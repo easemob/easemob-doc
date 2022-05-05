@@ -1,0 +1,14 @@
+{
+  "name": "VuePress",
+  "version": "1.0.0",
+  "description": "vuepress test",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.9.7"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  }
+}
