@@ -16,6 +16,7 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
+    "element-ui": "^2.15.9",
     "vuepress-plugin-code-copy": "^1.0.6",
     "wisdom-ui": "^0.0.36"
   }
