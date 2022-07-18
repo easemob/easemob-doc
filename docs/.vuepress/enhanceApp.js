@@ -8,4 +8,11 @@ export default ({
   siteData // 站点元数据
 }) => {
   // ...做一些其他的应用级别的优化
+  Vue.mixin({
+    mounted() {
+        import('wisdom-ui').then(function (m) {
+            Vue.use(m.default)
+        })
+    },
+  })
 }
