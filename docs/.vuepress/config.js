@@ -164,8 +164,8 @@ module.exports = {
               {
                 key: 'All',
                 title: '全部平台',
-                icon: '/icon-platform.svg',
-                hover_icon: '/icon-platform-hover.svg',
+                icon: 'icon-platform.svg',
+                hover_icon: 'icon-platform-hover.svg',
                 uri: ''
               }
             ],
@@ -177,29 +177,29 @@ module.exports = {
               {
                 key: 'Android',
                 title: 'Android',
-                icon: '/icon-Android.svg',
-                hover_icon: '/icon-Android-hover.svg',
+                icon: 'icon-Android.svg',
+                hover_icon: 'icon-Android-hover.svg',
                 uri: 'quickstart.html'
               },
               {
                 key: 'iOS',
                 title: 'iOS',
-                icon: '/icon-iOS.svg',
-                hover_icon: '/icon-iOS-hover.svg',
+                icon: 'icon-iOS.svg',
+                hover_icon: 'icon-iOS-hover.svg',
                 uri: 'quickstart.html'
               },
               {
                 key: 'Web',
                 title: 'Web',
-                icon: '/icon-web.svg',
-                hover_icon: '/icon-web-hover.png',
+                icon: 'icon-web.svg',
+                hover_icon: 'icon-web-hover.png',
                 uri: 'quickstart.html'
               },
               {
                 key: 'Windows',
                 title: 'Windows',
-                icon: '/icon-windows.svg',
-                hover_icon: '/icon-windows-hover.svg',
+                icon: 'icon-windows.svg',
+                hover_icon: 'icon-windows-hover.svg',
                 uri: 'quickstart.html'
               },
             ]
@@ -210,20 +210,20 @@ module.exports = {
               {
                 key: 'Mini-program',
                 title: '小程序',
-                icon: '/icon-mini-program.svg',
-                hover_icon: '/icon-mini-program-hover.svg',
+                icon: 'icon-mini-program.svg',
+                hover_icon: 'icon-mini-program-hover.svg',
               },
               {
                 key: 'Flutter',
                 title: 'Flutter',
-                icon: '/icon-flutter.svg',
-                hover_icon: '/icon-flutter-hover.png',
+                icon: 'icon-flutter.svg',
+                hover_icon: 'icon-flutter-hover.png',
               },
               {
                 key: 'React-Native',
                 title: 'React Native',
-                icon: '/icon-ReactNative.svg',
-                hover_icon: '/icon-ReactNative-hover.svg',
+                icon: 'icon-ReactNative.svg',
+                hover_icon: 'icon-ReactNative-hover.svg',
               },
             ]
           },
@@ -233,8 +233,8 @@ module.exports = {
               {
                 key: 'Server-side',
                 title: '服务端',
-                icon: '/icon-server-dark.png',
-                hover_icon: '/icon-server-light.png',
+                icon: 'icon-server-dark.png',
+                hover_icon: 'icon-server-light.png',
               }
             ]
           }
@@ -376,8 +376,8 @@ module.exports = {
               {
                 key: 'All',
                 title: 'All Platforms',
-                icon: '/icon-platform.svg',
-                hover_icon: '/icon-platform-hover.svg',
+                icon: 'icon-platform.svg',
+                hover_icon: 'icon-platform-hover.svg',
                 uri: ''
               }
             ],
@@ -389,29 +389,29 @@ module.exports = {
               {
                 key: 'Android',
                 title: 'Android',
-                icon: '/icon-Android.svg',
-                hover_icon: '/icon-Android-hover.svg',
+                icon: 'icon-Android.svg',
+                hover_icon: 'icon-Android-hover.svg',
                 uri: 'quickstart.html'
               },
               {
                 key: 'iOS',
                 title: 'iOS',
-                icon: '/icon-iOS.svg',
-                hover_icon: '/icon-iOS-hover.svg',
+                icon: 'icon-iOS.svg',
+                hover_icon: 'icon-iOS-hover.svg',
                 uri: 'quickstart.html'
               },
               {
                 key: 'Web',
                 title: 'Web',
-                icon: '/icon-web.svg',
-                hover_icon: '/icon-web-hover.png',
+                icon: 'icon-web.svg',
+                hover_icon: 'icon-web-hover.png',
                 uri: 'quickstart.html'
               },
               {
                 key: 'Windows',
                 title: 'Windows',
-                icon: '/icon-windows.svg',
-                hover_icon: '/icon-windows-hover.svg',
+                icon: 'icon-windows.svg',
+                hover_icon: 'icon-windows-hover.svg',
                 uri: 'quickstart.html'
               },
             ]
@@ -422,20 +422,20 @@ module.exports = {
               {
                 key: 'Mini-program',
                 title: 'Mini program',
-                icon: '/icon-mini-program.svg',
-                hover_icon: '/icon-mini-program-hover.svg',
+                icon: 'icon-mini-program.svg',
+                hover_icon: 'icon-mini-program-hover.svg',
               },
               {
                 key: 'Flutter',
                 title: 'Flutter',
-                icon: '/icon-flutter.svg',
-                hover_icon: '/icon-flutter-hover.png',
+                icon: 'icon-flutter.svg',
+                hover_icon: 'icon-flutter-hover.png',
               },
               {
                 key: 'React-Native',
                 title: 'React Native',
-                icon: '/icon-ReactNative.svg',
-                hover_icon: '/icon-ReactNative-hover.svg',
+                icon: 'icon-ReactNative.svg',
+                hover_icon: 'icon-ReactNative-hover.svg',
               },
             ]
           },
@@ -445,8 +445,8 @@ module.exports = {
               {
                 key: 'Server-side',
                 title: 'Server-side',
-                icon: '/icon-server-dark.png',
-                hover_icon: '/icon-server-light.png',
+                icon: 'icon-server-dark.png',
+                hover_icon: 'icon-server-light.png',
               }
             ]
           }
