@@ -4,14 +4,14 @@
     export default {
         data() {
             return {
-                'localePath': '',
-                'path': '', // 去除语言目录路径
-                'uri': '',
-                'root': '',
-                'language': '',
-                'version': '',
-                'file': '',
-                'sidebar': []
+                localePath: '',
+                path: '', // 去除语言目录路径
+                uri: '',
+                root: '',
+                language: '',
+                version: '',
+                file: '',
+                sidebar: []
             }
         },
         components: {

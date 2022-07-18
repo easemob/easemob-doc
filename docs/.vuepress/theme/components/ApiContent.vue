@@ -28,10 +28,10 @@
             {{text.description}}
         </div>
         <div class="api-platform">
-            <Platform :key="this.$page.path" />
+            <Platform :key="this.$page.path + 'platform'" />
         </div>
         <div class="description-container api-description-container">
-            <Markdown :key="this.$route.path"/>
+            <Markdown :key="this.$page.path + 'markdown'"/>
         </div>
     </div>
 </template>

@@ -1,4 +1,3 @@
-import Element from 'element-ui'
 import './public/prism.js';
 import './public/prism.css';
 
@@ -9,12 +8,4 @@ export default ({
   siteData // 站点元数据
 }) => {
   // ...做一些其他的应用级别的优化
-  Vue.use(Element);
-  Vue.mixin({
-    mounted() {
-        import('wisdom-ui').then(function (m) {
-            Vue.use(m.default)
-        })
-    },
-  })
 }

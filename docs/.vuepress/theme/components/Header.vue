@@ -4,16 +4,16 @@
     export default {
         data() {
             return {
-                'path': '',
-                'localePath': '',
-                'mainNav': [],
-                'secondaryNav': [],
-                'extraNav': [],
-                'languageLabel': '',
-                'languages': [],
-                'defLanguage': '',
-                'mouseEnter': false,
-                'mouseLeave': false,
+                path: '',
+                localePath: '',
+                mainNav: [],
+                secondaryNav: [],
+                extraNav: [],
+                languageLabel: '',
+                languages: [],
+                defLanguage: '',
+                mouseEnter: false,
+                mouseLeave: false,
                 isMobile: false,
                 showMobileMenu: false,
                 showSidebarMenu: false,
@@ -24,7 +24,6 @@
             SearchBox
         },
         created() {
-            this.isMobile = document.body.clientWidth <= 991 ? true : false;
             this.path = this.$route.path.replace('/en/', '/').substr(1);
             this.localePath = this.$localePath;
             const locales = this.$site.themeConfig.locales[this.localePath];
@@ -39,6 +38,9 @@
                     path: key
                 });
             }
+        },
+        mounted() {
+            this.isMobile = document.body.clientWidth <= 991 ? true : false;
             window.onresize = () => {
                 if (document.body.clientWidth <= 991) {
                     this.isMobile = true;

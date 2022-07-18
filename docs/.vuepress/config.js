@@ -96,8 +96,8 @@ module.exports = {
                 { text: '术语表', link: 'glossary.html' }
               ]
             },
-            /*
-            子菜单示例
+            /* 
+            // 子菜单示例
             {
               title: '基础功能',
               collapsable: false, // 是否允许展开/收起
@@ -120,7 +120,7 @@ module.exports = {
                 }
               ]
             }
-            */
+             */
           ],
           // 以 /document/ 开头的 url 侧边栏
           '/document/': [
@@ -238,7 +238,8 @@ module.exports = {
               }
             ]
           }
-        ]
+        ],
+        lastUpdated: '最后更新时间：'
       },
       // English
       '/en/': {
@@ -449,13 +450,13 @@ module.exports = {
               }
             ]
           }
-        ]
+        ],
+        lastUpdated: 'Last Updated: '
       }
     },
     searchMaxSuggestions: 20,
     sidebarDepth: 2,
     search: true,
-    lastUpdated: 'Last Updated',
     // 默认值是 true 。设置为 false 来禁用所有页面的 下一篇 链接
     nextLinks: true,
     // 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接

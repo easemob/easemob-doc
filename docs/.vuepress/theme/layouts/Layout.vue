@@ -19,7 +19,7 @@ export default {
         <Sider :key="this.$route.path"/>
         <div class="description-container" :data-key="this.$page.key">
             <Markdown :key="this.$route.path"/>
-            <div class="last-updated">{{ this.$page.lastUpdated }}</div>
+            <div class="last-updated">{{ this.$site.themeConfig.locales[this.$localePath].lastUpdated }}{{ this.$page.lastUpdated }}</div>
         </div>
     </div>
   </div>

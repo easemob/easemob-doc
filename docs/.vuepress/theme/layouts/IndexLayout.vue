@@ -1,10 +1,11 @@
 <script>
 import Header from '../components/Header';
+
 export default {
     components: {
         Header
     },
-    created() {
+    mounted() {
         this.$router.push(this.$localePath + this.$site.themeConfig.locales[this.$localePath].indexUri)
     }
 }

@@ -3,18 +3,18 @@
         props: ['all'],
         data() {
             return {
-                'localePath': '',
-                'path': '', // 去除语言目录路径
-                'uri': '',
-                'root': '',
-                'language': '',
-                'version': '',
-                'file': '',
-                'enter': false,
-                'leave': false,
-                'platformShow': false,
-                'platform': [],
-                'default_platform': {},
+                localePath: '',
+                path: '', // 去除语言目录路径
+                uri: '',
+                root: '',
+                language: '',
+                version: '',
+                file: '',
+                enter: false,
+                leave: false,
+                platformShow: false,
+                platform: [],
+                default_platform: {},
             }
         },
         created() {
