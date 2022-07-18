@@ -1,4 +1,5 @@
 ---
+layout: IndexLayout
 home: true
 heroImage: /logo.svg
 heroText: Hero 标题

@@ -1,10 +1,11 @@
 ---
+layout: IndexLayout
 home: true
 heroImage: /logo.svg
-heroText: Hero title
-tagline: Hero ftitle
-actionText: Get started →
-actionLink: /en/guide/
+heroText: Hero 标题
+tagline: Hero 副标题
+actionText: 快速上手 →
+actionLink: /zh/guide/
 features:
 - title: 简洁至上
   details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
@@ -15,5 +16,5 @@ features:
 ---
 
 ::: slot footer
-MIT Licensed MIT Licensed | Copyright © 2018-present [Evan You](https://github.com/yyx990803)
+MIT Licensed | Copyright © 2018-present [Evan You](https://github.com/yyx990803)
 :::

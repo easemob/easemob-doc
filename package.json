@@ -5,10 +5,17 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "vuepress": "^1.9.7"
+    "vuepress": "^1.9.7",
+    "vuepress-plugin-container": "^2.1.5",
+    "vuepress-plugin-fulltext-search": "^2.2.1",
+    "vuepress-plugin-smooth-scroll": "^0.0.10",
+    "vuepress-plugin-table-of-contents": "^1.1.7"
   },
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
+  },
+  "dependencies": {
+    "vuepress-plugin-code-copy": "^1.0.6"
   }
 }
