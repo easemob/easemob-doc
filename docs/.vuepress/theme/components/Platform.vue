@@ -117,7 +117,7 @@
     <div class="platform" v-show="platformShow">
         <div class="platform-input" @click="platformClick">
             <div class="platform-text">
-                <img :src="default_platform.hover_icon" alt="">
+                <img :src="$withBase(default_platform.hover_icon)" alt="">
                 <span>{{default_platform.title}}</span>
             </div>
             <div class="select-icon"><i class="icon-arrow" :class="{open: enter && !leave}"></i></div>
@@ -127,8 +127,8 @@
                 <div class="group-title">{{group.title}}</div>
                 <div class="options">
                     <div class="option-item" v-for="item in group.children" :data-key="item.key" @click="switchPlatform" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave" v-if="(item.show === undefined || item.show !== false) && ((!item.only && !item.except) || (item.only && item.only.indexOf(root) !== -1) || (item.except && item.except.indexOf(root) === -1))">
-                        <img :src="item.icon" class="default" alt="">
-                        <img :src="item.hover_icon" class="active" alt="">
+                        <img :src="$withBase(item.icon)" class="default" alt="">
+                        <img :src="$withBase(item.hover_icon)" class="active" alt="">
                         <span>{{item.title}}</span>
                     </div>
                 </div>

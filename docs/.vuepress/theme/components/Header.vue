@@ -94,7 +94,7 @@
         <div class="header-container" :class="{'mobile-header-container': isMobile}">
             <div class="logo">
                 <router-link :to="localePath">
-                    <span><img src="/logo.png"></span>
+                    <span><img :src="$withBase('/logo.png')"></span>
                     <h1>{{ this.$site.locales[localePath].title }}</h1>
                 </router-link>
             </div>
@@ -124,20 +124,20 @@
             </div>
             <div class="mobile-nav">
                 <template v-if="showMobileMenu">
-                    <img src="/icon-close.png" @click="toggleMenu" />
+                    <img :src="$withBase('/icon-close.png')" @click="toggleMenu" />
                 </template>
                 <template v-else>
-                    <img src="/icon-menu.png" @click="toggleMenu" />
+                    <img :src="$withBase('/icon-menu.png')" @click="toggleMenu" />
                 </template>
             </div>
         </div>
         <div class="m-header-search" v-if="isMobile && !showMobileMenu">
             <div class="sidebar-menu" v-if="!path.startsWith('api/')">
                 <template v-if="showSidebarMenu">
-                    <img src="/icon-close.png" @click="toggleSidebar" />
+                    <img :src="$withBase('/icon-close.png')" @click="toggleSidebar" />
                 </template>
                 <template v-else>
-                    <img src="/icon-sidebar.png" @click="toggleSidebar" />
+                    <img :src="$withBase('/icon-sidebar.png')" @click="toggleSidebar" />
                 </template>
             </div>
             <div class="search-container">
