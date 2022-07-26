@@ -2,12 +2,15 @@
 import Header from '../components/Header';
 import Sider from '../components/Sider';
 import Markdown from '../components/Markdown';
+import PageEdit from '../components/PageEdit';
+
 
 export default {
     components: {
         Header,
         Sider,
-        Markdown
+        Markdown,
+        PageEdit
     }
 }
 </script>
@@ -19,9 +22,10 @@ export default {
         <Sider :key="this.$route.path"/>
         <div class="description-container" :data-key="this.$page.key">
             <Markdown :key="this.$route.path"/>
-            <div class="last-updated">{{ this.$site.themeConfig.locales[this.$localePath].lastUpdated }}{{ this.$page.lastUpdated }}</div>
+            <PageEdit :key="this.$route.path + 'page-edit'"/>
         </div>
     </div>
+    <link id="code-theme" rel="stylesheet" />
   </div>
 </template>
 

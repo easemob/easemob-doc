@@ -1,5 +1,14 @@
+const path = require('path');
+
 module.exports = {
   base: '/vuepress/',
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@static': path.resolve(__dirname, '../../static')
+      }
+    }
+  },
   // 头部 head 标签内添加的标签
   head: [
     // 标题栏 icon 图标
@@ -26,12 +35,17 @@ module.exports = {
   },
   // 主题配置
   themeConfig: {
+    repo: 'maniacflow/vuepress',
+    docsDir: 'docs',
+    editLinks: true,
     // 头部左上角 logo
     logo: '/logo.png',
     // 多语言
     locales: {
       // 中文
       '/': {
+        // Github 编辑链接文字
+        editLinkText: '帮助我们改善此页面！',
         // 首页地址
         indexUri: 'product/introduction.html',
         // 选择语言处文本
@@ -47,7 +61,7 @@ module.exports = {
           */
           { text: '产品简介', link: '/product/introduction.html' },
           { text: '集成文档', link: '/document/Android/quickstart.html' },
-          { text: 'API 参考', link: '/api/Android/' },
+          { text: 'API 参考', link: '/api/Android' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
@@ -56,7 +70,7 @@ module.exports = {
             link: 链接地址
             show: 不存在或者值为 true 时，菜单显示；存在并且值为 false 时，菜单不显示
           */
-          { text: '提交工单', link: '/' }
+          { text: '提交工单', link: 'https://console.easemob.com/ticket' }
         ],
         // 额外导航，登录/注册
         extra_nav: [
@@ -65,8 +79,8 @@ module.exports = {
             link: 链接地址
             show: 不存在或者值为 true 时，菜单显示；存在并且值为 false 时，菜单不显示
           */
-          { text: '登录', link: '/' },
-          { text: '注册', link: '/' }
+          { text: '登录', link: 'https://console.easemob.com/user/login' },
+          { text: '注册', link: 'https://console.easemob.com/user/register' }
         ],
         // API 参考页面上方标题、描述
         '/api/': {
@@ -138,8 +152,67 @@ module.exports = {
               */
               title: '快速开始',
               children: [
-                { text: '快速开始', link: 'quickstart.html', only: ['Android', 'iOS'] },
-                { text: 'SDK 更新日志', link: 'releasenotes.html', except: ['iOS'] }
+                { text: 'Demo（EaseIM App）', link: 'demo.html' },
+                { text: '快速开始（不使用 EaseIMKIT）', link: 'quickstart.html', except: ['Android'] },
+              ]
+            },
+            {
+              title: '基础功能',
+              children: [
+                {
+                  text: '消息概述',
+                  link: 'message_overview.html',
+                  children: [
+                    { text: '发送和接收消息', link: 'send_and_receive_message.html' },
+                    { text: '管理本地消息数据', link: 'manage_message.html' },
+                    { text: '从服务器获取消息（消息漫游）', link: 'message_retrieve.html' },
+                    { text: '管理消息回执', link: 'message_receipt.html' },
+                    { text: '翻译', link: 'message_translation.html' },
+                  ]
+                },
+                { text: '管理用户属性', link: 'userprofile.html' },
+                { text: '管理用户关系', link: 'user_relationship.html' },
+                {
+                  text: '群组概述',
+                  link: 'group_overview.html',
+                  children: [
+                    { text: '创建和管理群组', link: 'create_and_manage_group.html' },
+                    { text: '管理群组成员', link: 'manage_group_member.html' },
+                    { text: '管理群组属性', link: 'group_attributes.html' },
+                  ]
+                },
+                {
+                  text: '聊天室概述',
+                  link: 'chatroom_overview.html',
+                  collapsable: true,
+                  children: [
+                    { text: '创建和管理聊天室', link: 'create_and_manage_chatroom.html' },
+                    { text: '管理聊天室成员', link: 'manage_chatroom_member.html' },
+                    { text: '管理聊天室属性', link: 'chatroom_attributes.html' },
+                  ]
+                },
+              ]
+            },
+            {
+              title: '进阶功能',
+              children: [
+                { text: '登录多个设备', link: 'multi_device.html' },
+                { text: '管理在线状态订阅', link: 'presence.html' },
+                { text: '消息表情回复', link: 'reaction.html' },
+                {
+                  text: '管理子区',
+                  link: 'chat_thread.html',
+                  children: [
+                    { text: '管理子区消息', link: 'message_thread.html' }
+                  ]
+                },
+                { text: '消息审核', link: 'moderation.html' },
+              ]
+            },
+            {
+              title: '其他',
+              children: [
+                { text: '错误码', link: 'error_code.html' }
               ]
             },
           ]
@@ -239,10 +312,12 @@ module.exports = {
             ]
           }
         ],
-        lastUpdated: '最后更新时间：'
+        lastUpdated: '更新时间：'
       },
       // English
       '/en/': {
+        // Github 编辑链接文字
+        editLinkText: 'Edit this page',
         // 首页地址
         indexUri: 'product/introduction.html',
         // 选择语言处文本
@@ -466,18 +541,16 @@ module.exports = {
     extractHeaders: [ 'h2', 'h3', 'h4' ],
   },
   plugins: [
+    [
+      require('./addons/vuepress-plugin-code-copy'),
+      {
+        selector: '.extra-class'
+      }
+    ],
     ['fulltext-search'],
     ['@vuepress/last-updated'],
     ['vuepress-plugin-table-of-contents'],
     ['vuepress-plugin-smooth-scroll'],
-    [
-      'vuepress-plugin-code-copy', {
-        selector: '.extra-class',
-        align: 'top',
-        color: '#fff',
-        backgroundTransition: false
-      }
-    ],
     // you can use this plugin multiple times
     [
       'vuepress-plugin-container',

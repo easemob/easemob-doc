@@ -523,6 +523,9 @@ input, button, select, optgroup, textarea {
     font-size: 15px;
     line-height: 26px;
     color: @text-color;
+    h1 {
+      padding-bottom: 46px;
+    }
     a {
       color: @primary-color;
       transition: all .3s;
@@ -848,15 +851,6 @@ code:not(.extra-class code) {
   border-radius: 4px;
 }
 
-.code-copy svg {
-  width: 20px !important;
-  height: 20px !important;
-}
-.code-copy span {
-  line-height: 1.5 !important;
-  color: #fff !important;
-}
-
 .back-to-top {
   position: fixed;
   right: 30px;
@@ -1000,13 +994,19 @@ code:not(.extra-class code) {
 }
 
 .last-updated {
-  margin: 20px 0;
+  position: absolute;
+  top: 2rem;
+  margin-top: 76px;
   padding-right: 220px;
   font-size: 15px;
   font-weight: 400;
   line-height: 26px;
   color: rgba(0,0,0,0.65);
   text-align: right;
+}
+
+a img+span svg {
+  display: none !important;
 }
 
 @media screen and (max-width: 1320px) {
@@ -1097,6 +1097,9 @@ code:not(.extra-class code) {
 
   .platform-list {
     height: 300px;
+  }
+  .last-updated {
+    top: 0;
   }
 }
 

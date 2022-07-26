@@ -16,6 +16,8 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
+    "async-validator": "1.11.5",
+    "element-ui": "^2.15.9",
     "vuepress-plugin-code-copy": "^1.0.6"
   }
 }

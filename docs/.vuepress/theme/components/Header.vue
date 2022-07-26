@@ -107,7 +107,14 @@
                         <SearchBox/>
                     </div>
                     <div class="secondary-nav">
-                        <router-link to="/" v-for="item in secondaryNav" v-if="item.show === undefined || item.show !== false">{{ item.text }}</router-link>
+                        <template v-for="item in secondaryNav">
+                            <template v-if="item.link.startsWith('http://') || item.link.startsWith('https://')">
+                                <a :href="item.link" target="_blank" v-if="item.show === undefined || item.show !== false">{{ item.text }}</a>
+                            </template>
+                            <template v-else>
+                                <router-link :to="item.link" v-if="item.show === undefined || item.show !== false">{{ item.text }}</router-link>
+                            </template>
+                        </template>
                     </div>
                     <div class="switch-lang" @mouseenter="mouseEnterLang" @mouseleave="mouseLeaveLang">
                         <a href="javascript:;">{{ languageLabel }}<span class="triangle"></span></a>
@@ -118,7 +125,7 @@
                         </div>
                     </div>
                     <div class="login-register">
-                        <router-link to="/" v-if="item.show === undefined || item.show !== false" v-for="item in extraNav">{{ item.text }}</router-link>
+                        <a :href="item.link" target="_blank" v-if="item.show === undefined || item.show !== false" v-for="item in extraNav">{{ item.text }}</a>
                     </div>
                 </div>
             </div>

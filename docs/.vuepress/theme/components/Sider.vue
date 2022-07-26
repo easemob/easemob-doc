@@ -22,7 +22,6 @@
             this.uri = this.$page.path;
             const locales = this.$site.themeConfig.locales[this.localePath];
             const path = this.$route.path.replace('/en/', '/');
-            this.path = path.substr(0, path.lastIndexOf('/') + 1);
             let temp = path.split('/');
             this.file = temp[temp.length - 1];
             temp.splice(temp.length - 1, 1, '');
@@ -30,6 +29,7 @@
             this.language = temp[2] ? temp[2] : '';
             this.version = temp[3] ? temp[3] : '';
             this.sidebar = locales.sidebar[temp.join('/')];
+            this.path = this.$localePath + this.root + '/' + (this.language ? this.language + '/' : '');
 
             if (!this.sidebar) {
                 for (let i = temp.length - 2; i > 0 ; i--) {
@@ -82,11 +82,11 @@
                                 <a href="javascript:;">{{ item.text }}</a>
                             </template>
                             <ul class="sider-menu-sub" :class="{'collapsable menu-hidden': item.collapsable}">
-                                <li v-for="itm in item.children" :class="{active: itm.link == file}" v-if="(itm.show === undefined || itm.show !== false) && (!language || ((!itm.only && !itm.except) || (itm.only && itm.only.indexOf(language) !== -1) || (itm.except && itm.except.indexOf(language) === -1)))"><router-link :to="itm.link">{{ itm.text }}</router-link></li>
+                                <li v-for="itm in item.children" :class="{active: itm.link == file}" v-if="(itm.show === undefined || itm.show !== false) && (!language || ((!itm.only && !itm.except) || (itm.only && itm.only.indexOf(language) !== -1) || (itm.except && itm.except.indexOf(language) === -1)))"><router-link :to="path + itm.link">{{ itm.text }}</router-link></li>
                             </ul>
                         </template>
                         <template v-else>
-                            <router-link :to="item.link" v-if="(item.show === undefined || item.show !== false) && (!language || ((!item.only && !item.except) || (item.only && item.only.indexOf(language) !== -1) || (item.except && item.except.indexOf(language) === -1)))">{{ item.text }}</router-link>
+                            <router-link :to="path + item.link" v-if="(item.show === undefined || item.show !== false) && (!language || ((!item.only && !item.except) || (item.only && item.only.indexOf(language) !== -1) || (item.except && item.except.indexOf(language) === -1)))">{{ item.text }}</router-link>
                         </template>
                     </li>
                 </ul>
