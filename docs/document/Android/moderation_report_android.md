@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/moderation_report.html
+---
+
 # 消息审核
 
 [[toc]]

@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/message_overview.html
+---
+
 # 消息管理
 
 [[toc]]

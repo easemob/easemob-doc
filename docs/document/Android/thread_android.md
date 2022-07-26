@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/thread.html
+---
+
 # 管理子区 Android
 
 [[toc]]

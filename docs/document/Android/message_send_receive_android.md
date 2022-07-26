@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/message_send_receive.html
+---
+
 # 消息管理–发送和接收消息
 
 [[toc]]

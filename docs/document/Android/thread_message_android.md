@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/thread_message.html
+---
+
 # 管理子区消息 Android
 
 [[toc]]

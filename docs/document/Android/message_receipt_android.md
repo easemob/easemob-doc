@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/message_receipt.html
+---
+
 # 消息管理–获取消息的已读回执和送达回执
 
 [[toc]]

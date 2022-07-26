@@ -1,6 +1,10 @@
+---
+permalink: /document/Android/error.html
+---
+
 # Android 常见错误代码
 
-更新时间：2022-06-07
+[[toc]]
 
 本文介绍环信即时通讯 Android SDK 中接口调用或者回调中的错误码。可以根据具体错误码判断具体错误原因。
 

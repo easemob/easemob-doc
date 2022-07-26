@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/room_attributes.html
+---
+
 # 管理聊天室属性
 
 [[toc]]

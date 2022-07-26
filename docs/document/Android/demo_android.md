@@ -1,12 +1,10 @@
 ---
-permalink: /document/Android/dddd/demo.html
+permalink: /document/Android/demo.html
 ---
 
 # Demo（EaseIM App）介绍
 
 [[toc]]
-
-![](@static/images/Android/123.png)
 
 环信即时通讯 Android 提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
 

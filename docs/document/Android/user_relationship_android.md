@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/user_relationship.html
+---
+
 # 用户关系管理
 
 [[toc]]

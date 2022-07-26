@@ -17,9 +17,9 @@ export default {
 
 <template>
   <div class="theme-container">
-    <Header :key="this.$route.path"/>
+    <Header :key="this.$route.path + 'header'"/>
     <div class="content-container">
-        <Sider :key="this.$route.path"/>
+        <Sider :key="this.$route.path + 'sider'"/>
         <div class="description-container" :data-key="this.$page.key">
             <Markdown :key="this.$route.path"/>
             <PageEdit :key="this.$route.path + 'page-edit'"/>

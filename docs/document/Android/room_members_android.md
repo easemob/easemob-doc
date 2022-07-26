@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/room_members.html
+---
+
 # 管理聊天室成员
 
 [[toc]]

@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/multi_device.html
+---
+
 # 在多个设备上登录
 
 [[toc]]

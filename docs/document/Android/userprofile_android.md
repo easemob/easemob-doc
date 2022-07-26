@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/userprofile.html
+---
+
 # 用户属性
 
 [[toc]]

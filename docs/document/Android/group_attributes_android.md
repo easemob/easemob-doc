@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/group_attributes.html
+---
+
 # 管理群组属性
 
 [[toc]]

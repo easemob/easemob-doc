@@ -1,5 +1,6 @@
 <script>
     import Platform from '../components/Platform';
+    import SiderChild from '../components/SiderChild';
 
     export default {
         data() {
@@ -16,6 +17,7 @@
         },
         components: {
             Platform,
+            SiderChild
         },
         created() {
             this.localePath = this.$localePath;
@@ -23,13 +25,15 @@
             const locales = this.$site.themeConfig.locales[this.localePath];
             const path = this.$route.path.replace('/en/', '/');
             let temp = path.split('/');
-            this.file = temp[temp.length - 1];
             temp.splice(temp.length - 1, 1, '');
             this.root = temp[1] ? temp[1] : '';
             this.language = temp[2] ? temp[2] : '';
             this.version = temp[3] ? temp[3] : '';
             this.sidebar = locales.sidebar[temp.join('/')];
             this.path = this.$localePath + this.root + '/' + (this.language ? this.language + '/' : '');
+
+            temp = this.$page.regularPath.split('/');
+            this.file = temp[temp.length - 1];
 
             if (!this.sidebar) {
                 for (let i = temp.length - 2; i > 0 ; i--) {
@@ -44,24 +48,6 @@
                     }
                 }
             }
-        },
-        methods: {
-            toggleSub(e) {
-                if (e.target.querySelector('.icon-arrow').classList.contains('open')) {
-                    e.target.querySelector('.icon-arrow').classList.remove('open');
-                    e.target.nextElementSibling.style.display = 'none';
-                } else {
-                    document.querySelector('.open') && document.querySelector('.open').classList.remove('open');
-                    const sub = document.querySelectorAll('.collapsable');
-                    for (let i = 0; i < sub.length; i++) {
-                        sub[i].style.display = 'none';
-                    }
-                    
-                    e.target.querySelector('.icon-arrow').classList.add('open');
-                    e.target.nextElementSibling.style.display = 'block';
-                }
-                e.stopPropagation();
-            }
         }
     }
 </script>
@@ -75,15 +61,7 @@
                 <ul>
                     <li v-for="item in group.children" :class="{active: item.link == file}" v-if="(item.show === undefined || item.show !== false) && (!language || ((!item.only && !item.except) || (item.only && item.only.indexOf(language) !== -1) || (item.except && item.except.indexOf(language) === -1)))">
                         <template v-if="item.children">
-                            <template v-if="item.collapsable">
-                                <a href="javascript:;" @click="toggleSub">{{ item.text }}<i class="icon-arrow"></i></a>
-                            </template>
-                            <template v-else>
-                                <a href="javascript:;">{{ item.text }}</a>
-                            </template>
-                            <ul class="sider-menu-sub" :class="{'collapsable menu-hidden': item.collapsable}">
-                                <li v-for="itm in item.children" :class="{active: itm.link == file}" v-if="(itm.show === undefined || itm.show !== false) && (!language || ((!itm.only && !itm.except) || (itm.only && itm.only.indexOf(language) !== -1) || (itm.except && itm.except.indexOf(language) === -1)))"><router-link :to="path + itm.link">{{ itm.text }}</router-link></li>
-                            </ul>
+                            <SiderChild :key="item.children[0].link + 'sider-child'" :menu="item" />
                         </template>
                         <template v-else>
                             <router-link :to="path + item.link" v-if="(item.show === undefined || item.show !== false) && (!language || ((!item.only && !item.except) || (item.only && item.only.indexOf(language) !== -1) || (item.except && item.except.indexOf(language) === -1)))">{{ item.text }}</router-link>

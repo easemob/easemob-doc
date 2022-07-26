@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/message_translation.html
+---
+
 # 翻译
 
 [[toc]]

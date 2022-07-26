@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/presence.html
+---
+
 # 在线状态订阅 Android
 
 [[toc]]

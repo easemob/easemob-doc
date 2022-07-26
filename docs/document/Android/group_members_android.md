@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/group_members.html
+---
+
 # 管理群组成员
 
 [[toc]]

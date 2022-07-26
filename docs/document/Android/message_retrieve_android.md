@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/message_retrieve.html
+---
+
 # 消息管理–从服务器获取会话和消息（消息漫游）
 
 [[toc]]

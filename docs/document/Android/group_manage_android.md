@@ -1,4 +1,8 @@
-# 创建和管理群组
+---
+permalink: /document/Android/group_manage.html
+---
+
+# 管理群组
 
 [[toc]]
 
@@ -51,7 +55,7 @@
 
 流程如下：
 
-[![img](https://docs-im.easemob.com/_media/ccim/android/8.png?w=1500&tok=db0f36)](https://docs-im.easemob.com/_detail/ccim/android/8.png?id=ccim%3Aandroid%3Agroup2)
+![img](https://docs-im.easemob.com/_media/ccim/android/8.png?w=1500&tok=db0f36)
 
 - 进群邀请无需用户确认 (`inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无视用户的 `autoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调；群主收到每个已加入成员对应的群组事件回调 `EMGroupChangeListener#onInvitationAccepted` 和 `EMGroupChangeListener#onMemberJoined`；先加入的群成员会收到群组事件回调 `EMGroupChangeListener#onMemberJoined`。
 

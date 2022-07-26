@@ -60,7 +60,7 @@ module.exports = {
             show: 不存在或者值为 true 时，菜单显示；存在并且值为 false 时，菜单不显示
           */
           { text: '产品简介', link: '/product/introduction.html' },
-          { text: '集成文档', link: '/document/Android/quickstart.html' },
+          { text: '集成文档', link: '/document/Android/quickstart' },
           { text: 'API 参考', link: '/api/Android' },
         ],
         // 次级导航，导航栏右侧导航
@@ -152,43 +152,45 @@ module.exports = {
               */
               title: '快速开始',
               children: [
-                { text: 'Demo（EaseIM App）', link: 'demo.html' },
-                { text: '快速开始（不使用 EaseIMKIT）', link: 'quickstart.html', except: ['Android'] },
+                { text: 'Demo（EaseIM App）', link: 'demo_android.html' },
+                { text: '快速开始（不使用 EaseIMKIT）', link: 'quick_start_android.html' },
               ]
             },
             {
               title: '基础功能',
               children: [
                 {
-                  text: '消息概述',
-                  link: 'message_overview.html',
-                  children: [
-                    { text: '发送和接收消息', link: 'send_and_receive_message.html' },
-                    { text: '管理本地消息数据', link: 'manage_message.html' },
-                    { text: '从服务器获取消息（消息漫游）', link: 'message_retrieve.html' },
-                    { text: '管理消息回执', link: 'message_receipt.html' },
-                    { text: '翻译', link: 'message_translation.html' },
-                  ]
-                },
-                { text: '管理用户属性', link: 'userprofile.html' },
-                { text: '管理用户关系', link: 'user_relationship.html' },
-                {
-                  text: '群组概述',
-                  link: 'group_overview.html',
-                  children: [
-                    { text: '创建和管理群组', link: 'create_and_manage_group.html' },
-                    { text: '管理群组成员', link: 'manage_group_member.html' },
-                    { text: '管理群组属性', link: 'group_attributes.html' },
-                  ]
-                },
-                {
-                  text: '聊天室概述',
-                  link: 'chatroom_overview.html',
+                  text: '消息管理',
                   collapsable: true,
                   children: [
-                    { text: '创建和管理聊天室', link: 'create_and_manage_chatroom.html' },
-                    { text: '管理聊天室成员', link: 'manage_chatroom_member.html' },
-                    { text: '管理聊天室属性', link: 'chatroom_attributes.html' },
+                    { text: '消息概述', link: 'message_overview_android.html' },
+                    { text: '发送和接收消息', link: 'message_send_receive_android.html' },
+                    { text: '管理本地消息数据', link: 'message_manage_android.html' },
+                    { text: '从服务器获取消息（消息漫游）', link: 'message_retrieve_android.html' },
+                    { text: '管理消息回执', link: 'message_receipt_android.html' },
+                    { text: '翻译', link: 'message_translation_android.html' },
+                  ]
+                },
+                { text: '管理用户属性', link: 'userprofile_android.html' },
+                { text: '管理用户关系', link: 'user_relationship_android.html' },
+                {
+                  text: '群组管理',
+                  collapsable: true,
+                  children: [
+                    { text: '群组概述', link: 'group_overview_android.html' },
+                    { text: '管理群组', link: 'group_manage_android.html' },
+                    { text: '管理群组成员', link: 'group_members_android.html' },
+                    { text: '管理群组属性', link: 'group_attributes_android.html' },
+                  ]
+                },
+                {
+                  text: '聊天室管理',
+                  collapsable: true,
+                  children: [
+                    { text: '聊天室概述', link: 'room_overview_android.html' },
+                    { text: '创建和管理聊天室', link: 'room_manage_android.html' },
+                    { text: '管理聊天室成员', link: 'room_members_android.html' },
+                    { text: '管理聊天室属性', link: 'room_attributes_android.html' },
                   ]
                 },
               ]
@@ -196,23 +198,24 @@ module.exports = {
             {
               title: '进阶功能',
               children: [
-                { text: '登录多个设备', link: 'multi_device.html' },
-                { text: '管理在线状态订阅', link: 'presence.html' },
-                { text: '消息表情回复', link: 'reaction.html' },
+                { text: '登录多个设备', link: 'multi_device_android.html' },
+                { text: '管理在线状态订阅', link: 'presence_android.html' },
+                { text: '消息表情回复', link: 'reaction_android.html' },
                 {
-                  text: '管理子区',
-                  link: 'chat_thread.html',
+                  text: '子区管理',
+                  collapsable: true,
                   children: [
-                    { text: '管理子区消息', link: 'message_thread.html' }
+                    { text: '管理子区', link: 'thread_android.html' },
+                    { text: '管理子区消息', link: 'thread_message_android.html' }
                   ]
                 },
-                { text: '消息审核', link: 'moderation.html' },
+                { text: '消息审核', link: 'moderation_report_android.html' },
               ]
             },
             {
               title: '其他',
               children: [
-                { text: '错误码', link: 'error_code.html' }
+                { text: '错误码', link: 'error_android.html' }
               ]
             },
           ]

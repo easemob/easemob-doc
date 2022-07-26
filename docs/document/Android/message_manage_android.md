@@ -1,3 +1,7 @@
+---
+permalink: /document/Android/message_manage.html
+---
+
 # 消息管理–管理本地消息数据
 
 [[toc]]

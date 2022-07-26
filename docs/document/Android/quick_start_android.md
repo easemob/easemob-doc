@@ -1,5 +1,5 @@
 ---
-title: Android 快速开始
+permalink: /document/Android/quickstart.html
 ---
 
 # 环信即时通讯 IM Android 快速开始

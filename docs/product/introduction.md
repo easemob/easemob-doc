@@ -4,6 +4,8 @@
 
 环信即时通讯为开发者提供高可靠、低时延、高并发、安全、全球化的通信云服务，支持单聊、群聊、聊天室。提供多平台 SDK 支持，包括：Android、iOS、Web；同时，提供 EaseIM 和 EaseIMKit 以及服务端 REST API，帮助开发者快速构建端到端通信的场景。
 
+![](@static/images/Android/123.png)
+
 ::: tip
 这是一个提示
 :::
