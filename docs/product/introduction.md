@@ -4,103 +4,31 @@
 
 环信即时通讯为开发者提供高可靠、低时延、高并发、安全、全球化的通信云服务，支持单聊、群聊、聊天室。提供多平台 SDK 支持，包括：Android、iOS、Web；同时，提供 EaseIM 和 EaseIMKit 以及服务端 REST API，帮助开发者快速构建端到端通信的场景。
 
-![](@static/images/Android/123.png)
-
-::: tip
-这是一个提示
-:::
-
-::: notice
-这是一个注意 <a>New module changes in Go 1.17</a>
-:::
-
-::: warning
-这是一个警告
-:::
-
-::: details 为什么所有用户订阅的都是 360 × 640 的视频流，我的单价却被定在超高清档？
-视频档位基于集合分辨率而定，即对你订阅的流的分辨率进行求和。所以，你订阅的视频流越多，你的集合分辨率越有可能超过 1,280 x 720 的超清档。
-:::
-
-`Java`
-
-参考以下步骤获取 App 证书：
-
-1. 在 Agora 控制台的项目管理页面，找到你的项目，点击**配置**。
-2. 在 Agora 控制台的项目管理页面，找到你的项目，点击**配置**。
-
-| Tables        | Are           | Cool  |
-| ------------- | ------------- | ----- |
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-
-| 用量（分钟） | 折扣        |
-| ----------------- | ---- |
-| 100,000 至 499,999 | 5%  |
-| 500,000 至 999,999 | 7%  |
-| 1,000,000+         | 10% |
-
-<table>
-    <tr>
-        <th>收费服务（视频用量类型）</th>
-        <th>总时长用量（分钟） = 各用户时长用量总和</th>
-        <th>单价（元/千分钟）</th>
-        <th class="y-middle">各服务费用（元）</th>
-        <th>总费用（元） （四舍五入至小数点后两位）</th>
-    </tr>
-    <tr>
-        <td>全高清视频（Full HD）</td>
-        <td>60</td>
-        <td>63</td>
-        <td>(60/1000) × 63 = 3.78</td>
-        <td rowspan="3" class="x-right y-middle">47.46</td>
-    </tr>
-    <tr>
-        <td>2K</td>
-        <td>60 × 2 = 120</td>
-        <td>112</td>
-        <td>(120/1000) × 112 = 13.44</td>
-    </tr>
-    <tr>
-        <td>2K+</td>
-        <td>60 × 2 = 120</td>
-        <td>252</td>
-        <td>(120/1000) × 252 = 30.24</td>
-    </tr>
-</table>
-
-:tada:
-
-:100:
-
-``` js
-export default {
-  name: 'MyComponent',
-  // ...
-}
-```
-
 ## 平台架构
 
-![环信IM后台](https://docs-im.easemob.com/_media/im/quickstart/guide/qq%E5%9B%BE%E7%89%8720181010182444.png)
+![环信 IM 后台](@static/images/product/framework.png)
 
 ## 集成概述
 
-在 [环信即时通讯控制台](https://docs-im.easemob.com/ccim/config) 注册和开通服务后，开发者主要需要了解服务器端集成和客户端集成内容。
+在 [环信即时通讯控制台](enable_and_configure_IM.html) 注册和开通服务后，开发者主要需要了解服务器端集成和客户端集成内容。
 
-![img](https://docs-im.easemob.com/_media/im/quickstart/guide/image001.png)
+![img](@static/images/product/integration-overview.png)
 
-服务端集成请看：[环信即时通讯 REST API 概览](https://docs-im.easemob.com/ccim/rest/overview)。
+服务端集成请看：[环信即时通讯 REST API 概览](/document/Server-side/overview.html)。
+
+客户端 Demo 体验请查看：
+
+[Android Demo（EaseIM App）体验](/document/Android/demo.html)
+
+[iOS Demo（EaseIM App）体验](/document/iOS/demo.html)
 
 客户端集成请查看相应的环信 SDK 开发文档：
 
-[环信即时通讯 IM Android 快速入门](https://docs-im.easemob.com/ccim/android/quickstart)；
+[环信即时通讯 IM Android 快速入门](/document/Android/quickstart.html)；
 
-[环信即时通讯 IM iOS 快速入门](https://docs-im.easemob.com/ccim/ios/quickstart)；
+[环信即时通讯 IM iOS 快速入门](/document/iOS/quickstart.html)；
 
-[环信即时通讯 IM Web 快速入门](https://docs-im.easemob.com/ccim/web/quickstart)。
+[环信即时通讯 IM Web 快速入门](/document/Web/quickstart.html)。
 
 ## 功能概述
 
@@ -139,23 +67,23 @@ export default {
 环信适用于端到端实时消息沟通的场景：
 
 - 应用内聊天（如：陌生人社交、相亲等）
-    - 支持丰富的消息类型、好友关系管理
-    - 支持群管理能力、群公告设置、群角色设置等
+  - 支持丰富的消息类型、好友关系管理
+  - 支持群管理能力、群公告设置、群角色设置等
 - 应用内通知
-    - 支持广播消息、自定义通知消息等
-    - 支持用户管理，包括储存用户信息、用户封禁等
+  - 支持广播消息、自定义通知消息等
+  - 支持用户管理，包括储存用户信息、用户封禁等
 - 视频/语音直播
-    - 支持聊天室管理能力
-    - 支持丰富类型的聊天室消息，包括弹幕、红包、礼物等
+  - 支持聊天室管理能力
+  - 支持丰富类型的聊天室消息，包括弹幕、红包、礼物等
 - 企业协作
-    - 支持用户管理，设置企业组织架构、好友关系管理
-    - 支持群管理能力、群公告设置、群附件发送、群角色设置等
+  - 支持用户管理，设置企业组织架构、好友关系管理
+  - 支持群管理能力、群公告设置、群附件发送、群角色设置等
 - 买家卖家沟通
-    - 支持订单通知、问候语设置、自定义消息发送
-    - 支持卖家内部管理、公告设置、成员管理等
+  - 支持订单通知、问候语设置、自定义消息发送
+  - 支持卖家内部管理、公告设置、成员管理等
 - 线上问诊
-    - 支持丰富的消息类型，图文病情描述、语音消息等
-    - 支持用户信息存储、用户身份管理等
+  - 支持丰富的消息类型，图文病情描述、语音消息等
+  - 支持用户信息存储、用户身份管理等
 
 ## 产品优势
 

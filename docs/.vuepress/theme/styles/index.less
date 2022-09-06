@@ -392,7 +392,7 @@ input, button, select, optgroup, textarea {
 .platform {
   position: relative;
   margin-bottom: 40px;
-  width: 210px;
+  width: 230px;
   height: 40px;
 }
 .platform-input {
@@ -431,7 +431,7 @@ input, button, select, optgroup, textarea {
   z-index: 22;
   top: 42px;
   padding: 15px;
-  width: 210px;
+  width: 230px;
   max-height: 480px;
   background-color: #fff;
   border: 1px solid #e3e3ec;
@@ -514,7 +514,7 @@ input, button, select, optgroup, textarea {
   top: 0;
   right: 0;
   bottom: 0;
-  left: 250px;
+  left: 270px;
   padding: 2rem 2.5rem;
   overflow: hidden auto;
   scroll-behavior: smooth;
@@ -575,6 +575,13 @@ input, button, select, optgroup, textarea {
       line-height: 25px;
       color: #23334e;
     }
+    h4 {
+      margin: 20px 0;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 22px;
+      color: #23334e;
+    }
     ul {
       padding-left: 20px;
       list-style: disc;
@@ -599,17 +606,32 @@ input, button, select, optgroup, textarea {
       li {
         margin: 5px 0;
         list-style-type: decimal;
+        ul, li {
+          list-style-type: disc;
+        }
       }
     }
     .table-of-contents {
       position: fixed;
       top: 120px;
       right: 20px;
+      bottom: 20px;
       width: 200px;
-      border-left: 4px solid #e8e8f2;
+      // border-left: 4px solid #e8e8f2;
+      overflow-y: auto;
       ul {
+        position: relative;
         padding-left: 0;
         list-style-type: none;
+        &::before {
+          position: absolute;
+          left: 0;
+          display: block;
+          content: "";
+          width: 4px;
+          height: 100%;
+          background-color: #e8e8f2;
+        }
       }
       li {
         position: relative;
@@ -618,7 +640,7 @@ input, button, select, optgroup, textarea {
         line-height: 1;
         a {
           display: block;
-          padding: 7px 0 7px 12px;
+          padding: 7px 0 7px 16px;
           font-family: HelveticaNeue;
           font-size: 14px;
           line-height: 16px;
@@ -631,11 +653,11 @@ input, button, select, optgroup, textarea {
         &.active {
           &::before {
             position: absolute;
-            left: -4px;
+            left: 0;
             display: block;
             content: "";
             width: 4px;
-            height: 30px;
+            height: 100%;
             background-color: @primary-color;
           }
           & > a {
@@ -645,7 +667,7 @@ input, button, select, optgroup, textarea {
         ul {
           li {
             a {
-              padding: 3px 0 3px 24px;
+              padding: 3px 0 3px 28px;
               font-size: 13px;
               color: #8a8a9a;
               transition: all .3s;
@@ -654,9 +676,6 @@ input, button, select, optgroup, textarea {
               }
             }
             &.active {
-              &::before {
-                height: 22px;
-              }
               & > a {
                 color: @primary-color;
               }
@@ -837,6 +856,9 @@ table {
 .extra-class {
   position: relative;
   border-radius: 2px;
+  &+.extra-class {
+    margin-top: 20px;
+  }
   pre {
     border-radius: 2px;
   }
@@ -1007,6 +1029,17 @@ code:not(.extra-class code) {
 
 a img+span svg {
   display: none !important;
+}
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.25rem 0 0.25rem 1rem;
+  font-size: 1rem;
+  color: #999;
+  border-left: 0.2rem solid #dfe2e5;
+  & > p {
+    margin: 0 !important;
+  }
 }
 
 @media screen and (max-width: 1320px) {

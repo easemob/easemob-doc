@@ -64,7 +64,7 @@
                             <SiderChild :key="item.children[0].link + 'sider-child'" :menu="item" />
                         </template>
                         <template v-else>
-                            <router-link :to="path + item.link" v-if="(item.show === undefined || item.show !== false) && (!language || ((!item.only && !item.except) || (item.only && item.only.indexOf(language) !== -1) || (item.except && item.except.indexOf(language) === -1)))">{{ item.text }}</router-link>
+                            <router-link :to="item.link.slice(0, 1) == '/' ? item.link : (path + item.link)" v-if="(item.show === undefined || item.show !== false) && (!language || ((!item.only && !item.except) || (item.only && item.only.indexOf(language) !== -1) || (item.except && item.except.indexOf(language) === -1)))">{{ item.text }}</router-link>
                         </template>
                     </li>
                 </ul>
@@ -77,7 +77,7 @@
     .sider-container {
         position: relative;
         padding: 20px;
-        width: 250px;
+        width: 270px;
         height: 100%;
         background-color: #f7f7fa;
         overflow: hidden auto;

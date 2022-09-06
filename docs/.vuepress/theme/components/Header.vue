@@ -116,7 +116,7 @@
                             </template>
                         </template>
                     </div>
-                    <div class="switch-lang" @mouseenter="mouseEnterLang" @mouseleave="mouseLeaveLang">
+                    <div v-if="this.$site.themeConfig.switchLang" class="switch-lang" @mouseenter="mouseEnterLang" @mouseleave="mouseLeaveLang">
                         <a href="javascript:;">{{ languageLabel }}<span class="triangle"></span></a>
                         <div class="sub-menu" id="sub-menu" :class="{'menu-hidden': !mouseEnter && !mouseLeave, 'slide-up-enter slide-up-enter-active': mouseEnter, 'slide-up-leave slide-up-leave-active': mouseLeave}">
                             <ul>

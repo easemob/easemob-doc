@@ -7,7 +7,7 @@
             <a href="javascript:;">{{ menu.text }}</a>
         </template>
         <ul class="sider-menu-sub" :class="{'collapsable': menu.collapsable, 'menu-hidden': !menu.active}">
-            <li v-for="itm in menu.children" :class="{active: itm.link == file}" v-if="(itm.show === undefined || itm.show !== false) && (!language || ((!itm.only && !itm.except) || (itm.only && itm.only.indexOf(language) !== -1) || (itm.except && itm.except.indexOf(language) === -1)))"><router-link :to="path + itm.link">{{ itm.text }}</router-link></li>
+            <li v-for="itm in menu.children" :class="{active: itm.link == file}" v-if="(itm.show === undefined || itm.show !== false) && (!language || ((!itm.only && !itm.except) || (itm.only && itm.only.indexOf(language) !== -1) || (itm.except && itm.except.indexOf(language) === -1)))"><router-link :to="itm.link.slice(0, 1) == '/' ? itm.link : (path + itm.link)">{{ itm.text }}</router-link></li>
         </ul>
     </div>
 </template>
