@@ -1,40 +1,48 @@
 # PHP Server SDK
 
-[[toc]]
+<Toc />
 
-### 介绍
-PHP SDK 是对环信 IM [服务端 API](https://docs-im.easemob.com/im/server/ready/intro) 的封装，这样做是为了节省服务器端开发者对接环信 API 的时间，只需要配置自己的 appkey 相关信息即可使用。
+## 介绍
 
-### 功能
+PHP SDK 是对环信 IM [REST API](overview.html) 的封装，旨在节省服务器端开发者对接环信 API 的时间，只需要配置自己的 App Key 相关信息即可使用。
+
+## 功能
+
 PHP SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力。
 
-### 依赖
+## 依赖
+
 - PHP 5.3+
 
-### 安装
+## 安装
+
 直接使用 [composer](https://www.phpcomposer.com/) 进行安装
 
-```
+```shell
 composer require maniac/easemob-php
 ```
 
-### 目录结构
+## 目录结构
+
 - examples 示例文件目录
 - runtime 临时文件、缓存文件目录
 - src 核心文件目录
 - tests 测试文件目录
 
-### 准备
+## 准备
+
 在使用 PHP SDK 之前，需要准备环信 appkey、Client ID、ClientSecret。
 
 如果你有环信管理后台账号并创建过应用，请先登录环信管理后台，点击 [这里](https://console.easemob.com/user/login)，然后到“应用列表” → 点击“查看”即可获取到 appkey、Client ID、ClientSecret。
 
 如果你没有环信管理后台账号，请先注册账号，点击 [这里](https://console.easemob.com/user/register)，注册成功后请登录，然后点击“添加应用”，添加成功后点击“查看”即可获取到 appkey、Client ID、ClientSecret。
 
-### 使用
+## 使用
+
 如果使用 Laravel、YII、ThinkPHP 之类的框架，composer 安装的库会自动加载，如果没有使用框架，需要手动引入 `vendor/autoload.php` 文件。
 
 使用所有的类之前，都要先初始化授权对象，然后再初始化其他类时，传入授权对象
+
 ```php
 require 'vendor/autoload.php';
 
@@ -96,13 +104,14 @@ $data = array(
 $user->create($data);
 ```
 
-### 参考
+## 参考
+
 - PHP SDK 的 api 文档在 [这里](https://easemob.github.io/im-php-server-sdk/annotated.html)
 - PHP SDK 开源地址在 [这里](https://github.com/easemob/im-php-server-sdk)
 
-### 常见问题
+## 常见问题
 
-1.关于 PHP 低版本中文乱码问题
+1. 关于 PHP 低版本中文乱码问题
 
 在纯 PHP 页面中使用
 
@@ -116,11 +125,11 @@ header("Content-Type:text/html;charset=utf-8");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 ```
 
-2.关于 SDK 返回的错误码和错误描述
+2. 关于 SDK 返回的错误码和错误描述
 
-PHP SDK 会直接返回 REST API 的错误码及错误描述，具体请参考 [服务器端 REST API 常见错误码](https://docs-im.easemob.com/im/other/errorcode/restapi)
+PHP SDK 会直接返回 REST API 的错误码及错误描述，具体请参考 [服务器端 REST API 常见错误码](error.html)
 
-3.使用代理的情况
+3. 使用代理的情况
 
 在初始化授权对象 Auth 之后，可以设置代理：
 

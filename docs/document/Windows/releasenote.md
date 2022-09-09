@@ -1,6 +1,6 @@
 # Windows SDK 更新日志
 
-[[toc]]
+<Toc />
 
 ## 版本 V1.0.5 Dev 2022-08-05
 

@@ -1,6 +1,6 @@
 # Android SDK 集成概述
 
-[[toc]]
+<Toc />
 
 介绍 Android 集成相关内容。
 
@@ -93,7 +93,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 });
 ```
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。 详见 [环信用户 token 的获取](/document/Server-side/easemob_user_token.html)。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。 详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
 ```java
 EMClient.getInstance().loginWithToken(mAccount, mPassword, new EMCallBack() {
@@ -227,7 +227,7 @@ EMClient.getInstance().setDebugMode(true);
 ### 获取本地日志
 
 ```shell
-adb pull /sdcard/Android/data/{应用包名}/{App Key}/core_log/easemob.log
+adb pull /sdcard/android/data/{应用包名}/{App Key}/core_log/easemob.log
 ```
 
 获取本地日志，需要将 `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`；`{App Key}` 需要替换为应用设置的环信 App Key。

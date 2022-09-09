@@ -1,10 +1,10 @@
 # 环信即时通讯 REST API 概览
 
-[[toc]]
+<Toc />
 
 环信即时通讯通过 REST 平台提供 REST API，你可以通过你的业务服务器向环信 REST 服务器发送 HTTP 请求，在服务端实现实时通信。
 
-另外环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，具体参见：[Java Server SDK](https://docs-im.easemob.com/ccim/rest/javaserversdk) 和 [PHP Server SDK](https://docs-im.easemob.com/ccim/rest/phpserversdk)。
+另外环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，具体参见：[Java Server SDK](java_server_sdk.html) 和 [PHP Server SDK](php_server_sdk.html)。
 
 ## REST 平台架构
 
@@ -20,14 +20,14 @@
 
 不同 org 之间的用户数据相互隔离；同一个 org 下，不同 app 之间的用户数据也相互隔离。一个 org 的数据架构如下图：
 
-![img](https://docs-im.easemob.com/_media/ccim/rest/1.1.2prepare_to_use_api.png?w=1500&tok=65eb12)
+![img](@static/images/server-side/prepare_to_use_api.png)
 
 ## 前提条件
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](https://docs-im.easemob.com/ccim/config)。
-- 已从服务端获取 app token，详见 [使用环信 app token 鉴权](https://docs-im.easemob.com/ccim/authentication)。
+- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 已从服务端获取 app token，详见 [使用环信 app token 鉴权](easemob_app_token.html)。
 
 ## 请求结构
 
@@ -39,7 +39,7 @@
 Authorization`：`Bearer ${token}
 ```
 
-为提高项目的安全性，环信即时通讯使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用环信 App Token 鉴权](https://docs-im.easemob.com/ccim/authentication)。
+为提高项目的安全性，环信即时通讯使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。
 
 ## 请求域名
 
@@ -47,15 +47,13 @@ Authorization`：`Bearer ${token}
 
 应用所在数据中心可以在环信用户管理后台 > 应用列表找到对应的 App Key 点击 **查看** > **即时通讯** > **服务概览** 中查看：
 
-![img](https://docs-im.easemob.com/_media/im/000quickstart/console-%E6%9F%A5%E7%9C%8Brestapi%E8%AE%BF%E9%97%AE%E5%9C%B0%E5%9D%80.jpg?w=800&tok=db13c5)
+![img](@static/images/server-side/server-side-console.jpeg)
 
-**注意：**
-
-1.为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。请根据您所在数据中心选择请求域名。
-
-2.国内 VIP 区、客服专区客户请联系商务经理索要 REST API 请求地址。
-
-3.支持 HTTP 和 HTTPS。
+:::notice
+1. 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。请根据您所在数据中心选择请求域名。
+2. 国内 VIP 区、客服专区客户请联系商务经理索要 REST API 请求地址。
+3. 支持 HTTP 和 HTTPS。
+:::
 
 ### 通信协议
 
@@ -72,7 +70,7 @@ Authorization`：`Bearer ${token}
 
 ### 用户体系管理
 
-[用户体系管理](https://docs-im.easemob.com/ccim/rest/accountsystem) 功能，包括注册、获取、修改和删除用户等。
+[用户体系管理](account_system.html) 功能，包括注册、获取、修改和删除用户等。
 
 | 名称         | 方法   | 请求                                             | 描述                  |
 | :----------- | :----- | :----------------------------------------------- | :-------------------- |
@@ -86,7 +84,7 @@ Authorization`：`Bearer ${token}
 
 ### 设置消息离线推送
 
-[设置推送消息](https://docs-im.easemob.com/ccim/rest/pushconfig) 展示方式、显示昵称、免打扰模式等。
+[设置推送消息](push.html) 展示方式、显示昵称、免打扰模式等。
 
 | 名称                | 方法 | 请求                                    | 描述                                                    |
 | :------------------- | :--- | :-------------------------------------- | :------------------------------------------------------ |
@@ -96,9 +94,9 @@ Authorization`：`Bearer ${token}
 
 ### 消息发送及文件下载
 
-[消息管理](https://docs-im.easemob.com/ccim/rest/message) 内容包括：从服务端发送文本、图片、语音、视频、透传、扩展、文件、自定义等各种类型的消息，以及上传和下载文件。
+[消息管理](message.html) 内容包括：从服务端发送文本、图片、语音、视频、透传、扩展、文件、自定义等各种类型的消息，以及上传和下载文件。
 
-| 名称             | 方法 | 请求                                        | 描述                                                         |
+| 名称<div style="width: 150px;"></div>             | 方法 | 请求                                        | 描述                                                         |
 | :--------------- | :--- | :------------------------------------------ | :----------------------------------------------------------- |
 | 发送消息         | POST | /{org_name}/{app_name}/messages             | 聊天相关 API，一般是模拟系统管理员给用户或者群组发送消息，支持发送文本消息、图片消息、语音消息、视频消息，透传消息，扩展消息以及文件类型消息。 |
 | 上传文件         | POST | /{org_name}/{app_name}/chatfiles            | 上传语音和图片等文件。                                       |
@@ -107,7 +105,7 @@ Authorization`：`Bearer ${token}
 
 ### 用户属性
 
-[用户属性管理](https://docs-im.easemob.com/ccim/rest/userprofile) 包括：设置、获取和删除用户属性。
+[用户属性管理](userprofile.html) 包括：设置、获取和删除用户属性。
 
 | 名称                       | 方法   | 请求                                            | 描述                                         |
 | :------------------------- | :----- | :---------------------------------------------- | :------------------------------------------- |
@@ -119,7 +117,7 @@ Authorization`：`Bearer ${token}
 
 ### 用户关系管理
 
-[用户关系管理](https://docs-im.easemob.com/ccim/rest/relationship) 包括：管理用户的好友列表和黑名单。
+[用户关系管理](user_relationship.html) 包括：管理用户的好友列表和黑名单。
 
 | 名称         | 方法   | 请求                                                         | 描述                   |
 | :----------- | :----- | :----------------------------------------------------------- | :--------------------- |
@@ -132,7 +130,7 @@ Authorization`：`Bearer ${token}
 
 ### 群组管理
 
-[群组管理](https://docs-im.easemob.com/ccim/rest/group) 包括创建、获取、修改和删除群组。
+[群组管理](group.html) 包括创建、获取、修改和删除群组。
 
 | 名称        | 方法   | 请求           | 描述          |
 | :---------------- | :----- | :----------------- | :-------------------- |
@@ -145,7 +143,7 @@ Authorization`：`Bearer ${token}
 
 ### 群组成员管理
 
-[管理群组成员](https://docs-im.easemob.com/ccim/rest/group)，包括添加、移除群组成员关系列表，转让群主等。
+[管理群组成员](group.html#管理群组成员)，包括添加、移除群组成员关系列表，转让群主等。
 
 | 名称      | 方法   | 请求      | 描述      |
 | :------------------- | :----- | :---------------------- | :--------------- |
@@ -175,7 +173,7 @@ Authorization`：`Bearer ${token}
 
 ### 管理子区
 
-[子区管理](https://docs-im.easemob.com/ccim/rest/group#管理子区) 包括子区的创建、获取、修改、删除等。
+[子区管理](group.html#管理子区) 包括子区的创建、获取、修改、删除等。
 
 | 名称                                             | 方法   | 请求                                                         | 描述                                           |
 | :----------------------------------------------- | :----- | :----------------------------------------------------------- | :--------------------------------------------- |
@@ -188,7 +186,7 @@ Authorization`：`Bearer ${token}
 
 ### 管理子区成员
 
-[子区成员管理](https://docs-im.easemob.com/ccim/rest/group#管理子区成员)，包括对子区的加入和踢出等管理功能。
+[子区成员管理](group.html#管理子区成员)，包括对子区的加入和踢出等管理功能。
 
 | 名称               | 方法   | 请求                                             | 描述                 |
 | :----------------- | :----- | :----------------------------------------------- | :------------------- |
@@ -198,7 +196,7 @@ Authorization`：`Bearer ${token}
 
 ### 聊天室管理
 
-[聊天室管理](https://docs-im.easemob.com/ccim/rest/chatroom)包括创建、获取、修改、删除聊天室。
+[聊天室管理](chatroom.html) 包括创建、获取、修改、删除聊天室。
 
 | 名称                    | 方法   | 请求                                                        | 描述                                     |
 | :---------------------- | :----- | :---------------------------------------------------------- | :--------------------------------------- |
@@ -213,7 +211,7 @@ Authorization`：`Bearer ${token}
 
 ### 聊天室成员管理
 
-[聊天室成员管理](https://docs-im.easemob.com/ccim/rest/chatroom)包括：添加、获取、修改和删除聊天室中的成员。
+[聊天室成员管理](chatroom.html#管理聊天室成员) 包括：添加、获取、修改和删除聊天室中的成员。
 
 | 名称                       | 方法   | 请求                                                         | 描述                                 |
 | :------------------------- | :----- | :----------------------------------------------------------- | :----------------------------------- |

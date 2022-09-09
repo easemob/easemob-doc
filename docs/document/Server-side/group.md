@@ -1,17 +1,17 @@
 # 群组管理 REST API
 
-[[toc]]
+<Toc />
 
 环信即时通讯 IM 提供了 REST API 管理 App 中的群组。
 
-单个 App [创建群组数量有限制](https://docs-im.easemob.com/ccim/config#群组数量)，单个用户可加入群组的数量依据版本而定，详见[IM 即时通讯云价格](https://www.easemob.com/pricing/im)。
+单个 App [创建群组数量有限制](enable_and_configure_IM.html#群组数量)，单个用户可加入群组的数量依据版本而定，详见 [IM 即时通讯云价格](https://www.easemob.com/pricing/im)。
 
 ## 前提条件
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯 IM 管理后台 [开通配置环信即时通讯 IM 服务](https://docs-im.easemob.com/ccim/config)。
-- 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](https://docs-im.easemob.com/ccim/limitationapi)。
+- 已在环信即时通讯 IM 管理后台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
@@ -61,7 +61,7 @@
 
 Authorization：`Bearer ${YourToken}`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 token 鉴权](https://docs-im.easemob.com/ccim/authentication)。
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 token 鉴权](easemob_app_token.html)。
 
 ## 创建和管理群组
 
@@ -77,11 +77,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见  [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -113,9 +113,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | :-------- | :----- | :-------- |
 | `data.groupid` | String | 群组 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见  [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -166,11 +166,11 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -201,9 +201,9 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.membersonly`  | Bool | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是; <br/> - `false`：否。 |
 | `data.allowinvites` | Bool | 是否允许群成员邀请别人加入此群：<br/> -`true`：允许群成员邀请人加入此群; </br>- `false`：只有群主才可以往群里加人。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -263,11 +263,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -297,15 +297,15 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 | `limit`         | Int    | 每页获取的数量。取值范围为[1,100]，默认值为 10。 |
 | `cursor` | String | 游标，下次回从该位置开始进行查询。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ##### 请求示例
 
 第一页
 
-```http
+```shell
 # 将 <YourToken> 替换为你在服务端生成的 Token
 
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups?limit=2'
@@ -313,7 +313,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> 
 
 第二页
 
-```http
+```shell
 # 将 <YourToken> 替换为你在服务端生成的 Token
 
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups?limit=2&cursor=ZGNXXXX6Mg'
@@ -381,11 +381,11 @@ GET https://{host}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pag
 | `pagesize` | String | 是     | 每页获取的群组数量。该参数仅适用于分页获取方法。             |
 | `pagenum`  | String | 是     | 当前页码。该参数仅适用于分页获取方法。                       |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json` |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -401,9 +401,9 @@ GET https://{host}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pag
 | `data.groupid`   | String | 群组 ID。  |
 | `data.groupname` | String | 群组名称。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -417,7 +417,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> 
 
 分页获取示例：
 
-```json
+```shell
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/users/user1/joined_chatgroups?pagesize=1&pagenum=100'
 ```
 
@@ -491,11 +491,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -522,9 +522,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.public`             | Bool | 是否是公开群：<br/> - `true`：公开群；<br/> - `false`：私有群。             |
 | `data.custom`             | String  | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -578,11 +578,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -592,14 +592,15 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
 | 字段       | 类型    | 说明                                                    |
 | :-------- | :------ | :------------------------------------------------------ |
 | `data.success` | Bool | 群组删除结果: </br> - `true`：删除成功； <br/> - `false`：删除失败。 |
 | `data.groupid` | String  | 所删除群组 ID。                                         |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -644,11 +645,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -664,9 +665,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 | :------------- | :----- | :----------- |
 | `data.announcement` | String | 群公告内容。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -708,11 +709,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -729,9 +730,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 | `data.id`     | String  | 群组 ID。                                            |
 | `data.result` | Bool | 修改结果：<br/> - `true`：修改成功；</br>- `false`：修改失败。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -764,7 +765,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 获取群组共享文件
 
-分页获取指定群组 ID 的群组共享文件，之后可以根据 response 中返回的 file_id，file_id 是群组共享文件的唯一标识，调用 [下载群组共享文件](https://docs-im.easemob.com/ccim/rest/group#下载群组共享文件) 接口下载文件，或调用 [删除群组共享文件](https://docs-im.easemob.com/ccim/rest/group#删除群组共享文件)接口删除文件。
+分页获取指定群组 ID 的群组共享文件，之后可以根据 response 中返回的 file_id，file_id 是群组共享文件的唯一标识，调用 [下载群组共享文件](#下载群组共享文件) 接口下载文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除文件。
 
 #### HTTP 请求
 
@@ -789,7 +790,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -809,9 +810,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 | `data.file_size`  | Long | 群组共享文件大小(字节)。                                    |
 | `data.created`   | Long  | 上传群组共享文件的时间。                                    |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -866,7 +867,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 上传指定群组 ID 的群组共享文件。注意上传的文件大小不能超过 10 MB。
 
-分页获取指定群组 ID 的群组共享文件，然后可以根据响应中返回的 file_id（群组共享文件的唯一标识）调用 [下载群组共享文件](https://docs-im.easemob.com/ccim/rest/group#下载群组共享文件) 接口下载群组的共享文件，或调用 [删除群组共享文件](https://docs-im.easemob.com/ccim/rest/group#删除群组共享文件)接口删除群组的共享文件。
+分页获取指定群组 ID 的群组共享文件，然后可以根据响应中返回的 file_id（群组共享文件的唯一标识）调用 [下载群组共享文件](#下载群组共享文件) 接口下载群组的共享文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除群组的共享文件。
 
 #### HTTP 请求
 
@@ -876,11 +877,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    |内容类型。请填 `application/json` |
 | `content-type`   | String | 是    |内容类型。请填 `multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW` |
@@ -903,9 +904,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 | `data.file_id`   | String  | 群组共享文件 ID，可以用于下载共享文件和删除共享文件。      |
 | `data.file_size`  | Long | 群组共享文件大小(字节)。                                   |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -944,7 +945,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files' -H 'Content-T
 
 ### 下载群组共享文件
 
-根据指定的群组 ID 与 file_id 下载群组共享文件，file_id 是通过 [获取群组共享文件](https://docs-im.easemob.com/ccim/rest/group#获取群组共享文件) 接口获取。
+根据指定的群组 ID 与 file_id 下载群组共享文件，file_id 是通过 [获取群组共享文件](#获取群组共享文件) 接口获取。
 
 #### HTTP 请求
 
@@ -954,11 +955,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -979,9 +980,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 | `data.file_id`    | String | 群组共享文件 ID，可以用于下载共享文件和删除共享文件。      |
 | `data.file_size`  | Long| 群组共享文件大小(字节)。                       |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1018,7 +1019,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ### 删除群组共享文件
 
-根据指定的群组 ID 与 file_id 删除群组共享文件，file_id 是通过 [获取群组共享文件](https://docs-im.easemob.com/ccim/rest/group#获取群组共享文件) 接口获取。
+根据指定的群组 ID 与 file_id 删除群组共享文件，file_id 是通过 [获取群组共享文件](#获取群组共享文件) 接口获取。
 
 #### HTTP 请求
 
@@ -1032,11 +1033,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{f
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `file_id`  | String | 是     | 文件 ID。                                                    |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -1054,9 +1055,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{f
 | `data.file_id`  | String  | 群组共享文件 ID，可以用于下载共享文件和删除共享文件          |
 | `data.result`   | Bool  | 删除群组共享文件的结果：<br/> - `ture`：删除成功；<br/> - `false`：删除失败。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1109,7 +1110,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 | `params.pagenum`  | Int    | 否   | 当前页码。默认从第 1 页开始获取。         |
 | `params.pagesize` | Int    | 否   | 每页期望返回的群组成员数量。取值范围为[1,100]。默认为 10。    |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1128,9 +1129,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 | `data.owner` | String  | 群主的用户 ID。例如：{“owner”: “user1”}。   |
 | `data.member` | String | 群成员的用户 ID。例如：{“member”:“user2”}。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1186,11 +1187,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -1209,9 +1210,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 | `data.action`  | String | 执行的操作。                                  |
 | `data.user`    | String  | 被添加的用户 ID。                       |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1256,11 +1257,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users\
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -1284,9 +1285,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users\
 | `data.groupid`   | String  | 群组 ID。           |
 | `data.action`    | String   | 执行的操作。`add_member` 为添加群成员。      |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1337,11 +1338,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1359,9 +1360,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 | `data.action`  | String  | 执行的操作，`remove_member` 为移除群组成员。                     |
 | `data.user`    | String  | 被移除的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1410,11 +1411,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{memeber
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
 | `memebers`    | String | 是     | 要移除的群成员用户 ID，用户 ID 之间用英文逗号分隔。建议一次最多移除 60 个群成员，并且 URL 的长度应在 4k 字节以内。         |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1433,9 +1434,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{memeber
 | `data.user`    | String  | 被移除成员的用户 ID。                                  |
 | `data.groupid` | String  | 操作的群组 ID。                                       |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1493,11 +1494,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -1511,9 +1512,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 | :----- | :---- | :--------------- |
 | `data` | Array | 群组管理员的用户 ID 列表。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1554,11 +1555,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -1578,9 +1579,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 | :----- | :----- | :---------------------- |
 | `data` | String | 添加的新管理员用户 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1621,11 +1622,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -1640,9 +1641,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 | `data.result`   | Bool | 操作结果：<br/> - `success`：表示移除成功; <br/> - `failure`：表示移除失败。 |
 | `data.oldadmin` | String  | 被移除的管理员用户 ID。                                          |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1685,7 +1686,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1711,9 +1712,9 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | :--------- | :------ | :---------------------------------------------------- |
 | `data.newowner` | Bool | 操作结果：<br/> - `true`：转让成功。<br/> - `false`：转让失败。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1759,11 +1760,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1778,9 +1779,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 | :----- | :---- | :------------------ |
 | `data` | Array | 群组黑名单用户 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1826,11 +1827,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{us
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -1849,9 +1850,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{us
 | `data.action`  | String | 执行操作。`add_blocks 为将成员加入黑名单。                                             |
 | `data.user`    | String | 被添加的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1898,11 +1899,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -1928,9 +1929,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 | `data.action`  | String  | 执行的操作。                                          |
 | `data.user`    | String  | 被添加的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1988,11 +1989,11 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -2010,9 +2011,9 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}
 | `action`  | String  | 执行的操作。                                          |
 | `user`    | String  | 被添加的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2057,7 +2058,7 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2079,9 +2080,9 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}
 | `data.action`  | String  | 执行的操作。                                          |
 | `data.user`    | String  | 添加的用户 ID。                                       |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2138,11 +2139,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -2157,9 +2158,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 | :----- | :---- | :---------------------- |
 | `data` | Array | 群组白名单中的用户 ID 列表。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2206,7 +2207,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2228,9 +2229,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 | `data.action`  | 执行操作。`add_user_whitelist` 为将成员加入群白名单。                        |
 | `data.user`    | 被添加的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2275,11 +2276,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -2305,9 +2306,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 | `data.action`  | String  | 执行的操作。`add_user_whitelist` 为将成员加入群白名单。                 |
 | `data.user`    | String  | 被添加的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2360,11 +2361,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{u
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -2382,9 +2383,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{u
 | `data.action`  | String  | 执行的操作。`remove_user_whitelist` 为将成员加入群白名单。               |
 | `data.user`    | String  | 添加的用户 ID，多个用户 ID 以逗号分隔。               |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2443,11 +2444,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2462,9 +2463,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 | `data.expire`| Long | 禁言到期的时间，单位为毫秒。 |
 | `data.user`| String  | 被禁言用户的 ID。            |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2507,17 +2508,17 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ##### 请求 body
 
-| 参数            | 类型   | 是否必需 | 说明                    |
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 说明                    |
 | :-------------- | :---- | :-------| :------------------------ |
 | `mute_duration` | Long  |  是  | 禁言时长，单位为毫秒。  |
 | `usernames`     | Array |  是  | 要被添加到禁言列表的用户 ID 列表。每次调用最多禁言 10 个成员。 |
@@ -2534,9 +2535,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 | `data.expire` | Long    | 禁言到期的时间。该时间为 Unix 时间戳，单位为毫秒。    |
 | `data.user`   | String  | 被禁言用户的 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2580,11 +2581,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -2592,7 +2593,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 ##### 请求 body
 
-| 参数            | 类型  | 是否必需 | 说明                   |
+| 参数            | 类型  | 是否必需<div style="width: 80px;"></div> | 说明                   |
 | :-------------- | :--- | :-------| :------------- |
 | `mute_duration` | Long | 是 | 禁言时长，单位为毫秒。 |
 
@@ -2607,9 +2608,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 | `data.result` | Bool | 操作结果：<br/> - `true`：禁言成功；<br/> - `false`：禁言失败。 |
 | `data.expire` | Long    | 禁言到期的时间。该时间为 Unix 时间戳，单位为毫秒。    |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2655,11 +2656,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `member`   | String | 是     | member1:成员 1 id；member2：成员 2 id；......                 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2674,9 +2675,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 | `data.result` | Bool | 操作结果：<br/> - `true`：解除成功；<br/> - `false`：解除失败。 |
 | `data.user`   | Array | 被移除禁言的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2719,7 +2720,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2739,9 +2740,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 | :------- | :------ | :---------------------------------------------------- |
 | `data.mute` | Bool | 是否处于全员禁言状态。<br/> - `true`：是； <br/> - `false`：否。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2791,11 +2792,11 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 |:---------|:-------|:-----|:--------------------------|
 | `sort`   | String | 否  | 搜索结果的排序方式：<br/> - `asc`：按创建时间正序；<br/> - （默认）`desc`：按创建时间倒序。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2817,9 +2818,9 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 | `entities.id`  | String | 子区 ID。 |
 | `properties.cursor`  | String  | 分页页码。下一次服务器会从游标起始的地方进行查询。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2868,11 +2869,11 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 |:---------|:-------|:-----|:--------------------------|
 | `sort`   | String | 否  | 搜索结果的排序方式：<br/> - `asc`：按创建时间正序；<br/> - （默认）`desc`：按创建时间倒序。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2899,9 +2900,9 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 | `entities.created` | Long |子区创建时间，Unix 时间戳。    |
 | `properties.cursor`  | String  | 游标。下一次服务器会从游标起始的地方进行查询。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2955,11 +2956,11 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 |:---------|:-------|:-----|:--------------------------|
 | `sort`   | String | 否  | 搜索结果的排序方式：<br/> - `asc`：按创建时间正序；<br/> - （默认）`desc`：按创建时间倒序。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2986,9 +2987,9 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 | `entities.created` | Long  |子区创建时间。    |
 | `properties.cursor`  | String  | 游标。下一次服务器会从游标起始的地方进行查询。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -3038,11 +3039,11 @@ POST https://{host}/{org_name}/{app_name}/thread
 
 ##### 路径参数
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -3065,9 +3066,9 @@ POST https://{host}/{org_name}/{app_name}/thread
 | :------- |:----|:---------------|
 | `data.thread_id` | String | 创建的子区 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -3116,11 +3117,11 @@ PUT https://{host}/{org_name}/{app_name}/thread/{thread_id}
 |:------------|:-------|:-----|:-----------|
 | `thread_id` | String | 是   |子区 ID。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -3140,9 +3141,9 @@ PUT https://{host}/{org_name}/{app_name}/thread/{thread_id}
 |:-----|:-------|:--------|
 | `data.name` | String | 修改后的名称。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -3186,7 +3187,7 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}
 |:------------|:-------|:-----|:-----------|
 | `thread_id` | String | 是   |子区 ID。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -3204,9 +3205,9 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}
 |:------|:--------|:--------|
 | `entities.status` | Bool | 删除结果，`ok` 表示已删除。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -3250,11 +3251,11 @@ GET https://{host}/{org_name}/{app_name}/thread/{thread_id}/users?limit={N}&curs
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -3276,9 +3277,9 @@ GET https://{host}/{org_name}/{app_name}/thread/{thread_id}/users?limit={N}&curs
 | `affiliations` | Array | Thread 成员用户 ID 列表。 |
 | `properties.cursor`  | String  | 游标，下一次服务器会从游标起始的地方进行查询。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -3325,11 +3326,11 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 |:------------|:-------|:-----|:-----------|
 | `thread_id` | String | 是   |子区 ID。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -3343,13 +3344,13 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+如果返回的 HTTP 状态码为 `200`，表示请求成功，字段及说明详见 [公共参数](#公共参数)。
 
 | 字段   |  类型     | 说明      |
 |:------|:--------|:--------|
 | `entities.status` | Bool | 删除结果，`ok` 表示已删除。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -3398,11 +3399,11 @@ DELETE https://{host}/{org_name}/{app_name}/threads/{thread_id}/users
 |:------------|:-------|:-----|:-----------|
 | `thread_id` | String | 是   |子区 ID。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -3423,9 +3424,9 @@ DELETE https://{host}/{org_name}/{app_name}/threads/{thread_id}/users
 | `result`| Bool | 操作结果。<br/> - `true`：成功；<br/> - `false`：失败。 |
 | `user` | String | 被踢出用户的 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/group#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 

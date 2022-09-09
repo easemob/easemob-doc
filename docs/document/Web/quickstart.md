@@ -1,6 +1,6 @@
 # 环信即时通讯 IM Web 快速开始
 
-[[toc]]
+<Toc />
 
 本页面介绍如何快速集成环信即时通讯 IM Web SDK 实现单聊。
 
@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![](@static/images/Web/sendandreceivemsg.png)
+![](@static/images/web/sendandreceivemsg.png)
 
 ## 前提条件
 

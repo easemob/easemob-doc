@@ -1,6 +1,6 @@
 # 环信 IM Windows SDK 快速入门
 
-[[toc]]
+<Toc />
 
 本文介绍如何快速集成环信 IM Windows SDK 实现发送和接收单聊文本消息。
 
@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收单聊文本消息的工作流程。
 
-![img](@static/images/Android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 如上图所示，发送和接收单聊消息的步骤如下：
 

@@ -1,6 +1,6 @@
 # 集成概述
 
-[[toc]]
+<Toc />
 
 介绍 Windows SDK 集成相关内容。
 
@@ -51,7 +51,7 @@ SDKClient.Instance.InitWithOptions(options);
 
 ### REST API 注册
 
-请参考 [注册用户](/document/Server-side/account_system.html#注册用户)。
+请参考 [注册用户](/document/server-side/account_system.html#注册用户)。
 
 ### SDK 注册
 

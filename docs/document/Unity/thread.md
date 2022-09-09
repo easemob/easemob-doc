@@ -1,10 +1,10 @@
 # 管理子区
 
-[[toc]]
+<Toc />
 
 子区是群组成员的子集，是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
 
-如需查看消息相关内容，参见 [子区消息管理](../doc_cn_easemob/unity/thread_message_unity.md)。
+如需查看消息相关内容，参见 [子区消息管理](thread_message.html)。
 
 ## 技术原理
 
@@ -24,9 +24,9 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 `1.0.6 以上版本` SDK 初始化，详见 [快速开始](https://github.com/easemob/chat-docs/blob/input/Doc/doc_cn_easemob/Unity/2.2.7quick_start_unity.md)。
-- 了解环信即时通讯 IM API 的[使用限制](https://docs-im.easemob.com/ccim/limitation)。
-- 了解子区和子区成员数量限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 `1.0.6 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+- 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
 
 ## 实现方法
@@ -64,9 +64,9 @@ SDKClient.Instance.ThreadManager.CreateThread(threadName, msgId, groupid, new Va
 
 单设备登录时，子区所属群组的所有成员均会收到 `IChatThreadManagerDelegate#onThreadNotifyChange` 回调；多设备登录时，其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_DESTROY`。
 
-**注意**
-
+:::notice
 解散子区或解散子区所在的群组后，将删除本地数据库及内存中关于该子区的全部数据，需谨慎操作。
+:::
 
 示例代码如下：
 
@@ -90,7 +90,6 @@ SDKClient.Instance.ThreadManager.DestroyThread(tid, new CallBack(
 加入子区的具体步骤如下：
 
 1. 收到 `IChatThreadManagerDelegate#OnCreateThread` 回调或 `IChatThreadManagerDelegate#onThreadNotifyChange` 回调，或调用 `FetchThreadListOfGroup` 方法从服务器获取指定群组的子区列表，从中获取到想要加入的子区 ID。
-
 2. 调用 `JoinThread` 传入子区 ID 加入对应子区。
 
 多设备登录时，其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_JOIN`。
@@ -185,19 +184,19 @@ SDKClient.Instance.ThreadManager.ChangeThreadSubject(tid, subject, new CallBack(
 
 ```csharp
 SDKClient.Instance.ThreadManager.GetThreadDetail(tid, new ValueCallBack<ChatThread>(
-        onSuccess: (thread) =>
+    onSuccess: (thread) =>
+    {
+        Debug.Log($"GetThreadDetail success");
+        if (null != thread)
         {
-            Debug.Log($"GetThreadDetail success");
-            if (null != thread)
-            {
-                //添加子区处理
-            }
-        },
-        onError: (code, desc) =>
-        {
-            Debug.Log($"GetThreadDetail failed, code:{code}, desc:{desc}");
+            //添加子区处理
         }
-    ));
+    },
+    onError: (code, desc) =>
+    {
+        Debug.Log($"GetThreadDetail failed, code:{code}, desc:{desc}");
+    }
+));
 ```
 
 ### 获取子区成员列表

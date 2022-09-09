@@ -1,6 +1,6 @@
 # Android 第三方推送设置
 
-[[toc]]
+<Toc />
 
 环信即时通讯 IM 支持集成第三方厂商的消息推送服务，为 Android 开发者提供低延时、高送达、高并发、不侵犯用户个人数据的离线消息推送服务。
 
@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-![image](@static/images/Android/push/push_android_understand.png)
+![image](@static/images/android/push/push_android_understand.png)
 
 1. 判断设备支持哪种推送（App 配置了第三方推送且满足该推送的使用条件）；
 2. 根据集成第三方推送 SDK 获取推送 token；
@@ -37,7 +37,7 @@
 1. 已开启环信即时通讯服务，详见 [开启和配置即时通讯服务](/product/enable_and_configure_IM.html)。
 2. 若使用 3.9.2 及以上版本提供的推送高级功能，包括设置推送通知模式、免打扰模式和自定义推送模板，你需要在环信即时通讯云控制后台中激活推送高级功能。
 
-![](@static/images/Android/enable_push_new.png)
+![](@static/images/android/enable_push_new.png)
 
 各推送使用条件：
 
@@ -60,7 +60,7 @@ SDK 内部会按照这个顺序去检测设备的推送支持情况。
 
 ### 上传到设备证书到环信即时通讯云控制台
 
-![image](@static/images/Android/push/push_android_certificate_add.png)
+![image](@static/images/android/push/push_android_certificate_add.png)
 
 ## 在客户端实现推送
 
@@ -536,7 +536,7 @@ EMClient.getInstance().init(this, options);
 
 其中，设置推送通知方式、免打扰模式和推送模板为推送的高级功能，使用前需要在环信即时通讯云管理后台上打开开关。
 
-![image](@static/images/Android/push/push_android_enable_push.png)
+![image](@static/images/android/push/push_android_enable_push.png)
 
 #### 4.1 设置推送通知 
 
@@ -775,9 +775,9 @@ EMClient.getInstance().pushManager().getPreferredNotificationLanguage(new EMValu
 1. 登录环信 IM Console，进入首页。
 2. 在 **应用列表** 区域中，点击对应 app 的 **操作** 一栏中的 **查看** 按钮。
 3. 在环信 IM 配置页面的左侧导航栏，选择 **即时通讯 > 功能配置 > 消息推送 > 模板管理**，进入推送模板管理页面。
-![image](@static/images/Android/push/push_android_template_mgmt.png)
+![image](@static/images/android/push/push_android_template_mgmt.png)
 4. 点击 **添加推送模板**。弹出以下页面，进行参数配置。
-![image](@static/images/Android/push/push_android_template_add.png)
+![image](@static/images/android/push/push_android_template_add.png)
 
 在环信即时通讯云管理后台中完成模板创建后，用户可以在发送消息时选择此推送模板作为默认布局，如下代码示例所示：
 

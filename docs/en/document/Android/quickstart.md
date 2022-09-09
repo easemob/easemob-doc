@@ -1,3 +1,3 @@
 # Android quick start
 
-[[toc]]
+<Toc />

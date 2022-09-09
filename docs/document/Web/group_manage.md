@@ -1,6 +1,6 @@
 # 群组-创建和管理群组及监听群组事件
 
-[[toc]]
+<Toc />
 
 群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
 
@@ -67,7 +67,7 @@ conn.createGroup(option).then(res => console.log(res))
 
 邀请用户入群的流程图如下：
 
-![img](@static/images/Web/8.png)
+![img](@static/images/web/8.png)
 
 邀请用户加群流程如下：
 

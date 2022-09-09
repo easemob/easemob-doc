@@ -1,6 +1,6 @@
 # Unity 常见错误代码
 
-[[toc]]
+<Toc />
 
 本文主要介绍在调用环信即时通讯 Unity SDK 中的接口过程中，SDK 返回的错误码和错误信息。
 
@@ -14,24 +14,23 @@
 例如，注册时用户返回已存在的错误可以这样检测：
 ```csharp
 SDKClient.Instance.Login(username, passwd,
-            handle: new CallBack(
-                onSuccess: () =>
-                {
-                },
-                onError: (code, desc) =>
-                {
-                    //注册失败，回调函数会返回错误码和错误描述
-                    //如：code为：USER_ALREADY_EXIST(203)
-                    //desc : User already exist.
-                }
-            )
-        );
+    handle: new CallBack(
+        onSuccess: () =>
+        {
+        },
+        onError: (code, desc) =>
+        {
+            //注册失败，回调函数会返回错误码和错误描述
+            //如：code为：USER_ALREADY_EXIST(203)
+            //desc : User already exist.
+        }
+    )
+);
 ```
 
 错误码定义如下：
 
-
-| 错误码 | 错误信息                        | 描述                                     | 可能原因                                                     |
+| 错误码<div style="width: 80px;"></div> | 错误信息                        | 描述                                     | 可能原因                                                     |
 | :----- | :------------------------------ | :--------------------------------------- | :----------------------------------------------------------- |
 | 0      | EM_NO_ERROR                     | 操作成功                                 | 提示操作成功。                                               |
 | 1      | GENERAL_ERROR                   | 默认未区分类型的错误                     | 提示 SDK 内部未正确初始化，或者请求服务器时未识别出具体原因的错误。 |

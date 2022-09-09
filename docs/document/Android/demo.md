@@ -1,24 +1,24 @@
 # Demo（EaseIM App）介绍
 
-[[toc]]
+<Toc />
 
 环信即时通讯 Android 提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
 
 1. 在 [环信即时通讯云 IM 管理后台](https://console.easemob.com/user/login) 通过邮箱注册，可以看到默认的 Demo 应用（默认应用是全功能开通的应用）；
 
-![img](@static/images/Android/app-demo.png)
+![img](@static/images/android/app-demo.png)
 
 2. 在上图页面 Demo 应用右侧点击 **查看**，选择 **开放注册**；
 
-![img](@static/images/Android/app-demo-register-type.png)
+![img](@static/images/android/app-demo-register-type.png)
 
 3. 下载 Demo，点击 **服务器配置**；
 
-![img](@static/images/Android/app-demo-config.jpeg)
+![img](@static/images/android/app-demo-config.jpeg)
 
 4. 将 Demo 的 App Key 填入，点击 **保存配置**；
 
-![img](@static/images/Android/app-demo-input-appkey.jpeg)
+![img](@static/images/android/app-demo-input-appkey.jpeg)
 
 5. 杀死 app；
 6. 重启，然后点击 **注册用户** 进行体验。
@@ -87,8 +87,8 @@
 
 ## 部分 UI 展示
 
-![会话列表](@static/images/Android/app-demo-ui-1.jpeg)
+![会话列表](@static/images/android/app-demo-ui-1.jpeg)
 
-![联系人列表](@static/images/Android/app-demo-ui-2.jpeg)
+![联系人列表](@static/images/android/app-demo-ui-2.jpeg)
 
-![聊天页面](@static/images/Android/app-demo-ui-3.jpeg)
+![聊天页面](@static/images/android/app-demo-ui-3.jpeg)

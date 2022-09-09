@@ -1,6 +1,6 @@
 # 群组-管理群组属性
 
-[[toc]]
+<Toc />
 
 群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中实现群组属性相关功能。
 
@@ -17,8 +17,8 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](https://docs-im.easemob.com/ccim/unity/quickstart)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)；
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
 - 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
@@ -33,12 +33,12 @@
 
 ```csharp
 SDKClient.Instance.GroupManager.ChangeGroupName(groupId, groupName, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -67,14 +67,13 @@ SDKClient.Instance.GroupManager.ChangeGroupDescription(groupId, description, new
 
 ```csharp
 SDKClient.Instance.GroupManager.UpdateGroupAnnouncement(groupId, announcement, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
-
 ```
 
 ### 获取群公告
@@ -85,12 +84,12 @@ SDKClient.Instance.GroupManager.UpdateGroupAnnouncement(groupId, announcement, n
 
 ```csharp
 SDKClient.Instance.GroupManager.GetGroupAnnouncementFromServer(currentGroupId, new ValueCallBack<string>(
-  onSuccess: (str) =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: (str) =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -104,12 +103,12 @@ SDKClient.Instance.GroupManager.GetGroupAnnouncementFromServer(currentGroupId, n
 
 ```csharp
 SDKClient.Instance.GroupManager.UploadGroupSharedFile(groupId, filePath, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -123,12 +122,12 @@ SDKClient.Instance.GroupManager.UploadGroupSharedFile(groupId, filePath, new Cal
 
 ```csharp
 SDKClient.Instance.GroupManager.DeleteGroupSharedFile(groupId, id, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -140,12 +139,12 @@ SDKClient.Instance.GroupManager.DeleteGroupSharedFile(groupId, id, new CallBack(
 
 ```csharp
 SDKClient.Instance.GroupManager.GetGroupFileListFromServer(groupId, pageNum, pageSize, handle: new ValueCallBack<List<GroupSharedFile>> (
-  onSuccess: (fileList) =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: (fileList) =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -157,15 +156,15 @@ SDKClient.Instance.GroupManager.GetGroupFileListFromServer(groupId, pageNum, pag
 
 ```csharp
 SDKClient.Instance.GroupManager.UpdateGroupExt(currentGroupId, extension, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
 ### 更多
 
-- [监听器介绍](../unity/group_manage_unity)
+- [监听器介绍](group_manage.html#监听群组事件)

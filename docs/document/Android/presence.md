@@ -1,6 +1,6 @@
 # 在线状态订阅 Android
 
-[[toc]]
+<Toc />
 
 用户在线状态（即 Presence）包含用户的在线、离线以及自定义状态。
 
@@ -18,7 +18,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![img](@static/images/Android/presence.png)
+![img](@static/images/android/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -28,7 +28,7 @@
 
 效果如下图：
 
-![img](@static/images/Android/status.png)
+![img](@static/images/android/status.png)
 
 ## 前提条件
 

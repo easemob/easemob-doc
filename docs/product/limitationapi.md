@@ -1,12 +1,12 @@
 # Rest API 调用频率限制
 
-[[toc]]
+<Toc />
 
 除部分 API 接口有特殊说明外，API 调用频率限制默认为 100 次/秒，具体每个接口限制以下表为准。
 
 按模块查看接口调用频率限制：
 
-### 帐号管理
+## 帐号管理
 
 | Rest API 接口 |方法  | 接口 URL|
 | :------------ | :--- | :--------------------------- |
@@ -31,7 +31,7 @@
 | 账号解禁    |  POST                    | /{org_name}/{app_name}/users/{username}/activate         | 100 次/秒/App Key                                                 |
 | 强制下线         |  GET          | /{org_name}/{app_name}/users/{username}/disconnect         | 100 次/秒/App Key       |
 
-### 消息推送
+## 消息推送
 
 | Rest API 接口        | 方法 | 接口 URL                                |
 | :------------------- | :--- | :-------------------------------------- |
@@ -41,7 +41,7 @@
 
 以上三个接口共限制，接口最高调用频率（默认值）100 次/秒/App Key。
 
-### 消息管理
+## 消息管理
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------------------- | :----- | :--------------------------------------------------- | :----------------------------------------------------------- |
@@ -54,7 +54,7 @@
 | 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
 | 服务端单向删除会话   |    DELETE    | /{org_name}/{appName}/users/{userName}/user_channel          | 100 次/秒/App Key                                                 |
 
-### 用户属性
+## 用户属性
 
 | Rest API 接口 |方法  | 接口 URL |
 | :------------------------- | :--- | :---------------------------------------------- |
@@ -69,7 +69,7 @@
 | 批量获取用户属性    |    POST      | /{org_name}/{app_name}/metadata/user/get           | 100 次/秒/App Key                                                 |
 | 删除用户属性   |    DELETE     | /{org_name}/{app_name}/metadata/user/{username}      | 100 次/秒/App Key                                                 |
 
-### 用户关系管理
+## 用户关系管理
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :------------- | :----- | :----------------------------------------------------------- | :------------------------- |
@@ -80,7 +80,7 @@
 | 添加黑名单    |    POST       | /{org_name}/{app_name}/users/{owner_username}/blocks/users    | 50 次/秒/App Key                                                  |
 | 移除黑名单 |    DELETE      | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username}   | 50 次/秒/App Key                                                  |
 
-### 群组管理
+## 群组管理
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
@@ -97,7 +97,7 @@
 | 下载群组共享文件    |  GET   | /{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file_id}   | 100 次/秒/App Key                                                 |
 | 删除群组共享文件   |    DELETE   | /{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file_id}     | 100 次/秒/App Key                                                 |
 
-### 群成员管理
+## 群成员管理
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
@@ -125,7 +125,7 @@
 | 解除成员禁言   |    DELETE   | /{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}(,{member2},…)    | 100 次/秒/App Key                                                 |
 | 解除全员禁言 |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}/ban                | 100 次/秒/App Key                                                 |
 
-### 聊天室管理
+## 聊天室管理
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
@@ -138,7 +138,7 @@
 | 获取聊天室公告  |   GET  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement      | 100 次/秒/App Key                                                 |
 | 修改聊天室公告   |    POST | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement      | 100 次/秒/App Key                                                 |
 
-### 聊天室成员管理
+## 聊天室成员管理
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
@@ -168,7 +168,7 @@
 | 添加超级管理员   |    POST    | /{org_name}/{app_name}/chatrooms/super_admin                  | 100 次/秒/App Key   |
 | 移除超级管理员    |  DELETE    | /{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}     | 100 次/秒/App Key  |
 
-### 全局禁言
+## 全局禁言
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
@@ -176,7 +176,7 @@
 | 查询单个用户 ID 全局禁言 |   GET   | /{org_name}/{appName}/mutes/username  | 100 次/秒/App Key  |
 | 查询 app 下的所有全局禁言的用户  |   GET  | /{org_name}/{appName}/mutes        | 100 次/秒/App Key  |
 
-### 用户在线状态管理
+## 用户在线状态管理
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |

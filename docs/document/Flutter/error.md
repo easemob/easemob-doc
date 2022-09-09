@@ -1,6 +1,7 @@
 # Flutter 常见错误代码
 
-[[toc]]
+<Toc />
 
-[Android 平台设备请参见：](https://docs-im.easemob.com/ccim/android/errorcode)  
-[iOS 平台设备请参见：](https://docs-im.easemob.com/ccim/ios/errorcode)
+[Android 平台设备请参见：](/document/android/error.html)
+
+[iOS 平台设备请参见：](/document/ios/error.html)  

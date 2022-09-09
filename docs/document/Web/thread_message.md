@@ -1,6 +1,6 @@
 # 管理子区消息 Web
 
-[[toc]]
+<Toc />
 
 子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍环信即时通讯 IM Web SDK 如何发送、接收以及撤回子区消息。
 
@@ -19,13 +19,13 @@
 2. 单聊时消息时，服务器投递消息给用户 B；对于群聊时消息，服务器投递给群内其他每一个成员;
 3. 用户收到消息。
 
-![img](@static/images/Android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 子区创建和查看如下图：
 
-![img](@static/images/Web/web_group_chat_chreat_new_thread_step_01.png)
+![img](@static/images/web/web_group_chat_chreat_new_thread_step_01.png)
 
-![img](@static/images/Web/web_group_chat_new_thread_created.png)
+![img](@static/images/web/web_group_chat_new_thread_created.png)
 
 ## 前提条件
 

@@ -1,6 +1,6 @@
 # 聊天室管理
 
-[[toc]]
+<Toc />
 
 本文介绍聊天室管理相关接口。需注意仅聊天室超级管理员具有在客户端创建聊天室的权限。
 
@@ -59,8 +59,8 @@
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](https://docs-im.easemob.com/ccim/config)。
-- 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](https://docs-im.easemob.com/ccim/limitationapi)。
+- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
@@ -68,7 +68,7 @@
 
 Authorization：`Bearer ${Token}`
 
-为提高项目的安全性，环信使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的鉴权方式，详见 [使用 app token 鉴权](https://docs-im.easemob.com/ccim/authentication)。
+为提高项目的安全性，环信使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的鉴权方式，详见 [使用 app token 鉴权](easemob_app_token.html)。
 
 ## 管理超级管理员
 
@@ -88,11 +88,11 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -103,7 +103,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 | :----------- | :----- | :------- | :-------------------------------- |
 | `superadmin` | String | 是     | 添加的用户 ID，一次只能添加一个。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### HTTP 响应
 
@@ -116,9 +116,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 | `data.result` | Bool | 添加是否成功：<br/> - `true`：是；<br/> - `false`：否。 |
 | `data.properties` | String    |  预留参数，开发者不用关注。     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -179,11 +179,11 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pages
 | `pagenum`  | Int   | 否  | 当前页码，默认值为 1。                                     |
 | `pagesize` | Int   | 否  | 每页返回的超级管理员数量，默认值为 10。                    |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -199,9 +199,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pages
 | `params.pagesize` | Int | 每页返回的超级管理员数量。 |
 | `params.pagenum` | Int | 当前页码。|
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -258,11 +258,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 | :----------- | :----- | :------- | :----------------------------------------------------------- |
 | `superAdmin` | String | 是     | 要撤销超级管理员权限的用户 ID。                                            |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -278,9 +278,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 | `data.resource` | String    |  预留参数，开发者不用关注。     |
 | `data.properties` | String    |  预留参数，开发者不用关注。     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -329,11 +329,11 @@ GET https://{host}/{org_name}/{app_name}/chatrooms
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -351,9 +351,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms
 | `data.owner`              | String | 聊天室创建者的用户 ID。例如：{“owner”: “user1”}。       |
 | `data.affiliations_count` | Int   | 聊天室现有成员总数。                                      |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -391,11 +391,11 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -411,9 +411,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms
 | `data.id`   | String | 聊天室 ID，聊天室唯一标识，由环信即时通讯 IM 服务器生成。 |
 | `data.name` | String | 聊天室名称，最大长度为 128 字符。             |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -449,15 +449,15 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 ##### 路径参数
 
-| 参数          | 类型   | 是否必填 |描述                       |
+| 参数          | 类型   | 是否必填<div style="width: 80px;"></div> |描述                       |
 | :------------ | :----- |:----- | :------------------------------------------ |
 | `chatroom_id` | String | 是       | 聊天室 ID，即时通讯服务分配给每个聊天室的唯一标识符，从[查询所有聊天室基本信息](https://docs-im.easemob.com/ccim/rest/chatroom#获取_app_中所有的聊天室) 的响应 body 中获取。<br/> - 查询多个聊天室时，将每个 `chatroom_id` 用 "," 隔开。<br/> - 一次请求最多查询 100 个聊天室。<br/> - 在 URL 中，需要将 "," 转义为 "%2C"。 |
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -483,9 +483,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | `data.affiliations`       | Array   | 现有成员列表，包含聊天室所有者和成员。例如：“affiliations”:[{“owner”: “user1”},{“member”:”user2”},{“member”:”user3”}]。 |
 | `data.public`             | Bool | 预留字段，无需关注。              |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -538,11 +538,11 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -570,9 +570,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 | :--- | :----- | :-------------------- |
 | `data.id` | String | 所创建的聊天室的 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -615,11 +615,11 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -647,9 +647,9 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | `data.description` | Bool | 聊天室描述是否修改成功。<br/> - `true`：是。<br/> `false`：否。       |
 | `data.maxusers`    | Bool | 聊天室成员最大数（包括聊天室创建者）是否修改成功。<br/> - `true`：是。<br/> `false`：否。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -690,18 +690,18 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### 请求 body
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### HTTP 响应
 
@@ -714,9 +714,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | `data.success` | Bool | 聊天室删除是否成功：<br/> - `true`：是；<br/> - `false`：否。 |
 | `data.id`      | String  | 被删除聊天室的 ID。                                        |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -759,11 +759,11 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -781,9 +781,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 | :----------- | :----- | :--------------- |
 | `data.announcement` | String | 聊天室公告内容。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -825,11 +825,11 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -846,9 +846,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 | `data.id` | String | 聊天室 ID。 |
 | `data.result` | Bool | 修改是否成功：<br/> - `true`：是；<br/> - `false`：否。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -906,11 +906,11 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?limit={N}
 | `limit`       | Int   | 否  | 每页期望返回的聊天室成员数量。取值范围为 [0,1000]，默认值为 1000。超过 1000 按照 1000 返回。 |
 | `cursor`      | String | 否  | 开始获取数据的游标位置。首次调用时，若传空字符串或 "null"，按照用户加入聊天室时间的倒序获取数据。你可以从响应 body 中获取 `cursor`，并在下一次请求的 URL 中传入该字段，直到响应 body 中不再有该字段，则表示已查询到 app 中所有用户。|
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -924,9 +924,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?limit={N}
 | :------- | :----- | :-------------- |
 | `data.member` | String | 聊天室成员 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -976,11 +976,11 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -999,9 +999,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username
 | `data.id`     | String  | 聊天室 ID，聊天室唯一标识符，由环信即时通讯 IM 服务器生成。 |
 | `data.user`   | String  | 添加到聊天室的用户。                                        |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1046,7 +1046,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1074,9 +1074,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users
 | `data.action`     | String | 执行的操作内容，`add_member` 表示添加用户。   |
 | `data.id`         | String | 聊天室 ID。      |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1127,11 +1127,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1149,9 +1149,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 | `data.user`   | String  | 用户 ID。                                                 |
 | `data.id`     | String  | 聊天室 ID。                                               |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1200,11 +1200,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 | :----------- | :----- | :------- | :----------------------------------------------------------- |
 | `username`   | String | 是     | 一个或多个用户 ID，多个用户 ID 间用 “,” 分隔。 一次最多传 100 个用户 ID。              |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1223,9 +1223,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 | `data.user`   | String  | 用户 ID。                                                 |
 | `data.id`     | String  | 聊天室 ID。                                               |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1279,11 +1279,11 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -1297,9 +1297,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 | :----- | :---- | :---------- |
 | `data` | Array | 管理员 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1342,11 +1342,11 @@ POST /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -1363,9 +1363,9 @@ POST /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 | `data.result`   | Bool | 操作结果：<br/> - `success`：添加成功；<br/> - `false`：添加失败。 |
 | `data.newadmin` | String  | 添加为聊天室管理员的成员用户 ID。                        |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1412,11 +1412,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin/{oldad
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
 | `oldadmin`    | String | 是     | 被撤销权限的管理员用户 ID。                                      |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -1431,9 +1431,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin/{oldad
 | `data.result`   | Bool | 撤销权限是否成功：<br/> - `true`：是；<br/> - `false`：否。 |
 | `data.oldadmin` | String  | 被撤销权限的管理员用户 ID。                                      |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1480,11 +1480,11 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1499,9 +1499,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 | :----- | :---- | :------------------------ |
 | `data` | Array | 聊天室黑名单中的用户 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1547,11 +1547,11 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -1570,9 +1570,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{
 | `data.action`     | String | 执行操作。`add_blocks` 为向黑名单列表中添加用户。                          |
 | `data.user`       | String | 被添加的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1619,11 +1619,11 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -1649,9 +1649,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 | `data.action`     | String  | 执行的操作。                                          |
 | `data.user`       | String  | 被添加的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1708,11 +1708,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1730,9 +1730,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 | `data.action`     | String  | 执行的操作。                                          |
 | `data.user`       | String  | 被移除的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1781,11 +1781,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
 | `username`    | String | 是     | 用户 ID，多个用户 ID 以逗号分隔，每次最多可传 60 个。        |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1803,9 +1803,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 | `data.action`     | String  | 执行的操作。                                          |
 | `data.user`       | String  | 被移除的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1862,11 +1862,11 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1881,9 +1881,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 | :----- | :---- | :------------------------ |
 | `data` | Array | 聊天室白名单中的用户 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1930,11 +1930,11 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{u
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1952,9 +1952,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{u
 | `data.action` | String  | 执行操作。`add_user_whitelist` 为用户添加至聊天室白名单中。                                      |
 | `data.user`    | String | 被添加的用户 ID。                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1999,11 +1999,11 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -2015,7 +2015,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 | :---------- | :---- | :----------------------------------------------------------- |
 | `usernames` | Array | 待添加至聊天室白名单中的用户 ID，多个用户 ID 以逗号分隔，每次最多可传 60 个。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
 #### HTTP 响应
 
@@ -2031,9 +2031,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 | `data.action`     | String  | 执行的操作。                                          |
 | `data.user`       | String  | 被添加至聊天室白名单中的用户 ID。                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2086,11 +2086,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -2108,9 +2108,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/
 | `data.action`     | String  | 执行的操作。                                          |
 | `data.user`       | String  | 添加的用户 ID，多个用户 ID 以逗号分隔。               |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2167,11 +2167,11 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2186,9 +2186,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 | `data.expire` | Long   | 禁言到期的 Unix 时间戳（毫秒）。 |
 | `data.user`   | String | 被禁言用户的 ID。                                            |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2235,11 +2235,11 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2250,7 +2250,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 | `mute_duration` | Long   | 是     | 从当前时间起算，禁言的时间长度。单位毫秒。`-1` 表示永久禁言。 |
 | `usernames`     | String | 是     | 要被添加禁言用户的 ID。                                      |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
 #### HTTP 响应
 
@@ -2264,9 +2264,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 | `data.expire` | Long | 禁言到期的时间，Unix 时间戳，单位为毫秒。                    |
 | `data.user`   | String | 被禁言用户的 ID。                                            |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2310,11 +2310,11 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -2331,9 +2331,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 | `data.mute` | Bool | 是否处于聊天室全员禁言状态：<br/> - `true`：是；<br/> - `false`：否。 |
 | `data.expire` | Long    | 禁言到期的时间。该时间为 Unix 时间戳，单位为毫秒。    |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2379,11 +2379,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member
 | :------------ | :----- | :------- | :--------------------------------------------------------- |
 | `member1`     | String | 是     | 待被移出禁言列表的聊天室成员的用户 ID。</br>如果需要解除多个成员的禁言，则成员用户 ID 之间用逗号（","）隔开。在 URL 中，需要将 "," 转义为 "%2C"。                                                 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2398,9 +2398,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member
 | `data.result` | Bool | 从禁言列表移除指定成员是否成功：<br/> - `true`：是； <br/> - `false`：否。 |
 | `data.user`   | String  | 被解除禁言的聊天室成员的用户 ID。                                           |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -2443,11 +2443,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -2463,9 +2463,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 | :------- | :------ | :---------------------------------------------------- |
 | `data.mute` | Bool | 是否处于聊天室全员禁言状态：<br/> - `true`：是；<br/> - `false`：否。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/chatroom#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 

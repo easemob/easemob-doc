@@ -1,14 +1,14 @@
 # 环信即时通讯 IM 快速开始
 
-[[toc]]
+<Toc />
 
 本文介绍如何快速集成环信即时通讯 IM Unity SDK 实现发送和接收单聊文本消息。
 
-#### 技术原理
+## 技术原理
 
 下图展示在客户端发送和接收单聊文本消息的工作流程。
 
-![img](https://docs-im.easemob.com/_media/ccim/web/sendandreceivemsg.png?w=800&tok=54ca33)
+![img](@static/images/android/sendandreceivemsg.png)
 
 如上图所示，发送和接收单聊消息的步骤如下：
 
@@ -45,21 +45,15 @@
 参考以下步骤：
 
 1. 克隆 [chat_unity_demo](https://github.com/easemob/chat_unity_demo) 至本地。
-
 2. 打开 Unity Hub，选择 **Projects** 页签，点击 **Open** 右边的下拉菜单，选择 **Add project from disk**，然后选择步骤 1 中本地路径下的 `chat_unity_quickstart`。这时，**Projects** 列表中显示 **chat_unity_quickstart** 项目。
-
 3. 单击 **chat_unity_quickstart** 打开项目。
 
-   如果正常打开，该流程结束。
-
-   < div class="alert info" >
-   如果 Demo 项目与本地 Unity Editor 版本不一致，你需要进行以下操作：
-
-   1. 在弹出的 **Editor version not installed** 提示框下方，选择 **Choose another Editor version**。
-
-   2. 在弹出的 **Select Editor version and platform** 窗口中，选择本地安装的 Editor 版本，并根据后续提示打开项目。
-
-   < /div>
+    如果正常打开，该流程结束。
+    
+    如果 Demo 项目与本地 Unity Editor 版本不一致，你需要进行以下操作：
+    
+    1. 在弹出的 **Editor version not installed** 提示框下方，选择 **Choose another Editor version**。
+    2. 在弹出的 **Select Editor version and platform** 窗口中，选择本地安装的 Editor 版本，并根据后续提示打开项目。
 
 ### 2. 集成环信即时通讯 SDK
 
@@ -77,9 +71,9 @@
 
 在 Unity Editor 中左侧导航栏下方，选择 **Project** 页签，然后选择 **Assets** 目录下的 **Scripts** 目录，双击 **TestCode.cs** 文件打开 Visual Studio。
 
-**注意**
-
+:::notice
 如果双击 **TestCode.cs** 文件无法打开 Visual Studio 开发环境，需将 Visual Studio 配置为 Unity 的外部工具：点击左上角的 Unity 菜单（Windows 为 **Edit**，Mac 为 **Unity**），依次选择 **Preference > External Tools > External Script Editor**，将脚本编辑器设置为 Visual Studio。
+:::
 
 以下代码编辑操作均在 Visual Studio 中进行。
 
@@ -100,6 +94,7 @@ using ChatSDK.MessageBody;
 var options = new Options(appKey: APPKEY);
 SDKClient.Instance.InitWithOptions(options);
 ```
+
 将 APPKEY 替换为 `easemob-demo#easeim`。本项目用于演示目的，在正式环境中，请使用你在环信控制台申请的 App Key。
 
 ### 4. 创建账号
@@ -117,9 +112,9 @@ SDKClient.Instance.CreateAccount(username: Username.text, Password.text, handle:
 ));
 ```
 
-**注意**
-
-该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端调用 Restful API 进行注册，详见 [注册单个用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册单个用户)。
+:::notice
+该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端调用 Restful API 进行注册，详见 [注册单个用户](/document/server-side/account_system.html#注册单个用户)。
+:::
 
 ### 5. 登录账号
 
@@ -186,84 +181,83 @@ public class TestCode : MonoBehaviour, IChatManagerDelegate
 
 ```csharp
 public void OnMessagesReceived(List<Message> messages)
-    {
-        foreach (Message msg in messages) {
-            if (msg.Body.Type == MessageBodyType.TXT)
-            {
-                TextBody txtBody = msg.Body as TextBody;
-                AddLogToLogText($"received text message: {txtBody.Text}, from: {msg.From}");
-            }
-            else if (msg.Body.Type == MessageBodyType.IMAGE)
-            {
-                ImageBody imageBody = msg.Body as ImageBody;
-                AddLogToLogText($"received image message, from: {msg.From}");
-            }
-            else if (msg.Body.Type == MessageBodyType.VIDEO) {
-                VideoBody videoBody = msg.Body as VideoBody;
-                AddLogToLogText($"received video message, from: {msg.From}");
-            }
-            else if (msg.Body.Type == MessageBodyType.VOICE)
-            {
-                VoiceBody voiceBody = msg.Body as VoiceBody;
-                AddLogToLogText($"received voice message, from: {msg.From}");
-            }
-            else if (msg.Body.Type == MessageBodyType.LOCATION)
-            {
-                LocationBody localBody = msg.Body as LocationBody;
-                AddLogToLogText($"received location message, from: {msg.From}");
-            }
-            else if (msg.Body.Type == MessageBodyType.FILE)
-            {
-                FileBody fileBody = msg.Body as FileBody;
-                AddLogToLogText($"received file message, from: {msg.From}");
-            }
+{
+    foreach (Message msg in messages) {
+        if (msg.Body.Type == MessageBodyType.TXT)
+        {
+            TextBody txtBody = msg.Body as TextBody;
+            AddLogToLogText($"received text message: {txtBody.Text}, from: {msg.From}");
+        }
+        else if (msg.Body.Type == MessageBodyType.IMAGE)
+        {
+            ImageBody imageBody = msg.Body as ImageBody;
+            AddLogToLogText($"received image message, from: {msg.From}");
+        }
+        else if (msg.Body.Type == MessageBodyType.VIDEO) {
+            VideoBody videoBody = msg.Body as VideoBody;
+            AddLogToLogText($"received video message, from: {msg.From}");
+        }
+        else if (msg.Body.Type == MessageBodyType.VOICE)
+        {
+            VoiceBody voiceBody = msg.Body as VoiceBody;
+            AddLogToLogText($"received voice message, from: {msg.From}");
+        }
+        else if (msg.Body.Type == MessageBodyType.LOCATION)
+        {
+            LocationBody localBody = msg.Body as LocationBody;
+            AddLogToLogText($"received location message, from: {msg.From}");
+        }
+        else if (msg.Body.Type == MessageBodyType.FILE)
+        {
+            FileBody fileBody = msg.Body as FileBody;
+            AddLogToLogText($"received file message, from: {msg.From}");
         }
     }
+}
 
-    public void OnCmdMessagesReceived(List<Message> messages)
-    {
+public void OnCmdMessagesReceived(List<Message> messages)
+{
 
-    }
+}
 
-    public void OnMessagesRead(List<Message> messages)
-    {
+public void OnMessagesRead(List<Message> messages)
+{
 
-    }
+}
 
-    public void OnMessagesDelivered(List<Message> messages)
-    {
+public void OnMessagesDelivered(List<Message> messages)
+{
 
-    }
+}
 
-    public void OnMessagesRecalled(List<Message> messages)
-    {
+public void OnMessagesRecalled(List<Message> messages)
+{
 
-    }
+}
 
-    public void OnReadAckForGroupMessageUpdated()
-    {
+public void OnReadAckForGroupMessageUpdated()
+{
 
-    }
+}
 
-    public void OnGroupMessageRead(List<GroupReadAck> list)
-    {
+public void OnGroupMessageRead(List<GroupReadAck> list)
+{
 
-    }
+}
 
-    public void OnConversationsUpdate()
-    {
+public void OnConversationsUpdate()
+{
 
-    }
+}
 
-    public void OnConversationRead(string from, string to)
-    {
+public void OnConversationRead(string from, string to)
+{
 
-    }
+}
 
-    public MessageReactionDidChange(List<MessageReactionChange> list)
-    {
-    }
-
+public MessageReactionDidChange(List<MessageReactionChange> list)
+{
+}
 ```
 
 在 `AddChatDelegate` 方法中添加以下代码，将 `TestCode` 对象实例加入监听列表。
@@ -282,22 +276,18 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 
 在 Unity Editor 的左侧导航栏下方，点击 **Project** 页签，选择 **Assets** 下的 **Scenes** 目录，双击右侧的 **SampleScene** 场景，然后点击 Unity Editor 上方的 Play 按钮运行场景。
 
-![图片](@static/images/Unity/unity-running.png)
+![图片](@static/images/unity/unity-running.png)
 
-**注意**
-
+:::notice
 若未安装 iOS Build Support，运行项目前，将 `Assets/ChatSDK/Scripts/Editor` 路径下的 `iOSBuildSetting.cs` 文件移除项目文件夹。
 
 1. 注册用户：在 **user id** 文本框中输入用户 ID，在 **password** 文本框中输入密码，点击 **Sign up** 进行用户注册。注册结果会在下方显示。可创建两个用户，例如 **quickstart_sender** 和 **quickstart_receiver**，分别用于发送和接收消息。
-
 2. 用户登录：在 **user id** 文本框中输入用户 ID，例如 **quickstart_sender**，在 **password** 文本框中输入密码，点击 **Sign in** 进行登录。登录结果会在下方显示。
-
 3. 发送消息：在 **single chat id** 文本框中输入消息接收方的用户 ID，例如 **quickstart_receiver**，在 **message content** 文本框中输入要发送的文本内容，如 **how are you.**，点击 **Send**  发送消息，消息发送结果会在下方显示。
-
 4. 退出登录：直接点击 **Sign out** 退出登录，退出结果会在下方显示。
-
 5. 接收消息：在 **user id** 文本框中输入接收消息的用户 ID，例如 **quickstart_receiver**，在 **password** 文本框输入密码，点击 **Sign in** 进行登录。登录成功后，下方会显示收到的消息，例如步骤 3 中发送的 ''how are you.''。
+:::
 
 ## 后续步骤
 
-文中示例仅作为演示和测试用途。在生产环境中，为保障通信安全，你需要自行部署服务器签发 Token，详见 [使用 User Token 鉴权](https://docs-im.easemob.com/ccim/rest/usertoken)。
+文中示例仅作为演示和测试用途。在生产环境中，为保障通信安全，你需要自行部署服务器签发 Token，详见 [使用 User Token 鉴权](/document/server-side/easemob_user_token.html)。

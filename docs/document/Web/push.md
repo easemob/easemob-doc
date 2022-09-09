@@ -1,6 +1,6 @@
 # 设置离线消息推送
 
-[[toc]]
+<Toc />
 
 环信 IM 提供离线推送服务，具有低延迟、高交付、高并发、不侵犯用户个人数据的特点，支持你对离线推送功能进行如下配置：
 
@@ -26,7 +26,7 @@
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 你已在环信即时通讯云管理后台中激活推送高级功能。推送高级功能包括设置推送通知模式和免打扰模式。
 
-![image](@static/images/Web/push_web_enable_push.png)
+![image](@static/images/web/push_web_enable_push.png)
 
 ## 实现方法
 

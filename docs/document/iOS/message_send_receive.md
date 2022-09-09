@@ -1,6 +1,6 @@
 # 消息管理–发送和接收消息
 
-[[toc]]
+<Toc />
 
 登录 Chat app 后，用户可以在一对一单聊、群聊、聊天室中发送如下类型的消息：
 
@@ -29,7 +29,7 @@
 1. 用户 A 发送一条消息到环信即时通讯 IM 消息服务器。
 2. 消息服务器投递消息给用户 B，用户 B 收到该消息。
 
-![img](@static/images/Android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 

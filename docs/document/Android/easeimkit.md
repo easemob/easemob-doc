@@ -1,6 +1,6 @@
 # EaseIMKit 使用指南
 
-[[toc]]
+<Toc />
 
 在您阅读此文档时，我们假定您已经具备了基础的 Android 应用开发经验，并能够理解相关基础概念。此文档是针对导入 EaseIMKit 库的快速集成文档，如果只是导入 SDK 去集成使用，请移步 [环信即时通讯 IM Android 快速开始](quickstart.html)。
 
@@ -103,7 +103,7 @@ EaseIMKit 封装了常用 IM 功能，提供了会话，聊天及联系人等基
 
 EaseIMKit 提供了 EaseConversationListFragment，需要将其或者其子类添加到 Activity 中。开发者需要对刷新事件（新消息，删除消息，删除会话等）进行处理。
 
-![img](@static/images/Android/easeim.jpeg)
+![img](@static/images/android/easeim.jpeg)
 
 :::notice
 要实现自定义头像及昵称，请参考 [设置头像和昵称](https://docs-im.easemob.com/im/android/basics/profile#%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E5%B1%9E%E6%80%A7)
@@ -139,13 +139,13 @@ public class ChatActivity extends BaseActivity {
 }
 ```
 
-![img](@static/images/Android/easeim1.jpeg)
+![img](@static/images/android/easeim1.jpeg)
 
 ### 添加联系人界面
 
 EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 中。开发者需要对刷新事件（添加联系人，删除联系人等）进行处理。
 
-![img](@static/images/Android/easeim2.jpeg)
+![img](@static/images/android/easeim2.jpeg)
 
 ## 设置样式
 
@@ -153,7 +153,7 @@ EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 
 
 EaseIMKit 提供了自定义的标题栏控件 EaseTitleBar。
 
-![img](@static/images/Android/easeim-titlebar.jpeg)
+![img](@static/images/android/easeim-titlebar.jpeg)
 
 标题栏除了做为 View 所具有的属性功能外，还可以设置标题的位置等。
 
@@ -216,7 +216,7 @@ conversationListLayout.showUnreadDotPosition(EaseConversationSetStyle.UnreadDotP
 
 效果如下图：
 
-![img](@static/images/Android/easeim3.jpeg)
+![img](@static/images/android/easeim3.jpeg)
 更多样式请参考 EaseContactListLayout 控件。
 
 #### 增加长按菜单项
@@ -258,7 +258,7 @@ public boolean onMenuItemClick(MenuItem item, int position) {
 
 聊天窗口包括标题栏（不包含在 EaseChatFragment中），聊天区，输入区及扩展展示区，如下图所示:
 
-![img](@static/images/Android/easeim4.png)
+![img](@static/images/android/easeim4.png)
 
 标题区 EaseTitleBar 的具体布局及实现不在 EaseIMKit 库的聊天控件及 fragment 中，需要你自己去实现。
 开发者可以在 EaseChatFragment 中获取到 EaseChatLayout 这个控件，然后通过这个控件进一步获取到获取其他控件，代码如下：
@@ -289,7 +289,7 @@ messageListLayout.setBackground(new ColorDrawable(Color.parseColor("#DA5A4D")));
 ```
 效果如下图：
 
-![img](@static/images/Android/easeim5.jpeg)
+![img](@static/images/android/easeim5.jpeg)
 
 #### 修改头像属性
 
@@ -305,7 +305,7 @@ messageListLayout.setAvatarShapeType(1);
 ```
 效果如下图：
 
-![img](@static/images/Android/easeim6.jpeg)
+![img](@static/images/android/easeim6.jpeg)
 
 #### 修改聊天文本
 
@@ -321,7 +321,7 @@ messageListLayout.setItemTextColor(ContextCompat.getColor(mContext, R.color.red)
 ```
 效果如下图：
 
-![img](@static/images/Android/easeim7.jpeg)
+![img](@static/images/android/easeim7.jpeg)
 
 #### 修改时间线样式
 
@@ -339,7 +339,7 @@ messageListLayout.setTimeTextColor(ContextCompat.getColor(mContext, R.color.blac
 ```
 效果如下图：
 
-![img](@static/images/Android/easeim8.jpeg)
+![img](@static/images/android/easeim8.jpeg)
 
 #### 修改聊天列表展示样式
 
@@ -353,7 +353,7 @@ messageListLayout.setItemShowType(EaseChatMessageListLayout.ShowType.LEFT);
 ```
 效果如下图：
 
-![img](@static/images/Android/easeim9.jpeg)
+![img](@static/images/android/easeim9.jpeg)
 
 #### 修改输入区样式
 
@@ -385,25 +385,25 @@ if(primaryMenu != null) {
 
 效果（EaseInputMenuStyle.DISABLE_VOICE）如下图：
 
-![img](@static/images/Android/easeim10.jpeg)
+![img](@static/images/android/easeim10.jpeg)
 
 其他样式为：
 
 完整模式（EaseInputMenuStyle.All）：
 
-![img](@static/images/Android/easeim11.jpeg)
+![img](@static/images/android/easeim11.jpeg)
 
 不可用表情模式（EaseInputMenuStyle.DISABLE_EMOJICON）：
 
-![img](@static/images/Android/easeim12.jpeg)
+![img](@static/images/android/easeim12.jpeg)
 
 不可用语音和表情模式（EaseInputMenuStyle.DISABLE_VOICE_EMOJICON）：
 
-![img](@static/images/Android/easeim13.jpeg)
+![img](@static/images/android/easeim13.jpeg)
 
 只有文本输入模式（EaseInputMenuStyle.ONLY_TEXT）：
 
-![img](@static/images/Android/easeim14.jpeg)
+![img](@static/images/android/easeim14.jpeg)
 
 #### 增加自定义消息类型及其布局
 
@@ -758,7 +758,7 @@ contactList.setHeaderBackGround(ContextCompat.getDrawable(mContext, R.color.whit
 
 效果如图：
 
-![img](@static/images/Android/easeim15.jpeg)
+![img](@static/images/android/easeim15.jpeg)
 
 设置简洁模式
 
@@ -769,7 +769,7 @@ contactLayout.showSimple();
 
 效果如图：
 
-![img](@static/images/Android/easeim16.jpeg)
+![img](@static/images/android/easeim16.jpeg)
 
 #### 增加长按菜单项
 

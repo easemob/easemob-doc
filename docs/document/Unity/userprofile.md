@@ -1,6 +1,6 @@
 # 管理用户属性
 
-[[toc]]
+<Toc />
 
 用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。
 
@@ -8,9 +8,9 @@
 
 本文介绍如何通过管理用户属性设置、更新、存储并获取实时消息用户的相关信息。
 
-**注意**
-
+:::notice
 为保证用户信息安全，SDK 仅支持用户设置或更新自己的用户属性。
+:::
 
 ## 技术原理
 
@@ -23,8 +23,8 @@
 
 设置用户属性前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](https://docs-im.easemob.com/ccim/unity/quickstart)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
@@ -58,17 +58,7 @@ SDKClient.Instance.UserInfoManager.UpdateOwnInfo(userInfo, new CallBack(
 
 用户属性包括如下字段：
 
-| 字段        | 类型   | 描述                                                       |
-| ----------- | ------ | ---------------------------------------------------------- |
-| `nickname`  | String | 用户昵称。长度在 64 字符内。                               |
-| `avatarurl` | String | 用户头像 URL 地址。长度在 256 字符内。                     |
-| `phone`     | String | 用户联系方式。长度在 32 字符内。                           |
-| `mail`      | String | 用户邮箱。长度在 64 字符内。                               |
-| `gender`    | Number | 用户性别。<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
-| `sign`      | String | 用户签名。长度在 256 字符内。                              |
-| `birth`     | String | 用户生日。长度在 64 字符内。                               |
-| userId    | String | 用户 ID。    |
-| `ext`       | String | 扩展字段。                                                 |
+<UserAttribute />
 
 ### 获取用户属性
 

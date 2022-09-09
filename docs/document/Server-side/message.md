@@ -1,6 +1,6 @@
 # 消息管理
 
-[[toc]]
+<Toc />
 
 本文展示如何调用环信 IM REST API 在服务端实现全类型消息的发送与接收、消息附件上传和下载、获取历史消息、服务端消息撤回、服务端单向删除会话等。支持消息类型包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
 
@@ -8,8 +8,8 @@
 
 要调用环信即时通讯 REST API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](https://docs-im.easemob.com/ccim/config)。
-- 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](https://docs-im.easemob.com/ccim/limitationapi)。
+- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
@@ -46,7 +46,7 @@
 
 Authorization：`Bearer ${YourToken}`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本篇涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 app token 鉴权](https://docs-im.easemob.com/ccim/authentication)。
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本篇涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 app token 鉴权](easemob_app_token.html)。
 
 ## 发送消息
 
@@ -55,15 +55,15 @@ Authorization：`Bearer ${YourToken}`
 | 消息类型                | 描述                                                         |
 | :---------------------- | :----------------------------------------------------------- |
 | 文本/透传消息           | 调用发送消息方法，在请求 body 中传入消息内容。               |
-| 图片/语音/视频/文件消息 | 1. 调用[文件上传方法](https://docs-im.easemob.com/ccim/rest/message#文件上传)上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 uuid。<br/> 2. 调用发送消息方法，在请求 body 中传入该 uuid。 |
+| 图片/语音/视频/文件消息 | 1. 调用 [文件上传方法](#文件上传) 上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 uuid。<br/>2. 调用发送消息方法，在请求 body 中传入该 uuid。 |
 
 调用服务端接口发送消息时，可选的 `from` 字段用于指定发送方。
 
-此外，消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](https://docs-im.easemob.com/ccim/ios/push#自定义显示) 和 [Android 推送字段说明](https://docs-im.easemob.com/ccim/android/push#自定义显示)。
+此外，消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。
 
-**注意**
-
+:::notice
 在调用程序中，请求体若超过 5 KB 会导致 413 错误，需要拆成几个更小的请求体重试。同时，请求体和扩展字段的总长度不能超过 3 KB。
+:::
 
 ### 发送单聊消息
 
@@ -75,7 +75,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -97,7 +97,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | `body`        | JSON   | 是       | 消息内容。对于不同消息类型 ，body 包含的字段不同，详情见下表。 |
 | `sync_device` | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。 |
 | `routetype`   | String | 否       | 若传入该参数，其值为 “ROUTE_ONLINE”，表示只有接收方在线时，消息才能成功发送；若接收方离线，消息发送失败。若不传入该字段，接收方离线时，消息也能成功发送。 |
-| `ext`         | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](https://docs-im.easemob.com/ccim/ios/push#自定义显示) 和 [Android 推送字段说明](https://docs-im.easemob.com/ccim/android/push#自定义显示)。 |
+| `ext`         | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
 
 #### body 字段说明
 
@@ -109,40 +109,40 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ##### 图片消息
 
-| 参数       | 类型   | 是否必需 | 描述                                                         |
+| 参数       | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `filename` | String | 是       | 图片名称。                                                   |
-| `secret`   | String | 否       | 图片的访问密钥。成功上传图片后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取的 share-secret。如果图片文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
+| `secret`   | String | 否       | 图片的访问密钥。成功上传图片后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。如果图片文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
 | `size`     | JSON   | 是       | 图片尺寸，单位为像素，包含以下字段：<br/> - `height`：图片高度；<br/> - `width`：图片宽度。 |
-| `url`      | String | 是       | 图片 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。其中 `uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取。 |
+| `url`      | String | 是       | 图片 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。其中 `uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 
 ##### 语音消息
 
-| 参数       | 类型   | 是否必需 | 描述                                                         |
+| 参数       | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `filename` | String | 是       | 语音文件的名称。                                             |
-| `secret`   | String | 否       | 语音文件访问密钥，成功上传语音文件后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取的 share-secret。 如果语音文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
+| `secret`   | String | 否       | 语音文件访问密钥，成功上传语音文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。 如果语音文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
 | `Length`   | Int    | 是       | 语音时长，单位为秒。                                         |
-| `url`      | String | 是       | 语音文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。uuid 为文件 ID，成功上传语音文件后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取。 |
+| `url`      | String | 是       | 语音文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。uuid 为文件 ID，成功上传语音文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 
 ##### 视频消息
 
-| 参数           | 类型   | 是否必需 | 描述                                                         |
+| 参数           | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
 | :------------- | :----- | :------- | :----------------------------------------------------------- |
-| `thumb`        | String | 是       | 视频缩略图 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。uuid 为视频缩略图唯一标识，成功上传缩略图文件后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取。 |
+| `thumb`        | String | 是       | 视频缩略图 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。uuid 为视频缩略图唯一标识，成功上传缩略图文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 | `length`       | Int    | 是       | 视频时长，单位为秒。                                         |
-| `secret`       | String | 否       | 视频文件访问密钥，成功上传视频文件后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取的 share-secret。如果视频文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
+| `secret`       | String | 否       | 视频文件访问密钥，成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。如果视频文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
 | `file_length`  | Long   | 是       | 视频文件大小，单位为字节。                                   |
-| `thumb_secret` | String | 否       | 视频缩略图访问密钥，成功上传视频文件后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取的 share-secret。如果缩略图文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
-| `url`          | String | 是       | 视频文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。其中 `uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取。 |
+| `thumb_secret` | String | 否       | 视频缩略图访问密钥，成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。如果缩略图文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
+| `url`          | String | 是       | 视频文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。其中 `uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 
 ##### 文件消息
 
-| 参数       | 类型   | 是否必需 | 描述                                                         |
+| 参数       | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `filename` | String | 是       | 文件名称。                                                   |
-| `secret`   | String | 否       | 文件访问密钥，成功上传文件后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取的 share-secret。如果文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
-| `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。其中 `uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取。 |
+| `secret`   | String | 否       | 文件访问密钥，成功上传文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。如果文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
+| `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。其中 `uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 
 ##### 位置消息
 
@@ -160,7 +160,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ##### 自定义消息
 
-| 参数          | 类型   | 是否必需 | 描述                                                         |
+| 参数          | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
 | `customEvent` | String | 否       | 用户自定义的事件类型。该参数的值必须满足正则表达式 `[a-zA-Z0-9-_/\.]{1,32}`，长度为 1-32 个字符。 |
 | `customExts`  | JSON   | 否       | 用户自定义的事件属性，类型必须是 `Map<String,String>`，最多可以包含 16 个元素。`customExts` 是可选的，不需要可以不传。 |
@@ -175,9 +175,9 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | :----- | :--- | :----------------------------------------------------------- |
 | `data` | JSON | 返回数据详情。该字段的值为包含接收方用户 ID 和 发送的消息的 ID 的键值对。<br/>例如 "user2": "1029457500870543736"，表示向 user2 发送了消息 ID 为1029457500870543736 的消息。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -187,7 +187,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 发送给目标用户，消息无需同步给发送方：
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["user2"],"type": "txt","body": {"msg": "testmessages"}}'
@@ -195,7 +195,7 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: applica
 
 仅发送给在线用户，消息同步给发送方：
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["user2"],"type": "txt","body": {"msg": "testmessages"},"routetype":"ROUTE_ONLINE", "sync_device":true}'
@@ -203,7 +203,7 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: applica
 
 ###### 图片消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["user2"],"type": "img","body": {"filename":"testimg.jpg","secret":"VfXXXXNb_","url":"https://XXXX/XXXX/XXXX/chatfiles/55f12940-XXXX-XXXX-8a5b-ff2336f03252","size":{"width":480,"height":720}}}'
@@ -211,7 +211,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: applic
 
 ###### 语音消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["user2"],"type": "audio","body": {"url": "https://XXXX/XXXX/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42","filename": "testaudio.amr","length": 10,"secret": "HfXXXXCjM"}}'
@@ -219,7 +219,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: applic
 
 ###### 视频消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d  '{"from": "user1","to": ["user2"],"type": "video","body": {"thumb" : "https://XXXX/XXXX/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97","length" : 0,"secret":"VfXXXXNb_","file_length" : 58103,"thumb_secret" : "ZyXXXX2I","url" : "https://XXXX/XXXX/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"}}'
@@ -227,7 +227,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: applic
 
 ###### 文件消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["user2"],"type": "file","body": {"filename":"test.txt","secret":"1-g0XXXXua","url":"https://XXXX/XXXX/XXXX/chatfiles/d7eXXXX7444"}}'
@@ -235,7 +235,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' -H 'Content-Type: applic
 
 ###### 位置消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users"  -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["user2"],"type": "loc","body":{"lat": "39.966","lng":"116.322","addr":"中国北京市海淀区中关村"}}'
@@ -243,7 +243,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users"  -H 'Content-Type: appli
 
 ###### 透传消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" -H 'Content-Type: application/json' -H 'Accept: application/json'  -H "Authorization:Bearer <YourAppToken>" -d '{"from": "user1","to": ["user2"],"type": "cmd","body":{"action":"action1"}}'
@@ -251,7 +251,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" -H 'Content-Type: applic
 
 ###### 自定义消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" -H 'Content-Type: application/json' -H 'Accept: application/json'  -H "Authorization:Bearer <YourAppToken>" -d '{"from": "user1","to": ["user2"],"type": "custom","body": {"customEvent": "custom_event"}}'
@@ -413,7 +413,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -427,13 +427,13 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 
 通用请求体为 JSON 对象，是所有消息的外层结构。
 
-| 参数 | 类型  | 是否必需 | 描述                                                         |
+| 参数 | 类型  | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
 | :--- | :---- | :------- | :----------------------------------------------------------- |
 | `to` | Array | 是       | 消息接收方群组 ID 数组，每秒最多可向群组发送 20 条信息，每次最多可向 3 个群组发送消息。例如，一次向 3 个群组发消息，表示发送了 3 条消息。 |
 
-群聊消息的通用请求体中的其他参数与单聊消息类似，详见 [通用请求体](https://docs-im.easemob.com/ccim/rest/message#通用请求体)。
+群聊消息的通用请求体中的其他参数与单聊消息类似，详见 [通用请求体](#通用请求体)。
 
-与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](https://docs-im.easemob.com/ccim/rest/message#body_字段说明)。
+与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
 
 #### HTTP 响应
 
@@ -445,9 +445,9 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 | :----- | :--- | :----------------------------------------------------------- |
 | `data` | JSON | 返回数据详情。该字段的值为包含群组 ID 和 发送的消息的 ID 的键值对。<br/>例如 "184524748161025": "1029544257947437432"，表示在 ID 为 184524748161025 的群组中发送了消息 ID 为 1029544257947437432 的消息。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -457,7 +457,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 
 发送给目标用户，消息无需同步给发送方：
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["184524748161025"],"type": "txt","body": {"msg": "testmessages"}}'
@@ -465,7 +465,7 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: ap
 
 仅发送给在线用户，消息同步给发送方：
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["184524748161025"],"type": "txt","body": {"msg": "testmessages"},"routetype":"ROUTE_ONLINE", "sync_device":true}'
@@ -473,7 +473,7 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: ap
 
 ###### 图片消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["184524748161025"],"type": "img","body": {"filename":"testimg.jpg","secret":"VfXXXXNb_","url":"https://XXXX/XXXX/XXXX/chatfiles/55f12940-XXXX-XXXX-8a5b-ff2336f03252","size":{"width":480,"height":720}}}'
@@ -481,7 +481,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: a
 
 ###### 语音消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["184524748161025"],"type": "audio","body": {"url": "https://XXXX/XXXX/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42","filename": "testaudio.amr","length": 10,"secret": "HfXXXXCjM"}}'
@@ -489,7 +489,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: a
 
 ###### 视频消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d  '{"from": "user1","to": ["184524748161025"],"type": "video","body": {"thumb" : "https://XXXX/XXXX/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97","length" : 0,"secret":"VfXXXXNb_","file_length" : 58103,"thumb_secret" : "ZyXXXX2I","url" : "https://XXXX/XXXX/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"}}'
@@ -497,7 +497,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: a
 
 ###### 文件消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["184524748161025"],"type": "file","body": {"filename":"test.txt","secret":"1-g0XXXXua","url":"https://XXXX/XXXX/XXXX/chatfiles/d7eXXXX7444"}}'
@@ -505,7 +505,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' -H 'Content-Type: a
 
 ###### 位置消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups"  -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["184524748161025"],"type": "loc","body":{"lat": "39.966","lng":"116.322","addr":"中国北京市海淀区中关村"}}'
@@ -513,7 +513,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups"  -H 'Content-Type: 
 
 ###### 透传消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups" -H 'Content-Type: application/json' -H 'Accept: application/json'  -H "Authorization:Bearer <YourAppToken>" -d '{"from": "user1","to": ["184524748161025"],"type": "cmd","body":{"action":"action1"}}'
@@ -521,7 +521,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups" -H 'Content-Type: a
 
 ###### 自定义消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups" -H 'Content-Type: application/json' -H 'Accept: application/json'  -H "Authorization:Bearer <YourAppToken>" -d '{"from": "user1","to": ["184524748161025"],"type": "custom","body": {"customEvent": "custom_event"}}'
@@ -683,7 +683,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -697,13 +697,13 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 通用请求体为 JSON 对象，是所有消息的外层结构。不同类型的消息只是 `body` 字段内容存在差异。
 
-| 参数 | 类型  | 是否必需 | 描述                                                         |
+| 参数 | 类型  | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
 | :--- | :---- | :------- | :----------------------------------------------------------- |
 | `to` | Array | 是       | 消息接收方聊天室 ID 数组，每秒钟最多可向 100 个聊天室发送信息，每次可发送的接收方聊天室上限为 10 个，如：一次发送给 10 个聊天室时，表示为 10 条消息。 |
 
-聊天室消息的通用请求体中的其他参数与单聊消息类似，详见 [通用请求体][https://docs-im.easemob.com/ccim/rest/message#通用请求体]。
+聊天室消息的通用请求体中的其他参数与单聊消息类似，详见 [通用请求体][#通用请求体]。
 
-与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](https://docs-im.easemob.com/ccim/rest/message#body_字段说明)。
+与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
 
 #### HTTP 响应
 
@@ -715,9 +715,9 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 | :----- | :--- | :----------------------------------------------------------- |
 | `data` | JSON | 返回数据详情。该字段的值为包含聊天室 ID 和 发送的消息的 ID 的键值对。<br/>例如 "185145305923585": "1029545553039460728"，表示在 ID 为 184524748161025 的聊天室中发送了消息 ID 为 1029545553039460728 的消息。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -727,7 +727,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 发送给目标用户，消息无需同步给发送方：
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/chatrooms' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["185145305923585"],"type": "txt","body": {"msg": "testmessages"}}'
@@ -735,23 +735,23 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/chatrooms' -H 'Content-Type: app
 
 仅发送给在线用户，消息同步给发送方：
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'http://XXXX/XXXX/XXXX/messages/chatrooms' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["185145305923585"],"type": "txt","body": {"msg": "testmessages"},"routetype":"ROUTE_ONLINE", "sync_device":true}'
 ```
 
-######  图片消息
+###### 图片消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["185145305923585"],"type": "img","body": {"filename":"testimg.jpg","secret":"VfXXXXNb_","url":"https://XXXX/XXXX/XXXX/chatfiles/55f12940-XXXX-XXXX-8a5b-ff2336f03252","size":{"width":480,"height":720}}}'
 ```
 
-######  语音消息
+###### 语音消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["185145305923585"],"type": "audio","body": {"url": "https://XXXX/XXXX/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42","filename": "testaudio.amr","length": 10,"secret": "HfXXXXCjM"}}'
@@ -759,7 +759,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' -H 'Content-Type: ap
 
 ###### 视频消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d  '{"from": "user1","to": ["185145305923585"],"type": "video","body": {"thumb" : "https://XXXX/XXXX/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97","length" : 0,"secret":"VfXXXXNb_","file_length" : 58103,"thumb_secret" : "ZyXXXX2I","url" : "https://XXXX/XXXX/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"}}'
@@ -767,7 +767,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' -H 'Content-Type: ap
 
 ###### 文件消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["185145305923585"],"type": "file","body": {"filename":"test.txt","secret":"1-g0XXXXua","url":"https://XXXX/XXXX/XXXX/chatfiles/d7eXXXX7444"}}'
@@ -775,7 +775,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' -H 'Content-Type: ap
 
 ###### 位置消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms"  -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"from": "user1","to": ["185145305923585"],"type": "loc","body":{"lat": "39.966","lng":"116.322","addr":"中国北京市海淀区中关村"}}'
@@ -783,7 +783,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms"  -H 'Content-Type: a
 
 ###### 透传消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" -H 'Content-Type: application/json' -H 'Accept: application/json'  -H "Authorization:Bearer <YourAppToken>" -d '{"from": "user1","to": ["185145305923585"],"type": "cmd","body":{"action":"action1"}}'
@@ -791,7 +791,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" -H 'Content-Type: ap
 
 ###### 自定义消息
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" -H 'Content-Type: application/json' -H 'Accept: application/json'  -H "Authorization:Bearer <YourAppToken>" -d '{"from": "user1","to": ["185145305923585"],"type": "custom","body": {"customEvent": "custom_event"}}'
@@ -958,7 +958,7 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -984,11 +984,11 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | :---------------------- | :----- | :----------------------------------------------------------- |
 | `entities.uuid`         | String | 文件 ID，即时通讯服务分配给该文件的唯一标识符。该参数在发送消息时需用到。 |
 | `entities.type`         | String | 消息类型。文件类型为 `file`。                                |
-| `entities.share-secret` | String | 文件访问密钥。你需要自行保存 share-secret，以便[下载文件](https://docs-im.easemob.com/ccim/rest/message#下载语音/图片文件/缩略图)时使用。 |
+| `entities.share-secret` | String | 文件访问密钥。你需要自行保存 share-secret，以便 [下载文件](#下载语音-图片文件-缩略图)时使用。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -1022,7 +1022,7 @@ curl -X POST https://XXXX/XXXX/XXXX/chatfiles -H 'Authorization: Bearer <YourApp
 }
 ```
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 下载语音/图片文件/缩略图
 
@@ -1036,7 +1036,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{uuid}
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -1044,13 +1044,13 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{uuid}
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Accept`        | string | 是       | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。 |
 | `Authorization` | string | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
-| `share-secret`  | string | 否       | 文件访问密钥。若上传文件时限制了访问，则需要该访问密钥。成功上传文件后，从 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 的响应 body 中获取该密钥。 |
+| `share-secret`  | string | 否       | 文件访问密钥。若上传文件时限制了访问，则需要该访问密钥。成功上传文件后，从 [文件上传](#文件上传) 的响应 body 中获取该密钥。 |
 
 ### HTTP 响应
 
 #### 响应 body
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ### 示例
 
@@ -1058,15 +1058,15 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{uuid}
 
 以下载图片为例：
 
-```json
+```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <YourAppToken>' -H 'share-secret: f0Vr-uyyEeiHpHmsu53XXXXXXXXZYgyLkdfsZ4xo2Z0cSBnB' 'http://XXXX/XXXX/XXXX/chatfiles/7f456bf0-XXXX-XXXX-b630-777db304f26c'-o /Users/test/easemob/image/image.JPG
 ```
 
-**注意**
-
+:::notice
 上述请求示例中，`/Users/test/easemob/image/image.JPG` 为环信即时通讯 IM 的本地文件路径，使用时请替换为自己的文件路径，否则会请求失败。
+:::
 
 #### 响应示例
 
@@ -1076,9 +1076,9 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 }
 ```
 
-如果返回的 HTTP 状态码为 200，表示请求成功，返回文件二进制数据流。
+如果返回的 HTTP 状态码为 `200`，表示请求成功，返回文件二进制数据流。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 下载缩略图
 
@@ -1104,7 +1104,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 
 #### 响应 body
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ### 示例
 
@@ -1118,7 +1118,9 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 
 #### 响应示例
 
-**返回值 200，表示下载缩略图成功**
+:::notice
+返回值 200，表示下载缩略图成功
+:::
 
 ```json
 {
@@ -1126,7 +1128,9 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 }
 ```
 
-**返回值 401，未授权 [无 token、token 错误、token 过期]**
+:::notice
+返回值 401，未授权 [无 token、token 错误、token 过期]**
+:::
 
 ```json
 {
@@ -1138,7 +1142,7 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 }
 ```
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 获取历史消息文件
 
@@ -1146,7 +1150,7 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 
 - 一次请求获取从指定起始时间开始一小时内的全部历史消息。
 - 查询历史消息时存在一定延时，无法实时获取。
-- 过期的历史消息无法获取。对于不同的套餐版本，历史消息默认存储时间不同。详见[套餐包详情](https://www.easemob.com/pricing/im)。
+- 过期的历史消息无法获取。对于不同的套餐版本，历史消息默认存储时间不同。详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ### HTTP 请求
 
@@ -1156,11 +1160,11 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
 
 #### 路径参数
 
-| 参数   | 类型   | 是否必需 | 描述                                                         |
+| 参数   | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
 | :----- | :----- | :------- | :----------------------------------------------------------- |
 | `time` | String | 是       | 历史消息查询的起始时间。UTC 时间，使用 ISO8601 标准，格式为 yyyyMMddHH。例如 time 为 2018112717，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -1179,9 +1183,9 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
 | :---- | :----- | :--------------------- |
 | `url` | String | 历史消息文件下载地址。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -1211,11 +1215,11 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-**注意**
-
+:::notice
 URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期时间，单位为秒。请及时通过 URL 下载聊天记录文件，URL 过期后会下载失败，需要重新调用”获取历史消息文件”接口获取新的 URL。
+:::
 
 ### 历史消息内容
 
@@ -1279,7 +1283,7 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 | 参数          | 类型   | 描述                                                         |
 | :------------ | :----- | :----------------------------------------------------------- |
 | `file_length` | Long   | 图片附件大小，单位为字节。                                   |
-| `secret`      | String | 图片文件访问密钥。如果 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 时设置了文件访问限制，则该字段存在。 |
+| `secret`      | String | 图片文件访问密钥。如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
 | `size`        | JSON   | 图片的尺寸。单位为像素。<br/> - `height`：图片高度。<br/> - `width`：图片宽度。 |
 | `type`        | String | 消息类型。图片消息为 `img`。                                 |
 | `url`         | String | 图片 URL 地址。                                              |
@@ -1321,7 +1325,7 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 | :------------ | :----- | :----------------------------------------------------------- |
 | `file_length` | Long   | 语音附件大小。单位为字节。                                   |
 | `filename`    | String | 带文件格式后缀的语音文件名称。                               |
-| `secret`      | String | 语音文件访问密钥。如果 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 时设置了文件访问限制，则该字段存在。 |
+| `secret`      | String | 语音文件访问密钥。如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
 | `length`      | Int    | 语音时长。单位为秒。                                         |
 | `type`        | String | 消息类型。语音消息为 `audio`。                               |
 | `url`         | String | 语音文件 URL 地址。                                          |
@@ -1350,7 +1354,7 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 | :------------- | :----- | :----------------------------------------------------------- |
 | `file_length`  | Long   | 视频附件大小。单位为字节。                                   |
 | `filename`     | String | 带文件格式后缀的视频文件名称。                               |
-| `secret`       | String | 视频文件访问密钥。如果 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 时设置了文件访问限制，则该字段存在。 |
+| `secret`       | String | 视频文件访问密钥。如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
 | `length`       | Int    | 视频时长。单位为秒。                                         |
 | `size`         | JSON   | 视频缩略图尺寸。单位为像素。<br/> - `width`：视频缩略图宽度； <br/> - `height`：视频缩略图高度。 |
 | `thumb`        | String | 上传视频缩略图远程地址，在上传视频缩略图后会返回 UUID。      |
@@ -1381,7 +1385,7 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 | :------------ | :----- | :----------------------------------------------------------- |
 | `file_length` | Long   | 文件大小。单位为字节。                                       |
 | `filename`    | String | 带文件格式后缀的文件名称。                                   |
-| `secret`      | String | 文件访问密钥。<br/> - 如果 [文件上传](https://docs-im.easemob.com/ccim/rest/message#文件上传) 时设置了文件访问限制，则该字段存在。 |
+| `secret`      | String | 文件访问密钥。<br/> - 如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
 | `type`        | String | 消息类型。文件消息为 `file`。                                |
 | `url`         | String | 文件的 URL 地址。你可以访问该 URL 下载历史消息文件。         |
 
@@ -1473,7 +1477,7 @@ POST https://{host}/{org_name}/{app_name}/messages/msg_recall
 | `to`        | String | 是       | 撤回消息的接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。<br/> 若不传入该参数，请求失败。 |
 | `chat_type` | String | 是       | 撤回消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊 ；<br/> - `chatroom`：聊天室 。 |
 | `from`      | String | 否       | 消息撤回方的用户 ID。若不传该参数，默认为 `admin`。          |
-| `force`     | Bool   | 是       | 是否为强制撤回：<br/> - `true`：是，支持撤回超过服务器存储时间的消息。具体见[服务器消息保存时长](https://docs-im.easemob.com/ccim/limitation#消息存储时长限制)；<br/> - `false`：否，不支持撤回超过服务器存储时间的消息。 |
+| `force`     | Bool   | 是       | 是否为强制撤回：<br/> - `true`：是，支持撤回超过服务器存储时间的消息。具体见 [服务器消息保存时长](/product/limitation.html#消息存储时长限制)；<br/> - `false`：否，不支持撤回超过服务器存储时间的消息。 |
 
 ### HTTP 响应
 
@@ -1489,9 +1493,9 @@ POST https://{host}/{org_name}/{app_name}/messages/msg_recall
 | `to`       | String | 撤回消息的送达方。<br/> - 单聊为送达方用户 ID；<br/> - 群聊为群组 ID。 |
 | `chattype` | String | 撤回消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊；<br/> - `chatroom`：聊天室。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -1581,7 +1585,7 @@ DELETE https://{host}/{orgName}/{appName}/users/{userName}/user_channel
 | :--------- | :----- | :------- | :---------------------------------------- |
 | `userName` | String | 是       | 要删除会话的用户的唯一标识符，即用户 ID。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -1607,9 +1611,9 @@ DELETE https://{host}/{orgName}/{appName}/users/{userName}/user_channel
 | :------- | :----- | :---------------------------------------------------- |
 | `result` | String | 删除结果，`ok` 表示成功，失败则直接返回错误码和原因。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -1668,7 +1672,7 @@ POST https://{host}/{orgName}/{appName}/messages/users/import
 | `msg_timestamp` | Long   | 否       | 导入的消息需要设置的时间戳。单位为毫秒。                     |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是；<br/> - `false`：否。<br/> - `默认`： false。 |
 
-与发送消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](https://docs-im.easemob.com/ccim/rest/message#body_字段说明)。
+与发送消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
 
 ### HTTP 响应
 
@@ -1680,9 +1684,9 @@ POST https://{host}/{orgName}/{appName}/messages/users/import
 | :------- | :----- | :---------------------- |
 | `msg_id` | String | 导入消息返回的消息 ID。 |
 
-其他参数及说明详见 [公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见  [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考  [响应状态码](error.html)  了解可能的原因。
 
 ### 示例
 
@@ -1704,7 +1708,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
 }'
 ```
 
-```json
+```bash
 # 导入图片消息
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
@@ -1771,7 +1775,7 @@ POST https://{host}/{orgName}/{appName}/messages/chatgroups/import
 | `msg_timestamp` | Long   | 否       | 导入的消息需要设置的时间戳。单位为毫秒。                     |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是；<br/> - （默认）`false`：否。 |
 
-与发送消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](https://docs-im.easemob.com/ccim/rest/message#body_字段说明)。
+与发送消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
 
 ### HTTP 响应
 
@@ -1783,9 +1787,9 @@ POST https://{host}/{orgName}/{appName}/messages/chatgroups/import
 | :------- | :----- | :---------------------- |
 | `msg_id` | String | 导入消息返回的消息 ID。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/message#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -1807,7 +1811,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/
 }'
 ```
 
-```json
+```shell
 # 导入图片消息
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 

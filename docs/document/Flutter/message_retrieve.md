@@ -1,6 +1,6 @@
 # 消息管理–从服务器获取会话和消息（消息漫游）
 
-[[toc]]
+<Toc />
 
 本文介绍用户如何从消息服务器获取会话和消息，该功能也称为消息漫游，指即时通讯服务将用户的历史消息保存在消息服务器上，用户即使切换终端设备，也能从服务器获取到单聊、群聊的历史消息，保持一致的会话场景。
 
@@ -15,8 +15,8 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](https://docs-im.easemob.com/ccim/flutter/quickstart)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
@@ -63,8 +63,8 @@ try {
 
 你可以参考如下文档，在项目中实现更多的消息相关功能：
 
-- [消息概述](https://docs-im.easemob.com/ccim/flutter/message1);
-- [发送和接收消息](https://docs-im.easemob.com/ccim/flutter/message2)；
-- [管理本地消息数据](https://docs-im.easemob.com/ccim/flutter/message3)；
-- [获取消息的已读回执和送达回执](https://docs-im.easemob.com/ccim/flutter/message5)；
-- [实现翻译功能](https://docs-im.easemob.com/ccim/rn/translation)。
+- [消息概述](message_overview.html);
+- [发送和接收消息](message_send_receive.html)；
+- [管理本地消息数据](message_manage.html)；
+- [获取消息的已读回执和送达回执](message_receipt.html)；
+- [实现翻译功能](message_translation.html)。

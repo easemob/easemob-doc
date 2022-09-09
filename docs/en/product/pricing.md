@@ -1,3 +1,3 @@
 # Product price
 
-[[toc]]
+<Toc />

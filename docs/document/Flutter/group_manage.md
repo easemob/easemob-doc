@@ -1,14 +1,14 @@
 # 管理群组
 
-[[toc]]
+<Toc />
 
 群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
 
-如需查看消息相关内容，参见 [消息管理](https://docs-im.easemob.com/ccim/flutter/message1)。
+如需查看消息相关内容，参见 [消息管理](message_overview.html)。
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupManagerListener` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupEventHandler` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散群组
 - 加入、退出群组
@@ -22,8 +22,8 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](https://docs-im.easemob.com/ccim/flutter/quickstart)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)；
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
 - 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
@@ -35,21 +35,17 @@
 在创建群组前，你需要设置群组类型 (`EMGroupStyle`) 和进群邀请是否需要对方同意 (`inviteNeedConfirm`)。
 
 1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型 (`GroupStyle`) ，具体设置如下：
-
-- `PrivateOnlyOwnerInvite` —— 私有群，只有群主和管理员可以邀请人进群；
-- `PrivateMemberCanInvite` —— 私有群，所有群成员均可以邀请人进群；
-- `PublicJoinNeedApproval` —— 公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
-- `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理同意。
-
+    - `PrivateOnlyOwnerInvite` —— 私有群，只有群主和管理员可以邀请人进群；
+    - `PrivateMemberCanInvite` —— 私有群，所有群成员均可以邀请人进群；
+    - `PublicJoinNeedApproval` —— 公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
+    - `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理同意。
 2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
-
-- 进群邀请需要用户确认 (`EMGroupOptions#inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `EMOptions#autoAcceptGroupInvitation` 设置，处理逻辑如下：
-  - 用户设置手动确认群组邀请 (`EMOptions#autoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `EMGroupManagerListener#onInvitationReceivedFromGroup` 回调，并选择同意或拒绝入群邀请：
-    - 用户同意入群邀请后，群主收到 `EMGroupManagerListener#onInvitationAcceptedFromGroup` 回调和 `EMGroupManagerListener#onMemberJoinedFromGroup` 回调，其他群成员收到 `EMGroupManagerListener#onMemberJoinedFromGroup` 回调；
-    - 用户拒绝入群邀请后，群主收到 `EMGroupManagerListener#onInvitationDeclinedFromGroup` 回调。
-
-- 进群邀请无需用户确认 (`EMGroupOptions.inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无视用户的 `EMOptions#autoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到`EMGroupManagerListener#onAutoAcceptInvitationFromGroup` 回调，群主收到每个加入成员的 `EMGroupManagerListener#onInvitationAcceptedFromGroup` 回调和 `EMGroupManagerListener#onMemberJoinedFromGroup` 回调。
-
+    - 进群邀请需要用户确认 (`EMGroupOptions#inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `EMOptions#autoAcceptGroupInvitation` 设置，处理逻辑如下：
+        - 用户设置手动确认群组邀请 (`EMOptions#autoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `EMGroupEventHandler#onInvitationReceivedFromGroup` 回调，并选择同意或拒绝入群邀请：
+            - 用户同意入群邀请后，群主收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 回调和 `EMGroupEventHandler#onMemberJoinedFromGroup` 回调，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 回调；
+            - 用户拒绝入群邀请后，群主收到 `EMGroupEventHandler#onInvitationDeclinedFromGroup` 回调。
+    - 进群邀请无需用户确认 (`EMGroupOptions.inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无视用户的 `EMOptions#autoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到`EMGroupEventHandler#onAutoAcceptInvitationFromGroup` 回调，群主收到每个加入成员的 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 回调和 `EMGroupEventHandler#onMemberJoinedFromGroup` 回调。
+  
 用户可以调用 `EMGroupManager#createGroup` 方法创建群组，并通过 `EMGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
 
 示例代码如下：
@@ -74,20 +70,20 @@ try {
 
 ### 用户申请入群
 
-根据 [创建群组](https://docs-preprod.agora.io/cn/agora-chat/agora_chat_group_flutter?platform=flutter#创建群组) 时的群组类型 (`GroupStyle`) 设置，加入群组的处理逻辑差别如下：
+根据 [创建群组](#创建群组) 时的群组类型 (`GroupStyle`) 设置，加入群组的处理逻辑差别如下：
 
-- 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主或群管理员同意，加入群组后，其他群成员收到 `EMGroupManagerListener#onMemberJoinedFromGroup` 回调；
-- 当群组类型为 `PublicJoinNeedApproval` 时，用户可以申请进群，群主或群管理员收到 `EMGroupManagerListener#onRequestToJoinReceivedFromGroup` 回调，并选择同意或拒绝入群申请：
-  - 群主或群管理员同意入群申请，申请人收到 `EMGroupManagerListener#onRequestToJoinAcceptedFromGroup` 回调，其他群成员收到`EMGroupManagerListener#onMemberJoinedFromGroup` 回调；
-  - 群主或群管理员拒绝入群申请，申请人收到 `EMGroupManagerListener#onRequestToJoinDeclinedFromGroup` 回调。
+- 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主或群管理员同意，加入群组后，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 回调；
+- 当群组类型为 `PublicJoinNeedApproval` 时，用户可以申请进群，群主或群管理员收到 `EMGroupEventHandler#onRequestToJoinReceivedFromGroup` 回调，并选择同意或拒绝入群申请：
+    - 群主或群管理员同意入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinAcceptedFromGroup` 回调，其他群成员收到`EMGroupEventHandler#onMemberJoinedFromGroup` 回调；
+    - 群主或群管理员拒绝入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 回调。
 
-**注意**
+:::notice
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
+:::
 
 用户申请加入群组的步骤如下：
 
 1. 调用 `EMGroupManager#fetchPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。
-
 2. 调用 `EMGroupManager#joinPublicGroup` 方法传入群组 ID，申请加入对应群组。
 
 示例代码如下：
@@ -107,13 +103,13 @@ try {
 }
 ```
 
-
 ### 解散群组
 
 仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `OnDestroyedFromGroup` 回调并被踢出群组。
 
-**注意：**
+:::notice
 解散群组后，将删除本地数据库及内存中的群相关信息及群会话，谨慎操作。
+:::
 
 示例代码如下：
 
@@ -130,7 +126,7 @@ SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
 
 ### 退出群组
 
-群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `EMGroupManagerListener#onMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [`DestroyGroup`](#destroy) 解散群组。
+群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `EMGroupEventHandler#onMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [`DestroyGroup`](#解散群组) 解散群组。
 
 示例代码如下：
 
@@ -259,23 +255,23 @@ try {
 
 ### 监听群组事件
 
-`EMGroupManagerListener` 类中提供群组事件的监听接口。开发者可以通过设置此监听，获取群组中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
+`EMGroupEventHandler` 类中提供群组事件的监听接口。开发者可以通过设置此监听，获取群组中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
 示例代码如下：
 
 ```dart
-class _GroupPageState extends State<GroupPage> implements EMGroupManagerListener {
+class _GroupPageState extends State<GroupPage> {
   @override
   void initState() {
     // 注册群组监听
-    EMClient.getInstance.groupManager.addGroupManagerListener(this);
+    EMClient.getInstance.groupManager.addEventHandler("UNIQUE_HANDLER_ID", EMGroupEventHandler());
     super.initState();
   }
 
   @override
   void dispose() {
     // 移除群组监听
-    EMClient.getInstance.groupManager.removeGroupManagerListener(this);
+    EMClient.getInstance.groupManager.removeEventHandler("UNIQUE_HANDLER_ID");
     super.dispose();
   }
 
@@ -283,171 +279,5 @@ class _GroupPageState extends State<GroupPage> implements EMGroupManagerListener
   Widget build(BuildContext context) {
     return Container();
   }
-
-  @override
-  // 群组新增管理员
-  void onAdminAddedFromGroup(
-    String groupId,
-    String admin,
-  ) {}
-
-  @override
-  // 群组管理员被移除权限
-  void onAdminRemovedFromGroup(
-    String groupId,
-    String admin,
-  ) {}
-
-  @override
-  // 群组成员全员禁言状态变化
-  void onAllGroupMemberMuteStateChanged(
-    String groupId,
-    bool isAllMuted,
-  ) {}
-
-  @override
-  // 群组公告更新
-  void onAnnouncementChangedFromGroup(
-    String groupId,
-    String announcement,
-  ) {}
-
-  @override
-  // 用户自动同意进群邀请
-  void onAutoAcceptInvitationFromGroup(
-    String groupId,
-    String inviter,
-    String? inviteMessage,
-  ) {}
-
-  @override
-  // 群组解散
-  void onGroupDestroyed(
-    String groupId,
-    String? groupName,
-  ) {}
-
-  @override
-  // 用户同意进群邀请
-  void onInvitationAcceptedFromGroup(
-    String groupId,
-    String invitee,
-    String? reason,
-  ) {}
-
-  @override
-  // 用户拒绝进群邀请
-  void onInvitationDeclinedFromGroup(
-    String groupId,
-    String invitee,
-    String? reason,
-  ) {}
-
-  @override
-  // 用户收到进群邀请
-  void onInvitationReceivedFromGroup(
-    String groupId,
-    String? groupName,
-    String inviter,
-    String? reason,
-  ) {}
-
-  @override
-  // 有群成员离开群组
-  void onMemberExitedFromGroup(
-    String groupId,
-    String member,
-  ) {}
-
-  @override
-  // 有新成员加入群组
-  void onMemberJoinedFromGroup(
-    String groupId,
-    String member,
-  ) {}
-
-  @override
-  // 有成员被添加到禁言列表
-  void onMuteListAddedFromGroup(
-    String groupId,
-    List<String> mutes,
-    int? muteExpire,
-  ) {}
-
-  @override
-  // 有成员被移出禁言列表
-  void onMuteListRemovedFromGroup(
-    String groupId,
-    List<String> mutes,
-  ) {}
-
-  @override
-  // 群主变更
-  void onOwnerChangedFromGroup(
-    String groupId,
-    String newOwner,
-    String oldOwner,
-  ) {}
-
-  @override
-  // 群主或群管理员同意用户的进群申请
-  void onRequestToJoinAcceptedFromGroup(
-    String groupId,
-    String? groupName,
-    String accepter,
-  ) {}
-
-  @override
-  // 群主或群管理员拒绝用户的进群申请
-  void onRequestToJoinDeclinedFromGroup(
-    String groupId,
-    String? groupName,
-    String decliner,
-    String? reason,
-  ) {}
-
-  @override
-  // 群主或群管理员收到进群申请
-  void onRequestToJoinReceivedFromGroup(
-    String groupId,
-    String? groupName,
-    String applicant,
-    String? reason,
-  ) {}
-
-  @override
-  // 新增群组共享文件
-  void onSharedFileAddedFromGroup(
-    String groupId,
-    EMGroupSharedFile sharedFile,
-  ) {}
-
-  @override
-  // 删除群组共享文件
-  void onSharedFileDeletedFromGroup(
-    String groupId,
-    String fileId,
-  ) {}
-
-  @override
-  // 有成员被移出群组
-  void onUserRemovedFromGroup(
-    String groupId,
-    String? groupName,
-  ) {}
-
-  @override
-  // 有成员加入白名单
-  void onAllowListAddedFromGroup(
-    String groupId,
-    List<String> members,
-  ) {}
-
-  @override
-  // 有成员被移出白名单
-  void onAllowListRemovedFromGroup(
-    String groupId,
-    List<String> members,
-  ) {}
 }
 ```

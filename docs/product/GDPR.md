@@ -1,6 +1,6 @@
 # GDPR 安全合规
 
-[[toc]]
+<Toc />
 
 环信 IM 提供一系列数据删除和导出 API，保护数据安全和用户隐私 ，确保符合 GDPR （通用数据保护条例）的安全合规要求。
 
@@ -22,19 +22,19 @@ Authorization：`Bearer ${YourAppToken}`
 
 #### 删除用户账号
 
-[删除 App 下指定的用户](/document/Server-side/account_system.html#删除单个用户)，删除的用户数据主要包括用户的会话列表、用户属性和好友关系。
+[删除 App 下指定的用户](/document/server-side/account_system.html#删除单个用户)，删除的用户数据主要包括用户的会话列表、用户属性和好友关系。
 
 #### 删除用户属性
 
-[删除 App 下指定用户的用户属性](/document/Server-side/userprofile.html#删除用户属性)。
+[删除 App 下指定用户的用户属性](/document/server-side/userprofile.html#删除用户属性)。
 
 #### 删除群组
 
-[删除 App 下指定群 ID 的群组](/document/Server-side/group.html#删除群组)。
+[删除 App 下指定群 ID 的群组](/document/server-side/group.html#删除群组)。
 
 #### 删除聊天室
 
-[删除 App 下指定 ID 的聊天室](/document/Server-side/chatroom.html#删除聊天室)。
+[删除 App 下指定 ID 的聊天室](/document/server-side/chatroom.html#删除聊天室)。
 
 ## 数据导出
 
@@ -50,32 +50,32 @@ Authorization：`Bearer ${YourAppToken}`
 
 | REST API                                                     | 描述                                |
 | :----------------------------------------------------------- | :---------------------------------- |
-| [获取单个用户信息](/document/Server-side/account_system.html#获取单个用户的详情)<br>[批量获取用户信息](/document/Server-side/account_system.html#批量获取用户详情) | 获取 App 下指定用户 ID 的用户信息。 |
-| [获取用户属性](/document/Server-side/userprofile.html#获取用户属性) | 获取 App 下指定用户 ID 的用户属性。 |
+| [获取单个用户信息](/document/server-side/account_system.html#获取单个用户的详情)<br>[批量获取用户信息](/document/server-side/account_system.html#批量获取用户详情) | 获取 App 下指定用户 ID 的用户信息。 |
+| [获取用户属性](/document/server-side/userprofile.html#获取用户属性) | 获取 App 下指定用户 ID 的用户属性。 |
 
 #### 导出群组数据
 
 | REST API                                                     | 描述                                      |
 | :----------------------------------------------------------- | :---------------------------------------- |
-| [群组详情](/document/Server-side/group.html#获取群组详情) | 获取 App 下指定群组 ID 的群组详情。       |
-| [App 下所有的群组](/document/Server-side/group.html#获取-app-中所有的群组-可分页) | 获取 App 下包含所有群组的列表。           |
-| [群组管理员列表](/document/Server-side/group.html#获取群管理员列表) | 获取 App 下指定群组 ID 的群组管理员列表。 |
-| [群组成员列表](/document/Server-side/group.html#分页获取群组成员) | 获取 App下指定群组 ID 的群组成员列表。    |
-| [群组公告](/document/Server-side/group.html#获取群组公告) | 获取 App 下指定群组 ID 的群组公告。       |
-| [群组共享文件](/document/Server-side/group.html#获取群组共享文件) | 获取 App 下指定群组 ID 的群组共享文件。   |
-| [群组黑名单列表](/document/Server-side/group.html#查询群组黑名单) | 获取 App 下指定群组 ID 的群组黑名单列表。 |
-| [群组禁言列表](/document/Server-side/group.html#获取禁言列表) | 获取 App 下指定群组 ID 的群组禁言列表。   |
+| [群组详情](/document/server-side/group.html#获取群组详情) | 获取 App 下指定群组 ID 的群组详情。       |
+| [App 下所有的群组](/document/server-side/group.html#获取-app-中所有的群组-可分页) | 获取 App 下包含所有群组的列表。           |
+| [群组管理员列表](/document/server-side/group.html#获取群管理员列表) | 获取 App 下指定群组 ID 的群组管理员列表。 |
+| [群组成员列表](/document/server-side/group.html#分页获取群组成员) | 获取 App下指定群组 ID 的群组成员列表。    |
+| [群组公告](/document/server-side/group.html#获取群组公告) | 获取 App 下指定群组 ID 的群组公告。       |
+| [群组共享文件](/document/server-side/group.html#获取群组共享文件) | 获取 App 下指定群组 ID 的群组共享文件。   |
+| [群组黑名单列表](/document/server-side/group.html#查询群组黑名单) | 获取 App 下指定群组 ID 的群组黑名单列表。 |
+| [群组禁言列表](/document/server-side/group.html#获取禁言列表) | 获取 App 下指定群组 ID 的群组禁言列表。   |
 
 #### 导出聊天室数据
 
 | REST API                                                     | 描述                                          |
 | :----------------------------------------------------------- | :-------------------------------------------- |
-| [获取聊天室详情](/document/Server-side/chatroom.html#查询聊天室详情) | 获取 App 下指定聊天室 ID 的聊天室详情。       |
-| [App 下所有的聊天室](/document/Server-side/chatroom.html#获取-app-中所有的聊天室) | 获取 App 下所有的聊天室列表。                 |
-| [用户加入的聊天室](/document/Server-side/chatroom.html#获取用户加入的聊天室) | 获取 App 下指定用户 ID 加入的聊天室列表。     |
-| [聊天室管理员列表](/document/Server-side/chatroom.html#获取聊天室管理员列表) | 获取 App 下指定聊天室 ID 的聊天室管理员列表。 |
-| [聊天室成员列表](/document/Server-side/chatroom.html#分页获取聊天室成员) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
-| [聊天室禁言列表](/document/Server-side/chatroom.html#获取禁言列表) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
+| [获取聊天室详情](/document/server-side/chatroom.html#查询聊天室详情) | 获取 App 下指定聊天室 ID 的聊天室详情。       |
+| [App 下所有的聊天室](/document/server-side/chatroom.html#获取-app-中所有的聊天室) | 获取 App 下所有的聊天室列表。                 |
+| [用户加入的聊天室](/document/server-side/chatroom.html#获取用户加入的聊天室) | 获取 App 下指定用户 ID 加入的聊天室列表。     |
+| [聊天室管理员列表](/document/server-side/chatroom.html#获取聊天室管理员列表) | 获取 App 下指定聊天室 ID 的聊天室管理员列表。 |
+| [聊天室成员列表](/document/server-side/chatroom.html#分页获取聊天室成员) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
+| [聊天室禁言列表](/document/server-side/chatroom.html#获取禁言列表) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
 
 #### 获取历史消息文件
 
@@ -83,7 +83,7 @@ Authorization：`Bearer ${YourAppToken}`
 
 | REST API                                                     | 描述                                  |
 | :----------------------------------------------------------- | :------------------------------------ |
-| [获取历史消息文件](/document/Server-side/message.html#获取历史消息文件) | 获取 App 下指定时间段的历史消息文件。 |
+| [获取历史消息文件](/document/server-side/message.html#获取历史消息文件) | 获取 App 下指定时间段的历史消息文件。 |
 
 #### 导出附件
 
@@ -91,4 +91,4 @@ Authorization：`Bearer ${YourAppToken}`
 
 | REST API                                                     | 描述                          |
 | :----------------------------------------------------------- | :---------------------------- |
-| [下载附件](/document/Server-side/message.html#下载语音-图片文件-缩略图) | 下载 App 下指定 UUID 的附件。 |
+| [下载附件](/document/server-side/message.html#下载语音-图片文件-缩略图) | 下载 App 下指定 UUID 的附件。 |

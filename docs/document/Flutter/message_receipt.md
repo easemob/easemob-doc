@@ -1,6 +1,6 @@
 # 消息管理–管理消息回执
 
-[[toc]]
+<Toc />
 
 用户在单聊和群聊中发送完信息后，可以查看该信息的送达和已读状态，了解接收方是否及时收到并阅读了信息。
 
@@ -19,13 +19,12 @@
 实现送达和已读回执的逻辑分别如下：
 
 - 消息送达回执
-
+  
   1. 消息发送方在发送消息前通过 `EMOptions.requireDeliveryAck` 开启送达回执功能
   2. 消息接收方收到消息后，SDK 自动向发送方触发送达回执
   3. 消息发送方通过监听 `onMessageDelivered` 回调接收消息送达回执
-
 - 会话及消息已读回执
-
+  
   1. 消息发送方在发送消息前通话 `EMOptions.requireAck` 开启已读回执功能
   2. 消息接收方收到消息后，调用 API `SendConversationReadAck` 或 `SendMessageReadAck` 发送会话或消息已读回执
   3. 消息发送方通过监听 `onConversationRead` 或 `onMessagesRead` 回调接收会话或消息已读回执
@@ -34,8 +33,8 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](https://docs-im.easemob.com/ccim/flutter/quickstart)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 在群组中实现消息已读回执功能默认不开启。如需使用，请联系商务开通。
 
 ## 实现方法
@@ -59,15 +58,13 @@ await EMClient.getInstance.init(options);
 2. 发送方监听事件 `onMessagesDelivered` 回调，收到接收方的送达回执。
 
 ```dart
-class _ChatMessagesPageState extends State<ChatMessagesPage>
-    implements EMChatManagerListener {
-  @override
-  void onMessagesDelivered(List<EMMessage> messages) {
-
-  }
-}
 // 添加监听器
-EMClient.getInstance.chatManager.addChatManagerListener(this);
+EMClient.getInstance.chatManager.addEventHandler(
+  "UNIQUE_HANDLER_ID",
+  EMChatEventHandler(
+    onMessagesDelivered: (list) => {},
+  ),
+);
 ```
 
 ### 消息和会话的已读回执
@@ -109,15 +106,12 @@ try {
 3. 发送方监听 `onConversationRead` 回调，接收会话已读回执。
 
 ```dart
-class _ChatMessagesPageState extends State<ChatMessagesPage>
-    implements EMChatManagerListener {
-  @override
-  void onConversationRead(String from, String to) {
-
-  }
-}
-// 添加监听器
-EMClient.getInstance.chatManager.addChatManagerListener(this);
+EMClient.getInstance.chatManager.addEventHandler(
+  "UNIQUE_HANDLER_ID",
+  EMChatEventHandler(
+    onConversationRead: (from, to) => {},
+  ),
+);
 ```
 
 > 同一用户 ID 登录多设备的情况下，用户在一台设备上发送会话已读回执，服务器会将会话的未读消息数置为 `0`，同时其他设备会收到 `onConversationRead` 回调。
@@ -139,15 +133,12 @@ EMClient.getInstance.init(options);
 2. 消息发送方监听 `onMessagesRead` 事件。
 
 ```dart
-class _ChatMessagesPageState extends State<ChatMessagesPage>
-    implements EMChatManagerListener {
-  @override
-  void onMessagesRead(List<EMMessage> messages) {
-
-  }
-}
-// 添加监听器
-EMClient.getInstance.chatManager.addChatManagerListener(this);
+EMClient.getInstance.chatManager.addEventHandler(
+  "UNIQUE_HANDLER_ID",
+  EMChatEventHandler(
+    onMessagesRead: (list) => {},
+  ),
+);
 ```
 
 3. 消息接收方发送已读回执
@@ -167,15 +158,12 @@ try {
 1. 消息发送方需要知道群组消息是否已读，需要监听 `onGroupMessageRead` 事件。
 
 ```dart
-class _ChatMessagesPageState extends State<ChatMessagesPage>
-    implements EMChatManagerListener {
-  @override
-  void onGroupMessageRead(List<EMGroupMessageAck> groupMessageAcks) {
-
-  }
-}
-// 添加监听器
-EMClient.getInstance.chatManager.addChatManagerListener(this);
+EMClient.getInstance.chatManager.addEventHandler(
+  "UNIQUE_HANDLER_ID",
+  EMChatEventHandler(
+    onGroupMessageRead: (list) => {},
+  ),
+);
 ```
 
 2. 发送群组消息。并设置 `needGroupAck` 为 `true`，表示需要群组消息已读回执。
@@ -206,7 +194,8 @@ try {
 
 你可以参考如下文档，在项目中实现更多的消息相关功能：
 
-- [消息概述](https://docs-im.easemob.com/ccim/flutter/message1);
-- [发送和接收消息](https://docs-im.easemob.com/ccim/flutter/message2)；
-- [管理本地消息数据](https://docs-im.easemob.com/ccim/flutter/message3)；
-- [获取消息的已读回执和送达回执](https://docs-im.easemob.com/ccim/flutter/message4)；
+- [消息概述](message_overview.html);
+- [发送和接收消息](message_send_receive.html)；
+- [管理本地消息数据](message_manage.html)；
+- [从服务器获取会话和消息（消息漫游）](message_retrieve.html)；
+- [实现翻译功能](message_translation.html)。

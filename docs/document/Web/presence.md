@@ -1,6 +1,6 @@
 # 在线状态订阅
 
-[[toc]]
+<Toc />
 
 用户在线状态（即 Presence）包含用户的在线、离线以及自定义状态。
 
@@ -18,7 +18,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![Presence_web](@static/images/iOS/presence.png)
+![Presence_web](@static/images/ios/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -28,7 +28,7 @@
 
 效果如下图：
 
-![img](@static/images/Web/web_chats_status_setting.png)
+![img](@static/images/web/web_chats_status_setting.png)
 
 ## 前提条件
 

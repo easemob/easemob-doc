@@ -1,6 +1,6 @@
 # 环信即时通讯 IM React-Native 快速入门
 
-[[toc]]
+<Toc />
 
 本文介绍如何极简集成环信即时通讯 React-Native SDK，在你的 app 中实现发送和接收单聊文本消息。
 
@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![img](@static/images/Android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 
@@ -452,7 +452,7 @@ export default App;
 3. 依次点击 **Targets** > **simple_demo** > **Signing & Capabilities** 在签名选项下设置应用签名；
 4. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
 
-![img](@static/images/React-Native/ios-1.png)
+![img](@static/images/react-native/ios-1.png)
 
 编译并在 iOS 模拟器中运行：
 
@@ -460,7 +460,7 @@ export default App;
 2. 在 `xcode` 中，选择模拟器 `iphone13`；
 3. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
 
-![img](@static/images/React-Native/ios-2.png)
+![img](@static/images/react-native/ios-2.png)
 
 编译并在 Android 真机运行：
 
@@ -475,11 +475,11 @@ yarn start
 
 5. 程序构建完成后，自动安装和运行，并显示应用界面。
 
-![img](@static/images/React-Native/android-1.png)
+![img](@static/images/react-native/android-1.png)
 
 demo 的界面:
 
-![img](@static/images/React-Native/main.png)
+![img](@static/images/react-native/main.png)
 
 ## 测试你的 app
 
@@ -494,4 +494,4 @@ demo 的界面:
 
 ## 更多操作
 
-为了保证安全性，我们推荐使用 `username + password + token` 方式创建用户，token 在你的 app server 生成供客户端获取，当 token 过期时你需要重新获取。详见 [获取 user token](/document/Server-side/account_system.html).
+为了保证安全性，我们推荐使用 `username + password + token` 方式创建用户，token 在你的 app server 生成供客户端获取，当 token 过期时你需要重新获取。详见 [获取 user token](/document/server-side/account_system.html).

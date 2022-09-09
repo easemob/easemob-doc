@@ -1,12 +1,12 @@
 # 创建和管理聊天室以及监听器介绍
 
-[[toc]]
+<Toc />
 
 聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，用户离线后，超过 5 分钟会自动退出聊天室。聊天室成员在离线后，不会收到推送消息。聊天室可以应用于直播、消息广播等。
 
 本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
 
-消息相关内容见 [消息管理](https://docs-im.easemob.com/ccim/unity/message1)。
+消息相关内容见 [消息管理](message_overview.html)。
 
 ## 技术原理
 
@@ -24,10 +24,10 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](https://docs-im.easemob.com/ccim/unity/quickstart)；
-- 了解环信即时通讯 IM 的 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
+- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 - 了解环信即时通讯 IM 不同版本的聊天室相关数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
-- 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](https://docs-im.easemob.com/ccim/rest/chatroom#%E6%B7%BB%E5%8A%A0%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98)。
+- 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom.html#添加超级管理员)。
 - 聊天室创建者和管理员的数量之和不能超过 100，即管理员最多可添加 99 个。
 
 ## 实现方法
@@ -36,9 +36,9 @@
 
 ### 创建聊天室
 
-仅 [超级管理员](https://docs-im.easemob.com/ccim/rest/chatroom#%E7%AE%A1%E7%90%86%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98) 可以调用 `CreateRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
+仅 [超级管理员](/document/server-side/chatroom.html#管理超级管理员) 可以调用 `CreateRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
 
-你也可以直接调用 REST API [从服务端创建聊天室](https://docs-im.easemob.com/ccim/rest/chatroom#创建聊天室)。
+你也可以直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
 
 示例代码如下：
 
@@ -67,7 +67,6 @@ handle: new ValueCallBack<Room>(
 用户申请加入聊天室的步骤如下：
 
 1. 调用 `FetchPublicRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-
 2. 调用 `JoinPublicGroup` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `OnMemberJoinedFromRoom` 回调。
 
 示例代码如下：
@@ -75,19 +74,19 @@ handle: new ValueCallBack<Room>(
 ```csharp
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
 SDKClient.Instance.RoomManager.FetchPublicRoomsFromServer(handle: new ValueCallBack<PageResult<Room>>(
-            //result 为 PageResult<Room> 类型
-            onSuccess: (result) => {
-            },
-            onError:(code, desc) => {
-            }
-        ));
+    //result 为 PageResult<Room> 类型
+    onSuccess: (result) => {
+    },
+    onError:(code, desc) => {
+    }
+));
 
 // 加入聊天室
 SDKClient.Instance.RoomManager.JoinRoom(roomId, new ValueCallBack<Room>(
-  onSuccess: (room) => {
-  },
-  onError: (code, desc) => {
-  }
+    onSuccess: (room) => {
+    },
+    onError: (code, desc) => {
+    }
 ));
 ```
 
@@ -114,10 +113,10 @@ SDKClient.Instance.RoomManager.FetchRoomInfoFromServer(roomId, new ValueCallBack
 
 ```csharp
 SDKClient.Instance.RoomManager.LeaveRoom(roomId, new CallBack(
-  onSuccess: () => {
-  },
-  onError: (code, desc) => {
-  }
+    onSuccess: () => {
+    },
+    onError: (code, desc) => {
+    }
 ));
 ```
 
@@ -140,10 +139,10 @@ options. DeleteMessagesAsExitRoom = false;
 
 ```csharp
 SDKClient.Instance.RoomManager.DestroyRoom(roomId, new CallBack(
-  onSuccess: () => {
-  },
-  onError: (code, desc) => {
-  }
+    onSuccess: () => {
+    },
+    onError: (code, desc) => {
+    }
 ));
 ```
 
@@ -174,27 +173,27 @@ SDKClient.Instance.RoomManager.AddRoomManagerDelegate(adelegate);
 
 ```csharp
 public interface IRoomManagerDelegate
-    {
-        // 解除聊天室一键禁言。聊天室所有成员（除操作者外）会收到该事件。
-        void OnDestroyedFromRoom(string roomId, string roomName);
-        // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
-        void OnMemberJoinedFromRoom(string roomId, string participant);
-        // 主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
-        void OnMemberExitedFromRoom(string roomId, string roomName, string participant);
-        // 有成员被移出聊天室。被踢出的成员会收到该事件。
-        void OnRemovedFromRoom(string roomId, string roomName, string participant);
-        // 禁言指定成员。被禁言的成员会收到该事件。
-        void OnMuteListAddedFromRoom(string roomId, List<string> mutes, long expireTime);
-        // 解除对指定成员的禁言。被解除禁言的成员会收到该事件
-        void OnMuteListRemovedFromRoom(string roomId, List<string> mutes);
-        // 设置管理员。被添加的管理员会收到该事件。
-        void OnAdminAddedFromRoom(string roomId, string admin);
-        // 移除管理员。被移除的管理员会收到该事件。
-        void OnAdminRemovedFromRoom(string roomId, string admin);
-        // 转让聊天室。聊天室全体成员会收到该事件。
-        void OnOwnerChangedFromRoom(string roomId, string newOwner, string oldOwner);
-        // 更新聊天室公告。聊天室的所有成员会收到该事件。
+{
+    // 解除聊天室一键禁言。聊天室所有成员（除操作者外）会收到该事件。
+    void OnDestroyedFromRoom(string roomId, string roomName);
+    // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
+    void OnMemberJoinedFromRoom(string roomId, string participant);
+    // 主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
+    void OnMemberExitedFromRoom(string roomId, string roomName, string participant);
+    // 有成员被移出聊天室。被踢出的成员会收到该事件。
+    void OnRemovedFromRoom(string roomId, string roomName, string participant);
+    // 禁言指定成员。被禁言的成员会收到该事件。
+    void OnMuteListAddedFromRoom(string roomId, List<string> mutes, long expireTime);
+    // 解除对指定成员的禁言。被解除禁言的成员会收到该事件
+    void OnMuteListRemovedFromRoom(string roomId, List<string> mutes);
+    // 设置管理员。被添加的管理员会收到该事件。
+    void OnAdminAddedFromRoom(string roomId, string admin);
+    // 移除管理员。被移除的管理员会收到该事件。
+    void OnAdminRemovedFromRoom(string roomId, string admin);
+    // 转让聊天室。聊天室全体成员会收到该事件。
+    void OnOwnerChangedFromRoom(string roomId, string newOwner, string oldOwner);
+    // 更新聊天室公告。聊天室的所有成员会收到该事件。
 
-        void OnAnnouncementChangedFromRoom(string roomId, string announcement);
-    }
+    void OnAnnouncementChangedFromRoom(string roomId, string announcement);
+}
 ```

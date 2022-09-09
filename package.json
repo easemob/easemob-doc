@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "markdown-it-anchor": "^8.6.4",
     "vuepress": "^1.9.7",
     "vuepress-plugin-container": "^2.1.5",
     "vuepress-plugin-fulltext-search": "^2.2.1",

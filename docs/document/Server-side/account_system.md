@@ -1,6 +1,6 @@
 # 用户体系集成
 
-[[toc]]
+<Toc />
 
 本文展示如何调用环信即时通讯 RESTful API 实现用户体系建立和管理，包括用户注册、获取、修改、删除、封禁、解禁、强制下线等。
 
@@ -8,9 +8,9 @@
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](https://docs-im.easemob.com/ccim/config)。
-- 已从服务端获取 app token，详见 [使用环信 app token 鉴权](https://docs-im.easemob.com/ccim/authentication)。
-- 了解环信 IM API 的调用频率限制，详见[接口频率限制](https://docs-im.easemob.com/ccim/limitationapi)。
+- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 已从服务端获取 app token，详见 [使用环信 app token 鉴权](easemob_app_token.html)。
+- 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
@@ -20,7 +20,7 @@
 
 | 参数       | 类型   | 描述                                                                                                                 |
 | :--------- | :----- | :------------------------------------------------------------------------------------------------------------------- |
-| `host`     | String | 你在环信即时通讯云控制台注册项目时所在的 [集群服务器地址](https://docs-im.easemob.com/ccim/rest/overview#请求域名)。 |
+| `host`     | String | 你在环信即时通讯云控制台注册项目时所在的 [集群服务器地址](overview.html#请求域名)。 |
 | `org_name` | String | 即时通讯服务分配给每个企业（组织）的唯一标识。你可以通过控制台获取该字段。                                           |
 | `app_name` | String | 你在环信即时通讯云控制台注册项目时填入的应用名称。                                                                   |
 
@@ -51,7 +51,7 @@
 
 Authorization：`Bearer ${YourAppToken}`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文介绍的即时通讯所有 REST API 均需使用 App Token 的鉴权方式，详见 [使用 Token 鉴权](https://docs-im.easemob.com/ccim/authentication)。
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文介绍的即时通讯所有 REST API 均需使用 App Token 的鉴权方式，详见 [使用 Token 鉴权](easemob_app_token.html)。
 
 ## 注册用户
 
@@ -69,7 +69,7 @@ POST https://{host}/{org_name}/{app_name}/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -83,11 +83,11 @@ POST https://{host}/{org_name}/{app_name}/users
 
 | 参数       | 类型   | 是否必需 | 描述                                                                                                                                                                                                                                                                                                                                                    |
 | :--------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `username` | String | 是       | 用户 ID，长度不可超过 64 个字节长度。不可设置为空。支持以下字符集： • 26 个小写英文字母 a-z； • 26 个大写英文字母 A-Z； • 10 个数字 0-9； • “_”, “-”, “.”。 **注意：** • 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名； • 请确保同一个 app 下，`username` 唯一； • `username` 用户 ID 是会公开的信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。 |
+| `username` | String | 是       | 用户 ID，长度不可超过 64 个字节长度。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “_”, “-”, “.”。 <br/>**注意：**<br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，`username` 唯一；<br/>- `username` 用户 ID 是会公开的信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。 |
 | `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。                                                                                                                                                                                                                                                                                                                |
 | `nickname` | String | 否       | 推送消息时，在消息推送通知栏内显示的用户昵称，并非用户个人信息的昵称。长度不可超过 100 个字符。支持以下字符集：<br/> -  26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。                                                                                                                   |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### HTTP 响应
 
@@ -101,9 +101,9 @@ POST https://{host}/{org_name}/{app_name}/users
 | `entities.password` | String | 用户的登录密码。                               |
 | `entities.nickname` | String | 推送消息时，在消息推送通知栏内显示的用户昵称。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html)了解可能的原因。
 
 #### 示例
 
@@ -149,8 +149,6 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 批量注册用户
 
-一个请求内注册多个用户，最多可注册 60 个用户 ID。
-
 批量注册是授权注册方式，服务端需要校验有效的 token 权限才能进行操作。
 
 #### HTTP 请求
@@ -161,7 +159,7 @@ POST https://{host}/{org_name}/{app_name}/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -189,9 +187,9 @@ POST https://{host}/{org_name}/{app_name}/users
 | `entities.username` | String | 用户 ID。                                      |
 | `entities.nickname` | String | 推送消息时，在消息推送通知栏内显示的用户昵称。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -301,7 +299,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -328,9 +326,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}
 | `entities.notifier_name`                      | String | 客户端推送证书名称。若用户未设置推送证书名称，则响应中不返回。                                                                                   |
 | `entities.device_token`                       | String | 推送 token。若用户没有推送 token，则响应中不返回。                                                                                               |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -379,7 +377,7 @@ GET https://{host}/{org_name}/{app_name}/users?limit={N}&{cursor}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -395,7 +393,7 @@ GET https://{host}/{org_name}/{app_name}/users?limit={N}&{cursor}
 | `limit`  | Int    | 否       | 请求查询用户的数量。取值范围[1,100]，默认值为 10。若实际用户数量超过 100，返回 100 个用户。                                                                                                                                                                             |
 | `cursor` | String | 否       | 开始获取数据的游标位置，用于分页显示用户列表。第一次发起批量查询用户请求时若不设置 `cursor`，请求成功后会获得第一页用户列表。从响应 body 中获取 `cursor`，并在下一次请求的 URL 中传入该 `cursor`，直到响应 body 中不再有 `cursor` 字段，则表示已查询到 app 中所有用户。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### HTTP 响应
 
@@ -415,9 +413,9 @@ GET https://{host}/{org_name}/{app_name}/users?limit={N}&{cursor}
 | `entities.notifier_name`                      | String | 客户端推送证书名称。若用户未设置推送证书名称，则响应中不返回。                                                              |
 | `entities.device_token`                       | String | 推送 token。若用户没有推送 token，则响应中不返回。                                                                          |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -535,7 +533,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -555,9 +553,9 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}
 | `entities.username` | String | 删除的用户的 ID。  |
 | `entities.nickname` | String | 删除的用户的昵称。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -608,7 +606,7 @@ DELETE https://{host}/{org_name}/{app_name}/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -628,9 +626,9 @@ DELETE https://{host}/{org_name}/{app_name}/users
 | `entities.username` | String | 删除的用户的 ID。  |
 | `entities.nickname` | String | 删除的用户的昵称。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -697,7 +695,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -715,15 +713,15 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 | :------------ | :----- | :------- | :-------------------- |
 | `newpassword` | String | 是       | ${新密码指定的字符串} |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### HTTP 响应
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -756,7 +754,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/status
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -775,9 +773,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/status
 | :-------------- | :----- | :-------------------------------------------------------------------------------------------------------------- |
 | `data.username` | String | 数据格式为：“用户名：当前在线状态”，例如，user1 的在线和离线状态分别为 “user1”: “online” 和”user1”: “offline”。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -819,7 +817,7 @@ POST https://{host}{org_name}/{app_name}/users/batch/status
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -844,7 +842,7 @@ POST https://{host}{org_name}/{app_name}/users/batch/status
 | :-------------- | :----- | :--------------------------------------------------------------------------------------------------------------- |
 | `data.username` | String | 数据格式为：“用户 ID：当前在线状态”，例如，user1 的在线和离线状态分别为 “user1”: “online” 和”user1”: “offline”。 |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -898,7 +896,7 @@ POST https://{host}/{orgName}/{appName}/mutes
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -912,7 +910,7 @@ POST https://{host}/{orgName}/{appName}/mutes
 | 参数        | 类型   | 是否必需 | 描述                                                                                                                                                                                                          |
 | :---------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `username`  | String | 是       | 设置禁言配置的用户 ID。                                                                                                                                                                                       |
-| `chat`      | Int    | 否       | 单聊消息禁言时长，单位为秒，最大值为 2147483647。<br/> - > `0`：该用户 ID 具体的单聊消息禁言时长。 <br/> -  `0`：取消该用户的单聊消息禁言。<br/> - `-1`：该用户被设置永久单聊消息禁言。<br/> - 其他负值无效。 |
+| `chat`      | Int    | 否       | 单聊消息禁言时长，单位为秒，最大值为 2147483647。<br/> - `> 0`：该用户 ID 具体的单聊消息禁言时长。 <br/> -  `0`：取消该用户的单聊消息禁言。<br/> - `-1`：该用户被设置永久单聊消息禁言。<br/> - 其他负值无效。 |
 | `groupchat` | Int    | 否       | 群组消息禁言时长，单位为秒，规则同上。                                                                                                                                                                        |
 | `chatroom`  | Int    | 否       | 聊天室消息禁言时长，单位为秒，规则同上。                                                                                                                                                                      |
 
@@ -926,9 +924,9 @@ POST https://{host}/{orgName}/{appName}/mutes
 | :------------ | :----- | :---------------------------------- |
 | `data.result` | String | 该方法调用结果。`ok` 表示设置成功。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -978,7 +976,7 @@ GET https://{host}/{orgName}/{appName}/mutes/username
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -996,14 +994,14 @@ GET https://{host}/{orgName}/{appName}/mutes/username
 | 字段             | 类型   | 描述                                                                                                                                                                                       |
 | :--------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data.userid`    | String | 设置禁言的用户 ID。                                                                                                                                                                        |
-| `data.chat`      | Int    | 单聊消息剩余禁言时间，单位为秒。最大值为 2147483647。<br/> - > 0：该用户 ID 具体的单聊消息禁言时长。<br/> - `0`：该用户的单聊消息禁言已取消。 <br/> - `-1`：该用户被设置永久单聊消息禁言。 |
+| `data.chat`      | Int    | 单聊消息剩余禁言时间，单位为秒。最大值为 2147483647。<br/> - `> 0`：该用户 ID 具体的单聊消息禁言时长。<br/> - `0`：该用户的单聊消息禁言已取消。 <br/> - `-1`：该用户被设置永久单聊消息禁言。 |
 | `data.groupchat` | Int    | 群组消息剩余禁言时长，单位为秒，规则同上。                                                                                                                                                 |
 | `data.chatroom`  | Int    | 聊天室消息剩余禁言时长，单位为秒，规则同上。                                                                                                                                               |
 | `data.unixtime`  | Int    | 当前操作的 Unix 时间戳。                                                                                                                                                                   |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1051,7 +1049,7 @@ POST https://{host}/{org_name}/{app_name}/users
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见[公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1076,14 +1074,14 @@ POST https://{host}/{org_name}/{app_name}/users
 | 字段        | 类型   | 描述                                                                                                                                                                                         |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `username`  | String | 设置禁言的用户 ID。                                                                                                                                                                          |
-| `chat`      | Int    | 单聊消息剩余禁言时间，单位为秒。最大值为 2147483647。 <br/> - > 0：该用户 ID 具体的单聊消息禁言时长。 <br/> - `0`：该用户的单聊消息禁言已取消。 <br/> - `-1`：该用户被设置永久单聊消息禁言。 |
+| `chat`      | Int    | 单聊消息剩余禁言时间，单位为秒。最大值为 2147483647。 <br/> - `> 0`：该用户 ID 具体的单聊消息禁言时长。 <br/> - `0`：该用户的单聊消息禁言已取消。 <br/> - `-1`：该用户被设置永久单聊消息禁言。 |
 | `groupchat` | Int    | 群组消息剩余禁言时长，单位为秒，规则同上。                                                                                                                                                   |
 | `chatroom`  | Int    | 聊天室消息剩余禁言时长，单位为秒，规则同上。                                                                                                                                                 |
 | `unixtime`  | Int    | 当前操作的 Unix 时间戳。                                                                                                                                                                     |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1099,7 +1097,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes?pageNum=1&pageSize=10' \
 
 ##### 响应示例
 
-```
+```json
 {
     "path": "/mutes",
     "uri": "https://XXXX/XXXX/XXXX/mutes",
@@ -1163,7 +1161,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/offline_msg_coun
 | :--------------: | :----- | :------- | :-------------------------- |
 | `owner_username` | String | 是       | 要获取离线消息数的用户 ID。 |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1182,9 +1180,9 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/offline_msg_coun
 | :--------- | :----- | :------------------------------------------------------------ |
 | `username` | String | 数据格式为：“用户 ID：当前离线消息的数量“，例如，”user1: 0”。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1198,7 +1196,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ##### 响应示例
 
-```
+```json
 {
   "action": "get",
   "uri": "http://XXXX/XXXX/XXXX/users/user1/offline_msg_count",
@@ -1229,7 +1227,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/offline_msg_status/{ms
 | `username` | String | 是       | 要获取离线消息状态的用户 ID。 |
 | `msg_id`   | String | 是       | 要查看状态的离线消息 ID。     |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1248,9 +1246,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/offline_msg_status/{ms
 | :------- | :----- | :------------------------------------------------------------------------------------------------------------------ |
 | `msg_id` | String | 数据格式为“消息 ID”：“离线状态”。消息的离线状态有两种：<br/> - `delivered`：已投递；<br/> - `undelivered`：未投递。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1292,7 +1290,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1313,9 +1311,9 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 | `username` | String | 被封禁的用户 ID。  |
 | `nickname` | String | 被封禁的用户昵称。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见[公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](error.html)了解可能的原因。
 
 #### 示例
 
@@ -1358,7 +1356,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1378,9 +1376,9 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 | :------- | :----- | :--------------------------------------- |
 | `action` | String | 执行的操作。账号解禁为 `activate user`。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1413,7 +1411,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 
 ##### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1432,9 +1430,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 | :------- | :--- | :-------------------------------------------------------------- |
 | `result` | Bool | 用户是否已被强制下线：<br/> - `true`：是；<br/> - `false`：否。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/accountsystem#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 

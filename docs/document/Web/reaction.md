@@ -1,6 +1,6 @@
 # 消息表情回复 Reaction Web
 
-[[toc]]
+<Toc />
 
 消息表情回复（下文统称 “Reaction” ）支持用户在单聊和群聊场景中对单条消息回复表情，从而丰富用户聊天互动方式。在群组中，Reaction 作为社交互动工具支持用户在沟通时直观地进行情绪表达。
 
@@ -18,9 +18,9 @@
 
 添加 Reaction：
 
-![](@static/images/Web/web_chat_reaction_add_reaction.png)
+![](@static/images/web/web_chat_reaction_add_reaction.png)
 
-![](@static/images/Web/web_group_chat_reaction_detail_another_version.png)
+![](@static/images/web/web_group_chat_reaction_detail_another_version.png)
 
 ## 前提条件
 

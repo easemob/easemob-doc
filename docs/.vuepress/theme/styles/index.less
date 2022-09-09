@@ -649,6 +649,11 @@ input, button, select, optgroup, textarea {
           &:hover {
             color: @primary-color;
           }
+          &.level-3 {
+            padding: 3px 0 3px 28px;
+            font-size: 13px;
+            color: #8a8a9a;
+          }
         }
         &.active {
           &::before {
@@ -734,6 +739,10 @@ input, button, select, optgroup, textarea {
   padding: 16px 20px 15px 46px;
   border: 1px solid transparent;
   border-radius: 4px;
+  &+.custom-block,
+  &+.extra-class {
+    margin-top: 20px;
+  }
   &::before {
     position: absolute;
     top: 16px;
@@ -856,7 +865,8 @@ table {
 .extra-class {
   position: relative;
   border-radius: 2px;
-  &+.extra-class {
+  &+.extra-class,
+  &+.custom-block {
     margin-top: 20px;
   }
   pre {

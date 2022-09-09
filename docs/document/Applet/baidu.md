@@ -1,10 +1,10 @@
 # 百度小程序集成介绍
 
-[[toc]]
+<Toc />
 
 ### 注册环信账号
 
-开发者需要在环信管理后台[注册并创建应用](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
+开发者需要在环信管理后台 [注册并创建应用](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
 
 ### 搭建百度小程序开发环境
 
@@ -16,34 +16,24 @@
 
 登录 [百度智能小程序官网](https://smartprogram.baidu.com/)，在开发设置页面配置以下服务器域名。
 
+:::tip request 合法域名
+1. https://a1.easemob.com
+2. https://a2.easemob.com
+3. https://a3.easemob.com
+4. https://a4.easemob.com
+5. https://a5.easemob.com
+:::
 
+:::tip socket 合法域名
+1. wss://im-api.easemob.com（2.0 IM SDK)
+2. wss://im-api-wechat.easemob.com（3.0 IM SDK）
+:::
 
-request 合法域名：
-
-1、https://a1.easemob.com
-
-2、https://a2.easemob.com
-
-3、https://a3.easemob.com
-
-4、https://a4.easemob.com
-
-5、https://a5.easemob.com
-
-
-socket 合法域名:
-
-1、wss://im-api.easemob.com（2.0 IM SDK)
-
-2、wss://im-api-wechat.easemob.com（3.0 IM SDK）
-
-
-
-```
-注意：
+:::notice
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
+:::
+
 环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
-```
 
 | 数据中心    | REST API 请求地址 | WebSocket 访问域名           |
 | ----------- | ----------------- | ---------------------------- |
@@ -52,11 +42,9 @@ socket 合法域名:
 | 国内 VIP 区 | 请咨询商务经理    | 请咨询商务经理               |
 | 客服专用    | 请咨询商务经理    | 请咨询商务经理               |
 
-```
 应用所在数据中心可以在环信用户管理后台>应用信息中查看：
-```
 
-[![img](https://docs-im.easemob.com/_media/im/server/ready/console%E6%9F%A5%E7%9C%8B%E5%8F%AF%E7%94%A8%E5%8C%BA.jpg?w=800&tok=79849f)](https://docs-im.easemob.com/_detail/im/server/ready/console查看可用区.jpg?id=im%3Aapplet%3Abaidu)
+![img](@static/images/applet/console.jpeg)
 
 ### 说明
 
@@ -69,21 +57,20 @@ socket 合法域名:
 可以通过以下两种方式获取 SDK：
 
 - 通过官网 [下载 SDK](http://www.easemob.com/download/im)
-
 - 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
 
 #### 引入 SDK
 
 - 开始一个全新的项目
-  1. 将下载的 SDK（src/sdk/）导入到自己的项目中。
-  2. 引入 SDK： import IMSDK from “../sdk/Easemob-chat-miniProgram”;
+    1. 将下载的 SDK（src/sdk/）导入到自己的项目中。
+    2. 引入 SDK：`import IMSDK from "../sdk/Easemob-chat-miniProgram";`
 - 基于 Demo 二次开发
 
 将下载的代码导入开发者工具即可运行起来。
 
 #### 调用示例
 
-```
+```javascript
 //使用示例
 import SDK from "../sdk/connection"; // 2.0 SDK
 import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
@@ -93,7 +80,7 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
 
 实例化 SDK，并挂载在全局对象下
 
-```
+```javascript
 //实例化 SDK 对象
 const WebIM = wx.WebIM = SDK;
 WebIM.conn = new WebIM.connection({
@@ -106,7 +93,5 @@ WebIM.conn = new WebIM.connection({
     useOwnUploadFun: false // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
 });
 ```
-
-------
 
 IM 基本功能和 Web 端一致，请参考 Web 端文档。

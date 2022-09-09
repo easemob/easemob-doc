@@ -1,6 +1,6 @@
 # 管理子区消息
 
-[[toc]]
+<Toc />
 
 子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `IsThread` 标记。本文介绍环信即时通讯 IM Unity SDK 如何发送、接收以及撤回子区消息。
 
@@ -19,19 +19,19 @@
 2. 单聊时消息时，服务器投递消息给用户 B；对于群聊时消息，服务器投递给群内其他每一个成员；对于子区消息，服务器投递给子区内其他每一个成员；
 3. 用户收到消息。
 
-[![img](https://docs-im.easemob.com/_media/ccim/web/sendandreceivemsg.png?w=800&tok=54ca33)](https://docs-im.easemob.com/_detail/ccim/web/sendandreceivemsg.png?id=ccim%3Aandroid%3Athread)
+![img](@static/images/android/sendandreceivemsg.png)
 
 子区创建和查看如下图：
 
-[![img](https://docs-im.easemob.com/_media/ccim/ios/threads.png)](https://docs-im.easemob.com/_detail/ccim/ios/threads.png?id=ccim%3Aandroid%3Athread)
+![img](@static/images/android/threads.png)
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 已集成环信 IM `(1.0.6 以上版本)` 的基本功能，账户登录成功。
-- 完成 SDK 初始化，详见 [快速开始](../unity/quick_start_unity.md)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
 
 ## 实现方法
@@ -40,7 +40,7 @@
 
 ### 发送子区消息
 
-发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](../doc_cn_easemob/Unity/message_send_receive_unity.md#发送消息)。唯一不同的是，发送子区消息需要指定标记 `IsThread` 为 `true`。
+发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send_receive.html#发送文本消息)。唯一不同的是，发送子区消息需要指定标记 `IsThread` 为 `true`。
 
 示例代码如下：
 
@@ -67,7 +67,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 ### 接收子区消息
 
-接收消息的具体逻辑，请参考[接收消息](https://github.com/easemob/chat-docs/blob/input/Doc/doc_cn_easemob/Unity/2.4.7.2messages_unity.md#接收消息)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考 [接收消息](message_send_receive.html#接收消息)，此处只介绍子区消息和其他消息的区别。
 
 子区有新增消息时，子区所属群组的所有成员收到 `IChatThreadManagerDelegate#OnUpdateMyThread` 回调，子区成员收到 `IChatManagerDelegate#OnMessagesReceived` 回调。
 
@@ -94,7 +94,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ### 撤回子区消息
 
-接收消息的具体逻辑，请参考[撤回消息](../doc_cn_easemob/Unity/message_send_receive_unity.md#撤回消息)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考[撤回消息](message_send_receive.html#撤回消息)，此处只介绍子区消息和其他消息的区别。
 
 子区有消息撤回时，子区所属群组的所有成员收到 `IChatThreadManagerDelegate#OnUpdateMyThread` 回调，子区成员收到 `IChatManagerDelegate#OnMessagesRecalled` 回调。
 
@@ -125,7 +125,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 #### 从服务器获取子区消息（消息漫游）
 
-从服务器获取子区消息，请参考 [从服务器获取消息 (消息漫游)](https://github.com/easemob/chat-docs/blob/input/Doc/doc_cn_easemob/Unity/2.4.7.4messages_unity.md)。
+从服务器获取子区消息，请参考 [从服务器获取消息 (消息漫游)](message_retrieve.html)。
 
 #### 管理本地子区消息
 
@@ -149,6 +149,6 @@ conversation.LoadMessages(startMsgId, count, direct, new ValueCallBack<List<Mess
 ));
 ```
 
-**注意**
-
+:::notice
 可以通过 `Conversation#IsThread()` 判断当前会话是否是子区会话。
+:::

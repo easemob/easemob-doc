@@ -1,6 +1,6 @@
 # 集成类问题
 
-[[toc]]
+<Toc />
 
 ## 如何实现跨 app 聊天
 
@@ -30,7 +30,7 @@ logPath = EMClient.getInstance().compressLogs();
 - 手机连接到电脑，adb 的使用可以参考：[Android Debug Bridge]( https://developer.android.com/studio/command-line/adb)
 
 ```shell
-adb pull  /sdcard/Android/data/(your_package_name)/(appkey)/core_log/easemob.log
+adb pull  /sdcard/android/data/(your_package_name)/(appkey)/core_log/easemob.log
 ```
 
 ### iOS

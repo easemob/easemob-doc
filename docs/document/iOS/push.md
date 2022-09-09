@@ -1,6 +1,6 @@
 # iOS 第三方推送设置
 
-[[toc]]
+<Toc />
 
 APNs 是苹果官方提供的推送解决方案，主要用于在 app 处于不活跃状态时向设备发送实时通知。使用环信即时通讯 IM SDK 时，当消息接收方不在线，环信即时通讯 IM 的服务器会通过苹果的 APNs 服务向接收方设备发消息推送，该服务器会暂时保存这些消息，等用户再次上线时通过环信即时通讯 IM 的长连接投递。同时开发者可根据需要设置推送的显示样式，免打扰时间段等。
 
@@ -10,14 +10,14 @@ APNs 是苹果官方提供的推送解决方案，主要用于在 app 处于不�
 
 ## 技术原理
 
-![image](@static/images/iOS/push/push_ios_1_understand.png)
+![image](@static/images/ios/push/push_ios_1_understand.png)
 
 ## 前提条件
 
 1. 使用消息推送前，需要在你的设备开启推送权限，并将推送证书上传到环信即时通讯 IM 管理后台。
 2. 若使用 3.9.2 及以上版本提供的推送高级功能，包括设置推送通知模式、免打扰模式和自定义推送模板，你需要在环信即时通讯云控制后台中激活推送高级功能。
 
-![](@static/images/iOS/enable_push_new.png)
+![](@static/images/ios/enable_push_new.png)
 
 ## 开启推送权限并上传推送证书
 
@@ -25,14 +25,14 @@ APNs 是苹果官方提供的推送解决方案，主要用于在 app 处于不�
 
 生成 Certificate Signing Request(CSR)：
 
-![image](@static/images/iOS/push/push_ios_2_keychain_access_csr.jpeg)
+![image](@static/images/ios/push/push_ios_2_keychain_access_csr.jpeg)
 
 填写你的邮箱（这个邮箱是申请 App ID 的付费帐号）和常用名称（一般默认是计算机名，不用更改），并选择保存到硬盘：
 
-![image](@static/images/iOS/push/push_ios_3_cert_assistant_cert_info.jpeg)
+![image](@static/images/ios/push/push_ios_3_cert_assistant_cert_info.jpeg)
 
 点击继续: 
-![image](@static/images/iOS/push/push_ios_4_cert_assistant_cert_save.jpeg)
+![image](@static/images/ios/push/push_ios_4_cert_assistant_cert_save.jpeg)
 
 在本地生成了名为 `EMImDemoAPS.certSigningRequest` 的 CSR 文件 。
 
@@ -40,49 +40,49 @@ APNs 是苹果官方提供的推送解决方案，主要用于在 app 处于不�
 
 生成 App ID ，如果已经有 App ID 可以跳至第 3 步。
 
-![image](@static/images/iOS/push/push_ios_5_create_app_id.jpeg)
+![image](@static/images/ios/push/push_ios_5_create_app_id.jpeg)
 
 选择 App ID，点击 `Continue`；
 
-![image](@static/images/iOS/push/push_ios_6_register_new_id.jpeg)
+![image](@static/images/ios/push/push_ios_6_register_new_id.jpeg)
 
 选择 App， 点击 `Continue`；
 
-![image](@static/images/iOS/push/push_ios_7_register_select_type.jpeg)
+![image](@static/images/ios/push/push_ios_7_register_select_type.jpeg)
 
 输入你的 App ID 描述信息，可以输入工程名；Bunble ID（在工程的 General 信息中），一般格式为 com.youcompany.youprojname。
 
-![image](@static/images/iOS/push/push_ios_8_register_type_app_desc.jpeg)
+![image](@static/images/ios/push/push_ios_8_register_type_app_desc.jpeg)
 
 选择需要支持 `Push Notification`，点击 `Continue`;
 
-![image](@static/images/iOS/push/push_ios_9_register_support_push_notifi.jpeg)
+![image](@static/images/ios/push/push_ios_9_register_support_push_notifi.jpeg)
 
 确定信息无误，点击 `Register`;
 
-![image](@static/images/iOS/push/push_ios_10_register_confirm_appid.jpeg)
+![image](@static/images/ios/push/push_ios_10_register_confirm_appid.jpeg)
 
 ### 3. 创建 app 的 APS 证书
 
 回到 App IDs 选择你需要推送的 app。
 
-![image](@static/images/iOS/push/push_ios_11_select_app_for_push.jpeg)
+![image](@static/images/ios/push/push_ios_11_select_app_for_push.jpeg)
 
 找到 `Push Notifications`， 点击 `Configure`。
 
-![image](@static/images/iOS/push/push_ios_12_edit_app_id_config.jpeg)
+![image](@static/images/ios/push/push_ios_12_edit_app_id_config.jpeg)
 
 如果是开发模式，点击 `Development SSL Certificate` 下的 `Create Certificate`。如果是生产模式，点击 `Production SSL Certificate` 下的 `Create Certificate` 。
 
-![image](@static/images/iOS/push/push_ios_13_APNs_SSL_cert.jpeg)
+![image](@static/images/ios/push/push_ios_13_APNs_SSL_cert.jpeg)
 
 `Platform` 选择 `iOS` , `Choose File` 选择第一步中创建的 `CSR` 文件，点击 `Continue`。
 
-![image](@static/images/iOS/push/push_ios_14_select_csr.jpeg)
+![image](@static/images/ios/push/push_ios_14_select_csr.jpeg)
 
 aps 文件创建成功了，点击 `Download` 下载到本地。（文件名：开发版本为 aps_development.cer，发布版本为 aps.cer）：
 
-![image](@static/images/iOS/push/push_ios_15_download_your_cert.jpeg)
+![image](@static/images/ios/push/push_ios_15_download_your_cert.jpeg)
 
 ### 4. 生成 Push 证书
 
@@ -90,41 +90,41 @@ aps 文件创建成功了，点击 `Download` 下载到本地。（文件名：�
 
 双击上一节下载的文件（`aps_development.cer` 和 `aps.cer`）将其安装到电脑，在“钥匙串访问”中，可以看到已经导入的证书。
 
-![image](@static/images/iOS/push/push_ios_16_keychain_access_apple_develop.jpeg)
+![image](@static/images/ios/push/push_ios_16_keychain_access_apple_develop.jpeg)
 
 右键选择导出为 p12 文件， (例：存储为 `EMImDemoAPS.p12`):
 
-![image](@static/images/iOS/push/push_ios_17_keychain_access_export.jpeg)
+![image](@static/images/ios/push/push_ios_17_keychain_access_export.jpeg)
 
 ### 5. 生成 Provisioning Profile 文件（PP 文件）
 
-![image](@static/images/iOS/push/push_ios_18_generate_provision_file.jpeg)
+![image](@static/images/ios/push/push_ios_18_generate_provision_file.jpeg)
 
 选择 `iOS App Development`（这里演示开发版描述文件的创建, 发布版本的创建流程一样，如果发布版本，请选择 App Store），点击 Continue。
 
-![image](@static/images/iOS/push/push_ios_19_generate_pr_register.jpeg)
+![image](@static/images/ios/push/push_ios_19_generate_pr_register.jpeg)
 
 App ID 选择需要创建 PP 文件的 App ID， 点击 `Continue`。
 
-![image](@static/images/iOS/push/push_ios_20_generate_pr_select_appid.jpeg)
+![image](@static/images/ios/push/push_ios_20_generate_pr_select_appid.jpeg)
 
-![image](@static/images/iOS/push/push_ios_21_generate_pr_select_cert.jpeg)
+![image](@static/images/ios/push/push_ios_21_generate_pr_select_cert.jpeg)
 
 选择需要加入开发的设备，只有加入了的设备才能进行真机调试，创建发布版本时没有这个步骤，点击 `Continue`。
 
-![image](@static/images/iOS/push/push_ios_22_generate_pr_select_devices.jpeg)
+![image](@static/images/ios/push/push_ios_22_generate_pr_select_devices.jpeg)
 
 输入 PP 文件的名称，点击 `Generate`。
 
-![image](@static/images/iOS/push/push_ios_23_generate_pr_review_name.jpeg)
+![image](@static/images/ios/push/push_ios_23_generate_pr_review_name.jpeg)
 
 PP 文件生成完成， 点击 `Download`。
 
-![image](@static/images/iOS/push/push_ios_24_generate_pr_download_install.jpeg)
+![image](@static/images/ios/push/push_ios_24_generate_pr_download_install.jpeg)
 
 ### 6. 上传到环信即时通讯 IM 管理后台
 
-![image](@static/images/iOS/push/push_ios_25_upload_cert.png)
+![image](@static/images/ios/push/push_ios_25_upload_cert.png)
 
 ## 在客户端实现推送
 
@@ -132,7 +132,7 @@ PP 文件生成完成， 点击 `Download`。
 
 需要在 xcode 中为 app 开启推送权限。 Targets → Capability → Push Notifications
 
-![image](@static/images/iOS/push/push_ios_26_xcode_enable_push_notifi.jpeg)
+![image](@static/images/ios/push/push_ios_26_xcode_enable_push_notifi.jpeg)
 
 ### 2. 将证书名称传递给 SDK
 
@@ -183,7 +183,7 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 
 其中，设置推送通知方式、免打扰模式和推送模板为推送的高级功能，使用前需要在环信即时通讯云管理后台上打开开关。
 
-![image](@static/images/iOS/push/push_ios_27_enable_push.png)
+![image](@static/images/ios/push/push_ios_27_enable_push.png)
 
 #### 4.1 设置推送通知 
 
@@ -449,11 +449,11 @@ NSArray *conversations = @[conversation1,conversation2];
 2. 在 **应用列表** 区域中，点击对应 app 的 **操作** 一栏中的 **查看** 按钮。
 3. 在环信 IM 配置页面的左侧导航栏，选择 **即时通讯 > 功能配置 > 消息推送 > 模板管理**，进入推送模板管理页面。
 
-![image](@static/images/iOS/push/push_ios_28_template_mgmt.png)
+![image](@static/images/ios/push/push_ios_28_template_mgmt.png)
 
 4. 点击 **添加推送模板**。弹出以下页面，进行参数配置。
 
-![image](@static/images/iOS/push/push_ios_29_template_add.png)
+![image](@static/images/ios/push/push_ios_29_template_add.png)
 
 在环信即时通讯云管理后台中完成模板创建后，用户可以在发送消息时选择此推送模板作为默认布局，如下代码示例所示：
 

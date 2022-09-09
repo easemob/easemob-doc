@@ -1,6 +1,6 @@
 # 消息管理–管理消息回执
 
-[[toc]]
+<Toc />
 
 用户在单聊和群聊中发送信息后，可以查看该信息的送达和已读状态，了解接收方是否及时收到并阅读了信息。
 
@@ -26,22 +26,19 @@
 已读回执：
 
 - 单聊会话及消息已读回执
-
-  1. 设置 `RequireAck` 为 `true`；
-  2. 消息接收方收到消息后，调用 API `SendConversationReadAck` 或 `SendMessageReadAck` 发送会话或消息已读回执；
-  3. 消息发送方通过监听 `OnConversationRead` 或 `OnMessageRead` 回调接收会话或消息已读回执。
-
+    1. 设置 `RequireAck` 为 `true`；
+    2. 消息接收方收到消息后，调用 API `SendConversationReadAck` 或 `SendMessageReadAck` 发送会话或消息已读回执；
+    3. 消息发送方通过监听 `OnConversationRead` 或 `OnMessageRead` 回调接收会话或消息已读回执。
 - 群聊只支持消息已读回执：
-
-  1. 你可以通过设置 `isNeedGroupAck` 开启群聊消息已读回执功能；
-  2. 消息接收方收到消息后通过 `SendReadAckForGroupMessage` 发送群组消息的已读回执。
+    1. 你可以通过设置 `isNeedGroupAck` 开启群聊消息已读回执功能；
+    2. 消息接收方收到消息后通过 `SendReadAckForGroupMessage` 发送群组消息的已读回执。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](https://docs-im.easemob.com/ccim/unity/quickstart)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)；
+- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)；
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
 - 在群组中实现消息已读回执功能默认不开启。如需使用，请联系商务开通。
 
 ## 实现方法
@@ -99,7 +96,7 @@ Options.RequireReadAck = true;
 
 1. 接收方发送会话已读回执。
 
-  消息接收方进入会话页面，查看会话中是否有未读消息。若有，发送会话已读回执，没有则不再发送。
+消息接收方进入会话页面，查看会话中是否有未读消息。若有，发送会话已读回执，没有则不再发送。
 
 ```csharp
 SDKClient.Instance.ChatManager.SendConversationReadAck(conversationId, new CallBack(
@@ -117,7 +114,6 @@ SDKClient.Instance.ChatManager.SendConversationReadAck(conversationId, new CallB
 ```csharp
 // 继承并实现 `IChatManagerDelegate`。
 public class ChatManagerDelegate : IChatManagerDelegate {
-
     // 收到已读回执。`from` 表示发送该会话已读回执的消息接收方，`to` 表示收到该会话已读回执的消息发送方。
     public void OnConversationRead(string from, string to)
     {
@@ -140,7 +136,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 1. 接收方发送已读回执消息。
 
-  消息接收方进入会话时，发送会话已读回执。
+消息接收方进入会话时，发送会话已读回执。
 
 ```csharp
 SDKClient.Instance.ChatManager.SendConversationReadAck(conversationId, new CallBack(
@@ -153,7 +149,7 @@ SDKClient.Instance.ChatManager.SendConversationReadAck(conversationId, new CallB
 ));
 ```
 
-  在会话页面，接收到消息时，根据消息类型发送消息已读回执，如下所示：
+在会话页面，接收到消息时，根据消息类型发送消息已读回执，如下所示：
 
 ```csharp
 // 继承并实现 `IChatManagerDelegate`。
@@ -202,7 +198,7 @@ public void sendReadAck(Message message) {
 
 2. 消息发送方监听消息已读回调。
 
-  你可以调用接口监听指定消息是否已读，示例代码如下：
+你可以调用接口监听指定消息是否已读，示例代码如下：
 
 ```csharp
 // 继承并实现 `IChatManagerDelegate`。
@@ -237,22 +233,22 @@ msg.IsNeedGroupAck = true;
 ```csharp
 void SendReadAckForGroupMessage(string messageId, string ackContent)
 {
-  SDKClient.Instance.ChatManager.SendReadAckForGroupMessage(messageId, ackContent，handle: new CallBack(
-              onSuccess: () =>
-              {
+    SDKClient.Instance.ChatManager.SendReadAckForGroupMessage(messageId, ackContent，handle: new CallBack(
+        onSuccess: () =>
+        {
 
-              },
-              onError: (code, desc) =>
-              {
+        },
+        onError: (code, desc) =>
+        {
 
-              }
-          ));
+        }
+    ));
 }
 ```
 
 3. 消息发送方监听群组消息已读回调。
 
-  群组消息已读回调在消息监听类 `IChatManagerDelegate` 中实现。
+群组消息已读回调在消息监听类 `IChatManagerDelegate` 中实现。
 
 ```csharp
 // 继承并实现 `IChatManagerDelegate`。
@@ -272,17 +268,16 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 4. 消息发送方获取群组消息的已读回执详情。
 
-  你可以调用 `FetchGroupReadAcks` 获取群组消息的已读回执的详情，示例代码如下：
+你可以调用 `FetchGroupReadAcks` 获取群组消息的已读回执的详情，示例代码如下：
 
 ```csharp
 SDKClient.Instance.ChatManager.FetchGroupReadAcks(messageId, groupId, startAckId, pageSize, new ValueCallBack<List<GroupReadAck>>(
-            onSuccess: (list) =>
-            {
-              // 页面刷新等操作。
-            },
-            onError: (code, desc) =>
-            {
-            }
-        ));
-
+    onSuccess: (list) =>
+    {
+        // 页面刷新等操作。
+    },
+    onError: (code, desc) =>
+    {
+    }
+));
 ```

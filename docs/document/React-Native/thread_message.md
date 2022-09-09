@@ -1,6 +1,6 @@
 # 消息-管理子区消息
 
-[[toc]]
+<Toc />
 
 子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍 即时通讯 IM React Native SDK 如何发送、接收以及撤回子区消息。
 
@@ -13,7 +13,7 @@
 - 撤回子区消息
 - 获取子区消息
 
-![img](@static/images/Android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 如上图所示，消息收发流程如下：
 
@@ -23,7 +23,7 @@
 
 子区创建和查看如下图：
 
-![img](@static/images/Android/threads.png)
+![img](@static/images/android/threads.png)
 
 ## 前提条件
 

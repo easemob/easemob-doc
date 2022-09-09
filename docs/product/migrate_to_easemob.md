@@ -1,6 +1,6 @@
 # 平滑迁移
 
-[[toc]]
+<Toc />
 
 环信多年来一直在致力于提供稳定，安全的即时通讯服务，在开发者中积累了良好的口碑。如果您希望接入环信的IM服务，但正在使用自研或友商提供的即时通讯服务，这篇文档正是针对这一场景，介绍了一套迁移方案，这套方案已经成功为多家客户实现了平滑迁移。
 
@@ -34,7 +34,7 @@
 
 环信只是即时通讯的消息通道。环信本身不提供除用户 ID 和密码外的其他资料。比如说，你的 APP 是一个婚恋交友 APP，那么你的 APP 用户的头像、昵称、身高、体重、三围、电话号码等信息是保存在你自己的 APP 业务服务器上，这些信息不需要告诉环信。
 
-[用户管理 REST API](/document/Server-side/account_system.html) 提供了一个创建环信账号的 REST 方法。这个方法很简单，只需要提供账号 ID 和密码 2 个参数，就可以创建一个环信账号。对一个已经上线，已经有很多现有用户的 APP 来说，要集成环信，只需要写一个脚本，循环调用创建环信用户的 REST 方法。
+[用户管理 REST API](/document/server-side/account_system.html) 提供了一个创建环信账号的 REST 方法。这个方法很简单，只需要提供账号 ID 和密码 2 个参数，就可以创建一个环信账号。对一个已经上线，已经有很多现有用户的 APP 来说，要集成环信，只需要写一个脚本，循环调用创建环信用户的 REST 方法。
 
 ### 2. 导入单聊和群聊信息至环信服务器
 
@@ -42,9 +42,9 @@
 
 对应的 REST API 如下：
 
-[REST 导入单聊消息](/document/Server-side/message.html#导入单聊消息)
+[REST 导入单聊消息](/document/server-side/message.html#导入单聊消息)
 
-[REST 导入群聊消息](/document/Server-side/message.html#导入群聊消息)
+[REST 导入群聊消息](/document/server-side/message.html#导入群聊消息)
 
 ### 3. 存量迁移工具
 
@@ -56,9 +56,9 @@
 
 具体可以参考：
 
-[Android 导入消息至本地数据库](/document/Android/message_manage.html#批量导入消息到数据库)
+[Android 导入消息至本地数据库](/document/android/message_manage.html#批量导入消息到数据库)
 
-[iOS 导入消息至本地数据库](/document/iOS/message_manage.html#批量导入消息到数据库)
+[iOS 导入消息至本地数据库](/document/ios/message_manage.html#批量导入消息到数据库)
 
 ## 新老兼容的平滑迁移
 
@@ -84,13 +84,13 @@
 
 消息回调为增值服务，需要联系商务开通，具体步骤可以参考如下文档：
 
-[消息回调](/document/Server-side/callback.html)
+[消息回调](/document/server-side/callback.html)
 
 #### 消息格式的转换
 
 环信 IM 服务的消息可能与旧的 IM 服务的消息格式稍有差别，需要用户自己实现格式的转换。 环信的消息支持文本消息，图片消息，语音消息，视频消息，位置消息等不同的类型，具体请参考：
 
-[消息数据格式](/document/Server-side/message.html#body-字段说明)
+[消息数据格式](/document/server-side/message.html#body-字段说明)
 
 用户也可以参考 Relay-server 此部分的实现。
 

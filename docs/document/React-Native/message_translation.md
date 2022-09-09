@@ -1,6 +1,6 @@
 # 翻译
 
-[[toc]]
+<Toc />
 
 为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM React Native SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对文本消息进行按需翻译或自动翻译：
 

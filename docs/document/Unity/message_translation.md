@@ -1,20 +1,19 @@
 # 翻译
 
-[[toc]]
+<Toc />
 
 为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对文本消息进行按需翻译或自动翻译：
 
 - 按需翻译：接收方在收到文本消息后，将消息内容翻译为目标语言。
-
 - 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-1. 完成 `1.0.6 以上版本` SDK 初始化，详见 [快速开始](../Unity/quick_start_unity.md)。
-2. 了解环信即时通讯 IM API 的 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
-3. 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通翻译功能。
+1. 完成 `1.0.6 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+3. 已在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 开通翻译功能。
 4. 该功能由 Microsoft Azure Translation API 提供，因此开始前请确保你了解该功能支持的目标语言。详见 [Language support](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/language-support)。
 
 ## 技术原理
@@ -93,10 +92,3 @@ foreach(var it in tb.Translations)
   Debug.Log($"Translate, lang:{it.Key}, result:{it.Value}");
 }
 ```
-
-## 参考
-
-### 设置和获取推送的目标语言
-
-设置推送的目标语言，设置之后收到的离线推送就会是目标语言，如果目标语言在消息里不存在，就以原文推送，详见（https://docs-im.easemob.com/ccim/web/push#%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E7%BF%BB%E8%AF%91）。
-

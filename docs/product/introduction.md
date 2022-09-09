@@ -1,6 +1,6 @@
 # 产品概述
 
-[[toc]]
+<Toc />
 
 环信即时通讯为开发者提供高可靠、低时延、高并发、安全、全球化的通信云服务，支持单聊、群聊、聊天室。提供多平台 SDK 支持，包括：Android、iOS、Web；同时，提供 EaseIM 和 EaseIMKit 以及服务端 REST API，帮助开发者快速构建端到端通信的场景。
 
@@ -14,21 +14,21 @@
 
 ![img](@static/images/product/integration-overview.png)
 
-服务端集成请看：[环信即时通讯 REST API 概览](/document/Server-side/overview.html)。
+服务端集成请看：[环信即时通讯 REST API 概览](/document/server-side/overview.html)。
 
 客户端 Demo 体验请查看：
 
-[Android Demo（EaseIM App）体验](/document/Android/demo.html)
+[Android Demo（EaseIM App）体验](/document/android/demo.html)
 
-[iOS Demo（EaseIM App）体验](/document/iOS/demo.html)
+[iOS Demo（EaseIM App）体验](/document/ios/demo.html)
 
 客户端集成请查看相应的环信 SDK 开发文档：
 
-[环信即时通讯 IM Android 快速入门](/document/Android/quickstart.html)；
+[环信即时通讯 IM Android 快速入门](/document/android/quickstart.html)；
 
-[环信即时通讯 IM iOS 快速入门](/document/iOS/quickstart.html)；
+[环信即时通讯 IM iOS 快速入门](/document/ios/quickstart.html)；
 
-[环信即时通讯 IM Web 快速入门](/document/Web/quickstart.html)。
+[环信即时通讯 IM Web 快速入门](/document/web/quickstart.html)。
 
 ## 功能概述
 

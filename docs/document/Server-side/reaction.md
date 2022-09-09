@@ -1,6 +1,6 @@
 # 消息表情回复 Reaction REST API
 
-[[toc]]
+<Toc />
 
 消息表情回复（下文统称 “Reaction” ）支持用户在单聊和群聊场景中对单条消息回复表情，从而增加用户聊天时的互动方式。本文主要介绍 Reaction 相关 REST API 接口。
 
@@ -30,7 +30,7 @@
 
 Authorization：`Bearer ${YourAppToken}`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 仅支持使用 app token 的鉴权方式，详见[[https://docs-im.easemob.com/ccim/authentication | 使用 app token 鉴权]]。
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 仅支持使用 app token 的鉴权方式，详见 [使用 app token 鉴权](easemob_app_token.html)。
 
 ## 创建/追加 Reaction
 
@@ -44,7 +44,7 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/reaction#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -55,7 +55,7 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 #### 请求 body
 
-| 参数      | 类型   | 是否必需 | 说明                                             |
+| 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 说明                                             |
 | --------- | ------ | -------- | ------------------------------------------------ |
 | `msgId`   | String | 必需     | 消息 ID。                                        |
 | `message` | String | 必需     | 表情 ID。长度不可超过 128 个字符。与客户端一致。允许的字符集包括：<br/> - 26 个大写字母 (A-Z)；<br/> - 26 个小写字母(a-z)；<br/> - 10 个数字(0-9)；<br/> - 特殊字符（建议不使用）：''*'' ''~'' ''!'' ''@'' ''#'' ''$'' ''('' '')'' ''_'' ''-'' ''='' ''?'' ''/'' ''.'' '','' ''<'' ''>'' ''''' '':'' '';'' ''！'' ''¥'' ''（'' ''）'' ''——'' ''【'' ''】'' ''、'' ''；'' ''“'' ''：'' ''？'' ''。'' ''，'' ''《'' ''》''。 |
@@ -77,9 +77,9 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 | `createAt`          | Instant | 创建时间。                                                  |
 | `updateAt`          | Instant | 修改时间。                                                  |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/reaction#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -122,7 +122,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/reaction#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -155,9 +155,9 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 | `state`             | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`: 是； <br/> - `false`：否。 |
 | `userList`          | Array  | 追加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/reaction#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -220,7 +220,7 @@ DELETE https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 ### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/reaction#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -247,9 +247,9 @@ DELETE https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 | `requestStatusCode` | String | 接口相应 code 状态。`OK` 表示操作成功。   |
 | `timestamp`         | long   | 请求响应的时间，Unix 时间戳，单位为毫秒。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/reaction#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -268,7 +268,7 @@ curl -g -X DELETE 'http://localhost:8089/easemob-demo/easeim/reaction/user/wz?ms
 }
 ```
 
-## 根据 消息 ID 和 表情 ID 获取 Reaction 信息
+## 根据消息 ID 和表情 ID 获取 Reaction 信息
 
 该方法根据指定的消息的 ID 和表情 ID 获取对应的 Reaction 信息，包括使用了该 Reaction 的用户名及用户人数。
 
@@ -280,7 +280,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/reaction#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -314,9 +314,9 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail
 | `userList`          | Array  | 追加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。 |
 | `cursor`            | String | 分页获取时使用，传入游标后便从游标起始的地方进行查询，类似于数据库 limit 1,5 中 1 的作用，可以理解为页码。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/reaction#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 

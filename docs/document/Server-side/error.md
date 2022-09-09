@@ -1,6 +1,6 @@
-## 常见错误代码
+# 常见错误代码
 
-[[toc]]
+<Toc />
 
 本文介绍 REST 接口调用后的返回结果响应码。可根据返回数据中的 error 字段判断具体错误。
 
@@ -10,7 +10,7 @@
 
 #### 返回示例
 
-[![REST API返回错误示例](https://docs-im.easemob.com/lib/exe/fetch.php?tok=6acf86&media=https%3A%2F%2Fdocs-im.easemob.com%2F_media%2Fstart%2F450errorcode%2Fresponse_icon.jpg)](https://docs-im.easemob.com/lib/exe/fetch.php?tok=6acf86&media=https%3A%2F%2Fdocs-im.easemob.com%2F_media%2Fstart%2F450errorcode%2Fresponse_icon.jpg)
+![REST API返回错误示例](@static/images/server-side/response_icon.jpeg)
 
 建议对 App 自己的服务器端调用的 REST API 结果做容错处理，比如：
 
@@ -19,7 +19,7 @@
 
 ## 索引 错误状态码
 
-| HTTP 返回码（Status Code） | 说明（Description）                                          |
+| HTTP 返回码（Status Code）<div style="width: 220px;"></div> | 说明（Description）                                          |
 | :------------------------- | :----------------------------------------------------------- |
 | 400                        | （错误请求）服务器不理解请求的语法。                         |
 | 401                        | （未授权）请求要求身份验证。对于需要 token 的接口，服务器可能返回此响应。 |
@@ -38,7 +38,7 @@
 
 ## 索引 错误结果说明
 
-| HTTP Status Code | Error                              | Error Description                                            | 可能原因                                                     |
+| HTTP Status Code<div style="width: 220px;"></div> | Error                              | Error Description                                            | 可能原因                                                     |
 | :--------------- | :--------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | 400              | invalid_grant                      | invalid username or password                                 | 用户名或者密码输入错误。                                     |
 | 400              | invalid_grant                      | “client_id does not match”                                   | “client_id does not match” 是 client_id 传入不正确，“client_secret does not match” 是 client_secret 传入不正确，client_id 以及 client_secret 在管理后台对应的应用详情中查看。 |
@@ -84,7 +84,7 @@
 | 413              | Request Entity Too Large           | “Request Entity Too Large”                                   | 请求体过大，如上传文件时文件过大；或发送消息时消息体过大，请求体如果超过 5kb 会导致 413 错误，需要拆成几个更小的请求体重试，同时用户消息+扩展字段的长度在 4k 字节以内。 |
 | 415              | web_application                    | “Unsupported Media Type”                                     | 请求体的类型不支持，请检查 header 是否添加 ”Content-Type”:“application/json”，body 是否符合标准的 JSON 格式，再确认 header 中是否还有非接口需要的参数，可以舍去。 |
 | 429              | resource_limited                   | “You have exceeded the limit of the Free edition. Please upgrade to higher edition.” | 说明触发了免费版限制，请联系环信客户经理咨询。               |
-| 429              | reach_limit                        | “This request has reached api limit”                         | 超过接口每秒调用次数，加大调用间隔或者联系商务调整限流大小，见 [限制条件](https://docs-im.easemob.com/ccim/limitation)。 |
+| 429              | reach_limit                        | “This request has reached api limit”                         | 超过接口每秒调用次数，加大调用间隔或者联系商务调整限流大小，见 [限制条件](/product/limitation.html)。 |
 | 500              | no_full_text_index                 | “Entity ‘user’ with property named ‘username’ is not full text indexed. You cannot use the ‘contains’ operand on this field” | username 不支持全文索引，不可以对该字段进行 contains 操作。  |
 | 500              | unsupported_service_operation      | “Service operation not supported”                            | 请求方式不被发送请求的 URL 支持。                            |
 | 500              | web_application                    | “javax.ws.rs.WebApplicationException”                        | 错误的请求，给一个未提供的 API 发送了请求。                  |

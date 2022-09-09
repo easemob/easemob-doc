@@ -1,6 +1,6 @@
 # 群组-管理群组成员
 
-[[toc]]
+<Toc />
 
 群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中实现群组成员管理相关功能。
 
@@ -19,9 +19,9 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](https://docs-im.easemob.com/ccim/unity/quickstart)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)；
-- 了解群成员角色，详见 [群组概述](https://docs-im.easemob.com/ccim/unity/group1)；
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
+- 了解群成员角色，详见 [群组概述](group_overview.html)；
 - 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
@@ -30,18 +30,18 @@
 
 ### 群组加人
 
-根据创建群组时的群组类型 (`GroupStyle`) 和进群邀请是否需要对方同意 (`inviteNeedConfirm`) 设置，群组加人的处理逻辑有差别。具体规则可以参考 [创建群组](https://docs-im.easemob.com/ccim/unity/group2#创建群组)。
+根据创建群组时的群组类型 (`GroupStyle`) 和进群邀请是否需要对方同意 (`inviteNeedConfirm`) 设置，群组加人的处理逻辑有差别。具体规则可以参考 [创建群组](group_manage.html#创建群组)。
 
 示例代码如下：
 
 ```csharp
 SDKClient.Instance.GroupManager.AddGroupMembers(groupId, members, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -53,12 +53,12 @@ SDKClient.Instance.GroupManager.AddGroupMembers(groupId, members, new CallBack(
 
 ```csharp
 SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, list, new CallBack (
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -72,12 +72,12 @@ SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, list, new CallBack (
 
 ```csharp
 SDKClient.Instance.GroupManager.ChangeGroupOwner(groupId, newOwner, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -91,12 +91,12 @@ SDKClient.Instance.GroupManager.ChangeGroupOwner(groupId, newOwner, new CallBack
 
 ```csharp
 SDKClient.Instance.GroupManager.AddGroupAdmin(groupId, adminId, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -108,12 +108,12 @@ SDKClient.Instance.GroupManager.AddGroupAdmin(groupId, adminId, new CallBack(
 
 ```csharp
 SDKClient.Instance.GroupManager.RemoveGroupAdmin(groupId, adminId, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -127,12 +127,12 @@ SDKClient.Instance.GroupManager.RemoveGroupAdmin(groupId, adminId, new CallBack(
 
 ```csharp
 SDKClient.Instance.GroupManager.BlockGroupMembers(groupId, members, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -144,12 +144,12 @@ SDKClient.Instance.GroupManager.BlockGroupMembers(groupId, members, new CallBack
 
 ```csharp
 SDKClient.Instance.GroupManager.UnBlockGroupMembers(groupId, members, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -161,12 +161,12 @@ SDKClient.Instance.GroupManager.UnBlockGroupMembers(groupId, members, new CallBa
 
 ```csharp
 SDKClient.Instance.GroupManager.GetGroupBlockListFromServer(groupId, pageNum, pageSize, handle: new ValueCallBack<List<string>>(
-  onSuccess: (list) =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: (list) =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -180,12 +180,12 @@ SDKClient.Instance.GroupManager.GetGroupBlockListFromServer(groupId, pageNum, pa
 
 ```csharp
 SDKClient.Instance.GroupManager.MuteGroupMembers(groupId, members, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -197,12 +197,12 @@ SDKClient.Instance.GroupManager.MuteGroupMembers(groupId, members, new CallBack(
 
 ```csharp
 SDKClient.Instance.GroupManager.UnMuteGroupMembers(groupId, members, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -214,11 +214,11 @@ SDKClient.Instance.GroupManager.UnMuteGroupMembers(groupId, members, new CallBac
 
 ```csharp
 SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, handle: new ValueCallBack<List<string>>(
-  onSuccess: (list) => {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: (list) => {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -230,11 +230,11 @@ SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, handle: new 
 
 ```csharp
 SDKClient.Instance.GroupManager.MuteGroupAllMembers(groupId, new CallBack(
-  onSuccess: () => {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () => {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -244,11 +244,11 @@ SDKClient.Instance.GroupManager.MuteGroupAllMembers(groupId, new CallBack(
 
 ```csharp
 SDKClient.Instance.GroupManager.UnMuteGroupAllMembers(groupId, new CallBack(
-  onSuccess: () => {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () => {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -262,11 +262,11 @@ SDKClient.Instance.GroupManager.UnMuteGroupAllMembers(groupId, new CallBack(
 
 ```csharp
 SDKClient.Instance.GroupManager.AddGroupWhiteList(groupId, members, new CallBack(
-  onSuccess: () => {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () => {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -278,11 +278,11 @@ SDKClient.Instance.GroupManager.AddGroupWhiteList(groupId, members, new CallBack
 
 ```csharp
 SDKClient.Instance.GroupManager.RemoveGroupWhiteList(groupId, members, new CallBack(
-  onSuccess: () => {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () => {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -293,10 +293,10 @@ SDKClient.Instance.GroupManager.RemoveGroupWhiteList(groupId, members, new CallB
 ```csharp
 public void checkIfInGroupWhiteList(final String groupId, EMValueCallBack<Boolean> callBack)
 SDKClient.Instance.GroupManager.CheckIfInGroupWhiteList(groupId, new ValueCallBack<bool>(
-  onSuccess: (ret) => {
-  },
-  onError: (code, desc)=> {
-  }
+    onSuccess: (ret) => {
+    },
+    onError: (code, desc)=> {
+    }
 ));
 ```
 
@@ -308,14 +308,14 @@ SDKClient.Instance.GroupManager.CheckIfInGroupWhiteList(groupId, new ValueCallBa
 
 ```csharp
 SDKClient.Instance.GroupManager.GetGroupWhiteListFromServer(currentGroupId, handle: new ValueCallBack<List<string>>(
-  onSuccess: (list) => {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: (list) => {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
 ### 更多
 
-- [监听器介绍](../unity/group_manage_unity.md)
+- [监听器介绍](group_manage.html#监听群组事件)

@@ -1,6 +1,6 @@
 # 管理用户关系
 
-[[toc]]
+<Toc />
 
 用户完成登录后，就会进行添加联系人、获取好友列表等操作。
 
@@ -28,8 +28,8 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](https://docs-im.easemob.com/ccim/unity/quickstart)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
@@ -55,7 +55,6 @@ SDKClient.Instance.ContactManager.AddContact(username, reason, handle: new CallB
 
   }
 ));
-
 ```
 
 #### 监听与好友请求相关的回调
@@ -65,7 +64,6 @@ SDKClient.Instance.ContactManager.AddContact(username, reason, handle: new CallB
 ```csharp
 //继承并实现 IContactManagerDelegate。
 public class ContactManagerDelegate : IContactManagerDelegate {
-
     // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 A 收到该事件，而用户 B 收到 `onContactAgreed` 事件。
     public void OnContactAdded(string username)
     {
@@ -94,7 +92,6 @@ SDKClient.Instance.ContactManager.AddContactManagerDelegate(adelegate);
 
 //移除监听器。
 SDKClient.Instance.ContactManager.RemoveContactManagerDelegate(adelegate);
-
 ```
 
 收到好友请求后，可以选择同意或拒绝加好友请求，示例代码如下：
@@ -146,9 +143,9 @@ SDKClient.Instance.ContactManager.DeleteContact(username, handle: new CallBack(
 
 你可以从服务器获取好友列表，也可以从本地数据库获取保存的好友列表。
 
-**注意**
-
+:::notice
 从服务器获取好友列表之后才能从本地数据库获取到好友列表。
+:::
 
 示例代码如下：
 
@@ -187,7 +184,6 @@ SDKClient.Instance.ContactManager.AddUserToBlockList(username, handle: new CallB
   {
   }
 ));
-
 ```
 
 #### 将用户从黑名单移除
@@ -203,7 +199,6 @@ SDKClient.Instance.ContactManager.RemoveUserFromBlockList(username, handle: new 
   {
   }
 ));
-
 ```
 
 #### 从服务器获取黑名单列表
@@ -219,5 +214,4 @@ SDKClient.Instance.ContactManager.GetBlockListFromServer(new ValueCallBack<List<
   {
   }
 ));
-
 ```

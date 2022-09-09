@@ -1,3 +1,3 @@
 # Android SDK logs
 
-[[toc]]
+<Toc />

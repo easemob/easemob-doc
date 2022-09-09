@@ -1,6 +1,6 @@
 # 在线状态订阅 Flutter
 
-[[toc]]
+<Toc />
 
 用户在线状态（即 Presence）包含用户的在线、离线以及自定义状态。
 
@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-环信 IM SDK 提供 `EMPresence`、`EMPresenceManager` 和 `EMPresenceManagerListener` 类，用于管理在线状态订阅，包含如下核心方法：
+环信 IM SDK 提供 `EMPresence`、`EMPresenceManager` 和 `EMPresenceEventHandler` 类，用于管理在线状态订阅，包含如下核心方法：
 
 - `publishPresence`：发布自定义在线状态；
 - `subscribe`：订阅用户的在线状态；
@@ -19,24 +19,24 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![img](https://docs-im.easemob.com/_media/ccim/android/2.9.2_presence_ios.png?w=600&tok=ad8168)
+![](@static/images/ios/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
-1、用户 A 订阅用户 B 的在线状态；
-2、用户 B 的在线状态发生变更；
-3、用户 A 收到 B 的状态变更通知。
+1. 用户 A 订阅用户 B 的在线状态；
+2. 用户 B 的在线状态发生变更；
+3. 用户 A 收到 B 的状态变更通知。
 
 效果如下图：
 
-![img](https://docs-im.easemob.com/_media/ccim/ios/status.png)
+![img](@static/images/ios/status.png)
 
 ## 前提条件
 
 使用在线状态功能前，请确保满足以下条件：
 
-1. 完成 `3.9.1 以上版本` SDK 初始化，详见 [快速开始](https://docs-im.easemob.com/ccim/flutter/quickstart)。
-2. 了解环信即时通讯 IM API 的[使用限制](https://docs-im.easemob.com/ccim/limitation)。
+1. 完成 `1.0.5 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 3. 已联系商务开通在线状态订阅功能。
 
 ## 实现方法
@@ -63,12 +63,12 @@ try {
 }
 ```
 
-在线状态变更时，订阅者会收到 `EMPresenceManagerListener#onPresenceStatusChanged` 回调。
+在线状态变更时，订阅者会收到 `EMPresenceEventHandler#onPresenceStatusChanged` 回调。
 
-**注意**
-
+:::notice
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
 - 每次调用接口最多只能订阅 100 个账号，若数量较大需多次调用。每个用户 ID 订阅的用户数不超过 3000。如果超过 3000，后续订阅也会成功，但默认会将订阅剩余时长较短的替代。
+:::
 
 ### 发布自定义在线状态
 
@@ -82,26 +82,30 @@ try {
 }
 ```
 
-在线状态发布后，发布者和订阅者均会收到 `EMPresenceManagerListener#onPresenceStatusChanged` 回调。
+在线状态发布后，发布者和订阅者均会收到 `EMPresenceEventHandler#onPresenceStatusChanged` 回调。
 
 ### 添加在线状态监听器
 
 添加用户在线状态的监听器以及接收状态变更事件通知，示例代码如下：
 
 ```dart
-class _ChatPageState extends State<ChatPage>
-    implements EMPresenceManagerListener {
+class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     super.initState();
     // 添加状态变化监听
-    EMClient.getInstance.presenceManager.addPresenceManagerListener(this);
+    EMClient.getInstance.presenceManager.addEventHandler(
+      "UNIQUE_HANDLER_ID",
+      EMPresenceEventHandler(
+        onPresenceStatusChanged: (list) => {},
+      ),
+    );
   }
 
   @override
   void dispose() {
     // 移除状态变化监听
-    EMClient.getInstance.presenceManager.removePresenceManagerListener(this);
+    EMClient.getInstance.presenceManager.removeEventHandler("UNIQUE_HANDLER_ID");
     super.dispose();
   }
 
@@ -109,9 +113,6 @@ class _ChatPageState extends State<ChatPage>
   Widget build(BuildContext context) {
     return Container();
   }
-
-  @override
-  void onPresenceStatusChanged(List<EMPresence> list) {}
 }
 ```
 

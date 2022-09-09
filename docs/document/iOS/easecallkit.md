@@ -1,6 +1,6 @@
 # iOS 端 EaseCallKit 使用指南
 
-[[toc]]
+<Toc />
 
 ## 功能概述
 
@@ -161,13 +161,13 @@ config.agoraAppId=@"声网 AppID";
 
 发起通话后的 UI 界面如下：
 
-<img src="@static/images/iOS/sendcall.png" width="400" />
+<img src="@static/images/ios/sendcall.png" width="400" />
 
 ### 收到邀请
 
 主叫方调用邀请接口后，如果被叫方在线且并未处于通话过程中，将弹出通话页面，被叫用户可选择接听或者拒绝。通话页面如下：
 
-<img src="@static/images/iOS/recvcall.png" width="400" />
+<img src="@static/images/ios/recvcall.png" width="400" />
 
 被叫振铃的同时，会触发以下回调：
 

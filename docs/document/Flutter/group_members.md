@@ -1,12 +1,12 @@
 # 管理群组成员
 
-[[toc]]
+<Toc />
 
 群组是支持多人沟通的即时通讯系统，本文指导你如何使用环信即时通讯 IM Flutter SDK 在实时互动 app 中实现群组成员管理相关功能。
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupManagerListener` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupEventHandler` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 群组加人、踢人
 - 管理群主及群管理员
@@ -19,9 +19,9 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](https://docs-im.easemob.com/ccim/flutter/quickstart)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)；
-- 了解群成员角色，详见 [群组概述](https://docs-im.easemob.com/ccim/flutter/group1)；
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
+- 了解群成员角色，详见 [群组概述](group_overview.html)；
 - 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
@@ -30,7 +30,7 @@
 
 ### 群组加人
 
-根据创建群组时的群组类型 (`EMGroupStyle`) 和进群邀请是否需要对方同意 (`EMGroupOptions#inviteNeedConfirm`) 设置，群组加人的处理逻辑有差别。具体规则可以参考[创建群组](Todo://添加链接)。
+根据创建群组时的群组类型 (`EMGroupStyle`) 和进群邀请是否需要对方同意 (`EMGroupOptions#inviteNeedConfirm`) 设置，群组加人的处理逻辑有差别。具体规则可以参考 [创建群组](group_manage.html#创建群组)。
 
 示例代码如下：
 
@@ -44,7 +44,7 @@ try {
 ### 群组踢人
 
 1. 仅群主和群管理员可以调用 `EMGroupManager#removeMembers` 方法将指定成员移出群组。
-2. 被移出群组后，该成员收到 `EMGroupManagerListener#onUserRemovedFromGroup` 回调，其他群成员收到 `EMGroupManagerListener#onMemberExitedFromGroup` 回调。
+2. 被移出群组后，该成员收到 `EMGroupEventHandler#onUserRemovedFromGroup` 回调，其他群成员收到 `EMGroupEventHandler#onMemberExitedFromGroup` 回调。
 3. 被移出群组后，该用户还可以再次加入群组。
 
 示例代码如下：
@@ -73,7 +73,7 @@ try {
 
 #### 添加群组管理员
 
-仅群主可以调用 `EMGroupManager#addAdmin` 方法添加群管理员。成功添加后，新管理员及其他管理员收到 `EMGroupManagerListener#onAdminAddedFromGroup` 回调。
+仅群主可以调用 `EMGroupManager#addAdmin` 方法添加群管理员。成功添加后，新管理员及其他管理员收到 `EMGroupEventHandler#onAdminAddedFromGroup` 回调。
 
 示例代码如下：
 
@@ -86,7 +86,7 @@ try {
 
 #### 移除群组管理员权限
 
-仅群主可以调用 `EMGroupManager#removeAdmin` 方法移除群管理员的管理权限。成功移除后，被移除的管理员及其他管理员收到 `EMGroupManagerListener#onAdminRemovedFromGroup` 回调。群组管理员的管理权限被移除后，将只拥有群成员的权限。
+仅群主可以调用 `EMGroupManager#removeAdmin` 方法移除群管理员的管理权限。成功移除后，被移除的管理员及其他管理员收到 `EMGroupEventHandler#onAdminRemovedFromGroup` 回调。群组管理员的管理权限被移除后，将只拥有群成员的权限。
 
 示例代码如下：
 
@@ -101,7 +101,7 @@ try {
 
 #### 将成员加入群组黑名单
 
-仅群主和群管理员可以调用 `EMGroupManager#blockMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupManagerListener#onUserRemovedFromGroup` 回调，其他群成员收到 `EMGroupManagerListener#onMemberExitedFromGroup` 回调。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
+仅群主和群管理员可以调用 `EMGroupManager#blockMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupEventHandler#onUserRemovedFromGroup` 回调，其他群成员收到 `EMGroupEventHandler#onMemberExitedFromGroup` 回调。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
 
 示例代码如下：
 
@@ -146,7 +146,7 @@ try {
 
 #### 将成员加入群组禁言列表
 
-仅群主和群管理员可以调用 `EMGroupManager#muteMembers` 方法将指定成员添加至群组禁言列表。被禁言后，该成员和其他未操作的管理员或者群主收到 `EMGroupManagerListener#onMuteListAddedFromGroup` 回调。群成员被加入群禁言列表后，不能在该群组中发言，即使被加入群白名单也不能发言。
+仅群主和群管理员可以调用 `EMGroupManager#muteMembers` 方法将指定成员添加至群组禁言列表。被禁言后，该成员和其他未操作的管理员或者群主收到 `EMGroupEventHandler#onMuteListAddedFromGroup` 回调。群成员被加入群禁言列表后，不能在该群组中发言，即使被加入群白名单也不能发言。
 
 示例代码如下：
 
@@ -162,7 +162,7 @@ try {
 
 #### 将成员移出群组禁言列表
 
-仅群主和群管理员可以调用 `EMGroupManager#unMuteMembers` 方法将指定成员移出群组禁言列表。被解除禁言后，该成员和其他未做操作的群管理员或者群主收到 `EMGroupManagerListener#onMuteListRemovedFromGroup` 回调。
+仅群主和群管理员可以调用 `EMGroupManager#unMuteMembers` 方法将指定成员移出群组禁言列表。被解除禁言后，该成员和其他未做操作的群管理员或者群主收到 `EMGroupEventHandler#onMuteListRemovedFromGroup` 回调。
 
 示例代码如下：
 
@@ -290,6 +290,6 @@ try {
 
 你可以参考如下文档，在项目中实现更多的群组相关功能：
 
-- [群组概述](https://docs-im.easemob.com/ccim/flutter/group1)
-- [创建和管理群组以及监听器介绍](https://docs-im.easemob.com/ccim/flutter/group2)
-- [群属性管理](https://docs-im.easemob.com/ccim/flutter/group4)
+- [群组概述](group_overview.html)
+- [创建和管理群组以及监听器介绍](group_manage.html)
+- [群属性管理](group_attributes.html)

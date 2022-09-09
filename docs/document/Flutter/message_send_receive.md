@@ -1,6 +1,6 @@
 # 消息管理–发送和接收消息
 
-[[toc]]
+<Toc />
 
 登录 Chat app 后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
 
@@ -20,14 +20,14 @@
 
 1. 发送方调用相应 Create 方法创建文本、文件、附件等类型的消息；
 2. 发送方再调用 `SendMessage` 发送消息；
-3. 接收方通过 `EMChatManagerListener` 中的方法监听消息回调事件。在收到 `onMessagesReceived` 后，即表示成功接收到消息。
+3. 接收方通过 `EMChatEventHandler` 中的方法监听消息回调事件。在收到 `onMessagesReceived` 后，即表示成功接收到消息。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](https://docs-im.easemob.com/ccim/flutter/quickstart)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
@@ -178,21 +178,25 @@ EMClient.getInstance.chatManager.sendMessage(message).then((value) {
 
 ### 接收消息
 
-你可以用注册 `EMChatManagerListener` 监听器接收消息。
+你可以用注册 `EMChatEventHandler` 监听器接收消息。
 
-该 `EMChatManagerListener` 可以多次添加。请记得在不需要的时候移除该监听器，如在 `dispose` 的卸载组件的时候。
+该 `EMChatEventHandler` 可以多次添加。请记得在不需要的时候移除该监听器，如在 `dispose` 的卸载组件的时候。
 
 在新消息到来时，你会收到 `onMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
 ```dart
-// 继承并实现 EMChatManagerListener
-class _ChatMessagesPageState extends State<ChatMessagesPage>
-    implements EMChatManagerListener {
+// 继承并实现 EMChatEventHandler
+class _ChatMessagesPageState extends State<ChatMessagesPage> {
   @override
   void initState() {
     super.initState();
     // 添加监听器
-    EMClient.getInstance.chatManager.addChatManagerListener(this);
+    EMClient.getInstance.chatManager.addEventHandler(
+      "UNIQUE_HANDLER_ID",
+      EMChatEventHandler(
+        onMessagesReceived: (list) => {},
+      ),
+    );
   }
 
   @override
@@ -203,39 +207,9 @@ class _ChatMessagesPageState extends State<ChatMessagesPage>
   @override
   void dispose() {
     // 移除监听器
-    EMClient.getInstance.chatManager.removeChatManagerListener(this);
+    EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
     super.dispose();
   }
-
-  @override
-  void messageReactionDidChange(List<EMMessageReactionChange> list) {}
-
-  @override
-  void onCmdMessagesReceived(List<EMMessage> messages) {}
-
-  @override
-  void onConversationRead(String from, String to) {}
-
-  @override
-  void onConversationsUpdate() {}
-
-  @override
-  void onGroupMessageRead(List<EMGroupMessageAck> groupMessageAcks) {}
-
-  @override
-  void onMessagesDelivered(List<EMMessage> messages) {}
-
-  @override
-  void onMessagesRead(List<EMMessage> messages) {}
-
-  @override
-  void onMessagesRecalled(List<EMMessage> messages) {}
-
-  @override
-  void onMessagesReceived(List<EMMessage> messages) {}
-
-  @override
-  void onReadAckForGroupMessageUpdated() {}
 }
 ```
 
@@ -310,7 +284,7 @@ try {
 设置消息撤回监听器：
 
 ```dart
-// 消息被撤回时触发的回调（此回调位于 EMChatManagerListener 中）。
+// 消息被撤回时触发的回调（此回调位于 EMChatEventHandler 中）。
 void onMessagesRecalled(List<EMMessage> messages) {}
 ```
 
@@ -318,8 +292,8 @@ void onMessagesRecalled(List<EMMessage> messages) {}
 
 你可以参考如下文档，在项目中实现更多的消息相关功能：
 
-- [消息概述](https://docs-im.easemob.com/ccim/flutter/message1);  
-- [管理本地消息数据](https://docs-im.easemob.com/ccim/flutter/message3)；
-- [从服务器获取会话和消息（消息漫游）](https://docs-im.easemob.com/ccim/flutter/message4)；
-- [获取消息的已读回执和送达回执](https://docs-im.easemob.com/ccim/flutter/message5)；
-- [实现翻译功能](https://docs-im.easemob.com/ccim/flutter/translation)。
+- [消息概述](message_overview.html);
+- [管理本地消息数据](message_manage.html)；
+- [从服务器获取会话和消息（消息漫游）](message_retrieve.html)；
+- [获取消息的已读回执和送达回执](message_receipt.html)；
+- [实现翻译功能](message_translation.html)。

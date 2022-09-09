@@ -1,13 +1,13 @@
 # Vue Demo（WebIM）介绍
 
-[[toc]]
+<Toc />
 
 环信即时通讯 WEB 端提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
 
 1. 在 [环信即时通讯云 IM 管理后台](https://console.easemob.com/user/login) 通过邮箱注册，可以看到默认的 Demo 应用（默认应用是全功能开通的应用）；
 2. 在上图页面 Demo 应用右侧点击 **查看**，选择 **开放注册**；
 
-![img](@static/images/Web/3.png)
+![img](@static/images/web/3.png)
 
 3. 打开 Demo，找到 `src/utils/WebIMConfig`；
 4. 将 Demo 的 App Key 填入，保存配置；
@@ -51,4 +51,4 @@ Demo 中有几大模块
 
 ## 部分 UI 展示
 
-![img](@static/images/Web/vue_demo.png)
+![img](@static/images/web/vue_demo.png)

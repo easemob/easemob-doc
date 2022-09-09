@@ -1,6 +1,6 @@
 # 发送后事件回调过滤规则设置
 
-[[toc]]
+<Toc />
 
 通过回调过滤规则的设置，可以根据需求选择回调中的有用信息。在环信管理后台设置发送后回调规则后，默认会回调所有事件信息，如需单独设置特定类型不回调，请联系环信商务经理。
 
@@ -16,7 +16,7 @@ app 的响应内容不能超过 1,000 个字符。
 
 ### 回调内容中单聊、群聊、聊天室事件的公共参数说明
 
-| 参数              | 类型   | 含义                                                                                                                                              |
+| 参数 | 类型   | 含义 |
 | :---------------- | :----- |:------------------------------------------------------------------------------------------------------------------------------------------------|
 | `callId`          | String | `callId` 为 `{appkey}_{uuid}` 其中 `uuid` 为随机生成，作为每条回调的唯一标识。                                                                                             |
 | `eventType`       | String | “chat” 上行消息、“chat_offline” 离线消息。                                                                                                                |
@@ -26,7 +26,7 @@ app 的响应内容不能超过 1,000 个字符。
 | `from`            | String | 消息的发送方。                                                                                                                                         |
 | `to`              | String | 消息的接收方。                                                                                                                                         |
 | `msg_id`          | String | 该回调消息的 ID。                                                                                                                                      |
-| `payload`         | object | 事件内容，与通过 REST API 发送过来的一致，查看[聊天记录数据结构文档](https://docs-im.easemob.com/im/server/basics/chatrecord#聊天记录数据结构)。                                     |
+| `payload`         | object | 事件内容，与通过 REST API 发送过来的一致，查看 [聊天记录数据结构文档](https://docs-im.easemob.com/im/server/basics/chatrecord#聊天记录数据结构)。                                     |
 | `securityVersion` | String | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。                                                                                                     |
 | `security`        | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 Console 后台回调规则。                                                                                 |
 | `appkey`          | String | 你在环信管理后台注册的应用唯一标识。                                                                                                                              |
@@ -62,9 +62,9 @@ app 的响应内容不能超过 1,000 个字符。
 
 ```json
 "payload":{
-        "ext":{},
-        "bodies":[{"msg":"rr","type":"txt"}]
-        }
+    "ext":{},
+    "bodies":[{"msg":"rr","type":"txt"}]
+}
 ```
 
 ##### 图片消息：
@@ -84,16 +84,16 @@ payload 示例：
 
 ```json
 "payload":{
-      "ext":{},
-      "bodies":[{
+    "ext":{},
+    "bodies":[{
         "filename":"image",
         "size":{"width":746,"height":1325},
         "secret":"EsYYqnkREeyZAUHNhFQyIhTJxWxvGOwyx1",
         "file_length":118179,
         "type":"img",
         "url":"https://XXXX.com/"
-        }]
-    }
+    }]
+}
 ```
 
 ##### 语音消息 payload 字段：
@@ -111,16 +111,16 @@ payload 示例：
 
 ```json
 "payload":{
-        "ext":{},
-        "bodies":[{
-            "filename":"audio",
-            "length":4,
-            "secret":"anmSynkREey91e0Ksmmt2Ym6AzpRr9SxsUpF",
-            "file_length":6374,
-            "type":"audio",
-            "url":"https://XXXX.com/"
-            }]
-        }
+    "ext":{},
+    "bodies":[{
+        "filename":"audio",
+        "length":4,
+        "secret":"anmSynkREey91e0Ksmmt2Ym6AzpRr9SxsUpF",
+        "file_length":6374,
+        "type":"audio",
+        "url":"https://XXXX.com/"
+    }]
+}
 ```
 
 ##### 视频消息：
@@ -156,8 +156,8 @@ payload 示例：
         "file_length":601404,
         "type":"video",
         "url":"https://XXXX.com/XXXX/XXXX/chatfiles/b85b3270-7a8b-11ec-9735-6922a85eb891"
-        }]
-        }
+    }]
+}
 ```
 
 ##### 位置消息：
@@ -172,14 +172,14 @@ payload 示例：
 
 ```json
 "payload":{
-     "ext":{},
-     "bodies":[{
+    "ext":{},
+    "bodies":[{
         "lng":116.32309156766605,
         "type":"loc",
         "addr":"********",
         "lat":39.96612729238626
-        }]
-    }
+    }]
+}
 ```
 
 ##### 自定义消息：
@@ -193,13 +193,13 @@ payload 示例：
 
 ```json
 "payload": {
-        "ext": {}, 
-        "bodies": [ { 
-            "customExts": [ {"name": 1 } ], 
-            "customEvent": "flower", 
-            "type": "custom" 
-            } ] 
-            }
+    "ext": {}, 
+    "bodies": [{ 
+        "customExts": [ {"name": 1 } ], 
+        "customEvent": "flower", 
+        "type": "custom" 
+    }] 
+}
 ```
 
 ### 群聊
@@ -239,7 +239,7 @@ payload 示例：
     "to":"user2",
     "msg_id":"8924312242322",
     "payload":{
-    // 具体的消息内容
+        // 具体的消息内容
     },
     "securityVersion":"1.0.0",
     "security":"2ca02c394bef9e7abc83958bcc3156d3"
@@ -283,11 +283,11 @@ payload 示例：
     "to":"user2",
     "msg_id":"8924312242322",
     "payload":{
-    // 具体的消息内容
+        // 具体的消息内容
     },
     "securityVersion":"1.0.0",
     "security":"2ca02c394bef9e7abc83958bcc3156d3"
- }
+}
 ```
 
 ### 消息撤回
@@ -309,7 +309,7 @@ payload 示例：
 | `to`              | String   | 消息的接收方。                                               |
 | `recall_id`       | String   | 要撤回的消息 ID。                                            |
 | `msg_id`          | String   | 该撤回事件消息的 ID。                                        |
-| `payload`         | object   | 事件内容，与通过 REST API 发送过来的一致，查看[聊天记录数据结构文档](https://docs-im.easemob.com/im/server/basics/chatrecord#聊天记录数据结构)。 |
+| `payload`         | object   | 事件内容，与通过 REST API 发送过来的一致，查看 [聊天记录数据结构文档](https://docs-im.easemob.com/im/server/basics/chatrecord#聊天记录数据结构)。 |
 | `securityVersion` | String   | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 Console 后台回调规则。 |
 | `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
@@ -327,22 +327,23 @@ payload 中字段含义：
 
 ```json
 {
- "chat_type":"recall",
- "callId":"orgname#appname_966475585536657404",
- "security":"ea7a867314fb0e0833d5f4f169eb4f8d",
- "payload":{
-     "ext":{},
-     "ack_message_id":"966475220900644860",
-     "bodies":[]},
- "host":"******",
- "appkey":"orgname#appname",
- "from":"tst",
- "recall_id":"966475220900644860",
- "to":"170908972023810",
- "eventType":"chat",
- "msg_id":"966475585536657404",
- "timestamp":1642589932646
- }
+    "chat_type":"recall",
+    "callId":"orgname#appname_966475585536657404",
+    "security":"ea7a867314fb0e0833d5f4f169eb4f8d",
+    "payload":{
+        "ext":{},
+        "ack_message_id":"966475220900644860",
+        "bodies":[]
+    },
+    "host":"******",
+    "appkey":"orgname#appname",
+    "from":"tst",
+    "recall_id":"966475220900644860",
+    "to":"170908972023810",
+    "eventType":"chat",
+    "msg_id":"966475585536657404",
+    "timestamp":1642589932646
+}
 ```
 
 ### 群组和聊天室操作
@@ -421,7 +422,7 @@ payload 字段含义：
     "eventType": "chat",
     "msg_id": "976459883882744164",
     "timestamp": 1644914583273
- }
+}
 ```
 
 #### 删除群/聊天室
@@ -1355,7 +1356,8 @@ payload 字段含义：
     "to": "1111", 
     "eventType":"chat", 
     "msg_id": "XXXX", 
-    "timestamp": 1644913174560 }
+    "timestamp": 1644913174560
+}
 ```
 
 #### 将群/聊天室成员禁言
@@ -2164,7 +2166,7 @@ payload 示例：
     "eventType":"chat",
     "msg_id":"9XXXX0",
     "timestamp":1642648046912
-    }
+}
 ```
 
 #### 解除拉黑好友
@@ -2197,7 +2199,7 @@ payload 示例：
     "eventType":"chat",
     "msg_id":"966725018736134200",
     "timestamp":1642648008357
-    }
+}
 ```
 
 #### 远程同意
@@ -2257,7 +2259,7 @@ payload 示例：
     "eventType": "chat", 
     "msg_id": "967182895737210928", 
     "timestamp": 1642754616149 
-    }
+}
 ```
 
 ### ack 事件
@@ -2349,7 +2351,7 @@ payload 示例：
     "version":"3.8.9.1",
     "timestamp":1642585154644,
     "status":"online"
-    }
+}
 ```
 
 #### 用户登出
@@ -2385,7 +2387,7 @@ payload 示例：
     "version":"3.8.9.1",
     "timestamp":1642648914742,
     "status":"offline"
-    }
+}
 ```
 
 #### 用户登出（被其他设备踢掉）
@@ -2420,7 +2422,7 @@ payload 示例：
     "version":"3.8.9.1",
     "timestamp":1642648955563,
     "status":"offline"
-    }
+}
 ```
 
 ### 敏感词监测
@@ -2451,7 +2453,7 @@ payload 示例：
 | `payload.data.reactions.op.reactionType`    | String| Reaction 当前操作类型。 |
 | `payload.data.reactions.op.operator`    | String | Reaction 当前操作人。 ｜
 
-其他字段见 [公共参数](https://docs-im.easemob.com/ccim/rest/callbackconfig#回调内容中单聊_群聊_聊天室事件的公共参数说明)。
+其他字段见 [公共参数](#回调内容中单聊_群聊_聊天室事件的公共参数说明)。
 
 回调请求示例：
 
@@ -2528,12 +2530,11 @@ payload 示例：
 | `payload.data.muc_parent_id` | String   | 创建 Thread 时所在的群组 ID。     |
 | `payload.data.last_message`  | JSON     | 最近一条消息的内容。              |
 
-其他字段见 [公共参数](https://docs-im.easemob.com/ccim/rest/callbackconfig#回调内容中单聊_群聊_聊天室事件的公共参数说明)。
+其他字段见 [公共参数](#回调内容中单聊_群聊_聊天室事件的公共参数说明)。
 
 回调请求示例：
 
 ```json
-
 {
     "chat_type": "notify",
     "payload":
@@ -2590,5 +2591,4 @@ payload 示例：
     "msg_id": "10XXXX24",
     "timestamp": 1651029973480
 }
-
 ```

@@ -1,6 +1,6 @@
 # 概述
 
-[[toc]]
+<Toc />
 
 介绍 React Native 集成相关内容。
 
@@ -75,7 +75,7 @@ ChatClient.getInstance()
 
 ### REST API 注册
 
-请参考 [注册用户](/document/Server-side/account_system.html#注册用户)。
+请参考 [注册用户](/document/server-side/account_system.html#注册用户)。
 
 ### SDK 注册
 
@@ -113,7 +113,7 @@ ChatClient.getInstance()
   });
 ```
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。 详见 [环信用户 token 的获取](/document/Server-side/easemob_user_token.html)。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。 详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
 ```typescript
 ChatClient.getInstance()

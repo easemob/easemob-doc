@@ -1,6 +1,6 @@
 # Flutter SDK 更新日志
 
-[[toc]]
+<Toc />
 
 ## 版本 V1.0.5 Dev 2022-6-217
 
@@ -13,16 +13,16 @@
 - 消息表情回复；
 - 管理子区等。
 
-关于详细功能概述请参见： [产品概述](https://docs-im.easemob.com/ccim/intro).
+关于详细功能概述请参见：[产品概述](/product/introduction.html).
 
 具体集成请参考以下文档：
 
-- [开通配置环信即时通讯 IM 服务](https://docs-im.easemob.com/ccim/config)
-- [环信即时通讯 IM Flutter 快速入门](https://docs-im.easemob.com/ccim/flutter/quickstart)
-- [消息管理 Flutter](https://docs-im.easemob.com/ccim/flutter/message1)
-- [群组 Flutter](https://docs-im.easemob.com/ccim/flutter/group1)
-- [聊天室 Flutter](https://docs-im.easemob.com/ccim/flutter/chatroom1)
-- [在线状态订阅 Flutter](https://docs-im.easemob.com/ccim/flutter/presence)
-- [消息表情回复 Flutter](https://docs-im.easemob.com/ccim/flutter/reaction)
-- [管理子区 Flutter](https://docs-im.easemob.com/ccim/flutter/thread2)
-- [Flutter API Reference]()
+- [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
+- [环信即时通讯 IM Flutter 快速入门](quickstart.html)
+- [消息管理 Flutter](message_overview.html)
+- [群组 Flutter](group_overview.html)
+- [聊天室 Flutter](room_overview.html)
+- [在线状态订阅 Flutter](presence.html)
+- [消息表情回复 Flutter](reaction.html)
+- [管理子区 Flutter](thread.html)
+- [Flutter API Reference](https://sdkdocs.easemob.com/apidoc/flutter/index.html)

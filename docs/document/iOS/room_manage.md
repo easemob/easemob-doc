@@ -1,6 +1,6 @@
 # 创建和管理聊天室以及监听器介绍
 
-[[toc]]
+<Toc />
 
 聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，用户离线后，超过 5 分钟会自动退出聊天室。聊天室成员在离线后，不会收到推送消息。聊天室可以应用于直播、消息广播等。
 
@@ -27,7 +27,7 @@
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 - 了解环信即时通讯 IM 不同版本的聊天室相关数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
-- 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/Server-side/chatroom.html#添加超级管理员)。
+- 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom.html#添加超级管理员)。
 - 聊天室创建者和管理员的数量之和不能超过 100 ，即管理员最多可添加 99 个。
 
 ## 实现方法
@@ -36,9 +36,9 @@
 
 ### 创建聊天室
 
-仅 [超级管理员](/document/Server-side/chatroom.html#管理超级管理员) 可以调用 `createChatroomWithSubject` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
+仅 [超级管理员](/document/server-side/chatroom.html#管理超级管理员) 可以调用 `createChatroomWithSubject` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
 
-你也可以直接调用 REST API [从服务端创建聊天室](/document/Server-side/chatroom.html#创建聊天室)。
+你也可以直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
 
 示例代码如下：
 

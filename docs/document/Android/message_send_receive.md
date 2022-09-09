@@ -1,6 +1,6 @@
 # 消息管理–发送和接收消息
 
-[[toc]]
+<Toc />
 
 登录 Chat app 后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
 
@@ -30,7 +30,7 @@
 2. 单聊消息时，服务器投递消息给用户 B；对于群聊时消息，服务器投递给群内其他每一个成员;
 3. 用户收到消息。
 
-![img](@static/images/Android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 

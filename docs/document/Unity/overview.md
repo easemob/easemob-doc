@@ -1,6 +1,6 @@
 # 集成概述
 
-[[toc]]
+<Toc />
 
 介绍 Unity 集成相关内容。
 
@@ -10,7 +10,7 @@
 
 ## 集成环境
 
-具体见 [集成环境要求](https://docs-im.easemob.com/ccim/unity/quickstart#前提条件)。
+具体见 [集成环境要求](quickstart.html#前提条件)。
 
 ## SDK 初始化
 
@@ -34,12 +34,12 @@ SDKClient.Instance.InitWithOptions(options);
 - `DebugMode`：是否启用日志输出功能。设置为 `true` 则会启用日志输出功能，在调试开发阶段帮助定位和分析问题。
 - `AcceptInvitationAlways`：是否自动接受申请。设置为 `true` 则当有人申请好友时，自动接受申请。
 - `AutoAcceptGroupInvitation`：是否自动接受邀请。设置为 `true` 则当有人邀请当前用户入群时，自动接受邀请。
-- `RequireAck`：是否需要发送已读回执。设置为 `true` 则消息需要已读回执。详见 [消息回执章节](https://docs-im.easemob.com/ccim/unity/message5)。
+- `RequireAck`：是否需要发送已读回执。设置为 `true` 则消息需要已读回执。详见 [消息回执章节](message_receipt.html)。
 - `RequireDeliveryAck`：是否需要发送送达回执。设置为 `true` 则消息需要送达回执。详见消息回执章节。
 - `DeleteMessagesAsExitGroup`：是否需要在离开群组时自动删除聊天历史消息。设置为 `true` 则在退出群组的时候，会删除聊天记录。
 - `DeleteMessagesAsExitRoom`：是否需要在离开聊天室时自动删除聊天历史消息。设置为 `true` 则在退出聊天室的时候，会删除记录。
-- `IsRoomOwnerLeaveAllowed`：是否允许聊天室所有者离开聊天室。设置为 `true` 则允许。详见 [聊天室](https://docs-im.easemob.com/ccim/unity/chatroom1) 章节。
-- `IsAutoDownload`: 是否开启自动下载。设置为 `true` 则收到图片、视频、音频、语音消息会自动下载。详见 [消息](https://docs-im.easemob.com/ccim/unity/message2#接收消息) 章节。
+- `IsRoomOwnerLeaveAllowed`：是否允许聊天室所有者离开聊天室。设置为 `true` 则允许。详见 [聊天室](room_overview.html) 章节。
+- `IsAutoDownload`: 是否开启自动下载。设置为 `true` 则收到图片、视频、音频、语音消息会自动下载。详见 [消息](message_send_receive.html#接收消息) 章节。
 
 ## 注册用户
 
@@ -51,7 +51,7 @@ SDKClient.Instance.InitWithOptions(options);
 
 ### REST API 注册
 
-请参考 [注册用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册用户)。
+请参考 [注册用户](/document/server-side/account_system.html#注册用户)。
 
 ### SDK 注册
 
@@ -74,7 +74,9 @@ SDKClient.Instance.CreateAccount(username, password,
 
 目前登录服务器有三种方式。通过 **用户 ID + 密码** 登录，通过 **用户 ID + token** 登录（Unity暂不支持），还有通过 **用户 ID + agoraToken** 登录。
 
-**请注意： 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。**
+:::notice
+使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
+:::
 
 ### 手动登录
 

@@ -1,6 +1,6 @@
 # 用户属性
 
-[[toc]]
+<Toc />
 
 ## 功能描述
 
@@ -8,9 +8,9 @@
 
 例如，在招聘场景下，利用用户属性功能，可以存储性别、邮箱、用户类型（面试者）、职位类型（web 研发）等。当查看用户信息时，可以直接查询服务器存储的用户属性信息。
 
-**注意**
-
+:::notice
 为保证用户信息安全，环信即时通讯 IM 仅支持用户本人或 app 管理员设置用户属性。
+:::
 
 可以调用以下 REST API 来实现用户属性功能：
 
@@ -26,8 +26,8 @@
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](https://docs-im.easemob.com/ccim/config)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](https://docs-im.easemob.com/ccim/limitationapi)。
+- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
@@ -65,7 +65,7 @@
 
 Authorization：`Bearer ${YourToken}`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的 鉴权方式，详见 [使用环信 App Token 鉴权](https://docs-im.easemob.com/ccim/authentication)。
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的 鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。
 
 ## 设置用户属性
 
@@ -81,7 +81,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/userprofile#公共参数)。
+参数及说明详见  [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -117,9 +117,9 @@ JSONString = ‘{“name”:“ken”, “employer”:“easemob”, “title”
 | :---------| :------------ | :------------------------- |
 | `data`    | JSON | 返回数据详情。包含你在本次请求中设置的用户属性键值对。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/userprofile#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应错误码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -159,7 +159,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/userprofile#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -178,9 +178,9 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 | :---------| :------------ | :------------------------- |
 | `data`    | Object | 用户属性键值对。|
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/userprofile#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应错误码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -220,11 +220,11 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/userprofile#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是   |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -246,9 +246,9 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 | :---------| :------------ | :------------------------- |
 | `data`    | Object | 用户属性键值对。|
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/userprofile#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应错误码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -309,7 +309,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/userprofile#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -327,9 +327,9 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 | :---------- | :-------------| :------------------------- |
 | `data`   |  Long   | 该 app 下所有用户属性的数据大小，单位为字节。 |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/userprofile#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应错误码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -363,7 +363,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/userprofile#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -381,9 +381,9 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 | :------| :----- | :------------------------- |
 | `data`   | Bool |  是否删除成功：<br/> - `true`：是；<br/> - `false`：否。    |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/userprofile#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应错误码](error.html) 了解可能的原因。
 
 ### 示例
 

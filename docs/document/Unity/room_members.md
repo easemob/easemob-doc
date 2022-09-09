@@ -1,6 +1,6 @@
 # 管理聊天室成员
 
-[[toc]]
+<Toc />
 
 聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。
 
@@ -20,8 +20,8 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](https://docs-im.easemob.com/ccim/unity/quickstart)；
-- 了解环信即时通讯 IM 的 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
+- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 - 了解环信即时通讯 IM 聊天室相关限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
@@ -56,10 +56,10 @@ SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, handle
 
 ```csharp
 SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
-  onSuccess: () => {
-  },
-  onError: (code, desc) => {
-  }
+    onSuccess: () => {
+    },
+    onError: (code, desc) => {
+    }
 ));
 ```
 
@@ -73,12 +73,12 @@ SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
 
 ```csharp
 SDKClient.Instance.RoomManager.BlockRoomMembers(roomId, members, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
+    onSuccess: () =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
 ));
 ```
 
@@ -90,10 +90,10 @@ SDKClient.Instance.RoomManager.BlockRoomMembers(roomId, members, new CallBack(
 
 ```csharp
 SDKClient.Instance.RoomManager.UnBlockRoomMembers(roomId, members, new CallBack(
-  onSuccess: () => {
-  },
-  onError: (code, desc) => {
-  }
+    onSuccess: () => {
+    },
+    onError: (code, desc) => {
+    }
 ));
 ```
 
@@ -105,11 +105,11 @@ SDKClient.Instance.RoomManager.UnBlockRoomMembers(roomId, members, new CallBack(
 
 ```csharp
 SDKClient.Instance.RoomManager.FetchRoomBlockList(roomId, pageNum, pageSize, handle: new ValueCallBack<List<string>>(
-  // list 类型为 List<string>。
-  onSuccess: (list) => {
-  },
-  onError: (code, desc) => {
-  }
+    // list 类型为 List<string>。
+    onSuccess: (list) => {
+    },
+    onError: (code, desc) => {
+    }
 ));
 ```
 
@@ -119,17 +119,18 @@ SDKClient.Instance.RoomManager.FetchRoomBlockList(roomId, pageNum, pageSize, han
 
 仅聊天室所有者和管理员可以调用 `MuteRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `OnMuteListAddedFromRoom` 回调。
 
-**注意**
+:::notice
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
+:::
 
 示例代码如下：
 
 ```csharp
 SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
-  onSuccess: () => {
-  },
-  onError: (code, desc) => {
-  }
+    onSuccess: () => {
+    },
+    onError: (code, desc) => {
+    }
 ));
 ```
 
@@ -137,17 +138,18 @@ SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
 
 仅聊天室所有者和管理员可以调用 `UnMuteRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，其他成员收到 `OnMuteListRemovedFromRoom` 回调。
 
-**注意**：
+:::notice
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。
+:::
 
 示例代码如下：
 
 ```csharp
 SDKClient.Instance.RoomManager.UnMuteRoomMembers(roomId, members, new CallBack(
-  onSuccess: () => {
-  },
-  onError: (code, desc) => {
-  }
+    onSuccess: () => {
+    },
+    onError: (code, desc) => {
+    }
 ));
 ```
 
@@ -216,4 +218,4 @@ SDKClient.Instance.RoomManager.RemoveRoomAdmin(roomId, adminId, new CallBack(
 
 ### 更多
 
-- [监听器介绍](../unity/chatroom_manage_unity.md)
+- [监听器介绍](group_manage.html#监听群组事件)

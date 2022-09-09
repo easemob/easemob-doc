@@ -1,6 +1,6 @@
 # 在多个设备上登录
 
-[[toc]]
+<Toc />
 
 环信即时通讯 IM 支持同一个用户 ID 在多个平台或者多个设备上登录；
 
@@ -15,14 +15,14 @@
 用户在 Flutter 端上初始化 SDK 时会生成设备识别 ID，用于多设备登录和推送。服务器会将新消息发送到已登录的设备。环信即时通讯 IM Flutter SDK 提供如下方法实现多个设备上的互动功能。
 
 - `getSelfIdsOnOtherPlatform` 获取其他登录设备的 ID；
-- `ChatMultiDeviceEventListener` 获取其他设备上进行的好友或者群组操作。
+- `MultiDeviceEventHandler` 获取其他设备上进行的好友或者群组操作。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](https://docs-im.easemob.com/ccim/rn/quickstart)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 了解环信即时通讯 IM 的套餐包，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
@@ -43,22 +43,24 @@ try {
 
 账号 A 同时在设备 A 和设备 B 上登录，账号 A 在设备 A 上进行一些操作，设备 B 上会收到这些操作对应的通知。
 
-你需要先实现 `EMMultiDeviceListener` 监听其他设备上的操作，再设置多设备监听器。
+你需要先实现 `EMMultiDeviceEventHandler` 监听其他设备上的操作，再设置多设备监听器。
 
 ```dart
-class _MultiDevicePageState extends State<MultiDevicePage>
-    implements EMMultiDeviceListener {
+class _MultiDevicePageState extends State<MultiDevicePage> {
   @override
   void initState() {
-    // 添加多设备监听
-    EMClient.getInstance.addMultiDeviceListener(this);
     super.initState();
+    // 添加多设备监听
+    EMClient.getInstance.addMultiDeviceEventHandler(
+      "UNIQUE_HANDLER_ID",
+      EMMultiDeviceEventHandler(),
+    );
   }
 
   @override
   void dispose() {
     // 移除多设备监听
-    EMClient.getInstance.removeMultiDeviceListener(this);
+    EMClient.getInstance.removeMultiDeviceEventHandler("UNIQUE_HANDLER_ID");
     super.dispose();
   }
 
@@ -66,13 +68,5 @@ class _MultiDevicePageState extends State<MultiDevicePage>
   Widget build(BuildContext context) {
     return Container();
   }
-
-  @override
-  void onContactEvent(
-      EMMultiDevicesEvent event, String username, String? ext) {}
-
-  @override
-  void onGroupEvent(
-      EMMultiDevicesEvent event, String groupId, List<String>? usernames) {}
 }
 ```

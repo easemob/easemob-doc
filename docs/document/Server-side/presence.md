@@ -1,8 +1,8 @@
 # 在线状态订阅 RESTful API
 
-[[toc]]
+<Toc />
 
-本文展示如何调用环信即时通讯 RESTful API 实现用户在线状态订阅，包括设置用户在线状态信息、批量订阅和获取在线状态、取消订阅以及查询订阅列表。调用以下方法前，请先参考[使用限制](https://docs-im.easemob.com/ccim/limitation)了解即时通讯 RESTful API 的调用频率限制。
+本文展示如何调用环信即时通讯 RESTful API 实现用户在线状态订阅，包括设置用户在线状态信息、批量订阅和获取在线状态、取消订阅以及查询订阅列表。调用以下方法前，请先参考 [使用限制](limitationapi.html) 了解即时通讯 RESTful API 的调用频率限制。
 
 使用该特性前，你需要联系商务开通。
 
@@ -36,7 +36,7 @@
 Authorization: Bearer ${YourAppToken}
 ```
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 建议使用 App Token 的鉴权方式，详见[使用 Token 鉴权](https://docs-im.easemob.com/ccim/authentication)。
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 建议使用 App Token 的鉴权方式，详见 [使用 Token 鉴权](easemob_app_token.html)。
 
 ## 设置用户在线状态信息
 
@@ -55,7 +55,7 @@ POST https://{host}/{org_name}/{app_name}/users/{uid}/presence/{resource}/{statu
 | `resource` | String | 设备来源，格式为设备类型 + resource ID，例如，android_123423453246。 | 是       |
 | `status`   | String | 端状态码。该参数的取值如下：<br> - `0`：离线；<br> - `1`：在线；<br> - 其他值：自定义在线状态。 | 是       |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/presence#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -82,7 +82,7 @@ POST https://{host}/{org_name}/{app_name}/users/{uid}/presence/{resource}/{statu
 | :------- | :----- | :--------------------------------------------------- |
 | `result` | String | 操作结果。设置成功返回’ok’，否则返回相应的错误原因。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -98,7 +98,7 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/c1/presence/a
 #### 响应示例
 
 ```json
-{"result":"ok"}%
+{"result":"ok"}
 ```
 
 ## 批量订阅在线状态
@@ -117,7 +117,7 @@ POST https://{host}/{org_name}/{app_name}/users/{uid}/presence/{expiry}
 | :------- | :----- | :--------------------------------- | :------- |
 | `expiry` | String | 订阅时长，单位为秒，最长为 30 天。 | 是       |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/presence#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -149,7 +149,7 @@ POST https://{host}/{org_name}/{app_name}/users/{uid}/presence/{expiry}
 | `ext`       | String     | 用户在线状态扩展信息，建议不超过 64 字节。                   |
 | `status`    | JSON Array | 用户多端的状态。该参数的取值如下：<br>  - `0`：离线；<br>  - `1`：在线；<br>  - 其他值：用户可设置其他值自定义在线状态。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -165,7 +165,7 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/
 #### 响应示例
 
 ```json
-{"result":[{"uid":"","last_time":"1644466063","expiry":"1645500371","ext":"123","status":{"android":"1","android_6b5610ac-4e11-4661-82b3-dee17bc7b2cc":"0"}},{"uid":"c3","last_time":"1645183991","expiry":"1645500371","ext":"","status":{"android":"0","android_6b5610ac-4e11-4661-82b3-dee17bc7b2cc":"0"}}]}%
+{"result":[{"uid":"","last_time":"1644466063","expiry":"1645500371","ext":"123","status":{"android":"1","android_6b5610ac-4e11-4661-82b3-dee17bc7b2cc":"0"}},{"uid":"c3","last_time":"1645183991","expiry":"1645500371","ext":"","status":{"android":"0","android_6b5610ac-4e11-4661-82b3-dee17bc7b2cc":"0"}}]}
 ```
 
 ## 批量获取在线状态信息
@@ -180,7 +180,7 @@ POST https://{host}/{org_name}/{app_name}/users/{uid}/presence
 
 #### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/presence#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -211,7 +211,7 @@ POST https://{host}/{org_name}/{app_name}/users/{uid}/presence
 | `ext`       | String     | 用户在线状态的扩展信息，建议不超过 64 字节。                 |
 | `status`    | JSON Array | 用户多端的状态。                                             |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -256,7 +256,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{uid}/presence
 
 ### 路径参数
 
-参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/presence#公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ### 请求 header
 
@@ -281,7 +281,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{uid}/presence
 | :------- | :----- | :--------------------------------------------- |
 | `result` | String | 取消成功返回“ok”；取消失败返回相应的错误原因。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -297,7 +297,7 @@ curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presenc
 #### 响应示例
 
 ```json
-{"result":"ok"}%
+{"result":"ok"}
 ```
 
 ## 查询订阅列表
@@ -317,7 +317,7 @@ GET https://{host}/{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&
 | `pageNum`  | int  | 要查询的页码。该参数的值须大于等于 1。          | 是       |
 | `pageSize` | int  | 每页显示的订阅用户数量。 该参数的值不得超 500。 | 是       |
 
-其他参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/presence#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -340,7 +340,7 @@ GET https://{host}/{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&
 | `uid`      | String | 用户在即时通讯服务器的唯一 ID。                              |
 | `expiry`   | String | 订阅的过期时间戳。                                           |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
 ### 示例
 

@@ -1,33 +1,30 @@
 # Uniapp 全平台方案简介
 
-[[toc]]
+<Toc />
 
 环信小程序 SDK 为各端小程序开发提供一套完整的技术解决方案，在各端小程序的开发环境下，集成 IM 相关的功能更加便捷、高效。让您的小程序快速获得安全稳定的 IM 能力，集成简单，使用方便，帮助您快速拓展业务，赢得先机。
 
-**注意：** `SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1.70.0 以下的版本基础库）、uni-app 编译的 原生 Android 以及 IOS。`
+:::notice
+SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1.70.0 以下的版本基础库）、uni-app 编译的 原生 Android 以及 IOS。
+:::
 
 ## 体验小程序
 
 扫描下方小程序二维码，或者微信搜索 **环信 IM Uniapp** 即可快速体验环信小程序 Demo 在线版本
 
-![img](https://docs-im.easemob.com/_media/im/applet/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%A0%81.jpg?w=600&tok=203c2b)
+![img](@static/images/applet/applet-demo.jpeg)
 
-**注意：**
-
-- 小程序 Demo 只包含部分 IM 功能，详细参考**功能说明**
-
-- Uni-app Demo Git 源码地址 https://github.com/easemob/webim-uniapp-demo
+:::notice
+- 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**
+- Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
+:::
 
 ## 功能说明
 
 - 支持账户注册登录
-
 - 支持 IM 基本功能收发文本、图片、语音、视频、音频、文件、透传、扩展消息等
-
 - 支持 群组聊天室功能
-
 - 支持个人设置
-
 - 支持发送语音功能
 
 ## 开发者集成
@@ -38,9 +35,8 @@
 
 ### 搭建开发环境
 
-1、下载 HBuilderx 编辑器 https://www.dcloud.io/hbuilderx.html
-
-2、DCloud 开发者中心注册 https://dev.dcloud.net.cn/
+1. 下载 HBuilderx 编辑器 [https://www.dcloud.io/hbuilderx.html](https://www.dcloud.io/hbuilderx.html)
+2. DCloud 开发者中心注册 [https://dev.dcloud.net.cn/](https://dev.dcloud.net.cn/)
 
 之后登陆 HBuilderx 编辑器。 至此小程序的开发环境差不多完成。
 
@@ -48,9 +44,10 @@
 
 ### 配置服务器域名（以微信为例）
 
-```
-为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。` `环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
-```
+
+为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
+
+环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
 
 | 数据中心      | REST API 请求地址                        | WebSocket 访问域名                                     |
 | ------------- | ---------------------------------------- | ------------------------------------------------------ |
@@ -62,52 +59,38 @@
 | 美东 1 区     | a41.easemob.com 或 a41.easecdn.com       | msync-api-41.easemob.com 或 msync-api-41.easecdn.com   |
 | 法兰克福 1 区 | a51.easemob.com 或 a51.easecdn.com       | msync-api-51.easemob.com 或 msync-api-51.easecdn.com   |
 
-`应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console中查看请求域名 `[![img](https://docs-im.easemob.com/_media/im/server/ready/console%E6%9F%A5%E7%9C%8B%E5%8F%AF%E7%94%A8%E5%8C%BA.jpg?w=800&tok=79849f)](https://docs-im.easemob.com/_detail/im/server/ready/console查看可用区.jpg?id=im%3Aapplet%3Auniapp)
+应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console中查看请求域名
 
-登录[微信公众平台](https://mp.weixin.qq.com/)，进入 “开发 > 开发设置” 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
+![img](@static/images/applet/console.jpeg)
 
-request 合法域名，uploadFile 合法域名，downloadFile 合法域名:
+登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 “开发 > 开发设置” 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
 
-1、https://a1.easemob.com
+:::tip request 合法域名，uploadFile 合法域名，downloadFile 合法域名
+1. https://a1.easemob.com
+2. https://a2.easemob.com
+3. https://a3.easemob.com
+4. https://a4.easemob.com
+5. https://a5.easemob.com
+6. https://a31.easemob.com
+7. https://a1-sgp.easemob.com
+8. https://a41.easemob.com
+9. https://a51.easemob.com
+:::
 
-2、https://a2.easemob.com
-
-3、https://a3.easemob.com
-
-4、https://a4.easemob.com
-
-5、https://a5.easemob.com
-
-6、https://a31.easemob.com
-
-7、https://a1-sgp.easemob.com
-
-8、https://a41.easemob.com
-
-9、https://a51.easemob.com
-
-socket合法域名:
-
-1、wss://im-api.easemob.com（2.0 IM SDK)
-
-2、wss://im-api-wechat.easemob.com（3.0 IM SDK）
-
-3、wss://im-api-wechat-31.easemob.com
-
-4、wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）
-
-5、wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）
-
+:::tip socket合法域名:
+1. wss://im-api.easemob.com（2.0 IM SDK)
+2. wss://im-api-wechat.easemob.com（3.0 IM SDK）
+3. wss://im-api-wechat-31.easemob.com
+4. wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）
+5. wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）
+:::
 
 
 ### 各端小程序 WebSocket 连接数量
 
 - QQ、微信小程序： `**1.7.0**` 及以上版本，最多可以同时存在 **5** 个 WebSocket 连接
-
 - 字节小程序： `**1.0.0**` 及以上版本 （在当前小程序页面已经有一个 WebSocket 连接的情况下，如果再创建一个 WebSocket 连接，会重新创建一个 WebSocket 连接，但是之前创建的 WebSocket 连接并不会自动关闭。）
-
 - 百度小程序：`**1.9.4**` 及以上版本，支持存在多个 WebSokcet 连接，每次成功调用会返回一个新的 SocketTask
-
 - 支付宝小程序：支付宝小程序在一段时间内只能保留一个 WebSocket 连接，如果当前已存在 WebSocket 连接，那么会自动关闭该连接，并重新创建一个新的 WebSocket 连接。
 
 ### 将 SDK 添加到自己的小程序
@@ -121,15 +104,15 @@ socket合法域名:
 #### 引入SDK
 
 - 开始一个全新的项目
-  1. 将 SDK 目录下（src/sdk/）的文件全部导入到自己的项目中。
-  2. 直接使用 import/require 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
+    1. 将 SDK 目录下（src/sdk/）的文件全部导入到自己的项目中。
+    2. 直接使用 import/require 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
 - 基于 Demo 二次开发
 
 拉取代码，HBuilder 运行
 
 #### 调用示例
 
-```
+```javascript
 //使用示例
 import websdk from "../newSDK/uni_sdk3.6.3";
 ```
@@ -138,7 +121,7 @@ import websdk from "../newSDK/uni_sdk3.6.3";
 
 实例化 SDK，并挂载在全局对象下
 
-```
+```javascript
 //实例化 SDK 对象
 const WebIM = wx.WebIM = SDK;
 WebIM.conn = new WebIM.connection({

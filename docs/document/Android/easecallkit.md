@@ -1,6 +1,6 @@
 # Android 端 EaseCallKit 使用指南
 
-[[toc]]
+<Toc />
 
 ## 功能概述
 
@@ -200,7 +200,7 @@ public void startInviteMultipleCall(final String[] users,final String ext){}
 
 发起通话后的 UI 界面如下：
 
-![img](@static/images/Android/sendcall.png)
+![img](@static/images/android/sendcall.png)
 
 ### 被叫收到通话邀请
 
@@ -220,7 +220,7 @@ void onRevivedCall(EaseCallType callType, String userId,String ext){}
 
 收到通话邀请后的界面如下:
 
-![img](@static/images/Android/called.jpeg)
+![img](@static/images/android/called.jpeg)
 
 ### 多人通话中邀请
 

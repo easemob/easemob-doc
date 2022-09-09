@@ -1,10 +1,7 @@
 # React Native 常见错误代码
 
-[[toc]]
+<Toc />
 
+[Android 平台](/document/android/error.html)
 
-[Android 平台](https://docs-im.easemob.com/ccim/android/errorcode)  
-
-
-
-[iOS 平台](https://docs-im.easemob.com/ccim/ios/errorcode)  
+[iOS 平台](/document/ios/error.html)  

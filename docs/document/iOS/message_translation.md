@@ -1,6 +1,6 @@
 # 翻译
 
-[[toc]]
+<Toc />
 
 文本消息支持翻译功能，包含按需翻译和自动翻译。
 
@@ -21,7 +21,7 @@
 
 如下为按需翻译示例：
 
-![img](@static/images/iOS/translation.png)
+![img](@static/images/ios/translation.png)
 
 ## 技术原理
 

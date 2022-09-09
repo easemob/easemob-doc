@@ -1,7 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  base: '/vuepress/',
   configureWebpack: {
     resolve: {
       alias: {
@@ -62,8 +61,8 @@ module.exports = {
             show: 不存在或者值为 true 时，菜单显示；存在并且值为 false 时，菜单不显示
           */
           { text: '产品简介', link: '/product/introduction.html' },
-          { text: '集成文档', link: '/document/Android/quickstart' },
-          { text: 'API 参考', link: '/api/Android' },
+          { text: '集成文档', link: '/document/android/quickstart' },
+          { text: 'API 参考', link: '/api/android' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
@@ -118,9 +117,9 @@ module.exports = {
                 { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html' },
                 { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html' },
                 { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html' },
-                { text: '快速开始（不使用 UIKIT）Android', link: '/document/Android/quickstart.html' },
-                { text: '快速开始（不使用 UIKIT）iOS', link: '/document/iOS/quickstart.html' },
-                { text: '快速开始（不使用 UIKIT）Web', link: '/document/Web/quickstart.html' }
+                { text: '快速开始（不使用 UIKIT）Android', link: '/document/android/quickstart.html' },
+                { text: '快速开始（不使用 UIKIT）iOS', link: '/document/ios/quickstart.html' },
+                { text: '快速开始（不使用 UIKIT）Web', link: '/document/web/quickstart.html' }
               ]
             },
             {
@@ -186,22 +185,22 @@ module.exports = {
               */
               title: '快速开始',
               children: [
-                { text: 'React Demo（WebIM）体验', link: 'demo_react.html', only: ['Web'] },
-                { text: 'Vue Demo（WebIM）体验', link: 'demo_vue.html', only: ['Web'] },
-                { text: 'Demo（EaseIM App）体验', link: 'demo.html', except: ['Web', 'Windows', 'React-Native', 'Flutter', 'Unity', 'Server-side'] },
-                { text: '快速开始（不使用 EaseIMKIT）', link: 'quickstart.html', except: ['Windows', 'React-Native', 'Flutter', 'Unity', 'Server-side'] },
-                { text: 'SDK 集成概述（不使用 EaseIMKIT）', link: 'overview.html', only: ['Android'] },
-                { text: '快速开始 （不使用 UIKit）', link: 'quickstart.html', only: ['Windows', 'React-Native', 'Flutter', 'Unity'] },
-                { text: 'SDK 集成概述（不使用 UIKit）', link: 'overview.html', only: ['Windows', 'React-Native', 'Unity'] },
-                { text: 'SDK 更新日志', link: 'releasenote.html', except: ['Server-side']},
-                { text: 'API reference', link: 'apireference.html', only: ['Android', 'iOS', 'Web', 'Windows', 'React-Native']},
-                { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['Server-side'] },
-                { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['Server-side'] },
-                { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['Server-side'] },
-                { text: 'IM 产品使用限制', link: 'limitation.html', only: ['Server-side'] },
-                { text: '接口频率限制', link: 'limitationapi.html', only: ['Server-side'] },
+                { text: 'React Demo（WebIM）体验', link: 'demo_react.html', only: ['web'] },
+                { text: 'Vue Demo（WebIM）体验', link: 'demo_vue.html', only: ['web'] },
+                { text: 'Demo（EaseIM App）体验', link: 'demo.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'server-side'] },
+                { text: '快速开始（不使用 EaseIMKIT）', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
+                { text: 'SDK 集成概述（不使用 EaseIMKIT）', link: 'overview.html', only: ['android'] },
+                { text: '快速开始 （不使用 UIKit）', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
+                { text: 'SDK 集成概述（不使用 UIKit）', link: 'overview.html', only: ['windows', 'react-native', 'unity'] },
+                { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
+                { text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},
+                { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
+                { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
+                { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
+                { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
+                { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
               ],
-              except: ['Applet']
+              except: ['applet']
             },
             {
               title: '基础功能',
@@ -212,8 +211,8 @@ module.exports = {
                   children: [
                     { text: '消息概述', link: 'message_overview.html' },
                     { text: '发送和接收消息', link: 'message_send_receive.html' },
-                    { text: '管理本地消息数据', link: 'message_manage.html', except: ['Web', 'React-Native'] },
-                    { text: '管理会话和消息', link: 'message_manage.html', only: ['React-Native'] },
+                    { text: '管理本地消息数据', link: 'message_manage.html', except: ['web', 'react-native'] },
+                    { text: '管理会话和消息', link: 'message_manage.html', only: ['react-native'] },
                     { text: '从服务器获取消息（消息漫游）', link: 'message_retrieve.html' },
                     { text: '管理消息回执', link: 'message_receipt.html' },
                     { text: '翻译', link: 'message_translation.html' },
@@ -242,12 +241,12 @@ module.exports = {
                   ]
                 },
               ],
-              except: ['Applet', 'Server-side']
+              except: ['applet', 'server-side']
             },
             {
               title: '进阶功能',
               children: [
-                { text: '设置推送', link: 'push.html', except: ['Windows', 'React-Native', 'Flutter', 'Unity'] },
+                { text: '设置推送', link: 'push.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
                 { text: '登录多个设备', link: 'multi_device.html' },
                 { text: '管理在线状态订阅', link: 'presence.html' },
                 { text: '消息表情回复', link: 'reaction.html' },
@@ -259,20 +258,20 @@ module.exports = {
                     { text: '管理子区消息', link: 'thread_message.html' }
                   ]
                 },
-                { text: '消息审核（举报）', link: 'moderation.html', except: ['React-Native', 'Flutter'] },
-                { text: '消息举报', link: 'moderation.html', only: ['React-Native', 'Flutter'] },
+                { text: '消息审核（举报）', link: 'moderation.html', except: ['react-native', 'flutter'] },
+                { text: '消息举报', link: 'moderation.html', only: ['react-native', 'flutter'] },
               ],
-              except: ['Applet', 'Server-side']
+              except: ['applet', 'server-side']
             },
             {
               title: '其他',
               children: [
                 { text: '错误码', link: 'error.html' },
-                { text: 'EaseIMKit 使用指南', link: 'easeimkit.html', except: ['Web', 'Windows', 'React-Native', 'Flutter', 'Unity'] },
-                { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['Web', 'Windows', 'React-Native', 'Flutter', 'Unity'] },
-                { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['Web', 'Windows', 'React-Native', 'Flutter', 'Unity'] },
+                { text: 'EaseIMKit 使用指南', link: 'easeimkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
+                { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
+                { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
               ],
-              except: ['Applet', 'Server-side']
+              except: ['applet', 'server-side']
             },
             {
               title: '产品介绍',
@@ -280,7 +279,7 @@ module.exports = {
                 { text: '环信小程序全平台解决方案', link: 'overview.html' },
                 { text: '小程序 SDK 更新日志', link: 'releasenote.html' },
               ],
-              only: ['Applet']
+              only: ['applet']
             },
             {
               title: '集成介绍',
@@ -293,7 +292,7 @@ module.exports = {
                 { text: 'Uniapp 全平台', link: 'uniapp.html' },
                 { text: '小程 API 文档', link: 'apidoc.html' },
               ],
-              only: ['Applet']
+              only: ['applet']
             },
             {
               title: '基本功能',
@@ -305,7 +304,7 @@ module.exports = {
                 { text: '群组', link: 'group_overview.html' },
                 { text: '聊天室', link: 'room_overview.html' },
               ],
-              only: ['Applet']
+              only: ['applet']
             },
             {
               title: '其他帮助',
@@ -314,7 +313,7 @@ module.exports = {
                 { text: '小程序模板使用指南', link: 'uniappuikit.html' },
                 { text: '如何配置服务器域名', link: 'serverconfig.html' },
               ],
-              only: ['Applet']
+              only: ['applet']
             },
             {
               title: '服务端 REST API',
@@ -330,7 +329,7 @@ module.exports = {
                 { text: '在线状态订阅', link: 'presence.html' },
                 { text: '消息表情回复', link: 'reaction.html' },
               ],
-              only: ['Server-side']
+              only: ['server-side']
             },
             {
               title: 'Server SDK',
@@ -338,14 +337,14 @@ module.exports = {
                 { text: 'Java Server SDK', link: 'java_server_sdk.html' },
                 { text: 'PHP Server SDK', link: 'php_server_sdk.html' },
               ],
-              only: ['Server-side']
+              only: ['server-side']
             },
             {
               title: '错误码',
               children: [
                 { text: '错误码', link: 'error.html' }
               ],
-              only: ['Server-side']
+              only: ['server-side']
             },
             {
               title: '设置回调',
@@ -354,7 +353,7 @@ module.exports = {
                 { text: '用户状态回调', link: 'user_status_callback.html' },
                 { text: '发送后回调-事件回调', link: 'callback_configurations.html' }
               ],
-              only: ['Server-side']
+              only: ['server-side']
             }
           ]
         },
@@ -389,28 +388,28 @@ module.exports = {
             title: '平台',
             children: [
               {
-                key: 'Android',
+                key: 'android',
                 title: 'Android',
                 icon: 'icon-Android.svg',
                 hover_icon: 'icon-Android-hover.svg',
                 uri: 'quickstart.html'
               },
               {
-                key: 'iOS',
+                key: 'ios',
                 title: 'iOS',
                 icon: 'icon-iOS.svg',
                 hover_icon: 'icon-iOS-hover.svg',
                 uri: 'quickstart.html'
               },
               {
-                key: 'Web',
+                key: 'web',
                 title: 'Web',
                 icon: 'icon-web.svg',
                 hover_icon: 'icon-web-hover.png',
                 uri: 'quickstart.html'
               },
               {
-                key: 'Windows',
+                key: 'windows',
                 title: 'Windows',
                 icon: 'icon-windows.svg',
                 hover_icon: 'icon-windows-hover.svg',
@@ -422,28 +421,28 @@ module.exports = {
             title: '框架',
             children: [
               {
-                key: 'React-Native',
+                key: 'react-native',
                 title: 'React Native',
                 icon: 'icon-ReactNative.svg',
                 hover_icon: 'icon-ReactNative-hover.svg',
                 uri: 'quickstart.html'
               },
               {
-                key: 'Flutter',
+                key: 'flutter',
                 title: 'Flutter',
                 icon: 'icon-flutter.svg',
                 hover_icon: 'icon-flutter-hover.png',
                 uri: 'quickstart.html'
               },
               {
-                key: 'Unity',
+                key: 'unity',
                 title: 'Unity',
                 icon: 'icon-unity.svg',
                 hover_icon: 'icon-unity-hover.svg',
                 uri: 'quickstart.html'
               },
               {
-                key: 'Applet',
+                key: 'applet',
                 title: '小程序',
                 icon: 'icon-mini-program.svg',
                 hover_icon: 'icon-mini-program-hover.svg',
@@ -455,13 +454,14 @@ module.exports = {
             title: '',
             children: [
               {
-                key: 'Server-side',
+                key: 'server-side',
                 title: '服务端',
                 icon: 'icon-server-dark.png',
                 hover_icon: 'icon-server-light.png',
                 uri: 'enable_and_configure_IM.html'
               }
-            ]
+            ],
+            only: ['document']
           }
         ],
         lastUpdated: '更新时间：'
@@ -484,8 +484,8 @@ module.exports = {
             show: 不存在或者值为 true 时，菜单显示；存在并且值为 false 时，菜单不显示
           */
           { text: 'Product introduction', link: '/en/product/introduction.html' },
-          { text: 'Integration document', link: '/en/document/Android/quickstart.html' },
-          { text: 'API reference', link: '/en/api/Android/' },
+          { text: 'Integration document', link: '/en/document/android/quickstart.html' },
+          { text: 'API reference', link: '/en/api/android/' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
@@ -576,8 +576,8 @@ module.exports = {
               */
               title: 'Quick start',
               children: [
-                { text: 'Quick start', link: 'quickstart.html', only: ['Android', 'iOS'] },
-                { text: 'SDK logs', link: 'releasenotes.html', except: ['iOS'] }
+                { text: 'Quick start', link: 'quickstart.html', only: ['android', 'ios'] },
+                { text: 'SDK logs', link: 'releasenotes.html', except: ['ios'] }
               ]
             },
           ]
@@ -614,28 +614,28 @@ module.exports = {
             title: 'Platform',
             children: [
               {
-                key: 'Android',
+                key: 'android',
                 title: 'Android',
                 icon: 'icon-Android.svg',
                 hover_icon: 'icon-Android-hover.svg',
                 uri: 'quickstart.html'
               },
               {
-                key: 'iOS',
+                key: 'ios',
                 title: 'iOS',
                 icon: 'icon-iOS.svg',
                 hover_icon: 'icon-iOS-hover.svg',
                 uri: 'quickstart.html'
               },
               {
-                key: 'Web',
+                key: 'web',
                 title: 'Web',
                 icon: 'icon-web.svg',
                 hover_icon: 'icon-web-hover.png',
                 uri: 'quickstart.html'
               },
               {
-                key: 'Windows',
+                key: 'windows',
                 title: 'Windows',
                 icon: 'icon-windows.svg',
                 hover_icon: 'icon-windows-hover.svg',
@@ -647,25 +647,25 @@ module.exports = {
             title: 'Framework',
             children: [
               {
-                key: 'React-Native',
+                key: 'react-native',
                 title: 'React Native',
                 icon: 'icon-ReactNative.svg',
                 hover_icon: 'icon-ReactNative-hover.svg',
               },
               {
-                key: 'Flutter',
+                key: 'flutter',
                 title: 'Flutter',
                 icon: 'icon-flutter.svg',
                 hover_icon: 'icon-flutter-hover.png',
               },
               {
-                key: 'Unity',
+                key: 'unity',
                 title: 'Unity',
                 icon: 'icon-unity.svg',
                 hover_icon: 'icon-unity-hover.svg',
               },
               {
-                key: 'Applet',
+                key: 'applet',
                 title: 'Applet',
                 icon: 'icon-mini-program.svg',
                 hover_icon: 'icon-mini-program-hover.svg',
@@ -676,7 +676,7 @@ module.exports = {
             title: '',
             children: [
               {
-                key: 'Server-side',
+                key: 'server-side',
                 title: 'Server-side',
                 icon: 'icon-server-dark.png',
                 hover_icon: 'icon-server-light.png',

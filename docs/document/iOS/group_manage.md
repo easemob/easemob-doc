@@ -1,6 +1,6 @@
 # 创建和管理群组
 
-[[toc]]
+<Toc />
 
 群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
 
@@ -49,7 +49,7 @@
             
 流程如下：
 
-![img](@static/images/iOS/group.png)
+![img](@static/images/ios/group.png)
 
 - 进群邀请无需用户确认 (`IsInviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无视用户的 `isAutoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到 `EMGroupManagerDelegate#didJoinGroup` 回调；群主收到每个已加入成员对应的群组事件回调 `EMGroupManagerDelegate#groupInvitationDidAccept` 和 `EMGroupManagerDelegate#userDidJoinGroup`；先加入的群成员会收到群组事件回调 `EMGroupManagerDelegate#userDidJoinGroup`。
 

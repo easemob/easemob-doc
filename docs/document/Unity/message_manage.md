@@ -1,6 +1,6 @@
 # 消息管理–管理本地消息数据
 
-[[toc]]
+<Toc />
 
 本文介绍环信即时通讯 IM SDK 如何管理本地消息数据。SDK 内部使用 SQLite 保存本地消息，方便消息处理。
 
@@ -24,8 +24,8 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](https://docs-im.easemob.com/ccim/unity/quickstart)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
@@ -108,11 +108,11 @@ conv.DeleteMessage(msgId);
 ```csharp
 //从服务器端删除和特定 ID 的会话，如果需要保留聊天记录，第三个参数传 `false`。
 SDKClient.Instance.ChatManager.DeleteConversationFromServer(conversationId, type, true, new CallBack(
-                onSuccess: () => {
-                },
-                onError: (code, desc) => {
-                }
-            ));
+    onSuccess: () => {
+    },
+    onError: (code, desc) => {
+    }
+));
 ```
 
 ### 根据关键字搜索会话消息

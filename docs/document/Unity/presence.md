@@ -1,6 +1,6 @@
 # 在线状态订阅
 
-[[toc]]
+<Toc />
 
 用户在线状态（即 Presence）包含用户的在线、离线以及自定义状态。
 
@@ -20,7 +20,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-[![img]](https://docs-im.easemob.com/_detail/ccim/android/2.9.2_presence_ios.png?id=ccim%3Aandroid%3Apresence)
+![img](@static/images/android/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -30,14 +30,14 @@
 
 效果如下图：
 
-[![img]](https://docs-im.easemob.com/_detail/ccim/ios/status.png?id=ccim%3Aandroid%3Apresence)
+![img](@static/images/android/status.png)
 
 ## 前提条件
 
 使用在线状态功能前，请确保满足以下条件：
 
-1. 完成 `1.0.6 以上版本` SDK 初始化，详见 [快速开始](../Unity/quick_start_unity.md)。
-2. 了解环信即时通讯 IM API 的[使用限制](https://docs-im.easemob.com/ccim/limitation)。
+1. 完成 `1.0.6 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 3. 已联系商务开通在线状态订阅功能。
 
 ## 实现方法
@@ -69,10 +69,10 @@ SDKClient.Instance.PresenceManager.SubscribePresences(members, expiry, new Value
 
 在线状态变更时，订阅者会收到 `IPresenceManagerDelegate#OnPresenceUpdated` 回调。
 
-**注意**
-
+:::notice
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
 - 每次调用接口最多只能订阅 100 个账号，若数量较大需多次调用。每个用户 ID 订阅的用户数不超过 3000。如果超过 3000，后续订阅也会成功，但默认会将订阅剩余时长较短的替代。
+:::
 
 ### 发布自定义在线状态
 

@@ -1,3 +1,3 @@
 # Interface frequency limit
 
-[[toc]]
+<Toc />

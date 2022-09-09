@@ -1,6 +1,6 @@
 # 管理子区消息
 
-[[toc]]
+<Toc />
 
 子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `IsThread` 标记。本文介绍环信即时通讯 IM windows SDK 如何发送、接收以及撤回子区消息。
 
@@ -19,11 +19,11 @@
 2. 单聊时消息时，服务器投递消息给用户 B；对于群聊时消息，服务器投递给群内其他每一个成员；对于子区消息，服务器投递给子区内其他每一个成员；
 3. 用户收到消息。
 
-![](@static/images/Android/sendandreceivemsg.png)
+![](@static/images/android/sendandreceivemsg.png)
 
 子区创建和查看如下图：
 
-![](@static/images/Android/threads.png)
+![](@static/images/android/threads.png)
 
 ## 前提条件
 

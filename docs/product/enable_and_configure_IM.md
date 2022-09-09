@@ -1,6 +1,6 @@
 # 开通配置环信即时通讯 IM 服务
 
-[[toc]]
+<Toc />
 
 ## 前提条件
 
@@ -148,7 +148,7 @@
 
 ![img](@static/images/product/push-callback-window.png)
 
-4. 在 **回调配置** 窗口中，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置，具体配置内容说明见 [回调配置](/document/Server-side/callback.html#实现步骤)。
+4. 在 **回调配置** 窗口中，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置，具体配置内容说明见 [回调配置](/document/server-side/callback.html#实现步骤)。
 
 ![img](@static/images/product/push-callback-form.png)
 

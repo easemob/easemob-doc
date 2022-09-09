@@ -1,68 +1,68 @@
 # 小程序 SDK 更新日志
 
-[[toc]]
+<Toc />
 
-### 版本 V4.0.9 Dev 2022-7-29
+## 版本 V4.0.9 Dev 2022-7-29
 
-#### 新增特性
+### 新增特性
 
 - [IM SDK] 优化协议，减少数据量。
 - [IM SDK] SDK 内部在群组聊天室部分 API 请求时增加 `resourceId`，增加操作的多设备通知提醒。
 - [IM SDK] [getJoinedGroups](https://docs-im.easemob.com/ccim/web/group2#获取群组列表) 增加请求参数支持返回群组成员人数和自己的角色。
 
-### 版本 V4.0.8 Dev 2022-6-17
+## 版本 V4.0.8 Dev 2022-6-17
 
-#### 新增特性
+### 新增特性
 
 - [IM SDK] 新增群组事件回调 [onGroupEvent](https://webim-h5.easemob.com/jsdoc/out/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://webim-h5.easemob.com/jsdoc/out/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
-- [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](https://docs-im.easemob.com/ccim/web/errorcode)
+- [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](/document/web/error.html)
 - [IM SDK] 邀请加入群聊回调 `onGroupChange` 返回中新增 群名称 参数值。
 
-#### 优化
+### 优化
 
-- [IM SDK] 支持批量查询群组详情 [getGroupInfo](https://docs-im.easemob.com/ccim/web/group2#获取群组详情信息)。
+- [IM SDK] 支持批量查询群组详情 [getGroupInfo](/document/web/group_manage.html#获取群组详情信息)。
 
-### 版本 V4.0.7 Dev 2022-5-25
+## 版本 V4.0.7 Dev 2022-5-25
 
-#### 新增特性:
+### 新增特性:
 
 - [IM SDK] 新增消息子区（message thread）功能；
-- [IM SDK] 新增 [getConversationList](https://docs-im.easemob.com/ccim/web/message3#从服务器获取消息) 方法解析会话中的最新一条消息；
+- [IM SDK] 新增 [getConversationList](/document/web/message_retrieve.html) 方法解析会话中的最新一条消息；
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 消息事件监听器中新增 onlineState 字段标记离线消息。
 
-### 版本 V4.0.5 Dev 2022-5-16
+## 版本 V4.0.5 Dev 2022-5-16
 
-#### 新增特性:
+### 新增特性:
 
 - [IM SDK] 新增举报 API 用于内容审核；
 - [IM SDK] 新增推送设置 API，支持不同的推送配置；
 - [IM SDK] 增加数据上报功能；
 - [IM SDK] 新增获取加入的群组支持分页 API；
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 创建群组时，支持设置群组人数；
 - [IM SDK] 接收到的图片消息增加缩略图 URL；
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 解决切换账号群组消息有缓存的 BUG。
 
-### 版本 V4.0.4 Dev 2022-4-19
+## 版本 V4.0.4 Dev 2022-4-19
 
-#### 新增特性:
+### 新增特性:
 
 - [IM SDK] 增加用户在线状态(Presence)订阅功能。
 - [IM SDK] 增加自动翻译接口。除了按需翻译，IM 实现自动翻译。
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 小程序不需要 isHttpDNS 参数。
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复 Uni_SDK 无法运行到浏览器问题。
 - [IM SDK] 修复创建群组时无法修改群简介问题。

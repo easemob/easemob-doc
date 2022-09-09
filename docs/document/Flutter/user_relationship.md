@@ -1,6 +1,6 @@
 # 用户关系管理
 
-[[toc]]
+<Toc />
 
 用户登录后，可进行添加联系人、获取好友列表等操作。
 
@@ -29,8 +29,8 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](https://docs-im.easemob.com/ccim/flutter/quickstart)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
@@ -76,44 +76,46 @@ try{
 3. 接收方对于同意，申请方收到监听事件 `onContactInvited`。
 
 ```dart
-class _ContactPageState extends State<ContactPage>
-    implements EMContactManagerListener {
+class _ContactPageState extends State<ContactPage> {
   @override
   void initState() {
     super.initState();
-    EMClient.getInstance.contactManager.addContactManagerListener(this);
+    EMClient.getInstance.contactManager.addEventHandler(
+      "UNIQUE_HANDLER_ID",
+      EMContactEventHandler(
+        onContactInvited: (userId, reason) {},
+      ),
+    );
   }
 
   @override
   void dispose() {
-    EMClient.getInstance.contactManager.removeContactManagerListener(this);
+    EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
     super.dispose();
   }
-
-  @override
-  void onContactInvited(String userName, String? reason) {}
 }
 ```
 
 4. 对方拒绝，收到监听事件 `onFriendRequestDeclined`。
 
 ```dart
-class _ContactPageState extends State<ContactPage>
-    implements EMContactManagerListener {
+class _ContactPageState extends State<ContactPage> {
   @override
   void initState() {
     super.initState();
-    EMClient.getInstance.contactManager.addContactManagerListener(this);
+    EMClient.getInstance.contactManager.addEventHandler(
+      "UNIQUE_HANDLER_ID",
+      EMContactEventHandler(
+        onFriendRequestDeclined: (userId) {},
+      ),
+    );
   }
 
   @override
   void dispose() {
-    EMClient.getInstance.contactManager.removeContactManagerListener(this);
+    EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
     super.dispose();
   }
-
-  @override
-  void onFriendRequestDeclined(String userName, String? reason) {}
 }
 ```
 

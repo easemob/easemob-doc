@@ -1,6 +1,6 @@
 # 管理聊天室属性
 
-[[toc]]
+<Toc />
 
 聊天室是支持多人沟通的即时通讯系统。本文介绍如何管理聊天室的属性信息。
 
@@ -17,8 +17,8 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](https://docs-im.easemob.com/ccim/unity/quickstart)；
-- 了解环信即时通讯 IM 的 [使用限制](https://docs-im.easemob.com/ccim/limitation)。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
+- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 - 了解聊天室的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
@@ -87,4 +87,4 @@ SDKClient.Instance.RoomManager.ChangeRoomDescription(currentRoomId, description,
 
 ### 更多
 
-- [监听器介绍](../unity/chatroom_manage.md)
+- [监听器介绍](group_manage.html#监听群组事件)
