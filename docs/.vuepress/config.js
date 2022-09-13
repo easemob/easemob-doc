@@ -34,7 +34,7 @@ module.exports = {
   },
   // 主题配置
   themeConfig: {
-    repo: 'maniacflow/vuepress',
+    repo: 'easemob/easemob-doc',
     docsDir: 'docs',
     editLinks: true,
     // 头部左上角 logo
