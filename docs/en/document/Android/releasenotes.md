@@ -1,3 +1,0 @@
-# Android SDK logs
-
-<Toc />

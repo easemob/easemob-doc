@@ -1,3 +1,0 @@
-# Use restrictions
-
-<Toc />
