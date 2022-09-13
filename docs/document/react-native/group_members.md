@@ -72,7 +72,7 @@ ChatClient.getInstance()
 2. 调用 `joinPublicGroup` 或 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
     1. 调用 `joinPublicGroup` 方法加入无需群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicOpenJoin`。
     申请人不会收到任何回调，其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
-    
+
     示例代码如下：
 
     ```typescript
@@ -86,7 +86,7 @@ ChatClient.getInstance()
         console.log("join group operation fail.", reason);
     });
     ```
-    
+
     2. 调用 `requestToJoinPublicGroup` 方法加入需要群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicJoinNeedApproval`。示例代码如下：
 
     ```typescript
@@ -123,7 +123,7 @@ ChatClient.getInstance()
         console.log("accept join request operation fail.", reason);
     });
     ```
-    
+
     - 若群主或群管理员拒绝申请人入群，需要调用 `declineJoinApplication` 方法。申请人会收到 `ChatGroupEventListener#onRequestToJoinDeclined` 回调。
 
     示例代码如下：
@@ -143,6 +143,8 @@ ChatClient.getInstance()
     ```
 
 #### 邀请用户入群
+
+邀请方式见 [邀请用户入群的配置](group_manage.html#创建群组)。
 
 邀请用户加群流程如下：
 
@@ -168,7 +170,7 @@ ChatClient.getInstance()
     ```
 
     - 普通成员邀请人入群，需要调用 `inviterUser` 方法：
-    
+
     `EMGroupStyle` 设置为 `PrivateMemberCanInvite` 时，所有群成员均可以邀请人进群。
 
     ```typescript
@@ -201,7 +203,7 @@ ChatClient.getInstance()
         console.log("accept invitation operation fail.", reason);
     });
     ```
-    
+
     - 受邀人拒绝入群组，需要调用 `declineInvitation` 方法。
 
     ```typescript
