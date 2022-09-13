@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/gray/flutter</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-&amp;-Logo2" transform="translate(-50.000000, -369.000000)" fill-rule="nonzero">
+            <g id="icon/gray/flutter" transform="translate(50.000000, 369.000000)">
+                <rect fill="#D8D8D8" opacity="0" x="0" y="0" width="20" height="20"></rect>
+                <g id="flutter" transform="translate(3.285714, 2.857143)" fill="#999999">
+                    <path d="M7.51980855,0 L0,7.50031252 L2.31590575,9.81290888 L12.1328424,0.00750031252 L7.5279455,0.00750031252 L7.51980855,0 Z M7.52857143,6.92028834 L3.47824006,10.9560815 L7.5279455,15 L12.1428571,15 L8.0994109,10.9573316 L12.1428571,6.91966333 L7.52919735,6.91966333 L7.52857143,6.92028834 Z" id="形状"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
