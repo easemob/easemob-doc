@@ -1,3 +1,0 @@
-# Product price
-
-<Toc />

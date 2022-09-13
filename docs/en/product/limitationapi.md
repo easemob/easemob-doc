@@ -1,3 +1,0 @@
-# Interface frequency limit
-
-<Toc />

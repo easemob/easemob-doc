@@ -1,3 +1,0 @@
-# Android quick start
-
-<Toc />
