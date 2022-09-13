@@ -17,6 +17,7 @@
 ## 版本 V4.0.8 Dev 2022-6-17
 
 ### 新增特性
+
 - [IM SDK] 新增群组事件回调 [onGroupEvent](https://webim-h5.easemob.com/jsdoc/out/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://webim-h5.easemob.com/jsdoc/out/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
 - [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](error.html)
 - [IM SDK] 邀请加入群聊回调 onGroupChange 返回中新增 群名称 参数值。

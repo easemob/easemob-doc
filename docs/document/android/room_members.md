@@ -278,10 +278,6 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().addChatRoomAdmin(
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().removeChatRoomAdmin(chatRoomId, admin);
 ```
 
-### 更多操作
+### 监听聊天室事件
 
-你可以参考如下文档，在项目中实现更多的聊天室相关功能：
-
-- [聊天室概述](room_overview.html)
-- [创建和管理聊天室以及监听器介绍](room_manage.html)
-- [管理聊天室属性](room_attributes.html)
+详见 [监听聊天室事件](room_manage.html#监听聊天室事件)。

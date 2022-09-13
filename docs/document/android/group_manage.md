@@ -1,4 +1,4 @@
-# 管理群组
+# 群组-创建和管理群组及监听群组事件
 
 <Toc />
 
@@ -256,117 +256,118 @@ EMClient.getInstance().groupManager().asyncGetGroupFromServer(groupId, new EMVal
 
 ```java
 // 创建一个群组事件监听
+// 在该方法的举例中，用户 A 表示当前用户。
 EMGroupChangeListener groupListener = new EMGroupChangeListener() {
-    // 用户收到进群邀请
+    // 当前用户收到了入群邀请。受邀用户会收到该回调。例如，用户 B 邀请用户 A 入群，则用户 A 会收到该回调。
     @Override
     public void onInvitationReceived(String groupId, String groupName, String inviter, String reason) {
     }
 
-    // 群主或群管理员收到进群申请
+    // 群主或群管理员收到进群申请。群主和所有管理员收到该回调。
     public void OnRequestToJoinReceivedFromGroup(string groupId, string groupName, string applicant, string reason){
     }
 
-    // 群主或群管理员同意用户的进群申请
+    // 群主或群管理员同意用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
     @Override
     public void onRequestToJoinAccepted(String groupId, String groupName, String accepter) {
     }
 
-    // 群主或群管理员拒绝用户的进群申请
+    // 群主或群管理员拒绝用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
     @Override
     public void onRequestToJoinDeclined(String groupId, String groupName, String decliner, String reason) {
     }
 
-    // 用户同意进群邀请
+    // 用户同意进群邀请。邀请人收到该回调。
     @Override
     public void onInvitationAccepted(String groupId, String invitee, String reason) {
     }
 
-    // 用户拒绝进群邀请
+    // 用户拒绝进群邀请。邀请人收到该回调。
     @Override
     public void onInvitationDeclined(String groupId, String invitee, String reason) {
     }
 
-    // 有成员被移出群组
+    // 有成员被移出群组。被踢出群组的成员会收到该回调。
     @Override
     public void onUserRemoved(String groupId, String groupName) {
     }
 
-    // 群组解散
+    // 群组解散。群主解散群组时，所有群成员均会收到该回调。
     @Override
     public void onGroupDestroyed(String groupId, String groupName) {
     }
 
-    // 有用户自动同意加入群组
+    // 有用户自动同意加入群组。邀请人收到该回调。
     @Override
     public void onAutoAcceptInvitationFromGroup(String groupId, String inviter, String inviteMessage) {
     }
 
-    // 有成员被加入群组禁言列表
+    // 有成员被加入群组禁言列表。被禁言的成员及群主和群管理员（除操作者外）会收到该回调。
     @Override
     public void onMuteListAdded(String groupId, List<String> mutes, long muteExpire) {
     }
 
-    // 有成员被移出禁言列表
+    // 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
     @Override
     public void onMuteListRemoved(String groupId, List<String> mutes) {
     }
 
-    // 有成员被加入群组白名单
+    // 有成员被加入群组白名单。被添加的成员及群主和群管理员（除操作者外）会收到该回调。
     @Override
     public void onWhiteListAdded(String groupId, List<String> whitelist) {
     }
 
-    // 有成员被移出群组白名单
+    // 有成员被移出群组白名单。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
     @Override
     public void onWhiteListRemoved(String groupId, List<String> whitelist) {
     }
 
-    // 全员禁言状态变化
+    // 全员禁言状态变化。群组所有成员（除操作者外）会收到该回调。
     @Override
     public void onAllMemberMuteStateChanged(String groupId, boolean isMuted) {
     }
 
-    // 群组新增管理员
+    // 设置管理员。群主、新管理员和其他管理员会收到该回调。
     @Override
     public void onAdminAdded(String groupId, String administrator) {
     }
 
-    // 群组管理员被移除
+    // 群组管理员被移除。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
     @Override
     public void onAdminRemoved(String groupId, String administrator) {
     }
 
-    // 群主转移权限
+    // 群主转移权限。原群主和新群主会收到该回调。
     @Override
     public void onOwnerChanged(String groupId, String newOwner, String oldOwner) {
     }
 
-    // 有新成员加入群组
+    // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
     @Override
     public void onMemberJoined(String groupId, String member) {
     }
 
-    // 有成员主动退出群
+    // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
     @Override
     public void onMemberExited(String groupId, String member) {
     }
 
-    // 群组公告更新
+    // 群组公告更新。群组所有成员会收到该回调。
     @Override
     public void onAnnouncementChanged(String groupId, String announcement) {
     }
 
-    // 有成员新上传群组共享文件
+    // 有成员新上传群组共享文件。群组所有成员会收到该回调。
     @Override
     public void onSharedFileAdded(String groupId, EMMucSharedFile sharedFile) {
     }
 
-    // 群组共享文件被删除
+    // 群组共享文件被删除。群组所有成员会收到该回调。
     @Override
     public void onSharedFileDeleted(String groupId, String fileId) {
     }
 
-    // 群组详情变更
+    // 群组详情变更。群组所有成员会收到该回调。
     @Override
     public void onSpecificationChanged(EMGroup group){
     }
