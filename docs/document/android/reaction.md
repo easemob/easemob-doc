@@ -43,12 +43,12 @@ Reaction 场景示例如下：
  EMClient.getInstance().chatManager().asyncAddReaction(message.getMsgId(), reaction, new EMCallBack() {
     @Override
     public void onSuccess() {
-        
+
     }
 
     @Override
     public void onError(int error, String errorMsg) {
-        
+
     }
 
     @Override
@@ -64,7 +64,7 @@ Reaction 场景示例如下：
      }
      @Override
      public void onReactionChanged(List<EMMessageReactionChange> list) {
-       
+
      }
  }
 ```
@@ -80,12 +80,12 @@ Reaction 场景示例如下：
 EMClient.getInstance().chatManager().asyncRemoveReaction(message.getMsgId(), reaction, new EMCallBack() {
     @Override
     public void onSuccess() {
-        
+
     }
 
     @Override
     public void onError(int error, String errorMsg) {
-        
+
     }
 
     @Override
@@ -101,25 +101,25 @@ public class MyClass implements EMMessageListener {
     }
     @Override
     public void onReactionChanged(List<EMMessageReactionChange> list) {
-    
+
     }
  }
 ```
 
 ### 获取消息的 Reaction 列表
 
-调用 `asyncGetReactionLis` 可以从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，用户数量，用户列表（概要数据，即前三个用户信息）。示例代码如下：
+调用 `asyncGetReactionList` 可以从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，用户数量，用户列表（概要数据，即前三个用户信息）。示例代码如下：
 
 ```java
 EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.ChatType.Chat, groupId, new EMValueCallBack<Map<String, List<EMMessageReaction>>>() {
     @Override
     public void onSuccess(Map<String, List<EMMessageReaction>> stringListMap) {
-    
+
     }
 
     @Override
     public void onError(int i, String s) {
-        
+
     }
 });
 ```
@@ -133,7 +133,7 @@ EMClient.getInstance().chatManager().asyncGetReactionDetail(mMsgId, emojiconId,
                 pageCurosr, 30, new EMValueCallBack<EMCursorResult<EMMessageReaction>>() {
     @Override
     public void onSuccess(EMCursorResult<EMMessageReaction> messageReactionCursorResult) {
-        
+
     }
 
     @Override

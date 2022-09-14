@@ -86,11 +86,11 @@ public class DemoApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        //EaseIM 初始化 
-        if(EaseIM.getInstance().init(context, options)){ 
-            //在做打包混淆时，关闭 debug 模式，避免消耗不必要的资源 
-            EMClient.getInstance().setDebugMode(true); 
-            //EaseIM 初始化成功之后再调用注册消息监听的代码 ... 
+        //EaseIM 初始化
+        if(EaseIM.getInstance().init(context, options)){
+            //在做打包混淆时，关闭 debug 模式，避免消耗不必要的资源
+            EMClient.getInstance().setDebugMode(true);
+            //EaseIM 初始化成功之后再调用注册消息监听的代码 ...
         }
     }
 }
@@ -168,7 +168,7 @@ xml 中设置如下：
     android:background="@color/white"
     app:titleBarDisplayHomeAsUpEnabled="true"/>
 ```
-其中 `titleBarDisplayHomeAsUpEnabled` 属性为设置返回按钮是否可见，设置标题位置可设置 `titleBarTitlePosition`，可选值为 center，left 和 right。
+其中 `titleBarDisplayHomeAsUpEnabled` 属性为设置返回按钮是否可见，设置标题位置可设置 `titleBarTitlePosition`，可选值为 `center`，`left` 和 `right`。
 
 也可进行代码设置，如下：
 
@@ -202,7 +202,7 @@ titleBarMessage.setOnBackPressListener(this);
 ```java
 //设置头像尺寸
 conversationListLayout.setAvatarSize(EaseCommonUtils.dip2px(mContext, 50));
-//设置头像样式：0 为默认，1 为圆形，2 为方形(设置方形时，需要配合设置 avatarRadius，默认的avatarRadius为50dp)
+//设置头像样式：0 为默认，1 为圆形，2 为方形(设置方形时，需要配合设置 avatarRadius，默认的 avatarRadius 为 50dp)
 conversationListLayout.setAvatarShapeType(2);
 //设置圆角半径
 conversationListLayout.setAvatarRadius((int) EaseCommonUtils.dip2px(mContext, 5));
@@ -230,7 +230,7 @@ public void initView(Bundle savedInstanceState) {
    super.initView(savedInstanceState);
    ......
    conversationListLayout.addItemMenu(Menu.NONE, R.id.action_con_delete, 4, getString(R.string.ease_conversation_menu_delete));
-}    
+}
 
 ......
 
@@ -659,7 +659,7 @@ public void initView(Bundle savedInstanceState) {
     MenuItemBean itemMenu = new MenuItemBean(0, R.id.action_chat_forward, 11, getString(R.string.action_forward));
     itemMenu.setResourceId(R.drawable.ease_chat_item_menu_forward);
     chatLayout.addItemMenu(itemMenu );
-}    
+}
 
 ......
 

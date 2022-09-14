@@ -257,10 +257,6 @@ public void checkIfInGroupWhiteList(final String groupId, EMValueCallBack<Boolea
 public void fetchGroupWhiteList(final String groupId, final EMValueCallBack<List<String>> callBack);
 ```
 
-### 更多操作
+### 监听群组事件
 
-你可以参考如下文档，在项目中实现更多的群组相关功能：
-
-- [群组概述](group_overview.html)
-- [创建和管理群组](group_manage.html)
-- [群组属性管理](group_attributes.html)
+详见 [监听群组事件](group_manage.html#监听群组事件)。
