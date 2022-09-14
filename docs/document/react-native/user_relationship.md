@@ -130,14 +130,28 @@ ChatClient.getInstance().contactManager.addContactListener(
 1. 从服务器获取好友列表
 
 ```typescript
+ ChatClient.getInstance()
+   .contactManager.getAllContactsFromServer()
+   .then((value) => {
+     console.log("get contact success.", value);
+   })
+   .catch((reason) => {
+     console.log("get contact fail.", reason);
+   });
+ ```
 
-```
+ 2. 从本地数据库中获取好友列表
 
-2. 从本地数据库中获取好友列表
-
-```typescript
-
-```
+ ```typescript
+ ChatClient.getInstance()
+   .contactManager.getAllContactsFromDB()
+   .then((value) => {
+     console.log("get contact success.", value);
+   })
+   .catch((reason) => {
+     console.log("get contact fail.", reason);
+   });
+ ```
 
 ### 删除好友
 
@@ -213,7 +227,7 @@ ChatClient.getInstance()
 ```typescript
 // 用户 ID
 const userId = "tom";
-// 将好友从黑名单移除
+// 将用户从黑名单移除
 ChatClient.getInstance()
   .contactManager.removeUserFromBlockList(userId)
   .then((list) => {
