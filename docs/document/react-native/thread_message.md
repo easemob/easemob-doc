@@ -120,4 +120,4 @@ class ChatMessageEvent implements ChatMessageEventListener {
 
 ### 从服务器获取子区消息 (消息漫游)
 
-从服务器获取子区消息，请参考 [从服务器获取消息 (消息漫游)](message_retrieve.html)。
+从服务器获取子区消息，请参考 [从服务器获取消息](message_manage.html#分页获取指定会话的历史消息)。
