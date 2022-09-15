@@ -99,7 +99,7 @@ String convId = "convId";
 try {
   await EMClient.getInstance.chatManager.sendConversationReadAck(convId);
 } on EMError catch (e) {
-  // 发送会话已读失败，错误代码：e.code，错误描述：e.description
+
 }
 ```
 
@@ -147,7 +147,7 @@ EMClient.getInstance.chatManager.addEventHandler(
 try {
   EMClient.getInstance.chatManager.sendMessageReadAck(msg);
 } on EMError catch (e) {
-  // 发送消息已读失败，错误代码：e.code，错误描述：e.description
+
 }
 ```
 
@@ -176,7 +176,7 @@ msg.needGroupAck = true;
 try {
   await EMClient.getInstance.chatManager.sendMessage(msg);
 } on EMError catch (e) {
-  // 发送消息失败，错误代码：e.code，错误描述：e.description
+
 }
 ```
 

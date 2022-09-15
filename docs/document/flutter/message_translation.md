@@ -1,4 +1,4 @@
-# 翻译 Flutter
+# 消息-翻译 Flutter
 
 <Toc />
 
@@ -23,6 +23,10 @@ SDK 支持你通过调用 API 在项目中实现如下功能：
 - `fetchSupportedLanguages` 获取支持的翻译语言；
 - 按需翻译：接收方在收到文本消息后调用 `translateMessage` 进行翻译；
 - 自动翻译：发送方发送消息之前设置 `EMTextMessageBody` 中的 `targetLanguages` 字段为目标语言，然后发送消息，接收方会收到消息原文和译文。
+
+如下为按需翻译示例：
+
+![img](@static/images/ios/translation.png)
 
 ## 实现方法
 
@@ -82,3 +86,9 @@ EMMessage textMessage = EMMessage.createTxtSendMessage(
 EMTextMessageBody body = receiveMessage.body as EMTextMessageBody;
 debugPrint("translation: ${body.translations}");
 ```
+
+## 参考
+
+### 设置和获取推送的目标语言
+
+设置推送的目标语言，设置之后收到的离线推送就会是目标语言，如果目标语言在消息里不存在，就以原文推送，详见 [设置推送翻译](push.html#_4-3-设置推送翻译)。

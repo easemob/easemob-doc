@@ -1,4 +1,4 @@
-# 创建和管理聊天室以及监听器介绍
+# 聊天室-创建和管理聊天室以及监听聊天室事件
 
 <Toc />
 
@@ -54,7 +54,7 @@ try {
 用户申请加入聊天室的步骤如下：
 
 1. 调用 `EMChatRoomManager#fetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-2. 调用 `EMChatRoomManager#joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `EMChatRoomEventHandler#onMemberJoinedFromChatRoom` 回调。
+2. 调用 `EMChatRoomManager#joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `EMChatRoomEventHandler#onMemberJoinedFromChatRoom` 事件。
 
 示例代码如下：
 
@@ -136,26 +136,12 @@ try {
 示例代码如下：
 
 ```dart
-class _ChatRoomPageState extends State<ChatRoomPage> {
-  @override
-  // 添加监听器
-  void initState() {
-    super.initState();
+    // 添加监听器
     EMClient.getInstance.chatRoomManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
       EMChatRoomEventHandler(),
     );
-  }
-  @override
-  // 清空所有监听器
-  void dispose() {
-    EMClient.getInstance.chatRoomManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+    // 移除监听器
+    EMClient.getInstance.chatRoomManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```

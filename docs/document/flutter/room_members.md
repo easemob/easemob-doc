@@ -70,7 +70,7 @@ try {
 
 仅聊天室所有者和管理员可调用 `EMChatRoomManager#blockChatRoomMembers` 方法将指定成员添加至黑名单。
 
-被加入黑名单后，该成员收到 `EMChatRoomEventHandler#onRemovedFromChatRoom` 回调，其他成员收到 `EMChatRoomEventHandler#onMemberExitedFromChatRoom` 回调。
+被加入黑名单后，该成员收到 `EMChatRoomEventHandler#onRemovedFromChatRoom` 事件，其他成员收到 `EMChatRoomEventHandler#onMemberExitedFromChatRoom` 事件。
 
 被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室，黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单。
 
@@ -123,7 +123,7 @@ try {
 
 #### 添加成员至聊天室白名单列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#addMembersToChatRoomAllowList` 方法将指定成员添加至聊天室白名单。被添加后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onAllowListAddedFromChatRoom` 回调。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#addMembersToChatRoomAllowList` 方法将指定成员添加至聊天室白名单。被添加后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onAllowListAddedFromChatRoom` 事件。
 
 示例代码如下：
 
@@ -139,7 +139,7 @@ try {
 
 #### 将成员移出聊天室白名单列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#removeMembersFromChatRoomAllowList` 方法将成员移出聊天室禁言列表。被解除禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onAllowListRemovedFromChatRoom` 回调。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#removeMembersFromChatRoomAllowList` 方法将成员移出聊天室禁言列表。被解除禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onAllowListRemovedFromChatRoom` 事件。
 
 示例代码如下：
 
@@ -168,7 +168,7 @@ try {
 
 #### 添加成员至聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onMuteListAddedFromChatRoom` 回调。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onMuteListAddedFromChatRoom` 事件。
 
 :::notice
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
@@ -188,7 +188,7 @@ try {
 
 #### 将成员移出聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unMuteChatRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onMuteListRemovedFromChatRoom` 回调。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unMuteChatRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onMuteListRemovedFromChatRoom` 事件。
 
 :::notice
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。
@@ -230,7 +230,7 @@ try {
 
 #### 开启聊天室全员禁言
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteAllChatRoomMembers` 方法开启全员禁言。全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `EMChatRoomEventHandler#onAllChatRoomMemberMuteStateChanged` 回调。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteAllChatRoomMembers` 方法开启全员禁言。全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `EMChatRoomEventHandler#onAllChatRoomMemberMuteStateChanged` 事件。
 
 示例代码如下：
 
@@ -243,7 +243,7 @@ try {
 
 #### 关闭聊天室全员禁言
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unMuteAllChatRoomMembers` 方法取消全员禁言。调用成功后，聊天室成员会收到 `EMChatRoomEventHandler#onAllChatRoomMemberMuteStateChanged` 回调。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unMuteAllChatRoomMembers` 方法取消全员禁言。调用成功后，聊天室成员会收到 `EMChatRoomEventHandler#onAllChatRoomMemberMuteStateChanged` 事件。
 
 示例代码如下：
 
@@ -258,7 +258,7 @@ try {
 
 #### 变更聊天室所有者
 
-仅聊天室所有者可以调用 `EMChatRoomManager#changeOwner` 方法将权限移交给聊天室中指定成员。成功移交后，原聊天室所有者变为聊天室成员，新的聊天室所有者和聊天室管理员收到 `EMChatRoomEventHandler#onOwnerChangedFromChatRoom` 回调。
+仅聊天室所有者可以调用 `EMChatRoomManager#changeOwner` 方法将权限移交给聊天室中指定成员。成功移交后，原聊天室所有者变为聊天室成员，新的聊天室所有者和聊天室管理员收到 `EMChatRoomEventHandler#onOwnerChangedFromChatRoom` 事件。
 
 示例代码如下：
 
@@ -274,7 +274,7 @@ try {
 
 #### 添加聊天室管理员
 
-仅聊天室所有者可以调用 `EMChatRoomManager#addChatRoomAdmin` 方法添加聊天室管理员。成功添加后，新管理员及其他管理员收到 `EMChatRoomEventHandler#onAdminAddedFromChatRoom` 回调。
+仅聊天室所有者可以调用 `EMChatRoomManager#addChatRoomAdmin` 方法添加聊天室管理员。成功添加后，新管理员及其他管理员收到 `EMChatRoomEventHandler#onAdminAddedFromChatRoom` 事件。
 
 示例代码如下：
 
@@ -290,7 +290,7 @@ try {
 
 #### 移除聊天室管理员
 
-仅聊天室所有者可以调用 `EMChatRoomManager#removeChatRoomAdmin` 方法移除聊天室管理员。成功移除后，被移除的管理员及其他管理员收到 `EMChatRoomEventHandler#onAdminRemovedFromChatRoom` 回调。
+仅聊天室所有者可以调用 `EMChatRoomManager#removeChatRoomAdmin` 方法移除聊天室管理员。成功移除后，被移除的管理员及其他管理员收到 `EMChatRoomEventHandler#onAdminRemovedFromChatRoom` 事件。
 
 示例代码如下：
 
