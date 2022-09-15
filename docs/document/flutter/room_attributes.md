@@ -43,7 +43,7 @@ try {
 
 ### 更新聊天室公告
 
-仅聊天室所有者和聊天室管理员可以调用 `EMChatRoomManager#updateChatRoomAnnouncement` 方法设置和更新聊天室公告，聊天室公告的长度限制为 512 个字符。公告更新后，其他聊天室成员收到 `EMChatRoomEventHandler#onAnnouncementChangedFromChatRoom` 回调。
+仅聊天室所有者和聊天室管理员可以调用 `EMChatRoomManager#updateChatRoomAnnouncement` 方法设置和更新聊天室公告，聊天室公告的长度限制为 512 个字符。公告更新后，其他聊天室成员收到 `EMChatRoomEventHandler#onAnnouncementChangedFromChatRoom` 事件。
 
 示例代码如下：
 
