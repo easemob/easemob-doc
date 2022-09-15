@@ -64,13 +64,13 @@
 
 请求采用 POST 方式，支持 `HTTP/HTTPS`，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
 
-请求 `header` 中包括以下字段：
+#### 请求 header
 
 | 字段名         | 值                 |
 | :------------- | :----------------- |
 | `Content-Type` | 内容类型，请填 `application/json`。 |
 
-#### 请求体
+#### 请求 body
 
 | 参数              | 类型                                                         |
 | :---------------- | :----------------------------------------------------------- |
@@ -86,13 +86,15 @@
 | `securityVersion` | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
 | `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)回调规则。 |
 
-#### 响应体参数
+#### 响应 body
 
 | 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
 | :-------- | :----- | :------- | :----------------------------------------------------------- |
 | `valid`   | bool   | 是       | 根据开发者自己服务器设定的规则判断消息是否合法。             |
 | `code`    | String | 否       | 自定义信息，字符串类型。该内容会显示到客户端返回的 error 中，具体分为以下几种情况：<br/> 1、返回的应答包内该 code 并且类型正确，error 会显示为你填写的内容；<br/> 2、返回的应答包内 code 为空，error 显示为 `custom logic denied`；<br/>3、在指定时间内未响应，未收到应答包，按默认配置处理，则 error 显示为 `custom internal error`；<br/>4、如果返回的应答包出现错误，包括缺少必填字段、字段类型不符合约定类型，error 显示为 `custom internal error`。                  |
 | `payload` | Object | 否       | 如果需要更改消息内容可以回传修改后的内容，不修改则无需传该内容。格式同传入的消息内容，目前仅支持文本的形式，并且消息大小不能超过 1K。 |
+
+### 示例
 
 #### 请求示例
 
@@ -101,7 +103,7 @@
     "callId":"easemob-demo#test_0990a64f-dp01-6c50-8696-cf3b48b20e7e",
     "eventType":"chat_offline",
     "timestamp":1600060847294,
-    "chat_type":"groupchat", 
+    "chat_type":"groupchat",
     "group_id":"16934809238921545",
     "from":"user1",
     "to":"user2",
@@ -217,7 +219,7 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
     "callId":"easemob-demo#test_0990a64f-dp01-6c50-8696-cf3b48b20e7e",
     "eventType":"chat_offline",
     "timestamp":1600060847294,
-    "chat_type":"groupchat", 
+    "chat_type":"groupchat",
     "group_id":"16934809238921545",
     "from":"user1",
     "to":"user2",
@@ -266,7 +268,7 @@ Authorization：`Bearer ${YourAppToken}`
 | 参数      | 类型   | 是否必需 | 描述                                       |
 | :-------- | :----- | :------- | :----------------------------------------- |
 | `orgName` | String | 是       | 你在环信 IM 管理后台注册的组织唯一标识。   |
-| `appName` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识 。 |
+| `appName` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识。 |
 
 #### 请求头
 
@@ -342,14 +344,14 @@ curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 | `orgName` | String | 是       | 你在环信 IM 管理后台注册的组织唯一标识。  |
 | `appName` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识。 |
 
-#### 请求头
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`  | String | 是       | 内容类型，请填 `application/json`。                                          |
 | `Authorization` | String | 是       | 鉴权 App Token 的值。详见[使用 token 鉴权](https://docs-im.easemob.com/ccim/authentication)。 |
 
-#### 请求体
+#### 请求 body
 
 | 参数        | 类型   | 是否必需 | 描述                                                         |
 | :---------- | :----- | :------- | :----------------------------------------------------------- |
@@ -357,7 +359,7 @@ curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 | `retry`     | Int    | 否       | 开发已重试的次数。考虑到补发也可能失败，服务器会继续存储。最开始是 0。 |
 | `targetUrl` | String | 否       | 补发消息的回调地址，如果为空，则使用原回调规则的回调地址。   |
 
-#### 响应参数
+#### 响应 body
 
 | 参数           | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
