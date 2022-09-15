@@ -1,4 +1,5 @@
 const path = require('path');
+const moment = require('moment');
 
 module.exports = {
   configureWebpack: {
@@ -712,7 +713,19 @@ module.exports = {
         searchMaxSuggestions: 10
       }
     ],
-    ['@vuepress/last-updated'],
+    [
+      '@vuepress/last-updated',
+      {
+        transformer: (timestamp, lang) => {
+          // 不要忘了安装 moment
+          moment.locale(lang)
+          return moment(timestamp).format('YYYY-MM-DD HH:mm:ss')
+        },
+        dateOptions:{
+          hour12: false
+        }
+      }
+    ],
     ['vuepress-plugin-smooth-scroll'],
     // you can use this plugin multiple times
     [
