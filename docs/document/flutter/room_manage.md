@@ -159,11 +159,3 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
   }
 }
 ```
-
-### 更多操作
-
-你可以参考如下文档，在项目中实现更多的聊天室相关功能：
-
-- [聊天室概述](room_overview.html)
-- [管理聊天室成员](room_members.html)
-- [管理聊天室属性](room_attributes.html)
