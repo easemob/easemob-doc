@@ -44,7 +44,7 @@
 
 环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 Authorization 字段：
 
-Authorization：`Bearer ${YourToken}`
+Authorization：`Bearer ${YourAppToken}`
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本篇涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 app token 鉴权](easemob_app_token.html)。
 
@@ -965,7 +965,7 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | 参数              | 类型   | 是否必需 | 描述                                                         |
 | :---------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`    | String | 否       | 内容类型。请填 `multipart/form-data`。上传文件会自动填充这个头。 |
-| `Authorization`   | String | 是       | `Bearer ${YourToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization`   | String | 是       | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
 | `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true` ：是。用户需要通过响应 body 中获取的文件访问密钥（share-secret）才能下载该文件。<br/> - `false` ：否。表示不限制访问。用户可以直接下载该文件。 |
 
 #### 请求 body
@@ -1283,6 +1283,7 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 | 参数          | 类型   | 描述                                                         |
 | :------------ | :----- | :----------------------------------------------------------- |
 | `file_length` | Long   | 图片附件大小，单位为字节。                                   |
+| `filename`    | String | 包含图片格式后缀的图片名称。                                                      |
 | `secret`      | String | 图片文件访问密钥。如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
 | `size`        | JSON   | 图片的尺寸。单位为像素。<br/> - `height`：图片高度。<br/> - `width`：图片宽度。 |
 | `type`        | String | 消息类型。图片消息为 `img`。                                 |

@@ -31,17 +31,17 @@ composer require maniac/easemob-php
 
 ## 准备
 
-在使用 PHP SDK 之前，需要准备环信 appkey、Client ID、ClientSecret。
+使用 PHP SDK 之前，需准备环信 App Key、Client ID 和 Client Secret。
 
-如果你有环信管理后台账号并创建过应用，请先登录环信管理后台，点击 [这里](https://console.easemob.com/user/login)，然后到“应用列表” → 点击“查看”即可获取到 appkey、Client ID、ClientSecret。
+如果你有环信管理后台账号并创建过应用，请先登录环信管理后台，点击 [这里](https://console.easemob.com/user/login)，然后在 “应用列表” 中点击 “查看” 即可获取 appkey、Client ID 和 ClientSecret。
 
-如果你没有环信管理后台账号，请先注册账号，点击 [这里](https://console.easemob.com/user/register)，注册成功后请登录，然后点击“添加应用”，添加成功后点击“查看”即可获取到 appkey、Client ID、ClientSecret。
+如果你没有环信管理后台账号，请先注册账号，点击 [这里](https://console.easemob.com/user/register)，注册成功后请登录，然后点击 “添加应用”，添加成功后点击 “查看” 即可获取 appkey、Client ID 和 ClientSecret。
 
 ## 使用
 
 如果使用 Laravel、YII、ThinkPHP 之类的框架，composer 安装的库会自动加载，如果没有使用框架，需要手动引入 `vendor/autoload.php` 文件。
 
-使用所有的类之前，都要先初始化授权对象，然后再初始化其他类时，传入授权对象
+使用所有的类之前，均需先初始化授权对象，然后在初始化其他类时传入授权对象。
 
 ```php
 require 'vendor/autoload.php';
@@ -68,7 +68,7 @@ $user = new User($auth);
 
 每个业务资源对应一个方法，例如，用户相关的 API，都可以在 User 类中找到。
 
-举个例子，我们要注册一个用户，就可以这样写：
+例如，注册用户，示例代码如下：
 
 ```php
 require 'vendor/autoload.php';
@@ -87,7 +87,7 @@ $data = array(
 );
 $user->create($data);
 
- 
+
 // 批量注册用户
 $data = array(
     array(
@@ -106,7 +106,7 @@ $user->create($data);
 
 ## 参考
 
-- PHP SDK 的 api 文档在 [这里](https://easemob.github.io/im-php-server-sdk/annotated.html)
+- PHP SDK 的 API 文档在 [这里](https://easemob.github.io/im-php-server-sdk/annotated.html)
 - PHP SDK 开源地址在 [这里](https://github.com/easemob/im-php-server-sdk)
 
 ## 常见问题
@@ -131,7 +131,7 @@ PHP SDK 会直接返回 REST API 的错误码及错误描述，具体请参考 [
 
 3. 使用代理的情况
 
-在初始化授权对象 Auth 之后，可以设置代理：
+初始化授权对象 Auth 之后，可以设置代理：
 
 ```php
 require 'vendor/autoload.php';

@@ -91,13 +91,12 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 | 参数           | 类型    | 是否必需 | 备注                                                         |
 |:----------------------| :------ |:-----|:--------------------------------------------------------------------------------------------------------------------------|
-| `groupid`             | String  | 否    | 自定义的群组 ID，只允许 18 位以内的数字字符串，字符串以非 0 数字开头。默认不允许自定义群组 ID，需联系商务开通。           |
 | `groupname`    | String  | 是     | 群组名称，最大长度为 128 字符。如果有空格，则使用 “+” 代替。         |
 | `desc`         | String  | 是     | 群组描述，最大长度为 512 字符。如果有空格，则使用 “+” 代替。     |
 | `public`       | Bool  | 是     | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                  |
 | `maxusers`     | Int | 否   | 群组最大成员数（包括群主），值为数值类型，默认值 200，具体上限请参考 [环信即时通讯云控制台](https://console.easemob.com/user/login)。 |
 | `allowinvites` | Bool  | 是     | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群;<br/> - （默认）`false`：只有群主或者管理员才可以往群里加人。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
-| `members_only` | Bool  | 否   | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：是； <br/> - （默认）`false`：否。 |
+| `membersonly` | Bool  | 否   | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：是； <br/> - （默认）`false`：否。 |
 | `invite_need_confirm` | Bool | 否 | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）`true`：是；<br/> - `false`：否。         |
 | `owner`        | String  | 是     | 群组的管理员。                                               |
 | `members`      | String  | 否   | 群组成员。若传入该参数，数组元素至少一个，不能超过 100。（注：群主 user1 不需要写入到 members 里面） |
@@ -113,7 +112,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | :-------- | :----- | :-------- |
 | `data.groupid` | String | 群组 ID。 |
 
-其他字段及说明详见  [公共参数](#公共参数)。
+其他字段及说明详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -199,7 +198,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.maxusers`     | Bool | 群组最大成员数：<br/> - `true`：修改成功;<br/> - `false`：修改失败。   |
 | `data.groupname`    | Bool  | 群组名称：<br/> - `true`：修改成功;<br/> - `false`：修改失败。         |
 | `data.membersonly`  | Bool | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是; <br/> - `false`：否。 |
-| `data.allowinvites` | Bool | 是否允许群成员邀请别人加入此群：<br/> -`true`：允许群成员邀请人加入此群; </br>- `false`：只有群主才可以往群里加人。 |
+| `data.allowinvites` | Bool | 是否允许群成员邀请其他用户入群：<br/> -`true`：允许群成员邀请人入群; </br>- `false`：只有群主才可以往群里加人。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -765,7 +764,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 获取群组共享文件
 
-分页获取指定群组 ID 的群组共享文件，之后可以根据 response 中返回的 file_id，file_id 是群组共享文件的唯一标识，调用 [下载群组共享文件](#下载群组共享文件) 接口下载文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除文件。
+分页获取指定群组 ID 的群组共享文件，之后可以根据 response 中返回的 `file_id`，`file_id` 是群组共享文件的唯一标识，调用 [下载群组共享文件](#下载群组共享文件) 接口下载文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除文件。
 
 #### HTTP 请求
 
@@ -783,14 +782,14 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 
 ##### 路径参数
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-| `pagesize` | String   |每页期望返回的共享文件数。取值范围为[1,1000]。|
-| `pagenum` |  Int | 当前页码。默认从第 1 页开始获取。  |
+| `pagesize` | String   | 否 | 每页期望返回的共享文件数。取值范围为 [1,1000]。|
+| `pagenum` |  Int | 否 | 当前页码。默认从第 1 页开始获取。  |
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -804,7 +803,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 
 | 字段      | 类型   | 说明                                                        |
 | :--------| :------ | :---------------------------------------------------------- |
-| `data.file_id`  | String   | 群组共享文件的 ID，如果要下载该文件需要使用到这个 file_id。 |
+| `data.file_id`  | String   | 群组共享文件的 ID，如果要下载该文件需要使用到这个 `file_id`。 |
 | `data.file_name` | String  | 群组共享文件名称。                                          |
 | `data.file_owner` | String | 上传群组共享文件的用户 ID。                                 |
 | `data.file_size`  | Long | 群组共享文件大小(字节)。                                    |
@@ -881,7 +880,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    |内容类型。请填 `application/json` |
 | `content-type`   | String | 是    |内容类型。请填 `multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW` |
@@ -945,7 +944,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files' -H 'Content-T
 
 ### 下载群组共享文件
 
-根据指定的群组 ID 与 file_id 下载群组共享文件，file_id 是通过 [获取群组共享文件](#获取群组共享文件) 接口获取。
+根据指定的群组 ID 与 `file_id` 下载群组共享文件，`file_id` 是通过 [获取群组共享文件](#获取群组共享文件) 接口获取。
 
 #### HTTP 请求
 
@@ -2977,8 +2976,8 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段         | 说明             |
-|:----------|:---------------|
+| 字段                | 说明   | 描述                                           |
+| :------------------ | :----- | :--------------------------------------------- |
 | `entities.name`   | String |子区名字。      |
 | `entities.owner`  | String |子区创建者。    |
 | `entities.id`     | String |子区 ID。     |
