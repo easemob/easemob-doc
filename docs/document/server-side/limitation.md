@@ -1,6 +1,6 @@
 ---
 {
-    pageKey: "v-3348831e",
+    pageUri: "/product/limitation.html",
     title: "限制条件"
 }
 ---
