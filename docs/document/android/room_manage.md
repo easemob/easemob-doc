@@ -1,4 +1,4 @@
-# 创建和管理聊天室以及监听器介绍
+# 聊天室-创建和管理聊天室以及监听事件
 
 <Toc />
 
@@ -136,17 +136,17 @@ EMClient.getInstance().chatroomManager().removeChatRoomListener(chatRoomChangeLi
 
 ```java
 public interface EMChatRoomChangeListener {
-    // 聊天室被解散
+    // 聊天室被解散。聊天室的所有成员会收到该事件。
     void onChatRoomDestroyed(final String roomId, final String roomName);
 
-    // 有用户加入聊天室
+    // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
     void onMemberJoined(final String roomId, final String participant);
 
-    // 有成员离开聊天室
+    // 有成员主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
     void onMemberExited(final String roomId, final String roomName, final String participant);
 
     /**
-     * 有成员被移出聊天室
+     * 有成员被移出聊天室。被移出的成员收到该事件。
      *
      * @param reason        用户被移出聊天室的原因：
      *                        - xxx BE_KICKED：该用户被聊天室管理员移出；
@@ -154,40 +154,41 @@ public interface EMChatRoomChangeListener {
      */
     void onRemovedFromChatRoom(final int reason, final String roomId, final String roomName, final String participant);
 
-    // 有成员被加入禁言列表
+    // 有成员被加入禁言列表。被添加的成员收到该事件。
     void onMuteListAdded(final String chatRoomId, final List<String> mutes, final long expireTime);
 
-    // 有成员被移出禁言列表
+    // 有成员被移出禁言列表。被解除禁言的成员会收到该事件。
     void onMuteListRemoved(final String chatRoomId, final List<String> mutes);
 
-    // 有成员被加入白名单列表
+    // 有成员被加入白名单列表。被添加的成员收到该事件。
     void onWhiteListAdded(final String chatRoomId, final List<String> whitelist);
 
-    // 有成员被移出白名单列表
+    // 有成员被移出白名单列表。被移出白名单的成员会收到该事件。
     void onWhiteListRemoved(final String chatRoomId, final List<String> whitelist);
 
-    // 全员禁言状态变更
+    // 全员禁言状态变更。聊天室所有成员会收到该事件。
     void onAllMemberMuteStateChanged(final String chatRoomId, final boolean isMuted);
 
-    // 有成员被设为管理员
+    // 有成员被设为管理员。被添加的管理员会收到该事件。
     void onAdminAdded(final String chatRoomId, final String admin);
 
-    // 有成员被移除管理员权限
+    // 有成员被移除管理员权限。被移除的管理员会收到该事件。
     void onAdminRemoved(final String chatRoomId, final String admin);
 
-  // 聊天室所有者变更
+    // 聊天室所有者变更。聊天室所有成员会收到该事件。
     void onOwnerChanged(final String chatRoomId, final String newOwner, final String oldOwner);
 
-   // 聊天室公告变更
+    // 聊天室详情有变更。聊天室的所有成员会收到该事件。
+    default void onSpecificationChanged(EMChatRoom chatRoom) {
+    }
+    // 聊天室公告变更。聊天室的所有成员会收到该事件。
     void onAnnouncementChanged(String chatRoomId, String announcement);
+
+    // 聊天室自定义属性有更新。聊天室所有成员会收到该事件。
+    default void onChatroomAttributesDidChanged(String chatRoomId, Map<String,String> attributeMap , String from){}
+
+    // 有聊天室自定义属性被移除。聊天室所有成员会收到该事件。
+    default void onChatroomAttributesDidRemoved(String chatRoomId, Map<String,String> attributeMap , String from){}
 
 }
 ```
-
-### 更多操作
-
-你可以参考如下文档，在项目中实现更多的聊天室相关功能：
-
-- [聊天室概述](room_overview.html)
-- [管理聊天室成员](room_members.html)
-- [管理聊天室属性](room_attributes.html)

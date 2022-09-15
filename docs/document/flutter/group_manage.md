@@ -1,4 +1,4 @@
-# 管理群组
+# 群组-创建和管理群组及监听群组事件
 
 <Toc />
 
@@ -41,11 +41,11 @@
     - `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理同意。
 2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
     - 进群邀请需要用户确认 (`EMGroupOptions#inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `EMOptions#autoAcceptGroupInvitation` 设置，处理逻辑如下：
-        - 用户设置手动确认群组邀请 (`EMOptions#autoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `EMGroupEventHandler#onInvitationReceivedFromGroup` 回调，并选择同意或拒绝入群邀请：
-            - 用户同意入群邀请后，群主收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 回调和 `EMGroupEventHandler#onMemberJoinedFromGroup` 回调，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 回调；
-            - 用户拒绝入群邀请后，群主收到 `EMGroupEventHandler#onInvitationDeclinedFromGroup` 回调。
-    - 进群邀请无需用户确认 (`EMGroupOptions.inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无视用户的 `EMOptions#autoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到`EMGroupEventHandler#onAutoAcceptInvitationFromGroup` 回调，群主收到每个加入成员的 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 回调和 `EMGroupEventHandler#onMemberJoinedFromGroup` 回调。
-  
+        - 用户设置手动确认群组邀请 (`EMOptions#autoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `EMGroupEventHandler#onInvitationReceivedFromGroup` 事件，并选择同意或拒绝入群邀请：
+            - 用户同意入群邀请后，群主收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
+            - 用户拒绝入群邀请后，群主收到 `EMGroupEventHandler#onInvitationDeclinedFromGroup` 事件。
+    - 进群邀请无需用户确认 (`EMGroupOptions.inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无视用户的 `EMOptions#autoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到`EMGroupEventHandler#onAutoAcceptInvitationFromGroup` 事件，群主收到每个加入成员的 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件。
+
 用户可以调用 `EMGroupManager#createGroup` 方法创建群组，并通过 `EMGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
 
 示例代码如下：
@@ -68,14 +68,30 @@ try {
 }
 ```
 
+### 解散群组
+
+仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `OnDestroyedFromGroup` 事件并被踢出群组。
+
+:::notice
+解散群组后，将删除本地数据库及内存中的群相关信息及群会话，谨慎操作。
+:::
+
+示例代码如下：
+
+```
+try {
+  await EMClient.getInstance.groupManager.destroyGroup("groupId");
+} on EMError catch (e) {}
+```
+
 ### 用户申请入群
 
 根据 [创建群组](#创建群组) 时的群组类型 (`GroupStyle`) 设置，加入群组的处理逻辑差别如下：
 
-- 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主或群管理员同意，加入群组后，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 回调；
-- 当群组类型为 `PublicJoinNeedApproval` 时，用户可以申请进群，群主或群管理员收到 `EMGroupEventHandler#onRequestToJoinReceivedFromGroup` 回调，并选择同意或拒绝入群申请：
-    - 群主或群管理员同意入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinAcceptedFromGroup` 回调，其他群成员收到`EMGroupEventHandler#onMemberJoinedFromGroup` 回调；
-    - 群主或群管理员拒绝入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 回调。
+- 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主或群管理员同意，加入群组后，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
+- 当群组类型为 `PublicJoinNeedApproval` 时，用户可以申请进群，群主或群管理员收到 `EMGroupEventHandler#onRequestToJoinReceivedFromGroup` 事件，并选择同意或拒绝入群申请：
+    - 群主或群管理员同意入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinAcceptedFromGroup` 事件，其他群成员收到`EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
+    - 群主或群管理员拒绝入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 事件。
 
 :::notice
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
@@ -103,30 +119,9 @@ try {
 }
 ```
 
-### 解散群组
-
-仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `OnDestroyedFromGroup` 回调并被踢出群组。
-
-:::notice
-解散群组后，将删除本地数据库及内存中的群相关信息及群会话，谨慎操作。
-:::
-
-示例代码如下：
-
-```dart
-SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
-  onSuccess: () =>
-  {
-  },
-  onError: (code, desc) =>
-  {
-  }
-));
-```
-
 ### 退出群组
 
-群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `EMGroupEventHandler#onMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [`DestroyGroup`](#解散群组) 解散群组。
+群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `EMGroupEventHandler#onMemberExitedFromGroup` 事件。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [`DestroyGroup`](#解散群组) 解散群组。
 
 示例代码如下：
 
@@ -260,24 +255,12 @@ try {
 示例代码如下：
 
 ```dart
-class _GroupPageState extends State<GroupPage> {
-  @override
-  void initState() {
     // 注册群组监听
-    EMClient.getInstance.groupManager.addEventHandler("UNIQUE_HANDLER_ID", EMGroupEventHandler());
-    super.initState();
-  }
+EMClient.getInstance.groupManager.addEventHandler(
+  "UNIQUE_HANDLER_ID",
+  EMGroupEventHandler(),
+);
 
-  @override
-  void dispose() {
     // 移除群组监听
     EMClient.getInstance.groupManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 ```

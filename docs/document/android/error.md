@@ -68,6 +68,7 @@ Android 中错误码的类为 `EMError`。
 | 506    |         MESSAGE_EXPIRED         | 消息已过期：发送群组回执时如果已经超过时间限制 (默认 3 天) 会提示该错误。 |
 | 507    |    MESSAGE_ILLEGAL_WHITELIST    | 用户未在白名单中：如果群组聊天室开启全员禁言，且用户未在白名单中发送消息时提示该错误。 |
 | 508    | MESSAGE_EXTERNAL_LOGIC_BLOCKED  | 消息执行发送前回调，发送的消息被用户自己的服务器定义的规则拦截掉时提示该错误。 |
+| 509    |      MESSAGE_CURRENT_LIMITING      |              单个用户 ID 发送群聊消息超出频率限制。              |
 | 600    |        GROUP_INVALID_ID         | 群组 ID 异常：使用群组相关 API，提供的群组 ID 为空时提示该错误。 |
 | 601    |      GROUP_ALREADY_JOINED       | 已在该群组中：调用加入群组的 API 时如果已经在该群组中则提示该错误。 |
 | 602    |        GROUP_NOT_JOINED         | 未加入该群组：尝试在未加入的群组中发送消息或进行群组操作时提示该错误。 |
@@ -89,6 +90,7 @@ Android 中错误码的类为 `EMError`。
 | 1001   |       CONTACT_REACH_LIMIT       |                邀请者联系人数量已经达到上限。                |
 | 1002   |    CONTACT_REACH_LIMIT_PEER     |                   受邀请者联系人达到上限。                   |
 | 1100   |  PRESENCE_PARAM_LENGTH_EXCEED   | 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 |
+| 1101   | PRESENCE_CANNOT_SUBSCRIBE_YOURSELF |                    不能订阅你自己的状态。                    |
 | 1110   |     TRANSLATE_PARAM_INVALID     |                        翻译参数错误。                        |
 | 1111   |  TRANSLATE_SERVICE_NOT_ENABLE   |                       翻译服务未启用。                       |
 | 1112   |      TRANSLATE_USAGE_LIMIT      |                      翻译用量达到上限。                      |

@@ -46,27 +46,12 @@ try {
 你需要先实现 `EMMultiDeviceEventHandler` 监听其他设备上的操作，再设置多设备监听器。
 
 ```dart
-class _MultiDevicePageState extends State<MultiDevicePage> {
-  @override
-  void initState() {
-    super.initState();
     // 添加多设备监听
     EMClient.getInstance.addMultiDeviceEventHandler(
       "UNIQUE_HANDLER_ID",
       EMMultiDeviceEventHandler(),
     );
-  }
 
-  @override
-  void dispose() {
     // 移除多设备监听
     EMClient.getInstance.removeMultiDeviceEventHandler("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 ```

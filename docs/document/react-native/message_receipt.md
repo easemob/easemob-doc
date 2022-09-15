@@ -308,7 +308,7 @@ ChatClient.getInstance()
 所有用户可以调用 `groupAckCount` 方法通过消息 ID 找到消息，在通过消息获取群组已读回执数量。
 
 ```typescript
-// msgId： 消息id
+// msgId： 消息 ID
 ChatClient.getInstance()
   .chatManager.groupAckCount(msgId)
   .then((count) => {

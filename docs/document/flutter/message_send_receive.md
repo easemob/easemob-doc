@@ -178,11 +178,11 @@ EMClient.getInstance.chatManager.sendMessage(message).then((value) {
 
 ### 接收消息
 
-你可以用注册 `EMChatEventHandler` 监听器接收消息。
+你可以添加 `EMChatEventHandler` 监听器接收消息。
 
 该 `EMChatEventHandler` 可以多次添加。请记得在不需要的时候移除该监听器，如在 `dispose` 的卸载组件的时候。
 
-在新消息到来时，你会收到 `onMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
+在新消息到来时，你会收到 `onMessagesReceived` 的事件，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
 ```dart
 // 继承并实现 EMChatEventHandler
@@ -287,13 +287,3 @@ try {
 // 消息被撤回时触发的回调（此回调位于 EMChatEventHandler 中）。
 void onMessagesRecalled(List<EMMessage> messages) {}
 ```
-
-### 更多操作
-
-你可以参考如下文档，在项目中实现更多的消息相关功能：
-
-- [消息概述](message_overview.html);
-- [管理本地消息数据](message_manage.html)；
-- [从服务器获取会话和消息（消息漫游）](message_retrieve.html)；
-- [获取消息的已读回执和送达回执](message_receipt.html)；
-- [实现翻译功能](message_translation.html)。
