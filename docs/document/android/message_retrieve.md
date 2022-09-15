@@ -63,13 +63,3 @@ EMClient.getInstance().chatManager().asyncfetchHistoryMessages(
     }
 );
 ```
-
-### 更多操作
-
-你可以参考如下文档，在项目中实现更多的消息相关功能：
-
-- [消息概述](message_overview.html)
-- [管理本地消息数据](message_manage.html)
-- [从服务器获取会话和消息（消息漫游）](message_retrieve.html)
-- [获取消息的已读回执和送达回执](message_receipt.html)
-- [实现翻译功能](message_translation.html)
