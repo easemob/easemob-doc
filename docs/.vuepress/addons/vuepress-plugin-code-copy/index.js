@@ -5,5 +5,12 @@ module.exports = (options, ctx) => ({
     selector: options.selector || 'div[class*="language-"] pre'
   },
   name: 'vuepress-plugin-code-copy',
+  /*
+  extendPageData ($page) {
+    $page.headersStr = ''
+    $page.content = ''
+    $page.normalizedContent = ''
+  },
+  */
   clientRootMixin: path.resolve(__dirname, 'clientRootMixin.js')
 })

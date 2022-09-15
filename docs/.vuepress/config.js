@@ -61,8 +61,8 @@ module.exports = {
             show: 不存在或者值为 true 时，菜单显示；存在并且值为 false 时，菜单不显示
           */
           { text: '产品简介', link: '/product/introduction.html' },
-          { text: '集成文档', link: '/document/android/quickstart' },
-          { text: 'API 参考', link: '/api/android' },
+          { text: '集成文档', link: '/document/android/quickstart.html' },
+          { text: 'API 参考', link: '/api/android/' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
@@ -687,9 +687,7 @@ module.exports = {
         lastUpdated: 'Last Updated: '
       }
     },
-    searchMaxSuggestions: 20,
     sidebarDepth: 2,
-    search: true,
     // 默认值是 true 。设置为 false 来禁用所有页面的 下一篇 链接
     nextLinks: true,
     // 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接
@@ -708,9 +706,13 @@ module.exports = {
         selector: '.extra-class'
       }
     ],
-    ['fulltext-search'],
+    [
+      '@vuepress/search',
+      {
+        searchMaxSuggestions: 10
+      }
+    ],
     ['@vuepress/last-updated'],
-    ['vuepress-plugin-table-of-contents'],
     ['vuepress-plugin-smooth-scroll'],
     // you can use this plugin multiple times
     [
