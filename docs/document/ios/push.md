@@ -27,14 +27,14 @@ APNs 是苹果官方提供的推送解决方案，主要用于在 app 处于不�
 
 ![image](@static/images/ios/push/push_ios_2_keychain_access_csr.jpeg)
 
-填写你的邮箱（这个邮箱是申请 App ID 的付费帐号）和常用名称（一般默认是计算机名，不用更改），并选择保存到硬盘：
+填写你的邮箱（该邮箱是申请 App ID 的付费帐号）和常用名称（一般默认是计算机名，不用更改），并选择保存到硬盘：
 
 ![image](@static/images/ios/push/push_ios_3_cert_assistant_cert_info.jpeg)
 
 点击继续: 
 ![image](@static/images/ios/push/push_ios_4_cert_assistant_cert_save.jpeg)
 
-在本地生成了名为 `EMImDemoAPS.certSigningRequest` 的 CSR 文件 。
+在本地生成了名为 `EMImDemoAPS.certSigningRequest` 的 CSR 文件。
 
 ### 2. 创建 App ID
 
@@ -50,7 +50,7 @@ APNs 是苹果官方提供的推送解决方案，主要用于在 app 处于不�
 
 ![image](@static/images/ios/push/push_ios_7_register_select_type.jpeg)
 
-输入你的 App ID 描述信息，可以输入工程名；Bunble ID（在工程的 General 信息中），一般格式为 com.youcompany.youprojname。
+输入你的 App ID 描述信息，可以输入工程名；Bundle ID（在工程的 General 信息中），一般格式为 com.youcompany.youprojname。
 
 ![image](@static/images/ios/push/push_ios_8_register_type_app_desc.jpeg)
 
@@ -72,11 +72,11 @@ APNs 是苹果官方提供的推送解决方案，主要用于在 app 处于不�
 
 ![image](@static/images/ios/push/push_ios_12_edit_app_id_config.jpeg)
 
-如果是开发模式，点击 `Development SSL Certificate` 下的 `Create Certificate`。如果是生产模式，点击 `Production SSL Certificate` 下的 `Create Certificate` 。
+如果是开发模式，点击 `Development SSL Certificate` 下的 `Create Certificate`。如果是生产模式，点击 `Production SSL Certificate` 下的 `Create Certificate`。
 
 ![image](@static/images/ios/push/push_ios_13_APNs_SSL_cert.jpeg)
 
-`Platform` 选择 `iOS` , `Choose File` 选择第一步中创建的 `CSR` 文件，点击 `Continue`。
+`Platform` 选择 `iOS`，`Choose File` 选择第一步中创建的 `CSR` 文件，点击 `Continue`。
 
 ![image](@static/images/ios/push/push_ios_14_select_csr.jpeg)
 
@@ -88,7 +88,7 @@ aps 文件创建成功了，点击 `Download` 下载到本地。（文件名：�
 
 导入证书
 
-双击上一节下载的文件（`aps_development.cer` 和 `aps.cer`）将其安装到电脑，在“钥匙串访问”中，可以看到已经导入的证书。
+双击上一节下载的文件（`aps_development.cer` 和 `aps.cer`）将其安装到电脑，在 `Keychain Access` 中，可以看到已经导入的证书。
 
 ![image](@static/images/ios/push/push_ios_16_keychain_access_apple_develop.jpeg)
 
@@ -100,7 +100,7 @@ aps 文件创建成功了，点击 `Download` 下载到本地。（文件名：�
 
 ![image](@static/images/ios/push/push_ios_18_generate_provision_file.jpeg)
 
-选择 `iOS App Development`（这里演示开发版描述文件的创建, 发布版本的创建流程一样，如果发布版本，请选择 App Store），点击 Continue。
+选择 `iOS App Development`（这里演示开发版描述文件的创建, 发布版本的创建流程一样，如果发布版本，请选择 App Store），点击 `Continue`。
 
 ![image](@static/images/ios/push/push_ios_19_generate_pr_register.jpeg)
 
@@ -130,7 +130,7 @@ PP 文件生成完成， 点击 `Download`。
 
 ### 1. 在 app 中开启推送权限
 
-需要在 xcode 中为 app 开启推送权限。 Targets → Capability → Push Notifications
+需要在 xcode 中为 app 开启推送权限。选择 `TARGETS > Capabilities > Push Notifications`。
 
 ![image](@static/images/ios/push/push_ios_26_xcode_enable_push_notifi.jpeg)
 
@@ -218,7 +218,7 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
     <td>✓</td>
     <td>✓</td>
   <tr>
-    <td>silentModeStartTime & silentModeEndTime：在指定的时间范围内不接收推送通知。</td>
+    <td>silentModeStartTime & silentModeEndTime：在指定的时间段内不接收推送通知。</td>
     <td>✓</td>
     <td>✗</td>
   </tr>
@@ -233,10 +233,11 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 
 **免打扰模式**
 
-1. 你可以在 app 级别指定 DND 时长和 DND 时间范围。环信 IM 在这两个时间段内不发送离线推送通知。
-2. 会话仅支持 DND 时长设置；DND 时间范围的设置不生效。
+1. 你可以在 app 级别指定免打扰时长和免打扰时间段。环信 IM 在这两个时间段内不发送离线推送通知。
 
-对于 app 和 app 中的所有会话，DND 模式的设置优先于推送通知方式的设置。
+2. 会话仅支持免打扰时长设置；免打扰时间段的设置不生效。
+
+对于 app 和 app 中的所有会话，免打扰模式的设置优先于推送通知方式的设置。
 
 例如，假设在 app 级别指定了免打扰时间段，并将指定会话的推送通知方式设置为 `All`。免打扰模式与推送通知方式的设置无关，即在指定的免打扰时间段内，你不会收到任何推送通知。
 
@@ -259,7 +260,7 @@ param.remindType = EMPushRemindTypeMentionOnly;
     }];
 
 //设置离线推送免打扰时长为 15 分钟。
-EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentModeParamTypeDuartion];
+EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentModeParamTypeDuration];
 param.silentModeDuration = 15;
 
 //设置离线推送的免打扰时间段为 8:30 到 15:00。
@@ -298,7 +299,7 @@ EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentM
 param.remindType = EMPushRemindTypeMentionOnly;
 
 //设置离线推送免打扰时长为 15 分钟。
-EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentModeParamTypeDuartion];
+EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentModeParamTypeDuration];
 param.silentModeDuration = 15;
                                 
 EMConversationType conversationType = EMConversationTypeGroupChat;
@@ -434,9 +435,9 @@ NSArray *conversations = @[conversation1,conversation2];
 }];
 
 //获取离线推送的首选语言。
-[[EMClient sharedClient].pushManager getPreferredNotificationLanguageCompletion:^(NSString *aLaguangeCode, EMError *aError) {
+[[EMClient sharedClient].pushManager getPreferredNotificationLanguageCompletion:^(NSString *aLanguageCode, EMError *aError) {
     if (!aError) {
-        NSLog(@"getPushPerformLanguage---%@",aLaguangeCode);
+        NSLog(@"getPushPerformLanguage---%@",aLanguageCode);
     }
 }];
 ```
@@ -693,7 +694,7 @@ message.chatType = EMChatTypeChat;
 
 ### 基于 UNNotificationServiceExtension 的扩展功能
 
-在 iOS10 之后生效，目的是为了唤醒 [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension?language=objc)，让你可以做更多的扩展。
+在 iOS 10 之后生效，目的是为了唤醒 [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension?language=objc)，让你可以做更多的扩展。
 
 ```plaintext
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];

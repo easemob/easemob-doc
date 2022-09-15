@@ -2,7 +2,7 @@
 
 <Toc />
 
-登录 Chat app 后，用户可以在一对一单聊、群聊、聊天室中发送如下类型的消息：
+登录 Chat app 后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
 
 - 文字消息，包含超链接和表情消息。
 - 附件消息，包含图片、语音、视频及文件消息。
@@ -97,7 +97,7 @@ message.chatType = EMChatTypeChat;
 
 ### 撤回消息
 
-消息撤回功能指用户可以撤回一定时间内自己发送出去的消息，消息撤回时限默认 2 分钟。如需调整，可以联系环信即时通讯 IM 客户经理。
+消息撤回功能指用户可以撤回一定时间内自己发送出去的消息，消息撤回时限默认 2 分钟。如需调整，可联系商务。
 
 ```objectivec
 [[EMClient sharedClient].chatManager recallMessageWithMessageId:messageId completion:^(EMError *aError) {
@@ -352,12 +352,3 @@ message.chatType = EMTypeChat;
      NSString *value = [message.ext objectForKey:@"attribute"];  }
   }
 ```
-
-## 更多操作
-
-你可以参考如下文档，在项目中实现更多的消息相关功能：
-
-- [管理本地消息数据](message_manage.html)
-- [从服务器获取会话和消息（消息漫游）](message_retrieve.html)
-- [获取消息的已读回执和送达回执](message_receipt.html)
-- [实现翻译功能](message_translation.html)

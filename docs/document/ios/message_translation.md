@@ -2,10 +2,11 @@
 
 <Toc />
 
-文本消息支持翻译功能，包含按需翻译和自动翻译。
+为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对文本消息进行按需翻译或自动翻译：
 
-- 按需翻译：收到消息时，接收方将消息内容翻译成目标语言。
-- 自动翻译：用户发送消息时，SDK 根据设置的目标语言自动翻译消息内容，然后将消息原文和译文一并发送给消息接收方。
+- 按需翻译：接收方在收到文本消息后，将消息内容翻译为目标语言。
+
+- 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
 
 :::notice
 翻译服务由 Microsoft Azure Translator API 提供支持。可以在 [Microsoft Azure Translator Language Support](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/language-support) 页面查看目前支持的语言。
@@ -17,7 +18,8 @@
 
 1. 完成 `3.9.1 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的[使用限制](/product/limitation.html)。
-3. 已联系商务开通翻译功能。
+3. 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通翻译功能。
+4. 该功能由 Microsoft Azure Translation API 提供，因此开始前请确保你了解该功能支持的目标语言。详见 [Language support](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/language-support)。
 
 如下为按需翻译示例：
 
@@ -28,8 +30,8 @@
 iOS SDK 支持你通过调用 API 在项目中实现如下功能：
 
 - `fetchSupportedLanguages`：获取支持的翻译语言；
-- `translateMessage`：翻译文本消息；
-- 设置自动翻译。
+- 按需翻译：接收方在收到文本消息后调用 `translateMessage` 进行翻译；
+- 自动翻译：发送方发送消息之前设置 `EMTextMessageBody` 中的 `targetLanguages` 字段为目标语言，然后发送消息，接收方会收到消息原文和译文。
 
 ## 实现方法
 
@@ -38,16 +40,10 @@ iOS SDK 支持你通过调用 API 在项目中实现如下功能：
 SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManager 模块的如下接口获取翻译功能支持的目标语言。
 
 ```objectivec
-/*!
- *  \~chinese
+/*
  *  获取翻译服务支持的语言。
  *  @param aCompletionBlock 完成的回调。
  *
- *  \~english
- *
- *  Fetches all languages what the translate service support.
- *
- *  @param aCompletionBlock The complete callback.
  */
 - (void)fetchSupportedLanguages:(void(^_Nullable)(NSArray<EMTranslateLanguage*>* _Nullable languages,EMError* _Nullable error))aCompletionBlock
 ```
@@ -55,7 +51,7 @@ SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManage
 使用过程如下:
 
 ```objectivec
-[[[EMClient sharedClient] chatManager] fetchSupportedLangurages:^(NSArray<EMTranslateLanguage *> * _Nullable languages, EMError * _Nullable error) {
+[[[EMClient sharedClient] chatManager] fetchSupportedLanguages:^(NSArray<EMTranslateLanguage *> * _Nullable languages, EMError * _Nullable error) {
 
 }];
 ```

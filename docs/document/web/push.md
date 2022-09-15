@@ -4,7 +4,7 @@
 
 环信 IM 提供离线推送服务，具有低延迟、高交付、高并发、不侵犯用户个人数据的特点，支持你对离线推送功能进行如下配置：
 
-- 设置推送通知，包含设置推送通知方式和免打扰模式。
+- 设置推送通知，包含设置推送通知方式和免打扰模式。设置推送通知为推送的高级功能，使用前需要在环信即时通讯云管理后台上打开开关。
 - 设置推送翻译。
 
 ## 技术原理
@@ -61,7 +61,7 @@
     <td>✓</td>
     <td>✓</td>
   <tr>
-    <td>startTime & endTime：在指定的时间范围内不接收推送通知。</td>
+    <td>startTime & endTime：在指定的时间段内不接收推送通知。</td>
     <td>✓</td>
     <td>✗</td>
   </tr>
@@ -72,7 +72,7 @@
 
 会话级别的推送通知方式设置优先于 app 级别的设置，未设置推送通知方式的会话默认采用 app 的设置。
 
-例如，假设 app 的推送方式设置为 `AT`，而指定会话的推送方式设置为`ALL`。你会收到来自该会话的所有推送通知，而对于其他会话来说，你只会收到提及你的消息的推送通知。
+例如，假设 app 的推送方式设置为 `AT`，而指定会话的推送方式设置为 `ALL`。你会收到来自该会话的所有推送通知，而对于其他会话来说，你只会收到提及你的消息的推送通知。
 
 **免打扰模式**
 
@@ -89,7 +89,7 @@
 
 你可以调用 `setSilentModeForAll` 方法在 app 级别设置推送通知，并通过指定 `paramType` 字段设置推送通知方式和免打扰模式，如下代码示例所示：
 
-```` javascript
+```javascript
 /**
   options // 推送通知配置选项。
 	options: {
@@ -119,7 +119,7 @@ const params = {
   }
 }
 WebIM.conn.setSilentModeForAll(params)
-````
+```
 
 ### 获取 app 的推送通知设置
 
@@ -134,7 +134,7 @@ WebIM.conn.getSilentModeForAll()
 
 你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知设置，示例代码如下：
 
-``` javascript
+```javascript
 /**
 	const params = {
     conversationId: 'test', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
@@ -185,22 +185,22 @@ WebIM.conn.setSilentModeForConversation(params)
 
 调用 `getSilentModeForConversation` 获取单个会话的推送通知设置，示例代码如下：
 
-```` javascript
+```javascript
 const params = {
   conversationId: 'test', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
   type: 'singleChat', // 会话类型：singleChat（单聊）、groupChat（群聊）和 chatRoom（聊天室）。
 }
 WebIM.conn.getSilentModeForConversation(params)
-````
+```
 
 ### 获取多个会话的推送通知设置
 
-1. 你可以在每次通话中检索最多 20 个会话的推送通知设置。
+1. 每次最多可获取 20 个会话的推送通知设置。
 2. 如果会话继承了 app 设置或其推送通知设置已过期，则返回的字典不包含此会话。
 
 你可以调用 `getSilentModeForConversations` 获取多个会话的推送通知设置，示例代码如下：
 
-```` javascript
+```javascript
 const params = {
   conversationList: [
     {
@@ -214,7 +214,7 @@ const params = {
   ]
 }
 WebIM.conn.getSilentModeForConversations(params)
-````
+```
 
 ### 清除单个会话的推送通知方式的设置
 
@@ -232,7 +232,7 @@ WebIM.conn.clearRemindTypeForConversation(params)
 
 ### 设置推送翻译
 
-如果用户启用 [自动翻译](message_translation.html) 功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
+如果用户启用[自动翻译](message_translation.html) 功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
 
 推送通知与翻译功能协同工作。作为接收方，你可以设置你在离线时希望接收的推送通知的首选语言。如果翻译消息的语言符合你的设置，则翻译消息显示在推送通知中；否则，将显示原始消息。
 

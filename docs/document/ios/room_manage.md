@@ -130,55 +130,71 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 具体事件如下：
 
 ```objectivec
-// 有用户加入聊天室。
+// 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
 - (void)userDidJoinChatroom:(EMChatroom *)aChatroom
       user:(NSString *)aUsername{
-  }
+}
 
-// 有成员离开聊天室。
+// 有成员主动退出聊天室。聊天室的所有成员（除退出成员外）会收到该事件。
 - (void)userDidLeaveChatroom:(EMChatroom *)aChatroom
-      user:(NSString *)aUsername {
-  }
+         user:(NSString *)aUsername {
+}
 
-// 有成员被踢出聊天室
+// 有成员被踢出聊天室。被踢出聊天室的成员会收到该事件。
 - (void)didDismissFromChatroom:(EMChatroom *)aChatroom
       reason:(EMChatroomBeKickedReason)aReason {
   }
 
-// 聊天室成员被禁言
+// 聊天室详情有变更。聊天室的所有成员会收到该事件。
+- (void)chatroomSpecificationDidUpdate:(EMChatroom *)aChatroom;
+
+// 有成员被添加至聊天室白名单。被添加的成员收到该事件。
+- (void)chatroomWhiteListDidUpdate:(EMChatroom *)aChatroom
+              addedWhiteListMembers:(NSArray<NSString *> *)aMembers;
+
+// 有成员被移出白名单。被移出的成员收到该事件。
+- (void)chatroomWhiteListDidUpdate:(EMChatroom *)aChatroom
+            removedWhiteListMembers:(NSArray<NSString *> *)aMembers;
+
+// 聊天室一键禁言状态变化。聊天室所有成员（除操作者外）会收到该事件。
+- (void)chatroomAllMemberMuteChanged:(EMChatroom *)aChatroom
+                     isAllMemberMuted:(BOOL)aMuted;
+
+// 更新聊天室公告。聊天室的所有成员会收到该事件。
+- (void)chatroomAnnouncementDidUpdate:(EMChatroom *)aChatroom
+                          announcement:(NSString *_Nullable)aAnnouncement;
+
+// 有成员被加入禁言列表。被禁言的成员会收到该事件。
 
 - (void)chatroomMuteListDidUpdate:(EMChatroom *)aChatroom
       addedMutedMembers:(NSArray *)aMutes
              muteExpire:(NSInteger)aMuteExpire {
   }
 
-// 聊天室成员被解除禁言
+// 有成员被移除禁言列表。被解除禁言的成员会收到该事件。
 - (void)chatroomMuteListDidUpdate:(EMChatroom *)aChatroom
       removedMutedMembers:(NSArray *)aMutes {
   }
 
-// 聊天室成员被设为管理员
+// 有成员被设为管理员。被添加的管理员会收到该事件。
 - (void)chatroomAdminListDidUpdate:(EMChatroom *)aChatroom
       addedAdmin:(NSString *)aAdmin {
   }
 
-// 聊天室成员被移除管理员权限
+// 有成员被移除管理员权限。被移除权限的管理员会收到该事件。
 - (void)chatroomAdminListDidUpdate:(EMChatroom *)aChatroom
       removedAdmin:(NSString *)aAdmin {
   }
 
-// 聊天室所有者变更
+// 聊天室所有者变更。聊天室全体成员会收到该事件。
 - (void)chatroomOwnerDidUpdate:(EMChatroom *)aChatroom
                       newOwner:(NSString *)aNewOwner
                       oldOwner:(NSString *)aOldOwner {
 
+// 有成员修改/设置聊天室自定义属性，聊天室的所有成员会收到该事件。
+- (void)chatroomAttributesDidUpdated:(NSString *_Nonnull)roomId attributeMap:(NSDictionary<NSString *, NSString *> *_Nullable)attributeMap from:(NSString *_Nonnull)fromId;
   }
+
+// 有成员删除聊天室自定义属性。聊天室所有成员会收到该事件。
+- (void)chatroomAttributesDidRemoved:(NSString *_Nonnull)roomId attributes:(NSArray<__kindof NSString *> *_Nullable)attributes from:(NSString *_Nonnull)fromId;
 ```
-
-## 更多操作
-
-你可以参考如下文档，在项目中实现更多的聊天室相关功能：
-
-- [聊天室概述](room_overview.html)
-- [管理聊天室成员](room_members.html)
-- [管理聊天室属性](room_attributes.html)
