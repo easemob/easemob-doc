@@ -316,6 +316,6 @@ SDKClient.Instance.GroupManager.GetGroupWhiteListFromServer(currentGroupId, hand
 ));
 ```
 
-### 更多
+### 监听群组事件
 
-- [监听器介绍](group_manage.html#监听群组事件)
+详见 [监听群组事件](group_manage.html#监听群组事件)

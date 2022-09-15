@@ -6,7 +6,7 @@
 
 ## 前提条件
 
-开始前，请注册有效的环信即时通讯 IM 开发者账号和取得 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+开始前，请注册有效的环信即时通讯 IM 开发者账号和获取 App key，参见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
 
 ## 集成环境
 
@@ -14,7 +14,7 @@
 
 ## SDK 初始化
 
-初始化是使用 SDK 必要的、执行在所有接口方法调用之前的步骤。
+初始化是使用 SDK 的第一步，需在调用任何方法前完成。
 如果进行多次初始化操作，只有第一次初始化以及相关的参数生效。
 
 初始化示例代码：
@@ -27,19 +27,21 @@ options.DebugMode = true;
 SDKClient.Instance.InitWithOptions(options);
 ```
 
-初始化参数非常多，这里做主要参数介绍。参数聚合在 `Options` 类型中。
+初始化参数非常多，这里对主要参数进行介绍。参数聚合在 `Options` 类型中。
 
-- `AppKey`：App 在控制台注册完成之后会生成该参数，这是 App 在系统中的唯一标识。
-- `AutoLogin`：是否自动登录。(Unity 不支持此选项)
-- `DebugMode`：是否启用日志输出功能。设置为 `true` 则会启用日志输出功能，在调试开发阶段帮助定位和分析问题。
-- `AcceptInvitationAlways`：是否自动接受申请。设置为 `true` 则当有人申请好友时，自动接受申请。
-- `AutoAcceptGroupInvitation`：是否自动接受邀请。设置为 `true` 则当有人邀请当前用户入群时，自动接受邀请。
-- `RequireAck`：是否需要发送已读回执。设置为 `true` 则消息需要已读回执。详见 [消息回执章节](message_receipt.html)。
-- `RequireDeliveryAck`：是否需要发送送达回执。设置为 `true` 则消息需要送达回执。详见消息回执章节。
-- `DeleteMessagesAsExitGroup`：是否需要在离开群组时自动删除聊天历史消息。设置为 `true` 则在退出群组的时候，会删除聊天记录。
-- `DeleteMessagesAsExitRoom`：是否需要在离开聊天室时自动删除聊天历史消息。设置为 `true` 则在退出聊天室的时候，会删除记录。
-- `IsRoomOwnerLeaveAllowed`：是否允许聊天室所有者离开聊天室。设置为 `true` 则允许。详见 [聊天室](room_overview.html) 章节。
-- `IsAutoDownload`: 是否开启自动下载。设置为 `true` 则收到图片、视频、音频、语音消息会自动下载。详见 [消息](message_send_receive.html#接收消息) 章节。
+| 参数             | 描述                                                         |
+| :----------| :----------------------------------------------------------- |
+| `AppKey` | App 在控制台注册完成之后会生成该参数，这是 App 在系统中的唯一标识。                                  |
+| `AutoLogin`  | 是否自动登录。(Unity 不支持此选项)  |
+| `DebugMode` | 是否启用日志输出功能。设置为 `true` 则会启用日志输出功能，在调试开发阶段帮助定位和分析问题。 |
+| `AcceptInvitationAlways` | 是否自动接受申请。设置为 `true` 则当有人申请好友时，自动接受申请。 |
+| `AutoAcceptGroupInvitation` | 是否自动接受邀请。设置为 `true` 则当有人邀请当前用户入群时，自动接受邀请。  |
+| `RequireAck` | 是否需要发送已读回执。设置为 `true` 则消息需要已读回执。详见 [消息回执章节](message_receipt.html)。 |
+| `RequireDeliveryAck` | 是否需要发送送达回执。设置为 `true` 则消息需要送达回执。详见消息回执章节。 |
+| `DeleteMessagesAsExitGroup` | 是否需要在离开群组时自动删除聊天历史消息。设置为 `true` 则在退出群组的时候，会删除聊天记录。  |
+| `DeleteMessagesAsExitRoom` | 是否需要在离开聊天室时自动删除聊天历史消息。设置为 `true` 则在退出聊天室的时候，会删除记录。 |
+| `IsRoomOwnerLeaveAllowed`  | 是否允许聊天室所有者离开聊天室。设置为 `true` 则允许。详见 [聊天室](room_overview.html) 章节。  |
+| `IsAutoDownload`  | 是否开启自动下载。设置为 `true` 则收到图片、视频、音频、语音消息会自动下载。详见 [消息](message_send_receive.html#接收消息) 章节。 |
 
 ## 注册用户
 
@@ -72,13 +74,15 @@ SDKClient.Instance.CreateAccount(username, password,
 
 ## 用户登录
 
-目前登录服务器有三种方式。通过 **用户 ID + 密码** 登录，通过 **用户 ID + token** 登录（Unity暂不支持），还有通过 **用户 ID + agoraToken** 登录。
-
+目前登录服务器有两种方式：
+- **用户 ID + 密码**；  
+- **用户 ID + agoraToken**。
 :::notice
-使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
+- 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
+- 只支持手动登录，不支持自动登录。
 :::
 
-### 手动登录
+### 用户 ID + 密码
 
 **用户 ID + 密码** 登录是传统的登录方式。
 
@@ -106,7 +110,9 @@ SDKClient.Instance.Login(username, password,
 );
 ```
 
-**用户 ID + agoraToken** 是支持声网 token 直接登录的方式。
+### 用户 ID + agoraToken
+
+**用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般同时使用声网和环信产品时利用该方法登录。token 获取请参考 [使用声网 user token 鉴权](https://docs.agora.io/en/agora-chat/generate_user_tokens?platform=React%20Native)。
 
 ```csharp
 SDKClient.Instance.LoginWithAgoraToken(username, token, 
@@ -131,7 +137,6 @@ SDKClient.Instance.LoginWithAgoraToken(username, token,
     ));
 ```
 
-### 自动登录（Unity 暂不支持）
 
 ## 退出登录
 
@@ -158,7 +163,7 @@ SDKClient.Instance.Logout(false,
 你需添加 `IConnectionDelegate#OnConnected` 回调。
 
 ```csharp
-// 监听器建议在初始化完成之后，登录之前设置，这样可以恰当地收到登录通知。
+// 监听器建议在初始化完成之后，登录之前设置，这样可确保收到登录通知。
 class ConnectionDelegate : IConnectionDelegate
 {
     // 连接回调
@@ -212,5 +217,3 @@ SDKClient.Instance.DeleteConnectionDelegate(connectionDelegate);
 ## 输出信息到日志文件
 
 如果开启日志调试模式，会通过控制台输出日志。`DebugMode` 设置为 `true`。
-
-## 更多
