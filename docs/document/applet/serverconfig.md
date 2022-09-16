@@ -9,11 +9,11 @@
 
 ![img](@static/images/applet/config1.png)
 
-3. 在 “</>开发” 模块，点击 “开发管理”，找到 “开发设置” 选项，下拉找到 “服务器域名” 模块
+3. 在 “</>开发” 模块，点击 “开发管理”，找到 “开发设置” 选项，下拉找到 “服务器域名” 模块。
 
 ![img](@static/images/applet/config2.png)
 
-4. 首次设置服务器域名的话，会有一个 “开始配置” 按钮，点击进入
+4. 首次设置服务器域名的话，会有一个 “开始配置” 按钮，点击进入。
 
 ![img](@static/images/applet/config3.png)
 
@@ -25,10 +25,10 @@
 
 ![img](@static/images/applet/config5.png)
 
-7. 登陆环信后台获取 socket 域名，进入即时通讯-服务概览页，即可看到如图的域名展示
+7. 登陆环信后台获取 socket 域名，进入即时通讯-服务概览页，即可看到如图的域名展示。
 
 :::notice
-字节跳动小程序、QQ 小程序、百度小程序、uniapp 全平台等同微信小程序的域名一致，使用微信小程序栏的域名即可
+字节跳动小程序、QQ 小程序、百度小程序、uniapp 全平台等同微信小程序的域名一致，使用微信小程序栏的域名即可。
 :::
 
 ![img](@static/images/applet/config6.png)

@@ -136,6 +136,7 @@ let username, password
 
 // 初始化客户端。
 WebIM.conn = new WebIM.connection({
+    //注意这里的 "K" 需大写。
     appKey: appKey,
 })
 
