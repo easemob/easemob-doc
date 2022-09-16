@@ -81,8 +81,8 @@ Authorization：`Bearer ${token}`
 | 修改用户密码 | PUT    | /{org_name}/{app_name}/users/{username}/password | 修改用户的密码。      |
 | 获取单个用户在线状态（status） | GET   | /{org_name}/{app_name}/users/{username}/status  | 查看一个用户的在线状态。|
 | 批量获取用户在线状态（status）| GET   | /{org_name}/{app_name}/users/batch/status | 批量查看用户的在线状态。|
-| 设置用户全局禁言 | POST | /{orgName}/{appName}/mutes | 设置单个用户 ID 的单聊、群组、聊天室消息全局禁言。|
-| 查询单个用户 ID 全局禁言 | GET    | /{orgName}/{appName}/mutes/{username} | 查询单个用户的单聊、群聊和聊天室消息的全局禁言。 |
+| 设置用户全局禁言 | POST | /{org_name}/{app_name}/mutes | 设置单个用户 ID 的单聊、群组、聊天室消息全局禁言。|
+| 查询单个用户 ID 全局禁言 | GET    | /{org_name}/{app_name}/mutes/{username} | 查询单个用户的单聊、群聊和聊天室消息的全局禁言。 |
 | 查询 app 下的所有全局禁言的用户 | POST   | /{org_name}/{app_name}/users  | 查询 app 下所有全局禁言的用户及其禁言剩余时间。|
 | 获取用户离线消息数量  | GET  | /{org_name}/{app_name}/users/{owner_username}/offline_msg_count | 获取用户的离线消息数量。|
 | 获取某条离线消息状态  | GET  | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id} | 获取用户的离线消息的状态，即查看该消息是否已投递。|
