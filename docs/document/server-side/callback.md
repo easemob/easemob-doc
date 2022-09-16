@@ -216,11 +216,11 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
 
 ```json
 {
-    "callId":"easemob-demo#test_0990a64f-dp01-6c50-8696-cf3b48b20e7e",
+    "callId":"XXXX-demo#XXXX-dp01-XXXX-8696-cf3b48b20e7e",
     "eventType":"chat_offline",
     "timestamp":1600060847294,
     "chat_type":"groupchat",
-    "group_id":"16934809238921545",
+    "group_id":"169XXXX21545",
     "from":"user1",
     "to":"user2",
     "msg_id":"8924312242322",
@@ -231,8 +231,6 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
     "security":"2ca02c394bef9e7abc83958bcc3156d3"
 }
 ```
-
-[Payload 数据格式说明](https://docs-im.easemob.com/im/server/basics/chatrecord#聊天记录数据结构)
 
 #### 应答包字段说明
 
@@ -255,7 +253,7 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
 
 Authorization：`Bearer ${YourAppToken}`
 
-为提高项目的安全性，使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 仅支持使用 App Token 的鉴权方式，详见 [使用 Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
 #### 基本信息
 
@@ -297,7 +295,7 @@ Authorization：`Bearer ${YourAppToken}`
 
 ```shell
 curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
--H 'Authorization: Bearer {{token}}'
+-H 'Authorization: Bearer {token}'
 ```
 
 #### 响应示例
@@ -349,7 +347,7 @@ curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`  | String | 是       | 内容类型，请填 `application/json`。                                          |
-| `Authorization` | String | 是       | 鉴权 App Token 的值。详见[使用 token 鉴权](https://docs-im.easemob.com/ccim/authentication)。 |
+| `Authorization` | String | 是       | 鉴权 App Token 的值。详见 [使用 app token 鉴权](https://docs-im.easemob.com/ccim/authentication)。 |
 
 #### 请求 body
 
