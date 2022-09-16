@@ -31,7 +31,7 @@ EaseIMKit 源码地址
 pod 'EaseIMKit'
 ```
 
-需要在 Podfile 文件加上 `use_frameworks!`
+需要在 `Podfile` 文件加上 `use_frameworks!`
 
 :::notice
 EaseIMKit: 对应 HyphenateChat SDK（HyphenateChat 不包含实时音视频，EaseIMKit 不包含音视频，EaseIM 依赖音视频库 EaseCallKit 后实现了音视频功能）
@@ -45,9 +45,9 @@ EaseIMKit 中包含了拍照，发语音，发图片，发视频，发位置，�
 
 执行命令：`git clone https://github.com/easemob/easeui_ios.git`
 
-- 创建 Podfile 文件并添加 EaseIMKit 源码依赖
+- 创建 `Podfile` 文件并添加 EaseIMKit 源码依赖
 
-    1. 项目Podfile 文件 和 ProjectName.xcodeproj 文件 应在同一目录，如下图所示：
+    1. 项目 `Podfile` 文件 和 `ProjectName.xcodeproj` 文件应在同一目录，如下图所示：
 
     ![img](@static/images/ios/easeimkit1.png)
 
@@ -100,7 +100,7 @@ EaseIMKit 中包含了拍照，发语音，发图片，发视频，发位置，�
 
 EaseIMKitManager 主要包含系统通知（好友申请，群邀请/申请）回调，未读总数回调等方法。 用户需要注册自己的类到 EaseIMKitManagerDelegate 才可收到未读总数变化回调。 用户需要添加 EaseIMKitSystemNotiDelegate 代理才可收到系统通知相关回调。
 
-系统通知相关回调接口，系统通知构造成了一个本地 Conversation，每个新通知构造为一条本地 message。 系统通知所构造的 Conversation 的 conversationId 为 @“emsystemnotificationid”。
+系统通知相关回调接口，系统通知构造成了一个本地会话，每个新通知构造为一条本地消息。 系统通知所构造的会话的 conversationId 为 @“emsystemnotificationid”。
 
 #### 是否需要系统通知
 
@@ -185,7 +185,7 @@ EaseChatViewController *chatController = [EaseChatViewController initWithConvers
 chatController.view.frame = self.view.bounds;
 ```
 
-聊天控制器嵌入自己的聊天页后还需传入消息列表 messageList 以供 EaseChatViewControlle 展示使用
+聊天控制器嵌入自己的聊天页后还需传入消息列表 messageList 以供 EaseChatViewController 展示使用
 
 ```objectivec
 //isScrollBottom 是否滑动到页面底部
@@ -708,7 +708,7 @@ return menuArray;
 - (NSMutableArray<EaseExtMenuModel*>*)messageLongPressExtMenuItemArray:(NSMutableArray<EaseExtMenuModel*>*)defaultLongPressItems message:(EMMessage*)message;
 ```
 
-默认消息cell长按回调示例（EaseIM APP有效）：
+默认消息 cell 长按回调示例（EaseIM APP有效）：
 
 ```objectivec
 //添加转发消息
@@ -893,7 +893,7 @@ EaseConversationsViewControllerDelegate
     //从服务器获取当前登录账户的联系人列表
     [EMClient.sharedClient.contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
         if (!aError) {
-            self->_contancts = [aList mutableCopy];
+            self->_contacts = [aList mutableCopy];
             NSMutableArray<EaseUserDelegate> *contacts = [NSMutableArray<EaseUserDelegate> array];
             for (NSString *username in aList) {
                 EMContactModel *model = [[EMContactModel alloc] init];

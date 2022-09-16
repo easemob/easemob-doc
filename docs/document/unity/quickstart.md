@@ -22,7 +22,7 @@
 开始前，请确保你的开发环境满足以下条件：
 
 - Unity Editor 2019.4.28 或以上版本
-- Unity SDK 3.9.0 或以上
+- Unity SDK 1.0.5 或以上
 - 目前 Unity SDK 仅支持 x86 指令集及 Intel 芯片。
 - 操作系统与编译器要求：
 
@@ -48,19 +48,22 @@
 2. 打开 Unity Hub，选择 **Projects** 页签，点击 **Open** 右边的下拉菜单，选择 **Add project from disk**，然后选择步骤 1 中本地路径下的 `chat_unity_quickstart`。这时，**Projects** 列表中显示 **chat_unity_quickstart** 项目。
 3. 单击 **chat_unity_quickstart** 打开项目。
 
-    如果正常打开，该流程结束。
-    
-    如果 Demo 项目与本地 Unity Editor 版本不一致，你需要进行以下操作：
-    
-    1. 在弹出的 **Editor version not installed** 提示框下方，选择 **Choose another Editor version**。
-    2. 在弹出的 **Select Editor version and platform** 窗口中，选择本地安装的 Editor 版本，并根据后续提示打开项目。
+   如果正常打开，该流程结束。
+
+  :::notice
+   如果 Demo 项目与本地 Unity Editor 版本不一致，你需要进行以下操作：
+
+   1. 在弹出的 **Editor version not installed** 提示框下方，选择 **Choose another Editor version**。
+
+   2. 在弹出的 **Select Editor version and platform** 窗口中，选择本地安装的 Editor 版本，并根据后续提示打开项目。
+   :::
 
 ### 2. 集成环信即时通讯 SDK
 
 你可以参考以下步骤集成 SDK：
 
 1. 在 [Unity 项目](https://github.com/easemob/emclient-unity) 页面点击 **下载 Unity SDK**，获取最新版的环信即时通讯 IM Unity SDK（`hyphenateCWrapper.unitypackage`）。
-2. 在 Unity Editor 中，依次选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 `hyphenateCWrapper.unitypackage` 导入。
+2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 `hyphenateCWrapper.unitypackage` 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
 
 ## 实现发送和接收单聊消息
