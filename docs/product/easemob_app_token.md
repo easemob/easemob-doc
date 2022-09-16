@@ -28,28 +28,28 @@ POST {https://host}/{org_name}/{app_name}/token
 
 |   参数    | 类型   | 是否必需 | 描述         |
 | :-------: | :----- | :------- | ------------ |
-|  `host`| String | 必需     |你在环信即时通讯云控制台注册应用时的集群服务器地址。|
-| `org_name` | String | 必需     | 你在环信即时通讯云控制台注册项目时填入的公司（组织）名称。  |
-| `app_name` | String | 必需     | 你在环信即时通讯云控制台注册项目时填入的应用名称。|
+|  `host`| String | 是    |你在环信即时通讯云控制台注册应用时的集群服务器地址。|
+| `org_name` | String | 是     | 你在环信即时通讯云控制台注册项目时填入的公司（组织）名称。  |
+| `app_name` | String | 是    | 你在环信即时通讯云控制台注册项目时填入的应用名称。|
 
-#### 请求头参数
+#### 请求 header
 
 |      参数      | 类型   | 是否必需 |        描述        |
 | :------------: | :----- | :------: | :----------------: |
-| `Content-Type` | String |   必需   | 内容类型：`application/json` |
+| `Content-Type` | String |   是   | 内容类型：`application/json` |
 
-#### 请求体参数
+#### 请求 body
 
-| 参数    | 类型   | 是否必需   | 描述                                                         |
-| :------------ | :----- | :------:| :-------------------- |
-| `grant_type`    | String |   必需| `client_credentials` ，固定字符串。          |
-| `client_id`     | String |   必需   | App 的 `client_id`，参见 [app 详情页面](https://console.easemob.com/app-detail/detail)。 |
-| `client_secret` | String |   必需   | App 的 `client_secret`，参见 [app 详情页面](https://console.easemob.com/app-detail/detail)。 |
-| `ttl`           | String |   必需   | token 有效期，单位为秒(s)。此外，也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。 |
+| 参数            | 类型   | 是否必需 | 描述                                                         |
+| :-------------- | :----- | :------: | :----------------------------------------------------------- |
+| `grant_type`    | String |    是    | `client_credentials`，固定字符串。                          |
+| `client_id`     | String |    是    | App 的 `client_id`，参见 [app 详情页面](https://console.easemob.com/app-detail/detail)。 |
+| `client_secret` | String |    是    | App 的 `client_secret`，参见 [app 详情页面](https://console.easemob.com/app-detail/detail)。 |
+| `ttl`           | Long   |    否    | token 有效期，单位为秒(s)。设置为 `0` 则 token 有效期为永久。若不传该参数，默认值为 60 天。也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。 |
 
 ### HTTP 响应
 
-#### 响应参数
+#### 响应 body
 
 | 参数     | 类型      | 说明                                 |
 | :-----------| :--------- | :----------------------------------- |

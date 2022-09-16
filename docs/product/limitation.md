@@ -6,7 +6,7 @@
 
 ## 用户注册
 
-- username 用户 ID：长度不可超过 64 个字节长度。不可设置为空。支持以下字符集：
+- username 用户 ID：长度不能超过 64 字节。不可设置为空。支持以下字符集：
     - 26 个小写英文字母 a-z；
     - 26 个大写英文字母 A-Z；
     - 10 个数字 0-9；
@@ -70,7 +70,7 @@
 
 ## 调用频率限制
 
-[Rest API 调用频率限制。](limitationapi.html)
+[Rest API 调用频率限制](limitationapi.html)。
 
 ## 消息大小限制
 
@@ -78,15 +78,31 @@
 
 | 消息类型       | 消息长度限制                         | 相关 API                                                     |
 | :------------- | :----------------------------------- | :----------------------------------------------------------- |
-| 文本消息       | 5 KB                                 | `createTxtSendMessage`|
+| 文本消息       | 3 KB                                 | `createTxtSendMessage`|
 | 图片消息       | 10 MB                                | `createImageSendMessage`|
 | 语音消息       | 10 MB                                | `createVoiceSendMessage`|
 | 视频消息       | 10 MB                                | `createVideoSendMessage`|
 | 文件消息       | 10 MB                                | `createFileSendMessage`|
-| 透传消息       | 5 KB                                 | `createSendMessage`|
+| 透传消息       | 3 KB                                 | `createSendMessage`|
 | 消息自定义扩展 | 扩展消息大小不能超过原类型消息的大小     |`createSendMessage`|
-| 自定义消息     | 5 KB                                 |`createSendMessage`|
+| 自定义消息     | 3 KB                                 |`createSendMessage`|
 
 ## 用户属性大小限制
 
-默认单一用户的属性总长不得超过 2 KB. 默认一个 app 下所有用户的属性总长度不得超过 10 GB。
+默认单一用户的属性总长不得超过 2 KB。默认一个 app 下所有用户的属性总长度不得超过 10 GB。
+
+## 消息撤回
+
+默认撤回时限为 2 分钟，可根据 App Key 在环信即时通讯云管理后台单独设置。
+
+## 聊天室自定义属性（key-value）
+
+每个聊天室最多可有 100 个自定义属性，每个应用的聊天室自定义属性总大小不超过 10 GB。
+
+聊天室自定义属性为键值对（key-value）结构，单个 key 不能超过 128 个字符，支持以下字符集：
+  • 26 个小写英文字母 a-z；
+  • 26 个大写英文字母 A-Z；
+  • 10 个数字 0-9；
+  • “_”, “-”, “.”。
+
+每个聊天室属性 value 不能超过 4096 个字符。

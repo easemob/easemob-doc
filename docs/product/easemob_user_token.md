@@ -2,7 +2,7 @@
 
 <Toc />
 
-如果你的用户在客户端使用环信 token 登录和鉴权，可参考本篇获取用户 token。
+如果你的用户在客户端使用环信 token 登录和鉴权，可参考本文获取用户 token。
 
 ## 前提条件
 
@@ -45,13 +45,6 @@
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                                                                                         |
 | `duration`           | Int    | 从发送 HTTP 请求到响应的时长, 单位为毫秒。                                                                                                    |
 
-## 认证方式
-
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 Authorization 字段：
-
-Authorization：`Bearer ${YourAppToken}`
-
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文介绍的即时通讯 REST API 需使用 App Token 的鉴权方式，详见 [使用 Token 鉴权](easemob_app_token.html)。
 
 ## 获取用户 token
 
@@ -66,7 +59,7 @@ Authorization：`Bearer ${YourAppToken}`
 
 方式 2：开发者使用 RESTful API 在自己的应用服务器管理用户 token，在客户端上登录时，由应用服务器下发用户 token，SDK 使用用户 ID 和用户 token 进行登录。
 
-该方式开发者可以对用户 token 进行管理。获取用户 token 时，可以设置 token 有效期。
+通过该方式，开发者可以对用户 token 进行管理，设置有效期，并确定当用户不存在时是否自动创建用户。
 
 #### HTTP 请求
 
@@ -92,7 +85,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | `grant_type` | String | 是       | 授权方式，此处的值固定是 `password`，即通过密码登录。                                                                                                                                                                   |
 | `username`   | String | 是       | 用户 ID。                                                                                                                                                                                                               |
 | `password`   | String | 是       | 用户的登录密码。                                                                                                                                                                                                        |
-| `ttl`        | String | 是       | token 有效期，单位为秒。此外，也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。注意：VIP 5 集群该参数单位为毫秒。 |
+| `ttl`        | Long   | 否       | token 有效期，单位为秒。设置为 0 则 token 有效期为永久。若不传该参数，有效期默认为 60 天。此外，也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。注意：VIP 5 集群该参数单位为毫秒。 |
 
 #### HTTP 响应
 
@@ -116,7 +109,6 @@ POST https://{host}/{org_name}/{app_name}/token
 ##### 请求示例
 
 ```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{
    "grant_type": "password",
@@ -139,6 +131,82 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
         "created": 1637740861395,
         "modified": 1637740861395,
         "username": "c",
+        "activated": true
+    }
+}
+```
+
+### 自动创建用户
+
+#### HTTP 请求
+
+```
+POST https://{host}/{org_name}/{app_name}/token
+```
+
+##### 路径参数
+
+参数及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/usertoken#公共参数)。
+
+##### 请求 header
+
+| 参数           | 类型   | 是否必需 | 描述                                |
+| :------------- | :----- | :------- | :---------------------------------- |
+| `Content-Type` | String | 是       | 内容类型。请填 `application/json`。 |
+| `Accept`       | String | 是       | 内容类型。请填 `application/json`。 |
+
+##### 请求 body
+
+| 参数             | 类型    | 是否必需 | 描述                                                         |
+| :--------------- | :------ | :------- | :----------------------------------------------------------- |
+| `grant_type`     | String  | 是       | 授权方式，此处的值固定是 `inherit`，仅使用用户名获取 token。 |
+| `username`       | String  | 是       | 用户 ID。                                                    |
+| `autoCreateUser` | Boolean | 是       | 当用户不存在时，是否自动创建用户。自动创建用户时，需要保证 **授权方式必须为“inherit“** , **API 请求 header 中使用 APP token 进行鉴权** 。 |
+| `ttl`            | Long    | 否       | token 有效期，单位为秒。设置为 0 则 token 有效期为永久；默认值为 60 天。也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。注意：VIP 5 集群该参数单位为毫秒。 |
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的 HTTP 状态码为 200，表示成功获取 token，响应包体中包含以下字段：
+
+| 字段            | 类型   | 描述                                                         |
+| :-------------- | :----- | :----------------------------------------------------------- |
+| `access_token`  | String | 有效的用户 token。                                           |
+| `expires_in`    | Long   | token 有效期，单位为秒。在有效期内无需重复获取。 注意：VIP 5 集群该参数单位为毫秒。 |
+| `user`          | JSON   | 用户相关信息。                                               |
+| `user.username` | String | 用户 ID。                                                    |
+
+其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/usertoken#公共参数)。
+
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```
+
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{
+    "username": "test2333",
+    "grant_type": "inherit",
+    "autoCreateUser": true
+    "ttl": 1024000
+ }' 'http://XXXX/XXXX/XXXX/token'
+```
+
+##### 响应示例
+
+```
+{
+    "access_token": "YWMthyeiFhbyEe2eMGeYZSLlT7sMrFep3U6BvVj7KSnNonUiDB-wFvIR7a5Ttx2-01MYAwMAAAGCfIeryQAPoAAsuveDfkUrePkEM2Hgy6SaOTeTx3ETgh5cnXcP_HfBPg",
+    "expires_in": 1024000,
+    "user": {
+        "uuid": "220c1fb0-XXXX-XXXX-ae53-b71dbed35318",
+        "type": "user",
+        "created": 1659946472753,
+        "modified": 1659946472753,
+        "username": "test2333",
         "activated": true
     }
 }
