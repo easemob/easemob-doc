@@ -77,7 +77,7 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 // 将指定会话的消息未读数清零。
 [conversation markAllMessagesAsRead:nil];
 // 将一条消息置为已读。
-[onversation markMessageAsReadWithId:messageId error:nil];
+[conversation markMessageAsReadWithId:messageId error:nil];
 ```
 
 ### 删除会话及聊天记录
@@ -147,12 +147,3 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
     }
 }];
 ```
-
-## 更多操作
-
-你可以参考如下文档，在项目中实现更多的消息相关功能：
-
-- [发送和接收消息](message_send_receive.html)
-- [从服务器获取会话和消息（消息漫游）](message_retrieve.html)
-- [获取消息的已读回执和送达回执](message_receipt.html)
-- [实现翻译功能](message_translation.html)

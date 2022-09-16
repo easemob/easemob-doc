@@ -48,8 +48,8 @@ conn.joinGroup(option).then(res => console.log(res))
 ```
 
 任何用户均可申请入群，是否需要群主和群管理员审批，取决于 `approval` 选项的设置：
-- `approval` 为 `false` 时，用户可直接加入群组，无需群主和群管理员审批。其他群成员会收到 `memberPresence` 事件。
-- `approval` 为 `true` 时，群主和群管理员审批后，用户才能加入群组。群主和群管理员会收到 `requestToJoin` 事件。
+a.`approval` 为 `false` 时，用户可直接加入群组，无需群主和群管理员审批。其他群成员会收到 `memberPresence` 事件。
+b. `approval` 为 `true` 时，群主和群管理员审批后，用户才能加入群组。群主和群管理员会收到 `requestToJoin` 事件。
     - 若同意用户加入群组，群主或管理员需要调用 `acceptGroupJoinRequest` 方法。
     
     申请人会收到 `acceptRequest` 事件且加入群组，其他成员会收到 `memberPresence` 事件。
@@ -345,3 +345,6 @@ let option = {
 conn.enableSendGroupMsg(option).then(res => console.log(res))
 ```
 
+### 监听群组事件
+
+有关详细信息，请参阅 [监听群组事件](group_manage#监听群组事件)。

@@ -12,7 +12,8 @@
 - 用户在线状态订阅；
 - 消息表情回复；
 - 管理子区等。
-- 关于详细功能概述请参见： 产品概述.
+
+关于详细功能概述，请参见[产品概述](http://docs-im-beta.easemob.com/product/introduction.html)。
 
 具体集成请参考以下文档：
 

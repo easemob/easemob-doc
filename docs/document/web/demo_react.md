@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信即时通讯 WEB 端提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
+环信即时通讯 Web 端提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
 
 1. 在 [环信即时通讯云 IM 管理后台](https://console.easemob.com/user/login) 通过邮箱注册，可以看到默认的 Demo 应用（默认应用是全功能开通的应用）；
 2. 在上图页面 Demo 应用右侧点击 **查看**，选择 **开放注册**；
@@ -43,7 +43,7 @@ Demo 中有几大模块
 
 - components —— 项目中定义的组件
 - config —— SDK 初始化配置
-- containers —— 容器组件，包含 contact, chat, login/regester
+- containers —— 容器组件，包含 contact, chat, login/register
 - layout —— chat 部分的布局
 - selectors —— 缓存数据，优化性能
 - utils —— 数据库和工具方法

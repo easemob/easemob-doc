@@ -12,7 +12,7 @@
 
 使用环信即时通讯 IM iOS SDK 可以实现消息的送达回执与已读回执。核心方法如下：
 
-- `enableRequireReadAck` 开启送达回执；
+- `enableRequireReadAck` 开启消息送达回执；
 - `ackConversationRead` 发出指定会话的已读回执；
 - `sendMessageReadAck` 发出指定消息的已读回执；
 - `sendGroupMessageReadAck` 发出群组消息的已读回执。
@@ -28,9 +28,9 @@
 已读回执：
 
 - 单聊会话及消息已读回执
-  1. 你可以通过设置 `enableRequireReadAck` 开启已读回执功能；
-  2. 消息接收方收到消息后，调用 API `sendConversationReadAck` 或 `sendMessageReadAck` 发送会话或消息已读回执；
-  3. 消息发送方通过监听 `onConversationRead` 或 `OnMessageRead` 回调接收会话或消息已读回执。
+  1. 你可以通过设置 `EMOptions.enableRequireReadAck` 为 `YES` 开启已读回执功能；
+  2. 消息接收方收到消息后，调用 API `ackConversationRead` 或 `sendMessageReadAck` 发送会话或消息已读回执；
+  3. 消息发送方通过监听 `onConversationRead` 或 `messagesDidRead` 回调接收会话或消息已读回执。
 - 群聊只支持消息已读回执：
   1. 你可以通过设置 `isNeedGroupAck` 开启群聊消息已读回执功能；
   2. 消息接收方收到消息后通过 `sendGroupMessageReadAck` 发送群组消息的已读回执。
@@ -258,12 +258,3 @@ EMChatManagerDelegate
     // 页面刷新等操作。
 }];
 ```
-
-## 更多操作
-
-你可以参考如下文档，在项目中实现更多的消息相关功能：
-
-- [发送和接收消息](message_send_receive.html)
-- [管理本地消息数据](message_manage.html)
-- [从服务器获取会话和消息（消息漫游）](message_retrieve.html)
-- [实现翻译功能](message_translation.html)
