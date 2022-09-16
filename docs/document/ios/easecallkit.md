@@ -364,7 +364,7 @@ config.enableRTCTokenValidate = YES;// 开启 RTC Token 验证，默认不开启
 
 ### 离线推送
 
-为保证被叫用户 App 在后台运行或离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [iOS SDK 集成](push.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。 关于离线推送场景方案，请参见 [iOS端保障新消息及时通知的常见实践](https://docs-im.easemob.com/im/other/integrationcases/iosimnotifi)。
+为保证被叫用户 App 在后台运行或离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [iOS SDK 集成](push.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。 关于离线推送场景方案，请参见 [iOS 端设置推送](push.html)。
 
 ## API 列表
 

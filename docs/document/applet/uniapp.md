@@ -31,7 +31,7 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 
 ### 集成前准备
 
-[注册并创建应用](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)
+[注册并创建应用](/product/enable_and_configure_IM.html#创建应用)
 
 ### 搭建开发环境
 
