@@ -83,7 +83,7 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
 
 本节介绍如何获取、设置和删除聊天室自定义属性。
 
-使用该功能的限制详见 [使用限制](https://docs-im.easemob.com/ccim/limitation#聊天室自定义属性（KV）)。
+使用该功能的限制详见 [使用限制](limitation.html#聊天室自定义属性（key-value）)。
 
 #### 获取聊天室自定义属性
 
@@ -103,7 +103,7 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
 
 ##### 设置单个聊天室自定义属性
 
-聊天室成员均可通过调用 `setChatRoomAttribute` 设置和更新单个自定义属性。设置后，其他聊天室成员收到 `onChatroomEvent` 回调，事件为 `operation: updateChatRoomAttributes`。
+聊天室成员均可通过调用 `setChatRoomAttribute` 设置和更新单个自定义属性。设置后，其他聊天室成员收到 `onChatroomEvent` 回调，事件为 `updateChatRoomAttributes`。
 
    ```javascript
    let option = {
@@ -118,7 +118,7 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
 
 ##### 设置多个聊天室自定义属性
 
-聊天室成员均可以调用 `setChatRoomAttributes` 批量设置自定义属性。设置后，其他聊天室成员收到 `onChatroomEvent` 回调，事件为 `operation:  updateChatRoomAttributes`。
+聊天室成员均可以调用 `setChatRoomAttributes` 批量设置自定义属性。设置后，其他聊天室成员收到 `onChatroomEvent` 回调，事件为 `updateChatRoomAttributes`。
 
    ```javascript
    let option = {
@@ -138,7 +138,7 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
 
 ##### 移除单个聊天室属性
 
-聊天室所有成员可通过调用 `removeChatRoomAttribute` 移除单个自定义属性。移除成功后，其他成员收到 `onChatroomEvent` 回调，事件为`operation:  removeChatRoomAttributes`。
+聊天室所有成员可通过调用 `removeChatRoomAttribute` 移除单个自定义属性。移除成功后，其他成员收到 `onChatroomEvent` 回调，事件为 `removeChatRoomAttributes`。
 
    ```javascript
    let option = {

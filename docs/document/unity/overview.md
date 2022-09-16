@@ -78,8 +78,9 @@ SDKClient.Instance.CreateAccount(username, password,
 - **用户 ID + 密码**；  
 - **用户 ID + agoraToken**。
 :::notice
-- 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
-- 只支持手动登录，不支持自动登录。
+- 使用 agoraToken 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
+- Unity 暂不支持通过调用 REST API 获取 token 登录。
+- Unity 只支持手动登录，不支持自动登录。
 :::
 
 ### 用户 ID + 密码
@@ -136,7 +137,6 @@ SDKClient.Instance.LoginWithAgoraToken(username, token,
         }
     ));
 ```
-
 
 ## 退出登录
 

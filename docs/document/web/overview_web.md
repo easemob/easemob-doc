@@ -8,7 +8,7 @@
 
 ## 集成环境
 
-具体见 [开发环境要求](https://docs-im.easemob.com/ccim/web/quickstart#前提条件)。
+具体见 [开发环境要求](quickstart.html#前提条件)。
 
 ## 导入 SDK
 
@@ -77,16 +77,16 @@ const conn = new EC.connection({
 
 | 参数             | 描述                                                         |
 | :----------| :----------------------------------------------------------- |
-| appKey | 在管理后台注册的应用唯一标识。                                   |
-| isHttpDNS   | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。  |
-| delivery | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。  |
-| https | 是否支持通过 HTTPS 访问即时通讯 IM：<br/> - （默认）`true`：支持 HTTPS 和 HTTP；<br/> -`false`：浏览器根据使用的域名自行判断。  |
-| heartBeatWait | 心跳间隔，单位为秒，默认为 30000 秒。  |
-| deviceId | 设备 ID，为默认随机值。  |
-| useOwnUploadFun | 是否支持通过自己的路径将图片、文件上传到自己的服务器。<br/> -`true`：支持，需要指定路径；<br/> -（默认）`false`：关闭，通过消息服务器上传下载文件。 |
-| autoReconnectNumMax | 最大重连次数。  |
-| apiUrl | 指定的 REST 服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。如有需求，请联系商务获取指定的服务器地址。  |
-| url  | 指定的消息服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。如有需求，请联系商务获取指定的服务器地址。  |
+| `appKey` | 在管理后台注册的应用唯一标识。                                   |
+| `isHttpDNS`   | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。  |
+| `delivery` | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。  |
+| `https` | 是否支持通过 HTTPS 访问即时通讯 IM：<br/> - （默认）`true`：支持 HTTPS 和 HTTP；<br/> -`false`：浏览器根据使用的域名自行判断。  |
+| `heartBeatWait` | 心跳间隔，单位为秒，默认为 30000 秒。  |
+| `deviceId` | 设备 ID，为默认随机值。  |
+| `useOwnUploadFun` | 是否支持通过自己的路径将图片、文件上传到自己的服务器。<br/> -`true`：支持，需要指定路径；<br/> -（默认）`false`：关闭，通过消息服务器上传下载文件。 |
+| `autoReconnectNumMax` | 最大重连次数。  |
+| `apiUrl` | 指定的 REST 服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。如有需求，请联系商务获取指定的服务器地址。  |
+| `url`  | 指定的消息服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。如有需求，请联系商务获取指定的服务器地址。  |
 
 ## 注册用户
 
@@ -98,7 +98,7 @@ const conn = new EC.connection({
 
 ### REST API 注册
 
-请参考 [注册用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册用户)。
+请参考 [注册用户](account_system.html#注册用户)。
 
 ### SDK 注册
 
@@ -148,7 +148,7 @@ conn.open({
 
 ### **用户 ID + token**
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](https://docs-im.easemob.com/ccim/rest/usertoken)。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](easemob_user_token.html)。
 
 ```javascript
 conn.open({
@@ -220,7 +220,7 @@ conn.addEventHandler('handlerId', {
 | WEBIM_CONNCTION_USER_LOGIN_ANOTHER_DEVICE=206 | 用户已经在其他设备登录。                                 |
 | WEBIM_CONNCTION_USER_REMOVED=207 | 用户账户已经被移除。                                 |
 | WEBIM_CONNCTION_USER_KICKED_BY_CHANGE_PASSWORD=216 | 由于密码变更被踢下线。                                 |
-| WEBIM_CONNCTION_USER_KICKED_BY_OTHER_DEVICE=217 | 由于其他设备登录被踢下线                                |
+| WEBIM_CONNCTION_USER_KICKED_BY_OTHER_DEVICE=217 | 由于其他设备登录被踢下线。                                |
 
 
 ## 输出信息到日志文件

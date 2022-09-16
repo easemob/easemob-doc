@@ -16,7 +16,7 @@
 
 开始前，请确保满足以下条件：
 
-1. 完成 `3.9.1 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+1. 完成 `3.9.1 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的[使用限制](/product/limitation.html)。
 3. 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通翻译功能。
 4. 该功能由 Microsoft Azure Translation API 提供，因此开始前请确保你了解该功能支持的目标语言。详见 [Language support](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/language-support)。
@@ -40,7 +40,7 @@ iOS SDK 支持你通过调用 API 在项目中实现如下功能：
 SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManager 模块的如下接口获取翻译功能支持的目标语言。
 
 ```objectivec
-/*
+/**
  *  获取翻译服务支持的语言。
  *  @param aCompletionBlock 完成的回调。
  *
@@ -63,7 +63,7 @@ SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManage
 用户可以在收到文本消息后调用消息翻译接口进行翻译。接口定义如下：
 
 ```objectivec
-/*
+/**
  *  翻译消息。
  *
  *  @param aMessage         消息对象。
