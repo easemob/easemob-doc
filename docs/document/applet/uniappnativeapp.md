@@ -23,7 +23,7 @@
 
 ## 开发者集成
 
-[注册并创建应用](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)
+[注册并创建应用](/product/enable_and_configure_IM.html#创建应用)
 
 ### 搭建 app 开发环境
 

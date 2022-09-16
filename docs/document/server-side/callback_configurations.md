@@ -26,7 +26,7 @@ app 的响应内容不能超过 1,000 个字符。
 | `from`            | String | 消息的发送方。                                                                                                                                         |
 | `to`              | String | 消息的接收方。                                                                                                                                         |
 | `msg_id`          | String | 该回调消息的 ID。                                                                                                                                      |
-| `payload`         | object | 事件内容，与通过 REST API 发送过来的一致，查看 [聊天记录数据结构文档](https://docs-im.easemob.com/im/server/basics/chatrecord#聊天记录数据结构)。                                     |
+| `payload`         | object | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message.html#历史消息内容)。                                     |
 | `securityVersion` | String | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。                                                                                                     |
 | `security`        | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 Console 后台回调规则。                                                                                 |
 | `appkey`          | String | 你在环信管理后台注册的应用唯一标识。                                                                                                                              |
@@ -309,7 +309,7 @@ payload 示例：
 | `to`              | String   | 消息的接收方。                                               |
 | `recall_id`       | String   | 要撤回的消息 ID。                                            |
 | `msg_id`          | String   | 该撤回事件消息的 ID。                                        |
-| `payload`         | object   | 事件内容，与通过 REST API 发送过来的一致，查看 [聊天记录数据结构文档](https://docs-im.easemob.com/im/server/basics/chatrecord#聊天记录数据结构)。 |
+| `payload`         | object   | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message.html#历史消息内容)。 |
 | `securityVersion` | String   | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 Console 后台回调规则。 |
 | `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |

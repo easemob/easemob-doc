@@ -96,3 +96,8 @@ msgBody.targetLanguages = @[@"en",@"ja"];
 EMMessage*message = [[EMMessage alloc] initWithConversationID:@"to" from:@"from" to:@"to" body:msgBody ext:nil];
 [[[EMClient sharedClient] chatManager] sendMessage:message progress:nil completion:nil];
 ```
+## 参考
+
+### 设置和获取推送的目标语言
+
+设置推送的目标语言，设置后收到的离线推送为目标语言。如果目标语言在消息里不存在，只推送原文，详见[设置推送翻译](push.html#设置推送翻译)。
