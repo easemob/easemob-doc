@@ -1,4 +1,4 @@
-# 消息管理–从服务器获取会话和消息（消息漫游）
+# 从服务器获取会话和消息（消息漫游）
 
 <Toc />
 
@@ -24,7 +24,7 @@
 
 该功能需联系商务开通，开通后，用户默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
 
-调用 `GetConversationsFromServer` 从服务端获取会话。我们建议在 app 安装时，或本地没有会话时调用该 API。否则调用 `LoadAllConversations` 即可，见 。示例代码如下：
+调用 `GetConversationsFromServer` 从服务端获取会话。我们建议在 app 安装时或本地没有会话时调用该 API。否则调用 `LoadAllConversations` 即可。示例代码如下：
 
 ```csharp
 SDKClient.Instance.ChatManager.GetConversationsFromServer(new ValueCallBack<List<Conversation>>(

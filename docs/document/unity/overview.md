@@ -32,7 +32,7 @@ SDKClient.Instance.InitWithOptions(options);
 | 参数             | 描述                                                         |
 | :----------| :----------------------------------------------------------- |
 | `AppKey` | App 在控制台注册完成之后会生成该参数，这是 App 在系统中的唯一标识。                                  |
-| `AutoLogin`  | 是否自动登录。(Unity 不支持此选项)  |
+| `AutoLogin`  | 是否自动登录。Unity 不支持此选项。  |
 | `DebugMode` | 是否启用日志输出功能。设置为 `true` 则会启用日志输出功能，在调试开发阶段帮助定位和分析问题。 |
 | `AcceptInvitationAlways` | 是否自动接受申请。设置为 `true` 则当有人申请好友时，自动接受申请。 |
 | `AutoAcceptGroupInvitation` | 是否自动接受邀请。设置为 `true` 则当有人邀请当前用户入群时，自动接受邀请。  |

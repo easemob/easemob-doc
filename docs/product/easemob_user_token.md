@@ -85,7 +85,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | `grant_type` | String | 是       | 授权方式，此处的值固定是 `password`，即通过密码登录。                                                                                                                                                                   |
 | `username`   | String | 是       | 用户 ID。                                                                                                                                                                                                               |
 | `password`   | String | 是       | 用户的登录密码。                                                                                                                                                                                                        |
-| `ttl`        | Long   | 否       | token 有效期，单位为秒。设置为 0 则 token 有效期为永久。若不传该参数，有效期默认为 60 天。此外，也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。注意：VIP 5 集群该参数单位为毫秒。 |
+| `ttl`        | Long   | 否       | token 有效期，单位为秒。设置为 0 则 token 有效期为永久（暂不支持调用群组和聊天室接口）。若不传该参数，有效期默认为 60 天。此外，也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。注意：VIP 5 集群该参数单位为毫秒。 |
 
 #### HTTP 响应
 
@@ -161,8 +161,8 @@ POST https://{host}/{org_name}/{app_name}/token
 | :--------------- | :------ | :------- | :----------------------------------------------------------- |
 | `grant_type`     | String  | 是       | 授权方式，此处的值固定是 `inherit`，仅使用用户名获取 token。 |
 | `username`       | String  | 是       | 用户 ID。                                                    |
-| `autoCreateUser` | Boolean | 是       | 当用户不存在时，是否自动创建用户。自动创建用户时，需要保证 **授权方式必须为“inherit“** , **API 请求 header 中使用 APP token 进行鉴权** 。 |
-| `ttl`            | Long    | 否       | token 有效期，单位为秒。设置为 0 则 token 有效期为永久；默认值为 60 天。也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。注意：VIP 5 集群该参数单位为毫秒。 |
+| `autoCreateUser` | Boolean | 是       | 当用户不存在时，是否自动创建用户。自动创建用户时，需要保证 **授权方式必须为“inherit“**，**API 请求 header 中使用 APP token 进行鉴权** 。 |
+| `ttl`            | Long    | 否       | token 有效期，单位为秒。设置为 0 则 token 有效期为永久（暂不支持调用群组和聊天室接口）。若不传该参数，有效期默认为 60 天。此外，也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。注意：VIP 5 集群该参数单位为毫秒。 |
 
 #### HTTP 响应
 
@@ -177,9 +177,9 @@ POST https://{host}/{org_name}/{app_name}/token
 | `user`          | JSON   | 用户相关信息。                                               |
 | `user.username` | String | 用户 ID。                                                    |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/usertoken#公共参数)。
+其他字段及说明详见[公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](error.html)了解可能的原因。
 
 #### 示例
 

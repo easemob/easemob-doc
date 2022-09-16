@@ -45,7 +45,7 @@ POST {https://host}/{org_name}/{app_name}/token
 | `grant_type`    | String |    是    | `client_credentials`，固定字符串。                          |
 | `client_id`     | String |    是    | App 的 `client_id`，参见 [app 详情页面](https://console.easemob.com/app-detail/detail)。 |
 | `client_secret` | String |    是    | App 的 `client_secret`，参见 [app 详情页面](https://console.easemob.com/app-detail/detail)。 |
-| `ttl`           | Long   |    否    | token 有效期，单位为秒(s)。设置为 `0` 则 token 有效期为永久。若不传该参数，默认值为 60 天。也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。 |
+| `ttl`           | Long   |    否    | token 有效期，单位为秒(s)。设置为 `0` 则 token 有效期为永久（暂不支持调用群组和聊天室接口）。若不传该参数，默认值为 60 天。也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。 |
 
 ### HTTP 响应
 
@@ -55,7 +55,7 @@ POST {https://host}/{org_name}/{app_name}/token
 | :-----------| :--------- | :----------------------------------- |
 | `access_token` | String | 有效的 token 字符串。               |
 | `expires_in`   | long | token 有效时间，单位为秒，在有效期内不需要重复获取。 |
-| `application`  |String | 当前 App 的 UUID 值。                 |
+| `application`  | String | 当前 App 的 UUID 值。                 |
 
 ### 示例
 
@@ -84,7 +84,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 #### 响应码
 
-| 响应码 | 意义 |
+| 响应码 | 说明 |
 | - | - |
 | 200 | 成功。 |
 | 429，503 或者其他 5xx | 单位时间内请求过多。请稍后重试。 |

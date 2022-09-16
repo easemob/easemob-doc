@@ -117,5 +117,5 @@
 
 ## 更多操作
 
-[监听器介绍](group_manage.html)
+详见[监听群组事件](group_manage.html)。
 

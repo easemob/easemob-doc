@@ -218,4 +218,4 @@ SDKClient.Instance.RoomManager.RemoveRoomAdmin(roomId, adminId, new CallBack(
 
 ### 更多
 
-- [监听器介绍](group_manage.html#监听群组事件)
+- [监听聊天室事件](room_manage.html#监听聊天室事件)
