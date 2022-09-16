@@ -127,7 +127,7 @@ logging.level.com.easemob.im.shaded.io.netty=error
 
 1. Server SDK 是对环信 IM [REST API](overview.htmml) 的封装，但并没有封装所有的 API，只封装了开发者常用的 API，点击 [这里](#使用) 查看 Server SDK API。
 
-对于注册环信 ID 的规则，Server SDK 有自己的限制，正则为 `^[a-z][0-9a-z-]{1,32}$`，这点与 [官网文档](http://docs-im.easemob.com/im/server/ready/user#环信_id_使用规则) 中说明的环信 ID 规则是有区别的，例如用户 ID 长度限制为 32 字节以内，这样做是因为目前环信 ID 注册的限制范围比较广，Server SDK 考虑缩小环信 ID 注册的限制范围使其更加规范。
+对于注册环信 ID 的规则，Server SDK 有自己的限制，正则为 `^[a-z][0-9a-z-]{1,32}$`，这点与 [官网 REST API 文档](account_system.html#开放注册单个用户) 中说明的环信 ID 规则是有区别的，例如用户 ID 长度限制为 32 字节以内，这样做是因为目前环信 ID 注册的限制范围比较广，Server SDK 考虑缩小环信 ID 注册的限制范围使其更加规范。
 
 如果不想使用 Server SDK 注册环信 ID 的限制，可以在初始化配置时添加 ‘turnOffUserNameValidation()’ （SDK 需要使用 0.3.5 以上的版本）
 
@@ -141,7 +141,7 @@ EMProperties properties = EMProperties.builder()
         .build();
 ```
 
-2. 使用代理的情况
+1. 使用代理的情况
 
 前提需要你的代理支持 `CONNECT` 方法，确保你的代理配置文件中有 connectport 80 存在。
 
