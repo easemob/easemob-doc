@@ -261,22 +261,22 @@ Authorization：`Bearer ${YourAppToken}`
 
 方法：`GET`
 
-接入点： `/{orgName}/{appName}/callbacks/storage/info`
+接入点： `/{org_name}/{app_name}/callbacks/storage/info`
 
 #### 路径参数
 
 | 参数      | 类型   | 是否必需 | 描述                                       |
 | :-------- | :----- | :------- | :----------------------------------------- |
-| `orgName` | String | 是       | 你在环信 IM 管理后台注册的组织唯一标识。   |
-| `appName` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识。 |
+| `org_name` | String | 是       | 你在环信 IM 管理后台注册的组织唯一标识。   |
+| `app_name` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识。 |
 
-#### 请求头
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                     |
 | :-------------- | :----- | :------- | :--------------------------------------- |
 | `Authorization` | String | 是       | 鉴权 Token，管理员 Token（含）以上权限。 |
 
-#### 响应参数
+#### 响应 body
 
 | 参数              | 类型   | 描述                                                         |
 | :---------------- | :----- | :----------------------------------------------------------- |
@@ -335,14 +335,14 @@ curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 
 方法：`POST`
 
-接入点： `http://{host}/{orgName}/{appName}/callbacks/storage/retry`
+接入点： `http://{host}/{org_name}/{app_name}/callbacks/storage/retry`
 
 #### 路径参数
 
 | 参数      | 类型   | 是否必需 | 描述                                      |
 | :-------- | :----- | :------- | :---------------------------------------- |
-| `orgName` | String | 是       | 你在环信 IM 管理后台注册的组织唯一标识。  |
-| `appName` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识。 |
+| `org_name` | String | 是       | 你在环信 IM 管理后台注册的组织唯一标识。  |
+| `app_name` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识。 |
 
 #### 请求 header
 

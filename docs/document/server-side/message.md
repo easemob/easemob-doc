@@ -1577,7 +1577,7 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{orgName}/{appName}/users/{userName}/user_channel
+DELETE https://{host}/{org_name}/{app_name}/users/{userName}/user_channel
 ```
 
 #### 路径参数
@@ -1652,7 +1652,7 @@ curl -X DELETE -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX
 ### HTTP 请求
 
 ```http
-POST https://{host}/{orgName}/{appName}/messages/users/import
+POST https://{host}/{org_name}/{app_name}/messages/users/import
 ```
 
 #### 请求 header
@@ -1755,7 +1755,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
 ### HTTP 请求
 
 ```http
-POST https://{host}/{orgName}/{appName}/messages/chatgroups/import
+POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 ```
 
 #### 请求 header

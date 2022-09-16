@@ -969,7 +969,7 @@ curl -X POST http://XXXX/XXXX/chatdemoui/users/batch/status -H 'Authorization: B
 #### HTTP 请求
 
 ```http
-POST https://{host}/{orgName}/{appName}/mutes
+POST https://{host}/{org_name}/{app_name}/mutes
 ```
 
 ##### 路径参数
@@ -1049,7 +1049,7 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/mutes' \
 #### HTTP 请求
 
 ```http
-GET https://{host}/{orgName}/{appName}/mutes/{username}
+GET https://{host}/{org_name}/{app_name}/mutes/{username}
 ```
 
 ##### 路径参数
