@@ -1,4 +1,4 @@
-# 管理群组属性
+# 群组-管理群组属性
 
 <Toc />
 
@@ -59,7 +59,7 @@ try {
 
 ### 更新群公告
 
-仅群主和群管理员可以调用 `EMGroupManager#updateGroupAnnouncement` 方法设置和更新群公告，群公告的长度限制为 512 个字符。群公告更新后，其他群成员收到 `EMGroupEventHandler#onAnnouncementChangedFromGroup` 回调。
+仅群主和群管理员可以调用 `EMGroupManager#updateGroupAnnouncement` 方法设置和更新群公告，群公告的长度限制为 512 个字符。群公告更新后，其他群成员收到 `EMGroupEventHandler#onAnnouncementChangedFromGroup` 事件。
 
 示例代码如下：
 
@@ -93,7 +93,7 @@ try {
 
 #### 上传共享文件
 
-所有群组成员均可以调用 `EMGroupManager#uploadGroupSharedFile` 方法上传共享文件至群组，群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `EMGroupEventHandler#onSharedFileAddedFromGroup` 回调。
+所有群组成员均可以调用 `EMGroupManager#uploadGroupSharedFile` 方法上传共享文件至群组，群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `EMGroupEventHandler#onSharedFileAddedFromGroup` 事件。
 
 示例代码如下：
 
@@ -109,7 +109,7 @@ try {
 
 #### 删除共享文件
 
-所有群成员均可以调用 `EMGroupManager#removeGroupSharedFile` 方法删除群共享文件。删除共享文件后，其他群成员收到 `EMGroupEventHandler#onSharedFileDeletedFromGroup` 回调。
+所有群成员均可以调用 `EMGroupManager#removeGroupSharedFile` 方法删除群共享文件。删除共享文件后，其他群成员收到 `EMGroupEventHandler#onSharedFileDeletedFromGroup` 事件。
 
 群主和群管理员可删除全部的群共享文件，群成员只能删除自己上传的群文件。
 
@@ -159,10 +159,6 @@ try {
 }
 ```
 
-### 更多操作
+### 监听群组事件
 
-你可以参考如下文档，在项目中实现更多的群组相关功能：
-
-- [群组概述](group_overview.html)
-- [创建和管理群组以及监听器介绍](group_manage.html)
-- [群成员管理](group_members.html)
+详见 [监听群组事件](group_manage.html#监听群组事件)。

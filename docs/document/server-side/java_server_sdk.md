@@ -10,8 +10,8 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 
 ## 前提条件
 
-- 安装好 JDK 1.8；
-- 准备 [Reactor]((https://projectreactor.io/))(io.projectreactor:reactor-bom:2020.0.4)；
+- Java 1.8
+- [Reactor](https://projectreactor.io/)(io.projectreactor:reactor-bom:2020.0.4)
 - 有效的环信即时通讯 IM 开发者账号和 App Key、Client ID、ClientSecre，登陆 [环信管理后台](https://console.easemob.com/user/login) 到“应用列表” → 点击“查看”即可获取到 App Key、Client ID、ClientSecret。
 
 ## 实现方法
@@ -47,7 +47,7 @@ public class Config {
 
     @Bean
     public EMService service() {
-        
+
         EMProperties properties = EMProperties.builder()
                 .setAppkey("Appkey")
                 .setClientId("Client ID")
@@ -90,7 +90,7 @@ public class UserService {
             e.getErrorCode();
             e.getMessage();
         }
-        
+
     }
 }
 ```
@@ -117,7 +117,7 @@ API的返回值是响应式的，如果希望阻塞，可以使用上面例子�
 logging.level.com.easemob.im.http=debug
 ```
 
-如果在 Mac 系统上使用 Server SDK 出现 Dns 的警告。 可以在配置文件中添加:
+如果在 Mac 系统上使用 Server SDK 出现 Dns 的警告，可以在配置文件中添加:
 
 ```properties
 logging.level.com.easemob.im.shaded.io.netty=error
@@ -127,14 +127,14 @@ logging.level.com.easemob.im.shaded.io.netty=error
 
 1. Server SDK 是对环信 IM [REST API](overview.htmml) 的封装，但并没有封装所有的 API，只封装了开发者常用的 API，点击 [这里](https://docs-im.easemob.com/im/server/ready/sdk#%E4%BD%BF%E7%94%A8) 查看 Server SDK API。
 
-对于注册环信 ID 的规则，Server SDK 有自己的限制, 正则为 `^[a-z][0-9a-z-]{1,32}$`，这点与 [官网文档](http://docs-im.easemob.com/im/server/ready/user#环信_id_使用规则) 中说明的环信 ID 规则是有区别的，例如用户 ID 长度限制为 32 字节以内，这样做是因为目前环信 ID 注册的限制范围比较广，Server SDK 考虑缩小环信 ID 注册的限制范围使其更加规范，在此说明一下。
+对于注册环信 ID 的规则，Server SDK 有自己的限制, 正则为 `^[a-z][0-9a-z-]{1,32}$`，这点与 [官网文档](http://docs-im.easemob.com/im/server/ready/user#环信_id_使用规则) 中说明的环信 ID 规则是有区别的，例如用户 ID 长度限制为 32 字节以内，这样做是因为目前环信 ID 注册的限制范围比较广，Server SDK 考虑缩小环信 ID 注册的限制范围使其更加规范。
 
 如果不想使用 Server SDK 注册环信 ID 的限制，可以在初始化配置时添加 ‘turnOffUserNameValidation()’ （SDK 需要使用 0.3.5 以上的版本）
 
 
 
 ```java
-// 强烈建议不要使用纯数字或者有规律的字符串来注册环信 ID，否则自己的用户可能会遭受到攻击、垃圾消息等后果。
+// 强烈建议不要使用纯数字或者有规律的字符串来注册环信 ID，否则用户可能容易遭受到攻击、接收到垃圾消息。
 EMProperties properties = EMProperties.builder()
         .setAppkey("appkey")
         .setClientId("Client ID")
@@ -160,7 +160,7 @@ EMProperties properties = EMProperties.builder()
         .setAppkey("appkey")
         .setClientId("Client ID")
         .setClientSecret("ClientSecret")
-        .build();                
+        .build();
 ```
 
 如果你使用的代理需要认证，那么需要传入自己的 IP、端口、账号以及密码。
@@ -178,7 +178,7 @@ EMProperties properties = EMProperties.builder()
         .setAppkey("appkey")
         .setClientId("Client ID")
         .setClientSecret("ClientSecret")
-        .build();                
+        .build();
 ```
 
 ## 更新日志

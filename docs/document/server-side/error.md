@@ -51,7 +51,7 @@
 | 400              | illegal_argument                   | “this is an invalid request.”                                | 请求无效，请检查调用接口的 url、header、body，是否符合所调用接口的要求，可以使用 curl 命令进行测试。 |
 | 400              | illegal_argument                   | “from can't be empty”                                        | from 表示消息发送者，无此字段 Server 会默认设置为 “from”:“admin”，有 from 字段但值为空字符串(“”)时请求失败，返回 400。 |
 | 400              | illegal_argument                   | “target_type can only be 'users' or 'chatgroups' or 'chatrooms'” | target_type 只能为 'users' or 'chatgroups' or 'chatrooms'，为其他字符串时请求失败，返回 400。 |
-| 400              | illegal_argument                   | “username is not legal”                                      | 注册使用的 username 不合法，username(Chat ID) 规则见 [用户体系集成](https://docs-im.easemob.com/ccim/rest/accountsystem) |
+| 400              | illegal_argument                   | “username is not legal”                                      | 注册使用的 username 不合法，username(Chat ID) 规则见 [用户体系集成](account_system.html#注册用户) |
 | 400              | illegal_argument                   | “This chatmessage request is not supported”                  | 可能是传入的时间格式不正确，正确的格式是：YYYYMMDDHH，如要获取 2018 年 02 月 09 日 12 点到 13 点的聊天记录，这样设置：2018020912。 |
 | 400              | illegal_argument                   | “illegal arguments: appkey: easemob-demo#chatdemoui, time: 2018020918, maybe chat message history is expired or unstored” | 对应时间的聊天记录还未生成或已过期，目前聊天记录免费保存 3 天。 |
 | 400              | invalid_parameter                  | “some of [groupid] are not valid fields”                     | 修改群信息目前只支持修改“群名称”、“群描述”、“群最大人数”，这个 error 是修改的参数不支持，如修改 groupid。 |

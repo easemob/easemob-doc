@@ -1,6 +1,6 @@
 ---
 {
-    pageKey: "v-2a61ea39",
+    pageUri: "/document/web/message_overview.html",
     title: "消息管理"
 }
 ---

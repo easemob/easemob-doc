@@ -1,9 +1,8 @@
-# 用户关系管理 REST API
+# 管理用户关系
 
 <Toc />
 
 用户关系管理是用来管理用户之间关系的服务，环信即时通讯 IM 支持通过 REST API 管理用户之间的关系。
-
 
 ## 前提条件
 
@@ -30,8 +29,6 @@ Authorization：`Bearer ${YourToken}`
 | `org_name` | String | 是    | 即时通讯服务分配给每个企业（组织）的唯一标识。 |
 | `app_name` | String | 是    | 你在环信即时通讯 IM 管理后台注册项目时填入的应用名称。       |
 | `username` | String | 是    | 用户 ID。         |
-| `Content-Type`  | String | 是    | 内容类型：`application/json`。                                |
-| `Authorization` | String | 是    | `Bearer ${Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 token 的值。 |
 
 ### 响应参数
 
@@ -225,7 +222,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToke
 
 ## 获取好友列表
 
-获取用户的好友列表。
+获取指定用户的好友列表。
 
 ### HTTP 请求
 

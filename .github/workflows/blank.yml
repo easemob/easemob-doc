@@ -10,6 +10,7 @@ env:
     SERVER_POSR: ${{ secrets.SERVER_PORT }} # 服务器端口
     USER_NAME: ${{ secrets.SERVER_USER_NAME }} # 服务器用户名
     cache-name: note
+    TZ: Asia/Shanghai # 设置当前环境时区
 
 # jobs表示执行的一项或多项任务
 jobs:

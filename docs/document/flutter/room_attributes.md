@@ -1,4 +1,4 @@
-# 管理聊天室属性
+# 聊天室-管理聊天室属性
 
 <Toc />
 
@@ -43,7 +43,7 @@ try {
 
 ### 更新聊天室公告
 
-仅聊天室所有者和聊天室管理员可以调用 `EMChatRoomManager#updateChatRoomAnnouncement` 方法设置和更新聊天室公告，聊天室公告的长度限制为 512 个字符。公告更新后，其他聊天室成员收到 `EMChatRoomEventHandler#onAnnouncementChangedFromChatRoom` 回调。
+仅聊天室所有者和聊天室管理员可以调用 `EMChatRoomManager#updateChatRoomAnnouncement` 方法设置和更新聊天室公告，聊天室公告的长度限制为 512 个字符。公告更新后，其他聊天室成员收到 `EMChatRoomEventHandler#onAnnouncementChangedFromChatRoom` 事件。
 
 示例代码如下：
 
@@ -89,10 +89,6 @@ try {
 }
 ```
 
-### 更多操作
+### 监听聊天室事件
 
-你可以参考如下文档，在项目中实现更多的聊天室相关功能：
-
-- [聊天室概述](room_overview.html)
-- [创建和管理群组以及监听器介绍](group_manage.html)
-- [管理聊天室成员](room_members.html)
+详见 [监听聊天室事件](chatroom_manage.html#监聊天室事件)。
