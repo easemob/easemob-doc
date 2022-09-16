@@ -362,7 +362,6 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     public void OnRemoveWhiteListMembersFromGroup(string groupId, List<string> whiteList)
     {
     }
-
     // 群成员一键禁言状态变更。群组所有成员（除操作者外）会收到该回调。
     public void OnAllMemberMuteChangedFromGroup(string groupId, bool isAllMuted)
     {

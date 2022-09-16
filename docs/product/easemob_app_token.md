@@ -55,7 +55,7 @@ POST {https://host}/{org_name}/{app_name}/token
 | :-----------| :--------- | :----------------------------------- |
 | `access_token` | String | 有效的 token 字符串。               |
 | `expires_in`   | long | token 有效时间，单位为秒，在有效期内不需要重复获取。 |
-| `application`  |String | 当前 App 的 UUID 值。                 |
+| `application`  | String | 当前 App 的 UUID 值。                 |
 
 ### 示例
 
@@ -84,7 +84,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 #### 响应码
 
-| 响应码 | 意义 |
+| 响应码 | 说明 |
 | - | - |
 | 200 | 成功。 |
 | 429，503 或者其他 5xx | 单位时间内请求过多。请稍后重试。 |

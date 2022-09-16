@@ -177,9 +177,9 @@ POST https://{host}/{org_name}/{app_name}/token
 | `user`          | JSON   | 用户相关信息。                                               |
 | `user.username` | String | 用户 ID。                                                    |
 
-其他字段及说明详见[公共参数](https://docs-im.easemob.com/ccim/rest/usertoken#公共参数)。
+其他字段及说明详见[公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](error.html)了解可能的原因。
 
 #### 示例
 
