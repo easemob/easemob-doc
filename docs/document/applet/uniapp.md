@@ -15,7 +15,7 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 ![img](@static/images/applet/applet-demo.jpeg)
 
 :::notice
-- 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**
+- 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
 - Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
 :::
 
@@ -35,10 +35,10 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 
 ### 搭建开发环境
 
-1. 下载 HBuilderx 编辑器 [https://www.dcloud.io/hbuilderx.html](https://www.dcloud.io/hbuilderx.html)
-2. DCloud 开发者中心注册 [https://dev.dcloud.net.cn/](https://dev.dcloud.net.cn/)
+1. 下载 HBuilderx 编辑器 [https://www.dcloud.io/hbuilderx.html](https://www.dcloud.io/hbuilderx.html)。
+2. DCloud 开发者中心注册 [https://dev.dcloud.net.cn/](https://dev.dcloud.net.cn/)。
 
-之后登陆 HBuilderx 编辑器。 至此小程序的开发环境差不多完成。
+之后登录 HBuilderx 编辑器。这样，小程序的开发环境准备完毕。
 
 即将开发的平台配置服务
 
@@ -59,7 +59,7 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 | 美东 1 区     | a41.easemob.com 或 a41.easecdn.com       | msync-api-41.easemob.com 或 msync-api-41.easecdn.com   |
 | 法兰克福 1 区 | a51.easemob.com 或 a51.easecdn.com       | msync-api-51.easemob.com 或 msync-api-51.easecdn.com   |
 
-应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console中查看请求域名
+应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console 中查看请求域名
 
 ![img](@static/images/applet/console.jpeg)
 
@@ -125,6 +125,7 @@ import websdk from "../newSDK/uni_sdk3.6.3";
 //实例化 SDK 对象
 const WebIM = wx.WebIM = SDK;
 WebIM.conn = new WebIM.connection({
+    appKey: 'your appKey'//注意这里的 "K" 需大写
     isMultiLoginSessions: false, //是否可以登录多个，并在所有端上接收消息
     https: false, //是否使用 HTTPS 
     url: 'wss://im-api-wechat.easemob.com/websocket', // socket server (3.0 SDK)

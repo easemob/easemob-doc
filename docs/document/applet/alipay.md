@@ -4,11 +4,11 @@
 
 ### 注册环信账号
 
-开发者需要在环信管理后台 [注册并创建应用](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
+开发者需要在环信管理后台 [注册并创建应用](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)获取唯一 appKey，SDK 初始化时需要配置 appKey。
 
 ### 搭建支付宝小程序开发环境
 
-首先需要下载并安装 [开发者工具](https://opendocs.alipay.com/mini/ide/download)，然后按照支付宝小程序的 [接入流程](https://opendocs.alipay.com/mini/006kyi) 一步步创建一个小程序
+首先需要下载并安装 [开发者工具](https://opendocs.alipay.com/mini/ide/download)，然后按照支付宝小程序的 [接入流程](https://opendocs.alipay.com/mini/006kyi) 一步步创建一个小程序。
 
 ### 配置服务器域名
 
@@ -60,7 +60,7 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
 
 #### 实例调用方式
 
-实例化 SDK，并挂载在全局对象下
+实例化 SDK，并挂载在全局对象下。
 
 ```javascript
 //实例化 SDK 对象
