@@ -125,13 +125,11 @@ logging.level.com.easemob.im.shaded.io.netty=error
 
 ## 注意事项
 
-1. Server SDK 是对环信 IM [REST API](overview.htmml) 的封装，但并没有封装所有的 API，只封装了开发者常用的 API，点击 [这里](https://docs-im.easemob.com/im/server/ready/sdk#%E4%BD%BF%E7%94%A8) 查看 Server SDK API。
+1. Server SDK 是对环信 IM [REST API](overview.htmml) 的封装，但并没有封装所有的 API，只封装了开发者常用的 API，点击 [这里](#使用) 查看 Server SDK API。
 
-对于注册环信 ID 的规则，Server SDK 有自己的限制, 正则为 `^[a-z][0-9a-z-]{1,32}$`，这点与 [官网文档](http://docs-im.easemob.com/im/server/ready/user#环信_id_使用规则) 中说明的环信 ID 规则是有区别的，例如用户 ID 长度限制为 32 字节以内，这样做是因为目前环信 ID 注册的限制范围比较广，Server SDK 考虑缩小环信 ID 注册的限制范围使其更加规范。
+对于注册环信 ID 的规则，Server SDK 有自己的限制，正则为 `^[a-z][0-9a-z-]{1,32}$`，这点与 [官网 REST API 文档](account_system.html#开放注册单个用户) 中说明的环信 ID 规则是有区别的，例如用户 ID 长度限制为 32 字节以内，这样做是因为目前环信 ID 注册的限制范围比较广，Server SDK 考虑缩小环信 ID 注册的限制范围使其更加规范。
 
 如果不想使用 Server SDK 注册环信 ID 的限制，可以在初始化配置时添加 ‘turnOffUserNameValidation()’ （SDK 需要使用 0.3.5 以上的版本）
-
-
 
 ```java
 // 强烈建议不要使用纯数字或者有规律的字符串来注册环信 ID，否则用户可能容易遭受到攻击、接收到垃圾消息。
@@ -143,7 +141,7 @@ EMProperties properties = EMProperties.builder()
         .build();
 ```
 
-2. 使用代理的情况
+1. 使用代理的情况
 
 前提需要你的代理支持 `CONNECT` 方法，确保你的代理配置文件中有 connectport 80 存在。
 
@@ -183,26 +181,17 @@ EMProperties properties = EMProperties.builder()
 
 ## 更新日志
 
-### V0.5.2
+### V0.6.0
 
-- 修改群组信息方法增加 custom 参数。
-- 新增群组转让方法。
+- 新增 聊天室全员禁言/解禁 功能。
+- 新增 获取聊天室详情返回当前成员人数。
+- 新增 获取聊天室详情返回成员列表。
+- 新增 发送消息不返回消息 ID 的方法。
+- 新增 发送消息可携带 `sync_device` 字段。
 
-以上更新内容请到 GroupApi 中查看。
+- 修复添加群组管理员参数错误无法捕捉异常的问题。
 
-### V0.5.3
-
-- 创建群组方法增加 needInviteConfirm(邀请用户加群，受邀用户是否需要确认) 参数。
-- 创建聊天室方法增加 custom 参数。
-- 新增聊天室转让方法。
-
-以上更新内容请到 GroupApi/RoomApi 中查看。
-
-### V0.5.4
-
-- 新增 设置用户全局禁言/查询单个用户全局禁言剩余时间/查询所有用户全局禁言剩余时间 功能.
-
-以上更新内容请到 MuteApi 中查看。
+以上更新内容请到 `RoomApi/MessageApi` 中查看。
 
 ### V0.5.5
 
@@ -213,4 +202,25 @@ EMProperties properties = EMProperties.builder()
 - 获取群组详情返回群组名称、描述等数据。
 - 修复调用群组批量移除成员方法移除单个成员时，抛出异常的问题。
 
-以上更新内容请到 GroupApi/MessageApi 中查看。
+以上更新内容请到 `GroupApi`/`MessageApi` 中查看。
+
+### V0.5.4
+
+- 新增 设置用户全局禁言/查询单个用户全局禁言剩余时间/查询所有用户全局禁言剩余时间 功能。
+
+以上更新内容请到 `MuteApi` 中查看。
+
+### V0.5.3
+
+- 创建群组方法增加 `needInviteConfirm`(邀请用户加群，受邀用户是否需要确认) 参数。
+- 创建聊天室方法增加 `custom` 参数。
+- 新增聊天室转让方法。
+
+以上更新内容请到 `GroupApi`/`RoomApi` 中查看。
+
+### V0.5.2
+
+- 修改群组信息方法增加 `custom` 参数。
+- 新增群组转让方法。
+
+以上更新内容请到 `GroupApi` 中查看。
