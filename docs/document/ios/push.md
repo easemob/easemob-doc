@@ -626,7 +626,7 @@ message.chatType = EMChatTypeChat;
 - 支持格式 Linear PCM MA4 (IMA/ADPCM) µLaw aLaw。
 - 音频文件存放路径 AppData/Library/Sounds，时长不得超过 30 秒。
 
-更多内容可以参考苹果官方文档 [Generating a Remote Notification.](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification?language=objc)
+更多内容可以参考苹果官方文档：[生成远程推送通知](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification?language=objc)。
 
 ```plaintext
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];

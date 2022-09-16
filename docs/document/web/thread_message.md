@@ -126,4 +126,4 @@ conn.addEventHandler('MESSAGES',{
 
 ### 从服务器获取子区消息 (消息漫游)
 
-从服务器获取子区消息，请参考 [消息管理–从服务器获取消息](message_retrieve.html)。
+从服务器获取子区消息，请参考 [从服务器获取消息](message_retrieve.html)。
