@@ -1,4 +1,4 @@
-# Android 端 EaseCallKit 使用指南
+# EaseCallKit 使用指南
 
 <Toc />
 

@@ -1,4 +1,4 @@
-# 消息表情回复 Reaction Android
+# 消息表情回复 Reaction
 
 <Toc />
 

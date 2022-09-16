@@ -179,7 +179,7 @@
 
 2. 在 **IP白名单** 列表中，单击目标 IP 右侧的 **删除**
 
-![img](@static/images/public/../../../../../static/images/product/delete-ip-allow-list.png)
+![img](@static/images/product/delete-ip-allow-list.png)
 
 1. 单击 **确认**，则删除完毕。
 

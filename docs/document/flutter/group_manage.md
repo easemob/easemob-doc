@@ -1,4 +1,4 @@
-# 群组-创建和管理群组及监听群组事件
+# 创建和管理群组及监听群组事件
 
 <Toc />
 
@@ -78,7 +78,7 @@ try {
 
 示例代码如下：
 
-```
+```dart
 try {
   await EMClient.getInstance.groupManager.destroyGroup("groupId");
 } on EMError catch (e) {}
