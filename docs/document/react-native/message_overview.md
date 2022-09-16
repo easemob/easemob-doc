@@ -1,6 +1,6 @@
 ---
 {
     pageUri: "/document/android/message_overview.html",
-    title: "消息管理"
+    title: "消息概述"
 }
 ---

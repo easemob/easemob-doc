@@ -1,4 +1,4 @@
-# Android SDK API Doc
+# SDK API Doc
 
 <Toc />
 

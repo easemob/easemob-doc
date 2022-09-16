@@ -1,4 +1,4 @@
-# Flutter SDK 更新日志
+# SDK 更新日志
 
 <Toc />
 
