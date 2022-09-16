@@ -318,4 +318,4 @@ SDKClient.Instance.GroupManager.GetGroupWhiteListFromServer(currentGroupId, hand
 
 ### 监听群组事件
 
-详见 [监听群组事件](group_manage.html#监听群组事件)
+详见 [监听群组事件](group_manage.html#监听群组事件)。

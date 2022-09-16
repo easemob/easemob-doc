@@ -81,10 +81,6 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
 
 聊天室自定义属性以键值对（key-value）形式存储，属性信息变更会实时同步给聊天室成员。利用自定义属性可以存储直播聊天室的类型、狼人杀等游戏中的角色信息和游戏状态以及实现语聊房的麦位管理和同步等。
 
-本节介绍如何获取、设置和删除聊天室自定义属性。
-
-使用该功能的限制详见 [使用限制](limitation.html#聊天室自定义属性（key-value）)。
-
 #### 获取聊天室自定义属性
 
 聊天室所有成员均可通过 `getChatRoomAttributes` 获取聊天室自定义属性。

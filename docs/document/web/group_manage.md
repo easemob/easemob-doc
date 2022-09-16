@@ -78,7 +78,7 @@ conn.inviteUsersToGroup({groupId: 'groupId', users: ['user1', 'user2']})
 ```
 
 2. 受邀用户会收到 `inviteToJoin` 事件，自动进群或确认是否加入群组（取决于 `inviteNeedConfirm` 选项的设置）：
-  a. 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。
+  - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。
         - 受邀用户会收到 `directJoined` 事件；
         - 邀请人会收到 `acceptInvite` 事件。用户加入成功后，群成员会收到 `memberPresence` 事件。
         
@@ -86,7 +86,7 @@ conn.inviteUsersToGroup({groupId: 'groupId', users: ['user1', 'user2']})
     conn.acceptGroupInvite({invitee: 'myUserId', groupId: 'groupId'})
     ```
     
-  b. 受邀人拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。
+  - 受邀人拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。
     
     邀请人会收到 `rejectInvite` 事件。
     

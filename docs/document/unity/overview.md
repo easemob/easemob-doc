@@ -36,8 +36,8 @@ SDKClient.Instance.InitWithOptions(options);
 | `DebugMode` | 是否启用日志输出功能。设置为 `true` 则会启用日志输出功能，在调试开发阶段帮助定位和分析问题。 |
 | `AcceptInvitationAlways` | 是否自动接受申请。设置为 `true` 则当用户申请好友时，自动接受申请。 |
 | `AutoAcceptGroupInvitation` | 是否自动接受邀请。设置为 `true` 则当有人邀请当前用户入群时，自动接受邀请。  |
-| `RequireAck` | 是否需要发送已读回执。设置为 `true` 则消息需要已读回执。详见 [消息回执章节](message_receipt.html)。 |
-| `RequireDeliveryAck` | 是否需要发送送达回执。设置为 `true` 则消息需要送达回执。[消息回执章节](message_receipt.html) |
+| `RequireAck` | 是否需要发送已读回执。设置为 `true` 则消息需要已读回执。详见 [消息回执](message_receipt.html) 章节。 |
+| `RequireDeliveryAck` | 是否需要发送送达回执。设置为 `true` 则消息需要送达回执。详见 [消息回执](message_receipt.html) 章节。 |
 | `DeleteMessagesAsExitGroup` | 是否需要在离开群组时自动删除聊天历史消息。设置为 `true` 则在退出群组的时候，会删除聊天记录。  |
 | `DeleteMessagesAsExitRoom` | 是否需要在离开聊天室时自动删除聊天历史消息。设置为 `true` 则在退出聊天室的时候，会删除记录。 |
 | `IsRoomOwnerLeaveAllowed`  | 是否允许聊天室所有者离开聊天室。设置为 `true` 则允许。详见 [聊天室](room_overview.html) 章节。  |
