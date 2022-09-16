@@ -44,7 +44,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 示例代码如下：
 
 ```csharp
-//The parameters are the username of the contact to be added and the reason for adding.
+//username 为要添加的联系人的用户名，reason 为添加原因
 SDKClient.Instance.ContactManager.AddContact(username, reason, handle: new CallBack(
   onSuccess: () =>
   {
@@ -118,7 +118,7 @@ SDKClient.Instance.ContactManager.DeclineInvitation(username, handle: new CallBa
 ));
 ```
 
-当你同意或者拒绝后，对方会通过好友事件回调，收到 `OnFriendRequestAccepted ` 或者 `OnFriendRequestDeclined` 回调。
+当你同意或者拒绝后，对方会通过好友事件回调，收到 `OnFriendRequestAccepted` 或者 `OnFriendRequestDeclined` 回调。
 
 ### 删除好友
 
