@@ -2,9 +2,11 @@
 
 <Toc />
 
-消息表情回复（下文统称 “Reaction” ）支持用户在单聊和群聊场景中对单条消息回复表情，从而丰富用户聊天互动方式。在群组中，Reaction 作为社交互动工具支持用户在沟通时直观地进行情绪表达。
+环信即时通讯 IM 提供消息表情回复（下文统称 “Reaction”）功能。用户可以在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量确认投票。
 
-注意：目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+:::notice
+目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+:::
 
 ## 技术原理
 
@@ -19,6 +21,7 @@
 添加 Reaction：
 
 ![](@static/images/web/web_chat_reaction_add_reaction.png)
+查看 Reaction：
 
 ![](@static/images/web/web_group_chat_reaction_detail_another_version.png)
 

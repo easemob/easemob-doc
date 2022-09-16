@@ -1,4 +1,4 @@
-# 创建和管理群组
+# 创建和管理群组及监听群组事件
 
 <Toc />
 
@@ -61,10 +61,14 @@
 
 ```objectivec
 EMGroupOptions *options = [[EMGroupOptions alloc] init];
+// 设置群组最大成员数量。
 options.maxUsersCount = self.maxMemNum;
+// 设置 `IsInviteNeedConfirm` 为 `YES`，则邀请用户入群需要用户确认。
 options.IsInviteNeedConfirm = YES;
+// 设置群组类型。此处示例为成员可以邀请用户入群的私有群组。
 options.style = EMGroupStylePrivateMemberCanInvite;
-NSArray *members = @{@"memeber1",@"member2"};
+NSArray *members = @{@"member1",@"member2"};
+// 调用 `createGroupWithSubject` 创建群组。
 [[EMClient sharedClient].groupManager createGroupWithSubject:@"subject"
                          description:@"description"
                          invitees:members
@@ -200,7 +204,7 @@ EMGroup *group = [[EMClient sharedClient].groupManager
                                           getGroupSpecificationFromServerWithId:@"groupID"
                                           fetchMembers:YES
                                           error:nil];
-NSArray *memeberList = [group.memberList];
+NSArray *memberList = [group.memberList];
 ```
 
 ### 获取群组列表
@@ -279,130 +283,130 @@ do {
   }
 ```
 
-群组事件如下：
+群组事件如下（在该方法的举例中，用户 A 表示当前用户）：
 
 ```objectivec
-// 用户收到进群邀请
+// 当前用户收到了入群邀请。受邀用户会收到该回调。例如，用户 B 邀请用户 A 入群，则用户 A 会收到该回调。
 - (void)groupInvitationDidReceive:(NSString *)aGroupId inviter:(NSString *)aInviter message:(NSString *)aMessage
   {
 
   }
 
-// 群主或群管理员收到进群申请
+// 群主或群管理员收到进群申请。群主和所有管理员收到该回调。
 - (void)joinGroupRequestDidReceive:(EMGroup *)aGroup user:(NSString *)aUsername reason:(NSString *)aReason
   {
 
   }
 
-// 群主或群管理员同意用户的进群申请
+// 群主或群管理员同意用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
 - (void)joinGroupRequestDidApprove:(EMGroup *)aGroup
   {
 
   }
 
-// 群主或群管理员拒绝用户的进群申请
+// 群主或群管理员拒绝用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
 - (void)joinGroupRequestDidDecline:(NSString *)aGroupId reason:(NSString *)aReason
   {
 
   }
 
-// 用户同意进群邀请
+// 用户同意进群邀请。邀请人收到该回调。
 - (void)groupInvitationDidAccept:(EMGroup *)aGroup invitee:(NSString *)aInvitee
   {
 
   }
 
-// 用户拒绝进群邀请
+// 用户拒绝进群邀请。邀请人收到该回调。
 - (void)groupInvitationDidDecline:(EMGroup *)aGroup invitee:(NSString *)aInvitee reason:(NSString *)aReason
   {
 
   }
 
-// 有用户自动同意加入群组
+// 有用户自动同意加入群组。邀请人收到该回调。
 - (void)didJoinGroup:(EMGroup *)aGroup inviter:(NSString *)aInviter message:(NSString *)aMessage
   {
 
   }
 
-// 有成员被加入群组禁言列表
+// 有成员被加入群组禁言列表。被禁言的成员及群主和群管理员（除操作者外）会收到该回调。
 - (void)groupMuteListDidUpdate:(EMGroup *)aGroup addedMutedMembers:(NSArray *)aMutedMembers muteExpire:(NSInteger)aMuteExpire
   {
 
   }
 
-// 有成员被移出禁言列表
+// 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
 - (void)groupMuteListDidUpdate:(EMGroup *)aGroup removedMutedMembers:(NSArray *)aMutedMembers
   {
 
   }
 
-// 有成员被加入群组白名单
+// 有成员被加入群组白名单。被添加的成员及群主和群管理员（除操作者外）会收到该回调。
 - (void)groupWhiteListDidUpdate:(EMGroup *)aGroup addedWhiteListMembers:(NSArray *)aMembers
   {
 
   }
 
-// 有成员被移出群组白名单
+// 有成员被移出群组白名单。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
 - (void)groupWhiteListDidUpdate:(EMGroup *)aGroup removedWhiteListMembers:(NSArray *)aMembers
   {
 
   }
 
-// 全员禁言状态变化
+// 全员禁言状态变化。群组所有成员（除操作者外）会收到该回调。
 - (void)groupAllMemberMuteChanged:(EMGroup *)aGroup isAllMemberMuted:(BOOL)aMuted
   {
 
   }
 
-// 群组新增管理员
+// 设置管理员。群主、新管理员和其他管理员会收到该回调。
 - (void)groupAdminListDidUpdate:(EMGroup *)aGroup addedAdmin:(NSString *)aAdmin
   {
 
   }
 
-// 有群组管理员被移除权限
+// 群组管理员被移除。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
 - (void)groupAdminListDidUpdate:(EMGroup *)aGroup removedAdmin:(NSString *)aAdmin
   {
 
   }
 
-// 群主转移权限
+// 群主变更。原群主和新群主会收到该回调。
 - (void)groupOwnerDidUpdate:(EMGroup *)aGroup newOwner:(NSString *)aNewOwner oldOwner:(NSString *)aOldOwner
   {
 
   }
 
-// 有新成员加入群组
+// 有新成员加入群组。除了新成员，其他群成员会收到该回调。
 - (void)userDidJoinGroup:(EMGroup *)aGroup user:(NSString *)aUsername
   {
 
   }
 
-// 有成员主动退出群
+// 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
 - (void)userDidLeaveGroup:(EMGroup *)aGroup user:(NSString *)aUsername
   {
 
   }
 
-// 群组公告更新
+// 群组公告更新。群组所有成员会收到该回调。
 - (void)groupAnnouncementDidUpdate:(EMGroup *)aGroup announcement:(NSString *)aAnnouncement
   {
 
   }
 
-// 有成员新上传群组共享文件
+// 有成员新上传群组共享文件。群组所有成员会收到该回调。
 - (void)groupFileListDidUpdate:(EMGroup *)aGroup addedSharedFile:(EMGroupSharedFile *)aSharedFile
   {
 
   }
 
-// 群组共享文件被删除
+// 群组共享文件被删除。群组所有成员会收到该回调。
 - (void)groupFileListDidUpdate:(EMGroup *)aGroup removedSharedFile:(NSString *)aFileId
   {
 
   }
 
-// 群组详情变更
+// 群组详情变更。群组所有成员会收到该回调。
 - (void)groupSpecificationDidUpdate:(NSString *)aGroupId
   {
 

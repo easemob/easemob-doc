@@ -1,8 +1,8 @@
-# 群组-创建和管理群组及监听群组事件
+# 创建和管理群组及监听群组事件
 
 <Toc />
 
-群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
+群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM Web SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
 
 ## 技术原理
 
@@ -34,14 +34,14 @@
 
 | 参数 | 类型        | 描述                 |
 | :--------- | :----------------------- | :----------------------------- |
-| groupname  | String             | 群组名称。              |
-| desc  | String | 群组描述。           |
-| members    | Array         | 群成员的用户 ID 组成的数组。 |
-| public  | Bool             | 是否为公开群：<br/> - `true`：是；<br/> - `false`：否。该群组为私有群。    |
-| approval  | Bool | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `public` 设置为 `true` 时，对私有群无效。  |
-| allowinvites    | Bool         | 是否允许普通群成员邀请人入群：<br/> - `true`：允许；<br/> - `false`：不允许。只有群主和管理员才可以向群组添加用户。<br/>该参数仅对私有群有效，即 `public` 设置为 `false`时， 因为公开群（public：`true`) 仅支持群主和群管理员邀请人入群，不支持普通群成员邀请人入群。 |
-| inviteNeedConfirm  | Bool             | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。             |
-| maxusers  | Int             | 群组最大成员数。          |
+| `groupname`  | String             | 群组名称。              |
+| `desc`  | String | 群组描述。           |
+| `members`    | Array         | 群成员的用户 ID 组成的数组。 |
+| `public`  | Bool             | 是否为公开群：<br/> - `true`：是；<br/> - `false`：否。该群组为私有群。    |
+| `approval`  | Bool | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `public` 设置为 `true` 时，对私有群无效。  |
+| `allowinvites`    | Bool         | 是否允许普通群成员邀请人入群：<br/> - `true`：允许；<br/> - `false`：不允许。只有群主和管理员才可以向群组添加用户。<br/>该参数仅对私有群有效，即 `public` 设置为 `false` 时， 因为公开群（public：`true`) 仅支持群主和群管理员邀请人入群，不支持普通群成员邀请人入群。 |
+| `inviteNeedConfirm`  | Bool             | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。             |
+| `maxusers`  | Int             | 群组最大成员数。          |
 
 创建群组的示例代码如下：
 
@@ -78,7 +78,7 @@ conn.inviteUsersToGroup({groupId: 'groupId', users: ['user1', 'user2']})
 ```
 
 2. 受邀用户会收到 `inviteToJoin` 事件，自动进群或确认是否加入群组（取决于 `inviteNeedConfirm` 选项的设置）：
-    - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。
+  a. 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。
         - 受邀用户会收到 `directJoined` 事件；
         - 邀请人会收到 `acceptInvite` 事件。用户加入成功后，群成员会收到 `memberPresence` 事件。
         
@@ -86,7 +86,7 @@ conn.inviteUsersToGroup({groupId: 'groupId', users: ['user1', 'user2']})
     conn.acceptGroupInvite({invitee: 'myUserId', groupId: 'groupId'})
     ```
     
-    - 受邀人拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。
+  b. 受邀人拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。
     
     邀请人会收到 `rejectInvite` 事件。
     
@@ -170,6 +170,7 @@ SDK 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通
 示例代码如下：
 
 ```javascript
+// 创建一个群组事件监听器
 // 在该方法的举例中，用户 A 表示当前用户。
 conn.addEventHandler("eventName", {
   onGroupEvent: function(msg){
@@ -198,10 +199,10 @@ conn.addEventHandler("eventName", {
       // 更新群公告。群组所有成员会收到该回调。
       case 'updateAnnouncement':
         break;
-      // 解除禁言。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
+      // 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
       case 'unmuteMember':
         break;
-      // 有群组成员加入禁言列表。被禁言的成员及群主和群管理员（除操作者外）会收到该回调。
+      // 有群组成员被加入禁言列表。被禁言的成员及群主和群管理员（除操作者外）会收到该回调。
       case 'muteMember':
         break;
       // 有管理员被移出管理员列表。群主、被移除的管理员和其他管理员会收到该回调。

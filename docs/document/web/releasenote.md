@@ -7,7 +7,7 @@
 ### 新增特性
 
 - [IM SDK] 增加灾备策略。
-- [IM SDK] SDK 内部在群组聊天室部分 API 请求时增加 resourceId，增加操作的多设备通知提醒。
+- [IM SDK] SDK 内部在群组聊天室部分 API 请求时增加 `resourceId`，增加操作的多设备通知提醒。
 
 ### 优化
 

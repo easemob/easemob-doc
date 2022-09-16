@@ -2,7 +2,7 @@
 
 <Toc />
 
-群组是支持多人沟通的即时通讯系统，本文指导你如何使用环信即时通讯 IM SDK 在实时互动 app 中实现群组成员管理相关功能。
+群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中实现群组成员管理相关功能。
 
 ## 技术原理
 
@@ -252,8 +252,4 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 
 ## 更多操作
 
-你可以参考如下文档，在项目中实现更多的群组相关功能：
-
-- [群组概述](group_overview.html)
-- [创建和管理群组以及监听器介绍](group_manage.html)
-- [群属性管理](group_attributes.html)
+[监听器介绍](group_manage.html)

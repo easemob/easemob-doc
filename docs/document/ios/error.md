@@ -88,6 +88,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 1001   |      EMErrorContactReachLimit       | 邀请者联系人数量已经达到上限。                               |
 | 1002   |    EMErrorContactReachLimitPeer     | 受邀请者联系人达到上限。                                     |
 | 1100   |     EMErrorPresenceParamExceed      | 调用 Presence 相关方法时参数长度超出限制。                   |
+| 1101   | EMErrorPresenceCannotSubscribeSelf  | 不能订阅你自己的状态。                                       |
 | 1110   |     EMErrorTranslateParamError      | 翻译参数错误。                                               |
 | 1111   |  EMErrorTranslateServiceNotEnabled  | 翻译服务未启用。                                             |
 | 1112   |     EMErrorTranslateUsageLimit      | 翻译用量达到上限。                                           |
@@ -95,6 +96,6 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 1300   |      EMErrorReactionReachLimit      | Reaction 数量已达到限制。                                    |
 | 1301   |   EMErrorReactionHasBeenOperated    | Reaction 重复添加。                                          |
 | 1302   |  EMErrorReactionOperationIsIllegal  | 没有操作权限：用户对该 Reaction 没有操作权限。例如没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接受者进行添加 Reaction 操作。 |
-| 1400   |          EMErrorThreadNotExist           | 未找到该子区，该子区不存在。                                 |
+| 1400   |  EMErrorThreadNotExist        | 未找到该子区，该子区不存在。                                 |
 | 1401   |        EMErrorThreadAlreadyExist         | 该消息 ID 下子区已存在，重复添加子区。                       |
 | 1402   |    EMErrorThreadCreateMessageIllegal    | 创建子区的消息无效：创建子区时父消息被撤回了，或者无法使用。 |
