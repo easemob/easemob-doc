@@ -214,7 +214,7 @@ module.exports = {
                     { text: '发送和接收消息', link: 'message_send_receive.html' },
                     { text: '管理本地消息数据', link: 'message_manage.html', except: ['web', 'react-native'] },
                     { text: '管理会话和消息', link: 'message_manage.html', only: ['react-native'] },
-                    { text: '从服务器获取消息（消息漫游）', link: 'message_retrieve.html' },
+                    { text: '从服务器获取消息（消息漫游）', link: 'message_retrieve.html', except: ['react-native'] },
                     { text: '管理消息回执', link: 'message_receipt.html' },
                     { text: '翻译', link: 'message_translation.html' },
                   ]
