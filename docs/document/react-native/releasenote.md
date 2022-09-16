@@ -1,4 +1,4 @@
-# React Native SDK 更新日志
+# SDK 更新日志
 
 <Toc />
 
@@ -18,7 +18,7 @@
 具体集成请参考以下文档：
 
 - [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
-- [环信即时通讯 IM React-Native 快速入门](quickstart.html)
+- [环信即时通讯 IM React-Native 快速开始](quickstart.html)
 - [消息管理 React Native](message_overview.html)
 - [群组](group_overview.html)
 - [聊天室](room_overview.html)
