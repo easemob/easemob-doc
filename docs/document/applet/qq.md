@@ -63,7 +63,7 @@ QQ、微信小程序： 1.7.0 及以上版本，最多可以同时存在 5 个 W
 - 通过官网 [下载 SDK](http://www.easemob.com/download/im)
 - 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
 
-#### 引入SDK
+#### 引入 SDK
 
 - 开始一个全新的项目
     1. 将下载的 SDK（src/sdk/）导入到自己的项目中。

@@ -6,7 +6,7 @@
 
 ## 简介
 
-小程序模版 源码地址 （`注意：分支为：versions2.0`)
+小程序模版源码地址 （`注意：分支为：versions2.0`)
 
 - [https://github.com/easemob/webim-uniapp-demo/tree/versions2.0](https://github.com/easemob/webim-uniapp-demo/tree/versions2.0)
 
@@ -107,7 +107,7 @@ import longPressModal from "@/components/longPressModal/index";
 - `winSize` – **必传参数** Objet，示例：winSize：{witdh: windowWidth, height: windowHeight}
 - `popButton` – **必传参数** Array，示例:['删除该聊天','置顶','自定义']
 - `change` – Function ，当前选中的具体参数
-- `showPop` – **必传参数** Bool，遮罩默认 fasle
+- `showPop` – **必传参数** Bool，遮罩默认 false
 - `hidePop` – Function，显隐框操作事件
 - `popStyle` – string，样式
 
