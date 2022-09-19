@@ -20,7 +20,7 @@
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 了解群成员角色，详见 [群组功能介绍](group_overview.html)。
+- 了解群成员角色，详见 [群组概述](group_overview.html)。
 
 ## 实现方法
 
@@ -48,8 +48,8 @@ conn.joinGroup(option).then(res => console.log(res))
 ```
 
 任何用户均可申请入群，是否需要群主和群管理员审批，取决于 `approval` 选项的设置：
-a.`approval` 为 `false` 时，用户可直接加入群组，无需群主和群管理员审批。其他群成员会收到 `memberPresence` 事件。
-b. `approval` 为 `true` 时，群主和群管理员审批后，用户才能加入群组。群主和群管理员会收到 `requestToJoin` 事件。
+- `approval` 为 `false` 时，用户可直接加入群组，无需群主和群管理员审批。其他群成员会收到 `memberPresence` 事件。
+- `approval` 为 `true` 时，群主和群管理员审批后，用户才能加入群组。群主和群管理员会收到 `requestToJoin` 事件。
     - 若同意用户加入群组，群主或管理员需要调用 `acceptGroupJoinRequest` 方法。
     
     申请人会收到 `acceptRequest` 事件且加入群组，其他成员会收到 `memberPresence` 事件。

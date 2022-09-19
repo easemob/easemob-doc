@@ -33,11 +33,11 @@
 WebIM.conn.getConversationlist().then((res) => {
     console.log(res)
     /**
-    返回参数说明。
-    channel_infos：所有会话。
-    channel_id：会话 ID。
-    lastMessage：最新一条消息。
-    unread_num：当前会话的未读消息数。
+    * 返回参数说明。
+    * channel_infos：所有会话。
+    * channel_id：会话 ID。
+    * lastMessage：最新一条消息。
+    * unread_num：当前会话的未读消息数。
     */
 })
 ```
@@ -54,11 +54,11 @@ WebIM.conn.getConversationlist().then((res) => {
 /**
  * 按服务器接收消息的时间顺序获取会话的历史消息。
  * @param {Object} options
- * @param {String} options.targetId   - 对方的用户 ID 或者群组 ID 或聊天室 ID。
- * @param {Number} options.pageSize  - （可选）每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
- * @param {Number} options.cursor   - （可选）查询的起始位置。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
- * @param {Boolean} options.chatType - （可选）会话类型（SDK V4.0)：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室聊天。
- * @param {String} options.searchDirection - 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
+ * @param {String} options.targetId ：对方的用户 ID 或者群组 ID 或聊天室 ID。
+ * @param {Number} options.pageSize：（可选）每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
+ * @param {Number} options.cursor：（可选）查询的起始位置。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
+ * @param {Boolean} options.chatType ：（可选）会话类型（SDK V4.0)：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室聊天。
+ * @param {String} options.searchDirection： 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
  */
 let options = {
   targetId: "user1",
@@ -86,9 +86,9 @@ WebIM.conn
 /**
  * 删除服务器端会话及其对应的消息。
  * @param {Object} options
- * @param {String} options.channel   - 会话 ID：对方的用户 ID 或群组 ID。
- * @param {String} options.chatType - `singleChat`：单聊；`groupChat`：群聊。
- * @param {Boolean} options.deleteRoam - 删除会话时是否同时删除服务端漫游消息。
+ * @param {String} options.channel：会话 ID：对方的用户 ID 或群组 ID。
+ * @param {String} options.chatType：`singleChat`：单聊；`groupChat`：群聊。
+ * @param {Boolean} options.deleteRoam：删除会话时是否同时删除服务端漫游消息。
  */
 
 let options = {

@@ -1,4 +1,4 @@
-# 使用环信用户 token 鉴权
+# 使用环信 User Token 鉴权
 
 <Toc />
 
