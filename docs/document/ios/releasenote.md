@@ -6,7 +6,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增聊天室自定义属性功能；
+- [IM SDK] 新增[聊天室自定义属性功能](room_attributes.html)。
 - [IM SDK] 新增 `EMLogDelegate` 类，实现用户日志回调。
 
 ### 优化

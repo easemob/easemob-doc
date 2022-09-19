@@ -6,19 +6,19 @@
 
 ### 新增特性
 
-[IM SDK] 新增聊天室自定义属性功能；
-[IM SDK] 新增 `EMLogListener` 类，实现用户日志回调。
+- [IM SDK] 新增[聊天室自定义属性功能](room_attributes.html)。
+- [IM SDK] 新增 `EMLogListener` 类，实现用户日志回调。
 
 ### 优化
 
-[IM SDK] 优化获取漫游消息的性能。
-[Demo] Demo 注册采用手机验证方式。
-[IMKit/CallKit] 优化 `isMainProcess` 方法，调用时无需获取 `GET_TASKS` 权限。
+- [IM SDK] 优化获取漫游消息的性能。
+- [Demo] Demo 注册采用手机验证方式。
+- [IMKit/CallKit] 优化 `isMainProcess` 方法，调用时无需获取 `GET_TASKS` 权限。
 
 ### 修复
 
-[IM SDK] 修复少数场景下，同步或拉取消息时消息量较大时收取失败的问题。 
-[Demo] 修复部分 Demo bug。
+- [IM SDK] 修复少数场景下，同步或拉取消息时消息量较大时收取失败的问题。 
+- [Demo] 修复部分 Demo bug。
 
 ## 版本 V3.9.5 Dev 2022-8-2（开发版）
 
