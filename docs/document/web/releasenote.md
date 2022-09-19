@@ -2,6 +2,25 @@
 
 <Toc />
 
+## 版本 V4.1.0 Dev 2022-9-16（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[聊天室自定义属性功能](room_attributes.html)。
+- [IM SDK] 新增 `logsCallback`（logger.logsCallback = (log) => {}）方法，实现用户日志回调。
+- [IM SDK] `getJoinedGroups` 方法中新增 `needAffiliations` 和 `needRole` 参数支持获取群组成员数和用户自己的角色。
+
+### 优化
+
+- [IM SDK] SDK 模块化拆分。
+- [IM SDK] 移除废弃的方法 (`subscribe`, `subscribed`, `unsubscribed`, `removeRoster`, `getRoster`, `callback: onRoster`, `onMutedMessage`, `onCreateGroup` 和 `onBlacklistUpdate`)。
+
+### 修复
+
+- [IM SDK] 修复上传文件失败没有触发回调的问题。
+- [IM SDK] 修复 IE 浏览器的兼容性问题。
+- [IM SDK] 修复 IM Uniapp 在手机上运行时上报 `addEventListener` 方法相关错误的问题。
+
 ## 版本 V4.0.9 Dev 2022-7-29（开发版）
 
 ### 新增特性
