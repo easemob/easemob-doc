@@ -2,6 +2,9 @@ const path = require('path');
 const moment = require('moment');
 
 module.exports = {
+  shouldPrefetch: () => {
+    return false
+  },
   configureWebpack: {
     resolve: {
       alias: {
