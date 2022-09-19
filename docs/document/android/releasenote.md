@@ -4,32 +4,32 @@
 
 ## 版本 V3.9.6 Dev 2022-9-16（开发版）
 
-#### 新增特性
+### 新增特性
 
 [IM SDK] 新增聊天室自定义属性功能；
 [IM SDK] 新增 `EMLogListener` 类，实现用户日志回调。
 
-#### 优化
+### 优化
 
 [IM SDK] 优化获取漫游消息的性能。
 [Demo] Demo 注册采用手机验证方式。
 [IMKit/CallKit] 优化 `isMainProcess` 方法，调用时无需获取 `GET_TASKS` 权限。
 
-#### 修复
+### 修复
 
 [IM SDK] 修复少数场景下，同步或拉取消息时消息量较大时收取失败的问题。 
 [Demo] 修复部分 Demo bug。
 
 ## 版本 V3.9.5 Dev 2022-8-2（开发版）
 
-#### 新增特性:
+### 新增特性:
 
 - [IM SDK] 新增群组详情中群组禁用状态：[EMGroup#isDisabled()](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html#acd072d7fc16e6ff89110173979ed318b) 属性，该属性需要开发者在服务端设置；
 - [IM SDK] 优化遇到连接问题时更新接入点的策略，增强可用性；
 - [IM SDK] [发送前回调](/document/server-side/callback.html#_1、发送前回调)：发送失败时返回给 app 用户的错误描述中增加你自定义的错误信息（即 [响应体参数](/document/server-side/callback.html#响应体参数) code 信息）。
 - [IM SDK] 在 [EMError](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 中新增错误码 1101：[EMError#PRESENCE_CANNOT_SUBSCRIBE_YOURSELF](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#abc9130b164d5cccb3559585ec38e8e99)，用来提示用户不能订阅自己的在线状态。
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 优化登录过程，缩短登录时间；
 - [IM SDK] 消息加密算法由 CBC 升级为 GCM；
@@ -42,13 +42,13 @@
 
 ## 版本 V3.9.4 Dev 2022-6-16
 
-#### 新增特性:
+### 新增特性:
 
 - [IM SDK] 在 [EMMessage](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message.html#acda7d83054f842b5208496370a9decaa) 中添加 `isOnlineState` 字段，用来标记接收到的消息是否为离线消息。
 - [IM SDK] 在 [EMError](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#aa61ecbf9d24db24d0d852f6f631560f4) 类中添加错误码 509 `MESSAGE_CURRENT_LIMITING`，表示群聊消息已被限流。
 - [IM SDK] 在 [EMPushManager](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_push_manager.html#a3c49e8245c25954b2cc1a13e93b57e0f) 中新增 `bindDeviceToken` 方法，用于绑定设备 Token。
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 优化子区相关接口及属性；对比 3.9.3 版本，用 `EMChatThread` 替换 `EMChatThreadInfo`，`EMChatThreadEvent` 中用 `EMChatThread` 对象替换 Chat Thread 相关属性；
 - [IM SDK] 群邀请回调 [EMGroupChangeListener#onInvitationReceived](http://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_group_change_listener.html#ab3591c00dc3f5b4138fa57073cc29589) 中新增 群名称（groupName） 参数值；
@@ -56,7 +56,7 @@
 - [IM SDK] 升级网络链路库；
 - [IM SDK] 支持发送设置附件地址为远程地址的消息。
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复获取 Reaction 对象时可能为空的问题；
 - [IM SDK] 修复低版本手机加载数据库失败的问题。
@@ -67,19 +67,19 @@
 
 - [IM SDK] 新增 [消息子区（Message Thread）](https://docs-im.easemob.com/ccim/android/thread2)功能；
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 优化网络链路，提升网络访问性能；
 - [IM SDK] 优化[拉取漫游消息接口](https://docs-im.easemob.com/ccim/android/message4#分页获取指定会话的历史消息)，增加指定拉取消息方向的参数。
 
 ## 版本 V3.9.2.1 Dev 2022-5-17
 
-#### 新增特性:
+### 新增特性:
 
 - [IM SDK] 新增 [消息 Reaction](https://docs-im.easemob.com/ccim/android/reaction) 功能，可以对消息进行不同的响应；
 - [IM SDK] 新增 [举报 API](https://docs-im.easemob.com/ccim/android/moderation) 用于内容审核。
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 优化获取服务器接入点 (dnsconfig) 的功能；
 - [IM SDK] 优化数据上报功能；
@@ -89,47 +89,47 @@
 - [IM SDK] SDK 最低支持版本调整到 21(Android5.0)；
 - [EaseCallKIt] 升级 Agora RTC SDK 版本到 3.6.2。
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复 Google Play 上架时报的加密算法问题；
 - [IM SDK] 修复 Translation API 失效的问题。
 
 ## 版本 V3.9.1.1 Dev 2022-4-27
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复偶发的拉取历史消息不能正常显示的问题。
 
 ## 版本 V3.9.1 Dev 2022-4-19
 
-#### 新增特性:
+### 新增特性:
 
 - [IM SDK] 增加 [用户在线状态 (Presence) 订阅功能](https://docs-im.easemob.com/ccim/android/presence)；
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 缩短发送消息超时时间。
 - [IM SDK] DNS 服务器地址列表支持优先级设置，HTTP 和 TCP 请求重试时按 DNS 服务器地址的优先级发送请求，提升请求成功率。
 - [IM SDK] IM SDK 所依赖的 OPPO 推送（版本 2.1.0 更新到 版本 3.0.0）和 vivo 推送（版本 2.3.1 更新到 版本 3.0.0.4_484）的 SDK 版本升级。
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复 PendingIntent 问题，移除 IM 在 Google Play 上架时的警告。
 
 ## 版本 V3.9.0 Dev 2022-2-22
 
-#### 新增特性:
+### 新增特性:
 
 - [IM SDK] [EaseIMKIt] 增加 [单向删除服务端会话 API](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html#a345e81b9caf2658c8796855fe63fe752)；
 - [IM SDK] Push 平台增加推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，见 [Android 推送集成](https://docs-im.easemob.com/push/apppush/androidsdk)；
 - [IM SDK] 增加非好友不能发送消息错误码 [221 USER_NOT_ON_ROSTER]；
 - [IM SDK] [EaseIMKIt] 增加通过 REST 接口撤回消息功能。
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 减少弱网时发送消息的等待时间。
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复消息发送重试被连接成功事件中断；
 - [IM SDK] 修复内存泄漏问题；
@@ -137,31 +137,31 @@
 
 ## 版本 V3.8.9.1 2021-12-30
 
-#### 修复:
+### 修复:
 
 - [IM SDK] 增加极端情况下打开数据库失败时重建数据库的策略。
 
 ## 版本 V3.8.9 Dev 2021-12-27
 
-#### 新增：
+### 新增：
 
 - [IM SDK] 增加翻译功能 API；
 - [IM SDK] 位置消息增加建筑物名称字段；
 - [IM SDK] 增加按照时间删除消息的 API；
 - [IM SDK] 增加获取会话中消息总数的 API；
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复部分 crash 的问题；
 - [IM SDK] 修复数据库加密的 bug。
 
 ## 版本 V3.8.8 Dev 2021-12-06
 
-#### 新增：
+### 新增：
 
 - [IM SDK] 增加获取登录状态的 API。
 
-#### 更新：
+### 更新：
 
 - [IM SDK] 更新部分函数命名与注释；
 - [IM SDK] 优化推送 token 的更新逻辑，降低对服务器的请求次数；
@@ -169,7 +169,7 @@
 - [IM SDK] 优化群组消息在 token 过期时的处理逻辑；
 - [IM SDK] EMOptions 中默认使用 HTTPS only。
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复拉取历史漫游消息不全的 bug；
 - [IM SDK] 对荣耀手机推送的支持；
@@ -182,28 +182,28 @@
 
 ## 版本 V3.8.7 Dev 2021-10-22
 
-#### 新增
+### 新增
 
 - 使用 token 登录时，在 token 过期时回调给上层 app；
 
-#### 修改
+### 修改
 
 - 修复部分场景下传输加密的问题。
 
 ## 版本 V3.8.6.1 Dev 2021-10-12
 
-#### 新功能：
+### 新功能：
 
 - [IM SDK] 增强本地存储数据的安全性；
 - [IM SDK] 增强传输数据的安全性；
 - [IM SDK] 增加用户被全局禁言时发消息会提示单独的错误码；
 
-#### 更新：
+### 更新：
 
 - [EaseIMKIt] 聊天页面语音消息按钮事件移到 APP 层；
 - [IM SDK] 检查发送 ReadAck 时 to 是否为空；
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复 WAKE_LOCK 权限导致应用 crash 问题；
 - [IM SDK] 删除自定义证书异常打印；
@@ -218,11 +218,11 @@
 
 ## 版本 V3.8.5 2021-09-10
 
-#### 新功能：
+### 新功能：
 
 - [IM SDK] 对用户日志加强了安全保护。
 
-#### 更新：
+### 更新：
 
 - [IM SDK] 设备 ID 使用随机生成的方式。
 - [IM SDK] 移除对 FCM 11.4.0 版本的依赖，将 FCM 的逻辑移到应用层。
@@ -230,7 +230,7 @@
 - [EaseIMKit] 在 EaseChatFragment 中暴露消息发送成功的回调 onChatSuccess。
 - [EaseIM] 将 FCM 逻辑移到应用层，并升级 FCM Messaging 到 22.0.0 版本，[FCM 集成详见](https://docs-im.easemob.com/im/android/push/thirdpartypush#sdk_385_版本之后集成方式)。
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复 SDK 某些场景下数据库损坏导致崩溃的问题。
 - [EaseIMKit] 修复通讯录首字母识别不准确的问题。
@@ -241,11 +241,11 @@
 
 ## 版本 V3.8.4 2021-08-03
 
-#### 新功能：
+### 新功能：
 
 - [IM SDK] 新增单聊 1v1 免打扰功能；
 
-#### 更新：
+### 更新：
 
 - [EaseIM App] 增加单聊 1v1 免打扰开关；
 - [IM SDK] EMCmdMessageBody#getParams 方法增加已废弃注解；
@@ -253,7 +253,7 @@
 - [IM SDK] 去除收集不必要的设备信息；
 - [IM SDK] 增加垃圾消息被拦截的错误码；
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复 APP 运行在前台或者后台判断错误问题；
 - [EaseIM App] 修复置顶会话在新消息到达时未置顶的问题；
@@ -262,13 +262,13 @@
 
 ## 版本 V3.8.3 2021-07-09
 
-#### 更新：
+### 更新：
 
 - [IM SDK] 在 EMClient 中增加了对一些方法的保护；
 - [IM SDK] 移除 SDK 中获取定位的相关逻辑；
 - [IM SDK] 移除 SDK 中 AndroidManifest 的权限声明；
 
-#### 修复:
+### 修复:
 
 - [EaseIMKIt] 修复某些场景下导致发送失败图标和已读标志重叠的问题；
 - [EaseIMKIt] 修复某些场景下长按聊天条目崩溃的问题；
@@ -280,13 +280,13 @@
 
 ## 版本 V3.8.2 2021-06-05
 
-#### 新功能：
+### 新功能：
 
 - [IM SDK] 新增增加异常事件上报功能, 需要开启，默认不会上报；
 - [IM SDK] 新增增加针对发送前回调拦截的消息的错误码；
 - [IM SDK] 新增支持多种不同应用(相同 Appkey)使用不同的消息过滤规则；
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 新增会话列表添加 localpath，确保拉取会话列表语音/视频/图片可以下载;
 - [IM SDK] 新增修复个别场景下长时间在前台可能会离线的 bug；
@@ -296,13 +296,13 @@
 
 ## 版本 V3.8.1 2021-04-13
 
-#### 新功能：
+### 新功能：
 
 - [IM SDK] 新增设置、获取用户属性的接口，集成参见：[用户属性](https://docs-im.easemob.com/im/android/basics/profile)
 - [EaseIM App] 新增用户资料（头像、昵称等）的存储、显示;
 - [EaseIM App] 新增用户名片消息的发送与展示（使用自定义消息实现);
 
-#### 修复：
+### 修复：
 
 - [EaseIMKIt] 修复发送多条带附件的消息时会发送重复的问题;
 - [EaseIMKIt] 修复注册聊天类型时排序问题造成的展示问题;
@@ -312,7 +312,7 @@
 - [IM SDK] 修复上传文件消息时没有设置文件长度的问题;
 - [IM SDK] 修复 SDK 3.5.3 后数据库从 2.0 迁移到 3.0 后加载会话列表消息不全的问题;
 
-#### 更新(2021-05-08)：
+### 更新(2021-05-08)：
 
 - [EaseCallkit] 修改加入声网频道的方式，改为使用数字 uid 加入，增加与小程序的互通，`与之前版本不互通`，参见[EaseCallKit 使用指南](https://docs-im.easemob.com/im/android/other/easecallkit);
 
@@ -330,26 +330,26 @@
 - [IM SDK] 增加群组成员批量操作的 API；
 - [IM SDK] 增加 getContactsFromLocal() 方法；
 
-#### 更新：
+### 更新：
 
 - [IM SDK] 3.8.0 及以后版本 SDK 更新名为 com.hyphenate:hyphenate-chat:x.x.x, 只发布 IM 功能，移除环信音视频功能；
 - [EaseIM App] 环信 app 依赖声网音视频功能;
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复极端情况用户名为空时请求 token 的的问题；
 - [IM SDK] 在 EMGroup 和 EMChatRoom 中增加 PermissionType 属性用以判断角色；
 - [IM SDK] 修复发送文件消息时没有设置文件长度的问题；
 - [EaseIMKit] 修复会话列表页面删除所有数据后，不展示空布局的问题；
 
-#### 注意
+### 注意
 
 - **为提供更好的服务，从3.8.0开始SDK中不再提供音视频功能，而是在EaseCallKit中基于声网的SDK给出了音视频功能的参考实现。该方案呼叫功能不能与之前版本之间互通，请根据情况选择使用新方案或者继续使用之前的版本**
 - EaseCallKit除了可以远程库外，也公布了源码，详情请见：[EaseCallKit 使用指南](http://docs-im.easemob.com/im/android/other/easecallkit);
 
 ## 版本 V3.7.6 2021-09-17
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 移除 SDK 中获取定位的相关逻辑；
 - [IM SDK] 移除 SDK 中 Android Manifest 的权限声明；
@@ -396,15 +396,15 @@
 
 ## 版本 V3.7.3 2020-12-31
 
-#### 新功能：
+### 新功能：
 
 - [EaseIMKit] EaseUI 的升级版 EaseIMKit 正式发布远程依赖库了，版本号与 IM SDK 一致，详情请见：[EaseIMKit 使用指南](https://docs-im.easemob.com/im/android/other/easeimkit)；
 
-#### 更新：
+### 更新：
 
 - [IM SDK] 提升 Android 音视频通话时音频的比特率（bitrate），提高声音质量；
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复特殊情况下传输加密引发的 crash 问题；
 - [IM SDK] 修复部分 Android 安全问题，移除不必要的 app monitor 保活；
@@ -435,24 +435,24 @@
 
 ## 版本 V3.7.1 2020-08-27
 
-#### 新功能：
+### 新功能：
 
 - RTC 增加设置质量优先的 API；
 - RTC 增加设置获取集群代理的 URL 的 API；
 - 增加显示推送详情的 API；
 
-#### 更新：
+### 更新：
 
 - 升级 OPPO 推送 SDK 升级到 2.1.0 版本;
 - 修改更新推送昵称的 API；
 
-#### 修复：
+### 修复：
 
 - 修复发送原图，接收方获取不到图片宽高的问题。
 
 ## 版本 V3.7.0 2020-07-29
 
-#### 新功能：
+### 新功能：
 
 - 实现 RTC 质量监控，上报RTC质量数据；
 - 增加纯音频推流功能,可设置音频参数；
@@ -465,14 +465,14 @@
 - 增加网络等异常无视频 音频数据，无数据回调接口；
 - 增加发送接收音视频首帧数据的回调；
 
-#### 修复：
+### 修复：
 
 - 修复构造图片消息时 localpath 为空时的 bug；
 - 修复发送图片消息可能会删除原图的 bug。
 
 ## 版本 V3.6.9.1 2020-06-29
 
-#### 修复：
+### 修复：
 
 - 修复设置 REST Server 端口设置失效的问题。
 
