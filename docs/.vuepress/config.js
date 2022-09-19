@@ -44,7 +44,7 @@ module.exports = {
     // 头部左上角 logo
     logo: '/logo.png',
     // 多语言切换
-    switchLang: true,
+    switchLang: false,
     // 多语言
     locales: {
       // 中文
