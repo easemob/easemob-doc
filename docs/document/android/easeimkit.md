@@ -90,6 +90,7 @@ public class DemoApplication extends Application {
     }
 }
 ```
+
 ## 快速搭建
 
 EaseIMKit 封装了常用 IM 功能，提供了会话，聊天及联系人等基本的 fragment，旨在帮助开发者快速集成环信 SDK。

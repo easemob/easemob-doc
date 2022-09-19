@@ -1,4 +1,4 @@
-# React Native 常见错误代码
+# 常见错误代码
 
 <Toc />
 

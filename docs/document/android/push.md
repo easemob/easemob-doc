@@ -353,13 +353,16 @@ EMClient.getInstance().init(this, options);
     - 3.2 配置 `AndroidManifest.xml`。
         - `OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q上接收 OPPO 推送需要升级环信 SDK 到 3.7.1 以及之后的版本，并使用 OPPO 推送 2.1.0 的包。从 3.9.1 版本开始，升级 OPPO 推送版本到 3.0.0`
         - 推送服务需要的权限列表：
+        
         ```xml
         <!-- OPPO 推送配置 start -->
         <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE"/>
         <uses-permission android:name="com.heytap.mcs.permission.RECIEVE_MCS_MESSAGE"/>
         <!-- OPPO 推送配置 end -->
         ```
+        
         - 推送服务需要的 service：
+        
         ```xml
         <!-- OPPO 推送配置 start -->
         <service
@@ -380,7 +383,9 @@ EMClient.getInstance().init(this, options);
         </service> <!--兼容 Q 版本-->
         <!-- OPPO 推送配置 end -->
         ```
+
     - 3.3 在 SDK 初始化的时候，配置启用 OPPO 推送
+    
     ```java
     EMOptions options = new EMOptions();
     ...
@@ -391,7 +396,9 @@ EMClient.getInstance().init(this, options);
     // To initialize Agora Chat SDK
     EMClient.getInstance().init(this, options);
     ```
+    
     - 3.4 调用 OPPO 推送的初始化
+    
     ```java
     HeytapPushManager.init(context, true);
     ```
@@ -408,6 +415,7 @@ EMClient.getInstance().init(this, options);
     - 3.1 配置 VIVO 推送 jar 包： 去 VIVO 推送官网下载推送 SDK 包，把 jar 包放到 libs 目录下并 sync 。也可以直接使用环信 Android IM Demo 中集成的 VIVO 推送的 jar 包。
     - 3.2 配置 `AndroidManifest.xml` 。
         - 推送服务需要的 service 和 receiver，并且需要配置 VIVO 的 app_id 和 app_key：
+        
         ```xml
         <!-- VIVO 推送配置 start -->
         <!--VIVO Push SDK 的版本信息-->
@@ -442,7 +450,9 @@ EMClient.getInstance().init(this, options);
         </receiver>
         <!-- VIVO 推送配置 end -->
         ```
+    
     - 3.3 在 SDK 初始化的时候，配置启用 VIVO 推送
+    
     ```java
     EMOptions options = new EMOptions();
     ...
@@ -453,6 +463,7 @@ EMClient.getInstance().init(this, options);
     // To initialize Agora Chat SDK
     EMClient.getInstance().init(this, options);
     ```
+    
     - 3.4 VIVO 设备安装应用后默认没有打开允许通知权限，测试前请先去设置中打开该应用的允许通知权限。
 
 [VIVO 推送官方文档](https://dev.vivo.com.cn/documentCenter/doc/158)
@@ -460,20 +471,24 @@ EMClient.getInstance().init(this, options);
 #### 魅族推送集成
 
 1. 在魅族开发者后台创建应用
-    - 在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下魅族官方介绍：[ flyme 推送服务集成](http://open-wiki.flyme.cn/index.php?title=Flyme推送接入文档)
+    - 在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下魅族官方介绍：[Flyme 推送服务集成](http://open-wiki.flyme.cn/index.php?title=Flyme推送接入文档)
 2. 上传推送证书
     - 注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 魅族，然后输入你在[ flyme 推送平台](http://push.meizu.com/#/config/app?appId=8843&_k=dnrz9k)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
 3. 魅族推送集成
     - 3.1 配置魅族推送 jar 包：
     在 app level/build.gradle 中添加依赖。
+    
+    
     ```gradle
     dependencies{
         // 该 aar 托管在 jcenter 中，请确保当前项目已配置 jcenter 仓库。
         implementation 'com.meizu.flyme.internet:push-internal:3.7.0@aar'
     }
     ```
+    
     - 3.2 配置 `AndroidManifest.xml`。
         - 推送服务需要的权限列表：
+        
         ```xml
         <!-- 魅族推送配置 start-->
         <!-- 兼容 flyme5.0 以下版本，魅族内部集成 pushSDK 必填，不然无法收到消息-->
@@ -490,7 +505,9 @@ EMClient.getInstance().init(this, options);
         <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
         <!-- 魅族推送配置 end-->
         ```
+        
         - 推送服务需要的 receiver：
+        
         ```xml
         <!-- MEIZU 推送配置 start -->
         <receiver android:name="com.hyphenate.push.platform.meizu.EMMzMsgReceiver">
@@ -513,7 +530,9 @@ EMClient.getInstance().init(this, options);
         </receiver>
         <!-- MEIZU 推送配置 end -->
         ```
+    
     - 3.3 在 SDK 初始化的时候，配置启用魅族推送。
+    
     ```java
     EMOptions options = new EMOptions();
     ...
@@ -709,7 +728,7 @@ EMClient.getInstance().pushManager().getSilentModeForConversations(conversationL
 以下代码示例显示了如何清除会话的推送通知方式：
 
 ```java
-//清除指定会话的推送通知方式设置。清除后，该会话会采取 app 的设置。
+// 清除指定会话的推送通知方式设置。清除后，该会话会采取 app 的设置。
 EMClient.getInstance().pushManager().clearRemindTypeForConversation(conversationId, conversationType, new EMCallBack(){});
 ```
 
@@ -835,7 +854,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 重写 `FirebaseMessagingService.onMessageReceived` 方法可以在 `RemoteMessage` 对象中获取自定义扩展：
 
-```
+```java
 public class EMFCMMSGService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

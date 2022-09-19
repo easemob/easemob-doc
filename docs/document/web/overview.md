@@ -121,15 +121,15 @@ conn.registerUser({
 
 目前登录服务器有三种方式：
 
-- **用户 ID + 密码**； 
-- **用户 ID + token**； 
-- **用户 ID + agoraToken**。
+- 用户 ID + 密码； 
+- 用户 ID + token； 
+- 用户 ID + agoraToken。
 
-**注意**
-- 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
-- Web 端只支持手动登录，不支持自动登录。
+:::notice
+使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
+:::
 
-### **用户 ID +密码** 
+## 手动登录
 
 **用户 ID +密码** 登录是传统的登录方式。用户 ID 和密码都是你的终端用户自行决定，密码需要符合密码规则要求。
 
@@ -146,8 +146,6 @@ conn.open({
 	});
 ```
 
-### **用户 ID + token**
-
 **用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](easemob_user_token.html)。
 
 ```javascript
@@ -163,8 +161,6 @@ conn.open({
 	});
 ```
 
-### **用户 ID + agoraToken**
-
 **用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般同时使用声网和环信产品时利用该方法登录。token 获取请参考 [使用声网 user token 鉴权](https://docs.agora.io/en/agora-chat/generate_user_tokens?platform=React%20Native)。
 
 ```javascript
@@ -179,6 +175,10 @@ conn.open({
 		console.log('login fail', reason);
 	});
 ```
+
+### 自动登录（Web SDK 暂不支持）
+
+在初始化的时候，可以设置是否自动登录。如果设置为自动登录，则登录成功之后，后续启动初始化的时候会自动登录，登录结果通过回调返回。
 
 ## 退出登录
 
