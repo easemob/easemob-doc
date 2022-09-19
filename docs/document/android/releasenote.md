@@ -2,16 +2,34 @@
 
 <Toc />
 
+## 版本 V3.9.6 Dev 2022-9-16（开发版）
+
+#### 新增特性
+
+[IM SDK] 新增聊天室自定义属性功能；
+[IM SDK] 新增 `EMLogListener` 类，实现用户日志回调。
+
+#### 优化
+
+[IM SDK] 优化获取漫游消息的性能。
+[Demo] Demo 注册采用手机验证方式。
+[IMKit/CallKit] 优化 `isMainProcess` 方法，调用时无需获取 `GET_TASKS` 权限。
+
+#### 修复
+
+[IM SDK] 修复少数场景下，同步或拉取消息时消息量较大时收取失败的问题。 
+[Demo] 修复部分 Demo bug。
+
 ## 版本 V3.9.5 Dev 2022-8-2（开发版）
 
-新增特性:
+#### 新增特性:
 
 - [IM SDK] 新增群组详情中群组禁用状态：[EMGroup#isDisabled()](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html#acd072d7fc16e6ff89110173979ed318b) 属性，该属性需要开发者在服务端设置；
 - [IM SDK] 优化遇到连接问题时更新接入点的策略，增强可用性；
 - [IM SDK] [发送前回调](/document/server-side/callback.html#_1、发送前回调)：发送失败时返回给 app 用户的错误描述中增加你自定义的错误信息（即 [响应体参数](/document/server-side/callback.html#响应体参数) code 信息）。
 - [IM SDK] 在 [EMError](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 中新增错误码 1101：[EMError#PRESENCE_CANNOT_SUBSCRIBE_YOURSELF](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#abc9130b164d5cccb3559585ec38e8e99)，用来提示用户不能订阅自己的在线状态。
 
-优化：
+#### 优化：
 
 - [IM SDK] 优化登录过程，缩短登录时间；
 - [IM SDK] 消息加密算法由 CBC 升级为 GCM；
@@ -24,7 +42,7 @@
 
 ## 版本 V3.9.4 Dev 2022-6-16
 
-新增特性:
+#### 新增特性:
 
 - [IM SDK] 在 [EMMessage](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message.html#acda7d83054f842b5208496370a9decaa) 中添加 `isOnlineState` 字段，用来标记接收到的消息是否为离线消息。
 - [IM SDK] 在 [EMError](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#aa61ecbf9d24db24d0d852f6f631560f4) 类中添加错误码 509 `MESSAGE_CURRENT_LIMITING`，表示群聊消息已被限流。

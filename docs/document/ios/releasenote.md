@@ -2,20 +2,36 @@
 
 <Toc />
 
+## 版本 V3.9.6 Dev 2022-9-16（开发版）
+
+#### 新增特性
+
+- [IM SDK] 新增聊天室自定义属性功能；
+- [IM SDK] 新增 `EMLogDelegate` 类，实现用户日志回调。
+
+#### 优化
+
+[IM SDK] 优化获取漫游消息的性能。
+
+#### 修复
+
+- [IM SDK] 修复少数场景下，同步或拉取消息时消息量较大时收取失败的问题。 
+- [Demo] 修复部分 Demo bug。
+
 ## 版本 V3.9.5 Dev 2022-8-2（开发版）
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增群组详情中群组禁用状态：isDisabled 属性，该属性需要开发者在服务端设置；
 - [IM SDK] 发送前回调：发送失败时返回给 app 用户的错误描述中增加你自定义的错误信息；
 - [IM SDK] 新增错误码 1101：EMErrorPresenceCannotSubscribeSelf。
 
-### 优化
+#### 优化
 
 - [IM SDK] 优化登录过程，缩短登录时间；
 - [IM SDK] 消息加密算法由 CBC 升级为 GCM；
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复退出账号时，若未设置推送证书，解绑 crash 的问题；
 - [IM SDK] 纠正部分拼写错误的接口；
@@ -23,30 +39,30 @@
 
 ## 版本 V3.9.4 Dev 2022-6-16
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 接收的消息中增加是否是离线消息 [isOnlineState()](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/interface_e_m_chat_message.html#a78d632fe28019bd04eaa9f9df8b94fd6) 的标记；
 - [IM SDK] 新增群聊消息限流错误码 [EMError#MESSAGECURRENTLIMITING](https://docs-im.easemob.com/ccim/ios/errorcode)
 - [IM SDK] 新增绑定设备 token 的接口 [EMPushManager#bindDeviceToken](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/interface_e_m_client.html#abafb1f83bc8fd3f59043bc7dd6af8282)。
 
-### 优化
+#### 优化
 
 - [IM SDK] 优化子区相关接口及属性；对比 3.9.3 版本，用 `EMChatThread` 替换 `EMChatThreadInfo`，`EMChatThreadEvent` 中的 Chat Thread 相关属性用 `EMChatThread` 对象替换；
 - [IM SDK] 群邀请回调 [EMGroupManagerDelegate#groupInvitationDidReceive:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_group_manager_delegate-p.html#a7eb4d32b6730b232aad0492cc808f996) 中返回新增 群名称（aGroupName） 参数值；
 - [IM SDK] 升级网络链路库；
 - [IM SDK] 支持设置附件为远程地址的消息。
 
-### 修复
+#### 修复
 
 - [EaseIMKit] 修复删除 Reaction 接口重复调用的问题。
 
 ## 版本 V3.9.3 Dev 2022-5-26
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增消息子区（Message Thread）功能；
 
-### 优化
+#### 优化
 
 - [IM SDK] 优化网络链路，提升网络访问性能；
 - [IM SDK] 优化 [拉取漫游消息接口](https://docs-im.easemob.com/ccim/android/message4#分页获取指定会话的历史消息)，增加指定拉取消息方向的参数；
