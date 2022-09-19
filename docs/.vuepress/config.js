@@ -197,7 +197,7 @@ module.exports = {
                 { text: '快速开始 （不使用 UIKit）', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
                 { text: 'SDK 集成概述（不使用 UIKit）', link: 'overview.html', only: ['windows', 'react-native', 'unity'] },
                 { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
-                { text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},
+                /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
                 { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
                 { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
                 { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
