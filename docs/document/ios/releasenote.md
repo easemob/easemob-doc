@@ -42,7 +42,7 @@
 ### 新增特性
 
 - [IM SDK] 接收的消息中增加是否是离线消息 [isOnlineState()](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/interface_e_m_chat_message.html#a78d632fe28019bd04eaa9f9df8b94fd6) 的标记；
-- [IM SDK] 新增群聊消息限流错误码 [EMError#MESSAGECURRENTLIMITING](https://docs-im.easemob.com/ccim/ios/errorcode)
+- [IM SDK] 新增群聊消息限流错误码 [EMError#MESSAGECURRENTLIMITING](error.html)
 - [IM SDK] 新增绑定设备 token 的接口 [EMPushManager#bindDeviceToken](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/interface_e_m_client.html#abafb1f83bc8fd3f59043bc7dd6af8282)。
 
 ### 优化
@@ -65,7 +65,7 @@
 ### 优化
 
 - [IM SDK] 优化网络链路，提升网络访问性能；
-- [IM SDK] 优化 [拉取漫游消息接口](https://docs-im.easemob.com/ccim/android/message4#分页获取指定会话的历史消息)，增加指定拉取消息方向的参数；
+- [IM SDK] 优化 [拉取漫游消息接口](message_retrieve.html)，增加指定拉取消息方向的参数；
 
 ## 版本 V3.9.2.1 Dev 2022-5-25
 
@@ -77,8 +77,8 @@
 
 ### 新增特性:
 
-- [IM SDK] 新增 [消息 Reaction](https://docs-im.easemob.com/ccim/ios/reaction) 功能，可以对消息进行不同的响应。
-- [IM SDK] 新增 [举报 API](https://docs-im.easemob.com/ccim/ios/moderation) 用于内容审核。
+- [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应。
+- [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核。
 
 ### 优化：
 
@@ -106,8 +106,8 @@
 
 ### 新增特性:
 
-- [IM SDK] [用户在线状态 (Presence) 订阅](https://docs-im.easemob.com/ccim/ios/presence)功能。
-- [IM SDK] [翻译](https://docs-im.easemob.com/ccim/ios/translation)功能更新，增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
+- [IM SDK] [用户在线状态 (Presence) 订阅](presence.html)功能。
+- [IM SDK] [翻译](message_translation.html)功能更新，增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
 
 ### 优化：
 
@@ -342,7 +342,7 @@ EaseIMKit：
 
 SDK：
 
-- 新增设置、获取用户属性的接口，集成参见：[用户属性](https://docs-im.easemob.com/ccim/ios/userprofile)
+- 新增设置、获取用户属性的接口，集成参见：[用户属性](userprofile.html)
 - 新增App层输出信息到日志文件的接口
 
 EaseIMKit：
@@ -357,7 +357,7 @@ EaseIMKit：
 
 EaseCallKit（2021-05-07）：
 
-- 修改加入声网频道的方式，改为使用数字uid加入，增加与小程序的互通，`与之前版本不互通`,参见[EaseCallKit使用指南](https://docs-im.easemob.com/im/ios/other/easecallkit)
+- 修改加入声网频道的方式，改为使用数字uid加入，增加与小程序的互通，`与之前版本不互通`,参见[EaseCallKit使用指南](easecallkit.html)
 
 ## 版本 V3.8.0 2021-02-27
 

@@ -65,19 +65,19 @@
 
 新增特性:
 
-- [IM SDK] 新增 [消息子区（Message Thread）](https://docs-im.easemob.com/ccim/android/thread2)功能；
+- [IM SDK] 新增 [消息子区（Message Thread）](thread_message.html)功能；
 
 ### 优化：
 
 - [IM SDK] 优化网络链路，提升网络访问性能；
-- [IM SDK] 优化[拉取漫游消息接口](https://docs-im.easemob.com/ccim/android/message4#分页获取指定会话的历史消息)，增加指定拉取消息方向的参数。
+- [IM SDK] 优化[拉取漫游消息接口](message_retrieve.html)，增加指定拉取消息方向的参数。
 
 ## 版本 V3.9.2.1 Dev 2022-5-17
 
 ### 新增特性:
 
-- [IM SDK] 新增 [消息 Reaction](https://docs-im.easemob.com/ccim/android/reaction) 功能，可以对消息进行不同的响应；
-- [IM SDK] 新增 [举报 API](https://docs-im.easemob.com/ccim/android/moderation) 用于内容审核。
+- [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应；
+- [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核。
 
 ### 优化：
 
@@ -104,7 +104,7 @@
 
 ### 新增特性:
 
-- [IM SDK] 增加 [用户在线状态 (Presence) 订阅功能](https://docs-im.easemob.com/ccim/android/presence)；
+- [IM SDK] 增加 [用户在线状态 (Presence) 订阅功能](presence.html)；
 
 ### 优化：
 
