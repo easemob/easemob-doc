@@ -29,7 +29,7 @@
 
 对于聊天室名称和描述，你可以调用 [`fetchChatRoomFromServer`](room_manage.html#获取聊天室详情) 获取聊天室详情时查看。
 
-### 获取聊天室公告
+#### 获取聊天室公告
 
 聊天室所有成员均可调用 `fetchChatRoomAnnouncement` 方法获取聊天室公告。
 
@@ -40,7 +40,7 @@
 String announcement = EMClient.getInstance().chatroomManager().fetchChatRoomAnnouncement(chatRoomId);
 ```
 
-### 更新聊天室公告
+#### 更新聊天室公告
 
 仅聊天室所有者和聊天室管理员可以调用 `updateChatRoomAnnouncement` 方法设置和更新聊天室公告，聊天室公告的长度限制为 512 个字符。公告更新后，其他聊天室成员收到 `onAnnouncementChanged` 回调。
 
@@ -51,7 +51,7 @@ String announcement = EMClient.getInstance().chatroomManager().fetchChatRoomAnno
 EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, announcement);
 ```
 
-### 更新聊天室名称
+#### 更新聊天室名称
 
 仅聊天室所有者和聊天室管理员可以调用 `changeChatRoomSubject` 方法设置和更新聊天室名称，聊天室名称的长度限制为 128 个字符。
 
@@ -62,7 +62,7 @@ EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, 
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatRoomSubject(chatRoomId, newSubject);
 ```
 
-### 更新聊天室描述
+#### 更新聊天室描述
 
 仅聊天室所有者和聊天室管理员可以调用 `changeChatroomDescription` 方法设置和更新聊天室描述，聊天室描述的长度限制为 512 个字符。
 

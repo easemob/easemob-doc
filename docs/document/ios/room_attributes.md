@@ -130,7 +130,7 @@ EMError *error = nil;
 
 ```objectivec
 // 异步方法
-[EMClient.sharedClient.roomManager setChatroomAttributesForced:self.currentConversation.conversationId key:@"234" value:@"123" autoDelete:YES completionBlock:^(EMError * _Nullable aError, NSDictionary<NSString *,NSString *> * _Nullable failureKeys) {
+[EMClient.sharedClient.roomManager setChatroomAttributesForced:self.currentConversation.conversationId key:@"234" autoDelete:YES completionBlock:^(EMError * _Nullable aError, NSDictionary<NSString *,NSString *> * _Nullable failureKeys) {
 
                 }];
 ```
