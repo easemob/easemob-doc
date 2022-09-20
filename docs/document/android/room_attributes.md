@@ -24,6 +24,7 @@
 - 了解聊天室的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
+
 ### 管理聊天室基本属性
 
 对于聊天室名称和描述，你可以调用 [`fetchChatRoomFromServer`](room_manage.html#获取聊天室详情) 获取聊天室详情时查看。
