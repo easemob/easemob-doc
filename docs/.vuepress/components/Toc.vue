@@ -13,7 +13,7 @@
             } else {
                 headers = this.$page.headers;
             }
-            this.toc =  headers ? headers.filter(item => item.level < 4) : [];
+            this.toc =  headers ? headers.filter(item => item.level < 5) : [];
         }
     }
 </script>
