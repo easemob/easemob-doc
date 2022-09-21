@@ -213,7 +213,7 @@ window.onload = function () {
     }
 }
 ```
-::::notice
+:::notice
 对于 Typescript，通过以下代码引入类型声明：
 ```JavaScript
 import WebIM, { EasemobChat } from 'easemob-websdk'
