@@ -22,7 +22,7 @@
 
 3. 修改为你的 App Key，即在环信即时通讯管理后台创建应用时即时通讯服务为你生成的 App Key。
 
-在终端中，在 `/demo/src/config/WebIMConfig.js` 文件中修改为你的 App Key。
+在 `/demo/src/config/WebIMConfig.js` 文件中修改为你的 App Key。
 
 ## 代码下载
 
