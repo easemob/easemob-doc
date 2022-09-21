@@ -4,13 +4,13 @@
 
 ## 前提条件
 
-开始前，请注册有效的环信即时通讯 IM 开发者账号且获得 App key，请参见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+开始前，请注册有效的环信即时通讯 IM 开发者账号且获得 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
 
 ## 集成环境
 
 具体见 [开发环境要求](quickstart.html#前提条件)。
 
-## 导入 SDK
+## 引入 SDK
 
 对于 JavaScript SDK，导入代码如下：
 
@@ -28,38 +28,38 @@ import EC, { EasemobChat } from 'easemob-websdk';
 
 | 功能             | 导入文件                | 使用方式            |
 | ---------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| 联系人和消息管理 | import \* as contactPlugin from "easemob-websdk/publish/websdk/contact/contact";             | miniCore.usePlugin(contactPlugin, "contact");         |
-| 群组        | import \* as groupPlugin from "easemob-websdk/publish/websdk/group/group";                   | miniCore.usePlugin(groupPlugin, "group");             |
-| 聊天室      | import \* as chatroomPlugin from "easemob-websdk/publish/websdk/chatroom/chatroom";          | miniCore.usePlugin(chatroomPlugin, "chatroom");       |
-| 子区        | import \* as threadPlugin from "easemob-websdk/publish/websdk/thread/thread";                | miniCore.usePlugin(threadPlugin, "thread");           |
-| 翻译         | import \* as translationPlugin from "easemob-websdk/publish/websdk/translation/translation"; | miniCore.usePlugin(translationPlugin, "translation"); |
-| 在线状态订阅     | import \* as presencePlugin from "easemob-websdk/publish/websdk/presence/presence";          | miniCore.usePlugin(presencePlugin, "presence");       |
+| 联系人和消息管理 | import \* as contactPlugin from "easemob-websdk/contact/contact";             | miniCore.usePlugin(contactPlugin, "contact");         |
+| 群组         | import \* as groupPlugin from "easemob-websdk/group/group";                   | miniCore.usePlugin(groupPlugin, "group");             |
+| 聊天室       | import \* as chatroomPlugin from "easemob-websdk/chatroom/chatroom";          | miniCore.usePlugin(chatroomPlugin, "chatroom");       |
+| 子区         | import \* as threadPlugin from "easemob-websdk/thread/thread";                | miniCore.usePlugin(threadPlugin, "thread");           |
+| 翻译         | import \* as translationPlugin from "easemob-websdk/translation/translation"; | miniCore.usePlugin(translationPlugin, "translation"); |
+| 在线状态订阅     | import \* as presencePlugin from "easemob-websdk/presence/presence";          | miniCore.usePlugin(presencePlugin, "presence");       |
 
 示例代码如下：
 
 ```javascript
-import MiniCore from 'easemob-websdk/publish/websdk/miniCore/miniCore';
-import * as contactPlugin from 'easemob-websdk/publish/websdk/contact/contact';
+import MiniCore from "easemob-websdk/miniCore/miniCore";
+import * as contactPlugin from "easemob-websdk/contact/contact";
 
 const miniCore = new MiniCore({
-	appKey: 'your appKey',
+  appKey: "your appKey",
 });
 
 // "contact" 为固定值
-miniCore.usePlugin(contactPlugin, 'contact');
+miniCore.usePlugin(contactPlugin, "contact");
 
 // 获取联系人列表
 miniCore.contact.getContacts();
 
 // 添加监听事件
-miniCore.addEventHandler('handlerId', {
+miniCore.addEventHandler("handlerId", {
 	onTextMessage: (message) => {},
 });
 
 // 登录
 miniCore.open({
-	username: 'username',
-	password: 'password',
+  username: "username",
+  password: "password",
 });
 ```
 
@@ -69,7 +69,7 @@ miniCore.open({
 
 ```javascript
 const conn = new EC.connection({
-	appKey: 'your appKey',
+  appKey: "your appKey",
 });
 ```
 
@@ -121,8 +121,8 @@ conn.registerUser({
 
 目前登录服务器有三种方式：
 
-- 用户 ID + 密码； 
-- 用户 ID + token； 
+- 用户 ID + 密码；
+- 用户 ID + token；
 - 用户 ID + agoraToken。
 
 :::notice
@@ -134,45 +134,48 @@ conn.registerUser({
 **用户 ID +密码** 登录是传统的登录方式。用户 ID 和密码都是你的终端用户自行决定，密码需要符合密码规则要求。
 
 ```javascript
-conn.open({
-	user: 'username',
-	pwd: 'password',
-})
-	.then(() => {
-		console.log('login success');
-	})
-	.catch((reason) => {
-		console.log('login fail', reason);
-	});
+conn
+  .open({
+    user: "username",
+    pwd: "password",
+  })
+  .then(() => {
+    console.log("login success");
+  })
+  .catch((reason) => {
+    console.log("login fail", reason);
+  });
 ```
 
 **用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](easemob_user_token.html)。
 
 ```javascript
-conn.open({
-	user: 'username',
-	accessToken: 'token',
-})
-	.then(() => {
-		console.log('login success');
-	})
-	.catch((reason) => {
-		console.log('login fail', reason);
-	});
+conn
+  .open({
+    user: "username",
+    accessToken: "token",
+  })
+  .then(() => {
+    console.log("login success");
+  })
+  .catch((reason) => {
+    console.log("login fail", reason);
+  });
 ```
 
 **用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般同时使用声网和环信产品时利用该方法登录。token 获取请参考 [使用声网 user token 鉴权](https://docs.agora.io/en/agora-chat/generate_user_tokens?platform=React%20Native)。
 
 ```javascript
-conn.open({
-	user: 'username',
-	agoraToken: 'agoraToken',
-})
-	.then(() => {
-		console.log('login success');
-	})
-	.catch((reason) => {
-		console.log('login fail', reason);
+conn
+  .open({
+    user: "username",
+    agoraToken: "agoraToken",
+  })
+  .then(() => {
+    console.log("login success");
+  })
+  .catch((reason) => {
+    console.log("login fail", reason);
 	});
 ```
 
@@ -191,18 +194,18 @@ conn.close();
 你可以通过注册连接监听器确认连接状态。
 
 ```javascript
-conn.addEventHandler('handlerId', {
-	onConnected: () => {
-		console.log('onConnected');
-	},
-	onDisconnected: () => {
-		console.log('onDisconnected');
-	},
-	onTokenWillExpire: () => {
-		console.log('onTokenWillExpire');
-	},
-	onTokenExpired: () => {
-		console.log('onTokenExpired');
+conn.addEventHandler("handlerId", {
+  onConnected: () => {
+    console.log("onConnected");
+  },
+  onDisconnected: () => {
+    console.log("onDisconnected");
+  },
+  onTokenWillExpire: () => {
+    console.log("onTokenWillExpire");
+  },
+  onTokenExpired: () => {
+    console.log("onTokenExpired");
 	},
 });
 ```
