@@ -302,11 +302,39 @@ module.exports = {
               title: '基本功能',
               children: [
                 { text: '初始化及登录', link: 'initialization.html' },
-                { text: '消息', link: 'message_overview.html' },
+                {
+                  text: '消息管理',
+                  collapsable: true,
+                  children: [
+                    { text: '消息概述', link: 'message_overview.html' },
+                    { text: '发送和接收消息', link: 'message_send_receive.html' },
+                    { text: '从服务器获取消息（消息漫游）', link: 'message_retrieve.html' },
+                    { text: '管理消息回执', link: 'message_receipt.html' },
+                    { text: '翻译', link: 'message_translation.html' },
+                  ]
+                },
                 { text: '用户属性', link: 'userprofile.html' },
                 { text: '好友管理', link: 'user_relationship.html' },
-                { text: '群组', link: 'group_overview.html' },
-                { text: '聊天室', link: 'room_overview.html' },
+                {
+                  text: '群组管理',
+                  collapsable: true,
+                  children: [
+                    { text: '群组概述', link: 'group_overview.html' },
+                    { text: '创建和管理群组', link: 'group_manage.html' },
+                    { text: '管理群组成员', link: 'group_members.html' },
+                    { text: '管理群组属性', link: 'group_attributes.html' },
+                  ]
+                },
+                {
+                  text: '聊天室管理',
+                  collapsable: true,
+                  children: [
+                    { text: '聊天室概述', link: 'room_overview.html' },
+                    { text: '创建和管理聊天室', link: 'room_manage.html' },
+                    { text: '管理聊天室成员', link: 'room_members.html' },
+                    { text: '管理聊天室属性', link: 'room_attributes.html' },
+                  ]
+                },
               ],
               only: ['applet']
             },
