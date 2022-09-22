@@ -33,7 +33,6 @@
             this.root = temp[1] ? temp[1] : '';
             this.language = temp[2] ? temp[2] : '';
             this.version = temp[3] ? temp[3] : '';
-
             for (let i = 0; i < this.platform.length; i++) {
                 for (let j = 0; j < this.platform[i].children.length; j++) {
                     if (this.platform[i].children[j].key === this.language) {
