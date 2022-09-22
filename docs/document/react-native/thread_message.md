@@ -139,13 +139,13 @@ ChatClient.getInstance()
     conv
       .getMessages(convId, convType, startMsgId, direction, loadCount)
       .then((messages) => {
-        console.log("success.", messages);
+        console.log('success.', messages);
       })
       .catch((reason) => {
-        console.log("fail.", reason);
+        console.log('fail.', reason);
       });
   })
   .catch((reason) => {
-    console.log("fail.", reason);
+    console.log('fail.', reason);
   });
 ```
