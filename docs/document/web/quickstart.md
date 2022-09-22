@@ -115,7 +115,7 @@ Easemob_quickstart<br>
 
 ### 4. 实现消息发送与接收
 
-`index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 "<Your app key>" 替换为你之前获取的 App Key。
+`index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 `<Your app key>` 替换为你之前获取的 App Key。
 
 ```Javascript
 import WebIM from 'easemob-websdk'
