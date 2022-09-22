@@ -6,7 +6,7 @@
 
 ### 新增特性
 
-新增 `getJoinedGroupsFromServer` 方法用于以分页方式从服务器获取当前用户加入的群组。
+新增 `getJoinedGroupsFromServer` 方法用于从服务器分页获取当前用户加入的群组。
 
 ### 优化
 
