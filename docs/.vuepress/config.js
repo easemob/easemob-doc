@@ -66,7 +66,7 @@ module.exports = {
           */
           { text: '产品简介', link: '/product/introduction.html' },
           { text: '集成文档', link: '/document/android/quickstart.html' },
-          { text: 'API 参考', link: '/api/android/' },
+          { text: 'API 参考', link: '/api/all/' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
