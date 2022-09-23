@@ -2,7 +2,7 @@
 
 <Toc />
 
-子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍 即时通讯 IM React Native SDK 如何发送、接收以及撤回子区消息。
+子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍即时通讯 IM React Native SDK 如何发送、接收以及撤回子区消息。
 
 ## 技术原理
 
@@ -118,6 +118,34 @@ class ChatMessageEvent implements ChatMessageEventListener {
 }
 ```
 
-### 从服务器获取子区消息 (消息漫游)
+### 获取子区消息
+
+进入单个子区会话后默认展示最早消息，用户可以从服务器获取子区历史消息；当你需要合并处理本地和服务器拉取到的消息（例如有用户撤回子区消息的提示是 SDK 在本地生成的一条消息）的时候，可以选择从本地获取子区消息。
+
+#### 从服务器获取子区消息（消息漫游）
 
 从服务器获取子区消息，请参考 [从服务器获取消息](message_manage.html#分页获取指定会话的历史消息)。
+
+#### 管理本地子区消息
+
+群成员可以调用 `getThreadConversation` 方法获取子区会话，然后从本地数据库中读取指定会话的消息：
+
+```typescript
+// 获取子区会话
+ChatClient.getInstance()
+  .chatManager.getThreadConversation(convId, createIfNeed)
+  .then((conv) => {
+    // 从本地数据库获取子区会话消息
+    conv
+      .getMessages(convId, convType, startMsgId, direction, loadCount)
+      .then((messages) => {
+        console.log('success.', messages);
+      })
+      .catch((reason) => {
+        console.log('fail.', reason);
+      });
+  })
+  .catch((reason) => {
+    console.log('fail.', reason);
+  });
+```
