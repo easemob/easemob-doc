@@ -66,7 +66,7 @@ module.exports = {
           */
           { text: '产品简介', link: '/product/introduction.html' },
           { text: '集成文档', link: '/document/android/quickstart.html' },
-          { text: 'API 参考', link: '/api/android/' },
+          { text: 'API 参考', link: '/api/all/' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
@@ -407,7 +407,7 @@ module.exports = {
             title: '',
             children: [
               {
-                key: 'All',
+                key: 'all',
                 title: '全部平台',
                 icon: 'icon-platform.svg',
                 hover_icon: 'icon-platform-hover.svg',
@@ -517,7 +517,7 @@ module.exports = {
           */
           { text: 'Product introduction', link: '/en/product/introduction.html' },
           { text: 'Integration document', link: '/en/document/android/quickstart.html' },
-          { text: 'API reference', link: '/en/api/android/' },
+          { text: 'API reference', link: '/en/api/all/' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
@@ -633,7 +633,7 @@ module.exports = {
             title: '',
             children: [
               {
-                key: 'All',
+                key: 'all',
                 title: 'All Platforms',
                 icon: 'icon-platform.svg',
                 hover_icon: 'icon-platform-hover.svg',
