@@ -152,7 +152,7 @@ EMClient.getInstance().chatroomManager().asyncFetchChatRoomAllAttributesFromSeve
  * @param String  chatRoomId            聊天室 ID。
  * @param String  attributeKey          聊天室属性的 key。
  * @param String  attributeValue        聊天室属性的 value。
- * @param boolean autoDelete            当前成员退出聊天室是否自动删除该聊天室中其设置的所有聊天室自定义属性。
+ * @param boolean autoDelete            当前成员退出聊天室时是否自动删除该聊天室中其设置的所有自定义属性。
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
@@ -182,7 +182,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(conversationI
  * @param String  chatRoomId            聊天室 ID。
  * @param String  attributeKey          聊天室属性的 key。
  * @param String  attributeValue        聊天室属性的 value。
- * @param boolean autoDelete            当前成员退出聊天室是否自动删除该聊天室中其设置的所有聊天室自定义属性。
+ * @param boolean autoDelete            当前成员退出聊天室时是否自动删除该聊天室中其设置的所有自定义属性。
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
@@ -211,7 +211,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(conver
  *
  * @param String chatRoomId             聊天室 ID。
  * @param Map<String,String> map        聊天室自定义属性集合，为键值对（key-value）结构。
- * @param boolean autoDelete            当前成员退出聊天室是否自动删除该聊天室中其设置的所有聊天室自定义属性。
+ * @param boolean autoDelete            当前成员退出聊天室时是否自动删除该聊天室中其设置的所有自定义属性。
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
@@ -243,7 +243,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(conver
  *
  * @param String chatRoomId             聊天室 ID。
  * @param Map<String,String> map        聊天室自定义属性集合，为键值对（key-value）结构。
- * @param boolean autoDelete            当前成员退出聊天室是否自动删除该聊天室中其设置的所有聊天室自定义属性。
+ * @param boolean autoDelete            当前成员退出聊天室时是否自动删除该聊天室中其设置的所有自定义属性。
  *       - （默认）`true`：是；
  *       - `false`：否。
  */

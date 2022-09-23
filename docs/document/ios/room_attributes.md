@@ -29,6 +29,10 @@
 
 ### 管理聊天室基本属性
 
+#### 获取聊天室名称和描述
+
+对于聊天室名称和描述，你可以调用 [`getChatroomSpecificationFromServerWithId`](room_manage.html#获取聊天室详情) 获取聊天室详情时查看。
+
 #### 获取聊天室公告
 
 聊天室所有成员均可调用 `getChatroomAnnouncementWithId` 方法获取聊天室公告。
@@ -71,6 +75,7 @@ EMError *error = nil;
 EMError *error = nil;
 [[EMClient sharedClient].roomManager updateDescription:textString forChatroom:self.chatroom.chatroomId error:&error];
 ```
+
 ### 管理聊天室自定义属性（key-value）
 
 聊天室自定义属性以键值对（key-value）形式存储，属性信息变更会实时同步给聊天室成员。利用自定义属性可以存储直播聊天室的类型、狼人杀等游戏中的角色信息和游戏状态以及实现语聊房的麦位管理和同步等。
