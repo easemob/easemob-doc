@@ -59,7 +59,7 @@ function sendTextMessage() {
     // 创建文本消息。
     let msg = WebIM.message.create(opt);
     // 调用 `send` 方法发送该文本消息。
-    conn.send(msg).then(()=>{
+    WebIM.conn.send(msg).then(()=>{
         console.log("Send message success");
     }).catch((e)=>{
         console.log("Send message fail");
@@ -81,7 +81,7 @@ function sendTextMessage() {
 
 ```javascript
 // 使用 `addEventHandler` 监听回调事件
-conn.addEventHandler("eventName",{
+WebIM.conn.addEventHandler("eventName",{
     // SDK 与环信服务器连接成功。
     onConnected: function (message) {},
     // SDK 与环信服务器断开连接。
@@ -137,7 +137,7 @@ conn.addEventHandler("eventName",{
 
 ### 撤回消息
 
-用户发送消息 2 分钟后可以撤回消息。如需调整时间限制，请联系可联系环信即时通讯 IM 的商务经理。
+用户发送消息 2 分钟内可以撤回消息。如需调整时间限制，请联系可联系环信即时通讯 IM 的商务经理。
 
 ```javascript
 /**
@@ -150,7 +150,7 @@ let option = {
     to: 'userID',
     chatType: 'singleChat'
 };
-conn.recallMessage(option).then((res) => {
+WebIM.conn.recallMessage(option).then((res) => {
     console.log('success', res)
 }).catch((error) => {
     // 消息撤回失败，原因可能是超过了撤销时限(超过 2 分钟)。
@@ -160,7 +160,7 @@ conn.recallMessage(option).then((res) => {
 你还可以使用 `onRecallMessage` 监听消息撤回状态：
 
 ```javascript
-conn.addEventHandler('MESSAGES',{
+WebIM.conn.addEventHandler('MESSAGES',{
    onRecallMessage: (msg) => {
       // 这里需要在本地删除对应的消息，也可以插入一条消息：“XXX撤回一条消息”。
       console.log('Recalling the message success'，msg)
@@ -219,7 +219,7 @@ function sendPrivateAudio(tempFilePath, duration){
 					}
 					let msg = WebIM.message.create(option);
 					// 调用 `send` 方法发送该语音消息。
-					conn.send(msg).then((res) => {
+					WebIM.conn.send(msg).then((res) => {
 						// 语音消息成功发送。
 						console.log('Success');
 					}).catch((e) => {
@@ -237,7 +237,7 @@ function sendPrivateAudio(tempFilePath, duration){
 
 ```javascript
 function sendImage(){
-    const me = this;
+    var me = this;
     wx.chooseImage({
         count: 1,
         sizeType: ["original", "compressed"],
@@ -249,6 +249,7 @@ function sendImage(){
 }
 
 function sendPrivateImg (res){
+  		var me = this;
 			var tempFilePaths = res.tempFilePaths;
 			var token = WebIM.conn.context.accessToken
 			wx.getImageInfo({
@@ -298,7 +299,7 @@ function sendPrivateImg (res){
 								  }
 								let msg = WebIM.message.create(option);
 								  // 调用 `send` 方法发送该图片消息。
-								conn.send(msg).then((res)=>{
+								WebIM.conn.send(msg).then((res)=>{
 									// 图片消息成功发送。
 									console.log('Success');
 								}).catch((e)=>{
@@ -331,7 +332,7 @@ function sendPrivateUrlImg() {
   // 创建一条图片消息。
   let msg = WebIM.message.create(option);
   //  调用 `send` 方法发送该图片消息。
-  conn.send(msg);
+  WebIM.conn.send(msg);
 };
 ```
 
@@ -367,13 +368,20 @@ function sendPrivateVideo(){
               var option = {
 									type: "video",
 									chatType: 'singleChat',
-									url: dataObj.uri + "/" + dataObj.entities[0].uuid,
                   filename: tempFilePaths,
 									to: 'username',// 接收消息对象
+                  body: {
+                    //文件 URL
+                    url:dataObj.uri + "/" + dataObj.entities[0].uuid,
+                    //文件类型
+                    type: "video",
+                    //文件名
+                    filename: tempFilePaths,
+                  },
 							}
               let msg = WebIM.message.create(option);
                // 调用 `send` 方法发送该视频消息。
-              conn.send(msg).then((res)=>{
+              WebIM.conn.send(msg).then((res)=>{
                // 视频消息成功发送。
                 console.log('Success');
               }).catch((e)=>{
@@ -392,14 +400,14 @@ function sendPrivateVideo(){
 参考以下代码示例创建、发送和接收文件消息：
 
 ```javascript
-function sendImage(){
+function sendFile(){
     const me = this;
     wx.chooseImage({
         count: 1,
         sizeType: ["original", "compressed"],
         sourceType: ["album"],
         success(res){
-            me.sendPrivateImg(res);
+            me.sendPrivateFile(res);
         }
     });
 }
@@ -450,16 +458,23 @@ function sendPrivateFile (res){
 									chatType: 'singleChat',
                   width: width,
                   height: height,
-									url: dataObj.uri + "/" + dataObj.entities[0].uuid,
 									to: 'username',// 接收消息对象
-								  }
+                  body: {
+                    //文件 URL
+                    url:dataObj.uri + "/" + dataObj.entities[0].uuid,
+                    //文件类型
+                    type: "file",
+                    //文件名
+                    filename: "filename",
+                  },
+								}
 								let msg = WebIM.message.create(option);
 								  // 调用 `send` 方法发送该图片消息。
-								conn.send(msg).then((res)=>{
-									// 图片消息成功发送。
+								WebIM.conn.send(msg).then((res)=>{
+									// 文件消息成功发送。
 									console.log('Success');
 								}).catch((e)=>{
-									// 图片消息发送失败。
+									// 文件消息发送失败。
 									console.log("Fail");
 								});
 							}
@@ -493,7 +508,7 @@ function sendCMDMessage(){
   // 创建一条透传消息。
   let msg = WebIM.message.create(option);
   // 调用 `send` 方法发送该透传消息。
-  conn.send(msg).then((res)=>{
+  WebIM.conn.send(msg).then((res)=>{
       // 消息成功发送回调。
       console.log("Success")
   }).catch((e)=>{
@@ -530,7 +545,7 @@ function sendCustomMsg() {
   // 创建一条自定义消息。
   let msg = WebIM.message.create(option);
   // 调用 `send` 方法发送该自定义消息。
-  conn.send(msg).then((res)=>{
+  WebIM.conn.send(msg).then((res)=>{
       // 消息成功发送回调。
       console.log("Success")
   }).catch((e)=>{
@@ -561,7 +576,7 @@ function sendTextMessage() {
     }
     let msg = WebIM.message.create(option);
     //  调用 `send` 方法发送该扩展消息。
-    conn.send(msg).then((res)=>{
+    WebIM.conn.send(msg).then((res)=>{
         console.log("send private text Success");
     }).catch((e)=>{
         console.log("Send private text error");
