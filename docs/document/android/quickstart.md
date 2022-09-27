@@ -4,9 +4,12 @@
 
 本文介绍如何快速集成环信即时通讯 IM Android SDK 实现单聊。
 
-:::notice 最近遇到因 app 隐私问题下架的开发者需注意
+:::notice
+最近遇到因 app 隐私问题下架的开发者需注意：
+
 - 请在点击获取隐私权限以后启动环信 SDK 初始化。
-- `EMChatService` 和 `EMJobService` 为早期 SDK 内在应用退到后台后，对应用进行保活的程序，可以不进行注册；`EMMonitorReceiver` 为监听开机自启动服务，也可以不注册。
+- `EMChatService` 和 `EMJobService` 为早期 SDK 内在应用退到后台后，对应用进行保活的程序，可以不进行注册。
+- `EMMonitorReceiver` 为监听开机自启动服务，可以不注册，同时请移除对应的权限申请：`<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>`。
 :::
 
 ## 实现原理
@@ -16,6 +19,7 @@
 ![img](@static/images/android/sendandreceivemsg.png)
 
 ## 前提条件
+
 - Android Studio 3.0 或以上版本；
 - Android SDK API 等级 19 或以上；
 - Android 4.4 或以上版本的设备；
@@ -28,6 +32,7 @@
 ### 1. 创建 Android 项目
 
 参考以下步骤创建一个 Android 项目。
+
 1. 打开 Android Studio，点击 **Start a new Android Studio project**。
 2. 在 **Select a Project Template** 界面，选择 **Phone and Tablet > Empty Activity**，然后点击 **Next**。
 3. 在 **Configure Your Project** 界面，依次填入以下内容：
@@ -115,7 +120,7 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 
 ### 3. 添加项目权限
 
-根据场景需要，在 /app/src/main/AndroidManifest.xml 文件中添加如下行，获取相应的设备权限：
+根据场景需要，在 `/app/src/main/AndroidManifest.xml` 文件中添加如下行，获取相应的设备权限：
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
