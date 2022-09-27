@@ -13,7 +13,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ## 技术原理
 
-环信即时通讯 IM React Native SDK 提供 `EMContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
+环信即时通讯 IM Flutter SDK 提供 `EMContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
 
 - `addContact` 申请添加好友；
 - `deleteContact` 删除好友；
@@ -39,7 +39,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 1. 用户添加指定用户为好友
 
 ```dart
-// 用户 ID
+// 要添加为联系人的用户 ID
 String userId = "foo";
 // 申请加为好友的理由
 String reason = "Request to add a friend.";
@@ -140,6 +140,8 @@ try {
 ### 将用户加入黑名单
 
 你可以调用 `addUserToBlockList` 添加用户到黑名单，添加后对方将无法发送消息给自己。
+
+用户可以将任何其他聊天用户添加到他们的黑名单列表中，无论该用户是否是联系人。添加到黑名单列表的联系人保留在联系人列表中。
 
 ```dart
 // 用户 ID
