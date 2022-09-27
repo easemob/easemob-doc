@@ -16,7 +16,7 @@
 
 环信即时通讯 IM Flutter SDK 提供一个 `EMUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
-- `updateOwnUserInfo` 设置和修改当前用户自己的属性信息；
+- `updateUserInfo` 设置和修改当前用户自己的属性信息；
 - `fetchUserInfoById` 获取指定用户的属性信息；
 - `fetchOwnInfo` 获取当前用户自己的属性信息。
 
@@ -67,6 +67,8 @@ try {
 ```
 
 ### 获取当前用户的属性
+
+调用 `fetchOwnInfo` 获取当前用户的用户属性：
 
 ```dart
 try {
