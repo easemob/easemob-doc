@@ -12,6 +12,9 @@
 - 更新聊天室公告
 - 更新聊天室名称
 - 更新聊天室描述
+- 添加聊天室属性
+- 获取聊天室属性
+- 删除聊天室属性
 
 ## 前提条件
 
@@ -90,6 +93,69 @@ ChatClient.getInstance()
   })
   .catch((reason) => {
     console.log("change desc fail.", reason);
+  });
+```
+
+### 添加聊天室属性
+
+聊天室成员可以调用 `addAttributes` 方法设置聊天室自定义属性。该方法只针对未设置的自定义属性字段和更新自己设置的属性。设置后，其他聊天室成员收到 `onAttributesUpdated` 回调。
+
+```typescript
+// 通过指定聊天室 ID、属性键、属性值、deleteWhenLeft 和覆盖来设置自定义属性。
+// deleteWhenLeft 表示离开房间时删除该属性。
+// overwrite 表示强制覆盖同一个key的属性。
+// 属性可以是数组，支持多对k-v属性。
+ChatClient.getInstance()
+  .roomManager.addAttributes({
+    roomId,
+    attributes,
+    deleteWhenLeft,
+    overwrite,
+  })
+  .then((response) => {
+    rollLog(`success: ${response}`);
+  })
+  .catch((error) => {
+    rollLog(`fail: ${error}`);
+  });
+```
+
+
+### 获取聊天室属性
+
+聊天室所有成员均可调用 `fetchChatRoomAttributes` 方法获取聊天室指定自定义属性。
+
+```typescript
+// 通过指定聊天室 ID 和属性键检索某些自定义属性。 如果 key 为空，则获取所有内容。
+ChatClient.getInstance()
+  .roomManager.fetchChatRoomAttributes(roomId, keys)
+  .then((response) => {
+    rollLog(`success: ${response}`);
+  })
+  .catch((error) => {
+    rollLog(`fail: ${error}`);
+  });
+```
+
+### 删除聊天室属性
+
+聊天室成员可以调用 `removeAttributes` 方法删除聊天室自定义属性。该方法只能删除自己设置的自定义属性。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
+
+```typescript
+// 通过指定聊天室 ID、属性键和强制删除自定义属性。
+// keys可以做一个数组，同时删除多个属性，失败返回错误信息。
+// 强制意味着强制删除一个属性。
+ChatClient.getInstance()
+  .roomManager.removeAttributes({
+    roomId,
+    keys,
+    forced,
+  })
+  .then((response) => {
+    rollLog(`success: ${response}`);
+  })
+  .catch((error) => {
+    rollLog(`fail: ${error}`);
   });
 ```
 
