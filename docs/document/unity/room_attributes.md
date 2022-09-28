@@ -31,7 +31,7 @@
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.RoomManager.FetchRoomAnnouncement(roomId, new ValueCallBack<string>(
   onSuccess: (str) => {
   },
@@ -46,7 +46,7 @@ SDKClient.Instance.RoomManager.FetchRoomAnnouncement(roomId, new ValueCallBack<s
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.RoomManager.UpdateRoomAnnouncement(roomId, announcement, new CallBack(
   onSuccess: () => {
   },
@@ -61,7 +61,7 @@ SDKClient.Instance.RoomManager.UpdateRoomAnnouncement(roomId, announcement, new 
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.RoomManager.ChangeRoomName(roomId, name, new CallBack(
   onSuccess: () => {
   },
@@ -76,7 +76,7 @@ SDKClient.Instance.RoomManager.ChangeRoomName(roomId, name, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.RoomManager.ChangeRoomDescription(currentRoomId, description, new CallBack(
   onSuccess: () => {
   },
@@ -85,6 +85,6 @@ SDKClient.Instance.RoomManager.ChangeRoomDescription(currentRoomId, description,
 ));
 ```
 
-### 更多
+### 监听聊天室事件
 
-- [监听器介绍](group_manage.html#监听群组事件)
+- [监听器介绍](group_manage.html#监听聊天室事件)
