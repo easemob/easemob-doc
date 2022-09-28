@@ -513,7 +513,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.membersonly`        | Bool | 加入群组是否需要群主或者群管理员审批。<br/> - `true`：是；<br/> - （默认）`false`：否。 |
 | `data.allowinvites`       | Bool | 是否允许群成员邀请其他用户加入此群。<br/> - `true`：允许群成员邀请其他用户加入此群；<br/> - （默认）`false`：只有群主可以邀请其他用户入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
 | `data.maxusers`           | Int | 群成员上限，创建群组的时候设置，可修改。                     |
-| `data.permission`         | String  | 群组成员角色：<br/> - `owner`：群主；<br/> - `admin`：管理员；<br/> - `member`：普通成员。          |
+| `data.permission`         | String  | 群组成员角色：<br/> - `owner`：群主；<br/> - `member`：普通成员。          |
 | `data.owner`              | String  | 群主的用户 ID。例如：{“owner”: “user1”}。                    |
 | `data.created`            | Long    | 创建该群组的 Unix 时间戳。    |
 | `data.affiliations_count` | int     | 现有成员总数。                                               |

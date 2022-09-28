@@ -40,7 +40,7 @@ Reaction 场景示例如下：
 
 示例代码如下：
 
-```csharp
+```c#
 // 添加 Reaction。
 SDKClient.Instance.ChatManager.AddReaction(msg_id, reaction, new CallBack(
      onSuccess: () =>
@@ -77,7 +77,7 @@ SDKClient.Instance.ChatManager.AddReactionManagerDelegate(reactionManagerDelegat
 
 示例代码如下：
 
-```csharp
+```c#
 // 删除 Reaction。
 SDKClient.Instance.ChatManager.RemoveReaction(msg_id, reaction, new CallBack(
      onSuccess: () =>
@@ -112,7 +112,7 @@ SDKClient.Instance.ChatManager.AddReactionManagerDelegate(reactionManagerDelegat
 
 调用 `GetReactionList` 可以从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，用户数量，用户列表（概要数据，即前三个用户信息）。示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.ChatManager.GetReactionList(messageIdList, chatType, groupId, new ValueCallBack<Dictionary<string, List<MessageReaction>>>(
 onSuccess: (dict) =>
 {
@@ -138,7 +138,7 @@ onError: (code, desc) =>
 
 调用 `GetReactionDetail` 可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，用户数量和全部用户列表。示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.ChatManager.GetReactionDetail(msg_id, reaction, cursor, pageSize, new ValueCallBack<CursorResult<MessageReaction>>(
 onSuccess: (ret) =>
 {
