@@ -12,7 +12,8 @@
 - 通过 `onError` 回调报告错误码。
 
 例如，注册时用户返回已存在的错误可以这样检测：
-```csharp
+
+```c#
 SDKClient.Instance.Login(username, passwd,
     handle: new CallBack(
         onSuccess: () =>
