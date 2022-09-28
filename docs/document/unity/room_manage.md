@@ -193,7 +193,10 @@ public interface IRoomManagerDelegate
     // 转让聊天室。聊天室全体成员会收到该事件。
     void OnOwnerChangedFromRoom(string roomId, string newOwner, string oldOwner);
     // 更新聊天室公告。聊天室的所有成员会收到该事件。
-
     void OnAnnouncementChangedFromRoom(string roomId, string announcement);
+    // 聊天室自定义属性有更新。聊天室所有成员会收到该事件。
+    void OnChatroomAttributesChanged(string roomId, Dictionary<string, string> kv, string from);
+    // 有聊天室自定义属性被移除。聊天室所有成员会收到该事件。
+    void OnChatroomAttributesRemoved(string roomId, List<string> keys, string from);
 }
 ```
