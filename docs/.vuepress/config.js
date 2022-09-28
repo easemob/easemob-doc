@@ -67,6 +67,7 @@ module.exports = {
           { text: '产品简介', link: '/product/introduction.html' },
           { text: '集成文档', link: '/document/android/quickstart.html' },
           { text: 'API 参考', link: '/api/all/' },
+          { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
