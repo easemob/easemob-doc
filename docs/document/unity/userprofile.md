@@ -36,7 +36,7 @@
 
 参考如下示例代码，在你的项目中当前用户设置自己的所有属性或者仅设置某一项属性。
 
-```csharp
+```C#
 //设置所有用户属性。
 UserInfo userInfo;
 userInfo.userId = currentId;
@@ -66,10 +66,10 @@ SDKClient.Instance.UserInfoManager.UpdateOwnInfo(userInfo, new CallBack(
 
 示例代码如下：
 
-```csharp
+```C#
 //获取一个或多个用户的所有属性，一次调用用户 ID 数量不超过 100。
 List<string> idList = new List<string>();
-idList.Add("usename");
+idList.Add("username");
 SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId
 
 SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId(idList, type, startId, loadCount, new ValueCallBack<Dictionary<string, UserInfo>>(
@@ -84,7 +84,7 @@ SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId(idList, type, startId, 
 
 ## 更多功能
 
-### 用户头像管理
+### 管理用户头像
 
 如果你的应用场景中涉及用户头像管理，还可以参考如下步骤进行操作：
 
@@ -93,11 +93,11 @@ SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId(idList, type, startId, 
 3. 将该 URL 地址传入用户属性的头像字段（avatarurl）。
 4. 调用 `fetchUserInfoById` 获取头像字段，并在本地 UI 中渲染用户头像。
 
-### 名片消息
+### 使用用户属性创建和发送名片
 
 如果使用场景中涉及名片消息，你也可以使用自定义属性功能，并参考如下示例代码实现：
 
-```csharp
+```C#
 // 设置自定义消息的 `event` 为 `"userCard"`，并在 `ext` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
 string event = "userCard";
 Dictionary<string, string> adict = new Dictionary<string, string>();
