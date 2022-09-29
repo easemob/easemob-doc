@@ -28,15 +28,13 @@
 
 ### 管理聊天室基本属性
 
-#### 获取聊天室详情
+#### 获取聊天室名称和描述
 
-聊天室所有成员可以通过 [`getChatRoomDetails`](room_manage.html#获取聊天室详情) 方法获取聊天室详情。
-
-聊天室详情包括聊天室 ID、名称、描述、成员和聊天室最大成员数等。
+对于聊天室名称和描述，你可以调用 [`getChatRoomDetails`](room_manage.html#获取聊天室详情) 获取聊天室详情时查看。
 
 #### 更新聊天室详情
 
-聊天室所有者和管理员可以更新聊天室详情，聊天室成员可以获取聊天室详情。
+仅聊天室所有者和管理员可以调用 `modifyChatRoom` 更新聊天室名称、描述和最大成员数量。
 
 示例代码如下：
 
@@ -79,7 +77,7 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
 
 ### 管理聊天室自定义属性（key-value）
 
-聊天室自定义属性以键值对（key-value）形式存储，属性信息变更会实时同步给聊天室成员。利用自定义属性可以存储直播聊天室的类型、狼人杀等游戏中的角色信息和游戏状态以及实现语聊房的麦位管理和同步等。
+利用自定义属性可以存储直播聊天室的类型、狼人杀等游戏中的角色信息和游戏状态以及实现语聊房的麦位管理和同步等。聊天室自定义属性以键值对（key-value）形式存储，属性信息变更会实时同步给聊天室成员。
 
 #### 获取聊天室自定义属性
 
@@ -157,6 +155,7 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
    }
    conn.removeChatRoomAttributes(option).then(res => console.log(res))
    ```
+
 ### 监听聊天室事件
 
 有关详细信息，请参阅 [聊天室事件](room_manage.html#监听聊天室事件)。

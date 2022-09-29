@@ -42,7 +42,7 @@
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.RoomManager.CreateRoom(
 // 聊天室名称，不能超过 128 个字符
 subject,
@@ -71,7 +71,7 @@ handle: new ValueCallBack<Room>(
 
 示例代码如下：
 
-```csharp
+```c#
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
 SDKClient.Instance.RoomManager.FetchPublicRoomsFromServer(handle: new ValueCallBack<PageResult<Room>>(
     //result 为 PageResult<Room> 类型
@@ -96,7 +96,7 @@ SDKClient.Instance.RoomManager.JoinRoom(roomId, new ValueCallBack<Room>(
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.RoomManager.FetchRoomInfoFromServer(roomId, new ValueCallBack<Room>(
   onSuccess: (room) => {
   },
@@ -111,7 +111,7 @@ SDKClient.Instance.RoomManager.FetchRoomInfoFromServer(roomId, new ValueCallBack
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.RoomManager.LeaveRoom(roomId, new CallBack(
     onSuccess: () => {
     },
@@ -124,7 +124,7 @@ SDKClient.Instance.RoomManager.LeaveRoom(roomId, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 Options options = new Options();
 options. DeleteMessagesAsExitRoom = false;
 ```
@@ -137,7 +137,7 @@ options. DeleteMessagesAsExitRoom = false;
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.RoomManager.DestroyRoom(roomId, new CallBack(
     onSuccess: () => {
     },
@@ -152,7 +152,7 @@ SDKClient.Instance.RoomManager.DestroyRoom(roomId, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 // 实现监听器以及定义监听器对象
 public class RoomManagerDelegate : IRoomManagerDelegate {
     ......
@@ -171,7 +171,7 @@ SDKClient.Instance.RoomManager.AddRoomManagerDelegate(adelegate);
 
 具体可以添加的回调事件如下：
 
-```csharp
+```c#
 public interface IRoomManagerDelegate
 {
     // 解除聊天室一键禁言。聊天室所有成员（除操作者外）会收到该事件。

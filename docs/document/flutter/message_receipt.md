@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 类提供消息已回执功能，回执主要分为两类：已读回执和送达回执。核心方法如下：
+环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 类提供消息回执功能，回执主要分为两类：已读回执和送达回执。核心方法如下：
 
 - `EMOptions.requireDeliveryAck` 送达回执的全局开关；
 - `EMOptions.requireAck` 已读回执的全局开关；

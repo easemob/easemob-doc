@@ -26,7 +26,7 @@
 
 调用 `GetConversationsFromServer` 从服务端获取会话。我们建议在 app 安装时或本地没有会话时调用该 API。否则调用 `LoadAllConversations` 即可。示例代码如下：
 
-```csharp
+```C#
 SDKClient.Instance.ChatManager.GetConversationsFromServer(new ValueCallBack<List<Conversation>>(
     //获取会话成功后的处理逻辑。
     //list 为 List<Conversation> 类型。
@@ -45,14 +45,14 @@ SDKClient.Instance.ChatManager.GetConversationsFromServer(new ValueCallBack<List
 
 你还可以从服务器分页获取指定会话的历史消息，实现消息漫游功能。为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 
-```csharp
+```C#
 SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(conversationId, type, startId, pageSize, new ValueCallBack<CursorResult<Message>>(
-    //获取历史消息成功。
-    //result 为 CursorResult<Message> 类型。
+    // 获取历史消息成功。
+    // result 为 CursorResult<Message> 类型。
     onSuccess: (result) => {
     },
 
-    //获取历史消息失败。
+    // 获取历史消息失败。
     onError:(code, desc) => {
     }
 ));
