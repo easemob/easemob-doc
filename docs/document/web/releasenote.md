@@ -4,16 +4,24 @@
 
 ## 版本 V4.1.0 Dev 2022-9-16（开发版）
 
+### 优化
+
+- miniCore 支持配置私有化配置。
+- 优化重连逻辑。
+
+
+## 版本 V4.1.0 Dev 2022-9-16（开发版）
+
 ### 新增特性
 
 - [IM SDK] 新增[聊天室自定义属性功能](room_attributes.html)。
-- [IM SDK] 新增 `logsCallback`（logger.logsCallback = (log) => {}）方法，实现用户日志回调。
+- [IM SDK] 新增 `onLog` 方法，实现用户日志回调。
 - [IM SDK] `getJoinedGroups` 方法中新增 `needAffiliations` 和 `needRole` 参数支持获取群组成员数和用户自己的角色。
 
 ### 优化
 
 - [IM SDK] SDK 模块化拆分。
-- [IM SDK] 移除废弃的方法 (`subscribe`, `subscribed`, `unsubscribed`, `removeRoster`, `getRoster`, `callback: onRoster`, `onMutedMessage`, `onCreateGroup` 和 `onBlacklistUpdate`)。
+- [IM SDK] 移除废弃的方法 (`subscribe`、`subscribed`、`unsubscribed`、`removeRoster`、`getRoster`、`callback: onRoster`、`onMutedMessage`、`onCreateGroup` 和 `onBlacklistUpdate`)。
 
 ### 修复
 
