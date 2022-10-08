@@ -1,4 +1,4 @@
-# iOS SDK 更新日志
+# iOS IM SDK 更新日志
 
 <Toc />
 

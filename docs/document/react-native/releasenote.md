@@ -1,4 +1,4 @@
-# SDK 更新日志
+# React-Native IM SDK 更新日志
 
 <Toc />
 
