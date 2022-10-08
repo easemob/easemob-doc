@@ -455,6 +455,20 @@ const groupListener: ChatGroupEventListener = new (class
       params.isAllMuted
     );
   }
+  // 群组详情变更，所有群成员收到该事件回调
+  onDetailChanged(group: ChatGroup): void {
+        console.log(`${QuickTestScreenBase.TAG}: onDetailChanged:`, group);
+        this.that.setState({
+          recvResult: `onDetailChanged: ` + group,
+        });
+      }
+  // 群组禁言状态变更，所有群成员收到该事件回调   
+  onStateChanged(group: ChatGroup): void {
+        console.log(`${QuickTestScreenBase.TAG}: onStateChanged:`, group);
+        this.that.setState({
+          recvResult: `onStateChanged: ` + group,
+        });
+      }  
 })(this);
 
 // 清空监听器对象
