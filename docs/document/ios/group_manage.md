@@ -35,18 +35,19 @@
 在创建群组前，你需要设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`IsInviteNeedConfirm`)。
 
 1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型（`EMGroupStyle`），具体设置如下：
-    - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
-    - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
-    - EMGroupStylePublicJoinNeedApproval——公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
-    - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理同意。
+
+   - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
+   - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
+   - EMGroupStylePublicJoinNeedApproval——公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
+   - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理同意。
 
 2. 进群邀请是否需要对方同意 (`IsInviteNeedConfirm`) 的具体设置如下：
-    - 进群邀请需要用户确认(`IsInviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `isAutoAcceptGroupInvitation` 设置，处理逻辑如下：
-        - 用户设置自动接受群组邀请 (`isAutoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupManagerDelegate#didJoinGroup` 回调，群主收到 `EMGroupManagerDelegate#onInvitationAccepted` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调，其他群成员收到 `EMGroupChangeListener#userDidJoinGroup` 回调。
-        - 用户设置手动确认群组邀请 (`isAutoAcceptGroupInvitation` 设置为 `true`)，受邀用户收到 `EMGroupManagerDelegate#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
-            - 用户同意入群邀请后，群主收到 `EMGroupManagerDelegate#onInvitationAccepted` 回调和 `EMGroupManagerDelegate#onMemberJoined` 回调；其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
-            - 用户拒绝入群邀请后，群主收到 `EMGroupManagerDelegate#onInvitationDeclined` 回调。
-            
+   - 进群邀请需要用户确认(`IsInviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `isAutoAcceptGroupInvitation` 设置，处理逻辑如下：
+     - 用户设置自动接受群组邀请 (`isAutoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupManagerDelegate#didJoinGroup` 回调，群主收到 `EMGroupManagerDelegate#onInvitationAccepted` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调，其他群成员收到 `EMGroupChangeListener#userDidJoinGroup` 回调。
+     - 用户设置手动确认群组邀请 (`isAutoAcceptGroupInvitation` 设置为 `true`)，受邀用户收到 `EMGroupManagerDelegate#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
+       - 用户同意入群邀请后，群主收到 `EMGroupManagerDelegate#onInvitationAccepted` 回调和 `EMGroupManagerDelegate#onMemberJoined` 回调；其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
+       - 用户拒绝入群邀请后，群主收到 `EMGroupManagerDelegate#onInvitationDeclined` 回调。
+
 流程如下：
 
 ![img](@static/images/ios/group.png)
@@ -82,12 +83,13 @@ NSArray *members = @{@"member1",@"member2"};
 :::
 
 ### 用户申请入群
+
 根据 [创建群组](#创建群组) 时的群组类型 (`EMGroupStyle`) 设置，加入群组的处理逻辑差别如下：
 
 - 当群组类型为 `EMGroupStylePublicOpenJoin` 时，用户直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
 - 当群组类型为 `EMGroupStylePublicJoinNeedApprova`，群主和群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调，并选择同意或拒绝入群申请：
-    - 群主和群管理员同意入群申请，申请人收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidApprove`；
-    - 其他群成员会收到群组事件回调 `EMGroupManagerDelegate#userDidJoinGroup`。 第二种情况：群主和群管理员拒绝入群申请，申请人会收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidDecline`。
+  - 群主和群管理员同意入群申请，申请人收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidApprove`；
+  - 其他群成员会收到群组事件回调 `EMGroupManagerDelegate#userDidJoinGroup`。 第二种情况：群主和群管理员拒绝入群申请，申请人会收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidDecline`。
 
 :::notice
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
@@ -212,10 +214,9 @@ NSArray *memberList = [group.memberList];
 用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：
 
 ```objectivec
-NSArray *groupList = [[EMClient sharedClient].groupManager
-                                              getJoinedGroupsFromServerWithPage:nil
-                                              pageSize:-1
-                                              error:nil];
+NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroupsFromServerWithPage:0 pageSize:20 needMemberCount:YES needRole:YES completion:^(NSArray<EMGroup *> * _Nullable aList, EMError * _Nullable aError) {
+        // got group list
+    }];
 ```
 
 - 用户可以调用 `getJoinedGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
