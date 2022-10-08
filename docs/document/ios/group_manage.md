@@ -87,7 +87,7 @@ NSArray *members = @{@"member1",@"member2"};
 根据 [创建群组](#创建群组) 时的群组类型 (`EMGroupStyle`) 设置，加入群组的处理逻辑差别如下：
 
 - 当群组类型为 `EMGroupStylePublicOpenJoin` 时，用户直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
-- 当群组类型为 `EMGroupStylePublicJoinNeedApprova`，群主和群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调，并选择同意或拒绝入群申请：
+- 当群组类型为 `EMGroupStylePublicJoinNeedApproval`，群主和群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调，并选择同意或拒绝入群申请：
   - 群主和群管理员同意入群申请，申请人收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidApprove`；
   - 其他群成员会收到群组事件回调 `EMGroupManagerDelegate#userDidJoinGroup`。 第二种情况：群主和群管理员拒绝入群申请，申请人会收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidDecline`。
 
