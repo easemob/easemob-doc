@@ -2,6 +2,18 @@
 
 <Toc />
 
+## 版本 V1.0.9 Dev 2022-10-08
+
+#### 新增特性
+
+`ChatGroupEventListener` 中新增两个事件：
+- `onDetailChanged`：群组详情变更事件。
+- `onStateChanged`：群组禁用状态变更事件。
+
+#### 修复
+
+修复聊天室自定义属性问题。
+
 ## 版本 V1.0.8 Dev 2022-09-30
 
 #### 新增特性
