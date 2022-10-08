@@ -2,12 +2,12 @@
 
 <Toc />
 
-版本 V1.0.8 Dev 2022-09-30
+## 版本 V1.0.8 Dev 2022-09-30
 
 #### 新增特性
 
 - 新增聊天室自定义属性功能。
-- 在 `ChatOptions` 类中新增  `areaCode` 参数限制连接边缘节点的范围。
+- 在 `ChatOptions` 类中新增 `areaCode` 参数限制连接边缘节点的范围。
 - `ChatGroupOptions` 中增加 `isDisabled` 属性显示群组禁用状态，需要开发者在服务端设置。该属性在调用 `ChatGroupManager` 中的 `fetchGroupInfoFromServer` 方法获取群组详情时返回。
 
 #### 修复
