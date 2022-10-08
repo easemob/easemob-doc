@@ -2,6 +2,20 @@
 
 <Toc />
 
+版本 V1.0.8 Dev 2022-09-30
+
+#### 新增特性
+
+- 新增聊天室自定义属性功能。
+- 在 `ChatOptions` 类中新增  `areaCode` 参数限制连接边缘节点的范围。
+- `ChatGroupOptions` 中增加 `isDisabled` 属性显示群组禁用状态，需要开发者在服务端设置。该属性在调用 `ChatGroupManager` 中的 `fetchGroupInfoFromServer` 方法获取群组详情时返回。
+
+#### 修复
+
+- 修复极少数场景下，从服务器获取较大数量的消息时失败的问题。
+- 修复数据统计不正确的问题。
+- 修复极少数场景下打印日志导致的崩溃。
+
 ## 版本 V1.0.5 Dev 2022-6-21
 
 这是 React Native SDK 第一个正式发布的版本，包含以下功能：

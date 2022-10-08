@@ -35,16 +35,16 @@
 在创建群组前，你需要设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`inviteNeedConfirm`)。
 
 1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型（`EMGroupStyle`），具体设置如下：
-    - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
-    - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
-    - EMGroupStylePublicJoinNeedApproval——公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
-    - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理同意。
+   - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
+   - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
+   - EMGroupStylePublicJoinNeedApproval——公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
+   - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理同意。
 2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
-    - 进群邀请需要用户确认(`inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `autoAcceptGroupInvitation` 设置，处理逻辑如下：
-        - 用户设置自动接受群组邀请 (`autoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调，群主收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
-        - 用户设置手动确认群组邀请 (`autoAcceptGroupInvitation` 设置为 `false`)，受邀用户收到 `EMGroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
-            - 用户同意入群邀请后，群主收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调；其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调；
-            - 用户拒绝入群邀请后，群主收到 `EMGroupChangeListener#groupInvitationDidDecline` 回调。
+   - 进群邀请需要用户确认(`inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `autoAcceptGroupInvitation` 设置，处理逻辑如下：
+     - 用户设置自动接受群组邀请 (`autoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调，群主收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
+     - 用户设置手动确认群组邀请 (`autoAcceptGroupInvitation` 设置为 `false`)，受邀用户收到 `EMGroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
+       - 用户同意入群邀请后，群主收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调；其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调；
+       - 用户拒绝入群邀请后，群主收到 `EMGroupChangeListener#groupInvitationDidDecline` 回调。
 
 流程如下：
 
@@ -72,8 +72,8 @@ EMClient.getInstance().groupManager().createGroup(groupName, desc, allMembers, r
 
 - 当群组类型为 `EMGroupStylePublicOpenJoin` 时，用户直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
 - 当群组类型为 `EMGroupStylePublicJoinNeedApproval` 时，群主和群管理员收到 `EMGroupChangeListener#onRequestToJoinReceived` 回调，并选择同意或拒绝入群申请：
-    - 群主和群管理员同意入群申请，申请人收到 `EMGroupChangeListener#onRequestToJoinAccepted` 回调；其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
-    - 群主和群管理员拒绝入群申请，申请人收到 `EMGroupChangeListener#onRequestToJoinDeclined` 回调。
+  - 群主和群管理员同意入群申请，申请人收到 `EMGroupChangeListener#onRequestToJoinAccepted` 回调；其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
+  - 群主和群管理员拒绝入群申请，申请人收到 `EMGroupChangeListener#onRequestToJoinDeclined` 回调。
 
 :::notice
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
@@ -189,7 +189,17 @@ List<String> memberList = group.getMembers();
 
 ```java
 // 异步方法。
-List<EMGroup> grouplist = EMClient.getInstance().groupManager().getJoinedGroupsFromServer();
+asyncGetJoinedGroupsFromServer(pageIndex, pageSize, needMemberCount, needRole, new EMValueCallBack<List<EMGroup>>() {
+                        @Override
+                        public void onSuccess(List<EMGroup> value) {
+
+                        }
+
+                        @Override
+                        public void onError(int error, String errorMsg) {
+
+                        }
+                });
 ```
 
 - 用户可以调用 `getAllGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
