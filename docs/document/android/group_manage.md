@@ -189,7 +189,7 @@ List<String> memberList = group.getMembers();
 
 ```java
 // 异步方法。
-asyncGetJoinedGroupsFromServer(pageIndex, pageSize, needMemberCount, needRole, new EMValueCallBack<List<EMGroup>>() {
+List<EMGroup> grouplist = EMClient.getInstance().groupManager().asyncGetJoinedGroupsFromServer(pageIndex, pageSize, needMemberCount, needRole, new EMValueCallBack<List<EMGroup>>() {
                         @Override
                         public void onSuccess(List<EMGroup> value) {
 
