@@ -1,4 +1,4 @@
-# Windows SDK 更新日志
+# Windows IM SDK 更新日志
 
 <Toc />
 
