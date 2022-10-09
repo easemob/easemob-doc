@@ -1,6 +1,6 @@
 # 管理聊天室属性
 
-聊天室是支持多人沟通的即时通讯系统。聊天室属性可分为聊天室名称、描述和公告等基本属性和自定义属性（Key-Value）。若聊天室基本属性不满足业务要求，用户可增加自定义属性并同步给所有成员。
+聊天室是支持多人沟通的即时通讯系统。聊天室属性可分为聊天室名称、描述和公告等基本属性和自定义属性（key-value）。若聊天室基本属性不满足业务要求，用户可增加自定义属性并同步给所有成员。利用自定义属性可以存储直播聊天室的类型、狼人杀等游戏中的角色信息和游戏状态以及实现语聊房的麦位管理和同步等。聊天室自定义属性以键值对（key-value）形式存储，属性信息变更会实时同步给聊天室成员。
 
 本文介绍如何管理聊天室属性信息。
 
@@ -9,9 +9,9 @@
 环信即时通讯 IM SDK 提供 `Room`、`IRoomManager` 和 `IRoomManagerDelegate` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 获取和更新聊天室基本属性（名称，描述和公告）；
-- 获取聊天室单个、多个或所有聊天室自定义属性；
-- 设置或强制设置单个或多个聊天室自定义属性；
-- 删除或强制删除单个或多个聊天室自定义属性。
+- 获取聊天室自定义属性；
+- 设置聊天室自定义属性；
+- 删除聊天室自定义属性。
 
 ## 前提条件
 
@@ -57,9 +57,9 @@ SDKClient.Instance.RoomManager.UpdateRoomAnnouncement(roomId, announcement, new 
 ));
 ```
 
-#### 更新聊天室名称
+#### 修改聊天室名称
 
-仅聊天室所有者和聊天室管理员可以调用 `ChangeRoomName` 方法设置和更新聊天室名称，聊天室名称的长度限制为 128 个字符。
+仅聊天室所有者和聊天室管理员可以调用 `ChangeRoomName` 方法设置和修改聊天室名称，聊天室名称的长度限制为 128 个字符。
 
 示例代码如下：
 
@@ -72,9 +72,9 @@ SDKClient.Instance.RoomManager.ChangeRoomName(roomId, name, new CallBack(
 ));
 ```
 
-#### 更新聊天室描述
+#### 修改聊天室描述
 
-仅聊天室所有者和聊天室管理员可以调用 `ChangeRoomDescription` 方法设置和更新聊天室描述，聊天室描述的长度限制为 512 个字符。
+仅聊天室所有者和聊天室管理员可以调用 `ChangeRoomDescription` 方法设置和修改聊天室描述，聊天室描述的长度限制为 512 个字符。
 
 示例代码如下：
 
@@ -88,10 +88,6 @@ SDKClient.Instance.RoomManager.ChangeRoomDescription(roomId, newDesc, new CallBa
 ```
 
 ### 管理聊天室自定义属性（key-value）
-
-利用自定义属性可以存储直播聊天室的类型、狼人杀等游戏中的角色信息和游戏状态以及实现语聊房的麦位管理和同步等。聊天室自定义属性以键值对（key-value）形式存储，属性信息变更会实时同步给聊天室成员。
-
-本节介绍如何获取、设置和删除聊天室自定义属性。
 
 #### 获取聊天室自定义属性
 
@@ -117,7 +113,6 @@ SDKClient.Instance.RoomManager.FetchAttributes(roomId, keys, new ValueCallBack<D
 ```
 
 #### 设置聊天室自定义属性
-
 
 所有聊天室成员均可调用 `AddAttributes` 方法设置一个或多个聊天室自定义属性。利用该方法可设置新属性，也可以修改自己或其他成员设置的现有属性。设置后，其他聊天室成员收到 `OnChatroomAttributesChanged` 回调。
 
@@ -155,7 +150,7 @@ SDKClient.Instance.RoomManager.AddAttributes(roomId, kv, deleteWhenExit, forced,
 
 #### 删除聊天室自定义属性
 
-所有聊天室成员均可以调用 `RemoveAttributes` 方法删除聊天室自定义属性。利用该方法可删除自己和其他成员设置的自定义属性。删除后，聊天室其他成员收到 `OnChatroomAttributesRemoved` 回调。
+所有聊天室成员均可以调用 `RemoveAttributes` 方法删除一个或多个聊天室自定义属性。利用该方法可删除自己和其他成员设置的自定义属性。删除后，聊天室其他成员收到 `OnChatroomAttributesRemoved` 回调。
 
 示例代码如下：
 
