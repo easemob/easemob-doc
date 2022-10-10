@@ -53,7 +53,7 @@ EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, 
 
 #### 修改聊天室名称
 
-仅聊天室所有者和聊天室管理员可以调用 `changeChatRoomSubject` 方法设置和更新聊天室名称，聊天室名称的长度限制为 128 个字符。
+仅聊天室所有者和聊天室管理员可以调用 `changeChatRoomSubject` 方法设置和修改聊天室名称，聊天室名称的长度限制为 128 个字符。
 
 示例代码如下：
 
@@ -64,7 +64,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatRoomSub
 
 #### 修改聊天室描述
 
-仅聊天室所有者和聊天室管理员可以调用 `changeChatroomDescription` 方法设置和更新聊天室描述，聊天室描述的长度限制为 512 个字符。
+仅聊天室所有者和聊天室管理员可以调用 `changeChatroomDescription` 方法设置和修改聊天室描述，聊天室描述的长度限制为 512 个字符。
 
 示例代码如下：
 
@@ -128,12 +128,11 @@ EMClient.getInstance().chatroomManager().asyncFetchChatRoomAllAttributesFromSeve
 
                 }
             });
-
 ```
 
 #### 设置单个聊天室属性
 
-聊天室成员可以调用 `asyncSetChatroomAttributes` 方法设置单个聊天室自定义属性。方法只可添加新自定义属性字段和更新自己设置的现有属性。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
+聊天室成员可以调用 `asyncSetChatroomAttributes` 方法设置单个聊天室自定义属性。该方法只可添加新自定义属性字段和更新自己设置的现有属性。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
 
 示例代码如下：
 

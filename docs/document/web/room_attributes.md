@@ -76,8 +76,6 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
 
 ### 管理聊天室自定义属性（key-value）
 
-
-
 #### 获取聊天室自定义属性
 
 聊天室所有成员均可通过 `getChatRoomAttributes` 获取聊天室自定义属性。
@@ -138,7 +136,7 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
    conn.removeChatRoomAttribute(option).then(res => console.log(res))
    ```
 
-##### 删除多个聊天室属性
+#### 删除多个聊天室属性
 
 聊天室所有成员可调用 `removeChatRoomAttributes` 批量移除自定义属性。移除成功后，其他成员收到 `onChatroomEvent` 回调，事件为 `removeChatRoomAttributes`。
 

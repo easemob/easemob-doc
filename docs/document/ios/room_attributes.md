@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM SDK 提供 `IEMChatRoomManager` 类，`EMChatRoomManagerDelegate` 类和 `EMChatroom` 类用于聊天室属性管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM SDK 提供 `IEMChatRoomManager` 类、`EMChatRoomManagerDelegate` 类和 `EMChatroom` 类用于聊天室属性管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 获取和更新聊天室基本属性（名称，描述和公告）；
 - 获取聊天室自定义属性；
@@ -56,7 +56,7 @@ EMError *error =  nil;
 
 #### 修改聊天室名称
 
-仅聊天室所有者和聊天室管理员可以调用 `updateSubject` 方法设置和更新聊天室名称，聊天室名称的长度限制为 128 个字符。
+仅聊天室所有者和聊天室管理员可以调用 `updateSubject` 方法设置和修改聊天室名称，聊天室名称的长度限制为 128 个字符。
 
 示例代码如下：
 
@@ -67,7 +67,7 @@ EMError *error = nil;
 
 #### 修改聊天室描述
 
-仅聊天室所有者和聊天室管理员可以调用 `updateDescription` 方法设置和更新聊天室描述，聊天室描述的长度限制为 512 个字符。
+仅聊天室所有者和聊天室管理员可以调用 `updateDescription` 方法设置和修改聊天室描述，聊天室描述的长度限制为 512 个字符。
 
 示例代码如下：
 
@@ -175,7 +175,7 @@ EMError *error = nil;
                 }];
 ```
 
-##### 删除多个聊天室自定义属性
+#### 删除多个聊天室自定义属性
 
 聊天室成员可以调用 `removeChatroomAttributes` 方法删除多个聊天室自定义属性。该方法只能删除自己设置的自定义属性。设置成功后，其他聊天室成员收到 `EMChatRoomManagerDelegate` 中的 `chatroomAttributesDidRemoved` 回调。
 
