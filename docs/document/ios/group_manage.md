@@ -408,7 +408,7 @@ do {
   }
 
 // 群组详情变更。群组所有成员会收到该回调。
-- (void)groupSpecificationDidUpdate:(NSString *)aGroupId
+- (void)groupSpecificationDidUpdate:(EMGroup *)aGroup
   {
 
   }
