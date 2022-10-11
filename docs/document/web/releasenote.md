@@ -6,7 +6,7 @@
 
 ### 优化
 
-- [miniCore](overview.html#引入 SDK) 支持配置私有化配置。
+- [miniCore](overview.html#引入SDK) 支持配置私有化配置。
 - 优化重连逻辑。
 
 ## 版本 V4.1.0 Dev 2022-9-16（开发版）
