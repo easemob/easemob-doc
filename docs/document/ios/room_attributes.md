@@ -10,7 +10,7 @@
 
 环信即时通讯 IM SDK 提供 `IEMChatRoomManager` 类、`EMChatRoomManagerDelegate` 类和 `EMChatroom` 类用于聊天室属性管理，支持你通过调用 API 在项目中实现如下功能：
 
-- 获取和更新聊天室基本属性（名称，描述和公告）；
+- 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
 - 设置聊天室自定义属性；
 - 删除聊天室自定义属性。
