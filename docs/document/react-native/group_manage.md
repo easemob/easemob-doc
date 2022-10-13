@@ -42,7 +42,7 @@
 
     公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群样式（EMGroupStyle）的设置：
     - `EMGroupStyle` 为 `EMGroupStylePrivateOnlyOwnerInvite`：只有群主和管理员可以邀请人入群； 
-    - `EMGroupStyle` 为 `EMGroupStylePrivateMemberCanInvite`，普通群成员也能邀请人进群。
+    - `EMGroupStyle` 为 `EMGroupStylePrivateMemberCanInvite`：普通群成员也能邀请人进群。
     
     邀请入群是否需受邀用户确认取决于群组选项 `ChatGroupOptions#inviteNeedConfirm` 和受邀用户的参数 `inviteNeedConfirm` 的设置，前者参数的优先级高于后者，即 `ChatGroupOptions#inviteNeedConfirm` 若设置为 `false`，不论 `inviteNeedConfirm` 设置为何值，受邀用户无需确认直接进群。
     1. 受邀用户无需确认，直接进群。

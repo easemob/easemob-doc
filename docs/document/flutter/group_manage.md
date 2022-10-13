@@ -42,11 +42,11 @@
 2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
     - 进群邀请需要用户确认 (`EMGroupOptions#inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `EMOptions#autoAcceptGroupInvitation` 设置，处理逻辑如下：
         - 用户设置手动确认群组邀请 (`EMOptions#autoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `EMGroupEventHandler#onInvitationReceivedFromGroup` 事件，并选择同意或拒绝入群邀请：
-            - 用户同意入群邀请后，群主收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
-            - 用户拒绝入群邀请后，群主收到 `EMGroupEventHandler#onInvitationDeclinedFromGroup` 事件。
-    - 进群邀请无需用户确认 (`EMGroupOptions.inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无视用户的 `EMOptions#autoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到`EMGroupEventHandler#onAutoAcceptInvitationFromGroup` 事件，群主收到每个加入成员的 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件。
+            - 用户同意入群邀请后，邀请人收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
+            - 用户拒绝入群邀请后，邀请人收到 `EMGroupEventHandler#onInvitationDeclinedFromGroup` 事件。
+    - 进群邀请无需用户确认 (`EMGroupOptions.inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无论用户的 `EMOptions#autoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到`EMGroupEventHandler#onAutoAcceptInvitationFromGroup` 事件，邀请人收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件。
 
-用户可以调用 `EMGroupManager#createGroup` 方法创建群组，并通过 `EMGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
+用户可以调用 `EMGroupManager#createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
 示例代码如下：
 

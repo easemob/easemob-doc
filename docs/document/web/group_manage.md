@@ -8,12 +8,12 @@
 
 环信即时通讯 IM Web SDK 支持你通过调用 API 在项目中实现以下群组管理功能：
 
-- 创建、解散群组；
-- 获取群组详情信息；
-- 获取群成员列表；
-- 获取已加入的群组列表；
-- 获取公开群列表；
-- 监听群组事件。
+- 创建、解散群组
+- 获取群组详情信息
+- 获取群成员列表
+- 获取已加入的群组列表
+- 获取公开群列表
+- 监听群组事件
 
 ## 前提条件
 
@@ -64,9 +64,6 @@ conn.createGroup(option).then((res) => console.log(res));
 
 公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于 `allowinvites` 选项的设置：
 
-- `true`：允许；
-- `false`：不允许。只有群主和管理员才可以向群组添加用户。
-
 邀请用户入群的流程图如下：
 
 ![img](@static/images/web/8.png)
@@ -79,15 +76,19 @@ conn.createGroup(option).then((res) => console.log(res));
 conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 ```
 
-2. 受邀用户会收到 `inviteToJoin` 事件，自动进群或确认是否加入群组（取决于 `inviteNeedConfirm` 选项的设置）：
+2. 受邀用户会收到 `inviteToJoin` 事件，自动进群或确认是否加入群组。
 
-- 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。 - 受邀用户会收到 `directJoined` 事件； - 邀请人会收到 `acceptInvite` 事件。用户加入成功后，群成员会收到 `memberPresence` 事件。
+   入群邀请是否需受邀用户确认取决于群组选项 `inviteNeedConfirm` 的设置：
+
+   - `inviteNeedConfirm` 设置为 `false` 时，受邀用户直接进群，无需确认，群组所有成员会收到 `memberPresence` 事件。
+   - `inviteNeedConfirm` 设置为 `true` 时，受邀用户需确认是否加入群组。
+
+     - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
+
   ```javascript
   conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
   ```
-- 受邀人拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。
-
-  邀请人会收到 `rejectInvite` 事件。
+    - 受邀用户拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。邀请人会收到 `rejectInvite` 事件。
 
   ```javascript
   conn.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });

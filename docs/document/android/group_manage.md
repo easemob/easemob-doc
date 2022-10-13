@@ -41,18 +41,18 @@
    - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理同意。
 2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
    - 进群邀请需要用户确认(`inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `autoAcceptGroupInvitation` 设置，处理逻辑如下：
-     - 用户设置自动接受群组邀请 (`autoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调，群主收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
+     - 用户设置自动接受群组邀请 (`autoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
      - 用户设置手动确认群组邀请 (`autoAcceptGroupInvitation` 设置为 `false`)，受邀用户收到 `EMGroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
-       - 用户同意入群邀请后，群主收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调；其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调；
+       - 用户同意入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调；
        - 用户拒绝入群邀请后，群主收到 `EMGroupChangeListener#groupInvitationDidDecline` 回调。
 
 流程如下：
 
 ![img](@static/images/android/group-flow.png)
 
-- 进群邀请无需用户确认 (`inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无视用户的 `autoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调；群主收到每个已加入成员对应的群组事件回调 `EMGroupChangeListener#onInvitationAccepted` 和 `EMGroupChangeListener#onMemberJoined`；先加入的群成员会收到群组事件回调 `EMGroupChangeListener#onMemberJoined`。
+- 进群邀请无需用户确认 (`inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，不论用户的 `autoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
 
-用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
+用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
 用户加入群组后，将可以收到群消息。
 
