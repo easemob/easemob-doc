@@ -158,7 +158,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 | 参数   | 类型   | 描述                 |
 | :--------| :-------- | :-------------------- |
 | `type`   | String  | 用户类型，即 “user”。                                              |
-| `created`   | Long  | 创用户创建时间戳。                       |
+| `created`   | Long  | 用户创建时间戳。                       |
 | `modified`   | Long  | 用户信息修改时间戳。              |
 | `activated`   | Bool   | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用 [解禁接口](account_system.html#账号解禁) 解除封禁，才能正常登录。 |
 | `notification_no_disturbing` | Bool   | 是否设置为免打扰模式：<br/> - `true`：是；<br/> - `false`：否。    |
