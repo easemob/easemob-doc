@@ -45,7 +45,7 @@
 | `timestamp`    | Unix 时间戳，单位为毫秒。                                    |
 | `duration`    | 请求响应时间，单位为毫秒。                                   |
 
-## 群组角色
+## 群组角色修改
 
 群组除了群主和普通群成员之外，新增群管理员角色。
 
@@ -199,10 +199,10 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.description`  | Bool | 群组描述是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。         |
 | `data.maxusers`     | Bool | 群组最大成员数是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。   |
 | `data.groupname`    | Bool  | 群组名称是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。         |
-| `data.membersonly`  | Bool | “加入群组是否需要群主或者群管理员审批”是否修改成功：<br/> - `true`：是；<br/> - `false`：否。 |
-| `data.public`       | Bool  | “是否是公开群”是否修改成功：<br/> - `true`：公开群；<br/> - `false`：私有群。                  |
-| `data.allowinvites` | Bool | “是否允许群成员邀请其他用户入群”是否修改成功：<br/> -`true`：允许群成员邀请人入群；</br>- `false`：只有群主或群管理员才可以邀请用户入群。 |
-| `data.invite_need_confirm` | Bool | “受邀人加入群组前是否需接受入群邀请”是否修改成功：<br/> - `true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
+| `data.membersonly`  | Bool | “加入群组是否需要群主或者群管理员审批”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。 |
+| `data.public`       | Bool  | “是否是公开群”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。                  |
+| `data.allowinvites` | Bool | “是否允许群成员邀请其他用户入群”是否修改成功：<br/> -`true`：修改成功；</br>- `false`：修改失败。 |
+| `data.invite_need_confirm` | Bool | “受邀人加入群组前是否需接受入群邀请”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -215,15 +215,15 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```shell
 # 将 <YourToken> 替换为你在服务端生成的 Token
 
-curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken>' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7' {
+curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken>' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7' -d {
     "groupname": "test groupname",
     "description": "updategroupinfo12311",
     "maxusers": 1500,
-    "membersonly":true,
-    "allowinvites":false,
+    "membersonly": true,
+    "allowinvites": false,
     "invite_need_confirm": true,
     "custom":"abc",
-    "public":true
+    "public": true
 }'
 ```
 
