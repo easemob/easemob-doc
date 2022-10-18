@@ -155,7 +155,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 修改群组信息
 
-修改指定的群组信息。仅支持修改 `groupname`、`description`、`maxusers`、`membersonly`、`allowinvites`、`custom` 六个属性。如果传入其他字段，或传入的字段不存在，则不能修改的字段会抛出异常。
+修改指定的群组信息，可修改 `groupname`、`description`、`maxusers`、`membersonly`、`allowinvites`、`invite_need_confirm`、`public` 和 `custom` 属性。如果传入其他字段，或传入的字段不存在，则不能修改的字段会抛出异常。
 
 #### HTTP 请求
 
@@ -169,7 +169,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -182,9 +182,11 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `groupname`    | String | 否  | 群组名称，修改时值不能包含斜杠（“/”），最大长度为 128 字符。如果有空格，则使用 “+” 代替。 |
 | `description`  | String  | 否  | 群组描述，修改时值不能包含斜杠（“/”），最大长度为 512 字符。如果有空格，则使用 “+” 代替。|
 | `maxusers`     | Int | 否  | 群组成员最大数（包括群主），值为数值类型。     |
-| `membersonly`  | String  | 否  | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是; <br/> - `false`：否。 |
-| `allowinvites` | String  | 否  | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群；<br/>  - `false`：只有群主才可以往群里加人。 |
+| `membersonly`  | String  | 否  | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。 |
+| `allowinvites` | String  | 否  | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群；<br/> - `false`：只有群主或群管理员才可以邀请用户入群。 |
+| `invite_need_confirm` | String  | 否  | 受邀人加入群组前是否需接受入群邀请：<br/> - `true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
 | `custom`  | String | 否  | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。 |
+| `public`       | Bool  | 是     | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。     |
 
 #### HTTP 响应
 
@@ -194,11 +196,13 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 | 字段            | 类型    | 说明                                                         |
 | :------------- | :------ | :----------------------------------------------------------- |
-| `data.description`  | Bool | 群组描述：<br/> - `true`：修改成功;<br/> - `false`：修改失败。         |
-| `data.maxusers`     | Bool | 群组最大成员数：<br/> - `true`：修改成功;<br/> - `false`：修改失败。   |
-| `data.groupname`    | Bool  | 群组名称：<br/> - `true`：修改成功;<br/> - `false`：修改失败。         |
-| `data.membersonly`  | Bool | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是; <br/> - `false`：否。 |
-| `data.allowinvites` | Bool | 是否允许群成员邀请其他用户入群：<br/> -`true`：允许群成员邀请人入群; </br>- `false`：只有群主才可以往群里加人。 |
+| `data.description`  | Bool | 群组描述：<br/> - `true`：修改成功；<br/> - `false`：修改失败。         |
+| `data.maxusers`     | Bool | 群组最大成员数：<br/> - `true`：修改成功；<br/> - `false`：修改失败。   |
+| `data.groupname`    | Bool  | 群组名称：<br/> - `true`：修改成功；<br/> - `false`：修改失败。         |
+| `data.membersonly`  | Bool | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。 |
+| `public`       | Bool  | 是     | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                  |
+| `data.allowinvites` | Bool | 是否允许群成员邀请其他用户入群：<br/> -`true`：允许群成员邀请人入群；</br>- `false`：只有群主或群管理员才可以邀请用户入群。 |
+| `invite_need_confirm` | String | 受邀人加入群组前是否需接受入群邀请：<br/> - （默认）`true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -211,34 +215,41 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```shell
 # 将 <YourToken> 替换为你在服务端生成的 Token
 
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' -d '{
-   "groupname": "testgroup1",
-   "description": "test",
-   "maxusers": 300,
-   "membersonly": true,
-   "allowinvites": true
- }' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7'
+curl --location --request PUT 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7' -H 'Accept: application/json' -H 'Content-Type: application/json' -H 'Authorization: <YourToken>' -d '{
+    "groupname": "test groupname",
+    "description": "updategroupinfo12311",
+    "maxusers": 1500,
+    "membersonly":true,
+    "allowinvites":false,
+    "invite_need_confirm": true,
+    "custom":"abc",
+    "public":true
+}'
 ```
 
 ##### 响应示例
 
 ```json
 {
-  "action": "put",
-  "application": "8bXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatgroups/6XXXX7",
-  "entities": [],
-  "data": {
-    "membersonly": true,
-    "allowinvites": true,
-    "description": true,
-    "maxusers": true,
-    "groupname": true
-  },
-  "timestamp": 1542363146301,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
+    "action": "put",
+    "application": "XXXXXX",
+    "applicationName": "XXXX",
+    "data": {
+        "allowinvites": true,
+        "invite_need_confirm": true,
+        "membersonly": true,
+        "public": true,
+        "custom": true,
+        "description": true,
+        "maxusers": true,
+        "groupname": true
+    },
+    "duration": 0,
+    "entities": [],
+    "organization": "XXXX",
+    "properties": {},
+    "timestamp": 1666062065529,
+    "uri": "http://XXXX/XXXX/XXXX/chatgroups/6XXXX7"
 }
 ```
 
