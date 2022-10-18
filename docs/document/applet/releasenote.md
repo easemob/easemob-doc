@@ -2,6 +2,29 @@
 
 <Toc />
 
+## 版本 V4.1.1 Dev 2022-9-26
+
+### 修复
+
+修复聊天室自定义属性功能中的问题。
+
+## 版本 V4.1.0 Dev 2022-9-16
+
+### 新增特性
+
+- [IM SDK] 新增[聊天室自定义属性功能](room_attributes.html)。
+- [IM SDK] 新增 `onLog` 方法，实现用户日志回调。
+- [IM SDK] `getJoinedGroups` 方法中新增 `needAffiliations` 和 `needRole` 参数支持获取群组成员数和用户自己的角色。
+
+### 优化
+
+- 增加内嵌文档。
+- 优化重连逻辑。
+
+### 修复
+
+[IM SDK] 修复 IM Uniapp 在手机上运行时上报 `addEventListener` 方法相关错误的问题。
+
 ## 版本 V4.0.9 Dev 2022-7-29
 
 ### 新增特性
