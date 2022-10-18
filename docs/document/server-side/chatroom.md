@@ -90,7 +90,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -182,7 +182,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pages
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -261,7 +261,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -332,7 +332,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -394,7 +394,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -448,7 +448,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 ##### 路径参数
 
-| 参数          | 类型   | 是否必填<div style="width: 80px;"></div> |描述                       |
+| 参数          | 类型   | 是否必填 |描述                       |
 | :------------ | :----- |:----- | :------------------------------------------ |
 | `chatroom_id` | String | 是       | 聊天室 ID，即时通讯服务分配给每个聊天室的唯一标识符，从[查询所有聊天室基本信息](https://docs-im.easemob.com/ccim/rest/chatroom#获取_app_中所有的聊天室) 的响应 body 中获取。<br/> - 查询多个聊天室时，将每个 `chatroom_id` 用 "," 隔开。<br/> - 一次请求最多查询 100 个聊天室。<br/> - 在 URL 中，需要将 "," 转义为 "%2C"。 |
 
@@ -456,7 +456,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -541,7 +541,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -617,7 +617,7 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -692,10 +692,10 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### 请求 body
 
@@ -761,7 +761,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -827,7 +827,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -1262,7 +1262,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?limit={N}
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -1332,7 +1332,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -1483,7 +1483,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1556,7 +1556,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1635,7 +1635,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -1698,7 +1698,7 @@ POST /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -1768,7 +1768,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin/{oldad
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -1836,7 +1836,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -1903,7 +1903,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -1975,7 +1975,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -2064,7 +2064,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -2137,7 +2137,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -2218,7 +2218,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -2286,7 +2286,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{u
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -2355,7 +2355,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -2442,7 +2442,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
@@ -2523,7 +2523,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2591,7 +2591,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2666,7 +2666,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
@@ -2735,7 +2735,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
@@ -2799,7 +2799,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
