@@ -27,13 +27,13 @@
 
 通过该方式，开发者可以对用户 token 进行管理，设置有效期，并确定当用户不存在时是否自动创建用户。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/token
 ```
 
-##### 路径参数
+#### 路径参数
 
 | 参数       | 类型   | 描述                                                                                                                 |
 | :--------- | :----- | :-------------------------- |
@@ -41,14 +41,14 @@ POST https://{host}/{org_name}/{app_name}/token
 | `org_name` | String | 即时通讯服务分配给每个企业（组织）的唯一标识。你可以通过控制台获取该字段。                                           |
 | `app_name` | String | 你在环信即时通讯云控制台注册项目时填入的应用名称。                                                                   |
 
-##### 请求 header
+#### 请求 header
 
 | 参数           | 类型   | 是否必需 | 描述                                |
 | :------------- | :----- | :------- | :---------------------------------- |
 | `Content-Type` | String | 是       | 内容类型。请填 `application/json`。 |
 | `Accept`       | String | 是       | 内容类型。请填 `application/json`。 |
 
-##### 请求 body
+#### 请求 body
 
 | 参数         | 类型   | 是否必需 | 描述 |
 | :----------- | :----- | :------- | :------------------- |
@@ -57,9 +57,9 @@ POST https://{host}/{org_name}/{app_name}/token
 | `password`   | String | 是       | 用户的登录密码。   |
 | `ttl`        | Long   | 否       | token 有效期，单位为秒。设置为 `0` 则 token 有效期为永久（暂不支持调用群组和聊天室接口）。若不传该参数，有效期默认为 60 天。此外，也可通过环信即时通讯云控制台设置，参见 [用户认证详情页面](https://console.easemob.com/app/applicationOverview/userManagement)。该参数值以最新设置为准。注意：VIP 5 集群该参数单位为毫秒。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 200，表示成功获取 token，响应包体中包含以下字段：
 
@@ -77,9 +77,9 @@ POST https://{host}/{org_name}/{app_name}/token
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](/document/server-side/error.html)了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 1. 通过用户 ID 和密码获取 token：
 
@@ -102,7 +102,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
  }' 'http://XXXX/XXXX/XXXX/token'
 ```
 
-##### 响应示例
+#### 响应示例
 
 1. 通过用户 ID 和密码获取 token 返回的响应：
 
