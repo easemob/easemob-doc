@@ -104,7 +104,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 #### 响应示例
 
-1. 通过用户 ID 和密码获取 token 返回的响应：
+1. 通过用户 ID 和密码获取 token 的响应：
 
 ```json
 {
@@ -122,7 +122,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-2. 通过用户 ID 获取 token 返回的响应：
+2. 通过用户 ID 获取 token 的响应：
 
 ```json
 {
