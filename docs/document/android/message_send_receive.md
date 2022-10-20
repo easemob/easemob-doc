@@ -356,14 +356,19 @@ if (chatType == CHATTYPE_GROUP)    message.setChatType(ChatType.GroupChat);EMCli
 
 ```java
 EMMessage cmdMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
-// 支持单聊和群聊，默认单聊，如果是群聊添加下面这行。
-cmdMsg.setChatType(ChatType.GroupChat)String action="action1";
-// `action` 可以自定义。
-EMCmdMessageBody cmdBody = new EMCmdMessageBody(action);
-String toUsername = "test1";
-// 发送给特定用户。
-cmdMsg.setTo(toUsername);cmdMsg.addBody(cmdBody);
-EMClient.getInstance().chatManager().sendMessage(cmdMsg);
+        // 支持单聊、群聊和聊天室，默认为单聊。
+        // 若为群聊，添加下行代码。
+        cmdMsg.setChatType(EMMessage.ChatType.GroupChat);
+       // 若为聊天室，添加下行代码。
+       // cmdMsg.setChatType(EMMessage.ChatType.ChatRoom);
+        
+        String action="action1";
+        // `action` 可以自定义。
+        EMCmdMessageBody cmdBody = new EMCmdMessageBody(action);
+        String toUsername = "test1";
+        // 发送给特定用户。
+        cmdMsg.setTo(toUsername);cmdMsg.addBody(cmdBody);
+        EMClient.getInstance().chatManager().sendMessage(cmdMsg);
 ```
 
 请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
