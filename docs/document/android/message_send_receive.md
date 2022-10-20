@@ -352,18 +352,23 @@ if (chatType == CHATTYPE_GROUP)    message.setChatType(ChatType.GroupChat);EMCli
 
 ### 发送透传消息
 
-透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
+透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em\_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
 
 ```java
 EMMessage cmdMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
-// 支持单聊和群聊，默认单聊，如果是群聊添加下面这行。
-cmdMsg.setChatType(ChatType.GroupChat)String action="action1";
-// `action` 可以自定义。
-EMCmdMessageBody cmdBody = new EMCmdMessageBody(action);
-String toUsername = "test1";
-// 发送给特定用户。
-cmdMsg.setTo(toUsername);cmdMsg.addBody(cmdBody);
-EMClient.getInstance().chatManager().sendMessage(cmdMsg);
+        // 支持单聊、群聊和聊天室，默认为单聊。
+        // 若为群聊，添加下行代码。
+        cmdMsg.setChatType(EMMessage.ChatType.GroupChat);
+       // 若为聊天室，添加下行代码。
+       // cmdMsg.setChatType(EMMessage.ChatType.ChatRoom);
+
+        String action="action1";
+        // `action` 可以自定义。
+        EMCmdMessageBody cmdBody = new EMCmdMessageBody(action);
+        String toUsername = "test1";
+        // 发送给特定用户。
+        cmdMsg.setTo(toUsername);cmdMsg.addBody(cmdBody);
+        EMClient.getInstance().chatManager().sendMessage(cmdMsg);
 ```
 
 请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
