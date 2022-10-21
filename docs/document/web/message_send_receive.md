@@ -439,7 +439,7 @@ function sendCMDMessage(){
   let option = {
     // 设置消息类型。
     type: 'cmd',
-    // 设置会话类型。
+    // 设置会话类型，支持单聊、群聊和聊天室。
     chatType: 'singleChat',
     // 设置消息接收方的用户 ID。
     to: 'username',

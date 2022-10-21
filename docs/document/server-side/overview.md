@@ -241,7 +241,7 @@ Authorization：`Bearer ${token}`
 | 批量添加用户至聊天室黑名单 | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users  | 将单个用户批量添加至聊天室的黑名单。 |
 | 从聊天室黑名单移除单个用户 | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{username} | 将用户从聊天室黑名单中移除。         |
 | 批量从聊天室黑名单移除用户 | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{usernames} | 批量将用户从黑名单列表中移除。       |
-| 查询聊天室白名单           | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users`  | 查询一个聊天室白名单中的用户列表。   |
+| 查询聊天室白名单           | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users  | 查询一个聊天室白名单中的用户列表。   |
 | 添加单个用户至聊天室白名单 | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username} | 将指定的单个用户添加至聊天室白名单。 |
 | 批量添加用户至聊天室白名单 | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users   | 添加多个用户至聊天室白名单。         |
 | 将用户移除聊天室白名单     | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username} | 将指定用户从聊天室白名单移除。       |

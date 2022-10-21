@@ -215,7 +215,7 @@ conn.isInGroupAllowlist(option).then(res => console.log(res));
 
 #### 获取群组白名单
 
-仅群主和群管理员可以调用 `getGroupBlocklist` 方法获取群组白名单列表。
+仅群主和群管理员可以调用 `getGroupAllowlist` 方法获取群组白名单列表。
 
 示例代码如下：
 
@@ -223,7 +223,7 @@ conn.isInGroupAllowlist(option).then(res => console.log(res));
 let option = {
     groupId: "groupId"
 }
-conn.getGroupBlocklist(option).then(res => console.log(res));
+conn.getGroupAllowlist(option).then(res => console.log(res));
 ```
 
 ### 管理群组黑名单

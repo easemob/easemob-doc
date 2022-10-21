@@ -55,6 +55,9 @@
 ### 优化
 
 - [IM SDK] 支持批量查询群组详情 [getGroupInfo](group_manage.html#获取群组详情信息)。
+- [IM SDK] 优化黑名单和白名单相关的方法名。
+  - 白名单相关的方法名中的 `Whitelist` 修改为 `Allowlist`，如 `getGroupWhitelist` 修改为 `getGroupAllowlist`；
+  - 黑名单相关的方法名中的 `Blacklist` 修改为 `Blocklist`，如 `getGroupBlacklist` 修改为 `getGroupBlocklist`。
 
 ## 版本 V4.0.7 Dev 2022-5-25
 
