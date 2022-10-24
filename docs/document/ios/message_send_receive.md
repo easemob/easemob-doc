@@ -293,12 +293,14 @@ message.chatType = EMTypeGroupChat;
 ```objectivec
 // `action` 自定义 `NSString` 类型的命令内容。
 EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:action];
-EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
-message.chatType = EMTypeChat;
-// 如果是群聊，设置 chatType，默认是单聊。
-message.chatType = EMTypeGroupChat;
-// 发送消息。
-[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+    EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
+    // 支持单聊，群聊和聊天室，默认为单聊。
+    // 若为群聊，添加下行代码。
+    message.chatType = EMChatTypeGroupChat;
+    // 若为聊天室，添加下行代码。
+    //message.chatType = EMChatTypeChatRoom;
+    // 发送消息。
+    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
 请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
