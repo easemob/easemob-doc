@@ -160,7 +160,7 @@ conn.getChatThreadDetail({chatThreadId: 'chatThreadId'}).then((res)=>{
 ```javascript
 // 获取子区成员列表
 // chatThreadId：子区 ID
-// pageSize：单次请求返回的成员数，取值范围为 [1, 50]
+// pageSize：单次请求返回的成员数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 conn.getChatThreadMembers({chatThreadId: 'chatThreadId ',pageSize:20,cursor:'cursor'}).then((res)=>{
   console.log(res)
@@ -173,7 +173,7 @@ conn.getChatThreadMembers({chatThreadId: 'chatThreadId ',pageSize:20,cursor:'cur
 
 ```javascript
 // 分页获取自己加入的子区列表
-// pageSize：单次请求返回的子区数，取值范围为 [1, 50]
+// pageSize：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 conn.getJoinedChatThreads({cursor: 'cursor',pageSize: 20}).then((res)=>{
   console.log(res)
@@ -185,7 +185,7 @@ conn.getJoinedChatThreads({cursor: 'cursor',pageSize: 20}).then((res)=>{
 ```javascript
 // 分页获取指定群组中自己加入的子区列表
 // parentId：群组 ID
-// pageSize：单次请求返回的子区数，取值范围为 [1, 50]
+// pageSize：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 conn.getJoinedChatThreads({parentId: 'parentId',cursor: 'cursor',pageSize: 20}).then((res)=>{
   console.log(res)
@@ -197,7 +197,7 @@ conn.getJoinedChatThreads({parentId: 'parentId',cursor: 'cursor',pageSize: 20}).
 ```javascript
 // 分页获取指定群组的子区列表
 // parentId：群组 ID
-// pageSize：单次请求返回的子区数，取值范围为 [1, 50]
+// pageSize：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 conn.getChatThreads({parentId: 'parentId', cursor:'cursor', pageSize: 20}).then((res)=>{
   console.log(res)
