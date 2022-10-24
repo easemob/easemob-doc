@@ -77,8 +77,9 @@
 - `fetchLastReceivedMessage` 方法重命名为 `getLatestReceivedMessage`。
 - `unreadCount` 方法重命名为 `getConversationUnreadCount`。
 - `getMessagesFromTime` 方法重命名为 `getMessageWithTimestamp`。
-- `WhiteList` 方法重命名为 `AllowList`。
-- `BlackList` 方法重命名为 `BlockList`。
+- 白名单和黑名单相关的方法名进行了重命名：
+  - 白名单相关的方法名中的 `WhiteList` 修改为 `AllowList`，如 `getGroupWhiteListFromServer` 修改为 `getGroupAllowListFromServer`；
+  - 黑名单相关的方法名中的 `BlackList` 修改为 `BlockList`，如 `getGroupBlackListFromServer` 修改为 `getGroupBlockListFromServer`。
 
 2. 删除了以下方法：
 
@@ -97,6 +98,7 @@
 - React-Native 升级至 0.66.4 LTS 版本。
 - Android 平台无需再执行其他操作。
 - `agora-react-native-chat` 重命名为 `react-native-agora-chat`。
+  
 
 #### 修复
 

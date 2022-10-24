@@ -130,9 +130,9 @@ message.chatType = EMChatTypeChat;
 // `localPath` 为语音文件本地资源路径，`displayName` 为附件的显示名称。
 EMVoiceMessageBody *body = [[EMVoiceMessageBody alloc] initWithLocalPath:localPath displayName:displayName];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
-message.chatType = EMTypeChat;
+message.chatType = EMChatTypeChat;
 // 如果是群聊，设置 chatType，默认是单聊。
-message.chatType = EMTypeGroupChat;
+message.chatType = EMChatTypeGroupChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
@@ -154,10 +154,10 @@ NSString *voiceLocalPath = voiceBody.localPath;
 EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithData:imageData displayName:displayName];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
 
-message.chatType = EMTypeChat;
+message.chatType = EMChatTypeChat;
 // 设置消息类型，即设置 `Message` 类的 `MessageType` 属性。
 // 设置该属性的值为 `Chat`、`Group` 和 `Room`，分别代表该消息是单聊、群聊或聊天室消息，默认为单聊。
-message.chatType = EMTypeGroupChat;
+message.chatType = EMChatTypeGroupChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
@@ -189,9 +189,9 @@ EMVideoMessageBody *body = [[EMVideoMessageBody alloc] initWithLocalPath:localPa
 body.duration = duration;// 视频时长。
 
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
-message.chatType = EMTypeChat;
+message.chatType = EMChatTypeChat;
 // 如果是群聊，设置 chatType，默认是单聊。
-message.chatType = EMTypeGroupChat;
+message.chatType = EMChatTypeGroupChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
@@ -219,9 +219,9 @@ NSString *thumbnailLocalPath = body.thumbnailLocalPath;
 // `fileData` 为本地资源，`fileName` 为附件的显示名称。
 EMFileMessageBody *body = [[EMFileMessageBody alloc]initWithData:fileData displayName:fileName];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
-message.chatType = EMTypeChat;
+message.chatType = EMChatTypeChat;
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
-message.chatType = EMTypeGroupChat;
+message.chatType = EMChatTypeGroupChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
@@ -277,9 +277,9 @@ NSString *localPath = body.localPath;
 // `latitude` 为纬度，`longitude` 为经度，`address` 为具体位置内容。
 EMLocationMessageBody *body = [[EMLocationMessageBody alloc] initWithLatitude:latitude longitude:longitude address:aAddress];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
-message.chatType = EMTypeChat;
+message.chatType = EMChatTypeChat;
 // 如果是群聊，设置 chatType，默认是单聊。
-message.chatType = EMTypeGroupChat;
+message.chatType = EMChatTypeGroupChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
@@ -293,12 +293,14 @@ message.chatType = EMTypeGroupChat;
 ```objectivec
 // `action` 自定义 `NSString` 类型的命令内容。
 EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:action];
-EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
-message.chatType = EMTypeChat;
-// 如果是群聊，设置 chatType，默认是单聊。
-message.chatType = EMTypeGroupChat;
-// 发送消息。
-[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+    EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
+    // 支持单聊，群聊和聊天室，默认为单聊。
+    // 若为群聊，添加下行代码。
+    message.chatType = EMChatTypeGroupChat;
+    // 若为聊天室，添加下行代码。
+    //message.chatType = EMChatTypeChatRoom;
+    // 发送消息。
+    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
 请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
@@ -321,9 +323,9 @@ message.chatType = EMTypeGroupChat;
 // event 为需要传递的自定义消息事件，比如名片消息，可以设置 "userCard"； `ext` 为事件扩展字段，比如可以设置 `uid`，`nickname`，`avatar`。
 EMCustomMessageBody* body = [[EMCustomMessageBody alloc] initWithEvent:@"userCard" ext:@{@"uid":aUid ,@"nickname":aNickName,@"avatar":aUrl}];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
-message.chatType = EMTypeChat;
+message.chatType = EMChatTypeChat;
 // 如果是群聊，设置 chatType，默认是单聊。
-message.chatType = EMTypeGroupChat;
+message.chatType = EMChatTypeGroupChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
@@ -339,7 +341,7 @@ EMTextMessageBody *textMessageBody = [[EMTextMessageBody alloc] initWithText:con
 // 增加自定义属性。
 NSDictionary *messageExt = @{@"attribute":@"value"};
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:textMessageBody ext:messageExt];
-message.chatType = EMTypeChat;
+message.chatType = EMChatTypeChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 

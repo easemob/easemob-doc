@@ -297,7 +297,7 @@ function sendPrivateImg() {
 
 #### 发送 URL 图片消息
 
-发送 URL 图片消息之前，确保将 `useOwnUploadFun` 设置为 `true`。
+发送 URL 图片消息之前，确保在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](http://webim-h5.easemob.com/jsdoc/out/classes/Connection.Connection-1.html)设置为 `true`。
 
 ```javascript
 function sendPrivateUrlImg() {
@@ -305,7 +305,7 @@ function sendPrivateUrlImg() {
       chatType: 'singleChat',
       // 设置消息类型。
       type: "img",
-      // 设置图片文件的 URL　地址。
+      // 设置图片文件的 URL 地址。
       url: "img url",
       // 设置消息接收方的用户 ID。
       to: "username",
@@ -439,7 +439,7 @@ function sendCMDMessage(){
   let option = {
     // 设置消息类型。
     type: 'cmd',
-    // 设置会话类型。
+    // 设置会话类型，支持单聊、群聊和聊天室。
     chatType: 'singleChat',
     // 设置消息接收方的用户 ID。
     to: 'username',

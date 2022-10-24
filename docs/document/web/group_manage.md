@@ -133,7 +133,7 @@ conn.getGroupInfo(option).then((res) => {
 
 ```javascript
 let pageNum = 1,
-  pageSize = 1000;
+  pageSize = 100;
 let option = {
   pageNum: pageNum,
   pageSize: pageSize,
@@ -149,7 +149,7 @@ conn.listGroupMembers(option).then((res) => console.log(res));
 ```javascript
 conn.getJoinedGroups({
   pageNum: 1,
-  pageSize: 500,
+  pageSize: 20,
   needAffiliations: true,
   needRole: true,
 });
