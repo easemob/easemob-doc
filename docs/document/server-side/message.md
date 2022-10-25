@@ -1598,9 +1598,9 @@ DELETE https://{host}/{org_name}/{app_name}/users/{userName}/user_channel
 
 | 参数          | 类型   | 是否必需 | 描述                                                         |
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
-| `channel`     | String | 是       | 要删除的会话 ID。                                            |
+| `channel`     | String | 是       | 要删除的会话 ID。该参数的值取决于会话类型 `type` 的值:<br/> - `type` 为 `chat`，即单聊时，会话 ID 为对端用户 ID；<br/> - `type` 为 `groupchat`，即群聊时，会话 ID 为群组 ID。                                         |
 | `type`        | String | 是       | 会话类型。<br/> - `chat`：单聊会话；<br/> -`groupchat`：群聊会话。 |
-| `delete_roam` | Bool   | 是       | 是否删除服务端消息。<br/> - `true`：是；<br/> - `false`：否。 |
+| `delete_roam` | Bool   | 是       | 是否删除服务端消息。<br/> - `true`：是。若删除了该会话的服务端消息，则用户无法从服务器拉取该会话的漫游消息。<br/> - `false`：否。用户仍可以从服务器拉取该会话的漫游消息。|
 
 ### HTTP 响应
 
