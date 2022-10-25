@@ -27,6 +27,7 @@
 调用 `asyncFetchConversationsFromServer` 从服务端获取会话。我们建议在 app 安装时，或本地没有会话时调用该 API。否则调用 `LoadAllConversations` 即可。示例代码如下：
 
 ```java
+// 异步方法。同步方法见 {@link #fetchConversationsFromServer()}。
 EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(new EMValueCallBack<Map<String, EMConversation>>() {
     //获取会话成功后的处理逻辑。
     @Override
@@ -44,16 +45,17 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(new EMVal
 从服务器分页获取指定会话的历史消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。建议每次获取少于 50 条消息，可多次获取。拉取后默认 SDK 会自动将消息更新到本地数据库。
 
 ```java
-EMClient.getInstance().chatManager().asyncfetchHistoryMessages(
-    String conversationId,
-    conversation.getType(),
+// 异步方法。同步方法见 {@link #fetchHistoryMessages(String, EMConversationType, int, String, EMConversation.EMSearchDirection)}。
+EMClient.getInstance().chatManager().asyncFetchHistoryMessage(
+    conversationId,
+    conversationType,
     pageSize,
     startMsgId,
-    EMConversation.EMSearchDirection.UP {
+    searchDirection,
+    new EMValueCallBack<EMCursorResult<EMMessage>>() {
         @Override
         public void onSuccess(EMCursorResult<EMMessage> value) {
 
-            });
         }
 
         @Override

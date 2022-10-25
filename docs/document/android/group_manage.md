@@ -62,7 +62,8 @@
 EMGroupOptions option = new EMGroupOptions();
 option.maxUsers = 100;
 option.style = EMGroupStyle.EMGroupStylePrivateMemberCanInvite;
-
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncCreateGroup(String, String, String[], String, EMGroupOptions, EMValueCallBack)}。
 EMClient.getInstance().groupManager().createGroup(groupName, desc, allMembers, reason, option);
 ```
 
@@ -87,12 +88,13 @@ EMClient.getInstance().groupManager().createGroup(groupName, desc, allMembers, r
 示例代码如下：
 
 ```java
-// 从服务器获取公开群组列表
+// 从服务器获取公开群组列表。
 EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, cursor);
 List<EMGroupInfo> groupsList = result.getData();
 String cursor = result.getCursor();
 
-// 申请加入群组
+// 申请加入群组。
+// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncJoinGroup(String, EMCallBack)}。
 EMClient.getInstance().groupManager().joinGroup(groupId);
 ```
 
@@ -107,7 +109,8 @@ EMClient.getInstance().groupManager().joinGroup(groupId);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncDestroyGroup(String, EMCallBack)}。
 EMClient.getInstance().groupManager().destroyGroup(groupId);
 ```
 
@@ -120,7 +123,8 @@ EMClient.getInstance().groupManager().destroyGroup(groupId);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncLeaveGroup(String, EMCallBack)}。
 EMClient.getInstance().groupManager().leaveGroup(groupId);
 ```
 
@@ -137,6 +141,7 @@ EMClient.getInstance().groupManager().leaveGroup(groupId);
 EMGroup group = EMClient.getInstance().groupManager().getGroup(groupId);
 
 // 根据群组 ID 从服务器获取群组详情。
+// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncGetGroupFromServer(String, EMValueCallBack)}。
 EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId);
 
 // 获取群主用户 ID。
@@ -168,6 +173,7 @@ List<String> memberList = new ArrayList<>;
 EMCursorResult<String> result = null;
 final int pageSize = 20;
 do {
+    // 同步方法，会阻塞当前线程。异步方法见 {@link #asyncFetchGroupMembers(String, String, int, EMValueCallBack)}。
      result = EMClient.getInstance().groupManager().fetchGroupMembers(groupId,
              result != null? result.getCursor(): "", pageSize);
      memberList.addAll(result.getData());
@@ -177,8 +183,8 @@ do {
 - 当群成员少于 200 人时，可通过以下方式获取群成员：
 
 ```java
-// 异步方法。
 // 第二个参数传入 `true`，默认取 200 人的群成员列表。
+// 同步方法，会阻塞当前线程。
 EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
 List<String> memberList = group.getMembers();
 ```
@@ -188,7 +194,7 @@ List<String> memberList = group.getMembers();
 用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：
 
 ```java
-// 异步方法。
+// 异步方法。同步方法见 {@link #getJoinedGroupsFromServer(int, int, boolean, boolean)}。
 List<EMGroup> grouplist = EMClient.getInstance().groupManager().asyncGetJoinedGroupsFromServer(pageIndex, pageSize, needMemberCount, needRole, new EMValueCallBack<List<EMGroup>>() {
                         @Override
                         public void onSuccess(List<EMGroup> value) {
@@ -211,7 +217,7 @@ List<EMGroup> grouplist = EMClient.getInstance().groupManager().getAllGroups();
 - 用户还可以分页获取公开群列表：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncGetPublicGroupsFromServer(int, String, EMValueCallBack)}。
 EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, cursor);
 List<EMGroupInfo> groupsList = result.getData();
 String cursor = result.getCursor();
@@ -226,6 +232,8 @@ String cursor = result.getCursor();
 群成员可以调用 `blockGroupMessage` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息，群主和群管理员不能进行此操作。示例代码如下：
 
 ```java
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncBlockGroupMessage(String, EMCallBack)}。
 EMClient.getInstance().groupManager().blockGroupMessage(groupId);
 ```
 
@@ -234,6 +242,8 @@ EMClient.getInstance().groupManager().blockGroupMessage(groupId);
 群成员可以调用 `unblockGroupMessage` 方法解除屏蔽群消息。示例代码如下：
 
 ```java
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncUnblockGroupMessage(String, EMCallBack)}。
 EMClient.getInstance().groupManager().unblockGroupMessage(groupId);
 ```
 
