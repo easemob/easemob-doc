@@ -73,7 +73,7 @@
 
 ## 用户关系管理
 
-| Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
+| Rest API 接口 |方法  | 接口 URL| 接口最高调用频率 |
 | :------------- | :----- | :----------------------------------------------------------- | :------------------------- |
 | 添加好友   |    POST         | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
 | 移除好友    |    DELETE        | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
