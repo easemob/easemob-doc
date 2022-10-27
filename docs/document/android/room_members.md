@@ -55,7 +55,6 @@ EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, membe
 
 ### 管理聊天室黑名单
 
-
 #### 将成员加入聊天室黑名单
 
 仅聊天室所有者和管理员可调用 `EMChatRoomManager#blockChatroomMembers` 方法将指定成员添加至黑名单。
@@ -95,6 +94,7 @@ EMChatRoom chatroom = EMClient.getInstance().chatroomManager().blockChatroomMemb
 
 ### 管理聊天室白名单
 
+聊天室白名单中的成员在聊天室中发送的消息为高优先级，会优先送达，但不保证必达。当负载较高时，服务器会优先丢弃低优先级的消息。若即便如此负载仍很高，则服务器也会丢弃高优先级消息。
 #### 获取聊天室白名单列表
 
 仅聊天室所有者和管理员可以调用 `fetchChatRoomWhiteList` 获取当前聊天室白名单成员列表。
