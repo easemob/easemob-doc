@@ -48,14 +48,16 @@
 
 ```javascript
 let option = {
-  groupname: "groupName",
-  desc: "A description of a group",
-  members: ["user1", "user2"],
-  public: true,
-  approval: true,
-  allowinvites: true,
-  inviteNeedConfirm: true,
-  maxusers: 500,
+  data: {
+    groupname: "groupName",
+    desc: "A description of a group",
+    members: ["user1", "user2"],
+    public: true,
+    approval: true,
+    allowinvites: true,
+    inviteNeedConfirm: true,
+    maxusers: 500,
+  },
 };
 conn.createGroup(option).then((res) => console.log(res));
 ```
@@ -85,14 +87,15 @@ conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 
      - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
 
-  ```javascript
-  conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
-  ```
+```javascript
+conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
+```
+
     - 受邀用户拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。邀请人会收到 `rejectInvite` 事件。
 
-  ```javascript
-  conn.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
-  ```
+```javascript
+conn.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
+```
 
 3、用户加入群组后，可以收发群消息。
 
