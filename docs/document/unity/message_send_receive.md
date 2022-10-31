@@ -397,64 +397,72 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 ```
 
-### 发送自定义类型消息
+#### 通过透传消息实现输入指示器
 
-除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。自定义消息内容为键值对（key-value）格式，你需要自己添加并解析该内容。
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
 
-```C#
-//`event` 为字符串类型的自定义事件，比如礼物消息，可以设置：
-string event = "gift";
+下图为输入指示器的工作原理。
 
-//`adict` 类型为 `Dictionary<string, string>`。
-Dictionary<string, string> adict = new Dictionary<string, string>();
-adict.Add("key", "value");
+[img](@static/images/common/typing_indicator.png)
 
-Message msg = Message.CreateCustomSendMessage(toChatUsername, event, adict);
-SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
-   onSuccess: () => {
-      Debug.Log($"{msg.MsgId}发送成功");
-   },
-   onError: (code, desc) => {
-      Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
-   }
-));
-```
 
-### 使用消息的扩展字段
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
 
-当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型。
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
 
-当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
+:::notice 
 
-```C#
-Message msg = Message.CreateTextSendMessage(toChatUsername, content);
+用户 A 可根据需要设置透传消息发送间隔。
 
-// 增加自定义属性。
-AttributeValue attr1 = AttributeValue.Of("value", AttributeValueType.STRING);
-AttributeValue attr2 = AttributeValue.Of(true, AttributeValueType.BOOL);
-msg.Attributes.Add("attribute1", attr1);
-msg.Attributes.Add("attribute2", attr2);
+:::
 
-// 发送消息。
-SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
-  onSuccess: () => {
-    Debug.Log($"{msg.MsgId}发送成功");
-  },
-  onError:(code, desc) => {
-    Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
+以下示例代码展示如何发送输入状态的透传消息。
+
+```c#
+//发送表示正在输入的透传消息
+string msgTypingBegin = "TypingBegin";
+
+void textChange() {
+  int currentTimestamp = getCurrentTimestamp();
+  if (currentTimestamp - _previousChangedTimeStamp > 5) {
+    _sendBeginTyping();
+    _previousChangedTimeStamp = currentTimestamp;
   }
-));
-
-// 接收消息的时候获取扩展属性。
-bool found = false;
-string str = msg.GetAttributeValue<string>(msg.Attributes, "attribute1", found);
-if (found) {
-  // 使用 str 变量。
 }
 
-found = false；
-bool b = msg.GetAttributeValue<bool>(msg.Attributes, "attribute2", found);
-if (found) {
-  // 使用 b 变量。
+void _sendBeginTyping() {
+  var msg = Message.CreateCmdSendMessage(
+    username: conversationId,
+    action: msgTypingBegin,
+    deliverOnlineOnly: true,
+  );
+  msg.chatType = MessageType.Chat;
+  SDKClient.getInstance.chatManager.sendMessage(msg);
+}
+
+```
+
+以下示例代码展示如何接受和解析输入状态的透传消息。
+
+```c#
+int typingTime = 10;
+
+void OnCmdMessagesReceived(List<Message> list) {
+  for (var msg in list) {
+    if (msg.ConversationId != currentConversationId) {
+      continue;
+    }
+    MessageBody.CmdBody body = msg.Body as MessageBody.CmdBody;
+    if (body.Action == msgTypingBegin) {
+      // 这里需更新 UI，显示“对方正在输入”
+      
+      Timer timer = new Timer((state) =>
+      {
+      	// 这里需更新 UI，不再显示“对方正在输入”
+      }, null, typingTime, Timeout.Infinite);
+    }
+  }
 }
 ```
