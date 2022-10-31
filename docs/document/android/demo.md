@@ -25,6 +25,8 @@
 
 ![img](@static/images/android/app-demo-config.jpeg)
 
+如果需要使用自己的 App Key，需要修改 GitHub 中的代码。
+
 ## 代码下载
 
 您可以通过以下两种方式获取到源代码：
