@@ -105,4 +105,4 @@ WebIM.conn = new WebIM.connection({
 });
 ```
 
-IM 基本功能和web端一致，请参考web端文档。
+ 微信小程序的 IM 的基本功能和 API 的使用方法与 Web 端一致，请参考 Web 端文档。
