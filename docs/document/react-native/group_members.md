@@ -8,8 +8,7 @@
 
 环信即时通讯 IM React Native SDK 提供 `ChatGroupManager` 类和 `ChatGroup` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
-- 群组加人
-- 群组踢人
+- 群组加人、踢人
 - 管理群主及群管理员
 - 管理群组黑名单
 - 管理群组禁言列表
