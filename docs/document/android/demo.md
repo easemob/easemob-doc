@@ -2,32 +2,28 @@
 
 <Toc />
 
-环信即时通讯 Android 提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
+环信即时通讯 Android 端提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
 
-1. 在 [环信即时通讯云 IM 管理后台](https://console.easemob.com/user/login) 通过邮箱注册，可以看到默认的 Demo 应用（默认应用是全功能开通的应用）；
+1. 在 [环信即时通讯云 IM 管理后台](https://console.easemob.com/user/login) 通过邮箱注册后登录，打开首页。
+
+在 **应用列表** 下可以看到默认的 Demo 应用。该 Demo 默认开通全部功能。
 
 ![img](@static/images/android/app-demo.png)
 
-2. 在上图页面 Demo 应用右侧点击 **查看**，选择 **开放注册**；
+2. 选择 **即时通讯** > **服务概览**，在 **设置** 区域中配置 **用户注册模式**。
 
 ![img](@static/images/android/app-demo-register-type.png)
 
-3. 下载 Demo，点击 **服务器配置**；
+:::notice
+注册模式包含开放注册和授权注册：
+
+- 开放注册：通过客户端注册环信账号。该方式只用于测试，在正式环境中不推荐使用。
+- 授权注册：你的应用服务器通过环信提供的 REST API 注册环信账号，然后将 token 保存到你的应用服务器或返回给客户端。
+  :::
+
+3. 下载 Demo，注册账号。
 
 ![img](@static/images/android/app-demo-config.jpeg)
-
-4. 将 Demo 的 App Key 填入，点击 **保存配置**；
-
-![img](@static/images/android/app-demo-input-appkey.jpeg)
-
-5. 杀死 app；
-6. 重启，然后点击 **注册用户** 进行体验。
-
-:::notice
-注册模式分两种，开放注册和授权注册。只有开放注册时，才可以客户端注册。
-- 开放注册是为了测试使用，正式环境中不推荐使用该方式注册环信账号；
-- 授权注册的流程应该是你的应用服务器通过环信提供的 REST API 注册，之后保存到你的应用服务器或返回给客户端。
-:::
 
 ## 代码下载
 
