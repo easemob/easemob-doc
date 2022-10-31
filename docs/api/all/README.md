@@ -10,5 +10,5 @@ layout: ApiLayout
 [React Native SDK API](https://sdkdocs.easemob.com/apidoc/rn/modules.html)
 [Flutter SDK API](https://sdkdocs.easemob.com/apidoc/flutter/index.html)
 [Unity SDK API](https://sdkdocs.easemob.com/apidoc/unity/annotated.html)
-[小程序 SDK API](http://webim-h5.easemob.com/jsdoc/out/connection.html)
+[小程序 SDK API](https://webim-h5.easemob.com/jsdoc/out/index.html)
 :::
