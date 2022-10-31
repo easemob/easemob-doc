@@ -58,15 +58,16 @@ Reaction 场景示例如下：
 });
 
 // 监听 Reaction 更新。
- public class MyClass implements EMMessageListener {
-     private void init() {
-         EMClient.getInstance().chatManager().addMessageListener(this);
-     }
-     @Override
-     public void onReactionChanged(List<EMMessageReactionChange> list) {
-
-     }
- }
+EMMessageListener listener = new EMMessageListener() {
+    ...
+    @Override
+    public void onReactionChanged(List<EMMessageReactionChange> messageReactionChangeList) {
+        // 处理 reaction 更新逻辑
+    }
+    ...
+};
+// 注册消息监听
+EMClient.getInstance().chatManager().addMessageListener(listener);
 ```
 
 ### 删除消息的 Reaction
@@ -95,15 +96,16 @@ EMClient.getInstance().chatManager().asyncRemoveReaction(message.getMsgId(), rea
 });
 
 // 监听 Reaction 更新。
-public class MyClass implements EMMessageListener {
-    private void init() {
-        EMClient.getInstance().chatManager().addMessageListener(this);
-    }
+EMMessageListener listener = new EMMessageListener() {
+    ...
     @Override
-    public void onReactionChanged(List<EMMessageReactionChange> list) {
-
+    public void onReactionChanged(List<EMMessageReactionChange> messageReactionChangeList) {
+        // 处理 reaction 更新逻辑
     }
- }
+    ...
+};
+// 注册消息监听
+EMClient.getInstance().chatManager().addMessageListener(listener);
 ```
 
 ### 获取消息的 Reaction 列表
@@ -126,11 +128,11 @@ EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.C
 
 ### 获取 Reaction 详情
 
-调用 `asyncgetReactionDetail` 可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，用户数量和全部用户列表。示例代码如下：
+调用 `asyncGetReactionDetail` 可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，用户数量和全部用户列表。示例代码如下：
 
 ```java
 EMClient.getInstance().chatManager().asyncGetReactionDetail(mMsgId, emojiconId,
-                pageCurosr, 30, new EMValueCallBack<EMCursorResult<EMMessageReaction>>() {
+                pageCursor, 30, new EMValueCallBack<EMCursorResult<EMMessageReaction>>() {
     @Override
     public void onSuccess(EMCursorResult<EMMessageReaction> messageReactionCursorResult) {
 

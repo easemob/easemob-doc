@@ -38,13 +38,15 @@
 
 ```java
 // 群主或群组管理员添加群组成员
+// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncAddUsersToGroup(String, String[], EMCallBack)}。
 EMClient.getInstance().groupManager().addUsersToGroup(groupId, newmembers);
 ```
 
 - 私有群成员邀请用户入群：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncInviteUser(String, String[], String, EMCallBack)}。
 EMClient.getInstance().groupManager().inviteUser(groupId, newmembers, null);
 ```
 
@@ -55,7 +57,8 @@ EMClient.getInstance().groupManager().inviteUser(groupId, newmembers, null);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncRemoveUserFromGroup(String, String, EMCallBack)}。
 EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 ```
 
@@ -68,7 +71,8 @@ EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncChangeOwner(String, String, EMValueCallBack)}。
 EMClient.getInstance().groupManager().changeOwner(groupId, newOwner);
 ```
 

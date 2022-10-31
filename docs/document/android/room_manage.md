@@ -58,6 +58,7 @@ EMChatRoom  chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(s
 
 ```java
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
+// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncFetchPublicChatRoomsFromServer(int, int, EMValueCallBack)}。
 EMPageResult<EMChatRoom> chatRooms = EMClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(pageNumber, pageSize);
 
 // 加入聊天室
@@ -81,7 +82,8 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncFetchChatRoomFromServer(String, EMValueCallBack)}。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFromServer(chatRoomId);
 ```
 
@@ -92,6 +94,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFrom
 示例代码如下：
 
 ```java
+// 异步方法。
 EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
 ```
 
@@ -113,7 +116,8 @@ options.setDeleteMessagesAsExitChatRoom(false);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncDestroyChatRoom(String, EMCallBack)}。
 EMClient.getInstance().chatroomManager().destroyChatRoom(chatRoomId);
 ```
 
@@ -179,8 +183,7 @@ public interface EMChatRoomChangeListener {
     void onOwnerChanged(final String chatRoomId, final String newOwner, final String oldOwner);
 
     // 聊天室详情有变更。聊天室的所有成员会收到该事件。
-    default void onSpecificationChanged(EMChatRoom chatRoom) {
-    }
+    default void onSpecificationChanged(EMChatRoom chatRoom) {}
     // 聊天室公告变更。聊天室的所有成员会收到该事件。
     void onAnnouncementChanged(String chatRoomId, String announcement);
 

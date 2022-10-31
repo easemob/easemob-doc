@@ -128,7 +128,7 @@ EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer
 为方便用户管理订阅关系，SDK 提供 `com.hyphenate.chat.EMPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
 ```java
-EMClient.getInstance().presenceManager().fetchSubscribedMembers(1, 50, new EMValueCallBack<List<String>>() {
+EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSize, new EMValueCallBack<List<String>>() {
     @Override
     public void onSuccess(List<String> subscribedMembers) {
         
@@ -146,7 +146,7 @@ EMClient.getInstance().presenceManager().fetchSubscribedMembers(1, 50, new EMVal
 如果不关注用户的在线状态变更，你可以调用 `com.hyphenate.chat.EMPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
 ```java
-EMClient.getInstance().presenceManager().fetchPresenceStatus(contactsFromServer, new EMValueCallBack<List<EMPresence>>() {
+EMClient.getInstance().presenceManager().fetchPresenceStatus(contactsList, new EMValueCallBack<List<EMPresence>>() {
     @Override
     public void onSuccess(List<EMPresence> presences) {
         

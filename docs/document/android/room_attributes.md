@@ -36,7 +36,8 @@
 示例代码如下：
 
 ```java
-// 同步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncFetchChatRoomAnnouncement(String, EMValueCallBack)}。
 String announcement = EMClient.getInstance().chatroomManager().fetchChatRoomAnnouncement(chatRoomId);
 ```
 
@@ -47,7 +48,8 @@ String announcement = EMClient.getInstance().chatroomManager().fetchChatRoomAnno
 示例代码如下：
 
 ```java
-// 同步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncUpdateChatRoomAnnouncement(String, String, EMCallBack)}。
 EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, announcement);
 ```
 
@@ -58,7 +60,8 @@ EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, 
 示例代码如下：
 
 ```java
-// 同步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncChangeChatRoomSubject(String, String, EMValueCallBack)}。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatRoomSubject(chatRoomId, newSubject);
 ```
 
@@ -69,7 +72,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatRoomSub
 示例代码如下：
 
 ```java
-// 同步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncChangeChatroomDescription(String, String, EMValueCallBack)}。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatroomDescription(chatRoomId, newDescription);
 ```
 
@@ -77,7 +81,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatroomDes
 
 #### 获取聊天室指定自定义属性
 
-聊天室所有成员均可调用 `asyncFetchChatroomAttributesFromServe` 方法获取聊天室指定自定义属性。
+聊天室所有成员均可调用 `asyncFetchChatroomAttributesFromServer` 方法获取聊天室指定自定义属性。
 
 示例代码如下：
 
@@ -85,27 +89,30 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatroomDes
 /**
  * 异步方法。
  *
- * @param String chatRoomId         聊天室 ID。
+ * @param String conversationId     聊天室 ID。
  * @param List<String> keyList      聊天室自定义属性的 Key 列表。传 `null` 返回所有自定义属性。
  * @param callBack                  结果回调，成功时回调 {@link EMValueCallBack#onSuccess(Object)}，
  *                                  失败时回调 {@link EMValueCallBack#onError(int, String)}。
  */
-EMClient.getInstance().chatroomManager().asyncFetchChatroomAttributesFromServe(conversationId, keyList, new EMValueCallBack<Map<String, String>>() {
-                @Override
-                public void onSuccess(Map<String, String> value) {
+EMClient.getInstance().chatroomManager().asyncFetchChatroomAttributesFromServer(
+    conversationId, 
+    keyList, 
+    new EMValueCallBack<Map<String, String>>() {
+        @Override
+        public void onSuccess(Map<String, String> value) {
 
-                }
+        }
 
-                @Override
-                public void onError(int error, String errorMsg) {
+        @Override
+        public void onError(int error, String errorMsg) {
 
-                }
-            });
+        }
+});
 ```
 
 #### 获取聊天室所有自定义属性
 
-聊天室成员可以调用 `asyncFetchChatRoomAllAttributesFromSever` 方法获取聊天室所有自定义属性。
+聊天室成员可以调用 `asyncFetchChatRoomAllAttributesFromServer` 方法获取聊天室所有自定义属性。
 
 示例代码如下：
 
@@ -113,26 +120,28 @@ EMClient.getInstance().chatroomManager().asyncFetchChatroomAttributesFromServe(c
 /**
  * 异步方法。
  *
- * @param String chatRoomId         聊天室 ID。
+ * @param String conversationId     聊天室 ID。
  * @param callBack                  结果回调，成功时回调 {@link EMValueCallBack#onSuccess(Object)}，
  *                                  失败时回调 {@link EMValueCallBack#onError(int, String)}。
  */
-EMClient.getInstance().chatroomManager().asyncFetchChatRoomAllAttributesFromSever(conversationId, new EMValueCallBack<Map<String, String>>() {
-                @Override
-                public void onSuccess(Map<String, String> value) {
+EMClient.getInstance().chatroomManager().asyncFetchChatRoomAllAttributesFromServer(
+    conversationId, 
+    new EMValueCallBack<Map<String, String>>() {
+        @Override
+        public void onSuccess(Map<String, String> value) {
 
-                }
+        }
 
-                @Override
-                public void onError(int error, String errorMsg) {
+        @Override
+        public void onError(int error, String errorMsg) {
 
-                }
-            });
+        }
+});
 ```
 
 #### 设置单个聊天室属性
 
-聊天室成员可以调用 `asyncSetChatroomAttributes` 方法设置单个聊天室自定义属性。该方法只可添加新自定义属性字段和更新自己设置的现有属性。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
+聊天室成员可以调用 `asyncSetChatroomAttribute` 方法设置单个聊天室自定义属性。该方法只可添加新自定义属性字段和更新自己设置的现有属性。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
 
 示例代码如下：
 
@@ -140,27 +149,32 @@ EMClient.getInstance().chatroomManager().asyncFetchChatRoomAllAttributesFromSeve
 /**
  * 异步方法。
  *
- * @param String  chatRoomId            聊天室 ID。
+ * @param String  conversationId        聊天室 ID。
  * @param String  attributeKey          聊天室属性的 key。
  * @param String  attributeValue        聊天室属性的 value。
  * @param boolean autoDelete            当前成员退出聊天室时是否自动删除该聊天室中其设置的所有自定义属性。
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
-EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(conversationId,attributeKey,attributeValue,false, new EMResultCallBack<Map<String, String>>() {
-                @Override
-                public void onSuccess() {
+EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(
+    conversationId,
+    attributeKey,
+    attributeValue,
+    autoDelete, 
+    new EMResultCallBack<Map<String, String>>() {
+        @Override
+        public void onSuccess() {
 
-                }
+        }
 
-                @Override
-                public void onError(int error, String errorMsg) {
+        @Override
+        public void onError(int error, String errorMsg) {
 
-                }
-            });
+        }
+});
 ```
 
-若要覆盖其他聊天室成员设置的自定义属性，需调用 `asyncSetChatroomAttributesForced` 方法。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
+若要覆盖其他聊天室成员设置的自定义属性，需调用 `asyncSetChatroomAttributeForced` 方法。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
 
 示例代码如下：
 
@@ -168,24 +182,29 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(conversationI
 /**
  * 异步方法。
  *
- * @param String  chatRoomId            聊天室 ID。
+ * @param String  conversationId        聊天室 ID。
  * @param String  attributeKey          聊天室属性的 key。
  * @param String  attributeValue        聊天室属性的 value。
  * @param boolean autoDelete            当前成员退出聊天室时是否自动删除该聊天室中其设置的所有自定义属性。
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
-EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(conversationId,attributeKey,attributeValue,false, new EMResultCallBack<Map<String, String>>() {
-                @Override
-                public void onSuccess() {
+EMClient.getInstance().chatroomManager().asyncSetChatroomAttributeForced(
+    conversationId,
+    attributeKey,
+    attributeValue,
+    autoDelete, 
+    new EMResultCallBack<Map<String, String>>() {
+        @Override
+        public void onSuccess() {
 
-                }
+        }
 
-                @Override
-                public void onError(int error, String errorMsg) {
+        @Override
+        public void onError(int error, String errorMsg) {
 
-                }
-            });
+        }
+});
 ```
 
 #### 设置多个聊天室自定义属性
@@ -198,26 +217,26 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(conver
 /**
  * 异步方法。
  *
- * @param String chatRoomId             聊天室 ID。
- * @param Map<String,String> map        聊天室自定义属性集合，为键值对（key-value）结构。
- * @param boolean autoDelete            当前成员退出聊天室时是否自动删除该聊天室中其设置的所有自定义属性。
+ * @param String conversationId             聊天室 ID。
+ * @param Map<String,String> attributeMap   聊天室自定义属性集合，为键值对（key-value）结构。
+ * @param boolean autoDelete                当前成员退出聊天室时是否自动删除该聊天室中其设置的所有自定义属性。
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
-    EMClient.getInstance().chatroomManager().asyncSetChatroomAttributes(conversationId, map, false, new EMResultCallBack<Map<String, String>>() {
-                @Override
-                public void onSuccess(int code,Map<String, String> value) {
-                    if (code == 0){ // onSuccess 返回值 code 为 0，表明自定义属性成功添加。
-                    }else { // onSuccess 返回值不为 0，表明一些自定义属性因长度超限等原因添加失败。
+EMClient.getInstance().chatroomManager().asyncSetChatroomAttributes(
+    conversationId, 
+    attributeMap, 
+    autoDelete, 
+    new EMResultCallBack<Map<String, Integer>>() {
+        @Override
+        public void onResult(int code, Map<String, Integer> value) {
+            if (code == EMError.EM_NO_ERROR) { // onResult 返回值 code 为 EMError.EM_NO_ERROR，表明自定义属性成功添加。
 
-                    }
-                }
+            }else { // onResult 返回值不为 EMError.EM_NO_ERROR，表明一些自定义属性因长度超限等原因添加失败。
 
-                @Override
-                public void onError(int error, String errorMsg) {
-
-                }
-            });
+            }
+        }
+});
 ```
 
 若要覆盖其他聊天室成员设置的自定义属性，需调用 `asyncSetChatroomAttributesForced` 方法。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
@@ -228,32 +247,31 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(conver
 /**
  * 异步方法。
  *
- * @param String chatRoomId             聊天室 ID。
- * @param Map<String,String> map        聊天室自定义属性集合，为键值对（key-value）结构。
- * @param boolean autoDelete            当前成员退出聊天室时是否自动删除该聊天室中其设置的所有自定义属性。
+ * @param String conversationId             聊天室 ID。
+ * @param Map<String,String> attributeMap   聊天室自定义属性集合，为键值对（key-value）结构。
+ * @param boolean autoDelete                当前成员退出聊天室时是否自动删除该聊天室中其设置的所有自定义属性。
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
-    EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(conversationId, map, false, new EMResultCallBack<Map<String, String>>() {
-                @Override
-                public void onSuccess(int code,Map<String, String> value) {
-                    if (code == 0){ // onSuccess 返回值 code 为 0，表明自定义属性成功添加。
+EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(
+    conversationId, 
+    attributeMap, 
+    autoDelete, 
+    new EMResultCallBack<Map<String, Integer>>() {
+        @Override
+        public void onResult(int code, Map<String, Integer> value) {
+            if (code == EMError.EM_NO_ERROR) { // onResult 返回值 code 为 EMError.EM_NO_ERROR，表明自定义属性成功添加。
 
-                    }else { // onSuccess 返回值不为 0，表明一些自定义属性因长度超限等原因添加失败。
+            }else { // onResult 返回值不为 EMError.EM_NO_ERROR，表明一些自定义属性因长度超限等原因添加失败。
 
-                    }
-                }
-
-                @Override
-                public void onError(int error, String errorMsg) {
-
-                }
-            });
+            }
+        }
+});
 ```
 
 #### 删除单个聊天室自定义属性
 
-聊天室成员可以调用 `asyncRemoveChatRoomAttributesFromSever` 方法删除单个聊天室自定义属性。该方法只能删除自己设置的自定义属性。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
+聊天室成员可以调用 `asyncRemoveChatRoomAttributeFromServer` 方法删除单个聊天室自定义属性。该方法只能删除自己设置的自定义属性。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
 
 示例代码如下：
 
@@ -261,25 +279,22 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(conver
 /**
  * 异步方法。
  *
- * @param String chatRoomId         聊天室 ID。
- * @param String attributeKey       聊天室属性的 key。
- * @param callBack                  结果回调，成功时回调 {@link EMResultCallBack#onSuccess(int,Object)}，
- *                                  失败时回调 {@link EMResultCallBack#onError(int, String)}。
+ * @param String conversationId     聊天室 ID。
+ * @param String key                聊天室属性的 key。
+ * @param callBack                  结果回调，回调 {@link EMResultCallBack#onResult(int, Object)}。
  */
-EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromSever(conversationId,attributeKey, new EMResultCallBack<Map<String, String>>() {
-                    @Override
-                    public void onSuccess(int code,Map<String, String> value) {
+EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServer(
+    conversationId,
+    key, 
+    new EMResultCallBack<Map<String, Integer>>() {
+        @Override
+        public void onResult(int code, Map<String, Integer> value) {
 
-                    }
-
-                    @Override
-                    public void onError(int error, String errorMsg) {
-
-                    }
-                });
+        }
+});
 ```
 
-若要删除其他聊天室成员设置的自定义属性，需调用 `asyncRemoveChatRoomAttributesFromSeverForced` 方法。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
+若要删除其他聊天室成员设置的自定义属性，需调用 `asyncRemoveChatRoomAttributeFromServerForced` 方法。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
 
 示例代码如下：
 
@@ -287,27 +302,24 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromSever(
 /**
  * 异步方法。
  *
- * @param String chatRoomId         聊天室 ID。
- * @param String attributeKey       聊天室属性的 key。
- * @param callBack                  结果回调，成功时回调 {@link EMResultCallBack#onSuccess(int,Object)}，
- *                                  失败时回调 {@link EMResultCallBack#onError(int, String)}。
+ * @param String conversationId     聊天室 ID。
+ * @param String key                聊天室属性的 key。
+ * @param callBack                  结果回调，成功时回调 {@link EMResultCallBack#onResult(int, Object)}。
  */
-EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromSeverForced(conversationId,attributeKey, new EMResultCallBack<Map<String, String>>() {
-                    @Override
-                    public void onSuccess() {
+EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServerForced(
+    conversationId,
+    key, 
+    new EMResultCallBack<Map<String, Integer>>() {
+        @Override
+        public void onResult(int code, Map<String, Integer> value) {
 
-                    }
-
-                    @Override
-                    public void onError(int error, String errorMsg) {
-
-                    }
-                });
+        }
+});
 ```
 
 #### 删除多个聊天室自定义属性
 
-聊天室成员可以调用 `asyncRemoveChatRoomAttributesFromSever` 方法删除多个聊天室自定义属性。该方法只能删除自己设置的自定义属性。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
+聊天室成员可以调用 `asyncRemoveChatRoomAttributesFromServer` 方法删除多个聊天室自定义属性。该方法只能删除自己设置的自定义属性。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
 
 示例代码如下：
 
@@ -320,7 +332,7 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromSeverF
  * @param callBack                  结果回调，成功时回调 {@link EMResultCallBack#onSuccess(int,Object)}，
  *                                  失败时回调 {@link EMResultCallBack#onError(int, String)}。
  */
-EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromSever(conversationId,keyList, new EMResultCallBack<Map<String, String>>() {
+EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromServer(conversationId,keyList, new EMResultCallBack<Map<String, String>>() {
                     @Override
                     public void onSuccess(int code,Map<String, String> value) {
 
@@ -333,7 +345,7 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromSever(
                 });
 ```
 
-若要删除其他聊天室成员设置的自定义属性，需调用 `asyncRemoveChatRoomAttributesFromSeverForced` 方法。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
+若要删除其他聊天室成员设置的自定义属性，需调用 `asyncRemoveChatRoomAttributesFromServerForced` 方法。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
 
 示例代码如下：
 
@@ -341,22 +353,19 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromSever(
 /**
  * 异步方法。
  *
- * @param String chatRoomId         聊天室 ID。
+ * @param String conversationId     聊天室 ID。
  * @param List<String> keyList      聊天室自定义属性的 key 列表。
- * @param callBack                  结果回调，成功时回调 {@link EMResultCallBack#onSuccess(int,Object)}，
- *                                  失败时回调 {@link EMResultCallBack#onError(int, String)}。
+ * @param callBack                  结果回调，成功时回调 {@link EMResultCallBack#onResult(int, Object)}。
  */
-EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromSeverForced(conversationId,keyList, new EMResultCallBack<Map<String, String>>() {
-                    @Override
-                    public void onSuccess(int code,Map<String, String> value) {
+EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromServerForced(
+    conversationId,
+    keyList, 
+    new EMResultCallBack<Map<String, Integer>>() {
+        @Override
+        public void onResult(int code,Map<String, Integer> value) {
 
-                    }
-
-                    @Override
-                    public void onError(int error, String errorMsg) {
-
-                    }
-                });
+        }
+});
 ```
 
 ### 监听聊天室事件

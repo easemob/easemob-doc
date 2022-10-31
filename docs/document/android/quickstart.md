@@ -216,7 +216,8 @@ EMClient.getInstance().init(context, options);
 
 ```java
 // 注册失败会抛出 HyphenateException。
-EMClient.getInstance().createAccount(mAccount, mPassword);//同步方法。
+// 同步方法，会阻塞当前线程。
+EMClient.getInstance().createAccount(mAccount, mPassword);
 ```
 
 :::notice
