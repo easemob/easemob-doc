@@ -57,18 +57,16 @@ message.setChatType(ChatType.GroupChat);
 2. 通过 `EMChatManager` 将该消息发出。发送消息时可以设置 `EMCallBack` 的实例，获取消息发送状态。
 
 ```java
-// 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+...
 // 发送消息时可以设置 `EMCallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
 message.setMessageStatusCallback(new EMCallBack() {
      @Override
      public void onSuccess() {
-         showToast("发送消息成功");
-          dialog.dismiss();
+         // 发送消息成功
      }
      @Override
      public void onError(int code, String error) {
-         showToast("发送消息失败");
+         // 发送消息失败
      }
      @Override
      public void onProgress(int progress, String status) {
@@ -76,6 +74,7 @@ message.setMessageStatusCallback(new EMCallBack() {
      }
 
  });
+ // 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
@@ -96,7 +95,9 @@ EMMessageListener msgListener = new EMMessageListener() {
 
    }
 };
+// 注册消息监听
 EMClient.getInstance().chatManager().addMessageListener(msgListener);
+// 解注册消息监听
 EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 ```
 
@@ -156,10 +157,11 @@ void onMessageRecalled(List<ChatMessage> messages);
 ```java
 // `voiceUri` 为语音文件的本地资源标志符，`duration` 为语音时长（秒）。
 EMMessage message = EMMessage.createVoiceSendMessage(voiceUri, duration, toChatUsername);
-    // 设置消息类型，即设置 `Message` 类的 `MessageType` 属性。
-    // 该属性的值为 `Chat`、`Group` 和 `Room`，表明该消息是单聊，群聊或聊天室消息，默认为单聊。
-    // 若为群聊，设置 `MessageType` 为 `Group`。
-    message.setChatType(ChatType.GroupChat);
+// 设置消息类型，即设置 `Message` 类的 `MessageType` 属性。
+// 该属性的值为 `Chat`、`Group` 和 `Room`，表明该消息是单聊，群聊或聊天室消息，默认为单聊。
+// 若为群聊，设置 `MessageType` 为 `Group`。
+message.setChatType(ChatType.GroupChat);
+// 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
@@ -173,10 +175,6 @@ String voiceRemoteUrl = voiceBody.getRemoteUrl();
 Uri voiceLocalUri = voiceBody.getLocalUri();
 ```
 
-:::notice
-适配 AndroidQ 及以上手机时，获取本地资源请调用 `voiceBody.getLocalUri()`，相应的 `voiceBody.getLocalUrl()` 方法已经被废弃。
-:::
-
 #### 发送图片消息
 
 图片消息默认会被压缩后发出，可通过设置 `original` 参数为 `true` 发送原图。
@@ -184,11 +182,13 @@ Uri voiceLocalUri = voiceBody.getLocalUri();
 
 ```java
 // `imageUri` 为图片本地资源标志符，`false` 为不发送原图（默认超过 100 KB 的图片会压缩后发给对方），需要发送原图传 `true`。
-EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
+EMMessage message = EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
 if (chatType == CHATTYPE_GROUP)
     message.setChatType(ChatType.GroupChat);
+// 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
+
 // 发送成功后，获取图片消息缩略图及附件。
 EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
 // 从服务器端获取图片文件。
@@ -201,10 +201,6 @@ Uri imgLocalUri = imgBody.getLocalUri();
 Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```
 
-:::notice
-适配 AndroidQ 及以上手机时，获取本地资源请调用 `imgBody.getLocalUri()`，相应的 `imgBody.getLocalUrl()` 方法已经被废弃。
-:::
-
 接收方如果设置了自动下载，即 `EMClient.getInstance().getOptions().getAutodownloadThumbnail()` 为 `true`，SDK 接收到消息后会下载缩略图；如果未设置自动下载，需主动调用 `EMClient.getInstance().chatManager().downloadThumbnail(message`) 下载。
 
 下载完成后，调用相应消息 `body` 的 `thumbnailLocalUri()` 去获取缩略图路径。
@@ -216,7 +212,8 @@ Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```java
 String thumbPath = getThumbPath(videoUri);
 EMMessage message = EMMessage.createVideoSendMessage(videoUri, thumbPath, videoLength, toChatUsername);
-sendMessage(message);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
 接收方收到短视频消息后，SDK 默认会下载该视频消息的缩略图。
@@ -245,6 +242,7 @@ private void downloadVideo(final EMMessage message) {
         public void onError(final int error, String msg) {
         }
     });
+    // 下载附件
     EMClient.getInstance().chatManager().downloadAttachment(message);
 }
 ```
@@ -267,7 +265,10 @@ Uri localThumbUri = ((EMVideoMessageBody) body).getLocalThumbUri();
 // `fileLocalUri` 为本地资源标志符。
 EMMessage message = EMMessage.createFileSendMessage(fileLocalUri, toChatUsername);
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
-if (chatType == CHATTYPE_GROUP)    message.setChatType(ChatType.GroupChat);EMClient.getInstance().chatManager().sendMessage(message);
+if (chatType == CHATTYPE_GROUP)    
+    message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
 发送成功后，获取文件消息附件：
@@ -280,10 +281,6 @@ String fileRemoteUrl = fileMessageBody.getRemoteUrl();
 Uri fileLocalUri = fileMessageBody.getLocalUri();
 ```
 
-:::notice
-适配 AndroidQ 及以上手机时，获取本地资源请调用 `fileMessageBody.getLocalUri()`，相应的 `fileMessageBody.getLocalUrl()` 方法已经被废弃。
-:::
-
 发送附件类型消息时，可以在 `onProgress` 回调中获取附件上传的进度，以百分比表示，示例代码如下：
 
 ```java
@@ -291,22 +288,22 @@ Uri fileLocalUri = fileMessageBody.getLocalUri();
  message.setMessageStatusCallback(new EMCallBack() {
      @Override
      public void onSuccess() {
-         showToast("发送消息成功");
+         // 发送消息成功
           dialog.dismiss();
      }
      @Override
      public void onError(int code, String error) {
-         showToast("发送消息失败");
+         // 发送消息失败
      }
 
- // 消息发送的状态，这里只用于附件类型的消息。
+     // 消息发送的状态，这里只用于附件类型的消息。
      @Override
      public void onProgress(int progress, String status) {
-
 
      }
 
  });
+ // 发送消息
  EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
@@ -347,7 +344,10 @@ Uri imgLocalUri = imgBody.getLocalUri();
 // `latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容。
 EMMessage message = EMMessage.createLocationSendMessage(latitude, longitude, locationAddress, toChatUsername);
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
-if (chatType == CHATTYPE_GROUP)    message.setChatType(ChatType.GroupChat);EMClient.getInstance().chatManager().sendMessage(message);
+if (chatType == CHATTYPE_GROUP)    
+    message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
 ### 发送透传消息
@@ -356,19 +356,21 @@ if (chatType == CHATTYPE_GROUP)    message.setChatType(ChatType.GroupChat);EMCli
 
 ```java
 EMMessage cmdMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
-        // 支持单聊、群聊和聊天室，默认为单聊。
-        // 若为群聊，添加下行代码。
-        cmdMsg.setChatType(EMMessage.ChatType.GroupChat);
-       // 若为聊天室，添加下行代码。
-       // cmdMsg.setChatType(EMMessage.ChatType.ChatRoom);
+// 支持单聊、群聊和聊天室，默认为单聊。
+// 若为群聊，添加下行代码。
+cmdMsg.setChatType(EMMessage.ChatType.GroupChat);
+// 若为聊天室，添加下行代码。
+// cmdMsg.setChatType(EMMessage.ChatType.ChatRoom);
 
-        String action="action1";
-        // `action` 可以自定义。
-        EMCmdMessageBody cmdBody = new EMCmdMessageBody(action);
-        String toUsername = "test1";
-        // 发送给特定用户。
-        cmdMsg.setTo(toUsername);cmdMsg.addBody(cmdBody);
-        EMClient.getInstance().chatManager().sendMessage(cmdMsg);
+String action="action1";
+// `action` 可以自定义。
+EMCmdMessageBody cmdBody = new EMCmdMessageBody(action);
+String toUsername = "test1";
+// 发送给特定用户。
+cmdMsg.setTo(toUsername);
+cmdMsg.addBody(cmdBody);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(cmdMsg);
 ```
 
 请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
@@ -490,7 +492,7 @@ private void cancelTimer() {
 ```java
 EMMessage customMessage = EMMessage.createSendMessage(EMMessage.Type.CUSTOM);
 // `event` 为需要传递的自定义消息事件，比如礼物消息，可以设置：
-event = "gift";
+String event = "gift";
 EMCustomMessageBody customBody = new EMCustomMessageBody(event);
 // `params` 类型为 `Map<String, String>`。
 customBody.setParams(params);
@@ -499,6 +501,7 @@ customMessage.addBody(customBody);
 customMessage.setTo(to);
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
 customMessage.setChatType(chatType);
+// 发送消息
 EMClient.getInstance().chatManager().sendMessage(customMessage);
 ```
 
