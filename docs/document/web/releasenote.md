@@ -33,7 +33,7 @@
 - [IM SDK] 修复 IE 浏览器的兼容性问题。
 - [IM SDK] 修复 IM Uniapp 在手机上运行时上报 `addEventListener` 方法相关错误的问题。
 
-## 版本 V4.0.9 Dev 2022-7-29（开发版）
+## 版本 V4.0.9 2022-7-29
 
 ### 新增特性
 
@@ -45,9 +45,10 @@
 - [IM SDK] 优化协议，减少数据量。
 - [IM SDK] 修复某些情况下消息延迟。
 
-## 版本 V4.0.8 Dev 2022-6-17
+## 版本 V4.0.8 2022-6-17
 
 ### 新增特性
+
 - [IM SDK] 新增群组事件回调 [onGroupEvent](https://webim-h5.easemob.com/jsdoc/out/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://webim-h5.easemob.com/jsdoc/out/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
 - [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](error.html)
 - [IM SDK] 邀请加入群聊回调 onGroupChange 返回中新增 群名称 参数值。
@@ -59,7 +60,7 @@
   - 白名单相关的方法名中的 `Whitelist` 修改为 `Allowlist`，如 `getGroupWhitelist` 修改为 `getGroupAllowlist`；
   - 黑名单相关的方法名中的 `Blacklist` 修改为 `Blocklist`，如 `getGroupBlacklist` 修改为 `getGroupBlocklist`。
 
-## 版本 V4.0.7 Dev 2022-5-25
+## 版本 V4.0.7 2022-5-25
 
 ### 新增特性:
 
@@ -70,7 +71,7 @@
 
 - [IM SDK] 消息事件监听器中新增 onlineState 字段标记消息的在线状态。
 
-## 版本 V4.0.5 Dev 2022-5-16
+## 版本 V4.0.5 2022-5-16
 
 ### 新增特性:
 
@@ -89,7 +90,7 @@
 
 - [IM SDK] 解决切换账号群组消息有缓存的 BUG。
 
-## 版本 V4.0.4 Dev 2022-4-19
+## 版本 V4.0.4 2022-4-19
 
 ### 新增特性:
 
@@ -106,7 +107,7 @@
 - [IM SDK] 修复创建群组时无法修改群简介问题。
 - [IM SDK] 修复 SSR 兼容性。
 
-## 版本：v4.0.3 2022-1-19（稳定版）
+## 版本：v4.0.3 2022-1-19
 
 - [IM SDK] 修复缺失 'downloadGroupSharedFile' 方法。
 - [IM SDK] 'fetchGroupSharedFileList' 支持分页。
