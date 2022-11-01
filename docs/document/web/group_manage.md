@@ -33,8 +33,8 @@
 
 创建群组时，需设置以下参数：
 
-| 参数                | 类型   | 描述                                                                                                                                                                                                                                                                   |
-| :------------------ | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 参数                | 类型   | 描述          |
+| :------------- | :----- | :--------------------------------------------- |
 | `groupname`         | String | 群组名称。                                                                                                                                                                                                                                                             |
 | `desc`              | String | 群组描述。                                                                                                                                                                                                                                                             |
 | `members`           | Array  | 群成员的用户 ID 组成的数组。                                                                                                                                                                                                                                           |
@@ -66,10 +66,6 @@ conn.createGroup(option).then((res) => console.log(res));
 
 公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于 `allowinvites` 选项的设置：
 
-邀请用户入群的流程图如下：
-
-![img](@static/images/web/8.png)
-
 邀请用户加群流程如下：
 
 1. 群成员调用 `inviteUsersToGroup` 方法邀请用户入群。
@@ -87,15 +83,15 @@ conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 
      - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
 
-```javascript
-conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
-```
+     ```javascript
+     conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
+     ```
 
-    - 受邀用户拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。邀请人会收到 `rejectInvite` 事件。
+     - 受邀用户拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。邀请人会收到 `rejectInvite` 事件。
 
-```javascript
-conn.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
-```
+     ```javascript
+     conn.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
+     ```
 
 3、用户加入群组后，可以收发群消息。
 
