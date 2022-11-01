@@ -23,9 +23,9 @@
 
 3. 下载 Demo，注册账号。
 
-![img](@static/images/android/app-demo-config.jpeg)
+![img](@static/images/android/app-demo-config.png)
 
-如果需要使用自己的 App Key，需要修改 GitHub 中的代码。
+如果需要使用自己的 App Key，需要修改 [GitHub 中的代码](https://github.com/easemob/chat-android)。
 
 ## 代码下载
 
