@@ -295,7 +295,7 @@ module.exports = {
                 { text: '字节跳动小程序', link: 'bytedance.html' },
                 { text: '支付宝小程序', link: 'alipay.html' },
                 { text: 'Uniapp 全平台', link: 'uniapp.html' },
-                { text: '小程 API 文档', link: 'apidoc.html' },
+                { text: '小程序 API 文档', link: 'apidoc.html' },
               ],
               only: ['applet']
             },
