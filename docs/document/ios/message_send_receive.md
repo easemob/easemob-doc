@@ -52,7 +52,7 @@ EMTextMessageBody *textMessageBody = [[TextMessageBody alloc] initWithText:conte
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:textMessageBody ext:messageExt];
 // 构造消息时需设置 `EMChatMessage` 类的 `ChatType` 属性。该属性的值为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，表明该消息是单聊、群聊或聊天室消息，默认为单聊。例如，设置消息类型为单聊消息即设置 `ChatType` 为 `EMChatTypeChat`。
 message.chatType = EMChatTypeChat;
-// 发送消息。
+// 发送消息，异步方法。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 // 发送消息时可以设置发送回调，获得消息发送状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {
@@ -100,6 +100,7 @@ message.chatType = EMChatTypeChat;
 消息撤回功能指用户可以撤回一定时间内自己发送出去的消息，消息撤回时限默认 2 分钟。如需调整，可联系商务。
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].chatManager recallMessageWithMessageId:messageId completion:^(EMError *aError) {
     if (!aError) {
         NSLog(@"撤回消息成功");
