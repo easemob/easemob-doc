@@ -47,6 +47,7 @@ userInfo.sign = @"hello world";
 userInfo.phone = @"12333333333";
 userInfo.mail = @"123456@qq.com";
 userInfo.gender = 1;
+// 异步方法
 [EMClient.sharedClient.userInfoManager updateOwnUserInfo:userInfo completion:^(EMUserInfo *aUserInfo, EMError *aError)
 
 }];
@@ -84,6 +85,7 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 
 ```objectivec
 // 获取用户所有属性，一次调用用户 ID 数量不能超过 100。
+// 异步方法
 [[EMClient sharedClient].userInfoManager fetchUserInfoById:@[EMClient.sharedClient.currentUsername] 		completion:^(NSDictionary *aUserDatas, EMError *aError) {
 }];
 ```
@@ -92,6 +94,7 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 // 获取指定用户的指定用户属性。
 NSString *userIds = @[@"user1",@"user2"];
 NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTypePhone),@(EMUserInfoTypeMail)];
+// 异步方法
 [[EMClient sharedClient].userInfoManager fetchUserInfoById:userIds type:userInfoTypes completion:^(NSDictionary *aUserDatas, EMError *aError) {
 
 }];
@@ -121,6 +124,7 @@ NSDictionary *messageExt = @{@"userId":EMClient.sharedClient.currentUsername,
                            @"avatar":@"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMDemo/avatar/Image1.png"
                         };
 body.ext = messageExt;
+// 异步方法
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"conversationID"
                                                 from:@"sender"
                                                 to:@"receiver"

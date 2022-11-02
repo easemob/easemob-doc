@@ -44,6 +44,7 @@
 
 ```objectivec
 EMError *error = nil;
+// 同步方法，异步方法见 [EMChatroomManager createChatroomWithSubject:description:invitees:message:maxMembersCount:completion]
 EMChatroom *retChatroom = [[EMClient sharedClient].roomManager createChatroomWithSubject:@"aSubject" description:@"aDescription" invitees:@[@"user1",@[user2]]message:@"aMessage" maxMembersCount:aMaxMembersCount error:&error];
 ```
 
@@ -58,12 +59,12 @@ EMChatroom *retChatroom = [[EMClient sharedClient].roomManager createChatroomWit
 
 ```objectivec
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
-EMError *error = nil;
-[[EMClient sharedClient].roomManager getChatroomsFromServerWithPage:1 pageSize:50 error:&error];
+// 异步方法
+[[EMClient sharedClient].roomManager getChatroomsFromServerWithPage:1 pageSize:50 completion:nil];
 
 // 加入聊天室
-EMError *error = nil;
-[[EMClient sharedClient].roomManager joinChatroom:@"aChatroomId" error:&error];
+// 异步方法
+[[EMClient sharedClient].roomManager joinChatroom:@"aChatroomId" completion:nil];
 ```
 
 ### 获取聊天室详情
@@ -73,8 +74,8 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-EMError *error = nil;
-EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecificationFromServerWithId:@“chatroomId” error:&error];
+// 异步方法
+EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecificationFromServerWithId:@“chatroomId” completion:nil];
 ```
 
 ### 退出聊天室
@@ -84,8 +85,8 @@ EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecifica
 示例代码如下：
 
 ```objectivec
-EMError *error = nil;
-[EMClient sharedClient].roomManager leaveChatroom:@"aChatroomId" error:&error];
+// 异步方法
+[EMClient sharedClient].roomManager leaveChatroom:@"aChatroomId" completion:nil];
 ```
 
 退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `isDeleteMessagesWhenExitChatRoom` 设置为 `NO`。
@@ -110,8 +111,8 @@ retOpt.isDeleteMessagesWhenExitChatRoom = NO;
 示例代码如下：
 
 ```objectivec
-EMError *error = nil;
-[[EMClient sharedClient].roomManager destroyChatroom:self.chatroom.chatroomId error:&error];
+// 异步方法
+[[EMClient sharedClient].roomManager destroyChatroom:self.chatroom.chatroomId completion:nil];
 ```
 
 ### 监听聊天室事件

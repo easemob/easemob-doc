@@ -27,6 +27,7 @@
 调用 `getConversationsFromServer` 从服务端获取会话。我们建议在 app 安装时，或本地没有会话时调用该 API。否则调用 `LoadAllConversations` 即可。示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].chatManager getConversationsFromServer:^(NSArray *aCoversations, EMError *aError) {
    if (!aError) {
       for (EMConversation *conversation in aCoversations) {
@@ -41,6 +42,7 @@
 从服务器分页获取指定会话的历史消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。建议每次获取少于 50 条消息，可多次获取。拉取后默认 SDK 会自动将消息更新到本地数据库。
 
 ```objectivec
+// 异步方法
  [[EMClient.sharedClient].chatManager asyncFetchHistoryMessagesFromServer:conversation.conversationId conversationType:conversation.type startMessageId:self.moreMsgId pageSize:10 completion:^(EMCursorResult *aResult, EMError *aError) {
              [self.conversation loadMessagesStartFromId:self.moreMsgId count:10 searchDirection:EMMessageSearchDirectionUp completion:block];
           }];
