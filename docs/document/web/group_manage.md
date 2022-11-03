@@ -147,7 +147,7 @@ conn.listGroupMembers(option).then((res) => console.log(res));
 
 ```javascript
 conn.getJoinedGroups({
-  pageNum: 1,
+  pageNum: 0,
   pageSize: 20,
   needAffiliations: true,
   needRole: true,
