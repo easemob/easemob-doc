@@ -286,7 +286,7 @@ message.chatType = EMChatTypeGroupChat;
 
 ### 发送透传消息
 
-可以把透传消息理解为一条指令，通过发送这条指令给对方，通知对方要执行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。另外，以 “em_” 和 “easemob::” 开头的 `action` 为内部保留字段，注意不要使用。
+可以把透传消息理解为一条指令，通过发送这条指令给对方，通知对方要执行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。另外，以 “em\_” 和 “easemob::” 开头的 `action` 为内部保留字段，注意不要使用。
 
 透传消息适用于更新头像、更新昵称等场景。
 
@@ -315,12 +315,113 @@ EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:action];
   }
 ```
 
+#### 通过透传消息实现输入指示器
+
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
+
+你可以通过透传消息实现输入指示器。
+
+下图为输入指示器的工作原理。
+
+![img](@static/images/common/typing_indicator.png)
+
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+
+:::notice
+用户 A 可根据需要设置透传消息发送间隔。
+:::
+
+以下示例代码展示如何发送输入状态的透传消息。
+
+```objectivec
+//发送表示正在输入的透传消息
+#define MSG_TYPING_BEGIN @"TypingBegin"
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    long long currentTimestamp = [self getCurrentTimestamp];
+    // 5 秒内不能重复发送消息
+    if ((currentTimestamp - _previousChangedTimeStamp) > 5) {
+        // 发送开始输入的透传消息
+        [self _sendBeginTyping];
+        _previousChangedTimeStamp = currentTimestamp;
+    }
+}
+
+- (void)_sendBeginTyping
+{
+    EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:MSG_TYPING_BEGIN];
+    body.isDeliverOnlineOnly = YES;
+    EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId body:body ext:nil];
+    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+}
+
+```
+
+以下示例代码展示如何接受和解析输入状态的透传消息。
+
+```objectivec
+#define TypingTimerCountNum 10
+- (void)cmdMessagesDidReceive:(NSArray *)aCmdMessages
+{
+    NSString *conId = self.currentConversation.conversationId;
+    for (EMChatMessage *message in aCmdMessages) {
+        if (![conId isEqualToString:message.conversationId]) {
+            continue;
+        }
+        EMCmdMessageBody *body = (EMCmdMessageBody *)message.body;
+        // 收到正在输入的透传消息
+        if ([body.action isEqualToString:MSG_TYPING_BEGIN]) {
+            if (_receiveTypingCountDownNum == 0) {
+                [self startReceiveTypingTimer];
+            }else {
+                _receiveTypingCountDownNum = TypingTimerCountNum;
+            }
+        }
+
+    }
+}
+
+- (void)startReceiveTypingTimer {
+    [self stopReceiveTypingTimer];
+    _receiveTypingCountDownNum = TypingTimerCountNum;
+    _receiveTypingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startReceiveCountDown) userInfo:nil repeats:YES];
+
+    [[NSRunLoop currentRunLoop] addTimer:_receiveTypingTimer forMode:UITrackingRunLoopMode];
+    [_receiveTypingTimer fire];
+    // 这里需更新 UI，显示“对方正在输入”
+}
+
+- (void)startReceiveCountDown
+{
+    if (_receiveTypingCountDownNum == 0) {
+        [self stopReceiveTypingTimer];
+        // 这里需更新 UI，不再显示“对方正在输入”
+
+        return;
+    }
+    _receiveTypingCountDownNum--;
+}
+
+- (void)stopReceiveTypingTimer {
+    _receiveTypingCountDownNum = 0;
+    if (_receiveTypingTimer) {
+        [_receiveTypingTimer invalidate];
+        _receiveTypingTimer = nil;
+    }
+}
+```
+
 ### 发送自定义类型消息
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。自定义消息内容是 key，value 格式，你需要自己添加并解析该内容。
 
 ```objectivec
-// event 为需要传递的自定义消息事件，比如名片消息，可以设置 "userCard"； `ext` 为事件扩展字段，比如可以设置 `uid`，`nickname`，`avatar`。
+// event 为需要传递的自定义消息事件，比如名片消息，可以设置 "userCard"；`ext` 为事件扩展字段，比如可以设置 `uid`，`nickname`，`avatar`。
 EMCustomMessageBody* body = [[EMCustomMessageBody alloc] initWithEvent:@"userCard" ext:@{@"uid":aUid ,@"nickname":aNickName,@"avatar":aUrl}];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
 message.chatType = EMChatTypeChat;
