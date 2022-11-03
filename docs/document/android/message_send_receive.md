@@ -392,7 +392,7 @@ EMMessageListener msgListener = new EMMessageListener(){
 
 输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
 
-下图为输入指示器的工作原理。
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
 
 ![img](@static/images/common/typing_indicator.png)
 

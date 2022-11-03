@@ -180,7 +180,7 @@ class ChatMessageCallback implements ChatMessageStatusCallback {
 
 输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，设定对聊天应用程序中新交互的期望。你可以通过透传消息实现输入指示器。
 
-下图为输入指示器的工作原理。
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
 
 ![img](@static/images/common/typing_indicator.png)
 
