@@ -73,6 +73,41 @@ function sendTextMessage() {
 - 聊天室：`to` 为聊天室 ID`；`chatType` 为 `chatRoom`。
 :::
 
+#### 设置聊天室消息优先级
+
+环信即时通讯提供聊天室消息分级功能，将消息的优先级划分为高、普通和低三种级别。设置后，高优先级的消息会优先送达，确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。
+
+你可以将指定的聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
+
+若要设置聊天室消息优先级，可以在发送各类消息的方法中的 `option` 对象中传 `priority` 属性。如果不传该属性，默认值为 `normal`，即“普通”优先级。
+
+在聊天室中发送高优先级的文本消息的示例代码如下：
+
+```javascript
+// 发送文本消息。
+function sendTextMessage() {
+    let option = {
+        // 设置消息类型。
+        type: "txt",
+        // 设置消息内容。
+        msg: "message content",
+        // 设置消息内容。
+        priority: "high"
+        // 设置聊天室 ID。
+        to: "chat room ID",
+        // 设置会话类型。
+        chatType: "chatRoom",
+    };
+    // 创建文本消息。
+    let msg = WebIM.message.create(opt);
+    // 调用 `send` 方法发送该文本消息。
+    conn.send(msg).then(()=>{
+        console.log("Send message success");
+    }).catch((e)=>{
+        console.log("Send message fail");
+    });
+}
+```
 ### 接收消息
 
 你可以通过 `addEventHandler` 注册监听器监听消息事件。你可以添加多个事件。当不再监听事件时，请确保删除监听器。
