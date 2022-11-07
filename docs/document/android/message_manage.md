@@ -14,7 +14,6 @@
 - `deleteConversation` 删除本地存储的会话；
 - `conversation.getUnreadMsgCount` 获取指定会话的未读消息数；
 - `chatManager().getUnreadMessageCount` 获取所有未读消息数；
-- `deleteConversationFromServer` 删除服务端的会话和聊天记录；
 - `searchMsgFromDB` 在本地存储的消息中搜索；
 - `insertMessage` 在指定会话中写入消息。
 
@@ -80,14 +79,12 @@ conversation.markMessageAsRead(messageId);
 EMClient.getInstance().chatManager().markAllConversationsAsRead();
 ```
 
-### 删除会话及聊天记录
+### 删除会话及历史消息
 
-SDK 提供两个接口，分别可以删除本地会话和聊天记录或者删除当前用户在服务器端的会话和聊天记录。
-
-- 删除本地会话和聊天记录示例代码如下：
+你可以删除本地会话和历史消息，示例代码如下：
 
 ```java
-// 删除和特定用户的会话，如果需要保留聊天记录，传 `false`。
+// 删除和特定用户的会话，如果需要保留历史消息，传 `false`。
 EMClient.getInstance().chatManager().deleteConversation(username, true);
 ```
 
@@ -97,22 +94,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 conversation.removeMessage(deleteMsg.msgId);
 ```
 
-- 删除服务器端会话和聊天记录，示例代码如下：
-
-```java
-// 删除指定会话，如果需要保留聊天记录，`isDeleteServerMessages` 传 `false`。
-EMClient.getInstance().chatManager().deleteConversationFromServer(conversationId, conversationType, isDeleteServerMessages, new EMCallBack() {
-    @Override
-    public void onSuccess() {
-
-    }
-
-    @Override
-    public void onError(int code, String error) {
-
-    }
-});
-```
+删除服务端的会话及其历史消息，详见 [message_retrieve.html#删除服务端会话及其历史消息]。
 
 ### 根据关键字搜索会话消息
 

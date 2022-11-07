@@ -161,6 +161,11 @@ private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
                 break;
         }
     }
+
+    @Override
+    // 当前用户在其他设备单向删除服务端的历史消息。
+    public void onMessageRemoved(String conversation, String deviceId) {            
+    }    
 }
 
 ChatMultiDeviceListener chatMultiDeviceListener = new ChatMultiDeviceListener();
