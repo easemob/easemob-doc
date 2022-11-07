@@ -59,7 +59,8 @@ message.setChatType(ChatType.GroupChat);
 
 ```java
    EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
-   // 聊天室消息的优先级。如果不设置，默认值为 `Normal`，即“普通”优先级。
+   message.setChatType(ChatType.ChatRoom);
+   // 聊天室消息的优先级。如果不设置，默认值为 `PriorityNormal`，即“普通”优先级。
    message.setPriority(EMChatRoomMessagePriority.PriorityHigh);
    sendMessage(message);
 ```
