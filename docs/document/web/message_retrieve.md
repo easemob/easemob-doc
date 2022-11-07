@@ -1,4 +1,4 @@
-# 从服务器获取消息
+# 管理服务端的会话和消息
 
 <Toc />
 
@@ -12,6 +12,7 @@
 
 - `getConversationlist` 获取服务器上保存的会话列表；
 - `getHistoryMessages` 按服务器接收消息的时间顺序获取服务器上保存的指定会话中的消息；
+- `removeHistoryMessages` 单向删除服务端的历史消息；
 - `deleteConversation` 删除服务器端会话及其对应的消息。
 
 ## 前提条件
@@ -76,6 +77,20 @@ WebIM.conn
   .catch((e) => {
     // 获取失败。
   });
+```
+
+### 单向删除服务端的历史消息
+
+你可以调用 `removeHistoryMessages` 方法按照时间或消息 ID 单向删除服务端的历史消息。每次最多可删除 50 条消息。消息删除后，该账号无法从服务端拉取到该消息。其他用户不受该操作影响。多端多设备登录时，删除成功后会触发 `onMultiDeviceEvent#deleteRoaming` 回调。
+
+示例代码如下：
+
+```javascript
+// 按时间删除消息
+connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', beforeTimeStamp: Date.now()})
+
+// 按消息 ID 删除消息
+connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', messageIds: ['messageId']})
 ```
 
 ### 删除服务器端会话及其对应的消息

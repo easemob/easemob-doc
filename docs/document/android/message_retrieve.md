@@ -1,15 +1,17 @@
-# 从服务器获取会话和消息（消息漫游）
+# 管理服务端的会话和消息
 
 <Toc />
 
-本文介绍用户如何从消息服务器获取会话和消息，该功能也称为消息漫游，指即时通讯服务将用户的历史消息保存在消息服务器上，用户即使切换终端设备，也能从服务器获取到单聊、群聊的历史消息，保持一致的会话场景。
+本文介绍用户如何获取和删除服务端的消息。从消息服务器获取会话和消息也称为消息漫游，指即时通讯服务将用户的历史消息保存在消息服务器上，用户即使切换终端设备，也能从服务器获取到单聊、群聊的历史消息，保持一致的会话场景。
 
 ## 技术原理
 
 使用环信即时通讯 IM SDK 可以从服务器获取历史消息。
 
 - `asyncFetchConversationsFromServer` 获取服务器保存的会话列表；
-- `fetchHistoryMessages` 获取服务器保存的指定会话中的消息。
+- `fetchHistoryMessages` 获取服务器保存的指定会话中的消息；
+- `removeMessagesFromServer` 单向删除服务端的历史消息；
+- `deleteConversationFromServer` 删除服务端的会话及其历史消息。
 
 ## 前提条件
 
@@ -64,4 +66,66 @@ EMClient.getInstance().chatManager().asyncFetchHistoryMessage(
         }
     }
 );
+```
+
+### 单向删除服务端的历史消息
+
+你可以调用 `removeMessagesFromServer` 方法单向删除服务端的历史消息。每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。
+
+登录该账号的其他设备会收到 `EMMultiDeviceListener` 中的 `onMessageRemoved` 回调，已删除的消息自动从设备本地移除。
+
+示例代码如下：
+
+```java 
+// 按时间删除消息
+EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
+conversation.removeMessagesFromServer(time, new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                       
+                    }
+
+                    @Override
+                    public void onError(int code, String desc) {
+                       
+                    }
+                });
+
+// 按消息 ID 删除消息
+ conversation.removeMessagesFromServer(msgIdList, new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                       
+                    }
+
+                    @Override
+                    public void onError(int code, String desc) {
+                       
+                    }
+                });  
+```                             
+### 删除服务端会话及其历史消息
+
+你可以调用 `deleteConversationFromServer` 方法删除服务器端会话和历史消息。会话删除后，当前用户和其他用户均无法从服务器获取该会话。若该会话的历史消息也删除，所有用户均无法从服务器获取该会话的消息。
+
+调用该方法之前，需调用 `getConversation` 方法获取会话 ID。
+
+示例代码如下：
+
+```java
+//获取指定的会话 ID。
+EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
+
+// 删除指定会话。如果需要保留历史消息，`isDeleteServerMessages` 传 `false`。
+EMClient.getInstance().chatManager().deleteConversationFromServer(conversationId, conversationType, isDeleteServerMessages, new EMCallBack() {
+    @Override
+    public void onSuccess() {
+
+    }
+
+    @Override
+    public void onError(int code, String error) {
+
+    }
+});
 ```

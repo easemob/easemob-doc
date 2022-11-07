@@ -7,10 +7,10 @@
 - 文字消息，包含超链接和表情消息。
 - 附件消息，包含图片、语音、视频及文件消息。
 - 位置消息。
-- CMD 消息。
+- 透传消息。
 - 自定义消息。
 
-以及对以上消息进行自定义扩展。
+对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
 
 本文介绍如何使用即时通讯 IM SDK 实现发送和接收这些类型的消息。
 
@@ -50,7 +50,7 @@
 // 创建一条文本消息，`content` 为消息文字内容，`toChatUsername` 为对方用户或者群聊的 ID，`fromChatUsername` 为发送方用户或群聊的 ID，`textMessageBody` 为消息体，`messageExt` 为消息扩展，后文皆是如此。
 EMTextMessageBody *textMessageBody = [[TextMessageBody alloc] initWithText:content];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:textMessageBody ext:messageExt];
-// 构造消息时需设置 `EMChatMessage` 类的 `ChatType` 属性。该属性的值为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，表明该消息是单聊、群聊或聊天室消息，默认为单聊。例如，设置消息类型为单聊消息即设置 `ChatType` 为 `EMChatTypeChat`。
+// 构造消息时需设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
 message.chatType = EMChatTypeChat;
 // 发送消息，异步方法。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
@@ -62,6 +62,18 @@ message.chatType = EMChatTypeChat;
         // 发送消息失败！
     }
 }];
+```
+
+对于聊天室消息，可设置消息优先级。示例代码如下：
+
+```Objectivec
+    NSString from = [[EMClient sharedClient] currentUsername];
+    EMChatMessage message = [[EMChatMessage alloc] initWithConversationID:aTo from:from to:aTo body:aBody ext:aExt];
+    message.chatType = EMChatTypeChatRoom;
+    // 聊天室消息的优先级。如果不设置，默认值为 `Normal`，即“普通”优先级。
+    message.priority = EMChatRoomMessagePriorityHigh;
+    __weak typeof(self) weakself = self;
+    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
 ### 接收消息

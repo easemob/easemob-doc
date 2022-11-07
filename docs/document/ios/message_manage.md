@@ -80,14 +80,12 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 [conversation markMessageAsReadWithId:messageId error:nil];
 ```
 
-### 删除会话及聊天记录
+### 删除会话及历史消息
 
-SDK 提供两个接口，分别可以删除本地会话和聊天记录或者删除当前用户在服务器端的会话和聊天记录。
-
-- 删除本地会话和聊天记录示例代码如下：
+你可以删除本地会话和历史消息，示例代码如下：
 
 ```objectivec
-// 删除指定会话，如果需要保留聊天记录，`isDeleteMessages` 参数传 `NO`，异步方法。
+// 删除指定会话，如果需要保留历史消息，`isDeleteMessages` 参数传 `NO`，异步方法。
 [[EMClient sharedClient].chatManager deleteConversation:conversationId isDeleteMessages:YES completion:nil];
 // 删除一组会话。
 NSArray *conversations = @{@"conversationID1",@"conversationID2"};
@@ -95,19 +93,12 @@ NSArray *conversations = @{@"conversationID1",@"conversationID2"};
 ```
 
 ```objectivec
-// 删除当前会话中指定的一条聊天记录。
+// 删除当前会话中指定的一条历史消息。
 EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
 [conversation deleteMessageWithId:.messageId error:nil];
 ```
 
-- 删除服务器端会话和聊天记录，示例代码如下：
-
-```objectivec
-// 删除指定会话，如果需要保留聊天记录，`isDeleteServerMessages` 参数传 `NO`，异步方法。
-[[EMClient sharedClient].chatManager deleteServerConversation:@"conversationId1" conversationType:EMConversationTypeChat isDeleteServerMessages:YES completion:^(NSString *aConversationId, EMError *aError) {
-    // 删除回调
-}];
-```
+删除服务端的会话及其历史消息，详见 [message_retrieve.html#删除服务端会话及其历史消息]。
 
 ### 根据关键字搜索会话消息
 

@@ -1,15 +1,17 @@
-# 从服务器获取消息（消息漫游）
+# 管理服务端的消息
 
 <Toc />
 
-本文介绍用户如何从消息服务器获取会话和消息，该功能也称为消息漫游，指即时通讯服务将用户的历史消息保存在消息服务器上，用户即使切换终端设备，也能从服务器获取到单聊、群聊的历史消息，保持一致的会话场景。
+本文介绍用户如何获取和删除服务端的消息。从消息服务器获取会话和消息也称为消息漫游，指即时通讯服务将用户的历史消息保存在消息服务器上，用户即使切换终端设备，也能从服务器获取到单聊、群聊的历史消息，保持一致的会话场景。
 
 ## 技术原理
 
-使用环信即时通讯 IM iOS SDK 可以从服务器获取会话和历史消息。
+使用环信即时通讯 IM iOS SDK 可以管理服务端的会话和历史消息。
 
 - `getConversationsFromServer` 获取在服务器保存的会话列表；
-- `asyncFetchHistoryMessagesFromServer` 获取服务器保存的指定会话中的消息。
+- `asyncFetchHistoryMessagesFromServer` 获取服务器保存的指定会话中的消息；
+- `removeMessagesFromServer` 单向删除服务端的历史消息；
+- `deleteServerConversation` 删除服务器端会话及其历史消息。
 
 ## 前提条件
 
@@ -28,9 +30,9 @@
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient].chatManager getConversationsFromServer:^(NSArray *aCoversations, EMError *aError) {
+[[EMClient sharedClient].chatManager getConversationsFromServer:^(NSArray *aConversations, EMError *aError) {
    if (!aError) {
-      for (EMConversation *conversation in aCoversations) {
+      for (EMConversation *conversation in aConversations) {
         // conversation 会话解析。
       }
    }
@@ -46,4 +48,35 @@
  [[EMClient.sharedClient].chatManager asyncFetchHistoryMessagesFromServer:conversation.conversationId conversationType:conversation.type startMessageId:self.moreMsgId pageSize:10 completion:^(EMCursorResult *aResult, EMError *aError) {
              [self.conversation loadMessagesStartFromId:self.moreMsgId count:10 searchDirection:EMMessageSearchDirectionUp completion:block];
           }];
+```
+
+### 单向删除服务端的历史消息
+
+你可以调用 `removeMessagesFromServer` 方法单向删除服务端的历史消息。每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。
+
+登录该账号的其他设备会收到 `EMMultiDevicesDelegate` 中 `multiDevicesMessageBeRemoved` 回调，已删除的消息自动从设备本地移除。
+
+示例代码如下：
+
+```Objectivec
+// 按时间删除消息
+[self.conversation removeMessagesFromServerWithTimeStamp:message.timestamp completion:^(EMError * _Nullable aError) {
+
+}];
+
+// 按消息 ID 删除消息
+[self.conversation removeMessagesFromServerMessageIds:@[@"123314142214"] completion:^(EMError * _Nullable aError) {
+
+}];
+```
+
+### 删除服务端会话及其历史消息
+
+你可以调用 `deleteServerConversation` 方法删除服务器端会话和历史消息。会话删除后，当前用户和其他用户均无法从服务器获取该会话。若该会话的历史消息也删除，所有用户均无法从服务器获取该会话的消息。
+
+```objectivec
+// 删除指定会话，如果需要保留历史消息，`isDeleteServerMessages` 参数传 `NO`，异步方法。
+[[EMClient sharedClient].chatManager deleteServerConversation:@"conversationId1" conversationType:EMConversationTypeChat isDeleteServerMessages:YES completion:^(NSString *aConversationId, EMError *aError) {
+    // 删除回调
+}];
 ```
