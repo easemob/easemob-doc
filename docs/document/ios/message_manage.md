@@ -98,7 +98,7 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 [conversation deleteMessageWithId:.messageId error:nil];
 ```
 
-删除服务端的会话及其历史消息，详见 [message_retrieve.html#删除服务端会话及其历史消息]。
+删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](message_retrieve.html#删除服务端会话及其历史消息)。
 
 ### 根据关键字搜索会话消息
 
