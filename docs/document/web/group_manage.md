@@ -57,7 +57,7 @@ let option = {
     allowinvites: true,
     inviteNeedConfirm: true,
     maxusers: 500,
-    ext: {info: 'group info'}
+    ext: {info: "group info"}
   },
 };
 conn.createGroup(option).then((res) => console.log(res));
