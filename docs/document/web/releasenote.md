@@ -6,31 +6,30 @@
 
 ### 新增特性
 
-- 创建群组方法 `createGroup` 和修改群信息方法 `modifyGroup` 新增 `ext` 字段支持群扩展信息。
-- 群通知事件增加群组信息修改事件 `updateInfo`。
-- [聊天室消息支持优先级](message_send_receive.html)。
-- 支持同时[对多个群组成员禁言和解除禁言](group_members.html#管理群组禁言列表)。
-- 新增[单向删除漫游消息功能](message_retrieve.html#单向删除服务端的历史消息)。
+- [IM SDK] 创建群组方法 `createGroup` 和修改群信息方法 `modifyGroup` 新增 `ext` 字段支持群扩展信息。
+- [IM SDK] 群组通知事件增加群组信息修改事件 `updateInfo`。
+- [IM SDK] 新增[聊天室消息优先级](message_send_receive.html)。
+- [IM SDK] 支持同时[对多个群组成员禁言和解除禁言](group_members.html#管理群组禁言列表)。
 
 ### 优化
 
-优化断网导致的消息发送失败时调用的回调。
+[IM SDK] 优化断网导致的消息发送失败时调用的回调。
 
 ### 修复
 
- 修复附件消息中的 `file_length` 字段不生效的问题。
+ [IM SDK] 修复附件消息中的 `file_length` 字段不生效的问题。
 
 ## 版本 V4.1.1 Dev 2022-9-26（开发版）
 
 ### 优化
 
-- [miniCore](overview.html#引入SDK) 支持配置私有化配置。
+- [IM SDK] [miniCore](overview.html#引入SDK) 支持配置私有化配置。
 - 优化重连逻辑。
 
 ### 修复
 
-- 修复聊天室自定义属性功能中的问题；
-- 修复 `miniCore` 中的 `uploadFile` 方法中的问题。
+- [IM SDK] 修复聊天室自定义属性功能中的问题；
+- [IM SDK] 修复 `miniCore` 中的 `uploadFile` 方法中的问题。
 
 ## 版本 V4.1.0 Dev 2022-9-16（开发版）
 

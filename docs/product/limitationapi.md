@@ -45,7 +45,6 @@
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------------------- | :----- | :--------------------------------------------------- | :----------------------------------------------------------- |
-| 发送消息                     | POST   | /{org_name}/{app_name}/messages                      | 100 次/秒/App Key （说明：1 秒下行分发消息量限制是该频率的 20 倍；该接口废弃，后期不再增加新特性） |
 | 发送单聊消息                 | POST   | /{org_name}/{app_name}/messages/users                | 6000 条/分钟/App Key                                         |
 | 发送群聊消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | 20 条/秒/App Key                                             |
 | 发送聊天室消息               | POST   | /{org_name}/{app_name}/messages/chatrooms            | 100 条/秒/App Key                                            |
