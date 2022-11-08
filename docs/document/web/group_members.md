@@ -282,7 +282,7 @@ conn.getGroupBlocklist(option).then(res => console.log(res))
 ```javascript
 let option = {
     groupId: "groupId"，
-    username: "'user1' || ['user1', 'user2']",
+    username: "user1" || ["user1", "user2"],
     muteDuration: 886400000 // 禁言时长，单位为毫秒。
 };
 conn.muteGroupMember(option).then(res => console.log(res))
@@ -297,7 +297,7 @@ conn.muteGroupMember(option).then(res => console.log(res))
 ```javascript
 let option = {
     groupId: "groupId",
-    username: "'user1' || ['user1', 'user2']"
+    username: "user1" || ["user1", "user2"]
 };
 conn.unmuteGroupMember(option).then(res => console.log(res))
 ```
