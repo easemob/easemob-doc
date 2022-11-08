@@ -57,6 +57,7 @@ let option = {
     allowinvites: true,
     inviteNeedConfirm: true,
     maxusers: 500,
+    ext: {info: "group info"}
   },
 };
 conn.createGroup(option).then((res) => console.log(res));
@@ -200,6 +201,9 @@ conn.addEventHandler("eventName", {
       // 更新群公告。群组所有成员会收到该回调。
       case "updateAnnouncement":
         break;
+      // 更新群组信息，如群组名称和群组描述。群组所有成员会收到该回调。
+      case "updateInfo":
+        break;  
       // 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
       case "unmuteMember":
         break;
