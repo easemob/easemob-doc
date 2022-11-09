@@ -32,7 +32,7 @@ let option = {
     groupId: "groupId",
     groupName: "groupName",
     description: "A description of group",
-    ext: {info: "group info"}
+    ext: "group detail extensions",
 };
 conn.modifyGroup(option).then(res => console.log(res))
 ```
