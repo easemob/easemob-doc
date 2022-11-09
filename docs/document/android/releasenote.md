@@ -2,6 +2,7 @@
 
 <Toc />
 
+## 版本 V3.9.8 Dev 2022-11-8（开发版）
 ### 新增特性
 
 - [IM SDK] 新增[聊天室消息优先级](message_send_receive.html)。
