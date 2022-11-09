@@ -2,7 +2,12 @@
 
 <Toc />
 
-环信即时通讯 Web 端提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
+环信即时通讯 Web 端提供示例应用可供体验：
+
+- [Vue 2 Demo](https://webim-vue.easemob.com/login)
+- [Vue 3 Demo](https://webim-vue3.easemob.com/login)
+
+为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
 
 1. 在 [环信即时通讯云 IM 管理后台](https://console.easemob.com/user/login) 通过邮箱注册后登录，打开首页。
 
@@ -26,7 +31,8 @@
 
 ## 代码下载
 
--下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)
+- Vue 2 下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)
+- Vue 3 下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/demo-vue3)
 
 欢迎大家提交 PR 改进和修复 Web IM 中的问题。
 
@@ -56,4 +62,12 @@ Demo 中的主要模块如下：
 
 ## 部分 UI 展示
 
+### Vue 2 Demo 界面
+
 ![img](@static/images/web/vue_demo.png)
+
+### Vue 3 Demo 界面
+
+![img](@static/images/web/vue3_home.png)
+
+![img](@static/images/web/vue3_chat.png)
