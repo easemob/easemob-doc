@@ -68,6 +68,7 @@ module.exports = {
           { text: '集成文档', link: '/document/android/quickstart.html' },
           { text: 'API 参考', link: '/api/all/' },
           { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
+          { text: '参与环信文档“捉虫”活动，领京东卡', link: 'https://www.imgeek.org/article/825360944' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
@@ -218,7 +219,7 @@ module.exports = {
                     { text: '发送和接收消息', link: 'message_send_receive.html' },
                     { text: '管理本地消息数据', link: 'message_manage.html', except: ['web', 'react-native'] },
                     { text: '管理会话和消息', link: 'message_manage.html', only: ['react-native'] },
-                    { text: '从服务器获取消息（消息漫游）', link: 'message_retrieve.html', except: ['react-native'] },
+                    { text: '管理服务端消息', link: 'message_retrieve.html', except: ['react-native'] },
                     { text: '管理消息回执', link: 'message_receipt.html' },
                     { text: '翻译', link: 'message_translation.html' },
                   ]
@@ -309,7 +310,7 @@ module.exports = {
                   children: [
                     { text: '消息概述', link: 'message_overview.html' },
                     { text: '发送和接收消息', link: 'message_send_receive.html' },
-                    { text: '从服务器获取消息（消息漫游）', link: 'message_retrieve.html' },
+                    { text: '管理服务端消息', link: 'message_retrieve.html' },
                     { text: '管理消息回执', link: 'message_receipt.html' },
                     { text: '翻译', link: 'message_translation.html' },
                   ]
