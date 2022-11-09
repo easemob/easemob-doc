@@ -42,7 +42,8 @@
 | `approval`          | Bool   | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `public` 设置为 `true` 时，对私有群无效。                                                         |
 | `allowinvites`      | Bool   | 是否允许普通群成员邀请人入群：<br/> - `true`：允许；<br/> - `false`：不允许。只有群主和管理员才可以向群组添加用户。<br/>该参数仅对私有群有效，即 `public` 设置为 `false` 时， 因为公开群（public：`true`) 仅支持群主和群管理员邀请人入群，不支持普通群成员邀请人入群。 |
 | `inviteNeedConfirm` | Bool   | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。                                                                                                                                          |
-| `maxusers`          | Int    | 群组最大成员数。                                                                                                                                                                                                                                                       |
+| `maxusers`          | Int    | 群组最大成员数。            |
+| `ext`          | String    | 群组详情扩展信息。            |
 
 创建群组的示例代码如下：
 
@@ -57,7 +58,7 @@ let option = {
     allowinvites: true,
     inviteNeedConfirm: true,
     maxusers: 500,
-    ext: {info: "group info"}
+    ext: "group detail extensions",
   },
 };
 conn.createGroup(option).then((res) => console.log(res));
