@@ -30,5 +30,17 @@ export default {
 </template>
 
 <style>
+.header-container .nav .main-nav a:last-child{
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(45deg, #009688, yellowgreen, pink, #03a9f4, #9c27b0, #8bc34a);
+    background-clip: text;   
+    animation: huerotate 1.5s infinite; 
+};
+@keyframes huerotate {
+    100% {
+        filter: hue-rotate(360deg);
+    }
+    
+}
     @import url('../styles/index.styl');
 </style>
