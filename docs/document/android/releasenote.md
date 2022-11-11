@@ -144,40 +144,44 @@
 
 ## 版本 V3.9.1.1 2022-4-27
 
-### 修复：
+### 修复
 
 - [IM SDK] 修复偶发的拉取历史消息不能正常显示的问题。
 
 ## 版本 V3.9.1 2022-4-19
 
-### 新增特性:
+:::TIP
+仅 V3.9.1 及以下版本支持私有化部署。
+:::
+
+### 新增特性
 
 - [IM SDK] 增加 [用户在线状态 (Presence) 订阅功能](presence.html)；
 
-### 优化：
+### 优化
 
 - [IM SDK] 缩短发送消息超时时间。
 - [IM SDK] DNS 服务器地址列表支持优先级设置，HTTP 和 TCP 请求重试时按 DNS 服务器地址的优先级发送请求，提升请求成功率。
 - [IM SDK] IM SDK 所依赖的 OPPO 推送（版本 2.1.0 更新到 版本 3.0.0）和 vivo 推送（版本 2.3.1 更新到 版本 3.0.0.4_484）的 SDK 版本升级。
 
-### 修复：
+### 修复
 
 - [IM SDK] 修复 PendingIntent 问题，移除 IM 在 Google Play 上架时的警告。
 
 ## 版本 V3.9.0 2022-2-22
 
-### 新增特性:
+### 新增特性
 
 - [IM SDK] [EaseIMKIt] 增加 [单向删除服务端会话 API](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html#a345e81b9caf2658c8796855fe63fe752)；
 - [IM SDK] Push 平台增加推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，见 [Android 推送集成](https://docs-im.easemob.com/push/apppush/androidsdk)；
 - [IM SDK] 增加非好友不能发送消息错误码 [221 USER_NOT_ON_ROSTER]；
 - [IM SDK] [EaseIMKIt] 增加通过 REST 接口撤回消息功能。
 
-### 优化：
+### 优化
 
 - [IM SDK] 减少弱网时发送消息的等待时间。
 
-### 修复：
+### 修复
 
 - [IM SDK] 修复消息发送重试被连接成功事件中断；
 - [IM SDK] 修复内存泄漏问题；
@@ -185,31 +189,31 @@
 
 ## 版本 V3.8.9.1 2021-12-30
 
-### 修复:
+### 修复
 
 - [IM SDK] 增加极端情况下打开数据库失败时重建数据库的策略。
 
 ## 版本 V3.8.9 2021-12-27
 
-### 新增：
+### 新增
 
 - [IM SDK] 增加翻译功能 API；
 - [IM SDK] 位置消息增加建筑物名称字段；
 - [IM SDK] 增加按照时间删除消息的 API；
 - [IM SDK] 增加获取会话中消息总数的 API；
 
-### 修复：
+### 修复
 
 - [IM SDK] 修复部分 crash 的问题；
 - [IM SDK] 修复数据库加密的 bug。
 
 ## 版本 V3.8.8 2021-12-06
 
-### 新增：
+### 新增
 
 - [IM SDK] 增加获取登录状态的 API。
 
-### 更新：
+### 更新
 
 - [IM SDK] 更新部分函数命名与注释；
 - [IM SDK] 优化推送 token 的更新逻辑，降低对服务器的请求次数；
@@ -217,7 +221,7 @@
 - [IM SDK] 优化群组消息在 token 过期时的处理逻辑；
 - [IM SDK] EMOptions 中默认使用 HTTPS only。
 
-### 修复：
+### 修复
 
 - [IM SDK] 修复拉取历史漫游消息不全的 bug；
 - [IM SDK] 对荣耀手机推送的支持；
@@ -240,18 +244,18 @@
 
 ## 版本 V3.8.6.1 2021-10-12
 
-### 新功能：
+### 新功能
 
 - [IM SDK] 增强本地存储数据的安全性；
 - [IM SDK] 增强传输数据的安全性；
 - [IM SDK] 增加用户被全局禁言时发消息会提示单独的错误码；
 
-### 更新：
+### 更新
 
 - [EaseIMKIt] 聊天页面语音消息按钮事件移到 APP 层；
 - [IM SDK] 检查发送 ReadAck 时 to 是否为空；
 
-### 修复：
+### 修复
 
 - [IM SDK] 修复 WAKE_LOCK 权限导致应用 crash 问题；
 - [IM SDK] 删除自定义证书异常打印；
@@ -266,11 +270,11 @@
 
 ## 版本 V3.8.5 2021-09-10
 
-### 新功能：
+### 新功能
 
 - [IM SDK] 对用户日志加强了安全保护。
 
-### 更新：
+### 更新
 
 - [IM SDK] 设备 ID 使用随机生成的方式。
 - [IM SDK] 移除对 FCM 11.4.0 版本的依赖，将 FCM 的逻辑移到应用层。
@@ -278,7 +282,7 @@
 - [EaseIMKit] 在 EaseChatFragment 中暴露消息发送成功的回调 onChatSuccess。
 - [EaseIM] 将 FCM 逻辑移到应用层，并升级 FCM Messaging 到 22.0.0 版本，[FCM 集成详见](https://docs-im.easemob.com/im/android/push/thirdpartypush#sdk_385_版本之后集成方式)。
 
-### 修复：
+### 修复
 
 - [IM SDK] 修复 SDK 某些场景下数据库损坏导致崩溃的问题。
 - [EaseIMKit] 修复通讯录首字母识别不准确的问题。
@@ -289,11 +293,11 @@
 
 ## 版本 V3.8.4 2021-08-03
 
-### 新功能：
+### 新功能
 
 - [IM SDK] 新增单聊 1v1 免打扰功能；
 
-### 更新：
+### 更新
 
 - [EaseIM App] 增加单聊 1v1 免打扰开关；
 - [IM SDK] EMCmdMessageBody#getParams 方法增加已废弃注解；
@@ -301,7 +305,7 @@
 - [IM SDK] 去除收集不必要的设备信息；
 - [IM SDK] 增加垃圾消息被拦截的错误码；
 
-### 修复：
+### 修复
 
 - [IM SDK] 修复 APP 运行在前台或者后台判断错误问题；
 - [EaseIM App] 修复置顶会话在新消息到达时未置顶的问题；
@@ -310,13 +314,13 @@
 
 ## 版本 V3.8.3 2021-07-09
 
-### 更新：
+### 更新
 
 - [IM SDK] 在 EMClient 中增加了对一些方法的保护；
 - [IM SDK] 移除 SDK 中获取定位的相关逻辑；
 - [IM SDK] 移除 SDK 中 AndroidManifest 的权限声明；
 
-### 修复:
+### 修复
 
 - [EaseIMKIt] 修复某些场景下导致发送失败图标和已读标志重叠的问题；
 - [EaseIMKIt] 修复某些场景下长按聊天条目崩溃的问题；
