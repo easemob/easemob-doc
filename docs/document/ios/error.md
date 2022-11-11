@@ -92,8 +92,10 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 1110   |     EMErrorTranslateParamError      | 翻译参数错误。                                               |
 | 1111   |  EMErrorTranslateServiceNotEnabled  | 翻译服务未启用。                                             |
 | 1112   |     EMErrorTranslateUsageLimit      | 翻译用量达到上限。                                           |
-| 1113   |     EMErrorTranslateServiceFail     | 获取翻译服务失败。                                           |
-| 1300   |      EMErrorReactionReachLimit      | Reaction 数量已达到限制。                                    |
+| 1113   |     EMErrorTranslateServiceFail     | 获取翻译服务失败。          |
+| 1200   |     EMErrorModerationFailed           | 环信即时通讯云的内容审核服务的消息审核结果为“拒绝”。 |
+| 1299   |     EMErrorThirdServiceFailed        | 第三方内容审核服务的消息审核结果为“拒绝”。 |
+| 1300   |     EMErrorReactionReachLimit      | Reaction 数量已达到限制。           |
 | 1301   |   EMErrorReactionHasBeenOperated    | Reaction 重复添加。                                          |
 | 1302   |  EMErrorReactionOperationIsIllegal  | 没有操作权限：用户对该 Reaction 没有操作权限。例如没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接受者进行添加 Reaction 操作。 |
 | 1400   |  EMErrorThreadNotExist        | 未找到该子区，该子区不存在。                                 |
