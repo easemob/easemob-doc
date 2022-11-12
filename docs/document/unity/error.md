@@ -105,3 +105,5 @@ SDKClient.Instance.Login(username, passwd,
 | 900    | PUSH_NOT_SUPPORT                | 第三方推送不支持：如果用户配置的第三方推送在当前设备上不支持，会提示该错误。 |
 | 901    | PUSH_BIND_FAILED                | 绑定第三方推送 token 失败：如果将第三方推送 token 上传到服务器失败时会返回该错误。 |
 | 902    | PUSH_UNBIND_FAILED              | 解绑第三方推送 token 失败：如果解绑第三方推送 token 失败会提示该错误。 |
+| 1200   | THIRD_MODERATION_FAILED         | 第三方内容审核服务的消息审核结果为“拒绝”。 |
+| 1299   | THIRD_DEFAULT_FAILED = 1299     | 除第三方内容审核服务的其他服务的消息审核结果为“拒绝”。 |

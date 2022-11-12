@@ -48,7 +48,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 505    | SERVICE_NOT_ENABLED                            | 服务未开启：要使用的某些功能未开通。                         |
 | 506    | SERVICE_NOT_ALLOW_MESSAGING                    | 用户未在白名单中：群组或聊天室开启全员禁言时，若用户未在白名单中发送消息时提示该错误。 |
 | 507    | SERVICE_NOT_ALLOW_MESSAGING_MUTE               | 当前用户被禁言：在群组或者聊天室中被禁言后发消息报此错误。           |
-| 508    | MESSAGE_MODERATION_BLOCKED                     | 消息执行发送前回调，发送的消息被用户自己的服务器定义的规则拦截掉时提示该错误。                                |
+| 508    | MESSAGE_MODERATION_BLOCKED                     | 消息执行发送前回调，发送的消息被用户自己的服务器定义的规则拦截掉时提示该错误。          |
 | 509    | MESSAGE_CURRENT_LIMITING                       | 单个用户 ID 发送群聊消息超出频率限制。                       |
 | 601    | GROUP_ALREADY_JOINED                           | 已在群组内：当前用户已在该群组中。                           |
 | 602    | GROUP_NOT_JOINED                               | 不在群组内：用户发送群消息时未加入该群组。                   |
