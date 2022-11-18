@@ -1,6 +1,6 @@
 ---
 {
-    pageKey: "v-24bd0e07",
+    pageUri: "/document/web/user_relationship.html",
     title: "管理用户关系"
 }
 ---

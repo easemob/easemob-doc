@@ -1,4 +1,4 @@
-# React Native API Doc
+# SDK API Doc
 
 <Toc />
 

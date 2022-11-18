@@ -1,4 +1,4 @@
-# 消息管理–发送和接收消息
+# 发送和接收消息
 
 <Toc />
 
@@ -7,7 +7,7 @@
 - 文字消息，包含超链接和表情消息。
 - 附件消息，包含图片、语音、视频及文件消息。
 - 位置消息。
-- CMD 消息。
+- 透传消息。
 - 自定义消息。
 
 本文介绍如何使用即时通讯 IM SDK 实现发送和接收这些类型的消息。
@@ -176,13 +176,94 @@ EMClient.getInstance.chatManager.sendMessage(message).then((value) {
 });
 ```
 
+#### 通过透传消息实现输入指示器
+
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
+
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
+
+![img](@static/images/common/typing_indicator.png)
+
+
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+
+:::notice 
+
+用户 A 可根据需要设置透传消息发送间隔。
+
+:::
+
+以下示例代码展示如何发送输入状态的透传消息。
+
+```dart
+//发送表示正在输入的透传消息
+final String msgTypingBegin = "TypingBegin";
+
+void textChange() {
+  int currentTimestamp = getCurrentTimestamp();
+  if (currentTimestamp - _previousChangedTimeStamp > 5) {
+    _sendBeginTyping();
+    _previousChangedTimeStamp = currentTimestamp;
+  }
+}
+
+void _sendBeginTyping() async {
+  var msg = EMMessage.createCmdSendMessage(
+    targetId: conversationId,
+    action: msgTypingBegin,
+    deliverOnlineOnly: true,
+  );
+  msg.chatType = ChatType.Chat;
+  EMClient.getInstance.chatManager.sendMessage(msg);
+}
+
+```
+
+以下示例代码展示如何接受和解析输入状态的透传消息。
+
+```dart
+final int typingTime = 10;
+Timer? _timer;
+
+void onCmdMessagesReceived(List<EMMessage> list) {
+  for (var msg in list) {
+    if (msg.conversationId != currentConversationId) {
+      continue;
+    }
+    EMCmdMessageBody body = msg.body as EMCmdMessageBody;
+    if (body.action == msgTypingBegin) {
+      // 这里需更新 UI，显示“对方正在输入”
+      beginTimer();
+    }
+  }
+}
+
+void beginTimer() {
+  _timer = Timer.periodic(
+    Duration(seconds: typingTime),
+    (timer) {
+      // 这里需更新 UI，显示“对方正在输入”
+      cancelTimer();
+    },
+  );
+}
+
+void cancelTimer() {
+  _timer?.cancel();
+}
+```
+
 ### 接收消息
 
-你可以用注册 `EMChatEventHandler` 监听器接收消息。
+你可以添加 `EMChatEventHandler` 监听器接收消息。
 
 该 `EMChatEventHandler` 可以多次添加。请记得在不需要的时候移除该监听器，如在 `dispose` 的卸载组件的时候。
 
-在新消息到来时，你会收到 `onMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
+在新消息到来时，你会收到 `onMessagesReceived` 的事件，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
 ```dart
 // 继承并实现 EMChatEventHandler
@@ -287,13 +368,3 @@ try {
 // 消息被撤回时触发的回调（此回调位于 EMChatEventHandler 中）。
 void onMessagesRecalled(List<EMMessage> messages) {}
 ```
-
-### 更多操作
-
-你可以参考如下文档，在项目中实现更多的消息相关功能：
-
-- [消息概述](message_overview.html);
-- [管理本地消息数据](message_manage.html)；
-- [从服务器获取会话和消息（消息漫游）](message_retrieve.html)；
-- [获取消息的已读回执和送达回执](message_receipt.html)；
-- [实现翻译功能](message_translation.html)。

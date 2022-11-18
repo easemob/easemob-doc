@@ -2,7 +2,6 @@
 
 <Toc />
 
-## 功能描述
 
 环信即时通讯 IM 支持同一个用户 ID 在多个平台或者多个设备上登录；
 
@@ -16,7 +15,7 @@
 
 在同一账号的所有已登录设备上同步群组和聊天室相关操作；
 
-默认最多支持 4 个设备同时在线，具体见 [环信即时通讯 IM 价格]( https://www.easemob.com/pricing/im)。如需增加支持的设备数量，可以联系环信商务。
+默认最多支持 4 个设备同时在线，具体见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。如需增加支持的设备数量，可以联系环信商务。
 
 ## 技术原理
 
@@ -52,7 +51,7 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUse
 ### 强制该账号从一个设备下线
 
 ```objectivec
-[EMClient.sharedClient kickDeviceWithUsername:@"ID" password:@"password" resource:@"deiviceResource" completion:nil];
+[EMClient.sharedClient kickDeviceWithUsername:@"ID" password:@"password" resource:@"deviceResource" completion:nil];
 ```
 
 ### 获取其他设备上进行的好友或者群组操作
@@ -181,6 +180,8 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUse
             break;
     }
 }
+// 当前⽤户在其他设备单向删除服务端的历史消息。
+- (void)multiDevicesMessageBeRemoved:(NSString *_Nonnull)conversationId deviceId:(NSString *_Nonnull)deviceId;
 ```
 
 ### 典型示例

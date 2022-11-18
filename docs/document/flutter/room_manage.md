@@ -1,4 +1,4 @@
-# 创建和管理聊天室以及监听器介绍
+# 创建和管理聊天室以及监听聊天室事件
 
 <Toc />
 
@@ -54,7 +54,7 @@ try {
 用户申请加入聊天室的步骤如下：
 
 1. 调用 `EMChatRoomManager#fetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-2. 调用 `EMChatRoomManager#joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `EMChatRoomEventHandler#onMemberJoinedFromChatRoom` 回调。
+2. 调用 `EMChatRoomManager#joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `EMChatRoomEventHandler#onMemberJoinedFromChatRoom` 事件。
 
 示例代码如下：
 
@@ -79,7 +79,7 @@ try {
 
 ### 获取聊天室详情
 
-聊天室所有成员均可以调用 `EMChatManager#fetchChatRoomInfoFromServer` 获取聊天室详情，包括聊天室 ID、聊天室名称，聊天室描述、聊天室公告、管理员列表、最大成员数、聊天室所有者、是否全员禁言以及聊天室权限类型。成员列表、黑名单列表、禁言列表需单独调用接口获取。
+聊天室所有成员均可以调用 `EMChatManager#fetchChatRoomInfoFromServer` 获取聊天室详情，包括聊天室 ID、聊天室名称，聊天室描述、最大成员数、聊天室所有者、是否全员禁言以及聊天室权限类型。聊天室公告、管理员列表、成员列表、黑名单列表、禁言列表需单独调用接口获取。
 
 示例代码如下：
 
@@ -136,34 +136,45 @@ try {
 示例代码如下：
 
 ```dart
-class _ChatRoomPageState extends State<ChatRoomPage> {
-  @override
-  // 添加监听器
-  void initState() {
-    super.initState();
-    EMClient.getInstance.chatRoomManager.addEventHandler(
-      "UNIQUE_HANDLER_ID",
-      EMChatRoomEventHandler(),
-    );
-  }
-  @override
-  // 清空所有监听器
-  void dispose() {
+    // 添加监听器
+EMClient.getInstance.chatRoomManager.addEventHandler(
+  "UNIQUE_HANDLER_ID",
+  EMChatRoomEventHandler(
+    // 转让聊天室。聊天室全体成员会收到该事件。
+    onOwnerChangedFromChatRoom: (roomId, newOwner, oldOwner) {},
+    // 禁言指定成员。被禁言的成员会收到该事件。
+    onMuteListAddedFromChatRoom: (roomId, mutes, expireTime) {},
+    // 解除对指定成员的禁言。被解除禁言的成员会收到该事件。
+    onMuteListRemovedFromChatRoom: (roomId, mutes) {},
+    // 解散聊天室。聊天室全体成员会收到该事件。
+    onChatRoomDestroyed: (roomId, roomName) {},
+    // 聊天室详情有变更。聊天室的所有成员会收到该事件。
+    onSpecificationChanged: (room) {},
+    // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
+    onMemberJoinedFromChatRoom: (roomId, participant) {},
+    // 有成员主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
+    onMemberExitedFromChatRoom: (roomId, roomName, participant) {},
+    // 有成员被移出聊天室。被移出的成员收到该事件。
+    onRemovedFromChatRoom: (roomId, roomName, participant) {},
+    // 聊天室公告变更。聊天室的所有成员会收到该事件。
+    onAnnouncementChangedFromChatRoom: (roomId, announcement) {},
+    // 有成员被加入白名单列表。被添加的成员收到该事件。
+    onAllowListAddedFromChatRoom: (roomId, members) {},
+    // 有成员被移出白名单列表。被移出白名单的成员会收到该事件。
+    onAllowListRemovedFromChatRoom: (roomId, members) {},
+    // 全员禁言状态变更。聊天室所有成员会收到该事件。
+    onAllChatRoomMemberMuteStateChanged: (roomId, isAllMuted) {},
+    // 有成员被设为管理员。被添加的管理员会收到该事件。
+    onAdminAddedFromChatRoom: (roomId, admin) {},
+    // 有成员被移除管理员权限。被移除的管理员会收到该事件。
+    onAdminRemovedFromChatRoom: (roomId, admin) {},
+    // 聊天室自定义属性有更新。聊天室所有成员会收到该事件。
+    onAttributesUpdated: (roomId, attributes, from) {},
+    // 有聊天室自定义属性被移除。聊天室所有成员会收到该事件。
+    onAttributesRemoved: (roomId, keys, fromId) {},
+  ),
+);
+
+    // 移除监听器
     EMClient.getInstance.chatRoomManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 ```
-
-### 更多操作
-
-你可以参考如下文档，在项目中实现更多的聊天室相关功能：
-
-- [聊天室概述](room_overview.html)
-- [管理聊天室成员](room_members.html)
-- [管理聊天室属性](room_attributes.html)

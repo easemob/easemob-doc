@@ -2,9 +2,14 @@
 
 <Toc />
 
-用户完成登录后，就会进行添加联系人、获取好友列表等操作。
+用户登录后，可进行添加联系人、获取好友列表等操作。
 
-本文介绍如何通过环信即时通讯 IM React Native SDK 管理好友关系，包括添加、同意、拒绝、删除、查询好友，以及管理黑名单，包括添加、移出、查询黑名单。
+SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
+
+- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请和删除好友等操作。
+- 黑名单管理：查询黑名单列表、添加用户至黑名单以及从黑名单中移出用户等操作。
+
+本文介绍如何通过环信即时通讯 IM React Native SDK 实现上述功能。
 
 ## 技术原理
 
@@ -114,9 +119,43 @@ ChatClient.getInstance().contactManager.addContactListener(
 );
 ```
 
+### 获取好友列表
+
+你可以从服务器获取好友列表，也可以从本地数据库获取已保存的好友列表。
+
+**注意**
+
+需要从服务器获取好友列表之后，才能从本地数据库获取到好友列表。
+
+1. 从服务器获取好友列表
+
+```typescript
+ ChatClient.getInstance()
+   .contactManager.getAllContactsFromServer()
+   .then((value) => {
+     console.log("get contact success.", value);
+   })
+   .catch((reason) => {
+     console.log("get contact fail.", reason);
+   });
+ ```
+
+ 2. 从本地数据库中获取好友列表
+
+ ```typescript
+ ChatClient.getInstance()
+   .contactManager.getAllContactsFromDB()
+   .then((value) => {
+     console.log("get contact success.", value);
+   })
+   .catch((reason) => {
+     console.log("get contact fail.", reason);
+   });
+ ```
+
 ### 删除好友
 
-删除好友建议执行双重确认，以免发生误删操作。删除操作是不需要对方同意或者拒绝操作的。
+删除好友时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
 ```typescript
 // 用户 ID
@@ -133,14 +172,14 @@ ChatClient.getInstance()
   });
 ```
 
-### 将联系人加入黑名单
+### 将用户加入黑名单
 
 加入黑名单后，对方将无法发送消息给自己。
 
 ```typescript
 // 用户 ID
 const userId = "tom";
-// 将好友添加到黑名单
+// 将用户添加到黑名单
 ChatClient.getInstance()
   .contactManager.addUserToBlockList(userId)
   .then(() => {
@@ -188,7 +227,7 @@ ChatClient.getInstance()
 ```typescript
 // 用户 ID
 const userId = "tom";
-// 将好友从黑名单移除
+// 将用户从黑名单移除
 ChatClient.getInstance()
   .contactManager.removeUserFromBlockList(userId)
   .then((list) => {

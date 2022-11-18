@@ -35,6 +35,7 @@
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMemberListFromServerWithId:cursor:pageSize:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager getChatroomMemberListFromServerWithId:@"chatroomId" cursor:1 pageSize:20 error:&error];
 ```
@@ -50,6 +51,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager removeMembers:fromChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager removeMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
 ```
@@ -67,6 +69,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager blockMembers:fromChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager blockMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
 ```
@@ -78,6 +81,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager unblockMembers:fromChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager unblockMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
 ```
@@ -89,11 +93,14 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomBlacklistFromServerWithId:pageNumber:pageSize:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager getChatroomBlacklistFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
 ```
 
 ### 管理聊天室白名单
+
+聊天室白名单中的成员在聊天室中发送的消息为高优先级，会优先送达，但不保证必达。当负载较高时，服务器会优先丢弃低优先级的消息。若即便如此负载仍很高，服务器也会丢弃高优先级消息。
 
 #### 获取聊天室白名单列表
 
@@ -102,6 +109,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomWhiteListFromServerWithId:completion]
 EMError *error = nil;
 [EMClient.sharedClient.roomManager getChatroomWhiteListFromServerWithId:@"aChatroomId" error:&error];
 ```
@@ -111,6 +119,7 @@ EMError *error = nil;
 所有聊天室成员可以调用 `isMemberInWhiteListFromServerWithChatroomId` 方法检查自己是否在白名单中，示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager isMemberInWhiteListFromServerWithChatroomId:completion]
 EMError *error = nil;
 [EMClient.sharedClient.roomManager isMemberInWhiteListFromServerWithChatroomId:@"aChatroomId" error:&error];
 ```
@@ -122,6 +131,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager addWhiteListMembers:fromChatroom:completion]
 EMError *error = nil;
 [EMClient.sharedClient.roomManager addWhiteListMembers:@[@"userId1",@"userId2"] fromChatroom:@"aChatroomId" error:&error];
 ```
@@ -133,6 +143,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager removeWhiteListMembers:fromChatroom:completion]
 EMError *error = nil;
 [EMClient.sharedClient.roomManager removeWhiteListMembers:@[@"userId1",@"userId2"] fromChatroom:@"aChatroomId" error:&error];
 ```
@@ -150,6 +161,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager muteMembers:muteMilliseconds:fromChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager muteMembers:@[@"userName"] muteMilliseconds:-1 fromChatroom:@"chatroomId" error:&error];
 ```
@@ -165,6 +177,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager unmuteMembers:fromChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager unmuteMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
 ```
@@ -176,6 +189,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMuteListFromServerWithId:pageNumber:pageSize:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager getChatroomMuteListFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
 ```
@@ -191,6 +205,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager muteAllMembersFromChatroom:completion]
 EMError *error = nil;
 [EMClient.sharedClient.roomManager muteAllMembersFromChatroom:@"chatRoomId" error:&error];
 ```
@@ -202,6 +217,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager unmuteAllMembersFromChatroom:completion]
 EMError *error = nil;
 [EMClient.sharedClient.roomManager unmuteAllMembersFromChatroom:@"chatRoomId" error:&error];
 ```
@@ -215,6 +231,7 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager updateChatroomOwner:newOwner:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager updateChatroomOwner:@"chatroomId" newOwner:@"textString" error:&error];
 ```
@@ -226,25 +243,23 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager addAdmin:toChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager addAdmin:@"userName" toChatroom:@"chatroomId" error:&error];
 ```
 
 #### 移除聊天室管理员
 
-仅聊天室所有者可以调用 `removeChatRoomAdmin` 方法移除聊天室管理员。成功移除后，被移除的管理员及其他管理员收到 `chatroomAdminListDidUpdate: removedAdmin` 回调。
+仅聊天室所有者可以调用 `removeAdmin` 方法移除聊天室管理员。成功移除后，被移除的管理员及其他管理员收到 `chatroomAdminListDidUpdate: removedAdmin` 回调。
 
 示例代码如下：
 
 ```objectivec
+// 同步方法，阻塞线程，异步方法参见[EMChatroomManager removeAdmin:fromChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager removeAdmin:@"userName" fromChatroom:@"chatroomId" error:&error];
 ```
 
 ## 更多操作
 
-你可以参考如下文档，在项目中实现更多的聊天室相关功能：
-
-- [聊天室概述](room_overview.html)
-- [创建和管理聊天室以及监听器介绍](room_manage.html)
-- [管理聊天室属性](room_attributes.html)
+你可以参考如下文档，在项目中实现监听：[监听器介绍](../ccim/ios/chatroom_mange.md)。

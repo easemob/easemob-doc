@@ -1,6 +1,6 @@
 ---
 {
-    pageKey: "v-24bd0e07",
+    pageUri: "/document/web/userprofile.html",
     title: "用户属性"
 }
 ---

@@ -1,4 +1,4 @@
-# 环信即时通讯 IM Flutter 快速入门
+# 快速开始
 
 <Toc />
 
@@ -29,7 +29,8 @@
 - Flutter 2.10 或以上版本;
 - Dart 2.16 或以上版本;
 
-[配置开发或者运行环境如果遇到问题，请参考这里](https://docs.flutter.dev/get-started/install)
+配置开发或者运行环境如果遇到问题，请参考 [这里](https://docs.flutter.dev/get-started/install)。
+
 - 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
 
 ## 项目设置
@@ -256,7 +257,7 @@ void _initSDK() async {
 
 ### 注册环信 IM 用户
 
-Demo 中使用 [开放注册](https://docs-im.easemob.com/im/server/ready/user?s[]=%E5%BC%80%E6%94%BE%E6%B3%A8%E5%86%8C)，在开放注册模式下，允许通过 App 注册，正式环境中请使用授权。
+Demo 中使用 [开放注册](/server-side/account_system.html#开放注册单个用户)，此操作需要在环信后台开启 `开放注册`。在开放注册模式下，允许通过 App 客户端直接注册环信用户，正式环境中请使用 [授权注册](server-side/account_system.html#授权注册单个用户)。
 
 在 `_signUp` 方法中添加注册代码：
 
@@ -348,7 +349,7 @@ void _sendMessage() async {
 ```dart
 void _addChatListener() {
   EMClient.getInstance.chatManager.addEventHandle(
-    // EMChatEventHandle 对应的 key。
+    // EMChatEventHandler 对应的 key。
     "UNIQUE_HANDLER_ID",
     EMChatEventHandler(
       onMessagesReceived: (messages) {
@@ -431,7 +432,7 @@ void dispose() {
 
 ## 运行项目
 
-以 iOS 为例，首先打开模拟器，之后在终端输入。
+以 iOS 为例，首先打开模拟器，然后在终端运行以下命令。
 
 ```bash
 flutter run

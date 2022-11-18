@@ -1,4 +1,4 @@
-# Android SDK 集成概述
+# SDK 集成概述
 
 <Toc />
 

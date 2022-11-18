@@ -34,7 +34,7 @@
 
 - 回调的方向是环信 IM 服务器向应用服务器发起 HTTP/HTTPS POST 请求。
 - 若同时设置了消息发送前和发送后两种回调，且消息发送前回调返回拒绝，则消息发送后回调将不会被触发。
-- 发送前回调只对客户端发送的消息有效，不包含 REST API 发送的消息。对同一个 app，可以针对不同类型的消息（“TEXT”，“IMAGE”，“VIDEO”，“LOCATION”，“VOICE” 和 ”FILE”）做配置；规则支持选择两种以上消息类型同时回调至一个指定服务器地址，接收到消息后，你可以区分消息的类型以便进行分类处理（详见 [消息管理 REST API](message.html)。
+- 发送前回调只对客户端发送的消息有效，不包含 REST API 发送的消息。对同一个 app，可以针对不同类型的消息（“TEXT”，“IMAGE”，“VIDEO”，“LOCATION”，“VOICE” 和 ”FILE”）做配置；规则支持选择两种以上消息类型同时回调至一个指定服务器地址，接收到消息后，你可以区分消息的类型以便进行分类处理（详见 [消息管理 REST API](message.html)）。
 - 环信 IM 服务器执行发送前回调后，如果你的应用服务器没有返回 valid 状态或者返回其他错误码，该条消息会根据默认设置（console 后台发送前回调中 ”调用失败时默认策略”）处理，不会再重试；后续消息依然正常执行回调。
 - 消息发送到你的应用服务器后，应用服务器需返回 HTTP 响应码 200 和 valid 属性，根据 valid 状态决定是否进行下发。
 
@@ -64,13 +64,13 @@
 
 请求采用 POST 方式，支持 `HTTP/HTTPS`，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
 
-请求 `header` 中包括以下字段：
+#### 请求 header
 
 | 字段名         | 值                 |
 | :------------- | :----------------- |
 | `Content-Type` | 内容类型，请填 `application/json`。 |
 
-#### 请求体
+#### 请求 body
 
 | 参数              | 类型                                                         |
 | :---------------- | :----------------------------------------------------------- |
@@ -82,17 +82,19 @@
 | `from`            | 消息的发送方。                                               |
 | `to`              | 消息的接收方。                                               |
 | `msg_id`          | 消息的 ID。                                                  |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](https://docs-im.easemob.com/im/server/basics/chatrecord#聊天记录数据结构)。 |
+| `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](message.html#历史消息内容)。 |
 | `securityVersion` | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
 | `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)回调规则。 |
 
-#### 响应体参数
+#### 响应 body
 
 | 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
 | :-------- | :----- | :------- | :----------------------------------------------------------- |
 | `valid`   | bool   | 是       | 根据开发者自己服务器设定的规则判断消息是否合法。             |
 | `code`    | String | 否       | 自定义信息，字符串类型。该内容会显示到客户端返回的 error 中，具体分为以下几种情况：<br/> 1、返回的应答包内该 code 并且类型正确，error 会显示为你填写的内容；<br/> 2、返回的应答包内 code 为空，error 显示为 `custom logic denied`；<br/>3、在指定时间内未响应，未收到应答包，按默认配置处理，则 error 显示为 `custom internal error`；<br/>4、如果返回的应答包出现错误，包括缺少必填字段、字段类型不符合约定类型，error 显示为 `custom internal error`。                  |
-| `payload` | Object | 否       | 如果需要更改消息内容可以回传修改后的内容，不修改则无需传该内容。格式同传入的消息内容，目前仅支持文本的形式，并且消息大小不能超过 1K。 |
+| `payload` | Object | 否       | 若无需修改消息内容，**请勿传该参数**。<br/>若需要更改消息内容可以回传修改后的内容，格式同传入的消息内容。目前仅支持文本的形式，并且消息大小不能超过 1K。|
+
+### 示例
 
 #### 请求示例
 
@@ -101,7 +103,7 @@
     "callId":"easemob-demo#test_0990a64f-dp01-6c50-8696-cf3b48b20e7e",
     "eventType":"chat_offline",
     "timestamp":1600060847294,
-    "chat_type":"groupchat", 
+    "chat_type":"groupchat",
     "group_id":"16934809238921545",
     "from":"user1",
     "to":"user2",
@@ -137,7 +139,7 @@
 - 在你的应用服务器端及时保存聊天历史记录或者离线消息。
 
 :::notice
-如果您对聊天消息没有时效性需求，可以直接通过免费的 [聊天记录拉取 REST API](https://docs-im.easemob.com/im/server/basics/chatrecord) 获取聊天记录，无需使用发送后回调。
+如果您对聊天消息没有时效性需求，可以直接通过免费的 [聊天记录拉取 REST API](message.html#获取历史消息文件) 获取聊天记录，无需使用发送后回调。
 :::
 
 ![](@static/images/server-side/im-callback1.png)
@@ -206,7 +208,7 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
 | `from`            | 消息的发送方。                                               |
 | `to`              | 消息的接收方。                                               |
 | `msg_id`          | 消息的 ID。                                                  |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](https://docs-im.easemob.com/im/server/basics/chatrecord#聊天记录数据结构)。 |
+| `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](message.html#历史消息内容)。 |
 | `securityVersion` | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成控制台做设置。 |
 | `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 Console 后台回调规则。 |
 
@@ -214,11 +216,11 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
 
 ```json
 {
-    "callId":"easemob-demo#test_0990a64f-dp01-6c50-8696-cf3b48b20e7e",
+    "callId":"XXXX-demo#XXXX-dp01-XXXX-8696-cf3b48b20e7e",
     "eventType":"chat_offline",
     "timestamp":1600060847294,
-    "chat_type":"groupchat", 
-    "group_id":"16934809238921545",
+    "chat_type":"groupchat",
+    "group_id":"169XXXX21545",
     "from":"user1",
     "to":"user2",
     "msg_id":"8924312242322",
@@ -229,8 +231,6 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
     "security":"2ca02c394bef9e7abc83958bcc3156d3"
 }
 ```
-
-[Payload 数据格式说明](https://docs-im.easemob.com/im/server/basics/chatrecord#聊天记录数据结构)
 
 #### 应答包字段说明
 
@@ -253,28 +253,28 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
 
 Authorization：`Bearer ${YourAppToken}`
 
-为提高项目的安全性，使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 仅支持使用 App Token 的鉴权方式，详见 [使用 Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
 #### 基本信息
 
 方法：`GET`
 
-接入点： `/{orgName}/{appName}/callbacks/storage/info`
+接入点： `/{org_name}/{app_name}/callbacks/storage/info`
 
 #### 路径参数
 
 | 参数      | 类型   | 是否必需 | 描述                                       |
 | :-------- | :----- | :------- | :----------------------------------------- |
-| `orgName` | String | 是       | 你在环信 IM 管理后台注册的组织唯一标识。   |
-| `appName` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识 。 |
+| `org_name` | String | 是       | 你在环信 IM 管理后台注册的组织唯一标识。   |
+| `app_name` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识。 |
 
-#### 请求头
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                     |
 | :-------------- | :----- | :------- | :--------------------------------------- |
 | `Authorization` | String | 是       | 鉴权 Token，管理员 Token（含）以上权限。 |
 
-#### 响应参数
+#### 响应 body
 
 | 参数              | 类型   | 描述                                                         |
 | :---------------- | :----- | :----------------------------------------------------------- |
@@ -295,7 +295,7 @@ Authorization：`Bearer ${YourAppToken}`
 
 ```shell
 curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
--H 'Authorization: Bearer {{token}}'
+-H 'Authorization: Bearer {token}'
 ```
 
 #### 响应示例
@@ -333,23 +333,23 @@ curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 
 方法：`POST`
 
-接入点： `http://{host}/{orgName}/{appName}/callbacks/storage/retry`
+接入点： `http://{host}/{org_name}/{app_name}/callbacks/storage/retry`
 
 #### 路径参数
 
 | 参数      | 类型   | 是否必需 | 描述                                      |
 | :-------- | :----- | :------- | :---------------------------------------- |
-| `orgName` | String | 是       | 你在环信 IM 管理后台注册的组织唯一标识。  |
-| `appName` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识。 |
+| `org_name` | String | 是       | 你在环信 IM 管理后台注册的组织唯一标识。  |
+| `app_name` | String | 是       | 你在环信 IM 管理后台注册的 App 唯一标识。 |
 
-#### 请求头
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`  | String | 是       | 内容类型，请填 `application/json`。                                          |
-| `Authorization` | String | 是       | 鉴权 App Token 的值。详见[使用 token 鉴权](https://docs-im.easemob.com/ccim/authentication)。 |
+| `Authorization` | String | 是       | 鉴权 App Token 的值。详见 [使用 app token 鉴权](easemob_app_token.html)。 |
 
-#### 请求体
+#### 请求 body
 
 | 参数        | 类型   | 是否必需 | 描述                                                         |
 | :---------- | :----- | :------- | :----------------------------------------------------------- |
@@ -357,7 +357,7 @@ curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 | `retry`     | Int    | 否       | 开发已重试的次数。考虑到补发也可能失败，服务器会继续存储。最开始是 0。 |
 | `targetUrl` | String | 否       | 补发消息的回调地址，如果为空，则使用原回调规则的回调地址。   |
 
-#### 响应参数
+#### 响应 body
 
 | 参数           | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |

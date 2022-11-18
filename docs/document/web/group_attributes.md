@@ -1,4 +1,4 @@
-# 群组-群属性管理
+# 群属性管理
 
 <Toc />
 
@@ -31,7 +31,8 @@
 let option = {
     groupId: "groupId",
     groupName: "groupName",
-    description: "A description of group"
+    description: "A description of group",
+    ext: "group detail extensions",
 };
 conn.modifyGroup(option).then(res => console.log(res))
 ```
@@ -125,3 +126,6 @@ let option = {
 };
 conn.getGroupSharedFilelist(option).then(res => console.log(res))
 ```
+### 监听群组事件
+
+有关详细信息，请参阅 [监听群组事件](group_manage.html#监听群组事件)。

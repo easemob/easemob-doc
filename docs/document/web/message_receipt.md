@@ -1,4 +1,4 @@
-# 消息管理-消息回执
+# 消息回执
 
 <Toc />
 
@@ -12,7 +12,7 @@
 
 单聊消息送达回执：
 
-  1. SDK 初始化时，用户将 `options.delivery` 设置为 `true` 开启消息送达回执。
+  1. SDK 初始化时，用户将 [`Connection` 类中的 `delivery` 参数](http://webim-h5.easemob.com/jsdoc/out/classes/Connection.Connection-1.html)设置为 `true` 开启消息送达回执。
   2. 发送方发送一条消息。
   2. 接收方收到消息后，SDK 会自动向发送方发送送达回执。
   3. 发送方通过监听 `onDeliveredMessage` 收到送达回执。

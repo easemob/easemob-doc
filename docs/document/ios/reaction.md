@@ -26,7 +26,7 @@ Reaction 场景示例如下：
 
 开始前，请确保满足以下条件：
 
-1. 完成 `HyphenateChat 3.9.2.1 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+1. 完成 `HyphenateChat 3.9.2.1 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 3. 已联系商务开通 Reaction 功能。
 
@@ -39,7 +39,7 @@ Reaction 场景示例如下：
 示例代码如下：
 
 ```objectivec
-// 添加 Reaction。
+// 添加 Reaction。异步方法
 [EMClient.sharedClient.chatManager addReaction:"reaction" toMessage:"messageId" completion:^(EMError * _Nullable error) {
 	refreshBlock(error, changeSelectedStateHandle);
 }];
@@ -58,7 +58,7 @@ Reaction 场景示例如下：
 示例代码如下：
 
 ```objectivec
-// 删除 Reaction。
+// 删除 Reaction。异步方法
 [EMClient.sharedClient.chatManager removeReaction:"reaction" fromMessage:"messageId" completion:^(EMError * _Nullable error) {
 	refreshBlock(error, changeSelectedStateHandle);
 }];
@@ -75,6 +75,7 @@ Reaction 场景示例如下：
 调用 `getReactionList` 从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，用户数量，用户列表（概要数据，即前三个用户信息）。示例代码如下：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.chatManager getReactionList:@["messageId"] groupId:@"groupId" chatType:EMChatTypeChat completion:^(NSDictionary<NSString *, EMMessageReaction *> * _Nonnull, EMError * _Nullable) {
 
 }];
@@ -85,6 +86,7 @@ Reaction 场景示例如下：
 调用 `getReactionDetail` 可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，用户数量和全部用户列表。示例代码如下：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.chatManager getReactionDetail:@"messageId" reaction:@"reaction" cursor:nil pageSize:30 completion:^(EMMessageReaction * _Nonnull, NSString * _Nullable cursor, EMError * _Nullable) {
 
 }];

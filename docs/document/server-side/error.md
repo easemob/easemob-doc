@@ -51,20 +51,21 @@
 | 400              | illegal_argument                   | “this is an invalid request.”                                | 请求无效，请检查调用接口的 url、header、body，是否符合所调用接口的要求，可以使用 curl 命令进行测试。 |
 | 400              | illegal_argument                   | “from can't be empty”                                        | from 表示消息发送者，无此字段 Server 会默认设置为 “from”:“admin”，有 from 字段但值为空字符串(“”)时请求失败，返回 400。 |
 | 400              | illegal_argument                   | “target_type can only be 'users' or 'chatgroups' or 'chatrooms'” | target_type 只能为 'users' or 'chatgroups' or 'chatrooms'，为其他字符串时请求失败，返回 400。 |
-| 400              | illegal_argument                   | “username is not legal”                                      | 注册使用的 username 不合法，username(Chat ID) 规则见 [用户体系集成](https://docs-im.easemob.com/ccim/rest/accountsystem) |
+| 400              | illegal_argument                   | “username is not legal”                                      | 注册使用的 username 不合法，username(Chat ID) 规则见 [用户体系集成](account_system.html#注册用户) |
 | 400              | illegal_argument                   | “This chatmessage request is not supported”                  | 可能是传入的时间格式不正确，正确的格式是：YYYYMMDDHH，如要获取 2018 年 02 月 09 日 12 点到 13 点的聊天记录，这样设置：2018020912。 |
 | 400              | illegal_argument                   | “illegal arguments: appkey: easemob-demo#chatdemoui, time: 2018020918, maybe chat message history is expired or unstored” | 对应时间的聊天记录还未生成或已过期，目前聊天记录免费保存 3 天。 |
 | 400              | invalid_parameter                  | “some of [groupid] are not valid fields”                     | 修改群信息目前只支持修改“群名称”、“群描述”、“群最大人数”，这个 error 是修改的参数不支持，如修改 groupid。 |
 | 400              | required_property_not_found        | “Entity user requires a property named username”             | 这个是被重置密码的 username 不存在导致。                     |
 | 400              | duplicate_unique_property_exists   | “Application null Entity user requires that property named username be unique, value of hxtest1 exists” | 注册的 username 已存在，返回 400；注：如果是批量注册，若一次调用返回一个 ID 已存在，则此次调用注册的其他不存在的 ID 不会注册，需将已存在的 ID 从数组中移除重新调用注册。 |
-| 400              |                                    | “set presence failed”                                        | 在线状态设置失败。                                           |
-| 400              |                                    | “ext is too big”                                             | 在线状态扩展信息长度超过限制                                 |
-| 400              |                                    | “resource not exist”                                         | 设备来源不存在。                                             |
-| 400              |                                    | “you can't sub yourself”                                     | 无法订阅自己的在线状态。                                     |
+| 400              | illegal_argument | “message is too large”     | 发送消息时消息体超过了 40 KB 会导致该错误，需要拆成几个更小的请求体重试。     |
+| 400              |              | “set presence failed”     | 在线状态设置失败。               |
+| 400              |     | “ext is too big”                                             | 在线状态扩展信息长度超过限制               |
+| 400              |         | “resource not exist”                                         | 设备来源不存在。                                             |
+| 400              |      | “you can't sub yourself”        | 无法订阅自己的在线状态。          |
 | 400              |                                    | “too many sub presence”                                      | 订阅用户数量超过上限。                                       |
 | 400              |                                    | “too many get presences”                                     | 获取在线状态的用户数量超过上限。                             |
 | 400              |                                    | “too many unsub presences”                                   | 取消订阅的用户数量超过上限。                                 |
-| 400              |                                    | “too many queries”                                           | 查询次数超过限制。                                           |
+| 400              |                                    | “too many queries”         | 查询次数超过限制。                                           |
 | 401              | unauthorized                       | “registration is not open, please contact the app admin”     | 返回 401 是未授权，error_description 的描述为 App Key 使用了授权注册，需要 header 加上管理员 token，才有权限注册用户；若加上 token 返回 401，则 token 可能失效，建议重取重试。 |
 | 401              | unauthorized                       | “Unable to authenticate due to expired access token”         | token 过期或未传 token。                                     |
 | 401              | auth_bad_access_token              | “Unable to authenticate due to corrupt access token”         | 发送请求时使用的 token 错误。注意：不是 token 过期。         |
@@ -81,7 +82,7 @@
 | 404              | service_resource_not_found         | “Service resource not found”                                 | 获取的 username 不存在，若用户列表存在该 username，则是因为存在脏数据，可以使用 uuid 代替 username 将该 ID 删除，再使用该 username 重新创建。 |
 | 404              | service_resource_not_found         | “Service resource not found”                                 | 要删除的 username 不存在，若用户列表存在该 username，则可使用 user 的 uuid 代替 username 删除。 |
 | 404              | storage_object_not_found           | “Failed to find chat message history download url for appkey: hx#hxdemo2, time: 2018020912” | 对应的时间没有聊天记录，如确定有聊天记录，请提交工单反馈 Agora Chat 技术支持团队确认。 |
-| 413              | Request Entity Too Large           | “Request Entity Too Large”                                   | 请求体过大，如上传文件时文件过大；或发送消息时消息体过大，请求体如果超过 5kb 会导致 413 错误，需要拆成几个更小的请求体重试，同时用户消息+扩展字段的长度在 4k 字节以内。 |
+| 413              | Request Entity Too Large           | “Request Entity Too Large”                                   | 请求体过大，如上传文件时文件过大，需要拆成几个更小的请求体重试。 |
 | 415              | web_application                    | “Unsupported Media Type”                                     | 请求体的类型不支持，请检查 header 是否添加 ”Content-Type”:“application/json”，body 是否符合标准的 JSON 格式，再确认 header 中是否还有非接口需要的参数，可以舍去。 |
 | 429              | resource_limited                   | “You have exceeded the limit of the Free edition. Please upgrade to higher edition.” | 说明触发了免费版限制，请联系环信客户经理咨询。               |
 | 429              | reach_limit                        | “This request has reached api limit”                         | 超过接口每秒调用次数，加大调用间隔或者联系商务调整限流大小，见 [限制条件](/product/limitation.html)。 |

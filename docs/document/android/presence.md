@@ -1,4 +1,4 @@
-# 在线状态订阅 Android
+# 在线状态订阅
 
 <Toc />
 
@@ -34,7 +34,7 @@
 
 使用在线状态功能前，请确保满足以下条件：
 
-1. 完成 `3.9.1 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+1. 完成 `3.9.1 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 3. 已联系商务开通在线状态订阅功能。
 
@@ -128,7 +128,7 @@ EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer
 为方便用户管理订阅关系，SDK 提供 `com.hyphenate.chat.EMPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
 ```java
-EMClient.getInstance().presenceManager().fetchSubscribedMembers(1, 50, new EMValueCallBack<List<String>>() {
+EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSize, new EMValueCallBack<List<String>>() {
     @Override
     public void onSuccess(List<String> subscribedMembers) {
         
@@ -146,7 +146,7 @@ EMClient.getInstance().presenceManager().fetchSubscribedMembers(1, 50, new EMVal
 如果不关注用户的在线状态变更，你可以调用 `com.hyphenate.chat.EMPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
 ```java
-EMClient.getInstance().presenceManager().fetchPresenceStatus(contactsFromServer, new EMValueCallBack<List<EMPresence>>() {
+EMClient.getInstance().presenceManager().fetchPresenceStatus(contactsList, new EMValueCallBack<List<EMPresence>>() {
     @Override
     public void onSuccess(List<EMPresence> presences) {
         

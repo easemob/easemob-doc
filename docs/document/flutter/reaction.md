@@ -1,10 +1,12 @@
-# 消息表情回复 Flutter
+# 消息表情回复
 
 <Toc />
 
 环信即时通讯 IM 提供消息表情回复（下文统称 “Reaction”）功能。用户可以在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量来确认投票。
 
-注意：目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+:::notice
+目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+:::
 
 ## 技术原理
 
@@ -112,23 +114,12 @@ try {
 ### 管理 Reaction 监听
 
 ```dart
-// 监听 Reaction 更新
-class _ChatPageState extends State<ChatPage> {
-  @override
-  void initState() {
-    super.initState();
+// 添加监听
     EMClient.getInstance.chatManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-      EMChatEventHandler(
-        onMessageReactionDidChange: (list) => {},
-      ),
-    );
-  }
+  EMChatEventHandler(onMessageReactionDidChange: (events) {}),
+);
 
-  @override
-  void dispose() {
-    EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
-}
+// 移除监听
+EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```

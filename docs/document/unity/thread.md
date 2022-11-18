@@ -24,7 +24,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 `1.0.6 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+- 完成 `1.0.5 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
@@ -41,7 +41,7 @@
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.ThreadManager.CreateThread(threadName, msgId, groupid, new ValueCallBack<ChatThread>(
     onSuccess: (thread) =>
     {
@@ -70,7 +70,7 @@ SDKClient.Instance.ThreadManager.CreateThread(threadName, msgId, groupid, new Va
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.ThreadManager.DestroyThread(tid, new CallBack(
     onSuccess: () =>
     {
@@ -96,7 +96,7 @@ SDKClient.Instance.ThreadManager.DestroyThread(tid, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.ThreadManager.JoinThread(tid, new ValueCallBack<ChatThread>(
     onSuccess: (thread) =>
     {
@@ -121,7 +121,7 @@ SDKClient.Instance.ThreadManager.JoinThread(tid, new ValueCallBack<ChatThread>(
 
 示例代码如下：
 
-```csharp
+```C#
 SDKClient.Instance.ThreadManager.LeaveThread(tid, new CallBack(
     onSuccess: () =>
     {
@@ -142,7 +142,7 @@ SDKClient.Instance.ThreadManager.LeaveThread(tid, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.ThreadManager.RemoveThreadMember(tid, uname, new CallBack(
     onSuccess: () =>
     {
@@ -163,7 +163,7 @@ SDKClient.Instance.ThreadManager.RemoveThreadMember(tid, uname, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.ThreadManager.ChangeThreadSubject(tid, subject, new CallBack(
     onSuccess: () =>
     {
@@ -182,7 +182,7 @@ SDKClient.Instance.ThreadManager.ChangeThreadSubject(tid, subject, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.ThreadManager.GetThreadDetail(tid, new ValueCallBack<ChatThread>(
     onSuccess: (thread) =>
     {
@@ -203,7 +203,7 @@ SDKClient.Instance.ThreadManager.GetThreadDetail(tid, new ValueCallBack<ChatThre
 
 子区所属群组的所有成员均可以调用 `FetchThreadMembers` 方法从服务器分页获取子区成员列表。
 
-```csharp
+```c#
 SDKClient.Instance.ThreadManager.FetchThreadMembers(tid, cursor, page_size, new ValueCallBack<CursorResult<string>>(
     onSuccess: (cursor_result) =>
     {
@@ -224,7 +224,7 @@ SDKClient.Instance.ThreadManager.FetchThreadMembers(tid, cursor, page_size, new 
 
 1. 用户可以调用 `FetchMineJoinedThreadList` 方法从服务器分页获取自己加入和创建的子区列表：
 
-```csharp
+```c#
  SDKClient.Instance.ThreadManager.FetchMineJoinedThreadList(cursor, page_size, new ValueCallBack<CursorResult<ChatThread>>(
     onSuccess: (cursor_result) =>
     {
@@ -243,14 +243,14 @@ SDKClient.Instance.ThreadManager.FetchThreadMembers(tid, cursor, page_size, new 
 
 2. 用户还可以调用 `FetchThreadListOfGroup` 方法从服务器分页获取指定群组的子区列表：
 
-```csharp
+```c#
 SDKClient.Instance.ThreadManager.FetchThreadListOfGroup(tid, joined, cursor, page_size, new ValueCallBack<CursorResult<ChatThread>>(
     onSuccess: (cursor_result) =>
     {
         Debug.Log($"FetchThreadListOfGroup success");
         if (null != cursor_result)
         {
-            //处理返回的子区列表cursor_result.Data
+            //处理返回的子区列表 cursor_result.Data
         }
     },
     onError: (code, desc) =>
@@ -266,7 +266,7 @@ SDKClient.Instance.ThreadManager.FetchThreadListOfGroup(tid, joined, cursor, pag
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.ThreadManager.GetLastMessageAccordingThreads(threadIds, new ValueCallBack<Dictionary<string, Message>>(
     onSuccess: (dict) =>
     {
@@ -289,7 +289,7 @@ SDKClient.Instance.ThreadManager.GetLastMessageAccordingThreads(threadIds, new V
 
 示例代码如下：
 
-```csharp
+```c#
 class ThreadManagerDelegate : IChatThreadManagerDelegate
 {
 

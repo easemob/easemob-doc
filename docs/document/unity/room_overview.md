@@ -1,6 +1,6 @@
 ---
 {
-    pageKey: "v-1e5c7dd3",
+    pageUri: "/document/android/room_overview.html",
     title: "聊天室概述"
 }
 ---

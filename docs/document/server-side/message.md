@@ -44,7 +44,7 @@
 
 环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 Authorization 字段：
 
-Authorization：`Bearer ${YourToken}`
+Authorization：`Bearer ${YourAppToken}`
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本篇涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 app token 鉴权](easemob_app_token.html)。
 
@@ -55,7 +55,7 @@ Authorization：`Bearer ${YourToken}`
 | 消息类型                | 描述                                                         |
 | :---------------------- | :----------------------------------------------------------- |
 | 文本/透传消息           | 调用发送消息方法，在请求 body 中传入消息内容。               |
-| 图片/语音/视频/文件消息 | 1. 调用 [文件上传方法](#文件上传) 上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 uuid。<br/>2. 调用发送消息方法，在请求 body 中传入该 uuid。 |
+| 图片/语音/视频/文件消息 | 1. 调用 [文件上传方法](#文件上传) 上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。<br/>2. 调用发送消息方法，在请求 body 中传入该 UUID。 |
 
 调用服务端接口发送消息时，可选的 `from` 字段用于指定发送方。
 
@@ -66,6 +66,8 @@ Authorization：`Bearer ${YourToken}`
 :::
 
 ### 发送单聊消息
+
+**发送频率**：通过 RESTful API 单个应用每分钟最多可发送 6000 条消息，每次最多可向 600 人发送。例如，一次向 600 人发消息，视为 600 条消息。
 
 #### HTTP 请求
 
@@ -79,7 +81,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ##### 请求 header
 
-|      参数       | 类型   | 是否必需 |                             描述                             |
+|      参数       | 类型   | 是否必需 | 描述                             |
 | :-------------: | :----- | :------: | :----------------------------------------------------------: |
 | `Content-Type`  | String |    是    |             内容类型。请填 `application/json`。              |
 |    `Accept`     | String |    是    |             内容类型。请填 `application/json`。              |
@@ -92,7 +94,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | 参数          | 类型   | 是否必需 | 描述                                                         |
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
 | `from`        | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为管理员，即 “admin”；若传入字段但值为空字符串 (“”)，请求失败。 |
-| `to`          | List   | 是       | 消息接收方的用户 ID 数组。每次可发送的接收方用户上限为 600 人，即 600 条消息。每分钟最多可向 6000 个用户发送信息。 |
+| `to`          | List   | 是       | 消息接收方的用户 ID 数组。每次最多可向 600 个用户发送消息。 |
 | `type`        | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`        | JSON   | 是       | 消息内容。对于不同消息类型 ，body 包含的字段不同，详情见下表。 |
 | `sync_device` | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。 |
@@ -109,7 +111,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ##### 图片消息
 
-| 参数       | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
+| 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `filename` | String | 是       | 图片名称。                                                   |
 | `secret`   | String | 否       | 图片的访问密钥。成功上传图片后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。如果图片文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
@@ -118,7 +120,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ##### 语音消息
 
-| 参数       | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
+| 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `filename` | String | 是       | 语音文件的名称。                                             |
 | `secret`   | String | 否       | 语音文件访问密钥，成功上传语音文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。 如果语音文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
@@ -127,7 +129,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ##### 视频消息
 
-| 参数           | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
+| 参数           | 类型   | 是否必需 | 描述                                                         |
 | :------------- | :----- | :------- | :----------------------------------------------------------- |
 | `thumb`        | String | 是       | 视频缩略图 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。uuid 为视频缩略图唯一标识，成功上传缩略图文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 | `length`       | Int    | 是       | 视频时长，单位为秒。                                         |
@@ -138,7 +140,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ##### 文件消息
 
-| 参数       | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
+| 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `filename` | String | 是       | 文件名称。                                                   |
 | `secret`   | String | 否       | 文件访问密钥，成功上传文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。如果文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
@@ -160,7 +162,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ##### 自定义消息
 
-| 参数          | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
+| 参数          | 类型   | 是否必需 | 描述                                                         |
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
 | `customEvent` | String | 否       | 用户自定义的事件类型。该参数的值必须满足正则表达式 `[a-zA-Z0-9-_/\.]{1,32}`，长度为 1-32 个字符。 |
 | `customExts`  | JSON   | 否       | 用户自定义的事件属性，类型必须是 `Map<String,String>`，最多可以包含 16 个元素。`customExts` 是可选的，不需要可以不传。 |
@@ -173,7 +175,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 | 参数   | 类型 | 描述                                                         |
 | :----- | :--- | :----------------------------------------------------------- |
-| `data` | JSON | 返回数据详情。该字段的值为包含接收方用户 ID 和 发送的消息的 ID 的键值对。<br/>例如 "user2": "1029457500870543736"，表示向 user2 发送了消息 ID 为1029457500870543736 的消息。 |
+| `data` | JSON | 返回数据详情。该字段的值为包含接收方用户 ID 和 发送的消息的 ID 的键值对。<br/>例如 "user2": "1029457500870543736"，表示向 user2 发送了消息 ID 为 1029457500870543736 的消息。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -405,6 +407,8 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" -H 'Content-Type: applic
 
 ### 发送群聊消息
 
+**发送频率**：通过 RESTful API 单个应用每秒最多可发送 20 条消息，每次最多可向 3 个群组发送。例如，一次向 3 个群组发送消息，视为 3 条消息。
+
 #### HTTP 请求
 
 ```http
@@ -427,13 +431,14 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 
 通用请求体为 JSON 对象，是所有消息的外层结构。
 
-| 参数 | 类型  | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
+| 参数 | 类型  | 是否必需 | 描述                                                         |
 | :--- | :---- | :------- | :----------------------------------------------------------- |
-| `to` | Array | 是       | 消息接收方群组 ID 数组，每秒最多可向群组发送 20 条信息，每次最多可向 3 个群组发送消息。例如，一次向 3 个群组发消息，表示发送了 3 条消息。 |
+| `to` | Array | 是       | 消息接收方群组 ID 数组。每次最多可向 3 个群组发送消息。|
 
-群聊消息的通用请求体中的其他参数与单聊消息类似，详见 [通用请求体](#通用请求体)。
-
-与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
+:::notice
+1. 群聊消息的通用请求体中除了不包含 `sync_device` 参数，其他参数与单聊消息类似， 详见 [通用请求体](#通用请求体)。<br/>
+2. 与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
+:::
 
 #### HTTP 响应
 
@@ -675,6 +680,8 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups" -H 'Content-Type: a
 
 ### 发送聊天室消息
 
+**发送频率**：通过 RESTful API 单个应用每秒最多可向聊天室发送 100 条消息，每次最多可向 10 个聊天室发送消息。例如，一次向 10 个聊天室发送消息，视为 10 条消息。
+
 #### HTTP 请求
 
 ```http
@@ -697,13 +704,14 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 通用请求体为 JSON 对象，是所有消息的外层结构。不同类型的消息只是 `body` 字段内容存在差异。
 
-| 参数 | 类型  | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
+| 参数 | 类型  | 是否必需 | 描述                                                         |
 | :--- | :---- | :------- | :----------------------------------------------------------- |
-| `to` | Array | 是       | 消息接收方聊天室 ID 数组，每秒钟最多可向 100 个聊天室发送信息，每次可发送的接收方聊天室上限为 10 个，如：一次发送给 10 个聊天室时，表示为 10 条消息。 |
+| `to` | Array | 是       | 消息接收方聊天室 ID 数组。每次最多可向 10 个聊天室发送消息。|
 
-聊天室消息的通用请求体中的其他参数与单聊消息类似，详见 [通用请求体][#通用请求体]。
-
-与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
+:::notice
+1. 聊天室消息的通用请求体除了不包含 `sync_device` 参数，其他参数与单聊消息类似，详见 [通用请求体](#通用请求体)。<br/>
+2. 与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
+:::
 
 #### HTTP 响应
 
@@ -965,7 +973,7 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | 参数              | 类型   | 是否必需 | 描述                                                         |
 | :---------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`    | String | 否       | 内容类型。请填 `multipart/form-data`。上传文件会自动填充这个头。 |
-| `Authorization`   | String | 是       | `Bearer ${YourToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization`   | String | 是       | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
 | `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true` ：是。用户需要通过响应 body 中获取的文件访问密钥（share-secret）才能下载该文件。<br/> - `false` ：否。表示不限制访问。用户可以直接下载该文件。 |
 
 #### 请求 body
@@ -973,6 +981,8 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | 参数   | 类型   | 是否必需 | 描述           |
 | :----- | :----- | :------- | :------------- |
 | `file` | String | 是       | 文件本地路径。 |
+| `thumbnail-height` | Int | 否       | 图片缩略图的高度。<br/>文件类型为图片时会自动生成图片的缩略图。该参数仅在上传的图片超过 10 KB 时，才会生效。若不传该参数，默认为 170 像素，可在[环信即时通讯控制台](https://console.easemob.com/user/login)修改该默认值。|
+| `thumbnail-width` | Int | 否       | 图片缩略图的宽度。<br/>文件类型为图片时会自动生成图片的缩略图。该参数仅在上传的图片超过 10 KB 时，才会生效。若不传该参数，默认为 170 像素，可在[环信即时通讯控制台](https://console.easemob.com/user/login)修改该默认值。|
 
 ### HTTP 响应
 
@@ -1160,7 +1170,7 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
 
 #### 路径参数
 
-| 参数   | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
+| 参数   | 类型   | 是否必需 | 描述                                                         |
 | :----- | :----- | :------- | :----------------------------------------------------------- |
 | `time` | String | 是       | 历史消息查询的起始时间。UTC 时间，使用 ISO8601 标准，格式为 yyyyMMddHH。例如 time 为 2018112717，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。 |
 
@@ -1283,6 +1293,7 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 | 参数          | 类型   | 描述                                                         |
 | :------------ | :----- | :----------------------------------------------------------- |
 | `file_length` | Long   | 图片附件大小，单位为字节。                                   |
+| `filename`    | String | 包含图片格式后缀的图片名称。                                                      |
 | `secret`      | String | 图片文件访问密钥。如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
 | `size`        | JSON   | 图片的尺寸。单位为像素。<br/> - `height`：图片高度。<br/> - `width`：图片宽度。 |
 | `type`        | String | 消息类型。图片消息为 `img`。                                 |
@@ -1576,7 +1587,7 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{orgName}/{appName}/users/{userName}/user_channel
+DELETE https://{host}/{org_name}/{app_name}/users/{userName}/user_channel
 ```
 
 #### 路径参数
@@ -1597,9 +1608,9 @@ DELETE https://{host}/{orgName}/{appName}/users/{userName}/user_channel
 
 | 参数          | 类型   | 是否必需 | 描述                                                         |
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
-| `channel`     | String | 是       | 要删除的会话 ID。                                            |
+| `channel`     | String | 是       | 要删除的会话 ID。该参数的值取决于会话类型 `type` 的值:<br/> - `type` 为 `chat`，即单聊时，会话 ID 为对端用户 ID；<br/> - `type` 为 `groupchat`，即群聊时，会话 ID 为群组 ID。                                         |
 | `type`        | String | 是       | 会话类型。<br/> - `chat`：单聊会话；<br/> -`groupchat`：群聊会话。 |
-| `delete_roam` | Bool   | 是       | 是否删除服务端消息。<br/> - `true`：是；<br/> - `false`：否。 |
+| `delete_roam` | Bool   | 是       | 是否删除服务端消息。<br/> - `true`：是。若删除了该会话的服务端消息，则用户无法从服务器拉取该会话的漫游消息。<br/> - `false`：否。用户仍可以从服务器拉取该会话的漫游消息。|
 
 ### HTTP 响应
 
@@ -1651,7 +1662,7 @@ curl -X DELETE -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX
 ### HTTP 请求
 
 ```http
-POST https://{host}/{orgName}/{appName}/messages/users/import
+POST https://{host}/{org_name}/{app_name}/messages/users/import
 ```
 
 #### 请求 header
@@ -1754,7 +1765,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
 ### HTTP 请求
 
 ```http
-POST https://{host}/{orgName}/{appName}/messages/chatgroups/import
+POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 ```
 
 #### 请求 header

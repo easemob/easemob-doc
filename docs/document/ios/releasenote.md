@@ -1,8 +1,59 @@
-# iOS SDK 更新日志
+# iOS IM SDK 更新日志
 
 <Toc />
 
-## 版本 V3.9.5 Dev 2022-8-2（开发版）
+## 版本 V3.9.8 Dev 2022-11-8（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[聊天室消息优先级](message_send_receive.html)。
+- [IM SDK] 群组信息更新后的 `EMGroupManagerDelegate#groupSpecificationDidUpdate` 回调中添加更新后的群组信息。
+
+### 优化
+
+[IM SDK] 修复某些场景下调用 `updateMessage` 方法导致的缓存与数据库消息不一致问题。
+ 
+## 版本 V3.9.7.1 Dev 2022-9-30（开发版）
+
+### 新增特性
+
+[IM SDK] 在 `EMOptions` 类 中增加 `area` 属性限制连接边缘节点的范围。
+
+### 优化
+
+[IM SDK] 优化通信协议，减少数据量。
+
+### 修复
+
+- [IM SDK] 修复数据统计不正确的问题。  
+- [IM SDK] 修复极少数场景下打印日志导致崩溃的问题。    
+- [IM SDK] 修复开启全链路加入（FPA）功能时导致崩溃的问题。
+
+## 版本 V3.9.6.1 Dev 2022-9-21（开发版）
+
+### 优化
+
+- [IM SDK] 优化聊天室自定义属性更新的回调方法 `onAttributesUpdate`，返回修改成功的聊天室自定义属性的集合。 
+- [IM SDK] 优化聊天室自定义属性移除的回调方法 `onAttributesRemoved`，返回成功移除的聊天室自定义属性的 key 数组。
+- [IMKit]  语音播放切换至媒体音量。
+
+## 版本 V3.9.6 Dev 2022-9-16（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[聊天室自定义属性功能](room_attributes.html)。
+- [IM SDK] 新增 `EMLogDelegate` 类，实现用户日志回调。
+
+### 优化
+
+[IM SDK] 优化获取漫游消息的性能。
+
+### 修复
+
+- [IM SDK] 修复少数场景下，同步或拉取消息时消息量较大时收取失败的问题。 
+- [Demo] 修复部分 Demo bug。
+
+## 版本 V3.9.5 2022-8-2（开发版）
 
 ### 新增特性
 
@@ -21,12 +72,12 @@
 - [IM SDK] 纠正部分拼写错误的接口；
 - [Demo] 修复部分 Demo bug。
 
-## 版本 V3.9.4 Dev 2022-6-16
+## 版本 V3.9.4 2022-6-16
 
 ### 新增特性
 
 - [IM SDK] 接收的消息中增加是否是离线消息 [isOnlineState()](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/interface_e_m_chat_message.html#a78d632fe28019bd04eaa9f9df8b94fd6) 的标记；
-- [IM SDK] 新增群聊消息限流错误码 [EMError#MESSAGECURRENTLIMITING](https://docs-im.easemob.com/ccim/ios/errorcode)
+- [IM SDK] 新增群聊消息限流错误码 [EMError#MESSAGECURRENTLIMITING](error.html)
 - [IM SDK] 新增绑定设备 token 的接口 [EMPushManager#bindDeviceToken](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/interface_e_m_client.html#abafb1f83bc8fd3f59043bc7dd6af8282)。
 
 ### 优化
@@ -40,7 +91,7 @@
 
 - [EaseIMKit] 修复删除 Reaction 接口重复调用的问题。
 
-## 版本 V3.9.3 Dev 2022-5-26
+## 版本 V3.9.3 2022-5-26
 
 ### 新增特性
 
@@ -49,22 +100,22 @@
 ### 优化
 
 - [IM SDK] 优化网络链路，提升网络访问性能；
-- [IM SDK] 优化 [拉取漫游消息接口](https://docs-im.easemob.com/ccim/android/message4#分页获取指定会话的历史消息)，增加指定拉取消息方向的参数；
+- [IM SDK] 优化 [拉取漫游消息接口](message_retrieve.html)，增加指定拉取消息方向的参数；
 
-## 版本 V3.9.2.1 Dev 2022-5-25
+## 版本 V3.9.2.1 2022-5-25
 
 修复 3.9.2 上传 AppStore 时的依赖库问题
 
-## 版本 V3.9.2 Dev 2022-5-15
+## 版本 V3.9.2 2022-5-15
 
 ### iOS SDK 3.9.2
 
-#### 新增特性:
+### 新增特性:
 
-- [IM SDK] 新增 [消息 Reaction](https://docs-im.easemob.com/ccim/ios/reaction) 功能，可以对消息进行不同的响应。
-- [IM SDK] 新增 [举报 API](https://docs-im.easemob.com/ccim/ios/moderation) 用于内容审核。
+- [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应。
+- [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核。
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 优化获取服务器接入点 (dnsconfig) 的功能。
 - [IM SDK] 优化数据上报功能。
@@ -76,33 +127,37 @@
 
 ### EaseCallKit 3.9.2
 
-#### 优化：
+### 优化：
 
 - [EaseCallKIt] 升级 Agora RTC SDK 版本到 3.6.2。
 
-## 版本 V3.9.1.1 Dev 2022-4-27
+## 版本 V3.9.1.1 2022-4-27
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 修复偶发的拉取历史消息不能正常显示的问题。
 
-## 版本 V3.9.1 Dev 2022-4-19
+## 版本 V3.9.1 2022-4-19
 
-#### 新增特性:
+:::tip
+仅 V3.9.1 及以下版本支持私有化部署。
+:::
 
-- [IM SDK] [用户在线状态 (Presence) 订阅](https://docs-im.easemob.com/ccim/ios/presence)功能。
-- [IM SDK] [翻译](https://docs-im.easemob.com/ccim/ios/translation)功能更新，增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
+### 新增特性:
 
-#### 优化：
+- [IM SDK] [用户在线状态 (Presence) 订阅](presence.html)功能。
+- [IM SDK] [翻译](message_translation.html)功能更新，增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
+
+### 优化：
 
 - [IM SDK] 缩短发送消息超时时间。
 - [IM SDK] DNS 服务器地址列表支持优先级设置，HTTP 和 TCP 请求重试时按 DNS 服务器地址的优先级发送请求，提升请求成功率。
 
-## 版本 V3.9.0 Dev 2022-02-23
+## 版本 V3.9.0 2022-02-23
 
 ### iOS SDK 3.9.0
 
-#### 新增特性：
+### 新增特性：
 
 - [IM SDK] [单向删除服务端会话 API](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_chat_manager-p.html#a4ac87045ad781e99c59acc271f9af433)；
 - [IM SDK] 免打扰事件的多设备间同步；
@@ -110,14 +165,14 @@
 - [IM SDK] 发送图片支持 PNG 格式；
 - [IM SDK] 非好友不能发送消息错误码 [221 EMErrorUserNotOnRoster]；
 
-#### 优化：
+### 优化：
 
 - [IM SDK] 减少弱网时发送消息的等待时间；
 - [IM SDK] EMMessage 重命名为 EMChatMessage，避免与系统类冲突；
 - [IM SDK] 移除 IEMPushManager 中 callBack EMError 参数的 _Nonnull 约束。
 - [IM SDK] API 调用在 Swift 语法的表现形式。
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 消息发送重试被连接成功事件中断；
 - [IM SDK] SDK 内存泄漏；
@@ -125,75 +180,75 @@
 
 ### EaseIM Demo 3.9.0
 
-#### 新增特性：
+### 新增特性：
 
 - [IM SDK] 通讯录 → 群聊下添加创建群组入口；
 - [IM SDK] 非好友不能发送消息提醒；
 - [IM SDK] 推送透传消息回调中增加获取推送内容示例。
 
-#### 优化：
+### 优化：
 
 - [IM SDK] EMMessage 重命名为 EMChatMessage；
 - [IM SDK] 服务器配置界面，“使用自定义服务器”开关生效；
 - [IM SDK] 免费版注册用户数超过 100 时，提示注册错误。
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 用户被群主移除和拉黑后，其会话列表仍显示该群组的数据；
 - [IM SDK] 聊天室重命名后，聊天室列表未刷新。
 
 ### EaseIMKit 3.9.0
 
-#### 新增特性：
+### 新增特性：
 
 - [IM SDK] 删除服务器会话时同时会删除本地会话；
 - [IM SDK] 免打扰事件的多设备间同步；
 - [IM SDK] 发送图片支持 PNG 格式。
 
-#### 优化：
+### 优化：
 
 - [IM SDK] EMMessage 重命名为 EMChatMessage；
 - [IM SDK] 优化撤回消息的相关提示信息。
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 语音消息动画播放异常；
 - [IM SDK] 语音消息“已听”属性重启后失效。
 
 ### EaseCallKit 3.9.0
 
-#### 优化：
+### 优化：
 
 - [EaseCallKIt] EMMessage 重命名为 EMChatMessage。
 
-## 版本 V3.8.9.1 Dev 2021-12-30
+## 版本 V3.8.9.1 2021-12-30
 
-#### 修复：
+### 修复：
 
 - [IM SDK] 增加极端情况下打开数据库失败时重建数据库的策略。
 
-## 版本 V3.8.9 Dev 2021-12-27
+## 版本 V3.8.9 2021-12-27
 
-#### 新增
+### 新增
 
 - [IM SDK] 增加翻译功能 API；
 - [IM SDK] 位置消息增加建筑物名称字段；
 - [IM SDK] 增加按照时间删除消息的 API；
 - [IM SDK] 增加获取会话中消息总数的 API；
 
-#### 修复
+### 修复
 
 - [IM SDK] 修复部分崩溃的问题；
 - [IM SDK] 修复数据库加密的 bug；
 - [IM SDK] 修复自动登录不兼容卸载重装问题。
 
-## 版本 V3.8.8 Dev 2021-12-06
+## 版本 V3.8.8 2021-12-06
 
-#### 新增
+### 新增
 
 - [IM SDK] 增加 取消收到群组消息后检查是否在群组中的过程。
 
-#### 优化
+### 优化
 
 - [IM SDK] 优化 API naming；
 - [IM SDK] 更新推送 Token 过程，降低服务器请求次数；
@@ -202,20 +257,20 @@
 - [IM SDK] 修改 SDK 中修改为默认使用 HTTPS；
 - [IM SDK] 优化 Agora Token 过期后不做解绑 Token 操作。
 
-#### 修复
+### 修复
 
 - [IM SDK] 修复 Agora Token 即将过期和已经过期回调时机不准确问题。
 
 **请注意： 此版本有切换账号杀掉应用后再打开应用，不能正常打开数据库的问题，请使用 3.8.9 版本。**
 
-## 版本 V3.8.7 Dev 2021-10-22
+## 版本 V3.8.7 2021-10-22
 
 SDK :
 
 - 增加：token登录支持自动登录，如果不希望自动登录，请在初始化时将EMOptions.isAutoLogin设置为NO
 - 支持版本：提升到 iOS 10 为最低版本
 
-## 版本 V3.8.6 Dev 2021-10-12
+## 版本 V3.8.6 2021-10-12
 
 SDK :
 
@@ -326,7 +381,7 @@ EaseIMKit：
 
 SDK：
 
-- 新增设置、获取用户属性的接口，集成参见：[用户属性](https://docs-im.easemob.com/ccim/ios/userprofile)
+- 新增设置、获取用户属性的接口，集成参见：[用户属性](userprofile.html)
 - 新增App层输出信息到日志文件的接口
 
 EaseIMKit：
@@ -341,7 +396,7 @@ EaseIMKit：
 
 EaseCallKit（2021-05-07）：
 
-- 修改加入声网频道的方式，改为使用数字uid加入，增加与小程序的互通，`与之前版本不互通`,参见[EaseCallKit使用指南](https://docs-im.easemob.com/im/ios/other/easecallkit)
+- 修改加入声网频道的方式，改为使用数字uid加入，增加与小程序的互通，`与之前版本不互通`,参见[EaseCallKit使用指南](easecallkit.html)
 
 ## 版本 V3.8.0 2021-02-27
 

@@ -1,4 +1,4 @@
-# 群组-管理群组成员
+# 管理群组成员
 
 <Toc />
 
@@ -34,7 +34,7 @@
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.AddGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -51,7 +51,7 @@ SDKClient.Instance.GroupManager.AddGroupMembers(groupId, members, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, list, new CallBack (
     onSuccess: () =>
     {
@@ -70,7 +70,7 @@ SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, list, new CallBack (
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.ChangeGroupOwner(groupId, newOwner, new CallBack(
     onSuccess: () =>
     {
@@ -89,7 +89,7 @@ SDKClient.Instance.GroupManager.ChangeGroupOwner(groupId, newOwner, new CallBack
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.AddGroupAdmin(groupId, adminId, new CallBack(
     onSuccess: () =>
     {
@@ -106,7 +106,7 @@ SDKClient.Instance.GroupManager.AddGroupAdmin(groupId, adminId, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.RemoveGroupAdmin(groupId, adminId, new CallBack(
     onSuccess: () =>
     {
@@ -121,11 +121,11 @@ SDKClient.Instance.GroupManager.RemoveGroupAdmin(groupId, adminId, new CallBack(
 
 #### 将成员加入群组黑名单
 
-仅群主和群管理员可以调用 `BlockGroupMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `IGroupManagerDelegate#OnUserRemovedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
+仅群主和群管理员可以调用 `BlockGroupMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `IGroupManagerDelegate#OnUserRemovedFromGroup` 回调。其他群成员会收到该成员退出群组的回调，如需该回调，请联系商务开通。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.BlockGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -142,7 +142,7 @@ SDKClient.Instance.GroupManager.BlockGroupMembers(groupId, members, new CallBack
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.UnBlockGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -159,7 +159,7 @@ SDKClient.Instance.GroupManager.UnBlockGroupMembers(groupId, members, new CallBa
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.GetGroupBlockListFromServer(groupId, pageNum, pageSize, handle: new ValueCallBack<List<string>>(
     onSuccess: (list) =>
     {
@@ -178,7 +178,7 @@ SDKClient.Instance.GroupManager.GetGroupBlockListFromServer(groupId, pageNum, pa
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.MuteGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -195,7 +195,7 @@ SDKClient.Instance.GroupManager.MuteGroupMembers(groupId, members, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.UnMuteGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -212,7 +212,7 @@ SDKClient.Instance.GroupManager.UnMuteGroupMembers(groupId, members, new CallBac
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, handle: new ValueCallBack<List<string>>(
     onSuccess: (list) => {
     },
@@ -222,13 +222,15 @@ SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, handle: new 
 ));
 ```
 
+### 开启和关闭群组全员禁言
+
 #### 开启群组全员禁言
 
 仅群主和群管理员可以调用 `MuteGroupAllMembers` 方法开启全员禁言。群组全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.MuteGroupAllMembers(groupId, new CallBack(
     onSuccess: () => {
     },
@@ -242,7 +244,7 @@ SDKClient.Instance.GroupManager.MuteGroupAllMembers(groupId, new CallBack(
 
 仅群主和群管理员可以调用 `UnMuteGroupAllMembers` 方法取消全员禁言，示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.UnMuteGroupAllMembers(groupId, new CallBack(
     onSuccess: () => {
     },
@@ -260,7 +262,7 @@ SDKClient.Instance.GroupManager.UnMuteGroupAllMembers(groupId, new CallBack(
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.AddGroupWhiteList(groupId, members, new CallBack(
     onSuccess: () => {
     },
@@ -276,7 +278,7 @@ SDKClient.Instance.GroupManager.AddGroupWhiteList(groupId, members, new CallBack
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.RemoveGroupWhiteList(groupId, members, new CallBack(
     onSuccess: () => {
     },
@@ -290,7 +292,7 @@ SDKClient.Instance.GroupManager.RemoveGroupWhiteList(groupId, members, new CallB
 
 所有群成员可以调用 `checkIfInGroupWhiteList` 方法检查自己是否在群白名单中，示例代码如下：
 
-```csharp
+```c#
 public void checkIfInGroupWhiteList(final String groupId, EMValueCallBack<Boolean> callBack)
 SDKClient.Instance.GroupManager.CheckIfInGroupWhiteList(groupId, new ValueCallBack<bool>(
     onSuccess: (ret) => {
@@ -306,7 +308,7 @@ SDKClient.Instance.GroupManager.CheckIfInGroupWhiteList(groupId, new ValueCallBa
 
 示例代码如下：
 
-```csharp
+```c#
 SDKClient.Instance.GroupManager.GetGroupWhiteListFromServer(currentGroupId, handle: new ValueCallBack<List<string>>(
     onSuccess: (list) => {
     },
@@ -316,6 +318,6 @@ SDKClient.Instance.GroupManager.GetGroupWhiteListFromServer(currentGroupId, hand
 ));
 ```
 
-### 更多
+### 监听群组事件
 
-- [监听器介绍](group_manage.html#监听群组事件)
+详见 [监听群组事件](group_manage.html#监听群组事件)。

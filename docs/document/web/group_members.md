@@ -1,4 +1,4 @@
-# 群组-群成员管理
+# 群组成员管理
 
 <Toc />
 
@@ -8,11 +8,11 @@
 
 环信即时通讯 IM Web SDK 提供以下群成员管理功能：
 
-- 群组加人、踢人；
-- 管理群主及群管理员；
-- 管理群组白名单；
-- 管理群组黑名单；
-- 管理禁言。
+- 群组加人、踢人
+- 管理群主及群管理员
+- 管理群组白名单
+- 管理群组黑名单
+- 管理禁言
 
 ## 前提条件
 
@@ -20,7 +20,7 @@
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 了解群成员角色，详见 [群组功能介绍](group_overview.html)。
+- 了解群成员角色，详见 [群组概述](group_overview.html)。
 
 ## 实现方法
 
@@ -215,7 +215,7 @@ conn.isInGroupAllowlist(option).then(res => console.log(res));
 
 #### 获取群组白名单
 
-仅群主和群管理员可以调用 `getGroupBlocklist` 方法获取群组白名单列表。
+仅群主和群管理员可以调用 `getGroupAllowlist` 方法获取群组白名单列表。
 
 示例代码如下：
 
@@ -223,18 +223,14 @@ conn.isInGroupAllowlist(option).then(res => console.log(res));
 let option = {
     groupId: "groupId"
 }
-conn.getGroupBlocklist(option).then(res => console.log(res));
+conn.getGroupAllowlist(option).then(res => console.log(res));
 ```
 
 ### 管理群组黑名单
 
 #### 将成员加入群组黑名单
 
-仅群主和群管理员可以调用 `blockGroupMembers` 方法将指定成员添加至群组黑名单。
-
-被加入黑名单后，该成员会收到 `removeMember` 事件。
-
-群成员被加入黑名单后无法再收发群组消息并被移出群组，如想再次加入群组，群主或群管理员必须先将其移出黑名单。
+仅群主和群管理员可以调用 `blockGroupMembers` 方法将指定成员添加至群组黑名单。被加入黑名单后，该成员会收到 `removeMember` 事件。其他群成员会收到该成员退出群组的回调，如需该回调，请联系商务开通。群成员被加入黑名单后无法再收发群组消息并被移出群组，如想再次加入群组，群主或群管理员必须先将其移出黑名单。
 
 示例代码如下：
 
@@ -273,20 +269,20 @@ let option = {
 conn.getGroupBlocklist(option).then(res => console.log(res))
 ```
 
-### 管理群组禁言
+### 管理群组禁言列表
 
 群主和群管理员可以将指定群成员添加或移出禁言列表，也可开启关闭全员禁言。全员禁言和单独的成员禁言不冲突，开启和关闭全员禁言，并不影响禁言列表。
 
 #### 将成员加入群组禁言列表
 
-仅群主和群管理员可以调用 `muteGroupMember` 方法将指定成员添加至群组禁言列表。群成员被加入禁言列表中后，被禁言成员、群组管理员和者群主（除操作者外）会收到 `muteMember` 事件。群成员被加入群禁言列表后，将不能够发言，即使其被加入群白名单也不能发言。
+仅群主和群管理员可以调用 `muteGroupMember` 方法将一个或多个成员添加至群组禁言列表。群成员被加入禁言列表中后，被禁言成员、群组管理员和者群主（除操作者外）会收到 `muteMember` 事件。群成员被加入群禁言列表后，将不能够发言，即使其被加入群白名单也不能发言。
 
 示例代码如下：
 
 ```javascript
 let option = {
     groupId: "groupId"，
-    username: "userId",
+    username: "user1" || ["user1", "user2"],
     muteDuration: 886400000 // 禁言时长，单位为毫秒。
 };
 conn.muteGroupMember(option).then(res => console.log(res))
@@ -294,14 +290,14 @@ conn.muteGroupMember(option).then(res => console.log(res))
 
 #### 将成员移出群组禁言列表
 
-仅群主和群管理员可以调用 `unmuteGroupMember` 方法将指定成员移出群组禁言列表。被移出的成员、群组管理员和者群主（除操作者外）会收到 `unmuteMember` 事件。
+仅群主和群管理员可以调用 `unmuteGroupMember` 方法将一个或多个成员移出群组禁言列表。被移出的成员、群组管理员和者群主（除操作者外）会收到 `unmuteMember` 事件。
 
 示例代码如下：
 
 ```javascript
 let option = {
     groupId: "groupId",
-    username: "userId"
+    username: "user1" || ["user1", "user2"]
 };
 conn.unmuteGroupMember(option).then(res => console.log(res))
 ```
@@ -345,3 +341,6 @@ let option = {
 conn.enableSendGroupMsg(option).then(res => console.log(res))
 ```
 
+### 监听群组事件
+
+有关详细信息，请参阅 [监听群组事件](group_manage#监听群组事件)。

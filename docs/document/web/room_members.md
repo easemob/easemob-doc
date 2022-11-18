@@ -118,6 +118,8 @@ conn.unblockChatRoomMembers(option).then(res => console.log(res));
 
 ### 管理聊天室白名单
 
+聊天室白名单中的成员在聊天室中发送的消息为高优先级，会优先送达，但不保证必达。当负载较高时，服务器会优先丢弃低优先级的消息。若即便如此负载仍很高，服务器也会丢弃高优先级消息。
+
 #### 获取聊天室白名单列表
 
 仅聊天室所有者和管理员可调用 `getChatRoomAllowlist` 方法获取当前聊天室白名单成员列表。
@@ -196,7 +198,7 @@ conn.getChatRoomMuteList(option).then(res => console.log(res))
 
 #### 将成员添加至聊天室禁言列表
 
-仅聊天室所有者和管理员可调用 `muteChatRoomMember` 方法将指定成员添加至聊天室禁言列表。除操作者外，聊天室其他成员会收到 `muteMember` 事件。
+仅聊天室所有者和管理员可调用 `muteChatRoomMember` 方法将指定成员添加至聊天室禁言列表。被禁言的聊天室成员会收到 `muteMember` 事件。
 
 :::notice
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
@@ -218,7 +220,7 @@ conn.muteChatRoomMember(option).then(res => console.log(res))
 仅聊天室所有者和管理员可调用 `unmuteChatRoomMember` 方法将一组成员解除禁言。
 
 :::notice
-聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。除操作者外，聊天室其他成员会收到 `removeMute` 事件。
+聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。被解除禁言的聊天室成员会收到 `removeMute` 事件。
 :::
 
 示例代码如下：
@@ -288,3 +290,6 @@ let option = {
 }
 conn.removeChatRoomAdmin(option).then(res => console.log(res))
 ```
+### 监听聊天室事件
+
+有关详细信息，请参阅 [聊天室事件](room_manage.html#监听聊天室事件)。

@@ -1,18 +1,18 @@
-# 群组-管理群组成员
+# 管理群组成员
 
 <Toc />
 
-群组是支持多人沟通的即时通讯系统，本文指导你如何使用环信即时通讯 IM React Native SDK 在实时互动 app 中实现群组成员管理相关功能。
+群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM React Native SDK 在实时互动 app 中实现群组成员管理相关功能。
 
 ## 技术原理
 
 环信即时通讯 IM React Native SDK 提供 `ChatGroupManager` 类和 `ChatGroup` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
-- 群组加人
-- 群组踢人
+- 群组加人、踢人
 - 管理群主及群管理员
 - 管理群组黑名单
-- 管理群组禁言
+- 管理群组禁言列表
+- 开启、关闭群组全员禁言
 - 管理群组白名单
 - 获取群组成员
 
@@ -72,7 +72,7 @@ ChatClient.getInstance()
 2. 调用 `joinPublicGroup` 或 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
     1. 调用 `joinPublicGroup` 方法加入无需群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicOpenJoin`。
     申请人不会收到任何回调，其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
-    
+
     示例代码如下：
 
     ```typescript
@@ -86,7 +86,7 @@ ChatClient.getInstance()
         console.log("join group operation fail.", reason);
     });
     ```
-    
+
     2. 调用 `requestToJoinPublicGroup` 方法加入需要群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicJoinNeedApproval`。示例代码如下：
 
     ```typescript
@@ -123,7 +123,7 @@ ChatClient.getInstance()
         console.log("accept join request operation fail.", reason);
     });
     ```
-    
+
     - 若群主或群管理员拒绝申请人入群，需要调用 `declineJoinApplication` 方法。申请人会收到 `ChatGroupEventListener#onRequestToJoinDeclined` 回调。
 
     示例代码如下：
@@ -143,6 +143,8 @@ ChatClient.getInstance()
     ```
 
 #### 邀请用户入群
+
+邀请方式见 [邀请用户入群的配置](group_manage.html#创建群组)。
 
 邀请用户加群流程如下：
 
@@ -168,7 +170,7 @@ ChatClient.getInstance()
     ```
 
     - 普通成员邀请人入群，需要调用 `inviterUser` 方法：
-    
+
     `EMGroupStyle` 设置为 `PrivateMemberCanInvite` 时，所有群成员均可以邀请人进群。
 
     ```typescript
@@ -201,7 +203,7 @@ ChatClient.getInstance()
         console.log("accept invitation operation fail.", reason);
     });
     ```
-    
+
     - 受邀人拒绝入群组，需要调用 `declineInvitation` 方法。
 
     ```typescript
@@ -290,9 +292,11 @@ ChatClient.getInstance()
 
 ### 管理群组黑名单
 
+群主及群管理员可以将群组中的指定群成员加入或者移出群黑名单。群成员被加入黑名单后将无法收发群消息。
+
 #### 将群成员拉入群组黑名单
 
-仅群主和群管理员可以调用 `blockMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `ChatGroupEventListener#onUserRemoved` 回调，其他群成员收到 `ChatGroupEventListener#onMemberExited` 回调。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
+仅群主和群管理员可以调用 `blockMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `ChatGroupEventListener#onUserRemoved` 回调。其他群成员会收到该成员退出群组的回调，如需该回调，请联系商务开通。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
 
 示例代码如下：
 
@@ -340,7 +344,7 @@ ChatClient.getInstance()
   });
 ```
 
-### 管理群组禁言
+### 管理群组禁言列表
 
 为了方便管理群组，环信即时通讯 IM SDK 提供了针对成员和群组的禁言操作。
 
@@ -400,6 +404,10 @@ ChatClient.getInstance()
     console.log("get mute list fail.", reason);
   });
 ```
+
+### 开启和关闭全员禁言
+
+为了快捷管理群成员发言，群主和群成员可以开启和关闭群组全员禁言。
 
 #### 开启全员禁言
 

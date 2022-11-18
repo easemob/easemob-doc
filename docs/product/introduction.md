@@ -24,11 +24,11 @@
 
 客户端集成请查看相应的环信 SDK 开发文档：
 
-[环信即时通讯 IM Android 快速入门](/document/android/quickstart.html)；
+[环信即时通讯 IM Android 快速开始](/document/android/quickstart.html)；
 
-[环信即时通讯 IM iOS 快速入门](/document/ios/quickstart.html)；
+[环信即时通讯 IM iOS 快速开始](/document/ios/quickstart.html)；
 
-[环信即时通讯 IM Web 快速入门](/document/web/quickstart.html)。
+[环信即时通讯 IM Web 快速开始](/document/web/quickstart.html)。
 
 ## 功能概述
 

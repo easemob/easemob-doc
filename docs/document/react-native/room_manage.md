@@ -1,4 +1,4 @@
-# 聊天室-创建和管理聊天室以及监听事件
+# 创建和管理聊天室以及监听事件
 
 <Toc />
 
@@ -176,7 +176,7 @@ ChatClient.getInstance()
 示例代码如下：
 
 ```typescript
-// 实现监听器以及定义监听器对象
+// 实现监听器以及定义监听器对象。
 const roomListener: ChatRoomEventListener = new (class
   implements ChatRoomEventListener
 {
@@ -184,18 +184,18 @@ const roomListener: ChatRoomEventListener = new (class
   constructor(parent: QuickTestScreenBase<S, SL>) {
     this.that = parent;
   }
-    // 聊天室被解散。
+  // 聊天室被解散。聊天室的所有成员会收到该事件。
   onChatRoomDestroyed(params: {
     roomId: string;
     roomName?: string | undefined;
   }): void {
     console.log(`onChatRoomDestroyed:`, params.roomId, params.roomName);
   }
-  // 有用户加入聊天室
+  // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
   onMemberJoined(params: { roomId: string; participant: string }): void {
     console.log(`onMemberJoined:`, params.roomId, params.participant);
   }
-  // 有成员离开聊天室
+  // 有成员主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
   onMemberExited(params: {
     roomId: string;
     participant: string;
@@ -208,7 +208,7 @@ const roomListener: ChatRoomEventListener = new (class
       params.roomName
     );
   }
-  // 有成员被移出聊天室
+  // 有成员被移出聊天室。被移出的成员会收到该事件。
   onRemoved(params: {
     roomId: string;
     participant?: string | undefined;
@@ -221,7 +221,7 @@ const roomListener: ChatRoomEventListener = new (class
       params.roomName
     );
   }
-  // 有成员被加入禁言列表
+  // 有成员被加入禁言列表。被添加的成员收到该事件。
   onMuteListAdded(params: {
     roomId: string;
     mutes: string[];
@@ -234,19 +234,19 @@ const roomListener: ChatRoomEventListener = new (class
       params.expireTime
     );
   }
-  // 有成员被移出禁言列表
+  // 有成员被移出禁言列表。被解除禁言的成员会收到该事件。
   onMuteListRemoved(params: { roomId: string; mutes: string[] }): void {
     console.log(`onMuteListRemoved:`, params.roomId, params.mutes);
   }
-  // 有成员被设为管理员
+  // 有成员被设为管理员。被添加的管理员会收到该事件。
   onAdminAdded(params: { roomId: string; admin: string }): void {
     console.log(`onAdminAdded:`, params.roomId, params.admin);
   }
-  // 有成员被移除管理员权限
+  // 有成员被移除管理员权限。被移除的管理员会收到该事件。
   onAdminRemoved(params: { roomId: string; admin: string }): void {
     console.log(`onAdminRemoved:`, params.roomId, params.admin);
   }
-  // 聊天室所有者变更
+  // 聊天室所有者变更。聊天室所有成员会收到该事件。
   onOwnerChanged(params: {
     roomId: string;
     newOwner: string;
@@ -259,22 +259,22 @@ const roomListener: ChatRoomEventListener = new (class
       params.oldOwner
     );
   }
-  // 聊天室公告变更
+  // 聊天室公告变更。聊天室的所有成员会收到该事件。
   onAnnouncementChanged(params: {
     roomId: string;
     announcement: string;
   }): void {
     console.log(`onAnnouncementChanged:`, params.roomId, params.announcement);
   }
-  // 有成员被加入聊天室白名单
+  // 有成员被加入聊天室白名单。被添加的成员收到该事件。
   onAllowListAdded(params: { roomId: string; members: string[] }): void {
     console.log(`onAllowListAdded:`, params.roomId, params.members);
   }
-  // 有成员被移出聊天室白名单
+  // 有成员被移出聊天室白名单。被移出白名单的成员会收到该事件。
   onAllowListRemoved(params: { roomId: string; members: string[] }): void {
     console.log(`onAllowListRemoved:`, params.roomId, params.members);
   }
-  // 聊天室全员禁言状态变更
+  // 聊天室全员禁言状态变更。聊天室所有成员会收到该事件。
   onAllChatRoomMemberMuteStateChanged(params: {
     roomId: string;
     isAllMuted: boolean;
@@ -285,11 +285,41 @@ const roomListener: ChatRoomEventListener = new (class
       params.isAllMuted ? "true" : "false"
     );
   }
+  // 聊天室详情发生改变。聊天室所有成员会收到该事件。
+  onSpecificationChanged?(room: ChatRoom): void {
+    console.log(`onSpecificationChanged:`, room);
+  }
+  // 聊天室自定义属性（key-value）有更新。聊天室所有成员会收到该事件。
+  onAttributesUpdated?(params: {
+    roomId: string;
+    attributes: Map<string, string>;
+    from: string;
+  }): void {
+    console.log(
+      `onAttributesUpdated:`,
+      params.roomId,
+      params.attributes,
+      params.from
+    );
+  }
+  // 聊天室自定义属性被移除。聊天室所有成员会收到该事件。
+  onAttributesRemoved?(params: {
+    roomId: string;
+    removedKeys: Array<string>;
+    from: string;
+  }): void {
+    console.log(
+      `onAttributesRemoved:`,
+      params.roomId,
+      params.removedKeys,
+      params.from
+    );
+  }
 })(this);
 
-// 清空所有监听器
+// 清空聊天室监听器。
 ChatClient.getInstance().roomManager.removeAllRoomListener();
 
-// 添加监听器
+// 添加聊天室监听器。
 ChatClient.getInstance().roomManager.addRoomListener(roomListener);
 ```

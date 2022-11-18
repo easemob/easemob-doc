@@ -2,7 +2,7 @@
 
 <Toc />
 
-群组是支持多人沟通的即时通讯系统，本文指导你如何使用环信即时通讯 IM SDK 在实时互动 app 中实现群组属性相关功能。
+群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中实现群组属性相关功能。
 
 ## 技术原理
 
@@ -50,6 +50,7 @@
 示例代码如下：
 
 ```objectivec
+// 同步方法，异步方法见 [EMGroupManager updateGroupAnnouncementWithId:announcement:completion:]
 [[EMClient sharedClient].groupManager updateGroupAnnouncementWithId:@"groupID"
                          announcement:@"announcement"
                          error:nil];
@@ -62,6 +63,7 @@
 示例代码如下：
 
 ```objectivec
+// 同步方法，异步方法见 [EMGroupManager getGroupAnnouncementWithId:completion:]
 [[EMClient sharedClient].groupManager getGroupAnnouncementWithId:@"groupID" error:nil];
 ```
 
@@ -74,6 +76,7 @@
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager uploadGroupSharedFileWithId:@"groupID"
                          filePath:@"filePath"
                          progress:nil
@@ -87,6 +90,7 @@
 群主和群管理员可删除全部的群共享文件，群成员只能删除自己上传的群文件。
 
 ```objectivec
+// 同步方法，异步方法见 [EMGroupManager removeGroupSharedFileWithId:sharedFileId:completion:]
 [[EMClient sharedClient].groupManager removeGroupSharedFileWithId:@"groupID"
                          sharedFileId:@"fileID"
                          error:nil];
@@ -97,6 +101,7 @@
 所有群成员均可以调用 `getGroupFileListWithId` 方法获取群共享文件。
 
 ```objectivec
+// 同步方法，异步方法见 [EMGroupManager getGroupFileListWithId:pageNumber:pageSize:completion:]
 [[EMClient sharedClient].groupManager getGroupFileListWithId:@"groupID"
                          pageNumber:pageNumber
                          pageSize:pageSize
@@ -110,6 +115,7 @@
 示例代码如下：
 
 ```objectivec
+// 同步方法，异步方法见 [EMGroupManager updateGroupExtWithId:ext:completion:]
 [[EMClient sharedClient].groupManager updateGroupExtWithId:@"groupID"
                          ext:@"ext"
                          error:nil];
@@ -117,8 +123,5 @@
 
 ## 更多操作
 
-你可以参考如下文档，在项目中实现更多的群组相关功能：
+详见[监听群组事件](group_manage.html)。
 
-- [群组概述](group_overview.html)
-- [创建和管理群组以及监听器介绍](group_manage.html)
-- [群成员管理](group_members.html)

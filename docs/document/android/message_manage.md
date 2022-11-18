@@ -1,4 +1,4 @@
-# 消息管理–管理本地消息数据
+# 管理本地消息数据
 
 <Toc />
 
@@ -14,7 +14,6 @@
 - `deleteConversation` 删除本地存储的会话；
 - `conversation.getUnreadMsgCount` 获取指定会话的未读消息数；
 - `chatManager().getUnreadMessageCount` 获取所有未读消息数；
-- `deleteConversationFromServer` 删除服务端的会话和聊天记录；
 - `searchMsgFromDB` 在本地存储的消息中搜索；
 - `insertMessage` 在指定会话中写入消息。
 
@@ -80,14 +79,12 @@ conversation.markMessageAsRead(messageId);
 EMClient.getInstance().chatManager().markAllConversationsAsRead();
 ```
 
-### 删除会话及聊天记录
+### 删除会话及历史消息
 
-SDK 提供两个接口，分别可以删除本地会话和聊天记录或者删除当前用户在服务器端的会话和聊天记录。
-
-- 删除本地会话和聊天记录示例代码如下：
+你可以删除本地会话和历史消息，示例代码如下：
 
 ```java
-// 删除和特定用户的会话，如果需要保留聊天记录，传 `false`。
+// 删除和特定用户的会话，如果需要保留历史消息，传 `false`。
 EMClient.getInstance().chatManager().deleteConversation(username, true);
 ```
 
@@ -97,22 +94,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 conversation.removeMessage(deleteMsg.msgId);
 ```
 
-- 删除服务器端会话和聊天记录，示例代码如下：
-
-```java
-// 删除指定会话，如果需要保留聊天记录，`isDeleteServerMessages` 传 `false`。
-EMClient.getInstance().chatManager().deleteConversationFromServer(conversationId, conversationType, isDeleteServerMessages, new EMCallBack() {
-    @Override
-    public void onSuccess() {
-
-    }
-
-    @Override
-    public void onError(int code, String error) {
-
-    }
-});
-```
+删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](message_retrieve.html#删除服务端会话及其历史消息)。
 
 ### 根据关键字搜索会话消息
 
@@ -152,20 +134,10 @@ EMClient.getInstance().chatManager().saveMessage(message);
 如果需要更新消息可以选用以下方法的任意一种：
 
 ```java
-// 直接通过 `EMChatManager` 更新 SDK 本地数据库消息
+// 简洁方式：直接通过 `EMChatManager` 更新 SDK 本地数据库消息
 EMClient.getInstance().chatManager().updateMessage(message);
 
-// 先获取会话，再更新 SDK 本地数据库会话中的消息
+// 正在使用 `EMConversation` 类时：先获取会话，再更新 SDK 本地数据库会话中的消息
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 conversation.updateMessage(message);
 ```
-
-### 更多操作
-
-你可以参考如下文档，在项目中实现更多的消息相关功能：
-
-- [消息概述](message_overview.html)
-- [管理本地消息数据](message_manage.html)
-- [从服务器获取会话和消息（消息漫游）](message_retrieve.html)
-- [获取消息的已读回执和送达回执](message_receipt.html)
-- [实现翻译功能](message_translation.html)

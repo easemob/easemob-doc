@@ -1,19 +1,19 @@
-# 用户关系管理
+# 管理用户关系
 
 <Toc />
 
 用户登录后，可进行添加联系人、获取好友列表等操作。
-
-本文介绍如何通过环信即时通讯 IM Flutter SDK 管理好友关系，包括添加、同意、拒绝、删除、查询好友，以及管理黑名单，包括添加、移出、查询黑名单。
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
 - 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请和删除好友等操作。
 - 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。
 
+本文介绍如何通过环信即时通讯 IM Flutter SDK 管理用户关系。
+
 ## 技术原理
 
-环信即时通讯 IM React Native SDK 提供 `EMContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
+环信即时通讯 IM Flutter SDK 提供 `EMContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
 
 - `addContact` 申请添加好友；
 - `deleteContact` 删除好友；
@@ -39,7 +39,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 1. 用户添加指定用户为好友
 
 ```dart
-// 用户 ID
+// 要添加为联系人的用户 ID
 String userId = "foo";
 // 申请加为好友的理由
 String reason = "Request to add a friend.";
@@ -76,47 +76,31 @@ try{
 3. 接收方对于同意，申请方收到监听事件 `onContactInvited`。
 
 ```dart
-class _ContactPageState extends State<ContactPage> {
-  @override
-  void initState() {
-    super.initState();
+// 注册监听
     EMClient.getInstance.contactManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
       EMContactEventHandler(
-        onContactInvited: (userId, reason) {},
+    onFriendRequestAccepted: (userId, reason) {},
       ),
     );
-  }
 
-  @override
-  void dispose() {
-    EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
-}
+// 移除监听
+EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
 4. 对方拒绝，收到监听事件 `onFriendRequestDeclined`。
 
 ```dart
-class _ContactPageState extends State<ContactPage> {
-  @override
-  void initState() {
-    super.initState();
+// 注册监听
     EMClient.getInstance.contactManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
       EMContactEventHandler(
         onFriendRequestDeclined: (userId) {},
       ),
     );
-  }
 
-  @override
-  void dispose() {
+// 移除监听
     EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
-}
 ```
 
 ### 获取好友列表
@@ -155,7 +139,9 @@ try {
 
 ### 将用户加入黑名单
 
-你可以调用 `addUserToBlockList` 添加用户到黑名单，添加后对方将无法发送消息给自己
+你可以调用 `addUserToBlockList` 添加用户到黑名单，添加后对方将无法发送消息给自己。
+
+用户可以将任何其他聊天用户添加到他们的黑名单列表中，无论该用户是否是联系人。添加到黑名单列表的联系人保留在联系人列表中。
 
 ```dart
 // 用户 ID

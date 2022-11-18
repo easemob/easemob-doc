@@ -52,7 +52,8 @@
 | 下载文件      |  GET     | /{org_name}/{app_name}/chatfiles/{uuid}       | 100 次/秒/App Key                                                 |
 | 获取历史消息（聊天记录）文件   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 次/分钟/App Key                                               |
 | 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
-| 服务端单向删除会话   |    DELETE    | /{org_name}/{appName}/users/{userName}/user_channel          | 100 次/秒/App Key                                                 |
+| 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 100 次/秒/App Key                                                 |
+| 拉取会话列表    |   GET    | /{org_name}/{app_name}/user/{username}/user_channels       | 5 次/分钟/单用户 ID，100 次/秒/App Key    |
 
 ## 用户属性
 
@@ -71,7 +72,7 @@
 
 ## 用户关系管理
 
-| Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
+| Rest API 接口 |方法  | 接口 URL| 接口最高调用频率 |
 | :------------- | :----- | :----------------------------------------------------------- | :------------------------- |
 | 添加好友   |    POST         | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
 | 移除好友    |    DELETE        | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
@@ -137,6 +138,11 @@
 | 删除聊天室  |  DELETE  | /{org_name}/{app_name}/chatrooms/{chatroom_id}                   | 100 次/秒/App Key                                                 |
 | 获取聊天室公告  |   GET  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement      | 100 次/秒/App Key                                                 |
 | 修改聊天室公告   |    POST | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement      | 100 次/秒/App Key                                                 |
+| 获取聊天室自定义属性 | POST  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 100 次/秒/App Key                                                 |
+| 设置聊天室自定义属性 | PUT  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username} | 100 次/秒/App Key                                                 |
+| 强制设置聊天室自定义属性 | PUT | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}/forced | 100 次/秒/App Key                                                 |
+| 删除聊天室自定义属性 | DELETE  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username} | 100 次/秒/App Key                                                 |
+| 强制删除聊天室自定义属性 | DELETE  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}/forced | 100 次/秒/App Key                                                 |
 
 ## 聊天室成员管理
 
@@ -172,9 +178,9 @@
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
-| 设置用户全局禁言  |  POST      | /{org_name}/{appName}/mutes         | 100 次/秒/App Key  |
+| 设置用户全局禁言  |  POST      | /{org_name}/{app_name}/mutes         | 100 次/秒/App Key  |
 | 查询单个用户 ID 全局禁言 |   GET   | /{org_name}/{appName}/mutes/username  | 100 次/秒/App Key  |
-| 查询 app 下的所有全局禁言的用户  |   GET  | /{org_name}/{appName}/mutes        | 100 次/秒/App Key  |
+| 查询 app 下的所有全局禁言的用户  |   GET  | /{org_name}/{app_name}/mutes        | 100 次/秒/App Key  |
 
 ## 用户在线状态管理
 

@@ -1,4 +1,4 @@
-# 聊天室-创建和管理聊天室
+# 创建和管理聊天室及监听聊天室事件
 
 <Toc />
 
@@ -46,7 +46,7 @@
 let options = {
     name: 'chatRoomName', // 聊天室名称。
     description: 'description', // 聊天室描述。
-    maxusers: 200, // 聊天室最大成员数（包括聊天室创建者），默认值 200，最大不超过 5,000。
+    maxusers: 200, // 聊天室允许的最大成员数（包括聊天室创建者），默认值 200，最大不超过 5,000。
     members: ['user1', 'user2'] // 聊天室成员。此属性可选，但是如果包含此项，数组元素至少一个。
 }
 conn.createChatRoom(options).then(res => console.log(res))
@@ -83,7 +83,7 @@ conn.joinChatRoom(option).then(res => console.log(res))
 
 ### 获取聊天室详情
 
-聊天室所有成员均可调用 `getChatRoomDetails` 方法获取聊天室的详情，包括聊天室 ID、聊天室名称、聊天室描述、聊天室公告、管理员列表、最大成员数、聊天室所有者、是否全员禁言以及聊天室角色类型。成员列表、黑名单列表、禁言列表需单独调用接口获取。
+聊天室所有成员均可调用 `getChatRoomDetails` 方法获取聊天室详情，包括聊天室 ID、名称、描述和允许的最大成员数等。聊天室成员列表、管理员列表、聊天室公告、黑名单列表和禁言列表需单独调用接口获取。
 
 示例代码如下：
 
@@ -158,6 +158,12 @@ conn.addEventHandler("eventName", {
                 break;
             // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
             case 'memberPresence':
+                break;
+             // 有成员修改/设置聊天室自定义属性，聊天室的所有成员会收到该事件。
+            case 'updateChatRoomAttributes':
+                break;
+            // 有成员删除聊天室自定义属性，聊天室所有成员会收到该事件。
+            case 'removeChatRoomAttributes':
                 break;
             default:
                 break;

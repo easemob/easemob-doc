@@ -6,7 +6,7 @@
 
 ### 注册环信账号
 
-开发者需要在环信管理后台 [注册并创建应用](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
+开发者需要在环信管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
 
 ## 实现步骤
 
@@ -63,7 +63,7 @@ QQ、微信小程序： 1.7.0 及以上版本，最多可以同时存在 5 个 W
 - 通过官网 [下载 SDK](http://www.easemob.com/download/im)
 - 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
 
-#### 引入SDK
+#### 引入 SDK
 
 - 开始一个全新的项目
     1. 将下载的 SDK（src/sdk/）导入到自己的项目中。

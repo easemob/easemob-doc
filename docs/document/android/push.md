@@ -35,7 +35,7 @@
 ## 前提条件
 
 1. 已开启环信即时通讯服务，详见 [开启和配置即时通讯服务](/product/enable_and_configure_IM.html)。
-2. 若使用 3.9.2 及以上版本提供的推送高级功能，包括设置推送通知模式、免打扰模式和自定义推送模板，你需要在环信即时通讯云控制后台中激活推送高级功能。
+2. 若使用 3.9.2 或以上版本提供的推送高级功能，包括设置推送通知模式、免打扰模式和自定义推送模板，你需要在环信即时通讯云控制后台中激活推送高级功能。
 
 ![](@static/images/android/enable_push_new.png)
 
@@ -75,7 +75,7 @@ EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
 // 设置支持哪家手机厂商推送。
 builder.enableMiPush(String appId, String appKey)
        //开发者需要调用该方法开启华为推送。
-       .enableHWPush(); 
+       .enableHWPush();
 // Sets pushconfig to ChatOptions.
 options.setPushConfig(builder.build());
 // Initializes IM SDK.
@@ -213,9 +213,9 @@ EMClient.getInstance().init(this, options);
 
 #### 华为 HMS 推送集成
 
-1. 华为开发者后台创建应用  
+1. 华为开发者后台创建应用
     在华为开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下华为官方介绍： [华为 HMS 消息推送服务集成](http://developer.huawei.com/consumer/cn/service/hms/catalog/huaweipush.html?page=hmssdk_huaweipush_devprepare)。
-2. 上传推送证书  
+2. 上传推送证书
     注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **华为**，然后输入你在 [华为开发者后台](http://developer.huawei.com/consumer/cn/devunion/openPlatform/html/memberCenter.html#/appManager) 创建的应用信息中的 APP ID 和 SecretKey 以及程序的包名；
 3. 华为推送集成
     - 3.1 集成 HMS Core SDK，参见 [华为官网集成文档](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-integrating-sdk-0000001050040084)。
@@ -236,7 +236,7 @@ EMClient.getInstance().init(this, options);
     EMOptions options = new EMOptions();
     ...
     EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
-    builder.enableHWPush(); 
+    builder.enableHWPush();
     // Set pushconfig to ChatOptions
     options.setPushConfig(builder.build());
     // To initialize Agora Chat SDK
@@ -248,9 +248,9 @@ EMClient.getInstance().init(this, options);
 
 环信即时通讯 IM SDK 中已经集成了小米推送（基于 `MiPush_SDK_Client_3_6_12.jar`）相关逻辑，你还需要完成以下步骤：
 
-1. 在小米开发者站创建应用  
+1. 在小米开发者站创建应用
     在 [小米开发者站](http://developer.xiaomi.com/) 创建应用，并开启 push 服务，具体可以看下小米官方介绍： [推送服务接入指南](https://dev.mi.com/console/doc/detail?pId=68)。
-2. 上传推送证书  
+2. 上传推送证书
     注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 小米，然后输入你在 [小米开发者站](http://developer.xiaomi.com/) 创建的应用信息中的 App ID 和 Secret Key 以及程序的包名。
 3. 小米推送集成
     - 3.1 下载 [小米推送 SDK](http://dev.xiaomi.com/mipush/downpage/) ，将 Jar 包添加到项目中。
@@ -264,7 +264,7 @@ EMClient.getInstance().init(this, options);
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE"/> 
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <permission android:name="com.xiaomi.mipushdemo.permission.MIPUSH_RECEIVE"
     android:protectionLevel="signature" /> <!--这里 `com.xiaomi.mipushdemo` 改成 app 的包名-->
     <uses-permission android:name="com.xiaomi.mipushdemo.permission.MIPUSH_RECEIVE" /><!--这里 `com.xiaomi.mipushdemo` 改成 app 的包名-->
@@ -288,7 +288,7 @@ EMClient.getInstance().init(this, options);
     <service
         android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
         android:enabled="true"
-        android:exported="true" 
+        android:exported="true"
         android:permission="com.xiaomi.xmsf.permission.MIPUSH_RECEIVE" />
 
     <!--注：此 service 必须在小米推送 SDK 2.2.5 版本以后（包括小米推送 SDK 2.2.5 版本）加入-->
@@ -333,7 +333,7 @@ EMClient.getInstance().init(this, options);
     EMOptions options = new EMOptions();
     ...
     EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
-    builder.enableMiPush(String appId, String appKey); 
+    builder.enableMiPush(String appId, String appKey);
     // Set pushconfig to ChatOptions
     options.setPushConfig(builder.build());
     // To initialize Agora Chat SDK
@@ -353,13 +353,16 @@ EMClient.getInstance().init(this, options);
     - 3.2 配置 `AndroidManifest.xml`。
         - `OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q上接收 OPPO 推送需要升级环信 SDK 到 3.7.1 以及之后的版本，并使用 OPPO 推送 2.1.0 的包。从 3.9.1 版本开始，升级 OPPO 推送版本到 3.0.0`
         - 推送服务需要的权限列表：
+        
         ```xml
         <!-- OPPO 推送配置 start -->
         <uses-permission android:name="com.coloros.mcs.permission.RECIEVE_MCS_MESSAGE"/>
         <uses-permission android:name="com.heytap.mcs.permission.RECIEVE_MCS_MESSAGE"/>
         <!-- OPPO 推送配置 end -->
         ```
+        
         - 推送服务需要的 service：
+        
         ```xml
         <!-- OPPO 推送配置 start -->
         <service
@@ -380,7 +383,9 @@ EMClient.getInstance().init(this, options);
         </service> <!--兼容 Q 版本-->
         <!-- OPPO 推送配置 end -->
         ```
+
     - 3.3 在 SDK 初始化的时候，配置启用 OPPO 推送
+    
     ```java
     EMOptions options = new EMOptions();
     ...
@@ -391,7 +396,9 @@ EMClient.getInstance().init(this, options);
     // To initialize Agora Chat SDK
     EMClient.getInstance().init(this, options);
     ```
+    
     - 3.4 调用 OPPO 推送的初始化
+    
     ```java
     HeytapPushManager.init(context, true);
     ```
@@ -408,6 +415,7 @@ EMClient.getInstance().init(this, options);
     - 3.1 配置 VIVO 推送 jar 包： 去 VIVO 推送官网下载推送 SDK 包，把 jar 包放到 libs 目录下并 sync 。也可以直接使用环信 Android IM Demo 中集成的 VIVO 推送的 jar 包。
     - 3.2 配置 `AndroidManifest.xml` 。
         - 推送服务需要的 service 和 receiver，并且需要配置 VIVO 的 app_id 和 app_key：
+        
         ```xml
         <!-- VIVO 推送配置 start -->
         <!--VIVO Push SDK 的版本信息-->
@@ -442,7 +450,9 @@ EMClient.getInstance().init(this, options);
         </receiver>
         <!-- VIVO 推送配置 end -->
         ```
+    
     - 3.3 在 SDK 初始化的时候，配置启用 VIVO 推送
+    
     ```java
     EMOptions options = new EMOptions();
     ...
@@ -453,6 +463,7 @@ EMClient.getInstance().init(this, options);
     // To initialize Agora Chat SDK
     EMClient.getInstance().init(this, options);
     ```
+    
     - 3.4 VIVO 设备安装应用后默认没有打开允许通知权限，测试前请先去设置中打开该应用的允许通知权限。
 
 [VIVO 推送官方文档](https://dev.vivo.com.cn/documentCenter/doc/158)
@@ -460,20 +471,24 @@ EMClient.getInstance().init(this, options);
 #### 魅族推送集成
 
 1. 在魅族开发者后台创建应用
-    - 在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下魅族官方介绍：[ flyme 推送服务集成](http://open-wiki.flyme.cn/index.php?title=Flyme推送接入文档)
+    - 在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下魅族官方介绍：[Flyme 推送服务集成](http://open-wiki.flyme.cn/index.php?title=Flyme推送接入文档)
 2. 上传推送证书
     - 注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 魅族，然后输入你在[ flyme 推送平台](http://push.meizu.com/#/config/app?appId=8843&_k=dnrz9k)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
 3. 魅族推送集成
-    - 3.1 配置魅族推送 jar 包：  
+    - 3.1 配置魅族推送 jar 包：
     在 app level/build.gradle 中添加依赖。
+    
+    
     ```gradle
     dependencies{
         // 该 aar 托管在 jcenter 中，请确保当前项目已配置 jcenter 仓库。
         implementation 'com.meizu.flyme.internet:push-internal:3.7.0@aar'
     }
     ```
+    
     - 3.2 配置 `AndroidManifest.xml`。
         - 推送服务需要的权限列表：
+        
         ```xml
         <!-- 魅族推送配置 start-->
         <!-- 兼容 flyme5.0 以下版本，魅族内部集成 pushSDK 必填，不然无法收到消息-->
@@ -490,7 +505,9 @@ EMClient.getInstance().init(this, options);
         <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
         <!-- 魅族推送配置 end-->
         ```
+        
         - 推送服务需要的 receiver：
+        
         ```xml
         <!-- MEIZU 推送配置 start -->
         <receiver android:name="com.hyphenate.push.platform.meizu.EMMzMsgReceiver">
@@ -513,7 +530,9 @@ EMClient.getInstance().init(this, options);
         </receiver>
         <!-- MEIZU 推送配置 end -->
         ```
+    
     - 3.3 在 SDK 初始化的时候，配置启用魅族推送。
+    
     ```java
     EMOptions options = new EMOptions();
     ...
@@ -538,7 +557,7 @@ EMClient.getInstance().init(this, options);
 
 ![image](@static/images/android/push/push_android_enable_push.png)
 
-#### 4.1 设置推送通知 
+#### 4.1 设置推送通知
 
 为优化用户在处理大量推送通知时的体验，环信 IM 在 app 和会话层面提供了推送通知和免打扰（DND）模式的细粒度选项，如下表所示：
 
@@ -582,7 +601,7 @@ EMClient.getInstance().init(this, options);
 
 会话级别的推送通知方式设置优先于 app 级别的设置，未设置推送通知方式的会话默认采用 app 的设置。
 
-例如，假设 app 的推送方式设置为 `MENTION_ONLY`，而指定会话的推送方式设置为`ALL`。你会收到来自该会话的所有推送通知，而对于其他会话来说，你只会收到提及你的消息的推送通知。
+例如，假设 app 的推送方式设置为 `MENTION_ONLY`，而指定会话的推送方式设置为 `ALL`。你会收到来自该会话的所有推送通知，而对于其他会话来说，你只会收到提及你的消息的推送通知。
 
 **免打扰模式**
 
@@ -649,14 +668,14 @@ EMClient.getInstance().pushManager().getSilentModeForAll(new EMValueCallBack<EMS
 你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知，并通过指定 `EMSilentModeParam` 字段设置推送通知方式和免打扰模式，如以下代码示例所示：
 
 ```java
-//设置推送通知方式为 `MENTION_ONLY`。
+// 设置推送通知方式为 `MENTION_ONLY`。
 EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.REMIND_TYPE)
                                 .setRemindType(EMPushManager.EMPushRemindType.MENTION_ONLY);
 
-//设置离线推送免打扰时长为 15 分钟。
+// 设置离线推送免打扰时长为 15 分钟。
 EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.SILENT_MODE_DURATION)
                                 .setSilentDuration(15);
-//设置会话的离线推送免打扰模式。目前，暂不支持设置会话免打扰时间段。
+// 设置会话的离线推送免打扰模式。目前暂不支持设置会话免打扰时间段。
 EMClient.getInstance().pushManager().setSilentModeForConversation(conversationId, conversationType, param, new EMValueCallBack<EMSilentModeResult>(){});
 ```
 
@@ -668,15 +687,15 @@ EMClient.getInstance().pushManager().setSilentModeForConversation(conversationId
 EMClient.getInstance().pushManager().getSilentModeForConversation(conversationId, conversationType, new EMValueCallBack<EMSilentModeResult>(){
     @Override
     public void onSuccess(EMSilentModeResult result) {
-        //获取会话是否设置了推送通知方式。
+        // 获取会话是否设置了推送通知方式。
         boolean enable = result.isConversationRemindTypeEnabled();
-        //检查会话是否设置了推送通知方式。
+        // 检查会话是否设置了推送通知方式。
         if(enable){
-            //获取会话的推送通知方式。
+            // 获取会话的推送通知方式。
             EMPushManager.EMPushRemindType remindType = result.getRemindType();
         }
 
-        //获取会话的离线推送免打扰过期 Unix 时间戳。
+        // 获取会话的离线推送免打扰过期 Unix 时间戳。
         long timestamp = result.getExpireTimestamp();
     }
 
@@ -709,7 +728,7 @@ EMClient.getInstance().pushManager().getSilentModeForConversations(conversationL
 以下代码示例显示了如何清除会话的推送通知方式：
 
 ```java
-//清除指定会话的推送通知方式设置。清除后，该会话会采取 app 的设置。
+// 清除指定会话的推送通知方式设置。清除后，该会话会采取 app 的设置。
 EMClient.getInstance().pushManager().clearRemindTypeForConversation(conversationId, conversationType, new EMCallBack(){});
 ```
 
@@ -720,20 +739,20 @@ EMClient.getInstance().pushManager().clearRemindTypeForConversation(conversation
 你可以调用 `updatePushNickname` 设置推送通知中显示的昵称，如以下代码示例所示：
 
 ```java
-//需要异步处理。
+// 需要异步处理。
 EMClient.getInstance().pushManager().updatePushNickname("pushNickname");
 ```
 
 你也可以调用 `updatePushDisplayStyle` 设置推送通知的显示样式，如下代码示例所示：
 
 ```java
-//设置为简单样式。
+// 设置为简单样式。
 EMPushManager.DisplayStyle displayStyle = EMPushManager.DisplayStyle.SimpleBanner;
-//需要异步处理。
+// 需要异步处理。
 EMClient.getInstance().pushManager().updatePushDisplayStyle(displayStyle);
 ```
 
-`DisplayStyle` 是枚举类型。 
+`DisplayStyle` 是枚举类型。
 
 | 参数             | 描述                    |
 | :--------------- | :---------------------- |
@@ -746,9 +765,9 @@ EMClient.getInstance().pushManager().updatePushDisplayStyle(displayStyle);
 
 ```java
 EMPushConfigs pushConfigs = EMClient.getInstance().pushManager().getPushConfigsFromServer();
-//获取推送显示昵称。
+// 获取推送显示昵称。
 String nickname = pushConfigs.getDisplayNickname();
-//获取推送通知的显示样式。
+// 获取推送通知的显示样式。
 EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
 ```
 
@@ -761,10 +780,10 @@ EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
 以下代码示例显示了如何设置和获取推送通知的首选语言：
 
 ```java
-//设置离线推送的首选语言。
+// 设置离线推送的首选语言。
 EMClient.getInstance().pushManager().setPreferredNotificationLanguage("en", new EMCallBack(){});
 
-//获取设置的离线推送的首选语言。
+// 获取设置的离线推送的首选语言。
 EMClient.getInstance().pushManager().getPreferredNotificationLanguage(new EMValueCallBack<String>(){});
 ```
 
@@ -782,33 +801,33 @@ EMClient.getInstance().pushManager().getPreferredNotificationLanguage(new EMValu
 在环信即时通讯云管理后台中完成模板创建后，用户可以在发送消息时选择此推送模板作为默认布局，如下代码示例所示：
 
 ```java
-//下面以文本消息为例，其他类型的消息设置方法相同。
+// 下面以文本消息为例，其他类型的消息设置方法相同。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("消息内容");
 message.setTo("6006");
-//设置推送模板。设置前需在环信即时通讯云管理后台上创建推送模板。
+// 设置推送模板。设置前需在环信即时通讯云管理后台上创建推送模板。
 JSONObject pushObject = new JSONObject();
 JSONArray titleArgs = new JSONArray();
 JSONArray contentArgs = new JSONArray();
 try {
-    //设置推送模板名称。
+    // 设置推送模板名称。
     pushObject.put("name", "test7");
-    //设置填写模板标题的 value 数组。
+    // 设置填写模板标题的 value 数组。
     titleArgs.put("value1");
     //...
     pushObject.put("title_args", titleArgs);
-    //设置填写模板内容的 value 数组。
+    // 设置填写模板内容的 value 数组。
     contentArgs.put("value1");
     //...
     pushObject.put("content_args", contentArgs);
 } catch (JSONException e) {
     e.printStackTrace();
 }
-//将推送扩展设置到消息中。
+// 将推送扩展设置到消息中。
 message.setAttribute("em_push_template", pushObject);
-//设置消息状态回调。
+// 设置消息状态回调。
 message.setMessageStatusCallback(new EMCallBack() {...});
-//发送消息。
+// 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
@@ -824,13 +843,18 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | `g`  | 群组 ID ，当消息是群组消息时，这个值会被赋值。 |
 | `e`  | 用户自定义扩展。                               |
 
-其中 `e` 为完全用户自定义扩展，而数据来源为 `em_apns_ext` 或者 `em_apns_ext`.extern 。规则如下： - 当 `extern` 不存在时，`e` 内容为 `em_apns_ext` 下 push 服务未使用字段。具体为移除 `em_push_title`，`em_push_content`，`em_push_name`，`em_push_channel_id`，`em_huawei_push_badge_class` 字段后剩余所有。 - 当 `extern` 存在时，使用 `extern` 下字段。
+其中 `e` 为完全用户自定义扩展，而数据来源为 `em_apns_ext` 或者 `em_apns_ext`.extern 。
+
+规则如下：
+
+- 当 `extern` 不存在时，`e` 内容为 `em_apns_ext` 下 push 服务未使用字段。具体为移除 `em_push_title`，`em_push_content`，`em_push_name`，`em_push_channel_id`，`em_huawei_push_badge_class` 字段后剩余所有。
+- 当 `extern` 存在时，使用 `extern` 下字段。
 
 #### 解析 FCM 推送字段
 
 重写 `FirebaseMessagingService.onMessageReceived` 方法可以在 `RemoteMessage` 对象中获取自定义扩展：
 
-```
+```java
 public class EMFCMMSGService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -853,7 +877,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 ```java
 public class SplashActivity extends BaseActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {        
+    protected void onCreate(Bundle savedInstanceState) {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String t = extras.getString("t");

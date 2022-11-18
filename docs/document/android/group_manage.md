@@ -1,4 +1,4 @@
-# 管理群组
+# 创建和管理群组及监听群组事件
 
 <Toc />
 
@@ -35,24 +35,24 @@
 在创建群组前，你需要设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`inviteNeedConfirm`)。
 
 1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型（`EMGroupStyle`），具体设置如下：
-    - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
-    - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
-    - EMGroupStylePublicJoinNeedApproval——公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
-    - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理同意。
+   - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
+   - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
+   - EMGroupStylePublicJoinNeedApproval——公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
+   - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理同意。
 2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
-    - 进群邀请需要用户确认(`inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `autoAcceptGroupInvitation` 设置，处理逻辑如下：
-        - 用户设置自动接受群组邀请 (`autoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调，群主收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
-        - 用户设置手动确认群组邀请 (`autoAcceptGroupInvitation` 设置为 `false`)，受邀用户收到 `EMGroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
-            - 用户同意入群邀请后，群主收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调；其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调；
-            - 用户拒绝入群邀请后，群主收到 `EMGroupChangeListener#groupInvitationDidDecline` 回调。
+   - 进群邀请需要用户确认(`inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `autoAcceptGroupInvitation` 设置，处理逻辑如下：
+     - 用户设置自动接受群组邀请 (`autoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
+     - 用户设置手动确认群组邀请 (`autoAcceptGroupInvitation` 设置为 `false`)，受邀用户收到 `EMGroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
+       - 用户同意入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调；
+       - 用户拒绝入群邀请后，群主收到 `EMGroupChangeListener#groupInvitationDidDecline` 回调。
 
 流程如下：
 
 ![img](@static/images/android/group-flow.png)
 
-- 进群邀请无需用户确认 (`inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无视用户的 `autoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调；群主收到每个已加入成员对应的群组事件回调 `EMGroupChangeListener#onInvitationAccepted` 和 `EMGroupChangeListener#onMemberJoined`；先加入的群成员会收到群组事件回调 `EMGroupChangeListener#onMemberJoined`。
+- 进群邀请无需用户确认 (`inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，不论用户的 `autoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
 
-用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
+用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
 用户加入群组后，将可以收到群消息。
 
@@ -62,7 +62,8 @@
 EMGroupOptions option = new EMGroupOptions();
 option.maxUsers = 100;
 option.style = EMGroupStyle.EMGroupStylePrivateMemberCanInvite;
-
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncCreateGroup(String, String, String[], String, EMGroupOptions, EMValueCallBack)}。
 EMClient.getInstance().groupManager().createGroup(groupName, desc, allMembers, reason, option);
 ```
 
@@ -72,8 +73,8 @@ EMClient.getInstance().groupManager().createGroup(groupName, desc, allMembers, r
 
 - 当群组类型为 `EMGroupStylePublicOpenJoin` 时，用户直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
 - 当群组类型为 `EMGroupStylePublicJoinNeedApproval` 时，群主和群管理员收到 `EMGroupChangeListener#onRequestToJoinReceived` 回调，并选择同意或拒绝入群申请：
-    - 群主和群管理员同意入群申请，申请人收到 `EMGroupChangeListener#onRequestToJoinAccepted` 回调；其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
-    - 群主和群管理员拒绝入群申请，申请人收到 `EMGroupChangeListener#onRequestToJoinDeclined` 回调。
+  - 群主和群管理员同意入群申请，申请人收到 `EMGroupChangeListener#onRequestToJoinAccepted` 回调；其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
+  - 群主和群管理员拒绝入群申请，申请人收到 `EMGroupChangeListener#onRequestToJoinDeclined` 回调。
 
 :::notice
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
@@ -87,12 +88,13 @@ EMClient.getInstance().groupManager().createGroup(groupName, desc, allMembers, r
 示例代码如下：
 
 ```java
-// 从服务器获取公开群组列表
+// 从服务器获取公开群组列表。
 EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, cursor);
 List<EMGroupInfo> groupsList = result.getData();
 String cursor = result.getCursor();
 
-// 申请加入群组
+// 申请加入群组。
+// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncJoinGroup(String, EMCallBack)}。
 EMClient.getInstance().groupManager().joinGroup(groupId);
 ```
 
@@ -107,7 +109,8 @@ EMClient.getInstance().groupManager().joinGroup(groupId);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncDestroyGroup(String, EMCallBack)}。
 EMClient.getInstance().groupManager().destroyGroup(groupId);
 ```
 
@@ -120,7 +123,8 @@ EMClient.getInstance().groupManager().destroyGroup(groupId);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncLeaveGroup(String, EMCallBack)}。
 EMClient.getInstance().groupManager().leaveGroup(groupId);
 ```
 
@@ -137,6 +141,7 @@ EMClient.getInstance().groupManager().leaveGroup(groupId);
 EMGroup group = EMClient.getInstance().groupManager().getGroup(groupId);
 
 // 根据群组 ID 从服务器获取群组详情。
+// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncGetGroupFromServer(String, EMValueCallBack)}。
 EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId);
 
 // 获取群主用户 ID。
@@ -168,6 +173,7 @@ List<String> memberList = new ArrayList<>;
 EMCursorResult<String> result = null;
 final int pageSize = 20;
 do {
+    // 同步方法，会阻塞当前线程。异步方法见 {@link #asyncFetchGroupMembers(String, String, int, EMValueCallBack)}。
      result = EMClient.getInstance().groupManager().fetchGroupMembers(groupId,
              result != null? result.getCursor(): "", pageSize);
      memberList.addAll(result.getData());
@@ -177,8 +183,8 @@ do {
 - 当群成员少于 200 人时，可通过以下方式获取群成员：
 
 ```java
-// 异步方法。
 // 第二个参数传入 `true`，默认取 200 人的群成员列表。
+// 同步方法，会阻塞当前线程。
 EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
 List<String> memberList = group.getMembers();
 ```
@@ -188,8 +194,18 @@ List<String> memberList = group.getMembers();
 用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：
 
 ```java
-// 异步方法。
-List<EMGroup> grouplist = EMClient.getInstance().groupManager().getJoinedGroupsFromServer();
+// 异步方法。同步方法见 {@link #getJoinedGroupsFromServer(int, int, boolean, boolean)}。
+List<EMGroup> grouplist = EMClient.getInstance().groupManager().asyncGetJoinedGroupsFromServer(pageIndex, pageSize, needMemberCount, needRole, new EMValueCallBack<List<EMGroup>>() {
+                        @Override
+                        public void onSuccess(List<EMGroup> value) {
+
+                        }
+
+                        @Override
+                        public void onError(int error, String errorMsg) {
+
+                        }
+                });
 ```
 
 - 用户可以调用 `getAllGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
@@ -201,7 +217,7 @@ List<EMGroup> grouplist = EMClient.getInstance().groupManager().getAllGroups();
 - 用户还可以分页获取公开群列表：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncGetPublicGroupsFromServer(int, String, EMValueCallBack)}。
 EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, cursor);
 List<EMGroupInfo> groupsList = result.getData();
 String cursor = result.getCursor();
@@ -216,6 +232,8 @@ String cursor = result.getCursor();
 群成员可以调用 `blockGroupMessage` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息，群主和群管理员不能进行此操作。示例代码如下：
 
 ```java
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncBlockGroupMessage(String, EMCallBack)}。
 EMClient.getInstance().groupManager().blockGroupMessage(groupId);
 ```
 
@@ -224,6 +242,8 @@ EMClient.getInstance().groupManager().blockGroupMessage(groupId);
 群成员可以调用 `unblockGroupMessage` 方法解除屏蔽群消息。示例代码如下：
 
 ```java
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncUnblockGroupMessage(String, EMCallBack)}。
 EMClient.getInstance().groupManager().unblockGroupMessage(groupId);
 ```
 
@@ -256,117 +276,118 @@ EMClient.getInstance().groupManager().asyncGetGroupFromServer(groupId, new EMVal
 
 ```java
 // 创建一个群组事件监听
+// 在该方法的举例中，用户 A 表示当前用户。
 EMGroupChangeListener groupListener = new EMGroupChangeListener() {
-    // 用户收到进群邀请
+    // 当前用户收到了入群邀请。受邀用户会收到该回调。例如，用户 B 邀请用户 A 入群，则用户 A 会收到该回调。
     @Override
     public void onInvitationReceived(String groupId, String groupName, String inviter, String reason) {
     }
 
-    // 群主或群管理员收到进群申请
+    // 群主或群管理员收到进群申请。群主和所有管理员收到该回调。
     public void OnRequestToJoinReceivedFromGroup(string groupId, string groupName, string applicant, string reason){
     }
 
-    // 群主或群管理员同意用户的进群申请
+    // 群主或群管理员同意用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
     @Override
     public void onRequestToJoinAccepted(String groupId, String groupName, String accepter) {
     }
 
-    // 群主或群管理员拒绝用户的进群申请
+    // 群主或群管理员拒绝用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
     @Override
     public void onRequestToJoinDeclined(String groupId, String groupName, String decliner, String reason) {
     }
 
-    // 用户同意进群邀请
+    // 用户同意进群邀请。邀请人收到该回调。
     @Override
     public void onInvitationAccepted(String groupId, String invitee, String reason) {
     }
 
-    // 用户拒绝进群邀请
+    // 用户拒绝进群邀请。邀请人收到该回调。
     @Override
     public void onInvitationDeclined(String groupId, String invitee, String reason) {
     }
 
-    // 有成员被移出群组
+    // 有成员被移出群组。被踢出群组的成员会收到该回调。
     @Override
     public void onUserRemoved(String groupId, String groupName) {
     }
 
-    // 群组解散
+    // 群组解散。群主解散群组时，所有群成员均会收到该回调。
     @Override
     public void onGroupDestroyed(String groupId, String groupName) {
     }
 
-    // 有用户自动同意加入群组
+    // 有用户自动同意加入群组。邀请人收到该回调。
     @Override
     public void onAutoAcceptInvitationFromGroup(String groupId, String inviter, String inviteMessage) {
     }
 
-    // 有成员被加入群组禁言列表
+    // 有成员被加入群组禁言列表。被禁言的成员及群主和群管理员（除操作者外）会收到该回调。
     @Override
     public void onMuteListAdded(String groupId, List<String> mutes, long muteExpire) {
     }
 
-    // 有成员被移出禁言列表
+    // 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
     @Override
     public void onMuteListRemoved(String groupId, List<String> mutes) {
     }
 
-    // 有成员被加入群组白名单
+    // 有成员被加入群组白名单。被添加的成员及群主和群管理员（除操作者外）会收到该回调。
     @Override
     public void onWhiteListAdded(String groupId, List<String> whitelist) {
     }
 
-    // 有成员被移出群组白名单
+    // 有成员被移出群组白名单。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
     @Override
     public void onWhiteListRemoved(String groupId, List<String> whitelist) {
     }
 
-    // 全员禁言状态变化
+    // 全员禁言状态变化。群组所有成员（除操作者外）会收到该回调。
     @Override
     public void onAllMemberMuteStateChanged(String groupId, boolean isMuted) {
     }
 
-    // 群组新增管理员
+    // 设置管理员。群主、新管理员和其他管理员会收到该回调。
     @Override
     public void onAdminAdded(String groupId, String administrator) {
     }
 
-    // 群组管理员被移除
+    // 群组管理员被移除。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
     @Override
     public void onAdminRemoved(String groupId, String administrator) {
     }
 
-    // 群主转移权限
+    // 群主转移权限。原群主和新群主会收到该回调。
     @Override
     public void onOwnerChanged(String groupId, String newOwner, String oldOwner) {
     }
 
-    // 有新成员加入群组
+    // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
     @Override
     public void onMemberJoined(String groupId, String member) {
     }
 
-    // 有成员主动退出群
+    // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
     @Override
     public void onMemberExited(String groupId, String member) {
     }
 
-    // 群组公告更新
+    // 群组公告更新。群组所有成员会收到该回调。
     @Override
     public void onAnnouncementChanged(String groupId, String announcement) {
     }
 
-    // 有成员新上传群组共享文件
+    // 有成员新上传群组共享文件。群组所有成员会收到该回调。
     @Override
     public void onSharedFileAdded(String groupId, EMMucSharedFile sharedFile) {
     }
 
-    // 群组共享文件被删除
+    // 群组共享文件被删除。群组所有成员会收到该回调。
     @Override
     public void onSharedFileDeleted(String groupId, String fileId) {
     }
 
-    // 群组详情变更
+    // 群组详情变更。群组所有成员会收到该回调。
     @Override
     public void onSpecificationChanged(EMGroup group){
     }

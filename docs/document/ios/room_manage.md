@@ -44,6 +44,7 @@
 
 ```objectivec
 EMError *error = nil;
+// 同步方法，异步方法见 [EMChatroomManager createChatroomWithSubject:description:invitees:message:maxMembersCount:completion]
 EMChatroom *retChatroom = [[EMClient sharedClient].roomManager createChatroomWithSubject:@"aSubject" description:@"aDescription" invitees:@[@"user1",@[user2]]message:@"aMessage" maxMembersCount:aMaxMembersCount error:&error];
 ```
 
@@ -58,23 +59,23 @@ EMChatroom *retChatroom = [[EMClient sharedClient].roomManager createChatroomWit
 
 ```objectivec
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
-EMError *error = nil;
-[[EMClient sharedClient].roomManager getChatroomsFromServerWithPage:1 pageSize:50 error:&error];
+// 异步方法
+[[EMClient sharedClient].roomManager getChatroomsFromServerWithPage:1 pageSize:50 completion:nil];
 
 // 加入聊天室
-EMError *error = nil;
-[[EMClient sharedClient].roomManager joinChatroom:@"aChatroomId" error:&error];
+// 异步方法
+[[EMClient sharedClient].roomManager joinChatroom:@"aChatroomId" completion:nil];
 ```
 
 ### 获取聊天室详情
 
-聊天室所有成员均可调用 `getChatroomSpecificationFromServerWithId` 获取聊天室的详情，包括聊天室 ID、聊天室名称，聊天室描述、聊天室公告、管理员列表、最大成员数、聊天室所有者、是否全员禁言以及聊天室角色类型。成员列表、黑名单列表、禁言列表需单独调用接口获取。
+聊天室所有成员均可调用 [`getChatroomSpecificationFromServerWithId`](room_manage.html#获取聊天室详情) 获取聊天室的详情，包括聊天室 ID、聊天室名称，聊天室描述、最大成员数、聊天室所有者、是否全员禁言以及聊天室角色类型。聊天室公告、成员列表、管理员列表、黑名单列表、禁言列表需单独调用接口获取。
 
 示例代码如下：
 
 ```objectivec
-EMError *error = nil;
-EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecificationFromServerWithId:@“chatroomId” error:&error];
+// 异步方法
+EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecificationFromServerWithId:@“chatroomId” completion:nil];
 ```
 
 ### 退出聊天室
@@ -84,8 +85,8 @@ EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecifica
 示例代码如下：
 
 ```objectivec
-EMError *error = nil;
-[EMClient sharedClient].roomManager leaveChatroom:@"aChatroomId" error:&error];
+// 异步方法
+[EMClient sharedClient].roomManager leaveChatroom:@"aChatroomId" completion:nil];
 ```
 
 退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `isDeleteMessagesWhenExitChatRoom` 设置为 `NO`。
@@ -110,8 +111,8 @@ retOpt.isDeleteMessagesWhenExitChatRoom = NO;
 示例代码如下：
 
 ```objectivec
-EMError *error = nil;
-[[EMClient sharedClient].roomManager destroyChatroom:self.chatroom.chatroomId error:&error];
+// 异步方法
+[[EMClient sharedClient].roomManager destroyChatroom:self.chatroom.chatroomId completion:nil];
 ```
 
 ### 监听聊天室事件
@@ -130,55 +131,71 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 具体事件如下：
 
 ```objectivec
-// 有用户加入聊天室。
+// 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
 - (void)userDidJoinChatroom:(EMChatroom *)aChatroom
       user:(NSString *)aUsername{
-  }
+}
 
-// 有成员离开聊天室。
+// 有成员主动退出聊天室。聊天室的所有成员（除退出成员外）会收到该事件。
 - (void)userDidLeaveChatroom:(EMChatroom *)aChatroom
-      user:(NSString *)aUsername {
-  }
+         user:(NSString *)aUsername {
+}
 
-// 有成员被踢出聊天室
+// 有成员被踢出聊天室。被踢出聊天室的成员会收到该事件。
 - (void)didDismissFromChatroom:(EMChatroom *)aChatroom
       reason:(EMChatroomBeKickedReason)aReason {
   }
 
-// 聊天室成员被禁言
+// 聊天室详情有变更。聊天室的所有成员会收到该事件。
+- (void)chatroomSpecificationDidUpdate:(EMChatroom *)aChatroom;
+
+// 有成员被添加至聊天室白名单。被添加的成员收到该事件。
+- (void)chatroomWhiteListDidUpdate:(EMChatroom *)aChatroom
+              addedWhiteListMembers:(NSArray<NSString *> *)aMembers;
+
+// 有成员被移出白名单。被移出的成员收到该事件。
+- (void)chatroomWhiteListDidUpdate:(EMChatroom *)aChatroom
+            removedWhiteListMembers:(NSArray<NSString *> *)aMembers;
+
+// 聊天室一键禁言状态变化。聊天室所有成员（除操作者外）会收到该事件。
+- (void)chatroomAllMemberMuteChanged:(EMChatroom *)aChatroom
+                     isAllMemberMuted:(BOOL)aMuted;
+
+// 更新聊天室公告。聊天室的所有成员会收到该事件。
+- (void)chatroomAnnouncementDidUpdate:(EMChatroom *)aChatroom
+                          announcement:(NSString *_Nullable)aAnnouncement;
+
+// 有成员被加入禁言列表。被禁言的成员会收到该事件。
 
 - (void)chatroomMuteListDidUpdate:(EMChatroom *)aChatroom
       addedMutedMembers:(NSArray *)aMutes
              muteExpire:(NSInteger)aMuteExpire {
   }
 
-// 聊天室成员被解除禁言
+// 有成员被移除禁言列表。被解除禁言的成员会收到该事件。
 - (void)chatroomMuteListDidUpdate:(EMChatroom *)aChatroom
       removedMutedMembers:(NSArray *)aMutes {
   }
 
-// 聊天室成员被设为管理员
+// 有成员被设为管理员。被添加的管理员会收到该事件。
 - (void)chatroomAdminListDidUpdate:(EMChatroom *)aChatroom
       addedAdmin:(NSString *)aAdmin {
   }
 
-// 聊天室成员被移除管理员权限
+// 有成员被移除管理员权限。被移除权限的管理员会收到该事件。
 - (void)chatroomAdminListDidUpdate:(EMChatroom *)aChatroom
       removedAdmin:(NSString *)aAdmin {
   }
 
-// 聊天室所有者变更
+// 聊天室所有者变更。聊天室全体成员会收到该事件。
 - (void)chatroomOwnerDidUpdate:(EMChatroom *)aChatroom
                       newOwner:(NSString *)aNewOwner
                       oldOwner:(NSString *)aOldOwner {
 
+// 有成员修改/设置聊天室自定义属性，聊天室的所有成员会收到该事件。
+- (void)chatroomAttributesDidUpdated:(NSString *_Nonnull)roomId attributeMap:(NSDictionary<NSString *, NSString *> *_Nullable)attributeMap from:(NSString *_Nonnull)fromId;
   }
+
+// 有成员删除聊天室自定义属性。聊天室所有成员会收到该事件。
+- (void)chatroomAttributesDidRemoved:(NSString *_Nonnull)roomId attributes:(NSArray<__kindof NSString *> *_Nullable)attributes from:(NSString *_Nonnull)fromId;
 ```
-
-## 更多操作
-
-你可以参考如下文档，在项目中实现更多的聊天室相关功能：
-
-- [聊天室概述](room_overview.html)
-- [管理聊天室成员](room_members.html)
-- [管理聊天室属性](room_attributes.html)

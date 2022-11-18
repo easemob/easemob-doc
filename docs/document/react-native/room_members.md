@@ -1,4 +1,4 @@
-# 聊天室-管理聊天室成员
+# 管理聊天室成员
 
 <Toc />
 
@@ -121,6 +121,74 @@ ChatClient.getInstance()
   });
 ```
 
+### 管理聊天室白名单
+
+#### 获取聊天室白名单列表
+
+仅聊天室所有者和管理员可以调用 `fetchChatRoomAllowListFromServer` 获取当前聊天室白名单成员列表。
+
+示例代码如下：
+
+```typescript
+ChatClient.getInstance()
+  .roomManager.fetchChatRoomAllowListFromServer(roomId)
+  .then((members) => {
+    console.log("get members success.", members);
+  })
+  .catch((reason) => {
+    console.log("get members fail.", reason);
+  });
+```
+
+#### 将成员加入聊天室白名单
+
+仅聊天室所有者和管理员可以调用 `addMembersToChatRoomAllowList` 将成员加入聊天室白名单。被添加后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomEventListener#onAllowListAdded` 回调。
+
+示例代码如下：
+
+```typescript
+ChatClient.getInstance()
+  .roomManager.addMembersToChatRoomAllowList(roomId, members)
+  .then((members) => {
+    console.log("success.", members);
+  })
+  .catch((reason) => {
+    console.log("fail.", reason);
+  });
+```
+
+#### 将成员移出聊天室白名单列表
+
+仅聊天室所有者和管理员可以调用 `removeMembersFromChatRoomAllowList` 将成员从聊天室白名单移出。被移出后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomEventListener#onAllowListRemoved` 回调。
+
+示例代码如下：
+
+```typescript
+ChatClient.getInstance()
+  .roomManager.removeMembersFromChatRoomAllowList(roomId, members)
+  .then((members) => {
+    console.log("success.", members);
+  })
+  .catch((reason) => {
+    console.log("fail.", reason);
+  });
+```
+
+#### 检查自己是否在聊天室白名单中
+
+所有聊天室成员可以调用 `isMemberInChatRoomAllowList` 方法检查自己是否在白名单中，示例代码如下：
+
+```typescript
+ChatClient.getInstance()
+  .roomManager.isMemberInChatRoomAllowList(roomId)
+  .then((members) => {
+    console.log("success.", members);
+  })
+  .catch((reason) => {
+    console.log("fail.", reason);
+  });
+```
+
 ### 管理聊天室禁言列表
 
 #### 添加成员至聊天室禁言列表
@@ -179,6 +247,44 @@ ChatClient.getInstance()
   })
   .catch((reason) => {
     console.log("get mute members fail.", reason);
+  });
+```
+
+### 开启和关闭聊天室全员禁言
+
+为了快捷管理聊天室发言，聊天室所有者和管理员可以开启和关闭聊天室全员禁言。全员禁言和单独的成员禁言不冲突，设置或者解除全员禁言，原禁言列表并不会变化。
+
+#### 开启聊天室全员禁言
+
+仅聊天室所有者和管理员可以调用 `muteAllChatRoomMembers`方法开启全员禁言。全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `onAllChatRoomMemberMuteStateChanged` 回调。
+
+示例代码如下：
+
+```typescript
+ChatClient.getInstance()
+  .roomManager.muteAllChatRoomMembers(roomId)
+  .then((members) => {
+    console.log("success.", members);
+  })
+  .catch((reason) => {
+    console.log("fail.", reason);
+  });
+```
+
+#### 关闭聊天室全员禁言
+
+仅聊天室所有者和管理员可以调用 `unMuteAllChatRoomMembers` 方法取消全员禁言。调用成功后，聊天室成员会收到 `onAllChatRoomMemberMuteStateChanged` 回调。
+
+示例代码如下：
+
+```typescript
+ChatClient.getInstance()
+  .roomManager.unMuteAllChatRoomMembers(roomId)
+  .then((members) => {
+    console.log("success.", members);
+  })
+  .catch((reason) => {
+    console.log("fail.", reason);
   });
 ```
 

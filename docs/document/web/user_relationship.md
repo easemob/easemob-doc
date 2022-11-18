@@ -26,7 +26,9 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ## 实现方法
 
-### 添加好友
+### 管理联系人列表
+
+#### 添加好友
 
 本节主要介绍发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
 
@@ -43,11 +45,11 @@ conn.addEventHandler("contactEvent", {
     onContactInvited: function (msg) {},
     // 当前用户被其他用户从联系人列表上移除。用户 B 将用户 A 从联系人列表上删除，用户 A 收到该事件。
     onContactDeleted: function (msg) {},
-    // 当前用户新增了联系人。 用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 A 收到该事件，而用户 B 收到 `onContactAgreed` 事件。
+    // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 A 收到该事件，而用户 B 收到 `onContactAgreed` 事件。
     onContactAdded: function (msg) {},
-    // 当前用户发送的好友请求被拒绝。 用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
+    // 当前用户发送的好友请求被拒绝。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
     onContactRefuse: function (msg) {},
-    // 当前用户发送的好友请求经过了对方同意。 用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。
+    // 当前用户发送的好友请求经过了对方同意。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。
     onContactAgreed: function (msg) {},
 });
 ```
@@ -75,7 +77,7 @@ conn.addContact("userId", "加个好友呗!");
     conn.declineContactInvite("userId");
     ```
 
-### 删除好友
+#### 删除好友
 
 删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
@@ -87,7 +89,7 @@ conn.deleteContact("userId");
 
 删除好友后，对方会收到 `onContactDeleted` 事件。
 
-### 获取好友列表
+#### 获取好友列表
 
 你可以调用 `getContacts` 方法查询好友列表，示例代码如下：
 

@@ -18,11 +18,6 @@ EaseIMKit 源码地址
 
 - [环信 IM](https://github.com/easemob/chat-android)
 
-**如果您使用的是 EaseUI 库，查看使用说明及快速集成，请点击下列链接跳转：**
-
-- [EaseUI 使用指南](https://docs-im.easemob.com/im/android/other/easeui)
-- [EaseUI 快速集成](https://docs-im.easemob.com/im/android/other/easeuiintegration)
-
 ## 导入 EaseIMKit
 
 ### 开发环境要求
@@ -86,15 +81,16 @@ public class DemoApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        //EaseIM 初始化 
-        if(EaseIM.getInstance().init(context, options)){ 
-            //在做打包混淆时，关闭 debug 模式，避免消耗不必要的资源 
-            EMClient.getInstance().setDebugMode(true); 
-            //EaseIM 初始化成功之后再调用注册消息监听的代码 ... 
+        //EaseIM 初始化
+        if(EaseIM.getInstance().init(context, options)){
+            //在做打包混淆时，关闭 debug 模式，避免消耗不必要的资源
+            EMClient.getInstance().setDebugMode(true);
+            //EaseIM 初始化成功之后再调用注册消息监听的代码 ...
         }
     }
 }
 ```
+
 ## 快速搭建
 
 EaseIMKit 封装了常用 IM 功能，提供了会话，聊天及联系人等基本的 fragment，旨在帮助开发者快速集成环信 SDK。
@@ -106,7 +102,7 @@ EaseIMKit 提供了 EaseConversationListFragment，需要将其或者其子类�
 ![img](@static/images/android/easeim.jpeg)
 
 :::notice
-要实现自定义头像及昵称，请参考 [设置头像和昵称](https://docs-im.easemob.com/im/android/basics/profile#%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E5%B1%9E%E6%80%A7)
+要实现自定义头像及昵称，请参考 [设置头像和昵称](userprofile.html#设置当前用户的属性)。
 :::
 
 ### 创建聊天界面
@@ -168,7 +164,7 @@ xml 中设置如下：
     android:background="@color/white"
     app:titleBarDisplayHomeAsUpEnabled="true"/>
 ```
-其中 `titleBarDisplayHomeAsUpEnabled` 属性为设置返回按钮是否可见，设置标题位置可设置 `titleBarTitlePosition`，可选值为 center，left 和 right。
+其中 `titleBarDisplayHomeAsUpEnabled` 属性为设置返回按钮是否可见，设置标题位置可设置 `titleBarTitlePosition`，可选值为 `center`，`left` 和 `right`。
 
 也可进行代码设置，如下：
 
@@ -202,7 +198,7 @@ titleBarMessage.setOnBackPressListener(this);
 ```java
 //设置头像尺寸
 conversationListLayout.setAvatarSize(EaseCommonUtils.dip2px(mContext, 50));
-//设置头像样式：0 为默认，1 为圆形，2 为方形(设置方形时，需要配合设置 avatarRadius，默认的avatarRadius为50dp)
+//设置头像样式：0 为默认，1 为圆形，2 为方形(设置方形时，需要配合设置 avatarRadius，默认的 avatarRadius 为 50dp)
 conversationListLayout.setAvatarShapeType(2);
 //设置圆角半径
 conversationListLayout.setAvatarRadius((int) EaseCommonUtils.dip2px(mContext, 5));
@@ -230,7 +226,7 @@ public void initView(Bundle savedInstanceState) {
    super.initView(savedInstanceState);
    ......
    conversationListLayout.addItemMenu(Menu.NONE, R.id.action_con_delete, 4, getString(R.string.ease_conversation_menu_delete));
-}    
+}
 
 ......
 
@@ -275,6 +271,7 @@ IChatExtendMenu chatExtendMenu = chatInputMenu.getChatExtendMenu();
 //获取到表情区域控件
 IChatEmojiconMenu emojiconMenu = chatInputMenu.getEmojiconMenu();
 ```
+
 #### 修改聊天列表样式
 
 聊天列表区域可以修改背景，文字，气泡，是否展示昵称及聊天展示样式等，更多设置请参考 IChatMessageItemSet。
@@ -287,6 +284,7 @@ EaseChatMessageListLayout messageListLayout = chatLayout.getChatMessageListLayou
 //设置聊天列表背景
 messageListLayout.setBackground(new ColorDrawable(Color.parseColor("#DA5A4D")));
 ```
+
 效果如下图：
 
 ![img](@static/images/android/easeim5.jpeg)
@@ -303,6 +301,7 @@ messageListLayout.setAvatarDefaultSrc(ContextCompat.getDrawable(mContext, R.draw
 //设置头像形状：0 为默认，1 为圆形，2 为方形
 messageListLayout.setAvatarShapeType(1);
 ```
+
 效果如下图：
 
 ![img](@static/images/android/easeim6.jpeg)
@@ -319,6 +318,7 @@ messageListLayout.setItemTextSize((int) EaseCommonUtils.sp2px(mContext, 18));
 //设置文本字体颜色
 messageListLayout.setItemTextColor(ContextCompat.getColor(mContext, R.color.red));
 ```
+
 效果如下图：
 
 ![img](@static/images/android/easeim7.jpeg)
@@ -337,6 +337,7 @@ messageListLayout.setTimeTextSize((int) EaseCommonUtils.sp2px(mContext, 18));
 //设置时间线的文本颜色
 messageListLayout.setTimeTextColor(ContextCompat.getColor(mContext, R.color.black));
 ```
+
 效果如下图：
 
 ![img](@static/images/android/easeim8.jpeg)
@@ -351,6 +352,7 @@ EaseChatMessageListLayout messageListLayout = chatLayout.getChatMessageListLayou
 //设置聊天列表样式：两侧及均位于左侧
 messageListLayout.setItemShowType(EaseChatMessageListLayout.ShowType.LEFT);
 ```
+
 效果如下图：
 
 ![img](@static/images/android/easeim9.jpeg)
@@ -607,7 +609,7 @@ public class ChatTxtNewAdapterDelegate extends EaseMessageAdapterDelegate <EMMes
 :::notice
 （1）相同的消息类型（比如例子中消息类型是 EMMessage.Type.TXT）且通过标记判断类型时，在第 5 步注册对话类型时，应将该对话类型注册于基类的对话类型之前（即 ChatTxtNewAdapterDelegate 注册应在 EaseTextAdapterDelegate 之前）。
 
-（2）对于`item.getBooleanAttribute(EaseConstant.MESSAGE_ATTR_IS_TXT_NEW, false)`可以理解为一种标记，在发送消息时设置，如下；
+（2）对于 `item.getBooleanAttribute(EaseConstant.MESSAGE_ATTR_IS_TXT_NEW, false)` 可以理解为一种标记，在发送消息时设置，如下；
 :::
 
 ```java
@@ -659,7 +661,7 @@ public void initView(Bundle savedInstanceState) {
     MenuItemBean itemMenu = new MenuItemBean(0, R.id.action_chat_forward, 11, getString(R.string.action_forward));
     itemMenu.setResourceId(R.drawable.ease_chat_item_menu_forward);
     chatLayout.addItemMenu(itemMenu );
-}    
+}
 
 ......
 
@@ -778,7 +780,7 @@ EaseContactListLayout 提供了增加菜单项的 API，开发者可方便的增
 示例代码如下：
 
 ```java
-// 通过增加 OnPopupMenuPreShowListener 监听，并在 onMenuPreShow 中增加菜单项更简单
+// 通过增加 `OnPopupMenuPreShowListener` 监听，并在 `onMenuPreShow` 中增加菜单项更简单
 @Override
 public void onMenuPreShow(EasePopupMenuHelper menuHelper, int position) {
     super.onMenuPreShow(menuHelper, position);
@@ -794,10 +796,10 @@ public boolean onMenuItemClick(MenuItem item, int position) {
     EaseUser user = contactLayout.getContactList().getItem(position);
     switch (item.getItemId()) {
         case R.id.action_friend_block :
-            // 增加处理逻辑并返回 true
+            // 增加处理逻辑并返回 `true`
             return true;
         case R.id.action_friend_delete:
-            // 增加处理逻辑并返回 true
+            // 增加处理逻辑并返回 `true`
             return true;
     }
     return super.onMenuItemClick(item, position);

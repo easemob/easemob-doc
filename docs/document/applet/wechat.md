@@ -4,7 +4,7 @@
 
 ### 注册环信账号
 
-开发者需要在环信管理后台 [注册并创建应用](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
+开发者需要在环信管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
 
 ### 搭建微信小程序开发环境
 
@@ -105,4 +105,4 @@ WebIM.conn = new WebIM.connection({
 });
 ```
 
-IM 基本功能和web端一致，请参考web端文档。
+ 微信小程序的 IM 的基本功能和 API 的使用方法与 Web 端一致，请参考 Web 端文档。

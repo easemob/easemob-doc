@@ -7,13 +7,13 @@
         },
         mounted() {
             let headers = [];
-            if (this.$frontmatter.pageKey) {
-                const page = this.$site.pages.filter(item => item.key === this.$frontmatter.pageKey);
+            if (this.$frontmatter.pageUri) {
+                const page = this.$site.pages.filter(item => item.path === this.$frontmatter.pageUri);
                 headers = page[0].headers;
             } else {
                 headers = this.$page.headers;
             }
-            this.toc =  headers ? headers.filter(item => item.level < 4) : [];
+            this.toc =  headers ? headers.filter(item => item.level < 5) : [];
         }
     }
 </script>

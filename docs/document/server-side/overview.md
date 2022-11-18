@@ -35,9 +35,7 @@
 
 环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
-```
-Authorization`：`Bearer ${token}
-```
+Authorization：`Bearer ${token}`
 
 为提高项目的安全性，环信即时通讯使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。
 
@@ -74,13 +72,23 @@ Authorization`：`Bearer ${token}
 
 | 名称         | 方法   | 请求                                             | 描述                  |
 | :----------- | :----- | :----------------------------------------------- | :-------------------- |
-| 注册单个用户 | POST   | /{org_name}/{app_name}/users                     | 注册一个用户。        |
-| 批量注册用户 | POST   | /{org_name}/{app_name}/users                     | 注册多个用户。        |
-| 获取单个用户 | GET    | /{org_name}/{app_name}/users/{username}          | 获取单个用户的信息。  |
-| 批量获取用户 | GET    | /{org_name}/{app_name}/users                     | 获取多个用户的信息。  |
-| 删除单个用户 | DELETE | /{org_name}/{app_name}/users/{username}          | 删除单个用户。        |
-| 批量删除用户 | DELETE | /{org_name}/{app_name}/users                     | 删除 app 下所有用户。 |
+| [开放](account_system.html#开放注册单个用户) 和 [授权](account_system.html#授权注册单个用户)注册单个用户 | POST   | /{org_name}/{app_name}/users             | 开放注册和授权注册一个用户。        |
+| 批量注册用户 | POST   | /{org_name}/{app_name}/users                     | 授权注册多个用户。        |
+| 获取单个用户详情 | GET    | /{org_name}/{app_name}/users/{username}          | 获取单个用户的信息。  |
+| 批量获取用户详情 | GET    | /{org_name}/{app_name}/users                     | 获取多个用户的信息。  |
+| 删除单个用户账号| DELETE | /{org_name}/{app_name}/users/{username}          | 删除单个用户。        |
+| 批量删除用户账号 | DELETE | /{org_name}/{app_name}/users                     | 删除 app 下所有用户。 |
 | 修改用户密码 | PUT    | /{org_name}/{app_name}/users/{username}/password | 修改用户的密码。      |
+| 获取单个用户在线状态（status） | GET   | /{org_name}/{app_name}/users/{username}/status  | 查看一个用户的在线状态。|
+| 批量获取用户在线状态（status）| GET   | /{org_name}/{app_name}/users/batch/status | 批量查看用户的在线状态。|
+| 设置用户全局禁言 | POST | /{org_name}/{app_name}/mutes | 设置单个用户 ID 的单聊、群组、聊天室消息全局禁言。|
+| 查询单个用户 ID 全局禁言 | GET    | /{org_name}/{app_name}/mutes/{username} | 查询单个用户的单聊、群聊和聊天室消息的全局禁言。 |
+| 查询 app 下的所有全局禁言的用户 | POST   | /{org_name}/{app_name}/users  | 查询 app 下所有全局禁言的用户及其禁言剩余时间。|
+| 获取用户离线消息数量  | GET  | /{org_name}/{app_name}/users/{owner_username}/offline_msg_count | 获取用户的离线消息数量。|
+| 获取某条离线消息状态  | GET  | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id} | 获取用户的离线消息的状态，即查看该消息是否已投递。|
+| 用户账号封禁 |  POST | /{org_name}/{app_name}/users/{username}/deactivate | 禁用用户账号，账号被禁用将立即下线并无法登录进入环信即时通讯 IM，直到被解禁后才能恢复登录。|
+| 用户账号解禁 | POST | /{org_name}/{app_name}/users/{username}/activate | 解禁用户账号。 |
+| 强制下线 | GET | /{org_name}/{app_name}/users/{username}/disconnect | 强制用户即把用户状态改为离线，用户需要重新登录才能正常使用。 |
 
 ### 设置消息离线推送
 
@@ -149,20 +157,20 @@ Authorization`：`Bearer ${token}
 | :------------------- | :----- | :---------------------- | :--------------- |
 | 分页获取群组成员 | GET | /{org_name}/{app_name}/chatgroups/{group_id}/users | 分页获取一个群组的群成员列表。 |
 | 添加单个群组成员 | POST  | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username} | 添加用户至群组成员列表。 |
-| 批量添加群组成员 | POST   | /{org_name}/{app_name}/chatgroups/{chatgroupid}/users        | 批量添加用户至群组成员列表。 |
+| 批量添加群组成员 | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/users        | 批量添加用户至群组成员列表。 |
 | 移除单个群组成员 | DELETE | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username} | 从群组成员列表中移除用户。 |
 | 批量移除群组成员| DELETE | /{org_name}/{app_name}/chatgroups/{group_id}/users/{usernames} | 从群组成员列表中批量移除用户。 |
 | 获取群管理员列表  | GET    | /{org_name}/{app_name}/chatgroups/{group_id}/admin           | 获取群组管理员列表。  |
 | 添加群管理员  | POST | /{org_name}/{app_name}/chatgroups/{group_id}/admin | 添加用户至群组管理员列表。 |
 | 移除群管理员| DELETE | /{org_name}/{app_name}/chatgroups/{group_id}/admin/{oldadmin} | 从群组管理员列表中移除用户。|
-| 转让群组  | PUT    | /{org_name}/{app_name}/chatgroups/{groupid}  | 转让群主权限。 |
+| 转让群组  | PUT    | /{org_name}/{app_name}/chatgroups/{group_id}  | 转让群主权限。 |
 | 查询群组黑名单           | GET    | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users    | 查询群组的黑名单列表。             |
 | 添加单个用户至群组黑名单 | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username} | 将用户添加至群组的黑名单列表。     |
 | 批量添加用户至群组黑名单 | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users    | 将用户批量添加至群组的黑名单列表。 |
 | 从群组黑名单移除单个用户 | DELETE | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username} | 将用户从黑名单列表中移除。         |
 | 批量从群组黑名单移除用户 | DELETE | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames} | 批量将用户从黑名单列表中移除。     |
 | 查询群组白名单           | GET    | /{org_name}/{app_name}/chatgroups/{group_id}/white/users     | 查询群组白名单中的用户列表。       |
-| 添加单个用户至群组白名单 | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/white/users/{username}} | 将指定的单个用户添加至群组白名单。 |
+| 添加单个用户至群组白名单 | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/white/users/{username} | 将指定的单个用户添加至群组白名单。 |
 | 批量添加用户至群组白名单 | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users    | 添加多个用户至群组白名单。         |
 | 将用户移除群组白名单     | DELETE | {org_name}/{app_name}/chatgroups/{group_id}/white/users/{username} | 将指定用户从群组白名单中移除。     |
 | 获取禁言列表             | GET    | /{org_name}/{app_name}/chatgroups/{group_id}/mute}           | 获得指定群组的禁言列表。           |
@@ -179,7 +187,7 @@ Authorization`：`Bearer ${token}
 | :----------------------------------------------- | :----- | :----------------------------------------------------------- | :--------------------------------------------- |
 | 获取 app 中所有的子区（分页获取）                | GET    | /{org_name}/{app_name}/thread                                | 获取应用下全部的子区列表。                     |
 | 获取一个用户加入的所有子区（分页获取）           | GET    | /{org_name}/{app_name}/threads/user/{username}               | 根据用户 ID 获取用户加入的所有的子区。         |
-| 获取一个用户某个群组下加入的所有子区（分页获取） | GET    | /{org_name}/{app_name}//threads/chatgroups/{group_id}user/{username} | 根据用户 ID 和群组 ID 获取用户加入的所有子区。 |
+| 获取一个用户某个群组下加入的所有子区（分页获取） | GET    | /{org_name}/{app_name}/threads/chatgroups/{group_id}user/{username} | 根据用户 ID 和群组 ID 获取用户加入的所有子区。 |
 | 创建子区                                         | POST   | /{org_name}/{app_name}/thread                                | 创建一个新子区。                               |
 | 修改子区                                         | PUT    | /{org_name}/{app_name}/thread/{thread_id}                    | 修改子区的部分信息。                           |
 | 删除子区                                         | DELETE | /{org_name}/{app_name}/thread/{thread_id}                    | 删除一个子区。                                 |
@@ -208,6 +216,11 @@ Authorization`：`Bearer ${token}
 | 删除聊天室              | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 删除一个聊天室。                         |
 | 获取聊天室公告          | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 获取指定聊天室 ID 的聊天室公告。         |
 | 修改聊天室公告          | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 修改指定聊天室 ID 的聊天室公告。         |
+| 获取聊天室自定义属性 | POST  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 获取聊天室指定或所有自定义属性。      |
+| 设置聊天室自定义属性 | PUT  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username} | 设置聊天室单个或多个自定义属性。    |
+| 强制设置聊天室自定义属性 | PUT | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}/forced | 强制设置聊天室单个或多个自定义属性。        |
+| 删除聊天室自定义属性 | DELETE  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username} | 删除单个或多个聊天室自定义属性。 |
+| 强制删除聊天室自定义属性 | DELETE  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}/forced | 强制删除单个或多个聊天室自定义属性。  |
 
 ### 聊天室成员管理
 
@@ -216,10 +229,10 @@ Authorization`：`Bearer ${token}
 | 名称                       | 方法   | 请求                                                         | 描述                                 |
 | :------------------------- | :----- | :----------------------------------------------------------- | :----------------------------------- |
 | 分页获取聊天室成员         | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users         | 分页获取一个聊天室的成员列表。       |
-| 添加单个聊天室成员         | POST   | /{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username} | 添加用户至聊天室成员列表。           |
-| 批量添加聊天室成员         | POST   | /{org_name}/{app_name}/chatrooms/{chatroomid}/users          | 批量添加用户至聊天室成员列表。       |
-| 删除单个聊天室成员         | DELETE | /{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username} | 从聊天室成员列表中删除用户。         |
-| 批量删除聊天室成员         | DELETE | /{org_name}/{app_name}/chatrooms/{chatroomid}/users/{usernames} | 从聊天室成员列表中批量删除用户。     |
+| 添加单个聊天室成员         | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{username} | 添加用户至聊天室成员列表。           |
+| 批量添加聊天室成员         | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users          | 批量添加用户至聊天室成员列表。       |
+| 删除单个聊天室成员         | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{username} | 从聊天室成员列表中删除用户。         |
+| 批量删除聊天室成员         | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{usernames} | 从聊天室成员列表中批量删除用户。     |
 | 获取聊天室管理员列表       | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin         | 获取聊天室管理员列表。               |
 | 添加聊天室管理员           | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin         | 添加用户至聊天室管理员列表。         |
 | 移除聊天室管理员           | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin/{oldadmin} | 从聊天室管理员列表中移除用户。       |
@@ -228,7 +241,7 @@ Authorization`：`Bearer ${token}
 | 批量添加用户至聊天室黑名单 | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users  | 将单个用户批量添加至聊天室的黑名单。 |
 | 从聊天室黑名单移除单个用户 | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{username} | 将用户从聊天室黑名单中移除。         |
 | 批量从聊天室黑名单移除用户 | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{usernames} | 批量将用户从黑名单列表中移除。       |
-| 查询聊天室白名单           | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users`  | 查询一个聊天室白名单中的用户列表。   |
+| 查询聊天室白名单           | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users  | 查询一个聊天室白名单中的用户列表。   |
 | 添加单个用户至聊天室白名单 | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username} | 将指定的单个用户添加至聊天室白名单。 |
 | 批量添加用户至聊天室白名单 | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users   | 添加多个用户至聊天室白名单。         |
 | 将用户移除聊天室白名单     | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username} | 将指定用户从聊天室白名单移除。       |

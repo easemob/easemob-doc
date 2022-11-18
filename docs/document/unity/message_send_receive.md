@@ -1,16 +1,14 @@
-# 消息管理–发送和接收消息
+# 发送和接收消息
 
 <Toc />
 
-登录 Chat app 后，用户可以在一对一单聊、群聊、聊天室中发送如下类型的消息：
+登录即时通讯 IM app 后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
 
 - 文字消息，包含超链接和表情消息。
 - 附件消息，包含图片、语音、视频及文件消息。
 - 位置消息。
 - 透传消息。
 - 自定义消息。
-
-以及对以上消息进行自定义扩展。
 
 本文介绍如何使用即时通讯 IM SDK 实现发送和接收这些类型的消息。
 
@@ -21,7 +19,7 @@
 其中，发送和接收消息的逻辑如下：
 
 1. 发送方调用相应 `Create` 方法创建文本、文件、附件等类型的消息；
-2. 发送方再调用 `SendMessage` 发送消息；
+2. 发送方调用 `SendMessage` 发送消息；
 3. 接收方通过 `AddChatManagerDelegate` 方法监听消息回调事件。在收到 `OnMessageReceived` 后，即表示成功接收到消息。
 
 ## 前提条件
@@ -35,11 +33,11 @@
 
 ### 发送文本消息
 
-你可以利用 `Message` 类构造一个消息，然后通过 `IChatManager ` 将该消息发出。
+你可以利用 `Message` 类构造一个消息，然后通过 `IChatManager` 将该消息发出。
 
 示例代码：
 
-```csharp
+```C#
 //创建一条文本消息，`content` 为消息文字内容，`toChatUsername` 为对方用户或者群聊的 ID，后文皆是如此。
 Message msg = Message.CreateTextSendMessage(toChatUsername, content);
 
@@ -68,7 +66,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 在新消息到来时，你会收到 `OnMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
-```csharp
+```C#
 //继承并实现 IChatManagerDelegate。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -91,7 +89,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 消息发送后 2 分钟之内，消息的发送方可以撤回该消息。如果需要调整可撤回时限，可以联系商务。
 
-```csharp
+```C#
 SDKClient.Instance.ChatManager.RecallMessage("Message ID", new CallBack(
   onSuccess: () => {
     Debug.Log("回撤成功");
@@ -105,35 +103,35 @@ SDKClient.Instance.ChatManager.RecallMessage("Message ID", new CallBack(
  ));
 ```
 
-设置消息撤回监听：
+还可以使用 `IChatManagerDelegate` 设置消息撤回监听：
 
-```csharp
-//接收到消息被撤回时触发此回调（此回调位于 IChatManagerDelegate 中）。
+```C#
+// 接收到消息被撤回时触发此回调（此回调位于 IChatManagerDelegate 中）。
 void OnMessagesRecalled(List<Message> messages);
 ```
 
-### 发送附件类型的消息
+### 发送和接收附件消息
 
 除文本消息外，还有几种其他类型的消息，其中语音，图片，短视频，文件等消息，是通过先将附件上传到消息服务器的方式实现。收到语音时，会自动下载，而图片和视频会自动下载缩略图。文件消息不会自动下载附件，接收方需调用下载附件的 API，具体实现参考下文。
 
-#### 发送语音消息
+#### 发送和接收语音消息
 
 发送语音消息时，应用层需完成语音文件录制的功能，提供语音文件的 URI 和语音时长。
 
 参考如下示例代码创建并发送语音消息：
 
-```csharp
-//localPath 为语音文件的本地资源路径，`displayName` 为消息显示名称，语音消息可以设置为空 ""。
-//fileSize 为语音文件大小，duration 为语音时长（秒）。
+```C#
+// localPath 为语音文件的本地资源路径，`displayName` 为消息显示名称，语音消息可以设置为空 ""。
+// fileSize 为语音文件大小，duration 为语音时长（秒）。
 Message msg = Message.CreateVoiceSendMessage(toChatUsername, localPath, displayName, fileSize, duration);
 
-//设置消息类型，即设置 `Message` 类的 `MessageType` 属性。
-//该属性的值为 `Chat`、`Group` 和 `Room`，表明该消息是单聊，群聊或聊天室消息，默认为单聊。
-//若为群聊，设置 `MessageType` 为 `Group`。
+// 设置消息类型，即设置 `Message` 类的 `MessageType` 属性。
+// 该属性的值为 `Chat`、`Group` 和 `Room`，表明该消息是单聊，群聊或聊天室消息，默认为单聊。
+// 若为群聊，设置 `MessageType` 为 `Group`。
 msg.MessageType = MessageType.Group;
 
-//发送消息。
-//发送消息时可以设置 `CallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
+// 发送消息。
+// 发送消息时可以设置 `CallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
 SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
   onSuccess: () => {
     Debug.Log($"{msg.MsgId}发送成功");
@@ -149,8 +147,8 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 接收方收到语音消息后，参考如下示例代码获取语音消息的附件：
 
-```csharp
-//注意：这里的 "Message ID" 是消息发送成功以后（CallBack 中的 onSuccess 被触发以后），被发送消息的 ID。
+```C#
+// 注意：这里的 "Message ID" 是消息发送成功以后（CallBack 中的 onSuccess 被触发以后），被发送消息的 ID。
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
 if (msg != null)
 {
@@ -167,13 +165,13 @@ else {
 }
 ```
 
-#### 发送图片消息
+#### 发送和接收图片消息
 
 图片消息默认会被压缩后发出，可通过设置 `original` 参数为 `true` 发送原图。
 
-参考如下示例代码，创建并接收图片消息：
+参考如下示例代码，创建并发送图片消息：
 
-```csharp
+```C#
 //`localPath` 为图片本地资源路径。
 //`displayName` 为图片显示名称。
 //`fileSize` 为用户上传的图片文件大小，单位为字节。
@@ -202,7 +200,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 接收方收到图片消息后，参考如下示例代码获取图片消息的缩略图和附件：
 
-```csharp
+```C#
 //注意：这里的 "Message ID" 是消息发送成功以后（`CallBack` 中的 `onSuccess` 被触发以后），被发送消息的 ID。
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
 if (msg != null)
@@ -231,13 +229,13 @@ else {
 
 下载完成后，调用相应消息 `msg.Body` 的 `ThumbnailLocalPath` 去获取缩略图路径。
 
-#### 发送短视频消息
+#### 发送和接收短视频消息
 
 发送短视频消息时，应用层需要完成视频文件的选取或者录制。视频消息支持给出视频的时长作为参数，发送给接收方。
 
 参考如下示例代码，创建并发送短视频消息：
 
-```csharp
+```C#
 Message msg = Message.CreateVideoSendMessage(toChatUsername, localPath, displayName, thumbnailLocalPath, fileSize, duration, width, height);
 
 //发送消息。
@@ -255,15 +253,15 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-接收方收到短视频消息后，SDK 默认会下载该视频消息的缩略图。
+默认情况下，当收件人收到短视频消息时，SDK 会下载视频消息的缩略图。
 
-使用 `Options.IsAutoDownload` 设置为 `false`可以修改为不自动下载。
+如果不希望 SDK 自动下载视频缩略图，可以将 `Options.IsAutoDownload` 设置为 `false`。
 
 如果未设置自动下载，需主动调用 `SDKClient.Instance.ChatManager.DownloadThumbnail` 下载。下载完成后，使用相应消息 `Body` 的 `ThumbnailLocalPath` 成员获取缩略图路径。
 
 短视频文件本身需要通过 `SDKClient.Instance.ChatManager.DownloadAttachment` 下载，下载完成后，使用相应消息 `Body` 的 `LocalPath` 成员获取短视频文件路径。
 
-```csharp
+```C#
 // 接收到视频消息需先下载附件才能打开。
 SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
   onSuccess: () => {
@@ -293,20 +291,20 @@ SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
 ));
 ```
 
-#### 发送文件消息
+#### 发送和接收文件消息
 
 参考如下示例代码创建并发送文件消息：
 
-```csharp
-//localPath 为文件本地路径，displayName 为消息显示名称，fileSize 为文件大小。
+```C#
+// localPath 为文件本地路径，displayName 为消息显示名称，fileSize 为文件大小。
 Message msg = Message.CreateFileSendMessage(toChatUsername,localPath, displayName, fileSize);
 
-//设置消息类型，即设置 `Message` 类的 `MessageType` 属性。
-//设置该属性的值为 `Chat`、`Group` 和 `Room`，分别代表该消息是单聊、群聊或聊天室消息，默认为单聊。
+// 设置消息类型，即设置 `Message` 类的 `MessageType` 属性。
+// 设置该属性的值为 `Chat`、`Group` 和 `Room`，分别代表该消息是单聊、群聊或聊天室消息，默认为单聊。
 msg.MessageType = MessageType.Group;
 
-//发送消息。
-//发送消息时可以设置 `CallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
+// 发送消息。
+// 发送消息时可以设置 `CallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
 SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
   onSuccess: () => {
     Debug.Log($"{msg.MsgId}发送成功");
@@ -319,8 +317,8 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
   }
 ));
 
-//发送成功后，获取文件消息附件。
-//注意：这里的 "Message ID" 是消息发送成功以后（CallBack 中的 onSuccess 被触发以后），被发送消息的 ID。
+// 发送成功后，获取文件消息附件。
+// 注意：这里的 "Message ID" 是消息发送成功以后（CallBack 中的 onSuccess 被触发以后），被发送消息的 ID。
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
 if (msg != null)
 {
@@ -343,7 +341,7 @@ else {
 
 当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
-```csharp
+```C#
 //`latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容，`buildingName` 为建筑名称。
 Message msg = Message.CreateLocationSendMessage(toChatUsername, latitude, longitude, locationAddress, buildingName);
 
@@ -357,11 +355,11 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-### 发送透传消息
+### 发送和接收透传消息
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
 
-```csharp
+```C#
 //`action` 可以自定义。
 string action = "actionXXX";
 Message msg = Message.CreateCmdSendMessage(toChatUsername, action);
@@ -377,86 +375,94 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
 
-```csharp
-//继承并实现 `IChatManagerDelegate`。
+```C#
+// 继承并实现 `IChatManagerDelegate`。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
-    //收到消息。
+    // 收到消息。
     public void OnMessagesReceived(List<Message> messages)
     {
-      //收到消息，遍历消息列表，解析和显示。
+      // 收到消息，遍历消息列表，解析和显示。
     }
-    //收到透传消息。
+    // 收到透传消息。
     void OnCmdMessagesReceived(List<Message> messages)
     {
-      //收到消息，遍历消息列表，解析和处理。
+      // 收到消息，遍历消息列表，解析和处理。
     }
 }
 
-//申请并注册监听。
+// 申请并注册监听。
 ChatManagerDelegate adelegate = new ChatManagerDelegate()
 SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 ```
 
-### 发送自定义类型消息
+#### 通过透传消息实现输入指示器
 
-除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。自定义消息内容是 key，value 格式，你需要自己添加并解析该内容。
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
 
-```csharp
-//`event` 为字符串类型的自定义事件，比如礼物消息，可以设置：
-string event = "gift";
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
 
-//`adict` 类型为 `Dictionary<string, string>`。
-Dictionary<string, string> adict = new Dictionary<string, string>();
-adict.Add("key", "value");
+[img](@static/images/common/typing_indicator.png)
 
-Message msg = Message.CreateCustomSendMessage(toChatUsername, event, adict);
-SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
-   onSuccess: () => {
-      Debug.Log($"{msg.MsgId}发送成功");
-   },
-   onError: (code, desc) => {
-      Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
-   }
-));
-```
 
-### 使用消息的扩展字段
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
 
-当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型。
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
 
-当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
+:::notice 
 
-```csharp
-Message msg = Message.CreateTextSendMessage(toChatUsername, content);
+用户 A 可根据需要设置透传消息发送间隔。
 
-//增加自定义属性。
-AttributeValue attr1 = AttributeValue.Of("value", AttributeValueType.STRING);
-AttributeValue attr2 = AttributeValue.Of(true, AttributeValueType.BOOL);
-msg.Attributes.Add("attribute1", attr1);
-msg.Attributes.Add("attribute2", attr2);
+:::
 
-//发送消息。
-SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
-  onSuccess: () => {
-    Debug.Log($"{msg.MsgId}发送成功");
-  },
-  onError:(code, desc) => {
-    Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
+以下示例代码展示如何发送输入状态的透传消息。
+
+```c#
+//发送表示正在输入的透传消息
+string msgTypingBegin = "TypingBegin";
+
+void textChange() {
+  int currentTimestamp = getCurrentTimestamp();
+  if (currentTimestamp - _previousChangedTimeStamp > 5) {
+    _sendBeginTyping();
+    _previousChangedTimeStamp = currentTimestamp;
   }
-));
-
-//接收消息的时候获取扩展属性。
-bool found = false;
-string str = msg.GetAttributeValue<string>(msg.Attributes, "attribute1", found);
-if (found) {
-  // 使用 str 变量。
 }
 
-found = false；
-bool b = msg.GetAttributeValue<bool>(msg.Attributes, "attribute2", found);
-if (found) {
-  // 使用 b 变量。
+void _sendBeginTyping() {
+  var msg = Message.CreateCmdSendMessage(
+    username: conversationId,
+    action: msgTypingBegin,
+    deliverOnlineOnly: true,
+  );
+  msg.chatType = MessageType.Chat;
+  SDKClient.getInstance.chatManager.sendMessage(msg);
+}
+
+```
+
+以下示例代码展示如何接受和解析输入状态的透传消息。
+
+```c#
+int typingTime = 10;
+
+void OnCmdMessagesReceived(List<Message> list) {
+  for (var msg in list) {
+    if (msg.ConversationId != currentConversationId) {
+      continue;
+    }
+    MessageBody.CmdBody body = msg.Body as MessageBody.CmdBody;
+    if (body.Action == msgTypingBegin) {
+      // 这里需更新 UI，显示“对方正在输入”
+      
+      Timer timer = new Timer((state) =>
+      {
+      	// 这里需更新 UI，不再显示“对方正在输入”
+      }, null, typingTime, Timeout.Infinite);
+    }
+  }
 }
 ```

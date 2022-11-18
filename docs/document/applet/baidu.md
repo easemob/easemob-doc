@@ -4,7 +4,7 @@
 
 ### 注册环信账号
 
-开发者需要在环信管理后台 [注册并创建应用](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
+开发者需要在环信管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
 
 ### 搭建百度小程序开发环境
 

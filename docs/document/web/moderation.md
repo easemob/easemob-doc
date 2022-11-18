@@ -1,4 +1,4 @@
-# 消息审核（举报）Web
+# 消息审核（举报）
 
 <Toc />
 
@@ -15,7 +15,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 开通消息审核服务，详见管理后台。
+- 已在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 开通消息审核服务。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
@@ -27,5 +27,5 @@ connection.reportMessage({
     reportType: 'report type'; // 举报类型。
     reportReason: 'report reason'; // 举报原因。
     messageId: 'ID of the reported message'; // 消息 ID
-}
+})
 ```

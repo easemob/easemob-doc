@@ -1,4 +1,4 @@
-# 在线状态订阅 Flutter
+# 在线状态订阅
 
 <Toc />
 
@@ -82,38 +82,21 @@ try {
 }
 ```
 
-在线状态发布后，发布者和订阅者均会收到 `EMPresenceEventHandler#onPresenceStatusChanged` 回调。
+在线状态发布后，发布者和订阅者均会收到 `EMPresenceEventHandler#onPresenceStatusChanged` 事件。
 
 ### 添加在线状态监听器
 
 添加用户在线状态的监听器以及接收状态变更事件通知，示例代码如下：
 
 ```dart
-class _ChatPageState extends State<ChatPage> {
-  @override
-  void initState() {
-    super.initState();
     // 添加状态变化监听
     EMClient.getInstance.presenceManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-      EMPresenceEventHandler(
-        onPresenceStatusChanged: (list) => {},
-      ),
-    );
-  }
+  EMPresenceEventHandler(),
+);
 
-  @override
-  void dispose() {
     // 移除状态变化监听
     EMClient.getInstance.presenceManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 ```
 
 ### 取消订阅指定用户的在线状态

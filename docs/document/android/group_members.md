@@ -38,13 +38,15 @@
 
 ```java
 // 群主或群组管理员添加群组成员
+// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncAddUsersToGroup(String, String[], EMCallBack)}。
 EMClient.getInstance().groupManager().addUsersToGroup(groupId, newmembers);
 ```
 
 - 私有群成员邀请用户入群：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncInviteUser(String, String[], String, EMCallBack)}。
 EMClient.getInstance().groupManager().inviteUser(groupId, newmembers, null);
 ```
 
@@ -55,7 +57,8 @@ EMClient.getInstance().groupManager().inviteUser(groupId, newmembers, null);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncRemoveUserFromGroup(String, String, EMCallBack)}。
 EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 ```
 
@@ -68,7 +71,8 @@ EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法见 {@link #asyncChangeOwner(String, String, EMValueCallBack)}。
 EMClient.getInstance().groupManager().changeOwner(groupId, newOwner);
 ```
 
@@ -115,7 +119,7 @@ List<String> adminList = group.getAdminList();
 
 #### 将成员加入群组黑名单
 
-仅群主和群管理员可以调用 `BlockGroupMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupChangeListener#OnUserRemovedFromGroup` 回调，其他群成员收到 `EMGroupChangeListener#OnMemberExitedFromGroup` 回调。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
+仅群主和群管理员可以调用 `BlockGroupMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupChangeListener#OnUserRemovedFromGroup` 回调。其他群成员会收到该成员退出群组的回调，如需该回调，请联系商务开通。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
 
 示例代码如下：
 
@@ -257,10 +261,6 @@ public void checkIfInGroupWhiteList(final String groupId, EMValueCallBack<Boolea
 public void fetchGroupWhiteList(final String groupId, final EMValueCallBack<List<String>> callBack);
 ```
 
-### 更多操作
+### 监听群组事件
 
-你可以参考如下文档，在项目中实现更多的群组相关功能：
-
-- [群组概述](group_overview.html)
-- [创建和管理群组](group_manage.html)
-- [群组属性管理](group_attributes.html)
+详见 [监听群组事件](group_manage.html#监听群组事件)。

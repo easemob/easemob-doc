@@ -2,10 +2,17 @@
     export default {
         data() {
             return {
+                pageKey: '',
                 toTopHide: true
             }
         },
         mounted() {
+            if (this.$frontmatter.pageUri) {
+                const page = this.$site.pages.filter(item => item.path === this.$frontmatter.pageUri);
+                if (page.length > 0) {
+                    this.pageKey = page[0].key;
+                }
+            }
             const content = document.querySelector('.description-container');
             if (location.hash && location.hash !== '#') {
                 setTimeout(function(){
@@ -55,8 +62,8 @@
 
 <template>
     <div>
-        <template v-if="this.$frontmatter.pageKey">
-        <Content :pageKey="this.$frontmatter.pageKey" />
+        <template v-if="this.$frontmatter.pageUri">
+        <Content :pageKey="pageKey" />
         </template>
         <template v-else>
         <Content />

@@ -6,19 +6,19 @@
 
 `EaseCallKit` 是一套基于声网音视频服务，使用环信 IM 作为信令通道的开源音视频 UI 库。UI 库提供了单人语音通话、视频通话，以及多人会议的功能接口。
 
-使用 `EaseCallKit` 库可以快速实现常用的音视频场景，通过信令的交互确认，保证`用户多端登录时，收到呼叫同时振铃，一端处理后，其他端自动停止`。
+使用 `EaseCallKit` 库可以快速实现常用的音视频场景，通过信令的交互确认，保证 **用户多端登录时，收到呼叫同时振铃，一端处理后，其他端自动停止**。
 
 `EaseCallKit` 库在 Github 上进行了保存，请参见 [EaseCallKit iOS 端使用指南](https://github.com/easemob/easecallkitui-ios)。
 
 **`EaseCallKit` 在通话过程中，使用环信 ID 加入频道，方便音视频视图中显示用户名。如果用户不使用 `EaseCallKit` 而直接调用声网 API，也可以直接使用数字 UID 加入频道。**
 
 :::notice
-本 UI 库只和移动端 3.8.0 以上版本 Demo 互通。3.8.1 的 UI 库使用声网数字 UID 加入频道，而 3.8.0 使用字符串加入频道，3.8.1 版本不与 3.8.0 互通，Demo 中 EaseCallKit 使用的 token 和 Uid 都是需要从声网申请的，如果您需要使用声网对应的音视频服务，也需单独去声网申请。`**
+本 UI 库只和移动端 3.8.0 以上版本 Demo 互通。3.8.1 的 UI 库使用声网数字 UID 加入频道，而 3.8.0 使用字符串加入频道，3.8.1 版本不与 3.8.0 互通，Demo 中 EaseCallKit 使用的 token 和 Uid 都是需要从声网申请的，如果您需要使用声网对应的音视频服务，也需单独去声网申请。
 :::
 
 ## 跑通 Demo
 
-`EaseCallKit` 集成在环信提供的开源 IM Demo 中，你可以通过进入 [环信 IM Demo 下载页面](https://www.easemob.com/download/im)，选择 iOS 端 Demo 下载，或直接进入 Github 开源网站 https://github.com/easemob/chat-ios 下载。
+`EaseCallKit` 集成在环信提供的开源 IM Demo 中，你可以通过进入 [环信 IM Demo 下载页面](https://www.easemob.com/download/im)，选择 iOS 端 Demo 下载，或直接进入 [Github 开源网站](https://github.com/easemob/chat-ios) 下载。
 
 - 安装 SDK 与 `EaseCallKit`
 
@@ -65,6 +65,7 @@ pod install
 
 - 在 Terminal 里进入项目根目录，并运行 `pod init` 命令。项目文件夹下会生成一个 `Podfile` 文本文件。
 - 打开 `Podfile` 文件，修改文件为如下内容。注意将 `AppName` 替换为你的 app 名称。
+
 ```
 use_frameworks!
 target 'AppName' do
@@ -75,6 +76,7 @@ target 'AppName' do
     pod 'EaseCallKit', '~> version'
 end
 ```
+
 - 在 Terminal 内运行 `pod update` 命令更新本地库版本。
 - 运行 `pod install` 命令安装 `EaseCallKit` UI 库。成功安装后，Terminal 中会显示 **Pod installation complete!**，此时项目文件夹下会生成一个 `xcworkspace` 文件。
 - 打开新生成的 `xcworkspace` 文件，连接手机，运行 demo。
@@ -139,7 +141,7 @@ config.agoraAppId=@"声网 AppID";
 ```objectivec
 // 发起一对一通话。
 // remoteUser   邀请对象的环信 ID。
-// type   通话类型。`EaseCallType1v1Audio` 表示语音通话; `EaseCallType1v1Video` 表示视频通话。 
+// type   通话类型。`EaseCallType1v1Audio` 表示语音通话，`EaseCallType1v1Video` 表示视频通话。 
 // ext    通话扩展信息，为用户信息字典。
 [[EaseCallManager sharedManager] startSingleCallWithUId:remoteUser type:aType ext:nil completion:^(NSString * callId, EaseCallError * aError) {
     
@@ -364,7 +366,7 @@ config.enableRTCTokenValidate = YES;// 开启 RTC Token 验证，默认不开启
 
 ### 离线推送
 
-为保证被叫用户 App 在后台运行或离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [iOS SDK 集成](push.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。 关于离线推送场景方案，请参见 [iOS端保障新消息及时通知的常见实践](https://docs-im.easemob.com/im/other/integrationcases/iosimnotifi)。
+为保证被叫用户 App 在后台运行或离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [iOS SDK 集成](push.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。 关于离线推送场景方案，请参见 [iOS 端设置推送](push.html)。
 
 ## API 列表
 

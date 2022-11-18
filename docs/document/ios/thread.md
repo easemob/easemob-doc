@@ -1,4 +1,4 @@
-# 管理子区 iOS
+# 管理子区
 
 <Toc />
 
@@ -22,7 +22,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 `3.9.3 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+- 完成 `3.9.3 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
@@ -43,6 +43,7 @@
 // threadName：子区名称，长度不超过 64 个字符
 // messageId：消息 ID，基于这条消息创建子区
 // parentId：群组 ID
+// 异步方法
 [[EMClient sharedClient].threadManager createChatThread:self.threadName messageId:self.message.message.messageId parentId:self.message.message.to completion:^(EMChatThread *thread, EMError *aError) {
     if (!aError) {
         
@@ -65,6 +66,7 @@
 示例代码如下：
 
 ```objectivec
+// 异步方法
     [EMClient.sharedClient.threadManager destroyChatThread:self.conversationId completion:^(EMError *aError) {
         if (!aError) {
             
@@ -88,6 +90,7 @@
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.threadManager joinChatThread:model.message.threadOverView.threadId completion:^(EMChatThread *thread,EMError *aError) {
     if (!aError || aError.code == EMErrorUserAlreadyExist) {
         
@@ -104,6 +107,7 @@
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.threadManager leaveChatThread:self.conversationId completion:^(EMError *aError) {
     if (!aError) {
         
@@ -124,6 +128,7 @@
 ```objectivec
 // chatThreadId：子区 ID
 // member：子区成员的用户 ID
+// 异步方法
 [EMClient.sharedClient.threadManager removeMemberFromChatThread:member threadId:self.threadId completion:^(EMError *aError) {
     if (!aError) {
         
@@ -144,6 +149,7 @@
 ```objectivec
 // threadId：子区 ID
 // ThreadName：你想要修改的名称（不超过 64 个字符）
+// 异步方法
 [EMClient.sharedClient.threadManager updateChatThreadName:self.threadNameField.text threadId:self.threadId completion:^(EMError *aError) {
     if (!aError) {
         
@@ -161,6 +167,7 @@
 
 ```objectivec
 // threadId：子区 ID
+// 异步方法
 [EMClient.sharedClient.threadManager getChatThreadDetail:self.currentConversation.conversationId completion:^(EMChatThread *thread, EMError *aError) {
     if (!aError) {
         
@@ -178,6 +185,7 @@
 // threadId：子区 ID
 // pageSize：单次请求返回的成员数，取值范围为 [1, 50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
+// 异步方法
 [[EMClient sharedClient].threadManager getChatThreadMemberListFromServerWithId:self.threadId cursor:aCursor pageSize:pageSize completion:^(EMCursorResult *aResult, EMError *aError) {
     if !aError { self.cursor = aResult; }
 }];
@@ -190,6 +198,7 @@
 ```objectivec
 // limit：单次请求返回的子区数，取值范围为 [1, 50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串 
+// 异步方法
 [EMClient.sharedClient.threadManager getJoinedChatThreadsFromServerWithCursor:@"" pageSize:20 completion:^(EMCursorResult * _Nonnull result, EMError * _Nonnull aError) {
         
 }];
@@ -201,6 +210,7 @@
 // parentId：群组 ID
 // pageSize：单次请求返回的子区数，取值范围为 [1, 50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
+// 异步方法
 [EMClient.sharedClient.threadManager getJoinedChatThreadsFromServerWithParentId:self.group.groupId cursor:self.cursor ? self.cursor.cursor:@"" pageSize:20 completion:^(EMCursorResult * _Nonnull result, EMError * _Nonnull aError) {
     if (!aError) {
         
@@ -214,6 +224,7 @@
 // parentId: 群组 ID
 // pageSize: 单次请求返回的子区数，取值范围为 [1, 50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
+// 异步方法
 [[EMClient sharedClient].threadManager getChatThreadsFromServerWithParentId:self.group.groupId cursor:self.cursor ? self.cursor.cursor:@"" pageSize:20 completion:^(EMCursorResult *result, EMError *aError) {
     if (!aError) {
         
@@ -229,6 +240,7 @@
 
 ```objectivec
 // threadIds：要查询的子区 ID 列表，每次最多可传入 20 个子区 ID
+// 异步方法
 [[EMClient sharedClient].threadManager getLastMessageFromSeverWithChatThreads:ids completion:^(NSDictionary<NSString *,EMChatMessage *> * _Nonnull messageMap, EMError * _Nonnull aError) {
     if (!aError) {
         

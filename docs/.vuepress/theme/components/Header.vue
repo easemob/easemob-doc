@@ -100,7 +100,14 @@
             </div>
             <div class="nav pc-nav">
                 <div class="main-nav">
-                    <router-link v-for="item in mainNav" v-if="item.show === undefined || item.show !== false" :to="item.link" :class="{active: item.link.startsWith(localePath + path.split('/')[0] + '/')}">{{ item.text }}</router-link>
+                    <template v-for="item in mainNav">
+                        <template v-if="item.link.startsWith('http://') || item.link.startsWith('https://')">
+                            <a :href="item.link" target="_blank">{{ item.text }}</a>
+                        </template>
+                        <template v-else>
+                            <router-link v-if="item.show === undefined || item.show !== false" :to="item.link" :class="{active: item.link.startsWith(localePath + path.split('/')[0] + '/')}">{{ item.text }}</router-link>
+                        </template>
+                    </template>
                 </div>
                 <div class="nav-extra">
                     <div class="search-container">

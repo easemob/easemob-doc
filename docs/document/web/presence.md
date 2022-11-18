@@ -95,7 +95,7 @@ WebIM.conn.addEventHandler('MESSAGES',{
 let option = {
   usernames: ['Alice','Bob']
 }
-conn.unsubscribePresence(payload).then(res => {console.log(res)})
+conn.unsubscribePresence(option).then(res => {console.log(res)})
 ```
 
 ### 查询被订阅用户列表
@@ -107,7 +107,7 @@ let option = {
   pageNum: 0,
   pageSize: 50
 }
-conn.getSubscribedPresenceList(payload).then(res => {console.log(res)})
+conn.getSubscribedPresenceList(option).then(res => {console.log(res)})
 ```
 
 ### 获取用户的当前在线状态
@@ -118,5 +118,5 @@ conn.getSubscribedPresenceList(payload).then(res => {console.log(res)})
 let option = {
   usernames: ['Alice','Bob']
 }
-conn.getPresenceStatus(payload).then(res => {console.log(res)})
+conn.getPresenceStatus(option).then(res => {console.log(res)})
 ```

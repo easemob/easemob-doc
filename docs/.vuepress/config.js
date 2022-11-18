@@ -1,6 +1,10 @@
 const path = require('path');
+const moment = require('moment');
 
 module.exports = {
+  shouldPrefetch: () => {
+    return false
+  },
   configureWebpack: {
     resolve: {
       alias: {
@@ -40,7 +44,7 @@ module.exports = {
     // 头部左上角 logo
     logo: '/logo.png',
     // 多语言切换
-    switchLang: true,
+    switchLang: false,
     // 多语言
     locales: {
       // 中文
@@ -61,8 +65,10 @@ module.exports = {
             show: 不存在或者值为 true 时，菜单显示；存在并且值为 false 时，菜单不显示
           */
           { text: '产品简介', link: '/product/introduction.html' },
-          { text: '集成文档', link: '/document/android/quickstart' },
-          { text: 'API 参考', link: '/api/android' },
+          { text: '集成文档', link: '/document/android/quickstart.html' },
+          { text: 'API 参考', link: '/api/all/' },
+          { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
+          { text: '参与环信文档“捉虫”活动，领京东卡', link: 'https://www.imgeek.org/article/825360944' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
@@ -143,6 +149,13 @@ module.exports = {
                 { text: 'GDPR 安全合规', link: 'GDPR.html' },
               ]
             },
+            {
+              title: '私有化集成',
+              children: [
+                { text: 'SDK 及 Demo 下载', link: 'uc_private.html' },
+                { text: '环信通下载', link: 'uc_overview.html' },
+              ]
+            },
             /* 
             // 子菜单示例
             {
@@ -189,11 +202,11 @@ module.exports = {
                 { text: 'Vue Demo（WebIM）体验', link: 'demo_vue.html', only: ['web'] },
                 { text: 'Demo（EaseIM App）体验', link: 'demo.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'server-side'] },
                 { text: '快速开始（不使用 EaseIMKIT）', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
-                { text: 'SDK 集成概述（不使用 EaseIMKIT）', link: 'overview.html', only: ['android'] },
                 { text: '快速开始 （不使用 UIKit）', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
+                { text: 'SDK 集成概述（不使用 EaseIMKIT）', link: 'overview.html', only: ['android', 'web', 'flutter'] },
                 { text: 'SDK 集成概述（不使用 UIKit）', link: 'overview.html', only: ['windows', 'react-native', 'unity'] },
                 { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
-                { text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},
+                /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
                 { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
                 { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
                 { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
@@ -213,7 +226,7 @@ module.exports = {
                     { text: '发送和接收消息', link: 'message_send_receive.html' },
                     { text: '管理本地消息数据', link: 'message_manage.html', except: ['web', 'react-native'] },
                     { text: '管理会话和消息', link: 'message_manage.html', only: ['react-native'] },
-                    { text: '从服务器获取消息（消息漫游）', link: 'message_retrieve.html' },
+                    { text: '管理服务端消息', link: 'message_retrieve.html', except: ['react-native'] },
                     { text: '管理消息回执', link: 'message_receipt.html' },
                     { text: '翻译', link: 'message_translation.html' },
                   ]
@@ -290,7 +303,7 @@ module.exports = {
                 { text: '字节跳动小程序', link: 'bytedance.html' },
                 { text: '支付宝小程序', link: 'alipay.html' },
                 { text: 'Uniapp 全平台', link: 'uniapp.html' },
-                { text: '小程 API 文档', link: 'apidoc.html' },
+                { text: '小程序 API 文档', link: 'apidoc.html' },
               ],
               only: ['applet']
             },
@@ -298,11 +311,39 @@ module.exports = {
               title: '基本功能',
               children: [
                 { text: '初始化及登录', link: 'initialization.html' },
-                { text: '消息', link: 'message_overview.html' },
+                {
+                  text: '消息管理',
+                  collapsable: true,
+                  children: [
+                    { text: '消息概述', link: 'message_overview.html' },
+                    { text: '发送和接收消息', link: 'message_send_receive.html' },
+                    { text: '管理服务端消息', link: 'message_retrieve.html' },
+                    { text: '管理消息回执', link: 'message_receipt.html' },
+                    { text: '翻译', link: 'message_translation.html' },
+                  ]
+                },
                 { text: '用户属性', link: 'userprofile.html' },
                 { text: '好友管理', link: 'user_relationship.html' },
-                { text: '群组', link: 'group_overview.html' },
-                { text: '聊天室', link: 'room_overview.html' },
+                {
+                  text: '群组管理',
+                  collapsable: true,
+                  children: [
+                    { text: '群组概述', link: 'group_overview.html' },
+                    { text: '创建和管理群组', link: 'group_manage.html' },
+                    { text: '管理群组成员', link: 'group_members.html' },
+                    { text: '管理群组属性', link: 'group_attributes.html' },
+                  ]
+                },
+                {
+                  text: '聊天室管理',
+                  collapsable: true,
+                  children: [
+                    { text: '聊天室概述', link: 'room_overview.html' },
+                    { text: '创建和管理聊天室', link: 'room_manage.html' },
+                    { text: '管理聊天室成员', link: 'room_members.html' },
+                    { text: '管理聊天室属性', link: 'room_attributes.html' },
+                  ]
+                },
               ],
               only: ['applet']
             },
@@ -375,7 +416,7 @@ module.exports = {
             title: '',
             children: [
               {
-                key: 'All',
+                key: 'all',
                 title: '全部平台',
                 icon: 'icon-platform.svg',
                 hover_icon: 'icon-platform-hover.svg',
@@ -485,7 +526,7 @@ module.exports = {
           */
           { text: 'Product introduction', link: '/en/product/introduction.html' },
           { text: 'Integration document', link: '/en/document/android/quickstart.html' },
-          { text: 'API reference', link: '/en/api/android/' },
+          { text: 'API reference', link: '/en/api/all/' },
         ],
         // 次级导航，导航栏右侧导航
         secondary_nav: [
@@ -601,7 +642,7 @@ module.exports = {
             title: '',
             children: [
               {
-                key: 'All',
+                key: 'all',
                 title: 'All Platforms',
                 icon: 'icon-platform.svg',
                 hover_icon: 'icon-platform-hover.svg',
@@ -687,9 +728,7 @@ module.exports = {
         lastUpdated: 'Last Updated: '
       }
     },
-    searchMaxSuggestions: 20,
     sidebarDepth: 2,
-    search: true,
     // 默认值是 true 。设置为 false 来禁用所有页面的 下一篇 链接
     nextLinks: true,
     // 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接
@@ -708,9 +747,25 @@ module.exports = {
         selector: '.extra-class'
       }
     ],
-    ['fulltext-search'],
-    ['@vuepress/last-updated'],
-    ['vuepress-plugin-table-of-contents'],
+    [
+      '@vuepress/search',
+      {
+        searchMaxSuggestions: 10
+      }
+    ],
+    [
+      '@vuepress/last-updated',
+      {
+        transformer: (timestamp, lang) => {
+          // 不要忘了安装 moment
+          moment.locale(lang)
+          return moment(timestamp).utc(+8).format('YYYY-MM-DD HH:mm:ss')
+        },
+        dateOptions:{
+          hour12: false
+        }
+      }
+    ],
     ['vuepress-plugin-smooth-scroll'],
     // you can use this plugin multiple times
     [

@@ -1,8 +1,10 @@
-# 管理子区 Flutter
+# 管理子区
 
 <Toc />
 
-子区是群组成员的子集，是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM Flutter SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
+子区是群组成员的子集，是支持多人沟通的即时通讯系统，子区让用户能够在群组中的特定消息上创建单独的会话，以保持主聊天界面整洁。
+
+本文介绍如何使用环信即时通讯 IM Flutter SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
 
 ## 技术原理
 
@@ -22,7 +24,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 `1.0.5 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+- 完成 `1.0.5 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
@@ -35,7 +37,7 @@
 
 所有群成员均可以调用 `EMChatThreadManager#createChatThread` 方法，基于一条群组消息新建子区。
 
-单设备登录时，子区所属群组的所有成员均会收到 `EMChatThreadEventHandler#onChatThreadCreate`回调；多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onChatThreadEvent` 回调，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_CREATE`。
+单设备登录时，子区所属群组的所有成员均会收到 `EMChatThreadEventHandler#onChatThreadCreate` 事件；多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_CREATE`。
 
 示例代码如下：
 
@@ -59,7 +61,7 @@ try {
 
 仅子区所在群组的群主和群管理员可以调用 `EMChatThreadManager#destroyChatThread` 方法解散子区。
 
-单设备登录时，子区所属群组的所有成员均会收到 `EMChatThreadEventHandler#onChatThreadDestroy` 回调；多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onChatThreadEvent` 回调，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_DESTROY`。
+单设备登录时，子区所属群组的所有成员均会收到 `EMChatThreadEventHandler#onChatThreadDestroy` 事件；多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_DESTROY`。
 
 :::notice
 解散子区或解散子区所在的群组后，将删除本地数据库及内存中关于该子区的全部数据，需谨慎操作。
@@ -85,11 +87,11 @@ try {
 
 加入子区的具体步骤如下：
 
-1. 收到 `EMChatThreadEventHandler#onChatThreadCreate` 回调或 `EMChatThreadEventHandler#onChatThreadUpdate` 回调，或调用 `fetchChatThreadWithParentId` 方法从服务器获取指定群组的子区列表，从中获取到想要加入的子区 ID。
+1. 收到 `EMChatThreadManagerEventHandler#onChatThreadCreate` 事件或 `EMChatThreadManagerEventHandler#onChatThreadUpdate` 事件，或调用 `fetchChatThreadWithParentId` 方法从服务器获取指定群组的子区列表，从中获取到想要加入的子区 ID。
 2. 调用 `joinChatThread` 传入子区 ID 加入对应子区。
-  
 
-多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onChatThreadEvent` 回调，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_JOIN`。
+
+多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_JOIN`。
 
 示例代码如下：
 
@@ -109,7 +111,7 @@ try {
 
 子区成员均可以主动调用 `EMChatThreadManager#leaveChatThread` 方法退出子区，退出子区后，该成员将不会再收到子区消息。
 
-多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onThreadEvent` 回调，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_LEAVE`。
+多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_LEAVE`。
 
 示例代码如下：
 
@@ -128,7 +130,7 @@ try {
 
 仅群主和群管理员可以调用 `EMChatThreadManager#removeMemberFromChatThread` 方法将指定成员 (群管理员或普通成员) 踢出子区，被踢出子区的成员将不再接收到子区消息。
 
-被踢出子区的成员会收到 `EMChatThreadEventHandler#onUserKickOutOfChatThread` 回调。多设备登录时，执行踢人操作的成员的其他设备会同时收到 `EMMultiDeviceEventHandler#onThreadEvent` 回调，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_KICK`。
+被踢出子区的成员会收到 `EMChatThreadEventHandler#onUserKickOutOfChatThread` 事件；多设备登录时，执行踢人操作的成员的其他设备会同时收到 `EMMultiDeviceEventHandler#onThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_KICK`。
 
 示例代码如下：
 
@@ -149,7 +151,7 @@ try {
 
 仅群主和群管理员以及子区的创建者可以调用 `EMChatThreadManager#updateChatThreadName` 方法修改子区名称。
 
-单设备登录时，子区所属群组的所有成员会收到 `EMChatThreadEventHandler#onChatThreadUpdate` 回调；多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onThreadEvent` 回调，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_UPDATE`。
+单设备登录时，子区所属群组的所有成员会收到 `EMChatThreadManagerEventHandler#onChatThreadUpdate` 事件；多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_UPDATE`。
 
 示例代码如下：
 
@@ -285,25 +287,12 @@ try {
 示例代码如下：
 
 ```dart
-class _ChatPageState extends State<ChatPage> {
-  @override
-  void initState() {
-    super.initState();
+// 注册监听
     EMClient.getInstance.chatThreadManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
       EMChatThreadEventHandler(),
     );
-  }
 
-  @override
-  void dispose() {
+// 移除监听
     EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 ```

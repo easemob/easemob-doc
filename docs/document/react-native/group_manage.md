@@ -1,4 +1,4 @@
-# 群组-创建管理群组和监听群组事件
+# 创建管理群组和监听群组事件
 
 <Toc />
 
@@ -10,8 +10,7 @@
 
 环信即时通讯 IM React Native SDK 提供 `ChatGroupManager` 类和 `ChatGroup` 类，用于管理群组，以及事件监听回调 `ChatGroupEventListener`。其中包含如下主要方法：
 
-- 创建群组
-- 解散群组
+- 创建、解散群组
 - 获取群组详情
 - 获取群组列表
 - 屏蔽和解除屏蔽群消息
@@ -42,7 +41,7 @@
 
     公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群样式（EMGroupStyle）的设置：
     - `EMGroupStyle` 为 `EMGroupStylePrivateOnlyOwnerInvite`：只有群主和管理员可以邀请人入群； 
-    - `EMGroupStyle` 为 `EMGroupStylePrivateMemberCanInvite`，普通群成员也能邀请人进群。
+    - `EMGroupStyle` 为 `EMGroupStylePrivateMemberCanInvite`：普通群成员也能邀请人进群。
     
     邀请入群是否需受邀用户确认取决于群组选项 `ChatGroupOptions#inviteNeedConfirm` 和受邀用户的参数 `inviteNeedConfirm` 的设置，前者参数的优先级高于后者，即 `ChatGroupOptions#inviteNeedConfirm` 若设置为 `false`，不论 `inviteNeedConfirm` 设置为何值，受邀用户无需确认直接进群。
     1. 受邀用户无需确认，直接进群。
@@ -455,6 +454,20 @@ const groupListener: ChatGroupEventListener = new (class
       params.isAllMuted
     );
   }
+  // 群组详情变更，所有群成员收到该事件回调
+  onDetailChanged(group: ChatGroup): void {
+        console.log(`${QuickTestScreenBase.TAG}: onDetailChanged:`, group);
+        this.that.setState({
+          recvResult: `onDetailChanged: ` + group,
+        });
+      }
+  // 群组禁言状态变更，所有群成员收到该事件回调   
+  onStateChanged(group: ChatGroup): void {
+        console.log(`${QuickTestScreenBase.TAG}: onStateChanged:`, group);
+        this.that.setState({
+          recvResult: `onStateChanged: ` + group,
+        });
+      }  
 })(this);
 
 // 清空监听器对象

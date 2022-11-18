@@ -1,4 +1,4 @@
-# 子区消息管理 Flutter
+# 管理子区消息
 
 <Toc />
 
@@ -15,6 +15,8 @@
 
 下图展示在客户端发送和接收消息的工作流程：
 
+![img](@static/images/android/sendandreceivemsg.png)
+
 如上图所示，消息收发流程如下：
 
 1. 用户 A 发送一条消息到消息服务器；
@@ -29,8 +31,7 @@
 
 开始前，请确保满足以下条件：
 
-- 已集成 IM `(1.0.5 以上版本)` 的基本功能，账户登录成功。
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 已集成 `1.0.5 或版本` SDK 的基本功能，完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
 
@@ -61,92 +62,62 @@ EMClient.getInstance.chatManager.sendMessage(msg);
 
 接收消息的具体逻辑，请参考 [接收消息](message_send_receive.html#接收消息)，此处只介绍子区消息和其他消息的区别。
 
-子区有新增消息时，子区所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 回调，子区成员收到 `EMChatEventHandler#onMessagesReceived` 回调。
+子区有新增消息时，子区所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 事件，子区成员收到 `EMChatEventHandler#onMessagesReceived` 事件。
 
 示例代码如下：
 
 ```dart
-class _ChatPageState extends State<ChatPage> {
-  @override
-  void initState() {
-    super.initState();
-
-    // 添加收消息监听
-    EMClient.getInstance.chatManager.addEventHandler(
+// 注册子区监听
+EMClient.getInstance.chatThreadManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-      EMChatEventHandler(
-        onMessagesReceived: (messages) {},
+  EMChatThreadEventHandler(
+    onChatThreadUpdate: (event) {},
       ),
     );
 
-    // 添加子区监听
-    EMClient.getInstance.chatThreadManager.addEventHandler(
-      "UNIQUE_HANDLER_ID",
-      EMChatThreadEventHandler(
-        onChatThreadCreate: ((event) => {}),
+// 添加消息监听
+EMClient.getInstance.chatManager.addEventHandler(
+  "UNIQUE_HANDLER_ID",
+  EMChatEventHandler(
+    onMessagesReceived: (messages) {},
       ),
     );
-  }
 
-  @override
-  void dispose() {
+// 移除子区监听
+EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
     // 移除消息监听
     EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    // 移除子区监听
-    EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 ```
 
 ### 撤回子区消息
 
 接收消息的具体逻辑，请参考 [撤回消息](message_send_receive.html#撤回消息)，此处只介绍子区消息和其他消息的区别。
 
-子区有消息撤回时，子区所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 回调，子区成员收到 `EMChatEventHandler#onMessagesRecalled` 回调。
+子区有消息撤回时，子区所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 事件，子区成员收到 `EMChatEventHandler#onMessagesRecalled` 事件。
 
 示例代码如下：
 
 ```dart
-class _ChatPageState extends State<ChatPage> {
-  @override
-  void initState() {
-    super.initState();
-    // 添加消息监听
-    EMClient.getInstance.chatManager.addEventHandler(
-      "UNIQUE_HANDLER_ID",
-      EMChatEventHandler(
-        onMessagesReceived: (messages) {},
-      ),
-    );
-    // 添加子区监听
-    EMClient.getInstance.chatThreadManager.addEventHandler(
-      "UNIQUE_HANDLER_ID",
-      EMChatThreadEventHandler(
-        onChatThreadUpdate: (event) {}
-      ),
-    );
-  }
+// 注册子区监听
+EMClient.getInstance.chatThreadManager.addEventHandler(
+  "UNIQUE_HANDLER_ID",
+  EMChatThreadEventHandler(
+    onChatThreadUpdate: (event) {},
+  ),
+);
 
-  @override
-  void dispose() {
-    // 移除消息监听
-    EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
-    // 移除子区监听
-    EMClient.getInstance.chatManager.chatThreadManager("UNIQUE_HANDLER_ID");
-    super.dispose();
-  }
+// 添加消息监听
+EMClient.getInstance.chatManager.addEventHandler(
+  "UNIQUE_HANDLER_ID",
+  EMChatEventHandler(
+    onMessagesRecalled: (messages) {},
+  ),
+);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+// 移除子区监听
+EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
+// 移除消息监听
+EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
 ### 从服务器获取子区消息 (消息漫游)
