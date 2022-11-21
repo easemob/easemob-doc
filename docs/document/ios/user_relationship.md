@@ -42,6 +42,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].contactManager addContact:@"aUsername" message:@"Message" completion:^(NSString *aUsername, EMError *aError) {
 if (!aError) {
     NSLog(@"添加好友成功 %@",aUsername);
@@ -73,6 +74,7 @@ if (!aError) {
 
 ```objectivec
 // 同意好友申请。
+// 异步方法
 [[EMClient sharedClient].contactManager approveFriendRequestFromUser:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
 if (!aError) {
     NSLog(@"同意加好友申请成功");
@@ -82,6 +84,7 @@ if (!aError) {
 }];
 
 // 拒绝好友申请。
+// 异步方法
 [[EMClient sharedClient].contactManager declineFriendRequestFromUser:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
 if (!aError) {
     NSLog(@"拒绝加好友申请成功");
@@ -113,6 +116,7 @@ if (!aError) {
 
 ```objectivec
 // 删除好友。
+// 异步方法
 [[EMClient sharedClient].contactManager deleteContact:@"aUsername" isDeleteConversation:aIsDeleteConversation completion:^(NSString *aUsername, EMError *aError) {
 if (!aError) {
     NSLog(@"删除好友成功");
@@ -144,6 +148,7 @@ if (!aError) {
 
 ```objectivec
 // 从服务器获取好友列表。
+// 异步方法
 [[EMClient sharedClient].contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
     if (!aError) {
         NSLog(@"获取所有好友成功 %@",aList);
@@ -169,6 +174,7 @@ NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 
 ```objectivec
 // 从服务器获取黑名单列表。
+// 异步方法
 [[EMClient sharedClient].contactManager getBlackListFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
     if (!aError) {
         NSLog(@"获取黑名单列表成功 %@",aList);
@@ -183,6 +189,7 @@ NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 从本地数据库获取示例代码如下：
 
 ```objectivec
+// 同步方法
 NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 ```
 
@@ -191,6 +198,7 @@ NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].contactManager addUserToBlackList:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
     if (!aError) {
         NSLog(@"将用户加入黑名单成功");
@@ -205,6 +213,7 @@ NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].contactManager removeUserFromBlackList:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
     if (!aError) {
         NSLog(@"将用户移出黑名单成功");

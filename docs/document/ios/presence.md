@@ -65,6 +65,7 @@
 用户在线时，可调用 `publishPresenceWithDescription` 方法发布自定义在线状态：
 
 ```objectivec
+// 异步方法
 [[[EMClient sharedClient] presenceManager] publishPresenceWithDescription:@"custom presence" completion:^(EMError *error) {
 }];
 ```
@@ -93,6 +94,7 @@
 若取消指定用户的在线状态订阅，可调用 `unsubscribe` 方法，示例代码如下：
 
 ```objectivec
+// 异步方法
 [[[EMClient sharedClient] presenceManager] unsubscribe:@[@"Alice"] completion:^(EMError *error) {
 
 }];
@@ -103,6 +105,7 @@
 为方便用户管理订阅关系，SDK 提供 `fetchSubscribedMembersWithPageNum` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient] presenceManager] fetchSubscribedMembersWithPageNum:0 pageSize:50 Completion:^(NSArray<NSString*>* members,EMError*error){
 }];
 ```
@@ -112,6 +115,7 @@
 如果不关注用户的在线状态变更，你可以调用 `fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient] presenceManager] fetchPresenceStatus:@[@"Alice",@"Tom"] completion:^(NSArray<EMPresence*>* presences,EMError*error){
 }];
 }

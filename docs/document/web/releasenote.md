@@ -2,17 +2,34 @@
 
 <Toc />
 
+## 版本 V4.1.2 Dev 2022-11-08（开发版）
+
+### 新增特性
+
+- [IM SDK] [创建群组方法 `createGroup`](group_manage.html#创建群组) 和[修改群信息方法 `modifyGroup`](group_attributes.html#修改群组名称和描述) 新增 `ext` 字段支持群扩展信息。
+- [IM SDK] 群组通知事件增加[群组信息修改事件 `updateInfo`](group_manage.html#监听群组事件)。
+- [IM SDK] 新增[聊天室消息优先级](message_send_receive.html)。
+- [IM SDK] 支持同时[对多个群组成员禁言和解除禁言](group_members.html#管理群组禁言列表)。
+
+### 优化
+
+[IM SDK] 优化断网导致的消息发送失败时调用的回调。
+
+### 修复
+
+ [IM SDK] 修复附件消息中的 `file_length` 字段不生效的问题。
+
 ## 版本 V4.1.1 Dev 2022-9-26（开发版）
 
 ### 优化
 
-- [miniCore](overview.html#引入SDK) 支持配置私有化配置。
+- [IM SDK] [miniCore](overview.html#引入SDK) 支持配置私有化配置。
 - 优化重连逻辑。
 
 ### 修复
 
-- 修复聊天室自定义属性功能中的问题；
-- 修复 `miniCore` 中的 `uploadFile` 方法中的问题。
+- [IM SDK] 修复聊天室自定义属性功能中的问题；
+- [IM SDK] 修复 `miniCore` 中的 `uploadFile` 方法中的问题。
 
 ## 版本 V4.1.0 Dev 2022-9-16（开发版）
 
@@ -33,7 +50,7 @@
 - [IM SDK] 修复 IE 浏览器的兼容性问题。
 - [IM SDK] 修复 IM Uniapp 在手机上运行时上报 `addEventListener` 方法相关错误的问题。
 
-## 版本 V4.0.9 Dev 2022-7-29（开发版）
+## 版本 V4.0.9 2022-7-29
 
 ### 新增特性
 
@@ -45,9 +62,10 @@
 - [IM SDK] 优化协议，减少数据量。
 - [IM SDK] 修复某些情况下消息延迟。
 
-## 版本 V4.0.8 Dev 2022-6-17
+## 版本 V4.0.8 2022-6-17
 
 ### 新增特性
+
 - [IM SDK] 新增群组事件回调 [onGroupEvent](https://webim-h5.easemob.com/jsdoc/out/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://webim-h5.easemob.com/jsdoc/out/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
 - [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](error.html)
 - [IM SDK] 邀请加入群聊回调 onGroupChange 返回中新增 群名称 参数值。
@@ -59,7 +77,7 @@
   - 白名单相关的方法名中的 `Whitelist` 修改为 `Allowlist`，如 `getGroupWhitelist` 修改为 `getGroupAllowlist`；
   - 黑名单相关的方法名中的 `Blacklist` 修改为 `Blocklist`，如 `getGroupBlacklist` 修改为 `getGroupBlocklist`。
 
-## 版本 V4.0.7 Dev 2022-5-25
+## 版本 V4.0.7 2022-5-25
 
 ### 新增特性:
 
@@ -70,7 +88,7 @@
 
 - [IM SDK] 消息事件监听器中新增 onlineState 字段标记消息的在线状态。
 
-## 版本 V4.0.5 Dev 2022-5-16
+## 版本 V4.0.5 2022-5-16
 
 ### 新增特性:
 
@@ -89,7 +107,11 @@
 
 - [IM SDK] 解决切换账号群组消息有缓存的 BUG。
 
-## 版本 V4.0.4 Dev 2022-4-19
+## 版本 V4.0.4 2022-4-19
+
+:::tip
+仅 V4.0.4 及以下版本支持私有化部署。
+:::
 
 ### 新增特性:
 
@@ -106,7 +128,7 @@
 - [IM SDK] 修复创建群组时无法修改群简介问题。
 - [IM SDK] 修复 SSR 兼容性。
 
-## 版本：v4.0.3 2022-1-19（稳定版）
+## 版本：v4.0.3 2022-1-19
 
 - [IM SDK] 修复缺失 'downloadGroupSharedFile' 方法。
 - [IM SDK] 'fetchGroupSharedFileList' 支持分页。

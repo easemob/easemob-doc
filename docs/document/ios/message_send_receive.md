@@ -7,10 +7,10 @@
 - 文字消息，包含超链接和表情消息。
 - 附件消息，包含图片、语音、视频及文件消息。
 - 位置消息。
-- CMD 消息。
+- 透传消息。
 - 自定义消息。
 
-以及对以上消息进行自定义扩展。
+对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
 
 本文介绍如何使用即时通讯 IM SDK 实现发送和接收这些类型的消息。
 
@@ -50,9 +50,9 @@
 // 创建一条文本消息，`content` 为消息文字内容，`toChatUsername` 为对方用户或者群聊的 ID，`fromChatUsername` 为发送方用户或群聊的 ID，`textMessageBody` 为消息体，`messageExt` 为消息扩展，后文皆是如此。
 EMTextMessageBody *textMessageBody = [[TextMessageBody alloc] initWithText:content];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:textMessageBody ext:messageExt];
-// 构造消息时需设置 `EMChatMessage` 类的 `ChatType` 属性。该属性的值为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，表明该消息是单聊、群聊或聊天室消息，默认为单聊。例如，设置消息类型为单聊消息即设置 `ChatType` 为 `EMChatTypeChat`。
+// 构造消息时需设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
 message.chatType = EMChatTypeChat;
-// 发送消息。
+// 发送消息，异步方法。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 // 发送消息时可以设置发送回调，获得消息发送状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {
@@ -62,6 +62,18 @@ message.chatType = EMChatTypeChat;
         // 发送消息失败！
     }
 }];
+```
+
+对于聊天室消息，可设置消息优先级。示例代码如下：
+
+```Objectivec
+    NSString from = [[EMClient sharedClient] currentUsername];
+    EMChatMessage message = [[EMChatMessage alloc] initWithConversationID:aTo from:from to:aTo body:aBody ext:aExt];
+    message.chatType = EMChatTypeChatRoom;
+    // 聊天室消息的优先级。如果不设置，默认值为 `Normal`，即“普通”优先级。
+    message.priority = EMChatRoomMessagePriorityHigh;
+    __weak typeof(self) weakself = self;
+    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
 ### 接收消息
@@ -100,6 +112,7 @@ message.chatType = EMChatTypeChat;
 消息撤回功能指用户可以撤回一定时间内自己发送出去的消息，消息撤回时限默认 2 分钟。如需调整，可联系商务。
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].chatManager recallMessageWithMessageId:messageId completion:^(EMError *aError) {
     if (!aError) {
         NSLog(@"撤回消息成功");
@@ -286,7 +299,7 @@ message.chatType = EMChatTypeGroupChat;
 
 ### 发送透传消息
 
-可以把透传消息理解为一条指令，通过发送这条指令给对方，通知对方要执行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。另外，以 “em_” 和 “easemob::” 开头的 `action` 为内部保留字段，注意不要使用。
+可以把透传消息理解为一条指令，通过发送这条指令给对方，通知对方要执行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。另外，以 “em\_” 和 “easemob::” 开头的 `action` 为内部保留字段，注意不要使用。
 
 透传消息适用于更新头像、更新昵称等场景。
 
@@ -315,12 +328,113 @@ EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:action];
   }
 ```
 
+#### 通过透传消息实现输入指示器
+
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
+
+你可以通过透传消息实现输入指示器。
+
+下图为输入指示器的工作原理。
+
+![img](@static/images/common/typing_indicator.png)
+
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+
+:::notice
+用户 A 可根据需要设置透传消息发送间隔。
+:::
+
+以下示例代码展示如何发送输入状态的透传消息。
+
+```objectivec
+//发送表示正在输入的透传消息
+#define MSG_TYPING_BEGIN @"TypingBegin"
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    long long currentTimestamp = [self getCurrentTimestamp];
+    // 5 秒内不能重复发送消息
+    if ((currentTimestamp - _previousChangedTimeStamp) > 5) {
+        // 发送开始输入的透传消息
+        [self _sendBeginTyping];
+        _previousChangedTimeStamp = currentTimestamp;
+    }
+}
+
+- (void)_sendBeginTyping
+{
+    EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:MSG_TYPING_BEGIN];
+    body.isDeliverOnlineOnly = YES;
+    EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId body:body ext:nil];
+    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+}
+
+```
+
+以下示例代码展示如何接受和解析输入状态的透传消息。
+
+```objectivec
+#define TypingTimerCountNum 10
+- (void)cmdMessagesDidReceive:(NSArray *)aCmdMessages
+{
+    NSString *conId = self.currentConversation.conversationId;
+    for (EMChatMessage *message in aCmdMessages) {
+        if (![conId isEqualToString:message.conversationId]) {
+            continue;
+        }
+        EMCmdMessageBody *body = (EMCmdMessageBody *)message.body;
+        // 收到正在输入的透传消息
+        if ([body.action isEqualToString:MSG_TYPING_BEGIN]) {
+            if (_receiveTypingCountDownNum == 0) {
+                [self startReceiveTypingTimer];
+            }else {
+                _receiveTypingCountDownNum = TypingTimerCountNum;
+            }
+        }
+
+    }
+}
+
+- (void)startReceiveTypingTimer {
+    [self stopReceiveTypingTimer];
+    _receiveTypingCountDownNum = TypingTimerCountNum;
+    _receiveTypingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(startReceiveCountDown) userInfo:nil repeats:YES];
+
+    [[NSRunLoop currentRunLoop] addTimer:_receiveTypingTimer forMode:UITrackingRunLoopMode];
+    [_receiveTypingTimer fire];
+    // 这里需更新 UI，显示“对方正在输入”
+}
+
+- (void)startReceiveCountDown
+{
+    if (_receiveTypingCountDownNum == 0) {
+        [self stopReceiveTypingTimer];
+        // 这里需更新 UI，不再显示“对方正在输入”
+
+        return;
+    }
+    _receiveTypingCountDownNum--;
+}
+
+- (void)stopReceiveTypingTimer {
+    _receiveTypingCountDownNum = 0;
+    if (_receiveTypingTimer) {
+        [_receiveTypingTimer invalidate];
+        _receiveTypingTimer = nil;
+    }
+}
+```
+
 ### 发送自定义类型消息
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。自定义消息内容是 key，value 格式，你需要自己添加并解析该内容。
 
 ```objectivec
-// event 为需要传递的自定义消息事件，比如名片消息，可以设置 "userCard"； `ext` 为事件扩展字段，比如可以设置 `uid`，`nickname`，`avatar`。
+// event 为需要传递的自定义消息事件，比如名片消息，可以设置 "userCard"；`ext` 为事件扩展字段，比如可以设置 `uid`，`nickname`，`avatar`。
 EMCustomMessageBody* body = [[EMCustomMessageBody alloc] initWithEvent:@"userCard" ext:@{@"uid":aUid ,@"nickname":aNickName,@"avatar":aUrl}];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
 message.chatType = EMChatTypeChat;

@@ -21,6 +21,7 @@
 举报违规消息的示例代码如下：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.chatManager reportMessageWithId:msgId
                        tag:tag
                        reason:reason

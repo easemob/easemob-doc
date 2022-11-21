@@ -1,4 +1,4 @@
-# 从服务器获取消息
+# 管理服务端的会话和消息
 
 <Toc />
 
@@ -12,6 +12,7 @@
 
 - `getConversationlist` 获取服务器上保存的会话列表；
 - `getHistoryMessages` 按服务器接收消息的时间顺序获取服务器上保存的指定会话中的消息；
+- `removeHistoryMessages` 单向删除服务端的历史消息；
 - `deleteConversation` 删除服务器端会话及其对应的消息。
 
 ## 前提条件
@@ -22,11 +23,14 @@
 
 ### 从服务器获取会话列表
 
-对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。用户可通过调用 `getConversationlist` 方法从服务器获取会话列表及每个会话中的最新一条消息。
+对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
+你可以调用 `getConversationlist` 方法从服务端获取会话列表。该功能需联系商务开通，开通后，用户默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
 
-:::notice
-登录用户的 ID 大小写混用会导致拉取会话列表时提示会话列表为空，因此避免大小写混用。
+:::tip
+1. 登录用户的 ID 大小写混用会导致拉取会话列表时提示会话列表为空，因此避免大小写混用。
+2. 服务端会话列表的更新存在延时，建议你在登录时调用该方法，其他时段可更新缓存中的会话列表。
+3. 获取的会话列表中不包含最新一条消息通过 RESTful 接口发送的会话。若需获取该类会话，需要联系商务开通将通过 RESTful 接口发送的消息写入会话列表的功能。
 :::
 
 ```javascript
@@ -44,11 +48,9 @@ WebIM.conn.getConversationlist().then((res) => {
 
 ### 从服务器获取指定会话的历史消息
 
-该功能需联系商务开通，开通后，用户默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系环信商务经理（您可以在环信通讯云管理后台首页，扫描二维码联系您的商务经理）。
+你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的消息（消息漫游）。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
 
-你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的消息。
-
-`getHistoryMessages` 可按消息创建时间顺序获取服务器上保存的指定会话中的消息。
+你可以指定消息查询方向，即明确按时间顺序或逆序获取。为确保数据可靠，我们建议你每次获取少于 50 条消息，可多次获取。拉取后默认 SDK 会自动将消息更新到本地数据库。
 
 ```javascript
 /**
@@ -76,6 +78,20 @@ WebIM.conn
   .catch((e) => {
     // 获取失败。
   });
+```
+
+### 单向删除服务端的历史消息
+
+你可以调用 `removeHistoryMessages` 方法按照时间或消息 ID 单向删除服务端的历史消息。每次最多可删除 50 条消息。消息删除后，该账号无法从服务端拉取到该消息。其他用户不受该操作影响。多端多设备登录时，删除成功后会触发 `onMultiDeviceEvent#deleteRoaming` 回调。
+
+示例代码如下：
+
+```javascript
+// 按时间删除消息
+connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', beforeTimeStamp: Date.now()})
+
+// 按消息 ID 删除消息
+connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', messageIds: ['messageId']})
 ```
 
 ### 删除服务器端会话及其对应的消息

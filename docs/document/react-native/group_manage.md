@@ -10,8 +10,7 @@
 
 环信即时通讯 IM React Native SDK 提供 `ChatGroupManager` 类和 `ChatGroup` 类，用于管理群组，以及事件监听回调 `ChatGroupEventListener`。其中包含如下主要方法：
 
-- 创建群组
-- 解散群组
+- 创建、解散群组
 - 获取群组详情
 - 获取群组列表
 - 屏蔽和解除屏蔽群消息

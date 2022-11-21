@@ -207,14 +207,15 @@ function sendPrivateAudio(tempFilePath, duration){
 						chatType: 'singleChat',
 						filename: tempFilePath,
 						to: 'username',// 接收消息对象
-						length: Math.ceil(duration / 1000),// 音频文件时长，单位(s)
 						body: {
-							//文件 URL
+							//文件 URL。
 							url: dataObj.uri + "/" + dataObj.entities[0].uuid,
-							//文件类型
+							//文件类型。
 							type: "audio",
-							//文件名
+							//文件名。
 							filename: tempFilePath,
+              // 音频文件时长，单位为秒。
+              length: Math.ceil(duration / 1000),
 						}
 					}
 					let msg = WebIM.message.create(option);

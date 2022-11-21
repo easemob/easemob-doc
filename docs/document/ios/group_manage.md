@@ -69,7 +69,7 @@ options.IsInviteNeedConfirm = YES;
 // 设置群组类型。此处示例为成员可以邀请用户入群的私有群组。
 options.style = EMGroupStylePrivateMemberCanInvite;
 NSArray *members = @{@"member1",@"member2"};
-// 调用 `createGroupWithSubject` 创建群组。
+// 调用 `createGroupWithSubject` 创建群组。同步方法，异步方法见 [EMGroupManager createGroupWithSubject:description:invitees:message:setting:completion:]
 [[EMClient sharedClient].groupManager createGroupWithSubject:@"subject"
                          description:@"description"
                          invitees:members
@@ -109,6 +109,7 @@ NSInteger pageSize = 50;
 NSString *cursor = nil;
 EMCursorResult *result = [[EMCursorResult alloc]init];
 do {
+  // 同步方法，异步方法见 [EMGroupManager getPublicGroupsFromServerWithCursor:pageSize:completion:]
     result = [[EMClient sharedClient].groupManager
                                       getPublicGroupsFromServerWithCursor:cursor
                                       pageSize:50
@@ -118,6 +119,7 @@ do {
 } while (result && result.list < pageSize);
 
 // 申请加入群组
+// 同步方法，异步方法见 [EMGroupManager joinPublicGroup:completion:]
 [[EMClient sharedClient].groupManager joinPublicGroup:@"groupID" error:nil];
 ```
 
@@ -131,6 +133,7 @@ do {
 
 ```objectivec
 //群组解散后，群成员将会收到 `EMGroupManagerDelegate#didLeaveGroup` 回调。
+// 同步方法，异步方法见 [EMGroupManager destroyGroup:finishCompletion:]
 [[EMClient sharedClient].groupManager destroyGroup:@"groupID"];
 ```
 
@@ -143,6 +146,7 @@ do {
 示例代码如下：
 
 ```objectivec
+// 同步方法，异步方法见 [EMGroupManager leaveGroup:completion:]
 [[[EMClient sharedClient].groupManager leaveGroup:@"groupID" error:nil];
 ```
 
@@ -157,7 +161,7 @@ do {
 群成员也可以调用 `getGroupSpecificationFromServerWithId` 方法从服务器获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表。另外，若设置 `fetchMembers` 为 `true`，获取群组详情时同时获取群成员，默认获取最大数量为 200。
 
 ```objectivec
-// 原型
+// 原型 异步方法
 - (void)getGroupSpecificationFromServerWithId:(NSString *)aGroupId
                                    fetchMembers:(BOOL)fetchMembers
                                    completion:(void (^)(EMGroup *aGroup, EMError *aError))aCompletionBlock;
@@ -188,6 +192,7 @@ NSInteger pageSize = 50;
 NSString *cursor = nil;
 EMCursorResult *result = [[EMCursorResult alloc]init];
 do {
+  // 同步方法，异步方法见 [EMGroupManager getGroupMemberListFromServerWithId:cursor:pageSize:completion:]
     result = [[EMClient sharedClient].groupManager
                                       getGroupMemberListFromServerWithId:@"groupID"
                                       cursor:cursor
@@ -202,6 +207,7 @@ do {
 
 ```objectivec
 // 第二个参数传入 TRUE，默认取 200 人的群成员列表。
+// 同步方法，异步方法见 [EMGroupManager getGroupSpecificationFromServerWithId:fetchMembers:completion:]
 EMGroup *group = [[EMClient sharedClient].groupManager
                                           getGroupSpecificationFromServerWithId:@"groupID"
                                           fetchMembers:YES
@@ -214,6 +220,7 @@ NSArray *memberList = [group.memberList];
 用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：
 
 ```objectivec
+// 异步方法
 NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroupsFromServerWithPage:0 pageSize:20 needMemberCount:YES needRole:YES completion:^(NSArray<EMGroup *> * _Nullable aList, EMError * _Nullable aError) {
         // got group list
     }];
@@ -222,6 +229,7 @@ NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroupsFromSe
 - 用户可以调用 `getJoinedGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
 
 ```objectivec
+// 同步方法，本地缓存加载
 NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroups];
 ```
 
@@ -233,6 +241,7 @@ NSInteger pageSize = 50;
 NSString *cursor = nil;
 EMCursorResult *result = [[EMCursorResult alloc]init];
 do {
+  // 同步方法，异步方法见 [EMGroupManager getPublicGroupsFromServerWithCursor:pageSize:completion:]
     result = [[EMClient sharedClient].groupManager
                                       getPublicGroupsFromServerWithCursor:cursor
                                       pageSize:50
@@ -249,7 +258,8 @@ do {
 群成员可以调用 `blockGroup` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息，群主和群管理员不能进行此操作。示例代码如下：
 
 ```objectivec
-[[EMClient sharedClient].groupManager blockGroup:@"groupID"error:nil];
+// 同步方法，异步方法见 [EMGroupManager blockGroup:completion:]
+[[EMClient sharedClient].groupManager blockGroup:@"groupID" error:nil];
 ```
 
 #### 解除屏蔽群
@@ -257,6 +267,7 @@ do {
 群成员可以调用 `unblockGroup` 方法解除屏蔽群消息。示例代码如下：
 
 ```objectivec
+// 同步方法，异步方法见 [EMGroupManager unblockGroup:completion:]
 [[EMClient sharedClient].groupManager unblockGroup:@"groupID" error:nil];
 ```
 

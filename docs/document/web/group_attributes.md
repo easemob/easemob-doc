@@ -31,7 +31,8 @@
 let option = {
     groupId: "groupId",
     groupName: "groupName",
-    description: "A description of group"
+    description: "A description of group",
+    ext: "group detail extensions",
 };
 conn.modifyGroup(option).then(res => console.log(res))
 ```

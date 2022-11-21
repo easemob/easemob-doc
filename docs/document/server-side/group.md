@@ -1827,7 +1827,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> 
 
 添加一个用户进入一个群组的黑名单。群主无法被加入群组的黑名单。
 
-用户进入群组黑名单后，会收到消息：You are kicked out of the group xxx。之后，该用户查看不到该群组的信息，也收不到该群组的消息。
+用户进入群组黑名单后会收到加入黑名单的回调。之后，该用户查看不到该群组的信息，也收不到该群组的消息。
 
 #### HTTP 请求
 
@@ -1899,7 +1899,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 将多个用户添加一个群组的黑名单。一次最多可以添加 60 个用户至群组黑名单。群主无法被加入群组的黑名单。
 
-用户进入群组黑名单后，会收到消息：You are kicked out of the group xxx。之后，该用户查看不到该群组的信息，也收不到该群组的消息。
+用户进入群组黑名单后会收到加入黑名单的回调。黑名单上的用户查看不到该群组的信息，也收不到该群组的消息。
 
 #### HTTP 请求
 

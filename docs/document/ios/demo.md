@@ -14,11 +14,11 @@
 
 3. 下载 Demo，点击 **服务器配置**；
 
-![img](@static/images/android/app-demo-config.jpeg)
+![img](@static/images/android/app-demo-config.png)
 
 4. 将 Demo 的 App Key 填入，点击 **保存配置**；
 
-![img](@static/images/android/app-demo-input-appkey.jpeg)
+![img](@static/images/android/app-demo-input-appkey.png)
 
 5. 杀死 app；
 6. 重启，然后点击 **注册用户** 进行体验。

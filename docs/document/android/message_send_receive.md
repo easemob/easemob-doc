@@ -7,10 +7,11 @@
 - 文字消息，包含超链接和表情消息。
 - 附件消息，包含图片、语音、视频及文件消息。
 - 位置消息。
-- CMD 消息。
+- 透传消息。
 - 自定义消息。
 
-以及对以上消息进行自定义扩展。
+对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
+
 本文介绍如何使用即时通讯 IM Android SDK 实现发送和接收这些类型的消息。
 
 ## 技术原理
@@ -43,15 +44,25 @@
 
 ### 发送文本消息
 
-1. 首先，利用 `EMMessage` 类构造一个消息。
+1. 首先，利用 `EMMessage` 类构造一条消息。
 
 示例代码：
 
 ```java
 // 创建一条文本消息，`content` 为消息文字内容，`toChatUsername` 为对方用户或者群聊的 ID，后文皆是如此。
 EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
-// 设置消息类型，即设置 `Message` 类的 `ChatType` 属性。该属性的值为 `Chat`、`GroupChat` 和 `ChatRoom`，表明该消息是单聊，群聊或聊天室消息，默认为单聊。若为群聊，设置 `ChatType` 为 `GroupChat`。
+// 设置消息类型，即设置 `Message` 类的 `ChatType` 属性，可设置为 `Chat`、`GroupChat` 和 `ChatRoom`，即单聊，群聊或聊天室消息，默认为单聊。
 message.setChatType(ChatType.GroupChat);
+```
+
+对于聊天室消息，可设置消息优先级。示例代码如下：
+
+```java
+   EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
+   message.setChatType(ChatType.ChatRoom);
+   // 聊天室消息的优先级。如果不设置，默认值为 `PriorityNormal`，即“普通”优先级。
+   message.setPriority(EMChatRoomMessagePriority.PriorityHigh);
+   sendMessage(message);
 ```
 
 2. 通过 `EMChatManager` 将该消息发出。发送消息时可以设置 `EMCallBack` 的实例，获取消息发送状态。
@@ -77,6 +88,21 @@ message.setMessageStatusCallback(new EMCallBack() {
  // 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
+
+#### 设置聊天室消息优先级
+
+环信即时通讯提供聊天室消息分级功能，将消息的优先级划分为高、普通和低三种级别。设置后，高优先级的消息会优先送达，确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。
+
+用户可将指定的聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
+
+在聊天室中发送高优先级的文本消息的示例代码如下：
+
+```java
+   EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
+   message.setPriority(EMChatRoomMessagePriority.PriorityHigh);
+   sendMessage(message);
+```
+
 
 ### 接收消息
 
@@ -226,7 +252,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ```java
 /**
- * Downloads the video file.
+ * 下载视频文件。
  */
 private void downloadVideo(final EMMessage message) {
     message.setMessageStatusCallback(new EMCallBack() {
@@ -352,7 +378,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ### 发送透传消息
 
-透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em\_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
+透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
 
 ```java
 EMMessage cmdMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
@@ -386,6 +412,103 @@ EMMessageListener msgListener = new EMMessageListener(){
   public void onCmdMessageReceived(List<EMMessage> messages) {
   }
 }
+```
+
+#### 通过透传消息实现输入指示器
+
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
+
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
+
+![img](@static/images/common/typing_indicator.png)
+
+
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+
+:::notice 
+
+用户 A 可根据需要设置透传消息发送间隔。
+
+:::
+
+以下示例代码展示如何发送输入状态的透传消息。
+
+```java
+//发送表示正在输入的透传消息
+private static final String MSG_TYPING_BEGIN = "TypingBegin";
+private long previousChangedTimeStamp;
+
+private void textChange() {
+    long currentTimestamp = System.currentTimeMillis();
+    if(currentTimestamp - previousChangedTimeStamp > 5) {
+        sendBeginTyping();
+        previousChangedTimeStamp = currentTimestamp;
+    }
+}
+
+private void sendBeginTyping() {
+    EMMessage beginMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
+    EMCmdMessageBody body = new EMCmdMessageBody(MSG_TYPING_BEGIN);
+    // 将该透传消息只发送给在线用户
+    body.deliverOnlineOnly(true);
+    beginMsg.addBody(body);
+    beginMsg.setTo(toChatUsername);
+    EMClient.getInstance().chatManager().sendMessage(beginMsg);
+}
+```
+
+以下示例代码展示如何接受和解析输入状态的透传消息。
+
+```java
+private static final int TYPING_SHOW_TIME = 10000;
+private static final int MSG_TYPING_END = 1;
+private Handler typingHandler;
+
+private void initTypingHandler() {
+    typingHandler = new Handler(Looper.myLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what) {
+                case MSG_TYPING_END :
+                    cancelTimer();
+                    break;
+            }
+        }
+    };
+}
+
+@Override
+public void onCmdMessageReceived(List<EMMessage> messages) {
+    for (EMMessage msg : messages) {
+        if(!TextUtils.equals(msg.conversationId(), currentConversationId)) {
+            return;
+        }
+        EMCmdMessageBody body = (EMCmdMessageBody) msg.getBody();
+        if(TextUtils.equals(body.action(), MSG_TYPING_BEGIN)) {
+            // 这里需更新 UI，显示“对方正在输入”
+            beginTimer();
+        }
+    }
+}
+
+private void beginTimer() {
+    if(typingHandler != null) {
+        typingHandler.removeMessages(MSG_TYPING_END);
+        typingHandler.sendEmptyMessageDelayed(MSG_TYPING_END, TYPING_SHOW_TIME);
+    }
+}
+
+private void cancelTimer() {
+    // 这里需更新 UI，不再显示“对方正在输入”
+    if(typingHandler != null) {
+        typingHandler.removeCallbacksAndMessages(null);
+    }
+}
+
 ```
 
 ### 发送自定义类型消息

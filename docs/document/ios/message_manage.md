@@ -80,14 +80,12 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 [conversation markMessageAsReadWithId:messageId error:nil];
 ```
 
-### 删除会话及聊天记录
+### 删除会话及历史消息
 
-SDK 提供两个接口，分别可以删除本地会话和聊天记录或者删除当前用户在服务器端的会话和聊天记录。
-
-- 删除本地会话和聊天记录示例代码如下：
+你可以删除本地会话和历史消息，示例代码如下：
 
 ```objectivec
-// 删除指定会话，如果需要保留聊天记录，`isDeleteMessages` 参数传 `NO`。
+// 删除指定会话，如果需要保留历史消息，`isDeleteMessages` 参数传 `NO`，异步方法。
 [[EMClient sharedClient].chatManager deleteConversation:conversationId isDeleteMessages:YES completion:nil];
 // 删除一组会话。
 NSArray *conversations = @{@"conversationID1",@"conversationID2"};
@@ -95,25 +93,19 @@ NSArray *conversations = @{@"conversationID1",@"conversationID2"};
 ```
 
 ```objectivec
-// 删除当前会话中指定的一条聊天记录。
+// 删除当前会话中指定的一条历史消息。
 EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
 [conversation deleteMessageWithId:.messageId error:nil];
 ```
 
-- 删除服务器端会话和聊天记录，示例代码如下：
-
-```objectivec
-// 删除指定会话，如果需要保留聊天记录，`isDeleteServerMessages` 参数传 `NO`。
-[[EMClient sharedClient].chatManager deleteServerConversation:@"conversationId1" conversationType:EMConversationTypeChat isDeleteServerMessages:YES completion:^(NSString *aConversationId, EMError *aError) {
-    // 删除回调
-}];
-```
+删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](message_retrieve.html#删除服务端会话及其历史消息)。
 
 ### 根据关键字搜索会话消息
 
 你可以根据关键字搜索会话消息，示例代码如下：
 
 ```objectivec
+// 同步方法，异步方法见[EMChatManager loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:completion]
 NSArray<EMChatMessage *> *messages = [conversation loadMessagesWithKeyword:keyword timestamp:0 count:50 fromUser:nil searchDirection:MessageSearchDirectionDown];
 ```
 
@@ -122,6 +114,7 @@ NSArray<EMChatMessage *> *messages = [conversation loadMessagesWithKeyword:keywo
 如果你需要使用批量导入方式在本地会话中插入消息可以使用下面的接口，构造 `Message` 对象，将消息导入本地数据库。
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].chatManager importMessages:messages completion:nil];
 ```
 
@@ -141,6 +134,7 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 如果需要更新消息用以下方法：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.chatManager updateMessage:message completion:^(EMChatMessage *aMessage, EMError *aError) {
     if (!aError) {
         // 更新本地消息完成。

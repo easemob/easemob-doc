@@ -2,13 +2,15 @@
 
 <Toc />
 
-登录环信 IM 后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
+登录环信即时通讯后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
 
 - 文字消息，包含超链接和表情；
 - 附件消息，包含图片、语音、视频及文件消息；
 - 位置消息；
 - 透传消息；
 - 自定义消息。
+
+对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
 
 本文介绍如何使用即时通讯 IM Web SDK 实现发送和接收这些类型的消息。
 
@@ -51,9 +53,9 @@ function sendTextMessage() {
         type: "txt",
         // 设置消息内容。
         msg: "message content",
-        // 设置消息接收方的用户 ID。
+        // 设置消息接收方，单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
         to: "username",
-        // 设置会话类型。
+        // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`，默认为单聊。
         chatType: "singleChat",
     };
     // 创建文本消息。
@@ -66,12 +68,27 @@ function sendTextMessage() {
     });
 }
 ```
+对于聊天室消息，可设置消息优先级。示例代码如下：
 
-:::notice
-群组消息和聊天室消息只需修改 option 对象下的其中 2 个参数：`to` 和 `chatType`。
-- 群聊：`to` 为群组 ID；`chatType` 为 `groupChat`；
-- 聊天室：`to` 为聊天室 ID`；`chatType` 为 `chatRoom`。
-:::
+```javascript
+// 发送文本消息。
+function sendTextMessage() {
+    let option = {
+        type: "txt",
+        msg: "message content",
+        // 聊天室消息的优先级。如果不设置，默认值为 `normal`，即“普通”优先级。
+        priority: "high"
+        to: "chat room ID",
+        chatType: "chatRoom",
+    };
+    let msg = WebIM.message.create(opt);
+    conn.send(msg).then(()=>{
+        console.log("Send message success");
+    }).catch((e)=>{
+        console.log("Send message fail");
+    });
+}
+```
 
 ### 接收消息
 
@@ -459,6 +476,85 @@ function sendCMDMessage(){
       console.log("Fail");
   });
 }
+```
+
+#### 通过透传消息实现输入指示器
+
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，设定对聊天应用程序中新交互的期望。你可以通过透传消息实现输入指示器。
+
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
+
+![img](@static/images/common/typing_indicator.png)
+
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+
+:::notice
+
+用户 A 可根据需要设置透传消息发送间隔。
+
+:::
+
+以下示例代码展示如何发送输入状态的透传消息。
+
+发送输入状态的用户。
+
+```typescript
+let previousChangedTimeStamp = 0;
+// 监听输入状态的变化
+const onInputChange = function () {
+  const currentTimestamp = new Date().getTime();
+  if (currentTimestamp - previousChangedTimeStamp > 5000) {
+    sendBeginTyping();
+    previousChangedTimeStamp = currentTimestamp;
+  }
+};
+
+// 创建输入状态消息并发送
+const sendBeginTyping = function () {
+  const option = {
+    chatType: "singleChat", // 会话类型，设置为单聊。
+    type: "cmd", // 消息类型。
+    to: "<target id>", // 消息接收方。
+    action: "TypingBegin", // 用户自定义操作。
+  };
+  const typingMessage = message.create(option);
+
+  connection
+    .send(typingMessage)
+    .then(() => {
+      console.log("success");
+    })
+    .catch((e) => {
+      console.log("fail");
+    });
+};
+```
+
+接收输入状态的用户。
+
+```typescript
+// 设置状态监听器
+let timer;
+connection.addEventHandler("message", {
+  onCmdMessage: (msg) => {
+    console.log("onCmdMessage", msg);
+    if (msg.action === "TypingBegin") {
+      // 这里需更新 UI，显示“对方正在输入”
+      beginTimer();
+    }
+  },
+});
+
+const beginTimer = () => {
+  timer && clearTimeout(timer);
+  timer = setTimeout(() => {
+    // 这里需更新 UI，不再显示“对方正在输入”
+  }, 5000);
+};
 ```
 
 ### 发送自定义消息

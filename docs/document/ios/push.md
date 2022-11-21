@@ -160,6 +160,7 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 
 ```
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  // 异步方法
   [EMClient.sharedClient registerForRemoteNotificationsWithDeviceToken:deviceToken completion:^(EMError *aError) {
       if (aError) {
           NSLog(@"bind deviceToken error: %@", aError.errorDescription);
@@ -253,6 +254,7 @@ EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentM
 param.remindType = EMPushRemindTypeMentionOnly;
 
 //设置 app 的离线推送免打扰模式。
+// 异步方法
 [[EMClient sharedClient].pushManager setSilentModeForAll:param completion:^(EMSilentModeResult *aResult, EMError *aError) {
         if (aError) {
             NSLog(@"setSilentModeForAll error---%@",aError.errorDescription);
@@ -274,6 +276,7 @@ param.silentModeEndTime = [[EMSilentModeTime alloc]initWithHours:15 minutes:0];
 你可以调用 `getSilentModeForAll` 获取 app 级别的推送通知设置，如以下代码示例所示：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].pushManager getSilentModeForAllWithCompletion:^(EMSilentModeResult *aResult, EMError *aError) {
     if (!aError) {
         //获取 app 的推送通知方式。
@@ -303,6 +306,7 @@ EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentM
 param.silentModeDuration = 15;
                                 
 EMConversationType conversationType = EMConversationTypeGroupChat;
+// 异步方法
 [[EMClient sharedClient].pushManager setSilentModeForConversation:@"conversationId" conversationType:conversationType params:param completion:^(EMSilentModeResult *aResult, EMError *aError) {
     if (aError) {
         NSLog(@"setSilentModeForConversation error---%@",aError.errorDescription);
@@ -315,6 +319,7 @@ EMConversationType conversationType = EMConversationTypeGroupChat;
 你可以调用 `getSilentModeForAllWithCompletion` 获取指定会话的推送通知设置，如以下代码示例所示：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].pushManager getSilentModeForAllWithCompletion:^(EMSilentModeResult *aResult, EMError *aError) {
     if (!aError) {
         //获取会话的推送通知方式。
@@ -341,6 +346,7 @@ EMConversationType conversationType = EMConversationTypeGroupChat;
 
 ```objectivec
 NSArray *conversations = @[conversation1,conversation2];
+// 异步方法
     [[EMClient sharedClient].pushManager getSilentModeForConversations:conversationArray completion:^(NSDictionary<NSString*,EMSilentModeResult*>*aResult, EMError *aError) {
         if (aError) {
             NSLog(@"getSilentModeForConversations error---%@",aError.errorDescription);
@@ -356,6 +362,7 @@ NSArray *conversations = @[conversation1,conversation2];
 
 ```objectivec
 //清除指定会话的推送通知方式的设置。清除后，该会话会采取 app 的设置。
+// 异步方法
 [[EMClient sharedClient].pushManager clearRemindTypeForConversation:@"" conversationType:conversationType completion:^(EMSilentModeResult *aResult, EMError *aError) {
     if (aError) {
         NSLog(@"clearRemindTypeForConversation error---%@",aError.errorDescription);
@@ -370,6 +377,7 @@ NSArray *conversations = @[conversation1,conversation2];
 你可以调用 `updatePushDisplayName` 设置推送通知中显示的昵称，如以下代码示例所示：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.pushManager updatePushDisplayName:@"displayName" completion:^(NSString * aDisplayName, EMError * aError) {
     if (aError) 
     {
@@ -381,6 +389,7 @@ NSArray *conversations = @[conversation1,conversation2];
 你也可以调用 `updatePushDisplayStyle` 设置推送通知的显示样式，如下代码示例所示：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.pushManager updatePushDisplayStyle:EMPushDisplayStyleSimpleBanner completion:^(EMError * aError)
 {
     if(aError)
@@ -402,6 +411,7 @@ NSArray *conversations = @[conversation1,conversation2];
 你可以调用 `getPushNotificationOptionsFromServerWithCompletion` 获取推送通知中的显示属性，如以下代码示例所示：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.pushManager getPushNotificationOptionsFromServerWithCompletion:^(EMPushOptions * aOptions, EMError * aError)
 {
     if (aError)
@@ -428,6 +438,7 @@ NSArray *conversations = @[conversation1,conversation2];
 
 ```objectivec
 //设置离线推送的首选语言。
+// 异步方法
 [[EMClient sharedClient].pushManager setPreferredNotificationLanguage:@"EU" completion:^(EMError *aError) {
     if (aError) {
         NSLog(@"setPushPerformLanguageCompletion error---%@",aError.errorDescription);

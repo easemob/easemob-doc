@@ -40,7 +40,8 @@
 示例代码如下：
 
 ```objectivec
-[EMClient.sharedClient.roomManager getChatroomAnnouncementWithId:@"chatRoomId" error:&error];
+// 异步方法
+[EMClient.sharedClient.roomManager getChatroomAnnouncementWithId:@"chatRoomId" completion:nil];
 ```
 
 #### 更新聊天室公告
@@ -51,7 +52,8 @@
 
 ```objectivec
 EMError *error =  nil;
-[[EMClient sharedClient].roomManager updateChatroomAnnouncementWithId:_chatroomId announcement:textString error:&error];
+// 异步方法
+[[EMClient sharedClient].roomManager updateChatroomAnnouncementWithId:_chatroomId announcement:textString completion:nil];
 ```
 
 #### 修改聊天室名称
@@ -62,7 +64,8 @@ EMError *error =  nil;
 
 ```objectivec
 EMError *error = nil;
-[[EMClient sharedClient].roomManager updateSubject:textString forChatroom:self.chatroom.chatroomId error:&error];
+// 异步方法
+[[EMClient sharedClient].roomManager updateSubject:textString forChatroom:self.chatroom.chatroomId completion:nil];
 ```
 
 #### 修改聊天室描述
@@ -73,7 +76,8 @@ EMError *error = nil;
 
 ```objectivec
 EMError *error = nil;
-[[EMClient sharedClient].roomManager updateDescription:textString forChatroom:self.chatroom.chatroomId error:&error];
+// 异步方法
+[[EMClient sharedClient].roomManager updateDescription:textString forChatroom:self.chatroom.chatroomId completion:nil];
 ```
 
 ### 管理聊天室自定义属性（key-value）

@@ -33,8 +33,8 @@
 
 创建群组时，需设置以下参数：
 
-| 参数                | 类型   | 描述                                                                                                                                                                                                                                                                   |
-| :------------------ | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 参数                | 类型   | 描述          |
+| :------------- | :----- | :--------------------------------------------- |
 | `groupname`         | String | 群组名称。                                                                                                                                                                                                                                                             |
 | `desc`              | String | 群组描述。                                                                                                                                                                                                                                                             |
 | `members`           | Array  | 群成员的用户 ID 组成的数组。                                                                                                                                                                                                                                           |
@@ -42,20 +42,24 @@
 | `approval`          | Bool   | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `public` 设置为 `true` 时，对私有群无效。                                                         |
 | `allowinvites`      | Bool   | 是否允许普通群成员邀请人入群：<br/> - `true`：允许；<br/> - `false`：不允许。只有群主和管理员才可以向群组添加用户。<br/>该参数仅对私有群有效，即 `public` 设置为 `false` 时， 因为公开群（public：`true`) 仅支持群主和群管理员邀请人入群，不支持普通群成员邀请人入群。 |
 | `inviteNeedConfirm` | Bool   | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。                                                                                                                                          |
-| `maxusers`          | Int    | 群组最大成员数。                                                                                                                                                                                                                                                       |
+| `maxusers`          | Int    | 群组最大成员数。            |
+| `ext`          | String    | 群组详情扩展信息。            |
 
 创建群组的示例代码如下：
 
 ```javascript
 let option = {
-  groupname: "groupName",
-  desc: "A description of a group",
-  members: ["user1", "user2"],
-  public: true,
-  approval: true,
-  allowinvites: true,
-  inviteNeedConfirm: true,
-  maxusers: 500,
+  data: {
+    groupname: "groupName",
+    desc: "A description of a group",
+    members: ["user1", "user2"],
+    public: true,
+    approval: true,
+    allowinvites: true,
+    inviteNeedConfirm: true,
+    maxusers: 500,
+    ext: "group detail extensions",
+  },
 };
 conn.createGroup(option).then((res) => console.log(res));
 ```
@@ -63,10 +67,6 @@ conn.createGroup(option).then((res) => console.log(res));
 2、邀请用户入群。
 
 公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于 `allowinvites` 选项的设置：
-
-邀请用户入群的流程图如下：
-
-![img](@static/images/web/8.png)
 
 邀请用户加群流程如下：
 
@@ -85,14 +85,15 @@ conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 
      - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
 
-  ```javascript
-  conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
-  ```
-    - 受邀用户拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。邀请人会收到 `rejectInvite` 事件。
+     ```javascript
+     conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
+     ```
 
-  ```javascript
-  conn.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
-  ```
+     - 受邀用户拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。邀请人会收到 `rejectInvite` 事件。
+
+     ```javascript
+     conn.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
+     ```
 
 3、用户加入群组后，可以收发群消息。
 
@@ -148,7 +149,7 @@ conn.listGroupMembers(option).then((res) => console.log(res));
 
 ```javascript
 conn.getJoinedGroups({
-  pageNum: 1,
+  pageNum: 0,
   pageSize: 20,
   needAffiliations: true,
   needRole: true,
@@ -201,6 +202,9 @@ conn.addEventHandler("eventName", {
       // 更新群公告。群组所有成员会收到该回调。
       case "updateAnnouncement":
         break;
+      // 更新群组信息，如群组名称和群组描述。群组所有成员会收到该回调。
+      case "updateInfo":
+        break;  
       // 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
       case "unmuteMember":
         break;

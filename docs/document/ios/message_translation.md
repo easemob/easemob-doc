@@ -51,6 +51,7 @@ SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManage
 使用过程如下:
 
 ```objectivec
+// 异步方法
 [[[EMClient sharedClient] chatManager] fetchSupportedLanguages:^(NSArray<EMTranslateLanguage *> * _Nullable languages, EMError * _Nullable error) {
 
 }];
@@ -64,7 +65,7 @@ SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManage
 
 ```objectivec
 /**
- *  翻译消息。
+ *  翻译消息，异步方法。
  *
  *  @param aMessage         消息对象。
  *  @param aLanguages       要翻译的目标语言 code，EMTranslateLanguage 类中的 languageCode 数组。

@@ -827,11 +827,17 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+
+##### 请求 body
+
+| 字段   | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `announcement`  | String | 是    | 修改后的聊天室公告。 |
 
 #### HTTP 响应
 
@@ -839,7 +845,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段    | 类型    | 说明                                                    |
+| 字段    | 类型    | 描述                                                    |
 | :------- | :------ | :------------------------------------------------------ |
 | `data.id` | String | 聊天室 ID。 |
 | `data.result` | Bool | 修改是否成功：<br/> - `true`：是；<br/> - `false`：否。 |
@@ -855,7 +861,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 ```shell
 # 将 <YourToken> 替换为你在服务端生成的 Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement' -d '{"announcement" : "聊天室公告…"}'
 ```
 
 ##### 响应示例
@@ -893,7 +899,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 
 ##### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
+| 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
@@ -2201,6 +2207,8 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToke
 ## 管理白名单
 
 环信即时通讯 IM 提供多个接口完成聊天室白名单管理，包括查看、将用户添加、移除白名单等。
+
+聊天室白名单中的成员在聊天室中发送的消息为高优先级，会优先送达，但不保证必达。当负载较高时，服务器会优先丢弃低优先级的消息。若即便如此负载仍很高，服务器也会丢弃高优先级消息。
 
 ### 查询聊天室白名单
 
