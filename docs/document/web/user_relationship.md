@@ -94,9 +94,9 @@ conn.deleteContact("userId");
 你可以调用 `getContacts` 方法查询好友列表，示例代码如下：
 
 ```javascript
-conn.getContacts().then( (res) => {
+conn.getContacts().then((res) => {
     console.log(res) // res.data > ['user1', 'user2']
-}
+})
 ```
 
 ### 管理黑名单

@@ -24,8 +24,8 @@
 
 ```javascript
 connection.reportMessage({
-    reportType: 'report type'; // 举报类型。
-    reportReason: 'report reason'; // 举报原因。
-    messageId: 'ID of the reported message'; // 消息 ID
+    reportType: 'report type', // 举报类型。
+    reportReason: 'report reason', // 举报原因。
+    messageId: 'ID of the reported message' // 消息 ID
 })
 ```

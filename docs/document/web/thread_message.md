@@ -73,12 +73,12 @@ function sendTextMessage() {
 
 示例代码如下：
 
-```
+```javascript
 // 监听收到的文本消息
 connection.addEventHandler('THREADMESSAGE',{
-  onTextMessage:(message) =>{
-            if(message.chatThread && JSON.stringify(message.chatThread)!=='{}'){
-        console.log(message)
+  onTextMessage:(message) => {
+    if(message.chatThread && JSON.stringify(message.chatThread)!=='{}'){
+      console.log(message)
         // 接收到子区消息，添加处理逻辑。
       }
     },
