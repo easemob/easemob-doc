@@ -94,15 +94,15 @@ const conn = new EC.connection({
 
 ### 控制台注册
 
-控制台的注册请到 [这里](https://console.easemob.com/app/im-service/operative-service/user)。
+登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择**即时通讯** > **运营服务** > **用户管理**，创建 IM 用户。
 
 ### REST API 注册
 
-请参考 [注册用户](account_system.html#注册用户)。
+请参考 [注册用户](\server-side\account_system.html#注册用户)。
 
 ### SDK 注册
 
-该方法需在 [控制台](https://console.easemob.com/app/im-service/detail) 设置允许 **开放注册**。
+若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
 ```javascript
 conn.registerUser({
