@@ -181,6 +181,16 @@ EMProperties properties = EMProperties.builder()
 
 ## 更新日志
 
+###  V0.6.3
+
+- 新增 离线推送设置 功能。
+- 新增 分页获取用户已加入的群组列表 功能。
+- 新增 批量获取用户属性 功能。
+- 新增 指定群组 ID 建群 功能，需要联系商务开通。
+- 修复了一些 Bug。
+
+以上更新内容请到 PushApi/GroupApi/MetadataApi 中查看。
+
 ### V0.6.0
 
 - 新增 聊天室全员禁言/解禁 功能。
