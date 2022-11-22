@@ -38,7 +38,7 @@
 
 ## 索引 错误结果说明
 
-| HTTP Status Code<div style="width: 220px;"></div> | Error                              | Error Description                                            | 可能原因                                                     |
+| HTTP Status Code | Error                              | Error Description                                            | 可能原因                                                     |
 | :--------------- | :--------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | 400              | invalid_grant                      | invalid username or password                                 | 用户名或者密码输入错误。                                     |
 | 400              | invalid_grant                      | “client_id does not match”                                   | “client_id does not match” 是 client_id 传入不正确，“client_secret does not match” 是 client_secret 传入不正确，client_id 以及 client_secret 在管理后台对应的应用详情中查看。 |
