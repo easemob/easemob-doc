@@ -96,11 +96,11 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
 
    ```javascript
    let option = {
-       chatRoomId: "chatRoomId",// 聊天室 ID
-       attributeKey: "attributeKey";// 聊天室属性 key
-       attributeValue: "attributeValue"; // 聊天室属性 value
-   	   autoDelete: true; // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
-       isForced: false  // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
+       chatRoomId: "chatRoomId", // 聊天室 ID
+       attributeKey: "attributeKey", // 聊天室属性 key
+       attributeValue: "attributeValue", // 聊天室属性 value
+   	   autoDelete: true, // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
+       isForced: false // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
    }
    conn.setChatRoomAttribute(option).then(res => console.log(res))
    ```
@@ -112,12 +112,12 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
    ```javascript
    let option = {
        chatRoomId: "chatRoomId",  // 聊天室 ID
-       attributes:{  // 聊天室属性，为 key-value 格式，即 {"key":"value"}
-            "attributeKey1":"attributeValue1",
-        	"attributeKey2":"attributeValue2",
+       attributes: {  // 聊天室属性，为 key-value 格式，即 {"key":"value"}
+            "attributeKey1": "attributeValue1",
+        	"attributeKey2": "attributeValue2",
          	"..."
        },
-       autoDelete: true; // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
+       autoDelete: true, // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
    	   isForced: false  // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
    }
    conn.setChatRoomAttributes(option).then(res => console.log(res))

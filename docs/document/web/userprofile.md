@@ -157,7 +157,7 @@ let option = {
     chatType: "singleChat"
 }
 // 创建自定义消息。
-let msg = WebIM.message.create(option;
+let msg = WebIM.message.create(option);
 conn.send(msg).then((res)=>{
     console.log('Success')
 }).catch((e)=>{
