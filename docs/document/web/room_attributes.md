@@ -29,7 +29,7 @@
 
 #### 获取聊天室名称和描述
 
-对于聊天室名称和描述，你可以调用 [`getChatRoomDetails`](room_manage.html#获取聊天室详情) 获取聊天室详情时查看。
+对于聊天室名称和描述，你可以调用 `getChatRoomDetails` 方法[获取聊天室详情](room_manage.html#获取聊天室详情)时查看。
 
 #### 更新聊天室详情
 
