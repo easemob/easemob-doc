@@ -31,7 +31,7 @@
 
 #### 获取聊天室名称和描述
 
-对于聊天室名称和描述，你可以调用 [`getChatroomSpecificationFromServerWithId`](room_manage.html#获取聊天室详情) 获取聊天室详情时查看。
+对于聊天室名称和描述，你可以调用 `getChatroomSpecificationFromServerWithId` 方法[获取聊天室详情](room_manage.html#获取聊天室详情)时查看。
 
 #### 获取聊天室公告
 
