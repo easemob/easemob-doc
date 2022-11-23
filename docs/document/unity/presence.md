@@ -6,6 +6,10 @@
 
 本文介绍如何在即时通讯应用中发布、订阅和查询用户的在线状态。
 
+:::notice
+私有化版本不支持在线状态订阅。
+:::
+
 ## 技术原理
 
 环信 IM SDK 提供 `Presence`、`PresenceManager` 和 `IPresenceManagerDelegate` 类，用于管理在线状态订阅，包含如下核心方法：
