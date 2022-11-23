@@ -133,7 +133,7 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 ```objectivec
 // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
 - (void)userDidJoinChatroom:(EMChatroom *)aChatroom
-      user:(NSString *)aUsername{
+      user:(NSString *)aUsername {
 }
 
 // 有成员主动退出聊天室。聊天室的所有成员（除退出成员外）会收到该事件。
@@ -147,23 +147,33 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
   }
 
 // 聊天室详情有变更。聊天室的所有成员会收到该事件。
-- (void)chatroomSpecificationDidUpdate:(EMChatroom *)aChatroom;
+- (void)chatroomSpecificationDidUpdate:(EMChatroom *)aChatroom {
+  
+  }
 
 // 有成员被添加至聊天室白名单。被添加的成员收到该事件。
 - (void)chatroomWhiteListDidUpdate:(EMChatroom *)aChatroom
-              addedWhiteListMembers:(NSArray<NSString *> *)aMembers;
+              addedWhiteListMembers:(NSArray<NSString *> *)aMembers {
+  
+  }
 
 // 有成员被移出白名单。被移出的成员收到该事件。
 - (void)chatroomWhiteListDidUpdate:(EMChatroom *)aChatroom
-            removedWhiteListMembers:(NSArray<NSString *> *)aMembers;
+            removedWhiteListMembers:(NSArray<NSString *> *)aMembers {
+  
+  }
 
 // 聊天室一键禁言状态变化。聊天室所有成员（除操作者外）会收到该事件。
 - (void)chatroomAllMemberMuteChanged:(EMChatroom *)aChatroom
-                     isAllMemberMuted:(BOOL)aMuted;
+                     isAllMemberMuted:(BOOL)aMuted {
+  
+  }
 
 // 更新聊天室公告。聊天室的所有成员会收到该事件。
 - (void)chatroomAnnouncementDidUpdate:(EMChatroom *)aChatroom
-                          announcement:(NSString *_Nullable)aAnnouncement;
+                          announcement:(NSString *_Nullable)aAnnouncement {
+  
+  }
 
 // 有成员被加入禁言列表。被禁言的成员会收到该事件。
 
@@ -192,10 +202,14 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
                       newOwner:(NSString *)aNewOwner
                       oldOwner:(NSString *)aOldOwner {
 
+   }
 // 有成员修改/设置聊天室自定义属性，聊天室的所有成员会收到该事件。
-- (void)chatroomAttributesDidUpdated:(NSString *_Nonnull)roomId attributeMap:(NSDictionary<NSString *, NSString *> *_Nullable)attributeMap from:(NSString *_Nonnull)fromId;
+- (void)chatroomAttributesDidUpdated:(NSString *_Nonnull)roomId attributeMap:(NSDictionary<NSString *, NSString *> *_Nullable)attributeMap from:(NSString *_Nonnull)fromId {
+  
   }
 
 // 有成员删除聊天室自定义属性。聊天室所有成员会收到该事件。
-- (void)chatroomAttributesDidRemoved:(NSString *_Nonnull)roomId attributes:(NSArray<__kindof NSString *> *_Nullable)attributes from:(NSString *_Nonnull)fromId;
+- (void)chatroomAttributesDidRemoved:(NSString *_Nonnull)roomId attributes:(NSArray<__kindof NSString *> *_Nullable)attributes from:(NSString *_Nonnull)fromId {
+  
+  }
 ```
