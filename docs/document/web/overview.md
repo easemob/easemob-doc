@@ -1,5 +1,7 @@
 # 概述
 
+<Toc />
+
 本页介绍 Web 集成相关内容。
 
 ## 前提条件
@@ -27,7 +29,7 @@ import EC, { EasemobChat } from 'easemob-websdk';
 如果对 SDK 大小有要求，可根据功能按需导入 SDK 文件。
 
 | 功能             | 导入文件                | 使用方式            |
-| ---------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| :------------ | :----- | :----------------------------------------------------------- |
 | 联系人和消息管理 | import \* as contactPlugin from "easemob-websdk/contact/contact";             | miniCore.usePlugin(contactPlugin, "contact");         |
 | 群组         | import \* as groupPlugin from "easemob-websdk/group/group";                   | miniCore.usePlugin(groupPlugin, "group");             |
 | 聊天室       | import \* as chatroomPlugin from "easemob-websdk/chatroom/chatroom";          | miniCore.usePlugin(chatroomPlugin, "chatroom");       |
@@ -75,8 +77,8 @@ const conn = new EC.connection({
 
 初始化 SDK 参数说明：
 
-| 参数             | 描述                                                         |
-| :----------| :----------------------------------------------------------- |
+| 参数             | 描述                                   |
+| :----------| :-------------------------------------- |
 | `appKey` | 在管理后台注册的应用唯一标识。                                   |
 | `isHttpDNS`   | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。  |
 | `delivery` | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。  |
@@ -94,15 +96,15 @@ const conn = new EC.connection({
 
 ### 控制台注册
 
-控制台的注册请到 [这里](https://console.easemob.com/app/im-service/operative-service/user)。
+登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择**即时通讯** > **运营服务** > **用户管理**，创建 IM 用户。
 
 ### REST API 注册
 
-请参考 [注册用户](account_system.html#注册用户)。
+请参考 [注册用户](\server-side\account_system.html#注册用户)。
 
 ### SDK 注册
 
-该方法需在 [控制台](https://console.easemob.com/app/im-service/detail) 设置允许 **开放注册**。
+若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
 ```javascript
 conn.registerUser({
@@ -147,7 +149,7 @@ conn
   });
 ```
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](easemob_user_token.html)。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/product/easemob_user_token.html)。
 
 ```javascript
 conn

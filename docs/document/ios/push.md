@@ -379,8 +379,7 @@ NSArray *conversations = @[conversation1,conversation2];
 ```objectivec
 // 异步方法
 [EMClient.sharedClient.pushManager updatePushDisplayName:@"displayName" completion:^(NSString * aDisplayName, EMError * aError) {
-    if (aError) 
-    {
+    if (aError) {
         NSLog(@"update push display name error: %@", aError.errorDescription);
     }
 }];
@@ -392,8 +391,7 @@ NSArray *conversations = @[conversation1,conversation2];
 // 异步方法
 [EMClient.sharedClient.pushManager updatePushDisplayStyle:EMPushDisplayStyleSimpleBanner completion:^(EMError * aError)
 {
-    if(aError)
-    {
+    if (aError) {
         NSLog(@"update display style error --- %@", aError.errorDescription);
     }
 }];
@@ -414,8 +412,7 @@ NSArray *conversations = @[conversation1,conversation2];
 // 异步方法
 [EMClient.sharedClient.pushManager getPushNotificationOptionsFromServerWithCompletion:^(EMPushOptions * aOptions, EMError * aError)
 {
-    if (aError)
-    {
+    if (aError) {
         NSLog(@"get push options error --- %@", aError.errorDescription);
     }
 }];

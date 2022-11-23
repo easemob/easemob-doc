@@ -106,7 +106,7 @@
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient] presenceManager] fetchSubscribedMembersWithPageNum:0 pageSize:50 Completion:^(NSArray<NSString*>* members,EMError*error){
+[[[EMClient sharedClient] presenceManager] fetchSubscribedMembersWithPageNum:0 pageSize:50 Completion:^(NSArray<NSString*>* members,EMError*error){
 }];
 ```
 
@@ -116,7 +116,6 @@
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient] presenceManager] fetchPresenceStatus:@[@"Alice",@"Tom"] completion:^(NSArray<EMPresence*>* presences,EMError*error){
+[[[EMClient sharedClient] presenceManager] fetchPresenceStatus:@[@"Alice",@"Tom"] completion:^(NSArray<EMPresence*>* presences,EMError*error){
 }];
-}
 ```

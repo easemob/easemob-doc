@@ -281,7 +281,7 @@ conn.getGroupBlocklist(option).then(res => console.log(res))
 
 ```javascript
 let option = {
-    groupId: "groupId"，
+    groupId: "groupId",
     username: "user1" || ["user1", "user2"],
     muteDuration: 886400000 // 禁言时长，单位为毫秒。
 };
@@ -343,4 +343,4 @@ conn.enableSendGroupMsg(option).then(res => console.log(res))
 
 ### 监听群组事件
 
-有关详细信息，请参阅 [监听群组事件](group_manage#监听群组事件)。
+有关详细信息，请参阅 [监听群组事件](group_manage.html#监听群组事件)。

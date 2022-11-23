@@ -37,7 +37,7 @@
 ```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMemberListFromServerWithId:cursor:pageSize:completion]
 EMError *error = nil;
-[[EMClient sharedClient].roomManager getChatroomMemberListFromServerWithId:@"chatroomId" cursor:1 pageSize:20 error:&error];
+EMCursorResult<NSString*> * result = [[EMClient sharedClient].roomManager getChatroomMemberListFromServerWithId:@"chatroomId" cursor:1 pageSize:20 error:&error];
 ```
 
 ### 将成员移出聊天室
@@ -95,7 +95,7 @@ EMError *error = nil;
 ```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomBlacklistFromServerWithId:pageNumber:pageSize:completion]
 EMError *error = nil;
-[[EMClient sharedClient].roomManager getChatroomBlacklistFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
+NSArray<NSString *> * blockMembers = [[EMClient sharedClient].roomManager getChatroomBlacklistFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
 ```
 
 ### 管理聊天室白名单
@@ -111,7 +111,7 @@ EMError *error = nil;
 ```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomWhiteListFromServerWithId:completion]
 EMError *error = nil;
-[EMClient.sharedClient.roomManager getChatroomWhiteListFromServerWithId:@"aChatroomId" error:&error];
+NSArray<NSString *> *allowMembers = [EMClient.sharedClient.roomManager getChatroomWhiteListFromServerWithId:@"aChatroomId" error:&error];
 ```
 
 #### 检查自己是否在聊天室白名单中
@@ -121,7 +121,7 @@ EMError *error = nil;
 ```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager isMemberInWhiteListFromServerWithChatroomId:completion]
 EMError *error = nil;
-[EMClient.sharedClient.roomManager isMemberInWhiteListFromServerWithChatroomId:@"aChatroomId" error:&error];
+BOOL isAllowed = [EMClient.sharedClient.roomManager isMemberInWhiteListFromServerWithChatroomId:@"aChatroomId" error:&error];
 ```
 
 #### 将成员加入聊天室白名单
@@ -191,7 +191,7 @@ EMError *error = nil;
 ```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMuteListFromServerWithId:pageNumber:pageSize:completion]
 EMError *error = nil;
-[[EMClient sharedClient].roomManager getChatroomMuteListFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
+NSArray<NSString *> * muteMembers = [[EMClient sharedClient].roomManager getChatroomMuteListFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
 ```
 
 ### 开启和关闭聊天室全员禁言
