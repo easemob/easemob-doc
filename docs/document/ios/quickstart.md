@@ -67,12 +67,12 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 ```objectivec
 (BOOL)application:(UIApplication *)applicationdidFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-// appkey 替换成你在环信即时通讯 IM 管理后台注册应用中的 App Key 
-EMOptions *options = [EMOptions optionsWithAppkey:@“appkey”]; 
-// apnsCertName是证书名称，可以先传 nil，等后期配置 APNs 推送时在传入证书名称 
-options.apnsCertName = nil; 
-[[EMClient sharedClient] initializeSDKWithOptions:options]; 
-return YES; 
+    // appkey 替换成你在环信即时通讯 IM 管理后台注册应用中的 App Key 
+    EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
+    // apnsCertName是证书名称，可以先传 nil，等后期配置 APNs 推送时在传入证书名称 
+    options.apnsCertName = nil;
+    [[EMClient sharedClient] initializeSDKWithOptions:options];
+    return YES;
 }
 ```
 
@@ -114,10 +114,11 @@ return YES;
 
 ```objectivec
 // 创建消息
+EMTextMessageBody* textBody = [[EMTextMessageBody alloc] initWithText:@"hello"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"user2"
                                                               from:@"user1"
                                                                 to:@"user2"
-                                                              body:TextMessageBody
+                                                              body:textBody
                                                                ext:@{}];
 // 发送消息
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {}];
