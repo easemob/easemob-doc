@@ -53,7 +53,7 @@ const DEFAULT_APIURL = '//xxx.xxxxx.com'; 	// 私有化的 RESTful 服务器地�
 appkey: 'easemob#easeim',	// 私有化的 App Key
 isHttpDNS: false,	// 是否允许通过 DNS 获取。由于私有云需自己配置，这里必须为 `false`。
 socketServer: '//xxx.xxxxx.com',  // 私有化的 WebSocket 地址
-restServer: '//xxx.xxxxx.com',	// 私有化的 RESTful 服务器地址
+restServer: '//xxx.xxxxx.com',	// 私有化的 RESTful 服务器地址。对于 Uniapp 全平台，需要全局搜索，查找 `a1.easemob.com` 替换为 `restServer`。
 ```
 
 ### 修改 SDK 初始化配置
@@ -64,7 +64,7 @@ restServer: '//xxx.xxxxx.com',	// 私有化的 RESTful 服务器地址
  url: WebIM.config.socketServer,
  apiUrl: WebIM.config.restServer,
  isHttpDNS：WebIM.config.isHttpDNS，  // 对于私有云，该参数必须为 `false`。
- // 其余配置可酌情添加
+ // 其他配置可酌情添加
 ```
 
 
