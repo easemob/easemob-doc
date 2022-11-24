@@ -42,8 +42,9 @@ const DEFAULT_APIURL = '//xxx.xxxxx.com'; 	// 私有化的 RESTful 服务器地�
 
 对于 webim-vue-demo，即 Vue 2 Demo 和 React Demo，需要在对应的 GitHub 地址中进行修改：
 
-[Vue 2 Demo 源码](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)
-[React Demo 源码](https://github.com/easemob/webim)
+- [Vue 2 Demo 源码](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)
+
+- [React Demo 源码](https://github.com/easemob/webim)
 
 ### 修改环境配置
 
