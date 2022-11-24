@@ -8,7 +8,7 @@
 
 在 `webim-vue-demo/src/IM/initwebsdk.js` 文件中，进行如下修改： 
 
-```
+```javascript
 const DEFAULT_APPKEY = 'easemob#easeim';  	// 私有化的 App Key
 const DEFAULT_URL = '//xxx.xxxxx.com';		// 私有化的 WebSocket 地址
 const DEFAULT_APIURL = '//xxx.xxxxx.com'; 	// 私有化的 RESTful 服务器地址
@@ -18,7 +18,7 @@ const DEFAULT_APIURL = '//xxx.xxxxx.com'; 	// 私有化的 RESTful 服务器地�
 
 私有化环境使用用户名和密码登录，因此需在 `webim-vue-demo/src/views/Login/components/LoginInput/index.vue` 文件中取消注释 SDK 登录方式代码。 
 
-```
+```javascript
 /* SDK 登陆的方式 */
   try {
     let { accessToken } = await EaseIM.conn.open({
@@ -49,7 +49,7 @@ const DEFAULT_APIURL = '//xxx.xxxxx.com'; 	// 私有化的 RESTful 服务器地�
 
 在 `WebIMConfig.js` 文件中，进行如下修改：
 
-```
+```javascript
 appkey: 'easemob#easeim',	// 私有化的 App Key
 isHttpDNS: false,	// 是否允许通过 DNS 获取。由于私有云需自己配置，这里必须为 `false`。
 socketServer: '//xxx.xxxxx.com',  // 私有化的 WebSocket 地址
@@ -60,7 +60,7 @@ restServer: '//xxx.xxxxx.com',	// 私有化的 RESTful 服务器地址。对于 
 
 在 `WebIM.js` 文件中，进行如下修改：
 
-```
+```javascript
  url: WebIM.config.socketServer,
  apiUrl: WebIM.config.restServer,
  isHttpDNS：WebIM.config.isHttpDNS，  // 对于私有云，该参数必须为 `false`。
