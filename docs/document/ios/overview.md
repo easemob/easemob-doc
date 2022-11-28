@@ -198,4 +198,4 @@ SDK 会写入日志文件到本地。日志文件路径如下：沙箱Library/Ap
 
 ![img](@static/images/ios/overview_fetchlogfile.png)
 
-日志文件 `easemob.log` 文件在下载包内容的 AppData/Library/Application Support/HyphenateSDK/easemobLog 目录下。
+日志文件 `easemob.log` 文件在下载包的 AppData/Library/Application Support/HyphenateSDK/easemobLog 目录下。
