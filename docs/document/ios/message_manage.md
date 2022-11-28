@@ -15,7 +15,10 @@
 - `conversation.unreadMessagesCount` 获取指定会话的未读消息数；
 - `deleteConversation` 删除指定会话；
 - `conversation.loadMessagesStartFromId` 在本地存储的消息中搜索；
-- `insertMessage` 在指定会话中写入消息。
+- `insertMessage` 在指定会话中写入消息；
+- `getMessageStatisticsById` 根据消息 ID 获取消息统计信息；
+- `getMessageCountWithStart` 获取满足统计条件的消息条数。
+- `getMessageStatisticsSizeWithStart` 获取满足统计条件的消息的总流量。
 
 ## 前提条件
 
@@ -140,4 +143,38 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
         // 更新本地消息完成。
     }
 }];
+```
+
+
+### 根据消息 ID 获取消息统计信息
+
+你可以根据消息 ID 获取指定消息的统计信息。示例代码如下：
+
+```objectivec
+(EMChatMessageStatistics* _Nullable)getMessageStatisticsById:(NSString* _Nonnull)messageId;
+```
+
+### 获取满足统计条件的消息条数
+
+你可以统计指定时间段内发送或/和接收的特定或全部类型的消息。示例代码如下：
+
+```objectivec
+(NSInteger)getMessageCountWithStart:(NSInteger)startTimestamp
+                                  end:(NSInteger)endTimestamp
+                            direction:(EMMessageStatisticsDirection)direction
+                                 type:(EMMessageStatisticsType)type;
+```
+
+
+### 获取满足统计条件的消息的总流量
+
+你可以统计指定时间段内发送或/和接收的特定或全部类型的消息的总流量。流量单位为字节。
+
+示例代码如下：
+
+```objectivec
+(NSInteger)getMessageStatisticsSizeWithStart:(NSInteger)startTimestamp
+                                           end:(NSInteger)endTimestamp
+                                     direction:(EMMessageStatisticsDirection)direction
+                                          type:(EMMessageStatisticsType)type;
 ```
