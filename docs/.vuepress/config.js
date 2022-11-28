@@ -129,6 +129,13 @@ module.exports = {
               ]
             },
             {
+              title: '私有化集成',
+              children: [
+                { text: 'SDK 及 Demo 下载', link: 'uc_private.html' },
+                { text: '环信通下载', link: 'uc_overview.html' },
+              ]
+            },
+            {
               title: '常见方案',
               children: [
                 { text: '迁移到环信', link: 'migrate_to_easemob.html' },
@@ -147,13 +154,6 @@ module.exports = {
               children: [
                 { text: '安全最佳实践', link: 'security_best_practices.html' },
                 { text: 'GDPR 安全合规', link: 'GDPR.html' },
-              ]
-            },
-            {
-              title: '私有化集成',
-              children: [
-                { text: 'SDK 及 Demo 下载', link: 'uc_private.html' },
-                { text: '环信通下载', link: 'uc_overview.html' },
               ]
             },
             /* 
