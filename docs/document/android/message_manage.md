@@ -17,8 +17,8 @@
 - `searchMsgFromDB` 在本地存储的消息中搜索；
 - `insertMessage` 在指定会话中写入消息；
 - `getMessageStatistics` 根据消息 ID 获取消息流量统计信息；
-- `getMessageCount` 获取一定时间段内发送或/和接收的指定类型的消息条数；
-- `getMessageSize` 获取一定时间段内发送或/和接收的指定或全部类型的消息的总流量。
+- `getMessageCount` 获取一定时间段内发送和/或接收的指定类型的消息条数；
+- `getMessageSize` 获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量。
 
 ## 前提条件
 
