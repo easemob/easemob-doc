@@ -95,14 +95,16 @@ EMClient.getInstance().init(this, options);
 #### FCM 推送集成
 
 1. Firebase 控制台创建项目
-   - 1.1 在 [Firebase console](https://console.firebase.google.com/) 创建项目，并注册 Android 应用。
-   - 1.2 按照提示去下载 google-services.json 文件到本地，并按照引导放置到项目的指定位置。
-   - 1.3 跳转到 `Project settings` 页面，选择 `Cloud Messaging` 标签，即可看到 `Server ID` 和 `Server Key`。
+   1.1 在 [Firebase console](https://console.firebase.google.com/) 创建项目，并注册 Android 应用。
+   1.2 按照提示去下载 google-services.json 文件到本地，并按照引导放置到项目的指定位置。
+   1.3 跳转到 `Project settings` 页面，选择 `Cloud Messaging` 标签，即可看到 `Server ID` 和 `Server Key`。
+
 2. 上传推送证书
-   - 注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **谷歌**，然后输入 Firebase 项目设置里的 `Server ID` 和 `Server Key`。
+   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **谷歌**，然后输入 Firebase 项目设置里的 `Server ID` 和 `Server Key`。
+
 3. FCM 推送集成
 
-   - 3.1 在项目根目录下的 `build.gradle` 中添加 FCM 服务插件
+   3.1 在项目根目录下的 `build.gradle` 中添加 FCM 服务插件
 
    ```gradle
    dependencies {
@@ -111,7 +113,7 @@ EMClient.getInstance().init(this, options);
    }
    ```
 
-   - 3.2 在项目的 module 的 gradle 文件中（通常为 /app/build.gradle ） 配置 FCM 库的依赖。
+   3.2 在项目的 module 的 gradle 文件中（通常为 /app/build.gradle ） 配置 FCM 库的依赖。
 
    ```gradle
    dependencies {
@@ -128,7 +130,7 @@ EMClient.getInstance().init(this, options);
    apply plugin: 'com.google.gms.google-services'  // Google Services plugin
    ```
 
-   - 3.3 同步应用后，继承 `FirebaseMessagingService` 的服务，并将其在 `AndroidManifest.xml` 中注册。
+   3.3 同步应用后，继承 `FirebaseMessagingService` 的服务，并将其在 `AndroidManifest.xml` 中注册。
 
    ```xml
    <service
@@ -140,7 +142,7 @@ EMClient.getInstance().init(this, options);
    </service>
    ```
 
-   - 3.4 在环信即时通讯 IM SDK 中启用 FCM。
+   3.4 在环信即时通讯 IM SDK 中启用 FCM。
 
    ```java
    EMOptions options = new EMOptions();
@@ -170,7 +172,7 @@ EMClient.getInstance().init(this, options);
    });
    ```
 
-   - 3.5 环信即时通讯 IM SDK 登录成功后，上传 FCM 的 device token。
+   3.5 环信即时通讯 IM SDK 登录成功后，上传 FCM 的 device token。
 
    ```java
    // Check whether FCM is supported
@@ -191,8 +193,8 @@ EMClient.getInstance().init(this, options);
    });
    ```
 
-   - 3.6 监控 device token 生成。
-   - 重写 `FirebaseMessagingService` 中的 `onNewToken` 方法，device token 更新后及时更新到环信即时通讯 IM SDK。
+   3.6 监控 device token 生成。
+       重写 `FirebaseMessagingService` 中的 `onNewToken` 方法，device token 更新后及时更新到环信即时通讯 IM SDK。
 
    ```java
    public class EMFCMMSGService extends FirebaseMessagingService {
@@ -225,7 +227,7 @@ EMClient.getInstance().init(this, options);
 1. 华为开发者后台创建应用<br/>
     在华为开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见华为官方介绍：[华为 HMS 消息推送服务集成](http://developer.huawei.com/consumer/cn/service/hms/catalog/huaweipush.html?page=hmssdk_huaweipush_devprepare)。
 2. 上传推送证书<br/>
-    注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **华为**，然后输入你在 华为开发者后台创建的[应用信息中的 APP ID 和 SecretKey 以及程序的包名](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section125831926193110)；
+    注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **华为**，然后输入你在 华为开发者后台创建的[应用信息中的 APP ID 和 SecretKey 以及程序的包名](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section125831926193110)。
 3. 华为推送集成<br/>
     - 3.1 集成 HMS Core SDK，参见 [华为官网集成文档](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-integrating-sdk-0000001050040084)。
     - 3.2 注册继承自 `HmsMessageService` 的服务到 `AndroidManifest.xml` 中。
@@ -263,8 +265,8 @@ EMClient.getInstance().init(this, options);
    注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 小米，然后输入你在 [小米开发者站](http://developer.xiaomi.com/) 创建的应用信息中的 App ID 和 Secret Key 以及程序的包名。
 3. 小米推送集成
 
-   - 3.1 下载 [小米推送 SDK](http://dev.xiaomi.com/mipush/downpage/) ，将 Jar 包添加到项目中。
-   - 3.2 配置 `AndroidManifest.xml`，详见 [官方文档](https://dev.mi.com/console/doc/detail?pId=41#_0_0) 。
+   3.1 下载 [小米推送 SDK](http://dev.xiaomi.com/mipush/downpage/) ，将 Jar 包添加到项目中。
+   3.2 配置 `AndroidManifest.xml`，详见 [官方文档](https://dev.mi.com/console/doc/detail?pId=41#_0_0) 。
    - 推送服务需要的权限列表：
 
    ```xml
