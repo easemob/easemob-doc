@@ -9,6 +9,7 @@
     "babel-plugin-component": "^1.1.1",
     "vuepress": "^1.9.7",
     "vuepress-plugin-container": "^2.1.5",
+    "vuepress-plugin-fulltext-search": "^2.2.1",
     "vuepress-plugin-smooth-scroll": "^0.0.10"
   },
   "scripts": {

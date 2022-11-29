@@ -102,7 +102,7 @@
                     }
                 }
                 // console.log(uri);
-                this.$router.push(uri);
+                this.$router.push(uri).catch(err => {});
             },
             handleMouseEnter(e) {
                 e.target.classList.add('active');

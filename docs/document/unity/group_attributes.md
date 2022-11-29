@@ -31,7 +31,7 @@
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.GroupManager.ChangeGroupName(groupId, groupName, new CallBack(
     onSuccess: () =>
     {
@@ -48,7 +48,7 @@ SDKClient.Instance.GroupManager.ChangeGroupName(groupId, groupName, new CallBack
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.GroupManager.ChangeGroupDescription(groupId, description, new CallBack(
   onSuccess: () =>
   {
@@ -65,7 +65,7 @@ SDKClient.Instance.GroupManager.ChangeGroupDescription(groupId, description, new
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.GroupManager.UpdateGroupAnnouncement(groupId, announcement, new CallBack(
     onSuccess: () =>
     {
@@ -82,7 +82,7 @@ SDKClient.Instance.GroupManager.UpdateGroupAnnouncement(groupId, announcement, n
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.GroupManager.GetGroupAnnouncementFromServer(currentGroupId, new ValueCallBack<string>(
     onSuccess: (str) =>
     {
@@ -101,7 +101,7 @@ SDKClient.Instance.GroupManager.GetGroupAnnouncementFromServer(currentGroupId, n
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.GroupManager.UploadGroupSharedFile(groupId, filePath, new CallBack(
     onSuccess: () =>
     {
@@ -120,7 +120,7 @@ SDKClient.Instance.GroupManager.UploadGroupSharedFile(groupId, filePath, new Cal
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.GroupManager.DeleteGroupSharedFile(groupId, id, new CallBack(
     onSuccess: () =>
     {
@@ -137,7 +137,7 @@ SDKClient.Instance.GroupManager.DeleteGroupSharedFile(groupId, id, new CallBack(
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.GroupManager.GetGroupFileListFromServer(groupId, pageNum, pageSize, handle: new ValueCallBack<List<GroupSharedFile>> (
     onSuccess: (fileList) =>
     {
@@ -154,7 +154,7 @@ SDKClient.Instance.GroupManager.GetGroupFileListFromServer(groupId, pageNum, pag
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.GroupManager.UpdateGroupExt(currentGroupId, extension, new CallBack(
     onSuccess: () =>
     {
