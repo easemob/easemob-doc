@@ -176,7 +176,7 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
 EMChatMessageStatistics * msgStatistics = [[[EMClient sharedClient] statisticsManager] getMessageStatisticsById:@"msgId"];
 ```
 
-#### 获取一定时间段内发送和/或接收的指定类型的消息条数
+#### 获取一定时间段内发送和/或接收的消息条数
 
 你可以统计一定时间段内发送和/或接收的指定或全部类型的消息，示例代码如下：
 
@@ -184,7 +184,7 @@ EMChatMessageStatistics * msgStatistics = [[[EMClient sharedClient] statisticsMa
 NSInteger count = [EMClient.sharedClient.statisticsManager getMessageCountWithStart:startTime end:endTime direction:EMMessageStatisticsDirectionAll type:EMMessageStatisticsTypeText];
 ```
 
-#### 获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量
+#### 获取一定时间段内发送和/或接收的消息的总流量
 
 你可以统计一定时间段内发送和/或接收的指定或全部类型的消息的总流量，流量单位为字节。
 
