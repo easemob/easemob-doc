@@ -6,7 +6,7 @@
 
 当客户端应用进程被关闭等原因导致用户离线，环信即时通讯 IM 服务会通过第三方厂商的消息推送服务向该离线用户的设备推送消息通知。当用户再次上线时，会收到离线期间所有消息。
 
-目前支持的手机厂商推送服务包括：华为、小米、魅族、OPPO、VIVO、GOOGLE，本文以集成小米、华为的消息推送服务为例，介绍如何在客户端应用中实现消息推送。
+目前支持的手机厂商推送服务包括：华为、小米、魅族、OPPO、VIVO、GOOGLE。本文以集成小米、华为的消息推送服务为例，介绍如何在客户端应用中实现消息推送。
 
 ## 技术原理
 
@@ -229,8 +229,10 @@ EMClient.getInstance().init(this, options);
 2. 上传推送证书<br/>
     注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **华为**，然后输入你在 华为开发者后台创建的[应用信息中的 APP ID 和 SecretKey 以及程序的包名](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section125831926193110)。
 3. 华为推送集成<br/>
-    - 3.1 集成 HMS Core SDK，参见 [华为官网集成文档](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-integrating-sdk-0000001050040084)。
-    - 3.2 注册继承自 `HmsMessageService` 的服务到 `AndroidManifest.xml` 中。
+    3.1 集成 HMS Core SDK，参见 [华为官网集成文档](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-integrating-sdk-0000001050040084)。
+
+    3.2 注册继承自 `HmsMessageService` 的服务到 `AndroidManifest.xml` 中。
+
     ```xml
     <!--华为 HMS Config-->
     <service android:name=".service.HMSPushService"
@@ -241,8 +243,10 @@ EMClient.getInstance().init(this, options);
     </service>
     <!-- huawei push end -->
     ```
-    - 3.3 [获取 Token 及 自动初始化](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-client-dev-0000001050042041)。
-    - 3.4 在 SDK 初始化的时候，配置启用华为推送。
+    3.3 [获取 Token 及 自动初始化](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-client-dev-0000001050042041)。
+
+    3.4 在 SDK 初始化的时候，配置启用华为推送。
+
     ```java
     EMOptions options = new EMOptions();
     ...
@@ -259,14 +263,18 @@ EMClient.getInstance().init(this, options);
 
 环信即时通讯 IM SDK 中已经集成了小米推送（基于 `MiPush_SDK_Client_3_6_12.jar`）相关逻辑，你还需要完成以下步骤：
 
-1. 在小米开发者站创建应用
+1. 在小米开发者站创建应用</br>
    在 [小米开发者站](http://developer.xiaomi.com/) 创建应用，并开启 push 服务，具体可以看下小米官方介绍： [推送服务接入指南](https://dev.mi.com/console/doc/detail?pId=68)。
-2. 上传推送证书
+
+2. 上传推送证书</br>
    注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 小米，然后输入你在 [小米开发者站](http://developer.xiaomi.com/) 创建的应用信息中的 App ID 和 Secret Key 以及程序的包名。
-3. 小米推送集成
+
+3. 小米推送集成</br>
 
    3.1 下载 [小米推送 SDK](http://dev.xiaomi.com/mipush/downpage/) ，将 Jar 包添加到项目中。
+
    3.2 配置 `AndroidManifest.xml`，详见 [官方文档](https://dev.mi.com/console/doc/detail?pId=41#_0_0) 。
+
    - 推送服务需要的权限列表：
 
    ```xml
@@ -330,7 +338,7 @@ EMClient.getInstance().init(this, options);
    </receiver>
    ```
 
-   - 3.3 自定义一个继承自环信即时通讯 IM SDK 中 **EMMiMsgReceiver** 类的 `BroadcastReceiver`，并进行注册：
+   3.3 自定义一个继承自环信即时通讯 IM SDK 中 **EMMiMsgReceiver** 类的 `BroadcastReceiver`，并进行注册：
 
    ```xml
    <receiver android:name=".common.receiver.MiMsgReceiver">
@@ -346,7 +354,7 @@ EMClient.getInstance().init(this, options);
    </receiver>
    ```
 
-   - 3.4 在 SDK 初始化的时候，配置启用小米推送。
+   3.4 在 SDK 初始化的时候，配置启用小米推送。
 
    ```java
    EMOptions options = new EMOptions();
@@ -363,16 +371,20 @@ EMClient.getInstance().init(this, options);
 
 环信即时通讯 IM SDK 中已经集成了 OPPO 推送相关逻辑，你还需要完成以下步骤：
 
-1. 在 OPPO 开发者后台创建应用
-   - 在 OPPO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下 OPPO 官方介绍：[ OPPO 推送服务集成](https://open.oppomobile.com/new/developmentDoc/info?id=10195)
-2. 上传推送证书
-   - 注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **OPPO**，然后输入你在 [OPPO 开发者后台](https://open.oppomobile.com/service/oms?service_id=1000004&app_type=app&app_id=30004346)创建的应用的 `appkey` 和 `mastersecret` 以及程序的 `包名`，MasterSecret 需要到 [OPPO 推送平台](https://push.oppo.com/) - **配置管理** - **应用配置** 页面查看。
+1. 在 OPPO 开发者后台创建应用</br>
+   在 OPPO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下 OPPO 官方介绍：[ OPPO 推送服务集成](https://open.oppomobile.com/new/developmentDoc/info?id=10195)
+
+2. 上传推送证书</br>
+
+   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **OPPO**，然后输入你在 [OPPO 开发者后台](https://open.oppomobile.com/service/oms?service_id=1000004&app_type=app&app_id=30004346)创建的应用的 `appkey` 和 `mastersecret` 以及程序的 `包名`，MasterSecret 需要到 [OPPO 推送平台](https://push.oppo.com/) - **配置管理** - **应用配置** 页面查看。
+
 3. OPPO 推送集成
 
-   - 3.1 配置 OPPO 推送 jar 包：去 OPPO 推送官网下载推送 SDK 包，把 jar 包放到 libs 目录下并 sync 。也可以直接使用环信 Android IM Demo 中集成的 OPPO 推送的 jar 包。
-   - 3.2 配置 `AndroidManifest.xml`。
+   3.1 配置 OPPO 推送 jar 包：去 OPPO 推送官网下载推送 SDK 包，把 jar 包放到 libs 目录下并 sync 。也可以直接使用环信 Android IM Demo 中集成的 OPPO 推送的 jar 包。
 
-     - `OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q上接收 OPPO 推送需要升级环信 SDK 到 3.7.1 以及之后的版本，并使用 OPPO 推送 2.1.0 的包。从 3.9.1 版本开始，升级 OPPO 推送版本到 3.0.0`
+   3.2 配置 `AndroidManifest.xml`。
+
+     `OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q上接收 OPPO 推送需要升级环信 SDK 到 3.7.1 以及之后的版本，并使用 OPPO 推送 2.1.0 的包。从 3.9.1 版本开始，升级 OPPO 推送版本到 3.0.0`
      - 推送服务需要的权限列表：
 
      ```xml
@@ -405,7 +417,7 @@ EMClient.getInstance().init(this, options);
      <!-- OPPO 推送配置 end -->
      ```
 
-   - 3.3 在 SDK 初始化的时候，配置启用 OPPO 推送
+   3.3 在 SDK 初始化的时候，配置启用 OPPO 推送
 
    ```java
    EMOptions options = new EMOptions();
@@ -418,7 +430,7 @@ EMClient.getInstance().init(this, options);
    EMClient.getInstance().init(this, options);
    ```
 
-   - 3.4 调用 OPPO 推送的初始化
+   3.4 调用 OPPO 推送的初始化
 
    ```java
    HeytapPushManager.init(context, true);
@@ -428,14 +440,17 @@ EMClient.getInstance().init(this, options);
 
 环信即时通讯 IM SDK 中已经集成了 VIVO 推送（基于 `vivo_push_v2.3.1.jar`）相关逻辑，你还需要完成以下步骤：
 
-1. 在 VIVO 开发者后台创建应用
-   - 在 VIVO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下 VIVO 官方介绍：[ VIVO 推送服务集成](https://dev.vivo.com.cn/documentCenter/doc/281)
-2. 上传推送证书
-   - 注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **VIVO**，然后输入你在 [VIVO 开发者后台](https://vpush.vivo.com.cn/#/appdetail)创建的应用的 `APP ID`，`APP KEY` 和 `APP SECRET` 以及程序的 `包名`。
+1. 在 VIVO 开发者后台创建应用</br>
+   在 VIVO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下 VIVO 官方介绍：[ VIVO 推送服务集成](https://dev.vivo.com.cn/documentCenter/doc/281)。
+
+2. 上传推送证书</br>
+   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **VIVO**，然后输入你在 [VIVO 开发者后台](https://vpush.vivo.com.cn/#/appdetail)创建的应用的 `APP ID`，`APP KEY` 和 `APP SECRET` 以及程序的 `包名`。
+
 3. VIVO 推送集成
 
-   - 3.1 配置 VIVO 推送 jar 包： 去 VIVO 推送官网下载推送 SDK 包，把 jar 包放到 libs 目录下并 sync 。也可以直接使用环信 Android IM Demo 中集成的 VIVO 推送的 jar 包。
-   - 3.2 配置 `AndroidManifest.xml` 。
+   3.1 配置 VIVO 推送 jar 包： 去 VIVO 推送官网下载推送 SDK 包，把 jar 包放到 libs 目录下并 sync 。也可以直接使用环信 Android IM Demo 中集成的 VIVO 推送的 jar 包。
+
+   3.2 配置 `AndroidManifest.xml` 。
 
      - 推送服务需要的 service 和 receiver，并且需要配置 VIVO 的 app_id 和 app_key：
 
@@ -474,7 +489,7 @@ EMClient.getInstance().init(this, options);
      <!-- VIVO 推送配置 end -->
      ```
 
-   - 3.3 在 SDK 初始化的时候，配置启用 VIVO 推送
+   3.3 在 SDK 初始化的时候，配置启用 VIVO 推送
 
    ```java
    EMOptions options = new EMOptions();
@@ -487,19 +502,21 @@ EMClient.getInstance().init(this, options);
    EMClient.getInstance().init(this, options);
    ```
 
-   - 3.4 VIVO 设备安装应用后默认没有打开允许通知权限，测试前请先去设置中打开该应用的允许通知权限。
+   3.4 VIVO 设备安装应用后默认没有打开允许通知权限，测试前请先去设置中打开该应用的允许通知权限。
 
 [VIVO 推送官方文档](https://dev.vivo.com.cn/documentCenter/doc/158)
 
 #### 魅族推送集成
 
-1. 在魅族开发者后台创建应用
-   - 在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下魅族官方介绍：[Flyme 推送服务集成](http://open-wiki.flyme.cn/index.php?title=Flyme推送接入文档)
+1. 在魅族开发者后台创建应用</br>
+   在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下魅族官方介绍：[Flyme 推送服务集成](http://open-wiki.flyme.cn/index.php?title=Flyme推送接入文档)。
+
 2. 上传推送证书
-   - 注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 魅族，然后输入你在[ flyme 推送平台](http://push.meizu.com/#/config/app?appId=8843&_k=dnrz9k)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
+   -注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 魅族，然后输入你在[ flyme 推送平台](http://push.meizu.com/#/config/app?appId=8843&_k=dnrz9k)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
+
 3. 魅族推送集成
 
-   - 3.1 配置魅族推送 jar 包：
+   3.1 配置魅族推送 jar 包：
      在 app level/build.gradle 中添加依赖。
 
    ```gradle
@@ -509,7 +526,7 @@ EMClient.getInstance().init(this, options);
    }
    ```
 
-   - 3.2 配置 `AndroidManifest.xml`。
+   3.2 配置 `AndroidManifest.xml`。
 
      - 推送服务需要的权限列表：
 
@@ -555,7 +572,7 @@ EMClient.getInstance().init(this, options);
      <!-- MEIZU 推送配置 end -->
      ```
 
-   - 3.3 在 SDK 初始化的时候，配置启用魅族推送。
+   3.3 在 SDK 初始化的时候，配置启用魅族推送。
 
    ```java
    EMOptions options = new EMOptions();

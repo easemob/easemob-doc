@@ -31,7 +31,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 可以使用如下代码创建账号：
 
-```Objective-C
+```objectivec
 // 异步方法 
 [[EMClient sharedClient] registerWithUsername:@"username"
                                          password:@"your password"
@@ -60,7 +60,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
-```Objective-C
+```objectivec
 // 异步方法 
 [[EMClient sharedClient] loginWithUsername:@"username"
                                      password:@"your password"
@@ -73,7 +73,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 **用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
-```Objective-C
+```objectivec
 // 异步方法 
 [EMClient.sharedClient loginWithUsername:@"username" token:@"token" completion:^(NSString * _Nonnull aUsername, EMError * _Nullable aError) {
         
@@ -82,7 +82,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 **用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般用于同时使用声网和环信产品的情况。token 获取请参考 [使用 token 鉴权](https://docs.agora.io/en/agora-chat/develop/authentication?platform=android)。
 
-```Objective-C
+```objectivec
 // 异步方法 
 [EMClient.sharedClient loginWithUsername:@"username" agoraToken:@"agoraToken" completion:^(NSString * _Nonnull aUsername, EMError * _Nullable aError) {
             
@@ -95,7 +95,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 自动登录完成后，触发 `EMClientDelegate` 中的以下回调：
 
-```Objective-C
+```objectivec
 - (void)autoLoginDidCompleteWithError:(EMError * _Nullable)aError
 {
 }
@@ -103,7 +103,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 ## 退出登录
 
-```Objective-C
+```objectivec
 // 异步方法 
 [EMClient.sharedClient logout:YES completion:^(EMError * _Nullable aError) {
         
@@ -114,7 +114,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 你可以通过注册连接监听 `EMClientDelegate` 确认连接状态。
 
-```Objective-C
+```objectivec
 - viewDidLoad
 {
     ...
@@ -152,7 +152,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 你可以通过监听 `EMClientDelegate` 中的以下回调，调用 `EMClient#logout:completion:`  退出登录并返回登录界面。
 
-```
+```objectivec
 // 当前登录账号在其它设备登录时会触发回调
 - (void)userAccountDidLoginFromOtherDevice
 {
@@ -178,7 +178,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 SDK 默认的日志输出级别为 `DEBUG`，开发阶段如果希望在环信即时通讯云管理后台上输出 SDK 日志，可在 SDK 初始化时开启以下开关：
 
-```Objective-C
+```objectivec
 EMOptions* option = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 // 日志输出到环信即时通讯管理后台
 option.enableConsoleLog = YES;
