@@ -419,7 +419,7 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 以下示例代码展示如何发送输入状态的透传消息。
 
-```C#
+```csharp
 //发送表示正在输入的透传消息
 string msgTypingBegin = "TypingBegin";
 
@@ -445,7 +445,7 @@ void _sendBeginTyping() {
 
 以下示例代码展示如何接受和解析输入状态的透传消息。
 
-```C#
+```csharp
 int typingTime = 10;
 
 void OnCmdMessagesReceived(List<Message> list) {

@@ -37,7 +37,7 @@
 
 示例代码：
 
-```C#
+```csharp
 //创建一条文本消息，`content` 为消息文字内容，`toChatUsername` 为对方用户或者群聊的 ID，后文皆是如此。
 Message msg = Message.CreateTextSendMessage(toChatUsername, content);
 
@@ -66,7 +66,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 在新消息到来时，你会收到 `OnMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
-```C#
+```csharp
 //继承并实现 IChatManagerDelegate。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -89,7 +89,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 消息发送后 2 分钟之内，消息的发送方可以撤回该消息。如果需要调整可撤回时限，可以联系商务。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.RecallMessage("Message ID", new CallBack(
   onSuccess: () => {
     Debug.Log("回撤成功");
@@ -105,7 +105,7 @@ SDKClient.Instance.ChatManager.RecallMessage("Message ID", new CallBack(
 
 还可以使用 `IChatManagerDelegate` 设置消息撤回监听：
 
-```C#
+```csharp
 // 接收到消息被撤回时触发此回调（此回调位于 IChatManagerDelegate 中）。
 void OnMessagesRecalled(List<Message> messages);
 ```
@@ -120,7 +120,7 @@ void OnMessagesRecalled(List<Message> messages);
 
 参考如下示例代码创建并发送语音消息：
 
-```C#
+```csharp
 // localPath 为语音文件的本地资源路径，`displayName` 为消息显示名称，语音消息可以设置为空 ""。
 // fileSize 为语音文件大小，duration 为语音时长（秒）。
 Message msg = Message.CreateVoiceSendMessage(toChatUsername, localPath, displayName, fileSize, duration);
@@ -147,7 +147,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 接收方收到语音消息后，参考如下示例代码获取语音消息的附件：
 
-```C#
+```csharp
 // 注意：这里的 "Message ID" 是消息发送成功以后（CallBack 中的 onSuccess 被触发以后），被发送消息的 ID。
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
 if (msg != null)
@@ -171,7 +171,7 @@ else {
 
 参考如下示例代码，创建并发送图片消息：
 
-```C#
+```csharp
 //`localPath` 为图片本地资源路径。
 //`displayName` 为图片显示名称。
 //`fileSize` 为用户上传的图片文件大小，单位为字节。
@@ -200,7 +200,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 接收方收到图片消息后，参考如下示例代码获取图片消息的缩略图和附件：
 
-```C#
+```csharp
 //注意：这里的 "Message ID" 是消息发送成功以后（`CallBack` 中的 `onSuccess` 被触发以后），被发送消息的 ID。
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
 if (msg != null)
@@ -235,7 +235,7 @@ else {
 
 参考如下示例代码，创建并发送短视频消息：
 
-```C#
+```csharp
 Message msg = Message.CreateVideoSendMessage(toChatUsername, localPath, displayName, thumbnailLocalPath, fileSize, duration, width, height);
 
 //发送消息。
@@ -261,7 +261,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 短视频文件本身需要通过 `SDKClient.Instance.ChatManager.DownloadAttachment` 下载，下载完成后，使用相应消息 `Body` 的 `LocalPath` 成员获取短视频文件路径。
 
-```C#
+```csharp
 // 接收到视频消息需先下载附件才能打开。
 SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
   onSuccess: () => {
@@ -295,7 +295,7 @@ SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
 
 参考如下示例代码创建并发送文件消息：
 
-```C#
+```csharp
 // localPath 为文件本地路径，displayName 为消息显示名称，fileSize 为文件大小。
 Message msg = Message.CreateFileSendMessage(toChatUsername,localPath, displayName, fileSize);
 
@@ -341,7 +341,7 @@ else {
 
 当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
-```C#
+```csharp
 //`latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容，`buildingName` 为建筑名称。
 Message msg = Message.CreateLocationSendMessage(toChatUsername, latitude, longitude, locationAddress, buildingName);
 
@@ -359,7 +359,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
 
-```C#
+```csharp
 //`action` 可以自定义。
 string action = "actionXXX";
 Message msg = Message.CreateCmdSendMessage(toChatUsername, action);
@@ -375,7 +375,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
 
-```C#
+```csharp
 // 继承并实现 `IChatManagerDelegate`。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -419,7 +419,7 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 以下示例代码展示如何发送输入状态的透传消息。
 
-```C#
+```csharp
 //发送表示正在输入的透传消息
 string msgTypingBegin = "TypingBegin";
 
@@ -445,7 +445,7 @@ void _sendBeginTyping() {
 
 以下示例代码展示如何接受和解析输入状态的透传消息。
 
-```C#
+```csharp
 int typingTime = 10;
 
 void OnCmdMessagesReceived(List<Message> list) {

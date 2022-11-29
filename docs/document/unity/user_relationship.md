@@ -43,7 +43,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 调用 `AddContact` 添加指定用户为联系人示例代码如下：：
 
-```C#
+```csharp
 //username 为要添加的联系人的用户名，reason 为添加原因
 SDKClient.Instance.ContactManager.AddContact(username, reason, handle: new CallBack(
   onSuccess: () =>
@@ -61,7 +61,7 @@ SDKClient.Instance.ContactManager.AddContact(username, reason, handle: new CallB
 
 请监听与好友请求相关事件的回调，这样当用户收到好友请求，可以调用接受请求的 RESTful API 添加好友。服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。设置监听示例代码如下：
 
-```C#
+```csharp
 //继承并实现 IContactManagerDelegate。
 public class ContactManagerDelegate : IContactManagerDelegate {
     // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 A 收到该事件，而用户 B 收到 `onContactAgreed` 事件。
@@ -98,7 +98,7 @@ SDKClient.Instance.ContactManager.RemoveContactManagerDelegate(adelegate);
 
 收到后 `OnContactInvited`，调用 `AcceptInvitation` 或 `DeclineInvitation` 接受或拒绝邀请。
 
-```C#
+```csharp
 //同意好友请求。
 SDKClient.Instance.ContactManager.AcceptInvitation(username, handle: new CallBack(
    onSuccess: () =>
@@ -126,7 +126,7 @@ SDKClient.Instance.ContactManager.DeclineInvitation(username, handle: new CallBa
 
 调用 `DeleteContact` 删除指定联系人。被删除的用户收到 `OnContactDeleted` 回调。删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
-```C#
+```csharp
 SDKClient.Instance.ContactManager.DeleteContact(username, handle: new CallBack(
   onSuccess: () =>
   {
@@ -149,7 +149,7 @@ SDKClient.Instance.ContactManager.DeleteContact(username, handle: new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 //从服务器获取好友列表。
 SDKClient.Instance.ContactManager.GetAllContactsFromServer(new ValueCallBack<List<string>>(
   onSuccess: (list) =>
@@ -174,7 +174,7 @@ List<string>list = SDKClient.Instance.ContactManager.GetAllContactsFromDB();
 
 你可以调用 `AddUserToBlockList` 添加用户到黑名单，示例代码如下：
 
-```C#
+```csharp
 //将好友拉入黑名单后，用户依然可以向该好友发送消息，但无法接收该好友发送的消息。
 SDKClient.Instance.ContactManager.AddUserToBlockList(username, handle: new CallBack(
   onSuccess: () =>
@@ -190,7 +190,7 @@ SDKClient.Instance.ContactManager.AddUserToBlockList(username, handle: new CallB
 
 你可以调用 `RemoveUserFromBlockList` 将用户从黑名单移除，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.ContactManager.RemoveUserFromBlockList(username, handle: new CallBack(
   onSuccess: () =>
   {
@@ -205,7 +205,7 @@ SDKClient.Instance.ContactManager.RemoveUserFromBlockList(username, handle: new 
 
 你可以调用 `GetBlockListFromServer` 从服务端获取黑名单列表。示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.ContactManager.GetBlockListFromServer(new ValueCallBack<List<string>>(
   onSuccess: (list) =>
   {

@@ -47,14 +47,14 @@
 
 1. 发送方若要接收消息送达回执，你需要将 `Options` 中的 `RequireDeliveryAck` 设为 `true`。当接收方收到消息后，SDK 底层会自动进行消息送达回执。
 
-```C#
+```csharp
 // 设置是否需要消息送达回执，设为 `true`。
 Options.RequireDeliveryAck = true;
 ```
 
 2. 发送方监听事件 `OnMessagesDelivered` 回调，收到接收方的送达回执。
 
-```C#
+```csharp
 // 继承并实现 `IChatManagerDelegate`。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -85,7 +85,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 第一步是在设置中打开已读回执开关：
 
-```C#
+```csharp
 // 设置是否需要消息已读回执，设为 `true`。
 Options.RequireReadAck = true;
 ```
@@ -98,7 +98,7 @@ Options.RequireReadAck = true;
 
 消息接收方进入会话页面，查看会话中是否有未读消息。若有，发送会话已读回执，没有则不再发送。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.SendConversationReadAck(conversationId, new CallBack(
   onSuccess: () => {
 
@@ -111,7 +111,7 @@ SDKClient.Instance.ChatManager.SendConversationReadAck(conversationId, new CallB
 
 2. 消息发送方监听会话已读回执的回调。
 
-```C#
+```csharp
 // 继承并实现 `IChatManagerDelegate`。
 public class ChatManagerDelegate : IChatManagerDelegate {
     // 收到已读回执。`from` 表示发送该会话已读回执的消息接收方，`to` 表示收到该会话已读回执的消息发送方。
@@ -138,7 +138,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 消息接收方进入会话时，发送会话已读回执。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.SendConversationReadAck(conversationId, new CallBack(
   onSuccess: () => {
 
@@ -151,7 +151,7 @@ SDKClient.Instance.ChatManager.SendConversationReadAck(conversationId, new CallB
 
 2.在会话页面，接收到消息时，根据消息类型发送消息已读回执，如下所示：
 
-```C#
+```csharp
 // 继承并实现 `IChatManagerDelegate`。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -200,7 +200,7 @@ public void sendReadAck(Message message) {
 
 你可以调用接口监听指定消息是否已读，示例代码如下：
 
-```C#
+```csharp
 // 继承并实现 `IChatManagerDelegate`。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -223,14 +223,14 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 1. 消息发送方在发送消息时，设置 `Message` 的 `IsNeedGroupAck` 为 `true`。
 
-```C#
+```csharp
 Message msg = Message.CreateTextSendMessage("to", "hello world");
 msg.IsNeedGroupAck = true;
 ```
 
 2. 消息接收方发送群组消息的已读回执。
 
-```C#
+```csharp
 void SendReadAckForGroupMessage(string messageId, string ackContent)
 {
     SDKClient.Instance.ChatManager.SendReadAckForGroupMessage(messageId, ackContent，handle: new CallBack(
@@ -250,7 +250,7 @@ void SendReadAckForGroupMessage(string messageId, string ackContent)
 
 群组消息已读回调在消息监听类 `IChatManagerDelegate` 中实现。
 
-```C#
+```csharp
 // 继承并实现 `IChatManagerDelegate`。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -270,7 +270,7 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 你可以调用 `FetchGroupReadAcks` 获取群组消息的已读回执的详情，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.FetchGroupReadAcks(messageId, groupId, startAckId, pageSize, new ValueCallBack<List<GroupReadAck>>(
     onSuccess: (list) =>
     {

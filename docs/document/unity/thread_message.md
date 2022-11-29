@@ -44,7 +44,7 @@
 
 示例代码如下：
 
-```C#
+```csharp
 // 创建一条文本消息，`content` 为消息文字内容，`chatThreadId` 为子区 ID。
 Message msg = Message.CreateTextSendMessage(chatThreadId, content);
 // 设置消息类型，子区消息需要将 `ChatType` 设置为 `GroupChat`。
@@ -73,7 +73,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 //继承并实现 IChatManagerDelegate。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -100,7 +100,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 示例代码如下：
 
-```C#
+```csharp
 //继承并实现 IChatManagerDelegate。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -131,7 +131,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 调用 `EMChatManager#getAllConversations()` 会返回单聊和群聊的会话，不会返回子区会话，你可以从本地数据库中读取指定会话的消息：
 
-```C#
+```csharp
 // 需要指定会话类型为 `ConversationType.Group`，且 `isChatThread` 设置为 `true`
 Conversation conversation = SDKClient.Instance.ChatManager.GetConversation(chatThreadId, EMConversationType.GroupChat, createIfNotExists, isChatThread);
 // 如需处理本地数据库中消息，用以下方法到数据库中获取，SDK 会将这些消息自动存入此会话

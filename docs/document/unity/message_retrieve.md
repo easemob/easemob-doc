@@ -33,7 +33,7 @@
 2. 获取的会话列表中不包含最新一条消息通过 RESTful 接口发送的会话。若需获取该类会话，需要联系商务开通将通过 RESTful 接口发送的消息写入会话列表的功能。
 :::
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.GetConversationsFromServer(new ValueCallBack<List<Conversation>>(
     //获取会话成功后的处理逻辑。
     //list 为 List<Conversation> 类型。
@@ -54,7 +54,7 @@ SDKClient.Instance.ChatManager.GetConversationsFromServer(new ValueCallBack<List
 
 为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(conversationId, type, startId, pageSize, new ValueCallBack<CursorResult<Message>>(
     // 获取历史消息成功。
     // result 为 CursorResult<Message> 类型。
