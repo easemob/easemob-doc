@@ -3,5 +3,5 @@ layout: ApiLayout
 ---
 
 ::: button-group
-[Web SDK API](https://webim-h5.easemob.com/jsdoc/out/index.html)
+[Web SDK API](https://docs-im-beta.easemob.com/jsdoc/index.html)
 :::

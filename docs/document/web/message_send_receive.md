@@ -48,26 +48,30 @@
 ```javascript
 // 发送文本消息。
 function sendTextMessage() {
-    let option = {
-        // 设置消息类型。
-        type: "txt",
-        // 设置消息内容。
-        msg: "message content",
-        // 设置消息接收方，单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-        to: "username",
-        // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`，默认为单聊。
-        chatType: "singleChat",
-    };
-    // 创建文本消息。
-    let msg = WebIM.message.create(opt);
-    // 调用 `send` 方法发送该文本消息。
-    conn.send(msg).then(()=>{
-        console.log("Send message success");
-    }).catch((e)=>{
-        console.log("Send message fail");
+  let option = {
+    // 设置消息类型。
+    type: "txt",
+    // 设置消息内容。
+    msg: "message content",
+    // 设置消息接收方，单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "username",
+    // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`，默认为单聊。
+    chatType: "singleChat",
+  };
+  // 创建文本消息。
+  let msg = WebIM.message.create(opt);
+  // 调用 `send` 方法发送该文本消息。
+  conn
+    .send(msg)
+    .then(() => {
+      console.log("Send message success");
+    })
+    .catch((e) => {
+      console.log("Send message fail");
     });
 }
 ```
+
 对于聊天室消息，可设置消息优先级。示例代码如下：
 
 ```javascript
@@ -98,57 +102,57 @@ function sendTextMessage() {
 
 ```javascript
 // 使用 `addEventHandler` 监听回调事件
-conn.addEventHandler("eventName",{
-    // SDK 与环信服务器连接成功。
-    onConnected: function (message) {},
-    // SDK 与环信服务器断开连接。
-    onDisconnected: function (message) {},
-    // 当前用户收到文本消息。
-    onTextMessage: function (message) {},
-    // 当前用户收到图片消息。
-    onImageMessage: function (message) {},
-    // 当前用户收到透传消息。
-    onCmdMessage: function (message) {},
-    // 当前用户收到语音消息。
-    onAudioMessage: function (message) {},
-    // 当前用户收到位置消息。
-    onLocationMessage: function (message) {},
-    // 当前用户收到文件消息。
-    onFileMessage: function (message) {},
-    // 当前用户收到自定义消息。
-    onCustomMessage: function (message) {},
-    // 当前用户收到视频消息。
-    onVideoMessage: function (message) {},
-    // 当前用户订阅的其他用户的在线状态更新。
-    onPresence: function (message) {},
-    // 当前用户收到好友邀请。
-    onContactInvited: function(msg){},
-    // 联系人被删除。
-    onContactDeleted: function(msg){},
-    // 新增联系人。
-    onContactAdded: function(msg){},
-    // 当前用户发送的好友请求被拒绝。
-    onContactRefuse: function(msg){},
-    // 当前用户发送的好友请求被同意。
-    onContactAgreed: function(msg){},
-    // 当前用户收到群组邀请。
-    onGroupEvent: function (message) {},
-    // 本机网络连接成功。
-    onOnline: function () {},
-    // 本机网络掉线。
-    onOffline: function () {},
-    // 调用过程中出现错误。
-    onError: function (message) {},
-    // 当前用户收到的消息被消息发送方撤回。
-    onRecallMessage: function (message) {},
-    // 当前用户发送的消息被接收方收到。
-    onReceivedMessage: function (message) {},
-    // 当前用户收到消息送达回执。
-    onDeliveredMessage: function (message) {},
-    // 当前用户收到消息已读回执。
-    onReadMessage: function (message) {},
-    // 当前用户收到会话已读回执。
-    onChannelMessage: function (message) {},
+conn.addEventHandler("eventName", {
+  // SDK 与环信服务器连接成功。
+  onConnected: function (message) {},
+  // SDK 与环信服务器断开连接。
+  onDisconnected: function (message) {},
+  // 当前用户收到文本消息。
+  onTextMessage: function (message) {},
+  // 当前用户收到图片消息。
+  onImageMessage: function (message) {},
+  // 当前用户收到透传消息。
+  onCmdMessage: function (message) {},
+  // 当前用户收到语音消息。
+  onAudioMessage: function (message) {},
+  // 当前用户收到位置消息。
+  onLocationMessage: function (message) {},
+  // 当前用户收到文件消息。
+  onFileMessage: function (message) {},
+  // 当前用户收到自定义消息。
+  onCustomMessage: function (message) {},
+  // 当前用户收到视频消息。
+  onVideoMessage: function (message) {},
+  // 当前用户订阅的其他用户的在线状态更新。
+  onPresence: function (message) {},
+  // 当前用户收到好友邀请。
+  onContactInvited: function (msg) {},
+  // 联系人被删除。
+  onContactDeleted: function (msg) {},
+  // 新增联系人。
+  onContactAdded: function (msg) {},
+  // 当前用户发送的好友请求被拒绝。
+  onContactRefuse: function (msg) {},
+  // 当前用户发送的好友请求被同意。
+  onContactAgreed: function (msg) {},
+  // 当前用户收到群组邀请。
+  onGroupEvent: function (message) {},
+  // 本机网络连接成功。
+  onOnline: function () {},
+  // 本机网络掉线。
+  onOffline: function () {},
+  // 调用过程中出现错误。
+  onError: function (message) {},
+  // 当前用户收到的消息被消息发送方撤回。
+  onRecallMessage: function (message) {},
+  // 当前用户发送的消息被接收方收到。
+  onReceivedMessage: function (message) {},
+  // 当前用户收到消息送达回执。
+  onDeliveredMessage: function (message) {},
+  // 当前用户收到消息已读回执。
+  onReadMessage: function (message) {},
+  // 当前用户收到会话已读回执。
+  onChannelMessage: function (message) {},
 });
 ```
 
@@ -211,50 +215,53 @@ SDK 接收到附件消息时，会执行以下步骤：
 ```javascript
 function sendPrivateAudio() {
   // 获取语音文件。
-  let input = document.getElementById('audio');
+  let input = document.getElementById("audio");
   let file = WebIM.utils.getFileUrl(input);
   let allowType = {
-      'mp3': true,
-      'amr': true,
-      'wmv': true
+    mp3: true,
+    amr: true,
+    wmv: true,
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
       // 设置消息类型。
-      type: 'audio',
+      type: "audio",
       file: file,
       // 设置语音文件长度，单位为秒。
-      length: '3',
+      length: "3",
       // 设置消息接收方的用户 ID。
-      to: 'username',
+      to: "username",
       // 设置会话类型。
-      chatType: 'singleChat',
+      chatType: "singleChat",
       // 语音文件上传失败。
       onFileUploadError: function () {
-          console.log('onFileUploadError');
+        console.log("onFileUploadError");
       },
       // 语音文件上传进度。
       onFileUploadProgress: function (e) {
-          console.log(e)
+        console.log(e);
       },
       // 语音文件上传成功。
       onFileUploadComplete: function () {
-          console.log('onFileUploadComplete');
+        console.log("onFileUploadComplete");
       },
-      ext: {file_length: file.data.size}
+      ext: { file_length: file.data.size },
     };
     // 创建一条语音消息。
     let msg = WebIM.message.create(option);
     // 调用 `send` 方法发送该语音消息。
-    conn.send(msg).then((res)=>{
-      // 语音文件成功发送。
-      console.log('Success');
-    }).catch((e)=>{
-      // 语音文件发送失败。
-      console.log("Fail");
-    });
+    conn
+      .send(msg)
+      .then((res) => {
+        // 语音文件成功发送。
+        console.log("Success");
+      })
+      .catch((e) => {
+        // 语音文件发送失败。
+        console.log("Fail");
+      });
   }
-};
+}
 ```
 
 #### 发送图片消息
@@ -275,11 +282,11 @@ function sendPrivateImg() {
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
       // 设置消息类型。
-      type: 'img',
+      type: "img",
       file: file,
       ext: {
-          // 设置图片文件长度，单位为字节。
-          file_length: file.data.size,
+        // 设置图片文件长度，单位为字节。
+        file_length: file.data.size,
       },
       // 设置消息接收方的用户 ID。
       to: "username",
@@ -287,51 +294,54 @@ function sendPrivateImg() {
       chatType: "singleChat",
       // 图片文件上传失败。
       onFileUploadError: function () {
-          console.log("onFileUploadError");
+        console.log("onFileUploadError");
       },
       // 图片文件上传进度。
       onFileUploadProgress: function (e) {
-          console.log(e);
+        console.log(e);
       },
       // 图片文件上传成功。
       onFileUploadComplete: function () {
-          console.log("onFileUploadComplete");
+        console.log("onFileUploadComplete");
       },
     };
     // 创建一条图片消息。
     let msg = WebIM.message.create(option);
     // 调用 `send` 方法发送该图片消息。
-    conn.send(msg).then((res)=>{
-      // 图片文件成功发送。
-      console.log('Success');
-    }).catch((e)=>{
-      // 图片文件发送失败。
-      console.log("Fail");
-    });
+    conn
+      .send(msg)
+      .then((res) => {
+        // 图片文件成功发送。
+        console.log("Success");
+      })
+      .catch((e) => {
+        // 图片文件发送失败。
+        console.log("Fail");
+      });
   }
-};
+}
 ```
 
 #### 发送 URL 图片消息
 
-发送 URL 图片消息之前，确保在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](http://webim-h5.easemob.com/jsdoc/out/classes/Connection.Connection-1.html)设置为 `true`。
+发送 URL 图片消息之前，确保在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](http://docs-im-beta.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。
 
 ```javascript
 function sendPrivateUrlImg() {
   let option = {
-      chatType: 'singleChat',
-      // 设置消息类型。
-      type: "img",
-      // 设置图片文件的 URL 地址。
-      url: "img url",
-      // 设置消息接收方的用户 ID。
-      to: "username",
+    chatType: "singleChat",
+    // 设置消息类型。
+    type: "img",
+    // 设置图片文件的 URL 地址。
+    url: "img url",
+    // 设置消息接收方的用户 ID。
+    to: "username",
   };
   // 创建一条图片消息。
   let msg = WebIM.message.create(option);
   //  调用 `send` 方法发送该图片消息。
   conn.send(msg);
-};
+}
 ```
 
 #### 发送视频消息
@@ -346,16 +356,16 @@ function sendPrivateVideo() {
   let input = document.getElementById("video");
   let file = WebIM.utils.getFileUrl(input);
   let allowType = {
-      mp4: true,
-      wmv: true,
-      avi: true,
-      rmvb: true,
-      mkv: true,
+    mp4: true,
+    wmv: true,
+    avi: true,
+    rmvb: true,
+    mkv: true,
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
       // 设置消息类型。
-      type: 'video',
+      type: "video",
       file: file,
       // 设置消息接收方的用户 ID。
       to: "username",
@@ -373,20 +383,23 @@ function sendPrivateVideo() {
         // 视频文件上传成功。
         console.log("onFileUploadComplete");
       },
-      ext: {file_length: file.data.size},
+      ext: { file_length: file.data.size },
     };
     // 创建一条视频消息。
     let msg = WebIM.message.create(option);
     // 调用 `send` 方法发送该视频消息。
-    conn.send(msg).then((res)=>{
-      // 视频文件成功发送。
-      console.log('Success')
-    }).catch((e)=>{
-      // 视频文件发送失败。例如，本地用户被禁言或封禁。
-      console.log("Fail");
-    });
+    conn
+      .send(msg)
+      .then((res) => {
+        // 视频文件成功发送。
+        console.log("Success");
+      })
+      .catch((e) => {
+        // 视频文件发送失败。例如，本地用户被禁言或封禁。
+        console.log("Fail");
+      });
   }
-};
+}
 ```
 
 #### 发送文件消息
@@ -399,19 +412,19 @@ function sendPrivateFile() {
   let input = document.getElementById("file");
   let file = WebIM.utils.getFileUrl(input);
   let allowType = {
-      jpg: true,
-      gif: true,
-      png: true,
-      bmp: true,
-      zip: true,
-      txt: true,
-      doc: true,
-      pdf: true,
+    jpg: true,
+    gif: true,
+    png: true,
+    bmp: true,
+    zip: true,
+    txt: true,
+    doc: true,
+    pdf: true,
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
       // 设置消息类型。
-      type: 'file',
+      type: "file",
       file: file,
       // 设置消息接收方的用户 ID。
       to: "username",
@@ -429,20 +442,23 @@ function sendPrivateFile() {
       onFileUploadComplete: function () {
         console.log("onFileUploadComplete");
       },
-      ext: {file_length: file.data.size},
+      ext: { file_length: file.data.size },
     };
-      // 创建一条文件消息。
+    // 创建一条文件消息。
     let msg = WebIM.message.create(option);
-      // 调用 `send` 方法发送该文件消息。
-    conn.send(msg).then((res) => {
-      // 文件消息成功发送。
-      console.log("Success");
-    }).catch((e)=>{
-      // 文件消息发送失败。
-      console.log("Fail");
-    });
+    // 调用 `send` 方法发送该文件消息。
+    conn
+      .send(msg)
+      .then((res) => {
+        // 文件消息成功发送。
+        console.log("Success");
+      })
+      .catch((e) => {
+        // 文件消息发送失败。
+        console.log("Fail");
+      });
   }
-};
+}
 ```
 
 ### 发送透传消息
@@ -452,29 +468,32 @@ function sendPrivateFile() {
 参考以下代码示例发送和接收透传消息：
 
 ```javascript
-function sendCMDMessage(){
+function sendCMDMessage() {
   let option = {
     // 设置消息类型。
-    type: 'cmd',
+    type: "cmd",
     // 设置会话类型，支持单聊、群聊和聊天室。
-    chatType: 'singleChat',
+    chatType: "singleChat",
     // 设置消息接收方的用户 ID。
-    to: 'username',
+    to: "username",
     // 设置自定义动作。对于透传消息，该字段必填。
-    action : 'action',
+    action: "action",
     // 设置消息扩展信息。
-    ext: {key: 'extends messages'}
-  }
+    ext: { key: "extends messages" },
+  };
   // 创建一条透传消息。
   let msg = WebIM.message.create(option);
   // 调用 `send` 方法发送该透传消息。
-  conn.send(msg).then((res)=>{
+  conn
+    .send(msg)
+    .then((res) => {
       // 消息成功发送回调。
-      console.log("Success")
-  }).catch((e)=>{
+      console.log("Success");
+    })
+    .catch((e) => {
       // 消息发送失败回调。
       console.log("Fail");
-  });
+    });
 }
 ```
 
@@ -570,28 +589,31 @@ function sendCustomMsg() {
   // 通过键值对设置自定义消息内容。
   let customExts = {};
   let option = {
-      // 设置消息类型。
-      type: "custom",
-      // 设置消息接收方的用户 ID。
-      to: "username",
-      // 设置会话类型。
-      chatType: "singleChat",
-      customEvent,
-      customExts,
-      // 消息扩展字段，不能设置为空，即设置为 "ext:null" 这种形式会出错。
-      ext: {},
-  }
+    // 设置消息类型。
+    type: "custom",
+    // 设置消息接收方的用户 ID。
+    to: "username",
+    // 设置会话类型。
+    chatType: "singleChat",
+    customEvent,
+    customExts,
+    // 消息扩展字段，不能设置为空，即设置为 "ext:null" 这种形式会出错。
+    ext: {},
+  };
   // 创建一条自定义消息。
   let msg = WebIM.message.create(option);
   // 调用 `send` 方法发送该自定义消息。
-  conn.send(msg).then((res)=>{
+  conn
+    .send(msg)
+    .then((res) => {
       // 消息成功发送回调。
-      console.log("Success")
-  }).catch((e)=>{
+      console.log("Success");
+    })
+    .catch((e) => {
       // 消息发送失败回调。
       console.log("Fail");
-  });
-};
+    });
+}
 ```
 
 ### 使用消息扩展
@@ -600,25 +622,28 @@ function sendCustomMsg() {
 
 ```javascript
 function sendTextMessage() {
-    let option = {
-        type: "txt",
-        msg: "message content",
-        to: "username",
-        chatType: "singleChat",
-        // 设置消息扩展信息。扩展字段为可选，若带有该字段，值不能为空，即 "ext:null" 会出错。
-        ext: {
-            key1: "Self-defined value1",
-            key2: {
-                key3: "Self-defined value3",
-            },
-        }
-    }
-    let msg = WebIM.message.create(option);
-    //  调用 `send` 方法发送该扩展消息。
-    conn.send(msg).then((res)=>{
-        console.log("send private text Success");
-    }).catch((e)=>{
-        console.log("Send private text error");
+  let option = {
+    type: "txt",
+    msg: "message content",
+    to: "username",
+    chatType: "singleChat",
+    // 设置消息扩展信息。扩展字段为可选，若带有该字段，值不能为空，即 "ext:null" 会出错。
+    ext: {
+      key1: "Self-defined value1",
+      key2: {
+        key3: "Self-defined value3",
+      },
+    },
+  };
+  let msg = WebIM.message.create(option);
+  //  调用 `send` 方法发送该扩展消息。
+  conn
+    .send(msg)
+    .then((res) => {
+      console.log("send private text Success");
+    })
+    .catch((e) => {
+      console.log("Send private text error");
     });
 }
 ```

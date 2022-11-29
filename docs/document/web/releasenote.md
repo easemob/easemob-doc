@@ -17,7 +17,7 @@
 
 ### 修复
 
- [IM SDK] 修复附件消息中的 `file_length` 字段不生效的问题。
+[IM SDK] 修复附件消息中的 `file_length` 字段不生效的问题。
 
 ## 版本 V4.1.1 Dev 2022-9-26（开发版）
 
@@ -66,7 +66,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增群组事件回调 [onGroupEvent](https://webim-h5.easemob.com/jsdoc/out/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://webim-h5.easemob.com/jsdoc/out/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
+- [IM SDK] 新增群组事件回调 [onGroupEvent](https://docs-im-beta.easemob.com/jsdoc/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://docs-im-beta.easemob.com/jsdoc/interfaces/Types.EvevtHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
 - [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](error.html)
 - [IM SDK] 邀请加入群聊回调 onGroupChange 返回中新增 群名称 参数值。
 
@@ -205,39 +205,39 @@
 
 ## 版本：v3.4.1 2020-12-24
 
-- [多人音视频] 实现默认使用dns config
-- [多人音视频] 修复1v1 通话没有挂断原因
-- [多人音视频] 修复eletron 共享桌面显示不正常的问题
+- [多人音视频] 实现默认使用 dns config
+- [多人音视频] 修复 1v1 通话没有挂断原因
+- [多人音视频] 修复 eletron 共享桌面显示不正常的问题
 - [多人音视频] 修复 退出会议，会提示别人退出
-- [多人音视频] 修复 Android手机微信内，切换 4g, 画面卡住的问题
+- [多人音视频] 修复 Android 手机微信内，切换 4g, 画面卡住的问题
 - [多人音视频] 修复 偶现共享桌面无法显示的问题
 - [多人音视频] 支持共享桌面 点击【停止共享】按钮
 - [多人音视频] 修复手机切换摄像头不生效的问题
-- [多人音视频] 修复web端发布流传入选中设备的deviceId不生效的问题
+- [多人音视频] 修复 web 端发布流传入选中设备的 deviceId 不生效的问题
 
 ## 版本：v3.4.0 2020-12-10
 
-- [IM SDK] 增加移动端上传推送token api
-- [IM SDK] 撤回消息、已读消息增加from、to字段
-- [IM SDK] CMD、自定义消息增加type字段
-- [IM SDK] 修复ie中兼容问题
+- [IM SDK] 增加移动端上传推送 token api
+- [IM SDK] 撤回消息、已读消息增加 from、to 字段
+- [IM SDK] CMD、自定义消息增加 type 字段
+- [IM SDK] 修复 ie 中兼容问题
 
 ## 版本：v3.3.2 2020-10-19
 
 - [IM SDK] 增加支持设置固定 deviceId
 - [IM SDK] 修改 getGroup 方法去掉 apiUrl 参数
 - [IM SDK] 修复拉历史消息 bug
-- [IM SDK] 修复发送附件消息对3.3.0之前 api 的兼容问题
+- [IM SDK] 修复发送附件消息对 3.3.0 之前 api 的兼容问题
 
 ## 版本：v3.3.0 2020-09-16
 
 - [IM SDK] 增加支持 promise
 - [IM SDK] 增加 onContactInvited、onContactDeleted、onContactAdded、onContactRefuse、onContactAgreed 好友相关的回调
-- [IM SDK] 增加 addContact、deleteContact、acceptInvitation、declineInvitation 代替原subscribe、removeRoster、subscribed、unsubscribed 好友操作 API
-- [IM SDK] 修改默认的resource，以便区分web端和小程序端的用户
+- [IM SDK] 增加 addContact、deleteContact、acceptInvitation、declineInvitation 代替原 subscribe、removeRoster、subscribed、unsubscribed 好友操作 API
+- [IM SDK] 修改默认的 resource，以便区分 web 端和小程序端的用户
 - [IM SDK] 修改 getChatRooms 获取聊天室 API，去掉 apiUrl 参数
 - [IM SDK] 修改 构造 cmd 消息 API, 去掉 msg 参数
-- [IM SDK] 优化构造消息API，使用 chatType 来区分消息类型（单聊/群聊/聊天室）
+- [IM SDK] 优化构造消息 API，使用 chatType 来区分消息类型（单聊/群聊/聊天室）
 - [IM SDK] 修复发送位置消息成功后并不执行 success 回调
 - [IM SDK] 增加容错处理
 
@@ -245,12 +245,12 @@
 
 - [IM SDK] 创建群组时增加被邀请人是否需要同意的参数
 - [IM SDK] 修复头条小程序消息延迟
-- [IM SDK] onError回调增加 error message
+- [IM SDK] onError 回调增加 error message
 - [IM SDK] 修改附件消息重定向
-- [IM SDK] 支持vue-ssr-renderer服务端渲染
+- [IM SDK] 支持 vue-ssr-renderer 服务端渲染
 - [多人音视频] 支持会议中质量监控上报功能
 - [多人音视频] 支持会议中视频的弱网和断网状态监听
-- [多人音视频] 支持多集群部署文件RTCConfig URL 可指定
+- [多人音视频] 支持多集群部署文件 RTCConfig URL 可指定
 - [多人音视频] 修复多人会议，发布视频流的时候，无麦克风，视频也发布不成功
 - [多人音视频] 修复创建会议后，全体静音不生效
 - [单人音视频] 支持通话过程中，对一端断网的监听
@@ -258,59 +258,59 @@
 ## 版本：v3.2.1 2020-07-28
 
 - [多人音视频] 共享桌面 API 支持 chrome 72 以上不再依赖插件
-- [多人音视频] 增加 多路推流API
-- [多人音视频] 支持纯音频推流CDN
-- [多人音视频] 修复授权API 在IM内无法使用
-- [多人音视频] 修复 1对1 视频通话 先呼叫一个不在线的人员，再呼叫其他人员失败
+- [多人音视频] 增加 多路推流 API
+- [多人音视频] 支持纯音频推流 CDN
+- [多人音视频] 修复授权 API 在 IM 内无法使用
+- [多人音视频] 修复 1 对 1 视频通话 先呼叫一个不在线的人员，再呼叫其他人员失败
 - [单人音视频] 增加呼叫推送功能
-- [IM SDK] 修改创建聊天室api，不需要传owner参数
+- [IM SDK] 修改创建聊天室 api，不需要传 owner 参数
 - [IM SDK] 增加日志采集功能
 
 ## 版本：v3.2.0 2020-07-09
 
 - [IM SDK] 增加创建聊天室、查询\修改聊天室详情、查询\设置\移除管理员
 - [IM SDK] 修复对消息扩展类型解析错误
-- [IM SDK] 修复发送图片、文件消息时，直接发送url时下载不成功
-- [IM SDK] 修改对于被禁言、拉黑等导致的发送消息失败，将从fail回调出去，不再从全局的onError回调
-- [多人音视频] 增加通过joinRoom创建房间时，可配置支持小程序
+- [IM SDK] 修复发送图片、文件消息时，直接发送 url 时下载不成功
+- [IM SDK] 修改对于被禁言、拉黑等导致的发送消息失败，将从 fail 回调出去，不再从全局的 onError 回调
+- [多人音视频] 增加通过 joinRoom 创建房间时，可配置支持小程序
 
 ## 版本：v3.1.5 2020-06-23
 
 - [多人音视频] 增加创建会议支持自定义共享桌面个数
-- [多人音视频] 修复了safari 浏览器的兼容性问题
+- [多人音视频] 修复了 safari 浏览器的兼容性问题
 - [多人音视频] 支持 electorn 共享桌面
 
 ## 版本：v3.1.4 2020-06-11
 
 - [IM SDK] 支持附件下载重定向
 - [IM SDK] 支持图片检测违规抛出单独的异常
-- [IM SDK] 增加分页获取聊天室成员api
+- [IM SDK] 增加分页获取聊天室成员 api
 
 ## 版本：v3.1.2 2020-05-14
 
-- [IM SDK] 增加上传修改群/聊天室公告、获取群/聊天室公告、上传/下载/删除群/聊天室文件、获取群/聊天室文件列表APIs
+- [IM SDK] 增加上传修改群/聊天室公告、获取群/聊天室公告、上传/下载/删除群/聊天室文件、获取群/聊天室文件列表 APIs
 - [IM SDK] 修改重连间隔
 - [IM SDK] 去掉对上传文件大小的限制, 由服务端来限制
-- [IM SDK] 增加聊天室禁言、解除禁言、获取禁言列表、加入黑名单、移除黑名单、获取黑明单列表APIs
+- [IM SDK] 增加聊天室禁言、解除禁言、获取禁言列表、加入黑名单、移除黑名单、获取黑明单列表 APIs
 - [多人音视频] 增加上麦申请/下麦降级/申请主持人/全体静音/全体解除静音/静音个人/解除静音个人 APIs
 - [多人音视频] 增加了支持多集群部署 API
-- [多人音视频] 增加了 推流CDN/更新推流布局 APIs
+- [多人音视频] 增加了 推流 CDN/更新推流布局 APIs
 - [多人音视频] 修复了引入 webrtc 报错 regenerator-runtime
 
 ## 版本：v3.1.0 2020-04-20
 
-- [多人音视频] joinRoom API 通过appkey 拼接URL
+- [多人音视频] joinRoom API 通过 appkey 拼接 URL
 
 ## 版本：v3.0.10 2020-03-28
 
 - [sdk] 支持一键禁言、白名单等群/聊天室的操作
 - [sdk] 支持发自定义消息
-- [sdk] 消息体里增加ContentsType，来表示消息类型
-- [sdk] 修复扩展消息不能使用number类型数据
+- [sdk] 消息体里增加 ContentsType，来表示消息类型
+- [sdk] 修复扩展消息不能使用 number 类型数据
 - [sdk] 登录接口的'Content-type'改为'application/json'
 - [sdk] 修复回复多余回执导致堵塞的情况
-- [sdk] 修复dnsconfig配置问题
-- [多人音视频] 增加添加加入房间API joinRoom
+- [sdk] 修复 dnsconfig 配置问题
+- [多人音视频] 增加添加加入房间 API joinRoom
 - [多人音视频] 增加管理员变更回调 onAdminChanged
 - [多人音视频] 增加会议属性相关 API
 - [多人音视频] 定义视频流类型 StreamType
@@ -318,42 +318,42 @@
 
 ## 版本：v3.0.7 2019-12-31
 
-- [sdk] https下增加dns配置
+- [sdk] https 下增加 dns 配置
 - [sdk] 增加群组回执
-- [sdk] 修复resource错误等bug
+- [sdk] 修复 resource 错误等 bug
 
 ## 版本：v3.0.6 2019-09-20
 
 - [sdk] 音视频增加录制、合并设置
-- [sdk] sdk增加消息去重机制
+- [sdk] sdk 增加消息去重机制
 - [sdk] 回调消息增加时间戳
 
 ## 版本：v3.0.5 2019-08-22
 
 - [sdk] 简化好友添加和移除黑名单方法
-- [sdk] 扩展消息支持json对象
-- [sdk] 退出不执行onclose
-- [sdk] Electron下不能建立链接问题
+- [sdk] 扩展消息支持 json 对象
+- [sdk] 退出不执行 onclose
+- [sdk] Electron 下不能建立链接问题
 
 ## 版本：v3.0.4 2019-07-25
 
-### Bug修复：
+### Bug 修复：
 
-- [sdk] 扩展消息bug
-- [sdk] 群组类消息撤回bug
+- [sdk] 扩展消息 bug
+- [sdk] 群组类消息撤回 bug
 - [sdk] 优化历史消息
-- [sdk] 发送语音消息、视频消息回调bug
+- [sdk] 发送语音消息、视频消息回调 bug
 
 ## 版本：v3.0.2 2019-07-09
 
 ### 新功能：
 
-- [sdk] dns下上传文件走dns
+- [sdk] dns 下上传文件走 dns
 
-### Bug修复：
+### Bug 修复：
 
 - [sdk] 无法拉取历史消息
-- [sdk] loc/cmd消息 messageId bug
+- [sdk] loc/cmd 消息 messageId bug
 
 ## 版本：v3.0.0 2019-06-29
 
@@ -366,7 +366,7 @@
 - [demo] 增加接受群邀请功能
 - [demo] 增加和调整一些群操作通知
 
-### Bug修复：
+### Bug 修复：
 
 - [demo] 修复音视频通话时显示名称不对
 - [demo] 加入群组群组列表不实时更新
@@ -376,10 +376,10 @@
 
 ### 新功能：
 
-- [sdk] 通过设置 isHttpDNS 为 true，从服务端获取 DNS 配置文件，SDK中改进自动重连的功能
+- [sdk] 通过设置 isHttpDNS 为 true，从服务端获取 DNS 配置文件，SDK 中改进自动重连的功能
 - [demo] 配置文件文件增加配置 isHttpDNS
 - [demo] 项目初始化 sdk 增加 isHttpDNS
-- [demo] 解决safari视频无图片、无声音问题
+- [demo] 解决 safari 视频无图片、无声音问题
 
 ## 版本：v1.10.0 2018-09-17
 
@@ -387,14 +387,14 @@
 
 - [demo] 多人音视频
 
-### Bug修复：
+### Bug 修复：
 
 - [demo] 在视频界面中，切到其他界面，视频界面不在了。但是视频还在继续中
 - [demo] 火狐 邀请 chrome， 进入多人会议，都收不到视频通知
 - [demo] 不选择会话，收不到视频来电
 - [demo] 多人视频 开关视频键状态不对
-- [demo] chrome和firfox多人音视频会议中，chrome不显示firefox用户的视频
-- [demo] 多人视频，一个浏览器登录两个账号，有一个账号 ui经常收不到视频邀请
+- [demo] chrome 和 firfox 多人音视频会议中，chrome 不显示 firefox 用户的视频
+- [demo] 多人视频，一个浏览器登录两个账号，有一个账号 ui 经常收不到视频邀请
 
 ## 版本：v1.6.0 2018-01-29
 
@@ -403,7 +403,7 @@
 - [demo] 多人音视频
 - [sdk] 多人音视频
 
-### Bug修复：
+### Bug 修复：
 
 - [demo] 无法发送表情
 
@@ -411,27 +411,27 @@
 
 ### 新功能：
 
-- [demo] 添加Rest Interface的Test case
-- [demo] sdk/demo 上传功能兼容ie8
+- [demo] 添加 Rest Interface 的 Test case
+- [demo] sdk/demo 上传功能兼容 ie8
 
-### Bug修复：
+### Bug 修复：
 
 - [demo] 多设备登录异常
 - [demo] 新建需要审批的公有群，加入必须有审批流程
 - [demo] 鼠标悬浮在群禁言图标上出现提示信息“禁言”
-- [demo] demo.html中从cdn引入sdk
-- [demo] 修复无法准确统计离线消息数的bug
-- [demo] window.history.pushState在windows的chrome上有兼容性问题，统一改成window.location.href
-- [demo] window.location.href = xxxx，如果修改的是href.search参数(?a=x&b=y)时候, 如果遇到file方式打开本地index.html会直接跳转页面，造成登录一直不成功，改成修改 href.hash 参数(#a=x&b=y)
+- [demo] demo.html 中从 cdn 引入 sdk
+- [demo] 修复无法准确统计离线消息数的 bug
+- [demo] window.history.pushState 在 windows 的 chrome 上有兼容性问题，统一改成 window.location.href
+- [demo] window.location.href = xxxx，如果修改的是 href.search 参数(?a=x&b=y)时候, 如果遇到 file 方式打开本地 index.html 会直接跳转页面，造成登录一直不成功，改成修改 href.hash 参数(#a=x&b=y)
 - [demo] 将群管理员可操作的项目展示给管理员
 
 ## 版本：v1.4.13 2017-09-12
 
 ### 新功能：
 
-- [sdk] 新增jsdoc
+- [sdk] 新增 jsdoc
 
-### Bug修复：
+### Bug 修复：
 
 - [sdk] ios(8.1)webview 已读和已送到回执异常
 - [sdk] 多设备登录异常
@@ -441,48 +441,48 @@
 
 ### 新功能：
 
-- [sdk] 修改delivery ack和read ack的格式
+- [sdk] 修改 delivery ack 和 read ack 的格式
 - [sdk] 用户在离线状态下发送消息，会自动重连并将未成功发送的消息发送出去
-- [sdk] WEBIM支持多设备，添加加入聊天室事件
-- [sdk] 给delivered和ack加上from字段
-- [demo] 添加Rest Interface的 Test case
-- [demo] sdk/demo上传功能兼容ie8
+- [sdk] WEBIM 支持多设备，添加加入聊天室事件
+- [sdk] 给 delivered 和 ack 加上 from 字段
+- [demo] 添加 Rest Interface 的 Test case
+- [demo] sdk/demo 上传功能兼容 ie8
 
-### Bug修复：
+### Bug 修复：
 
-- [sdk] 提升ie8的兼容性
-- [sdk] 自己发送的消息的已读ack，不再发送给自己
+- [sdk] 提升 ie8 的兼容性
+- [sdk] 自己发送的消息的已读 ack，不再发送给自己
 - [demo] 新建需要审批的公有群，加入必须有审批流程
 - [demo] 鼠标悬浮在群禁言图标上出现提示信息“禁言”
-- [demo] demo.html中从cdn引入sdk
-- [demo] 修复无法准确统计离线消息数的bug
-- [demo] window.history.pushState在windows的chrome上有兼容性问题，统一改成window.location.href
-- [demo] window.location.href = xxxx，如果修改的是href.search参数(?a=x&b=y)时候, 如果遇到file方式打开本地index.html会直接跳转页面，造成登录一直不成功，改成修改 href.hash 参数(#a=x&b=y)
+- [demo] demo.html 中从 cdn 引入 sdk
+- [demo] 修复无法准确统计离线消息数的 bug
+- [demo] window.history.pushState 在 windows 的 chrome 上有兼容性问题，统一改成 window.location.href
+- [demo] window.location.href = xxxx，如果修改的是 href.search 参数(?a=x&b=y)时候, 如果遇到 file 方式打开本地 index.html 会直接跳转页面，造成登录一直不成功，改成修改 href.hash 参数(#a=x&b=y)
 - [demo] 将群管理员可操作的项目展示给管理员
 
 ## 版本：v1.4.11 2017-06-14
 
 ### 新功能：
 
-- [sdk] debug.js融合到sdk当中，优化日志内容输出
-- [sdk] 通过Rest屏蔽群组
-- [sdk] 通过Rest发出入群申请
-- [sdk] 通过Rest获取群组列表
-- [sdk] 通过Rest根据groupid获取群组详情
-- [sdk] 通过Rest列出某用户所加入的所有群组
-- [sdk] 通过Rest列出群组的所有成员
-- [sdk] 通过Rest禁止群用户发言
-- [sdk] 通过Rest取消对用户禁言的禁止
-- [sdk] 通过Rest获取群组下所有管理员
-- [sdk] 通过Rest获取群组下所有被禁言成员
-- [sdk] 通过Rest设置群管理员
-- [sdk] 通过Rest取消群管理员
-- [sdk] 通过Rest同意用户加入群
-- [sdk] 通过Rest拒绝用户加入群
-- [sdk] 通过Rest添加用户至群组黑名单（单个）
-- [sdk] 通过Rest添加用户至群组黑名单（批量）
-- [sdk] 通过Rest将用户从群黑名单移除（单个）
-- [sdk] 通过Rest将用户从群黑名单移除（批量）
+- [sdk] debug.js 融合到 sdk 当中，优化日志内容输出
+- [sdk] 通过 Rest 屏蔽群组
+- [sdk] 通过 Rest 发出入群申请
+- [sdk] 通过 Rest 获取群组列表
+- [sdk] 通过 Rest 根据 groupid 获取群组详情
+- [sdk] 通过 Rest 列出某用户所加入的所有群组
+- [sdk] 通过 Rest 列出群组的所有成员
+- [sdk] 通过 Rest 禁止群用户发言
+- [sdk] 通过 Rest 取消对用户禁言的禁止
+- [sdk] 通过 Rest 获取群组下所有管理员
+- [sdk] 通过 Rest 获取群组下所有被禁言成员
+- [sdk] 通过 Rest 设置群管理员
+- [sdk] 通过 Rest 取消群管理员
+- [sdk] 通过 Rest 同意用户加入群
+- [sdk] 通过 Rest 拒绝用户加入群
+- [sdk] 通过 Rest 添加用户至群组黑名单（单个）
+- [sdk] 通过 Rest 添加用户至群组黑名单（批量）
+- [sdk] 通过 Rest 将用户从群黑名单移除（单个）
+- [sdk] 通过 Rest 将用户从群黑名单移除（批量）
 - [demo] 聊天窗口中记录可清空
 - [demo] 聊天窗口中发送方聊天记录显示状态（未送达、已送达、已读）
 - [demo] 查看聊天室成员
@@ -495,30 +495,30 @@
 - [demo] 群主可同意、拒绝加群申请
 - [demo] 在群主的群成员列表中新增添加/移除管理员、禁言/解禁群成员按钮
 
-### Bug修复：
+### Bug 修复：
 
 - [sdk] 添加好友会产生多余的订阅消息
-- [sdk] 频繁的发送消息会导致消息id重复的问题
-- [sdk] 适配SDK发送文件和图片的大小
-- [demo] 优化sdk/demo.html，修复某些依赖文件找不到的问题
+- [sdk] 频繁的发送消息会导致消息 id 重复的问题
+- [sdk] 适配 SDK 发送文件和图片的大小
+- [demo] 优化 sdk/demo.html，修复某些依赖文件找不到的问题
 - [demo] 修复离线消息数量统计不准确问题
 
 ## 版本：v1.4.10 2017-02-16
 
 ### 新功能：
 
-- [sdk] webrtc新增语音呼叫
+- [sdk] webrtc 新增语音呼叫
 
-## Bug修复：
+## Bug 修复：
 
-- [sdk] webrtc:Firefox在结束通话后的问题
+- [sdk] webrtc:Firefox 在结束通话后的问题
 - [sdk] webrtc:多次接通挂断之后,逻辑功能混乱
-- [sdk] webrtc:正常挂断不应该提醒offline
-- [sdk] webrtc:重连后无法处理音视频IQ消息
+- [sdk] webrtc:正常挂断不应该提醒 offline
+- [sdk] webrtc:重连后无法处理音视频 IQ 消息
 
 ## 版本：v1.4.9 2017-01-20
 
-### Bug修复：
+### Bug 修复：
 
 - [sdk] 成功/失败的回调函数如果没有定义会报错
 
@@ -526,57 +526,57 @@
 
 ### 新功能：
 
-- [demo] 增加webrtc视频聊天的声音开关
-- [demo] 动态创建chatWindow，提高网页性能
-- [demo] 切换leftbar时会给chatWindow添加遮罩，返回之前的leftbar时会直接跳到之前选中的cate和chatWindow
+- [demo] 增加 webrtc 视频聊天的声音开关
+- [demo] 动态创建 chatWindow，提高网页性能
+- [demo] 切换 leftbar 时会给 chatWindow 添加遮罩，返回之前的 leftbar 时会直接跳到之前选中的 cate 和 chatWindow
 - [demo] 登录成功后，刷新页面不会再回到登录页
 
-### Bug修复：
+### Bug 修复：
 
-- [sdk] 移除sdk中所有log方法
-- [sdk] 退出muc group room 时，追加发送一条unavailable的presence stanza
+- [sdk] 移除 sdk 中所有 log 方法
+- [sdk] 退出 muc group room 时，追加发送一条 unavailable 的 presence stanza
 
 ## 版本：V1.4.7 2016-12-21
 
 ### 新功能：
 
-- [demo] 在demo.html中新增视频聊天及发送视频文件的功能
+- [demo] 在 demo.html 中新增视频聊天及发送视频文件的功能
 
-### Bug修复：
+### Bug 修复：
 
 - [sdk] 解决在手机浏览器在后台运行时无法断线重连的问题
-- [demo] WebIM建群，等待后台建群成功后再拉取群信息并更新UI中的群列表
-- [demo] WebIM群加人，群主和被添加的群成员均可以收到通知
-- [demo] WebIM群主将群成员从黑名单移除后，不再回到群成员列表中，而直接被删除
+- [demo] WebIM 建群，等待后台建群成功后再拉取群信息并更新 UI 中的群列表
+- [demo] WebIM 群加人，群主和被添加的群成员均可以收到通知
+- [demo] WebIM 群主将群成员从黑名单移除后，不再回到群成员列表中，而直接被删除
 
 ## 版本：V1.4.6 2016-12-20
 
 ### 新功能：
 
-- [sdk] 新增 demo.html, 演示如何调用sdk的各种接口
+- [sdk] 新增 demo.html, 演示如何调用 sdk 的各种接口
 
-### Bug修复：
+### Bug 修复：
 
-- [demo] 创建群组成功之后，立即刷新群组列表，不再等1秒
-- [sdk] sdk与上层Demo解耦，删除Demo相关代码
-- [sdk] 删除server不支持的connection.prototype.createRoom
+- [demo] 创建群组成功之后，立即刷新群组列表，不再等 1 秒
+- [sdk] sdk 与上层 Demo 解耦，删除 Demo 相关代码
+- [sdk] 删除 server 不支持的 connection.prototype.createRoom
 
 ## 版本：V1.4.5 2016-12-01
 
 ### 新功能：
 
-- GNU风格的版本号命名格式: 主版本号.子版本号.修正版本号 (新版本规则的1.4.5 = 旧版本规则的1.1.4.5)
-- [demo] 好友之间可以通过webrtc进行视频聊(仅支持 https + Webkit浏览器)
-- [demo] 支持同一账号最多8个标签页登录 isMultiLoginSessions:true
-- [demo] http访问加入ip策略功能,防止DNS劫持 isHttpDNS:true
+- GNU 风格的版本号命名格式: 主版本号.子版本号.修正版本号 (新版本规则的 1.4.5 = 旧版本规则的 1.1.4.5)
+- [demo] 好友之间可以通过 webrtc 进行视频聊(仅支持 https + Webkit 浏览器)
+- [demo] 支持同一账号最多 8 个标签页登录 isMultiLoginSessions:true
+- [demo] http 访问加入 ip 策略功能,防止 DNS 劫持 isHttpDNS:true
 - [sdk] 新增两种安装引用方式（具体引用方式，请参考 [集成方式](https://docs-im.easemob.com/im/web/intro/integration)）
-    - 添加 `<script>` 标签，并通过WebIM命名空间访问websdk
-    - NPM（websdk 已经发布到NPM），先require，再访问WebIM
+  - 添加 `<script>` 标签，并通过 WebIM 命名空间访问 websdk
+  - NPM（websdk 已经发布到 NPM），先 require，再访问 WebIM
 
-### Bug修复：
+### Bug 修复：
 
-- [sdk] 解散群组不更新UI
-- [sdk] 修复了发送cmd消息成功后无法调用回调函数的bug
+- [sdk] 解散群组不更新 UI
+- [sdk] 修复了发送 cmd 消息成功后无法调用回调函数的 bug
 
 ## 版本：V1.1.3 2016-11-01
 
@@ -584,7 +584,7 @@
 
 - [demo] 支持 Windows SDK。[https://www.easemob.com/download/im](https://www.easemob.com/download/im)
 - [demo] 新增黑名单功能。
-- [demo] 获取聊天室列表: 支持分页、下拉刷新，新增以下2个参数：pagenum 和 pagesize。
+- [demo] 获取聊天室列表: 支持分页、下拉刷新，新增以下 2 个参数：pagenum 和 pagesize。
 - [demo] 群组增加以下功能：创建群组、修改群组名称、修改群组简介、群组成员管理、加入公开群。
 - [sdk] strophe 从 v1.2.2 升级到 v1.2.8，在生产模式使用 strophe-1.2.8.min.js， 在开发模式使用 strophe.js。
 - [sdk] 支持自动重连: 在 webim.config.js 文件中新增相关参数 `autoReconnectNumMax` 和 `autoReconnectInterval`。
@@ -592,26 +592,26 @@
 ### Bug fixes:
 
 - [demo] 增加 `babel-core/browser-polyfill.js`文件，修复了 IE 不支持 HTML5 elements 的 bug。
-- [demo] 修复了有未读消息时点击联系人不生效的bug。
-- [sdk] 修复了strophe.js v1.2.8在IE9中使用BOSH会报错的bug。 [https://github.com/strophe/strophejs/issues/213](https://github.com/strophe/strophejs/issues/213)
-- [sdk] 修复了存在大量离线消息时收发消息延迟的bug。客户端将发送ack应答消息的速度限制在5个/秒，不影响其他正常消息。
-- [sdk] 将心跳消息从空body的 json message 切换为 ping/pong iq。前者会作为离线消息被XMPP Server缓存。
+- [demo] 修复了有未读消息时点击联系人不生效的 bug。
+- [sdk] 修复了 strophe.js v1.2.8 在 IE9 中使用 BOSH 会报错的 bug。 [https://github.com/strophe/strophejs/issues/213](https://github.com/strophe/strophejs/issues/213)
+- [sdk] 修复了存在大量离线消息时收发消息延迟的 bug。客户端将发送 ack 应答消息的速度限制在 5 个/秒，不影响其他正常消息。
+- [sdk] 将心跳消息从空 body 的 json message 切换为 ping/pong iq。前者会作为离线消息被 XMPP Server 缓存。
 
 ## 版本：V1.1.2 2016-8-12
 
 ### 功能改进：
 
-- 新版demo
-- 添加isAutoLogoin参数，默认setPresence
-- 拆分sdk为四个文件，最终打包成一个webim.im.sdk.js
-- 增加try catch，尽量减少因为外部的错误导致的连接断开
+- 新版 demo
+- 添加 isAutoLogoin 参数，默认 setPresence
+- 拆分 sdk 为四个文件，最终打包成一个 webim.im.sdk.js
+- 增加 try catch，尽量减少因为外部的错误导致的连接断开
 - 修改错误码，不再返回错误提示消息，在文档体现
 
 ### Bug fix：
 
-- 无法传file_length
+- 无法传 file_length
 - 特殊字符无法显示
-- im用户为数字时，toLowercase报错
+- im 用户为数字时，toLowercase 报错
 - 发送音频增加时长参数
 
 ## 版本：V1.1.1 2016-6-27
@@ -619,50 +619,50 @@
 ### 功能改进：
 
 - 增加聊天室加入成功、失败回调
-- 增加网络监测回调onOnline、onOffline
-- 处理Web IM与Android/iOS SDK 3.x和2.x的兼容性
-- demo新增发送文件功能
-- 收到AMR自动转MP3
+- 增加网络监测回调 onOnline、onOffline
+- 处理 Web IM 与 Android/iOS SDK 3.x 和 2.x 的兼容性
+- demo 新增发送文件功能
+- 收到 AMR 自动转 MP3
 
 ### Bug fix：
 
-- 修复心跳会创建多个timer
+- 修复心跳会创建多个 timer
 - 联系人名称过长导致的样式问题
-- IE9发送附件失效
-- IE9添加好友报错
+- IE9 发送附件失效
+- IE9 添加好友报错
 
 ## 版本：V1.1.0 2016-4-6
 
 ### 功能改进：
 
-- 将表情包移除sdk，可导入自定义表情。
-- 增加XMPP连接多resource支持的参数。
-- 对于不支持wss，如qqX5内核浏览器，自动降级为https long polling。
+- 将表情包移除 sdk，可导入自定义表情。
+- 增加 XMPP 连接多 resource 支持的参数。
+- 对于不支持 wss，如 qqX5 内核浏览器，自动降级为 https long polling。
 - 增加聊天室功能。
-- v1.1.0与之前版本sdk部分api已不兼容，添加shim.js，做降级支持。
+- v1.1.0 与之前版本 sdk 部分 api 已不兼容，添加 shim.js，做降级支持。
 - 新增消息发送的成功失败回调。
-- 优化代码，修复退出时websocket报错。
+- 优化代码，修复退出时 websocket 报错。
 
 ## 版本：V1.0.7 2015-8-25
 
 ### 功能改进：
 
 - 增加连接心跳支持，保持客户端连接不间断。
-- 增加XMPP连接多resource支持。
-- 实现Web IM SDK Websocket支持。
-- 增加Token登录。
-- 在Demo中对不支持异步上传的浏览器使用第三方插件（swfupload）提供支持。
-- 对于不支持audio标签的浏览器，使用jPlayer解决无法播放语音的问题，但此方案当前只支持MP3。
-- 重整目录结构，SDK相关文件在sdk文件夹内部；添加easemob.im.config.js，只需配置此js里面相关字段即可。
-- 改进code，支持多环境快速调试。
-- 支持IE7、IE8、IE9（在Demo中，接收的音频消息只能播放MP3格式）。
+- 增加 XMPP 连接多 resource 支持。
+- 实现 Web IM SDK Websocket 支持。
+- 增加 Token 登录。
+- 在 Demo 中对不支持异步上传的浏览器使用第三方插件（swfupload）提供支持。
+- 对于不支持 audio 标签的浏览器，使用 jPlayer 解决无法播放语音的问题，但此方案当前只支持 MP3。
+- 重整目录结构，SDK 相关文件在 sdk 文件夹内部；添加 easemob.im.config.js，只需配置此 js 里面相关字段即可。
+- 改进 code，支持多环境快速调试。
+- 支持 IE7、IE8、IE9（在 Demo 中，接收的音频消息只能播放 MP3 格式）。
 
 ## 版本：V1.0.5 2015-3-11
 
 ### 新功能：
 
 - 优化底层连接，减少系统登录耗时。
-- 添加透传消息支持（注册onCmdMessage事件，以监听服务器端推送的透传消息）。
+- 添加透传消息支持（注册 onCmdMessage 事件，以监听服务器端推送的透传消息）。
 - 添加收到消息后，自动发送回复消息给服务器。
 - 当图片下载失败时默认再一次下载。
 
@@ -675,14 +675,14 @@
 
 ### Bug Fix：
 
-- 修复bug。修复不点击‘退出’按钮直接关闭浏览器下次登录消息丢失的bug。
+- 修复 bug。修复不点击‘退出’按钮直接关闭浏览器下次登录消息丢失的 bug。
 
 ## 版本：V1.0.4 2014-12-17
 
 ### Bug Fix：
 
-- 修复bug。群聊位置消息作为单聊消息处理。
-- 修改bug。好友列表为空时陌生人消息不显示。
+- 修复 bug。群聊位置消息作为单聊消息处理。
+- 修改 bug。好友列表为空时陌生人消息不显示。
 
 ## 版本：V1.0.3 2014-12-11
 
@@ -690,17 +690,17 @@
 
 - 增加陌生人聊天功能。
 - 添加新用户注册功能。
-- 支持https访问模式。
-- 支持token登录。
+- 支持 https 访问模式。
+- 支持 token 登录。
 - 支持语音消息。
-- 消息体支持自定义扩展,添加ext属性。
-- Demo示例支持未读消息提醒。
+- 消息体支持自定义扩展,添加 ext 属性。
+- Demo 示例支持未读消息提醒。
 
 ### 功能改进：
 
-- 修复bug。demo联系人过多时的样式问题。
-- 修复bug。conn = new Easemob.im.Connection();变量名不为conn或者conn不是全局变量时接收不到消息。
-- 修复bug。群组离线消息当作陌生人消息处理。
-- 修复bug。IE浏览器接受文本消息以换行符开始时会遮挡联系人名称。
-- 修复bug。在线用户被邀请加入群组不能实时显示，必须重新登录。
+- 修复 bug。demo 联系人过多时的样式问题。
+- 修复 bug。conn = new Easemob.im.Connection();变量名不为 conn 或者 conn 不是全局变量时接收不到消息。
+- 修复 bug。群组离线消息当作陌生人消息处理。
+- 修复 bug。IE 浏览器接受文本消息以换行符开始时会遮挡联系人名称。
+- 修复 bug。在线用户被邀请加入群组不能实时显示，必须重新登录。
 - 丰富相关文档内容。
