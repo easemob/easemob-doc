@@ -145,39 +145,6 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 }];
 ```
 
-
-### 根据消息 ID 获取消息统计信息
-
-你可以根据消息 ID 获取指定消息的统计信息。示例代码如下：
-
-```objectivec
-(EMChatMessageStatistics* _Nullable)getMessageStatisticsById:(NSString* _Nonnull)messageId;
-```
-
-### 获取满足统计条件的消息条数
-
-你可以统计指定时间段内发送或/和接收的特定或全部类型的消息。示例代码如下：
-
-```objectivec
-(NSInteger)getMessageCountWithStart:(NSInteger)startTimestamp
-                                  end:(NSInteger)endTimestamp
-                            direction:(EMMessageStatisticsDirection)direction
-                                 type:(EMMessageStatisticsType)type;
-```
-
-
-### 获取满足统计条件的消息的总流量
-
-你可以统计指定时间段内发送或/和接收的特定或全部类型的消息的总流量。流量单位为字节。
-
-示例代码如下：
-
-```objectivec
-(NSInteger)getMessageStatisticsSizeWithStart:(NSInteger)startTimestamp
-                                           end:(NSInteger)endTimestamp
-                                     direction:(EMMessageStatisticsDirection)direction
-                                          type:(EMMessageStatisticsType)type;
-```
 ### 获取本地消息的流量统计信息
 
 本地消息的流量统计功能默认关闭。若要使用该功能，需在 SDK 初始化前设置 `EMOptions#enableStatistics` 开启。
