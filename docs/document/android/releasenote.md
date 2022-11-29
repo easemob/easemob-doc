@@ -6,7 +6,7 @@
 
 ### 新增特性
 
-新增[流量统计的功能](message_manage.html)。
+新增[消息流量统计功能](message_manage.html#获取本地消息的流量统计信息)。
 
 ### 修复
 
