@@ -26,7 +26,7 @@
 - 推送 token 属于哪个推送通道；
 - 需 Android 设备上报。
 
-### Android 设备需要做的事：
+### Android 设备需进行的操作：
 
 - 判断当前设备支持哪种推送通道；
 - 通过集成第三方推送 SDK 获取推送 token；
@@ -213,11 +213,11 @@ EMClient.getInstance().init(this, options);
 
 #### 华为 HMS 推送集成
 
-1. 华为开发者后台创建应用
-    在华为开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下华为官方介绍： [华为 HMS 消息推送服务集成](http://developer.huawei.com/consumer/cn/service/hms/catalog/huaweipush.html?page=hmssdk_huaweipush_devprepare)。
-2. 上传推送证书
-    注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **华为**，然后输入你在 [华为开发者后台](http://developer.huawei.com/consumer/cn/devunion/openPlatform/html/memberCenter.html#/appManager) 创建的应用信息中的 APP ID 和 SecretKey 以及程序的包名；
-3. 华为推送集成
+1. 华为开发者后台创建应用<br/>
+    在华为开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见华为官方介绍：[华为 HMS 消息推送服务集成](http://developer.huawei.com/consumer/cn/service/hms/catalog/huaweipush.html?page=hmssdk_huaweipush_devprepare)。
+2. 上传推送证书<br/>
+    注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **华为**，然后输入你在 华为开发者后台创建的[应用信息中的 APP ID 和 SecretKey 以及程序的包名](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section125831926193110)；
+3. 华为推送集成<br/>
     - 3.1 集成 HMS Core SDK，参见 [华为官网集成文档](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-integrating-sdk-0000001050040084)。
     - 3.2 注册继承自 `HmsMessageService` 的服务到 `AndroidManifest.xml` 中。
     ```xml
