@@ -17,7 +17,7 @@
 - `conversation.loadMessagesStartFromId` 在本地存储的消息中搜索；
 - `insertMessage` 在指定会话中写入消息；
 - `getMessageStatisticsById` 根据消息 ID 获取消息流量统计信息；
-- `getMessageCountWithStart` 获取一定时间段内发送和/或接收的指定类型的消息条数；
+- `getMessageCountWithStart` 获取一定时间段内发送和/或接收的指定或全部类型的消息条数；
 - `getMessageStatisticsSizeWithStart` 获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量。
 
 ## 前提条件
