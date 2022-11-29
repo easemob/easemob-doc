@@ -362,7 +362,7 @@ EMClient.getInstance().init(this, options);
 环信即时通讯 IM SDK 中已经集成了 OPPO 推送相关逻辑，你还需要完成以下步骤：
 
 1. 在 OPPO 开发者后台创建应用
-   - 在 OPPO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下 OPPO 官方介绍：[ OPPO 推送服务集成](https://open.oppomobile.com/wiki/doC#id=10195)
+   - 在 OPPO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下 OPPO 官方介绍：[ OPPO 推送服务集成](https://open.oppomobile.com/new/developmentDoc/info?id=10195)
 2. 上传推送证书
    - 注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **OPPO**，然后输入你在 [OPPO 开发者后台](https://open.oppomobile.com/service/oms?service_id=1000004&app_type=app&app_id=30004346)创建的应用的 `appkey` 和 `mastersecret` 以及程序的 `包名`，MasterSecret 需要到 [OPPO 推送平台](https://push.oppo.com/) - **配置管理** - **应用配置** 页面查看。
 3. OPPO 推送集成
