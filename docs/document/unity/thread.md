@@ -45,7 +45,7 @@
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.ThreadManager.CreateThread(threadName, msgId, groupid, new ValueCallBack<ChatThread>(
     onSuccess: (thread) =>
     {
@@ -74,7 +74,7 @@ SDKClient.Instance.ThreadManager.CreateThread(threadName, msgId, groupid, new Va
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.ThreadManager.DestroyThread(tid, new CallBack(
     onSuccess: () =>
     {
@@ -100,7 +100,7 @@ SDKClient.Instance.ThreadManager.DestroyThread(tid, new CallBack(
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.ThreadManager.JoinThread(tid, new ValueCallBack<ChatThread>(
     onSuccess: (thread) =>
     {
@@ -146,7 +146,7 @@ SDKClient.Instance.ThreadManager.LeaveThread(tid, new CallBack(
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.ThreadManager.RemoveThreadMember(tid, uname, new CallBack(
     onSuccess: () =>
     {
@@ -167,7 +167,7 @@ SDKClient.Instance.ThreadManager.RemoveThreadMember(tid, uname, new CallBack(
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.ThreadManager.ChangeThreadSubject(tid, subject, new CallBack(
     onSuccess: () =>
     {
@@ -186,7 +186,7 @@ SDKClient.Instance.ThreadManager.ChangeThreadSubject(tid, subject, new CallBack(
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.ThreadManager.GetThreadDetail(tid, new ValueCallBack<ChatThread>(
     onSuccess: (thread) =>
     {
@@ -207,7 +207,7 @@ SDKClient.Instance.ThreadManager.GetThreadDetail(tid, new ValueCallBack<ChatThre
 
 子区所属群组的所有成员均可以调用 `FetchThreadMembers` 方法从服务器分页获取子区成员列表。
 
-```c#
+```C#
 SDKClient.Instance.ThreadManager.FetchThreadMembers(tid, cursor, page_size, new ValueCallBack<CursorResult<string>>(
     onSuccess: (cursor_result) =>
     {
@@ -228,7 +228,7 @@ SDKClient.Instance.ThreadManager.FetchThreadMembers(tid, cursor, page_size, new 
 
 1. 用户可以调用 `FetchMineJoinedThreadList` 方法从服务器分页获取自己加入和创建的子区列表：
 
-```c#
+```C#
  SDKClient.Instance.ThreadManager.FetchMineJoinedThreadList(cursor, page_size, new ValueCallBack<CursorResult<ChatThread>>(
     onSuccess: (cursor_result) =>
     {
@@ -247,7 +247,7 @@ SDKClient.Instance.ThreadManager.FetchThreadMembers(tid, cursor, page_size, new 
 
 2. 用户还可以调用 `FetchThreadListOfGroup` 方法从服务器分页获取指定群组的子区列表：
 
-```c#
+```C#
 SDKClient.Instance.ThreadManager.FetchThreadListOfGroup(tid, joined, cursor, page_size, new ValueCallBack<CursorResult<ChatThread>>(
     onSuccess: (cursor_result) =>
     {
@@ -270,7 +270,7 @@ SDKClient.Instance.ThreadManager.FetchThreadListOfGroup(tid, joined, cursor, pag
 
 示例代码如下：
 
-```c#
+```C#
 SDKClient.Instance.ThreadManager.GetLastMessageAccordingThreads(threadIds, new ValueCallBack<Dictionary<string, Message>>(
     onSuccess: (dict) =>
     {
@@ -293,7 +293,7 @@ SDKClient.Instance.ThreadManager.GetLastMessageAccordingThreads(threadIds, new V
 
 示例代码如下：
 
-```c#
+```C#
 class ThreadManagerDelegate : IChatThreadManagerDelegate
 {
 

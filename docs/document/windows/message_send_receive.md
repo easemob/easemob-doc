@@ -358,7 +358,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 ### 发送透传消息
 
-透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
+透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em\_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
 
 ```csharp
 //`action` 可以自定义。
@@ -405,14 +405,13 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 [img](@static/images/common/typing_indicator.png)
 
-
 监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
 
 - 用户 A 向用户 B 发送消息，通知其开始输入文本。
 - 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
 - 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
 
-:::notice 
+:::notice
 
 用户 A 可根据需要设置透传消息发送间隔。
 
@@ -420,7 +419,7 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 以下示例代码展示如何发送输入状态的透传消息。
 
-```c#
+```C#
 //发送表示正在输入的透传消息
 string msgTypingBegin = "TypingBegin";
 
@@ -446,7 +445,7 @@ void _sendBeginTyping() {
 
 以下示例代码展示如何接受和解析输入状态的透传消息。
 
-```c#
+```C#
 int typingTime = 10;
 
 void OnCmdMessagesReceived(List<Message> list) {
@@ -457,7 +456,7 @@ void OnCmdMessagesReceived(List<Message> list) {
     MessageBody.CmdBody body = msg.Body as MessageBody.CmdBody;
     if (body.Action == msgTypingBegin) {
       // 这里需更新 UI，显示“对方正在输入”
-      
+
       Timer timer = new Timer((state) =>
       {
       	// 这里需更新 UI，不再显示“对方正在输入”

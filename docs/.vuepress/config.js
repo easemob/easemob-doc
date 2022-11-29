@@ -1,6 +1,7 @@
 const path = require('path');
 const moment = require('moment');
 
+
 module.exports = {
   shouldPrefetch: () => {
     return false
@@ -753,6 +754,7 @@ module.exports = {
         searchMaxSuggestions: 10
       }
     ],
+    ['fulltext-search'],
     [
       '@vuepress/last-updated',
       {
