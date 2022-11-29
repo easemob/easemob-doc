@@ -52,7 +52,7 @@
 
 默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `PresenceManager#SubscribePresences` 方法订阅指定用户的在线状态，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.PresenceManager.SubscribePresences(members, expiry, new ValueCallBack<List<Presence>>(
     onSuccess: (list) =>
     {
@@ -85,7 +85,7 @@ SDKClient.Instance.PresenceManager.SubscribePresences(members, expiry, new Value
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.PresenceManager.PublishPresence(ext, new CallBack(
     onSuccess: () => {
         Debug.Log($"PublishPresence success.");
@@ -100,14 +100,14 @@ SDKClient.Instance.PresenceManager.PublishPresence(ext, new CallBack(
 
 添加用户在线状态的监听器，示例代码如下：
 
-```C#
+```csharp
 PresenceManagerDelegate presenceManagerDelegate = new PresenceManagerDelegate();
 SDKClient.Instance.PresenceManager.AddPresenceManagerDelegate(presenceManagerDelegate);
 ```
 
 参考如下示例代码，使用 `IPresenceManagerDelegate` 监听器实现以下接口。当订阅的用户在线状态发生变化时，会收到`OnPresenceUpdated` 回调。
 
-```C#
+```csharp
 public interface IPresenceManagerDelegate
 {
     void OnPresenceUpdated(List<Presence> presences);
@@ -118,7 +118,7 @@ public interface IPresenceManagerDelegate
 
 若取消指定用户的在线状态订阅，可调用 `PresenceManager#UnsubscribePresences` 方法，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.PresenceManager.UnsubscribePresences(mem_list, new CallBack(
     onSuccess: () => {
         Debug.Log($"UnsubscribePresences success.");
@@ -133,7 +133,7 @@ SDKClient.Instance.PresenceManager.UnsubscribePresences(mem_list, new CallBack(
 
 为方便用户管理订阅关系，SDK 提供 `PresenceManager#FetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.PresenceManager.FetchSubscribedMembers(pageNum, pageSize, new ValueCallBack<List<string>>(
     onSuccess: (list) =>
     {
@@ -150,7 +150,7 @@ SDKClient.Instance.PresenceManager.FetchSubscribedMembers(pageNum, pageSize, new
 
 如果不关注用户的在线状态变更，你可以调用 `PresenceManager#FetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.PresenceManager.FetchPresenceStatus(members, new ValueCallBack<List<Presence>>(
     onSuccess: (list) =>
     {

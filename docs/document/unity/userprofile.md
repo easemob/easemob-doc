@@ -36,7 +36,7 @@
 
 参考如下示例代码，在你的项目中当前用户设置自己的所有属性或者仅设置某一项属性。
 
-```C#
+```csharp
 //设置所有用户属性。
 UserInfo userInfo;
 userInfo.userId = currentId;
@@ -66,7 +66,7 @@ SDKClient.Instance.UserInfoManager.UpdateOwnInfo(userInfo, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 //获取一个或多个用户的所有属性，一次调用用户 ID 数量不超过 100。
 List<string> idList = new List<string>();
 idList.Add("username");
@@ -97,7 +97,7 @@ SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId(idList, type, startId, 
 
 如果使用场景中涉及名片消息，你也可以使用自定义属性功能，并参考如下示例代码实现：
 
-```C#
+```csharp
 // 设置自定义消息的 `event` 为 `"userCard"`，并在 `ext` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
 string event = "userCard";
 Dictionary<string, string> adict = new Dictionary<string, string>();

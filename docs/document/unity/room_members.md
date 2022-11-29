@@ -34,7 +34,7 @@
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, handle: new ValueCallBack<CursorResult<string>>(
   // members 类型为 CursorResult<string>。
   onSuccess: (members) => {
@@ -54,7 +54,7 @@ SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, handle
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
     },
@@ -71,7 +71,7 @@ SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.BlockRoomMembers(roomId, members, new CallBack(
     onSuccess: () =>
     {
@@ -88,7 +88,7 @@ SDKClient.Instance.RoomManager.BlockRoomMembers(roomId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.UnBlockRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
     },
@@ -103,7 +103,7 @@ SDKClient.Instance.RoomManager.UnBlockRoomMembers(roomId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.FetchRoomBlockList(roomId, pageNum, pageSize, handle: new ValueCallBack<List<string>>(
     // list 类型为 List<string>。
     onSuccess: (list) => {
@@ -125,7 +125,7 @@ SDKClient.Instance.RoomManager.FetchRoomBlockList(roomId, pageNum, pageSize, han
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
     },
@@ -144,7 +144,7 @@ SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.UnMuteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
     },
@@ -159,7 +159,7 @@ SDKClient.Instance.RoomManager.UnMuteRoomMembers(roomId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.FetchRoomMuteList(roomId, pageSize, pageNum, handle: new ValueCallBack<List<string>>(
   // list 类型为 List<string>
   onSuccess: (list) => {
@@ -177,7 +177,7 @@ SDKClient.Instance.RoomManager.FetchRoomMuteList(roomId, pageSize, pageNum, hand
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.ChangeRoomOwner(roomId, newOwner, new CallBack(
   onSuccess: () => {
   },
@@ -192,7 +192,7 @@ SDKClient.Instance.RoomManager.ChangeRoomOwner(roomId, newOwner, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.AddRoomAdmin(roomId, adminId, new CallBack(
   onSuccess: () => {
   },
@@ -207,7 +207,7 @@ SDKClient.Instance.RoomManager.AddRoomAdmin(roomId, adminId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.RemoveRoomAdmin(roomId, adminId, new CallBack(
   onSuccess: () => {
   },

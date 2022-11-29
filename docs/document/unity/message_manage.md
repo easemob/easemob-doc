@@ -33,7 +33,7 @@ SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使�
 
 调用 `LoadAllConversations` 方法可以根据会话 ID 和会话类型调用 API 获取本地会话:
 
-```C#
+```csharp
 List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
 ```
 
@@ -41,7 +41,7 @@ List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
 
 你可以从本地数据库中读取指定会话的消息，示例代码如下：
 
-```C#
+```csharp
 // 获取本地会话。
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 // 该方法获取 `startMsgId` 之前的 `pagesize` 条消息。
@@ -59,7 +59,7 @@ conv.LoadMessages(startMsgId, pagesize, handle:new ValueCallBack<List<Message>>(
 
 你可以调用接口获取特定会话的未读消息数，示例代码如下：
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 int unread = conv.UnReadCount;
 ```
@@ -68,7 +68,7 @@ int unread = conv.UnReadCount;
 
 你可以通过接口获取所有会话的未读消息数量，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.GetUnreadMessageCount();
 ```
 
@@ -76,7 +76,7 @@ SDKClient.Instance.ChatManager.GetUnreadMessageCount();
 
 你可以调用接口对特定会话的未读消息数清零，示例代码如下：
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 // 指定会话的未读消息数清零。
 conv.MarkAllMessageAsRead();
@@ -94,7 +94,7 @@ SDK 提供两个接口，分别可以删除本地会话和聊天记录或者删�
 
 调用 `DeleteConversation` 和 `DeleteMessage` 删除本地会话和聊天记录，示例代码如下：
 
-```C#
+```csharp
 //删除和特定用户的会话，如需保留聊天记录，传 `false`。
 SDKClient.Instance.ChatManager.DeleteConversation(conversationId, true);
 
@@ -105,7 +105,7 @@ conv.DeleteMessage(msgId);
 
 调用 `DeleteConversationFromServer` 删除服务器端会话和聊天记录，示例代码如下：
 
-```C#
+```csharp
 //从服务器端删除和特定 ID 的会话，如果需要保留聊天记录，第三个参数传 `false`。
 SDKClient.Instance.ChatManager.DeleteConversationFromServer(conversationId, type, true, new CallBack(
     onSuccess: () => {
@@ -119,7 +119,7 @@ SDKClient.Instance.ChatManager.DeleteConversationFromServer(conversationId, type
 
 调用 `SearchMsgFromDB` 按关键字、时间戳和消息发送方搜索消息：
 
-```C#
+```csharp
 List<Message> list = SDKClient.Instance.ChatManager.SearchMsgFromDB(keywords, timeStamp, maxCount, from, MessageSearchDirection.UP);
 ```
 
@@ -129,7 +129,7 @@ List<Message> list = SDKClient.Instance.ChatManager.SearchMsgFromDB(keywords, ti
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.ImportMessages(msgs);
 ```
 
@@ -137,7 +137,7 @@ SDKClient.Instance.ChatManager.ImportMessages(msgs);
 
 如果你想在当前对话中插入消息而不实际发送消息，请构造消息正文并调用 `InsertMessage` 方法用于发送通知消息，例如“XXX 撤回一条消息”、“XXX 入群” 和 “对方正在输入...”。
 
-```C#
+```csharp
 // 将消息插入到指定会话中。
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 conv.InsertMessage(message);

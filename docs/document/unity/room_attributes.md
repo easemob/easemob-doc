@@ -33,7 +33,7 @@
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.FetchRoomAnnouncement(roomId, new ValueCallBack<string>(
     onSuccess: (announcement) => {
     },
@@ -48,7 +48,7 @@ SDKClient.Instance.RoomManager.FetchRoomAnnouncement(roomId, new ValueCallBack<s
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.UpdateRoomAnnouncement(roomId, announcement, new CallBack(
     onSuccess: () => {
     },
@@ -63,7 +63,7 @@ SDKClient.Instance.RoomManager.UpdateRoomAnnouncement(roomId, announcement, new 
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.ChangeRoomName(roomId, name, new CallBack(
     onSuccess: () => {
     },
@@ -78,7 +78,7 @@ SDKClient.Instance.RoomManager.ChangeRoomName(roomId, name, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.ChangeRoomDescription(roomId, newDesc, new CallBack(
     onSuccess: () => {
     },
@@ -95,7 +95,7 @@ SDKClient.Instance.RoomManager.ChangeRoomDescription(roomId, newDesc, new CallBa
 
 示例代码如下：
 
-```C#
+```csharp
 /**
  * 异步方法。
  *
@@ -118,7 +118,7 @@ SDKClient.Instance.RoomManager.FetchAttributes(roomId, keys, new ValueCallBack<D
 
 示例代码如下：
 
-```C#
+```csharp
 /**
  * 异步方法。
  *
@@ -154,7 +154,7 @@ SDKClient.Instance.RoomManager.AddAttributes(roomId, kv, deleteWhenExit, forced,
 
 示例代码如下：
 
-```C#
+```csharp
 /**
  * 异步方法。
  *
