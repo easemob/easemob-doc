@@ -17,16 +17,13 @@
 3. 上传证书名称（环信服务器用来判断使用哪种推送通道）和推送 token 到环信服务器；
 4. 向某设备发送消息时，环信服务器会先判断目标设备是否在线，如果目标设备不在线，则判断目标设备使用了哪种推送通道（根据目标设备上传的证书名称），使用该推送通道通过第三方推送服务器将消息推送至目标设备。
 
-### 环信服务器应具备的能力：
+### 环信服务器具备的能力
 
 - 拥有向你的 App 发送推送消息的能力；
-- 开发者通过环信后台配置 App 的推送证书，推送证书会要求填写证书名称（或者 App Key），证书名称是环信服务器用来判断目标设备使用哪种推送通道的唯一条件，所以证书名称必须与 Android 终端设备上传的证书名称一致；
-- 跟终端 Android 设备一一对应的推送 token；
-- 需 Android 设备上报；
-- 推送 token 属于哪个推送通道；
-- 需 Android 设备上报。
 
-### Android 设备需要做的事：
+- 开发者通过环信后台配置 App 的推送证书，推送证书会要求填写证书名称（或者 App Key），证书名称是环信服务器用来判断目标设备使用哪种推送通道的唯一条件，所以证书名称必须与 Android 终端设备上传的证书名称一致。
+
+### Android 设备进行的操作
 
 - 判断当前设备支持哪种推送通道；
 - 通过集成第三方推送 SDK 获取推送 token；
@@ -225,36 +222,36 @@ EMClient.getInstance().init(this, options);
 
 #### 华为 HMS 推送集成
 
-1. 华为开发者后台创建应用
-   在华为开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下华为官方介绍： [华为 HMS 消息推送服务集成](http://developer.huawei.com/consumer/cn/service/hms/catalog/huaweipush.html?page=hmssdk_huaweipush_devprepare)。
-2. 上传推送证书
-   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **华为**，然后输入你在 [华为开发者后台](http://developer.huawei.com/consumer/cn/devunion/openPlatform/html/memberCenter.html#/appManager) 创建的应用信息中的 APP ID 和 SecretKey 以及程序的包名；
-3. 华为推送集成
-   - 3.1 集成 HMS Core SDK，参见 [华为官网集成文档](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-integrating-sdk-0000001050040084)。
-   - 3.2 注册继承自 `HmsMessageService` 的服务到 `AndroidManifest.xml` 中。
-   ```xml
-   <!--华为 HMS Config-->
-   <service android:name=".service.HMSPushService"
-       android:exported="false">
-       <intent-filter>
-           <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
-       </intent-filter>
-   </service>
-   <!-- huawei push end -->
-   ```
-   - 3.3 [获取 Token 及 自动初始化](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-client-dev-0000001050042041)。
-   - 3.4 在 SDK 初始化的时候，配置启用华为推送。
-   ```java
-   EMOptions options = new EMOptions();
-   ...
-   EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
-   builder.enableHWPush();
-   // Set pushconfig to ChatOptions
-   options.setPushConfig(builder.build());
-   // To initialize Agora Chat SDK
-   EMClient.getInstance().init(this, options);
-   ```
-   - 3.5 [华为通知消息智能分类](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-intelligent-classification-0000001050040120)。
+1. 华为开发者后台创建应用<br/>
+    在华为开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见华为官方介绍：[华为 HMS 消息推送服务集成](http://developer.huawei.com/consumer/cn/service/hms/catalog/huaweipush.html?page=hmssdk_huaweipush_devprepare)。
+2. 上传推送证书<br/>
+    注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **华为**，然后输入你在 华为开发者后台创建的[应用信息中的 APP ID 和 SecretKey 以及程序的包名](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section125831926193110)；
+3. 华为推送集成<br/>
+    - 3.1 集成 HMS Core SDK，参见 [华为官网集成文档](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-integrating-sdk-0000001050040084)。
+    - 3.2 注册继承自 `HmsMessageService` 的服务到 `AndroidManifest.xml` 中。
+    ```xml
+    <!--华为 HMS Config-->
+    <service android:name=".service.HMSPushService"
+        android:exported="false">
+        <intent-filter>
+            <action android:name="com.huawei.push.action.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
+    <!-- huawei push end -->
+    ```
+    - 3.3 [获取 Token 及 自动初始化](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-client-dev-0000001050042041)。
+    - 3.4 在 SDK 初始化的时候，配置启用华为推送。
+    ```java
+    EMOptions options = new EMOptions();
+    ...
+    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
+    builder.enableHWPush();
+    // Set pushconfig to ChatOptions
+    options.setPushConfig(builder.build());
+    // To initialize Agora Chat SDK
+    EMClient.getInstance().init(this, options);
+    ```
+    - 3.5 [华为通知消息智能分类](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-intelligent-classification-0000001050040120)。
 
 #### 小米推送集成
 
@@ -365,7 +362,7 @@ EMClient.getInstance().init(this, options);
 环信即时通讯 IM SDK 中已经集成了 OPPO 推送相关逻辑，你还需要完成以下步骤：
 
 1. 在 OPPO 开发者后台创建应用
-   - 在 OPPO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下 OPPO 官方介绍：[ OPPO 推送服务集成](https://open.oppomobile.com/wiki/doC#id=10195)
+   - 在 OPPO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下 OPPO 官方介绍：[ OPPO 推送服务集成](https://open.oppomobile.com/new/developmentDoc/info?id=10195)
 2. 上传推送证书
    - 注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **OPPO**，然后输入你在 [OPPO 开发者后台](https://open.oppomobile.com/service/oms?service_id=1000004&app_type=app&app_id=30004346)创建的应用的 `appkey` 和 `mastersecret` 以及程序的 `包名`，MasterSecret 需要到 [OPPO 推送平台](https://push.oppo.com/) - **配置管理** - **应用配置** 页面查看。
 3. OPPO 推送集成
