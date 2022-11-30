@@ -100,7 +100,7 @@ const conn = new EC.connection({
 
 ### REST API 注册
 
-请参考 [注册用户](\server-side\account_system.html#注册用户)。
+请参考 [注册用户](/server-side/account_system.html#注册用户)。
 
 ### SDK 注册
 
@@ -165,7 +165,7 @@ conn
   });
 ```
 
-**用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般同时使用声网和环信产品时利用该方法登录。token 获取请参考 [使用声网 user token 鉴权](https://docs.agora.io/en/agora-chat/generate_user_tokens?platform=React%20Native)。
+**用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般同时使用声网和环信产品时利用该方法登录。token 获取请参考 [使用声网用户权限 token 鉴权](https://docs.agora.io/en/agora-chat/develop/authentication?platform=android)。
 
 ```javascript
 conn
