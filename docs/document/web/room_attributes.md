@@ -39,10 +39,10 @@
 
 ```javascript
 let option = {
-    chatRoomId: "chatRoomId",
-    chatRoomName: "chatRoomName", // 聊天室名称。
-    description: "description", // 聊天室描述。
-    maxusers: 200, // 聊天室最大成员数。
+  chatRoomId: "chatRoomId",
+  chatRoomName: "chatRoomName", // 聊天室名称。
+  description: "description", // 聊天室描述。
+  maxusers: 200, // 聊天室最大成员数。
 };
 conn.modifyChatRoom(option).then((res) => console.log(res));
 ```
@@ -55,7 +55,7 @@ conn.modifyChatRoom(option).then((res) => console.log(res));
 
 ```javascript
 var option = {
-    roomId: "roomId",
+  roomId: "roomId",
 };
 conn.fetchChatRoomAnnouncement(option).then((res) => console.log(res));
 ```
@@ -68,8 +68,8 @@ conn.fetchChatRoomAnnouncement(option).then((res) => console.log(res));
 
 ```javascript
 let option = {
-    roomId: "roomId",
-    announcement: "hello everyone",
+  roomId: "roomId",
+  announcement: "hello everyone",
 };
 conn.updateChatRoomAnnouncement(option).then((res) => console.log(res));
 ```
@@ -84,8 +84,8 @@ conn.updateChatRoomAnnouncement(option).then((res) => console.log(res));
 
 ```javascript
 let option = {
-    chatRoomId: "chatRoomId", // 聊天室 ID
-    attributeKeys: ["attributeKey1", "attributeKey2", "..."], // 聊天室属性 key（可选，若不设置则获取全部自定义属性）
+  chatRoomId: "chatRoomId", // 聊天室 ID
+  attributeKeys: ["attributeKey1", "attributeKey2", "..."], // 聊天室属性 key（可选，若不设置则获取全部自定义属性）
 };
 conn.getChatRoomAttributes(option).then((res) => console.log(res));
 ```
@@ -96,11 +96,11 @@ conn.getChatRoomAttributes(option).then((res) => console.log(res));
 
 ```javascript
 let option = {
-    chatRoomId: "chatRoomId", // 聊天室 ID
-    attributeKey: "attributeKey", // 聊天室属性 key
-    attributeValue: "attributeValue", // 聊天室属性 value
-    autoDelete: true, // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
-    isForced: false, // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
+  chatRoomId: "chatRoomId", // 聊天室 ID
+  attributeKey: "attributeKey", // 聊天室属性 key
+  attributeValue: "attributeValue", // 聊天室属性 value
+  autoDelete: true, // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
+  isForced: false, // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
 };
 conn.setChatRoomAttribute(option).then((res) => console.log(res));
 ```
@@ -129,9 +129,9 @@ conn.setChatRoomAttributes(option).then(res => console.log(res))
 
 ```javascript
 let option = {
-    chatRoomId: "chatRoomId", // 聊天室 ID
-    attributeKey: "attributeKey", // 聊天室属性 key
-    isForced: false, // 强制设置聊天室自定义属性，即是否支持移除其他成员设置的属性（可选，默认为 `false`）
+  chatRoomId: "chatRoomId", // 聊天室 ID
+  attributeKey: "attributeKey", // 聊天室属性 key
+  isForced: false, // 强制设置聊天室自定义属性，即是否支持移除其他成员设置的属性（可选，默认为 `false`）
 };
 conn.removeChatRoomAttribute(option).then((res) => console.log(res));
 ```
@@ -142,9 +142,9 @@ conn.removeChatRoomAttribute(option).then((res) => console.log(res));
 
 ```javascript
 let option = {
-    chatRoomId: "chatRoomId", // 聊天室 ID
-    attributeKeys: ["attributeKey1", "attributeKey2", "..."], // 聊天室属性 key
-    isForced: false, // 强制设置聊天室自定义属性，即是否支持移除其他成员设置的属性（可选，默认为 `false`）
+  chatRoomId: "chatRoomId", // 聊天室 ID
+  attributeKeys: ["attributeKey1", "attributeKey2", "..."], // 聊天室属性 key
+  isForced: false, // 强制设置聊天室自定义属性，即是否支持移除其他成员设置的属性（可选，默认为 `false`）
 };
 conn.removeChatRoomAttributes(option).then((res) => console.log(res));
 ```
