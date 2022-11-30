@@ -39,12 +39,12 @@
 
 ```javascript
 let option = {
-    chatRoomId: 'chatRoomId',
-    chatRoomName: 'chatRoomName', // 聊天室名称。
-    description: 'description',   // 聊天室描述。
-    maxusers: 200                 // 聊天室最大成员数。
-}
-conn.modifyChatRoom(option).then(res => console.log(res))
+    chatRoomId: "chatRoomId",
+    chatRoomName: "chatRoomName", // 聊天室名称。
+    description: "description", // 聊天室描述。
+    maxusers: 200, // 聊天室最大成员数。
+};
+conn.modifyChatRoom(option).then((res) => console.log(res));
 ```
 
 #### 获取聊天室公告
@@ -55,9 +55,9 @@ conn.modifyChatRoom(option).then(res => console.log(res))
 
 ```javascript
 var option = {
-    roomId: 'roomId'
+    roomId: "roomId",
 };
-conn.fetchChatRoomAnnouncement(option).then(res => console.log(res))
+conn.fetchChatRoomAnnouncement(option).then((res) => console.log(res));
 ```
 
 #### 更新聊天室公告
@@ -68,10 +68,10 @@ conn.fetchChatRoomAnnouncement(option).then(res => console.log(res))
 
 ```javascript
 let option = {
-    roomId: 'roomId',
-    announcement: 'hello everyone'
+    roomId: "roomId",
+    announcement: "hello everyone",
 };
-conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
+conn.updateChatRoomAnnouncement(option).then((res) => console.log(res));
 ```
 
 ### 管理聊天室自定义属性（key-value）
@@ -82,72 +82,72 @@ conn.updateChatRoomAnnouncement(option).then(res => console.log(res))
 
 示例代码如下：
 
-   ```javascript
-   let option = {
-       chatRoomId: "chatRoomId",  // 聊天室 ID
-       attributeKeys: ["attributeKey1","attributeKey2","..."] // 聊天室属性 key（可选，若不设置则获取全部自定义属性）
-   }
-   conn.getChatRoomAttributes(option).then(res => console.log(res))
-   ```
+```javascript
+let option = {
+    chatRoomId: "chatRoomId", // 聊天室 ID
+    attributeKeys: ["attributeKey1", "attributeKey2", "..."], // 聊天室属性 key（可选，若不设置则获取全部自定义属性）
+};
+conn.getChatRoomAttributes(option).then((res) => console.log(res));
+```
 
 #### 设置单个聊天室自定义属性
 
 聊天室成员均可通过调用 `setChatRoomAttribute` 设置和更新单个自定义属性。设置后，其他聊天室成员收到 `onChatroomEvent` 回调，事件为 `updateChatRoomAttributes`。
 
-   ```javascript
-   let option = {
-       chatRoomId: "chatRoomId", // 聊天室 ID
-       attributeKey: "attributeKey", // 聊天室属性 key
-       attributeValue: "attributeValue", // 聊天室属性 value
-   	   autoDelete: true, // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
-       isForced: false // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
-   }
-   conn.setChatRoomAttribute(option).then(res => console.log(res))
-   ```
+```javascript
+let option = {
+    chatRoomId: "chatRoomId", // 聊天室 ID
+    attributeKey: "attributeKey", // 聊天室属性 key
+    attributeValue: "attributeValue", // 聊天室属性 value
+    autoDelete: true, // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
+    isForced: false, // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
+};
+conn.setChatRoomAttribute(option).then((res) => console.log(res));
+```
 
 #### 设置多个聊天室自定义属性
 
 聊天室成员均可以调用 `setChatRoomAttributes` 批量设置自定义属性。设置后，其他聊天室成员收到 `onChatroomEvent` 回调，事件为 `updateChatRoomAttributes`。
 
-   ```javascript
-   let option = {
-       chatRoomId: "chatRoomId",  // 聊天室 ID
-       attributes: {  // 聊天室属性，为 key-value 格式，即 {"key":"value"}
-            "attributeKey1": "attributeValue1",
-        	"attributeKey2": "attributeValue2",
-         	"..."
-       },
-       autoDelete: true, // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
-   	   isForced: false  // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
-   }
-   conn.setChatRoomAttributes(option).then(res => console.log(res))
-   ```
+```javascript
+let option = {
+    chatRoomId: "chatRoomId",  // 聊天室 ID
+    attributes: {  // 聊天室属性，为 key-value 格式，即 {"key":"value"}
+        "attributeKey1": "attributeValue1",
+     	"attributeKey2": "attributeValue2",
+      	"..."
+    },
+    autoDelete: true, // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
+	isForced: false  // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
+}
+conn.setChatRoomAttributes(option).then(res => console.log(res))
+```
 
 #### 删除单个聊天室属性
 
 聊天室所有成员可通过调用 `removeChatRoomAttribute` 移除单个自定义属性。移除成功后，其他成员收到 `onChatroomEvent` 回调，事件为 `removeChatRoomAttributes`。
 
-   ```javascript
-   let option = {
-      chatRoomId: "chatRoomId",  // 聊天室 ID
-   	  attributeKey: "attributeKey",  // 聊天室属性 key
-   	  isForced: false // 强制设置聊天室自定义属性，即是否支持移除其他成员设置的属性（可选，默认为 `false`）
-   }
-   conn.removeChatRoomAttribute(option).then(res => console.log(res))
-   ```
+```javascript
+let option = {
+    chatRoomId: "chatRoomId", // 聊天室 ID
+    attributeKey: "attributeKey", // 聊天室属性 key
+    isForced: false, // 强制设置聊天室自定义属性，即是否支持移除其他成员设置的属性（可选，默认为 `false`）
+};
+conn.removeChatRoomAttribute(option).then((res) => console.log(res));
+```
 
 #### 删除多个聊天室属性
 
 聊天室所有成员可调用 `removeChatRoomAttributes` 批量移除自定义属性。移除成功后，其他成员收到 `onChatroomEvent` 回调，事件为 `removeChatRoomAttributes`。
 
-   ```javascript
-   let option = {
-    	chatRoomId: "chatRoomId",  // 聊天室 ID
-    	attributeKeys: ["attributeKey1","attributeKey2","..."], // 聊天室属性 key
-   	    isForced: false // 强制设置聊天室自定义属性，即是否支持移除其他成员设置的属性（可选，默认为 `false`）
-   }
-   conn.removeChatRoomAttributes(option).then(res => console.log(res))
-   ```
+```javascript
+let option = {
+    chatRoomId: "chatRoomId", // 聊天室 ID
+    attributeKeys: ["attributeKey1", "attributeKey2", "..."], // 聊天室属性 key
+    isForced: false, // 强制设置聊天室自定义属性，即是否支持移除其他成员设置的属性（可选，默认为 `false`）
+};
+conn.removeChatRoomAttributes(option).then((res) => console.log(res));
+```
 
 ### 监听聊天室事件
 
