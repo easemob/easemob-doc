@@ -7,6 +7,8 @@
   "devDependencies": {
     "@vuepress/plugin-search": "^1.9.7",
     "babel-plugin-component": "^1.1.1",
+    "patch-package": "^6.5.0",
+    "postinstall-postinstall": "^2.1.0",
     "vuepress": "^1.9.7",
     "vuepress-plugin-container": "^2.1.5",
     "vuepress-plugin-fulltext-search": "^2.2.1",
@@ -14,7 +16,8 @@
   },
   "scripts": {
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "async-validator": "^4.2.5",
