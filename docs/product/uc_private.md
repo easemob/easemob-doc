@@ -36,7 +36,7 @@
 |SDK|版本号 |下载地址|开发指南|
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 |Android|[3.9.1](http://docs-im-beta.easemob.com/document/android/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19)|[下载 SDK](https://downloadsdk.easemob.com/downloads/easemob-sdk-3.9.1.zip)    [下载 Demo](https://downloadsdk.easemob.com/downloads/imsdkdemo_android-3.9.1.apk) | [查看](http://docs-im-beta.easemob.com/document/android/privatecloud.html) |
-|Web|[4.0.4](http://docs-im-beta.easemob.com/document/web/releasenote.html#%E7%89%88%E6%9C%AC-v4-0-4-2022-4-19)|[下载 SDK](https://github.com/easemob/websdk/releases/tag/v4.0.4)   [下载 Demo](zq-webim-hsb.easemob.com) | [查看](http://docs-im-beta.easemob.com/document/web/overview.html) |
+|Web|[4.0.4](http://docs-im-beta.easemob.com/document/web/releasenote.html#%E7%89%88%E6%9C%AC-v4-0-4-2022-4-19)|[下载 SDK](https://github.com/easemob/websdk/releases/tag/v4.0.4)   [下载 Demo](https://zq-webim-hsb.easemob.com/) | [查看](http://docs-im-beta.easemob.com/document/web/privatecloud.html) |
 |iOS|[3.9.1](http://docs-im-beta.easemob.com/document/ios/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19)|[下载 SDK](https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V3.9.1.zip)    [下载 Demo](https://www.pgyer.com/2XKY) | [查看](http://docs-im-beta.easemob.com/document/ios/privatecloud.html) |
 |Windows（C++）|3.9.1|[下载 SDK 及 Demo](https://gitee.com/liyuzhao/im-cpp-demo)  | [查看](https://gitee.com/liyuzhao/im-cpp-demo) |
 |Windows（C#）|[1.0.2](http://docs-im-beta.easemob.com/document/windows/releasenote.html#%E7%89%88%E6%9C%AC-v1-0-2-1-2022-06-22)|[下载 SDK](https://downloadsdk.easemob.com/downloads/SDK/WinSDK/agora_chat_sdk.1.0.2-beta.nupkg) | [查看](http://docs-im-beta.easemob.com/document/windows/quickstart.html) |
@@ -46,6 +46,6 @@
 |小程序|[4.0.4](https://docs-im.easemob.com/im/applet/releasenote#%E7%89%88%E6%9C%AC_v404_dev_2022-4-19)|[下载 SDK 及 Demo](https://github.com/easemob/webim-uniapp-demo/releases/tag/4.0.4) | [查看](https://docs-im.easemob.com/im/applet/wechat) |
 |Unity|3.9.0|[下载 SDK](https://downloadsdk.easemob.com/downloads/SDK/Unity/im_unity_sdk_3_9_0.unitypackage) |  |
 |Flutter|[3.9.0+2](https://pub.flutter-io.cn/packages/im_flutter_sdk/changelog#3902)|[下载 SDK](https://pub.flutter-io.cn/packages/im_flutter_sdk/versions/3.9.0+2) | [查看](http://docs-im-beta.easemob.com/document/flutter/quickstart.html) |
-|Java|[0.4.6](https://docs-im.easemob.com/im/server/ready/releasenote)|[下载 SDK](https://github.com/easemob/easemob-im-server-sdk) | [查看](https://docs-im.easemob.com/im/server/ready/sdk) |
+|Java|[0.6.3](https://docs-im.easemob.com/im/server/ready/releasenote)|[下载 SDK](https://github.com/easemob/easemob-im-server-sdk) | [查看](http://docs-im-beta.easemob.com/document/server-side/java_server_sdk.html) |
 | PHP|0.1.0|[下载 SDK](https://github.com/easemob/im-php-server-sdk) | [查看](http://docs-im-beta.easemob.com/document/server-side/php_server_sdk.html) |
 
