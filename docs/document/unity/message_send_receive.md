@@ -465,3 +465,64 @@ void OnCmdMessagesReceived(List<Message> list) {
   }
 }
 ```
+
+### 发送自定义类型消息
+
+除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。自定义消息内容为键值对（key-value）格式，你需要自己添加并解析该内容。
+
+```csharp
+//`event` 为字符串类型的自定义事件，比如礼物消息，可以设置：
+string event = "gift";
+
+//`adict` 类型为 `Dictionary<string, string>`。
+Dictionary<string, string> adict = new Dictionary<string, string>();
+adict.Add("key", "value");
+
+Message msg = Message.CreateCustomSendMessage(toChatUsername, event, adict);
+SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+   onSuccess: () => {
+      Debug.Log($"{msg.MsgId}发送成功");
+   },
+   onError: (code, desc) => {
+      Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
+   }
+));
+```
+
+### 使用消息的扩展字段
+
+当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型。
+
+当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
+
+```csharp
+Message msg = Message.CreateTextSendMessage(toChatUsername, content);
+
+// 增加自定义属性。
+AttributeValue attr1 = AttributeValue.Of("value", AttributeValueType.STRING);
+AttributeValue attr2 = AttributeValue.Of(true, AttributeValueType.BOOL);
+msg.Attributes.Add("attribute1", attr1);
+msg.Attributes.Add("attribute2", attr2);
+
+// 发送消息。
+SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+  onSuccess: () => {
+    Debug.Log($"{msg.MsgId}发送成功");
+  },
+  onError:(code, desc) => {
+    Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
+  }
+));
+// 接收消息的时候获取扩展属性。
+bool found = false;
+string str = msg.GetAttributeValue<string>(msg.Attributes, "attribute1", found);
+if (found) {
+  // 使用 str 变量。
+}
+found = false；
+bool b = msg.GetAttributeValue<bool>(msg.Attributes, "attribute2", found);
+if (found) {
+  // 使用 b 变量。
+}
+```
+
