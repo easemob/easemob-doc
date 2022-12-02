@@ -94,17 +94,16 @@ EMClient.getInstance().init(this, options);
 
 #### FCM 推送集成
 
-1. Firebase 控制台创建项目
-   1.1 在 [Firebase console](https://console.firebase.google.com/) 创建项目，并注册 Android 应用。
-   1.2 按照提示去下载 google-services.json 文件到本地，并按照引导放置到项目的指定位置。
-   1.3 跳转到 `Project settings` 页面，选择 `Cloud Messaging` 标签，即可看到 `Server ID` 和 `Server Key`。
+1. 在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase，详见 [FCM 的官网介绍](https://firebase.google.com/docs/android/setup?hl=zh-cn#console)。<br/>
+  将 Firebase SDK 添加到你的应用后，在 Firebase 控制台的 `Project settings` 页面，选择 `Cloud Messaging` 标签，查看 `Server ID` 和 `Server Key`。
 
-2. 上传推送证书
-   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **谷歌**，然后输入 Firebase 项目设置里的 `Server ID` 和 `Server Key`。
+2. 上传推送证书。<br/>
 
-3. FCM 推送集成
+   在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时推送** > **配置证书** > **添加推送证书** > **谷歌**，然后输入 Firebase 项目设置里的 `Server ID` 和 `Server Key`。
 
-   3.1 在项目根目录下的 `build.gradle` 中添加 FCM 服务插件
+3. FCM 推送集成。<br/>
+
+   3.1 在项目根目录下的 `build.gradle` 中添加 FCM 服务插件。
 
    ```gradle
    dependencies {
@@ -194,6 +193,7 @@ EMClient.getInstance().init(this, options);
    ```
 
    3.6 监控 device token 生成。
+   
        重写 `FirebaseMessagingService` 中的 `onNewToken` 方法，device token 更新后及时更新到环信即时通讯 IM SDK。
 
    ```java
