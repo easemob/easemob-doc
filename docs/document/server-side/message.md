@@ -981,8 +981,8 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | 参数   | 类型   | 是否必需 | 描述           |
 | :----- | :----- | :------- | :------------- |
 | `file` | String | 是       | 文件本地路径。 |
-| `thumbnail-height` | Int | 否       | 图片缩略图的高度。<br/>文件类型为图片时会自动生成图片的缩略图。该参数仅在上传的图片超过 10 KB 时，才会生效。若不传该参数，默认为 170 像素，可在[环信即时通讯控制台](https://console.easemob.com/user/login)修改该默认值。|
-| `thumbnail-width` | Int | 否       | 图片缩略图的宽度。<br/>文件类型为图片时会自动生成图片的缩略图。该参数仅在上传的图片超过 10 KB 时，才会生效。若不传该参数，默认为 170 像素，可在[环信即时通讯控制台](https://console.easemob.com/user/login)修改该默认值。|
+| `thumbnail-height` | Int | 否       | 图片缩略图的高度。<br/>文件类型为图片时会自动生成图片的缩略图。该参数仅在上传的图片超过 10 KB 时，才会生效。若不传该参数，默认为 170 像素，可在[环信即时通讯控制台](https://console.easemob.com/user/login)的`服务概览`页面的`设置`区域修改该默认值。|
+| `thumbnail-width` | Int | 否       | 图片缩略图的宽度。<br/>文件类型为图片时会自动生成图片的缩略图。该参数仅在上传的图片超过 10 KB 时，才会生效。若不传该参数，默认为 170 像素，可在[环信即时通讯控制台](https://console.easemob.com/user/login)的`服务概览`页面的`设置`区域修改该默认值。|
 
 ### HTTP 响应
 
