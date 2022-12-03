@@ -243,8 +243,8 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 | 参数                           | 类型 | 描述   | 是否必填<div style="width: 80px;"></div>                                         |
 | :-------- | :------------ | :------------ |:------------ |
 | `notification_no_disturbing`      | Bool  |  是否设置为免打扰模式：<br/> - `true`：是；<br/> - `false`：否。 | 否 |
-| `notification_no_disturbing_start` |  String | 免打扰时间段的开始时间，精确到小时，例如 “8” 表示每日 8:00 开启免打扰模式。该参数的取值范围为 [0,23]。 | 否|
-| `notification_no_disturbing_end`  | String | 免打扰时间段的结束时间，精确到小时，例如 “18” 表示每日 18:00 关闭免打扰模式。该参数的取值范围为 [0,23]。 | 否|
+| `notification_no_disturbing_start` |  String | 免打扰时间段的开始时间，精确到小时，取值范围为 [0,23]。例如 “8” 表示每日 8:00 开启免打扰模式。| 否|
+| `notification_no_disturbing_end`  | String | 免打扰时间段的结束时间，精确到小时，取值范围为 [0,23]。例如 “18” 表示每日 18:00 关闭免打扰模式。| 否|
 
 :::tip
 免打扰时间段的设置，应注意以下几项：
