@@ -595,7 +595,7 @@ EMClient.getInstance().init(this, options);
 
 #### 4.1 设置推送通知
 
-为优化用户在处理大量推送通知时的体验，环信 IM 在 app 和会话层面提供了推送通知和免打扰模式的细粒度选项。
+为优化用户在处理大量推送通知时的体验，环信 IM 在 app 和会话层面提供了推送通知方式和免打扰模式的细粒度选项。
 
 **推送通知方式**
 
@@ -605,21 +605,22 @@ EMClient.getInstance().init(this, options);
 <td width="184">
 <p><strong>推送通知方式参数</strong></p>
 </td>
-<td width="345">
+<td width="420">
 <p><strong>描述</strong></p>
 </td>
-<td width="284">
-<p>应用范围</p>
+<td width="321">
+<p><strong>应用范围</strong></p>
 </td>
 </tr>
 <tr>
 <td width="184">
-<p>All</p>
+<p>ALL</p>
 </td>
-<td width="345">
+<td width="420">
 <p>接收所有离线消息的推送通知。</p>
 </td>
-<td rowspan="3" width="284">
+<td rowspan="3" width="321">
+<p>&nbsp;</p>
 <p>App 或单聊/群聊会话</p>
 </td>
 </tr>
@@ -627,15 +628,16 @@ EMClient.getInstance().init(this, options);
 <td width="184">
 <p>MENTION_ONLY</p>
 </td>
-<td width="345">
-<p>仅接收提及消息的推送通知。<br/>该参数推荐在群聊中使用。若提及一个或多个用户，需在创建消息时对 ext 字段传 "em_at_list":["user1", "user2" ...]；若提及所有人，对该字段传 "em_at_list":"all"。</p>
+<td width="420">
+<p>仅接收提及消息的推送通知。</p>
+<p>该参数推荐在群聊中使用。若提及一个或多个用户，需在创建消息时对 ext 字段传 "em_at_list":["user1", "user2" ...]；若提及所有人，对该字段传 "em_at_list":"all"。</p>
 </td>
 </tr>
 <tr>
 <td width="184">
 <p>NONE</p>
 </td>
-<td width="345">
+<td width="420">
 <p>不接收离线消息的推送通知。</p>
 </td>
 </tr>
