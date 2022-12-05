@@ -24,14 +24,14 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.6.0</version>
+    <version>0.6.6</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:0.6.0'
+implementation 'com.easemob.im:im-sdk-core:0.6.6'
 ```
 
 ### 使用
@@ -95,12 +95,35 @@ public class UserService {
 }
 ```
 
-API的返回值是响应式的，如果希望阻塞，可以使用上面例子中的 `.block()`。
+API 的返回值是响应式的，如果希望阻塞，可以使用上面例子中的 `.block()`。
 
 :::notice
 如果你的项目不是响应式的编程，那么请在调用的 Server SDK API 的结尾添加 `.block()`
 对使用的 API 添加 try/catch ，如果使用的 API 没有抛出异常，代表请求成功，反之则请求失败，通过异常 `EMException` 对象的 `getErrorCode()/getMessage()` 拿到错误码以及错误描述。
 :::
+
+#### 2.私有化配置，将你自己的私有化 REST 服务器地址设置给 `setBaseUri` 即可。
+
+建议写到配置类中，示例如下：
+
+```java
+@Configuration
+public class Config {
+
+    @Bean
+    public EMService service() {
+
+        EMProperties properties = EMProperties.builder()
+                 .setBaseUri("http://Your privatized address name")
+                .setAppkey("Appkey")
+                .setClientId("Client ID")
+                .setClientSecret("ClientSecret")
+                .build();
+
+        return new EMService(properties);
+    }
+}
+```
 
 ## 参考
 
@@ -180,6 +203,10 @@ EMProperties properties = EMProperties.builder()
 ```
 
 ## 更新日志
+
+###  V0.6.6 2022-12-02
+
+修复创建/获取/删除用户方法使用大写字母出现异常的问题。
 
 ###  V0.6.3
 
