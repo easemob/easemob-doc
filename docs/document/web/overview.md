@@ -109,11 +109,11 @@ const conn = new EC.connection({
 ```javascript
 conn.registerUser({
 	/** 用户 ID。 */
-	username: string;
+	username: string,
 	/** 密码。 */
-	password: string;
+	password: string,
 	/** 显示昵称。用于移动端推送的时候通知栏显示。 */
-	nickname?: string;
+	nickname: string,
 }).then((res) => {
   console.log(res)
 })
