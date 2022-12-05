@@ -102,10 +102,10 @@ export default {
                 <div class="main-nav">
                     <template v-for="item in mainNav">
                         <template v-if="item.link.startsWith('http://') || item.link.startsWith('https://')">
-                            <a :href="item.link" target="_blank">{{ item.text }}</a>
+                            <a :href="item.link" target="_blank" :key="item.text">{{ item.text }}</a>
                         </template>
                         <template v-else>
-                            <router-link v-if="item.show === undefined || item.show !== false" :to="item.link"
+                            <router-link v-if="item.show !== false" :to="item.link" :key="item.text"
                                 :class="{ active: item.link.startsWith(localePath + path.split('/')[0] + '/') }">{{
                                         item.text
                                 }}</router-link>
@@ -119,11 +119,12 @@ export default {
                     <div class="secondary-nav">
                         <template v-for="item in secondaryNav">
                             <template v-if="item.link.startsWith('http://') || item.link.startsWith('https://')">
-                                <a :href="item.link" target="_blank"
-                                    v-if="item.show === undefined || item.show !== false">{{ item.text }}</a>
+                                <a :href="item.link" target="_blank" v-if="item.show !== false" :key="item.text">{{
+                                        item.text
+                                }}</a>
                             </template>
                             <template v-else>
-                                <router-link :to="item.link" v-if="item.show === undefined || item.show !== false">{{
+                                <router-link :to="item.link" v-if="item.show !== false" :key="item.text">{{
                                         item.text
                                 }}</router-link>
                             </template>
@@ -135,15 +136,20 @@ export default {
                         <div class="sub-menu" id="sub-menu"
                             :class="{ 'menu-hidden': !mouseEnter && !mouseLeave, 'slide-up-enter slide-up-enter-active': mouseEnter, 'slide-up-leave slide-up-leave-active': mouseLeave }">
                             <ul>
-                                <li v-for="item in languages" :class="{ active: item.path == localePath }">
+                                <li v-for="item in languages" :class="{ active: item.path == localePath }"
+                                    :key="item.label">
                                     <router-link :to="item.path + path">{{ item.label }}</router-link>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="login-register">
-                        <a :href="item.link" target="_blank" v-if="item.show === undefined || item.show !== false"
-                            v-for="item in extraNav">{{ item.text }}</a>
+                        <template v-for="item in extraNav">
+                            <a :href="item.link" target="_blank" v-if="item.show !== false" :key="item.text">{{
+                                    item.text
+                            }}</a>
+                        </template>
+
                     </div>
                 </div>
             </div>
@@ -171,16 +177,23 @@ export default {
         </div>
         <div class="mobile-nav-list" v-if="showMobileMenu">
             <ul>
-                <li v-for="item in mainNav" v-if="item.show === undefined || item.show !== false">
-                    <router-link :to="item.link">{{ item.text }}</router-link>
-                </li>
+                <template v-for="item in mainNav">
+                    <li v-if="item.show !== false" :key="item.text">
+                        <a :href="item.link" target="_blank"
+                            v-if="item.link.startsWith('http://') || item.link.startsWith('https://')">{{ item.text
+                            }}</a>
+                        <router-link v-else :to="item.link">{{ item.text }}</router-link>
+                    </li>
+                </template>
                 <!-- <li v-for="item in secondaryNav" v-if="item.show === undefined || item.show !== false">
                     <router-link :to="item.link">{{ item.text }}</router-link>
                 </li> -->
-                <li v-for="item in extraNav" v-if="item.show === undefined || item.show !== false">
-                    <a :href="item.link" target="_blank">{{ item.text }}</a>
-                    <!-- <router-link :to="item.link">{{ item.text }}</router-link> -->
-                </li>
+                <template v-for="item in extraNav">
+                    <li v-if="item.show !== false" :key="item.text">
+                        <a :href="item.link" target="_blank">{{ item.text }}</a>
+                        <!-- <router-link :to="item.link">{{ item.text }}</router-link> -->
+                    </li>
+                </template>
                 <!-- <li class="switch-lang" :class="{open: showMobileLangList}">
                     <a @click="showLangList">{{ languageLabel }}</a>
                     <ul>
