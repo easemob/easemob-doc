@@ -2,7 +2,7 @@
 
 ## Web Vue 3 Demo
 
-对于 Web Vue Demo，进行私有化配置需在 [Vue 3 源代码]（https://github.com/easemob/webim-vue-demo/tree/demo-vue3）中进行修改。
+对于 Web Vue Demo，进行私有化配置需在 [Vue 3 源代码](https://github.com/easemob/webim-vue-demo/tree/demo-vue3)中进行修改。
 
 ### 修改环境配置
 
