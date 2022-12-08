@@ -273,10 +273,9 @@ module.exports = {
                     { text: '管理子区消息', link: 'thread_message.html' }
                   ]
                 },
-                { text: '消息审核（举报）', link: 'moderation.html', except: ['react-native', 'flutter'] },
-                { text: '消息举报', link: 'moderation.html', only: ['react-native', 'flutter'] },
+                { text: '消息审核（举报）', link: 'moderation.html'},
               ],
-              except: ['applet', 'server-side']
+              except: ['server-side']
             },
             {
               title: '其他',
