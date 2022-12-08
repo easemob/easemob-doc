@@ -256,7 +256,7 @@ module.exports = {
                   ]
                 },
               ],
-              except: ['applet', 'server-side']
+              except: ['server-side']
             },
             {
               title: '进阶功能',
