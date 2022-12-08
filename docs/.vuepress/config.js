@@ -275,7 +275,7 @@ module.exports = {
                 },
                 { text: '消息审核（举报）', link: 'moderation.html'},
               ],
-              except: ['server-side']
+              except: ['applet','server-side']
             },
             {
               title: '其他',
@@ -344,6 +344,25 @@ module.exports = {
                     { text: '管理聊天室属性', link: 'room_attributes.html' },
                   ]
                 },
+              ],
+              only: ['applet']
+            },
+            {
+              title: '进阶功能',
+              children: [
+                { text: '设置推送', link: 'push.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
+                { text: '登录多个设备', link: 'multi_device.html' },
+                { text: '管理在线状态订阅', link: 'presence.html' },
+                { text: '消息表情回复', link: 'reaction.html' },
+                {
+                  text: '子区管理',
+                  collapsable: true,
+                  children: [
+                    { text: '管理子区', link: 'thread.html' },
+                    { text: '管理子区消息', link: 'thread_message.html' }
+                  ]
+                },
+                { text: '消息审核（举报）', link: 'moderation.html'},
               ],
               only: ['applet']
             },
