@@ -893,6 +893,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
+| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 | `Content-Type`   | String | 是    |内容类型。请填 `multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW`。 |
 |`restrict-access`| Bool  |  否   |是否仅群成员可见。<br/> - `true`：是。<br/> - `false`：否。  |
@@ -924,7 +925,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 ```shell
 # 将 <YourToken> 替换为你在服务端生成的 Token
 
-curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files' -H 'Authorization: Bearer <YourToken> ' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -H 'restrict-access: true'
+curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -H 'restrict-access: true' -F file=@/Users/test/image/IMG_3.JPG
 ```
 
 ##### 响应示例
