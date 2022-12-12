@@ -893,9 +893,8 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-| `Content-Type`  | String | 是    |内容类型。请填 `application/json` |
-| `content-type`   | String | 是    |内容类型。请填 `multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW` |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Content-Type`   | String | 是    |内容类型。请填 `multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW` |
 |`restrict-access`| Bool  |  否   |是否仅群成员可见。<br/> - `true`：是。<br/> - `false`：否。  |
 |`file`| String | 是 |待上传文件的本地路径。  |
 
@@ -925,7 +924,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 ```shell
 # 将 <YourToken> 替换为你在服务端生成的 Token
 
-curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files' -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourToken> ' -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -H 'restrict-access: true' /
+curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files' -H 'Authorization: Bearer <YourToken> ' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -H 'restrict-access: true'
 ```
 
 ##### 响应示例
