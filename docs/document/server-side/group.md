@@ -925,7 +925,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 ```shell
 # 将 <YourToken> 替换为你在服务端生成的 Token
 
-curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -H 'restrict-access: true' -F file=@/Users/test/image/IMG_3.JPG
+curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -H 'restrict-access: true' -F file=@/Users/test/image/IMG_3.JPG
 ```
 
 ##### 响应示例
