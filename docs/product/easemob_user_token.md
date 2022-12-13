@@ -132,7 +132,7 @@ curl -X POST http://XXXX/XXXX/XXXX/token -H 'Authorization: Bearer <YourAppToken
 }
 ```
 
-2. 通过用户 ID 获取 token 的响应：
+2. 自动创建用户并获取 token 的响应：
 
 ```json
 {

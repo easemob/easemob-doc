@@ -117,9 +117,9 @@ EMClient.getInstance.addConnectionEventHandler(
     onUserDidRemoveFromServer: () => {},
     // 由于其他设备登录被踢下线；
     onUserKickedByOtherDevice: () => {},
-    // agora token 过期;
+    // Token 过期;
     onTokenDidExpire: () => {},
-    // agora token 即将过期，需要调用 renewToken;
+    // Token 即将过期，需要调用 renewToken;
     onTokenWillExpire: () => {},
   ),
 );
