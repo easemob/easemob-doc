@@ -138,7 +138,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | :----------- | :----- | :------- | :------------------- |
 | `grant_type` | String | 是       | 授权方式。<br/> - 若值为 `password`，通过用户 ID 和密码获取 token，需设置 `username` 和 `password` 参数。 <br/> - 若值为 `inherit`，通过用户 ID 获取 token，只需设置 `username` 参数。在该请求中，该参数需设置为 `inherit`。  |
 | `username`   | String | 是       | 用户 ID。                |
-| `autoCreateUser`   | Boolean | 是       | 当用户不存在时，是否自动创建用户。**自动创建用户时，需保证授权方式必须为 "inherit"，API 请求 header 中使用 App token 进行鉴权 **。  |
+| `autoCreateUser`   | Boolean | 是       | 当用户不存在时，是否自动创建用户。**自动创建用户时，需保证授权方式必须为 `inherit`，API 请求 header 中使用 App token 进行鉴权**。  |
 | `ttl`        | Long   | 否       | token 有效期，单位为秒。设置为 `0` 则 token 有效期为永久（暂不支持调用群组和聊天室接口）。若不传该参数，有效期默认为 60 天。此外，也可通过[环信即时通讯云控制台](https://console.easemob.com/user/login/)的`用户认证`页面设置。该参数值以最新设置为准。<br/>注意：VIP 5 集群该参数单位为毫秒。 |
 
 ### HTTP 响应
