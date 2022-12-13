@@ -52,7 +52,7 @@
 | 下载文件      |  GET     | /{org_name}/{app_name}/chatfiles/{uuid}       | 100 次/秒/App Key                                                 |
 | 获取历史消息（聊天记录）文件   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 次/分钟/App Key                                               |
 | 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
-| 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 100 次/秒/App Key                                                 |
+| 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key                                              |
 | 拉取会话列表    |   GET    | /{org_name}/{app_name}/user/{username}/user_channels       | 5 次/分钟/单用户 ID，100 次/秒/App Key    |
 
 ## 用户属性
