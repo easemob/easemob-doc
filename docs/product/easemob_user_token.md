@@ -27,6 +27,13 @@
 
 通过该方式，开发者可以对用户 token 进行管理，设置有效期，并确定当用户不存在时是否自动创建用户。
 
+### 认证方式
+
+环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 Authorization 字段：
+
+Authorization：`Bearer ${YourAppToken}`
+
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 token 鉴权](easemob_app_token.html)。
 ### HTTP 请求
 
 ```http
@@ -55,6 +62,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | `grant_type` | String | 是       | 授权方式。<br/> - 若值为 `password`，通过用户 ID 和密码获取 token，需设置 `username` 和 `password` 参数。 <br/> - 若值为 `inherit`，通过用户 ID 获取 token，只需设置 `username` 参数。        |
 | `username`   | String | 是       | 用户 ID。                |
 | `password`   | String | 是       | 用户的登录密码。   |
+| `autoCreateUser`   | Boolean | 是       | 当用户不存在时，是否自动创建用户。**自动创建用户时，需要保证授权方式必须为"inherit"，API 请求 header 中使用 APP token 进行鉴权 **。  |
 | `ttl`        | Long   | 否       | token 有效期，单位为秒。设置为 `0` 则 token 有效期为永久（暂不支持调用群组和聊天室接口）。若不传该参数，有效期默认为 60 天。此外，也可通过[环信即时通讯云控制台](https://console.easemob.com/user/login/)的`用户认证`页面设置。该参数值以最新设置为准。<br/>注意：VIP 5 集群该参数单位为毫秒。 |
 
 ### HTTP 响应
@@ -92,14 +100,17 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
  }' 'http://XXXX/XXXX/XXXX/token'
 ```
 
-2. 通过用户 ID 获取 token：
+2. 自动创建用户并获取 token：
 
 ```shell
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST http://XXXX/XXXX/XXXX/token -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{
     "username": "test2333",
     "grant_type": "inherit",
+    "autoCreateUser": true,
     "ttl": 1024000
- }' 'http://XXXX/XXXX/XXXX/token'
+ }'
 ```
 
 #### 响应示例
