@@ -99,7 +99,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | `membersonly` | Bool  | 否   | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：是； <br/> - （默认）`false`：否。 |
 | `invite_need_confirm` | Bool | 否 | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）`true`：是；<br/> - `false`：否。         |
 | `owner`        | String  | 是     | 群组的管理员。                                               |
-| `members`      | String  | 否   | 群组成员。若传入该参数，数组元素至少一个，不能超过 100。（注：群主 user1 不需要写入到 members 里面） |
+| `members`      | Array  | 否   | 群组成员的用户 ID 数组。该数组可包含 1-100 个元素，不包含群主的用户 ID。 |
 | `custom`       | String  | 否   | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。 |
 
 #### HTTP 响应
