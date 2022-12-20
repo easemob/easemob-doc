@@ -1114,7 +1114,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。 |
 | `Authorization` | String | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
-| `thumbnail`     | Bool   | 否       | 是否下载缩略图或原文件：<br/> - `true`：是。 <br/> - `false`：否。<br/>注意：只要请求 header 中包含了该参数，无论该参数设置为 `true` 或 `false`，均下载缩略图。 |
+| `thumbnail`     | Bool   | 否       | 是否下载缩略图：<br/> - `true`：是。 <br/> - `false`：否。<br/>注意：只要请求 header 中包含了该参数，无论该参数设置为 `true` 或 `false`，均下载缩略图。 |
 
 ### HTTP 响应
 
