@@ -38,7 +38,7 @@
 
 ## 运行 Web IM 项目
 
-从 [github 下载](https://github.com/easemob/webim-vue-demo/tree/dev-4.0) 下载 Web SDK 压缩包，然后解压。解压后，`webim-vue-demo` 文件夹即为 Web IM 的项目目录。
+从 [github 下载](https://github.com/easemob/webim-vue-demo/tree/dev-4.0) 下载项目代码压缩包，然后解压。解压后，`webim-vue-demo` 文件夹即为 Web IM 的项目目录。
 
 1. 安装 Demo 所需的依赖：在终端中运行 `cd demo` 和 `npm install` 命令。
 

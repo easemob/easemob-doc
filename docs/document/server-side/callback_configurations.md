@@ -187,7 +187,7 @@ payload 示例：
 | 参数          | 参数类型 | 描述                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `customEvent` | String   | 用户自定义的事件类型，必须是 string，值必须满足正则表达式。 [a-zA-Z0-9-_/.]{1,32}，最短 1 个字符 最长 32 个字符。 |
-| `customExts`/`v2:customExts`  | Json     | 用户自定义的事件属性，类型必须是 Map<String,String>，最多可以包含 16 个元素。customExts 是可选的，不需要可以不传。<br/>`customExts` 为旧版参数，`v2:customExts` 为新版参数。 |
+| `customExts`/`v2:customExts`  | Json     | 用户自定义的事件属性。该参数为可选，不需要可以不传。<br/> - `customExts` 为旧版参数，数组类型，最多可包含 16 个元素。<br/> - `v2:customExts` 为新版参数，Map<String,String> 类型，最多可以包含 16 个元素。推荐使用该新版参数。 |
 | `from`        | String   | 表示消息发送者;无此字段 Server 会默认设置为 “from”:“admin”，有 from 字段但值为空串 (“”) 时请求失败。 |
 | `ext`         | Json     | 扩展属性，支持 app 自定义内容。可以没有这个字段；但是如果有，值不能是 “ext:null” 这种形式，否则会发生错误。 |
 

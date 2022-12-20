@@ -4,7 +4,7 @@
 
 环信即时通讯 IM 提供了 REST API 管理 App 中的群组。
 
-单个 App [创建群组数量有限制](enable_and_configure_IM.html#群组数量)，单个用户可加入群组的数量依据版本而定，详见 [IM 即时通讯云价格](https://www.easemob.com/pricing/im)。
+单个 App 创建群组数量有限制，而且单个用户可加入群组的数量依据版本而定，详见 [IM 即时通讯云价格](limitation.html#群组限制)。
 
 ## 前提条件
 
