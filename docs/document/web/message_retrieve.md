@@ -50,7 +50,7 @@ WebIM.conn.getConversationlist().then((res) => {
 
 ### 从服务器获取指定会话的历史消息
 
-你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。为确保数据可靠，我们建议你每次获取少于 50 条消息，可多次获取。拉取后默认 SDK 会自动将消息更新到本地数据库。
+你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
 
 ```javascript
 /**
@@ -58,7 +58,7 @@ WebIM.conn.getConversationlist().then((res) => {
  * @param {Object} options
  * @param {String} options.targetId ：对方的用户 ID 或者群组 ID 或聊天室 ID。
  * @param {Number} options.pageSize：（可选）每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
- * @param {Number} options.cursor：（可选）查询的起始位置。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
+ * @param {Number} options.cursor：（可选）查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
  * @param {Boolean} options.chatType ：（可选）会话类型（SDK V4.0)：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室聊天。
  * @param {String} options.searchDirection： 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
  */

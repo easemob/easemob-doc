@@ -57,12 +57,12 @@ Authorization：`Bearer ${YourAppToken}`
 | 文本/透传消息           | 调用发送消息方法，在请求 body 中传入消息内容。               |
 | 图片/语音/视频/文件消息 | 1. 调用 [文件上传方法](#文件上传) 上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。<br/>2. 调用发送消息方法，在请求 body 中传入该 UUID。 |
 
-调用服务端接口发送消息时，可选的 `from` 字段用于指定发送方。
+调用 REST 接口发送消息时，可选的 `from` 字段用于指定发送方。
 
 此外，消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。
 
 :::notice
-在调用程序中，请求体若超过 5 KB 会导致 413 错误，需要拆成几个更小的请求体重试。同时，请求体和扩展字段的总长度不能超过 3 KB。
+在接口调用过程中，请求体若超过 5 KB 会导致 413 错误，需要拆成几个更小的请求体重试。同时，请求体和扩展字段的总长度不能超过 3 KB。
 :::
 
 ### 发送单聊消息
@@ -83,8 +83,8 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 |      参数       | 类型   | 是否必需 | 描述                             |
 | :-------------: | :----- | :------: | :----------------------------------------------------------: |
-| `Content-Type`  | String |    是    |             内容类型。请填 `application/json`。              |
-|    `Accept`     | String |    是    |             内容类型。请填 `application/json`。              |
+| `Content-Type`  | String |    是    | 内容类型。请填 `application/json`。              |
+|    `Accept`     | String |    是    | 内容类型。请填 `application/json`。              |
 | `Authorization` | String |    是    | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
 
 #### 通用请求体
@@ -98,7 +98,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | `type`        | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`        | JSON   | 是       | 消息内容。对于不同消息类型 ，body 包含的字段不同，详情见下表。 |
 | `sync_device` | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。 |
-| `routetype`   | String | 否       | 若传入该参数，其值为 “ROUTE_ONLINE”，表示只有接收方在线时，消息才能成功发送；若接收方离线，消息发送失败。若不传入该字段，接收方离线时，消息也能成功发送。 |
+| `routetype`   | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。 |
 | `ext`         | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
 
 #### body 字段说明
@@ -436,7 +436,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 | `to` | Array | 是       | 消息接收方群组 ID 数组。每次最多可向 3 个群组发送消息。|
 
 :::notice
-1. 群聊消息的通用请求体中除了不包含 `sync_device` 参数，其他参数与单聊消息类似， 详见 [通用请求体](#通用请求体)。<br/>
+1. 群聊消息的通用请求体中的参数与单聊消息类似，详见 [通用请求体](#通用请求体)。<br/>
 2. 与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
 :::
 
@@ -709,7 +709,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 | `to` | Array | 是       | 消息接收方聊天室 ID 数组。每次最多可向 10 个聊天室发送消息。|
 
 :::notice
-1. 聊天室消息的通用请求体除了不包含 `sync_device` 参数，其他参数与单聊消息类似，详见 [通用请求体](#通用请求体)。<br/>
+1. 聊天室消息的通用请求体中的参数与单聊消息类似，详见 [通用请求体](#通用请求体)。<br/>
 2. 与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
 :::
 
@@ -974,15 +974,15 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | :---------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`    | String | 否       | 内容类型。请填 `multipart/form-data`。上传文件会自动填充这个头。 |
 | `Authorization`   | String | 是       | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
-| `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true` ：是。用户需要通过响应 body 中获取的文件访问密钥（share-secret）才能下载该文件。<br/> - `false` ：否。表示不限制访问。用户可以直接下载该文件。 |
+| `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（share-secret）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。 |
 
 #### 请求 body
 
 | 参数   | 类型   | 是否必需 | 描述           |
 | :----- | :----- | :------- | :------------- |
 | `file` | String | 是       | 文件本地路径。 |
-| `thumbnail-height` | Int | 否       | 图片缩略图的高度。<br/>文件类型为图片时会自动生成图片的缩略图。该参数仅在上传的图片超过 10 KB 时，才会生效。若不传该参数，默认为 170 像素，可在[环信即时通讯控制台](https://console.easemob.com/user/login)的`服务概览`页面的`设置`区域修改该默认值。|
-| `thumbnail-width` | Int | 否       | 图片缩略图的宽度。<br/>文件类型为图片时会自动生成图片的缩略图。该参数仅在上传的图片超过 10 KB 时，才会生效。若不传该参数，默认为 170 像素，可在[环信即时通讯控制台](https://console.easemob.com/user/login)的`服务概览`页面的`设置`区域修改该默认值。|
+| `thumbnail-height` | Int | 否       | 图片缩略图的高度，单位为像素。<br/>文件类型为图片时，服务器会自动生成图片的缩略图。若图片小于 10 KB，图片原图即为缩略图。因此，该参数仅在上传的图片超过 10 KB 时才会生效。若不传该参数，默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。|
+| `thumbnail-width` | Int | 否       | 图片缩略图的宽度，单位为像素。<br/>文件类型为图片时，服务器会自动生成图片的缩略图。若图片小于 10 KB，图片原图即为缩略图。因此，该参数仅在上传的图片超过 10 KB 时才会生效。若不传该参数，默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。|
 
 ### HTTP 响应
 
@@ -1034,19 +1034,20 @@ curl -X POST https://XXXX/XXXX/XXXX/chatfiles -H 'Authorization: Bearer <YourApp
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-## 下载语音/图片文件/缩略图
+## 下载语音/图片/视频
 
-需要注意是，如果上传文件时选择了文件不共享，需要在请求头中包含上述响应返回的 `share-secret` 和当前登录用户的 token 才能下载。
+需要注意是，如果上传文件时设置了文件访问限制（`restrict-access` 设置为 `true`），需要在下载请求头中包含文件上传响应中返回的 `share-secret` 和当前登录用户的 token 才能下载文件。
 
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatfiles/{uuid}
+GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 ```
-
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数            | 类型   | 是否必需 | 描述                                                         |
+| :-------------- | :----- | :------- | :----------------------------- |
+| `file_uuid`        | String | 是       | 服务器为文件生成的 UUID。 |
 
 #### 请求 header
 
@@ -1092,15 +1093,20 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 
 ## 下载缩略图
 
-环信即时通讯 IM 支持在服务器端自动创建图片的缩略图。用户可先下载缩略图，需要时再下载原图。下载缩略图与下载原图的唯一区别是前者在请求 header 中多了 “thumbnail: true”。当服务器收到包含该字段的请求 header 时，返回缩略图，否则返回原图。
+环信即时通讯 IM 支持在服务器端自动创建图片的缩略图。用户可先下载缩略图，需要时再下载原图。下载缩略图与下载原图的唯一区别是前者在请求 header 中多了 `thumbnail: true`。当服务器收到包含该字段的请求 header 时，返回缩略图，否则返回原图。
 
 ### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 ```
+#### 路径参数
 
-需要在请求时对应填写 `{file_uuid}`，即服务器为文件生成的 UUID。
+| 参数            | 类型   | 是否必需 | 描述                                                         |
+| :-------------- | :----- | :------- | :----------------------------- |
+| `file_uuid`        | String | 是       | 服务器为缩略图文件生成的 UUID。 |
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -1108,7 +1114,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。 |
 | `Authorization` | String | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
-| `thumbnail`     | Bool   | 否       | 上传图片或视频时，服务器是否自动生成缩略图，用户可选择下载缩略图或原文件。<br/> - `true`：是。 <br/> - `false`：否。 |
+| `thumbnail`     | Bool   | 否       | 是否下载缩略图或原文件：<br/> - `true`：是。 <br/> - `false`：否。<br/>注意：只要请求 header 中包含了该参数，无论该参数设置为 `true` 或 `false`，均下载缩略图。 |
 
 ### HTTP 响应
 

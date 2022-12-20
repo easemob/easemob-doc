@@ -38,9 +38,9 @@ POST https://{host}/{org_name}/{app_name}/token
 
 | 参数       | 类型   | 描述                                                         |
 | :--------- | :----- | :----------------------------------------------------------- |
-| `host`     | String | 你在环信即时通讯 IM 管理后台注册项目时所在的集群服务器地址。 |
-| `org_name` | String | 即时通讯服务分配给每个企业（组织）的唯一标识。你可以通过控制台获取该字段。 |
-| `app_name` | String | 你在环信即时通讯 IM 管理后台注册项目时填入的应用名称。           |
+| `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-IM-的信息)。|
+| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-IM-的信息)。  |
+| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-IM-的信息)。|
 
 #### 请求 header
 
@@ -56,7 +56,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | `grant_type` | String | 是       | 授权方式。<br/> - 若值为 `password`，通过用户 ID 和密码获取 token，需设置 `username` 和 `password` 参数。在该请求中，该参数需设置为 `password`。<br/> - 若值为 `inherit`，通过用户 ID 获取 token，只需设置 `username` 参数。        |
 | `username`   | String | 是       | 用户 ID。                |
 | `password`   | String | 是       | 用户的登录密码。   |
-| `ttl`        | Long   | 否       | token 有效期，单位为秒。设置为 `0` 则 token 有效期为永久（暂不支持调用群组和聊天室接口）。若不传该参数，有效期默认为 60 天。此外，也可通过[环信即时通讯云控制台](https://console.easemob.com/user/login/)的`用户认证`页面设置。该参数值以最新设置为准。<br/>注意：VIP 5 集群该参数单位为毫秒。 |
+| `ttl`        | Long   | 否       | token 有效期，单位为秒。设置为 `0` 则 token 有效期为永久。若不传该参数，有效期默认为 60 天。此外，也可通过[环信即时通讯云控制台](https://console.easemob.com/user/login/)的`用户认证`页面设置。该参数值以最新设置为准。<br/>注意：VIP 5 集群该参数单位为毫秒。 |
 
 ### HTTP 响应
 
@@ -74,7 +74,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | `user.created`  | Long  | 注册用户的 Unix 时间戳，单位为毫秒。                                                      |
 | `user.modified`  | Long  | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。                                                |
 | `user.username`  | String | 用户 ID。                                                       |
-| `user.activated` | Bool  | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用解禁用户解除封禁。 |
+| `user.activated` | Bool  | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户的 API](account_system.html#账号解禁)对账号解除封禁。 |
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](/document/server-side/error.html)了解可能的原因。
 
@@ -122,9 +122,9 @@ POST https://{host}/{org_name}/{app_name}/token
 
 | 参数       | 类型   | 描述                                                         |
 | :--------- | :----- | :----------------------------------------------------------- |
-| `host`     | String | 你在环信即时通讯 IM 管理后台注册项目时所在的集群服务器地址。 |
-| `org_name` | String | 即时通讯服务分配给每个企业（组织）的唯一标识。你可以通过控制台获取该字段。 |
-| `app_name` | String | 你在环信即时通讯 IM 管理后台注册项目时填入的应用名称。           |
+| `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-IM-的信息)。|
+| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-IM-的信息)。  |
+| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-IM-的信息)。|
 
 #### 请求 header
 
@@ -132,6 +132,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | :------------- | :----- | :------- | :---------------------------------- |
 | `Content-Type` | String | 是       | 内容类型。请填 `application/json`。 |
 | `Accept`       | String | 是       | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
 
 #### 请求 body
 
@@ -139,8 +140,8 @@ POST https://{host}/{org_name}/{app_name}/token
 | :----------- | :----- | :------- | :------------------- |
 | `grant_type` | String | 是       | 授权方式。<br/> - 若值为 `password`，通过用户 ID 和密码获取 token，需设置 `username` 和 `password` 参数。 <br/> - 若值为 `inherit`，通过用户 ID 获取 token，只需设置 `username` 参数。在该请求中，该参数需设置为 `inherit`。  |
 | `username`   | String | 是       | 用户 ID。                |
-| `autoCreateUser`   | Boolean | 是       | 当用户不存在时，是否自动创建用户。**自动创建用户时，需保证授权方式必须为 `inherit`，API 请求 header 中使用 App token 进行鉴权**。  |
-| `ttl`        | Long   | 否       | token 有效期，单位为秒。设置为 `0` 则 token 有效期为永久（暂不支持调用群组和聊天室接口）。若不传该参数，有效期默认为 60 天。此外，也可通过[环信即时通讯云控制台](https://console.easemob.com/user/login/)的`用户认证`页面设置。该参数值以最新设置为准。<br/>注意：VIP 5 集群该参数单位为毫秒。 |
+| `autoCreateUser`   | Boolean | 是       | 当用户不存在时，是否自动创建用户。**自动创建用户时，需保证授权方式（`grant_type`）必须为 `inherit`，API 请求 header 中使用 App token 进行鉴权**。  |
+| `ttl`        | Long   | 否       | token 有效期，单位为秒。设置为 `0` 则 token 有效期为永久。若不传该参数，有效期默认为 60 天。此外，也可通过[环信即时通讯云控制台](https://console.easemob.com/user/login/)的`用户认证`页面设置。该参数值以最新设置为准。<br/>注意：VIP 5 集群该参数单位为毫秒。 |
 
 ### HTTP 响应
 
@@ -148,7 +149,7 @@ POST https://{host}/{org_name}/{app_name}/token
 
 如果返回的 HTTP 状态码为 `200`，表示成功获取 token。如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](/document/server-side/error.html)了解可能的原因。
 
-关于响应包体中的字段的描述，详见用户 ID 和密码获取 token 的中的响应字段的描述。
+关于响应包体中的字段的描述，详见[通过用户 ID 和密码获取 token 的 API](#通过用户 ID 和密码获取用户 token) 中的响应字段的描述。
 
 ### 示例
 
