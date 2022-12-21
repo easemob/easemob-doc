@@ -94,18 +94,14 @@ connection.addEventHandler('THREADMESSAGE',{
 示例代码如下：
 
 ```javascript
-// 撤回消息
-/**
- * 发送要撤回的消息。
- * @param {Object} option - 
- * @param {Object} option.mid -  要撤回消息的 ID。
- * @param {Object} option.to -   消息接收对象。
- * @param {Object} option.type - 消息类型：chat (单聊)、groupchat (群聊)和 chatroom (聊天室)。
-   */
 let option = {
+  // 设置要撤回消息的 ID。
   mid: 'msgId',
+  // 设置消息接收方。
   to: 'userID',
+  // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
   chatType: 'groupChat'
+  // 设置是否为子区消息。
   isChatThread: true
 };
 connection.recallMessage(option).then((res) => {
