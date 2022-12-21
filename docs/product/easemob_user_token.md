@@ -37,7 +37,7 @@ POST https://{host}/{org_name}/{app_name}/token
 #### 路径参数
 
 | 参数    | 类型   | 是否必需 | 描述         |
-| :-------: | :----- | :------- | ------------ |
+| :------------- | :----- | :------- | :--------------------- |
 | `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
 | `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
@@ -45,7 +45,7 @@ POST https://{host}/{org_name}/{app_name}/token
 #### 请求 header
 
 | 参数           | 类型   | 是否必需 | 描述                                |
-| :------------- | :----- | :------- | :---------------------------------- |
+| :------------- | :----- | :------- | :---------------------- |
 | `Content-Type` | String | 是       | 内容类型。请填 `application/json`。 |
 | `Accept`       | String | 是       | 内容类型。请填 `application/json`。 |
 
@@ -64,15 +64,15 @@ POST https://{host}/{org_name}/{app_name}/token
 
 如果返回的 HTTP 状态码为 200，表示成功获取 token，响应包体中包含以下字段：
 
-| 字段            | 类型   | 描述                                                                                     |
+| 字段            | 类型   | 描述                                               |
 | :-------------- | :----- | :---------------- |
-| `access_token`  | String | 有效的用户 token。                                                                       |
+| `access_token`  | String | 有效的用户 token。                                     |
 | `expires_in`    | Long   | token 有效期，单位为秒。在有效期内无需重复获取。<br/> 注意：VIP 5 集群该参数单位为毫秒。 |
-| `user`          | JSON   | 用户相关信息。                                                                           |
-| `user.uuid`    | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成用户 token。         |
-| `user.type`    | String | 对象类型，无需关注。                                                              |
-| `user.created`  | Long  | 注册用户的 Unix 时间戳，单位为毫秒。                                                      |
-| `user.modified`  | Long  | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。                                                |
+| `user`          | JSON   | 用户相关信息。                                             |
+| `user.uuid`    | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成用户 token。   |
+| `user.type`    | String | 对象类型，无需关注。       |
+| `user.created`  | Long  | 注册用户的 Unix 时间戳，单位为毫秒。            |
+| `user.modified`  | Long  | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。          |
 | `user.username`  | String | 用户 ID。                                                       |
 | `user.activated` | Bool  | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户的 API](account_system.html#账号解禁)对账号解除封禁。 |
 
@@ -121,7 +121,7 @@ POST https://{host}/{org_name}/{app_name}/token
 #### 路径参数
 
 | 参数    | 类型   | 是否必需 | 描述         |
-| :-------: | :----- | :------- | ------------ |
+| :------------- | :----- | :------- | :---------------------------------- |
 | `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
 | `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
