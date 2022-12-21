@@ -161,14 +161,12 @@ WebIM.conn.addEventHandler("eventName", {
 用户发送消息 2 分钟内可以撤回消息。如需调整时间限制，请联系可联系环信即时通讯 IM 的商务经理。
 
 ```javascript
-/**
- * @param {Object} option.mid - 要撤回消息的 ID。
- * @param {Object} option.to - 消息接收方。
- * @param {Object} option.type - 消息类型：chat (单聊)、groupchat (群聊)和 chatroom (聊天室)。
- */
 let option = {
+  // 设置要撤回消息的消息 ID。
     mid: 'msgId',
+  // 设置消息接收方，单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: 'userID',
+  // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: 'singleChat'
 };
 WebIM.conn.recallMessage(option).then((res) => {
