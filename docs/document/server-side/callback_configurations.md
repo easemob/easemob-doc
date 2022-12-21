@@ -14,23 +14,23 @@ app 的响应内容不能超过 1,000 个字符。
 
 ## 回调事件
 
-### 回调内容中单聊、群聊、聊天室事件的公共参数说明
+### 回调内容中单聊、群聊、聊天室事件的公共参数描述
 
-| 参数 | 类型   | 含义 |
-| :---------------- | :----- |:------------------------------------------------------------------------------------------------------------------------------------------------|
-| `callId`          | String | `callId` 为 `{appkey}_{uuid}` 其中 `uuid` 为随机生成，作为每条回调的唯一标识。                                                                                             |
-| `eventType`       | String | “chat” 上行消息、“chat_offline” 离线消息。                                                                                                                |
-| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为 ms。                                                                                                               |
+| 参数 | 类型   | 描述 |
+| :---------------- | :----- |:------------------------------------------------------------------|
+| `callId`          | String | `callId` 为 `{appkey}_{uuid}` 其中 `uuid` 为随机生成，作为每条回调的唯一标识。              |
+| `eventType`       | String | “chat” 上行消息、“chat_offline” 离线消息。                      |
+| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为 ms。                           |
 | `chat_type`       | String | 会话类型（默认全选）：<br/> - "chat"：单聊回调；<br/> - "groupchat"：群聊回调包含了群组和聊天室的消息回调；<br/> - "notify"：通知回调包含了Thread 和 Reaction 的回调，需要结合 payload 中的 type 字段确定具体类型。 |
-| `group_id`        | String | 当 `chat_type` 为 `groupchat` 有此参数，表示回调消息所在的群组或聊天室。                                                                                               |
-| `from`            | String | 消息的发送方。                                                                                                                                         |
-| `to`              | String | 消息的接收方。                                                                                                                                         |
-| `msg_id`          | String | 该回调消息的 ID。                                                                                                                                      |
-| `payload`         | object | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message.html#历史消息内容)。                                     |
-| `securityVersion` | String | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。                                                                                                     |
-| `security`        | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 Console 后台回调规则。                                                                                 |
-| `appkey`          | String | 你在环信管理后台注册的应用唯一标识。                                                                                                                              |
-| `host`            | String | 服务器名称。                                                                                                                                          |
+| `group_id`        | String | 当 `chat_type` 为 `groupchat` 有此参数，表示回调消息所在的群组或聊天室。                |
+| `from`            | String | 消息的发送方。     |
+| `to`              | String | 消息的接收方。   |
+| `msg_id`          | String | 该回调消息的 ID。       |
+| `payload`         | object | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message.html#历史消息内容)。      |
+| `securityVersion` | String | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。                   |
+| `security`        | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 Console 后台回调规则。     |
+| `appkey`          | String | 你在环信管理后台注册的应用唯一标识。        |
+| `host`            | String | 服务器名称。              |
 
 ### 单聊
 
@@ -51,7 +51,7 @@ app 的响应内容不能超过 1,000 个字符。
 
 ##### 文字以及透传消息
 
-| 字段     | 数据类型 | 含义                                                         |
+| 字段     | 数据类型 | 描述                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `ext`    | object   | 消息的扩展字段。                                             |
 | `bodies` | object   | 该回调的主体内容，包含以下两个字段 `msg`，`type`。           |
@@ -69,7 +69,7 @@ app 的响应内容不能超过 1,000 个字符。
 
 ##### 图片消息
 
-| 字段          | 类型   | 说明                                                         |
+| 字段          | 类型   | 描述                                                        |
 | :------------ | :----- | :----------------------------------------------------------- |
 | `ext`         | Json   | 消息的扩展字段。                                             |
 | `bodies`      | object | 该回调的主体内容，包含以下六个字段 `filename`，`secret`，`file_length`，`size`，`url`，`type`。 |
@@ -98,7 +98,7 @@ payload 示例：
 
 ##### 语音消息 payload 字段
 
-| 字段          | 类型   | 说明                                                         |
+| 字段          | 类型   | 描述                                                        |
 | :------------ | :----- | :----------------------------------------------------------- |
 | `ext`         | Json   | 消息的扩展字段。                                             |
 | `filename`    | String | 文件名称。                                                   |
@@ -125,7 +125,7 @@ payload 示例：
 
 ##### 视频消息
 
-| 字段           | 类型   | 说明                                                         |
+| 字段           | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `ext`          | Json   | 消息的扩展字段。                                             |
 | `bodies`       | object | 该回调的主体内容，包含以下字段 `thumb_secret`、`thumb`、`filename`，`secret`，`file_length`，`size`，`url`，`type`。 |
@@ -2454,7 +2454,7 @@ payload 示例：
 | `payload.data.reactions.op.reactionType`    | String| Reaction 当前操作类型。 |
 | `payload.data.reactions.op.operator`    | String | Reaction 当前操作人。 ｜
 
-其他字段见 [公共参数](#回调内容中单聊_群聊_聊天室事件的公共参数说明)。
+其他字段见 [公共参数](#回调内容中单聊、群聊、聊天室事件的公共参数描述)。
 
 回调请求示例：
 
@@ -2531,7 +2531,7 @@ payload 示例：
 | `payload.data.muc_parent_id` | String   | 创建 Thread 时所在的群组 ID。     |
 | `payload.data.last_message`  | JSON     | 最近一条消息的内容。              |
 
-其他字段见 [公共参数](#回调内容中单聊_群聊_聊天室事件的公共参数说明)。
+其他字段见 [公共参数](#回调内容中单聊、群聊、聊天室事件的公共参数描述)。
 
 回调请求示例：
 

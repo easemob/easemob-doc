@@ -17,11 +17,11 @@
 
 ### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述                                                         |
-| :--------- | :----- | :------- | :----------------------------------------------------------- |
-| `host`     | String | 是     | 你在环信即时通讯 IM 管理后台注册项目时所在的集群服务器地址。 |
-| `org_name` | String | 是     | 即时通讯服务分配给每个企业（组织）的唯一标识。你可以通过控制台获取该字段。 |
-| `app_name` | String | 是     | 你在环信即时通讯 IM 管理后台注册项目时填入的应用名称。       |
+| 参数    | 类型   | 是否必需 | 描述         |
+| :------------ | :----- | :------ | :---------------- |
+| `host` | String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
 | `group_id` | String | 是     | 群组 ID。                |
 | `username` |String | 是     | 用户 ID。         |
 
@@ -30,9 +30,9 @@
 | 参数             | 描述                                                         |
 | :----------| :----------------------------------------------------------- |
 | `action`     | 请求方式，即接口方法名。                                     |
-| `organization`      | 即 `org_name`，即时通讯服务分配给每个企业（组织）的唯一标识。你可以通过控制台获取该字段。 |
+| `organization`      | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
 | `application`   | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
-| `applicationName` | 即 `app_name`，你在环信即时通讯 IM 管理后台注册项目时填入的应用名称。 |
+| `applicationName` | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | 请求 URL。                                                   |
 | `path`          | 请求路径，属于请求 URL 的一部分，开发者无需关注。            |
 | `entities`         | 详细信息。                                                   |
@@ -77,19 +77,19 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 ##### 路径参数
 
-参数及说明详见  [公共参数](#公共参数)。
+参数及描述详见  [公共参数](#公共参数)。
 
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ##### 请求 body
 
-| 参数           | 类型    | 是否必需 | 备注                                                         |
+| 参数           | 类型    | 是否必需 | 描述                                                         |
 |:----------------------| :------ |:-----|:--------------------------------------------------------------------------------------------------------------------------|
 | `groupname`    | String  | 是     | 群组名称，最大长度为 128 字符。如果有空格，则使用 “+” 代替。         |
 | `desc`         | String  | 是     | 群组描述，最大长度为 512 字符。如果有空格，则使用 “+” 代替。     |
@@ -108,11 +108,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型   | 说明      |
+| 字段       | 类型   | 描述      |
 | :-------- | :----- | :-------- |
 | `data.groupid` | String | 群组 ID。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -165,7 +165,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -177,7 +177,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 请求 body
 
-| 参数           | 类型   | 是否必需 | 说明                                                         |
+| 参数           | 类型   | 是否必需 | 描述                                                         |
 | :------------- | :------ | :----- | :----------------------------- |
 | `groupname`    | String | 否  | 群组名称，修改时值不能包含斜杠（“/”），最大长度为 128 字符。如果有空格，则使用 “+” 代替。 |
 | `description`  | String  | 否  | 群组描述，修改时值不能包含斜杠（“/”），最大长度为 512 字符。如果有空格，则使用 “+” 代替。|
@@ -194,7 +194,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段            | 类型    | 说明                                                         |
+| 字段            | 类型    | 描述                                                         |
 | :------------- | :------ | :----------------------------------------------------------- |
 | `data.description`  | Bool | 群组描述是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。         |
 | `data.maxusers`     | Bool | 群组最大成员数是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。   |
@@ -204,7 +204,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.allowinvites` | Bool | “是否允许群成员邀请其他用户入群”是否修改成功：<br/> -`true`：修改成功；</br>- `false`：修改失败。 |
 | `data.invite_need_confirm` | Bool | “受邀人加入群组前是否需接受入群邀请”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -273,7 +273,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -295,7 +295,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段             | 类型   | 说明                                                         |
+| 字段             | 类型   | 描述                                                         |
 | :-------------- | :----- | :----------------------------------------------------------- |
 | `data.owner`         | String | 群主的 ID。例如：{“owner”: “user1}。                         |
 | `data.groupid`       | String | 群组 ID。                                                    |
@@ -307,7 +307,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 | `limit`         | Int    | 每页获取的数量。取值范围为[1,100]，默认值为 10。 |
 | `cursor` | String | 游标，下次回从该位置开始进行查询。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -391,7 +391,7 @@ GET https://{host}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pag
 | `pagesize` | String | 是     | 每页获取的群组数量。该参数仅适用于分页获取方法。             |
 | `pagenum`  | String | 是     | 当前页码。该参数仅适用于分页获取方法。                       |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -406,12 +406,12 @@ GET https://{host}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pag
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段         | 类型   | 说明       |
+| 字段         | 类型   | 描述       |
 | :---------- | :----- | :--------- |
 | `data.groupid`   | String | 群组 ID。  |
 | `data.groupname` | String | 群组名称。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -501,7 +501,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -516,7 +516,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段                  | 类型    | 说明                                                         |
+| 字段                  | 类型    | 描述                                                         |
 | :------------------- | :------ | :----------------------------------------------------------- |
 | `data.id`                 | String  | 群组 ID，群组唯一标识符。                                    |
 | `data.name`               | String  | 群组名称。   |
@@ -532,7 +532,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.public`             | Bool | 是否是公开群：<br/> - `true`：公开群；<br/> - `false`：私有群。             |
 | `data.custom`             | String  | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -588,7 +588,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -603,12 +603,12 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型    | 说明                                                    |
+| 字段       | 类型    | 描述                                                    |
 | :-------- | :------ | :------------------------------------------------------ |
 | `data.success` | Bool | 群组删除结果: </br> - `true`：删除成功； <br/> - `false`：删除失败。 |
 | `data.groupid` | String  | 所删除群组 ID。                                         |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -655,7 +655,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -671,11 +671,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段            | 类型   | 说明         |
+| 字段            | 类型   | 描述         |
 | :------------- | :----- | :----------- |
 | `data.announcement` | String | 群公告内容。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -719,7 +719,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -735,12 +735,12 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型    | 说明                                                 |
+| 字段      | 类型    | 描述                                                 |
 | :------- | :------ | :--------------------------------------------------- |
 | `data.id`     | String  | 群组 ID。                                            |
 | `data.result` | Bool | 修改结果：<br/> - `true`：修改成功；</br>- `false`：修改失败。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -812,7 +812,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型   | 说明                                                        |
+| 字段      | 类型   | 描述                                                        |
 | :--------| :------ | :---------------------------------------------------------- |
 | `data.file_id`  | String   | 群组共享文件的 ID，如果要下载该文件需要使用到这个 `file_id`。 |
 | `data.file_name` | String  | 群组共享文件名称。                                          |
@@ -820,7 +820,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 | `data.file_size`  | Long | 群组共享文件大小(字节)。                                    |
 | `data.created`   | Long  | 上传群组共享文件的时间。                                    |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -887,7 +887,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -905,7 +905,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     | 类型      | 说明                                                       |
+| 字段     | 类型      | 描述                                                       |
 | :---------| :--------- | :---------------------------------- |
 | `data.file_url`  | String  | 群组共享文件的 URL，在环信即时通讯 IM 服务器上保存的地址。 |
 | `data.group_id`   | String | 群组 ID。                                                  |
@@ -914,7 +914,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 | `data.file_id`   | String  | 群组共享文件 ID，可以用于下载共享文件和删除共享文件。      |
 | `data.file_size`  | Long | 群组共享文件大小(字节)。                                   |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -965,7 +965,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -981,7 +981,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型       | 说明                          |
+| 字段      | 类型       | 描述                          |
 | :---------- | :------------| :------------------------------------ |
 | `data.file_url`  | String  | 群组共享文件的 URL，在环信即时通讯 IM 服务器上保存的地址。 |
 | `data.group_id`   | String | 群组 ID。                                                  |
@@ -990,7 +990,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 | `data.file_id`    | String | 群组共享文件 ID，可以用于下载共享文件和删除共享文件。      |
 | `data.file_size`  | Long| 群组共享文件大小(字节)。                       |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1043,7 +1043,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{f
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `file_id`  | String | 是     | 文件 ID。                                                    |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1059,13 +1059,13 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{f
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型    | 说明                                                         |
+| 字段      | 类型    | 描述                                                         |
 | :---------| :------ | :----------------------------------------------------------- |
 | `data.group_id`  | String | 群组 ID。                                                    |
 | `data.file_id`  | String  | 群组共享文件 ID，可以用于下载共享文件和删除共享文件          |
 | `data.result`   | Bool  | 删除群组共享文件的结果：<br/> - `true`：删除成功；<br/> - `false`：删除失败。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1120,7 +1120,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 | `params.pagenum`  | Int    | 否   | 当前页码。默认从第 1 页开始获取。         |
 | `params.pagesize` | Int    | 否   | 每页期望返回的群组成员数量。取值范围为 [1,100]。默认为 10。    |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1134,12 +1134,12 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     | 类型     | 说明                                        |
+| 字段     | 类型     | 描述                                        |
 | :------| :------ | :------------------------------------------ |
 | `data.owner` | String  | 群主的用户 ID。例如：{“owner”: “user1”}。   |
 | `data.member` | String | 群成员的用户 ID。例如：{“member”:“user2”}。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1197,7 +1197,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1213,14 +1213,14 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     | 类型  | 说明                                          |
+| 字段     | 类型  | 描述                                          |
 | :-------- | :--------------| :--------------------------- |
 | `data.result`  | Bool | 添加结果：<br/> - `true`：成功。<br/> - `false`：失败。 |
 | `data.groupid` | String | 群组 ID。                                     |
 | `data.action`  | String | 执行的操作。                                  |
 | `data.user`    | String  | 被添加的用户 ID。                       |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1267,7 +1267,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1289,13 +1289,13 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     |  类型       | 说明                |
+| 字段     |  类型       | 描述                |
 | :---------- | :-------- | :------------------ |
 | `data.newmembers`  | Array | 添加的群组成员 ID。 |
 | `data.groupid`   | String  | 群组 ID。           |
 | `data.action`    | String   | 执行的操作。`add_member` 为添加群成员。      |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1348,7 +1348,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1363,14 +1363,14 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型    | 说明                                                  |
+| 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
 | `data.groupid` | String  | 群组 ID。                                             |
 | `data.action`  | String  | 执行的操作，`remove_member` 为移除群组成员。                     |
 | `data.user`    | String  | 被移除的用户 ID。                                     |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1421,7 +1421,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
 | `members`    | String | 是     | 要移除的群成员用户 ID，用户 ID 之间用英文逗号分隔。建议一次最多移除 60 个群成员，并且 URL 的长度应在 4k 字节以内。         |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1436,7 +1436,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型    | 说明                                                  |
+| 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 操作结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
 | `data.action`  | String  | 执行的操作，`remove_member`：移除群组成员。       |
@@ -1444,7 +1444,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 | `data.user`    | String  | 被移除成员的用户 ID。                                  |
 | `data.groupid` | String  | 操作的群组 ID。                                       |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1504,7 +1504,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1518,11 +1518,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段    | 类型  | 说明             |
+| 字段    | 类型  | 描述             |
 | :----- | :---- | :--------------- |
 | `data` | Array | 群组管理员的用户 ID 列表。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1565,7 +1565,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1585,11 +1585,11 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段    | 类型   | 说明                    |
+| 字段    | 类型   | 描述                    |
 | :----- | :----- | :---------------------- |
 | `data` | String | 添加的新管理员用户 ID。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1632,7 +1632,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1646,12 +1646,12 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段        | 类型    | 说明                                                         |
+| 字段        | 类型    | 描述                                                         |
 | :--------- | :------ | :----------------------------------------------------------- |
 | `data.result`   | Bool | 操作结果：<br/> - `success`：表示移除成功; <br/> - `failure`：表示移除失败。 |
 | `data.oldadmin` | String  | 被移除的管理员用户 ID。                                          |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1696,7 +1696,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1708,7 +1708,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 请求 body
 
-| 参数       | 类型   | 说明                |
+| 参数       | 类型   | 描述                |
 | :--------- | :----- | :------------------ |
 | `newowner` | String | 群组的新管理员用户 ID。 |
 
@@ -1718,11 +1718,11 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段        | 类型    | 说明                                                  |
+| 字段        | 类型    | 描述                                                  |
 | :--------- | :------ | :---------------------------------------------------- |
 | `data.newowner` | Bool | 操作结果：<br/> - `true`：转让成功。<br/> - `false`：转让失败。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1770,7 +1770,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1785,11 +1785,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段    | 类型  | 说明                |
+| 字段    | 类型  | 描述                |
 | :----- | :---- | :------------------ |
 | `data` | Array | 群组黑名单用户 ID。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1837,7 +1837,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{us
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1853,14 +1853,14 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{us
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     | 类型   | 说明                                                  |
+| 字段     | 类型   | 描述                                                  |
 | :-------- | :---------------- | :------------------------- |
 | `data.result`  | Bool | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
 | `data.groupid` | String | 群组 ID。                                             |
 | `data.action`  | String | 执行操作。`add_blocks 为将成员加入黑名单。                                             |
 | `data.user`    | String | 被添加的用户 ID。                                     |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1909,7 +1909,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1921,7 +1921,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 ##### 请求 body
 
-| 参数        | 类型  | 是否必需 | 说明              |
+| 参数        | 类型  | 是否必需 | 描述              |
 | :---------- | :----  | :----| :---------------- |
 | `usernames` | Array | 是 | 要添加的用户 ID 数组。 |
 
@@ -1931,7 +1931,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型    | 说明                                                  |
+| 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
 | `data.reason`  | String  | 添加失败的原因。                                      |
@@ -1939,7 +1939,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 | `data.action`  | String  | 执行的操作。                                          |
 | `data.user`    | String  | 被添加的用户 ID。                                     |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1999,7 +1999,7 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2014,14 +2014,14 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型    | 说明                                                  |
+| 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `result`  | Bool | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
 | `groupid` | String  | 群组 ID。                                             |
 | `action`  | String  | 执行的操作。                                          |
 | `user`    | String  | 被添加的用户 ID。                                     |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2068,7 +2068,7 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2083,14 +2083,14 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型    | 说明                                                  |
+| 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
 | `data.groupid` | String  | 群组 ID。                                             |
 | `data.action`  | String  | 执行的操作。                                          |
 | `data.user`    | String  | 添加的用户 ID。                                       |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2149,7 +2149,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2164,11 +2164,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段    | 类型  | 说明                    |
+| 字段    | 类型  | 描述                    |
 | :----- | :---- | :---------------------- |
 | `data` | Array | 群组白名单中的用户 ID 列表。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2217,7 +2217,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2232,14 +2232,14 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 说明                                                  |
+| 字段       | 描述                                                  |
 | :-------- | :---------------------------------------------------- |
 | `data.result`  | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
 | `data.groupid` | 群组 ID。                                             |
 | `data.action`  | 执行操作。`add_user_whitelist` 为将成员加入群白名单。                        |
 | `data.user`    | 被添加的用户 ID。                                     |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2286,7 +2286,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2298,7 +2298,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 ##### 请求 body
 
-| 参数        | 类型  | 说明                            |
+| 参数        | 类型  | 描述                            |
 | :---------- | :---- | :------------------------------ |
 | `usernames` | Array | 待添加至群组白名单中的用户 ID。 |
 
@@ -2308,7 +2308,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型    | 说明                                                  |
+| 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
 | `data.reason`  | String  | 添加失败的原因。                                      |
@@ -2316,7 +2316,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 | `data.action`  | String  | 执行的操作。`add_user_whitelist` 为将成员加入群白名单。                 |
 | `data.user`    | String  | 被添加的用户 ID。                                     |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2371,7 +2371,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{u
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2386,14 +2386,14 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{u
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型    | 说明                                                  |
+| 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
 | `data.groupid` | String  | 群组 ID。                                             |
 | `data.action`  | String  | 执行的操作。`remove_user_whitelist` 为将成员加入群白名单。               |
 | `data.user`    | String  | 添加的用户 ID，多个用户 ID 以逗号分隔。               |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2454,7 +2454,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2468,12 +2468,12 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段    | 类型    | 说明                         |
+| 字段    | 类型    | 描述                         |
 | :-------| :---------------| :--------------- |
 | `data.expire`| Long | 禁言到期的时间，单位为毫秒。 |
 | `data.user`| String  | 被禁言用户的 ID。            |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2518,7 +2518,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2528,7 +2528,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 ##### 请求 body
 
-| 参数            | 类型   | 是否必需 | 说明                    |
+| 参数            | 类型   | 是否必需 | 描述                    |
 | :-------------- | :---- | :-------| :------------------------ |
 | `mute_duration` | Long  |  是  | 禁言时长，单位为毫秒。  |
 | `usernames`     | Array |  是  | 要被添加到禁言列表的用户 ID 列表。每次调用最多禁言 10 个成员。 |
@@ -2539,13 +2539,13 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型    | 说明                                                  |
+| 字段      | 类型    | 描述                                                  |
 | :------- | :------ | :---------------------------------------------------- |
 | `data.result` | Bool | 操作结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
 | `data.expire` | Long    | 禁言到期的时间。该时间为 Unix 时间戳，单位为毫秒。    |
 | `data.user`   | String  | 被禁言用户的 ID。                                     |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2591,7 +2591,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2603,7 +2603,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 ##### 请求 body
 
-| 参数            | 类型  | 是否必需 | 说明                   |
+| 参数            | 类型  | 是否必需 | 描述                   |
 | :-------------- | :--- | :-------| :------------- |
 | `mute_duration` | Long | 是 | 禁言时长，单位为毫秒。 |
 
@@ -2613,12 +2613,12 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型    | 说明                                                  |
+| 字段      | 类型    | 描述                                                  |
 | :------- | :------ | :---------------------------------------------------- |
 | `data.result` | Bool | 操作结果：<br/> - `true`：禁言成功；<br/> - `false`：禁言失败。 |
 | `data.expire` | Long    | 禁言到期的时间。该时间为 Unix 时间戳，单位为毫秒。    |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2666,7 +2666,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `member`   | String | 是     | member1:成员 1 id；member2：成员 2 id；......                 |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2680,12 +2680,12 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型    | 说明                                                      |
+| 字段      | 类型    | 描述                                                      |
 | :------- | :------ | :-------------------------------------------------------- |
 | `data.result` | Bool | 操作结果：<br/> - `true`：解除成功；<br/> - `false`：解除失败。 |
 | `data.user`   | Array | 被移除禁言的用户 ID。                                     |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2730,7 +2730,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2746,11 +2746,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型    | 说明                                                  |
+| 字段      | 类型    | 描述                                                  |
 | :------- | :------ | :---------------------------------------------------- |
 | `data.mute` | Bool | 是否处于全员禁言状态。<br/> - `true`：是； <br/> - `false`：否。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2802,7 +2802,7 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 |:---------|:-------|:-----|:--------------------------|
 | `sort`   | String | 否  | 搜索结果的排序方式：<br/> - `asc`：按创建时间正序；<br/> - （默认）`desc`：按创建时间倒序。 |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2823,12 +2823,12 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     | 类型   | 说明         |
+| 字段     | 类型   | 描述         |
 |:------|:----------|:-----------|
 | `entities.id`  | String | 子区 ID。 |
 | `properties.cursor`  | String  | 分页页码。下一次服务器会从游标起始的地方进行查询。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2879,7 +2879,7 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 |:---------|:-------|:-----|:--------------------------|
 | `sort`   | String | 否  | 搜索结果的排序方式：<br/> - `asc`：按创建时间正序；<br/> - （默认）`desc`：按创建时间倒序。 |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2900,7 +2900,7 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型  | 说明             |
+| 字段      | 类型  | 描述             |
 |:---------|:----------|:---------------|
 | `entities.name`  | String  |子区名称。      |
 | `entities.owner`  | String |子区创建者的用户 ID。    |
@@ -2910,7 +2910,7 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 | `entities.created` | Long |子区创建时间，Unix 时间戳。    |
 | `properties.cursor`  | String  | 游标。下一次服务器会从游标起始的地方进行查询。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2966,7 +2966,7 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 |:---------|:-------|:-----|:--------------------------|
 | `sort`   | String | 否  | 搜索结果的排序方式：<br/> - `asc`：按创建时间正序；<br/> - （默认）`desc`：按创建时间倒序。 |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2987,7 +2987,7 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段                | 说明   | 描述                                           |
+| 字段                | 描述   | 描述                                           |
 | :------------------ | :----- | :--------------------------------------------- |
 | `entities.name`   | String |子区名字。      |
 | `entities.owner`  | String |子区创建者。    |
@@ -2997,7 +2997,7 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 | `entities.created` | Long  |子区创建时间。    |
 | `properties.cursor`  | String  | 游标。下一次服务器会从游标起始的地方进行查询。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -3049,7 +3049,7 @@ POST https://{host}/{org_name}/{app_name}/thread
 
 ##### 路径参数
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -3072,11 +3072,11 @@ POST https://{host}/{org_name}/{app_name}/thread
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     | 类型      | 说明           |
+| 字段     | 类型      | 描述           |
 | :------- |:----|:---------------|
 | `data.thread_id` | String | 创建的子区 ID。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -3127,7 +3127,7 @@ PUT https://{host}/{org_name}/{app_name}/thread/{thread_id}
 |:------------|:-------|:-----|:-----------|
 | `thread_id` | String | 是   |子区 ID。 |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -3137,7 +3137,7 @@ PUT https://{host}/{org_name}/{app_name}/thread/{thread_id}
 
 ##### 请求 body
 
-| 参数             | 类型    | 是否必需 | 备注                   |
+| 参数             | 类型    | 是否必需 | 描述                  |
 |:---------------| :------ | :------- |:---------------------|
 | `name`         | String  | 是     | 要修改的子区的名称，最大长度为 64 字符。 |
 
@@ -3147,11 +3147,11 @@ PUT https://{host}/{org_name}/{app_name}/thread/{thread_id}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段   | 类型         | 说明      |
+| 字段   | 类型         | 描述      |
 |:-----|:-------|:--------|
 | `data.name` | String | 修改后的名称。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -3197,7 +3197,7 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}
 |:------------|:-------|:-----|:-----------|
 | `thread_id` | String | 是   |子区 ID。 |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -3211,11 +3211,11 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段   |  类型     | 说明      |
+| 字段   |  类型     | 描述      |
 |:------|:--------|:--------|
 | `entities.status` | Bool | 删除结果，`ok` 表示已删除。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -3261,7 +3261,7 @@ GET https://{host}/{org_name}/{app_name}/thread/{thread_id}/users?limit={N}&curs
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -3282,12 +3282,12 @@ GET https://{host}/{org_name}/{app_name}/thread/{thread_id}/users?limit={N}&curs
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型 | 说明             |
+| 字段      | 类型 | 描述             |
 |:-------|:--------|:--------------|
 | `affiliations` | Array | Thread 成员用户 ID 列表。 |
 | `properties.cursor`  | String  | 游标，下一次服务器会从游标起始的地方进行查询。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -3336,7 +3336,7 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 |:------------|:-------|:-----|:-----------|
 | `thread_id` | String | 是   |子区 ID。 |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -3354,9 +3354,9 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，字段及说明详见 [公共参数](#公共参数)。
+如果返回的 HTTP 状态码为 `200`，表示请求成功，字段及描述详见 [公共参数](#公共参数)。
 
-| 字段   |  类型     | 说明      |
+| 字段   |  类型     | 描述      |
 |:------|:--------|:--------|
 | `entities.status` | Bool | 删除结果，`ok` 表示已删除。 |
 
@@ -3409,7 +3409,7 @@ DELETE https://{host}/{org_name}/{app_name}/threads/{thread_id}/users
 |:------------|:-------|:-----|:-----------|
 | `thread_id` | String | 是   |子区 ID。 |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -3429,12 +3429,12 @@ DELETE https://{host}/{org_name}/{app_name}/threads/{thread_id}/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段    | 类型   | 说明      |
+| 字段    | 类型   | 描述      |
 |:-------|:-------|:-------|
 | `result`| Bool | 操作结果。<br/> - `true`：成功；<br/> - `false`：失败。 |
 | `user` | String | 被踢出用户的 ID。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
