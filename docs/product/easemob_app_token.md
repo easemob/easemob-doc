@@ -23,7 +23,7 @@ POST {https://host}/{org_name}/{app_name}/token
 #### 路径参数
 
 | 参数    | 类型   | 是否必需 | 描述         |
-| :-------: | :----- | :------- | ------------ |
+| :------------ | :----- | :------ | :---------------- |
 | `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
 | `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
@@ -31,14 +31,14 @@ POST {https://host}/{org_name}/{app_name}/token
 #### 请求 header
 
 | 参数      | 类型   | 是否必需 | 描述        |
-| :------------: | :----- | :------: | :----------------: |
+| :------------ | :----- | :------ | :---------------- |
 | `Content-Type` | String | 是   | 内容类型。请填 `application/json`。 |
-| `Accept`       | String | 是   | 内容类型。请填 `application/json`。                          |
+| `Accept`       | String | 是   | 内容类型。请填 `application/json`。     |
 
 #### 请求 body
 
 | 参数            | 类型   | 是否必需 | 描述          |
-| :-------------- | :----- | :------: | :----------------------------------------------------------- |
+| :------------ | :----- | :------ | :---------------- |
 | `grant_type`    | String | 是    | 授权方式。该参数设置为固定字符串 `client_credentials`，即客户端凭证模式。      |
 | `client_id`     | String | 是    | App 的 `client_id`，用于生成 app token 调用 REST API。详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的`应用详情`页面。 |
 | `client_secret` | String | 是    | App 的 `client_secret`，用于生成 app token 调用 REST API。详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的`应用详情`页面。 |
