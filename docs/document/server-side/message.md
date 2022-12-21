@@ -15,25 +15,25 @@
 
 ### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述                                                         |
-| :--------- | :----- | :------- | :----------------------------------------------------------- |
-| `host`     | String | 是       | 你在环信即时通讯 IM 管理后台注册项目时所在的集群服务器地址。 |
-| `org_name` | String | 是       | 即时通讯服务分配给每个企业（组织）的唯一标识。               |
-| `app_name` | String | 是       | 你在环信即时通讯 IM 管理后台注册项目时填入的应用名称。       |
-| `username` | String | 是       | 用户 ID。                                                    |
+| 参数    | 类型   | 是否必需 | 描述         |
+| :------------ | :----- | :------ | :---------------- |
+| `host` | String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| `username` | String | 是       | 用户 ID。       |
 
 ### 响应参数
 
 | 参数              | 类型   | 描述                                                                  |
 | :---------------- | :----- | :-------------------------------------------------------------------- |
 | `action`          | String | 请求方式，即接口方法名。                                              |
-| `organization`    | String | 即 `org_name`，即时通讯服务分配给每个企业（组织）的唯一标识。         |
+| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。        |
 | `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。            |
-| `applicationName` | String | 即 `app_name`，你在环信即时通讯 IM 管理后台注册项目时填入的应用名称。 |
+| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | String | 请求 URL。                                                            |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。            |
 | `entities`        | JSON   | 详细信息。                                                   |
-| `host`            | String | 你在环信即时通讯 IM 管理后台注册项目时所在的集群服务器地址。 |
+| `host`            | String | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。 |
 | `data`            | JSON   | 实际获取的数据详情。                                         |
 | `uuid`            | String | 消息附件的唯一标识。该标识由系统生成，开发者无需关心。       |
 | `username`        | String | 用户 ID。                                                    |
@@ -81,18 +81,18 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ##### 请求 header
 
-|      参数       | 类型   | 是否必需 | 描述                             |
-| :-------------: | :----- | :------: | :----------------------------------------------------------: |
-| `Content-Type`  | String |    是    | 内容类型。请填 `application/json`。              |
-|    `Accept`     | String |    是    | 内容类型。请填 `application/json`。              |
-| `Authorization` | String |    是    | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+|      参数       | 类型   | 是否必需 | 描述             |
+| :------------ | :----- | :------- | :---------------------------------- |
+| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。              |
+| `Accept`     | String | 是    | 内容类型。请填 `application/json`。              |
+| `Authorization` | String | 是    | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
 
 #### 通用请求体
 
 通用请求体为 JSON 对象，是所有消息的外层结构。不同类型的消息只是 `body` 字段内容存在差异。
 
-| 参数          | 类型   | 是否必需 | 描述                                                         |
-| :------------ | :----- | :------- | :----------------------------------------------------------- |
+| 参数          | 类型   | 是否必需 | 描述                |
+| :------------ | :----- | :------- | :---------------------------------- |
 | `from`        | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为管理员，即 “admin”；若传入字段但值为空字符串 (“”)，请求失败。 |
 | `to`          | List   | 是       | 消息接收方的用户 ID 数组。每次最多可向 600 个用户发送消息。 |
 | `type`        | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |

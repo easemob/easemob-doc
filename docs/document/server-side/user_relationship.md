@@ -23,11 +23,11 @@ Authorization：`Bearer ${YourToken}`
 
 ### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述                                                         |
-| :--------- | :----- | :------- | :----------------------------------------------------------- |
-| `host`     | String | 是    | 你在环信即时通讯 IM 管理后台注册项目时所在的集群服务器地址。 |
-| `org_name` | String | 是    | 即时通讯服务分配给每个企业（组织）的唯一标识。 |
-| `app_name` | String | 是    | 你在环信即时通讯 IM 管理后台注册项目时填入的应用名称。       |
+| 参数    | 类型   | 是否必需 | 描述         |
+| :------------ | :----- | :------ | :---------------- |
+| `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
 | `username` | String | 是    | 用户 ID。         |
 
 ### 响应参数
@@ -39,9 +39,9 @@ Authorization：`Bearer ${YourToken}`
 | `uuid`      | String  | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
 | `username`  | String| 用户 ID。                                                     |
 | `action`   | String  | 请求方式，即接口方法名。                                     |
-| `organization`   | String   | 即 `org_name`，即时通讯服务分配给每个企业（组织）的唯一标识。 |
+| `organization`   | String   | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
 | `application`  | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
-| `applicationName` | String | 即 `app_name`，你在环信即时通讯 IM 管理后台注册项目时填入的应用名称。 |
+| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`        | String     | 请求 URL。                                                   |
 | `path`        | String  | 请求路径，属于请求 URL 的一部分，开发者无需关注。            |
 | `username`  | String | 用户 ID。                                                     |
@@ -70,15 +70,15 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 | `owner_username`  | String | 是    | 你的用户 ID。                                                 |
 | `friend_username` | String | 是    | 要添加的用户 ID。                                             |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
 | 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ### HTTP 响应
 
@@ -97,7 +97,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 | `entities.activated`   | Bool  | 用户是否被封禁：<br/> • `true` 该用户没有被封禁。<br/> • `false` 该用户已经被封禁。 |
 | `entities.nickname`      | String   | 用户昵称。                                                   |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -154,14 +154,14 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 | `owner_username`  | String | 是    | 发起操作的用户 ID。                                           |
 | `friend_username` | String | 是    | 被移除好友的用户 ID。                                         |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
 | 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ### HTTP 响应
 
@@ -180,7 +180,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 | `entities.activated`      | Bool  | 用户是否被封禁：<br/> • `true` 该用户没有被封禁。<br/> • `false` 该用户已经被封禁。 |
 | `entities.nickname`      | String   | 用户昵称。                                                   |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -236,7 +236,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 | :--------------- | :----- | :------- | :----------------------------------------------------------- |
 | `owner_username` | String | 是    | 好友列表所有者的用户 ID。                                     |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -244,7 +244,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ### HTTP 响应
 
@@ -252,13 +252,13 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型   | 说明                                 |
+| 字段      | 类型   | 描述                                 |
 | :-------| :-----| :----------------------------------- |
 | `data`  | Array | “user1”, “user2”，获取到的好友列表。 |
 | `entities`  | Object | 预留参数。               |
 | `count`  | Int   | 计数，好友数量。                     |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -306,15 +306,15 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 | :--------------- | :----- | :------- | :----------------------------------------------------------- |
 | `owner_username` | String | 是    | 你的用户 ID。                                                 |
 
-其他参数及说明详见[公共参数](#公共参数)。
+其他参数及描述详见[公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
+| 参数    | 类型   | 是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### 请求 body
 
@@ -328,11 +328,11 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段    | 类型      | 说明                                                         |
+| 字段    | 类型      | 描述                                                         |
 | :------------ | :------------- | :----------------------------------------------------------- |
 | `data`        | Array   | 添加至黑名单的用户 ID。                                       |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -384,7 +384,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 | :--------------- | :----- | :------- | :----------------------------------------------------------- |
 | `owner_username` | String | 是    | 当前用户的用户 ID。                     |
 
-其他参数及说明详见[公共参数](#公共参数)。
+其他参数及描述详见[公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -399,13 +399,13 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型    | 说明                                   |
+| 字段       | 类型    | 描述                                   |
 | :---------| :------ | :------------------------------------- |
 | `data` | Array | “user1”, “user2”，获取到的黑名单列表。 |
 | `entities` | Object | 黑名单用户的详情。                     |
 | `count`    | Int | 计数，好友数量。                       |
 
-其他字段及说明详见[公共参数](#公共参数)。
+其他字段及描述详见[公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -452,7 +452,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 | `owner_username`   | String | 是    | 当前用户的用户 ID。                 |
 | `blocked_username` | String | 是    | 需移除的黑名单用户 ID。                |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -478,7 +478,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 | `entities.activated`      | Bool   | 用户是否被封禁：<br/> • `true` 该用户正常。<br/> • `false` 该用户被封禁。 |
 | `entities.nickname`      | String   | 用户昵称。                                                   |
 
-其他字段及说明详见[公共参数](#公共参数)。
+其他字段及描述详见[公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 

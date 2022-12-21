@@ -8,12 +8,12 @@
 
 ### 请求参数
 
-| 参数      | 类型   | 是否必需 | 描述                                         |
-| :-------- | :----- | :------- | -------------------------------------------- |
-| `host`     | String | 必需     | 你在环信即时通讯云控制台注册项目时所在的集群服务器地址。 |
-| `org_name` | String | 必需     | 即时通讯服务分配给每个企业（组织）的唯一标识。你可以通过控制台获取该字段。 |
-| `app_name` | String | 必需     | 你在环信即时通讯云控制台注册项目时填入的应用名称。         |
-| `userId`   | String | 必需     | 用户 ID。                                                  |
+| 参数    | 类型   | 是否必需 | 描述         |
+| :------------ | :----- | :------ | :---------------- |
+| `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| `userId`   | String | 是     | 用户 ID。                                                  |
 
 ### 响应参数
 
@@ -44,21 +44,21 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | ------------------------------------------------------------ |
-| `Content-Type`  | String | 必需     | 内容类型：`application/json`                                 |
-| `Authorization` | String | 必需     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
+| `Content-Type`  | String | 是     | 内容类型：`application/json`                                 |
+| `Authorization` | String | 是     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
 
 #### 请求 body
 
-| 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 说明                                             |
+| 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                             |
 | --------- | ------ | -------- | ------------------------------------------------ |
-| `msgId`   | String | 必需     | 消息 ID。                                        |
-| `message` | String | 必需     | 表情 ID。长度不可超过 128 个字符。与客户端一致。允许的字符集包括：<br/> - 26 个大写字母 (A-Z)；<br/> - 26 个小写字母(a-z)；<br/> - 10 个数字(0-9)；<br/> - 特殊字符（建议不使用）：''*'' ''~'' ''!'' ''@'' ''#'' ''$'' ''('' '')'' ''_'' ''-'' ''='' ''?'' ''/'' ''.'' '','' ''<'' ''>'' ''''' '':'' '';'' ''！'' ''¥'' ''（'' ''）'' ''——'' ''【'' ''】'' ''、'' ''；'' ''“'' ''：'' ''？'' ''。'' ''，'' ''《'' ''》''。 |
+| `msgId`   | String | 是     | 消息 ID。                                        |
+| `message` | String | 是     | 表情 ID。长度不可超过 128 个字符。与客户端一致。允许的字符集包括：<br/> - 26 个大写字母 (A-Z)；<br/> - 26 个小写字母(a-z)；<br/> - 10 个数字(0-9)；<br/> - 特殊字符（建议不使用）：''*'' ''~'' ''!'' ''@'' ''#'' ''$'' ''('' '')'' ''_'' ''-'' ''='' ''?'' ''/'' ''.'' '','' ''<'' ''>'' ''''' '':'' '';'' ''！'' ''¥'' ''（'' ''）'' ''——'' ''【'' ''】'' ''、'' ''；'' ''“'' ''：'' ''？'' ''。'' ''，'' ''《'' ''》''。 |
 
 ### HTTP 响应
 
@@ -66,7 +66,7 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数                | 类型    | 说明                                                        |
+| 参数                | 类型    | 描述                                                       |
 | ------------------- | ------- | ----------------------------------------------------------- |
 | `requestStatusCode` | String  | 接口相应 code 状态。`OK` 表示操作成功。                     |
 | `id`                | String  | Reaction ID。                                               |
@@ -77,7 +77,7 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 | `createAt`          | Instant | 创建时间。                                                  |
 | `updateAt`          | Instant | 修改时间。                                                  |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -122,22 +122,22 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | ------------------------------------------------------------ |
-| `Content-Type`  | String | 必需     | 内容类型：`application/json`                                 |
-| `Authorization` | String | 必需     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
+| `Content-Type`  | String | 是    | 内容类型：`application/json`                                 |
+| `Authorization` | String | 是     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
 
 #### 请求 body
 
 | 参数        | 类型   | 是否必需 | 描述                                                      |
 | :---------- | :----- | :------- | --------------------------------------------------------- |
-| `msgIdList` | Array  | 必需     | 需要查询的消息 ID 列表。                                  |
-| `msgType`   | String | 必需     | 消息类型（单聊：`chat`； 群聊：`groupchat`）。            |
-| `groupId`   | String | 非必需   | 群组 ID（若要拉取群中的 Reaction，需要传当前群组的 ID）。 |
+| `msgIdList` | Array  | 是     | 需要查询的消息 ID 列表。                                  |
+| `msgType`   | String | 是     | 消息类型（单聊：`chat`； 群聊：`groupchat`）。            |
+| `groupId`   | String | 否  | 群组 ID（若要拉取群中的 Reaction，需要传当前群组的 ID）。 |
 
 ### HTTP 响应
 
@@ -145,7 +145,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数                | 类型   | 说明                                                         |
+| 参数                | 类型   | 描述                                                        |
 | ------------------- | ------ | ------------------------------------------------------------ |
 | `requestStatusCode` | String | 接口相应 code 状态。`OK` 表示操作成功。                      |
 | `msgId`             | String | 消息 ID。                                                    |
@@ -155,7 +155,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 | `state`             | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`: 是； <br/> - `false`：否。 |
 | `userList`          | Array  | 追加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -220,21 +220,21 @@ DELETE https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 ### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | ------------------------------------------------------------ |
-| `Content-Type`  | String | 必需     | 内容类型：`application/json`                                 |
-| `Authorization` | String | 必需     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
+| `Content-Type`  | String | 是     | 内容类型：`application/json`                                 |
+| `Authorization` | String | 是    | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
 
 #### 请求 body
 
 | 参数      | 类型   | 是否必需 | 描述                                             |
 | :-------- | :----- | :------- | ------------------------------------------------ |
-| `msgId`   | String | 必需     | 消息 ID。                                        |
-| `message` | String | 必需     | 表情 ID。长度不可超过 128 个字符。与客户端一致。 |
+| `msgId`   | String | 是     | 消息 ID。                                        |
+| `message` | String | 是     | 表情 ID。长度不可超过 128 个字符。与客户端一致。 |
 
 ### HTTP 响应
 
@@ -242,12 +242,12 @@ DELETE https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数                | 类型   | 说明                                      |
+| 参数                | 类型   | 描述                                      |
 | ------------------- | ------ | ----------------------------------------- |
 | `requestStatusCode` | String | 接口相应 code 状态。`OK` 表示操作成功。   |
 | `timestamp`         | long   | 请求响应的时间，Unix 时间戳，单位为毫秒。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -280,23 +280,23 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | ------------------------------------------------------------ |
-| `Content-Type`  | String | 必需     | 内容类型：`application/json`                                 |
-| `Authorization` | String | 必需     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
+| `Content-Type`  | String | 是    | 内容类型：`application/json`                                 |
+| `Authorization` | String | 是     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
 
 #### 请求 body
 
-| 参数      | 类型    | 是否必需 | 说明                                                         |
+| 参数      | 类型    | 是否必需 | 描述                                                        |
 | --------- | ------- | -------- | ------------------------------------------------------------ |
-| `msgId`   | String  | 必需     | 消息 ID。                                                    |
-| `message` | String  | 必需     | 表情 ID。长度不可超过 128 个字符。与客户端一致。             |
-| `limit`   | Integer | 非必需   | 分页获取时使用，每页显示的 Reaction 条数（默认值和最大值都为 50）。 |
-| `cursor`  | String  | 非必需   | 分页获取时使用，传入游标后便从游标起始的地方进行查询，类似于数据库 limit 1,5 中 1 的作用，可以理解为页码。 |
+| `msgId`   | String  | 是     | 消息 ID。                                                    |
+| `message` | String  | 是     | 表情 ID。长度不可超过 128 个字符。与客户端一致。             |
+| `limit`   | Integer | 否   | 分页获取时使用，每页显示的 Reaction 条数（默认值和最大值都为 50）。 |
+| `cursor`  | String  | 否   | 分页获取时使用，传入游标后便从游标起始的地方进行查询，类似于数据库 limit 1,5 中 1 的作用，可以理解为页码。 |
 
 ### HTTP 响应
 
@@ -304,7 +304,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数                | 类型   | 说明                                                         |
+| 参数                | 类型   | 描述                                                         |
 | ------------------- | ------ | ------------------------------------------------------------ |
 | `requestStatusCode` | String | 接口相应 code 状态。`OK` 表示操作成功。                      |
 | `reactionId`        | String | Reaction ID。                                                |
@@ -314,7 +314,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail
 | `userList`          | Array  | 追加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。 |
 | `cursor`            | String | 分页获取时使用，传入游标后便从游标起始的地方进行查询，类似于数据库 limit 1,5 中 1 的作用，可以理解为页码。 |
 
-其他字段及说明详见 [公共参数](#公共参数)。
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
