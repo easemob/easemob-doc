@@ -18,32 +18,32 @@
 
 ### 请求参数
 
-| 参数       | 类型   | 描述                                                                                                                 |
-| :--------- | :----- | :--------------------------------------------- |
-| `host`     | String | 你在环信即时通讯云控制台注册项目时所在的 [集群服务器地址](overview.html#请求域名)。 |
-| `org_name` | String | 即时通讯服务分配给每个企业（组织）的唯一标识。你可以通过控制台获取该字段。                                           |
-| `app_name` | String | 你在环信即时通讯云控制台注册项目时填入的应用名称。                                                                   |
+| 参数    | 类型   | 是否必需 | 描述         |
+| :------------ | :----- | :------ | :---------------- |
+| `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
 
 ### 响应参数
 
-| 参数                 | 类型   | 描述                                                                                                                                          |
-| :------------------- | :----- | :-------------------------------------------- |
-| `action`             | String | 请求方式。                                                                                                                                    |
-| `organization`       | String | 即 `org_name`，即时通讯服务分配给每个企业（组织）的唯一标识。你可以通过控制台获取该字段。                                                     |
-| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。                                                                                                  |
-| `applicationName`    | String | 即 `app_name`，你在环信即时通讯云控制台注册项目时填入的应用名称。                                                                             |
-| `uri`                | String | 请求 URL。                                                                                                                                    |
-| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                                                                                             |
-| `entities`           | JSON   | 详细信息。                                                                                                                                    |
-| `entities.uuid`      | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。                                                     |
-| `entities.type`      | String | 对象类型，无需关注。                                                                                                                          |
-| `entities.created`   | Long   | 注册用户的 Unix 时间戳，单位为毫秒。                                                                                                          |
-| `entities.modified`  | Long   | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。                                                                                              |
-| `entities.username`  | String | 用户 ID，长度不可超过 64 个字节。                                                                                                             |
+| 参数         | 类型   | 描述      |
+| :------------------- | :----- | :------------------------------------ |
+| `action`             | String | 请求方式。          |
+| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。  |
+| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。                                  |
+| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
+| `uri`                | String | 请求 URL。           |
+| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                            |
+| `entities`           | JSON   | 详细信息。            |
+| `entities.uuid`      | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。   |
+| `entities.type`      | String | 对象类型，无需关注。   |
+| `entities.created`   | Long   | 注册用户的 Unix 时间戳，单位为毫秒。              |
+| `entities.modified`  | Long   | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。         |
+| `entities.username`  | String | 用户 ID，长度不可超过 64 个字节。               |
 | `entities.activated` | Bool   | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用解禁用户解除封禁。 |
-| `data`               | JSON   | 实际获取的数据详情。                                                                                                                          |
-| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                                                                                         |
-| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。                                                                                                    |
+| `data`               | JSON   | 实际获取的数据详情。  |
+| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                      |
+| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。                             |
 
 ## 认证方式
 

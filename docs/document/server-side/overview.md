@@ -106,9 +106,9 @@ Authorization：`Bearer ${token}`
 
 | 名称<div style="width: 150px;"></div>             | 方法 | 请求                                        | 描述                                                         |
 | :--------------- | :--- | :------------------------------------------ | :----------------------------------------------------------- |
-| 发送消息         | POST | /{org_name}/{app_name}/messages             | 聊天相关 API，一般是模拟系统管理员给用户或者群组发送消息，支持发送文本消息、图片消息、语音消息、视频消息，透传消息，扩展消息以及文件类型消息。 |
+| 发送消息         | POST | 三种请求场景如下：<br/> - 单聊：/{org_name}/{app_name}/messages/users <br/> - 群聊：/{org_name}/{app_name}/messages/chatgroups <br/> - 聊天室：/{org_name}/{app_name}/messages/chatrooms  | 聊天相关 API，一般是模拟系统管理员给用户、群组或聊天室发送消息，支持发送文本消息、图片消息、语音消息、视频消息，透传消息，扩展消息以及文件类型消息。 |
 | 上传文件         | POST | /{org_name}/{app_name}/chatfiles            | 上传语音和图片等文件。                                       |
-| 下载文件         | POST | /{org_name}/{app_name}/chatfiles/{uuid}     | 下载语音和图片等文件。                                       |
+| 下载文件         | GET | /{org_name}/{app_name}/chatfiles/{file_uuid}     | 下载语音和图片等文件。                                       |
 | 获取聊天记录文件 | GET  | /{org_name}/{app_name}/chatmessages/${time} | 获取聊天记录文件。                                           |
 
 ### 用户属性
