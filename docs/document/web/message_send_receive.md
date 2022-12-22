@@ -168,7 +168,7 @@ let option = {
   // 要撤回消息的消息 ID。
     mid: 'msgId',
   // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-    to: 'userID',
+    to: 'username',
   // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: 'singleChat'
 };
@@ -230,9 +230,9 @@ function sendPrivateAudio() {
       file: file,
       // 语音文件长度，单位为秒。
       length: "3",
-      // 消息接收方的用户 ID。
+      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
       to: "username",
-      // 会话类型。
+      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
       chatType: "singleChat",
       // 语音文件上传失败。
       onFileUploadError: function () {
@@ -282,16 +282,16 @@ function sendPrivateImg() {
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
-      // 设置消息类型。
+      // 消息类型。
       type: "img",
       file: file,
       ext: {
         // 图片文件长度，单位为字节。
         file_length: file.data.size,
       },
-      // 消息接收方的用户 ID。
+      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
       to: "username",
-      // 会话类型。
+      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
       chatType: "singleChat",
       // 图片文件上传失败。
       onFileUploadError: function () {
@@ -335,7 +335,7 @@ function sendPrivateUrlImg() {
     type: "img",
     // 图片文件的 URL 地址。
     url: "img url",
-    // 消息接收方的用户 ID。
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: "username",
   };
   // 创建一条图片消息。
@@ -368,9 +368,9 @@ function sendPrivateVideo() {
       // 消息类型。
       type: "video",
       file: file,
-      // 消息接收方的用户 ID。
+      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
       to: "username",
-      // 会话类型。
+      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
       chatType: "singleChat",
       onFileUploadError: function () {
         // 视频文件上传失败。
@@ -427,9 +427,9 @@ function sendPrivateFile() {
       // 消息类型。
       type: "file",
       file: file,
-      // 消息接收方的用户 ID。
+      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
       to: "username",
-      // 会话类型。
+      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
       chatType: "singleChat",
       // 文件上传失败。
       onFileUploadError: function () {
@@ -499,9 +499,9 @@ function sendCMDMessage() {
   let option = {
     // 消息类型。
     type: "cmd",
-    // 会话类型，支持单聊、群聊和聊天室。
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: "singleChat",
-    // 消息接收方的用户 ID。
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: "username",
     // 自定义动作。对于透传消息，该字段必填。
     action: "action",
@@ -562,10 +562,14 @@ const onInputChange = function () {
 // 创建输入状态消息并发送
 const sendBeginTyping = function () {
   const option = {
-    chatType: "singleChat", // 会话类型，设置为单聊。
-    type: "cmd", // 消息类型。
-    to: "<target id>", // 消息接收方。
-    action: "TypingBegin", // 用户自定义操作。
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+    chatType: "singleChat", 
+    // 消息类型。
+    type: "cmd", 
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "<target id>", 
+    // 用户自定义操作。
+    action: "TypingBegin", 
   };
   const typingMessage = message.create(option);
 
@@ -618,9 +622,9 @@ function sendCustomMsg() {
   let option = {
     // 消息类型。
     type: "custom",
-    // 消息接收方的用户 ID。
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: "username",
-    // 会话类型。
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: "singleChat",
     customEvent,
     customExts,

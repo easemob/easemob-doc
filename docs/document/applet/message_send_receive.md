@@ -12,11 +12,11 @@
 
 对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
 
-本文介绍如何使用即时通讯 IM Web SDK 实现小程序发送和接收这些类型的消息。
+本文介绍如何使用即时通讯 IM SDK 实现小程序发送和接收这些类型的消息。
 
 ## 技术原理
 
-环信即时通讯 IM Web SDK 可以实现消息的发送、接收与撤回。
+环信即时通讯 IM SDK 可以实现消息的发送、接收与撤回。
 
 发送和接收消息：
 
@@ -92,7 +92,7 @@ function sendTextMessage() {
         console.log("Send message fail");
     });
 }
-```  
+```
 
 ### 接收消息
 
@@ -256,7 +256,7 @@ function sendPrivateAudio(tempFilePath, duration) {
 
 #### 发送图片消息
 
-请参考以下代码示例来创建和发送图片消息：
+请参考以下代码示例创建和发送图片消息：
 
 ```javascript
 function sendImage() {
@@ -348,16 +348,16 @@ function sendPrivateImg(res) {
 function sendPrivateUrlImg() {
   let option = {
     chatType: "singleChat",
-    // 设置消息类型。
+    // 消息类型。
     type: "img",
-    // 设置图片文件的 URL　地址。
+    // 图片文件的 URL 地址。
     url: "img url",
-    // 设置消息接收方的用户 ID。
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: "username",
   };
   // 创建一条图片消息。
   let msg = WebIM.message.create(option);
-  //  调用 `send` 方法发送该图片消息。
+  // 调用 `send` 方法发送该图片消息。
   WebIM.conn.send(msg);
 }
 ```
@@ -392,24 +392,28 @@ function sendPrivateVideo(){
 							var data = res.data;
 							var dataObj = JSON.parse(data);
               var option = {
+                  // 消息类型。
 									type: "video",
-									chatType: 'singleChat',
-                  filename: tempFilePaths,
-									to: 'username',// 接收消息对象
+                  // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+									chatType: "singleChat",
+                  // 文件名。
+                  filename: "filename",
+                  // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+									to: "username",
                   body: {
-                    //文件 URL
+                    //文件 URL。
                     url:dataObj.uri + "/" + dataObj.entities[0].uuid,
-                    //文件类型
+                    //文件类型。
                     type: "video",
-                    //文件名
-                    filename: tempFilePaths,
+                    //文件名称。
+                    filename: "filename",
                   },
 							}
               let msg = WebIM.message.create(option);
                // 调用 `send` 方法发送该视频消息。
               WebIM.conn.send(msg).then((res)=>{
                // 视频消息成功发送。
-                console.log('Success');
+                console.log("Success");
               }).catch((e)=>{
                 // 视频消息发送失败。
                 console.log("Fail");
@@ -480,22 +484,22 @@ function sendPrivateFile(res) {
             var data = res.data;
             var dataObj = JSON.parse(data);
             var option = {
+              // 消息类型。
               type: "file",
+              // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
               chatType: "singleChat",
-              width: width,
-              height: height,
-              to: "username", // 接收消息对象
+              to: "username",
               body: {
-                //文件 URL
+                //文件 URL。
                 url: dataObj.uri + "/" + dataObj.entities[0].uuid,
-                //文件类型
+                //文件类型。
                 type: "file",
-                //文件名
+                //文件名称。
                 filename: "filename",
               },
             };
             let msg = WebIM.message.create(option);
-            // 调用 `send` 方法发送该图片消息。
+            // 调用 `send` 方法发送该文件消息。
             WebIM.conn
               .send(msg)
               .then((res) => {
@@ -523,15 +527,15 @@ function sendPrivateFile(res) {
 ```javascript
 function sendCMDMessage() {
   let option = {
-    // 设置消息类型。
+    // 消息类型。
     type: "cmd",
-    // 设置会话类型。
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: "singleChat",
-    // 设置消息接收方的用户 ID。
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: "username",
-    // 设置自定义动作。对于透传消息，该字段必填。
+    // 自定义动作。对于透传消息，该字段必填。
     action: "action",
-    // 设置消息扩展信息。
+    // 消息扩展信息。
     ext: { key: "extends messages" },
   };
   // 创建一条透传消息。
@@ -563,11 +567,11 @@ function sendCustomMsg() {
   // 通过键值对设置自定义消息内容。
   let customExts = {};
   let option = {
-    // 设置消息类型。
+    // 消息类型。
     type: "custom",
-    // 设置消息接收方的用户 ID。
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: "username",
-    // 设置会话类型。
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: "singleChat",
     customEvent,
     customExts,
