@@ -49,14 +49,19 @@
 示例代码如下：
 
 ```javascript
-// 在 thread 内发送文本消息
+// 在子区内发送文本消息
 function sendTextMessage() {
     let option = {
-        chatType: 'groupChat',     // 会话类型，设置为群聊。
-        type: 'txt',               // 消息类型。
-        to: chatThreadId,          // 消息接收方（子区 ID)。
-        msg: 'message content'     // 消息内容。
-        isChatThread:true,   // thread 消息标记
+        // 会话类型，设置为群聊。
+        chatType: 'groupChat',  
+        // 消息类型。
+        type: 'txt',   
+        // 消息接收方（子区 ID)。
+        to: 'chatThreadId',     
+        // 消息内容。
+        msg: 'message content'  
+        // 是否为子区消息。
+        isChatThread: 'true',   
     }
     let msg = WebIM.message.create(option); 
     connection.send(msg).then(() => {
@@ -97,12 +102,12 @@ connection.addEventHandler('THREADMESSAGE',{
 let option = {
   // 设置要撤回消息的 ID。
   mid: 'msgId',
-  // 设置消息接收方。
-  to: 'userID',
+  // 设置消息接收方（子区 ID)。
+  to: 'chatThreadId',
   // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
   chatType: 'groupChat'
   // 设置是否为子区消息。
-  isChatThread: true
+  isChatThread: 'true'
 };
 connection.recallMessage(option).then((res) => {
   console.log('success', res)

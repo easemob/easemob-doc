@@ -165,11 +165,11 @@ conn.addEventHandler("eventName", {
 
 ```javascript
 let option = {
-  // 设置消息 ID。
+  // 设置要撤回消息的消息 ID。
     mid: 'msgId',
   // 设置消息接收方，单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: 'userID',
-  para
+  // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: 'singleChat'
 };
 conn.recallMessage(option).then((res) => {
