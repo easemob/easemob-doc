@@ -225,7 +225,8 @@ function sendPrivateAudio(tempFilePath, duration) {
         type: "audio",
         chatType: "singleChat",
         filename: tempFilePath,
-        to: "username", // 接收消息对象
+        // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+        to: "username", 
         body: {
           //文件 URL。
           url: dataObj.uri + "/" + dataObj.entities[0].uuid,
@@ -318,7 +319,8 @@ function sendPrivateImg(res) {
               width: width,
               height: height,
               url: dataObj.uri + "/" + dataObj.entities[0].uuid,
-              to: "username", // 接收消息对象
+              // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+              to: "username", 
             };
             let msg = WebIM.message.create(option);
             // 调用 `send` 方法发送该图片消息。
@@ -391,7 +393,7 @@ function sendPrivateVideo(){
 						success(res){
 							var data = res.data;
 							var dataObj = JSON.parse(data);
-              var option = {
+  						var option = {
                   // 消息类型。
 									type: "video",
                   // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
@@ -614,7 +616,7 @@ function sendTextMessage() {
     },
   };
   let msg = WebIM.message.create(option);
-  //  调用 `send` 方法发送该扩展消息。
+  // 调用 `send` 方法发送该扩展消息。
   WebIM.conn
     .send(msg)
     .then((res) => {
