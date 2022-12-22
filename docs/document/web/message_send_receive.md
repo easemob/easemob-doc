@@ -52,13 +52,13 @@
 // 发送文本消息。
 function sendTextMessage() {
   let option = {
-    // 设置消息类型。
+    // 消息类型。
     type: "txt",
-    // 设置消息内容。
+    // 消息内容。
     msg: "message content",
-    // 设置消息接收方，单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: "username",
-    // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: "singleChat",
   };
   // 创建文本消息。
@@ -165,11 +165,11 @@ conn.addEventHandler("eventName", {
 
 ```javascript
 let option = {
-  // 设置要撤回消息的消息 ID。
+  // 要撤回消息的消息 ID。
     mid: 'msgId',
-  // 设置消息接收方，单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+  // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: 'userID',
-  // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+  // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: 'singleChat'
 };
 conn.recallMessage(option).then((res) => {
@@ -225,14 +225,14 @@ function sendPrivateAudio() {
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
-      // 设置消息类型。
+      // 消息类型。
       type: "audio",
       file: file,
-      // 设置语音文件长度，单位为秒。
+      // 语音文件长度，单位为秒。
       length: "3",
-      // 设置消息接收方的用户 ID。
+      // 消息接收方的用户 ID。
       to: "username",
-      // 设置会话类型。
+      // 会话类型。
       chatType: "singleChat",
       // 语音文件上传失败。
       onFileUploadError: function () {
@@ -286,12 +286,12 @@ function sendPrivateImg() {
       type: "img",
       file: file,
       ext: {
-        // 设置图片文件长度，单位为字节。
+        // 图片文件长度，单位为字节。
         file_length: file.data.size,
       },
-      // 设置消息接收方的用户 ID。
+      // 消息接收方的用户 ID。
       to: "username",
-      // 设置会话类型。
+      // 会话类型。
       chatType: "singleChat",
       // 图片文件上传失败。
       onFileUploadError: function () {
@@ -331,11 +331,11 @@ function sendPrivateImg() {
 function sendPrivateUrlImg() {
   let option = {
     chatType: "singleChat",
-    // 设置消息类型。
+    // 消息类型。
     type: "img",
-    // 设置图片文件的 URL 地址。
+    // 图片文件的 URL 地址。
     url: "img url",
-    // 设置消息接收方的用户 ID。
+    // 消息接收方的用户 ID。
     to: "username",
   };
   // 创建一条图片消息。
@@ -365,12 +365,12 @@ function sendPrivateVideo() {
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
-      // 设置消息类型。
+      // 消息类型。
       type: "video",
       file: file,
-      // 设置消息接收方的用户 ID。
+      // 消息接收方的用户 ID。
       to: "username",
-      // 设置会话类型。
+      // 会话类型。
       chatType: "singleChat",
       onFileUploadError: function () {
         // 视频文件上传失败。
@@ -424,12 +424,12 @@ function sendPrivateFile() {
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
-      // 设置消息类型。
+      // 消息类型。
       type: "file",
       file: file,
-      // 设置消息接收方的用户 ID。
+      // 消息接收方的用户 ID。
       to: "username",
-      // 设置会话类型。
+      // 会话类型。
       chatType: "singleChat",
       // 文件上传失败。
       onFileUploadError: function () {
@@ -497,15 +497,15 @@ const sendLocMsg = () => {
 ```javascript
 function sendCMDMessage() {
   let option = {
-    // 设置消息类型。
+    // 消息类型。
     type: "cmd",
-    // 设置会话类型，支持单聊、群聊和聊天室。
+    // 会话类型，支持单聊、群聊和聊天室。
     chatType: "singleChat",
-    // 设置消息接收方的用户 ID。
+    // 消息接收方的用户 ID。
     to: "username",
-    // 设置自定义动作。对于透传消息，该字段必填。
+    // 自定义动作。对于透传消息，该字段必填。
     action: "action",
-    // 设置消息扩展信息。
+    // 消息扩展信息。
     ext: { key: "extends messages" },
   };
   // 创建一条透传消息。
@@ -611,16 +611,16 @@ const beginTimer = () => {
 
 ```javascript
 function sendCustomMsg() {
-  // 设置自定义事件。
+  // 自定义事件。
   let customEvent = "customEvent";
   // 通过键值对设置自定义消息内容。
   let customExts = {};
   let option = {
-    // 设置消息类型。
+    // 消息类型。
     type: "custom",
-    // 设置消息接收方的用户 ID。
+    // 消息接收方的用户 ID。
     to: "username",
-    // 设置会话类型。
+    // 会话类型。
     chatType: "singleChat",
     customEvent,
     customExts,
@@ -654,7 +654,7 @@ function sendTextMessage() {
     msg: "message content",
     to: "username",
     chatType: "singleChat",
-    // 设置消息扩展信息。扩展字段为可选，若带有该字段，值不能为空，即 "ext:null" 会出错。
+    // 消息扩展信息。扩展字段为可选，若带有该字段，值不能为空，即 "ext:null" 会出错。
     ext: {
       key1: "Self-defined value1",
       key2: {

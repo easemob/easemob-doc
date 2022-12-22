@@ -49,13 +49,13 @@
 // 发送文本消息。
 function sendTextMessage() {
   let option = {
-    // 设置消息类型。
+    // 消息类型。
     type: "txt",
-    // 设置消息内容。
+    // 消息内容。
     msg: "message content",
-    // 设置消息接收方，单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: "username",
-    // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`，默认为单聊。
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`，默认为单聊。
     chatType: "singleChat",
   };
   // 创建文本消息。
@@ -162,11 +162,11 @@ WebIM.conn.addEventHandler("eventName", {
 
 ```javascript
 let option = {
-  // 设置要撤回消息的消息 ID。
+  // 要撤回消息的消息 ID。
     mid: 'msgId',
-  // 设置消息接收方，单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+  // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: 'userID',
-  // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+  // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: 'singleChat'
 };
 WebIM.conn.recallMessage(option).then((res) => {
