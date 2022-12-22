@@ -133,7 +133,7 @@ conn.removeChatThreadMember({chatThreadId: 'chatThreadId',username:'username'});
 ```javascript
 // 修改子区名称
 // chatThreadId：子区 ID
-// name：修改的子区名称，长度不超过 64 个字符
+// name：修改后的子区名称，长度不超过 64 个字符
 conn.changeChatThreadName({chatThreadId: 'chatThreadId',name: 'name'})
 // 监听子区更新
 conn.addEventHandler('THREAD',{
@@ -150,7 +150,6 @@ conn.addEventHandler('THREAD',{
 示例代码如下：
 
 ```javascript
-// 获取子区详情
 // chatThreadID：子区 ID
 conn.getChatThreadDetail({chatThreadId: 'chatThreadId'}).then((res)=>{
   console.log(res)

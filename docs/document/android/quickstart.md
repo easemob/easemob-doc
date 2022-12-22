@@ -21,7 +21,7 @@
 ## 前提条件
 
 - Android Studio 3.0 或以上版本；
-- Android SDK API 等级 19 或以上；
+- Android SDK API 等级 21 或以上；
 - Android 4.4 或以上版本的设备；
 - 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
 
