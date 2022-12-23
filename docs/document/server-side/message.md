@@ -2,7 +2,7 @@
 
 <Toc />
 
-本文展示如何调用环信 IM REST API 在服务端实现全类型消息的发送与接收、消息附件上传和下载、获取历史消息、服务端消息撤回、服务端单向删除会话等。支持消息类型包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
+本文展示如何调用环信 IM REST API 在服务端实现全类型消息，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息的发送与接收、消息附件上传和下载、获取历史消息记录、服务端消息撤回、服务端单向删除会话等。
 
 ## 前提条件
 
@@ -26,13 +26,13 @@
 
 | 参数              | 类型   | 描述                                                                  |
 | :---------------- | :----- | :-------------------------------------------------------------------- |
-| `action`          | String | 请求方式，即接口方法名。                                              |
+| `action`          | String | 请求方法。                                              |
 | `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。        |
 | `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。            |
 | `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | String | 请求 URL。                                                            |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。            |
-| `entities`        | JSON   | 详细信息。                                                   |
+| `entities`        | JSON   | 响应实体。                                                   |
 | `host`            | String | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。 |
 | `data`            | JSON   | 实际获取的数据详情。                                         |
 | `uuid`            | String | 消息附件的唯一标识。该标识由系统生成，开发者无需关心。       |
@@ -85,7 +85,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | :------------ | :----- | :------- | :---------------------------------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。              |
 | `Accept`     | String | 是    | 内容类型。请填 `application/json`。              |
-| `Authorization` | String | 是    | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization` | String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 通用请求体
 
@@ -114,37 +114,37 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `filename` | String | 是       | 图片名称。                                                   |
-| `secret`   | String | 否       | 图片的访问密钥。成功上传图片后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。如果图片文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
+| `secret`   | String | 否       | 图片的访问密钥，即成功上传图片后，从 [文件上传](#文件上传) 的响应 body 中获取的 `share-secret`。如果图片文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `size`     | JSON   | 是       | 图片尺寸，单位为像素，包含以下字段：<br/> - `height`：图片高度；<br/> - `width`：图片宽度。 |
-| `url`      | String | 是       | 图片 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。其中 `uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
+| `url`      | String | 是       | 图片 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 
 ##### 语音消息
 
 | 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `filename` | String | 是       | 语音文件的名称。                                             |
-| `secret`   | String | 否       | 语音文件访问密钥，成功上传语音文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。 如果语音文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
+| `secret`   | String | 否       | 语音文件访问密钥，即成功上传语音文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 `share-secret`。 如果语音文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `Length`   | Int    | 是       | 语音时长，单位为秒。                                         |
-| `url`      | String | 是       | 语音文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。uuid 为文件 ID，成功上传语音文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
+| `url`      | String | 是       | 语音文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为文件 ID，成功上传语音文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 
 ##### 视频消息
 
 | 参数           | 类型   | 是否必需 | 描述                                                         |
 | :------------- | :----- | :------- | :----------------------------------------------------------- |
-| `thumb`        | String | 是       | 视频缩略图 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。uuid 为视频缩略图唯一标识，成功上传缩略图文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
+| `thumb`        | String | 否       | 视频缩略图 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为视频缩略图唯一标识，成功上传缩略图文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 | `length`       | Int    | 是       | 视频时长，单位为秒。                                         |
-| `secret`       | String | 否       | 视频文件访问密钥，成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。如果视频文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
+| `secret`       | String | 否       | 视频文件访问密钥，即成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 `share-secret`。如果视频文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `file_length`  | Long   | 是       | 视频文件大小，单位为字节。                                   |
-| `thumb_secret` | String | 否       | 视频缩略图访问密钥，成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。如果缩略图文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
-| `url`          | String | 是       | 视频文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。其中 `uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
+| `thumb_secret` | String | 否       | 视频缩略图访问密钥，即成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 `share-secret`。如果缩略图文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
+| `url`          | String | 是       | 视频文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 
 ##### 文件消息
 
 | 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `filename` | String | 是       | 文件名称。                                                   |
-| `secret`   | String | 否       | 文件访问密钥，成功上传文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 share-secret。如果文件上传时设置了文件访问限制（restrict-access），则该字段为必填。 |
-| `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{uuid}`。其中 `uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
+| `secret`   | String | 否       | 文件访问密钥，即成功上传文件后，从 [文件上传](#文件上传) 的响应 body 中获取的 `share-secret`。如果文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
+| `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](#文件上传) 的响应 body 中获取。 |
 
 ##### 位置消息
 
@@ -175,7 +175,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 | 参数   | 类型 | 描述                                                         |
 | :----- | :--- | :----------------------------------------------------------- |
-| `data` | JSON | 返回数据详情。该字段的值为包含接收方用户 ID 和 发送的消息的 ID 的键值对。<br/>例如 "user2": "1029457500870543736"，表示向 user2 发送了消息 ID 为 1029457500870543736 的消息。 |
+| `data` | JSON | 响应中的数据详情。该字段的值为包含接收方用户 ID 和 发送的消息的 ID 的键值对。<br/>例如 "user2": "1029457500870543736"，表示向 user2 发送了消息 ID 为 1029457500870543736 的消息。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -425,7 +425,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                          |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                          |
-| `Authorization` | String | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 通用请求体
 
@@ -696,9 +696,9 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 |      参数       | 类型   | 是否必需 |                             描述                             |
 | :-------------: | :----- | :------: | :----------------------------------------------------------: |
-| `Content-Type`  | String |    是    |             内容类型。请填 `application/json`。              |
-|    `Accept`     | String |    是    |             内容类型。请填 `application/json`。              |
-| `Authorization` | String |    是    | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Content-Type`  | String |    是    | 内容类型。请填 `application/json`。              |
+|    `Accept`     | String |    是    | 内容类型。请填 `application/json`。              |
+| `Authorization` | String |    是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 通用请求体
 
@@ -953,10 +953,15 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" -H 'Content-Type: ap
 
 ## 文件上传
 
-上传图片、语音、视频或其他类型文件。同时，为了保证聊天文件的安全，我们的 API 保证了以下几点：
+对于附件类型的消息，如图片、语音、视频或其他类型文件，发送消息前需上传文件。图片和视频存在缩略图，文件上传详情如下：
+
+- 图片：可调用文件上传接口上传原图，环信服务器会自动为图片生成缩略图。若上传的图片在 10 KB 以内，缩略图与原图等同；若图片超过 10 KB，环信服务器会根据你在请求中设置的图片高度和宽度，即 `thumbnail-height` 和 `thumbnail-width` 参数，生成缩略图。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。
+- 视频：可调用文件上传接口上传视频文件。环信服务器不会自动为视频文件生成缩略图。如果需要缩略图，你需再次调用文件上传接口上传视频缩略图。上传视频文件时，无需传 `thumbnail-height` 和 `thumbnail-width` 参数。上传视频缩略图时，若图片在 10 KB 以内，视频缩略图即为上传的图片。如果图片超过 10 KB，而且设置了这两个参数，视频缩略图的高度和宽度取决于这两个参数的设置。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。
+
+同时，为了保证聊天文件的安全，我们的 API 保证了以下几点：
 
 - 上传文件的大小不能超过 10 MB，超过会上传失败。
-- 支持对上传的文件限制访问。该功能开启后，你需要通过密钥才能下载被限制访问的文件。消息回调（包含发送前回调和发送后回调）、历史消息中涉及下载文件时，都需要在下载 URL 中拼接密钥，才能正常下载文件，拼接规则为：`{{url}}?share-secret={{secret}}`。
+- 支持对上传的文件限制访问。该功能开启后，你需要通过密钥才能下载被限制访问的文件。消息回调（包含发送前回调和发送后回调）和获取历史消息涉及下载文件时，都需要在下载 URL 中拼接密钥，才能正常下载文件，拼接规则为：`{{url}}?share-secret={{secret}}`。
 
 ### HTTP 请求
 
@@ -973,16 +978,16 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | 参数              | 类型   | 是否必需 | 描述                                                         |
 | :---------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`    | String | 否       | 内容类型。请填 `multipart/form-data`。上传文件会自动填充这个头。 |
-| `Authorization`   | String | 是       | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
-| `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（share-secret）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。 |
+| `Authorization`   | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（`share-secret`）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。 |
 
 #### 请求 body
 
 | 参数   | 类型   | 是否必需 | 描述           |
 | :----- | :----- | :------- | :------------- |
 | `file` | String | 是       | 文件本地路径。 |
-| `thumbnail-height` | Int | 否       | 图片缩略图的高度，单位为像素。<br/>文件类型为图片时，服务器会自动生成图片的缩略图。若图片小于 10 KB，图片原图即为缩略图。因此，该参数仅在上传的图片超过 10 KB 时才会生效。若不传该参数，默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。|
-| `thumbnail-width` | Int | 否       | 图片缩略图的宽度，单位为像素。<br/>文件类型为图片时，服务器会自动生成图片的缩略图。若图片小于 10 KB，图片原图即为缩略图。因此，该参数仅在上传的图片超过 10 KB 时才会生效。若不传该参数，默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。|
+| `thumbnail-height` | Int | 否       | 缩略图的高度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，上传的图片即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的高度取决于该参数的设置。<br/> - 若不传该参数，缩略图的高度默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。|
+| `thumbnail-width` | Int | 否       | 缩略图的宽度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，图片原图即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的宽度取决于该参数的设置。<br/> - 若不传该参数，缩略图的宽度默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。|
 
 ### HTTP 响应
 
@@ -993,8 +998,8 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | 参数                    | 类型   | 描述                                                         |
 | :---------------------- | :----- | :----------------------------------------------------------- |
 | `entities.uuid`         | String | 文件 ID，即时通讯服务分配给该文件的唯一标识符。该参数在发送消息时需用到。 |
-| `entities.type`         | String | 消息类型。文件类型为 `file`。                                |
-| `entities.share-secret` | String | 文件访问密钥。你需要自行保存 share-secret，以便 [下载文件](#下载语音-图片文件-缩略图)时使用。 |
+| `entities.type`         | String | 文件类型，为固定值 `chatfile`。                                |
+| `entities.share-secret` | String | 文件访问密钥。你需要自行保存 `share-secret`，以便 [下载文件](#下载文件)时使用。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -1006,7 +1011,6 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token，将 file 的路径替换为待上传文件所在的本地完整路径
-
 curl -X POST https://XXXX/XXXX/XXXX/chatfiles -H 'Authorization: Bearer <YourAppToken>' -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'  -H 'restrict-access: true' -F file=@/Users/test/9.2/easemob/image/IMG_2953.JPG
 ```
 
@@ -1032,11 +1036,13 @@ curl -X POST https://XXXX/XXXX/XXXX/chatfiles -H 'Authorization: Bearer <YourApp
 }
 ```
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+## 下载文件
 
-## 下载语音/图片/视频
+你可利用该方法下载图片、语音、视频或其他类型的文件。
 
-需要注意是，如果上传文件时设置了文件访问限制（`restrict-access` 设置为 `true`），需要在下载请求头中包含文件上传响应中返回的 `share-secret` 和当前登录用户的 token 才能下载文件。
+:::notice
+如果上传文件时设置了文件访问限制（`restrict-access` 设置为 `true`），需要在下载请求头中包含文件上传响应中返回的 `share-secret` 和当前登录用户的 token 才能下载文件。
+:::
 
 ### HTTP 请求
 
@@ -1054,14 +1060,16 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Accept`        | string | 是       | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。 |
-| `Authorization` | string | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization` | string | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 | `share-secret`  | string | 否       | 文件访问密钥。若上传文件时限制了访问，则需要该访问密钥。成功上传文件后，从 [文件上传](#文件上传) 的响应 body 中获取该密钥。 |
 
 ### HTTP 响应
 
 #### 响应 body
 
-参数及说明详见 [公共参数](#公共参数)。
+如果返回的 HTTP 状态码为 `200`，表示请求成功。参数及说明详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -1087,13 +1095,9 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 }
 ```
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，返回文件二进制数据流。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
-
 ## 下载缩略图
 
-环信即时通讯 IM 支持在服务器端自动创建图片的缩略图。用户可先下载缩略图，需要时再下载原图。下载缩略图与下载原图的唯一区别是前者在请求 header 中多了 `thumbnail: true`。当服务器收到包含该字段的请求 header 时，返回缩略图，否则返回原图。
+收到图片或视频消息，你可以先下载图片或视频的缩略图，如果需要再下载图片或视频原文件。下载缩略图与下载原文件的唯一区别是前者在请求 header 中多了 `thumbnail: true`。当服务器收到包含该字段的请求 header 时，返回缩略图，否则返回原文件。
 
 ### HTTP 请求
 
@@ -1113,14 +1117,16 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。 |
-| `Authorization` | String | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
-| `thumbnail`     | Bool   | 否       | 是否下载缩略图：<br/> - `true`：是。 <br/> - `false`：否。<br/>注意：只要请求 header 中包含了该参数，无论该参数设置为 `true` 或 `false`，均下载缩略图。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `thumbnail`     | Bool   | 否       | 是否下载缩略图：<br/> - `true`：是，下载缩略图。 <br/> - `false`：否，下载原文件。<br/> 注意：若该参数为空，下载原文件。 |
 
 ### HTTP 响应
 
 #### 响应 body
 
-参数及说明详见 [公共参数](#公共参数)。
+如果返回的 HTTP 状态码为 200，表示请求成功。参数及描述详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -1134,39 +1140,19 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 
 #### 响应示例
 
-:::notice
-返回值 200，表示下载缩略图成功
-:::
-
 ```json
 {
 //缩略图信息
 }
 ```
 
-:::notice
-返回值 401，未授权 [无 token、token 错误、token 过期]**
-:::
+## 获取历史消息记录
 
-```json
-{
-  "error": "auth_bad_access_token",
-  "timestamp": 1542350943210,
-  "duration": 0,
-  "exception": "org.apache.usergrid.rest.exceptions.SecurityException",
-  "error_description": "Unable to authenticate due to corrupt access token"
-}
-```
+获取用户发送和接收的历史消息的记录。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-## 获取历史消息文件
-
-获取用户发送和接收的历史消息。
-
-- 一次请求获取从指定起始时间开始一小时内的全部历史消息。
-- 查询历史消息时存在一定延时，无法实时获取。
-- 过期的历史消息无法获取。对于不同的套餐版本，历史消息默认存储时间不同。详见 [套餐包详情](https://www.easemob.com/pricing/im)。
+- 单次请求获取从指定起始时间开始一小时内的全部历史消息记录。
+- 查询历史消息记录时存在一定延时，无法实时获取。
+- 过期的历史消息记录无法获取。对于不同的套餐版本，历史消息记录的默认存储时间不同。详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ### HTTP 请求
 
@@ -1178,16 +1164,16 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
 
 | 参数   | 类型   | 是否必需 | 描述                                                         |
 | :----- | :----- | :------- | :----------------------------------------------------------- |
-| `time` | String | 是       | 历史消息查询的起始时间。UTC 时间，使用 ISO8601 标准，格式为 yyyyMMddHH。例如 time 为 2018112717，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。 |
+| `time` | String | 是       | 历史消息记录查询的起始时间。UTC 时间，使用 ISO8601 标准，格式为 yyyyMMddHH。例如 `time` 为 `2018112717`，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。 |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Accept`        | String | 是       | 内容类型，请填 `application/json`。                          |
-| `Authorization` | String | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 ### HTTP 响应
 
@@ -1197,7 +1183,7 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
 
 | 参数  | 类型   | 描述                   |
 | :---- | :----- | :--------------------- |
-| `url` | String | 历史消息文件下载地址。 |
+| `url` | String | 历史消息记录的下载地址。URL 仅在一定时间内有效，URL 中的 `Expires` 对应的时间戳为过期时间，单位为秒。请及时通过 URL 下载聊天记录文件，URL 过期后会下载失败，需要重新调用该接口获取新的 URL。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -1231,28 +1217,23 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+### 历史消息记录的内容
 
-:::notice
-URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期时间，单位为秒。请及时通过 URL 下载聊天记录文件，URL 过期后会下载失败，需要重新调用”获取历史消息文件”接口获取新的 URL。
-:::
+查询历史消息记录成功后，你可以访问 URL 下载历史消息记录文件，查看历史消息记录的具体内容。
 
-### 历史消息内容
-
-查询历史消息成功后，你可以访问 URL 下载历史消息文件，查看历史消息具体内容。
-
-历史消息包含以下字段：
+一条历史消息记录包含以下字段：
 
 | 参数        | 类型   | 描述                                                         |
 | :---------- | :----- | :----------------------------------------------------------- |
 | `msg_id`    | String | 消息 ID。                                                    |
-| `timestamp` | Long   | 消息发送完成的 Unix 时间戳，单位未毫秒，UTC 时间。           |
+| `timestamp` | Long   | 消息发送完成的 Unix 时间戳，单位为毫秒，UTC 时间。           |
+| `direction` | String | 消息方向，即该消息是当前用户发送的还是接收的：<br/> - `outgoing`：发送的消息；<br/> - `incoming`：接收的消息。 |
 | `from`      | String | 消息发送方的用户 ID。                                        |
-| `to`        | String | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组ID。 |
+| `to`        | String | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。 |
 | `chat_type` | String | 会话类型：<br/> - `chat`: 单聊；<br/> - `groupchat`: 群聊；<br/> - `chatroom`: 聊天室。 |
-| `payload`   | JSON   | 包含消息的具体内容。例如消息扩展信息、自定义扩展属性等。     |
+| `payload`   | JSON   | 消息的具体内容。例如，消息扩展信息、自定义扩展属性等。     |
 
-历史消息为 JSON 类型，示例如下：
+历史消息记录为 JSON 类型，示例如下：
 
 ```json
 {
@@ -1299,7 +1280,7 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 | 参数          | 类型   | 描述                                                         |
 | :------------ | :----- | :----------------------------------------------------------- |
 | `file_length` | Long   | 图片附件大小，单位为字节。                                   |
-| `filename`    | String | 包含图片格式后缀的图片名称。                                                      |
+| `filename`    | String | 图片文件名称，包含文件后缀名。                                  |
 | `secret`      | String | 图片文件访问密钥。如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
 | `size`        | JSON   | 图片的尺寸。单位为像素。<br/> - `height`：图片高度。<br/> - `width`：图片宽度。 |
 | `type`        | String | 消息类型。图片消息为 `img`。                                 |
@@ -1317,9 +1298,9 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 
 | 参数   | 类型   | 描述                         |
 | :----- | :----- | :--------------------------- |
-| `addr` | String | 所在位置地址描述。           |
-| `lat`  | Long   | 所在位置的纬度。             |
-| `lng`  | Long   | 所在位置的经度。             |
+| `addr` | String | 位置的地址描述。           |
+| `lat`  | Long   | 位置的纬度。             |
+| `lng`  | Long   | 位置的经度。             |
 | `type` | String | 消息类型。位置消息为 `loc`。 |
 
 示例
@@ -1341,11 +1322,11 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 | 参数          | 类型   | 描述                                                         |
 | :------------ | :----- | :----------------------------------------------------------- |
 | `file_length` | Long   | 语音附件大小。单位为字节。                                   |
-| `filename`    | String | 带文件格式后缀的语音文件名称。                               |
+| `filename`    | String | 语音文件名称，包含文件后缀名。                               |
 | `secret`      | String | 语音文件访问密钥。如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
 | `length`      | Int    | 语音时长。单位为秒。                                         |
 | `type`        | String | 消息类型。语音消息为 `audio`。                               |
-| `url`         | String | 语音文件 URL 地址。                                          |
+| `url`         | String | 语音文件的 URL 地址。                                          |
 
 示例
 
@@ -1370,12 +1351,12 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 | 参数           | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `file_length`  | Long   | 视频附件大小。单位为字节。                                   |
-| `filename`     | String | 带文件格式后缀的视频文件名称。                               |
-| `secret`       | String | 视频文件访问密钥。如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
+| `filename`     | String | 视频文件名称，包含文件后缀名。                               |
+| `secret`       | String | 视频文件的访问密钥。如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
 | `length`       | Int    | 视频时长。单位为秒。                                         |
-| `size`         | JSON   | 视频缩略图尺寸。单位为像素。<br/> - `width`：视频缩略图宽度； <br/> - `height`：视频缩略图高度。 |
-| `thumb`        | String | 视频缩略图的 URL 地址，在上传视频缩略图后会返回 UUID。      |
-| `thumb_secret` | String | 缩略图文件访问密钥。<br/> - 如果文件上传时设置了文件访问限制，则该字段存在。 |
+| `size`         | JSON   | 视频缩略图尺寸。单位为像素。<br/> - `width`：视频缩略图的宽度；<br/> - `height`：视频缩略图的高度。 |
+| `thumb`        | String | 视频缩略图的 URL 地址，格式为 https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中，`file_uuid` 为视频缩略图上传后，环信服务器返回的缩略图的 UUID。      |
+| `thumb_secret` | String | 缩略图文件访问密钥。如果文件上传时设置了文件访问限制，则该字段存在。 |
 | `type`         | String | 消息类型。视频消息为 `video`。                               |
 | `url`          | String | 视频文件的 URL 地址。                                        |
 
@@ -1401,8 +1382,8 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 | 参数          | 类型   | 描述                                                         |
 | :------------ | :----- | :----------------------------------------------------------- |
 | `file_length` | Long   | 文件大小。单位为字节。                                       |
-| `filename`    | String | 带文件格式后缀的文件名称。                                   |
-| `secret`      | String | 文件访问密钥。<br/> - 如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
+| `filename`    | String | 文件名称，包含文件后缀名。                                  |
+| `secret`      | String | 文件访问密钥。如果 [文件上传](#文件上传) 时设置了文件访问限制，则该字段存在。 |
 | `type`        | String | 消息类型。文件消息为 `file`。                                |
 | `url`         | String | 文件的 URL 地址。你可以访问该 URL 下载历史消息文件。         |
 
@@ -1480,19 +1461,25 @@ URL 仅在一定时间内有效，URL 中的 Expires 对应的时间戳为过期
 POST https://{host}/{org_name}/{app_name}/messages/msg_recall
 ```
 
+#### 路径参数
+
+参数及描述详见 [公共参数](#公共参数)。
+
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                         |
-| :-------------- | :----- | :------- | :----------------------------------------------------------- |
-| `Authorization` | String | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### 请求 body
 
 | 参数        | 类型   | 是否必需 | 描述                                                         |
 | :---------- | :----- | :------- | :----------------------------------------------------------- |
 | `msg_id`    | String | 是       | 要撤回消息的消息 ID。                                        |
-| `to`        | String | 是       | 撤回消息的接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。<br/> 若不传入该参数，请求失败。 |
-| `chat_type` | String | 是       | 撤回消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊 ；<br/> - `chatroom`：聊天室 。 |
+| `to`        | String | 是       | 要撤回消息的接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。<br/> 若不传入该参数，请求失败。 |
+| `chat_type` | String | 是       | 要撤回消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊 ；<br/> - `chatroom`：聊天室 。 |
 | `from`      | String | 否       | 消息撤回方的用户 ID。若不传该参数，默认为 `admin`。          |
 | `force`     | Bool   | 是       | 是否为强制撤回：<br/> - `true`：是，支持撤回超过服务器存储时间的消息。具体见 [服务器消息保存时长](/product/limitation.html#消息存储时长限制)；<br/> - `false`：否，不支持撤回超过服务器存储时间的消息。 |
 
@@ -1506,7 +1493,7 @@ POST https://{host}/{org_name}/{app_name}/messages/msg_recall
 | :--------- | :----- | :----------------------------------------------------------- |
 | `msg_id`   | String | 需要撤回的消息 ID。                                          |
 | `recalled` | String | 消息撤回结果，成功是 `yes`。                                 |
-| `from`     | String | 消息撤回方。                                                 |
+| `from`     | String | 消息撤回方的用户 ID。                                                 |
 | `to`       | String | 撤回消息的送达方。<br/> - 单聊为送达方用户 ID；<br/> - 群聊为群组 ID。 |
 | `chattype` | String | 撤回消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊；<br/> - `chatroom`：聊天室。 |
 
@@ -1576,7 +1563,7 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 }
 ```
 
-撤回消息服务未在环信即时通讯云管理后台开通，返回示例如下：
+消息撤回服务未在环信即时通讯云管理后台开通，返回示例如下：
 
 ```json
 {
@@ -1593,14 +1580,14 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users/{userName}/user_channel
+DELETE https://{host}/{org_name}/{app_name}/users/{username}/user_channel
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 是否必需 | 描述                                      |
 | :--------- | :----- | :------- | :---------------------------------------- |
-| `userName` | String | 是       | 要删除会话的用户的唯一标识符，即用户 ID。 |
+| `username` | String | 是       | 要删除会话的用户的唯一标识符，即用户 ID。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -1608,7 +1595,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{userName}/user_channel
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
-| `Authorization` | String | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 请求 body
 
@@ -1663,7 +1650,7 @@ curl -X DELETE -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX
 
 ## 导入单聊消息
 
-该接口用于数据迁移时单聊消息的批量导入。
+该接口用于数据迁移时批量导入单聊消息。
 
 ### HTTP 请求
 
@@ -1675,19 +1662,19 @@ POST https://{host}/{org_name}/{app_name}/messages/users/import
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
-| `Authorization` | String | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 请求 body
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `from`          | String | 是       | 消息发送方的用户 ID。                                        |
-| `target`        | String | 是       | 消息接受方的用户 ID。                                        |
+| `target`        | String | 是       | 消息接收方的用户 ID。                                        |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`          | JSON   | 是       | 消息内容。                                                |
 | `is_ack_read`   | Bool   | 否       | 是否设置消息为已读。<br/> - `true`：是；<br/> - `false`：否。 |
-| `msg_timestamp` | Long   | 否       | 导入的消息需要设置的时间戳。单位为毫秒。                     |
-| `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是；<br/> - `false`：否。<br/> - `默认`： false。 |
+| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。     |
+| `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是；<br/> - （默认）`false`：否。。 |
 
 与发送消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
 
@@ -1703,16 +1690,16 @@ POST https://{host}/{org_name}/{app_name}/messages/users/import
 
 其他参数及说明详见  [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考  [响应状态码](error.html)  了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html)  了解可能的原因。
 
 ### 示例
 
 #### 请求示例
 
-```shell
-# 导入文本消息
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+导入文本消息：
 
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/messages/users/import" -d '{
     "target": "username2",
     "type": "txt",
@@ -1725,10 +1712,10 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
 }'
 ```
 
-```bash
-# 导入图片消息
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+导入图片消息：
 
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/messages/users/import" -d '{
     "target": "username2",
     "type": "img",
@@ -1773,26 +1760,31 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
 ```http
 POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 ```
+#### 路径参数
+
+参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
-| `Authorization` | String | 是       | `Bearer ${Your App Token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 请求 body
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `from`          | String | 是       | 消息发送方的用户 ID。                                        |
-| `target`        | String | 是       | 群 ID。                                                      |
+| `target`        | String | 是       | 群组 ID。                                                      |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`          | JSON   | 是       | 消息内容。                                             |
 | `is_ack_read`   | Bool   | 否       | 是否设置消息为已读。<br/> - `true`：是；<br/> - `false`：否。 |
-| `msg_timestamp` | Long   | 否       | 导入的消息需要设置的时间戳。单位为毫秒。                     |
+| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。   |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是；<br/> - （默认）`false`：否。 |
 
+:::notice
 与发送消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body_字段说明)。
+:::
 
 ### HTTP 响应
 
@@ -1812,10 +1804,10 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 
 #### 请求示例
 
-```shell
-# 导入文本消息
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+导入文本消息：
 
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/messages/chatgroups/import" -d '{
     "target": "username2",
     "type": "txt",
@@ -1828,10 +1820,10 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/
 }'
 ```
 
-```shell
-# 导入图片消息
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+导入图片消息：
 
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/messages/chatgroups/import" -d '{
     "target": "username2",
     "type": "img",
@@ -1848,6 +1840,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/
     "msg_timestamp": 1656906628428,
     "need_download": true
 }'
+
 ```
 
 #### 响应示例

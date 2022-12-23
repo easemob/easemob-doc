@@ -76,13 +76,13 @@ Authorization：`Bearer ${YourAppToken}`
 | [聊天室成员列表](/document/server-side/chatroom.html#分页获取聊天室成员) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
 | [聊天室禁言列表](/document/server-side/chatroom.html#获取禁言列表) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
 
-#### 获取历史消息文件
+#### 获取历史消息记录
 
-此接口一次只能获取一个小时的历史消息文件。
+此接口一次只能获取一个小时的历史消息记录。
 
 | REST API                                                     | 描述                                  |
 | :----------------------------------------------------------- | :------------------------------------ |
-| [获取历史消息文件](/document/server-side/message.html#获取历史消息文件) | 获取 App 下指定时间段的历史消息文件。 |
+| [获取历史消息记录](/document/server-side/message.html#获取历史消息记录) | 获取 App 下指定时间段的历史消息文件。 |
 
 #### 导出附件
 
@@ -90,4 +90,4 @@ Authorization：`Bearer ${YourAppToken}`
 
 | REST API                                                     | 描述                          |
 | :----------------------------------------------------------- | :---------------------------- |
-| [下载附件](/document/server-side/message.html#下载语音-图片文件-缩略图) | 下载 App 下指定 UUID 的附件。 |
+| [下载附件](/document/server-side/message.html#下载文件) | 下载 App 下指定 UUID 的附件。 |
