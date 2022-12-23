@@ -85,7 +85,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | :------------ | :----- | :------- | :---------------------------------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。              |
 | `Accept`     | String | 是    | 内容类型。请填 `application/json`。              |
-| `Authorization` | String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Authorization` | String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 通用请求体
 
@@ -425,7 +425,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                          |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                          |
-| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 通用请求体
 
@@ -698,7 +698,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 | :-------------: | :----- | :------: | :----------------------------------------------------------: |
 | `Content-Type`  | String |    是    | 内容类型。请填 `application/json`。              |
 |    `Accept`     | String |    是    | 内容类型。请填 `application/json`。              |
-| `Authorization` | String |    是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Authorization` | String |    是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 通用请求体
 
@@ -978,7 +978,7 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | 参数              | 类型   | 是否必需 | 描述                                                         |
 | :---------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`    | String | 否       | 内容类型。请填 `multipart/form-data`。上传文件会自动填充这个头。 |
-| `Authorization`   | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Authorization`   | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 | `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（`share-secret`）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。 |
 
 #### 请求 body
@@ -1060,7 +1060,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Accept`        | string | 是       | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。 |
-| `Authorization` | string | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Authorization` | string | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 | `share-secret`  | string | 否       | 文件访问密钥。若上传文件时限制了访问，则需要该访问密钥。成功上传文件后，从 [文件上传](#文件上传) 的响应 body 中获取该密钥。 |
 
 ### HTTP 响应
@@ -1117,7 +1117,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。 |
-| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 | `thumbnail`     | Bool   | 否       | 是否下载缩略图：<br/> - `true`：是，下载缩略图。 <br/> - `false`：否，下载原文件。<br/> 注意：若该参数为空，下载原文件。 |
 
 ### HTTP 响应
@@ -1173,7 +1173,7 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Accept`        | String | 是       | 内容类型，请填 `application/json`。                          |
-| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 ### HTTP 响应
 
@@ -1471,7 +1471,7 @@ POST https://{host}/{org_name}/{app_name}/messages/msg_recall
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### 请求 body
 
@@ -1595,7 +1595,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/user_channel
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
-| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 请求 body
 
@@ -1662,7 +1662,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users/import
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
-| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 请求 body
 
@@ -1768,7 +1768,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
-| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 请求 body
 

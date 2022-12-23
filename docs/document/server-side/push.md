@@ -64,7 +64,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 | :------------ | :----- | :------ | :---------------- |
 | `Content-Type`   | String | 内容类型：`application/json`    | 是  |
 | `Accept`   | String | 内容类型：`application/json`    | 是  |
-| `Authorization` | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。  | 是 |
+| `Authorization` | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。  | 是 |
 
 #### 请求 body
 
@@ -145,7 +145,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 | 参数            | 类型   | 描述  | 是否必需                                                         |
 | :------------ | :----- | :------ | :---------------- |
 | `Content-Type`   | String | 内容类型：`application/json`    | 是  |
-| `Authorization` | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。| 是 |
+| `Authorization` | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。| 是 |
 
 #### 请求 body
 
@@ -236,7 +236,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 | 参数            | 类型   | 描述 | 是否必需                                                   |
 | :------------ | :----- | :------ | :---------------- |
 | `Content-Type`  | String | 内容类型：`application/json`     | 是                                 |
-| `Authorization` | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。| 是 |
+| `Authorization` | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。| 是 |
 
 #### 请求 body
 
@@ -353,7 +353,7 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 | 参数      | 类型   | 描述 | 是否必需       |
 | :------------ | :----- | :------ | :---------------- |
 | `Content-Type` | String | 内容类型：`application/json`   | 是  |
-| `Authorization`  | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是 |
+| `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是 |
 
 #### 请求 body
 
@@ -436,7 +436,7 @@ GET https://{host}/{org}/{app}/users/{username}/notification/{type}/{key}
 
 | 参数      | 类型   | 描述 | 是否必需               |
 | :------------ | :----- | :------ | :---------------- |
-| `Authorization`  | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是 |
+| `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是 |
 
 ### HTTP 响应
 
@@ -500,7 +500,7 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 | 参数      | 类型   | 描述   | 是否必需       |
 | :------------ | :----- | :------ | :---------------- |
 | `Content-Type` | String | 内容类型：`application/json` | 是  |
-| `Authorization`  | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是  |
+| `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是  |
 
 #### 请求 body
 
@@ -568,7 +568,7 @@ GET https://{host}/{org}/{app}/users/{username}/notification/language
 | 参数      | 类型   | 描述 | 是否必需              |
 | :------------ | :----- | :------ | :---------------- |
 | `Content-Type` | String | 内容类型：`application/json`  | 是 |
-| `Authorization`  | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是 |
+| `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是 |
 
 ### HTTP 响应
 
@@ -628,7 +628,7 @@ POST https://{host}/{org}/{app}/notification/template
 | 参数      | 类型   | 描述 | 是否必需       |
 | :------------ | :----- | :------ | :---------------- |
 | `Content-Type` | String | 内容类型：`application/json`   | 是  |
-| `Authorization`  | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。| 是   |
+| `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。| 是   |
 
 #### 请求 body
 
@@ -713,7 +713,7 @@ GET https://{host}/{org}/{app}/notification/template/{name}
 | 参数      | 类型   | 描述  | 是否必需           |
 | :------------ | :----- | :------ | :---------------- |
 | `Content-Type` | String | 内容类型：`application/json`    | 是 |
-| `Authorization`  | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是   |
+| `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是   |
 
 ### HTTP 响应
 
@@ -784,7 +784,7 @@ DELETE https://{host}/{org}/{app}/notification/template/{name}
 | 参数      | 类型   | 描述    | 是否必需          |
 | :------------ | :----- | :------ | :---------------- |
 | `Content-Type` | String | 内容类型：`application/json`    | 是 |
-| `Authorization`  | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是   |
+| `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是   |
 
 ### HTTP 响应
 

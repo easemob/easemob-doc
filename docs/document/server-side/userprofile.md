@@ -88,7 +88,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 | 参数    | 类型   |是否必需 | 描述      |
  | :-------------- | :----- | :---------------- | :------- |
  | `Content-Type`  | String | 是    | 内容类型。请填 `application/x-www-form-urlencoded`。 |
- |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+ |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### 请求 body
 
@@ -166,7 +166,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 | 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是   |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是   |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ### HTTP 响应
 
@@ -227,7 +227,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 | 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Authorization`| String | 是   | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是   | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### 请求 body
 
@@ -315,7 +315,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 
 | 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是   | 该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是   | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ### HTTP 响应
 
@@ -369,7 +369,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 | 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是  |该用户或管理员的鉴权 token，格式为 `Bearer ${token}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是  |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ### HTTP 响应
 
