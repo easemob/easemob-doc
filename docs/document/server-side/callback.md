@@ -139,7 +139,7 @@
 - 在你的应用服务器端及时保存聊天历史记录或者离线消息。
 
 :::notice
-如果您对聊天消息没有时效性需求，可以直接通过免费的 [聊天记录拉取 REST API](message.html#获取历史消息文件) 获取聊天记录，无需使用发送后回调。
+如果您对聊天消息没有时效性需求，可以直接通过免费的 [聊天记录拉取 REST API](message.html#获取历史消息记录) 获取聊天记录，无需使用发送后回调。
 :::
 
 ![](@static/images/server-side/im-callback1.png)
@@ -283,7 +283,7 @@ Authorization：`Bearer ${YourAppToken}`
 | `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。       |
 | `organization`    | string | 你在环信 IM 管理后台注册的组织唯一标识。                     |
 | `application`     | string | 你在环信 IM 管理后台注册的 App 唯一标识。                    |
-| `action`          | string | 请求方法。                                                   |
+| `action`          | string | 请求方法。                          |
 | `duration`        | long   | 请求耗时，单位为毫秒。                                       |
 | `applicationName` | string | 你在环信 IM 管理后台注册的 App 名称。                        |
 | `data`            | object | 响应数据内容。包括以下三个参数：`date`、`size` 和 `retry`。  |

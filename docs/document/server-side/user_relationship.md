@@ -34,11 +34,11 @@ Authorization：`Bearer ${YourToken}`
 
 | 参数        | 类型      | 描述                                                         |
 | :----------| :------- | :------------------------------------------- |
-| `entities`  | Object    | 详细信息。                                                   |
+| `entities`  | Object    | 响应实体。                                                   |
 | `data`      | Object  | 实际获取的数据详情。                                         |
 | `uuid`      | String  | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
 | `username`  | String| 用户 ID。                                                     |
-| `action`   | String  | 请求方式，即接口方法名。                                     |
+| `action`   | String  | 请求方法。                                     |
 | `organization`   | String   | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
 | `application`  | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
 | `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |

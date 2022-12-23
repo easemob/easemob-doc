@@ -28,13 +28,13 @@
 
 | 参数         | 类型   | 描述      |
 | :------------------- | :----- | :------------------------------------ |
-| `action`             | String | 请求方式。          |
+| `action`             | String | 请求方法。          |
 | `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。  |
 | `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。                                  |
 | `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
 | `uri`                | String | 请求 URL。           |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                            |
-| `entities`           | JSON   | 详细信息。            |
+| `entities`           | JSON   | 响应实体。           |
 | `entities.uuid`      | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。   |
 | `entities.type`      | String | 对象类型，无需关注。   |
 | `entities.created`   | Long   | 注册用户的 Unix 时间戳，单位为毫秒。              |

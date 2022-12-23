@@ -33,7 +33,7 @@
 
 | 参数                 | 类型   | 描述                                                         |
 | :------------------- | :----- | :----------------------------------------------------------- |
-| `action`             | String | 请求方式，即接口方法名。                                     |
+| `action`             | String | 请求方法。                                     |
 | `host`               | String | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。          |
 | `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
 | `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。                 |
@@ -41,7 +41,7 @@
 | `uri`                | String | 请求 URL。                                                   |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。            |
 | `id`                 | String | 聊天室 ID，聊天室唯一标识，由环信即时通讯 IM 服务器生成。    |
-| `entities`           | JSON   | 返回实体信息。                                               |
+| `entities`           | JSON   | 响应实体。                                               |
 | `data`               | JSON   | 返回数据详情。                                               |
 | `uuid`               | String | 系统内为用户或者应用生成的系统内唯一标识，开发者无需关心。   |
 | `created`            | String | 用户、群组或聊天室的创建时间，Unix 时间戳，单位为毫秒。      |
