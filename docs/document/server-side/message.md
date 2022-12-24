@@ -1140,9 +1140,23 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 
 #### 响应示例
 
+若返回值为 `200`，表示下载缩略图成功。
+
 ```json
 {
 //缩略图信息
+}
+```
+
+若返回值 `401`，表示未授权，例如无 token、token 错误或 token 过期。
+
+```json
+{
+  "error": "auth_bad_access_token",
+  "timestamp": 1542350943210,
+  "duration": 0,
+  "exception": "org.apache.usergrid.rest.exceptions.SecurityException",
+  "error_description": "Unable to authenticate due to corrupt access token"
 }
 ```
 
@@ -1494,7 +1508,7 @@ POST https://{host}/{org_name}/{app_name}/messages/msg_recall
 | `msg_id`   | String | 需要撤回的消息 ID。                                          |
 | `recalled` | String | 消息撤回结果，成功是 `yes`。                                 |
 | `from`     | String | 消息撤回方的用户 ID。                                                 |
-| `to`       | String | 撤回消息的送达方。<br/> - 单聊为送达方用户 ID；<br/> - 群聊为群组 ID。 |
+| `to`       | String | 撤回消息的送达方。<br/> - 单聊为送达方用户 ID；<br/> - 群聊为群组 ID。<br/> - 聊天室聊天为聊天室 ID。 |
 | `chattype` | String | 撤回消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊；<br/> - `chatroom`：聊天室。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
