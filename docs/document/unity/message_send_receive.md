@@ -515,12 +515,12 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 // 接收消息的时候获取扩展属性。
 bool found = false;
-string str = msg.GetAttributeValue<string>(msg.Attributes, "attribute1", found);
+string str = Message.GetAttributeValue<string>(msg.Attributes, "attribute1", found);
 if (found) {
   // 使用 str 变量。
 }
 found = false；
-bool b = msg.GetAttributeValue<bool>(msg.Attributes, "attribute2", found);
+bool b = Message.GetAttributeValue<bool>(msg.Attributes, "attribute2", found);
 if (found) {
   // 使用 b 变量。
 }
