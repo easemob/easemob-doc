@@ -10,12 +10,19 @@
 
 环信即时通讯 IM iOS SDK 支持管理用户设备上存储的消息会话数据，其中包含如下主要方法：
 
-- `getAllConversations` 加载本地存储的会话列表；
-- `deleteConversations` 删除本地存储的会话；
-- `conversation.unreadMessagesCount` 获取指定会话的未读消息数；
-- `deleteConversation` 删除指定会话；
-- `conversation.loadMessagesStartFromId` 在本地存储的消息中搜索；
-- `insertMessage` 在指定会话中写入消息；
+- `IEMChatManager.getAllConversations` 获取本地所有会话；
+- `EMConversation.loadMessagesStartFromId` 从数据库中读取指定会话的消息；
+- `EMConversation.unreadMessagesCount` 获取指定会话的未读消息数；
+- `EMConversation.unreadMessagesCount` 获取所有会话的未读消息数；
+- `EMConversation.markMessageAsReadWithId` 指定会话的未读消息数清零；
+- `IEMChatManager.deleteConversations` 删除本地会话及历史消息；
+- `IEMChatManager.getMessageWithMessageId` 根据消息 ID 搜索消息；
+- `EMConversation.loadMessagesWithType` 获取指定会话中特定类型的消息；
+- `EMConversation.loadMessagesFrom:to:count:completion:` 获取指定会话中一定时间段内的消息；
+- `IEMChatManager.loadMessagesWithKeyword` 根据关键字搜索会话消息；
+- `IEMChatManager.importMessages` 批量导入消息到数据库；
+- `EMConversation.insertMessage` 插入消息；
+- `IEMChatManager.updateMessage` 更新消息到本地数据库；
 - `getMessageStatisticsById` 根据消息 ID 获取消息流量统计信息；
 - `getMessageCountWithStart` 获取一定时间段内发送和/或接收的指定或全部类型的消息条数；
 - `getMessageStatisticsSizeWithStart` 获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量。
@@ -29,9 +36,9 @@
 
 ## 实现方法
 
-### 获取本地所有会话
+### 获取本地会话列表
 
-你可以调用 API 获取本地所有会话：
+你可以调用 API 获取本地会话列表：
 
 ```objectivec
 NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
@@ -103,6 +110,46 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 
 删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](message_retrieve.html#删除服务端会话及其历史消息)。
 
+### 根据消息 ID 搜索消息
+
+你可以调用 `getMessageWithMessageId` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
+
+```objectivec
+// 同步方法
+EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
+EMError* err = nil;
+// messageId：要获取消息的消息 ID。
+EMChatMessage* message = [EMClient.sharedClient.chatManager getMessageWithMessageId:@"messageId"];
+```
+
+### 获取指定会话中特定类型的消息
+
+你可以调用 `loadMessagesWithType` 方法从本地存储中获取指定会话中特定类型的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
+
+```objectivec
+// 异步方法
+EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
+// timestamp：消息搜索的起始时间戳，单位为毫秒。该参数设置后，SDK 从指定的时间戳的消息开始，按照搜索方向对消息进行搜索。若设置为负数，SDK 从当前时间开始，按消息时间戳的逆序搜索。
+// count：每次搜索的消息数量。取值范围为 [1,400]。
+// searchDirection：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+[conv loadMessagesWithType:EMMessageBodyTypeText timestamp:1671761876000 count:50 fromUser:@"" searchDirection:EMMessageSearchDirectionUp completion:^(NSArray<EMChatMessage *> * _Nullable aMessages, EMError * _Nullable aError) {
+        
+}];
+```
+
+### 获取指定会话中一定时间段内的消息
+
+你可以调用 `loadMessagesFrom:to:count:completion:` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
+
+```objectivec
+// 异步方法
+EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
+// startTime：搜索的起始时间戳，单位为毫秒；endTime：搜索的结束时间戳，单位为毫秒；count：每次获取的消息数量。取值范围为 [1,400]。
+[conv loadMessagesFrom:startTime to:endTime count:50 completion:^(NSArray<EMChatMessage *> * _Nullable aMessages, EMError * _Nullable aError) {
+            
+}];
+```
+
 ### 根据关键字搜索会话消息
 
 你可以根据关键字搜索会话消息，示例代码如下：
@@ -132,7 +179,7 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 [conversation insertMessage:message error:nil];
 ```
 
-### 更新消息到 SDK 本地数据库
+### 更新消息到本地数据库
 
 如果需要更新消息用以下方法：
 

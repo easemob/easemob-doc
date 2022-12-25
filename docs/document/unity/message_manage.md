@@ -10,15 +10,21 @@
 
 ## 技术原理
 
-SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使用 `IChatManager` 和 `IConversationManager` 管理本地消息。以下是核心方法：
+SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使用 `IChatManager` 和 `Conversation` 管理本地消息。以下是核心方法：
 
-- `IChatManager.LoadAllConversations` 加载本地存储会话列表;
-- `IChatManager.DeleteConversation` 删除本地存储的会话；
-- `IConversationManager.UnReadCount` 获取指定会话的未读消息数；
-- `IChatManager.GetUnreadMessageCount` 获取所有未读消息数；
-- `IChatManager.DeleteConversationFromServer` 删除服务端的会话和聊天记录；
-- `IChatManager.SearchMsgFromDB` 在本地存储的消息中搜索；
-- `Conversation.insertMessage` 在指定会话中写入消息。
+- `IChatManager.LoadAllConversations` 获取本地会话列表；
+- `Conversation.LoadMessages` 读取指定会话的消息；
+- `Conversation.UnReadCount` 获取指定会话的未读消息数；
+- `IChatManager.GetUnreadMessageCount` 获取所有会话的未读消息数；
+- `IChatManager.MarkAllConversationsAsRead` 指定会话的未读消息数清零；
+- `IChatManager.DeleteConversation` 删除本地会话及历史消息；
+- `IChatManager.DeleteConversationFromServer` 删除服务端的会话及历史消息；
+- `IChatManager.LoadMessage` 根据消息 ID 搜索消息；
+- `Conversation.LoadMessagesWithMsgType` 获取指定会话中特定类型的消息；
+- `Conversation.LoadMessagesWithTime` 获取指定会话中一定时间段内的消息；
+- `IChatManager.SearchMsgFromDB` 根据关键字搜索会话消息；
+- `IChatManager.ImportMessages` 批量导入消息到数据库；
+- `Conversation.InsertMessage` 在指定会话中插入消息。
 
 ## 前提条件
 
@@ -29,9 +35,9 @@ SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使�
 
 ## 实现方法
 
-### 获取本地所有会话
+### 获取本地会话列表
 
-调用 `LoadAllConversations` 方法可以根据会话 ID 和会话类型调用 API 获取本地会话:
+你可以调用 `LoadAllConversations` 方法可以根据会话 ID 和会话类型获取本地会话列表:
 
 ```csharp
 List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
@@ -88,27 +94,74 @@ conv.MarkMessageAsRead(msgId);
 SDKClient.Instance.ChatManager.MarkAllConversationsAsRead();
 ```
 
-### 删除会话及聊天记录
+### 删除会话及历史消息
 
-SDK 提供两个接口，分别可以删除本地会话和聊天记录或者删除当前用户在服务器端的会话和聊天记录。
+SDK 提供两个接口，分别可以删除本地会话和历史消息或者删除当前用户在服务器端的会话和聊天消息。
 
-调用 `DeleteConversation` 和 `DeleteMessage` 删除本地会话和聊天记录，示例代码如下：
+调用 `DeleteConversation` 和 `DeleteMessage` 删除本地会话和聊天消息，示例代码如下：
 
 ```csharp
-//删除和特定用户的会话，如需保留聊天记录，传 `false`。
+//删除和特定用户的会话，如需保留历史消息，传 `false`。
 SDKClient.Instance.ChatManager.DeleteConversation(conversationId, true);
 
-//删除当前会话中指定的一条聊天记录。
+//删除当前会话中指定的一条历史消息。
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 conv.DeleteMessage(msgId);
 ```
 
-调用 `DeleteConversationFromServer` 删除服务器端会话和聊天记录，示例代码如下：
+调用 `DeleteConversationFromServer` 删除服务器端会话和历史消息，示例代码如下：
 
 ```csharp
-//从服务器端删除和特定 ID 的会话，如果需要保留聊天记录，第三个参数传 `false`。
+//从服务器端删除和特定 ID 的会话，如果需要保留历史消息，第三个参数传 `false`。
 SDKClient.Instance.ChatManager.DeleteConversationFromServer(conversationId, type, true, new CallBack(
     onSuccess: () => {
+    },
+    onError: (code, desc) => {
+    }
+));
+```
+
+### 根据消息 ID 搜索消息
+
+你可以调用 `LoadMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
+
+```csharp
+// msgId：要获取消息的消息 ID。
+Message msg = SDKClient.Instance.ChatManager.LoadMessage("msgId");
+```
+
+### 获取指定会话中特定类型的消息
+
+你可以调用 `LoadMessagesWithMsgType` 方法从本地存储中获取指定会话中特定类型的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
+
+```csharp
+Conversation conv = SDKClient.Instance.ChatManager.GetConversation("convId");
+// type：消息类型；count：每次获取的消息数量，取值范围为 [1,400]；direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+conv.LoadMessagesWithMsgType(type: MessageBodyType.TXT, count: 50, direction: MessageSearchDirection.UP, new ValueCallBack<List<Message>>(
+    onSuccess: (list) => {
+        // 遍历消息列表
+        foreach(var it in list)
+        {
+        }
+    },
+    onError: (code, desc) => {
+    }
+));
+```
+
+### 获取指定会话中一定时间段内的消息
+
+你可以调用 `LoadMessagesWithTime` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
+
+```csharp
+Conversation conv = SDKClient.Instance.ChatManager.GetConversation("convId");
+// startTime：搜索的起始时间戳；endTime：搜索的结束时间戳；count：每次获取的消息数量，取值范围为 [1,400]。
+conv.LoadMessagesWithTime(startTime: startTime, endTime: endTime, count: 50, new ValueCallBack<List<Message>>(
+    onSuccess: (list) => {
+        // 遍历消息列表
+        foreach (var it in list)
+        {
+        }
     },
     onError: (code, desc) => {
     }
