@@ -694,11 +694,11 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 #### 请求 header
 
-|      参数       | 类型   | 是否必需 |                             描述                             |
+| 参数       | 类型   | 是否必需 | 描述                             |
 | :-------------: | :----- | :------: | :----------------------------------------------------------: |
-| `Content-Type`  | String |    是    | 内容类型。请填 `application/json`。              |
-|    `Accept`     | String |    是    | 内容类型。请填 `application/json`。              |
-| `Authorization` | String |    是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。              |
+| `Accept`     | String | 是    | 内容类型。请填 `application/json`。              |
+| `Authorization` | String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### 通用请求体
 

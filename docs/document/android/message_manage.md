@@ -10,15 +10,23 @@
 
 环信即时通讯 IM Android SDK 支持管理用户设备上存储的消息会话数据，其中包含如下主要方法：
 
-- `loadAllConversations` 加载本地存储的会话列表;
-- `deleteConversation` 删除本地存储的会话；
-- `conversation.getUnreadMsgCount` 获取指定会话的未读消息数；
-- `chatManager().getUnreadMessageCount` 获取所有未读消息数；
-- `searchMsgFromDB` 在本地存储的消息中搜索；
-- `insertMessage` 在指定会话中写入消息；
-- `getMessageStatistics` 根据消息 ID 获取消息流量统计信息；
-- `getMessageCount` 获取一定时间段内发送和/或接收的指定或全部类型的消息条数；
-- `getMessageSize` 获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量。
+- `EMChatManager.loadAllConversations` 获取本地会话列表；
+- `EMConversation.getAllMessages` 从数据库中读取指定会话的消息；
+- `EMConversation.getUnreadMsgCount` 获取指定会话的未读消息数；
+- `EMChatManager.getUnreadMessageCount` 获取所有会话的未读消息数；
+- `EMChatManager.markAllConversationsAsRead` 指定会话的未读消息数清零；
+- `EMChatManager.deleteConversation` 删除会话及历史消息；
+- `EMConversation.getUnreadMsgCount` 获取指定会话的未读消息数；
+- `EMChatManager.getMessage` 根据消息 ID 搜索消息；
+- `EMChatManager.searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)` 获取指定会话中特定类型的消息；
+- `EMChatManager.searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)` 获取指定时间段内发送或接收的消息；
+- `searchMsgFromDB` 根据关键字搜索本地会话消息；
+- `EMChatManager.importMessages` 批量导入消息到数据库；
+- `EMChatManager.insertMessage` 在指定会话中插入消息；
+- `EMConversation.updateMessage` 更新消息到本地数据库；
+- `EMStatisticsManager.getMessageStatistics` 根据消息 ID 获取消息流量统计信息；
+- `EMStatisticsManager.getMessageCount` 获取一定时间段内发送和/或接收的指定或全部类型的消息条数；
+- `EMStatisticsManager.getMessageSize` 获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量。
 
 ## 前提条件
 
@@ -29,9 +37,9 @@
 
 ## 实现方法
 
-### 获取本地所有会话
+### 获取本地会话列表
 
-你可以调用 API 获取本地所有会话：
+你可以调用 API 获取本地会话列表：
 
 ```java
 Map<String, EMConversation> conversations = EMClient.getInstance().chatManager().getAllConversations();
@@ -98,6 +106,34 @@ conversation.removeMessage(deleteMsg.msgId);
 ```
 
 删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](message_retrieve.html#删除服务端会话及其历史消息)。
+
+### 根据消息 ID 搜索消息
+
+你可以调用 `getMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
+
+```java
+// msgId：要获取消息的消息 ID。
+EMMessage msg = EMClient.getInstance().chatManager().getMessage(msgId);
+```
+
+### 获取指定会话中特定类型的消息
+
+你可以调用 `searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)` 方法从本地存储中获取指定会话中特定类型的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
+
+```java
+// Type：消息类型；timeStamp：消息搜索的起始时间戳，单位为毫秒。该参数设置后，SDK 从指定的时间戳的消息开始，按照搜索方向对消息进行搜索。若设置为负数，SDK 从当前时间开始，按消息时间戳的逆序搜索。
+// maxCount：每次获取的消息数量，取值范围为 [1,400]；direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+ List<EMMessage> emMessages = EMClient.getInstance().chatManager().searchMsgFromDB(EMMessage.Type.TXT, System.currentTimeMillis(), 50, "xiaoming", EMConversation.EMSearchDirection.UP);
+```
+
+### 获取指定时间段内发送或接收的消息
+
+你可以调用 `searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)` 方法从本地存储中搜索指定时间段内发送或接收的消息。每次最多可获取 400 条消息。
+
+```java
+// startTimeStamp：搜索的起始时间戳；endTimeStamp：搜索的结束时间戳；maxCount：每次获取的消息数量，取值范围为 [1,400]。
+List<EMMessage> messageList = EMClient.getInstance().chatManager().searchMsgFromDB(startTimeStamp,endTimeStamp, 50);
+```
 
 ### 根据关键字搜索会话消息
 
@@ -168,8 +204,7 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
 
 #### 根据消息 ID 获取消息流量统计信息
 
-你可以根据消息 ID 获取指定消息的统计信息。该方法返回的消息流量统计信息包括消息 ID、消息的发送方和接收方
-、消息体类型、会话类型、消息方向、消息流量大小（单位为字节）以及服务器收到该消息的 Unix 时间戳。
+你可以根据消息 ID 获取指定消息的统计信息。该方法返回的消息流量统计信息包括消息 ID、消息的发送方和接收方、消息体类型、会话类型、消息方向、消息流量大小（单位为字节）以及服务器收到该消息的 Unix 时间戳。
 
 示例代码如下：
 
