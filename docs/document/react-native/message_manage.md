@@ -24,7 +24,7 @@
 
 ### 管理服务端和本地的会话
 
-#### 获取会话列表
+#### 获取本地所有会话
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
@@ -46,7 +46,7 @@ ChatClient.getInstance()
   });
 ```
 
-你可以调用 `getAllConversations` 方法获取本地会话列表，示例代码如下：
+你可以调用 `getAllConversations` 方法获取本地所有会话，示例代码如下：
 
 ```typescript
 ChatClient.getInstance()
@@ -230,7 +230,7 @@ ChatClient.getInstance()
 
 #### 获取指定会话中包含特定关键字的消息
 
-你可以调用 `getMessagesWithKeyword` 方法获取指定会话中包含特定关键字的消息。
+你可以调用 `getMessagesWithKeyword` 方法从本地数据库获取会话中的指定用户发送的包含特定关键字的消息，示例代码如下：
 
 ```typescript
 // convId: 会话 ID。
@@ -296,7 +296,7 @@ ChatClient.getInstance()
   .catch((reason) => {
     console.log("get message fail.", reason);
   });
-``` 
+```
 #### 获取指定会话的最新消息
 
 你可以调用 `getLatestMessage` 方法获取指定会话中的最新一条消息。

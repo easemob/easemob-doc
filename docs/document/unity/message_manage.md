@@ -35,9 +35,9 @@ SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使�
 
 ## 实现方法
 
-### 获取本地会话列表
+### 获取本地所有会话
 
-你可以调用 `LoadAllConversations` 方法可以根据会话 ID 和会话类型获取本地会话列表:
+你可以调用 `LoadAllConversations` 方法可以根据会话 ID 和会话类型获取本地所有会话:
 
 ```csharp
 List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
@@ -170,10 +170,33 @@ conv.LoadMessagesWithTime(startTime: startTime, endTime: endTime, count: 50, new
 
 ### 根据关键字搜索会话消息
 
-调用 `SearchMsgFromDB` 按关键字、时间戳和消息发送方搜索消息：
+你可以调用 `LoadMessagesWithKeyword` 方法以从本地数据库获取会话中的指定用户发送的包含特定关键字的消息，示例代码如下：
 
 ```csharp
-List<Message> list = SDKClient.Instance.ChatManager.SearchMsgFromDB(keywords, timeStamp, maxCount, from, MessageSearchDirection.UP);
+Conversation conv = SDKClient.Instance.ChatManager.GetConversation("convId");
+
+conv.LoadMessagesWithKeyword(
+        // 搜索关键字。
+        "key", 
+        // 消息发送方。
+        sender: "tom",
+        // 搜索开始的 Unix 时间戳，单位为毫秒。
+        timestamp: 1653971593000,
+        // 搜索的最大消息数。
+        count: 10, 
+        // 消息的搜索方向：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+        direction: MessageSearchDirection.UP, 
+        // 回调处理
+        new ValueCallBack<List<Message>>(
+    onSuccess: (list) => {
+        // 遍历消息列表
+        foreach(var it in list)
+        {
+        }
+    },
+    onError: (code, desc) => {
+    }
+));
 ```
 
 ### 批量导入消息到数据库
