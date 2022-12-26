@@ -10,7 +10,7 @@
 
 环信即时通讯 IM Android SDK 支持管理用户设备上存储的消息会话数据，其中包含如下主要方法：
 
-- `EMChatManager.getAllConversations` 获取本地会话列表；
+- `EMChatManager.getAllConversations` 获取本地所有会话；
 - `EMConversation.getAllMessages` 从数据库中读取指定会话的消息；
 - `EMConversation.getUnreadMsgCount` 获取指定会话的未读消息数；
 - `EMChatManager.getUnreadMessageCount` 获取所有会话的未读消息数；
@@ -20,7 +20,7 @@
 - `EMChatManager.getMessage` 根据消息 ID 获取消息；
 - `EMChatManager.searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)` 获取指定会话中特定类型的消息；
 - `EMChatManager.searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)` 获取指定时间段内发送或接收的消息；
-- `searchMsgFromDB` 根据关键字搜索本地会话消息；
+- `searchMsgFromDB(string keywords, long timeStamp, int maxCount, string from, EMSearchDirection direction)` 根据关键字搜索本地会话消息；
 - `EMChatManager.importMessages` 批量导入消息到数据库；
 - `EMChatManager.insertMessage` 在指定会话中插入消息；
 - `EMConversation.updateMessage` 更新消息到本地数据库；

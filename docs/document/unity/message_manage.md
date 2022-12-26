@@ -4,7 +4,7 @@
 
 本文介绍即时通讯 IM SDK 如何管理本地消息数据。
 
-除了发送和接收消息外，环信即时通讯 IM SDK 还支持以会话为单位对本地的消息数据进行管理，如获取与管理未读消息、删除聊天记录、搜索历史消息等。其中，会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息或查看历史消息，还可进行会话置顶、清空聊天记录等操作。
+除了发送和接收消息外，环信即时通讯 IM SDK 还支持以会话为单位对本地的消息数据进行管理，如获取与管理未读消息、搜索和删除历史消息等。其中，会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息以及查看或清空历史消息。
 
 本文介绍如何使用环信即时通讯 IM SDK 在 app 中实现这些功能。
 
@@ -12,7 +12,7 @@
 
 SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使用 `IChatManager` 和 `Conversation` 管理本地消息。以下是核心方法：
 
-- `IChatManager.LoadAllConversations` 获取本地会话列表；
+- `IChatManager.LoadAllConversations` 获取本地所有会话；
 - `Conversation.LoadMessages` 读取指定会话的消息；
 - `Conversation.UnReadCount` 获取指定会话的未读消息数；
 - `IChatManager.GetUnreadMessageCount` 获取所有会话的未读消息数；
