@@ -442,7 +442,7 @@ NSArray *conversations = @[conversation1,conversation2];
 | `displayName`        | 对方收到推送时发送方展示的名称。                             |
 | `displayStyle`       | 推送显示类型。                                               |
 
-### 4.3 设置推送翻译
+#### 4.3 设置推送翻译
 
 如果用户启用 [自动翻译](message_translation.html) 功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
 

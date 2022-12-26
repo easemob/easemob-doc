@@ -4,7 +4,7 @@
 
 本文介绍环信即时通讯 IM SDK 如何管理本地消息数据。SDK 内部使用 SQLite 保存本地消息，方便消息处理。
 
-除了发送和接收消息外，环信即时通讯 IM SDK 还支持以会话为单位对本地的消息数据进行管理，如获取与管理未读消息、删除聊天记录、搜索历史消息等。其中，会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息或查看历史消息，还可进行会话置顶、清空聊天记录等操作。
+除了发送和接收消息外，环信即时通讯 IM SDK 还支持以会话为单位对本地的消息数据进行管理，如获取与管理未读消息、搜索和删除历史消息等。其中，会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息以及查看或清空历史消息。
 
 本文介绍如何使用环信即时通讯 IM SDK 在 app 中实现这些功能。
 
@@ -12,7 +12,7 @@
 
 环信即时通讯 IM SDK 通过 `IChatManager` 和 `Conversation` 类实现对本地消息的管理，其中核心方法如下：
 
-- `IChatManager.LoadAllConversations` 获取本地会话列表；
+- `IChatManager.LoadAllConversations` 获取本地所有会话；
 - `Conversation.LoadMessages` 读取指定会话的消息；
 - `Conversation.UnReadCount` 获取指定会话的未读消息数；
 - `IChatManager.GetUnreadMessageCount` 获取所有会话的未读消息数；
@@ -35,9 +35,9 @@
 
 ## 实现方法
 
-### 获取本地会话列表
+### 获取本地所有会话
 
-你可以调用 `LoadAllConversations` 方法可以根据会话 ID 和会话类型获取本地会话列表:
+你可以调用 `LoadAllConversations` 方法可以根据会话 ID 和会话类型获取本地所有会话:
 
 ```csharp
 List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
@@ -170,10 +170,35 @@ conv.LoadMessagesWithTime(startTime: startTime, endTime: endTime, count: 50, new
 
 ### 根据关键字搜索会话消息
 
-你可以根据关键字搜索会话消息，示例代码如下：
+### 根据关键字搜索会话消息
+
+你可以调用 `LoadMessagesWithKeyword` 方法以从本地数据库获取会话中的指定用户发送的包含特定关键字的消息，示例代码如下：
 
 ```csharp
-List<Message> list = SDKClient.Instance.ChatManager.SearchMsgFromDB(keywords, timeStamp, maxCount, from, MessageSearchDirection.UP);
+Conversation conv = SDKClient.Instance.ChatManager.GetConversation("convId");
+
+conv.LoadMessagesWithKeyword(
+        // 搜索关键字。
+        "key", 
+        // 消息发送方。
+        sender: "tom",
+        // 搜索开始的 Unix 时间戳，单位为毫秒。
+        timestamp: 1653971593000,
+        // 搜索的最大消息数。
+        count: 10, 
+        // 消息的搜索方向：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+        direction: MessageSearchDirection.UP, 
+        // 回调处理
+        new ValueCallBack<List<Message>>(
+    onSuccess: (list) => {
+        // 遍历消息列表
+        foreach(var it in list)
+        {
+        }
+    },
+    onError: (code, desc) => {
+    }
+));
 ```
 
 ### 批量导入消息到数据库

@@ -36,9 +36,9 @@
 
 ## 实现方法
 
-### 获取本地会话列表
+### 获取本地所有会话
 
-你可以调用 API 获取本地会话列表：
+你可以调用 API 获取本地所有会话：
 
 ```objectivec
 NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
@@ -152,11 +152,12 @@ EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithCon
 
 ### 根据关键字搜索会话消息
 
-你可以根据关键字搜索会话消息，示例代码如下：
+你可以调用 `loadMessagesWithKeyword` 方法从本地数据库获取会话中的指定用户发送的包含特定关键字的消息，示例代码如下：
 
 ```objectivec
-// 同步方法，异步方法见[EMChatManager loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:completion]
-NSArray<EMChatMessage *> *messages = [conversation loadMessagesWithKeyword:keyword timestamp:0 count:50 fromUser:nil searchDirection:MessageSearchDirectionDown];
+// 同步方法，异步方法见[EMConversation loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:completion]
+    EMConversation* conversation = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
+    NSArray<EMChatMessage *> *messages = [conversation loadMessagesWithKeyword:@"keyword" timestamp:0 count:50 fromUser:nil searchDirection:EMMessageSearchDirectionDown];
 ```
 
 ### 批量导入消息到数据库

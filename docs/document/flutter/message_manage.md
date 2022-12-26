@@ -18,7 +18,7 @@
 - `EMChatManager.getUnreadMessageCount` 获取所有会话的未读消息数；
 - `EMConversation.markMessageAsRead` 指定会话的未读消息数清零；
 - `EMChatManager.deleteConversation` 删除本地存储的会话及其历史消息；
-- `EMChatManager.loadMessage` 根据消息 ID 搜索消息；
+- `EMChatManager.loadMessage` 根据消息 ID 获取消息；
 - `EMConversation.loadMessagesWithMsgType` 获取指定会话中特定类型的消息；
 - `EMConversation.loadMessagesFromTime` 获取指定会话中一定时间段内的消息；
 - `EMChatManager.searchMsgFromDB` 根据关键字搜索会话消息；
@@ -33,9 +33,9 @@
 
 ## 实现方法
 
-### 获取本地会话列表
+### 获取本地所有会话
 
-你可以获取本地会话列表：
+你可以获取本地所有会话：
 
 ```dart
 try {
@@ -149,7 +149,7 @@ await EMClient.getInstance.chatManager.deleteRemoteConversation(
 
 ```dart
 // msgId：要获取消息的消息 ID。
-ChatMessage? msg = await ChatClient.getInstance.chatManager.loadMessage("msgId");
+EMMessage? msg = await EMClient.getInstance.chatManager.loadMessage("msgId");
 ```
 
 ### 获取指定会话中特定类型的消息
@@ -157,16 +157,16 @@ ChatMessage? msg = await ChatClient.getInstance.chatManager.loadMessage("msgId")
 你可以调用 `loadMessagesWithMsgType` 方法从本地存储中获取指定会话中特定类型的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
 ```dart
-ChatConversation? conv =
-    await ChatClient.getInstance.chatManager.getConversation("convId");
-List<ChatMessage>? list = await conv?.loadMessagesWithMsgType(
-  // 消息类型。
-  type: MessageType.TXT,
-  // 每次获取的消息数量。取值范围为 [1,400]。
-  count: 50,
-  // 消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-  direction: ChatSearchDirection.Up,
-);
+EMConversation? conv =
+        await EMClient.getInstance.chatManager.getConversation("convId");
+    List<EMMessage>? list = await conv?.loadMessagesWithMsgType(
+      // 消息类型。
+      type: MessageType.TXT,
+      // 每次获取的消息数量。取值范围为 [1,400]。
+      count: 50,
+      // 消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+      direction: EMSearchDirection.Up,
+    );
 ```
 
 ### 获取指定会话中一定时间段内的消息
@@ -174,41 +174,39 @@ List<ChatMessage>? list = await conv?.loadMessagesWithMsgType(
 你可以调用 `loadMessagesFromTime` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
 
 ```dart
-ChatConversation? conv =
-    await ChatClient.getInstance.chatManager.getConversation("convId");
-List<ChatMessage>? list = await conv?.loadMessagesFromTime(
-  // 搜索的起始时间戳，单位为毫秒。
-  startTime: startTime,
-  // 搜索的结束时间戳，单位为毫秒。
-  endTime: endTime,
-  // 每次获取的消息数量。取值范围为 [1,400]。
-  count: 50,
-);
+EMConversation? conv =
+        await EMClient.getInstance.chatManager.getConversation("convId");
+    List<EMMessage>? list = await conv?.loadMessagesFromTime(
+      // 搜索的起始时间戳，单位为毫秒。
+      startTime: startTime,
+      // 搜索的结束时间戳，单位为毫秒。
+      endTime: endTime,
+      // 每次获取的消息数量。取值范围为 [1,400]。
+      count: 50,
+    );
 ```
 
 ### 根据关键字搜索会话消息
 
-你可以根据关键字搜索会话消息，示例代码如下：
+你可以调用 `loadMessagesWithKeyword` 方法从本地数据库获取会话中的指定用户发送的包含特定关键字的消息，示例代码如下：
+
 
 ```dart
-// 搜索关键字。
-String keywords = 'key';
-// 搜索开始的 Unix 时间戳，单位为毫秒。
-int timestamp = 1653971593000;
-// 搜索的最大消息数。
-int maxCount = 10;
-// 消息发送方。
-String from = 'tom';
-// 消息的搜索方向：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-EMSearchDirection direction = EMSearchDirection.Up;
-List<EMMessage> list =
-    await EMClient.getInstance.chatManager.searchMsgFromDB(
-  keywords,
-  timeStamp: timestamp,
-  maxCount: maxCount,
-  from: from,
-  direction: direction,
-);
+EMConversation? conv =
+        await EMClient.getInstance.chatManager.getConversation("convId");
+        
+    List<EMMessage>? msgs = await conv?.loadMessagesWithKeyword(
+      // 搜索关键字。
+      "key",
+      // 消息发送方。
+      sender: "tom",
+      // 搜索开始的 Unix 时间戳，单位为毫秒。
+      timestamp: 1653971593000,
+      // 搜索的最大消息数。
+      count: 10,
+      // 消息的搜索方向：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+      direction: EMSearchDirection.Up,
+    );
 ```
 
 ### 批量导入消息到数据库
