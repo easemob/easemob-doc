@@ -27,23 +27,24 @@
 
 ### 响应参数
 
-| 参数             | 描述                                                         |
-| :----------| :----------------------------------------------------------- |
-| `action`     | 请求方法。                                     |
-| `organization`      | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`   | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
-| `applicationName` | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
-| `uri`             | 请求 URL。                                                   |
-| `path`          | 请求路径，属于请求 URL 的一部分，开发者无需关注。            |
-| `entities`         | 详细信息。                                                   |
-| `data`        | 实际获取的数据详情。                                         |
-| `uuid`         | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
-| `created`         | 群组创建时间，Unix 时间戳，单位为毫秒。                      |
-| `username`   | 用户 ID。                                                     |
-| `groupname`      | 群组名。                                                     |
-| `nickname`        | 用户昵称。                                                   |
-| `timestamp`    | Unix 时间戳，单位为毫秒。                                    |
-| `duration`    | 请求响应时间，单位为毫秒。                                   |
+| 参数         | 类型    | 描述                         |
+| :----------| :---------------| :------------------------------------------ |
+| `action`  | String   | 请求方法。                                     |
+| `organization`  | String      | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
+| `application`  | String   | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
+| `applicationName`| String   | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
+| `uri`          | String     | 请求 URL。                                                   |
+| `path`         | String   | 请求路径，属于请求 URL 的一部分，开发者无需关注。            |
+| `entities`     | JSON      | 响应实体。                                                   |
+| `data`      | JSON   | 实际获取的数据详情。                                         |
+| `uuid`       | String    | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
+| `created`      | Long     | 群组创建时间，Unix 时间戳，单位为毫秒。                      |
+| `username`  | String  | 用户 ID。                                                     |
+| `groupname`    | String   | 群组名。                                                     |
+| `nickname`    | String     | 用户昵称。                                                   |
+| `timestamp`   | Long    | Unix 时间戳，单位为毫秒。                                    |
+| `duration`    | Int   | 请求响应时间，单位为毫秒。                                   |
+| `properties`   | String   | 响应属性。                                   |
 
 ## 群组角色
 
@@ -89,8 +90,8 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 ##### 请求 body
 
-| 参数           | 类型    | 是否必需 | 描述                                                         |
-|:----------------------| :------ |:-----|:--------------------------------------------------------------------------------------------------------------------------|
+| 参数           | 类型    | 是否必需 | 描述                            |
+|:----------------------| :------ |:-----|:----------------------------|
 | `groupname`    | String  | 是     | 群组名称，最大长度为 128 字符。如果有空格，则使用 “+” 代替。         |
 | `desc`         | String  | 是     | 群组描述，最大长度为 512 字符。如果有空格，则使用 “+” 代替。     |
 | `public`       | Bool  | 是     | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                  |
@@ -255,7 +256,7 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken>'
 
 ### 获取 App 中所有的群组（可分页）
 
-获取应用下全部的群组信息的接口。
+获取应用下所有群组的信息。
 
 #### HTTP 请求
 
@@ -275,19 +276,19 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 
 参数及描述详见 [公共参数](#公共参数)。
 
+##### 查询参数
+
+| 参数     | 类型   | 是否必需 | 描述                   |
+| :------- | :----- | :------------------------ | :------- |
+| `limit`  | Int | 否  |每次期望返回的群组数量。该参数仅在分页获取时为必需。   |
+| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
-
-##### 请求 body
-
-| 参数     | 类型   | 是否必需 | 描述                   |
-| :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int |  否  |每次期望返回的群组数量。该参数仅在分页获取时为必需。   |
-| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
 
 #### HTTP 响应
 
@@ -297,15 +298,15 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 
 | 字段             | 类型   | 描述                                                         |
 | :-------------- | :----- | :----------------------------------------------------------- |
-| `data.owner`         | String | 群主的 ID。例如：{“owner”: “user1}。                         |
+| `data.owner`         | String | 群主的用户 ID。例如：{“owner”: “user1}。                         |
 | `data.groupid`       | String | 群组 ID。                                                    |
 | `data.affiliations`  | int    | 群组现有成员数。                                             |
 | `data.type`          | String | “group” 群组类型。                                           |
 | `data.last_modified` | String | 最近一次修改的时间戳，单位为毫秒。                           |
 | `data.groupname`     | String | 群组名称。                                                   |
-| `count`         | Int    | 实际取得的群组数量。                                         |
-| `limit`         | Int    | 每页获取的数量。取值范围为[1,100]，默认值为 10。 |
-| `cursor` | String | 游标，下次回从该位置开始进行查询。 |
+| `count`         | Int    | 实际获取的群组数量。                                         |
+| `limit`         | Int    | 每次获取的群组数量。取值范围为[1,100]，默认值为 10。 |
+| `cursor` | String | 查询游标，指定下次查询的起始位置。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -368,7 +369,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> 
 
 ### 获取单个用户加入的所有群组（可分页）
 
-根据用户 ID 称获取该用户加入的全部群组。
+根据用户 ID 获取指定用户加入的全部群组。
 
 #### HTTP 请求
 
@@ -386,10 +387,14 @@ GET https://{host}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pag
 
 ##### 路径参数
 
+参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
 | 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
-| `pagesize` | String | 是     | 每页获取的群组数量。该参数仅适用于分页获取方法。             |
-| `pagenum`  | String | 是     | 当前页码。该参数仅适用于分页获取方法。                       |
+| `pagesize` | String | 否     | 每页获取的群组数量。该参数仅适用于分页获取方法。             |
+| `pagenum`  | String | 否     | 当前页码。该参数仅适用于分页获取方法。                       |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -397,8 +402,8 @@ GET https://{host}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pag
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-| `Accept`   | String | 是    |内容类型。请填 `application/json` |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json` |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -507,8 +512,8 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -523,14 +528,14 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.description`        | String  | 群组描述。    |
 | `data.membersonly`        | Bool | 加入群组是否需要群主或者群管理员审批。<br/> - `true`：是；<br/> - （默认）`false`：否。 |
 | `data.allowinvites`       | Bool | 是否允许群成员邀请其他用户加入此群。<br/> - `true`：允许群成员邀请其他用户加入此群；<br/> - （默认）`false`：只有群主可以邀请其他用户入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
-| `data.maxusers`           | Int | 群成员上限，创建群组的时候设置，可修改。                     |
+| `data.maxusers`           | Int | 群成员数上限，创建群组的时候设置，可修改。                     |
 | `data.permission`         | String  | 群组成员角色：<br/> - `owner`：群主；<br/> - `member`：普通成员。          |
 | `data.owner`              | String  | 群主的用户 ID。例如：{“owner”: “user1”}。                    |
 | `data.created`            | Long    | 创建该群组的 Unix 时间戳。    |
-| `data.affiliations_count` | int     | 现有成员总数。                                               |
+| `data.affiliations_count` | int     | 群组现有成员总数。                                               |
 | `data.mute`        | Bool | 是否处于全员禁言状态。<br/> - `true`：是； <br/> - （默认）`false`：否。       |
 | `data.public`             | Bool | 是否是公开群：<br/> - `true`：公开群；<br/> - `false`：私有群。             |
-| `data.custom`             | String  | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。 |
+| `data.custom`             | String  | 群组扩展信息，例如，可以给群组添加业务相关的标记，不要超过 1,024 字符。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -578,7 +583,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> 
 
 ### 删除群组
 
-删除一个群组的接口。删除群组时会同时删除群组下所有的子区（Thread）。
+删除指定的群组。删除群组时会同时删除群组下所有的子区（Thread）。
 
 #### HTTP 请求
 
@@ -606,7 +611,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | 字段       | 类型    | 描述                                                    |
 | :-------- | :------ | :------------------------------------------------------ |
 | `data.success` | Bool | 群组删除结果: </br> - `true`：删除成功； <br/> - `false`：删除失败。 |
-| `data.groupid` | String  | 所删除群组 ID。                                         |
+| `data.groupid` | String  | 删除的群组的 ID。                                         |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -662,8 +667,8 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -726,8 +731,8 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -775,7 +780,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 获取群组共享文件
 
-分页获取指定群组 ID 的群组共享文件，之后可以根据 response 中返回的 `file_id`，`file_id` 是群组共享文件的唯一标识，调用 [下载群组共享文件](#下载群组共享文件) 接口下载文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除文件。
+可以分页获取指定群组 ID 的群组共享文件。获取文件后，你可以根据响应中返回的文件 ID（`file_id`）调用 [下载群组共享文件](#下载群组共享文件) 接口下载文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除文件。
 
 #### HTTP 请求
 
@@ -793,6 +798,10 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 
 ##### 路径参数
 
+参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `pagesize` | String   | 否 | 每页期望返回的共享文件数。取值范围为 [1,1000]。|
@@ -803,8 +812,8 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -814,10 +823,10 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 
 | 字段      | 类型   | 描述                                                        |
 | :--------| :------ | :---------------------------------------------------------- |
-| `data.file_id`  | String   | 群组共享文件的 ID，如果要下载该文件需要使用到这个 `file_id`。 |
+| `data.file_id`  | String   | 群组共享文件的 ID，若要下载或删除该文件需要使用该参数。 |
 | `data.file_name` | String  | 群组共享文件名称。                                          |
 | `data.file_owner` | String | 上传群组共享文件的用户 ID。                                 |
-| `data.file_size`  | Long | 群组共享文件大小(字节)。                                    |
+| `data.file_size`  | Long | 群组共享文件大小，单位为字节。                                    |
 | `data.created`   | Long  | 上传群组共享文件的时间。                                    |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -877,7 +886,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 上传指定群组 ID 的群组共享文件。注意上传的文件大小不能超过 10 MB。
 
-分页获取指定群组 ID 的群组共享文件，然后可以根据响应中返回的 file_id（群组共享文件的唯一标识）调用 [下载群组共享文件](#下载群组共享文件) 接口下载群组的共享文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除群组的共享文件。
+分页获取指定群组 ID 的群组共享文件，然后可以根据响应中返回的文件 ID（`file_id`）调用 [下载群组共享文件](#下载群组共享文件) 接口下载群组的共享文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除群组的共享文件。
 
 #### HTTP 请求
 
@@ -911,8 +920,8 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 | `data.group_id`   | String | 群组 ID。                                                  |
 | `data.file_name`  | String | 群组共享文件名称。                                         |
 | `data.created`    | Long | 上传群组共享文件的时间。                                   |
-| `data.file_id`   | String  | 群组共享文件 ID，可以用于下载共享文件和删除共享文件。      |
-| `data.file_size`  | Long | 群组共享文件大小(字节)。                                   |
+| `data.file_id`   | String  | 群组共享文件 ID，可以用于下载和删除共享文件。      |
+| `data.file_size`  | Long | 群组共享文件大小，单位为字节。                                   |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -955,7 +964,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'A
 
 ### 下载群组共享文件
 
-根据指定的群组 ID 与 `file_id` 下载群组共享文件，`file_id` 是通过 [获取群组共享文件](#获取群组共享文件) 接口获取。
+根据指定的群组 ID 与文件 ID（`file_id`）下载群组共享文件，文件 ID 可从 [获取群组共享文件](#获取群组共享文件) 接口的响应中获取。
 
 #### HTTP 请求
 
@@ -972,8 +981,8 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -985,10 +994,10 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 | :---------- | :------------| :------------------------------------ |
 | `data.file_url`  | String  | 群组共享文件的 URL，在环信即时通讯 IM 服务器上保存的地址。 |
 | `data.group_id`   | String | 群组 ID。                                                  |
-| `data.file_name`  | String | 群组共享文件名称。                                         |
+| `data.file_name`  | String | 群组共享文件的名称。                                         |
 | `data.created`    | Long | 上传群组共享文件的时间。                                   |
-| `data.file_id`    | String | 群组共享文件 ID，可以用于下载共享文件和删除共享文件。      |
-| `data.file_size`  | Long| 群组共享文件大小(字节)。                       |
+| `data.file_id`    | String | 群组共享文件 ID。该参数在删除共享文件时需要提供。      |
+| `data.file_size`  | Long| 群组共享文件大小，单位为字节。                       |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1029,7 +1038,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ### 删除群组共享文件
 
-根据指定的群组 ID 与 文件 ID（file_id）删除群组共享文件，文件 ID 通过 [获取群组共享文件](#获取群组共享文件) 接口获取。
+根据指定的群组 ID 与 文件 ID（`file_id`）删除群组共享文件，文件 ID 可从 [获取群组共享文件](#获取群组共享文件) 接口的响应中获取。
 
 #### HTTP 请求
 
@@ -1039,9 +1048,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{f
 
 ##### 路径参数
 
-| 参数       | 类型   | 是否必需 | 描述                                                         |
-| :--------- | :----- | :------- | :----------------------------------------------------------- |
-| `file_id`  | String | 是     | 文件 ID。                                                    |
+| 参数       | 类型   | 是否必需 | 描述                      |
+| :--------- | :----- | :------- | :------------------------------------ |
+| `file_id`  | String | 是     | 文件 ID。               |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -1050,8 +1059,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{f
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -1062,7 +1071,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{f
 | 字段      | 类型    | 描述                                                         |
 | :---------| :------ | :----------------------------------------------------------- |
 | `data.group_id`  | String | 群组 ID。                                                    |
-| `data.file_id`  | String  | 群组共享文件 ID，可以用于下载共享文件和删除共享文件          |
+| `data.file_id`  | String  | 群组共享文件 ID。在下载共享文件时需提供该参数。          |
 | `data.result`   | Bool  | 删除群组共享文件的结果：<br/> - `true`：删除成功；<br/> - `false`：删除失败。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -1101,7 +1110,7 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json'
 
 ## 管理群组成员
 
-环信即时通讯 IM 提供多个接口实现对群组成员的管理，包括添加、移除群组成员关系列表，转让群主等。
+环信即时通讯 IM 提供多个接口实现对群组成员的管理，包括添加和移除群组成员、转让群组所有权以及群组黑名单、白名单和禁言列表相关操作。
 
 ### 分页获取群组成员
 
@@ -1115,10 +1124,14 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 
 ##### 路径参数
 
+参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
 | 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
-| `params.pagenum`  | Int    | 否   | 当前页码。默认从第 1 页开始获取。         |
-| `params.pagesize` | Int    | 否   | 每页期望返回的群组成员数量。取值范围为 [1,100]。默认为 10。    |
+| `pagenum`  | Int    | 否   | 当前页码。默认从第 1 页开始获取。         |
+| `pagesize` | Int    | 否   | 每页期望返回的群组成员数量。取值范围为 [1,100]。默认为 10。    |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -1126,7 +1139,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -1187,7 +1200,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagenum=2&pagesize=2
 
 ### 添加单个群组成员
 
-一次给群添加一个成员，不能重复添加同一个成员。如果用户已经是群成员，将添加失败，并返回错误。
+每次添加一个群成员。若添加的用户已是群成员，添加失败，返回错误。
 
 #### HTTP 请求
 
@@ -1204,8 +1217,8 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -1217,7 +1230,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 | :-------- | :--------------| :--------------------------- |
 | `data.result`  | Bool | 添加结果：<br/> - `true`：成功。<br/> - `false`：失败。 |
 | `data.groupid` | String | 群组 ID。                                     |
-| `data.action`  | String | 执行的操作。                                  |
+| `data.action`  | String | 执行的操作。在该响应中，该字段的值为 `add_member`，表示添加群组成员。     |
 | `data.user`    | String  | 被添加的用户 ID。                       |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -1257,7 +1270,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 批量添加群组成员
 
-为群组添加多个成员，一次最多可以添加 60 位成员。如果所有用户均已是群成员，将添加失败，并返回错误。
+一次为群组添加多个成员，每次最多可以添加 60 位成员。如果所有用户均已是群成员，添加失败，返回错误。
 
 #### HTTP 请求
 
@@ -1274,14 +1287,14 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ##### 请求 body
 
 | 参数        | 类型   | 是否必需 | 描述                                           |
 | :---------- | :----- | :------- | :--------------------------------------------- |
-| `usernames` | Array | 是     | `username1/username2` 要添加到群中的成员用户 ID。 |
+| `usernames` | Array | 是     | 要添加为群组成员的用户 ID。 |
 
 #### HTTP 响应
 
@@ -1291,9 +1304,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
 
 | 字段     |  类型       | 描述                |
 | :---------- | :-------- | :------------------ |
-| `data.newmembers`  | Array | 添加的群组成员 ID。 |
+| `data.newmembers`  | Array | 添加的群组成员的用户 ID。 |
 | `data.groupid`   | String  | 群组 ID。           |
-| `data.action`    | String   | 执行的操作。`add_member` 为添加群成员。      |
+| `data.action`    | String   | 执行的操作。在该响应中，该字段的值为 `add_member`，表示添加群成员。      |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1338,8 +1351,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 移除单个群组成员
 
-从群中移除指定成员。如果被移除用户不是群成员，将移除失败，并返回错误。群成员移除时还会移除他在群下所有加入的子区。
-
+从群中移除指定成员。如果被移除用户不是群成员，将移除失败，并返回错误。移除后，该成员也会被移除其在该群组中加入的子区。
 #### HTTP 请求
 
 ```http
@@ -1354,8 +1366,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -1367,7 +1379,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
 | `data.groupid` | String  | 群组 ID。                                             |
-| `data.action`  | String  | 执行的操作，`remove_member` 为移除群组成员。                     |
+| `data.action`  | String  | 执行的操作。在该响应中，该字段的值为 `remove_member`，表示移除群组成员。  |
 | `data.user`    | String  | 被移除的用户 ID。                                     |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -1407,8 +1419,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToke
 
 ### 批量移除群组成员
 
-移除多名群成员。如果所有被移除用户均不是群成员，将移除失败，并返回错误。移除后也会将用户从该群里加入的子区中移除。
-
+一次移除多名群成员。如果所有被移除用户均不是群成员，将移除失败，并返回错误。移除后，这些成员也会被移除其在该群组中加入的子区。
 #### HTTP 请求
 
 ```http
@@ -1419,7 +1430,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 
 | 参数          | 类型   | 是否必需 | 描述                                                         |
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
-| `members`    | String | 是     | 要移除的群成员用户 ID，用户 ID 之间用英文逗号分隔。建议一次最多移除 60 个群成员，并且 URL 的长度应在 4k 字节以内。         |
+| `members`    | String | 是     | 要移除的群成员的用户 ID，用户 ID 之间用英文逗号分隔。建议一次最多移除 60 个群成员，并且 URL 的长度不超过 4 KB。         |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -1427,8 +1438,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -1439,7 +1450,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 | 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 操作结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
-| `data.action`  | String  | 执行的操作，`remove_member`：移除群组成员。       |
+| `data.action`  | String  | 执行的操作。在该响应中，该字段的值为 `remove_member`，表示移除群组成员。       |
 | `data.reason`  | String  | 操作失败的原因。                                      |
 | `data.user`    | String  | 被移除成员的用户 ID。                                  |
 | `data.groupid` | String  | 操作的群组 ID。                                       |
@@ -1494,7 +1505,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToke
 
 ### 获取群管理员列表
 
-获取群组管理员列表的接口。
+获取群组管理员列表。
 
 #### HTTP 请求
 
@@ -1510,7 +1521,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -1555,7 +1566,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -H 'Authorization: B
 
 ### 添加群管理员
 
-将一个群成员角色权限提升为群管理员。
+将一个普通群成员设为为群管理员。
 
 #### HTTP 请求
 
@@ -1577,7 +1588,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 | 参数       | 类型   | 是否必需 | 描述                    |
 | :--------- | :----- | :------- | :---------------------- |
-| `newadmin` | String | 是     | 添加的新管理员用户 ID。 |
+| `newadmin` | String | 是     | 要添加的新管理员的用户 ID。 |
 
 #### HTTP 响应
 
@@ -1588,6 +1599,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 | 字段    | 类型   | 描述                    |
 | :----- | :----- | :---------------------- |
 | `data` | String | 添加的新管理员用户 ID。 |
+| `count` | Int   | 添加的新管理员的数量。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1704,13 +1716,13 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ##### 请求 body
 
 | 参数       | 类型   | 描述                |
 | :--------- | :----- | :------------------ |
-| `newowner` | String | 群组的新管理员用户 ID。 |
+| `newowner` | String | 群组的新管理员的用户 ID。 |
 
 #### HTTP 响应
 
@@ -1756,11 +1768,11 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ## 管理黑名单
 
-环信即时通讯 IM 提供多个接口完成群组黑名单管理，包括查看、将用户添加、移除黑名单等。
+环信即时通讯 IM 提供多个接口完成群组黑名单管理，包括查看黑名单中的用户以及将用户加入和移除黑名单等。
 
 ### 查询群组黑名单
 
-查询一个群组黑名单中的用户列表。位于黑名单中的用户查看不到该群组的信息，也无法收到该群组的消息。
+查询一个群组黑名单中的用户列表。黑名单中的用户无法查看该群组的信息，也无法收到该群组的消息。
 
 #### HTTP 请求
 
@@ -1777,7 +1789,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -1787,7 +1799,8 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 | 字段    | 类型  | 描述                |
 | :----- | :---- | :------------------ |
-| `data` | Array | 群组黑名单用户 ID。 |
+| `data` | Array | 群组黑名单上的用户 ID。 |
+| `count` | Int | 群组黑名单中的用户数量。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1825,9 +1838,9 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> 
 
 ### 添加单个用户至群组黑名单
 
-添加一个用户进入一个群组的黑名单。群主无法被加入群组的黑名单。
+将单个用户添加至群组黑名单。群主无法被加入群组的黑名单。
 
-用户进入群组黑名单后会收到加入黑名单的回调。之后，该用户查看不到该群组的信息，也收不到该群组的消息。
+用户进入群组黑名单后会收到加入黑名单的回调。之后，该用户无法查看该群组的信息，也收不到该群组的消息。
 
 #### HTTP 请求
 
@@ -1844,8 +1857,8 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{us
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -1856,9 +1869,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{us
 | 字段     | 类型   | 描述                                                  |
 | :-------- | :---------------- | :------------------------- |
 | `data.result`  | Bool | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
-| `data.groupid` | String | 群组 ID。                                             |
-| `data.action`  | String | 执行操作。`add_blocks 为将成员加入黑名单。                                             |
+| `data.action`  | String | 执行操作。在该响应中，该字段的值为 `add_blocks`，表示将成员添加至群组黑名单。 |
 | `data.user`    | String | 被添加的用户 ID。                                     |
+| `data.groupid` | String | 群组 ID。                                             |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1897,9 +1910,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 批量添加用户至群组黑名单
 
-将多个用户添加一个群组的黑名单。一次最多可以添加 60 个用户至群组黑名单。群主无法被加入群组的黑名单。
+将多个用户添加至群组黑名单。一次最多可以添加 60 个用户至群组黑名单。群主无法被加入群组的黑名单。
 
-用户进入群组黑名单后会收到加入黑名单的回调。黑名单上的用户查看不到该群组的信息，也收不到该群组的消息。
+用户进入群组黑名单后会收到加入黑名单的回调。黑名单上的用户无法查看该群组的信息，也收不到该群组的消息。
 
 #### HTTP 请求
 
@@ -1917,13 +1930,13 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 ##### 请求 body
 
 | 参数        | 类型  | 是否必需 | 描述              |
 | :---------- | :----  | :----| :---------------- |
-| `usernames` | Array | 是 | 要添加的用户 ID 数组。 |
+| `usernames` | Array | 是 | 要添加至群组黑名单的用户 ID 数组。 |
 
 #### HTTP 响应
 
@@ -1934,10 +1947,10 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 | 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
-| `data.reason`  | String  | 添加失败的原因。                                      |
-| `data.groupid` | String  | 群组 ID。                                             |
-| `data.action`  | String  | 执行的操作。                                          |
-| `data.user`    | String  | 被添加的用户 ID。                                     |
+| `data.action`  | String  | 执行的操作。在该响应中，该字段的值为 `add_blocks`，表示将群成员加入群组黑名单。   |
+| `data.reason`  | String  | 添加失败的原因。 |
+| `data.user`    | String  | 被添加的用户 ID。         |
+| `data.groupid` | String  | 群组 ID。         |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2005,8 +2018,8 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -2017,9 +2030,9 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}
 | 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `result`  | Bool | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
-| `groupid` | String  | 群组 ID。                                             |
-| `action`  | String  | 执行的操作。                                          |
+| `action`  | String  | 执行的操作。在该响应中，该字段的值为 `remove_blocks`，表示将群成员移出群组黑名单。                                          |
 | `user`    | String  | 被添加的用户 ID。                                     |
+| `groupid` | String  | 群组 ID。                                             |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2068,7 +2081,11 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `usernames`   | String | 是    | 要移除群组黑名单的用户 ID。 |
+
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -2086,9 +2103,9 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}
 | 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
+| `data.action`  | String  | 执行的操作。在该响应中，该字段的值为 `remove_blocks`，表示将用户从群组黑名单批量移除。    |
+| `data.user`    | String  | 被移除的用户 ID。                                       |
 | `data.groupid` | String  | 群组 ID。                                             |
-| `data.action`  | String  | 执行的操作。                                          |
-| `data.user`    | String  | 添加的用户 ID。                                       |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2135,11 +2152,11 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToke
 
 ## 管理白名单
 
-环信即时通讯 IM 提供多个接口完成群组白名单管理，包括查看、将用户添加、移除白名单等。
+环信即时通讯 IM 提供多个接口完成群组白名单管理，包括查看群组白名单中的用户以及将用户添加至或移除白名单等。
 
 ### 查询群组白名单
 
-查询一个群组白名单中的用户列表。
+查询群组白名单中的用户列表。
 
 #### HTTP 请求
 
@@ -2207,7 +2224,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> 
 
 ### 添加单个用户至群组白名单
 
-将指定的单个用户添加至群组白名单。用户在添加至群组白名单后，当群组全员被禁言时，仍可以在群组中发送消息。
+将指定的单个用户添加至群组白名单。用户添加至群组白名单后，当群组全员被禁言时，仍可以在群组中发送消息。
 
 #### HTTP 请求
 
@@ -2235,9 +2252,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 | 字段       | 描述                                                  |
 | :-------- | :---------------------------------------------------- |
 | `data.result`  | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
-| `data.groupid` | 群组 ID。                                             |
-| `data.action`  | 执行操作。`add_user_whitelist` 为将成员加入群白名单。                        |
+| `data.action`  | 执行操作。在该响应中，该字段的值为 `add_user_whitelist`，表示将成员加入群白名单。     |
 | `data.user`    | 被添加的用户 ID。                                     |
+| `data.groupid` | 群组 ID。                                             |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2311,10 +2328,10 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 | 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
-| `data.reason`  | String  | 添加失败的原因。                                      |
-| `data.groupid` | String  | 群组 ID。                                             |
-| `data.action`  | String  | 执行的操作。`add_user_whitelist` 为将成员加入群白名单。                 |
+| `data.action`  | String  | 执行的操作。在该响应中，该字段的值为 `add_user_whitelist`，表示将成员加入群白名单。|
 | `data.user`    | String  | 被添加的用户 ID。                                     |
+| `data.groupid` | String  | 群组 ID。                                             |
+| `data.reason`  | String  | 添加失败的原因。                                      |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2359,7 +2376,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-### 将用户移除群组白名单
+### 从群组白名单移除用户
 
 将指定用户从群组白名单中移除。你每次最多可移除 60 个用户。
 
@@ -2389,9 +2406,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{u
 | 字段       | 类型    | 描述                                                  |
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
-| `data.groupid` | String  | 群组 ID。                                             |
-| `data.action`  | String  | 执行的操作。`remove_user_whitelist` 为将成员加入群白名单。               |
+| `data.action`  | String  | 执行的操作。在该响应中，该字段的值为 `remove_user_whitelist`，表示将成员移出群组白名单。               |
 | `data.user`    | String  | 添加的用户 ID，多个用户 ID 以逗号分隔。               |
+| `data.groupid` | String  | 群组 ID。                                             |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2438,13 +2455,11 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToke
 
 ## 管理禁言
 
-环信即时通讯 IM 提供多个接口进行群组禁言列表管理，包括查看、将用户添加、移除禁言列表等。
+环信即时通讯 IM 提供多个接口进行群组禁言列表管理，包括查看禁言列表以及将用户添加至或移出禁言列表等。
 
 ### 获取禁言列表
 
 获取当前群组的禁言用户列表。
-
-将用户从禁言列表中移除。移除后，用户可以正常在群中发送消息。
 
 #### HTTP 请求
 
@@ -2508,7 +2523,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -H 'Authorization: Be
 
 ### 禁言指定群成员
 
-对指定群成员禁言。群成员被禁言后，将无法在群中发送消息，也无法在子区里面发送消息。
+对指定群成员禁言。群成员被禁言后，将无法在群组中发送消息，也无法在该群组下的子区中发送消息。
 
 #### HTTP 请求
 
@@ -2531,7 +2546,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 | 参数            | 类型   | 是否必需 | 描述                    |
 | :-------------- | :---- | :-------| :------------------------ |
 | `mute_duration` | Long  |  是  | 禁言时长，单位为毫秒。  |
-| `usernames`     | Array |  是  | 要被添加到禁言列表的用户 ID 列表。每次调用最多禁言 10 个成员。 |
+| `usernames`     | Array |  是  | 要添加到禁言列表的用户 ID 列表。每次最多可禁言 10 个成员。 |
 
 #### HTTP 响应
 
@@ -2579,9 +2594,9 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -d '{"usernames":["u
 }
 ```
 
-### 禁言全体成员
+### 禁言全体群成员
 
-对所有群组成员一键禁言，即将群组的所有成员均加入禁言列表。设置群组全员禁言后，仅群组白名单中的用户可在群组内发消息。同样在子区中发消息也需要在群组的白名单里面。
+对所有群组成员一键禁言，即将群组的所有成员加入禁言列表。设置群组全员禁言后，仅群组白名单中的用户可在群组以及该群组下的子区内发送消息。
 
 #### HTTP 请求
 
@@ -2652,7 +2667,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 解除成员禁言
 
-将一个或多个群成员移除禁言列表。移除后，群成员可以在群组中正常发送消息。同时也可以在子区里面发送消息。
+将一个或多个群成员移出禁言列表。移除后，群成员可以在群组中正常发送消息，同时也可以在该群组下的子区中发送消息。
 
 #### HTTP 请求
 
@@ -2664,7 +2679,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 
 | 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
-| `member`   | String | 是     | member1:成员 1 id；member2：成员 2 id；......                 |
+| `member`   | String | 是     | member1：成员 1 的用户 ID；member2：成员 2 的用户 ID；以此类推。  |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -2683,7 +2698,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 | 字段      | 类型    | 描述                                                      |
 | :------- | :------ | :-------------------------------------------------------- |
 | `data.result` | Bool | 操作结果：<br/> - `true`：解除成功；<br/> - `false`：解除失败。 |
-| `data.user`   | Array | 被移除禁言的用户 ID。                                     |
+| `data.user`   | Array | 被移出禁言列表的用户 ID。                                     |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2720,7 +2735,7 @@ curl -X DELETE http://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute/user1  -H 'Authori
 
 ### 解除全员禁言
 
-一键取消对群组全体成员的禁言。移除后，群成员可以在群组和子区中正常发送消息。
+一键取消对群组全体成员的禁言。解除禁言后，群成员可以在群组和该群组下的子区中正常发送消息。
 
 #### HTTP 请求
 
@@ -2784,7 +2799,7 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json'
 
 ## 管理子区
 
-环信即时通讯 IM 提供多个接口完成子区相关的管理，包括子区的创建、获取、修改、删除等。
+环信即时通讯 IM 提供多个接口实现子区管理，包括子区的创建、获取、修改和删除等。
 
 ### 获取 app 中所有的子区(分页获取)
 
@@ -2798,24 +2813,22 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 
 ##### 路径参数
 
-| 参数       | 类型     | 是否必需 | 描述                        |
-|:---------|:-------|:-----|:--------------------------|
-| `sort`   | String | 否  | 搜索结果的排序方式：<br/> - `asc`：按创建时间正序；<br/> - （默认）`desc`：按创建时间倒序。 |
+参数及描述详见 [公共参数](#公共参数)。
 
-其他参数及描述详见 [公共参数](#公共参数)。
+##### 查询参数
+
+| 参数     | 类型   | 是否必需 | 描述                   |
+| :------- | :----- | :------------------------ | :------- |
+| `limit`  | Int | 否  |每次期望返回的子区数量。该参数仅在分页获取时为必需。   |
+| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+| `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按子区创建时间的正序；<br/> - （默认）`desc`：按子区创建时间的倒序。 |
+
 
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
-
-##### 请求 body
-
-| 参数     | 类型   | 是否必需 | 描述                   |
-| :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int |  否  |每次期望返回的子区数量。该参数仅在分页获取时为必需。   |
-| `cursor` | String | 否   | 分页获取时，数据查询的起始位置。该参数仅在分页获取时为必需。 |
 
 #### HTTP 响应
 
@@ -2826,7 +2839,7 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 | 字段     | 类型   | 描述         |
 |:------|:----------|:-----------|
 | `entities.id`  | String | 子区 ID。 |
-| `properties.cursor`  | String  | 分页页码。下一次服务器会从游标起始的地方进行查询。 |
+| `properties.cursor`  | String  | 查询游标，指定下次查询的起始位置。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2863,9 +2876,9 @@ curl -X GET http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourToken> '
 }
 ```
 
-### 获取一个用户加入的所有子区(分页获取)
+### 获取单个用户加入的所有子区（分页获取）
 
-根据用户 ID 获取该用户加入的子区列表。
+根据用户 ID 获取该用户加入的所有子区。
 
 #### HTTP 请求
 
@@ -2875,24 +2888,21 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 
 ##### 路径参数
 
-| 参数       | 类型     | 是否必需 | 描述                        |
-|:---------|:-------|:-----|:--------------------------|
-| `sort`   | String | 否  | 搜索结果的排序方式：<br/> - `asc`：按创建时间正序；<br/> - （默认）`desc`：按创建时间倒序。 |
+参数及描述详见 [公共参数](#公共参数)。
 
-其他参数及描述详见 [公共参数](#公共参数)。
+##### 查询参数
+
+| 参数     | 类型   | 是否必需 | 描述                   |
+| :------- | :----- | :------------------------ | :------- |
+| `limit`  | Int | 否  | 每次期望返回的子区数量。该参数仅在分页获取时为必需。   |
+| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+| `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按用户加入子区的时间的正序；<br/> - （默认）`desc`：按用户加入子区的时间的倒序。 |
 
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
-
-##### 请求 body
-
-| 参数     | 类型   | 是否必需 | 描述                                                         |
-| :------- | :----- | :------- | :----------------------------------------------------------- |
-| `cursor` | String | 否   | 游标，数据查询的起始位置。该参数仅在分页获取时为必需。 |
-| `limit`  | Int |  否  |每次期望返回的子区数量。 该参数仅在分页获取时为必需。  |
 
 #### HTTP 响应
 
@@ -2908,7 +2918,7 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 | `entities.msgId`  | String |子区的父消息 ID。 |
 | `entities.groupId` | String |子区所属群组 ID。  |
 | `entities.created` | Long |子区创建时间，Unix 时间戳。    |
-| `properties.cursor`  | String  | 游标。下一次服务器会从游标起始的地方进行查询。 |
+| `properties.cursor`  | String  | 查询游标，指定服务器下次查询的起始位置。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2950,9 +2960,9 @@ curl -X GET http://XXXX/XXXX/XXXX/threads/user/test4 -H 'Authorization: Bearer <
 }
 ```
 
-### 获取一个用户某个群组下加入的所有子区 (分页获取)
+### 获取单个用户在指定群组中加入的所有子区 (分页获取)
 
-根据用户 ID 获取该用户在某个群组下加入的子区列表。
+根据用户 ID 获取该用户在指定群组中加入的所有子区。
 
 #### HTTP 请求
 
@@ -2962,24 +2972,21 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 
 ##### 路径参数
 
-| 参数       | 类型     | 是否必需 | 描述                        |
-|:---------|:-------|:-----|:--------------------------|
-| `sort`   | String | 否  | 搜索结果的排序方式：<br/> - `asc`：按创建时间正序；<br/> - （默认）`desc`：按创建时间倒序。 |
+参数及描述详见 [公共参数](#公共参数)。
 
-其他参数及描述详见 [公共参数](#公共参数)。
+##### 查询参数
+
+| 参数     | 类型   | 是否必需 | 描述                   |
+| :------- | :----- | :------------------------ | :------- |
+| `limit`  | Int | 否  |每次期望返回的子区数量。该参数仅在分页获取时为必需。   |
+| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+| `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按用户加入子区的时间的正序；<br/> - （默认）`desc`：按用户加入子区的时间的倒序。 |
 
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
-
-##### 请求 body
-
-| 参数     | 类型   | 是否必需 | 描述                                                         |
-| :------- | :----- | :------- | :----------------------------------------------------------- |
-| `cursor` | String | 否   |游标，数据查询的起始位置。该参数仅在分页获取时为必需。 |
-| `limit`  | Int |  否  |每次期望返回的子区数量。 该参数仅在分页获取时为必需。  |
 
 #### HTTP 响应
 
@@ -2989,13 +2996,13 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 
 | 字段                | 描述   | 描述                                           |
 | :------------------ | :----- | :--------------------------------------------- |
-| `entities.name`   | String |子区名字。      |
-| `entities.owner`  | String |子区创建者。    |
+| `entities.name`   | String |子区名称。      |
+| `entities.owner`  | String |子区的创建者。    |
 | `entities.id`     | String |子区 ID。     |
 | `entities.msgId`   | String |子区的父消息 ID。 |
 | `entities.groupId` | String |子区所属群组 ID。  |
-| `entities.created` | Long  |子区创建时间。    |
-| `properties.cursor`  | String  | 游标。下一次服务器会从游标起始的地方进行查询。 |
+| `entities.created` | Long  |子区创建时间，Unix 时间戳，单位为毫秒。    |
+| `properties.cursor`  | String  | 查询游标，指定下次查询的起始位置。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -3049,7 +3056,7 @@ POST https://{host}/{org_name}/{app_name}/thread
 
 ##### 路径参数
 
-其他参数及描述详见 [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -3059,12 +3066,12 @@ POST https://{host}/{org_name}/{app_name}/thread
 
 ##### 请求 body
 
-| 参数             | 类型    | 是否必需 | 备注                |
+| 参数             | 类型    | 是否必需 | 描述                |
 |:---------------| :------ | :------- |:------------------|
 | `group_id`     | String  | 是     |子区所在的群组 ID。             |
-| `name`         | String  | 是     |子区的名称，最大长度为 64 字符。 |
-| `msg_id`       | String  | 是     |子区所在的消息 ID。         |
-| `owner`        | String  | 是     |子区的所有者，即创建子区的成员。     |
+| `name`         | String  | 是     |子区名称，不能超过 64 个字符。 |
+| `msg_id`       | String  | 是     |子区的父消息 ID。         |
+| `owner`        | String  | 是     |子区的所有者，即创建子区的群成员。     |
 
 #### HTTP 响应
 
@@ -3139,7 +3146,7 @@ PUT https://{host}/{org_name}/{app_name}/thread/{thread_id}
 
 | 参数             | 类型    | 是否必需 | 描述                  |
 |:---------------| :------ | :------- |:---------------------|
-| `name`         | String  | 是     | 要修改的子区的名称，最大长度为 64 字符。 |
+| `name`         | String  | 是     | 要修改的子区的名称。修改后的子区名称不能超过 64 个字符。 |
 
 #### HTTP 响应
 
@@ -3209,11 +3216,11 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功。响应包体中包含以下字段：
 
 | 字段   |  类型     | 描述      |
 |:------|:--------|:--------|
-| `entities.status` | Bool | 删除结果，`ok` 表示已删除。 |
+| `data.status` | Bool | 删除结果，`ok` 表示成功删除。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -3247,11 +3254,11 @@ curl -X DELETE http://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <Yo
 
 ## 管理子区成员
 
-环信即时通讯 IM 提供多个接口完成子区成员的管理，包括对子区的加入和踢出等管理功能。
+环信即时通讯 IM 提供多个接口实现子区成员管理，包括对加入和踢出子区等管理功能。
 
-### 查询子区成员(分页)
+### 获取子区成员列表(分页)
 
-查询子区成员。
+获取指定子区的成员列表。
 
 #### HTTP 请求
 
@@ -3263,29 +3270,29 @@ GET https://{host}/{org_name}/{app_name}/thread/{thread_id}/users?limit={N}&curs
 
 参数及描述详见 [公共参数](#公共参数)。
 
+##### 查询参数
+
+| 参数     | 类型   | 是否必需 | 描述                   |
+| :------- | :----- | :------------------------ | :------- |
+| `limit`  | Int | 否  |每次期望返回的子区成员数量。该参数仅在分页获取时为必需。   |
+| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
-##### 请求 body
-
-| 参数    | 类型   | 是否必需 | 描述      |
-| :-------------- | :----- | :---------------- | :------- |
-| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
-| `limit`  | Int |  否  |每次期望返回的子区成员数量。 该参数仅在分页获取时为必需。  |
-
 #### HTTP 响应
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功。响应包体中包含以下字段：
 
 | 字段      | 类型 | 描述             |
 |:-------|:--------|:--------------|
-| `affiliations` | Array | Thread 成员用户 ID 列表。 |
-| `properties.cursor`  | String  | 游标，下一次服务器会从游标起始的地方进行查询。 |
+| `affiliations` | Array | 子区成员的用户 ID 列表。 |
+| `properties.cursor`  | String  | 查询游标，指定下次查询的起始位置。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -3320,9 +3327,9 @@ curl -X GET http://XXXX/XXXX/XXXX/thread/1XXXX7/users -H 'Authorization: Bearer 
 }
 ```
 
-### 批量加入子区
+### 用户批量加入子区
 
-批量加入子区成员。
+用户批量加入指定的子区。
 
 #### HTTP 请求
 
@@ -3348,17 +3355,19 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 
 | 参数          | 类型   | 是否必需 | 备注             |
 |:------------|:-----|:-----|:---------------|
-| `usernames` | List | 是   | 批量加入子区的用户 ID 列表。每次调用最多可加入 10 个成员。 |
+| `usernames` | List | 是   | 批量加入子区的用户 ID 列表。每次最多支持 10 个用户加入子区。 |
 
 #### HTTP 响应
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，字段及描述详见 [公共参数](#公共参数)。
+如果返回的 HTTP 状态码为 `200`，表示请求成功。响应包体中包含以下字段：
 
 | 字段   |  类型     | 描述      |
 |:------|:--------|:--------|
-| `entities.status` | Bool | 删除结果，`ok` 表示已删除。 |
+| `data.status` | Bool | 删除结果，`ok` 表示成功删除。 |
+
+其他字段及描述详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -3421,18 +3430,18 @@ DELETE https://{host}/{org_name}/{app_name}/threads/{thread_id}/users
 
 | 参数          | 类型   | 是否必需 | 备注             |
 |:------------|:-----|:-----|:---------------|
-| `usernames` | List | 是   | 批量踢出子区的用户 ID 列表。每次调用最多可踢出 10 个成员。 |
+| `usernames` | List | 是   | 批量踢出子区的用户 ID 列表。每次最多可踢出 10 个子区成员。 |
 
 #### HTTP 响应
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功。响应包体中包含以下字段：
 
 | 字段    | 类型   | 描述      |
 |:-------|:-------|:-------|
 | `result`| Bool | 操作结果。<br/> - `true`：成功；<br/> - `false`：失败。 |
-| `user` | String | 被踢出用户的 ID。 |
+| `user` | String | 被踢出子区的用户 ID。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
