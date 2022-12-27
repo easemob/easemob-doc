@@ -126,9 +126,9 @@ JSONString = ‘{“name”:“ken”, “employer”:“easemob”, “title”
 #### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Bearer <YourToken>' -d 'avatarurl=http://www.easemob.com/avatar.png&ext=ext&nickname=nickname' 'http://XXXX/XXXX/XXXX/metadata/user/user1'
+curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Bearer <YourAppToken>' -d 'avatarurl=http://www.easemob.com/avatar.png&ext=ext&nickname=nickname' 'http://XXXX/XXXX/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例
@@ -187,9 +187,9 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 #### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourToken>' 'http://XXXX/XXXX/XXXX/metadata/user/user1'
+curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例
@@ -255,9 +255,9 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 #### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type:  application/json' -H 'Authorization: Bearer <YourToken>' -d '{
+curl -X POST -H 'Content-Type:  application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
   "properties": [
     "avatarurl",
     "ext",
@@ -336,9 +336,9 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 #### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Authorization: Bearer <YourToken>' 'http://XXXX/XXXX/XXXX/metadata/user/capacity'
+curl -X GET -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/metadata/user/capacity'
 ```
 
 #### 响应示例
@@ -390,9 +390,9 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 #### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Authorization: Bearer <YourToken>' 'http://XXXX/XXXX/XXXX/metadata/user/user1'
+curl -X DELETE -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例

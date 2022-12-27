@@ -122,9 +122,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' -d '{
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
    "groupname": "testgroup",
    "desc": "test",
    "public": true,
@@ -214,9 +214,9 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken>' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7' -d {
+curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7' -d {
     "groupname": "test groupname",
     "description": "updategroupinfo12311",
     "maxusers": 1500,
@@ -317,17 +317,17 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 第一页
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups?limit=2'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups?limit=2'
 ```
 
 第二页
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups?limit=2&cursor=ZGNXXXX6Mg'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups?limit=2&cursor=ZGNXXXX6Mg'
 ```
 
 ##### 响应示例
@@ -423,15 +423,15 @@ GET https://{host}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pag
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> '' 'http://XXXX/XXXX/XXXX/users/user1/joined_chatgroups'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> '' 'http://XXXX/XXXX/XXXX/users/user1/joined_chatgroups'
 ```
 
 分页获取示例：
 
 ```shell
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/users/user1/joined_chatgroups?pagesize=1&pagenum=100'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/users/user1/joined_chatgroups?pagesize=1&pagenum=100'
 ```
 
 ##### 响应示例
@@ -544,9 +544,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85'
 ```
 
 ##### 响应示例
@@ -620,9 +620,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://a1.Ago ra.com/XXXX/testapp/chatgroups/6XXXX7'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://a1.Ago ra.com/XXXX/testapp/chatgroups/6XXXX7'
 ```
 
 ##### 响应示例
@@ -687,9 +687,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/announcement'
+curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/announcement'
 ```
 
 ##### 响应示例
@@ -752,9 +752,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' -d '{"announcement" : "群组公告…"}' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/announcement'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{"announcement" : "群组公告…"}' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/announcement'
 ```
 
 ##### 响应示例
@@ -836,9 +836,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files?pagenum=1&pagesize=10'
+curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files?pagenum=1&pagesize=10'
 ```
 
 ##### 响应示例
@@ -930,9 +930,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -H 'restrict-access: true' -F file=@/Users/test/image/IMG_3.JPG
+curl -X POST 'http://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -H 'restrict-access: true' -F file=@/Users/test/image/IMG_3.JPG
 ```
 
 ##### 响应示例
@@ -1006,9 +1006,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files/b30XXXX4f'
+curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files/b30XXXX4f'
 ```
 
 ##### 响应示例
@@ -1081,9 +1081,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{f
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files/b30XXXX4f'
+curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files/b30XXXX4f'
 ```
 
 ##### 响应示例
@@ -1159,9 +1159,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourToken> '
+curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -1240,9 +1240,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user4'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user4'
 ```
 
 ##### 响应示例
@@ -1315,9 +1315,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' -d '{
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
    "usernames": [
      "user4","user5"
    ]
@@ -1389,9 +1389,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user3'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user3'
 ```
 
 ##### 响应示例
@@ -1462,9 +1462,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/ttXXXX81,user2,user3'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/ttXXXX81,user2,user3'
 ```
 
 ##### 响应示例
@@ -1540,9 +1540,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -H 'Authorization: Bearer <YourToken> '
+curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -1608,9 +1608,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -d '{"newadmin":"user1"}' -H 'Authorization: Bearer <YourToken> '
+curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -d '{"newadmin":"user1"}' -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -1670,9 +1670,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin/user1 -H 'Authorization: Bearer <YourToken> '
+curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin/user1 -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -1741,9 +1741,9 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' -d '{     "newowner": "user2"   }' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85'
+curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{     "newowner": "user2"   }' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85'
 ```
 
 ##### 响应示例
@@ -1809,9 +1809,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users'
 ```
 
 ##### 响应示例
@@ -1880,9 +1880,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{us
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users/user1'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users/user1'
 ```
 
 ##### 响应示例
@@ -1959,9 +1959,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' -d '{
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
    "usernames": [
      "user3","user4"
    ]
@@ -2041,9 +2041,9 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users/user1'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users/user1'
 ```
 
 ##### 响应示例
@@ -2114,9 +2114,9 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users/user1%2Cuser2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users/user1%2Cuser2'
 ```
 
 ##### 响应示例
@@ -2192,9 +2192,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/white/users'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/white/users'
 ```
 
 ##### 响应示例
@@ -2263,9 +2263,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/white/users/{username}'
+curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/white/users/{username}'
 ```
 
 ##### 响应示例
@@ -2340,9 +2340,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' -d '{"usernames" : ["user1"]}' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/white/users'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{"usernames" : ["user1"]}' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/white/users'
 ```
 
 ##### 响应示例
@@ -2417,9 +2417,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{u
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken>' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/white/users/{username}'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/white/users/{username}'
 ```
 
 ##### 响应示例
@@ -2495,9 +2495,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -H 'Authorization: Bearer <YourToken> '
+curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -2567,9 +2567,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -d '{"usernames":["user1"], "mute_duration":86400000}' -H 'Authorization: Bearer <YourToken> '
+curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -d '{"usernames":["user1"], "mute_duration":86400000}' -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -2640,9 +2640,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/ban'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/ban'
 ```
 
 ##### 响应示例
@@ -2707,9 +2707,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE http://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute/user1  -H 'Authorization: Bearer <YourToken> '
+curl -X DELETE http://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute/user1  -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -2772,9 +2772,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/ban'
+curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatgroups/{groupid}/ban'
 ```
 
 ##### 响应示例
@@ -2848,9 +2848,9 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourToken> '
+curl -X GET http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -2927,9 +2927,9 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/threads/user/test4 -H 'Authorization: Bearer <YourToken> '
+curl -X GET http://XXXX/XXXX/XXXX/threads/user/test4 -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -3011,9 +3011,9 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/threads/chatgroups/XXXX/user/XXXX -H 'Authorization: Bearer <YourToken> '
+curl -X GET http://XXXX/XXXX/XXXX/threads/chatgroups/XXXX/user/XXXX -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -3090,9 +3090,9 @@ POST https://{host}/{org_name}/{app_name}/thread
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourToken> ' -d '{
+curl -X POST http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken> ' -d '{
     "group_id": 179800091197441,
     "name": "1",
     "owner": "test4",
@@ -3165,9 +3165,9 @@ PUT https://{host}/{org_name}/{app_name}/thread/{thread_id}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT http://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <YourToken> ' -d '{"name": "test4"}'
+curl -X PUT http://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <YourAppToken> ' -d '{"name": "test4"}'
 ```
 
 ##### 响应示例
@@ -3229,9 +3229,9 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE http://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <YourToken> '
+curl -X DELETE http://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -3301,9 +3301,9 @@ GET https://{host}/{org_name}/{app_name}/thread/{thread_id}/users?limit={N}&curs
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/thread/1XXXX7/users -H 'Authorization: Bearer <YourToken> '
+curl -X GET http://XXXX/XXXX/XXXX/thread/1XXXX7/users -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -3374,14 +3374,14 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST http://XXXX/XXXX/XXXX/thread/1XXXX7/users -d '{
 "usernames": [
 "test2",
 "test3"
 ]
-}' -H 'Authorization: Bearer <YourToken> '
+}' -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
@@ -3450,9 +3450,9 @@ DELETE https://{host}/{org_name}/{app_name}/threads/{thread_id}/users
 ##### 请求示例
 
 ```shell
-# 将 <YourToken> 替换为你在服务端生成的 Token
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE http://XXXX/XXXX/XXXX/thread/1XXXX7/users -H 'Authorization: Bearer <YourToken> '
+curl -X DELETE http://XXXX/XXXX/XXXX/thread/1XXXX7/users -H 'Authorization: Bearer <YourAppToken> '
 ```
 
 ##### 响应示例
