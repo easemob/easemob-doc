@@ -38,7 +38,7 @@ const conn = new EC.connection({
 
 | 参数       | 类型   | 是否必需 | 描述                               |
 | :--------- | :----- | :------- | :--------------------------------- |
-| `appKey`    | String     | 是      | 在管理后台注册的应用唯一标识。                  |
+| `appKey`    | String     | 是      | 环信即时通讯云控制台为你的应用生成的唯一标识，由应用名称（`Appname`）和组织名称（`Orgname`）组成。                  |
 | `isHttpDNS`  | Bool  | 否 | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。        |
 | `delivery`         | Bool  | 否    | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。      |
 | `https`      | Bool  | 否  | 是否支持通过 HTTPS 访问即时通讯 IM：<br/> - （默认）`true`：支持 HTTPS 和 HTTP；<br/> -`false`：浏览器根据使用的域名自行判断。     |

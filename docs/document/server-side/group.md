@@ -40,7 +40,7 @@
 | `uuid`       | String    | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
 | `created`      | Long     | 群组创建时间，Unix 时间戳，单位为毫秒。                      |
 | `username`  | String  | 用户 ID。                                                     |
-| `groupname`    | String   | 群组名。                                                     |
+| `groupname`    | String   | 群组名称。                                                     |
 | `nickname`    | String     | 用户昵称。                                                   |
 | `timestamp`   | Long    | Unix 时间戳，单位为毫秒。                                    |
 | `duration`    | Int   | 请求响应时间，单位为毫秒。                                   |
@@ -395,8 +395,6 @@ GET https://{host}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pag
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
 | `pagesize` | String | 否     | 每页获取的群组数量。该参数仅适用于分页获取方法。             |
 | `pagenum`  | String | 否     | 当前页码。该参数仅适用于分页获取方法。                       |
-
-其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1200,7 +1198,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagenum=2&pagesize=2
 
 ### 添加单个群组成员
 
-每次添加一个群成员。若添加的用户已是群成员，添加失败，返回错误。
+每次添加一个群成员。若添加的用户已是群成员，则添加失败，返回错误。
 
 #### HTTP 请求
 
@@ -1231,7 +1229,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 | `data.result`  | Bool | 添加结果：<br/> - `true`：成功。<br/> - `false`：失败。 |
 | `data.groupid` | String | 群组 ID。                                     |
 | `data.action`  | String | 执行的操作。在该响应中，该字段的值为 `add_member`，表示添加群组成员。     |
-| `data.user`    | String  | 被添加的用户 ID。                       |
+| `data.user`    | String  | 添加的用户 ID。                       |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1870,7 +1868,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{us
 | :-------- | :---------------- | :------------------------- |
 | `data.result`  | Bool | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
 | `data.action`  | String | 执行操作。在该响应中，该字段的值为 `add_blocks`，表示将成员添加至群组黑名单。 |
-| `data.user`    | String | 被添加的用户 ID。                                     |
+| `data.user`    | String | 添加的用户 ID。                                     |
 | `data.groupid` | String | 群组 ID。                                             |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -1910,7 +1908,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 批量添加用户至群组黑名单
 
-将多个用户添加至群组黑名单。一次最多可以添加 60 个用户至群组黑名单。群主无法被加入群组的黑名单。
+将多个用户添加至群组黑名单，一次最多可以添加 60 个用户。群主无法被加入群组的黑名单。
 
 用户进入群组黑名单后会收到加入黑名单的回调。黑名单上的用户无法查看该群组的信息，也收不到该群组的消息。
 
@@ -1949,7 +1947,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 | `data.result`  | Bool | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
 | `data.action`  | String  | 执行的操作。在该响应中，该字段的值为 `add_blocks`，表示将群成员加入群组黑名单。   |
 | `data.reason`  | String  | 添加失败的原因。 |
-| `data.user`    | String  | 被添加的用户 ID。         |
+| `data.user`    | String  | 添加的用户 ID。         |
 | `data.groupid` | String  | 群组 ID。         |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -2031,7 +2029,7 @@ DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}
 | :-------- | :------ | :---------------------------------------------------- |
 | `result`  | Bool | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。 |
 | `action`  | String  | 执行的操作。在该响应中，该字段的值为 `remove_blocks`，表示将群成员移出群组黑名单。                                          |
-| `user`    | String  | 被添加的用户 ID。                                     |
+| `user`    | String  | 添加的用户 ID。                                     |
 | `groupid` | String  | 群组 ID。                                             |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -2152,7 +2150,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourToke
 
 ## 管理白名单
 
-环信即时通讯 IM 提供多个接口完成群组白名单管理，包括查看群组白名单中的用户以及将用户添加至或移除白名单等。
+环信即时通讯 IM 提供多个接口实现群组白名单管理，包括查看群组白名单中的用户以及将用户添加至或移除白名单等。
 
 ### 查询群组白名单
 
@@ -2253,7 +2251,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 | :-------- | :---------------------------------------------------- |
 | `data.result`  | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
 | `data.action`  | 执行操作。在该响应中，该字段的值为 `add_user_whitelist`，表示将成员加入群白名单。     |
-| `data.user`    | 被添加的用户 ID。                                     |
+| `data.user`    | 添加的用户 ID。                                     |
 | `data.groupid` | 群组 ID。                                             |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -2329,7 +2327,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 | :-------- | :------ | :---------------------------------------------------- |
 | `data.result`  | Bool | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
 | `data.action`  | String  | 执行的操作。在该响应中，该字段的值为 `add_user_whitelist`，表示将成员加入群白名单。|
-| `data.user`    | String  | 被添加的用户 ID。                                     |
+| `data.user`    | String  | 添加的用户 ID。                                     |
 | `data.groupid` | String  | 群组 ID。                                             |
 | `data.reason`  | String  | 添加失败的原因。                                      |
 
@@ -2679,7 +2677,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 
 | 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
-| `member`   | String | 是     | member1：成员 1 的用户 ID；member2：成员 2 的用户 ID；以此类推。  |
+| `member`   | String | 是     | 解除禁言的成员的用户 ID。member1：成员 1 的用户 ID；member2：成员 2 的用户 ID；以此类推。  |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
