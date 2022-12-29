@@ -51,7 +51,7 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | ------------------------------------------------------------ |
 | `Content-Type`  | String | 是     | 内容类型：`application/json`                                 |
-| `Authorization` | String | 是     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
+| `Authorization` | String | 是     | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
 
 #### 请求 body
 
@@ -129,7 +129,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | ------------------------------------------------------------ |
 | `Content-Type`  | String | 是    | 内容类型：`application/json`                                 |
-| `Authorization` | String | 是     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
+| `Authorization` | String | 是     | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
 
 #### 请求 body
 
@@ -227,7 +227,7 @@ DELETE https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | ------------------------------------------------------------ |
 | `Content-Type`  | String | 是     | 内容类型：`application/json`                                 |
-| `Authorization` | String | 是    | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
+| `Authorization` | String | 是    | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
 
 #### 请求 body
 
@@ -287,7 +287,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | ------------------------------------------------------------ |
 | `Content-Type`  | String | 是    | 内容类型：`application/json`                                 |
-| `Authorization` | String | 是     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
+| `Authorization` | String | 是     | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
 
 #### 请求 body
 

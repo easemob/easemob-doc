@@ -2,7 +2,7 @@
 
 <Toc />
 
-用户关系管理是用来管理用户之间关系的服务，环信即时通讯 IM 支持通过 REST API 管理用户之间的关系。
+环信即时通讯 IM 支持通过 RESTful API 管理用户之间的关系，包括添加和移除联系人以及将用户添加至或移除黑名单。
 
 ## 前提条件
 
@@ -15,9 +15,9 @@
 
 环信即时通讯 IM REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
-Authorization：`Bearer ${YourToken}`
+Authorization：`Bearer ${YourAppToken}`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
 ## 公共参数
 
@@ -34,7 +34,7 @@ Authorization：`Bearer ${YourToken}`
 
 | 参数        | 类型      | 描述                                                         |
 | :----------| :------- | :------------------------------------------- |
-| `entities`  | Object    | 响应实体。                                                   |
+| `entities`  | Object    | 响应实体。                     |
 | `data`      | Object  | 实际获取的数据详情。                                         |
 | `uuid`      | String  | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
 | `username`  | String| 用户 ID。                                                     |
@@ -53,9 +53,9 @@ Authorization：`Bearer ${YourToken}`
 
 ## 添加好友
 
-添加好友，好友必须是和自己在一个 App Key 下的用户。
+添加好友，好友必须是和当前用户在一个 App Key 下的用户。
 
-免费版 App Key 下的每个用户的好友数量上限为 1000，不同版本 App Key 上限不同，具体可参考：[版本功能介绍](https://www.easemob.com/pricing/im)。
+对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 1000，不同服务版本的 App Key 的该数量上限不同，具体可参考[版本功能介绍](https://www.easemob.com/pricing/im)。
 
 ### HTTP 请求
 
@@ -67,7 +67,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 
 | 参数              | 类型   | 是否必需 | 描述                                                         |
 | :---------------- | :----- | :------- | :----------------------------------------------------------- |
-| `owner_username`  | String | 是    | 你的用户 ID。                                                 |
+| `owner_username`  | String | 是    | 当前用户的用户 ID。       |
 | `friend_username` | String | 是    | 要添加的用户 ID。                                             |
 
 其他参数及描述详见 [公共参数](#公共参数)。
@@ -88,14 +88,14 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 
 | 字段       | 类型      | 描述                                                         |
 | :---------- | :---------------- | :----------------------------------------------------------- |
-| `entities`     | Object    | 用户详情。                                                   |
-| `entities.uuid`       | String      | 系统内为用户生成的系统内唯一标识，开发者无需关心。           |
-| `entities.type`        | String     | 接口类型，分为 `user` 和 `group` 两种。                          |
+| `entities`     | JSONArray    | 添加的好友的详情。                                                   |
+| `entities.uuid`       | String      | 系统内为好友生成的系统内唯一标识，开发者无需关心。           |
+| `entities.type`        | String     | 对象类型，值为 `user` 或 `group`。                          |
 | `entities.created`       | Long   | 用户创建时间，Unix 时间戳，单位为毫秒。                      |
-| `entities.modified`      | Long  | 用户信息如密码或者昵称等最后修改时间，Unix 时间戳，单位为毫秒。 |
-| `entities.username`   | String   | 被添加的用户 ID。                                             |
-| `entities.activated`   | Bool  | 用户是否被封禁：<br/> • `true` 该用户没有被封禁。<br/> • `false` 该用户已经被封禁。 |
-| `entities.nickname`      | String   | 用户昵称。                                                   |
+| `entities.modified`      | Long  | 好友的用户信息如密码或者昵称等最新修改时间，Unix 时间戳，单位为毫秒。 |
+| `entities.username`   | String   | 添加的好友的用户 ID。                                             |
+| `entities.activated`   | Bool  | 好友是否被封禁：<br/> • `true` 未被封禁。<br/> • `false` 已被封禁。 |
+| `entities.nickname`      | String   | 好友的用户昵称。                                                   |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -171,14 +171,14 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 
 | 字段        | 类型   | 描述                                           |
 | :---------- | :------------ | :--------------------------------------------- |
-| `entities` | Object   | 用户详情。                                                   |
-| `entities.uuid`    | String   | 系统内为用户生成的系统内唯一标识，开发者无需关心。           |
-| `entities.type`         | String    | 接口类型，分为 user 和 group 两种。                          |
+| `entities` | Object   | 被移除的好友的详情。                                                   |
+| `entities.uuid`    | String   | 系统内为好友生成的系统内唯一标识，开发者无需关心。           |
+| `entities.type`         | String    | 对象类型，值为 `user` 或 `group`。                          |
 | `entities.created`     | Long    | 用户创建时间，Unix 时间戳，单位为毫秒。                      |
-| `entities.modified`      | Long   | 用户信息如密码或者昵称等最后修改时间，Unix 时间戳，单位为毫秒。 |
-| `entities.username`     | String    | 被添加的用户 ID。                                             |
-| `entities.activated`      | Bool  | 用户是否被封禁：<br/> • `true` 该用户没有被封禁。<br/> • `false` 该用户已经被封禁。 |
-| `entities.nickname`      | String   | 用户昵称。                                                   |
+| `entities.modified`      | Long   | 好友的用户信息如密码或者昵称等最后修改时间，Unix 时间戳，单位为毫秒。 |
+| `entities.username`     | String    | 被移除好友的用户 ID。                                             |
+| `entities.activated`      | Bool  | 好友是否被封禁：<br/> • `true` 未被封禁。<br/> • `false` 已被封禁。 |
+| `entities.nickname`      | String   | 好友的用户昵称。                                                   |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -254,9 +254,9 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 | 字段      | 类型   | 描述                                 |
 | :-------| :-----| :----------------------------------- |
-| `data`  | Array | “user1”, “user2”，获取到的好友列表。 |
+| `data`  | Array | 获取的好友列表，例如 "user1", "user2"。 |
 | `entities`  | Object | 预留参数。               |
-| `count`  | Int   | 计数，好友数量。                     |
+| `count`  | Int   | 好友数量。                     |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -290,9 +290,9 @@ curl -X GET 'http://XXXX/XXXX/XXXX/users/user1/contacts/users' \
 }
 ```
 
-## 添加黑名单
+## 添加用户至黑名单
 
-向用户的黑名单列表中添加一个或者多个用户，黑名单中的用户无法给该用户发送消息，每个用户的黑名单人数上限为 500。
+向用户的黑名单列表中添加一个或者多个用户，黑名单中的用户无法对该用户发送消息，每个用户的黑名单人数上限为 500。
 
 ### HTTP 请求
 
@@ -302,9 +302,9 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 #### 路径参数
 
-| 参数             | 类型   | 是否必需 | 描述                                                         |
-| :--------------- | :----- | :------- | :----------------------------------------------------------- |
-| `owner_username` | String | 是    | 你的用户 ID。                                                 |
+| 参数             | 类型   | 是否必需 | 描述              |
+| :--------------- | :----- | :------- | :------------------------------ |
+| `owner_username` | String | 是    | 当前用户的用户 ID。           |
 
 其他参数及描述详见[公共参数](#公共参数)。
 
@@ -318,9 +318,9 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 #### 请求 body
 
-| 参数        | 类型       | 是否必需 | 描述                                                         |
-| :---------- | :--------- | :------- | :----------------------------------------------------------- |
-| `usernames` | Array | 是    | [“user1”, “user2”] 需要加入到黑名单中的用户 ID 以数组方式提交。 |
+| 参数        | 类型       | 是否必需 | 描述                 |
+| :---------- | :--------- | :------- | :----------------------------- |
+| `usernames` | Array | 是    | 要加入黑名单的用户 ID，例如 ["user1", "user2"]。 |
 
 ### HTTP 响应
 
@@ -329,8 +329,8 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 字段    | 类型      | 描述                                                         |
-| :------------ | :------------- | :----------------------------------------------------------- |
-| `data`        | Array   | 添加至黑名单的用户 ID。                                       |
+| :------------ | :------------- | :---------------------------------- |
+| `data`        | Array   | 添加至黑名单的用户 ID。         |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -368,9 +368,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-## 获取黑名单
+## 获取黑名单列表
 
-获取黑名单列表。
+获取加入黑名单的用户列表。
 
 ### HTTP 请求
 
@@ -380,8 +380,8 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 #### 路径参数
 
-| 参数             | 类型   | 是否必需 | 描述                                                         |
-| :--------------- | :----- | :------- | :----------------------------------------------------------- |
+| 参数             | 类型   | 是否必需 | 描述      |
+| :--------------- | :----- | :------- | :---------------- |
 | `owner_username` | String | 是    | 当前用户的用户 ID。                     |
 
 其他参数及描述详见[公共参数](#公共参数)。
@@ -401,9 +401,9 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 | 字段       | 类型    | 描述                                   |
 | :---------| :------ | :------------------------------------- |
-| `data` | Array | “user1”, “user2”，获取到的黑名单列表。 |
+| `data` | Array | 获取的黑名单列表，例如 ["user1", "user2"]。 |
 | `entities` | Object | 黑名单用户的详情。                     |
-| `count`    | Int | 计数，好友数量。                       |
+| `count`    | Int | 黑名单上用户的数量。                       |
 
 其他字段及描述详见[公共参数](#公共参数)。
 
@@ -435,7 +435,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-## 移除黑名单
+## 从黑名单中移除用户
 
 从用户的黑名单中移除用户。将用户从黑名单移除后，恢复到好友，或者未添加好友的用户关系。可以正常的进行消息收发。
 
@@ -447,10 +447,10 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 #### 路径参数
 
-| 参数               | 类型   | 是否必需 | 描述                                                         |
-| :----------------- | :----- | :------- | :----------------------------------------------------------- |
+| 参数               | 类型   | 是否必需 | 描述              |
+| :----------------- | :----- | :------- | :------------------------ |
 | `owner_username`   | String | 是    | 当前用户的用户 ID。                 |
-| `blocked_username` | String | 是    | 需移除的黑名单用户 ID。                |
+| `blocked_username` | String | 是    | 要移出黑名单的用户 ID。                |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -469,13 +469,13 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 | 参数           | 类型   | 描述                                                         |
 | :----------- | :------ | :---------------------------------------------- |
-| `entities`       | Object  | 从黑名单中移除的用户的详细信息。                             |
+| `entities`       | JSONArray  | 从黑名单中移除的用户的详细信息。                             |
 | `entities.uuid`        | String     | 用户在系统内的唯一标识。系统自动生成，开发者无需关心。       |
-| `entities.type`          | String   | 接口类型，分为 user 和 group 两种。                          |
+| `entities.type`          | String   | 对象类型，值为 `user` 或 `group`。         |
 | `entities.created`         | Long  | 用户创建时间，Unix 时间戳，单位为毫秒。                      |
-| `entities.modified`       | Long     | 用户信息如密码或者昵称等最后修改时间，Unix 时间戳，单位为毫秒。 |
-| `entities.username`       | String  | 被移出黑名单的用户 ID。                                               |
-| `entities.activated`      | Bool   | 用户是否被封禁：<br/> • `true` 该用户正常。<br/> • `false` 该用户被封禁。 |
+| `entities.modified`       | Long     | 用户信息如密码或昵称等的最新修改时间，Unix 时间戳，单位为毫秒。 |
+| `entities.username`       | String  | 被移出黑名单的用户 ID。         |
+| `entities.activated`      | Bool   | 用户是否为正常状态：<br/> • `true` 该用户为正常状态。<br/> • `false` 该用户为封禁状态。 |
 | `entities.nickname`      | String   | 用户昵称。                                                   |
 
 其他字段及描述详见[公共参数](#公共参数)。
