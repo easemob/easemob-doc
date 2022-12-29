@@ -62,7 +62,7 @@ POST https://{host}/{org_name}/{app_name}/users/{uid}/presence/{resource}/{statu
 | 参数            | 类型   | 是否必需 | 描述                       | 
 | :-------------- | :----- | :------------ | :------- |
 | `Content-Type`  | String | 是    | 内容类型：`application/json`。                               | 
-| `Authorization` | String | 是    | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 
+| `Authorization` | String | 是    | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 
 
 #### 请求体 body
 
@@ -124,7 +124,7 @@ POST https://{host}/{org_name}/{app_name}/users/{uid}/presence/{expiry}
 | 参数            | 类型  | 是否必需 | 描述                  | 
 | :-------------- | :----- | :------------------------- | :------- |
 | `Content-Type`  | String | 是   | 内容类型：`application/json`。                  |
-| `Authorization` | String | 是   | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。      |
+| `Authorization` | String | 是   | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。      |
 
 #### 请求 body
 
@@ -187,7 +187,7 @@ POST https://{host}/{org_name}/{app_name}/users/{uid}/presence
 | 参数            | 类型  | 是否必需 | 描述               |
 | :-------------- | :----- | :----------------- | :------- |
 | `Content-Type`  | String | 是  | 内容类型：`application/json`。         |
-| `Authorization` | String | 是  | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 | 
+| `Authorization` | String | 是  | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 | 
 
 #### 请求 body
 
@@ -263,7 +263,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{uid}/presence
 | 参数            | 类型   | 是否必需 | 描述         | 
 | :-------------- | :----- | :-------------------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型：`application/json`。                                   |
-| `Authorization` | String | 是    | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization` | String | 是    | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
 ### 请求 body
 
 | 参数    | 类型  | 是否必需 | 描述                                                         | 
@@ -323,7 +323,7 @@ GET https://{host}/{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`  | String | 是     | 内容类型：`application/json`。                               |
-| `Authorization` | String | 是     | `Bearer ${token}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
+| `Authorization` | String | 是     | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 App Token 的值。 |
 
 ### HTTP 响应
 
