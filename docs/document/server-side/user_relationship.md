@@ -476,7 +476,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 | `entities.modified`       | Long     | 用户信息如密码或昵称等的最新修改时间，Unix 时间戳，单位为毫秒。 |
 | `entities.username`       | String  | 被移出黑名单的用户 ID。         |
 | `entities.activated`      | Bool   | 用户是否为正常状态：<br/> • `true` 该用户为正常状态。<br/> • `false` 该用户为封禁状态。 |
-| `entities.nickname`      | String   | 用户昵称。                                                   |
+| `entities.nickname`      | String   | 被移出黑名单的用户的昵称。               |
 
 其他字段及描述详见[公共参数](#公共参数)。
 

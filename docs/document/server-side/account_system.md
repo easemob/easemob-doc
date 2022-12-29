@@ -156,7 +156,7 @@ POST https://{host}/{org_name}/{app_name}/users
 
 | 参数       | 类型   | 是否必需 | 描述  |
 | :--------- | :----- | :------- | :---------------------------- |
-| `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
+| `username` | String | 是       | 用户 ID，长度不可超过 64 字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
 | `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。          |
 | `nickname` | String | 否       | 推送消息时，在消息推送通知栏内显示的用户昵称，并非用户个人信息的昵称。长度不可超过 100 个字符。支持以下字符集：<br/> -  26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。     |
 
@@ -920,6 +920,7 @@ POST https://{host}/{org_name}/{app_name}/users/batch/status
 
 | 字段            | 类型   | 描述                 |
 | :-------------- | :----- | :------------------------------------- |
+| `action` | String | 执行的操作。在该响应中，该参数的值为 `get batch user status`，表示批量获取用户在线状态。 |
 | `data` | JSONArray | 查询的用户的在线状态，数据格式为："用户 ID": "当前在线状态"，例如，user1 的在线和离线状态分别为 "user1": "online" 和 "user1": "offline"。 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -1389,6 +1390,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 
 | 参数       | 类型   | 描述               |
 | :--------- | :----- | :----------------- |
+| `action` | String | 执行的操作。在该响应中，该参数的值为 `Deactivate user`，表示对账号进行封禁。 |
 | `entities.username` | String | 被封禁的用户 ID。  |
 | `entities.nickname` | String | 被封禁的用户昵称。 |
 
@@ -1441,10 +1443,10 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                        |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------ |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                         |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                         |
+| 参数            | 类型   | 是否必需 | 描述               |
+| :-------------- | :----- | :------- | :----------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。        |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                 |
 | `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### HTTP 响应
@@ -1455,7 +1457,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 
 | 字段     | 类型   | 描述                                     |
 | :------- | :----- | :--------------------------------------- |
-| `action` | String | 执行的操作。账号解禁为 `activate user`。 |
+| `action` | String | 执行的操作。在该响应中，该参数的值为 `activate user`，表示对账号进行解禁。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -1496,9 +1498,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                        |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------ |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                         |
+| 参数            | 类型   | 是否必需 | 描述            |
+| :-------------- | :----- | :------- | :-------------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。         |
 | `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### HTTP 响应
@@ -1507,8 +1509,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     | 类型 | 描述                                                            |
-| :------- | :--- | :-------------------------------------------------------------- |
+| 字段     | 类型 | 描述                          |
+| :------- | :--- | :--------------------- |
 | `data.result` | Bool | 用户是否已被强制下线：<br/> - `true`：是；<br/> - `false`：否。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
