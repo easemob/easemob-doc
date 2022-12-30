@@ -4,14 +4,6 @@
 
 本文展示如何调用环信即时通讯 RESTful API 实现用户体系建立和管理，包括用户注册、获取、修改、删除、封禁、解禁、强制下线等。
 
-## 前提条件
-
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
-
-- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 已从服务端获取 app token，详见 [使用环信 app token 鉴权](easemob_app_token.html)。
-- 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
-
 ## 公共参数
 
 以下表格列举了环信 IM 的 RESTful 接口的公共请求参数和响应参数：
@@ -44,6 +36,14 @@
 | `data`               | JSON   | 实际获取的数据详情。  |
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                      |
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。                             |
+
+## 前提条件
+
+要调用环信即时通讯 RESTful API，请确保满足以下要求：
+
+- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 已从服务端获取 app token，详见 [使用环信 app token 鉴权](easemob_app_token.html)。
+- 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
 

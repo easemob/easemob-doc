@@ -88,13 +88,13 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 
 | 字段       | 类型      | 描述                                                         |
 | :---------- | :---------------- | :----------------------------------------------------------- |
-| `entities`     | JSONArray    | 添加的好友的详情。                                                   |
+| `entities`     | JSON Array    | 添加的好友的详情。                                                   |
 | `entities.uuid`       | String      | 系统内为好友生成的系统内唯一标识，开发者无需关心。           |
 | `entities.type`        | String     | 对象类型，值为 `user` 或 `group`。                          |
 | `entities.created`       | Long   | 用户创建时间，Unix 时间戳，单位为毫秒。                      |
 | `entities.modified`      | Long  | 好友的用户信息如密码或者昵称等最新修改时间，Unix 时间戳，单位为毫秒。 |
 | `entities.username`   | String   | 添加的好友的用户 ID。                                             |
-| `entities.activated`   | Bool  | 好友是否被封禁：<br/> • `true` 未被封禁。<br/> • `false` 已被封禁。 |
+| `entities.activated`   | Bool  | 好友是否为正常状态：<br/> • `true` 正常状态。<br/> • `false` 已被封禁。 |
 | `entities.nickname`      | String   | 好友的用户昵称。                                                   |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -171,7 +171,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 
 | 字段        | 类型   | 描述                                           |
 | :---------- | :------------ | :--------------------------------------------- |
-| `entities` | Object   | 被移除的好友的详情。                                                   |
+| `entities` | JSON Array   | 被移除的好友的详情。                                                   |
 | `entities.uuid`    | String   | 系统内为好友生成的系统内唯一标识，开发者无需关心。           |
 | `entities.type`         | String    | 对象类型，值为 `user` 或 `group`。                          |
 | `entities.created`     | Long    | 用户创建时间，Unix 时间戳，单位为毫秒。                      |
@@ -469,7 +469,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 | 参数           | 类型   | 描述                                                         |
 | :----------- | :------ | :---------------------------------------------- |
-| `entities`       | JSONArray  | 从黑名单中移除的用户的详细信息。                             |
+| `entities`       | JSON Array  | 从黑名单中移除的用户的详细信息。                             |
 | `entities.uuid`        | String     | 用户在系统内的唯一标识。系统自动生成，开发者无需关心。       |
 | `entities.type`          | String   | 对象类型，值为 `user` 或 `group`。         |
 | `entities.created`         | Long  | 用户创建时间，Unix 时间戳，单位为毫秒。                      |

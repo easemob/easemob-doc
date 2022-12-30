@@ -8,6 +8,13 @@
 仅聊天室超级管理员具有在客户端创建聊天室的权限。
 :::
 
+## 前提条件
+
+要调用环信即时通讯 RESTful API，请确保满足以下要求：
+
+- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](limitationapi.html)。
+
 ## 聊天室成员角色
 
 | 成员角色     | 描述           | 管理权限                 |
@@ -54,13 +61,6 @@
 | `member`             | String | 聊天室成员的用户 ID，包括聊天室管理员和普通成员的用户 ID。例如：{“member”:”xc6xrnbzci”}。        |
 | `timestamp`          |  Long  | HTTP 响应的 Unix 时间戳，单位为毫秒。                            |
 | `duration`           |  Long  | 从发送 HTTP 请求到响应的时长，单位为毫秒。                       |
-
-## 前提条件
-
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
-
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
