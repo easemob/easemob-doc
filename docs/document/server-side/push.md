@@ -2,10 +2,10 @@
 
 <Toc />
 
-本文展示如何调用环信即时通讯 RESTful API 实现离线推送，包括设置离线推送通知显示的昵称、推送通知方式及免打扰模式。调用以下方法前，请先参考 [限制条件](limitationapi.html) 了解即时通讯 RESTful API 的调用频率限制。
+本文展示如何调用环信即时通讯 RESTful API 实现离线推送，包括设置离线推送通知显示的昵称、推送通知方式及免打扰模式。调用以下方法前，请先参考 [接口频率限制](limitationapi.html) 了解即时通讯 RESTful API 的调用频率限制。
 
 :::tip
-若要使用离线推送的高级功能，包括设置推送通知模式、免打扰模式和自定义推送模板，你需要在[环信即时通讯云控制后台](https://console.easemob.com/user/login)中点击你的应用后选择 **即时通讯** > **功能配置** > **功能配置总览** 开通。
+若要使用离线推送的高级功能，即设置推送通知模式、免打扰模式和自定义推送模板，你需要在[环信即时通讯云控制后台](https://console.easemob.com/user/login)中点击你的应用后选择 **即时通讯** > **功能配置** > **功能配置总览** 开通离线推送高级功能。
 :::
 
 ## 公共参数
@@ -31,7 +31,7 @@
 | `uri` | String | 请求 URL。                                 |
 | `timestamp`| Long  | HTTP 响应的 Unix 时间戳，单位为毫秒。                              |
 | `applicationName`| String  | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。                           |
-| `duration` | Int | 请求耗时，单位为毫秒。                              |
+| `duration` | Int | 从发送 HTTP 请求到响应的时长，单位为毫秒。                              |
 | `data` | String | 返回数据详情。                              |
 | `username` | String | 环信用户 ID。                                 |
 | `uuid`   | String   | 用户的 UUID，即系统为用户生成唯一标识字段，开发者无需关注。      |
@@ -85,7 +85,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 | `type`    | String  | 用户类型，即 “user”。              |
 | `created`   | Long   | 用户创建时间戳。                       |
 | `modified`   | Long   | 用户信息修改时戳。                    |
-| `activated`   | Bool    | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用 [解禁接口](account_system.html#账号解禁) 解除封禁，才能正常登录。 |
+| `activated`   | Bool    | 用户是否为正常状态：<br/> - `true`：正常状态。<br/> - `false`：封禁状态。如要使用已被封禁的用户账户，你需要调用 [解禁接口](account_system.html#账号解禁) 解除封禁，才能正常登录。 |
 |  `nickname`     | String  | 收到离线推送通知时显示的昵称。     |
 
 其他参数及说明详见 [公共参数](#公共参数)。
