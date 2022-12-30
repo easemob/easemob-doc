@@ -34,18 +34,17 @@
  - `MaxUserCount`：群允许加入的最大成员数。
  - `Ext`：群组扩展信息。
  - `IsDisabled`·`：群组是否禁用。         
-6. `IGroupManagerDelegate` 类中调整部分回调:
               
 #### 优化
 
 1. 命名空间由 ChatSDK 改为了 AgoraChat。
 2. 各方法中的 `handle` 参数重命名为 `callback`。
 3. 移除了 `pushmanager` 类。
-4. `UserInfo` 类中的字段名均改成首字母大写。
+4. `UserInfo` 类中的字段名均改为首字母大写。
 5. `Message` 类中的 `AttributeValue` 子类移除了几种类型。
 6. `OnDisconnected` 方法中移除整型参数 `i`。
 7. 以下方法的返回结果进行了调整：
- - `importmessage` 返回结果由直接返回变成了异步回调。
+ - `importmessage` 返回结果由直接返回调整为异步回调。
  - `GetGroupMuteListFromServer` 的返回结果的数据类型由 `List<string>` 调整为 `Dictionary<string, string>`。
  - `FetchRoomMuteList` 的返回结果的数据类型由 `List<string>` 调整为 `Dictionary<string, string>`。
 8. `GroupManager` 类中的以下方法进行了重命名:
