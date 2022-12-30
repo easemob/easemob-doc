@@ -17,7 +17,7 @@
  - `GetChatRoom`：从内存中获取指定聊天室的详情。
  - `UnMuteAllRoomMembers`：解除对所有聊天室成员的禁言。
 
-3.  `IRoomManagerDelegate` 类中新增以下回调方法:
+3. `IRoomManagerDelegate` 类中新增以下回调方法:
  - `OnSpecificationChangedFromRoom`：聊天室信息有更新。
  - `OnAddAllowListMembersFromChatroom`：有成员加入聊天室白名单。
  - `OnRemoveAllowListMembersFromChatroom`：有成员被移出聊天室白名单。
