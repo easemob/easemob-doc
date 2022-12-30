@@ -20,8 +20,8 @@ app 的响应内容不能超过 1,000 个字符。
 | :---------------- | :----- |:------------------------------------------------------------------|
 | `callId`          | String | `callId` 为 `{appkey}_{uuid}` 其中 `uuid` 为随机生成，作为每条回调的唯一标识。              |
 | `eventType`       | String | “chat” 上行消息、“chat_offline” 离线消息。                      |
-| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为 ms。                           |
-| `chat_type`       | String | 会话类型（默认全选）：<br/> - "chat"：单聊回调；<br/> - "groupchat"：群聊回调包含了群组和聊天室的消息回调；<br/> - "notify"：通知回调包含了Thread 和 Reaction 的回调，需要结合 payload 中的 type 字段确定具体类型。 |
+| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                           |
+| `chat_type`       | String | 会话类型（默认全选）：<br/> - "chat"：单聊回调；<br/> - "groupchat"：群聊回调包含了群组和聊天室的消息回调；<br/> - "notify"：通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 type 字段确定具体类型。 |
 | `group_id`        | String | 当 `chat_type` 为 `groupchat` 有此参数，表示回调消息所在的群组或聊天室。                |
 | `from`            | String | 消息的发送方。     |
 | `to`              | String | 消息的接收方。   |

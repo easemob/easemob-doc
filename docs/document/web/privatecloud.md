@@ -1,50 +1,8 @@
 # 私有云 SDK 集成配置
 
-## Web Vue 3 Demo
+## Web Vue 2 Demo
 
-对于 Web Vue Demo，进行私有化配置需在 [Vue 3 源代码](https://github.com/easemob/webim-vue-demo/tree/demo-vue3)中进行修改。
-
-### 修改环境配置
-
-在 `webim-vue-demo/src/IM/initwebsdk.js` 文件中，进行如下修改： 
-
-```javascript
-const DEFAULT_APPKEY = 'easemob#easeim';  	// 私有化的 App Key
-const DEFAULT_URL = '//xxx.xxxxx.com';		// 私有化的 WebSocket 地址
-const DEFAULT_APIURL = '//xxx.xxxxx.com'; 	// 私有化的 RESTful 服务器地址
-```
-
-### 修改登录方式
-
-私有化环境使用用户名和密码登录，因此需在 `webim-vue-demo/src/views/Login/components/LoginInput/index.vue` 文件中取消注释 SDK 登录方式代码。 
-
-```javascript
-/* SDK 登陆的方式 */
-  try {
-    let { accessToken } = await EaseIM.conn.open({
-      user: loginValue.username.toLowerCase(),
-      pwd: loginValue.password.toLowerCase(),
-    });
-    window.localStorage.setItem(`EASEIM_loginUser`, JSON.stringify({ user: loginValue.username, accessToken: accessToken }))
-  } catch (error) {
-    console.log('>>>>登陆失败', error);
-    const { data: { extraInfo } } = error
-    handleSDKErrorNotifi(error.type, extraInfo.errDesc);
-    loginValue.username = '';
-    loginValue.username = '';
-  }
-  finally {
-    buttonLoding.value = false;
-  }
-```
-
-## 其他 Demo 
-
-对于 webim-vue-demo，即 Vue 2 Demo 和 React Demo，需要在对应的 GitHub 地址中进行修改：
-
-- [Vue 2 Demo 源码](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)
-
-- [React Demo 源码](https://github.com/easemob/webim)
+对于 Web Vue Demo，进行私有化配置需在 [Vue 2 Demo 源代码](https://github.com/easemob/webim-vue-demo/releases/tag/1.2.17)中进行修改。
 
 ### 修改环境配置
 
@@ -67,6 +25,37 @@ restServer: '//xxx.xxxxx.com',	// 私有化的 RESTful 服务器地址。对于 
  isHttpDNS：WebIM.config.isHttpDNS，  // 对于私有云，该参数必须为 `false`。
  // 其他配置可酌情添加
 ```
+
+## Web React Demo 
+
+对于 Web React Demo，进行私有化配置需在 [React Demo 源代码](https://github.com/easemob/webim/releases/tag/4.1.12)中进行修改。
+
+修改配置如下：
+
+1. 在 `/demo/src/config/WebIMConfig.js` 中修改配置信息，如下所示：
+
+  ```javascript
+  let config = {
+  	appkey: appkey || 'easemob-demo#zim',
+  	isHttpDNS: false,
+  	restServer: rest.restServer || (window.location.protocol === 'https:' ? 'https:' : 'http:') + '//zq-a1-rest2-hsb.easemob.com',
+  	restServer: rest.restServer || (window.location.protocol === 'https:' ? 'https:' : 'http:') + '//zq-a1-rest2-hsb.easemob.com',
+  	...
+  }
+  ```
+
+2. 在 `/demo/src/config/WebIM.js` 中修改初始化配置，如下所示：
+
+  ```javascript
+  let options = {
+      url: WebIM.config.socketServer,
+      apiUrl: WebIM.config.restServer,
+      ...
+  }
+  ```
+
+  然后，将 `if(WebIM.config.isSandbox)` 判断去掉，只使用 `options` 中配置的地址。 
+
 
 
 

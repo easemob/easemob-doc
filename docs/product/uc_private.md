@@ -2,6 +2,8 @@
 
 <Toc />
 
+[下载私有化 SDK >>](#私有化 SDK 下载)。
+
 环信即时通讯私有化服务是基于 IM 核心技术实现的可私有化部署解决方案。本方案可适配内网物理服务器集群、公有云以及私有云等任意部署环境，提供功能完备、安全可靠、易于扩展的即时通讯平台。整体通讯平台架构主要由三部分组成，分别为客户端、服务端、Web 控制台。
 
  - **客户端**：采用 SDK 形式，对核心通信模块进行封装，提供场景功能接口，覆盖多种平台（包括：Android、iOS、Web、小程序、 Windows/Mac OS、Linux），支持快速集成终端用户应用。
@@ -35,9 +37,9 @@
 
 |SDK|版本号 |下载地址|开发指南|
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
-|Android|[3.9.1](http://docs-im-beta.easemob.com/document/android/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19)|[下载 SDK](https://downloadsdk.easemob.com/downloads/easemob-sdk-3.9.1.zip)    [下载 Demo](https://downloadsdk.easemob.com/downloads/imsdkdemo_android-3.9.1.apk) | [查看](http://docs-im-beta.easemob.com/document/android/privatecloud.html) |
-|Web|[4.0.4](http://docs-im-beta.easemob.com/document/web/releasenote.html#%E7%89%88%E6%9C%AC-v4-0-4-2022-4-19)|[下载 SDK](https://github.com/easemob/websdk/releases/tag/v4.0.4)   [下载 Demo](https://zq-im-management-hsb.easemob.com) | [查看](http://docs-im-beta.easemob.com/document/web/privatecloud.html) |
-|iOS|[3.9.1](http://docs-im-beta.easemob.com/document/ios/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19)|[下载 SDK](https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V3.9.1.zip)    [下载 Demo](https://www.pgyer.com/2XKY) | [查看](http://docs-im-beta.easemob.com/document/ios/privatecloud.html) |
+|Android|[3.9.1](http://docs-im-beta.easemob.com/document/android/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19)|[下载 SDK 及 Demo](https://downloadsdk.easemob.com/downloads/easemob-sdk-3.9.1.zip)    [体验 Demo](https://downloadsdk.easemob.com/downloads/imsdkdemo_android-3.9.1.apk) | [查看](http://docs-im-beta.easemob.com/document/android/privatecloud.html) |
+|Web|[4.0.4](http://docs-im-beta.easemob.com/document/web/releasenote.html#%E7%89%88%E6%9C%AC-v4-0-4-2022-4-19)| • React: [下载 SDK 及 Demo](https://github.com/easemob/webim/releases/tag/4.1.12) [体验 Demo](https://zq-im-management-hsb.easemob.com/) | [查看](http://docs-im-beta.easemob.com/document/web/privatecloud.html) <br/> • Vue: [下载 SDK 及 Demo](https://github.com/easemob/webim-vue-demo/releases/tag/1.2.17) [体验 Demo](https://zq-im-management-hsb.easemob.com/) | [查看](http://docs-im-beta.easemob.com/document/web/privatecloud.html) |
+|iOS|[3.9.1](http://docs-im-beta.easemob.com/document/ios/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19)|[下载 SDK 及 Demo](https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V3.9.1.zip)    [体验 Demo](https://www.pgyer.com/2XKY) | [查看](http://docs-im-beta.easemob.com/document/ios/privatecloud.html) |
 |Windows（C++）|3.9.1|[下载 SDK 及 Demo](https://gitee.com/liyuzhao/im-cpp-demo)  | [查看](https://gitee.com/liyuzhao/im-cpp-demo/tree/master/docs) |
 |Windows（C#）|[1.0.2](http://docs-im-beta.easemob.com/document/windows/releasenote.html#%E7%89%88%E6%9C%AC-v1-0-2-1-2022-06-22)|[下载 SDK](https://downloadsdk.easemob.com/downloads/SDK/WinSDK/agora_chat_sdk.1.0.2-beta.nupkg) | [查看](http://docs-im-beta.easemob.com/document/windows/quickstart.html) |
 |Linux|[3.1.0](https://docs-im.easemob.com/im/linux/releasenote)|[下载 SDK](https://downloadsdk.easemob.com/downloads/linux_IM_SDK_V3.1.0_r1.zip) | [查看](https://docs-im.easemob.com/im/linux/integration) |
