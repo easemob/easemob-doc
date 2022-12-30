@@ -142,7 +142,7 @@ Authorization：`Bearer ${YourAppToken}`
 
 | 名称        | 方法   | 请求           | 描述          |
 | :---------------- | :----- | :----------------- | :-------------------- |
-| 获取 app 中所有的群组（可分页） | GET  | /{org_name}/{app_name}/chatgroups  | 获取应用下全部的群组信息。 |
+| 分页获取 app 中的群组 | GET  | /{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}  | 分页获取应用下的群组信息。 |
 | 获取一个用户参与的所有群组 | GET  | /{app_name}/users/{username}/joined_chatgroups | 根据用户名称获取此用户加入的全部群组。 |
 | 获取群组详情 | GET | /{org_name}/{app_name}/chatgroups/{group_ids} | 根据群组 ID 获取群组的详情。  |
 | 创建一个群组  | POST   | /{org_name}/{app_name}/chatgroups     | 创建一个群组。  |
@@ -183,9 +183,9 @@ Authorization：`Bearer ${YourAppToken}`
 
 [子区管理](group.html#管理子区) 包括子区的创建、获取、修改、删除等。
 
-| 名称                                             | 方法   | 请求                                                         | 描述                                           |
-| :----------------------------------------------- | :----- | :----------------------------------------------------------- | :--------------------------------------------- |
-| 获取 app 中所有的子区（分页获取）                | GET    | /{org_name}/{app_name}/thread                                | 获取应用下全部的子区列表。                     |
+| 名称           | 方法   | 请求               | 描述            |
+| :-------------------- | :----- | :------------------ | :-------------------- |
+| 分页获取 app 中的子区        | GET    | /{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&sort={sort}           | 分页获取应用下的子区列表。                     |
 | 获取一个用户加入的所有子区（分页获取）           | GET    | /{org_name}/{app_name}/threads/user/{username}               | 根据用户 ID 获取用户加入的所有的子区。         |
 | 获取一个用户某个群组下加入的所有子区（分页获取） | GET    | /{org_name}/{app_name}/threads/chatgroups/{group_id}user/{username} | 根据用户 ID 和群组 ID 获取用户加入的所有子区。 |
 | 创建子区                                         | POST   | /{org_name}/{app_name}/thread                                | 创建一个新子区。                               |
@@ -208,7 +208,7 @@ Authorization：`Bearer ${YourAppToken}`
 
 | 名称                    | 方法   | 请求                                                        | 描述                                     |
 | :---------------------- | :----- | :---------------------------------------------------------- | :--------------------------------------- |
-| 获取 app 中所有的聊天室 | GET    | /{org_name}/{app_name}/chatrooms                            | 获取应用下全部的聊天室信息。             |
+| 分页获取 app 中的聊天室 | GET    | /{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}          | 分页获取应用下的聊天室信息。             |
 | 获取用户加入的聊天室    | GET    | /{org_name}/{app_name}/users/{username}/joined_chatrooms    | 根据用户名称获取此用户加入的全部聊天室。 |
 | 获取聊天室详情          | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 根据聊天室 ID 获取此聊天室的详情         |
 | 创建一个聊天室          | POST   | /{org_name}/{app_name}/chatrooms                            | 创建一个新聊天室。                       |

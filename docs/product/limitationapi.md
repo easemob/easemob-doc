@@ -85,8 +85,8 @@
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
-| 获取 app 中所有的群组（可分页）  |  GET     | /{org_name}/{app_name}/chatgroups        | 100 次/秒/App Key                                                 |
-| 获取一个用户参与的所有群组   |  GET         | /{app_name}/users/{username}/joined_chatgroups        | 50 次/秒/App Key                                                  |
+| 分页获取 app 中的群组  |  GET     | /{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}        | 100 次/秒/App Key                                                 |
+| 获取一个用户加入的所有群组   |  GET         | /{org_name}/{app_name}/users/{username}/joined_chatgroups        | 50 次/秒/App Key                                                  |
 | 获取群组详情        |  GET        | /{org_name}/{app_name}/chatgroups/{group_ids}           | 100 次/秒/App Key            |
 | 创建一个群组  |    POST      | /{org_name}/{app_name}/chatgroups                  | 100 次/秒/App Key                                                 |
 | 修改群组信息   |    PUT         | /{org_name}/{app_name}/chatgroups/{group_id}             | 100 次/秒/App Key                                                 |
@@ -130,7 +130,7 @@
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
-| 获取 app 中所有的聊天室  |    GET   | /{org_name}/{app_name}/chatrooms                                 | 50 次/秒/App Key                                                  |
+| 获取 app 中的聊天室  |    GET   | /{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}       | 50 次/秒/App Key                                                  |
 | 获取用户加入的聊天室 |    GET       | /{org_name}/{app_name}/users/{username}/joined_chatrooms         | 50 次/秒/App Key                                                  |
 | 获取聊天室详情     |    GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}                   | 100 次/秒/App Key                                                 |
 | 创建一个聊天室   |    POST   | /{org_name}/{app_name}/chatrooms                                 | 50 次/秒/App Key                                                  |

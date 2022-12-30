@@ -254,19 +254,11 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 获取 App 中所有的群组（可分页）
+### 获取 App 中的群组
 
-获取应用下所有群组的信息。
+分页获取应用下的群组的信息。
 
 #### HTTP 请求
-
-直接获取：
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatgroups
-```
-
-分页获取：
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
@@ -280,8 +272,12 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  |每次期望返回的群组数量。该参数仅在分页获取时为必需。   |
+| `limit`  | Int | 否  |每次期望返回的群组数量。取值范围为 [1,100]，默认值为 `10`。该参数仅在分页获取时为必需。   |
 | `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+
+:::tip
+若请求中均未设置 `limit` 和 `cursor`，环信服务器返回群组列表的第一页中前 10 个群组。
+:::
 
 ##### 请求 header
 
@@ -305,7 +301,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 | `data.last_modified` | String | 最近一次修改的时间戳，单位为毫秒。                           |
 | `data.groupname`     | String | 群组名称。                                                   |
 | `count`         | Int    | 实际获取的群组数量。                                         |
-| `limit`         | Int    | 每次获取的群组数量。取值范围为[1,100]，默认值为 10。 |
+| `limit`         | Int    | 每次获取的群组数量。 |
 | `cursor` | String | 查询游标，指定下次查询的起始位置。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -2799,9 +2795,9 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json'
 
 环信即时通讯 IM 提供多个接口实现子区管理，包括子区的创建、获取、修改和删除等。
 
-### 获取 app 中所有的子区(分页获取)
+### 获取 app 中的子区
 
-获取应用下全部的子区列表。
+分页获取应用下的子区列表。
 
 #### HTTP 请求
 
