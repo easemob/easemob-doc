@@ -52,18 +52,47 @@ Authorization：`Bearer ${YourAppToken}`
 
 在服务端实现用户到用户，用户到群组或用户到聊天室的消息发送与接收。消息类型包括文本、图片、语音、视频、透传以及自定义消息。
 
-| 消息类型                | 描述         |
-| :---------------------- | :--------------------------------------------------- |
-| 文本/透传消息           | 调用发送消息方法，在请求 body 中传入消息内容。      |
-| 图片/语音/视频/文件消息 | 1. 调用 [文件上传方法](#文件上传) 上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。<br/>2. 调用发送消息方法，在请求 body 中传入该 UUID。 |
-
-调用 REST 接口发送消息时，可选的 `from` 字段用于指定发送方。
-
-此外，消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。
+<table>
+<tbody>
+<tr>
+<td width="161">
+<p><strong>消息类型</strong></p>
+</td>
+<td width="189">
+<p><strong>发送方式</strong></p>
+</td>
+<td width="279">
+<p><strong>备注</strong></p>
+</td>
+</tr>
+<tr>
+<td width="161">
+<p>文本/透传消息</p>
+</td>
+<td width="189">
+<p>调用发送消息方法，在请求 body 中传入消息内容。</p>
+</td>
+<td rowspan="2" width="279">
+<p>1.发送消息时，可选的 `from` 字段用于指定发送方。</p>
+<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="http://docs-im-beta.easemob.com/document/ios/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">APNs 自定义显示</a>和 <a href="http://docs-im-beta.easemob.com/document/android/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">Android 推送字段说明</a>。</p>
+</td>
+</tr>
+<tr>
+<td width="161">
+<p>图片/语音/视频/文件消息</p>
+</td>
+<td width="189">
+<p>1. 调用<a href="http://docs-im-beta.easemob.com/document/server-side/message.html#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。2. 调用发送消息方法，在请求 body 中传入该 UUID。</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
 
 :::notice
 在接口调用过程中，请求体若超过 5 KB 会导致 413 错误，需要拆成几个更小的请求体重试。同时，请求体和扩展字段的总长度不能超过 3 KB。
 :::
+
 
 ### 发送单聊消息
 
