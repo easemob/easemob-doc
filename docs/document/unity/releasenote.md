@@ -10,35 +10,30 @@
  - `GetLoggedInDevicesFromServer`：获取指定账号下登录的在线设备列表。
  - `KickDevice`：将指定账号登录的指定设备踢下线。
  - `kickAllDevices`：将指定账号登录的所有设备都踢下线。
-
 2. `RoomManager` 类中新增以下方法： 
  - `FetchAllowListFromServer`：从服务器获取聊天室白名单列表。
  - ` CheckIfInRoomAllowList`：检查当前用户是否在聊天室白名单中。
  - `GetChatRoom`：从内存中获取指定聊天室的详情。
  - `UnMuteAllRoomMembers`：解除对所有聊天室成员的禁言。
-
 3. `IRoomManagerDelegate` 类中新增以下回调方法:
  - `OnSpecificationChangedFromRoom`：聊天室信息有更新。
  - `OnAddAllowListMembersFromChatroom`：有成员加入聊天室白名单。
  - `OnRemoveAllowListMembersFromChatroom`：有成员被移出聊天室白名单。
- - `OnRemoveFromRoomByOffline`：成员因为离线被移出聊天室。
-                
+ - `OnRemoveFromRoomByOffline`：成员因为离线被移出聊天室。              
 4. `IConnectionDelegate` 类中新增以下回调方法：
  - `OnLoggedOtherDevice`：当前登录账号在其它设备登录时会接收到此回调。
- -  `OnRemovedFromServer`：当前登录账号已经被从服务器端删除时会收到该回调。
+ - `OnRemovedFromServer`：当前登录账号已经被从服务器端删除时会收到该回调。
  - `OnForbidByServer`：当前用户账号被禁用时会收到该回调。
  - `OnChangedIMPwd`：当前登录账号因密码被修改被强制退出。
- -  `OnLoginTooManyDevice`：当前登录账号登录设备数过多被强制退出。
+ - `OnLoginTooManyDevice`：当前登录账号登录设备数过多被强制退出。
  - `OnKickedByOtherDevice`：当前登录设备账号被登录其他设备的同账号踢下线。
- -  `OnAuthFailed`：当前登录设备账号因鉴权失败强制退出。
-
+ - `OnAuthFailed`：当前登录设备账号因鉴权失败强制退出。
 5. `Group` 类中新增以下属性：             
  - `IsMemberOnly`：表示群组不能自由加入，需要申请或者被邀请。
  - `IsMemberAllowToInvite`：群组是否允许成员邀请。
  - `MaxUserCount`：群允许加入的最大成员数。
  - `Ext`：群组扩展信息。
- - `IsDisabled`·`：群组是否禁用。
-          
+ - `IsDisabled`·`：群组是否禁用。         
 6. `IGroupManagerDelegate` 类中调整部分回调:
               
 #### 优化
@@ -57,8 +52,7 @@
  - `AddGroupWhiteList` 重命名为 `AddGroupAllowList`。
  - `CheckIfInGroupWhiteList` 重命名为 `CheckIfInGroupAllowList`。
  - `GetGroupWhiteListFromServer` 重命名为 `GetGroupAllowListFromServer`。
- - `RemoveGroupWhiteList` 重命名为 `RemoveGroupAllowList`。
-                
+ - `RemoveGroupWhiteList` 重命名为 `RemoveGroupAllowList`。            
 9. `RoomManager` 类中的以下方法进行了重命名:
  - `AddWhiteListMembers` 重命名为 `AddAllowListMembers`。
  - `RemoveWhiteListMembers` 重命名为 `RemoveAllowListMembers`。                
