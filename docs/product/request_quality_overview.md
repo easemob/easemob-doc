@@ -57,9 +57,9 @@
 
 ### Server API 数据
 
-**Server API 数据** 页面以折线图展示服务器端 REST API 接口调用的请求次数、请求成功率和平均时延数据。
+**Server API 数据** 页面以折线图展示服务器端 RESTful API 接口调用的请求次数、请求成功率和平均时延数据。
 
-Server API 数据包含了一部分 SDK 对 REST API 接口的调用。例如 SDK 端的群组操作通过 REST API 调用，因此也会统计在 Server API 数据里。
+Server API 数据包含了一部分 SDK 对 RESTful API 接口的调用。例如，SDK 端的群组操作通过 RESTful API 调用，因此也统计在 Server API 数据中。
 
 ![](@static/images/console/requestmonitor/serverapidata.png)
 
@@ -68,13 +68,13 @@ Server API 数据包含了一部分 SDK 对 REST API 接口的调用。例如 SD
 
 |指标类型|描述|
 | :----------- | :-------------------------------- |
-|获取 token|通过 REST API 实现获取管理员权限 token 的功能。|
-|用户体系集成|通过 REST API 实现用户的注册、获取、修改、删除等管理功能。|
-|文件上传下载|通过 REST API 实现语音和图片等文件的上传和下载功能。|
-|发送消息|通过 REST API 实现发送消息功能。|
-|群组管理|通过 REST API 实现群组创建、删除等管理功能。|
-|聊天室管理|通过 REST API 实现聊天室创建、删除等管理功能。|
-|用户属性|通过 REST API 实现用户属性设置、删除等管理功能。|
+|获取 token|通过 RESTful API 实现获取管理员权限 token 的功能。|
+|用户体系集成|通过 RESTful API 实现用户的注册、获取、修改、删除等管理功能。|
+|文件上传下载|通过 RESTful API 实现语音和图片等文件的上传和下载功能。|
+|发送消息|通过 RESTful API 实现发送消息功能。|
+|群组管理|通过 RESTful API 实现群组创建、删除等管理功能。|
+|聊天室管理|通过 RESTful API 实现聊天室创建、删除等管理功能。|
+|用户属性|通过 RESTful API 实现用户属性设置、删除等管理功能。|
 
 ### 指标
 
@@ -82,9 +82,10 @@ Server API 数据包含了一部分 SDK 对 REST API 接口的调用。例如 SD
 
 |指标|说明|
 | :----------- | :-------------------------------- |
-|请求次数|服务器端 REST API 的总请求次数。|
-|1s/3s/5s 请求成功率|服务器端 REST API 在 1s/3s/5s 成功的请求次数 ÷ 总请求次数 × 100%。|
-|平均时延|服务器端 REST API 请求的总延时 ÷ 总请求次数。|
+|请求次数|服务器端 RESTful API 的总请求次数。|
+|1s/3s/5s 请求成功率|服务器端 RESTful API 在 1s/3s/5s 成功的请求次数 ÷ 总请求次数 × 100%。|
+|平均时延|服务器端 RESTful API 请求的总延时 ÷ 总请求次数。|
+
 为了更直观的呈现数据，不同指标采用了不同的图表形式，具体说明如下：
 
 |指标|图|
