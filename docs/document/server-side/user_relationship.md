@@ -13,7 +13,7 @@
 
 ## 认证方式
 
-环信即时通讯 IM REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+环信即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 Authorization：`Bearer ${YourAppToken}`
 
@@ -255,7 +255,6 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 | 字段      | 类型   | 描述                                 |
 | :-------| :-----| :----------------------------------- |
 | `data`  | Array | 获取的好友列表，例如 "user1", "user2"。 |
-| `entities`  | Object | 预留参数。               |
 | `count`  | Int   | 好友数量。                     |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -402,7 +401,6 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 | 字段       | 类型    | 描述                                   |
 | :---------| :------ | :------------------------------------- |
 | `data` | Array | 获取的黑名单列表，例如 ["user1", "user2"]。 |
-| `entities` | Object | 黑名单用户的详情。                     |
 | `count`    | Int | 黑名单上用户的数量。                       |
 
 其他字段及描述详见[公共参数](#公共参数)。
@@ -437,8 +435,9 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ## 从黑名单中移除用户
 
-从用户的黑名单中移除用户。将用户从黑名单移除后，恢复到好友，或者未添加好友的用户关系。可以正常的进行消息收发。
-
+从用户的黑名单中移除用户：
+- 将好友从黑名单中移除后，恢复好友关系，可以正常收发消息；
+- 将非好友从黑名单中移除后，恢复到未添加好友的状态。
 ### HTTP 请求
 
 ```http
@@ -471,7 +470,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 | :----------- | :------ | :---------------------------------------------- |
 | `entities`       | JSON Array  | 从黑名单中移除的用户的详细信息。                             |
 | `entities.uuid`        | String     | 用户在系统内的唯一标识。系统自动生成，开发者无需关心。       |
-| `entities.type`          | String   | 对象类型，值为 `user` 或 `group`。         |
+| `entities.type`          | String   | 对象类型，值为 `user`。         |
 | `entities.created`         | Long  | 用户创建时间，Unix 时间戳，单位为毫秒。                      |
 | `entities.modified`       | Long     | 用户信息如密码或昵称等的最新修改时间，Unix 时间戳，单位为毫秒。 |
 | `entities.username`       | String  | 被移出黑名单的用户 ID。         |
