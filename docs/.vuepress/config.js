@@ -121,7 +121,6 @@ module.exports = {
             {
               title: '快速开始',
               children: [
-                { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html' },
                 { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html' },
                 { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html' },
                 { text: '快速开始（不使用 UIKIT）Android', link: '/document/android/quickstart.html' },
