@@ -63,7 +63,7 @@ Server API 数据包含了一部分 SDK 对 RESTful API 接口的调用。例如
 
 ![](@static/images/console/requestmonitor/serverapidata.png)
 
-### 指标类型
+#### 指标类型
 ![](@static/images/console/requestmonitor/serverapiindexdata.png)
 
 |指标类型|描述|
@@ -76,7 +76,7 @@ Server API 数据包含了一部分 SDK 对 RESTful API 接口的调用。例如
 |聊天室管理|通过 RESTful API 实现聊天室创建、删除等管理功能。|
 |用户属性|通过 RESTful API 实现用户属性设置、删除等管理功能。|
 
-### 指标
+#### 指标
 
 ![](@static/images/console/requestmonitor/serverapiindex.png)
 
