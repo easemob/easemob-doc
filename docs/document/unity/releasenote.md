@@ -41,7 +41,7 @@
 2. 各方法中的 `handle` 参数重命名为 `callback`。
 3. 移除了 `pushmanager` 类。
 4. `UserInfo` 类中的字段名均改为首字母大写。
-5. `Message` 类中的 `AttributeValue` 子类移除了几种类型。
+5. `Message` 类中的 `AttributeValue` 子类移除了 `UINT32` 和 `JSONSTRING` 类型。
 6. `OnDisconnected` 方法中移除整型参数 `i`。
 7. 以下方法的返回结果进行了调整：
   - `importmessage` 返回结果由直接返回调整为异步回调。
