@@ -157,6 +157,13 @@ module.exports = {
                 { text: 'GDPR 安全合规', link: 'GDPR.html' },
               ]
             },
+            {
+              title: 'Console 指南',
+              children: [
+                { text: '开通和配置服务', link: 'enable_and_configure_IM.html' },
+                { text: '请求质量概览', link: 'request_quality_overview.html' },
+              ]
+            },
             /* 
             // 子菜单示例
             {
