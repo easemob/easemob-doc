@@ -39,14 +39,14 @@
 ```csharp
 //设置所有用户属性。
 UserInfo userInfo;
-userInfo.userId = currentId;
-userInfo.nickName = "easemob";
-userInfo.avatarUrl = "http://www.easemob.com";
-userInfo.birth = "2000.10.10";
-userInfo.signature = "hello world";
-userInfo.phoneNumber = "13333333333";
-userInfo.email = "123456@qq.com";
-userInfo.gender = 1;
+userInfo.UserId = currentId;
+userInfo.NickName = "easemob";
+userInfo.AvatarUrl = "http://www.easemob.com";
+userInfo.Birth = "2000.10.10";
+userInfo.Signature = "hello world";
+userInfo.PhoneNumber = "13333333333";
+userInfo.Email = "123456@qq.com";
+userInfo.Gender = 1;
 
 SDKClient.Instance.UserInfoManager.UpdateOwnInfo(userInfo, new CallBack(
   onSuccess: () => {
@@ -90,7 +90,7 @@ SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId(idList, type, startId, 
 
 1. 开通第三方文件存储服务。详情可以参考文件储存服务商的文档。
 2. 将头像文件上传至上述第三方文件存储，并获取存储 URL 地址。
-3. 将该 URL 地址传入用户属性的头像字段（avatarurl）。
+3. 将该 URL 地址传入用户属性的头像字段（AvatarUrl）。
 4. 调用 `fetchUserInfoById` 获取头像字段，并在本地 UI 中渲染用户头像。
 
 ### 使用用户属性创建和发送名片
@@ -101,9 +101,9 @@ SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId(idList, type, startId, 
 // 设置自定义消息的 `event` 为 `"userCard"`，并在 `ext` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
 string event = "userCard";
 Dictionary<string, string> adict = new Dictionary<string, string>();
-adict.Add("userId", userInfo.userId);
-adict.Add("nickname", userInfo. nickname);
-adict.Add("avatarUrl", userInfo.avatarUrl);
+adict.Add("UserId", userInfo.UserId);
+adict.Add("Nickname", userInfo.Nickname);
+adict.Add("AvatarUrl", userInfo.AvatarUrl);
 
 // 创建自定义消息。
 Message msg = Message.CreateCustomSendMessage(toChatUsername, event, adict);
