@@ -90,7 +90,7 @@ SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId(idList, type, startId, 
 
 1. 开通第三方文件存储服务。详情可以参考文件储存服务商的文档。
 2. 将头像文件上传至上述第三方文件存储，并获取存储 URL 地址。
-3. 将该 URL 地址传入用户属性的头像字段（AvatarUrl）。
+3. 将该 URL 地址传入用户属性的头像字段（`AvatarUrl`）。
 4. 调用 `fetchUserInfoById` 获取头像字段，并在本地 UI 中渲染用户头像。
 
 ### 使用用户属性创建和发送名片
