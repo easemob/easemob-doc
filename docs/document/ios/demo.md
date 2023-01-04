@@ -10,7 +10,7 @@
 
 3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
-![img](@static/images/demo/android_login.png)
+![img](@static/images/demo/ios_login.png)
 
 ## 代码下载
 
