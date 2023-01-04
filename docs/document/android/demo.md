@@ -6,11 +6,11 @@
 
 1. [下载 Demo](https://www.easemob.com/download/demo)。
 
-2. 输入你的手机号，获取验证码。
+2. 输入你的手机号，获取验证码，然后输入。
 
-3. 输入验证码，选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
+3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
-![img](@static/images/demo/android_demo_login.png)
+![img](@static/images/demo/android_login.png)
 
 ## 代码下载
 

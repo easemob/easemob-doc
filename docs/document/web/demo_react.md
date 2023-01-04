@@ -2,27 +2,15 @@
 
 <Toc />
 
-环信即时通讯 Web 端提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
+环信即时通讯 Web 端提供示例应用可供体验。你可以按以下步骤体验：
 
-1. 在 [环信即时通讯云 IM 管理后台](https://console.easemob.com/user/login) 通过邮箱注册后登录，打开首页。
+1. [登录 Demo](https://webim-h5.easemob.com/#/login)。
 
-   在 **应用列表** 下可以看到默认的 Demo 应用。该 Demo 默认开通全部功能。
+![img](@static/images/demo/web_react_login.png)
 
-![img](@static/images/web/demo_view.png)
+2. 输入你的手机号，获取验证码，然后输入。
 
-2. 选择 **即时通讯** > **服务概览**，在 **设置** 区域中配置 **用户注册模式**。
-
-![img](@static/images/web/3.png)
-
-:::notice
-注册模式包含开放注册和授权注册：
-- 开放注册：通过客户端注册环信账号。该方式只用于测试，在正式环境中不推荐使用。
-- 授权注册：你的应用服务器通过环信提供的 REST API 注册环信账号，然后将 token 保存到你的应用服务器或返回给客户端。
-:::
-
-3. 修改为你的 App Key，即在环信即时通讯管理后台创建应用时即时通讯服务为你生成的 App Key。
-
-在 `/demo/src/config/WebIMConfig.js` 文件中修改为你的 App Key。
+3. 点击 **登录** 登录 Demo。
 
 ## 代码下载
 
