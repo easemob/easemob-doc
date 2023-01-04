@@ -292,11 +292,11 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     {
     }
     // 当前用户的入群申请被拒绝。申请人会收到该回调。例如，用户 B 拒绝用户 A 的入群申请后，用户 A 会收到该回调。
-    public void OnRequestToJoinDeclinedFromGroup(string groupId, string groupName, string decliner, string reason)
+    public void OnRequestToJoinDeclinedFromGroup(string groupId, string reason)
     {
     }
     // 当前用户的入群邀请被接受。邀请人会收到该回调。例如，用户 B 接受了用户 A 的入群邀请，则用户 A 会收到该回调。
-    public void OnInvitationAcceptedFromGroup(string groupId, string invitee, string reason)
+    public void OnInvitationAcceptedFromGroup(string groupId, string invitee)
     {
     }
     // 当前用户的入群申请被拒绝。申请人会收到该回调。例如，用户 B 拒绝用户 A 的入群申请后，用户 A 会收到该回调。
@@ -356,12 +356,12 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     {
     }
     // 有成员添加至群白名单。被添加的成员及群主和群管理员（除操作者外）会收到该回调。
-    public void OnAddWhiteListMembersFromGroup(string groupId, List<string> whiteList)
+    public void OnAddAllowListMembersFromGroup(string groupId, List<string> whiteList)
     {
     }
 
     // 有成员从群白名单中移出。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
-    public void OnRemoveWhiteListMembersFromGroup(string groupId, List<string> whiteList)
+    public void OnRemoveAllowListMembersFromGroup(string groupId, List<string> whiteList)
     {
     }
     // 群成员一键禁言状态变更。群组所有成员（除操作者外）会收到该回调。
