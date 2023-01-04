@@ -123,8 +123,8 @@ conn.registerUser({
 
 目前登录服务器有两种方式：
 
-- 用户 ID + 密码；
-- 用户 ID + token。
+- 用户 ID + 密码
+- 用户 ID + token
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
