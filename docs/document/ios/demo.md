@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信即时通讯 IM Android 端提供示例应用可供体验。
+环信即时通讯 IM iOS 端提供示例应用可供体验。
 
 1. [下载 Demo](https://www.easemob.com/download/demo)。
 
