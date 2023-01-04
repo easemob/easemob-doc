@@ -258,12 +258,12 @@ SDKClient.Instance.GroupManager.UnMuteGroupAllMembers(groupId, new CallBack(
 
 #### 将成员加入群组白名单
 
-仅群主和群管理员可以调用 `AddGroupWhiteList` 方法将指定群成员加入群白名单。白名单用户不受全员禁言的限制，但是如果白名单用户在群禁言列表中，则该用户不能发言。
+仅群主和群管理员可以调用 `AddGroupAllowList` 方法将指定群成员加入群白名单。白名单用户不受全员禁言的限制，但是如果白名单用户在群禁言列表中，则该用户不能发言。
 
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.AddGroupWhiteList(groupId, members, new CallBack(
+SDKClient.Instance.GroupManager.AddGroupAllowList(groupId, members, new CallBack(
     onSuccess: () => {
     },
     onError: (code, desc) =>
@@ -274,12 +274,12 @@ SDKClient.Instance.GroupManager.AddGroupWhiteList(groupId, members, new CallBack
 
 #### 将成员移出群组白名单
 
-仅群主和群管理员可以调用 `RemoveGroupWhiteList` 方法将指定群成员移出群白名单。
+仅群主和群管理员可以调用 `RemoveGroupAllowList` 方法将指定群成员移出群白名单。
 
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.RemoveGroupWhiteList(groupId, members, new CallBack(
+SDKClient.Instance.GroupManager.RemoveGroupAllowList(groupId, members, new CallBack(
     onSuccess: () => {
     },
     onError: (code, desc) =>
@@ -290,11 +290,11 @@ SDKClient.Instance.GroupManager.RemoveGroupWhiteList(groupId, members, new CallB
 
 #### 检查自己是否在白名单中
 
-所有群成员可以调用 `checkIfInGroupWhiteList` 方法检查自己是否在群白名单中，示例代码如下：
+所有群成员可以调用 `CheckIfInGroupAllowList` 方法检查自己是否在群白名单中，示例代码如下：
 
 ```csharp
-public void checkIfInGroupWhiteList(final String groupId, EMValueCallBack<Boolean> callBack)
-SDKClient.Instance.GroupManager.CheckIfInGroupWhiteList(groupId, new ValueCallBack<bool>(
+public void CheckIfInGroupAllowList(final String groupId, EMValueCallBack<Boolean> callBack)
+SDKClient.Instance.GroupManager.CheckIfInGroupAllowList(groupId, new ValueCallBack<bool>(
     onSuccess: (ret) => {
     },
     onError: (code, desc)=> {
@@ -304,12 +304,12 @@ SDKClient.Instance.GroupManager.CheckIfInGroupWhiteList(groupId, new ValueCallBa
 
 #### 获取群组白名单
 
-仅群主和群管理员可以调用 `GetGroupWhiteListFromServer` 方法从服务器获取当前群组的白名单。
+仅群主和群管理员可以调用 `GetGroupAllowListFromServer` 方法从服务器获取当前群组的白名单。
 
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.GetGroupWhiteListFromServer(currentGroupId, handle: new ValueCallBack<List<string>>(
+SDKClient.Instance.GroupManager.GetGroupAllowListFromServer(currentGroupId, handle: new ValueCallBack<List<string>>(
     onSuccess: (list) => {
     },
     onError: (code, desc) =>
