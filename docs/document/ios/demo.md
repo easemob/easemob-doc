@@ -2,33 +2,15 @@
 
 <Toc />
 
-环信即时通讯 iOS 端提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
+环信即时通讯 IM iOS 端提供示例应用可供体验。
 
-1. 在 [环信即时通讯云 IM 管理后台](https://console.easemob.com/user/login) 通过邮箱注册，可以看到默认的 Demo 应用（默认应用是全功能开通的应用）；
+1. [下载 Demo](https://www.easemob.com/download/demo)。
 
-![img](@static/images/android/app-demo.png)
+2. 输入你的手机号，获取验证码，然后输入。
 
-2. 在上图页面 Demo 应用右侧点击 **查看**，选择 **开放注册**；
+3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
-![img](@static/images/android/app-demo-register-type.png)
-
-3. 下载 Demo，点击 **服务器配置**；
-
-![img](@static/images/android/app-demo-config.png)
-
-4. 将 Demo 的 App Key 填入，点击 **保存配置**；
-
-![img](@static/images/android/app-demo-input-appkey.png)
-
-5. 杀死 app；
-6. 重启，然后点击 **注册用户** 进行体验。
-
-:::notice
-注册模式分两种，开放注册和授权注册。只有开放注册时，才可以客户端注册。
-
-- 开放注册是为了测试使用，正式环境中不推荐使用该方式注册环信账号；
-- 授权注册的流程应该是你的应用服务器通过环信提供的 REST API 注册，之后保存到你的应用服务器或返回给客户端。
-:::
+![img](@static/images/demo/ios_login.png)
 
 ## 代码下载
 

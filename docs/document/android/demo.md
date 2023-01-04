@@ -2,30 +2,15 @@
 
 <Toc />
 
-环信即时通讯 Android 端提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
+环信即时通讯 IM Android 端提供示例应用可供体验。
 
-1. 在 [环信即时通讯云 IM 管理后台](https://console.easemob.com/user/login) 通过邮箱注册后登录，打开首页。
+1. [下载 Demo](https://www.easemob.com/download/demo)。
 
-在 **应用列表** 下可以看到默认的 Demo 应用。该 Demo 默认开通全部功能。
+2. 输入你的手机号，获取验证码，然后输入。
 
-![img](@static/images/android/app-demo.png)
+3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
-2. 选择 **即时通讯** > **服务概览**，在 **设置** 区域中配置 **用户注册模式**。
-
-![img](@static/images/android/app-demo-register-type.png)
-
-:::notice
-注册模式包含开放注册和授权注册：
-
-- 开放注册：通过客户端注册环信账号。该方式只用于测试，在正式环境中不推荐使用。
-- 授权注册：你的应用服务器通过环信提供的 REST API 注册环信账号，然后将 token 保存到你的应用服务器或返回给客户端。
-  :::
-
-3. 下载 Demo，注册账号。
-
-![img](@static/images/android/app-demo-config.png)
-
-如果需要使用自己的 App Key，需要修改 [GitHub 中的代码](https://github.com/easemob/chat-android)。
+![img](@static/images/demo/android_login.png)
 
 ## 代码下载
 
