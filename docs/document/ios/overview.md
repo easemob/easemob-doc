@@ -46,11 +46,10 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 ## 用户登录
 
-目前登录服务器支持手动和自动登录。手动登录有三种方式：
+目前登录服务器支持手动和自动登录。手动登录有两种方式：
 
-- 通过 **用户 ID + 密码** 登录；
-- 通过 **用户 ID + token** 登录；
-- 通过 **用户 ID + agoraToken** 登录。
+- 用户 ID + 密码
+- 用户 ID + token
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如每次登录时更新 token 等机制。
@@ -77,15 +76,6 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 // 异步方法 
 [EMClient.sharedClient loginWithUsername:@"username" token:@"token" completion:^(NSString * _Nonnull aUsername, EMError * _Nullable aError) {
         
-}];
-```
-
-**用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般用于同时使用声网和环信产品的情况。token 获取请参考 [使用 token 鉴权](https://docs.agora.io/en/agora-chat/develop/authentication?platform=android)。
-
-```objectivec
-// 异步方法 
-[EMClient.sharedClient loginWithUsername:@"username" agoraToken:@"agoraToken" completion:^(NSString * _Nonnull aUsername, EMError * _Nullable aError) {
-            
 }];
 ```
 

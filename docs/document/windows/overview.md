@@ -75,10 +75,10 @@ SDKClient.Instance.CreateAccount(username, password,
 
 ## 用户登录
 
-目前登录服务器有三种方式：
-- **用户 ID + 密码**；
-- **用户 ID + token**（Windows SDK 暂不支持）；
-- **用户 ID + agoraToken**。
+目前登录服务器有两种方式：
+
+- 用户 ID + 密码
+- 用户 ID + token
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
@@ -111,30 +111,30 @@ SDKClient.Instance.Login(username, password,
     )
 );
 ```
-
-**用户 ID + agoraToken** 是支持声网 token 直接登录的方式。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
 ```csharp
-SDKClient.Instance.LoginWithAgoraToken(username, token, 
+SDKClient.Instance.Login(username, password, true,
     handle: new CallBack(
-    
+
         onSuccess: () =>
         {
-            Debug.Log("LoginWithAgoraToken succeed");
+            Debug.Log("login succeed");
         },
-    
+
         onError: (code, desc) =>
         {
             if (code == 200)
             {
-                Debug.Log($"Already login");
+                Debug.Log("Already login.");;
             }
-            else
+            else 
             {
-                Debug.Log($"Login failed, code:{code}, desc:{desc}");
+                Debug.Log($"login failed, code: {code} ; desc: {desc}");
             }
         }
-    ));
+    )
+);
 ```
 
 ### 自动登录（Windows SDK 暂不支持）
