@@ -121,11 +121,10 @@ conn.registerUser({
 
 ## 用户登录
 
-目前登录服务器有三种方式：
+目前登录服务器有两种方式：
 
 - 用户 ID + 密码；
-- 用户 ID + token；
-- 用户 ID + agoraToken。
+- 用户 ID + token。
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
@@ -163,22 +162,6 @@ conn
   .catch((reason) => {
     console.log("login fail", reason);
   });
-```
-
-**用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般同时使用声网和环信产品时利用该方法登录。token 获取请参考 [使用声网用户权限 token 鉴权](https://docs.agora.io/en/agora-chat/develop/authentication?platform=android)。
-
-```javascript
-conn
-  .open({
-    user: "username",
-    agoraToken: "agoraToken",
-  })
-  .then(() => {
-    console.log("login success");
-  })
-  .catch((reason) => {
-    console.log("login fail", reason);
-	});
 ```
 
 ### 自动登录（Web SDK 暂不支持）

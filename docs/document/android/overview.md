@@ -64,11 +64,10 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 
 ## 用户登录
 
-目前登录服务器支持手动和自动登录。手动登录有三种方式：
+目前登录服务器支持手动和自动登录。手动登录有两种方式：
 
 - 通过 **用户 ID + 密码** 登录；
-- 通过 **用户 ID + token** 登录；
-- 通过 **用户 ID + agoraToken** 登录。
+- 通过 **用户 ID + token** 登录。
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
@@ -99,24 +98,6 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 
 ```java
 EMClient.getInstance().loginWithToken(mAccount, mPassword, new EMCallBack() {
-    // 登录成功回调
-    @Override
-    public void onSuccess() {
-
-    }
-
-    // 登录失败回调，包含错误信息
-    @Override
-    public void onError(int code, String error) {
-
-    }
-});
-```
-
-**用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般用于同时使用声网和环信产品的情况。token 获取请参考 [使用 token 鉴权](https://docs.agora.io/en/agora-chat/develop/authentication?platform=android)。
-
-```java
-EMClient.getInstance().loginWithAgoraToken(mAccount, mPassword, new EMCallBack() {
     // 登录成功回调
     @Override
     public void onSuccess() {

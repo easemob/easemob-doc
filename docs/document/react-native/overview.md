@@ -92,7 +92,9 @@ ChatClient.getInstance()
 
 ## 用户登录
 
-目前登录服务器有三种方式。通过 **用户 ID + 密码** 登录，通过 **用户 ID + token** 登录，还有通过 **用户 ID + agoraToken** 登录。
+目前登录服务器有两种方式：
+- **用户 ID + 密码**；
+- **用户 ID + token**。
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
@@ -118,19 +120,6 @@ ChatClient.getInstance()
 ```typescript
 ChatClient.getInstance()
   .login(username, token, false)
-  .then((value: any) => {
-    console.log(`login success`, value);
-  })
-  .catch((reason: any) => {
-    console.log(`login fail`, reason);
-  });
-```
-
-**用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般同时使用声网和环信产品时使用。token 获取请参考 [使用声网 user token 鉴权](https://docs.agora.io/en/agora-chat/generate_user_tokens?platform=React%20Native)。
-
-```typescript
-ChatClient.getInstance()
-  .loginWithAgoraToken(username, agoraToken)
   .then((value: any) => {
     console.log(`login success`, value);
   })
