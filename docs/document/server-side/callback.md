@@ -75,7 +75,6 @@
 | 参数              | 类型                                                         |
 | :---------------- | :----------------------------------------------------------- |
 | `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。 |
-| `eventType`       | 有两种，`chat_offline` 离线消息，`chat` 上行消息。           |
 | `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。                         |
 | `chat_type`       | `chat` 单聊回调、`groupchat` 群聊回调包含了群组和聊天室的消息回调，默认全选。 |
 | `group_id`        | 回调消息所在的群组。群聊消息回调才有此参数。                 |
@@ -101,7 +100,6 @@
 ```shell
 {
     "callId":"easemob-demo#test_0990a64f-dp01-6c50-8696-cf3b48b20e7e",
-    "eventType":"chat_offline",
     "timestamp":1600060847294,
     "chat_type":"groupchat",
     "group_id":"16934809238921545",
