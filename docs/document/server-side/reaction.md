@@ -318,7 +318,7 @@ https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={msgId}
 | `count`             | Int | 添加该 Reaction 的用户人数。                                 |
 | `state`             | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`：是；<br/> - `false`：否。 |
 | `userList`          | Array  | 追加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。 |
-| `cursor`            | String | 查询游标，指定下次查询的起始位置，类似于数据库 limit 1,5 中 1 的作用，可以理解为页码。 |
+| `cursor`            | String | 查询游标，指定下次查询的起始位置。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
