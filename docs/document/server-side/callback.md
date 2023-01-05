@@ -365,7 +365,7 @@ curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 | `organization` | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。                     |
 | `application`  | String | 你在环信 IM 管理后台注册的 app 唯一标识。                    |
 | `action`       | String | 请求方法。                                                   |
-| `data`         | Bool   | - `success`：成功；<br/> - `failure`：失败。                      |
+| `data`         | Bool   | • `success`：成功；<br/> • `failure`：失败。                      |
 | `duration`     | long   | 请求耗时，单位为毫秒。                                       |
 | `retry`        | Int    | 开发者已经重试补发的次数。考虑到补发也可能失败，服务器会继续存储。最开始是 0。 |
 
