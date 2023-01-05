@@ -74,12 +74,12 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 | 参数                | 类型    | 描述                                                       |
 | :------- | :----- | :--------------------------------------------------- |
-| `requestStatusCode` | String  | 该请求的 code 状态。`OK` 表示操作成功。                     |
+| `requestStatusCode` | String  | 请求状态，`OK` 表示操作成功。                     |
 | `id`                | String  | Reaction ID。                                               |
 | `msgId`             | String  | 消息 ID。                                                   |
 | `msgType`           | String  | 消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊。 |
 | `groupId`           | String  | 群组 ID。该参数在单聊时为 null。                                  |
-| `reaction`          | String  | 表情 ID，必须与客户端一致，与请求参数 `message` 相同。             |
+| `reaction`          | String  | 表情 ID，与客户端一致，与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。             |
 | `createAt`          | Instant | Reaction 的创建时间。                                                  |
 | `updateAt`          | Instant | Reaction 的修改时间。                                                  |
 
@@ -123,12 +123,20 @@ curl -g -X POST 'http://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H 
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}
+GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgIdList={N,M}&msgType={msgType}&groupId={groupId}
 ```
 
 #### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
+
+#### 查询参数
+
+| 参数        | 类型   | 是否必需 | 描述                                                      |
+| :---------- | :----- | :------- | --------------------------------------------------------- |
+| `msgIdList` | Array  | 是     | 需要查询的消息 ID 列表。                                  |
+| `msgType`   | String | 是     | 消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊。            |
+| `groupId`   | String | 否  | 群组 ID。若要拉取群中的 Reaction，需要传当前群组的 ID。 |
 
 #### 请求 header
 
@@ -136,14 +144,6 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 | :-------------- | :----- | :------- | ------------------------------------------------------------ |
 | `Content-Type`  | String | 是    | 内容类型：`application/json`                                 |
 | `Authorization` | String | 是     | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 |
-
-#### 请求 body
-
-| 参数        | 类型   | 是否必需 | 描述                                                      |
-| :---------- | :----- | :------- | --------------------------------------------------------- |
-| `msgIdList` | Array  | 是     | 需要查询的消息 ID 列表。                                  |
-| `msgType`   | String | 是     | 消息的会话类型：单聊为 `chat`，群聊为 `groupchat`。            |
-| `groupId`   | String | 否  | 群组 ID。若要拉取群中的 Reaction，需要传当前群组的 ID。 |
 
 ### HTTP 响应
 
@@ -156,7 +156,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 | `requestStatusCode` | String | 接口相应 code 状态。`OK` 表示操作成功。                      |
 | `msgId`             | String | 消息 ID。                                                    |
 | `reactionId`        | String | Reaction ID。                                                |
-| `reaction`          | String | 表情 ID，与客户端一致。该参数与请求参数中的 `message` 参数相同。              |
+| `reaction`          | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。              |
 | `count`             | Number | 添加该 Reaction 的用户人数。                         |
 | `state`             | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`: 是； <br/> - `false`：否。 |
 | `userList`          | Array  | 追加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。 |
@@ -250,7 +250,7 @@ DELETE https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 | 参数                | 类型   | 描述                                      |
 | ------------------- | ------ | ----------------------------------------- |
-| `requestStatusCode` | String | 接口相应 code 状态。`OK` 表示操作成功。   |
+| `requestStatusCode` | String | 请求状态，`OK` 表示操作成功。   |
 | `timestamp`         | Long   | 请求响应的时间，Unix 时间戳，单位为毫秒。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -281,7 +281,7 @@ curl -g -X DELETE 'http://localhost:8089/easemob-demo/easeim/reaction/user/wz?ms
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail
+https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={msgId}&message={message}&limit={limit}&cursor={cursor}
 ```
 
 #### 路径参数
@@ -312,9 +312,9 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail
 
 | 参数                | 类型   | 描述                                                         |
 | ------------------- | ------ | ------------------------------------------------------------ |
-| `requestStatusCode` | String | 接口相应 code 状态。`OK` 表示操作成功。                      |
+| `requestStatusCode` | String | 请求状态，`OK` 表示操作成功。                      |
 | `reactionId`        | String | Reaction ID。                                                |
-| `reaction`          | String | 表情 ID，与客户端一致。该参数与请求参数中的 `message` 相同。              |
+| `reaction`          | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。              |
 | `count`             | Int | 添加该 Reaction 的用户人数。                                 |
 | `state`             | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`：是；<br/> - `false`：否。 |
 | `userList`          | Array  | 追加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。 |
