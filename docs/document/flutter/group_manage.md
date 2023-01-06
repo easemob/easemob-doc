@@ -136,7 +136,7 @@ try {
 
 群成员可以调用 `EMGroupManager#getGroupWithId` 方法从内存获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
 
-群成员也可以调用 `EMGroupManager#fetchGroupInfoFromServer` 方法从服务器获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群主、群组管理员列表以及群成员列表。
+群成员也可以调用 `EMGroupManager#fetchGroupInfoFromServer` 方法从服务器获取群组详情。返回的结果包括：群组 ID、群组名称、群组描述、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用等信息。另外，若将该方法的 `fetchMembers` 参数设置为 `true`，可获取群成员列表，默认最多包括 200 个成员。
 
 示例代码如下：
 

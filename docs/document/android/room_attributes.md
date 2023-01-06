@@ -37,7 +37,7 @@
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncFetchChatRoomAnnouncement(String, EMValueCallBack)}。
+// 异步方法为 asyncFetchChatRoomAnnouncement(String, EMValueCallBack)。
 String announcement = EMClient.getInstance().chatroomManager().fetchChatRoomAnnouncement(chatRoomId);
 ```
 
@@ -49,7 +49,7 @@ String announcement = EMClient.getInstance().chatroomManager().fetchChatRoomAnno
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncUpdateChatRoomAnnouncement(String, String, EMCallBack)}。
+// 异步方法为 asyncUpdateChatRoomAnnouncement(String, String, EMCallBack)。
 EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, announcement);
 ```
 
@@ -61,7 +61,7 @@ EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, 
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncChangeChatRoomSubject(String, String, EMValueCallBack)}。
+// 异步方法为 asyncChangeChatRoomSubject(String, String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatRoomSubject(chatRoomId, newSubject);
 ```
 
@@ -73,7 +73,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatRoomSub
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncChangeChatroomDescription(String, String, EMValueCallBack)}。
+// 异步方法为 asyncChangeChatroomDescription(String, String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatroomDescription(chatRoomId, newDescription);
 ```
 

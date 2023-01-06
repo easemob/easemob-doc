@@ -45,7 +45,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ```java
 // 添加好友。
-// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncAddContact(String, String, EMCallBack)}。
+// 同步方法，会阻塞当前线程。异步方法为 asyncAddContact(String, String, EMCallBack)。
 EMClient.getInstance().contactManager().addContact(toAddUsername, reason);
 ```
 
@@ -81,10 +81,10 @@ EMClient.getInstance().contactManager().setContactListener(new EMContactListener
 
 ```java
 // 同意好友申请。
-// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncAcceptInvitation(String, EMCallBack)}。
+// 同步方法，会阻塞当前线程。异步方法为 asyncAcceptInvitation(String, EMCallBack)。
 EMClient.getInstance().contactManager().acceptInvitation(username);
 // 拒绝好友申请。
-// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncDeclineInvitation(String, EMCallBack)}。
+// 同步方法，会阻塞当前线程。异步方法为 asyncDeclineInvitation(String, EMCallBack)。
 EMClient.getInstance().contactManager().declineInvitation(username);
 ```
 
@@ -98,7 +98,7 @@ EMClient.getInstance().contactManager().declineInvitation(username);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncDeleteContact(String, EMCallBack)}。
+// 异步方法为 asyncDeleteContact(String, EMCallBack)。
 EMClient.getInstance().contactManager().deleteContact(username);
 ```
 
@@ -116,7 +116,7 @@ EMClient.getInstance().contactManager().deleteContact(username);
 
 ```java
 // 从服务器获取好友列表。
-// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncGetAllContactsFromServer(EMValueCallBack)}。
+// 同步方法，会阻塞当前线程。异步方法为 asyncGetAllContactsFromServer(EMValueCallBack)。
 List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
 // 从本地数据库获取好友列表。
 List<String> usernames = EMClient.getInstance().contactManager().getContactsFromLocal();
@@ -131,7 +131,7 @@ List<String> usernames = EMClient.getInstance().contactManager().getContactsFrom
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见{@link #asyncAddUserToBlackList(String, boolean, EMCallBack)}。
+// 异步方法为 asyncAddUserToBlackList(String, boolean, EMCallBack)。
 EMClient.getInstance().contactManager().addUserToBlackList(username,true);
 ```
 
@@ -141,7 +141,7 @@ EMClient.getInstance().contactManager().addUserToBlackList(username,true);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见{@link #asyncRemoveUserFromBlackList(String, EMCallBack)}。
+// 异步方法为 asyncRemoveUserFromBlackList(String, EMCallBack)。
 EMClient.getInstance().contactManager().removeUserFromBlackList(username);
 ```
 
@@ -153,7 +153,7 @@ EMClient.getInstance().contactManager().removeUserFromBlackList(username);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncGetBlackListFromServer(EMValueCallBack)}。
+// 异步方法为 asyncGetBlackListFromServer(EMValueCallBack)。
 EMClient.getInstance().contactManager().getBlackListFromServer();
 ```
 

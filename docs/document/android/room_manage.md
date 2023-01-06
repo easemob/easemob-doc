@@ -58,7 +58,7 @@ EMChatRoom  chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(s
 
 ```java
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
-// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncFetchPublicChatRoomsFromServer(int, int, EMValueCallBack)}。
+// 同步方法，会阻塞当前线程。异步方法为 asyncFetchPublicChatRoomsFromServer(int, int, EMValueCallBack)。
 EMPageResult<EMChatRoom> chatRooms = EMClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(pageNumber, pageSize);
 
 // 加入聊天室
@@ -83,7 +83,7 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncFetchChatRoomFromServer(String, EMValueCallBack)}。
+// 异步方法为 asyncFetchChatRoomFromServer(String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFromServer(chatRoomId);
 ```
 
@@ -117,7 +117,7 @@ options.setDeleteMessagesAsExitChatRoom(false);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncDestroyChatRoom(String, EMCallBack)}。
+// 异步方法为 asyncDestroyChatRoom(String, EMCallBack)。
 EMClient.getInstance().chatroomManager().destroyChatRoom(chatRoomId);
 ```
 
