@@ -1,8 +1,8 @@
-# 群组管理 REST API
+# 群组管理
 
 <Toc />
 
-环信即时通讯 IM 提供了 REST API 管理 App 中的群组。
+环信即时通讯 IM 提供了 RESTful API 管理 App 中的群组。
 
 单个 App 创建群组数量有限制，而且单个用户可加入群组的数量依据版本而定，详见 [使用限制](limitation.html#群组限制)。
 
@@ -11,7 +11,7 @@
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
 - 已在环信即时通讯 IM 管理后台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
@@ -151,6 +151,138 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
   "duration": 0,
   "organization": "XXXX",
   "applicationName": "testapp"
+}
+```
+
+### 封禁群组
+
+封禁指定的群组。例如，群成员经常在群中发送违规消息，可以调用该 API 对该群进行封禁。群组被封禁后，群中任何成员均无法在群组以及该群组下的子区中发送和接收消息，也无法进行群组和子区管理操作。
+
+群组封禁后，只能通过开发者调用[解禁群组](#解禁群组) API 对该群组解禁。
+
+#### HTTP 请求
+
+```http
+POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
+```
+
+##### 路径参数
+
+参数及描述详见 [公共参数](#公共参数)。
+
+##### 请求 header
+
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段    | 类型      | 描述 |
+|:------|:--------|:--|
+| data.disabled | Bool | 群组是否为禁用状态：<br/> - `true`：群组被禁用；<br/> - `false`：群组为启用状态。 |
+
+其他字段及描述详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatgroups/XXXX/disable' 
+```
+
+##### 响应示例
+
+```json
+{
+    "action": "post",
+    "application": "XXXX",
+    "applicationName": "XXXX",
+    "data": {
+        "disabled": true
+    },
+    "duration": 740,
+    "entities": [],
+    "organization": "XXXX",
+    "properties": {},
+    "timestamp": 1672974260359,
+    "uri": "http://XXXX/XXXX/XXXX/chatgroups/XXXX/disable"
+}
+```
+
+### 解禁群组
+
+解除对指定群组的封禁。群组解禁后，群成员可以在该群组以及该群组下的子区中发送和接收消息并进行群组和子区管理相关操作。
+
+#### HTTP 请求
+
+```http
+POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/enable
+```
+
+##### 路径参数
+
+参数及描述详见 [公共参数](#公共参数)。
+
+##### 请求 header
+
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
+|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段       | 类型   | 描述                  |
+| :-------- | :----- |:--------------------|
+| data.disabled | Bool | 群组是否为禁用状态：<br/> - `true`：群组被禁用；<br/> - `false`：群组为启用状态。 |
+
+其他字段及描述详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatgroups/XXXX/enable' 
+```
+
+##### 响应示例
+
+```json
+{
+    "action": "post",
+    "application": "XXXX",
+    "applicationName": "XXXX",
+    "data": {
+        "disabled": false
+    },
+    "duration": 22,
+    "entities": [],
+    "organization": "XXXX",
+    "properties": {},
+    "timestamp": 1672974668171,
+    "uri": "http://XXXX/XXXX/XXXX/chatgroups/XXXX/enable"
 }
 ```
 
@@ -527,6 +659,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.owner`              | String  | 群主的用户 ID。例如：{“owner”: “user1”}。                    |
 | `data.created`            | Long    | 创建该群组的 Unix 时间戳。    |
 | `data.affiliations_count` | int     | 群组现有成员总数。                                               |
+| `data.disabled`           | Bool | 群组是否为禁用状态：<br/> - `true`：群组被禁用；<br/> - `false`：群组为启用状态。 |
 | `data.mute`        | Bool | 是否处于全员禁言状态。<br/> - `true`：是； <br/> - （默认）`false`：否。       |
 | `data.public`             | Bool | 是否是公开群：<br/> - `true`：公开群；<br/> - `false`：私有群。             |
 | `data.custom`             | String  | 群组扩展信息，例如，可以给群组添加业务相关的标记，不要超过 1,024 字符。 |
@@ -565,6 +698,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
     "custom":"",
     "mute":false,
     "affiliations_count":1,
+    "disabled": false,
     "public":true,
     "permission":"owner",
     }],
