@@ -40,7 +40,7 @@
 示例代码如下：
 
 ```java
-// 异步方法。同步方法见 {@link #fetchConversationsFromServer()}。
+// 异步方法。同步方法为 fetchConversationsFromServer()。
 EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(new EMValueCallBack<Map<String, EMConversation>>() {
     //获取会话成功后的处理逻辑。
     @Override
@@ -60,7 +60,7 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(new EMVal
 你可以调用 `asyncFetchHistoryMessage` 方法从服务器获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
 
 ```java
-// 异步方法。同步方法见 {@link #fetchHistoryMessages(String, EMConversationType, int, String, EMConversation.EMSearchDirection)}。
+// 异步方法。同步方法为 fetchHistoryMessages(String, EMConversationType, int, String, EMConversation.EMSearchDirection)。
 EMClient.getInstance().chatManager().asyncFetchHistoryMessage(
     conversationId,
     conversationType,

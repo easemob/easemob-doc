@@ -38,7 +38,7 @@
 
 ```java
 // 群主或群组管理员添加群组成员
-// 同步方法，会阻塞当前线程。异步方法见 {@link #asyncAddUsersToGroup(String, String[], EMCallBack)}。
+// 同步方法，会阻塞当前线程。异步方法为 asyncAddUsersToGroup(String, String[], EMCallBack)。
 EMClient.getInstance().groupManager().addUsersToGroup(groupId, newmembers);
 ```
 
@@ -46,7 +46,7 @@ EMClient.getInstance().groupManager().addUsersToGroup(groupId, newmembers);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncInviteUser(String, String[], String, EMCallBack)}。
+// 异步方法为 asyncInviteUser(String, String[], String, EMCallBack)}。
 EMClient.getInstance().groupManager().inviteUser(groupId, newmembers, null);
 ```
 
@@ -58,7 +58,7 @@ EMClient.getInstance().groupManager().inviteUser(groupId, newmembers, null);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncRemoveUserFromGroup(String, String, EMCallBack)}。
+// 异步方法为 asyncRemoveUserFromGroup(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 ```
 
@@ -72,7 +72,7 @@ EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncChangeOwner(String, String, EMValueCallBack)}。
+// 异步方法为 asyncChangeOwner(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().changeOwner(groupId, newOwner);
 ```
 
@@ -86,7 +86,7 @@ EMClient.getInstance().groupManager().changeOwner(groupId, newOwner);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncAddGroupAdmin(String, String, EMValueCallBack)}。
+// 异步方法为 asyncAddGroupAdmin(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().addGroupAdmin(groupId, admin);
 ```
 
@@ -100,7 +100,7 @@ EMClient.getInstance().groupManager().addGroupAdmin(groupId, admin);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncRemoveGroupAdmin(String, String, EMValueCallBack)}。
+// 异步方法为 asyncRemoveGroupAdmin(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().removeGroupAdmin(groupId, admin);
 ```
 
@@ -125,7 +125,7 @@ List<String> adminList = group.getAdminList();
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncBlockUser(String, String, EMCallBack)}。
+// 异步方法为 asyncBlockUser(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().blockUser(groupId, username);
 ```
 
@@ -137,7 +137,7 @@ EMClient.getInstance().groupManager().blockUser(groupId, username);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncUnblockUser(String, String, EMCallBack)}。
+// 异步方法为 asyncUnblockUser(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().unblockUser(groupId, username);
 ```
 
@@ -149,7 +149,7 @@ EMClient.getInstance().groupManager().unblockUser(groupId, username);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncGetBlockedUsers(String, EMValueCallBack)}。
+// 异步方法为 asyncGetBlockedUsers(String, EMValueCallBack)。
 EMClient.getInstance().groupManager().getBlockedUsers(groupId);
 ```
 
@@ -163,7 +163,7 @@ EMClient.getInstance().groupManager().getBlockedUsers(groupId);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #aysncMuteGroupMembers(String, List, long, EMValueCallBack)}。
+// 异步方法为 asyncMuteGroupMembers(String, List, long, EMValueCallBack)。
 EMClient.getInstance().groupManager().muteGroupMembers(groupId, muteMembers, duration);
 ```
 
@@ -175,7 +175,7 @@ EMClient.getInstance().groupManager().muteGroupMembers(groupId, muteMembers, dur
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncUnMuteGroupMembers(String, List, EMValueCallBack)}。
+// 异步方法为 asyncUnMuteGroupMembers(String, List, EMValueCallBack)。
 EMClient.getInstance().groupManager().unMuteGroupMembers(String groupId, List<String> members);
 ```
 
@@ -187,7 +187,7 @@ EMClient.getInstance().groupManager().unMuteGroupMembers(String groupId, List<St
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncFetchGroupMuteList(String, int, int, EMValueCallBack)}。
+// 异步方法为 asyncFetchGroupMuteList(String, int, int, EMValueCallBack)。
 EMClient.getInstance().groupManager().fetchGroupMuteList(String groupId, int pageNum, int pageSize);
 ```
 

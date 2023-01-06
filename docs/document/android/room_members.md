@@ -36,7 +36,7 @@
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncFetchChatRoomMembers(String, String, int, EMValueCallBack)}。
+// 异步方法为 asyncFetchChatRoomMembers(String, String, int, EMValueCallBack)。
 public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cursor, int pageSize);
 ```
 
@@ -52,7 +52,7 @@ public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cur
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncRemoveChatRoomMembers(String, List, EMValueCallBack)}。
+// 异步方法为 asyncRemoveChatRoomMembers(String, List, EMValueCallBack)。
 EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, members);
 ```
 
@@ -70,7 +70,7 @@ EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, membe
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncBlockChatroomMembers(String, List, EMValueCallBack)}。
+// 异步方法为 asyncBlockChatroomMembers(String, List, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().blockChatroomMembers(chatRoomId, members);
 ```
 
@@ -82,7 +82,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().blockChatroomMemb
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncBlockChatroomMembers(String, List, EMValueCallBack)}。
+// 异步方法为 asyncBlockChatroomMembers(String, List, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unblockChatRoomMembers(chatRoomId, members);
 ```
 
@@ -94,7 +94,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unblockChatRoomMe
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncFetchChatRoomBlackList(String, int, int, EMValueCallBack)}。
+// 异步方法为 asyncFetchChatRoomBlackList(String, int, int, EMValueCallBack)。
 EMChatRoom chatroom = EMClient.getInstance().chatroomManager().fetchChatRoomBlackList(chatRoomId, pageNum, pageSize);
 ```
 
@@ -182,7 +182,7 @@ EMClient.getInstance().chatroomManager().removeFromChatRoomWhiteList(chatRoomId,
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncMuteChatRoomMembers(String, List, long, EMValueCallBack)}。
+// 异步方法为 asyncMuteChatRoomMembers(String, List, long, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().muteChatRoomMembers(chatRoomId, members, duration);
 ```
 
@@ -198,7 +198,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().muteChatRoomMembe
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncUnMuteChatRoomMembers(String, List, EMValueCallBack)}。
+// 异步方法为 asyncUnMuteChatRoomMembers(String, List, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unMuteChatRoomMembers(chatRoomId, members);
 ```
 
@@ -210,7 +210,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unMuteChatRoomMem
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncFetchChatRoomMuteList(String, int, int, EMValueCallBack)}。
+// 异步方法为 asyncFetchChatRoomMuteList(String, int, int, EMValueCallBack)。
 Map<String, Long> memberMap =  EMClient.getInstance().chatroomManager().fetchChatRoomMuteList(chatRoomId, pageNum, pageSize);
 ```
 
@@ -262,7 +262,7 @@ EMClient.getInstance().chatroomManager().unmuteAllMembers(chatRoomId, new EMValu
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncChangeOwner(String, String, EMValueCallBack)}。
+// 异步方法为 asyncChangeOwner(String, String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeOwner(chatRoomId, newOwner);
 ```
 
@@ -274,7 +274,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeOwner(chatR
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncAddChatRoomAdmin(String, String, EMValueCallBack)}。
+// 异步方法为 asyncAddChatRoomAdmin(String, String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().addChatRoomAdmin(chatRoomId, admin);
 ```
 
@@ -286,7 +286,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().addChatRoomAdmin(
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncRemoveChatRoomAdmin(String, String, EMValueCallBack)}。
+// 异步方法为 asyncRemoveChatRoomAdmin(String, String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().removeChatRoomAdmin(chatRoomId, admin);
 ```
 
