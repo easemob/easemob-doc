@@ -14,10 +14,7 @@ APNs 是苹果官方提供的推送解决方案，主要用于在 app 处于不�
 
 ## 前提条件
 
-1. 使用消息推送前，需要在你的设备开启推送权限，并将推送证书上传到环信即时通讯 IM 管理后台。
-2. 若使用 3.9.2 或以上版本提供的推送高级功能，包括设置推送通知模式、免打扰模式和自定义推送模板，你需要在环信即时通讯云控制后台中激活推送高级功能。
-
-![](@static/images/ios/enable_push_new.png)
+使用消息推送前，需要在你的设备开启推送权限，并将推送证书上传到环信即时通讯 IM 管理后台。
 
 ## 开启推送权限并上传推送证书
 
@@ -160,6 +157,7 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 
 ```
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  // 异步方法
   [EMClient.sharedClient registerForRemoteNotificationsWithDeviceToken:deviceToken completion:^(EMError *aError) {
       if (aError) {
           NSLog(@"bind deviceToken error: %@", aError.errorDescription);
@@ -181,51 +179,62 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 - 设置推送通知，包含设置推送通知方式和免打扰模式。
 - 配置推送翻译和推送模板。
 
-其中，设置推送通知方式、免打扰模式和推送模板为推送的高级功能，使用前需要在环信即时通讯云管理后台上打开开关。
+其中，设置推送通知方式、免打扰模式和推送模板为推送的高级功能，使用前需要在[环信即时通讯云控制后台](https://console.easemob.com/user/login)上开通。
 
 ![image](@static/images/ios/push/push_ios_27_enable_push.png)
 
 #### 4.1 设置推送通知 
 
-为优化用户在处理大量推送通知时的体验，环信 IM 在 app 和会话层面提供了推送通知和免打扰（DND）模式的细粒度选项，如下表所示：
-
-<table>
-  <tr>
-    <th>模式</th>
-    <th>选项</th>
-    <th>App</th>
-    <th>会话</th>
-  </tr>
-  <tr>
-    <td rowspan="3">推送通知方式</td>
-    <td>All：接收所有离线消息的推送通知。</td>
-    <td>✓</td>
-    <td>✓</td>
-  <tr>
-    <td>MentionOnly：仅接收提及消息的推送通知。</td>
-    <td>✓</td>
-    <td>✓</td>
-  </tr>
-  <tr>
-     <td>NONE：不接收离线消息的推送通知。</td>
-    <td>✓</td>
-    <td>✓</td>
-  </tr>
-  <tr>
-    <tr>
-    <td rowspan="2">免打扰模式</td>
-    <td>silentModeDuration：在指定时长内不接收推送通知。</td>
-    <td>✓</td>
-    <td>✓</td>
-  <tr>
-    <td>silentModeStartTime & silentModeEndTime：在指定的时间段内不接收推送通知。</td>
-    <td>✓</td>
-    <td>✗</td>
-  </tr>
-  </tr>
-</table>
+为优化用户在处理大量推送通知时的体验，环信 IM 在 app 和会话层面提供了推送通知方式和免打扰模式的细粒度选项。
 
 **推送通知方式**
+
+<table>
+<tbody>
+<tr>
+<td width="184">
+<p><strong>推送通知方式参数</strong></p>
+</td>
+<td width="420">
+<p><strong>描述</strong></p>
+</td>
+<td width="321">
+<p><strong>应用范围</strong></p>
+</td>
+</tr>
+<tr>
+<td width="184">
+<p>All</p>
+</td>
+<td width="420">
+<p>接收所有离线消息的推送通知。</p>
+</td>
+<td rowspan="3" width="321">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>App 或单聊/群聊会话</p>
+</td>
+</tr>
+<tr>
+<td width="184">
+<p>MentionOnly</p>
+</td>
+<td width="420">
+<p>仅接收提及消息的推送通知。</p>
+<p>该参数推荐在群聊中使用。若提及一个或多个用户，需在创建消息时对 ext 字段传 "em_at_list":["user1", "user2" ...]；若提及所有人，对该字段传 "em_at_list":"all"。</p>
+</td>
+</tr>
+<tr>
+<td width="184">
+<p>NONE</p>
+</td>
+<td width="420">
+<p>不接收离线消息的推送通知。</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
 
 会话级别的推送通知方式设置优先于 app 级别的设置，未设置推送通知方式的会话默认采用 app 的设置。
 
@@ -233,13 +242,22 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 
 **免打扰模式**
 
-1. 你可以在 app 级别指定免打扰时长和免打扰时间段。环信 IM 在这两个时间段内不发送离线推送通知。
+你可以在 app 级别指定免打扰时间段和免打扰时长，环信 IM 在这两个时间段内不发送离线推送通知。若既设置了免打扰时间段，又设置了免打扰时长，免打扰模式的生效时间为这两个时间段的累加。
 
-2. 会话仅支持免打扰时长设置；免打扰时间段的设置不生效。
+免打扰时间参数的说明如下表所示：
 
-对于 app 和 app 中的所有会话，免打扰模式的设置优先于推送通知方式的设置。
+| 免打扰时间参数     |  描述   |   应用范围 |
+| :--------| :----- | :----------------------------------------------------------- |
+| EMSilentModeParamTypeInterval | 免打扰时间段，精确到分钟，格式为 HH:MM-HH:MM，例如 08:30-10:00。该时间为 24 小时制，免打扰时间段的开始时间和结束时间中的小时数和分钟数的取值范围分别为 [00,23] 和 [00,59]。免打扰时间段的设置说明如下：<br/> - 开始时间和结束时间的设置立即生效，免打扰模式每天定时触发。例如，开始时间为 `08:00`，结束时间为 `10:00`，免打扰模式在每天的 8:00-10:00 内生效。若你在 11:00 设置开始时间为 `08:00`，结束时间为 `12:00`，则免打扰模式在当天的 11:00-12:00 生效，以后每天均在 8:00-12:00 生效。<br/> - 若开始时间和结束时间相同，免打扰模式则全天生效。<br/> - 若结束时间早于开始时间，则免打扰模式在每天的开始时间到次日的结束时间内生效。例如，开始时间为 `10:00`，结束时间为 `08:00`，则免打扰模式的在当天的 10:00 到次日的 8:00 生效。<br/> - 目前仅支持在每天的一个指定时间段内开启免打扰模式，不支持多个免打扰时间段，新的设置会覆盖之前的设置。<br/> - 若不设置该参数，传空字符串。 | 仅用于 app 级别，对单聊或群聊会话不生效。 |
+| EMSilentModeParamTypeDuration |  免打扰时长，单位为毫秒。免打扰时长的取值范围为 [0,604800000]，`0` 表示该参数无效，`604800000` 表示免打扰模式持续 7 天。<br/> 与免打扰时间段的设置长久有效不同，该参数为一次有效。    | App 或单聊/群聊会话。  |
 
-例如，假设在 app 级别指定了免打扰时间段，并将指定会话的推送通知方式设置为 `All`。免打扰模式与推送通知方式的设置无关，即在指定的免打扰时间段内，你不会收到任何推送通知。
+:::tip
+若在免打扰时段或时长生效期间需要对指定用户推送消息，需设置[强制推送](#强制推送)。
+:::
+
+**推送通知方式与免打扰时间设置之间的关系**
+
+对于 app 和 app 中的所有会话，免打扰模式的设置优先于推送通知方式的设置。例如，假设在 app 级别指定了免打扰时间段，并将指定会话的推送通知方式设置为 `All`。免打扰模式与推送通知方式的设置无关，即在指定的免打扰时间段内，你不会收到任何推送通知。
 
 或者，假设为会话指定了免打扰时间段，而 app 没有任何免打扰设置，并且其推送通知方式设置为 `All`。在指定的免打扰时间段内，你不会收到来自该会话的任何推送通知，而所有其他会话的推送保持不变。
 
@@ -253,6 +271,7 @@ EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentM
 param.remindType = EMPushRemindTypeMentionOnly;
 
 //设置 app 的离线推送免打扰模式。
+// 异步方法
 [[EMClient sharedClient].pushManager setSilentModeForAll:param completion:^(EMSilentModeResult *aResult, EMError *aError) {
         if (aError) {
             NSLog(@"setSilentModeForAll error---%@",aError.errorDescription);
@@ -274,6 +293,7 @@ param.silentModeEndTime = [[EMSilentModeTime alloc]initWithHours:15 minutes:0];
 你可以调用 `getSilentModeForAll` 获取 app 级别的推送通知设置，如以下代码示例所示：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].pushManager getSilentModeForAllWithCompletion:^(EMSilentModeResult *aResult, EMError *aError) {
     if (!aError) {
         //获取 app 的推送通知方式。
@@ -303,6 +323,7 @@ EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentM
 param.silentModeDuration = 15;
                                 
 EMConversationType conversationType = EMConversationTypeGroupChat;
+// 异步方法
 [[EMClient sharedClient].pushManager setSilentModeForConversation:@"conversationId" conversationType:conversationType params:param completion:^(EMSilentModeResult *aResult, EMError *aError) {
     if (aError) {
         NSLog(@"setSilentModeForConversation error---%@",aError.errorDescription);
@@ -315,6 +336,7 @@ EMConversationType conversationType = EMConversationTypeGroupChat;
 你可以调用 `getSilentModeForAllWithCompletion` 获取指定会话的推送通知设置，如以下代码示例所示：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].pushManager getSilentModeForAllWithCompletion:^(EMSilentModeResult *aResult, EMError *aError) {
     if (!aError) {
         //获取会话的推送通知方式。
@@ -341,6 +363,7 @@ EMConversationType conversationType = EMConversationTypeGroupChat;
 
 ```objectivec
 NSArray *conversations = @[conversation1,conversation2];
+// 异步方法
     [[EMClient sharedClient].pushManager getSilentModeForConversations:conversationArray completion:^(NSDictionary<NSString*,EMSilentModeResult*>*aResult, EMError *aError) {
         if (aError) {
             NSLog(@"getSilentModeForConversations error---%@",aError.errorDescription);
@@ -356,6 +379,7 @@ NSArray *conversations = @[conversation1,conversation2];
 
 ```objectivec
 //清除指定会话的推送通知方式的设置。清除后，该会话会采取 app 的设置。
+// 异步方法
 [[EMClient sharedClient].pushManager clearRemindTypeForConversation:@"" conversationType:conversationType completion:^(EMSilentModeResult *aResult, EMError *aError) {
     if (aError) {
         NSLog(@"clearRemindTypeForConversation error---%@",aError.errorDescription);
@@ -370,9 +394,9 @@ NSArray *conversations = @[conversation1,conversation2];
 你可以调用 `updatePushDisplayName` 设置推送通知中显示的昵称，如以下代码示例所示：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.pushManager updatePushDisplayName:@"displayName" completion:^(NSString * aDisplayName, EMError * aError) {
-    if (aError) 
-    {
+    if (aError) {
         NSLog(@"update push display name error: %@", aError.errorDescription);
     }
 }];
@@ -381,10 +405,10 @@ NSArray *conversations = @[conversation1,conversation2];
 你也可以调用 `updatePushDisplayStyle` 设置推送通知的显示样式，如下代码示例所示：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.pushManager updatePushDisplayStyle:EMPushDisplayStyleSimpleBanner completion:^(EMError * aError)
 {
-    if(aError)
-    {
+    if (aError) {
         NSLog(@"update display style error --- %@", aError.errorDescription);
     }
 }];
@@ -402,10 +426,10 @@ NSArray *conversations = @[conversation1,conversation2];
 你可以调用 `getPushNotificationOptionsFromServerWithCompletion` 获取推送通知中的显示属性，如以下代码示例所示：
 
 ```objectivec
+// 异步方法
 [EMClient.sharedClient.pushManager getPushNotificationOptionsFromServerWithCompletion:^(EMPushOptions * aOptions, EMError * aError)
 {
-    if (aError)
-    {
+    if (aError) {
         NSLog(@"get push options error --- %@", aError.errorDescription);
     }
 }];
@@ -418,7 +442,7 @@ NSArray *conversations = @[conversation1,conversation2];
 | `displayName`        | 对方收到推送时发送方展示的名称。                             |
 | `displayStyle`       | 推送显示类型。                                               |
 
-### 4.3 设置推送翻译
+#### 4.3 设置推送翻译
 
 如果用户启用 [自动翻译](message_translation.html) 功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
 
@@ -428,6 +452,7 @@ NSArray *conversations = @[conversation1,conversation2];
 
 ```objectivec
 //设置离线推送的首选语言。
+// 异步方法
 [[EMClient sharedClient].pushManager setPreferredNotificationLanguage:@"EU" completion:^(EMError *aError) {
     if (aError) {
         NSLog(@"setPushPerformLanguageCompletion error---%@",aError.errorDescription);

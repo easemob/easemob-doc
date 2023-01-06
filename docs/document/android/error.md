@@ -93,9 +93,11 @@ Android 中错误码的类为 `EMError`。
 | 1101   | PRESENCE_CANNOT_SUBSCRIBE_YOURSELF |                    不能订阅你自己的状态。                    |
 | 1110   |     TRANSLATE_PARAM_INVALID     |                        翻译参数错误。                        |
 | 1111   |  TRANSLATE_SERVICE_NOT_ENABLE   |                       翻译服务未启用。                       |
-| 1112   |      TRANSLATE_USAGE_LIMIT      |                      翻译用量达到上限。                      |
-| 1113   |     TRANSLATE_MESSAGE_FAIL      |                      获取翻译服务失败。                      |
-| 1300   |      REACTION_REACH_LIMIT       |                  Reaction 数量已达到限制。                   |
+| 1112   |      TRANSLATE_USAGE_LIMIT      |                      翻译用量达到上限。     |
+| 1113   |     TRANSLATE_MESSAGE_FAIL      |                      获取翻译服务失败。 |
+| 1200   |     MODERATION_FAILED           | 第三方内容审核服务的消息审核结果为“拒绝”。 |
+| 1299   |     THIRD_SERVER_FAILED         | 除第三方内容审核服务的其他服务的消息审核结果为“拒绝”。 |
+| 1300   |      REACTION_REACH_LIMIT       |                  Reaction 数量已达到限制。      |
 | 1301   |   REACTION_HAS_BEEN_OPERATED    |                     Reaction 重复添加。                      |
 | 1302   |  REACTION_OPERATION_IS_ILLEGAL  | 用户对该 Reaction 没有操作权限。例如没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接受者进行添加 Reaction 操作。 |
 | 1400   |        THREAD_NOT_EXIST         |                        该子区不存在。                        |

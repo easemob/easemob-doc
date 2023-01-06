@@ -7,10 +7,14 @@
 - 文字消息，包含超链接和表情消息。
 - 附件消息，包含图片、语音、视频及文件消息。
 - 位置消息。
-- CMD 消息。
+- 透传消息。
 - 自定义消息。
 
-以及对以上消息进行自定义扩展。
+:::tip
+对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。
+当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
+:::
+
 本文介绍如何使用即时通讯 IM Android SDK 实现发送和接收这些类型的消息。
 
 ## 技术原理
@@ -43,32 +47,40 @@
 
 ### 发送文本消息
 
-1. 首先，利用 `EMMessage` 类构造一个消息。
+1. 首先，利用 `EMMessage` 类构造一条消息。
 
 示例代码：
 
 ```java
 // 创建一条文本消息，`content` 为消息文字内容，`toChatUsername` 为对方用户或者群聊的 ID，后文皆是如此。
 EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
-// 设置消息类型，即设置 `Message` 类的 `ChatType` 属性。该属性的值为 `Chat`、`GroupChat` 和 `ChatRoom`，表明该消息是单聊，群聊或聊天室消息，默认为单聊。若为群聊，设置 `ChatType` 为 `GroupChat`。
+// 设置消息类型，即设置 `Message` 类的 `ChatType` 属性，可设置为 `Chat`、`GroupChat` 和 `ChatRoom`，即单聊，群聊或聊天室消息，默认为单聊。
 message.setChatType(ChatType.GroupChat);
+```
+
+对于聊天室消息，可设置消息优先级。示例代码如下：
+
+```java
+   EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
+   message.setChatType(ChatType.ChatRoom);
+   // 聊天室消息的优先级。如果不设置，默认值为 `PriorityNormal`，即“普通”优先级。
+   message.setPriority(EMChatRoomMessagePriority.PriorityHigh);
+   sendMessage(message);
 ```
 
 2. 通过 `EMChatManager` 将该消息发出。发送消息时可以设置 `EMCallBack` 的实例，获取消息发送状态。
 
 ```java
-// 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+...
 // 发送消息时可以设置 `EMCallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
 message.setMessageStatusCallback(new EMCallBack() {
      @Override
      public void onSuccess() {
-         showToast("发送消息成功");
-          dialog.dismiss();
+         // 发送消息成功
      }
      @Override
      public void onError(int code, String error) {
-         showToast("发送消息失败");
+         // 发送消息失败
      }
      @Override
      public void onProgress(int progress, String status) {
@@ -76,6 +88,7 @@ message.setMessageStatusCallback(new EMCallBack() {
      }
 
  });
+ // 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
@@ -96,7 +109,9 @@ EMMessageListener msgListener = new EMMessageListener() {
 
    }
 };
+// 注册消息监听
 EMClient.getInstance().chatManager().addMessageListener(msgListener);
+// 解注册消息监听
 EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 ```
 
@@ -156,10 +171,11 @@ void onMessageRecalled(List<ChatMessage> messages);
 ```java
 // `voiceUri` 为语音文件的本地资源标志符，`duration` 为语音时长（秒）。
 EMMessage message = EMMessage.createVoiceSendMessage(voiceUri, duration, toChatUsername);
-    // 设置消息类型，即设置 `Message` 类的 `MessageType` 属性。
-    // 该属性的值为 `Chat`、`Group` 和 `Room`，表明该消息是单聊，群聊或聊天室消息，默认为单聊。
-    // 若为群聊，设置 `MessageType` 为 `Group`。
-    message.setChatType(ChatType.GroupChat);
+// 设置消息类型，即设置 `Message` 类的 `MessageType` 属性。
+// 该属性的值为 `Chat`、`Group` 和 `Room`，表明该消息是单聊，群聊或聊天室消息，默认为单聊。
+// 若为群聊，设置 `MessageType` 为 `Group`。
+message.setChatType(ChatType.GroupChat);
+// 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
@@ -173,10 +189,6 @@ String voiceRemoteUrl = voiceBody.getRemoteUrl();
 Uri voiceLocalUri = voiceBody.getLocalUri();
 ```
 
-:::notice
-适配 AndroidQ 及以上手机时，获取本地资源请调用 `voiceBody.getLocalUri()`，相应的 `voiceBody.getLocalUrl()` 方法已经被废弃。
-:::
-
 #### 发送图片消息
 
 图片消息默认会被压缩后发出，可通过设置 `original` 参数为 `true` 发送原图。
@@ -184,11 +196,13 @@ Uri voiceLocalUri = voiceBody.getLocalUri();
 
 ```java
 // `imageUri` 为图片本地资源标志符，`false` 为不发送原图（默认超过 100 KB 的图片会压缩后发给对方），需要发送原图传 `true`。
-EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
+EMMessage message = EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
 if (chatType == CHATTYPE_GROUP)
     message.setChatType(ChatType.GroupChat);
+// 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
+
 // 发送成功后，获取图片消息缩略图及附件。
 EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
 // 从服务器端获取图片文件。
@@ -201,10 +215,6 @@ Uri imgLocalUri = imgBody.getLocalUri();
 Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```
 
-:::notice
-适配 AndroidQ 及以上手机时，获取本地资源请调用 `imgBody.getLocalUri()`，相应的 `imgBody.getLocalUrl()` 方法已经被废弃。
-:::
-
 接收方如果设置了自动下载，即 `EMClient.getInstance().getOptions().getAutodownloadThumbnail()` 为 `true`，SDK 接收到消息后会下载缩略图；如果未设置自动下载，需主动调用 `EMClient.getInstance().chatManager().downloadThumbnail(message`) 下载。
 
 下载完成后，调用相应消息 `body` 的 `thumbnailLocalUri()` 去获取缩略图路径。
@@ -216,7 +226,8 @@ Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```java
 String thumbPath = getThumbPath(videoUri);
 EMMessage message = EMMessage.createVideoSendMessage(videoUri, thumbPath, videoLength, toChatUsername);
-sendMessage(message);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
 接收方收到短视频消息后，SDK 默认会下载该视频消息的缩略图。
@@ -229,7 +240,7 @@ sendMessage(message);
 
 ```java
 /**
- * Downloads the video file.
+ * 下载视频文件。
  */
 private void downloadVideo(final EMMessage message) {
     message.setMessageStatusCallback(new EMCallBack() {
@@ -245,6 +256,7 @@ private void downloadVideo(final EMMessage message) {
         public void onError(final int error, String msg) {
         }
     });
+    // 下载附件
     EMClient.getInstance().chatManager().downloadAttachment(message);
 }
 ```
@@ -267,7 +279,10 @@ Uri localThumbUri = ((EMVideoMessageBody) body).getLocalThumbUri();
 // `fileLocalUri` 为本地资源标志符。
 EMMessage message = EMMessage.createFileSendMessage(fileLocalUri, toChatUsername);
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
-if (chatType == CHATTYPE_GROUP)    message.setChatType(ChatType.GroupChat);EMClient.getInstance().chatManager().sendMessage(message);
+if (chatType == CHATTYPE_GROUP)    
+    message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
 发送成功后，获取文件消息附件：
@@ -280,10 +295,6 @@ String fileRemoteUrl = fileMessageBody.getRemoteUrl();
 Uri fileLocalUri = fileMessageBody.getLocalUri();
 ```
 
-:::notice
-适配 AndroidQ 及以上手机时，获取本地资源请调用 `fileMessageBody.getLocalUri()`，相应的 `fileMessageBody.getLocalUrl()` 方法已经被废弃。
-:::
-
 发送附件类型消息时，可以在 `onProgress` 回调中获取附件上传的进度，以百分比表示，示例代码如下：
 
 ```java
@@ -291,22 +302,22 @@ Uri fileLocalUri = fileMessageBody.getLocalUri();
  message.setMessageStatusCallback(new EMCallBack() {
      @Override
      public void onSuccess() {
-         showToast("发送消息成功");
+         // 发送消息成功
           dialog.dismiss();
      }
      @Override
      public void onError(int code, String error) {
-         showToast("发送消息失败");
+         // 发送消息失败
      }
 
- // 消息发送的状态，这里只用于附件类型的消息。
+     // 消息发送的状态，这里只用于附件类型的消息。
      @Override
      public void onProgress(int progress, String status) {
-
 
      }
 
  });
+ // 发送消息
  EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
@@ -341,13 +352,16 @@ Uri imgLocalUri = imgBody.getLocalUri();
 
 ### 发送位置消息
 
-当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
+当你要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
 ```java
 // `latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容。
 EMMessage message = EMMessage.createLocationSendMessage(latitude, longitude, locationAddress, toChatUsername);
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
-if (chatType == CHATTYPE_GROUP)    message.setChatType(ChatType.GroupChat);EMClient.getInstance().chatManager().sendMessage(message);
+if (chatType == CHATTYPE_GROUP)    
+    message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
 ### 发送透传消息
@@ -356,13 +370,20 @@ if (chatType == CHATTYPE_GROUP)    message.setChatType(ChatType.GroupChat);EMCli
 
 ```java
 EMMessage cmdMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
-// 支持单聊和群聊，默认单聊，如果是群聊添加下面这行。
-cmdMsg.setChatType(ChatType.GroupChat)String action="action1";
+// 支持单聊、群聊和聊天室，默认为单聊。
+// 若为群聊，添加下行代码。
+cmdMsg.setChatType(EMMessage.ChatType.GroupChat);
+// 若为聊天室，添加下行代码。
+// cmdMsg.setChatType(EMMessage.ChatType.ChatRoom);
+
+String action="action1";
 // `action` 可以自定义。
 EMCmdMessageBody cmdBody = new EMCmdMessageBody(action);
 String toUsername = "test1";
 // 发送给特定用户。
-cmdMsg.setTo(toUsername);cmdMsg.addBody(cmdBody);
+cmdMsg.setTo(toUsername);
+cmdMsg.addBody(cmdBody);
+// 发送消息
 EMClient.getInstance().chatManager().sendMessage(cmdMsg);
 ```
 
@@ -381,6 +402,103 @@ EMMessageListener msgListener = new EMMessageListener(){
 }
 ```
 
+#### 通过透传消息实现输入指示器
+
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
+
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
+
+![img](@static/images/common/typing_indicator.png)
+
+
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+
+:::notice 
+
+用户 A 可根据需要设置透传消息发送间隔。
+
+:::
+
+以下示例代码展示如何发送输入状态的透传消息。
+
+```java
+//发送表示正在输入的透传消息
+private static final String MSG_TYPING_BEGIN = "TypingBegin";
+private long previousChangedTimeStamp;
+
+private void textChange() {
+    long currentTimestamp = System.currentTimeMillis();
+    if(currentTimestamp - previousChangedTimeStamp > 5) {
+        sendBeginTyping();
+        previousChangedTimeStamp = currentTimestamp;
+    }
+}
+
+private void sendBeginTyping() {
+    EMMessage beginMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
+    EMCmdMessageBody body = new EMCmdMessageBody(MSG_TYPING_BEGIN);
+    // 将该透传消息只发送给在线用户
+    body.deliverOnlineOnly(true);
+    beginMsg.addBody(body);
+    beginMsg.setTo(toChatUsername);
+    EMClient.getInstance().chatManager().sendMessage(beginMsg);
+}
+```
+
+以下示例代码展示如何接受和解析输入状态的透传消息。
+
+```java
+private static final int TYPING_SHOW_TIME = 10000;
+private static final int MSG_TYPING_END = 1;
+private Handler typingHandler;
+
+private void initTypingHandler() {
+    typingHandler = new Handler(Looper.myLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what) {
+                case MSG_TYPING_END :
+                    cancelTimer();
+                    break;
+            }
+        }
+    };
+}
+
+@Override
+public void onCmdMessageReceived(List<EMMessage> messages) {
+    for (EMMessage msg : messages) {
+        if(!TextUtils.equals(msg.conversationId(), currentConversationId)) {
+            return;
+        }
+        EMCmdMessageBody body = (EMCmdMessageBody) msg.getBody();
+        if(TextUtils.equals(body.action(), MSG_TYPING_BEGIN)) {
+            // 这里需更新 UI，显示“对方正在输入”
+            beginTimer();
+        }
+    }
+}
+
+private void beginTimer() {
+    if(typingHandler != null) {
+        typingHandler.removeMessages(MSG_TYPING_END);
+        typingHandler.sendEmptyMessageDelayed(MSG_TYPING_END, TYPING_SHOW_TIME);
+    }
+}
+
+private void cancelTimer() {
+    // 这里需更新 UI，不再显示“对方正在输入”
+    if(typingHandler != null) {
+        typingHandler.removeCallbacksAndMessages(null);
+    }
+}
+
+```
+
 ### 发送自定义类型消息
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。自定义消息内容是 key，value 格式，你需要自己添加并解析该内容。
@@ -388,7 +506,7 @@ EMMessageListener msgListener = new EMMessageListener(){
 ```java
 EMMessage customMessage = EMMessage.createSendMessage(EMMessage.Type.CUSTOM);
 // `event` 为需要传递的自定义消息事件，比如礼物消息，可以设置：
-event = "gift";
+String event = "gift";
 EMCustomMessageBody customBody = new EMCustomMessageBody(event);
 // `params` 类型为 `Map<String, String>`。
 customBody.setParams(params);
@@ -397,6 +515,7 @@ customMessage.addBody(customBody);
 customMessage.setTo(to);
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
 customMessage.setChatType(chatType);
+// 发送消息
 EMClient.getInstance().chatManager().sendMessage(customMessage);
 ```
 

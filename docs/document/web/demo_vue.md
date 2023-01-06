@@ -2,37 +2,32 @@
 
 <Toc />
 
-环信即时通讯 Web 端提供示例应用可供体验。为方便体验，建议使用你自己的 Demo 应用，具体步骤如下：
+环信即时通讯 Web 端提供示例应用可供体验。你可以按以下步骤体验：
 
-1. 在 [环信即时通讯云 IM 管理后台](https://console.easemob.com/user/login) 通过邮箱注册后登录，打开首页。
+1. 登录 Demo。
 
-   在 **应用列表** 下可以看到默认的 Demo 应用。该 Demo 默认开通全部功能。
+- [Vue 2 Demo](https://webim-vue.easemob.com/login)
 
-![img](@static/images/web/demo_view.png)
+![img](@static/images/demo/web_vue2_login.png)
 
-2. 选择 **即时通讯** > **服务概览**，在 **设置** 区域中配置 **用户注册模式**。
+- [Vue 3 Demo](https://webim-vue3.easemob.com/login)
 
-![img](@static/images/web/3.png)
+![img](@static/images/demo/web_vue3_login.png)
 
-:::notice
-注册模式包含开放注册和授权注册：
-- 开放注册：通过客户端注册环信账号。该方式只用于测试，在正式环境中不推荐使用。
-- 授权注册：你的应用服务器通过环信提供的 REST API 注册环信账号，然后将 token 保存到你的应用服务器或返回给客户端。
-:::
+2. 输入你的手机号，获取验证码，然后输入。
 
-3. 修改为你的 App Key，即在环信即时通讯管理后台创建应用时即时通讯服务为你生成的 App Key。
-
-在 `/demo/src/config/WebIMConfig.js` 文件中修改为你的 App Key。
+3. 点击 **登录** 登录 Demo。
 
 ## 代码下载
 
--下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)
+- Vue 2 下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)
+- Vue 3 下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/demo-vue3)
 
 欢迎大家提交 PR 改进和修复 Web IM 中的问题。
 
 ## 运行 Web IM 项目
 
-从 [github 下载](https://github.com/easemob/webim-vue-demo/tree/dev-4.0) 下载 Web SDK 压缩包，然后解压。解压后，`webim-vue-demo` 文件夹即为 Web IM 的项目目录。
+从 [github 下载](https://github.com/easemob/webim-vue-demo/tree/dev-4.0) 下载项目代码压缩包，然后解压。解压后，`webim-vue-demo` 文件夹即为 Web IM 的项目目录。
 
 1. 安装 Demo 所需的依赖：在终端中运行 `cd demo` 和 `npm install` 命令。
 
@@ -56,4 +51,12 @@ Demo 中的主要模块如下：
 
 ## 部分 UI 展示
 
+### Vue 2 Demo 界面
+
 ![img](@static/images/web/vue_demo.png)
+
+### Vue 3 Demo 界面
+
+![img](@static/images/web/vue3_home.png)
+
+![img](@static/images/web/vue3_chat.png)

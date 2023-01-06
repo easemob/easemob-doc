@@ -32,20 +32,20 @@
 
 ### 创建群组
 
-在创建群组前，你需要设置群组类型 (GroupStyle) 和进群邀请是否需要对方同意 (inviteNeedConfirm)。
+在创建群组前，你需要设置群组类型 (`GroupStyle`) 和进群邀请是否需要对方同意 (`inviteNeedConfirm`)。
 
-1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型 (GroupStyle) ，具体设置如下：
+1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型 (`GroupStyle`) ，具体设置如下：
     - `PrivateOnlyOwnerInvite` —— 私有群，只有群主和管理员可以邀请人进群；
     - `PrivateMemberCanInvite` —— 私有群，所有群成员均可以邀请人进群；
     - `PublicJoinNeedApproval` —— 公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
     - `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理同意。
-2. 进群邀请是否需要对方同意 (inviteNeedConfirm) 的具体设置如下：
-    - 进群邀请需要用户确认 (`option.InviteNeedConfirm` 设置为 true)。创建群组并发出邀请后，根据受邀用户的 `AutoAcceptGroupInvitation` 设置，处理逻辑如下：
-        - 用户设置自动接受群组邀请 (`AutoAcceptGroupInvitation` 设置为 true)。受邀用户自动进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，群主收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调。
-        - 用户设置手动确认群组邀请 (`AutoAcceptGroupInvitation` 设置为 false)。受邀用户收到 `IGroupManagerDelegate#OnInvitationReceivedFromGroup` 回调，并选择同意或拒绝入群邀请：
-            - 用户同意入群邀请后，群主收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
-            - 用户拒绝入群邀请后，群主收到 `IGroupManagerDelegate#OnInvitationDeclinedFromGroup` 回调。
-    - 进群邀请无需用户确认 (`option.InviteNeedConfirm` 设置为 false)。创建群组并发出邀请后，无视用户的 `IsAutoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，群主收到每个加入成员的 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调。
+2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
+    - 进群邀请需要用户确认 (`option.InviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `AutoAcceptGroupInvitation` 设置，处理逻辑如下：
+        - 用户设置自动接受群组邀请 (`AutoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调。
+        - 用户设置手动确认群组邀请 (`AutoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `IGroupManagerDelegate#OnInvitationReceivedFromGroup` 回调，并选择同意或拒绝入群邀请：
+            - 用户同意入群邀请后，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
+            - 用户拒绝入群邀请后，邀请人收到 `IGroupManagerDelegate#OnInvitationDeclinedFromGroup` 回调。
+    - 进群邀请无需用户确认 (`option.InviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，不论用户的 `IsAutoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调。
 
 用户可以调用 `CreateGroup` 方法创建群组，并通过 `GroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
 
@@ -64,7 +64,7 @@ SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, ha
 
 ### 用户申请入群
 
-根据 [创建群组](#创建群组) 时的群组类型 (GroupStyle) 设置，加入群组的处理逻辑差别如下：
+根据 [创建群组](#创建群组) 时的群组类型 (`GroupStyle`) 设置，加入群组的处理逻辑差别如下：
 
 - 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
 - 当群组类型为 `PublicJoinNeedApproval` 时，用户可以申请进群，群主和群管理员收到 `IGroupManagerDelegate#OnRequestToJoinReceivedFromGroup` 回调，并选择同意或拒绝入群申请：
@@ -145,9 +145,9 @@ SDKClient.Instance.GroupManager.LeaveGroup(groupId, new CallBack(
 
 ### 获取群组详情
 
-群成员可以调用 `GetGroupWithId` 方法从内存获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
+群成员可以调用 `GetGroupWithId` 方法从内存获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
 
-群成员也可以调用 `GetGroupSpecificationFromServer` 方法从服务器获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群主、群组管理员列表以及群成员列表。
+群成员也可以调用 `GetGroupSpecificationFromServer` 方法从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用等信息，不包括群成员列表。
 
 示例代码如下：
 
@@ -295,11 +295,11 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     {
     }
     // 当前用户的入群申请被拒绝。申请人会收到该回调。例如，用户 B 拒绝用户 A 的入群申请后，用户 A 会收到该回调。
-    public void OnRequestToJoinDeclinedFromGroup(string groupId, string groupName, string decliner, string reason)
+    public void OnRequestToJoinDeclinedFromGroup(string groupId, string reason)
     {
     }
     // 当前用户的入群邀请被接受。邀请人会收到该回调。例如，用户 B 接受了用户 A 的入群邀请，则用户 A 会收到该回调。
-    public void OnInvitationAcceptedFromGroup(string groupId, string invitee, string reason)
+    public void OnInvitationAcceptedFromGroup(string groupId, string invitee)
     {
     }
     // 当前用户的入群申请被拒绝。申请人会收到该回调。例如，用户 B 拒绝用户 A 的入群申请后，用户 A 会收到该回调。
@@ -359,12 +359,12 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     {
     }
     // 有成员添加至群白名单。被添加的成员及群主和群管理员（除操作者外）会收到该回调。
-    public void OnAddWhiteListMembersFromGroup(string groupId, List<string> whiteList)
+    public void OnAddAllowListMembersFromGroup(string groupId, List<string> whiteList)
     {
     }
 
     // 有成员从群白名单中移出。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
-    public void OnRemoveWhiteListMembersFromGroup(string groupId, List<string> whiteList)
+    public void OnRemoveAllowListMembersFromGroup(string groupId, List<string> whiteList)
     {
     }
 

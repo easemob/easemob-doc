@@ -33,7 +33,7 @@
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncChangeGroupName(String, String, EMCallBack)}。
+// 异步方法为 asyncChangeGroupName(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().changeGroupName(groupId,changedGroupName);
 ```
 
@@ -45,7 +45,7 @@ EMClient.getInstance().groupManager().changeGroupName(groupId,changedGroupName);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncChangeGroupDescription(String, String, EMCallBack)}。
+// 异步方法为 asyncChangeGroupDescription(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().changeGroupDescription(groupId,description);
 ```
 
@@ -57,7 +57,7 @@ EMClient.getInstance().groupManager().changeGroupDescription(groupId,description
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncUpdateGroupAnnouncement(String, String, EMCallBack)}。
+// 异步方法为 asyncUpdateGroupAnnouncement(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().updateGroupAnnouncement(groupId, announcement);
 ```
 
@@ -69,7 +69,7 @@ EMClient.getInstance().groupManager().updateGroupAnnouncement(groupId, announcem
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncFetchGroupAnnouncement(String, EMValueCallBack)}。
+// 异步方法为 asyncFetchGroupAnnouncement(String, EMValueCallBack)。
 EMClient.getInstance().groupManager().fetchGroupAnnouncement(groupId);
 ```
 
@@ -83,7 +83,7 @@ EMClient.getInstance().groupManager().fetchGroupAnnouncement(groupId);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncUploadGroupSharedFile(String, String, EMCallBack)}。
+// 异步方法为 asyncUploadGroupSharedFile(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().uploadGroupSharedFile(groupId, filePath, callBack);
 ```
 
@@ -97,7 +97,7 @@ EMClient.getInstance().groupManager().uploadGroupSharedFile(groupId, filePath, c
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncDeleteGroupSharedFile(String, String, EMCallBack)}。
+// 异步方法为 asyncDeleteGroupSharedFile(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().deleteGroupSharedFile(groupId, fileId);
 ```
 
@@ -107,7 +107,7 @@ EMClient.getInstance().groupManager().deleteGroupSharedFile(groupId, fileId);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncFetchGroupSharedFileList(String, int, int, EMValueCallBack)}。
+// 异步方法为 asyncFetchGroupSharedFileList(String, int, int, EMValueCallBack)。
 EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum, pageSize);
 ```
 

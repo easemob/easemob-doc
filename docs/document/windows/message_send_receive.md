@@ -358,7 +358,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 ### 发送透传消息
 
-透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
+透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em\_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
 
 ```csharp
 //`action` 可以自定义。
@@ -395,6 +395,75 @@ public class ChatManagerDelegate : IChatManagerDelegate {
 //申请并注册监听。
 ChatManagerDelegate adelegate = new ChatManagerDelegate()
 SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
+```
+
+#### 通过透传消息实现输入指示器
+
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
+
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
+
+[img](@static/images/common/typing_indicator.png)
+
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+
+:::notice
+
+用户 A 可根据需要设置透传消息发送间隔。
+
+:::
+
+以下示例代码展示如何发送输入状态的透传消息。
+
+```csharp
+//发送表示正在输入的透传消息
+string msgTypingBegin = "TypingBegin";
+
+void textChange() {
+  int currentTimestamp = getCurrentTimestamp();
+  if (currentTimestamp - _previousChangedTimeStamp > 5) {
+    _sendBeginTyping();
+    _previousChangedTimeStamp = currentTimestamp;
+  }
+}
+
+void _sendBeginTyping() {
+  var msg = Message.CreateCmdSendMessage(
+    username: conversationId,
+    action: msgTypingBegin,
+    deliverOnlineOnly: true,
+  );
+  msg.chatType = MessageType.Chat;
+  SDKClient.getInstance.chatManager.sendMessage(msg);
+}
+
+```
+
+以下示例代码展示如何接受和解析输入状态的透传消息。
+
+```csharp
+int typingTime = 10;
+
+void OnCmdMessagesReceived(List<Message> list) {
+  for (var msg in list) {
+    if (msg.ConversationId != currentConversationId) {
+      continue;
+    }
+    MessageBody.CmdBody body = msg.Body as MessageBody.CmdBody;
+    if (body.Action == msgTypingBegin) {
+      // 这里需更新 UI，显示“对方正在输入”
+
+      Timer timer = new Timer((state) =>
+      {
+      	// 这里需更新 UI，不再显示“对方正在输入”
+      }, null, typingTime, Timeout.Infinite);
+    }
+  }
+}
 ```
 
 ### 发送自定义类型消息
@@ -445,15 +514,14 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
   }
 ));
 
-//接收消息的时候获取扩展属性。
+// 接收消息的时候获取扩展属性。
 bool found = false;
-string str = msg.GetAttributeValue<string>(msg.Attributes, "attribute1", found);
+string str = Message.GetAttributeValue<string>(msg.Attributes, "attribute1", out found);
 if (found) {
   // 使用 str 变量。
 }
-
 found = false；
-bool b = msg.GetAttributeValue<bool>(msg.Attributes, "attribute2", found);
+bool b = Message.GetAttributeValue<bool>(msg.Attributes, "attribute2", out found);
 if (found) {
   // 使用 b 变量。
 }

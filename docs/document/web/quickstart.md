@@ -123,7 +123,7 @@ const appKey = "<Your app key>"
 
 let username, password
 
-// 初始化客户端。
+// 初始化客户端。相关的参数配置，详见 API 参考中的 `Connection` 类。
 WebIM.conn = new WebIM.connection({
     //注意这里的 "K" 需大写。
     appKey: appKey,

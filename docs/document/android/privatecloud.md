@@ -15,8 +15,9 @@ emOptions.enableDNSConfig(false);//默认是 true，在私有云下，需要关�
 
 EMClient.getInstance().init(context,emOptions);//最后初始化 SDK
 ```
-
-注意：如果需要配置 HTTPS 只需在 REST 地址前加一个前缀
+:::notice
+如果需要配置 HTTPS 只需在 REST 地址前加一个前缀。
+:::
 
 ```java
 emOptions.setRestServer("https://10.10.10.10:00");//设置私有云 REST 地址（ip：port）

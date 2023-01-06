@@ -58,6 +58,7 @@ EMChatRoom  chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(s
 
 ```java
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
+// 同步方法，会阻塞当前线程。异步方法为 asyncFetchPublicChatRoomsFromServer(int, int, EMValueCallBack)。
 EMPageResult<EMChatRoom> chatRooms = EMClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(pageNumber, pageSize);
 
 // 加入聊天室
@@ -76,12 +77,13 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 
 ### 获取聊天室详情
 
-聊天室所有成员均可调用 `fetchChatRoomFromServer` 获取聊天室的详情，包括聊天室 ID、聊天室名称，聊天室描述、最大成员数、聊天室所有者、是否全员禁言以及聊天室角色类型。聊天室公告、管理员列表、成员列表、黑名单列表、禁言列表需单独调用接口获取。
+聊天室所有成员均可调用 `fetchChatRoomFromServer` 方法获取聊天室的详情，包括聊天室 ID、聊天室名称，聊天室描述、最大成员数、聊天室所有者、是否全员禁言以及聊天室角色类型。聊天室公告、管理员列表、成员列表、黑名单列表、禁言列表需单独调用接口获取。
 
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncFetchChatRoomFromServer(String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFromServer(chatRoomId);
 ```
 
@@ -92,6 +94,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFrom
 示例代码如下：
 
 ```java
+// 异步方法。
 EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
 ```
 
@@ -113,7 +116,8 @@ options.setDeleteMessagesAsExitChatRoom(false);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncDestroyChatRoom(String, EMCallBack)。
 EMClient.getInstance().chatroomManager().destroyChatRoom(chatRoomId);
 ```
 
@@ -179,8 +183,7 @@ public interface EMChatRoomChangeListener {
     void onOwnerChanged(final String chatRoomId, final String newOwner, final String oldOwner);
 
     // 聊天室详情有变更。聊天室的所有成员会收到该事件。
-    default void onSpecificationChanged(EMChatRoom chatRoom) {
-    }
+    default void onSpecificationChanged(EMChatRoom chatRoom) {}
     // 聊天室公告变更。聊天室的所有成员会收到该事件。
     void onAnnouncementChanged(String chatRoomId, String announcement);
 

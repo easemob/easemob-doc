@@ -35,6 +35,8 @@
 示例代码如下：
 
 ```java
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncFetchChatRoomMembers(String, String, int, EMValueCallBack)。
 public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cursor, int pageSize);
 ```
 
@@ -49,12 +51,12 @@ public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cur
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncRemoveChatRoomMembers(String, List, EMValueCallBack)。
 EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, members);
 ```
 
 ### 管理聊天室黑名单
-
 
 #### 将成员加入聊天室黑名单
 
@@ -67,7 +69,8 @@ EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, membe
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncBlockChatroomMembers(String, List, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().blockChatroomMembers(chatRoomId, members);
 ```
 
@@ -78,23 +81,26 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().blockChatroomMemb
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncBlockChatroomMembers(String, List, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unblockChatRoomMembers(chatRoomId, members);
 ```
 
 #### 获取聊天室黑名单列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#fetchChatRoomBlockList` 方法获取当前聊天室黑名单。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#fetchChatRoomBlackList` 方法获取当前聊天室黑名单。
 
 示例代码如下：
 
 ```java
-// 异步方法
-EMChatRoom chatroom = EMClient.getInstance().chatroomManager().blockChatroomMembers(chatRoomId, members);
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncFetchChatRoomBlackList(String, int, int, EMValueCallBack)。
+EMChatRoom chatroom = EMClient.getInstance().chatroomManager().fetchChatRoomBlackList(chatRoomId, pageNum, pageSize);
 ```
 
 ### 管理聊天室白名单
 
+聊天室白名单中的成员在聊天室中发送的消息为高优先级，会优先送达，但不保证必达。当负载较高时，服务器会优先丢弃低优先级的消息。若即便如此负载仍很高，服务器也会丢弃高优先级消息。
 #### 获取聊天室白名单列表
 
 仅聊天室所有者和管理员可以调用 `fetchChatRoomWhiteList` 获取当前聊天室白名单成员列表。
@@ -175,7 +181,8 @@ EMClient.getInstance().chatroomManager().removeFromChatRoomWhiteList(chatRoomId,
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncMuteChatRoomMembers(String, List, long, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().muteChatRoomMembers(chatRoomId, members, duration);
 ```
 
@@ -190,7 +197,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().muteChatRoomMembe
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncUnMuteChatRoomMembers(String, List, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unMuteChatRoomMembers(chatRoomId, members);
 ```
 
@@ -201,7 +209,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unMuteChatRoomMem
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncFetchChatRoomMuteList(String, int, int, EMValueCallBack)。
 Map<String, Long> memberMap =  EMClient.getInstance().chatroomManager().fetchChatRoomMuteList(chatRoomId, pageNum, pageSize);
 ```
 
@@ -252,7 +261,8 @@ EMClient.getInstance().chatroomManager().unmuteAllMembers(chatRoomId, new EMValu
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncChangeOwner(String, String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeOwner(chatRoomId, newOwner);
 ```
 
@@ -263,7 +273,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeOwner(chatR
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncAddChatRoomAdmin(String, String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().addChatRoomAdmin(chatRoomId, admin);
 ```
 
@@ -274,7 +285,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().addChatRoomAdmin(
 示例代码如下：
 
 ```java
-// 异步方法
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncRemoveChatRoomAdmin(String, String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().removeChatRoomAdmin(chatRoomId, admin);
 ```
 

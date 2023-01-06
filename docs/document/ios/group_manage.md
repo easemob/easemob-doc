@@ -35,25 +35,26 @@
 在创建群组前，你需要设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`IsInviteNeedConfirm`)。
 
 1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型（`EMGroupStyle`），具体设置如下：
-    - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
-    - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
-    - EMGroupStylePublicJoinNeedApproval——公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
-    - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理同意。
+
+   - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
+   - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
+   - EMGroupStylePublicJoinNeedApproval——公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
+   - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理同意。
 
 2. 进群邀请是否需要对方同意 (`IsInviteNeedConfirm`) 的具体设置如下：
-    - 进群邀请需要用户确认(`IsInviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `isAutoAcceptGroupInvitation` 设置，处理逻辑如下：
-        - 用户设置自动接受群组邀请 (`isAutoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupManagerDelegate#didJoinGroup` 回调，群主收到 `EMGroupManagerDelegate#onInvitationAccepted` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调，其他群成员收到 `EMGroupChangeListener#userDidJoinGroup` 回调。
-        - 用户设置手动确认群组邀请 (`isAutoAcceptGroupInvitation` 设置为 `true`)，受邀用户收到 `EMGroupManagerDelegate#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
-            - 用户同意入群邀请后，群主收到 `EMGroupManagerDelegate#onInvitationAccepted` 回调和 `EMGroupManagerDelegate#onMemberJoined` 回调；其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
-            - 用户拒绝入群邀请后，群主收到 `EMGroupManagerDelegate#onInvitationDeclined` 回调。
-            
+   - 进群邀请需要用户确认(`IsInviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `isAutoAcceptGroupInvitation` 设置，处理逻辑如下：
+     - 用户设置自动接受群组邀请 (`isAutoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupManagerDelegate#didJoinGroup` 回调，邀请人收到 `EMGroupManagerDelegate#onInvitationAccepted` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调，其他群成员收到 `EMGroupChangeListener#userDidJoinGroup` 回调。
+     - 用户设置手动确认群组邀请 (`isAutoAcceptGroupInvitation` 设置为 `true`)，受邀用户收到 `EMGroupManagerDelegate#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
+       - 用户同意入群邀请后，邀请人收到 `EMGroupManagerDelegate#onInvitationAccepted` 回调和 `EMGroupManagerDelegate#onMemberJoined` 回调，其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
+       - 用户拒绝入群邀请后，邀请人收到 `EMGroupManagerDelegate#onInvitationDeclined` 回调。
+
+- 进群邀请无需用户确认 (`IsInviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，不论受邀用户的 `isAutoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `EMGroupManagerDelegate#didJoinGroup` 回调，邀请人收到 `EMGroupManagerDelegate#groupInvitationDidAccept` 和 `EMGroupManagerDelegate#userDidJoinGroup` 回调，其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
+
 流程如下：
 
 ![img](@static/images/ios/group.png)
 
-- 进群邀请无需用户确认 (`IsInviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无视用户的 `isAutoAcceptGroupInvitation` 设置，受邀用户直接进群。用户收到 `EMGroupManagerDelegate#didJoinGroup` 回调；群主收到每个已加入成员对应的群组事件回调 `EMGroupManagerDelegate#groupInvitationDidAccept` 和 `EMGroupManagerDelegate#userDidJoinGroup`；先加入的群成员会收到群组事件回调 `EMGroupManagerDelegate#userDidJoinGroup`。
-
-用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
+用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
 用户加入群组后，将可以收到群消息。
 
@@ -68,7 +69,7 @@ options.IsInviteNeedConfirm = YES;
 // 设置群组类型。此处示例为成员可以邀请用户入群的私有群组。
 options.style = EMGroupStylePrivateMemberCanInvite;
 NSArray *members = @{@"member1",@"member2"};
-// 调用 `createGroupWithSubject` 创建群组。
+// 调用 `createGroupWithSubject` 创建群组。同步方法，异步方法见 [EMGroupManager createGroupWithSubject:description:invitees:message:setting:completion:]
 [[EMClient sharedClient].groupManager createGroupWithSubject:@"subject"
                          description:@"description"
                          invitees:members
@@ -82,12 +83,13 @@ NSArray *members = @{@"member1",@"member2"};
 :::
 
 ### 用户申请入群
+
 根据 [创建群组](#创建群组) 时的群组类型 (`EMGroupStyle`) 设置，加入群组的处理逻辑差别如下：
 
 - 当群组类型为 `EMGroupStylePublicOpenJoin` 时，用户直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
-- 当群组类型为 `EMGroupStylePublicJoinNeedApprova`，群主和群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调，并选择同意或拒绝入群申请：
-    - 群主和群管理员同意入群申请，申请人收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidApprove`；
-    - 其他群成员会收到群组事件回调 `EMGroupManagerDelegate#userDidJoinGroup`。 第二种情况：群主和群管理员拒绝入群申请，申请人会收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidDecline`。
+- 当群组类型为 `EMGroupStylePublicJoinNeedApproval`，群主和群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调，并选择同意或拒绝入群申请：
+  - 群主和群管理员同意入群申请，申请人收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidApprove`；
+  - 其他群成员会收到群组事件回调 `EMGroupManagerDelegate#userDidJoinGroup`。 第二种情况：群主和群管理员拒绝入群申请，申请人会收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidDecline`。
 
 :::notice
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
@@ -107,6 +109,7 @@ NSInteger pageSize = 50;
 NSString *cursor = nil;
 EMCursorResult *result = [[EMCursorResult alloc]init];
 do {
+  // 同步方法，异步方法见 [EMGroupManager getPublicGroupsFromServerWithCursor:pageSize:completion:]
     result = [[EMClient sharedClient].groupManager
                                       getPublicGroupsFromServerWithCursor:cursor
                                       pageSize:50
@@ -116,6 +119,7 @@ do {
 } while (result && result.list < pageSize);
 
 // 申请加入群组
+// 同步方法，异步方法见 [EMGroupManager joinPublicGroup:completion:]
 [[EMClient sharedClient].groupManager joinPublicGroup:@"groupID" error:nil];
 ```
 
@@ -129,6 +133,7 @@ do {
 
 ```objectivec
 //群组解散后，群成员将会收到 `EMGroupManagerDelegate#didLeaveGroup` 回调。
+// 同步方法，异步方法见 [EMGroupManager destroyGroup:finishCompletion:]
 [[EMClient sharedClient].groupManager destroyGroup:@"groupID"];
 ```
 
@@ -141,6 +146,7 @@ do {
 示例代码如下：
 
 ```objectivec
+// 同步方法，异步方法见 [EMGroupManager leaveGroup:completion:]
 [[[EMClient sharedClient].groupManager leaveGroup:@"groupID" error:nil];
 ```
 
@@ -150,12 +156,12 @@ do {
 从 3.7.4 版本开始支持 “是否获取群组成员” 参数。
 :::
 
-群成员可以调用 `aGroup.adminList` 方法从内存获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
+群成员可以调用 `aGroup.adminList` 方法从内存获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
 
-群成员也可以调用 `getGroupSpecificationFromServerWithId` 方法从服务器获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表。另外，若设置 `fetchMembers` 为 `true`，获取群组详情时同时获取群成员，默认获取最大数量为 200。
+群成员也可以调用 `getGroupSpecificationFromServerWithId` 方法从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用。另外，若将该方法的 `fetchMembers` 参数设置为 `true`，可获取群成员列表，默认最多包括 200 个成员。
 
 ```objectivec
-// 原型
+// 原型 异步方法
 - (void)getGroupSpecificationFromServerWithId:(NSString *)aGroupId
                                    fetchMembers:(BOOL)fetchMembers
                                    completion:(void (^)(EMGroup *aGroup, EMError *aError))aCompletionBlock;
@@ -178,7 +184,7 @@ NSArray *admins = aGroup.adminList;
 
 群成员可以调用 `getGroupMemberListFromServerWithId` 方法从服务器分页获取群成员列表。
 
-- 可通过分页获取群成员：
+- 当群成员数量大于等于 200 时，可分页获取群成员列表：
 
 ```objectivec
 NSMutableArray *memberList = [[NSMutableArray alloc]init];
@@ -186,6 +192,7 @@ NSInteger pageSize = 50;
 NSString *cursor = nil;
 EMCursorResult *result = [[EMCursorResult alloc]init];
 do {
+  // 同步方法，异步方法见 [EMGroupManager getGroupMemberListFromServerWithId:cursor:pageSize:completion:]
     result = [[EMClient sharedClient].groupManager
                                       getGroupMemberListFromServerWithId:@"groupID"
                                       cursor:cursor
@@ -196,10 +203,11 @@ do {
 } while (result && result.list < pageSize);
 ```
 
-- 当群成员少于 200 人时，可通过以下方式获取群成员：
+- 当群成员少于 200 人时，可通过以下方式获取群成员列表：
 
 ```objectivec
 // 第二个参数传入 TRUE，默认取 200 人的群成员列表。
+// 同步方法，异步方法见 [EMGroupManager getGroupSpecificationFromServerWithId:fetchMembers:completion:]
 EMGroup *group = [[EMClient sharedClient].groupManager
                                           getGroupSpecificationFromServerWithId:@"groupID"
                                           fetchMembers:YES
@@ -212,15 +220,16 @@ NSArray *memberList = [group.memberList];
 用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：
 
 ```objectivec
-NSArray *groupList = [[EMClient sharedClient].groupManager
-                                              getJoinedGroupsFromServerWithPage:nil
-                                              pageSize:-1
-                                              error:nil];
+// 异步方法
+NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroupsFromServerWithPage:0 pageSize:20 needMemberCount:YES needRole:YES completion:^(NSArray<EMGroup *> * _Nullable aList, EMError * _Nullable aError) {
+        // got group list
+    }];
 ```
 
 - 用户可以调用 `getJoinedGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
 
 ```objectivec
+// 同步方法，本地缓存加载
 NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroups];
 ```
 
@@ -232,6 +241,7 @@ NSInteger pageSize = 50;
 NSString *cursor = nil;
 EMCursorResult *result = [[EMCursorResult alloc]init];
 do {
+  // 同步方法，异步方法见 [EMGroupManager getPublicGroupsFromServerWithCursor:pageSize:completion:]
     result = [[EMClient sharedClient].groupManager
                                       getPublicGroupsFromServerWithCursor:cursor
                                       pageSize:50
@@ -248,7 +258,8 @@ do {
 群成员可以调用 `blockGroup` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息，群主和群管理员不能进行此操作。示例代码如下：
 
 ```objectivec
-[[EMClient sharedClient].groupManager blockGroup:@"groupID"error:nil];
+// 同步方法，异步方法见 [EMGroupManager blockGroup:completion:]
+[[EMClient sharedClient].groupManager blockGroup:@"groupID" error:nil];
 ```
 
 #### 解除屏蔽群
@@ -256,6 +267,7 @@ do {
 群成员可以调用 `unblockGroup` 方法解除屏蔽群消息。示例代码如下：
 
 ```objectivec
+// 同步方法，异步方法见 [EMGroupManager unblockGroup:completion:]
 [[EMClient sharedClient].groupManager unblockGroup:@"groupID" error:nil];
 ```
 
@@ -407,7 +419,7 @@ do {
   }
 
 // 群组详情变更。群组所有成员会收到该回调。
-- (void)groupSpecificationDidUpdate:(NSString *)aGroupId
+- (void)groupSpecificationDidUpdate:(EMGroup *)aGroup
   {
 
   }

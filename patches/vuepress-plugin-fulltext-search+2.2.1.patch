@@ -1,0 +1,36 @@
+diff --git a/node_modules/vuepress-plugin-fulltext-search/components/SearchBox.vue b/node_modules/vuepress-plugin-fulltext-search/components/SearchBox.vue
+index 2fcc7ab..374dd7f 100644
+--- a/node_modules/vuepress-plugin-fulltext-search/components/SearchBox.vue
++++ b/node_modules/vuepress-plugin-fulltext-search/components/SearchBox.vue
+@@ -27,7 +27,10 @@
+         <a :href="s.path + s.slug" @click.prevent>
+           <div v-if="s.parentPageTitle" class="parent-page-title" v-html="s.parentPageTitle" />
+           <div class="suggestion-row">
+-            <div class="page-title">{{ s.title || s.path }}</div>
++            <div class="page-title">
++              <span :style="{color: 'blue'}" v-if="s.platform">({{s.platform}})</span>
++              {{ s.title || s.path }}
++            </div>
+             <div class="suggestion-content">
+               <!-- prettier-ignore -->
+               <div v-if="s.headingStr" class="header">
+@@ -123,11 +126,17 @@ export default {
+         // augment suggestions with user-provided function
+         suggestions = await hooks.processSuggestions(suggestions, this.query, this.queryTerms)
+       }
+-      this.suggestions = suggestions.map(s => ({
++      this.suggestions = suggestions.map((s) => {
++        const pathItem = s.path.split('/')
++        if (pathItem[1] == 'document') {
++          s.platform = pathItem[2] 
++        }
++        return {
+         ...s,
+         headingDisplay: highlight(s.headingStr, s.headingHighlight),
+         contentDisplay: highlight(s.contentStr, s.contentHighlight),
+-      }))
++        }
++      })
+     },
+     getPageLocalePath(page) {
+       for (const localePath in this.$site.locales || {}) {

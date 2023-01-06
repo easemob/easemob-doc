@@ -2,11 +2,11 @@
 
 <Toc />
 
-子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍环信即时通讯 IM Web SDK 如何发送、接收以及撤回子区消息。
+子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍环信即时通讯 IM SDK 如何发送、接收以及撤回子区消息。
 
 ## 技术原理
 
-环信即时通讯 IM Web SDK 支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下功能：
 
 - 发送子区消息
 - 接收子区消息
@@ -49,14 +49,19 @@
 示例代码如下：
 
 ```javascript
-// 在 thread 内发送文本消息
+// 在子区内发送文本消息
 function sendTextMessage() {
     let option = {
-        chatType: 'groupChat',     // 会话类型，设置为群聊。
-        type: 'txt',               // 消息类型。
-        to: chatThreadId,          // 消息接收方（子区 ID)。
-        msg: 'message content'     // 消息内容。
-        isChatThread:true,   // thread 消息标记
+        // 会话类型，设置为群聊。
+        chatType: 'groupChat',  
+        // 消息类型。
+        type: 'txt',   
+        // 消息接收方（子区 ID)。
+        to: 'chatThreadId',     
+        // 消息内容。
+        msg: 'message content'  
+        // 是否为子区消息。
+        isChatThread: 'true',   
     }
     let msg = WebIM.message.create(option); 
     connection.send(msg).then(() => {
@@ -73,12 +78,12 @@ function sendTextMessage() {
 
 示例代码如下：
 
-```
+```javascript
 // 监听收到的文本消息
 connection.addEventHandler('THREADMESSAGE',{
-  onTextMessage:(message) =>{
-            if(message.chatThread && JSON.stringify(message.chatThread)!=='{}'){
-        console.log(message)
+  onTextMessage:(message) => {
+    if(message.chatThread && JSON.stringify(message.chatThread)!=='{}'){
+      console.log(message)
         // 接收到子区消息，添加处理逻辑。
       }
     },
@@ -94,19 +99,15 @@ connection.addEventHandler('THREADMESSAGE',{
 示例代码如下：
 
 ```javascript
-// 撤回消息
-/**
- * 发送要撤回的消息。
- * @param {Object} option - 
- * @param {Object} option.mid -  要撤回消息的 ID。
- * @param {Object} option.to -   消息接收对象。
- * @param {Object} option.type - 消息类型：chat (单聊)、groupchat (群聊)和 chatroom (聊天室)。
-   */
 let option = {
+  // 设置要撤回消息的 ID。
   mid: 'msgId',
-  to: 'userID',
+  // 设置消息接收方（子区 ID)。
+  to: 'chatThreadId',
+  // 设置会话类型，单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
   chatType: 'groupChat'
-  isChatThread: true
+  // 设置是否为子区消息。
+  isChatThread: 'true'
 };
 connection.recallMessage(option).then((res) => {
   console.log('success', res)

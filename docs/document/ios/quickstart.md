@@ -39,7 +39,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 2. 打开 **Podfile** 文件，修改文件为如下内容：
 
 ```pod
-# platform :ios, '10.0' 
+# platform :ios, '10.0'
 
  target 'EMChatQuickstart' do
      pod 'HyphenateChat'
@@ -67,12 +67,12 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 ```objectivec
 (BOOL)application:(UIApplication *)applicationdidFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-// appkey 替换成你在环信即时通讯 IM 管理后台注册应用中的 App Key 
-EMOptions *options = [EMOptions optionsWithAppkey:@“appkey”]; 
-// apnsCertName是证书名称，可以先传 nil，等后期配置 APNs 推送时在传入证书名称 
-options.apnsCertName = nil; 
-[[EMClient sharedClient] initializeSDKWithOptions:options]; 
-return YES; 
+    // appkey 替换成你在环信即时通讯 IM 管理后台注册应用中的 App Key
+    EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
+    // apnsCertName是证书名称，可以先传 nil，等后期配置 APNs 推送时在传入证书名称
+    options.apnsCertName = nil;
+    [[EMClient sharedClient] initializeSDKWithOptions:options];
+    return YES;
 }
 ```
 
@@ -92,32 +92,39 @@ return YES;
 
 ## 5.创建账号
 
+设置用户名和密码创建账号。
+
 ```objectivec
-// 异步方法 
+// 异步方法
 [[EMClient sharedClient] registerWithUsername:@"username"
                                          password:@"your password"
-                                       completion:^(NSString *aUsername, EMError *aError) {                             
+                                       completion:^(NSString *aUsername, EMError *aError) {
                                    }];
 ```
 
 ## 6. 登录账号
 
+利用创建的用户名和密码登录环信 IM。
+
 ```objectivec
 [[EMClient sharedClient] loginWithUsername:@"username"
                                      password:@"your password"
                                    completion:^(NSString *aUsername, EMError *aError) {
-                                                                 
+
 }];
 ```
 
 ## 7.发送消息
 
+利用创建的用户名和密码登录环信 IM，向对端用户发送消息。在下面示例中，向 user 2 发送文本消息。
+
 ```objectivec
 // 创建消息
+EMTextMessageBody* textBody = [[EMTextMessageBody alloc] initWithText:@"hello"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"user2"
                                                               from:@"user1"
                                                                 to:@"user2"
-                                                              body:TextMessageBody
+                                                              body:textBody
                                                                ext:@{}];
 // 发送消息
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {}];

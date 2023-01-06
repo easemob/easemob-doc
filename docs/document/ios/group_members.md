@@ -37,6 +37,7 @@
 - 邀请加群：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager addMembers:@{@"member1",@"member2"}
                          toGroup:@"groupID"
                          message:@"message"
@@ -50,6 +51,7 @@
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager removeMembers:@{@"member"}
                          fromGroup:@"groupsID"
                          completion:nil];
@@ -64,9 +66,10 @@
 示例如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager updateGroupOwner:@"groupID"
                          newOwner:@"newOwner"
-                         error:nil];
+                       completion:nil];
 ```
 
 #### 添加群组管理员
@@ -78,9 +81,10 @@
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager addAdmin:@"member"
                          toGroup:@"groupID"
-                         error:nil];
+                      completion:nil];
 ```
 
 #### 移除群组管理员权限
@@ -92,9 +96,10 @@
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager removeAdmin:@"admin"
                          fromGroup:@"groupID"
-                         error:nil];
+                        completion:nil];
 ```
 
 ### 管理群组黑名单
@@ -103,11 +108,12 @@
 
 #### 将群成员拉入群组黑名单
 
-仅群主和群管理员可以调用 `blockMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupManagerDelegate#OnUserRemovedFromGroup` 回调，其他群成员收到 `EMGroupManagerDelegate#OnMemberExitedFromGroup` 回调。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
+仅群主和群管理员可以调用 `blockMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupManagerDelegate#OnUserRemovedFromGroup` 回调。其他群成员会收到该成员退出群组的回调，如需该回调，请联系商务开通。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
 
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager blockMembers:members
                          fromGroup:@"groupID"
                          completion:nil];
@@ -120,7 +126,10 @@
 示例代码如下：
 
 ```objectivec
-ChatClient.getInstance().groupManager().unblockUser(groupId, username);
+// 异步方法
+[[EMClient sharedClient].groupManager unblockMembers:members
+                         fromGroup:@"groupID"
+                         completion:nil];
 ```
 
 #### 获取群组的黑名单用户列表
@@ -130,6 +139,7 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager getGroupBlacklistFromServerWithId:@"groupId"
                          pageNumber:pageNumber
                          pageSize:pageSize
@@ -149,10 +159,11 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 群成员被群主或者群管理员加入禁言列表后，被禁言成员和其他未操作的管理员或者群主将会收到群组事件回调 `EMGroupManagerDelegate#groupMuteListDidUpdate`。
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager muteMembers:members
                          muteMilliseconds:60
                          fromGroup:@"groupID"
-                         error:nil];
+                        completion:nil];
 ```
 
 #### 将成员移出群组禁言列表
@@ -162,9 +173,10 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 群成员被群主或者群管理员移出禁言列表后，被移出的群成员及其他未操作的管理员或者群主将会收到群组事件回调 `EMGroupManagerDelegate#groupMuteListDidUpdate`。
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager unmuteMembers:members
                          fromGroup:@"groupID"
-                         error:nil];
+                        completion:nil];
 ```
 
 #### 获取群组禁言列表
@@ -174,10 +186,11 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager getGroupMuteListFromServerWithId:@"groupID"
                          pageNumber:pageNumber
                          pageSize:pageSize
-                         error:nil];
+                       completion:nil];
 ```
 
 ### 开启和关闭全员禁言
@@ -193,7 +206,8 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 示例代码如下：
 
 ```objectivec
-[[EMClient sharedClient].groupManager muteAllMembersFromGroup:@"groupID" error:nil];
+// 异步方法
+[[EMClient sharedClient].groupManager muteAllMembersFromGroup:@"groupID" completion:nil];
 ```
 
 #### 关闭全员禁言
@@ -203,7 +217,8 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 示例代码如下：
 
 ```objectivec
-[[EMClient sharedClient].groupManager unmuteAllMembersFromGroup:@"groupID" error:nil];
+// 异步方法
+[[EMClient sharedClient].groupManager unmuteAllMembersFromGroup:@"groupID" completion:nil];
 ```
 
 ### 管理群组白名单
@@ -215,6 +230,7 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 群成员被群主或者群管理员添加到群白名单后，该群成员及其他未操作的群管理员和群主将会收到群组事件回调 `EMGroupManagerDelegate#groupWhiteListDidUpdate`。
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager addWhiteListMembers:members
                          fromGroup:@"groupID"
                          error:nil];
@@ -227,9 +243,10 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 群成员被群主或者群管理员移除群白名单后，该群成员及其他未操作的群管理员和群主将会收到群组事件回调 `EMGroupManagerDelegate#groupWhiteListDidUpdate`。
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager removeWhiteListMembers:members
                          fromGroup:@"groupID"
-                         error:nil];
+                         completion:nil];
 ```
 
 #### 检查自己是否在白名单中
@@ -237,9 +254,10 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 所有群成员可以调用 `isMemberInWhiteListFromServerWithGroupId` 方法检查自己是否在群白名单中，示例代码如下：
 
 ```objectivec
+// 异步方法
 [[EMClient sharedClient].groupManager
                          isMemberInWhiteListFromServerWithGroupId:@"groupID"
-                         error:nil];
+                         completion:nil];
 ```
 
 #### 获取群组白名单
@@ -247,7 +265,8 @@ ChatClient.getInstance().groupManager().unblockUser(groupId, username);
 仅群主和群管理员可以调用 `getGroupWhiteListFromServerWithId` 方法从服务器获取当前群组的白名单。
 
 ```objectivec
-[[EMClient sharedClient].groupManager getGroupWhiteListFromServerWithId:@"groupID" error:nil];
+// 异步方法
+[[EMClient sharedClient].groupManager getGroupWhiteListFromServerWithId:@"groupID" completion:nil];
 ```
 
 ## 更多操作

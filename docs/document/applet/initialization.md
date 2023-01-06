@@ -2,200 +2,192 @@
 
 <Toc />
 
-## 创建连接
+本页介绍小程序 SDK 集成过程中的初始化及登录。
+
+## 前提条件
+
+开始前，请注册有效的环信即时通讯 IM 开发者账号且获得 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+
+## 引入 SDK
+
+对于 JavaScript SDK，导入代码如下：
 
 ```javascript
-let conn = {};
-WebIM.config = config;
-conn = WebIM.conn = new WebIM.connection({
-    appKey: WebIM.config.appkey,
-    isHttpDNS: WebIM.config.isHttpDNS,
-    isMultiLoginSessions: WebIM.config.isMultiLoginSessions,
-    https: WebIM.config.https,
-    url: WebIM.config.socketServer,
-    apiUrl: WebIM.config.restServer,
-    isAutoLogin: WebIM.config.isAutoLogin,
-    autoReconnectNumMax: WebIM.config.autoReconnectNumMax,
-    autoReconnectInterval: WebIM.config.autoReconnectInterval,
-    delivery: WebIM.config.delivery,
-    useOwnUploadFun: WebIM.config.useOwnUploadFun
-})
-// WebIM.config 为之前集成里介绍的WebIMConfig.js
+import EC from "easemob-websdk";
 ```
 
-## 添加回调函数
+对于 TypeScript SDK，导入代码如下, EasemobChat 是 SDK 类型的命名空间。
 
 ```javascript
-conn.listen({
-    onOpened: function () {},                  //连接成功回调 
-    onClosed: function () {},                  //连接关闭回调
-    onTextMessage: function ( message ) {},    //收到文本消息
-    onEmojiMessage: function ( message ) {},   //收到表情消息
-    onPictureMessage: function ( message ) {}, //收到图片消息
-    onCmdMessage: function ( message ) {},     //收到命令消息
-    onAudioMessage: function ( message ) {},   //收到音频消息
-    onLocationMessage: function ( message ) {},//收到位置消息
-    onFileMessage: function ( message ) {},    //收到文件消息
-    onCustomMessage: function ( message ) {},  //收到自定义消息
-    onVideoMessage: function (message) {
-        var node = document.getElementById('privateVideo');
-        var option = {
-            url: message.url,
-            headers: {
-              'Accept': 'audio/mp4'
-            },
-            onFileDownloadComplete: function (response) {
-                var objectURL = WebIM.utils.parseDownloadResponse.call(conn, response);
-                node.src = objectURL;
-            },
-            onFileDownloadError: function () {
-                console.log('File down load error.')
-            }
-        };
-        WebIM.utils.download.call(conn, option);
-    },   //收到视频消息
-    onPresence: function ( message ) {},       //处理“广播”或“发布-订阅”消息，如联系人订阅请求、处理群组、聊天室被踢解散等消息
-    onRoster: function ( message ) {},         //处理好友申请
-    onInviteMessage: function ( message ) {},  //处理群组邀请
-    onOnline: function () {},                  //本机网络连接成功
-    onOffline: function () {},                 //本机网络掉线
-    onError: function ( message ) {},          //失败回调
-    onBlacklistUpdate: function (list) {       //黑名单变动
-        // 查询黑名单，将好友拉黑，将好友从黑名单移除都会回调这个函数，list则是黑名单现有的所有好友信息
-        console.log(list);
-    },
-    onRecallMessage: function(message){},      //收到撤回消息回调
-    onReceivedMessage: function(message){},    //收到消息送达服务器回执
-    onDeliveredMessage: function(message){},   //收到消息送达客户端回执
-    onReadMessage: function(message){},        //收到消息已读回执
-    onCreateGroup: function(message){},        //创建群组成功回执（需调用createGroupNew）
-    onMutedMessage: function(message){},       //如果用户在A群组被禁言，在A群发消息会走这个回调并且消息不会传递给群其它成员
-    onChannelMessage: function(message){}      //收到整个会话已读的回执，在对方发送channel ack时会在这个回调里收到消息
+import EC, { EasemobChat } from "easemob-websdk";
+```
+
+## SDK 初始化
+
+使用 SDK 前需要进行初始化，示例代码如下：
+
+```javascript
+const conn = new EC.connection({
+  appKey: "your appKey",
+  url: "wss://im-api-wechat.easemob.com/websocket",
+  apiUrl: "https://a1.easemob.com",
 });
 ```
 
-## 注册
+初始化 SDK 参数说明：
 
-根据用户名/密码/昵称注册环信 Web IM：
+| 参数       | 类型   | 是否必需 | 描述                               |
+| :--------- | :----- | :------- | :--------------------------------- |
+| `appKey`    | String     | 是      | 环信即时通讯云控制台为你的应用生成的唯一标识，由应用名称（`Appname`）和组织名称（`Orgname`）组成。                  |
+| `isHttpDNS`  | Bool  | 否 | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。        |
+| `delivery`         | Bool  | 否    | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。      |
+| `https`      | Bool  | 否  | 是否支持通过 HTTPS 访问即时通讯 IM：<br/> - （默认）`true`：支持 HTTPS 和 HTTP；<br/> -`false`：浏览器根据使用的域名自行判断。     |
+| `heartBeatWait`      | Int  | 否 | 心跳间隔，单位为秒，默认为 30000 秒。       |
+| `deviceId`           | String  | 否  | 设备 ID，为默认随机值。               |
+| `useOwnUploadFun`   | Bool  | 否   | 是否支持通过自己的路径将图片、文件上传到自己的服务器。<br/> -`true`：支持，需要指定路径；<br/> -（默认）`false`：关闭，通过消息服务器上传下载文件。 |
+| `autoReconnectNumMax` | Int  | 否 | 最大重连次数。      |
+| `apiUrl`           | String     | 是    | 指定的 REST 服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。如有需求，请联系商务获取指定的服务器地址。   |
+| `url`   | String     | 是   | 指定的消息服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。如有需求，请联系商务获取指定的服务器地址。     |
+
+## 注册用户
+
+本节介绍三种用户注册方式。
+
+### 控制台注册
+
+登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择**即时通讯** > **运营服务** > **用户管理**，创建 IM 用户。
+
+### REST API 注册
+
+请参考 [注册用户](/server-side/account_system.html#注册用户)。
+
+### SDK 注册
+
+若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
 ```javascript
-var options = { 
-    username: 'username',
-    password: 'password',
-    nickname: 'nickname',
-    appKey: WebIM.config.appkey,
-    success: function () { },  
-    error: function (err) {
-        let errorData = JSON.parse(err.data);
-        if (errorData.error === 'duplicate_unique_property_exists') {
-            console.log('用户已存在！');
-        } else if (errorData.error === 'illegal_argument') {
-            if (errorData.error_description === 'USERNAME_TOO_LONG') {
-                console.log('用户名超过64个字节！')
-            }else{
-                console.log('用户名不合法！')
-            }
-        } else if (errorData.error === 'unauthorized') {
-            console.log('注册失败，无权限！')
-        } else if (errorData.error === 'resource_limited') {
-            console.log('您的App用户注册数量已达上限,请升级至企业版！')
-        }
-    }, 
-  }; 
-  conn.registerUser(options);
+conn
+  .registerUser({
+    /** 用户 ID。 */
+    username: string,
+    /** 密码。 */
+    password: string,
+    /** 显示昵称。用于移动端推送的时候通知栏显示。 */
+    nickname: string,
+  })
+  .then((res) => {
+    console.log(res);
+  });
 ```
 
-## 登录
+## 用户登录
 
-### 用户名/密码登录
+目前登录服务器有两种方式：
 
-使用用户名/密码登录环信 Web IM：
+- 用户 ID + 密码
+- 用户 ID + token
+
+:::notice
+使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
+:::
+
+## 手动登录
+
+**用户 ID +密码** 登录是传统的登录方式。用户 ID 和密码都是你的终端用户自行决定，密码需要符合密码规则要求。
 
 ```javascript
-var options = { 
-  user: 'username',
-  pwd: 'password',
-  appKey: WebIM.config.appkey
-};
-conn.open(options);
+conn
+  .open({
+    user: "username",
+    pwd: "password",
+  })
+  .then(() => {
+    console.log("login success");
+  })
+  .catch((reason) => {
+    console.log("login fail", reason);
+  });
 ```
 
-### 使用 Token 登录
-
-1. 使用用户名/密码登录，获取 Token。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/product/easemob_user_token.html)。
 
 ```javascript
-var options = {
-    user: 'username',
-    pwd: 'password',
-    appKey: WebIM.config.appkey,
-    success: function (res) {
-      var token = res.access_token
-    },
-    error: function(){
-    }
-};
-conn.open(options);
+conn
+  .open({
+    user: "username",
+    accessToken: "token",
+  })
+  .then(() => {
+    console.log("login success");
+  })
+  .catch((reason) => {
+    console.log("login fail", reason);
+  });
 ```
 
-2. 使用 Token 登录环信 Web IM。
+### 自动登录（小程序 SDK 暂不支持）
 
-```javascript
-var options = {
-    user: 'username',
-    accessToken: 'token',
-    appKey: WebIM.config.appkey
-};
-conn.open(options);
-```
+在初始化的时候，可以设置是否自动登录。如果设置为自动登录，则登录成功之后，后续启动初始化的时候会自动登录，登录结果通过回调返回。
 
-## 退出
+## 退出登录
 
-```javascript
+```typescript
 conn.close();
 ```
 
-## 上传推送 token
+## 连接状态相关
 
-如果把 SDK 用在原生客户端，集成第三方推送功能，可以调用此方法将 token 上传到环信服务器
-
-```javascript
-/**
- * @param {Object} options - 
- * @param {Object} options.deviceId - 设备 ID，可以自己定义，一般用来标识同一个设备
- * @param {Object} options.deviceToken - 推送 token
- * @param {Object} options.notifierName - 推送服务的 appId，对于 FCM 是 senderId，对于 VIVO 是 “appId+#+AppKey ”
- */
-conn.uploadToken(options);
-```
-
-## 修改推送昵称
-
-在注册时可以设置一个昵称，这个昵称用来在推送消息时显示，可以调用下面API修改昵称
+你可以通过注册连接监听器确认连接状态。
 
 ```javascript
-conn.updateCurrentUserNick('newNick')
+conn.addEventHandler("handlerId", {
+  onConnected: () => {
+    console.log("onConnected");
+  },
+  onDisconnected: () => {
+    console.log("onDisconnected");
+  },
+  onTokenWillExpire: () => {
+    console.log("onTokenWillExpire");
+  },
+  onTokenExpired: () => {
+    console.log("onTokenExpired");
+  },
+});
 ```
 
-## 常见问题
+### 断网自动重连
 
-:::details 是否支持 token 登录，是否支持 HTTPS？
-支持。
-:::
+如果由于网络信号弱、切换网络等引起的连接中断，系统会自动尝试重连。重连成功或者失败分别会收到 `onConnected` 和 `onDisconnected` 通知。
 
-:::details 是否支持重连？
-支持。
-1. 未使用 DNS：当前连接不能建立时会尝试重新连接，连接次数可在 config 里配置；
-2. 使用 DNS：当前连接不能建立时，会根据 DNSconfig 的地址逐一尝试连接。
-:::
+### 被动退出登录
 
-:::details ws 有上行没有下行？
-可能是浏览器缓存了错误的 ws 返回结果，解决办法是加个时间戳参数，强制浏览器不走缓存。
-:::
+对于 `onDisconnected` 通知，错误码（`errorCode`）可能为以下几种，建议 App 返回登录界面。
 
-:::details 收到提示 “您的连接不是私密连接”，怎么处理？
+| 错误码                                             | 描述                       |
+| :------------------------------------------------- | :------------------------- |
+| WEBIM_CONNCTION_USER_LOGIN_ANOTHER_DEVICE=206      | 用户已经在其他设备登录。   |
+| WEBIM_CONNCTION_USER_REMOVED=207                   | 用户账户已经被移除。       |
+| WEBIM_CONNCTION_USER_KICKED_BY_CHANGE_PASSWORD=216 | 由于密码变更被踢下线。     |
+| WEBIM_CONNCTION_USER_KICKED_BY_OTHER_DEVICE=217    | 由于其他设备登录被踢下线。 |
 
-![](@static/images/applet/not-private-link.jpeg)
+## 输出信息到日志文件
 
-chrome53 屏蔽了赛门铁克的某些日期颁发的证书，升级 chrome 就可以解决。详细信息可查看：[http://www.jkeabc.com/376605.html](http://www.jkeabc.com/376605.html) 或者 [https://sslmate.com/blog/post/ct_redaction_in_chrome_53](https://sslmate.com/blog/post/ct_redaction_in_chrome_53)。
-:::
+开启日志输出：
+
+```javascript
+logger.enableAll();
+```
+
+关闭日志输出：
+
+```javascript
+logger.disableAll();
+```
+
+设置日志输出等级：
+
+```javascript
+// 0 - 5 或者 'TRACE'，'DEBUG'，'INFO'，'WARN'，'ERROR'，'SILENT';
+logger.setLevel(0);
+```

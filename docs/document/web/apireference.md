@@ -2,4 +2,4 @@
 
 <Toc />
 
-[4.X Web SDK 接口列表](https://webim-h5.easemob.com/jsdoc/out/index.html)
+[4.X Web SDK 接口列表](https://docs-im-beta.easemob.com/jsdoc/index.html)

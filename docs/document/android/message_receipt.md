@@ -156,11 +156,11 @@ EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() 
     ......
 
 });
-   /**
-    * 发送已读回执。
-    * @param message
-    */
-    public void sendReadAck(EMMessage message) {
+/**
+* 发送已读回执。
+* @param message
+*/
+public void sendReadAck(EMMessage message) {
     // 这里是接收的消息，未发送过已读回执且是单聊。
     if(message.direct() == EMMessage.Direct.RECEIVE
             && !message.isAcked()
@@ -176,7 +176,7 @@ EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() 
             e.printStackTrace();
         }
     }
-    }
+}
 
 ```
 
@@ -243,9 +243,7 @@ public void sendAckMessage(EMMessage message) {
 
 ```java
 // 接收到群组消息体的已读回执, 消息的接收方已经阅读此消息。
-void onGroupMessageRead(List<EMGroupReadAck> groupReadAcks) {
-
-}
+void onGroupMessageRead(List<EMGroupReadAck> groupReadAcks);
 ```
 
 接收到群组消息已读回执后，发出消息的属性 `groupAckCount` 会有相应变化；
@@ -272,8 +270,5 @@ public void asyncFetchGroupReadAcks(
     final String msgId,
     final int pageSize,
     final String startAckId,
-    final EMValueCallBack<EMCursorResult<EMGroupReadAck>> callBack
-) {
-
-}
+    final EMValueCallBack<EMCursorResult<EMGroupReadAck>> callBack);
 ```

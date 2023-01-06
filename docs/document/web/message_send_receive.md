@@ -2,13 +2,18 @@
 
 <Toc />
 
-登录环信 IM 后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
+登录环信即时通讯后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
 
 - 文字消息，包含超链接和表情；
 - 附件消息，包含图片、语音、视频及文件消息；
 - 位置消息；
 - 透传消息；
 - 自定义消息。
+
+:::tip
+对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。
+当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
+:::
 
 本文介绍如何使用即时通讯 IM Web SDK 实现发送和接收这些类型的消息。
 
@@ -46,19 +51,44 @@
 ```javascript
 // 发送文本消息。
 function sendTextMessage() {
+  let option = {
+    // 消息类型。
+    type: "txt",
+    // 消息内容。
+    msg: "message content",
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "username",
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+    chatType: "singleChat",
+  };
+  // 创建文本消息。
+  let msg = WebIM.message.create(opt);
+  // 调用 `send` 方法发送该文本消息。
+  conn
+    .send(msg)
+    .then(() => {
+      console.log("Send message success");
+    })
+    .catch((e) => {
+      console.log("Send message fail");
+    });
+}
+```
+
+对于聊天室消息，可设置消息优先级。示例代码如下：
+
+```javascript
+// 发送文本消息。
+function sendTextMessage() {
     let option = {
-        // 设置消息类型。
         type: "txt",
-        // 设置消息内容。
         msg: "message content",
-        // 设置消息接收方的用户 ID。
-        to: "username",
-        // 设置会话类型。
-        chatType: "singleChat",
+        // 聊天室消息的优先级。如果不设置，默认值为 `normal`，即“普通”优先级。
+        priority: "high"
+        to: "chat room ID",
+        chatType: "chatRoom",
     };
-    // 创建文本消息。
     let msg = WebIM.message.create(opt);
-    // 调用 `send` 方法发送该文本消息。
     conn.send(msg).then(()=>{
         console.log("Send message success");
     }).catch((e)=>{
@@ -66,12 +96,6 @@ function sendTextMessage() {
     });
 }
 ```
-
-:::notice
-群组消息和聊天室消息只需修改 option 对象下的其中 2 个参数：`to` 和 `chatType`。
-- 群聊：`to` 为群组 ID；`chatType` 为 `groupChat`；
-- 聊天室：`to` 为聊天室 ID`；`chatType` 为 `chatRoom`。
-:::
 
 ### 接收消息
 
@@ -81,57 +105,57 @@ function sendTextMessage() {
 
 ```javascript
 // 使用 `addEventHandler` 监听回调事件
-conn.addEventHandler("eventName",{
-    // SDK 与环信服务器连接成功。
-    onConnected: function (message) {},
-    // SDK 与环信服务器断开连接。
-    onDisconnected: function (message) {},
-    // 当前用户收到文本消息。
-    onTextMessage: function (message) {},
-    // 当前用户收到图片消息。
-    onImageMessage: function (message) {},
-    // 当前用户收到透传消息。
-    onCmdMessage: function (message) {},
-    // 当前用户收到语音消息。
-    onAudioMessage: function (message) {},
-    // 当前用户收到位置消息。
-    onLocationMessage: function (message) {},
-    // 当前用户收到文件消息。
-    onFileMessage: function (message) {},
-    // 当前用户收到自定义消息。
-    onCustomMessage: function (message) {},
-    // 当前用户收到视频消息。
-    onVideoMessage: function (message) {},
-    // 当前用户订阅的其他用户的在线状态更新。
-    onPresence: function (message) {},
-    // 当前用户收到好友邀请。
-    onContactInvited: function(msg){},
-    // 联系人被删除。
-    onContactDeleted: function(msg){},
-    // 新增联系人。
-    onContactAdded: function(msg){},
-    // 当前用户发送的好友请求被拒绝。
-    onContactRefuse: function(msg){},
-    // 当前用户发送的好友请求被同意。
-    onContactAgreed: function(msg){},
-    // 当前用户收到群组邀请。
-    onGroupEvent: function (message) {},
-    // 本机网络连接成功。
-    onOnline: function () {},
-    // 本机网络掉线。
-    onOffline: function () {},
-    // 调用过程中出现错误。
-    onError: function (message) {},
-    // 当前用户收到的消息被消息发送方撤回。
-    onRecallMessage: function (message) {},
-    // 当前用户发送的消息被接收方收到。
-    onReceivedMessage: function (message) {},
-    // 当前用户收到消息送达回执。
-    onDeliveredMessage: function (message) {},
-    // 当前用户收到消息已读回执。
-    onReadMessage: function (message) {},
-    // 当前用户收到会话已读回执。
-    onChannelMessage: function (message) {},
+conn.addEventHandler("eventName", {
+  // SDK 与环信服务器连接成功。
+  onConnected: function (message) {},
+  // SDK 与环信服务器断开连接。
+  onDisconnected: function (message) {},
+  // 当前用户收到文本消息。
+  onTextMessage: function (message) {},
+  // 当前用户收到图片消息。
+  onImageMessage: function (message) {},
+  // 当前用户收到透传消息。
+  onCmdMessage: function (message) {},
+  // 当前用户收到语音消息。
+  onAudioMessage: function (message) {},
+  // 当前用户收到位置消息。
+  onLocationMessage: function (message) {},
+  // 当前用户收到文件消息。
+  onFileMessage: function (message) {},
+  // 当前用户收到自定义消息。
+  onCustomMessage: function (message) {},
+  // 当前用户收到视频消息。
+  onVideoMessage: function (message) {},
+  // 当前用户订阅的其他用户的在线状态更新。
+  onPresence: function (message) {},
+  // 当前用户收到好友邀请。
+  onContactInvited: function (msg) {},
+  // 联系人被删除。
+  onContactDeleted: function (msg) {},
+  // 新增联系人。
+  onContactAdded: function (msg) {},
+  // 当前用户发送的好友请求被拒绝。
+  onContactRefuse: function (msg) {},
+  // 当前用户发送的好友请求被同意。
+  onContactAgreed: function (msg) {},
+  // 当前用户收到群组邀请。
+  onGroupEvent: function (message) {},
+  // 本机网络连接成功。
+  onOnline: function () {},
+  // 本机网络掉线。
+  onOffline: function () {},
+  // 调用过程中出现错误。
+  onError: function (message) {},
+  // 当前用户收到的消息被消息发送方撤回。
+  onRecallMessage: function (message) {},
+  // 当前用户发送的消息被接收方收到。
+  onReceivedMessage: function (message) {},
+  // 当前用户收到消息送达回执。
+  onDeliveredMessage: function (message) {},
+  // 当前用户收到消息已读回执。
+  onReadMessage: function (message) {},
+  // 当前用户收到会话已读回执。
+  onChannelMessage: function (message) {},
 });
 ```
 
@@ -140,14 +164,12 @@ conn.addEventHandler("eventName",{
 用户发送消息 2 分钟内可以撤回消息。如需调整时间限制，请联系可联系环信即时通讯 IM 的商务经理。
 
 ```javascript
-/**
- * @param {Object} option.mid - 要撤回消息的 ID。
- * @param {Object} option.to - 消息接收方。
- * @param {Object} option.type - 消息类型：chat (单聊)、groupchat (群聊)和 chatroom (聊天室)。
- */
 let option = {
+  // 要撤回消息的消息 ID。
     mid: 'msgId',
-    to: 'userID',
+  // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: 'username',
+  // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
     chatType: 'singleChat'
 };
 conn.recallMessage(option).then((res) => {
@@ -194,50 +216,53 @@ SDK 接收到附件消息时，会执行以下步骤：
 ```javascript
 function sendPrivateAudio() {
   // 获取语音文件。
-  let input = document.getElementById('audio');
+  let input = document.getElementById("audio");
   let file = WebIM.utils.getFileUrl(input);
   let allowType = {
-      'mp3': true,
-      'amr': true,
-      'wmv': true
+    mp3: true,
+    amr: true,
+    wmv: true,
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
-      // 设置消息类型。
-      type: 'audio',
+      // 消息类型。
+      type: "audio",
       file: file,
-      // 设置语音文件长度，单位为秒。
-      length: '3',
-      // 设置消息接收方的用户 ID。
-      to: 'username',
-      // 设置会话类型。
-      chatType: 'singleChat',
+      // 语音文件长度，单位为秒。
+      length: "3",
+      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+      to: "username",
+      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+      chatType: "singleChat",
       // 语音文件上传失败。
       onFileUploadError: function () {
-          console.log('onFileUploadError');
+        console.log("onFileUploadError");
       },
       // 语音文件上传进度。
       onFileUploadProgress: function (e) {
-          console.log(e)
+        console.log(e);
       },
       // 语音文件上传成功。
       onFileUploadComplete: function () {
-          console.log('onFileUploadComplete');
+        console.log("onFileUploadComplete");
       },
-      ext: {file_length: file.data.size}
+      ext: { file_length: file.data.size },
     };
     // 创建一条语音消息。
     let msg = WebIM.message.create(option);
     // 调用 `send` 方法发送该语音消息。
-    conn.send(msg).then((res)=>{
-      // 语音文件成功发送。
-      console.log('Success');
-    }).catch((e)=>{
-      // 语音文件发送失败。
-      console.log("Fail");
-    });
+    conn
+      .send(msg)
+      .then((res) => {
+        // 语音文件成功发送。
+        console.log("Success");
+      })
+      .catch((e) => {
+        // 语音文件发送失败。
+        console.log("Fail");
+      });
   }
-};
+}
 ```
 
 #### 发送图片消息
@@ -257,64 +282,67 @@ function sendPrivateImg() {
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
-      // 设置消息类型。
-      type: 'img',
+      // 消息类型。
+      type: "img",
       file: file,
       ext: {
-          // 设置图片文件长度，单位为字节。
-          file_length: file.data.size,
+        // 图片文件长度，单位为字节。
+        file_length: file.data.size,
       },
-      // 设置消息接收方的用户 ID。
+      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
       to: "username",
-      // 设置会话类型。
+      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
       chatType: "singleChat",
       // 图片文件上传失败。
       onFileUploadError: function () {
-          console.log("onFileUploadError");
+        console.log("onFileUploadError");
       },
       // 图片文件上传进度。
       onFileUploadProgress: function (e) {
-          console.log(e);
+        console.log(e);
       },
       // 图片文件上传成功。
       onFileUploadComplete: function () {
-          console.log("onFileUploadComplete");
+        console.log("onFileUploadComplete");
       },
     };
     // 创建一条图片消息。
     let msg = WebIM.message.create(option);
     // 调用 `send` 方法发送该图片消息。
-    conn.send(msg).then((res)=>{
-      // 图片文件成功发送。
-      console.log('Success');
-    }).catch((e)=>{
-      // 图片文件发送失败。
-      console.log("Fail");
-    });
+    conn
+      .send(msg)
+      .then((res) => {
+        // 图片文件成功发送。
+        console.log("Success");
+      })
+      .catch((e) => {
+        // 图片文件发送失败。
+        console.log("Fail");
+      });
   }
-};
+}
 ```
 
 #### 发送 URL 图片消息
 
-发送 URL 图片消息之前，确保将 `useOwnUploadFun` 设置为 `true`。
+发送 URL 图片消息之前，确保在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](http://docs-im-beta.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。
 
 ```javascript
 function sendPrivateUrlImg() {
   let option = {
-      chatType: 'singleChat',
-      // 设置消息类型。
-      type: "img",
-      // 设置图片文件的 URL　地址。
-      url: "img url",
-      // 设置消息接收方的用户 ID。
-      to: "username",
+    chatType: "singleChat",
+    // 消息类型。
+    type: "img",
+    // 图片文件的 URL 地址。
+    url: "img url",
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "username",
   };
   // 创建一条图片消息。
   let msg = WebIM.message.create(option);
   //  调用 `send` 方法发送该图片消息。
   conn.send(msg);
-};
+}
 ```
 
 #### 发送视频消息
@@ -329,20 +357,20 @@ function sendPrivateVideo() {
   let input = document.getElementById("video");
   let file = WebIM.utils.getFileUrl(input);
   let allowType = {
-      mp4: true,
-      wmv: true,
-      avi: true,
-      rmvb: true,
-      mkv: true,
+    mp4: true,
+    wmv: true,
+    avi: true,
+    rmvb: true,
+    mkv: true,
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
-      // 设置消息类型。
-      type: 'video',
+      // 消息类型。
+      type: "video",
       file: file,
-      // 设置消息接收方的用户 ID。
+      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
       to: "username",
-      // 设置会话类型。
+      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
       chatType: "singleChat",
       onFileUploadError: function () {
         // 视频文件上传失败。
@@ -356,20 +384,23 @@ function sendPrivateVideo() {
         // 视频文件上传成功。
         console.log("onFileUploadComplete");
       },
-      ext: {file_length: file.data.size},
+      ext: { file_length: file.data.size },
     };
     // 创建一条视频消息。
     let msg = WebIM.message.create(option);
     // 调用 `send` 方法发送该视频消息。
-    conn.send(msg).then((res)=>{
-      // 视频文件成功发送。
-      console.log('Success')
-    }).catch((e)=>{
-      // 视频文件发送失败。例如，本地用户被禁言或封禁。
-      console.log("Fail");
-    });
+    conn
+      .send(msg)
+      .then((res) => {
+        // 视频文件成功发送。
+        console.log("Success");
+      })
+      .catch((e) => {
+        // 视频文件发送失败。例如，本地用户被禁言或封禁。
+        console.log("Fail");
+      });
   }
-};
+}
 ```
 
 #### 发送文件消息
@@ -382,23 +413,23 @@ function sendPrivateFile() {
   let input = document.getElementById("file");
   let file = WebIM.utils.getFileUrl(input);
   let allowType = {
-      jpg: true,
-      gif: true,
-      png: true,
-      bmp: true,
-      zip: true,
-      txt: true,
-      doc: true,
-      pdf: true,
+    jpg: true,
+    gif: true,
+    png: true,
+    bmp: true,
+    zip: true,
+    txt: true,
+    doc: true,
+    pdf: true,
   };
   if (file.filetype.toLowerCase() in allowType) {
     let option = {
-      // 设置消息类型。
-      type: 'file',
+      // 消息类型。
+      type: "file",
       file: file,
-      // 设置消息接收方的用户 ID。
+      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
       to: "username",
-      // 设置会话类型。
+      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
       chatType: "singleChat",
       // 文件上传失败。
       onFileUploadError: function () {
@@ -412,17 +443,46 @@ function sendPrivateFile() {
       onFileUploadComplete: function () {
         console.log("onFileUploadComplete");
       },
-      ext: {file_length: file.data.size},
+      ext: { file_length: file.data.size },
     };
-      // 创建一条文件消息。
+    // 创建一条文件消息。
     let msg = WebIM.message.create(option);
-      // 调用 `send` 方法发送该文件消息。
-    conn.send(msg).then((res) => {
-      // 文件消息成功发送。
-      console.log("Success");
-    }).catch((e)=>{
-      // 文件消息发送失败。
-      console.log("Fail");
+    // 调用 `send` 方法发送该文件消息。
+    conn
+      .send(msg)
+      .then((res) => {
+        // 文件消息成功发送。
+        console.log("Success");
+      })
+      .catch((e) => {
+        // 文件消息发送失败。
+        console.log("Fail");
+      });
+  }
+}
+```
+
+### 发送位置消息
+
+当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
+
+```javascript
+const sendLocMsg = () => {
+  let coords;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      coords = position.coords;
+      let option = {
+        chatType: "singleChat",
+        type: "loc",
+        to: "username",
+        addr: "四通桥东",
+        buildingName: "数码大厦",
+        lat: Math.round(coords.latitude),
+        lng: Math.round(coords.longitude),
+      };
+      let msg = WebIM.message.create(option);
+      conn.send(msg);
     });
   }
 };
@@ -435,30 +495,116 @@ function sendPrivateFile() {
 参考以下代码示例发送和接收透传消息：
 
 ```javascript
-function sendCMDMessage(){
+function sendCMDMessage() {
   let option = {
-    // 设置消息类型。
-    type: 'cmd',
-    // 设置会话类型。
-    chatType: 'singleChat',
-    // 设置消息接收方的用户 ID。
-    to: 'username',
-    // 设置自定义动作。对于透传消息，该字段必填。
-    action : 'action',
-    // 设置消息扩展信息。
-    ext: {key: 'extends messages'}
-  }
+    // 消息类型。
+    type: "cmd",
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+    chatType: "singleChat",
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "username",
+    // 自定义动作。对于透传消息，该字段必填。
+    action: "action",
+    // 消息扩展信息。
+    ext: { key: "extends messages" },
+  };
   // 创建一条透传消息。
   let msg = WebIM.message.create(option);
   // 调用 `send` 方法发送该透传消息。
-  conn.send(msg).then((res)=>{
+  conn
+    .send(msg)
+    .then((res) => {
       // 消息成功发送回调。
-      console.log("Success")
-  }).catch((e)=>{
+      console.log("Success");
+    })
+    .catch((e) => {
       // 消息发送失败回调。
       console.log("Fail");
-  });
+    });
 }
+```
+
+#### 通过透传消息实现输入指示器
+
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，设定对聊天应用程序中新交互的期望。你可以通过透传消息实现输入指示器。
+
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
+
+![img](@static/images/common/typing_indicator.png)
+
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+
+:::notice
+
+用户 A 可根据需要设置透传消息发送间隔。
+
+:::
+
+以下示例代码展示如何发送输入状态的透传消息。
+
+发送输入状态的用户。
+
+```typescript
+let previousChangedTimeStamp = 0;
+// 监听输入状态的变化
+const onInputChange = function () {
+  const currentTimestamp = new Date().getTime();
+  if (currentTimestamp - previousChangedTimeStamp > 5000) {
+    sendBeginTyping();
+    previousChangedTimeStamp = currentTimestamp;
+  }
+};
+
+// 创建输入状态消息并发送
+const sendBeginTyping = function () {
+  const option = {
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+    chatType: "singleChat", 
+    // 消息类型。
+    type: "cmd", 
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "<target id>", 
+    // 用户自定义操作。
+    action: "TypingBegin", 
+  };
+  const typingMessage = message.create(option);
+
+  connection
+    .send(typingMessage)
+    .then(() => {
+      console.log("success");
+    })
+    .catch((e) => {
+      console.log("fail");
+    });
+};
+```
+
+接收输入状态的用户。
+
+```typescript
+// 设置状态监听器
+let timer;
+connection.addEventHandler("message", {
+  onCmdMessage: (msg) => {
+    console.log("onCmdMessage", msg);
+    if (msg.action === "TypingBegin") {
+      // 这里需更新 UI，显示“对方正在输入”
+      beginTimer();
+    }
+  },
+});
+
+const beginTimer = () => {
+  timer && clearTimeout(timer);
+  timer = setTimeout(() => {
+    // 这里需更新 UI，不再显示“对方正在输入”
+  }, 5000);
+};
 ```
 
 ### 发送自定义消息
@@ -469,33 +615,36 @@ function sendCMDMessage(){
 
 ```javascript
 function sendCustomMsg() {
-  // 设置自定义事件。
+  // 自定义事件。
   let customEvent = "customEvent";
   // 通过键值对设置自定义消息内容。
   let customExts = {};
   let option = {
-      // 设置消息类型。
-      type: "custom",
-      // 设置消息接收方的用户 ID。
-      to: "username",
-      // 设置会话类型。
-      chatType: "singleChat",
-      customEvent,
-      customExts,
-      // 消息扩展字段，不能设置为空，即设置为 "ext:null" 这种形式会出错。
-      ext: {},
-  }
+    // 消息类型。
+    type: "custom",
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "username",
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+    chatType: "singleChat",
+    customEvent,
+    customExts,
+    // 消息扩展字段，不能设置为空，即设置为 "ext:null" 这种形式会出错。
+    ext: {},
+  };
   // 创建一条自定义消息。
   let msg = WebIM.message.create(option);
   // 调用 `send` 方法发送该自定义消息。
-  conn.send(msg).then((res)=>{
+  conn
+    .send(msg)
+    .then((res) => {
       // 消息成功发送回调。
-      console.log("Success")
-  }).catch((e)=>{
+      console.log("Success");
+    })
+    .catch((e) => {
       // 消息发送失败回调。
       console.log("Fail");
-  });
-};
+    });
+}
 ```
 
 ### 使用消息扩展
@@ -504,25 +653,28 @@ function sendCustomMsg() {
 
 ```javascript
 function sendTextMessage() {
-    let option = {
-        type: "txt",
-        msg: "message content",
-        to: "username",
-        chatType: "singleChat",
-        // 设置消息扩展信息。扩展字段为可选，若带有该字段，值不能为空，即 "ext:null" 会出错。
-        ext: {
-            key1: "Self-defined value1",
-            key2: {
-                key3: "Self-defined value3",
-            },
-        }
-    }
-    let msg = WebIM.message.create(option);
-    //  调用 `send` 方法发送该扩展消息。
-    conn.send(msg).then((res)=>{
-        console.log("send private text Success");
-    }).catch((e)=>{
-        console.log("Send private text error");
+  let option = {
+    type: "txt",
+    msg: "message content",
+    to: "username",
+    chatType: "singleChat",
+    // 消息扩展信息。扩展字段为可选，若带有该字段，值不能为空，即 "ext:null" 会出错。
+    ext: {
+      key1: "Self-defined value1",
+      key2: {
+        key3: "Self-defined value3",
+      },
+    },
+  };
+  let msg = WebIM.message.create(option);
+  //  调用 `send` 方法发送该扩展消息。
+  conn
+    .send(msg)
+    .then((res) => {
+      console.log("send private text Success");
+    })
+    .catch((e) => {
+      console.log("Send private text error");
     });
 }
 ```

@@ -24,13 +24,16 @@
 
 ### 管理服务端和本地的会话
 
-#### 获取所有会话
+#### 获取本地所有会话
 
-环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。我们建议在 app 安装时，或本地没有会话时调用该方法。否则调用从本地获取所有会话的方法即可。
+对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-该功能需联系商务开通，开通后，用户默认可拉取 7 天内的 10 个最新会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
+你可以调用 `fetchAllConversations` 方法从服务端获取会话列表。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通，开通后，用户默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
 
-你可以调用 `fetchAllConversations` 方法从服务器获取所有会话，示例代码如下：
+:::tip
+1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 获取本地会话即可。
+2. 获取的会话列表中不包含最新一条消息通过 RESTful 接口发送的会话。若需获取该类会话，需要联系商务开通将通过 RESTful 接口发送的消息写入会话列表的功能。
+:::
 
 ```typescript
 ChatClient.getInstance()
@@ -58,16 +61,20 @@ ChatClient.getInstance()
 
 #### 分页获取指定会话的历史消息
 
-你可以调用 `fetchHistoryMessages` 方法从服务器分页获取指定会话的历史消息。建议该方法每次调用获取的消息不超过 50 条。若获取较大数量的消息，你可以多次调用该方法，确保数据可靠。获取数据后，SDK 会自动将消息更新到本地数据库。
+环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
+
+你可以调用 `fetchHistoryMessages` 方法从服务器分页获取指定会话的历史消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+
+为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 
 ```typescript
-// 会话 ID
+// 会话 ID。
 const convId = "convId";
 // 会话类型。详见 `ChatConversationType` 枚举类型。
 const convType = ChatConversationType.PeerChat;
-// 获取的最大消息数目
+// 获取的最大消息数目。
 const pageSize = 10;
-// 搜索的起始消息 ID
+// 搜索的起始消息 ID。
 const startMsgId = "";
 ChatClient.getInstance()
   .chatManager.fetchHistoryMessages(convId, chatType, pageSize, startMsgId)
@@ -82,9 +89,9 @@ ChatClient.getInstance()
 你可以调用 `getConversation` 方法从本地获取指定会话 ID 的会话，如果不存在可以创建。
 
 ```typescript
-// convId: 会话 ID
-// convType： 会话类型
-// createIfNeed：如果不存在则创建设置该值为 true
+// convId: 会话 ID。
+// convType： 会话类型。
+// createIfNeed：如果不存在则创建设置该值为 true。
 ChatClient.getInstance()
   .chatManager.getConversation(convId, convType, createIfNeed)
   .then(() => {
@@ -100,9 +107,9 @@ ChatClient.getInstance()
 你可以调用 `removeConversationFromServer` 方法删除服务器端会话及其对应的消息，示例代码如下：
 
 ```typescript
-// convId: 会话 ID
-// convType：会话类型
-// isDeleteMessage：删除会话时是否同时删除该会话中的消息
+// convId: 会话 ID。
+// convType：会话类型。
+// isDeleteMessage：删除会话时是否同时删除该会话中的消息。
 ChatClient.getInstance()
   .chatManager.removeConversationFromServer(convId, convType, isDeleteMessage)
   .then(() => {
@@ -116,8 +123,8 @@ ChatClient.getInstance()
 你可以调用 `deleteConversation` 方法删除本地保存的指定会话，示例代码如下：
 
 ```typescript
-// convId: 会话 ID
-// withMessage：删除会话时是否同时删除该会话中的消息
+// convId: 会话 ID。
+// withMessage：删除会话时是否同时删除该会话中的消息。
 ChatClient.getInstance()
   .chatManager.deleteConversation(convId, withMessage)
   .then(() => {
@@ -133,9 +140,9 @@ ChatClient.getInstance()
 你可以调用 `updateConversationMessage` 方法更新本地会话中的消息，示例代码如下：
 
 ```typescript
-// convId: 会话 ID
-// contType：会话类型
-// msg: 要更新的消息
+// convId: 会话 ID。
+// contType：会话类型。
+// msg: 要更新的消息。
 ChatClient.getInstance()
   .chatManager.updateConversationMessage(convId, convType, msg)
   .then(() => {
@@ -148,16 +155,12 @@ ChatClient.getInstance()
 
 ### 管理本地消息
 
-#### 获取本地消息
+#### 根据消息 ID 搜索消息
 
-你可以通过调用不同的方法获取指定的本地消息。
-
-##### 获取指定消息 ID 对应的消息
-
-你可以调用 `getMessage` 方法根据消息 ID 获取指定消息。
+你可以调用 `getMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 
 ```typescript
-// msgId: 消息 ID
+// msgId: 要获取的消息的消息 ID。
 ChatClient.getInstance()
   .chatManager.getMessage(msgId)
   .then((message) => {
@@ -168,18 +171,75 @@ ChatClient.getInstance()
   });
 ```
 
-##### 获取指定会话中包含特定关键字的消息
+#### 获取指定会话中特定类型的消息
 
-你可以调用 `getMessagesWithKeyword` 方法获取指定会话中包含特定关键字的消息。
+你可以调用 `getMessagesWithMsgType` 方法从本地存储中获取指定会话中特定类型的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
 ```typescript
-// convId: 会话 ID
-// convType：会话类型
-// keywords: 搜索关键字
-// direction：消息的搜索方向
-// timestamp：搜索起始时间戳
-// count: 期望获取的最大消息数
-// sender：消息发送者
+// convId: 会话 ID。
+// convType：会话类型：单聊、群聊和聊天室分别为 `PeerChat`、`GroupChat` 和 `RoomChat`。
+// msgType: 消息类型。
+// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+// timestamp：消息搜索的起始时间戳，单位为毫秒。该参数设置后，SDK 从指定的时间戳的消息开始，按照搜索方向对消息进行搜索。若设置为负数，SDK 从当前时间开始，按消息时间戳的逆序搜索。
+// count: 每次搜索的消息数量。取值范围为 [1,400]。
+// sender：消息发送方。
+ChatClient.getInstance()
+  .getMessagesWithMsgType(
+    convId,
+    convType,
+    msgType,
+    direction,
+    timestamp,
+    count,
+    sender
+  )
+  .then((messages) => {
+    console.log("get message success");
+  })
+  .catch((reason) => {
+    console.log("get message fail.", reason);
+  });
+```
+#### 获取指定会话中一定时间段内的消息
+
+你可以调用 `getMessageWithTimestamp` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
+
+```typescript
+// convId：会话 ID。
+// convType：会话类型：单聊、群聊和聊天室分别为 `PeerChat`、`GroupChat` 和 `RoomChat`。
+// startTime：搜索的起始时间戳，单位为毫秒。
+// endTime：搜索的结束时间戳，单位为毫秒。
+// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+// count：每次获取的消息数量。取值范围为 [1,400]。
+ChatClient.getInstance()
+  .getMessageWithTimestamp(
+    convId,
+    convType,
+    startTime,
+    endTime,
+    direction,
+    count
+  )
+  .then((messages) => {
+    console.log("get message success");
+  })
+  .catch((reason) => {
+    console.log("get message fail.", reason);
+  });
+```
+
+#### 获取指定会话中包含特定关键字的消息
+
+你可以调用 `getMessagesWithKeyword` 方法从本地数据库获取会话中的指定用户发送的包含特定关键字的消息，示例代码如下：
+
+```typescript
+// convId: 会话 ID。
+// convType：会话类型。
+// keywords: 搜索关键字。
+// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+// timestamp：搜索起始时间戳。
+// count: 每次获取的消息数量。取值范围为 [1,400]。
+// sender：消息发送方。
 ChatClient.getInstance()
   .getMessagesWithKeyword(
     convId,
@@ -198,16 +258,16 @@ ChatClient.getInstance()
   });
 ```
 
-##### 获取指定用户在一定时间内发送包含关键字的消息
+#### 获取指定用户在一定时间内发送包含关键字的消息
 
 你可以调用 `searchMsgFromDB` 方法获取指定用户在一定时间内发送的包含关键字的消息。
 
 ```typescript
-// keywords: 搜索消息的关键字
-// timestamp：起始时间戳
-// maxCount: 期望获取的最大消息数
-// from: 消息的发送者
-// direction：消息的搜索方向
+// keywords: 搜索消息的关键字。
+// timestamp：搜索起始时间戳。
+// maxCount: 每次获取的消息数量。取值范围为 [1,400]。
+// from: 消息发送方。
+// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
 ChatClient.getInstance()
   .chatManager.searchMsgFromDB(keywords, timestamp, maxCount, from, direction)
   .then((messages) => {
@@ -218,13 +278,32 @@ ChatClient.getInstance()
   });
 ```
 
-##### 获取指定会话的最新消息
+#### 获取指定会话中一定数量的消息
+
+你可以调用 `getMessages` 获取指定会话中一定数量的消息。 
+
+```typescript
+// convId: 会话 ID。
+// convType：会话类型。
+// startMsgId: 搜索的起始消息 ID。
+// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+// loadCount: 每次获取的消息数量。取值范围为 [1,400]。
+ChatClient.getInstance()
+  .getMessages(convId, convType, startMsgId, direction, loadCount)
+  .then((messages) => {
+    console.log("get message success");
+  })
+  .catch((reason) => {
+    console.log("get message fail.", reason);
+  });
+```
+#### 获取指定会话的最新消息
 
 你可以调用 `getLatestMessage` 方法获取指定会话中的最新一条消息。
 
 ```typescript
-// convId: 会话 ID
-// convType：会话类型
+// convId: 会话 ID。
+// convType：会话类型。
 ChatClient.getInstance()
   .getLatestMessage(convId, convType)
   .then((message) => {
@@ -235,20 +314,34 @@ ChatClient.getInstance()
   });
 ```
 
-除了以上方法，你还可以调用下面的方法获取消息：
+#### 获取指定会话最新接收到的消息
 
-- `getMessages`：获取指定会话中一定数量的消息；
-- `getLastReceivedMessage`：获取指定会话最新接收到的消息；
-- `getMessagesWithMsgType`：获取指定会话中特定类型的消息；
-- `getMessageWithTimestamp`：获取指定会话中一定时间内发送和接收的消息。
+你可以调用 `getLastReceivedMessage` 方法获取指定会话中最新收到的一条消息。 
 
-#### 获取未读消息数
+```typescript
+// convId: 会话 ID
+// convType：会话类型
+ChatClient.getInstance()
+  .getLastReceivedMessage(convId, convType)
+  .then((message) => {
+    if (message) {
+      console.log("get message success");
+    } else {
+      console.log("message not find.");
+    }
+  })
+  .catch((reason) => {
+    console.log("get message fail.", reason);
+  });
+```
 
-##### 获取所有会话的未读消息数
+#### 获取所有会话的未读消息数
 
 你可以调用 `getUnreadCount` 方法获取所有会话的未读消息数。
 
 ```typescript
+// convId: 会话 ID
+// convType：会话类型
 ChatClient.getInstance()
   .chatManager.getUnreadCount()
   .then((count) => {
@@ -259,7 +352,7 @@ ChatClient.getInstance()
   });
 ```
 
-##### 获取指定会话的未读消息数
+#### 获取指定会话的未读消息数
 
 你可以调用 `getConversationUnreadCount` 方法获取指定会话的未读消息数。
 
@@ -276,9 +369,7 @@ ChatClient.getInstance()
   });
 ```
 
-#### 标记消息已读
-
-##### 标记所有会话中的消息已读
+#### 标记所有会话中的消息已读
 
 你可以调用 `markAllConversationsAsRead` 方法标记所有会话中的消息已读。
 
@@ -293,7 +384,7 @@ ChatClient.getInstance()
   });
 ```
 
-##### 标记指定会话所有消息已读
+#### 标记指定会话所有消息已读
 
 你可以调用 `markAllMessagesAsRead` 方法标记指定会话所有消息已读。
 
@@ -310,7 +401,7 @@ ChatClient.getInstance()
   });
 ```
 
-##### 标记指定会话中的指定消息已读
+#### 标记指定会话中的指定消息已读
 
 你可以调用 `markMessageAsRead` 方法标记指定会话中的指定消息已读。
 
@@ -350,7 +441,7 @@ ChatClient.getInstance()
 当前用户只能导入自己发送或接收的消息。导入后，消息按照其包含的时间戳添加到对应的会话中。
 
 ```typescript
-// msgs 将要插入的消息数组
+// msgs：将要插入的消息数组
 ChatClient.getInstance()
   .chatManager.importMessages(msgs)
   .then(() => {

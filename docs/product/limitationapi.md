@@ -45,7 +45,6 @@
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------------------- | :----- | :--------------------------------------------------- | :----------------------------------------------------------- |
-| 发送消息                     | POST   | /{org_name}/{app_name}/messages                      | 100 次/秒/App Key （说明：1 秒下行分发消息量限制是该频率的 20 倍；该接口废弃，后期不再增加新特性） |
 | 发送单聊消息                 | POST   | /{org_name}/{app_name}/messages/users                | 6000 条/分钟/App Key                                         |
 | 发送群聊消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | 20 条/秒/App Key                                             |
 | 发送聊天室消息               | POST   | /{org_name}/{app_name}/messages/chatrooms            | 100 条/秒/App Key                                            |
@@ -53,7 +52,7 @@
 | 下载文件      |  GET     | /{org_name}/{app_name}/chatfiles/{uuid}       | 100 次/秒/App Key                                                 |
 | 获取历史消息（聊天记录）文件   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 次/分钟/App Key                                               |
 | 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
-| 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 100 次/秒/App Key                                                 |
+| 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key                                              |
 | 拉取会话列表    |   GET    | /{org_name}/{app_name}/user/{username}/user_channels       | 5 次/分钟/单用户 ID，100 次/秒/App Key    |
 
 ## 用户属性
@@ -61,7 +60,7 @@
 | Rest API 接口 |方法  | 接口 URL |
 | :------------------------- | :--- | :---------------------------------------------- |
 | 获取指定用户的所有用户属性   |  GET     | /{org_name}/{app_name}/metadata/user/{username}             |
-| 获取用户属性总量大小   |  GET     | /{org_name}/{app_name}/metadata/user/capacity           |
+| 获取 app 下的用户属性总大小   |  GET     | /{org_name}/{app_name}/metadata/user/capacity           |
 
 以上两个接口一共最高调用频率（默认值） 100 次/秒/App Key。
 
@@ -73,21 +72,21 @@
 
 ## 用户关系管理
 
-| Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
+| Rest API 接口 |方法  | 接口 URL| 接口最高调用频率 |
 | :------------- | :----- | :----------------------------------------------------------- | :------------------------- |
 | 添加好友   |    POST         | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
 | 移除好友    |    DELETE        | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
 | 获取好友列表    |  GET      | /{org_name}/{app_name}/users/{owner_username}/contacts/users   | 100 次/秒/App Key                                                 |
 | 获取黑名单列表     |  GET       | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 50 次/秒/App Key                                                  |
-| 添加黑名单    |    POST       | /{org_name}/{app_name}/users/{owner_username}/blocks/users    | 50 次/秒/App Key                                                  |
-| 移除黑名单 |    DELETE      | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username}   | 50 次/秒/App Key                                                  |
+| 添加用户至黑名单    |    POST       | /{org_name}/{app_name}/users/{owner_username}/blocks/users    | 50 次/秒/App Key                                                  |
+| 从黑名单移除用户 |    DELETE      | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username}   | 50 次/秒/App Key                                                  |
 
 ## 群组管理
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
-| 获取 app 中所有的群组（可分页）  |  GET     | /{org_name}/{app_name}/chatgroups        | 100 次/秒/App Key                                                 |
-| 获取一个用户参与的所有群组   |  GET         | /{app_name}/users/{username}/joined_chatgroups        | 50 次/秒/App Key                                                  |
+| 分页获取 app 中的群组  |  GET     | /{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}        | 100 次/秒/App Key                                                 |
+| 获取一个用户加入的所有群组   |  GET         | /{org_name}/{app_name}/users/{username}/joined_chatgroups        | 50 次/秒/App Key                                                  |
 | 获取群组详情        |  GET        | /{org_name}/{app_name}/chatgroups/{group_ids}           | 100 次/秒/App Key            |
 | 创建一个群组  |    POST      | /{org_name}/{app_name}/chatgroups                  | 100 次/秒/App Key                                                 |
 | 修改群组信息   |    PUT         | /{org_name}/{app_name}/chatgroups/{group_id}             | 100 次/秒/App Key                                                 |
@@ -131,7 +130,7 @@
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
-| 获取 app 中所有的聊天室  |    GET   | /{org_name}/{app_name}/chatrooms                                 | 50 次/秒/App Key                                                  |
+| 获取 app 中的聊天室  |    GET   | /{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}       | 50 次/秒/App Key                                                  |
 | 获取用户加入的聊天室 |    GET       | /{org_name}/{app_name}/users/{username}/joined_chatrooms         | 50 次/秒/App Key                                                  |
 | 获取聊天室详情     |    GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}                   | 100 次/秒/App Key                                                 |
 | 创建一个聊天室   |    POST   | /{org_name}/{app_name}/chatrooms                                 | 50 次/秒/App Key                                                  |

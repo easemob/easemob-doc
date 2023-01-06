@@ -1,5 +1,7 @@
 # 概述
 
+<Toc />
+
 本页介绍 Web 集成相关内容。
 
 ## 前提条件
@@ -27,7 +29,7 @@ import EC, { EasemobChat } from 'easemob-websdk';
 如果对 SDK 大小有要求，可根据功能按需导入 SDK 文件。
 
 | 功能             | 导入文件                | 使用方式            |
-| ---------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| :------------ | :----- | :----------------------------------------------------------- |
 | 联系人和消息管理 | import \* as contactPlugin from "easemob-websdk/contact/contact";             | miniCore.usePlugin(contactPlugin, "contact");         |
 | 群组         | import \* as groupPlugin from "easemob-websdk/group/group";                   | miniCore.usePlugin(groupPlugin, "group");             |
 | 聊天室       | import \* as chatroomPlugin from "easemob-websdk/chatroom/chatroom";          | miniCore.usePlugin(chatroomPlugin, "chatroom");       |
@@ -75,18 +77,18 @@ const conn = new EC.connection({
 
 初始化 SDK 参数说明：
 
-| 参数             | 描述                                                         |
-| :----------| :----------------------------------------------------------- |
-| `appKey` | 在管理后台注册的应用唯一标识。                                   |
-| `isHttpDNS`   | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。  |
-| `delivery` | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。  |
-| `https` | 是否支持通过 HTTPS 访问即时通讯 IM：<br/> - （默认）`true`：支持 HTTPS 和 HTTP；<br/> -`false`：浏览器根据使用的域名自行判断。  |
-| `heartBeatWait` | 心跳间隔，单位为秒，默认为 30000 秒。  |
-| `deviceId` | 设备 ID，为默认随机值。  |
-| `useOwnUploadFun` | 是否支持通过自己的路径将图片、文件上传到自己的服务器。<br/> -`true`：支持，需要指定路径；<br/> -（默认）`false`：关闭，通过消息服务器上传下载文件。 |
-| `autoReconnectNumMax` | 最大重连次数。  |
-| `apiUrl` | 指定的 REST 服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。如有需求，请联系商务获取指定的服务器地址。  |
-| `url`  | 指定的消息服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。如有需求，请联系商务获取指定的服务器地址。  |
+| 参数       | 类型   | 是否必需 | 描述                               |
+| :--------- | :----- | :------- | :--------------------------------- |
+| `appKey` | String     | 是    | 环信即时通讯云控制台为你的应用生成的唯一标识，由应用名称（`Appname`）和组织名称（`Orgname`）组成。                                   |
+| `isHttpDNS` | Bool  | 否  | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。  |
+| `delivery` | Bool  | 否 | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。  |
+| `https` | Bool  | 否 | 是否支持通过 HTTPS 访问即时通讯 IM：<br/> - （默认）`true`：支持 HTTPS 和 HTTP；<br/> -`false`：浏览器根据使用的域名自行判断。  |
+| `heartBeatWait` | Int  | 否 | 心跳间隔，单位为秒，默认为 30000 秒。  |
+| `deviceId` | String  | 否 | 设备 ID，为默认随机值。  |
+| `useOwnUploadFun` | Bool  | 否 | 是否支持通过自己的路径将图片、文件上传到自己的服务器。<br/> -`true`：支持，需要指定路径；<br/> -（默认）`false`：关闭，通过消息服务器上传下载文件。 |
+| `autoReconnectNumMax` | Int  | 否 | 最大重连次数。  |
+| `apiUrl` | String     | 否 | 指定的 REST 服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。如有需求，请联系商务获取指定的服务器地址。  |
+| `url`  | String     | 否 | 指定的消息服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。如有需求，请联系商务获取指定的服务器地址。  |
 
 ## 注册用户
 
@@ -94,24 +96,24 @@ const conn = new EC.connection({
 
 ### 控制台注册
 
-控制台的注册请到 [这里](https://console.easemob.com/app/im-service/operative-service/user)。
+登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择**即时通讯** > **运营服务** > **用户管理**，创建 IM 用户。
 
 ### REST API 注册
 
-请参考 [注册用户](account_system.html#注册用户)。
+请参考 [注册用户](/server-side/account_system.html#注册用户)。
 
 ### SDK 注册
 
-该方法需在 [控制台](https://console.easemob.com/app/im-service/detail) 设置允许 **开放注册**。
+若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
 ```javascript
 conn.registerUser({
 	/** 用户 ID。 */
-	username: string;
+	username: string,
 	/** 密码。 */
-	password: string;
+	password: string,
 	/** 显示昵称。用于移动端推送的时候通知栏显示。 */
-	nickname?: string;
+	nickname: string,
 }).then((res) => {
   console.log(res)
 })
@@ -119,11 +121,10 @@ conn.registerUser({
 
 ## 用户登录
 
-目前登录服务器有三种方式：
+目前登录服务器有两种方式：
 
-- 用户 ID + 密码；
-- 用户 ID + token；
-- 用户 ID + agoraToken。
+- 用户 ID + 密码
+- 用户 ID + token
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
@@ -147,7 +148,7 @@ conn
   });
 ```
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](easemob_user_token.html)。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/product/easemob_user_token.html)。
 
 ```javascript
 conn
@@ -161,22 +162,6 @@ conn
   .catch((reason) => {
     console.log("login fail", reason);
   });
-```
-
-**用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般同时使用声网和环信产品时利用该方法登录。token 获取请参考 [使用声网 user token 鉴权](https://docs.agora.io/en/agora-chat/generate_user_tokens?platform=React%20Native)。
-
-```javascript
-conn
-  .open({
-    user: "username",
-    agoraToken: "agoraToken",
-  })
-  .then(() => {
-    console.log("login success");
-  })
-  .catch((reason) => {
-    console.log("login fail", reason);
-	});
 ```
 
 ### 自动登录（Web SDK 暂不支持）

@@ -6,6 +6,10 @@
 
 本文介绍如何在即时通讯应用中发布、订阅和查询用户的在线状态。
 
+:::notice
+私有化版本不支持在线状态订阅。
+:::
+
 ## 技术原理
 
 环信 IM SDK 提供 `Presence`、`PresenceManager` 和 `IPresenceManagerDelegate` 类，用于管理在线状态订阅，包含如下核心方法：
@@ -48,7 +52,7 @@
 
 默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `PresenceManager#SubscribePresences` 方法订阅指定用户的在线状态，示例代码如下：
 
-```c#
+```csharp
 SDKClient.Instance.PresenceManager.SubscribePresences(members, expiry, new ValueCallBack<List<Presence>>(
     onSuccess: (list) =>
     {
@@ -70,9 +74,10 @@ SDKClient.Instance.PresenceManager.SubscribePresences(members, expiry, new Value
 在线状态变更时，订阅者会收到 `IPresenceManagerDelegate#OnPresenceUpdated` 回调。
 
 :::notice
+
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
 - 每次调用接口最多只能订阅 100 个账号，若数量较大需多次调用。每个用户 ID 订阅的用户数不超过 3000。如果超过 3000，后续订阅也会成功，但默认会将订阅剩余时长较短的替代。
-:::
+  :::
 
 ### 发布自定义在线状态
 
@@ -80,7 +85,7 @@ SDKClient.Instance.PresenceManager.SubscribePresences(members, expiry, new Value
 
 示例代码如下：
 
-```c#
+```csharp
 SDKClient.Instance.PresenceManager.PublishPresence(ext, new CallBack(
     onSuccess: () => {
         Debug.Log($"PublishPresence success.");
@@ -95,14 +100,14 @@ SDKClient.Instance.PresenceManager.PublishPresence(ext, new CallBack(
 
 添加用户在线状态的监听器，示例代码如下：
 
-```c#
+```csharp
 PresenceManagerDelegate presenceManagerDelegate = new PresenceManagerDelegate();
 SDKClient.Instance.PresenceManager.AddPresenceManagerDelegate(presenceManagerDelegate);
 ```
 
 参考如下示例代码，使用 `IPresenceManagerDelegate` 监听器实现以下接口。当订阅的用户在线状态发生变化时，会收到`OnPresenceUpdated` 回调。
 
-```c#
+```csharp
 public interface IPresenceManagerDelegate
 {
     void OnPresenceUpdated(List<Presence> presences);
@@ -113,7 +118,7 @@ public interface IPresenceManagerDelegate
 
 若取消指定用户的在线状态订阅，可调用 `PresenceManager#UnsubscribePresences` 方法，示例代码如下：
 
-```c#
+```csharp
 SDKClient.Instance.PresenceManager.UnsubscribePresences(mem_list, new CallBack(
     onSuccess: () => {
         Debug.Log($"UnsubscribePresences success.");
@@ -128,7 +133,7 @@ SDKClient.Instance.PresenceManager.UnsubscribePresences(mem_list, new CallBack(
 
 为方便用户管理订阅关系，SDK 提供 `PresenceManager#FetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
-```c#
+```csharp
 SDKClient.Instance.PresenceManager.FetchSubscribedMembers(pageNum, pageSize, new ValueCallBack<List<string>>(
     onSuccess: (list) =>
     {
@@ -145,7 +150,7 @@ SDKClient.Instance.PresenceManager.FetchSubscribedMembers(pageNum, pageSize, new
 
 如果不关注用户的在线状态变更，你可以调用 `PresenceManager#FetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
-```c#
+```csharp
 SDKClient.Instance.PresenceManager.FetchPresenceStatus(members, new ValueCallBack<List<Presence>>(
     onSuccess: (list) =>
     {

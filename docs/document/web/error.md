@@ -41,14 +41,14 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 219    | USER_MUTED_BY_ADMIN                            | 用户被全局禁言：在管理后台禁言了此用户。                     |
 | 221    | USER_NOT_FRIEND                                | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。该功能可在控制台开通。 |
 | 500    | SERVER_BUSY                                    | 服务器忙碌。                                                 |
-| 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT                | 敏感词：发送的消息包含敏感词时报此错误。                     |
+| 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT                | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。                     |
 | 502    | MESSAGE_EXTERNAL_LOGIC_BLOCKED                 | 消息被拦截：开通反垃圾服务后，消息被拦截报此错误。           |
 | 503    | SERVER_UNKNOWN_ERROR                           | 消息发送失败未知错误：服务端返回的错误信息超出 SDK 处理范围。 |
 | 504    | MESSAGE_RECALL_TIME_LIMIT                      | 撤回消息时超出限定时间。                                     |
 | 505    | SERVICE_NOT_ENABLED                            | 服务未开启：要使用的某些功能未开通。                         |
 | 506    | SERVICE_NOT_ALLOW_MESSAGING                    | 用户未在白名单中：群组或聊天室开启全员禁言时，若用户未在白名单中发送消息时提示该错误。 |
 | 507    | SERVICE_NOT_ALLOW_MESSAGING_MUTE               | 当前用户被禁言：在群组或者聊天室中被禁言后发消息报此错误。           |
-| 508    | MESSAGE_MODERATION_BLOCKED                     | 消息被 Moderation 服务拦截。                                 |
+| 508    | MESSAGE_MODERATION_BLOCKED                     | 第三方内容审核服务的消息审核结果为“拒绝”时提示该错误。          |
 | 509    | MESSAGE_CURRENT_LIMITING                       | 单个用户 ID 发送群聊消息超出频率限制。                       |
 | 601    | GROUP_ALREADY_JOINED                           | 已在群组内：当前用户已在该群组中。                           |
 | 602    | GROUP_NOT_JOINED                               | 不在群组内：用户发送群消息时未加入该群组。                   |

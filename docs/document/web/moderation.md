@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Web SDK 提供 `reportMessage` 方法实现举报违规消息功能。
+环信即时通讯 IM SDK 提供 `reportMessage` 方法实现举报违规消息功能。
 
 ## 前提条件
 
@@ -24,8 +24,8 @@
 
 ```javascript
 connection.reportMessage({
-    reportType: 'report type'; // 举报类型。
-    reportReason: 'report reason'; // 举报原因。
-    messageId: 'ID of the reported message'; // 消息 ID
+    reportType: 'report type', // 举报类型。
+    reportReason: 'report reason', // 举报原因。
+    messageId: 'ID of the reported message' // 消息 ID
 })
 ```

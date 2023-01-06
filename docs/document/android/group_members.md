@@ -38,13 +38,15 @@
 
 ```java
 // 群主或群组管理员添加群组成员
+// 同步方法，会阻塞当前线程。异步方法为 asyncAddUsersToGroup(String, String[], EMCallBack)。
 EMClient.getInstance().groupManager().addUsersToGroup(groupId, newmembers);
 ```
 
 - 私有群成员邀请用户入群：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncInviteUser(String, String[], String, EMCallBack)}。
 EMClient.getInstance().groupManager().inviteUser(groupId, newmembers, null);
 ```
 
@@ -55,7 +57,8 @@ EMClient.getInstance().groupManager().inviteUser(groupId, newmembers, null);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncRemoveUserFromGroup(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 ```
 
@@ -68,7 +71,8 @@ EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 示例代码如下：
 
 ```java
-// 异步方法。
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncChangeOwner(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().changeOwner(groupId, newOwner);
 ```
 
@@ -82,7 +86,7 @@ EMClient.getInstance().groupManager().changeOwner(groupId, newOwner);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncAddGroupAdmin(String, String, EMValueCallBack)}。
+// 异步方法为 asyncAddGroupAdmin(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().addGroupAdmin(groupId, admin);
 ```
 
@@ -96,7 +100,7 @@ EMClient.getInstance().groupManager().addGroupAdmin(groupId, admin);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncRemoveGroupAdmin(String, String, EMValueCallBack)}。
+// 异步方法为 asyncRemoveGroupAdmin(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().removeGroupAdmin(groupId, admin);
 ```
 
@@ -115,13 +119,13 @@ List<String> adminList = group.getAdminList();
 
 #### 将成员加入群组黑名单
 
-仅群主和群管理员可以调用 `BlockGroupMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupChangeListener#OnUserRemovedFromGroup` 回调，其他群成员收到 `EMGroupChangeListener#OnMemberExitedFromGroup` 回调。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
+仅群主和群管理员可以调用 `BlockGroupMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupChangeListener#OnUserRemovedFromGroup` 回调。其他群成员会收到该成员退出群组的回调，如需该回调，请联系商务开通。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
 
 示例代码如下：
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncBlockUser(String, String, EMCallBack)}。
+// 异步方法为 asyncBlockUser(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().blockUser(groupId, username);
 ```
 
@@ -133,7 +137,7 @@ EMClient.getInstance().groupManager().blockUser(groupId, username);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncUnblockUser(String, String, EMCallBack)}。
+// 异步方法为 asyncUnblockUser(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().unblockUser(groupId, username);
 ```
 
@@ -145,7 +149,7 @@ EMClient.getInstance().groupManager().unblockUser(groupId, username);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncGetBlockedUsers(String, EMValueCallBack)}。
+// 异步方法为 asyncGetBlockedUsers(String, EMValueCallBack)。
 EMClient.getInstance().groupManager().getBlockedUsers(groupId);
 ```
 
@@ -159,7 +163,7 @@ EMClient.getInstance().groupManager().getBlockedUsers(groupId);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #aysncMuteGroupMembers(String, List, long, EMValueCallBack)}。
+// 异步方法为 asyncMuteGroupMembers(String, List, long, EMValueCallBack)。
 EMClient.getInstance().groupManager().muteGroupMembers(groupId, muteMembers, duration);
 ```
 
@@ -171,7 +175,7 @@ EMClient.getInstance().groupManager().muteGroupMembers(groupId, muteMembers, dur
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncUnMuteGroupMembers(String, List, EMValueCallBack)}。
+// 异步方法为 asyncUnMuteGroupMembers(String, List, EMValueCallBack)。
 EMClient.getInstance().groupManager().unMuteGroupMembers(String groupId, List<String> members);
 ```
 
@@ -183,7 +187,7 @@ EMClient.getInstance().groupManager().unMuteGroupMembers(String groupId, List<St
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法见 {@link #asyncFetchGroupMuteList(String, int, int, EMValueCallBack)}。
+// 异步方法为 asyncFetchGroupMuteList(String, int, int, EMValueCallBack)。
 EMClient.getInstance().groupManager().fetchGroupMuteList(String groupId, int pageNum, int pageSize);
 ```
 

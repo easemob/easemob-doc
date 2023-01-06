@@ -1,4 +1,4 @@
-# 创建和管理聊天室及监听聊天室事件
+# 创建和管理聊天室以及监听器介绍
 
 <Toc />
 
@@ -36,39 +36,38 @@
 
 ### 创建聊天室
 
-仅 [超级管理员](/document/server-side/chatroom.html#管理超级管理员) 可以调用 CreateRoom 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
+仅 [超级管理员](/document/server-side/chatroom.html#管理超级管理员) 可以调用 `CreateRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
 
-你也可以直接调用 REST API 从服务端 [创建聊天室](document/server-side/chatroom.html#创建聊天室)。
+你也可以直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
 
 示例代码如下：
 
 ```csharp
 SDKClient.Instance.RoomManager.CreateRoom(
-    // 聊天室名称，不能超过 128 个字符
-    subject,
-    // 聊天室描述， 不能超过 512 个字符
-    description,
-    // 欢迎消息
-    welcomeMsg,
-    // 最大成员数
-    maxUserCount,
-    // 聊天室成员列表
-    members,
-    handle: new ValueCallBack<Room>(
-        onSuccess: (room) => {
-        },
-        onError:(code, desc) => {
-        }
-    )
-);
+// 聊天室名称，不能超过 128 个字符
+subject,
+// 聊天室描述， 不能超过 512 个字符
+description,
+// 欢迎消息
+welcomeMsg,
+// 最大成员数
+maxUserCount,
+// 聊天室成员列表
+members,
+handle: new ValueCallBack<Room>(
+  onSuccess: (room) => {
+  },
+  onError:(code, desc) => {
+  }
+));
 ```
 
 ### 加入聊天室
 
 用户申请加入聊天室的步骤如下：
 
-- 调用 `FetchPublicRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-- 调用 `JoinPublicGroup` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `OnMemberJoinedFromRoom` 回调。
+1. 调用 `FetchPublicRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
+2. 调用 `JoinPublicGroup` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `OnMemberJoinedFromRoom` 回调。
 
 示例代码如下：
 
@@ -99,10 +98,10 @@ SDKClient.Instance.RoomManager.JoinRoom(roomId, new ValueCallBack<Room>(
 
 ```csharp
 SDKClient.Instance.RoomManager.FetchRoomInfoFromServer(roomId, new ValueCallBack<Room>(
-    onSuccess: (room) => {
-    },
-    onError: (code, desc) => {
-    }
+  onSuccess: (room) => {
+  },
+  onError: (code, desc) => {
+  }
 ));
 ```
 
@@ -121,7 +120,7 @@ SDKClient.Instance.RoomManager.LeaveRoom(roomId, new CallBack(
 ));
 ```
 
-退出聊天室时，SDK 默认删除该聊天室的所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `Options#DeleteMessagesAsExitRoom` 设置为 false。
+退出聊天室时，SDK 默认删除该聊天室的所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `Options#DeleteMessagesAsExitRoom` 设置为 `false`。
 
 示例代码如下：
 
@@ -185,7 +184,7 @@ public interface IRoomManagerDelegate
     void OnRemovedFromRoom(string roomId, string roomName, string participant);
     // 禁言指定成员。被禁言的成员会收到该事件。
     void OnMuteListAddedFromRoom(string roomId, List<string> mutes, long expireTime);
-    // 解除对指定成员的禁言。被解除禁言的成员会收到该事件
+    // 解除对指定成员的禁言。被解除禁言的成员会收到该事件。
     void OnMuteListRemovedFromRoom(string roomId, List<string> mutes);
     // 设置管理员。被添加的管理员会收到该事件。
     void OnAdminAddedFromRoom(string roomId, string admin);
@@ -194,7 +193,10 @@ public interface IRoomManagerDelegate
     // 转让聊天室。聊天室全体成员会收到该事件。
     void OnOwnerChangedFromRoom(string roomId, string newOwner, string oldOwner);
     // 更新聊天室公告。聊天室的所有成员会收到该事件。
-
     void OnAnnouncementChangedFromRoom(string roomId, string announcement);
+    // 聊天室自定义属性有更新。聊天室所有成员会收到该事件。
+    void OnChatroomAttributesChanged(string roomId, Dictionary<string, string> kv, string from);
+    // 有聊天室自定义属性被移除。聊天室所有成员会收到该事件。
+    void OnChatroomAttributesRemoved(string roomId, List<string> keys, string from);
 }
 ```

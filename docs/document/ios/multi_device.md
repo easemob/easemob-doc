@@ -180,6 +180,8 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUse
             break;
     }
 }
+// 当前⽤户在其他设备单向删除服务端的历史消息。
+- (void)multiDevicesMessageBeRemoved:(NSString *_Nonnull)conversationId deviceId:(NSString *_Nonnull)deviceId;
 ```
 
 ### 典型示例

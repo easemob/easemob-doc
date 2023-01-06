@@ -20,7 +20,7 @@
 
 举报违规消息的示例代码如下：
 
-```c#
+```csharp
 SDKClient.Instance.ChatManager.ReportMessage(msgId, tag, reason, new CallBack(
     onSuccess: () =>
     {

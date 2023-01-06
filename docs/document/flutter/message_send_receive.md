@@ -7,7 +7,7 @@
 - 文字消息，包含超链接和表情消息。
 - 附件消息，包含图片、语音、视频及文件消息。
 - 位置消息。
-- CMD 消息。
+- 透传消息。
 - 自定义消息。
 
 本文介绍如何使用即时通讯 IM SDK 实现发送和接收这些类型的消息。
@@ -174,6 +174,87 @@ message.setMessageStatusCallBack(
 EMClient.getInstance.chatManager.sendMessage(message).then((value) {
   // 消息发送动作完成。
 });
+```
+
+#### 通过透传消息实现输入指示器
+
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
+
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
+
+![img](@static/images/common/typing_indicator.png)
+
+
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+
+:::notice 
+
+用户 A 可根据需要设置透传消息发送间隔。
+
+:::
+
+以下示例代码展示如何发送输入状态的透传消息。
+
+```dart
+//发送表示正在输入的透传消息
+final String msgTypingBegin = "TypingBegin";
+
+void textChange() {
+  int currentTimestamp = getCurrentTimestamp();
+  if (currentTimestamp - _previousChangedTimeStamp > 5) {
+    _sendBeginTyping();
+    _previousChangedTimeStamp = currentTimestamp;
+  }
+}
+
+void _sendBeginTyping() async {
+  var msg = EMMessage.createCmdSendMessage(
+    targetId: conversationId,
+    action: msgTypingBegin,
+    deliverOnlineOnly: true,
+  );
+  msg.chatType = ChatType.Chat;
+  EMClient.getInstance.chatManager.sendMessage(msg);
+}
+
+```
+
+以下示例代码展示如何接受和解析输入状态的透传消息。
+
+```dart
+final int typingTime = 10;
+Timer? _timer;
+
+void onCmdMessagesReceived(List<EMMessage> list) {
+  for (var msg in list) {
+    if (msg.conversationId != currentConversationId) {
+      continue;
+    }
+    EMCmdMessageBody body = msg.body as EMCmdMessageBody;
+    if (body.action == msgTypingBegin) {
+      // 这里需更新 UI，显示“对方正在输入”
+      beginTimer();
+    }
+  }
+}
+
+void beginTimer() {
+  _timer = Timer.periodic(
+    Duration(seconds: typingTime),
+    (timer) {
+      // 这里需更新 UI，显示“对方正在输入”
+      cancelTimer();
+    },
+  );
+}
+
+void cancelTimer() {
+  _timer?.cancel();
+}
 ```
 
 ### 接收消息

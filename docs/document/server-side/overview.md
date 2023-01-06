@@ -35,7 +35,7 @@
 
 环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
-Authorization：`Bearer ${token}`
+Authorization：`Bearer ${YourAppToken}`
 
 为提高项目的安全性，环信即时通讯使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。
 
@@ -106,9 +106,9 @@ Authorization：`Bearer ${token}`
 
 | 名称<div style="width: 150px;"></div>             | 方法 | 请求                                        | 描述                                                         |
 | :--------------- | :--- | :------------------------------------------ | :----------------------------------------------------------- |
-| 发送消息         | POST | /{org_name}/{app_name}/messages             | 聊天相关 API，一般是模拟系统管理员给用户或者群组发送消息，支持发送文本消息、图片消息、语音消息、视频消息，透传消息，扩展消息以及文件类型消息。 |
+| 发送消息         | POST | 三种请求场景如下：<br/> - 单聊：/{org_name}/{app_name}/messages/users <br/> - 群聊：/{org_name}/{app_name}/messages/chatgroups <br/> - 聊天室：/{org_name}/{app_name}/messages/chatrooms  | 聊天相关 API，一般是模拟系统管理员给用户、群组或聊天室发送消息，支持发送文本消息、图片消息、语音消息、视频消息，透传消息，扩展消息以及文件类型消息。 |
 | 上传文件         | POST | /{org_name}/{app_name}/chatfiles            | 上传语音和图片等文件。                                       |
-| 下载文件         | POST | /{org_name}/{app_name}/chatfiles/{uuid}     | 下载语音和图片等文件。                                       |
+| 下载文件         | GET | /{org_name}/{app_name}/chatfiles/{file_uuid}     | 下载语音和图片等文件。                                       |
 | 获取聊天记录文件 | GET  | /{org_name}/{app_name}/chatmessages/${time} | 获取聊天记录文件。                                           |
 
 ### 用户属性
@@ -121,7 +121,7 @@ Authorization：`Bearer ${token}`
 | 获取指定用户的所有用户属性 | GET    | /{org_name}/{app_name}/metadata/user/{username} | 获取指定用户的所有用户属性。                 |
 | 批量获取用户属性           | POST   | /{org_name}/{app_name}/metadata/user/get        | 根据指定的用户名列表和属性列表查询用户属性。 |
 | 删除用户属性               | DELETE | /{org_name}/{app_name}/metadata/user/{username} | 删除指定用户的所有用户属性。                 |
-| 获取用户属性总量大小       | GET    | /{org_name}/{app_name}/metadata/user/capacity   | 获取该 app 下所有用户的用户属性总大小。      |
+| 获取 app 下的用户属性总大小       | GET    | /{org_name}/{app_name}/metadata/user/capacity   | 获取该 app 下所有用户的用户属性总大小。      |
 
 ### 用户关系管理
 
@@ -132,9 +132,9 @@ Authorization：`Bearer ${token}`
 | 添加好友     | POST   | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username} | 添加为好友。           |
 | 移除好友     | DELETE | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username} | 移除好友列表中的用户。 |
 | 获取好友列表 | GET    | /{org_name}/{app_name}/users/{owner_username}/contacts/users | 获取好友列表。         |
-| 获取黑名单   | GET    | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 获取黑名单。           |
-| 添加黑名单   | POST   | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 添加用户至黑名单。     |
-| 移除黑名单   | DELETE | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username} | 移除黑名单中的用户。   |
+| 获取黑名单列表   | GET    | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 获取黑名单。           |
+| 添加用户至黑名单   | POST   | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 添加用户至黑名单。     |
+| 将用户从黑名单移除   | DELETE | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username} | 移除黑名单中的用户。   |
 
 ### 群组管理
 
@@ -142,7 +142,7 @@ Authorization：`Bearer ${token}`
 
 | 名称        | 方法   | 请求           | 描述          |
 | :---------------- | :----- | :----------------- | :-------------------- |
-| 获取 app 中所有的群组（可分页） | GET  | /{org_name}/{app_name}/chatgroups  | 获取应用下全部的群组信息。 |
+| 分页获取 app 中的群组 | GET  | /{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}  | 分页获取应用下的群组信息。 |
 | 获取一个用户参与的所有群组 | GET  | /{app_name}/users/{username}/joined_chatgroups | 根据用户名称获取此用户加入的全部群组。 |
 | 获取群组详情 | GET | /{org_name}/{app_name}/chatgroups/{group_ids} | 根据群组 ID 获取群组的详情。  |
 | 创建一个群组  | POST   | /{org_name}/{app_name}/chatgroups     | 创建一个群组。  |
@@ -183,9 +183,9 @@ Authorization：`Bearer ${token}`
 
 [子区管理](group.html#管理子区) 包括子区的创建、获取、修改、删除等。
 
-| 名称                                             | 方法   | 请求                                                         | 描述                                           |
-| :----------------------------------------------- | :----- | :----------------------------------------------------------- | :--------------------------------------------- |
-| 获取 app 中所有的子区（分页获取）                | GET    | /{org_name}/{app_name}/thread                                | 获取应用下全部的子区列表。                     |
+| 名称           | 方法   | 请求               | 描述            |
+| :-------------------- | :----- | :------------------ | :-------------------- |
+| 分页获取 app 中的子区        | GET    | /{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&sort={sort}           | 分页获取应用下的子区列表。                     |
 | 获取一个用户加入的所有子区（分页获取）           | GET    | /{org_name}/{app_name}/threads/user/{username}               | 根据用户 ID 获取用户加入的所有的子区。         |
 | 获取一个用户某个群组下加入的所有子区（分页获取） | GET    | /{org_name}/{app_name}/threads/chatgroups/{group_id}user/{username} | 根据用户 ID 和群组 ID 获取用户加入的所有子区。 |
 | 创建子区                                         | POST   | /{org_name}/{app_name}/thread                                | 创建一个新子区。                               |
@@ -208,7 +208,7 @@ Authorization：`Bearer ${token}`
 
 | 名称                    | 方法   | 请求                                                        | 描述                                     |
 | :---------------------- | :----- | :---------------------------------------------------------- | :--------------------------------------- |
-| 获取 app 中所有的聊天室 | GET    | /{org_name}/{app_name}/chatrooms                            | 获取应用下全部的聊天室信息。             |
+| 分页获取 app 中的聊天室 | GET    | /{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}          | 分页获取应用下的聊天室信息。             |
 | 获取用户加入的聊天室    | GET    | /{org_name}/{app_name}/users/{username}/joined_chatrooms    | 根据用户名称获取此用户加入的全部聊天室。 |
 | 获取聊天室详情          | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 根据聊天室 ID 获取此聊天室的详情         |
 | 创建一个聊天室          | POST   | /{org_name}/{app_name}/chatrooms                            | 创建一个新聊天室。                       |
@@ -241,7 +241,7 @@ Authorization：`Bearer ${token}`
 | 批量添加用户至聊天室黑名单 | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users  | 将单个用户批量添加至聊天室的黑名单。 |
 | 从聊天室黑名单移除单个用户 | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{username} | 将用户从聊天室黑名单中移除。         |
 | 批量从聊天室黑名单移除用户 | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{usernames} | 批量将用户从黑名单列表中移除。       |
-| 查询聊天室白名单           | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users`  | 查询一个聊天室白名单中的用户列表。   |
+| 查询聊天室白名单           | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users  | 查询一个聊天室白名单中的用户列表。   |
 | 添加单个用户至聊天室白名单 | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username} | 将指定的单个用户添加至聊天室白名单。 |
 | 批量添加用户至聊天室白名单 | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users   | 添加多个用户至聊天室白名单。         |
 | 将用户移除聊天室白名单     | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username} | 将指定用户从聊天室白名单移除。       |

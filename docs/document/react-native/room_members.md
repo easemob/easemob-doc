@@ -142,7 +142,7 @@ ChatClient.getInstance()
 
 #### 将成员加入聊天室白名单
 
-仅聊天室所有者和管理员可以调用 `addMembersToChatRoomAllowList` 将成员加入聊天室白名单，被添加后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomEventListener#onAllowListAdded` 回调。
+仅聊天室所有者和管理员可以调用 `addMembersToChatRoomAllowList` 将成员加入聊天室白名单。被添加后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomEventListener#onAllowListAdded` 回调。
 
 示例代码如下：
 
@@ -159,7 +159,7 @@ ChatClient.getInstance()
 
 #### 将成员移出聊天室白名单列表
 
-仅聊天室所有者和管理员可以调用 `将成员从聊天室白名单移出，被移出后，该成员和其他未操作的聊天室管理员或聊天室所有者收到` 回调。
+仅聊天室所有者和管理员可以调用 `removeMembersFromChatRoomAllowList` 将成员从聊天室白名单移出。被移出后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomEventListener#onAllowListRemoved` 回调。
 
 示例代码如下：
 

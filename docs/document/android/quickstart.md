@@ -21,7 +21,7 @@
 ## 前提条件
 
 - Android Studio 3.0 或以上版本；
-- Android SDK API 等级 19 或以上；
+- Android SDK API 等级 21 或以上；
 - Android 4.4 或以上版本的设备；
 - 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
 
@@ -140,19 +140,16 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- 获取运营商信息，用于获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!-- 写入扩展存储权限，用于附件等的存储 -->
+    <!-- 获取读存储权限，用于附件等的获取 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- 访问 GPS 定位，用于定位消息，如果不用定位相关可以移除 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <!-- api 21 后被标记为 deprecated，可以移除 -->
-    <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- 允许程序在手机屏幕关闭后后台进程仍然运行 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!-- 允许程序开机自动运行，SDK 保活时使用，如果使用厂商推送，可以移除 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <!-- 申请闹钟定时权限 -->
+    <!-- 申请闹钟定时权限，SDK 心跳中使用，3.9.8及以后版本可以不添加 -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <!-- IM SDK required end -->
     <application>
@@ -216,7 +213,8 @@ EMClient.getInstance().init(context, options);
 
 ```java
 // 注册失败会抛出 HyphenateException。
-EMClient.getInstance().createAccount(mAccount, mPassword);//同步方法。
+// 同步方法，会阻塞当前线程。
+EMClient.getInstance().createAccount(mAccount, mPassword);
 ```
 
 :::notice
