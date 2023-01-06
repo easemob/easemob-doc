@@ -130,9 +130,9 @@ EMClient.getInstance().groupManager().leaveGroup(groupId);
 
 ### 获取群组详情
 
-群成员可以调用 `getGroup(groupId)` 方法从内存获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
+群成员可以调用 `getGroup(groupId)` 方法从内存获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
 
-群成员也可以调用 `getGroupFromServer(String groupId, boolean fetchMembers)` 方法从服务器获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表。另外，若设置 `fetchMembers` 为 `true`，获取群组详情时同时获取群成员，默认获取最大数量为 200。
+群成员也可以调用 `getGroupFromServer(String groupId, boolean fetchMembers)` 方法从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用等信息。另外，若将该方法的 `fetchMembers` 参数设置为 `true`，可获取群成员列表，默认最多包括 200 个成员。
 
 示例代码如下：
 
@@ -166,7 +166,7 @@ boolean isMsgBlocked = group.isMsgBlocked();
 
 群成员可以调用 `fetchGroupMembers` 方法从服务器分页获取群成员列表。
 
-- 可通过分页获取群成员：
+- 当群成员数量大于等于 200 时，可分页获取群成员列表：
 
 ```java
 List<String> memberList = new ArrayList<>;
@@ -180,7 +180,7 @@ do {
 } while (!TextUtils.isEmpty(result.getCursor()) && result.getData().size() == pageSize);
 ```
 
-- 当群成员少于 200 人时，可通过以下方式获取群成员：
+- 当群成员少于 200 人时，可通过以下方式获取群成员列表：
 
 ```java
 // 第二个参数传入 `true`，默认取 200 人的群成员列表。
