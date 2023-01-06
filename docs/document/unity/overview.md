@@ -59,7 +59,7 @@ SDKClient.Instance.InitWithOptions(options);
 
 ```csharp
 SDKClient.Instance.CreateAccount(username, password,
-    handle: new CallBack(
+    callback: new CallBack(
 
         onSuccess: () => {
             Debug.Log("CreateAccount succeed");
@@ -89,7 +89,7 @@ SDKClient.Instance.CreateAccount(username, password,
 
 ```csharp
 SDKClient.Instance.Login(username, password,
-    handle: new CallBack(
+    callback: new CallBack(
 
         onSuccess: () =>
         {
@@ -115,7 +115,7 @@ SDKClient.Instance.Login(username, password,
 
 ```csharp
 SDKClient.Instance.Login(username, password, true,
-    handle: new CallBack(
+    callback: new CallBack(
 
         onSuccess: () =>
         {
@@ -147,7 +147,7 @@ SDKClient.Instance.Login(username, password, true,
 
 ```csharp
 SDKClient.Instance.Logout(false,
-    handle: new CallBack(
+    callback: new CallBack(
     onSuccess: () =>
     {
         Debug.Log("Logout succeed");
@@ -169,25 +169,38 @@ SDKClient.Instance.Logout(false,
 // 监听器建议在初始化完成之后，登录之前设置，这样可确保收到登录通知。
 class ConnectionDelegate : IConnectionDelegate
 {
-    // 连接回调
     public void OnConnected()
     {
-        Debug.Log("OnConnected");
     }
-    // 断开连接回调
-    public void OnDisconnected(int i)
+    public void OnDisconnected()
     {
-        Debug.Log($"OnDisconnected: {i}");
     }
-    // Token 过期回调
+    public void OnAuthFailed()
+    {
+    }
+    public void OnRemovedFromServer()
+    {
+    }
+    public void OnLoginTooManyDevice()
+    {
+    }
+    public void OnChangedIMPwd()
+    {
+    }
+    public void OnKickedByOtherDevice()
+    {
+    }
+    public void OnLoggedOtherDevice()
+    {
+    }
+    public void OnForbidByServer()
+    {
+    }
     public void OnTokenExpired()
     {
-        Debug.Log($"OnTokenExpired");
     }
-    // Token 即将过期回调
     public void OnTokenWillExpire()
     {
-        Debug.Log($"OnTokenWillExpire");
     }
 }
 // 添加连接监听器

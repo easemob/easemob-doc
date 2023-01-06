@@ -15,7 +15,7 @@
 
 ```csharp
 SDKClient.Instance.Login(username, passwd,
-    handle: new CallBack(
+    callback: new CallBack(
         onSuccess: () =>
         {
         },

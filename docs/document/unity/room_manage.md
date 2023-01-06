@@ -54,7 +54,7 @@ welcomeMsg,
 maxUserCount,
 // 聊天室成员列表
 members,
-handle: new ValueCallBack<Room>(
+callback: new ValueCallBack<Room>(
   onSuccess: (room) => {
   },
   onError:(code, desc) => {
@@ -73,7 +73,7 @@ handle: new ValueCallBack<Room>(
 
 ```csharp
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
-SDKClient.Instance.RoomManager.FetchPublicRoomsFromServer(handle: new ValueCallBack<PageResult<Room>>(
+SDKClient.Instance.RoomManager.FetchPublicRoomsFromServer(callback: new ValueCallBack<PageResult<Room>>(
     //result 为 PageResult<Room> 类型
     onSuccess: (result) => {
     },
@@ -198,5 +198,13 @@ public interface IRoomManagerDelegate
     void OnChatroomAttributesChanged(string roomId, Dictionary<string, string> kv, string from);
     // 有聊天室自定义属性被移除。聊天室所有成员会收到该事件。
     void OnChatroomAttributesRemoved(string roomId, List<string> keys, string from);
+    // 有成员被加入白名单列表
+    void OnAddAllowListMembersFromChatroom(string roomId, List<string> members);
+    //有成员被移出白名单列表
+    void OnRemoveAllowListMembersFromChatroom(string roomId, List<string> members);
+    //全员禁言状态变更回调
+    void OnAllMemberMuteChangedFromChatroom(string roomId, bool isAllMuted);
+    //聊天室详情变更
+    void OnSpecificationChangedFromRoom(Room room);
 }
 ```
