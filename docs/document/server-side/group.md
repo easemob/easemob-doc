@@ -158,7 +158,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 封禁指定的群组。例如，群成员经常在群中发送违规消息，可以调用该 API 对该群进行封禁。群组被封禁后，群中任何成员均无法在群组以及该群组下的子区中发送和接收消息，也无法进行群组和子区管理操作。
 
-群组封禁后，只能通过开发者调用[解禁群组](#解禁群组) API 对该群组解禁。
+群组封禁后，可调用[解禁群组](#解禁群组) API 对该群组解禁。
 
 #### HTTP 请求
 
@@ -433,7 +433,6 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 | `data.last_modified` | String | 最近一次修改的时间戳，单位为毫秒。                           |
 | `data.groupname`     | String | 群组名称。                                                   |
 | `count`         | Int    | 实际获取的群组数量。                                         |
-| `limit`         | Int    | 每次获取的群组数量。 |
 | `cursor` | String | 查询游标，指定下次查询的起始位置。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -1261,8 +1260,6 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 | `pagenum`  | Int    | 否   | 当前页码。默认从第 1 页开始获取。         |
 | `pagesize` | Int    | 否   | 每页期望返回的群组成员数量。取值范围为 [1,100]。默认为 10。    |
 
-其他参数及描述详见 [公共参数](#公共参数)。
-
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
@@ -1694,7 +1691,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -H 'Authorization: B
 
 ### 添加群管理员
 
-将一个普通群成员设为为群管理员。
+将一个普通群成员设为为群管理员。群管理员有管理黑名单、禁言等权限。最多可以添加 99 个群管理员。
 
 #### HTTP 请求
 
@@ -3493,7 +3490,7 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 
 | 字段   |  类型     | 描述      |
 |:------|:--------|:--------|
-| `data.status` | Bool | 删除结果，`ok` 表示成功删除。 |
+| `data.status` | Bool | 添加结果，`ok` 表示成功添加。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
