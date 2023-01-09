@@ -252,6 +252,8 @@ void _initSDK() async {
         autoLogin: false,
     );
     await EMClient.getInstance.init(options);
+    // 通知 SDK UI 已准备好。该方法执行后才会收到 `EMChatRoomEventHandler`、`EMContactEventHandler` 和 `EMGroupEventHandler` 回调。
+    await EMClient.getInstance.startCallback();
 }
 ```
 

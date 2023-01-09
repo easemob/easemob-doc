@@ -174,7 +174,7 @@ SDKClient.Instance.RoomManager.AddRoomManagerDelegate(adelegate);
 ```csharp
 public interface IRoomManagerDelegate
 {
-    // 解除聊天室一键禁言。聊天室所有成员（除操作者外）会收到该事件。
+    // 解散聊天室。聊天室所有成员会收到该事件。
     void OnDestroyedFromRoom(string roomId, string roomName);
     // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
     void OnMemberJoinedFromRoom(string roomId, string participant);
@@ -198,13 +198,13 @@ public interface IRoomManagerDelegate
     void OnChatroomAttributesChanged(string roomId, Dictionary<string, string> kv, string from);
     // 有聊天室自定义属性被移除。聊天室所有成员会收到该事件。
     void OnChatroomAttributesRemoved(string roomId, List<string> keys, string from);
-    // 有成员被加入白名单列表
+    // 有成员被加入白名单列表。被添加的成员收到该事件。
     void OnAddAllowListMembersFromChatroom(string roomId, List<string> members);
-    //有成员被移出白名单列表
+    // 有成员被移出白名单列表。被移出白名单的成员会收到该事件。
     void OnRemoveAllowListMembersFromChatroom(string roomId, List<string> members);
-    //全员禁言状态变更回调
+    // 全员禁言状态变更回调。聊天室所有成员会收到该事件。
     void OnAllMemberMuteChangedFromChatroom(string roomId, bool isAllMuted);
-    //聊天室详情变更
+    // 聊天室详情变更。聊天室的所有成员会收到该事件。
     void OnSpecificationChangedFromRoom(Room room);
 
 }
