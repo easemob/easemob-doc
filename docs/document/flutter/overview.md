@@ -23,6 +23,8 @@
 await EMClient.getInstance.init(EMOptions(
     appKey: "<#your app key#>",
 ));
+// 通知 SDK UI 已准备好。该方法执行后才会收到 `EMChatRoomEventHandler`、`EMContactEventHandler` 和 `EMGroupEventHandler` 回调。
+await EMClient.getInstance.startCallback();
 ```
 
 ## 注册用户

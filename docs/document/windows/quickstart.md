@@ -299,4 +299,4 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(this);
 
 ## 参考信息
 
-除文中用到的 `用户 ID + 声网 token` 登录方式（Demo 中使用）外，我们也支持 `用户 ID + 密码` 以及 `用户 ID + 环信 token` 的登录方式，具体可参考 API reference。
+文中示例仅作为演示和测试用途。在生产环境中，为保障通信安全，你需要自行部署服务器签发 Token，详见 [使用 User Token 鉴权](/document/server-side/easemob_user_token.html)。
