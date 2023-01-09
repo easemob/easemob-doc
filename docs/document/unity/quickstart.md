@@ -59,8 +59,8 @@
    :::
  
    :::notice
-   如果碰到'SpriteRenderer' does not contain a definition for 'IsUsingDeformableBuffer'这类异常，需要进行reset操作。
-   **Help**菜单下，执行**Reset Packages to defaults**。
+   如果碰到'SpriteRenderer' does not contain a definition for 'IsUsingDeformableBuffer'这类异常，需要进行重置操作。
+   在**Help**菜单下，点击**Reset Packages to defaults**将包恢复默认设置。
    :::
 
 ### 2. 集成环信即时通讯 SDK
@@ -68,7 +68,7 @@
 你可以参考以下步骤集成 SDK：
 
 1. [下载 Unity SDK](https://downloadsdk.easemob.com/downloads/SDK/Unity/agora_chat_unity_sdk1.0.9.unitypackage)。
-2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的unitypackage导入。
+2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 unitypackage 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
 
 ## 实现发送和接收单聊消息
@@ -99,7 +99,7 @@ using AgoraChat.MessageBody;
 在 `InitSDK` 方法中添加以下代码完成 SDK 初始化：
 
 ```csharp
-var options = new Options("appkey"); //参数为你的appkey
+var options = new Options("appkey"); //将该参数设置为你的 App Key
 SDKClient.Instance.InitWithOptions(options);
 ```
 
