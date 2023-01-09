@@ -81,10 +81,6 @@ options.UsingHttpsOnly = true;
 SDKClient.Instance.InitWithOptions(options);
 ```
 
-:::tip
-代码中目前的 App Key 为 `easemob-demo#easeim`， 为演示用，如果是正式环境，需要使用你申请的 App Key。
-:::
-
 ### 4.创建账号
 
 在 `SignUp_Click` 函数尾部添加以下代码，用于创建 AppServer 上的登录账户，示例代码如下：
@@ -122,10 +118,6 @@ SDKClient.Instance.Login(UserIdTextBox.Text,  PasswordTextBox.Text, false, callb
      }
 ));
 ```
-
-:::tip
-此处登录账户包含两个操作：1. 调用 `LoginToAppServer` 获取 Agora token；2. 调用 `LoginWithAgoraToken` 使用用户名和 Agora token 进行环信服务器登录。
-:::
 
 ### 6. 登出账号
 
