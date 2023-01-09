@@ -44,7 +44,7 @@
 
 你可以参考以下步骤集成 SDK：
 
-1. 下载：点击 [Windows SDK](https://downloadsdk.easemob.com/downloads/SDK/WinSDK/agora_chat_sdk.1.0.2-beta.nupkg) 进行下载，下载的 `NuGet` 包一般存放在 `C:\Users\XXX\Downloads` (`XXX` 为本机用户名)；
+1. 下载：点击 [Windows SDK](https://downloadsdk.easemob.com/downloads/SDK/WinSDK/agora_chat_sdk.1.0.9.nupkg) 进行下载，下载的 `NuGet` 包一般存放在 `C:\Users\XXX\Downloads` (`XXX` 为本机用户名)；
 2. 将下载的 `NuGet` 包拷贝到自己的工作目录，比如 `D:\workspace\WinSDK` 下，以下说明以此目录举例；
 3. 在 Visual Studio 开发环境里，右键点击 `windows-example` 项目，选择 **管理 NuGet 程序包 (N)...**；
 4. 在弹出的 `NuGet:windows-example` tab 页面里，点击右上角的小齿轮会弹出 NuGet 程序包源的设置窗体，点击窗体右上角的 **+** 按钮，在 **包源** 的文本框内会出现 **Package source** 这一栏，点击选中，并修改文本框下的 **名称** 和 **源**。例如 **名称** 可以设置为 `Local Package source`，**源** 则设置为第 2 步中的目录， `D:\workspace\WinSDK`，点击确定；
@@ -61,20 +61,14 @@
 
 在 Visual Studio 的 `windows-example` 项目下，点击 `MainWindow.xaml` 左边的小三角，然后双击 `MainWindow.xaml.cs` 文件开始编辑。
 
-:::notice
-如果 Visual Studio 提示 `JsonConvert` 未定义（即下面有红色波浪线），这是由于当前的项目里没有导入 `Newtonsoft.Json` 包造成的，可以通过重新安装 `Newtonsoft.Json` 来骤修复这个问题，以下是具体步骤：
-- 右键点击 `windows-example` 项目，然后选择 **管理 NuGet 程序包**；
-- 在 `NuGet:windows-example` tab 页面下，选择 **已安装**，点击 **Newtonsoft.Json** 这一栏，然后点击这一栏右边的小红叉，或者点击最右边分隔栏里的 “ 卸载 ” 按钮，将 `Newtonsoft.Json` 卸载掉；
-- 在 `NuGet:windows-example` tab 页面下，选择 **浏览**，在搜索框里输入 `Newtonsoft`，然后在下面出现的搜索结果中，选中 **Newtonsoft.Json**，点击这一栏右边的下载小图标，进行重新安装即可。
-:::
 
 ### 2. 添加命名空间
 
 在 `MainWindow.xaml.cs` 头部添加以下命名空间：
 
 ```csharp
-using ChatSDK;
-using ChatSDK.MessageBody;
+using AgoraChat;
+using AgoraChat.MessageBody;
 ```
 
 ### 3. 初始化 SDK
@@ -82,7 +76,7 @@ using ChatSDK.MessageBody;
 在 `InitSDK` 函数中添加以下代码完成 SDK 初始化：
 
 ```csharp
-var options = new Options(appKey: APPKEY);
+var options = new Options("appkey"); //此处填入你的appkey
 options.UsingHttpsOnly = true;
 SDKClient.Instance.InitWithOptions(options);
 ```
@@ -96,15 +90,16 @@ SDKClient.Instance.InitWithOptions(options);
 在 `SignUp_Click` 函数尾部添加以下代码，用于创建 AppServer 上的登录账户，示例代码如下：
 
 ```csharp
-bool result = await RegisterToAppServer(UserIdTextBox.Text, PasswordTextBox.Text);
-if (result)
-{
-    AddLogToLogText("sign up succeed");
-}
-else
-{
-    AddLogToLogText("sign up failed");
-}
+SDKClient.Instance.CreateAccount(username, password, callback: new CallBack(
+     onSuccess: () =>
+     {
+        AddLogToLogText("sign up succeed");
+     },
+     onError: (code, desc) =>
+     {
+        AddLogToLogText("sign up failed");
+     }
+));
 ```
 
 :::notice
@@ -116,24 +111,16 @@ else
 在 `SignIn_Click` 函数尾部添加以下代码，用于使用账号登录即时通讯系统，示例代码如下：
 
 ```csharp
-string token = await LoginToAppServer(UserIdTextBox.Text, PasswordTextBox.Text);
-if (token != null)
-{
-   SDKClient.Instance.LoginWithAgoraToken(UserIdTextBox.Text, token, callback: new CallBack(
-        onSuccess: () =>
-        {
-            AddLogToLogText("sign in sdk succeed");
-        },
-        onError: (code, desc) =>
-        {
-            AddLogToLogText($"sign in sdk failed, code: {code}, desc: {desc}");
-        }
-    ));
-}
-else
-{
-    AddLogToLogText($"fetch token error");
-}
+SDKClient.Instance.Login(UserIdTextBox.Text,  PasswordTextBox.Text, false, callback: new CallBack(
+     onSuccess: () =>
+     {
+       AddLogToLogText("sign in sdk succeed");
+     },
+     onError: (code, desc) =>
+     {
+       AddLogToLogText($"sign in sdk failed, code: {code}, desc: {desc}");
+     }
+));
 ```
 
 :::tip
@@ -279,13 +266,23 @@ public void OnConversationRead(string from, string to)
 
 }
 
+public void MessageReactionDidChange(List<MessageReactionChange> list)
+{
+}
 ```
 
-在 `AddChatDelegate` 函数中添加以下代码，以将 `TestCode` 对象实例加入到监听列表中
+在 `AddChatDelegate` 函数中添加以下代码，以将 `MainWindow` 对象实例加入到监听列表中
 
 ```csharp
 SDKClient.Instance.ChatManager.AddChatManagerDelegate(this);
 ```
+
+在 `RemoveChatDelegate` 函数中添加以下代码，以便在关闭窗体时将 `MainWindow` 对象实例从监听列表中移除
+
+```csharp
+SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
+```
+
 
 ### 9.测试修改后的项目
 
@@ -297,6 +294,3 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(this);
 4. 用户退出登录：直接点击 **Sign out** 会让当前用户退出登录，退出结果会在下方的方形区域进行显示。
 5. 接收消息：在 `user id` 文本框中输入接收消息的用户名，例如 `quickstart_receiver`， 在 `password` 文本框输入密码，点击 `Sign in` 进行登录。登录成功后，下方的方形区域将会显示接收到的消息，例如第 3 步发送的 `how are you.`。
 
-## 参考信息
-
-除文中用到的 `用户 ID + 声网 token` 登录方式（Demo 中使用）外，我们也支持 `用户 ID + 密码` 以及 `用户 ID + 环信 token` 的登录方式，具体可参考 API reference。
