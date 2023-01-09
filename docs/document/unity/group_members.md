@@ -160,7 +160,7 @@ SDKClient.Instance.GroupManager.UnBlockGroupMembers(groupId, members, new CallBa
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.GetGroupBlockListFromServer(groupId, pageNum, pageSize, handle: new ValueCallBack<List<string>>(
+SDKClient.Instance.GroupManager.GetGroupBlockListFromServer(groupId, pageNum, pageSize, callback: new ValueCallBack<List<string>>(
     onSuccess: (list) =>
     {
     },
@@ -213,8 +213,8 @@ SDKClient.Instance.GroupManager.UnMuteGroupMembers(groupId, members, new CallBac
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, handle: new ValueCallBack<List<string>>(
-    onSuccess: (list) => {
+SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: new ValueCallBack<Dictionary<string, long>>(
+    onSuccess: (dict) => {
     },
     onError: (code, desc) =>
     {
@@ -309,7 +309,7 @@ SDKClient.Instance.GroupManager.CheckIfInGroupAllowList(groupId, new ValueCallBa
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.GetGroupAllowListFromServer(currentGroupId, handle: new ValueCallBack<List<string>>(
+SDKClient.Instance.GroupManager.GetGroupAllowListFromServer(currentGroupId, callback: new ValueCallBack<List<string>>(
     onSuccess: (list) => {
     },
     onError: (code, desc) =>

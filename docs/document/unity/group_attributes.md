@@ -138,7 +138,7 @@ SDKClient.Instance.GroupManager.DeleteGroupSharedFile(groupId, id, new CallBack(
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.GetGroupFileListFromServer(groupId, pageNum, pageSize, handle: new ValueCallBack<List<GroupSharedFile>> (
+SDKClient.Instance.GroupManager.GetGroupFileListFromServer(groupId, pageNum, pageSize, callback: new ValueCallBack<List<GroupSharedFile>> (
     onSuccess: (fileList) =>
     {
     },

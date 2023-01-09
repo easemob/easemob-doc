@@ -45,7 +45,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ```csharp
 //username 为要添加的联系人的用户名，reason 为添加原因
-SDKClient.Instance.ContactManager.AddContact(username, reason, handle: new CallBack(
+SDKClient.Instance.ContactManager.AddContact(username, reason, callback: new CallBack(
   onSuccess: () =>
   {
 
@@ -100,7 +100,7 @@ SDKClient.Instance.ContactManager.RemoveContactManagerDelegate(adelegate);
 
 ```csharp
 //同意好友请求。
-SDKClient.Instance.ContactManager.AcceptInvitation(username, handle: new CallBack(
+SDKClient.Instance.ContactManager.AcceptInvitation(username, callback: new CallBack(
    onSuccess: () =>
    {
    },
@@ -110,7 +110,7 @@ SDKClient.Instance.ContactManager.AcceptInvitation(username, handle: new CallBac
 ));
 
 //拒绝好友请求。
-SDKClient.Instance.ContactManager.DeclineInvitation(username, handle: new CallBack(
+SDKClient.Instance.ContactManager.DeclineInvitation(username, callback: new CallBack(
   onSuccess: () =>
   {
   },
@@ -127,7 +127,7 @@ SDKClient.Instance.ContactManager.DeclineInvitation(username, handle: new CallBa
 调用 `DeleteContact` 删除指定联系人。被删除的用户收到 `OnContactDeleted` 回调。删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
 ```csharp
-SDKClient.Instance.ContactManager.DeleteContact(username, handle: new CallBack(
+SDKClient.Instance.ContactManager.DeleteContact(username, callback: new CallBack(
   onSuccess: () =>
   {
   },
@@ -176,7 +176,7 @@ List<string>list = SDKClient.Instance.ContactManager.GetAllContactsFromDB();
 
 ```csharp
 //将好友拉入黑名单后，用户依然可以向该好友发送消息，但无法接收该好友发送的消息。
-SDKClient.Instance.ContactManager.AddUserToBlockList(username, handle: new CallBack(
+SDKClient.Instance.ContactManager.AddUserToBlockList(username, callback: new CallBack(
   onSuccess: () =>
   {
   },
@@ -191,7 +191,7 @@ SDKClient.Instance.ContactManager.AddUserToBlockList(username, handle: new CallB
 你可以调用 `RemoveUserFromBlockList` 将用户从黑名单移除，示例代码如下：
 
 ```csharp
-SDKClient.Instance.ContactManager.RemoveUserFromBlockList(username, handle: new CallBack(
+SDKClient.Instance.ContactManager.RemoveUserFromBlockList(username, callback: new CallBack(
   onSuccess: () =>
   {
   },

@@ -45,7 +45,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ```csharp
 //The parameters are the username of the contact to be added and the reason for adding.
-SDKClient.Instance.ContactManager.AddContact(username, reason, handle: new CallBack(
+SDKClient.Instance.ContactManager.AddContact(username, reason, callback: new CallBack(
     onSuccess: () =>
     {
 
@@ -97,7 +97,7 @@ SDKClient.Instance.ContactManager.RemoveContactManagerDelegate(adelegate);
 
 ```csharp
 // 同意好友请求。
-SDKClient.Instance.ContactManager.AcceptInvitation(username, handle: new CallBack(
+SDKClient.Instance.ContactManager.AcceptInvitation(username, callback: new CallBack(
     onSuccess: () =>
     {
     },
@@ -107,7 +107,7 @@ SDKClient.Instance.ContactManager.AcceptInvitation(username, handle: new CallBac
 ));
 
 //拒绝好友请求。
-SDKClient.Instance.ContactManager.DeclineInvitation(username, handle: new CallBack(
+SDKClient.Instance.ContactManager.DeclineInvitation(username, callback: new CallBack(
     onSuccess: () =>
     {
     },
@@ -126,7 +126,7 @@ SDKClient.Instance.ContactManager.DeclineInvitation(username, handle: new CallBa
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.ContactManager.DeleteContact(username, handle: new CallBack(
+SDKClient.Instance.ContactManager.DeleteContact(username, callback: new CallBack(
     onSuccess: () =>
     {
     },
@@ -175,7 +175,7 @@ List<string>list = SDKClient.Instance.ContactManager.GetAllContactsFromDB();
 
 ```csharp
 //将好友拉入黑名单后，用户依然可以向该好友发送消息，但无法接收该好友发送的消息。
-SDKClient.Instance.ContactManager.AddUserToBlockList(username, handle: new CallBack(
+SDKClient.Instance.ContactManager.AddUserToBlockList(username, callback: new CallBack(
     onSuccess: () =>
     {
     },
@@ -190,7 +190,7 @@ SDKClient.Instance.ContactManager.AddUserToBlockList(username, handle: new CallB
 你可以调用 `RemoveUserFromBlockList` 将用户从黑名单移除，示例代码如下：
 
 ```csharp
-SDKClient.Instance.ContactManager.RemoveUserFromBlockList(username, handle: new CallBack(
+SDKClient.Instance.ContactManager.RemoveUserFromBlockList(username, callback: new CallBack(
     onSuccess: () =>
     {
     },

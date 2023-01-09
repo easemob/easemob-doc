@@ -105,7 +105,7 @@ SDKClient.Instance.InitWithOptions(options);
 在 `SignUpAction` 方法尾部添加以下代码，创建即时通讯系统的登录账户，示例代码如下：
 
 ```csharp
-SDKClient.Instance.CreateAccount(username: Username.text, Password.text, handle: new CallBack(
+SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callback: new CallBack(
   onSuccess: () => {
     AddLogToLogText("sign up sdk succeed");
   },
@@ -124,7 +124,7 @@ SDKClient.Instance.CreateAccount(username: Username.text, Password.text, handle:
 在 `SignInAction` 方法尾部添加以下代码，使用账号登录即时通讯系统，示例代码如下：
 
 ```csharp
-SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, handle: new CallBack(
+SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
   onSuccess: () => {
     AddLogToLogText("sign in sdk succeed");
   },
@@ -139,7 +139,7 @@ SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, han
 在 `SignOutAction` 方法尾部添加以下代码，登出即时通讯系统，示例代码如下：
 
 ```csharp
-SDKClient.Instance.Logout(true, handle: new CallBack(
+SDKClient.Instance.Logout(true, callback: new CallBack(
   onSuccess: () => {
     AddLogToLogText("sign out sdk succeed");
   },
