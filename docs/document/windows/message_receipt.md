@@ -234,7 +234,7 @@ msg.IsNeedGroupAck = true;
 ```csharp
 void SendReadAckForGroupMessage(string messageId, string ackContent)
 {
-    SDKClient.Instance.ChatManager.SendReadAckForGroupMessage(messageId, ackContent，handle: new CallBack(
+    SDKClient.Instance.ChatManager.SendReadAckForGroupMessage(messageId, ackContent，callback: new CallBack(
         onSuccess: () =>
         {
 

@@ -51,7 +51,7 @@ List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
 //获取本地会话。
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 //该方法获取 `startMsgId` 之前的 `pagesize` 条消息。
-conv.LoadMessages(startMsgId, pagesize, handle:new ValueCallBack<List<Message>>(
+conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>>(
   onSuccess: (list) => {
      Debug.Log($"获取到{list.Count}条消息");
   },
@@ -208,7 +208,14 @@ conv.LoadMessagesWithKeyword(
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.ChatManager.ImportMessages(msgs);
+SDKClient.Instance.ChatManager.ImportMessages(messages, new CallBack(
+   onSuccess: () => {
+   },
+   onError: (code, desc) =>
+   {
+   }
+));
+
 ```
 
 ### 插入消息

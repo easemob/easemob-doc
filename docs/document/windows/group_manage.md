@@ -54,7 +54,7 @@
 ```csharp
 GroupOptions option = new GroupOptions(GroupStyle.PrivateMemberCanInvite);
 option.MaxCount = 100;
-SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, handle:new ValueCallBack<Group>(
+SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, callback:new ValueCallBack<Group>(
     onSuccess: (group) => {
     },
     onError:(code, error) => {
@@ -84,7 +84,7 @@ SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, ha
 
 ```csharp
 // 获取公开群组列表
-SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(handle: new ValueCallBack<CursorResult<GroupInfo>>(
+SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(callback: new ValueCallBack<CursorResult<GroupInfo>>(
     //result 为 CursorResult<GroupInfo>
     onSuccess: (result) => {
     },
@@ -172,7 +172,7 @@ SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(groupId, new Val
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.GetGroupMemberListFromServer(groupId, pageSize, cursor, handle: new ValueCallBack<CursorResult<string>>(
+SDKClient.Instance.GroupManager.GetGroupMemberListFromServer(groupId, pageSize, cursor, callback: new ValueCallBack<CursorResult<string>>(
     onSuccess: (result) =>
     {
     },
@@ -189,7 +189,7 @@ SDKClient.Instance.GroupManager.GetGroupMemberListFromServer(groupId, pageSize, 
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.FetchJoinedGroupsFromServer(handle: new ValueCallBack<List<Group>>(
+SDKClient.Instance.GroupManager.FetchJoinedGroupsFromServer(callback: new ValueCallBack<List<Group>>(
     onSuccess: (groupList) => {
     },
     onError: (code, desc) =>
@@ -209,7 +209,7 @@ List<Group> groupList = SDKClient.Instance.GroupManager.GetJoinedGroups();
 用户还可以调用 `FetchPublicGroupsFromServer` 方法从服务器分页获取公开群组列表。示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(pageSize, cursor, handle: new ValueCallBack<CursorResult<GroupInfo>>(
+SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(pageSize, cursor, callback: new ValueCallBack<CursorResult<GroupInfo>>(
     onSuccess: (result) =>
     {
     },

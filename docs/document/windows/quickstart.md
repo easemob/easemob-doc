@@ -119,7 +119,7 @@ else
 string token = await LoginToAppServer(UserIdTextBox.Text, PasswordTextBox.Text);
 if (token != null)
 {
-   SDKClient.Instance.LoginWithAgoraToken(UserIdTextBox.Text, token, handle: new CallBack(
+   SDKClient.Instance.LoginWithAgoraToken(UserIdTextBox.Text, token, callback: new CallBack(
         onSuccess: () =>
         {
             AddLogToLogText("sign in sdk succeed");
@@ -145,7 +145,7 @@ else
 在 `SignOut_Click` 函数尾部添加以下代码，用于登出即时通讯系统，示例代码如下：
 
 ```csharp
-SDKClient.Instance.Logout(true, handle: new CallBack(
+SDKClient.Instance.Logout(true, callback: new CallBack(
     onSuccess: () =>
     {
         AddLogToLogText("sign out sdk succeed");
