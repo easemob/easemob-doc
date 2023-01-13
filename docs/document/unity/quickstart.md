@@ -57,13 +57,18 @@
 
    2. 在弹出的 **Select Editor version and platform** 窗口中，选择本地安装的 Editor 版本，并根据后续提示打开项目。
    :::
+ 
+   :::notice
+   如果碰到'SpriteRenderer' does not contain a definition for 'IsUsingDeformableBuffer'这类异常，需要进行重置操作。
+   在**Help**菜单下，点击**Reset Packages to defaults**将包恢复默认设置。
+   :::
 
 ### 2. 集成环信即时通讯 SDK
 
 你可以参考以下步骤集成 SDK：
 
-1. 在 [Unity 项目](https://github.com/easemob/emclient-unity) 页面点击 **下载 Unity SDK**，获取最新版的环信即时通讯 IM Unity SDK（`hyphenateCWrapper.unitypackage`）。
-2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 `hyphenateCWrapper.unitypackage` 导入。
+1. [下载 Unity SDK](https://downloadsdk.easemob.com/downloads/SDK/Unity/agora_chat_unity_sdk1.0.9.unitypackage)。
+2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 unitypackage 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
 
 ## 实现发送和接收单聊消息
@@ -85,8 +90,8 @@
 在 **TestCode.cs** 头部添加以下命名空间：
 
 ```csharp
-using ChatSDK;
-using ChatSDK.MessageBody;
+using AgoraChat;
+using AgoraChat.MessageBody;
 ```
 
 ### 3. 初始化 SDK
@@ -94,11 +99,9 @@ using ChatSDK.MessageBody;
 在 `InitSDK` 方法中添加以下代码完成 SDK 初始化：
 
 ```csharp
-var options = new Options(appKey: APPKEY);
+var options = new Options("appkey"); //将该参数设置为你的 App Key
 SDKClient.Instance.InitWithOptions(options);
 ```
-
-将 APPKEY 替换为 `easemob-demo#easeim`。本项目用于演示目的，在正式环境中，请使用你在环信控制台申请的 App Key。
 
 ### 4. 创建账号
 
@@ -258,7 +261,7 @@ public void OnConversationRead(string from, string to)
 
 }
 
-public MessageReactionDidChange(List<MessageReactionChange> list)
+public void MessageReactionDidChange(List<MessageReactionChange> list)
 {
 }
 ```
@@ -290,7 +293,3 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 4. 退出登录：直接点击 **Sign out** 退出登录，退出结果会在下方显示。
 5. 接收消息：在 **user id** 文本框中输入接收消息的用户 ID，例如 **quickstart_receiver**，在 **password** 文本框输入密码，点击 **Sign in** 进行登录。登录成功后，下方会显示收到的消息，例如步骤 3 中发送的 ''how are you.''。
 :::
-
-## 后续步骤
-
-文中示例仅作为演示和测试用途。在生产环境中，为保障通信安全，你需要自行部署服务器签发 Token，详见 [使用 User Token 鉴权](/document/server-side/easemob_user_token.html)。
