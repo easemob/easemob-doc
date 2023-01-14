@@ -9,7 +9,7 @@
 - [IM SDK] [创建群组方法 `createGroup`](group_manage.html#创建群组) 和[修改群信息方法 `modifyGroup`](group_attributes.html#修改群组名称和描述) 新增 `ext` 字段支持群扩展信息。
 - [IM SDK] 群组通知事件增加[群组信息修改事件 `updateInfo`](group_manage.html#监听群组事件)。
 - [IM SDK] 新增[聊天室消息优先级](message_send_receive.html)。
-- [IM SDK] 支持同时[对多个群组成员禁言和解除禁言](group_members.html#管理群组禁言列表)。
+- [IM SDK] 支持同时[对多个群组成员禁言和解除禁言](group_members.html#管理群组禁言)。
 
 ## 版本 V4.1.1 Dev 2022-9-26
 

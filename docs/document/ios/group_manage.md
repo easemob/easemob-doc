@@ -11,7 +11,6 @@
 环信即时通讯 IM iOS SDK 提供 `IEMGroupManager` 类和 `EMGroup` 类用于管理群组，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散群组
-- 加入、退出群组
 - 获取群组详情
 - 获取群成员列表
 - 获取群组列表
@@ -32,27 +31,44 @@
 
 ### 创建群组
 
-在创建群组前，你需要设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`IsInviteNeedConfirm`)。
+群组可分为私有群和公有群。私有群不可被搜索到，公开群可以通过群组 ID 搜索到。
 
-1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型（`EMGroupStyle`），具体设置如下：
+用户可以创建群组，设置群组的名称、描述、群组成员、创建群组的原因等属性。用户还可以设置 `EMGroupStyle` 参数指定群组的大小和类型。创建群组后，群组创建者自动成为群主。
 
-   - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
-   - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
-   - EMGroupStylePublicJoinNeedApproval——公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
-   - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理同意。
+创建群组前，需设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`EMGroupOptions#IsInviteNeedConfirm`)。
 
-2. 进群邀请是否需要对方同意 (`IsInviteNeedConfirm`) 的具体设置如下：
-   - 进群邀请需要用户确认(`IsInviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `isAutoAcceptGroupInvitation` 设置，处理逻辑如下：
-     - 用户设置自动接受群组邀请 (`isAutoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupManagerDelegate#didJoinGroup` 回调，邀请人收到 `EMGroupManagerDelegate#onInvitationAccepted` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调，其他群成员收到 `EMGroupChangeListener#userDidJoinGroup` 回调。
-     - 用户设置手动确认群组邀请 (`isAutoAcceptGroupInvitation` 设置为 `true`)，受邀用户收到 `EMGroupManagerDelegate#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
-       - 用户同意入群邀请后，邀请人收到 `EMGroupManagerDelegate#onInvitationAccepted` 回调和 `EMGroupManagerDelegate#onMemberJoined` 回调，其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
-       - 用户拒绝入群邀请后，邀请人收到 `EMGroupManagerDelegate#onInvitationDeclined` 回调。
+- 群组类型（`EMGroupStyle`）可以设置为如下值：
 
-- 进群邀请无需用户确认 (`IsInviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，不论受邀用户的 `isAutoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `EMGroupManagerDelegate#didJoinGroup` 回调，邀请人收到 `EMGroupManagerDelegate#groupInvitationDidAccept` 和 `EMGroupManagerDelegate#userDidJoinGroup` 回调，其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
+  - `EMGroupStylePrivateOnlyOwnerInvite`——私有群，只有群主和管理员可以邀请人进群；
+  - `EMGroupStylePrivateMemberCanInvite`——私有群，所有群成员均可以邀请人进群；
+  - `EMGroupStylePublicJoinNeedApproval`——公开群，申请人通过群主和群管理同意后才能进群；
+  - `EMGroupStylePublicOpenJoin`——公开群，任何人都可以进群，无需群主和群管理同意。
 
-流程如下：
+- 邀请进群是否需要对方同意（`EMGroupOptions#IsInviteNeedConfirm`）
 
-![img](@static/images/ios/group.png)
+公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 `EMGroupStyle` 的设置。
+
+邀请入群是否需受邀用户确认取决于群组选项 `EMGroupOptions#IsInviteNeedConfirm` 和受邀用户的参数 `isAutoAcceptGroupInvitation` 的设置，前者的优先级高于后者，即若 `EMGroupOptions#IsInviteNeedConfirm` 设置为 `false`，不论 `isAutoAcceptGroupInvitation` 设置为何值，受邀用户无需确认直接进群。
+
+1. 受邀用户无需确认，直接进群。
+
+以下两种设置的情况下，用户直接进群：
+
+- 若 `EMGroupOptions#IsInviteNeedConfirm` 设置为 `false`，不论 `isAutoAcceptGroupInvitation` 设置为 `false` 或 `true`，受邀用户均无需确认，直接进群。
+- 若 `EMGroupOptions#IsInviteNeedConfirm` 和 `isAutoAcceptGroupInvitation` 均设置为 `true`，用户自动接受群组邀请，直接进群。
+
+受邀用户直接进群，会收到如下回调：
+
+- 新成员会收到 `EMGroupManagerDelegate#didJoinGroup` 回调；
+- 邀请人收到 `EMGroupManagerDelegate#groupInvitationDidAccept` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
+- 其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
+
+2. 受邀用户需要确认才能进群。
+
+只有 `AgoraChatGroupOptions#IsInviteNeedConfirm` 设置为 `true` 和 `isAutoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `EMGroupManagerDelegate#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
+
+- 用户同意入群邀请后，邀请人收到 `EMGroupManagerDelegate#groupInvitationDidAccept` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调；其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
+- 用户拒绝入群邀请后，邀请人收到 `EMGroupManagerDelegate#groupInvitationDidDecline` 回调。
 
 用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
@@ -82,47 +98,6 @@ NSArray *members = @{@"member1",@"member2"};
 如果 `options.IsInviteNeedConfirm` 设置为 `false`，即直接加被邀请人进群。在此情况下，被邀请人设置非自动进群是不起作用的。
 :::
 
-### 用户申请入群
-
-根据 [创建群组](#创建群组) 时的群组类型 (`EMGroupStyle`) 设置，加入群组的处理逻辑差别如下：
-
-- 当群组类型为 `EMGroupStylePublicOpenJoin` 时，用户直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
-- 当群组类型为 `EMGroupStylePublicJoinNeedApproval`，群主和群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调，并选择同意或拒绝入群申请：
-  - 群主和群管理员同意入群申请，申请人收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidApprove`；
-  - 其他群成员会收到群组事件回调 `EMGroupManagerDelegate#userDidJoinGroup`。 第二种情况：群主和群管理员拒绝入群申请，申请人会收到群组事件回调 `EMGroupManagerDelegate#joinGroupRequestDidDecline`。
-
-:::notice
-用户只能申请加入公开群组，私有群组不支持用户申请入群。
-:::
-
-用户申请加入群组步骤如下：
-
-1. 调用 `getPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。
-2. 调用 `joinPublicGroup` 方法传入群组 ID，申请加入对应群组。
-
-示例代码如下：
-
-```objectivec
-// 从服务器获取公开群组列表
-NSMutableArray *memberList = [[NSMutableArray alloc]init];
-NSInteger pageSize = 50;
-NSString *cursor = nil;
-EMCursorResult *result = [[EMCursorResult alloc]init];
-do {
-  // 同步方法，异步方法见 [EMGroupManager getPublicGroupsFromServerWithCursor:pageSize:completion:]
-    result = [[EMClient sharedClient].groupManager
-                                      getPublicGroupsFromServerWithCursor:cursor
-                                      pageSize:50
-                                      error:nil];
-    [memberList addObjectsFromArray:result.list];
-    cursor = result.cursor;
-} while (result && result.list < pageSize);
-
-// 申请加入群组
-// 同步方法，异步方法见 [EMGroupManager joinPublicGroup:completion:]
-[[EMClient sharedClient].groupManager joinPublicGroup:@"groupID" error:nil];
-```
-
 ### 解散群组
 
 :::notice
@@ -137,26 +112,11 @@ do {
 [[EMClient sharedClient].groupManager destroyGroup:@"groupID"];
 ```
 
-### 退出群组
-
-群成员可以调用 `leaveGroup` 方法退出群组，其他成员将会收到群组事件回调 `EMGroupManagerDelegate#didLeaveGroup`。
-
-退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 `destroyGroup` 解散群组。
-
-示例代码如下：
-
-```objectivec
-// 同步方法，异步方法见 [EMGroupManager leaveGroup:completion:]
-[[[EMClient sharedClient].groupManager leaveGroup:@"groupID" error:nil];
-```
-
 ### 获取群组详情
 
 :::notice
-从 3.7.4 版本开始支持 “是否获取群组成员” 参数。
+从 3.7.4 版本开始支持是否获取群组成员参数 `fetchMembers` 。
 :::
-
-群成员可以调用 `aGroup.adminList` 方法从内存获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
 
 群成员也可以调用 `getGroupSpecificationFromServerWithId` 方法从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用。另外，若将该方法的 `fetchMembers` 参数设置为 `true`，可获取群成员列表，默认最多包括 200 个成员。
 
@@ -169,15 +129,16 @@ do {
 // 根据群组 ID 从服务器获取群组详情。
 [[EMClient sharedClient].groupManager getGroupSpecificationFromServerWithId:self.group.groupId fetchMembers:YES completion:^(EMGroup *aGroup, EMError *aError) {
     if (!aError) {
-        // EMGroup 中包含了很多群组属性，比如群组 ID，群组成员，是否屏蔽群组消息(isBlocked 属性)等，具体到 SDK 中 EMGroup.h 头文件查看。
+        // EMGroup 中包含了很多群组属性，比如群组 ID、群组成员和是否屏蔽群组消息(isBlocked 属性)等。详情请查看 SDK 中 EMGroup.h 头文件查看。
         NSLog(@"获取群组详情成功");
     } else {
         NSLog(@"获取群组详情失败的原因 --- %@", aError.errorDescription);
     }
 }];
 
-// 根据群组 ID 从本地获取群组详情。
+// 获取群组管理员列表。
 NSArray *admins = aGroup.adminList;
+...
 ```
 
 ### 获取群成员列表
@@ -262,7 +223,7 @@ do {
 [[EMClient sharedClient].groupManager blockGroup:@"groupID" error:nil];
 ```
 
-#### 解除屏蔽群
+#### 解除屏蔽群消息
 
 群成员可以调用 `unblockGroup` 方法解除屏蔽群消息。示例代码如下：
 
@@ -273,7 +234,7 @@ do {
 
 #### 检查是否已经屏蔽群消息
 
-群成员可以通过 `EMGroup#isBlocked` 检查用户是否屏蔽了该群的群消息。使用此方法检查时，为了保证结果的准确性，需要先从服务器获取群详情，即调用 `EMGroup#getGroupSpecificationFromServerWithId`。
+群成员可以调用 `EMGroup#isBlocked` 检查是否屏蔽了该群的消息。为了保证检查结果的准确性，调用该方法前需先从服务器获取群详情，即调用 `EMGroup#getGroupSpecificationFromServerWithId`。
 
 ### 监听群组事件
 
@@ -399,6 +360,12 @@ do {
   {
 
   }
+
+// 有成员被移出群组。被移出的成员收到该事件。
+- (void)didLeaveGroup:(EMGroup *_Nonnull)aGroup reason:(EMGroupLeaveReason)aReason
+  {
+    
+  }  
 
 // 群组公告更新。群组所有成员会收到该回调。
 - (void)groupAnnouncementDidUpdate:(EMGroup *)aGroup announcement:(NSString *)aAnnouncement

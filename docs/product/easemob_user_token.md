@@ -74,7 +74,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | `user.created`  | Long  | 注册用户的 Unix 时间戳，单位为毫秒。            |
 | `user.modified`  | Long  | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。          |
 | `user.username`  | String | 用户 ID。                                                       |
-| `user.activated` | Bool  | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户的 API](account_system.html#账号解禁)对账号解除封禁。 |
+| `user.activated` | Bool  | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户的 API](/document/server-side/account_system.html#账号解禁)对账号解除封禁。 |
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](/document/server-side/error.html)了解可能的原因。
 
