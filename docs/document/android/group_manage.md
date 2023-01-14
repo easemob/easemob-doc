@@ -11,7 +11,6 @@
 环信即时通讯 IM Android SDK 提供 `EMGroupManager` 类和 `EMGroup` 类用于管理群组，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散群组
-- 加入、退出群组
 - 获取群组详情
 - 获取群成员列表
 - 获取群组列表
@@ -32,31 +31,52 @@
 
 ### 创建群组
 
-在创建群组前，你需要设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`inviteNeedConfirm`)。
+群组可分为私有群和公有群。私有群不可被搜索到，公开群可以通过群组 ID 搜索到。
 
-1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型（`EMGroupStyle`），具体设置如下：
+用户可以创建群组，设置群组的名称、描述、群组成员、创建群组的原因等属性。用户还可以设置 `EMGroupStyle` 参数指定群组的大小和类型。创建群组后，群组创建者自动成为群主。
+
+创建群组前，需设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`EMGroupOptions#inviteNeedConfirm`)。
+
+- 目前支持四种群组类型（`EMGroupStyle`），具体设置如下：
+
    - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
    - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
-   - EMGroupStylePublicJoinNeedApproval——公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
+   - EMGroupStylePublicJoinNeedApproval——公开群，用户入群需要获得群主和群管理员同意；
    - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理员同意。
-2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
-   - 进群邀请需要用户确认(`inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `autoAcceptGroupInvitation` 设置，处理逻辑如下：
-     - 用户设置自动接受群组邀请 (`autoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
-     - 用户设置手动确认群组邀请 (`autoAcceptGroupInvitation` 设置为 `false`)，受邀用户收到 `EMGroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝入群邀请：
-       - 用户同意入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调；
-       - 用户拒绝入群邀请后，群主收到 `EMGroupChangeListener#groupInvitationDidDecline` 回调。
 
-- 进群邀请无需用户确认 (`inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，不论用户的 `autoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
+- 邀请进群是否需要受邀用户确认（`EMGroupOptions#inviteNeedConfirm`）
 
-流程如下：
+公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 `EMGroupStyle` 的设置。
+
+邀请入群是否需受邀用户确认取决于群组选项 `EMGroupOptions#inviteNeedConfirm` 和受邀用户的参数 `autoAcceptGroupInvitation` 的设置，前者的优先级高于后者，即若 `EMGroupOptions#inviteNeedConfirm` 设置为 `false`，不论 `autoAcceptGroupInvitation` 设置为何值，受邀用户无需确认直接进群。
+
+1. 受邀用户无需确认，直接进群。
+
+以下两种设置的情况下，用户直接进群：
+
+- 若 `EMGroupOptions#inviteNeedConfirm` 设置为 `false`，不论 `autoAcceptGroupInvitation` 设置为 `false` 或 `true`，受邀用户均无需确认，直接进群。
+- 若 `EMGroupOptions#inviteNeedConfirm` 和 `autoAcceptGroupInvitation` 均设置为 `true`，用户自动接受群组邀请，直接进群。
+
+受邀用户直接进群，会收到如下回调：
+
+- 新成员会收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调；
+- 邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调；
+- 其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
+
+2. 受邀用户需要确认才能进群。
+
+只有 `EMGroupOptions#inviteNeedConfirm` 设置为 `true` 和 `autoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `EMGroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
+
+- 用户同意入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调；
+- 用户拒绝入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationDeclined` 回调。
+
+邀请用户入群的流程如下图所示：
 
 ![img](@static/images/android/group-flow.png)
 
 用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
-用户加入群组后，将可以收到群消息。
-
-示例代码如下：
+用户加入群组后，将可以收到群消息。示例代码如下：
 
 ```java
 EMGroupOptions option = new EMGroupOptions();
@@ -65,37 +85,6 @@ option.style = EMGroupStyle.EMGroupStylePrivateMemberCanInvite;
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncCreateGroup(String, String, String[], String, EMGroupOptions, EMValueCallBack)。
 EMClient.getInstance().groupManager().createGroup(groupName, desc, allMembers, reason, option);
-```
-
-### 用户申请入群
-
-根据 [创建群组](#创建群组) 时的群组类型 (`EMGroupStyle`) 设置，加入群组的处理逻辑差别如下：
-
-- 当群组类型为 `EMGroupStylePublicOpenJoin` 时，用户直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
-- 当群组类型为 `EMGroupStylePublicJoinNeedApproval` 时，群主和群管理员收到 `EMGroupChangeListener#onRequestToJoinReceived` 回调，并选择同意或拒绝入群申请：
-  - 群主和群管理员同意入群申请，申请人收到 `EMGroupChangeListener#onRequestToJoinAccepted` 回调；其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
-  - 群主和群管理员拒绝入群申请，申请人收到 `EMGroupChangeListener#onRequestToJoinDeclined` 回调。
-
-:::notice
-用户只能申请加入公开群组，私有群组不支持用户申请入群。
-:::
-
-用户申请加入群组的步骤如下：
-
-1. 调用 `getPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。
-2. 调用 `joinGroup` 方法传入群组 ID，申请加入对应群组。
-
-示例代码如下：
-
-```java
-// 从服务器获取公开群组列表。
-EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, cursor);
-List<EMGroupInfo> groupsList = result.getData();
-String cursor = result.getCursor();
-
-// 申请加入群组。
-// 同步方法，会阻塞当前线程。异步方法为 asyncJoinGroup(String, EMCallBack)。
-EMClient.getInstance().groupManager().joinGroup(groupId);
 ```
 
 ### 解散群组
@@ -112,20 +101,6 @@ EMClient.getInstance().groupManager().joinGroup(groupId);
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncDestroyGroup(String, EMCallBack)。
 EMClient.getInstance().groupManager().destroyGroup(groupId);
-```
-
-### 退出群组
-
-群成员可以调用 `leaveGroup` 方法退出群组。其他成员收到 `EMGroupChangeListener#onMemberExited` 回调。
-
-退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 `DestroyGroup` 解散群组。
-
-示例代码如下：
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncLeaveGroup(String, EMCallBack)。
-EMClient.getInstance().groupManager().leaveGroup(groupId);
 ```
 
 ### 获取群组详情
@@ -249,7 +224,7 @@ EMClient.getInstance().groupManager().unblockGroupMessage(groupId);
 
 #### 检查自己是否已经屏蔽群消息
 
-群成员可以调用 `EMGroup#isMsgBlocked` 方法检查用户是否屏蔽了该群的群消息。使用此方法检查时，为了保证结果的准确性，需要先从服务器获取群详情，即调用 `EMGroupManager#getGroupFromServer`。
+群成员可以调用 `EMGroup#isMsgBlocked` 方法检查是否屏蔽了该群的消息。为了保证检查结果的准确性，调用该方法前需先从服务器获取群详情，即调用 `EMGroupManager#getGroupFromServer`。
 
 示例代码如下：
 
@@ -258,7 +233,7 @@ EMClient.getInstance().groupManager().unblockGroupMessage(groupId);
 EMClient.getInstance().groupManager().asyncGetGroupFromServer(groupId, new EMValueCallBack<EMGroup>() {
     @Override
     public void onSuccess(EMGroup group) {
-        // 2、检查用户是否屏蔽了该群的群消息
+        // 2、检查用户是否屏蔽了该群的消息
         if(group.isMsgBlocked()) {
         }
     }

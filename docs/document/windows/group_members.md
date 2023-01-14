@@ -85,7 +85,7 @@ SDKClient.Instance.GroupManager.ChangeGroupOwner(groupId, newOwner, new CallBack
 
 仅群主可以调用 `AddGroupAdmin` 方法添加群管理员。成功添加后，新管理员及其他管理员收到 `IGroupManagerDelegate#OnAdminAddedFromGroup` 回调。
 
-管理员除了不能散群组等少数权限外，拥有对群组的绝大部分权限。
+管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分权限。
 
 示例代码如下：
 

@@ -257,7 +257,7 @@ SDKClient.Instance.GroupManager.UnBlockGroup(groupId, new CallBack(
 ```csharp
 SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(currentGroupId, new ValueCallBack<Group>(
     onSuccess: (group) => {
-        // 检查用户是否屏蔽了该群的群消息
+        // 检查用户是否屏蔽了该群的消息
         if(group.MessageBlocked == true) {
 
         }

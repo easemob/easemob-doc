@@ -240,7 +240,7 @@ try {
 try {
   EMGroup group = await EMClient.getInstance.groupManager
       .fetchGroupInfoFromServer(groupId);
-  // 检查用户是否屏蔽了该群的群消息
+  // 检查用户是否屏蔽了该群的消息
   if (group.messageBlocked == true) {
 
   }

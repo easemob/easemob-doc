@@ -70,13 +70,12 @@ message.chatType = EMChatTypeChat;
 对于聊天室消息，可设置消息优先级。示例代码如下：
 
 ```Objectivec
-    NSString from = [[EMClient sharedClient] currentUsername];
-    EMChatMessage message = [[EMChatMessage alloc] initWithConversationID:aTo from:from to:aTo body:aBody ext:aExt];
-    message.chatType = EMChatTypeChatRoom;
-    // 聊天室消息的优先级。如果不设置，默认值为 `Normal`，即“普通”优先级。
-    message.priority = EMChatRoomMessagePriorityHigh;
-    __weak typeof(self) weakself = self;
-    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+EMTextMessageBody* textBody = [[EMTextMessageBody alloc] initWithText:@"Hi"];
+EMChatMessage* message = [[EMChatMessage alloc] initWithConversationID:@"roomId" body:textBody ext:nil];
+message.chatType = EMChatTypeChatRoom;
+// 聊天室消息的优先级。如果不设置，默认值为 `Normal`，即“普通”优先级。
+message.priority = EMChatRoomMessagePriorityHigh;
+[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
 ### 接收消息
