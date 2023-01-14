@@ -35,8 +35,8 @@
 - 群组类型（`ChatGroupStyle`）可以设置为如下值：
     - `PrivateOnlyOwnerInvite` —— 私有群，只有群主和管理员可以邀请人进群；
     - `PrivateMemberCanInvite` —— 私有群，所有群成员均可以邀请人进群；
-    - `PublicJoinNeedApproval` —— 公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
-    - `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理同意。
+    - `PublicJoinNeedApproval` —— 公开群，用户加入群组需要群组或管理员同意；
+    - `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理员同意。
 - 邀请用户进群（`ChatGroupOptions#inviteNeedConfirm`）
 
     公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群样式（`ChatGroupStyle`）的设置：
