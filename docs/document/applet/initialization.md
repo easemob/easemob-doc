@@ -59,7 +59,7 @@ const conn = new EC.connection({
 
 ### REST API 注册
 
-请参考 [注册用户](account_system.html#注册用户)。
+请参考 [注册用户](/document/server-side/account_system.html#注册用户)。
 
 ### SDK 注册
 
