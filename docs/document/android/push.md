@@ -6,7 +6,7 @@
 
 当客户端应用进程被关闭等原因导致用户离线，环信即时通讯 IM 服务会通过第三方厂商的消息推送服务向该离线用户的设备推送消息通知。当用户再次上线时，会收到离线期间所有消息。
 
-目前支持的手机厂商推送服务包括：华为、小米、魅族、OPPO、VIVO、GOOGLE，本文以集成小米、华为的消息推送服务为例，介绍如何在客户端应用中实现消息推送。
+目前支持的手机厂商推送服务包括：华为、小米、魅族、OPPO、VIVO、Google，本文以集成小米、华为的消息推送服务为例，介绍如何在客户端应用中实现消息推送。
 
 ## 技术原理
 
@@ -102,7 +102,7 @@ EMClient.getInstance().init(this, options);
 
    ```gradle
    dependencies {
-       // Google Firebase cloud messaging
+       // FCM 推送
        classpath 'com.google.gms:google-services:4.3.8'
    }
    ```
@@ -113,15 +113,15 @@ EMClient.getInstance().init(this, options);
    dependencies {
        // ...
 
-       // FCM: Import the Firebase BoM
+       // FCM：导入 Firebase BoM
        implementation platform('com.google.firebase:firebase-bom:28.4.1')
-       // FCM: Declare the dependencies for the Firebase Cloud Messaging
-       // When using the BoM, you don't specify versions in Firebase library dependencies
+       // FCM：声明 FCM 的依赖项
+       // 使用 BoM 时，不要在 Firebase 库依赖中指定版本
        implementation 'com.google.firebase:firebase-messaging'
 
    }
-   // Add the following line:
-   apply plugin: 'com.google.gms.google-services'  // Google Services plugin
+   // 添加下行代码：
+   apply plugin: 'com.google.gms.google-services'  // Google 服务插件
    ```
 
    3.3 同步应用后，继承 `FirebaseMessagingService` 的服务，并将其在 `AndroidManifest.xml` 中注册。
@@ -142,13 +142,13 @@ EMClient.getInstance().init(this, options);
    EMOptions options = new EMOptions();
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
-   // Replace to Your FCM sender id
+   // 替换为你的 FCM 发送方的用户 ID
    builder.enableFCM("Your FCM sender id");
-   // Set pushconfig to EMOptions
+   // 将 pushconfig 设置到 EMOptions 中
    options.setPushConfig(builder.build());
-   // To initialize Easemob IM SDK
+   // 初始化即时通讯 IM SDK
    EMClient.getInstance().init(this, options);
-   // After the SDK is initialized
+   // 即时通讯 IM SDK 初始化后
    EMPushHelper.getInstance().setPushListener(new EMPushListener() {
        @Override
        public void onError(EMPushType pushType, long errorCode) {
@@ -156,7 +156,7 @@ EMClient.getInstance().init(this, options);
        }
        @Override
        public boolean isSupportPush(EMPushType pushType, EMPushConfig pushConfig) {
-           // Set whether FCM is supported
+           // 设置是否支持 FCM
            if(pushType == EMPushType.FCM) {
                return GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this)
                            == ConnectionResult.SUCCESS;
@@ -169,7 +169,7 @@ EMClient.getInstance().init(this, options);
    3.5 环信即时通讯 IM SDK 登录成功后，上传 FCM 的 device token。
 
    ```java
-   // Check whether FCM is supported
+   // 查看是否支持 FCM
    if(GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this) != ConnectionResult.SUCCESS) {
        return;
    }
@@ -180,7 +180,7 @@ EMClient.getInstance().init(this, options);
                EMLog.d("PushClient", "Fetching FCM registration token failed:"+task.getException());
                return;
            }
-           // Get new FCM registration token
+           // 获取新的 FCM 注册 token
            String token = task.getResult();
            EMClient.getInstance().sendFCMTokenToServer(token);
        }
@@ -207,9 +207,7 @@ EMClient.getInstance().init(this, options);
        @Override
        public void onNewToken(@NonNull String token) {
            Log.i("MessagingService", "onNewToken: " + token);
-           // If you want to send messages to this application instance or
-           // manage this apps subscriptions on the server side, send the
-           // FCM registration token to your app server.
+           // 若要对该应用实例发送消息或管理服务端的应用订阅，将 FCM 注册 token 发送至你的应用服务器。
            if(EMClient.getInstance().isSdkInited()) {
                EMClient.getInstance().sendFCMTokenToServer(token);
            }
@@ -220,7 +218,7 @@ EMClient.getInstance().init(this, options);
 #### 华为 HMS 推送集成
 
 1. 华为开发者后台创建应用<br/>
-    在华为开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见华为官方介绍：[华为 HMS 消息推送服务集成](http://developer.huawei.com/consumer/cn/service/hms/catalog/huaweipush.html?page=hmssdk_huaweipush_devprepare)。
+    在华为开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见华为官方介绍：[华为 HMS 消息推送服务集成](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section19884105518498)。
 2. 上传推送证书<br/>
     注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **华为**，然后输入你在 华为开发者后台创建的[应用信息中的 APP ID 和 SecretKey 以及程序的包名](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section125831926193110)。
 3. 华为推送集成<br/>
@@ -247,9 +245,9 @@ EMClient.getInstance().init(this, options);
     ...
     EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
     builder.enableHWPush();
-    // Set pushconfig to ChatOptions
+    // 将 pushconfig 设置为 ChatOptions
     options.setPushConfig(builder.build());
-    // To initialize Agora Chat SDK
+    // 初始化 IM SDK
     EMClient.getInstance().init(this, options);
     ```
     - 3.5 [华为通知消息智能分类](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-intelligent-classification-0000001050040120)。
@@ -258,17 +256,17 @@ EMClient.getInstance().init(this, options);
 
 环信即时通讯 IM SDK 中已经集成了小米推送（基于 `MiPush_SDK_Client_3_6_12.jar`）相关逻辑，你还需要完成以下步骤：
 
-1. 在小米开发者站创建应用</br>
-   在 [小米开发者站](http://developer.xiaomi.com/) 创建应用，并开启 push 服务，具体可以看下小米官方介绍： [推送服务接入指南](https://dev.mi.com/console/doc/detail?pId=68)。
+1. 在小米开放平台创建应用</br>
+   在 [小米开放平台](https://dev.mi.com/platform) 创建应用，开启推送服务。详见小米官方网站的 [推送服务接入指南](https://dev.mi.com/console/doc/detail?pId=68)。
 
 2. 上传推送证书</br>
-   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 小米，然后输入你在 [小米开发者站](http://developer.xiaomi.com/) 创建的应用信息中的 App ID 和 Secret Key 以及程序的包名。
+   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 小米，然后输入你在 [小米开放平台](https://dev.mi.com/platform) 创建的应用信息中的 App ID 和 Secret Key 以及程序的包名。
 
 3. 小米推送集成</br>
 
-   3.1 下载 [小米推送 SDK](http://dev.xiaomi.com/mipush/downpage/) ，将 Jar 包添加到项目中。
+   3.1 下载 [小米推送 SDK](https://admin.xmpush.xiaomi.com/zh_CN/mipush/downpage) ，将 Jar 包添加到项目中。
 
-   3.2 配置 `AndroidManifest.xml`，详见 [官方文档](https://dev.mi.com/console/doc/detail?pId=41#_0_0) 。
+   3.2 配置 `AndroidManifest.xml`，详见 [官方文档](https://dev.mi.com/console/doc/detail?pId=41#_0_0)。
 
    - 推送服务需要的权限列表：
 
@@ -356,9 +354,9 @@ EMClient.getInstance().init(this, options);
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
    builder.enableMiPush(String appId, String appKey);
-   // Set pushconfig to ChatOptions
+   // 将 pushconfig 设置为 ChatOptions
    options.setPushConfig(builder.build());
-   // To initialize Agora Chat SDK
+   // 初始化 IM SDK
    EMClient.getInstance().init(this, options);
    ```
 
@@ -367,7 +365,7 @@ EMClient.getInstance().init(this, options);
 环信即时通讯 IM SDK 中已经集成了 OPPO 推送相关逻辑，你还需要完成以下步骤：
 
 1. 在 OPPO 开发者后台创建应用</br>
-   在 OPPO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下 OPPO 官方介绍：[ OPPO 推送服务集成](https://open.oppomobile.com/new/developmentDoc/info?id=10195)
+   在 OPPO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见 OPPO 官方介绍：[ OPPO 推送服务集成](https://open.oppomobile.com/new/developmentDoc/info?id=10195)
 
 2. 上传推送证书</br>
 
@@ -419,9 +417,9 @@ EMClient.getInstance().init(this, options);
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
    builder.enableOppoPush(String appKey,String appSecret);
-   // Set pushconfig to ChatOptions
+   // 将 pushconfig 设置为 ChatOptions
    options.setPushConfig(builder.build());
-   // To initialize Agora Chat SDK
+   // 初始化 IM SDK
    EMClient.getInstance().init(this, options);
    ```
 
@@ -436,7 +434,7 @@ EMClient.getInstance().init(this, options);
 环信即时通讯 IM SDK 中已经集成了 VIVO 推送（基于 `vivo_push_v2.3.1.jar`）相关逻辑，你还需要完成以下步骤：
 
 1. 在 VIVO 开发者后台创建应用</br>
-   在 VIVO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下 VIVO 官方介绍：[ VIVO 推送服务集成](https://dev.vivo.com.cn/documentCenter/doc/281)。
+   在 VIVO 开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见 VIVO 官方介绍：[ VIVO 推送服务集成](https://dev.vivo.com.cn/documentCenter/doc/281)。
 
 2. 上传推送证书</br>
    注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **VIVO**，然后输入你在 [VIVO 开发者后台](https://vpush.vivo.com.cn/#/appdetail)创建的应用的 `APP ID`，`APP KEY` 和 `APP SECRET` 以及程序的 `包名`。
@@ -477,23 +475,23 @@ EMClient.getInstance().init(this, options);
 
      <receiver android:name="com.hyphenate.push.platform.vivo.EMVivoMsgReceiver" >
          <intent-filter>
-             <!-- 接收 push 消息 -->
+             <!-- 接收推送消息 -->
              <action android:name="com.vivo.pushclient.action.RECEIVE" />
          </intent-filter>
      </receiver>
      <!-- VIVO 推送配置 end -->
      ```
 
-   3.3 在 SDK 初始化的时候，配置启用 VIVO 推送
+   3.3 在 SDK 初始化的时候，配置启用 VIVO 推送。
 
    ```java
    EMOptions options = new EMOptions();
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
    builder.enableVivoPush();
-   // Set pushconfig to ChatOptions
+   // 将 pushconfig 设置为 ChatOptions
    options.setPushConfig(builder.build());
-   // To initialize Agora Chat SDK
+   // 初始化 IM SDK
    EMClient.getInstance().init(this, options);
    ```
 
@@ -504,7 +502,7 @@ EMClient.getInstance().init(this, options);
 #### 魅族推送集成
 
 1. 在魅族开发者后台创建应用</br>
-   在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，具体可以看下魅族官方介绍：[Flyme 推送服务集成](http://open-wiki.flyme.cn/index.php?title=Flyme推送接入文档)。
+   在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见魅族官方介绍：[Flyme 推送服务集成](http://open-wiki.flyme.cn/index.php?title=Flyme推送接入文档)。
 
 2. 上传推送证书
    -注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 魅族，然后输入你在[ flyme 推送平台](http://push.meizu.com/#/config/app?appId=8843&_k=dnrz9k)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
@@ -574,9 +572,9 @@ EMClient.getInstance().init(this, options);
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
    builder.enableVivoPush();
-   // Set pushconfig to ChatOptions
+   // 将 pushconfig 设置为 ChatOptions
    options.enableMeiZuPush(String appId,String appKey);
-   // To initialize Agora Chat SDK
+   // 初始化 IM SDK
    EMClient.getInstance().init(this, options);
    ```
 
