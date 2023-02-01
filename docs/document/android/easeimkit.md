@@ -2,7 +2,7 @@
 
 <Toc />
 
-在您阅读此文档时，我们假定您已经具备了基础的 Android 应用开发经验，并能够理解相关基础概念。此文档是针对导入 EaseIMKit 库的快速集成文档，如果只是导入 SDK 去集成使用，请移步 [环信即时通讯 IM Android 快速开始](quickstart.html)。
+在您阅读此文档时，我们假定您已经具备了基础的 Android 应用开发经验，并能够理解相关基础概念。此文档是针对导入 EaseIMKit 库的快速集成文档，如果只是导入 SDK 集成使用，请参考 [环信即时通讯 IM Android 快速开始](quickstart.html)。
 
 ## 简介
 
@@ -237,9 +237,11 @@ public boolean onMenuItemClick(MenuItem item, int position) {
     if(object instanceof EMConversation) {
         switch (item.getItemId()) {
             case R.id.action_con_make_top :
+                // 将会话置顶
                 conversationListLayout.makeConversationTop(position, info);
                 return true;
             case R.id.action_con_cancel_top :
+                // 取消会话置顶
                 conversationListLayout.cancelConversationTop(position, info);
                 return true;
             case R.id.action_con_delete :
