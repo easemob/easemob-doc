@@ -220,3 +220,33 @@ conn.getChatThreadLastMessage({chatThreadIds: ['chatThreadId1','chatThreadId2']}
   console.log(res)
 });
 ```
+
+### 监听子区事件
+
+SDK 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通过设置此监听，获取群组中的事件。
+
+示例代码如下：
+
+```javascript
+// 创建一个子区事件监听器
+conn.addEventHandler("eventName", {
+  onChatThreadChange: function (msg) {
+    switch (msg.operation) {
+      // 子区创建时会收到该回调。
+      case "create":
+        break;
+      // 子区名称修改、子区中新增或撤回消息时会收到该回调。
+      case "update":
+        break;
+      // 子区解散时会收到该回调。
+      case "destroy":
+        break;
+      // 子区成员被移除时会收到该回调。
+      case "userRemove":
+        break;
+      default:
+        break;
+    }
+  },
+});
+```
