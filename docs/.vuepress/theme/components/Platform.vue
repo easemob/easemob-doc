@@ -133,26 +133,33 @@ export default {
         <div class="platform-input" @click="platformClick">
             <div class="platform-text">
                 <img :src="rootPath + default_platform.hover_icon" alt="">
-                <span>{{ default_platform.title }}</span>
+                <span>{{ root === 'api' ? default_platform.title === 'Web' ? 'Web/小程序' : default_platform.title :
+                default_platform.title }}</span>
             </div>
             <div class="select-icon"><i class="icon-arrow" :class="{ open: enter && !leave }"></i></div>
         </div>
         <div class="platform-list" id="platform-list"
             :class="{ 'menu-hidden': !enter && !leave, 'slide-up-enter slide-up-enter-active': enter, 'slide-up-leave slide-up-leave-active': leave }"
             @click="platformToggleDown">
-            <div class="group" v-for="group in platform"
-                v-if="(group.show === undefined || group.show !== false) && ((!group.only && !group.except) || (group.only && group.only.indexOf(root) !== -1) || (group.except && group.except.indexOf(root) === -1))">
-                <div class="group-title">{{ group.title }}</div>
-                <div class="options">
-                    <div class="option-item" v-for="item in group.children" :data-key="item.key" @click="switchPlatform"
-                        @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave"
-                        v-if="(item.show === undefined || item.show !== false) && ((!item.only && !item.except) || (item.only && item.only.indexOf(root) !== -1) || (item.except && item.except.indexOf(root) === -1))">
-                        <img :src="rootPath + item.icon" class="default" alt="">
-                        <img :src="rootPath + item.hover_icon" class="active" alt="">
-                        <span>{{ item.title }}</span>
+            <template v-for="group in platform">
+                <div class="group" :key="group.title"
+                    v-if="(group.show === undefined || group.show !== false) && ((!group.only && !group.except) || (group.only && group.only.indexOf(root) !== -1) || (group.except && group.except.indexOf(root) === -1))">
+                    <div class="group-title">{{ group.title }}</div>
+                    <div class="options">
+                        <template v-for="item in group.children">
+                            <div class="option-item" :key="item.key" :data-key="item.key" @click="switchPlatform"
+                                @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave"
+                                v-if="(item.show === undefined || item.show !== false) && ((!item.only && !item.except) || (item.only && item.only.indexOf(root) !== -1) || (item.except && item.except.indexOf(root) === -1)) && (root === 'api' ? item.title === '小程序' ? false : true : true)">
+                                <img :src="rootPath + item.icon" class="default" alt="">
+                                <img :src="rootPath + item.hover_icon" class="active" alt="">
+                                <span>{{ root === 'api' ? item.key === 'web' ? 'Web/小程序' : item.title : item.title
+                                }}</span>
+                            </div>
+                        </template>
                     </div>
                 </div>
-            </div>
+            </template>
+
         </div>
     </div>
 </template>
