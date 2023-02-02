@@ -14,7 +14,6 @@
 
 - 创建、解散子区
 - 加入、退出子区
-- 子区踢人
 - 修改子区名称
 - 获取子区详情
 - 获取子区成员列表
@@ -25,7 +24,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 `4.0.7 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)；
+- 完成 4.0.7 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)；
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
@@ -96,18 +95,19 @@ conn.joinChatThread({chatThreadId: 'chatThreadId'});
 
 ### 退出子区
 
-子区成员均可以主动调用 `leaveChatThread` 方法退出子区，退出子区后，该成员将不会再收到子区消息。
+#### 子区成员主动退出子区
+
+子区成员均可以调用 `leaveChatThread` 方法主动退出子区。退出子区后，该成员将不会再收到子区消息。
 
 多设备登录时，其他设备会同时收到 `onMultiDeviceEvent` 回调，事件为 `chatThreadLeave`。
 
 示例代码如下：
 
 ```javascript
-// 退出子区
 conn.leaveChatThread({chatThreadId: 'chatThreadId'});
 ```
 
-### 从子区移出成员
+#### 子区成员被移出子区
 
 仅群主和群管理员可以调用 `removeChatThreadMember` 方法将指定成员 (群管理员或普通成员) 踢出子区，被踢出子区的成员将不再接收到子区消息。
 
@@ -116,7 +116,6 @@ conn.leaveChatThread({chatThreadId: 'chatThreadId'});
 示例代码如下：
 
 ```javascript
-// 从子区移出成员
 // chatThreadId: 子区 ID
 // username: 子区成员的用户 ID
 conn.removeChatThreadMember({chatThreadId: 'chatThreadId',username:'username'}); 
@@ -131,7 +130,6 @@ conn.removeChatThreadMember({chatThreadId: 'chatThreadId',username:'username'});
 示例代码如下：
 
 ```javascript
-// 修改子区名称
 // chatThreadId：子区 ID
 // name：修改后的子区名称，长度不超过 64 个字符
 conn.changeChatThreadName({chatThreadId: 'chatThreadId',name: 'name'})
@@ -161,7 +159,6 @@ conn.getChatThreadDetail({chatThreadId: 'chatThreadId'}).then((res)=>{
 子区所属群组的所有成员均可以调用 `getChatThreadMembers` 方法从服务器分页获取子区成员列表。
 
 ```javascript
-// 获取子区成员列表
 // chatThreadId：子区 ID
 // pageSize：单次请求返回的成员数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -175,7 +172,6 @@ conn.getChatThreadMembers({chatThreadId: 'chatThreadId ',pageSize:20,cursor:'cur
 1. 用户可以调用 `getJoinedChatThreads` 方法从服务器分页获取自己加入的子区列表：
 
 ```javascript
-// 分页获取自己加入的子区列表
 // pageSize：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 conn.getJoinedChatThreads({cursor: 'cursor',pageSize: 20}).then((res)=>{
@@ -186,7 +182,6 @@ conn.getJoinedChatThreads({cursor: 'cursor',pageSize: 20}).then((res)=>{
 2. 用户可以调用 `getJoinedChatThreads` 方法从服务器分页获取指定群组中自己加入的子区列表：
 
 ```javascript
-// 分页获取指定群组中自己加入的子区列表
 // parentId：群组 ID
 // pageSize：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -198,7 +193,6 @@ conn.getJoinedChatThreads({parentId: 'parentId',cursor: 'cursor',pageSize: 20}).
 3. 用户还可以调用 `getChatThreads` 方法从服务器分页获取指定群组的子区列表：
 
 ```javascript
-// 分页获取指定群组的子区列表
 // parentId：群组 ID
 // pageSize：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -214,7 +208,6 @@ conn.getChatThreads({parentId: 'parentId', cursor:'cursor', pageSize: 20}).then(
 示例代码如下：
 
 ```javascript
-// 批量获取子区中的最新消息
 // chatThreadIds：要查询的子区 ID 列表，每次最多可传入 20 个子区 ID
 conn.getChatThreadLastMessage({chatThreadIds: ['chatThreadId1','chatThreadId2']}).then((res)=>{
   console.log(res)
@@ -232,16 +225,16 @@ SDK 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通
 conn.addEventHandler("eventName", {
   onChatThreadChange: function (msg) {
     switch (msg.operation) {
-      // 子区创建时会收到该回调。
+      // 子区创建。子区所属群组的所有成员收到该事件。
       case "create":
         break;
-      // 子区名称修改、子区中新增或撤回消息时会收到该回调。
+      // 子区名称修改、子区中新增或撤回消息。子区所属群组的所有成员会收到该事件。
       case "update":
         break;
-      // 子区解散时会收到该回调。
+      // 子区解散。子区所属群组的所有成员会收到该事件。
       case "destroy":
         break;
-      // 子区成员被移除时会收到该回调。
+      // 子区成员被移除。被踢出子区的成员收到该事件。
       case "userRemove":
         break;
       default:
