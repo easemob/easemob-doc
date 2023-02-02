@@ -103,7 +103,7 @@ message.isChatThread = self.isChatThread;
 
 ### 从服务器获取子区消息 (消息漫游)
 
-从服务器获取子区消息，请参考 [从服务器获取消息（消息漫游）](message_retrieve.html)。
+从服务器获取子区消息，请参考 [从服务器获取消息（消息漫游）](message_retrieve.html#分页获取指定会话的历史消息)。
 
 #### 从内存和本地数据库中获取子区消息
 
@@ -118,5 +118,5 @@ EMConversation* conversation = [EMClient.sharedClient.chatManager getConversatio
 }];
 ```
 :::tip
-判断当前会话是否为子区会话，可以调用 `EMConversation#isChatThread` 属性。
+可通过 `EMConversation#isChatThread` 属性判断当前会话是否为子区会话。
 :::

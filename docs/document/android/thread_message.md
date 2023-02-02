@@ -143,5 +143,5 @@ List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize, 
 ```
 
 :::tip
-通过 `EMConversation#isChatThread()` 判断当前会话是否为子区会话。
+可通过 `EMConversation#isChatThread()` 判断当前会话是否为子区会话。
 :::
