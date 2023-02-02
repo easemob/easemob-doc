@@ -2,7 +2,7 @@
 
 <Toc />
 
-子区是群组成员的子集，是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM Android SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
+子区是群组成员的子集，是支持多人沟通的即时通讯系统。本文介绍如何使用环信即时通讯 IM Android SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
 
 如需查看消息相关内容，参见 [子区消息管理](thread_message.html)。
 
@@ -16,7 +16,6 @@
 
 - 创建、解散子区
 - 加入、退出子区
-- 子区踢人
 - 修改子区名称
 - 获取子区详情
 - 获取子区成员列表
@@ -28,7 +27,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 `3.9.3 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+- 完成 3.9.3 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
@@ -47,7 +46,7 @@
 
 ```java
 // parentId：群组 ID
-// messageId：消息 ID，基于这条消息创建子区
+// messageId：消息 ID，基于该消息创建子区
 // threadName：子区名称，长度不超过 64 个字符
 EMClient.getInstance().chatThreadManager().createChatThread(parentId, messageId, threadName, new EMValueCallBack<EMChatThread>() {
     @Override
@@ -112,6 +111,8 @@ EMClient.getInstance().chatThreadManager().joinChatThread(chatThreadId, new EMVa
 
 ### 退出子区
 
+#### 子区成员主动退出子区
+
 子区成员均可以主动调用 `leaveChatThread` 方法退出子区，退出子区后，该成员将不会再收到子区消息。
 
 多设备登录时，其他设备会同时收到 `EMMultiDeviceListener#onThreadEvent` 回调，回调事件为 `THREAD_LEAVE`。
@@ -130,7 +131,7 @@ EMClient.getInstance().chatThreadManager().leaveChatThread(chatThreadId, new EMC
 });
 ```
 
-### 从子区移出成员
+#### 子区成员被移出子区
 
 仅群主和群管理员可以调用 `removeMemberFromChatThread` 方法将指定成员 (群管理员或普通成员) 踢出子区，被踢出子区的成员将不再接收到子区消息。
 
@@ -176,7 +177,7 @@ EMClient.getInstance().chatThreadManager().updateChatThreadName(chatThreadId, ne
 
 ### 获取子区详情
 
-子区所属群组的所有成员均可以调用 `getChatThreadFromServer` 从服务器获取子区详情。
+子区所属群组的所有成员均可以调用 `getChatThreadFromServer` 方法从服务器获取子区详情。
 
 示例代码如下：
 
@@ -199,7 +200,7 @@ EMClient.getInstance().chatThreadManager().getChatThreadFromServer(chatThreadId,
 
 ```java
 // chatThreadId: 子区 ID
-// limit: 单次请求返回的成员数，取值范围为 [1, 50]
+// limit: 单次请求返回的成员数，取值范围为 [1,50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 EMClient.getInstance().chatThreadManager().getChatThreadMembers(chatThreadId, limit, cursor, 
         new EMValueCallBack<EMCursorResult<String>>() {
@@ -218,7 +219,7 @@ EMClient.getInstance().chatThreadManager().getChatThreadMembers(chatThreadId, li
 1. 用户可以调用 `getJoinedChatThreadsFromServer` 方法从服务器分页获取自己加入和创建的子区列表：
 
 ```java
-// limit: 单次请求返回的子区数，取值范围为 [1, 50]
+// limit: 单次请求返回的子区数，取值范围为 [1,50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 EMClient.getInstance().chatThreadManager().getJoinedChatThreadsFromServer(limit, cursor, 
         new EMValueCallBack<EMCursorResult<EMChatThread>>() {
@@ -236,7 +237,7 @@ EMClient.getInstance().chatThreadManager().getJoinedChatThreadsFromServer(limit,
 
 ```java
 // parentId: 群组 ID
-// limit: 单次请求返回的子区数，取值范围为 [1, 50]
+// limit: 单次请求返回的子区数，取值范围为 [1,50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 EMClient.getInstance().chatThreadManager().getJoinedChatThreadsFromServer(parentId, limit, cursor, 
         new EMValueCallBack<EMCursorResult<EMChatThread>>() {
@@ -254,7 +255,7 @@ EMClient.getInstance().chatThreadManager().getJoinedChatThreadsFromServer(parent
 
 ```java
 // parentId: 群组 ID
-// limit: 单次请求返回的子区数，取值范围为 [1, 50]
+// limit: 单次请求返回的子区数，取值范围为 [1,50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 EMClient.getInstance().chatThreadManager().getChatThreadsFromServer(parentId, limit, cursor, 
         new EMValueCallBack<EMCursorResult<EMChatThread>>() {
@@ -297,21 +298,21 @@ EMClient.getInstance().chatThreadManager().getChatThreadLatestMessage(chatThread
 ```java
 EMChatThreadChangeListener chatThreadChangeListener = new EMChatThreadChangeListener() {
     @Override
-    // 子区创建
+    // 子区创建。子区所属群组的所有成员收到该事件。
     public void onChatThreadCreated(ChatThreadEvent event) {}
     @Override
-    // 子区名称修改、子区中新增或撤回消息
+    // 子区名称修改、子区中新增或撤回消息。子区所属群组的所有成员会收到该事件。
     public void onChatThreadUpdated(ChatThreadEvent event) {}
     @Override
-    // 子区解散
+    // 子区解散。子区所属群组的所有成员会收到该事件。
     public void onChatThreadDestroyed(ChatThreadEvent event) {}
     @Override
-    // 子区成员被移除
+    // 子区成员被移除。被踢出子区的成员收到该事件。
     public void onChatThreadUserRemoved(ChatThreadEvent event) {}
 };
 // 注册监听
 EMClient.getInstance().chatThreadManager().addChatThreadChangeListener(chatThreadChangeListener);
 
 // 移除监听
-EMClient.getInstance().chatThreadManager().removeChatThreadChangeListene(chatThreadChangeListener);
+EMClient.getInstance().chatThreadManager().removeChatThreadChangeListener(chatThreadChangeListener);
 ```

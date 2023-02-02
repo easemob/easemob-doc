@@ -40,7 +40,7 @@
 
 - [IM SDK] 优化协议，减少数据量。
 - [IM SDK] SDK 内部在群组聊天室部分 API 请求时增加 `resourceId`，增加操作的多设备通知提醒。
-- [IM SDK] [getJoinedGroups](/web/group_manage.html#获取群组列表) 增加请求参数支持返回群组成员人数和自己的角色。
+- [IM SDK] [getJoinedGroups](/document/web/group_manage.html#获取群组列表) 方法中增加请求参数支持返回群组成员人数和自己的角色。
 
 ## 版本 V4.0.8 2022-6-17
 

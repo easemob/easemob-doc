@@ -97,7 +97,7 @@ EMClient.getInstance().presenceManager().publishPresence("自定义状态", new 
 EMClient.getInstance().presenceManager().addListener(new MyPresenceListener());
 ```
 
-参考如下示例代码，使用 `EMPresenceListener` 监听器实现以下接口。当订阅的用户在线状态发生变化时，会收到`onPresenceUpdated` 回调。
+参考如下示例代码，使用 `EMPresenceListener` 监听器实现以下接口。当订阅的用户在线状态发生变化时，会收到 `onPresenceUpdated` 回调。
 
 ```java
 public interface EMPresenceListener {

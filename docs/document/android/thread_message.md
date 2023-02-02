@@ -29,7 +29,7 @@
 
 开始前，请确保满足以下条件：
 
-- 已集成环信 IM `(3.9.3 或以上版本)` 的基本功能，账户登录成功。
+- 已集成环信 IM 3.9.3 或以上版本的基本功能，账户登录成功。
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
@@ -121,18 +121,20 @@ EMMessageListener msgListener = new EMMessageListener() {
 
 ### 获取子区消息
 
-进入单个子区会话后默认展示最早消息，用户可以从服务器获取子区历史消息；当你需要合并处理本地和服务器拉取到的消息（例如有用户撤回子区消息的提示是 SDK 在本地生成的一条消息）的时候，可以选择从本地获取子区消息。
+从服务器还是本地数据库获取子区消息取决于你的生产环境。
+
+进入单个子区会话后默认展示最早消息，用户可以从服务器获取子区历史消息；若需要合并本地和服务器拉取到的消息（例如有用户撤回子区消息的提示是 SDK 在本地生成的一条消息，可以选择从本地获取子区消息。
 
 #### 从服务器获取子区消息（消息漫游）
 
-从服务器获取子区消息，请参考 [从服务器获取消息 (消息漫游)](message_retrieve.html)。
+从服务器获取子区消息，请参考 [从服务器获取消息 (消息漫游)](message_retrieve.html#分页获取指定会话的历史消息)。
 
-#### 管理本地子区消息
+#### 从内存和本地数据库中获取子区消息
 
-调用 `EMChatManager#getAllConversations()` 会返回单聊和群聊的会话，不会返回子区会话，你可以从本地数据库中读取指定会话的消息：
+调用 `EMChatManager#getAllConversations` 会返回单聊和群聊的会话，不会返回子区会话。你可以调用以下方法从本地数据库中读取指定会话的消息：
 
 ```java
-// 需要指定会话类型为 `EMConversationType.GroupChat`，且 `isChatThread` 设置为 `true`
+// 需要指定会话类型为 `EMConversationType.GroupChat` 且 `isChatThread` 设置为 `true`
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(chatThreadId, EMConversationType.GroupChat, createIfNotExists, isChatThread);
 // 获取此会话的所有内存中的消息
 List<EMMessage> messages = conversation.getAllMessages();
@@ -140,6 +142,6 @@ List<EMMessage> messages = conversation.getAllMessages();
 List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize, searchDirection);
 ```
 
-:::notice
-判断当前会话是否是子区会话，可以通过 `EMConversation#isChatThread()` 进行判断。
+:::tip
+可通过 `EMConversation#isChatThread()` 判断当前会话是否为子区会话。
 :::

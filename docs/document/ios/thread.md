@@ -14,7 +14,6 @@
 
 - 创建、解散子区
 - 加入、退出子区
-- 子区踢人
 - 修改子区名称
 - 获取子区详情
 - 获取子区成员列表
@@ -26,7 +25,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 `3.9.3 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+- 完成 3.9.3 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
@@ -45,7 +44,7 @@
 
 ```objectivec
 // threadName：子区名称，长度不超过 64 个字符
-// messageId：消息 ID，基于这条消息创建子区
+// messageId：消息 ID，基于该消息创建子区
 // parentId：群组 ID
 // 异步方法
 [[EMClient sharedClient].threadManager createChatThread:self.threadName messageId:self.message.message.messageId parentId:self.message.message.to completion:^(EMChatThread *thread, EMError *aError) {
@@ -104,7 +103,9 @@
 
 ### 退出子区
 
-子区成员均可以主动调用 `leaveChatThread` 方法退出子区，退出子区后，该成员将不会再收到子区消息。
+#### 子区成员主动退出子区
+
+子区成员均可以调用 `leaveChatThread` 方法主动退出子区。退出子区后，该成员将不会再收到子区消息。
 
 多设备登录时，其他设备会同时收到 `- (void)multiDevicesThreadEventDidReceive:(EMMultiDevicesEvent)aEvent threadId:(NSString *)aThreadId ext:(id)aExt;` 回调，回调事件为 `EMMultiDevicesEventThreadLeave`。
 
@@ -121,7 +122,7 @@
 }];
 ```
 
-### 从子区移出成员
+#### 子区成员被移出子区
 
 仅群主和群管理员可以调用 `removeMemberFromChatThread` 方法将指定成员 (群管理员或普通成员) 踢出子区，被踢出子区的成员将不再接收到子区消息。
 
@@ -152,7 +153,7 @@
 
 ```objectivec
 // threadId：子区 ID
-// ThreadName：你想要修改的名称（不超过 64 个字符）
+// ThreadName：修改后的子区名称（不超过 64 个字符）
 // 异步方法
 [EMClient.sharedClient.threadManager updateChatThreadName:self.threadNameField.text threadId:self.threadId completion:^(EMError *aError) {
     if (!aError) {
@@ -187,8 +188,8 @@
 
 ```objectivec
 // threadId：子区 ID
-// pageSize：单次请求返回的成员数，取值范围为 [1, 50]
-// cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
+// pageSize：单次请求返回的成员数，取值范围为 [1,50]
+// cursor：开始获取数据的游标位置，首次调用方法时传 `nil` 或空字符串
 // 异步方法
 [[EMClient sharedClient].threadManager getChatThreadMemberListFromServerWithId:self.threadId cursor:aCursor pageSize:pageSize completion:^(EMCursorResult *aResult, EMError *aError) {
     if !aError { self.cursor = aResult; }
@@ -200,8 +201,8 @@
 1. 用户可以调用 `getJoinedChatThreadsFromServer` 方法从服务器分页获取自己加入和创建的子区列表：
 
 ```objectivec
-// limit：单次请求返回的子区数，取值范围为 [1, 50]
-// cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串 
+// limit：单次请求返回的子区数，取值范围为 [1,50]
+// cursor：开始获取数据的游标位置，首次调用方法时传 `nil` 或空字符串 
 // 异步方法
 [EMClient.sharedClient.threadManager getJoinedChatThreadsFromServerWithCursor:@"" pageSize:20 completion:^(EMCursorResult * _Nonnull result, EMError * _Nonnull aError) {
         
@@ -212,8 +213,8 @@
 
 ```objectivec
 // parentId：群组 ID
-// pageSize：单次请求返回的子区数，取值范围为 [1, 50]
-// cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
+// pageSize：单次请求返回的子区数，取值范围为 [1,50]
+// cursor：开始获取数据的游标位置，首次调用方法时传 `nil` 或空字符串
 // 异步方法
 [EMClient.sharedClient.threadManager getJoinedChatThreadsFromServerWithParentId:self.group.groupId cursor:self.cursor ? self.cursor.cursor:@"" pageSize:20 completion:^(EMCursorResult * _Nonnull result, EMError * _Nonnull aError) {
     if (!aError) {
@@ -226,8 +227,8 @@
 
 ```objectivec
 // parentId: 群组 ID
-// pageSize: 单次请求返回的子区数，取值范围为 [1, 50]
-// cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
+// pageSize: 单次请求返回的子区数，取值范围为 [1,50]
+// cursor: 开始获取数据的游标位置，首次调用方法时传 `nil` 或空字符串
 // 异步方法
 [[EMClient sharedClient].threadManager getChatThreadsFromServerWithParentId:self.group.groupId cursor:self.cursor ? self.cursor.cursor:@"" pageSize:20 completion:^(EMCursorResult *result, EMError *aError) {
     if (!aError) {
@@ -261,16 +262,16 @@
 ```objectivec
 EMChatThreadManagerDelegate 
 
-// 子区创建
+// 子区创建。子区所属群组的所有成员收到该事件。
 - (void)onChatThreadCreate:(EMChatThreadEvent *)event;
 
-// 子区名称修改、子区中新增或撤回消息
+// 子区名称修改、子区中新增或撤回消息。子区所属群组的所有成员会收到该事件。
 - (void)onChatThreadUpdate:(EMChatThreadEvent *)event;
 
-// 子区解散
+// 子区解散。子区所属群组的所有成员会收到该事件。
 - (void)onChatThreadDestroy:(EMChatThreadEvent *)event;
 
-// 子区成员被移除
+// 子区成员被移除。被踢出子区的成员收到该事件。
 - (void)onUserKickOutOfChatThread:(EMChatThreadEvent *)event;
 
 // 注册监听
