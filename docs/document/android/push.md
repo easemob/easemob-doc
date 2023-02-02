@@ -42,7 +42,7 @@
 - OPPO 推送：在 OPPO 系统上可用；
 - VIVO 推送：在 VIVO 系统上可用。
 
-SDK 内部会按照这个顺序去检测设备的推送支持情况。
+SDK 内部会按照这个顺序检测设备的推送支持情况。
 
 如果未设置第三方推送或者不满足使用第三方推送的条件，环信 IM SDK 会通过一些保活手段尽可能的保持与环信服务器的长连接，以确保消息及时送达。
 
@@ -70,9 +70,9 @@ EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
 builder.enableMiPush(String appId, String appKey)
        //开发者需要调用该方法开启华为推送。
        .enableHWPush();
-// Sets pushconfig to ChatOptions.
+// 将 pushconfig 设置为 ChatOptions.
 options.setPushConfig(builder.build());
-// Initializes IM SDK.
+// 初始化即时通讯 IM SDK。
 EMClient.getInstance().init(this, options);
 ```
 
@@ -92,7 +92,7 @@ EMClient.getInstance().init(this, options);
 #### FCM 推送集成
 
 1. 在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase，详见 [FCM 的官网介绍](https://firebase.google.com/docs/android/setup?hl=zh-cn#console)。<br/>
-  将 Firebase SDK 添加到你的应用后，在 Firebase 控制台的 `Project settings` 页面，选择 `Cloud Messaging` 标签，查看 `Server ID` 和 `Server Key`。
+    将 Firebase SDK 添加到你的应用后，在 Firebase 控制台的 `Project settings` 页面，选择 `Cloud Messaging` 标签，查看 `Server ID` 和 `Server Key`。
 
 2. 上传推送证书。<br/>
    注册完成后，在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时推送** > **配置证书** > **添加推送证书** > **谷歌**，然后输入 Firebase 项目设置里的 `Server ID` 和 `Server Key`。
@@ -369,15 +369,18 @@ EMClient.getInstance().init(this, options);
 
 2. 上传推送证书</br>
 
-   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **OPPO**，然后输入你在 [OPPO 开发者后台](https://open.oppomobile.com/service/oms?service_id=1000004&app_type=app&app_id=30004346)创建的应用的 `appkey` 和 `mastersecret` 以及程序的 `包名`，MasterSecret 需要到 [OPPO 推送平台](https://push.oppo.com/) - **配置管理** - **应用配置** 页面查看。
+   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **OPPO**，然后输入你在 [OPPO 开发者后台](https://open.oppomobile.com/service/oms?service_id=1000004&app_type=app&app_id=30004346)创建的应用的 `appkey` 和 `mastersecret` 以及程序的 `包名`，MasterSecret 需要到 [OPPO 推送平台](https://open.oppomobile.com/) - **配置管理** - **应用配置** 页面查看。
 
 3. OPPO 推送集成
 
-   3.1 配置 OPPO 推送 jar 包：去 OPPO 推送官网下载推送 SDK 包，把 jar 包放到 libs 目录下并 sync 。也可以直接使用环信 Android IM Demo 中集成的 OPPO 推送的 jar 包。
+   3.1 配置 OPPO 推送 jar 包：在 OPPO 推送官网下载推送 SDK 包，把 jar 包放到 libs 目录下并 sync 。也可以直接使用环信 Android IM Demo 中集成的 OPPO 推送的 jar 包。
 
    3.2 配置 `AndroidManifest.xml`。
 
-     `OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q上接收 OPPO 推送需要升级环信 SDK 到 3.7.1 以及之后的版本，并使用 OPPO 推送 2.1.0 的包。从 3.9.1 版本开始，升级 OPPO 推送版本到 3.0.0`
+    :::tip
+     OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q上接收 OPPO 推送需要升级环信 SDK 到 3.7.1 以及之后的版本，并使用 OPPO 推送 2.1.0 的包。从 3.9.1 版本开始，升级 OPPO 推送版本到 3.0.0。
+    :::
+
      - 推送服务需要的权限列表：
 
      ```xml
@@ -387,7 +390,7 @@ EMClient.getInstance().init(this, options);
      <!-- OPPO 推送配置 end -->
      ```
 
-     - 推送服务需要的 service：
+     - 推送服务需要的服务：
 
      ```xml
      <!-- OPPO 推送配置 start -->
@@ -497,15 +500,15 @@ EMClient.getInstance().init(this, options);
 
    3.4 VIVO 设备安装应用后默认没有打开允许通知权限，测试前请先去设置中打开该应用的允许通知权限。
 
-[VIVO 推送官方文档](https://dev.vivo.com.cn/documentCenter/doc/158)
+[VIVO 推送官方文档](https://dev.vivo.com.cn/documentCenter/doc/363)
 
 #### 魅族推送集成
 
 1. 在魅族开发者后台创建应用</br>
-   在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见魅族官方介绍：[Flyme 推送服务集成](http://open-wiki.flyme.cn/index.php?title=Flyme推送接入文档)。
+   在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见魅族官方介绍：[Flyme 推送服务集成](https://open.flyme.cn/docs?id=129)。
 
 2. 上传推送证书
-   -注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> 即时推送 —> 配置证书 —> 添加推送证书 —> 魅族，然后输入你在[ flyme 推送平台](http://push.meizu.com/#/config/app?appId=8843&_k=dnrz9k)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
+   -注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **魅族**，然后输入你在[ flyme 推送平台](http://push.meizu.com/#/config/app?appId=8843&_k=dnrz9k)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
 
 3. 魅族推送集成
 
@@ -642,7 +645,6 @@ EMClient.getInstance().init(this, options);
 </tbody>
 </table>
 <p>&nbsp;</p>
-
 会话级别的推送通知方式设置优先于 app 级别的设置，未设置推送通知方式的会话默认采用 app 的设置。
 
 例如，假设 app 的推送方式设置为 `MENTION_ONLY`，而指定会话的推送方式设置为 `ALL`。你会收到来自该会话的所有推送通知，而对于其他会话来说，你只会收到提及你的消息的推送通知。
