@@ -83,7 +83,7 @@ EMClient.getInstance().groupManager().fetchGroupAnnouncement(groupId);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncUploadGroupSharedFile(String, String, EMCallBack)。
+// 异步方法为 asyncUploadGroupSharedFile(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().uploadGroupSharedFile(groupId, filePath, callBack);
 ```
 
