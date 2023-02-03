@@ -629,7 +629,7 @@ dependencies {
 <p>MENTION_ONLY</p>
 </td>
 <td width="420">
-<p>仅接收提及消息的推送通知。</p>
+<p>仅接收提及某些用户的消息的推送通知。</p>
 <p>该参数推荐在群聊中使用。若提及一个或多个用户，需在创建消息时对 ext 字段传 "em_at_list":["user1", "user2" ...]；若提及所有人，对该字段传 "em_at_list":"all"。</p>
 </td>
 </tr>

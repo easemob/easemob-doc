@@ -373,7 +373,7 @@ NSArray *conversations = @[conversation1,conversation2];
 
 ##### 4.1.6 清除单个会话的推送通知方式的设置
 
-你可以调用 `clearRemindTypeForConversation:` 清除指定会话的推送通知方式的设置。清除后，默认情况下，此会话会继承 app 的设置。
+你可以调用 `clearRemindTypeForConversation` 清除指定会话的推送通知方式的设置。清除后，默认情况下，此会话会继承 app 的设置。
 
 以下代码示例显示了如何清除会话的推送通知方式的设置：
 
