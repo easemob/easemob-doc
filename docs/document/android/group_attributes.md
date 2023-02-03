@@ -83,8 +83,30 @@ EMClient.getInstance().groupManager().fetchGroupAnnouncement(groupId);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncUploadGroupSharedFile(String, String, EMCallBack)。
+// 异步方法为 asyncUploadGroupSharedFile(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().uploadGroupSharedFile(groupId, filePath, callBack);
+```
+
+#### 下载共享文件
+
+所有群成员均可调用 `asyncDownloadGroupSharedFile` 方法下载群组共享文件。
+
+```java
+// 同步方法，需要放到异步线程
+List<EMMucSharedFile> sharedFiles = EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum, pageSize);
+// 获取需要的共享文件信息
+EMMucSharedFile sharedFile = sharedFiles.get(index);
+EMClient.getInstance().groupManager().asyncDownloadGroupSharedFile(groupId, sharedFile.getFileId(), savePath, new EMCallBack() {
+    @Override
+    public void onSuccess() {
+        // 在这里处理 savePath 保存的文件
+    }
+
+    @Override
+    public void onError(int code, String error) {
+
+    }
+});
 ```
 
 #### 删除共享文件
