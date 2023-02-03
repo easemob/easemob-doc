@@ -64,6 +64,7 @@ EMConversation? conversation =
   conversationType,
   true,
 );
+List<EMMessage>? list = await conversation?.loadMessages();
 ```
 
 ### 获取指定会话的未读消息数
