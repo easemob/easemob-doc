@@ -23,12 +23,12 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 103    |          EMErrorInvalidURL          | URL 不正确，该错误码已废弃。                                 |
 | 104    |       EMErrorUsernameTooLong        | 用户名过长。                                                 |
 | 200    |     EMErrorUserAlreadyLoginSame     | 当前用户已经登录：同一用户 ID 已经登录。                     |
-| 201    |         EMErrorUserNotLogin         | 用户未登录：如果未登录成功时调用发送消息，群组操作的 API 会提示该错误。 |
+| 201    |         EMErrorUserNotLogin         | 用户未登录：例如，如果未登录成功时调用发送消息或群组操作的 API 会提示该错误。 |
 | 202    |   EMErrorUserAuthenticationFailed   | 用户鉴权失败：一般是 token 鉴权失败或者 token 已经过期。     |
 | 203    |       EMErrorUserAlreadyExist       | 用户已经存在：注册的用户 ID 已存在。                         |
 | 204    |         EMErrorUserNotFound         | 用户不存在：比如登录或者获取用户会话列表时用户 ID 不存在。   |
 | 205    |     EMErrorUserIllegalArgument      | 用户参数不正确：比如创建用户 ID 时不符合格式要求，或者更新用户属性时用户参数为空等。 |
-| 206    |   EMErrorUserLoginOnAnotherDevice   | 用户在其他设备登录：未开启多设备登录，用户已登录其他设备，当前设备登录失败。 |
+| 206    |   EMErrorUserLoginOnAnotherDevice   | 用户在其他设备登录：如果用户未开启多设备登录，当在其他设备登录时，会被强制从当前登录的设备下线，且收到该错误码。 |
 | 207    |         EMErrorUserRemoved          | 用户已经被注销：如果登录用户 ID 被管理员从管理后台删除则会收到此错误。 |
 | 208    |      EMErrorUserRegisterFailed      | 用户注册失败：注册用户 ID 时失败，比如未开启开放注册功能等原因。 |
 | 209    |   EMErrorUpdateApnsConfigsFailed    | 更新推送配置错误：用户更新推送昵称，设置免推送配置时失败。   |
@@ -63,7 +63,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 504    |    EMErrorMessageRecallTimeLimit    | 消息撤回超时错误：如果超过消息撤回允许的时间尝试撤回时提示该错误。 |
 | 505    |       EMErrorServiceNotEnable       | 服务未开通：要使用的某些功能未开通。                         |
 | 506    |        EMErrorMessageExpired        | 消息已过期：发送群组回执时超过了时间限制 (默认 3 天) 。      |
-| 507    |   EMErrorMessageIllegalWhiteList    | 用户未在白名单中：群组聊天室开启全员禁言时，若用户未在白名单中发送消息时提示该错误。 |
+| 507    |   EMErrorMessageIllegalWhiteList    | 用户未在白名单中：群组或聊天室开启全员禁言时，若用户未在白名单中发送消息时提示该错误。 |
 | 508    | EMErrorMessageExternalLogicBlocked  | 发送前回调拦截：消息发送前被服务器拦截。                     |
 | 509    |    EMErrorMessageCurrentLimiting    | 单个用户 ID 发送群聊消息超出频率限制。                       |
 | 600    |        EMErrorGroupInvalidId        | 群组 ID 异常：群组相关 API 传入的群组 ID 为空。              |
