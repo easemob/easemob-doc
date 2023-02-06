@@ -12,7 +12,7 @@
 
 使用环信即时通讯 IM SDK 可以从服务器获取历史消息。
 
-- `asyncFetchConversationsFromServer` 获取服务器保存的会话列表；
+- `asyncFetchConversationsFromServer` 分页获取服务器保存的会话列表；
 - `fetchHistoryMessages` 获取服务器保存的指定会话中的消息；
 - `removeMessagesFromServer` 单向删除服务端的历史消息；
 - `deleteConversationFromServer` 删除服务端的会话及其历史消息。
@@ -26,14 +26,14 @@
 
 ## 实现方法
 
-### 从服务器获取会话列表
+### 从服务器分页获取会话列表
 
-对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
+对于单聊或群聊，用户发消息时会自动将对方添加到用户的会话列表。
 
-你可以调用 `asyncFetchConversationsFromServer` 方法从服务端获取会话列表。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。开通后，用户默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
+你可以调用 `asyncFetchConversationsFromServer` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
 
 :::tip
-1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `LoadAllConversations` 即可。
+1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 方法即可。
 2. 获取的会话列表中不包含最新一条消息通过 RESTful 接口发送的会话。若需获取该类会话，需要联系商务开通将通过 RESTful 接口发送的消息写入会话列表的功能。
 :::
 
@@ -41,17 +41,22 @@
 
 ```java
 // 异步方法。同步方法为 fetchConversationsFromServer()。
-EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(new EMValueCallBack<Map<String, EMConversation>>() {
-    //获取会话成功后的处理逻辑。
+// pageNum：当前页面，从 1 开始。
+// pageSize：每页获取的会话数量。取值范围为 [1,20]。
+EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(pageNum, pageSize, new EMValueCallBack<Map<String, EMConversation>>() {
     @Override
     public void onSuccess(Map<String, EMConversation> value) {
+        
     }
-    //获取会话失败处理逻辑。
+
     @Override
     public void onError(int error, String errorMsg) {
+
     }
 });
 ```
+
+对于使用 `asyncFetchConversationsFromServer` 方法未实现分页获取会话列表的用户，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
 
 ### 分页获取指定会话的历史消息
 

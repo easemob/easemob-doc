@@ -25,13 +25,13 @@ Android 中错误码的类为 `EMError`。
 | 109    |        TOKEN_WILL_EXPIRE        | 声网 token 即将过期：超出声网 token 有效期一半时间时会开始回调此错误码。 |
 | 110    |          INVALID_PARAM          |                          参数无效。                          |
 | 200    |       USER_ALREADY_LOGIN        |            用户已经登录：同一个用户 ID 已经登录。            |
-| 201    |         USER_NOT_LOGIN          | 用户未登录：如果未登录成功时发送消息，或者使用群组操作的 API，SDK 会提示该错误。 |
+| 201    |         USER_NOT_LOGIN          | 用户未登录：如果未登录成功时发送消息或者使用群组操作的 API，SDK 会提示该错误。 |
 | 202    |   USER_AUTHENTICATION_FAILED    |   用户鉴权失败：一般是 token 鉴权失败或者 token 已经过期。   |
 | 203    |       USER_ALREADY_EXIST        | 用户已经存在：注册用户 ID 时如果该 ID 已经存在会提示该错误。 |
 | 204    |         USER_NOT_FOUND          |  用户不存在：比如登录或者获取用户会话列表时用户 ID 不存在。  |
 | 205    |      USER_ILLEGAL_ARGUMENT      | 用户参数不正确：比如创建用户 ID 时不符合格式要求，或者更新用户属性时用户参数为空等。 |
 | 206    |    USER_LOGIN_ANOTHER_DEVICE    | 用户在其他设备登录：如果未开启多设备登录，则在其他设备登录会将当前登录的设备踢下线，用户会收到此错误。 |
-| 207    |          USER_REMOVED           | 用户已经被注销：如果登录用户被从管理后台删除 ID 则会收到此错误。 |
+| 207    |          USER_REMOVED           | 用户已经被注销：如果当前的登录用户 ID 被从管理后台则会收到此错误。 |
 | 208    |         USER_REG_FAILED         | 用户注册失败：注册用户 ID 时失败，比如未开启开放注册功能等原因。 |
 | 209    |    PUSH_UPDATECONFIGS_FAILED    |  更新推送配置错误：用户更新推送昵称，设置免推送配置时失败。  |
 | 210    |     USER_PERMISSION_DENIED      |   用户无权限：例如如果用户被封禁，发送消息时会提示该错误。   |
@@ -63,7 +63,7 @@ Android 中错误码的类为 `EMError`。
 | 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。 |
 | 502    |   MESSAGE_SEND_TRAFFIC_LIMIT    | 消息限流：发送消息过快时提示该错误，建议降低频率或者减少消息内容的大小。 |
 | 503    |    MESSAGE_ENCRYPTION_ERROR     |                消息加密错误：该错误码已废弃。                |
-| 504    |    MESSAGE_RECALL_TIME_LIMIT    | 消息撤回超时错误：如果超过消息撤回允许的时间尝试撤回时提示该错误。 |
+| 504    |    MESSAGE_RECALL_TIME_LIMIT    | 消息撤回超时错误：消息撤回超过时间限制时会提示该错误。 |
 | 505    |       SERVICE_NOT_ENABLED       |      服务未开启：尝试使用某些未开通的功能时提示该错误。      |
 | 506    |         MESSAGE_EXPIRED         | 消息已过期：发送群组回执时如果已经超过时间限制 (默认 3 天) 会提示该错误。 |
 | 507    |    MESSAGE_ILLEGAL_WHITELIST    | 用户未在白名单中：如果群组聊天室开启全员禁言，且用户未在白名单中发送消息时提示该错误。 |
@@ -87,7 +87,7 @@ Android 中错误码的类为 `EMError`。
 | 904    |         TRANSLATE_FAIL          |               翻译失败：调用翻译方法翻译失败。               |
 | 905    |       TRANSLATE_NOT_INIT        |            翻译服务未初始化：没有初始化翻译模块。            |
 | 1000   |       CONTACT_ADD_FAILED        |                       添加联系人失败。                       |
-| 1001   |       CONTACT_REACH_LIMIT       |                邀请者联系人数量已经达到上限。                |
+| 1001   |       CONTACT_REACH_LIMIT       |                邀请者的联系人数量已经达到上限。                |
 | 1002   |    CONTACT_REACH_LIMIT_PEER     |                   受邀请者联系人达到上限。                   |
 | 1100   |  PRESENCE_PARAM_LENGTH_EXCEED   | 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 |
 | 1101   | PRESENCE_CANNOT_SUBSCRIBE_YOURSELF |                    不能订阅你自己的状态。                    |
@@ -99,10 +99,10 @@ Android 中错误码的类为 `EMError`。
 | 1299   |     THIRD_SERVER_FAILED         | 除第三方内容审核服务的其他服务的消息审核结果为“拒绝”。 |
 | 1300   |      REACTION_REACH_LIMIT       |                  Reaction 数量已达到限制。      |
 | 1301   |   REACTION_HAS_BEEN_OPERATED    |                     Reaction 重复添加。                      |
-| 1302   |  REACTION_OPERATION_IS_ILLEGAL  | 用户对该 Reaction 没有操作权限。例如没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接受者进行添加 Reaction 操作。 |
+| 1302   |  REACTION_OPERATION_IS_ILLEGAL  | 用户对该 Reaction 没有操作权限。例如没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接收者进行添加 Reaction 操作。 |
 | 1400   |        THREAD_NOT_EXIST         |                        该子区不存在。                        |
 | 1401   |      THREAD_ALREADY_EXIST       |                 该子区已存在，重复添加子区。                 |
-| 1402   |  THREAD_CREATE_MESSAGE_ILLEGAL  |                   创建子区的消息是无效的。                   |
+| 1402   |  THREAD_CREATE_MESSAGE_ILLEGAL  |                   创建子区的消息无效。                   |
 | 1500   |        PUSH_NOT_SUPPORT         | 第三方推送不支持：如果用户配置的第三方推送在当前设备上不支持，会提示该错误。 |
 | 1501   |        PUSH_BIND_FAILED         | 绑定第三方推送 token 失败：如果将第三方推送 token 上传到服务器失败时会返回该错误。 |
 | 1502   |       PUSH_UNBIND_FAILED        | 解绑第三方推送 token 失败：如果解绑第三方推送 token 失败会提示该错误。 |
