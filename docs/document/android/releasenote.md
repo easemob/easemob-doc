@@ -11,11 +11,11 @@
 ### 优化
 
 - [IM Demo] [优化登录方式，修改为手机号+验证码](demo.html)。
-- [IM CallKit] 升级 RTC 版本至 4.1.1 版本。
+- [IM CallKit] 升级 RTC 版本至 4.1.0 版本。
 
 ### 修复
 
-- [IM SDK] 修复群共享文件上传和下载回调执行多次的问题。对于文件上传，废弃 `EMGroupManager#asyncUploadGroupSharedFile(String, String, EMCallBack)` 方法，使用 `EMGroupManager#asyncUploadGroupSharedFile(String, String, EMValueCallBack)` 方法替代。
+- [IM SDK] 修复群共享文件上传和下载回调执行两次的问题。对于文件上传，废弃 `EMGroupManager#asyncUploadGroupSharedFile(String, String, EMCallBack)` 方法，使用 `EMGroupManager#asyncUploadGroupSharedFile(String, String, EMValueCallBack)` 方法替代。
 - [IM SDK] 修复某些场景下调用单向删除服务端历史消息的方法 `EMConversation#removeMessagesFromServer` 导致崩溃的问题。
 - [IM Demo] 修复部分内存泄漏问题。
 - [IM CallKit] 修复部分音视频通话中的问题。
