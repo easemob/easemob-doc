@@ -89,6 +89,7 @@ dependencies {
     implementation 'io.hyphenate:hyphenate-chat:x.x.x'
 }
 ```
+获取最新SDK的版本号：[SDK 更新日志](http://docs-im-beta.easemob.com/document/android/releasenote.html)
 
 :::notice
 如果使用 3.8.0 之前的版本，gradle 依赖需要按照下面格式添加：
