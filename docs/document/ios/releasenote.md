@@ -2,6 +2,17 @@
 
 <Toc />
 
+## 版本 V4.0.0 Dev 2023-2-6（开发版）
+
+### 新增特性
+
+[IM SDK] [新增 `EMChatManager#getConversationsFromServerByPage:pageSize:completion` 方法实现从服务端分页获取会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+
+### 优化
+
+- [IM Demo] [优化登录方式，修改为手机号+验证码](demo.html)。
+- [IM CallKit] 升级 RTC 版本至 4.1.1 版本。
+
 ## 版本 V3.9.9 Dev 2022-11-29（开发版）
 
 ### 新增特性

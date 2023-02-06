@@ -12,7 +12,7 @@
 
 使用环信即时通讯 IM iOS SDK 可以管理服务端的会话和历史消息。
 
-- `getConversationsFromServer` 获取在服务器保存的会话列表；
+- `getConversationsFromServer` 分页获取服务器上保存的会话列表；
 - `asyncFetchHistoryMessagesFromServer` 获取服务器保存的指定会话中的消息；
 - `removeMessagesFromServer` 单向删除服务端的历史消息；
 - `deleteServerConversation` 删除服务器端会话及其历史消息。
@@ -26,27 +26,28 @@
 
 ## 实现方法
 
-### 从服务器获取会话列表
+### 从服务器分页获取会话列表
 
-对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话。
+对于单聊或群聊，用户发消息时会自动将对方添加到用户的会话列表。
 
-你可以调用 `getConversationsFromServer` 方法从服务端获取会话列表。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。开通后，用户默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
+你可以调用 `getConversationsFromServerByPage` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
 
 :::tip
-1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `LoadAllConversations` 即可。
+1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 方法即可。
 2. 获取的会话列表中不包含最新一条消息通过 RESTful 接口发送的会话。若需获取该类会话，需要联系商务开通将通过 RESTful 接口发送的消息写入会话列表的功能。
 :::
 
-```objectivec
-// 异步方法
-[[EMClient sharedClient].chatManager getConversationsFromServer:^(NSArray *aConversations, EMError *aError) {
-   if (!aError) {
-      for (EMConversation *conversation in aConversations) {
-        // conversation 会话解析。
-      }
-   }
+示例代码如下：
+
+```java
+// pageNum：当前页面，从 1 开始。
+// pageSize：每页获取的会话数量。取值范围为 [1,20]。
+[EMClient.sharedClient.chatManager getConversationsFromServerByPage:pageNum pageSize:pageSize completion:^(NSArray<EMConversation *> * _Nullable aConversations, EMError * _Nullable aError) {
+            
 }];
-```
+``` 
+
+对于使用 `getConversationsFromServer` 方法未实现分页获取会话的用户，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
 
 ### 分页获取指定会话的历史消息
 
