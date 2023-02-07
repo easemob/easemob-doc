@@ -18,14 +18,12 @@
 2. SDK 最少需要添加的权限如下：
 
 ```xml
+<!-- 访问网络权限 -->
+<uses-permission android:name="android.permission.INTERNET" />
 <!-- 获取运营商信息，用于获取网络状态 -->
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE”/>
-<!-- 写入扩展存储权限，用于附件等的存储 -->
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE”/>
 <!-- 允许程序在手机屏幕关闭后后台进程仍然运行 -->
 <uses-permission android:name="android.permission.WAKE_LOCK" />
-<!-- Android 12 后增加，申请闹钟定时权限 -—> 
-<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 ```
 
 ## SDK 初始化
