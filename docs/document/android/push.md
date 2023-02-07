@@ -674,7 +674,7 @@ dependencies {
 你可以调用 `setSilentModeForAll` 设置 app 级别的推送通知，并通过指定 `EMSilentModeParam` 字段设置推送通知方式和免打扰模式，如下代码示例所示：
 
 ```java
-//设置推送通知方式为 `MentionOnly`。
+//设置推送通知方式为 `MENTION_ONLY`。
 EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.REMIND_TYPE)
                                 .setRemindType(EMPushManager.EMPushRemindType.MENTION_ONLY);
 
@@ -686,7 +686,7 @@ EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModePa
 EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.SILENT_MODE_INTERVAL)
                                 .setSilentModeInterval(new EMSilentModeTime(8, 30), new EMSilentModeTime(15, 0));
 
-//设置 app 的离线推送免打扰模式。
+//设置 app 的离线推送。
 EMClient.getInstance().pushManager().setSilentModeForAll(param, new EMValueCallBack<EMSilentModeResult>(){});
 ```
 

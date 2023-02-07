@@ -6,33 +6,29 @@
 
 ## 前提条件
 
-开始前，请注册有效的环信即时通讯 IM 开发者账号并获得 App key，详见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+开始前，请注册有效的环信即时通讯 IM 开发者账号和取得 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
 
 ## 集成环境
 
-详见 [开发环境要求](quickstart.html#前提条件)。
+具体见 [开发环境要求](quickstart.html#前提条件)。
 
 ## 添加权限
 
-1. 找到 `AndroidManifest.xml` 文件。
-
-2. SDK 至少需添加以下权限：
+1. 找到文件 `AndroidManifest.xml`
+2. SDK 最少需要添加的权限如下：
 
 ```xml
+<!-- 访问网络权限 -->
+<uses-permission android:name="android.permission.INTERNET" />
 <!-- 获取运营商信息，用于获取网络状态 -->
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE”/>
-<!-- 写入扩展存储权限，用于附件等的存储 -->
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE”/>
 <!-- 允许程序在手机屏幕关闭后后台进程仍然运行 -->
 <uses-permission android:name="android.permission.WAKE_LOCK" />
-<!-- Android 12 后增加，申请闹钟定时权限 -—> 
-<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 ```
 
 ## SDK 初始化
 
-初始化是使用 SDK 的必要步骤，需在执行所有接口方法调用前完成。
-
+初始化是使用 SDK 必要的、执行在所有接口方法调用之前的步骤。
 如果进行多次初始化操作，只有第一次初始化以及相关的参数生效。
 
 初始化示例代码：
@@ -58,16 +54,17 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 ```
 
 :::notice
-- 以上注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用；
-- 正式环境应使用服务器端调用 REST API 接口 [注册用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册用户)。
+- 以上注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；
+- 正式环境应使用服务器端调用 REST API 接口注册，[注册用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册用户)。
 :::
 
 ## 用户登录
 
-目前登录服务器支持手动和自动登录。手动登录有两种方式：
+目前登录服务器支持手动和自动登录。手动登录有三种方式：
 
-- 用户 ID + 密码
-- 用户 ID + token
+- 通过 **用户 ID + 密码** 登录；
+- 通过 **用户 ID + token** 登录；
+- 通过 **用户 ID + agoraToken** 登录。
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
@@ -75,7 +72,7 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 
 ### 手动登录
 
-**用户 ID + 密码** 登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
+**用户 ID + 密码** 登录是传统的登录方式。用户名和密码都是你的终端用户自行决定，密码需要符合密码规则要求。
 
 ```java
 EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
@@ -94,7 +91,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 });
 ```
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。 详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
 ```java
 EMClient.getInstance().loginWithToken(mAccount, mPassword, new EMCallBack() {
@@ -112,9 +109,27 @@ EMClient.getInstance().loginWithToken(mAccount, mPassword, new EMCallBack() {
 });
 ```
 
+**用户 ID + agoraToken** 是支持声网 token 直接登录的方式，一般同时使用声网和环信产品时使用。token 获取请参考 [使用声网 user token 鉴权](https://docs.agora.io/en/agora-chat/generate_user_tokens?platform=React%20Native)。
+
+```java
+EMClient.getInstance().loginWithAgoraToken(mAccount, mPassword, new EMCallBack() {
+    // 登录成功回调
+    @Override
+    public void onSuccess() {
+
+    }
+
+    // 登录失败回调，包含错误信息
+    @Override
+    public void onError(int code, String error) {
+
+    }
+});
+```
+
 ### 自动登录
 
-初始化时可以设置是否自动登录。如果设置为自动登录，则登录成功之后，后续启动初始化的时候会自动登录。
+在初始化的时候，可以设置是否自动登录。如果设置为自动登录，则登录成功之后，后续启动初始化的时候会自动登录。
 
 ## 退出登录
 
@@ -143,7 +158,7 @@ EMClient.getInstance().logout(true, new EMCallBack() {
 
 ## 连接状态相关
 
-你可以通过注册连接监听确认连接状态。
+你可以通过注册连接监听来确认连接状态。
 
 ```java
 EMConnectionListener connectionListener = new EMConnectionListener() {
@@ -173,7 +188,7 @@ EMConnectionListener connectionListener = new EMConnectionListener() {
 };
 // 注册连接状态监听
 EMClient.getInstance().addConnectionListener(connectionListener);
-// 移除连接状态监听
+// 解注册连接状态监听
 EMClient.getInstance().removeConnectionListener(connectionListener);
 ```
 
@@ -204,7 +219,7 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 
 ```java
 // 需要在 SDK 初始化后调用
-EMClient.getInstance().setDebugMode(true); 
+EMClient.getInstance().setDebugMode(true);
 ```
 
 ### 获取本地日志
@@ -213,4 +228,4 @@ EMClient.getInstance().setDebugMode(true);
 adb pull /sdcard/android/data/{应用包名}/{App Key}/core_log/easemob.log
 ```
 
-获取本地日志时需要将 `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`；`{App Key}` 需要替换为应用设置的环信 App Key。
+获取本地日志，需要将 `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`；`{App Key}` 需要替换为应用设置的环信 App Key。

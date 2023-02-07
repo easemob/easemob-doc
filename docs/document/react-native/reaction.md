@@ -70,8 +70,10 @@ ChatClient.getInstance()
 
 ### 获取消息的 Reaction 列表
 
-调用 `getReactionList` 可以从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，用户数量，用户列表（概要数据，即前三个用户信息）。
+调用 `getReactionList` 方法可以从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，添加或移除 Reaction 的用户数量，以及添加或移除 Reaction 的前三个用户的用户 ID。
+
 对应消息 `ChatMessage` 有便捷的访问方式 `reactionList`。
+
 示例代码如下：
 
 ```typescript
@@ -102,7 +104,7 @@ msg.reactionList
 
 ### 获取 Reaction 详情
 
-调用 `fetchReactionDetail` 可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，用户数量和全部用户列表。示例代码如下：
+调用 `fetchReactionDetail` 方法可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的全部用户列表。示例代码如下：
 
 ```typescript
 // reaction: Reaction ID

@@ -248,7 +248,7 @@ conn.disableSendChatRoomMsg(option).then(res => console.log(res))
 
 #### 关闭全员禁言
 
-仅聊天室所有者和管理员可调用 `enableSendChatRoomMsg` 方法设置解除全员禁言。解除全员禁言后，仅在黑名单中的成员不可以发言，聊天室成员会收到 `unmuteAllMembers` 事件。
+仅聊天室所有者和管理员可调用 `enableSendChatRoomMsg` 方法设置解除全员禁言。调用成功后，聊天室成员会收到 `unmuteAllMembers` 事件。
 
 示例代码如下：
 

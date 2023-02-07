@@ -15,9 +15,9 @@
 
 消息收发流程如下：
 
-1. 用户 A 发送一条消息到环信的消息服务器;
-2. 单聊时消息时，服务器投递消息给用户 B；对于群聊时消息，服务器投递给群内其他每一个成员;
-3. 用户收到消息。
+1. 客户端从应用服务器获取 token。
+2. 客户端 A 和 B 登录即时通讯。
+3. 客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
 
 ![img](@static/images/android/sendandreceivemsg.png)
 
@@ -84,7 +84,7 @@ message.isChatThread = self.isChatThread;
 
 ### 撤回子区消息
 
-接收消息的具体逻辑，请参考 [撤回消息](message_send_receive.html#撤回消息)，此处只介绍子区消息和其他消息的区别。
+撤回消息的具体逻辑，请参考 [撤回消息](message_send_receive.html#撤回消息)，此处只介绍子区消息和其他消息的区别。
 
 子区成员可以设置消息监听回调 `EMChatManagerDelegate#messagesInfoDidRecall` 对子区消息的撤回进行监听。
 
