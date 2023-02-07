@@ -6,7 +6,7 @@
 
 按模块查看接口调用频率限制：
 
-## 帐号管理
+##  用户帐号管理
 
 | Rest API 接口 |方法  | 接口 URL|
 | :------------ | :--- | :--------------------------- |
@@ -33,13 +33,18 @@
 
 ## 消息推送
 
-| Rest API 接口        | 方法 | 接口 URL                                |
-| :------------------- | :--- | :-------------------------------------- |
-| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} |
-| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} |
-| 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} |
-
-以上三个接口共限制，接口最高调用频率（默认值）100 次/秒/App Key。
+| RESTful API 接口        | 方法 | 接口 URL           | 接口最高调用频率（默认值） |
+| :------------------- | :--- | :------------------- |
+| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
+| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
+| 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
+| 设置离线推送         | PUT  | /{org}/{app}/users/{username}/notification/{chattype}/{key} | 100 次/秒/App Key          |
+| 查询离线推送设置     | GET  | /{org}/{app}/users/{username}/notification/{type}/{key} | 100 次/秒/App Key          |
+| 设置推送翻译语言     | PUT  | /{org}/{app}/users/{username}/notification/language | 100 次/秒/App Key          |
+| 查询离线推送消息的翻译语言 | PUT  | /{org}/{app}/users/{username}/notification/language | 100 次/秒/App Key  |
+| 创建离线推送模板          | POST  | /{org}/{app}/notification/template | 10 次/秒/App Key  |
+| 查询离线推送模板          | GET  | /{org}/{app}/notification/template/{name} | 10 次/秒/App Key  |
+| 删除离线推送模板          | DELETE  | /{org}/{app}/notification/template/{name} | 10 次/秒/App Key  |
 
 ## 消息管理
 
@@ -49,7 +54,7 @@
 | 发送群聊消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | 20 条/秒/App Key                                             |
 | 发送聊天室消息               | POST   | /{org_name}/{app_name}/messages/chatrooms            | 100 条/秒/App Key                                            |
 | 上传文件  |    POST  | /{org_name}/{app_name}/chatfiles       | 100 次/秒/App Key                                                 |
-| 下载文件      |  GET     | /{org_name}/{app_name}/chatfiles/{uuid}       | 100 次/秒/App Key                                                 |
+| 下载文件      |  GET     | /{org_name}/{app_name}/chatfiles/{file_uuid}       | 100 次/秒/App Key                                                 |
 | 获取历史消息（聊天记录）文件   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 次/分钟/App Key                                               |
 | 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
 | 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key                                              |
@@ -57,18 +62,13 @@
 
 ## 用户属性
 
-| Rest API 接口 |方法  | 接口 URL |
-| :------------------------- | :--- | :---------------------------------------------- |
-| 获取指定用户的所有用户属性   |  GET     | /{org_name}/{app_name}/metadata/user/{username}             |
-| 获取 app 下的用户属性总大小   |  GET     | /{org_name}/{app_name}/metadata/user/capacity           |
-
-以上两个接口一共最高调用频率（默认值） 100 次/秒/App Key。
-
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- | :----- | :---------------------------------------------- | :------------------------- |
-| 设置用户属性      |  PUT     | /{org_name}/{app_name}/metadata/user/{username}            | 100 次/秒/App Key                                                 |
-| 批量获取用户属性    |    POST      | /{org_name}/{app_name}/metadata/user/get           | 100 次/秒/App Key                                                 |
-| 删除用户属性   |    DELETE     | /{org_name}/{app_name}/metadata/user/{username}      | 100 次/秒/App Key                                                 |
+| 设置用户属性      | PUT     | /{org_name}/{app_name}/metadata/user/{username}            | 100 次/秒/App Key |
+| 批量获取用户属性    | POST      | /{org_name}/{app_name}/metadata/user/get           | 100 次/秒/App Key    |
+| 删除用户属性   | DELETE     | /{org_name}/{app_name}/metadata/user/{username}      | 100 次/秒/App Key  |
+| 获取指定用户的所有用户属性   | GET     | /{org_name}/{app_name}/metadata/user/{username}      | 100 次/秒/App Key |
+| 获取 app 下的用户属性总大小   | GET     | /{org_name}/{app_name}/metadata/user/capacity   | 100 次/秒/App Key |
 
 ## 用户关系管理
 
@@ -93,7 +93,7 @@
 | 删除群组 |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}                    | 100 次/秒/App Key                                                 |
 | 获取群组公告     |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/announcement         | 100 次/秒/App Key                                                 |
 | 修改群组公告  |    POST| /{org_name}/{app_name}/chatgroups/{group_id}/announcement          | 100 次/秒/App Key                                                 |
-| 获取群组共享文件   |  GET     | 不分页：/{org_name}/{app_name}/chatgroups/{group_id}/share_files<br>分页：/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagenum=1&pagesize=10        | 100 次/秒/App Key                                                 |
+| 分页获取群组共享文件   |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagenum=1&pagesize=10        | 100 次/秒/App Key                                                 |
 | 上传群组共享文件  |    POST  | /{org_name}/{app_name}/chatgroups/{group_id}/share_files       | 100 次/秒/App Key                                                 |
 | 下载群组共享文件    |  GET   | /{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file_id}   | 100 次/秒/App Key                                                 |
 | 删除群组共享文件   |    DELETE   | /{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file_id}     | 100 次/秒/App Key                                                 |
@@ -191,3 +191,27 @@
 | 批量获取在线状态信息    |  POST   | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key |
 | 取消订阅     |  DELETE           | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key    |
 | 查询订阅列表    |   GET       | /{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&pageSize=100 | 50 次/秒/App Key  |
+
+### 消息表情回复 Reaction
+
+
+| RESTful API 接口      | 方法   | 接口 URL        | 接口最高调用频率（默认值） |
+| :------------------- | :----- | :------------------------ | :----------- |
+| 创建/添加 Reaction         | POST   | /{org_name}/{app_name}/reaction/user/{userId}   | 100/second  |
+| 根据消息 ID 获取 Reaction     | GET    | /{org_name}/{app_name}/reaction/user/{userId}  | 100/second  |
+| 删除 Reaction     | DELETE | /{org_name}/{app_name}/reaction/user/{userId} | 100/second  |
+| 根据消息 ID 和表情 ID 获取 Reaction 信息 | GET    | /{org_name}/{app_name}/reaction/user/{userId}/detail | 100/second   |
+
+### 子区管理
+
+| RESTful API 接口      | 方法   | 接口 URL        | 接口最高调用频率（默认值） |
+| :------------------- | :----- | :------------------------ | :----------- |
+| 分页获取 app 中的子区  | GET  | /{org_name}/{app_name}/thread | 100/second   |
+| 分页获取单个用户加入的所有子区  | GET     | /{org_name}/{app_name}/threads/user/{username}    | 100/second    |
+| 分页获取单个用户在指定群组中加入的所有子区  | GET  | /{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{username}    | 100/second    |
+| 创建子区  | POST     | /{org_name}/{app_name}/thread    | 100/second    |
+| 修改子区  | PUT     | /{org_name}/{app_name}/thread/{thread_id}    | 100/second    |
+| 删除子区  | DELETE     | /{org_name}/{app_name}/thread/{thread_id}    | 100/second    |
+| 分页获取子区成员列表  | GET     | /{org_name}/{app_name}/thread/{thread_id}/users    | 100/second    |
+| 用户批量加入子区  | POST     | /{org_name}/{app_name}/thread/{thread_id}/users   | 100/second    |
+| 批量踢出子区成员  | DELETE     | /{org_name}/{app_name}/threads/{thread_id}/users   | 100/second    |

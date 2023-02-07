@@ -348,7 +348,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7' -d {
+curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatgroups/6XXXX7' -d '{
     "groupname": "test groupname",
     "description": "updategroupinfo12311",
     "maxusers": 1500,
@@ -494,19 +494,11 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 获取单个用户加入的所有群组（可分页）
+### 获取单个用户加入的所有群组
 
-根据用户 ID 获取指定用户加入的全部群组。
+根据用户 ID 分页获取指定用户加入的全部群组。
 
 #### HTTP 请求
-
-直接请求：
-
-```http
-GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatgroups
-```
-
-分页请求：
 
 ```http
 GET https://{host}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pagenum={}

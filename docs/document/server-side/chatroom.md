@@ -1253,12 +1253,6 @@ DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json'
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users
-```
-
-分页方法：
-
-```http
 GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?limit={N}&cursor={N}
 ```
 
