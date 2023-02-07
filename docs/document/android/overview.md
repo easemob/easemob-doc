@@ -6,7 +6,7 @@
 
 ## 前提条件
 
-开始前，请注册有效的环信即时通讯 IM 开发者账号并获得 App key，详见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+开始前，请注册有效的环信即时通讯 IM 开发者账号并取得 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
 
 ## 集成环境
 
@@ -14,19 +14,16 @@
 
 ## 添加权限
 
-1. 找到 `AndroidManifest.xml` 文件。
-
-2. SDK 至少需添加以下权限：
+1. 找到文件 `AndroidManifest.xml`
+2. SDK 最少需要添加的权限如下：
 
 ```xml
+<!-- 访问网络权限 -->
+<uses-permission android:name="android.permission.INTERNET" />
 <!-- 获取运营商信息，用于获取网络状态 -->
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE”/>
-<!-- 写入扩展存储权限，用于附件等的存储 -->
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE”/>
 <!-- 允许程序在手机屏幕关闭后后台进程仍然运行 -->
 <uses-permission android:name="android.permission.WAKE_LOCK" />
-<!-- Android 12 后增加，申请闹钟定时权限 -—> 
-<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 ```
 
 ## SDK 初始化
@@ -59,7 +56,7 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 
 :::notice
 - 以上注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用；
-- 正式环境应使用服务器端调用 REST API 接口 [注册用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册用户)。
+- 正式环境应使用服务器端调用 REST API 接口[注册用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册用户)。
 :::
 
 ## 用户登录
@@ -94,7 +91,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 });
 ```
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
 ```java
 EMClient.getInstance().loginWithToken(mAccount, mPassword, new EMCallBack() {
@@ -204,7 +201,7 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 
 ```java
 // 需要在 SDK 初始化后调用
-EMClient.getInstance().setDebugMode(true); 
+EMClient.getInstance().setDebugMode(true);
 ```
 
 ### 获取本地日志
@@ -213,4 +210,4 @@ EMClient.getInstance().setDebugMode(true);
 adb pull /sdcard/android/data/{应用包名}/{App Key}/core_log/easemob.log
 ```
 
-获取本地日志时需要将 `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`；`{App Key}` 需要替换为应用设置的环信 App Key。
+获取本地日志，需要将 `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`；`{App Key}` 需要替换为应用设置的环信 App Key。

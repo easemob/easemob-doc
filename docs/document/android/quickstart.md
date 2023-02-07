@@ -9,7 +9,6 @@
 
 - 请在点击获取隐私权限以后启动环信 SDK 初始化。
 - `EMChatService` 和 `EMJobService` 为早期 SDK 内在应用退到后台后，对应用进行保活的程序，可以不进行注册。
-- `EMMonitorReceiver` 为监听开机自启动服务，可以不注册，同时请移除对应的权限申请：`<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>`。
 :::
 
 ## 实现原理
@@ -22,7 +21,7 @@
 
 - Android Studio 3.0 或以上版本；
 - Android SDK API 等级 21 或以上；
-- Android 4.4 或以上版本的设备；
+- Android 5.0 或以上版本的设备；
 - 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
 
 ## 准备开发环境
@@ -89,6 +88,7 @@ dependencies {
     implementation 'io.hyphenate:hyphenate-chat:x.x.x'
 }
 ```
+获取最新SDK的版本号：[SDK 更新日志](releasenote.html)
 
 :::notice
 如果使用 3.8.0 之前的版本，gradle 依赖需要按照下面格式添加：
@@ -147,8 +147,6 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!-- 允许程序在手机屏幕关闭后后台进程仍然运行 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- 允许程序开机自动运行，SDK 保活时使用，如果使用厂商推送，可以移除 -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <!-- 申请闹钟定时权限，SDK 心跳中使用，3.9.8及以后版本可以不添加 -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <!-- IM SDK required end -->
@@ -162,20 +160,6 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
             android:name="com.hyphenate.chat.EMJobService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-        <!-- 声明 SDK 所需的 receiver -->
-        <receiver
-            android:name="com.hyphenate.chat.EMMonitorReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <data android:scheme="package" />
-            </intent-filter>
-            <!-- 可选 filter -->
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>
