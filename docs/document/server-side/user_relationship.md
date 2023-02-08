@@ -175,9 +175,9 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 | `entities.uuid`    | String   | 系统内为好友生成的系统内唯一标识，开发者无需关心。           |
 | `entities.type`         | String    | 对象类型，值为 `user` 或 `group`。                          |
 | `entities.created`     | Long    | 用户创建时间，Unix 时间戳，单位为毫秒。                      |
-| `entities.modified`      | Long   | 好友的用户信息如密码或者昵称等最后修改时间，Unix 时间戳，单位为毫秒。 |
+| `entities.modified`      | Long   | 好友的用户信息如密码或者昵称等最近一次修改时间，Unix 时间戳，单位为毫秒。 |
 | `entities.username`     | String    | 被移除好友的用户 ID。                                             |
-| `entities.activated`      | Bool  | 好友是否被封禁：<br/> • `true` 未被封禁。<br/> • `false` 已被封禁。 |
+| `entities.activated`      | Bool  | 好友是否为正常状态：<ul><li>`true` 正常状态。</li><li>`false` 已被封禁。</li></ul> |
 | `entities.nickname`      | String   | 好友的用户昵称。                                                   |
 
 其他字段及描述详见 [公共参数](#公共参数)。
