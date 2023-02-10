@@ -12,6 +12,11 @@
 
 以及对以上消息进行自定义扩展。本文介绍如何使用即时通讯 IM SDK 实现发送和接收这些类型的消息。
 
+:::tip
+对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。
+当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
+:::
+
 ## 技术原理
 
 环信即时通讯 IM React Native SDK 通过 `ChatManager` 和 `ChatMessage` 类实现消息的发送、接收与撤回。
@@ -131,18 +136,25 @@ if (messageType === ChatMessageType.TXT) {
   // 其他不支持的消息类型会在此处抛出异常
   throw new Error("Not implemented.");
 }
+
+对于聊天室消息，还可以设置消息的投递优先级。
+if (ret.chatType === ChatMessageChatType.ChatRoom) {
+  ret.messagePriority = priority;
+}
+
 // 消息发送结果会通过回调对象返回，这里返回的结果只是说明发送消息的动作成功或者失败。不代表消息发送的成功或者失败
 ChatClient.getInstance()
-  .chatManager.sendMessage(msg!, new ChatMessageCallback())
-  .then(() => {
-    // 消息发送动作完成，会在这里打印日志
-    // 消息的发送结果通过回调返回
-    console.log("send message operation success.");
-  })
-  .catch((reason) => {
-    // 消息发送动作失败，会在这里打印日志
-    console.log("send message operation fail.", reason);
-  });
+.chatManager.sendMessage(msg!, new ChatMessageCallback())
+.then(() => {
+// 消息发送动作完成，会在这里打印日志
+// 消息的发送结果通过回调返回
+console.log("send message operation success.");
+})
+.catch((reason) => {
+// 消息发送动作失败，会在这里打印日志
+console.log("send message operation fail.", reason);
+});
+
 ```
 
 2. 通过 `ChatManager` 将该消息发出。
@@ -248,7 +260,6 @@ ChatClient.getInstance().chatManager.addMessageListener(
   })()
 );
 ```
-
 
 ### 接收消息
 
