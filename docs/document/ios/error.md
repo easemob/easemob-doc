@@ -35,7 +35,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 210    |     EMErrorUserPermissionDenied     | 用户无权限：例如，如果用户被封禁，发送消息时会提示该错误。   |
 | 211    |  EMErrorUserBindDeviceTokenFailed   | 用户更新推送 token 错误，该错误码已废弃。                    |
 | 212    | EMErrorUserUnbindDeviceTokenFailed  | 用户更新推送 token 错误，该错误码已废弃。                    |
-| 213    |    EMErrorUserBindAnotherDevice     | 用户已经在另外设备登录：如果用户设置为先登录的设备优先，则后登录设备登录失败并提示该错误。 |
+| 213    |    EMErrorUserBindAnotherDevice     | 用户已经在另外设备登录：如果用户设置为先登录的设备优先，则后登录设备登录失败并提示该错误。该错误码已废弃。|
 | 214    |   EMErrorUserLoginTooManyDevices    | 用户登录设备数超过限制：用户同一 ID 登录设备数量超过限制提示该错误。 |
 | 215    |          EMErrorUserMuted           | 用户在群组聊天室中被禁言：用户被禁言后发送消息时提示该错误。 |
 | 216    |  EMErrorUserKickedByChangePassword  | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 |
