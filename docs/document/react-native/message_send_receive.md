@@ -141,7 +141,6 @@ if (ret.chatType === ChatMessageChatType.ChatRoom) {
   ret.messagePriority = priority;
 }
 
-// 消息发送结果会通过回调对象返回，这里返回的结果只是说明发送消息的动作成功或者失败。不代表消息发送的成功或者失败
 ChatClient.getInstance()
 .chatManager.sendMessage(msg!, new ChatMessageCallback())
 .then(() => {
