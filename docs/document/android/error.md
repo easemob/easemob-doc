@@ -37,7 +37,7 @@ Android 中错误码的类为 `EMError`。
 | 210    |     USER_PERMISSION_DENIED      |   用户无权限：例如如果用户被封禁，发送消息时会提示该错误。   |
 | 211    |   USER_BINDDEVICETOKEN_FAILED   |          用户更新推送 token 错误，该错误码已废弃。           |
 | 212    | USER_UNBIND_DEVICETOKEN_FAILED  |          用户更新推送 token 错误，该错误码已废弃。           |
-| 213    |    USER_BIND_ANOTHER_DEVICE     | 用户已经在另外设备登录：如果用户设置为先登录的设备优先，则后登录设备登录失败并提示该错误。 |
+| 213    |    USER_BIND_ANOTHER_DEVICE     | 用户已经在另外设备登录：如果用户设置为先登录的设备优先，则后登录设备登录失败并提示该错误。该错误码已废弃。 |
 | 214    |   USER_LOGIN_TOO_MANY_DEVICES   | 用户登录设备数超过限制：该错误在多设备自动登录场景中且打开不踢掉其他设备上的登录的开关时超过登录设备数量的限制才会出现。例如，用户最多可同时登录 4 台设备， A（实现了自动登录）、B、C 和 D。手动登录设备 E 后，用户再次自动登录设备 A 时登录失败且提示该错误。 |
 | 215    |           USER_MUTED            | 用户在群组或聊天室中被禁言：用户被禁言后发送消息时提示该错误。 |
 | 216    | USER_KICKED_BY_CHANGE_PASSWORD  | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 |
