@@ -1015,7 +1015,7 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | `Authorization`   | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。      |
 | `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（`share-secret`）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。 |
 
-#### 请求 body
+#### 查询参数
 
 | 参数               | 类型   | 是否必需 | 描述      |
 | :----------------- | :----- | :------- | :----------------- |
