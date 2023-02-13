@@ -28,23 +28,27 @@
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `fetchAllConversations` 方法从服务端获取会话列表。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通，开通后，用户默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
+你可以调用 `fetchConversationsFromServerWithPage` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
 
 :::tip
-1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 获取本地会话即可。
+1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 方法获取本地会话即可。
 2. 获取的会话列表中不包含最新一条消息通过 RESTful 接口发送的会话。若需获取该类会话，需要联系商务开通将通过 RESTful 接口发送的消息写入会话列表的功能。
 :::
 
 ```typescript
+// pageNum：当前页面，从 1 开始。
+// pageSize：每页获取的会话数量。取值范围为 [1,20]。
 ChatClient.getInstance()
-  .chatManager.fetchAllConversations()
-  .then(() => {
-    console.log("get conversions success");
+  .chatManager.fetchConversationsFromServerWithPage(pageSize, pageNum)
+  .then((result) => {
+    console.log("test:success:", result);
   })
-  .catch((reason) => {
-    console.log("get conversions fail.", reason);
+  .catch((error) => {
+    console.warn("test:error:", error);
   });
 ```
+
+对于使用 `fetchAllConversations` 方法未实现分页获取会话列表的用户，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
 
 你可以调用 `getAllConversations` 方法获取本地所有会话，示例代码如下：
 
@@ -102,9 +106,42 @@ ChatClient.getInstance()
   });
 ```
 
+### 单向删除服务端的历史消息
+
+你可以调用 `removeMessagesFromServerWithTimestamp` 或者 `removeMessagesFromServerWithMsgIds` 方法单向删除服务端的历史消息，每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。
+
+示例代码如下：
+
+```typescript
+// 按消息 ID 删除
+ChatClient.getInstance()
+  .chatManager.removeMessagesFromServerWithMsgIds(convId, convType, msgIds)
+  .then((result) => {
+    console.log("test:success:", result);
+  })
+  .catch((error) => {
+    console.warn("test:error:", error);
+  });
+// 按时间戳删除
+ChatClient.getInstance()
+  .chatManager.removeMessagesFromServerWithTimestamp(
+    convId,
+    convType,
+    timestamp
+  )
+  .then((result) => {
+    console.log("test:success:", result);
+  })
+  .catch((error) => {
+    console.warn("test:error:", error);
+  });
+```
+
 #### 删除会话及其中的消息
 
-你可以调用 `removeConversationFromServer` 方法删除服务器端会话及其对应的消息，示例代码如下：
+你可以调用 `removeConversationFromServer` 方法删除服务器端会话及其历史消息。会话删除后，当前用户和其他用户均无法从服务器获取该会话。若该会话的历史消息也删除，所有用户均无法从服务器获取该会话的消息。
+
+示例代码如下：
 
 ```typescript
 // convId: 会话 ID。
