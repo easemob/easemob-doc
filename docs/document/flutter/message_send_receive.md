@@ -143,7 +143,7 @@ EMMessage msg = EMMessage.createVoiceSendMessage(
   displayName: voiceName,
 );
 
-对于聊天室消息，还可以设置消息优先级。
+// 对于聊天室消息，还可以设置消息优先级。
 if (msg.chatType == ChatType.ChatRoom) {
   msg.chatroomMessagePriority = ChatRoomMessagePriority.High;
 }
@@ -331,13 +331,34 @@ EMOptions options = EMOptions(
 2. 设置下载监听器。
 
 ```dart
-message.setMessageStatusCallBack(
-  MessageStatusCallBack(
-    onProgress: (progress) {},
-    onSuccess: () {},
-    onError: (e) {},
-  ),
+// 添加消息状态监听器
+EMClient.getInstance.chatManager.addMessageEvent(
+    "UNIQUE_HANDLER_ID",
+    ChatMessageEvent(
+        // 收到成功回调表示消息已经下载成功。
+        onSuccess: (msgId, msg) {
+        // msgId 消息id；
+        // msg 下载成功的消息;
+        },
+        // 收到失败回调，表示消息下载失败。
+        onError: (msgId, msg, error) {
+        // msgId 消息id；
+        // msg 下载失败的消息；
+        // error 失败原因
+        },
+        // 对于附件类型的消息，如图片，语音，文件，视频类型，上传或下载文件时会收到相应的进度值，表示附件的上传或者下载进度。
+        onProgress: (msgId, progress) {
+        // msgId 消息id；
+        // progress 进度;
+        },
+    ),
 );
+
+void dispose() {
+    // 移除消息状态监听器
+    EMClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
+    super.dispose();
+}
 ```
 
 3. 下载缩略图。
