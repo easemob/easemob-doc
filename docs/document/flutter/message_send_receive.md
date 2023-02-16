@@ -337,18 +337,18 @@ EMClient.getInstance.chatManager.addMessageEvent(
     ChatMessageEvent(
         // 收到成功回调表示消息已经下载成功。
         onSuccess: (msgId, msg) {
-        // msgId 消息id；
+        // msgId 消息ID；
         // msg 下载成功的消息;
         },
         // 收到失败回调，表示消息下载失败。
         onError: (msgId, msg, error) {
-        // msgId 消息id；
+        // msgId 消息ID；
         // msg 下载失败的消息；
         // error 失败原因
         },
         // 对于附件类型的消息，如图片，语音，文件，视频类型，上传或下载文件时会收到相应的进度值，表示附件的上传或者下载进度。
         onProgress: (msgId, progress) {
-        // msgId 消息id；
+        // msgId 消息ID；
         // progress 进度;
         },
     ),
