@@ -10,6 +10,10 @@
 - 透传消息。
 - 自定义消息。
 
+:::tip
+针对聊天室消息并发量较大的场景，即时通讯服务提供消息分级功能。你可以通过设置消息优先级，将消息划分为高、普通和低三种级别。你可以在创建消息时，将指定消息类型，或指定成员的所有消息设置为高优先级，确保此类消息优先送达。这种方式可以确保在聊天室内消息并发量较大或消息发送频率过高的情况下，服务器首先丢弃低优先级消息，将资源留给高优先级消息，确保重要消息（如打赏、公告等）优先送达，以此提升重要消息的可靠性 。请注意，该功能并不保证高优先级消息必达。在聊天室内消息并发量过大的情况下，为保证用户实时互动的流畅性，即使是高优先级消息仍然会被丢弃。
+:::
+
 本文介绍如何使用即时通讯 IM SDK 实现发送和接收这些类型的消息。
 
 ## 技术原理
@@ -46,7 +50,7 @@ String targetId = "tom";
 ChatType chatType = ChatType.Chat;
 // 构造消息。构造不同类型的消息，需要不同的参数。
 // 构造文本消息
-EMMessage txtMsg = EMMessage.createTxtSendMessage(
+EMMessage msg = EMMessage.createTxtSendMessage(
   targetId: targetId,
   content: "This is text message",
 );
@@ -57,7 +61,7 @@ double imgWidth = 100;
 double imgHeight = 100;
 String imgName = "image.jpg";
 int imgSize = 3000;
-EMMessage imgMessage = EMMessage.createImageSendMessage(
+EMMessage msg = EMMessage.createImageSendMessage(
   targetId: targetId,
   filePath: imgPath,
   width: imgWidth,
@@ -68,7 +72,7 @@ EMMessage imgMessage = EMMessage.createImageSendMessage(
 
 // 构建命令消息。根据命令消息可以执行具体的命令，命令的内容格式自定义的。
 String action = "writing";
-EMMessage cmdMsg = EMMessage.createCmdSendMessage(
+EMMessage msg = EMMessage.createCmdSendMessage(
   targetId: targetId,
   action: action,
 );
@@ -77,7 +81,7 @@ EMMessage cmdMsg = EMMessage.createCmdSendMessage(
 // 扩展字段用户可以自行实现和使用。
 String event = "gift";
 Map<String, String> params = {"key": "value"};
-EMMessage customMsg = EMMessage.createCustomSendMessage(
+EMMessage msg = EMMessage.createCustomSendMessage(
   targetId: targetId,
   event: event,
   params: params,
@@ -87,7 +91,7 @@ EMMessage customMsg = EMMessage.createCustomSendMessage(
 String filePath = "data/.../foo.zip";
 String fileName = "foo.zip";
 int fileSize = 6000;
-EMMessage fileMsg = EMMessage.createFileSendMessage(
+EMMessage msg = EMMessage msg = EMMessage.createFileSendMessage(
   targetId: targetId,
   filePath: filePath,
   displayName: fileName,
@@ -99,7 +103,7 @@ EMMessage fileMsg = EMMessage.createFileSendMessage(
 double latitude = 114.78;
 double longitude = 39.89;
 String address = "darwin";
-EMMessage.createLocationSendMessage(
+EMMessage msg = EMMessage.createLocationSendMessage(
   targetId: targetId,
   latitude: latitude,
   longitude: longitude,
@@ -115,7 +119,7 @@ double videoHeight = 100;
 String videoName = "foo.mp4";
 int videoDuration = 5;
 int videoSize = 4000;
-EMMessage.createVideoSendMessage(
+EMMessage msg = EMMessage.createVideoSendMessage(
   targetId: targetId,
   filePath: videoPath,
   width: videoWidth,
@@ -131,7 +135,7 @@ String voiceName = "foo.wav";
 int voiceDuration = 5;
 int voiceSize = 1000;
 
-EMMessage.createVoiceSendMessage(
+EMMessage msg = EMMessage.createVoiceSendMessage(
   targetId: targetId,
   filePath: voicePath,
   duration: voiceDuration,
@@ -139,8 +143,11 @@ EMMessage.createVoiceSendMessage(
   displayName: voiceName,
 );
 
-EMMessage message =
-    EMMessage.createCmdSendMessage(targetId: targetId, action: "action");
+对于聊天室消息，还可以设置消息优先级。
+if (msg.chatType == ChatType.ChatRoom) {
+  msg.chatroomMessagePriority = ChatRoomMessagePriority.High;
+}
+
 ```
 
 2. 通过 `EMChatManager` 将该消息发出。
@@ -150,25 +157,39 @@ EMClient.getInstance.chatManager.sendMessage(message).then((value) {
 });
 ```
 
-你可以设置发送消息结果回调，用于接收消息发送进度或者发送结果，如发送成功或失败。为此，需实现 `MessageStatusCallBack` 接口。
+你可以设置发送消息结果回调，用于接收消息发送进度或者发送结果，如发送成功或失败。为此，需实现 `EMChatManager#addMessageEvent` 接口。
 
 对于命令消息可能并不需要结果，可以不用赋值。
 
 ```dart
-// 实现回调对象
-message.setMessageStatusCallBack(
-  MessageStatusCallBack(
-    onSuccess: () {
-      // 收到成功回调之后，可以对发送的消息进行更新处理，或者其他操作。
+// 添加消息状态监听器
+EMClient.getInstance.chatManager.addMessageEvent(
+  "UNIQUE_HANDLER_ID",
+  ChatMessageEvent(
+    // 收到成功回调之后，可以对发送的消息进行更新处理，或者其他操作。
+    onSuccess: (msgId, msg) {
+      // msgId 旧的消息id；
+      // msg 发送成功的消息;
     },
-    onError: (error) {
-      // 收到回调之后，可以将发送的消息状态进行更新，或者进行其他操作。
+    // 收到回调之后，可以将发送的消息状态进行更新，或者进行其他操作。
+    onError: (msgId, msg, error) {
+      // msgId 旧的消息id；
+      // msg 发送失败的消息;
+      // error 错误原因
     },
-    onProgress: (progress) {
-      // 对于附件类型的消息，如图片，语音，文件，视频类型，上传或下载文件时会收到相应的进度值，表示附件的上传或者下载进度。
+    // 对于附件类型的消息，如图片，语音，文件，视频类型，上传或下载文件时会收到相应的进度值，表示附件的上传或者下载进度。
+    onProgress: (msgId, progress) {
+      // msgId 消息id；
+      // progress 进度;
     },
   ),
 );
+
+void dispose() {
+  // 移除消息状态监听器
+  EMClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
+  super.dispose();
+}
 
 // 消息发送结果会通过回调对象返回，该返回结果仅表示该方法的调用结果，与实际消息发送状态无关。
 EMClient.getInstance.chatManager.sendMessage(message).then((value) {
