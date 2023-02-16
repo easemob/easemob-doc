@@ -168,18 +168,18 @@ EMClient.getInstance.chatManager.addMessageEvent(
   ChatMessageEvent(
     // 收到成功回调之后，可以对发送的消息进行更新处理，或者其他操作。
     onSuccess: (msgId, msg) {
-      // msgId 旧的消息id；
+      // msgId 发送时消息id；
       // msg 发送成功的消息;
     },
     // 收到回调之后，可以将发送的消息状态进行更新，或者进行其他操作。
     onError: (msgId, msg, error) {
-      // msgId 旧的消息id；
+      // msgId 发送时的消息id；
       // msg 发送失败的消息;
       // error 错误原因
     },
     // 对于附件类型的消息，如图片，语音，文件，视频类型，上传或下载文件时会收到相应的进度值，表示附件的上传或者下载进度。
     onProgress: (msgId, progress) {
-      // msgId 消息id；
+      // msgId 发送时的消息id；
       // progress 进度;
     },
   ),
