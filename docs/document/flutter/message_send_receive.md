@@ -143,7 +143,7 @@ EMMessage msg = EMMessage.createVoiceSendMessage(
   displayName: voiceName,
 );
 
-// 对于聊天室消息，还可以设置消息优先级。
+// 对于聊天室消息，还可以设置消息优先级,如果不设置，默认值为Normal，即“普通”优先级。
 if (msg.chatType == ChatType.ChatRoom) {
   msg.chatroomMessagePriority = ChatRoomMessagePriority.High;
 }
@@ -168,18 +168,18 @@ EMClient.getInstance.chatManager.addMessageEvent(
   ChatMessageEvent(
     // 收到成功回调之后，可以对发送的消息进行更新处理，或者其他操作。
     onSuccess: (msgId, msg) {
-      // msgId 发送时消息id；
+      // msgId 发送时消息ID;
       // msg 发送成功的消息;
     },
     // 收到回调之后，可以将发送的消息状态进行更新，或者进行其他操作。
     onError: (msgId, msg, error) {
-      // msgId 发送时的消息id；
+      // msgId 发送时的消息ID;
       // msg 发送失败的消息;
-      // error 错误原因
+      // error 失败原因;
     },
     // 对于附件类型的消息，如图片，语音，文件，视频类型，上传或下载文件时会收到相应的进度值，表示附件的上传或者下载进度。
     onProgress: (msgId, progress) {
-      // msgId 发送时的消息id；
+      // msgId 发送时的消息ID;
       // progress 进度;
     },
   ),
@@ -331,7 +331,7 @@ EMOptions options = EMOptions(
 2. 设置下载监听器。
 
 ```dart
-// 添加消息状态监听器
+// 添加监听器
 EMClient.getInstance.chatManager.addMessageEvent(
     "UNIQUE_HANDLER_ID",
     ChatMessageEvent(
@@ -355,7 +355,7 @@ EMClient.getInstance.chatManager.addMessageEvent(
 );
 
 void dispose() {
-    // 移除消息状态监听器
+    // 移除监听器
     EMClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
     super.dispose();
 }
