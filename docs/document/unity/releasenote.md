@@ -2,6 +2,23 @@
 
 <Toc />
 
+## 版本 v1.1.0 Dev 2023-2-25（开发版）
+
+#### 新增特性
+
+- 依赖的原生平台 `iOS` 和 `Android` 的 SDK 升级为 v4.0.0 版本。
+- 新增 `ChatManager#GetConversationsFromServerWithPage` 方法实现从服务器分页获取会话列表。
+- 新增 `Message#Priority` 属性实现聊天室消息优先级功能，确保高优先级消息优先处理。
+- 新增 `ChatManager#RemoveMessagesFromServer` 方法实现单向删除服务端历史消息。
+
+#### 优化
+
+调整 `SDKClient#InitWithOptions` 方法，增加返回结果，检查 App Key 格式。
+
+#### 修复
+
+修复登录时的部分 bug。
+
 ## 版本 V1.0.9 Dev 2022-12-30（开发版）
 
 #### 新增特性
