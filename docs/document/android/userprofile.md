@@ -73,7 +73,17 @@ EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType
 
 用户属性包括如下字段：
 
-<UserAttribute />
+| 字段        | 类型   | 描述                                                         |
+| :---------- | :----- | :----------------------------------------------------------- |
+| `nickname`  | String | 用户昵称。长度在 64 字符内。                                 |
+| `avatarurl` | String | 用户头像 URL 地址。长度在 256 字符内。                       |
+| `phone`     | String | 用户联系方式。长度在 32 字符内。                             |
+| `mail`      | String | 用户邮箱。长度在 64 字符内。                                 |
+| `gender`    | Number | 用户性别。 - `1`：男； - `2`：女； - （默认）`0`：未知； - 设置为其他值无效。 |
+| `sign`      | String | 用户签名。长度在 256 字符内。                                |
+| `birth`     | String | 用户生日。长度在 64 字符内。                                 |
+| `userId`    | String | 用户 ID。                                                    |
+| `ext`       | String | 扩展字段。                                                   |
 
 ### 获取用户属性
 
