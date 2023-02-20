@@ -134,8 +134,14 @@ conn.addEventHandler("eventName", {
             // 更新聊天室公告。聊天室的所有成员会收到该事件。
             case 'updateAnnouncement':
                 break;
+            // 更新聊天室详情。聊天室的所有成员会收到该事件。
+            case 'updateInfo':
+                break;    
             // 解除对指定成员的禁言。被解除禁言的成员会收到该事件。
             case 'unmuteMember':
+                break;
+            // 有成员被移出聊天室黑名单。被移出的成员会收到该事件。
+            case 'unblockMember':
                 break;
             // 禁言指定成员。被禁言的成员会收到该事件。
             case 'muteMember':
@@ -149,6 +155,9 @@ conn.addEventHandler("eventName", {
             // 转让聊天室。聊天室全体成员会收到该事件。
             case 'changeOwner':
                 break;
+            // 解散聊天室。聊天室的所有成员会收到该事件。
+            case 'destroy':
+                break;   
             // 主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
             case 'memberAbsence':
                 break;
