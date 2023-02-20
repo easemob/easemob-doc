@@ -20,7 +20,8 @@
 
 登录 QQ 小程序 [开发者平台](https://q.qq.com/)，进入 “开发 > 开发设置” 页面配置以下服务器地址。
 
-:::tip request合法域名
+:::tip 
+request合法域名：
 1. https://a1.easemob.com
 2. https://a2.easemob.com
 3. https://a3.easemob.com
@@ -28,7 +29,8 @@
 5. https://a5.easemob.com
 :::
 
-:::tip socket 合法域名
+:::tip 
+socket 合法域名：
 1. wss://im-api.easemob.com（2.0 IM SDK)
 2. wss://im-api-wechat.easemob.com（3.0 IM SDK）
 :::

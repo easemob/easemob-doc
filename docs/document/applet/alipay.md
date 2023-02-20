@@ -16,7 +16,8 @@
 
 登录 [支付宝开放平台](https://open.alipay.com/platform/home.htm), 配置以下服务器域名。
 
-:::tip request合法域名
+:::tip 
+request合法域名：
 1. https://a1.easemob.com
 2. https://a2.easemob.com
 3. https://a3.easemob.com
@@ -24,7 +25,8 @@
 5. https://a5.easemob.com
 :::
 
-:::tip socket合法域名
+:::tip 
+socket合法域名：
 wss://im-api-alipay.easemob.com/websocket
 :::
 

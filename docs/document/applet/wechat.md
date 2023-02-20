@@ -17,24 +17,29 @@
 登录[微信公众平台](https://mp.weixin.qq.com/), 在开发设置页面配置以下服务器域名。
 
 
-:::tip request合法域名
+:::tip 
+request合法域名：
 1. https://a1.easemob.com
 2. https://a2.easemob.com
 3. https://a3.easemob.com
 4. https://a4.easemob.com
 5. https://a5.easemob.com
+6. https://a1-chatfile.easemob.com
 :::
 
-:::tip socket合法域名
+:::tip 
+socket合法域名：
 1. wss://im-api.easemob.com（2.0 IM SDK)
 2. wss://im-api-wechat.easemob.com（3.0 IM SDK）
 :::
 
-:::tip uploadFile合法域名
+:::tip 
+uploadFile合法域名：
 https://a1.easemob.com
 :::
 
-:::tip downloadFile合法域名
+:::tip 
+downloadFile合法域名：
 1. https://a1-v2.easemob.com
 2. https://a4.easemob.com
 3. https://a1.easemob.com
@@ -42,6 +47,7 @@ https://a1.easemob.com
 5. https://a3-v2.easemob.com
 6. https://a5-v2.easemob.com
 7. https://a2-v2.easemob.com
+8. https://a1-chatfile.easemob.com
 :::
 
 :::notice

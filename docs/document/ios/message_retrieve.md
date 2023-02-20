@@ -12,7 +12,7 @@
 
 使用环信即时通讯 IM iOS SDK 可以管理服务端的会话和历史消息。
 
-- `getConversationsFromServer` 分页获取服务器上保存的会话列表；
+- `getConversationsFromServerByPage` 分页获取服务器上保存的会话列表；
 - `asyncFetchHistoryMessagesFromServer` 获取服务器保存的指定会话中的消息；
 - `removeMessagesFromServer` 单向删除服务端的历史消息；
 - `deleteServerConversation` 删除服务器端会话及其历史消息。

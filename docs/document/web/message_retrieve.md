@@ -54,7 +54,7 @@ let options = {
   pageSize: 20,
   // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
   cursor: -1,
-  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室聊天。
+  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊。
   chatType: "groupChat",
   // 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
   searchDirection: "up",
@@ -97,7 +97,7 @@ connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', me
 let options = {
   // 会话 ID：单聊为对方的用户 ID，群聊为群组 ID。
   channel: "channel",
-  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室聊天。
+  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊。
   chatType: "singleChat",
   // 删除会话时是否同时删除服务端漫游消息。
   deleteRoam: true,

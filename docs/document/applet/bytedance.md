@@ -16,15 +16,18 @@
 
 登录字节跳动小程序 [开发者平台](https://microapp.bytedance.com/)，选择当前小程序（如果没有需要创建一个小程序），进入 “开发管理>开发设置” 页面配置以下服务器地址。
 
-:::tip request 合法域名
+:::tip 
+request 合法域名：
 1. https://a1.easemob.com
 2. https://a2.easemob.com
 3. https://a3.easemob.com
 4. https://a4.easemob.com
 5. https://a5.easemob.com
+6. https://a1-chatfile.easemob.com
 :::
 
-:::tip socket 合法域名
+:::tip 
+socket 合法域名：
 1. wss://im-api.easemob.com（2.0 IM SDK)
 2. wss://im-api-wechat.easemob.com（3.0 IM SDK）
 :::

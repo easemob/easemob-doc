@@ -114,7 +114,7 @@ conn.destroyChatRoom(option).then(res => console.log(res))
 
 ```javascript
 conn.addEventHandler("eventName", {
-    onGroupEvent: function(msg){
+    onChatroomChange: function(msg){
         switch(msg.operation){
             // 解除聊天室一键禁言。聊天室所有成员（除操作者外）会收到该事件。
             case 'unmuteAllMembers':

@@ -65,7 +65,8 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 
 登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 “开发 > 开发设置” 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
 
-:::tip request 合法域名，uploadFile 合法域名，downloadFile 合法域名
+:::tip 
+request 合法域名，uploadFile 合法域名，downloadFile 合法域名
 1. https://a1.easemob.com
 2. https://a2.easemob.com
 3. https://a3.easemob.com
@@ -75,9 +76,11 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 7. https://a1-sgp.easemob.com
 8. https://a41.easemob.com
 9. https://a51.easemob.com
+10. https://a1-chatfile.easemob.com
 :::
 
-:::tip socket合法域名:
+:::tip 
+socket 合法域名:
 1. wss://im-api.easemob.com（2.0 IM SDK)
 2. wss://im-api-wechat.easemob.com（3.0 IM SDK）
 3. wss://im-api-wechat-31.easemob.com

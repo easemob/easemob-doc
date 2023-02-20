@@ -17,7 +17,7 @@
 - `deleteReaction` 删除消息的 Reaction；
 - `getReactionList` 获取消息的 Reaction 列表；
 - `getReactionDetail` 获取 Reaction 详情；
-- `fetchHistoryMessages` 获取漫游消息中的 Reaction。
+- `getHistoryMessages ` 获取漫游消息中的 Reaction。
 
 添加 Reaction：
 
@@ -103,12 +103,31 @@ conn
 
 ### 获取漫游消息中的 Reaction
 
-调用 `fetchHistoryMessages` 可以获取漫游消息，如果一条消息已添加 Reaction，消息体中会包含 Reaction 概览。
+调用 `getHistoryMessages` 可以获取漫游消息，如果一条消息已添加 Reaction，消息体中会包含 Reaction 概览。
 
 示例代码如下：
 
 ```javascript
-conn.fetchHistoryMessages({ queue: "user", count: 20 }).then((messages) => {
-  console.log(messages);
-});
+let options = {
+  // 对方的用户 ID 或者群组 ID 或聊天室 ID。
+  targetId: "user1",
+  // 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
+  pageSize: 20,
+  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
+  cursor: -1,
+  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室聊天。
+  chatType: "groupChat",
+  // 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
+  searchDirection: "up",
+};
+WebIM.conn
+  .getHistoryMessages(options)
+  .then((res) => {
+    // 成功获取历史消息。
+    console.log(res);
+  })
+  .catch((e) => {
+    // 获取失败。
+  });
+
 ```
