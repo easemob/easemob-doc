@@ -16,7 +16,8 @@
 
 登录 [百度智能小程序官网](https://smartprogram.baidu.com/)，在开发设置页面配置以下服务器域名。
 
-:::tip request 合法域名
+:::tip 
+request 合法域名：
 1. https://a1.easemob.com
 2. https://a2.easemob.com
 3. https://a3.easemob.com
@@ -24,7 +25,8 @@
 5. https://a5.easemob.com
 :::
 
-:::tip socket 合法域名
+:::tip 
+socket 合法域名：
 1. wss://im-api.easemob.com（2.0 IM SDK)
 2. wss://im-api-wechat.easemob.com（3.0 IM SDK）
 :::
