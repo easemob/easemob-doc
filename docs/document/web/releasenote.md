@@ -2,6 +2,26 @@
 
 <Toc />
 
+## v4.1.3
+
+v4.1.3 于 2022 年 2 月 21 日发布。
+
+#### 新增特性
+
+- 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+- 新增[群组创建事件 `create`](group_manage.html#监听群组事件)。群组创建后，群主的其他设备会收到该事件。
+
+#### 优化
+
+- 缩减 MiniCore 的大小。
+- 优化重连逻辑。
+
+#### 修复
+
+- 修复 TypeScript 代码的一些类型错误。
+- 修复 `getConversationlist` 方法的返回值缺少 `customExts` 字段的问题。
+- 修复设置 `useOwnUploadFun` 允许用户自己上传图片时图片消息中的 `size` 字段不生效的问题。
+
 ## 版本 V4.1.2 Dev 2022-11-08（开发版）
 
 ### 新增特性
