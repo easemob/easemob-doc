@@ -178,6 +178,9 @@ SDK 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通
 conn.addEventHandler("eventName", {
   onGroupEvent: function (msg) {
     switch (msg.operation) {
+      // 有新群组创建。群主的其他设备会收到该回调。
+      case "create":
+        break;
       // 关闭群组一键禁言。群组所有成员（除操作者外）会收到该回调。
       case "unmuteAllMembers":
         break;
