@@ -56,7 +56,7 @@ SDKClient.Instance.UserInfoManager.UpdateOwnInfo(userInfo, new CallBack(
 ));
 ```
 
-若[调用 RESTful 的接口设置](userprofile.html#设置用户属性)或[删除用户属性](userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
+若[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
 
 | 字段        | 类型   | 描述                                                         |
 | :---------- | :----- | :----------------------------------------------------------- |
