@@ -91,7 +91,7 @@ EMClient.getInstance().chatManager().asyncFetchHistoryMessage(
 你可以调用 `removeMessagesFromServer` 方法单向删除服务端的历史消息，每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。登录该账号的其他设备会收到 `EMMultiDeviceListener` 中的 `onMessageRemoved` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V3.9.8 或以上版本。
+若使用该功能，需将 SDK 升级至 V3.9.8 或以上版本并联系商务开通。
 :::
 
 示例代码如下：

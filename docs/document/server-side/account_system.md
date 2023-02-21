@@ -401,6 +401,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}
 | `entities.notification_ignore_63112447328257` | Bool   | 是否屏蔽了群组消息的离线推送的设置。参数中的数字，例如 `63112447328257` 表示群组 ID。 <br/> -`true`：已屏蔽。<br/> - `false`：未屏蔽。若用户未设该参数，则响应中不返回。 |
 | `entities.notifier_name`                      | String | 客户端推送证书名称。若用户未设置推送证书名称，则响应中不返回。      |
 | `entities.device_token`                       | String | 推送 token。若用户没有推送 token，则响应中不返回。   |
+| `count`                       | Int | 用户数量。  |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 

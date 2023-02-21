@@ -22,6 +22,7 @@
 添加 Reaction：
 
 ![](@static/images/web/web_chat_reaction_add_reaction.png)
+
 查看 Reaction：
 
 ![](@static/images/web/web_group_chat_reaction_detail_another_version.png)
@@ -115,7 +116,7 @@ let options = {
   pageSize: 20,
   // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
   cursor: -1,
-  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室聊天。
+  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊。
   chatType: "groupChat",
   // 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
   searchDirection: "up",
