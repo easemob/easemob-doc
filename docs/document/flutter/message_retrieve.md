@@ -12,7 +12,7 @@
 
 - `fetchConversationListFromServer` 分页获取服务器保存的会话列表；
 - `fetchHistoryMessages` 获取服务器保存的指定会话中的消息。
-- `deleteRemoteMessagesWithTs` 根据消息时间单向删除服务端的历史消息；
+- `deleteRemoteMessagesBefore` 根据消息时间单向删除服务端的历史消息；
 - `deleteRemoteMessagesWithIds` 根据消息id单向删除服务端的历史消息；
 - `deleteRemoteConversation` 删除服务端的会话及其历史消息。
 
@@ -77,7 +77,7 @@ try {
 ```
 ### 单向删除服务端的历史消息
 
-你可以调用 `deleteRemoteMessagesWithTs` 和 `deleteRemoteMessagesWithIds` 方法单向删除服务端的历史消息，每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。已删除的消息自动从设备本地移除。
+你可以调用 `deleteRemoteMessagesBefore` 和 `deleteRemoteMessagesWithIds` 方法单向删除服务端的历史消息，每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。已删除的消息自动从设备本地移除。
 
 :::tip
 若使用该功能，需将 SDK 升级至 V4.0.0 或以上版本。
@@ -85,7 +85,7 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.deleteRemoteMessagesWithTs(
+  await EMClient.getInstance.chatManager.deleteRemoteMessagesBefore(
     conversationId: conversationId,
     type: convType,
     timestamp: timestamp,
