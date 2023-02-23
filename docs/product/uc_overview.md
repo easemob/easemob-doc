@@ -76,8 +76,8 @@
 
 | 应用端 | 下载地址 |
 | :------------------- | :----- |
-| Windows | [下载体验](http://221.204.13.10:12001/download/win32/x64/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.0.1.win.setup.exe) |
-| macOS | [下载体验](http://221.204.13.10:12001/download/darwin/x64/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.0.1.mac.dmg) |
+| Windows | [下载体验](http://180.184.135.29:12001/download/win32/x64/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.0.3-build0110.win.setup.exe) |
+| macOS | [下载体验](http://180.184.135.29:12001/download/darwin/x64/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.0.3-build0110.mac.dmg) |
 | Android | [下载体验](https://www.pgyer.com/ywWr) |
-| iOS | [下载体验](https://www.pgyer.com/wIpF) |
+| iOS | [下载体验](https://www.pgyer.com/mTuq) |
 
