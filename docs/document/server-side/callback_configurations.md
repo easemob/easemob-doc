@@ -369,7 +369,7 @@ payload 中字段含义：
 | muc:unblock                | {“operation”:“unblock”}                | 用户解除屏蔽群                                 | 不支持                 |
 | muc:presence               | {“operation”:“presence”}               | 成员进入群                                     | 成员进入聊天室         |
 | muc:absence                | {“operation”:“absence”}                | 有成员退出了群                                 | 有成员离开了聊天室     |
-| muc:direct_joined          | {“operation”:“direct_joined”}          | 成员直接加入群（未开启加入验证）        | 成员直接加入聊天室（未开启加入验证）  |
+| muc:direct_joined          | {“operation”:“direct_joined”}          | 成员直接加入群（未开启加入验证）        | 不支持  |
 | muc:leave                  | {“operation”:“leave”}                  | 成员主动退出群                                 | 成员主动退出聊天室     |
 | muc:assing_owner           | {“operation”:“assing_owner”}           | 转让群                                         | 不支持                 |
 | muc:add_admin              | {“operation”:“add_admin”}              | 添加群管理员                                   | 添加聊天室管理员       |
