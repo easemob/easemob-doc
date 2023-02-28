@@ -30,7 +30,7 @@
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `GetConversationsFromServerWithPage` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。该功能需在环信即时通讯 IM 管理后台[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+你可以调用 `GetConversationsFromServerWithPage` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
 
 :::tip
 1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `LoadAllConversations` 即可。
@@ -56,7 +56,7 @@ SDKClient.Instance.ChatManager.GetConversationsFromServerWithPage(pageNum, pageS
 
 ### 分页获取指定会话的历史消息
 
-你可以调用 `FetchHistoryMessagesFromServer` 方法从服务器分页获取指定会话的历史消息，实现消息漫游。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+你可以调用 `FetchHistoryMessagesFromServer` 方法从服务器分页获取指定会话的历史消息，实现消息漫游。
 
 为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 

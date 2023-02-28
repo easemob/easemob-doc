@@ -2,9 +2,11 @@
 
 <Toc />
 
-环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
+环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。本文介绍用户如何从消息服务器获取会话和消息。
 
-本文介绍用户如何从消息服务器获取会话和消息。
+:::tip
+本文介绍的功能均为增值服务，需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+:::
 
 ## 实现原理
 
@@ -12,10 +14,8 @@
 
 - `fetchConversationListFromServer` 分页获取服务器保存的会话列表；
 - `fetchHistoryMessages` 获取服务器保存的指定会话中的消息。
-- `deleteRemoteMessagesBefore` 根据消息时间单向删除服务端的历史消息；
-- `deleteRemoteMessagesWithIds` 根据消息id单向删除服务端的历史消息；
+- `deleteRemoteMessagesBefore`/`deleteRemoteMessagesWithIds` 根据消息时间或消息 ID 单向删除服务端的历史消息；
 - `deleteRemoteConversation` 删除服务端的会话及其历史消息。
-
 
 ## 前提条件
 
@@ -30,7 +30,7 @@
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `fetchConversationListFromServer` 从服务端分页获取会话列表。每个会话包含最新一条历史消息。该功能需在环信即时通讯 IM 管理后台[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+你可以调用 `fetchConversationListFromServer` 从服务端分页获取会话列表。每个会话包含最新一条历史消息。
 
 :::tip
 1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `loadAllConversations` 获取本地会话即可。
@@ -41,17 +41,19 @@
 try {
   List<EMConversation> list = await EMClient.getInstance.chatManager
       .fetchConversationListFromServer(
+    // pageNum：当前页面，从 1 开始。
     pageNum: pageNum,
+   // pageSize：每页获取的会话数量。取值范围为 [1,20]。
     pageSize: pageSize,
   );
 } on EMError catch (e) {}
 ```
 
-对于还不支持 `fetchConversationListFromServer` 接口的用户，可以调用 `getConversationsFromServer` 从服务端获取会话列表。该功能需在环信即时通讯 IM [环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通，开通后，用户默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
+对于还不支持 `fetchConversationListFromServer` 接口的用户，可以调用 `getConversationsFromServer` 从服务端获取会话列表，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息）。如需调整会话数量或时间限制请联系商务。
 
 ### 分页获取指定会话的历史消息
 
-你可以调用 `fetchHistoryMessages` 方法从服务器获取指定会话的消息（消息漫游）。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+你可以调用 `fetchHistoryMessages` 方法从服务器获取指定会话的消息（消息漫游）。
 
 为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 
@@ -80,7 +82,7 @@ try {
 你可以调用 `deleteRemoteMessagesBefore` 和 `deleteRemoteMessagesWithIds` 方法单向删除服务端的历史消息，每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。已删除的消息自动从设备本地移除。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V4.0.0 或以上版本。
+若使用该功能，需将 SDK 升级至 V4.0.0 或以上版本并联系商务。
 :::
 
 ```dart

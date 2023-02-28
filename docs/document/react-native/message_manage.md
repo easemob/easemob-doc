@@ -24,7 +24,7 @@
 
 ### 管理服务端和本地的会话
 
-#### 获取本地所有会话
+#### 获取会话列表
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
@@ -48,7 +48,7 @@ ChatClient.getInstance()
   });
 ```
 
-对于使用 `fetchAllConversations` 方法未实现分页获取会话列表的用户，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
+对于还不支持 `fetchConversationsFromServerWithPage` 方法的用户，可以调用 `fetchAllConversations` 方法从服务端获取会话列表，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息）。如需调整会话数量或时间限制请联系商务。
 
 你可以调用 `getAllConversations` 方法获取本地所有会话，示例代码如下：
 
@@ -110,6 +110,10 @@ ChatClient.getInstance()
 
 你可以调用 `removeMessagesFromServerWithTimestamp` 或者 `removeMessagesFromServerWithMsgIds` 方法单向删除服务端的历史消息，每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。
 
+:::tip
+若使用该功能，需将 SDK 升级至 V1.1.0 或以上版本并联系商务。
+:::
+
 示例代码如下：
 
 ```typescript
@@ -139,7 +143,7 @@ ChatClient.getInstance()
 
 #### 删除会话及其中的消息
 
-你可以调用 `removeConversationFromServer` 方法删除服务器端会话及其历史消息。会话删除后，当前用户和其他用户均无法从服务器获取该会话。若该会话的历史消息也删除，所有用户均无法从服务器获取该会话的消息。
+你可以调用 `removeConversationFromServer` 方法删除服务器端会话及其历史消息。会话删除后，当前用户和其他用户均无法从服务器获取该会话。若该会话的历史消息也删除，所有用户均无法从服务器获取该会话的消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
 
 示例代码如下：
 
