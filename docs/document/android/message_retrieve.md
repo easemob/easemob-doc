@@ -5,7 +5,7 @@
 环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。本文介绍用户如何获取和删除服务端的会话和消息。
 
 :::tip
-本文介绍的功能均为增值服务，需联系商务开通。
+本文介绍的功能均为增值服务，需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
 :::
 
 ## 技术原理
@@ -30,7 +30,7 @@
 
 对于单聊或群聊，用户发消息时会自动将对方添加到用户的会话列表。
 
-你可以调用 `asyncFetchConversationsFromServer` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+你可以调用 `asyncFetchConversationsFromServer` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
 
 :::tip
 1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 方法即可。
@@ -91,7 +91,7 @@ EMClient.getInstance().chatManager().asyncFetchHistoryMessage(
 你可以调用 `removeMessagesFromServer` 方法单向删除服务端的历史消息，每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。登录该账号的其他设备会收到 `EMMultiDeviceListener` 中的 `onMessageRemoved` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V3.9.8 或以上版本。
+若使用该功能，需将 SDK 升级至 V3.9.8 或以上版本并联系商务开通。
 :::
 
 示例代码如下：

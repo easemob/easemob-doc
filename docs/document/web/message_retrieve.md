@@ -5,14 +5,15 @@
 环信即时通讯 IM SDK 在消息服务器上存储历史消息。当聊天用户从其他设备登录或加入群组后，你可以从服务器检索历史消息，以便用户也可以在新设备上浏览这些消息。本文介绍如何实现用户从消息服务器获取会话和消息。
 
 :::tip
-本文介绍的功能均为增值服务，需联系商务开通。
+本文介绍的功能均为增值服务，需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+
 :::
 
 ## 技术原理
 
 利用环信即时通讯 IM SDK 可从服务器获取会话和历史消息。
 
-- `getConversationlist` 获取服务器上保存的会话列表；
+- `getConversationlist` 分页获取会话列表以及会话中的最新一条消息；
 - `getHistoryMessages` 按服务器接收消息的时间顺序获取服务器上保存的指定会话中的消息；
 - `removeHistoryMessages` 单向删除服务端的历史消息；
 - `deleteConversation` 删除服务器端会话及其对应的消息。
@@ -23,11 +24,11 @@
 
 ## 实现方法
 
-### 从服务器获取会话列表
+### 从服务器分页获取会话列表
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `getConversationlist` 方法从服务端获取会话列表。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。开通后，用户默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
+你可以调用 `getConversationlist` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
 
 :::tip
 1. 登录用户的 ID 大小写混用会导致拉取会话列表时提示会话列表为空，因此避免大小写混用。
@@ -36,11 +37,12 @@
 :::
 
 ```javascript
-WebIM.conn.getConversationlist().then((res) => {
-    console.log(res)
-    // 返回参数说明：channel_infos：所有会话；channel_id：会话 ID；lastMessage：最新一条消息；unread_num：当前会话的未读消息数。
-})
+// pageNum：当前页面，从 1 开始。
+// pageSize：每页获取的会话数量。取值范围为 [1,20]。
+connection.getConversationlist({pageNum: 1, pageSize: 20}).then((res) => {})
 ```
+
+对于使用 `getConversationlist` 方法未实现分页获取会话的用户，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
 
 ### 从服务器获取指定会话的历史消息
 
@@ -54,7 +56,7 @@ let options = {
   pageSize: 20,
   // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
   cursor: -1,
-  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室聊天。
+  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊。
   chatType: "groupChat",
   // 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
   searchDirection: "up",
@@ -75,7 +77,7 @@ WebIM.conn
 你可以调用 `removeHistoryMessages` 方法按照时间或消息 ID 单向删除服务端的历史消息。每次最多可删除 50 条消息。消息删除后，该账号无法从服务端拉取到该消息。其他用户不受该操作影响。多端多设备登录时，删除成功后会触发 `onMultiDeviceEvent#deleteRoaming` 回调。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V4.1.2 或以上版本。
+若使用该功能，需将 SDK 升级至 V4.1.2 或以上版本并联系商务开通。
 :::
 
 示例代码如下：
@@ -97,7 +99,7 @@ connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', me
 let options = {
   // 会话 ID：单聊为对方的用户 ID，群聊为群组 ID。
   channel: "channel",
-  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室聊天。
+  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊。
   chatType: "singleChat",
   // 删除会话时是否同时删除服务端漫游消息。
   deleteRoam: true,

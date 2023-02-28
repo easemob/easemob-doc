@@ -64,7 +64,7 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 }];
 ```
 
-用户属性包括如下字段：
+若[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
 
 | 字段        | 类型   | 描述                                                       |
 | ----------- | ------ | ---------------------------------------------------------- |
@@ -72,7 +72,7 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 | `avatarurl` | String | 用户头像 URL 地址。长度在 256 字符内。                     |
 | `phone`     | String | 用户联系方式。长度在 32 字符内。                           |
 | `mail`      | String | 用户邮箱。长度在 64 字符内。                               |
-| `gender`    | Number | 用户性别。<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
+| `gender`    | Int | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
 | `sign`      | String | 用户签名。长度在 256 字符内。                              |
 | `birth`     | String | 用户生日。长度在 64 字符内。                               |
 | `ext`       | String | 扩展字段。                                                 |

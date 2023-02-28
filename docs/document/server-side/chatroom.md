@@ -2688,7 +2688,6 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 | 字段    | 类型    | 描述                                                  |
 | :------- | :------ | :---------------------------------------------------- |
 | `data.mute` | Bool | 是否处于聊天室全员禁言状态：<br/> - `true`：是；<br/> - `false`：否。 |
-| `data.expire` | Long    | 禁言到期的时间。该时间为 Unix 时间戳，单位为毫秒。    |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 

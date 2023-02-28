@@ -2,6 +2,24 @@
 
 <Toc />
 
+## 版本 V4.1.3 Dev 2023-02-21（开发版）
+
+#### 新增特性
+
+- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+- [IM SDK] 新增[群组创建事件 `create`](group_manage.html#监听群组事件)。群组创建后，群主的其他设备会收到该事件。
+
+#### 优化
+
+- [IM SDK] 缩减 MiniCore 的大小。
+- [IM SDK] 优化重连逻辑。
+
+#### 修复
+
+- [IM SDK] 修复 TypeScript 代码的一些类型错误。
+- [IM SDK] 修复 `getConversationlist` 方法的返回值缺少 `customExts` 字段的问题。
+- [IM SDK] 修复设置 `useOwnUploadFun` 允许用户自己上传图片时图片消息中的 `size` 字段不生效的问题。
+
 ## 版本 V4.1.2 Dev 2022-11-08（开发版）
 
 ### 新增特性
