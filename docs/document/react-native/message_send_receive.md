@@ -2,7 +2,7 @@
 
 <Toc />
 
-登录 Chat app 后，用户可以在一对一单聊、群聊、聊天室中发送如下类型的消息：
+登录即时通讯服务后，用户可以在一对一单聊、群聊、聊天室中发送如下类型的消息：
 
 - 文字消息，包含超链接和表情消息。
 - 附件消息，包含图片、语音、视频及文件消息。
@@ -10,7 +10,9 @@
 - 透传消息。
 - 自定义消息。
 
-以及对以上消息进行自定义扩展。本文介绍如何使用即时通讯 IM SDK 实现发送和接收这些类型的消息。
+本文介绍如何使用即时通讯 IM SDK 实现发送和接收这些类型的消息。
+
+针对聊天室消息并发量较大的场景，即时通讯服务提供消息分级功能。你可以通过设置消息优先级，将消息划分为高、普通和低三种级别。你可以在创建消息时，将指定消息类型，或指定成员的所有消息设置为高优先级，确保此类消息优先送达。这种方式可以确保在聊天室内消息并发量较大或消息发送频率过高的情况下，服务器首先丢弃低优先级消息，将资源留给高优先级消息，确保重要消息（如打赏、公告等）优先送达，以此提升重要消息的可靠性。请注意，该功能并不保证高优先级消息必达。在聊天室内消息并发量过大的情况下，为保证用户实时互动的流畅性，即使是高优先级消息仍然会被丢弃。
 
 ## 技术原理
 
@@ -131,18 +133,23 @@ if (messageType === ChatMessageType.TXT) {
   // 其他不支持的消息类型会在此处抛出异常
   throw new Error("Not implemented.");
 }
-// 消息发送结果会通过回调对象返回，这里返回的结果只是说明发送消息的动作成功或者失败。不代表消息发送的成功或者失败
+
+对于聊天室消息，还可以设置消息优先级。
+if (ret.chatType === ChatMessageChatType.ChatRoom) {
+  ret.messagePriority = priority;
+}
+
 ChatClient.getInstance()
-  .chatManager.sendMessage(msg!, new ChatMessageCallback())
-  .then(() => {
-    // 消息发送动作完成，会在这里打印日志
-    // 消息的发送结果通过回调返回
-    console.log("send message operation success.");
-  })
-  .catch((reason) => {
-    // 消息发送动作失败，会在这里打印日志
-    console.log("send message operation fail.", reason);
-  });
+.chatManager.sendMessage(msg!, new ChatMessageCallback())
+.then(() => {
+// 消息发送动作完成，会在这里打印日志
+// 消息的发送结果通过回调返回
+console.log("send message operation success.");
+})
+.catch((reason) => {
+// 消息发送动作失败，会在这里打印日志
+console.log("send message operation fail.", reason);
+});
 ```
 
 2. 通过 `ChatManager` 将该消息发出。

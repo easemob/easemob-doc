@@ -2,6 +2,24 @@
 
 <Toc />
 
+## 版本 v1.1.0 Dev 2023-2-25（开发版）
+
+#### 新增特性
+
+- 依赖的原生平台 `iOS` 和 `Android` 的 SDK 升级为 v4.0.0 版本。
+- 新增 `ChatManager#GetConversationsFromServerWithPage` 方法实现从服务器分页获取会话列表。
+- 新增 `Message#Priority` 属性实现聊天室消息优先级功能，确保高优先级消息优先处理。
+
+#### 优化
+
+调整 `SDKClient#InitWithOptions` 方法，增加返回结果，检查 App Key 格式。
+
+#### 修复
+
+- 修复登录时的部分 bug。
+- 修复发送的消息的已读标识为 `false` 的问题。修复后，发送消息时将已读标识设置为 `true`。 
+- 数据库加密文件名生成错误问题。该问题只发生在 Unity 框架下的 Window 和 Mac 平台。建议升级到 v1.1.0 后，使用历史数据时首先从服务端拉取数据。
+
 ## 版本 V1.0.9 Dev 2022-12-30（开发版）
 
 #### 新增特性
