@@ -9,6 +9,7 @@
 
 - 请在点击获取隐私权限以后启动环信 SDK 初始化。
 - `EMChatService` 和 `EMJobService` 为早期 SDK 内在应用退到后台后，对应用进行保活的程序，可以不进行注册。
+- `EMMonitorReceiver` 为监听开机自启动服务，可以不注册，同时请移除对应的权限申请：`<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>`。
 :::
 
 ## 实现原理
