@@ -2,13 +2,15 @@
 
 <Toc />
 
-用户在单聊和群聊中发送信息后，可以查看该信息的送达和已读状态，了解接收方是否及时收到并阅读了信息。
+单聊会话支持消息送达回执、会话已读回执和消息已读回执，发送方发送消息后可及时了解接收方是否及时收到并阅读了信息，也可以了解整个会话是否已读。
 
-本文介绍如何使用环信即时通讯 IM Unity SDK 的消息已读回执和送达回执在 app 中实现上述功能。
+群聊会话只支持消息已读回执。群主和群管理员在发送消息时，可以设置该消息是否需要已读回执。仅旗舰版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
+
+本文介绍如何使用环信即时通讯 IM Android SDK 实现单聊和群聊的上述功能。
 
 ## 技术原理
 
-环信即时通讯 IM Unity SDK 通过 `IChatManager` 类提供消息已回执功能，包含的核心方法如下：
+环信即时通讯 IM Unity SDK 通过 `IChatManager` 类提供消息的送达回执和已读回执功能，包含的核心方法如下：
 
 - `Options.RequireDeliveryAck` 开启送达回执；
 - `IChatManager.SendConversationReadAck` 发出指定会话的已读回执；
@@ -17,7 +19,7 @@
 
 实现消息送达和已读回执的逻辑分别如下：
 
-消息送达回执：
+单聊消息送达回执：
 
 1. 消息发送方在发送消息前通过 `ChatOptions.RequireDeliveryAck` 开启送达回执功能；
 2. 消息接收方收到消息后，SDK 自动向发送方触发送达回执；
@@ -39,7 +41,7 @@
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)；
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
-- 在群组中实现消息已读回执功能默认不开启。如需使用，请联系商务开通。
+- 群消息已读回执功能仅在环信 IM 旗舰版及以上版本支持该功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
 
 ## 实现方法
 
@@ -219,9 +221,11 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 #### 群聊
 
-对于群组消息，消息发送方（目前为群主和群管理员）可设置消息是否需要已读回执。
+对于群聊，群主和群管理员发送消息时，可以设置该消息是否需要已读回执。若需要，每个群成员在阅读消息后，SDK 均会发送已读回执，即阅读该消息的群成员数量即为已读回执的数量。
 
-1. 消息发送方在发送消息时，设置 `Message` 的 `IsNeedGroupAck` 为 `true`。
+仅旗舰版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
+
+1. 群主或群管理员发送消息时若需已读回执，需设置 `Message` 的 `IsNeedGroupAck` 为 `true`。
 
 ```csharp
 Message msg = Message.CreateTextSendMessage("to", "hello world");
