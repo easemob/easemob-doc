@@ -91,7 +91,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | 参数           | 类型    | 是否必需 | 描述                            |
 |:----------------------| :------ |:-----|:----------------------------|
 | `groupname`    | String  | 是     | 群组名称，最大长度为 128 字符。如果有空格，则使用 “+” 代替。         |
-| `desc`         | String  | 是     | 群组描述，最大长度为 512 字符。如果有空格，则使用 “+” 代替。     |
+| `description`         | String  | 是     | 群组描述，最大长度为 512 字符。如果有空格，则使用 “+” 代替。     |
 | `public`       | Bool  | 是     | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                  |
 | `maxusers`     | Int | 否   | 群组最大成员数（包括群主），值为数值类型，默认值 200，具体上限请参考 [环信即时通讯云控制台](https://console.easemob.com/user/login)。 |
 | `allowinvites` | Bool  | 是     | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群;<br/> - （默认）`false`：只有群主或者管理员才可以往群里加人。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
@@ -124,7 +124,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
    "groupname": "testgroup",
-   "desc": "test",
+   "description": "test",
    "public": true,
    "maxusers": 300,
    "owner": "testuser",
@@ -334,8 +334,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.public`       | Bool  | “是否是公开群”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。                  |
 | `data.allowinvites` | Bool | “是否允许群成员邀请其他用户入群”是否修改成功：<br/> -`true`：修改成功；</br>- `false`：修改失败。 |
 | `data.invite_need_confirm` | Bool | “受邀人加入群组前是否需接受入群邀请”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。 |
-
-其他字段及描述详见 [公共参数](#公共参数)。
+| `data.custom`  | String | 群组扩展信息是否修改成功：<br/> -`true`：修改成功；</br>- `false`：修改失败。 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 

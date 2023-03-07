@@ -115,10 +115,10 @@ conn.addUsersToBlocklist({
 
 #### 将用户移出黑名单
 
-你可以调用 `removeUserFromBlockList` 方法将用户移出黑名单，示例代码如下：
+你可以调用 `removeUserFromBlocklist` 方法将用户移出黑名单，示例代码如下：
 
 ```javascript
-conn.removeUserFromBlockList({
+conn.removeUserFromBlocklist({
     //可以添加单个用户 ID 或批量添加多个用户 ID 组成的数组。
     name: ["user1", "user2"],
 });

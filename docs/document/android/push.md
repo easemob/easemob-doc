@@ -562,7 +562,7 @@ dependencies {
                  />
              <action android:name="com.meizu.c2dm.intent.RECEIVE" />
              <category android:name="${applicationId}"></category>
-         <	/intent-filter>
+         </intent-filter>
      </receiver>
      <!-- MEIZU 推送配置 end -->
      ```
