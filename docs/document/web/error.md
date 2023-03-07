@@ -51,6 +51,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 507    | SERVICE_NOT_ALLOW_MESSAGING_MUTE               | 当前用户被禁言：在群组或者聊天室中被禁言后发消息报此错误。           |
 | 508    | MESSAGE_MODERATION_BLOCKED                     | 第三方内容审核服务的消息审核结果为“拒绝”时提示该错误。          |
 | 509    | MESSAGE_CURRENT_LIMITING                       | 单个用户 ID 发送群聊消息超出频率限制。                       |
+| 510    | MESSAGE_WEBSOCKET_DISCONNECTED                 | 网络断开连接导致消息发送失败。                       |
 | 601    | GROUP_ALREADY_JOINED                           | 已在群组内：当前用户已在该群组中。                           |
 | 602    | GROUP_NOT_JOINED                               | 不在群组内：用户发送群消息时未加入该群组。                   |
 | 603    | PERMISSION_DENIED                              | 用户无权限：例如如果用户被封禁，发送消息时会提示该错误。     |
