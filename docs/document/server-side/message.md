@@ -743,7 +743,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 :::notice
 
-1. 聊天室消息的通用请求体中的参数与单聊消息类似，详见 [通用请求体](#通用请求体)。<br/>
+1. 聊天室消息的通用请求体中的其他参数与单聊消息类似，详见 [通用请求体](#通用请求体)。<br/>
 2. 与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body-字段说明)。
    :::
 
@@ -1096,7 +1096,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | :-------------- | :----- | :------- | :-------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。       |
 | `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
-| `share-secret`  | String | 否       | 文件访问密钥。若上传文件时限制了访问，则需要该访问密钥。成功上传文件后，从 [文件上传](#文件上传) 的响应 body 中获取该密钥。    |
+| `share-secret`  | String | 否       | 文件访问密钥。若上传文件时限制了访问，下载该文件时则需要该访问密钥。成功上传文件后，从 [文件上传](#文件上传) 的响应 body 中获取该密钥。    |
 
 ### HTTP 响应
 
@@ -1290,7 +1290,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 {
   "msg_id": "5I02W-XX-8278a",
   "timestamp": 1403099033211,
-  "direction":"outgoing",
+  "direction": "outgoing",
   "to": "XXXX",
   "from": "XXXX",
   "chat_type": "chat",
@@ -1484,7 +1484,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | `customEvent` | String | 自定义事件类型。                                 |
 | `type`        | String | 消息类型。自定义消息为 `custom`。                |
 
-示例如下：
+自定义类型消息格式示例如下：
 
 ```json
 "bodies":
@@ -1623,6 +1623,9 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 
 ## 服务端单向删除会话
 
+该方法使聊天用户能够从服务器中删除会话。删除会话后，该用户将从服务器获取不到该会话。该会话的其他参与聊天用户仍然可以从服务器获取会话内容。
+
+
 ### HTTP 请求
 
 ```http
@@ -1703,6 +1706,10 @@ curl -X DELETE -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX
 ```http
 POST https://{host}/{org_name}/{app_name}/messages/users/import
 ```
+
+#### 路径参数
+
+参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
