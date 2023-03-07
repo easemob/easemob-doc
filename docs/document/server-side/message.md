@@ -128,7 +128,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | `body`        | JSON   | 是       | 消息内容。对于不同消息类型 ，body 包含的字段不同，详见 [body 字段说明](#body-字段说明)。                     |
 | `sync_device` | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。            |
 | `routetype`   | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。              |
-| `ext`         | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。                       |
+| `ext`         | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。                       |
 | `msg_timestamp`        | Long   | 否       | 服务器收到该消息的时间戳。若不传该参数，服务器收到消息后会自动生成一个消息接收时间戳。          |
 
 #### body 字段说明
@@ -466,7 +466,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 | `to` | Array | 是   | 消息接收方群组 ID 数组。每次最多可向 3 个群组发送消息。 |
 
 :::notice
-1. 群聊消息的通用请求体中的参数与单聊消息类似，详见 [通用请求体](#通用请求体)。<br/>
+1. 群聊消息的通用请求体中的其他参数与单聊消息类似，详见 [通用请求体](#通用请求体)。<br/>
 2. 与单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [body 字段说明](#body-字段说明)。
 :::
 
