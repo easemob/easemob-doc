@@ -9,6 +9,7 @@
 环信即时通讯 IM iOS SDK 提供 `IEMGroupManager` 类和 `EMGroup` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 加入、退出群组
+- 管理群成员的自定义属性
 - 管理群主及群管理员
 - 管理群组白名单
 - 管理群组黑名单
@@ -174,6 +175,63 @@ do {
 [[EMClient sharedClient].groupManager removeMembers:@{@"member"}
                          fromGroup:@"groupsID"
                          completion:nil];
+```
+
+### 管理群成员的自定义属性
+
+群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
+
+- 每个群成员的自定义属性总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节，否则会报错。
+
+- 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
+
+#### 设置群成员自定义属性
+
+你可以调用 `EMGroupManager#setMemberAttribute` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置空字符串即删除该自定义属性。
+
+设置后，群内其他成员会收到 `EMGroupManagerDelegate#onAttributesChangedOfGroupMember` 事件。
+
+示例代码如下：
+
+```ObjectiveC 
+        [EMClient.sharedClient.groupManager setMemberAttribute:groupId userId:userName attributes:@{key:value} completion:^(EMError * _Nullable error) {
+        if (error == nil) {
+            [self updateCacheWithGroupId:groupId userName:userName key:key value:value];
+        }
+        if (completion) {
+            completion(error);
+        }
+    }];
+```
+
+#### 获取单个群成员的所有自定义属性
+
+你可以调用 `EMGroupManager#fetchMemberAttribute` 方法获取单个群成员的所有自定义属性。
+
+示例代码如下：
+
+```ObjectiveC 
+        [EMClient.sharedClient.groupManager fetchMemberAttribute:aGroupId userId:EMClient.sharedClient.currentUsername completion:^(NSDictionary<NSString *,NSString *> * _Nullable attributes, EMError * _Nullable error) {
+            if (error == nil) {
+                //refresh UI according to attributes or cache.
+            }
+        }];
+```
+
+#### 获取多个群成员的自定义属性
+
+你可调用 `EMGroupManager#fetchMembersAttributes` 方法获取多个群成员的某些自定义属性。
+
+:::notice
+每次最多可获取 10 个群成员的自定义属性。
+:::
+
+示例代码如下：
+
+```ObjectiveC 
+    [EMClient.sharedClient.groupManager fetchMembersAttributes:groupId userIds:@[userId] keys:@[@"1",@"2"] completion:^(NSDictionary<NSString *,NSDictionary<NSString *,NSString *> *> * _Nullable attributes, EMError * _Nullable error) {
+            //根据获取的自定义属性或缓存刷新 UI。
+    }];
 ```
 
 ### 管理群主和群管理员

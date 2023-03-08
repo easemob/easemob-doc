@@ -390,4 +390,9 @@ do {
   {
 
   }
+
+// 设置群成员自定义属性。群内其他成员会收到该回调。
+- (void)onAttributesChangedOfGroupMember:(NSString *)groupId userId:(NSString *)userId attributes:(NSDictionary<NSString *,NSString *> *)attributes operatorId:(NSString *)operatorId {
+    [self showAlertWithMessage:[NSString stringWithFormat:@"%@ changed %@ attributes %@ in %@",operatorId,userId,attributes,groupId]];
+}
 ```
