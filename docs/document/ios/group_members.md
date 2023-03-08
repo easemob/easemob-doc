@@ -229,7 +229,7 @@ do {
 示例代码如下：
 
 ```ObjectiveC 
-   // keys：要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取所有自定义属性。
+   // keys：要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
     [EMClient.sharedClient.groupManager fetchMembersAttributes:groupId userIds:@[userId] keys:@[@"1",@"2"] completion:^(NSDictionary<NSString *,NSDictionary<NSString *,NSString *> *> * _Nullable attributes, EMError * _Nullable error) {
             //根据获取的自定义属性或缓存刷新 UI。
     }];
