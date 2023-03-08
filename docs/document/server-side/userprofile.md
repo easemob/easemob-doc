@@ -82,9 +82,9 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 #### 请求 header
 
 | 参数    | 类型   |是否必需 | 描述      |
- | :-------------- | :----- | :---------------- | :------- |
- | `Content-Type`  | String | 是    | 内容类型。请填 `application/x-www-form-urlencoded`。 |
- | `Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| :-------------- | :----- | :---------------- | :------- |
+| `Content-Type`  | String | 是    | 内容类型。请填 `application/x-www-form-urlencoded`。 |
+| `Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### 请求 body
 
@@ -172,7 +172,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 | 字段     | 类型      | 描述                       |
 | :---------| :------------ | :------------------------- |
-| `data`    | Object | 用户属性键值对。|
+| `data`    | Object | 用户属性键值对。<br/>如果 `data` 为空，请确认用户 ID 是否存在或该用户是否有用户属性。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -240,7 +240,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 
 | 字段     | 类型      | 描述                       |
 | :---------| :------------ | :------------------------- |
-| `data`    | Object | 用户属性键值对。|
+| `data`    | Object | 用户属性键值对。<br/>如果 `data` 为空，请确认用户 ID 是否存在或用户是否有用户属性。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -375,7 +375,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 | 参数       | 类型 | 描述                       |
 | :------| :----- | :------------------------- |
-| `data`   | Bool |  是否删除成功：<br/> - `true`：是；<br/> - `false`：否。    |
+| `data`   | Bool | 是否删除成功：<br/> - `true`：是。如果指定的用户不存在，或指定用户的用户属性不存在，也视为删除成功。<br/> - `false`：否。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
