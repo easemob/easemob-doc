@@ -154,7 +154,7 @@ conn.removeGroupMember(option).then(res => console.log(res))
     })
 ```
 
-#### 获取多个群成员的自定义属性
+#### 获取多个群成员的某些自定义属性
 
 你可使用 `getGroupMembersAttributes` 方法获取多个群成员的某些自定义属性。
 

@@ -218,7 +218,7 @@ do {
         }];
 ```
 
-#### 获取多个群成员的自定义属性
+#### 获取多个群成员的某些自定义属性
 
 你可调用 `EMGroupManager#fetchMembersAttributes` 方法获取多个群成员的某些自定义属性。
 
