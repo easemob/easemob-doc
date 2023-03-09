@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon/gray/unity</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-&amp;-Logo2" transform="translate(-50.000000, -336.000000)" fill-rule="nonzero">
+            <g id="icon/gray/unity" transform="translate(50.000000, 336.000000)">
+                <rect fill="#D8D8D8" opacity="0" x="0" y="0" width="20" height="20"></rect>
+                <g id="Unity_Technologies_logo" transform="translate(1.142857, 2.142857)" fill="#999999">
+                    <path d="M13.0662983,12.5916782 L10.2446725,7.84988831 L13.0662983,3.10809842 L14.4265193,7.84988831 L13.0662983,12.5916782 Z M6.78642463,12.1289646 L3.24119968,8.61603111 L8.88445146,8.61603111 L11.7060773,13.357821 L6.78642463,12.1289646 Z M6.78642463,3.55630299 L11.6917127,2.32744654 L8.87008682,7.06923644 L3.22683504,7.06923644 L6.78642463,3.55630299 Z M13.992423,0 L7.58216259,1.66255194 L6.62715075,3.2960857 L4.70276243,3.28157662 L0,7.84988831 L4.70276243,12.4182 L6.62715075,12.4036909 L7.58216259,14.0372247 L13.992423,15.7142857 L15.7142857,9.48342208 L14.7447514,7.8643974 L15.7142857,6.24521501 L13.992423,0 Z" id="path2"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

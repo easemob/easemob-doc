@@ -1,0 +1,105 @@
+
+<script lang="ts" setup>
+import { ref, watch} from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const platform = ref('')
+const route = useRoute()
+const router = useRouter()
+watch(()=>route.path, ()=> {
+  if (route.path.indexOf('/document') == 0) {
+    platform.value = route.path.split('/')[2]
+  }
+}, {immediate:true})
+
+// 切换平台，如果有相同路径的route就直接跳转
+const onChange = (platform) => {
+  const nextPlatformDocRouters = router.options.routes.filter(item=>item.hasOwnProperty('name') && item?.path.indexOf('/document/'+platform) == 0).map(item=>item.path)
+
+  let newPath = route.path.split('/')
+  newPath[2] = platform
+  const nextPathPath = newPath.join('/')
+
+  if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
+    router.push(nextPathPath)
+  } else {
+    router.push('/document/'+platform)
+  }
+}
+
+const options = [
+  {
+    label: '平台',
+    options: [
+      {
+        value: 'android',
+        label: 'Android',
+      },
+      {
+        value: 'ios',
+        label: 'IOS',
+      },
+      {
+        value: 'web',
+        label: 'Web',
+      },
+      {
+        value: 'windows',
+        label: 'Windows',
+      },
+    ],
+  },
+  {
+    label: '框架',
+    options: [
+      {
+        value: 'react-native',
+        label: 'React Native',
+      },
+      {
+        value: 'flutter',
+        label: 'Flutter',
+      },
+      {
+        value: 'unity',
+        label: 'Unity',
+      },
+      {
+        value: 'applet',
+        label: '小程序',
+      },
+    ],
+  },
+  {
+    label: '服务端',
+    options: [
+      {
+        value: 'server-side',
+        label: 'Rest Api',
+      }
+    ],
+  },
+]
+</script>
+
+
+<template>
+  <el-select v-model="platform" @change="onChange" placeholder="请选择">
+    <el-option-group
+      v-for="group in options"
+      :key="group.label"
+      :label="group.label"
+    >
+      <el-option
+        v-for="item in group.options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      />
+    </el-option-group>
+  </el-select>
+</template>
+
+<style>
+
+</style>
