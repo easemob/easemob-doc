@@ -73,6 +73,10 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 604    |       EMErrorGroupMembersFull       | 群组已满：群组已经达到人数上限。                             |
 | 605    |        EMErrorGroupNotExist         | 群组不存在：对不存在的群组进行操作。                         |
 | 606    |   EMErrorGroupSharedFileInvalidId   | 共享文件 ID 为空：共享文件 ID 为空。                         |
+| 609    |   EMErrorGroupMemberAttributesReachLimit   | 群组成员自定义属性个数到达上限。                         |
+| 610    |   EMErrorGroupMemberAttributesUpdateFailed   | 设置群成员自定义属性失败。                        |
+| 611    |   EMErrorGroupMemberAttributesKeyReachLimit   | 设置的群成员自定义属性 key 长度（不能超过 16 字节）超限。                        |
+| 612    |   EMErrorGroupMemberAttributesValueReachLimit   | 设置群成员自定义属性 value 长度（不能超过 512 字节）超限。  |
 | 700    |      EMErrorChatroomInvalidId       | 聊天室 ID 异常：聊天室相关 API 传入的聊天室 ID 为空。        |
 | 701    |    EMErrorChatroomAlreadyJoined     | 已在该聊天室中：调用加入聊天室的 API 添加的用户已经在该聊天室中。 |
 | 702    |      EMErrorChatroomNotJoined       | 未加入该聊天室：用户在未加入的聊天室中发送消息或进行聊天室操作时提示该错误。 |
