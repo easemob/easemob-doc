@@ -1040,6 +1040,8 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 用户删除其设置的聊天室自定义属性。该方法只能删除当前用户设置的聊天室自定义属性，不能删除其他成员设置的自定义属性。
 
+该方法每次最多可删除 10 个自定义属性。
+
 #### HTTP 请求
 
 ```http
@@ -1062,7 +1064,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 
 | 参数          | 类型   | 是否必需 | 描述                                                 |
 | :------------ | :----- | :------- | :--------------------------------------------------- |
-| `keys`        | Array | 否     | 聊天室自定义属性名称列表。              |
+| `keys`        | Array | 否     | 聊天室自定义属性名称列表。每次最多可传 10 个自定义属性名称。              |
 
 #### HTTP 响应
 
@@ -1179,6 +1181,8 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 用户强制删除聊天室的自定义属性信息，即该方法除了会删除当前用户设置的聊天室自定义属性，还可以删除其他用户设置的自定义属性。
 
+该方法每次最多可删除 10 个自定义属性。
+
 #### HTTP 请求
 
 ```http
@@ -1201,7 +1205,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 
 | 参数          | 类型   | 是否必需 | 描述                                                 |
 | :------------ | :----- | :------- | :--------------------------------------------------- |
-| `keys`        | Array | 否     | 聊天室自定义属性的名称列表。              |
+| `keys`        | Array | 否     | 聊天室自定义属性的名称列表。每次最多可传 10 个自定义属性名称。              |
 
 #### HTTP 响应
 
