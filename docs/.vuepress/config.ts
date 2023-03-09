@@ -1,8 +1,8 @@
 import { defineUserConfig, UserConfig } from "vuepress";
 import { viteBundler } from '@vuepress/bundler-vite'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+// import AutoImport from 'unplugin-auto-import/vite'
+// import Components from 'unplugin-vue-components/vite'
+// import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { containerPlugin } from './markdown/plugin'
 import theme from "./theme.js";
@@ -47,6 +47,14 @@ export default defineUserConfig({
       apiKey: 'df9e938d06f6531ce8dd8de71f907f0d',
       indexName: 'im-beta-easemob',
       placeholder: '搜索文档',
+      translations: {
+        button: {
+          buttonText: '搜索'
+        }
+      },
+      // transformItems(items){
+      //   return items.map(items=>({ ...items, content: 'xxxxx'}))
+      // }
     }),
   ],
   onPrepared: async (app) => {
