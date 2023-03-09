@@ -28,7 +28,7 @@ jobs:
           node-version: "14"
           # cache: "pnpm"
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install
 
       # 打包
       - name: Build
