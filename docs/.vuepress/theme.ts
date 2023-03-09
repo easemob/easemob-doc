@@ -14,6 +14,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   repo: "easemob/easemob-doc",
   docsDir: "docs",
   darkmode: 'disable',
+  contributors: false,
   // navbar
   navbar: zhNavbar,
   // sidebar
