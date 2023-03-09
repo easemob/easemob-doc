@@ -16,6 +16,9 @@ env:
 jobs:
   build: # 任务的job_id，具体名称自定义，这里build代表打包
     runs-on: ubuntu-latest # runs-on字段指定运行所需要的虚拟机环境。注意：这个是必填字段
+    defaults:
+      run:
+        working-directory: /
     steps:
       - uses: pnpm/action-setup@v2
         with:
@@ -23,7 +26,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "14"
-          cache: "pnpm"
+          # cache: "pnpm"
+
       - run: pnpm install --frozen-lockfile
 
       # 打包
