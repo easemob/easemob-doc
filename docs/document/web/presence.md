@@ -100,14 +100,14 @@ conn.unsubscribePresence(option).then(res => {console.log(res)})
 
 ### 查询被订阅用户列表
 
-为方便用户管理订阅关系，SDK 提供 `getSubscribedPresenceList` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
+为方便用户管理订阅关系，SDK 提供 `getSubscribedPresencelist` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
 ```javascript
 let option = {
   pageNum: 0,
   pageSize: 50
 }
-conn.getSubscribedPresenceList(option).then(res => {console.log(res)})
+conn.getSubscribedPresencelist(option).then(res => {console.log(res)})
 ```
 
 ### 获取用户的当前在线状态
