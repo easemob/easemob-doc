@@ -49,7 +49,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Install dependencies
+      - name: Build
         run: pnpm docs:build
 
       # 上传打包资源

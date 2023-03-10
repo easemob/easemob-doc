@@ -6,7 +6,6 @@ import 'element-plus/dist/index.css'
 
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
-    console.log(router)
     app.component('Container', Container)
     app.use(ElementPlus)
     app.component('Toc', Toc)
