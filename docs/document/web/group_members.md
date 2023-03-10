@@ -115,7 +115,7 @@ conn.removeGroupMember(option).then(res => console.log(res))
 
 你可以使用 `setGroupMemberAttributes` 方法设置群成员自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置空字符串即删除该自定义属性。
 
-设置后，群内其他成员会收到 `onGroupEvent` 回调，事件为 `memberAttributesUpdate`。该成员的其他设备会收到 `onMultiDeviceEvent` 回调，事件为`memberAttributesUpdate`。
+设置后，群内其他成员会收到 `onGroupEvent` 回调，事件为 `memberAttributesUpdate`。该成员的其他设备会收到 `onMultiDeviceEvent` 回调，事件为 `memberAttributesUpdate`。
 
 示例代码如下：
 
