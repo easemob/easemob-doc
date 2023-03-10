@@ -9,6 +9,7 @@
 环信即时通讯 IM Android SDK 提供 `EMGroupManager` 类和 `EMGroup` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 加入、退出群组
+- 管理群成员的自定义属性
 - 管理群主及群管理员
 - 管理群组白名单
 - 管理群组黑名单
@@ -155,6 +156,81 @@ EMClient.getInstance().groupManager().leaveGroup(groupId);
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncRemoveUserFromGroup(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
+```
+
+### 管理群成员的自定义属性
+
+群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
+
+- 每个群成员的自定义属性总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节，否则会报错。
+
+- 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
+
+#### 设置群成员自定义属性
+
+你可以调用 `EMGroupManager#asyncSetGroupMemberAttributes` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。
+
+设置后，群内其他成员会收到 `com.hyphenate.EMGroupChangeListener#onGroupMemberAttributeChanged` 事件。
+
+示例代码如下：
+
+```java 
+    Map<String,String> attrMap=new HashMap();
+    attrMap.put("key","value");
+
+    EMClient.getInstance().groupManager().asyncSetGroupMemberAttributes(groupId, userId, attrMap, new EMCallBack() {
+        @Override
+        public void onSuccess() {
+            
+        }
+
+        @Override
+        public void onError(int code, String error) {
+
+        }
+    });
+```
+#### 获取单个群成员的所有自定义属性
+
+你可以调用 `EMGroupManager#asyncFetchGroupMemberAllAttributes` 方法获取单个群成员的所有自定义属性。
+
+示例代码如下：
+
+```java 
+    EMClient.getInstance().groupManager().asyncFetchGroupMemberAllAttributes(groupId, userId, new EMValueCallBack<Map<String, Map<String, String>>>() {
+        @Override
+        public void onSuccess(Map<String, Map<String, String>> value) {
+            
+        }
+
+        @Override
+        public void onError(int error, String errorMsg) {
+
+        }
+    });
+```
+#### 获取多个群成员的某些自定义属性
+
+你可调用 `EMGroupManager#asyncFetchGroupMembersAttributes` 方法获取多个群成员的某些自定义属性。
+
+:::notice
+每次最多可获取 10 个群成员的自定义属性。
+:::
+
+示例代码如下：
+```java 
+   // keyList：要获取自定义属性的 key 的数组。若 keyList 为空数组或不传则获取这些成员的所有自定义属性。
+    EMClient.getInstance().groupManager().asyncFetchGroupMembersAttributes(groupId, userIds, keyList, new EMValueCallBack<Map<String, Map<String, String>>>() {
+        @Override
+        public void onSuccess(Map<String, Map<String, String>> value) {
+            
+        }
+
+        @Override
+        public void onError(int error, String errorMsg) {
+
+        }
+    });
 ```
 
 ### 管理群主和群管理员
