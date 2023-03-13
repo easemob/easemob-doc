@@ -610,7 +610,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ### 获取群组详情
 
-可以获取一个或多个群组的详情。当获取多个群组的详情时，返回所有存在的群组的详情；对于不存在的群组，返回 “group id doesn’t exist”。
+可以获取一个或多个群组的详情，最多可获取 100 个群组的详情。当获取多个群组的详情时，返回所有存在的群组的详情；对于不存在的群组，返回 “group id doesn’t exist”。
 
 #### HTTP 请求
 
@@ -620,7 +620,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `group_id`   | String | 是    | 要获取详情的群组 ID。最多可传 100 个群组 ID，以逗号分隔。 |
+
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
