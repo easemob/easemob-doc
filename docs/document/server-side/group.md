@@ -405,7 +405,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 | `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
 
 :::tip
-若请求中均未设置 `limit` 和 `cursor`，环信服务器返回群组列表的第一页中前 10 个群组。
+若请求中均未设置 `limit` 和 `cursor` 参数，环信服务器按群组创建时间倒序返回前 10 个群组。
 :::
 
 ##### 请求 header
@@ -512,6 +512,10 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatgroups?page
 | `pagesize` | String | 否     | 每页获取的群组数量。该参数仅适用于分页获取方法。             |
 | `pagenum`  | String | 否     | 当前页码。该参数仅适用于分页获取方法。                       |
 
+:::tip
+若请求中均未设置 `pagesize` 和 `pagenum` 参数，环信服务器按用户加入群组的时间倒序返回前 500 个群组。
+:::
+
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
@@ -539,44 +543,10 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatgroups?page
 ##### 请求示例
 
 ```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> '' 'http://XXXX/XXXX/XXXX/users/user1/joined_chatgroups'
-```
-
-分页获取示例：
-
-```shell
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/users/user1/joined_chatgroups?pagesize=1&pagenum=100'
 ```
 
 ##### 响应示例
-
-```json
-{
-  "action": "get",
-  "application": "8bXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/users/user1/joined_chatgroups",
-  "entities": [],
-  "data": [
-    {
-      "groupid": "66XXXX85",
-      "groupname": "testgroup1"
-    },
-    {
-      "groupid": "66016467025921",
-      "groupname": "testgroup2"
-    },
-  ],
-  "timestamp": 1542359565885,
-  "duration": 1,
-  "organization": "XXXX",
-  "applicationName": "testapp",
-  "count": 2
-}
-```
-
-分页获取响应示例：
 
 ```json
 {
@@ -610,7 +580,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ### 获取群组详情
 
-可以获取一个或多个群组的详情。当获取多个群组的详情时，返回所有存在的群组的详情；对于不存在的群组，返回 “group id doesn’t exist”。
+可以获取一个或多个群组的详情，最多可获取 100 个群组的详情。当获取多个群组的详情时，返回所有存在的群组的详情；对于不存在的群组，返回 “group id doesn’t exist”。
 
 #### HTTP 请求
 
@@ -620,7 +590,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `group_id`   | String | 是    | 要获取详情的群组 ID。最多可传 100 个群组 ID，以逗号分隔。 |
+
+其他参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 

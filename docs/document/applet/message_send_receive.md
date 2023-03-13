@@ -520,6 +520,26 @@ function sendPrivateFile(res) {
 }
 ```
 
+### 发送位置消息
+
+当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
+
+```javascript
+const sendLocMsg = () => {
+  let option = {
+    chatType: "singleChat",
+    type: "loc",
+    to: "username",
+    addr: "四通桥东",
+    buildingName: "数码大厦",
+    lat: 40, // 纬度
+    lng: 116, // 经度
+  };
+  let msg = WebIM.message.create(option);
+  conn.send(msg);
+};
+```
+
 ### 发送透传消息
 
 透传消息是通知指定用户采取特定操作的命令消息。接收方自己处理透传消息。
