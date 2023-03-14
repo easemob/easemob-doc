@@ -1090,6 +1090,8 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | :---------- | :----- | :------- | :-------------- |
 | `file_uuid` | String | 是       | 服务器为文件生成的 UUID。 |
 
+其他参数及描述详见 [公共参数](#公共参数)。
+
 #### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述     |
@@ -1234,7 +1236,7 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
 
 | 参数  | 类型   | 描述          |
 | :---- | :----- | :----------------- |
-| `url` | String | 历史消息记录的下载地址。该 URL 由历史消息记录的存储地址、到期 Unix 时间戳（`Expires`，单位为秒）、第三方云存储访问密钥（`OSSAccessKeyId`）和第三方云存储验证签名（`Signature`）组成。URL 仅在一定时间内有效，请及时通过 URL 下载聊天记录文件，URL 过期后会下载失败，需要重新调用该接口获取新的 URL。 |
+| `data.url` | String | 历史消息记录的下载地址。该 URL 由历史消息记录的存储地址、到期 Unix 时间戳（`Expires`，单位为秒）、第三方云存储访问密钥（`OSSAccessKeyId`）和第三方云存储验证签名（`Signature`）组成。URL 仅在一定时间内有效，请及时通过 URL 下载聊天记录文件，URL 过期后会下载失败，需要重新调用该接口获取新的 URL。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -1341,7 +1343,21 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 示例
 
 ```json
-"bodies": [    {       "file_length":128827,       "filename":"test1.jpg",        "secret":"DRGM8OZrEeO1vaXXXXXXXXHBeKlIhDp0GCnFu54xOF3M6KLr",        "size":{"height":1325,"width":746},       "type":"img",       "url":"https://XXXX/XXXX/chatdemoui/chatfiles/65e54a4a-XXXX-XXXX-b821-ebde7b50cc4b",    }]
+{
+    "bodies": [
+        {
+            "file_length": 128827,
+            "filename": "test1.jpg",
+            "secret": "DRGM8OZrEeO1vaXXXXXXXXHBeKlIhDp0GCnFu54xOF3M6KLr",
+            "size": {
+                "height": 1325,
+                "width": 746
+            },
+            "type": "img",
+            "url": "https://XXXX/XXXX/chatdemoui/chatfiles/65e54a4a-XXXX-XXXX-b821-ebde7b50cc4b"
+        }
+    ]
+}
 ```
 
 #### 位置消息
