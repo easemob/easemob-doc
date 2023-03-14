@@ -506,7 +506,7 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 
 | 参数                  | 类型  | 描述   | 是否必需       |
 | :-------------------- | :------- | :----- | :----------- |
-| `translationLanguage` | String     | 目标语言代码。若设置为空字符串，表示无需翻译，仅发送消息原文。 | 是 |
+| `translationLanguage` | String     | 用户接收的推送通知的首选语言的代码。如果设置为空字符串，表示无需翻译，服务器直接推送原语言的通知。 | 是 |
 
 ### HTTP 响应
 

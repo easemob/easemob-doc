@@ -2883,6 +2883,8 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json'
 
 环信即时通讯 IM 提供多个接口实现子区管理，包括子区的创建、获取、修改和删除等。
 
+单个 app 下的子区总数默认为 10 万，如需调整请联系商务。
+
 ### 获取 app 中的子区
 
 分页获取应用下的子区列表。
@@ -2901,7 +2903,7 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  |每次期望返回的子区数量。该参数仅在分页获取时为必需。   |
+| `limit`  | Int | 否  |每次期望返回的子区数量，取值范围为 [1,50]。该参数仅在分页获取时为必需。   |
 | `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
 | `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按子区创建时间的正序；<br/> - （默认）`desc`：按子区创建时间的倒序。 |
 
@@ -2951,7 +2953,7 @@ curl -X GET http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken
     ],
     "organization": "XXXX",
     "properties": {
-        "cursor": "ZGXXXXTE"
+     "cursor": "ZGXXXXTE"
     },
     "timestamp": 1650869750247,
     "uri": "http://XXXX/XXXX/XXXX/thread"
@@ -2976,7 +2978,7 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  | 每次期望返回的子区数量。该参数仅在分页获取时为必需。   |
+| `limit`  | Int | 否  | 每次期望返回的子区数量，取值范围为 [1,50]。该参数仅在分页获取时为必需。   |
 | `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
 | `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按用户加入子区的时间的正序；<br/> - （默认）`desc`：按用户加入子区的时间的倒序。 |
 
@@ -2984,7 +2986,7 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -3035,7 +3037,7 @@ curl -X GET http://XXXX/XXXX/XXXX/threads/user/test4 -H 'Authorization: Bearer <
     ],
     "organization": "XXXX",
     "properties": {
-        "cursor": "ZGXXXXzg"
+    "cursor": "ZGXXXXzg"
     },
     "timestamp": 1650869972109,
     "uri": "http://XXXX/XXXX/XXXX/threads/user/test4"
@@ -3060,7 +3062,7 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  |每次期望返回的子区数量。该参数仅在分页获取时为必需。   |
+| `limit`  | Int | 否  |每次期望返回的子区数量，取值范围为 [1,50]。该参数仅在分页获取时为必需。   |
 | `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
 | `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按用户加入子区的时间的正序；<br/> - （默认）`desc`：按用户加入子区的时间的倒序。 |
 
@@ -3356,7 +3358,7 @@ GET https://{host}/{org_name}/{app_name}/thread/{thread_id}/users?limit={N}&curs
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  |每次期望返回的子区成员数量。该参数仅在分页获取时为必需。   |
+| `limit`  | Int | 否  |每次期望返回的子区成员数量，取值范围为 [1,50]。该参数仅在分页获取时为必需。   |
 | `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
 
 ##### 请求 header
