@@ -38,13 +38,13 @@
 | 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
 | 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
 | 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
-| 设置离线推送         | PUT  | /{org}/{app}/users/{username}/notification/{chattype}/{key} | 100 次/秒/App Key          |
-| 查询离线推送设置     | GET  | /{org}/{app}/users/{username}/notification/{type}/{key} | 100 次/秒/App Key          |
-| 设置推送翻译语言     | PUT  | /{org}/{app}/users/{username}/notification/language | 100 次/秒/App Key          |
-| 查询离线推送消息的翻译语言 | PUT  | /{org}/{app}/users/{username}/notification/language | 100 次/秒/App Key  |
-| 创建离线推送模板          | POST  | /{org}/{app}/notification/template | 10 次/秒/App Key  |
-| 查询离线推送模板          | GET  | /{org}/{app}/notification/template/{name} | 10 次/秒/App Key  |
-| 删除离线推送模板          | DELETE  | /{org}/{app}/notification/template/{name} | 10 次/秒/App Key  |
+| 设置离线推送         | PUT  | /{org}/{app_name}/users/{username}/notification/{chattype}/{key} | 100 次/秒/App Key          |
+| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{username}/notification/{type}/{key} | 100 次/秒/App Key          |
+| 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{username}/notification/language | 100 次/秒/App Key          |
+| 获取推送通知的首选语言 | PUT  | /{org_name}/{app_name}/users/{username}/notification/language | 100 次/秒/App Key  |
+| 创建离线推送模板          | POST  | /{org_name}/{app_name}/notification/template | 10 次/秒/App Key  |
+| 查询离线推送模板          | GET  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
+| 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
 
 ## 消息管理
 
