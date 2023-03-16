@@ -485,8 +485,8 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | 字段                 | 类型    | 描述                                                         |
 | :------------------- | :------ | :----------------------------------------------------------- |
 | `data.id`                 | String  | 聊天室 ID，聊天室唯一标识符，由环信即时通讯 IM 服务器生成。  |
-| `data.name`               | String  | 聊天室名称，最大长度为 128 字符。                |
-| `data.description`        | String  | 聊天室描述，最大长度为 512 字符。                |
+| `data.name`               | String  | 聊天室名称。                |
+| `data.description`        | String  | 聊天室描述。                |
 | `data.membersonly`        | Bool | 加入聊天室是否需要群主或者群管理员审批：<br/> - `true`：是。<br/> - `false`：否。 |
 | `data.allowinvites`       | Bool | 是否允许聊天室成员邀请其他用户加入该聊天室：<br/> - `true`：允许聊天室成员邀请他人加入该聊天室。<br/> - `false`：仅聊天室管理员可邀请他人加入该聊天室。 |
 | `data.maxusers`           | Int    | 聊天室成员数上限，创建聊天室时设置。             |
@@ -644,8 +644,8 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 | 参数          | 类型   | 是否必需 | 描述                                                 |
 | :------------ | :----- | :------- | :--------------------------------------------------- |
-| `name`        | String | 是     | 聊天室名称，设置的值不能包含斜杠(“/”)。              |
-| `description` | String | 是     | 聊天室描述，设置的值不能包含斜杠(“/”)。              |
+| `name`        | String | 是     | 聊天室名称，不能超过 128 个字符，不能包含斜杠(“/”)。              |
+| `description` | String | 是     | 聊天室描述，不能超过 512 个字符，不能包含斜杠(“/”)。              |
 | `maxusers`    | Int | 是     | 聊天室最大成员数（包括聊天室所有者），默认可设置的最大人数为 10,000，如需调整请联系商务。 |
 
 #### HTTP 响应

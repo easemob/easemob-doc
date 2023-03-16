@@ -189,7 +189,7 @@
 | 设置用户在线状态信息  |  POST     | /{org_name}/{app_name}/users/{uid}/presence/{resource}/{status} | 50 次/秒/App Key  |
 | 批量订阅在线状态    |  POST      | /{org_name}/{app_name}/users/{uid}/presence/{expiry}         | 50 次/秒/App Key   |
 | 批量获取在线状态信息    |  POST   | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key |
-| 取消订阅     |  DELETE           | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key    |
+|  取消订阅多个用户的在线状态     |  DELETE           | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key    |
 | 查询订阅列表    |   GET       | /{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&pageSize=100 | 50 次/秒/App Key  |
 
 ### 消息表情回复 Reaction
