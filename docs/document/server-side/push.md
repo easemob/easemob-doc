@@ -426,14 +426,14 @@ curl -L -X PUT '{url}/{org_name}/{app_name}/users/{username}/notification/user/{
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org}/{app}/users/{username}/notification/{type}/{key}
+GET https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 ```
 
 #### 路径参数
 
 | 参数           | 类型  | 描述     | 是否必需                                                       |
 | :------------ | :-------| :------ | :----------------------------------------------------------- |
-| `type` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。  | 是 |
+| `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。  | 是 |
 | `key`         | String     | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。 | 是  |
 
 其他参数及说明详见 [公共参数](#公共参数)。

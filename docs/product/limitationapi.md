@@ -1,4 +1,4 @@
-# Rest API 调用频率限制
+# Restful API 调用频率限制
 
 <Toc />
 
@@ -8,12 +8,15 @@
 
 ##  用户帐号管理
 
-| Rest API 接口 |方法  | 接口 URL|
+| Restful API 接口 |方法  | 接口 URL|
 | :------------ | :--- | :--------------------------- |
 | 注册单个用户  |  POST  | /{org_name}/{app_name}/users        |
 | 批量注册用户 |  POST   | /{org_name}/{app_name}/users       |
+| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} |
+| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 
+| 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} |
 
-以上两个接口一共最高调用频率（默认值） 100 次/秒/App Key。
+以上五个接口的总调用频率（默认值）为 100 次/秒/App Key。
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :------------------- | :----- | :----------------------------------------------------------- | :------------------------- |
@@ -35,11 +38,8 @@
 
 | RESTful API 接口        | 方法 | 接口 URL           | 接口最高调用频率（默认值） |
 | :------------------- | :--- | :------------------- | :------------------- |
-| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
-| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
-| 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
 | 设置离线推送         | PUT  | /{org}/{app_name}/users/{username}/notification/{chattype}/{key} | 100 次/秒/App Key          |
-| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{username}/notification/{type}/{key} | 100 次/秒/App Key          |
+| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{username}/notification/{chattype}/{key} | 100 次/秒/App Key          |
 | 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{username}/notification/language | 100 次/秒/App Key          |
 | 获取推送通知的首选语言 | PUT  | /{org_name}/{app_name}/users/{username}/notification/language | 100 次/秒/App Key  |
 | 创建离线推送模板          | POST  | /{org_name}/{app_name}/notification/template | 10 次/秒/App Key  |
