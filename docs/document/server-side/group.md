@@ -90,7 +90,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | `groupname`    | String  | 是     | 群组名称，最大长度为 128 字符。如果有空格，则使用 “+” 代替。         |
 | `description`         | String  | 是     | 群组描述，最大长度为 512 字符。如果有空格，则使用 “+” 代替。     |
 | `public`       | Bool  | 是     | 是否是公开群。公开群可以被搜索到，用户可以申请加入公开群；私有群无法被搜索到，因此需要群主或群管理员添加，用户才可以加入。<br/> - `true`：公开群；<br/> - `false`：私有群。                  |
-| `maxusers`     | Int | 否   | 群组最大成员数（包括群主），值为数值类型，默认值 200。不同套餐支持的人数上限不同，详见 [环信即时通讯云控制台](https://www.easemob.com/pricing/im)。 |
+| `maxusers`     | Int | 否   | 群组最大成员数（包括群主），值为数值类型，默认值 200。不同套餐支持的人数上限不同，详见 [产品价格](https://www.easemob.com/pricing/im)。 |
 | `allowinvites` | Bool  | 是     | 是否允许群成员邀请用户加入群组：<br/> - `true`：群成员可拉人入群;<br/> - （默认）`false`：只有群主或者管理员才可以拉人入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
 | `membersonly` | Bool  | 否   | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：需要； <br/> - （默认）`false`：不需要，用户直接进群。 |
 | `invite_need_confirm` | Bool | 否 | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）`true`：是；<br/> - `false`：否。         |
@@ -801,7 +801,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ### 修改群组公告
 
-修改指定群组 ID 的群组公告。群组公不能超过 512 个字符。
+修改指定群组 ID 的群组公告。群组公告不能超过 512 个字符。
 
 #### HTTP 请求
 
@@ -3104,8 +3104,8 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  |每次期望返回的子区数量，取值范围为 [1,50]。该参数仅在分页获取时为必需。   |
-| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+| `limit`  | Int | 否  |每次期望返回的子区数量，取值范围为 [1,50]。|
+| `cursor` | String | 否   | 数据查询的起始位置。 |
 | `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按子区创建时间的正序；<br/> - （默认）`desc`：按子区创建时间的倒序。 |
 
 
@@ -3179,8 +3179,8 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  | 每次期望返回的子区数量，取值范围为 [1,50]。该参数仅在分页获取时为必需。   |
-| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+| `limit`  | Int | 否  | 每次期望返回的子区数量，取值范围为 [1,50]。 |
+| `cursor` | String | 否   | 数据查询的起始位置。 |
 | `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按用户加入子区的时间的正序；<br/> - （默认）`desc`：按用户加入子区的时间的倒序。 |
 
 ##### 请求 header
