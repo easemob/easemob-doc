@@ -19,7 +19,7 @@
 | `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
 | `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
-| `username` | String | 是 | 环信用户 ID。  |
+| `username` | String | 是 | 环信用户 ID。 |
 
 ### 响应参数
 
@@ -32,9 +32,6 @@
 | `timestamp`| Long  | HTTP 响应的 Unix 时间戳，单位为毫秒。                              |
 | `applicationName`| String  | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。                           |
 | `duration` | Int | 从发送 HTTP 请求到响应的时长，单位为毫秒。                              |
-| `data` | String | 返回数据详情。                              |
-| `username` | String | 环信用户 ID。                                 |
-| `uuid`   | String   | 用户的 UUID，即系统为用户生成唯一标识字段，开发者无需关注。      |
 
 ## 认证方式
 
@@ -62,8 +59,8 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数            | 类型   | 描述  | 是否必需                          |
 | :------------ | :----- | :------ | :---------------- |
-| `Content-Type`   | String | 内容类型：`application/json`    | 是  |
-| `Accept`   | String | 内容类型：`application/json`    | 是  |
+| `Content-Type`   | String | 内容类型。请填 `application/json`。    | 是  |
+| `Accept`   | String | 内容类型。请填 `application/json`。   | 是  |
 | `Authorization` | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。  | 是 |
 
 #### 请求 body
@@ -80,13 +77,16 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
-| 参数    | 类型  | 描述                                                        |
-| :-------- | :-----| :----------------------------------------------------------- |
-| `type`    | String  | 用户类型，即 “user”。              |
-| `created`   | Long   | 用户创建时间戳。                       |
-| `modified`   | Long   | 用户信息修改时戳。                    |
-| `activated`   | Bool    | 用户是否为正常状态：<br/> - `true`：正常状态。<br/> - `false`：封禁状态。如要使用已被封禁的用户账户，你需要调用 [解禁接口](account_system.html#账号解禁) 解除封禁，才能正常登录。 |
-|  `nickname`     | String  | 收到离线推送通知时显示的昵称。     |
+| 参数                | 类型   | 描述                                           |
+| :------------------ | :----- | :--------------------------------------------- |
+| `entities`           | JSON   | 用户在推送通知中显示的昵称以及用户相关信息。         |
+| `entities.uuid`      | String | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。              |
+| `entities.type`      | String | 用户类型，即 `user`。     |
+| `entities.created`   | Number | 用户注册的 Unix 时间戳，单位为毫秒。        |
+| `entities.modified`  | Number | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。  |
+| `entities.username`  | String | 用户 ID。用户登录的唯一账号。                       |
+| `entities.activated` | Boolean   | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](./agora_chat_restful_registration?platform=RESTful#解禁用户)解除封禁。</li></ul> |
+| `entities.nickname` | String | 推送通知中显示的昵称。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -144,7 +144,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数            | 类型   | 描述  | 是否必需                                                         |
 | :------------ | :----- | :------ | :---------------- |
-| `Content-Type`   | String | 内容类型：`application/json`    | 是  |
+| `Content-Type`   | String | 内容类型。请填 `application/json`。    | 是  |
 | `Authorization` | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。| 是 |
 
 #### 请求 body
@@ -153,7 +153,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数      | 类型   | 描述  | 是否必需          |
 | :------------ | :----- | :------ | :---------------- |
-| `notification_display_style`   | Int | 离线推送通知的展示方式：<br/> - （默认） 0：推送标题为“您有一条新消息”，推送内容为“请点击查看”；<br/> - `1`：推送标题为“您有一条新消息”，推送内容为发送人昵称和离线消息的内容。   | 是  |
+| `notification_display_style`   | Int | 离线推送通知的展示方式：<ul><li>（默认）`0`：推送标题为“您有一条新消息”，推送内容为“请点击查看”；</li><li>`1`：推送标题为“您有一条新消息”，推送内容为发送人昵称和离线消息的内容。</li></ul>  | 是  |
 
 ### HTTP 响应
 
@@ -161,16 +161,19 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数   | 类型   | 描述                 |
 | :--------| :-------- | :-------------------- |
-| `type`   | String  | 用户类型，即 “user”。                                              |
-| `created`   | Long  | 用户创建时间戳。                       |
-| `modified`   | Long  | 用户信息修改时间戳。              |
-| `activated`   | Bool   | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用 [解禁接口](account_system.html#账号解禁) 解除封禁，才能正常登录。 |
-| `notification_no_disturbing` | Bool   | 是否设置为免打扰模式：<br/> - `true`：是；<br/> - `false`：否。    |
-| `notification_no_disturbing_start`  | Int    | 免打扰时间段的开始时间。            |
-| `notification_no_disturbing_end`  | Int    | 免打扰时间段的结束时间。         |
-| `notification_display_style`  | Int    | 离线推送通知的展示方式。 |
-| `nickname`   | String    | 离线推送通知收到时显示的昵称。 |
-| `notifier_name` | String    | 推送证书名称。 |
+| `entities`           | JSON   | 用户的离线推送通知的展示方式以及相关信息。         |
+| `entities.uuid`      | String | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。              |
+| `entities.type`      | String | 用户类型，即 `user`。     |
+| `entities.created`   | Long | 用户创建的 Unix 时间戳，单位为毫秒。        |
+| `entities.modified`  | Long | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。  |
+| `entities.username`  | String | 用户 ID。用户登录的唯一账号。                       |
+| `entities.activated` | Boolean   | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](./agora_chat_restful_registration?platform=RESTful#解禁用户)解除封禁。</li></ul> |
+| `entities.notification_no_disturbing` | Boolean   | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>    |
+| `entities.notification_no_disturbing_start`  | Int    | 免打扰时间段的开始时间。            |
+| `entities.notification_no_disturbing_end`  | Int    | 免打扰时间段的结束时间。         |
+| `entities.notification_display_style`  | Int    | 离线推送通知的展示方式。 |
+| `entities.nickname`   | String    | 离线推送通知收到时显示的昵称。 |
+| `entities.notifier_name` | String    | 推送证书名称。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -235,7 +238,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数            | 类型   | 描述 | 是否必需                                                   |
 | :------------ | :----- | :------ | :---------------- |
-| `Content-Type`  | String | 内容类型：`application/json`     | 是                                 |
+| `Content-Type`  | String | 内容类型。请填 `application/json`。    | 是                                 |
 | `Authorization` | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。| 是 |
 
 #### 请求 body
@@ -244,7 +247,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数                           | 类型 | 描述   | 是否必需<div style="width: 80px;"></div>              |
 | :-------- | :------------ | :------------ | :------------ |
-| `notification_no_disturbing`      | Bool  |  是否设置为免打扰模式：<br/> - `true`：是；<br/> - `false`：否。 | 否 |
+| `notification_no_disturbing`      | Boolean  |  是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul> | 否 |
 | `notification_no_disturbing_start` |  String | 免打扰时间段的开始时间，精确到小时，取值范围为 [0,23]。例如 “8” 表示每日 8:00 开启免打扰模式。| 否|
 | `notification_no_disturbing_end`  | String | 免打扰时间段的结束时间，精确到小时，取值范围为 [0,23]。例如 “18” 表示每日 18:00 关闭免打扰模式。| 否|
 
@@ -261,18 +264,21 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
-| 参数       | 类型           | 描述           |
-| :------------| :------------- | :------------------- |
-| `type`     | String | 用户类型，即 “user”。            |
-| `created`   | Long   | 创建用户的时间戳。          |
-| `modified`    | Long    | 用户信息修改时间戳。             |
-| `activated`   | Bool   | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用 [解禁接口](account_system.html#账号解禁) 解除封禁，才能正常登录。 |
-| `notification_no_disturbing`   | Bool     | 是否设置为免打扰模式：<br/> - `true`：是；<br/> - `false`：否。      |
-| `notification_no_disturbing_start`  | String    | 免打扰时间段的开始时间。                           |
-| `notification_no_disturbing_end`   | String   | 免打扰时间段的结束时间。  |
-| `notification_display_style`  | Int    | 离线推送通知的展示方式。 |
-| `nickname`    | String  | 离线推送通知收到时显示的昵称。 |
-| `notifier_name` | String    | 推送证书名称。 |][========================]
+| 参数   | 类型   | 描述                 |
+| :--------| :-------- | :-------------------- |
+| `entities`           | JSON   | 用户的免打扰模式的相关信息。         |
+| `entities.uuid`      | String | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。              |
+| `entities.type`      | String | 用户类型，即 `user`。      |
+| `entities.created`   | Long | 用户创建的 Unix 时间戳，单位为毫秒。        |
+| `entities.modified`  | Long | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。  |
+| `entities.username`  | String | 用户 ID。用户登录的唯一账号。                       |
+| `entities.activated` | Boolean   | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](./agora_chat_restful_registration?platform=RESTful#解禁用户)解除封禁。</li></ul> |
+| `entities.notification_no_disturbing` | Boolean   | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>    |
+| `entities.notification_no_disturbing_start`  | Int    | 免打扰时间段的开始时间。            |
+| `entities.notification_no_disturbing_end`  | Int    | 免打扰时间段的结束时间。         |
+| `entities.notification_display_style`  | Int    | 离线推送通知的展示方式。 |
+| `entities.nickname`   | String    | 离线推送通知收到时显示的昵称。 |
+| `entities.notifier_name` | String    | 推送证书名称。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -352,7 +358,7 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 
 | 参数      | 类型   | 描述 | 是否必需       |
 | :------------ | :----- | :------ | :---------------- |
-| `Content-Type` | String | 内容类型：`application/json`   | 是  |
+| `Content-Type` | String | 内容类型。请填 `application/json`。   | 是  |
 | `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是 |
 
 #### 请求 body
@@ -371,9 +377,10 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 
 | 参数      | 类型     | 描述                  |
 | :---------| :---------- | :------------------- |
-| `type`          | String        | 离线推送通知方式。|
-| `ignoreInterval`    | Int   | 离线推送免打扰时间段。 |
-| `ignoreDuration` | Long | 离线推送免打扰时长。 |
+| `data`           | JSON | 离线推送的设置。   |
+| `data.type`           | String | 离线推送通知方式。   |
+| `data.ignoreInterval` | String | 离线推送免打扰时间段。 |
+| `data.ignoreDuration` | Long   | 离线推送免打扰时长。 |
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
@@ -419,14 +426,14 @@ curl -L -X PUT '{url}/{org_name}/{app_name}/users/{username}/notification/user/{
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org}/{app}/users/{username}/notification/{type}/{key}
+GET https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 ```
 
 #### 路径参数
 
 | 参数           | 类型  | 描述     | 是否必需                                                       |
 | :------------ | :-------| :------ | :----------------------------------------------------------- |
-| `type` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。  | 是 |
+| `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。  | 是 |
 | `key`         | String     | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。 | 是  |
 
 其他参数及说明详见 [公共参数](#公共参数)。
@@ -444,11 +451,12 @@ GET https://{host}/{org}/{app}/users/{username}/notification/{type}/{key}
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
-| 参数   | 类型     | 描述             |
-| :--------| :---------- | :-------- |
-| `type`            | String          | 离线推送通知方式。|
-| `ignoreInterval`   | Int    | 离线推送免打扰时间段。 |
-| `ignoreDuration` | Long  | 离线推送免打扰时长。 |
+| 参数             | 类型 | 描述             |
+| :--------------- | :--- | :--------------- |
+| `data`           | JSON | 离线推送通知的设置。   |
+| `data.type`           | String | 离线推送通知方式。   |
+| `data.ignoreInterval` | String | 离线推送免打扰时间段。 |
+| `data.ignoreDuration` | Long  | 离线推送免打扰时长。 |
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
@@ -481,9 +489,9 @@ curl -L -X GET '{url}/{org}/{app}/users/{username}/notification/chatgroup/{key}'
 }
 ```
 
-## 设置推送翻译语言
+## 设置推送通知的首选语言
 
-设置离线推送消息的翻译语言。
+设置离线推送消息的首选语言。
 
 ### HTTP 请求
 
@@ -499,14 +507,14 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 
 | 参数      | 类型   | 描述   | 是否必需       |
 | :------------ | :----- | :------ | :---------------- |
-| `Content-Type` | String | 内容类型：`application/json` | 是  |
+| `Content-Type` | String | 内容类型。请填 `application/json`。 | 是  |
 | `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是  |
 
 #### 请求 body
 
 | 参数                  | 类型  | 描述   | 是否必需       |
 | :-------------------- | :------- | :----- | :----------- |
-| `translationLanguage` | String     | 目标语言代码。若设置为空字符串，表示无需翻译，仅发送消息原文。 | 是 |
+| `translationLanguage` | String     | 用户接收的推送通知的首选语言的代码。如果设置为空字符串，表示无需翻译，服务器直接推送原语言的通知。 | 是 |
 
 ### HTTP 响应
 
@@ -516,7 +524,10 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 
 | 参数      | 类型       | 描述                       |
 | :----------| :-------- | :------------- |
-| `language`     | String | 目标语言代码。|
+| `data` | JSON | 用户接收推送通知的首选语言。 |
+| `data.language` | String | 用户接收推送通知的首选语言的代码。 |
+
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
 ### 示例
 
@@ -549,14 +560,14 @@ curl -L -X PUT '{url}/{org}/{app}/users/{username}/notification/language' \
 }
 ```
 
-## 查询推送翻译
+## 获取推送通知的首选语言
 
-查询离线推送消息的翻译语言。
+获取推送通知的首选语言。
 
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org}/{app}/users/{username}/notification/language
+GET https://{host}/{org_name}/{app_name}/users/{username}/notification/language
 ```
 
 #### 路径参数
@@ -567,7 +578,7 @@ GET https://{host}/{org}/{app}/users/{username}/notification/language
 
 | 参数      | 类型   | 描述 | 是否必需              |
 | :------------ | :----- | :------ | :---------------- |
-| `Content-Type` | String | 内容类型：`application/json`  | 是 |
+| `Content-Type` | String | 内容类型。请填 `application/json`。  | 是 |
 | `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是 |
 
 ### HTTP 响应
@@ -578,7 +589,8 @@ GET https://{host}/{org}/{app}/users/{username}/notification/language
 
 | 参数      | 类型      | 描述          |
 | :-----------| :-------- | :-------- |
-| `language`    | String          | 目标语言代码。|
+| `data` | JSON | 用户接收推送通知的首选语言。 |
+| `data.language` | String | 用户接收推送通知的首选语言的代码。 |
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
@@ -616,7 +628,7 @@ curl -L -X GET '{url}/{org}/{app}/users/{username}/notification/language' \
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org}/{app}/notification/template
+POST https://{host}/{org_name}/{app_name}/notification/template
 ```
 
 #### 路径参数
@@ -627,7 +639,7 @@ POST https://{host}/{org}/{app}/notification/template
 
 | 参数      | 类型   | 描述 | 是否必需       |
 | :------------ | :----- | :------ | :---------------- |
-| `Content-Type` | String | 内容类型：`application/json`   | 是  |
+| `Content-Type` | String | 内容类型。请填 `application/json`。   | 是  |
 | `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。| 是   |
 
 #### 请求 body
@@ -644,13 +656,14 @@ POST https://{host}/{org}/{app}/notification/template
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
-| 参数   |  类型    | 描述           |
-| :-----------| :------- | :------------ |
-| `name`             | String            | 推送模板名称。|
-| `createAt`         | Long            | 推送模板的创建时间。|
-| `updateAt`          | Long          | 推送模板的更新时间。|
-| `title_pattern`      | String          | 自定义推送标题。|
-| `content_pattern`   | String           | 自定义推送内容。|
+| 参数              | 类型 | 描述                                |
+| :---------------- | :--- | :---------------------------------- |
+| `data` | JSON | 推送模板的相关信息。 |
+| `data.name`            | String | 推送模板的名称。                    |
+| `data.createAt`        | Number | 创建模板的 Unix 时间戳，单位为毫秒。     |
+| `data.updateAt`        | Number | 最近一次修改模板的 Unix 时间戳，单位为毫秒。 |
+| `data.title_pattern`   | String | 推送模板的自定义标题。              |
+| `data.content_pattern` | String | 推送模板的自定义内容。              |
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
@@ -697,7 +710,7 @@ curl -X POST '{url}/{org}/{app}/notification/template' \
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org}/{app}/notification/template/{name}
+GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 ```
 
 #### 路径参数
@@ -712,7 +725,7 @@ GET https://{host}/{org}/{app}/notification/template/{name}
 
 | 参数      | 类型   | 描述  | 是否必需           |
 | :------------ | :----- | :------ | :---------------- |
-| `Content-Type` | String | 内容类型：`application/json`    | 是 |
+| `Content-Type` | String | 内容类型。请填 `application/json`。    | 是 |
 | `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是   |
 
 ### HTTP 响应
@@ -721,13 +734,14 @@ GET https://{host}/{org}/{app}/notification/template/{name}
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
-| 参数  | 类型   | 描述             |
-| :-----------| :----- | :------------- |
-| `name`           | String | 推送模板名称。|
-| `createAt`       | Long   | 推送模板的创建时间。|
-| `updateAt`       | Long   | 推送模板的更新时间。|
-| `title_pattern`  | String | 自定义推送标题。|
-| `content_pattern`| String | 自定义推送内容。|
+| 参数              | 类型 | 描述                                |
+| :---------------- | :--- | :---------------------------------- |
+| `data` | JSON | 推送模板的相关信息。 |
+| `data.name`            | String | 推送模板的名称。                    |
+| `data.createAt`        | Number | 创建模板时的 Unix 时间戳，单位为毫秒。     |
+| `data.updateAt`        | Number | 最近一次修改模板时的 Unix 时间戳，单位为毫秒。 |
+| `data.title_pattern`   | String | 推送模板的自定义标题。              |
+| `data.content_pattern` | String | 推送模板的自定义内容。              |
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
@@ -767,8 +781,8 @@ curl -X GET '{url}/{org}/{app}/notification/template/{name}' \
 
 ### HTTP 请求
 
-```
-DELETE https://{host}/{org}/{app}/notification/template/{name}
+```http
+DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 ```
 
 #### 路径参数
@@ -783,7 +797,7 @@ DELETE https://{host}/{org}/{app}/notification/template/{name}
 
 | 参数      | 类型   | 描述    | 是否必需          |
 | :------------ | :----- | :------ | :---------------- |
-| `Content-Type` | String | 内容类型：`application/json`    | 是 |
+| `Content-Type` | String | 内容类型。请填 `application/json`。    | 是 |
 | `Authorization`  | String | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 | 是   |
 
 ### HTTP 响应
@@ -792,13 +806,14 @@ DELETE https://{host}/{org}/{app}/notification/template/{name}
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
-| 参数     | 类型   | 描述    |
-| :-------| :------- | :---------- |
-| `name`           | String        | 推送模板名称。|
-| `createAt`       | Long          | 推送模板的创建时间。|
-| `updateAt`        | Long         | 推送模板的更新时间。|
-| `title_pattern`    | String      | 自定义推送标题。|
-| `content_pattern`   | String     | 自定义推送内容。|
+| 参数              | 类型 | 描述                                |
+| :---------------- | :--- | :---------------------------------- |
+| `data` | JSON | 删除的推送模板的相关信息。 |
+| `data.name`            | String | 推送模板的名称。                    |
+| `data.createAt`        | Number | 推送模板的创建时间戳，单位为毫秒。     |
+| `data.updateAt`        | Number | 最近一次修改模板时的 Unix 时间戳，单位为毫秒。 |
+| `data.title_pattern`   | String | 推送模板的自定义标题。              |
+| `data.content_pattern` | String | 推送模板的自定义内容。              |
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 

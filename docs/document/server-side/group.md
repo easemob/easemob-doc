@@ -39,11 +39,8 @@
 | `data`      | JSON   | 实际获取的数据详情。                                         |
 | `uuid`       | String    | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
 | `created`      | Long     | 群组创建时间，Unix 时间戳，单位为毫秒。                      |
-| `username`  | String  | 用户 ID。                                                     |
-| `groupname`    | String   | 群组名称。                                                     |
-| `nickname`    | String     | 用户昵称。                                                   |
 | `timestamp`   | Long    | Unix 时间戳，单位为毫秒。                                    |
-| `duration`    | Int   | 请求响应时间，单位为毫秒。                                   |
+| `duration`    | Int   | 从发送请求到响应的时长，单位为毫秒。                                  |
 | `properties`   | String   | 响应属性。                                   |
 
 ## 群组角色
@@ -66,7 +63,7 @@ Authorization：`Bearer ${YourToken}`
 
 ### 创建群组
 
-创建一个群组，并设置群组名称、群组描述、公开群/私有群属性、群成员最大人数（包括群主）、加入公开群是否需要批准、群主、群成员、群组扩展信息。
+创建一个群组，并设置群组名称、群组描述、公开群/私有群属性、群成员最大人数（包括群主）、加入公开群是否需要批准、群主、群成员和群组扩展信息。
 
 #### HTTP 请求
 
@@ -76,7 +73,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 ##### 路径参数
 
-参数及描述详见  [公共参数](#公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -92,10 +89,10 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 |:----------------------| :------ |:-----|:----------------------------|
 | `groupname`    | String  | 是     | 群组名称，最大长度为 128 字符。如果有空格，则使用 “+” 代替。         |
 | `description`         | String  | 是     | 群组描述，最大长度为 512 字符。如果有空格，则使用 “+” 代替。     |
-| `public`       | Bool  | 是     | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                  |
-| `maxusers`     | Int | 否   | 群组最大成员数（包括群主），值为数值类型，默认值 200，具体上限请参考 [环信即时通讯云控制台](https://console.easemob.com/user/login)。 |
-| `allowinvites` | Bool  | 是     | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群;<br/> - （默认）`false`：只有群主或者管理员才可以往群里加人。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
-| `membersonly` | Bool  | 否   | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：是； <br/> - （默认）`false`：否。 |
+| `public`       | Bool  | 是     | 是否是公开群。公开群可以被搜索到，用户可以申请加入公开群；私有群无法被搜索到，因此需要群主或群管理员添加，用户才可以加入。<br/> - `true`：公开群；<br/> - `false`：私有群。                  |
+| `maxusers`     | Int | 否   | 群组最大成员数（包括群主），值为数值类型，默认值 200。不同套餐支持的人数上限不同，详见 [产品价格](https://www.easemob.com/pricing/im)。 |
+| `allowinvites` | Bool  | 是     | 是否允许群成员邀请用户加入群组：<br/> - `true`：群成员可拉人入群;<br/> - （默认）`false`：只有群主或者管理员才可以拉人入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
+| `membersonly` | Bool  | 否   | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：需要； <br/> - （默认）`false`：不需要，用户直接进群。 |
 | `invite_need_confirm` | Bool | 否 | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）`true`：是；<br/> - `false`：否。         |
 | `owner`        | String  | 是     | 群组的管理员。                                               |
 | `members`      | Array  | 否   | 群组成员的用户 ID 数组。该数组可包含 1-100 个元素，不包含群主的用户 ID。 |
@@ -401,8 +398,8 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  |每次期望返回的群组数量。取值范围为 [1,100]，默认值为 `10`。该参数仅在分页获取时为必需。   |
-| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+| `limit`  | Int | 否  |每次期望返回的群组数量。取值范围为 [1,100]，默认值为 `10`。 |
+| `cursor` | String | 否   | 数据查询的起始位置。 |
 
 :::tip
 若请求中均未设置 `limit` 和 `cursor` 参数，环信服务器按群组创建时间倒序返回前 10 个群组。
@@ -509,8 +506,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatgroups?page
 
 | 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
-| `pagesize` | String | 否     | 每页获取的群组数量。该参数仅适用于分页获取方法。             |
-| `pagenum`  | String | 否     | 当前页码。该参数仅适用于分页获取方法。                       |
+| `pagesize` | String | 否     | 每页获取的群组数量。取值范围为 [1,100]，默认值为 `10`。            |
+| `pagenum`  | String | 否     | 当前页码。默认从第 1 页开始获取。                    |
 
 :::tip
 若请求中均未设置 `pagesize` 和 `pagenum` 参数，环信服务器按用户加入群组的时间倒序返回前 500 个群组。
@@ -614,9 +611,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.id`                 | String  | 群组 ID，群组唯一标识符。                                    |
 | `data.name`               | String  | 群组名称。   |
 | `data.description`        | String  | 群组描述。    |
-| `data.membersonly`        | Bool | 加入群组是否需要群主或者群管理员审批。<br/> - `true`：是；<br/> - （默认）`false`：否。 |
-| `data.allowinvites`       | Bool | 是否允许群成员邀请其他用户加入此群。<br/> - `true`：允许群成员邀请其他用户加入此群；<br/> - （默认）`false`：只有群主可以邀请其他用户入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
-| `data.maxusers`           | Int | 群成员数上限，创建群组的时候设置，可修改。                     |
+| `data.membersonly`        | Bool | 加入群组是否需要群主或者群管理员审批。<br/> - `true`：是；<br/> - `false`：否。 |
+| `data.allowinvites`       | Bool | 是否允许群成员邀请其他用户加入此群。<br/> - `true`：允许群成员邀请其他用户加入此群；<br/> - `false`：只有群主可以邀请其他用户入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
+| `data.maxusers`           | Int | 群组最大成员数，创建群组的时候设置，可修改。                     |
 | `data.permission`         | String  | 群组成员角色：<br/> - `owner`：群主；<br/> - `member`：普通成员。          |
 | `data.owner`              | String  | 群主的用户 ID。例如：{“owner”: “user1”}。                    |
 | `data.created`            | Long    | 创建该群组的 Unix 时间戳。    |
@@ -804,7 +801,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ### 修改群组公告
 
-修改指定群组 ID 的群组公告，注意群组公告的内容不能超过 512 个字符。
+修改指定群组 ID 的群组公告。群组公告不能超过 512 个字符。
 
 #### HTTP 请求
 
@@ -874,14 +871,6 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 #### HTTP 请求
 
-直接请求：
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
-```
-
-分页请求：
-
 ```http
 GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagenum={N}&pagesize={N}
 ```
@@ -894,7 +883,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-| `pagesize` | String   | 否 | 每页期望返回的共享文件数。取值范围为 [1,1000]。|
+| `pagesize` | String   | 否 | 每页期望返回的共享文件数。取值范围为 [1,1000]，默认为 `1000`。|
 | `pagenum` |  Int | 否 | 当前页码。默认从第 1 页开始获取。  |
 
 ##### 请求 header
@@ -976,7 +965,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 上传指定群组 ID 的群组共享文件。注意上传的文件大小不能超过 10 MB。
 
-分页获取指定群组 ID 的群组共享文件，然后可以根据响应中返回的文件 ID（`file_id`）调用 [下载群组共享文件](#下载群组共享文件) 接口下载群组的共享文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除群组的共享文件。
+分页获取指定群组 ID 的群组共享文件，然后可以根据响应中返回的文件 ID（`file_id`）调用 [下载群组共享文件](#下载群组共享文件) 接口下载该文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除该文件。
 
 #### HTTP 请求
 
@@ -1204,7 +1193,7 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json'
 
 ### 分页获取群组成员
 
-可以分页获取群组成员列表的接口。
+可以分页获取群组成员列表。
 
 #### HTTP 请求
 
@@ -2980,6 +2969,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
+| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
 |`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
@@ -3004,7 +2994,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE http://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute/user1  -H 'Authorization: Bearer <YourAppToken> '
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatgroups/10130212061185/mute/user1'
 ```
 
 ##### 响应示例
@@ -3094,6 +3084,8 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json'
 
 环信即时通讯 IM 提供多个接口实现子区管理，包括子区的创建、获取、修改和删除等。
 
+单个 app 下的子区总数默认为 10 万，如需调整请联系商务。
+
 ### 获取 app 中的子区
 
 分页获取应用下的子区列表。
@@ -3112,8 +3104,8 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  |每次期望返回的子区数量。该参数仅在分页获取时为必需。   |
-| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+| `limit`  | Int | 否  |每次期望返回的子区数量，取值范围为 [1,50]。|
+| `cursor` | String | 否   | 数据查询的起始位置。 |
 | `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按子区创建时间的正序；<br/> - （默认）`desc`：按子区创建时间的倒序。 |
 
 
@@ -3162,7 +3154,7 @@ curl -X GET http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken
     ],
     "organization": "XXXX",
     "properties": {
-        "cursor": "ZGXXXXTE"
+     "cursor": "ZGXXXXTE"
     },
     "timestamp": 1650869750247,
     "uri": "http://XXXX/XXXX/XXXX/thread"
@@ -3187,15 +3179,15 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  | 每次期望返回的子区数量。该参数仅在分页获取时为必需。   |
-| `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
+| `limit`  | Int | 否  | 每次期望返回的子区数量，取值范围为 [1,50]。 |
+| `cursor` | String | 否   | 数据查询的起始位置。 |
 | `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按用户加入子区的时间的正序；<br/> - （默认）`desc`：按用户加入子区的时间的倒序。 |
 
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
 
 #### HTTP 响应
 
@@ -3246,7 +3238,7 @@ curl -X GET http://XXXX/XXXX/XXXX/threads/user/test4 -H 'Authorization: Bearer <
     ],
     "organization": "XXXX",
     "properties": {
-        "cursor": "ZGXXXXzg"
+    "cursor": "ZGXXXXzg"
     },
     "timestamp": 1650869972109,
     "uri": "http://XXXX/XXXX/XXXX/threads/user/test4"
@@ -3271,7 +3263,7 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  |每次期望返回的子区数量。该参数仅在分页获取时为必需。   |
+| `limit`  | Int | 否  |每次期望返回的子区数量，取值范围为 [1,50]。该参数仅在分页获取时为必需。   |
 | `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
 | `sort`   | String | 否  | 获取的子区的排序顺序：<br/> - `asc`：按用户加入子区的时间的正序；<br/> - （默认）`desc`：按用户加入子区的时间的倒序。 |
 
@@ -3567,7 +3559,7 @@ GET https://{host}/{org_name}/{app_name}/thread/{thread_id}/users?limit={N}&curs
 
 | 参数     | 类型   | 是否必需 | 描述                   |
 | :------- | :----- | :------------------------ | :------- |
-| `limit`  | Int | 否  |每次期望返回的子区成员数量。该参数仅在分页获取时为必需。   |
+| `limit`  | Int | 否  |每次期望返回的子区成员数量，取值范围为 [1,50]。该参数仅在分页获取时为必需。   |
 | `cursor` | String | 否   | 数据查询的起始位置。该参数仅在分页获取时为必需。 |
 
 ##### 请求 header

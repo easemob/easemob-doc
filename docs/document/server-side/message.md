@@ -1285,7 +1285,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | `from`      | String | 消息发送方的用户 ID。        |
 | `to`        | String | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。    |
 | `chat_type` | String | 会话类型：<br/> - `chat`: 单聊；<br/> - `groupchat`: 群聊；<br/> - `chatroom`: 聊天室。   |
-| `payload`   | JSON   | 消息的具体内容。例如，消息扩展信息、自定义扩展属性等。    |
+| `payload`   | JSON   | 消息的具体内容。例如，消息扩展信息等。    |
 
 历史消息记录为 JSON 类型，示例如下：
 
