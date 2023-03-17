@@ -75,6 +75,10 @@ Android 中错误码的类为 `EMError`。
 | 603    |     GROUP_PERMISSION_DENIED     | 无权限的群组操作：没有权限进行群组操作，比如群组成员不能设置群组管理员。 |
 | 604    |       GROUP_MEMBERS_FULL        |               群组已满：群组已经达到人数上限。               |
 | 605    |         GROUP_NOT_EXIST         |     群组不存在：尝试对不存在的群组进行操作时提示该错误。     |
+| 609    |   GROUP_MEMBER_ATTRIBUTES_REACH_LIMIT   | 群组成员自定义属性个数达到上限。                         |
+| 610    |   GROUP_MEMBER_ATTRIBUTES_UPDATE_FAILED   | 设置群成员自定义属性失败。                        |
+| 611    |   GROUP_MEMBER_ATTRIBUTES_KEY_REACH_LIMIT   | 设置的群成员自定义属性 key 长度（不能超过 16 字节）超限。                        |
+| 612    |   GROUP_MEMBER_ATTRIBUTES_VALUE_REACH_LIMIT   | 设置的群成员自定义属性 value 长度（不能超过 512 字节）超限。  |
 | 700    |       CHATROOM_INVALID_ID       | 聊天室 ID 异常：使用聊天室相关 API，提供的聊天室 ID 为空时提示该错误。 |
 | 701    |     CHATROOM_ALREADY_JOINED     | 已在该聊天室中：调用加入聊天室的 API 时如果已经在该聊天室中则提示该错误。 |
 | 702    |       CHATROOM_NOT_JOINED       | 未加入该聊天室：尝试在未加入的聊天室中发送消息或进行聊天室操作时提示该错误。 |

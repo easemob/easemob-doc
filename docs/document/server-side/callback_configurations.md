@@ -2011,12 +2011,12 @@ payload 字段含义：
 | `roster`                | -                              | 好友关系操作所有事件 |
 | `roster:add`            | `{“operation”:“add”}`           | 添加好友             |
 | `roster:remove`         | `{“operation”:“remove”}`         | 删除好友             |
-| `roster:accept`         | `{“operation”:“accept”}`         | 同意好友申请         |
-| `roster:decline`        | `{“operation”:“decline”}`        | 拒绝好友申请         |
+| `roster:accept`         | `{“operation”:“accept”}`         | 同意好友申请。对方用户收到该事件。         |
+| `roster:decline`        | `{“operation”:“decline”}`        | 拒绝好友申请。对方用户收到该事件。       |
+| `roster:remote_accept`  | `{“operation”:“remote_accept”}`  | 远程同意。申请人收到该事件。            |
+| `roster:remote_decline` | `{“operation”:“remote_decline”}` | 远程拒绝。申请人收到该事件。             |
 | `roster:ban`            | `{“operation”:“ban”}`           | 拉黑好友             |
 | `roster:allow`          | `{“operation”:“allow”}`          | 解除拉黑好友         |
-| `roster:remote_accept`  | `{“operation”:“remote_accept”}`  | 远程同意             |
-| `roster:remote_decline` | `{“operation”:“remote_decline”}` | 远程拒绝             |
 
 #### 添加好友
 
@@ -2080,6 +2080,8 @@ payload 示例：
 
 #### 同意好友申请
 
+用户发送好友申请后，对方用户同意加好友后会收到服务器发送的该事件。
+
 payload 字段含义：
 
 | 字段         | 数据类型 | 含义                     |
@@ -2110,6 +2112,8 @@ payload 示例：
 
 #### 拒绝好友申请
 
+用户发送好友申请后，对方用户拒绝添加好友后会收到服务器发送的该事件。
+
 payload 字段含义：
 
 | 字段         | 数据类型 | 含义                      |
@@ -2136,6 +2140,70 @@ payload 示例：
     "msg_id":"9XXXX68",
     "timestamp":1642648260029
     }
+```
+
+#### 远程同意
+
+用户发送好友申请后，对方用户同意加好友后，申请方会收到服务器发送的该事件。
+
+payload 字段含义：
+
+| 字段         | 数据类型 | 含义                                                        |
+| :----------- | :------- | :---------------------------------------------------------- |
+| `roster_ver` | String   | 好友列表的版本号。                                          |
+| `operation`  | String   | `remote_accept`：远程同意。 |
+
+payload 示例：
+
+```json
+{ 
+    "chat_type": "roster", 
+    "callId": "XXXX#XXXX_967182720616630320", 
+    "security": "f4bc73eb6e7764e383521c2e88dc2729", 
+    "payload": { 
+        "roster_ver": "1BD5718E9C9D3F0C572A5157CFC711D4F6FA490F", 
+        "operation": "remote_accept" 
+        }, 
+    "host": "XXXX", 
+    "appkey": "XXXX#XXXX", 
+    "from": "XXXX#XXXX_XXXX/android_XXXX", 
+    "to": "2222", 
+    "eventType": "chat", 
+    "msg_id": "967182720616630320", 
+    "timestamp": 1642754575382 
+    }
+```
+
+#### 远程拒绝
+
+用户发送好友申请后，对方用户拒绝添加好友后，申请方会收到服务器发送的该事件。
+
+payload 字段含义：
+
+| 字段         | 数据类型 | 含义                                                         |
+| :----------- | :------- | :----------------------------------------------------------- |
+| `roster_ver` | String   | 好友列表的版本号。                                           |
+| `operation`  | String   | `remote_decline`：远程拒绝。 |
+
+payload 示例：
+
+```json
+{ 
+    "chat_type": "roster", 
+    "callId": "XXXX#XXXX_967182895737210928", 
+    "security": "27f5b919623380cc11d863ef957aa61b", 
+    "payload": { 
+        "roster_ver": "CFC06E0BA39E8B7FD493D102E2F8F3CAE678B380", 
+        "operation": "remote_decline" 
+        }, 
+    "host": "XXXX", 
+    "appkey": "XXXX#XXXX", 
+    "from": "XXXX#XXXX/android_XXXX", 
+    "to": "2222", 
+    "eventType": "chat", 
+    "msg_id": "967182895737210928", 
+    "timestamp": 1642754616149 
+}
 ```
 
 #### 拉黑好友
@@ -2201,66 +2269,6 @@ payload 示例：
     "eventType":"chat",
     "msg_id":"966725018736134200",
     "timestamp":1642648008357
-}
-```
-
-#### 远程同意
-
-payload 字段含义：
-
-| 字段         | 数据类型 | 含义                                                        |
-| :----------- | :------- | :---------------------------------------------------------- |
-| `roster_ver` | String   | 好友列表的版本号。                                          |
-| `operation`  | String   | `remote_accept`：远程同意，服务端上给好友申请发起人的回调。 |
-
-payload 示例：
-
-```json
-{ 
-    "chat_type": "roster", 
-    "callId": "XXXX#XXXX_967182720616630320", 
-    "security": "f4bc73eb6e7764e383521c2e88dc2729", 
-    "payload": { 
-        "roster_ver": "1BD5718E9C9D3F0C572A5157CFC711D4F6FA490F", 
-        "operation": "remote_accept" 
-        }, 
-    "host": "XXXX", 
-    "appkey": "XXXX#XXXX", 
-    "from": "XXXX#XXXX_XXXX/android_XXXX", 
-    "to": "2222", 
-    "eventType": "chat", 
-    "msg_id": "967182720616630320", 
-    "timestamp": 1642754575382 
-    }
-```
-
-#### 远程拒绝
-
-payload 字段含义：
-
-| 字段         | 数据类型 | 含义                                                         |
-| :----------- | :------- | :----------------------------------------------------------- |
-| `roster_ver` | String   | 好友列表的版本号。                                           |
-| `operation`  | String   | `remote_decline`：远程拒绝，服务端上给好友申请发起人的回调。 |
-
-payload 示例：
-
-```json
-{ 
-    "chat_type": "roster", 
-    "callId": "XXXX#XXXX_967182895737210928", 
-    "security": "27f5b919623380cc11d863ef957aa61b", 
-    "payload": { 
-        "roster_ver": "CFC06E0BA39E8B7FD493D102E2F8F3CAE678B380", 
-        "operation": "remote_decline" 
-        }, 
-    "host": "XXXX", 
-    "appkey": "XXXX#XXXX", 
-    "from": "XXXX#XXXX/android_XXXX", 
-    "to": "2222", 
-    "eventType": "chat", 
-    "msg_id": "967182895737210928", 
-    "timestamp": 1642754616149 
 }
 ```
 
