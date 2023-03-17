@@ -256,6 +256,9 @@ conn.addEventHandler("eventName", {
       // 群组被解散。群主解散群组时，所有群成员均会收到该回调。
       case "destroy":
         break;
+      // 设置群成员的自定义属性。群组内其他成员均会收到该回调。
+      case "memberAttributesUpdate":
+        break;  
       default:
         break;
     }

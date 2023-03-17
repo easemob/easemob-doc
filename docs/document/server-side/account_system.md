@@ -160,7 +160,6 @@ POST https://{host}/{org_name}/{app_name}/users
 | `password` | String | 否       | 用户的登录密码，长度不可超过 64 个字符。若不传登录密码，调用通过用户 ID 获取 token 的 API 时，请求 body 中的授权方式 `grant_type` 只能设置为 `inherit`，不能设置为 `password`。           |
 | `nickname` | String | 否       | 推送消息时，在消息推送通知栏内显示的用户昵称，并非用户个人信息的昵称。长度不可超过 100 个字符。支持以下字符集：<br/> -  26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。     |
 
-其他参数及说明详见 [公共参数](#公共参数)。
 
 #### HTTP 响应
 
@@ -171,7 +170,7 @@ POST https://{host}/{org_name}/{app_name}/users
 | 字段                | 类型   | 描述                                           |
 | :------------------ | :----- | :--------------------------------------------- |
 | `entities.username` | String | 用户 ID。                                      |
-| `entities.nickname` | String | 推送消息时，在消息推送通知栏内显示的用户昵称。 |
+| `entities.nickname` | String | 推送消息时，在消息推送通知栏内显示的用户昵称。<br/>该字段为消息推送显示的用户昵称，而非用户属性的用户昵称。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -243,7 +242,7 @@ POST https://{host}/{org_name}/{app_name}/users
 ##### 请求 body
 
 :::notice
-单次请求内最多可注册 60 个用户 ID。
+单次请求最多可注册 60 个用户 ID。
 :::
 
 | 参数       | 类型   | 是否必需 | 描述      |
@@ -388,7 +387,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示成功获取 token，响应包体中包含以下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 字段                | 类型   | 描述              |
 | :------------------------------- | :----- | :--------------------------------------- |
@@ -487,6 +486,8 @@ GET https://{host}/{org_name}/{app_name}/users?limit={N}&{cursor}
 | `entities.notification_ignore_63112447328257` | Bool   | 是否屏蔽了群组消息的离线推送的设置。数字表示群组 ID。 <br/> -`true`：已屏蔽。 <br/> - `false`：未屏蔽，没有设置则不会返回。 |
 | `entities.notifier_name`                      | String | 客户端推送证书名称。若用户未设置推送证书名称，则响应中不返回。                                                              |
 | `entities.device_token`                       | String | 推送 token。若用户没有推送 token，则响应中不返回。                                                                          |
+| `cursor`                                      | String | 游标，用于分页显示用户列表。<br>第一次发起批量查询用户请求时无需设置 `cursor`，请求成功后，从响应 body 中获取 `cursor`，并在下一次请求的 URL 中传入该 `cursor`，直到响应 body 中不再有 `cursor` 字段，则表示已查询到 app 中所有用户。 |
+| `count`                                       | Number | 返回用户数量。     |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -811,7 +812,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token，<YourPassword> 替换为你设置的新密码
 
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{     "newpassword": "<YourPassword>"   }' 'http://XXXX/XXXX/XXXX/users/user1/password'
+curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{ "newpassword": "<YourPassword>" }' 'http://XXXX/XXXX/XXXX/users/user1/password'
 ```
 
 ##### 响应示例
@@ -970,7 +971,7 @@ curl -X POST http://XXXX/XXXX/chatdemoui/users/batch/status -H 'Authorization: B
 
 ### 设置用户全局禁言
 
-设置单个用户 ID 的单聊、群组或聊天室消息的全局禁言。
+设置单个用户 ID 的单聊、群组或聊天室消息的全局禁言。设置成功后，该用户将无法在对应的单聊、群组或聊天室中发送消息。
 
 #### HTTP 请求
 
@@ -987,16 +988,16 @@ POST https://{host}/{org_name}/{app_name}/mutes
 | 参数            | 类型   | 是否必需 | 描述                                     |
 | :-------------- | :----- | :------- | :--------------------------------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。      |
-| `Authorization` | String | 是       | 鉴权 token，app token 及以上权限。 |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 Bearer ${YourAppToken}，其中 Bearer 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 ##### 请求 body
 
 | 参数        | 类型   | 是否必需 | 描述                   |
 | :---------- | :----- | :------- | :------------------------------------- |
-| `username`  | String | 是       | 设置禁言配置的用户 ID。         |
-| `chat`      | Int    | 否       | 单聊消息禁言时长，单位为秒，最大值为 `2147483647`。<br/> - > `0`：该用户 ID 具体的单聊消息禁言时长。 <br/> - `0`：取消该用户的单聊消息禁言。<br/> - `-1`：该用户被设置永久单聊消息禁言。<br/> - 其他负值无效。 |
-| `groupchat` | Int    | 否       | 群组消息禁言时长，单位为秒，规则同上。      |
-| `chatroom`  | Int    | 否       | 聊天室消息禁言时长，单位为秒，规则同上。                    |
+| `username`  | String | 是       | 设置全局禁言的用户 ID。         |
+| `chat`      | Int    | 否       | 单聊禁言时长，单位为秒，最大值为 `2147483647`。<br/> - > `0`：该用户 ID 的单聊禁言时长。 <br/> - `0`：取消该用户的单聊禁言。<br/> - `-1`：该用户被设置永久单聊禁言。<br/> - 其他负值无效。 |
+| `groupchat` | Int    | 否       | 群组禁言时长，单位为秒，规则同单聊禁言。      |
+| `chatroom`  | Int    | 否       | 聊天室禁言时长，单位为秒，规则同单聊禁言。                    |
 
 #### HTTP 响应
 
@@ -1006,7 +1007,7 @@ POST https://{host}/{org_name}/{app_name}/mutes
 
 | 字段          | 类型   | 描述                                |
 | :------------ | :----- | :---------------------------------- |
-| `data.result` | String | 该方法调用结果。`ok` 表示设置成功。 |
+| `data.result` | String | 是否成功设置用户全局禁言。`ok` 表示设置成功。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -1050,7 +1051,7 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/mutes' \
 
 ### 查询单个用户 ID 全局禁言
 
-查询单个用户的单聊、群聊和聊天室消息的全局禁言详情。
+查询单个用户的单聊、群聊和聊天室的全局禁言详情。
 
 #### HTTP 请求
 
@@ -1066,8 +1067,8 @@ GET https://{host}/{org_name}/{app_name}/mutes/{username}
 
 | 参数            | 类型   | 是否必需 | 描述                                      |
 | :-------------- | :----- | :------- | :---------------------------------------- |
-| `Content-Type`  | String | 是       | `application/json` 内容类型。             |
-| `Authorization` | String | 是       | 鉴权 token，管理员 token （含）以上权限。 |
+| `Content-Type`  | String | 是       | 内容类型，请填 `application/json`。             |
+| `Authorization` | String | 是       | 该用户或管理员的鉴权 token，格式为 Bearer ${YourAppToken}，其中 Bearer 是固定字符，后面加英文空格，再加获取到的 token 值。 |
 
 #### HTTP 响应
 
@@ -1078,9 +1079,9 @@ GET https://{host}/{org_name}/{app_name}/mutes/{username}
 | 字段             | 类型   | 描述                       |
 | :--------------- | :----- | :---------------------------------------------------------- |
 | `data.userid`    | String | 设置禁言的用户 ID。                   |
-| `data.chat`      | Int    | 单聊消息剩余禁言时间，单位为秒。最大值为 `2147483647`。<br/> - > 0：该用户 ID 具体的单聊消息禁言时长。<br/> - `0`：该用户的单聊消息禁言已取消。 <br/> - `-1`：该用户被设置永久单聊消息禁言。 |
-| `data.groupchat` | Int    | 群组消息剩余禁言时长，单位为秒，规则同上。        |
-| `data.chatroom`  | Int    | 聊天室消息剩余禁言时长，单位为秒，规则同上。            |
+| `data.chat`      | Int    | 单聊剩余禁言时间，单位为秒。最大值为 `2147483647`。<br/> - > 0：该用户 ID 剩余的单聊禁言时长。<br/> - `0`：该用户的单聊消息禁言已取消。 <br/> - `-1`：该用户被设置永久单聊消息禁言。 |
+| `data.groupchat` | Int    | 群组消息剩余禁言时长，单位为秒，规则同单聊禁言。        |
+| `data.chatroom`  | Int    | 聊天室消息剩余禁言时长，单位为秒，规则同单聊禁言。            |
 | `data.unixtime`  | Int    | 当前操作的 Unix 时间戳。                       |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -1128,12 +1129,19 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/mutes
+GET https://{host}/{org_name}/{app_name}/mutes
 ```
 
 ##### 路径参数
 
 参数及说明详见[公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数       | 类型 | 是否必需 | 描述                               |
+| :--------- | :--- | :------- | :--------------------------------- |
+| `pageNum`  | Int  | 否       | 请求查询的页码。                   |
+| `pageSize` | Int  | 否      | 请求查询每页显示的禁言用户的数量。取值范围为 [1,50]。 |
 
 ##### 请求 header
 
@@ -1141,13 +1149,6 @@ POST https://{host}/{org_name}/{app_name}/mutes
 | :-------------- | :----- | :------- | :--------------------------------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。      |
 | `Authorization` | String | 是       | 鉴权 token，管理员 token（含）以上权限。 |
-
-##### 请求 body
-
-| 参数       | 类型 | 是否必需 | 描述                               |
-| :--------- | :--- | :------- | :--------------------------------- |
-| `pageNum`  | Int  | 是       | 请求查询的页码。                   |
-| `pageSize` | Int  | 是       | 请求查询每页显示的禁言用户的数量。取值范围为 [1,50]。 |
 
 #### HTTP 响应
 

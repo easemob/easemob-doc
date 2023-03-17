@@ -1580,6 +1580,217 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 }
 ```
 
+### 设置群成员自定义属性
+
+群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
+
+群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
+
+#### HTTP 请求
+
+```http
+PUT http://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}
+```
+
+##### 路径参数
+
+参数及描述详见 [公共参数](#公共参数)。
+
+##### 请求 header
+
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |  
+| `Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+
+##### 请求 body
+
+| 参数           | 类型    | 是否必需 | 描述                            |
+|:----------------------| :------ |:-----|:----------------------------|
+| `metaData`    | JSON  | 是     | 要设置的群成员自定义属性，为 key-value 键值对。对于单个键值对：<br/> - key 表示属性名称，不能超过 16 字节。<br/> - value 表示属性值，不能超过 512 个字节。若 value 设置为空字符串即删除该自定义属性。<Container type="notice" title="注意">单个群成员的自定义属性总长度不能超过 4 KB。</Container> |  
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段         | 类型   | 描述       |
+| :---------- | :----- | :--------- |
+| `data`   | JSON | 设置的群成员自定义属性。  |
+
+其他字段及描述详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl --location --request PUT 'http://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup/207059303858177/user/test2' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json'
+-H 'Authorization: Bearer YWMtozZwfsFFEe2oQTE6aob5eQAAAAAAAAAAAAAAAAAAAAExCXvf5bRGAJBgXNYFJVQ9AQMAAAGG2MUClwBPGgDsI1GYg1QtapTEdGyrm29Eu6L8qx60lDZ9TJRDOQjEsw' \
+--data-raw '{
+    "metaData": {
+          "key1": "value1"
+    }
+}'
+```
+
+##### 响应示例
+
+```json
+{
+    "timestamp": 1678674135533,
+    "data": {
+        "key1": "value1"
+    },
+    "duration": 53
+}
+```
+
+### 获取单个群成员的所有自定义属性
+
+获取单个群成员的所有自定义属性。
+
+#### HTTP 请求
+
+```http
+GET http://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}
+```
+
+##### 路径参数
+
+参数及描述详见 [公共参数](#公共参数)。
+
+##### 请求 header
+
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |  
+| `Authorization` | String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段         | 类型   | 描述       |
+| :---------- | :----- | :--------- |
+| `data`   | JSON | 获取的群成员自定义属性。  |
+
+其他字段及描述详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl --location --request GET 'http://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup/207059303858177/user/test2' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json'
+-H 'Authorization: Bearer YWMtozZwfsFFEe2oQTE6aob5eQAAAAAAAAAAAAAAAAAAAAExCXvf5bRGAJBgXNYFJVQ9AQMAAAGG2MUClwBPGgDsI1GYg1QtapTEdGyrm29Eu6L8qx60lDZ9TJRDOQjEsw' \
+--data-raw ''
+```
+
+##### 响应示例
+
+```json
+{
+    "timestamp": 1678674211840,
+    "data": {
+        "key1": "value1"
+    },
+    "duration": 6
+}
+```
+
+### 根据属性 key 获取多个群成员的自定义属性
+
+根据指定的属性 key 获取多个群成员的自定义属性。每次最多可获取 10 个群成员的自定义属性。
+
+#### HTTP 请求
+
+```http
+POST http://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/get
+```
+
+##### 路径参数
+
+参数及描述详见 [公共参数](#公共参数)。
+
+##### 请求 header
+
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
+| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |  
+| `Authorization` | String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+
+##### 请求 body
+
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :---------------- | :------- |
+| `targets`  | JSON Array | 是    | 要获取自定义属性的群成员的用户 ID。一次最多可传 10 个用户 ID。 |
+| `properties`  | JSON Array | 是    | 要获取自定义属性的 key 的数组。若该参数设置为空数组或不传，则获取这些群成员的所有自定义属性。 |
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段         | 类型   | 描述       |
+| :---------- | :----- | :--------- |
+| `data`   | JSON | 获取的群成员的自定义属性。如下响应示例中的 `test1` 和 `test2` 为自定义属性所属的群成员的用户 ID。   | 
+
+其他字段及描述详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl --location --request POST 'http://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup/207059303858177/get' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json'
+-H 'Authorization: Bearer YWMtozZwfsFFEe2oQTE6aob5eQAAAAAAAAAAAAAAAAAAAAExCXvf5bRGAJBgXNYFJVQ9AQMAAAGG2MUClwBPGgDsI1GYg1QtapTEdGyrm29Eu6L8qx60lDZ9TJRDOQjEsw' \
+--data-raw '{
+    "targets":["test1","test2"],
+    "properties":["key1","key2"]
+}'
+```
+
+##### 响应示例
+
+```json
+{
+    "timestamp": 1678674292783,
+    "data": {
+        "test1": {
+            "key1": "value1"
+        },
+        "test2": {
+            "key1": "value1"
+        }
+        
+    },
+    "duration": 2
+}
+```
+
 ### 获取群管理员列表
 
 获取群组管理员列表。
