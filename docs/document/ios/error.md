@@ -21,7 +21,8 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 101    |       EMErrorInvalidUsername        | 用户 ID 为空或不正确，比如使用邀请好友 API 时 username 参数为空字符。 |
 | 102    |       EMErrorInvalidPassword        | 用户密码不正确：登录时提供的密码为空或不正确。               |
 | 103    |          EMErrorInvalidURL          | URL 不正确，该错误码已废弃。                                 |
-| 104    |       EMErrorUsernameTooLong        | 用户名过长。                                                 |
+| 104    |          EMErrorInvalidToken        | 用户 token 不正确：登录时提供的 token 为空或不正确。                                |
+| 105    |       EMErrorUsernameTooLong        | 用户名过长。                                                 |
 | 200    |     EMErrorUserAlreadyLoginSame     | 当前用户已经登录：同一用户 ID 已经登录。                     |
 | 201    |         EMErrorUserNotLogin         | 用户未登录：例如，如果未登录成功时调用发送消息或群组操作的 API 会提示该错误。 |
 | 202    |   EMErrorUserAuthenticationFailed   | 用户鉴权失败：一般是 token 鉴权失败或者 token 已经过期。     |
