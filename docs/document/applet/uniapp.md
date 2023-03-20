@@ -117,7 +117,7 @@ socket 合法域名:
 
 ```javascript
 //使用示例
-import websdk from "../newSDK/uni_sdk3.6.3";
+import SDK from "../newSDK/uni_sdk3.6.3";
 ```
 
 #### 实例调用方式

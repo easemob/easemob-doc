@@ -167,7 +167,7 @@ conn.removeGroupMember(option).then(res => console.log(res))
 ```javascript
     let options = {
         groupId: 'groupId',
-        userId: 'userId',
+        userIds: ['userId'],
         // 要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
         keys: ['key1', 'key2']
     }   
