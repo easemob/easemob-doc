@@ -516,7 +516,7 @@ dependencies {
 
    ```gradle
    dependencies{
-       // 该 aar 托管在 jcenter 中，请确保当前项目已配置 jcenter 仓库。
+       // 该 jar 托管在 jcenter 中，请确保当前项目已配置 jcenter 仓库。
        implementation 'com.meizu.flyme.internet:push-internal:3.7.0@aar'
    }
    ```
