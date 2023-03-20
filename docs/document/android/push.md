@@ -100,7 +100,7 @@ EMClient.getInstance().init(this, options);
 
     ![image](@static/images/android/push/fcm_old_version.png)
 
--  若 **证书类型** 选择 **V1**，你需要上传证书文件（*.json 文件）并将 **证书名称** 设置为 FCM 的发送者 ID。你需要在[Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置** > **服务账号** 页面，点击 **生成新的私钥**，下载推送证书文件（.json），然后在 **项目设置** > **云消息传递** 页面中，在 **Firebase Cloud Messaging API（V1）** 区域中获取 发送者 ID。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
+-  若 **证书类型** 选择 **V1**，你需要上传证书文件（.json 文件）并将 **证书名称** 设置为 FCM 的发送者 ID。你需要在[Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置** > **服务账号** 页面，点击 **生成新的私钥**，下载推送证书文件（.json），然后在 **项目设置** > **云消息传递** 页面中，在 **Firebase Cloud Messaging API（V1）** 区域中获取 发送者 ID。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
 
      ![image](@static/images/android/push/fcm_v1.png)
 
