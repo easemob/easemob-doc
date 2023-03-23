@@ -2295,7 +2295,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 #### HTTP 请求
 
 ```http
-DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}
+DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}
 ```
 
 ##### 路径参数
@@ -2359,12 +2359,12 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ### 从群组黑名单批量移除用户
 
-将多名指定用户从群组黑名单中移除。对于群组黑名单中的用户，如果需要将其再次加入群组，需要先将其从群组黑名单中移除。
+将多名指定用户从群组黑名单中移除。对于群组黑名单中的用户，如果要将其再次加入群组，需先将其从群组黑名单中移除。
 
 #### HTTP 请求
 
 ```http
-DELETE /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}
+DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}
 ```
 
 ##### 路径参数
@@ -3137,7 +3137,7 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken> '
+curl -X GET http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -3379,7 +3379,7 @@ POST https://{host}/{org_name}/{app_name}/thread
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken> ' -d '{
+curl -X POST http://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken>' -d '{
     "group_id": 179800091197441,
     "name": "1",
     "owner": "test4",
@@ -3505,7 +3505,7 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}
 
 | 字段   |  类型     | 描述      |
 |:------|:--------|:--------|
-| `data.status` | Bool | 删除结果，`ok` 表示成功删除。 |
+| `data.status` | String | 删除结果，`ok` 表示成功删除。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -3650,7 +3650,7 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 
 | 字段   |  类型     | 描述      |
 |:------|:--------|:--------|
-| `data.status` | Bool | 添加结果，`ok` 表示成功添加。 |
+| `data.status` | String | 添加结果，`ok` 表示成功添加。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 

@@ -2646,7 +2646,14 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -d '{"usernames":["user1"], "mute_duration":86400000}' -H 'Authorization: Bearer <YourAppToken> '
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d
+'{
+    "usernames": [
+        "user1",
+        "user2"
+    ],
+    "mute_duration": 86400000
+}'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute'
 ```
 
 ##### 响应示例
@@ -2657,11 +2664,18 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -d '{"usernames":["us
     "application": "52XXXXf0",
     "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute",
     "entities": [],
-    "data": [{
-        "result": true,
-        "expire": 1489158589481,
-        "user": "user1"
-    }],
+    "data": [
+        {
+            "result": true,
+            "expire": 1642148173726,
+            "user": "user1"
+        },
+        {
+            "result": true,
+            "expire": 1642148173726,
+            "user": "user2"
+        }
+    ],
     "timestamp": 1489072189508,
     "duration": 0,
     "organization": "XXXX",
@@ -2671,7 +2685,9 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -d '{"usernames":["us
 
 ### 禁言聊天室全体成员
 
-对所有聊天室成员一键禁言，即将聊天室的所有成员均加入禁言列表。设置聊天室全员禁言后，仅聊天室白名单中的用户可在聊天室内发消息。
+对所有聊天室成员一键禁言。该操作不影响聊天室禁言列表，即一键禁言不会将聊天室所有成员加入聊天室禁言列表。
+
+设置聊天室全员禁言后，仅聊天室白名单中的用户可在聊天室内发消息。
 
 #### HTTP 请求
 

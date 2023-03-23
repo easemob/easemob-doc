@@ -27,7 +27,7 @@
 | `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
 | `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
-| `uid`      | String | 是 |用户在即时通讯服务器上的唯一 ID。                            | 
+| `username`      | String | 是 |用户在即时通讯服务器上的唯一 ID。                            | 
 
 ## 认证方式
 
@@ -46,7 +46,7 @@ Authorization: Bearer ${YourAppToken}
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{uid}/presence/{resource}/{status}
+POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{status}
 ```
 
 #### 路径参数
@@ -109,7 +109,7 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/c1/presence/a
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{uid}/presence/{expiry}
+POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{expiry}
 ```
 
 #### 路径参数
@@ -192,7 +192,7 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{uid}/presence
+POST https://{host}/{org_name}/{app_name}/users/{username}/presence
 ```
 
 #### 路径参数
@@ -269,7 +269,7 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence'
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users/{uid}/presence
+DELETE https://{host}/{org_name}/{app_name}/users/{username}/presence
 ```
 
 ### 路径参数
@@ -324,7 +324,7 @@ curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presenc
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&pageSize=100
+GET https://{host}/{org_name}/{app_name}/users/{username}/presence/sublist?pageNum=1&pageSize=100
 ```
 
 #### 路径参数
