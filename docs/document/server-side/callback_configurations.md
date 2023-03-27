@@ -135,9 +135,9 @@ payload 示例：
 | `thumb`        | String | 成功上传视频缩略图返回的 UUID。                              |
 | `secret`       | String | 成功上传视频文件后返回的 secret。                            |
 | `length`       | Int    | 视频播放长度。                                               |
-| `file_length`  | Long   | 视频文件大小（单位：字节）。                                 |
+| `file_length`  | Long   | 视频文件大小，单位为字节。                                 |
 | `type`         | String | 消息类型，包括：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 命令消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
-| `url`          | String | 成功上传视频文件返回的 UUID。                                |
+| `url`          | String | 视频文件的 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`，其中 `file_uuid` 为视频文件 ID。成功上传视频文件后，从文件上传的响应 body 中获取。  |
 
 payload 示例：
 
@@ -165,6 +165,7 @@ payload 示例：
 | 字段   | 类型   | 描述             |
 | :----- | :----- | :--------------- |
 | `lat`  | String | 纬度。           |
+| `type` | String   | 消息类型。位置消息为 `loc`。 |
 | `lng`  | String | 经度。           |
 | `addr` | String | 位置的文字描述。 |
 
@@ -309,7 +310,7 @@ payload 示例：
 | `from`            | String   | 消息的发送方。                                               |
 | `to`              | String   | 消息的接收方。                                               |
 | `recall_id`       | String   | 要撤回的消息 ID。                                            |
-| `msg_id`          | String   | 该撤回事件消息的 ID。                                        |
+| `msg_id`          | String   | 该撤回事件消息的 ID，与发送消息时的 `msg_id` 一致。                                       |
 | `payload`         | object   | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message.html#历史消息记录的内容)。 |
 | `securityVersion` | String   | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 Console 后台回调规则。 |
@@ -385,7 +386,7 @@ payload 中字段含义：
 | muc:ban_group              | {“operation”:“ban_group”}              | 群全局禁言                                     | 聊天室全局禁言         |
 | muc:remove_ban_group       | {“operation”:“remove_ban_group”}       | 解除群全局禁言                                 | 解除聊天室全局禁言     |
 
-#### 创建群聊
+#### 创建群组或聊天室
 
 payload 字段含义：
 
@@ -546,7 +547,7 @@ payload 字段含义：
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
 | `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
-| `operation`   | String   | `invite`：申请加入群或聊天室。                               |
+| `operation`   | String   | `apply_accept`：接受加入群组的申请。                               |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
@@ -771,7 +772,7 @@ payload 字段含义：
 }
 ```
 
-#### 封禁群成员（将群成员添加到黑名单）
+#### 添加成员至黑名单
 
 payload 字段含义：
 
@@ -780,7 +781,7 @@ payload 字段含义：
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
 | `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
-| `operation`   | String   | `ban`：封禁群成员（将群成员添加到黑名单）。                  |
+| `operation`   | String   | `ban`：将成员添加到黑名单。                  |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
@@ -813,7 +814,7 @@ payload 字段含义：
 }
 ```
 
-#### 解除群成员封禁
+#### 将成员从黑名单中移除
 
 payload 字段含义：
 
@@ -822,7 +823,7 @@ payload 字段含义：
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
 | `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
-| `operation`   | String   | `allow`：解除群聊或聊天室成员封禁。                          |
+| `operation`   | String   | `allow`：将成员从黑名单中移除。                          |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
@@ -923,7 +924,7 @@ payload 字段含义：
 }
 ```
 
-#### 用户屏蔽群
+#### 屏蔽群组或聊天室消息
 
 payload 字段含义：
 
@@ -965,7 +966,7 @@ payload 字段含义：
 }
 ```
 
-#### 用户解除屏蔽群
+#### 取消屏蔽群组或聊天室消息
 
 payload 字段含义：
 
@@ -1007,7 +1008,7 @@ payload 字段含义：
 }
 ```
 
-#### 成员进群/聊天室
+#### 加入群组或聊天室
 
 payload 字段含义：
 
@@ -1063,7 +1064,7 @@ payload 字段含义：
 }
 ```
 
-#### 有成员退出了群/有成员离开了聊天室
+#### 离开群组或聊天室
 
 payload 字段含义：
 
