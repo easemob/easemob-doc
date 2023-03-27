@@ -39,7 +39,7 @@ try {
 
 :::notice
 - 以上注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；
-- 正式环境应使用服务器端调用 REST API 接口注册，[注册用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册用户)。
+- 正式环境应[调用 REST API 接口注册用户](/document/server-side/account_system.html#注册用户)。
 :::
 
 ## 用户登录
@@ -49,9 +49,9 @@ try {
 - 用户 ID + 密码
 - 用户 ID + token
 
-:::notice
-使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
-:::
+手动登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
+
+调用登录接口后，收到 `onConnected` 回调表明 SDK 与环信服务器连接成功。
 
 ### 手动登录
 
@@ -64,6 +64,10 @@ try {
 ```
 
 **用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。 详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
+
+:::notice
+使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
+:::
 
 ```dart
 try {
