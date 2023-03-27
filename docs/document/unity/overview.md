@@ -121,7 +121,7 @@ SDKClient.Instance.Login(username, password,
 :::
 
 ```csharp
-SDKClient.Instance.Login(username, password, true,
+SDKClient.Instance.Login(username, token, true,
     callback: new CallBack(
 
         onSuccess: () =>
