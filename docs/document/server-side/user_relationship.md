@@ -108,7 +108,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/users/user1/contacts/users/user2'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/contacts/users/user2'
 ```
 
 #### 响应示例
@@ -191,7 +191,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/users/user1/contacts/users/user2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/contacts/users/user2'
 ```
 
 #### 响应示例
@@ -269,7 +269,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X GET 'http://XXXX/XXXX/XXXX/users/user1/contacts/users' \
--H 'Authorization: Bearer <YourAppToken> '
+-H 'Authorization: Bearer <YourAppToken>'
 ```
 
 #### 响应示例
@@ -342,7 +342,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
    "usernames": [
      "user2"
    ]
@@ -414,7 +414,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/users/user1/blocks/users'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/blocks/users'
 ```
 
 #### 响应示例
@@ -488,7 +488,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/users/user1/blocks/users/user2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/blocks/users/user2'
 ```
 
 #### 响应示例
