@@ -251,7 +251,7 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
 
 环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 Authorization 字段：
 
-Authorization：`Bearer ${YourAppToken}`
+Authorization：`Bearer YourAppToken`
 
 为提高项目的安全性，使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
@@ -295,7 +295,7 @@ Authorization：`Bearer ${YourAppToken}`
 
 ```shell
 curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
--H 'Authorization: Bearer {token}'
+-H 'Authorization: Bearer <YourAppToken>'
 ```
 
 #### 响应示例
@@ -375,7 +375,7 @@ curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 
 ```shell
 curl -X POST 'http://a1.easemob.com/easemob-demo/easeim/callback/storage/retry' \
--H 'Authorization: Bearer {{token}}' \
+-H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 --data-raw '{
     "date": "202108272230",
