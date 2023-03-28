@@ -98,7 +98,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 :::
 
 ```java
-EMClient.getInstance().loginWithToken(mAccount, mPassword, new EMCallBack() {
+EMClient.getInstance().loginWithToken(mAccount, mToken, new EMCallBack() {
     // 登录成功回调
     @Override
     public void onSuccess() {
