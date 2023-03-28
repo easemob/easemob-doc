@@ -57,9 +57,9 @@
 
 ## 认证方式
 
-环信即时通讯 IM REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 Authorization 字段：
+环信即时通讯 IM REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
-Authorization：`Bearer YourAppToken`
+`Authorization: Bearer YourAppToken`
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的 鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。
 
@@ -111,7 +111,7 @@ JSONString = ‘{“name”:“ken”, “employer”:“easemob”, “title”
 | `avatarurl` | String | 用户头像 URL 地址。长度在 256 个字符内。                       |
 | `phone`     | String | 用户联系方式。长度在 32 个字符内。                             |
 | `mail`      | String | 用户邮箱。长度在 64 个字符内。                                 |
-| `gender`    | Int | 用户性别：<br/> -  `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
+| `gender`    | Int | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
 | `sign`      | String | 用户签名。长度在 256 个字符内。                                 |
 | `birth`     | String | 用户生日。长度在 64 个字符内。                                 |
 | `ext`       | String | 扩展字段。                                                   |

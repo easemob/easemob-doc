@@ -472,4 +472,4 @@ flutter run
 
 ## 后续步骤
 
-为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见使用 [Token 鉴权](/product/easemob_app_token.html)。
+为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见[使用 App Token 鉴权](/product/easemob_app_token.html)。

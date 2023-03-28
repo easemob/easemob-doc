@@ -15,12 +15,12 @@
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)。
-- 已从服务端获取 app token，详见 [使用环信 app token 鉴权](/product/easemob_app_token.html)。
+- 已从服务端获取 app token，详见 [使用 App Token 鉴权](/product/easemob_app_token.html)。
 - 了解环信 IM API 的调用频率限制，详见[接口频率限制](/product/limitationapi.html)。
 
 ## 认证方式
 
-环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 Authorization 字段：
+环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 Authorization：`Bearer YourAppToken`
 
