@@ -57,9 +57,9 @@
 
 ## 认证方式
 
-环信即时通讯 IM REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 Authorization 字段：
+环信即时通讯 IM REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
-Authorization：`Bearer ${YourAppToken}`
+`Authorization: Bearer YourAppToken`
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的 鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。
 
@@ -84,7 +84,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 | 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/x-www-form-urlencoded`。 |
-| `Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -111,7 +111,7 @@ JSONString = ‘{“name”:“ken”, “employer”:“easemob”, “title”
 | `avatarurl` | String | 用户头像 URL 地址。长度在 256 个字符内。                       |
 | `phone`     | String | 用户联系方式。长度在 32 个字符内。                             |
 | `mail`      | String | 用户邮箱。长度在 64 个字符内。                                 |
-| `gender`    | Int | 用户性别：<br/> -  `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
+| `gender`    | Int | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
 | `sign`      | String | 用户签名。长度在 256 个字符内。                                 |
 | `birth`     | String | 用户生日。长度在 64 个字符内。                                 |
 | `ext`       | String | 扩展字段。                                                   |
@@ -175,7 +175,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 | 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是   |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是   |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 ### HTTP 响应
 
@@ -236,7 +236,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 | 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Authorization`| String | 是   | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是   | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -324,7 +324,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 
 | 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是   | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是   | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 ### HTTP 响应
 
@@ -378,7 +378,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 | 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是  |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是  |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 ### HTTP 响应
 
