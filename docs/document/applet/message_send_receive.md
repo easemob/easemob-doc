@@ -192,7 +192,7 @@ WebIM.conn.addEventHandler('MESSAGES',{
 
 语音、图片、视频和文件消息本质上是附件消息。发送和接收附件消息的流程如下：
 
-1. 创建和发送附件类型消息。SDK 将附件上传到 Agora 服务器，获取消息的基本信息以及服务器上附件文件的路径。
+1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器，获取消息的基本信息以及服务器上附件文件的路径。
 
    对于图片消息来说，服务器会自动生成图片的缩略图；而对于视频消息来说，服务器不会自动生成视频缩略图。
 
@@ -350,7 +350,7 @@ function sendPrivateImg(res) {
 
 你也可以将图片上传到自己的服务器，而不是环信服务器，然后调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
 
-发送 URL 图片消息前，确保将 `useOwnUploadFun` 设置为 `true`。
+发送 URL 图片消息前，确保将 `Connection` 类中的 `useOwnUploadFun` 设置为 `true`。
 
 ```javascript
 function sendPrivateUrlImg() {
