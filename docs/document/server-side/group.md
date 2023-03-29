@@ -1917,7 +1917,7 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -d '{"newadmin":"us
     },
     "duration": 0,
     "entities": [],
-    "organization": "1159220719104357",
+    "organization": "XXXX",
     "properties": {},
     "timestamp": 1680074570600,
     "uri": "http://XXXX/XXXX/XXXX/chatgroups/190141728620545/admin"
