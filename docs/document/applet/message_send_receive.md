@@ -2,7 +2,7 @@
 
 <Toc />
 
-登录环信 IM 后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
+登录即时通讯服务后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
 
 - 文字消息，包含超链接和表情；
 - 附件消息，包含图片、语音、视频及文件消息；
@@ -174,6 +174,7 @@ WebIM.conn.recallMessage(option).then((res) => {
 }).catch((error) => {
     // 消息撤回失败，原因可能是超过了撤销时限(超过 2 分钟)。
     console.log('fail', error)
+})
 ```
 
 你还可以使用 `onRecallMessage` 监听消息撤回状态：
@@ -189,23 +190,26 @@ WebIM.conn.addEventHandler('MESSAGES',{
 
 ### 发送附件消息
 
-语音、图片、视频和文件消息本质上是附件消息。
+语音、图片、视频和文件消息本质上是附件消息。发送和接收附件消息的流程如下：
 
-在发送附件消息时，采取以下步骤：
+1. 创建和发送附件类型消息。SDK 将附件上传到 Agora 服务器，获取消息的基本信息以及服务器上附件文件的路径。
 
-1. 小程序上传附件到环信服务器，获取服务器上附件文件的信息
-2. 调用 SDK 方法发送附件消息，包含消息的基本信息，以及服务器上附件文件的路径。
+   对于图片消息来说，服务器会自动生成图片的缩略图；而对于视频消息来说，服务器不会自动生成视频缩略图。
+
+2. 接收附件消息。
+
+   接收方可以自行下载语音、图片、图片缩略图、视频和文件。
 
 #### 发送语音消息
 
-在发送语音消息之前，你应该在小程序实现录音及音频文件上传。
+在发送语音消息前，你应该在 app 级别实现录音，提供录制的语音文件的 URI 和时长（单位为秒）。
 
-参考以下代码示例来创建和发送语音消息：
+参考以下代码示例创建和发送语音消息：
 
 ```javascript
 /**
  * @param {Object} tempFilePath - 要上传的文件的小程序临时文件路径。
- * @param {Object} duration - 语音时长。
+ * @param {Object} duration - 语音时长，单位为秒。
  */
 function sendPrivateAudio(tempFilePath, duration) {
   var str = WebIM.config.appkey.split("#");
@@ -225,7 +229,7 @@ function sendPrivateAudio(tempFilePath, duration) {
         type: "audio",
         chatType: "singleChat",
         filename: tempFilePath,
-        // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+        // 消息接收方：单聊为对端用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
         to: "username", 
         body: {
           //文件 URL。
@@ -257,7 +261,7 @@ function sendPrivateAudio(tempFilePath, duration) {
 
 #### 发送图片消息
 
-请参考以下代码示例创建和发送图片消息：
+参考以下代码示例创建和发送图片消息：
 
 ```javascript
 function sendImage() {
@@ -344,7 +348,9 @@ function sendPrivateImg(res) {
 
 #### 发送 URL 图片消息
 
-发送 URL 图片消息之前，确保将 `useOwnUploadFun` 设置为 `true`。
+你也可以将图片上传到自己的服务器，而不是环信服务器，然后调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
+
+发送 URL 图片消息前，确保将 `useOwnUploadFun` 设置为 `true`。
 
 ```javascript
 function sendPrivateUrlImg() {
@@ -591,9 +597,7 @@ function sendCMDMessage() {
 - 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
 
 :::notice
-
 用户 A 可根据需要设置透传消息发送间隔。
-
 :::
 
 以下示例代码展示如何发送输入状态的透传消息。
@@ -680,7 +684,7 @@ function sendCustomMsg() {
     chatType: "singleChat",
     customEvent,
     customExts,
-    // 消息扩展字段，不能设置为空，即设置为 "ext:null" 这种形式会出错。
+    // 消息扩展字段，不能设置为空，即设置为 "ext:null" 会出错。
     ext: {},
   };
   // 创建一条自定义消息。
@@ -701,7 +705,7 @@ function sendCustomMsg() {
 
 ### 使用消息扩展
 
-如果上述消息类型无法满足要求，你可以使用消息扩展为消息添加属性。这种情况可用于更复杂的消息传递场景，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
+如果上述类型的消息无法满足要求，你可以使用消息扩展为消息添加属性。这种情况可用于更复杂的消息传递场景，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
 
 ```javascript
 function sendTextMessage() {
