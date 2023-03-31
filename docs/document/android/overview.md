@@ -21,7 +21,7 @@
 <!-- 访问网络权限 -->
 <uses-permission android:name="android.permission.INTERNET" />
 <!-- 获取运营商信息，用于获取网络状态 -->
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE”/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 <!-- 允许程序在手机屏幕关闭后后台进程仍然运行 -->
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
