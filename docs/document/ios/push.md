@@ -714,7 +714,7 @@ message.ext = @{@"em_force_notification":@YES};
 | `ConversationID`        | 消息属于的会话 ID。                           |
 | `from`                  | 消息发送方，一般为当前登录 ID。               |
 | `to`                    | 消息接收方 ID，一般与 `ConversationID` 一致。 |
-| `em_force_notification` | 标志是否为强制推送的关键字，不可修改。        |
+| `em_force_notification` | 是否为强制推送：<br/> - `YES`：强制推送<br/> - （默认）`NO`：非强制推送。<br/>该字段名固定，不可修改。   |
 
 ### 发送静默消息
 
@@ -733,7 +733,7 @@ message.ext = @{@"em_ignore_notification":@YES};
 | `ConversationID`        | 消息属于的会话 ID。                           |
 | `from`                  | 消息发送方，一般为当前登录 ID。               |
 | `to`                    | 消息接收方 ID，一般与 `ConversationID` 一致。 |
-| `em_ignore_notification` | 表示是否发送静默消息的关键字，不可修改。 |
+| `em_ignore_notification` | 是否发送静默消息。<br/> - `YES`：发送静默消息；<br/> - （默认）`NO`：推送该消息。<br/>该字段名固定，不可修改。 |
 
 ### 基于 UNNotificationServiceExtension 的扩展功能
 
@@ -753,8 +753,8 @@ message.chatType = EMChatTypeChat;
 | `ConversationID`          | 消息属于的会话 ID。                                          |
 | `from`                    | 消息发送方，一般为当前登录 ID。                              |
 | `to`                      | 消息接收方 ID，一般与 `ConversationID` 一致。                |
-| `em_apns_ext`             | 消息扩展，使用扩展的方式向推送中添加自定义字段，该值为固定值，不可修改。 |
-| `em_push_mutable_content` | 是否使用推送扩展的关键字，不可修改。                         |
+| `em_apns_ext`             | 消息扩展字段，该字段名固定，不可修改。该字段用于配置富文本推送通知，包含自定义字段。 |
+| `em_push_mutable_content` | 是否使用富文本推送通知（`em_apns_ext`）：<br/> - `YES`：富文本推送通知；<br/> - （默认）`NO`：普通推送通知。<br/>该字段名固定，不可修改。   |
 
 **解析的内容**
 
