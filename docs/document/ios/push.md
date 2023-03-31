@@ -705,7 +705,6 @@ message.chatType = EMChatTypeChat;
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_force_notification":@YES};
-message.chatType = EMChatTypeChat; 
 [EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:nil];
 ```
 
