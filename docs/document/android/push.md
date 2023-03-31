@@ -1040,7 +1040,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | `txtBody`        | 消息体。                                                                 |
 | `toChatUsername` | 消息接收方 ID。                                                          |
 | `em_apns_ext`    | 消息扩展，使用扩展的方式向推送中添加自定义字段，该值为固定值，不可修改。 |
-| `test1`          | 自定义 key，用户自定义。                                                 |
+| `test1`          | 自定义 key，用户自定义。   |
 
 应用端解析自定义字段，参见 [解析收到的推送字段](#_5-解析收到的推送字段)。
 
@@ -1101,7 +1101,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :---------------------- | :------------------------------------- |
 | `txtBody`               | 消息体。                               |
 | `toChatUsername`        | 消息接收方：<br/> - 单聊为对端用户的用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。    |
-| `em_force_notification` | 表示是否为强制推送的关键字，不可修改。 |
+| `em_force_notification` | 是否为强制推送：<br/> - `YES`：强制推送<br/> - （默认）`NO`：非强制推送。<br/>该字段名固定，不可修改。 |
 
 ### 发送静默消息
 
@@ -1124,5 +1124,5 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :---------------------- | :------------------------------------- |
 | `txtBody`               | 消息体。                               |
 | `toChatUsername`        | 消息接收方：<br/> - 单聊为对端用户的用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。                    |
-| `em_ignore_notification` | 表示是否发送静默消息的关键字，不可修改。 |
+| `em_ignore_notification` | 是否发送静默消息。<br/> - `YES`：发送静默消息；<br/> - （默认）`NO`：推送该消息。<br/>该字段名固定，不可修改。 |
 
