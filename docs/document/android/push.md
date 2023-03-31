@@ -1084,7 +1084,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 使用该方式设置后，本条消息会忽略接收方的免打扰设置，不论是否处于免打扰时间段都会正常向对方推送通知；
 
 ```java
-// 下面以 TXT 消息为例，IMAGE FILE 等类型的消息设置方法相同。
+// 下面以 TXT 消息为例，图片、文件等类型的消息设置方法相同。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("test");
 // 设置要发送用户的用户 ID。
@@ -1101,4 +1101,28 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :---------------------- | :------------------------------------- |
 | `txtBody`               | 消息体。                               |
 | `toChatUsername`        | 消息接收方用户 ID。                    |
-| `em_force_notification` | 标志是否为强制推送的关键字，不可修改。 |
+| `em_force_notification` | 表示是否为强制推送的关键字，不可修改。 |
+
+### 发送静默消息
+
+发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。
+
+```java
+// 下面以 TXT 消息为例，图片、文件等类型的消息设置方法相同。
+EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
+EMTextMessageBody txtBody = new EMTextMessageBody("test");
+// 设置接收方：单聊为对端用户的用户 ID；群聊为群组 ID；聊天室聊天为聊天室 ID。
+message.setTo("toChatUsername");
+// 设置自定义扩展字段。
+message.setAttribute("em_ignore_notification", true);
+// 设置消息回调。
+message.setMessageStatusCallback(new CallBack() {...});
+// 发送消息。
+EMClient.getInstance().chatManager().sendMessage(message);
+```
+| 参数                    | 描述                                   |
+| :---------------------- | :------------------------------------- |
+| `txtBody`               | 消息体。                               |
+| `toChatUsername`        | 消息接收方：<br/> - 单聊为对端用户的用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。                    |
+| `em_ignore_notification` | 表示是否发送静默消息的关键字，不可修改。 |
+
