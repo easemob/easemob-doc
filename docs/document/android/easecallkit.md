@@ -14,7 +14,7 @@
 
 ## 跑通 Demo
 
-EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 Demo 及源码](https://www.easemob.com/download/im) 下载页面，选择 iOS 端进行下载，直接下载: [Android IM 源码](https://github.com/easemob/chat-android)。
+EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 Demo 及源码](https://www.easemob.com/download/im) 下载页面，选择 Android 端进行下载，直接下载: [Android IM 源码](https://github.com/easemob/chat-android)。
 
 环境准备：
 
