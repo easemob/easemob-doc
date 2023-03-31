@@ -157,142 +157,17 @@ EMClient.getInstance().chatManager().aysncRecallMessage(message, new CallBack() 
 void onMessageRecalled(List<ChatMessage> messages);
 ```
 
-### 发送附件类型的消息
+### 发送和接收附件类型的消息
 
-除文本消息外，还有几种其他类型的消息，其中语音，图片，短视频，文件等消息，是通过先将附件上传到消息服务器的方式实现。收到语音时，会自动下载，而图片和视频会自动下载缩略图。文件消息不会自动下载附件，接收方需调用下载附件的 API，具体实现参考下文。
+除文本消息外，SDK 还支持发送附件类型消息，包括语音、图片、视频和文件消息。
 
-#### 发送语音消息
+附件消息的发送和接收过程如下：
 
-发送语音消息时，应用层需完成语音文件录制的功能，提供语音文件的 URI 和语音时长。
+1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器。
+2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
+3. 获取附件的服务器地址和本地路径。
 
-```java
-// `voiceUri` 为语音文件的本地资源标志符，`duration` 为语音时长（秒）。
-EMMessage message = EMMessage.createVoiceSendMessage(voiceUri, duration, toChatUsername);
-// 设置消息类型，即设置 `Message` 类的 `MessageType` 属性。
-// 该属性的值为 `Chat`、`Group` 和 `Room`，表明该消息是单聊，群聊或聊天室消息，默认为单聊。
-// 若为群聊，设置 `MessageType` 为 `Group`。
-message.setChatType(ChatType.GroupChat);
-// 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
-```
-
-接收方收到语音消息后，参考如下示例代码获取语音消息的附件：
-
-```java
-EMVoiceMessageBody voiceBody = (EMVoiceMessageBody) msg.getBody();
-// 获取语音文件在服务器的地址。
-String voiceRemoteUrl = voiceBody.getRemoteUrl();
-// 本地语音文件的资源路径。
-Uri voiceLocalUri = voiceBody.getLocalUri();
-```
-
-#### 发送图片消息
-
-图片消息默认会被压缩后发出，可通过设置 `original` 参数为 `true` 发送原图。
-参考如下示例代码，创建并接收图片消息：
-
-```java
-// `imageUri` 为图片本地资源标志符，`false` 为不发送原图（默认超过 100 KB 的图片会压缩后发给对方），需要发送原图传 `true`。
-EMMessage message = EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
-// 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
-if (chatType == CHATTYPE_GROUP)
-    message.setChatType(ChatType.GroupChat);
-// 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
-
-// 发送成功后，获取图片消息缩略图及附件。
-EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
-// 从服务器端获取图片文件。
-String imgRemoteUrl = imgBody.getRemoteUrl();
-// 从服务器端获取图片缩略图。
-String thumbnailUrl = imgBody.getThumbnailUrl();
-// 从本地获取图片文件。
-Uri imgLocalUri = imgBody.getLocalUri();
-// 从本地获取图片缩略图。
-Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
-```
-
-接收方如果设置了自动下载，即 `EMClient.getInstance().getOptions().getAutodownloadThumbnail()` 为 `true`，SDK 接收到消息后会下载缩略图；如果未设置自动下载，需主动调用 `EMClient.getInstance().chatManager().downloadThumbnail(message`) 下载。
-
-下载完成后，调用相应消息 `body` 的 `thumbnailLocalUri()` 去获取缩略图路径。
-
-#### 发送短视频消息
-
-发送短视频消息时，应用层需要完成视频文件的选取或者录制。视频消息支持输入视频的首帧作为缩略图，也支持给出视频的时长作为参数，发送给接收方。
-
-```java
-String thumbPath = getThumbPath(videoUri);
-EMMessage message = EMMessage.createVideoSendMessage(videoUri, thumbPath, videoLength, toChatUsername);
-// 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
-```
-
-接收方收到短视频消息后，SDK 默认会下载该视频消息的缩略图。
-
-使用 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)` 可以修改为不自动下载。
-
-如果未设置自动下载，需主动调用 `EMClient.getInstance().chatManager().downloadThumbnail(message`) 下载。
-
-短视频文件本身需要通过 `EMClient.getInstance().chatManager().downloadAttachment(message)` 下载，下载完成后，调用相应消息 body 的 `thumbnailLocalUri()` 获取缩略图路径。
-
-```java
-/**
- * 下载视频文件。
- */
-private void downloadVideo(final EMMessage message) {
-    message.setMessageStatusCallback(new EMCallBack() {
-        @Override
-        public void onSuccess() {
-        }
-
-        @Override
-        public void onProgress(final int progress,String status) {
-        }
-
-        @Override
-        public void onError(final int error, String msg) {
-        }
-    });
-    // 下载附件
-    EMClient.getInstance().chatManager().downloadAttachment(message);
-}
-```
-
-获取视频封面的服务器地址：
-
-```java
-String thumbnailUrl = ((EMVideoMessageBody) body).getThumbnailUrl();
-```
-
-获取视频封面的本地资源路径：
-
-```java
-Uri localThumbUri = ((EMVideoMessageBody) body).getLocalThumbUri();
-```
-
-#### 发送文件消息
-
-```java
-// `fileLocalUri` 为本地资源标志符。
-EMMessage message = EMMessage.createFileSendMessage(fileLocalUri, toChatUsername);
-// 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
-if (chatType == CHATTYPE_GROUP)    
-    message.setChatType(ChatType.GroupChat);
-// 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
-```
-
-发送成功后，获取文件消息附件：
-
-```java
-EMNormalFileMessageBody fileMessageBody = (EMNormalFileMessageBody) message.getBody();
-// 从服务器获取文件。
-String fileRemoteUrl = fileMessageBody.getRemoteUrl();
-// 从本地获取文件。
-Uri fileLocalUri = fileMessageBody.getLocalUri();
-```
-
-发送附件类型消息时，可以在 `onProgress` 回调中获取附件上传的进度，以百分比表示，示例代码如下：
+此外，发送附件类型消息时，可以在 `onProgress` 回调中获取附件上传的进度，以百分比表示，示例代码如下：
 
 ```java
 // 发送消息时可以设置 `EMCallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如，消息发送失败后的提示等等。
@@ -318,36 +193,261 @@ Uri fileLocalUri = fileMessageBody.getLocalUri();
  EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-#### 下载缩略图及附件
+#### 发送和接收语音消息
 
-图片消息和视频消息默认会生成缩略图，接收到图片消息，视频消息默认会自动下载缩略图。语音消息接收到后会自动下载。如果不想自动下载附件，可以通过配置修改，即修改 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`。
+发送和接收语音消息的过程如下：
 
-如果未设置自动下载，需主动调用 `EMClient.getInstance().chatManager().downloadThumbnail(message)` 下载。
-
-下载完成后，调用相应消息 body 的 `thumbnailLocalUri()` 获取缩略图路径。
+1. 发送语音消息前，在应用层录制语音文件。
+2. 发送方调用 `createVoiceSendMessage` 方法传入语音文件的 URI、语音时长和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建语音消息，然后调用 `sendMessage` 方法发送消息。SDK 会将语音文件上传至环信服务器。
 
 ```java
-// 从服务器下载缩略图。
+// `voiceUri` 为语音文件的本地资源标志符，`duration` 为语音时长（单位为秒）。
+EMMessage message = EMMessage.createVoiceSendMessage(voiceUri, duration, toChatUsername);
+// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
+message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
+```
+
+3. 接收方收到语音消息时，自动下载语音文件。
+
+4. 接收方收到 `onMessageReceived` 回调，调用 `getRemoteUrl` 或 `getLocalUri` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
+
+```java
+EMVoiceMessageBody voiceBody = (EMVoiceMessageBody) msg.getBody();
+// 获取语音文件在服务器的地址。
+String voiceRemoteUrl = voiceBody.getRemoteUrl();
+// 本地语音文件的资源路径。
+Uri voiceLocalUri = voiceBody.getLocalUri();
+```
+
+#### 发送和接收图片消息
+
+发送和接收图片消息的流程如下：
+
+1. 发送方调用 `createImageSendMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID （群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息，然后调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+```java
+// `imageUri` 为图片本地资源标志符，`false` 为不发送原图（默认超过 100 KB 的图片会压缩后发给对方），若需要发送原图传 `true`，即设置 `original` 参数为 `true`。
+EMMessage message = EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
+// 会话类型，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
+if (chatType == CHATTYPE_GROUP)
+    message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
+```
+
+2. 接收方收到图片消息，自动下载图片缩略图。
+
+SDK 默认自动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。若设置为手动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需调用 `EMClient.getInstance().chatManager().downloadThumbnail(message)` 下载。
+
+3. 接收方收到 `onMessageReceived` 回调，调用 `downloadAttachment` 下载原图。
+
+```java
+@Override
+public void onMessageReceived(List<EMMessage> messages) {
+    for(EMMessage message : messages) {
+        if (message.getType() == Type.IMAGE) {
+            message.setMessageStatusCallback(new EMCallBack() {
+               @Override
+               public void onSuccess() {
+                   // 附件下载成功
+               }
+               @Override
+               public void onError(int code, String error) {
+                   // 附件下载失败
+               }
+
+               @Override
+               public void onProgress(int progress, String status) {
+                   // 附件下载进度
+               }
+
+           });
+           // 下载附件
+           EMClient.getInstance().chatManager().downloadAttachment(message);
+        }
+    }
+}
+```
+
+4. 获取图片消息的缩略图和附件。
+
+```java
 EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
+// 从服务器端获取图片文件。
+String imgRemoteUrl = imgBody.getRemoteUrl();
+// 从服务器端获取图片缩略图。
+String thumbnailUrl = imgBody.getThumbnailUrl();
+// 从本地获取图片文件。
+Uri imgLocalUri = imgBody.getLocalUri();
 // 从本地获取图片缩略图。
 Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```
 
-下载附件
+#### 发送和接收视频消息
 
-下载附件的方法为：`EMClient.getInstance().chatManager().downloadAttachment(message)`;
+发送和接收视频消息的流程如下：
 
-下载完成后，调用相应消息 body 的 `getLocalUri()` 获取附件路径。
+1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
+
+2. 发送方调用 `createVideoSendMessage` 方法传入视频文件的本地资源标志符、缩略图的本地存储路径、视频时长以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID），然后调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoSendMessage` 方法。
+
+```java
+// 在应用层获取视频首帧
+String thumbPath = getThumbPath(videoUri);
+EMMessage message = EMMessage.createVideoSendMessage(videoUri, thumbPath, videoLength, toChatUsername);
+// 会话类型，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
+if (chatType == CHATTYPE_GROUP)
+    message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
+```
+
+3. 接收方收到视频消息时，自动下载视频缩略图。
+
+SDK 默认自动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。若设置为手动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需调用 `EMClient.getInstance().chatManager().downloadThumbnail(message)` 下载。
+
+4. 接收方收到 `onMessageReceived` 回调，可以调用 `EMClient.getInstance().chatManager().downloadAttachment(message)` 方法下载视频原文件。
+
+```java
+/**
+ * 下载视频文件。
+ */
+private void downloadVideo(final EMMessage message) {
+    message.setMessageStatusCallback(new EMCallBack() {
+        @Override
+        public void onSuccess() {
+        }
+
+        @Override
+        public void onProgress(final int progress,String status) {
+        }
+
+        @Override
+        public void onError(final int error, String msg) {
+        }
+    });
+    // 下载附件
+    EMClient.getInstance().chatManager().downloadAttachment(message);
+}
+```
+
+5. 获取视频缩略图和视频原文件。
+
+```java
+// 从服务器端获取视频文件。
+String imgRemoteUrl = ((EMVideoMessageBody) body).getRemoteUrl();
+// 从服务器获取视频缩略图文件。
+String thumbnailUrl = ((EMVideoMessageBody) body).getThumbnailUrl();
+// 从本地获取视频文件文件。
+Uri localUri = ((EMVideoMessageBody) body).getLocalUri();
+// 从本地获取视频缩略图文件。
+Uri localThumbUri = ((EMVideoMessageBody) body).thumbnailLocalUri();
+```
+
+#### 发送和接收文件消息
+
+发送和接收文件消息的流程如下：
+
+1. 发送方调用 `createFileSendMessage` 方法传入文件的本地资源标志符和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建文件消息，然后调用 `sendMessage` 方法发送文件消息。SDK 将文件上传至环信服务器。
+
+```java
+// `fileLocalUri` 为本地资源标志符。
+EMMessage message = EMMessage.createFileSendMessage(fileLocalUri, toChatUsername);
+// 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
+if (chatType == CHATTYPE_GROUP)    
+    message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
+```
+
+2. 接收方收到 `onMessageReceived` 回调，调用 `downloadAttachment` 方法下载文件。
+
+```java
+/**
+ * 下载视频文件。
+ */
+private void downloadFile(final EMMessage message) {
+    message.setMessageStatusCallback(new CallBack() {
+        @Override
+        public void onSuccess() {
+        }
+
+        @Override
+        public void onProgress(final int progress,String status) {
+        }
+
+        @Override
+        public void onError(final int error, String msg) {
+        }
+    });
+    // 下载附件
+    EMClient.getInstance().chatManager().downloadAttachment(message);
+}
+```
+
+3. 调用以下方法从服务器或本地获取文件附件：
+
+```java
+EMNormalFileMessageBody fileMessageBody = (EMNormalFileMessageBody) message.getBody();
+// 从服务器获取文件。
+String fileRemoteUrl = fileMessageBody.getRemoteUrl();
+// 从本地获取文件。
+Uri fileLocalUri = fileMessageBody.getLocalUri();
+```
+
+#### 下载缩略图及附件
+
+SDK 默认自动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。若设置为手动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需主动调用 `EMClient.getInstance().chatManager().downloadThumbnail(message)` 下载。下载完成后，调用相应消息 body 的 `thumbnailLocalUri()` 获取缩略图路径。
+
+```java
+// 从服务器下载缩略图。
+message.setMessageStatusCallback(new EMCallBack() {
+    @Override
+    public void onSuccess() {
+        EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
+        // 从本地获取图片缩略图。
+        Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
+    }
+    
+    @Override
+    public void onProgress(final int progress,String status) {
+    }
+    
+    @Override
+    public void onError(final int error, String msg) {
+    }
+});
+// 下载缩略图
+EMClient.getInstance().chatManager().downloadThumbnail(message);
+```
+
+对于原文件来说，语音消息收到后会自动下载语音文件。若下载原图片、视频或文件，调用 `EMClient.getInstance().chatManager().downloadAttachment(message)` 方法。下载完成后，调用相应消息 body 的 `getLocalUri()` 获取附件路径。
 
 例如：
 
 ```java
-EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
-// 从本地获取图片文件。
-Uri imgLocalUri = imgBody.getLocalUri();
+message.setMessageStatusCallback(new EMCallBack() {
+    @Override
+    public void onSuccess() {
+        EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
+        // 从本地获取图片文件。
+        Uri imgLocalUri = imgBody.getLocalUri();
+    }
+
+    @Override
+    public void onProgress(final int progress,String status) {
+    }
+    
+    @Override
+    public void onError(final int error, String msg) {
+    }
+});
+// 下载附件
+EMClient.getInstance().chatManager().downloadAttachment(message);
 ```
 
-### 发送位置消息
+### 发送和接收位置消息
 
 当你要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
@@ -361,7 +461,7 @@ if (chatType == CHATTYPE_GROUP)
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-### 发送透传消息
+### 发送和接收透传消息
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
 

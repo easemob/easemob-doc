@@ -705,7 +705,6 @@ message.chatType = EMChatTypeChat;
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_force_notification":@YES};
-message.chatType = EMChatTypeChat; 
 [EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:nil];
 ```
 
@@ -716,6 +715,25 @@ message.chatType = EMChatTypeChat;
 | `from`                  | 消息发送方，一般为当前登录 ID。               |
 | `to`                    | 消息接收方 ID，一般与 `ConversationID` 一致。 |
 | `em_force_notification` | 标志是否为强制推送的关键字，不可修改。        |
+
+### 发送静默消息
+
+发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。
+
+```plaintext
+EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
+EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
+message.ext = @{@"em_ignore_notification":@YES};
+[EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:nil];
+```
+
+| 参数                    | 描述                                          |
+| :---------------------- | :-------------------------------------------- |
+| `body`                  | 消息体。                                      |
+| `ConversationID`        | 消息属于的会话 ID。                           |
+| `from`                  | 消息发送方，一般为当前登录 ID。               |
+| `to`                    | 消息接收方 ID，一般与 `ConversationID` 一致。 |
+| `em_ignore_notification` | 表示是否发送静默消息的关键字，不可修改。 |
 
 ### 基于 UNNotificationServiceExtension 的扩展功能
 
