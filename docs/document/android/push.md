@@ -1100,7 +1100,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | 参数                    | 描述                                   |
 | :---------------------- | :------------------------------------- |
 | `txtBody`               | 消息体。                               |
-| `toChatUsername`        | 消息接收方用户 ID。                    |
+| `toChatUsername`        | 消息接收方：<br/> - 单聊为对端用户的用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。    |
 | `em_force_notification` | 表示是否为强制推送的关键字，不可修改。 |
 
 ### 发送静默消息
