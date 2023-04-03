@@ -14,7 +14,7 @@
 
 - `getConversationsFromServerByPage` 分页获取服务器上保存的会话列表；
 - `asyncFetchHistoryMessagesFromServer` 获取服务器保存的指定会话中的消息；
-- `removeMessagesFromServer` 单向删除服务端的历史消息；
+- `removeMessagesFromServerWithTimeStamp`/`removeMessagesFromServerMessageIds` 按消息时间或消息 ID 单向删除服务端的历史消息；
 - `deleteServerConversation` 删除服务器端会话及其历史消息。
 
 ## 前提条件
@@ -33,8 +33,9 @@
 你可以调用 `getConversationsFromServerByPage` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
 
 :::tip
-1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 方法即可。
-2. 获取的会话列表中不包含最新一条消息通过 RESTful 接口发送的会话。若需获取该类会话，需要联系商务开通将通过 RESTful 接口发送的消息写入会话列表的功能。
+1. 若使用该功能，需将 SDK 升级至 4.0.0。
+2. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 方法即可。
+3. 获取的会话列表中不包含最新一条消息通过 RESTful 接口发送的会话。若需获取该类会话，需要联系商务开通将通过 RESTful 接口发送的消息写入会话列表的功能。
 :::
 
 示例代码如下：
@@ -62,7 +63,7 @@
 
 ### 单向删除服务端的历史消息
 
-你可以调用 `removeMessagesFromServer` 方法单向删除服务端的历史消息。每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。登录该账号的其他设备会收到 `EMMultiDevicesDelegate` 中的 `multiDevicesMessageBeRemoved` 回调，已删除的消息自动从设备本地移除。
+你可以调用 `removeMessagesFromServerWithTimeStamp` 或 `removeMessagesFromServerMessageIds` 方法按消息时间或消息 ID 单向删除服务端的历史消息。每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。登录该账号的其他设备会收到 `EMMultiDevicesDelegate` 中的 `multiDevicesMessageBeRemoved` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
 若使用该功能，需将 SDK 升级至 V3.9.8 或以上版本并联系商务开通。

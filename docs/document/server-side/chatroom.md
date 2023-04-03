@@ -64,11 +64,11 @@
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 Authorization 字段：
+环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
-Authorization：`Bearer ${YourAppToken}`
+`Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的鉴权方式，详见 [使用 app token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，环信使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
 ## 管理超级管理员
 
@@ -95,7 +95,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -126,7 +126,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST 'https://XXXX/XXXX/XXXX//chatrooms/super_admin'
--H 'Authorization: Bearer <YourAppToken> '
+-H 'Authorization: Bearer <YourAppToken>'
 -H 'Content-Type: application/json'
 -d '{
     "superadmin": "user1"
@@ -181,13 +181,13 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pages
 | `pagenum`  | Int   | 否  | 当前页码，默认值为 1。              |
 | `pagesize` | Int   | 否  | 每页返回的超级管理员数量，默认值为 10。                    |
 
-其他参数及描述详见 [公共参数](#公共参数)。
+
 
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -212,7 +212,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pages
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken> '
+curl -X GET http://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -266,7 +266,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -278,7 +278,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 | :------- | :------ | :---------------------------------------------------- |
 | `data.newSuperAdmin` | String  | 被撤销超级管理员权限的用户 ID。     |
 | `data.resource` | String    | 预留参数，开发者不用关注。     |
-| `data.properties` | String    |  预留参数，开发者不用关注。     |
+| `properties` | String    |  预留参数，开发者不用关注。     |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -292,7 +292,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl --location --request DELETE 'https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX'
---header 'Authorization: Bearer <YourAppToken> '
+--header 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -349,7 +349,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -360,9 +360,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}
 | 字段                 | 类型   | 描述                                                      |
 | :------------------- | :----- | :-------------------------------------------------------- |
 | `data.id`                 | String | 聊天室 ID，聊天室唯一标识，由环信即时通讯 IM 服务器生成。 |
-| `data.name`               | String | 聊天室名称，最大长度为 128 个字符。             |
+| `data.name`               | String | 聊天室名称。             |
 | `data.owner`              | String | 聊天室创建者的用户 ID。例如：{“owner”: “user1”}。       |
-| `data.affiliations_count` | Int   | 聊天室现有成员总数。                                      |
+| `data.affiliations_count` | Int   | 聊天室现有成员总数（包含聊天室创建者）。                            |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -412,7 +412,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -436,7 +436,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/users/user1/joined_chatrooms'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/joined_chatrooms'
 ```
 
 ##### 响应示例
@@ -474,7 +474,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -485,14 +485,14 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | 字段                 | 类型    | 描述                                                         |
 | :------------------- | :------ | :----------------------------------------------------------- |
 | `data.id`                 | String  | 聊天室 ID，聊天室唯一标识符，由环信即时通讯 IM 服务器生成。  |
-| `data.name`               | String  | 聊天室名称，最大长度为 128 字符。                |
-| `data.description`        | String  | 聊天室描述，最大长度为 512 字符。                |
+| `data.name`               | String  | 聊天室名称。                |
+| `data.description`        | String  | 聊天室描述。                |
 | `data.membersonly`        | Bool | 加入聊天室是否需要群主或者群管理员审批：<br/> - `true`：是。<br/> - `false`：否。 |
-| `data.allowinvites`       | Bool | 是否允许聊天室成员邀请其他用户加入该聊天室：<br/> - `true`：允许聊天室成员邀请他人加入该聊天室。<br/> - `false`：仅聊天室管理员可邀请他人加入该聊天室。 |
+| `data.allowinvites`       | Bool | 是否允许聊天室成员邀请其他用户加入该聊天室：<br/> - `true`：允许聊天室成员邀请他人加入该聊天室。<br/> - `false`：仅聊天室所有者和管理员可邀请他人加入该聊天室。 |
 | `data.maxusers`           | Int    | 聊天室成员数上限，创建聊天室时设置。             |
 | `data.owner`              | String  | 聊天室所有者的用户 ID。例如：{“owner”: “user1”}。          |
 | `data.created`            | Long    | 创建聊天室时间，Unix 时间戳，单位为毫秒。                    |
-| `data.custom`             | String  | 聊天室自定义属性字段。                               |
+| `data.custom`             | String  | 聊天室扩展信息。                             |
 | `data.affiliations_count` | Int    | 现有聊天室成员总数。                                         |
 | `data.affiliations`       | Array   | 现有聊天室成员列表，包含聊天室所有者和成员（包括聊天室管理员）。例如：“affiliations”:[{“owner”: “user1”},{“member”:”user2”},{“member”:”user3”}]。 |
 | `data.public`             | Bool | 预留字段，无需关注。              |
@@ -508,7 +508,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
 ```
 
 ##### 响应示例
@@ -542,7 +542,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ### 创建聊天室
 
-创建一个聊天室，并设置聊天室名称、聊天室描述、公开聊天室/私有聊天室属性、聊天室成员最大人数（包括管理员）、加入公开聊天室是否需要批准、管理员、以及聊天室成员。
+创建一个聊天室，需设置聊天室名称、聊天室描述、聊天室成员最大人数（包括管理员）、聊天室管理员和普通成员以及聊天室扩展信息。
 
 #### HTTP 请求
 
@@ -560,7 +560,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -571,7 +571,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 | `maxusers`    | Int   | 否  | 聊天室最大成员数（包括聊天室所有者），默认最大值为 10,000，如需调整请联系商务。         |
 | `owner`       | String | 是     | 聊天室的管理员。                                             |
 | `members`     | Array  | 否  | 聊天室成员的用户 ID。若传该参数，确保至少设置一个数组元素。 |
-| `custom`  | String | 否  | 聊天室自定义属性，例如可以给聊天室添加业务相关的标记，不要超过 1,024 个字符。                                 |
+| `custom`  | String | 否  | 聊天室扩展信息，例如可以给聊天室添加业务相关的标记，不要超过 1,024 个字符。                               |
 
 #### HTTP 响应
 
@@ -594,7 +594,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
    "name": "testchatroom1",
    "description": "test",
    "maxusers": 300,
@@ -636,7 +636,7 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -644,8 +644,8 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 | 参数          | 类型   | 是否必需 | 描述                                                 |
 | :------------ | :----- | :------- | :--------------------------------------------------- |
-| `name`        | String | 是     | 聊天室名称，设置的值不能包含斜杠(“/”)。              |
-| `description` | String | 是     | 聊天室描述，设置的值不能包含斜杠(“/”)。              |
+| `name`        | String | 是     | 聊天室名称，不能超过 128 个字符，不能包含斜杠(“/”)。              |
+| `description` | String | 是     | 聊天室描述，不能超过 512 个字符，不能包含斜杠(“/”)。              |
 | `maxusers`    | Int | 是     | 聊天室最大成员数（包括聊天室所有者），默认可设置的最大人数为 10,000，如需调整请联系商务。 |
 
 #### HTTP 响应
@@ -671,7 +671,7 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
+curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
    "name": "testchatroom",
    "description": "test",
    "maxusers": 300
@@ -710,7 +710,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | 参数    | 类型   |是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -738,7 +738,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
 ```
 
 ##### 响应示例
@@ -780,7 +780,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -805,7 +805,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement'
+curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement'
 ```
 
 ##### 响应示例
@@ -846,7 +846,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 ##### 请求 body
 
@@ -876,7 +876,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement' -d '{"announcement" : "聊天室公告…"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement' -d '{"announcement" : "聊天室公告…"}'
 ```
 
 ##### 响应示例
@@ -918,7 +918,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -949,7 +949,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
+curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "metaData": {
   			"key1": "value1",
 				"key2": "value2"
@@ -990,7 +990,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -1019,7 +1019,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "keys": ["key1","key2"]
  }' 'http://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13'
 ```
@@ -1040,6 +1040,8 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 用户删除其设置的聊天室自定义属性。该方法只能删除当前用户设置的聊天室自定义属性，不能删除其他成员设置的自定义属性。
 
+该方法每次最多可删除 10 个自定义属性。
+
 #### HTTP 请求
 
 ```http
@@ -1056,13 +1058,13 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
 | 参数          | 类型   | 是否必需 | 描述                                                 |
 | :------------ | :----- | :------- | :--------------------------------------------------- |
-| `keys`        | Array | 否     | 聊天室自定义属性名称列表。              |
+| `keys`        | Array | 否     | 聊天室自定义属性名称列表。每次最多可传 10 个自定义属性名称。              |
 
 #### HTTP 响应
 
@@ -1086,7 +1088,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
+DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "keys": ["key1","key2"]
  }' 'http://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1'
 ```
@@ -1123,7 +1125,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -1154,7 +1156,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
+curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "metaData": {
         "key1": "value1",
 		"key2": "value2"
@@ -1179,6 +1181,8 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 用户强制删除聊天室的自定义属性信息，即该方法除了会删除当前用户设置的聊天室自定义属性，还可以删除其他用户设置的自定义属性。
 
+该方法每次最多可删除 10 个自定义属性。
+
 #### HTTP 请求
 
 ```http
@@ -1195,13 +1199,13 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | 该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
 | 参数          | 类型   | 是否必需 | 描述                                                 |
 | :------------ | :----- | :------- | :--------------------------------------------------- |
-| `keys`        | Array | 否     | 聊天室自定义属性的名称列表。              |
+| `keys`        | Array | 否     | 聊天室自定义属性的名称列表。每次最多可传 10 个自定义属性名称。              |
 
 #### HTTP 响应
 
@@ -1225,7 +1229,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
+DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "keys": ["key1","key2"]
  }' 'http://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1/forced'
 ```
@@ -1253,7 +1257,7 @@ DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json'
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?limit={N}&cursor={N}
+GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?pagenum={N}&pagesize={N}
 ```
 
 ##### 路径参数
@@ -1264,14 +1268,14 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?limit={N}
 
 | 参数          | 类型   | 是否必需 | 描述                                                         |
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
-| `limit`       | Int   | 否  | 每页期望返回的聊天室成员数量。取值范围为 [0,1000]，默认值为 1000。超过 1000 按照 1000 返回。 |
-| `cursor`      | String | 否  | 查询游标，指定数据查询的起始位置。首次调用时，若传空字符串或 `null`，按照用户加入聊天室时间的倒序获取数据。你可以从响应 body 中获取 `cursor`，并在下一次请求的 URL 中传入该字段，直到响应 body 中不再有该字段，则表示已查询到 app 中所有用户。|
+| `pagenum`       | Int   | 否  | 查询页码。默认值为 1。  |
+| `pagesize`      | Int | 否  | 每页显示的聊天室成员数量。默认值为 1000。取值范围为 [0,1000]。|
 
 ##### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -1294,7 +1298,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?limit={N}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken> '
+curl -X GET http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -1343,7 +1347,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -1369,7 +1373,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1'
 ```
 
 ##### 响应示例
@@ -1413,7 +1417,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -1444,7 +1448,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
    "usernames": [
      "user1","user2"
    ]
@@ -1493,7 +1497,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -1519,7 +1523,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1'
 ```
 
 ##### 响应示例
@@ -1557,7 +1561,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 
 | 参数         | 类型   | 是否必需 | 描述                                                         |
 | :----------- | :----- | :------- | :----------------------------------------------------------- |
-| `username`   | String | 是     | 一个或多个用户 ID，多个用户 ID 之间用逗号（“,”）分隔。一次最多可传 100 个用户 ID。              |
+| `username`   | String | 是     | 一个或多个用户 ID，多个用户 ID 之间用逗号（“,”）分隔。在 URL 中，"," 需要转义为 "%2C"。一次最多可传 100 个用户 ID。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1566,7 +1570,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -1579,7 +1583,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 | `data.result` | Bool | 是否成功批量移除聊天室成员：<br/> - `true`：是；<br/> - `false`：否。 |
 | `data.action` | String  | 执行的操作。在该响应中，该字段的值为 `remove_member`，表示移除成员。                                            |
 | `data.reason` | String  | 移除失败的原因。                                        |
-| `data.user`   | String  | 用户 ID。                                                 |
+| `data.user`   | String  | 已删除成员的用户 ID 列表。                                  |
 | `data.id`     | String  | 聊天室 ID。                                               |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -1593,7 +1597,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1%2Cuser2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1%2Cuser2'
 ```
 
 ##### 响应示例
@@ -1644,7 +1648,8 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`        | String | 是      | 内容类型。请填 `application/json`。  |
+|`Authorization`| String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -1652,9 +1657,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数   | 类型  | 描述        |
-| :----- | :---- | :---------- |
-| `data` | Array | 管理员 ID。 |
+| 参数   | 类型  | 描述                       |
+| :----- | :---- | :------------------------- |
+| `data` | Array | 聊天室管理员用户 ID 数组。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1667,7 +1672,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -H 'Authorization: Bearer <YourAppToken> '
+curl -X GET http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -1694,7 +1699,7 @@ curl -X GET http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -H 'Authorization: Be
 #### HTTP 请求
 
 ```http
-POST /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
+POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 ```
 
 ##### 路径参数
@@ -1705,15 +1710,21 @@ POST /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Content-Type`  | String | 是     | 内容类型。填入 `application/json`。 |
+| `Accept`        | String | 是     | 内容类型。填入 `application/json`。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
-#### 请求 body
+##### 请求 body
 
 | 参数       | 描述                                |
 | :--------- | :---------------------------------- |
 | `newadmin` | 要添加为聊天室管理员的成员用户 ID。 |
 
-#### 响应参数
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 参数       | 类型    | 描述                                                     |
 | :--------- | :------ | :------------------------------------------------------- |
@@ -1731,7 +1742,7 @@ POST /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -d '{"newadmin":"user1"}' -H 'Authorization: Bearer <YourAppToken> '
+curl -X POST http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -d '{"newadmin":"user1"}' -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -1775,7 +1786,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin/{oldad
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Accept`        | String | 是 | 内容类型。填入 `application/json`       |
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -1799,7 +1811,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin/{oldad
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin/user1 -H 'Authorization: Bearer <YourAppToken> '
+curl -X DELETE http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin/user1 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -1844,7 +1856,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -1867,7 +1879,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users'
 ```
 
 ##### 响应示例
@@ -1912,7 +1924,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -1938,7 +1950,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1'
 ```
 
 ##### 响应示例
@@ -1984,7 +1996,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -2017,7 +2029,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
    "usernames": [
      "user3","user4"
  }' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users'
@@ -2072,7 +2084,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -2098,7 +2110,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1'
 ```
 
 ##### 响应示例
@@ -2145,7 +2157,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -2171,7 +2183,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1%2Cuser2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1%2Cuser2'
 ```
 
 ##### 响应示例
@@ -2228,7 +2240,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -2251,7 +2263,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users'
 ```
 
 ##### 响应示例
@@ -2296,7 +2308,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{u
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -2322,7 +2334,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{u
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/{66XXXX33}/white/users/{username}'
+curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/{66XXXX33}/white/users/{username}'
 ```
 
 ##### 响应示例
@@ -2366,7 +2378,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -2401,7 +2413,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' -d '{"usernames" : ["user1"]}' 'http://XXXX/XXXX/XXXX/chatrooms/{chatroomid}/white/users'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"usernames" : ["user1"]}' 'http://XXXX/XXXX/XXXX/chatrooms/{chatroomid}/white/users'
 ```
 
 ##### 响应示例
@@ -2452,7 +2464,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -2478,7 +2490,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/{66XXXX33}/white/users/{username}'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/{66XXXX33}/white/users/{username}'
 ```
 
 ##### 响应示例
@@ -2532,7 +2544,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -2556,7 +2568,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -H 'Authorization: Bearer <YourAppToken> '
+curl -X GET HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -2600,7 +2612,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
+| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### 请求 body
 
@@ -2608,8 +2622,6 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `mute_duration` | Long   | 是     | 禁言时长，从当前时间开始计算。单位为毫秒。`-1` 表示永久禁言。 |
 | `usernames`     | String | 是     | 要被禁言的用户 ID。                                      |
-
-其他字段及描述详见 [公共参数](#公共参数)。
 
 #### HTTP 响应
 
@@ -2634,7 +2646,14 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -d '{"usernames":["user1"], "mute_duration":86400000}' -H 'Authorization: Bearer <YourAppToken> '
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d
+'{
+    "usernames": [
+        "user1",
+        "user2"
+    ],
+    "mute_duration": 86400000
+}'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute'
 ```
 
 ##### 响应示例
@@ -2645,11 +2664,18 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -d '{"usernames":["us
     "application": "52XXXXf0",
     "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute",
     "entities": [],
-    "data": [{
-        "result": true,
-        "expire": 1489158589481,
-        "user": "user1"
-    }],
+    "data": [
+        {
+            "result": true,
+            "expire": 1642148173726,
+            "user": "user1"
+        },
+        {
+            "result": true,
+            "expire": 1642148173726,
+            "user": "user2"
+        }
+    ],
     "timestamp": 1489072189508,
     "duration": 0,
     "organization": "XXXX",
@@ -2659,7 +2685,9 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -d '{"usernames":["us
 
 ### 禁言聊天室全体成员
 
-对所有聊天室成员一键禁言，即将聊天室的所有成员均加入禁言列表。设置聊天室全员禁言后，仅聊天室白名单中的用户可在聊天室内发消息。
+对所有聊天室成员一键禁言。该操作不影响聊天室禁言列表，即一键禁言不会将聊天室所有成员加入聊天室禁言列表。
+
+设置聊天室全员禁言后，仅聊天室白名单中的用户可在聊天室内发消息。
 
 #### HTTP 请求
 
@@ -2677,7 +2705,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-| `Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+| `Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -2700,7 +2728,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban'
 ```
 
 ##### 响应示例
@@ -2743,7 +2771,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :---------------- | :------- |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -2753,8 +2781,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member
 
 | 字段    | 类型    | 描述                                                         |
 | :------- | :------ | :----------------------------------------------------------- |
-| `data.result` | Bool | 是否成功将指定用户移出禁言列表：<br/> - `true`：是； <br/> - `false`：否。 |
-| `data.user`   | String  | 被解除禁言的聊天室成员的用户 ID。                                           |
+| `data.result` | Boolean | 是否成功将指定用户移出禁言列表：<br/> - `true`：是； <br/> - `false`：否。 |
+| `data.user`   | String  | 被解除禁言的聊天室成员的用户 ID。   |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2767,7 +2795,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute/user1  -H 'Authorization: Bearer <YourAppToken> '
+curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute/user1  -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -2809,7 +2837,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 | :-------------- | :----- | :---------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
 | `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |该用户或管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。|
+|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
 
 #### HTTP 响应
 
@@ -2832,7 +2860,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken> ' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban'
+curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban'
 ```
 
 ##### 响应示例

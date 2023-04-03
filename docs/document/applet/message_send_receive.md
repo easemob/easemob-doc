@@ -2,7 +2,7 @@
 
 <Toc />
 
-登录环信 IM 后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
+登录即时通讯服务后，用户可以在单聊、群聊、聊天室中发送如下类型的消息：
 
 - 文字消息，包含超链接和表情；
 - 附件消息，包含图片、语音、视频及文件消息；
@@ -10,7 +10,7 @@
 - 透传消息；
 - 自定义消息。
 
-对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
+针对聊天室消息并发量较大的场景，即时通讯服务提供消息分级功能。你可以通过设置消息优先级，将消息划分为高、普通和低三种级别。你可以在创建消息时，将指定消息类型，或指定成员的所有消息设置为高优先级，确保此类消息优先送达。这种方式可以确保在聊天室内消息并发量较大或消息发送频率过高的情况下，服务器首先丢弃低优先级消息，将资源留给高优先级消息，确保重要消息（如打赏、公告等）优先送达，以此提升重要消息的可靠性。请注意，该功能并不保证高优先级消息必达。在聊天室内消息并发量过大的情况下，为保证用户实时互动的流畅性，即使是高优先级消息仍然会被丢弃。
 
 本文介绍如何使用即时通讯 IM SDK 实现小程序发送和接收这些类型的消息。
 
@@ -174,6 +174,7 @@ WebIM.conn.recallMessage(option).then((res) => {
 }).catch((error) => {
     // 消息撤回失败，原因可能是超过了撤销时限(超过 2 分钟)。
     console.log('fail', error)
+})
 ```
 
 你还可以使用 `onRecallMessage` 监听消息撤回状态：
@@ -189,23 +190,26 @@ WebIM.conn.addEventHandler('MESSAGES',{
 
 ### 发送附件消息
 
-语音、图片、视频和文件消息本质上是附件消息。
+语音、图片、视频和文件消息本质上是附件消息。发送和接收附件消息的流程如下：
 
-在发送附件消息时，采取以下步骤：
+1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器，获取消息的基本信息以及服务器上附件文件的路径。
 
-1. 小程序上传附件到环信服务器，获取服务器上附件文件的信息
-2. 调用 SDK 方法发送附件消息，包含消息的基本信息，以及服务器上附件文件的路径。
+   对于图片消息来说，服务器会自动生成图片的缩略图；而对于视频消息来说，服务器不会自动生成视频缩略图。
+
+2. 接收附件消息。
+
+   接收方可以自行下载语音、图片、图片缩略图、视频和文件。
 
 #### 发送语音消息
 
-在发送语音消息之前，你应该在小程序实现录音及音频文件上传。
+在发送语音消息前，你应该在 app 级别实现录音，提供录制的语音文件的 URI 和时长（单位为秒）。
 
-参考以下代码示例来创建和发送语音消息：
+参考以下代码示例创建和发送语音消息：
 
 ```javascript
 /**
  * @param {Object} tempFilePath - 要上传的文件的小程序临时文件路径。
- * @param {Object} duration - 语音时长。
+ * @param {Object} duration - 语音时长，单位为秒。
  */
 function sendPrivateAudio(tempFilePath, duration) {
   var str = WebIM.config.appkey.split("#");
@@ -225,7 +229,7 @@ function sendPrivateAudio(tempFilePath, duration) {
         type: "audio",
         chatType: "singleChat",
         filename: tempFilePath,
-        // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+        // 消息接收方：单聊为对端用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
         to: "username", 
         body: {
           //文件 URL。
@@ -257,7 +261,7 @@ function sendPrivateAudio(tempFilePath, duration) {
 
 #### 发送图片消息
 
-请参考以下代码示例创建和发送图片消息：
+参考以下代码示例创建和发送图片消息：
 
 ```javascript
 function sendImage() {
@@ -344,7 +348,9 @@ function sendPrivateImg(res) {
 
 #### 发送 URL 图片消息
 
-发送 URL 图片消息之前，确保将 `useOwnUploadFun` 设置为 `true`。
+你也可以将图片上传到自己的服务器，而不是环信服务器，然后调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
+
+发送 URL 图片消息前，确保将 `Connection` 类中的 `useOwnUploadFun` 设置为 `true`。
 
 ```javascript
 function sendPrivateUrlImg() {
@@ -520,6 +526,26 @@ function sendPrivateFile(res) {
 }
 ```
 
+### 发送位置消息
+
+当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
+
+```javascript
+const sendLocMsg = () => {
+  let option = {
+    chatType: "singleChat",
+    type: "loc",
+    to: "username",
+    addr: "四通桥东",
+    buildingName: "数码大厦",
+    lat: 40, // 纬度
+    lng: 116, // 经度
+  };
+  let msg = WebIM.message.create(option);
+  conn.send(msg);
+};
+```
+
 ### 发送透传消息
 
 透传消息是通知指定用户采取特定操作的命令消息。接收方自己处理透传消息。
@@ -556,6 +582,87 @@ function sendCMDMessage() {
 }
 ```
 
+#### 通过透传消息实现输入指示器
+
+输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，设定对聊天应用程序中新交互的期望。你可以通过透传消息实现输入指示器。
+
+你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
+
+![img](@static/images/common/typing_indicator.png)
+
+监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+
+- 用户 A 向用户 B 发送消息，通知其开始输入文本。
+- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
+- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+
+:::notice
+用户 A 可根据需要设置透传消息发送间隔。
+:::
+
+以下示例代码展示如何发送输入状态的透传消息。
+
+发送输入状态的用户。
+
+```typescript
+let previousChangedTimeStamp = 0;
+// 监听输入状态的变化
+const onInputChange = function () {
+  const currentTimestamp = new Date().getTime();
+  if (currentTimestamp - previousChangedTimeStamp > 5000) {
+    sendBeginTyping();
+    previousChangedTimeStamp = currentTimestamp;
+  }
+};
+
+// 创建输入状态消息并发送
+const sendBeginTyping = function () {
+  const option = {
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+    chatType: "singleChat", 
+    // 消息类型。
+    type: "cmd", 
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "<target id>", 
+    // 用户自定义操作。
+    action: "TypingBegin", 
+  };
+  const typingMessage = message.create(option);
+
+  connection
+    .send(typingMessage)
+    .then(() => {
+      console.log("success");
+    })
+    .catch((e) => {
+      console.log("fail");
+    });
+};
+```
+
+接收输入状态的用户。
+
+```typescript
+// 设置状态监听器
+let timer;
+connection.addEventHandler("message", {
+  onCmdMessage: (msg) => {
+    console.log("onCmdMessage", msg);
+    if (msg.action === "TypingBegin") {
+      // 这里需更新 UI，显示“对方正在输入”
+      beginTimer();
+    }
+  },
+});
+
+const beginTimer = () => {
+  timer && clearTimeout(timer);
+  timer = setTimeout(() => {
+    // 这里需更新 UI，不再显示“对方正在输入”
+  }, 5000);
+};
+```
+
 ### 发送自定义消息
 
 自定义消息为用户自定义的键值对，包括消息类型和消息内容。
@@ -577,7 +684,7 @@ function sendCustomMsg() {
     chatType: "singleChat",
     customEvent,
     customExts,
-    // 消息扩展字段，不能设置为空，即设置为 "ext:null" 这种形式会出错。
+    // 消息扩展字段，不能设置为空，即设置为 "ext:null" 会出错。
     ext: {},
   };
   // 创建一条自定义消息。
@@ -598,7 +705,7 @@ function sendCustomMsg() {
 
 ### 使用消息扩展
 
-如果上述消息类型无法满足要求，你可以使用消息扩展为消息添加属性。这种情况可用于更复杂的消息传递场景，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
+如果上述类型的消息无法满足要求，你可以使用消息扩展为消息添加属性。这种情况可用于更复杂的消息传递场景，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
 
 ```javascript
 function sendTextMessage() {

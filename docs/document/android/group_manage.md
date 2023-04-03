@@ -366,6 +366,12 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
     @Override
     public void onSpecificationChanged(EMGroup group){
     }
+
+    // 设置群成员自定义属性。群内其他成员会收到该回调。
+   @Override
+   public void onGroupMemberAttributeChanged(String groupId, String userId, Map<String, String> attribute, String from) {
+            
+    }
 };
 
 // 注册群组监听

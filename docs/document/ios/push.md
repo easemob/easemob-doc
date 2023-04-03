@@ -705,7 +705,6 @@ message.chatType = EMChatTypeChat;
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_force_notification":@YES};
-message.chatType = EMChatTypeChat; 
 [EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:nil];
 ```
 
@@ -715,7 +714,26 @@ message.chatType = EMChatTypeChat;
 | `ConversationID`        | 消息属于的会话 ID。                           |
 | `from`                  | 消息发送方，一般为当前登录 ID。               |
 | `to`                    | 消息接收方 ID，一般与 `ConversationID` 一致。 |
-| `em_force_notification` | 标志是否为强制推送的关键字，不可修改。        |
+| `em_force_notification` | 是否为强制推送：<br/> - `YES`：强制推送<br/> - （默认）`NO`：非强制推送。<br/>该字段名固定，不可修改。   |
+
+### 发送静默消息
+
+发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。
+
+```plaintext
+EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
+EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
+message.ext = @{@"em_ignore_notification":@YES};
+[EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:nil];
+```
+
+| 参数                    | 描述                                          |
+| :---------------------- | :-------------------------------------------- |
+| `body`                  | 消息体。                                      |
+| `ConversationID`        | 消息属于的会话 ID。                           |
+| `from`                  | 消息发送方，一般为当前登录 ID。               |
+| `to`                    | 消息接收方 ID，一般与 `ConversationID` 一致。 |
+| `em_ignore_notification` | 是否发送静默消息。<br/> - `YES`：发送静默消息；<br/> - （默认）`NO`：推送该消息。<br/>该字段名固定，不可修改。 |
 
 ### 基于 UNNotificationServiceExtension 的扩展功能
 
@@ -735,8 +753,8 @@ message.chatType = EMChatTypeChat;
 | `ConversationID`          | 消息属于的会话 ID。                                          |
 | `from`                    | 消息发送方，一般为当前登录 ID。                              |
 | `to`                      | 消息接收方 ID，一般与 `ConversationID` 一致。                |
-| `em_apns_ext`             | 消息扩展，使用扩展的方式向推送中添加自定义字段，该值为固定值，不可修改。 |
-| `em_push_mutable_content` | 是否使用推送扩展的关键字，不可修改。                         |
+| `em_apns_ext`             | 消息扩展字段，该字段名固定，不可修改。该字段用于配置富文本推送通知，包含自定义字段。 |
+| `em_push_mutable_content` | 是否使用富文本推送通知（`em_apns_ext`）：<br/> - `YES`：富文本推送通知；<br/> - （默认）`NO`：普通推送通知。<br/>该字段名固定，不可修改。   |
 
 **解析的内容**
 

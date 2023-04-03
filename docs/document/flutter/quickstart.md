@@ -330,16 +330,7 @@ void _sendMessage() async {
     targetId: _chatId,
     content: _messageContent,
   );
-  msg.setMessageStatusCallBack(MessageStatusCallBack(
-    onSuccess: () {
-      _addLogToConsole("send message succeed");
-    },
-    onError: (e) {
-      _addLogToConsole(
-        "send message failed, code: ${e.code}, desc: ${e.description}",
-      );
-    },
-  ));
+
   EMClient.getInstance.chatManager.sendMessage(msg);
 }
 ```
@@ -350,6 +341,27 @@ void _sendMessage() async {
 
 ```dart
 void _addChatListener() {
+
+  // 添加消息状态变更监听
+  EMClient.getInstance.chatManager.addMessageEvent(
+      // ChatMessageEvent 对应的 key。
+        "UNIQUE_HANDLER_ID",
+        ChatMessageEvent(
+          onSuccess: (msgId, msg) {
+            _addLogToConsole("send message succeed");
+          },
+          onProgress: (msgId, progress) {
+            _addLogToConsole("send message succeed");
+          },
+          onError: (msgId, msg, error) {
+            _addLogToConsole(
+              "send message failed, code: ${error.code}, desc: ${error.description}",
+            );
+          },
+        ));
+
+
+  // 添加收消息监听
   EMClient.getInstance.chatManager.addEventHandle(
     // EMChatEventHandler 对应的 key。
     "UNIQUE_HANDLER_ID",
@@ -427,6 +439,9 @@ void _addChatListener() {
 ```dart
 @override
 void dispose() {
+  // 移除消息状态监听
+  EMClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
+  // 移除收消息监听
   EMClient.getInstance.chatManager.removeEventHandle("UNIQUE_HANDLER_ID");
   super.dispose();
 }
@@ -457,4 +472,4 @@ flutter run
 
 ## 后续步骤
 
-为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见使用 [Token 鉴权](/product/easemob_app_token.html)。
+为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见[使用 App Token 鉴权](/product/easemob_app_token.html)。

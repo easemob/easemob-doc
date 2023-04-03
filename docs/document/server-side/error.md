@@ -46,14 +46,14 @@
 | 400              | illegal_argument                   | “Entity user requires a property named username”             | 创建用户请求体未提供 “username”。                            |
 | 400              | illegal_argument                   | “password or pin must provided”                              | 创建用户请求体未提供 “password” 或提供了 password 但是值为空字符。 |
 | 400              | illegal_argument                   | “newpassword is required”                                    | 修改用户密码的请求体没提供 newpassword 属性。                |
-| 400              | illegal_argument                   | “oldPassword is required”                                    | 这个是因为没有加管理员 token 的 header 导致，需要 header 加上管理员 token 的参数即可。 |
-| 400              | illegal_argument                   | “group member username1 doesn’t exist”                       | 批量添加群组时预加入群组的新成员 username 不存在。           |
+| 400              | illegal_argument                   | “oldPassword is required”                                    | 修改用户密码的请求体未提供 `oldPassword` 属性。 |
+| 400              | illegal_argument                   | “group member username1 doesn’t exist”                       | 批量添加群组成员时预加入群组的新成员 username 不存在。           |
 | 400              | illegal_argument                   | “this is an invalid request.”                                | 请求无效，请检查调用接口的 url、header、body，是否符合所调用接口的要求，可以使用 curl 命令进行测试。 |
 | 400              | illegal_argument                   | “from can't be empty”                                        | from 表示消息发送者，无此字段 Server 会默认设置为 “from”:“admin”，有 from 字段但值为空字符串(“”)时请求失败，返回 400。 |
 | 400              | illegal_argument                   | “target_type can only be 'users' or 'chatgroups' or 'chatrooms'” | target_type 只能为 'users' or 'chatgroups' or 'chatrooms'，为其他字符串时请求失败，返回 400。 |
 | 400              | illegal_argument                   | “username is not legal”                                      | 注册使用的 username 不合法，username(Chat ID) 规则见 [用户体系集成](account_system.html#注册用户) |
 | 400              | illegal_argument                   | “This chatmessage request is not supported”                  | 可能是传入的时间格式不正确，正确的格式是：YYYYMMDDHH，如要获取 2018 年 02 月 09 日 12 点到 13 点的聊天记录，这样设置：2018020912。 |
-| 400              | illegal_argument                   | “illegal arguments: appkey: easemob-demo#chatdemoui, time: 2018020918, maybe chat message history is expired or unstored” | 对应时间的聊天记录还未生成或已过期，目前聊天记录免费保存 3 天。 |
+| 400              | illegal_argument                   | “illegal arguments: appkey: easemob-demo#chatdemoui, time: 2018020918, maybe chat message history is expired or unstored” | 对应时间的历史消息还未生成或已过期。消息的保留时间取决于产品套餐，详见[消息存储时长限制](limitation.html#消息存储时长限制)。 |
 | 400              | invalid_parameter                  | “some of [groupid] are not valid fields”                     | 修改群信息目前只支持修改“群名称”、“群描述”、“群最大人数”，这个 error 是修改的参数不支持，如修改 groupid。 |
 | 400              | required_property_not_found        | “Entity user requires a property named username”             | 这个是被重置密码的 username 不存在导致。                     |
 | 400              | duplicate_unique_property_exists   | “Application null Entity user requires that property named username be unique, value of hxtest1 exists” | 注册的 username 已存在，返回 400；注：如果是批量注册，若一次调用返回一个 ID 已存在，则此次调用注册的其他不存在的 ID 不会注册，需将已存在的 ID 从数组中移除重新调用注册。 |
@@ -87,5 +87,5 @@
 | 429              | resource_limited                   | “You have exceeded the limit of the Free edition. Please upgrade to higher edition.” | 说明触发了免费版限制，请联系环信客户经理咨询。               |
 | 429              | reach_limit                        | “This request has reached api limit”                         | 超过接口每秒调用次数，加大调用间隔或者联系商务调整限流大小，见 [限制条件](/product/limitation.html)。 |
 | 500              | no_full_text_index                 | “Entity ‘user’ with property named ‘username’ is not full text indexed. You cannot use the ‘contains’ operand on this field” | username 不支持全文索引，不可以对该字段进行 contains 操作。  |
-| 500              | unsupported_service_operation      | “Service operation not supported”                            | 请求方式不被发送请求的 URL 支持。                            |
+| 500              | unsupported_service_operation      | “Service operation not supported”                            | 请求 URL 不支持该请求方式。                            |
 | 500              | web_application                    | “javax.ws.rs.WebApplicationException”                        | 错误的请求，给一个未提供的 API 发送了请求。                  |

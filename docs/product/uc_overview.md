@@ -76,9 +76,9 @@
 
 | 应用端 | 下载地址 |
 | :------------------- | :----- |
-| Windows | [下载体验](http://221.204.13.10:12001/download/win32/x64/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.0.1.win.setup.exe) |
-| macOS | [下载体验](http://221.204.13.10:12001/download/darwin/x64/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.0.1.mac.dmg) |
+| Windows | [下载体验](https://zim-private.oss-cn-beijing.aliyuncs.com/zim-update/Windows/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.0.3-build0110.win.setup.exe) |
+| macOS | [下载体验](https://zim-private.oss-cn-beijing.aliyuncs.com/zim-update/mac/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.0.3-build0110.mac.dmg) |
 | Android | [下载体验](https://www.pgyer.com/ywWr) |
-| iOS | [下载体验](https://www.pgyer.com/wIpF) |
+| iOS | [下载体验](https://testflight.apple.com/join/j1ssvXm0)<font color='#ccc' size=2>(下载提示：1.iOS手机需要安装testflight；2.将应用下载链接复制到手机浏览器中打开，点击[开始测试]下载)</font> |
 
 <span style="color:#1890ff">申请体验账号，请联系程先生(Tel:17611319060)。</span>
