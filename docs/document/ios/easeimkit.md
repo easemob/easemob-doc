@@ -664,15 +664,69 @@ return menuArray;
 //@群成员
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    //用户可自定义@实现
-    if ([text isEqualToString:@"@"] && self.conversation.type == EMConversationTypeGroupChat)
-    {
-        [self _willInputAt:textView];
+    if (self.conversation.type == EMConversationTypeGroupChat) {
+        if ([text isEqualToString:@"@"]) {
+            [self _willInputAt:textView];
+        } else if ([text isEqualToString:@""]) {
+            __block BOOL isAt = NO;
+            [textView.attributedText enumerateAttributesInRange:NSMakeRange(0, textView.text.length) options:0 usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+                NSString *atUser = attrs[@"AtInfo"];
+                if (atUser) {
+                    if (textView.selectedRange.location == range.location + range.length) {
+                        isAt = YES;
+                        NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithAttributedString:textView.attributedText];
+                        [result deleteCharactersInRange:range];
+                        textView.attributedText = result;
+                        if ([atUser isEqualToString:@"All"]) {
+                            [self.chatController removeAtAll];
+                        } else {
+                            [self.chatController removeAtUser:atUser];
+                        }
+                        *stop = YES;
+                    }
+                }
+            }];
+            return !isAt;
+        }
     }
     return YES;
 }
 ```
+#### 输入框选中回调
+```objectivec
+/**
+ * 输入区选中范围变化回调  例：@群成员
+ */
+- (void)textViewDidChangeSelection:(UITextView *)textView;
+```
 
+输入区选中范围变化回调示例（EaseIM APP 有效）：
+
+```objectivec
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+    [textView.attributedText enumerateAttributesInRange:NSMakeRange(0, textView.text.length) options:0 usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+        if (attrs[@"AtInfo"]) {
+            NSUInteger min = textView.selectedRange.location;
+            NSUInteger max = textView.selectedRange.location + textView.selectedRange.length;
+            if (min > range.location && min <= range.location + range.length) {
+                NSUInteger location = range.location + range.length;
+                NSUInteger length = 0;
+                if (textView.selectedRange.location + textView.selectedRange.length > location) {
+                    length = textView.selectedRange.location + textView.selectedRange.length - location;
+                }
+                textView.selectedRange = NSMakeRange(location, length);
+                *stop = YES;
+            } else if (max > range.location && max <= range.location + range.length) {
+                NSUInteger location = min;
+                NSUInteger length = textView.selectedRange.length - (max - range.location - range.length);
+                textView.selectedRange = NSMakeRange(location, length);
+                *stop = YES;
+            }
+        }
+    }];
+}
+```
 #### 对方正在输入状态回调
 
 对方正在输入状态回调（单聊有效）
