@@ -354,7 +354,7 @@ public void onRemoteUserJoinChannel(String channelName, String userName, int uid
 
 加入音视频时，你需获取声网 token 以进行鉴权，需要在 `EaseCallKitListener` 中将 token 回调给 `EaseCallKit`。
 
-如果不需要鉴权，可以直接回调 token 为 `null`，或者不实现该回调, 具体接口和使用如下：
+如果不需要鉴权，可以直接回调 token 为 `null`，或者在设置 `callKitConfig.setEnableRTCToken(false)` 的前提下不实现该回调, 具体接口和使用如下：
 
 ```java
 /**
