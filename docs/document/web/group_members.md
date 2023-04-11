@@ -9,6 +9,7 @@
 环信即时通讯 IM Web SDK 提供以下群成员管理功能：
 
 - 加入、退出群组
+- 管理群成员自定义属性
 - 管理群主及群管理员
 - 管理群组白名单
 - 管理群组黑名单
@@ -100,6 +101,82 @@ let option = {
     username: "username"
 };
 conn.removeGroupMember(option).then(res => console.log(res))
+```
+
+### 管理群成员自定义属性
+
+群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
+
+- 单个群成员的自定义属性总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节，否则会报错。
+
+- 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
+
+#### 设置群成员的自定义属性
+
+你可以使用 `setGroupMemberAttributes` 方法设置群成员自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置空字符串即删除该自定义属性。
+
+设置后，群内其他成员会收到 `onGroupEvent` 回调，事件为 `memberAttributesUpdate`。该成员的其他设备会收到 `onMultiDeviceEvent` 回调，事件为 `memberAttributesUpdate`。
+
+示例代码如下：
+
+```javascript
+    let options = {
+        groupId: 'groupId',
+        userId: 'userId',
+        memberAttributes: {
+            key: 'value'
+        },
+    }   
+
+    WebIM.conn.setGroupMemberAttributes(options).then((res) => {
+        console.log(res)
+    }).catch((e) => {
+        console.log(e)
+    })
+```
+
+#### 获取单个群成员的所有自定义属性
+
+你可使用 `getGroupMemberAttributes` 方法获取单个群成员的所有自定义属性。
+
+示例代码如下：
+
+```javascript
+    let options = {
+        groupId: 'groupId',
+        userId: 'userId'
+    }   
+
+    WebIM.conn.getGroupMemberAttributes(options).then((res) => {
+        console.log(res)
+    }).catch((e) => {
+        console.log(e)
+    })
+```
+
+#### 根据属性 key 获取多个群成员的自定义属性
+
+你可使用 `getGroupMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
+
+:::notice
+每次最多可获取 10 个群成员的自定义属性。
+:::
+
+示例代码如下：
+
+```javascript
+    let options = {
+        groupId: 'groupId',
+        userIds: ['userId'],
+        // 要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
+        keys: ['key1', 'key2']
+    }   
+
+    WebIM.conn.getGroupMembersAttributes(options).then((res) => {
+        console.log(res)
+    }).catch((e) => {
+        console.log(e)
+    })
 ```
 
 ### 管理群主及群管理员

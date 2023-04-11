@@ -46,7 +46,6 @@ implementation 'io.hyphenate:hyphenate-chat:xxx版本'
 **EaseIMKit 必须依赖环信 IM SDK，因而在使用 EaseIMKit 时必须同时添加环信 IM SDK 依赖。**
 
 :::notice
-
 1. IM SDK **3.8.0** 版本以后，远程依赖的 `artifactId` 修改为 `hyphenate-chat`，且该版本以后中不再包含音视频相关逻辑。
 2. IM SDK **3.8.0** 以下，远程依赖，包含音视频的 `artifactId` 为 `hyphenate-sdk`，不包含音视频的 `artifactId` 为 `hyphenate-sdk-lite`。如果想使用不包含音视频通话的 SDK，用 `implementation 'io.hyphenate:hyphenate-sdk-lite:xxx版本`'。
 
@@ -100,7 +99,7 @@ EaseIMKit 封装了常用 IM 功能，提供了会话，聊天及联系人等基
 
 EaseIMKit 提供了 EaseConversationListFragment，需要将其或者其子类添加到 Activity 中。开发者需要对刷新事件（新消息，删除消息，删除会话等）进行处理。
 
-![img](/images/android/easeim.jpeg)
+![img](@static/images/android/easeim.jpeg)
 
 :::notice
 要实现自定义头像及昵称，请参考 [设置头像和昵称](userprofile.html#设置当前用户的属性)。
@@ -136,13 +135,13 @@ public class ChatActivity extends BaseActivity {
 }
 ```
 
-![img](/images/android/easeim1.jpeg)
+![img](@static/images/android/easeim1.jpeg)
 
 ### 添加联系人界面
 
 EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 中。开发者需要对刷新事件（添加联系人，删除联系人等）进行处理。
 
-![img](/images/android/easeim2.jpeg)
+![img](@static/images/android/easeim2.jpeg)
 
 ## 设置样式
 
@@ -150,7 +149,7 @@ EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 
 
 EaseIMKit 提供了自定义的标题栏控件 EaseTitleBar。
 
-![img](/images/android/easeim-titlebar.jpeg)
+![img](@static/images/android/easeim-titlebar.jpeg)
 
 标题栏除了做为 View 所具有的属性功能外，还可以设置标题的位置等。
 
@@ -165,7 +164,6 @@ xml 中设置如下：
     android:background="@color/white"
     app:titleBarDisplayHomeAsUpEnabled="true"/>
 ```
-
 其中 `titleBarDisplayHomeAsUpEnabled` 属性为设置返回按钮是否可见，设置标题位置可设置 `titleBarTitlePosition`，可选值为 `center`，`left` 和 `right`。
 
 也可进行代码设置，如下：
@@ -183,7 +181,6 @@ titleBarMessage.setOnRightClickListener(this);
 //设置返回按钮的点击事件
 titleBarMessage.setOnBackPressListener(this);
 ```
-
 当然设置右侧菜单，您也可以通过 Android 提供的添加 `menu xml` 的形式实现。修改按钮图标，可以调用 `titleBarMenuResource` 属性进行设置。
 
 ### 设置会话列表
@@ -215,7 +212,7 @@ conversationListLayout.showUnreadDotPosition(EaseConversationSetStyle.UnreadDotP
 
 效果如下图：
 
-![img](/images/android/easeim3.jpeg)
+![img](@static/images/android/easeim3.jpeg)
 更多样式请参考 EaseContactListLayout 控件。
 
 #### 增加长按菜单项
@@ -255,12 +252,11 @@ public boolean onMenuItemClick(MenuItem item, int position) {
     return super.onMenuItemClick(item, position);
 }
 ```
-
 ### 设置聊天窗口
 
-聊天窗口包括标题栏（不包含在 EaseChatFragment 中），聊天区，输入区及扩展展示区，如下图所示:
+聊天窗口包括标题栏（不包含在 EaseChatFragment中），聊天区，输入区及扩展展示区，如下图所示:
 
-![img](/images/android/easeim4.png)
+![img](@static/images/android/easeim4.png)
 
 标题区 EaseTitleBar 的具体布局及实现不在 EaseIMKit 库的聊天控件及 fragment 中，需要你自己去实现。
 开发者可以在 EaseChatFragment 中获取到 EaseChatLayout 这个控件，然后通过这个控件进一步获取到获取其他控件，代码如下：
@@ -293,7 +289,7 @@ messageListLayout.setBackground(new ColorDrawable(Color.parseColor("#DA5A4D")));
 
 效果如下图：
 
-![img](/images/android/easeim5.jpeg)
+![img](@static/images/android/easeim5.jpeg)
 
 #### 修改头像属性
 
@@ -310,7 +306,7 @@ messageListLayout.setAvatarShapeType(1);
 
 效果如下图：
 
-![img](/images/android/easeim6.jpeg)
+![img](@static/images/android/easeim6.jpeg)
 
 #### 修改聊天文本
 
@@ -327,7 +323,7 @@ messageListLayout.setItemTextColor(ContextCompat.getColor(mContext, R.color.red)
 
 效果如下图：
 
-![img](/images/android/easeim7.jpeg)
+![img](@static/images/android/easeim7.jpeg)
 
 #### 修改时间线样式
 
@@ -346,7 +342,7 @@ messageListLayout.setTimeTextColor(ContextCompat.getColor(mContext, R.color.blac
 
 效果如下图：
 
-![img](/images/android/easeim8.jpeg)
+![img](@static/images/android/easeim8.jpeg)
 
 #### 修改聊天列表展示样式
 
@@ -361,7 +357,7 @@ messageListLayout.setItemShowType(EaseChatMessageListLayout.ShowType.LEFT);
 
 效果如下图：
 
-![img](/images/android/easeim9.jpeg)
+![img](@static/images/android/easeim9.jpeg)
 
 #### 修改输入区样式
 
@@ -393,25 +389,25 @@ if(primaryMenu != null) {
 
 效果（EaseInputMenuStyle.DISABLE_VOICE）如下图：
 
-![img](/images/android/easeim10.jpeg)
+![img](@static/images/android/easeim10.jpeg)
 
 其他样式为：
 
 完整模式（EaseInputMenuStyle.All）：
 
-![img](/images/android/easeim11.jpeg)
+![img](@static/images/android/easeim11.jpeg)
 
 不可用表情模式（EaseInputMenuStyle.DISABLE_EMOJICON）：
 
-![img](/images/android/easeim12.jpeg)
+![img](@static/images/android/easeim12.jpeg)
 
 不可用语音和表情模式（EaseInputMenuStyle.DISABLE_VOICE_EMOJICON）：
 
-![img](/images/android/easeim13.jpeg)
+![img](@static/images/android/easeim13.jpeg)
 
 只有文本输入模式（EaseInputMenuStyle.ONLY_TEXT）：
 
-![img](/images/android/easeim14.jpeg)
+![img](@static/images/android/easeim14.jpeg)
 
 #### 增加自定义消息类型及其布局
 
@@ -766,7 +762,7 @@ contactList.setHeaderBackGround(ContextCompat.getDrawable(mContext, R.color.whit
 
 效果如图：
 
-![img](/images/android/easeim15.jpeg)
+![img](@static/images/android/easeim15.jpeg)
 
 设置简洁模式
 
@@ -777,7 +773,7 @@ contactLayout.showSimple();
 
 效果如图：
 
-![img](/images/android/easeim16.jpeg)
+![img](@static/images/android/easeim16.jpeg)
 
 #### 增加长按菜单项
 
@@ -1229,7 +1225,7 @@ contactLayout.getContactList().setOnItemLongClickListener(new OnItemLongClickLis
 
 ### 系统消息
 
-EaseIMKit 中 EaseConversationListLayout 已经封装了 IM 通知的展示逻辑，但是需要开发者将 IM 的通知封装成系统消息并保存到本地数据库。为了方便开发者封装成符合 EaseIMKit 能够使用的系统消息，EaseIMKit 中提供了 EaseSystemMsgManager 管理类，开发者可通过该管理类，方便的封装及更新系统消息。
+EaseIMKit 中 EaseConversationListLayout 已经封装了 IM 通知的展示逻辑，但是需要开发者将IM的通知封装成系统消息并保存到本地数据库。为了方便开发者封装成符合 EaseIMKit 能够使用的系统消息，EaseIMKit 中提供了 EaseSystemMsgManager 管理类，开发者可通过该管理类，方便的封装及更新系统消息。
 
 EaseIMKit 可处理的系统消息有如下要求：
 

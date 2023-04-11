@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![img](/images/android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 

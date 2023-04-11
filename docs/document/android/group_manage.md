@@ -39,10 +39,10 @@
 
 - 目前支持四种群组类型（`EMGroupStyle`），具体设置如下：
 
-  - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
-  - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
-  - EMGroupStylePublicJoinNeedApproval——公开群，用户入群需要获得群主和群管理员同意；
-  - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理员同意。
+   - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
+   - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
+   - EMGroupStylePublicJoinNeedApproval——公开群，用户入群需要获得群主和群管理员同意；
+   - EMGroupStylePublicOpenJoin ——公开群，任何人都可以进群，无需群主和群管理员同意。
 
 - 邀请进群是否需要受邀用户确认（`EMGroupOptions#inviteNeedConfirm`）
 
@@ -72,7 +72,7 @@
 
 邀请用户入群的流程如下图所示：
 
-![img](/images/android/group-flow.png)
+![img](@static/images/android/group-flow.png)
 
 用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
@@ -365,6 +365,12 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
     // 群组详情变更。群组所有成员会收到该回调。
     @Override
     public void onSpecificationChanged(EMGroup group){
+    }
+
+    // 设置群成员自定义属性。群内其他成员会收到该回调。
+   @Override
+   public void onGroupMemberAttributeChanged(String groupId, String userId, Map<String, String> attribute, String from) {
+            
     }
 };
 

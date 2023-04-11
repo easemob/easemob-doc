@@ -23,7 +23,7 @@
 
 如下为按需翻译示例：
 
-![img](/images/ios/translation.png)
+![img](@static/images/ios/translation.png)
 
 ## 技术原理
 
@@ -97,7 +97,6 @@ msgBody.targetLanguages = @[@"en",@"ja"];
 EMMessage*message = [[EMMessage alloc] initWithConversationID:@"to" from:@"from" to:@"to" body:msgBody ext:nil];
 [[[EMClient sharedClient] chatManager] sendMessage:message progress:nil completion:nil];
 ```
-
 ## 参考
 
 ### 设置和获取推送的目标语言

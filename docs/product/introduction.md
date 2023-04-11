@@ -6,13 +6,13 @@
 
 ## 平台架构
 
-![环信 IM 后台](/images/product/framework.png)
+![环信 IM 后台](@static/images/product/framework.png)
 
 ## 集成概述
 
 在 [环信即时通讯控制台](enable_and_configure_IM.html) 注册和开通服务后，开发者主要需要了解服务器端集成和客户端集成内容。
 
-![img](/images/product/integration-overview.png)
+![img](@static/images/product/integration-overview.png)
 
 服务端集成请看：[环信即时通讯 REST API 概览](/document/server-side/overview.html)。
 
@@ -107,8 +107,14 @@
 
 ### 多平台
 
-环信即时通讯支持以下平台，且平台间能够互通：
+环信即时通讯 IM 支持 Android、iOS、Web 等平台，而且各平台之间可互通。下表为即时通讯支持的各平台版本：
 
-- Android 4.4+
-- iOS 9.0+
-- Web（Internet Explorer 9+、FireFox 10+、Chrome 54+、Safari 6+、IE 9+、Edge 12+、QQ 浏览器 8.0+、360 浏览器 10.0+、Opera 浏览器 58+、微信 H5、App 内嵌 H5）
+| 平台     | 支持的版本                                   |
+| ------------ | ------------------------------------------------------------ |
+| Android      | Android 5.0 或以上版本（API 级别 21 或以上）   |
+| iOS          | iOS 10.0 或以上版本                                            |
+| Web          | <br/> - Internet Explorer 9 或以上 <br/> - FireFox 10 或以上 <br/> - Chrome 54 或以上 Safari 6 或以上<br/> - Edge 12 或以上 <br/> - Opera 58 或以上<br/> - iOS Safari 7 或以上<br/> - Android Browser 4.4 (KitKat) 或以上 |
+| Unity        | Unity 2017 或以上版本                                         |
+| Windows      | Windows 10 或以上版本                                       |
+| React Native | React Native 0.63.4 或以上版本                              |
+| Flutter      | Flutter 2.10                                                 |

@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收单聊文本消息的工作流程。
 
-![img](/images/android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 如上图所示，发送和接收单聊消息的步骤如下：
 
@@ -26,12 +26,12 @@
 - 目前 Unity SDK 仅支持 x86 指令集及 Intel 芯片。
 - 操作系统与编译器要求：
 
-| 开发平台 | 操作系统版本       | 编译器版本                                          |
-| :------- | :----------------- | :-------------------------------------------------- |
-| Android  | Android 5.0 或以上 | Android Studio 3.0 或以上                           |
-| iOS      | iOS 10 或以上      | Xcode 建议最新版本                                  |
-| macOS    | macOS 10.0 或以上  | Xcode 9.0 或以上，Visual Studio for Mac 2019 或以上 |
-| Windows  | Windows 10 或以上  | Microsoft Visual Studio 2019 或以上                 |
+| 开发平台                | 操作系统版本    | 编译器版本                                                         |
+| :-------------------- | :------ | :----------------------------------------------------------- |
+| Android                  | Android 5.0 或以上  | Android Studio 3.0 或以上                                    |
+| iOS                | iOS 10 或以上 | Xcode 建议最新版本    |
+| macOS        | macOS 10.0 或以上  |  Xcode 9.0 或以上，Visual Studio for Mac 2019 或以上   |
+| Windows              | Windows 10 或以上 | Microsoft Visual Studio 2019 或以上            |
 
 - 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
@@ -50,18 +50,18 @@
 
    如果正常打开，该流程结束。
 
-:::notice
-如果 Demo 项目与本地 Unity Editor 版本不一致，你需要进行以下操作：
+  :::notice
+   如果 Demo 项目与本地 Unity Editor 版本不一致，你需要进行以下操作：
 
-1.  在弹出的 **Editor version not installed** 提示框下方，选择 **Choose another Editor version**。
+   1. 在弹出的 **Editor version not installed** 提示框下方，选择 **Choose another Editor version**。
 
-2.  在弹出的 **Select Editor version and platform** 窗口中，选择本地安装的 Editor 版本，并根据后续提示打开项目。
-    :::
-
-:::notice
-如果碰到'SpriteRenderer' does not contain a definition for 'IsUsingDeformableBuffer'这类异常，需要进行重置操作。
-在**Help**菜单下，点击**Reset Packages to defaults**将包恢复默认设置。
-:::
+   2. 在弹出的 **Select Editor version and platform** 窗口中，选择本地安装的 Editor 版本，并根据后续提示打开项目。
+   :::
+ 
+   :::notice
+   如果碰到'SpriteRenderer' does not contain a definition for 'IsUsingDeformableBuffer'这类异常，需要进行重置操作。
+   在**Help**菜单下，点击**Reset Packages to defaults**将包恢复默认设置。
+   :::
 
 ### 2. 集成环信即时通讯 SDK
 
@@ -282,14 +282,14 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 
 在 Unity Editor 的左侧导航栏下方，点击 **Project** 页签，选择 **Assets** 下的 **Scenes** 目录，双击右侧的 **SampleScene** 场景，然后点击 Unity Editor 上方的 Play 按钮运行场景。
 
-![图片](/images/unity/unity-running.png)
+![图片](@static/images/unity/unity-running.png)
 
 :::notice
 若未安装 iOS Build Support，运行项目前，将 `Assets/ChatSDK/Scripts/Editor` 路径下的 `iOSBuildSetting.cs` 文件移除项目文件夹。
 
 1. 注册用户：在 **user id** 文本框中输入用户 ID，在 **password** 文本框中输入密码，点击 **Sign up** 进行用户注册。注册结果会在下方显示。可创建两个用户，例如 **quickstart_sender** 和 **quickstart_receiver**，分别用于发送和接收消息。
 2. 用户登录：在 **user id** 文本框中输入用户 ID，例如 **quickstart_sender**，在 **password** 文本框中输入密码，点击 **Sign in** 进行登录。登录结果会在下方显示。
-3. 发送消息：在 **single chat id** 文本框中输入消息接收方的用户 ID，例如 **quickstart_receiver**，在 **message content** 文本框中输入要发送的文本内容，如 **how are you.**，点击 **Send** 发送消息，消息发送结果会在下方显示。
+3. 发送消息：在 **single chat id** 文本框中输入消息接收方的用户 ID，例如 **quickstart_receiver**，在 **message content** 文本框中输入要发送的文本内容，如 **how are you.**，点击 **Send**  发送消息，消息发送结果会在下方显示。
 4. 退出登录：直接点击 **Sign out** 退出登录，退出结果会在下方显示。
 5. 接收消息：在 **user id** 文本框中输入接收消息的用户 ID，例如 **quickstart_receiver**，在 **password** 文本框输入密码，点击 **Sign in** 进行登录。登录成功后，下方会显示收到的消息，例如步骤 3 中发送的 ''how are you.''。
-   :::
+:::

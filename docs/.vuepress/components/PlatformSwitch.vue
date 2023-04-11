@@ -42,7 +42,6 @@ const PLATFORM_ICON_MAP = {
   },
 }
 
-
 const platform = ref('')
 const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value]?.activeIcon)
 const route = useRoute()
@@ -65,7 +64,7 @@ const onChange = (platform) => {
   if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
     router.push(nextPathPath)
   } else {
-    router.push('/document/'+platform)
+    router.push('/document/'+platform+'/overview.html')
   }
 }
 

@@ -13,7 +13,7 @@
 - 撤回子区消息
 - 获取子区消息
 
-![img](/images/android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 如上图所示，消息收发流程如下：
 
@@ -23,7 +23,7 @@
 
 子区创建和查看如下图：
 
-![img](/images/android/threads.png)
+![img](@static/images/android/threads.png)
 
 ## 前提条件
 
@@ -139,13 +139,13 @@ ChatClient.getInstance()
     conv
       .getMessages(convId, convType, startMsgId, direction, loadCount)
       .then((messages) => {
-        console.log("success.", messages);
+        console.log('success.', messages);
       })
       .catch((reason) => {
-        console.log("fail.", reason);
+        console.log('fail.', reason);
       });
   })
   .catch((reason) => {
-    console.log("fail.", reason);
+    console.log('fail.', reason);
   });
 ```

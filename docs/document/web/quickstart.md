@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![](/images/web/sendandreceivemsg.png)
+![](@static/images/web/sendandreceivemsg.png)
 
 ## 前提条件
 
@@ -29,7 +29,7 @@
 
 - `index.html`：设置 Web 应用的用户界面；
 - `index.js`：包含消息发送和接收逻辑的实现代码。
-  此时你的目录中包含以下文件：
+此时你的目录中包含以下文件：
 
 Easemob_quickstart<br>
 ├─ index.html<br>
@@ -42,18 +42,18 @@ Easemob_quickstart<br>
 
 ```json
 {
-  "name": "web",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
+    "name": "web",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
+    },
+    "dependencies": {
     "easemob-websdk": "latest"
-  },
-  "author": "",
-  "license": "ISC"
+    },
+    "author": "",
+    "license": "ISC"
 }
 ```
 
@@ -66,52 +66,50 @@ Easemob_quickstart<br>
 ```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Easemob Chat Examples</title>
-  </head>
 
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Easemob Chat Examples</title>
+</head>
+
+<body>
     <h2 class="left-align">Easemob Chat Examples</h2>
     <form id="loginForm">
-      <div class="col" style="min-width: 433px; max-width: 443px">
-        <div class="card" style="margin-top: 0px; margin-bottom: 0px;">
-          <div
-            class="row card-content"
-            style="margin-bottom: 0px; margin-top: 10px;"
-          >
-            <div class="input-field">
-              <label>Username</label>
-              <input type="text" placeholder="Username" id="userID" />
+        <div class="col" style="min-width: 433px; max-width: 443px">
+            <div class="card" style="margin-top: 0px; margin-bottom: 0px;">
+                <div class="row card-content" style="margin-bottom: 0px; margin-top: 10px;">
+                    <div class="input-field">
+                        <label>Username</label>
+                        <input type="text" placeholder="Username" id="userID">
+                    </div>
+                    <div class="input-field">
+                        <label>Password</label>
+                        <input type="password" placeholder="Password" id="password">
+                    </div>
+                    <div class="row">
+                        <div>
+                            <button type="button" id="register">register</button>
+                            <button type="button" id="login">login</button>
+                            <button type="button" id="logout">logout</button>
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <label>Peer username</label>
+                        <input type="text" placeholder="Peer username" id="peerId">
+                    </div>
+                    <div class="input-field">
+                        <label>Peer Message</label>
+                        <input type="text" placeholder="Peer message" id="peerMessage">
+                        <button type="button" id="send_peer_message">send</button>
+                    </div>
+                </div>
             </div>
-            <div class="input-field">
-              <label>Password</label>
-              <input type="password" placeholder="Password" id="password" />
-            </div>
-            <div class="row">
-              <div>
-                <button type="button" id="register">register</button>
-                <button type="button" id="login">login</button>
-                <button type="button" id="logout">logout</button>
-              </div>
-            </div>
-            <div class="input-field">
-              <label>Peer username</label>
-              <input type="text" placeholder="Peer username" id="peerId" />
-            </div>
-            <div class="input-field">
-              <label>Peer Message</label>
-              <input type="text" placeholder="Peer message" id="peerMessage" />
-              <button type="button" id="send_peer_message">send</button>
-            </div>
-          </div>
         </div>
-      </div>
     </form>
-    <hr />
+    <hr>
     <div id="log"></div>
-  </body>
-  <script src="./dist/bundle.js"></script>
+</body>
+<script src="./dist/bundle.js"></script>
 </html>
 ```
 
@@ -215,14 +213,11 @@ window.onload = function () {
     }
 }
 ```
-
 :::notice
 对于 Typescript，通过以下代码引入类型声明：
-
 ```JavaScript
 import WebIM, { EasemobChat } from 'easemob-websdk'
 ```
-
 :::
 
 ### 5. 运行项目
@@ -233,22 +228,22 @@ import WebIM, { EasemobChat } from 'easemob-websdk'
 
 ```json
 {
-  "name": "web",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "start:dev": "webpack serve --open --config webpack.config.js"
-  },
-  "dependencies": {
-    "easemob-websdk": "latest",
-    "webpack": "^5.50.0",
-    "webpack-dev-server": "^3.11.2",
-    "webpack-cli": "^4.8.0"
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "web",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack --config webpack.config.js",
+        "start:dev": "webpack serve --open --config webpack.config.js"
+    },
+    "dependencies": {
+        "easemob-websdk": "latest",
+        "webpack": "^5.50.0",
+        "webpack-dev-server": "^3.11.2",
+        "webpack-cli": "^4.8.0"
+    },
+    "author": "",
+    "license": "ISC"
 }
 ```
 
@@ -308,18 +303,18 @@ $ npm run start:dev
 
 ```json
 {
-  "name": "web",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
+    "name": "web",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
+    },
+    "dependencies": {
     "easemob-websdk": "latest"
-  },
-  "author": "",
-  "license": "ISC"
+    },
+    "author": "",
+    "license": "ISC"
 }
 ```
 

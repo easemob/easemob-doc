@@ -19,13 +19,13 @@
 2. 客户端 A 和 B 登录即时通讯。
 3. 客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
 
-![img](/images/android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 子区创建和查看如下图：
 
-![img](/images/web/web_group_chat_chreat_new_thread_step_01.png)
+![img](@static/images/web/web_group_chat_chreat_new_thread_step_01.png)
 
-![img](/images/web/web_group_chat_new_thread_created.png)
+![img](@static/images/web/web_group_chat_new_thread_created.png)
 
 ## 前提条件
 
@@ -53,21 +53,21 @@
 function sendTextMessage() {
     let option = {
         // 会话类型，设置为群聊。
-        chatType: 'groupChat',
+        chatType: 'groupChat',  
         // 消息类型。
-        type: 'txt',
+        type: 'txt',   
         // 消息接收方（子区 ID)。
-        to: 'chatThreadId',
+        to: 'chatThreadId',     
         // 消息内容。
-        msg: 'message content'
+        msg: 'message content'  
         // 是否为子区消息。
-        isChatThread: 'true',
+        isChatThread: 'true',   
     }
-    let msg = WebIM.message.create(option);
+    let msg = WebIM.message.create(option); 
     connection.send(msg).then(() => {
-        console.log('send private text Success');
+        console.log('send private text Success');  
     }).catch((e) => {
-        console.log("Send private text error");
+        console.log("Send private text error");  
     })
 };
 ```
@@ -80,13 +80,13 @@ function sendTextMessage() {
 
 ```javascript
 // 监听收到的文本消息
-connection.addEventHandler("THREADMESSAGE", {
-  onTextMessage: (message) => {
-    if (message.chatThread && JSON.stringify(message.chatThread) !== "{}") {
-      console.log(message);
-      // 接收到子区消息，添加处理逻辑。
-    }
-  },
+connection.addEventHandler('THREADMESSAGE',{
+  onTextMessage:(message) => {
+    if(message.chatThread && JSON.stringify(message.chatThread)!=='{}'){
+      console.log(message)
+        // 接收到子区消息，添加处理逻辑。
+      }
+    },
 });
 ```
 
@@ -120,8 +120,8 @@ connection.recallMessage(option).then((res) => {
 conn.addEventHandler('MESSAGES',{
    onRecallMessage: => (msg) {
        // 接收到子区消息被撤回，添加处理逻辑。
-       console.log('撤回成功'，msg)
-   },
+       console.log('撤回成功'，msg) 
+   }, 
 })
 ```
 

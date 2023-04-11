@@ -8,11 +8,11 @@
 
 - [Vue 2 Demo](https://webim-vue.easemob.com/login)
 
-![img](/images/demo/web_vue2_login.png)
+![img](@static/images/demo/web_vue2_login.png)
 
 - [Vue 3 Demo](https://webim-vue3.easemob.com/login)
 
-![img](/images/demo/web_vue3_login.png)
+![img](@static/images/demo/web_vue3_login.png)
 
 2. 输入你的手机号，获取验证码，然后输入。
 
@@ -39,24 +39,24 @@
 
 Demo 中的主要模块如下：
 
-| 模块名称     | 描述                   |
-| :----------- | :--------------------- |
-| `assets`     | 资源文件。             |
-| `components` | 项目中定义的组件。     |
-| `config`     | 消息表情。             |
-| `pages`      | 登录和聊天页面。       |
-| `router`     | 路由。                 |
-| `store`      | 使用 Vuex 处理的数据。 |
-| `utils`      | SDK 配置。             |
+| 模块名称       | 描述                 |
+| :------------- | :----------------- |
+| `assets` | 资源文件。 |
+| `components` | 项目中定义的组件。 |
+| `config` | 消息表情。 |
+| `pages` | 登录和聊天页面。 |
+| `router` | 路由。 |
+| `store` | 使用 Vuex 处理的数据。 |
+| `utils` | SDK 配置。 |
 
 ## 部分 UI 展示
 
 ### Vue 2 Demo 界面
 
-![img](/images/web/vue_demo.png)
+![img](@static/images/web/vue_demo.png)
 
 ### Vue 3 Demo 界面
 
-![img](/images/web/vue3_home.png)
+![img](@static/images/web/vue3_home.png)
 
-![img](/images/web/vue3_chat.png)
+![img](@static/images/web/vue3_chat.png)

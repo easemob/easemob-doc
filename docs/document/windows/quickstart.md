@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收单聊文本消息的工作流程。
 
-![img](/images/android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 如上图所示，发送和接收单聊消息的步骤如下：
 
@@ -60,6 +60,7 @@
 ### 1. 打开代码文件开始编辑
 
 在 Visual Studio 的 `windows-example` 项目下，点击 `MainWindow.xaml` 左边的小三角，然后双击 `MainWindow.xaml.cs` 文件开始编辑。
+
 
 ### 2. 添加命名空间
 
@@ -274,6 +275,7 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(this);
 SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 ```
 
+
 ### 9.测试修改后的项目
 
 在 Visual Studio 窗体上部，点击 **启动** 按钮。
@@ -283,3 +285,4 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 3. 发送消息：在 `single chat id` 文本框中输入消息接收方，例如输入 `quickstart_receiver`，在 `message content` 文本框中输入想要发送的文本内容，如 `how are you.`，点击 **Send** 进行消息发送，消息发送结果会在下方的方形区域进行显示。
 4. 用户退出登录：直接点击 **Sign out** 会让当前用户退出登录，退出结果会在下方的方形区域进行显示。
 5. 接收消息：在 `user id` 文本框中输入接收消息的用户名，例如 `quickstart_receiver`， 在 `password` 文本框输入密码，点击 `Sign in` 进行登录。登录成功后，下方的方形区域将会显示接收到的消息，例如第 3 步发送的 `how are you.`。
+

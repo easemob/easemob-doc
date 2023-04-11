@@ -14,7 +14,7 @@
 
 ## 跑通 Demo
 
-EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 Demo 及源码](https://www.easemob.com/download/im) 下载页面，选择 iOS 端进行下载，直接下载: [Android IM 源码](https://github.com/easemob/chat-android)。
+EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 Demo 及源码](https://www.easemob.com/download/im) 下载页面，选择 Android 端进行下载，直接下载: [Android IM 源码](https://github.com/easemob/chat-android)。
 
 环境准备：
 
@@ -58,7 +58,6 @@ EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 De
 ```gradle
 implementation 'io.hyphenate:ease-call-kit:3.8.9'
 ```
-
 :::notice
 `EaseCallKit` 必须依赖环信 IM SDK (即 hyphenate-chat) ，因而在使用 `EaseCallKit` 时必须同时添加环信 IM SDK 依赖。
 :::
@@ -107,7 +106,7 @@ implementation 'io.agora.rtc:full-sdk:3.8.0'
 在清单中增加 `EaseCallKit` 中的 `EaseVideoCallActivity` 和 `EaseMultipleVideoActivity`:
 
 ```xml
-//添加 Activity
+//添加 Activity  
 <activity
     android:name="com.hyphenate.easecallkit.ui.EaseVideoCallActivity"
     android:configChanges="orientation|keyboardHidden|screenSize"
@@ -127,17 +126,17 @@ implementation 'io.agora.rtc:full-sdk:3.8.0'
 在环信 IM SDK 初始化完成后，可以开始初始化 `EaseCallKit`，同时增加监听回调，设置常用配置项。代码如下：
 
 ```java
-//初始化 `EaseCallUIKit`。
+//初始化 `EaseCallUIKit`。 
 EaseCallKitConfig callKitConfig = new EaseCallKitConfig();
-//设置默认头像。
+//设置默认头像。    
 String headImage = EaseFileUtils.getModelFilePath(context,"watermark.png");
 callKitConfig.setDefaultHeadImage(headImage);
-//设置振铃文件。
+//设置振铃文件。   
 String ringFile = EaseFileUtils.getModelFilePath(context,"huahai.mp3");
 callKitConfig.setRingFile(ringFile);
-//设置呼叫超时时间，单位为秒。
+//设置呼叫超时时间，单位为秒。  
 callKitConfig.setCallTimeOut(30 * 1000);
-//设置声网的 appId。
+//设置声网的 appId。 
 callKitConfig.setAgoraAppId("*****");
 Map<String, EaseCallUserInfo> userInfoMap = new HashMap<>();
 userInfoMap.put("***",new EaseCallUserInfo("****",null));
@@ -150,12 +149,12 @@ addCallkitListener();
 
 ```java
 /**
- * EaseCallKit 相关的用户配置选项。
- * defaultHeadImage  用户默认头像。该参数的值为本地文件绝对路径或者 URL。
+ * EaseCallKit 相关的用户配置选项。 
+ * defaultHeadImage  用户默认头像。该参数的值为本地文件绝对路径或者 URL。 
  * userInfoMap      用户相关信息。该信息为 key-value 格式，key 为用户的环信 ID，value 为 `EaseCallUserInfo`。
- * callTimeOut      呼叫超时时间，单位为毫秒，默认为 30 秒。
- * audioFile       振铃文件。该参数的值为本地文件绝对路径。
- * enableRTCToken  是否开启 RTC 验证。该功能通过声网后台控制，默认为关闭。
+ * callTimeOut      呼叫超时时间，单位为毫秒，默认为 30 秒。 
+ * audioFile       振铃文件。该参数的值为本地文件绝对路径。  
+ * enableRTCToken  是否开启 RTC 验证。该功能通过声网后台控制，默认为关闭。 
  */
 public class EaseCallKitConfig {
     private String defaultHeadImage;
@@ -178,10 +177,10 @@ public class EaseCallKitConfig {
 
 ```java
 /**
- * 发起一对一通话。
- * @param type 通话类型。该参数只能设置为 `SIGNAL_VOICE_CALL` 或 `SIGNAL_VIDEO_CALL`。
- * @param user 被叫用户 ID，即环信 ID。
- * @param ext  自定义扩展字段，描述通话扩展信息。
+ * 发起一对一通话。   
+ * @param type 通话类型。该参数只能设置为 `SIGNAL_VOICE_CALL` 或 `SIGNAL_VIDEO_CALL`。 
+ * @param user 被叫用户 ID，即环信 ID。 
+ * @param ext  自定义扩展字段，描述通话扩展信息。 
  */
 public void startSingleCall(final EaseCallType type, final String user,final  String ext){}
 ```
@@ -192,16 +191,16 @@ public void startSingleCall(final EaseCallType type, final String user,final  St
 
 ```java
 /**
- * 邀请用户加入多人通话。
- * @param users 用户 ID 列表，即环信 ID 列表。
+ * 邀请用户加入多人通话。 
+ * @param users 用户 ID 列表，即环信 ID 列表。  
  * @param ext  自定义扩展字段，描述通话扩展信息。
  */
-public void startInviteMultipleCall(final String[] users,final String ext){}
+public void startInviteMultipleCall(final String[] users,final String ext){} 
 ```
 
 发起通话后的 UI 界面如下：
 
-![img](/images/android/sendcall.png)
+![img](@static/images/android/sendcall.png)
 
 ### 被叫收到通话邀请
 
@@ -211,9 +210,9 @@ public void startInviteMultipleCall(final String[] users,final String ext){}
 
 ```java
 /**
- * 收到通话邀请回调。
+ * 收到通话邀请回调。 
  * @param callType  通话类型。
- * @param userId    邀请方的用户 ID。
+ * @param userId    邀请方的用户 ID。  
  * @param ext       自定义扩展字段，描述通话扩展信息。
  */
 void onRevivedCall(EaseCallType callType, String userId,String ext){}
@@ -221,7 +220,7 @@ void onRevivedCall(EaseCallType callType, String userId,String ext){}
 
 收到通话邀请后的界面如下:
 
-![img](/images/android/called.jpeg)
+![img](@static/images/android/called.jpeg)
 
 ### 多人通话中邀请
 
@@ -229,13 +228,13 @@ void onRevivedCall(EaseCallType callType, String userId,String ext){}
 
 ```java
 /**
- * 邀请好友进行多人通话。
+ * 邀请好友进行多人通话。  
  * @param context  通话上下文。
  * @param users    当前通话中已经存在的成员。
  * @param ext      自定义扩展字段，描述通话扩展信息。
  */
 public void onInviteUsers(Context context,String userId[],String ext) {
-}
+}  
 ```
 
 ### 加入频道成功回调
@@ -256,20 +255,20 @@ public void onRemoteUserJoinChannel(String channelName, String userName, int uid
 
 ```java
 /**
- * 通话结束回调。
+ * 通话结束回调。  
  * @param callType    通话类型。
- * @param reason      通话结束原因。
+ * @param reason      通话结束原因。 
  * @param callTime    通话时长。
  */
 void onEndCallWithReason(EaseCallType callType, String channelName, EaseCallEndReason reason, long callTime){}
 
-//通话结束原因如下：
+//通话结束原因如下：  
 public enum EaseCallEndReason {
     EaseCallEndReasonHangup(0), //正常挂断。
-    EaseCallEndReasonCancel(1), //您已取消通话。
+    EaseCallEndReasonCancel(1), //您已取消通话。 
     EaseCallEndReasonRemoteCancel(2), //对方取消通话。
     EaseCallEndReasonRefuse(3),//对方拒绝接听。
-    EaseCallEndReasonBusy(4), //忙线中。
+    EaseCallEndReasonBusy(4), //忙线中。 
     EaseCallEndReasonNoResponse(5), //您未接听。
     EaseCallEndReasonRemoteNoResponse(6), //对端无响应。
     EaseCallEndReasonHandleOnOtherDevice(7); //已在其他设备处理。
@@ -286,9 +285,9 @@ public enum EaseCallEndReason {
 ```java
 /**
  * 通话异常回调。
- * @param type            错误类型。
- * @param errorCode       错误码。
- * @param description     错误描述。
+ * @param type            错误类型。  
+ * @param errorCode       错误码。   
+ * @param description     错误描述。    
  */
 void onCallError(EaseCallKit.EaseCallError type, int errorCode, String description){}
 ```
@@ -297,14 +296,14 @@ void onCallError(EaseCallKit.EaseCallError type, int errorCode, String descripti
 
 ```java
 /**
- * 通话错误类型。
+ * 通话错误类型。 
  *
  */
 public enum EaseCallError{
-    PROCESS_ERROR, //业务逻辑异常。
+    PROCESS_ERROR, //业务逻辑异常。  
     RTC_ERROR, //音视频异常。
-    IM_ERROR  //Easemob IM 异常。
-}
+    IM_ERROR  //Easemob IM 异常。  
+}   
 ```
 
 ### 配置修改
@@ -334,7 +333,7 @@ if(config != null){
 @Override
 public void onRemoteUserJoinChannel(String channelName, String userName, int uid, EaseGetUserAccountCallback callback){
     if(userName == null || userName == ""){
-        // 根据用户的 Agora ID 获取 环信 ID。url 为获取用户信息的请求 URL，请参考 [Easemob IM demo](https://www.easemob.com/download/demo)。
+        // 根据用户的 Agora ID 获取 环信 ID。url 为获取用户信息的请求 URL，请参考 [Easemob IM demo](https://www.easemob.com/download/demo)。  
         getUserIdAgoraUid(uid, url, callback);
         // 将获取到的用户信息设置给回调，具体实现请参考 [Easemob IM demo](https://www.easemob.com/download/demo)。
         //callback.onUserAccount(userAccounts);
@@ -355,14 +354,14 @@ public void onRemoteUserJoinChannel(String channelName, String userName, int uid
 
 加入音视频时，你需获取声网 token 以进行鉴权，需要在 `EaseCallKitListener` 中将 token 回调给 `EaseCallKit`。
 
-如果不需要鉴权，可以直接回调 token 为 `null`，或者不实现该回调, 具体接口和使用如下：
+如果不需要鉴权，可以直接回调 token 为 `null`，或者在设置 `callKitConfig.setEnableRTCToken(false)` 的前提下不实现该回调, 具体接口和使用如下：
 
 ```java
 /**
  * 用户生成 token 回调。
- * @param userId       用户 ID，即用户的环信 ID。
- * @param channelName  频道名称。
- * @param agoraAppId   声网的 App ID。
+ * @param userId       用户 ID，即用户的环信 ID。 
+ * @param channelName  频道名称。  
+ * @param agoraAppId   声网的 App ID。 
  * @param callback     生成的 token 回调。若成功生成 token，即返回 token；若未能成功生成 token，返回错误码和错误消息。
  */
 default void onGenerateToken(String userId,String channelName,String agoraAppId,EaseCallKitTokenCallback callback){};
@@ -370,14 +369,14 @@ default void onGenerateToken(String userId,String channelName,String agoraAppId,
 @Override
 public void onGenerateToken(String userId, String channelName, String agoraAppId, EaseCallKitTokenCallback )callback{
     if(callback != null){
-        // 若无需 token 鉴权，你需向 `token` 传 `null`，向 `uid` 传 `0`。
-        //callback.onSetToken(null, 0);
-
+        // 若无需 token 鉴权，你需向 `token` 传 `null`，向 `uid` 传 `0`。 
+        //callback.onSetToken(null, 0); 
+        
 
         // 若需要 token 鉴权，则调用你的 App Server 生成 token，然后将生成的 token 回调给 `EaseCallKit`。
-        // url 为拼接参数请求 token 的 URL，可参考[官网上的 Easemob IM demo](https://www.easemob.com/download/demo)。
+        // url 为拼接参数请求 token 的 URL，可参考[官网上的 Easemob IM demo](https://www.easemob.com/download/demo)。 
         getRtcToken(url, callback);
-        //获取到 token 及 uid 后，将其回调给 callback 即可。
+        //获取到 token 及 uid 后，将其回调给 callback 即可。 
         //callback.onSetToken(token, uid);
     }
 }
@@ -409,19 +408,19 @@ void onSetToken(String token, int uId);
 
 回调模块 `EaseCallKitListener` 的 API 列表如下：
 
-| 事件                    | 说明                                                             |
-| :---------------------- | :--------------------------------------------------------------- |
-| onEndCallWithReason     | 通话结束时触发该事件。                                           |
-| onInviteUsers           | 多人通话中点击邀请按钮触发该事件。                               |
-| onReceivedCall          | 振铃时触发该事件。                                               |
+| 事件                    | 说明                                                         |
+| :---------------------- | :----------------------------------------------------------- |
+| onEndCallWithReason     | 通话结束时触发该事件。                                       |
+| onInviteUsers           | 多人通话中点击邀请按钮触发该事件。                           |
+| onReceivedCall          | 振铃时触发该事件。                                           |
 | onGenerateToken         | 获取声网 token 回调。用户将获取到的 token 回调到 `EaseCallKit`。 |
-| onCallError             | 通话异常时触发该回调。                                           |
-| onInViteCallMessageSent | 通话邀请消息回调。                                               |
-| onRemoteUserJoinChannel | 用户加入频道时触发。该方法自 `EaseCallKit` 3.8.1 版本添加。      |
+| onCallError             | 通话异常时触发该回调。                                       |
+| onInViteCallMessageSent | 通话邀请消息回调。                                           |
+| onRemoteUserJoinChannel | 用户加入频道时触发。该方法自 `EaseCallKit` 3.8.1 版本添加。  |
 
 `EaseGetUserAccountCallback` 的 API 列表如下：
 
-| 事件                  | 说明                                                                    |
-| :-------------------- | :---------------------------------------------------------------------- |
+| 事件                  | 说明                                                         |
+| :-------------------- | :----------------------------------------------------------- |
 | onUserAccount         | 传入环信 ID 与声网 uid 的映射。 该方法自 `EaseCallKit` 3.8.1 版本添加。 |
-| onSetUserAccountError | 获取用户信息失败触发。方法自 `EaseCallKit` 3.8.1 版本添加。             |
+| onSetUserAccountError | 获取用户信息失败触发。方法自 `EaseCallKit` 3.8.1 版本添加。  |

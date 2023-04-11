@@ -6,7 +6,7 @@
 
 1. [登录 Demo](https://webim-h5.easemob.com/#/login)。
 
-![img](/images/demo/web_react_login.png)
+![img](@static/images/demo/web_react_login.png)
 
 2. 输入你的手机号，获取验证码，然后输入。
 
@@ -32,15 +32,15 @@
 
 Demo 中的主要模块如下：
 
-| 模块名称     | 描述                                     |
-| :----------- | :--------------------------------------- |
-| `components` | 项目中定义的组件。                       |
-| `config`     | SDK 初始化配置。                         |
+| 模块名称       | 描述                 |
+| :------------- | :----------------- |
+| `components` | 项目中定义的组件。 |
+| `config` | SDK 初始化配置。 |
 | `containers` | 容器组件，包含联系人、聊天、登录和注册。 |
-| `layout`     | 聊天部分的布局。                         |
-| `selectors`  | 缓存数据，优化性能。                     |
-| `utils`      | 数据库和工具方法。                       |
+| `layout` | 聊天部分的布局。 |
+| `selectors` | 缓存数据，优化性能。 |
+| `utils` | 数据库和工具方法。 |
 
 ## 部分 UI 展示
 
-![img](/images/web/react_demo.png)
+![img](@static/images/web/react_demo.png)

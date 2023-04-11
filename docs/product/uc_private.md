@@ -35,6 +35,12 @@
 
 环信客户端及服务端SDK已对IM核心服务完成封装，通过调用SDK API接口，即可快速获得消息收发、会话管理、群组、好友、聊天室等功能，目前客户端 SDK 已覆盖 Windows、Linux、MacOS、Android、iOS、Web、小程序等多种平台，服务器端 SDK 已覆盖 Java、PHP 等平台，各端 SDK 下载及开发指南如下所示。
 
+:::tip
+1. 若要体验环信即时通讯 IM 的功能，可下载[公有云 Demo](https://www.easemob.com/download/demo)。
+2. 若要体验私有化 Demo，需下载下表中对应平台的 Demo，然后在登录页面的`服务器配置`区域完成配置。
+3. 若要集成，需选择下表中的 SDK 及 Demo 版本，按照下表中“开发指南”一列的文档配置私有化环境信息。
+:::
+
 |SDK|版本号 |下载地址|开发指南|
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 |Android|[3.9.1](http://docs-im-beta.easemob.com/document/android/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19)|[下载 SDK 及 Demo](https://downloadsdk.easemob.com/downloads/easemob-sdk-3.9.1.zip)    [体验 Demo](https://downloadsdk.easemob.com/downloads/imsdkdemo_android-3.9.1.apk) | [查看](http://docs-im-beta.easemob.com/document/android/privatecloud.html) |

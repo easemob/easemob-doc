@@ -21,28 +21,28 @@
 初始化示例代码：
 
 ```Objective-C
-// appkey 替换成你在环信即时通讯 IM 管理后台注册应用中的 App Key
+// appkey 替换成你在环信即时通讯 IM 管理后台注册应用中的 App Key 
 EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 [[EMClient sharedClient] initializeSDKWithOptions:options];
 ```
+
 
 ## 注册用户
 
 可以使用如下代码创建账号：
 
 ```objectivec
-// 异步方法
+// 异步方法 
 [[EMClient sharedClient] registerWithUsername:@"username"
                                          password:@"your password"
-                                       completion:^(NSString *aUsername, EMError *aError) {
+                                       completion:^(NSString *aUsername, EMError *aError) {                             
                                    }];
 ```
 
 :::notice
-
 - 以上注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用；
-- 正式环境应使用服务器端调用 REST API 接口 [注册用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册用户)。
-  :::
+- 正式环境应使用服务器端调用 REST API 接口 [注册用户](/document/server-side/account_system.html#注册用户)。
+:::
 
 ## 用户登录
 
@@ -51,20 +51,20 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 - 用户 ID + 密码
 - 用户 ID + token
 
-:::notice
-使用 token 登录时需要处理 token 过期的问题，比如每次登录时更新 token 等机制。
-:::
-
 ### 手动登录
+
+登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
+
+手动登录后，收到 `connectionStateDidChange` 回调表明 SDK 与环信服务器连接成功。
 
 **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
 ```objectivec
-// 异步方法
+// 异步方法 
 [[EMClient sharedClient] loginWithUsername:@"username"
                                      password:@"your password"
                                    completion:^(NSString *aUsername, EMError *aError) {
-
+                                                                 
 }];
 
 
@@ -72,10 +72,14 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 **用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
-```objectivec
-// 异步方法
-[EMClient.sharedClient loginWithUsername:@"username" token:@"token" completion:^(NSString * _Nonnull aUsername, EMError * _Nullable aError) {
+:::notice
+使用 token 登录时需要处理 token 过期的问题，比如每次登录时更新 token 等机制。
+:::
 
+```objectivec
+// 异步方法 
+[EMClient.sharedClient loginWithUsername:@"username" token:@"token" completion:^(NSString * _Nonnull aUsername, EMError * _Nullable aError) {
+        
 }];
 ```
 
@@ -94,9 +98,9 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 ## 退出登录
 
 ```objectivec
-// 异步方法
+// 异步方法 
 [EMClient.sharedClient logout:YES completion:^(EMError * _Nullable aError) {
-
+        
 }];
 ```
 
@@ -140,7 +144,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 ### 被动退出登录
 
-你可以通过监听 `EMClientDelegate` 中的以下回调，调用 `EMClient#logout:completion:` 退出登录并返回登录界面。
+你可以通过监听 `EMClientDelegate` 中的以下回调，调用 `EMClient#logout:completion:`  退出登录并返回登录界面。
 
 ```objectivec
 // 当前登录账号在其它设备登录时会触发回调
@@ -179,13 +183,13 @@ option.logLevel = EMLogLevelDebug;
 
 ### 获取本地日志
 
-SDK 会写入日志文件到本地。日志文件路径如下：沙箱 Library/Application Support/HyphenateSDK/easemobLog/easemob.log。
+SDK 会写入日志文件到本地。日志文件路径如下：沙箱Library/Application Support/HyphenateSDK/easemobLog/easemob.log。
 
 以真机为例，获取本地日志过程如下：
 
 - 打开 Xcode，连接设备，选择 **Xcode** > **Window** > **Devices and Simulators**。
 - 进入 **Devices** 选项卡，在左侧选择目标设备，例如 Easemob IM，点击设置图标，然后选择 **Download Container**。
 
-![img](/images/ios/overview_fetchlogfile.png)
+![img](@static/images/ios/overview_fetchlogfile.png)
 
 日志文件 `easemob.log` 文件在下载包的 AppData/Library/Application Support/HyphenateSDK/easemobLog 目录下。

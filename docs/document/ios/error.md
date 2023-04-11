@@ -21,7 +21,8 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 101    |       EMErrorInvalidUsername        | 用户 ID 为空或不正确，比如使用邀请好友 API 时 username 参数为空字符。 |
 | 102    |       EMErrorInvalidPassword        | 用户密码不正确：登录时提供的密码为空或不正确。               |
 | 103    |          EMErrorInvalidURL          | URL 不正确，该错误码已废弃。                                 |
-| 104    |       EMErrorUsernameTooLong        | 用户名过长。                                                 |
+| 104    |          EMErrorInvalidToken        | 用户 token 不正确：登录时提供的 token 为空或不正确。                                |
+| 105    |       EMErrorUsernameTooLong        | 用户名过长。                                                 |
 | 200    |     EMErrorUserAlreadyLoginSame     | 当前用户已经登录：同一用户 ID 已经登录。                     |
 | 201    |         EMErrorUserNotLogin         | 用户未登录：例如，如果未登录成功时调用发送消息或群组操作的 API 会提示该错误。 |
 | 202    |   EMErrorUserAuthenticationFailed   | 用户鉴权失败：一般是 token 鉴权失败或者 token 已经过期。     |
@@ -73,6 +74,10 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 604    |       EMErrorGroupMembersFull       | 群组已满：群组已经达到人数上限。                             |
 | 605    |        EMErrorGroupNotExist         | 群组不存在：对不存在的群组进行操作。                         |
 | 606    |   EMErrorGroupSharedFileInvalidId   | 共享文件 ID 为空：共享文件 ID 为空。                         |
+| 609    |   EMErrorGroupMemberAttributesReachLimit   | 群组成员自定义属性个数达到上限。                         |
+| 610    |   EMErrorGroupMemberAttributesUpdateFailed   | 设置群成员自定义属性失败。                        |
+| 611    |   EMErrorGroupMemberAttributesKeyReachLimit   | 设置的群成员自定义属性 key 长度（不能超过 16 字节）超限。                        |
+| 612    |   EMErrorGroupMemberAttributesValueReachLimit   | 设置的群成员自定义属性 value 长度（不能超过 512 字节）超限。  |
 | 700    |      EMErrorChatroomInvalidId       | 聊天室 ID 异常：聊天室相关 API 传入的聊天室 ID 为空。        |
 | 701    |    EMErrorChatroomAlreadyJoined     | 已在该聊天室中：调用加入聊天室的 API 添加的用户已经在该聊天室中。 |
 | 702    |      EMErrorChatroomNotJoined       | 未加入该聊天室：用户在未加入的聊天室中发送消息或进行聊天室操作时提示该错误。 |

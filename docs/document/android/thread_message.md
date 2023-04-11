@@ -19,11 +19,11 @@
 2. 客户端 A 和 B 登录即时通讯。
 3. 客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
 
-![img](/images/android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 子区创建和查看如下图：
 
-![img](/images/android/threads.png)
+![img](@static/images/android/threads.png)
 
 ## 前提条件
 
@@ -46,9 +46,9 @@
 
 ```java
 // 创建一条文本消息，`content` 为消息文字内容，`chatThreadId` 为子区 ID。
-EMMessage message = EMMessage.createTxtSendMessage(content, chatThreadId);
+EMMessage message = EMMessage.createTxtSendMessage(content, chatThreadId); 
 // 设置消息类型，子区消息需要将 `ChatType` 设置为 `GroupChat`。
-message.setChatType(ChatType.GroupChat);
+message.setChatType(ChatType.GroupChat); 
 // 设置消息标记 `isChatThreadMessage` 为 `true`。
 message.setIsChatThreadMessage(true);
 // 发送消息时可以设置 `EMCallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。

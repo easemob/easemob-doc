@@ -157,6 +157,9 @@ private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
             //当前⽤户在其他设备移除禁⾔。
             case GROUP_REMOVE_MUTE:
                 break;
+            //当前⽤户在其他设备设置了群成员自定义属性。
+            case GROUP_METADATA_CHANGED:
+                break;    
             default:
                 break;
         }

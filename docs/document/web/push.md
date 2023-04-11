@@ -26,7 +26,7 @@
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 你已在环信即时通讯云管理后台中激活推送高级功能。推送高级功能包括设置推送通知模式和免打扰模式。
 
-![image](/images/web/push_web_enable_push.png)
+![image](@static/images/web/push_web_enable_push.png)
 
 ## 实现方法
 
@@ -89,10 +89,11 @@
 
 免打扰时间参数的说明如下表所示：
 
-| 免打扰时间参数      | 描述                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 应用范围                                  |
-| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------- |
-| startTime & endTime | 免打扰时间段，精确到分钟，格式为 HH:MM-HH:MM，例如 08:30-10:00。该时间为 24 小时制，免打扰时间段的开始时间和结束时间中的小时数和分钟数的取值范围分别为 [00,23] 和 [00,59]。免打扰时间段的设置说明如下：<br/> - 开始时间和结束时间的设置立即生效，免打扰模式每天定时触发。例如，开始时间为 `08:00`，结束时间为 `10:00`，免打扰模式在每天的 8:00-10:00 内生效。若你在 11:00 设置开始时间为 `08:00`，结束时间为 `12:00`，则免打扰模式在当天的 11:00-12:00 生效，以后每天均在 8:00-12:00 生效。<br/> - 若开始时间和结束时间相同，免打扰模式则全天生效。<br/> - 若结束时间早于开始时间，则免打扰模式在每天的开始时间到次日的结束时间内生效。例如，开始时间为 `10:00`，结束时间为 `08:00`，则免打扰模式的在当天的 10:00 到次日的 8:00 生效。<br/> - 目前仅支持在每天的一个指定时间段内开启免打扰模式，不支持多个免打扰时间段，新的设置会覆盖之前的设置。<br/> - 若不设置该参数，传空字符串。 | 仅用于 app 级别，对单聊或群聊会话不生效。 |
-| duration            | 免打扰时长，单位为毫秒。免打扰时长的取值范围为 [0,604800000]，`0` 表示该参数无效，`604800000` 表示免打扰模式持续 7 天。<br/> 与免打扰时间段的设置长久有效不同，该参数为一次有效。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | App 或单聊/群聊会话。                     |
+| 免打扰时间参数     |  描述   |   应用范围 |
+| :--------| :----- | :----------------------------------------------------------- |
+| startTime & endTime  | 免打扰时间段，精确到分钟，格式为 HH:MM-HH:MM，例如 08:30-10:00。该时间为 24 小时制，免打扰时间段的开始时间和结束时间中的小时数和分钟数的取值范围分别为 [00,23] 和 [00,59]。免打扰时间段的设置说明如下：<br/> - 开始时间和结束时间的设置立即生效，免打扰模式每天定时触发。例如，开始时间为 `08:00`，结束时间为 `10:00`，免打扰模式在每天的 8:00-10:00 内生效。若你在 11:00 设置开始时间为 `08:00`，结束时间为 `12:00`，则免打扰模式在当天的 11:00-12:00 生效，以后每天均在 8:00-12:00 生效。<br/> - 若开始时间和结束时间相同，免打扰模式则全天生效。<br/> - 若结束时间早于开始时间，则免打扰模式在每天的开始时间到次日的结束时间内生效。例如，开始时间为 `10:00`，结束时间为 `08:00`，则免打扰模式的在当天的 10:00 到次日的 8:00 生效。<br/> - 目前仅支持在每天的一个指定时间段内开启免打扰模式，不支持多个免打扰时间段，新的设置会覆盖之前的设置。<br/> - 若不设置该参数，传空字符串。 | 仅用于 app 级别，对单聊或群聊会话不生效。 |
+| duration |  免打扰时长，单位为毫秒。免打扰时长的取值范围为 [0,604800000]，`0` 表示该参数无效，`604800000` 表示免打扰模式持续 7 天。<br/> 与免打扰时间段的设置长久有效不同，该参数为一次有效。    | App 或单聊/群聊会话。  |
+
 
 **推送通知方式与免打扰时间设置之间的关系**
 
@@ -130,10 +131,10 @@
 const params = {
   options: {
     paramType: 0,
-    remindType: "ALL",
-  },
-};
-WebIM.conn.setSilentModeForAll(params);
+    remindType: 'ALL'
+  }
+}
+WebIM.conn.setSilentModeForAll(params)
 ```
 
 ### 获取 app 的推送通知设置
@@ -142,7 +143,7 @@ WebIM.conn.setSilentModeForAll(params);
 
 ```javascript
 // 无需传参数，直接调用。
-WebIM.conn.getSilentModeForAll();
+WebIM.conn.getSilentModeForAll()
 ```
 
 ### 设置单个会话的推送通知
@@ -186,14 +187,14 @@ WebIM.conn.getSilentModeForAll();
   }
 */
 const params = {
-  conversationId: "12345",
-  type: "groupChat",
+  conversationId: '12345',
+  type: 'groupChat',
   options: {
     paramType: 0,
-    remindType: "ALL",
-  },
-};
-WebIM.conn.setSilentModeForConversation(params);
+    remindType: 'ALL'
+  }
+}
+WebIM.conn.setSilentModeForConversation(params)
 ```
 
 ### 获取单个会话的推送通知设置
@@ -202,10 +203,10 @@ WebIM.conn.setSilentModeForConversation(params);
 
 ```javascript
 const params = {
-  conversationId: "test", // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
-  type: "singleChat", // 会话类型：singleChat（单聊）、groupChat（群聊）和 chatRoom（聊天室）。
-};
-WebIM.conn.getSilentModeForConversation(params);
+  conversationId: 'test', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
+  type: 'singleChat', // 会话类型：singleChat（单聊）、groupChat（群聊）和 chatRoom（聊天室）。
+}
+WebIM.conn.getSilentModeForConversation(params)
 ```
 
 ### 获取多个会话的推送通知设置
@@ -219,16 +220,16 @@ WebIM.conn.getSilentModeForConversation(params);
 const params = {
   conversationList: [
     {
-      id: "test", // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
-      type: "singleChat", // 会话类型：singleChat（单聊）、groupChat（群聊）和 chatRoom（聊天室）。
+      id: 'test', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
+      type: 'singleChat' // 会话类型：singleChat（单聊）、groupChat（群聊）和 chatRoom（聊天室）。
     },
     {
-      id: "1234",
-      type: "groupChat",
-    },
-  ],
-};
-WebIM.conn.getSilentModeForConversations(params);
+      id: '1234',
+      type: 'groupChat'
+    }
+  ]
+}
+WebIM.conn.getSilentModeForConversations(params)
 ```
 
 ### 清除单个会话的推送通知方式的设置
@@ -239,10 +240,10 @@ WebIM.conn.getSilentModeForConversations(params);
 
 ```javascript
 const params = {
-  conversationId: "12345", // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
-  type: "groupChat", // 会话类型：singleChat（单聊）、groupChat（群聊）或 chatRoom（聊天室）。
-};
-WebIM.conn.clearRemindTypeForConversation(params);
+  conversationId: '12345', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
+  type: 'groupChat', // 会话类型：singleChat（单聊）、groupChat（群聊）或 chatRoom（聊天室）。
+}
+WebIM.conn.clearRemindTypeForConversation(params)
 ```
 
 ### 设置推送翻译
@@ -258,13 +259,13 @@ WebIM.conn.clearRemindTypeForConversation(params);
 	language: string, // 推送通知的首选语言。
 */
 const params = {
-  language: "EU",
-};
-WebIM.conn.setPushPerformLanguage(params);
+  language: 'EU'
+}
+WebIM.conn.setPushPerformLanguage(params)
 ```
 
 你可以调用 `getPushPerformLanguage` 获取推送通知的首选语言，示例代码如下：
 
 ```javascript
-WebIM.conn.getPushPerformLanguage(); // 无需传参数，直接调用。
+WebIM.conn.getPushPerformLanguage() // 无需传参数，直接调用。
 ```

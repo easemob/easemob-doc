@@ -19,6 +19,11 @@ export default defineUserConfig({
   description: "vuepress-theme-hope 的文档演示",
   bundler: viteBundler({
     viteOptions: {
+      resolve: {
+        alias: {
+          '@static': path.resolve(__dirname, '../../static')
+        }
+      },
       plugins: [
         // AutoImport({
         //   resolvers: [ElementPlusResolver({})],
@@ -101,10 +106,6 @@ export default defineUserConfig({
       __dirname,
       "./components/HomePage.vue"
     ),
-    // "@theme-hope/components/CommonWrapper": path.resolve(
-    //   __dirname,
-    //   "./components/CommonWrapper.vue"
-    // ),
 
     "@theme-hope/modules/sidebar/components/Sidebar": path.resolve(
       __dirname,

@@ -12,19 +12,18 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动、uni-app 编译的
 
 扫描下方小程序二维码，或者微信搜索 **环信即时通讯云** 即可快速体验环信小程序 Demo 在线版本：
 
-![img](/images/applet/applet-demo.jpeg)
+![img](@static/images/applet/applet-demo.jpeg)
 
-点击链接，扫描二维码，即可快速体验环信 Uniapp 编译生成的移动端原生应用：
+点击链接，扫描二维码，即可快速体验环信Uniapp编译生成的移动端原生应用：
 
 - 安卓： [https://www.pgyer.com/h4XF](https://www.pgyer.com/h4XF)
 - IOS： [https://www.pgyer.com/9ISC](https://www.pgyer.com/9ISC)
 
 :::notice
-
 - 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**
 - 各小程序 Demo 源码可在官网 [下载页](http://www.easemob.com/download/im) 获取
 - Uni-app Demo Git 源码地址：[https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
-  :::
+:::
 
 ## 功能说明
 

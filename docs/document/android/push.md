@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-![image](/images/android/push/push_android_understand.png)
+![image](@static/images/android/push/push_android_understand.png)
 
 消息推送流程如下：
 
@@ -55,7 +55,7 @@ SDK 内部会按照该顺序检测设备的推送支持情况。如果未设置�
 
 ### 上传到设备证书到环信即时通讯云控制台
 
-![image](/images/android/push/push_android_certificate_add.png)
+![image](@static/images/android/push/fcm_old_version.png)
 
 ## 在客户端实现推送
 
@@ -93,10 +93,17 @@ EMClient.getInstance().init(this, options);
 #### FCM 推送集成
 
 1. 在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase，详见 [FCM 的官网介绍](https://firebase.google.com/docs/android/setup?hl=zh-cn#console)。<br/>
-   将 Firebase SDK 添加到你的应用后，在 Firebase 控制台的 `Project settings` 页面，选择 `Cloud Messaging` 标签，查看 `Server ID` 和 `Server Key`。
 
 2. 上传推送证书。<br/>
-   注册完成后，在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时推送** > **配置证书** > **添加推送证书** > **谷歌**，然后输入 Firebase 项目设置里的 `Server ID` 和 `Server Key`。
+   注册完成后，在[环信即时通讯云控制台 (opens new window)](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书配置**，点击 **添加推送证书**。即时通讯 IM 支持 FCM 的旧版证书和 v1 版证书。
+
+- 若 **证书类型** 选择 **旧版**，你需要将 **证书名称** 设置为 FCM 的发送者 ID，**推送秘钥** 设置为 FCM 的服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面中，在 **Cloud Messaging API（旧版）** 区域中获取发送者 ID 和服务器密钥，如下图所示。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
+
+  ![image](@static/images/android/push/fcm_old_version.png)
+
+- 若 **证书类型** 选择 **V1**，你需要上传证书文件（.json 文件）并将 **证书名称** 设置为 FCM 的发送者 ID。你需要在[Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置** > **服务账号** 页面，点击 **生成新的私钥**，下载推送证书文件（.json），然后在 **项目设置** > **云消息传递** 页面中，在 **Firebase Cloud Messaging API（V1）** 区域中获取 发送者 ID。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
+
+  ![image](@static/images/android/push/fcm_v1.png)
 
 3. FCM 推送集成。<br/>
    3.1 在项目根目录下的 `build.gradle` 中添加 FCM 服务插件。
@@ -522,7 +529,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 
    ```gradle
    dependencies{
-       // 该 aar 托管在 jcenter 中，请确保当前项目已配置 jcenter 仓库。
+       // 该 jar 托管在 jcenter 中，请确保当前项目已配置 jcenter 仓库。
        implementation 'com.meizu.flyme.internet:push-internal:3.7.0@aar'
    }
    ```
@@ -597,7 +604,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 
 其中，设置推送通知方式、免打扰模式和推送模板为推送的高级功能，使用前需要在[环信即时通讯云控制后台](https://console.easemob.com/user/login)上开通。
 
-![image](/images/android/push/push_android_enable_push.png)
+![image](@static/images/android/push/push_android_enable_push.png)
 
 #### 4.1 设置推送通知
 
@@ -855,9 +862,9 @@ EMClient.getInstance().pushManager().getPreferredNotificationLanguage(new EMValu
 1. 登录环信 IM Console，进入首页。
 2. 在 **应用列表** 区域中，点击对应 app 的 **操作** 一栏中的 **查看** 按钮。
 3. 在环信 IM 配置页面的左侧导航栏，选择 **即时通讯 > 功能配置 > 消息推送 > 模板管理**，进入推送模板管理页面。
-   ![image](/images/android/push/push_android_template_mgmt.png)
+   ![image](@static/images/android/push/push_android_template_mgmt.png)
 4. 点击 **添加推送模板**。弹出以下页面，进行参数配置。
-   ![image](/images/android/push/push_android_template_add.png)
+   ![image](@static/images/android/push/push_android_template_add.png)
 
 在环信即时通讯云管理后台中完成模板创建后，用户可以在发送消息时选择此推送模板作为默认布局，如下代码示例所示：
 
@@ -1082,7 +1089,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 使用该方式设置后，本条消息会忽略接收方的免打扰设置，不论是否处于免打扰时间段都会正常向对方推送通知；
 
 ```java
-// 下面以 TXT 消息为例，IMAGE FILE 等类型的消息设置方法相同。
+// 下面以 TXT 消息为例，图片、文件等类型的消息设置方法相同。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("test");
 // 设置要发送用户的用户 ID。
@@ -1095,8 +1102,32 @@ message.setMessageStatusCallback(new CallBack() {...});
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-| 参数                    | 描述                                   |
-| :---------------------- | :------------------------------------- |
-| `txtBody`               | 消息体。                               |
-| `toChatUsername`        | 消息接收方用户 ID。                    |
-| `em_force_notification` | 标志是否为强制推送的关键字，不可修改。 |
+| 参数                    | 描述                                                                                                   |
+| :---------------------- | :----------------------------------------------------------------------------------------------------- |
+| `txtBody`               | 消息体。                                                                                               |
+| `toChatUsername`        | 消息接收方：<br/> - 单聊为对端用户的用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。    |
+| `em_force_notification` | 是否为强制推送：<br/> - `YES`：强制推送<br/> - （默认）`NO`：非强制推送。<br/>该字段名固定，不可修改。 |
+
+### 发送静默消息
+
+发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。
+
+```java
+// 下面以 TXT 消息为例，图片、文件等类型的消息设置方法相同。
+EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
+EMTextMessageBody txtBody = new EMTextMessageBody("test");
+// 设置接收方：单聊为对端用户的用户 ID；群聊为群组 ID；聊天室聊天为聊天室 ID。
+message.setTo("toChatUsername");
+// 设置自定义扩展字段。
+message.setAttribute("em_ignore_notification", true);
+// 设置消息回调。
+message.setMessageStatusCallback(new CallBack() {...});
+// 发送消息。
+EMClient.getInstance().chatManager().sendMessage(message);
+```
+
+| 参数                     | 描述                                                                                                           |
+| :----------------------- | :------------------------------------------------------------------------------------------------------------- |
+| `txtBody`                | 消息体。                                                                                                       |
+| `toChatUsername`         | 消息接收方：<br/> - 单聊为对端用户的用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。            |
+| `em_ignore_notification` | 是否发送静默消息。<br/> - `YES`：发送静默消息；<br/> - （默认）`NO`：推送该消息。<br/>该字段名固定，不可修改。 |

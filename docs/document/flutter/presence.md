@@ -23,7 +23,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![](/images/ios/presence.png)
+![](@static/images/ios/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -33,7 +33,7 @@
 
 效果如下图：
 
-![img](/images/ios/status.png)
+![img](@static/images/ios/status.png)
 
 ## 前提条件
 
@@ -70,10 +70,9 @@ try {
 在线状态变更时，订阅者会收到 `EMPresenceEventHandler#onPresenceStatusChanged` 回调。
 
 :::notice
-
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
 - 每次调用接口最多只能订阅 100 个账号，若数量较大需多次调用。每个用户 ID 订阅的用户数不超过 3000。如果超过 3000，后续订阅也会成功，但默认会将订阅剩余时长较短的替代。
-  :::
+:::
 
 ### 发布自定义在线状态
 

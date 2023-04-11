@@ -18,7 +18,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![Presence_web](/images/ios/presence.png)
+![Presence_web](@static/images/ios/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -28,7 +28,7 @@
 
 效果如下图：
 
-![img](/images/web/web_chats_status_setting.png)
+![img](@static/images/web/web_chats_status_setting.png)
 
 ## 前提条件
 
@@ -48,21 +48,18 @@
 
 ```javascript
 let option = {
-  usernames: ["Alice", "Bob"],
-  expiry: 7 * 24 * 3600, // 单位为秒
-};
-conn.subscribePresence(option).then((res) => {
-  console.log(res);
-});
+  usernames: ['Alice','Bob'],
+  expiry: 7*24*3600 // 单位为秒
+}
+conn.subscribePresence(option).then(res => {console.log(res)})
 ```
 
 在线状态变更时，订阅者会收到 `onPresenceStatusChange` 回调。
 
 :::notice
-
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
 - 每次调用接口最多只能订阅 100 个账号，若数量较大需多次调用。每个用户 ID 订阅的用户数不超过 3000。如果超过 3000，后续订阅也会成功，但默认会将订阅剩余时长较短的替代。
-  :::
+:::
 
 ### 发布自定义在线状态
 
@@ -70,11 +67,9 @@ conn.subscribePresence(option).then((res) => {
 
 ```javascript
 let option = {
-  description: "custom presence",
-};
-conn.publishPresence(option).then((res) => {
-  console.log(res);
-});
+  description: 'custom presence'
+}
+conn.publishPresence(option).then(res => {console.log(res)})
 ```
 
 在线状态发布后，发布者和订阅者均会收到 `onPresenceStatusChange` 回调。
@@ -87,8 +82,8 @@ conn.publishPresence(option).then((res) => {
 WebIM.conn.addEventHandler('MESSAGES',{
    onPresenceStatusChange: => (msg) {
        // 这里可以处理订阅用户状态更新后的逻辑。
-   	   console.log('状态更新'，msg)
-   },
+   	   console.log('状态更新'，msg) 
+   }, 
 })
 ```
 
@@ -98,25 +93,21 @@ WebIM.conn.addEventHandler('MESSAGES',{
 
 ```javascript
 let option = {
-  usernames: ["Alice", "Bob"],
-};
-conn.unsubscribePresence(option).then((res) => {
-  console.log(res);
-});
+  usernames: ['Alice','Bob']
+}
+conn.unsubscribePresence(option).then(res => {console.log(res)})
 ```
 
 ### 查询被订阅用户列表
 
-为方便用户管理订阅关系，SDK 提供 `getSubscribedPresenceList` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
+为方便用户管理订阅关系，SDK 提供 `getSubscribedPresencelist` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
 ```javascript
 let option = {
   pageNum: 0,
-  pageSize: 50,
-};
-conn.getSubscribedPresenceList(option).then((res) => {
-  console.log(res);
-});
+  pageSize: 50
+}
+conn.getSubscribedPresencelist(option).then(res => {console.log(res)})
 ```
 
 ### 获取用户的当前在线状态
@@ -125,9 +116,7 @@ conn.getSubscribedPresenceList(option).then((res) => {
 
 ```javascript
 let option = {
-  usernames: ["Alice", "Bob"],
-};
-conn.getPresenceStatus(option).then((res) => {
-  console.log(res);
-});
+  usernames: ['Alice','Bob']
+}
+conn.getPresenceStatus(option).then(res => {console.log(res)})
 ```

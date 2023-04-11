@@ -11,11 +11,9 @@ EaseIMKit 是什么？
 EaseIMKit 是基于环信 IM SDK 的一款 UI 组件库，它提供了一些通用的 UI 组件，例如 ‘会话列表’、‘聊天界面’ 和 ‘联系人列表’ 等，开发者可根据实际业务需求通过该组件库快速地搭建自定义 IM 应用。EaseIMKit 中的组件在实现 UI 功能的同时，调用 IM SDK 相应的接口实现 IM 相关逻辑和数据的处理，因而开发者在使用 EaseIMKit 时只需关注自身业务或个性化扩展即可。
 
 EaseIMKit 源码地址
-
 - [EaseIMKit 工程](https://github.com/easemob/easeui_ios/tree/EaseIMKit)
 
 使用 EaseIMKit 环信 IM App 地址：
-
 - [环信 IM](https://github.com/easemob/chat-ios)
 
 ## 导入
@@ -49,36 +47,33 @@ EaseIMKit 中包含了拍照，发语音，发图片，发视频，发位置，�
 
 - 创建 `Podfile` 文件并添加 EaseIMKit 源码依赖
 
-  1. 项目 `Podfile` 文件 和 `ProjectName.xcodeproj` 文件应在同一目录，如下图所示：
+    1. 项目 `Podfile` 文件 和 `ProjectName.xcodeproj` 文件应在同一目录，如下图所示：
 
-  ![img](/images/ios/easeimkit1.png)
+    ![img](@static/images/ios/easeimkit1.png)
 
-  Podfile 文件示例：
+    Podfile 文件示例：
 
-  ```
-  platform :ios, '11.0'
+    ```
+    platform :ios, '11.0'
 
-  source 'https://github.com/CocoaPods/Specs.git'
+    source 'https://github.com/CocoaPods/Specs.git'
 
-  target 'ProjectName' do
-      pod 'EaseIMKit',  :path => "../EaseUI/EaseIMKit"
-      pod 'HyphenateChat', '3.8.4'
-  end
-  ```
+    target 'ProjectName' do
+        pod 'EaseIMKit',  :path => "../EaseUI/EaseIMKit"
+        pod 'HyphenateChat', '3.8.4'
+    end
+    ```
+    2. EaseIMKit path 路径（如：pod 'EaseIMKit', :path ⇒ “../EaseUI/EaseIMKit”）需指向 EaseIMKit.podspec 文件所在目录，如下图所示：
 
-  2. EaseIMKit path 路径（如：pod 'EaseIMKit', :path ⇒ “../EaseUI/EaseIMKit”）需指向 EaseIMKit.podspec 文件所在目录，如下图所示：
-
-  ![img](/images/ios/easeimkit2.png)
+    ![img](@static/images/ios/easeimkit2.png)
 
 - 项目集成本地 EaseIMKit 源码
+    1. 终端 cd 到 Podfile 文件所在目录，执行 pod install 命令在项目中安装 EaseIMKit 本地源码
+    2. 执行完成后，则在 Xcode 项目目录 Pods/Development Pods/ 可找到 EaseIMKit 源码，如下图所示：
 
-  1. 终端 cd 到 Podfile 文件所在目录，执行 pod install 命令在项目中安装 EaseIMKit 本地源码
-  2. 执行完成后，则在 Xcode 项目目录 Pods/Development Pods/ 可找到 EaseIMKit 源码，如下图所示：
+    ![img](@static/images/ios/easeimkit3.png)
 
-  ![img](/images/ios/easeimkit3.png)
-
-  3. 可对源码进行符合自己项目目标的自定义修改
-
+    3. 可对源码进行符合自己项目目标的自定义修改
 - 成为社区贡献者
 
 如果在源码自定义过程中有任何通用自定义都可以给我们 [Github 仓库](https://github.com/easemob/easeui_ios.git) 提交代码成为社区贡献者！
@@ -325,7 +320,7 @@ typedef enum {
 } EaseAlignmentStyle;
 ```
 
-实例化的聊天控制器可通过重置视图 UI 配置模型刷新页面
+实例化的聊天控制器可通过重置视图UI配置模型刷新页面
 
 ```objectivec
 //重置聊天控制器
@@ -334,19 +329,19 @@ typedef enum {
 
 聊天页背景色，输入区颜色配置示例：
 
-![背景色，输入区颜色](/images/ios/easeimkit4.png)
+![背景色，输入区颜色](@static/images/ios/easeimkit4.png)
 
 聊天会话输入区类型参数配置示例：
 
-![全部功能，语音不可用，表情不可用，语音和表情不可用，纯文本](/images/ios/easeimkit5.png)
+![全部功能，语音不可用，表情不可用，语音和表情不可用，纯文本](@static/images/ios/easeimkit5.png)
 
 输入区扩展功能参数配置示例：
 
-![输入区扩展](/images/ios/easeimkit6.jpeg)
+![输入区扩展](@static/images/ios/easeimkit6.jpeg)
 
 聊天会话群聊消息同左排列，时间线背景色，时间字体颜色配置示例：
 
-![群聊消息同左排列，时间线背景色，时间字体颜色](/images/ios/easeimkit7.jpeg)
+![群聊消息同左排列，时间线背景色，时间字体颜色](@static/images/ios/easeimkit7.jpeg)
 
 ### 会话列表样式配置
 
@@ -369,7 +364,7 @@ typedef enum {
 @property (nonatomic) EMUnReadCountViewPosition badgeLabelPosition; // 未读数显示风格
 @property (nonatomic, strong) UIFont *badgeLabelFont;   // 未读数字体
 @property (nonatomic, strong) UIColor *badgeLabelTitleColor;    // 未读数字色
-@property (nonatomic, strong) UIColor *badgeLabelBgColor;   // 未读数背景色
+@property (nonatomic, strong) UIColor *badgeLabelBgColor;   // 未读数背景色  
 @property (nonatomic) CGFloat badgeLabelHeight;   // 未读数角标高度
 @property (nonatomic) CGVector badgeLabelCenterVector;  // 未读数中心位置偏移
 @property (nonatomic) int badgeMaxNum;   // 未读数显示上限, 超过上限后会显示 xx+
@@ -417,13 +412,13 @@ typedef enum {
 
 通讯录添加头部功能区：新的好友，群聊，聊天室示意图：
 
-![头部功能区：新的好友，群聊，聊天室以及联系人列表](/images/ios/easeimkit8.png)
+![头部功能区：新的好友，群聊，聊天室以及联系人列表](@static/images/ios/easeimkit8.png)
 
 ## 自定义功能扩展
 
 ### 聊天会话自定义功能扩展
 
-实例化 EaseChatViewController 之后，可选择实现 EaseChatViewControllerDelegate 协议（聊天控制器回调代理），接收 EaseChatViewController 的回调并做进一步的自定义实现。
+实例化EaseChatViewController之后，可选择实现EaseChatViewControllerDelegate协议（聊天控制器回调代理），接收 EaseChatViewController 的回调并做进一步的自定义实现。
 
 EaseChatViewControllerDelegate
 
@@ -433,7 +428,7 @@ EaseChatViewControllerDelegate
 
 ```objectivec
 /**
- * 下拉加载更多消息回调
+ * 下拉加载更多消息回调 
  *
  * @param   firstMessageId          第一条消息 ID
  * @param   messageList             当前消息列表
@@ -441,7 +436,7 @@ EaseChatViewControllerDelegate
 - (void)loadMoreMessageData:(NSString *)firstMessageId currentMessageList:(NSArray<EMMessage *> *)messageList;
 ```
 
-#### 自定义 cell
+#### 自定义cell
 
 通过实现聊天控制回调获取自定义消息 cell，根据 messageModel，用户自己判断是否显示自定义消息 cell。如果返回 nil 会显示默认；如果返回 cell 会显示用户自定义消息 cell。
 
@@ -476,7 +471,7 @@ EaseChatViewControllerDelegate
 
 通过自定义 cell 展示单聊音视频通话记录的效果图：
 
-![自定义 cell 展示单聊音视频通话记录](/images/ios/easeimkit9.png)
+![自定义 cell 展示单聊音视频通话记录](@static/images/ios/easeimkit9.png)
 
 #### 选中消息的回调
 
@@ -610,7 +605,7 @@ EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实�
  */
 
 - (NSMutableArray<EaseExtMenuModel*>*)inputBarExtMenuItemArray:
-                (NSMutableArray<EaseExtMenuModel*>*)defaultInputBarItems
+                (NSMutableArray<EaseExtMenuModel*>*)defaultInputBarItems 
                 conversationType:(EMConversationType)conversationType;
 ```
 
@@ -669,15 +664,69 @@ return menuArray;
 //@群成员
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    //用户可自定义@实现
-    if ([text isEqualToString:@"@"] && self.conversation.type == EMConversationTypeGroupChat)
-    {
-        [self _willInputAt:textView];
+    if (self.conversation.type == EMConversationTypeGroupChat) {
+        if ([text isEqualToString:@"@"]) {
+            [self _willInputAt:textView];
+        } else if ([text isEqualToString:@""]) {
+            __block BOOL isAt = NO;
+            [textView.attributedText enumerateAttributesInRange:NSMakeRange(0, textView.text.length) options:0 usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+                NSString *atUser = attrs[@"AtInfo"];
+                if (atUser) {
+                    if (textView.selectedRange.location == range.location + range.length) {
+                        isAt = YES;
+                        NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithAttributedString:textView.attributedText];
+                        [result deleteCharactersInRange:range];
+                        textView.attributedText = result;
+                        if ([atUser isEqualToString:@"All"]) {
+                            [self.chatController removeAtAll];
+                        } else {
+                            [self.chatController removeAtUser:atUser];
+                        }
+                        *stop = YES;
+                    }
+                }
+            }];
+            return !isAt;
+        }
     }
     return YES;
 }
 ```
+#### 输入框选中回调
+```objectivec
+/**
+ * 输入区选中范围变化回调  例：@群成员
+ */
+- (void)textViewDidChangeSelection:(UITextView *)textView;
+```
 
+输入区选中范围变化回调示例（EaseIM APP 有效）：
+
+```objectivec
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+    [textView.attributedText enumerateAttributesInRange:NSMakeRange(0, textView.text.length) options:0 usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+        if (attrs[@"AtInfo"]) {
+            NSUInteger min = textView.selectedRange.location;
+            NSUInteger max = textView.selectedRange.location + textView.selectedRange.length;
+            if (min > range.location && min <= range.location + range.length) {
+                NSUInteger location = range.location + range.length;
+                NSUInteger length = 0;
+                if (textView.selectedRange.location + textView.selectedRange.length > location) {
+                    length = textView.selectedRange.location + textView.selectedRange.length - location;
+                }
+                textView.selectedRange = NSMakeRange(location, length);
+                *stop = YES;
+            } else if (max > range.location && max <= range.location + range.length) {
+                NSUInteger location = min;
+                NSUInteger length = textView.selectedRange.length - (max - range.location - range.length);
+                textView.selectedRange = NSMakeRange(location, length);
+                *stop = YES;
+            }
+        }
+    }];
+}
+```
 #### 对方正在输入状态回调
 
 对方正在输入状态回调（单聊有效）
@@ -713,7 +762,7 @@ return menuArray;
 - (NSMutableArray<EaseExtMenuModel*>*)messageLongPressExtMenuItemArray:(NSMutableArray<EaseExtMenuModel*>*)defaultLongPressItems message:(EMMessage*)message;
 ```
 
-默认消息 cell 长按回调示例（EaseIM APP 有效）：
+默认消息 cell 长按回调示例（EaseIM APP有效）：
 
 ```objectivec
 //添加转发消息
@@ -748,7 +797,7 @@ return menuArray;
  @result  返回默认消息长按扩展功能组
  */
 /**
- *
+ * 
  *
  * @param   defaultLongPressItems   默认长按扩展区功能数据模型组  默认共有：复制，删除，撤回（发送消息时 间距当前时间小于 2 分钟））
  * @param   customCell              当前长按的自定义 cell
@@ -796,7 +845,7 @@ return menuArray;
 - (void)easeTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EaseConversationCell *cell = (EaseConversationCell*)[tableView cellForRowAtIndexPath:indexPath];
-    //系统通知
+    //系统通知  
     if ([cell.model.easeId isEqualToString:@"emsystemnotificationid"]) {
        //此实例仅为 EaseIM APP 展示系统通知
         EMNotificationViewController *controller = [[EMNotificationViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -881,7 +930,7 @@ return menuArray;
 - (void)setContacts:(NSArray<EaseUserDelegate> * _Nonnull)contacts;
 ```
 
-实例化 EaseContactsViewController 之后，可选择实现 EaseContactsViewControllerDelegate 协议（通讯录代理），接收 EaseContactsViewController 的回调并做进一步的自定义实现。
+实例化 EaseContactsViewController 之后，可选择实现EaseContactsViewControllerDelegate协议（通讯录代理），接收 EaseContactsViewController 的回调并做进一步的自定义实现。
 
 EaseConversationsViewControllerDelegate
 

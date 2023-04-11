@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![img](/images/android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 
@@ -86,7 +86,7 @@ cd ios && pod install && cd ..
 
 ```javascript
 // 导入依赖库
-import React, { useEffect } from "react";
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -94,28 +94,28 @@ import {
   Text,
   TextInput,
   View,
-} from "react-native";
+} from 'react-native';
 import {
   ChatClient,
   ChatOptions,
   ChatMessageChatType,
   ChatMessage,
-} from "react-native-chat-sdk";
+} from 'react-native-chat-sdk';
 
 // 创建 app
 const App = () => {
   // 进行 app 设置
-  const title = "ChatQuickstart";
-  const [appKey, setAppKey] = React.useState("easemob-demo#easeim");
-  const [username, setUsername] = React.useState("asterisk001");
-  const [password, setPassword] = React.useState("qwer");
-  const [userId, setUserId] = React.useState("");
-  const [content, setContent] = React.useState("");
-  const [logText, setWarnText] = React.useState("Show log area");
+  const title = 'ChatQuickstart';
+  const [appKey, setAppKey] = React.useState('easemob-demo#easeim');
+  const [username, setUsername] = React.useState('asterisk001');
+  const [password, setPassword] = React.useState('qwer');
+  const [userId, setUserId] = React.useState('');
+  const [content, setContent] = React.useState('');
+  const [logText, setWarnText] = React.useState('Show log area');
 
   // 输出 console log 文件
   useEffect(() => {
-    logText.split("\n").forEach((value, index, array) => {
+    logText.split('\n').forEach((value, index, array) => {
       if (index === 0) {
         console.log(value);
       }
@@ -123,11 +123,11 @@ const App = () => {
   }, [logText]);
 
   // 输出 UI log 文件
-  const rollLog = (text) => {
-    setWarnText((preLogText) => {
+  const rollLog = text => {
+    setWarnText(preLogText => {
       let newLogText = text;
       preLogText
-        .split("\n")
+        .split('\n')
         .filter((value, index, array) => {
           if (index > 8) {
             return false;
@@ -135,7 +135,7 @@ const App = () => {
           return true;
         })
         .forEach((value, index, array) => {
-          newLogText += "\n" + value;
+          newLogText += '\n' + value;
         });
       return newLogText;
     });
@@ -146,14 +146,14 @@ const App = () => {
     let msgListener = {
       onMessagesReceived(messages) {
         for (let index = 0; index < messages.length; index++) {
-          rollLog("received msgId: " + messages[index].msgId);
+          rollLog('received msgId: ' + messages[index].msgId);
         }
       },
-      onCmdMessagesReceived: (messages) => {},
-      onMessagesRead: (messages) => {},
-      onGroupMessageRead: (groupMessageAcks) => {},
-      onMessagesDelivered: (messages) => {},
-      onMessagesRecalled: (messages) => {},
+      onCmdMessagesReceived: messages => {},
+      onMessagesRead: messages => {},
+      onGroupMessageRead: groupMessageAcks => {},
+      onMessagesDelivered: messages => {},
+      onMessagesRecalled: messages => {},
       onConversationsUpdate: () => {},
       onConversationRead: (from, to) => {},
     };
@@ -173,29 +173,29 @@ const App = () => {
     ChatClient.getInstance()
       .init(o)
       .then(() => {
-        rollLog("init success");
+        rollLog('init success');
         this.isInitialized = true;
         let listener = {
           onTokenWillExpire() {
-            rollLog("token expire.");
+            rollLog('token expire.');
           },
           onTokenDidExpire() {
-            rollLog("token did expire");
+            rollLog('token did expire');
           },
           onConnected() {
-            rollLog("login success.");
+            rollLog('login success.');
             setMessageListener();
           },
           onDisconnected(errorCode) {
-            rollLog("login fail: " + errorCode);
+            rollLog('login fail: ' + errorCode);
           },
         };
         ChatClient.getInstance().addConnectionListener(listener);
       })
-      .catch((error) => {
+      .catch(error => {
         rollLog(
-          "init fail: " +
-            (error instanceof Object ? JSON.stringify(error) : error)
+          'init fail: ' +
+            (error instanceof Object ? JSON.stringify(error) : error),
         );
       });
   };
@@ -203,64 +203,64 @@ const App = () => {
   // 注册账号。
   const registerAccount = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog("Perform initialization first.");
+      rollLog('Perform initialization first.');
       return;
     }
-    rollLog("start register account ...");
+    rollLog('start register account ...');
     ChatClient.getInstance()
       .createAccount(username, password)
-      .then((response) => {
+      .then(response => {
         rollLog(`register success: userName = ${username}, password = ******`);
       })
-      .catch((error) => {
-        rollLog("register fail: " + JSON.stringify(error));
+      .catch(error => {
+        rollLog('register fail: ' + JSON.stringify(error));
       });
   };
 
   // 用环信即时通讯 IM 账号和密码登录。
   const loginWithPassword = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog("Perform initialization first.");
+      rollLog('Perform initialization first.');
       return;
     }
-    rollLog("start login ...");
+    rollLog('start login ...');
     ChatClient.getInstance()
       .login(username, password)
       .then(() => {
-        rollLog("login operation success.");
+        rollLog('login operation success.');
       })
-      .catch((reason) => {
-        rollLog("login fail: " + JSON.stringify(reason));
+      .catch(reason => {
+        rollLog('login fail: ' + JSON.stringify(reason));
       });
   };
 
   // 登出。
   const logout = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog("Perform initialization first.");
+      rollLog('Perform initialization first.');
       return;
     }
-    rollLog("start logout ...");
+    rollLog('start logout ...');
     ChatClient.getInstance()
       .logout()
       .then(() => {
-        rollLog("logout success.");
+        rollLog('logout success.');
       })
-      .catch((reason) => {
-        rollLog("logout fail:" + JSON.stringify(reason));
+      .catch(reason => {
+        rollLog('logout fail:' + JSON.stringify(reason));
       });
   };
 
   // 发送一条文本消息。
   const sendmsg = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog("Perform initialization first.");
+      rollLog('Perform initialization first.');
       return;
     }
     let msg = ChatMessage.createTextMessage(
       userId,
       content,
-      ChatMessageChatType.PeerChat
+      ChatMessageChatType.PeerChat,
     );
     const callback = new (class {
       onProgress(locaMsgId, progress) {
@@ -270,17 +270,17 @@ const App = () => {
         rollLog(`send message fail: ${locaMsgId}, ${JSON.stringify(error)}`);
       }
       onSuccess(message) {
-        rollLog("send message success: " + message.localMsgId);
+        rollLog('send message success: ' + message.localMsgId);
       }
     })();
-    rollLog("start send message ...");
+    rollLog('start send message ...');
     ChatClient.getInstance()
       .chatManager.sendMessage(msg, callback)
       .then(() => {
-        rollLog("send message: " + msg.localMsgId);
+        rollLog('send message: ' + msg.localMsgId);
       })
-      .catch((reason) => {
-        rollLog("send fail: " + JSON.stringify(reason));
+      .catch(reason => {
+        rollLog('send fail: ' + JSON.stringify(reason));
       });
   };
 
@@ -296,7 +296,7 @@ const App = () => {
             multiline
             style={styles.inputBox}
             placeholder="Enter appkey"
-            onChangeText={(text) => setAppKey(text)}
+            onChangeText={text => setAppKey(text)}
             value={appKey}
           />
         </View>
@@ -310,7 +310,7 @@ const App = () => {
             multiline
             style={styles.inputBox}
             placeholder="Enter username"
-            onChangeText={(text) => setUsername(text)}
+            onChangeText={text => setUsername(text)}
             value={username}
           />
         </View>
@@ -319,7 +319,7 @@ const App = () => {
             multiline
             style={styles.inputBox}
             placeholder="Enter password"
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={text => setPassword(text)}
             value={password}
           />
         </View>
@@ -339,7 +339,7 @@ const App = () => {
             multiline
             style={styles.inputBox}
             placeholder="Enter the username you want to send"
-            onChangeText={(text) => setUserId(text)}
+            onChangeText={text => setUserId(text)}
             value={userId}
           />
         </View>
@@ -348,7 +348,7 @@ const App = () => {
             multiline
             style={styles.inputBox}
             placeholder="Enter content"
-            onChangeText={(text) => setContent(text)}
+            onChangeText={text => setContent(text)}
             value={content}
           />
         </View>
@@ -377,62 +377,62 @@ const App = () => {
 const styles = StyleSheet.create({
   titleContainer: {
     height: 60,
-    backgroundColor: "#6200ED",
+    backgroundColor: '#6200ED',
   },
   title: {
     lineHeight: 60,
     paddingLeft: 15,
-    color: "#fff",
+    color: '#fff',
     fontSize: 20,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   inputCon: {
-    marginLeft: "5%",
-    width: "90%",
+    marginLeft: '5%',
+    width: '90%',
     height: 60,
     paddingBottom: 6,
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: '#ccc',
   },
   inputBox: {
     marginTop: 15,
-    width: "100%",
+    width: '100%',
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   buttonCon: {
-    marginLeft: "2%",
-    width: "96%",
-    flexDirection: "row",
+    marginLeft: '2%',
+    width: '96%',
+    flexDirection: 'row',
     marginTop: 20,
     height: 26,
-    justifyContent: "space-around",
-    alignItems: "center",
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   eachBtn: {
     height: 40,
-    width: "28%",
+    width: '28%',
     lineHeight: 40,
-    textAlign: "center",
-    color: "#fff",
+    textAlign: 'center',
+    color: '#fff',
     fontSize: 16,
-    backgroundColor: "#6200ED",
+    backgroundColor: '#6200ED',
     borderRadius: 5,
   },
   btn2: {
     height: 40,
-    width: "45%",
+    width: '45%',
     lineHeight: 40,
-    textAlign: "center",
-    color: "#fff",
+    textAlign: 'center',
+    color: '#fff',
     fontSize: 16,
-    backgroundColor: "#6200ED",
+    backgroundColor: '#6200ED',
     borderRadius: 5,
   },
   logText: {
     padding: 10,
     marginTop: 10,
-    color: "#ccc",
+    color: '#ccc',
     fontSize: 14,
     lineHeight: 20,
   },
@@ -452,7 +452,7 @@ export default App;
 3. 依次点击 **Targets** > **simple_demo** > **Signing & Capabilities** 在签名选项下设置应用签名；
 4. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
 
-![img](/images/react-native/ios-1.png)
+![img](@static/images/react-native/ios-1.png)
 
 编译并在 iOS 模拟器中运行：
 
@@ -460,7 +460,7 @@ export default App;
 2. 在 `xcode` 中，选择模拟器 `iphone13`；
 3. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
 
-![img](/images/react-native/ios-2.png)
+![img](@static/images/react-native/ios-2.png)
 
 编译并在 Android 真机运行：
 
@@ -475,11 +475,11 @@ yarn start
 
 5. 程序构建完成后，自动安装和运行，并显示应用界面。
 
-![img](/images/react-native/android-1.png)
+![img](@static/images/react-native/android-1.png)
 
 demo 的界面:
 
-![img](/images/react-native/main.png)
+![img](@static/images/react-native/main.png)
 
 ## 测试你的 app
 

@@ -189,7 +189,7 @@ class ChatMessageCallback implements ChatMessageStatusCallback {
 
 你可以通过透传消息实现输入指示器。下图为输入指示器的工作原理。
 
-![img](/images/common/typing_indicator.png)
+![img](@static/images/common/typing_indicator.png)
 
 监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
 
@@ -255,6 +255,7 @@ ChatClient.getInstance().chatManager.addMessageListener(
   })()
 );
 ```
+
 
 ### 接收消息
 

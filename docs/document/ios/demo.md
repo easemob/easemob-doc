@@ -10,7 +10,7 @@
 
 3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
-![img](/images/demo/ios_login.png)
+![img](@static/images/demo/ios_login.png)
 
 ## 代码下载
 
@@ -67,6 +67,6 @@ Demo 中有几大 UI 功能模块，在集成时将对应的模块添加到工�
 
 ## 部分 UI 展示
 
-![联系人列表](/images/android/app-demo-ui-2.jpeg)
+![联系人列表](@static/images/android/app-demo-ui-2.jpeg)
 
-![聊天页面](/images/android/app-demo-ui-3.jpeg)
+![聊天页面](@static/images/android/app-demo-ui-3.jpeg)

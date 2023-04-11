@@ -176,6 +176,9 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUse
             //当前⽤户在其他设备移除禁⾔。
         case EMMultiDevicesEventGroupRemoveMute:
             break;
+            //当前⽤户在其他设备设置了群成员自定义属性。
+        case EMMultiDevicesEventGroupMemberAttributesChanged:
+            break;
         default:
             break;
     }

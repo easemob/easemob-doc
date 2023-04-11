@@ -12,13 +12,12 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 
 扫描下方小程序二维码，或者微信搜索 **环信 IM Uniapp** 即可快速体验环信小程序 Demo 在线版本
 
-![img](/images/applet/applet-demo.jpeg)
+![img](@static/images/applet/applet-demo.jpeg)
 
 :::notice
-
 - 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
 - Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
-  :::
+:::
 
 ## 功能说明
 
@@ -45,6 +44,7 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 
 ### 配置服务器域名（以微信为例）
 
+
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 
 环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
@@ -61,13 +61,12 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 
 应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console 中查看请求域名
 
-![img](/images/applet/console.jpeg)
+![img](@static/images/applet/console.jpeg)
 
 登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 “开发 > 开发设置” 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
 
-:::tip
+:::tip 
 request 合法域名，uploadFile 合法域名，downloadFile 合法域名
-
 1. https://a1.easemob.com
 2. https://a2.easemob.com
 3. https://a3.easemob.com
@@ -78,17 +77,17 @@ request 合法域名，uploadFile 合法域名，downloadFile 合法域名
 8. https://a41.easemob.com
 9. https://a51.easemob.com
 10. https://a1-chatfile.easemob.com
-    :::
+:::
 
-:::tip
+:::tip 
 socket 合法域名:
-
 1. wss://im-api.easemob.com（2.0 IM SDK)
 2. wss://im-api-wechat.easemob.com（3.0 IM SDK）
 3. wss://im-api-wechat-31.easemob.com
 4. wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）
 5. wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）
-   :::
+:::
+
 
 ### 各端小程序 WebSocket 连接数量
 
@@ -105,11 +104,11 @@ socket 合法域名:
 
 - 从环信的 [github 仓库](https://github.com/easemob/webim-uniapp-demo/tree/master/newSDK) 中获取 SDK 中的文件，从 3.3.1 开始支持 uniapp。
 
-#### 引入 SDK
+#### 引入SDK
 
 - 开始一个全新的项目
-  1. 将 SDK 目录下（src/sdk/）的文件全部导入到自己的项目中。
-  2. 直接使用 import/require 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
+    1. 将 SDK 目录下（src/sdk/）的文件全部导入到自己的项目中。
+    2. 直接使用 import/require 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
 - 基于 Demo 二次开发
 
 拉取代码，HBuilder 运行
@@ -118,7 +117,7 @@ socket 合法域名:
 
 ```javascript
 //使用示例
-import websdk from "../newSDK/uni_sdk3.6.3";
+import SDK from "../newSDK/uni_sdk3.6.3";
 ```
 
 #### 实例调用方式
@@ -131,7 +130,7 @@ const WebIM = wx.WebIM = SDK;
 WebIM.conn = new WebIM.connection({
     appKey: 'your appKey'//注意这里的 "K" 需大写
     isMultiLoginSessions: false, //是否可以登录多个，并在所有端上接收消息
-    https: false, //是否使用 HTTPS
+    https: false, //是否使用 HTTPS 
     url: 'wss://im-api-wechat.easemob.com/websocket', // socket server (3.0 SDK)
     apiUrl: 'https://a1.easemob.com',    // rest server
     heartBeatWait: 30000, //心跳间隔

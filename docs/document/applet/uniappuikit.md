@@ -2,7 +2,7 @@
 
 <Toc />
 
-此模版根据 uni-app 版本的小程序进行 2 次封装而来，组件可灵活抽离且可以快速集成在其他项目中。不用过分关注收发消息、发图片、发文件、消息上屏等逻辑。从而快速集成符合自身业务的功能
+此模版根据 uni-app 版本的小程序进行2次封装而来，组件可灵活抽离且可以快速集成在其他项目中。不用过分关注收发消息、发图片、发文件、消息上屏等逻辑。从而快速集成符合自身业务的功能
 
 ## 简介
 
@@ -10,7 +10,7 @@
 
 - [https://github.com/easemob/webim-uniapp-demo/tree/versions2.0](https://github.com/easemob/webim-uniapp-demo/tree/versions2.0)
 
-### 安装 scss/sass 依赖
+### 安装scss/sass依赖
 
 HBuilderx ⇒ 工具 ⇒ 插件安装 ⇒ 安装新插件 ⇒ 前往插件市场安装
 
@@ -24,7 +24,7 @@ HBuilderx ⇒ 工具 ⇒ 插件安装 ⇒ 安装新插件 ⇒ 前往插件市场
 
 所有依赖配置项都在 utils 中：
 
-![img](/images/applet/utils.jpeg)
+![img](@static/images/applet/utils.jpeg)
 
 具体 SDK 集成，详见 [Uniapp 全平台](uniapp.html)
 
@@ -34,41 +34,41 @@ HBuilderx ⇒ 工具 ⇒ 插件安装 ⇒ 安装新插件 ⇒ 前往插件市场
 
 ## 组件介绍
 
-<img src="/images/applet/component.jpeg" width="400" />
+<img src="@static/images/applet/component.jpeg" width="400" />
 
 ## 组件使用
 
 ```javascript
 import chat from "@/components/chat/chat.vue";
 // chatType=singleChat 单聊
-   <chat
+   <chat 
     :username="username"    // 必填
      ref="chat"             // 必填
      chatType="singleChat"> // 必填
    </chat>
 
 // chatType=chatRoom 群聊
-   <chat
+   <chat 
      ref="chat"           // 必填
      :username="username" // 必填
      chatType="chatRoom"  // 必填
    </chat>
 ```
 
-<img src="/images/applet/uniappuikit.jpeg" width="400" />
+<img src="@static/images/applet/uniappuikit.jpeg" width="400" />
 
 ### chat 组件详细介绍
 
 #### 参数介绍
 
 - `username` – **必传参数** 由消息列表或联系人通过 URL 传入，包含当前用户 name 以及当前点击用户 name；示例：username: “{“myName”:“xx”,”your“:“xxx”}”
-- `chatType` – **必传参数** 聊天类型 singleChat：单聊 chatRoom：群聊 可自定新增
+- `chatType` – **必传参数** 聊天类型singleChat：单聊 chatRoom：群聊 可自定新增
 
 #### chat 组件依赖
 
-- chat 组件依赖 utils 中的文件，因此使用 chat 组件时，务必保证 utils 中的文件一并存在
+- chat 组件依赖  utils  中的文件，因此使用 chat 组件时，务必保证 utils 中的文件一并存在
 
-<img src="/images/applet/utils1.jpeg" width="400" />
+<img src="@static/images/applet/utils1.jpeg" width="400" />
 
 #### chat 组件的消息存取
 
@@ -80,7 +80,7 @@ import chat from "@/components/chat/chat.vue";
 
 ```javascript
 import swipeDelete from "@/components/swipedelete/swipedelete";
-<swipe-delete> ... </swipe-delete>;
+<swipe-delete> ... </swipe-delete>
 ```
 
 ### 长按功能框
@@ -96,7 +96,7 @@ import longPressModal from "@/components/longPressModal/index";
    :popStyle="popStyle"/>     // 样式
 ```
 
-<img src="/images/applet/huadong.jpeg" width="400" />
+<img src="@static/images/applet/huadong.jpeg" width="400" />
 
 ### 长按组件详细介绍
 
@@ -127,7 +127,7 @@ onLoad(){
         },
       });
   }
-
+  
 /* 长按事件 */
 longpress: function (e) {
       //将当前选中的值存在data中方便后续操作
@@ -152,6 +152,6 @@ longpress: function (e) {
           this.showPop = true;
         }, 10);
       });
-    },
-
+    },  
+  
 ```

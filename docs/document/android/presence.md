@@ -18,7 +18,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![img](/images/android/presence.png)
+![img](@static/images/android/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -28,7 +28,7 @@
 
 效果如下图：
 
-![img](/images/android/status.png)
+![img](@static/images/android/status.png)
 
 ## 前提条件
 
@@ -50,14 +50,14 @@
 EMClient.getInstance().presenceManager().subscribePresences(contactsFromServer, 1 * 24 * 3600, new EMValueCallBack<List<EMPresence>>() {
     @Override
     public void onSuccess(List<EMPresence> presences) {
-
+        
     }
 
     @Override
     public void onError(int errorCode, String errorMsg) {
-
+        
     }
-});
+});             
 ```
 
 成功订阅指定用户的在线状态后，SDK 通过 `onSuccess` 回调返回被订阅用户的在线状态。
@@ -65,10 +65,9 @@ EMClient.getInstance().presenceManager().subscribePresences(contactsFromServer, 
 在线状态变更时，订阅者会收到 `com.hyphenate.EMPresenceListener#onPresenceUpdated` 回调。
 
 :::notice
-
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
 - 每次调用接口最多只能订阅 100 个账号，若数量较大需多次调用。每个用户 ID 订阅的用户数不超过 3000。如果超过 3000，后续订阅也会成功，但默认会将订阅剩余时长较短的替代。
-  :::
+:::
 
 ### 发布自定义在线状态
 
@@ -114,12 +113,12 @@ public interface EMPresenceListener {
 EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer, new EMCallBack() {
     @Override
     public void onSuccess() {
-
+        
     }
 
     @Override
     public void onError(int errorCode, String errorMsg) {
-
+        
     }
 });
 ```
@@ -132,12 +131,12 @@ EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer
 EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSize, new EMValueCallBack<List<String>>() {
     @Override
     public void onSuccess(List<String> subscribedMembers) {
-
+        
     }
 
     @Override
     public void onError(int errorCode, String errorMsg) {
-
+        
     }
 });
 ```
@@ -150,12 +149,12 @@ EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSiz
 EMClient.getInstance().presenceManager().fetchPresenceStatus(contactsList, new EMValueCallBack<List<EMPresence>>() {
     @Override
     public void onSuccess(List<EMPresence> presences) {
-
+        
     }
 
     @Override
     public void onError(int errorCode, String errorMsg) {
-
+        
     }
 });
 ```

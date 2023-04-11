@@ -18,9 +18,9 @@
 
 登录 IM Console，请进入您遇到问题的 APP，然后点击屏幕下方的技术咨询，提交工单。工单的响应时间是一个工作日内。
 
-![](/images/product/help-ticket1.jpeg)
+![](@static/images/product/help-ticket1.jpeg)
 
-![](/images/product/help-ticket2.jpeg)
+![](@static/images/product/help-ticket2.jpeg)
 
 ## IM Geek 社区
 

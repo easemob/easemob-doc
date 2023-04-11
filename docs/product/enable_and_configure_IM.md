@@ -14,24 +14,23 @@
 
 1. 登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，在首页的**应用列表**区域点击 **添加应用** 按钮，创建即时通讯 IM 应用。
 
-![img](/images/product/console.png)
+![img](@static/images/product/console.png)
 
 2. 在 **创建应用** 对话框中，输入新应用的相关信息，点击 **创建** 按钮创建应用。新建应用的服务版本默认为免费版。
 
 :::notice
-
 1. `appname`：你设置的应用名称，用于生成 App Key。该参数的值只能包含小写字母、数字和连字符，不能超过 32 个字符。
 2. `Appkey`：即时通讯服务分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成，生成后无法修改。
 3. `数据中心`：设置后无法修改。
-   :::
+:::
 
-![img](/images/product/create-app.png)
+![img](@static/images/product/create-app.png)
 
 ## 购买服务
 
 1. 创建应用后，在 **应用列表** 中点击所创建应用的 **操作** 栏中的 **查看** 按钮，进入 **应用详情** 页面。
 
-![img](/images/product/app-setting.png)
+![img](@static/images/product/app-setting.png)
 
 2. 开通或升级版本。
 
@@ -39,27 +38,27 @@
 
 - 在页面左侧的导航栏，选择 **即时通讯** > **功能配置** > **版本开通**，查看各种套餐的详情，选择需要的版本，点击 **立即开通**。
 
-![img](/images/product/select-version.png)
+![img](@static/images/product/select-version.png)
 
 - 在页面左侧的导航栏，选择 **即时通讯** > **服务概览**，在 **服务版本** 区域中单击 **升级版本**，进入即时通讯 IM 服务版本购买页面。
 
-![img](/images/product/upgrade-version.png)
+![img](@static/images/product/upgrade-version.png)
 
 - 在页面左侧的导航栏，选择 **即时通讯** > **功能配置** > **功能配置总览**，点击各功能的 **操作** 一栏中的 **升级** 或 **增值服务**。
 
-在 **即时通讯 IM 服务版本** 页面，根据业务实际需求选择所需的服务版本和可选增值服务。该页面的配置参数说明如下表所示：
+在 **即时通讯IM 服务版本** 页面，根据业务实际需求选择所需的服务版本和可选增值服务。该页面的配置参数说明如下表所示：
 
-| 参数项                  | 描述                                                                                                                                                                                                                                                                                                                                                                                             |
-| :---------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 选择要开通服务的 Appkey | 请确认 App Key 是否选择正确，购买后无法修改。                                                                                                                                                                                                                                                                                                                                                    |
-| 请选择服务版本          | 服务版本的选择如下：<br/> - 当 App Key 为免费版时，可购买专业版、旗舰版或尊享版，不可单独购买增值服务。<br/> - 当 App Key 为专业版时，可购买旗舰版、尊享版或单独购买增值服务。<br/> - 当 App Key 为旗舰版时，可购买尊享版或单独购买增值服务。<br/> - 当 App Key 为尊享版时，仅支持单独购买增值服务。                                                                                             |
-| 可选增值服务            | 请根据实际需求选择增值功能：<br/> - 单个群成员数上限和单个用户可加入群组数上限：不支持叠加购买；以单个群成员数上限举例说明，如果旗舰版购买了 8000 人/群的增值服务，则表示单个群成员上限配置提升至 8000 人/群。<br/> - 消息云存储时长和 REST API 接口调用频率上限：支持可叠加购买，即支持多倍购买；以消息云存储时长举例说明，如购买时选择了 10 份，则表示消息云存储时长延长 300 天（30 天\*10）。 |
+| 参数项                   | 描述                                          |
+| :----------------------- | :-------------------------------------------- |
+| 选择要开通服务的 Appkey | 请确认 App Key 是否选择正确，购买后无法修改。 |
+| 请选择服务版本           | 服务版本的选择如下：<br/> - 当 App Key 为免费版时，可购买专业版、旗舰版或尊享版，不可单独购买增值服务。<br/> - 当 App Key 为专业版时，可购买旗舰版、尊享版或单独购买增值服务。<br/> - 当 App Key 为旗舰版时，可购买尊享版或单独购买增值服务。<br/> - 当 App Key 为尊享版时，仅支持单独购买增值服务。|
+| 可选增值服务 | 请根据实际需求选择增值功能：<br/> - 单个群成员数上限和单个用户可加入群组数上限：不支持叠加购买；以单个群成员数上限举例说明，如果旗舰版购买了 8000 人/群的增值服务，则表示单个群成员上限配置提升至 8000 人/群。<br/> - 消息云存储时长和 REST API 接口调用频率上限：支持可叠加购买，即支持多倍购买；以消息云存储时长举例说明，如购买时选择了 10 份，则表示消息云存储时长延长 300 天（30 天*10）。 |
 
 :::notice
 服务购买页显示的预估费用仅用于做参考，预估费用仅包含基础费用，具体费用以每月账单为准。
 :::
 
-![img](/images/product/add-service.png)
+![img](@static/images/product/add-service.png)
 
 3. 勾选 **我已阅读并同意《环信云服务购买协议》**。
 
@@ -67,19 +66,19 @@
 
 购买成功后即刻生效，当天开始计费，每月 1 号自动扣除上月总消耗费用。
 
-![img](/images/product/success.png)
+![img](@static/images/product/success.png)
 
 ## 获取环信即时通讯 IM 的信息
 
 在环信即时通讯云控制台，你可以查看你的环信即时通讯 IM 服务的如下信息：
 
-| 应用信息             | 描述                                                                                                                                                         | 如何查看                                                                                   |
-| :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
-| `Orgname`            | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。该参数是 `APPKEY` 的一部分。                                                                               | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
-| `Appname`            | 你在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建应用时填入的应用名称。该参数是 `AppKey` 的一部分。                                     | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
-| `APPKEY`             | 应用的唯一标识，由 `Orgname` 和 `Appname` 组成，生成后不允许修改。                                                                                           | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
-| 服务器域名（`host`） | RESTful API 请求域名。环信为应用提供的 REST API 和 WebSocket 的请求域名。                                                                                    | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **服务概览** 页面查看。 |
-| 数据中心             | 环信 IM 提供的分布在全球的多个数据中心：<br/> - 国内数据中心：北京 1 区和北京 Vip6 区 <br/> - 海外数据中心：新加坡 1 区、 法兰克福（法国）和弗吉尼亚（美国） | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **服务概览** 页面查看。 |
+| 应用信息       | 描述   | 如何查看 | 
+| :--------- | :----- | :------- | :------------------------------------- |
+| `Orgname`     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。该参数是 `APPKEY` 的一部分。 | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
+| `Appname` | 你在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建应用时填入的应用名称。该参数是 `AppKey` 的一部分。| 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
+| `APPKEY` | 应用的唯一标识，由 `Orgname` 和 `Appname` 组成，生成后不允许修改。     | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
+| 服务器域名（`host`） | RESTful API 请求域名。环信为应用提供的 REST API 和 WebSocket 的请求域名。 | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **服务概览** 页面查看。              |
+| 数据中心 | 环信 IM 提供的分布在全球的多个数据中心：<br/> - 国内数据中心：北京 1 区和北京 Vip6 区 <br/> - 海外数据中心：新加坡 1 区、 法兰克福（法国）和弗吉尼亚（美国） | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **服务概览** 页面查看。         |
 
 ## 查看和配置功能
 
@@ -92,7 +91,7 @@
 3. **升级**：功能如果当前服务版本中不包含、或需要提高功能状态中的参数值，则可点击 **升级**，购买升级至符合业务需求的服务版本即可；
 4. **增值服务**：点击**增值服务**，进入增值服务购买页面，根据实际需求选择购买。
 
-![img](/images/product/functional.png)
+![img](@static/images/product/functional.png)
 
 ## 设置消息撤回（REST & 客户端）
 
@@ -100,7 +99,7 @@
 2. 在弹出的 **消息撤回时间设置** 对话框中，设置消息可撤回时长。端消息撤回时长和 REST 消息撤回时长均不能超过 7 天。
 3. 单击 **确定** 保存配置。
 
-![img](/images/product/rest.png)
+![img](@static/images/product/rest.png)
 
 ## 配置推送证书
 
@@ -110,19 +109,19 @@
 
 1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中，点击 **查看**。
 
-![img](/images/product/credentials.png)
+![img](@static/images/product/credentials.png)
 
 2. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **消息推送** > **证书管理**，进入 **证书管理** 页面。
 
-![img](/images/product/push-settings.png)
+![img](@static/images/product/push-settings.png)
 
 3. 点击 **添加推送证书** 按钮，打开 **添加推送证书** 对话框。
 
-![img](/images/product/push-settings-window.png)
+![img](@static/images/product/push-settings-window.png)
 
 4. 在 **添加推送证书** 对话框中，填写各厂商平台的相关推送信息，点击 **保存** 按钮，完成证书配置。
 
-![img](/images/product/push-settings-form.png)
+![img](@static/images/product/push-settings-form.png)
 
 ## 配置消息回调
 
@@ -132,19 +131,19 @@
 
 1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **查看**。
 
-![img](/images/product/app-view.png)
+![img](@static/images/product/app-view.png)
 
 2. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **消息回调**，进入 **消息回调** 页面。
 
-![img](/images/product/push-callback.png)
+![img](@static/images/product/push-callback.png)
 
 3. 点击 **添加回调地址** 按钮，打开回调配置对话框。
 
-![img](/images/product/push-callback-window.png)
+![img](@static/images/product/push-callback-window.png)
 
 4. 在回调配置对话框中，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置，具体配置内容说明见 [回调配置](/document/server-side/callback.html#实现步骤)。
 
-![img](/images/product/push-callback-form.png)
+![img](@static/images/product/push-callback-form.png)
 
 ## 敏感词设置
 
@@ -152,22 +151,22 @@
 2. 在敏感词配置页面，单击 **服务设置** 旁边的 **编辑**，在弹出的 **敏感词服务** 对话框中，按需求选择对应设置。
 3. 单击 **确定** 保存配置。
 
-![img](/images/product/sensitive-words.png)
+![img](@static/images/product/sensitive-words.png)
 
 ## REST-IP 白名单设置
 
 ### 添加 IP 白名单
 
 1. 在环信即时通讯云的左侧导航栏中，选择 **即时通讯** > **功能配置** > **功能配置总览**。在 **功能配置总览** 页面的 **基础功能** 页签中搜索找到 **REST-IP 白名单**，单击右侧的 **设置**（已开通状态下），打开**安全配置**页面。
-2. 在 **安全配置** 页面，单击 **添加 IP**，在弹出的 **添加 IP** 对话框中，输入 IP 地址。
-   :::notice
-3. 每次只能输入 1 个 IP 地址，最多可添加 8 个。
-4. 添加 IP 地址成功后 10 分钟后生效。
-5. 若白名单列表为空，则所有 IP 地址均可发 REST 消息。
-   :::
-6. 单击 **保存** 完成配置。
+2. 在 **安全配置** 页面，单击 **添加IP**，在弹出的 **添加 IP** 对话框中，输入 IP 地址。
+:::notice
+1. 每次只能输入 1 个 IP 地址，最多可添加 8 个。
+2. 添加 IP 地址成功后 10 分钟后生效。
+3. 若白名单列表为空，则所有 IP 地址均可发 REST 消息。
+:::
+3. 单击 **保存** 完成配置。
 
-![img](/images/product/ip-whitelist.png)
+![img](@static/images/product/ip-whitelist.png)
 
 ### 删除 IP 白名单
 
@@ -175,9 +174,9 @@
 
 1. 在环信即时通讯云的左侧导航栏中，选择 **即时通讯** > **功能配置** > **安全配置**。
 
-2. 在 **IP 白名单** 列表中，单击目标 IP 右侧的 **删除**。
+2. 在 **IP白名单** 列表中，单击目标 IP 右侧的 **删除**。
 
-![img](/images/product/delete-ip-allow-list.png)
+![img](@static/images/product/delete-ip-allow-list.png)
 
 3. 单击 **确认**，则删除该 IP 地址。
 
@@ -185,13 +184,13 @@
 
 登录环信即时通讯云控制台，选择 **费用中心** > **账户中心**，可查看你当前的账户余额和支出明细。
 
-![img](/images/product/account-bills.png)
+![img](@static/images/product/account-bills.png)
 
 ## 查看订单记录
 
 登录环信即时通讯云控制台，选择 **费用中心** > **订单中心**，可查看你当前的所有订单记录。
 
-![img](/images/product/order-records.png)
+![img](@static/images/product/order-records.png)
 
 **订单中心**页面上的订单状态说明如下：
 
@@ -199,14 +198,14 @@
 - **服务中**：表示当前订单中购买的服务在使用中。同一 App Key 同时仅能有 1 个服务版本的订单状态为**服务中**。
 - **已完结**：表示当前订单中购买的服务已关闭。当客户升级新服务后，原服务版本订单和相关增值服务订单均会自动关闭，变为**已完结**状态。
 
-![img](/images/product/order-status.png)
+![img](@static/images/product/order-status.png)
 
 点击 **操作** 栏中的 **详情**，可查看订单详情。
 
-![img](/images/product/order-detail.png)
+![img](@static/images/product/order-detail.png)
 
 ## 查看账单记录
 
 登录环信即时通讯云控制台，选择 **费用中心** > **消费账单**，可查看你当前的已生成的账单记录。
 
-![img](/images/product/bill-records.png)
+![img](@static/images/product/bill-records.png)

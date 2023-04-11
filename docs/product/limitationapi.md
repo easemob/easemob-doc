@@ -1,4 +1,4 @@
-# Rest API 调用频率限制
+# Restful API 调用频率限制
 
 <Toc />
 
@@ -8,12 +8,15 @@
 
 ##  用户帐号管理
 
-| Rest API 接口 |方法  | 接口 URL|
+| Restful API 接口 |方法  | 接口 URL|
 | :------------ | :--- | :--------------------------- |
 | 注册单个用户  |  POST  | /{org_name}/{app_name}/users        |
 | 批量注册用户 |  POST   | /{org_name}/{app_name}/users       |
+| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} |
+| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 
+| 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} |
 
-以上两个接口一共最高调用频率（默认值） 100 次/秒/App Key。
+以上五个接口的总调用频率（默认值）为 100 次/秒/App Key。
 
 | Rest API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :------------------- | :----- | :----------------------------------------------------------- | :------------------------- |
@@ -35,16 +38,13 @@
 
 | RESTful API 接口        | 方法 | 接口 URL           | 接口最高调用频率（默认值） |
 | :------------------- | :--- | :------------------- | :------------------- |
-| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
-| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
-| 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} | 与[用户账号管理接口](#用户帐号管理)一致          |
-| 设置离线推送         | PUT  | /{org}/{app}/users/{username}/notification/{chattype}/{key} | 100 次/秒/App Key          |
-| 查询离线推送设置     | GET  | /{org}/{app}/users/{username}/notification/{type}/{key} | 100 次/秒/App Key          |
-| 设置推送翻译语言     | PUT  | /{org}/{app}/users/{username}/notification/language | 100 次/秒/App Key          |
-| 查询离线推送消息的翻译语言 | PUT  | /{org}/{app}/users/{username}/notification/language | 100 次/秒/App Key  |
-| 创建离线推送模板          | POST  | /{org}/{app}/notification/template | 10 次/秒/App Key  |
-| 查询离线推送模板          | GET  | /{org}/{app}/notification/template/{name} | 10 次/秒/App Key  |
-| 删除离线推送模板          | DELETE  | /{org}/{app}/notification/template/{name} | 10 次/秒/App Key  |
+| 设置离线推送         | PUT  | /{org}/{app_name}/users/{username}/notification/{chattype}/{key} | 100 次/秒/App Key          |
+| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{username}/notification/{chattype}/{key} | 100 次/秒/App Key          |
+| 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{username}/notification/language | 100 次/秒/App Key          |
+| 获取推送通知的首选语言 | PUT  | /{org_name}/{app_name}/users/{username}/notification/language | 100 次/秒/App Key  |
+| 创建离线推送模板          | POST  | /{org_name}/{app_name}/notification/template | 10 次/秒/App Key  |
+| 查询离线推送模板          | GET  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
+| 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
 
 ## 消息管理
 
@@ -104,13 +104,16 @@
 | :--------------- |:------ | :------------  | :----------- |
 | 分页获取群组成员  |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/users       | 100 次/秒/App Key                                                 |
 | 添加单个群组成员     |    POST | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username}    | 100 次/秒/App Key                                                 |
-| 批量添加群组成员    |    POST   | /{org_name}/{app_name}/chatgroups/{chatgroupid}/users           | 100 次/秒/App Key                                                 |
+| 批量添加群组成员    |    POST   | /{org_name}/{app_name}/chatgroups/{group_id}/users           | 100 次/秒/App Key                                                 |
 | 移除单个群组成员     |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username}    | 100 次/秒/App Key                                                 |
 | 批量移除群组成员    |    DELETE     | /{org_name}/{app_name}/chatgroups/{group_id}/users/{usernames}    | 100 次/秒/App Key                                                 |
-| 获取群管理员列表    |  GET       | /{org_name}/{app_name}/chatgroups/{group_id}/admin              | 100 次/秒/App Key                                                 |
+| 设置群成员自定义属性    |  PUT       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}              | 100 次/秒/App Key                                                 |
+| 获取单个群成员的所有自定义属性    |  GET       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}            | 100 次/秒/App Key                                                 |
+| 根据属性 key 获取多个群成员的自定义属性    |  GET       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/get              | 100 次/秒/App Key                                                 |
+| 获取群管理员列表    |  GET       | /{org_name}/{app_name}/chatgroups/{group_id}/admin              | 100 次/秒/App Key   |
 | 添加群管理员     |    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/admin              | 100 次/秒/App Key                                                 |
 | 移除群管理员     |    DELETE  | /{org_name}/{app_name}/chatgroups/{group_id}/admin/{oldadmin}    | 100 次/秒/App Key                                                 |
-| 转让群组       |    PUT | /{org_name}/{app_name}/chatgroups/{groupid}                     | 100 次/秒/App Key                                                 |
+| 转让群组       |    PUT | /{org_name}/{app_name}/chatgroups/{group_id}                     | 100 次/秒/App Key                                                 |
 | 查询群组黑名单    |    GET   | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users       | 100 次/秒/App Key                                                 |
 | 添加单个用户至群组黑名单   |    POST      | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}    | 100 次/秒/App Key                                                 |
 | 批量添加用户至群组黑名单   |    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users       | 100 次/秒/App Key                                                 |
@@ -189,7 +192,7 @@
 | 设置用户在线状态信息  |  POST     | /{org_name}/{app_name}/users/{uid}/presence/{resource}/{status} | 50 次/秒/App Key  |
 | 批量订阅在线状态    |  POST      | /{org_name}/{app_name}/users/{uid}/presence/{expiry}         | 50 次/秒/App Key   |
 | 批量获取在线状态信息    |  POST   | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key |
-| 取消订阅     |  DELETE           | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key    |
+|  取消订阅多个用户的在线状态     |  DELETE           | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key    |
 | 查询订阅列表    |   GET       | /{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&pageSize=100 | 50 次/秒/App Key  |
 
 ### 消息表情回复 Reaction

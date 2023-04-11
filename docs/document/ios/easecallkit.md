@@ -115,7 +115,7 @@ config.agoraAppId=@"声网 AppID";
 
 ```objectivec
 @interface EaseCallConfig : NSObject
-// 默认头像。
+// 默认头像。  
 @property (nonatomic)  NSURL*  defaultHeadImage;
 // 呼叫超时时间，单位为秒。
 @property (nonatomic) UInt32 callTimeOut;
@@ -141,10 +141,10 @@ config.agoraAppId=@"声网 AppID";
 ```objectivec
 // 发起一对一通话。
 // remoteUser   邀请对象的环信 ID。
-// type   通话类型。`EaseCallType1v1Audio` 表示语音通话，`EaseCallType1v1Video` 表示视频通话。
+// type   通话类型。`EaseCallType1v1Audio` 表示语音通话，`EaseCallType1v1Video` 表示视频通话。 
 // ext    通话扩展信息，为用户信息字典。
 [[EaseCallManager sharedManager] startSingleCallWithUId:remoteUser type:aType ext:nil completion:^(NSString * callId, EaseCallError * aError) {
-
+    
 }];
 ```
 
@@ -153,23 +153,23 @@ config.agoraAppId=@"声网 AppID";
 你可以从群组成员列表或者好友列表中选择用户，发起多人音视频通话。具体实现可参考 Demo 中的 `ConfInviteUsersViewController`。
 
 ```objectivec
-//邀请用户加入多人通话。
+//邀请用户加入多人通话。 
 // aInviteUsers   受邀用户的环信 ID 数组。
 // ext   可设置扩展信息，如果从群组发起，可通过 `ext` 设置群组 ID，其他用户也可邀请该群组成员。
 [[EaseCallManager sharedManager] startInviteUsers:aInviteUsers ext:@{@"groupId":aConversationId} completion:^(NSString * callId, EaseCallError * aError) {
-
+    
 }];
 ```
 
 发起通话后的 UI 界面如下：
 
-<img src="/images/ios/sendcall.png" width="400" />
+<img src="@static/images/ios/sendcall.png" width="400" />
 
 ### 收到邀请
 
 主叫方调用邀请接口后，如果被叫方在线且并未处于通话过程中，将弹出通话页面，被叫用户可选择接听或者拒绝。通话页面如下：
 
-<img src="/images/ios/recvcall.png" width="400" />
+<img src="@static/images/ios/recvcall.png" width="400" />
 
 被叫振铃的同时，会触发以下回调：
 
@@ -191,7 +191,7 @@ config.agoraAppId=@"声网 AppID";
 // aExt   通话扩展信息。
 - (void)multiCallDidInvitingWithCurVC:(UIViewController*_Nonnull)vc excludeUsers:(NSArray<NSString*> *_Nullable)users ext:(NSDictionary *)aExt
   {
-    //若只邀请群组中的用户加入通话，发起通话时在扩展信息里添加 `groupId`。
+    //若只邀请群组中的用户加入通话，发起通话时在扩展信息里添加 `groupId`。 
     NSString* groupId = nil;
     if(aExt) {
         groupId = [aExt objectForKey:@"groupId"];
@@ -209,7 +209,7 @@ config.agoraAppId=@"声网 AppID";
     confVC.modalPresentationStyle = UIModalPresentationPopover;
     [vc presentViewController:confVC animated:NO completion:nil];
   }
-
+  
 ```
 
 通话邀请界面的实现，可以参考 Demo 中的 `ConfInviteUsersViewController` 实现。
@@ -225,7 +225,7 @@ config.agoraAppId=@"声网 AppID";
     //[self _fetchUserMapsFromServer:aChannelName];
     [[EaseCallManager sharedManager] setUsers:users channelName:channelName];
   }
-
+  
 ```
 
 ### 对方成功加入频道回调
@@ -307,7 +307,7 @@ config.agoraAppId=@"声网 AppID";
 
 ```objectivec
 @interface EaseCallError : NSObject
-// 异常类型，包括 Easemob IM 异常、RTC 异常和业务逻辑异常。
+// 异常类型，包括 Easemob IM 异常、RTC 异常和业务逻辑异常。   
 @property (nonatomic) EaseCallErrorType aErrorType;
 // 异常代号。
 @property (nonatomic) NSInteger errCode;
@@ -320,7 +320,7 @@ config.agoraAppId=@"声网 AppID";
 `EaseCallKit` 库初始化之后，可调用该方法修改配置：
 
 ```objectivec
-// 以下为修改铃声过程。
+// 以下为修改铃声过程。 
 EaseCallConfig* config = [[EaseCallManager sharedManager] getEaseCallConfig];
 NSString* path = [[NSBundle mainBundle] pathForResource:@"huahai128" ofType:@"mp3"];
 config.ringFileUrl = [NSURL fileURLWithPath:path];
@@ -343,7 +343,7 @@ EaseCallUser* user = [EaseCallUser userWithNickName:info.nickName image:[NSURL U
 
 ```objectivec
 EaseCallUser* callUser = [[EaseCallUser alloc] init];
-config.enableRTCTokenValidate = YES;// 开启 RTC Token 验证，默认不开启。
+config.enableRTCTokenValidate = YES;// 开启 RTC Token 验证，默认不开启。  
 [[EaseCallManager sharedManager] initWithConfig:config delegate:self];
 ```
 
@@ -374,25 +374,25 @@ config.enableRTCTokenValidate = YES;// 开启 RTC Token 验证，默认不开启
 
 管理模块 `EaseCallManager` 的 API 列表如下：
 
-| 方法                                       | 说明                                                                     |
-| :----------------------------------------- | :----------------------------------------------------------------------- |
-| initWithConfig:delegate                    | 初始化方法                                                               |
-| startSingleCallWithUId:type:ext:completion | 发起一对一通话。                                                         |
-| startInviteUsers:type:ext:completion:      | 邀请用户加入多人通话。                                                   |
-| getEaseCallConfig                          | 获取 `EaseCallKit` 相关配置。                                            |
-| setRTCToken:channelName:                   | 设置声网 Token。该方法自 `EaseCallKit` 3.8.1 版本添加。                  |
-| setRTCToken:channelName:uid:               | 设置声网 Token。该方法自 `EaseCallKit` 3.8.1 版本添加。                  |
+| 方法                                       | 说明                                                         |
+| :----------------------------------------- | :----------------------------------------------------------- |
+| initWithConfig:delegate                    | 初始化方法                                                   |
+| startSingleCallWithUId:type:ext:completion | 发起一对一通话。                                             |
+| startInviteUsers:type:ext:completion:      | 邀请用户加入多人通话。                                       |
+| getEaseCallConfig                          | 获取 `EaseCallKit` 相关配置。                                |
+| setRTCToken:channelName:                   | 设置声网 Token。该方法自 `EaseCallKit` 3.8.1 版本添加。      |
+| setRTCToken:channelName:uid:               | 设置声网 Token。该方法自 `EaseCallKit` 3.8.1 版本添加。      |
 | setUsers:channelName:                      | 设置环信 ID 与声网 uid 的映射表。该方法自 `EaseCallKit` 3.8.1 版本添加。 |
 
 回调模块 `EaseCallDelegate` 的 API 列表如下：
 
-| 方法                                                    | 说明                                                            |
-| :------------------------------------------------------ | :-------------------------------------------------------------- |
-| callDidEnd:reason:time:type:                            | 通话结束时触发该事件。                                          |
-| multiCallDidInvitingWithCurVC:excludeUsers:ext:         | 多人通话中点击邀请按钮触发该事件。                              |
-| callDidReceive:inviter:ext:                             | 振铃时触发该事件。                                              |
-| callDidRequestRTCTokenForAppId:channelName:account:     | 获取声网 token 回调。该方法自 `EaseCallKit` 3.8.1 版本添加。    |
-| callDidRequestRTCTokenForAppId:channelName:account:uid: | 获取声网 token 回调。该方法自 `EaseCallKit` 3.8.1 版本添加。    |
-| callDidOccurError:                                      | 通话异常时触发该事件。                                          |
-| remoteUserDidJoinChannel:uid:                           | 对方加入频道时触发。该方法自 `EaseCallKit` 3.8.1 版本添加。     |
+| 方法                                                    | 说明                                                         |
+| :------------------------------------------------------ | :----------------------------------------------------------- |
+| callDidEnd:reason:time:type:                            | 通话结束时触发该事件。                                       |
+| multiCallDidInvitingWithCurVC:excludeUsers:ext:         | 多人通话中点击邀请按钮触发该事件。                           |
+| callDidReceive:inviter:ext:                             | 振铃时触发该事件。                                           |
+| callDidRequestRTCTokenForAppId:channelName:account:     | 获取声网 token 回调。该方法自 `EaseCallKit` 3.8.1 版本添加。 |
+| callDidRequestRTCTokenForAppId:channelName:account:uid: | 获取声网 token 回调。该方法自 `EaseCallKit` 3.8.1 版本添加。 |
+| callDidOccurError:                                      | 通话异常时触发该事件。                                       |
+| remoteUserDidJoinChannel:uid:                           | 对方加入频道时触发。该方法自 `EaseCallKit` 3.8.1 版本添加。  |
 | callDidJoinChannel:uid:                                 | 当前用户加入频道时触发。该方法自 `EaseCallKit` 3.8.1 版本添加。 |
