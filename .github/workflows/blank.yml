@@ -62,4 +62,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_PORT: ${{ secrets.SERVER_PORT }} -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
-          TARGET: /data/apps/data/docs-im-beta2/ # 服务器目标路径
+          TARGET: /data/apps/data/docs-im-beta/ # 服务器目标路径
