@@ -34,10 +34,10 @@
 
 公开群和私有群在两种入群方式方面存在差别：
 
-| 入群方式         | 公开群       | 私有群            |
-| :------------- | :-------------- | :------------ |
-| 是否支持用户申请入群       | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 `EMGroupStyle` 的设置。 | 不支持     |
-| 是否支持群成员邀请用户入群 | 支持 <br/>只能由群主和管理员邀请。    | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 `EMGroupStyle` 的设置。 |
+| 入群方式                   | 公开群                                                                                             | 私有群                                                                                             |
+| :------------------------- | :------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| 是否支持用户申请入群       | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 `EMGroupStyle` 的设置。 | 不支持                                                                                             |
+| 是否支持群成员邀请用户入群 | 支持 <br/>只能由群主和管理员邀请。                                                                 | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 `EMGroupStyle` 的设置。 |
 
 #### 用户申请入群
 
@@ -70,49 +70,49 @@ do {
 
 2. 调用 `joinPublicGroup` 或 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
 
-  - 调用 `joinPublicGroup` 方法加入无需群主或管理员审批的公开群，即 `EMGroupStyle` 为 `EMGroupStylePublicOpenJoin`。申请人不会收到任何回调，其他群成员会收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
+- 调用 `joinPublicGroup` 方法加入无需群主或管理员审批的公开群，即 `EMGroupStyle` 为 `EMGroupStylePublicOpenJoin`。申请人不会收到任何回调，其他群成员会收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
 
-   示例代码如下：
+示例代码如下：
 
-   ```objective-c
-   // 异步方法
-   [[EMClient sharedClient].groupManager joinPublicGroup:@"groupId" completion:^(EMGroup *aGroup, EMError *aError) {
-    }];
-   ```
+```objective-c
+// 异步方法
+[[EMClient sharedClient].groupManager joinPublicGroup:@"groupId" completion:^(EMGroup *aGroup, EMError *aError) {
+ }];
+```
 
-  - 调用 `requestToJoinPublicGroup` 方法加入需要群主或管理员审批的公开群，即 `EMGroupStyle` 为 `EMGroupStylePublicJoinNeedApproval`。示例代码如下：
+- 调用 `requestToJoinPublicGroup` 方法加入需要群主或管理员审批的公开群，即 `EMGroupStyle` 为 `EMGroupStylePublicJoinNeedApproval`。示例代码如下：
 
-   ```objective-c
-   // 异步方法
-   [[EMClient sharedClient].groupManager requestToJoinPublicGroup:@"groupId" message:nil completion:^(EMGroup *aGroup1, EMError *aError) {
-   }];
-   ```
+```objective-c
+// 异步方法
+[[EMClient sharedClient].groupManager requestToJoinPublicGroup:@"groupId" message:nil completion:^(EMGroup *aGroup1, EMError *aError) {
+}];
+```
 
-   群主或群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调。
+群主或群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调。
 
-   - 若同意加入群组，需要调用 `approveJoinGroupRequest` 方法。
+- 若同意加入群组，需要调用 `approveJoinGroupRequest` 方法。
 
-   申请人会收到 `EMGroupManagerDelegate#joinGroupRequestDidApprove` 回调，其他群成员会收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
+申请人会收到 `EMGroupManagerDelegate#joinGroupRequestDidApprove` 回调，其他群成员会收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
 
-   示例代码如下：
+示例代码如下：
 
-  ```objective-c
-  // 异步方法
-  [[EMClient sharedClient].groupManager approveJoinGroupRequest:@"groupId" sender:@"userId" completion:^(EMGroup *aGroup, EMError *aError) {
-        
-  }];
-  ```
+```objective-c
+// 异步方法
+[[EMClient sharedClient].groupManager approveJoinGroupRequest:@"groupId" sender:@"userId" completion:^(EMGroup *aGroup, EMError *aError) {
 
-   - 若群主或群管理员拒绝申请人入群，需要调用 `declineJoinGroupRequest` 方法。申请人会收到 `EMGroupManagerDelegate#joinGroupRequestDidDecline` 回调。
+}];
+```
 
-   示例代码如下：
+- 若群主或群管理员拒绝申请人入群，需要调用 `declineJoinGroupRequest` 方法。申请人会收到 `EMGroupManagerDelegate#joinGroupRequestDidDecline` 回调。
 
-   ```objective-c
-   // 异步方法
-   [[EMClient sharedClient].groupManager declineJoinGroupRequest:@"groupId" sender:@"userId" reason:@"reason" completion:^(EMGroup *aGroup, EMError *aError) {
-           
-    }];
-   ```
+示例代码如下：
+
+```objective-c
+// 异步方法
+[[EMClient sharedClient].groupManager declineJoinGroupRequest:@"groupId" sender:@"userId" reason:@"reason" completion:^(EMGroup *aGroup, EMError *aError) {
+
+ }];
+```
 
 #### 邀请用户入群
 
@@ -145,7 +145,7 @@ do {
 
    ```objective-c
    [[EMClient sharedClient].groupManager declineGroupInvitation:@"groupId" inviter:@"inviter" reason:@"reason" completion:^(EMError *aError) {
-         
+
    }];
    ```
 
@@ -193,7 +193,7 @@ do {
 
 示例代码如下：
 
-```ObjectiveC 
+```objectivec
         [EMClient.sharedClient.groupManager setMemberAttribute:groupId userId:userName attributes:@{key:value} completion:^(EMError * _Nullable error) {
         if (error == nil) {
             [self updateCacheWithGroupId:groupId userName:userName key:key value:value];
@@ -210,7 +210,7 @@ do {
 
 示例代码如下：
 
-```ObjectiveC 
+```objectivec
         [EMClient.sharedClient.groupManager fetchMemberAttribute:aGroupId userId:EMClient.sharedClient.currentUsername completion:^(NSDictionary<NSString *,NSString *> * _Nullable attributes, EMError * _Nullable error) {
             if (error == nil) {
                 //refresh UI according to attributes or cache.
@@ -228,7 +228,7 @@ do {
 
 示例代码如下：
 
-```ObjectiveC 
+```objectivec
    // keys：要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
     [EMClient.sharedClient.groupManager fetchMembersAttributes:groupId userIds:@[userId] keys:@[@"1",@"2"] completion:^(NSDictionary<NSString *,NSDictionary<NSString *,NSString *> *> * _Nullable attributes, EMError * _Nullable error) {
             //根据获取的自定义属性或缓存刷新 UI。
@@ -447,4 +447,4 @@ do {
 
 ### 监听群组事件
 
-详见 [监听群组事件](group_manage.html)。
+详见 [监听群组事件](group_manage.html#监听群组事件)。

@@ -89,7 +89,7 @@
 
 ```objectivec
 [EMClient.sharedClient.groupManager downloadGroupSharedFileWithId:@"groupId" filePath:@"filePath" sharedFileId:@"fileId" progress:nil completion:^(EMGroup * _Nullable aGroup, EMError * _Nullable aError) {
-            
+
     }];
 ```
 
@@ -133,5 +133,4 @@
 
 ## 更多操作
 
-详见[监听群组事件](group_manage.html)。
-
+详见[监听群组事件](group_manage.html#监听群组事件)。

@@ -166,18 +166,21 @@ conn.addEventHandler("eventName", {
 ```javascript
 let option = {
   // 要撤回消息的消息 ID。
-    mid: 'msgId',
+  mid: "msgId",
   // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-    to: 'username',
+  to: "username",
   // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
-    chatType: 'singleChat'
+  chatType: "singleChat",
 };
-conn.recallMessage(option).then((res) => {
-    console.log('success', res)
-}).catch((error) => {
+conn
+  .recallMessage(option)
+  .then((res) => {
+    console.log("success", res);
+  })
+  .catch((error) => {
     // 消息撤回失败，原因可能是超过了撤销时限(超过 2 分钟)。
-    console.log('fail', error)
-})
+    console.log("fail", error);
+  });
 ```
 
 你还可以使用 `onRecallMessage` 监听消息撤回状态：
@@ -323,7 +326,7 @@ function sendPrivateImg() {
 
 你也可以将图片上传到自己的服务器，而不是环信服务器，然后调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
 
-发送 URL 图片消息之前，确保在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](http://docs-im-beta.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。
+发送 URL 图片消息之前，确保在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://docs-im-beta.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。
 
 ```javascript
 function sendPrivateUrlImg() {
@@ -561,13 +564,13 @@ const onInputChange = function () {
 const sendBeginTyping = function () {
   const option = {
     // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
-    chatType: "singleChat", 
+    chatType: "singleChat",
     // 消息类型。
-    type: "cmd", 
+    type: "cmd",
     // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-    to: "<target id>", 
+    to: "<target id>",
     // 用户自定义操作。
-    action: "TypingBegin", 
+    action: "TypingBegin",
   };
   const typingMessage = message.create(option);
 

@@ -25,21 +25,21 @@
 1. 安装 Demo 所需的依赖：在终端中运行 `cd demo` 和 `npm install` 命令。
 
 2. 运行 Demo：
-   - 如果通过 HTTP 访问 Demo，在终端中运行 `cd demo` 和 `npm start` 命令。命令运行后会生成 Demo 的访问地址，例如 http://localhost:3001。通过 HTTP 访问的 Demo 中不包含音视频功能。
+   - 如果通过 HTTP 访问 Demo，在终端中运行 `cd demo` 和 `npm start` 命令。命令运行后会生成 Demo 的访问地址，例如 https://localhost:3001。通过 HTTP 访问的 Demo 中不包含音视频功能。
    - 如果通过 HTTPS 访问 Demo，在终端中运行 `cd demo` 和 `HTTPS=true npm start` 命令。命令运行后会生成 Demo 的访问地址，例如 https://localhost:3001。通过 HTTPS 访问的 Demo 中包含音视频功能。
 
 ## 主要模块介绍
 
 Demo 中的主要模块如下：
 
-| 模块名称       | 描述                 |
-| :------------- | :----------------- |
-| `components` | 项目中定义的组件。 |
-| `config` | SDK 初始化配置。 |
+| 模块名称     | 描述                                     |
+| :----------- | :--------------------------------------- |
+| `components` | 项目中定义的组件。                       |
+| `config`     | SDK 初始化配置。                         |
 | `containers` | 容器组件，包含联系人、聊天、登录和注册。 |
-| `layout` | 聊天部分的布局。 |
-| `selectors` | 缓存数据，优化性能。 |
-| `utils` | 数据库和工具方法。 |
+| `layout`     | 聊天部分的布局。                         |
+| `selectors`  | 缓存数据，优化性能。                     |
+| `utils`      | 数据库和工具方法。                       |
 
 ## 部分 UI 展示
 

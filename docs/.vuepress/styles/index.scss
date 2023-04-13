@@ -9,3 +9,16 @@
     }
   }
 }
+
+
+div[class*=language-] {
+  padding-top: 2px;
+} 
+
+div[class*=language-]::before {
+  right: 5em;
+}
+
+div[class*=language-] > button.copy-code-button:not(.fancy) {
+  right: 1em;
+}

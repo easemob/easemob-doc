@@ -10,32 +10,32 @@
 
 ### 请求参数
 
-| 参数    | 类型   | 是否必需 | 描述         |
-| :------------ | :----- | :------ | :---------------- |
-| `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
-| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
+| :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 
 ### 响应参数
 
-| 参数         | 类型   | 描述      |
-| :------------------- | :----- | :------------------------------------ |
-| `action`             | String | 请求方法。          |
-| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。  |
-| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。    |
-| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
-| `uri`                | String | 请求 URL。           |
-| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。      |
-| `entities`           | JSON   | 响应实体。           |
-| `entities.uuid`      | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。   |
-| `entities.type`      | String | 对象类型，无需关注。   |
-| `entities.created`   | Long   | 注册用户的 Unix 时间戳，单位为毫秒。              |
-| `entities.modified`  | Long   | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。         |
-| `entities.username`  | String | 用户 ID。               |
+| 参数                 | 类型   | 描述                                                                                                                                                           |
+| :------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `action`             | String | 请求方法。                                                                                                                                                     |
+| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。                                                                                 |
+| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。                                                                                                                   |
+| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。                                                                                 |
+| `uri`                | String | 请求 URL。                                                                                                                                                     |
+| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                                                                                                              |
+| `entities`           | JSON   | 响应实体。                                                                                                                                                     |
+| `entities.uuid`      | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。                                                                      |
+| `entities.type`      | String | 对象类型，无需关注。                                                                                                                                           |
+| `entities.created`   | Long   | 注册用户的 Unix 时间戳，单位为毫秒。                                                                                                                           |
+| `entities.modified`  | Long   | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。                                                                                                               |
+| `entities.username`  | String | 用户 ID。                                                                                                                                                      |
 | `entities.activated` | Bool   | 用户是否为正常状态：<br/> - `true`：用户为正常状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](#账号解禁)方法解除封禁。 |
-| `data`               | JSON   | 实际获取的数据详情。  |
-| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                      |
-| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。                             |
+| `data`               | JSON   | 实际获取的数据详情。                                                                                                                                           |
+| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                                                                                                          |
+| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。                                                                                                                     |
 
 ## 前提条件
 
@@ -67,17 +67,17 @@ POST https://{host}/{org_name}/{app_name}/users
 
 ##### 请求 Header
 
-| 参数            | 类型   | 是否必需 | 描述                                                         |
-| :-------------- | :----- | :------- | :----------------------------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                          |
+| 参数           | 类型   | 是否必需 | 描述                                |
+| :------------- | :----- | :------- | :---------------------------------- |
+| `Content-Type` | String | 是       | 内容类型。请填 `application/json`。 |
 
 ##### 请求 body
 
-| 参数       | 类型   | 是否必需 | 描述     |
-| :--------- | :----- | :------- | :---------------------- |
-| `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同的用户 ID；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。  |
-| `nickname` | String | 否       | 推送消息时，在消息推送通知栏内显示的用户昵称，并非用户个人信息的昵称。长度不可超过 100 个字符。支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。  |
+| 参数       | 类型   | 是否必需 | 描述                                                                                                                                                                                                                                                                                                                                                                                                           |
+| :--------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同的用户 ID；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
+| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。                                                                                                                                                                                                                                                                                                                                                                       |
+| `nickname` | String | 否       | 推送消息时，在消息推送通知栏内显示的用户昵称，并非用户个人信息的昵称。长度不可超过 100 个字符。支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。                                                                                                                                                                           |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -88,7 +88,7 @@ POST https://{host}/{org_name}/{app_name}/users
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 字段                | 类型   | 描述                                           |
-| :------------------ | :----- | :------------------------------ |
+| :------------------ | :----- | :--------------------------------------------- |
 | `entities.username` | String | 用户 ID。                                      |
 | `entities.nickname` | String | 推送消息时，在消息推送通知栏内显示的用户昵称。 |
 
@@ -146,20 +146,19 @@ POST https://{host}/{org_name}/{app_name}/users
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述         |
-| :-------------- | :----- | :------- | ------------------------ |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。        |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。          |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | -------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ##### 请求 body
 
-| 参数       | 类型   | 是否必需 | 描述  |
-| :--------- | :----- | :------- | :---------------------------- |
-| `username` | String | 是       | 用户 ID，长度不可超过 64 字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| `password` | String | 否       | 用户的登录密码，长度不可超过 64 个字符。若不传登录密码，调用通过用户 ID 获取 token 的 API 时，请求 body 中的授权方式 `grant_type` 只能设置为 `inherit`，不能设置为 `password`。           |
-| `nickname` | String | 否       | 推送消息时，在消息推送通知栏内显示的用户昵称，并非用户个人信息的昵称。长度不可超过 100 个字符。支持以下字符集：<br/> -  26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。     |
-
+| 参数       | 类型   | 是否必需 | 描述                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :--------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `username` | String | 是       | 用户 ID，长度不可超过 64 字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
+| `password` | String | 否       | 用户的登录密码，长度不可超过 64 个字符。若不传登录密码，调用通过用户 ID 获取 token 的 API 时，请求 body 中的授权方式 `grant_type` 只能设置为 `inherit`，不能设置为 `password`。                                                                                                                                                                                                                           |
+| `nickname` | String | 否       | 推送消息时，在消息推送通知栏内显示的用户昵称，并非用户个人信息的昵称。长度不可超过 100 个字符。支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。                                                                                                                                                                      |
 
 #### HTTP 响应
 
@@ -167,9 +166,9 @@ POST https://{host}/{org_name}/{app_name}/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段                | 类型   | 描述                                           |
-| :------------------ | :----- | :--------------------------------------------- |
-| `entities.username` | String | 用户 ID。                                      |
+| 字段                | 类型   | 描述                                                                                                        |
+| :------------------ | :----- | :---------------------------------------------------------------------------------------------------------- |
+| `entities.username` | String | 用户 ID。                                                                                                   |
 | `entities.nickname` | String | 推送消息时，在消息推送通知栏内显示的用户昵称。<br/>该字段为消息推送显示的用户昵称，而非用户属性的用户昵称。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -234,9 +233,9 @@ POST https://{host}/{org_name}/{app_name}/users
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                        |
-| :-------------- | :----- | :------- | :---------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。        |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ##### 请求 body
@@ -245,11 +244,11 @@ POST https://{host}/{org_name}/{app_name}/users
 单次请求最多可注册 60 个用户 ID。
 :::
 
-| 参数       | 类型   | 是否必需 | 描述      |
-| :--------- | :----- | :------- | :------------------- |
-| `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container>          |
-| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。      |
-| `nickname` | String | 否       | 推送消息时，在消息推送通知栏内显示的用户昵称，并非用户个人信息的昵称。长度不可超过 100 个字符。支持以下字符集：<br/> -  26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。 |
+| 参数       | 类型   | 是否必需 | 描述                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
+| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。                                                                                                                                                                                                                                                                                                                                                                    |
+| `nickname` | String | 否       | 推送消息时，在消息推送通知栏内显示的用户昵称，并非用户个人信息的昵称。长度不可超过 100 个字符。支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。                                                                                                                                                                        |
 
 #### HTTP 响应
 
@@ -295,7 +294,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
       "username": "user1",
       "activated": true,
       "nickname": "testuser1"
-      },
+    },
     {
       "uuid": "278bac80-XXXX-XXXX-b192-73e4cd5078a5",
       "type": "user",
@@ -304,7 +303,8 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
       "username": "user2",
       "activated": true,
       "nickname": "testuser2"
-      }  ],
+    }
+  ],
   "timestamp": 1541587920714,
   "data": [],
   "duration": 0,
@@ -332,32 +332,36 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
   "path": "/users",
   "uri": "https://XXXX/XXXX/XXXX/testapp/users",
   "entities": [
-  {
-    "uuid": "278b5e60-XXXX-XXXX-8f9b-d5d83ebec806",
-    "type": "user",
-    "created": 1541587920710,
-    "modified": 1541587920710,
-    "username": "user1",
-    "activated": true,
-    "nickname": "testuser1"
+    {
+      "uuid": "278b5e60-XXXX-XXXX-8f9b-d5d83ebec806",
+      "type": "user",
+      "created": 1541587920710,
+      "modified": 1541587920710,
+      "username": "user1",
+      "activated": true,
+      "nickname": "testuser1"
     },
-  {
-    "uuid": "278bac80-XXXX-XXXX-b192-73e4cd5078a5",
-    "type": "user",
-    "created": 1541587920712,
-    "modified": 1541587920712,
-    "username": "user2",
-    "activated": true,
-    "nickname": "testuser2"    }  ],
-    "timestamp": 1541587920714,
-    "data": [        {
-    "username": "user3",
-    "registerUserFailReason":
-    "the user3 already exists"
-}    ],
-"duration": 0,
-"organization": "XXXX",
-"applicationName": "XXXX"}
+    {
+      "uuid": "278bac80-XXXX-XXXX-b192-73e4cd5078a5",
+      "type": "user",
+      "created": 1541587920712,
+      "modified": 1541587920712,
+      "username": "user2",
+      "activated": true,
+      "nickname": "testuser2"
+    }
+  ],
+  "timestamp": 1541587920714,
+  "data": [
+    {
+      "username": "user3",
+      "registerUserFailReason": "the user3 already exists"
+    }
+  ],
+  "duration": 0,
+  "organization": "XXXX",
+  "applicationName": "XXXX"
+}
 ```
 
 ## 获取用户详情
@@ -378,9 +382,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述              |
-| :-------------- | :----- | :------- | :------------------------------ |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。       |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -389,18 +393,18 @@ GET https://{host}/{org_name}/{app_name}/users/{username}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段                | 类型   | 描述              |
-| :------------------------------- | :----- | :--------------------------------------- |
-| `entities.username`                           | String | 用户 ID。         |
-| `entities.nickname`                           | String | 推送消息时，在消息推送通知栏内显示的用户昵称。                            |
-| `entities.notification_display_style`         | Int    | 消息推送方式：<br/> - `0`：仅通知。推送标题为“您有一条新消息”，推送内容为“请点击查看”；<br/> - `1`：通知以及消息详情。推送标题为“您有一条新消息”，推送内容为发送人昵称和离线消息的内容。<br/>若用户未设置该参数，则响应中不返回。     |
-| `entities.notification_no_disturbing`         | Bool   | 是否开启免打扰。<br/> - `true`：免打扰开启。若用户未设置该参数，则响应中不返回。<br/> - `false`：免打扰关闭。        |
-| `entities.notification_no_disturbing_start`   | String | 免打扰的开始时间。例如，“8” 代表每日 8:00 开启免打扰。若用户未设该参数，则响应中不返回。            |
-| `entities.notification_no_disturbing_end`     | String | 免打扰的结束时间。例如，“18” 代表每日 18:00 关闭免打扰。若用户未设该参数，则响应中不返回。    |
-| `entities.notification_ignore_63112447328257` | Bool   | 是否屏蔽了群组消息的离线推送的设置。参数中的数字，例如 `63112447328257` 表示群组 ID。 <br/> -`true`：已屏蔽。<br/> - `false`：未屏蔽。若用户未设该参数，则响应中不返回。 |
-| `entities.notifier_name`                      | String | 客户端推送证书名称。若用户未设置推送证书名称，则响应中不返回。      |
-| `entities.device_token`                       | String | 推送 token。若用户没有推送 token，则响应中不返回。   |
-| `count`                       | Int | 用户数量。  |
+| 字段                                          | 类型   | 描述                                                                                                                                                                                                                              |
+| :-------------------------------------------- | :----- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `entities.username`                           | String | 用户 ID。                                                                                                                                                                                                                         |
+| `entities.nickname`                           | String | 推送消息时，在消息推送通知栏内显示的用户昵称。                                                                                                                                                                                    |
+| `entities.notification_display_style`         | Int    | 消息推送方式：<br/> - `0`：仅通知。推送标题为“您有一条新消息”，推送内容为“请点击查看”；<br/> - `1`：通知以及消息详情。推送标题为“您有一条新消息”，推送内容为发送人昵称和离线消息的内容。<br/>若用户未设置该参数，则响应中不返回。 |
+| `entities.notification_no_disturbing`         | Bool   | 是否开启免打扰。<br/> - `true`：免打扰开启。若用户未设置该参数，则响应中不返回。<br/> - `false`：免打扰关闭。                                                                                                                     |
+| `entities.notification_no_disturbing_start`   | String | 免打扰的开始时间。例如，“8” 代表每日 8:00 开启免打扰。若用户未设该参数，则响应中不返回。                                                                                                                                          |
+| `entities.notification_no_disturbing_end`     | String | 免打扰的结束时间。例如，“18” 代表每日 18:00 关闭免打扰。若用户未设该参数，则响应中不返回。                                                                                                                                        |
+| `entities.notification_ignore_63112447328257` | Bool   | 是否屏蔽了群组消息的离线推送的设置。参数中的数字，例如 `63112447328257` 表示群组 ID。 <br/> -`true`：已屏蔽。<br/> - `false`：未屏蔽。若用户未设该参数，则响应中不返回。                                                          |
+| `entities.notifier_name`                      | String | 客户端推送证书名称。若用户未设置推送证书名称，则响应中不返回。                                                                                                                                                                    |
+| `entities.device_token`                       | String | 推送 token。若用户没有推送 token，则响应中不返回。                                                                                                                                                                                |
+| `count`                                       | Int    | 用户数量。                                                                                                                                                                                                                        |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -413,7 +417,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/XXXX'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/XXXX'
 ```
 
 ##### 响应示例
@@ -422,7 +426,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 {
   "action": "get",
   "path": "/users",
-  "uri": "http://XXXX/XXXX/XXXX/users/XXXX",
+  "uri": "https://XXXX/XXXX/XXXX/users/XXXX",
   "entities": [
     {
       "uuid": "0ffe2d80-XXXX-XXXX-8d66-279e3e1c214b",
@@ -432,10 +436,11 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
       "username": "XXXX",
       "activated": true,
       "nickname": "testuser"
-      }  ],
- "timestamp": 1542798985011,
- "duration": 6,
- "count": 1
+    }
+  ],
+  "timestamp": 1542798985011,
+  "duration": 6,
+  "count": 1
 }
 ```
 
@@ -457,16 +462,16 @@ GET https://{host}/{org_name}/{app_name}/users?limit={N}&{cursor}
 
 ##### 查询参数
 
-| 参数     | 类型   | 是否必需 | 描述             |
-| :------- | :----- | :------- | :-------------------------- |
-| `limit`  | Int    | 否       | 请求查询用户的数量。取值范围为 [1,100]，默认值为 10。若实际用户数量超过 100，返回 100 个用户。      |
+| 参数     | 类型   | 是否必需 | 描述                                                                                                                                                                                                                                                                    |
+| :------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `limit`  | Int    | 否       | 请求查询用户的数量。取值范围为 [1,100]，默认值为 10。若实际用户数量超过 100，返回 100 个用户。                                                                                                                                                                          |
 | `cursor` | String | 否       | 开始获取数据的游标位置，用于分页显示用户列表。第一次发起批量查询用户请求时若不设置 `cursor`，请求成功后会获得第一页用户列表。从响应 body 中获取 `cursor`，并在下一次请求的 URL 中传入该 `cursor`，直到响应 body 中不再有 `cursor` 字段，则表示已查询到 app 中所有用户。 |
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述           |
-| :-------------- | :----- | :------- | :--------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。      |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -475,19 +480,19 @@ GET https://{host}/{org_name}/{app_name}/users?limit={N}&{cursor}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段                                          | 类型   | 描述                    |
-| :------------------- | :----- | :------------------------ |
-| `entities.username`                           | String | 用户 ID。                                                                                                                   |
-| `entities.nickname`                           | String | 推送消息时，在消息推送通知栏内显示的用户昵称。                                                                              |
-| `entities.notification_display_style`         | Int    | 消息推送方式：<br/> - `0`：仅通知。推送标题为“您有一条新消息”，推送内容为“请点击查看”；<br/> - `1`：通知以及消息详情。推送标题为“您有一条新消息”，推送内容为发送人昵称和离线消息的内容。<br/>若用户未设置该参数，则响应中不会返回。         |
-| `entities.notification_no_disturbing`         | Bool   | 是否开启免打扰模式。<br/> - `true`：免打扰开启。若用户未设置改参数，则响应中不返回。<br/> - `false`：代表免打扰关闭。       |
-| `entities.notification_no_disturbing_start`   | String | 免打扰的开始时间。例如，`8` 代表每日 8:00 开启免打扰。若用户未设该参数，则响应中不返回。                                   |
-| `entities.notification_no_disturbing_end`     | String | 免打扰的结束时间。例如，`18` 代表每日 18:00 关闭免打扰。若用户未设该参数，则响应中不返回。                                 |
-| `entities.notification_ignore_63112447328257` | Bool   | 是否屏蔽了群组消息的离线推送的设置。数字表示群组 ID。 <br/> -`true`：已屏蔽。 <br/> - `false`：未屏蔽，没有设置则不会返回。 |
-| `entities.notifier_name`                      | String | 客户端推送证书名称。若用户未设置推送证书名称，则响应中不返回。                                                              |
-| `entities.device_token`                       | String | 推送 token。若用户没有推送 token，则响应中不返回。                                                                          |
+| 字段                                          | 类型   | 描述                                                                                                                                                                                                                                  |
+| :-------------------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `entities.username`                           | String | 用户 ID。                                                                                                                                                                                                                             |
+| `entities.nickname`                           | String | 推送消息时，在消息推送通知栏内显示的用户昵称。                                                                                                                                                                                        |
+| `entities.notification_display_style`         | Int    | 消息推送方式：<br/> - `0`：仅通知。推送标题为“您有一条新消息”，推送内容为“请点击查看”；<br/> - `1`：通知以及消息详情。推送标题为“您有一条新消息”，推送内容为发送人昵称和离线消息的内容。<br/>若用户未设置该参数，则响应中不会返回。   |
+| `entities.notification_no_disturbing`         | Bool   | 是否开启免打扰模式。<br/> - `true`：免打扰开启。若用户未设置改参数，则响应中不返回。<br/> - `false`：代表免打扰关闭。                                                                                                                 |
+| `entities.notification_no_disturbing_start`   | String | 免打扰的开始时间。例如，`8` 代表每日 8:00 开启免打扰。若用户未设该参数，则响应中不返回。                                                                                                                                              |
+| `entities.notification_no_disturbing_end`     | String | 免打扰的结束时间。例如，`18` 代表每日 18:00 关闭免打扰。若用户未设该参数，则响应中不返回。                                                                                                                                            |
+| `entities.notification_ignore_63112447328257` | Bool   | 是否屏蔽了群组消息的离线推送的设置。数字表示群组 ID。 <br/> -`true`：已屏蔽。 <br/> - `false`：未屏蔽，没有设置则不会返回。                                                                                                           |
+| `entities.notifier_name`                      | String | 客户端推送证书名称。若用户未设置推送证书名称，则响应中不返回。                                                                                                                                                                        |
+| `entities.device_token`                       | String | 推送 token。若用户没有推送 token，则响应中不返回。                                                                                                                                                                                    |
 | `cursor`                                      | String | 游标，用于分页显示用户列表。<br>第一次发起批量查询用户请求时无需设置 `cursor`，请求成功后，从响应 body 中获取 `cursor`，并在下一次请求的 URL 中传入该 `cursor`，直到响应 body 中不再有 `cursor` 字段，则表示已查询到 app 中所有用户。 |
-| `count`                                       | Number | 返回用户数量。     |
+| `count`                                       | Number | 返回用户数量。                                                                                                                                                                                                                        |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -502,7 +507,7 @@ GET https://{host}/{org_name}/{app_name}/users?limit={N}&{cursor}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users?limit=2'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users?limit=2'
 ```
 
 使用返回的 cursor 获取下一页：
@@ -510,7 +515,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users?limit=2&cursor=LTgzXXXX2tB'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users?limit=2&cursor=LTgzXXXX2tB'
 ```
 
 ##### 响应示例一
@@ -520,35 +525,35 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "params":
-  {
-    "limit": [      "2"    ]
+  "params": {
+    "limit": ["2"]
+  },
+  "path": "/users",
+  "uri": "https://XXXX/XXXX/XXXX/users",
+  "entities": [
+    {
+      "uuid": "ab90eff0-XXXX-XXXX-9174-8f161649a182",
+      "type": "user",
+      "created": 1542356511855,
+      "modified": 1542356511855,
+      "username": "XXXX",
+      "activated": true,
+      "nickname": "user1"
     },
-    "path": "/users",
-    "uri": "http://XXXX/XXXX/XXXX/users",
-    "entities": [
-      {
-        "uuid": "ab90eff0-XXXX-XXXX-9174-8f161649a182",
-         "type": "user",
-         "created": 1542356511855,
-         "modified": 1542356511855,
-         "username": "XXXX",
-         "activated": true,
-         "nickname": "user1"
-         },
-      {
-        "uuid": "b2aade90-XXXX-XXXX-a974-f3368f82e4f1",
-        "type": "user",
-        "created": 1542356523769,
-        "modified": 1542356523769,
-        "username": "user2",
-        "activated": true,
-        "nickname": "user2"
-        }  ],
-"timestamp": 1542558467056,
-"duration": 11,
-"cursor": "LTgzXXXX2tB",
-"count": 2
+    {
+      "uuid": "b2aade90-XXXX-XXXX-a974-f3368f82e4f1",
+      "type": "user",
+      "created": 1542356523769,
+      "modified": 1542356523769,
+      "username": "user2",
+      "activated": true,
+      "nickname": "user2"
+    }
+  ],
+  "timestamp": 1542558467056,
+  "duration": 11,
+  "cursor": "LTgzXXXX2tB",
+  "count": 2
 }
 ```
 
@@ -559,7 +564,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users?limit=2&cursor=LTgzXXXX  2tB'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users?limit=2&cursor=LTgzXXXX  2tB'
 ```
 
 ##### 响应示例二
@@ -569,16 +574,12 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "params":
-  {
-    "cursor": [
-      "LTgzXXXX2tB"
-      ],
-    "limit": [
-      "2"    ]
-    },
+  "params": {
+    "cursor": ["LTgzXXXX2tB"],
+    "limit": ["2"]
+  },
   "path": "/users",
-  "uri": "http://XXXX/XXXX/XXXX/users",
+  "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
     {
       "uuid": "fef7f250-XXXX-XXXX-ba39-0fed7dcc3cdd",
@@ -588,7 +589,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
       "username": "XXXX",
       "activated": true,
       "nickname": "testuser"
-      }  ],
+    }
+  ],
   "timestamp": 1542559337702,
   "duration": 2,
   "count": 1
@@ -613,9 +615,9 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述           |
-| :-------------- | :----- | :------- | :---------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。    |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -624,8 +626,8 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数                | 类型   | 描述               |
-| :------------------ | :----- | :----------------- |
+| 参数                | 类型   | 描述                   |
+| :------------------ | :----- | :--------------------- |
 | `entities.username` | String | 删除的账号的用户 ID。  |
 | `entities.nickname` | String | 删除的账号的用户昵称。 |
 
@@ -640,7 +642,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1'
 ```
 
 ##### 响应示例
@@ -660,7 +662,8 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
       "username": "XXXX",
       "activated": true,
       "nickname": "user1"
-      }  ],
+    }
+  ],
   "timestamp": 1542559539776,
   "duration": 39,
   "organization": "XXXX",
@@ -686,9 +689,9 @@ DELETE https://{host}/{org_name}/{app_name}/users
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述       |
-| :-------------- | :----- | :------- | :---------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。        |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -697,8 +700,8 @@ DELETE https://{host}/{org_name}/{app_name}/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段                | 类型   | 描述               |
-| :------------------ | :----- | :----------------- |
+| 字段                | 类型   | 描述                   |
+| :------------------ | :----- | :--------------------- |
 | `entities.username` | String | 删除的账号的用户 ID。  |
 | `entities.nickname` | String | 删除的账号的用户昵称。 |
 
@@ -713,7 +716,7 @@ DELETE https://{host}/{org_name}/{app_name}/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users?limit=2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users?limit=2'
 ```
 
 ##### 响应示例
@@ -723,9 +726,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
   "action": "delete",
   "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
   "params": {
-    "limit": [
-      "2"
-    ]
+    "limit": ["2"]
   },
   "path": "/users",
   "uri": "https://XXXX/XXXX/testapp/users",
@@ -775,18 +776,18 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述              |
-| :-------------- | :----- | :------- | :----------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。        |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。           |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ##### 请求 body
 
 请求包体为 JSON Object 类型，包含以下字段：
 
-| 参数          | 类型   | 是否必需 | 描述                  |
-| :------------ | :----- | :------- | :-------------------- |
+| 参数          | 类型   | 是否必需 | 描述                                       |
+| :------------ | :----- | :------- | :----------------------------------------- |
 | `newpassword` | String | 是       | 用户的新登录密码，长度不可超过 64 个字符。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
@@ -797,8 +798,8 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数          | 类型   | 描述                  |
-| :------------ | :----- | :------- | :-------------------- |
+| 参数     | 类型   | 描述                                                                         |
+| :------- | :----- | :--------------------------------------------------------------------------- |
 | `action` | String | 执行的操作。在该响应中，该参数的值为 `set user password`，表示设置用户密码。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -812,7 +813,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token，<YourPassword> 替换为你设置的新密码
 
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{ "newpassword": "<YourPassword>" }' 'http://XXXX/XXXX/XXXX/users/user1/password'
+curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{ "newpassword": "<YourPassword>" }' 'https://XXXX/XXXX/XXXX/users/user1/password'
 ```
 
 ##### 响应示例
@@ -821,7 +822,8 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 {
   "action": "set user password",
   "timestamp": 1542595598924,
-  "duration": 8}
+  "duration": 8
+}
 ```
 
 ## 获取用户在线状态
@@ -842,9 +844,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/status
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述              |
-| :-------------- | :----- | :------- | :----------------------------------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。            |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -853,8 +855,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/status
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段            | 类型   | 描述                 |
-| :-------------- | :----- | :------------------------------------ |
+| 字段   | 类型 | 描述                                                                                                                                |
+| :----- | :--- | :---------------------------------------------------------------------------------------------------------------------------------- |
 | `data` | JSON | 用户的在线状态数据。格式为："用户 ID": "当前在线状态"，例如，user1 的在线和离线状态分别为 "user1": "online" 和 "user1": "offline"。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -868,7 +870,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/status
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/status'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/status'
 ```
 
 ##### 响应示例
@@ -876,7 +878,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "uri": "http://XXXX/XXXX/XXXX/users/user1/status",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/status",
   "entities": [],
   "data": {
     "user1": "offline"
@@ -905,15 +907,15 @@ POST https://{host}/{org_name}/{app_name}/users/batch/status
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述      |
-| :-------------- | :----- | :------- | :---------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。         |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ##### 请求 body
 
-| 参数        | 类型   | 是否必需 | 描述                                                           |
-| :---------- | :----- | :------- | :------------------------------------------------------------- |
+| 参数        | 类型  | 是否必需 | 描述                                           |
+| :---------- | :---- | :------- | :--------------------------------------------- |
 | `usernames` | Array | 是       | 要查询状态的用户 ID，**每次最多能传 100 个**。 |
 
 #### HTTP 响应
@@ -922,10 +924,10 @@ POST https://{host}/{org_name}/{app_name}/users/batch/status
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段            | 类型   | 描述                 |
-| :-------------- | :----- | :------------------------------------- |
-| `action` | String | 执行的操作。在该响应中，该参数的值为 `get batch user status`，表示批量获取用户在线状态。 |
-| `data` | JSONArray | 查询的用户的在线状态，数据格式为："用户 ID": "当前在线状态"，例如，user1 的在线和离线状态分别为 "user1": "online" 和 "user1": "offline"。 |
+| 字段     | 类型      | 描述                                                                                                                                      |
+| :------- | :-------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| `action` | String    | 执行的操作。在该响应中，该参数的值为 `get batch user status`，表示批量获取用户在线状态。                                                  |
+| `data`   | JSONArray | 查询的用户的在线状态，数据格式为："用户 ID": "当前在线状态"，例如，user1 的在线和离线状态分别为 "user1": "online" 和 "user1": "offline"。 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -936,7 +938,7 @@ POST https://{host}/{org_name}/{app_name}/users/batch/status
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST http://XXXX/XXXX/chatdemoui/users/batch/status -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: application/json' -d '{"usernames":["user1","user2"]}'
+curl -X POST https://XXXX/XXXX/chatdemoui/users/batch/status -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: application/json' -d '{"usernames":["user1","user2"]}'
 ```
 
 ##### 响应示例
@@ -945,17 +947,17 @@ curl -X POST http://XXXX/XXXX/chatdemoui/users/batch/status -H 'Authorization: B
 
 ```json
 {
-    "action": "get batch user status",
-    "data": [
-        {
-            "user1": "offline"
-        },
-        {
-            "user2": "offline"
-        }
-    ],
-    "timestamp": 1552280231926,
-    "duration": 4
+  "action": "get batch user status",
+  "data": [
+    {
+      "user1": "offline"
+    },
+    {
+      "user2": "offline"
+    }
+  ],
+  "timestamp": 1552280231926,
+  "duration": 4
 }
 ```
 
@@ -985,19 +987,19 @@ POST https://{host}/{org_name}/{app_name}/mutes
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                     |
-| :-------------- | :----- | :------- | :--------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。      |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ##### 请求 body
 
-| 参数        | 类型   | 是否必需 | 描述                   |
-| :---------- | :----- | :------- | :------------------------------------- |
-| `username`  | String | 是       | 设置全局禁言的用户 ID。         |
+| 参数        | 类型   | 是否必需 | 描述                                                                                                                                                                                       |
+| :---------- | :----- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `username`  | String | 是       | 设置全局禁言的用户 ID。                                                                                                                                                                    |
 | `chat`      | Int    | 否       | 单聊禁言时长，单位为秒，最大值为 `2147483647`。<br/> - > `0`：该用户 ID 的单聊禁言时长。 <br/> - `0`：取消该用户的单聊禁言。<br/> - `-1`：该用户被设置永久单聊禁言。<br/> - 其他负值无效。 |
-| `groupchat` | Int    | 否       | 群组禁言时长，单位为秒，规则同单聊禁言。      |
-| `chatroom`  | Int    | 否       | 聊天室禁言时长，单位为秒，规则同单聊禁言。                    |
+| `groupchat` | Int    | 否       | 群组禁言时长，单位为秒，规则同单聊禁言。                                                                                                                                                   |
+| `chatroom`  | Int    | 否       | 聊天室禁言时长，单位为秒，规则同单聊禁言。                                                                                                                                                 |
 
 #### HTTP 响应
 
@@ -1005,8 +1007,8 @@ POST https://{host}/{org_name}/{app_name}/mutes
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段          | 类型   | 描述                                |
-| :------------ | :----- | :---------------------------------- |
+| 字段          | 类型   | 描述                                          |
+| :------------ | :----- | :-------------------------------------------- |
 | `data.result` | String | 是否成功设置用户全局禁言。`ok` 表示设置成功。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -1035,17 +1037,17 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/mutes' \
 
 ```json
 {
-    "path": "/mutes",
-    "uri": "https://XXXX/XXXX/XXXX/mutes",
-    "timestamp": 1631609754727,
-    "organization": "XXXX",
-    "application": "357169f0-XXXX-XXXX-9b3a-f1af649cc48d",
-    "action": "post",
-    "data": {
-        "result": "ok"
-    },
-    "duration": 74,
-    "applicationName": "XXXX"
+  "path": "/mutes",
+  "uri": "https://XXXX/XXXX/XXXX/mutes",
+  "timestamp": 1631609754727,
+  "organization": "XXXX",
+  "application": "357169f0-XXXX-XXXX-9b3a-f1af649cc48d",
+  "action": "post",
+  "data": {
+    "result": "ok"
+  },
+  "duration": 74,
+  "applicationName": "XXXX"
 }
 ```
 
@@ -1065,9 +1067,9 @@ GET https://{host}/{org_name}/{app_name}/mutes/{username}
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                      |
-| :-------------- | :----- | :------- | :---------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型，请填 `application/json`。             |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型，请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -1076,13 +1078,13 @@ GET https://{host}/{org_name}/{app_name}/mutes/{username}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段             | 类型   | 描述                       |
-| :--------------- | :----- | :---------------------------------------------------------- |
-| `data.userid`    | String | 设置禁言的用户 ID。                   |
+| 字段             | 类型   | 描述                                                                                                                                                                                 |
+| :--------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data.userid`    | String | 设置禁言的用户 ID。                                                                                                                                                                  |
 | `data.chat`      | Int    | 单聊剩余禁言时间，单位为秒。最大值为 `2147483647`。<br/> - > 0：该用户 ID 剩余的单聊禁言时长。<br/> - `0`：该用户的单聊消息禁言已取消。 <br/> - `-1`：该用户被设置永久单聊消息禁言。 |
-| `data.groupchat` | Int    | 群组消息剩余禁言时长，单位为秒，规则同单聊禁言。        |
-| `data.chatroom`  | Int    | 聊天室消息剩余禁言时长，单位为秒，规则同单聊禁言。            |
-| `data.unixtime`  | Int    | 当前操作的 Unix 时间戳。                       |
+| `data.groupchat` | Int    | 群组消息剩余禁言时长，单位为秒，规则同单聊禁言。                                                                                                                                     |
+| `data.chatroom`  | Int    | 聊天室消息剩余禁言时长，单位为秒，规则同单聊禁言。                                                                                                                                   |
+| `data.unixtime`  | Int    | 当前操作的 Unix 时间戳。                                                                                                                                                             |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -1104,21 +1106,21 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
 
 ```json
 {
-    "path": "/mutes",
-    "uri": "https://XXXX/XXXX/XXXX/mutes",
-    "timestamp": 1631609831800,
-    "organization": "XXXX",
-    "application": "357169f0-XXXX-XXXX-9b3a-f1af649cc48d",
-    "action": "get",
-    "data": {
-        "userid": "XXXX#restys_zs1",
-        "chat": 96,
-        "groupchat": 96,
-        "chatroom": 96,
-        "unixtime": 1631609831
-    },
-    "duration": 13,
-    "applicationName": "XXXX"
+  "path": "/mutes",
+  "uri": "https://XXXX/XXXX/XXXX/mutes",
+  "timestamp": 1631609831800,
+  "organization": "XXXX",
+  "application": "357169f0-XXXX-XXXX-9b3a-f1af649cc48d",
+  "action": "get",
+  "data": {
+    "userid": "XXXX#restys_zs1",
+    "chat": 96,
+    "groupchat": 96,
+    "chatroom": 96,
+    "unixtime": 1631609831
+  },
+  "duration": 13,
+  "applicationName": "XXXX"
 }
 ```
 
@@ -1138,10 +1140,10 @@ GET https://{host}/{org_name}/{app_name}/mutes
 
 ##### 查询参数
 
-| 参数       | 类型 | 是否必需 | 描述                               |
-| :--------- | :--- | :------- | :--------------------------------- |
-| `pageNum`  | Int  | 否       | 请求查询的页码。                   |
-| `pageSize` | Int  | 否      | 请求查询每页显示的禁言用户的数量。取值范围为 [1,50]。 |
+| 参数       | 类型 | 是否必需 | 描述                                                  |
+| :--------- | :--- | :------- | :---------------------------------------------------- |
+| `pageNum`  | Int  | 否       | 请求查询的页码。                                      |
+| `pageSize` | Int  | 否       | 请求查询每页显示的禁言用户的数量。取值范围为 [1,50]。 |
 
 ##### 请求 header
 
@@ -1156,14 +1158,14 @@ GET https://{host}/{org_name}/{app_name}/mutes
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段        | 类型   | 描述             |
-| :---------- | :----- | :--------------------------------------------------------------- |
-| `data.data`  | JSONArray | 获取的所有全局禁言的用户的信息。           |
-| `data.data.username`  | String | 设置禁言的用户 ID。           |
-| `data.data.chat`      | Int    | 单聊消息剩余禁言时间，单位为秒。最大值为 `2147483647`。 <br/> - > 0：该用户 ID 具体的单聊消息禁言时长。 <br/> - `0`：该用户的单聊消息禁言已取消。 <br/> - `-1`：该用户被设置永久单聊消息禁言。 |
-| `data.data.groupchat` | Int    | 群组消息剩余禁言时长，单位为秒，规则同上。     |
-| `data.data.chatroom`  | Int    | 聊天室消息剩余禁言时长，单位为秒，规则同上。          |
-| `data.unixtime`  | Long    | 当前操作的 Unix 时间戳，单位为毫秒。                      |
+| 字段                  | 类型      | 描述                                                                                                                                                                                           |
+| :-------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data.data`           | JSONArray | 获取的所有全局禁言的用户的信息。                                                                                                                                                               |
+| `data.data.username`  | String    | 设置禁言的用户 ID。                                                                                                                                                                            |
+| `data.data.chat`      | Int       | 单聊消息剩余禁言时间，单位为秒。最大值为 `2147483647`。 <br/> - > 0：该用户 ID 具体的单聊消息禁言时长。 <br/> - `0`：该用户的单聊消息禁言已取消。 <br/> - `-1`：该用户被设置永久单聊消息禁言。 |
+| `data.data.groupchat` | Int       | 群组消息剩余禁言时长，单位为秒，规则同上。                                                                                                                                                     |
+| `data.data.chatroom`  | Int       | 聊天室消息剩余禁言时长，单位为秒，规则同上。                                                                                                                                                   |
+| `data.unixtime`       | Long      | 当前操作的 Unix 时间戳，单位为毫秒。                                                                                                                                                           |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -1185,47 +1187,47 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes?pageNum=1&pageSize=10' \
 
 ```json
 {
-    "path": "/mutes",
-    "uri": "https://XXXX/XXXX/XXXX/mutes",
-    "timestamp": 1631609858771,
-    "organization": "XXXX",
-    "application": "357169f0-XXXX-XXXX-9b3a-f1af649cc48d",
-    "action": "get",
-    "data": {
-        "data": [
-            {
-                "username": "zs2",
-                "chatroom": 0
-            },
-            {
-                "username": "zs1",
-                "groupchat": 69
-            },
-            {
-                "username": "zs1",
-                "chat": 69
-            },
-            {
-                "username": "zs1",
-                "chatroom": 69
-            },
-            {
-                "username": "h2",
-                "chatroom": 0
-            },
-            {
-                "username": "h2",
-                "groupchat": 0
-            },
-            {
-                "username": "h2",
-                "chat": 0
-            }
-        ],
-        "unixtime": 1631609858
-    },
-    "duration": 17,
-    "applicationName": "XXXX"
+  "path": "/mutes",
+  "uri": "https://XXXX/XXXX/XXXX/mutes",
+  "timestamp": 1631609858771,
+  "organization": "XXXX",
+  "application": "357169f0-XXXX-XXXX-9b3a-f1af649cc48d",
+  "action": "get",
+  "data": {
+    "data": [
+      {
+        "username": "zs2",
+        "chatroom": 0
+      },
+      {
+        "username": "zs1",
+        "groupchat": 69
+      },
+      {
+        "username": "zs1",
+        "chat": 69
+      },
+      {
+        "username": "zs1",
+        "chatroom": 69
+      },
+      {
+        "username": "h2",
+        "chatroom": 0
+      },
+      {
+        "username": "h2",
+        "groupchat": 0
+      },
+      {
+        "username": "h2",
+        "chat": 0
+      }
+    ],
+    "unixtime": 1631609858
+  },
+  "duration": 17,
+  "applicationName": "XXXX"
 }
 ```
 
@@ -1243,17 +1245,17 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/offline_msg_coun
 
 ##### 路径参数
 
-| 参数       | 类型   | 是否必需 | 描述                        |
-| :-------------- | :----- | :------- | :-------------------------- |
+| 参数             | 类型   | 是否必需 | 描述                          |
+| :--------------- | :----- | :------- | :---------------------------- |
 | `owner_username` | String | 是       | 要获取离线消息数量的用户 ID。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述              |
-| :-------------- | :----- | :------- | :---------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。      |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -1262,8 +1264,8 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/offline_msg_coun
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型   | 描述                                                          |
-| :--------- | :----- | :------------------------------------------------------------ |
+| 字段   | 类型 | 描述                                                                                  |
+| :----- | :--- | :------------------------------------------------------------------------------------ |
 | `data` | JSON | 用户的离线消息数量。数据格式为："用户 ID": "当前离线消息的数量"，例如，"user1": "0"。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -1277,7 +1279,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/offline_msg_coun
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/offline_msg_count'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/offline_msg_count'
 ```
 
 ##### 响应示例
@@ -1285,7 +1287,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "uri": "http://XXXX/XXXX/XXXX/users/user1/offline_msg_count",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/offline_msg_count",
   "entities": [],
   "data": {
     "user1": 0
@@ -1317,9 +1319,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/offline_msg_status/{ms
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述          |
-| :-------------- | :----- | :------- | :---------------------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。         |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -1328,8 +1330,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/offline_msg_status/{ms
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中的字段如下：
 
-| 字段     | 类型   | 描述              |
-| :------- | :----- | :--------------------------------------------------- |
+| 字段   | 类型 | 描述                                                                                                                                         |
+| :----- | :--- | :------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data` | JSON | 指定离线消息的投递状态。数据格式为 "消息 ID": "投递状态"。消息的投递状态有两种：<br/> - `delivered`：已投递；<br/> - `undelivered`：未投递。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -1343,7 +1345,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/offline_msg_status/{ms
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/offline_msg_status/123'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/offline_msg_status/123'
 ```
 
 ##### 响应示例
@@ -1351,7 +1353,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "uri": "http://XXXX/XXXX/XXXX/users/user1/offline_msg_status/123",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/offline_msg_status/123",
   "entities": [],
   "data": {
     "123": "delivered"
@@ -1380,10 +1382,10 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述              |
-| :-------------- | :----- | :------- | :---------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。           |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。      |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -1392,11 +1394,11 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数       | 类型   | 描述               |
-| :--------- | :----- | :----------------- |
-| `action` | String | 执行的操作。在该响应中，该参数的值为 `Deactivate user`，表示对账号进行封禁。 |
-| `entities.username` | String | 被封禁的用户 ID。  |
-| `entities.nickname` | String | 被封禁的用户昵称。 |
+| 参数                | 类型   | 描述                                                                         |
+| :------------------ | :----- | :--------------------------------------------------------------------------- |
+| `action`            | String | 执行的操作。在该响应中，该参数的值为 `Deactivate user`，表示对账号进行封禁。 |
+| `entities.username` | String | 被封禁的用户 ID。                                                            |
+| `entities.nickname` | String | 被封禁的用户昵称。                                                           |
 
 其他字段及说明详见[公共参数](#公共参数)。
 
@@ -1409,7 +1411,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/deactivate'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/deactivate'
 ```
 
 ##### 响应示例
@@ -1426,9 +1428,11 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
       "username": "user1",
       "activated": false,
       "nickname": "user"
-      }  ],
-      "timestamp": 1542602157258,
-      "duration": 12}
+    }
+  ],
+  "timestamp": 1542602157258,
+  "duration": 12
+}
 ```
 
 ### 账号解禁
@@ -1447,10 +1451,10 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述               |
-| :-------------- | :----- | :------- | :----------------------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。        |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                 |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -1459,8 +1463,8 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     | 类型   | 描述                                     |
-| :------- | :----- | :--------------------------------------- |
+| 字段     | 类型   | 描述                                                                       |
+| :------- | :----- | :------------------------------------------------------------------------- |
 | `action` | String | 执行的操作。在该响应中，该参数的值为 `activate user`，表示对账号进行解禁。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -1474,7 +1478,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/activate'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/activate'
 ```
 
 ##### 响应示例
@@ -1483,7 +1487,8 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "activate user",
   "timestamp": 1542602404132,
-  "duration": 9}
+  "duration": 9
+}
 ```
 
 ### 强制下线
@@ -1502,9 +1507,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述            |
-| :-------------- | :----- | :------- | :-------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。         |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -1513,8 +1518,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     | 类型 | 描述                          |
-| :------- | :--- | :--------------------- |
+| 字段          | 类型 | 描述                                                            |
+| :------------ | :--- | :-------------------------------------------------------------- |
 | `data.result` | Bool | 用户是否已被强制下线：<br/> - `true`：是；<br/> - `false`：否。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -1528,7 +1533,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/disconnect'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/disconnect'
 ```
 
 ##### 响应示例
@@ -1536,12 +1541,13 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "uri": "http://XXXX/XXXX/XXXX/users/user1/disconnect",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/disconnect",
   "entities": [],
   "data": {
     "result": true
-    },
+  },
   "timestamp": 1542602601332,
   "duration": 6,
-  "count": 0}
+  "count": 0
+}
 ```

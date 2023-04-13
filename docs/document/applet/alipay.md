@@ -16,17 +16,18 @@
 
 登录 [支付宝开放平台](https://open.alipay.com/platform/home.htm), 配置以下服务器域名。
 
-:::tip 
-request合法域名：
+:::tip
+request 合法域名：
+
 1. https://a1.easemob.com
 2. https://a2.easemob.com
 3. https://a3.easemob.com
 4. https://a4.easemob.com
 5. https://a5.easemob.com
-:::
+   :::
 
-:::tip 
-socket合法域名：
+:::tip
+socket 合法域名：
 wss://im-api-alipay.easemob.com/websocket
 :::
 
@@ -40,14 +41,14 @@ wss://im-api-alipay.easemob.com/websocket
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网[下载 SDK](http://www.easemob.com/download/im)
+- 通过官网[下载 SDK](https://www.easemob.com/download/im)
 - 从环信的[github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
 
 #### 引入 SDK
 
 - 开始一个全新的项目
-    1. 将下载的 SDK（src/sdk/）导入到自己的项目中。
-    2. 引入 SDK：`import IMSDK from "../sdk/Easemob-chat-miniProgram";`
+  1. 将下载的 SDK（src/sdk/）导入到自己的项目中。
+  2. 引入 SDK：`import IMSDK from "../sdk/Easemob-chat-miniProgram";`
 - 基于 Demo 二次开发
 
 将下载的代码导入开发者工具即可运行起来。
@@ -66,15 +67,15 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
 
 ```javascript
 //实例化 SDK 对象
-const WebIM = wx.WebIM = SDK;
+const WebIM = (wx.WebIM = SDK);
 WebIM.conn = new WebIM.connection({
-    appKey: 'your appKey',
-    https: true, //是否使用 HTTPS 
-    url: 'wss://im-api-alipay.easemob.com/websocket', // socket server (3.0 SDK)
-    apiUrl: 'https://a1.easemob.com',    // rest server
-    heartBeatWait: 30000, //心跳间隔
-    autoReconnectNumMax: 5, //自动重连次数
-    useOwnUploadFun: false // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
+  appKey: "your appKey",
+  https: true, //是否使用 HTTPS
+  url: "wss://im-api-alipay.easemob.com/websocket", // socket server (3.0 SDK)
+  apiUrl: "https://a1.easemob.com", // rest server
+  heartBeatWait: 30000, //心跳间隔
+  autoReconnectNumMax: 5, //自动重连次数
+  useOwnUploadFun: false, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
 });
 ```
 

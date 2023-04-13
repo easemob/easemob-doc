@@ -23,31 +23,31 @@
 
 ### 请求参数
 
-| 参数    | 类型   | 是否必需 | 描述         |
-| :------------ | :----- | :------ | :---------------- |
-| `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
-| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
-| `username` | String | 是    | 用户 ID。         |
+| 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
+| :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `username` | String | 是       | 用户 ID。                                                                                                                                       |
 
 ### 响应参数
 
-| 参数        | 类型      | 描述                                                         |
-| :----------| :------- | :------------------------------------------- |
-| `entities`  | Object    | 响应实体。                     |
-| `data`      | Object  | 实际获取的数据详情。                                         |
-| `uuid`      | String  | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
-| `username`  | String| 用户 ID。                                                     |
-| `action`   | String  | 请求方法。                                     |
-| `organization`   | String   | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`  | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。   |
+| 参数              | 类型   | 描述                                                                           |
+| :---------------- | :----- | :----------------------------------------------------------------------------- |
+| `entities`        | Object | 响应实体。                                                                     |
+| `data`            | Object | 实际获取的数据详情。                                                           |
+| `uuid`            | String | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
+| `username`        | String | 用户 ID。                                                                      |
+| `action`          | String | 请求方法。                                                                     |
+| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
+| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
 | `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
-| `uri`        | String     | 请求 URL。                                                   |
-| `path`        | String  | 请求路径，属于请求 URL 的一部分，开发者无需关注。            |
-| `username`  | String | 用户 ID。                                                     |
-| `nickname`   | String | 用户昵称。                                                   |
-| `timestamp`   | Long | Unix 时间戳，单位为毫秒。                                    |
-| `duration`  | String  | 请求响应时间，单位为毫秒。                                   |
+| `uri`             | String | 请求 URL。                                                                     |
+| `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
+| `username`        | String | 用户 ID。                                                                      |
+| `nickname`        | String | 用户昵称。                                                                     |
+| `timestamp`       | Long   | Unix 时间戳，单位为毫秒。                                                      |
+| `duration`        | String | 请求响应时间，单位为毫秒。                                                     |
 
 用户关系管理的主要接口如下：
 
@@ -65,20 +65,20 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 
 #### 路径参数
 
-| 参数              | 类型   | 是否必需 | 描述                                                         |
-| :---------------- | :----- | :------- | :----------------------------------------------------------- |
-| `owner_username`  | String | 是    | 当前用户的用户 ID。       |
-| `friend_username` | String | 是    | 要添加的用户 ID。                                             |
+| 参数              | 类型   | 是否必需 | 描述                |
+| :---------------- | :----- | :------- | :------------------ |
+| `owner_username`  | String | 是       | 当前用户的用户 ID。 |
+| `friend_username` | String | 是       | 要添加的用户 ID。   |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
-| :-------------- | :----- | :---------------- | :------- |
-| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    | 内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                 |
+| :-------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
+| `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
 
@@ -86,16 +86,16 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型      | 描述                                                         |
-| :---------- | :---------------- | :----------------------------------------------------------- |
-| `entities`     | JSON Array    | 添加的好友的详情。                                                   |
-| `entities.uuid`       | String      | 系统内为好友生成的系统内唯一标识，开发者无需关心。           |
-| `entities.type`        | String     | 对象类型，值为 `user` 或 `group`。                          |
-| `entities.created`       | Long   | 用户创建时间，Unix 时间戳，单位为毫秒。                      |
-| `entities.modified`      | Long  | 好友的用户信息如密码或者昵称等最新修改时间，Unix 时间戳，单位为毫秒。 |
-| `entities.username`   | String   | 添加的好友的用户 ID。                                             |
-| `entities.activated`   | Bool  | 好友是否为正常状态：<br/> • `true` 正常状态。<br/> • `false` 已被封禁。 |
-| `entities.nickname`      | String   | 好友的用户昵称。                                                   |
+| 字段                 | 类型       | 描述                                                                    |
+| :------------------- | :--------- | :---------------------------------------------------------------------- |
+| `entities`           | JSON Array | 添加的好友的详情。                                                      |
+| `entities.uuid`      | String     | 系统内为好友生成的系统内唯一标识，开发者无需关心。                      |
+| `entities.type`      | String     | 对象类型，值为 `user` 或 `group`。                                      |
+| `entities.created`   | Long       | 用户创建时间，Unix 时间戳，单位为毫秒。                                 |
+| `entities.modified`  | Long       | 好友的用户信息如密码或者昵称等最新修改时间，Unix 时间戳，单位为毫秒。   |
+| `entities.username`  | String     | 添加的好友的用户 ID。                                                   |
+| `entities.activated` | Bool       | 好友是否为正常状态：<br/> • `true` 正常状态。<br/> • `false` 已被封禁。 |
+| `entities.nickname`  | String     | 好友的用户昵称。                                                        |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -108,7 +108,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/contacts/users/user2'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/contacts/users/user2'
 ```
 
 #### 响应示例
@@ -149,19 +149,19 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 
 #### 路径参数
 
-| 参数              | 类型   | 是否必需 | 描述                                                         |
-| :---------------- | :----- | :------- | :----------------------------------------------------------- |
-| `owner_username`  | String | 是    | 发起操作的用户 ID。                                           |
-| `friend_username` | String | 是    | 被移除好友的用户 ID。                                         |
+| 参数              | 类型   | 是否必需 | 描述                  |
+| :---------------- | :----- | :------- | :-------------------- |
+| `owner_username`  | String | 是       | 发起操作的用户 ID。   |
+| `friend_username` | String | 是       | 被移除好友的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
-| :-------------- | :----- | :---------------- | :------- |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-| `Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                 |
+| :-------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
+| `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
 
@@ -169,16 +169,16 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段        | 类型   | 描述                                           |
-| :---------- | :------------ | :--------------------------------------------- |
-| `entities` | JSON Array   | 被移除的好友的详情。                                                   |
-| `entities.uuid`    | String   | 系统内为好友生成的系统内唯一标识，开发者无需关心。           |
-| `entities.type`         | String    | 对象类型，值为 `user` 或 `group`。                          |
-| `entities.created`     | Long    | 用户创建时间，Unix 时间戳，单位为毫秒。                      |
-| `entities.modified`      | Long   | 好友的用户信息如密码或者昵称等最近一次修改时间，Unix 时间戳，单位为毫秒。 |
-| `entities.username`     | String    | 被移除好友的用户 ID。                                             |
-| `entities.activated`      | Bool  | 好友是否为正常状态：<ul><li>`true` 正常状态。</li><li>`false` 已被封禁。</li></ul> |
-| `entities.nickname`      | String   | 好友的用户昵称。                                                   |
+| 字段                 | 类型       | 描述                                                                               |
+| :------------------- | :--------- | :--------------------------------------------------------------------------------- |
+| `entities`           | JSON Array | 被移除的好友的详情。                                                               |
+| `entities.uuid`      | String     | 系统内为好友生成的系统内唯一标识，开发者无需关心。                                 |
+| `entities.type`      | String     | 对象类型，值为 `user` 或 `group`。                                                 |
+| `entities.created`   | Long       | 用户创建时间，Unix 时间戳，单位为毫秒。                                            |
+| `entities.modified`  | Long       | 好友的用户信息如密码或者昵称等最近一次修改时间，Unix 时间戳，单位为毫秒。          |
+| `entities.username`  | String     | 被移除好友的用户 ID。                                                              |
+| `entities.activated` | Bool       | 好友是否为正常状态：<ul><li>`true` 正常状态。</li><li>`false` 已被封禁。</li></ul> |
+| `entities.nickname`  | String     | 好友的用户昵称。                                                                   |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -191,7 +191,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/contacts/users/user2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/contacts/users/user2'
 ```
 
 #### 响应示例
@@ -232,19 +232,19 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 #### 路径参数
 
-| 参数             | 类型   | 是否必需 | 描述                                                         |
-| :--------------- | :----- | :------- | :----------------------------------------------------------- |
-| `owner_username` | String | 是    | 好友列表所有者的用户 ID。                                     |
+| 参数             | 类型   | 是否必需 | 描述                      |
+| :--------------- | :----- | :------- | :------------------------ |
+| `owner_username` | String | 是       | 好友列表所有者的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数    | 类型   |是否必需 | 描述      |
-| :-------------- | :----- | :---------------- | :------- |
-| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-| `Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
 
@@ -252,10 +252,10 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型   | 描述                                 |
-| :-------| :-----| :----------------------------------- |
+| 字段    | 类型  | 描述                                    |
+| :------ | :---- | :-------------------------------------- |
 | `data`  | Array | 获取的好友列表，例如 "user1", "user2"。 |
-| `count`  | Int   | 好友数量。                     |
+| `count` | Int   | 好友数量。                              |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -268,7 +268,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET 'http://XXXX/XXXX/XXXX/users/user1/contacts/users' \
+curl -X GET 'https://XXXX/XXXX/XXXX/users/user1/contacts/users' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -277,12 +277,9 @@ curl -X GET 'http://XXXX/XXXX/XXXX/users/user1/contacts/users' \
 ```json
 {
   "action": "get",
-  "uri": "http://XXXX/XXXX/XXXX/users/user1/contacts/users",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/contacts/users",
   "entities": [],
-  "data": [
-    "user3",
-    "user2"
-  ],
+  "data": ["user3", "user2"],
   "timestamp": 1543819826513,
   "duration": 12,
   "count": 2
@@ -301,25 +298,25 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 #### 路径参数
 
-| 参数             | 类型   | 是否必需 | 描述              |
-| :--------------- | :----- | :------- | :------------------------------ |
-| `owner_username` | String | 是    | 当前用户的用户 ID。           |
+| 参数             | 类型   | 是否必需 | 描述                |
+| :--------------- | :----- | :------- | :------------------ |
+| `owner_username` | String | 是       | 当前用户的用户 ID。 |
 
 其他参数及描述详见[公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数    | 类型   | 是否必需<div style="width: 80px;"></div> | 描述      |
-| :-------------- | :----- | :---------------- | :------- |
-| `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。 |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-| `Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                 |
+| :-------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
+| `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### 请求 body
 
-| 参数        | 类型       | 是否必需 | 描述                 |
-| :---------- | :--------- | :------- | :----------------------------- |
-| `usernames` | Array | 是    | 要加入黑名单的用户 ID，例如 ["user1", "user2"]。 |
+| 参数        | 类型  | 是否必需 | 描述                                             |
+| :---------- | :---- | :------- | :----------------------------------------------- |
+| `usernames` | Array | 是       | 要加入黑名单的用户 ID，例如 ["user1", "user2"]。 |
 
 ### HTTP 响应
 
@@ -327,9 +324,9 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段    | 类型      | 描述                                                         |
-| :------------ | :------------- | :---------------------------------- |
-| `data`        | Array   | 添加至黑名单的用户 ID。         |
+| 字段   | 类型  | 描述                    |
+| :----- | :---- | :---------------------- |
+| `data` | Array | 添加至黑名单的用户 ID。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -346,7 +343,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
    "usernames": [
      "user2"
    ]
- }' 'http://XXXX/XXXX/XXXX/users/user1/blocks/users'
+ }' 'https://XXXX/XXXX/XXXX/users/user1/blocks/users'
 ```
 
 #### 响应示例
@@ -357,9 +354,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
   "application": "8bXXXX402",
   "uri": "https://XXXX.com/XXXX/testapp",
   "entities": [],
-  "data": [
-    "user2"
-  ],
+  "data": ["user2"],
   "timestamp": 1542600372046,
   "duration": 11,
   "organization": "XXXX",
@@ -379,18 +374,18 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 #### 路径参数
 
-| 参数             | 类型   | 是否必需 | 描述      |
-| :--------------- | :----- | :------- | :---------------- |
-| `owner_username` | String | 是    | 当前用户的用户 ID。                     |
+| 参数             | 类型   | 是否必需 | 描述                |
+| :--------------- | :----- | :------- | :------------------ |
+| `owner_username` | String | 是       | 当前用户的用户 ID。 |
 
 其他参数及描述详见[公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
-| :-------------- | :----- | :---------------- | :------- |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                 |
+| :-------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
+| `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
 
@@ -398,10 +393,10 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段       | 类型    | 描述                                   |
-| :---------| :------ | :------------------------------------- |
-| `data` | Array | 获取的黑名单列表，例如 ["user1", "user2"]。 |
-| `count`    | Int | 黑名单上用户的数量。                       |
+| 字段    | 类型  | 描述                                        |
+| :------ | :---- | :------------------------------------------ |
+| `data`  | Array | 获取的黑名单列表，例如 ["user1", "user2"]。 |
+| `count` | Int   | 黑名单上用户的数量。                        |
 
 其他字段及描述详见[公共参数](#公共参数)。
 
@@ -414,7 +409,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/blocks/users'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/blocks/users'
 ```
 
 #### 响应示例
@@ -422,11 +417,9 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "uri": "http://XXXX/XXXX/XXXX/users/user1/blocks/users",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/blocks/users",
   "entities": [],
-  "data": [
-    "user2"
-  ],
+  "data": ["user2"],
   "timestamp": 1542599978751,
   "duration": 4,
   "count": 1
@@ -436,8 +429,10 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ## 从黑名单中移除用户
 
 从用户的黑名单中移除用户：
+
 - 将好友从黑名单中移除后，恢复好友关系，可以正常收发消息；
 - 将非好友从黑名单中移除后，恢复到未添加好友的状态。
+
 ### HTTP 请求
 
 ```http
@@ -446,19 +441,19 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 #### 路径参数
 
-| 参数               | 类型   | 是否必需 | 描述              |
-| :----------------- | :----- | :------- | :------------------------ |
-| `owner_username`   | String | 是    | 当前用户的用户 ID。                 |
-| `blocked_username` | String | 是    | 要移出黑名单的用户 ID。                |
+| 参数               | 类型   | 是否必需 | 描述                    |
+| :----------------- | :----- | :------- | :---------------------- |
+| `owner_username`   | String | 是       | 当前用户的用户 ID。     |
+| `blocked_username` | String | 是       | 要移出黑名单的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数    | 类型   |是否必需<div style="width: 80px;"></div> | 描述      |
-| :-------------- | :----- | :---------------- | :------- |
-| `Accept`   | String | 是    |内容类型。请填 `application/json`。 |
-|`Authorization`| String | 是    |App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。|
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                 |
+| :-------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
+| `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
 
@@ -466,16 +461,16 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数           | 类型   | 描述                                                         |
-| :----------- | :------ | :---------------------------------------------- |
-| `entities`       | JSON Array  | 从黑名单中移除的用户的详细信息。                             |
-| `entities.uuid`        | String     | 用户在系统内的唯一标识。系统自动生成，开发者无需关心。       |
-| `entities.type`          | String   | 对象类型，值为 `user`。         |
-| `entities.created`         | Long  | 用户创建时间，Unix 时间戳，单位为毫秒。                      |
-| `entities.modified`       | Long     | 用户信息如密码或昵称等的最新修改时间，Unix 时间戳，单位为毫秒。 |
-| `entities.username`       | String  | 被移出黑名单的用户 ID。         |
-| `entities.activated`      | Bool   | 用户是否为正常状态：<br/> • `true` 该用户为正常状态。<br/> • `false` 该用户为封禁状态。 |
-| `entities.nickname`      | String   | 被移出黑名单的用户的昵称。               |
+| 参数                 | 类型       | 描述                                                                                    |
+| :------------------- | :--------- | :-------------------------------------------------------------------------------------- |
+| `entities`           | JSON Array | 从黑名单中移除的用户的详细信息。                                                        |
+| `entities.uuid`      | String     | 用户在系统内的唯一标识。系统自动生成，开发者无需关心。                                  |
+| `entities.type`      | String     | 对象类型，值为 `user`。                                                                 |
+| `entities.created`   | Long       | 用户创建时间，Unix 时间戳，单位为毫秒。                                                 |
+| `entities.modified`  | Long       | 用户信息如密码或昵称等的最新修改时间，Unix 时间戳，单位为毫秒。                         |
+| `entities.username`  | String     | 被移出黑名单的用户 ID。                                                                 |
+| `entities.activated` | Bool       | 用户是否为正常状态：<br/> • `true` 该用户为正常状态。<br/> • `false` 该用户为封禁状态。 |
+| `entities.nickname`  | String     | 被移出黑名单的用户的昵称。                                                              |
 
 其他字段及描述详见[公共参数](#公共参数)。
 
@@ -488,7 +483,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/blocks/users/user2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/blocks/users/user2'
 ```
 
 #### 响应示例

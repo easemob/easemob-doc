@@ -14,7 +14,7 @@
 
 单聊消息送达回执：
 
-1. SDK 初始化时，用户将 [`Connection` 类中的 `delivery` 参数](http://docs-im-beta.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true` 开启消息送达回执。
+1. SDK 初始化时，用户将 [`Connection` 类中的 `delivery` 参数](https://docs-im-beta.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true` 开启消息送达回执。
 2. 发送方发送一条消息。
 3. 接收方收到消息后，SDK 会自动向发送方发送送达回执。
 4. 发送方通过监听 `onDeliveredMessage` 收到送达回执。
@@ -38,7 +38,6 @@
 - 已经集成和初始化环信 IM SDK，并实现了注册账号和登录功能。详情请参见 [快速开始](quickstart.html)。
 - 了解 [使用限制](/product/limitation.html) 中的 API 调用频率限制。
 - 群消息已读回执功能仅在环信 IM 旗舰版及以上版本支持该功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
-
 
 ## 实现方法
 

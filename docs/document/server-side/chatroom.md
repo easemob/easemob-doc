@@ -148,7 +148,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX//chatrooms/super_admin'
   "entities": [],
   "organization": "XXXX",
   "timestamp": 1656488117703,
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/super_admin"
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/super_admin"
 }
 ```
 
@@ -210,7 +210,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pages
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
+curl -X GET https://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -223,7 +223,7 @@ curl -X GET http://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H 
     "pagesize": ["2"],
     "pagenum": ["2"]
   },
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/super_admin",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/super_admin",
   "entities": [],
   "data": ["hXXXX1", "hXXXX11", "hXXXX10"],
   "timestamp": 1596187292391,
@@ -301,7 +301,7 @@ curl --location --request DELETE 'https://XXXX/XXXX/XXXX/chatrooms/super_admin/X
   "organization": "XXXX",
   "properties": {},
   "timestamp": 1656488154100,
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX"
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX"
 }
 ```
 
@@ -365,7 +365,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl --location --request GET 'http://XXXX/XXXX/XXXX/chatrooms?limit=10' \
+curl --location --request GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
 --header 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -425,7 +425,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/users/user1/joined_chatrooms'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/joined_chatrooms'
 ```
 
 ##### 响应示例
@@ -496,7 +496,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
 ```
 
 ##### 响应示例
@@ -589,7 +589,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
    "members": [
      "user2"
    ]
- }' 'http://XXXX/XXXX/XXXX/chatrooms'
+ }' 'https://XXXX/XXXX/XXXX/chatrooms'
 ```
 
 ##### 响应示例
@@ -661,7 +661,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
    "name": "testchatroom",
    "description": "test",
    "maxusers": 300
- }' 'http://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
+ }' 'https://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
 ```
 
 ##### 响应示例
@@ -723,7 +723,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
 ```
 
 ##### 响应示例
@@ -732,7 +732,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 {
   "action": "delete",
   "application": "8beXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/662XXXX13",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/662XXXX13",
   "entities": [],
   "data": {
     "success": true,
@@ -790,7 +790,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement'
+curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement'
 ```
 
 ##### 响应示例
@@ -799,7 +799,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 {
   "action": "get",
   "application": "52XXXXf0",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement",
   "entities": [],
   "data": {
     "announcement": "XXXX."
@@ -861,7 +861,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement' -d '{"announcement" : "聊天室公告…"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement' -d '{"announcement" : "聊天室公告…"}'
 ```
 
 ##### 响应示例
@@ -870,7 +870,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "post",
   "application": "52XXXXf0",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement",
   "entities": [],
   "data": {
     "id": "12XXXX11",
@@ -940,7 +940,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 				"key2": "value2"
     },
     "autoDelete": "DELETE"
- }' 'http://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1'
+ }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1'
 ```
 
 ##### 响应示例
@@ -1005,7 +1005,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}
 
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "keys": ["key1","key2"]
- }' 'http://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13'
+ }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13'
 ```
 
 ##### 响应示例
@@ -1073,7 +1073,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 
 DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "keys": ["key1","key2"]
- }' 'http://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1'
+ }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1'
 ```
 
 ##### 响应示例
@@ -1144,7 +1144,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 		"key2": "value2"
     },
     "autoDelete": "DELETE"
- }' 'http://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1/forced'
+ }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1/forced'
 ```
 
 ##### 响应示例
@@ -1212,7 +1212,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 
 DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "keys": ["key1","key2"]
- }' 'http://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1/forced'
+ }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1/forced'
 ```
 
 ##### 响应示例
@@ -1278,7 +1278,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?pagenum={
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
+curl -X GET https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -1291,7 +1291,7 @@ curl -X GET http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users?pagenum=2&pagesize=2 
     "pagesize": ["2"],
     "pagenum": ["2"]
   },
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users",
   "entities": [],
   "data": [
     {
@@ -1355,7 +1355,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1'
 ```
 
 ##### 响应示例
@@ -1364,7 +1364,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "post",
   "application": "8beXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1",
   "entities": [],
   "data": {
     "result": true,
@@ -1434,7 +1434,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
    "usernames": [
      "user1","user2"
    ]
- }' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users'
+ }' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users'
 ```
 
 ##### 响应示例
@@ -1443,7 +1443,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "post",
   "application": "8beXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users",
   "entities": [],
   "data": {
     "newmembers": ["user1", "user2"],
@@ -1502,7 +1502,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1'
 ```
 
 ##### 响应示例
@@ -1511,7 +1511,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 {
   "action": "delete",
   "application": "8beXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1",
   "entities": [],
   "data": {
     "result": true,
@@ -1576,7 +1576,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1%2Cuser2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1%2Cuser2'
 ```
 
 ##### 响应示例
@@ -1585,7 +1585,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 {
   "action": "delete",
   "application": "8beXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1%2Cuser2",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1%2Cuser2",
   "entities": [],
   "data": [
     {
@@ -1651,7 +1651,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -H 'Authorization: Bearer <YourAppToken>'
+curl -X GET https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -1660,7 +1660,7 @@ curl -X GET http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -H 'Authorization: Be
 {
   "action": "get",
   "application": "52XXXXf0",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin",
   "entities": [],
   "data": ["user1"],
   "timestamp": 1489073361210,
@@ -1721,7 +1721,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -d '{"newadmin":"user1"}' -H 'Authorization: Bearer <YourAppToken>'
+curl -X POST https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -d '{"newadmin":"user1"}' -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -1730,7 +1730,7 @@ curl -X POST http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -d '{"newadmin":"use
 {
   "action": "post",
   "application": "52XXXXf0",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin",
   "entities": [],
   "data": {
     "result": "success",
@@ -1790,7 +1790,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin/{oldad
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin/user1 -H 'Authorization: Bearer <YourAppToken>'
+curl -X DELETE https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin/user1 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -1799,7 +1799,7 @@ curl -X DELETE http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin/user1 -H 'Authoriz
 {
   "action": "delete",
   "application": "52XXXXf0",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin/user1",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin/user1",
   "entities": [],
   "data": {
     "result": "success",
@@ -1858,7 +1858,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users'
 ```
 
 ##### 响应示例
@@ -1867,7 +1867,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 {
   "action": "get",
   "application": "8beXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users",
   "entities": [],
   "data": ["user2", "user3"],
   "timestamp": 1543466293681,
@@ -1926,7 +1926,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1'
 ```
 
 ##### 响应示例
@@ -1935,7 +1935,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "post",
   "application": "8beXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1",
   "entities": [],
   "data": {
     "result": true,
@@ -2008,7 +2008,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
    "usernames": [
      "user3","user4"
- }' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users'
+ }' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users'
 ```
 
 ##### 响应示例
@@ -2017,7 +2017,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "post",
   "application": "8beXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users",
   "entities": [],
   "data": [
     {
@@ -2086,7 +2086,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1'
 ```
 
 ##### 响应示例
@@ -2095,7 +2095,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 {
   "action": "delete",
   "application": "8beXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1",
   "entities": [],
   "data": {
     "result": true,
@@ -2159,7 +2159,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1%2Cuser2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1%2Cuser2'
 ```
 
 ##### 响应示例
@@ -2168,7 +2168,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 {
   "action": "delete",
   "application": "8beXXXX02",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1%2Cuser2",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/blocks/users/user1%2Cuser2",
   "entities": [],
   "data": [
     {
@@ -2239,7 +2239,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users'
 ```
 
 ##### 响应示例
@@ -2248,7 +2248,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 {
   "action": "get",
   "application": "5cXXXX75d",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users",
   "entities": [],
   "data": ["wzy_test", "wzy_vivo", "wzy_huawei", "wzy_xiaomi", "wzy_meizu"],
   "timestamp": 1594724947117,
@@ -2304,7 +2304,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{u
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/{66XXXX33}/white/users/{username}'
+curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/{66XXXX33}/white/users/{username}'
 ```
 
 ##### 响应示例
@@ -2313,7 +2313,7 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 {
   "action": "post",
   "application": "5cXXXX75d",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users/wzy_xiaomi",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users/wzy_xiaomi",
   "entities": [],
   "data": {
     "result": true,
@@ -2383,7 +2383,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"usernames" : ["user1"]}' 'http://XXXX/XXXX/XXXX/chatrooms/{chatroomid}/white/users'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"usernames" : ["user1"]}' 'https://XXXX/XXXX/XXXX/chatrooms/{chatroomid}/white/users'
 ```
 
 ##### 响应示例
@@ -2392,7 +2392,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "post",
   "application": "5cXXXX75d",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users",
   "entities": [],
   "data": [
     {
@@ -2460,7 +2460,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/{66XXXX33}/white/users/{username}'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/{66XXXX33}/white/users/{username}'
 ```
 
 ##### 响应示例
@@ -2469,7 +2469,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 {
   "action": "delete",
   "application": "5cXXXX75d",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users/wzy_huawei,wzy_meizu",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/white/users/wzy_huawei,wzy_meizu",
   "entities": [],
   "data": [
     {
@@ -2547,7 +2547,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -H 'Authorization: Bea
 {
   "action": "get",
   "application": "52XXXXf0",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute",
   "entities": [],
   "data": [
     {
@@ -2625,7 +2625,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
         "user2"
     ],
     "mute_duration": 86400000
-}'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute'
+}'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute'
 ```
 
 ##### 响应示例
@@ -2634,7 +2634,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "post",
   "application": "52XXXXf0",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute",
   "entities": [],
   "data": [
     {
@@ -2700,7 +2700,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban'
 ```
 
 ##### 响应示例
@@ -2709,7 +2709,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "put",
   "application": "5cXXXX75d",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban",
   "entities": [],
   "data": {
     "mute": true
@@ -2776,7 +2776,7 @@ curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute/user1  -H 'Authoriz
 {
   "action": "delete",
   "application": "52XXXXf0",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute/user1",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute/user1",
   "entities": [],
   "data": [
     {
@@ -2834,7 +2834,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/ban
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban'
+curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban'
 ```
 
 ##### 响应示例
@@ -2843,7 +2843,7 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json'
 {
   "action": "delete",
   "application": "5cXXXX75d",
-  "uri": "http://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban",
+  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/ban",
   "entities": [],
   "data": {
     "mute": false

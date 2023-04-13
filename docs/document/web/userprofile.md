@@ -9,19 +9,22 @@
 本文介绍如何管理用户属性，包括设置、更新、存储并获取用户的相关信息。
 
 :::notice
+
 - 用户属性存储在环信服务器。如果你有安全方面的顾虑，环信建议你自行管理用户属性。
 - 为保证信息安全，app 用户只能修改自己的用户属性。只有 app 管理员可以修改其他用户的用户属性。
-:::
+  :::
 
 ## 技术原理
 
 环信即时通讯 IM Web SDK 支持你通过调用 API 实现如下功能：
+
 - 设置或修改用户属性。
 - 获取指定用户的用户属性。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
+
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
@@ -35,47 +38,47 @@
 
 当前用户设置自己的所有属性或者仅设置一项指定属性。
 
-
 参考如下示例代码，设置所有用户属性：
 
 ```javascript
 let option = {
-    nickname: 'The nickname',
-    avatarurl: 'http://avatarurl',
-    mail: '123@qq.com',
-    phone: '16888888888',
-    gender: 'female',
-    birth: '2000-01-01',
-    sign: 'a sign',
-    ext: JSON.stringify({
-      nationality: 'China',
-      merit: 'Hello, world！'
-    })
-}
+  nickname: "The nickname",
+  avatarurl: "https://avatarurl",
+  mail: "123@qq.com",
+  phone: "16888888888",
+  gender: "female",
+  birth: "2000-01-01",
+  sign: "a sign",
+  ext: JSON.stringify({
+    nationality: "China",
+    merit: "Hello, world！",
+  }),
+};
 conn.updateUserInfo(option).then((res) => {
-    console.log(res)
-})      
+  console.log(res);
+});
 ```
+
 参考如下示例代码，设置指定用户属性，例如昵称：
 
 ```javascript
-conn.updateUserInfo('nickname', 'Your nickname').then((res) => {
-    console.log(res)
-})
+conn.updateUserInfo("nickname", "Your nickname").then((res) => {
+  console.log(res);
+});
 ```
 
 若[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
 
-| 字段        | 类型   | 备注                                                         |
-| :---------- | :----- | :----------------------------------------------------------- |
-| `nickname`  | String | 用户昵称。长度在 64 字符内。                                 |
-| `avatarurl` | String | 用户头像 URL 地址。长度在 256 字符内。                       |
-| `phone`     | String | 用户联系方式。长度在 32 字符内。                             |
-| `mail`      | String | 用户邮箱。长度在 64 字符内。                                 |
+| 字段        | 类型   | 备注                                                                                               |
+| :---------- | :----- | :------------------------------------------------------------------------------------------------- |
+| `nickname`  | String | 用户昵称。长度在 64 字符内。                                                                       |
+| `avatarurl` | String | 用户头像 URL 地址。长度在 256 字符内。                                                             |
+| `phone`     | String | 用户联系方式。长度在 32 字符内。                                                                   |
+| `mail`      | String | 用户邮箱。长度在 64 字符内。                                                                       |
 | `gender`    | Number | 用户性别。 <br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
-| `sign`      | String | 用户签名。长度在 256 字符内。                                |
-| `birth`     | String | 用户生日。长度在 64 字符内。                                 |
-| `ext`       | String | 扩展字段。                                                   |
+| `sign`      | String | 用户签名。长度在 256 字符内。                                                                      |
+| `birth`     | String | 用户生日。长度在 64 字符内。                                                                       |
+| `ext`       | String | 扩展字段。                                                                                         |
 
 ### 获取用户属性
 
@@ -87,10 +90,10 @@ conn.updateUserInfo('nickname', 'Your nickname').then((res) => {
 /**
  * @param {String|Array} users 用户 ID。可设置一个用户 ID，也可通过数组形式设置多个。
  */
-let users = 'user1' || ['user1', 'user2']
+let users = "user1" || ["user1", "user2"];
 conn.fetchUserInfoById(users).then((res) => {
-    console.log(res)
-})
+  console.log(res);
+});
 ```
 
 参考以下示例代码获取用户的指定属性。
@@ -100,13 +103,16 @@ conn.fetchUserInfoById(users).then((res) => {
  * @param {String|Array} users 用户 ID。可设置一个用户 ID，也可通过数组形式设置多个。
  * @param {String|Array} properties 查询的用户属性。
  */
-conn.fetchUserInfoById('userId', 'nickname').then((res) => {
-    console.log(res)
-})
+conn.fetchUserInfoById("userId", "nickname").then((res) => {
+  console.log(res);
+});
 
 // 同时查询多个用户属性。
-conn.fetchUserInfoById(['user1', 'user2'], ['nickname', 'avatarurl']).then((res) => { console.log(res)
-})
+conn
+  .fetchUserInfoById(["user1", "user2"], ["nickname", "avatarurl"])
+  .then((res) => {
+    console.log(res);
+  });
 ```
 
 ## 更多功能
@@ -133,37 +139,39 @@ conn.fetchUserInfoById(['user1', 'user2'], ['nickname', 'avatarurl']).then((res)
 参考以下示例代码创建和发送名片消息：
 
 ```javascript
-
 // 将自定义事件类型设置为 `userCard`。
 let customEvent = "userCard";
 // 通过 `customExts` 将这些属性设置为自定义消息的扩展信息。
 let customExts = {
-    nickname: "昵称",
-    avatarurl: "http://avatarurl",
-    mail: "123@qq.com",
-    phone: "16888888888",
-    gender: "female",
-    birth: "2000-01-01",
-    sign: "a sign",
+  nickname: "昵称",
+  avatarurl: "https://avatarurl",
+  mail: "123@qq.com",
+  phone: "16888888888",
+  gender: "female",
+  birth: "2000-01-01",
+  sign: "a sign",
 };
 let option = {
-    // 设置消息类型。
-    type: "custom",
-    // 设置消息接收方。
-    to: "username",
-    // 设置消息事件。
-    customEvent,
-    // 设置消息内容。
-    customExts,
-    chatType: "singleChat"
-}
+  // 设置消息类型。
+  type: "custom",
+  // 设置消息接收方。
+  to: "username",
+  // 设置消息事件。
+  customEvent,
+  // 设置消息内容。
+  customExts,
+  chatType: "singleChat",
+};
 // 创建自定义消息。
 let msg = WebIM.message.create(option);
-conn.send(msg).then((res)=>{
-    console.log('Success')
-}).catch((e)=>{
-    console.log('Fail')
-});
+conn
+  .send(msg)
+  .then((res) => {
+    console.log("Success");
+  })
+  .catch((e) => {
+    console.log("Fail");
+  });
 ```
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中添加更多字段。

@@ -8,7 +8,7 @@
 
 - [IM SDK] 新增 [群成员自定义属性功能](group_members.html#管理群成员的自定义属性)并增加[自定义属性更新事件](group_manage.html#监听群组事件)实现群成员设置和获取在群组中的昵称和头像等属性。
 - [IM SDK] 新增 `EMMessage#deliverOnlineOnly` 和 `EMMessage#isDeliverOnlineOnly` 方法实现发消息只投递给在线用户。若开启了该功能，用户离线时消息不投递。
-- [IM Demo] 新增群成员昵称修改与展示功能。 
+- [IM Demo] 新增群成员昵称修改与展示功能。
 
 ### 优化
 
@@ -80,8 +80,8 @@
 
 ### 修复
 
-- [IM SDK] 修复数据统计不正确的问题。  
-- [IM SDK] 修复极少数场景下打印日志导致崩溃的问题。    
+- [IM SDK] 修复数据统计不正确的问题。
+- [IM SDK] 修复极少数场景下打印日志导致崩溃的问题。
 - [IM SDK] 修复开启全链路加入（FPA）功能时导致崩溃的问题。
 - [IM SDK] 修复聊天室自定义属性部分设置失败时，返回的错误码为字符串类型（修改为 Int 类型）的问题。
 
@@ -93,9 +93,9 @@
 
 ### 优化
 
-- [IM SDK] 优化聊天室自定义属性更新的回调方法 `onAttributesUpdate`，返回修改成功的聊天室自定义属性的集合。 
+- [IM SDK] 优化聊天室自定义属性更新的回调方法 `onAttributesUpdate`，返回修改成功的聊天室自定义属性的集合。
 - [IM SDK] 优化聊天室自定义属性移除的回调方法 `onAttributesRemoved`，返回成功移除的聊天室自定义属性的 key 数组。
-- [IMKit]  语音播放切换至媒体音量。
+- [IMKit] 语音播放切换至媒体音量。
 
 ## 版本 V3.9.6 Dev 2022-9-16（开发版）
 
@@ -112,17 +112,17 @@
 
 ### 修复
 
-- [IM SDK] 修复少数场景下，同步或拉取消息时消息量较大时收取失败的问题。 
+- [IM SDK] 修复少数场景下，同步或拉取消息时消息量较大时收取失败的问题。
 - [Demo] 修复部分 Demo bug。
 
 ## 版本 V3.9.5 2022-8-2
 
 ### 新增特性:
 
-- [IM SDK] 新增群组详情中群组禁用状态：[EMGroup#isDisabled()](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html#acd072d7fc16e6ff89110173979ed318b) 属性，该属性需要开发者在服务端设置；
+- [IM SDK] 新增群组详情中群组禁用状态：[EMGroup#isDisabled()](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html#acd072d7fc16e6ff89110173979ed318b) 属性，该属性需要开发者在服务端设置；
 - [IM SDK] 优化遇到连接问题时更新接入点的策略，增强可用性；
 - [IM SDK] [发送前回调](/document/server-side/callback.html#_1、发送前回调)：发送失败时返回给 app 用户的错误描述中增加你自定义的错误信息（即 [响应体参数](/document/server-side/callback.html#响应体参数) code 信息）。
-- [IM SDK] 在 [EMError](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 中新增错误码 1101：[EMError#PRESENCE_CANNOT_SUBSCRIBE_YOURSELF](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#abc9130b164d5cccb3559585ec38e8e99)，用来提示用户不能订阅自己的在线状态。
+- [IM SDK] 在 [EMError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 中新增错误码 1101：[EMError#PRESENCE_CANNOT_SUBSCRIBE_YOURSELF](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#abc9130b164d5cccb3559585ec38e8e99)，用来提示用户不能订阅自己的在线状态。
 
 ### 优化：
 
@@ -132,21 +132,21 @@
 
 修复：
 
-- [IM SDK] 修复 [EMConversation#getAllMessage](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html#a5482db46052c03f30de813e31ab607c1) 方法没有去重的问题；
+- [IM SDK] 修复 [EMConversation#getAllMessage](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html#a5482db46052c03f30de813e31ab607c1) 方法没有去重的问题；
 - [IM SDK] 修复密码登录时偶现崩溃的问题。
 
 ## 版本 V3.9.4 2022-6-16
 
 ### 新增特性:
 
-- [IM SDK] 在 [EMMessage](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message.html#acda7d83054f842b5208496370a9decaa) 中添加 `isOnlineState` 字段，用来标记接收到的消息是否为离线消息。
-- [IM SDK] 在 [EMError](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#aa61ecbf9d24db24d0d852f6f631560f4) 类中添加错误码 509 `MESSAGE_CURRENT_LIMITING`，表示群聊消息已被限流。
-- [IM SDK] 在 [EMPushManager](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_push_manager.html#a3c49e8245c25954b2cc1a13e93b57e0f) 中新增 `bindDeviceToken` 方法，用于绑定设备 Token。
+- [IM SDK] 在 [EMMessage](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message.html#acda7d83054f842b5208496370a9decaa) 中添加 `isOnlineState` 字段，用来标记接收到的消息是否为离线消息。
+- [IM SDK] 在 [EMError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#aa61ecbf9d24db24d0d852f6f631560f4) 类中添加错误码 509 `MESSAGE_CURRENT_LIMITING`，表示群聊消息已被限流。
+- [IM SDK] 在 [EMPushManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_push_manager.html#a3c49e8245c25954b2cc1a13e93b57e0f) 中新增 `bindDeviceToken` 方法，用于绑定设备 Token。
 
 ### 优化：
 
 - [IM SDK] 优化子区相关接口及属性；对比 3.9.3 版本，用 `EMChatThread` 替换 `EMChatThreadInfo`，`EMChatThreadEvent` 中用 `EMChatThread` 对象替换 Chat Thread 相关属性；
-- [IM SDK] 群邀请回调 [EMGroupChangeListener#onInvitationReceived](http://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_group_change_listener.html#ab3591c00dc3f5b4138fa57073cc29589) 中新增 群名称（groupName） 参数值；
+- [IM SDK] 群邀请回调 [EMGroupChangeListener#onInvitationReceived](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_group_change_listener.html#ab3591c00dc3f5b4138fa57073cc29589) 中新增 群名称（groupName） 参数值；
 - [IM SDK] 移除平台层 CBC 及 ECB 加密算法；
 - [IM SDK] 升级网络链路库；
 - [IM SDK] 支持发送设置附件地址为远程地址的消息。
@@ -219,7 +219,7 @@
 
 ### 新增特性
 
-- [IM SDK] [EaseIMKIt] 增加 [单向删除服务端会话 API](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html#a345e81b9caf2658c8796855fe63fe752)；
+- [IM SDK] [EaseIMKIt] 增加 [单向删除服务端会话 API](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html#a345e81b9caf2658c8796855fe63fe752)；
 - [IM SDK] Push 平台增加推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，见 [Android 推送集成](https://docs-im.easemob.com/push/apppush/androidsdk)；
 - [IM SDK] 增加非好友不能发送消息错误码 [221 USER_NOT_ON_ROSTER]；
 - [IM SDK] [EaseIMKIt] 增加通过 REST 接口撤回消息功能。
@@ -443,8 +443,8 @@
 
 ### 注意
 
-- **为提供更好的服务，从3.8.0开始SDK中不再提供音视频功能，而是在EaseCallKit中基于声网的SDK给出了音视频功能的参考实现。该方案呼叫功能不能与之前版本之间互通，请根据情况选择使用新方案或者继续使用之前的版本**
-- EaseCallKit除了可以远程库外，也公布了源码，详情请见：[EaseCallKit 使用指南](http://docs-im.easemob.com/im/android/other/easecallkit);
+- **为提供更好的服务，从 3.8.0 开始 SDK 中不再提供音视频功能，而是在 EaseCallKit 中基于声网的 SDK 给出了音视频功能的参考实现。该方案呼叫功能不能与之前版本之间互通，请根据情况选择使用新方案或者继续使用之前的版本**
+- EaseCallKit 除了可以远程库外，也公布了源码，详情请见：[EaseCallKit 使用指南](https://docs-im.easemob.com/im/android/other/easecallkit);
 
 ## 版本 V3.7.6 2021-09-17
 
@@ -529,7 +529,7 @@
 - 修复偶现的 ExecutorService 空指针问题;
 - 修改添加群成员，邀请文案描述只能是 “welcome” 的问题；
 - 修复 setHostnameVerifier 的安全隐患；
-- 修复 Android API 21以下（不包括 21）delete 请求出现异常的问题；
+- 修复 Android API 21 以下（不包括 21）delete 请求出现异常的问题；
 - 对 Emclient 中的 getCurrentUser 方法增加同步锁，修复偶现的 crash 问题。
 
 ## 版本 V3.7.1 2020-08-27
@@ -553,7 +553,7 @@
 
 ### 新功能：
 
-- 实现 RTC 质量监控，上报RTC质量数据；
+- 实现 RTC 质量监控，上报 RTC 质量数据；
 - 增加纯音频推流功能,可设置音频参数；
 - 增加多人推流到 CDN 接口的 API；
 - 增加推流到 CDN 自定义录制接口的 API；
@@ -600,49 +600,49 @@
 
 更新：
 
-- 适配AndroidQ(支持上传附件通过Uri，具体用法请参考[发送消息](https://docs-im.easemob.com/im/android/basics/message))；
-- 移除apache jar包；
+- 适配 AndroidQ(支持上传附件通过 Uri，具体用法请参考[发送消息](https://docs-im.easemob.com/im/android/basics/message))；
+- 移除 apache jar 包；
 
 修复：
 
 - 修复群组发起音视频会议无法邀请管理员的问题；
 
-**注意：配合SDK适配AndroidQ，EaseUi库进行了相应的适配。如果SDK升级到此版本之后，需要对依赖的EaseUi库进行更新。**
+**注意：配合 SDK 适配 AndroidQ，EaseUi 库进行了相应的适配。如果 SDK 升级到此版本之后，需要对依赖的 EaseUi 库进行更新。**
 
 ## 版本 V3.6.7 2020-05-15
 
 新功能：
 
 - 支持集群代理功能；
-- SDK实现上下麦api；
-- SDK实现静音管理功能；
-- SDK支持推流CDN功能；
-- SDK支持推流CDN更新布局功能；
-- 外部输入视频支持NV12格式；
-- demo中音视频会议只使用普通模式；
+- SDK 实现上下麦 api；
+- SDK 实现静音管理功能；
+- SDK 支持推流 CDN 功能；
+- SDK 支持推流 CDN 更新布局功能；
+- 外部输入视频支持 NV12 格式；
+- demo 中音视频会议只使用普通模式；
 
 更新：
 
 - 修复视频最小码率不起作用的问题；
-- 修复了Android 和 IOS 1V1 视频，安卓切换大小屏时候，对端显示镜像的问题；
-- 升级OPPO推送SDK到2.0.2版本。manifest等配置参见：消息推送→第三方推送集成→OPPO推送集成；
-- 兼容AndroidQ版本。
+- 修复了 Android 和 IOS 1V1 视频，安卓切换大小屏时候，对端显示镜像的问题；
+- 升级 OPPO 推送 SDK 到 2.0.2 版本。manifest 等配置参见：消息推送 → 第三方推送集成 →OPPO 推送集成；
+- 兼容 AndroidQ 版本。
 
 ## 版本 V3.6.6 2020-04-09
 
 新功能：
 
-- 音视频会议增加踢人api；
-- 音视频会议增加管理员转移api和回调；
-- 加入房间时支持设置最大主播人数，nickname和扩展。
-- 提高默认分辨率为480p；
-- 支持x86_64位so文件
+- 音视频会议增加踢人 api；
+- 音视频会议增加管理员转移 api 和回调；
+- 加入房间时支持设置最大主播人数，nickname 和扩展。
+- 提高默认分辨率为 480p；
+- 支持 x86_64 位 so 文件
 
 更新：
 
-- 修复1v1横屏时显示本地图像倒立的问题；
-- 修复3.6.5版本中安卓视频会议和小程序互通问题。
-- 修复连续两次调用unpublish()接口时crash的问题；
+- 修复 1v1 横屏时显示本地图像倒立的问题；
+- 修复 3.6.5 版本中安卓视频会议和小程序互通问题。
+- 修复连续两次调用 unpublish()接口时 crash 的问题；
 
 ## 版本 V3.6.5 2020-03-13
 
@@ -650,37 +650,37 @@
 
 - 支持群组聊天室白名单管理，全员禁言功能；
 - 支持用户自定义消息类型；
-- 增加创建白板和加入白板的api；
-- 增加视频会议joinRoom的api；
+- 增加创建白板和加入白板的 api；
+- 增加视频会议 joinRoom 的 api；
 - 添加对于对于加入音视频会议密码错误，或者主播已经满的错误提示；
-- 启用DTX功能，用户在静音时节约流量；
+- 启用 DTX 功能，用户在静音时节约流量；
 
 更新：
 
-- 修复live模式下只发布音频流时其他人无法收到声音的bug；
-- 修复视频fill 模式拉伸显示导致画面不正常的问题；
+- 修复 live 模式下只发布音频流时其他人无法收到声音的 bug；
+- 修复视频 fill 模式拉伸显示导致画面不正常的问题；
 
-**注意：该版本视频会议会有小程序端无法看到图像的bug，建议有互通需要的尽快升级最新版本。**
+**注意：该版本视频会议会有小程序端无法看到图像的 bug，建议有互通需要的尽快升级最新版本。**
 
 ## 版本 V3.6.4 2020-02-12
 
 新功能：
 
 - 支持设置视频流水印；
-- 创建会议api，增加参数支持小程序，默认为不支持；
+- 创建会议 api，增加参数支持小程序，默认为不支持；
 
 更新：
 
-- 修复加入音视频会议时与小程序互通的bug；
-- 解决通话时手机选择90度，本地view显示图像为倒立的问题；
-- 修复下麦时crash的问题；
+- 修复加入音视频会议时与小程序互通的 bug；
+- 解决通话时手机选择 90 度，本地 view 显示图像为倒立的问题；
+- 修复下麦时 crash 的问题；
 
 ## 版本 V3.6.3 2020-01-03
 
 新功能：
 
-- 支持外部输入音频api；
-- 支持设置私有部署的RTC 服务器api；
+- 支持外部输入音频 api；
+- 支持设置私有部署的 RTC 服务器 api；
 
 更新：
 
@@ -696,15 +696,15 @@
 
 更新：
 
-- 支持H264软编解码，提高音视频通话的兼容性；
-- 私有部署且未启用dns时，不尝试取服务器列表；
-- 添加音视频功能的一些关键log，方便排查问题；
+- 支持 H264 软编解码，提高音视频通话的兼容性；
+- 私有部署且未启用 dns 时，不尝试取服务器列表；
+- 添加音视频功能的一些关键 log，方便排查问题；
 
 修复：
 
 - 修复特定场景下密钥信息未正确保存的问题；
-- 修复网络变化时重连的bug；
-- 修复某些场景下码率限制未生效的bug；
+- 修复网络变化时重连的 bug；
+- 修复某些场景下码率限制未生效的 bug；
 
 ## 版本 V3.6.1 2019-07-20
 
@@ -712,41 +712,41 @@
 
 - 添加主播自己下麦的接口
 - 添加本地消息全局搜索的接口
-- 添加mute远端流的接口
+- 添加 mute 远端流的接口
 
 更新：
 
-- 改进SDK中加载动态库的方式
-- 去除不需要的libsqlcipher.so 减少SDK大小
-- 升级Easeui中glide库到4.x版本
+- 改进 SDK 中加载动态库的方式
+- 去除不需要的 libsqlcipher.so 减少 SDK 大小
+- 升级 Easeui 中 glide 库到 4.x 版本
 
 修复：
 
 - 修复通话状态回调不准确的问题
-- 修复App从后台回到前台时，部分设备上重建连接慢的问题
-- 修复音视频通话过程中某些场景下setRotation()不起作用的问题
+- 修复 App 从后台回到前台时，部分设备上重建连接慢的问题
+- 修复音视频通话过程中某些场景下 setRotation()不起作用的问题
 - 修复上传的文件大小超过限制提示慢问题
 
 ## 版本 V3.6.0.1 2019-06-21
 
 修复：
 
-- 修复通过gradle加载完整版SDK时，部分情况下发起多人会议失败的问题；
+- 修复通过 gradle 加载完整版 SDK 时，部分情况下发起多人会议失败的问题；
 
 ## 版本 V3.6.0 2019-05-28
 
 新功能：
 
-- 增加会议属性功能，可以方便使用音视频会议实现特定的一些场景，具体可以参见语聊demo；
-- 增加语音会议伴音功能，具体可以参见语聊demo；
+- 增加会议属性功能，可以方便使用音视频会议实现特定的一些场景，具体可以参见语聊 demo；
+- 增加语音会议伴音功能，具体可以参见语聊 demo；
 - 在附件过大时返回相应的错误码，在附件过期或不存在时，返回相应的错误码；
-- 发起通话和创建会议时添加参数，是否开启服务端的录制和录制时是否合并流，通过录制id可以在服务器端查询；
+- 发起通话和创建会议时添加参数，是否开启服务端的录制和录制时是否合并流，通过录制 id 可以在服务器端查询；
 - 支持自定义图片消息缩略图的大小；
 
 更新：
 
 - 升级音视频引擎，优化噪声消除，改进性能，减少建立通话的时间等；
-- 从3.6.0版本中暂时移除了端上的录制功能，移动端可通过SDK参数配置每个通话是否在服务器上录制，Web端如果也需要录制则需联系商务打开全端录制功能，该功能开启后优先级将高于SDK参数配置；
+- 从 3.6.0 版本中暂时移除了端上的录制功能，移动端可通过 SDK 参数配置每个通话是否在服务器上录制，Web 端如果也需要录制则需联系商务打开全端录制功能，该功能开启后优先级将高于 SDK 参数配置；
 - 优化批量消息保存方法，在批量保存后再给服务器确认消息，修复极端场景下消息未正确保存的问题；
 - 发起通话和创建会议时如果音视频服务未开通或者欠费，会返回相应的错误码；
 - 修改一对一视频中自定义本地视频数据接口;
@@ -757,35 +757,35 @@
 
 ## 版本 V3.5.6 2019-05-16
 
-- 修复接收消息存储过程中发生异常，导致消息不能正常存储的bug。
-- 使用gradle添加依赖时，请使用：api 'com.hyphenate:hyphenate-sdk:3.5.6.1'
+- 修复接收消息存储过程中发生异常，导致消息不能正常存储的 bug。
+- 使用 gradle 添加依赖时，请使用：api 'com.hyphenate:hyphenate-sdk:3.5.6.1'
 
 ## 版本 V3.5.5 2019-04-24
 
-- 新增EMStreamParam#setUsingExternalSource(boolean)接口,用于支持音视频会议模式下的EMConferenceManager#inputExternalVideoData()接口的使用;
-- 修复chrome 72+ 与Android设备 1v1 呼叫不通的问题;
-- 修复SDK中三方推送使用可能崩溃的问题;
-- 修复Demo层的一些bug；
+- 新增 EMStreamParam#setUsingExternalSource(boolean)接口,用于支持音视频会议模式下的 EMConferenceManager#inputExternalVideoData()接口的使用;
+- 修复 chrome 72+ 与 Android 设备 1v1 呼叫不通的问题;
+- 修复 SDK 中三方推送使用可能崩溃的问题;
+- 修复 Demo 层的一些 bug；
 
 ## 版本 V3.5.4 2019-03-26
 
 新功能：
 
-- 支持Oppo、Vivo、魅族推送，详情请见[第三方推送集成](http://docs-im.easemob.com/im/android/push/thirdpartypush)文档；
+- 支持 Oppo、Vivo、魅族推送，详情请见[第三方推送集成](https://docs-im.easemob.com/im/android/push/thirdpartypush)文档；
 
 优化：
 
-- 优化三方推送的集成使用接口，详情请见[第三方推送集成](http://docs-im.easemob.com/im/android/push/thirdpartypush)文档；
+- 优化三方推送的集成使用接口，详情请见[第三方推送集成](https://docs-im.easemob.com/im/android/push/thirdpartypush)文档；
 - 优化一些错误码返回值，错误原因更加具体；
 
 修复：
 
 - 修复个别情况下音视频通话接通失败的问题；
-- Demo层的一些bug；
+- Demo 层的一些 bug；
 
 **注意：**
 
-- 针对oppo推送，我们把Demo包名替换为了：com.hyphenate.chatuidemo.push。如果在环信Demo上测试Oppo推送，请自行修改Demo包名。
+- 针对 oppo 推送，我们把 Demo 包名替换为了：com.hyphenate.chatuidemo.push。如果在环信 Demo 上测试 Oppo 推送，请自行修改 Demo 包名。
 
 - `V3.5.4，在华为手机注册推送的时候会出现异常，该 Bug 在V3.5.5及之后的版本中已修复，这里建议未集成的用户或者已是V3.5.4的用户升级到更高的 SDK 版本。`
 
@@ -793,19 +793,19 @@
 
 修复：
 
-- 某些情况下使用含大写字母的id发消息失败的问题；
-- debug log不能关闭的问题；
-- 退出登录时仍然可以取到当前用户id的问题；
+- 某些情况下使用含大写字母的 id 发消息失败的问题；
+- debug log 不能关闭的问题；
+- 退出登录时仍然可以取到当前用户 id 的问题；
 - 某些场景下第二次加入音视频会议失败的问题；
 - 共享网络下不能拨打音视频通话的问题；
 - 自己给自己发送消息不能加载会话的问题；
-- Demo从设置中设置视频通话分辨率无效的问题;
+- Demo 从设置中设置视频通话分辨率无效的问题;
 
 优化：
 
-- sqlite升级至3.26.0
+- sqlite 升级至 3.26.0
 - 完善音视频通话逻辑，提高音视频呼叫接通率
-- 适配android 9.0
+- 适配 android 9.0
 
 ```
 目前，环信IM SDK和Demo已经全部适配至9.0，编译环境配置如下：
@@ -837,7 +837,7 @@
    distributionUrl=https\://services.gradle.org/distributions/gradle-4.6-all.zip
  - Android Support-Library 相关:
    'com.android.support:design:28.0.0-alpha1'
-   
+
  Tips：版本的更新会从Google相关网站下载相应版本的编译工具，可能需要科学上网哦
 ```
 
@@ -845,7 +845,7 @@
 
 新功能：
 
-- 移除IM SDK3.2.0及以前deprecated的方法。
+- 移除 IM SDK3.2.0 及以前 deprecated 的方法。
 
 ```
 api 变动如下, '-'代表deprecated api，'+'代表可替换的api
@@ -863,25 +863,25 @@ api 变动如下, '-'代表deprecated api，'+'代表可替换的api
 +  public String EMContact#getNickname();
 ```
 
-- 添加EMCallSurfaceView#setCoverImage(Bitmap bitmap)接口，在通过EMConferenceManager#updateLocalSurfaceView(EMCallSurfaceView)或者EMConferenceManager#updateRemoteSurfaceView(String, EMCallSurfaceView)设置该EMCallSurfaceView时，该view会在stream到来前显示该Bitmap。
+- 添加 EMCallSurfaceView#setCoverImage(Bitmap bitmap)接口，在通过 EMConferenceManager#updateLocalSurfaceView(EMCallSurfaceView)或者 EMConferenceManager#updateRemoteSurfaceView(String, EMCallSurfaceView)设置该 EMCallSurfaceView 时，该 view 会在 stream 到来前显示该 Bitmap。
 
 修复：
 
-- 音视频通话后可能导致内存泄露的bug；
-- 自动登录时无网络，导致获取自己在其他设备登录的id包含自己的bug；
-- 个别情况下，连接失败时更新服务器列表的bug;
-- 32位设备上EMMessage#setLocalTime(long serverTime)设置后获取为负数的bug；
+- 音视频通话后可能导致内存泄露的 bug；
+- 自动登录时无网络，导致获取自己在其他设备登录的 id 包含自己的 bug；
+- 个别情况下，连接失败时更新服务器列表的 bug;
+- 32 位设备上 EMMessage#setLocalTime(long serverTime)设置后获取为负数的 bug；
 
 ## 版本 V3.5.1 2018-09-13
 
 新功能：
 
 - 多人实时音视频添加动态修改最大视频码率接口 EMConferenceManager#updateVideoMaxKbps(int maxKbps)
-- 1v1实时音视频单独录制音频的功能 EMVideoCallHelper#startAudioRecord(String dirPath) 和 EMVideoCallHelper#stopAudioRecord()
+- 1v1 实时音视频单独录制音频的功能 EMVideoCallHelper#startAudioRecord(String dirPath) 和 EMVideoCallHelper#stopAudioRecord()
 
 修复：
 
-- Fix：Demo中实时音视频中接听普通电话的问题
+- Fix：Demo 中实时音视频中接听普通电话的问题
 
 优化：
 
@@ -891,7 +891,7 @@ api 变动如下, '-'代表deprecated api，'+'代表可替换的api
 
 新功能：
 
-- 为满足不同场景需求，3.5.0版本开始将实时音视频会议划分了不同的类型，不同类型对应了不同场景，使你能够轻松地将实时音视频功能集成到你的应用或者网站中。类型如下：
+- 为满足不同场景需求，3.5.0 版本开始将实时音视频会议划分了不同的类型，不同类型对应了不同场景，使你能够轻松地将实时音视频功能集成到你的应用或者网站中。类型如下：
 
 ```
    1. Communication：普通通信会议，最多支持参会者6人，会议里的每个参会者都可以自由说话和发布视频，该会议类型在服务器不做语音的再编码，音质最好，适用于远程医疗，在线客服等场景；
@@ -901,8 +901,8 @@ api 变动如下, '-'代表deprecated api，'+'代表可替换的api
 
 ## 版本 V3.4.3 2018-07-17
 
-1. 解决Android 7.0以上设备聊天中选择扩展功能中的'拍照'崩溃的问题
-2. 增加'只投递在线用户'消息属性，以节约消息量，目前只支持CMD类型消息。通过`EMCmdMessageBody#deliverOnlineOnly(true)`接口设置该属性
+1. 解决 Android 7.0 以上设备聊天中选择扩展功能中的'拍照'崩溃的问题
+2. 增加'只投递在线用户'消息属性，以节约消息量，目前只支持 CMD 类型消息。通过`EMCmdMessageBody#deliverOnlineOnly(true)`接口设置该属性
 
 ## 版本 V3.4.2 2018-06-19
 
@@ -914,17 +914,17 @@ api 变动如下, '-'代表deprecated api，'+'代表可替换的api
 
 修复：
 
-1. 修复移动端与chrome 端视频通话时不显示视频画面的bug；
+1. 修复移动端与 chrome 端视频通话时不显示视频画面的 bug；
 2. 解决极端情况下 Android 通话挂断崩溃的问题
 
 优化：
 
-1. 音视频会议实现新的UI；
-2. 优化设备同时有FCM和华为推送时的逻辑，使用`EMOption#setUseFCM()`接口
+1. 音视频会议实现新的 UI；
+2. 优化设备同时有 FCM 和华为推送时的逻辑，使用`EMOption#setUseFCM()`接口
 
-**EMOption#setUseFCM() 接口可以设置是否启用谷歌推送，无需再通过后台配置。默认为true，即如果用户手机上有google play service 且配置了FCM number则优先使用FCM推送，如果仅有国内用户，建议关闭该选项，详细可参考 demo 实现**
+**EMOption#setUseFCM() 接口可以设置是否启用谷歌推送，无需再通过后台配置。默认为 true，即如果用户手机上有 google play service 且配置了 FCM number 则优先使用 FCM 推送，如果仅有国内用户，建议关闭该选项，详细可参考 demo 实现**
 
-**请注意：为提供高质量且一致的音视频体验，从3.4.1版本开始，1v1 通话不再与3.1.5及以前版本兼容，请及时升级。**
+**请注意：为提供高质量且一致的音视频体验，从 3.4.1 版本开始，1v1 通话不再与 3.1.5 及以前版本兼容，请及时升级。**
 
 ## 版本 V3.4.1 2018-05-11
 
@@ -932,52 +932,52 @@ SDK:
 
 1. 修复安卓中会话消息未读数显示不准确的问题；
 2. 修复华为推送自动登录情况下有时不可用的问题；
-3. 修复app第一次安装运行,初始化过程有可能报nullpointer的问题；
-4. 尝试解决sendDeviceToServer()方法crash的问题；
+3. 修复 app 第一次安装运行,初始化过程有可能报 nullpointer 的问题；
+4. 尝试解决 sendDeviceToServer()方法 crash 的问题；
 5. 实现音视频弱网检测提示功能；
 6. 实现加群时填写验证消息功能；
 7. 提供聊天室断线时被踢出聊天室的提醒；
-8. 优化1v1 通话；
+8. 优化 1v1 通话；
 
 EaseUI:
 
 1. 更新消息发送逻辑,用于解决发送消息出现重复,顺序颠倒等问题.
 
-**请注意：为提供高质量且一致的音视频体验，从3.4.1版本开始，1v1 通话不再与3.1.5及以前版本兼容，请及时升级。**
+**请注意：为提供高质量且一致的音视频体验，从 3.4.1 版本开始，1v1 通话不再与 3.1.5 及以前版本兼容，请及时升级。**
 
 ## 版本 V3.4.0.1 2018-04-13
 
 新功能：
 
-1. 将华为推送的集成从sdk中转移到应用层，SDK提供上传华为推送token的接口供用户调用，方便华为推送升级时用户自行升级 [3.4.0.1华为推送修改文档](https://docs-im.easemob.com/im/android/push/thirdpartypush#华为hms推送集成)
+1. 将华为推送的集成从 sdk 中转移到应用层，SDK 提供上传华为推送 token 的接口供用户调用，方便华为推送升级时用户自行升级 [3.4.0.1 华为推送修改文档](https://docs-im.easemob.com/im/android/push/thirdpartypush#华为hms推送集成)
 
 ## 版本 V3.4.0 2018-04-04
 
 新功能：
 
-1. 增加是否使用FCM推送的接口 通过`EMOptions`的`setUserFCM()`方法设置
+1. 增加是否使用 FCM 推送的接口 通过`EMOptions`的`setUserFCM()`方法设置
 2. 添加语音会议功能 [多人音视频会议](https://docs-im.easemob.com/im/android/basics/multiuserconference)
 
 修复：
 
-1. 修复华为推送覆盖安装时无法收到推送的bug
-2. 修复下载附件时不更新token的bug
+1. 修复华为推送覆盖安装时无法收到推送的 bug
+2. 修复下载附件时不更新 token 的 bug
 
 ## 版本 V3.3.9 2018-02-11
 
-1. Demo层实现群组消息已读功能（发送方在EMMessage.ext中自定义字段用以表示是否需要已读回执，接收方用CMD消息实现已读回执）
-2. 精简Demo实现，demo中移除红包功能;
+1. Demo 层实现群组消息已读功能（发送方在 EMMessage.ext 中自定义字段用以表示是否需要已读回执，接收方用 CMD 消息实现已读回执）
+2. 精简 Demo 实现，demo 中移除红包功能;
 3. 优化重连逻辑,解决用户迁移和服务器受攻击后部分用户连接服务超时的问题;
-4. 修复获取会话中消息数量接口(EMConversation#getAllMsgCount())不准确的bug;
-5. 修复弱网环境下,连续发送多个带附件消息的同时从数据库中加载更多历史消息导致消息重复展示的bug;
-6. 适配部分'1+'手机SharedPreferences#Editor#apply()方法无效的问题;
+4. 修复获取会话中消息数量接口(EMConversation#getAllMsgCount())不准确的 bug;
+5. 修复弱网环境下,连续发送多个带附件消息的同时从数据库中加载更多历史消息导致消息重复展示的 bug;
+6. 适配部分'1+'手机 SharedPreferences#Editor#apply()方法无效的问题;
 
 ## 版本 V3.3.8 2018-01-24
 
 1. 添加服务诊断接口
 2. 添加设置音频码率接口
 3. 优化重连逻辑，减少重连次数
-4. 添加社区版SDK注册用户，创建群组\聊天室达到数量限制的提示
+4. 添加社区版 SDK 注册用户，创建群组\聊天室达到数量限制的提示
 
 ## 版本 V3.3.7 2017-11-30
 
@@ -987,13 +987,13 @@ EaseUI:
 2. 修复更新聊天室公告时，其他聊天室成员收到回调崩溃问题
 3. 修复保存和插入消息时间戳和本地已存在消息的时间戳不同时，导致内存出现重复消息的问题
 4. 消息时间戳相同时导致消息不能正确加载
-5. 离线消息在某些情况下会导致cmd与普通消息顺序不一致
+5. 离线消息在某些情况下会导致 cmd 与普通消息顺序不一致
 
 ## 版本 V3.3.6 2017-11-03
 
 新功能：
 
-1. 新增API请查看[3.3.6 API变化](https://docs-im.easemob.com/im/android/sdk/3.3.6apichange)
+1. 新增 API 请查看[3.3.6 API 变化](https://docs-im.easemob.com/im/android/sdk/3.3.6apichange)
 2. 使用外接音频输入源进行音视频通话时，设置音频源
 3. 提供是否自己处理附件的上传和下载设置项
 4. 提供是否自动下载附件类消息附件设置项（缩略图，语音文件）
@@ -1002,7 +1002,7 @@ EaseUI:
 优化：
 
 1. 更改 easeui 中 EaseChatRow 实现方式，保证发送消息的回调顺利执行
-2. 使用SDK下载接口，如果本地已经有同名文件，新的文件名会在原有文件名后边追加数字；
+2. 使用 SDK 下载接口，如果本地已经有同名文件，新的文件名会在原有文件名后边追加数字；
 
 修复：
 
@@ -1014,26 +1014,26 @@ EaseUI:
 
 修复：
 
-1. 不再尝试加载sqlcipher。因为部分手机已经在系统中集成sqlcipher,并且会查找java端相应代码，会导致3.3.5加载失败。
+1. 不再尝试加载 sqlcipher。因为部分手机已经在系统中集成 sqlcipher,并且会查找 java 端相应代码，会导致 3.3.5 加载失败。
 
 ## 版本 V3.3.5 2017-10-23
 
 新功能：
 
 1. 增加了传输安全性；
-2. 支持FCM推送；
+2. 支持 FCM 推送；
 
 优化：
 
-1. 私有部署设置dns的接口；
+1. 私有部署设置 dns 的接口；
 2. 优化私有部署重连逻辑；
-3. 限制用户名长度为255；
-4. 需要服务器开通的功能接口返回SERVICE_NOT_ENABLED(505);
+3. 限制用户名长度为 255；
+4. 需要服务器开通的功能接口返回 SERVICE_NOT_ENABLED(505);
 
 修复：
 
-1. 修复4G与wifi切换时偶然出现发送消息失败的bug；
-2. 修复VIVO手机JobService crash问题；
+1. 修复 4G 与 wifi 切换时偶然出现发送消息失败的 bug；
+2. 修复 VIVO 手机 JobService crash 问题；
 
 ## 版本 V3.3.4 R1 2017-08-09
 
@@ -1043,9 +1043,9 @@ EaseUI:
 
 新功能
 
-1. 新增加API请查看链接[3.3.4api修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.4apichange)
+1. 新增加 API 请查看链接[3.3.4api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.4apichange)
 2. 增加接口支持获取历史消息(消息漫游)（`此功能需要联系商务同事开通`）;
-3. 新增PC与移动端互发消息和文件的功能；
+3. 新增 PC 与移动端互发消息和文件的功能；
 4. 增加消息撤回的接口和回调（`此功能需要联系商务同事开通`）;
 5. 支持华为新版推送功能(HMS)；
 
@@ -1053,80 +1053,80 @@ EaseUI:
 
 新功能
 
-1. 新增加API请查看链接[3.3.3api修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.3apichange)
+1. 新增加 API 请查看链接[3.3.3api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.3apichange)
 2. 支持在多个设备登录同一个账号，多个设备间可以同步消息，好友及群组的操作(多设备登录属于增值服务，需要联系商务开通)；
 3. 添加群共享文件的大小属性；
 4. 增加获取同一账号登录的设备列表的接口，并可以选择踢掉某个设备上的登录；
 
 问题修复
 
-1. 修复分页获取聊天室成员接口无法传入cursor的问题；
-2. 修复邀请群成员时没有附带信息的bug；
+1. 修复分页获取聊天室成员接口无法传入 cursor 的问题；
+2. 修复邀请群成员时没有附带信息的 bug；
 3. 修复群组操作时必须获取所有已加入群组的问题；
-4. 修复附件消息在web IM中右键另存时不能正确显示名字的问题；
-5. 修复android 共享文件名为中文时显示乱码的问题；
-6. 修复下载附件路径不存在或者打开错误时仍然下载成功的bug；
-7. 修复切换账号时某些场景下崩溃的bug；
-8. 修复获取群成员时最后一页cursor未更新的问题；
+4. 修复附件消息在 web IM 中右键另存时不能正确显示名字的问题；
+5. 修复 android 共享文件名为中文时显示乱码的问题；
+6. 修复下载附件路径不存在或者打开错误时仍然下载成功的 bug；
+7. 修复切换账号时某些场景下崩溃的 bug；
+8. 修复获取群成员时最后一页 cursor 未更新的问题；
 
 ## 版本 V3.3.2 2017-05-18
 
-1. 增加群、聊天室公告相关API
+1. 增加群、聊天室公告相关 API
 2. 群组支持上传及下载共享文件
 3. 群组支持设置扩展属性
 4. EMLocalSurfaceView 和 EMOppositeSurfaceView 合为同一个控件 EMCallSurfaceView
-5. Demo及EaseUI改成纯Android Studio结构，不再支持Eclicpse导入
-6. easeui没有包含SDK的jar和so, 使用需要自己拷贝libs下的库文件，或者执行copyLibs.sh完成拷贝。
+5. Demo 及 EaseUI 改成纯 Android Studio 结构，不再支持 Eclicpse 导入
+6. easeui 没有包含 SDK 的 jar 和 so, 使用需要自己拷贝 libs 下的库文件，或者执行 copyLibs.sh 完成拷贝。
 
 ## 版本 V3.3.1 2017-04-07
 
 新功能：
 
-1. 新增：使用token登录接口
+1. 新增：使用 token 登录接口
 2. 新增：群组群成员进出群组回调
 
 优化：
 
-1. Demo中红包集成方式更改为aar，默认支持支付宝渠道支付
+1. Demo 中红包集成方式更改为 aar，默认支持支付宝渠道支付
 
 修复
 
-1. 之前EMChatManager.getMessage对应的消息会保存在缓存中，修改后不缓存getMessage产生的消息。之前的代码会导致loadMoreMessage部分消息不显示。
-2. 3.3.0版本Demo中群组@键，弹出列表没有包含群组管理员
-3. 3.3.0版本EMGroup.getMuteList会崩溃
-4. 3.3.0版本EMChatRoom hash code错误
+1. 之前 EMChatManager.getMessage 对应的消息会保存在缓存中，修改后不缓存 getMessage 产生的消息。之前的代码会导致 loadMoreMessage 部分消息不显示。
+2. 3.3.0 版本 Demo 中群组@键，弹出列表没有包含群组管理员
+3. 3.3.0 版本 EMGroup.getMuteList 会崩溃
+4. 3.3.0 版本 EMChatRoom hash code 错误
 5. 修复音视频被叫时多个应用都会收到通知的错误
 
 ## 版本 V3.3.0 2017-03-07
 
 新功能：
 
-1. 群组和聊天室改造：增加管理员权限，新增禁言，增减管理员的功能，支持使用分批的方式获取成员，禁言，管理员列表，支持完善的聊天室功能。新增加API请查看链接[3.3.0api修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.0apichange)
-2. 优化dns劫持时的处理
-3. 增加EMConversation.latestMessageFromOthers,表示收到对方的最后一条消息
-4. 增加EMClient.compressLogs，压缩log，Demo中增加通过邮件发送log的示例
-5. libs.without.audio继续支持armeabi，解决armeabi-v5te的支持问题
+1. 群组和聊天室改造：增加管理员权限，新增禁言，增减管理员的功能，支持使用分批的方式获取成员，禁言，管理员列表，支持完善的聊天室功能。新增加 API 请查看链接[3.3.0api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.0apichange)
+2. 优化 dns 劫持时的处理
+3. 增加 EMConversation.latestMessageFromOthers,表示收到对方的最后一条消息
+4. 增加 EMClient.compressLogs，压缩 log，Demo 中增加通过邮件发送 log 的示例
+5. libs.without.audio 继续支持 armeabi，解决 armeabi-v5te 的支持问题
 
 bug 修订:
 
-1. 修复2.x升级3.x消息未读数为0的bug
-2. Demo在视频通话时，主叫方铃声没有播放的问题
-3. Demo在视频通话时，主叫方在建立连接成功后，文字提示不正确
-4. Demo在聊天窗口界面，清空消息后，收到新的消息，返回会话列表，未读消息数显示不正确
-5. 修复在Oppo和Vivo手机上出现的JobService报错。
-6. EMGroupManager.createGroup成员列表数超过512产生的overflow错误
-7. 修复部分手机在网络切换时发消息慢的bug
+1. 修复 2.x 升级 3.x 消息未读数为 0 的 bug
+2. Demo 在视频通话时，主叫方铃声没有播放的问题
+3. Demo 在视频通话时，主叫方在建立连接成功后，文字提示不正确
+4. Demo 在聊天窗口界面，清空消息后，收到新的消息，返回会话列表，未读消息数显示不正确
+5. 修复在 Oppo 和 Vivo 手机上出现的 JobService 报错。
+6. EMGroupManager.createGroup 成员列表数超过 512 产生的 overflow 错误
+7. 修复部分手机在网络切换时发消息慢的 bug
 
 ## 版本 V3.2.3 2016-12-29
 
 新功能/优化：
 
-1. sdk提供aar及gradle方式集成，具体方法查看[gradle方式导入aar](https://docs-im.easemob.com/im/android/sdk/import#手动复制jar包及so导入)
-2. 增加离线推送设置的相关接口，具体方法可查看EMPushManager API文档
-3. 为了使sdk更简洁易用，修改一些api，并将一些api标记为“已过时”，具体修改查看[3.2.3api修改](https://docs-im.easemob.com/im/200androidclientintegration/3.2.3apichange)，另外，已过时的api后续3-5个版本会进行删除
-4. 优化loadAllConversationsFromDB()方法，从联表查询改为从两个表分别查询，解决在个别乐视手机上执行很慢的问题
+1. sdk 提供 aar 及 gradle 方式集成，具体方法查看[gradle 方式导入 aar](https://docs-im.easemob.com/im/android/sdk/import#手动复制jar包及so导入)
+2. 增加离线推送设置的相关接口，具体方法可查看 EMPushManager API 文档
+3. 为了使 sdk 更简洁易用，修改一些 api，并将一些 api 标记为“已过时”，具体修改查看[3.2.3api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.2.3apichange)，另外，已过时的 api 后续 3-5 个版本会进行删除
+4. 优化 loadAllConversationsFromDB()方法，从联表查询改为从两个表分别查询，解决在个别乐视手机上执行很慢的问题
 5. 优化登录模块，减少登录失败的概率
-6. 鉴于市面上的手机基本都是armeabi-v7a及以上的架构，从这版本开始不再提供普通的armeabi架构的so，减少打包时app的体积
+6. 鉴于市面上的手机基本都是 armeabi-v7a 及以上的架构，从这版本开始不再提供普通的 armeabi 架构的 so，减少打包时 app 的体积
 
 红包相关：
 
@@ -1143,13 +1143,13 @@ bug 修订:
 2. 发红包等页面增加点击空白区域收回键盘的功能
 3. 群成员列表索引增加常用姓氏以及汉字的支持
 
-修复bug：
+修复 bug：
 
 1. 红包详情页领取人列表展示不全
-2. 华为P8手机密码框无法获取焦点
+2. 华为 P8 手机密码框无法获取焦点
 3. 部分银行卡号输入正确，提示银行卡号不正确
 4. 红包祝福语有换行符显示不正确
-5. 修复Emoji表情显示乱码
+5. 修复 Emoji 表情显示乱码
 6. 修复商户自主配置红包最低限额错误
 7. 修复零钱明细显示顺序错误问题
 
@@ -1159,35 +1159,35 @@ bug 修订:
 
 1. 新增设置音视频参数及呼叫时对方离线是否发推送的接口
 2. 新增修改群描述的接口；
-3. 删除好友时的逻辑修改： 删除好友增加接口，根据参数是否删除消息； 被动被删除时不再删除会话消息， 用户需要删除会话及消息时可以在onContactDeleted()中调用EMClient.getInstance().chatManager().deleteConversation(username, true)。
+3. 删除好友时的逻辑修改： 删除好友增加接口，根据参数是否删除消息； 被动被删除时不再删除会话消息， 用户需要删除会话及消息时可以在 onContactDeleted()中调用 EMClient.getInstance().chatManager().deleteConversation(username, true)。
 
 Bug Fix：
 
-1. 修复3.2.1版本中某些情况下心跳比较频繁的问题，节约流量电量，建议升级到最新版本；
+1. 修复 3.2.1 版本中某些情况下心跳比较频繁的问题，节约流量电量，建议升级到最新版本；
 2. 修复呼叫时对方不在线，不能正确显示通话结束原因的问题；
-3. 修复某些特殊情况下获取群成员列表时crash的问题；
-4. 修复某些特殊情况下退出时crash的问题；
+3. 修复某些特殊情况下获取群成员列表时 crash 的问题；
+4. 修复某些特殊情况下退出时 crash 的问题；
 
 Demo：
 
-1. demo中增加音视频参数设置页；
+1. demo 中增加音视频参数设置页；
 
 ## 版本 V3.2.1 2016-11-12
 
 新功能/优化：
 
 1. 聊天室列表支持分页获取
-2. 发起电话的接口增加ext参数，方便用户自定义内容
-3. EMOption中增加setUseHttps()的接口
+2. 发起电话的接口增加 ext 参数，方便用户自定义内容
+3. EMOption 中增加 setUseHttps()的接口
 4. 优化会话加载的速度
 
 Bug fix:
 
-1. 修复使用视音频后可能导致手机外放没有声音的bug
-2. 修复发送消息后马上删除附件可能导致手机crash的bug
-3. 修复音视频呼叫在某些魅蓝手机上会卡死的bug
-4. 修复demo中呼叫时没有铃声的bug
-5. 修复了视频通话时使用后置摄像头时图像显示不正确的bug
+1. 修复使用视音频后可能导致手机外放没有声音的 bug
+2. 修复发送消息后马上删除附件可能导致手机 crash 的 bug
+3. 修复音视频呼叫在某些魅蓝手机上会卡死的 bug
+4. 修复 demo 中呼叫时没有铃声的 bug
+5. 修复了视频通话时使用后置摄像头时图像显示不正确的 bug
 
 ## 版本 V3.2.0 2016-10-15
 
@@ -1198,7 +1198,7 @@ Bug fix:
 - 支持高清视频，画质更细腻；
 - 支持客户端视频和语音数据回调，；
 - 支持横屏和竖屏自由转换；
-- 支持画面fit和fill模式；
+- 支持画面 fit 和 fill 模式；
 
 红包功能改进：
 
@@ -1207,30 +1207,30 @@ Bug fix:
 
 其他改进：
 
-- cmd消息增加“em_” 和 “easemob::” 开头的action为内部保留字段；
-- Fix 个别情况下会话未读消息数显示不准确的bug；
-- Fix 个别情况下获取联系人不正确的bug；
-- Fix 登录户马上加入聊天室某些情况下会失败的bug；
+- cmd 消息增加“em\_” 和 “easemob::” 开头的 action 为内部保留字段；
+- Fix 个别情况下会话未读消息数显示不准确的 bug；
+- Fix 个别情况下获取联系人不正确的 bug；
+- Fix 登录户马上加入聊天室某些情况下会失败的 bug；
 - 发送语音或者视频时，如果文件内容过小会给出提示；
 - 优化读取数据库的性能；
 
 ## 版本 V3.1.5 2016-8-26
 
-1. 修改一些api名称，主要针对一些拼写错误的api,具体变动请查看[3.1.5api修改](https://docs-im.easemob.com/im/200androidclientintegration/3.1.5apichange)
+1. 修改一些 api 名称，主要针对一些拼写错误的 api,具体变动请查看[3.1.5api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.1.5apichange)
 2. 优化读取联系人的速度；
-3. 修复在logout方法的回调里立刻调用login方法不能登录的bug；
-4. 修复https安全漏洞，提高安全性；
-5. 修复实时通话时暂停音频不生效的bug；
-6. 修复使用网线连接时`NetUtils.hasDataConnection()`判断为false的bug；
-7. 修复发送消息时导致memory leak的bug；
+3. 修复在 logout 方法的回调里立刻调用 login 方法不能登录的 bug；
+4. 修复 https 安全漏洞，提高安全性；
+5. 修复实时通话时暂停音频不生效的 bug；
+6. 修复使用网线连接时`NetUtils.hasDataConnection()`判断为 false 的 bug；
+7. 修复发送消息时导致 memory leak 的 bug；
 
 ## 版本 V3.1.4 2016-7-8
 
 新功能/优化：
 
 1. 支持华为推送
-2. 聊天室获取详情后可以通过相应api获取到成员列表及成员数
-3. easeui及demo增加@消息
+2. 聊天室获取详情后可以通过相应 api 获取到成员列表及成员数
+3. easeui 及 demo 增加@消息
 
 红包相关:
 
@@ -1241,16 +1241,16 @@ Bug fix:
 5. 零钱页支持充值；
 6. 改版零钱页；
 7. 支持上传身份证照片做第三通道验证；
-8. 红包UI细节打磨，包括双title和各个页面细节，安卓和iOS文案统一；
+8. 红包 UI 细节打磨，包括双 title 和各个页面细节，安卓和 iOS 文案统一；
 9. 错误信息梳理，关键错误基于对话框引导；
 10. 服务端性能数倍的提升；
 11. 红包数据平台完善统计项；
-12. 其他优化：优化代码结构，剥离第三方库减少和开发者库的冲突；透传消息仅给发红包用户而非群内全部用户；优化token获取和更新机制；修复若干bug。
+12. 其他优化：优化代码结构，剥离第三方库减少和开发者库的冲突；透传消息仅给发红包用户而非群内全部用户；优化 token 获取和更新机制；修复若干 bug。
 
 ## 版本 V3.1.3 R2 2016-6-15
 
-1. 修复R1版本中第三方app或者sdk不能捕捉到app crash的问题
-2. 修复R1版本中在Android4.2.2以下系统中使用实时通话crash的问题
+1. 修复 R1 版本中第三方 app 或者 sdk 不能捕捉到 app crash 的问题
+2. 修复 R1 版本中在 Android4.2.2 以下系统中使用实时通话 crash 的问题
 
 ## 版本 V3.1.3 2016-6-3
 
@@ -1258,13 +1258,13 @@ Bug fix:
 
 1. 消息支持按照本地时间或服务器时间排序
 2. 实时音视频支持动态码率
-3. Demo支持红包功能(单聊及群聊红包)
-4. Demo适配了Android 6.0运行时权限，现在把targetSdkVersion设到23程序也能正常运行
+3. Demo 支持红包功能(单聊及群聊红包)
+4. Demo 适配了 Android 6.0 运行时权限，现在把 targetSdkVersion 设到 23 程序也能正常运行
 
 Bug fix:
 
 1. 修复自动同意好友请求有延迟的问题
-2. 修复在targetSdkVersion设为23时，视频通话可能crash的问题
+2. 修复在 targetSdkVersion 设为 23 时，视频通话可能 crash 的问题
 
 ## 版本 V3.1.2 R2 2016-4-29
 

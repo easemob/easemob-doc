@@ -114,7 +114,7 @@ public class Config {
     public EMService service() {
 
         EMProperties properties = EMProperties.builder()
-                 .setBaseUri("http://Your privatized address name")
+                 .setBaseUri("https://Your privatized address name")
                 .setAppkey("Appkey")
                 .setClientId("Client ID")
                 .setClientSecret("ClientSecret")
@@ -204,11 +204,11 @@ EMProperties properties = EMProperties.builder()
 
 ## 更新日志
 
-###  V0.6.6 2022-12-02
+### V0.6.6 2022-12-02
 
 修复创建/获取/删除用户方法使用大写字母出现异常的问题。
 
-###  V0.6.3
+### V0.6.3
 
 - 新增 离线推送设置 功能。
 - 新增 分页获取用户已加入的群组列表 功能。

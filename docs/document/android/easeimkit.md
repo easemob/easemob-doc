@@ -46,6 +46,7 @@ implementation 'io.hyphenate:hyphenate-chat:xxx版本'
 **EaseIMKit 必须依赖环信 IM SDK，因而在使用 EaseIMKit 时必须同时添加环信 IM SDK 依赖。**
 
 :::notice
+
 1. IM SDK **3.8.0** 版本以后，远程依赖的 `artifactId` 修改为 `hyphenate-chat`，且该版本以后中不再包含音视频相关逻辑。
 2. IM SDK **3.8.0** 以下，远程依赖，包含音视频的 `artifactId` 为 `hyphenate-sdk`，不包含音视频的 `artifactId` 为 `hyphenate-sdk-lite`。如果想使用不包含音视频通话的 SDK，用 `implementation 'io.hyphenate:hyphenate-sdk-lite:xxx版本`'。
 
@@ -164,6 +165,7 @@ xml 中设置如下：
     android:background="@color/white"
     app:titleBarDisplayHomeAsUpEnabled="true"/>
 ```
+
 其中 `titleBarDisplayHomeAsUpEnabled` 属性为设置返回按钮是否可见，设置标题位置可设置 `titleBarTitlePosition`，可选值为 `center`，`left` 和 `right`。
 
 也可进行代码设置，如下：
@@ -181,6 +183,7 @@ titleBarMessage.setOnRightClickListener(this);
 //设置返回按钮的点击事件
 titleBarMessage.setOnBackPressListener(this);
 ```
+
 当然设置右侧菜单，您也可以通过 Android 提供的添加 `menu xml` 的形式实现。修改按钮图标，可以调用 `titleBarMenuResource` 属性进行设置。
 
 ### 设置会话列表
@@ -252,9 +255,10 @@ public boolean onMenuItemClick(MenuItem item, int position) {
     return super.onMenuItemClick(item, position);
 }
 ```
+
 ### 设置聊天窗口
 
-聊天窗口包括标题栏（不包含在 EaseChatFragment中），聊天区，输入区及扩展展示区，如下图所示:
+聊天窗口包括标题栏（不包含在 EaseChatFragment 中），聊天区，输入区及扩展展示区，如下图所示:
 
 ![img](@static/images/android/easeim4.png)
 
@@ -463,10 +467,10 @@ public class ChatRowTxtNew extends EaseChatRow {
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="https://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="https://schemas.android.com/tools"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingTop="13dp">
@@ -1225,7 +1229,7 @@ contactLayout.getContactList().setOnItemLongClickListener(new OnItemLongClickLis
 
 ### 系统消息
 
-EaseIMKit 中 EaseConversationListLayout 已经封装了 IM 通知的展示逻辑，但是需要开发者将IM的通知封装成系统消息并保存到本地数据库。为了方便开发者封装成符合 EaseIMKit 能够使用的系统消息，EaseIMKit 中提供了 EaseSystemMsgManager 管理类，开发者可通过该管理类，方便的封装及更新系统消息。
+EaseIMKit 中 EaseConversationListLayout 已经封装了 IM 通知的展示逻辑，但是需要开发者将 IM 的通知封装成系统消息并保存到本地数据库。为了方便开发者封装成符合 EaseIMKit 能够使用的系统消息，EaseIMKit 中提供了 EaseSystemMsgManager 管理类，开发者可通过该管理类，方便的封装及更新系统消息。
 
 EaseIMKit 可处理的系统消息有如下要求：
 

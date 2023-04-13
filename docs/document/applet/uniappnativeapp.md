@@ -10,9 +10,10 @@
 - iOS： [https://www.pgyer.com/9ISC](https://www.pgyer.com/9ISC)
 
 :::notice
+
 - Demo 只包含部分 IM 功能，详细参考 **功能说明**
 - Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
-:::
+  :::
 
 ## 功能说明
 
@@ -43,14 +44,14 @@
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载SDK](http://www.easemob.com/download/im)
+- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
 - Uni-app Demo 源码中获取 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
 
-#### 引入SDK
+#### 引入 SDK
 
 - 开始一个全新的项目
-    1. 将 SDK 目录下（src/sdk/）的文件全部导入到自己的项目中。
-    2. 直接使用 import/require 方式获取引用, 如果使用 mpvue 请保持引用文件方式的统一。
+  1. 将 SDK 目录下（src/sdk/）的文件全部导入到自己的项目中。
+  2. 直接使用 import/require 方式获取引用, 如果使用 mpvue 请保持引用文件方式的统一。
 
 #### 基于 Demo 二次开发
 
@@ -69,15 +70,15 @@ import SDK from "../sdk/webimSDK3.x.x"; // 3.0sdk
 
 ```javascript
 //实例化 SDK 对象
-const WebIM = wx.WebIM = SDK;
+const WebIM = (wx.WebIM = SDK);
 WebIM.conn = new WebIM.connection({
-    isMultiLoginSessions: false, //是否可以登录多个，并在所有端上接收消息
-    https: false, //是否使用 HTTPS 
-    url: 'wss://im-api-wechat.easemob.com/websocket', // socket server (3.0 SDK)
-    apiUrl: 'https://a1.easemob.com',    // rest server
-    heartBeatWait: 30000, //心跳间隔
-    autoReconnectNumMax: 2, //自动重连次数
-    useOwnUploadFun: false // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传url）
+  isMultiLoginSessions: false, //是否可以登录多个，并在所有端上接收消息
+  https: false, //是否使用 HTTPS
+  url: "wss://im-api-wechat.easemob.com/websocket", // socket server (3.0 SDK)
+  apiUrl: "https://a1.easemob.com", // rest server
+  heartBeatWait: 30000, //心跳间隔
+  autoReconnectNumMax: 2, //自动重连次数
+  useOwnUploadFun: false, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传url）
 });
 ```
 

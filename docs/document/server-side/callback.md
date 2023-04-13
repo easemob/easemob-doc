@@ -45,16 +45,16 @@
 1. 在管理后台开通消息回调服务。
 2. 请在环信即时通讯云控制台配置开通规则配置。
 
-| 配置说明           | 是否必填 | 内容                                                         |
-| :----------------- | :------- | :----------------------------------------------------------- |
-| 规则名称           |  是     | 填写文字，支持中英文，长度限制为 32 字符。                   |
-| 会话类型           |  是     | 会话类型：<br/> •  单聊；<br/> •  群组；<br/> •  聊天室。                                 |
-| 消息类型           |  是     | 多选： 文本；图片；视频；位置；语音；文件；自定义消息。      |
-| 等待响应时间       |  是     | 后台判断超时时间，默认 200，单位为毫秒。                     |
-| 调用失败时默认策略 |  是     | 当您的服务器返回结果异常或等待时间内未返回结果时，消息放行或不放行。 |
-| 消息拦截报错时显示 |  是     | 当消息被拦截时，是否通知发送者 SDK 消息发送失败： <br/> •  报错：通知发送者 SDK 消息发送失败，发送者会感知到消息发送失败； <br/> •  不报错：不通知发送者 SDK 消息发送失败，发送者无感知。 |
-| 启用状态           |  是     | 回调规则是否马上生效：<br/> •  启用：马上生效； <br/> •  不启用：暂不生效。 (建议首次创建配置为“不启用”，等您的服务器配置好验证信息后再修改为“启用”) |
-| 回调地址           |  是     | 回调 URL，环信 IM 对 HTTP 和 HTTPS 的回调地址均支持。        |
+| 配置说明           | 是否必填 | 内容                                                                                                                                                                                    |
+| :----------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 规则名称           | 是       | 填写文字，支持中英文，长度限制为 32 字符。                                                                                                                                              |
+| 会话类型           | 是       | 会话类型：<br/> • 单聊；<br/> • 群组；<br/> • 聊天室。                                                                                                                                  |
+| 消息类型           | 是       | 多选： 文本；图片；视频；位置；语音；文件；自定义消息。                                                                                                                                 |
+| 等待响应时间       | 是       | 后台判断超时时间，默认 200，单位为毫秒。                                                                                                                                                |
+| 调用失败时默认策略 | 是       | 当您的服务器返回结果异常或等待时间内未返回结果时，消息放行或不放行。                                                                                                                    |
+| 消息拦截报错时显示 | 是       | 当消息被拦截时，是否通知发送者 SDK 消息发送失败： <br/> • 报错：通知发送者 SDK 消息发送失败，发送者会感知到消息发送失败； <br/> • 不报错：不通知发送者 SDK 消息发送失败，发送者无感知。 |
+| 启用状态           | 是       | 回调规则是否马上生效：<br/> • 启用：马上生效； <br/> • 不启用：暂不生效。 (建议首次创建配置为“不启用”，等您的服务器配置好验证信息后再修改为“启用”)                                      |
+| 回调地址           | 是       | 回调 URL，环信 IM 对 HTTP 和 HTTPS 的回调地址均支持。                                                                                                                                   |
 
 **规则说明：**
 
@@ -68,32 +68,32 @@
 
 #### 请求 header
 
-| 字段名         | 值                 |
-| :------------- | :----------------- |
+| 字段名         | 值                                  |
+| :------------- | :---------------------------------- |
 | `Content-Type` | 内容类型，请填 `application/json`。 |
 
 #### 请求 body
 
-| 参数              | 类型                                                         |
-| :---------------- | :----------------------------------------------------------- |
-| `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。 |
-| `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。                         |
-| `chat_type`       | `chat` 单聊回调、`groupchat` 群聊回调包含了群组和聊天室的消息回调，默认全选。 |
-| `group_id`        | 回调消息所在的群组。群聊消息回调才有此参数。                 |
-| `from`            | 消息的发送方。                                               |
-| `to`              | 消息的接收方。                                               |
-| `msg_id`          | 消息的 ID。                                                  |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](message.html#历史消息记录的内容)。 |
-| `securityVersion` | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
+| 参数              | 类型                                                                                                                               |
+| :---------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。                                                    |
+| `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。                                                                                               |
+| `chat_type`       | `chat` 单聊回调、`groupchat` 群聊回调包含了群组和聊天室的消息回调，默认全选。                                                      |
+| `group_id`        | 回调消息所在的群组。群聊消息回调才有此参数。                                                                                       |
+| `from`            | 消息的发送方。                                                                                                                     |
+| `to`              | 消息的接收方。                                                                                                                     |
+| `msg_id`          | 消息的 ID。                                                                                                                        |
+| `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](message.html#历史消息记录的内容)。                                   |
+| `securityVersion` | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。                                                            |
 | `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)回调规则。 |
 
 #### 响应 body
 
-| 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                         |
-| :-------- | :----- | :------- | :----------------------------------------------------------- |
-| `valid`   | bool   | 是       | 根据开发者自己服务器设定的规则判断消息是否合法。             |
-| `code`    | String | 否       | 自定义信息，字符串类型。该内容会显示到客户端返回的 error 中，具体分为以下几种情况：<br/> 1. 返回的应答包内该 code 并且类型正确，error 会显示为你填写的内容；<br/> 2. 返回的应答包内 code 为空，error 显示为 `custom logic denied`；<br/>3. 在指定时间内未响应，未收到应答包，按默认配置处理，则 error 显示为 `custom internal error`；<br/>4. 如果返回的应答包出现错误，包括缺少必填字段、字段类型不符合约定类型，error 显示为 `custom internal error`。                  |
-| `payload` | Object | 否       | 若无需修改消息内容，**请勿传该参数**。<br/>若需要更改消息内容可以回传修改后的内容，格式同传入的消息内容。目前仅支持文本的形式，并且消息大小不能超过 1K。|
+| 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| :-------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `valid`   | bool   | 是                                       | 根据开发者自己服务器设定的规则判断消息是否合法。                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `code`    | String | 否                                       | 自定义信息，字符串类型。该内容会显示到客户端返回的 error 中，具体分为以下几种情况：<br/> 1. 返回的应答包内该 code 并且类型正确，error 会显示为你填写的内容；<br/> 2. 返回的应答包内 code 为空，error 显示为 `custom logic denied`；<br/>3. 在指定时间内未响应，未收到应答包，按默认配置处理，则 error 显示为 `custom internal error`；<br/>4. 如果返回的应答包出现错误，包括缺少必填字段、字段类型不符合约定类型，error 显示为 `custom internal error`。 |
+| `payload` | Object | 否                                       | 若无需修改消息内容，**请勿传该参数**。<br/>若需要更改消息内容可以回传修改后的内容，格式同传入的消息内容。目前仅支持文本的形式，并且消息大小不能超过 1K。                                                                                                                                                                                                                                                                                                 |
 
 ### 示例
 
@@ -120,12 +120,12 @@
 
 ```json
 {
-     "valid": true,
-    "code": "HX:10000",
-     "payload":{
+  "valid": true,
+  "code": "HX:10000",
+  "payload": {
     // 具体的消息内容。
     // 仅支持文本类型消息。
-    },
+  }
 }
 ```
 
@@ -167,12 +167,12 @@
 
 1. App Key 可以配置回调规则的数据格式，可以配置多个回调规则（默认最多开通 4 个规则），开通服务后才允许用户配置，前往 [环信即时通讯云控制台](https://console.easemob.com/) 配置：
 
-| 参数<div style="width: 80px;"></div>     | 说明                                                         |
-| :------- | :----------------------------------------------------------- |
-| 规则名称 | 填写唯一的规则名称(不能用中文)。                             |
-| 消息类型 | 需要回调的类型，目前有两种消息类型可以回调（`chat` 为上行消息；`chat_offline` 为离线消息，可以同时选择） |
-| 回调地址 | 环信 IM 服务器会把消息推送到指定的 URL 地址，支持针对不同类型的消息配置不同的 HTTP 和 HTTPS 回调地址。 |
-| Secret   | （可选）默认情况下，环信 IM 服务器发给 URL（也就是您自己服务器的）的数据，签名时使用的密钥由环信 IM 服务器生成，可通过环信即时通讯 IM Console 管理后台查看。若要使用自定义密钥，可以联系环信商务经理。 |
+| 参数<div style="width: 80px;"></div> | 说明                                                                                                                                                                                                   |
+| :----------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 规则名称                             | 填写唯一的规则名称(不能用中文)。                                                                                                                                                                       |
+| 消息类型                             | 需要回调的类型，目前有两种消息类型可以回调（`chat` 为上行消息；`chat_offline` 为离线消息，可以同时选择）                                                                                               |
+| 回调地址                             | 环信 IM 服务器会把消息推送到指定的 URL 地址，支持针对不同类型的消息配置不同的 HTTP 和 HTTPS 回调地址。                                                                                                 |
+| Secret                               | （可选）默认情况下，环信 IM 服务器发给 URL（也就是您自己服务器的）的数据，签名时使用的密钥由环信 IM 服务器生成，可通过环信即时通讯 IM Console 管理后台查看。若要使用自定义密钥，可以联系环信商务经理。 |
 
 #### chat 上行消息
 
@@ -198,37 +198,37 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
 
 **回调消息的参数说明**
 
-| 参数              | 类型                                                         |
-| :---------------- | :----------------------------------------------------------- |
-| `callId`          | callId 为 {appkey}_{uuid} 其中 UUID 为随机生成，作为每条回调的唯一标识。 |
-| `eventType`       | • `chat` 上行消息；<br/> • `chat_offline` 离线消息。                   |
-| `timestamp`       | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。       |
-| `chat_type`       | • `chat` 单聊回调；<br/> • `groupchat` 群聊回调包含了群组和聊天室的消息回调，默认全选。 |
-| `group_id`        | 群聊时才有此参数，回调消息所在的群组。                       |
-| `from`            | 消息的发送方。                                               |
-| `to`              | 消息的接收方。                                               |
-| `msg_id`          | 消息的 ID。                                                  |
+| 参数              | 类型                                                                                             |
+| :---------------- | :----------------------------------------------------------------------------------------------- |
+| `callId`          | callId 为 {appkey}\_{uuid} 其中 UUID 为随机生成，作为每条回调的唯一标识。                        |
+| `eventType`       | • `chat` 上行消息；<br/> • `chat_offline` 离线消息。                                             |
+| `timestamp`       | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                                           |
+| `chat_type`       | • `chat` 单聊回调；<br/> • `groupchat` 群聊回调包含了群组和聊天室的消息回调，默认全选。          |
+| `group_id`        | 群聊时才有此参数，回调消息所在的群组。                                                           |
+| `from`            | 消息的发送方。                                                                                   |
+| `to`              | 消息的接收方。                                                                                   |
+| `msg_id`          | 消息的 ID。                                                                                      |
 | `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](message.html#历史消息记录的内容)。 |
-| `securityVersion` | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成控制台做设置。 |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 Console 后台回调规则。 |
+| `securityVersion` | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成控制台做设置。                                 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 Console 后台回调规则。                 |
 
 **回调成功返回的示例**
 
 ```json
 {
-    "callId":"XXXX-demo#XXXX-dp01-XXXX-8696-cf3b48b20e7e",
-    "eventType":"chat_offline",
-    "timestamp":1600060847294,
-    "chat_type":"groupchat",
-    "group_id":"169XXXX21545",
-    "from":"user1",
-    "to":"user2",
-    "msg_id":"8924312242322",
-    "payload":{
+  "callId": "XXXX-demo#XXXX-dp01-XXXX-8696-cf3b48b20e7e",
+  "eventType": "chat_offline",
+  "timestamp": 1600060847294,
+  "chat_type": "groupchat",
+  "group_id": "169XXXX21545",
+  "from": "user1",
+  "to": "user2",
+  "msg_id": "8924312242322",
+  "payload": {
     // 具体的消息内容。
-    },
-    "securityVersion":"1.0.0",
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
+  },
+  "securityVersion": "1.0.0",
+  "security": "2ca02c394bef9e7abc83958bcc3156d3"
 }
 ```
 
@@ -263,10 +263,10 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
 
 #### 路径参数
 
-| 参数      | 类型   | 是否必需 | 描述                                       |
-| :-------- | :----- | :------- | :----------------------------------------- |
-| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| 参数       | 类型   | 是否必需 | 描述                                                                                                                                           |
+| :--------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
 
 #### 请求 header
 
@@ -276,25 +276,25 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
 
 #### 响应 body
 
-| 参数              | 类型   | 描述                                                         |
-| :---------------- | :----- | :----------------------------------------------------------- |
-| `path`            | string | 请求路径。                                                   |
-| `uri`             | string | 请求路径的 URI。                                             |
-| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。       |
-| `organization`    | string | 你在环信 IM 管理后台注册的组织唯一标识。                     |
-| `application`     | string | 你在环信 IM 管理后台注册的 App 唯一标识。                    |
-| `action`          | string | 请求方法。                          |
-| `duration`        | long   | 请求耗时，单位为毫秒。                                       |
-| `applicationName` | string | 你在环信 IM 管理后台注册的 App 名称。                        |
-| `data`            | object | 响应数据内容。包括以下三个参数：`date`、`size` 和 `retry`。  |
-| `date`            | String | 代表本次可以发送的补发的一个十分钟 date key，key 为十分钟的起点。 |
-| `size`            | Int    | 本时段消息数量。                                             |
+| 参数              | 类型   | 描述                                                                           |
+| :---------------- | :----- | :----------------------------------------------------------------------------- |
+| `path`            | string | 请求路径。                                                                     |
+| `uri`             | string | 请求路径的 URI。                                                               |
+| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
+| `organization`    | string | 你在环信 IM 管理后台注册的组织唯一标识。                                       |
+| `application`     | string | 你在环信 IM 管理后台注册的 App 唯一标识。                                      |
+| `action`          | string | 请求方法。                                                                     |
+| `duration`        | long   | 请求耗时，单位为毫秒。                                                         |
+| `applicationName` | string | 你在环信 IM 管理后台注册的 App 名称。                                          |
+| `data`            | object | 响应数据内容。包括以下三个参数：`date`、`size` 和 `retry`。                    |
+| `date`            | String | 代表本次可以发送的补发的一个十分钟 date key，key 为十分钟的起点。              |
+| `size`            | Int    | 本时段消息数量。                                                               |
 | `retry`           | Int    | 开发者已经重试补发的次数。考虑到补发也可能失败，服务器会继续存储。最开始是 0。 |
 
 #### 请求示例
 
 ```shell
-curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
+curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -302,26 +302,26 @@ curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 
 ```json
 {
-    "path": "/callbacks",
-    "uri": "http://a1.easemob.com/easemob-demo/easeim/callbacks",
-    "timestamp": 1631193031254,
-    "organization": "easemob-demo",
-    "application": "8dfb1641-b6d8-450b-bbe9-d8d45a3be39f",
-    "action": "post",
-    "data": [
-        {
-            "date": "202109091440",
-            "size": 15,
-            "retry": 0
-        },
-        {
-            "date": "202109091450",
-            "size": 103,
-            "retry": 1
-        }
-    ],
-    "duration": 153,
-    "applicationName": "easeim"
+  "path": "/callbacks",
+  "uri": "https://a1.easemob.com/easemob-demo/easeim/callbacks",
+  "timestamp": 1631193031254,
+  "organization": "easemob-demo",
+  "application": "8dfb1641-b6d8-450b-bbe9-d8d45a3be39f",
+  "action": "post",
+  "data": [
+    {
+      "date": "202109091440",
+      "size": 15,
+      "retry": 0
+    },
+    {
+      "date": "202109091450",
+      "size": 103,
+      "retry": 1
+    }
+  ],
+  "duration": 153,
+  "applicationName": "easeim"
 }
 ```
 
@@ -333,54 +333,54 @@ curl -X GET 'http://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
 
 方法：`POST`
 
-接入点： `http://{host}/{org_name}/{app_name}/callbacks/storage/retry`
+接入点： `https://{host}/{org_name}/{app_name}/callbacks/storage/retry`
 
 #### 路径参数
 
-| 参数      | 类型   | 是否必需 | 描述                                      |
-| :-------- | :----- | :------- | :---------------------------------------- |
-| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| 参数       | 类型   | 是否必需 | 描述                                                                                                                                           |
+| :--------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                         |
-| :-------------- | :----- | :------- | :----------------------------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型，请填 `application/json`。                                          |
+| 参数            | 类型   | 是否必需 | 描述                                                                      |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------ |
+| `Content-Type`  | String | 是       | 内容类型，请填 `application/json`。                                       |
 | `Authorization` | String | 是       | 鉴权 App Token 的值。详见 [使用 App Token 鉴权](easemob_app_token.html)。 |
 
 #### 请求 body
 
-| 参数        | 类型   | 是否必需 | 描述                                                         |
-| :---------- | :----- | :------- | :----------------------------------------------------------- |
-| `date`      | String | 是       | 可以补发的一个十分钟 date key，key 为十分钟的起点。          |
+| 参数        | 类型   | 是否必需 | 描述                                                                   |
+| :---------- | :----- | :------- | :--------------------------------------------------------------------- |
+| `date`      | String | 是       | 可以补发的一个十分钟 date key，key 为十分钟的起点。                    |
 | `retry`     | Int    | 否       | 开发已重试的次数。考虑到补发也可能失败，服务器会继续存储。最开始是 0。 |
-| `targetUrl` | String | 否       | 补发消息的回调地址，如果为空，则使用原回调规则的回调地址。   |
+| `targetUrl` | String | 否       | 补发消息的回调地址，如果为空，则使用原回调规则的回调地址。             |
 
 #### 响应 body
 
-| 参数           | 类型   | 描述                                                         |
-| :------------- | :----- | :----------------------------------------------------------- |
-| `path`         | String | 请求路径。                                                   |
-| `uri`          | String | 请求路径的 URI。                                             |
-| `timestamp`    | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。       |
-| `organization` | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。                     |
-| `application`  | String | 你在环信 IM 管理后台注册的 app 唯一标识。                    |
-| `action`       | String | 请求方法。                                                   |
-| `data`         | Bool   | • `success`：成功；<br/> • `failure`：失败。                      |
-| `duration`     | long   | 请求耗时，单位为毫秒。                                       |
+| 参数           | 类型   | 描述                                                                           |
+| :------------- | :----- | :----------------------------------------------------------------------------- |
+| `path`         | String | 请求路径。                                                                     |
+| `uri`          | String | 请求路径的 URI。                                                               |
+| `timestamp`    | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
+| `organization` | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
+| `application`  | String | 你在环信 IM 管理后台注册的 app 唯一标识。                                      |
+| `action`       | String | 请求方法。                                                                     |
+| `data`         | Bool   | • `success`：成功；<br/> • `failure`：失败。                                   |
+| `duration`     | long   | 请求耗时，单位为毫秒。                                                         |
 | `retry`        | Int    | 开发者已经重试补发的次数。考虑到补发也可能失败，服务器会继续存储。最开始是 0。 |
 
 #### 请求示例
 
 ```shell
-curl -X POST 'http://a1.easemob.com/easemob-demo/easeim/callback/storage/retry' \
+curl -X POST 'https://a1.easemob.com/easemob-demo/easeim/callback/storage/retry' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 --data-raw '{
     "date": "202108272230",
     "retry": 0,
-    "targetUrl": "http://localhost:8000/test"
+    "targetUrl": "https://localhost:8000/test"
 }'
 ```
 
@@ -388,15 +388,15 @@ curl -X POST 'http://a1.easemob.com/easemob-demo/easeim/callback/storage/retry' 
 
 ```json
 {
-    "path": "/callbacks",
-    "uri": "http://a1.easemob.com/easemob-demo/easeim/callbacks",
-    "timestamp": 1631194031721,
-    "organization": "easemob-demo",
-    "application": "8dfb1641-b6d8-450b-bbe9-d8d45a3be39f",
-    "action": "post",
-    "data": "success",
-    "duration": 225,
-    "applicationName": "easeim"
+  "path": "/callbacks",
+  "uri": "https://a1.easemob.com/easemob-demo/easeim/callbacks",
+  "timestamp": 1631194031721,
+  "organization": "easemob-demo",
+  "application": "8dfb1641-b6d8-450b-bbe9-d8d45a3be39f",
+  "action": "post",
+  "data": "success",
+  "duration": 225,
+  "applicationName": "easeim"
 }
 ```
 

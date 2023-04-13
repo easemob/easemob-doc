@@ -10,7 +10,7 @@
 - 请在点击获取隐私权限以后启动环信 SDK 初始化。
 - `EMChatService` 和 `EMJobService` 为早期 SDK 内在应用退到后台后，对应用进行保活的程序，可以不进行注册。
 - `EMMonitorReceiver` 为监听开机自启动服务，可以不注册，同时请移除对应的权限申请：`<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>`。
-:::
+  :::
 
 ## 实现原理
 
@@ -51,9 +51,10 @@
 选择如下任意一种方式将环信即时通讯 IM SDK 集成到你的项目中。
 
 :::notice
+
 - 以下集成方式只需选择一种，同时使用多种集成方式可能会报错。
 - 请点击查看发版说明获得最新版本号。
-:::
+  :::
 
 #### 方法一：使用 mavenCentral 自动集成
 
@@ -89,7 +90,8 @@ dependencies {
     implementation 'io.hyphenate:hyphenate-chat:x.x.x'
 }
 ```
-获取最新SDK的版本号：[SDK 更新日志](releasenote.html)
+
+获取最新 SDK 的版本号：[SDK 更新日志](releasenote.html)
 
 :::notice
 如果使用 3.8.0 之前的版本，gradle 依赖需要按照下面格式添加：
@@ -98,7 +100,7 @@ dependencies {
 ```gradle
 implementation 'io.hyphenate:hyphenate-sdk:3.7.5' // 完整版本，包含音视频功能
 
-implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含IM功能 
+implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含IM功能
 ```
 
 #### 方法二：手动复制 SDK 文件
@@ -125,7 +127,7 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="https://schemas.android.com/apk/res/android"
     package="Your Package"
     android:versionCode="100"
     android:versionName="1.0.0">
@@ -213,30 +215,31 @@ EMClient.getInstance().createAccount(mAccount, mPassword);
 ```java
 EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
     // 登录成功回调
-    @Override 
+    @Override
     public void onSuccess() {
 
     }
 
     // 登录失败回调，包含错误信息
-    @Override 
+    @Override
     public void onError(final int code, final String error) {
-    
+
     }
-    
-    @Override 
+
+    @Override
     public void onProgress(int i, String s) {
-        
+
     }
 
 });
 ```
 
 :::notice
+
 1. 除了注册监听器，其他的 SDK 操作均需在登录之后进行。
 2. 登录成功后需要调用 `EMClient.getInstance().chatManager().loadAllConversations();` 和 `EMClient.getInstance().groupManager().loadAllGroups();`，确保进入主页面后本地会话和群组均加载完毕。
 3. 如果之前登录过，App 长期在后台运行后切换到前台运行可能会导致加载到内存的群组和会话为空。为了避免这种情况，可在主页面的 `oncreate` 里也添加这两种方法，不过，最好将这两种方法放在程序的开屏页。
-:::
+   :::
 
 ### 4. 发送一条单聊消息
 

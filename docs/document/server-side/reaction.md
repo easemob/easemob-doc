@@ -18,12 +18,12 @@
 
 ### 请求参数
 
-| 参数    | 类型   | 是否必需 | 描述         |
-| :------------ | :----- | :------ | :---------------- |
-| `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
-| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
-| `username` | String | 是     | 用户 ID。                                                  |
+| 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
+| :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `username` | String | 是       | 用户 ID。                                                                                                                                       |
 
 ## 认证方式
 
@@ -49,17 +49,17 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{username}
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                         |
-| :-------------- | :----- | :------------ | :------- |
-| `Content-Type`  | String | 是  | 内容类型。填入 `application/json`。       |
-| `Authorization` | String | 是     | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。填入 `application/json`。                                                                                  |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### 请求 body
 
-| 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 描述      |
-| :-------------- | :----- | :------------ | :------- |
-| `msgId`   | String | 是     | 消息 ID。                                        |
-| `message` | String | 是     | 表情 ID。长度不能超过 128 个字符，必须与客户端的设置一致。该参数对支持的字符集类型没有限制，若使用特殊字符，获取和删除 Reaction 时需对特殊字符进行 URL 编码。 |
+| 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                                                          |
+| :-------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `msgId`   | String | 是                                       | 消息 ID。                                                                                                                                                     |
+| `message` | String | 是                                       | 表情 ID。长度不能超过 128 个字符，必须与客户端的设置一致。该参数对支持的字符集类型没有限制，若使用特殊字符，获取和删除 Reaction 时需对特殊字符进行 URL 编码。 |
 
 ### HTTP 响应
 
@@ -67,18 +67,18 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{username}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数                | 类型    | 描述                                                       |
-| :------- | :----- | :--------------------------------------------------- |
-| `requestStatusCode` | String  | 操作结果，`ok` 表示成功创建或追加 Reaction。 |
-| `timestamp` | Long | 请求响应的时间，Unix 时间戳，单位为毫秒。 |
-| `data`    | JSON   | 添加的 Reaction 的详情。                     |
-| `data.id`                | String  | Reaction ID。                                               |
-| `data.msgId`             | String  | 添加 Reaction 的消息 ID。                                                   |
-| `data.msgType`           | String  | 消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊。 |
-| `data.groupId`           | String  | 群组 ID。该参数在单聊时为 null。                                  |
-| `data.reaction`          | String  | 表情 ID，与客户端一致，与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。             |
-| `data.createAt`          | Instant | Reaction 的创建时间。                                                  |
-| `data.updateAt`          | Instant | Reaction 的修改时间。                                                  |
+| 参数                | 类型    | 描述                                                                                              |
+| :------------------ | :------ | :------------------------------------------------------------------------------------------------ |
+| `requestStatusCode` | String  | 操作结果，`ok` 表示成功创建或追加 Reaction。                                                      |
+| `timestamp`         | Long    | 请求响应的时间，Unix 时间戳，单位为毫秒。                                                         |
+| `data`              | JSON    | 添加的 Reaction 的详情。                                                                          |
+| `data.id`           | String  | Reaction ID。                                                                                     |
+| `data.msgId`        | String  | 添加 Reaction 的消息 ID。                                                                         |
+| `data.msgType`      | String  | 消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊。                                 |
+| `data.groupId`      | String  | 群组 ID。该参数在单聊时为 null。                                                                  |
+| `data.reaction`     | String  | 表情 ID，与客户端一致，与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。 |
+| `data.createAt`     | Instant | Reaction 的创建时间。                                                                             |
+| `data.updateAt`     | Instant | Reaction 的修改时间。                                                                             |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -89,7 +89,7 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{username}
 #### 请求示例
 
 ```shell
-curl -g -X POST 'http://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: application/json' --data-raw '{
+curl -g -X POST 'https://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: application/json' --data-raw '{
     "msgId":"997625372793113144",
     "message":"emoji_40"
 }'
@@ -99,17 +99,17 @@ curl -g -X POST 'http://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H 
 
 ```json
 {
-    "requestStatusCode": "ok",
-    "timestamp": 1645774821181,
-    "data": {
-        "id": "946481033434607420",
-        "msgId": "msg3333",
-        "msgType": "chat",
-        "groupId": null,
-        "reaction": "message123456",
-        "createdAt": "2022-02-24T10:57:43.138934Z",
-        "updatedAt": "2022-02-24T10:57:43.138939Z"
-    }
+  "requestStatusCode": "ok",
+  "timestamp": 1645774821181,
+  "data": {
+    "id": "946481033434607420",
+    "msgId": "msg3333",
+    "msgType": "chat",
+    "groupId": null,
+    "reaction": "message123456",
+    "createdAt": "2022-02-24T10:57:43.138934Z",
+    "updatedAt": "2022-02-24T10:57:43.138939Z"
+  }
 }
 ```
 
@@ -129,17 +129,17 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{username}?msgIdList={N,M
 
 #### 查询参数
 
-| 参数        | 类型   | 是否必需 | 描述                                                      |
-| :---------- | :----- | :------- | :--------------------------------------------------------- |
-| `msgIdList` | Array  | 是     | 需要查询的消息 ID 列表，最多可传 20 个消息 ID。                                  |
-| `msgType`   | String | 是     | 消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊。            |
-| `groupId`   | String | 否  | 群组 ID。如果 `msgType` 设置为 `groupchat`，即拉取群中的 Reaction，必须指定群组 ID。 |
+| 参数        | 类型   | 是否必需 | 描述                                                                                 |
+| :---------- | :----- | :------- | :----------------------------------------------------------------------------------- |
+| `msgIdList` | Array  | 是       | 需要查询的消息 ID 列表，最多可传 20 个消息 ID。                                      |
+| `msgType`   | String | 是       | 消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊。                    |
+| `groupId`   | String | 否       | 群组 ID。如果 `msgType` 设置为 `groupchat`，即拉取群中的 Reaction，必须指定群组 ID。 |
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                         |
-| :-------------- | :----- | :------- | :------------------------------------------------------------ |
-| `Authorization` | String | 是     | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
 
@@ -147,18 +147,18 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{username}?msgIdList={N,M
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数                | 类型   | 描述                                                        |
-| :------- | :----- | :--------------------------------------------------- |
-| `requestStatusCode` | String | 接口相应 code 状态。`OK` 表示操作成功。                      |
-| `timestamp` | Long | 请求响应的时间，Unix 时间戳，单位为毫秒。 |
-| `data`    | JSON Array   | 单个消息添加的 Reaction 的详情。                     |
-| `data.msgId`             | String | Reaction 对应的消息 ID。    |
-| `data.reactionList`  | JSON Array | 单个消息的 Reaction 列表。    |
-| `data.reactionList.reactionId`        | String | Reaction ID。                                                |
-| `data.reactionList.reaction`          | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。              |
-| `data.reactionList.count`             | Int | 添加该 Reaction 的用户人数。                         |
-| `data.reactionList.state`             | Bool   | 当前请求用户是否添加过该 Reaction： <br/> - `true`: 是； <br/> - `false`：否。 |
-| `data.reactionList.userList`          | Array  | 添加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。 |
+| 参数                           | 类型       | 描述                                                                                                    |
+| :----------------------------- | :--------- | :------------------------------------------------------------------------------------------------------ |
+| `requestStatusCode`            | String     | 接口相应 code 状态。`OK` 表示操作成功。                                                                 |
+| `timestamp`                    | Long       | 请求响应的时间，Unix 时间戳，单位为毫秒。                                                               |
+| `data`                         | JSON Array | 单个消息添加的 Reaction 的详情。                                                                        |
+| `data.msgId`                   | String     | Reaction 对应的消息 ID。                                                                                |
+| `data.reactionList`            | JSON Array | 单个消息的 Reaction 列表。                                                                              |
+| `data.reactionList.reactionId` | String     | Reaction ID。                                                                                           |
+| `data.reactionList.reaction`   | String     | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。 |
+| `data.reactionList.count`      | Int        | 添加该 Reaction 的用户人数。                                                                            |
+| `data.reactionList.state`      | Bool       | 当前请求用户是否添加过该 Reaction： <br/> - `true`: 是； <br/> - `false`：否。                          |
+| `data.reactionList.userList`   | Array      | 添加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。                                 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -167,7 +167,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{username}?msgIdList={N,M
 #### 请求示例
 
 ```shell
-curl -g -X GET 'http://localhost:8089/easemob-demo/easeim/reaction/user/{{userId}}?msgIdList=msgId1&msgType=chat' -H 'Authorization: Bearer <YourAppToken>'
+curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/{{userId}}?msgIdList=msgId1&msgType=chat' -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 #### 响应示例
@@ -227,16 +227,16 @@ DELETE https://{host}/{org_name}/{app_name}/reaction/user/{username}?msgId={msgI
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                         |
-| :-------------- | :----- | :------- | :------------------------------------------------------------ |
-| `Authorization` | String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### 查询参数
 
-| 参数      | 类型   | 是否必需 | 描述                                             |
-| :-------- | :----- | :------- | :------------------------------------------------ |
-| `msgId`   | String | 是     | 消息 ID。                                        |
-| `message` | String | 是     | 表情 ID。长度不可超过 128 个字符。该参数的值必须与客户端一致。 |
+| 参数      | 类型   | 是否必需 | 描述                                                           |
+| :-------- | :----- | :------- | :------------------------------------------------------------- |
+| `msgId`   | String | 是       | 消息 ID。                                                      |
+| `message` | String | 是       | 表情 ID。长度不可超过 128 个字符。该参数的值必须与客户端一致。 |
 
 ### HTTP 响应
 
@@ -245,8 +245,8 @@ DELETE https://{host}/{org_name}/{app_name}/reaction/user/{username}?msgId={msgI
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 参数                | 类型   | 描述                                      |
-| :------- | :----- | :--------------------------------------------------- |
-| `requestStatusCode` | String | 操作结果。`ok` 表示成功删除 Reaction。 |
+| :------------------ | :----- | :---------------------------------------- |
+| `requestStatusCode` | String | 操作结果。`ok` 表示成功删除 Reaction。    |
 | `timestamp`         | Long   | 请求响应的时间，Unix 时间戳，单位为毫秒。 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -256,15 +256,15 @@ DELETE https://{host}/{org_name}/{app_name}/reaction/user/{username}?msgId={msgI
 #### 请求示例
 
 ```shell
-curl -g -X DELETE 'http://localhost:8089/easemob-demo/easeim/reaction/user/wz?msgId=997625372793113144&message=emoji_40' -H 'Authorization: Bearer <YourAppToken>'
+curl -g -X DELETE 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz?msgId=997625372793113144&message=emoji_40' -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 #### 响应示例
 
 ```json
 {
-    "requestStatusCode": "ok",
-    "timestamp": 1645774821181
+  "requestStatusCode": "ok",
+  "timestamp": 1645774821181
 }
 ```
 
@@ -284,24 +284,24 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{username}/detail?msgId={
 
 #### 查询参数
 
-| 参数      | 类型    | 是否必需 | 描述                                                        |
-| :-------- | :----- | :------- | :------------------------------------------------ |
-| `msgId`   | String  | 是     | 消息 ID。                                                    |
-| `message` | String  | 是     | 表情 ID。长度不可超过 128 个字符。该参数的值必须与客户端一致。             |
-| `limit`   | Int | 否   | 每页显示的 Reaction 条数。取值范围为 [1,50]，默认值为 `50`。 |
-| `cursor`  | String  | 否   | 查询游标，指定数据查询的起始位置，分页获取时使用。 |
+| 参数      | 类型   | 是否必需 | 描述                                                           |
+| :-------- | :----- | :------- | :------------------------------------------------------------- |
+| `msgId`   | String | 是       | 消息 ID。                                                      |
+| `message` | String | 是       | 表情 ID。长度不可超过 128 个字符。该参数的值必须与客户端一致。 |
+| `limit`   | Int    | 否       | 每页显示的 Reaction 条数。取值范围为 [1,50]，默认值为 `50`。   |
+| `cursor`  | String | 否       | 查询游标，指定数据查询的起始位置，分页获取时使用。             |
 
 :::notice
 
-分页获取时，服务器按 Reaction 添加时间的正序返回。若 `limit`  和 `cursor`  均不传值，服务器返回最早添加的 50 个 Reaction。
+分页获取时，服务器按 Reaction 添加时间的正序返回。若 `limit` 和 `cursor` 均不传值，服务器返回最早添加的 50 个 Reaction。
 
 :::
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                         |
-| :-------- | :----- | :------- | :------------------------------------------------ |
-| `Authorization` | String | 是     | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
 
@@ -309,17 +309,17 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{username}/detail?msgId={
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数                | 类型   | 描述                                                         |
-| :------- | :----- | :--------------------------------------------------- |
-| `requestStatusCode` | String | 操作结果，`ok` 表示成功获取 Reaction 信息。                      |
-| `timestamp` | Long | 请求响应的时间，Unix 时间戳，单位为毫秒。 |
-| `data`    | JSON   | 消息添加的 Reaction 的详情。                     |
-| `data.reactionId`        | String | Reaction ID。                                                |
-| `data.reaction`          | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。   |
-| `data.count`             | Int | 添加该 Reaction 的用户人数。                                 |
-| `data.state`             | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`：是；<br/> - `false`：否。 |
-| `data.userList`          | Array  | 添加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。 |
-| `data.cursor`            | String | 查询游标，指定下次查询的起始位置。 |
+| 参数                | 类型   | 描述                                                                                                    |
+| :------------------ | :----- | :------------------------------------------------------------------------------------------------------ |
+| `requestStatusCode` | String | 操作结果，`ok` 表示成功获取 Reaction 信息。                                                             |
+| `timestamp`         | Long   | 请求响应的时间，Unix 时间戳，单位为毫秒。                                                               |
+| `data`              | JSON   | 消息添加的 Reaction 的详情。                                                                            |
+| `data.reactionId`   | String | Reaction ID。                                                                                           |
+| `data.reaction`     | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。 |
+| `data.count`        | Int    | 添加该 Reaction 的用户人数。                                                                            |
+| `data.state`        | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`：是；<br/> - `false`：否。                           |
+| `data.userList`     | Array  | 添加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。                                 |
+| `data.cursor`       | String | 查询游标，指定下次查询的起始位置。                                                                      |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -330,30 +330,28 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{username}/detail?msgId={
 #### 请求示例(第一页)
 
 ```shell
-curl -g -X GET 'http://localhost:8089/easemob-demo/easeim/reaction/user/wz/detail?msgId=997627787730750008&message=emoji_40&limit=50' -H 'Authorization: Bearer <YourAppToken>'
+curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz/detail?msgId=997627787730750008&message=emoji_40&limit=50' -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 #### 请求示例(第 N 页)
 
 ```shell
-curl -g -X GET 'http://localhost:8089/easemob-demo/easeim/reaction/user/wz/detail?msgId=997627787730750008&message=emoji_40&cursor=944330529971449164&limit=50' -H 'Authorization: Authorization: Bearer <YourAppToken>'
+curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz/detail?msgId=997627787730750008&message=emoji_40&cursor=944330529971449164&limit=50' -H 'Authorization: Authorization: Bearer <YourAppToken>'
 ```
 
 #### 响应示例
 
 ```json
 {
-    "requestStatusCode": "ok",
-    "timestamp": 1645776986146,
-    "data": {
-        "reactionId": "946463470818405943",
-        "reaction": "message123456",
-        "count": 1,
-        "state": true,
-        "userList": [
-            "wz1"
-        ],
-        "cursor": "946463471296555192"
-    }
+  "requestStatusCode": "ok",
+  "timestamp": 1645776986146,
+  "data": {
+    "reactionId": "946463470818405943",
+    "reaction": "message123456",
+    "count": 1,
+    "state": true,
+    "userList": ["wz1"],
+    "cursor": "946463471296555192"
+  }
 }
 ```

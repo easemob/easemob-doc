@@ -520,7 +520,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
    在魅族开发者后台创建应用，并开启 push 服务，并上传对应的证书指纹，详见魅族官方介绍：[Flyme 推送服务集成](https://open.flyme.cn/docs?id=129)。
 
 2. 上传推送证书<br/>
-   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **魅族**，然后输入你在[ flyme 推送平台](http://push.meizu.com/#/config/app?appId=8843&_k=dnrz9k)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
+   注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 —> **即时推送** —> **配置证书** —> **添加推送证书** —> **魅族**，然后输入你在[ flyme 推送平台](https://push.meizu.com/#/config/app?appId=8843&_k=dnrz9k)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
 
 3. 魅族推送集成
 

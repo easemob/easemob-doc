@@ -34,10 +34,10 @@
 
 公开群和私有群在两种入群方式方面存在差别：
 
-| 入群方式         | 公开群       | 私有群            |
-| :------------- | :-------------- | :------------ |
-| 是否支持用户申请入群       | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 `EMGroupStyle` 的设置。 | 不支持     |
-| 是否支持群成员邀请用户入群 | 支持 <br/>只能由群主和管理员邀请。    | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 `EMGroupStyle` 的设置。 |
+| 入群方式                   | 公开群                                                                                             | 私有群                                                                                             |
+| :------------------------- | :------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| 是否支持用户申请入群       | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 `EMGroupStyle` 的设置。 | 不支持                                                                                             |
+| 是否支持群成员邀请用户入群 | 支持 <br/>只能由群主和管理员邀请。                                                                 | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 `EMGroupStyle` 的设置。 |
 
 #### 用户申请入群
 
@@ -174,14 +174,14 @@ EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 
 示例代码如下：
 
-```java 
+```java
     Map<String,String> attrMap=new HashMap();
     attrMap.put("key","value");
 
     EMClient.getInstance().groupManager().asyncSetGroupMemberAttributes(groupId, userId, attrMap, new EMCallBack() {
         @Override
         public void onSuccess() {
-            
+
         }
 
         @Override
@@ -190,17 +190,18 @@ EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
         }
     });
 ```
+
 #### 获取单个群成员的所有自定义属性
 
 你可以调用 `EMGroupManager#asyncFetchGroupMemberAllAttributes` 方法获取单个群成员的所有自定义属性。
 
 示例代码如下：
 
-```java 
+```java
     EMClient.getInstance().groupManager().asyncFetchGroupMemberAllAttributes(groupId, userId, new EMValueCallBack<Map<String, Map<String, String>>>() {
         @Override
         public void onSuccess(Map<String, Map<String, String>> value) {
-            
+
         }
 
         @Override
@@ -209,6 +210,7 @@ EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
         }
     });
 ```
+
 #### 根据属性 key 获取多个群成员的自定义属性
 
 你可调用 `EMGroupManager#asyncFetchGroupMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
@@ -218,12 +220,13 @@ EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 :::
 
 示例代码如下：
-```java 
+
+```java
    // keyList：要获取自定义属性的 key 的数组。若 keyList 为空数组或不传则获取这些成员的所有自定义属性。
     EMClient.getInstance().groupManager().asyncFetchGroupMembersAttributes(groupId, userIds, keyList, new EMValueCallBack<Map<String, Map<String, String>>>() {
         @Override
         public void onSuccess(Map<String, Map<String, String>> value) {
-            
+
         }
 
         @Override

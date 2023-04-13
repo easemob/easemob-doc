@@ -43,7 +43,7 @@
 EMUserInfo userInfo = new EMUserInfo();
 userInfo.setUserId(EMClient.getInstance().getCurrentUser());
 userInfo.setNickname("easemob");
-userInfo.setAvatarUrl("http://www.easemob.com");
+userInfo.setAvatarUrl("https://www.easemob.com");
 userInfo.setBirth("2000.10.10");
 userInfo.setSignature("hello world");
 userInfo.setPhoneNumber("13333333333");
@@ -73,16 +73,16 @@ EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType
 
 若[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
 
-| 字段        | 类型   | 描述                                                         |
-| :---------- | :----- | :----------------------------------------------------------- |
-| `nickname`  | String | 用户昵称。长度在 64 字符内。                                 |
-| `avatarurl` | String | 用户头像 URL 地址。长度在 256 字符内。                       |
-| `phone`     | String | 用户联系方式。长度在 32 字符内。                             |
-| `mail`      | String | 用户邮箱。长度在 64 字符内。                                 |
-| `gender`    | Int | 用户性别：<br/> -  `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
-| `sign`      | String | 用户签名。长度在 256 字符内。                                |
-| `birth`     | String | 用户生日。长度在 64 字符内。                                 |
-| `ext`       | String | 扩展字段。                                                   |
+| 字段        | 类型   | 描述                                                                                              |
+| :---------- | :----- | :------------------------------------------------------------------------------------------------ |
+| `nickname`  | String | 用户昵称。长度在 64 字符内。                                                                      |
+| `avatarurl` | String | 用户头像 URL 地址。长度在 256 字符内。                                                            |
+| `phone`     | String | 用户联系方式。长度在 32 字符内。                                                                  |
+| `mail`      | String | 用户邮箱。长度在 64 字符内。                                                                      |
+| `gender`    | Int    | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
+| `sign`      | String | 用户签名。长度在 256 字符内。                                                                     |
+| `birth`     | String | 用户生日。长度在 64 字符内。                                                                      |
+| `ext`       | String | 扩展字段。                                                                                        |
 
 ### 获取用户属性
 
@@ -108,7 +108,7 @@ userId[0] = EMClient.getInstance().getCurrentUser();
 EMUserInfo.EMUserInfoType[] userInfoTypes = new EMUserInfo.EMUserInfoType[2];
 userInfoTypes[0] = EMUserInfo.EMUserInfoType.NICKNAME;
 userInfoTypes[1] = EMUserInfo.EMUserInfoType.AVATAR_URL;
-EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userInfoTypes, 
+EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userInfoTypes,
     new EMValueCallBack<Map<String, EMUserInfo>>() {});
 ```
 

@@ -55,9 +55,10 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 ```
 
 :::notice
+
 - 以上注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用；
 - 正式环境应使用服务器端调用 REST API 接口[注册用户](/document/server-side/account_system.html#注册用户)。
-:::
+  :::
 
 ## 用户登录
 
@@ -77,13 +78,13 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 ```java
 EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
     // 登录成功回调
-    @Override 
+    @Override
     public void onSuccess() {
 
     }
 
     // 登录失败回调，包含错误信息
-    @Override 
+    @Override
     public void onError(int code, String error) {
 
     }
@@ -197,7 +198,7 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 - `USER_DEVICE_CHANGED=220`: 和上次设备不同导致下线
 - `SERVER_SERVING_DISABLED=305`: 服务器服务停止
 
-以上参数具体可以参考 [EMError](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 对应说明。
+以上参数具体可以参考 [EMError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 对应说明。
 
 ## 输出信息到日志文件
 

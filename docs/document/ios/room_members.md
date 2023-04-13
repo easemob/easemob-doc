@@ -262,4 +262,4 @@ EMError *error = nil;
 
 ## 更多操作
 
-你可以参考如下文档，在项目中实现监听：[监听器介绍](../ccim/ios/chatroom_mange.md)。
+详见 [监听聊天室事件](room_manage.html#监听聊天室事件)。
