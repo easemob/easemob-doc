@@ -11,7 +11,7 @@ export const zhNavbar = navbar([
     //     link: '/document/android'
     //   },
     //   {
-    //     text: 'IOS',
+    //     text: 'iOS',
     //     link: '/document/ios'
     //   },
     //   {
@@ -32,7 +32,7 @@ export const zhNavbar = navbar([
             link: 'https://sdkdocs.easemob.com/apidoc/android/chat3.0/annotated.html'
           },
           {
-            text: 'IOS',
+            text: 'iOS',
             icon: '/icon-iOS.svg',
             link: 'https://sdkdocs.easemob.com/apidoc/ios/chat3.0/annotated.html'
           },

@@ -1,4 +1,4 @@
-# uni-app 打包原生 app（Android、IOS）方案简介
+# uni-app 打包原生 app（Android、iOS）方案简介
 
 <Toc />
 

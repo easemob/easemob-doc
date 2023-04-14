@@ -17,7 +17,7 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动、uni-app 编译的
 点击链接，扫描二维码，即可快速体验环信 Uniapp 编译生成的移动端原生应用：
 
 - 安卓： [https://www.pgyer.com/h4XF](https://www.pgyer.com/h4XF)
-- IOS： [https://www.pgyer.com/9ISC](https://www.pgyer.com/9ISC)
+- iOS： [https://www.pgyer.com/9ISC](https://www.pgyer.com/9ISC)
 
 :::notice
 

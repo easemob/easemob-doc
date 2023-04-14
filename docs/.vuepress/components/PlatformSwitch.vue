@@ -78,7 +78,7 @@ const options = [
       },
       {
         value: 'ios',
-        label: 'IOS',
+        label: 'iOS',
       },
       {
         value: 'web',
