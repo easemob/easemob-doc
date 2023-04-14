@@ -63,3 +63,11 @@ jobs:
           REMOTE_PORT: ${{ secrets.SERVER_PORT }} -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
           TARGET: /data/apps/data/docs-im-beta/ # 服务器目标路径
+
+      - name: CDN Refresh
+        uses: visionwx/ali-cdn-refresh@main
+        with:
+          accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
+          accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
+          type: Directory
+          path: https://docs-im-beta.easemob.com/\r\nhttp://docs-im-beta.easemob.com/
