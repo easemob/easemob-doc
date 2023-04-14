@@ -22,3 +22,12 @@ div[class*=language-]::before {
 div[class*=language-] > button.copy-code-button:not(.fancy) {
   right: 1em;
 }
+
+.sidebar-group .sidebar-group {
+  -webkit-padding-start: 1em;
+  padding-inline-start: 1em;
+}
+
+.sidebar-group .sidebar-group .sidebar-heading {
+  font-size: 1.0em
+}
