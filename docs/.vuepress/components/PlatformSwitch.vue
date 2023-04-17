@@ -42,7 +42,7 @@ const PLATFORM_ICON_MAP = {
   },
 }
 
-const platform = ref('')
+const platform = ref('android')
 const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value]?.activeIcon)
 const route = useRoute()
 const router = useRouter()

@@ -15,7 +15,7 @@
 <template>
   <Sidebar>
     <template #top>
-      <div v-if="showPlatformSwitch" class="platform-switch">
+      <div v-show="showPlatformSwitch" class="platform-switch">
         <PlatformSwitch />
       </div>
     </template>
