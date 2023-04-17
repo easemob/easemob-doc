@@ -16,7 +16,7 @@ export default defineUserConfig({
   head: [
     ['link', { rel: 'icon', href: '/logo.png' }]
   ],
-  description: "vuepress-theme-hope 的文档演示",
+  description: "环信 IM 文档",
   bundler: viteBundler({
     viteOptions: {
       resolve: {
@@ -45,6 +45,7 @@ export default defineUserConfig({
   extendsMarkdown: (md)=> {
     containerPlugin(md)
   },
+  templateBuild: path.resolve(__dirname, './templates/index.build.html'),
   theme,
   plugins: [
     docsearchPlugin({
