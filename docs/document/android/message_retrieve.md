@@ -13,7 +13,7 @@
 使用环信即时通讯 IM SDK 可以从服务器获取历史消息。
 
 - `asyncFetchConversationsFromServer` 分页获取服务器保存的会话列表；
-- `fetchHistoryMessages` 获取服务器保存的指定会话中的消息；
+- `asyncFetchHistoryMessage` 从服务端分页获取指定会话的历史消息；
 - `removeMessagesFromServer` 单向删除服务端的历史消息；
 - `deleteConversationFromServer` 删除服务端的会话及其历史消息。
 

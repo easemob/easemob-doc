@@ -2,7 +2,14 @@
 
 <Toc />
 
-## 版本 V4.1.4 Dev 2023-3-16（开发版）
+## 版本 V4.1.6 Dev 2023-04-17（开发版）
+
+### 新增特性
+
+- [IM SDK] `getHistoryMessages` 方法的 `searchOptions` 中新增 `from`、`msgTypes`、`startTime` 和 `endTime` 参数，允许用户按消息发送方、消息类型或时间段从服务端拉取历史消息。
+- [IM SDK] 新增错误码 511，即 MESSAGE_SIZE_LIMIT，若[消息体大小超过限制](message_overview.html#消息类型)时提示用户。
+
+## 版本 V4.1.4 Dev 2023-03-16（开发版）
 
 ### 新增特性
 
