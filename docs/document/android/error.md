@@ -15,6 +15,7 @@ Android 中错误码的类为 `EMError`。
 | 2      |          NETWORK_ERROR          | 网络错误：无网络服务时会回调此错误，表示 SDK 与服务器的连接已断开。 |
 | 4      |      EXCEED_SERVICE_LIMIT       | 超过服务限制：超过服务版本的数量限制，比如创建的用户 ID 数量超过购买服务的限制时提示该错误。 |
 | 5      |       SERVICE_ARREARAGES        |                  服务欠费，该错误码已废弃。                  |
+| 8      |       APP_ACTIVE_NUMBER_REACH_LIMITATION    |  应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。                  |
 | 100    |         INVALID_APP_KEY         |         App Key 不合法：用户的 App Key 格式不正确。          |
 | 101    |        INVALID_USER_NAME        | 用户 ID 不正确：一般是用户 ID 为空时提示该错误，比如使用邀请好友 API 时 username 参数为空字符。 |
 | 102    |        INVALID_PASSWORD         |        用户密码不正确：登录时提供的密码为空或不正确。        |

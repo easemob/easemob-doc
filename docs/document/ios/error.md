@@ -10,13 +10,14 @@ iOS 中错误码的类为 `EMError`。
 
 iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 nil。
 
-| 错误码<div style="width: 50px;"></div> |              错误信息               | 描述和可能原因                                               |
+| 错误码<div style="width: 50px;"></div> | 错误信息               | 描述和可能原因                                               |
 | :----- | :--------------------------------- | :----------------------------------------------------------- |
 | 1      |           EMErrorGeneral            | 默认未区分类型的错误：SDK 内部未正确初始化或提示请求服务器时未识别出的具体原因。 |
 | 2      |      EMErrorNetworkUnavailable      | 网络错误：无网络服务时会回调此错误，表示 SDK 与服务器的连接已断开。 |
 | 3      |   EMErrorDatabaseOperationFailed    | 数据库操作失败：打开本地数据库失败。                         |
 | 4      |      EMErrorExceedServiceLimit      | 超过服务限制：超过服务版本的数量限制，比如创建的用户 ID 数量超过上限。 |
 | 5      |      EMErrorServiceArrearages       | 服务欠费，该错误码已废弃。                                   |
+| 8      |      EMAppActiveNumbersReachLimitation       | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。                                 |
 | 100    |        EMErrorInvalidAppkey         | App Key 不合法：用户的 App Key 格式不正确。                  |
 | 101    |       EMErrorInvalidUsername        | 用户 ID 为空或不正确，比如使用邀请好友 API 时 username 参数为空字符。 |
 | 102    |       EMErrorInvalidPassword        | 用户密码不正确：登录时提供的密码为空或不正确。               |
