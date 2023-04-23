@@ -4,7 +4,7 @@
 
 本文介绍环信即时通讯 IM Web SDK 中接口调用或者回调中的错误码。可以根据具体错误码判断具体错误原因。
 
-你可以在 listen 方法中通过 `options` 参数注册 `onError` 回调，然后通过该回调返回的参数，或其他 API 调用失败回调中返回的参数判断出错的原因。示例代码如下：
+你可以在 `addEventHandler` 方法中通过 `options` 参数注册 `onError` 回调，然后通过该回调返回的参数，或其他 API 调用失败回调中返回的参数判断出错的原因。示例代码如下：
 
 error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` 为回调返回的参数，`statusCode` 为 SDK 定义的错误信息。
 
