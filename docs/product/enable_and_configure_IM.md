@@ -73,7 +73,7 @@
 在环信即时通讯云控制台，你可以查看你的环信即时通讯 IM 服务的如下信息：
 
 | 应用信息       | 描述   | 如何查看 | 
-| :--------- | :----- | :------- | :------------------------------------- |
+| :--------- | :----- | :------- | 
 | `Orgname`     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。该参数是 `APPKEY` 的一部分。 | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
 | `Appname` | 你在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建应用时填入的应用名称。该参数是 `AppKey` 的一部分。| 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
 | `APPKEY` | 应用的唯一标识，由 `Orgname` 和 `Appname` 组成，生成后不允许修改。     | 在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
