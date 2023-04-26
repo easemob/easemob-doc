@@ -16,7 +16,7 @@
 
 ### 优化
 
-- [IM SDK] 聊天室详情更新回调 `chatroomSpecificationDidUpdate` 返回更新的信息。
+- [IM SDK] [聊天室详情更新回调 chatroomSpecificationDidUpdate](room_manage.html#监听聊天室事件) 返回更新的信息。
 - [IM SDK] 优化 `loadMessagesWithKeyword` 方法实现按关键字全局搜索消息支持搜索自定义消息。
 - [IM SDK] 优化日志回调逻辑。
 - [IM SDK] 移除代码中使用的 ECB 加密。
