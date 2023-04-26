@@ -68,6 +68,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 507    |   EMErrorMessageIllegalWhiteList    | 用户未在白名单中：群组或聊天室开启全员禁言时，若用户未在白名单中发送消息时提示该错误。 |
 | 508    | EMErrorMessageExternalLogicBlocked  | 发送前回调拦截：消息发送前被服务器拦截。                     |
 | 509    |    EMErrorMessageCurrentLimiting    | 单个用户 ID 发送群聊消息超出频率限制。                       |
+| 510    |    EMErrorMessageSizeLimit    | 发送消息时消息体大小超过上限。 |
 | 600    |        EMErrorGroupInvalidId        | 群组 ID 异常：群组相关 API 传入的群组 ID 为空。              |
 | 601    |      EMErrorGroupAlreadyJoined      | 已在该群组中：调用加入群组的 API 加入的用户已经在该群组中。  |
 | 602    |        EMErrorGroupNotJoined        | 未加入该群组：在未加入的群组中发送消息或进行群组操作时提示该错误。 |
