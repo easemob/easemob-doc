@@ -2,6 +2,32 @@
 
 <Toc />
 
+## 版本 V4.0.2 Dev 2023-4-26（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 Reaction 回调操作类型。
+- [IM SDK] 新增 `EMChatManager#asyncFetchHistoryMessages` 方法，实现根据消息拉取参数配置类（`EMFetchMessageOption`）从服务器分页获取指定会话的历史消息。`EMFetchMessageOption` 类中包括起始时间戳、消息类型和消息发送方等参数。
+- [IM SDK] 新增 `EMConversation#removeMessages` 重载方法，实现从本地数据库中删除指定时间段内的消息。
+- [IM SDK] 新增[错误码 510 `MESSAGE_SIZE_LIMIT`](error.html)，发送消息时若消息体大小超过上限时提示错误。
+- [IM SDK] 新增[错误码 8 `APP_ACTIVE_NUMBER_REACH_LIMITATION`](error.html)，应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时提示错误。
+
+### 优化
+
+- [IM SDK] [聊天室详情更新回调 onSpecificationChanged](room_manage.html#监听聊天室事件) 返回更新的信息。
+- [IM SDK] 优化 `searchMsgFromDB` 方法实现按关键字全局搜索消息支持搜索自定义消息。
+- [IM SDK] 优化上传绑定推送证书的逻辑。
+- [IM SDK] 优化自动登录时数据库加载的时机。
+- [IM SDK] 优化日志回调逻辑。
+- [IM Demo] 优化反诈骗 UI 样式。
+
+### 修复
+
+- [IM SDK] 修复[获取群组详情](group_manage.html#获取群组详情)时，群组 ID 为空时发生崩溃的问题。
+- [IM SDK] 修复某些场景下平台层缓存数据不更新的问题。
+- [IM SDK] 修复部分场景下用户调用下载消息附件接口时，附件未下载到私有目录的问题。
+- [IM SDK] 修复某些场景下消息已读状态不更新的问题。
+
 ## 版本 V4.0.1 Dev 2023-3-16（开发版）
 
 ### 新增特性

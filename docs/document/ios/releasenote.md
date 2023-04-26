@@ -2,11 +2,30 @@
 
 <Toc />
 
+## 版本 V4.0.2 Dev 2023-4-26（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 Reaction 回调操作类型。
+- [IM SDK] 新增 `EMChatManager#fetchMessagesFromServerBy` 方法，根据消息拉取参数配置接口（`EMFetchServerMessagesOption`）从服务器分页获取指定会话的历史消息。`EMFetchServerMessagesOption` 接口中包括起始时间戳、消息类型和消息发送方等参数。
+- [IM SDK] 新增 `EMConversation#removeMessagesStart` 方法，实现从本地数据库中删除指定时间段内的消息。
+- [IM SDK] 新增[错误码 510 `EMErrorMessageSizeLimit`](error.html)，发送消息时若消息体大小超过上限时提示错误。
+- [IM SDK] 新增[错误码 8 `EMAppActiveNumbersReachLimitation`](error.html)，应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时提示错误。
+- [IM Demo] 新增群组聊天时可提及某些用户，对其发送消息。
+
+
+### 优化
+
+- [IM SDK] [聊天室详情更新回调 chatroomSpecificationDidUpdate](room_manage.html#监听聊天室事件) 返回更新的信息。
+- [IM SDK] 优化 `loadMessagesWithKeyword` 方法实现按关键字全局搜索消息支持搜索自定义消息。
+- [IM SDK] 优化日志回调逻辑。
+- [IM SDK] 移除代码中使用的 ECB 加密。
+
 ## 版本 V4.0.1 Dev 2023-3-16（开发版）
 
 ### 新增特性
 
-- [IM SDK] 新增 [群成员自定义属性功能](group_members.html#管理群成员自定义属性)并增加[自定义属性更新事件](group_manage.html#监听群组事件)实现群成员设置和获取在群组中的昵称和头像等属性。
+- [IM SDK] 新增[群成员自定义属性功能](group_members.html#管理群成员自定义属性)并增加[自定义属性更新事件](group_manage.html#监听群组事件)实现群成员设置和获取在群组中的昵称和头像等属性。
 - [IM SDK] 新增 `EMChatMessage#deliverOnlineOnly` 属性实现发消息只投递给在线用户。若开启了该功能，用户离线时消息不投递。
 - [IM Demo] 新增群成员昵称修改与展示功能。
 
