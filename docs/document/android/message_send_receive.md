@@ -49,16 +49,16 @@
 示例代码：
 
 ```java
-// 创建一条文本消息，`content` 为消息文字内容，`toChatUsername` 为对方用户或者群聊的 ID，后文皆是如此。
-EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
-// 设置消息类型，即设置 `Message` 类的 `ChatType` 属性，可设置为 `Chat`、`GroupChat` 和 `ChatRoom`，即单聊，群聊或聊天室消息，默认为单聊。
-message.setChatType(ChatType.GroupChat);
+// 创建一条文本消息，`content` 为消息文字内容，`conversationId` 为会话 ID，在单聊时为对端用户 ID、群聊时为群组 ID，聊天室时为聊天室 ID。
+EMMessage message = EMMessage.createTextSendMessage(content, conversationId);
+// 发送消息。
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
 对于聊天室消息，可设置消息优先级。示例代码如下：
 
 ```java
-   EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
+   EMMessage message = EMMessage.createTextSendMessage(content, conversationId);
    message.setChatType(ChatType.ChatRoom);
    // 聊天室消息的优先级。如果不设置，默认值为 `PriorityNormal`，即“普通”优先级。
    message.setPriority(EMChatRoomMessagePriority.PriorityHigh);

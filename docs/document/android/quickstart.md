@@ -245,7 +245,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 
 ```java
 // `content` 为要发送的文本内容，`toChatUsername` 为对方的账号。
-EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
+EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
