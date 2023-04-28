@@ -235,11 +235,10 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 ```
 
 :::notice
-
 1. 除了注册监听器，其他的 SDK 操作均需在登录之后进行。
 2. 登录成功后需要调用 `EMClient.getInstance().chatManager().loadAllConversations();` 和 `EMClient.getInstance().groupManager().loadAllGroups();`，确保进入主页面后本地会话和群组均加载完毕。
 3. 如果之前登录过，App 长期在后台运行后切换到前台运行可能会导致加载到内存的群组和会话为空。为了避免这种情况，可在主页面的 `oncreate` 里也添加这两种方法，不过，最好将这两种方法放在程序的开屏页。
-   :::
+:::
 
 ### 4. 发送一条单聊消息
 

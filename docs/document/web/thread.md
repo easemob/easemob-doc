@@ -56,11 +56,7 @@ conn.addEventHandler('THREAD',{
 
 仅子区所在群组的群主和群管理员可以调用 `destroyChatThread` 方法解散子区。
 
-单设备登录时，子区所属群组的所有成员均会收到 `onChatThreadChange`回调，事件为 `destroy`；多设备登录时，其他设备会同时收到 `onMultiDeviceEvent` 回调，事件为 `chatThreadDestroy`。
-
-:::notice
-解散子区后，将删除本地数据库及内存中的群相关信息及群会话，谨慎操作。
-:::
+单设备登录时，子区所属群组的所有成员均会收到 `onChatThreadChange` 回调，事件为 `destroy`；多设备登录时，其他设备会同时收到 `onMultiDeviceEvent` 回调，事件为 `chatThreadDestroy`。
 
 示例代码如下：
 
@@ -77,11 +73,11 @@ conn.addEventHandler('THREAD',{
 
 ### 加入子区
 
-子区所在群组的所有成员均可以调用 `joinChatThread` 方法加入群组，
+子区所在群组的所有成员均可以调用 `joinChatThread` 方法加入子区。
 
 加入子区的具体步骤如下：
 
-1. 收到 `onChatThreadChange` 回调，或调用 `getChatThreads` 方法从服务器获取指定群组的子区列表，从中获取到想要加入的子区 ID。
+1. 收到 `onChatThreadChange` 回调或调用 `getChatThreads` 方法从服务器查询指定群组的子区列表，获得要加入的子区 ID。
 2. 调用 `joinChatThread` 传入子区 ID 加入对应子区。  
 
 多设备登录时，其他设备会同时收到 `onMultiDeviceEvent` 回调，事件为 `chatThreadJoin`。

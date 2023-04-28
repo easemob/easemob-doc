@@ -1668,15 +1668,15 @@ payload 字段含义：
     "security": "426c327006ccc3283d157d7da22db27f", 
     "payload": { 
         "muc_id": "XXXX#XXXX@conference.easemob.com", 
-        "reason": "{
-            \"data\":{
-                \"file_id\":\"79ddf840-8e2f-11ec-bec3-ad40868b03f9\",
-                \"file_name\":\"a.csv\",
-                \"file_owner\":\"@ppAdmin\",
-                \"file_size\":6787,
-                \"created\":1644909510085
+        "reason": {
+            "data": {
+                "file_id": "79ddf840-XXXX-XXXX-bec3-ad40868b03f9",
+                "file_name": "a.csv",
+                "file_owner": "@ppAdmin",
+                "file_size": 6787,
+                "created": 1644909510085
                 }
-            }",
+            },
         "is_chatroom": false, 
         "operation": "upload_file", 
         "status": { 

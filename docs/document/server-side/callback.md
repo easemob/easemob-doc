@@ -303,10 +303,10 @@ curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' 
 ```json
 {
   "path": "/callbacks",
-  "uri": "https://a1.easemob.com/easemob-demo/easeim/callbacks",
+  "uri": "https://XXXX/XXXX/XXXX/callbacks",
   "timestamp": 1631193031254,
-  "organization": "easemob-demo",
-  "application": "8dfb1641-b6d8-450b-bbe9-d8d45a3be39f",
+  "organization": "XXXX",
+  "application": "8dfb1641-XXXX-XXXX-bbe9-d8d45a3be39f",
   "action": "post",
   "data": [
     {
@@ -321,7 +321,7 @@ curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' 
     }
   ],
   "duration": 153,
-  "applicationName": "easeim"
+  "applicationName": "XXXX"
 }
 ```
 
@@ -369,12 +369,11 @@ curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' 
 | `action`       | String | 请求方法。                                                                     |
 | `data`         | Bool   | • `success`：成功；<br/> • `failure`：失败。                                   |
 | `duration`     | long   | 请求耗时，单位为毫秒。                                                         |
-| `retry`        | Int    | 开发者已经重试补发的次数。考虑到补发也可能失败，服务器会继续存储。最开始是 0。 |
 
 #### 请求示例
 
 ```shell
-curl -X POST 'https://a1.easemob.com/easemob-demo/easeim/callback/storage/retry' \
+curl -X POST 'https://XXXX/XXXX/XXXX/callback/storage/retry' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 --data-raw '{
@@ -389,14 +388,14 @@ curl -X POST 'https://a1.easemob.com/easemob-demo/easeim/callback/storage/retry'
 ```json
 {
   "path": "/callbacks",
-  "uri": "https://a1.easemob.com/easemob-demo/easeim/callbacks",
+  "uri": "https://XXXX/XXXX/XXXX/callbacks",
   "timestamp": 1631194031721,
-  "organization": "easemob-demo",
-  "application": "8dfb1641-b6d8-450b-bbe9-d8d45a3be39f",
+  "organization": "XXXX",
+  "application": "8dfb1641-XXXX-XXXX-bbe9-d8d45a3be39f",
   "action": "post",
   "data": "success",
   "duration": 225,
-  "applicationName": "easeim"
+  "applicationName": "XXXX"
 }
 ```
 
