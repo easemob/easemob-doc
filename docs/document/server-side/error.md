@@ -27,7 +27,7 @@
 | 404                        | （未找到）服务器找不到请求的接口。                           |
 | 405                        | （请求方式错误）请按照环信官网接口说明，正确的使用接口 GET，POST 等请求方式。 |
 | 408                        | （请求超时）服务器等候请求时发生超时。                       |
-| 413                        | （请求体过大）请求体超过了 5 kb，拆成更小的请求体重试即可。  |
+| 413                        | （请求体过大）请求体超过了 5 KB，拆成更小的请求体重试即可。  |
 | 415                        | 请求体的类型不支持。                                         |
 | 429                        | （服务不可用）请求接口超过调用频率限制，即接口被限流。或超过社区版限制，如有需要可联系商务。 |
 | 500                        | （服务器内部错误）服务器遇到错误，无法完成请求。             |
@@ -66,13 +66,13 @@
 | 400              |                                    | “too many get presences”                                     | 获取在线状态的用户数量超过上限。                             |
 | 400              |                                    | “too many unsub presences”                                   | 取消订阅的用户数量超过上限。                                 |
 | 400              |                                    | “too many queries”         | 查询次数超过限制。                                           |
-| 401              | unauthorized                       | “registration is not open, please contact the app admin”     | 返回 401 是未授权，error_description 的描述为 App Key 使用了授权注册，需要 header 加上管理员 token，才有权限注册用户；若加上 token 返回 401，则 token 可能失效，建议重取重试。 |
-| 401              | unauthorized                       | “Unable to authenticate due to expired access token”         | token 过期或未传 token。                                     |
-| 401              | auth_bad_access_token              | “Unable to authenticate due to corrupt access token”         | 发送请求时使用的 token 错误。注意：不是 token 过期。         |
-| 401              | auth_bad_access_token              | “Unable to authenticate”                                     | 无效 token，符合 token 的格式，但是该 token 不是接受请求的系统生成的，系统无法识别该 token。 |
+| 401              | unauthorized                       | “registration is not open, please contact the app admin”     | 授权注册模式下，调用[注册单个用户](account_system.html#授权注册单个用户)和[批量注册用户](account_system.html#批量注册用户)的 RESTful 接口时，未传入 App Token 或传入了错误的 App Token 时提示该错误，例如 Token 已过期或格式不正确。 |
+| 401              | unauthorized                       | “Unable to authenticate due to expired access token”         | 调用 RESTful 接口发送请求时使用的 App Token 过期或未传入 App Token。<br/>该错误码针对除[注册单个用户](account_system.html#授权注册单个用户)和[批量注册用户](account_system.html#批量注册用户)之外的 RESTful 接口有效。     |
+| 401              | auth_bad_access_token              | “Unable to authenticate due to corrupt access token”         | 调用 RESTful 接口发送请求时使用的 App Token 格式错误。<br/>该错误码针对除[注册单个用户](account_system.html#授权注册单个用户)和[批量注册用户](account_system.html#批量注册用户)之外的 RESTful 接口有效。      |
+| 401              | auth_bad_access_token              | “Unable to authenticate”                                     | 调用 RESTful 接口发送请求时使用的 App Token 无效。App Token 的格式正确，但不是由接收请求的服务器生成的，导致服务器无法识别该 Token。<br/>该错误码针对除[注册单个用户](./agora_chat_restful_regiration#注册单个用户)和[批量注册用户](./agora_chat_restful_regiration#注册单个用户)两个 RESTful 接口之外的接口有效。 |
 | 403              | forbidden_op                       | “can not join this group, reason:user: hxtest1 already in group: 40659491815425\n” | 群组加人返回 403 说明用户已经在群内。                        |
 | 403              | forbidden_op                       | “users [hxtest100] are not members of this group!”           | 群组减人返回 403 说明被踢的用户本身就不在群内。              |
-| 403              | forbidden_op                       | “user: username1 doesn't exist in group: 40659491815425”     | 转让群组返回 403，error_description 说明用户被转让的用户不是群成员，无法转让。 |
+| 403              | forbidden_op                       | “user: username1 doesn't exist in group: 40659491815425”     | 转让群组返回 403，error_description 说明用户被转让的 员，无法转让。 |
 | 403              | forbidden_op                       | “new owner and old owner are the same”                       | 转让群组返回 403，error_description 说明被转让的用户已经是群主。 |
 | 403              | forbidden_op                       | “forbidden operation on group owner!”                        | 不能将群主加入黑名单。                                       |
 | 403              | forbidden_op                       | “can not join this group, reason：user %s has joined too many groups/chatroom!” | 用户加入群组或聊天室数超过了限制。                           |

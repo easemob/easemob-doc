@@ -157,13 +157,15 @@ EaseIMKit 提供了自定义的标题栏控件 EaseTitleBar。
 xml 中设置如下：
 
 ```xml
-<com.hyphenate.easeui.widget.EaseTitleBar
-    android:id="@+id/title_bar"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/em_common_title_bar_height"
-    app:titleBarTitle="@string/em_chat_group_detail_title"
-    android:background="@color/white"
-    app:titleBarDisplayHomeAsUpEnabled="true"/>
+ <com.hyphenate.easeui.widget.EaseTitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        app:titleBarLeftImage="@drawable/ease_mm_title_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleBarDisplayHomeAsUpEnabled="true"
+        app:titleBarTitle="标题" />
 ```
 
 其中 `titleBarDisplayHomeAsUpEnabled` 属性为设置返回按钮是否可见，设置标题位置可设置 `titleBarTitlePosition`，可选值为 `center`，`left` 和 `right`。
