@@ -199,13 +199,20 @@ EMClient.getInstance().init(context, options);
 可以使用如下代码创建账户：
 
 ```java
-// 注册失败会抛出 HyphenateException。
-// 同步方法，会阻塞当前线程。
-EMClient.getInstance().createAccount(mAccount, mPassword);
+try {
+                        // 注册失败会抛出 HyphenateException。
+                        // 同步方法，会阻塞当前线程。
+                        EMClient.getInstance().createAccount(userName, pwd);
+                        //成功
+                        //callBack.onSuccess(createLiveData(userName));
+                    } catch (HyphenateException e) {
+                        //失败
+                        //callBack.onError(e.getErrorCode(), e.getMessage());
+                    }
 ```
 
 :::notice
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见：[注册单个用户](/document/server-side/account_system.html#注册单个用户)。
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#注册单个用户)。
 :::
 
 ### 3. 登录账号

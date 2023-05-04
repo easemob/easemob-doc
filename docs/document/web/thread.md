@@ -61,7 +61,7 @@ conn.addEventHandler('THREAD',{
 示例代码如下：
 
 ```javascript
-// 创建子区
+// 解散子区
 conn.destroyChatThread({chatThreadId: 'chatThreadId'})
 // 监听子区解散回调
 conn.addEventHandler('THREAD',{
@@ -78,7 +78,7 @@ conn.addEventHandler('THREAD',{
 加入子区的具体步骤如下：
 
 1. 收到 `onChatThreadChange` 回调或调用 `getChatThreads` 方法从服务器查询指定群组的子区列表，获得要加入的子区 ID。
-2. 调用 `joinChatThread` 传入子区 ID 加入对应子区。  
+2. 调用 `joinChatThread` 方法传入子区 ID 加入对应子区。  
 
 多设备登录时，其他设备会同时收到 `onMultiDeviceEvent` 回调，事件为 `chatThreadJoin`。
 
