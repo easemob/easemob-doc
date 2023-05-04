@@ -199,13 +199,20 @@ EMClient.getInstance().init(context, options);
 可以使用如下代码创建账户：
 
 ```java
-// 注册失败会抛出 HyphenateException。
-// 同步方法，会阻塞当前线程。
-EMClient.getInstance().createAccount(mAccount, mPassword);
+try {
+                        // 注册失败会抛出 HyphenateException。
+                        // 同步方法，会阻塞当前线程。
+                        EMClient.getInstance().createAccount(userName, pwd);
+                        //成功
+                        //callBack.onSuccess(createLiveData(userName));
+                    } catch (HyphenateException e) {
+                        //失败
+                        //callBack.onError(e.getErrorCode(), e.getMessage());
+                    }
 ```
 
 :::notice
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见：[注册单个用户](/document/server-side/account_system.html#注册单个用户)。
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#注册单个用户)。
 :::
 
 ### 3. 登录账号
@@ -235,17 +242,16 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 ```
 
 :::notice
-
 1. 除了注册监听器，其他的 SDK 操作均需在登录之后进行。
 2. 登录成功后需要调用 `EMClient.getInstance().chatManager().loadAllConversations();` 和 `EMClient.getInstance().groupManager().loadAllGroups();`，确保进入主页面后本地会话和群组均加载完毕。
 3. 如果之前登录过，App 长期在后台运行后切换到前台运行可能会导致加载到内存的群组和会话为空。为了避免这种情况，可在主页面的 `oncreate` 里也添加这两种方法，不过，最好将这两种方法放在程序的开屏页。
-   :::
+:::
 
 ### 4. 发送一条单聊消息
 
 ```java
 // `content` 为要发送的文本内容，`toChatUsername` 为对方的账号。
-EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
+EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```

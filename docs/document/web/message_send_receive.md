@@ -62,15 +62,12 @@ function sendTextMessage() {
     chatType: "singleChat",
   };
   // 创建文本消息。
-  let msg = WebIM.message.create(opt);
+  let msg = WebIM.message.create(option);
   // 调用 `send` 方法发送该文本消息。
-  conn
-    .send(msg)
-    .then(() => {
-      console.log("Send message success");
-    })
-    .catch((e) => {
-      console.log("Send message fail");
+    conn.send(msg).then((res)=>{
+      console.log("Send message success",res);
+    }).catch((e)=>{
+      console.log("Send message fail",e);
     });
 }
 ```
@@ -198,7 +195,7 @@ conn.addEventHandler('MESSAGES',{
 
 语音、图片、视频和文件消息本质上是附件消息。发送和接收附件消息的流程如下：
 
-1. 创建和发送附件类型消息。SDK 将附件上传到 Agora 服务器，获取消息的基本信息以及服务器上附件文件的路径。
+1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器，获取消息的基本信息以及服务器上附件文件的路径。
 
    对于图片消息来说，服务器会自动生成图片的缩略图；而对于视频消息来说，服务器不会自动生成视频缩略图。
 
@@ -483,10 +480,14 @@ const sendLocMsg = () => {
         lng: Math.round(coords.longitude),
       };
       let msg = WebIM.message.create(option);
-      conn.send(msg);
-    });
+      conn.send(msg).then((res)=>{
+        console.log("Send message success", res);
+      }).catch((e)=>{
+        console.log("Send message fail", e);
+      });
+    })
   }
-};
+}
 ```
 
 ### 发送透传消息
@@ -590,7 +591,7 @@ const sendBeginTyping = function () {
 ```typescript
 // 设置状态监听器
 let timer;
-connection.addEventHandler("message", {
+conn.addEventHandler("message", {
   onCmdMessage: (msg) => {
     console.log("onCmdMessage", msg);
     if (msg.action === "TypingBegin") {

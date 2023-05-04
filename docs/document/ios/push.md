@@ -29,6 +29,7 @@ APNs 是苹果官方提供的推送解决方案，主要用于在 app 处于不�
 ![image](@static/images/ios/push/push_ios_3_cert_assistant_cert_info.jpeg)
 
 点击继续: 
+
 ![image](@static/images/ios/push/push_ios_4_cert_assistant_cert_save.jpeg)
 
 在本地生成了名为 `EMImDemoAPS.certSigningRequest` 的 CSR 文件。
@@ -99,7 +100,7 @@ aps 文件创建成功了，点击 `Download` 下载到本地。（文件名：�
 
 选择 `iOS App Development`（这里演示开发版描述文件的创建, 发布版本的创建流程一样，如果发布版本，请选择 App Store），点击 `Continue`。
 
-![image](@static/images/ios/push/push_ios_19_generate_pr_register.jpeg)
+![image](@static/images/ios/push/push_ios_19_generate_pr_register.png)
 
 App ID 选择需要创建 PP 文件的 App ID， 点击 `Continue`。
 

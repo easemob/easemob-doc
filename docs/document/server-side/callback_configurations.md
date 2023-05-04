@@ -368,7 +368,7 @@ payload 中字段含义：
 | muc:update                 | {“operation”:“update”}                 | 群信息修改                                     | 聊天室信息修改         |
 | muc:block                  | {“operation”:“block”}                  | 用户屏蔽群                                     | 不支持                 |
 | muc:unblock                | {“operation”:“unblock”}                | 用户解除屏蔽群                                 | 不支持                 |
-| muc:presence               | {“operation”:“presence”}               | 成员进入群                                     | 成员进入聊天室         |
+| muc:presence               | {“operation”:“presence”}               | 有新成员加入了群                                     | 有新成员加入了聊天室         |
 | muc:absence                | {“operation”:“absence”}                | 有成员退出了群                                 | 有成员离开了聊天室     |
 | muc:direct_joined          | {“operation”:“direct_joined”}          | 成员直接加入群（未开启加入验证）        | 不支持  |
 | muc:leave                  | {“operation”:“leave”}                  | 成员主动退出群                                 | 成员主动退出聊天室     |
@@ -394,7 +394,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。<br> - `true`：是；<br> - `false`：否。             |
+| `is_chatroom` | Bool     | 是否是聊天室。<br> - `true`：是；<br> - `false`：否。             |
 | `operation`   | String   | `create` 创建群聊或聊天室。                                  |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 创建群聊或聊天室失败的原因描述。                             |
@@ -504,7 +504,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `apply`：申请加入群。                                        |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 申请加入群聊或聊天室失败的原因描述。                         |
@@ -546,7 +546,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `apply_accept`：接受加入群组的申请。                               |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -587,7 +587,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `invite`：邀请新成员加入群。                                 |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 邀请新用户加入群聊失败的原因描述。                           |
@@ -629,7 +629,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `invite_accept`：受邀用户同意加入群。                        |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -671,7 +671,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `invite_decline`：受邀用户拒绝加入群。                       |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -712,7 +712,7 @@ payload 字段含义：
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `kick`：将成员踢出群聊或聊天室。                             |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -780,7 +780,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `ban`：将成员添加到黑名单。                  |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -822,7 +822,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `allow`：将成员从黑名单中移除。                          |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -864,7 +864,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `update`：群/聊天室信息修改。                                |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -932,7 +932,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `block`：用户屏蔽群。                                        |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -974,7 +974,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `unblock`：用户屏蔽群/聊天室。                               |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1008,7 +1008,7 @@ payload 字段含义：
 }
 ```
 
-#### 加入群组或聊天室
+#### 有新成员加入了群组或聊天室
 
 payload 字段含义：
 
@@ -1016,9 +1016,9 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `operation`   | String   | `presence`：成员进群/聊天室。                                |
-| `is_chatroom` | bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
+| `is_chatroom` | Bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
 
-成员进群回调请求示例：
+有新成员加入了群组时，即时通讯 IM 服务会向你的应用服务器发送用户加入了群组的通知。回调请求示例：
 
 ```json
 { 
@@ -1041,7 +1041,7 @@ payload 字段含义：
 }
 ```
 
-成员进聊天室回调请求示例：
+有新成员加入了聊天室时，即时通讯 IM 服务会向你的应用服务器发送用户加入了聊天室的通知。回调请求示例：
 
 ```json
 { 
@@ -1064,17 +1064,17 @@ payload 字段含义：
 }
 ```
 
-#### 离开群组或聊天室
+#### 有成员离开了群组或聊天室
 
 payload 字段含义：
 
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
-| `operation`   | String   | `absence`：成员离开群/聊天室。                               |
-| `is_chatroom` | bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
+| `operation`   | String   | `absence`：成员离开群/聊天室。                                |
+| `is_chatroom` | Bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
 
-有成员退出了群回调请求示例：
+有新成员主动离开了群组或被移出时，即时通讯 IM 服务会向你的应用服务器发送用户离开了群组的通知。回调请求示例：
 
 ```json
 { 
@@ -1097,7 +1097,7 @@ payload 字段含义：
 }
 ```
 
-成员离开聊天室回调请求示例：
+有新成员主动离开了聊天室或被移出时，即时通讯 IM 服务会向你的应用服务器发送用户离开了聊天室的通知。回调请求示例：
 
 ```json
 { 
@@ -1120,7 +1120,7 @@ payload 字段含义：
 }
 ```
 
-#### 有成员主动退出群/有成员主动离开聊天室
+#### 成员主动退出群/成员主动离开聊天室
 
 payload 字段含义：
 
@@ -1128,12 +1128,12 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `operation`   | String   | `leave`：有成员主动退出群/主动离开聊天室。                   |
-| `is_chatroom` | bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
+| `is_chatroom` | Bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
-有成员主动退出群回调请求示例：
+成员主动退出群回调请求示例：
 
 ```json
 { 
@@ -1160,7 +1160,7 @@ payload 字段含义：
 }
 ```
 
-有成员主动离开聊天室回调请求示例：
+成员主动离开聊天室回调请求示例：
 
 ```json
 { 
@@ -1195,7 +1195,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群}@conference.easemob.com`。 |
 | `operation`   | String   | `assing_owner`：转让群。                                     |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
@@ -1235,7 +1235,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `add_admin`：添加群/聊天室管理员。                           |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1303,7 +1303,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `remove_admin`：删除群/聊天室管理员。                        |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1371,7 +1371,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `add_mute`：将群/聊天室成员禁言。                            |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1440,7 +1440,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `remove_mute`：将群/聊天室成员解除禁言。                     |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1508,7 +1508,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | 群公告内容。                                                 |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `update_announcement`：更新群/聊天室公告。                   |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1578,7 +1578,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | 删除后群公告内容，为空。                                     |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `delete_announcement`：删除群/聊天室公告。                   |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1653,7 +1653,7 @@ payload 字段含义：
 | `file_owner`  | String   | 文件所有者。                                                 |
 | `file_size`   | Int      | 文件大小，单位为字节。                                       |
 | `created`     | long     | 文件创建的 Unix 时间戳，单位为 ms。                          |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `upload_file`：上传群文件。                                  |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1668,15 +1668,15 @@ payload 字段含义：
     "security": "426c327006ccc3283d157d7da22db27f", 
     "payload": { 
         "muc_id": "XXXX#XXXX@conference.easemob.com", 
-        "reason": "{
-            \"data\":{
-                \"file_id\":\"79ddf840-8e2f-11ec-bec3-ad40868b03f9\",
-                \"file_name\":\"a.csv\",
-                \"file_owner\":\"@ppAdmin\",
-                \"file_size\":6787,
-                \"created\":1644909510085
+        "reason": {
+            "data": {
+                "file_id": "79ddf840-XXXX-XXXX-bec3-ad40868b03f9",
+                "file_name": "a.csv",
+                "file_owner": "@ppAdmin",
+                "file_size": 6787,
+                "created": 1644909510085
                 }
-            }",
+            },
         "is_chatroom": false, 
         "operation": "upload_file", 
         "status": { 
@@ -1703,7 +1703,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | object   | 跟上传群文件时 `file_id` 一致。                              |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `delete_file`：删除群文件。                                  |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1744,7 +1744,7 @@ payload 字段含义：
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `add_user_white_list`：添加用户进群/聊天室白名单。           |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1811,7 +1811,7 @@ payload 字段含义：
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `remove_user_white_list`：将用户从群/聊天室白名单移除。      |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1878,7 +1878,7 @@ payload 字段含义：
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
-| `is_chatroom` | bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `ban_group`：将群或聊天室全局禁言。                          |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
@@ -1945,7 +1945,7 @@ payload 字段含义：
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
-| `is_chatroom` | bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
+| `is_chatroom` | Bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
 | `operation`   | String   | `remove_ban_group`：解除群或聊天室全局禁言。                 |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
