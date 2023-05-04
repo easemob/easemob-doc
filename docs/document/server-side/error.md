@@ -41,22 +41,22 @@
 | HTTP Status Code | Error                              | Error Description                                            | 可能原因                                                     |
 | :--------------- | :--------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | 400              | invalid_grant                      | invalid username or password                                 | 用户名或者密码输入错误。                                     |
-| 400              | invalid_grant                      | “client_id does not match”                                   | “client_id does not match” 是 client_id 传入不正确，“client_secret does not match” 是 client_secret 传入不正确，client_id 以及 client_secret 在管理后台对应的应用详情中查看。 |
+| 400              | invalid_grant                      | “client_id does not match”                                   | <br/>- “client_id does not match”：传入的 client_id 不正确；<br/>- “client_secret does not match”：传入的 client_secret 不正确。<br/>client_id 以及 client_secret 在环信管理后台的**应用详情**页面中查看。 |
 | 400              | json_parse                         | “Unexpected character (‘=’ (code 61)): was expecting a colon to separate field name and value\n at [Source: java.io.BufferedInputStream@170e3f35; line: 1, column: 23]” | 发送请求时请求体不符合标准的 JSON 格式，服务器无法正确解析。 |
-| 400              | illegal_argument                   | “Entity user requires a property named username”             | 创建用户请求体未提供 “username”。                            |
-| 400              | illegal_argument                   | “password or pin must provided”                              | 创建用户请求体未提供 “password” 或提供了 password 但是值为空字符。 |
-| 400              | illegal_argument                   | “newpassword is required”                                    | 修改用户密码的请求体没提供 newpassword 属性。                |
+| 400              | illegal_argument                   | “Entity user requires a property named username”             | 注册用户请求未提供用户 ID（`username`）。                         |
+| 400              | illegal_argument                   | “password or pin must provided”                              | 注册用户请求未提供用户密码（`password`）或提供的密码为空。 |
+| 400              | illegal_argument                   | “newpassword is required”                                    | 修改用户密码的请求体未提供 `newpassword` 属性。   |
 | 400              | illegal_argument                   | “oldPassword is required”                                    | 修改用户密码的请求体未提供 `oldPassword` 属性。 |
-| 400              | illegal_argument                   | “group member username1 doesn’t exist”                       | 批量添加群组成员时预加入群组的新成员 username 不存在。           |
+| 400              | illegal_argument                   | “group member username1 doesn’t exist”                       | 批量添加群组成员时，`username1` 不存在。         |
 | 400              | illegal_argument                   | “this is an invalid request.”                                | 请求无效，请检查调用接口的 url、header、body，是否符合所调用接口的要求，可以使用 curl 命令进行测试。 |
-| 400              | illegal_argument                   | “from can't be empty”                                        | from 表示消息发送者，无此字段 Server 会默认设置为 “from”:“admin”，有 from 字段但值为空字符串(“”)时请求失败，返回 400。 |
-| 400              | illegal_argument                   | “target_type can only be 'users' or 'chatgroups' or 'chatrooms'” | target_type 只能为 'users' or 'chatgroups' or 'chatrooms'，为其他字符串时请求失败，返回 400。 |
-| 400              | illegal_argument                   | “username is not legal”                                      | 注册使用的 username 不合法，username(Chat ID) 规则见 [用户体系集成](account_system.html#注册用户) |
-| 400              | illegal_argument                   | “This chatmessage request is not supported”                  | 可能是传入的时间格式不正确，正确的格式是：YYYYMMDDHH，如要获取 2018 年 02 月 09 日 12 点到 13 点的聊天记录，这样设置：2018020912。 |
-| 400              | illegal_argument                   | “illegal arguments: appkey: easemob-demo#chatdemoui, time: 2018020918, maybe chat message history is expired or unstored” | 对应时间的历史消息还未生成或已过期。消息的保留时间取决于产品套餐，详见[消息存储时长限制](limitation.html#消息存储时长限制)。 |
-| 400              | invalid_parameter                  | “some of [groupid] are not valid fields”                     | 修改群信息目前只支持修改“群名称”、“群描述”、“群最大人数”，这个 error 是修改的参数不支持，如修改 groupid。 |
-| 400              | required_property_not_found        | “Entity user requires a property named username”             | 这个是被重置密码的 username 不存在导致。                     |
-| 400              | duplicate_unique_property_exists   | “Application null Entity user requires that property named username be unique, value of hxtest1 exists” | 注册的 username 已存在，返回 400；注：如果是批量注册，若一次调用返回一个 ID 已存在，则此次调用注册的其他不存在的 ID 不会注册，需将已存在的 ID 从数组中移除重新调用注册。 |
+| 400              | illegal_argument                   | “from can't be empty”                                        | 消息发送方（`from`）为空。若不传该字段， 服务器会默认设置为 `admin`。 |
+| 400              | illegal_argument                   | “target_type can only be 'users' or 'chatgroups' or 'chatrooms'” | 发送消息时，对象类型（`target_type`）只能传入 `users`、`chatgroups` 或 `chatrooms`。若传入其他值，提示该错误。 |
+| 400              | illegal_argument                   | “username is not legal”                                      | 注册用户时传入的 username 不合法，详见 [用户体系集成](account_system.html#注册用户) |
+| 400              | illegal_argument                   | “This chatmessage request is not supported”                  | 查询历史消息时传入的时间格式不正确，正确的格式为 YYYYMMDDHH。例如，要获取 2018 年 02 月 09 日 12 点到 13 点的历史消息，传入的时间为 `2018020912`。 |
+| 400              | illegal_argument                   | “illegal arguments: appkey: easemob-demo#chatdemoui, time: 2018020918, maybe chat message history is expired or unstored” | 查询的历史消息未生成或已过期。消息的保留时间取决于产品套餐，详见[消息存储时长限制](limitation.html#消息存储时长限制)。 |
+| 400              | invalid_parameter                  | “some of [groupid] are not valid fields”                     | 修改的群组信息时，传入的参数不支持，例如修改 `groupid`。修改群信息目前只支持修改“群名称”、“群描述” 和 “群最大人数”。 |
+| 400              | required_property_not_found        | “Entity user requires a property named username”             | 修改用户密码请求未提供用户 ID（`username`）。    |
+| 400              | duplicate_unique_property_exists   | “Application null Entity user requires that property named username be unique, value of hxtest1 exists” | 注册用户时，用户 ID 已存在，请更换用户 ID 重新注册。 注：如果是批量注册，若一次调用返回一个 ID 已存在，则此次调用注册的其他不存在的 ID 不会注册，需将已存在的 ID 从数组中移除重新调用注册。 |
 | 400              | illegal_argument | “message is too large”     | 发送消息时消息体超过了 40 KB 会导致该错误，需要拆成几个更小的请求体重试。     |
 | 400              |              | “set presence failed”     | 在线状态设置失败。               |
 | 400              |     | “ext is too big”                                             | 在线状态扩展信息长度超过限制               |
@@ -70,22 +70,22 @@
 | 401              | unauthorized                       | “Unable to authenticate due to expired access token”         | 调用 RESTful 接口发送请求时使用的 App Token 过期或未传入 App Token。<br/>该错误码针对除[注册单个用户](account_system.html#授权注册单个用户)和[批量注册用户](account_system.html#批量注册用户)之外的 RESTful 接口有效。     |
 | 401              | auth_bad_access_token              | “Unable to authenticate due to corrupt access token”         | 调用 RESTful 接口发送请求时使用的 App Token 格式错误。<br/>该错误码针对除[注册单个用户](account_system.html#授权注册单个用户)和[批量注册用户](account_system.html#批量注册用户)之外的 RESTful 接口有效。      |
 | 401              | auth_bad_access_token              | “Unable to authenticate”                                     | 调用 RESTful 接口发送请求时使用的 App Token 无效。App Token 的格式正确，但不是由接收请求的服务器生成的，导致服务器无法识别该 Token。<br/>该错误码针对除[注册单个用户](./agora_chat_restful_regiration#注册单个用户)和[批量注册用户](./agora_chat_restful_regiration#注册单个用户)两个 RESTful 接口之外的接口有效。 |
-| 403              | forbidden_op                       | “can not join this group, reason:user: hxtest1 already in group: 40659491815425\n” | 群组加人返回 403 说明用户已经在群内。                        |
-| 403              | forbidden_op                       | “users [hxtest100] are not members of this group!”           | 群组减人返回 403 说明被踢的用户本身就不在群内。              |
-| 403              | forbidden_op                       | “user: username1 doesn't exist in group: 40659491815425”     | 转让群组返回 403，error_description 说明用户被转让的 员，无法转让。 |
-| 403              | forbidden_op                       | “new owner and old owner are the same”                       | 转让群组返回 403，error_description 说明被转让的用户已经是群主。 |
-| 403              | forbidden_op                       | “forbidden operation on group owner!”                        | 不能将群主加入黑名单。                                       |
-| 403              | forbidden_op                       | “can not join this group, reason：user %s has joined too many groups/chatroom!” | 用户加入群组或聊天室数超过了限制。                           |
-| 403              | forbidden_op                       | “this appKey has create too many groups/chatrooms!”          | AppKey 下创建的群组或聊天室数量以达到限制。                  |
+| 403              | forbidden_op                       | “can not join this group, reason:user: hxtest1 already in group: 40659491815425\n” | 添加群组或聊天室成员时，被添加用户已在群组或聊天室内。                       |
+| 403              | forbidden_op                       | “users [hxtest100] are not members of this group!”           | 踢除群组或聊天室成员时，被踢除的用户不在群组或聊天室内。              |
+| 403              | forbidden_op                       | “user: username1 doesn't exist in group: 40659491815425”     | 转让群组时，被转让的用户不是群组内成员。 |
+| 403              | forbidden_op                       | “new owner and old owner are the same”                       | 转让群组时，被转让的用户已经是群主。 |
+| 403              | forbidden_op                       | “forbidden operation on group owner!”                        | 当前操作禁止对群主使用，如将群主加入黑名单。                                    |
+| 403              | forbidden_op                       | “can not join this group, reason：user %s has joined too many groups/chatroom!” | 用户加入的群组或聊天室数超过了限制。                           |
+| 403              | forbidden_op                       | “this appKey has create too many groups/chatrooms!”          | 加入群组或聊天室时，群组或聊天室人数已达到上限。                |
 | 404              | organization_application_not_found | “Could not find application for hx/hxdeo2 from URI: hx/hxdeo2/token” | hx/hxdeo2 这个设置不正确或不存在，或 baseurl 集群设置错误（只针对 vip 集群的 AppKey），正确的是 orgname/appname，即 AppKey 的 “#“ 换成 ”/“。 |
-| 404              | service_resource_not_found         | “Service resource not found”                                 | URL 指定的资源不存在，如用户相关接口是用户不存在，群组相关接口是群组不存在，聊天室相关接口是聊天室不存在。 |
+| 404              | service_resource_not_found         | “Service resource not found”                                 | URL 指定的资源不存在，如用户相关接口提示用户不存在，群组相关接口提示群组不存在，聊天室相关接口提示聊天室不存在。 |
 | 404              | service_resource_not_found         | “Service resource not found”                                 | 获取的 username 不存在，若用户列表存在该 username，则是因为存在脏数据，可以使用 uuid 代替 username 将该 ID 删除，再使用该 username 重新创建。 |
 | 404              | service_resource_not_found         | “Service resource not found”                                 | 要删除的 username 不存在，若用户列表存在该 username，则可使用 user 的 uuid 代替 username 删除。 |
-| 404              | storage_object_not_found           | “Failed to find chat message history download url for appkey: hx#hxdemo2, time: 2018020912” | 对应的时间没有聊天记录，如确定有聊天记录，请提交工单反馈 Agora Chat 技术支持团队确认。 |
+| 404              | storage_object_not_found           | “Failed to find chat message history download url for appkey: hx#hxdemo2, time: 2018020912” | 对应的时间没有历史消息，如确定有历史消息，请联系[环信技术支持](support@easemob.com)。 |
 | 413              | Request Entity Too Large           | “Request Entity Too Large”                                   | 请求体过大，如上传文件时文件过大，需要拆成几个更小的请求体重试。 |
-| 415              | web_application                    | “Unsupported Media Type”                                     | 请求体的类型不支持，请检查 header 是否添加 ”Content-Type”:“application/json”，body 是否符合标准的 JSON 格式，再确认 header 中是否还有非接口需要的参数，可以舍去。 |
-| 429              | resource_limited                   | “You have exceeded the limit of the Free edition. Please upgrade to higher edition.” | 说明触发了免费版限制，请联系环信客户经理咨询。               |
-| 429              | reach_limit                        | “This request has reached api limit”                         | 超过接口每秒调用次数，加大调用间隔或者联系商务调整限流大小，见 [限制条件](/product/limitation.html)。 |
-| 500              | no_full_text_index                 | “Entity ‘user’ with property named ‘username’ is not full text indexed. You cannot use the ‘contains’ operand on this field” | username 不支持全文索引，不可以对该字段进行 contains 操作。  |
+| 415              | web_application                    | “Unsupported Media Type”                                     | 请求体的类型不支持，请检查请求头是否添加了 `Content-Type`: `application/json`，请求包体是否符合标准的 JSON 格式，以及请求头中是否有接口不需要的参数。 |
+| 429              | resource_limited                   | “You have exceeded the limit of the Free edition. Please upgrade to higher edition.” | 超过免费版套餐包限制。如需开通其他版本套餐包，需联系环信商务。               |
+| 429              | reach_limit                        | “This request has reached api limit”                         | 超过即时通讯 RESTful API 的[调用频率限制](/product/limitation.html)。如果限制条件无法满足你的实际业务需求，需联系请联系环信商务。 |
+| 500              | no_full_text_index                 | “Entity ‘user’ with property named ‘username’ is not full text indexed. You cannot use the ‘contains’ operand on this field” | username 不支持全文索引，不可以对该字段进行 `contains` 操作。  |
 | 500              | unsupported_service_operation      | “Service operation not supported”                            | 请求 URL 不支持该请求方式。                            |
-| 500              | web_application                    | “javax.ws.rs.WebApplicationException”                        | 错误的请求，给一个未提供的 API 发送了请求。                  |
+| 500              | web_application                    | “javax.ws.rs.WebApplicationException”                        | 请求 URL 错误。 |
