@@ -629,32 +629,41 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ```json
 {
-  "action": "get",
-  "application": "09eXXXX34",
-  "applicationName": "chatdemoui",
-  "count": 1,
-  "data": [
-    {
-      "id": "18XXXX3",
-      "name": "XXXX",
-      "description": "test",
-      "membersonly": false,
-      "allowinvites": false,
-      "maxusers": 300,
-      "owner": "yifan2",
-      "created": 1656062986845,
-      "custom": "",
-      "mute": false,
-      "affiliations_count": 1,
-      "disabled": false,
-      "public": true,
-      "permission": "owner"
-    }
-  ],
-  "duration": 2,
-  "organization": "XXXX",
-  "timestamp": 1656063062633,
-  "uri": "https://XXXX.com/XXXX/chatdemoui/chatgroups/18XXXX3"
+    "action": "get",
+    "application": "09ebbf8b-XXXX-XXXX-bd4b-d47c3b38e434",
+    "applicationName": "XXXX",
+    "count": 1,
+    "data": [
+        {
+            "id": "XXXX",
+            "name": "XXXX",
+            "description": "XXXX",
+            "membersonly": true,
+            "allowinvites": false,
+            "maxusers": 2000,
+            "owner": "XXXX",
+            "created": 1682588716646,
+            "custom": "",
+            "mute": false,
+            "affiliations_count": 2,
+            "disabled": false,
+            "affiliations": [
+                {
+                    "member": "XXXX"
+                },
+                {
+                    "owner": "XXXX"
+                }
+            ],
+            "public": false
+        }
+    ],
+    "duration": 35,
+    "entities": [],
+    "organization": "XXXX",
+    "properties": {},
+    "timestamp": 1682588814419,
+    "uri": "http://XXXX/XXXX/XXXX/chatgroups/XXXX"
 }
 ```
 
