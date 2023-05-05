@@ -2,7 +2,7 @@
 
 <Toc />
 
-SDK 提供消息举报接口支持用户举报违规消息。当服务器端审核服务收到举报消息后，会将举报消息存储到数据库，并提供接口供 Console 后台搜索展示。审核员可以对举报记录进行相应处理。
+即时通讯 IM SDK 提供消息举报接口。开发者可以在客户端调用该接口举报违规消息。当服务器端审核服务收到举报消息后，会将举报消息存储到数据库，并在 Console 展示。审核员可在 Console 查看举报记录，并进行相应处理。
 
 ## 技术原理
 
@@ -22,9 +22,9 @@ SDK 提供消息举报接口支持用户举报违规消息。当服务器端审�
 
 ```java
 // msgid：要举报的消息 ID。
-// reportTarget：非法消息的标签，可传入`涉政`、`涉黄`、`广告`、`辱骂`、`暴恐`、`违禁`或`其他`。
-// reason：举报原因。具体原因需自行填写。
-EMClient.getInstance().chatManager().asyncReportMessage(msgid, reportTarget, reason, new EMCallBack() {
+// tag：非法消息的标签。你需要自行填写标签。该字段对应环信即时通讯云控制台的消息举报记录页面的`词条标记`字段。
+// reason：举报原因。你需要自行填写举报原因。该字段对应环信即时通讯云控制台的消息举报记录页面的`举报原因`字段。
+EMClient.getInstance().chatManager().asyncReportMessage(msgid, tag, reason, new EMCallBack() {
     @Override
     public void onSuccess() {
     }
