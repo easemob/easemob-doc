@@ -37,23 +37,219 @@
 
 :::tip
 1. 若要体验环信即时通讯 IM 的功能，可下载[公有云 Demo](https://www.easemob.com/download/demo)。
-2. 若要体验私有化 Demo，需下载下表中对应平台的 Demo，然后在登录页面的`服务器配置`区域完成配置。
-3. 若要集成，需选择下表中的 SDK 及 Demo 版本，按照下表中“开发指南”一列的文档配置私有化环境信息。
+2. 若要体验私有化 Demo，需下载下表中对应平台的 Demo，然后在登录页面的**服务器配置**区域完成配置。
+3. 若要集成，需选择下表中的 SDK 及 Demo 版本，按照下表中**开发指南**一列的文档配置私有化环境信息。
 :::
 
-|SDK|版本号 |下载地址|开发指南|
-| :-------------- | :----- | :------- | :----------------------------------------------------------- |
-|Android|[3.9.1](http://docs-im-beta.easemob.com/document/android/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19)|[下载 SDK 及 Demo](https://downloadsdk.easemob.com/downloads/easemob-sdk-3.9.1.zip)    [体验 Demo](https://downloadsdk.easemob.com/downloads/imsdkdemo_android-3.9.1.apk) | [查看](http://docs-im-beta.easemob.com/document/android/privatecloud.html) |
-|Web|[4.0.4](http://docs-im-beta.easemob.com/document/web/releasenote.html#%E7%89%88%E6%9C%AC-v4-0-4-2022-4-19)| • React: [下载 SDK 及 Demo](https://download-sdk.oss-cn-beijing.aliyuncs.com/zq/private-demo-20230104.zip) [体验 Demo](https://zq-im-management-hsb.easemob.com/) <br/> • Vue 2: [下载 SDK 及 Demo](https://download-sdk.oss-cn-beijing.aliyuncs.com/zq/private-vue2-20230104.zip) <br/> • Vue 3: [下载 SDK 及 Demo](https://download-sdk.oss-cn-beijing.aliyuncs.com/zq/private-vue3-20230104.zip) | [查看](http://docs-im-beta.easemob.com/document/web/privatecloud.html) |
-|iOS|[3.9.1](http://docs-im-beta.easemob.com/document/ios/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19)|[下载 SDK 及 Demo](https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V3.9.1.zip)    [体验 Demo](https://www.pgyer.com/2XKY) | [查看](http://docs-im-beta.easemob.com/document/ios/privatecloud.html) |
-|Windows（C++）|3.9.1|[下载 SDK 及 Demo](https://gitee.com/liyuzhao/im-cpp-demo)  | [查看](https://gitee.com/liyuzhao/im-cpp-demo/tree/master/docs) |
-|Windows（C#）|[1.0.2](http://docs-im-beta.easemob.com/document/windows/releasenote.html#%E7%89%88%E6%9C%AC-v1-0-2-1-2022-06-22)|[下载 SDK](https://downloadsdk.easemob.com/downloads/SDK/WinSDK/agora_chat_sdk.1.0.2-beta.nupkg) | [查看](http://docs-im-beta.easemob.com/document/windows/quickstart.html) |
-|Linux|[3.1.0](https://docs-im.easemob.com/im/linux/releasenote)|[下载 SDK](https://downloadsdk.easemob.com/downloads/linux_IM_SDK_V3.1.0_r1.zip) | [查看](https://docs-im.easemob.com/im/linux/integration) |
-|Electron|[3.8.4](https://docs-im.easemob.com/im/pc/log/releasenote#%E7%89%88%E6%9C%AC_v384_2021-12-09)|[下载 SDK](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/Desktop_IM_SDK_3.8.4.zip) | [查看](https://docs-im.easemob.com/im/pc/intro/integration) |
-|uni-app|[4.0.4](https://docs-im.easemob.com/im/applet/releasenote#%E7%89%88%E6%9C%AC_v404_dev_2022-4-19)|[下载 SDK 及 Demo](https://github.com/easemob/webim-uniapp-demo/releases/tag/4.0.4) | [查看](https://docs-im.easemob.com/im/applet/uniapp) |
-|小程序|[4.0.4](https://docs-im.easemob.com/im/applet/releasenote#%E7%89%88%E6%9C%AC_v404_dev_2022-4-19)|[下载 SDK 及 Demo](https://github.com/easemob/webim-uniapp-demo/releases/tag/4.0.4) | [查看](https://docs-im.easemob.com/im/applet/wechat) |
-|Unity|3.9.0|[下载 SDK](https://downloadsdk.easemob.com/downloads/SDK/Unity/im_unity_sdk_3_9_0.unitypackage) |  |
-|Flutter|[3.9.0+2](https://pub.flutter-io.cn/packages/im_flutter_sdk/changelog#3902)|[下载 SDK](https://pub.flutter-io.cn/packages/im_flutter_sdk/versions/3.9.0+2) | [查看](http://docs-im-beta.easemob.com/document/flutter/quickstart.html) |
-|Java|[0.6.3](https://docs-im.easemob.com/im/server/ready/releasenote)|[下载 SDK](https://github.com/easemob/easemob-im-server-sdk) | [查看](http://docs-im-beta.easemob.com/document/server-side/java_server_sdk.html) |
-| PHP|0.1.0|[下载 SDK](https://github.com/easemob/im-php-server-sdk) | [查看](http://docs-im-beta.easemob.com/document/server-side/php_server_sdk.html) |
+<table>
+<thead>
+<tr>
+<td width="75">
+<p><strong>SDK </strong><strong>类型</strong></p>
+</td>
+<td width="97">
+<p><strong>平台</strong></p>
+</td>
+<td>
+<p><strong>版本号</strong></p>
+</td>
+<td>
+<p><strong>下载地址</strong></p>
+</td>
+<td>
+<p><strong>开发指南</strong></p>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="11" width="75">
+<p>&nbsp;</p>
+<p>客户端 SDK</p>
+</td>
+<td width="97">
+<p>Android</p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/android/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19">3.9.1</a></p>
+</td>
+<td>
+<p><a href="https://downloadsdk.easemob.com/downloads/easemob-sdk-3.9.1.zip">下载 SDK 及 Demo</a>&nbsp;<a href="https://downloadsdk.easemob.com/downloads/imsdkdemo_android-3.9.1.apk">体验 Demo</a></p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/android/privatecloud.html">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>Web</p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/web/releasenote.html#%E7%89%88%E6%9C%AC-v4-0-4-2022-4-19">4.0.4</a></p>
+</td>
+<td>
+<p>&bull; React:&nbsp;<a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/zq/private-demo-20230104.zip">下载 SDK 及 Demo</a>&nbsp;<a href="https://zq-im-management-hsb.easemob.com/">体验 Demo</a><br /> &bull; Vue 2:&nbsp;<a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/zq/private-vue2-20230104.zip">下载 SDK 及 Demo</a><br /> &bull; Vue 3:&nbsp;<a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/zq/private-vue3-20230104.zip">下载 SDK 及 Demo</a></p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/web/privatecloud.html">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>iOS</p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/ios/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19">3.9.1</a></p>
+</td>
+<td>
+<p><a href="https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V3.9.1.zip">下载 SDK 及 Demo</a>&nbsp;<a href="https://www.pgyer.com/2XKY">体验 Demo</a></p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/ios/privatecloud.html">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>Windows（C++）</p>
+</td>
+<td>
+<p>3.9.1</p>
+</td>
+<td>
+<p><a href="https://gitee.com/liyuzhao/im-cpp-demo">下载 SDK 及 Demo</a></p>
+</td>
+<td>
+<p><a href="https://gitee.com/liyuzhao/im-cpp-demo/tree/master/docs">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>Windows（C#）</p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/windows/releasenote.html#%E7%89%88%E6%9C%AC-v1-0-2-1-2022-06-22">1.0.2</a></p>
+</td>
+<td>
+<p><a href="https://downloadsdk.easemob.com/downloads/SDK/WinSDK/agora_chat_sdk.1.0.2-beta.nupkg">下载 SDK</a></p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/windows/quickstart.html">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>Linux</p>
+</td>
+<td>
+<p><a href="https://docs-im.easemob.com/im/linux/releasenote">3.1.0</a></p>
+</td>
+<td>
+<p><a href="https://downloadsdk.easemob.com/downloads/linux_IM_SDK_V3.1.0_r1.zip">下载 SDK</a></p>
+</td>
+<td>
+<p><a href="https://docs-im.easemob.com/im/linux/integration">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>Electron</p>
+</td>
+<td>
+<p><a href="https://docs-im.easemob.com/im/pc/log/releasenote#%E7%89%88%E6%9C%AC_v384_2021-12-09">3.8.4</a></p>
+</td>
+<td>
+<p><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/Desktop_IM_SDK_3.8.4.zip">下载 SDK</a></p>
+</td>
+<td>
+<p><a href="https://docs-im.easemob.com/im/pc/intro/integration">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>uni-app</p>
+</td>
+<td>
+<p><a href="https://docs-im.easemob.com/im/applet/releasenote#%E7%89%88%E6%9C%AC_v404_dev_2022-4-19">4.0.4</a></p>
+</td>
+<td>
+<p><a href="https://github.com/easemob/webim-uniapp-demo/releases/tag/4.0.4">下载 SDK 及 Demo</a></p>
+</td>
+<td>
+<p><a href="https://docs-im.easemob.com/im/applet/uniapp">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>小程序</p>
+</td>
+<td>
+<p><a href="https://docs-im.easemob.com/im/applet/releasenote#%E7%89%88%E6%9C%AC_v404_dev_2022-4-19">4.0.4</a></p>
+</td>
+<td>
+<p><a href="https://github.com/easemob/webim-uniapp-demo/releases/tag/4.0.4">下载 SDK 及 Demo</a></p>
+</td>
+<td>
+<p><a href="https://docs-im.easemob.com/im/applet/wechat">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>Unity</p>
+</td>
+<td>
+<p>3.9.0</p>
+</td>
+<td>
+<p><a href="https://downloadsdk.easemob.com/downloads/SDK/Unity/im_unity_sdk_3_9_0.unitypackage">下载 SDK</a></p>
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td width="97">
+<p>Flutter</p>
+</td>
+<td>
+<p><a href="https://pub.flutter-io.cn/packages/im_flutter_sdk/changelog#3902">3.9.0+2</a></p>
+</td>
+<td>
+<p><a href="https://pub.flutter-io.cn/packages/im_flutter_sdk/versions/3.9.0+2">下载 SDK</a></p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/flutter/quickstart.html">查看</a></p>
+</td>
+</tr>
+<tr>
+<td rowspan="2" width="75">
+<p>&nbsp;</p>
+<p>服务端 SDK</p>
+</td>
+<td width="97">
+<p>Java</p>
+</td>
+<td>
+<p><a href="https://docs-im.easemob.com/im/server/ready/releasenote">0.6.3</a></p>
+</td>
+<td>
+<p><a href="https://github.com/easemob/easemob-im-server-sdk">下载 SDK</a></p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/server-side/java_server_sdk.html">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>PHP</p>
+</td>
+<td>
+<p>0.1.0</p>
+</td>
+<td>
+<p><a href="https://github.com/easemob/im-php-server-sdk">下载 SDK</a></p>
+</td>
+<td>
+<p><a href="http://docs-im-beta.easemob.com/document/server-side/php_server_sdk.html">查看</a></p>
+</td>
+</tr>
+</tbody>
+</table>
 
