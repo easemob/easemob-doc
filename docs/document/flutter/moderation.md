@@ -21,9 +21,9 @@
 举报违规消息的示例代码如下：
 
 ```typescript
-// messageId: 将要上报的消息 ID
-// tag: 指定上报消息的分类标签
-// reason: 上报的具体原因
+// messageId: 要举报的消息 ID。
+// tag: 非法消息的标签，可传入`涉政`、`涉黄`、`广告`、`辱骂`、`暴恐`、`违禁`或`其他`。
+// reason: 举报原因。具体原因需自行填写。
 try {
   await EMClient.getInstance.chatManager.reportMessage(
     messageId: messageId,

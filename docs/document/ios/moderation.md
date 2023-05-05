@@ -22,6 +22,9 @@
 
 ```objectivec
 // 异步方法
+// msgId：要举报的消息 ID。
+// tag：非法消息的标签，可传入`涉政`、`涉黄`、`广告`、`辱骂`、`暴恐`、`违禁`或`其他`。
+// reason：举报原因。具体原因需自行填写。
 [EMClient.sharedClient.chatManager reportMessageWithId:msgId
                        tag:tag
                        reason:reason
