@@ -50,7 +50,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 506    | SERVICE_NOT_ALLOW_MESSAGING                    | 用户未在白名单中：群组或聊天室开启全员禁言时，若用户未在白名单中发送消息时提示该错误。 |
 | 507    | SERVICE_NOT_ALLOW_MESSAGING_MUTE               | 当前用户被禁言：在群组或者聊天室中被禁言后发消息报此错误。           |
 | 508    | MESSAGE_MODERATION_BLOCKED                     | 第三方内容审核服务的消息审核结果为“拒绝”时提示该错误。          |
-| 509    | MESSAGE_CURRENT_LIMITING                       | 单个用户 ID 发送群聊消息超出频率限制。默认情况下，SDK 对单个用户 ID 发送群消息未做频率限制。如果你联系了商务设置了该限制，一旦超过了限制，则会提示该错误。                       |
+| 509    | MESSAGE_CURRENT_LIMITING                       | 单个用户 ID 发送消息超出频率限制。默认情况下，SDK 对单个用户 ID 发送群消息未做频率限制。如果你联系了环信商务设置了该限制，一旦在在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，则会提示该错误。 |
 | 510    | MESSAGE_WEBSOCKET_DISCONNECTED                 | 网络断开连接导致消息发送失败。                       |
 | 511    | MESSAGE_SIZE_LIMIT                 | 消息体大小超过限制。关于各端消息体大小的限制，详见[消息管理概述中的描述](message_overview.html#消息类型)。|
 | 601    | GROUP_ALREADY_JOINED                           | 已在群组内：当前用户已在该群组中。                           |
