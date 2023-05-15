@@ -1230,7 +1230,7 @@ DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json'
 
 环信即时通讯 IM 提供多个接口实现聊天室成员管理，包括添加和移除聊天室成员、转让聊天室所有权以及聊天室黑名单、白名单和禁言列表相关操作。
 
-### 分页获取聊天室成员
+### 分页获取聊天室成员列表
 
 可以分页获取聊天室成员列表。
 
@@ -1265,7 +1265,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?pagenum={
 
 | 参数          | 类型   | 描述            |
 | :------------ | :----- | :-------------- |
-| `data.member` | String | 聊天室成员 ID。 |
+| `data.owner`  | String | 聊天室所有者的用户 ID。例如：{“owner”: “user1”}。   |
+| `data.member` | String | 普通聊天室成员或聊天室管理员的用户 ID。例如：{“member”:“user2”}。 |
+| `count` | Number | 本次调用获取的聊天室成员数量。 | 
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1295,7 +1297,7 @@ curl -X GET https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users?pagenum=2&pagesize=2
   "entities": [],
   "data": [
     {
-      "member": "user1"
+      "owner": "user1"
     },
     {
       "member": "user2"

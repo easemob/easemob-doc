@@ -44,6 +44,8 @@
 
 你可以利用 `EMChatMessage` 类构造一条消息，然后通过 `ChatManager` 将该消息发出。
 
+默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `EMErrorMessageCurrentLimiting`。
+
 示例代码：
 
 ```objectivec

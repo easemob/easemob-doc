@@ -67,7 +67,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 506    |        EMErrorMessageExpired        | 消息已过期：发送群组回执时超过了时间限制 (默认 3 天) 。      |
 | 507    |   EMErrorMessageIllegalWhiteList    | 用户未在白名单中：群组或聊天室开启全员禁言时，若用户未在白名单中发送消息时提示该错误。 |
 | 508    | EMErrorMessageExternalLogicBlocked  | 发送前回调拦截：消息发送前被服务器拦截。                     |
-| 509    |    EMErrorMessageCurrentLimiting    | 单个用户 ID 发送群聊消息超出频率限制。                       |
+| 509    |    EMErrorMessageCurrentLimiting    | 单个用户 ID 发送消息超出频率限制。默认情况下，SDK 对单个用户 ID 发送群消息未做频率限制。如果你联系了环信商务设置了该限制，一旦在在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，则会提示该错误。 |
 | 510    |    EMErrorMessageSizeLimit    | 发送消息时消息体大小超过上限。 |
 | 600    |        EMErrorGroupInvalidId        | 群组 ID 异常：群组相关 API 传入的群组 ID 为空。              |
 | 601    |      EMErrorGroupAlreadyJoined      | 已在该群组中：调用加入群组的 API 加入的用户已经在该群组中。  |

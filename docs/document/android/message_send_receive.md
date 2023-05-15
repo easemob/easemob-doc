@@ -46,6 +46,8 @@
 
 1. 首先，利用 `EMMessage` 类构造一条消息。
 
+默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
+
 示例代码：
 
 ```java
@@ -68,7 +70,6 @@ EMClient.getInstance().chatManager().sendMessage(message);
 2. 通过 `EMChatManager` 将该消息发出。发送消息时可以设置 `EMCallBack` 的实例，获取消息发送状态。
 
 ```java
-...
 // 发送消息时可以设置 `EMCallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
 message.setMessageStatusCallback(new EMCallBack() {
      @Override

@@ -48,6 +48,8 @@
 
 使用 `Message` 类创建并发送文本消息。示例代码如下：
 
+默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
+
 ```javascript
 // 发送文本消息。
 function sendTextMessage() {
@@ -85,7 +87,7 @@ function sendTextMessage() {
         to: "chat room ID",
         chatType: "chatRoom",
     };
-    let msg = WebIM.message.create(opt);
+    let msg = WebIM.message.create(option);
     conn.send(msg).then(()=>{
         console.log("Send message success");
     }).catch((e)=>{

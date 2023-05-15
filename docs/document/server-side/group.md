@@ -331,7 +331,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.public`              | Bool   | “是否是公开群”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。                         |
 | `data.allowinvites`        | Bool   | “是否允许群成员邀请其他用户入群”是否修改成功：<br/> -`true`：修改成功；<br/>- `false`：修改失败。         |
 | `data.invite_need_confirm` | Bool   | “受邀人加入群组前是否需接受入群邀请”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。   |
-| `data.custom`              | String | 群组扩展信息是否修改成功：<br/> -`true`：修改成功；<br/>- `false`：修改失败。                             |
+| `data.custom`              | Bool | 群组扩展信息是否修改成功：<br/> -`true`：修改成功；<br/>- `false`：修改失败。                             |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -596,6 +596,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 | 字段                      | 类型   | 描述                                                                                                                                                                                                        |
 | :------------------------ | :----- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `count`                 | Int | 获取详情的群组数量。 |
 | `data.id`                 | String | 群组 ID，群组唯一标识符。                                                                                                                                                                                   |
 | `data.name`               | String | 群组名称。                                                                                                                                                                                                  |
 | `data.description`        | String | 群组描述。                                                                                                                                                                                                  |
@@ -1184,7 +1185,7 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json'
 
 环信即时通讯 IM 提供多个接口实现对群组成员的管理，包括添加和移除群组成员、转让群组所有权以及群组黑名单、白名单和禁言列表相关操作。
 
-### 分页获取群组成员
+### 分页获取群成员列表
 
 可以分页获取群组成员列表。
 
@@ -1220,7 +1221,8 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 | 字段          | 类型   | 描述                                        |
 | :------------ | :----- | :------------------------------------------ |
 | `data.owner`  | String | 群主的用户 ID。例如：{“owner”: “user1”}。   |
-| `data.member` | String | 群成员的用户 ID。例如：{“member”:“user2”}。 |
+| `data.member` | String | 普通群成员或群管理员的用户 ID。例如：{“member”:“user2”}。 |
+| `count` | Number | 本次调用获取的群成员数量。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1250,7 +1252,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagenum=2&pagesize=2
   "entities": [],
   "data": [
     {
-      "member": "user1"
+      "owner": "user1"
     },
     {
       "member": "user2"
@@ -2499,7 +2501,13 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   "application": "XXXX",
   "uri": "https://XXXX/XXXX/XXXX/chatgroups/12XXXX53/white/users",
   "entities": [],
-  "data": ["wzy_test", "wzy_vivo", "wzy_huawei", "wzy_xiaomi", "wzXXXXzu"],
+  "data": [
+    "wzy_test", 
+    "wzy_vivo", 
+    "wzy_huawei", 
+    "wzy_xiaomi", 
+    "wzXXXXzu"
+    ],
   "timestamp": 1594724947117,
   "duration": 3,
   "organization": "XXXX",
