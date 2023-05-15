@@ -87,7 +87,7 @@ function sendTextMessage() {
         to: "chat room ID",
         chatType: "chatRoom",
     };
-    let msg = WebIM.message.create(opt);
+    let msg = WebIM.message.create(option);
     conn.send(msg).then(()=>{
         console.log("Send message success");
     }).catch((e)=>{

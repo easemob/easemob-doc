@@ -2501,7 +2501,13 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   "application": "XXXX",
   "uri": "https://XXXX/XXXX/XXXX/chatgroups/12XXXX53/white/users",
   "entities": [],
-  "data": ["wzy_test", "wzy_vivo", "wzy_huawei", "wzy_xiaomi", "wzXXXXzu"],
+  "data": [
+    "wzy_test", 
+    "wzy_vivo", 
+    "wzy_huawei", 
+    "wzy_xiaomi", 
+    "wzXXXXzu"
+    ],
   "timestamp": 1594724947117,
   "duration": 3,
   "organization": "XXXX",
