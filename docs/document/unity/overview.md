@@ -78,18 +78,16 @@ SDKClient.Instance.CreateAccount(username, password,
 
 ## 用户登录
 
-目前登录服务器有两种方式：
+SDK 不支持自动登录，只支持通过以下方式手动登录：
 
 - 用户 ID + 密码
 - 用户 ID + token
 
-手动登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
+登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
 
 调用登录接口后，收到 `OnConnected` 回调表明 SDK 与环信服务器连接成功。
 
-### 手动登录
-
-**用户 ID + 密码** 登录是传统的登录方式。
+1. **用户 ID + 密码** 登录是传统的登录方式。
 
 ```csharp
 SDKClient.Instance.Login(username, password,
@@ -115,7 +113,7 @@ SDKClient.Instance.Login(username, password,
 );
 ```
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
+2. **用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
@@ -145,9 +143,11 @@ SDKClient.Instance.Login(username, token, true,
 );
 ```
 
-### 自动登录（Unity SDK 暂不支持）
+登录重试机制如下：
 
-在初始化的时候，可以设置是否自动登录。如果设置为自动登录，则登录成功之后，后续启动初始化的时候会自动登录，登录结果通过回调返回。
+- 登录时，若服务器返回明确的失败原因，例如，token 不正确，SDK 不会重试登录。
+
+- 若登录因超时失败，SDK 会重试登录。
 
 ## 退出登录
 

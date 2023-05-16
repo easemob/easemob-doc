@@ -83,6 +83,12 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 }];
 ```
 
+登录重试机制如下：
+
+- 登录时，若服务器返回明确的失败原因，例如，token 不正确，SDK 不会重试登录。
+
+- 若登录因超时失败，SDK 会重试登录。
+
 ### 自动登录
 
 在初始化的时候，可以设置是否自动登录。如果设置为自动登录，则登录成功之后，后续启动初始化的时候会自动登录。
@@ -94,6 +100,8 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 {
 }
 ```
+
+自动登录时，SDK 尝试连接服务器失败后，延时随机一段时间后自动重连。
 
 ## 退出登录
 
