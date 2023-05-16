@@ -202,7 +202,18 @@ const documentSidebar = [
       { text: '即时通讯 REST API 概览', link: 'overview.html' },
       { text: '用户体系管理', link: 'account_system.html' },
       { text: '推送设置', link: 'push.html' },
-      { text: '消息管理', link: 'message.html' },
+      { 
+        text: '消息管理', 
+        children: [
+          { text: '发送单聊消息', link: 'message_single.html' },
+          { text: '发送群聊消息', link: 'message_group.html' },
+          { text: '发送聊天室消息', link: 'message_chatroom.html' },
+          { text: '上传和下载文件', link: 'message_download.html' },
+          { text: '获取历史消息记录', link: 'message_historical.html' },
+          { text: '撤回消息和单向删除会话', link: 'message_recall.html' },
+          { text: '导入消息', link: 'message_import.html' }
+        ]
+      },
       { text: '用户属性', link: 'userprofile.html' },
       { text: '用户关系管理', link: 'user_relationship.html' },
       { text: '群组', link: 'group.html' },
