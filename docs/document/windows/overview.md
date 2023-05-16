@@ -146,7 +146,6 @@ SDKClient.Instance.Login(username, token, true,
 登录重试机制如下：
 
 - 登录时，若服务器返回明确的失败原因，例如，token 不正确，SDK 不会重试登录。
-
 - 若登录因超时失败，SDK 会重试登录。
 
 ## 退出登录
