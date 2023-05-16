@@ -81,9 +81,9 @@ Web 和小程序端无本地消息存储。
 
 #### 消息重发机制
 
-对于 Android 和 iOS 端来说，消息重发机制如下：
+对于 Android、iOS 、Windows 端和三个跨平台框架 Unity、React Native 和 Flutter 来说，消息重发机制如下：
 
-客户端调用发送消息的方法后，会等待服务器返回响应，超时时间为 10 秒。若因响应超时导致发送失败，客户端会再次尝试发送消息，即通过长连接重连服务器，然后发送消息。如果再次失败，SDK 认为消息发送失败，返回服务器不可达的错误消息，即错误码 300，Android 为 `EMErrorServerNotReachable`，iOS 为 `SERVER_NOT_REACHABLE`。
+客户端调用发送消息的方法后，会等待服务器返回响应，超时时间为 10 秒。若因响应超时导致发送失败，客户端会再次尝试发送消息，即通过长连接重连服务器，然后发送消息。如果再次失败，SDK 认为消息发送失败，返回服务器不可达的错误消息，即错误码 300，Android 为 `EMErrorServerNotReachable`，iOS 和 Windows 为 `SERVER_NOT_REACHABLE`。
 
 对于 Web 来说，消息重发机制如下：
 
