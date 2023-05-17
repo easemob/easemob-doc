@@ -83,7 +83,7 @@
 | `from`            | 消息的发送方。                                                                                                                     |
 | `to`              | 消息的接收方。                                                                                                                     |
 | `msg_id`          | 消息的 ID。                                                                                                                        |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](message_historical.html)。                                   |
+| `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](message_historical.html#历史消息记录的内容)。                                   |
 | `securityVersion` | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。                                                            |
 | `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)回调规则。 |
 
@@ -139,7 +139,7 @@
 - 在你的应用服务器端及时保存聊天历史记录或者离线消息。
 
 :::notice
-如果您对聊天消息没有时效性需求，可以直接通过免费的 [聊天记录拉取 REST API](message_historical.html) 获取聊天记录，无需使用发送后回调。
+如果您对聊天消息没有时效性需求，可以直接通过免费的 [聊天记录拉取 REST API](message_historical.html#历史消息记录的内容) 获取聊天记录，无需使用发送后回调。
 :::
 
 ![](@static/images/server-side/im-callback1.png)
@@ -208,7 +208,7 @@ app 的响应内容不能超过 1,000 个字符，否则环信服务器会认为
 | `from`            | 消息的发送方。                                                                                   |
 | `to`              | 消息的接收方。                                                                                   |
 | `msg_id`          | 消息的 ID。                                                                                      |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](message_historical.html)。 |
+| `payload`         | 消息内容，与通过 REST API 发送过来的一致，查看 [消息格式文档](message_historical.html#历史消息记录的内容)。 |
 | `securityVersion` | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成控制台做设置。                                 |
 | `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 Console 后台回调规则。                 |
 
