@@ -2,7 +2,7 @@
 
 <Toc />
 
-聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，用户离线后，超过 5 分钟会自动退出聊天室。聊天室成员在离线后，不会收到推送消息。聊天室可以应用于直播、消息广播等。
+聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，用户离线后，超过 2 分钟会自动退出聊天室。聊天室成员在离线后，不会收到推送消息。聊天室可以应用于直播、消息广播等。若需调整该时间，需联系环信商务经理。
 
 本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
 
@@ -98,7 +98,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFrom
 EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
 ```
 
-退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
+退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `com.hyphenate.chat.EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
 
 示例代码如下：
 
@@ -107,7 +107,7 @@ EMOptions options = new EMOptions();
 options.setDeleteMessagesAsExitChatRoom(false);
 ```
 
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，例如所有者从服务器下线则 5 分钟后自动离开聊天室。如果所有者重新进入聊天室仍是该聊天室的所有者。
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，例如所有者从服务器下线则 2 分钟后自动离开聊天室。如果所有者重新进入聊天室仍是该聊天室的所有者。
 
 ### 解散聊天室
 
