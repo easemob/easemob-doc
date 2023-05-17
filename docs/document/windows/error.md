@@ -384,6 +384,12 @@ SDKClient.Instance.Login(username, passwd,
             <td>发送的消息被用户自己的服务器定义的规则拦截掉时提示该错误。</td>
         </tr>
         <tr>
+            <td>509</td>
+            <td>MESSAGE_CURRENT_LIMITING</td>
+            <td>单个用户 ID 发送消息超出频率限制。</td>
+            <td>默认情况下，SDK 对单个用户 ID 发送群消息未做频率限制。如果你联系了环信商务设置了该限制，一旦在在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，则会提示该错误。</td>
+        </tr>
+        <tr>
             <td>600</td>
             <td>GROUP_INVALID_ID</td>
             <td>群组 ID 异常</td>
