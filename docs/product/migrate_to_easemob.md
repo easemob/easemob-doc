@@ -42,9 +42,9 @@
 
 对应的 REST API 如下：
 
-[REST 导入单聊消息](/document/server-side/message.html#导入单聊消息)
+[REST 导入单聊消息](/document/server-side/message_import.html#导入单聊消息)
 
-[REST 导入群聊消息](/document/server-side/message.html#导入群聊消息)
+[REST 导入群聊消息](/document/server-side/message_import.html#导入群聊消息)
 
 ### 3. 存量迁移工具
 
@@ -88,9 +88,7 @@
 
 #### 消息格式的转换
 
-环信 IM 服务的消息可能与旧的 IM 服务的消息格式稍有差别，需要用户自己实现格式的转换。 环信的消息支持文本消息，图片消息，语音消息，视频消息，位置消息等不同的类型，具体请参考：
-
-[消息数据格式](/document/server-side/message.html#body-字段说明)
+环信 IM 服务的消息可能与旧的 IM 服务的消息格式稍有差别，需要用户自己实现格式的转换。环信的消息支持文本消息，图片消息，语音消息，视频消息，位置消息等不同的类型，具体请参考[发送各类型单聊消息的 API 中的请求 body](/document/server-side/message_single.html#发送文本消息)。
 
 用户也可以参考 Relay-server 此部分的实现。
 

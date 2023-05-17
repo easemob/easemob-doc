@@ -82,7 +82,7 @@
 
 | REST API                                                     | 描述                                  |
 | :----------------------------------------------------------- | :------------------------------------ |
-| [获取历史消息记录](/document/server-side/message.html#获取历史消息记录) | 获取 App 下指定时间段的历史消息文件。 |
+| [获取历史消息记录](/document/server-side/message_historical.html) | 获取 App 下指定时间段的历史消息文件。 |
 
 #### 导出附件
 
@@ -90,4 +90,4 @@
 
 | REST API                                                     | 描述                          |
 | :----------------------------------------------------------- | :---------------------------- |
-| [下载附件](/document/server-side/message.html#下载文件) | 下载 App 下指定 UUID 的附件。 |
+| [下载附件](/document/server-side/message_download.html#下载文件) | 下载 App 下指定 UUID 的附件。 |
