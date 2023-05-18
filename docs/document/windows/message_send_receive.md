@@ -96,7 +96,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ### 撤回消息
 
-消息发送后 2 分钟之内，消息的发送方可以撤回该消息。如果需要调整可撤回时限，可以联系商务。
+发送方可以撤回一条发送成功的消息。默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。如需撤销发送超过 7 天的消息，需联系环信商务经理。
 
 ```csharp
 SDKClient.Instance.ChatManager.RecallMessage("Message ID", new CallBack(
