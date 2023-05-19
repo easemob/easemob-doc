@@ -206,8 +206,8 @@ EMProperties properties = EMProperties.builder()
 
 ### V0.6.9  2023-04-07
 
-1.增加 批量注册用户 功能。
-2.增加 批量禁言群组成员 功能。
+1.增加批量注册用户功能。
+2.增加批量禁言群组成员功能。
 以上更新内容请到 UserApi/BlockApi 中查看。
 
 ### V0.6.8  2023-03-17
