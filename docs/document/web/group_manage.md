@@ -130,9 +130,9 @@ conn.getGroupInfo(option).then((res) => {
 
 ### 获取群成员列表
 
-所有群成员均可调用 `listGroupMembers` 方法获取群成员列表。
+所有群成员均可调用 `listGroupMembers` 方法分页获取群成员列表，包括群主、群管理员和普通群成员。
 
-你可以通过分页获取群成员，示例代码如下：
+示例代码如下：
 
 ```javascript
 let pageNum = 1,
