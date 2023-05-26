@@ -382,6 +382,7 @@ EMClient.getInstance().groupManager().getBlockedUsers(groupId);
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncMuteGroupMembers(String, List, long, EMValueCallBack)。
+// 若对 `duration` 传 -1，表示永久禁言。
 EMClient.getInstance().groupManager().muteGroupMembers(groupId, muteMembers, duration);
 ```
 

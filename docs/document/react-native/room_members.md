@@ -341,8 +341,6 @@ ChatClient.getInstance()
   });
 ```
 
-### 更多
+### 监听聊天室事件
 
-你可以参考如下文档，在项目中实现聊天室事件监听：
-
-- [监听器介绍](room_manage.html)
+详见 [监听聊天室事件](room_manage.html#监听聊天室事件)。

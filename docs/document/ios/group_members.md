@@ -161,7 +161,7 @@ do {
 
 ```objectivec
 // 同步方法，异步方法见 [EMGroupManager leaveGroup:completion:]
-[[[EMClient sharedClient].groupManager leaveGroup:@"groupID" error:nil];
+[[EMClient sharedClient].groupManager leaveGroup:@"groupID" error:nil];
 ```
 
 #### 群成员被移出群组

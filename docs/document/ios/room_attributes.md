@@ -205,4 +205,4 @@ EMError *error = nil;
 
 ### 监听聊天室事件
 
-详见 [监听聊天室事件](https://docs-im.easemob.com/ccim/iOS/chatroom2)。
+详见 [监听聊天室事件](room_manage.html#监听聊天室事件)。

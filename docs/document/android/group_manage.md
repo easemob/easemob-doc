@@ -139,12 +139,25 @@ boolean isMsgBlocked = group.isMsgBlocked();
 
 ### 获取群成员列表
 
-群成员可以调用 `fetchGroupMembers` 方法从服务器分页获取群成员列表。
-
-- 当群成员数量大于等于 200 时，可分页获取群成员列表：
+- 当群成员少于 200 人时，你可以调用从服务器获取群组详情的方法 `getGroupFromServer` 获取获取群成员列表，包括群主、群管理员和普通群成员：
 
 ```java
-List<String> memberList = new ArrayList<>;
+// 第二个参数传入 `true`，默认取 200 人的群成员列表。
+// 同步方法，会阻塞当前线程。
+EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
+List<String> memberList = group.getMembers();//普通成员
+memberList.addAll(group.getAdminList());//加上管理员
+memberList.add(group.getOwner());//加上群主
+```
+
+- 当群成员数量大于等于 200 时，你可以首先调用 `getGroupFromServer` 方法获取群主和群管理员，然后调用 `fetchGroupMembers` 方法获取普通群成员列表：
+
+```java
+// 第二个参数传入 `true`，默认取 200 人的群成员列表。
+// 同步方法，会阻塞当前线程。
+EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
+
+List<String> memberList = new ArrayList<>();
 EMCursorResult<String> result = null;
 final int pageSize = 20;
 do {
@@ -153,15 +166,9 @@ do {
              result != null? result.getCursor(): "", pageSize);
      memberList.addAll(result.getData());
 } while (!TextUtils.isEmpty(result.getCursor()) && result.getData().size() == pageSize);
-```
 
-- 当群成员少于 200 人时，可通过以下方式获取群成员列表：
-
-```java
-// 第二个参数传入 `true`，默认取 200 人的群成员列表。
-// 同步方法，会阻塞当前线程。
-EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
-List<String> memberList = group.getMembers();
+ memberList.addAll(group.getAdminList());//加上管理员
+ memberList.add(group.getOwner());//加上群主
 ```
 
 ### 获取群组列表
