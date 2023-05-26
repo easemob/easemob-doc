@@ -174,4 +174,4 @@ try {
 
 ### 监听聊天室事件
 
-详见 [监听聊天室事件](chatroom_manage.html#监聊天室事件)。
+详见 [监听聊天室事件](room_manage.html#监听聊天室事件)。
