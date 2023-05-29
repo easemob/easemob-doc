@@ -2060,31 +2060,19 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users?pageSize={N}&cursor={cursor}
+GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 ```
 
 ##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 查询参数
-
-| 参数     | 类型   | 是否必需 | 描述                                  |
-| :------- | :----- | :------- | :-------------------------- |
-| `pageSize`  | Int    | 否       | 每次期望返回的黑名单用户的数量。取值范围为 [1,50]。该参数仅在分页获取时为必需。 |
-| `cursor` | String | 否       | 数据查询的起始位置。该参数仅在分页获取时为必需。     |
-
-:::tip
-如果 `pageSize` 和 `cursor` 参数均不传，获取最新加入群组黑名单的 500 个用户。若只传 `pageSize` 而不传 `cursor`，服务器返回第一页黑名单用户列表，即最新加入黑名单的用户，最多不超过 50 个。
-:::
-
 ##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :--------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。   |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 
 
 #### HTTP 响应
 
@@ -2094,7 +2082,6 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users?page
 
 | 字段    | 类型  | 描述                     |
 | :------ | :---- | :----------------------- |
-| `cursor` | String | 查询游标，指定下次查询的起始位置。       |
 | `count` | Int   | 群组黑名单中的用户数量。 |
 | `data`  | Array | 群组黑名单上的用户 ID。  |
 
@@ -2109,24 +2096,23 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users?page
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users?pageSize=2'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users'
 ```
 
 ##### 响应示例
 
 ```json
 {
-    "uri": "https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/blocks/users",
-    "timestamp": 1682064422108,
-    "entities": [],
-    "cursor": "MTA5OTAwMzMwNDUzNTA2ODY1NA==",
-    "count": 2,
-    "action": "get",
-    "data": [
-        "tst05",
-        "tst04"
-    ],
-    "duration": 52
+  "action": "get",
+  "application": "8bXXXX02",
+  "uri": "https://XXXX/XXXX/XXXX/chatgroups/67178793598977/blocks/users",
+  "entities": [],
+  "data": ["user2", "user3"],
+  "timestamp": 1543466293681,
+  "duration": 0,
+  "organization": "XXXX",
+  "applicationName": "testapp",
+  "count": 2
 }
 ```
 

@@ -369,7 +369,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
+GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pageSize={N}&cursor={cursor}
 ```
 
 #### 路径参数
@@ -379,6 +379,17 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 | `owner_username` | String | 是       | 当前用户的用户 ID。 |
 
 其他参数及描述详见[公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数     | 类型   | 是否必需 | 描述                                  |
+| :------- | :----- | :------- | :-------------------------- |
+| `pageSize`  | Int    | 否       | 每次期望返回的黑名单用户的数量。取值范围为 [1,50]。该参数仅在分页获取时为必需。 |
+| `cursor` | String | 否       | 数据查询的起始位置。该参数仅在分页获取时为必需。     |
+
+:::tip
+如果 `pageSize` 和 `cursor` 参数均不传，获取最新加入黑名单的 500 个用户。若只传 `pageSize` 而不传 `cursor`，服务器返回第一页黑名单用户列表，即最新加入黑名单的用户，最多不超过 50 个。
+:::
 
 #### 请求 header
 
@@ -409,20 +420,24 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/blocks/users'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/blocks/users?pageSize=2'
 ```
 
 #### 响应示例
 
 ```json
 {
-  "action": "get",
-  "uri": "https://XXXX/XXXX/XXXX/users/user1/blocks/users",
-  "entities": [],
-  "data": ["user2"],
-  "timestamp": 1542599978751,
-  "duration": 4,
-  "count": 1
+    "uri": "https://a1.easemob.com/easemob-demo/wang/users/tst/blocks/users",
+    "timestamp": 1682064422108,
+    "entities": [],
+    "cursor": "MTA5OTAwMzMwNDUzNTA2ODY1NA==",
+    "count": 2,
+    "action": "get",
+    "data": [
+        "tst05",
+        "tst04"
+    ],
+    "duration": 52
 }
 ```
 

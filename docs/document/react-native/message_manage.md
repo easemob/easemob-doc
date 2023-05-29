@@ -108,7 +108,7 @@ ChatClient.getInstance()
 
 ### 单向删除服务端的历史消息
 
-你可以调用 `removeMessagesFromServerWithTimestamp` 或者 `removeMessagesFromServerWithMsgIds` 方法单向删除服务端的历史消息，每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。
+你可以调用 `removeMessagesFromServerWithTimestamp` 或者 `removeMessagesFromServerWithMsgIds` 方法单向删除服务端的历史消息，每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息，已删除的消息自动从设备本地移除。其他用户不受该操作影响。
 
 :::tip
 若使用该功能，需将 SDK 升级至 V1.1.0 或以上版本并联系商务。
@@ -144,6 +144,8 @@ ChatClient.getInstance()
 #### 删除会话及其中的消息
 
 你可以调用 `removeConversationFromServer` 方法删除服务器端会话及其历史消息。会话删除后，当前用户和其他用户均无法从服务器获取该会话。若该会话的历史消息也删除，所有用户均无法从服务器获取该会话的消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+
+删除服务端会话及其历史消息，对本地的会话和消息无影响。
 
 示例代码如下：
 

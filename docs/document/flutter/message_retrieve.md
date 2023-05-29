@@ -108,6 +108,8 @@ try {
 
 你可以调用 `deleteRemoteConversation` 方法删除服务器端会话和历史消息。会话删除后，当前用户和其他用户均无法从服务器获取该会话。若该会话的历史消息也删除，所有用户均无法从服务器获取该会话的消息。
 
+删除服务端会话及其历史消息，对本地的会话和消息无影响。
+
 ```dart
 try {
   await EMClient.getInstance.chatManager.deleteRemoteConversation(
