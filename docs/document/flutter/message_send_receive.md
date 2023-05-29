@@ -78,7 +78,7 @@ EMMessage msg = EMMessage.createCmdSendMessage(
 );
 
 // 自定义消息。消息内容由两部分组成：消息事件和扩展字段。
-// 扩展字段用户可以自行实现和使用。
+// 自定义消息内容为 String 类型的 key-value 格式，你可以自行实现和使用。
 String event = "gift";
 Map<String, String> params = {"key": "value"};
 EMMessage msg = EMMessage.createCustomSendMessage(
