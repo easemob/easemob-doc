@@ -2,7 +2,14 @@
 
 <Toc />
 
-## 版本 V1.1.0 Dev 2023-2-25（开发版）
+## 版本 V1.1.1 Dev 2023-5-29
+
+#### 修复
+
+1. 修复 [`ChatManager#FetchHistoryMessageFromServer`](message_retrieve.html#从服务器获取会话) 方法在安卓环境下调用失败的问题。
+2. 修复在安卓环境下发送视频消息没有回调的问题。
+
+## 版本 V1.1.0 Dev 2023-2-25
 
 #### 新增特性
 

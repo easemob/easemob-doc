@@ -129,6 +129,8 @@ conversation.removeMessagesFromServer(time, new EMCallBack() {
 
 你可以调用 `deleteConversationFromServer` 方法删除服务器端会话和历史消息。会话删除后，当前用户和其他用户均无法从服务器获取该会话。若该会话的历史消息也删除，所有用户均无法从服务器获取该会话的消息。
 
+删除服务端会话及其历史消息，对本地的会话和消息无影响。
+
 调用该方法之前，需调用 `getConversation` 方法获取会话 ID。
 
 示例代码如下：
