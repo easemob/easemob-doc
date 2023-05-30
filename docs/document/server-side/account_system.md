@@ -132,7 +132,7 @@ curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users" -d '{"username":"user1",
 
 ### 授权注册单个用户
 
-授权注册模式指注册环信即时通讯 IM 账号时携带管理员身份认证信息。
+授权注册模式指注册环信即时通讯 IM 账号时携带管理员身份认证信息，即 App Token。
 
 要使用该注册方式，你需要在环信控制台进行如下配置：
 
