@@ -19,6 +19,7 @@
 - 下载源代码：[github源码地址](https://github.com/easemob/chat-android)
 欢迎大家提交 PR 改进和修复 EaseIM 和 EaseIMKit 中的问题。
 ## 导入 EaseIM
+
 从 [IM SDK 及 Demo 下载](https://www.easemob.com/download/im) 下载 Android SDK 压缩包，然后解压。解压后在 examples 文件夹下，即为 EaseIM 的工程目录。
 ### 导入到 Android Studio
 打开 Android Studio，点击 File→Open，打开 EaseIm3.0 根目录即可。
