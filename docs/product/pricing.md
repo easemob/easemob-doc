@@ -235,7 +235,7 @@
 <tr><td>Web 端</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>APICloud 插件</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>Linux</td><td>✓</td><td>✓</td><td>✓</td></tr>
-<tr><td>MacOS（通过 Electron 实现）</td><td>✓</td><td>✓</td><td>✓</td></tr>
-<tr><td>Windows（通过 Electron 实现）</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>MacOS（支持 Electron 版本）</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Windows（支持 C#、Electron 版本）</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>Server SDK（Java 版本）</td><td>✓</td><td>✓</td><td>✓</td></tr> 
 </table>
