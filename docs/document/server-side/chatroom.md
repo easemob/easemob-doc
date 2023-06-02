@@ -384,7 +384,7 @@ curl --location --request GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
 
 ### 获取用户加入的聊天室
 
-根据用户 ID 分页获取该用户加入的聊天室。每个用户最多可获取 100 个加入的聊天室。
+根据用户 ID 分页获取该用户加入的聊天室。
 
 #### HTTP 请求
 
@@ -401,7 +401,11 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms?pagen
 | 参数       | 类型 | 是否必需 | 描述                                    |
 | :--------- | :--- | :------- | :-------------------------------------- |
 | `pagenum`  | Int  | 否       | 当前页码，默认值为 1。                  |
-| `pagesize` | Int  | 否       | 每页返回的聊天室数量。 |
+| `pagesize` | Int  | 否       | 每页返回的聊天室数量，取值范围为 [1,1000]，默认值为 `1000`。 |
+
+:::notice
+若查询参数 `pagenum` 和 `pagesize` 均不传，服务器返回用户最新加入的 500 个聊天室。
+:::
 
 ##### 请求 header
 
@@ -432,21 +436,43 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms?pagen
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/joined_chatrooms?pagenum=1&pagesize=1'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/joined_chatrooms?pagenum=1&pagesize=10'
 ```
 
 ##### 响应示例
 
 ```json
 {
-"params": {
-    "pagesize": ["1"],
-    "pagenum": ["1"]
-  },
-  "data": {
-    "id": "662XXXX13",
-    "name": "testchatroom1"
-  }
+    "action": "get",
+    "application": "48472d89-5846-XXXX-XXXX-5fa4b79af9b1",
+    "applicationName": "XXXX",
+    "count": 2,
+    "data": [
+        {
+            "id": "216295074234369",
+            "name": "fd",
+            "disabled": "false"
+        },
+        {
+            "id": "216294461865985",
+            "name": "testChatRoom",
+            "disabled": "false"
+        }
+    ],
+    "duration": 0,
+    "entities": [],
+    "organization": "XXXX",
+    "params": {
+        "pagesize": [
+            "10"
+        ],
+        "pagenum": [
+            "1"
+        ]
+    },
+    "properties": {},
+    "timestamp": 1685673568976,
+    "uri": "http://XXXX/XXXX/XXXX/users/user2/joined_chatrooms"
 }
 ```
 
