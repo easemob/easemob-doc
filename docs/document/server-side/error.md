@@ -81,7 +81,7 @@
 | 404              | service_resource_not_found         | “Service resource not found”                                 | URL 指定的资源不存在，如用户相关接口提示用户不存在，群组相关接口提示群组不存在，聊天室相关接口提示聊天室不存在。 |
 | 404              | service_resource_not_found         | “Service resource not found”                                 | 获取的 username 不存在，若用户列表存在该 username，则是因为存在脏数据，可以使用 uuid 代替 username 将该 ID 删除，再使用该 username 重新创建。 |
 | 404              | service_resource_not_found         | “Service resource not found”                                 | 要删除的 username 不存在，若用户列表存在该 username，则可使用 user 的 uuid 代替 username 删除。 |
-| 404              | storage_object_not_found           | “Failed to find chat message history download url for appkey: hx#hxdemo2, time: 2018020912” | 对应的时间没有历史消息，如确定有历史消息，请联系[环信技术支持](support@easemob.com)。 |
+| 404              | storage_object_not_found           | “Failed to find chat message history download url for appkey: hx#hxdemo2, time: 2018020912” | 对应的时间没有历史消息，如确定有历史消息，请联系[环信技术支持](mailto:support@easemob.com)。 |
 | 413              | Request Entity Too Large           | “Request Entity Too Large”                                   | 请求体过大，如上传文件时文件过大，需要拆成几个更小的请求体重试。 |
 | 415              | web_application                    | “Unsupported Media Type”                                     | 请求体的类型不支持，请检查请求头是否添加了 `Content-Type`: `application/json`，请求包体是否符合标准的 JSON 格式，以及请求头中是否有接口不需要的参数。 |
 | 429              | resource_limited                   | “You have exceeded the limit of the Free edition. Please upgrade to higher edition.” | 超过免费版套餐包限制。如需开通其他版本套餐包，需联系环信商务。               |

@@ -36,6 +36,7 @@ export const zhSidebar = sidebar({
     {
       text: '私有化集成',
       children: [
+        { text: '私有化部署流程', link: 'uc_deploy.html' },
         { text: 'SDK 及 Demo 下载', link: 'uc_private.html' },
         { text: '环信通下载', link: 'uc_overview.html' },
       ]
