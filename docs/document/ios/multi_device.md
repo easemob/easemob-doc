@@ -1,5 +1,7 @@
 # 在多个设备上登录
 
+<Toc />
+
 环信即时通讯 IM 支持同一账号在多个设备上登录，所有已登录的设备同步以下信息和操作：
 
 - 在线消息、离线消息、推送通知（若开启了第三方推送服务，离线设备收到）以及对应的回执和已读状态；
@@ -9,7 +11,7 @@
 
 ## 技术原理  
 
-Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送时识别设备，并将该 ID 发送到服务器。服务器会自动将新消息发送到用户登录的设备，可以自动监听到其他设备上进行的好友或群组操作。即时通讯 IM Android SDK 提供以下功能实现多个设备之间的同步：
+iOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送时识别设备，并将该 ID 发送到服务器。服务器会自动将新消息发送到用户登录的设备，可以自动监听到其他设备上进行的好友或群组操作。即时通讯 IM iOS SDK 提供以下功能实现多个设备之间的同步：
 
 - 获取其他登录设备的设备 ID；
 - 获取其他设备上的好友或者群组操作。
@@ -22,155 +24,203 @@ Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推�
 
 ### 获取其他已登录设备的登录 ID 列表并向这些设备发送消息
 
-你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表。选择目标登录 ID 作为消息接收方发出消息，则这些设备上的同一登录账号可以收到消息，实现不同设备之间的消息同步。
+你可以调用 `getSelfIdsOnOtherPlatformWithCompletion:` 方法获取其他登录设备的登录 ID 列表。选择目标登录 ID 作为消息接收方发出消息，则这些设备上的同一登录账号可以收到消息，实现不同设备之间的消息同步。
 
-```java
-// 同步方法，会阻塞当前线程。异步方法为 asyncGetSelfIdsOnOtherPlatform(EMValueCallBack)。
-List<String> ids = EMClient.getInstance().contactManager().getSelfIdsOnOtherPlatform();
-// 选择一个登录 ID 作为消息发送方。
-String toChatUsername = ids.get(0);
-// 创建一条文本消息，content 为消息文字内容，toChatUsername 传入登录 ID 作为消息发送方。
-EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername); 
-// 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message); 
+```objectivec
+[EMClient.sharedClient.contactManager getSelfIdsOnOtherPlatformWithCompletion:^(NSArray<NSString *> * _Nullable aList, EMError * _Nullable aError) {
+    // 选择一个登录 ID 作为消息发送方。
+    NSString *to = aList.firstObject;
+    if (to.length > 0) {
+        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"Hello World"];
+        // 创建一条文本消息，content 为消息文字内容，to 传入登录 ID 作为消息发送方。
+        EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:to body:body ext:nil];
+        // 发送消息。
+        [EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:^(EMChatMessage * _Nullable message, EMError * _Nullable error) {
+        }];
+    }
+}];
 ```
 
 ### 强制账号从单个设备下线
 
-```java
-// username：账户名称，password：账户密码。需要在异步线程中执行。
-List<EMDeviceInfo> deviceInfos = EMClient.getInstance().getLoggedInDevicesFromServer(username, password);
-// username：账户名称，password：账户密码, resource：设备 ID。需要在异步线程中执行。
-EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIndex).getResource());
+```objectivec
+// username：账户名称，password：账户密码。
+NSString *username = @"";
+NSString *password = @"";
+[EMClient.sharedClient getLoggedInDevicesFromServerWithUsername:username password:password completion:^(NSArray<EMDeviceConfig *> * _Nullable aList, EMError * _Nullable aError) {
+    NSString *resource = aList.firstObject.resource;
+    if (resource.length > 0) {
+        // username：账户名称，password：账户密码, resource：设备 ID。
+        [EMClient.sharedClient kickDeviceWithUsername:username password:password resource:resource completion:^(EMError * _Nullable aError) {
+        }];
+    }
+}];
 ```
 
 ### 获取其他设备的好友或者群组操作
 
 例如，账号 A 同时在设备 A 和 B 上登录，账号 A 在设备 A 上进行操作，设备 B 会收到这些操作对应的通知。
 
-你需要先实现 `EMMultiDeviceListener` 类监听其他设备上的操作，然后调用 `addMultiDeviceListener` 方法添加多设备监听。
+你需要先实现 `EMMultiDevicesDelegate` 类监听其他设备上的操作，然后调用 `addMultiDevicesDelegate:delegateQueue:` 方法添加多设备监听。
 
-```java
-//实现 `EMMultiDeviceListener` 监听其他设备上的操作。
-private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
-//@param event 事件。
-    @Override
-    //@param target 好友的用户 ID； @param ext 事件扩展信息。
-    public void onContactEvent(int event, String target, String ext) {
-        EMLog.i(TAG, "onContactEvent event"+event);
-        DemoDbHelper dbHelper = DemoDbHelper.getInstance(DemoApplication.getInstance());
-        String message = null;
-        switch (event) {
-            //好友已在其他设备上被移除。
-            case CONTACT_REMOVE: 
-                break;
-            //好友请求已在其他设备上同意。
-            case CONTACT_ACCEPT:
-                break;
-            //好友请求已在其他设备上被拒绝。  
-            case CONTACT_DECLINE: 
-                break;
-            //当前用户在其他设备将某个用户添加至黑名单。                   
-            case CONTACT_BAN: 
-                break;
-            // 用户在其他设备被移出黑名单。                   
-            case CONTACT_ALLOW:
-                break; 
-        }
-    }
+```objectivec
+ //实现 `EMMultiDevicesDelegate` 监听其他设备上的操作。
+@interface ViewController () <EMMultiDevicesDelegate>
 
-    @Override
-    public void onGroupEvent(int event, String groupId, List<String> usernames) {
-        EMLog.i(TAG, "onEMGroupEvent event"+event);
-        String message = null;
-        switch (event) {
-            //当前⽤户在其他设备创建了群组。
-            case GROUP_CREATE:
-                break;
-            //当前⽤户在其他设备销毁了群组。
-            case GROUP_DESTROY:
-                break;
-            //当前⽤户在其他设备加⼊了群组。
-            case GROUP_JOIN:
-                break;
-            //当前⽤户在其他设备离开了群组。
-            case GROUP_LEAVE:
-                break;
-            //当前⽤户在其他设备发起了入群申请。
-            case GROUP_APPLY:
-                break;
-            //当前⽤户在其他设备同意了入群申请。
-            case GROUP_APPLY_ACCEPT:
-                break;
-            //当前⽤户在其他设备拒绝了入群申请。
-            case GROUP_APPLY_DECLINE:
-                break;
-            //当前⽤户在其他设备邀请了群成员。
-            case GROUP_INVITE:
-                break;
-            //当前⽤户在其他设备同意了入群邀请。
-            case GROUP_INVITE_ACCEPT:
-                break;
-            //当前⽤户在其他设备拒绝了入群邀请。
-            case GROUP_INVITE_DECLINE:
-                break;
-            //当前⽤户在其他设备将成员踢出群。
-            case GROUP_KICK:
-                break;
-            //当前⽤户在其他设备将成员加⼊群组⿊名单。
-            case GROUP_BAN:
-                break;
-            //当前⽤户在其他设备将成员移除群组⿊名单。
-            case GROUP_ALLOW:
-                break;
-            //当前⽤户在其他设备屏蔽了群组。
-            case GROUP_BLOCK:
-                break;
-            //当前⽤户在其他设备取消群组屏蔽。
-            case GROUP_UNBLOCK:
-                break;
-            //当前⽤户在其他设备转移群所有权。
-            case GROUP_ASSIGN_OWNER:
-                break;
-            //当前⽤户在其他设备添加管理员。
-            case GROUP_ADD_ADMIN:
-                break;
-            //当前⽤户在其他设备移除管理员。
-            case GROUP_REMOVE_ADMIN:
-                break;
-            //当前⽤户在其他设备禁⾔⽤户。
-            case GROUP_ADD_MUTE:
-                break;
-            //当前⽤户在其他设备移除禁⾔。
-            case GROUP_REMOVE_MUTE:
-                break;
-            //当前⽤户在其他设备设置了群成员自定义属性。
-            case GROUP_METADATA_CHANGED:
-                break;    
-            default:
-                break;
-        }
-    }
+@end
 
-    @Override
-    // 当前用户在其他设备上单向删除服务端的历史消息。
-    public void onMessageRemoved(String conversation, String deviceId) {            
-    }    
+@implementation ViewController
+
+- (void)viewDidLoad 
+{
+    [super viewDidLoad];
+    [EMClient.sharedClient addMultiDevicesDelegate:self delegateQueue:nil];
 }
 
-ChatMultiDeviceListener chatMultiDeviceListener = new ChatMultiDeviceListener();
+- (void)dealloc 
+{
+    [EMClient.sharedClient removeMultiDevicesDelegate:self];
+}
 
-//设置多设备监听。
-EMClient.getInstance().addMultiDeviceListener(chatMultiDeviceListener);
+#pragma mark - EMMultiDevicesDelegate
+- (void)multiDevicesContactEventDidReceive:(EMMultiDevicesEvent)aEvent
+                                  username:(NSString *)aUsername
+                                       ext:(NSString *)aExt 
+{
+    switch (aEvent) {
+        //好友已经在其他设备上被移除。
+        case EMMultiDevicesEventContactRemove:
+            break;
+        //好友请求已经在其他设备上被同意。
+        case EMMultiDevicesEventContactAccept:
+            break;
+        //好友请求已经在其他设备上被拒绝。
+        case EMMultiDevicesEventContactDecline:
+            break;
+        //当前用户在其他设备加某人进入黑名单。
+        case EMMultiDevicesEventContactBan:
+            break;
+        //好友在其他设备被移出黑名单。
+        case EMMultiDevicesEventContactAllow:
+            break;
+        default:
+            break;
+   }
+}
 
-//移除多设备监听。
-EMClient.getInstance().removeMultiDeviceListener(chatMultiDeviceListener);
+- (void)multiDevicesGroupEventDidReceive:(EMMultiDevicesEvent)aEvent
+                                 groupId:(NSString *)aGroupId
+                                     ext:(id)aExt {
+    switch (aEvent) {
+        //当前⽤户在其他设备创建了群组。
+        case EMMultiDevicesEventGroupCreate:
+            break;
+        //当前⽤户在其他设备销毁了群组。
+        case EMMultiDevicesEventGroupDestroy:
+            break;
+        //当前⽤户在其他设备已经加⼊群组。
+        case EMMultiDevicesEventGroupJoin:
+            break;
+        //当前⽤户在其他设备已经离开群组。
+        case EMMultiDevicesEventGroupLeave:
+            break;
+        //当前⽤户在其他设备发起了群组申请。
+        case EMMultiDevicesEventGroupApply:
+            break;
+        //当前⽤户在其他设备同意了群组申请。
+        case EMMultiDevicesEventGroupApplyAccept:
+            break;
+        //当前⽤户在其他设备拒绝了群组申请。
+        case EMMultiDevicesEventGroupApplyDecline:
+            break;
+        //当前⽤户在其他设备邀请了群成员。
+        case EMMultiDevicesEventGroupInvite:
+            break;
+        //当前⽤户在其他设备同意了群组邀请。
+        case EMMultiDevicesEventGroupInviteAccept:
+            break;
+        //当前⽤户在其他设备拒绝了群组邀请。
+        case EMMultiDevicesEventGroupInviteDecline:
+            break;
+        //当前⽤户在其他设备将某⼈踢出群。
+        case EMMultiDevicesEventGroupKick:
+            break;
+        //当前⽤户在其他设备将成员加⼊群组⿊名单。
+        case EMMultiDevicesEventGroupBan:
+            break;
+        //当前⽤户在其他设备将成员移除群组⿊名单。
+        case EMMultiDevicesEventGroupAllow:
+            break;
+        //当前⽤户在其他设备屏蔽群组。
+        case EMMultiDevicesEventGroupBlock:
+            break;
+        //当前⽤户在其他设备取消群组屏蔽。
+        case EMMultiDevicesEventGroupUnBlock:
+            break;
+        //当前⽤户在其他设备转移群主。
+        case EMMultiDevicesEventGroupAssignOwner:
+            break;
+        //当前⽤户在其他设备添加管理员。
+        case EMMultiDevicesEventGroupAddAdmin:
+            break;
+        //当前⽤户在其他设备移除管理员。
+        case EMMultiDevicesEventGroupRemoveAdmin:
+            break;
+        //当前⽤户在其他设备禁⾔⽤户。
+        case EMMultiDevicesEventGroupAddMute:
+            break;
+        //当前⽤户在其他设备移除禁⾔。
+        case EMMultiDevicesEventGroupRemoveMute:
+            break;
+        //当前⽤户在其他设备设置了群成员自定义属性。
+        case EMMultiDevicesEventGroupMemberAttributesChanged:
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)multiDevicesConversationEvent:(EMMultiDevicesEvent)aEvent conversationId:(NSString *)conversationId conversationType:(EMConversationType)conversationType
+{
+    switch (aEvent) {
+        // 会话置顶。
+        case EMMultiDevicesEventConversationPinned:
+            break;
+        // 会话取消置顶。
+        case EMMultiDevicesEventConversationUnpinned:
+            break;
+        // 会话被删除。
+        case EMMultiDevicesEventConversationDelete:
+            break;
+        default:
+            break;
+    }
+}
+
+// 当前⽤户在其他设备单向删除服务端的历史消息。
+- (void)multiDevicesMessageBeRemoved:(NSString *)conversationId deviceId:(NSString *)deviceId
+{
+    
+}
 ```
 
 ### 典型示例
 
 当 PC 端和移动端登录同一个账号时，在移动端可以通过调用方法获取到 PC 端的登录 ID。该登录 ID 相当于特殊的好友用户 ID，可以直接使用于聊天，使用方法与好友的用户 ID 类似。
 
-```java
-List<String> selfIds = EMClient.getInstance().contactManager().getSelfIdsOnOtherPlatform();
+```objectivec
+ NSArray *otherPlatformIds = [[EMClient sharedClient].contactManager getSelfIdsOnOtherPlatformWithError:nil];
+if ([otherPlatformIds count] > 0) {
+    NSString *chatter = otherPlatformIds[0];
+    //获取会话
+    EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:chatter type:EMConversationTypeChat createIfNotExist:YES];
+
+    //发送消息
+    NSString *sendText = @"test";
+    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:sendText];
+    NSString *from = [[EMClient sharedClient] currentUsername];
+    EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversation.conversationId from:from to:chatter body:body ext:nil];
+    message.chatType = EMChatTypeChat;
+    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+ }
 ```
