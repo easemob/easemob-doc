@@ -84,7 +84,22 @@
 
 ### 优化
 
-[IM Demo] 修改 `manifest` 中 `activity` 属性配置，在用户进行音视频通话时在最近任务管理器中显示当前应用。
+- [IM Demo] 修改 `manifest` 中 `activity` 属性配置，在用户进行音视频通话时在最近任务管理器中显示当前应用。
+
+- [IM SDK] 以下接口或事件名称进行了重命名：
+
+| 原名称     | 新名称   | 描述 |
+| :-------------- | :----- | :------- | 
+| EMConversationListener#onCoversationUpdate  | EMConversationListener#onConversationUpdate   | 会话更新回调。| 
+| EMChatManager#aysncRecallMessage | EMChatManager#asyncRecallMessage | 撤回消息。 | 
+| EMContactManager#aysncAddContact | EMContactManager#asyncAddContact   | 添加好友。  | 
+| EMContactManager#aysncDeleteContact   | EMContactManager#asyncDeleteContact   | 删除好友。   | 
+| EMContactManager#aysncGetAllContactsFromServer  | EMContactManager#asyncGetAllContactsFromServer  | 从服务端获取好友列表。  | 
+| EMContactManager#aysncAddUserToBlackList | EMContactManager#asyncAddUserToBlackList | 将好友加入黑名单。  | 
+| EMContactManager#aysncRemoveUserFromBlackList | EMContactManager#asyncRemoveUserFromBlackList | 将好友移出用户列表。| 
+| EMContactManager#aysncGetBlackListFromServer  | EMContactManager#asyncGetBlackListFromServer | 从服务端获取黑名单列表。   | 
+| EMContactManager#aysncGetSelfIdsOnOtherPlatform  | EMContactManager#asyncGetSelfIdsOnOtherPlatform   | 获取当前用户账号的其他登录设备的 ID。  | 
+| EMGroupManager#aysncMuteGroupMembers | EMGroupManager#asyncMuteGroupMembers  | 将群组成员添加到禁言列表。   | 
 
 ### 修复
 
