@@ -13,6 +13,8 @@
 使用环信即时通讯 IM SDK 可以从服务器获取历史消息。
 
 - `asyncFetchConversationsFromServer` 分页获取服务器保存的会话列表；
+- `asyncFetchPinnedConversationsFromServe` 分页获取服务器保存的置顶会话列表；
+- `asyncPinConversation` 置顶会话。
 - `asyncFetchHistoryMessage` 从服务端分页获取指定会话的历史消息；
 - `removeMessagesFromServer` 单向删除服务端的历史消息；
 - `deleteConversationFromServer` 删除服务端的会话及其历史消息。
@@ -32,22 +34,28 @@
 
 你可以调用 `asyncFetchConversationsFromServer` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
 
-:::tip
-1. 若使用该功能，需将 SDK 升级至 4.0.0。
-2. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 方法即可。
-3. 获取的会话列表中不包含最新一条消息通过 RESTful 接口发送的会话。若需获取该类会话，需要联系商务开通将通过 RESTful 接口发送的消息写入会话列表的功能。
+SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表。若会话中没有消息，则 SDK 按照会话创建时间的倒序返回会话列表。
+
+服务器默认存储 100 条会话。若提升该上限，需联系环信商务，最多能增加至 500 条。
+
+:::notice
+1. 若使用该功能，需将 SDK 升级至 4.0.3。 
+2. 建议你在首次下载、卸载后重装应用等本地数据库无数据情况下拉取服务端会话列表。其他情况下，调用 `getAllConversationsBySort` 或 `getAllConversations` 方法获取本地所有会话即可。
+3. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需联系商务。
 :::
 
 示例代码如下：
 
 ```java
-// 异步方法。同步方法为 fetchConversationsFromServer()。
-// pageNum：当前页面，从 1 开始。
-// pageSize：每页获取的会话数量。取值范围为 [1,20]。
-EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(pageNum, pageSize, new EMValueCallBack<Map<String, EMConversation>>() {
+int limit = 10;
+String cursor = "";
+EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cursor, new EMValueCallBack<EMCursorResult<EMConversation>>() {
     @Override
-    public void onSuccess(Map<String, EMConversation> value) {
-        
+    public void onSuccess(EMCursorResult<EMConversation> result) {
+        // 获取到的会话列表
+        List<EMConversation> conversations = result.getData();
+        // 下一次请求的 cursor
+        String nextCursor = result.getCursor();
     }
 
     @Override
@@ -57,7 +65,67 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(pageNum, 
 });
 ```
 
-对于使用 `asyncFetchConversationsFromServer` 方法未实现分页获取会话列表的用户，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
+## 获取服务端的置顶会话列表
+
+你可以调用 `asyncFetchPinnedConversationsFromServe` 方法从服务端分页获取置顶会话列表。SDK 按照会话置顶时间的倒序返回。 
+
+你最多可以拉取 50 个置顶会话。
+
+:::notice
+若使用该功能，需将 SDK 升级至 4.0.3。
+:::
+
+示例代码如下： 
+
+```java
+int limit = 10;
+String cursor = "";
+EMClient.getInstance().chatManager().asyncFetchPinnedConversationsFromServer(limit, cursor, new EMValueCallBack<EMCursorResult<EMConversation>>() {
+    @Override
+    public void onSuccess(EMCursorResult<EMConversation> result) {
+        // 获取到的会话列表
+        List<EMConversation> conversations = result.getData();
+        // 下一次请求的 cursor
+        String nextCursor = result.getCursor();
+    }
+
+    @Override
+    public void onError(int error, String errorMsg) {
+
+    }
+});
+
+```
+
+### 置顶会话
+
+会话置顶指将单聊或群聊会话固定在会话列表的顶部，方便用户查找。例如，将重点会话置顶，可快速定位会话。
+
+置顶状态会存储在服务器上，多设备登录情况下，更新置顶状态会同步到其他登录设备。你最多可以置顶 50 个会话。
+
+你可以调用 `asyncPinConversation` 方法设置是否置顶会话。多设备登录情况下，会话置顶或取消置顶后，其他登录设备分别会收到 `CONVERSATION_PINNED` 和 `CONVERSATION_UNPINNED` 事件。
+
+:::notice
+若使用该功能，需将 SDK 升级至 4.0.3。
+:::
+
+示例代码如下： 
+
+```java
+EMClient.getInstance().chatManager().asyncPinConversation(conversationId, isPinned, new EMCallBack() {
+    @Override
+    public void onSuccess() {
+        
+    }
+
+    @Override
+    public void onError(int code, String error) {
+
+    }
+});
+```
+
+你可以通过 `EMConversation` 对象的 `isPinned` 字段检查会话是否为置顶状态，或者调用 `getPinnedTime` 方法获取会话置顶时间。
 
 ### 分页获取指定会话的历史消息
 
