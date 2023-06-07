@@ -206,18 +206,18 @@ EMProperties properties = EMProperties.builder()
 
 ### V0.7.0   2023-06-06
 
-1.增加批量获取群组详情功能。
-2.增加批量禁言/解禁聊天室成员功能。
-3.增加获取群组成员列表包括群主的功能。
-4.`EMProperties` 支持设置 `pendingAcquireMaxCount`。
-5.修正部分方法使用示例错误的问题。
+- 增加批量获取群组详情功能。
+- 增加批量禁言/解禁聊天室成员功能。
+- 增加获取群组成员列表包括群主的功能。
+- `EMProperties` 支持设置 `pendingAcquireMaxCount`。
+- 修正部分方法使用示例错误的问题。
 
 以上更新内容请到 `EMProperties/GroupApi/RoomApi/BlockApi` 中查看。
 
 ### V0.6.9  2023-04-07
 
-1.增加批量注册用户功能。
-2.增加批量禁言群组成员功能。
+- 增加批量注册用户功能。
+- 增加批量禁言群组成员功能。
 
 以上更新内容请到 UserApi/BlockApi 中查看。
 
