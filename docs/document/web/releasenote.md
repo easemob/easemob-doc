@@ -6,10 +6,10 @@
 
 ### 新增特性
 
-1. [新增 `pinConversation` 方法实现会话置顶和取消置顶](message_retrieve.html#置顶会话)。
-2. [新增 `getServerPinnedConversations` 方法分页获取服务器端的置顶会话列表](message_retrieve.html#获取服务端的置顶会话列表)。
-3. [新增 `getServerConversations` 方法分页获取排序后的服务端会话列表](message_retrieve.html#从服务器分页获取会话列表)。
-4. [新增在群组或聊天室会话中发送定向消息](message_send_receive.html#发送定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
+1. 新增 `pinConversation` 方法实现[会话置顶和取消置顶](message_retrieve.html#置顶会话)。
+2. 新增 `getServerPinnedConversations` 方法[分页获取服务器端的置顶会话列表](message_retrieve.html#获取服务端的置顶会话列表)。
+3. 新增 `getServerConversations` 方法[分页获取排序后的服务端会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+4. 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
 5. 在从服务器获取历史消息的方法 `getHistoryMessages` 的返回数据中新增 `isLast` 字段表示返回的是否为最后一页数据。
 6. 在构建图片消息的方法 `create` 中新增 [`thumbnailWidth` 和 `thumbnailHeight`](message_send_receive.html#发送图片消息) 参数用于设置缩略图的宽度和高度。
 7. 新增以下 SDK 登录失败原因，在控制台上提示：
