@@ -267,7 +267,7 @@ function sendPrivateAudio() {
 
 对于图片消息，服务器会根据用户设置的 `thumbnailHeight` 和 `thumbnailWidth` 参数自动生成图片的缩略图。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。
 
-请参考以下代码示例来创建和发送图片消息：
+请参考以下代码示例创建和发送图片消息：
 
 ```javascript
 function sendPrivateImg() {
@@ -305,6 +305,8 @@ function sendPrivateImg() {
       onFileUploadComplete: function () {
         console.log("onFileUploadComplete");
       },
+      thumbnailHeight: 200,
+      thumbnailWidth: 200,
     };
     // 创建一条图片消息。
     let msg = WebIM.message.create(option);
@@ -652,6 +654,49 @@ function sendCustomMsg() {
     });
 }
 ```
+
+### 发送定向消息
+
+发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
+
+该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
+
+:::notice
+1. 仅 SDK 4.1.7 及以上版本支持。
+2. 定向消息不计入群组会话或聊天室会话的未读计数。
+:::
+
+发送定向消息的流程与发送普通消息相似，唯一区别是需要设置定向消息的接收方。
+
+下面以文本消息为例介绍如何发送定向消息，示例代码如下：
+
+```javaScript
+// 发送定向文本消息。
+function sendTextMessage() {
+  let option = {
+    // 消息类型。
+    type: "txt",
+    // 消息内容。
+    msg: "message content",
+    // 消息接收方所在群组或聊天室的 ID。
+    to: "groupId",
+    // 会话类型：群聊和聊天室分别为 `groupChat` 和 `chatRoom`。
+    chatType: "groupChat",
+    // 消息的接收方列表。最多可传 20 个接收方的用户 ID。若不设置该字段或传入数组类型之外的值，如字符串，则消息发送给群组或聊天室的所有成员。
+    receiverList: ['uId1','uId2'],
+  };
+  // 创建文本消息。
+  let msg = WebIM.message.create(option);
+  // 调用 `send` 方法发送该文本消息。
+    conn.send(msg).then((res)=>{
+      console.log("Send message success",res);
+    }).catch((e)=>{
+      console.log("Send message fail",e);
+    });
+}
+```
+
+接收定向消息与接收普通消息的操作相同，详见[接收消息](#接收消息)。
 
 ### 使用消息扩展
 

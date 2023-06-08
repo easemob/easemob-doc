@@ -13,7 +13,9 @@
 
 利用环信即时通讯 IM SDK 可从服务器获取会话和历史消息。
 
-- `getConversationlist` 分页获取会话列表以及会话中的最新一条消息；
+- `getServerConversations` 分页获取会话列表以及会话中的最新一条消息；
+- `getServerPinnedConversations` 获取服务端的置顶会话列表；
+- `pinConversation` 设置是否置顶会话；
 - `getHistoryMessages` 按服务器接收消息的时间顺序获取服务器上保存的指定会话中的消息；
 - `removeHistoryMessages` 单向删除服务端的历史消息；
 - `deleteConversation` 删除服务器端会话及其对应的消息。
@@ -28,22 +30,76 @@
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `getConversationlist` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
+你可以调用 `getServerConversations` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表。若会话中没有消息，则 SDK 按照会话创建时间的倒序返回会话列表。
 
-:::tip
-1. 若使用该功能，需将 SDK 升级至 V4.1.3。
-2. 登录用户的 ID 大小写混用会导致拉取会话列表时提示会话列表为空，因此避免大小写混用。
-3. 服务端会话列表的更新存在延时，建议你在登录时调用该方法，其他时段可更新缓存中的会话列表。
-4. 获取的会话列表中不包含最新一条消息通过 RESTful 接口发送的会话。若需获取该类会话，需要联系商务开通将通过 RESTful 接口发送的消息写入会话列表的功能。
+服务器默认存储 100 条会话。若提升该上限，需联系环信商务，最多能增加至 500 条。
+
+:::notice
+1. 若使用该功能，需将 SDK 升级至 4.1.7 或以上版本。 
+2. 登录用户的 ID 大小写混用会导致拉取会话列表时提示会话列表为空，因此建议用户 ID 使用小写字母。
+3. 服务端会话列表的更新存在延时，建议你仅在登录时调用该方法。
+4. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需联系商务。
 :::
 
+示例代码如下：
+
 ```javascript
-// pageNum：当前页面，从 1 开始。
-// pageSize：每页获取的会话数量。取值范围为 [1,20]。
-connection.getConversationlist({pageNum: 1, pageSize: 20}).then((res) => {})
+// pageSize: 每页期望获取的会话数量。取值范围为 [1,50]，默认为 `20`。
+// cursor：开始获取数据的游标位置。若传空字符串（''），SDK从最新活跃的会话开始获取。
+connection.getServerConversations({pageSize:50, cursor: ''}).then((res)=>{
+    console.log(res)
+})
+```
+该方法的返回数据包含 `conversations` 和 `cursor` 参数：
+
+- conversations: 会话列表。`conversations` 为 `ConversationItem[]` 类型，`ConversationItem` 包含如下属性：
+
+| 属性名称 | 描述 |
+| :--------- | :----- |
+| `conversationId`  | 会话 ID。 |
+| `conversationType`| 会话类型。|
+| `isPinned` | 是否置顶：<br/> - `true`：置顶；<br/> - `false`：不置顶。 |
+| `pinnedTime`| 会话置顶的 UNIX 时间戳，单位为毫秒。未置顶时值为 `0` |
+| `lastMessage` | 最新一条消息概况。 | 
+| `unReadCount` | 未读消息数。 |  
+
+- cursor: 下次查询数据的游标位置。若 SDK 返回的数据条数小于请求中设置的数目，`cursor` 的值为空字符串（''），表示当前为最后一页数据。否则，SDK 返回具体的游标位置，指定开始获取数据的位置。
+
+### 获取服务端的置顶会话列表
+
+你可以调用 `getServerPinnedConversations` 方法从服务端分页获取置顶会话列表。SDK 按照会话置顶时间的倒序返回。 
+
+你最多可以拉取 50 个置顶会话。
+
+:::notice
+若使用该功能，需将 SDK 升级至 4.1.7 或以上版本。
+:::
+
+示例代码如下，返回数据类型参见getServerConversations： 
+
+```javascript
+connection.getServerPinnedConversations({pageSize:50, cursor: ''})
 ```
 
-对于使用 `getConversationlist` 方法未实现分页获取会话的用户，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息），如需调整会话数量或时间限制请联系商务。
+该方法的返回数据与[获取服务端的会话列表](#从服务器分页获取会话列表)相同。
+
+### 置顶会话
+
+会话置顶指将单聊或群聊会话固定在会话列表的顶部，方便用户查找。例如，将重点会话置顶，可快速定位会话。
+
+置顶状态会存储在服务器上，多设备登录情况下，更新置顶状态会同步到其他登录设备。你最多可以置顶 50 个会话。
+
+你可以调用 `pinConversation` 方法设置是否置顶会话。多设备登录情况下，会话置顶或取消置顶后，其他登录设备会收到 `onMultiDeviceEvent` 事件，事件名分别为 `pinnedConversation` 和 `unpinnedConversation` 事件。
+
+:::notice
+若使用该功能，需将 SDK 升级至 4.1.7 或以上版本。
+:::
+
+示例代码如下： 
+
+```javascript
+connection.pinConversation({conversationId:'conversationId', conversationType: 'singleChat', isPinned: true})
+```
 
 ### 从服务器获取指定会话的历史消息
 
