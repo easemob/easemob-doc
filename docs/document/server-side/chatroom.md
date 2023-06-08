@@ -2017,7 +2017,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 | 参数        | 类型  | 描述                                                                |
 | :---------- | :---- | :------------------------------------------------------------------ |
-| `usernames` | Array | 添加的用户 ID，多个用户 ID 通过逗号（“，”）分隔，最多可添加 60 个。 |
+| `usernames` | Array | 待添加到聊天室黑名单的用户 ID，多个用户 ID 通过逗号（“，”）分隔，最多可添加 60 个。 |
 
 #### HTTP 响应
 
@@ -2486,7 +2486,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/
 | `data.result`     | Bool   | 是否成功将用户移出聊天室白名单：<br/> - `true`：是；<br/> - `false`：否。                  |
 | `data.chatroomid` | String | 聊天室 ID。                                                                                |
 | `data.action`     | String | 执行的操作。在该响应中，该字段的值为 `remove_user_whitelist`，表示将用户移出聊天室白名单。 |
-| `data.user`       | String | 添加的用户 ID，多个用户 ID 以逗号（“，”）分隔。                                            |
+| `data.user`       | String | 添加的用户 ID，多个用户 ID 以逗号（“，”）分隔，最多可添加 60 个。                                            |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2607,7 +2607,9 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -H 'Authorization: Bea
 
 ### 禁言聊天室成员
 
-禁言单个用户。用户被禁言后，将无法在聊天室中发送消息。
+禁言单个或多个聊天室成员。你一次最多可禁言 60 个成员。
+
+用户被禁言后，将无法在聊天室中发送消息。
 
 #### HTTP 请求
 
@@ -2632,7 +2634,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 | 参数            | 类型   | 是否必需 | 描述                                                          |
 | :-------------- | :----- | :------- | :------------------------------------------------------------ |
 | `mute_duration` | Long   | 是       | 禁言时长，从当前时间开始计算。单位为毫秒。`-1` 表示永久禁言。 |
-| `usernames`     | String | 是       | 要被禁言的用户 ID。                                           |
+| `usernames`     | String | 是       | 要被禁言的用户 ID，一次最多可传 60 个。                                           |
 
 #### HTTP 响应
 
@@ -2762,7 +2764,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 解除聊天室禁言成员
 
-解除对一个或多个聊天室成员的禁言。解除禁言后，该成员可以正常在聊天室中发送消息。
+解除对一个或多个聊天室成员的禁言。你一次最多可对 60 个成员解除禁言。
+
+解除禁言后，该成员可以正常在聊天室中发送消息。
 
 #### HTTP 请求
 
@@ -2774,7 +2778,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member
 
 | 参数      | 类型   | 是否必需 | 描述                                                                                                                                              |
 | :-------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `member1` | String | 是       | 待被移出禁言列表的聊天室成员的用户 ID。<br/>如果需要解除多个成员的禁言，则成员用户 ID 之间用逗号（","）隔开。在 URL 中，需要将 "," 转义为 "%2C"。 |
+| `member1` | String | 是       | 待被移出禁言列表的聊天室成员的用户 ID。<br/>一次最多可传 60 个用户 ID，用户 ID 之间用逗号（","）隔开。在 URL 中，需要将 "," 转义为 "%2C"。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
