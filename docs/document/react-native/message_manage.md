@@ -141,11 +141,9 @@ ChatClient.getInstance()
   });
 ```
 
-#### 删除会话及其中的消息
+#### 单向删除服务端会话及其历史消息
 
-你可以调用 `removeConversationFromServer` 方法删除服务器端会话及其历史消息。会话删除后，当前用户和其他用户均无法从服务器获取该会话。若该会话的历史消息也删除，所有用户均无法从服务器获取该会话的消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
-
-删除服务端会话及其历史消息，对本地的会话和消息无影响。
+你可以调用 `removeConversationFromServer` 方法删除服务器端会话和历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息，对本地的会话无影响，但会删除本地消息，而其他用户不受影响。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
 
 示例代码如下：
 
