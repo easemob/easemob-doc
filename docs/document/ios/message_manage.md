@@ -10,7 +10,7 @@
 
 环信即时通讯 IM iOS SDK 支持管理用户设备上存储的消息会话数据，其中包含如下主要方法：
 
-- `IEMChatManager.getAllConversations` 获取本地所有会话；
+- `IEMChatManager.getAllConversations:` 获取本地所有会话；
 - `EMConversation.loadMessagesStartFromId` 从数据库中读取指定会话的消息；
 - `EMConversation.unreadMessagesCount` 获取指定会话的未读消息数；
 - `EMConversation.unreadMessagesCount` 获取所有会话的未读消息数；
@@ -38,11 +38,21 @@
 
 ### 获取本地所有会话
 
-你可以调用 API 获取本地所有会话：
+你可以调用 `getAllConversations:` 方法一次性获取本地所有会话。
+
+SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
+
+:::notice
+若使用该功能，需将 SDK 升级至 4.0.3。
+:::
+
+示例代码如下：
 
 ```objectivec
-NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
+NSArray <EMConversation *>*conversations = [EMClient.sharedClient.chatManager getAllConversations:YES];
 ```
+
+你也可以调用 `getAllConversations` 方法返回 `NSArray <EMConversation *>` 结构的会话。
 
 ### 从数据库中读取指定会话的消息
 
@@ -108,7 +118,7 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 [conversation deleteMessageWithId:.messageId error:nil];
 ```
 
-删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](message_retrieve.html#删除服务端会话及其历史消息)。
+删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](message_retrieve.html#单向删除服务端会话及其历史消息)。
 
 ### 根据消息 ID 搜索消息
 

@@ -149,7 +149,7 @@ connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', me
 
 ### 删除服务器端会话及其对应的消息
 
-你可以调用 `deleteConversation` 方法删除服务器端会话及其对应的消息。
+你可以调用 `deleteConversation` 方法删除服务器端会话及其对应的消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息，其他用户不受影响。
 
 ```javascript
 

@@ -2,6 +2,28 @@
 
 <Toc />
 
+## 版本 V4.0.3 Dev 2023-6-19（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 `EMChatManager#asyncFetchConversationsFromServer` 方法实现[从服务器拉取会话](message_retrieve.html#从服务器分页获取会话列表)，原接口标记为已废弃。
+- [IM SDK] 新增置顶服务器会话的功能：
+    - 新增 `EMChatManager#asyncPinConversation` 方法，实现[置顶或取消置顶服务器会话](message_retrieve.html#置顶会话)：
+    - 新增 `EMChatManager#asyncFetchPinnedConversationsFromServer` 方法，实现[获取置顶的服务器会话](message_retrieve.html#获取服务端的置顶会话列表)。
+- [IM SDK] 新增 `EMChatManager#getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](message_manage.html#获取本地所有会话)；
+- [IM SDK] 新增在群组或聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)的功能；
+
+### 优化
+
+- [IM SDK] 优化登录时若消息过多，从本地数据库加载会话太慢的问题；
+- [IM SDK] 优化绑定及解绑推送设备的逻辑。
+
+
+### 修复
+
+- [IM UIKit] 修复部分空指针问题。
+- [IM UIKit] 修复部分场景下不展示自定义头像的问题。
+
 ## 版本 V4.0.2 Dev 2023-4-26（开发版）
 
 ### 新增特性

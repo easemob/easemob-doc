@@ -283,6 +283,9 @@ public class EMFCMMSGService extends FirebaseMessagingService {
    - 推送服务需要的权限列表：
 
    ```xml
+   <!--注：若使用小米推送 SDK 3.6.12 版本，需要添加以下权限-->
+   <!-- <uses-permission android:name="android.permission.GET_TASKS"/>-->  
+   
    <!--注：以下三个权限在小米推送 SDK 4.8.0 及以上版本不再依赖-->
    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
