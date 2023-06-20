@@ -31,9 +31,10 @@
 你可以调用 `fetchConversationsFromServerWithPage` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
 
 :::tip
+
 1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 方法获取本地会话即可。
 2. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需联系商务。
-:::
+   :::
 
 ```typescript
 // pageNum：当前页面，从 1 开始。
@@ -241,6 +242,7 @@ ChatClient.getInstance()
     console.log("get message fail.", reason);
   });
 ```
+
 #### 获取指定会话中一定时间段内的消息
 
 你可以调用 `getMessageWithTimestamp` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
@@ -321,7 +323,7 @@ ChatClient.getInstance()
 
 #### 获取指定会话中一定数量的消息
 
-你可以调用 `getMessages` 获取指定会话中一定数量的消息。 
+你可以调用 `getMessages` 获取指定会话中一定数量的消息。
 
 ```typescript
 // convId: 会话 ID。
@@ -338,6 +340,7 @@ ChatClient.getInstance()
     console.log("get message fail.", reason);
   });
 ```
+
 #### 获取指定会话的最新消息
 
 你可以调用 `getLatestMessage` 方法获取指定会话中的最新一条消息。
@@ -357,7 +360,7 @@ ChatClient.getInstance()
 
 #### 获取指定会话最新接收到的消息
 
-你可以调用 `getLastReceivedMessage` 方法获取指定会话中最新收到的一条消息。 
+你可以调用 `getLastReceivedMessage` 方法获取指定会话中最新收到的一条消息。
 
 ```typescript
 // convId: 会话 ID
@@ -520,6 +523,23 @@ ChatClient.getInstance()
 // convType：会话类型
 ChatClient.getInstance()
   .chatManager.deleteAllMessages(convId, convType)
+  .then(() => {
+    console.log("delete message success");
+  })
+  .catch((reason) => {
+    console.log("delete message fail.", reason);
+  });
+```
+
+#### 删除指定时间段的本地消息
+
+你可以调用 `deleteMessagesWithTimestamp` 方法删除指定时间段的消息。
+
+```typescript
+// startTs: 开始点的时间戳
+// endTs: 结束点的时间戳
+ChatClient.getInstance()
+  .chatManager.deleteMessagesWithTimestamp({ startTs, endTs })
   .then(() => {
     console.log("delete message success");
   })
