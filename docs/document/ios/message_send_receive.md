@@ -499,7 +499,7 @@ message.chatType = EMChatTypeGroupChat;
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
-## 发送和接收定向消息
+### 发送和接收定向消息
 
 发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
 

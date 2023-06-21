@@ -790,3 +790,134 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups" \
 }
 ```
 
+## 发送定向消息
+
+你可以向群组中指定的一个或多个成员发送消息，但单次仅支持指定一个群组。对于定向消息，只有作为接收方的指定成员才能看到消息，其他群成员则看不到该消息。
+
+定向消息不计入群组会话的未读计数。若使用该功能，需联系环信商务开通。
+
+**发送频率**：100 次/秒/App Key
+
+以下以文本消息为例介绍如何在群组中发送定向消息。
+
+### HTTP 请求
+
+```http
+POST https://{host}/{org_name}/{app_name}/messages/chatgroups/users
+```
+
+#### 路径参数
+
+参数及说明详见 [公共参数](#公共参数)。
+
+#### 请求 header
+
+| 参数       | 类型   | 是否必需 | 描述          |
+| :-------------- | :----- | :------- | :-------------- |
+| `Content-Type`  | String | 是       | 内容类型。填入 `application/json`。       |
+| `Accept`        | String | 是       | 内容类型。填入 `application/json`。      |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+#### 请求 body
+
+下表为发送各类消息的通用请求体，为 JSON 对象，是所有消息的外层结构。
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :--------------- |
+| `from`          | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为管理员，即 “admin”；若传入字段但值为空字符串 (“”)，请求失败。  |
+| `to`            | Array   | 是       | 消息接收方所属的群组 ID。每次只能传 1 个群组。 |
+| `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
+| `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
+| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。      |
+| `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
+| `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。|
+| `users`         | Array  | 是       ｜接收消息的群成员的用户 ID 数组。每次最多可传 20 个用户 ID。｜
+
+请求体中的 `body` 字段说明详见下表。
+
+| 参数  | 类型   | 是否必需 | 描述       |
+| :---- | :----- | :------- | :--------- |
+| `msg` | String | 是       | 消息内容。 |
+
+对于其他类型的消息，`body` 字段的说明详见[发送普通群聊消息](#发送普通群聊消息)一节中发送各类型消息的请求体中的 `body` 字段说明。
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
+
+| 参数   | 类型 | 描述     |
+| :----- | :--- | :--------------- |
+| `data` | JSON | 返回数据详情。该字段的值为包含群组 ID 和 发送的消息的 ID 的键值对。<br/>例如 "184524748161025": "1029544257947437432"，表示在 ID 为 184524748161025 的群组中发送了消息 ID 为 1029544257947437432 的消息。 |
+
+其他参数及说明详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+发送给目标用户，消息无需同步给发送方：
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups/users' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "from": "user1",
+    "to": ["184524748161025"],
+    "type": "txt",
+    "body": {
+        "msg": "testmessages"
+    },
+    "ext": {
+       "em_ignore_notification": true
+    },
+    "users": ["user2", "user3"]
+}'
+```
+
+消息同步给发送方：
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups/users' 
+-H 'Content-Type: application/json' 
+-H 'Accept: application/json' 
+-H 'Authorization: Bearer <YourAppToken>' 
+-d '{
+    "from": "user1",
+    "to": ["184524748161025"],
+    "type": "txt",
+    "body": {
+        "msg": "testmessages"
+    },
+    "sync_device":true,
+    "users": ["user2", "user3"]
+}'
+```
+
+#### 响应示例
+
+```json
+{
+  "path": "/messages/chatgroups",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
+  "timestamp": 1657254052191,
+  "organization": "XXXX",
+  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
+  "action": "post",
+  "data": {
+    "184524748161025": "1029544257947437432"
+  },
+  "duration": 0,
+  "applicationName": "XXXX"
+}
+```
+
