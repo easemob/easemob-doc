@@ -832,6 +832,8 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/users
 | :---- | :----- | :------- | :--------- |
 | `msg` | String | 是       | 消息内容。 |
 
+对于其他类型的消息，`body` 字段的说明详见发送各类型的普通群聊消息的请求体中的 `body` 字段说明。
+
 ### HTTP 响应
 
 #### 响应 body
