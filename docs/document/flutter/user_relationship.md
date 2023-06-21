@@ -34,7 +34,8 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ## 实现方法
 
-### 添加好友
+### 管理好友列表
+#### 添加好友
 
 1. 用户添加指定用户为好友
 
@@ -103,7 +104,7 @@ EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
     EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
-### 获取好友列表
+#### 获取好友列表
 
 1. 从服务器获取好友列表
 
@@ -117,7 +118,7 @@ List<String> contacts = await EMClient.getInstance.contactManager.getAllContacts
 List<String> contacts = await EMClient.getInstance.contactManager.getAllContactsFromDB();
 ```
 
-### 删除好友
+#### 删除好友
 
 删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
@@ -137,11 +138,17 @@ try {
 }
 ```
 
-### 将用户加入黑名单
+### 管理黑名单
 
-你可以调用 `addUserToBlockList` 添加用户到黑名单，添加后对方将无法发送消息给自己。
+黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。
 
-用户可以将任何其他聊天用户添加到他们的黑名单列表中，无论该用户是否是联系人。添加到黑名单列表的联系人保留在联系人列表中。
+黑名单功能包括加入黑名单，从黑名单移出用户和获取黑名单列表。对于获取黑名单，你可从服务器获取黑名单列表，也可从本地数据库获取已保存的黑名单列表。
+
+#### 将用户加入黑名单
+
+你可以调用 `addUserToBlockList` 将指定用户加入黑名单。用户被加入黑名单后将无法向你发送消息，也无法发送好友申请。
+
+用户可以将任何其他用户添加到黑名单列表，无论该用户是否是好友。好友被加入黑名单后仍在好友列表上显示。
 
 ```dart
 // 用户 ID
@@ -152,7 +159,7 @@ try {
 }
 ```
 
-### 查看当前用户黑名单列表
+#### 查看当前用户黑名单列表
 
 1. 通过服务器获取黑名单列表
 
@@ -176,7 +183,7 @@ try {
 }
 ```
 
-### 将用户从黑名单移除
+#### 将用户从黑名单移除
 
 你可以调用 `removeUserFromBlockList` 将用户从黑名单移除，用户发送消息等行为将恢复。
 

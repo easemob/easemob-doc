@@ -35,9 +35,11 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 本节展示如何在项目中管理好友的添加移除和黑名单的添加移除。
 
-### 添加好友
+### 管理好友列表
 
-好友申请部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
+#### 添加好友
+
+添加好友部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
 
 1. 申请指定用户添加好友
 
@@ -90,7 +92,7 @@ EMClient.getInstance().contactManager().declineInvitation(username);
 
 当你同意或者拒绝后，对方会通过好友事件回调，收到 `onContactAgreed` 或者 `onContactRefused`。
 
-### 删除好友
+#### 删除好友
 
 删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
@@ -104,7 +106,7 @@ EMClient.getInstance().contactManager().deleteContact(username);
 
 调用 `deleteContact` 删除好友后，对方会收到 `onContactDeleted` 回调。
 
-### 获取好友列表
+#### 获取好友列表
 
 你可以从服务器获取好友列表，也可以从本地数据库获取已保存的好友列表。
 
@@ -121,13 +123,18 @@ List<String> usernames = EMClient.getInstance().contactManager().getAllContactsF
 // 从本地数据库获取好友列表。
 List<String> usernames = EMClient.getInstance().contactManager().getContactsFromLocal();
 ```
-### 添加用户到黑名单
 
-将指定用户加入黑名单后，对方将无法给你发送消息。黑名单部分主要功能是获取黑名单列表、添加用户至黑名单以及将用户从黑名单移除等。获取黑名单时，可从服务器获取黑名单列表，也可从本地数据库获取已保存的黑名单列表。
+### 管理黑名单
 
-黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。好友加入黑名单后仍在好友列表上显示。
+黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。
 
-你可以调用 `addUserToBlackList` 添加用户到黑名单，示例代码如下：
+黑名单功能包括加入黑名单，从黑名单移出用户和获取黑名单列表。对于获取黑名单，你可从服务器获取黑名单列表，也可从本地数据库获取已保存的黑名单列表。
+
+#### 添加用户到黑名单
+
+你可以调用 `addUserToBlackList` 添加用户到黑名单。用户被加入黑名单后，无法向你发送消息，也无法发送好友申请。
+
+用户可以将任何其他用户添加到黑名单列表，无论该用户是否是好友。好友被加入黑名单后仍在好友列表上显示。
 
 ```java
 // 同步方法，会阻塞当前线程。
@@ -135,17 +142,15 @@ List<String> usernames = EMClient.getInstance().contactManager().getContactsFrom
 EMClient.getInstance().contactManager().addUserToBlackList(username,true);
 ```
 
-### 将用户从黑名单移除
+#### 将用户从黑名单移除
 
-你可以调用 `removeUserFromBlackList` 将用户从黑名单移除，示例代码如下：
+你可以调用 `removeUserFromBlackList` 将用户从黑名单移除，用户发送消息等行为将恢复。
 
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncRemoveUserFromBlackList(String, EMCallBack)。
 EMClient.getInstance().contactManager().removeUserFromBlackList(username);
 ```
-
-### 查看当前用户黑名单列表
 
 #### 从服务器获取黑名单列表
 

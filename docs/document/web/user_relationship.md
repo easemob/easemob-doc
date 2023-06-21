@@ -102,9 +102,9 @@ conn.getContacts().then((res) => {
 
 #### 添加用户至黑名单
 
-将好友加入黑名单后，对方好友列表依然可以看到己方，但无法向己方发送消息.
+你可以调用 `addUsersToBlocklist` 添加用户到黑名单。用户被加入黑名单后，无法向你发送消息，也无法发送好友申请。
 
-你可以调用 `addUsersToBlocklist` 方法将用户加入黑名单，示例代码如下：
+用户可以将任何其他用户添加到黑名单列表，无论该用户是否是好友。好友被加入黑名单后仍在好友列表上显示。
 
 ```javascript
 conn.addUsersToBlocklist({
