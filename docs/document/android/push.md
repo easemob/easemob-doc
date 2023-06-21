@@ -28,7 +28,7 @@
 
 1. 开发者通过环信即时通讯云控制台配置 App 的推送证书，需填写证书名称（或者 App Key）。该步骤须在登录环信 IM SDK 成功后进行。
 2. 证书名称是环信服务器用来判断目标设备使用哪种推送通道的唯一条件，因此必须确保与 Android 终端设备上传的证书名称一致。
-   :::
+:::
 
 ## 前提条件
 
@@ -55,7 +55,7 @@ SDK 内部会按照该顺序检测设备的推送支持情况。如果未设置�
 
 ### 上传到设备证书到环信即时通讯云控制台
 
-![image](@static/images/android/push/fcm_old_version.png)
+![image](@static/images/android/push/push_android_certificate_add.png)
 
 ## 在客户端实现推送
 
@@ -95,7 +95,7 @@ EMClient.getInstance().init(this, options);
 1. 在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase，详见 [FCM 的官网介绍](https://firebase.google.com/docs/android/setup?hl=zh-cn#console)。<br/>
 
 2. 上传推送证书。<br/>
-   注册完成后，在[环信即时通讯云控制台 (opens new window)](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书配置**，点击 **添加推送证书**。即时通讯 IM 支持 FCM 的旧版证书和 v1 版证书。
+   注册完成后，在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书配置**，点击 **添加推送证书**。即时通讯 IM 支持 FCM 的旧版证书和 v1 版证书。
 
 - 若 **证书类型** 选择 **旧版**，你需要将 **证书名称** 设置为 FCM 的发送者 ID，**推送秘钥** 设置为 FCM 的服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面中，在 **Cloud Messaging API（旧版）** 区域中获取发送者 ID 和服务器密钥，如下图所示。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
 
