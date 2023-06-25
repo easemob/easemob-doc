@@ -12,6 +12,7 @@
     - 新增 `EMChatManager#asyncFetchPinnedConversationsFromServer` 方法，实现[获取置顶的服务器会话](message_retrieve.html#获取服务端的置顶会话列表)。
 - [IM SDK] 新增 `EMChatManager#getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](message_manage.html#获取本地所有会话)；
 - [IM SDK] 新增在群组或聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)的功能；
+- [IM SDK] 新增[荣耀推送](push.html#荣耀推送集成)。
 
 ### 优化
 
