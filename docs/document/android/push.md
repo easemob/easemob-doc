@@ -459,13 +459,11 @@ if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
 
 通过如下三步实现打开应用自定义页面并携带数据给应用。
 
-若消息扩展支持 action 配置，需要添加消息结构（泽源）。
-
-若启动自定义页面需要前置参数，消息如何携带前置参数，需要添加消息结构。若只设置 Console 上的 action，只能跳转到无需前置参数的情况。在消息中，可实现针对不用的用户跳转不同的应用自定义页面。
-
 1. 服务端消息体中设置 `action` 值。
 
-你可以在环信即时通讯云控制台的 `添加推送证书` 对话框中配置 `action` 参数设置点击推送通知栏默认打开的应用自定义页面。若推送不同的消息时，接收方收到后点击推送通知栏打开不同应用自定义页面，你可以通过在消息中添加消息扩展属性实现。通过消息扩展属性设置的自定义页面的优先级高于环信即时通讯云控制台的配置。
+你可以在环信即时通讯云控制台的 `添加推送证书` 对话框中将 `action` 参数设置为 `1`，`Badge Class` 设置为点击推送通知栏默认打开的应用自定义页面。该配置只能实现跳转到无需前置参数的页面。若启动应用自定义页面需要前置参数，你还需要在消息扩展中添加前置参数。
+
+若推送不同的消息时，接收方收到后点击推送通知栏打开不同应用自定义页面，你可以添加相应的消息扩展属性实现。
 
 示例代码如下：
 
@@ -476,8 +474,8 @@ EMTextMessageBody txtBody = new EMTextMessageBody("test");
 // 设置接收方：单聊为对端用户的用户 ID；群聊为群组 ID；聊天室聊天为聊天室 ID。
 message.setTo("toChatUsername");
 JSONObject jsonObject = new JSONObject();
-        jsonObject.put("honor_click_action","com.hyphenate.chatdemo.section.me.action");// 设置点击推送通知栏打开的应用自定义页面。
-        message.setAttribute("em_android_push_ext",jsonObject);// 发送消息。
+jsonObject.put("honor_click_action","com.hyphenate.chatdemo.section.me.action");// 设置点击推送通知栏打开的应用自定义页面。
+message.setAttribute("em_android_push_ext",jsonObject);// 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
