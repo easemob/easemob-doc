@@ -287,7 +287,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 2. 在右侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
 3. 在**添加推送证书**对话框中选择**荣耀**，配置荣耀推送参数。
 
-![img](add_honor_push_template.png)
+![image](@static/images/android/push/add_honor_push_template.png)
 
 | 推送证书参数    | 类型   | 是否必需 | 描述                                                                                               |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------- |
@@ -301,7 +301,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 关于**App ID**、**Client ID**和**Client Secret**，可在荣耀开发者服务平台申请开通推送服务后，在**推送服务**页面，选择创建的应用，在[**查看推送服务**](https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=guides&docId=app-registration.md&token=#申请开通推送服务)页面查看。
 :::
 
-![img](view_push_service.png)
+![image](@static/images/android/push/view_push_service.png)
 
 **步骤 3：在环信即时通讯云 IM 中集成荣耀推送。**
 
