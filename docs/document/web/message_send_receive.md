@@ -244,7 +244,7 @@ function sendPrivateAudio() {
       onFileUploadComplete: function () {
         console.log("onFileUploadComplete");
       },
-      ext: { file_length: file.data.size },
+      ext: { },
     };
     // 创建一条语音消息。
     let msg = WebIM.message.create(option);
@@ -388,7 +388,7 @@ function sendPrivateVideo() {
         // 视频文件上传成功。
         console.log("onFileUploadComplete");
       },
-      ext: { file_length: file.data.size },
+      ext: { },
     };
     // 创建一条视频消息。
     let msg = WebIM.message.create(option);
@@ -447,7 +447,7 @@ function sendPrivateFile() {
       onFileUploadComplete: function () {
         console.log("onFileUploadComplete");
       },
-      ext: { file_length: file.data.size },
+      ext: { },
     };
     // 创建一条文件消息。
     let msg = WebIM.message.create(option);
