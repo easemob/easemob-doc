@@ -2,7 +2,7 @@
 
 <Toc />
 
-消息表情回复（“Reaction”）指用户在单聊和群聊场景中对单条消息回复表情，可丰富用户聊天时的互动方式。
+消息表情回复（“Reaction”）指用户在单聊和群聊场景中对单条消息回复表情，可丰富用户聊天时的互动方式。对于单个消息，一个消息表情为一个 Reaction，若重复添加同一消息表情，Reaction 数量计为 1。每条消息默认可添加 20 个 Reaction，若需提升该上限，需联系环信商务。
 
 本页介绍如何使用即时通讯 IM RESTful API 实现 Reaction 功能。
 
@@ -36,6 +36,8 @@
 ## 创建/追加 Reaction
 
 在单聊或群聊场景中对单条消息创建或追加 Reaction。
+
+创建 Reaction 指对消息添加第一条 Reaction，后续的 Reaction 添加称为追加。
 
 ### HTTP 请求
 
@@ -288,12 +290,12 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{username}/detail?msgId={
 | :-------- | :----- | :------- | :------------------------------------------------------------- |
 | `msgId`   | String | 是       | 消息 ID。                                                      |
 | `message` | String | 是       | 表情 ID。长度不可超过 128 个字符。该参数的值必须与客户端一致。 |
-| `limit`   | Int    | 否       | 每页显示的 Reaction 条数。取值范围为 [1,50]，默认值为 `50`。   |
+| `limit`   | Int    | 否       | 每页显示添加 Reaction 的用户数量。取值范围为 [1,50]，默认值为 `50`。   |
 | `cursor`  | String | 否       | 查询游标，指定数据查询的起始位置，分页获取时使用。             |
 
 :::notice
 
-分页获取时，服务器按 Reaction 添加时间的正序返回。若 `limit` 和 `cursor` 均不传值，服务器返回最早添加的 50 个 Reaction。
+分页获取时，服务器按用户 Reaction 添加时间的正序返回。若 `limit` 和 `cursor` 均不传值，服务器返回最早添加 Reaction 的 50 个用户。
 
 :::
 
@@ -318,7 +320,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{username}/detail?msgId={
 | `data.reaction`     | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。 |
 | `data.count`        | Int    | 添加该 Reaction 的用户人数。                                                                            |
 | `data.state`        | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`：是；<br/> - `false`：否。                           |
-| `data.userList`     | Array  | 添加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。                                 |
+| `data.userList`     | Array  | 按 Reaction 添加时间正序返回的用户 ID 列表。                           |
 | `data.cursor`       | String | 查询游标，指定下次查询的起始位置。                                                                      |
 
 其他字段及描述详见 [公共参数](#公共参数)。

@@ -295,10 +295,10 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 | `Client ID`     | String | 是       | 应用的客户 ID，用于获取发送消息令牌的 ID，在荣耀开发者服务平台开通对应应用的荣耀推送服务时生成。   |
 | `Client Secret` | String | 是       | 应用的客户密钥，用于获取发送消息令牌的密钥，在荣耀开发者服务平台开通对应应用的荣耀推送服务时生成。 |
 | `Badge Class`   | String | 否       | 应用入口 Activity 类全路径，例如 com.example.test.MainActivity。                                   |
-| `Action`        | String | 否       | 消息接收方在收到离线推送通知时单击通知栏时打开应用的指定页面。                                     |
+| `Action`        | String | 否       | 消息接收方在收到离线推送通知时单击通知栏时打开的应用指定页面的自定义标记。                                     |
 
 :::tip
-关于**App ID**、**Client ID**和**Client Secret**，可在荣耀开发者服务平台申请开通推送服务后，在**推送服务**页面，选择创建的应用，在[**查看推送服务**](https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=guides&docId=app-registration.md&token=#申请开通推送服务)页面查看。
+关于**App ID**、**Client ID**和**Client Secret**，可在荣耀开发者服务平台申请开通推送服务后，在**推送服务**页面选择创建的应用，在[**查看推送服务**](https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=guides&docId=app-registration.md&token=#申请开通推送服务)页面查看。
 :::
 
 ![image](@static/images/android/push/view_push_service.png)
