@@ -4,11 +4,13 @@
 
 客户端 SDK 不提供获取 token 的 API。如果你的用户在客户端使用环信 token 登录和鉴权，你需要在应用服务器（App Server）集成环信服务端获取 token 的 API，实现获取 Token 的业务逻辑。
 
-环信服务端支持以下两种方式获取用户 token：
+环信服务端支持以下三种方式获取用户 token：
 
 - 通过“用户 ID”和“密码”获取：用户注册后，使用 “用户 ID” 和 “密码” 登录。登录成功后，你的 App Server 会为客户端提供一个用户 token。
 
 - 通过“用户 ID”获取：用户在客户端上登录时，你的应用服务器会下发用户 token，SDK 使用用户 ID 和用户 token 进行登录。开发者可通过 RESTful API 在你的应用服务器上对用户 token 进行管理，设置有效期，并确定当用户不存在时是否自动创建用户。
+
+- 基于 `AppKey、AppSecret` 和 `userId`（即注册用户时传入的 `username`）生成动态 Token。
 
 ## 前提条件
 
@@ -184,3 +186,35 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
     }
 }
 ```
+
+## 生成动态的用户 Token
+
+动态 Token 的生成方法依赖 `AppSecret`，因此生成逻辑务必在客户的服务器侧完成，以免 `AppSecret` 泄露。
+
+动态 Token 临时有效，有效期由你自行设置，建议不要太长。
+
+你可以按照如下步骤生成动态用户 token：
+
+1. 在[环信控制台](https://console.easemob.com/user/login)创建应用，生成 `AppKey`、`Client ID` 和 `ClientSecret`。
+
+2. 基于 `AppKey、AppSecret` 和 `userId`（即注册用户时传入的 `username`），参考如下示例生成 token。
+
+```
+a. 获取当前时间戳，单位为秒。
+    CurTime = 1686207557
+b. 设置过期时间，单位为秒。
+    ttl = 600
+c. 生成 signature，将 clientId、appkey、userId、curTime、ttl、clientSecret 六个字段拼成一个字符串，进行 sha1 编码并将编码内容得到的字节转换为十六进制字符串。
+    str = clientId + appkey + userId + curTime + ttl + clientSecret
+    shaBytes = sha1(str)
+    signature = fmt.Sprintf("%x", shaBytes)
+d. 组装为 json。
+     json = {"signature": "xx", "appkey":"xx#xx", "userId":"xx", "curTime":1686207557, "ttl": 600}
+e. 将 token 类型 "dt-" 放到 json 转成的字符串前，生成最终的字符串。
+    str = "dt-" + jsonStr
+f. 进行 base64 编码，生成最终的 token。
+    token = base64.urlEncode.encode(str)
+```
+
+3. 使用上述方法生成 Token 后，客户端 SDK 将该 Token 填入并登录，服务器校验成功后即登录成功。
+
