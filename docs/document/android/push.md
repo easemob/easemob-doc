@@ -368,8 +368,8 @@ options.setPushConfig(builder.build());
 // 检查是否支持荣耀推送。
 boolean isSupport = HonorPushClient.getInstance().checkSupportHonorPush(context);
 if (isSupport) {
-   // true：调用初始化接口时，SDK 会同时进行异步请求 PushToken，会触发 HonorMessageService.onNewToken(String) 回调。
-   // false：不会异步请求 PushToken，需要应用主动请求获取 PushToken。建议用 `false`，自己控制获取 PushToken 的时机。
+   // true：调用初始化接口时，SDK 会同时进行异步请求 device token，会触发 HonorMessageService.onNewToken(String) 回调。
+   // false：不会异步请求 device token，需要应用主动请求获取 device token。建议用 `false`，自己控制获取 device token 的时机。
    HonorPushClient.getInstance().init(context, false);
 }
 // 设置推送配置监听。若推送初始化失败，返回相应错误。
@@ -415,12 +415,12 @@ EMPushHelper.getInstance().setPushListener(new PushListener() {
 
 ```
 public class HONORPushService extends HonorMessageService {
-  //Token 发生变化时，会触发 `onNewToken` 回调返回新 Token。
+  //Device token 发生变化时，会触发 `onNewToken` 回调返回新 Token。
   @Override
   public void onNewToken(String token) {
       if(token != null && !token.equals("")){
           EMLog.d("HONORPush", "service register honor push token success token:" + token);
-        // IM SDK 提供的上传 Push Token 的 API
+        // IM SDK 提供的上传 device token 的 API
           EMClient.getInstance().sendHonorPushTokenToServer(token);
       }else{
           EMLog.e("HONORPush", "service register honor push token fail!");
@@ -433,13 +433,13 @@ public class HONORPushService extends HonorMessageService {
 }
 ```
 
-**步骤 5：打开应用，初始化环信 IM SDK 成功且成功登录后，获取一次 Push Token，将 Token 上传至环信服务器，与 IM 的登录账号绑定。**
+**步骤 5：打开应用，初始化环信 IM SDK 成功且成功登录后，获取一次 device token，将 token 上传至环信服务器，与 IM 的登录账号绑定。**
 
-如果当前 IM 的登录账号已经绑定了 Push Token，则 IM SDK 不会上传 Token。
+如果当前 IM 的登录账号已经绑定了 device token，则 IM SDK 不会上传 token。
 
 ```
 if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
-    // 获取荣耀 Push token。
+    // 获取荣耀 device token。
     HonorPushClient.getInstance().getPushToken(new HonorPushCallback<String>() {
         @Override
         public void onSuccess(String token) {
@@ -455,19 +455,42 @@ if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
 }
 ```
 
-**步骤 6：设置 `action` 参数，即配置点击推送通知栏要打开的应用自定义页面。**
+**步骤 6：设置通知栏消息点击动作。**
 
-`action` 参数需要与客户端 `AndroidManifest.xml` 文件中注册启动的 `Activity` 类中 `intent-filter` 标签中设置的 `action` 一致。
+通知栏消息点击动作分为以下三类，详见[推送的服务端文档](https://docs-im.easemob.com/push/apppush/pushkv#通知栏消息单击动作)。
+- （默认）点击后打开应用首页；
+- 打开特定的 URL；
+- 打开应用自定义页面。
 
-通过如下三步实现打开应用自定义页面并携带数据给应用。
+要实现打开特定的 URL，发送消息时需要添加 key-value 格式的消息扩展属性设置 `type` 为 `2`，`url` 为要打开的目标页面的路径。
 
-1. 服务端消息体中设置 `action` 值。
+下面详细介绍如何实现点击通知栏消息打开应用自定义页面。通过如下三步实现打开应用自定义页面并携带数据给应用。
 
-你可以在环信即时通讯云控制台的 `添加推送证书` 对话框中将 `action` 参数设置为 `1`，`Badge Class` 设置为点击推送通知栏默认打开的应用自定义页面。该配置只能实现跳转到无需前置参数的页面。若启动应用自定义页面需要前置参数，你还需要在消息扩展中添加前置参数。
+1. 设置 `action` 和 `type` 参数。
+
+- 设置 `action` 参数：在环信即时通讯云控制台的**添加推送证书**对话框中设置 `action` 参数。
+
+该参数需要与客户端 `AndroidManifest.xml` 文件中注册启动的 `Activity` 类中 `intent-filter` 标签中设置的 `action` 一致。该配置只能实现跳转到无需前置参数的页面。若启动应用自定义页面需要前置参数，你还需要在消息扩展中添加前置参数。
+
+- 设置 `type` 参数：通过消息扩展属性设置 `type` 为 `1`。
 
 若推送不同的消息时，接收方收到后点击推送通知栏打开不同应用自定义页面，你可以添加相应的消息扩展属性实现。
 
-示例代码如下：
+以下为环信服务端提供的通知栏消息点击动作的扩展字段：
+
+```
+{
+    "payload":{
+        "ext":{
+            "em_android_push_ext":{
+                "honor_click_action":"com.hyphenate.chatdemo.section.me.action"
+            }
+        }
+    }
+}
+```
+
+客户端的示例代码如下：
 
 ```java
 // 下面以 TXT 消息为例，图片、文件等类型的消息设置方法相同。
@@ -476,7 +499,7 @@ EMTextMessageBody txtBody = new EMTextMessageBody("test");
 // 设置接收方：单聊为对端用户的用户 ID；群聊为群组 ID；聊天室聊天为聊天室 ID。
 message.setTo("toChatUsername");
 JSONObject jsonObject = new JSONObject();
-jsonObject.put("honor_click_action","com.hyphenate.chatdemo.section.me.action");// 设置点击推送通知栏打开的应用自定义页面。
+jsonObject.put("honor_click_action","com.hyphenate.chatdemo.section.me.action");// 设置点击推送通知栏打开的应用自定义页面的自定义标记。
 message.setAttribute("em_android_push_ext",jsonObject);// 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
@@ -500,7 +523,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 ```
 private void getIntentData(Intent intent) {
   if (null != intent) {
-      // 获取data里的值
+      // 获取 data 里的值
       Bundle bundle = intent.getExtras();
       if (bundle != null) {
           for (String key : bundle.keySet()) {
