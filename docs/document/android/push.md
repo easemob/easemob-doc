@@ -413,6 +413,7 @@ EMPushHelper.getInstance().setPushListener(new PushListener() {
 
 对于注册荣耀推送服务，需自定义 Service，继承荣耀推送的 `HonorMessageService` 类，重写 `onNewToken` 方法。
 
+```
 public class HONORPushService extends HonorMessageService {
   //Token 发生变化时，会触发 `onNewToken` 回调返回新 Token。
   @Override
@@ -430,6 +431,7 @@ public class HONORPushService extends HonorMessageService {
       EMLog.d("HONORPush", "onMessageReceived" + honorPushDataMsg.getData());
   }
 }
+```
 
 **步骤 5：打开应用，初始化环信 IM SDK 成功且成功登录后，获取一次 Push Token，将 Token 上传至环信服务器，与 IM 的登录账号绑定。**
 
