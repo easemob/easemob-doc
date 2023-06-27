@@ -46,12 +46,12 @@
 示例代码如下：
 
 ```dart
-// targetGroup 为群组 ID
+// `chatThreadId` 为子区 ID
 EMMessage msg = EMMessage.createTxtSendMessage(
-  targetId: targetGroup,
+  chatThreadId: threadId,
   content: content,
 );
-// 设置为群组消息
+// `chatType` 设置为 `GroupChat`，即群聊
 msg.chatType = ChatType.GroupChat;
 // isChatThreadMessage: 是否是子区消息，这里设置为 `true`，即是子区消息
 msg.isChatThreadMessage = true;

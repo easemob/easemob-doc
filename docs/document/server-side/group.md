@@ -3384,7 +3384,7 @@ POST https://{host}/{org_name}/{app_name}/thread
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken>' -d '{
+curl -X POST https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type:application/json' -d '{
     "group_id": 179800091197441,
     "name": "1",
     "owner": "test4",
@@ -3401,7 +3401,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppTok
     "duration": 4,
     "data": {
         "thread_id": "1XXXX7"
-    }
+    },
     "organization": "XXXX",
     "timestamp": 1650869972109,
     "uri": "https://XXXX/XXXX/XXXX/thread"
@@ -3471,7 +3471,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <Your
     "duration": 4,
     "data": {
         "name": "test4"
-    }
+    },
     "organization": "XXXX",
     "timestamp": 1650869972109,
     "uri": "https://XXXX/XXXX/XXXX/thread"
