@@ -44,11 +44,13 @@
 示例代码如下：
 
 ```typescript
-// targetId: 消息接收对象 ID
-// content: 文本消息内容
-// chatType: 会话类型
+// chatThreadId: 子区 ID
+// content: 消息内容
+// chatType: 会话类型，设置为 `GroupChat`，即群聊 
 // isChatThread: 是否是子区消息，这里设置为 `true`，即是子区消息
-ChatMessage message = ChatMessage.createTextMessage(targetId, content, chatType, {isChatThread});
+const message = ChatMessage.createTextMessage(chatThreadId, content, chatType, {
+  isChatThread: true,
+});
 // 发送消息时可以设置回调，接收消息的发送状态和结果
 // 详见 [2.4.6.2](./2.4.6.2messages_RN)
 const callback = new ChatMessageCallback();

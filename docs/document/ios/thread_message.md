@@ -49,8 +49,8 @@
 ```objectivec
 // 创建一条文本消息，`content` 为消息文字内容，`chatThreadId` 为子区 ID。
 NSString *from = [[EMClient sharedClient] currentUsername];
-NSString *to = self.currentConversation.conversationId;
-EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:to from:from to:to body:aBody ext:aExt];
+NSString *chatThreadId = self.currentConversation.conversationId;
+EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:chatThreadId from:from to:chatThreadId body:aBody ext:aExt];
 // 是否需要消息已读回执。
 if([aExt objectForKey:MSG_EXT_READ_RECEIPT]) {
     message.isNeedGroupAck = YES;
