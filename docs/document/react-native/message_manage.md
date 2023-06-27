@@ -81,8 +81,14 @@ const convType = ChatConversationType.PeerChat;
 const pageSize = 10;
 // 搜索的起始消息 ID。
 const startMsgId = "";
+// 消息搜索方向
+const direction = ChatSearchDirection.UP;
 ChatClient.getInstance()
-  .chatManager.fetchHistoryMessages(convId, chatType, pageSize, startMsgId)
+  .chatManager.fetchHistoryMessages(convId, chatType, {
+    pageSize,
+    startMsgId,
+    direction,
+  })
   .then((messages) => {
     console.log("get message success: ", messages);
   })
