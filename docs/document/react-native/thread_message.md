@@ -44,11 +44,13 @@
 示例代码如下：
 
 ```typescript
-// targetId: 消息接收对象 ID
+// chatThreadID: 子区 ID。请参考创建thread。
 // content: 文本消息内容
-// chatType: 会话类型
+// convType: 会话类型。这里必须是 ChatConversationType.GroupChat
 // isChatThread: 是否是子区消息，这里设置为 `true`，即是子区消息
-ChatMessage message = ChatMessage.createTextMessage(targetId, content, chatType, {isChatThread});
+const message = ChatMessage.createTextMessage(chatThreadID, content, convType, {
+  isChatThread: true,
+});
 // 发送消息时可以设置回调，接收消息的发送状态和结果
 // 详见 [2.4.6.2](./2.4.6.2messages_RN)
 const callback = new ChatMessageCallback();
@@ -126,6 +128,31 @@ class ChatMessageEvent implements ChatMessageEventListener {
 
 从服务器获取子区消息，请参考 [从服务器获取消息](message_manage.html#分页获取指定会话的历史消息)。
 
+```typescript
+// chatThreadID: 子区 ID。请参考创建thread。
+const chatThreadID = "chatThreadID";
+// 会话类型。这里必须是 ChatConversationType.GroupChat。
+const convType = ChatConversationType.GroupChat;
+// 获取的最大消息数目。
+const pageSize = 10;
+// 搜索的起始消息 ID。
+const startMsgId = "";
+// 消息搜索方向
+const direction = ChatSearchDirection.UP;
+ChatClient.getInstance()
+  .chatManager.fetchHistoryMessages(chatThreadID, chatType, {
+    pageSize,
+    startMsgId,
+    direction,
+  })
+  .then((messages) => {
+    console.log("get message success: ", messages);
+  })
+  .catch((reason) => {
+    console.log("load conversions fail.", reason);
+  });
+```
+
 #### 管理本地子区消息
 
 群成员可以调用 `getThreadConversation` 方法获取子区会话，然后从本地数据库中读取指定会话的消息：
@@ -133,19 +160,25 @@ class ChatMessageEvent implements ChatMessageEventListener {
 ```typescript
 // 获取子区会话
 ChatClient.getInstance()
-  .chatManager.getThreadConversation(convId, createIfNeed)
+  .chatManager.getThreadConversation(chatThreadID, createIfNeed)
   .then((conv) => {
     // 从本地数据库获取子区会话消息
     conv
-      .getMessages(convId, convType, startMsgId, direction, loadCount)
+      .getMessages(
+        chatThreadID,
+        ChatConversationType.GroupChat,
+        startMsgId,
+        direction,
+        loadCount
+      )
       .then((messages) => {
-        console.log('success.', messages);
+        console.log("success.", messages);
       })
       .catch((reason) => {
-        console.log('fail.', reason);
+        console.log("fail.", reason);
       });
   })
   .catch((reason) => {
-    console.log('fail.', reason);
+    console.log("fail.", reason);
   });
 ```
