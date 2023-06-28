@@ -33,37 +33,39 @@
 在创建群组前，你需要设置群组的类型（`ChatGroupStyle`）和邀请进群是否需要对方同意（`ChatGroupOptions#inviteNeedConfirm`）。其中：
 
 - 群组类型（`ChatGroupStyle`）可以设置为如下值：
-    - `PrivateOnlyOwnerInvite` —— 私有群，只有群主和管理员可以邀请人进群；
-    - `PrivateMemberCanInvite` —— 私有群，所有群成员均可以邀请人进群；
-    - `PublicJoinNeedApproval` —— 公开群，用户加入群组需要群组或管理员同意；
-    - `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理员同意。
+  - `PrivateOnlyOwnerInvite` —— 私有群，只有群主和管理员可以邀请人进群；
+  - `PrivateMemberCanInvite` —— 私有群，所有群成员均可以邀请人进群；
+  - `PublicJoinNeedApproval` —— 公开群，用户加入群组需要群组或管理员同意；
+  - `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理员同意。
 - 邀请用户进群（`ChatGroupOptions#inviteNeedConfirm`）
 
-    公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群样式（`ChatGroupStyle`）的设置：
-    - `ChatGroupStyle` 为 `PrivateOnlyOwnerInvite`：只有群主和管理员可以邀请人入群； 
-    - `ChatGroupStyle` 为 `PrivateMemberCanInvite`：普通群成员也能邀请人进群。
-    
-    邀请入群是否需受邀用户确认取决于群组选项 `ChatGroupOptions#inviteNeedConfirm` 和受邀用户的参数 `autoAcceptGroupInvitation` 的设置，前者参数的优先级高于后者，即 `ChatGroupOptions#inviteNeedConfirm` 若设置为 `false`，不论 `autoAcceptGroupInvitation` 设置为何值，受邀用户无需确认直接进群。
-    1. 受邀用户无需确认，直接进群。
-    
-    以下两种设置的情况下，用户直接进群：
-    
-    - 若 `ChatGroupOptions#inviteNeedConfirm` 设置为 `false`，不论 `autoAcceptGroupInvitation` 设置为 `false` 或 `true`，受邀用户均无需确认，直接进群。
-    - 若 `ChatGroupOptions#inviteNeedConfirm` 和 `autoAcceptGroupInvitation` 均设置为 `true`，用户自动接受群组邀请，直接进群。
-    
-    受邀用户直接进群，会收到如下回调：
-    
-    - 新成员会收到 `ChatGroupEventListener#onAutoAcceptInvitation` 回调；
-    - 邀请人会收到 `ChatGroupEventListener#onInvitationAccepted` 和 `ChatGroupEventListener#onMemberJoined` 回调;
-    - 其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
-    
-    2. 受邀用户需要确认才能进群。
-    
-    只有 `ChatGroupOptions#inviteNeedConfirm` 设置为 `true` 和 `autoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `ChatGroupEventListener#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
-    
-    - 用户同意入群邀请后，邀请人收到 `ChatGroupEventListener#onInvitationAccepted` 回调和 `ChatGroupEventListener#onMemberJoined` 回调，其他群成员收到 `ChatGroupEventListener#onMemberJoined` 回调；
-    - 用户拒绝入群邀请后，邀请人收到 `ChatGroupEventListener#onInvitationDeclined` 回调。
-    
+  公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群样式（`ChatGroupStyle`）的设置：
+
+  - `ChatGroupStyle` 为 `PrivateOnlyOwnerInvite`：只有群主和管理员可以邀请人入群；
+  - `ChatGroupStyle` 为 `PrivateMemberCanInvite`：普通群成员也能邀请人进群。
+
+  邀请入群是否需受邀用户确认取决于群组选项 `ChatGroupOptions#inviteNeedConfirm` 和受邀用户的参数 `autoAcceptGroupInvitation` 的设置，前者参数的优先级高于后者，即 `ChatGroupOptions#inviteNeedConfirm` 若设置为 `false`，不论 `autoAcceptGroupInvitation` 设置为何值，受邀用户无需确认直接进群。
+
+  1. 受邀用户无需确认，直接进群。
+
+  以下两种设置的情况下，用户直接进群：
+
+  - 若 `ChatGroupOptions#inviteNeedConfirm` 设置为 `false`，不论 `autoAcceptGroupInvitation` 设置为 `false` 或 `true`，受邀用户均无需确认，直接进群。
+  - 若 `ChatGroupOptions#inviteNeedConfirm` 和 `autoAcceptGroupInvitation` 均设置为 `true`，用户自动接受群组邀请，直接进群。
+
+  受邀用户直接进群，会收到如下回调：
+
+  - 新成员会收到 `ChatGroupEventListener#onAutoAcceptInvitation` 回调；
+  - 邀请人会收到 `ChatGroupEventListener#onInvitationAccepted` 和 `ChatGroupEventListener#onMemberJoined` 回调;
+  - 其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
+
+  2. 受邀用户需要确认才能进群。
+
+  只有 `ChatGroupOptions#inviteNeedConfirm` 设置为 `true` 和 `autoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `ChatGroupEventListener#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
+
+  - 用户同意入群邀请后，邀请人收到 `ChatGroupEventListener#onInvitationAccepted` 回调和 `ChatGroupEventListener#onMemberJoined` 回调，其他群成员收到 `ChatGroupEventListener#onMemberJoined` 回调；
+  - 用户拒绝入群邀请后，邀请人收到 `ChatGroupEventListener#onInvitationDeclined` 回调。
+
 你可以调用 `createGroup` 方法创建群组，并通过 `ChatGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
 
 示例代码如下：
@@ -456,18 +458,30 @@ const groupListener: ChatGroupEventListener = new (class
   }
   // 群组详情变更，所有群成员收到该事件回调
   onDetailChanged(group: ChatGroup): void {
-        console.log(`${QuickTestScreenBase.TAG}: onDetailChanged:`, group);
-        this.that.setState({
-          recvResult: `onDetailChanged: ` + group,
-        });
-      }
-  // 群组禁言状态变更，所有群成员收到该事件回调   
+    console.log(`${QuickTestScreenBase.TAG}: onDetailChanged:`, group);
+    this.that.setState({
+      recvResult: `onDetailChanged: ` + group,
+    });
+  }
+  // 群组禁言状态变更，所有群成员收到该事件回调
   onStateChanged(group: ChatGroup): void {
-        console.log(`${QuickTestScreenBase.TAG}: onStateChanged:`, group);
-        this.that.setState({
-          recvResult: `onStateChanged: ` + group,
-        });
-      }  
+    console.log(`${QuickTestScreenBase.TAG}: onStateChanged:`, group);
+    this.that.setState({
+      recvResult: `onStateChanged: ` + group,
+    });
+  }
+  // 群组成员属性发生变更，其它成员收到该通知。
+  onMemberAttributesChanged(params: {
+    groupId: string;
+    member: string;
+    attributes: any;
+    operator: string;
+  }): void {
+    console.log(`${QuickTestScreenBase.TAG}: onStateChanged:`, params);
+    this.that.setState({
+      recvResult: `onMemberAttributesChanged: ` + params,
+    });
+  }
 })(this);
 
 // 清空监听器对象
