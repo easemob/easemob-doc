@@ -1921,7 +1921,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 将单个用户加入指定聊天室的黑名单。聊天室所有者无法被加入聊天室的黑名单。
 
-用户进入聊天室黑名单后，会收到消息：“You are kicked out of the chatroom xxx”。之后，该用户无法查看和收发该聊天室的信息。
+用户进入聊天室黑名单后，无法查看和收发该聊天室的信息。
 
 #### HTTP 请求
 
@@ -1993,7 +1993,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 将多个用户加入指定聊天室的黑名单。你一次最多可以添加 60 个用户至聊天室黑名单。聊天室所有者无法被加入聊天室的黑名单。
 
-用户进入聊天室黑名单后，会收到消息：“You are kicked out of the chatroom xxx”。之后，这些用户无法查看和收发该聊天室的信息。
+用户进入聊天室黑名单后，无法查看和收发该聊天室的信息。
 
 #### HTTP 请求
 
