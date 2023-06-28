@@ -80,8 +80,14 @@ const convType = ChatConversationType.PeerChat;
 const pageSize = 10;
 // 搜索的起始消息 ID。
 const startMsgId = "";
+// 消息搜索方向
+const direction = ChatSearchDirection.UP;
 ChatClient.getInstance()
-  .chatManager.fetchHistoryMessages(convId, chatType, pageSize, startMsgId)
+  .chatManager.fetchHistoryMessages(convId, chatType, {
+    pageSize,
+    startMsgId,
+    direction,
+  })
   .then((messages) => {
     console.log("get message success: ", messages);
   })
@@ -241,6 +247,7 @@ ChatClient.getInstance()
     console.log("get message fail.", reason);
   });
 ```
+
 #### 获取指定会话中一定时间段内的消息
 
 你可以调用 `getMessageWithTimestamp` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
@@ -321,7 +328,7 @@ ChatClient.getInstance()
 
 #### 获取指定会话中一定数量的消息
 
-你可以调用 `getMessages` 获取指定会话中一定数量的消息。 
+你可以调用 `getMessages` 获取指定会话中一定数量的消息。
 
 ```typescript
 // convId: 会话 ID。
@@ -338,6 +345,7 @@ ChatClient.getInstance()
     console.log("get message fail.", reason);
   });
 ```
+
 #### 获取指定会话的最新消息
 
 你可以调用 `getLatestMessage` 方法获取指定会话中的最新一条消息。
@@ -357,7 +365,7 @@ ChatClient.getInstance()
 
 #### 获取指定会话最新接收到的消息
 
-你可以调用 `getLastReceivedMessage` 方法获取指定会话中最新收到的一条消息。 
+你可以调用 `getLastReceivedMessage` 方法获取指定会话中最新收到的一条消息。
 
 ```typescript
 // convId: 会话 ID
@@ -520,6 +528,23 @@ ChatClient.getInstance()
 // convType：会话类型
 ChatClient.getInstance()
   .chatManager.deleteAllMessages(convId, convType)
+  .then(() => {
+    console.log("delete message success");
+  })
+  .catch((reason) => {
+    console.log("delete message fail.", reason);
+  });
+```
+
+#### 删除指定时间段的本地消息
+
+你可以调用 `deleteMessagesWithTimestamp` 方法删除指定时间段的消息。
+
+```typescript
+// startTs: 开始点的时间戳
+// endTs: 结束点的时间戳
+ChatClient.getInstance()
+  .chatManager.deleteMessagesWithTimestamp({ startTs, endTs })
   .then(() => {
     console.log("delete message success");
   })

@@ -466,8 +466,20 @@ const groupListener: ChatGroupEventListener = new (class
         console.log(`${QuickTestScreenBase.TAG}: onStateChanged:`, group);
         this.that.setState({
           recvResult: `onStateChanged: ` + group,
-        });
-      }  
+        });        
+      }
+  // 群组成员属性发生变更，其它成员收到该通知。
+  onMemberAttributesChanged(params: {
+    groupId: string;
+    member: string;
+    attributes: any;
+    operator: string;
+  }): void {
+    console.log(`${QuickTestScreenBase.TAG}: onStateChanged:`, params);
+    this.that.setState({
+      recvResult: `onMemberAttributesChanged: ` + params,
+    });
+  }      
 })(this);
 
 // 清空监听器对象

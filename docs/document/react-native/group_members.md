@@ -9,6 +9,7 @@
 环信即时通讯 IM React Native SDK 提供 `ChatGroupManager` 类和 `ChatGroup` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 群组加人、踢人
+- 管理群组成员属性
 - 管理群主及群管理员
 - 管理群组黑名单
 - 管理群组禁言列表
@@ -35,10 +36,10 @@
 
 公开群和私有群在两种入群方式方面存在差别：
 
-| 入群方式<div style="width: 240px;"></div>       | 公开群 | 私有群   |
-| :--------- | :----- | :------- |
-| 是否支持用户申请入群 | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群样式 `EMGroupStyle` 的设置。 | 不支持 <br/>  |
-| 是否支持群成员邀请用户入群 | 支持 <br/>只能由群主和管理员邀请。 | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群样式 `EMGroupStyle` 的设置。 |
+| 入群方式<div style="width: 240px;"></div> | 公开群                                                                                           | 私有群                                                                                           |
+| :---------------------------------------- | :----------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- |
+| 是否支持用户申请入群                      | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群样式 `EMGroupStyle` 的设置。 | 不支持 <br/>                                                                                     |
+| 是否支持群成员邀请用户入群                | 支持 <br/>只能由群主和管理员邀请。                                                               | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群样式 `EMGroupStyle` 的设置。 |
 
 #### 用户申请入群
 
@@ -46,8 +47,8 @@
 
 任何用户均可申请入群，是否需要群主和群管理员审批，取决于群样式（`EMGroupStyle`）的设置：
 
-- `EMGroupStyle`  为  `EMGroupStylePublicJoinNeedApproval` 时，群主和群管理员审批后，用户才能加入群组；
-- `EMGroupStyle`  为  `EMGroupStylePublicOpenJoin` 时，用户可直接加入群组，无需群主和群管理员审批。
+- `EMGroupStyle` 为 `EMGroupStylePublicJoinNeedApproval` 时，群主和群管理员审批后，用户才能加入群组；
+- `EMGroupStyle` 为 `EMGroupStylePublicOpenJoin` 时，用户可直接加入群组，无需群主和群管理员审批。
 
 若申请加入公开群，申请人需执行以下步骤：
 
@@ -70,77 +71,78 @@ ChatClient.getInstance()
 ```
 
 2. 调用 `joinPublicGroup` 或 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
-    1. 调用 `joinPublicGroup` 方法加入无需群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicOpenJoin`。
-    申请人不会收到任何回调，其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
 
-    示例代码如下：
+   1. 调用 `joinPublicGroup` 方法加入无需群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicOpenJoin`。
+      申请人不会收到任何回调，其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
 
-    ```typescript
-    // groupId: 群组 ID
-    ChatClient.getInstance()
-    .groupManager.joinPublicGroup(groupId)
-    .then(() => {
-        console.log("join group operation success.");
-    })
-    .catch((reason) => {
-        console.log("join group operation fail.", reason);
-    });
-    ```
+   示例代码如下：
 
-    2. 调用 `requestToJoinPublicGroup` 方法加入需要群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicJoinNeedApproval`。示例代码如下：
+   ```typescript
+   // groupId: 群组 ID
+   ChatClient.getInstance()
+     .groupManager.joinPublicGroup(groupId)
+     .then(() => {
+       console.log("join group operation success.");
+     })
+     .catch((reason) => {
+       console.log("join group operation fail.", reason);
+     });
+   ```
 
-    ```typescript
-    // 申请加入指定群组。
-    const groupId = "100";
-    const reason = "study typescript";
-    ChatClient.getInstance()
-    .groupManager.requestToJoinPublicGroup(groupId, reason)
-    .then(() => {
-        console.log("request send success.");
-    })
-    .catch((reason) => {
-        console.log("request send fail.", reason);
-    });
-    ```
+   2. 调用 `requestToJoinPublicGroup` 方法加入需要群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicJoinNeedApproval`。示例代码如下：
 
-    群主或群管理员收到 `ChatGroupEventListener#onRequestToJoinReceived` 回调：
+   ```typescript
+   // 申请加入指定群组。
+   const groupId = "100";
+   const reason = "study typescript";
+   ChatClient.getInstance()
+     .groupManager.requestToJoinPublicGroup(groupId, reason)
+     .then(() => {
+       console.log("request send success.");
+     })
+     .catch((reason) => {
+       console.log("request send fail.", reason);
+     });
+   ```
 
-    - 若同意加入群组，需要调用 `acceptJoinApplication` 方法。
+   群主或群管理员收到 `ChatGroupEventListener#onRequestToJoinReceived` 回调：
 
-    申请人会收到 `ChatGroupEventListener#onRequestToJoinAccepted` 回调，其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
+   - 若同意加入群组，需要调用 `acceptJoinApplication` 方法。
 
-    示例代码如下：
+   申请人会收到 `ChatGroupEventListener#onRequestToJoinAccepted` 回调，其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
 
-    ```typescript
-    // groupId: 群组 ID
-    // username：用户 ID
-    ChatClient.getInstance()
-    .groupManager.acceptJoinApplication(groupId, username)
-    .then(() => {
-        console.log("accept join request operation success.");
-    })
-    .catch((reason) => {
-        console.log("accept join request operation fail.", reason);
-    });
-    ```
+   示例代码如下：
 
-    - 若群主或群管理员拒绝申请人入群，需要调用 `declineJoinApplication` 方法。申请人会收到 `ChatGroupEventListener#onRequestToJoinDeclined` 回调。
+   ```typescript
+   // groupId: 群组 ID
+   // username：用户 ID
+   ChatClient.getInstance()
+     .groupManager.acceptJoinApplication(groupId, username)
+     .then(() => {
+       console.log("accept join request operation success.");
+     })
+     .catch((reason) => {
+       console.log("accept join request operation fail.", reason);
+     });
+   ```
 
-    示例代码如下：
+   - 若群主或群管理员拒绝申请人入群，需要调用 `declineJoinApplication` 方法。申请人会收到 `ChatGroupEventListener#onRequestToJoinDeclined` 回调。
 
-    ```typescript
-    // groupId: 群组 ID
-    // username：用户 ID
-    // reason：拒绝的理由
-    ChatClient.getInstance()
-    .groupManager.declineJoinApplication(groupId, username, reason)
-    .then(() => {
-        console.log("decline join request operation success.");
-    })
-    .catch((reason) => {
-        console.log("decline join request operation fail.", reason);
-    });
-    ```
+   示例代码如下：
+
+   ```typescript
+   // groupId: 群组 ID
+   // username：用户 ID
+   // reason：拒绝的理由
+   ChatClient.getInstance()
+     .groupManager.declineJoinApplication(groupId, username, reason)
+     .then(() => {
+       console.log("decline join request operation success.");
+     })
+     .catch((reason) => {
+       console.log("decline join request operation fail.", reason);
+     });
+   ```
 
 #### 邀请用户入群
 
@@ -150,75 +152,75 @@ ChatClient.getInstance()
 
 1. 群成员邀请用户入群。
 
-    - 群主或群管理员加人，需要调用 `addMembers` 方法：
+   - 群主或群管理员加人，需要调用 `addMembers` 方法：
 
-    ```typescript
-    // 群主或者管理员添加群成员
-    const groupId = "100";
-    // 群成员列表
-    const members = ["Tom", "Json"];
-    // 欢迎消息
-    const welcome = "Welcome to you";
-    ChatClient.getInstance()
-    .groupManager.addMembers(groupId, members, welcome)
-    .then(() => {
-        console.log("add members success.");
-    })
-    .catch((reason) => {
-        console.log("add members fail.", reason);
-    });
-    ```
+   ```typescript
+   // 群主或者管理员添加群成员
+   const groupId = "100";
+   // 群成员列表
+   const members = ["Tom", "Json"];
+   // 欢迎消息
+   const welcome = "Welcome to you";
+   ChatClient.getInstance()
+     .groupManager.addMembers(groupId, members, welcome)
+     .then(() => {
+       console.log("add members success.");
+     })
+     .catch((reason) => {
+       console.log("add members fail.", reason);
+     });
+   ```
 
-    - 普通成员邀请人入群，需要调用 `inviteUser` 方法：
+   - 普通成员邀请人入群，需要调用 `inviteUser` 方法：
 
-    `EMGroupStyle` 设置为 `PrivateMemberCanInvite` 时，所有群成员均可以邀请人进群。
+   `EMGroupStyle` 设置为 `PrivateMemberCanInvite` 时，所有群成员均可以邀请人进群。
 
-    ```typescript
-    // groupId: 群组 ID
-    // members：受邀用户列表
-    // reason：邀请的原因
-    ChatClient.getInstance()
-    .groupManager.inviteUser(groupId, members, reason)
-    .then(() => {
-        console.log("invite members operation success.");
-    })
-    .catch((reason) => {
-        console.log("invite members operation fail.", reason);
-    });
-    ```
+   ```typescript
+   // groupId: 群组 ID
+   // members：受邀用户列表
+   // reason：邀请的原因
+   ChatClient.getInstance()
+     .groupManager.inviteUser(groupId, members, reason)
+     .then(() => {
+       console.log("invite members operation success.");
+     })
+     .catch((reason) => {
+       console.log("invite members operation fail.", reason);
+     });
+   ```
 
 2. 受邀用户自动进群或确认是否加入群组：
 
-    - 受邀用户同意加入群组，需要调用 `acceptInvitation` 方法。
+   - 受邀用户同意加入群组，需要调用 `acceptInvitation` 方法。
 
-    ```typescript
-    // groupId: 群组 ID
-    // inviter：邀请人的 ID
-    ChatClient.getInstance()
-    .groupManager.acceptInvitation(groupId, inviter)
-    .then(() => {
-        console.log("accept invitation operation success.");
-    })
-    .catch((reason) => {
-        console.log("accept invitation operation fail.", reason);
-    });
-    ```
+   ```typescript
+   // groupId: 群组 ID
+   // inviter：邀请人的 ID
+   ChatClient.getInstance()
+     .groupManager.acceptInvitation(groupId, inviter)
+     .then(() => {
+       console.log("accept invitation operation success.");
+     })
+     .catch((reason) => {
+       console.log("accept invitation operation fail.", reason);
+     });
+   ```
 
-    - 受邀人拒绝入群组，需要调用 `declineInvitation` 方法。
+   - 受邀人拒绝入群组，需要调用 `declineInvitation` 方法。
 
-    ```typescript
-    // groupId: 群组 ID
-    // inviter：邀请人的 ID
-    // reason：拒绝的理由
-    ChatClient.getInstance()
-    .groupManager.declineInvitation(groupId, inviter, reason)
-    .then(() => {
-        console.log("decline invitation operation success.");
-    })
-    .catch((reason) => {
-        console.log("decline invitation operation fail.", reason);
-    });
-    ```
+   ```typescript
+   // groupId: 群组 ID
+   // inviter：邀请人的 ID
+   // reason：拒绝的理由
+   ChatClient.getInstance()
+     .groupManager.declineInvitation(groupId, inviter, reason)
+     .then(() => {
+       console.log("decline invitation operation success.");
+     })
+     .catch((reason) => {
+       console.log("decline invitation operation fail.", reason);
+     });
+   ```
 
 ### 群组踢人
 
@@ -234,6 +236,70 @@ ChatClient.getInstance()
   })
   .catch((reason) => {
     console.log("remove members fail.", reason);
+  });
+```
+
+### 管理群组成员属性
+
+群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
+
+- 单个群成员的自定义属性总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节，否则会报错。
+- 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
+
+#### 设置群组成员自定义属性
+
+你可以调用 `setMemberAttribute` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。设置后，群内其他成员会收到 `ChatGroupEventListener.onMemberAttributesChanged` 事件。
+
+```typescript
+// groupId：群组 ID。
+// member：群组成员的用户 ID。
+// attributes：需要设置的群成员属性。
+ChatClient.getInstance()
+  .groupManager.setMemberAttribute(groupId, member, attributes)
+  .then(() => {
+    console.log("set group members attributes success.");
+  })
+  .catch((reason) => {
+    console.log("set group members attributes fail.", reason);
+  });
+```
+
+#### 获取单个群成员的所有自定义属性
+
+你可以调用 `fetchMemberAttributes` 方法获取单个群成员的所有自定义属性。
+
+```typescript
+// groupId：群组 ID。
+// member：群组成员的用户 ID。
+ChatClient.getInstance()
+  .groupManager.fetchMemberAttributes(groupId, member)
+  .then((attributes: Record<string, string> | undefined) => {
+    console.log("get group members attributes success.", attributes);
+  })
+  .catch((reason) => {
+    console.log("get group members attributes fail.", reason);
+  });
+```
+
+#### 根据属性 key 获取多个群成员的自定义属性
+
+你可以调用 `fetchMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
+
+:::notice
+每次最多可获取 10 个群成员的自定义属性。
+:::
+
+```typescript
+// groupId：群组 ID
+// members：群成员的用户 ID，数组类型。
+// attributeKeys: 要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
+ChatClient.getInstance()
+  .groupManager.fetchMembersAttributes(groupId, members, attributeKeys)
+  .then((result: Map<string, Record<string, string>>) => {
+    console.log("get group members attributes success.", result);
+  })
+  .catch((reason) => {
+    console.log("get group members attributes fail.", reason);
   });
 ```
 
@@ -531,6 +597,6 @@ ChatClient.getInstance()
   });
 ```
 
-### 更多
+### 监听群组事件
 
-[监听群组事件](group_manage.html#监听群组事件)
+详见 [监听群组事件](group_manage.html#监听群组事件)。
