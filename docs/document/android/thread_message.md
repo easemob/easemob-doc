@@ -127,11 +127,33 @@ EMMessageListener msgListener = new EMMessageListener() {
 
 #### 从服务器获取子区消息（消息漫游）
 
-从服务器获取子区消息，请参考 [从服务器获取消息 (消息漫游)](message_retrieve.html#分页获取指定会话的历史消息)。
+调用 `asyncFetchHistoryMessage` 从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
+
+```java
+String chatThreadId = "{your chatThreadId}";
+EMConversation.EMConversationType type = EMConversation.EMConversationType.GroupChat;
+int pageSize = 10;
+String startMsgId = "";// 开始查询的消息 ID。若传 ""，SDK 忽略该参数，按搜索方向查询消息。
+
+EMConversation.EMSearchDirection direction = EMConversation.EMSearchDirection.DOWN;
+
+EMClient.getInstance().chatManager().asyncFetchHistoryMessage(chatThreadId, type,
+        pageSize, startMsgId, direction, new EMValueCallBack<EMCursorResult<EMMessage>>() {
+    @Override
+    public void onSuccess(EMCursorResult<EMMessage> value) {
+
+    }
+
+    @Override
+    public void onError(int error, String errorMsg) {
+
+    }
+});
+```
 
 #### 从内存和本地数据库中获取子区消息
 
-调用 `EMChatManager#getAllConversations` 会返回单聊和群聊的会话，不会返回子区会话。你可以调用以下方法从本地数据库中读取指定会话的消息：
+调用 `EMChatManager#getAllConversations` 会返回单聊和群聊的会话，不会返回子区会话。你可以调用以下方法从本地数据库中读取指定子区的消息：
 
 ```java
 // 需要指定会话类型为 `EMConversationType.GroupChat` 且 `isChatThread` 设置为 `true`

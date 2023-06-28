@@ -124,7 +124,22 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 #### 从服务器获取子区消息（消息漫游）
 
-从服务器获取子区消息，请参考 [从服务器获取消息 (消息漫游)](message_retrieve.html)。
+调用 `FetchHistoryMessagesFromServer` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
+
+```csharp
+SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(threadId, ConversationType.Group, startMsgId, pageSize, MessageSearchDirection.DOWN, new ValueCallBack<CursorResult<Message>>(
+          onSuccess: (result) =>
+          {
+              foreach (var msg in result.Data)
+              {
+                  //process every msg
+              }
+          },
+          onError: (code, desc) =>
+          {
+          }
+      ));
+```
 
 #### 管理本地子区消息
 

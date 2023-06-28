@@ -103,7 +103,13 @@ message.isChatThread = self.isChatThread;
 
 ### 从服务器获取子区消息 (消息漫游)
 
-从服务器获取子区消息，请参考 [从服务器获取消息（消息漫游）](message_retrieve.html#分页获取指定会话的历史消息)。
+调用 `asyncFetchHistoryMessagesFromServer` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
+
+```objectivec
+[EMClient.sharedClient.chatManager asyncFetchHistoryMessagesFromServer:@"threadId" conversationType:EMConversationTypeGroupChat startMessageId:@"" fetchDirection:EMMessageFetchHistoryDirectionUp pageSize:20 completion:^(EMCursorResult<EMChatMessage *> * _Nullable aResult, EMError * _Nullable aError) {
+            
+    }];
+```
 
 #### 从内存和本地数据库中获取子区消息
 
