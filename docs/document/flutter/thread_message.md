@@ -122,6 +122,10 @@ EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 
 ### 获取子区消息
 
+从服务器还是本地数据库获取子区消息取决于你的生产环境。
+
+你可以通过 `EMConversation#isChatThread()` 判断当前会话是否为子区会话。
+
 #### 从服务器获取子区消息 (消息漫游)
 
 调用 `fetchHistoryMessages` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。

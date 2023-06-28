@@ -99,7 +99,11 @@ message.isChatThread = self.isChatThread;
 
 从服务器还是本地数据库获取子区消息取决于你的生产环境。
 
-进入单个子区会话后默认展示最早消息，用户可以从服务器获取子区历史消息；若需要合并本地和服务器拉取到的消息（例如有用户撤回子区消息的提示是 SDK 在本地生成的一条消息，可以选择从本地获取子区消息。
+进入单个子区会话后默认展示最早消息，用户可以从服务器获取子区历史消息；若需要合并本地和服务器拉取到的消息（例如有用户撤回子区消息的提示是 SDK 在本地生成的一条消息），可以选择从本地获取子区消息。
+
+:::tip
+可通过 `EMConversation#isChatThread` 属性判断当前会话是否为子区会话。
+:::
 
 ### 从服务器获取子区消息 (消息漫游)
 
@@ -123,6 +127,3 @@ EMConversation* conversation = [EMClient.sharedClient.chatManager getConversatio
             
 }];
 ```
-:::tip
-可通过 `EMConversation#isChatThread` 属性判断当前会话是否为子区会话。
-:::

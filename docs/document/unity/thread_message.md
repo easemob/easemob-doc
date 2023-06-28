@@ -123,6 +123,10 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 进入单个子区会话后默认展示最早消息，用户可以从服务器获取子区历史消息；当你需要合并处理本地和服务器拉取到的消息（例如有用户撤回子区消息的提示是 SDK 在本地生成的一条消息）的时候，可以选择从本地获取子区消息。
 
+:::notice
+可以通过 `Conversation#IsThread()` 判断当前会话是否是子区会话。
+:::
+
 #### 从服务器获取子区消息（消息漫游）
 
 调用 `FetchHistoryMessagesFromServer` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
@@ -144,7 +148,7 @@ SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(threadId, Conversa
 
 #### 获取本地子区消息
 
-调用 `EMChatManager#getAllConversations()` 会返回单聊和群聊的会话，不会返回子区会话，你可以从本地数据库中读取指定会话的消息：
+调用 `EMChatManager#getAllConversations()` 会返回单聊和群聊的会话，不会返回子区会话，你可以通过调用以下方法从本地数据库中读取指定子区会话的消息：
 
 ```csharp
 // 需要指定会话类型为 `ConversationType.Group`，且 `isChatThread` 设置为 `true`
@@ -164,6 +168,4 @@ conversation.LoadMessages(startMsgId, count, direct, new ValueCallBack<List<Mess
 ));
 ```
 
-:::notice
-可以通过 `Conversation#IsThread()` 判断当前会话是否是子区会话。
-:::
+

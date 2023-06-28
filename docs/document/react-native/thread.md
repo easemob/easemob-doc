@@ -40,7 +40,7 @@
 示例代码如下：
 
 ```typescript
-// name: 即将创建的子区的名字
+// name: 要创建的子区的名称
 // msgId: 子区的父消息 ID
 // parentId: 子区的父节点，通常是群组 ID
 ChatClient.getInstance()
@@ -67,7 +67,6 @@ ChatClient.getInstance()
 
 ```typescript
 // chatThreadID: 子区 ID
-// 执行子区销毁，请谨慎使用。
 ChatClient.getInstance()
   .chatManager.destroyChatThread(chatThreadID)
   .then((result) => {
