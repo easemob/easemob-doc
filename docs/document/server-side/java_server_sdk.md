@@ -204,6 +204,20 @@ EMProperties properties = EMProperties.builder()
 
 ## 更新日志
 
+### V0.7.2 2023-06-29
+
+- 增加禁言全体群成员和解除全员禁言功能。
+- 增加群成员自定义属性相关功能。
+- 处理 Rest 服务异常时 Response 返回为空不抛异常的问题。
+
+以上更新内容请到 BlockApi & MetadataApi 中查看。
+
+### V0.7.1  2023-06-14
+
+- 增加 ttl 对获取环信用户 Token 生效的功能。
+
+以上更新内容请到 TokenApi 中查看。
+
 ### V0.7.0   2023-06-06
 
 - 增加批量获取群组详情功能。
