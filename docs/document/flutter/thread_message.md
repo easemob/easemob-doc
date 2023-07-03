@@ -126,7 +126,7 @@ EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 
 你可以通过 `EMConversation#isChatThread()` 判断当前会话是否为子区会话。
 
-#### 从服务器获取子区消息 (消息漫游)
+#### 从服务器获取单个子区的消息 (消息漫游)
 
 调用 `fetchHistoryMessages` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
 
@@ -150,9 +150,9 @@ try {
 } on EMError catch (e) {}
 ```
 
-#### 获取本地子区消息
+#### 从本地获取单个子区的消息
 
-调用以下方法获取本地的子区消息。
+调用 `EMChatManager#loadAllConversations` 方法只能获取单聊或群聊会话。你可以调用以下方法从本地获取单个子区的消息：
 
 ```dart
 try {
