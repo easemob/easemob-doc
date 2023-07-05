@@ -24,14 +24,14 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.6.6</version>
+    <version>0.7.3</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:0.6.6'
+implementation 'com.easemob.im:im-sdk-core:0.7.3'
 ```
 
 ### 使用
@@ -203,6 +203,12 @@ EMProperties properties = EMProperties.builder()
 ```
 
 ## 更新日志
+
+### V0.7.3 2023-07-05
+
+- 发送聊天室消息增加 `chatroom_msg_level` 选项。
+
+以上更新内容请到 MessageApi 中查看。
 
 ### V0.7.2 2023-06-29
 
