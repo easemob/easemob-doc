@@ -76,9 +76,9 @@
 
 | 应用端 | 下载地址 |
 | :------------------- | :----- |
-| Windows | [下载体验](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/poc/win/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.0.4-build0609.win.setup.exe) |
+| Windows | [下载体验](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/poc/win/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.x.exe) |
 | Linux | [下载体验](http://download-sdk.oss-cn-beijing.aliyuncs.com/mp/poc/linux/easemoboa_2.0.3-build0110_amd64.deb)<br/> 当前应用适配 Ubuntu 18-Ubuntu 20，如需其他版本请联系商务。|
-| macOS | [下载体验](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/poc/mac/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.0.4-build0609.mac.dmg) |
+| macOS | [下载体验](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/poc/mac/%E7%8E%AF%E4%BF%A1%E9%80%9A.2.x.dmg) |
 | Android | [下载体验](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/poc/android/app-release.apk) |
 | iOS | [下载体验](https://www.pgyer.com/mTuq)|
 
