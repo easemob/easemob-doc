@@ -13,7 +13,7 @@
 使用环信即时通讯 IM SDK 可以从服务器获取历史消息。
 
 - `asyncFetchConversationsFromServer` 分页获取服务器保存的会话列表；
-- `asyncFetchPinnedConversationsFromServe` 分页获取服务器保存的置顶会话列表；
+- `asyncFetchPinnedConversationsFromServer` 分页获取服务器保存的置顶会话列表；
 - `asyncPinConversation` 置顶会话。
 - `asyncFetchHistoryMessage` 从服务端分页获取指定会话的历史消息；
 - `removeMessagesFromServer` 单向删除服务端的历史消息；
@@ -67,7 +67,7 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cu
 
 ## 获取服务端的置顶会话列表
 
-你可以调用 `asyncFetchPinnedConversationsFromServe` 方法从服务端分页获取置顶会话列表。SDK 按照会话置顶时间的倒序返回。 
+你可以调用 `asyncFetchPinnedConversationsFromServer` 方法从服务端分页获取置顶会话列表。SDK 按照会话置顶时间的倒序返回。 
 
 你最多可以拉取 50 个置顶会话。
 
