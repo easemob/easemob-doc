@@ -22,7 +22,7 @@
 
 从 [IM SDK 及 Demo 下载](https://www.easemob.com/download/im) 下载 Android SDK 压缩包，然后解压。解压后在 examples 文件夹下，即为 EaseIM 的工程目录。
 ### 导入到 Android Studio
-打开 Android Studio，点击 File→Open，打开 EaseIm3.0 根目录即可。
+打开 Android Studio，点击 File > Open，打开 EaseIm3.0 根目录即可。
 :::notice
 环信（EaseIM）中使用了百度地图，在开发你自己的应用时，请在 AndroidManifest.xml 中把相应的 key 改成你自己申请的。
 :::

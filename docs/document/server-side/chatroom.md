@@ -384,23 +384,34 @@ curl --location --request GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
 
 ### 获取用户加入的聊天室
 
-根据用户 ID 获取该用户加入的全部聊天室。
+根据用户 ID 分页获取该用户加入的聊天室。
 
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms
+GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms?pagenum={N}&pagesize={N}
 ```
 
 ##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
+##### 查询参数
+
+| 参数       | 类型 | 是否必需 | 描述                                    |
+| :--------- | :--- | :------- | :-------------------------------------- |
+| `pagenum`  | Int  | 否       | 当前页码，默认值为 1。                  |
+| `pagesize` | Int  | 否       | 每页返回的聊天室数量，取值范围为 [1,1000]，默认值为 `1000`。 |
+
+:::notice
+若查询参数 `pagenum` 和 `pagesize` 均不传，服务器返回用户最新加入的 500 个聊天室。
+:::
+
 ##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。 |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -425,17 +436,43 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/joined_chatrooms'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/joined_chatrooms?pagenum=1&pagesize=10'
 ```
 
 ##### 响应示例
 
 ```json
 {
-  "data": {
-    "id": "662XXXX13",
-    "name": "testchatroom1"
-  }
+    "action": "get",
+    "application": "48472d89-5846-XXXX-XXXX-5fa4b79af9b1",
+    "applicationName": "XXXX",
+    "count": 2,
+    "data": [
+        {
+            "id": "216295074234369",
+            "name": "fd",
+            "disabled": "false"
+        },
+        {
+            "id": "216294461865985",
+            "name": "testChatRoom",
+            "disabled": "false"
+        }
+    ],
+    "duration": 0,
+    "entities": [],
+    "organization": "XXXX",
+    "params": {
+        "pagesize": [
+            "10"
+        ],
+        "pagenum": [
+            "1"
+        ]
+    },
+    "properties": {},
+    "timestamp": 1685673568976,
+    "uri": "http://XXXX/XXXX/XXXX/users/user2/joined_chatrooms"
 }
 ```
 
@@ -1884,7 +1921,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 将单个用户加入指定聊天室的黑名单。聊天室所有者无法被加入聊天室的黑名单。
 
-用户进入聊天室黑名单后，会收到消息：“You are kicked out of the chatroom xxx”。之后，该用户无法查看和收发该聊天室的信息。
+用户进入聊天室黑名单后，无法查看和收发该聊天室的信息。
 
 #### HTTP 请求
 
@@ -1956,7 +1993,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 将多个用户加入指定聊天室的黑名单。你一次最多可以添加 60 个用户至聊天室黑名单。聊天室所有者无法被加入聊天室的黑名单。
 
-用户进入聊天室黑名单后，会收到消息：“You are kicked out of the chatroom xxx”。之后，这些用户无法查看和收发该聊天室的信息。
+用户进入聊天室黑名单后，无法查看和收发该聊天室的信息。
 
 #### HTTP 请求
 
@@ -1980,7 +2017,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 | 参数        | 类型  | 描述                                                                |
 | :---------- | :---- | :------------------------------------------------------------------ |
-| `usernames` | Array | 添加的用户 ID，多个用户 ID 通过逗号（“，”）分隔，最多可添加 60 个。 |
+| `usernames` | Array | 待添加到聊天室黑名单的用户 ID，多个用户 ID 通过逗号（“，”）分隔，最多可添加 60 个。 |
 
 #### HTTP 响应
 
@@ -2449,7 +2486,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/
 | `data.result`     | Bool   | 是否成功将用户移出聊天室白名单：<br/> - `true`：是；<br/> - `false`：否。                  |
 | `data.chatroomid` | String | 聊天室 ID。                                                                                |
 | `data.action`     | String | 执行的操作。在该响应中，该字段的值为 `remove_user_whitelist`，表示将用户移出聊天室白名单。 |
-| `data.user`       | String | 添加的用户 ID，多个用户 ID 以逗号（“，”）分隔。                                            |
+| `data.user`       | String | 添加的用户 ID，多个用户 ID 以逗号（“，”）分隔，最多可添加 60 个。                                            |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2570,7 +2607,9 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute -H 'Authorization: Bea
 
 ### 禁言聊天室成员
 
-禁言单个用户。用户被禁言后，将无法在聊天室中发送消息。
+禁言单个或多个聊天室成员。你一次最多可禁言 60 个成员。
+
+用户被禁言后，将无法在聊天室中发送消息。
 
 #### HTTP 请求
 
@@ -2595,7 +2634,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 | 参数            | 类型   | 是否必需 | 描述                                                          |
 | :-------------- | :----- | :------- | :------------------------------------------------------------ |
 | `mute_duration` | Long   | 是       | 禁言时长，从当前时间开始计算。单位为毫秒。`-1` 表示永久禁言。 |
-| `usernames`     | String | 是       | 要被禁言的用户 ID。                                           |
+| `usernames`     | String | 是       | 要被禁言的用户 ID，一次最多可传 60 个。                                           |
 
 #### HTTP 响应
 
@@ -2725,7 +2764,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 解除聊天室禁言成员
 
-解除对一个或多个聊天室成员的禁言。解除禁言后，该成员可以正常在聊天室中发送消息。
+解除对一个或多个聊天室成员的禁言。你一次最多可对 60 个成员解除禁言。
+
+解除禁言后，该成员可以正常在聊天室中发送消息。
 
 #### HTTP 请求
 
@@ -2737,7 +2778,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member
 
 | 参数      | 类型   | 是否必需 | 描述                                                                                                                                              |
 | :-------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `member1` | String | 是       | 待被移出禁言列表的聊天室成员的用户 ID。<br/>如果需要解除多个成员的禁言，则成员用户 ID 之间用逗号（","）隔开。在 URL 中，需要将 "," 转义为 "%2C"。 |
+| `member1` | String | 是       | 待被移出禁言列表的聊天室成员的用户 ID。<br/>一次最多可传 60 个用户 ID，用户 ID 之间用逗号（","）隔开。在 URL 中，需要将 "," 转义为 "%2C"。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 

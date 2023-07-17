@@ -2,6 +2,29 @@
 
 <Toc />
 
+## 版本 V4.0.3 Dev 2023-6-19（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 `EMChatManager#asyncFetchConversationsFromServer` 方法实现[从服务器拉取会话](message_retrieve.html#从服务器分页获取会话列表)，原接口标记为已废弃。
+- [IM SDK] 新增置顶服务器会话的功能：
+    - 新增 `EMChatManager#asyncPinConversation` 方法，实现[置顶或取消置顶服务器会话](message_retrieve.html#置顶会话)：
+    - 新增 `EMChatManager#asyncFetchPinnedConversationsFromServer` 方法，实现[获取置顶的服务器会话](message_retrieve.html#获取服务端的置顶会话列表)。
+- [IM SDK] 新增 `EMChatManager#getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](message_manage.html#获取本地所有会话)；
+- [IM SDK] 新增在群组或聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)的功能；
+- [IM SDK] 新增[荣耀推送](push.html#荣耀推送集成)。
+
+### 优化
+
+- [IM SDK] 优化登录时若消息过多，从本地数据库加载会话太慢的问题；
+- [IM SDK] 优化绑定及解绑推送设备的逻辑。
+
+
+### 修复
+
+- [IM UIKit] 修复部分空指针问题。
+- [IM UIKit] 修复部分场景下不展示自定义头像的问题。
+
 ## 版本 V4.0.2 Dev 2023-4-26（开发版）
 
 ### 新增特性
@@ -84,7 +107,22 @@
 
 ### 优化
 
-[IM Demo] 修改 `manifest` 中 `activity` 属性配置，在用户进行音视频通话时在最近任务管理器中显示当前应用。
+- [IM Demo] 修改 `manifest` 中 `activity` 属性配置，在用户进行音视频通话时在最近任务管理器中显示当前应用。
+
+- [IM SDK] 以下接口或事件名称进行了重命名：
+
+| 原名称     | 新名称   | 描述 |
+| :-------------- | :----- | :------- | 
+| EMConversationListener#onCoversationUpdate  | EMConversationListener#onConversationUpdate   | 会话更新回调。| 
+| EMChatManager#aysncRecallMessage | EMChatManager#asyncRecallMessage | 撤回消息。 | 
+| EMContactManager#aysncAddContact | EMContactManager#asyncAddContact   | 添加好友。  | 
+| EMContactManager#aysncDeleteContact   | EMContactManager#asyncDeleteContact   | 删除好友。   | 
+| EMContactManager#aysncGetAllContactsFromServer  | EMContactManager#asyncGetAllContactsFromServer  | 从服务端获取好友列表。  | 
+| EMContactManager#aysncAddUserToBlackList | EMContactManager#asyncAddUserToBlackList | 将好友加入黑名单。  | 
+| EMContactManager#aysncRemoveUserFromBlackList | EMContactManager#asyncRemoveUserFromBlackList | 将好友移出用户列表。| 
+| EMContactManager#aysncGetBlackListFromServer  | EMContactManager#asyncGetBlackListFromServer | 从服务端获取黑名单列表。   | 
+| EMContactManager#aysncGetSelfIdsOnOtherPlatform  | EMContactManager#asyncGetSelfIdsOnOtherPlatform   | 获取当前用户账号的其他登录设备的 ID。  | 
+| EMGroupManager#aysncMuteGroupMembers | EMGroupManager#asyncMuteGroupMembers  | 将群组成员添加到禁言列表。   | 
 
 ### 修复
 

@@ -46,12 +46,12 @@
 示例代码如下：
 
 ```dart
-// targetGroup 为群组 ID
+// `chatThreadId` 为子区 ID
 EMMessage msg = EMMessage.createTxtSendMessage(
-  targetId: targetGroup,
+  chatThreadId: threadId,
   content: content,
 );
-// 设置为群组消息
+// `chatType` 设置为 `GroupChat`，即群聊
 msg.chatType = ChatType.GroupChat;
 // isChatThreadMessage: 是否是子区消息，这里设置为 `true`，即是子区消息
 msg.isChatThreadMessage = true;
@@ -120,6 +120,53 @@ EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
 EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
-### 从服务器获取子区消息 (消息漫游)
+### 获取子区消息
 
-从服务器获取子区消息，请参考 [从服务器获取消息 (消息漫游)](message_retrieve.html)。
+从服务器还是本地数据库获取子区消息取决于你的生产环境。
+
+你可以通过 `EMConversation#isChatThread()` 判断当前会话是否为子区会话。
+
+#### 从服务器获取单个子区的消息 (消息漫游)
+
+调用 `fetchHistoryMessages` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
+
+```dart
+try {
+  // 子区 ID。
+  String threadId = "threadId";
+  // 会话类型，设置为群聊，即 `GroupChat`。
+  EMConversationType convType = EMConversationType.GroupChat;
+  // 每页期望获取的消息数量。
+  int pageSize = 10;
+  // 搜索的起始消息 ID。
+  String startMsgId = "";
+  EMCursorResult<EMMessage> result =
+      await EMClient.getInstance.chatManager.fetchHistoryMessages(
+    conversationId: threadId,
+    type: convType,
+    startMsgId: startMsgId,
+    pageSize: pageSize,
+  );
+} on EMError catch (e) {}
+```
+
+#### 从本地获取单个子区的消息
+
+调用 `EMChatManager#loadAllConversations` 方法只能获取单聊或群聊会话。你可以调用以下方法从本地获取单个子区的消息：
+
+```dart
+try {
+  // 子区 ID。
+  String threadId = "threadId";
+  // 会话类型，即群聊 `GroupChat`。
+  EMConversationType convType = EMConversationType.GroupChat;
+  EMConversation? conversation = await EMClient.getInstance.chatManager
+      .getConversation(threadId, type: convType);
+  // 搜索的起始消息 ID。
+  String startMsgId = "startMsgId";
+  // 每页期望获取的消息数量。
+  int pageSize = 10;
+  List<EMMessage>? list = await conversation?.loadMessages(
+      startMsgId: startMsgId, loadCount: pageSize);
+} on EMError catch (e) {}
+```

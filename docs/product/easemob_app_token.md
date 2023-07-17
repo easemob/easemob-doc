@@ -42,7 +42,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | `grant_type`    | String | 是       | 授权方式。该参数设置为固定字符串 `client_credentials`，即客户端凭证模式。                                                                                                                                        |
 | `client_id`     | String | 是       | App 的 `client_id`，用于生成 app token 调用 REST API。详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的`应用详情`页面。                                                                     |
 | `client_secret` | String | 是       | App 的 `client_secret`，用于生成 app token 调用 REST API。详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的`应用详情`页面。                                                                 |
-| `ttl`           | Long   | 否       | token 有效期，单位为秒(s)。设置为 `0` 则 token 有效期为永久。若不传该参数，默认值为 60 天，也可通过[环信即时通讯云控制台](https://console.easemob.com/user/login/)的`用户认证`页面设置。该参数值以最新设置为准。 |
+| `ttl`           | Long   | 否       | token 有效期，单位为秒。<br/> - 若传入该参数，token 有效期以传入的值为准。<br/> - 若不传该参数，以 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的`用户认证`页面的 token 有效期的设置为准。<br/> - 若设置为 `0`，则 token 永久有效。 <br/>注意：VIP 5 集群该参数单位为毫秒。|
 
 ### HTTP 响应
 

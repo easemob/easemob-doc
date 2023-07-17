@@ -33,11 +33,11 @@
 
 群组可分为私有群和公有群。私有群不可被搜索到，公开群可以通过群组 ID 搜索到。
 
-用户可以创建群组，设置群组的名称、描述、群组成员、创建群组的原因等属性。用户还可以设置 `EMGroupStyle` 参数指定群组的大小和类型。创建群组后，群组创建者自动成为群主。
+用户可以创建群组，设置群组的名称、描述、群组成员、创建群组的原因等属性，还可以设置 `EMGroupStyle` 参数指定群组的大小和类型。创建群组后，群组创建者自动成为群主。
 
 创建群组前，需设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`EMGroupOptions#inviteNeedConfirm`)。
 
-- 目前支持四种群组类型（`EMGroupStyle`），具体设置如下：
+- 设置群组类型（`EMGroupStyle`）以及入群是否需要群主和群管理员同意：
 
    - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
    - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；

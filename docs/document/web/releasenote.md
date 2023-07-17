@@ -2,6 +2,27 @@
 
 <Toc />
 
+## 版本 V4.1.7 Dev 2023-06-08（开发版）
+
+### 新增特性
+
+1. 新增 `pinConversation` 方法实现[会话置顶和取消置顶](message_retrieve.html#置顶会话)。
+2. 新增 `getServerPinnedConversations` 方法[分页获取服务器端的置顶会话列表](message_retrieve.html#获取服务端的置顶会话列表)。
+3. 新增 `getServerConversations` 方法[分页获取排序后的服务端会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+4. 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
+5. 在从服务器获取历史消息的方法 `getHistoryMessages` 的返回数据中新增 `isLast` 字段表示返回的是否为最后一页数据。
+6. 在构建图片消息的方法 `create` 中新增 [`thumbnailWidth` 和 `thumbnailHeight`](message_send_receive.html#发送图片消息) 参数用于设置缩略图的宽度和高度。
+7. 新增以下 SDK 登录失败原因，在控制台上提示：
+ - [错误码 50，MAX_LIMIT](error.html)：新增应用的日活跃用户数（DAU）超限、在线用户数量超限和月活跃用户数（MAU）超限错误提示。
+ - [错误码 2， WEBIM_CONNCTION_AUTH_ERROR](error.html) ：新增 Token 无效提示。
+8. 以下[好友管理方法](user_relationship.html)增加执行成功和失败的回调（Promise）：
+ - addContact：添加好友。
+ - deleteContact：删除好友。
+ - acceptContactInvite：接受好友邀请。
+ - declineContactInvite：拒绝好友邀请。
+ - addUsersToBlocklist：将好友添加至黑名单。
+ - removeUserFromBlocklist：将好友移出黑名单。
+
 ## 版本 V4.1.6 Dev 2023-04-17（开发版）
 
 ### 新增特性

@@ -35,16 +35,18 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 本节展示如何在项目中管理好友的添加移除和黑名单的添加移除。
 
-### 管理好友请求
+### 管理好友列表
+
+#### 添加好友
 
 好友请求部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
 
-#### 请求添加好友
+1. 请求添加好友
 
-调用 `AddContact` 添加指定用户为联系人示例代码如下：：
+调用 `AddContact` 添加指定用户为好友，示例代码如下：
 
 ```csharp
-//username 为要添加的联系人的用户名，reason 为添加原因
+//username 为要添加的好友的用户名，reason 为添加原因
 SDKClient.Instance.ContactManager.AddContact(username, reason, callback: new CallBack(
   onSuccess: () =>
   {
@@ -57,7 +59,7 @@ SDKClient.Instance.ContactManager.AddContact(username, reason, callback: new Cal
 ));
 ```
 
-#### 监听与好友请求相关的回调
+2. 监听与好友请求相关的回调
 
 请监听与好友请求相关事件的回调，这样当用户收到好友请求，可以调用接受请求的 RESTful API 添加好友。服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。设置监听示例代码如下：
 
@@ -122,7 +124,7 @@ SDKClient.Instance.ContactManager.DeclineInvitation(username, callback: new Call
 
 当你同意或者拒绝后，对方会通过好友事件回调，收到 `OnFriendRequestAccepted` 或者 `OnFriendRequestDeclined` 回调。
 
-### 删除好友
+#### 删除好友
 
 调用 `DeleteContact` 删除指定联系人。被删除的用户收到 `OnContactDeleted` 回调。删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
@@ -139,7 +141,7 @@ SDKClient.Instance.ContactManager.DeleteContact(username, callback: new CallBack
 
 调用 `DeleteContact` 删除好友后，对方会收到 `OnContactDeleted` 回调。
 
-### 获取好友列表
+#### 获取好友列表
 
 你可以从服务器获取好友列表，也可以从本地数据库获取保存的好友列表。
 
@@ -166,13 +168,15 @@ List<string>list = SDKClient.Instance.ContactManager.GetAllContactsFromDB();
 
 ### 管理黑名单
 
-将指定用户加入黑名单后，对方将无法给你发送消息。黑名单部分主要功能是获取黑名单列表、添加用户至黑名单以及将用户从黑名单移除等。获取黑名单时，可从服务器获取黑名单列表，也可从本地数据库获取已保存的黑名单列表。
+黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。
 
-黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。好友加入黑名单后仍在好友列表上显示。
+黑名单功能包括加入黑名单，从黑名单移出用户和获取黑名单列表。
 
 #### 添加用户到黑名单
 
-你可以调用 `AddUserToBlockList` 添加用户到黑名单，示例代码如下：
+你可以调用 `AddUserToBlockList` 添加用户到黑名单。用户被加入黑名单后，无法向你发送消息，也无法发送好友申请。
+
+用户可以将任何其他用户添加到黑名单列表，无论该用户是否是好友。好友被加入黑名单后仍在好友列表上显示。
 
 ```csharp
 //将好友拉入黑名单后，用户依然可以向该好友发送消息，但无法接收该好友发送的消息。
@@ -188,7 +192,7 @@ SDKClient.Instance.ContactManager.AddUserToBlockList(username, callback: new Cal
 
 #### 将用户从黑名单移除
 
-你可以调用 `RemoveUserFromBlockList` 将用户从黑名单移除，示例代码如下：
+你可以调用 `RemoveUserFromBlockList` 将用户从黑名单移除，用户发送消息等行为将恢复。
 
 ```csharp
 SDKClient.Instance.ContactManager.RemoveUserFromBlockList(username, callback: new CallBack(

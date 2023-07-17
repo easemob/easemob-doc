@@ -44,13 +44,14 @@
 示例代码如下：
 
 ```typescript
-// targetId: 消息接收对象 ID
+// chatThreadID: 子区 ID。
 // content: 文本消息内容
-// chatType: 会话类型
+// convType: 会话类型为群组会话，即 ChatConversationType.GroupChat
 // isChatThread: 是否是子区消息，这里设置为 `true`，即是子区消息
-ChatMessage message = ChatMessage.createTextMessage(targetId, content, chatType, {isChatThread});
+const message = ChatMessage.createTextMessage(chatThreadID, content, convType, {
+  isChatThread: true,
+});
 // 发送消息时可以设置回调，接收消息的发送状态和结果
-// 详见 [2.4.6.2](./2.4.6.2messages_RN)
 const callback = new ChatMessageCallback();
 // 发送消息。
 ChatClient.getInstance()
@@ -120,32 +121,67 @@ class ChatMessageEvent implements ChatMessageEventListener {
 
 ### 获取子区消息
 
-进入单个子区会话后默认展示最早消息，用户可以从服务器获取子区历史消息；当你需要合并处理本地和服务器拉取到的消息（例如有用户撤回子区消息的提示是 SDK 在本地生成的一条消息）的时候，可以选择从本地获取子区消息。
+从服务器还是本地数据库获取子区消息取决于你的生产环境。
 
-#### 从服务器获取子区消息（消息漫游）
+你可以通过 `ChatConversation#isChatThread()` 判断当前会话是否是子区会话。
 
-从服务器获取子区消息，请参考 [从服务器获取消息](message_manage.html#分页获取指定会话的历史消息)。
+#### 从服务器获取单个子区的消息（消息漫游）
 
-#### 管理本地子区消息
+调用 `fetchHistoryMessages` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
 
-群成员可以调用 `getThreadConversation` 方法获取子区会话，然后从本地数据库中读取指定会话的消息：
+```typescript
+// chatThreadID: 子区 ID。
+const chatThreadID = "chatThreadID";
+// 会话类型为群聊，即 ChatConversationType.GroupChat。
+const convType = ChatConversationType.GroupChat;
+// 期望每页获取的消息数量。
+const pageSize = 10;
+// 搜索的起始消息 ID。
+const startMsgId = "";
+// 消息搜索方向
+const direction = ChatSearchDirection.UP;
+ChatClient.getInstance()
+  .chatManager.fetchHistoryMessages(chatThreadID, chatType, {
+    pageSize,
+    startMsgId,
+    direction,
+  })
+  .then((messages) => {
+    console.log("get message success: ", messages);
+  })
+  .catch((reason) => {
+    console.log("load conversions fail.", reason);
+  });
+```
+
+#### 获取本地单个子区的消息
+
+调用 `ChatManager#getAllConversations` 方法只能获取单聊或群聊会话。
+
+你可以调用 `getThreadConversation` 方法获取子区会话，然后从本地数据库中读取指定会话的消息：
 
 ```typescript
 // 获取子区会话
 ChatClient.getInstance()
-  .chatManager.getThreadConversation(convId, createIfNeed)
+  .chatManager.getThreadConversation(chatThreadID, createIfNeed)
   .then((conv) => {
     // 从本地数据库获取子区会话消息
     conv
-      .getMessages(convId, convType, startMsgId, direction, loadCount)
+      .getMessages(
+        chatThreadID,
+        ChatConversationType.GroupChat,
+        startMsgId,
+        direction,
+        loadCount
+      )
       .then((messages) => {
-        console.log('success.', messages);
+        console.log("success.", messages);
       })
       .catch((reason) => {
-        console.log('fail.', reason);
+        console.log("fail.", reason);
       });
   })
   .catch((reason) => {
-    console.log('fail.', reason);
+    console.log("fail.", reason);
   });
 ```

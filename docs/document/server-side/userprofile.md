@@ -88,20 +88,12 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 #### 请求 body
 
-请求 body 为 `x-www-form-urlencoded` 类型，发送请求时数据类型为 JSON String，长度不得超过 4 KB，包含以下字段：
+请求 body 为 `x-www-form-urlencoded` 类型，长度不得超过 4 KB，包含以下字段：
 
 | 字段    | 类型   | 描述     | 是否必需 |
 | :------ | :----- | :------- | :------- |
 | `Key`   | String | 属性名称 | 是       |
 | `Value` | String | 属性值   | 是       |
-
-例如:
-
-requestBody = ‘name=ken&employer=easemob&title=developer’
-
-JSONString = ‘{“name”:“ken”, “employer”:“easemob”, “title”:“developer”}’
-
-这个 JSONString 的总长度不能超过 4 KB。
 
 调用该 RESTful 接口设置用户昵称、头像、联系方式、邮箱、性别、签名、生日和扩展字段时，若要确保在客户端能够获取设置，请求中必须传以下键名，根据实际使用场景确定键值：
 

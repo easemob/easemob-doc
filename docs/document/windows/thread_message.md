@@ -39,7 +39,7 @@
 
 ### 发送子区消息
 
-发送子区消息和发送群组消息的方法基本一致，详情请参考 发送消息。唯一不同的是，发送子区消息需要指定标记 `IsThread` 为 true。
+发送子区消息和发送群组消息的方法基本一致，详情请参考[发送消息](message_send_receive.html#发送文本消息)。唯一不同的是，发送子区消息需要指定标记 `IsThread` 为 `true`。
 
 示例代码如下：
 
@@ -120,15 +120,32 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ### 获取子区消息
 
-进入单个子区会话后默认展示最早消息，用户可以从服务器获取子区历史消息；当你需要合并处理本地和服务器拉取到的消息（例如有用户撤回子区消息的提示是 SDK 在本地生成的一条消息）的时候，可以选择从本地获取子区消息。
+从服务器还是本地数据库获取子区消息取决于你的生产环境。
 
-#### 从服务器获取子区消息（消息漫游）
+你可以通过 `Conversation#IsThread()` 判断当前会话是否是子区会话。
 
-从服务器获取子区消息，请参考 [从服务器获取消息 (消息漫游)](message_retrieve.html)。
+#### 从服务器获取单个子区的消息（消息漫游）
 
-#### 管理本地子区消息
+调用 `FetchHistoryMessagesFromServer` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
 
-调用 `EMChatManager#getAllConversations()` 会返回单聊和群聊的会话，不会返回子区会话，你可以从本地数据库中读取指定会话的消息：
+```csharp
+SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(threadId, ConversationType.Group, startMsgId, pageSize, MessageSearchDirection.DOWN, new ValueCallBack<CursorResult<Message>>(
+          onSuccess: (result) =>
+          {
+              foreach (var msg in result.Data)
+              {
+                  //process every msg
+              }
+          },
+          onError: (code, desc) =>
+          {
+          }
+      ));
+```
+
+#### 获取本地单个子区的消息
+
+调用 `EMChatManager#getAllConversations()` 会返回单聊和群聊的会话，不会返回子区会话，你可以通过调用以下方法从本地数据库中读取指定子区会话的消息：
 
 ```csharp
 // 需要指定会话类型为 `ConversationType.Group`，且 `isChatThread` 设置为 `true`
@@ -147,7 +164,3 @@ conversation.LoadMessages(startMsgId, count, direct, new ValueCallBack<List<Mess
     }
 ));
 ```
-
-:::notice
-可以通过 `Conversation#IsThread()` 判断当前会话是否是子区会话。
-:::

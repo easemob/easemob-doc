@@ -77,16 +77,16 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数     | 类型   | 是否必需 | 描述     |
+| :-------------- | :----- | :------- | :------------------ |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ##### 请求 body
 
-| 参数                  | 类型   | 是否必需 | 描述                                                                                                                                                                                                 |
-| :-------------------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 参数                  | 类型   | 是否必需 | 描述          |
+| :------------ | :----- | :------- | :------------------------------------------- |
 | `groupname`           | String | 是       | 群组名称，最大长度为 128 字符。如果有空格，则使用 “+” 代替。                                                                                                                                         |
 | `description`         | String | 是       | 群组描述，最大长度为 512 字符。如果有空格，则使用 “+” 代替。                                                                                                                                         |
 | `public`              | Bool   | 是       | 是否是公开群。公开群可以被搜索到，用户可以申请加入公开群；私有群无法被搜索到，因此需要群主或群管理员添加，用户才可以加入。<br/> - `true`：公开群；<br/> - `false`：私有群。                          |
@@ -2351,7 +2351,9 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ### 从群组黑名单批量移除用户
 
-将多名指定用户从群组黑名单中移除。对于群组黑名单中的用户，如果要将其再次加入群组，需先将其从群组黑名单中移除。
+将多名指定用户从群组黑名单中移除。你一次最多可移除 60 个用户。
+
+对于群组黑名单中的用户，如果要将其再次加入群组，需先将其从群组黑名单中移除。
 
 #### HTTP 请求
 
@@ -2363,7 +2365,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{
 
 | 参数        | 类型   | 是否必需 | 描述                        |
 | :---------- | :----- | :------- | :-------------------------- |
-| `usernames` | String | 是       | 要移除群组黑名单的用户 ID。 |
+| `usernames` | String | 是       | 要移除群组黑名单的用户 ID，一次最多可传 60 个。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -2573,7 +2575,9 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 
 ### 批量添加用户至群组白名单
 
-添加多个用户至群组白名单。你一次最多可添加 60 个用户。用户添加至白名单后在群组全员禁言时仍可以在群组中发送消息。
+添加多个用户至群组白名单。你一次最多可添加 60 个用户。
+
+用户添加至白名单后在群组全员禁言时仍可以在群组中发送消息。
 
 #### HTTP 请求
 
@@ -2597,7 +2601,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 | 参数        | 类型  | 描述                            |
 | :---------- | :---- | :------------------------------ |
-| `usernames` | Array | 待添加至群组白名单中的用户 ID。 |
+| `usernames` | Array | 待添加至群组白名单中的用户 ID，一次最多可添加 60 个。 |
 
 #### HTTP 响应
 
@@ -2805,7 +2809,9 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -H 'Authorization: Be
 
 ### 禁言指定群成员
 
-对指定群成员禁言。群成员被禁言后，将无法在群组中发送消息，也无法在该群组下的子区中发送消息。
+对一个或多个群成员禁言。你一次最多可禁言 60 个群组成员。
+
+群成员被禁言后，将无法在群组中发送消息，也无法在该群组下的子区中发送消息。
 
 #### HTTP 请求
 
@@ -2828,7 +2834,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 | 参数            | 类型  | 是否必需 | 描述                                                       |
 | :-------------- | :---- | :------- | :--------------------------------------------------------- |
 | `mute_duration` | Long  | 是       | 禁言时长，单位为毫秒。                                     |
-| `usernames`     | Array | 是       | 要添加到禁言列表的用户 ID 列表。每次最多可禁言 10 个成员。 |
+| `usernames`     | Array | 是       | 要添加到禁言列表的用户 ID 列表，每次最多可添加 60 个。 |
 
 #### HTTP 响应
 
@@ -2945,7 +2951,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 解除成员禁言
 
-将一个或多个群成员移出禁言列表。移除后，群成员可以在群组中正常发送消息，同时也可以在该群组下的子区中发送消息。
+将一个或多个群成员移出禁言列表。你一次最多可对 60 个成员解除禁言。
+
+移除后，群成员可以在群组中正常发送消息，同时也可以在该群组下的子区中发送消息。
 
 #### HTTP 请求
 
@@ -2957,7 +2965,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 
 | 参数     | 类型   | 是否必需 | 描述                                                                                      |
 | :------- | :----- | :------- | :---------------------------------------------------------------------------------------- |
-| `member` | String | 是       | 解除禁言的成员的用户 ID。member1：成员 1 的用户 ID；member2：成员 2 的用户 ID；以此类推。 |
+| `member` | String | 是       | 解除禁言的成员的用户 ID。member1：成员 1 的用户 ID；member2：成员 2 的用户 ID；以此类推，最多可添加 60 个。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -3376,7 +3384,7 @@ POST https://{host}/{org_name}/{app_name}/thread
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken>' -d '{
+curl -X POST https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type:application/json' -d '{
     "group_id": 179800091197441,
     "name": "1",
     "owner": "test4",
@@ -3393,7 +3401,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppTok
     "duration": 4,
     "data": {
         "thread_id": "1XXXX7"
-    }
+    },
     "organization": "XXXX",
     "timestamp": 1650869972109,
     "uri": "https://XXXX/XXXX/XXXX/thread"
@@ -3463,7 +3471,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <Your
     "duration": 4,
     "data": {
         "name": "test4"
-    }
+    },
     "organization": "XXXX",
     "timestamp": 1650869972109,
     "uri": "https://XXXX/XXXX/XXXX/thread"

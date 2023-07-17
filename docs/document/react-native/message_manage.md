@@ -80,8 +80,14 @@ const convType = ChatConversationType.PeerChat;
 const pageSize = 10;
 // 搜索的起始消息 ID。
 const startMsgId = "";
+// 消息搜索方向
+const direction = ChatSearchDirection.UP;
 ChatClient.getInstance()
-  .chatManager.fetchHistoryMessages(convId, chatType, pageSize, startMsgId)
+  .chatManager.fetchHistoryMessages(convId, chatType, {
+    pageSize,
+    startMsgId,
+    direction,
+  })
   .then((messages) => {
     console.log("get message success: ", messages);
   })
@@ -141,11 +147,9 @@ ChatClient.getInstance()
   });
 ```
 
-#### 删除会话及其中的消息
+#### 单向删除服务端会话及其历史消息
 
-你可以调用 `removeConversationFromServer` 方法删除服务器端会话及其历史消息。会话删除后，当前用户和其他用户均无法从服务器获取该会话。若该会话的历史消息也删除，所有用户均无法从服务器获取该会话的消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
-
-删除服务端会话及其历史消息，对本地的会话和消息无影响。
+你可以调用 `removeConversationFromServer` 方法删除服务器端会话和历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息，对本地的会话无影响，但会删除本地消息，而其他用户不受影响。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
 
 示例代码如下：
 
@@ -243,6 +247,7 @@ ChatClient.getInstance()
     console.log("get message fail.", reason);
   });
 ```
+
 #### 获取指定会话中一定时间段内的消息
 
 你可以调用 `getMessageWithTimestamp` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
@@ -323,7 +328,7 @@ ChatClient.getInstance()
 
 #### 获取指定会话中一定数量的消息
 
-你可以调用 `getMessages` 获取指定会话中一定数量的消息。 
+你可以调用 `getMessages` 获取指定会话中一定数量的消息。
 
 ```typescript
 // convId: 会话 ID。
@@ -340,6 +345,7 @@ ChatClient.getInstance()
     console.log("get message fail.", reason);
   });
 ```
+
 #### 获取指定会话的最新消息
 
 你可以调用 `getLatestMessage` 方法获取指定会话中的最新一条消息。
@@ -359,7 +365,7 @@ ChatClient.getInstance()
 
 #### 获取指定会话最新接收到的消息
 
-你可以调用 `getLastReceivedMessage` 方法获取指定会话中最新收到的一条消息。 
+你可以调用 `getLastReceivedMessage` 方法获取指定会话中最新收到的一条消息。
 
 ```typescript
 // convId: 会话 ID
@@ -522,6 +528,23 @@ ChatClient.getInstance()
 // convType：会话类型
 ChatClient.getInstance()
   .chatManager.deleteAllMessages(convId, convType)
+  .then(() => {
+    console.log("delete message success");
+  })
+  .catch((reason) => {
+    console.log("delete message fail.", reason);
+  });
+```
+
+#### 删除指定时间段的本地消息
+
+你可以调用 `deleteMessagesWithTimestamp` 方法删除指定时间段的消息。
+
+```typescript
+// startTs: 开始点的时间戳
+// endTs: 结束点的时间戳
+ChatClient.getInstance()
+  .chatManager.deleteMessagesWithTimestamp({ startTs, endTs })
   .then(() => {
     console.log("delete message success");
   })
