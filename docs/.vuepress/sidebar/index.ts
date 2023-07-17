@@ -1,5 +1,6 @@
 import { sidebar } from "vuepress-theme-hope";
 import { DOC_SIDEBAR } from "./document"
+import { PRIVATE_IM_SIDEBAR, PRIVATE_MEDIA_SIDEBAR } from './private'
 
 export const zhSidebar = sidebar({
 
@@ -70,5 +71,7 @@ export const zhSidebar = sidebar({
       ]
     },
   ],
-  ...DOC_SIDEBAR
+  ...DOC_SIDEBAR,
+  '/private/im/': PRIVATE_IM_SIDEBAR,
+  '/private/media/': PRIVATE_MEDIA_SIDEBAR
 });

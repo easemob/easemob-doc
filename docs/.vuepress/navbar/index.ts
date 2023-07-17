@@ -67,8 +67,26 @@ export const zhNavbar = navbar([
             link: 'https://sdkdocs.easemob.com/apidoc/unity/annotated.html'
           }
         ]
-      }
+      },
      ]
+  },
+  {
+    text: '私有部署',
+    children: [
+      {
+        text: '私有化',
+        children: [
+          {
+            text: '即时通讯',
+            link: '/private/im/uc_deploy.html'
+          },
+          {
+            text: '音视频',
+            link: '/private/media/overview.html'
+          }
+        ]
+      }
+    ]
   },
   { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
   { text: '参与环信文档“捉虫”活动，领京东卡', link: 'https://www.imgeek.org/article/825360944' },
