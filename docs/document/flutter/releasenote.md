@@ -2,4 +2,4 @@
 
 <Toc />
 
-[Flutter SDK 更新日志](https://pub.flutter-io.cn/packages/im_flutter_sdk/changelog)
+[Flutter SDK 更新日志](https://pub.dev/packages/im_flutter_sdk/changelog)
