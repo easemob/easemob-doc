@@ -82,7 +82,7 @@ export const zhNavbar = navbar([
           },
           {
             text: '音视频',
-            link: '/private/media/overview.html'
+            link: '/private/media/common_introduction.html'
           }
         ]
       }
