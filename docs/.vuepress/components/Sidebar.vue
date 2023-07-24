@@ -7,14 +7,11 @@
 
   const pageData = usePageData()
   const showPlatformSwitch = ref(false)
-  watch(pageData, ()=> {
-    const pagePath = pageData.value.path
-    showPlatformSwitch.value = pagePath.indexOf('/document') == 0
-  }, {immediate:true})
   const showPrivateSwitch = ref(false)
   watch(pageData, ()=> {
     const pagePath = pageData.value.path
-    showPrivateSwitch.value = pagePath.indexOf('/private') == 0
+    showPrivateSwitch.value = pagePath.indexOf('/private/') == 0
+    showPlatformSwitch.value = pagePath.indexOf('/document/') == 0
   }, {immediate:true})
 
 
@@ -23,10 +20,14 @@
   <Sidebar>
     <template #top>
       <div v-show="showPlatformSwitch" class="platform-switch">
-        <PlatformSwitch />
+        <ClientOnly>
+          <PlatformSwitch />
+        </ClientOnly>
       </div>
        <div v-show="showPrivateSwitch" class="platform-switch">
-        <PrivateSwitch />
+        <ClientOnly>
+          <PrivateSwitch />
+        </ClientOnly>
       </div>
     </template>
   </Sidebar>
