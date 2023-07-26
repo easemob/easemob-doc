@@ -1,19 +1,25 @@
 export const PRIVATE_IM_SIDEBAR = [
     {
-      text: '私有化下载', 
+      text: '安装部署', 
       children: [
-        { text: '部署流程说明', link: 'uc_deploy.html' },
-        { text: 'SDK 及 Demo 下载', link: 'uc_private.html' },
-        { text: '环信通下载', link: 'uc_overview.html' },
+        { text: '私有化服务部署', link: 'uc_deploy.html' },
       ]
     } ,
     {
       text: '私有化集成', 
       children: [
-        { text: 'console配置说明', link: 'uc_configure.html' },
+        { text: 'Console配置说明', link: 'uc_configure.html' },
+        { text: 'SDK 及 Demo 下载', link: 'uc_private.html' },
         { text: 'Android私有化配置', link: 'uc_android_private.html' },
         { text: 'iOS私有化配置', link: 'uc_iOS_private.html' },
         { text: 'Web私有化配置', link: 'uc_Web_private.html' },
+      ]
+    } ,
+    {
+      text: '解决方案', 
+      children: [
+        { text: '企业协同办公（环信通）', link: 'uc_overview.html' },
+        { text: '轻客服远程协助（个性化协同）', link: 'uc_lowcode.html' },
       ]
     } 
 ]
