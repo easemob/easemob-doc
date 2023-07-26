@@ -1,6 +1,5 @@
 # REST接口简介
 
-------
 
 音视频云的REST接口规则与即时通讯的REST规则是一致的，参考[服务端集成](../../document/server-side/overview.md)
 

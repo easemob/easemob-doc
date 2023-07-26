@@ -9,13 +9,13 @@
 :::notice
 目前音视频插件仅支持运行在iOS以及Android，暂不支持运行在微信小程序使用。如需运行到微信小程序我们为此提供了小程序音视频SDK，请移步小程序集成多人音视频文档部分。
 :::
-使用 uni-app 集成多人音视频SDK，需要下载环信uni-app原生插件**emlive-pusher**、**emlive-player**配合一起使用。音视频SDK依赖IM SDK， 所以要先集成IM，并把IM SDK实例挂载在全局变量下：uni.WebIM = websdk， 可以参考[uni-app demo]() utils/WebIM 文件。
+使用 uni-app 集成多人音视频SDK，需要下载环信uni-app原生插件**emlive-pusher**、**emlive-player**配合一起使用。音视频SDK依赖IM SDK， 所以要先集成IM，并把IM SDK实例挂载在全局变量下：uni.WebIM = websdk， 可以参考[uni-app demo](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/webim-uniapp-demo.zip) utils/WebIM 文件。
 
 ------
   
 ## 运行demo
 
-下载好[uniapp demo]()后，导入hbuilderX，需要检查manifest.json/原生插件配置中是否选中了插件，否则需要自己选择nativeplugins中的EMLiveplugin插件，然后点击hbuilderX的运行→运行到手机或模拟器→制作自定义调试基座。 此时hbuilderX会进行打包，等打包成功后，点击运行→运行到手机或模拟器→运行基座选择→自定义调试基座，选择好后重新点击运行→运行到手机或模拟器→找到自己的设备 等安装好后，就可以在群组聊天中点击电话的icon，发起多人会议。
+下载好[uni-app demo](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/webim-uniapp-demo.zip)后，导入hbuilderX，需要检查manifest.json/原生插件配置中是否选中了插件，否则需要自己选择nativeplugins中的EMLiveplugin插件，然后点击hbuilderX的运行→运行到手机或模拟器→制作自定义调试基座。 此时hbuilderX会进行打包，等打包成功后，点击运行→运行到手机或模拟器→运行基座选择→自定义调试基座，选择好后重新点击运行→运行到手机或模拟器→找到自己的设备 等安装好后，就可以在群组聊天中点击电话的icon，发起多人会议。
 
 ------
 
