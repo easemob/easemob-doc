@@ -822,7 +822,7 @@ DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 #### 请求示例
 
 ```bash
-curl -X DELETE '{url}/{org}/{app}/notification/template' \
+curl -X DELETE '{url}/{org}/{app}/notification/template/{name}' \
 -H 'Authorization: Bearer {YourAppToken}'
 ```
 
@@ -830,7 +830,7 @@ curl -X DELETE '{url}/{org}/{app}/notification/template' \
 
 ```json
 {
-  "uri": "https://XXXX/XXXX/XXXX/notification/template",
+  "uri": "https://XXXX/XXXX/XXXX/notification/template/test7",
   "timestamp": 1646989686393,
   "organization": "hx",
   "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",

@@ -42,7 +42,7 @@ const conn = new EC.connection({
 | `isHttpDNS`  | Bool  | 否 | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。        |
 | `delivery`         | Bool  | 否    | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。      |
 | `https`      | Bool  | 否  | 是否支持通过 HTTPS 访问即时通讯 IM：<br/> - （默认）`true`：支持 HTTPS 和 HTTP；<br/> -`false`：浏览器根据使用的域名自行判断。     |
-| `heartBeatWait`      | Int  | 否 | 心跳间隔，单位为秒，默认为 30000 秒。       |
+| `heartBeatWait`      | Int  | 否 | 心跳间隔，单位为毫秒，默认为 30000。       |
 | `deviceId`           | String  | 否  | 设备 ID，为默认随机值。               |
 | `useOwnUploadFun`   | Bool  | 否   | 是否支持通过自己的路径将图片、文件上传到自己的服务器。<br/> -`true`：支持，需要指定路径；<br/> -（默认）`false`：关闭，通过消息服务器上传下载文件。 |
 | `autoReconnectNumMax` | Int  | 否 | 最大重连次数。      |
