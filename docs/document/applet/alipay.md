@@ -73,7 +73,7 @@ WebIM.conn = new WebIM.connection({
   https: true, //是否使用 HTTPS
   url: "wss://im-api-alipay.easemob.com/websocket", // socket server (3.0 SDK)
   apiUrl: "https://a1.easemob.com", // rest server
-  heartBeatWait: 30000, //心跳间隔
+  heartBeatWait: 30000, //心跳间隔，单位为毫秒
   autoReconnectNumMax: 5, //自动重连次数
   useOwnUploadFun: false, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
 });
