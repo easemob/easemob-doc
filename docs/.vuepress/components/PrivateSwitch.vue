@@ -3,6 +3,11 @@
 import { ref, watch, computed } from 'vue'
 import { useRoute, useRouter} from 'vue-router'
 
+const PLATFORM_INDEX_URL = {
+  im: '/private/im/uc_deploy.html',
+  media: '/private/media/common_introduction.html'
+}
+
 const platform = ref('im')
 const route = useRoute()
 const router = useRouter()
@@ -14,12 +19,7 @@ watch(()=>route.path, ()=> {
 
 // 切换平台，如果有相同路径的route就直接跳转
 const onChange = (platform) => {
-  const nextPlatformDocRouters = router.options.routes
-  .filter(item=>item.hasOwnProperty('name'))
-  .map(item=>item.path)
-  .filter(item=>item.indexOf('/private/'+platform)==0)
-  .filter(item=>item.length > `/private/${platform}/`.length)
-  router.push(nextPlatformDocRouters[0])
+  router.push(PLATFORM_INDEX_URL[platform])
 }
 
 const options = [
