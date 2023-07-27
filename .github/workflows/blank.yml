@@ -2,7 +2,7 @@ name: note build
 # 触发workflow的条件
 on:
   push:
-    branches: ["doc-v2-beta"]
+    branches: ["doc-v2"]
 
 env:
   SERVER_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }} # 服务器私钥
@@ -62,7 +62,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_PORT: ${{ secrets.SERVER_PORT }} -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
-          TARGET: /data/apps/data/docs-im-beta2/ # 服务器目标路径
+          TARGET: /data/apps/data/docs-im-beta/ # 服务器目标路径
 
       - name: CDN Refresh
         uses: visionwx/ali-cdn-refresh@main
