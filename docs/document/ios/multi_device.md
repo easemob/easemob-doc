@@ -124,7 +124,7 @@ NSString *password = @"";
 
 ### 强制指定账号从所有设备下线
 
-你可以调用 `kickAllDevicesWithUsername` 或 `kickAllDevicesWithUserId` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备都踢下线。
+你可以调用 `kickAllDevicesWithUsername` 或 `kickAllDevicesWithUserId` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备都踢下线。 
 
 ```objectivec
 // 用户 ID + 密码
