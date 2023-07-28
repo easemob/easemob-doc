@@ -6,15 +6,15 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送合并消息)：
+- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送和接收合并消息)：
            - 新增合并消息类型 `EMMessage#Type#COMBINE`；
            - 新增消息体类 `EMCombineMessageBody`；
            - 新增 `EMMessage#createCombinedSendMessage` 方法用于创建合并消息；
            - 新增 `EMChatManager#downloadAndParseCombineMessage` 方法用于下载并解析合并消息。
-- [IM SDK] 新增[消息修改功能](#message_modify.html)：
+- [IM SDK] 新增[消息修改功能](message_modify.html)：
            - 新增 `EMChatManager#asyncModifyMessage` 方法，用于修改消息；
            - 新增 `EMMessageListener#onMessageContentChanged` 回调。消息修改后，接收方会收到该回调。
-- [IM SDK] 新增[自定义设备的平台和名称功能](multi_device.html设置登录设备的名称)：
+- [IM SDK] 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)：
            - 新增 `EMOptions#setCustomOSPlatform` 方法，设置自定义平台代号；
            - 新增 `EMOptions#getCustomOSPlatform` 方法，设置当前设备的自定义设备平台；
            - 新增 `EMOptions#setCustomDeviceName` 方法，设置当前设备自定义设备名称；

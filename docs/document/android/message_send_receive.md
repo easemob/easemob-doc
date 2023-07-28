@@ -618,7 +618,7 @@ customMessage.setChatType(chatType);
 EMClient.getInstance().chatManager().sendMessage(customMessage);
 ```
 
-### 发送合并消息
+### 发送和接收合并消息
 
 为了方便消息互动，即时通讯 IM 自 4.1.0 版本开始支持将多个消息合并在一起进行转发。你可以采取以下步骤进行消息的合并转发：
 

@@ -7,7 +7,7 @@
 ### 新增特性
 
 1. [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送合并消息)。
-2. [IM SDK] 新增[消息修改功能](#message_modify.html)。
+2. [IM SDK] 新增[消息修改功能](message_modify.html)。
 
 ### 修复
 
