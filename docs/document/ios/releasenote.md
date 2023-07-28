@@ -2,6 +2,42 @@
 
 <Toc />
 
+## 版本 V4.1.0 Dev 2023-7-27（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送合并消息)：
+           - 新增合并消息类型 `EMMessageBodyTypeCombine`；
+           - 新增消息体类 `EMCombineMessageBody` ；
+           - 新增 `EMChatManager#downloadAndParseCombineMessage` 方法，用于下载并解析合并消息。
+- [IM SDK] 新增[消息修改功能](#message_modify.html)：
+           - 新增 `EMChatManager#modifyMessage` 方法，用于修改消息；
+           - 新增 `EMChatManagerDelegate#onMessageContentChanged` 回调。消息修改后，接收方会收到该回调。
+- [IM SDK] 新增[自定义设备的平台和名称功能](multi_device.html设置登录设备的名称)。
+           - 新增 `EMOptions#customOSType` 属性，用于设置自定义平台代号；
+           - 新增 `EMOptions#customDeviceName` 属性，用于设置当前设备的自定义设备名称。
+- [IM SDK] 新增 `EMClientDelegate#userAccountDidLoginFromOtherDevice:(NSString*)deviceName` 回调。
+           作废`EMClientDelegate#userAccountDidLoginFromOtherDevice` 回调。
+           设置设备名称后，若登录设备时因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到 `EMClientDelegate#userAccountDidLoginFromOtherDevice:(NSString*)deviceName` 回调，其中包含导致该设备被踢下线的自定义设备名称。
+- [IM SDK] 新增以下方法支持用户 token：
+           - `EMClient#getLoggedInDevicesFromServerWithUserId`：获取指定账号下登录的在线设备列表；
+           - `EMClient#kickDeviceWithUserId`：将指定账号登录的指定设备踢下线：
+           - `EMClient#kickAllDevicesWithUserId`：将指定账号登录的所有设备都踢下线。
+- [IM UIKit] 新增消息引用功能。
+- [IM UIKit] 新增消息修改功能。
+- [IM APP] 新增消息中 URL 的预览功能。
+
+### 优化
+
+- [IM SDK] 优化登录 IM 服务器时对不同优先级接入地址选择的逻辑。
+
+### 修复
+
+- [IM SDK] 修复调用 `EMChatManager#deleteMessagesBeforeTimestamp 和 EMConversation#removeMessages(long,long)` 方法偶现崩溃的问题；
+- [IM SDK] 修复偶现的因未登录导致调用接口时崩溃的问题；
+- [IM SDK] 修复在 ARM 64 模拟器下偶现的文件类消息附件路径不对的问题；
+- [IM APP] 修复 Demo 偶现的 UI 刷新崩溃的问题。
+
 ## 版本 V4.0.3 Dev 2023-6-19（开发版）
 
 ### 新增特性

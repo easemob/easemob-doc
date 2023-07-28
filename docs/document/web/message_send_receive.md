@@ -8,7 +8,8 @@
 - 附件消息，包含图片、语音、视频及文件消息；
 - 位置消息；
 - 透传消息；
-- 自定义消息。
+- 自定义消息；
+- 合并消息
 
 :::tip
 对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。
@@ -653,6 +654,87 @@ function sendCustomMsg() {
       console.log("Fail");
     });
 }
+```
+
+### 发送合并消息
+
+为了方便消息互动，即时通讯 IM 自 4.2.0 版本开始支持将多个消息合并在一起进行转发。你可以采取以下步骤进行消息的合并转发：
+
+1. 利用原始消息列表创建一条合并消息。
+2. 发送合并消息。
+3. 对端收到合并消息后进行解析，获取原始消息列表。
+
+#### 创建和发送合并消息
+
+你可以调用 `message.create` 方法创建一条合并消息，然后调用 `connection.send` 方法发送该条消息。
+
+创建合并消息时，需要设置以下参数：
+
+| 属性                   | 类型                                            | 描述         |
+| :--------------------- | :---------------------------------------------- | :----------------------- |
+| `chatType`             | ChatType                                        | 会话类型。     |
+| `type`                 | 'combine'                                       | 消息类型。    |
+| `to`                   | String                                          | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。    |
+| `title`                | String                                          | 合并消息的标题。   |
+| `summary`              | String                                          | 合并消息的概要。   |
+| `compatibleText`       | String                                          | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。 |
+| `messageIdList`        | MessagesType[]                                  | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。        |
+| `onFileUploadComplete` | (data: { url: string; secret: string;}) => void | 合并消息文件上传完成的回调。     |
+| `onFileUploadError`    | (error: any) => void                            | 合并消息文件上传失败的回调。      |
+
+:::notice
+1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
+2. 只有成功发送或接收的消息才能合并转发。
+:::
+
+示例代码如下：
+
+```javascript
+let option = {
+  chatType: "singleChat",
+  type: "combine",
+  to: "userId",
+  compatibleText: "SDK 版本低，请升级",
+  title: "聊天记录",
+  summary: "hi",
+  messageList: [
+    {
+      type: "txt",
+      // ...
+    },
+  ],
+  onFileUploadComplete: (data) => {
+    option.url = data.url;
+  },
+};
+let msg = message.create(option);
+connection
+  .send(msg)
+  .then((res) => {
+    console.log("发送成功", res);
+  })
+  .catch((err) => {
+    console.log("发送失败", err);
+  });
+```
+
+接收合并消息与[接收普通消息](#接收消息)的操作相同，唯一不同是对于合并消息来说，消息接收事件为 `onCombineMessage`。
+
+对于不支持合并转发消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText` 携带的内容，其他字段会被忽略。
+
+#### 解析合并消息
+
+合并消息实际上是一种附件消息。收到合并消息后，你可以调用 `downloadAndParseCombineMessage` 方法下载合并消息附件并解析出原始消息列表。
+
+```javascript
+connection
+  .downloadAndParseCombineMessage({
+    url: msg.url,
+    secret: msg.secret,
+  })
+  .then((res) => {
+    console.log("合并消息解析后的消息列表", res);
+  });
 ```
 
 ### 发送定向消息
