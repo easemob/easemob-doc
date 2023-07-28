@@ -17,7 +17,7 @@
 ### 修复
 
 - 修复安卓热重载（hot reload）后回调多次的问题；
-- 修复iOS 获取聊天室属性 key 传 null 导致的崩溃问题；
+- 修复 iOS 获取聊天室属性 key 传 null 导致的崩溃问题；
 
 ### 优化
 
@@ -57,7 +57,7 @@
 
 ### 修复
 
-- 修复List<String>? 转换失败；
+- 修复`List<String>?` 转换失败；
 - 修复图片消息和视频消息转换失败；
 
 ## 版本 4.0.0
@@ -80,11 +80,11 @@
 
 ### 修复
 
-1. 修复ios群已读回执不执行；
+1. 修复 ios 群已读回执不执行；
 
 ## 新增特性
 
-1. 增加会话根据时间删除服务器漫游消息api `EMConversation#removeServerMessageBeforeTimeStamp(timestamp)`。
+1. 增加会话根据时间删除服务器漫游消息 api `EMConversation#removeServerMessageBeforeTimeStamp(timestamp)`。
 
 ## 版本 3.9.9
 
@@ -96,8 +96,8 @@
 
 ### 修复
 
-1. 安卓不执行onGroupDestroyed回调；
-2. 构造位置消息时无法设置buildingName；
+1. 安卓不执行 onGroupDestroyed 回调；
+2. 构造位置消息时无法设置 buildingName；
 
 ## 版本 3.9.7+3
 
@@ -116,26 +116,26 @@
 
 ### 修复
 
-  1. 修复 安卓 fcm send id偶现为空的问题；
-  2. 修复 安卓 `SilentModeResult` expireTs 为空的问题；
+1. 修复 安卓 fcm send id 偶现为空的问题；
+2. 修复 安卓 `SilentModeResult` expireTs 为空的问题；
 
 ## 版本 3.9.7
 
 ### 新增特性
 
-  1. 新增聊天室自定义属性功能。
-  2. 新增 `areaCode` 方法限制连接边缘节点的范围。
-  3. `EMGroup` 中增加 `isDisabled` 属性显示群组禁用状态，需要开发者在服务端设置。该属性在调用 `EMGroupManager` 中的 `fetchGroupInfoFromServer` 方法获取群组详情时返回。
+1. 新增聊天室自定义属性功能。
+2. 新增 `areaCode` 方法限制连接边缘节点的范围。
+3. `EMGroup` 中增加 `isDisabled` 属性显示群组禁用状态，需要开发者在服务端设置。该属性在调用 `EMGroupManager` 中的 `fetchGroupInfoFromServer` 方法获取群组详情时返回。
 
 ### 优化
 
-  1. 移除 SDK 一部分冗余日志。
+1. 移除 SDK 一部分冗余日志。
 
 ### 修复
 
-  1. 修复极少数场景下，从服务器获取较大数量的消息时失败的问题。
-  2. 修复数据统计不正确的问题。
-  3. 修复极少数场景下打印日志导致的崩溃。
+1. 修复极少数场景下，从服务器获取较大数量的消息时失败的问题。
+2. 修复数据统计不正确的问题。
+3. 修复极少数场景下打印日志导致的崩溃。
 
 ## 版本 3.9.5
 
@@ -158,27 +158,27 @@
 
 ## 版本 3.9.4+1
 
-- 增加ChatSilentMode;
+- 增加 ChatSilentMode;
 
 ## 版本 3.9.4
 
-- 移除过期Api；
+- 移除过期 Api；
 
 ## 版本 3.9.3
 
-- 新增thread实现；
-- 修复部分bug；
-- 依赖原生sdk版本为3.9.3
+- 新增 thread 实现；
+- 修复部分 bug；
+- 依赖原生 sdk 版本为 3.9.3
 
 ## 版本 3.9.2
 
-- 增加Reaction实现；
+- 增加 Reaction 实现；
 - 增加举报功能；
-- 增加获取群组已读api；
+- 增加获取群组已读 api；
 - 添加下载群文件进度回调；
 - 修复下载视频偶现失败；
 - 修复获取群免打扰详情失败；
-- 修复 startCallback是 ios 偶现 crash;
+- 修复 startCallback 是 ios 偶现 crash;
 
 ## 版本 3.9.1
 
@@ -197,19 +197,19 @@
   - EMConnectionListener#onUserDidLoginTooManyDevice: 当前账号登录太多设备;
   - EMConnectionListener#onUserKickedByOtherDevice: 当前账号被登录的其他设备设置下线;
   - EMConnectionListener#onUserAuthenticationFailed: 当前账号鉴权失败;
-- 依赖原生sdk版本为3.9.2.1；
-- 修复ios group ack 问题；
+- 依赖原生 sdk 版本为 3.9.2.1；
+- 修复 ios group ack 问题；
 
 ## 版本 3.9.0+1
 
-- 修复message.attribute不准;
+- 修复 message.attribute 不准;
 
 - 增加 EMClient.getInstance.startCallback() 方法
-  
+
   ```dart
   EMClient.getInstance.startCallback();
   ```
-  
+
   只有调用该方法后，`EMContactManagerListener`、 `EMGroupEventListener` 、 `EMChatRoomEventListener` 回调才会开始执行;
 
 - 修复删除聊天室白名单成员失败;
@@ -218,53 +218,53 @@
 
 - 增加单人推送免打扰接口；
 
-- 增加api referance;
+- 增加 api referance;
 
-- 增加renewToken api;
+- 增加 renewToken api;
 
-- 修改消息callback方式；
+- 修改消息 callback 方式；
 
-- iOS移除自动绑定deviceToken，如需使用，需要在iOS端单独增加；
+- iOS 移除自动绑定 deviceToken，如需使用，需要在 iOS 端单独增加；
 
-- android移除多余权限；
+- android 移除多余权限；
 
-- 修改已知bug；
+- 修改已知 bug；
 
 ## 版本 3.8.9
 
 - 增加单聊消息免打扰；
 - 去除不必要的信息收集；
 - 修复安卓某些场景下数据库损坏导致崩溃；
-- 移除对FCM11.4.0的依赖；
-- 修复安卓WAKE_LOCK权限导致的崩溃；
+- 移除对 FCM11.4.0 的依赖；
+- 修复安卓 WAKE_LOCK 权限导致的崩溃；
 - 增加用户被全局禁言时发消息错误码；
 - 增强数据传输安全性；
 - 增强本地数据存储安全性；
-- 新增使用Token登录时，Token过期的回调；
-- 修复拉取历史漫游消息不全的bug；
-- 默认使用https；
+- 新增使用 Token 登录时，Token 过期的回调；
+- 修复拉取历史漫游消息不全的 bug；
+- 默认使用 https；
 - 优化登录速度；
 
 ## 版本 3.8.3+9
 
-- 将设置推送相关操作从EMPushConfigs中移到EMPushManager中；
-- 修复已知bug；
+- 将设置推送相关操作从 EMPushConfigs 中移到 EMPushManager 中；
+- 修复已知 bug；
 
 ## 版本 3.8.3+8
 
-- 修复ios使用token登录失败；
-- 修改Login方法和Logout方法返回值；
+- 修复 ios 使用 token 登录失败；
+- 修改 Login 方法和 Logout 方法返回值；
 
 ## 版本 3.8.3+6
 
-- 修改EMImPushConfig为EMPushConfigs;
-- 删除EMOptions中的EMPushConfig.设置推送证书时直接调用EMOptions即可;
-- EMGroup中移除ShareFiles，如果需要获取共享文件，请调用Api:
-  `EMClient.getInstance.groupManager.getGroupFileListFromServer(groupId)` 
-- 将isConnected和isLoginBefore、Token改为从原生获取；
+- 修改 EMImPushConfig 为 EMPushConfigs;
+- 删除 EMOptions 中的 EMPushConfig.设置推送证书时直接调用 EMOptions 即可;
+- EMGroup 中移除 ShareFiles，如果需要获取共享文件，请调用 Api:
+  `EMClient.getInstance.groupManager.getGroupFileListFromServer(groupId)`
+- 将 isConnected 和 isLoginBefore、Token 改为从原生获取；
 - 修复安卓设置群组免打扰失效的问题；
-- 修复获取公开群crash的问题；
-- 修改throw error的逻辑；
+- 修复获取公开群 crash 的问题；
+- 修改 throw error 的逻辑；
 - 修改构造文本消息时的方法，需要传入参数名；
 - 修改部分原生方法逻辑；
 - 调整项目目录结构；
@@ -272,33 +272,33 @@
 
 ## 版本 3.8.3+5
 
-- 更新安卓依赖原生sdk版本；
-- 修复获取本地群组crash；
+- 更新安卓依赖原生 sdk 版本；
+- 修复获取本地群组 crash；
 
 ## 版本 3.8.3+4
 
-- 修复消息attribute类型变为bool类型；
+- 修复消息 attribute 类型变为 bool 类型；
 - 修复群组免打扰属性不准；
-- 修复ios importMessages方法bug；
-- 修复群、聊天室禁言时不执行回调的bug；
-- 修复下载方法不执行callback；
+- 修复 ios importMessages 方法 bug；
+- 修复群、聊天室禁言时不执行回调的 bug；
+- 修复下载方法不执行 callback；
 - 构造文件消息提供设置文件大小属性；
 - 修改`EMGroupChangeListener` 为 `EMGroupEventListener`
 
 ## 版本 3.8.3+3
 
-- 修复安卓下resendMessage方法发送失败时不回调onError；
-- 修复fetchChatRoomMembers返回类型错误；
+- 修复安卓下 resendMessage 方法发送失败时不回调 onError；
+- 修复 fetchChatRoomMembers 返回类型错误；
 
 ## 3.8.3+2
 
 - 增加群组已读回执；
-- 不在提供EMContact类，直接返回String类型username;
+- 不在提供 EMContact 类，直接返回 String 类型 username;
 
 ## 版本 3.8.3
 
 - 增加用户属性；
-- 修复已知bug；
+- 修复已知 bug；
 
 ## 版本 1.0.0
 
