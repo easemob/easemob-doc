@@ -7,25 +7,25 @@
 ### 新增特性
 
 - [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送和接收合并消息)：
-           - 新增合并消息类型 `EMMessage#Type#COMBINE`；
-           - 新增消息体类 `EMCombineMessageBody`；
-           - 新增 `EMMessage#createCombinedSendMessage` 方法用于创建合并消息；
-           - 新增 `EMChatManager#downloadAndParseCombineMessage` 方法用于下载并解析合并消息。
+    - 新增合并消息类型 `EMMessage#Type#COMBINE`；
+    - 新增消息体类 `EMCombineMessageBody`；
+    - 新增 `EMMessage#createCombinedSendMessage` 方法用于创建合并消息；
+    - 新增 `EMChatManager#downloadAndParseCombineMessage` 方法用于下载并解析合并消息。
 - [IM SDK] 新增[消息修改功能](message_modify.html)：
-           - 新增 `EMChatManager#asyncModifyMessage` 方法，用于修改消息；
-           - 新增 `EMMessageListener#onMessageContentChanged` 回调。消息修改后，接收方会收到该回调。
+    - 新增 `EMChatManager#asyncModifyMessage` 方法，用于修改消息；
+    - 新增 `EMMessageListener#onMessageContentChanged` 回调。消息修改后，接收方会收到该回调。
 - [IM SDK] 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)：
-           - 新增 `EMOptions#setCustomOSPlatform` 方法，设置自定义平台代号；
-           - 新增 `EMOptions#getCustomOSPlatform` 方法，设置当前设备的自定义设备平台；
-           - 新增 `EMOptions#setCustomDeviceName` 方法，设置当前设备自定义设备名称；
-           - 新增 `EMOptions#getCustomDeviceName` 方法，获取当前设备自定义设备名称。
-- [IM SDK] 新增 `EMConnectionListener#onLogout(int, String)` 回调，其中包含将当前设备踢下线的设备名称。
-           作废 `EMConnectionListener#onLogout(int)` 回调。
+    - 新增 `EMOptions#setCustomOSPlatform` 方法，设置自定义平台代号；
+    - 新增 `EMOptions#getCustomOSPlatform` 方法，设置当前设备的自定义设备平台；
+    - 新增 `EMOptions#setCustomDeviceName` 方法，设置当前设备自定义设备名称；
+    - 新增 `EMOptions#getCustomDeviceName` 方法，获取当前设备自定义设备名称。
+- [IM SDK] 新增 `EMConnectionListener#onLogout(int, String)` 回调，其中包含将当前设备踢下线的设备名称。<br/>
+           作废 `EMConnectionListener#onLogout(int)` 回调。<br/>
 - [IM SDK] 新增 `EMChatRoomManager#leaveChatRoom(String, EMCallBack)`，退出聊天室的成员会收到退出成功或失败的回调；
 - [IM SDK] 新增以下方法支持用户 token：
-           - `EMClient#getLoggedInDevicesFromServerWithToken`：获取指定账号下登录的在线设备列表；
-           - `EMClient#kickDeviceWithToken`：将指定账号登录的指定设备踢下线；
-           - `EMClient#kickAllDevicesWithToken`：将指定账号登录的所有设备都踢下线。
+    - `EMClient#getLoggedInDevicesFromServerWithToken`：获取指定账号下登录的在线设备列表；
+    - `EMClient#kickDeviceWithToken`：将指定账号登录的指定设备踢下线；
+    - `EMClient#kickAllDevicesWithToken`：将指定账号登录的所有设备都踢下线。
 - [IM UIKit] 新增消息引用功能。
 - [IM UIKit] 新增修改消息功能。
 - [IM APP] 新增消息中 URL 的预览功能。
