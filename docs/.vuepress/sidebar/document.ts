@@ -51,6 +51,7 @@ const documentSidebar = [
           { text: '管理会话和消息', link: 'message_manage.html', only: ['react-native'] },
           { text: '管理服务端消息', link: 'message_retrieve.html', except: ['react-native'] },
           { text: '管理消息回执', link: 'message_receipt.html' },
+          { text: '修改消息', link: 'message_modify.html' },
           { text: '翻译', link: 'message_translation.html' },
         ]
       },
@@ -140,6 +141,7 @@ const documentSidebar = [
           { text: '发送和接收消息', link: 'message_send_receive.html' },
           { text: '管理服务端消息', link: 'message_retrieve.html' },
           { text: '管理消息回执', link: 'message_receipt.html' },
+          { text: '修改消息', link: 'message_modify.html' },
           { text: '翻译', link: 'message_translation.html' },
         ]
       },

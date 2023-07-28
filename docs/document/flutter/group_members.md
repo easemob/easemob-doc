@@ -9,6 +9,7 @@
 环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupEventHandler` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 群组加人、踢人
+- 管理群成员的自定义属性
 - 管理群主及群管理员
 - 管理群组黑名单
 - 管理群组禁言列表
@@ -53,6 +54,79 @@ try {
 try {
   await EMClient.getInstance.groupManager.removeMembers(groupId, members);
 } on EMError catch (e) {
+}
+```
+
+### 管理群成员的自定义属性
+
+群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
+
+- 单个群成员的自定义属性总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节，否则会报错。
+
+- 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
+
+#### 设置群成员自定义属性
+
+你可以调用 `EMGroupManager#setMemberAttributes` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。
+
+设置后，群内其他成员会收到 `EMGroupEventHandler#onAttributesChangedOfGroupMember` 事件。
+
+示例代码如下：
+
+```dart
+Map<String, String> attributes = {"key": "value"};
+try {
+  await EMClient.getInstance.groupManager.setMemberAttributes(
+    groupId: groupId,
+    attributes: attributes,
+    userId: userId,
+  );
+  debugPrint("set member attributes succeed");
+} on EMError catch (e) {
+  debugPrint("set member attributes failed, code: ${e.code}");
+}
+```
+
+#### 获取单个群成员的所有自定义属性
+
+你可以调用 `EMGroupManager#fetchMemberAttributes` 方法获取单个群成员的所有自定义属性。
+
+示例代码如下：
+
+```dart
+try {
+  Map<String, String> attributes =
+      await EMClient.getInstance.groupManager.fetchMemberAttributes(
+    groupId: groupId,
+    userId: userId,
+  );
+} on EMError catch (e) {
+  debugPrint("fetch member attributes failed, e: ${e.code} , ${e.description}");
+}
+```
+
+#### 根据属性 key 获取多个群成员的自定义属性
+
+你可调用 `EMGroupManager#fetchMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
+
+:::notice
+每次最多可获取 10 个群成员的自定义属性。
+:::
+
+示例代码如下：
+
+```dart
+// keys：要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
+try {
+  Map<String, Map<String, String>> usersAttributeMaps =
+      await EMClient.getInstance.groupManager.fetchMembersAttributes(
+    groupId: groupId,
+    userIds: userIds,
+    keys: keys,
+  );
+} on EMError catch (e) {
+  debugPrint(
+      "fetch members attributes failed, e: ${e.code} , ${e.description}");
 }
 ```
 
