@@ -728,7 +728,7 @@ emedia.mgr.switchMobileCamera(confrId).then(function(){
 #### **6. 音视频网络状态监听**
 
 :::tip
-建议进入会议之前绑定网络状态监听函数**
+建议进入会议之前绑定网络状态监听函数
 :::
 ```
 //监听弱网状态

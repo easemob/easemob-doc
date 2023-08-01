@@ -660,7 +660,6 @@ EMClient.getInstance().callManager().setWaterMark(watermark);
 | getConnectType    | 连接类型               |
 | isRecordOnServer  | 是否启用服务器录制     |
 | getServerRecordId | 获取录制ID             |
-| getServerRecordId | 获取录制ID             |
 | getExt            | 获取消息扩展           |
 
 ### EMVideoCallHelper

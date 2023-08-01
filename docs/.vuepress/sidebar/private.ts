@@ -57,7 +57,7 @@ export const PRIVATE_MEDIA_SIDEBAR = [
       { text: 'PC集成', link: 'conference_pcdesktop.html' },
     ]
   } ,
-  {
+  /*{
     text: '互动白板', 
     children: [
       { text: '功能简介', link: 'whiteboard_introduction.html' },
@@ -67,14 +67,14 @@ export const PRIVATE_MEDIA_SIDEBAR = [
       { text: '微信小程序集成', link: 'whiteboard_vxmini.html' },
       { text: 'PC集成', link: 'whiteboard_pcdesktop.html' },
     ]
-  } ,
+  } ,*/
   {
     text: 'REST接口', 
     children: [
       { text: '功能简介', link: 'rest_introduction.html' },
       { text: '会议管理', link: 'rest_manage.html' },
       { text: '录制及提取', link: 'rest_record.html' },
-      { text: '互动白板', link: 'rest_whiteboard.html' },
+      /*{ text: '互动白板', link: 'rest_whiteboard.html' },*/
     ]
   } ,
   {
