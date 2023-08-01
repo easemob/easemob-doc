@@ -51,7 +51,7 @@
 <td>桌面端</td><td><a href="https://github.com/easemob/videocall-web">下载代码</a></td><td><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/rtcdemo/%E7%8E%AF%E4%BF%A1%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE.2.0.1.win.setup.exe">体验Windows Demo</a><br><br><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/rtcdemo/%E7%8E%AF%E4%BF%A1%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE.2.0.1.mac.dmg">体验MAC Demo</a></td>
 </tr>
 
-<tr>
+<!-- <tr>
 <td rowspan="3">互动白板</td><td rowspan="3">互动白板可以进行多人实时互动，支持画笔、文本、图形、文档上传等功能</td><td>Android</td><td><a href="https://github.com/easemob/whiteboard_demo_android">下载代码</a></td><td>\</td>
 </tr>
 <tr>
@@ -61,11 +61,13 @@
 <td>Web</td><td><a href="https://github.com/easemob/whiteboard_demo_web">下载代码</a></td><td>\</td>
 </tr>
 
+
 <tr>
 <td rowspan="2">语音连麦聊天室</td><td rowspan="2">支持创建房间，上下麦，送礼物，声音美声，空间音效，表情图片文字聊天等</td><td>Android</td><td><a href="https://github.com/easemob/liveroom-android">下载代码</a></td><td></td>
 </tr>
 <tr>
 <td>iOS</td><td><a href="https://github.com/easemob/liveroom-ios">下载代码</a></td><td>\</td>
 </tr>
+-->
 </tbody>
 </table>

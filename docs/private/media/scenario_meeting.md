@@ -15,7 +15,6 @@
 - 多人音频通话
 - 多人视频通话
 - 共享桌面
-- 互动白板
 - 外部视频源输入
 - 美颜
 - 服务器端录制及下载
@@ -24,6 +23,7 @@
 - 会议室的管理：创建会议、删除会议、获取指定会议室详情、加入会议室、退出会议室
 - 会议室的人员管理：获取会议室参会人名列表、踢人，设置观众为主播，设置主播为观众等
 - 多端支持：Android、iOS、Web、PC、小程序
+<!--- 互动白板 -->
 :::notice
 在多人视频会议场景下用到的某些功能需要在特定的浏览器、版本或插件下才能使用。<br>所以为了简化用户体验，不推荐直接使用浏览器，**建议引导用户使用本地应用（如PC端应用）**。
 
@@ -54,7 +54,7 @@ web端: [聊天室管理](http://docs-im-beta.easemob.com/document/web/room_over
 PC端: [聊天室管理](https://docs-im.easemob.com/im/pc/basics/chatroom)
 
 
-3. 如果需要互动白板高级功能，请详见文档：
+<!--3. 如果需要互动白板高级功能，请详见文档：
 
 [互动白板简介](whiteboard_introduction)
 
@@ -66,7 +66,7 @@ PC端: [聊天室管理](https://docs-im.easemob.com/im/pc/basics/chatroom)
 
 [微信小程序集成](whiteboard_vxmini)
 
-[PC桌面集成](whiteboard_pcdesktop)
+[PC桌面集成](whiteboard_pcdesktop)-->
 
 ## 客户端应用源码
 
