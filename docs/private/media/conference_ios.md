@@ -1560,7 +1560,7 @@ aMemberName 是appkey拼接环信id，例如：easemob-demo#chatdemoui_lulu1
 | [requestTobeAdmin:adminId:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#af2e99d266d5d3f67490903b17818b17c) | 主播申请成为管理员，                            |
 | [responseReqSpeaker:memId:result:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a097c52f9ea833b9ac289290247c25860) | 管理员同意/拒绝观众的上麦申请，管理员调用       |
 | [responseReqAdmin:memId:result:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a34ff57a1a78c507d5118249e4863b8ff) | 管理员同意/拒绝主播的申请管理员请求，管理员调用 |
-| [setMuteMember:memId:mute:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a6432c2f2a68760b1cad2dabb6e9cba6d) | 将指定成员静音/解除静音，管理员调用             |
+| [setMuteMember:memId: mute:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a6432c2f2a68760b1cad2dabb6e9cba6d) | 将指定成员静音/解除静音，管理员调用             |
 | [updateConferenceWithSwitchCamera:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a28bd7490cb8e238a07a5aec62d164cea) | 切换前后摄像头                                  |
 | [updateConference:isMute:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#abc3d1658875a99bdd1f5f1158a74e789) | 设置是否静音                                    |
 | [updateConference:enableVideo:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a478c1c8b08758a55fdea520d6772ae9e) | 设置视频是否可用                                |
@@ -1569,11 +1569,11 @@ aMemberName 是appkey拼接环信id，例如：easemob-demo#chatdemoui_lulu1
 | [inputVideoPixelBuffer:sampleBufferTime:rotation:conference:publishedStreamId:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a544a757e0f2a16c9b265243c784f1fd4) | 输入自定义本地视频数据                          |
 | [setConferenceAttribute:value:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#ae98d762cb6aed35de22da40779455fcb) | 设置会议属性，                                  |
 | [deleteAttributeWithKey:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a226dbe5816201a32fa3850dd1bb3c991) | 删除频道属性                                    |
-| [startAudioMixing:loop:sendMix:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#aa7e7d1a088f746f98b796d94b3eb631d) | 开启本地伴音功能                                |
+| [startAudioMixing: loop:sendMix:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#aa7e7d1a088f746f98b796d94b3eb631d) | 开启本地伴音功能                                |
 | [stopAudioMixing](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a703c15925f723cc3c4ec59f347226a91) | 关闭本地混音功能                                |
 | [adjustAudioMixingVolume:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a9b9a168a7e160ff08b5ccf13d2b8ab2f) | 设置伴奏音量                                    |
-| [muteRemoteAudio:mute:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a28f9297ad2411c6aa9bdbb291bb8df26) | mute远端音频                                    |
-| [muteRemoteVideo:mute:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a870a36303635529c953194b9d240521b) | mute远端视频                                    |
+| [muteRemoteAudio: mute:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a28f9297ad2411c6aa9bdbb291bb8df26) | mute远端音频                                    |
+| [muteRemoteVideo: mute:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a870a36303635529c953194b9d240521b) | mute远端视频                                    |
 | [enableStatistics:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#aa57d7c7aaec58f84fb0f81b38f36a2e4) | 启用统计                                        |
 | [muteAll:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a0a7340e4fe935143ba0ff529858ad295) | 全体静音                                        |
 | [inputCustomAudioData:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_conference_manager-p.html#a2fb9faf9d767ed2e58315c1db354df37) | 输入自定义外部音频数据                          |
@@ -1602,7 +1602,7 @@ aMemberName 是appkey拼接环信id，例如：easemob-demo#chatdemoui_lulu1
 | [conferenceAttributeUpdated:attributes:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_conference_manager_delegate-p.html#a0917065a18ca3ce9433d6677288830c3) | 会议属性变更                                                 |
 | [conferenceReqSpeaker:memId:nickName:memName:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_conference_manager_delegate-p.html#afca1af08d628fd0be0ddd1bed1bf9138) | 收到观众申请主播的请求，只有管理员会触发                     |
 | [conferenceReqAdmin:memId:nickName:memName:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_conference_manager_delegate-p.html#ad90e5d598c1b8cb57a02cd6b81fc929e) | 收到主播申请管理员的请求，只有管理员会触发                   |
-| [conferenceDidUpdated:mute:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_conference_manager_delegate-p.html#a2b09dd5dbb6144cc561027378bc3f1e7) | 收到静音/解除静音的回调                                      |
+| [conferenceDidUpdated: mute:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_conference_manager_delegate-p.html#a2b09dd5dbb6144cc561027378bc3f1e7) | 收到静音/解除静音的回调                                      |
 | [conferenceReqSpeakerRefused:adminId:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_conference_manager_delegate-p.html#ae598e6c668121780573ce2402be3d745) | 收到申请主播请求被拒绝的回调                                 |
 | [conferenceReqAdminRefused:adminId:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_conference_manager_delegate-p.html#aa285cef35bc14db40ef17be9245798ed) | 收到申请管理员请求被拒绝的回调                               |
 | [conferenceDidUpdated:liveCfg:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_conference_manager_delegate-p.html#acccb25d9f4eef388781be85cfeefb5ff) | 会议开启cdn推流或自定义录制，收到LiveCfg的回调，只有管理员能收到 |

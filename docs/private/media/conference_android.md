@@ -1933,7 +1933,6 @@ EMConferenceListener#onPassiveLeave(final int error, final String message)
 | [updateLiveLayout](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a08f1d1f058cb40a6bf745dfa4e0ab1e1) | 更新CDN推流布局                                  |
 | [stopLiveStream](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a6f154980142e31629ca5786d756f38fa) | 停止CDN推流                                      |
 | [addLiveStream](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a1682b222486d14ffd77da06a6c111c88) | 增加CDN旁路推流                                  |
-| [stopLiveStream](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a6f154980142e31629ca5786d756f38fa) | 停止CDN推流                                      |
 | [enableRecordLivestream](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#abf0e222c3ec094c9dea7ec9c7b89a1a1) | 开启或停止录制CDN的流                            |
 | [joinConferenceWithTicket](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#aab4ae14065e192f9a1f284443c911149) | 通过Ticket加入会议                               |
 | [inviteUserToJoinConference](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a46185b19b85ee8366c0f22ef36a3e05e) | 邀请其他人加入会议                               |
@@ -1970,17 +1969,17 @@ EMConferenceListener#onPassiveLeave(final int error, final String message)
 | [getSubscribedStreamMap](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a8332e86b981056d930dde2965c047274) | 获取当前会议已订阅 Stream                        |
 | [setLocalVideoViewMirror](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#acc62694d0c18068081209f6d987b0db6) | 设置本地视频view镜像                             |
 | [setRotation](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#ad29c3544ec98b0ac4596d7d9abe35df9) | 设置视频会议中Camera采集到的VideoFrame的rotation |
-| [createWhiteboardRoom](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#ad386890a370780b0dd4f80a1406a65b7) | 创建白板房间                                     |
-| [destroyWhiteboardRoom](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a887013e116d229c48b45ce12177051f4) | 销毁白板房间                                     |
-| [joinWhiteboardRoomWithId](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a4aaf75f7416029bca4c3dc98bcbb81b9) | 通过白板id加入房间                               |
-| [joinWhiteboardRoomWithName](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a39704e3e68b7786261d4de0b3005409f) | 通过白板名称加入房间                             |
-| [updateWhiteboardRoomWithRoomId](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#ae005fa11c9f9087f6582fff84340f363) | 通过白板id修改白板操作权限                       |
 | [applyTobeSpeaker](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a59d53f3c392714f201486d788f38cf07) | 发送上麦请求                                     |
 | [handleSpeakerApplication](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#affaa83f9c32e5a99caa7ec0627ddfcb2) | 管理员处理上麦请求                               |
 | [applyTobeAdmin](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a5240c7d53051f0d14b27f0a59a2fc945) | 发送申请管理员请求                               |
 | [handleAdminApplication](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a5240c7d53051f0d14b27f0a59a2fc945:~:text=hyphenate.chat.EMConferenceManager.-,handleAdminApplication) | 管理员处理申请管理员请求                         |
 | [muteMember](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a5176c44768bec0b59578315281dae6ad) | 发送静音命令                                     |
 | [unmuteMember](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a5176c44768bec0b59578315281dae6ad:~:text=hyphenate.chat.EMConferenceManager.-,unmuteMember) | 发送解除静音命令                                 |
+<!-- | [createWhiteboardRoom](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#ad386890a370780b0dd4f80a1406a65b7) | 创建白板房间                                     |
+| [destroyWhiteboardRoom](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a887013e116d229c48b45ce12177051f4) | 销毁白板房间                                     |
+| [joinWhiteboardRoomWithId](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a4aaf75f7416029bca4c3dc98bcbb81b9) | 通过白板id加入房间                               |
+| [joinWhiteboardRoomWithName](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a39704e3e68b7786261d4de0b3005409f) | 通过白板名称加入房间                             |
+| [updateWhiteboardRoomWithRoomId](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#ae005fa11c9f9087f6582fff84340f363) | 通过白板id修改白板操作权限                       | -->
 
 ### EMConference
 

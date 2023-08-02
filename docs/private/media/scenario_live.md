@@ -69,7 +69,7 @@ web端: [聊天室管理](http://docs-im-beta.easemob.com/document/web/room_over
 PC端: [聊天室管理](https://docs-im.easemob.com/im/pc/basics/chatroom)
 
 
-如果需要互动白板高级功能，请详见文档：
+<!--如果需要互动白板高级功能，请详见文档：
 
 [互动白板简介](whiteboard_introduction)
 
@@ -81,4 +81,4 @@ PC端: [聊天室管理](https://docs-im.easemob.com/im/pc/basics/chatroom)
 
 [微信小程序集成](whiteboard_vxmini)
 
-[PC桌面集成](whiteboard_pcdesktop)
+[PC桌面集成](whiteboard_pcdesktop)-->

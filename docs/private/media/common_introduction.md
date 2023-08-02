@@ -23,7 +23,7 @@
 
 ![img](@static/images/privitization/em-rtcsdk-architecture.png)
 
-环信音视频SDK提供3套API体系，[1对1通话](one2one_introduction)，[多人通话](conference_introduction)，[互动白板](whiteboard_introduction)，以上API能满足客户的绝大多数使用场景。
+环信音视频SDK提供3套API体系，[1对1通话](one2one_introduction)，[多人通话](conference_introduction)，<!-- [互动白板](whiteboard_introduction)，-->以上API能满足客户的绝大多数使用场景。
 
 ## 典型场景
 
