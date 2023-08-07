@@ -11,10 +11,10 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 1.0.5 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-- 已在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 开通翻译功能。
-- 该功能由 Microsoft Azure Translation API 提供，因此开始前请确保你了解该功能支持的目标语言。详见 [翻译语言支持](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/language-support)。
+1. 完成 `1.0.5 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+3. 已在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 开通翻译功能。
+4. 该功能由 Microsoft Azure Translation API 提供，因此开始前请确保你了解该功能支持的目标语言。详见 [翻译语言支持](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/language-support)。
 
 ## 技术原理
 
@@ -33,19 +33,19 @@ SDK 支持你通过调用 API 在项目中实现如下功能：
 ```csharp
 // 获取翻译服务支持的语言。
 SDKClient.Instance.ChatManager.FetchSupportLanguages(new ValueCallBack<List<SupportLanguage>>(
-    onSuccess: (list) =>
-    {
-        Debug.Log($"FetchSupportLanguages found total: {list.Count}");
-        foreach (var lang in list)
-        {
-            Debug.Log($"code: {lang.LanguageCode}, name:{lang.LanguageName}, nativename:{lang.LanguageNativeName}");
-        }
-    },
-    onError: (code, desc) =>
-    {
-        Debug.Log($"FetchSupportLanguages failed, code:{code}, desc:{desc}");
-    }
-));
+     onSuccess: (list) =>
+     {
+         Debug.Log($"FetchSupportLanguages found total: {list.Count}");
+         foreach (var lang in list)
+         {
+             Debug.Log($"code: {lang.LanguageCode}, name:{lang.LanguageName}, nativename:{lang.LanguageNativeName}");
+         }
+     },
+     onError: (code, desc) =>
+     {
+         Debug.Log($"FetchSupportLanguages failed, code:{code}, desc:{desc}");
+     }
+    ));
 ```
 
 ### 按需翻译
@@ -54,20 +54,20 @@ SDKClient.Instance.ChatManager.FetchSupportLanguages(new ValueCallBack<List<Supp
 
 ```csharp
 SDKClient.Instance.ChatManager.TranslateMessage(msg, targetLanguages, new ValueCallBack<Message>(
-    onSuccess: (dmsg) =>
-    {
-        Debug.Log($"TranslateMessage success.");
-        TextBody tb = (TextBody)dmsg.Body;
-        foreach(var it in tb.Translations)
-        {
-            Debug.Log($"Translate, lang:{it.Key}, result:{it.Value}");
-        }
+ onSuccess: (dmsg) =>
+ {
+     Debug.Log($"TranslateMessage success.");
+     TextBody tb = (TextBody)dmsg.Body;
+     foreach(var it in tb.Translations)
+     {
+         Debug.Log($"Translate, lang:{it.Key}, result:{it.Value}");
+     }
 
-    },
-    onError: (code, desc) =>
-    {
-        Debug.Log($"TranslateMessage failed, code:{code}, desc:{desc}");
-    }
+ },
+ onError: (code, desc) =>
+ {
+     Debug.Log($"TranslateMessage failed, code:{code}, desc:{desc}");
+ }
 ));
 ```
 
@@ -89,6 +89,6 @@ tb.TargetLanguages = languageList;
 TextBody tb = (TextBody)msg.Body;
 foreach(var it in tb.Translations)
 {
-    Debug.Log($"Translate, lang:{it.Key}, result:{it.Value}");
+  Debug.Log($"Translate, lang:{it.Key}, result:{it.Value}");
 }
 ```

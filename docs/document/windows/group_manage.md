@@ -1,4 +1,4 @@
-# 创建和管理群组及监听群组事件
+# 创建和管理群组及监听器介绍
 
 <Toc />
 
@@ -22,8 +22,8 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
 - 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
@@ -35,19 +35,21 @@
 在创建群组前，你需要设置群组类型 (`GroupStyle`) 和进群邀请是否需要对方同意 (`inviteNeedConfirm`)。
 
 1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型 (`GroupStyle`) ，具体设置如下：
-    - `PrivateOnlyOwnerInvite` —— 私有群，只有群主和管理员可以邀请人进群；
-    - `PrivateMemberCanInvite` —— 私有群，所有群成员均可以邀请人进群；
-    - `PublicJoinNeedApproval` —— 公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
-    - `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理同意。
-2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
-    - 进群邀请需要用户确认 (`option.InviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `AutoAcceptGroupInvitation` 设置，处理逻辑如下：
-        - 用户设置自动接受群组邀请 (`AutoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调。
-        - 用户设置手动确认群组邀请 (`AutoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `IGroupManagerDelegate#OnInvitationReceivedFromGroup` 回调，并选择同意或拒绝入群邀请：
-            - 用户同意入群邀请后，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
-            - 用户拒绝入群邀请后，邀请人收到 `IGroupManagerDelegate#OnInvitationDeclinedFromGroup` 回调。
-    - 进群邀请无需用户确认 (`option.InviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，不论用户的 `IsAutoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调。
 
-用户可以调用 `CreateGroup` 方法创建群组，并通过 `GroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
+   - `PrivateOnlyOwnerInvite` —— 私有群，只有群主和管理员可以邀请人进群；
+   - `PrivateMemberCanInvite` —— 私有群，所有群成员均可以邀请人进群；
+   - `PublicJoinNeedApproval` —— 公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
+   - `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理同意。
+
+2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
+   - 进群邀请需要用户确认 (`option.InviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `AutoAcceptGroupInvitation` 设置，处理逻辑如下：
+     - 用户设置自动接受群组邀请 (`AutoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调。
+     - 用户设置手动确认群组邀请 (`AutoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `IGroupManagerDelegate#OnInvitationReceivedFromGroup` 回调，并选择同意或拒绝入群邀请：
+       - 用户同意入群邀请后，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
+       - 用户拒绝入群邀请后，邀请人收到 `IGroupManagerDelegate#OnInvitationDeclinedFromGroup` 回调。
+   - 进群邀请无需用户确认 (`option.InviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无论用户的 `IsAutoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调。
+
+用户可以调用 `CreateGroup` 方法创建群组，并通过 `GroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
 示例代码如下：
 
@@ -55,10 +57,10 @@
 GroupOptions option = new GroupOptions(GroupStyle.PrivateMemberCanInvite);
 option.MaxCount = 100;
 SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, callback:new ValueCallBack<Group>(
-    onSuccess: (group) => {
-    },
-    onError:(code, error) => {
-    }
+  onSuccess: (group) => {
+  },
+  onError:(code, error) => {
+  }
 ));
 ```
 
@@ -68,8 +70,8 @@ SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, ca
 
 - 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
 - 当群组类型为 `PublicJoinNeedApproval` 时，用户可以申请进群，群主和群管理员收到 `IGroupManagerDelegate#OnRequestToJoinReceivedFromGroup` 回调，并选择同意或拒绝入群申请：
-    - 群主和群管理员同意入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinAcceptedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
-    - 群主和群管理员拒绝入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinDeclinedFromGroup` 回调。
+  - 群主和群管理员同意入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinAcceptedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
+  - 群主和群管理员拒绝入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinDeclinedFromGroup` 回调。
 
 :::notice
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
@@ -108,7 +110,6 @@ SDKClient.Instance.GroupManager.JoinPublicGroup(groupId, new CallBack(
 
 仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `OnDestroyedFromGroup` 回调并被踢出群组。
 
-
 :::notice
 该操作只有群主才能进行，是危险操作，解散群组后，将删除本地数据库及内存中的群相关信息及群会话。
 :::
@@ -128,7 +129,7 @@ SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
 
 ### 退出群组
 
-群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 `DestroyGroup` 方法解散群组。
+群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [DestroyGroup](https://docs-im.easemob.com/ccim/unity/group2#解散群组) 方法解散群组。
 
 示例代码如下：
 
@@ -145,9 +146,9 @@ SDKClient.Instance.GroupManager.LeaveGroup(groupId, new CallBack(
 
 ### 获取群组详情
 
-群成员可以调用 `GetGroupWithId` 方法从内存获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
+群成员可以调用 `GetGroupWithId` 方法从内存获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
 
-群成员也可以调用 `GetGroupSpecificationFromServer` 方法从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用等信息，不包括群成员列表。
+群成员也可以调用 `GetGroupSpecificationFromServer` 方法从服务器获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用等信息，不包括群成员列表。
 
 示例代码如下：
 
@@ -184,9 +185,7 @@ SDKClient.Instance.GroupManager.GetGroupMemberListFromServer(groupId, pageSize, 
 
 ### 获取群组列表
 
-用户可以调用 `FetchJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。
-
-示例代码如下：
+用户可以调用 `FetchJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：
 
 ```csharp
 SDKClient.Instance.GroupManager.FetchJoinedGroupsFromServer(callback: new ValueCallBack<List<Group>>(
@@ -198,9 +197,7 @@ SDKClient.Instance.GroupManager.FetchJoinedGroupsFromServer(callback: new ValueC
 ));
 ```
 
-用户可以调用 `GetJoinedGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。
-
-示例代码如下：
+用户可以调用 `GetJoinedGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
 
 ```csharp
 List<Group> groupList = SDKClient.Instance.GroupManager.GetJoinedGroups();
@@ -251,7 +248,7 @@ SDKClient.Instance.GroupManager.UnBlockGroup(groupId, new CallBack(
 ));
 ```
 
-#### 检查自己是否已经屏蔽群消息
+#### 检查当前用户是否已经屏蔽群消息
 
 群成员可以调用 `IGroupManager#GetGroupSpecificationFromServer` 方法并通过 `Group#MessageBlocked` 字段检查自己是否屏蔽了群消息。
 
@@ -291,7 +288,7 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     {
     }
     // 当前用户的入群申请被接受。申请人会收到该回调。例如，用户 B 接受用户 A 的入群申请后，用户 A 会收到该回调。
-    public void OnRequestToJoinAcceptedFromGroup(string groupId, string groupName, string accepter))
+    public void OnRequestToJoinAcceptedFromGroup(string groupId, string groupName, string accepter)
     {
     }
     // 当前用户的入群申请被拒绝。申请人会收到该回调。例如，用户 B 拒绝用户 A 的入群申请后，用户 A 会收到该回调。
@@ -367,7 +364,6 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     public void OnRemoveAllowListMembersFromGroup(string groupId, List<string> whiteList)
     {
     }
-
     // 群成员一键禁言状态变更。群组所有成员（除操作者外）会收到该回调。
     public void OnAllMemberMuteChangedFromGroup(string groupId, bool isAllMuted)
     {

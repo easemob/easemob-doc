@@ -30,7 +30,7 @@
 
 ### 群组加人
 
-根据创建群组时的群组类型 (GroupStyle) 和进群邀请是否需要对方同意 (inviteNeedConfirm) 设置，群组加人的处理逻辑有差别。具体规则可以参考 创建群组。
+根据创建群组时的群组类型 (`GroupStyle`) 和进群邀请是否需要对方同意 (`inviteNeedConfirm`) 设置，群组加人的处理逻辑有差别。具体规则可以参考 [创建群组](group_manage.html#创建群组)。
 
 示例代码如下：
 
@@ -213,14 +213,16 @@ SDKClient.Instance.GroupManager.UnMuteGroupMembers(groupId, members, new CallBac
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: new ValueCallBack<List<string>>(
-    onSuccess: (list) => {
+SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: new ValueCallBack<Dictionary<string, long>>(
+    onSuccess: (dict) => {
     },
     onError: (code, desc) =>
     {
     }
 ));
 ```
+
+### 开启和关闭群组全员禁言
 
 #### 开启群组全员禁言
 
