@@ -8,55 +8,214 @@
 
 环信即时通讯 IM SDK 支持在同一账号所有已登录设备上同步在线和离线消息以及对应的回执和已读状态、接收离线推送通知、同步好友、群组以及聊天室相关的操作。
 
-默认最多支持 4 个设备同时在线，具体见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。
+多端登录时，即时通讯 IM 所有各端默认共支持 4 个设备同时在线。单端登录时默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。
+
+你可以在环信控制台的**功能配置** > **功能配置总览**页面的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置设置各端设备的数量：
+
+![img](@static/images/common/multidevice_device_count.png)
 
 ## 技术原理
 
-用户在端上初始化 SDK 时会生成设备识别 ID，用于多设备登录和推送。服务器会将新消息发送到已登录的设备。环信即时通讯 IM SDK 提供如下方法实现多个设备上的互动功能。
+用户在端上初始化 SDK 时会生成设备识别 ID，用于多设备登录和推送。服务器会将新消息发送到已登录的设备。环信即时通讯 IM SDK 提供以下多设备场景功能：
 
-- `GetSelfIdsOnOtherPlatform` 获取其他登录设备的 ID；
-- `IMultiDeviceDelegate` 获取其他设备上进行的好友或者群组操作。
+- 获取当前用户的其他已登录设备的登录 ID 列表并向这些设备发送消息；
+- 获取指定账号的在线登录设备列表；
+- 设置登录设备的名称；
+- 设置登录设备的平台；
+- 强制指定账号从单个设备下线；
+- 强制指定账号从所有设备下线；
+- 获取其他设备的好友或者群组操作。
 
 ## 前提条件
 
-开始前，请确保满足以下条件：
-
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 了解环信即时通讯 IM 的套餐包，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+开始前，确保将 SDK 初始化，连接到服务器。详见[快速开始](quickstart.html)。
+设置登录设备的自定义名称和平台需在 SDK 初始化时中完成。
 
 ## 实现方法
 
-### 获取其他登录设备的 ID 和对其他设备发送消息
+### 获取指定账号的在线登录设备列表
 
-你可以调用 `GetSelfIdsOnOtherPlatform` 方法获取其他登录设备的 ID。你在当前设备上发送消息时，其他设备通过这些 ID 接收消息，实现不同设备之间的消息传输。
+你可以调用 `GetLoggedInDevicesFromServer` 或 `GetLoggedInDevicesFromServerWithToken` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。
 
 ```csharp
-SDKClient.Instance.ContactManager.GetSelfIdsOnOtherPlatform(new ValueCallBack<List<string>>(
-    // GetSelfIdsOnOtherPlatform 返回成功，list 类型为 List<string>。
-    onSuccess: (list) => {
-        //选择一个 设备 ID 作为发送目标。
-        string toChatUsername = list[0];
+SDKClient.Instance.GetLoggedInDevicesFromServer(username, password,
+	callback: new ValueCallBack<List<DeviceInfo>>(
 
-        //创建一条文本消息，content 为消息文本，`toChatUsername` 为接收方的用户 ID。
-        Message msg = Message.CreateTextSendMessage(toChatUsername, content);
+    onSuccess: (list) =>
+    {
 
-        //发送消息。
-        SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
-        onSuccess: () => {
-        },
-        onError:(code, desc) => {
-            }            
-        ));
     },
 
-    // `GetSelfIdsOnOtherPlatform` 返回失败。
-    onError: (code, desc) => {
+    onError: (code, desc) =>
+    {
+
     }
-));
+   )
+);
+
+SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
+	callback: new ValueCallBack<List<DeviceInfo>>(
+
+    onSuccess: (list) =>
+    {
+
+    },
+
+    onError: (code, desc) =>
+    {
+
+    }
+  )
+);
 ```
 
-### 获取其他设备上进行的好友或者群组操作
+调用该方法后，在 SDK 返回的信息中，`DeviceInfo` 中的 `DeviceName` 属性的含义如下：
+- 若指定账号自定义了设备名称，该属性表示自定义设备名称。
+- 若未自定义设备的名称，该属性默认为设备型号。
+
+
+### 设置登录设备的名称
+
+即时通讯 IM 自 1.2.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
+
+初始化 SDK 时，你可以调用 `Options#CustomDeviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `IConnectionDelegate#OnLoggedOtherDevice` 回调会包含导致该设备被踢下线的自定义设备名称。
+
+```csharp
+// 设置设备名称并进行初始化
+Options options = new Options("YouAppKey");
+ooptions.CustomDeviceName = "MyDeviceName";
+SDKClient.Instance.InitWithOptions(options);
+
+// 定义监听器
+public class ConnectionDelegate : IConnectionDelegate {
+
+    public void OnLoggedOtherDevice(string deviceName)
+    {
+
+    }
+  }
+
+// 注册监听器。
+ChatManagerDelegate adelegate = new ChatManagerDelegate();
+SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
+
+// 不使用监听器时需要移除监听器。
+SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
+```
+
+### 设置登录设备的平台
+
+即时通讯 IM 自 1.2.0 版本开始支持自定义设置登录设备的平台，方便用户精细化控制同一平台的登录设备数量及平台间互踢等行为。
+
+你可以按照以下步骤设置登录设备所属的平台：
+
+1. 在环信控制台的**功能配置** > **功能配置总览**页面，点击**基础功能**页签，然后点击**多端多设备在线**对应的**设置**。在弹出的对话框中点击 **新增自定义平台**，在**添加自定义平台**对话框中设置**设备平台**和**设备数量**。
+
+**设备平台**的取值范围为 [1,100]，**设备数量**的取值范围为 [0,4]。
+
+![img](@static/images/common/multidevice_device_platform.png)
+
+2. 初始化 SDK 时，调用 `Options#CustomOSType` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
+
+```csharp
+Options options = new Options("YouAppKey");
+ooptions.CustomOSType = 1;
+SDKClient.Instance.InitWithOptions(options);
+```
+
+
+### 强制指定账号从单个设备下线
+
+你可以调用 `KickDevice` 或 `KickDeviceWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。调用这两种方法前，你需要首先通过 `SDKClient#GetLoggedInDevicesFromServer` 和 `DeviceInfo#Resource` 方法获取设备 ID。
+
+```csharp
+// username：账户名称，password：账户密码。
+SDKClient.Instance.GetLoggedInDevicesFromServer(username, password,
+	callback: new ValueCallBack<List<DeviceInfo>>(
+
+    onSuccess: (list) =>
+    {
+      // 此处从DeviceInfo列表中获取各个Resource
+    },
+
+    onError: (code, desc) =>
+    {
+
+    }
+  )
+);
+
+// username：账户名称，password：账户密码, resource：设备 ID。
+SDKClient.Instance.KickDevice(username, password, resource,
+	callback: new CallBack(
+
+    onSuccess: () =>
+    {
+
+    },
+
+    onError: (code, desc) =>
+    {
+
+    }
+  )
+);
+
+/*
+SDKClient.Instance.KickDeviceWithToken(username, token, resource,
+	callback: new CallBack(
+
+    onSuccess: () =>
+    {
+
+    },
+
+    onError: (code, desc) =>
+    {
+
+    }
+  )
+);
+*/
+```
+
+### 强制指定账号从所有设备下线
+
+你可以调用 `KickAllDevices` 或 `KickAllDevicesWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备踢下线。
+
+```csharp
+SDKClient.Instance.KickAllDevices(username, password,
+	callback: new CallBack(
+
+    onSuccess: () =>
+    {
+
+    },
+
+    onError: (code, desc) =>
+    {
+
+    }
+  )
+);
+
+SDKClient.Instance.KickAllDevicesWithToken(username, token,
+  callback: new CallBack(
+
+    onSuccess: () =>
+    {
+
+    },
+
+    onError: (code, desc) =>
+    {
+
+    }
+   )
+);
+```
+
+### 获取其他设备的好友或者群组操作
 
 账号 A 同时在设备 A 和设备 B 上登录，账号 A 在设备 A 上进行一些操作，设备 B 上会收到这些操作对应的通知。
 
@@ -65,7 +224,7 @@ SDKClient.Instance.ContactManager.GetSelfIdsOnOtherPlatform(new ValueCallBack<Li
 ```csharp
 //继承并实现 IMultiDeviceDelegate。
 public class MultiDeviceDelegate : IMultiDeviceDelegate {
-    public void onContactMultiDevicesEvent(MultiDevicesOperation operation, string target, string ext) {
+	public void onContactMultiDevicesEvent(MultiDevicesOperation operation, string target, string ext) {
             ......
             switch (operation) {
             //好友已在其他设备上被移除。

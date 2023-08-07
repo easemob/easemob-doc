@@ -2,7 +2,7 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM SDK 如何管理本地消息数据。SDK 内部使用 SQLite 保存本地消息，方便消息处理。
+本文介绍即时通讯 IM SDK 如何管理本地消息数据。
 
 除了发送和接收消息外，环信即时通讯 IM SDK 还支持以会话为单位对本地的消息数据进行管理，如获取与管理未读消息、搜索和删除历史消息等。其中，会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息以及查看或清空历史消息。
 
@@ -10,14 +10,14 @@
 
 ## 技术原理
 
-环信即时通讯 IM SDK 通过 `IChatManager` 和 `Conversation` 类实现对本地消息的管理，其中核心方法如下：
+SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使用 `IChatManager` 和 `Conversation` 管理本地消息。以下是核心方法：
 
 - `IChatManager.LoadAllConversations` 获取本地所有会话；
 - `Conversation.LoadMessages` 读取指定会话的消息；
 - `Conversation.UnReadCount` 获取指定会话的未读消息数；
 - `IChatManager.GetUnreadMessageCount` 获取所有会话的未读消息数；
 - `IChatManager.MarkAllConversationsAsRead` 指定会话的未读消息数清零；
-- `IChatManager.DeleteConversation` 删除会话及历史消息；
+- `IChatManager.DeleteConversation` 删除本地会话及历史消息；
 - `IChatManager.DeleteConversationFromServer` 删除服务端的会话及历史消息；
 - `IChatManager.LoadMessage` 根据消息 ID 搜索消息；
 - `Conversation.LoadMessagesWithMsgType` 获取指定会话中特定类型的消息；
@@ -40,17 +40,21 @@
 你可以调用 `LoadAllConversations` 方法可以根据会话 ID 和会话类型获取本地所有会话:
 
 ```csharp
-List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
+// 参数isSort表示返回的会话列表是否排序
+List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations(true);
+
 ```
+SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<Conversation>` 结构。
+
 
 ### 读取指定会话的消息
 
 你可以从本地数据库中读取指定会话的消息，示例代码如下：
 
 ```csharp
-//获取本地会话。
+// 获取本地会话。
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
-//该方法获取 `startMsgId` 之前的 `pagesize` 条消息。
+// 该方法获取 `startMsgId` 之前的 `pagesize` 条消息。
 conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>>(
   onSuccess: (list) => {
      Debug.Log($"获取到{list.Count}条消息");
@@ -84,13 +88,13 @@ SDKClient.Instance.ChatManager.GetUnreadMessageCount();
 
 ```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
-//指定会话的未读消息数清零。
+// 指定会话的未读消息数清零。
 conv.MarkAllMessageAsRead();
 
-//将一条消息置为已读。
+// 将一条消息置为已读。
 conv.MarkMessageAsRead(msgId);
 
-//将所有未读消息数清零。
+// 将所有未读消息数清零。
 SDKClient.Instance.ChatManager.MarkAllConversationsAsRead();
 ```
 
@@ -98,7 +102,7 @@ SDKClient.Instance.ChatManager.MarkAllConversationsAsRead();
 
 SDK 提供两个接口，分别可以删除本地会话和历史消息或者删除当前用户在服务器端的会话和聊天消息。
 
-- 删除本地会话和历史消息示例代码如下：
+调用 `DeleteConversation` 和 `DeleteMessage` 删除本地会话和聊天消息，示例代码如下：
 
 ```csharp
 //删除和特定用户的会话，如需保留历史消息，传 `false`。
@@ -109,17 +113,7 @@ Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationI
 conv.DeleteMessage(msgId);
 ```
 
-- 删除服务器端会话和历史消息，示例代码如下：
-
-```csharp
-//从服务器端删除和特定 ID 的会话，如果需要保留历史消息，第三个参数传 `false`。
-SDKClient.Instance.ChatManager.DeleteConversationFromServer(conversationId, type, true, new CallBack(
-    onSuccess: () => {
-    },
-    onError: (code, desc) => {
-    }
-));
-```
+删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](message_retrieve.html#单向删除服务端会话及其历史消息)。
 
 ### 根据消息 ID 搜索消息
 
@@ -170,8 +164,6 @@ conv.LoadMessagesWithTime(startTime: startTime, endTime: endTime, count: 50, new
 
 ### 根据关键字搜索会话消息
 
-### 根据关键字搜索会话消息
-
 你可以调用 `LoadMessagesWithKeyword` 方法以从本地数据库获取会话中的指定用户发送的包含特定关键字的消息，示例代码如下：
 
 ```csharp
@@ -203,7 +195,7 @@ conv.LoadMessagesWithKeyword(
 
 ### 批量导入消息到数据库
 
-如果你需要使用批量导入方式在本地会话中插入消息，可以使用下面的接口，构造 EMMessage 对象，将消息导入本地数据库。
+如果你需要使用批量导入方式在本地会话中插入消息，可以调用 `ImportMessages` 方法，构造 `EMMessage` 对象，将消息导入本地数据库。
 
 示例代码如下：
 
@@ -215,16 +207,11 @@ SDKClient.Instance.ChatManager.ImportMessages(messages, new CallBack(
    {
    }
 ));
-
 ```
 
 ### 插入消息
 
-如果你需要在本地会话中加入一条消息，比如收到某些通知消息时，可以构造一条消息写入会话。
-
-例如插入一条无需发送但有需要显示给用户看的内容，类似 “XXX 撤回一条消息”、“XXX 入群”、“对方正在输入” 等。
-
-示例代码如下：
+如果你想在当前对话中插入消息而不实际发送消息，请构造消息正文并调用 `InsertMessage` 方法用于发送通知消息，例如“XXX 撤回一条消息”、“XXX 入群” 和 “对方正在输入...”。
 
 ```csharp
 // 将消息插入到指定会话中。

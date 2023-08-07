@@ -2,6 +2,82 @@
 
 <Toc />
 
+## 版本 V1.2.0 Dev 2023-7-27（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 [合并转发消息功能](message_send_receive.html#发送和接收合并消息)：
+           - 新增合并消息类型 `MessageBodyType#COMBINE`；
+           - 新增消息体类 `CombineBody`；
+           - 新增 `Message#CreateCombineSendMessage` 方法用于创建合并消息；
+           - 新增 `ChatManager#FetchCombineMessageDetail` 方法用于下载并解析合并消息。
+- [IM SDK] 新增 [消息修改功能](message_modify.html)：
+           - 新增 `ChatManager#ModifyMessage` 方法，用于修改消息；
+           - 新增 `IChatManagerDelegate#OnMessageContentChanged` 回调。消息修改后，接收方会收到该回调。
+           - 新增 `IMessageBody#OperationTime` ：编辑消息中内容修改的时间。
+           - 新增 `IMessageBody#OperatorId` ：编辑消息中的操作人Id。
+           - 新增 `IMessageBody#OperationCount` ：发送后编辑的次数。
+- [IM SDK] 调整 `IConnectionDelegate#OnLoggedOtherDevice(intString)` 回调，新增当前设备踢下线的设备名称。
+- [IM SDK] 新增 `IConnectionDelegate#OnAppActiveNumberReachLimitation` 回调，App激活数量已达限制值。
+- [IM SDK] 新增 `IMultiDeviceDelegate#OnRoamDeleteMultiDevicesEvent` 回调，多端多设备单个会话删除漫游消息事件。
+- [IM SDK] 新增 `IMultiDeviceDelegate#OnConversationMultiDevicesEvent` 回调，多端多设备会话操作事件。
+- [IM SDK] 调整 `ChatManager#LoadAllConversations` 方法，新增isSort参数。
+- [IM SDK] 新增 以下方法支持用户 token：
+           - `SDKClient#GetLoggedInDevicesFromServerWithToken`：获取指定账号下登录的在线设备列表；
+           - `SDKClient#KickDeviceWithToken`：将指定账号登录的指定设备踢下线；
+           - `SDKClient#KickAllDevicesWithToken`：将指定账号登录的所有设备都踢下线。
+- [IM SDK] 新增 以下方法支持会话置顶：
+           - `Conversation#IsPinned`：判断该会话是否被置顶；
+           - `Conversation#PinnedTime`：会话置顶时间戳。
+- [IM SDK] 新增 `ChatManager#GetConversationsFromServerWithCursor` ：根据指定参数从服务器获取相关会话对象。
+           作废 `ChatManager#GetConversationsFromServer`。
+- [IM SDK] 新增 基于FetchServerMessagesOption获取历史消息：
+           - `ChatManager#FetchHistoryMessagesFromServerBy`：根据FetchServerMessagesOption从服务器获取历史消息;
+           - `FetchServerMessagesOption#IsSave`：获取的消息是否保存到数据库;
+           - `FetchServerMessagesOption#Direction`：消息搜索方向;
+           - `FetchServerMessagesOption#From`：消息发送方的用户 ID;
+           - `FetchServerMessagesOption#MsgTypes`：要查询的消息类型列表;
+           - `FetchServerMessagesOption#StartTime`：消息查询的起始时间;
+           - `FetchServerMessagesOption#EndTime`：消息查询的结束时间。
+- [IM SDK] 新增 设置群组或聊天室消息接收列表：
+           - `Message#ReceiverList`：设置群组或聊天室消息接收列表。
+- [IM SDK] 新增 删除本地数据库中指定时间段的消息：
+           - `Conversation#DeleteMessages`：删除本地数据库中指定时间段的消息。
+- [IM SDK] 新增 以下方法支持群组用户自定义属性操作：
+           - `GroupManager#FetchMemberAttributes`：获取群组成员自定义属性；
+           - `GroupManager#SetMemberAttributes`：设置群组用户自定义属性；
+           - `IGroupManagerDelegate#OnUpdateMemberAttributesFromGroup`：群成员自定义属性发生改变。
+- [IM SDK] 新增 多设备操作定义：
+           - `MultiDevicesOperation#SET_METADATA`：在其他设备上设置了群组成员自定义属性；
+           - `MultiDevicesOperation#DELETE_METADATA`：在其他设备上删除了群组成员自定义属性；
+           - `MultiDevicesOperation#GROUP_MEMBER_METADATA_CHANGED`：群组成员自定义属性发生改变；
+           - `MultiDevicesOperation#CONVERSATION_PINNED`：会话被置顶；
+           - `MultiDevicesOperation#CONVERSATION_UNPINNED`：会话被取消置顶；
+           - `MultiDevicesOperation#CONVERSATION_DELETED`：会话被删除。
+- [IM SDK] 新增 MessageReactionOperation：
+           - `MessageReactionOperation#UserId`：操作者；
+           - `MessageReactionOperation#Reaction`：发生变化的 reaction。
+- [IM SDK] 新增 [自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)：
+           - 新增 `Options#CustomOSType` 方法，设置自定义平台代号；
+           - 新增 `Options#CustomDeviceName` 方法，设置当前设备自定义设备名称。
+- [IM SDK] 新增 以下Options选项：
+           - `Options#DeliverOnlineOnly`： 设置消息是否只投递给在线用户；
+           - `Options#SDKDataPath`：设置SDK数据目录；
+           - `Options#MyUUID`：设置自定义UUID；
+           - `Options#EnableEmptyConversation`：从数据库加载会话时，是否允许加载空会话。
+
+### 优化
+
+- [IM SDK] 支持Mac上arm64模式。
+
+### 修复
+
+- [IM SDK] 修复SDK回调时找不到回调句柄的问题；
+- [IM SDK] 修复SDK在未初始化时对底层资源的释放；
+- [IM SDK] 修复安卓、IOS在更新UserInfo时的一些问题；
+- [IM SDK] 修复kickAllDevice首字母改为大写。
+
+
 ## 版本 V1.1.1 Dev 2023-5-29
 
 #### 修复
