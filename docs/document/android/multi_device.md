@@ -17,7 +17,7 @@
 
 Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送时识别设备，并将该 ID 发送到服务器。服务器会自动将新消息发送到用户登录的设备，可以自动监听到其他设备上进行的好友或群组操作。即时通讯 IM Android SDK 提供以下多设备场景功能：
 
-- 获取当前用户的其他已登录设备的登录 ID 列表并向这些设备发送消息；
+- 获取当前用户的其他已登录设备的登录 ID 列表；
 - 获取指定账号的在线登录设备列表；  
 - 设置登录设备的名称；
 - 设置登录设备的平台；
@@ -33,7 +33,7 @@ Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推�
 
 ## 实现方法   
 
-### 获取当前用户的其他登录设备的登录 ID 列表并向其发送消息  
+### 获取当前用户的其他登录设备的登录 ID 列表  
 
 你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表。选择目标登录 ID 作为消息接收方发出消息，则这些设备上的同一登录账号可以收到消息，实现不同设备之间的消息同步。
 
@@ -50,7 +50,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ### 获取指定账号的在线登录设备列表  
 
-你可以调用 `getLoggedInDevicesFromServer` 或 `getLoggedInDevicesFromServerWithToken` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。
+你可以调用 `getLoggedInDevicesFromServer` 或 `getLoggedInDevicesFromServerWithToken` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`EMDeviceInfo` 中的 `mDeviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
 
 ```java
     try {
@@ -66,15 +66,15 @@ EMClient.getInstance().chatManager().sendMessage(message);
     }
 ```
 
-调用该方法后，在 SDK 返回的信息中，`EMDeviceInfo` 中的 `mDeviceName` 属性的含义如下：
-- 若指定账号自定义了设备名称，该属性表示自定义设备名称。
-- 若未自定义设备的名称，该属性默认为设备型号。
-
 ### 设置登录设备的名称
 
 即时通讯 IM 自 4.1.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
 
 初始化 SDK 时，你可以调用 `EMOptions#setCustomDeviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `EMConnectionListener#onLogout` 回调会包含导致该设备被踢下线的自定义设备名称。
+
+:::notice
+登录成功后才会将该设置发送到服务器。
+:::
 
 ```java
     EMOptions options =  new EMOptions();
@@ -113,6 +113,10 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 2. 初始化 SDK 时，调用 `EMOptions#setCustomOSPlatform` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
 
+:::notice
+登录成功后才会将该设置发送到服务器。
+:::
+
 ```java
     EMOptions options=new EMOptions();
     options.setCustomOSPlatform(1);
@@ -122,6 +126,10 @@ EMClient.getInstance().chatManager().sendMessage(message);
 ### 强制指定账号从单个设备下线
 
 你可以调用 `kickDevice` 或 `kickDeviceWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。调用这两种方法前，你需要首先通过 `EMClient#getLoggedInDevicesFromServer` 和 `EMDeviceInfo#getResource` 方法获取设备 ID。
+
+:::notice
+不登录也可以使用该接口。
+:::
 
 ```java
 // username：账户名称，password：账户密码。需要在异步线程中执行。
@@ -134,6 +142,10 @@ EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIn
 ### 强制指定账号从所有设备下线
 
 你可以调用 `kickAllDevices` 或 `kickAllDevicesWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备踢下线。
+
+:::notice
+不登录也可以使用该接口。
+:::
 
 ```java
     try {

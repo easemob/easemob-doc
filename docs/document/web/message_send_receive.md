@@ -707,8 +707,8 @@ let option = {
     option.url = data.url;
   },
 };
-let msg = message.create(option);
-connection
+let msg = WebIM.message;
+conn.send
   .send(msg)
   .then((res) => {
     console.log("发送成功", res);
