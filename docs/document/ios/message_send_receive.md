@@ -318,26 +318,6 @@ NSString *remotePath = body.remotePath;
 NSString *localPath = body.localPath;
 ```
 
-#### 下载缩略图及附件
-
-SDK 默认自动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail;` 为 `YES`。如果设置为手动下载附件，可修改 `[[EMClient sharedClient].options setIsAutoDownloadThumbnail:NO];`，需主动调用 `[[EMClient sharedClient].chatManager downloadMessageThumbnail:message progress:nil completion:nil];` 下载附件。下载完成后，调用相应消息体的 `thumbnailLocalPath` 获取缩略图路径。
-
-```objectivec
-EMImageMessageBody *body = (EMImageMessageBody *)message.body;
-// 从服务器端获取图片缩略图。
-NSString *thumbnailPath = body.thumbnailRemotePath;
-// 从本地获取图片缩略图。
-NSString *thumbnailLocalPath = body.thumbnailLocalPath;
-```
-
-对于原文件来说，语音消息收到后会自动下载语音文件。若下载原图片、视频或文件，调用 `[[EMClient sharedClient].chatManager downloadMessageThumbnail:message progress:nil completion:nil];` 方法。下载完成后，调用相应消息 body 的 `localPath` 获取附件路径。
-
-```objectivec
-EMImageMessageBody *body = (EMImageMessageBody *)message.body;
-// 从本地获取文件。
-NSString *localPath = body.localPath;
-```
-
 ### 发送位置消息
 
 当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。

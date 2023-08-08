@@ -367,7 +367,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ```java
 /**
- * 下载视频文件。
+ * 下载文件。
  */
 private void downloadFile(final EMMessage message) {
     message.setMessageStatusCallback(new CallBack() {
@@ -396,57 +396,6 @@ EMNormalFileMessageBody fileMessageBody = (EMNormalFileMessageBody) message.getB
 String fileRemoteUrl = fileMessageBody.getRemoteUrl();
 // 从本地获取文件。
 Uri fileLocalUri = fileMessageBody.getLocalUri();
-```
-
-#### 下载缩略图及附件
-
-SDK 默认自动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。若设置为手动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需主动调用 `EMClient.getInstance().chatManager().downloadThumbnail(message)` 下载。下载完成后，调用相应消息 body 的 `thumbnailLocalUri()` 获取缩略图路径。
-
-```java
-// 从服务器下载缩略图。
-message.setMessageStatusCallback(new EMCallBack() {
-    @Override
-    public void onSuccess() {
-        EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
-        // 从本地获取图片缩略图。
-        Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
-    }
-    
-    @Override
-    public void onProgress(final int progress,String status) {
-    }
-    
-    @Override
-    public void onError(final int error, String msg) {
-    }
-});
-// 下载缩略图
-EMClient.getInstance().chatManager().downloadThumbnail(message);
-```
-
-对于原文件来说，语音消息收到后会自动下载语音文件。若下载原图片、视频或文件，调用 `EMClient.getInstance().chatManager().downloadAttachment(message)` 方法。下载完成后，调用相应消息 body 的 `getLocalUri()` 获取附件路径。
-
-例如：
-
-```java
-message.setMessageStatusCallback(new EMCallBack() {
-    @Override
-    public void onSuccess() {
-        EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
-        // 从本地获取图片文件。
-        Uri imgLocalUri = imgBody.getLocalUri();
-    }
-
-    @Override
-    public void onProgress(final int progress,String status) {
-    }
-    
-    @Override
-    public void onError(final int error, String msg) {
-    }
-});
-// 下载附件
-EMClient.getInstance().chatManager().downloadAttachment(message);
 ```
 
 ### 发送和接收位置消息
