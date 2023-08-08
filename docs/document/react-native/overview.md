@@ -68,6 +68,7 @@ ChatClient.getInstance()
 ## 注册用户
 
 目前注册的方式有以下几种：
+
 - 通过控制台注册。
 - 通过 REST API 接口注册。
 - 调用 SDK 接口注册。该方法需在 [控制台](https://console.easemob.com/app/im-service/detail) 设置允许 **开放注册**。
@@ -169,19 +170,41 @@ ChatClient.getInstance()
 ```typescript
 // 监听器建议在初始化完成之后，登录之前设置，这样可以恰当地收到登录通知。
 let listener = new (class s implements ChatConnectEventListener {
-  // token即将过期
   onTokenWillExpire(): void {
-    console.log("onTokenWillExpire");
+    // todo: token即将过期
   }
-  // token已过期
   onTokenDidExpire(): void {
-    console.log("onTokenDidExpire");
+    // todo: token已过期
   }
   onConnected(): void {
-    console.log("onConnected");
+    // todo: 已连接到服务器
   }
-  onDisconnected(errorCode?: number): void {
-    console.log("onDisconnected: ", errorCode);
+  onDisconnected(): void {
+    // todo: 连接已断开，会自动重连。
+  }
+  onAppActiveNumberReachLimit?(): void {
+    // todo: 达到日活上限，被服务器断开。
+  }
+  onUserDidLoginFromOtherDevice?(deviceName?: string): void {
+    // todo: 用户在其它设备登录，本设备被服务器断开。
+  }
+  onUserDidRemoveFromServer?(): void {
+    // todo: 当前用户被移除，被服务器断开。
+  }
+  onUserDidForbidByServer?(): void {
+    // todo: 用户被禁用，被服务器断开。
+  }
+  onUserDidChangePassword?(): void {
+    // todo: 用户权限信息更改，被服务器断开。
+  }
+  onUserDidLoginTooManyDevice?(): void {
+    // todo: 用户登录设备超过上限，被服务器断开。
+  }
+  onUserKickedByOtherDevice?(): void {
+    // todo: 用户被踢下线，被服务器断开。
+  }
+  onUserAuthenticationFailed?(): void {
+    // todo: 用户权限问题，被服务器断开。
   }
 })();
 ChatClient.getInstance().removeAllConnectionListener();
@@ -194,18 +217,16 @@ ChatClient.getInstance().addConnectionListener(listener);
 
 ### 被动退出登录
 
-对于 `onDisconnected` 通知，这些 `errorCode` 需要用户关注，收到这些通知，建议 APP 返回登录界面。
+用户需要关心什么原因被服务器踢下线，需要关注对应事件，并且进行处理。
 
-- `USER_LOGIN_ANOTHER_DEVICE=206`: 用户已经在其他设备登录
-- `USER_REMOVED=207`: 用户账户已经被移除
-- `USER_BIND_ANOTHER_DEVICE=213`: 用户已经绑定其他设备
-- `SERVER_SERVING_DISABLED=305`: 服务器服务停止
-- `USER_LOGIN_TOO_MANY_DEVICES=214`: 用户登录设备超出数量限制
-- `USER_KICKED_BY_CHANGE_PASSWORD=216`: 由于密码变更被踢下线
-- `USER_KICKED_BY_OTHER_DEVICE=217`: 由于其他设备登录被踢下线
-- `USER_DEVICE_CHANGED=220`: 和上次设备不同导致下线
-
-以上参数具体可以参考原生平台对应说明。
+- onAppActiveNumberReachLimit:
+- onUserDidLoginFromOtherDevice:
+- onUserDidRemoveFromServer:
+- onUserDidForbidByServer:
+- onUserDidChangePassword:
+- onUserDidLoginTooManyDevice:
+- onUserKickedByOtherDevice:
+- onUserAuthenticationFailed:
 
 ## 输出信息到日志文件
 
