@@ -143,7 +143,8 @@
 | 名称        | 方法   | 请求           | 描述          |
 | :---------------- | :----- | :----------------- | :-------------------- |
 | 分页获取 app 中的群组 | GET  | /{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}  | 分页获取应用下的群组信息。 |
-| 获取一个用户参与的所有群组 | GET  | /{app_name}/users/{username}/joined_chatgroups | 根据用户名称获取此用户加入的全部群组。 |
+| 获取一个用户参与的所有群组 | GET  | /{org_name}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pagenum={} | 根据用户名称获取此用户加入的全部群组。 |
+| 查看指定用户是否已加入群组 | POST  | /{org_name}/{app_name}/chatgroups/{group_id}/user/{user_id}/is_joined | 查看指定的用户是否已加入群组。 |
 | 获取群组详情 | GET | /{org_name}/{app_name}/chatgroups/{group_ids} | 根据群组 ID 获取群组的详情。  |
 | 创建一个群组  | POST   | /{org_name}/{app_name}/chatgroups     | 创建一个群组。  |
 | 修改群组信息  | PUT   | /{org_name}/{app_name}/chatgroups/{group_id}   | 修改群组信息。   |
