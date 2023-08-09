@@ -133,7 +133,7 @@ curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/wzy/push/binding' \
   "entities": [ 
     {            
       "device_id": "8ce08cad-9369-4bdd-86c8-695a0d247cda",
-      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",    
+      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",
       "notifier_name": "104410638"       
     }   
   ],    
@@ -200,11 +200,13 @@ curl --location --request GET 'https://a1-hsb.easemob.com/easemob-demo/testy/use
   "entities": [       
     {            
       "device_id": "8ce08cad-9369-4bdd-86c8-695a0d247cda",      
-      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",    "notifier_name": "104410638"      
+      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",  
+      "notifier_name": "104410638"      
     }   
     {            
       "device_id": "8ce08cad-9369-4bdd-86c8-695a0d247cda",      
-      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",    "notifier_name": "104410638"      
+      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",  
+      "notifier_name": "104410638"      
     }  
   ],    
   "action": "get",    
