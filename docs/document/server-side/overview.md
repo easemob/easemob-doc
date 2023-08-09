@@ -96,6 +96,8 @@
 
 | 名称                | 方法 | 请求                                    | 描述                                                    |
 | :------------------- | :--- | :-------------------------------------- | :------------------------------------------------------ |
+| 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/wzy/push/binding | 对用户设备与推送信息进行绑定和解绑。    |
+| 查询当前用户的所有设备的推送绑定信息    | GET  | /{org_name}/{app_name}/users/wzy/push/binding |查询用户设备与推送信息进行绑定和解绑。  |
 | 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送消息显示的昵称。                            |
 | 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送消息展示为仅通知还是详情可见。              |
 | 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送是否开启免打扰模式，以及开启/关闭免打扰的时间。 |
@@ -143,7 +145,8 @@
 | 名称        | 方法   | 请求           | 描述          |
 | :---------------- | :----- | :----------------- | :-------------------- |
 | 分页获取 app 中的群组 | GET  | /{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}  | 分页获取应用下的群组信息。 |
-| 获取一个用户参与的所有群组 | GET  | /{app_name}/users/{username}/joined_chatgroups | 根据用户名称获取此用户加入的全部群组。 |
+| 获取一个用户参与的所有群组 | GET  | /{org_name}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pagenum={} | 根据用户名称获取此用户加入的全部群组。 |
+| 查看指定用户是否已加入群组 | POST  | /{org_name}/{app_name}/chatgroups/{group_id}/user/{user_id}/is_joined | 查看指定的用户是否已加入群组。 |
 | 获取群组详情 | GET | /{org_name}/{app_name}/chatgroups/{group_ids} | 根据群组 ID 获取群组的详情。  |
 | 创建一个群组  | POST   | /{org_name}/{app_name}/chatgroups     | 创建一个群组。  |
 | 修改群组信息  | PUT   | /{org_name}/{app_name}/chatgroups/{group_id}   | 修改群组信息。   |

@@ -41,6 +41,179 @@
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 仅支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
+
+## 绑定和解绑推送信息 
+
+推送消息时，设备与推送信息会进行绑定，包括设备 ID、推送证书和 device token。
+
+- 设备 ID：SDK 为每个设备分配的唯一标识符。
+
+- device token：第三方推送服务提供的推送 token，该 token 用于标识每台设备上的每个应用，第三方推送服务通过该 token 明确消息是发送给哪个设备的，然后将消息转发给设备，设备再通知应用程序。例如，对于 FCM 推送，device token 指初次启动你的应用时 FCM SDK 为客户端应用实例生成的注册令牌 (registration token)。
+
+- 推送证书：推送证书由第三方推送服务提供，一个 app 对应一个推送证书。
+
+用户从第三方推送服务器获取 device token 和证书名称，然后向环信即时通讯服务器上传，服务器根据 device token 向用户推送消息。
+
+你可以调用该接口对设备与推送信息进行绑定或解绑。
+
+### HTTP 请求
+
+```
+PUT https://{host}/{org_name}/{app_name}/users/wzy/push/binding
+```
+
+#### 路径参数
+
+参数及说明详见 [公共参数](#公共参数)。
+
+#### 请求 header
+
+| 参数            | 类型   | 描述                                                         | 是否必需 |
+| :-------------- | :----- | :----------------------------------------------------------- | :------- |
+| `Content-Type`  | String | 内容类型。请填 `application/json`。                          | 是       |
+| `Authorization` | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是       |
+
+### 请求 body
+
+| 参数            | 类型   | 描述                                                         | 是否必需 |
+| :-------------- | :----- | :----------------------------------------------------------- | :------- |
+| `device_id`     | String | 移动端设备标识，服务端用于识别设备，进行推送信息的绑定和解绑。 | 是       |
+| `notifier_name` | String | 推送证书名称。<br/> - 传入的证书名称必需与你在环信控制台的**添加推送证书**页面上填写的证书名称一致，否则推送失败。<br/> - 若 `notifier_name` 为空，表示解除当前设备与所有推送信息的绑定。 | 是       |
+| `device_token`  | String | 推送设备 token。错误的信息会推送失败，且服务端自动解除绑定。若 `device_token` 为空，则会解除当前用户当前设备 ID 和当前证书名的绑定。 | 是       |
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 参数        | 类型   | 描述                                                         |
+| :---------- | :----- | :----------------------------------------------------------- |
+| `entities`  | Array  | 当前设备绑定的推送信息列表。如果发送该绑定请求后该设备无任何推送绑定信息，则返回空列表。 |
+
+其他参数及说明详见 [公共参数](#公共参数)。
+
+### 示例
+
+#### 请求示例
+
+**绑定请求**
+
+```shell
+curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/wzy/push/binding' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{    
+    "device_id": "8ce08cad-XXXX-XXXX-86c8-695a0d247cda",    
+    "device_token": "XXXX",    
+    "notifier_name": "104410638"
+}'
+```
+
+**解除绑定**
+
+```shell
+curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/wzy/push/binding' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{    
+    "device_id": "8ce08cad-XXXX-XXXX-86c8-695a0d247cda",    
+    "device_token": "",    
+    "notifier_name": "104410638"
+}'
+```
+
+#### 响应示例
+
+**绑定响应**
+
+```json
+{ 
+  "timestamp": 1688030642443, 
+  "entities": [ 
+    {            
+      "device_id": "8ce08cad-9369-4bdd-86c8-695a0d247cda",
+      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",
+      "notifier_name": "104410638"       
+    }   
+  ],    
+  "action": "put",   
+  "duration": 28
+}
+```
+
+**解除绑定响应**
+
+```json
+{    
+  "timestamp": 1688030767345,    
+  "entities": [],    
+  "action": "put",    
+  "duration": 24
+}
+```
+
+## 查询推送绑定信息
+
+查询当前用户的所有设备的推送绑定信息。
+
+### HTTP 请求
+
+```
+GET https://{host}/{org_name}/{app_name}/users/wzy/push/binding
+```
+
+#### 路径参数
+
+参数及说明详见 [公共参数](#公共参数)。
+
+#### 请求 header
+
+| 参数            | 类型   | 描述             | 是否必需 |
+| :-------------- | :----- | :------------------------------ | :------- |
+| `Authorization` | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是       |
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 参数       | 类型  | 描述                                                         |
+| :--------- | :---- | :----------------------------------------------------------- |
+| `entities` | Array | 当前用户的所有设备的推送绑定信息列表。若当前用户的任何设备均无推送绑定信息，则返回空列表。 |
+
+其他参数及说明详见 [公共参数](#公共参数)。
+
+### 请求示例
+
+```shell
+curl --location --request GET 'https://a1-hsb.easemob.com/easemob-demo/testy/users/wzy/push/binding' \
+-H 'Authorization: Bearer <YourAppToken>'
+```
+
+### 响应示例
+
+```json
+{    
+  "timestamp": 1688031327535,   
+  "entities": [       
+    {            
+      "device_id": "8ce08cad-9369-4bdd-86c8-695a0d247cda",      
+      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",  
+      "notifier_name": "104410638"      
+    }   
+    {            
+      "device_id": "8ce08cad-9369-4bdd-86c8-695a0d247cda",      
+      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",  
+      "notifier_name": "104410638"      
+    }  
+  ],    
+  "action": "get",    
+  "duration": 6
+}
+```
+
 ## 设置离线推送时显示的昵称
 
 设置离线推送时显示的昵称。
@@ -142,8 +315,8 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 #### 请求 header
 
-| 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
-| :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
+| 参数            | 类型   | 描述                               | 是否必需 |
+| :-------------- | :----- | :-------------------------------------- | :------- |
 | `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
@@ -151,17 +324,17 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 请求包体为 JSON Object 类型，包含以下字段：
 
-| 参数                         | 类型 | 描述                                                                                                                                                                                        | 是否必需 |
-| :--------------------------- | :--- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------- |
+| 参数                         | 类型 | 描述             | 是否必需 |
+| :--------------------------- | :--- | :--------------------------------- | :------- |
 | `notification_display_style` | Int  | 离线推送通知的展示方式：<ul><li>（默认）`0`：推送标题为“您有一条新消息”，推送内容为“请点击查看”；</li><li>`1`：推送标题为“您有一条新消息”，推送内容为发送人昵称和离线消息的内容。</li></ul> | 是       |
 
 ### HTTP 响应
 
 #### 响应 body
 
-| 参数                                        | 类型    | 描述                                                                                                                                                                                                           |
-| :------------------------------------------ | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `entities`                                  | JSON    | 用户的离线推送通知的展示方式以及相关信息。                                                                                                                                                                     |
+| 参数      | 类型    | 描述   |
+| :-------------------- | :------ | :------------------------------------------------ |
+| `entities`                                  | JSON    | 用户的离线推送通知的展示方式以及相关信息。        |
 | `entities.uuid`                             | String  | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。                                                                                                                           |
 | `entities.type`                             | String  | 用户类型，即 `user`。                                                                                                                                                                                          |
 | `entities.created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。                                                                                                                                                                           |
