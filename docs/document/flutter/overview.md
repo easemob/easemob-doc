@@ -114,14 +114,14 @@ EMClient.getInstance.addConnectionEventHandler(
     onUserDidChangePassword: () => {},
     // 用户被连接被服务器禁止;
     onUserDidForbidByServer: () => {},
-    // 用户已经在其他设备登录;
-    onUserDidLoginFromOtherDevice: () => {},
     // 用户登录设备超出数量限制;
     onUserDidLoginTooManyDevice: () => {},
     // 用户从服务器删除;
     onUserDidRemoveFromServer: () => {},
-    // 由于其他设备登录被踢下线；
+    // 调用 `kickDevice` 方法将设备踢下线，被踢设备会收到该回调；
     onUserKickedByOtherDevice: () => {},
+    // 登录新设备时因达到了登录设备数量限制而导致当前设备被踢下线，被踢设备收到该回调；
+    onUserDidLoginFromOtherDevice(String deviceName) => {},
     // Token 过期;
     onTokenDidExpire: () => {},
     // Token 即将过期，需要调用 renewToken;

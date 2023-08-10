@@ -115,7 +115,7 @@ EMClient.getInstance.init(options);
 
 ### 强制指定账号从单个设备下线
 
-你可以调用 `kickDevice` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。调用这两种方法前，你需要首先通过 `EMClient#fetchLoggedInDevices` 方法获取设备 ID。
+你可以调用 `kickDevice` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。被踢设备会收到 `onUserKickedByOtherDevice` 回调。调用该方法前，你需要首先通过 `EMClient#fetchLoggedInDevices` 方法获取设备 ID。
 
 :::notice
 不登录也可以使用该接口。
