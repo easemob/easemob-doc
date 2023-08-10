@@ -20,7 +20,7 @@
 - 新增 `EMClient#fetchLoggedInDevices` 方法，可使用 token 获取已登录的设备列表；
 - 新增 `EMClient#kickDevice` 方法，可以使用 token 踢掉指定设备；
 - 新增 `EMClient#kickAllDevices` 方法，可以使用 token 踢掉所有已登录设备；
-- 新增 `EMChatManager#fetchConversation` 方法，获取服务器会话列表，原方法 `EMChatManager#getConversationsFromServer` 作废；
+- 新增 `EMChatManager#fetchConversation` 方法，[获取服务器会话列表](message_retrieve.html#从服务器分页获取会话列表)，原方法 `EMChatManager#getConversationsFromServer` 作废；
 - 新增 `EMMessage#receiverList` 属性，用于在群组/聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)；
 
 ### 优化
