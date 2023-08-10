@@ -22,7 +22,7 @@
 
 ![](@static/images/product/help-ticket2.jpeg)
 
-### FAQ 帮助中心
+## FAQ 帮助中心
 
 [环信 FAQ 帮助中心](https://faq.easemob.com/)提供各客户端、RESTful API、环信控制台以及商务相关的常见问题，您在遇到问题时可以查看，快速找到答案。
 
