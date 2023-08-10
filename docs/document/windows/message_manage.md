@@ -40,8 +40,7 @@ SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使�
 你可以调用 `LoadAllConversations` 方法可以根据会话 ID 和会话类型获取本地所有会话:
 
 ```csharp
-// 参数isSort表示返回的会话列表是否排序
-List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations(true);
+List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
 
 ```
 SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<Conversation>` 结构。

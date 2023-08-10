@@ -21,7 +21,6 @@
 - [IM SDK] 新增 `IConnectionDelegate#OnAppActiveNumberReachLimitation` 回调，App激活数量已达限制值。
 - [IM SDK] 新增 `IMultiDeviceDelegate#OnRoamDeleteMultiDevicesEvent` 回调，多端多设备单个会话删除漫游消息事件。
 - [IM SDK] 新增 `IMultiDeviceDelegate#OnConversationMultiDevicesEvent` 回调，多端多设备会话操作事件。
-- [IM SDK] 调整 `ChatManager#LoadAllConversations` 方法，新增isSort参数。
 - [IM SDK] 新增 以下方法支持用户 token：
            - `SDKClient#GetLoggedInDevicesFromServerWithToken`：获取指定账号下登录的在线设备列表；
            - `SDKClient#KickDeviceWithToken`：将指定账号登录的指定设备踢下线；

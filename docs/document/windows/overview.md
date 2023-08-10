@@ -197,7 +197,7 @@ class ConnectionDelegate : IConnectionDelegate
     public void OnKickedByOtherDevice()
     {
     }
-    public void OnLoggedOtherDevice()
+    public void OnLoggedOtherDevice(string deviceName)
     {
     }
     public void OnForbidByServer()
