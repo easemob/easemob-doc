@@ -16,7 +16,9 @@
 - `EMChatManager.getConversation` 读取指定会话的消息；
 - `EMConversation.unreadCount` 获取指定会话的未读消息数；
 - `EMChatManager.getUnreadMessageCount` 获取所有会话的未读消息数；
-- `EMConversation.markMessageAsRead` 指定会话的未读消息数清零；
+- `EMConversation.markMessageAsRead` 指定会话的未读消息置为已读；
+- `EMConversation.markAllMessagesAsRead` 指定会话所有未读数清零；
+- `EMChatManager.markAllConversationsAsRead` 将所有会话消息设为已读；
 - `EMChatManager.deleteConversation` 删除本地存储的会话及其历史消息；
 - `EMChatManager.loadMessage` 根据消息 ID 获取消息；
 - `EMConversation.loadMessagesWithMsgType` 获取指定会话中特定类型的消息；

@@ -32,6 +32,10 @@
 
 ### 创建群组
 
+群组可分为私有群和公有群。私有群不可被搜索到，公开群可以通过群组 ID 搜索到。
+
+用户可以创建群组，设置群组的名称、描述、群组成员、创建群组的原因等属性，还可以设置 `EMGroupStyle` 参数指定群组的大小和类型。创建群组后，群组创建者自动成为群主。
+
 在创建群组前，你需要设置群组类型 (`EMGroupStyle`) 和进群邀请是否需要对方同意 (`inviteNeedConfirm`)。
 
 1. 私有群不可被搜索到，公开群可以通过 ID 搜索到。目前支持四种群组类型 (`GroupStyle`) ，具体设置如下：
@@ -39,7 +43,7 @@
     - `PrivateMemberCanInvite` —— 私有群，所有群成员均可以邀请人进群；
     - `PublicJoinNeedApproval` —— 公开群，加入此群除了群主和管理员邀请，只能通过申请加入此群；
     - `PublicOpenJoin` —— 公开群，任何人都可以进群，无需群主和群管理同意。
-2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
+2. 进群邀请是否需要对方同意 (`EMGroupOptions#inviteNeedConfirm`) 的具体设置如下：
     - 进群邀请需要用户确认 (`EMGroupOptions#inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `EMOptions#autoAcceptGroupInvitation` 设置，处理逻辑如下：
         - 用户设置手动确认群组邀请 (`EMOptions#autoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `EMGroupEventHandler#onInvitationReceivedFromGroup` 事件，并选择同意或拒绝入群邀请：
             - 用户同意入群邀请后，邀请人收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
@@ -54,6 +58,7 @@
 EMGroupOptions groupOptions = EMGroupOptions(
   style: EMGroupStyle.PrivateMemberCanInvite,
   inviteNeedConfirm: true,
+  maxCount: 200,
 );
 
 String groupName = "newGroup";
@@ -70,7 +75,7 @@ try {
 
 ### 解散群组
 
-仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `OnDestroyedFromGroup` 事件并被踢出群组。
+仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `EMGroupEventHandler#onGroupDestroyed` 事件并被踢出群组。
 
 :::notice
 解散群组后，将删除本地数据库及内存中的群相关信息及群会话，谨慎操作。
@@ -207,6 +212,8 @@ try {
 
 ### 屏蔽和解除屏蔽群消息
 
+群成员可以屏蔽群消息和解除屏蔽群消息。
+
 #### 屏蔽群消息
 
 群成员可以调用 `EMGroupManager#blockGroup` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息，群主和群管理员不能进行此操作。示例代码如下：
@@ -231,7 +238,8 @@ try {
 
 #### 检查自己是否已经屏蔽群消息
 
-群成员可以调用 `EMGroupManager#fetchGroupInfoFromServer` 方法并通过 `EMGroup#messageBlocked` 字段检查自己是否屏蔽了群消息。
+群成员可以调用 `EMGroup#messageBlocked` 字段检查自己是否屏蔽了群消息。为了保证检查结果的准确性，调用该方法前需先从服务器获取群详情，即调用 `EMGroupManager#fetchGroupInfoFromServer`。
+
 
 示例代码如下：
 
@@ -255,12 +263,12 @@ try {
 示例代码如下：
 
 ```dart
-    // 注册群组监听
+// 注册群组监听
 EMClient.getInstance.groupManager.addEventHandler(
   "UNIQUE_HANDLER_ID",
   EMGroupEventHandler(),
 );
 
-    // 移除群组监听
-    EMClient.getInstance.groupManager.removeEventHandler("UNIQUE_HANDLER_ID");
+// 移除群组监听
+EMClient.getInstance.groupManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```

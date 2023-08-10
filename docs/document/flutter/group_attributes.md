@@ -27,7 +27,7 @@
 
 ### 修改群组名称
 
-仅群主和群管理员可以调用 `EMGroupManager#changeGroupName` 方法设置和修改群组名称，群名称的长度限制为 128 个字符。
+仅群主和群管理员可以调用 `EMGroupManager#changeGroupName` 方法设置和修改群组名称，群名称的长度限制为 128 个字符, 其他成员会收到 `EMGroupEventHandler#onSpecificationDidUpdate` 回调。
 
 示例代码如下：
 
@@ -43,7 +43,7 @@ try {
 
 ### 修改群组描述
 
-仅群主和群管理员可以调用 `EMGroupManager#changeGroupDescription` 方法设置和修改群组描述，群描述的长度限制为 512 个字符。
+仅群主和群管理员可以调用 `EMGroupManager#changeGroupDescription` 方法设置和修改群组描述，群描述的长度限制为 512 个字符, 其他成员会收到 `EMGroupEventHandler#onSpecificationDidUpdate` 回调。
 
 示例代码如下：
 
@@ -104,6 +104,32 @@ try {
     filePath,
   );
 } on EMError catch (e) {
+}
+```
+
+#### 下载共享文件
+
+所有群成员均可调用 `downloadGroupSharedFile` 方法下载群组共享文件。
+
+```dart
+try {
+  // 获取文件列表
+  List<EMGroupSharedFile> list =
+      await EMClient.getInstance.groupManager.fetchGroupFileListFromServer(
+    groupId,
+    pageNum: 1,
+    pageSize: 10,
+  );
+
+  if (list.isNotEmpty) {
+    await EMClient.getInstance.groupManager.downloadGroupSharedFile(
+      groupId: groupId,
+      fileId: list.first.fileId!,
+      savePath: savePath,
+    );
+  }
+} on EMError catch (e) {
+  debugPrint('$e');
 }
 ```
 
