@@ -2,6 +2,37 @@
 
 <Toc />
 
+## 4.1.0
+
+### 新增特性
+
+- 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)；
+  - 新增 `EMOptions#osType` 属性和 `EMOptions#deviceName` 属性，用户设置设备类型和设备名称。
+- 新增[合并转发消息功能](message_send_receive.html#发送和接收合并消息)：
+  - 新增 `Combine` 消息类型，用于合并转发消息；
+  - 新增 `EMChatManager#fetchCombineMessageDetail` 方法，获取合并消息中的原始消息列表;
+- 新增[消息修改功能](message_modify.html)：
+  - 新增 `EMChatManager#modifyMessage` 方法用户修改已发送的消息，目前只支持文本消息;
+  - 新增 `EMChatEventHandler#onMessageContentChanged` 回调，用户监听消息修改实现；
+- 新增[会话置顶功能](message_retrieve.html#置顶会话)：
+  - 新增 `EMChatManager#pinConversation` 方法，实现在服务器会话列表中置顶/取消置顶会话；
+  - 新增 `EMChatManager#fetchPinnedConversations` 方法，从服务器获取已置顶会话；
+- 新增 `EMClient#fetchLoggedInDevices` 方法，可使用 token 获取已登录的设备列表；
+- 新增 `EMClient#kickDevice` 方法，可以使用 token 踢掉指定设备；
+- 新增 `EMClient#kickAllDevices` 方法，可以使用 token 踢掉所有已登录设备；
+- 新增 `EMChatManager#fetchConversation` 方法，获取服务器会话列表，原方法 `EMChatManager#getConversationsFromServer` 作废；
+- 新增 `EMMessage#receiverList` 属性，用于在群组/聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)；
+
+### 优化
+
+- 离开聊天室回调 `EMChatRoomEventHandler#onRemovedFromChatRoom` 中增加离开原因;
+- 被其他设备踢下线 `EMConnectionEventHandler#onUserDidLoginFromOtherDevice` 回调中增加操作人的设备名称 `deviceName`;
+
+### 修复
+
+- 修复 ios 中无法收到 `EMConnectionEventHandler#onConnected` 和 `EMConnectionEventHandler#onDisconnected` 的问题；
+- 修复某些场景下，发送方发送 Android 消息时添加的 string 类型扩展属性在接收方侧变为 int 类型的问题。
+
 ## 版本 V4.0.2
 
 ### 新增特性
