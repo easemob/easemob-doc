@@ -50,12 +50,12 @@ SDKClient.Instance.GroupManager.ChangeGroupName(groupId, groupName, new CallBack
 
 ```csharp
 SDKClient.Instance.GroupManager.ChangeGroupDescription(groupId, description, new CallBack(
-    onSuccess: () =>
-    {
-    },
-    onError: (code, desc) =>
-    {
-    }
+  onSuccess: () =>
+  {
+  },
+  onError: (code, desc) =>
+  {
+  }
 ));
 ```
 

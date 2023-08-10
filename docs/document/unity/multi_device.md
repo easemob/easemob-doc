@@ -18,7 +18,7 @@
 
 用户在端上初始化 SDK 时会生成设备识别 ID，用于多设备登录和推送。服务器会将新消息发送到已登录的设备。环信即时通讯 IM SDK 提供以下多设备场景功能：
 
-- 获取当前用户的其他已登录设备的登录 ID 列表并向这些设备发送消息；
+- 获取当前用户的其他已登录设备的登录 ID 列表，并向这些设备发送消息；
 - 获取指定账号的在线登录设备列表；
 - 设置登录设备的名称；
 - 设置登录设备的平台；
@@ -32,6 +32,39 @@
 设置登录设备的自定义名称和平台需在 SDK 初始化时中完成。
 
 ## 实现方法
+
+### 获取当前用户的其他已登录设备的登录 ID 列表，并向这些设备发送消息
+
+你可以调用 `GetSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表。选择目标登录 ID 作为消息接收方发出消息，则这些设备上的同一登录账号可以收到消息，实现不同设备之间的消息同步。
+
+```csharp
+SDKClient.Instance.ContactManager.GetSelfIdsOnOtherPlatform(new ValueCallBack<List<string>>(
+  onSuccess: (list) =>
+  {
+    // 选择一个登录 ID 作为消息发送方。
+    string toChatUsername = list[0];
+    string content = "content";
+    // 创建一条文本消息，content 为消息文字内容，toChatUsername 传入登录 ID 作为消息发送方。
+    Message msg = Message.CreateTextSendMessage(toChatUsername, content);
+    // 发送消息。
+    SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+	    onSuccess: () => {
+
+	    },
+	    onProgress: (progress) => {
+
+	    },
+	    onError: (code, desc) => {
+
+	    }
+    ));
+  },
+  onError: (code, desc) =>
+  {
+
+  }
+));
+```
 
 ### 获取指定账号的在线登录设备列表
 
@@ -80,6 +113,10 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
 
 初始化 SDK 时，你可以调用 `Options#CustomDeviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `IConnectionDelegate#OnLoggedOtherDevice` 回调会包含导致该设备被踢下线的自定义设备名称。
 
+:::tip
+登录成功后才会将该设置发送到服务器。
+:::
+
 ```csharp
 // 设置设备名称并进行初始化
 Options options = new Options("YouAppKey");
@@ -117,6 +154,10 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 2. 初始化 SDK 时，调用 `Options#CustomOSType` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
 
+:::tip
+登录成功后才会将该设置发送到服务器。
+:::
+
 ```csharp
 Options options = new Options("YouAppKey");
 ooptions.CustomOSType = 1;
@@ -127,6 +168,10 @@ SDKClient.Instance.InitWithOptions(options);
 ### 强制指定账号从单个设备下线
 
 你可以调用 `KickDevice` 或 `KickDeviceWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。调用这两种方法前，你需要首先通过 `SDKClient#GetLoggedInDevicesFromServer` 和 `DeviceInfo#Resource` 方法获取设备 ID。
+
+:::tip
+不登录也可以使用该接口。
+:::
 
 ```csharp
 // username：账户名称，password：账户密码。
@@ -182,6 +227,10 @@ SDKClient.Instance.KickDeviceWithToken(username, token, resource,
 ### 强制指定账号从所有设备下线
 
 你可以调用 `KickAllDevices` 或 `KickAllDevicesWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备踢下线。
+
+:::tip
+不登录也可以使用该接口。
+:::
 
 ```csharp
 SDKClient.Instance.KickAllDevices(username, password,

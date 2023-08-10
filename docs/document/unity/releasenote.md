@@ -60,8 +60,9 @@
 - [IM SDK] 新增 [自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)：
            - 新增 `Options#CustomOSType` 方法，设置自定义平台代号；
            - 新增 `Options#CustomDeviceName` 方法，设置当前设备自定义设备名称。
+- [IM SDK] 新增 Message字段：
+           - `Message#DeliverOnlineOnly`： 设置消息是否只投递给在线用户；
 - [IM SDK] 新增 以下Options选项：
-           - `Options#DeliverOnlineOnly`： 设置消息是否只投递给在线用户；
            - `Options#SDKDataPath`：设置SDK数据目录；
            - `Options#MyUUID`：设置自定义UUID；
            - `Options#EnableEmptyConversation`：从数据库加载会话时，是否允许加载空会话。
@@ -76,6 +77,12 @@
 - [IM SDK] 修复SDK在未初始化时对底层资源的释放；
 - [IM SDK] 修复安卓、IOS在更新UserInfo时的一些问题；
 - [IM SDK] 修复kickAllDevice首字母改为大写。
+- [IM SDK] 修改MessageReaction中拼写错误：
+           Rection修改为Reaction。
+- [IM SDK] 修改 MessageBody 中以下属性名称中的拼写错误：
+           ThumbnaiRemotePath 修改为 ThumbnailRemotePath；
+           ThumbnaiSecret 修改为 ThumbnailSecret；
+           ThumbnaiDownStatus 修改为 ThumbnailDownStatus。
 
 
 ## 版本 V1.1.1 Dev 2023-5-29
