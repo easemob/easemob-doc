@@ -165,8 +165,8 @@ ChatClient.getInstance()
 用户可以调用 `fetchJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：
 
 ```typescript
-// pageNum：当前页码，从 1 开始。
-// pageSize：每页期望返回的群组数量，取值范围为[1,50]。
+// pageNum：当前页码，从 0 开始。
+// pageSize：每页期望返回的群组数量，取值范围为[1,20]。
 const pageSize = 10;
 // 当前页码
 const pageNum = 1;
