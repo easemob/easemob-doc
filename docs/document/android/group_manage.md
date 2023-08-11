@@ -179,8 +179,8 @@ do {
 
 ```java
 // 异步方法。同步方法为 getJoinedGroupsFromServer(int, int, boolean, boolean)。
-// pageIndex：当前页码，从 1 开始。
-// pageSize：每页期望返回的群组数。取值范围为[1,50]。
+// pageIndex：当前页码，从 0 开始。
+// pageSize：每页期望返回的群组数。取值范围为[1,20]。
 List<EMGroup> grouplist = EMClient.getInstance().groupManager().asyncGetJoinedGroupsFromServer(pageIndex, pageSize, needMemberCount, needRole, new EMValueCallBack<List<EMGroup>>() {
                         @Override
                         public void onSuccess(List<EMGroup> value) {
