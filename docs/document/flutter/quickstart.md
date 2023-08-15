@@ -362,7 +362,7 @@ void _addChatListener() {
 
 
   // 添加收消息监听
-  EMClient.getInstance.chatManager.addEventHandle(
+  EMClient.getInstance.chatManager.addEventHandler(
     // EMChatEventHandler 对应的 key。
     "UNIQUE_HANDLER_ID",
     EMChatEventHandler(
