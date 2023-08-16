@@ -35,6 +35,35 @@ export const zhSidebar = sidebar({
       ]
     },
     {
+      text: '内容审核',
+      children: [
+        { text: '产品简介', children: [
+          { text: '产品概述', link: 'moderation_overview.html' },
+        ]},
+        { text: '产品定价',  children: [
+          { text: '计费说明（国内）', link: 'moderation_billing_domestic.html' },
+          { text: '计费说明（国外）', link: 'moderation_billing_overseas.html' },
+        ]},
+        { text: '快速开始',  children: [
+          { text: '开通审核服务', link: 'moderation_enable.html' },
+          { text: '规则配置', link: 'moderation_rule_config.html' },
+          { text: '规则测试', link: 'moderation_rule_test.html' },
+          { text: '历史记录', link: 'moderation_history.html' },
+          { text: '消息审核机制', link: 'moderation_mechanism.html' },
+        ]},
+        { text: '进阶功能', children: [
+          { text: '审核记录回调', link: 'moderation_record_callback.html' },
+          { text: '消息人工审核', link: 'moderation_manual_review.html' },
+          { text: '用户管理', link: 'moderation_usermgmt.html' },
+        ]},  
+        { text: '常见问题', children: [
+          { text: '如何开始使用内容审核服务？', link: 'moderation_use_console.html' },
+          { text: '如何新增自定义词？', link: 'moderation_add_word.html' },
+          { text: '为什么处置方式选择了替换***，但实际被拦截了没有发出来？', link: 'moderation_replace_refuse.html' },
+        ]},  
+      ]
+    },
+    {
       text: '私有化集成',
       children: [
         { text: '私有化部署流程', link: 'uc_deploy.html' },
