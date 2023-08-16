@@ -26,29 +26,33 @@
 
 #### 获取会话列表
 
-对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
+对于单聊或群聊，用户发消息时会自动将对方添加到用户的会话列表。
 
-你可以调用 `fetchConversationsFromServerWithPage` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+你可以调用 `fetchConversationsFromServerWithCursor` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
+
+SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表。若会话中没有消息，则 SDK 按照会话创建时间的倒序返回会话列表。
+
+服务器默认存储 100 条会话。若提升该上限，需联系环信商务，最多能增加至 500 条。
 
 :::tip
-1. 建议在 app 安装时或本地没有会话时调用该方法，否则调用 `getAllConversations` 方法获取本地会话即可。
-2. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需联系商务。
+1. 若使用该功能，需将 SDK 升级至 1.2.0。 
+2. 建议你在首次下载、卸载后重装应用等本地数据库无数据情况下拉取服务端会话列表。其他情况下，调用 `getAllConversations` 方法获取本地所有会话即可。
+3. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需联系商务。
 :::
 
+示例代码如下：
+
 ```typescript
-// pageNum：当前页面，从 1 开始。
-// pageSize：每页获取的会话数量。取值范围为 [1,20]。
+// cursor: 如果为空字符串，则从最新会话开始获取。
 ChatClient.getInstance()
-  .chatManager.fetchConversationsFromServerWithPage(pageSize, pageNum)
-  .then((result) => {
-    console.log("test:success:", result);
+  .chatManager.fetchConversationsFromServerWithCursor(cursor, pageSize)
+  .then(() => {
+    console.log("get conversions success");
   })
-  .catch((error) => {
-    console.warn("test:error:", error);
+  .catch((reason) => {
+    console.log("get conversions fail.", reason);
   });
 ```
-
-对于还不支持 `fetchConversationsFromServerWithPage` 方法的用户，可以调用 `fetchAllConversations` 方法从服务端获取会话列表，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息）。如需调整会话数量或时间限制请联系商务。
 
 你可以调用 `getAllConversations` 方法获取本地所有会话，示例代码如下：
 
@@ -62,6 +66,55 @@ ChatClient.getInstance()
     console.log("get conversions fail.", reason);
   });
 ```
+
+#### 获取服务端的置顶会话列表
+
+你可以调用 `fetchPinnedConversationsFromServerWithCursor` 方法从服务端分页获取置顶会话列表。SDK 按照会话置顶时间的倒序返回。 
+
+你最多可以拉取 50 个置顶会话。
+
+:::notice
+若使用该功能，需将 SDK 升级至 1.2.0。
+:::
+
+示例代码如下： 
+
+```typescript
+ChatClient.getInstance()
+  .chatManager.fetchPinnedConversationsFromServerWithCursor(cursor, pageSize)
+  .then(() => {
+    console.log("get conversions success");
+  })
+  .catch((reason) => {
+    console.log("get conversions fail.", reason);
+  });
+```
+
+#### 置顶会话
+
+会话置顶指将单聊或群聊会话固定在会话列表的顶部，方便用户查找。例如，将重点会话置顶，可快速定位会话。
+
+你可以调用 `pinConversation` 方法设置是否置顶会话。置顶状态会存储在服务器上，多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他登录设备分别会收到 `CONVERSATION_PINNED` 和 `CONVERSATION_UNPINNED` 事件。你最多可以置顶 50 个会话。
+
+:::notice
+若使用该功能，需将 SDK 升级至 1.2.0。
+:::
+
+示例代码如下： 
+
+```typescript
+// isPinned: 设置是否置顶会话。
+ChatClient.getInstance()
+  .chatManager.pinConversation(convId, isPinned)
+  .then(() => {
+    console.log("pin conversions success");
+  })
+  .catch((reason) => {
+    console.log("pin conversions fail.", reason);
+  });
+```
+
+你可以通过 `ChatConversation` 对象的 `isPinned` 字段检查会话是否为置顶状态，或查看 `pinnedTime` 字段获取会话置顶时间。
 
 #### 分页获取指定会话的历史消息
 

@@ -2,6 +2,60 @@
 
 <Toc />
 
+## 版本 V1.2.0 2023-8-16
+
+### 新增特性
+
+- React-Native 从 0.66.5 升级到 0.71.11。
+- 依赖的原生 SDK（iOS 和 Android）升级到版本 4.1.1。添加原生 SDK 提供的新功能。
+- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法从服务器分页获取会话列表。
+- 新增置顶服务器会话的功能：
+  - 新增 `ChatManager.pinConversation` 方法，实现置顶或取消置顶服务器会话；
+  - 新增 `ChatManager.fetchPinnedConversationsFromServerWithCursor` 从服务器分页获取置顶会话列表。
+- 新增 `ChatManager.modifyMessageBody` 方法，用于修改本地消息或服务器端消息。
+- 新增消息合并转发功能：
+  - 新增 `ChatMessage.createCombineMessage` 方法构建合并消息。
+  - 新增 `ChatManager.fetchCombineMessageDetail` 方法获取合并消息的信息。
+- 新增自定义登录设备的名称和平台的功能。  
+- 新增 `ChatPushManager.selectPushTemplate` 方法基于自定义推送模板进行离线推送。
+- 新增 `ChatPushManager.fetchSelectedPushTemplate` 获取选定的推送模板以进行离线推送。
+- 在 `ChatClient.getLoggedInDevicesFromServer` 方法中添加 token 参数可使用用户 token 获取在线设备列表。
+- 在 `ChatClient.kickDevice` 和 `ChatClient.kickAllDevices` 方法中添加 token 参数可使用用户 token 将指定用户的某个或全部的登录设备踢下线。
+- 更新监听器：
+  - `ChatEvents.ChatConnectEventListener.onUserDidLoginFromOtherDevice`：添加 `deviceName` 参数。
+  - `ChatEvents.ChatConnectEventListener`：添加 `onUserDidRemoveFromServer`、`onUserDidForbidByServer`、`onUserDidChangePassword`、`onUserDidLoginTooManyDevice`、`onUserKickedByOtherDevice` 和 `onUserAuthenticationFailed` 事件通知。
+  - `ChatEvents.ChatConnectEventListener.onDisconnected`：删除代码参数。
+  - `ChatEvents.ChatMultiDeviceEventListener`：添加 `onMessageRemoved` 事件。
+  - `ChatEvents.ChatMultiDeviceEventListener`：添加 `onConversationEvent` 事件。
+  - `ChatEvents.ChatMessageEventListener`：添加 `onMessageContentChanged` 事件。
+  - `ChatEvents.ChatMultiDeviceEvent`：添加 `ChatRoomEventListener.onRemoved`：添加 `reason` 参数。
+- 更新以下数据对象：
+  - `ChatConversation`：添加 `isPinned` 和 `pinnedTime` 属性。
+  - `ChatMessage.ChatMessageType`：添加 `COMBINE` 类型消息正文。
+  - `ChatMessage`：添加 `receiverList` 属性。
+  - 创建发送消息：添加 `secret` 参数。
+  - `ChatMessage.ChatMessageBody`：添加 `lastModifyOperatorId`、`lastModifyTime` 和 `modifyCount` 属性。
+  - `ChatOptions`：添加 `enableEmptyConversation`、`customDeviceName` 和 `customOSType` 属性。
+  - `ChatEvents.ChatMultiDeviceEvent`：添加 `CONVERSATION_PINNED`、`CONVERSATION_UNPINNED` 和 `CONVERSATION_DELETED`事件。
+- 添加数据对象：
+`ChatMessage.ChatCombineMessageBody`：添加组合消息正文对象。
+
+### 优化
+
+- 优化断线通知，分离出服务器主动断线的通知，用户可以具体处理服务器主动断线的原因。
+- 使用 commitlint 优化 git 提交规范，确保提交的代码符合规范。
+- 使用 lefthook 优化 git commit。添加使用 gitleaks 检查敏感信息。
+- 在 `ChatManager` 对象中，`deleteAllMessages` 重命名为 `deleteConversationAllMessages`。
+- 在 `ChatEvents.ChatRoomEventListener` 对象中，`onRemoved` 重命名为 `onMemberRemoved`。
+- 在 `ChatEvents.ChatGroupEventListener` 对象中，`onUserRemoved` 重命名为 `onMemberRemoved`。
+- 在 `ChatEvents.ChatRoomEventListener` 对象中，`onChatRoomDestroyed` 重命名为 `onDestroyed`。
+- 在 `ChatEvents.ChatGroupEventListener` 对象中，`onGroupDestroyed` 重命名为 `onDestroyed`。
+- 弃用 `ChatManager.fetchAllConversations`，改用 `ChatManager.fetchConversationsFromServerWithCursor`。
+
+### 修复
+
+修复 Android 平台下由于添加表情响应导致应用程序崩溃的问题。
+
 ## 版本 V1.1.2 2023-6-28
 
 #### 新增特性
