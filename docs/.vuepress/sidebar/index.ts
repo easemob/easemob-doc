@@ -41,8 +41,8 @@ export const zhSidebar = sidebar({
           { text: '产品概述', link: 'moderation/moderation_overview.html' },
         ]},
         { text: '产品定价', collapsible: true, children: [
-          { text: '计费说明（国内）', link: 'moderation/moderation_billing_domestic.html' },
-          { text: '计费说明（国外）', link: 'moderation_billing_overseas.html' },
+          { text: '国内计费说明', link: 'moderation/moderation_billing_domestic.html' },
+          { text: '海外计费说明', link: 'moderation/moderation_billing_overseas.html' },
         ]},
         { text: '快速开始', collapsible: true, children: [
           { text: '开通审核服务', link: 'moderation/moderation_enable.html' },
@@ -55,7 +55,7 @@ export const zhSidebar = sidebar({
           { text: '审核记录回调', link: 'moderation/moderation_record_callback.html' },
           { text: '消息人工审核', link: 'moderation/moderation_manual_review.html' },
           { text: '用户管理', link: 'moderation/moderation_usermgmt.html' },
-        ]},  
+        ]},
         { text: '常见问题', collapsible: true, children: [
           { text: '如何开始使用内容审核服务？', link: 'moderation/moderation_use_console.html' },
           { text: '如何新增自定义词？', link: 'moderation/moderation_add_word.html' },
