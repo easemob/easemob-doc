@@ -8,19 +8,19 @@
 
 - React-Native 从 0.66.5 升级到 0.71.11。
 - 依赖的原生 SDK（iOS 和 Android）升级到版本 4.1.1。添加原生 SDK 提供的新功能。
-- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法从服务器分页获取会话列表。
-- 新增置顶服务器会话的功能：
+- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法[从服务器分页获取会话列表](message_manage.html#获取会话列表)。
+- 新增[置顶服务器会话的功能](message_manage.html#获取服务端的置顶会话列表)：
   - 新增 `ChatManager.pinConversation` 方法，实现置顶或取消置顶服务器会话；
   - 新增 `ChatManager.fetchPinnedConversationsFromServerWithCursor` 从服务器分页获取置顶会话列表。
 - 新增 `ChatManager.modifyMessageBody` 方法，用于修改本地消息或服务器端消息。
-- 新增消息合并转发功能：
+- 新增[消息合并转发功能](message_send_receive.html#发送和接收合并消息)：
   - 新增 `ChatMessage.createCombineMessage` 方法构建合并消息。
   - 新增 `ChatManager.fetchCombineMessageDetail` 方法获取合并消息的信息。
-- 新增自定义登录设备的名称和平台的功能。  
+- 新增[自定义登录设备的名称和平台的功能](multi_device.html#设置登录设备的名称)。  
 - 新增 `ChatPushManager.selectPushTemplate` 方法基于自定义推送模板进行离线推送。
 - 新增 `ChatPushManager.fetchSelectedPushTemplate` 获取选定的推送模板以进行离线推送。
 - 在 `ChatClient.getLoggedInDevicesFromServer` 方法中添加 token 参数可使用用户 token 获取在线设备列表。
-- 在 `ChatClient.kickDevice` 和 `ChatClient.kickAllDevices` 方法中添加 token 参数可使用用户 token 将指定用户的某个或全部的登录设备踢下线。
+- [在 `ChatClient.kickDevice` 和 `ChatClient.kickAllDevices` 方法中添加 token 参数可使用用户 token 将指定用户的某个或全部的登录设备踢下线](multi_device.html#强制指定账号从单个设备下线)。
 - 更新监听器：
   - `ChatEvents.ChatConnectEventListener.onUserDidLoginFromOtherDevice`：添加 `deviceName` 参数。
   - `ChatEvents.ChatConnectEventListener`：添加 `onUserDidRemoveFromServer`、`onUserDidForbidByServer`、`onUserDidChangePassword`、`onUserDidLoginTooManyDevice`、`onUserKickedByOtherDevice` 和 `onUserAuthenticationFailed` 事件通知。
