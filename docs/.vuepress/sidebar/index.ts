@@ -38,7 +38,7 @@ export const zhSidebar = sidebar({
       text: '内容审核',
       children: [
         { text: '产品简介', children: [
-          { text: '产品概述', link: 'moderation_overview.html' },
+          { text: '产品概述', link: 'moderation/moderation_overview.html' },
         ]},
         { text: '产品定价',  children: [
           { text: '计费说明（国内）', link: 'moderation_billing_domestic.html' },
