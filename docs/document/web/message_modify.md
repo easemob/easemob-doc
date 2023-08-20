@@ -31,9 +31,9 @@ const textMessage = WebIM.message.create({
 });
 
 
-conn.modifyMessage({ messageId: 'messageId', message: textMessage })
+conn.modifyMessage({ messageId: 'messageId', modifiedMessage: textMessage })
     .then((res) => {
-      console.log(res.message, 'modifiedMessage')
+      console.log(res.message)
     })
     .catch((e) => {
       console.log(e)

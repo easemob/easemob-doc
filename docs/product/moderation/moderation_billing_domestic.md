@@ -35,157 +35,146 @@
 假设用量费用为 100 元低于基础服务费用 288 元/月，则当月应付费用为 288 元。
 :::
 
-**具体审核模型单价如下：**
+**审核模型单价如下：**
 
-<table>
-  <tr>
-    <th>数据类型</th>
-    <th>审核模型</th>
-    <th>单价</th>
-    <th>单位</th>
-  </tr>
-  <tr>
-    <td>文本</td>
-    <td>文本-通用违规（涉政&违禁&暴恐&色情&辱骂&广告&灌水&无意义）</td>
-    <td>15</td>
-    <td>元/万条</td>
-  </tr>
-  <tr>
-    <td rowspan="7">图片</td>
-    <td>图片-涉政</td>
-    <td>15</td>
-    <td>元/万张</td>
-  <tr>
-    <td>图片-暴恐</td>
-    <td>15</td>
-    <td>元/万张</td>
-  <tr>
-    <td>图片-色情</td>
-    <td>15</td>
-    <td>元/万张</td>
-  <tr>
-    <td>图片-广告</td>
-    <td>15</td>
-    <td>元/万张</td>
-  <tr>
-    <td>图片-版权 LOGO</td>
-    <td>15</td>
-    <td>元/万张</td>
-  <tr>
-    <td>图片-违禁</td>
-    <td>15</td>
-    <td>元/万张</td>
-  <tr>
-    <td>图片-OCR 文字通用违规（涉政&违禁&暴恐&色情&辱骂&广告）</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  </tr>
-  </tr>
-  <tr>
-    <td rowspan="2">音频文件</td>
-    <td>音频-转译文本通用违规（涉政&违禁&暴恐&色情&辱骂&广告）</td>
-    <td>1.5</td>
-    <td>元/小时</td>
-  <tr>
-    <td>音频-声音特征（娇喘）</td>
-    <td>0.5</td>
-    <td>元/小时</td>
-  </tr>
-  </tr>
- <tr>
-    <td rowspan="9">视频文件</td>
-    <td>视频-截帧图片涉政</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频-截帧图片暴恐</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频-截帧图片色情</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频-截帧图片广告</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频-截帧图片版权 LOGO</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频-截帧图片违禁</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频-截帧图片 OCR 文字通用违规（涉政&违禁&暴恐&色情&辱骂&广告）</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频-音频转译文本通用违规（涉政&违禁&暴恐&色情&辱骂&广告）</td>
-    <td>1.5</td>
-    <td>元/小时</td>
-  <tr>
-    <td>视频-音频声音特征（娇喘）</td>
-    <td>0.5</td>
-    <td>元/小时</td>
-  </tr>
-  </tr>
-  <tr>
-    <td rowspan="10">视频流</td>
-    <td>视频流-截帧图片涉政</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频流-截帧图片暴恐</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频流-截帧图片色情</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频流-截帧图片广告</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频流-截帧图片版权 LOGO</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频流-截帧图片违禁</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频流-截帧图片不良场景</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频流-截帧图片 OCR 文字通用违规（涉政&违禁&暴恐&色情&辱骂&广告）</td>
-    <td>22.5</td>
-    <td>元/万张</td>
-  <tr>
-    <td>视频流-音频转译文本通用违规（涉政&违禁&暴恐&色情&辱骂&广告）</td>
-    <td>1.5</td>
-    <td>元/小时</td>
-   <tr>
-    <td>视频流-音频声音特征（娇喘）</td>
-    <td>0.5</td>
-    <td>元/小时</td>
-  </tr>
-  </tr>
-  <tr>
-    <td rowspan="2">音频流</td>
-    <td>音频流-转译文本通用违规（涉政&违禁&暴恐&色情&辱骂&广告）</td>
-    <td>1.5</td>
-    <td>元/小时</td>
-  <tr>
-    <td>音频流-声音特征（娇喘）</td>
-    <td>0.5</td>
-    <td>元/小时</td>
-  </tr>
-  </tr>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<table width="825" border="1">
+  <tbody>
+    <tr>
+      <td width="91"><strong>数据类型</strong></td>
+      <td width="547"><strong>审核模型</strong></td>
+      <td width="71"><strong>单价</strong></td>
+      <td width="88"><strong>单位</strong></td>
+    </tr>
+    <tr>
+      <td>文本</td>
+      <td>文本-通用违规（涉政&amp;违禁&amp;暴恐&amp;色情&amp;辱骂&amp;广告&amp;灌水&amp;无意义）</td>
+      <td rowspan="7">15</td>
+      <td>元/万条</td>
+    </tr>
+    <tr>
+      <td rowspan="7">图片</td>
+      <td>图片-涉政</td>
+      <td rowspan="7">元/万张</td>
+    </tr>
+    <tr>
+      <td>图片-暴恐</td>
+    </tr>
+    <tr>
+      <td>图片-色情</td>
+    </tr>
+    <tr>
+      <td>图片-广告</td>
+    </tr>
+    <tr>
+      <td>图片-版权 LOGO</td>
+    </tr>
+    <tr>
+      <td>图片-违禁</td>
+    </tr>
+    <tr>
+      <td>图片-OCR 文字通用违规（涉政&amp;违禁&amp;暴恐&amp;色情&amp;辱骂&amp;广告）</td>
+      <td>22.5</td>
+    </tr>
+    <tr>
+      <td rowspan="2">音频文件</td>
+      <td>音频-转译文本通用违规（涉政&amp;违禁&amp;暴恐&amp;色情&amp;辱骂&amp;广告）</td>
+      <td>1.5</td>
+      <td rowspan="2">元/小时</td>
+    </tr>
+    <tr>
+      <td>音频-声音特征（娇喘）</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <td rowspan="9">视频文件</td>
+      <td>视频-截帧图片涉政</td>
+      <td rowspan="7">22.5</td>
+      <td rowspan="7">元/万张</td>
+    </tr>
+    <tr>
+      <td>视频-截帧图片暴恐</td>
+    </tr>
+    <tr>
+      <td>视频-截帧图片色情</td>
+    </tr>
+    <tr>
+      <td>视频-截帧图片广告</td>
+    </tr>
+    <tr>
+      <td>视频-截帧图片版权 LOGO</td>
+    </tr>
+    <tr>
+      <td>视频-截帧图片违禁</td>
+    </tr>
+    <tr>
+      <td>视频-截帧图片 OCR 文字通用违规（涉政&amp;违禁&amp;暴恐&amp;色情&amp;辱骂&amp;广告）</td>
+    </tr>
+    <tr>
+      <td>视频-音频转译文本通用违规（涉政&amp;违禁&amp;暴恐&amp;色情&amp;辱骂&amp;广告）</td>
+      <td>1.5</td>
+      <td rowspan="2">元/小时</td>
+    </tr>
+    <tr>
+      <td>视频-音频声音特征（娇喘）</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <td rowspan="10">视频流</td>
+      <td>视频流-截帧图片涉政</td>
+      <td rowspan="8">22.5</td>
+      <td rowspan="8">元/万张</td>
+    </tr>
+    <tr>
+      <td>视频流-截帧图片暴恐</td>
+    </tr>
+    <tr>
+      <td>视频流-截帧图片色情</td>
+    </tr>
+    <tr>
+      <td>视频流-截帧图片广告</td>
+    </tr>
+    <tr>
+      <td>视频流-截帧图片版权 LOGO</td>
+    </tr>
+    <tr>
+      <td>视频流-截帧图片违禁</td>
+    </tr>
+    <tr>
+      <td>视频流-截帧图片不良场景</td>
+    </tr>
+    <tr>
+      <td>视频流-截帧图片 OCR 文字通用违规（涉政&amp;违禁&amp;暴恐&amp;色情&amp;辱骂&amp;广告）</td>
+    </tr>
+    <tr>
+      <td>视频流-音频转译文本通用违规（涉政&amp;违禁&amp;暴恐&amp;色情&amp;辱骂&amp;广告）</td>
+      <td>1.5</td>
+      <td rowspan="2">元/小时</td>
+    </tr>
+    <tr>
+      <td>视频流-音频声音特征（娇喘）</td>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <td rowspan="2">音频流</td>
+      <td>音频流-转译文本通用违规（涉政&amp;违禁&amp;暴恐&amp;色情&amp;辱骂&amp;广告）</td>
+      <td>1.5</td>
+      <td rowspan="2">元/小时</td>
+    </tr>
+    <tr>
+      <td>音频流-声音特征（娇喘）</td>
+      <td>0.5</td>            
+    </tr>
+  </tbody>
 </table>
+</body>
+</html>
 
 相关文档：
 
