@@ -518,7 +518,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 使用返回的 cursor 获取下一页：
 
-```json
+```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users?limit=2&cursor=LTgzXXXX2tB'
@@ -766,21 +766,19 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ## 修改用户密码
 
-### 修改用户密码
-
 可以通过服务端接口修改用户的登录密码，不需要提供原密码。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及说明详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
@@ -788,7 +786,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-##### 请求 body
+#### 请求 body
 
 请求包体为 JSON Object 类型，包含以下字段：
 
@@ -798,9 +796,9 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -812,9 +810,9 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token，<YourPassword> 替换为你设置的新密码
@@ -822,7 +820,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{ "newpassword": "<YourPassword>" }' 'https://XXXX/XXXX/XXXX/users/user1/password'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -964,6 +962,82 @@ curl -X POST https://XXXX/XXXX/chatdemoui/users/batch/status -H 'Authorization: 
   ],
   "timestamp": 1552280231926,
   "duration": 4
+}
+```
+
+## 获取指定账号的在线登录设备列表
+
+多设备登录情况下，你可以调用该接口获取指定账号的在线登录设备列表。
+
+### HTTP 请求
+
+```http
+GET https://{host}/{org_name}/{app_name}/users/{username}/resources
+```
+
+#### 路径参数
+
+| 参数   | 类型   | 是否必需 | 描述         |
+| :----- | :----- | :-----| :------------- |
+| `username` | String | 是    | 用户 ID。 |
+
+其他参数及描述详见 [公共参数](#公共参数)。
+
+#### 请求 header
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------------ |
+| `Accept`        | String | 是       | 内容类型，请填 `application/json`。       |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 参数       | 类型     | 描述               |
+|:---------|:-------|:-----------------|
+| data     | JSON Array  | 已登录设备的列表。          |
+| data.res | String | 已登录设备的资源 ID，即服务器分配给每个设备资源的唯一标识符。资源 ID 的格式为 `{device type}_{resource ID}`，其中设备类型 `device type` 可以是 `android`、`ios` 或 `web`，`resource ID` 由 SDK 分配。例如，`android_123423453246`。|
+| data.device_uuid | String | 已登录设备的 UUID。       |
+| data.device_name | String | 已登录设备的名称。        |
+
+其他参数及说明详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl --location 'http://XXXX/XXXX/XXXX/users/XXXX/resources' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer  <YourAppToken>'
+```
+
+#### 响应示例
+
+```json
+{
+    "path": "/users/XXXX/resources",
+    "uri": "https://XXXX/XXXX/XXXX/users/XXXX/resources",
+    "timestamp": 1692325141777,
+    "organization": "XXXX",
+    "application": "0XXXX4",
+    "entities": [],
+    "action": "get",
+    "data": [
+        {
+            "res": "android_XXXX",
+            "device_uuid": "2a54-XXXX",
+            "device_name": "HUAWEI-XXXX"
+        }
+    ],
+    "duration": 0,
+    "applicationName": "chatdemoui"
 }
 ```
 
