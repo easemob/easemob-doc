@@ -78,11 +78,20 @@
 
 个性化协同支持全端（Web、Android 和 iOS）覆盖，为帮助开发者及企业客户更好的体验产品功能，各端应用可通过以下链接下载。您也可以拨打400-622-1776 联系我们，环信会安排专业的顾问，为贵单位提供定制、安全、可扩展的个性化协同解决方案。
 
+<table>
+<tr><td>平台</td><td>应用端</td><td>下载地址</td><td>备注</td></tr>
+<tr><td rowspan="2">访客端</td><td>iOS</td><td><a href="https://www.pgyer.com/lbTC">下载体验</a></td><td>下载后选择【用户模块】注册与登录</td></tr>
+<tr><td>Android</td><td><a href="https://www.pgyer.com/Bt7N">下载体验</a></td><td>下载后选择【用户模块】注册与登录</td></tr>
+<tr><td rowspan="3">客服&运管人员</td><td>iOS</td><td><a href="https://www.pgyer.com/lbTC">下载体验</a></td><td>下载后选择【运管模块】，使用客服预置账号登录</td></tr>
+<tr><td>Android</td><td><a href="https://www.pgyer.com/Bt7N">下载体验</a></td><td>下载后选择【运管模块】，使用客服预置账号登录</td></tr>
+<tr><td>Web</td><td><a href="http://39.105.11.55/#/login">点击体验</a></td><td>下载后选择【运管模块】，使用客服预置账号登录</td></tr>
+</table>
+<!--
 | 应用端 | 下载地址 |
 | :------------------- | :----- |
 | Web | [下载体验](http://39.105.11.55/#/login) |
 | Android | [下载体验](https://www.pgyer.com/Bt7N) |
 | iOS | [下载体验](https://www.pgyer.com/lbTC)|
-
+-->
 <span style="color:#000;font-weight:bold;font-size:20px;">授权开源</span><br>
 <span>通过签署授权协议，环信可提供个性化协同源码以帮助合作伙伴或最终客户降低开发成本，加速项目进程。请联系程先生 (Tel:17611319060)。</span>
