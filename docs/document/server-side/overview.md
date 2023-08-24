@@ -176,7 +176,7 @@
 | 添加单个用户至群组白名单 | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/white/users/{username} | 将指定的单个用户添加至群组白名单。 |
 | 批量添加用户至群组白名单 | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users    | 添加多个用户至群组白名单。         |
 | 将用户移除群组白名单     | DELETE | {org_name}/{app_name}/chatgroups/{group_id}/white/users/{username} | 将指定用户从群组白名单中移除。     |
-| 获取禁言列表             | GET    | /{org_name}/{app_name}/chatgroups/{group_id}/mute}           | 获得指定群组的禁言列表。           |
+| 获取禁言列表             | GET    | /{org_name}/{app_name}/chatgroups/{group_id}/{mute}           | 获得指定群组的禁言列表。           |
 | 禁言指定群成员           | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/mute            | 将指定群成员禁言。                 |
 | 禁言全体成员             | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/ban             | 对所有群组成员一键禁言。           |
 | 解除指定成员禁言             | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}(,{member2},…) | 将一个或多个群成员移除禁言列表。   |
@@ -253,3 +253,14 @@
 | 禁言聊天室全体成员         | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/ban           | 对所有聊天室成员一键禁言。           |
 | 解除聊天室禁言成员         | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member1}(,{member2},…) | 将指定用户从禁言列表中移除。         |
 | 解除聊天室全员禁言         | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/ban           | 一键取消对聊天室全体成员的禁言。     |
+
+## 用户在线状态管理
+
+| 名称 | 方法  | 请求 | 描述 |
+| :--------------- |:------ | :------------  | :----------- |
+| 设置用户在线状态信息  |  POST     | /{org_name}/{app_name}/users/{uid}/presence/{resource}/{status} | 设置用户在线状态信息。 |
+| 批量订阅在线状态    |  POST      | /{org_name}/{app_name}/users/{uid}/presence/{expiry}         | 批量订阅在线状态。  |
+| 批量获取在线状态信息    |  POST   | /{org_name}/{app_name}/users/{uid}/presence                  | 批量获取在线状态信息。 |
+| 查询单个群组的在线成员数量    |  GET   | /{org_name}/{app_name}/presence/online/{group_id}/type/{query_type}  | 查询单个群组的在线成员数量。 |
+|  取消订阅多个用户的在线状态     |  DELETE           | /{org_name}/{app_name}/users/{uid}/presence                  | 取消订阅多个用户的在线状态。   |
+| 查询订阅列表    |   GET       | /{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&pageSize=100 | 查询订阅列表。  |
