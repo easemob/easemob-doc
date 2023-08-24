@@ -260,6 +260,66 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence'
  }
 ```
 
+## 查询单个群组的在线成员数量
+
+你可以查询单个群组的在线成员数量。如需使用该 API，需要联系环信商务开通。
+
+这里的在线状态指用户的 app 与服务器成功建立连接，不包括用户的自定义在线状态，如忙碌、马上回来等。
+
+### HTTP 请求
+
+```http
+GET https://{host}/{org_name}/{app_name}/presence/online/{group_id}/type/{query_type}
+```
+
+#### 路径参数
+
+参数及描述详见 [公共参数](#公共参数)。
+
+#### 查询参数
+
+| 参数   | 类型   | 是否必需 | 描述                                    |
+| :----- | :----- | :------- | :-------------------------------------- |
+| `group_id`   | String | 是       | 群组 ID。                                |
+| `query_type` | Int    | 是       | 查询类型，查询群组的在线成员数量，传 `1` 即可。 |
+
+#### 请求 header
+
+| 参数            | 类型   | 是否必需 | 描述                                                         |
+| :-------------- | :----- | :------- | :--------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                          |
+| `Authorization` | String | 是       | 该管理员的鉴权 token，格式为 `Bearer ${YourAppToken}`，其中 `Bearer` 是固定字符，后面加英文空格，再加获取到的 token 值。 |
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段     | 类型 | 描述               |
+| :------- | :--- | :----------------- |
+| `result` | Int  | 群组内的在线成员数量。 |
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](error.html)了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+```shell
+将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXX/XXX/XXX/presence/online/XXX/type/XXX'
+```
+
+#### 响应示例
+
+```json
+{
+    "result": 100
+}
+```
+
+
 ##  取消订阅多个用户的在线状态
 
 取消订阅多个用户的在线状态。
