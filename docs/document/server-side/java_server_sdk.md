@@ -24,7 +24,7 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.7.3</version>
+    <version>0.7.5</version>
 </dependency>
 ```
 
@@ -237,8 +237,8 @@ EMProperties properties = EMProperties.builder()
 
 ### V0.7.5 2023-08-24
 
-1.`EMProperties` 中增加对 `ConnectionProvider` 的配置项，用于解决 Netty 请求连接问题。
-2.支持修改群组公开或私有属性。
+- `EMProperties` 中增加对 `ConnectionProvider` 的配置项，用于解决 Netty 请求连接问题。
+- 支持修改群组公开或私有属性。
 以上更新内容请到 `EMProperties` 和 `GroupApi` 中查看。
 
 ### V0.7.3 2023-07-05
