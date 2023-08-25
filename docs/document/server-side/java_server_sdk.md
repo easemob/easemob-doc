@@ -127,7 +127,7 @@ public class Config {
 
 ## 参考
 
-- [Server SDK 的 API 文档](https://easemob.github.io/easemob-im-server-sdk/) 。
+- [Server SDK 的 API 文档](https://easemob.github.io/easemob-im-server-sdk/)。
 - [Server SDK 开源地址](https://github.com/easemob/easemob-im-server-sdk)。
 
 ## 常见问题
@@ -144,6 +144,37 @@ logging.level.com.easemob.im.http=debug
 
 ```properties
 logging.level.com.easemob.im.shaded.io.netty=error
+```
+
+### 使用问题
+
+目前有开发者在使用 Server SDK 有遇到 `Connection reset by peer` 异常的情况，由于 Server SDK 使用的 Netty 来发送请求，该异常是由 Netty 抛出来的，Netty 官方有相关问题的 issue 并有一些[解决方案](https://github.com/reactor/reactor-netty/issues/1774)，不过要依赖于对 Netty 的 `ConnectionProvider` 进行配置，因此 Server SDK 在 `EMProperties` 中增加与之对应的配置项，来让开发者针对自己的使用场景进行对 Netty 的 `ConnectionProvider` 进行配置。比如设置连接数量、连接空闲时间等，如果使用 Server SDK 请求量较大，那可以把连接数设置大一些。
+
+示例：
+
+```java
+@Configuration
+public class Config {
+
+    @Bean
+    public EMService service() {
+
+        EMProperties properties = EMProperties.builder()
+                    .setBaseUri("https://Your privatized address name")
+                    .setAppkey("Appkey")
+                    .setClientId("Client ID")
+                    .setClientSecret("Client Secret")
+                    .setHttpConnectionPoolSize(500)
+                    .setHttpConnectionMaxIdleTime(20000)
+                    .setHttpConnectionMaxLifeTime(60000)
+                    .setHttpConnectionPendingAcquireTimeout(60000)
+                    .setHttpConnectionEvictInBackground(120000)
+                    .setServerTimezone("+8")
+                    .build();
+
+        return new EMService(properties);
+    }
+}
 ```
 
 ## 注意事项
@@ -203,6 +234,12 @@ EMProperties properties = EMProperties.builder()
 ```
 
 ## 更新日志
+
+### V0.7.5 2023-08-24
+
+1.`EMProperties`` 中增加对 `ConnectionProvider` 的配置项，用于解决 Netty 请求连接问题。
+2.支持修改群组公开或私有属性。
+以上更新内容请到 `EMProperties` 和 `GroupApi` 中查看。
 
 ### V0.7.3 2023-07-05
 
