@@ -237,7 +237,7 @@ EMProperties properties = EMProperties.builder()
 
 ### V0.7.5 2023-08-24
 
-1.`EMProperties`` 中增加对 `ConnectionProvider` 的配置项，用于解决 Netty 请求连接问题。
+1.`EMProperties` 中增加对 `ConnectionProvider` 的配置项，用于解决 Netty 请求连接问题。
 2.支持修改群组公开或私有属性。
 以上更新内容请到 `EMProperties` 和 `GroupApi` 中查看。
 
