@@ -772,7 +772,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ## 发送消息
 
-通过 RESTful API 在频道中发送消息与在群组中发送消息的方式类似，唯一的区别在于请求体中的 `to` 参数需要设置为频道 ID，并且发送的消息不会写入会话列表。详见 [发送群聊消息](http://docs-im-beta.easemob.com/document/server-side/message.html#发送群聊消息)。
+通过 RESTful API 在频道中发送消息与在群组中发送消息的方式类似，唯一的区别在于请求体中的 `to` 参数需要设置为频道 ID，并且发送的消息不会写入会话列表。详见 [发送群聊消息](/document/server-side/message_group.html)。
 
 ## 管理消息 Reaction
 

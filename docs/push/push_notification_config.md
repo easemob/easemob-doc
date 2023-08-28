@@ -253,7 +253,7 @@
 | `clientCustomMap` | Object | 客户端自定义键值对。                                         |
 | `requestId`       | String | 用户请求唯一标识，长度限制为 64 字符。                       |
 | `pushMode`        | Int    | 推送模式。<br/> - （默认）`0`：正式推送；<br/> - `1`：测试推送。       |
-| `extra`           | Object | [推送回调](#vivo-推送回调) |
+| `extra`           | Object | [推送回调](#vivo-推送回调)。 |
 | `category`        | String | 二级分类，字段的值详见[二级分类标准 中category说明](https://dev.vivo.com.cn/documentCenter/doc/359)。 1. 填写`category` 后，可以不设置 `classification` 参数，但若设置 `classification`，需保证 `category` 与 `classification` 是正确对应关系，否则推送失败。 2. 该参数请按照消息分类规则填写，且必须大写；若传入无效的值，则推送失败。 |
 | `notifyId`        | Int    | 通知 ID，即通知的唯一标识。若多个消息的通知 ID 相同，到达设备的新消息会覆盖旧消息显示在设备通知栏中。取值范围为：1-2147483647。 |
 
@@ -396,7 +396,7 @@
 | `sound`             | String | 自定义消息通知铃声，在新创建渠道时有效，此处设置的铃声文件必须存放在应用的/res/raw路径下，例如设置为“/raw/shake”，对应应用本地的/res/raw/shake.xxx文件，支持的文件格式包括mp3、wav、mpeg等，如果不设置使用默认系统铃声。注意：由于铃声是通知渠道的属性，因此铃声仅在渠道创建时有效，渠道创建后，即使设置自定义铃声也不会播放，而使用创建渠道时设置的铃声。 |
 | `defaultSound`      | Bool   | 默认铃声控制开关。<br/> - `true`：打开；<br/> - `false`：关闭。        |
 | `tag`               | String | 消息标签，同一应用下使用同一个消息标签的消息会相互覆盖，只展示最新的一条。 |
-| `clickAction`       | Object | [消息点击行为](#自定义消息点击行为) |
+| `clickAction`       | Object | [消息点击行为](#自定义消息点击行为)。 |
 | `bodyLocKey`        | String | 通知显示本地化。                                             |
 | `bodyLocArgs`       | List   |                                                              |
 | `titleLocKey`       | String | 标题本地化 key。                                             |
@@ -411,7 +411,7 @@
 | `autoClear`         | Int    | 消息展示时长，超过后自动清除，单位为毫秒。                   |
 | `notifyId`          | Int    | 每条消息在通知显示时的唯一标识。实现新的通知栏消息覆盖老的。 |
 | `group`             | String | 消息分组，将同一组的消息只显示 1 条。                        |
-| `badge`             | Object | [安卓通知消息角标控制](#自定义角标) |
+| `badge`             | Object | [安卓通知消息角标控制](#自定义角标)。 |
 | `autoCancel`        | Bool   | 安卓通知栏消息保持标识，在点击通知栏消息后，消息是否不显示在通知栏。<br/> - `true`：是；<br/> - `false`：否。 |
 | `when`              | String | 消息的排序时间，安卓通知栏消息根据这个值将消息排序，同时这个时间在通知栏上显示。样例：2014-10-02T15:01:23.045123456Z |
 | `importance`        | String | Android通知消息分类，决定用户设备消息通知行为，取值如下：<br/> - `LOW`：资讯营销类消息；<br/> - `NORMAL`：服务与通讯类消息。 |
@@ -455,7 +455,7 @@
 
 | 字段               | 类型   | 描述                                                         |
 | :----------------- | :----- | :----------------------------------------------------------- |
-| `color`            | Object | [呼吸灯颜色](#呼吸灯颜色) |
+| `color`            | Object | [呼吸灯颜色](#呼吸灯颜色)。 |
 | `lightOnDuration`  | String | 呼吸灯点亮时间间隔，格式按照 “｜[sS]｜.｜.[sS]”。            |
 | `lightOffDuration` | String | 呼吸灯熄灭时间间隔，格式按照 “｜[sS]｜.｜.[sS]”。            |
 

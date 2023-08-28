@@ -68,32 +68,32 @@ export const zhSidebar = sidebar({
       text: '场景方案',
       children: [
         { text: '超级社区', collapsible: true, children: [
-          { text: '产品概述', link: 'circle_overview.html' },
+          { text: '产品概述', link: 'circle/circle_overview.html' },
           { text: '快速开始', collapsible: false, children: [ 
-            { text: 'Android 快速开始', link: 'circle_quickstart_android.html' },
-            { text: 'iOS 快速开始', link: 'circle_quickstart_ios.html'  },
-            { text: 'Web 快速开始', link: 'circle_quickstart_web.html'  },
+            { text: 'Android 快速开始', link: 'circle/circle_quickstart_android.html' },
+            { text: 'iOS 快速开始', link: 'circle/circle_quickstart_ios.html'  },
+            { text: 'Web 快速开始', link: 'circle/circle_quickstart_web.html'  },
             ]
           },
           { text: '集成说明', collapsible: false, children: [ 
-            { text: 'Android 社区管理', link: 'server_mgmt_android.html'  },
-            { text: 'Android 频道管理', link: 'channel_mgmt_android.html'  },
-            { text: 'Android 频道分组管理', link: 'category_mgmt_android.html' },
-            { text: 'iOS 社区管理', link: 'server_mgmt_ios.html'  },
-            { text: 'iOS 频道管理', link: 'channel_mgmt_ios.html'  },
-            { text: 'iOS 频道分组管理', link: 'category_mgmt_ios.html'  },
-            { text: 'Web 社区管理', link: 'server_mgmt_web.html'  },
-            { text: 'Web 频道管理', link: 'channel_mgmt_web.html'  },
-            { text: 'Web 频道分组管理', link: 'category_mgmt_web.html' },
+            { text: 'Android 社区管理', link: 'circle/server_mgmt_android.html'  },
+            { text: 'Android 频道管理', link: 'circle/channel_mgmt_android.html'  },
+            { text: 'Android 频道分组管理', link: 'circle/category_mgmt_android.html' },
+            { text: 'iOS 社区管理', link: 'circle/server_mgmt_ios.html'  },
+            { text: 'iOS 频道管理', link: 'circle/channel_mgmt_ios.html'  },
+            { text: 'iOS 频道分组管理', link: 'circle/category_mgmt_ios.html'  },
+            { text: 'Web 社区管理', link: 'circle/server_mgmt_web.html'  },
+            { text: 'Web 频道管理', link: 'circle/channel_mgmt_web.html'  },
+            { text: 'Web 频道分组管理', link: 'circle/category_mgmt_web.html' },
             ]
           },  
           { text: 'API 参考', collapsible: false, children: [ 
-            { text: 'REST 社区管理', link: 'server_mgmt_rest.html'  },
-            { text: 'REST 频道管理', link: 'channel_mgmt_rest.html'  },
-            { text: 'REST 频道分组管理', link: 'category_mgmt_rest.html'  },
-            { text: 'Android API 参考', link: 'api_reference_android.html'  },
-            { text: 'iOS API 参考', link: 'api_reference_ios.html'  },
-            { text: 'Web API 参考', link: 'api_reference_web.html'  },
+            { text: 'REST 社区管理', link: 'circle/server_mgmt_rest.html'  },
+            { text: 'REST 频道管理', link: 'circle/channel_mgmt_rest.html'  },
+            { text: 'REST 频道分组管理', link: 'circle/category_mgmt_rest.html'  },
+            { text: 'Android API 参考', link: 'circle/api_reference_android.html'  },
+            { text: 'iOS API 参考', link: 'circle/api_reference_ios.html'  },
+            { text: 'Web API 参考', link: 'circle/api_reference_web.html'  },
             ]
           },  
         ]
