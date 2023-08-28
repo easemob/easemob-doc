@@ -45,7 +45,7 @@
 | `description`   | String    | 频道描述。|
 | `custom`    | String   | 频道的扩展信息。                      |
 | `max_users`    | Long   | 频道最大成员数量。                      |
-| `rtc_name`    | String   | RTC 频道名称。该名称在加入 RTC 频道时使用。若使用声网 RTC，该名称还用于[生成 RTC Token](https://docs.agora.io/cn/voice-call-4.x/token_server_android_ng?platform=Android)。<br/>该参数仅在创建语聊频道时返回，若创建语聊房频道时未指定 `rtc_name`，服务器将使用频道 ID 作为该参数的值返回。                    |
+| `rtc_name`    | String   | RTC 频道名称。该名称在加入 RTC 频道时使用。若使用声网 RTC，该名称还用于[生成 RTC Token](https://docportal.shengwang.cn/cn/voice-call-4.x/token_server_android_ng?platform=Android)。<br/>该参数仅在创建语聊频道时返回，若创建语聊房频道时未指定 `rtc_name`，服务器将使用频道 ID 作为该参数的值返回。                    |
 | `current_users_count` | Int | 当前在频道中的成员数，仅在获取语聊房频道详情时返回。        |
 | `default_channel` | Int | 是否为社区的默认频道：<br/> - `0`：否；<br/> - `1`：是。         |
 | `user_id`   | String   | 环信用户 ID。                           |
@@ -61,7 +61,7 @@
 
 Authorization：`Bearer ${YourAppToken}`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用环信 App Token 鉴权](http://docs-im-beta.easemob.com/document/server-side/easemob_app_token.html)。
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用环信 App Token 鉴权](/document/server-side/easemob_app_token.html)。
 
 ## 创建和管理频道
 
@@ -99,7 +99,7 @@ POST https://{host}/{org_name}/{app_name}/circle/channel
 | `maxUsers`        | Long | 否       | 频道最大成员数量。<br/> - 对于语聊频道（即 `mode` 为 `1`），该参数的取值范围为 [1,20]，默认值为 `8`。<br/> - 对于文字频道，该参数的取值范围为 [1,2000]，默认值为 `2000`。如需要提高上限请联系商务。                      |
 | `description` | String | 否       | 频道描述，长度不能超过 500 个字符。                      |
 | `custom`      | String | 否       | 频道扩展信息，例如可以给社区添加业务相关的标记，长度不能超过 500 个字符。 |
-| `rtc_name`      | String | 否       | RTC 频道名称，长度不能超过 50 个字符。该名称在加入 RTC 频道时使用，仅在创建语聊频道时返回。若使用声网 RTC，该名称还用于[生成 RTC Token](https://docs.agora.io/cn/voice-call-4.x/token_server_android_ng?platform=Android)。<br/>若创建语聊频道时未指定 `rtc_name`，服务器将使用频道 ID 作为该参数的值返回。|
+| `rtc_name`      | String | 否       | RTC 频道名称，长度不能超过 50 个字符。该名称在加入 RTC 频道时使用，仅在创建语聊频道时返回。若使用声网 RTC，该名称还用于[生成 RTC Token](https://docportal.shengwang.cn/cn/voice-call-4.x/token_server_android_ng?platform=Android)。<br/>若创建语聊频道时未指定 `rtc_name`，服务器将使用频道 ID 作为该参数的值返回。|
 
 #### HTTP 响应
 
