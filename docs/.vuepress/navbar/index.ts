@@ -72,7 +72,7 @@ export const zhNavbar = navbar([
   },
   {
     text: '即时推送',
-    link: '/push/overview.html'
+    link: '/push/push_overview.html'
   },
   {
     text: '私有部署',

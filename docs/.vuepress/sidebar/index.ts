@@ -157,5 +157,5 @@ export const zhSidebar = sidebar({
   ...DOC_SIDEBAR,
   '/private/im/': PRIVATE_IM_SIDEBAR,
   '/private/media/': PRIVATE_MEDIA_SIDEBAR,
-  // '/push': PUSH_SIDEBAR
+  '/push': PUSH_SIDEBAR
 });
