@@ -67,7 +67,7 @@ export const zhSidebar = sidebar({
     {
       text: '场景方案',
       children: [
-        { text: '超级社区', collapsible: false, children: [
+        { text: '超级社区', collapsible: true, children: [
           { text: '产品概述', link: 'circle_overview.html' },
           { text: '快速开始', collapsible: false, children: [ 
             { text: 'Android 快速开始', link: 'circle_quickstart_android.html' },
@@ -98,7 +98,7 @@ export const zhSidebar = sidebar({
           },  
         ]
       },  
-        { text: '语聊房', collapsible: false, children: [
+        { text: '语聊房', collapsible: true, children: [
           { text: '场景概览', collapsible: false, children: [ 
             { text: '场景介绍', link: 'demo_scenario_introduction.html' },
             { text: 'Demo 体验（Android/iOS）', link: 'demo_experience.html'  },
