@@ -40,9 +40,9 @@ pod install
 
 在集成该库前，你需要满足以下条件：
 
-- 分别创建 [环信应用](/product/enable_and_configure_IM.html) 及 [声网应用](https://docs.agora.io/cn/Video/run_demo_video_call_ios?platform=iOS#1-创建-agora-项目)；
+- 分别创建 [环信应用](/product/enable_and_configure_IM.html) 及 [声网应用](https://docportal.shengwang.cn/cn/video-legacy/run_demo_video_call_ios?platform=iOS#1-创建声网项目)；
 - 已完成环信 IM 的基本功能，包括登录、好友、群组以及会话等的集成；
-- 上线之前开通声网 token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 token。利用 App Server 生成 token 的过程参见 [声网 token](https://docs.agora.io/cn/live-streaming/token_server)。
+- 上线之前开通声网 token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 token。利用 App Server 生成 token 的过程参见 [声网 token](https://docportal.shengwang.cn/cn/video-call-4.x/token_server_ios_ng?platform=iOS)。
 
 ## 快速集成
 
@@ -347,7 +347,7 @@ config.enableRTCTokenValidate = YES;// 开启 RTC Token 验证，默认不开启
 [[EaseCallManager sharedManager] initWithConfig:config delegate:self];
 ```
 
-获取 token 的过程由用户自己完成，开启后在通话时，会收到 `callDidRequestRTCTokenForAppId`回调，用户需要在回调中，实现从用户自己的 App Server 中获取 token（App Server 的实现参见 [生成声网 Token](https://docs.agora.io/cn/live-streaming/token_server)），然后调用 `setRTCToken:channelName:` 接口。
+获取 token 的过程由用户自己完成，开启后在通话时，会收到 `callDidRequestRTCTokenForAppId`回调，用户需要在回调中，实现从用户自己的 App Server 中获取 token（App Server 的实现参见 [生成声网 Token](https://docportal.shengwang.cn/cn/video-call-4.x/token_server_ios_ng)，然后调用 `setRTCToken:channelName:` 接口。
 
 ```objectivec
 - (void)callDidRequestRTCTokenForAppId:(NSString * _Nonnull)aAppId

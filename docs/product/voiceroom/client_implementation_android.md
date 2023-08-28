@@ -100,7 +100,7 @@ Demo 中创建或加入语聊房的流程如下：
 - Android SDK API 等级 23 或以上；
 - Android 6.0 或以上版本的设备；
 - 有效的环信 IM 开发者账号和 App key，详见[环信即时通讯云控制台](https://console.easemob.com/user/login)；
-- [有效的 Agora 项目，获取项目的 App ID 以及一个 RTC Token，实现语音通话](https://docs.agora.io/cn/voice-call-4.x/start_call_audio_android_ng?platform=Android)；
+- [有效的 Agora 项目，获取项目的 App ID 以及一个 RTC Token，实现语音通话](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_android_ng?platform=Android)；
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 项目配置
@@ -108,7 +108,7 @@ Demo 中创建或加入语聊房的流程如下：
 | 产品                | SDK 下载                  | 集成文档                                                                    |
 | :------------------ | :------------------------ | :------------------------------------------------ |
 | 环信即时通讯 IM SDK | 环信即时通讯 IM SDK 3.9.8 | [发送和接收消息](/document/android/message_send_receive.html)           |
-| Agora RTC SDK       | Agora RTC SDK 4.0.1       | [实现音频通话](https://docs.agora.io/cn/voice-call-4.x/start_call_audio_android_ng?platform=Android)|
+| Agora RTC SDK       | Agora RTC SDK 4.0.1       | [实现音频通话](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_android_ng?platform=Android)|
 
 ## 基础 API 参考
 
@@ -116,7 +116,7 @@ Demo 中创建或加入语聊房的流程如下：
 
 ### 初始设置
 
-加入语聊房前，进行[环信 IM SDK 初始化](/document/android/quickstart.html#实现单聊)和 [Agora RTC 初始化](https://docs.agora.io/cn/voice-call-4.x/start_call_audio_android_ng?platform=Android#处理-android-系统逻辑)设置。
+加入语聊房前，进行[环信 IM SDK 初始化](/document/android/quickstart.html#实现单聊)和 [Agora RTC 初始化](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_android_ng?platform=Android#处理-android-系统逻辑)设置。
 
 ### App Server 相关
 
@@ -171,9 +171,9 @@ Demo 中创建或加入语聊房的流程如下：
 
 | API                                                          | 实现功能                |
 | :----------------------------------------------------------- | :---------------------- |
-| [initializeAndJoinChannel](https://docs.agora.io/cn/voice-call-4.x/start_call_audio_android_ng?platform=Android#实现语音通话逻辑) | 初始化 app 并加入频道。 |
+| [initializeAndJoinChannel](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_android_ng?platform=Android#实现语音通话逻辑) | 初始化 app 并加入频道。 |
 
-其他 API，详见[声网官网](https://docs.agora.io/cn/voice-call-4.x/API%20Reference/java_ng/API/rtc_api_overview_ng.html)。
+其他 API，详见[声网官网](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/java_ng/API/rtc_api_overview_ng.html)。
 
 ### Easemob IM SDK 相关
 

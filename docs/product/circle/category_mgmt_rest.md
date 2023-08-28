@@ -52,7 +52,7 @@
 | `channels.channel_id`   | String   | 频道 ID。                          |
 | `channels.max_users`    | Long   | 频道最大成员数量。                      |
 | `channels.default_channel` | Int | 是否为社区的默认频道：<br/> - `0`：否；<br/> - `1`：是。         |
-| `rtc_name`    | String   | RTC 频道名称。该名称在加入 RTC 频道时使用。若使用声网 RTC，该名称还用于[生成 RTC Token](https://docs.agora.io/cn/voice-call-4.x/token_server_android_ng?platform=Android)。<br/>该参数仅在创建语聊频道时返回，若创建语聊房频道时未指定 `rtc_name`，服务器将使用频道 ID 作为该参数的值返回。                   |
+| `rtc_name`    | String   | RTC 频道名称。该名称在加入 RTC 频道时使用。若使用声网 RTC，该名称还用于[生成 RTC Token](https://docportal.shengwang.cn/cn/voice-call-4.x/token_server_android_ng?platform=Android)。<br/>该参数仅在创建语聊频道时返回，若创建语聊房频道时未指定 `rtc_name`，服务器将使用频道 ID 作为该参数的值返回。                   |
 
 ## 认证方式
 

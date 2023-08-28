@@ -188,7 +188,7 @@
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [joinChatroom](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_chatroom_manager-p.html#ac66d04fd0182c7499ed539c0ea610152) | 加入语聊房。房间内的观众会收到 `userDidJoinChatroom` 回调。用户加入语聊房后才能接收或发布音频流。 |
 | [leaveChatroom](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_chatroom_manager-p.html#ac66d04fd0182c7499ed539c0ea610152) | 离开语聊房。其他成员收到 `userDidLeaveChatroom` 回调。房主离开语聊房后，房间对象自动销毁，其他成员会自动离开语聊房。 |
-| [joinChannelbyToken](https://docs.agora.io/cn/voice-call-4.x/API Reference/ios_ng/API/class_irtcengine.html#api_irtcengine_joinchannel) | 加入 RTC 频道。用户加入语聊房后才能接收或发布音频流。房间内的观众会收到 `ASManagerDelegate.didRtcLocalUserJoinedOfUid` 回调。 |
+| [joinChannelbyToken](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#api_irtcengine_joinchannel) | 加入 RTC 频道。用户加入语聊房后才能接收或发布音频流。房间内的观众会收到 `ASManagerDelegate.didRtcLocalUserJoinedOfUid` 回调。 |
 | [leaveChannel](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#api_irtcengine_leavechannel) | 离开 RTC 频道。                                              |
 
 通过 App Server 加入或离开语聊房的方法的示例代码如下：
