@@ -65,6 +65,59 @@ export const zhSidebar = sidebar({
       ]
     },
     {
+      text: '场景方案',
+      children: [
+        { text: '超级社区', collapsible: false, children: [
+          { text: '产品概述', link: 'circle_overview.html' },
+          { text: '快速开始', collapsible: false, children: [ 
+            { text: 'Android 快速开始', link: 'circle_quickstart_android.html' },
+            { text: 'iOS 快速开始', link: 'circle_quickstart_ios.html'  },
+            { text: 'Web 快速开始', link: 'circle_quickstart_web.html'  },
+            ]
+          },
+          { text: '集成说明', collapsible: false, children: [ 
+            { text: 'Android 社区管理', link: 'server_mgmt_android.html'  },
+            { text: 'Android 频道管理', link: 'channel_mgmt_android.html'  },
+            { text: 'Android 频道分组管理', link: 'category_mgmt_android.html' },
+            { text: 'iOS 社区管理', link: 'server_mgmt_ios.html'  },
+            { text: 'iOS 频道管理', link: 'channel_mgmt_ios.html'  },
+            { text: 'iOS 频道分组管理', link: 'category_mgmt_ios.html'  },
+            { text: 'Web 社区管理', link: 'server_mgmt_web.html'  },
+            { text: 'Web 频道管理', link: 'channel_mgmt_web.html'  },
+            { text: 'Web 频道分组管理', link: 'category_mgmt_web.html' },
+            ]
+          },  
+          { text: 'API 参考', collapsible: false, children: [ 
+            { text: 'REST 社区管理', link: 'server_mgmt_rest.html'  },
+            { text: 'REST 频道管理', link: 'channel_mgmt_rest.html'  },
+            { text: 'REST 频道分组管理', link: 'category_mgmt_rest.html'  },
+            { text: 'Android API 参考', link: 'https://docs-im.easemob.com/ccim/circle/android/api'  },
+            { text: 'iOS API 参考', link: 'https://docs-im.easemob.com/ccim/circle/ios/api'  },
+            { text: 'Web API 参考', link: 'https://docs-im.easemob.com/ccim/circle/web/api'  },
+            ]
+          },  
+        ]
+      },  
+        { text: '语聊房', collapsible: false, children: [
+          { text: '场景概览', collapsible: false, children: [ 
+            { text: '场景介绍', link: 'demo_scenario_introduction.html' },
+            { text: 'Demo 体验（Android/iOS）', link: 'demo_experience.html'  },
+            ]
+          },
+          { text: '快速开始', collapsible: false, children: [ 
+            { text: '跑通示例项目（Android）', link: 'run_through_demo_android.html'  },
+            { text: '跑通示例项目（iOS）', link: 'run_through_demo_ios.html'  },
+            ]
+          },  
+          { text: '实现流程', collapsible: false, children: [ 
+            { text: '客户端实现（Android）', link: 'client_implementation_android.html'  },
+            { text: '客户端实现（iOS）', link: 'client_implementation_ios.html'  },
+            ]
+          },  
+        ]}, 
+    ]},
+
+    {
       text: '私有化集成',
       children: [
         { text: '私有化部署流程', link: 'uc_deploy.html' },
