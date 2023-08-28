@@ -100,18 +100,18 @@ export const zhSidebar = sidebar({
       },  
         { text: '语聊房', collapsible: true, children: [
           { text: '场景概览', collapsible: false, children: [ 
-            { text: '场景介绍', link: 'demo_scenario_introduction.html' },
-            { text: 'Demo 体验（Android/iOS）', link: 'demo_experience.html'  },
+            { text: '场景介绍', link: 'voiceroom/demo_scenario_introduction.html' },
+            { text: 'Demo 体验（Android/iOS）', link: 'voiceroom/demo_experience.html'  },
             ]
           },
           { text: '快速开始', collapsible: false, children: [ 
-            { text: '跑通示例项目（Android）', link: 'run_through_demo_android.html'  },
-            { text: '跑通示例项目（iOS）', link: 'run_through_demo_ios.html'  },
+            { text: '跑通示例项目（Android）', link: 'voiceroom/run_through_demo_android.html'  },
+            { text: '跑通示例项目（iOS）', link: 'voiceroom/run_through_demo_ios.html'  },
             ]
           },  
           { text: '实现流程', collapsible: false, children: [ 
-            { text: '客户端实现（Android）', link: 'client_implementation_android.html'  },
-            { text: '客户端实现（iOS）', link: 'client_implementation_ios.html'  },
+            { text: '客户端实现（Android）', link: 'voiceroom/client_implementation_android.html'  },
+            { text: '客户端实现（iOS）', link: 'voiceroom/client_implementation_ios.html'  },
             ]
           },  
         ]}, 

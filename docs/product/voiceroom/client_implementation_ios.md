@@ -95,7 +95,7 @@
 - CocoaPods。你可以参考 [CocoaPods 安装指南](https://guides.cocoapods.org/using/getting-started.html#getting-started) 安装。
 - iOS 13.0 或以上版本的设备。部分模拟机可能无法支持本项目的全部功能，所以推荐使用真机。
 - 有效的环信 IM 开发者账号和 App key，详见[环信即时通讯云控制台](https://console.easemob.com/user/login)。
-- [有效的 Agora 项目，获取项目的 App ID 以及一个 RTC Token，实现语音通话](https://docs.agora.io/cn/voice-call-4.x/start_call_audio_ios_ng?platform=iOS)。
+- [有效的 Agora 项目，获取项目的 App ID 以及一个 RTC Token，实现语音通话](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_ios_ng?platform=iOS)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 项目配置
@@ -103,7 +103,7 @@
 | 产品                | SDK 下载                           | 集成文档                                                     |
 | ------------------- | ---------------------------------- | ------------------------------------------------------------ |
 | 环信即时通讯 IM SDK | 环信即时通讯 IM SDK 3.9.8 或以上版本 | [发送、接收消息、聊天室属性 KV](/document/ios/message_send_receive.html) |
-| Agora Audio SDK     | 声网 RTM SDK 4.0.1                 | [实现音频通话](https://docs.agora.io/cn/voice-call-4.x/start_call_audio_ios_ng?platform=iOS) |
+| Agora Audio SDK     | 声网 RTM SDK 4.0.1                 | [实现音频通话](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_ios_ng?platform=iOS) |
 
 ## 基本 API 参考
 
@@ -180,7 +180,7 @@
 
 ### 初始化设置
 
-加入语聊房前，进行[环信 IM SDK 初始化](http://docs-im-beta.easemob.com/document/android/quickstart.html#实现单聊)和 [Agora Audio 初始化](https://docs.agora.io/cn/voice-call-4.x/start_call_audio_ios_ng?platform=iOS#实现语音通话逻辑)设置。
+加入语聊房前，进行[环信 IM SDK 初始化](http://docs-im-beta.easemob.com/document/android/quickstart.html#实现单聊)和 [Agora Audio 初始化](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_ios_ng?platform=iOS#实现语音通话逻辑)设置。
 
 ### 加入/离开环信 IM 聊天室或者声网 RTC 频道
 
@@ -189,7 +189,7 @@
 | [joinChatroom](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_chatroom_manager-p.html#ac66d04fd0182c7499ed539c0ea610152) | 加入语聊房。房间内的观众会收到 `userDidJoinChatroom` 回调。用户加入语聊房后才能接收或发布音频流。 |
 | [leaveChatroom](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_chatroom_manager-p.html#ac66d04fd0182c7499ed539c0ea610152) | 离开语聊房。其他成员收到 `userDidLeaveChatroom` 回调。房主离开语聊房后，房间对象自动销毁，其他成员会自动离开语聊房。 |
 | [joinChannelbyToken](https://docs.agora.io/cn/voice-call-4.x/API Reference/ios_ng/API/class_irtcengine.html#api_irtcengine_joinchannel) | 加入 RTC 频道。用户加入语聊房后才能接收或发布音频流。房间内的观众会收到 `ASManagerDelegate.didRtcLocalUserJoinedOfUid` 回调。 |
-| [leaveChannel](https://docs.agora.io/cn/voice-call-4.x/API Reference/ios_ng/API/class_irtcengine.html#api_irtcengine_leavechannel) | 离开 RTC 频道。                                              |
+| [leaveChannel](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#api_irtcengine_leavechannel) | 离开 RTC 频道。                                              |
 
 通过 App Server 加入或离开语聊房的方法的示例代码如下：
 
@@ -225,15 +225,15 @@
 
 | API                                                          | 实现功能                       |
 | ------------------------------------------------------------ | ------------------------------ |
-| [`setAudioProfile [2/2]`](https://docs.agora.io/cn/voice-call-4.x/API Reference/ios_ng/API/class_irtcengine.html#api_setaudioprofile2) | 设置音频编码属性。             |
-| [`muteLocalAudioStream`](https://docs.agora.io/cn/voice-call-4.x/API Reference/ios_ng/API/class_irtcengine.html#api_mutelocalaudiostream) | 主播可以关闭或开启本地麦克风。 |
-| [`adjustRecordingSignalVolume`](https://docs.agora.io/cn/voice-call-4.x/API Reference/ios_ng/API/class_irtcengine.html#api_adjustrecordingsignalvolume) | 调节人声音量。                 |
+| [`setAudioProfile [2/2]`](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#api_setaudioprofile2) | 设置音频编码属性。             |
+| [`muteLocalAudioStream`](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#api_mutelocalaudiostream) | 主播可以关闭或开启本地麦克风。 |
+| [`adjustRecordingSignalVolume`](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#api_adjustrecordingsignalvolume) | 调节人声音量。                 |
 
 ### 附加功能
 
 #### 最佳音效
 
-调用 [`setAudioEffectPreset`](https://docs.agora.io/cn/voice-call-4.x/API Reference/ios_ng/API/class_irtcengine.html#ariaid-title129) 方法，在不改变原声的性别特征的前提下，设置人声音效。设置音效后，频道内所有用户都能听到该效果。
+调用 [`setAudioEffectPreset`](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#ariaid-title129) 方法，在不改变原声的性别特征的前提下，设置人声音效。设置音效后，频道内所有用户都能听到该效果。
 
 ```swift
     rtcKit.setChannelProfile(.liveBroadcasting)

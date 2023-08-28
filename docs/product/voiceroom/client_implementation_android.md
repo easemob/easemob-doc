@@ -214,9 +214,9 @@ Easemob IM SDK 的 API 如下表所示：
 
 | API     | 实现功能                       |
 | :--------------- | :------------------- |
-| [`setAudioProfile [2/2\]`](https://docs.agora.io/cn/voice-call-4.x/API Reference/ios_ng/API/class_irtcengine.html#api_setaudioprofile2)   | 设置音频编码属性。   |
-| [`muteLocalAudioStream`](https://docs.agora.io/cn/voice-call-4.x/API Reference/ios_ng/API/class_irtcengine.html#api_mutelocalaudiostream) | 主播可以关闭或开启本地麦克风。 |
-| [`adjustRecordingSignalVolume`](https://docs.agora.io/cn/voice-call-4.x/API Reference/ios_ng/API/class_irtcengine.html#api_adjustrecordingsignalvolume) | 调节人声音量。  |
+| [`setAudioProfile [2/2\]`](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#api_setaudioprofile2)   | 设置音频编码属性。   |
+| [`muteLocalAudioStream`](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#api_mutelocalaudiostream) | 主播可以关闭或开启本地麦克风。 |
+| [`adjustRecordingSignalVolume`](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#api_adjustrecordingsignalvolume) | 调节人声音量。  |
 
 ### 附加功能
 
