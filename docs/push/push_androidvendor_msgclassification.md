@@ -121,7 +121,7 @@ QPS计算规则只适用于中国大陆。
 | 关键字   | 类型   | 选项 | 含义   | 说明                                                         |
 | :--------- | :----- | :--- | :------ | :----------- |
 | importance | string | 可选 | 华为通知栏消息智能分类 | 取值为”LOW”时，表示消息为资讯营销。取值为”NORMAL”时，表示消息为服务与通讯。 |
-| category   | string | 可选 | 华为厂商消息场景标识   | 为了适配华为手机厂商消息，完成[自分类权益申请](https://docs.jiguang.cn/jpush/client/Android/android_channel_id#华为消息分类使用指南) 后，用于标识消息类型，确定消息提醒方式，对特定类型消息加快发送。对应值及其说明参考 [category 值说明](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-References/https-send-api-0000001050986197#ZH-CN_TOPIC_0000001134031085__p5203378238)。若应用没有自分类权益，或应用有自分类权益但推送消息不携带 category 字段，则应用的推送消息将通过智能分类进行自动归类。若应用有自分类权益且推送消息携带category字段，将信任开发者提供的分类信息，消息不经过智能分类。 |
+| category   | string | 可选 | 华为厂商消息场景标识   | 为了适配华为手机厂商消息，完成[自分类权益申请](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/message-classification-0000001149358835#section3410731125514) 后，用于标识消息类型，确定消息提醒方式，对特定类型消息加快发送。对应值及其说明参考 [category 值说明](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-References/https-send-api-0000001050986197#ZH-CN_TOPIC_0000001134031085__p5203378238)。若应用没有自分类权益，或应用有自分类权益但推送消息不携带 category 字段，则应用的推送消息将通过智能分类进行自动归类。若应用有自分类权益且推送消息携带category字段，将信任开发者提供的分类信息，消息不经过智能分类。 |
 
 ## OPPO
 

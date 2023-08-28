@@ -60,7 +60,7 @@ POST https://{host}/{org_name}/{app_name}/push/sync/{target}
 | :------- | :----- | :---------------------- | :------- |
 | `target` | String | 接收推送通知的用户 ID。 | 是       |
 
-其他参数及描述详见 [公共参数](公共参数)。
+其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -87,7 +87,7 @@ POST https://{host}/{org_name}/{app_name}/push/sync/{target}
 | `data`            | Object | 推送结果。服务器根据推送结果判断推送状态。                   |
 | `data.pushStatus` | String | 推送状态：<br/> - `SUCCESS`：推送成功；<br/> - `FAIL`：推送失败，即非服务端导致的错误，例如 `bad device token`，表示移动端传给服务端的 device token 错误，对应推送厂商不接受。<br/> - `ERROR`：推送异常，即服务端导致错误，例如连接超时或读写超时。 |
 
-其他参数及说明详见 [公共参数](公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
@@ -178,7 +178,7 @@ POST https://{host}/{org_name}/{app_name}/push/single
 
 #### 路径参数
 
-参数及描述详见 [公共参数](公共参数)。
+参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -208,7 +208,7 @@ POST https://{host}/{org_name}/{app_name}/push/single
 | `pushStatus` | String | 推送状态：`ASYNC_SUCCESS` 表示推送成功。 |
 | `desc`       | String | 推送结果的相关描述。                     |
 
-其他参数及说明详见 [公共参数](公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
@@ -261,7 +261,7 @@ POST https://{host}/{org_name}/{app_name}/push/list/label
 
 #### 路径参数
 
-参数及说明详见 [公共参数](公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -289,7 +289,7 @@ POST https://{host}/{org_name}/{app_name}/push/list/label
 | `data`   | Object | 推送任务数据。 |
 | `taskId` | Long   | 推送任务 ID。  |
 
-其他参数及说明详见 [公共参数](公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
@@ -338,7 +338,7 @@ POST https://{host}/{org_name}/{app_name}/push/task
 
 #### 路径参数
 
-参数及说明详见 [公共参数](公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -364,7 +364,7 @@ POST https://{host}/{org_name}/{app_name}/push/task
 | :----- | :--- | :--------------- |
 | `data` | Long | 推送任务 ID（后续相关推送结果都是基于任务的，需要保存）。 |
 
-其他参数及说明详见 [公共参数](公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
@@ -412,7 +412,7 @@ POST https://{host}/{org_name}/{app_name}/push/message
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -435,7 +435,7 @@ POST https://{host}/{org_name}/{app_name}/push/message
 | :----- | :--- | :----------------------------------------------------------- |
 | `data` | Long | 创建推送通知时后台生成的消息 ID，需要保存，创建推送任务是基于此 ID。 |
 
-其他参数及说明详见 [公共参数](公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
@@ -480,7 +480,7 @@ POST https://{host}/{org_name}/{app_name}/push/message/{messageId}
 | :---------- | :----- | :-------------------------------- | :------- |
 | `messageId` | String | 推送通知 ID，创建推送通知时返回。 | 是       |
 
-其他参数及说明详见 [公共参数](公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -499,7 +499,7 @@ POST https://{host}/{org_name}/{app_name}/push/message/{messageId}
 | :----- | :----- | :--------------- |
 | `data` | String | 推送通知的内容。 |
 
-其他参数及说明详见 [公共参数](公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
@@ -541,7 +541,7 @@ POST https://{host}/{org_name}/{app_name}/push/task/broadcast
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](公共参数)。
+参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -567,7 +567,7 @@ POST https://{host}/{org_name}/{app_name}/push/task/broadcast
 | :----- | :----- | :----------------------------------------------- |
 | `data` | String | 推送任务 ID（查询推送结果需要使用推送任务 ID）。 |
 
-其他参数及说明详见 [公共参数](公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 

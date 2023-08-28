@@ -41,7 +41,7 @@ pod install --repo-update
 
 ### 手动导入
 
-[下载环信 demo](https://www.easemob.com/download/im)。
+[下载环信 demo](https://www.easemob.com/download/demo)。
 
 开发者最开始集成，如果选择手动导入文件集成的方式，只需要向工程中添 HyphenateChat 就可以，下面会介绍具体的集成方式。
 
