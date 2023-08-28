@@ -39,8 +39,8 @@ APP创建成功后，将显示至【应用列表】中，选中创建的APP，�
 
 #### 3.2 推送集成
 
-详细Android 推送集成参考文档:[Android 推送集成](integration_process_android.html)
-详细iOS SDK集成参考文档:[iOS SDK集成](integration_process_ios.html)
+详细Android 推送集成参考文档:[Android 推送集成](push_integration_process_android.html)
+详细iOS SDK集成参考文档:[iOS SDK集成](push_integration_process_ios.html)
 
 ### 4、配置推送证书
 
