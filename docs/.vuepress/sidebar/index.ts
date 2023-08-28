@@ -91,9 +91,9 @@ export const zhSidebar = sidebar({
             { text: 'REST 社区管理', link: 'server_mgmt_rest.html'  },
             { text: 'REST 频道管理', link: 'channel_mgmt_rest.html'  },
             { text: 'REST 频道分组管理', link: 'category_mgmt_rest.html'  },
-            { text: 'Android API 参考', link: 'https://docs-im.easemob.com/ccim/circle/android/api'  },
-            { text: 'iOS API 参考', link: 'https://docs-im.easemob.com/ccim/circle/ios/api'  },
-            { text: 'Web API 参考', link: 'https://docs-im.easemob.com/ccim/circle/web/api'  },
+            { text: 'Android API 参考', link: 'api_reference_android.html'  },
+            { text: 'iOS API 参考', link: 'api_reference_ios.html'  },
+            { text: 'Web API 参考', link: 'api_reference_web.html'  },
             ]
           },  
         ]
