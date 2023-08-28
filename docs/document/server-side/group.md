@@ -489,12 +489,12 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ### 获取单个用户加入的所有群组
 
-根据用户 ID 分页获取指定用户加入的全部群组。
+根据用户 ID 分页获取指定用户加入的所有群组。
 
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatgroups?pagesize={}&pagenum={}
+GET https://{host}/{org_name}/{app_name}/chatgroups/users/{username}?pagesize={}&pagenum={}
 ```
 
 ##### 路径参数
@@ -503,20 +503,16 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatgroups?page
 
 ##### 查询参数
 
-| 参数       | 类型   | 是否必需 | 描述                                                    |
-| :--------- | :----- | :------- | :------------------------------------------------------ |
-| `pagesize` | String | 否       | 每页获取的群组数量。取值范围为 [1,100]，默认值为 `10`。 |
-| `pagenum`  | String | 否       | 当前页码。默认从第 1 页开始获取。                       |
-
-:::tip
-若请求中均未设置 `pagesize` 和 `pagenum` 参数，环信服务器按用户加入群组的时间倒序返回前 500 个群组。
-:::
+| 参数            | 类型   | 是否必需    | 描述                 |
+|:--------------| :----- |:--------|:-------------------|
+| `pagesize`     | String | 否       | 每页获取的群组数量。取值范围为 [1,20]，默认值为 `10`。 |
+| `pagenum`       | String | 否       | 当前页码。默认从第 `0` 页开始获取。 |
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`                                                                                    |
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------------ |
+| `Accept`        | String | 是       | 内容类型，请填 `application/json`。       |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -525,12 +521,22 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatgroups?page
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段             | 类型   | 描述       |
-| :--------------- | :----- | :--------- |
-| `data.groupid`   | String | 群组 ID。  |
-| `data.groupname` | String | 群组名称。 |
+| 参数      | 类型     | 描述     |
+|:-------------------------|:-------|:----------------------------|
+| `total`                    | Int  | 用户加入的群组总数。          |
+| `entities`                 | Array  | 用户加入的群组列表。             |
+| `entities.groupId `     | String | 群组 ID。             |
+| `entities.name`         | String | 群组名称。       |
+| `entities.owner`        | String | 群组管理员的用户 ID。      |
+| `entities.description`  | String | 群组描述。        |
+| `entities.disabled`     | Bool | 群组是否被禁用：<br/> - `true`：禁用。禁用后不能对群组进行任何修改。<br/> - `false`：未禁用。 |
+| `entities.public`       | Bool | 是否是公开群：<br/> - `true`：公开群。公开群可以被搜索到，用户可以申请加入公开群。<br/> - `false`：私有群。私有群无法被搜索到，需要群主或群管理员邀请，用户才可以加入。|
+| `entities.allowinvites` | Bool | 是否允许普通群成员邀请用户加入群组：<br/> - `true`：普通群成员可拉人入群; <br/> - `false`：只有群主或者管理员才可以拉人入群。         |
+| `entities.membersonly`  | Bool | 用户申请入群是否需要群主或者群管理员审批。<br/> - `true`：需要；<br/> - `false`：不需要，用户直接进群。                               |
+| `entities.maxusers`     | Int | 群组最大成员数（包括群主）。      |
+| `entities.created `     | Long | 群组创建时间戳。      |
 
-其他字段及描述详见 [公共参数](#公共参数)。
+其他参数及说明详见 [公共参数](#公共参数)。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -539,7 +545,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatgroups?page
 ##### 请求示例
 
 ```shell
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/joined_chatgroups?pagesize=100&pagenum=1'
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl --location 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
+-H 'Authorization: Bearer  <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -547,20 +555,27 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "application": "8bXXXX02",
-  "applicationName": "testapp",
-  "count": 0,
-  "data": [],
+  "applicationName": "XXXX",
   "duration": 0,
-  "entities": [],
+  "entities": [
+    {
+      "name": "群组名称",
+      "owner": "群组管理员",
+      "id": "2XXXX1",
+      "groupId": "2XXXX1",
+      "description": "群组描述",
+      "disabled": false,
+      "public": false,
+      "allowinvites": false,
+      "membersonly": true,
+      "maxusers": 2000,
+      "created": 1692687427254
+    }
+  ],
   "organization": "XXXX",
-  "params": {
-    "pagesize": ["100"],
-    "pagenum": ["1"]
-  },
-  "properties": {},
-  "timestamp": 1645177932072,
-  "uri": "https://XXXX/XXXX/XXXX/users/user1/joined_chatgroups"
+  "timestamp": 1692687427254,
+  "total": 10,
+  "uri": "http://XXXX/XXXX/XXXX/chatgroups/user/XXXX"
 }
 ```
 
