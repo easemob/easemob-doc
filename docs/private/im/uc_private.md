@@ -104,7 +104,7 @@
 <p><a href="http://docs-im-beta.easemob.com/document/ios/releasenote.html#%E7%89%88%E6%9C%AC-v3-9-1-2022-4-19">3.9.1</a></p>
 </td>
 <td>
-<p><a href="https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V3.9.1.zip">下载 SDK 及 Demo</a>&nbsp;<a href="https://www.pgyer.com/2XKY">体验 Demo</a></p>
+<p><a href="https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V3.9.1.zip">下载 SDK 及 Demo</a>&nbsp;<!-- <a href="https://www.pgyer.com/2XKY">体验 Demo</a>--></p>
 </td>
 <td>
 <p><a href="http://docs-im-beta.easemob.com/document/ios/privatecloud.html">查看</a></p>
