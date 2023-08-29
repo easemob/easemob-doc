@@ -15,7 +15,7 @@
 <td rowspan="4">音视频SDK</td><td>Android</td><td>SDK 兼容 android 5.0及以上版本，easeUI 兼容 android 5.0及以上版本</td><td><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/easemob-sdk-3.7.6.3.zip">下载代码</a></td><td><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/app-prod-release.apk">体验Demo</a></td>
 </tr>
 <tr>
-<td>iOS</td><td>SDK 兼容 iOS 10及以上版本</td><td><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/iOS_IM_SDK_V3.7.4.7.zip">下载代码</a></td><td>\</td>
+<td>iOS</td><td>SDK 兼容 iOS 10及以上版本</td><td><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/iOS_IM_SDK_V3.7.4.7.zip">下载代码</a></td><td><a href="https://testflight.apple.com/join/AyWrVpc7">体验Demo</a></td>
 </tr>
 <tr>
 <td>Web</td><td>环信 WebIM SDK 为 PC /移动 Web 应用，提供完善的即时通信与音视频功能</td><td><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/webdemo-3.4.2.7.zip">下载代码</a></td><td><a href="https://zim-rtc.easemob.com:12005">体验Demo</a></td>
