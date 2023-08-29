@@ -49,7 +49,7 @@ export const PUSH_SIDEBAR = [
     {
       text: '服务端 REST',
       children: [
-        { text: '推送标签管理', link: 'push_tag_mgmt.html' },
+        { text: '推送标签管理', link: 'push_by_tag.html' },
         { text: '发送推送通知', link: 'push_send_notification.html' },
         { text: '配置推送通知', link: 'push_notification_config.html' },
       ]
