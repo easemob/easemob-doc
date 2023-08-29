@@ -68,6 +68,21 @@ export const zhNavbar = navbar([
           }
         ]
       },
+      {
+        text: '服务端',
+        children: [
+          {
+            text: 'Java',
+            icon: '//icon-platform.svg',
+            link: 'https://easemob.github.io/easemob-im-server-sdk/'
+          },
+          {
+            text: 'PHP',
+            icon: '//icon-platform.svg',
+            link: 'https://easemob.github.io/im-php-server-sdk/annotated.html'
+          }
+        ]
+      },
      ]
   },
   {
