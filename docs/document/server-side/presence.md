@@ -39,7 +39,7 @@
 
 ## 设置用户在线状态信息
 
-根据用户的唯一 ID 设置在线状态信息。
+可以设置用户在指定设备的在线状态信息。
 
 ### HTTP 请求
 
@@ -51,8 +51,9 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{
 
 | 参数       | 类型  | 是否必需 | 描述           | 
 | :--------- | :----- | :---------------------- | :------- |
-| `resource` | String | 是     | 服务器分配给每个设备资源的唯一标识符，格式为 `{device type}_{resource ID}`，其中设备类型 `device type` 可以是 `android`、`ios` 或 `web`，资源 ID `resource ID` 由 SDK 分配。例如，`android_123423453246`。 |
-| `status`   | String | 是     | 用户定义的在线状态：<br> - `0`：离线；<br> - `1`：在线；<br> - 其他值：自定义在线状态。 | 
+| `username`       | String  | 是 | 设置哪个用户的在线状态信息。           | 
+| `resource` | String | 是     | 要设置用户在哪个设备的在线状态信息，即传入服务器分配给每个设备资源的唯一标识符，格式为 `{device type}_{resource ID}`，其中设备类型 `device type` 可以是 `android`、`ios` 或 `web`，资源 ID `resource ID` 由 SDK 分配。例如，`android_123423453246`。 |
+| `status`   | String | 是     | 用户的在线状态：<br> - `0`：离线；<br> - `1`：在线；<br> - 其它数字字符串：自定义在线状态。 | 
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
