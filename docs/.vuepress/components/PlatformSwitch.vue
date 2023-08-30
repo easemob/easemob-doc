@@ -116,7 +116,7 @@ const options = [
     options: [
       {
         value: 'server-side',
-        label: 'Rest Api',
+        label: '服务端',
       }
     ],
   },
