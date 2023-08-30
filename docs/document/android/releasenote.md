@@ -43,7 +43,7 @@
 
 ### 修复
 
-- [IM SDK] 修复调用接口 `EMChatManager#deleteMessagesBeforeTimestamp`` 和 `EMConversation#removeMessages(long,long)` 偶现崩溃的问题；
+- [IM SDK] 修复调用接口 `EMChatManager#deleteMessagesBeforeTimestamp` 和 `EMConversation#removeMessages(long,long)` 偶现崩溃的问题；
 - [IM UIKit] 修复语音消息自动下载失败后点击语音图标无法再次下载的问题。
 
 ## 版本 V4.0.3 Dev 2023-6-19（开发版）
