@@ -10,6 +10,7 @@
 
 - 群组加人
 - 群组踢人
+- 管理群成员的自定义属性
 - 管理群主及群管理员
 - 管理群组黑名单
 - 管理群组禁言
@@ -30,7 +31,7 @@
 
 ### 群组加人
 
-根据创建群组时的群组类型 (GroupStyle) 和进群邀请是否需要对方同意 (inviteNeedConfirm) 设置，群组加人的处理逻辑有差别。具体规则可以参考 创建群组。
+根据创建群组时的群组类型 (`GroupStyle`) 和进群邀请是否需要对方同意 (`inviteNeedConfirm`) 设置，群组加人的处理逻辑有差别。具体规则可以参考 [创建群组](group_manage.html#创建群组)。
 
 示例代码如下：
 
@@ -61,6 +62,69 @@ SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, list, new CallBack (
     }
 ));
 ```
+
+### 管理群成员的自定义属性
+
+群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
+
+- 单个群成员的自定义属性总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节，否则会报错。
+
+- 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
+
+#### 设置群成员自定义属性
+
+你可以调用 `GroupManager#SetMemberAttributes` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。
+
+设置后，群内其他成员会收到 `IGroupManagerDelegate#OnUpdateMemberAttributesFromGroup` 事件。
+
+示例代码如下：
+
+```csharp
+Dictionary<string, string> dict = new Dictionary<string, string>();
+dict.Add("key", "value");
+
+SDKClient.Instance.GroupManager.SetMemberAttributes(groupId, userId, dict, new CallBack(
+    onSuccess: () =>
+    {
+        Console.WriteLine($"SetMemberAttributes success.");
+    },
+    onError: (code, desc) =>
+    {
+        Console.WriteLine($"SetMemberAttributes failed, code:{code}, desc:{desc}");
+    }
+));
+```
+
+#### 根据属性 key 获取多个群成员的自定义属性
+
+你可调用 `GroupManager#FetchMemberAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
+
+:::notice
+每次最多可获取 10 个群成员的自定义属性。
+:::
+
+示例代码如下：
+
+```csharp
+List<string> userList = new List<string>();
+userList.Add("user");
+
+// keyList：要获取自定义属性的 key 的数组。若 keyList 为空数组或不传则获取这些成员的所有自定义属性。
+List<string> keyList = new List<string>();
+keyList.Add("key");
+
+SDKClient.Instance.GroupManager.FetchMemberAttributes(groupId, userList, keyList, new ValueCallBack<Dictionary<string, Dictionary<string, string>>>(
+    onSuccess: (dict) =>
+    {
+
+    },
+    onError: (code, desc) =>
+    {
+
+    }
+));
+```
+
 
 ### 管理群主和群管理员
 
@@ -213,14 +277,16 @@ SDKClient.Instance.GroupManager.UnMuteGroupMembers(groupId, members, new CallBac
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: new ValueCallBack<List<string>>(
-    onSuccess: (list) => {
+SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: new ValueCallBack<Dictionary<string, long>>(
+    onSuccess: (dict) => {
     },
     onError: (code, desc) =>
     {
     }
 ));
 ```
+
+### 开启和关闭群组全员禁言
 
 #### 开启群组全员禁言
 

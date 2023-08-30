@@ -498,6 +498,120 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
+### 发送和接收合并消息
+为了方便消息互动，即时通讯 IM 自 1.2.0 版本开始支持将多个消息合并在一起进行转发。你可以采取以下步骤进行消息的合并转发：
+
+1. 利用原始消息列表创建一条合并消息。
+2. 发送合并消息。
+3. 对端收到合并消息后进行解析，获取原始消息列表。
+
+
+#### 创建和发送合并消息
+
+你可以调用 `CreateCombineSendMessage` 方法创建一条合并消息，然后调用 `SendMessage` 方法发送该条消息。
+
+创建合并消息时，需要设置以下参数：
+
+| 属性   | 类型        | 描述    |
+| :-------------- | :-------------------- | :-------------------- |
+| `userId` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。|
+| `title`  | string | 合并消息的标题。    |
+| `summary` | string       | 合并消息的概要。   |
+| `compatibleText` | string       | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |
+| `messageList` | List      | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。  |
+
+
+:::notice
+1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
+2. 不论 `Options#ServerTransfer` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
+:::
+
+示例代码如下：
+
+```csharp
+String title = "A和B的聊天记录";
+String summary = "A:这是A的消息内容\nB:这是B的消息内容";
+String compatibleText = "您当前的版本不支持该消息，请升级到最新版本";
+Message msg = Message.CreateCombineSendMessage(to, title, summary, compatibleText, msgIdList);
+
+SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+    onSuccess: () => {
+        // 消息发送成功的处理逻辑
+    },
+    onError: (code, desc) => {
+        // 消息发送失败的处理逻辑
+    }
+));
+```
+
+接收合并消息与接收普通消息的操作相同，详见[接收消息](#接收消息)。
+
+对于不支持合并转发消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText` 携带的内容，其他字段会被忽略。
+
+#### 解析合并消息
+
+合并消息实际上是一种附件消息。收到合并消息后，你可以调用 `FetchCombineMessageDetail` 方法下载合并消息附件并解析出原始消息列表。
+
+对于一条合并消息，首次调用该方法会下载和解析合并消息附件，然后返回原始消息列表，而后续调用会存在以下情况：
+
+- 若附件已存在，该方法会直接解析附件并返回原始消息列表。
+- 若附件不存在，该方法首先下载附件，然后解析附件并返回原始消息列表。
+
+```csharp
+SDKClient.Instance.ChatManager.FetchCombineMessageDetail(msg, new ValueCallBack<List<Message>>(
+    onSuccess: (list) => {
+        // 处理并展示消息列表
+    },
+    onError: (code, desc) => {
+        // 处理出错信息
+    }
+));
+```
+
+### 发送和接收定向消息
+
+发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
+
+该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
+
+:::notice
+1. 仅 SDK 1.2.0 及以上版本支持。
+2. 定向消息不计入群组会话或聊天室会话的未读计数。
+:::
+
+发送定向消息的流程与发送普通消息相似，唯一区别是需要设置消息的接收方，具体操作如下：
+
+1. 创建一条群组或聊天室消息。
+2. 设置消息的接收方。
+3. 发送定向消息。
+
+下面以文本消息为例介绍如何发送定向消息，示例代码如下：
+
+```csharp
+// 创建一条文本消息。
+Message msg = Message.CreateTextSendMessage(groupId, content);
+// 会话类型：群组和聊天室聊天，分别为 `Group` 和 `Room`。
+msg.MessageType = MessageType.Group;
+
+List<string> receives = new List<string>();
+receives.Add("userId1");
+receives.Add("userId2");
+
+// 设置消息接收方列表。最多可传 20 个接收方的用户 ID。若传入 `null`或者包含接收Id数目为0，则消息发送给群组或聊天室的所有成员。
+msg.ReceiverList = receives;
+
+SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+    onSuccess: () => {
+
+    },
+    onError: (code, desc) => {
+
+    }
+));
+```
+
+接收群定向消息与接收普通消息的操作相同，详见[接收消息](#接收消息)。
+
 ### 使用消息的扩展字段
 
 当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型。

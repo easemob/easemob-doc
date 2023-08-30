@@ -4,7 +4,7 @@
 
 用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。
 
-例如，在招聘场景下，利用用户属性功能可以存储性别、邮箱、用户类型（面试者）、职位类型（Web 研发）等。查看用户信息时，可以直接查询服务器存储的用户属性信息。
+例如，在招聘场景下，利用用户属性功能可以存储性别、邮箱、用户类型（面试者）、职位类型（web 研发）等。查看用户信息时，可以直接查询服务器存储的用户属性信息。
 
 本文介绍如何通过管理用户属性设置、更新、存储并获取实时消息用户的相关信息。
 
@@ -37,7 +37,7 @@
 参考如下示例代码，在你的项目中当前用户设置自己的所有属性或者仅设置某一项属性。
 
 ```csharp
-// 设置所有用户属性。
+//设置所有用户属性。
 UserInfo userInfo;
 userInfo.UserId = currentId;
 userInfo.NickName = "easemob";
@@ -49,10 +49,10 @@ userInfo.Email = "123456@qq.com";
 userInfo.Gender = 1;
 
 SDKClient.Instance.UserInfoManager.UpdateOwnInfo(userInfo, new CallBack(
-    onSuccess: () => {
-    },
-    onError:(code, desc) => {
-    }
+  onSuccess: () => {
+  },
+  onError:(code, desc) => {
+  }
 ));
 ```
 
@@ -82,18 +82,18 @@ idList.Add("username");
 SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId
 
 SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId(idList, type, startId, loadCount, new ValueCallBack<Dictionary<string, UserInfo>>(
-    //result 是 Dictionary<string, UserInfo> 类型。
-    onSuccess: (result) => {
-    //遍历 dictionary 里所有的用户信息。
-    },
-    onError:(code, desc) => {
-    }
+  //result 是 Dictionary<string, UserInfo> 类型。
+  onSuccess: (result) => {
+	//遍历 dictionary 里所有的用户信息。
+  },
+  onError:(code, desc) => {
+  }
 ));
 ```
 
 ## 更多功能
 
-### 用户头像管理
+### 管理用户头像
 
 如果你的应用场景中涉及用户头像管理，还可以参考如下步骤进行操作：
 
@@ -102,12 +102,12 @@ SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId(idList, type, startId, 
 3. 将该 URL 地址传入用户属性的头像字段（`AvatarUrl`）。
 4. 调用 `fetchUserInfoById` 获取头像字段，并在本地 UI 中渲染用户头像。
 
-### 名片消息
+### 使用用户属性创建和发送名片
 
 如果使用场景中涉及名片消息，你也可以使用自定义属性功能，并参考如下示例代码实现：
 
 ```csharp
-// 设置自定义消息的 `event` 为 `userCard`，并在 `ext` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
+// 设置自定义消息的 `event` 为 `"userCard"`，并在 `ext` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
 string event = "userCard";
 Dictionary<string, string> adict = new Dictionary<string, string>();
 adict.Add("UserId", userInfo.UserId);
@@ -118,11 +118,11 @@ adict.Add("AvatarUrl", userInfo.AvatarUrl);
 Message msg = Message.CreateCustomSendMessage(toChatUsername, event, adict);
 
 SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
-    onSuccess: () => {
-        Debug.Log($"{msg.MsgId}发送成功");
-    },
-    onError: (code, desc) => {
-        Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
-    }
+   onSuccess: () => {
+      Debug.Log($"{msg.MsgId}发送成功");
+   },
+   onError: (code, desc) => {
+      Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
+   }
 ));
 ```

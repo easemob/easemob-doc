@@ -36,11 +36,11 @@
 
 ```csharp
 SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, callback: new ValueCallBack<CursorResult<string>>(
-    // members 类型为 CursorResult<string>。
-    onSuccess: (members) => {
-    },
-    onError: (code, desc) => {
-    }
+  // members 类型为 CursorResult<string>。
+  onSuccess: (members) => {
+  },
+  onError: (code, desc) => {
+  }
 ));
 ```
 
@@ -179,7 +179,6 @@ SDKClient.Instance.RoomManager.RemoveAllowListMembers(roomId, list, new CallBack
   ));
 ```
 
-
 ### 管理聊天室禁言列表
 
 #### 添加成员至聊天室禁言列表
@@ -228,10 +227,10 @@ SDKClient.Instance.RoomManager.UnMuteRoomMembers(roomId, members, new CallBack(
 
 ```csharp
 SDKClient.Instance.RoomManager.FetchRoomMuteList(roomId, pageSize, pageNum, callback: new ValueCallBack<Dictionary<string, long>>(
-    onSuccess: (dict) => {
-    },
-    onError: (code, desc) => {
-    }
+  onSuccess: (dict) => {
+  },
+  onError: (code, desc) => {
+  }
 ));
 ```
 
@@ -269,8 +268,6 @@ SDKClient.Instance.RoomManager.UnMuteAllRoomMembers(roomId, new ValueCallBack<Ro
   ));
 ```
 
-
-
 ### 管理聊天室所有者和管理员
 
 #### 变更聊天室所有者
@@ -281,10 +278,10 @@ SDKClient.Instance.RoomManager.UnMuteAllRoomMembers(roomId, new ValueCallBack<Ro
 
 ```csharp
 SDKClient.Instance.RoomManager.ChangeRoomOwner(roomId, newOwner, new CallBack(
-    onSuccess: () => {
-    },
-    onError: (code, desc) => {
-    }
+  onSuccess: () => {
+  },
+  onError: (code, desc) => {
+  }
 ));
 ```
 
@@ -296,10 +293,10 @@ SDKClient.Instance.RoomManager.ChangeRoomOwner(roomId, newOwner, new CallBack(
 
 ```csharp
 SDKClient.Instance.RoomManager.AddRoomAdmin(roomId, adminId, new CallBack(
-    onSuccess: () => {
-    },
-    onError: (code, desc) => {
-    }
+  onSuccess: () => {
+  },
+  onError: (code, desc) => {
+  }
 ));
 ```
 

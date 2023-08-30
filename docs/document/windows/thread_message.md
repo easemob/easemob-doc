@@ -19,11 +19,11 @@
 2. 客户端 A 和 B 登录即时通讯。
 3. 客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
 
-![](@static/images/android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 子区创建和查看如下图：
 
-![](@static/images/android/threads.png)
+![img](@static/images/android/threads.png)
 
 ## 前提条件
 
@@ -39,7 +39,7 @@
 
 ### 发送子区消息
 
-发送子区消息和发送群组消息的方法基本一致，详情请参考[发送消息](message_send_receive.html#发送文本消息)。唯一不同的是，发送子区消息需要指定标记 `IsThread` 为 `true`。
+发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send_receive.html#发送文本消息)。唯一不同的是，发送子区消息需要指定标记 `IsThread` 为 `true`。
 
 示例代码如下：
 
@@ -93,7 +93,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ### 撤回子区消息
 
-接收消息的具体逻辑，请参考 [撤回消息](message_send_receive.html#撤回消息)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考[撤回消息](message_send_receive.html#撤回消息)，此处只介绍子区消息和其他消息的区别。
 
 子区有消息撤回时，子区所属群组的所有成员收到 `IChatThreadManagerDelegate#OnUpdateMyThread` 回调，子区成员收到 `IChatManagerDelegate#OnMessagesRecalled` 回调。
 
@@ -134,7 +134,7 @@ SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(threadId, Conversa
           {
               foreach (var msg in result.Data)
               {
-                  //process every msg
+                  //处理每条消息
               }
           },
           onError: (code, desc) =>
@@ -150,7 +150,7 @@ SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(threadId, Conversa
 ```csharp
 // 需要指定会话类型为 `ConversationType.Group`，且 `isChatThread` 设置为 `true`
 Conversation conversation = SDKClient.Instance.ChatManager.GetConversation(chatThreadId, EMConversationType.GroupChat, createIfNotExists, isChatThread);
-// 如需处理本地数据库中消息，用以下方法到数据库中获取，SDK 会将这些消息自动存入此会话
+// 如需处理本地数据库中消息，用以下方法到数据库中获取，SDK 会将这些消息自动存入此会话。
 conversation.LoadMessages(startMsgId, count, direct, new ValueCallBack<List<Message>>(
     onSuccess: (list) => {
         Console.WriteLine($"LoadMessages found {list.Count} messages");
@@ -164,3 +164,5 @@ conversation.LoadMessages(startMsgId, count, direct, new ValueCallBack<List<Mess
     }
 ));
 ```
+
+

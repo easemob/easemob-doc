@@ -41,7 +41,10 @@ SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使�
 
 ```csharp
 List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
+
 ```
+SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<Conversation>` 结构。
+
 
 ### 读取指定会话的消息
 
@@ -109,17 +112,7 @@ Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationI
 conv.DeleteMessage(msgId);
 ```
 
-调用 `DeleteConversationFromServer` 删除服务器端会话和历史消息，示例代码如下：
-
-```csharp
-//从服务器端删除和特定 ID 的会话，如果需要保留历史消息，第三个参数传 `false`。
-SDKClient.Instance.ChatManager.DeleteConversationFromServer(conversationId, type, true, new CallBack(
-    onSuccess: () => {
-    },
-    onError: (code, desc) => {
-    }
-));
-```
+删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](message_retrieve.html#单向删除服务端会话及其历史消息)。
 
 ### 根据消息 ID 搜索消息
 

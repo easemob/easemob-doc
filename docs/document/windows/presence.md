@@ -1,4 +1,4 @@
-# 在线状态订阅
+# 管理在线状态订阅
 
 <Toc />
 
@@ -24,7 +24,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![](@static/images/android/presence.png)
+![img](@static/images/android/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -40,9 +40,9 @@
 
 使用在线状态功能前，请确保满足以下条件：
 
-- 完成 1.0.5 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-- 已联系商务开通在线状态订阅功能。
+1. 完成 `1.0.5 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+3. 已联系商务开通在线状态订阅功能。
 
 ## 实现方法
 
@@ -74,13 +74,16 @@ SDKClient.Instance.PresenceManager.SubscribePresences(members, expiry, new Value
 在线状态变更时，订阅者会收到 `IPresenceManagerDelegate#OnPresenceUpdated` 回调。
 
 :::notice
+
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
 - 每次调用接口最多只能订阅 100 个账号，若数量较大需多次调用。每个用户 ID 订阅的用户数不超过 3000。如果超过 3000，后续订阅也会成功，但默认会将订阅剩余时长较短的替代。
-:::
+  :::
 
 ### 发布自定义在线状态
 
-用户在线时，可调用 `PresenceManager#PublishPresence` 方法发布自定义在线状态：
+用户在线时，可调用 `PresenceManager#PublishPresence` 以发布自定义状态。每当在线状态更新时，订阅的用户都会收到 `IPresenceManagerDelegate#OnPresenceUpdated` 回调。
+
+示例代码如下：
 
 ```csharp
 SDKClient.Instance.PresenceManager.PublishPresence(ext, new CallBack(
@@ -93,8 +96,6 @@ SDKClient.Instance.PresenceManager.PublishPresence(ext, new CallBack(
 ));
 ```
 
-在线状态发布后，发布者和订阅者均会收到 `IPresenceManagerDelegate#OnPresenceUpdated` 回调。
-
 ### 添加在线状态监听器
 
 添加用户在线状态的监听器，示例代码如下：
@@ -104,7 +105,7 @@ PresenceManagerDelegate presenceManagerDelegate = new PresenceManagerDelegate();
 SDKClient.Instance.PresenceManager.AddPresenceManagerDelegate(presenceManagerDelegate);
 ```
 
-参考如下示例代码，使用 `IPresenceManagerDelegate` 监听器实现以下接口。当订阅的用户在线状态发生变化时，会收到 `OnPresenceUpdated` 回调。
+参考如下示例代码，使用 `IPresenceManagerDelegate` 监听器实现以下接口。当订阅的用户在线状态发生变化时，会收到`OnPresenceUpdated` 回调。
 
 ```csharp
 public interface IPresenceManagerDelegate
@@ -142,7 +143,7 @@ SDKClient.Instance.PresenceManager.FetchSubscribedMembers(pageNum, pageSize, new
     {
         Debug.Log($"SubscribePresences failed, code:{code}, desc:{desc}");
     }
-))
+));
 ```
 
 ### 获取用户的当前在线状态

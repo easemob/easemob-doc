@@ -25,9 +25,9 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)；
-- 了解环信即时通讯 IM 不同版本的聊天室相关数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)；
-- 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom.html#添加超级管理员)；
+- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
+- 了解环信即时通讯 IM 不同版本的聊天室相关数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+- 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom.html#添加超级管理员)。
 - 聊天室创建者和管理员的数量之和不能超过 100，即管理员最多可添加 99 个。
 
 ## 实现方法
@@ -200,12 +200,11 @@ public interface IRoomManagerDelegate
     void OnChatroomAttributesRemoved(string roomId, List<string> keys, string from);
     // 有成员被加入白名单列表。被添加的成员收到该事件。
     void OnAddAllowListMembersFromChatroom(string roomId, List<string> members);
-    // 有成员被移出白名单列表。被移出白名单的成员会收到该事件。
+    //有成员被移出白名单列表。被移出白名单的成员会收到该事件。
     void OnRemoveAllowListMembersFromChatroom(string roomId, List<string> members);
-    // 全员禁言状态变更回调。聊天室所有成员会收到该事件。
+    //全员禁言状态变更回调。聊天室所有成员会收到该事件。
     void OnAllMemberMuteChangedFromChatroom(string roomId, bool isAllMuted);
-    // 聊天室详情变更。聊天室的所有成员会收到该事件。
+    //聊天室详情变更。聊天室的所有成员会收到该事件。
     void OnSpecificationChangedFromRoom(Room room);
-
 }
 ```
