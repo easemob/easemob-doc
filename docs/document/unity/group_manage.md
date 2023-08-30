@@ -368,6 +368,10 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     public void OnAllMemberMuteChangedFromGroup(string groupId, bool isAllMuted)
     {
     }
+    // 群成员自定义属性发生了变更会收到该回调。
+    public void OnUpdateMemberAttributesFromGroup(string groupId, string userId, Dictionary<string, string> attributes, string from)
+    {
+    }
 }
 
 // 注册群组回调。

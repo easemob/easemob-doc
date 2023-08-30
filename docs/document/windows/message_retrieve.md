@@ -32,49 +32,21 @@
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `GetConversationsFromServerWithPage` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
+你可以调用 `GetConversationsFromServerWithCursor` 方法从服务端分页获取会话列表。通过设置该方法中的 `pinOnly` 参数确定是否只获取置顶会话列表：
 
-SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表。若会话中没有消息，则 SDK 按照会话创建时间的倒序返回会话列表。
-
-服务器默认存储 100 条会话。若提升该上限，需联系环信商务，最多能增加至 500 条。
+- 若 `pinOnly` 为 `false`，获取包括置顶和未置顶会话的列表。SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表。若会话中没有消息，则 SDK 按照会话创建时间的倒序返回会话列表。服务器默认存储 100 条会话。若提升该上限，需联系环信商务，最多能增加至 500 条。
+- 若为 `true` 仅获取置顶会话列表，最多可拉取 50 个置顶会话。SDK 按照会话置顶时间的倒序返回。
 
 :::notice
-1. 若使用该功能，需将 SDK 升级至 1.2.0。
+1. 若使用该方法，需将 SDK 升级至 1.2.0。
 2. 建议你在首次下载、卸载后重装应用等本地数据库无数据情况下拉取服务端会话列表。其他情况下，调用 `LoadAllConversations` 方法获取本地所有会话即可。
 3. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需联系商务。
 :::
 
 ```csharp
-SDKClient.Instance.ChatManager.GetConversationsFromServerWithPage(pageNum, pageSize, new ValueCallBack<List<Conversation>>(
-    //获取会话成功后的处理逻辑。
-    //list 为 List<Conversation> 类型。
-    onSuccess: (list) =>
-    {
-    },
-    onError: (code, desc) =>
-    {
-    }
-));
-```
-
-对于还不支持 `GetConversationsFromServerWithPage` 方法的用户，可以调用 `GetConversationsFromServer` 方法从服务端获取会话列表，SDK 默认可拉取 7 天内的 10 个会话（每个会话包含最新一条历史消息）。如需调整会话数量或时间限制请联系商务。
-
-## 获取服务端的置顶会话列表
-
-你可以调用 `GetConversationsFromServerWithCursor` 方法从服务端分页获取置顶会话列表。SDK 按照会话置顶时间的倒序返回。
-
-你最多可以拉取 50 个置顶会话。
-
-:::notice
-若使用该功能，需将 SDK 升级至 1.2.0。
-:::
-
-示例代码如下：
-
-```csharp
 int limit = 10;
 string cursor = "";
-bool pinOnly = true;
+bool pinOnly = false; // `false`：获取所有会话；`true`仅获取置顶会话列表。
 SDKClient.Instance.ChatManager.GetConversationsFromServerWithCursor(pinOnly, cursor, limit, new ValueCallBack<CursorResult<Conversation>>(
    onSuccess: (result) =>
    {
@@ -92,6 +64,23 @@ SDKClient.Instance.ChatManager.GetConversationsFromServerWithCursor(pinOnly, cur
    }
 ));
 
+```
+
+此外，你可以调用 `GetConversationsFromServerWithPage` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
+
+若使用该功能，需将 SDK 升级至 V1.1.0。
+
+```csharp
+SDKClient.Instance.ChatManager.GetConversationsFromServerWithPage(pageNum, pageSize, new ValueCallBack<List<Conversation>>(
+    //获取会话成功后的处理逻辑。
+    //list 为 List<Conversation> 类型。
+    onSuccess: (list) =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
+));
 ```
 
 ### 置顶会话
