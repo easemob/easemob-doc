@@ -2,9 +2,9 @@
 
 <Toc />
 
-你可以从服务端获取用户发送和接收的历史消息的记录。
+你可以从服务端获取用户发送的历史消息的记录。
 
-- 单次请求获取从指定起始时间开始一小时内的全部历史消息记录。
+- 单次请求获取从指定起始时间开始一小时内的发送的历史消息记录。
 - 查询历史消息记录时存在一定延时，无法实时获取。
 - 过期的历史消息记录无法获取。对于不同的套餐版本，历史消息记录的默认存储时间不同，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
@@ -121,7 +121,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | :---------- | :----- | :---------------------- |
 | `msg_id`    | String | 消息 ID。       |
 | `timestamp` | Long   | 消息发送完成的 UNIX 时间戳，单位为毫秒，UTC 时间。         |
-| `direction` | String | 消息方向，即该消息是当前用户发送的还是接收的：<br/> - `outgoing`：发送的消息；<br/> - `incoming`：接收的消息。 |
+| `direction` | String | 消息方向，值为 `outgoing`，即当前用户发送的消息。 |
 | `from`      | String | 消息发送方的用户 ID。       |
 | `to`        | String | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。  |
 | `chat_type` | String | 会话类型：<br/> - `chat`: 单聊；<br/> - `groupchat`: 群聊；<br/> - `chatroom`: 聊天室。 |
