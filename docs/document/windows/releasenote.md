@@ -25,7 +25,7 @@
   - `SDKClient#GetLoggedInDevicesFromServerWithToken`：获取指定账号下登录的在线设备列表；
   - `SDKClient#KickDeviceWithToken`：将指定账号登录的指定设备踢下线；
   - `SDKClient#KickAllDevicesWithToken`：将指定账号登录的所有设备都踢下线。
-- [IM SDK] 新增 以下方法支持会话置顶：
+- [IM SDK] 新增[会话置顶功能](message_retrieve.html#置顶会话)：
   - `Conversation#IsPinned`：判断该会话是否被置顶；
   - `Conversation#PinnedTime`：会话置顶时间戳。
 - [IM SDK] 新增 `ChatManager#GetConversationsFromServerWithCursor` 方法根据指定参数从服务器获取相关会话对象。<br/>
@@ -38,9 +38,9 @@
   - `FetchServerMessagesOption#MsgTypes`：要查询的消息类型列表;
   - `FetchServerMessagesOption#StartTime`：消息查询的起始时间;
   - `FetchServerMessagesOption#EndTime`：消息查询的结束时间。
-- [IM SDK] 新增 设置群组或聊天室消息接收列表：
+- [IM SDK] 新增[在群组或聊天室中发送定向消息功能](message_send_receive.html#发送和接收定向消息)：
   - `Message#ReceiverList`：设置群组或聊天室消息接收列表。
-- [IM SDK] 新增 删除本地数据库中指定时间段的消息：
+- [IM SDK] 新增删除本地数据库中指定时间段的消息：
   - `Conversation#DeleteMessages`：删除本地数据库中指定时间段的消息。
 - [IM SDK] 新增[群组成员自定义属性管理功能](group_members.html#管理群成员的自定义属性)：
   - `GroupManager#FetchMemberAttributes`：获取群组成员自定义属性；
@@ -80,16 +80,16 @@
 
 ## 版本 v1.1.0 Dev 2023-2-25
 
-#### 新增特性
+### 新增特性
 
 - 新增 `ChatManager#GetConversationsFromServerWithPage` 方法实现从服务器分页获取会话列表。
 - 新增 `Message#Priority` 属性实现聊天室消息优先级功能，确保高优先级消息优先处理。
 
-#### 优化
+### 优化
 
 调整 `SDKClient#InitWithOptions` 方法，增加返回结果，检查 App Key 格式。
 
-#### 修复
+### 修复
 
 - 修复登录时的部分 bug。
 - 修复发送的消息的已读标识为 `false` 的问题。修复后，发送消息时将已读标识设置为 `true`。
@@ -97,7 +97,7 @@
 
 ## 版本 V1.0.9 Dev 2022-12-30（开发版）
 
-#### 新增特性
+### 新增特性
 
 1. `SDKClient` 类中新增以下方法:      
   - `GetLoggedInDevicesFromServer`：获取通过指定账号登录的在线设备列表。
@@ -128,7 +128,7 @@
   - `Ext`：自定义群组扩展信息。
   - `IsDisabled`：群组是否禁用。         
               
-#### 优化
+### 优化
 
 1. 命名空间由 ChatSDK 修改为 AgoraChat。
 2. 各方法中的 `handle` 参数重命名为 `callback`。
@@ -158,16 +158,16 @@
 
 ## 版本 V1.0.8 Dev 2022-9-30（开发版）
 
-#### 新增特性
+### 新增特性
 
 - 新增聊天室自定义属性功能。
 - `ChatGroup` 中增加 `isDisabled` 属性显示群组禁用状态，需要开发者在服务端设置。该属性在调用 `IGroupManager` 中的 `GetGroupSpecificationFromServer` 方法获取群组详情时返回。
-#### 优化
+### 优化
 
 - 移除 SDK 一部分冗余日志；
 - 将命名空间由 ChatSDK 改为 AgoraChat。
         
-#### 修复
+### 修复
 
   1. 修复极少数场景下，从服务器获取较大数量的消息时失败的问题。
   2. 修复数据统计不正确的问题。       
@@ -176,7 +176,7 @@
 
 ## 版本 V1.0.5 2022-08-05
 
-新增特性
+### 新增特性
 
 - [在线状态订阅](presence.html)
 - [消息表情回复](reaction.html)
