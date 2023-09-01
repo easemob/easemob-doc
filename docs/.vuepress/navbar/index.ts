@@ -4,22 +4,70 @@ export const zhNavbar = navbar([
   { text: '产品简介', link: '/product/introduction.html' },
   {
      text: '集成文档', 
-     link: '/document/android/quickstart.html',
-    //  children: [
-    //   {
-    //     text: 'Android',
-    //     link: '/document/android'
-    //   },
-    //   {
-    //     text: 'iOS',
-    //     link: '/document/ios'
-    //   },
-    //   {
-    //     text: 'Web',
-    //     link: '/document/web'
-    //   },
-    //  ]
-  },
+     children: [
+      {
+        text: '平台',
+        children: [
+          {
+            text: 'Android',
+            icon: '/icon-Android.svg',
+            link: '/document/android/quickstart.html'
+          },
+          {
+            text: 'iOS',
+            icon: '/icon-iOS.svg',
+            link: '/document/ios/quickstart.html'
+          },
+          {
+            text: 'Web',
+            icon: '/icon-web.svg',
+            link: '/document/web/quickstart.html'
+          },
+          {
+            text: 'Windows',
+            icon: '/icon-windows.svg',
+            link: '/document/windows/quickstart.html'
+          }
+        ]
+      },
+      {
+        text: '框架',
+        children: [
+          {
+            text: 'React Native',
+            icon: '/icon-ReactNative.svg',
+            link: '/document/react-native/quickstart.html'
+          },
+          {
+            text: 'Flutter',
+            icon: '/icon-flutter.svg',
+            link: '/document/flutter/quickstart.html'
+          },
+          {
+            text: 'Unity',
+            icon: '/icon-unity.svg',
+            link: '/document/unity/quickstart.html'
+          },
+          {
+            text: '小程序',
+            icon: '/icon-mini-program.svg',
+            link: '/document/applet/overview.html'
+          },
+        ]
+      },
+      {
+        text: '服务端',
+        children: [
+          {
+        text: 'REST API',    
+        icon: '/icon-platform.svg',
+        link: '/document/server-side/overview.html'
+       }
+      ]  
+    },
+  ]
+},  
+
   {
      text: 'API 参考',
      children: [
