@@ -4,14 +4,46 @@
 
 环信即时通讯 IM 支持同一账号在多个设备上登录，所有已登录的设备同步以下信息和操作：
 
-- 在线消息、离线消息、推送通知（若开启了第三方推送服务，离线设备收到）以及对应的回执和已读状态；
-- 好友和群组相关操作。
+- 消息：包括在线消息、离线消息、推送通知（若开启了第三方推送服务，离线设备收到）以及对应的回执和已读状态等；
+- 好友和群组相关操作；
+- 子区相关操作；
+- 会话相关操作。
 
-多端登录时，即时通讯 IM 所有各端默认共支持 4 个设备同时在线。单端登录时默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。
+多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。
 
 你可以在环信控制台的**功能配置** > **功能配置总览**页面的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置设置各端设备的数量：
 
 ![img](@static/images/common/multidevice_device_count.png)
+
+单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<table width="761" height="195" border="1">
+  <tbody>
+    <tr>
+      <td width="139" height="49">单端/多端登录</td>
+      <td width="353">互踢策略</td>
+      <td width="247">自动登录安全检查</td>
+    </tr>
+    <tr>
+      <td height="52">单端登录</td>
+      <td>新登录的设备会将当前在线设备踢下线。</td>
+      <td rowspan="2">设备支持自动登录时，若设备下线后自动重连时需要判断是否踢掉当前在线的最早登录设备，请联系环信商务。 </td>
+    </tr>
+    <tr>
+      <td height="84">多端登录</td>
+      <td>若一端的登录设备数量达到了上限，新登录的设备会将该端最早登录的设备踢下线。&lt;br/&gt;即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>  
 
 ## 技术原理  
 
@@ -163,7 +195,7 @@ try {
 }
 ```
 
-### 获取其他设备的好友或者群组操作
+### 获取其他设备上的操作
 
 例如，账号 A 同时在设备 A 和 B 上登录，账号 A 在设备 A 上进行操作，设备 B 会收到这些操作对应的通知。
 
@@ -175,27 +207,27 @@ final multiDeviceEventHandler = EMMultiDeviceEventHandler(
   onChatThreadEvent: (EMMultiDevicesEvent event, String chatThreadId,
       List<String> userIds) {
     switch (event) {
-      // 多设备新建子区回调
+      // 当前用户在其他设备上创建子区。
       case EMMultiDevicesEvent.CHAT_THREAD_CREATE:
         debugPrint('chat thread create: $chatThreadId');
         break;
-      // 多设备解散子区回调
+      // 当前用户在其他设备上销毁子区。
       case EMMultiDevicesEvent.CHAT_THREAD_DESTROY:
         debugPrint('chat thread destroy: $chatThreadId');
         break;
-      // 多设备加入子区回调
+      // 当前用户在其他设备上加入子区。
       case EMMultiDevicesEvent.CHAT_THREAD_JOIN:
         debugPrint('chat thread join: $chatThreadId');
         break;
-      // 多设备离开子区回调
+      // 当前用户在其他设备上离开子区。
       case EMMultiDevicesEvent.CHAT_THREAD_LEAVE:
         debugPrint('chat thread leave: $chatThreadId');
         break;
-      // 多设备子区更新回调
+      // 当前用户在其他设备上更新子区。
       case EMMultiDevicesEvent.CHAT_THREAD_UPDATE:
         debugPrint('chat thread update: $chatThreadId');
         break;
-      // 多设备子区被踢回调
+      // 当前用户在其他设备上将成员踢出子区。
       case EMMultiDevicesEvent.CHAT_THREAD_KICK:
         debugPrint('chat thread kick: $chatThreadId');
         break;
@@ -205,23 +237,23 @@ final multiDeviceEventHandler = EMMultiDeviceEventHandler(
   },
   onContactEvent: (EMMultiDevicesEvent event, String userId, String? ext) {
     switch (event) {
-      // 多设备好友请求同意回调，在其他设备同意了好友请求，在当前设备收到回调。
+      // 当前用户在其他设备上接受好友请求。
       case EMMultiDevicesEvent.CONTACT_ACCEPT:
         debugPrint('contact accept: $userId');
         break;
-      // 多设备添加黑名单回调，在其他设备拉黑userId，在当前设备收到回调。
+      // 当前用户在其他设备上将好友加入黑名单。 
       case EMMultiDevicesEvent.CONTACT_BAN:
         debugPrint('contact ban: $userId');
         break;
-      // 多设备移除黑名单回调，在其他设备移除黑名单userId，在当前设备收到回调。
+      // 当前用户在其他设备上将好友移出黑名单。 
       case EMMultiDevicesEvent.CONTACT_ALLOW:
         debugPrint('contact allow: $userId');
         break;
-      // 多设备好友申请拒绝回调，在其他设备拒绝了好友申请，在当前设备收到回调。
+      // 当前用户在其他设备上拒绝好友请求。  
       case EMMultiDevicesEvent.CONTACT_DECLINE:
         debugPrint('contact decline: $userId');
         break;
-      // 多设备好友移除回调，在其他设备删除了好友，在当前设备收到回调。
+      //当前用户在其他设备上删除好友。
       case EMMultiDevicesEvent.CONTACT_REMOVE:
         debugPrint('contact remove: $userId');
         break;
@@ -344,7 +376,7 @@ final multiDeviceEventHandler = EMMultiDeviceEventHandler(
         break;
     }
   },
-  // 单个会话删除漫游消息后对其他设备的回调
+  // 当前用户在其他设备上单向删除服务端某个会话的历史消息。
   onRemoteMessagesRemoved: (String conversationId, String? deviceId) {
     debugPrint('remote messages removed: $conversationId');
   },
