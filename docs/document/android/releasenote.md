@@ -2,7 +2,14 @@
 
 <Toc />
 
-## 版本 V4.1.1 Dev 2023-8-03（开发版）
+## 版本 V4.1.2 Dev 2023-9-5（开发版）
+
+### 优化
+
+- [IM SDK] 适配 Android 14 Beta。
+  - 适配以 Android 14 为目标平台时动态注册广播接收者必须设置 `RECEIVER_EXPORTED` 或者 `RECEIVER_NOT_EXPORTED` 的规定。
+
+## 版本 V4.1.1 Dev 2023-8-3（开发版）
 
 ### 修复
 
