@@ -53,6 +53,11 @@ export const zhNavbar = navbar([
             icon: '/icon-mini-program.svg',
             link: '/document/applet/overview.html'
           },
+          {
+            text: 'uni-app',
+            icon: '/icon-uni-app.svg',
+            link: '/document/applet/uniapp.html'
+          },
         ]
       },
       {
@@ -152,5 +157,5 @@ export const zhNavbar = navbar([
       
   },
   { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
-  { text: '参与环信文档“捉虫”活动，领京东卡', link: 'https://www.imgeek.org/article/825360944' },
+  { text: '文档“捉虫”活动', link: 'https://www.imgeek.org/article/825360944' },
 ]);
