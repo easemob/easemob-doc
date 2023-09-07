@@ -18,20 +18,18 @@
 单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
 
 <html>
-
 <head>
 <meta charset="utf-8">
 <title>无标题文档</title>
 </head>
 
 <body>
-
-<table width="761" height="195" border="1">
+<table width="815" height="195" border="1">
   <tbody>
     <tr>
-      <td width="139" height="49">单端/多端登录</td>
-      <td width="353">互踢策略</td>
-      <td width="247">自动登录安全检查</td>
+      <td width="127" height="49">单端/多端登录</td>
+      <td width="400">互踢策略</td>
+      <td width="266">自动登录安全检查</td>
     </tr>
     <tr>
       <td height="52">单端登录</td>
@@ -40,13 +38,12 @@
     </tr>
     <tr>
       <td height="84">多端登录</td>
-      <td>若一端的登录设备数量达到了上限，新登录的设备会将该端最早登录的设备踢下线。&lt;br/&gt;即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。</td>
+      <td>若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。&lt;br/&gt;即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。</td>
     </tr>
   </tbody>
 </table>
-
 </body>
-</html>  
+</html> 
 
 ## 技术原理
 
