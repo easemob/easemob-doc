@@ -80,11 +80,11 @@
 
 <table>
 <tr><td>平台</td><td>应用端</td><td>下载地址</td><td>备注</td></tr>
-<tr><td rowspan="2">访客端</td><td>iOS</td><td><a href="https://www.pgyer.com/lbTC">下载体验</a></td><td>下载后选择【用户模块】注册与登录</td></tr>
-<tr><td>Android</td><td><a href="https://www.pgyer.com/Bt7N">下载体验</a></td><td>下载后选择【用户模块】注册与登录</td></tr>
-<tr><td rowspan="3">客服&运管人员</td><td>iOS</td><td><a href="https://www.pgyer.com/lbTC">下载体验</a></td><td>下载后选择【运管模块】，使用客服预置账号登录</td></tr>
-<tr><td>Android</td><td><a href="https://www.pgyer.com/Bt7N">下载体验</a></td><td>下载后选择【运管模块】，使用客服预置账号登录</td></tr>
-<tr><td>Web</td><td><a href="http://39.105.11.55/#/login">点击体验</a></td><td>下载后选择【运管模块】，使用客服预置账号登录</td></tr>
+<tr><td rowspan="2">访客端</td><td>iOS</td><td>联系商务获取</td><td>下载后选择【用户模块】注册与登录</td></tr>
+<tr><td>Android</td><td><a href="https://www.pgyer.com/UtUNdP">下载体验</a></td><td>下载后选择【用户模块】注册与登录</td></tr>
+<tr><td rowspan="3">客服&运管人员</td><td>iOS</td><td>联系商务获取</td><td>下载后选择【运管模块】，使用客服预置账号登录</td></tr>
+<tr><td>Android</td><td><a href="https://www.pgyer.com/UtUNdP">下载体验</a></td><td>下载后选择【运管模块】，使用客服预置账号登录</td></tr>
+<tr><td>Web</td><td><a href="http://106.120.21.108:20880/">点击体验</a></td><td>下载后选择【运管模块】，使用客服预置账号登录</td></tr>
 </table>
 <!--
 | 应用端 | 下载地址 |
