@@ -512,9 +512,9 @@
 
 ### 新功能：
 
-- [IM SDK] 新增设置、获取用户属性的接口，集成参见：[用户属性](https://docs-im.easemob.com/im/android/basics/profile)
+- [IM SDK] 新增设置、获取用户属性的接口，集成参见：[用户属性](userprofile.html)；
 - [EaseIM App] 新增用户资料（头像、昵称等）的存储、显示;
-- [EaseIM App] 新增用户名片消息的发送与展示（使用自定义消息实现);
+- [EaseIM App] 新增用户名片消息的发送与展示（使用自定义消息实现）;
 
 ### 修复：
 
