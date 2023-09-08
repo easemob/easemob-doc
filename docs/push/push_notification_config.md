@@ -29,7 +29,8 @@
   "meizu": {},
   "oppo": {},
   "vivo": {},
-  "xiaomi": {}
+  "xiaomi": {},
+  "honor":{}
 }
 ```
 
@@ -57,6 +58,7 @@
 | `oppo`    | Object | OPPO 推送。                    | 否       |
 | `meizu`   | Object | 魅族推送特性。                 | 否       |
 | `huawei`  | Object | 华为推送特性。                 | 否       |
+| `honor`   | Object | 荣耀推送特性。                 | 否       |
 
 ### Easemob 推送
 
