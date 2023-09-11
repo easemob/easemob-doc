@@ -25,12 +25,12 @@
 </head>
 
 <body>
-<table width="815" height="195" border="1">
+<table width="1060" height="327" border="1">
   <tbody>
     <tr>
-      <td width="127" height="49">单端/多端登录</td>
-      <td width="400">互踢策略</td>
-      <td width="266">自动登录安全检查</td>
+      <td width="109" height="49">单端/多端登录</td>
+      <td width="519">互踢策略</td>
+      <td width="410">自动登录安全检查</td>
     </tr>
     <tr>
       <td height="52">单端登录</td>
@@ -38,13 +38,13 @@
       <td rowspan="2">设备支持自动登录时，若设备下线后自动重连时需要判断是否踢掉当前在线的最早登录设备，请联系环信商务。 </td>
     </tr>
     <tr>
-      <td height="84">多端登录</td>
+      <td height="156">多端登录</td>
       <td>若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。&lt;br/&gt;即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。</td>
     </tr>
   </tbody>
 </table>
 </body>
-</html> 
+</html>
 
 ## 技术原理
 
