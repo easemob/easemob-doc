@@ -11,6 +11,7 @@ env:
   USER_NAME: ${{ secrets.SERVER_USER_NAME }} # 服务器用户名
   cache-name: note
   TZ: Asia/Shanghai # 设置当前环境时区
+  NODE_OPTIONS: "--max_old_space_size=4096"
 
 # jobs表示执行的一项或多项任务
 jobs:
