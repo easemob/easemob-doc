@@ -4,6 +4,10 @@ import { ref, watch, computed } from 'vue'
 import { useRoute, useRouter} from 'vue-router'
 
 const PLATFORM_ICON_MAP = {
+  privatization: {
+    icon : '/icon-server-dark.png',
+    activeIcon: '/icon-server-light.png',
+  },
   android: {
     icon : '/icon-Android.svg',
     activeIcon: '/icon-Android-hover.svg',
@@ -43,34 +47,49 @@ const PLATFORM_ICON_MAP = {
 }
 
 const platform = ref('android')
+let version = ''
 const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value]?.activeIcon)
 const route = useRoute()
 const router = useRouter()
 watch(()=>route.path, ()=> {
   if (route.path.indexOf('/document') == 0) {
-    platform.value = route.path.split('/')[2]
+    version = route.path.split('/')[2]
+    platform.value = route.path.split('/')[3]
   }
 }, {immediate:true})
 
 
 // 切换平台，如果有相同路径的route就直接跳转
 const onChange = (platform) => {
-  const nextPlatformDocRouters = router.options.routes.filter(item=>item.hasOwnProperty('name') && item?.path.indexOf('/document/'+platform) == 0).map(item=>item.path)
+  if (platform === 'privatization') {
+    router.push(`/document/${version}/privatization/uc_deploy.html`)
+    return 
+  }
+  const nextPlatformDocRouters = router.options.routes.filter(item=>item.hasOwnProperty('name') && item?.path.indexOf(`/document/${version}/${platform}`) == 0).map(item=>item.path)
 
   let newPath = route.path.split('/')
-  newPath[2] = platform
+  newPath[3] = platform
   const nextPathPath = newPath.join('/')
 
   if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
     router.push(nextPathPath)
   } else {
-    router.push('/document/'+platform+'/overview.html')
+    router.push(`/document/${version}/${platform}/overview.html`)
   }
 }
 
 const options = [
   {
-    label: '平台',
+    label: '安装部署',
+    options: [
+       {
+        value: 'privatization',
+        label: '服务部署',
+      },
+    ],
+  },
+  {
+    label: '集成文档',
     options: [
       {
         value: 'android',
@@ -88,12 +107,7 @@ const options = [
         value: 'windows',
         label: 'Windows',
       },
-    ],
-  },
-  {
-    label: '框架',
-    options: [
-      {
+       {
         value: 'react-native',
         label: 'React Native',
       },
@@ -109,11 +123,6 @@ const options = [
         value: 'applet',
         label: '小程序',
       },
-    ],
-  },
-  {
-    label: '服务端',
-    options: [
       {
         value: 'server-side',
         label: 'Rest Api',

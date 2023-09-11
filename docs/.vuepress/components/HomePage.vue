@@ -7,5 +7,5 @@
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-router.push('/product/introduction')
+router.push('/document/v2/privatization/uc_deploy')
 </script>
