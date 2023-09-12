@@ -824,7 +824,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/users
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
 | `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。      |
 | `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
-| `users`         | Array  | 是       ｜接收消息的聊天室成员的用户 ID 数组。每次最多可传 20 个用户 ID。｜
+| `users` | Array | 是       | 接收消息的聊天室成员的用户 ID 数组。每次最多可传 20 个用户 ID。 |
 
 请求体中的 `body` 字段说明详见下表。
 
