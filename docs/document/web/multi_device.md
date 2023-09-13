@@ -26,12 +26,12 @@
 </head>
 
 <body>
-<table width="1060" height="327" border="1">
+<table width="807" height="327" border="1">
   <tbody>
     <tr>
       <td width="109" height="49">单端/多端登录</td>
-      <td width="519">互踢策略</td>
-      <td width="410">自动登录安全检查</td>
+      <td width="384">互踢策略</td>
+      <td width="292">自动登录安全检查</td>
     </tr>
     <tr>
       <td height="52">单端登录</td>
@@ -40,7 +40,8 @@
     </tr>
     <tr>
       <td height="156">多端登录</td>
-      <td>若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。&lt;br/&gt;即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。</td>
+      <td><p>若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。</p>
+      <p>即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。</p></td>
     </tr>
   </tbody>
 </table>
