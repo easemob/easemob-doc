@@ -9,7 +9,7 @@
 - 子区相关操作；
 - 会话相关操作。
 
-环信服务器提供 RESTful 接口[查询每个账号已登录设备列表](account_system.html#获取指定账号的在线登录设备列表)以及[将账号从已登录设备强制下线](account_system.html#强制下线)。
+环信服务器提供 RESTful 接口[查询每个账号已登录设备列表](/document/server-side/account_system.html#获取指定账号的在线登录设备列表)以及[将账号从已登录设备强制下线](/document/server-side/account_system.html#强制下线)。
 
 多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。
 
