@@ -44,6 +44,7 @@
 :::
 
 ```csharp
+// limit: 每页返回的会话数。取值范围为 [1,50]。
 int limit = 10;
 string cursor = "";
 bool pinOnly = false; // `false`：获取所有会话；`true`仅获取置顶会话列表。

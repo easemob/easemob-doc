@@ -45,6 +45,8 @@ SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒�
 示例代码如下：
 
 ```objectivec
+// pageSize: 每页返回的会话数。取值范围为 [1,50]。
+// cursor：查询的开始位置。若传入 `nil` 或 `@""`，SDK 从最新活跃的会话开始获取。
 NSString *cursor = @"";
 [EMClient.sharedClient.chatManager getConversationsFromServerWithCursor:cursor pageSize:20 completion:^(EMCursorResult<EMConversation *> * _Nullable result, EMError * _Nullable error) {
 }];
@@ -63,6 +65,7 @@ NSString *cursor = @"";
 示例代码如下： 
 
 ```objectivec
+// pageSize: 每页返回的会话数。取值范围为 [1,50]。
 NSString *cursor = @"";
 [EMClient.sharedClient.chatManager getPinnedConversationsFromServerWithCursor:cursor pageSize:20 completion:^(EMCursorResult<EMConversation *> * _Nullable result, EMError * _Nullable error) {
 }];

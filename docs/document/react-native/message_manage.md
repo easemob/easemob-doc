@@ -43,7 +43,8 @@ SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒�
 示例代码如下：
 
 ```typescript
-// cursor: 如果为空字符串，则从最新会话开始获取。
+// pageSize: 每页返回的会话数。取值范围为 [1,50]。
+// cursor: 开始获取数据的游标位置。如果为空字符串或传 `undefined`，则从最新会话开始获取。
 ChatClient.getInstance()
   .chatManager.fetchConversationsFromServerWithCursor(cursor, pageSize)
   .then(() => {
@@ -80,6 +81,8 @@ ChatClient.getInstance()
 示例代码如下： 
 
 ```typescript
+// pageSize: 每页返回的会话数。取值范围为 [1,50]。
+// cursor: 开始获取数据的游标位置。若获取数据时传 `undefined` 或者空字符串（""），SDK 从最新置顶的会话开始查询。
 ChatClient.getInstance()
   .chatManager.fetchPinnedConversationsFromServerWithCursor(cursor, pageSize)
   .then(() => {

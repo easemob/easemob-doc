@@ -47,6 +47,7 @@ SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒�
 示例代码如下：
 
 ```dart
+// pageSize: 每页返回的会话数。取值范围为 [1,50]。
 try {
   int pageSize = 10;
   String cursor = "";
@@ -75,6 +76,7 @@ try {
 示例代码如下： 
 
 ```dart
+// pageSize: 每页返回的会话数。取值范围为 [1,50]。
 try {
   int pageSize = 10;
   String cursor = "";
