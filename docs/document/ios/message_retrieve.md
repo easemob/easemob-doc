@@ -66,6 +66,7 @@ NSString *cursor = @"";
 
 ```objectivec
 // pageSize: 每页返回的会话数。取值范围为 [1,50]。
+// cursor：查询的开始位置。若传入 `nil` 或 `@""`，SDK 从最新置顶的会话开始查询。
 NSString *cursor = @"";
 [EMClient.sharedClient.chatManager getPinnedConversationsFromServerWithCursor:cursor pageSize:20 completion:^(EMCursorResult<EMConversation *> * _Nullable result, EMError * _Nullable error) {
 }];
