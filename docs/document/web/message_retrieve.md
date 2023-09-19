@@ -78,6 +78,8 @@ connection.getServerConversations({pageSize:50, cursor: ''}).then((res)=>{
 示例代码如下，返回数据类型参见getServerConversations： 
 
 ```javascript
+// pageSize: 每页返回的会话数。取值范围为 [1,50]。
+// cursor：开始获取数据的游标位置。若传空字符串（''），SDK 从最新置顶的会话开始查询。
 connection.getServerPinnedConversations({pageSize:50, cursor: ''})
 ```
 
