@@ -48,7 +48,7 @@ SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒�
 
 ```java
 // limit: 每页返回的会话数。取值范围为 [1,50]。
-// cursor: 开始获取数据的游标位置。若获取数据时传 null 或者空字符串（""），SDK 从最新活跃的会话开始获取。
+// cursor: 开始获取数据的游标位置。若获取数据时传 `null` 或者空字符串（""），SDK 从最新活跃的会话开始获取。
 int limit = 10;
 String cursor = "";
 EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cursor, new EMValueCallBack<EMCursorResult<EMConversation>>() {
