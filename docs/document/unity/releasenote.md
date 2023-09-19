@@ -37,7 +37,7 @@
   - `FetchServerMessagesOption#MsgTypes`：要查询的消息类型列表;
   - `FetchServerMessagesOption#StartTime`：消息查询的起始时间;
   - `FetchServerMessagesOption#EndTime`：消息查询的结束时间。
-- [IM SDK] 新增 `GetConversationsFromServerWithCursor` 方法
+- [IM SDK] 新增 `GetConversationsFromServerWithCursor` 方法从服务端分页获取会话列表。
 - [IM SDK] 新增[在群组或聊天室中发送定向消息功能](message_send_receive.html#发送和接收定向消息)：
   - `Message#ReceiverList`：设置群组或聊天室消息接收列表。
 - [IM SDK] 新增 `Conversation#DeleteMessages`方法删除本地数据库中指定时间段的消息。

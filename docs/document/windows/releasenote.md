@@ -28,7 +28,7 @@
 - [IM SDK] 新增[会话置顶功能](message_retrieve.html#置顶会话)：
   - `Conversation#IsPinned`：判断该会话是否被置顶；
   - `Conversation#PinnedTime`：会话置顶时间戳。
-- [IM SDK] 新增 `ChatManager#GetConversationsFromServerWithCursor` 方法根据指定参数从服务器获取相关会话对象。<br/>
+- [IM SDK] 新增 `ChatManager#FetchHistoryMessagesFromServerBy` 方法根据消息拉取参数配置类 `FetchServerMessagesOption` 从服务器获取历史消息。<br/>
   作废 `ChatManager#GetConversationsFromServer`。
 - 新增 `ChatManager#FetchHistoryMessagesFromServerBy` 方法根据消息拉取参数配置类 `FetchServerMessagesOption` 从服务器获取历史消息;
 - [IM SDK] 新增消息拉取参数配置类 `FetchServerMessagesOption`：
@@ -38,6 +38,7 @@
   - `FetchServerMessagesOption#MsgTypes`：要查询的消息类型列表;
   - `FetchServerMessagesOption#StartTime`：消息查询的起始时间;
   - `FetchServerMessagesOption#EndTime`：消息查询的结束时间。
+- [IM SDK] 新增 `GetConversationsFromServerWithCursor` 方法从服务端分页获取会话列表。  
 - [IM SDK] 新增[在群组或聊天室中发送定向消息功能](message_send_receive.html#发送和接收定向消息)：
   - `Message#ReceiverList`：设置群组或聊天室消息接收列表。
 - [IM SDK] 新增删除本地数据库中指定时间段的消息：
