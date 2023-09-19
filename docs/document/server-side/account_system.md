@@ -459,7 +459,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users?limit={N}&{cursor}
+GET https://{host}/{org_name}/{app_name}/users?limit={N}&cursor={cursor}
 ```
 
 ##### 路径参数
