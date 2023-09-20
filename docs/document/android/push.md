@@ -167,7 +167,7 @@ options.setPushConfig(builder.build());
 // 初始化即时通讯 IM SDK
 EMClient.getInstance().init(this, options);
 // 即时通讯 IM SDK 初始化后
-EMPushHelper.getInstance().setPushListener(new EMPushListener() {
+EMPushHelper.getInstance().setPushListener(new PushListener() {
    @Override
    public void onError(EMPushType pushType, long errorCode) {
        EMLog.e("PushClient", "Push client occur a error: " + pushType + " - " + errorCode);

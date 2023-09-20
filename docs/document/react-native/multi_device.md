@@ -60,11 +60,7 @@
 
 ## 前提条件
 
-开始前，请确保满足以下条件：
-
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 了解环信即时通讯 IM 的套餐包，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+开始前，请确保满足完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
 
 ## 实现方法
 
@@ -241,6 +237,23 @@ let listener: ChatMultiDeviceEventListener = new (class
     ext?: string
   ): void {
     // 联系人相关多设备通知。
+    switch (event) {
+      //当前用户在其他设备上删除好友。
+      case CONTACT_REMOVE:
+        break;
+      //当前用户在其他设备上接受好友请求。
+      case CONTACT_ACCEPT:
+        break;
+      //当前用户在其他设备上拒绝好友请求。
+      case CONTACT_DECLINE:
+        break;
+      //当前用户在其他设备上将好友加入黑名单。
+      case CONTACT_BAN:
+        break;
+      //当前用户在其他设备上将好友移出黑名单。
+      case CONTACT_ALLOW:
+        break;
+    }
   }
 
   onGroupEvent?(
@@ -249,6 +262,73 @@ let listener: ChatMultiDeviceEventListener = new (class
     usernames?: Array<string>
   ): void {
     // 群组相关多设备通知。
+    switch (event) {
+      //当前⽤户在其他设备创建了群组。
+      case GROUP_CREATE:
+        break;
+      //当前⽤户在其他设备销毁了群组。
+      case GROUP_DESTROY:
+        break;
+      //当前⽤户在其他设备加⼊了群组。
+      case GROUP_JOIN:
+        break;
+      //当前⽤户在其他设备离开了群组。
+      case GROUP_LEAVE:
+        break;
+      //当前⽤户在其他设备发起了入群申请。
+      case GROUP_APPLY:
+        break;
+      //当前⽤户在其他设备同意了入群申请。
+      case GROUP_APPLY_ACCEPT:
+        break;
+      //当前⽤户在其他设备拒绝了入群申请。
+      case GROUP_APPLY_DECLINE:
+        break;
+      //当前⽤户在其他设备邀请了群成员。
+      case GROUP_INVITE:
+        break;
+      //当前⽤户在其他设备同意了入群邀请。
+      case GROUP_INVITE_ACCEPT:
+        break;
+      //当前⽤户在其他设备拒绝了入群邀请。
+      case GROUP_INVITE_DECLINE:
+        break;
+      //当前⽤户在其他设备将成员踢出群。
+      case GROUP_KICK:
+        break;
+      //当前⽤户在其他设备将成员加⼊群组⿊名单。
+      case GROUP_BAN:
+        break;
+      //当前⽤户在其他设备将成员移除群组⿊名单。
+      case GROUP_ALLOW:
+        break;
+      //当前⽤户在其他设备屏蔽了群组。
+      case GROUP_BLOCK:
+        break;
+      //当前⽤户在其他设备取消群组屏蔽。
+      case GROUP_UNBLOCK:
+        break;
+      //当前⽤户在其他设备转移群所有权。
+      case GROUP_ASSIGN_OWNER:
+        break;
+      //当前⽤户在其他设备添加管理员。
+      case GROUP_ADD_ADMIN:
+        break;
+      //当前⽤户在其他设备移除管理员。
+      case GROUP_REMOVE_ADMIN:
+        break;
+      //当前⽤户在其他设备禁⾔⽤户。
+      case GROUP_ADD_MUTE:
+        break;
+      //当前⽤户在其他设备移除禁⾔。
+      case GROUP_REMOVE_MUTE:
+        break;
+      //当前⽤户在其他设备设置了群成员自定义属性。
+      case GROUP_METADATA_CHANGED:
+        break;
+      default:
+        break;
+    }
   }
 
   onThreadEvent?(
@@ -257,6 +337,26 @@ let listener: ChatMultiDeviceEventListener = new (class
     usernames?: Array<string>
   ): void {
     // 子区消息多设备通知。
+    switch (event) {
+      case THREAD_CREATE:
+        //当前用户在其他设备上创建子区。
+        break;
+      case THREAD_DESTROY:
+        //当前用户在其他设备上销毁子区。
+        break;
+      case THREAD_JOIN:
+        //当前用户在其他设备上加入子区。
+        break;
+      case THREAD_LEAVE:
+        //当前用户在其他设备上离开子区。
+        break;
+      case THREAD_UPDATE:
+        //当前用户在其他设备上更新子区。
+        break;
+      case THREAD_KICK:
+        //当前用户在其他设备上将成员踢出子区。
+        break;
+    }
   }
 
   onMessageRemoved?(convId?: string, deviceId?: string): void {
@@ -269,6 +369,19 @@ let listener: ChatMultiDeviceEventListener = new (class
     convType?: ChatConversationType
   ): void {
     // 会话变更通知。
+    switch (event) {
+      case CONVERSATION_PINNED:
+        //当前用户在其他设备上给某个会话置顶
+        break;
+      case CONVERSATION_UNPINNED:
+        //当前用户在其他设备上给某个会话取消置顶
+        break;
+      case CONVERSATION_DELETED:
+        //当前用户在其他设备上删除某个会话
+        break;
+      default:
+        break;
+    }
   }
 })();
 
