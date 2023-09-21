@@ -240,11 +240,10 @@
 - 消息表情回复；
 - 管理子区等。
 
-关于详细功能概述请参见： [产品概述](/product/introduction.html).
 
 具体集成请参考以下文档：
 
-- [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
+- [开通配置环信即时通讯 IM 服务](/document/v2/privatization/uc_configure.html)
 - [环信即时通讯 IM React-Native 快速开始](quickstart.html)
 - [消息管理 React Native](message_overview.html)
 - [群组](group_overview.html)

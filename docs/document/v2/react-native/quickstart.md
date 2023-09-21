@@ -41,7 +41,7 @@
 
 ### 其他要求
 
-有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云管理后台](/document/v2/privatization/uc_configure.html)。
 
 ## 项目设置
 
@@ -494,4 +494,4 @@ demo 的界面:
 
 ## 更多操作
 
-为了保证安全性，我们推荐使用 `username + password + token` 方式创建用户，token 在你的 app server 生成供客户端获取，当 token 过期时你需要重新获取。详见 [获取 user token](/product/easemob_user_token)。
+为了保证安全性，我们推荐使用 `username + password + token` 方式创建用户，token 在你的 app server 生成供客户端获取，当 token 过期时你需要重新获取。详见 [获取 user token](/document/v2/server-side/easemob_user_token.html)。

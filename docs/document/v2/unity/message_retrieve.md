@@ -4,9 +4,6 @@
 
 环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。本文介绍用户如何从消息服务器获取和删除会话和消息。
 
-:::tip
-本文介绍的功能均为增值服务，需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
-:::
 
 ## 实现原理
 
@@ -24,7 +21,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/document/v2/privatization/uc_limitation.html)。
 
 ## 实现方法
 
@@ -115,7 +112,7 @@ SDKClient.Instance.ChatManager.PinConversation(convId, isPinned, new CallBack(
 
 ### 分页获取指定会话的历史消息
 
-你可以调用 `FetchHistoryMessagesFromServer` 方法从服务器分页获取指定会话的历史消息，实现消息漫游。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+你可以调用 `FetchHistoryMessagesFromServer` 方法从服务器分页获取指定会话的历史消息，实现消息漫游。
 
 为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 
@@ -137,7 +134,7 @@ SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(conversationId, ty
 你可以调用 `RemoveMessagesFromServer` 方法单向删除服务端的历史消息，每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。已删除的消息自动从设备本地移除。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V1.1.0 或以上版本并联系商务。
+若使用该功能，需将 SDK 升级至 V1.1.0 或以上版本。
 :::
 
 ```csharp

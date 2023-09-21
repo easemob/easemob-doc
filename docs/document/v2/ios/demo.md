@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信即时通讯 IM iOS 端提供示例应用可供体验。
+<!--环信即时通讯 IM iOS 端提供示例应用可供体验。
 
 1. [下载 Demo](https://www.easemob.com/download/demo)。
 
@@ -11,19 +11,20 @@
 3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
 ![img](@static/images/demo/ios_login.png)
+-->
 
 ## 代码下载
 
 您可以通过以下两种方式获取到源代码：
 
-- 下载代码压缩包：[IM SDK 及 Demo 下载](https://www.easemob.com/download/im)
-- 下载源代码：[github 源码地址](https://github.com/easemob/chat-ios)
+- 下载代码压缩包：[IM SDK 及 Demo 下载](https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V4.1.1.zip)
+
 
 欢迎大家提交 PR 改进和修复 EaseIM 和 EaseIMKit 中的问题。
 
 ## 运行 EaseIM 工程
 
-从 [IM SDK 及 Demo 下载](https://www.easemob.com/download/im) 下载 iOS SDK 压缩包，然后解压。解压后在 `EaseIM` 文件夹下，即为 EaseIM 的工程目录。
+下载 iOS SDK 压缩包，然后解压。解压后在 `EaseIM` 文件夹下，即为 EaseIM 的工程目录。
 
 终端 cd 到 EaseIM 的 `podfile` 目录下，终端执行 `pod install` 命令，等待下载完所有的 pod 依赖库，即可打开 `EaseIM.xcworkspace`，运行 EaseIM demo 进行自定义再次开发。
 
@@ -67,6 +68,6 @@ Demo 中有几大 UI 功能模块，在集成时将对应的模块添加到工�
 
 ## 部分 UI 展示
 
-![联系人列表](@static/images/android/app-demo-ui-2.jpeg)
 
-![聊天页面](@static/images/android/app-demo-ui-3.jpeg)
+<img src=@static/images/android/app-demo-ui-2.jpeg  title=联系人列表 width="200"/>&nbsp;&nbsp;
+<img src=@static/images/android/app-demo-ui-3.jpeg  title=聊天页面 width="200"/>

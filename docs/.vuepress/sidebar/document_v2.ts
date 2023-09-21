@@ -8,26 +8,33 @@ const platformList = getSubDirectories(DOC_PATH)
 const privateSidebar = {
   '/document/v2/privatization/': [ 
     {
-      text: '服务部署', 
+      text: '产品简介', 
       children: [
-        { text: '私有化服务部署', link: 'uc_deploy.html' },
+        { text: '产品概述', link: 'uc_introduction.html' },
+        { text: '产品使用限制', link: 'uc_limitation.html' },
+        { text: '术语表', link: 'uc_glossary.html' },
       ]
-    },
+    } ,
     {
-      text: '配置说明', 
-      children: [
-        { text: 'Console配置说明', link: 'uc_configure.html' },
-        { text: 'Android私有化配置', link: 'uc_android_private.html' },
-        { text: 'iOS私有化配置', link: 'uc_iOS_private.html' },
-        { text: 'Web私有化配置', link: 'uc_Web_private.html' },
-      ]
-    },
-    {
-      text: 'SDK下载', 
-      children: [
-        { text: 'SDK 及 Demo 下载', link: 'uc_private.html' },
-      ]
-    },
+        text: '快速开始', 
+        children: [
+          { text: '服务部署', link: 'uc_deploy.html' },
+          { text: '客户端下载', link: 'uc_private.html' },
+          { text: 'Console指南', link: 'uc_configure.html' },
+          { text: 'App Token 鉴权', link: 'easemob_app_token.html' },
+          { text: 'User Token 鉴权', link: 'easemob_user_token.html' },
+          { text: '快速开始(不使用 UIKIT) Android', link: '/document/v2/android/overview.html' },
+          { text: '快速开始(不使用 UIKIT)iOS', link: '/document/v2/ios/quickstart.html' },
+          { text: '快速开始(不使用 UIKIT) Web', link: '/document/v2/web/quickstart.html' },
+        ]   
+      } ,
+      {
+        text: 'FAQ', 
+        children: [
+          { text: 'FAQ质量', link: 'faq_quality_issues.html' },
+          { text: ' FAQ集成', link: 'faq_integration_issues.html' },
+        ]
+      } ,
   ]
 }
 
@@ -60,9 +67,9 @@ const documentSidebar = [
       { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
       { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
       { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
-      { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
+      /*{ text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },*/
     ],
-    except: ['applet']
+    except: ['applet', 'linux', 'electron']
   },
   {
     text: '基础功能',
@@ -78,7 +85,7 @@ const documentSidebar = [
           { text: '管理服务端消息', link: 'message_retrieve.html', except: ['react-native'] },
           { text: '管理消息回执', link: 'message_receipt.html' },
           { text: '修改消息', link: 'message_modify.html' },
-          { text: '翻译', link: 'message_translation.html' },
+          /*{ text: '翻译', link: 'message_translation.html' },*/
         ]
       },
       { text: '管理用户属性', link: 'userprofile.html' },
@@ -104,7 +111,7 @@ const documentSidebar = [
         ]
       },
     ],
-    except: ['applet', 'server-side']
+    except: ['applet', 'server-side','electron']
   },
   {
     text: '进阶功能',
@@ -121,9 +128,9 @@ const documentSidebar = [
           { text: '管理子区消息', link: 'thread_message.html' }
         ]
       },
-      { text: '消息审核（举报）', link: 'moderation.html'},
+      /*{ text: '消息审核（举报）', link: 'moderation.html'},*/
     ],
-    except: ['applet','server-side']
+    except: ['applet','server-side','electron']
   },
   {
     text: '其他',
@@ -168,7 +175,7 @@ const documentSidebar = [
           { text: '管理服务端消息', link: 'message_retrieve.html' },
           { text: '管理消息回执', link: 'message_receipt.html' },
           { text: '修改消息', link: 'message_modify.html' },
-          { text: '翻译', link: 'message_translation.html' },
+          /**{ text: '翻译', link: 'message_translation.html' },**/
         ]
       },
       { text: '用户属性', link: 'userprofile.html' },
@@ -211,7 +218,7 @@ const documentSidebar = [
           { text: '管理子区消息', link: 'thread_message.html' }
         ]
       },
-      { text: '消息审核（举报）', link: 'moderation.html'},
+      /**{ text: '消息审核（举报）', link: 'moderation.html'},**/
     ],
     only: ['applet']
   },
@@ -274,7 +281,45 @@ const documentSidebar = [
       { text: '发送后回调-事件回调', link: 'callback_configurations.html' }
     ],
     only: ['server-side']
-  }
+  },
+  {
+    text: 'Linux开发文档',
+    children: [
+      { text: '集成说明', link: 'overview.html' },
+      { text: '技术参数', link: 'techspec.html' },
+      { text: 'SDK更新日志', link: 'releasenote.html' },
+    ],
+    only: ['linux']
+  },
+  {
+    text: '快速开始',
+    children: [
+      { text: 'Demo下载体验', link: 'demo.html' },
+      { text: '快速开始', link: 'quickstart.html' },
+      { text: '集成概述', link: 'overview.html' },
+      { text: 'SDK更新日志', link: 'releasenote.html' },
+    ],
+    only: ['electron']
+  },
+  {
+    text: '基础功能',
+    children: [
+      { text: '消息管理', link: 'message.html' },
+      { text: '会话管理', link: 'chatmanage.html' },
+      { text: '好友管理', link: 'user_relationship.html' },
+      { text: '群组管理', link: 'group_manage.html' },
+      { text: '聊天室管理', link: 'room_manage.html' },
+    ],
+    only: ['electron']
+  },
+  {
+    text: '进阶功能',
+    children: [
+      { text: '多设备监听', link: 'multi_device.html' },
+      { text: '附录', link: 'appendix.html' },
+    ],
+    only: ['electron']
+  },
 ]
 
 function buildDocSidebar() {

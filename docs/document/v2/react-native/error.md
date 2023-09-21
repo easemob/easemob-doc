@@ -2,6 +2,6 @@
 
 <Toc />
 
-[Android 平台](/document/android/error.html)
+[Android 平台](/document/v2/android/error.html)
 
-[iOS 平台](/document/ios/error.html)  
+[iOS 平台](/document/v2/ios/error.html)  

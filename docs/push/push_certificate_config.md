@@ -1,6 +1,6 @@
 ## 证书配置
 
-环信推送与IM使用相同的SDK，SDK下载地址：[下载页](https://www.easemob.com/download/im)
+环信推送与IM使用相同的SDK，[SDK下载页](/document/v2/privatization/uc_private.html) 
 
 Android端推送集成：[Android 推送集成](push_integration_process_android.html)
 

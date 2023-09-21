@@ -53,7 +53,7 @@
 | 400              | illegal_argument                   | “target_type can only be 'users' or 'chatgroups' or 'chatrooms'” | 发送消息时，对象类型（`target_type`）只能传入 `users`、`chatgroups` 或 `chatrooms`。若传入其他值，提示该错误。 |
 | 400              | illegal_argument                   | “username is not legal”                                      | 注册用户时传入的 username 不合法，详见 [用户体系集成](account_system.html#注册用户) |
 | 400              | illegal_argument                   | “This chatmessage request is not supported”                  | 查询历史消息时传入的时间格式不正确，正确的格式为 YYYYMMDDHH。例如，要获取 2018 年 02 月 09 日 12 点到 13 点的历史消息，传入的时间为 `2018020912`。 |
-| 400              | illegal_argument                   | “illegal arguments: appkey: easemob-demo#chatdemoui, time: 2018020918, maybe chat message history is expired or unstored” | 查询的历史消息未生成或已过期。消息的保留时间取决于产品套餐，详见[消息存储时长限制](limitation.html#消息存储时长限制)。 |
+| 400              | illegal_argument                   | “illegal arguments: appkey: easemob-demo#chatdemoui, time: 2018020918, maybe chat message history is expired or unstored” | 查询的历史消息未生成或已过期。消息的保留时间取决于初始设置。 |
 | 400              | invalid_parameter                  | “some of [groupid] are not valid fields”                     | 修改的群组信息时，传入的参数不支持，例如修改 `groupid`。修改群信息目前只支持修改“群名称”、“群描述” 和 “群最大人数”。 |
 | 400              | required_property_not_found        | “Entity user requires a property named username”             | 修改用户密码请求未提供用户 ID（`username`）。    |
 | 400              | duplicate_unique_property_exists   | “Application null Entity user requires that property named username be unique, value of hxtest1 exists” | 注册用户时，用户 ID 已存在，请更换用户 ID 重新注册。 注：如果是批量注册，若一次调用返回一个 ID 已存在，则此次调用注册的其他不存在的 ID 不会注册，需将已存在的 ID 从数组中移除重新调用注册。 |
@@ -69,7 +69,7 @@
 | 401              | unauthorized                       | “registration is not open, please contact the app admin”     | 授权注册模式下，调用[注册单个用户](account_system.html#授权注册单个用户)和[批量注册用户](account_system.html#批量注册用户)的 RESTful 接口时，未传入 App Token 或传入了错误的 App Token 时提示该错误，例如 Token 已过期或格式不正确。 |
 | 401              | unauthorized                       | “Unable to authenticate due to expired access token”         | 调用 RESTful 接口发送请求时使用的 App Token 过期或未传入 App Token。<br/>该错误码针对除[注册单个用户](account_system.html#授权注册单个用户)和[批量注册用户](account_system.html#批量注册用户)之外的 RESTful 接口有效。     |
 | 401              | auth_bad_access_token              | “Unable to authenticate due to corrupt access token”         | 调用 RESTful 接口发送请求时使用的 App Token 格式错误。<br/>该错误码针对除[注册单个用户](account_system.html#授权注册单个用户)和[批量注册用户](account_system.html#批量注册用户)之外的 RESTful 接口有效。      |
-| 401              | auth_bad_access_token              | “Unable to authenticate”                                     | 调用 RESTful 接口发送请求时使用的 App Token 无效。App Token 的格式正确，但不是由接收请求的服务器生成的，导致服务器无法识别该 Token。<br/>该错误码针对除[注册单个用户](./agora_chat_restful_regiration#注册单个用户)和[批量注册用户](./agora_chat_restful_regiration#注册单个用户)两个 RESTful 接口之外的接口有效。 |
+| 401              | auth_bad_access_token              | “Unable to authenticate”                                     | 调用 RESTful 接口发送请求时使用的 App Token 无效。App Token 的格式正确，但不是由接收请求的服务器生成的，导致服务器无法识别该 Token。<br/>该错误码针对除[注册单个用户](account_system.html#授权注册单个用户)和[批量注册用户](account_system.html#批量注册用户)两个 RESTful 接口之外的接口有效。 |
 | 403              | forbidden_op                       | “can not join this group, reason:user: hxtest1 already in group: 40659491815425\n” | 添加群组或聊天室成员时，被添加用户已在群组或聊天室内。                       |
 | 403              | forbidden_op                       | “users [hxtest100] are not members of this group!”           | 踢除群组或聊天室成员时，被踢除的用户不在群组或聊天室内。              |
 | 403              | forbidden_op                       | “user: username1 doesn't exist in group: 40659491815425”     | 转让群组时，被转让的用户不是群组内成员。 |
@@ -85,7 +85,7 @@
 | 413              | Request Entity Too Large           | “Request Entity Too Large”                                   | 请求体过大，如上传文件时文件过大，需要拆成几个更小的请求体重试。 |
 | 415              | web_application                    | “Unsupported Media Type”                                     | 请求体的类型不支持，请检查请求头是否添加了 `Content-Type`: `application/json`，请求包体是否符合标准的 JSON 格式，以及请求头中是否有接口不需要的参数。 |
 | 429              | resource_limited                   | “You have exceeded the limit of the Free edition. Please upgrade to higher edition.” | 超过免费版套餐包限制。如需开通其他版本套餐包，需联系环信商务。               |
-| 429              | reach_limit                        | “This request has reached api limit”                         | 超过即时通讯 RESTful API 的[调用频率限制](/product/limitation.html)。如果限制条件无法满足你的实际业务需求，需联系请联系环信商务。 |
+| 429              | reach_limit                        | “This request has reached api limit”                         | 超过即时通讯 RESTful API 的调用频率限制。 |
 | 500              | no_full_text_index                 | “Entity ‘user’ with property named ‘username’ is not full text indexed. You cannot use the ‘contains’ operand on this field” | username 不支持全文索引，不可以对该字段进行 `contains` 操作。  |
 | 500              | unsupported_service_operation      | “Service operation not supported”                            | 请求 URL 不支持该请求方式。                            |
 | 500              | web_application                    | “javax.ws.rs.WebApplicationException”                        | 请求 URL 错误。 |

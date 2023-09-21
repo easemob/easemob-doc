@@ -4,23 +4,23 @@
 
 环信即时通讯 Web 端提供示例应用可供体验。你可以按以下步骤体验：
 
-1. [登录 Demo](https://webim-h5.easemob.com/#/login)。
+1. [登录 Demo](https://zq-im-management-hsb.easemob.com/)。
 
-![img](@static/images/demo/web_react_login.png)
+<!--![img](@static/images/demo/web_react_login.png)-->
 
-2. 输入你的手机号，获取验证码，然后输入。
+2. 输入你的登录账号和密码，然后输入。
 
 3. 点击 **登录** 登录 Demo。
 
 ## 代码下载
 
-下载源代码：[github 源码地址](https://github.com/easemob/webim)
+下载源代码：[源码地址](https://downloadsdk.easemob.com/mp/downloads/sdk/private-react-20230918.zip)
 
 欢迎大家提交 PR 改进和修复 Web IM 中的问题。
 
 ## 运行 Web IM 项目
 
-从 [IM SDK 及 Demo 下载](https://www.easemob.com/download/im) 下载 Web SDK 压缩包，然后解压。解压后在 `demo` 文件夹即为 Web IM 的项目目录。
+下载 Web SDK 压缩包，然后解压。解压后在 `demo` 文件夹即为 Web IM 的项目目录。
 
 1. 安装 Demo 所需的依赖：在终端中运行 `cd demo` 和 `npm install` 命令。
 

@@ -44,6 +44,14 @@ const PLATFORM_ICON_MAP = {
     icon : '/icon-platform.svg',
     activeIcon: '/icon-platform-hover.svg',
   },
+  electron: {
+    icon : '/icon-Electron.svg',
+    activeIcon: '/icon-Electron-hover.svg',
+  },
+  linux: {
+    icon : '/icon-linux.svg',
+    activeIcon: '/icon-linux-hover.svg',
+  },
 }
 
 const platform = ref('android')
@@ -84,7 +92,7 @@ const options = [
     options: [
        {
         value: 'privatization',
-        label: '服务部署',
+        label: '环境准备',
       },
     ],
   },
@@ -122,11 +130,20 @@ const options = [
       {
         value: 'applet',
         label: '小程序',
+        
+      },
+      {
+        value: 'electron',
+        label: 'Electron',
+      },
+      {
+        value: 'linux',
+        label: 'Linux',
       },
       {
         value: 'server-side',
         label: 'Rest Api',
-      }
+      },
     ],
   },
 ]

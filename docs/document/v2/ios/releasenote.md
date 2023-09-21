@@ -227,7 +227,6 @@
 ### 新增特性:
 
 - [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应。
-- [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核。
 
 ### 优化：
 
@@ -260,7 +259,6 @@
 ### 新增特性:
 
 - [IM SDK] [用户在线状态 (Presence) 订阅](presence.html)功能。
-- [IM SDK] [翻译](message_translation.html)功能更新，增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
 
 ### 优化：
 
@@ -275,7 +273,7 @@
 
 - [IM SDK] [单向删除服务端会话 API](https://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_chat_manager-p.html#a4ac87045ad781e99c59acc271f9af433)；
 - [IM SDK] 免打扰事件的多设备间同步；
-- [IM SDK] Push 平台推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，具体见：[iOS 推送集成](https://docs-im.easemob.com/push/apppush/iossdk)；
+- [IM SDK] Push 平台推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，具体见：[iOS 推送集成](/push/push_integration_note_ios.html)；
 - [IM SDK] 发送图片支持 PNG 格式；
 - [IM SDK] 非好友不能发送消息错误码 [221 EMErrorUserNotOnRoster]；
 
@@ -917,7 +915,7 @@ IM_DEMO 修改：
 
 新功能：
 
-- 实现不同模式的实时语音会议功能 [多人音视频会议](https://docs-im.easemob.com/im/ios/basics/multiuserconference)
+- 实现不同模式的实时语音会议功能 [多人音视频会议](/private/media/conference_ios.html)
 - 添加动态更换对方实时视频显示页面的功能[IEMConferenceManager updateConference:streamId:remoteVideoView:completion:]
 
 ## 版本 V3.3.9 2018-02-11

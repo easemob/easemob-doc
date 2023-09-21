@@ -33,14 +33,14 @@
 | macOS        | macOS 10.0 或以上  |  Xcode 9.0 或以上，Visual Studio for Mac 2019 或以上   |
 | Windows              | Windows 10 或以上 | Microsoft Visual Studio 2019 或以上            |
 
-- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云管理后台](/document/v2/privatization/uc_configure.html)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 项目设置
 
 实现发送和接收单聊文本消息之前，参考以下步骤设置你的项目。
 
-### 1. 下载并设置 Unity Demo 项目
+<!--### 1. 下载并设置 Unity Demo 项目
 
 参考以下步骤：
 
@@ -66,8 +66,8 @@
 ### 2. 集成环信即时通讯 SDK
 
 你可以参考以下步骤集成 SDK：
-
-1. [下载 Unity SDK](https://downloadsdk.easemob.com/downloads/SDK/Unity/agora_chat_unity_sdk1.0.9.unitypackage)。
+-->
+1. [下载 Unity SDK](https://downloadsdk.easemob.com/downloads/SDK/Unity/agora_chat_unity_sdk1.2.0.unitypackage)。
 2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 unitypackage 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
 
@@ -119,7 +119,7 @@ SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callbac
 ```
 
 :::notice
-该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端调用 Restful API 进行注册，详见 [注册单个用户](/document/server-side/account_system.html#注册单个用户)。
+该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端调用 Restful API 进行注册，详见 [注册单个用户](/document/v2/server-side/account_system.html#注册单个用户)。
 :::
 
 ### 5. 登录账号

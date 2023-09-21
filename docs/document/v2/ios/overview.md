@@ -6,7 +6,7 @@
 
 ## 前提条件
 
-开始前，请注册有效的环信即时通讯 IM 开发者账号并获得 App key，详见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+开始前，请注册有效的环信即时通讯 IM 开发者账号并获得 App key，详见 [环信即时通讯云管理后台](/document/v2/privatization/uc_configure.html)。
 
 ## 集成环境
 
@@ -41,7 +41,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 :::notice
 
 - 以上注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用；
-- 正式环境应使用服务器端调用 REST API 接口 [注册用户](/document/server-side/account_system.html#注册用户)。
+- 正式环境应使用服务器端调用 REST API 接口 [注册用户](/document/v2/server-side/account_system.html#注册用户)。
   :::
 
 ## 用户登录
@@ -53,7 +53,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 ### 手动登录
 
-登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
+登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/v2/server-side/account_system.html#注册用户)。
 
 手动登录后，收到 `connectionStateDidChange` 回调表明 SDK 与环信服务器连接成功。
 
@@ -70,7 +70,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 ```
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/v2/server-side/easemob_user_token.html)。
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如每次登录时更新 token 等机制。
@@ -190,7 +190,7 @@ option.logLevel = EMLogLevelDebug;
 
 ### 获取本地日志
 
-SDK 会写入日志文件到本地。日志文件路径如下：沙箱 Library/Application Support/HyphenateSDK/easemobLog/easemob.log。
+SDK 会写入日志文件到本地。日志文件路径如下：<br>沙箱 Library/Application Support/HyphenateSDK/easemobLog/easemob.log。
 
 以真机为例，获取本地日志过程如下：
 

@@ -8,6 +8,7 @@
 SDK 目前支持微信、QQ、百度小程序、字节跳动、uni-app 编译的原生 Android 以及 iOS。
 :::
 
+<!--
 ## 体验小程序
 
 扫描下方小程序二维码，或者微信搜索 **环信即时通讯云** 即可快速体验环信小程序 Demo 在线版本：
@@ -25,7 +26,7 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动、uni-app 编译的
 - 各小程序 Demo 源码可在官网 [下载页](https://www.easemob.com/download/im) 获取
 - Uni-app Demo Git 源码地址：[https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
   :::
-
+-->
 ## 功能说明
 
 环信小程序 Web IM 在微信生态系统进行优化，功能与微信对接更为流畅：

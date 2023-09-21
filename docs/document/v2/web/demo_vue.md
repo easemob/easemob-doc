@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信即时通讯 Web 端提供示例应用可供体验。你可以按以下步骤体验：
+<!--环信即时通讯 Web 端提供示例应用可供体验。你可以按以下步骤体验：
 
 1. 登录 Demo。
 
@@ -17,17 +17,18 @@
 2. 输入你的手机号，获取验证码，然后输入。
 
 3. 点击 **登录** 登录 Demo。
+-->
 
 ## 代码下载
 
-- Vue 2 下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)
-- Vue 3 下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/demo-vue3)
+- Vue 2 下载源代码：[github 源码地址](https://downloadsdk.easemob.com/mp/downloads/sdk/private-vue2-20230918.zip)
+- Vue 3 下载源代码：[github 源码地址]()
 
 欢迎大家提交 PR 改进和修复 Web IM 中的问题。
 
 ## 运行 Web IM 项目
 
-从 [github 下载](https://github.com/easemob/webim-vue-demo/tree/dev-4.0) 下载项目代码压缩包，然后解压。解压后，`webim-vue-demo` 文件夹即为 Web IM 的项目目录。
+下载项目代码压缩包，然后解压。解压后，`webim-vue-demo` 文件夹即为 Web IM 的项目目录。
 
 1. 安装 Demo 所需的依赖：在终端中运行 `cd demo` 和 `npm install` 命令。
 

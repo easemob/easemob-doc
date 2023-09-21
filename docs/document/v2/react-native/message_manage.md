@@ -18,7 +18,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/document/v2/privatization/uc_limitation.html)。
 
 ## 实现方法
 
@@ -120,7 +120,7 @@ ChatClient.getInstance()
 
 环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
 
-你可以调用 `fetchHistoryMessages` 方法从服务器分页获取指定会话的历史消息。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
+你可以调用 `fetchHistoryMessages` 方法从服务器分页获取指定会话的历史消息。
 
 为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 
@@ -202,8 +202,7 @@ ChatClient.getInstance()
 
 #### 单向删除服务端会话及其历史消息
 
-你可以调用 `removeConversationFromServer` 方法删除服务器端会话和历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息，对本地的会话无影响，但会删除本地消息，而其他用户不受影响。该功能需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
-
+你可以调用 `removeConversationFromServer` 方法删除服务器端会话和历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息，对本地的会话无影响，但会删除本地消息，而其他用户不受影响。
 示例代码如下：
 
 ```typescript

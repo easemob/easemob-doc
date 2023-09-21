@@ -4,7 +4,7 @@
 
 ### 注册环信账号
 
-开发者需要在环信管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
+开发者需要在环信管理后台 [注册并创建应用](/document/v2/privatization/uc_configure.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
 
 ### 搭建字节跳动小程序开发环境
 
@@ -14,8 +14,8 @@
 
 小程序在发布前，需要配置合法域名。
 
-登录字节跳动小程序 [开发者平台](https://microapp.bytedance.com/)，选择当前小程序（如果没有需要创建一个小程序），进入 “开发管理>开发设置” 页面配置以下服务器地址。
-
+登录字节跳动小程序 [开发者平台](https://microapp.bytedance.com/)，选择当前小程序（如果没有需要创建一个小程序），进入 “开发管理>开发设置” 页面按私有部署文档中的 **2.2开通防火墙白名单** 配置各服务“地址:端口”。
+<!--
 :::tip
 request 合法域名：
 
@@ -50,15 +50,15 @@ socket 合法域名：
 应用所在数据中心可以在环信用户管理后台>应用信息中查看：
 
 ![img](@static/images/applet/console.jpeg)
-
+-->
 ### 集成 SDK
 
 #### 下载 SDK
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
-- 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
+<!--- 通过官网 [下载 SDK](https://www.easemob.com/download/im)-->
+- 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx) 中获取 SDK 中的文件
 
 #### 引入 SDK
 

@@ -6,7 +6,7 @@
 
 ## 前提条件
 
-开始前，请注册有效的环信即时通讯 IM 开发者账号并取得 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+开始前，请注册有效的环信即时通讯 IM 开发者账号并取得 App key，见 [环信即时通讯云管理后台](/document/v2/privatization/uc_configure.html)。
 
 ## 集成环境
 
@@ -57,7 +57,7 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 :::notice
 
 - 以上注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用；
-- 正式环境应使用服务器端调用 REST API 接口[注册用户](/document/server-side/account_system.html#注册用户)。
+- 正式环境应使用服务器端调用 REST API 接口[注册用户](/document/v2/server-side/account_system.html#注册用户)。
   :::
 
 ## 用户登录
@@ -67,7 +67,7 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 - 用户 ID + 密码
 - 用户 ID + token
 
-手动登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
+手动登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/v2/server-side/account_system.html#注册用户)。
 
 调用登录接口后，收到 `onConnected` 回调表明 SDK 与环信服务器连接成功。
 
@@ -92,7 +92,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 });
 ```
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。详见 [环信用户 token 的获取](/document/v2/server-side/easemob_user_token.html)。
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
