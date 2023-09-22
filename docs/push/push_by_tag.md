@@ -75,7 +75,7 @@ POST https://{host}/{org_name}/{app_name}/push/label
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -145,7 +145,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html)了解可能的原因。
 
 ### 示例
 
@@ -214,7 +214,7 @@ GET https://{host}/{org_name}/{app_name}/push/label
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -284,7 +284,7 @@ DELETE https://{host}/{org_name}/{app_name}/push/label/{labelname}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -350,7 +350,7 @@ POST https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -421,7 +421,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}/user/{username}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -492,7 +492,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -564,7 +564,7 @@ DELETE https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
