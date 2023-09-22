@@ -14,7 +14,7 @@
 
 ## 跑通 Demo
 
-EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 Demo 及源码](https://www.easemob.com/download/im) 下载页面，选择 Android 端进行下载，直接下载: [Android IM 源码](https://github.com/easemob/chat-android)。
+EaseCallKit 集成在环信开源 IM Demo 中，你可以直接下载 Android 端源码 [Android IM 源码](https://downloadsdk.easemob.com/downloads/easemob-sdk-4.1.2.zip)。
 
 环境准备：
 
@@ -32,7 +32,7 @@ EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 De
 
 集成该库之前，你需要满足以下条件：
 
-- 分别创建 [环信应用](/product/enable_and_configure_IM.html) 及 [声网应用](https://docportal.shengwang.cn/cn/video-legacy/run_demo_video_call_ios?platform=iOS#1-创建声网项目)；
+- 分别创建 [环信应用](/document/v2/privatization/uc_configure.html) 及 [声网应用](https://docportal.shengwang.cn/cn/video-legacy/run_demo_video_call_ios?platform=iOS#1-创建声网项目)；
 - 已完成环信 IM 的基本功能，包括登录、好友、群组以及会话等的集成；
 - 上线之前开通声网 Token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 Token。具体请参见 [创建 Token 服务及使用 App Server 生成 Token](https://docportal.shengwang.cn/cn/video-call-4.x/token_server_ios_ng)。
 
@@ -65,7 +65,7 @@ implementation 'io.hyphenate:ease-call-kit:3.8.9'
 
 #### 源码集成
 
-- 下载 [EaseCallKit 源码](https://github.com/easemob/easecallkitui-android)；
+- 下载 [EaseCallKit 源码](https://github.com/easemob/easecallkitui-android/tree/EaseCallKit_4.1.0)；
 - 在 `build.gradle` 中增加以下内容，重新 build 你的项目即可。
 
 ```gradle
@@ -201,7 +201,7 @@ public void startInviteMultipleCall(final String[] users,final String ext){}
 
 发起通话后的 UI 界面如下：
 
-![img](@static/images/android/sendcall.png)
+<img src=@static/images/android/sendcall.png  title=发起通话后 width="200"/>
 
 ### 被叫收到通话邀请
 
@@ -221,7 +221,7 @@ void onRevivedCall(EaseCallType callType, String userId,String ext){}
 
 收到通话邀请后的界面如下:
 
-![img](@static/images/android/called.jpeg)
+<img src=@static/images/android/called.jpeg  title=收到通话 width="200"/>
 
 ### 多人通话中邀请
 

@@ -236,7 +236,7 @@
 
 - [IM SDK] 新增群组详情中群组禁用状态：[EMGroup#isDisabled()](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html#acd072d7fc16e6ff89110173979ed318b) 属性，该属性需要开发者在服务端设置；
 - [IM SDK] 优化遇到连接问题时更新接入点的策略，增强可用性；
-- [IM SDK] [发送前回调](/document/server-side/callback.html#_1、发送前回调)：发送失败时返回给 app 用户的错误描述中增加你自定义的错误信息（即 [响应体参数](/document/server-side/callback.html#响应体参数) code 信息）。
+- [IM SDK] [发送前回调](/document/v2/server-side/callback.html#_1、发送前回调)：发送失败时返回给 app 用户的错误描述中增加你自定义的错误信息（即 [响应体参数](/document/v2/server-side/callback.html#响应体参数) code 信息）。
 - [IM SDK] 在 [EMError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 中新增错误码 1101：[EMError#PRESENCE_CANNOT_SUBSCRIBE_YOURSELF](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#abc9130b164d5cccb3559585ec38e8e99)，用来提示用户不能订阅自己的在线状态。
 
 ### 优化：
@@ -287,7 +287,6 @@
 ### 新增特性:
 
 - [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应；
-- [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核。
 
 ### 优化：
 
@@ -302,7 +301,6 @@
 ### 修复：
 
 - [IM SDK] 修复 Google Play 上架时报的加密算法问题；
-- [IM SDK] 修复 Translation API 失效的问题。
 
 ## 版本 V3.9.1.1 2022-4-27
 
@@ -312,9 +310,6 @@
 
 ## 版本 V3.9.1 2022-4-19
 
-:::tip
-仅 V3.9.1 及以下版本支持私有化部署。
-:::
 
 ### 新增特性
 
@@ -335,7 +330,7 @@
 ### 新增特性
 
 - [IM SDK] [EaseIMKIt] 增加 [单向删除服务端会话 API](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html#a345e81b9caf2658c8796855fe63fe752)；
-- [IM SDK] Push 平台增加推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，见 [Android 推送集成](https://docs-im.easemob.com/push/apppush/androidsdk)；
+- [IM SDK] Push 平台增加推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，见 [Android 推送集成](/push/push_integration_note_android.html)；
 - [IM SDK] 增加非好友不能发送消息错误码 [221 USER_NOT_ON_ROSTER]；
 - [IM SDK] [EaseIMKIt] 增加通过 REST 接口撤回消息功能。
 
@@ -359,7 +354,6 @@
 
 ### 新增
 
-- [IM SDK] 增加翻译功能 API；
 - [IM SDK] 位置消息增加建筑物名称字段；
 - [IM SDK] 增加按照时间删除消息的 API；
 - [IM SDK] 增加获取会话中消息总数的 API；
@@ -1071,7 +1065,7 @@ EaseUI:
 新功能：
 
 1. 增加是否使用 FCM 推送的接口 通过`EMOptions`的`setUserFCM()`方法设置
-2. 添加语音会议功能 [多人音视频会议](https://docs-im.easemob.com/im/android/basics/multiuserconference)
+2. 添加语音会议功能 [多人音视频会议](/private/media/conference_android.html)
 
 修复：
 
@@ -1112,7 +1106,7 @@ EaseUI:
 2. 使用外接音频输入源进行音视频通话时，设置音频源
 3. 提供是否自己处理附件的上传和下载设置项
 4. 提供是否自动下载附件类消息附件设置项（缩略图，语音文件）
-5. 多人音视频会议功能，详细参考集成文档 [多人音视频会议](https://docs-im.easemob.com/im/android/basics/multiuserconference)
+5. 多人音视频会议功能，详细参考集成文档 [多人音视频会议](/private/media/conference_android.html)
 
 优化：
 

@@ -19,9 +19,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述                                                |
 | :--------- | :----- | :------- | :-------------------------------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。  |
+| `host`     | String | 是       | 访问 RESTful API 的域名或服务器信息。<br/>-公有云集成为 环信即时通讯控制台的 `即时通讯->服务概览`页面下的 `域名配置- Rest Api`。 <br/> -私有化集成为部署后 `服务器地址:端口`。 |
+| `org_name` | String | 是       | 每个公司（组织）分配的唯一标识。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Orgname`。  |
+| `app_name` | String | 是       | 创建应用时填入的应用名称。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Appname`。   |
 | `username` | String | 是       | 用户 ID。                                           |
 
 ### 响应参数
@@ -37,7 +37,7 @@
 
 Authorization：`Bearer ${YourAppToken}`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 app token 鉴权](/document/server-side/easemob_app_token.html)。
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 app token 鉴权](/document/v2/server-side/easemob_app_token.html)。
 
 ## 以同步方式发送推送通知
 
@@ -89,7 +89,7 @@ POST https://{host}/{org_name}/{app_name}/push/sync/{target}
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -210,7 +210,7 @@ POST https://{host}/{org_name}/{app_name}/push/single
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -291,7 +291,7 @@ POST https://{host}/{org_name}/{app_name}/push/list/label
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -366,7 +366,7 @@ POST https://{host}/{org_name}/{app_name}/push/task
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -437,7 +437,7 @@ POST https://{host}/{org_name}/{app_name}/push/message
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 #### 示例
 
@@ -501,7 +501,7 @@ POST https://{host}/{org_name}/{app_name}/push/message/{messageId}
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 #### 示例
 
@@ -569,7 +569,7 @@ POST https://{host}/{org_name}/{app_name}/push/task/broadcast
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 #### 示例
 

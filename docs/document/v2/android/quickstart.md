@@ -23,7 +23,7 @@
 - Android Studio 3.0 或以上版本；
 - Android SDK API 等级 21 或以上；
 - Android 5.0 或以上版本的设备；
-- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](/document/v2/privatization/uc_configure.html)。
 
 ## 准备开发环境
 
@@ -168,7 +168,7 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 </manifest>
 ```
 
-关于 App Key 对应的 value 获取，在 [环信即时通讯 IM 管理后台](https://console.easemob.com/user/login) 创建应用后，申请 App Key 并进行相关配置。
+关于 App Key 对应的 value 获取，在 [环信即时通讯 IM 管理后台](/document/v2/privatization/uc_configure.html) 创建应用后，申请 App Key 并进行相关配置。
 
 ### 4. 防止代码混淆
 
@@ -212,7 +212,7 @@ try {
 ```
 
 :::notice
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#注册单个用户)。
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/v2/server-side/account_system.html#注册用户)。
 :::
 
 ### 3. 登录账号

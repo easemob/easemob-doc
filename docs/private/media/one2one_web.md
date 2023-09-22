@@ -36,7 +36,7 @@ HTTPS=true npm start
 
 ### 1. 环信后台注册 appkey
 
-在开始集成前，你需要注册环信开发者账号并在后台创建应用，参见[创建应用](../im/uc_configure.html#创建应用) 。
+在开始集成前，你需要注册环信开发者账号并在后台创建应用，参见[创建应用](/document/v2/privatization/uc_configure.html#创建应用) 。
 
 ### 2. 创建项目
 
@@ -348,7 +348,7 @@ var rtcCall = new webrtc.Call({
 
 ### 私有部署
 
-私有部署设置方法参见[私有云sdk集成配置](../im/uc_Web_private.md)。
+私有部署设置方法参见[私有云sdk集成配置](/document/v2/web/privatecloud.html)。
 
 ## 客户端API
 

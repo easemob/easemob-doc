@@ -4,7 +4,7 @@
 
 ### 注册环信账号
 
-开发者需要在环信管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
+开发者需要在环信管理后台 [注册并创建应用](/document/v2/privatization/uc_configure.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
 
 ### 搭建支付宝小程序开发环境
 
@@ -14,8 +14,8 @@
 
 小程序在发布前，需要配置合法域名。
 
-登录 [支付宝开放平台](https://open.alipay.com/platform/home.htm), 配置以下服务器域名。
-
+登录 [支付宝开放平台](https://open.alipay.com/platform/home.htm), 按私有部署文档中的 **2.2开通防火墙白名单** 配置各服务“地址:端口”。
+<!--
 :::tip
 request 合法域名：
 
@@ -30,7 +30,7 @@ request 合法域名：
 socket 合法域名：
 wss://im-api-alipay.easemob.com/websocket
 :::
-
+-->
 ### 说明
 
 支付宝小程序：支付宝小程序在一段时间内只能保留一个 WebSocket 连接，如果当前已存在 WebSocket 连接，那么会自动关闭该连接，并重新创建一个新的 WebSocket 连接。
@@ -41,8 +41,8 @@ wss://im-api-alipay.easemob.com/websocket
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网[下载 SDK](https://www.easemob.com/download/im)
-- 从环信的[github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
+<!--- 通过官网 [下载 SDK](https://www.easemob.com/download/im)-->
+- 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx) 中获取 SDK 中的文件
 
 #### 引入 SDK
 

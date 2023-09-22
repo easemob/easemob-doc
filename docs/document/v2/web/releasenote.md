@@ -168,7 +168,6 @@
 ### 新增特性:
 
 - [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应；
-- [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核；
 - [IM SDK] 新增推送设置 API，支持不同的推送配置；
 - [IM SDK] 增加数据上报功能；
 
@@ -184,14 +183,10 @@
 
 ## 版本 V4.0.4 2022-4-19
 
-:::tip
-仅 V4.0.4 及以下版本支持私有化部署。
-:::
 
 ### 新增特性:
 
 - [IM SDK] 增加 [用户在线状态(Presence)](presence.html) 订阅功能。
-- [IM SDK] [翻译功能](message_translation.html)：增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
 
 ### 优化：
 

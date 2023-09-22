@@ -25,12 +25,12 @@
 - Visual Studio IDE 2019 或以上；
 - .Net Framework 4.5.2 或以上；
 - 目前 Windows SDK 仅支持 64 位运行模式；
-- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云控制台](/document/v2/privatization/uc_configure.html)。
 
 ## 项目设置
 
 实现发送和接收单聊文本消息之前，参考以下步骤设置你的项目。
-
+<!--
 ### 1. 下载并设置 Windows Demo 项目
 
 参考以下步骤：
@@ -43,8 +43,8 @@
 ### 2. 集成环信即时通讯 SDK
 
 你可以参考以下步骤集成 SDK：
-
-1. 下载：点击 [Windows SDK](https://downloadsdk.easemob.com/downloads/SDK/WinSDK/agora_chat_sdk.1.0.9.nupkg) 进行下载，下载的 `NuGet` 包一般存放在 `C:\Users\XXX\Downloads` (`XXX` 为本机用户名)；
+-->
+1. 下载：点击 [Windows SDK](https://downloadsdk.easemob.com/downloads/SDK/WinSDK/agora_chat_sdk.1.2.0.nupkg) 进行下载，下载的 `NuGet` 包一般存放在 `C:\Users\XXX\Downloads` (`XXX` 为本机用户名)；
 2. 将下载的 `NuGet` 包拷贝到自己的工作目录，比如 `D:\workspace\WinSDK` 下，以下说明以此目录举例；
 3. 在 Visual Studio 开发环境里，右键点击 `windows-example` 项目，选择 **管理 NuGet 程序包 (N)...**；
 4. 在弹出的 `NuGet:windows-example` tab 页面里，点击右上角的小齿轮会弹出 NuGet 程序包源的设置窗体，点击窗体右上角的 **+** 按钮，在 **包源** 的文本框内会出现 **Package source** 这一栏，点击选中，并修改文本框下的 **名称** 和 **源**。例如 **名称** 可以设置为 `Local Package source`，**源** 则设置为第 2 步中的目录， `D:\workspace\WinSDK`，点击确定；
@@ -99,7 +99,7 @@ SDKClient.Instance.CreateAccount(username, password, callback: new CallBack(
 ```
 
 :::notice
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见：[注册单个用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册单个用户)。
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见：[注册单个用户](/document/v2/server-side/account_system.html#注册用户)。
 :::
 
 ### 5. 登录账号

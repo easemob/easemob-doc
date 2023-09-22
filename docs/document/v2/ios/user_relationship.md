@@ -25,7 +25,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/document/v2/privatization/uc_limitation.html)；
 - 调用好友请求相关方法之前先导入头文件 `IEMContactManager.h`；
 - 调用监听接收好友请求等回调方法 API 之前导入头文件：`EMContactManagerDelegate.h`。
 

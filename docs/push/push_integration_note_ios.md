@@ -4,9 +4,9 @@
 
 ## iOS SDK 使用须知
 
-使用 SDK 之前，你需先创建应用，获取应用的唯一标识 App Key，请参见[创建应用](/product/enable_and_configure_IM.html#创建应用)。
+使用 SDK 之前，你需先创建应用，获取应用的唯一标识 App Key，请参见[创建应用](/document/v2/privatization/uc_configure.html#创建应用)。
 
-环信推送分为在线推送和远程推送，远程推送时通过 APNS 下发，所以你需要配置应用对应的证书，请参见[APNS 推送配置](/document/ios/push.html#开启推送权限并上传推送证书)。
+环信推送分为在线推送和远程推送，远程推送时通过 APNS 下发，所以你需要配置应用对应的证书，请参见[APNS 推送配置](/document/v2/ios/push.html#开启推送权限并上传推送证书)。
 
 ## 集成 SDK
 
@@ -41,7 +41,7 @@ pod install --repo-update
 
 ### 手动导入
 
-[下载环信 demo](https://www.easemob.com/download/demo)。
+[下载环信 demo](https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V4.1.1.zip)。
 
 开发者最开始集成，如果选择手动导入文件集成的方式，只需要向工程中添 HyphenateChat 就可以，下面会介绍具体的集成方式。
 
@@ -94,7 +94,7 @@ demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工�
 }
 ```
 
-调用的 SDK 接口参数解释如下：\ App Key: 区别 APP 的标识，请参考[开发者注册及管理后台](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)。 \ apnsCertName: iOS 中推送证书名称，请参考[制作与上传推送证书](https://docs-im.easemob.com/im/ios/apns/deploy)。
+调用的 SDK 接口参数解释如下：\ App Key: 区别 APP 的标识，请参考[开发者注册及管理后台](/document/v2/privatization/uc_configure.html#创建应用)。 \ apnsCertName: iOS 中推送证书名称，请参考[制作与上传推送证书](https://docs-im.easemob.com/im/ios/apns/deploy)。
 
 ### SDK 登录流程
 
@@ -110,7 +110,7 @@ demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工�
 }];
 ```
 
-有关更多注册登录等基础功能，请参考[iOS SDK基础功能](https://docs-im.easemob.com/im/ios/sdk/basic)。
+有关更多注册登录等基础功能，请参考[iOS SDK基础功能](/document/v2/ios/overview.html)。
 
 ## SDK 推送集成
 

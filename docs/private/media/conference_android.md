@@ -70,7 +70,7 @@ dependencies {
 
 环信为管理者与开发者提供了方便易用的App工作台– **环信管理后台**。<br>
 通过环信管理后台可以完成应用创建、服务配置、企业信息修改基础功能；同时，管理后台也提供了发送消息、用户管理、群组管理、聊天室管理和数据统计等管理监控功能。<br>
-在开始集成前，你需要注册环信开发者账号并在后台创建应用，参见[创建应用](../im/uc_configure.html#创建应用) 。
+在开始集成前，你需要注册环信开发者账号并在后台创建应用，参见[创建应用](/document/v2/privatization/uc_configure.html#创建应用) 。
 
 ### 2. 创建项目
 
@@ -255,8 +255,8 @@ EMConferenceListener listener = new EMConferenceListener() {
 
 ### 8. 加入会议
 
-在进行音视频通话前，需要首先登录IM账户，登录过程参见[账号登录](http://docs-im-beta.easemob.com/document/android/overview.html#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95)。<br>
-若您还没有IM账户，需要先注册账户，注册过程参见[账号注册](http://docs-im-beta.easemob.com/document/android/overview.html#%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7)。<br>
+在进行音视频通话前，需要首先登录IM账户，登录过程参见[账号登录](/document/v2/android/overview.html#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95)。<br>
+若您还没有IM账户，需要先注册账户，注册过程参见[账号注册](/document/v2/android/overview.html#%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7)。<br>
 登录环信ID以后，可以加入会议了，通过 [EMConferenceManager#joinRoom](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a8940f54febf2086ccd978d75980c7763) API加入房间。<br>
 - 创建会议成功以后，默认超时时间为三分钟，超过三分钟没有人加入，会议会自动销毁；
 - 另外当会议中所有人离开2分钟后，会议也会被销毁；
@@ -1175,7 +1175,7 @@ public void onAttributesUpdated(EMConferenceAttribute[] attributes) {}
 
 #### **私有部署**
 
-私有部署设置方法参见[私有云 Android SDK集成配置](../im/uc_android_private.md)。
+私有部署设置方法参见[私有云 Android SDK集成配置](/document/v2/android/privatecloud.html)。
 
 ### 音视频管理
 

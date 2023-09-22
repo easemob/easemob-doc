@@ -31,7 +31,7 @@
 
 配置开发或者运行环境如果遇到问题，请参考 [这里](https://docs.flutter.dev/get-started/install)。
 
-- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](/document/v2/privatization/uc_configure.html)。
 
 ## 项目设置
 
@@ -259,7 +259,7 @@ void _initSDK() async {
 
 ### 注册环信 IM 用户
 
-Demo 中使用 [开放注册](/server-side/account_system.html#开放注册单个用户)，此操作需要在环信后台开启 `开放注册`。在开放注册模式下，允许通过 App 客户端直接注册环信用户，正式环境中请使用 [授权注册](server-side/account_system.html#授权注册单个用户)。
+Demo 中使用 [开放注册](/document/v2/server-side/account_system.html#开放注册单个用户)，此操作需要在环信后台开启 `开放注册`。在开放注册模式下，允许通过 App 客户端直接注册环信用户，正式环境中请使用 [授权注册](/document/v2/server-side/account_system.html#授权注册单个用户)。
 
 在 `_signUp` 方法中添加注册代码：
 
@@ -457,19 +457,19 @@ flutter run
 
 运行结果如下：
 
-<img src="@static/images/flutter/simulator_screen_shot1.png" width="500" />
+<img src="@static/images/flutter/simulator_screen_shot1.png" width="200" />
 
 参考以下步骤发送和接收文本消息：
 
 1. 输入任意用户名（如 `flutter001` 和 `flutter002`）和密码 `1`，点击 `SIGN UP` 创建用户；
 2. 以 `flutter001` 身份登录 Demo，将 `Enter the username you want to send` 输如为 `flutter002`， 发送文本消息；
 
-<img src="@static/images/flutter/simulator_screen_shot2.png" width="500" />
+<img src="@static/images/flutter/simulator_screen_shot2.png" width="200" />
 
 3. 以 `flutter002` 身份登录 Demo，查看 Log 信息确认是否都到消息。
 
-<img src="@static/images/flutter/simulator_screen_shot3.png" width="500" />
+<img src="@static/images/flutter/simulator_screen_shot3.png" width="200" />
 
 ## 后续步骤
 
-为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见[使用 App Token 鉴权](/product/easemob_app_token.html)。
+为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见[使用 App Token 鉴权](/document/v2/server-side/easemob_app_token.html)。

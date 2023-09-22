@@ -56,17 +56,17 @@
 
 多人视频会议如果需要环信即时通讯云的文字聊天室实现IM沟通功能，请详见文档：
 
-服务器端: [聊天室管理](http://docs-im-beta.easemob.com/document/server-side/chatroom.html)
+服务器端：[服务端集成](/document/v2/server-side/overview.html)
 
-Android: [聊天室管理](http://docs-im-beta.easemob.com/document/android/room_overview.html)
+Android：[Android SDK 介绍及导入](/document/v2/android/quickstart.html)
 
-iOS: [聊天室管理](http://docs-im-beta.easemob.com/document/ios/room_overview.html)
+iOS：[iOS SDK 快速集成](/document/v2/ios/quickstart.html)
 
-web端: [聊天室管理](http://docs-im-beta.easemob.com/document/web/room_overview.html)
+web端： [Web IM 介绍](/document/v2/web/quickstart.html)
 
-微信小程序: [聊天室管理](http://docs-im-beta.easemob.com/document/applet/room_overview.html)
+微信小程序： [微信小程序SDK简介](/document/v2/applet/wechat.html)
 
-PC端: [聊天室管理](https://docs-im.easemob.com/im/pc/basics/chatroom)
+PC端： [桌面端集成说明](https://docs-im.easemob.com/im/pc/intro/integration)
 
 
 <!--如果需要互动白板高级功能，请详见文档：

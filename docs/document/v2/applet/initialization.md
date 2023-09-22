@@ -6,7 +6,7 @@
 
 ## 前提条件
 
-开始前，请注册有效的环信即时通讯 IM 开发者账号且获得 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+开始前，请注册有效的环信即时通讯 IM 开发者账号且获得 App key，见 [环信即时通讯云管理后台](/document/v2/privatization/uc_configure.html)。
 
 ## 引入 SDK
 
@@ -55,15 +55,15 @@ const conn = new EC.connection({
 
 ### 控制台注册
 
-登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择**即时通讯** > **运营服务** > **用户管理**，创建 IM 用户。
+登录[环信即时通讯云控制台](/document/v2/privatization/uc_configure.html)，选择**运营服务** > **用户管理**，创建 IM 用户。
 
 ### REST API 注册
 
-请参考 [注册用户](/document/server-side/account_system.html#注册用户)。
+请参考 [注册用户](/document/v2/server-side/account_system.html#注册用户)。
 
 ### SDK 注册
 
-若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
+若支持 SDK 注册，需登录[环信即时通讯云控制台](/document/v2/privatization/uc_configure.html)，选择 **应用概览** > **应用详情**，将 **应用设置**下的 **用户注册模式** 设置为 **开放注册**。
 
 ```javascript
 conn
@@ -87,7 +87,7 @@ SDK 不支持自动登录，只支持通过以下方式手动登录：
 - 用户 ID + 密码
 - 用户 ID + token
 
-登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
+登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/v2/server-side/account_system.html#注册用户)。
 
 调用登录接口后，收到 `onConnected` 回调表明 SDK 与环信服务器连接成功。
 
@@ -109,7 +109,7 @@ conn
   });
 ```
 
-**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/product/easemob_user_token.html)。
+**用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/v2/server-side/easemob_user_token.html)。
 
 :::notice
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。

@@ -8,7 +8,7 @@
 
 使用 `EaseCallKit` 库可以快速实现常用的音视频场景，通过信令的交互确认，保证 **用户多端登录时，收到呼叫同时振铃，一端处理后，其他端自动停止**。
 
-`EaseCallKit` 库在 Github 上进行了保存，请参见 [EaseCallKit iOS 端使用指南](https://github.com/easemob/easecallkitui-ios)。
+`EaseCallKit` 库在 Github 上进行了保存，请参见 [EaseCallKit iOS 端使用指南](https://github.com/easemob/easecallkitui-ios/tree/4.0.0)。
 
 **`EaseCallKit` 在通话过程中，使用环信 ID 加入频道，方便音视频视图中显示用户名。如果用户不使用 `EaseCallKit` 而直接调用声网 API，也可以直接使用数字 UID 加入频道。**
 
@@ -18,7 +18,7 @@
 
 ## 跑通 Demo
 
-`EaseCallKit` 集成在环信提供的开源 IM Demo 中，你可以通过进入 [环信 IM Demo 下载页面](https://www.easemob.com/download/im)，选择 iOS 端 Demo 下载，或直接进入 [Github 开源网站](https://github.com/easemob/chat-ios) 下载。
+EaseCallKit 集成在环信开源 IM Demo 中，你可以直接下载 iOS 端Demo下载 [iOS IM源码](https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V4.1.1.zip) 。
 
 - 安装 SDK 与 `EaseCallKit`
 
@@ -40,7 +40,7 @@ pod install
 
 在集成该库前，你需要满足以下条件：
 
-- 分别创建 [环信应用](/product/enable_and_configure_IM.html) 及 [声网应用](https://docportal.shengwang.cn/cn/video-legacy/run_demo_video_call_ios?platform=iOS#1-创建声网项目)；
+- 分别创建 [环信应用](/document/v2/privatization/uc_configure.html) 及 [声网应用](https://docportal.shengwang.cn/cn/video-legacy/run_demo_video_call_ios?platform=iOS#1-创建声网项目)；
 - 已完成环信 IM 的基本功能，包括登录、好友、群组以及会话等的集成；
 - 上线之前开通声网 token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 token。利用 App Server 生成 token 的过程参见 [声网 token](https://docportal.shengwang.cn/cn/video-call-4.x/token_server_ios_ng?platform=iOS)。
 
@@ -163,13 +163,13 @@ config.agoraAppId=@"声网 AppID";
 
 发起通话后的 UI 界面如下：
 
-<img src="@static/images/ios/sendcall.png" width="400" />
+<img src=@static/images/ios/sendcall.png  title=发起通话后 width="200"/>
 
 ### 收到邀请
 
 主叫方调用邀请接口后，如果被叫方在线且并未处于通话过程中，将弹出通话页面，被叫用户可选择接听或者拒绝。通话页面如下：
 
-<img src="@static/images/ios/recvcall.png" width="400" />
+<img src=@static/images/ios/recvcall.png  title=发起通话后 width="200"/>
 
 被叫振铃的同时，会触发以下回调：
 

@@ -2,7 +2,7 @@
 
 ## Web Vue 2 Demo
 
-对于 Web Vue Demo，进行私有化配置需在 [Vue 2 Demo 源代码](https://download-sdk.oss-cn-beijing.aliyuncs.com/zq/private-vue2-20230104.zip)中进行修改。
+对于 Web Vue Demo，进行私有化配置需在 [Vue 2 Demo 源代码](https://downloadsdk.easemob.com/mp/downloads/sdk/private-vue2-20230918.zip)中进行修改。
 
 ### 修改环境配置
 
@@ -43,7 +43,7 @@ const DEFAULT_APIURL = "https://xxx.xxxxx.com"; // 私有化的 RESTful 服务�
 
 ## Web React Demo
 
-对于 Web React Demo，进行私有化配置需在 [React Demo 源代码](https://download-sdk.oss-cn-beijing.aliyuncs.com/zq/private-demo-20230104.zip)中进行修改。
+对于 Web React Demo，进行私有化配置需在 [React Demo 源代码](https://downloadsdk.easemob.com/mp/downloads/sdk/private-react-20230918.zip)中进行修改。
 
 修改配置如下：
 

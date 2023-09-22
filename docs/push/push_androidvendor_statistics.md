@@ -20,14 +20,12 @@
 
 #### 1.3、设置回调地址
 
-根据所在集群设置回调地址（配置 http）
+根据所在集群设置回调地址（配置 http），私有化部署见部署手册提供的环信IM REST API信息。
 格式为：`http://域名/orgname/appname/push/report/meizu`。
 
 ![img](@static/images/instantpush/push_flyme_callbackaddr.png)
 
-您可以在环信后台，**即时通讯** → **服务概览** 中查看当前 Appkey 的 Rest API 域名地址，仅支持填写 `easemob.com` 类型。
 
-![img](@static/images/instantpush/push_domain_name.png)
 
 #### 1.4、开启送达回执
 
@@ -62,10 +60,8 @@
 ##### 2.4.1、回调地址
 
 根据所在集群设置回调地址（配置 https，注意：华为只支持https地址配置）
-格式为：`https://域名/orgname/appname/push/report/huawei`
-您可以在环信后台，**即时通讯** > **服务概览** 中查看当前 Appkey 的 Rest API 域名地址，仅支持填写 `easemob.com` 类型。 
+格式为：`https://域名/orgname/appname/push/report/huawei`，私有化部署见部署手册提供的环信IM REST API信息。
 
-![img](@static/images/instantpush/push_domain_name.png)
 
 ##### 2.4.2、证书内容
 

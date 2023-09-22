@@ -30,7 +30,7 @@
 开始前，请确保满足以下条件：
 
 - 已集成 `1.0.5 或以上版本` SDK 的基本功能，完成 SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
-- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](/document/v2/privatization/uc_limitation.html)。
 - 联系商务开通子区功能。
 
 ## 实现方法

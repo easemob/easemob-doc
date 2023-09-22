@@ -30,8 +30,8 @@
 开始前，请确保满足以下条件：
 
 - 完成 1.0.6 以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 联系商务开通子区功能。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/document/v2/privatization/uc_limitation.html)。
+- 私有部署已开通子区功能。
 
 ## 实现方法
 

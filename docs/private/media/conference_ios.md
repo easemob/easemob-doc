@@ -112,7 +112,7 @@ EMConferenceManagerDelegate.h
 
 ### 1. 环信后台注册appkey
 
-在开始集成前，你需要注册环信开发者账号并在后台创建应用，参见[创建应用](../im/uc_configure.html#创建应用) 。
+在开始集成前，你需要注册环信开发者账号并在后台创建应用，参见[创建应用](/document/v2/privatization/uc_configure.html#创建应用) 。
 
 ### 2. 创建项目
 
@@ -185,8 +185,8 @@ retOpt.enableConsoleLog = YES;
 
 ### 7. 环信ID注册、登录
 
-在进行音视频通话前，需要首先登录IM账户，登录过程参见[账号登录](http://docs-im-beta.easemob.com/document/android/overview.html#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95)。<br>
-若您还没有IM账户，需要先注册账户，注册过程参见[账号注册](http://docs-im-beta.easemob.com/document/android/overview.html#%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7)。<br>
+在进行音视频通话前，需要首先登录IM账户，登录过程参见[账号登录](/document/v2/android/overview.html#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95)。<br>
+若您还没有IM账户，需要先注册账户，注册过程参见[账号注册](/document/v2/android/overview.html#%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7)。<br>
 
 ### 8. 音视频功能初始化
 
@@ -834,7 +834,7 @@ region.z = 9;
 
 #### 私有部署
 
-私有部署设置方法参见[私有云sdk集成配置](../im/uc_iOS_private.md)
+私有部署设置方法参见[私有云sdk集成配置](/document/v2/ios/privatecloud.html)
 
 ### 音视频管理
 

@@ -13,7 +13,7 @@
 ## 前提条件
 
 - 有效的环信即时通讯 IM 开发者账号；
-- [创建环信即时通讯 IM 项目并获取 App Key](/product/enable_and_configure_IM.html)；
+- [创建环信即时通讯 IM 项目并获取 App Key](/document/v2/privatization/uc_configure.html)；
 - [npm](https://www.npmjs.com/get-npm)；
 - SDK 支持 IE 9+、Firefox 10+、Chrome 54+ 和 Safari 6+。
 
@@ -324,9 +324,9 @@ $ npm run start:dev
 import WebIM from 'easemob-websdk'
 ```
 
-#### 方法二：从官网获取并导入 SDK
+#### 方法二：下载Demo并导入 SDK
 
-1. 下载 [Easemob Chat SDK for Web](https://www.easemob.com/download/im)。将 `demo/src/config` 中的 Easemob-chat 文件保存到你的项目下。
+1. 下载 [Easemob Chat SDK for Web](https://downloadsdk.easemob.com/mp/downloads/sdk/private-react-20230918.zip)。将 `demo/src/config` 中的 Easemob-chat 文件保存到你的项目下。
 
 2. 在 `index.html` 文件中，对 `index.js` 文件进行引用。
 

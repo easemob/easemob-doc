@@ -4,7 +4,7 @@
 
 你可以通过环信即时通讯控制台创建和管理标签，也可以通过 REST API 进行标签管理。用户与标签是多对多的关系，即一个用户可以对应多个标签，一个标签也可以对应多个用户。
 
-本文档主要介绍如何调用即时推送 REST API 实现创建及管理推送标签。调用以下方法前，请先参考 [接口频率限制](/document/server-side/error.html/product/limitation.html)了解即时通讯 RESTful API 的调用频率限制。
+本文档主要介绍如何调用即时推送 REST API 实现创建及管理推送标签。
 
 ## 公共参数
 
@@ -12,9 +12,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述                                                |
 | :--------- | :----- | :------- | :-------------------------------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。  |
+| `host`     | String | 是       | 访问 RESTful API 的域名或服务器信息。<br/>-公有云集成为 环信即时通讯控制台的 `即时通讯->服务概览`页面下的 `域名配置- Rest Api`。 <br/> -私有化集成为部署后 `服务器地址:端口`。 |
+| `org_name` | String | 是       | 每个公司（组织）分配的唯一标识。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Orgname`。  |
+| `app_name` | String | 是       | 创建应用时填入的应用名称。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Appname`。   |
 | `username` | String | 是       | 用户 ID。                                           |
 
 ### 响应参数
@@ -75,7 +75,7 @@ POST https://{host}/{org_name}/{app_name}/push/label
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -145,7 +145,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html)了解可能的原因。
 
 ### 示例
 
@@ -214,7 +214,7 @@ GET https://{host}/{org_name}/{app_name}/push/label
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -284,7 +284,7 @@ DELETE https://{host}/{org_name}/{app_name}/push/label/{labelname}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -350,7 +350,7 @@ POST https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -421,7 +421,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}/user/{username}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -492,7 +492,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 
@@ -564,7 +564,7 @@ DELETE https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/v2/server-side/error.html) 了解可能的原因。
 
 ### 示例
 

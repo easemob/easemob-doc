@@ -24,7 +24,7 @@
 设置用户属性前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/document/v2/privatization/uc_limitation.html)。
 
 ## 实现方法
 
@@ -56,7 +56,7 @@ SDKClient.Instance.UserInfoManager.UpdateOwnInfo(userInfo, new CallBack(
 ));
 ```
 
-若[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
+若[调用 RESTful 的接口设置](/document/v2/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/v2/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
 
 | 字段        | 类型   | 描述                                                                                              |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------ |
