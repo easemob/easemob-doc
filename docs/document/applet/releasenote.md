@@ -8,6 +8,7 @@
 
 - [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送合并消息)。
 - [IM SDK] 新增[消息修改功能](message_modify.html)。
+- [IM SDK] 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
 
 ### 修复
 
