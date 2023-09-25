@@ -53,11 +53,11 @@
 
 ```typescript
 // 设置发送的消息类型。消息类型共支持 8 种。具体详见 `ChatMessageType` 枚举类型。
-// 通过指定该值，可以发送不同类型的消息。
 const messageType = ChatMessageType.TXT;
-// 设置消息接收对象 ID。
+// 设置消息接收对象。单聊时为对端用户 ID、群聊时为群组 ID，聊天室时为聊天室 ID。
 const targetId = "john";
-// 设置消息接收对象类型。 消息接收对象类型包括单个用户、群组和聊天室。具体详见 `ChatMessageChatType` 枚举类型
+// 设置消息接收对象类型。单聊为 `PeerChat`，群聊为 `GroupChat`，聊天室为 `ChatRoom`。
+// 具体详见 `ChatMessageChatType` 枚举类型。
 const chatType = ChatMessageChatType.PeerChat;
 let msg: ChatMessage;
 // 构建文本消息。只需要消息文本内容。

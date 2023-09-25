@@ -53,8 +53,10 @@
 示例代码：
 
 ```java
-// 创建一条文本消息，`content` 为消息文字内容，`conversationId` 为会话 ID，在单聊时为对端用户 ID、群聊时为群组 ID，聊天室时为聊天室 ID。
+// 创建一条文本消息，`content` 为消息文字内容，`conversationId` 为会话 ID，单聊时为对端用户 ID、群聊时为群组 ID，聊天室时为聊天室 ID。
 EMMessage message = EMMessage.createTextSendMessage(content, conversationId);
+// 单聊时为 EMMessage.ChatType.Chat，群聊时为 EMMessage.ChatType.GroupChat, 聊天室时为EMMessage.ChatType.ChatRoom。
+message.setChatType(EMMessage.ChatType.Chat);
 // 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
