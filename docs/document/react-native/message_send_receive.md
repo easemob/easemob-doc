@@ -56,7 +56,7 @@
 const messageType = ChatMessageType.TXT;
 // 设置消息接收对象。单聊时为对端用户 ID、群聊时为群组 ID，聊天室时为聊天室 ID。
 const targetId = "john";
-// 设置消息接收对象类型。单聊为 `PeerChat`，群聊为 `GroupChat`，聊天室为 `ChatRoom`。
+// 设置会话类型。单聊为 `PeerChat`，群聊为 `GroupChat`，聊天室为 `ChatRoom`，默认为单聊。
 // 具体详见 `ChatMessageChatType` 枚举类型。
 const chatType = ChatMessageChatType.PeerChat;
 let msg: ChatMessage;

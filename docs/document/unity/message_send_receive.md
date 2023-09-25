@@ -45,11 +45,11 @@
 
 ```csharp
 //创建一条文本消息，`content` 为消息文字内容。
-// `conversationId` 在单聊时为对端用户的 ID，群聊为群组 ID，聊天室时为聊天室 ID。
+// `conversationId` 为消息接收方，单聊为对端用户的 ID，群聊为群组 ID，聊天室时为聊天室 ID。
 Message msg = Message.CreateTextSendMessage(conversationId, content);
 
-//设置消息类型，即 `Message` 类的 `MessageType` 属性。
-//单聊、群聊和聊天室分别设置为 `Chat`、`Group` 和 `Room`，默认为单聊。
+//设置会话类型，即 `Message` 类的 `MessageType` 属性。
+//单聊、群聊和聊天室分别为 `Chat`、`Group` 和 `Room`，默认为单聊。
 msg.MessageType = MessageType.Group;
 
 //对于聊天室消息，可设置消息优先级。

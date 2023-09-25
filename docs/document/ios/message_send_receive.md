@@ -51,17 +51,16 @@
 示例代码：
 
 ```objective-c
-// 调用 initWithText 创建文本消息。将 `content` 设置为文本消息的内容。
+// 调用 initWithText 创建文本消息。`content` 为文本消息的内容。
 EMTextMessageBody *textMessageBody = [[EMTextMessageBody alloc] initWithText:content];
-// `conversationId` 在单聊时设置为对端用户的 ID，群聊时为群组 ID，聊天室时为聊天室 ID。
+// 消息接收方，单聊为对端用户的 ID，群聊为群组 ID，聊天室为聊天室 ID。
 NSString* conversationId = @"remoteUserId";
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId
                                                       body:textMessageBody
                                                                ext:messageExt];
-// `message.chatType` 在单聊时设置为 `EMChatTypeChat`，群聊时为 `EMChatTypeGroupChat`，聊天室时为 `EMChatTypeChatRoom`。
-// 默认值为 `EMChatTypeChat`，即单聊。
+// 会话类型，单聊为 `EMChatTypeChat`，群聊为 `EMChatTypeGroupChat`，聊天室为 `EMChatTypeChatRoom`，默认为单聊。
 message.chatType = EMChatTypeChatRoom;
-// Send the message
+// 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message
                                         progress:nil
                                       completion:nil];

@@ -62,7 +62,7 @@ function sendTextMessage() {
     msg: "message content",
     // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
     to: "username",
-    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`，默认为单聊。
     chatType: "singleChat",
   };
   // 创建文本消息。
