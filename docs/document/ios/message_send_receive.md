@@ -50,22 +50,21 @@
 
 示例代码：
 
-```objectivec
-// 创建一条文本消息，`content` 为消息文字内容，`toChatUsername` 为对方用户或者群聊的 ID，`fromChatUsername` 为发送方用户或群聊的 ID，`textMessageBody` 为消息体，`messageExt` 为消息扩展，后文皆是如此。
-EMTextMessageBody *textMessageBody = [[TextMessageBody alloc] initWithText:content];
-EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:textMessageBody ext:messageExt];
-// 构造消息时需设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
-message.chatType = EMChatTypeChat;
-// 发送消息，异步方法。
-[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
-// 发送消息时可以设置发送回调，获得消息发送状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
-[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {
-    if (!error) {
-        // 发送消息成功！
-    } else {
-        // 发送消息失败！
-    }
-}];
+```objective-c
+// 调用 initWithText 创建文本消息。`content` 为文本消息的内容。
+EMTextMessageBody *textMessageBody = [[EMTextMessageBody alloc] initWithText:content];
+// 消息接收方，单聊为对端用户的 ID，群聊为群组 ID，聊天室为聊天室 ID。
+NSString* conversationId = @"remoteUserId";
+EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId
+                                                      body:textMessageBody
+                                                               ext:messageExt];
+// 会话类型，单聊为 `EMChatTypeChat`，群聊为 `EMChatTypeGroupChat`，聊天室为 `EMChatTypeChatRoom`，默认为单聊。
+message.chatType = EMChatTypeChatRoom;
+// 发送消息。
+[[EMClient sharedClient].chatManager sendMessage:message
+                                        progress:nil
+                                      completion:nil];
+
 ```
 
 对于聊天室消息，可设置消息优先级。示例代码如下：
@@ -196,7 +195,7 @@ EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithData:imageData di
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
 
 // 设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
-message.chatType = EMChatTypeGroupChat; 
+message.chatType = EMChatTypeGroupChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
@@ -222,16 +221,13 @@ SDK 默认自动下载缩略图，即 `[EMClient sharedClient].options.isAutoDow
 
 下载完成后，在回调里调用相应消息 `body` 的 `thumbnailLocalPath` 获取缩略图路径。
 
-
 ```objectivec
 EMImageMessageBody *imageBody = (EMImageMessageBody *)message.body;
 // 图片文件的本地缩略图资源路径。
 NSString *thumbnailLocalPath = imageBody.thumbnailLocalPath;
 ```
 
-
 4. 获取图片消息的附件。
-
 
 ```objectivec
 [[EMClient sharedClient].chatManager downloadMessageAttachment:message progress:nil completion:^(EMChatMessage *message, EMError *error) {
@@ -241,7 +237,6 @@ NSString *thumbnailLocalPath = imageBody.thumbnailLocalPath;
             }
         }];
 ```
-
 
 #### 发送和接收视频消息
 
@@ -258,7 +253,7 @@ body.duration = duration;// 视频时长。
 
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
 // 设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
-message.chatType = EMChatTypeGroupChat; 
+message.chatType = EMChatTypeGroupChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
@@ -495,18 +490,19 @@ message.chatType = EMChatTypeGroupChat;
 
 创建合并消息体时，需要设置以下参数：
 
-| 属性   | 类型        | 描述
-| :-------------- | :-------------------- | :-------------------- |
-| `title`  | String    | 合并消息的标题。    |
-| `summary` | String       | 合并消息的概要。   |
-| `compatibleText` | String       | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |
-| `messageIdList` | List      | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。 |
- 
+| 属性             | 类型   | 描述                                                                                                                                                                                       |
+| :--------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`          | String | 合并消息的标题。                                                                                                                                                                           |
+| `summary`        | String | 合并消息的概要。                                                                                                                                                                           |
+| `compatibleText` | String | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。 |
+| `messageIdList`  | List   | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。                                                                                                                                 |
+
 :::notice
+
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
 2. 只有成功发送或接收的消息才能合并转发。
 3. 不论 `EMOptions#isAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
-:::
+   :::
 
 示例代码如下：
 
@@ -534,12 +530,12 @@ EMChatMessage* msg = [[EMChatMessage alloc] initWithConversationID:@"conversatio
 ```Objective-C
 - (void)messagesDidReceive:(NSArray<EMChatMessage *> *)aMessages
 {
-    
+
     for (EMChatMessage* msg in aMessages) {
         if (msg.body.type == EMMessageBodyTypeCombine) {
             // 合并消息类型，解析合并消息
             [EMClient.sharedClient.chatManager downloadAndParseCombineMessage:msg completion:^(NSArray<EMChatMessage *> * _Nullable messages, EMError * _Nullable error) {
-            
+
             }];
         }
     }
@@ -553,14 +549,15 @@ EMChatMessage* msg = [[EMChatMessage alloc] initWithConversationID:@"conversatio
 该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
 
 :::notice
+
 1. 仅 SDK 4.0.3 及以上版本支持。
 2. 定向消息不计入群组会话或聊天室会话的未读计数。
-:::
+   :::
 
 发送定向消息的流程与发送普通消息相似，唯一区别是需要设置消息的接收方，具体操作如下：
 
 1. 创建一条群组或聊天室消息。
-2. 设置消息的接收方。 
+2. 设置消息的接收方。
 3. 发送定向消息。
 
 下面以文本消息为例介绍如何发送定向消息，示例代码如下：
@@ -569,13 +566,13 @@ EMChatMessage* msg = [[EMChatMessage alloc] initWithConversationID:@"conversatio
 // 创建一条文本消息。
 EMTextMessageBody* textBody = [[EMTextMessageBody alloc] initWithText:@"hello"];
 EMChatMessage* msg = [[EMChatMessage alloc] initWithConversationID:@"groupId" body:textBody ext:nil];
-// 会话类型：群组和聊天室聊天，分别为 `EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`。 
+// 会话类型：群组和聊天室聊天，分别为 `EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`。
 msg.chatType = EMChatTypeGroupChat;
-// 设置消息接收方列表。最多可传 20 个接收方的用户 ID。若传入 `nil`，则消息发送给群组或聊天室的所有成员。 
+// 设置消息接收方列表。最多可传 20 个接收方的用户 ID。若传入 `nil`，则消息发送给群组或聊天室的所有成员。
 msg.receiverList = @[@"A",@"B"];
 // 发送消息。
 [EMClient.sharedClient.chatManager sendMessage:msg progress:nil completion:^(EMChatMessage * _Nullable message, EMError * _Nullable error) {
-            
+
 }];
 ```
 

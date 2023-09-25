@@ -51,10 +51,14 @@
 示例代码：
 
 ```dart
-// 创建一条文本消息，`content` 为消息文字内容，`conversationId` 为会话 ID，在单聊时为对端用户 ID、群聊时为群组 ID，聊天室时为聊天室 ID。
+// 创建一条文本消息。
 final msg = EMMessage.createTxtSendMessage(
+  // `targetId` 为接收方，单聊为对端用户 ID、群聊为群组 ID，聊天室为聊天室 ID。
   targetId: conversationId,
+  // `content` 为消息文字内容。
   content: 'hello',
+  // 会话类型：单聊为 `Chat`，群聊为 `GroupChat`, 聊天室为 `ChatRoom`，默认为单聊。
+  chatType: ChatType.Chat,
 );
 
 // 发送消息。
