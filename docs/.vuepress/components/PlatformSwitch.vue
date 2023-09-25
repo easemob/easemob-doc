@@ -54,39 +54,9 @@ const PLATFORM_ICON_MAP = {
   },
 }
 
-const platform = ref('android')
-let version = ''
-const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value]?.activeIcon)
-const route = useRoute()
-const router = useRouter()
-watch(()=>route.path, ()=> {
-  if (route.path.indexOf('/document') == 0) {
-    version = route.path.split('/')[2]
-    platform.value = route.path.split('/')[3]
-  }
-}, {immediate:true})
+const V1_PLATFORM = ['android', 'ios', 'web', 'applet', 'electron', 'server-side']
 
-
-// 切换平台，如果有相同路径的route就直接跳转
-const onChange = (platform) => {
-  if (platform === 'privatization') {
-    router.push(`/document/${version}/privatization/uc_deploy.html`)
-    return 
-  }
-  const nextPlatformDocRouters = router.options.routes.filter(item=>item.hasOwnProperty('name') && item?.path.indexOf(`/document/${version}/${platform}`) == 0).map(item=>item.path)
-
-  let newPath = route.path.split('/')
-  newPath[3] = platform
-  const nextPathPath = newPath.join('/')
-
-  if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
-    router.push(nextPathPath)
-  } else {
-    router.push(`/document/${version}/${platform}/overview.html`)
-  }
-}
-
-const options = [
+const OPTIONS = [
   {
     label: '安装部署',
     options: [
@@ -147,6 +117,57 @@ const options = [
     ],
   },
 ]
+
+const platform = ref('android')
+const platformOptions = ref(OPTIONS)
+let version = ''
+const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value]?.activeIcon)
+const route = useRoute()
+const router = useRouter()
+
+
+
+const handleVersionOptions = (version:string) =>{
+  if (version === 'v2') {
+    platformOptions.value = OPTIONS
+  }
+  if (version === 'v1') {
+    let v1Options = JSON.parse(JSON.stringify(OPTIONS))
+    v1Options[1].options = v1Options[1].options.filter((item) =>
+      V1_PLATFORM.includes(item.value)
+    )
+    platformOptions.value = v1Options
+   
+  }
+}
+
+watch(()=>route.path, ()=> {
+  if (route.path.indexOf('/document') == 0) {
+    version = route.path.split('/')[2]
+    handleVersionOptions(version)
+    platform.value = route.path.split('/')[3]
+  }
+}, {immediate:true})
+
+// 切换平台，如果有相同路径的route就直接跳转
+const onChange = (platform) => {
+  if (platform === 'privatization') {
+    router.push(`/document/${version}/privatization/uc_deploy.html`)
+    return 
+  }
+  const nextPlatformDocRouters = router.options.routes.filter(item=>item.hasOwnProperty('name') && item?.path.indexOf(`/document/${version}/${platform}`) == 0).map(item=>item.path)
+
+  let newPath = route.path.split('/')
+  newPath[3] = platform
+  const nextPathPath = newPath.join('/')
+
+  if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
+    router.push(nextPathPath)
+  } else {
+    router.push(`/document/${version}/${platform}/overview.html`)
+  }
+}
+
 </script>
 
 
@@ -156,7 +177,7 @@ const options = [
      <img width="20" height="20" :src="platformIcon">
     </template>
     <el-option-group
-      v-for="group in options"
+      v-for="group in platformOptions"
       :key="group.label"
       :label="group.label"
     >
