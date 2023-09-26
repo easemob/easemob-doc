@@ -36,6 +36,7 @@ export default function ChatScreen(): JSX.Element {
   );
 }
 ```
+效果如下图所示：
 
 ![img](@static/images/rnuikit/chat_detail_overview.png)
 
@@ -73,6 +74,8 @@ export default function ChatScreen(): JSX.Element {
   );
 }
 ```
+
+效果如下图所示：
 
 ![img](@static/images/rnuikit/chat_detail_send_voice_msg.png)
 
@@ -117,6 +120,8 @@ export default function ChatScreen(): JSX.Element {
 }
 ```
 
+效果如下图所示：
+
 ![img](@static/images/rnuikit/chat_detail_msg_list_item_custom_1.png)
 ![img](@static/images/rnuikit/chat_detail_msg_list_item_custom_2.png)
 ![img](@static/images/rnuikit/chat_detail_msg_list_item_custom_3.png)
@@ -146,6 +151,8 @@ export default function ChatScreen(): JSX.Element {
 }
 ```
 
+效果如下图所示：
+
 ![img](@static/images/rnuikit/chat_detail_bg.png)
 
 ### 自定义时间标签显示和隐藏
@@ -172,6 +179,8 @@ export default function ChatScreen(): JSX.Element {
   );
 }
 ```
+
+效果如下图所示：
 
 ![img](@static/images/rnuikit/chat_detail_time_label.png)
 
@@ -216,6 +225,8 @@ export default function ChatScreen(): JSX.Element {
   );
 }
 ```
+
+效果如下图所示：
 
 ![img](@static/images/rnuikit/chat_detail_msg_list_item_long_press.png)
 

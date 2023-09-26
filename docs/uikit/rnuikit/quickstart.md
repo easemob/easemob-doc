@@ -74,7 +74,7 @@ yarn && yarn run env
 }
 ```
 
-#### 第四步 配置 iOS
+### 第四步 配置 iOS
 
 添加以下内容到 `ios/Podfile` 文件。
 
@@ -108,7 +108,7 @@ end
 </dict>
 ```
 
-#### 第四步 配置 Android
+### 第五步 配置 Android
 
 添加以下内容到 `android/build.gradle` 文件。
 
@@ -140,7 +140,7 @@ buildscript {
 </manifest>
 ```
 
-### 第五步 初始化和进入聊天页面
+### 第六步 初始化和进入聊天页面
 
 必要的代码包括初始化 react-native-chat-uikit、登录服务器、进入聊天页面开始聊天。下面添加了简单的页面路由和跳转用于演示目的。
 
@@ -185,7 +185,7 @@ export function ChatScreen({
 }
 ```
 
-### 第六步 运行示例项目
+### 第七步 运行示例项目
 
 ```sh
 yarn run ios
@@ -193,7 +193,7 @@ yarn run ios
 yarn run android
 ```
 
-### 第七步 发送消息验证
+### 第八步 发送消息验证
 
 ![img](@static/images/rnuikit/uikit_quick_start.png)
 

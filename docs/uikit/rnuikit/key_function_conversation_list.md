@@ -34,9 +34,12 @@ export default function ChatScreen(): JSX.Element {
 }
 ```
 
+效果如下图所示：
+
 ![img](@static/images/rnuikit/conv_list_overview.png)
 
-## 自定义会话样式
+## 自定义实现
+### 自定义会话样式
 
 你可以设置 `ConversationListFragment` 中的 `RenderItem` 自定义会话样式，例如自定义头像、消息未读数以及消息时间戳等。
 
@@ -60,11 +63,13 @@ export default function ChatScreen(): JSX.Element {
 }
 ```
 
+效果如下图所示：
+
 ![img](@static/images/rnuikit/conv_list_custom_1.png)
 ![img](@static/images/rnuikit/conv_list_custom_2.png)
 ![img](@static/images/rnuikit/conversation_list_slide_menu.png)
 
-## 自定义会话排序
+### 自定义会话排序
 
 会话默认按会话 ID `convId` 排序。你可以设置 `ConversationListFragment` 中的 `sortPolicy` 自定义会话排序，如置顶会话或按会话中的最新一条消息的时间戳排序。
 
@@ -90,9 +95,11 @@ export default function ChatScreen(): JSX.Element {
 }
 ```
 
+效果如下图所示：
+
 ![img](@static/images/rnuikit/conv_list_sort.png)
 
-## 自定义会话的未读消息数
+### 自定义会话的未读消息数
 
 很多组件需要关注会话的未读消息数的通知来改变消息提醒的状态。
 
@@ -114,9 +121,11 @@ export default function ChatScreen(): JSX.Element {
 }
 ```
 
+效果如下图所示：
+
 ![img](@static/images/rnuikit/conv_list_unread_count.png)
 
-## 自定义会话点击事件
+### 自定义会话点击事件
 
 你可以设置 `ConversationListFragment` 中的 `onPress` 自定义会话点击事件。例如，你可以点击会话列表项，进入聊天页面。
 
@@ -136,7 +145,7 @@ export default function ChatScreen(): JSX.Element {
 }
 ```
 
-## 自定义会话列表项长按事件
+### 自定义会话列表项长按事件
 
 你可以设置 `ConversationListFragment` 中的 `onLongPress` 自定义会话列表项，例如长按后显示该项目的右键菜单。
 
@@ -155,6 +164,8 @@ export default function ChatScreen(): JSX.Element {
   );
 }
 ```
+
+效果如下图所示：
 
 ![img](@static/images/rnuikit/conv_list_long_press.png)
 
