@@ -1996,7 +1996,7 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -d '{"newadmin":"us
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
+DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin/{username}
 ```
 
 ##### 路径参数
