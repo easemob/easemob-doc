@@ -701,6 +701,7 @@ let option = {
   messageList: [
     {
       type: "txt",
+      chatType: "singleChat",
       // ...
     },
   ],
@@ -708,7 +709,7 @@ let option = {
     option.url = data.url;
   },
 };
-let msg = WebIM.message;
+let msg = WebIM.message.create(option);
 conn.send
   .send(msg)
   .then((res) => {
