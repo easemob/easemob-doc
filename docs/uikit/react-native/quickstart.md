@@ -92,7 +92,6 @@ target 'RNUIkitQuickExample' do
   pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
 
 end
-
 ```
 
 添加以下内容到 `ios/RNUIkitQuickExample/Info.plist` 文件。
@@ -195,7 +194,7 @@ yarn run android
 
 ### 第八步 发送消息验证
 
-![img](@static/images/rnuikit/uikit_quick_start.png)
+![img](@static/images/uikitrn/uikit_quick_start.png)
 
 ## 示例源码参考
 

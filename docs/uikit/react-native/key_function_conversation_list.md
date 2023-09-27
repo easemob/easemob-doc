@@ -36,7 +36,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/rnuikit/conv_list_overview.png)
+![img](@static/images/uikitrn/conv_list_overview.png)
 
 ## 自定义实现
 ### 自定义会话样式
@@ -65,9 +65,9 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/rnuikit/conv_list_custom_1.png)
-![img](@static/images/rnuikit/conv_list_custom_2.png)
-![img](@static/images/rnuikit/conversation_list_slide_menu.png)
+<img src=@static/images/uikitrn/conv_list_custom_1.png  width="200"/>&nbsp;&nbsp;
+<img src=@static/images/uikitrn/conv_list_custom_2.png  width="200"/>&nbsp;&nbsp;
+<img src=@static/images/uikitrn/conversation_list_slide_menu.png  width="200"/>
 
 ### 自定义会话排序
 
@@ -97,7 +97,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/rnuikit/conv_list_sort.png)
+![img](@static/images/uikitrn/conv_list_sort.png)
 
 ### 自定义会话的未读消息数
 
@@ -123,7 +123,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/rnuikit/conv_list_unread_count.png)
+![img](@static/images/uikitrn/conv_list_unread_count.png)
 
 ### 自定义会话点击事件
 
@@ -167,7 +167,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/rnuikit/conv_list_long_press.png)
+![img](@static/images/uikitrn/conv_list_long_press.png)
 
 
 

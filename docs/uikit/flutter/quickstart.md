@@ -1,12 +1,8 @@
 
 利用 flutter_chat_uikit 提供的 UI 组件，你可以轻松实现应用内的聊天。flutter_chat_uikit 支持单聊、群聊和聊天室会话，本文介绍如何实现在单聊会话中发送消息。
 
-聊天界面如下所示： 
-![img](@static/images/flutteruikit/ChatMessagesView.png)
-
-会话列表界面如下所示：
-
-![img](@static/images/flutteruikit/ChatConversationsView.png)
+<img src=@static/images/uikitflutter/ChatMessagesView.png  title=“聊天界面” width="300"/>&nbsp;&nbsp;
+<img src=@static/images/uikitflutter/ChatConversationsView.png  title=会话列表页面 width="300"/>
 
 ## 前提条件
 
@@ -69,14 +65,14 @@
 
 flutter_chat_uikit 支持 pub.dev 接入和本地源码集成。
 
-- pub.dev 接入集成
+- pub.dev 接入集成：
 
 ```dart
 flutter pub add flutter_chat_uikit
 flutter pub get
 ```
 
-- 本地源码集成
+- 本地源码集成：
 
 ```dart
 dependencies:
@@ -157,4 +153,4 @@ class _MessagesPageState extends State<MessagesPage> {
 }
 ```
 
-![image](@static/images/flutteruikit/MessagesPage.png)
+![image](@static/images/uikitflutter/MessagesPage.png)

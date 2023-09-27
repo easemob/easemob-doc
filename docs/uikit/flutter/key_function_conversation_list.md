@@ -32,7 +32,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
 
 效果图如下所示：
 
-![image](@static/images/flutteruikit/ChatConversationsView.png)
+![image](@static/images/uikitflutter/ChatConversationsView.png)
 
 参数详情如下表所示：
 
@@ -75,7 +75,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
 
 效果如下图所示：
 
-![image](@static/images/flutteruikit/ChatConversationsView_avatar.png)
+![image](@static/images/uikitflutter/ChatConversationsView_avatar.png)
 
 ### 设置会话名称
 
@@ -101,7 +101,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
 
 效果如下图所示：
 
-![image](@static/images/flutteruikit/ChatConversationsView_nickname.png)
+![image](@static/images/uikitflutter/ChatConversationsView_nickname.png)
 
 ### 自定义显示样式
 
@@ -129,7 +129,7 @@ class _ConversationsPageState extends State<ConversationsPage> {
 ```
 效果如下图所示：
 
-![image](@static/images/flutteruikit/ChatConversationsView_custom.png)
+![image](@static/images/uikitflutter/ChatConversationsView_custom.png)
 
 ### 自定义点击事件
 
@@ -154,4 +154,4 @@ class _ConversationsPageState extends State<ConversationsPage> {
 ```
 效果如下图所示：
 
-![image](@static/images/flutteruikit/ChatConversationsView_click.png)
+![image](@static/images/uikitflutter/ChatConversationsView_click.png)

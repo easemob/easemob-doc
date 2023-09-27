@@ -38,7 +38,7 @@ export default function ChatScreen(): JSX.Element {
 ```
 效果如下图所示：
 
-![img](@static/images/rnuikit/chat_detail_overview.png)
+![img](@static/images/uikitrn/chat_detail_overview.png)
 
 聊天页面相关的方法如下表所示：
 
@@ -77,7 +77,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/rnuikit/chat_detail_send_voice_msg.png)
+![img](@static/images/uikitrn/chat_detail_send_voice_msg.png)
 
 ## 自定义实现
 
@@ -122,9 +122,9 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/rnuikit/chat_detail_msg_list_item_custom_1.png)
-![img](@static/images/rnuikit/chat_detail_msg_list_item_custom_2.png)
-![img](@static/images/rnuikit/chat_detail_msg_list_item_custom_3.png)
+<img src=@static/images/uikitrn/chat_detail_msg_list_item_custom_1.png  width="200"/>&nbsp;&nbsp;
+<img src=@static/images/uikitrn/chat_detail_msg_list_item_custom_2.png  width="200"/>&nbsp;&nbsp;
+<img src=@static/images/uikitrn/chat_detail_msg_list_item_custom_3.png  width="200"/>
 
 ### 自定义背景色  
 
@@ -153,7 +153,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/rnuikit/chat_detail_bg.png)
+![img](@static/images/uikitrn/chat_detail_bg.png)
 
 ### 自定义时间标签显示和隐藏
 
@@ -182,7 +182,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/rnuikit/chat_detail_time_label.png)
+![img](@static/images/uikitrn/chat_detail_time_label.png)
 
 ### 自定义点击消息气泡回调
 
@@ -228,7 +228,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/rnuikit/chat_detail_msg_list_item_long_press.png)
+![img](@static/images/uikitrn/chat_detail_msg_list_item_long_press.png)
 
 ### 自定义发送消息前回调
 
