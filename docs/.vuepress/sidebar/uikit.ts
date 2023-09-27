@@ -18,18 +18,18 @@ const uikitSidebar = [
         collapsible: 子菜单是否允许展开/收起，true: 允许; false: 不允许。请参考「子菜单示例」
         children: 子菜单。请参考「子菜单示例」
     */
-    text: 'UIKit 介绍', link: 'overview.html'
+    text: 'UIKit 介绍', link: 'overview.html',
     except: ['android', 'ios']
   },
   {
-    text: '快速开始', link: 'quickstart.html'
+    text: '快速开始', link: 'quickstart.html',
   },
   {
-    text: '集成聊天页面', link: 'key_function_chat_page.html'
+    text: '集成聊天页面', link: 'key_function_chat_page.html',
     except: ['android', 'ios']
   },  
   {
-    text: '集成会话列表页面', link: 'key_function_conversation_list.html'
+    text: '集成会话列表页面', link: 'key_function_conversation_list.html',
     except: ['android', 'ios']
   }
 ]
