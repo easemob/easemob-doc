@@ -81,12 +81,12 @@ export const zhNavbar = navbar([
          {
            text: 'Android',
            icon: '/icon-Android.svg',
-           link: '/uikit/android/overview.html'
+           link: '/uikit/android/quickstart.html'
          },
          {
            text: 'iOS',
            icon: '/icon-iOS.svg',
-           link: '/uikit/ios/overview.html'
+           link: '/uikit/ios/quickstart.html'
          },
         //  {
         //    text: 'Web',
