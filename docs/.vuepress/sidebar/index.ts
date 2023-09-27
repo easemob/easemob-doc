@@ -1,5 +1,6 @@
 import { sidebar } from "vuepress-theme-hope";
 import { DOC_SIDEBAR } from "./document"
+import { UIKIT_SIDEBAR } from "./uikit"
 import { PRIVATE_IM_SIDEBAR, PRIVATE_MEDIA_SIDEBAR } from './private'
 import { PUSH_SIDEBAR } from './push'
 
@@ -116,15 +117,6 @@ export const zhSidebar = sidebar({
           },  
         ]}, 
     ]},
-
-    {
-      text: '私有化集成',
-      children: [
-        { text: '私有化部署流程', link: 'uc_deploy.html' },
-        { text: 'SDK 及 Demo 下载', link: 'uc_private.html' },
-        { text: '环信通下载', link: 'uc_overview.html' },
-      ]
-    },
     {
       text: '常见方案',
       children: [
@@ -155,6 +147,7 @@ export const zhSidebar = sidebar({
     },
   ],
   ...DOC_SIDEBAR,
+  ...UIKIT_SIDEBAR,
   '/private/im/': PRIVATE_IM_SIDEBAR,
   '/private/media/': PRIVATE_MEDIA_SIDEBAR,
   '/push': PUSH_SIDEBAR

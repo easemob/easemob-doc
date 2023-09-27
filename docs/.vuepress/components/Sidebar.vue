@@ -2,16 +2,19 @@
   import Sidebar from "vuepress-theme-hope/modules/sidebar/components/Sidebar.js";
   import PlatformSwitch from './PlatformSwitch.vue'
   import PrivateSwitch from './PrivateSwitch.vue'
+  import UIKitSwitch from './UIKitSwitch.vue'
   import { usePageData } from '@vuepress/client'
   import { ref, watch } from 'vue'
 
   const pageData = usePageData()
   const showPlatformSwitch = ref(false)
   const showPrivateSwitch = ref(false)
+  const showUIKitSwitch = ref(false)
   watch(pageData, ()=> {
     const pagePath = pageData.value.path
     showPrivateSwitch.value = pagePath.indexOf('/private/') == 0
     showPlatformSwitch.value = pagePath.indexOf('/document/') == 0
+    showUIKitSwitch.value = pagePath.indexOf('/uikit/') == 0
   }, {immediate:true})
 
 
@@ -27,6 +30,11 @@
        <div v-show="showPrivateSwitch" class="platform-switch">
         <ClientOnly>
           <PrivateSwitch />
+        </ClientOnly>
+      </div>
+      <div v-show="showUIKitSwitch" class="platform-switch">
+        <ClientOnly>
+          <UIKitSwitch />
         </ClientOnly>
       </div>
     </template>

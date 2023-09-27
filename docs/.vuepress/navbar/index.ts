@@ -3,7 +3,7 @@ import { navbar } from "vuepress-theme-hope";
 export const zhNavbar = navbar([
   { text: '产品简介', link: '/product/introduction.html' },
   {
-     text: '集成文档', 
+     text: 'SDK/REST 集成', 
      children: [
       {
         text: '平台',
@@ -70,9 +70,68 @@ export const zhNavbar = navbar([
        }
       ]  
     },
-  ]
-},  
-
+    ]
+  }, 
+  // {
+  //   text: 'UIKit', 
+  //   children: [
+  //    {
+  //      text: '平台',
+  //      children: [
+  //        {
+  //          text: 'Android',
+  //          icon: '/icon-Android.svg',
+  //          link: '/uikit/android/overview.html'
+  //        },
+  //        {
+  //          text: 'iOS',
+  //          icon: '/icon-iOS.svg',
+  //          link: '/uikit/ios/overview.html'
+  //        },
+  //       //  {
+  //       //    text: 'Web',
+  //       //    icon: '/icon-web.svg',
+  //       //    link: '/uikit/web/overview.html'
+  //       //  },
+  //       //  {
+  //       //    text: 'Windows',
+  //       //    icon: '/icon-windows.svg',
+  //       //    link: '/uikit/windows/overview.html'
+  //       //  }
+  //      ]
+  //    },
+  //    {
+  //      text: '框架',
+  //      children: [
+  //        {
+  //          text: 'React Native',
+  //          icon: '/icon-ReactNative.svg',
+  //          link: '/uikit/react-native/overview.html'
+  //        },
+  //        {
+  //          text: 'Flutter',
+  //          icon: '/icon-flutter.svg',
+  //          link: '/uikit/flutter/overview.html'
+  //        },
+  //       //  {
+  //       //    text: 'Unity',
+  //       //    icon: '/icon-unity.svg',
+  //       //    link: '/uikit/unity/overview.html'
+  //       //  },
+  //       //  {
+  //       //    text: '小程序',
+  //       //    icon: '/icon-mini-program.svg',
+  //       //    link: '/uikit/applet/overview.html'
+  //       //  },
+  //       //  {
+  //       //    text: 'uni-app',
+  //       //    icon: '/icon-uni-app.svg',
+  //       //    link: '/uikit/applet/uniapp.html'
+  //       //  },
+  //      ]
+  //    },
+  //  ]
+  // },  
   {
      text: 'API 参考',
      children: [

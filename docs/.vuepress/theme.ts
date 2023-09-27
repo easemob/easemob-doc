@@ -25,7 +25,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   displayFooter: true,
   headerDepth: 2,
   extra_nav: [
-    { text: '提交工单', link: 'https://console.easemob.com/ticket', type: 'info' },
+    // { text: '提交工单', link: 'https://console.easemob.com/ticket', type: 'info' },
     { text: '登录', link: 'https://console.easemob.com/user/login', type: 'success' },
     { text: '注册', link: 'https://console.easemob.com/user/register', type: 'primary' }
   ],
