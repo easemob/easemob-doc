@@ -1,398 +1,1058 @@
-# iOS 端 EaseCallKit 使用指南
+# EaseIMKit 使用指南
 
 <Toc />
 
-## 功能概述
+仍在使用旧版 EaseUI 的用户可参考旧版 EaseUI 的文档，旧版已不再维护。 旧版文档地址：[EaseUI 集成](https://docs-im.easemob.com/im/ios/other/easeui)
 
-`EaseCallKit` 是一套基于声网音视频服务，使用环信 IM 作为信令通道的开源音视频 UI 库。UI 库提供了单人语音通话、视频通话，以及多人会议的功能接口。
+## 简介
 
-使用 `EaseCallKit` 库可以快速实现常用的音视频场景，通过信令的交互确认，保证 **用户多端登录时，收到呼叫同时振铃，一端处理后，其他端自动停止**。
+EaseIMKit 是什么？
 
-`EaseCallKit` 库在 Github 上进行了保存，请参见 [EaseCallKit iOS 端使用指南](https://github.com/easemob/easecallkitui-ios)。
+EaseIMKit 是基于环信 IM SDK 的一款 UI 组件库，它提供了一些通用的 UI 组件，例如 ‘会话列表’、‘聊天界面’ 和 ‘联系人列表’ 等，开发者可根据实际业务需求通过该组件库快速地搭建自定义 IM 应用。EaseIMKit 中的组件在实现 UI 功能的同时，调用 IM SDK 相应的接口实现 IM 相关逻辑和数据的处理，因而开发者在使用 EaseIMKit 时只需关注自身业务或个性化扩展即可。
 
-**`EaseCallKit` 在通话过程中，使用环信 ID 加入频道，方便音视频视图中显示用户名。如果用户不使用 `EaseCallKit` 而直接调用声网 API，也可以直接使用数字 UID 加入频道。**
+EaseIMKit 源码地址
 
-:::notice
-本 UI 库只和移动端 3.8.0 以上版本 Demo 互通。3.8.1 的 UI 库使用声网数字 UID 加入频道，而 3.8.0 使用字符串加入频道，3.8.1 版本不与 3.8.0 互通，Demo 中 EaseCallKit 使用的 token 和 UID 均由你自己生成。若你需要使用声网对应的音视频服务，需单独在声网申请。
-:::
+- [EaseIMKit 工程](https://github.com/easemob/easeui_ios/tree/EaseIMKit)
 
-## 跑通 Demo
+使用 EaseIMKit 环信 IM App 地址：
 
-`EaseCallKit` 集成在环信提供的开源 IM Demo 中，你可以通过进入 [环信 IM Demo 下载页面](https://www.easemob.com/download/im)，选择 iOS 端 Demo 下载，或直接进入 [Github 开源网站](https://github.com/easemob/chat-ios) 下载。
+- [环信 IM](https://github.com/easemob/chat-ios)
 
-- 安装 SDK 与 `EaseCallKit`
+## 导入
 
-Demo 源码中不涉及 SDK 和 `EaseCallKit`，你可以通过直接导入或通过 CocoaPods 安装。
+### 支持系统版本要求
 
-如果当前系统上没有安装 CocoaPods，需参考 [CocoaPods 安装说明](https://guides.cocoapods.org/using/getting-started.html)进行安装。
-
-使用 CocoaPods 安装需要进入 `podfile` 所在目录，然后在终端执行如下命令：
-
-```
-pod install
-```
-
-- 运行 demo
-
-安装完成 SDK 与 `EaseCallKit` 后，在 Xcode 打开工作空间 `EaseIM.xcworkspace`，连接手机，然后就可以运行了。
-
-## 准备条件
-
-在集成该库前，你需要满足以下条件：
-
-- 分别创建 [环信应用](/product/enable_and_configure_IM.html) 及 [声网应用](https://docportal.shengwang.cn/cn/video-legacy/run_demo_video_call_ios?platform=iOS#1-创建声网项目)；
-- 已完成环信 IM 的基本功能，包括登录、好友、群组以及会话等的集成；
-- 上线之前开通声网 token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 token。利用 App Server 生成 token 的过程参见 [声网 token](https://docportal.shengwang.cn/cn/video-call-4.x/token_server_ios_ng?platform=iOS)。
+- EaseIMKit 支持 iOS 10.0 及以上系统版本
+- EaseIM 支持 iOS 11.0 及以上系统版本
 
 ## 快速集成
 
-使用 `EaseCallKit` 库完成音视频通话的基本流程如下：
-
-1. 用户调用 `EaseCallKit` 库初始化接口；
-2. 主叫方调用发起通话邀请接口，自动进入通话页面；
-3. 被叫方自动弹出通话请求页面，在 UI 界面选择接听，进入通话；
-4. 结束通话时，点击 UI 界面挂断按钮。
-
-### 导入 EaseCallKit 库
-
-`EaseCallKit` UI 库依赖于 `HyphenateChat`、`AgoraRtcEngine_iOS`、`Masonry` 和 `SDWebImage` 库，导入该 UI 库时需要同步导入工程，依赖库可通过 CocoaPods 导入。
-
-**`EaseCallKit` 是动态库，在 `podfile` 中必须加入 `use_frameworks!`**。
-
-`EaseCallKit` 库可通过手动导入，也可利用 CocoaPods 导入。
-
-#### 使用 CocoaPods 导入 EaseCallKit
-
-- 在 Terminal 里进入项目根目录，并运行 `pod init` 命令。项目文件夹下会生成一个 `Podfile` 文本文件。
-- 打开 `Podfile` 文件，修改文件为如下内容。注意将 `AppName` 替换为你的 app 名称。
+### pod 方式集成
 
 ```
-use_frameworks!
-target 'AppName' do
-    pod 'HyphenateChat'
-    pod 'Masonry'
-    pod 'AgoraRtcEngine_iOS'
-    pod 'SDWebImage'
-    pod 'EaseCallKit', '~> version'
-end
+pod 'EaseIMKit'
 ```
 
-- 在 Terminal 内运行 `pod update` 命令更新本地库版本。
-- 运行 `pod install` 命令安装 `EaseCallKit` UI 库。成功安装后，Terminal 中会显示 **Pod installation complete!**，此时项目文件夹下会生成一个 `xcworkspace` 文件。
-- 打开新生成的 `xcworkspace` 文件，连接手机，运行 demo。
+需要在 `Podfile` 文件加上 `use_frameworks!`
 
-#### 手动导入 EaseCallKit
+:::notice
+EaseIMKit: 对应 HyphenateChat SDK（HyphenateChat 不包含实时音视频，EaseIMKit 不包含音视频，EaseIM 依赖音视频库 EaseCallKit 后实现了音视频功能）
 
-- 将在跑通 Demo 阶段下载的 `EaseCallKit.framework` 复制到项目工程目录下；
-- 打开 Xcode，选择 **工程设置** > **General** 菜单，将 `EaseCallKit.framework` 拖拽到工程下，在 `Frameworks`、`libraries` 和 `Embedded Content` 中设置 `EaseCallKit.framework` 为 `Embed & Sign`。
+EaseIMKit 中包含了拍照，发语音，发图片，发视频，发位置，发文件的功能，需要使用录音，摄像头，相册，地理位置的权限。需要在您项目的 info.plist 中添加对应权限。
+:::
 
-### 添加权限
+### 源码集成
 
-应用需要音频设备及摄像头权限。在 `info.plist` 文件中，点击 `+` 图标，添加如下信息：
+- [Github 下载源码](https://github.com/easemob/easeui_ios.git)
 
-| Key                                    | Type   | Value                                   |
-| :------------------------------------- | :----- | :-------------------------------------- |
-| Privacy - Microphone Usage Description | String | 描述信息，如“环信需要使用您的麦克风”。  |
-| Privacy - Camera Usage Description     | String | 描述信息，如“环信需要使用您的摄像头” 。 |
+执行命令：`git clone https://github.com/easemob/easeui_ios.git`
 
-如果希望在后台运行，还需要添加后台运行音视频权限，在 `info.plist` 文件中，点击 `+` 图标，添加 `Required background modes`，`Type` 为 `Array`，在 `Array` 下添加元素 `App plays audio or streams audio/video using AirPlay`。
+- 创建 `Podfile` 文件并添加 EaseIMKit 源码依赖
+
+  1. 项目 `Podfile` 文件 和 `ProjectName.xcodeproj` 文件应在同一目录，如下图所示：
+
+  ![img](@static/images/ios/easeimkit1.png)
+
+  Podfile 文件示例：
+
+  ```
+  platform :ios, '11.0'
+
+  source 'https://github.com/CocoaPods/Specs.git'
+
+  target 'ProjectName' do
+      pod 'EaseIMKit',  :path => "../EaseUI/EaseIMKit"
+      pod 'HyphenateChat', '3.8.4'
+  end
+  ```
+
+  2. EaseIMKit path 路径（如：pod 'EaseIMKit', :path ⇒ “../EaseUI/EaseIMKit”）需指向 EaseIMKit.podspec 文件所在目录，如下图所示：
+
+  ![img](@static/images/ios/easeimkit2.png)
+
+- 项目集成本地 EaseIMKit 源码
+
+  1. 终端 cd 到 Podfile 文件所在目录，执行 pod install 命令在项目中安装 EaseIMKit 本地源码
+  2. 执行完成后，则在 Xcode 项目目录 Pods/Development Pods/ 可找到 EaseIMKit 源码，如下图所示：
+
+  ![img](@static/images/ios/easeimkit3.png)
+
+  3. 可对源码进行符合自己项目目标的自定义修改
+
+- 成为社区贡献者
+
+如果在源码自定义过程中有任何通用自定义都可以给我们 [Github 仓库](https://github.com/easemob/easeui_ios.git) 提交代码成为社区贡献者！
 
 ### 初始化
 
-在环信 IM SDK 初始化完成后，同时初始化 `EaseCallKit`，初始化的同时开启回调监听，设置常用配置项。代码如下：
+第 1 步：引入相关头文件
 
 ```objectivec
-EaseCallConfig* config = [[EaseCallConfig alloc] init];
-EaseCallUser* usr = [[EaseCallUser alloc] init];
-usr.nickName = @"自定义昵称";
-usr.headImage = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"headImage" ofType:@"png"]];
-config.users = @{@"环信 ID":usr};
-config.agoraAppId=@"声网 AppID";
-[[EaseCallManager sharedManager] initWithConfig:config delegate:self];
+#import <EaseIMKit/EaseIMKit.h>
 ```
 
-可设置的配置项包括以下内容：
+第 2 步：在在工程的 AppDelegate 中的以下方法中调用 EaseIMKitManager 的初始化方法一并初始化环信 SDK。(注: 此方法不需要重复调用)
 
 ```objectivec
-@interface EaseCallConfig : NSObject
-// 默认头像。  
-@property (nonatomic)  NSURL*  defaultHeadImage;
-// 呼叫超时时间，单位为秒。
-@property (nonatomic) UInt32 callTimeOut;
-// 用户信息字典，key 为环信 ID，value 为 `EaseCallUser`。
-@property (nonatomic) NSMutableDictionary* users;
-// 振铃文件。
-@property (nonatomic) NSURL* ringFileUrl;
-// 声网 appId。
-@property (nonatomic) NSString* agoraAppId;
-// 声网 token 验证开关，默认不开启。
-@property (nonatomic) BOOL enableRTCTokenValidate
-@end
-```
-
-### 发起通话邀请
-
-`EaseCallKit` 初始化完成后，可以开始发起音视频通话。
-
-#### 一对一音视频通话
-
-一对一通话分为语音通话与视频通话，发起过程如下：
-
-```objectivec
-// 发起一对一通话。
-// remoteUser   邀请对象的环信 ID。
-// type   通话类型。`EaseCallType1v1Audio` 表示语音通话，`EaseCallType1v1Video` 表示视频通话。 
-// ext    通话扩展信息，为用户信息字典。
-[[EaseCallManager sharedManager] startSingleCallWithUId:remoteUser type:aType ext:nil completion:^(NSString * callId, EaseCallError * aError) {
-    
-}];
-```
-
-#### 多人音视频通话
-
-你可以从群组成员列表或者好友列表中选择用户，发起多人音视频通话。具体实现可参考 Demo 中的 `ConfInviteUsersViewController`。
-
-```objectivec
-//邀请用户加入多人通话。 
-// aInviteUsers   受邀用户的环信 ID 数组。
-// ext   可设置扩展信息，如果从群组发起，可通过 `ext` 设置群组 ID，其他用户也可邀请该群组成员。
-[[EaseCallManager sharedManager] startInviteUsers:aInviteUsers ext:@{@"groupId":aConversationId} completion:^(NSString * callId, EaseCallError * aError) {
-    
-}];
-```
-
-发起通话后的 UI 界面如下：
-
-<img src="@static/images/ios/sendcall.png" width="400" />
-
-### 收到邀请
-
-主叫方调用邀请接口后，如果被叫方在线且并未处于通话过程中，将弹出通话页面，被叫用户可选择接听或者拒绝。通话页面如下：
-
-<img src="@static/images/ios/recvcall.png" width="400" />
-
-被叫振铃的同时，会触发以下回调：
-
-```objectivec
-- (void)callDidReceive:(EaseCallType)aType inviter:(NSString*_Nonnull)user ext:(NSDictionary*)aExt
-  {
-
-  }
-```
-
-### 多人通话中间发起邀请
-
-多人通话中，当前用户可以点击通话界面右上角的邀请按钮再次向其他用户发起邀请。这种情况下，会触发 `EaseCallKitListener` 中的 `multiCallDidInvitingWithCurVC` 回调：
-
-```objectivec
-// 多人音视频邀请按钮的回调。
-// vc     当前视图控制器。
-// users  通话中已存在的用户。
-// aExt   通话扩展信息。
-- (void)multiCallDidInvitingWithCurVC:(UIViewController*_Nonnull)vc excludeUsers:(NSArray<NSString*> *_Nullable)users ext:(NSDictionary *)aExt
-  {
-    //若只邀请群组中的用户加入通话，发起通话时在扩展信息里添加 `groupId`。 
-    NSString* groupId = nil;
-    if(aExt) {
-        groupId = [aExt objectForKey:@"groupId"];
-    }
-
-    ConfInviteUsersViewController * confVC = nil;
-    if([groupId length] == 0) {
-        confVC = [[ConfInviteUsersViewController alloc] initWithType:ConfInviteTypeUser isCreate:NO excludeUsers:users groupOrChatroomId:nil];
-    }else{
-        confVC = [[ConfInviteUsersViewController alloc] initWithType:ConfInviteTypeGroup isCreate:NO excludeUsers:users groupOrChatroomId:groupId];
-    }
-    [confVC setDoneCompletion:^(NSArray *aInviteUsers) {
-        [[EaseCallManager sharedManager] startInviteUsers:aInviteUsers ext:aExt completion:nil];
-    }];
-    confVC.modalPresentationStyle = UIModalPresentationPopover;
-    [vc presentViewController:confVC animated:NO completion:nil];
-  }
-  
-```
-
-通话邀请界面的实现，可以参考 Demo 中的 `ConfInviteUsersViewController` 实现。
-
-### 当前用户成功加入频道回调
-
-自 `EaseCallKit` 3.8.1 新增 `callDidJoinChannel` 方法，在用户加入通话后会收到回调：
-
-```objectivec
-- (void)callDidJoinChannel:(NSString*_Nonnull)aChannelName uid:(NSUInteger)aUid
-  {
-    //此时，可以获取当前频道中已有用户的声网 ID 与环信 ID 的映射表，并将映射表设置到 `EaseCallKit`，同时也可以更新用户的头像和昵称。
-    //[self _fetchUserMapsFromServer:aChannelName];
-    [[EaseCallManager sharedManager] setUsers:users channelName:channelName];
-  }
-  
-```
-
-### 对方成功加入频道回调
-
-自 `EaseCallKit` 3.8.1 新增 `remoteUserDidJoinChannel` 方法，在对方用户加入通话后会收到回调。
-
-```objectivec
--(void)remoteUserDidJoinChannel:( NSString*_Nonnull)aChannelName uid:(NSInteger)aUid username:(NSString*_Nullable)aUserName
-{
-    // 此时，可以获取当前频道中已有用户的声网 RTC UID 与环信 ID 的映射表，并将映射表设置到 `EaseCallKit`，同时也可以更新用户的头像和昵称。
-    //[self _fetchUserMapsFromServer:aChannelName];
-    [[EaseCallManager sharedManager] setUsers:users channelName:channelName];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+    EMOptions *options = [EMOptions optionsWithAppkey:@"您的APPKEY"];
+    [EaseIMKitManager initWithEMOptions:options];
+    //再做登录操作，可准确接收到系统通知
+    return YES;
 }
 ```
 
-### 通话结束
+EaseIMKitManager 主要包含系统通知（好友申请，群邀请/申请）回调，未读总数回调等方法。 用户需要注册自己的类到 EaseIMKitManagerDelegate 才可收到未读总数变化回调。 用户需要添加 EaseIMKitSystemNotiDelegate 代理才可收到系统通知相关回调。
 
-在一对一音视频通话中，若其中一方挂断，双方的通话会自动结束，而多人音视频通话中需要主动挂断才能结束通话。通话结束后，会触发 `callDidEnd` 回调：
+系统通知相关回调接口，系统通知构造成了一个本地会话，每个新通知构造为一条本地消息。 系统通知所构造的会话的 conversationId 为 @“emsystemnotificationid”。
+
+#### 是否需要系统通知
 
 ```objectivec
-// 通话结束回调。
-// aChannelName  通话使用的声网频道名称，用户可以根据频道名称，到声网 Console 的水晶球查询通话质量。
-// aTm    通话时长，单位为秒。
-// aCallType  通话类型。
-- (void)callDidEnd:(NSString*)aChannelName reason:(EaseCallEndReason)aReason time:(int)aTm type:(EaseCallType)aCallType
-  {
-    NSString* msg = @"";
-    switch (aReason) {
-        case EaseCallEndReasonHandleOnOtherDevice:
-            msg = @"已在其他设备处理。";
-            break;
-        case EaseCallEndReasonBusy:
-            msg = @"对方忙。";
-            break;
-        case EaseCallEndReasonRefuse:
-            msg = @"对方拒绝接听。";
-            break;
-        case EaseCallEndReasonCancel:
-            msg = @"您已取消通话。";
-            break;
-        case EaseCallEndReasonRemoteCancel:
-            msg = @"对方取消通话。";
-            break;
-        case EaseCallEndReasonRemoteNoResponse:
-            msg = @"对方无响应。";
-            break;
-        case EaseCallEndReasonNoResponse:
-            msg = @"您未接听。";
-            break;
-        case EaseCallEndReasonHangup:
-            msg = [NSString stringWithFormat:@"通话已结束，通话时长：%d秒",aTm];
-            break;
-        default:
-            break;
+/*!
+ @method
+ @brief 是否需要系统通知：好友/群 申请等
+ @discussion  默认需要系统通知
+ @result 返回： YES：需要； NO：不需要；
+ */
+- (BOOL)isNeedsSystemNotification;
+```
+
+#### 收到系统通知所展示信息回调接口
+
+```objectivec
+/*!
+ @method
+ @brief 收到请求返回展示信息
+ @param   conversationId   会话 ID。
+   * 对于单聊类型，会话 ID 同时也是对方用户的名称。
+   * 对于群聊类型，会话 ID 同时也是对方群组的 ID，并不同于群组的名称。
+   * 对于聊天室类型，会话 ID 同时也是聊天室的 ID，并不同于聊天室的名称。
+
+ @param   requestUser   请求方。
+ @param   reason   请求原因。
+ @result    返回系统通知所展示信息。
+ */
+- (NSString *)requestDidReceiveShowMessage:(NSString *)conversationId requestUser:(NSString *)requestUser reason:(EaseIMKitCallBackReason)reason;
+```
+
+对于返回值处理：空字符串不产生新 message / nil：使用默认实现 / 非空字符串且长度大于 0，使用该字符串产生新 message
+
+#### 收到系统通知扩展信息回调接口
+
+```objectivec
+/*!
+ @method
+ @brief 收到请求返回扩展信息
+ @param   conversationId   会话 ID。
+   * 对于单聊类型，会话 ID 同时也是对方用户的名称。
+   * 对于群聊类型，会话 ID 同时也是对方群组的 ID，并不同于群组的名称。
+   * 对于聊天室类型，会话 ID 同时也是聊天室的 ID，并不同于聊天室的名称。
+
+ @param   requestUser   请求方。
+ @param   reason   请求原因。
+ @result    返回系统通知携带扩展信息字典。
+ */
+- (NSDictionary *)requestDidReceiveConversationExt:(NSString *)conversationId requestUser:(NSString *)requestUser reason:(EaseIMKitCallBackReason)reason;
+```
+
+#### 未读总数变化回调接口
+
+```objectivec
+/*!
+ @method
+ @brief 会话未读总数变化。
+ @param   unreadCount     当前会话列表的总未读数。
+ */
+- (void)conversationsUnreadCountUpdate:(NSInteger)unreadCount;
+```
+
+## 快速搭建
+
+### 聊天会话快速搭建
+
+导入 EaseIMKit 头文件
+
+```objectivec
+#import <EaseIMKit/EaseIMKit.h>
+```
+
+EaseIMKit 提供现成的聊天会话 ViewController，可以通过创建 EaseChatViewController 对象实例，嵌入进自己的聊天控制器方式（参考 EaseIM 中 EMChatViewController）实现对 EaseIMKit 聊天会话的集成。 创建聊天会话页实例，需传递用户‘环信 ID’或‘群 ID’ ，会话类型（EMConversationType）以及必须传入聊天视图配置数据模型 EaseChatViewModel 实例。
+
+```objectivec
+EaseChatViewModel *viewModel = [[EaseChatViewModel alloc]init];
+EaseChatViewController *chatController = [EaseChatViewController initWithConversationId:@"custom"
+                                              conversationType:EMConversationTypeChat
+                                                  chatViewModel:viewModel];
+[self addChildViewController:chatController];
+[self.view addSubview:chatController.view];
+chatController.view.frame = self.view.bounds;
+```
+
+聊天控制器嵌入自己的聊天页后还需传入消息列表 messageList 以供 EaseChatViewController 展示使用
+
+```objectivec
+//isScrollBottom 是否滑动到页面底部
+- (void)loadData:(BOOL)isScrollBottom
+{
+    __weak typeof(self) weakself = self;
+    void (^block)(NSArray *aMessages, EMError *aError) = ^(NSArray *aMessages, EMError *aError) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //给 EaseChatViewController 传入消息列表messageList
+            //isScrollBottom 是否滑动到页面底部 isInsertBottom 消息数据集是否插入消息列表底部
+            //在传入消息列表之前不需要对列表做任何处理，只需传入列表数据即可，否则会刷新 UI 失败
+            [weakself.chatController refreshTableViewWithData:aMessages  isInsertBottom:NO  isScrollBottom:isScrollBottom];
+        });
+    };
+  [self.conversation loadMessagesStartFromId:nil count:50   searchDirection:EMMessageSearchDirectionUp completion:block];
+}
+```
+
+### 会话列表快速搭建
+
+导入 EaseIMKit 头文件
+
+```objectivec
+#import <EaseIMKit/EaseIMKit.h>
+```
+
+在自己聊天控制器内可嵌入 EaseIMKit 的会话列表页，创建会话列表实例，实例化会话列表必须传入会话列表视图数据配置模型 EaseConversationViewModel 实例。
+
+```objectivec
+EaseConversationViewModel *viewModel = [[EaseConversationViewModel alloc] init];
+
+EaseConversationsViewController *easeConvsVC = [[EaseConversationsViewController alloc] initWithModel:viewModel];
+easeConvsVC.delegate = self;
+[self addChildViewController:easeConvsVC];
+[self.view addSubview:easeConvsVC.view];
+[easeConvsVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.size.equalTo(self.view);
+}];
+```
+
+### 通讯录快速搭建
+
+导入 EaseIMKit 头文件
+
+```objectivec
+#import <EaseIMKit/EaseIMKit.h>
+```
+
+在自己聊天控制器内可嵌入 EaseIMKit 的会话列表页，创建通讯录实例，必须传入通讯录视图数据模型 EaseContactsViewModel 实例以构建通讯录 UI 界面。
+
+```objectivec
+EaseContactsViewModel *model = [[EaseContactsViewModel alloc] init];
+EaseContactsViewController *contactsVC = [[EaseContactsViewController alloc] initWithModel:model];
+//通讯录头部功能区（加好友/群聊/聊天室 入口）
+contactsVC.customHeaderItems = [self items];
+contactsVC.delegate = self;
+[self addChildViewController:contactsVC];
+[self.view addSubview:contactsVC.view];
+[contactsVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.size.equalTo(self.view);
+}];
+//设置通讯录头部功能区实例（EaseIM APP 有效）：
+- (NSArray<EaseUserDelegate> *)items {
+    EMContactModel *newFriends = [[EMContactModel alloc] init];
+    newFriends.huanXinId = @"newFriend";
+    newFriends.nickname = @"新的好友";
+    newFriends.avatar = [UIImage imageNamed:@"newFriend"];
+    EMContactModel *groups = [[EMContactModel alloc] init];
+    groups.huanXinId = @"groupList";
+    groups.nickname = @"群聊";
+    groups.avatar = [UIImage imageNamed:@"groupchat"];
+    EMContactModel *chatooms = [[EMContactModel alloc] init];
+    chatooms.huanXinId = @"chatroomList";
+    chatooms.nickname = @"聊天室";
+    chatooms.avatar = [UIImage imageNamed:@"chatroom"];
+    return (NSArray<EaseUserDelegate> *)@[newFriends, groups, chatooms];
+}
+```
+
+## 设置样式
+
+### 聊天会话样式配置
+
+聊天会话可配置参数如下：
+
+```objectivec
+@property (nonatomic, strong) UIColor *chatViewBgColor; //聊天页背景色
+@property (nonatomic, strong) UIColor *chatBarBgColor; //输入区背景色
+@property (nonatomic, strong) EaseExtFuncModel *extFuncModel; //输入区扩展功能数据模型
+@property (nonatomic, strong) UIColor *msgTimeItemBgColor; //时间线背景色
+@property (nonatomic, strong) UIColor *msgTimeItemFontColor; //时间线字体颜色
+@property (nonatomic, strong) UIImage *receiveBubbleBgPicture; //所接收信息的气泡
+@property (nonatomic, strong) UIImage *sendBubbleBgPicture; //所发送信息的气泡
+@property (nonatomic, strong) UIColor *contentFontColor; //文本消息字体颜色
+@property (nonatomic) CGFloat contentFontSize;  //文本消息字体大小
+@property (nonatomic) UIEdgeInsets bubbleBgEdgeInset; //消息气泡背景图保护区域
+@property (nonatomic) EaseInputBarStyle inputBarStyle; //输入区类型：(全部功能，无语音，无表情，无表情和语音，纯文本)
+@property (nonatomic) EaseAvatarStyle avatarStyle; //头像风格
+@property (nonatomic) CGFloat avatarCornerRadius; //头像圆角大小 默认：0 (只有头像类型是圆角生效)
+//仅群聊可设置
+@property (nonatomic) EaseAlignmentStyle msgAlignmentStyle; //聊天区域消息排列方式
+```
+
+其中参数：EaseExtFuncModel 输入区扩展功能数据配置模型(聊天会话页相机，相册，音视频等区域)内含可配参数：
+
+```objectivec
+@property (nonatomic, strong) UIColor *iconBgColor;//图标所在 view 背景色
+@property (nonatomic, strong) UIColor *viewBgColor;//视图背景色
+@property (nonatomic, strong) UIColor *fontColor;//字体颜色
+@property (nonatomic, assign) CGFloat fontSize;//字体大小
+@property (nonatomic, assign) CGSize collectionViewSize;//视图尺寸
+```
+
+其中参数：inputBarStyle（输入区）包含五种类型：
+
+```objectivec
+typedef NS_ENUM(NSInteger, EaseInputBarStyle) {
+    EaseInputBarStyleAll = 1,          //全部功能
+    EaseInputBarStyleNoAudio,          //无语音
+    EaseInputBarStyleNoEmoji,          //无表情
+    EaseInputBarStyleNoAudioAndEmoji,  //无表情和语音
+    EaseInputBarStyleOnlyText,         //纯文本
+};
+```
+
+其中参数：EaseAlignmentStyle （消息排列方式,仅群聊可生效）包含两种类型
+
+```objectivec
+typedef enum {
+    EaseAlignmentNormal = 1,     //左右排列
+    EaseAlignmentlLeft,          //居左排列
+} EaseAlignmentStyle;
+```
+
+实例化的聊天控制器可通过重置视图 UI 配置模型刷新页面
+
+```objectivec
+//重置聊天控制器
+- (void)resetChatVCWithViewModel:(EaseChatViewModel *)viewModel;
+```
+
+聊天页背景色，输入区颜色配置示例：
+
+![背景色，输入区颜色](@static/images/ios/easeimkit4.png)
+
+聊天会话输入区类型参数配置示例：
+
+![全部功能，语音不可用，表情不可用，语音和表情不可用，纯文本](@static/images/ios/easeimkit5.png)
+
+输入区扩展功能参数配置示例：
+
+![输入区扩展](@static/images/ios/easeimkit6.jpeg)
+
+聊天会话群聊消息同左排列，时间线背景色，时间字体颜色配置示例：
+
+![群聊消息同左排列，时间线背景色，时间字体颜色](@static/images/ios/easeimkit7.jpeg)
+
+### 会话列表样式配置
+
+会话列表可配置参数如下：
+
+```objectivec
+@property (nonatomic) EaseAvatarStyle avatarType;   // 头像样式
+@property (nonatomic, strong) UIImage *defaultAvatarImage;  // 默认头像
+@property (nonatomic) CGSize avatarSize;    // 头像尺寸
+@property (nonatomic) UIEdgeInsets avatarEdgeInsets;   // 头像位置
+@property (nonatomic, strong) UIFont *nameLabelFont;   // 昵称字体
+@property (nonatomic, strong) UIColor *nameLabelColor;   // 昵称颜色
+@property (nonatomic) UIEdgeInsets nameLabelEdgeInsets;   // 昵称位置
+@property (nonatomic, strong) UIFont *detailLabelFont;   // 详情字体
+@property (nonatomic, strong) UIColor *detailLabelColor;    // 详情字色
+@property (nonatomic) UIEdgeInsets detailLabelEdgeInsets;   // 详情位置
+@property (nonatomic, strong) UIFont *timeLabelFont;    // 时间字体
+@property (nonatomic, strong) UIColor *timeLabelColor;  // 时间字色
+@property (nonatomic) UIEdgeInsets timeLabelEdgeInsets; // 时间位置
+@property (nonatomic) EMUnReadCountViewPosition badgeLabelPosition; // 未读数显示风格
+@property (nonatomic, strong) UIFont *badgeLabelFont;   // 未读数字体
+@property (nonatomic, strong) UIColor *badgeLabelTitleColor;    // 未读数字色
+@property (nonatomic, strong) UIColor *badgeLabelBgColor;   // 未读数背景色
+@property (nonatomic) CGFloat badgeLabelHeight;   // 未读数角标高度
+@property (nonatomic) CGVector badgeLabelCenterVector;  // 未读数中心位置偏移
+@property (nonatomic) int badgeMaxNum;   // 未读数显示上限, 超过上限后会显示 xx+
+```
+
+会话列表以及联系人列表共用其父类可配置参数如下：
+
+```objectivec
+@property (nonatomic) BOOL canRefresh;  // 是否可下拉刷新
+@property (nonatomic, strong) UIView *bgView;   // tableView 背景图
+@property (nonatomic, strong) UIColor *cellBgColor;  // UITableViewCell 背景色
+@property (nonatomic) UIEdgeInsets cellSeparatorInset;  // UITableViewCell 下划线位置
+@property (nonatomic, strong) UIColor *cellSeparatorColor;  // UITableViewCell 下划线颜色
+```
+
+### 通讯录样式配置
+
+通讯录可配置参数如下：
+
+```objectivec
+@property (nonatomic) EaseAvatarStyle avatarType;   // 头像样式
+@property (nonatomic, strong) UIImage *defaultAvatarImage;  // 默认头像
+@property (nonatomic) CGSize avatarSize;    // 头像尺寸
+@property (nonatomic) UIEdgeInsets avatarEdgeInsets;    // 头像位置
+@property (nonatomic, strong) UIFont *nameLabelFont;    // 昵称字体
+@property (nonatomic, strong) UIColor *nameLabelColor;  // 昵称颜色
+@property (nonatomic) UIEdgeInsets nameLabelEdgeInsets;  // 昵称位置
+@property (nonatomic, strong) UIFont *sectionTitleFont;  // section title 字体
+@property (nonatomic, strong) UIColor *sectionTitleColor;   // section title 颜色
+@property (nonatomic, strong) UIColor *sectionTitleBgColor;  // section title 背景
+@property (nonatomic) UIEdgeInsets sectionTitleEdgeInsets;  // section title 位置
+// section title label 高度 (section title view = sectionTitleLabelHeight + sectionTitleEdgeInsets.top + sectionTitleEdgeInsets.bottom)
+@property (nonatomic) CGFloat sectionTitleLabelHeight;
+```
+
+以及通讯录和会话列表共用的参数配置
+
+```objectivec
+@property (nonatomic) BOOL canRefresh;  // 是否可下拉刷新
+@property (nonatomic, strong) UIView *bgView;   // tableView 背景图
+@property (nonatomic, strong) UIColor *cellBgColor;  // UITableViewCell 背景色
+@property (nonatomic) UIEdgeInsets cellSeparatorInset;  // UITableViewCell 下划线位置
+@property (nonatomic, strong) UIColor *cellSeparatorColor;  // UITableViewCell 下划线颜色
+```
+
+通讯录添加头部功能区：新的好友，群聊，聊天室示意图：
+
+![头部功能区：新的好友，群聊，聊天室以及联系人列表](@static/images/ios/easeimkit8.png)
+
+## 自定义功能扩展
+
+### 聊天会话自定义功能扩展
+
+实例化 EaseChatViewController 之后，可选择实现 EaseChatViewControllerDelegate 协议（聊天控制器回调代理），接收 EaseChatViewController 的回调并做进一步的自定义实现。
+
+EaseChatViewControllerDelegate
+
+#### 下拉加载更多消息回调
+
+下拉加载更多消息回调（可得到当前第一条消息 ID 作为下次加载更多消息的参考 ID；当前消息列表）
+
+```objectivec
+/**
+ * 下拉加载更多消息回调
+ *
+ * @param   firstMessageId          第一条消息 ID
+ * @param   messageList             当前消息列表
+ */
+- (void)loadMoreMessageData:(NSString *)firstMessageId currentMessageList:(NSArray<EMMessage *> *)messageList;
+```
+
+#### 自定义 cell
+
+通过实现聊天控制回调获取自定义消息 cell，根据 messageModel，用户自己判断是否显示自定义消息 cell。如果返回 nil 会显示默认；如果返回 cell 会显示用户自定义消息 cell。
+
+```objectivec
+/*!
+ @method
+ @brief 获取消息自定义 cell
+ @discussion 用户根据 messageModel 判断是否显示自定义 cell。返回 nil 显示默认 cell，否则显示用户自定义 cell
+ @param tableView 当前消息视图的 tableView
+ @param messageModel 消息的数据模型
+ @result 返回用户自定义 cell
+ */
+- (UITableViewCell *)cellForItem:(UITableView *)tableView messageModel:(EaseMessageModel *)messageModel;
+```
+
+具体创建自定义 Cell 的示例：
+
+```objectivec
+//自定义通话记录cell
+- (UITableViewCell *)cellForItem:(UITableView *)tableView messageModel:(EaseMessageModel *)messageModel
+{
+    //当消息是单聊音视频通话消息时，EaseIM 自定义通话记录 cell
+    if (messageModel.type == EMMessageTypePictMixText) {
+        EMMessageCell *cell = [[EMMessageCell alloc]initWithDirection:messageModel.direction type:messageModel.type];
+        cell.model = messageModel;
+        cell.delegate = self;
+        return cell;
     }
-    if([msg length] > 0)
-       [self showHint:msg];
-  }
+    return nil;
+}
 ```
 
-## 进阶功能
+通过自定义 cell 展示单聊音视频通话记录的效果图：
 
-### 通话异常回调
+![自定义 cell 展示单聊音视频通话记录](@static/images/ios/easeimkit9.png)
 
-通话过程中如果有异常或者错误发生，会触发 `callDidOccurError` 回调：
+#### 选中消息的回调
 
-异常包括业务逻辑异常、音视频异常以及 Easemob IM 异常。
+选中消息的回调（EaseIMKit 没有对于自定义 cell 的选中事件回调，需用户自定义实现选中响应）
 
 ```objectivec
-// 通话异常回调。
-// aError 为异常信息，包括了 Easemob IM 异常，RTC 异常，业务异常三种情况。
-- (void)callDidOccurError:(EaseCallError *)aError
-  {
-
-  }
+/*!
+ @method
+ @brief 消息点击事件
+ @discussion 用户根据 messageModel 判断，是否自定义处理消息选中时间。返回 NO 为自定义处理，返回 YES 为默认处理
+ @param   message         当前点击的消息
+ @param   userData        当前点击的消息携带的用户资料
+ @result 是否采用默认事件处理
+*/
+- (BOOL)didSelectMessageItem:(EMMessage*)message userData:(id<EaseUserDelegate>)userData;
 ```
 
-`EaseCallError` 异常包括 IM 异常，RTC 异常以及业务逻辑异常。
+EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实现，例：EaseIM 单聊通话记录 cell 点击事件再次发起通话
 
 ```objectivec
-@interface EaseCallError : NSObject
-// 异常类型，包括 Easemob IM 异常、RTC 异常和业务逻辑异常。   
-@property (nonatomic) EaseCallErrorType aErrorType;
-// 异常代号。
-@property (nonatomic) NSInteger errCode;
-// 异常描述。
-@property (nonatomic) NSString* errDescription;
+- (void)messageCellDidSelected:(EMMessageCell *)aCell
+{
+    //使用‘通知’的方式发起通话，其中所定义的宏仅在 EaseIM APP 中生效
+    NSString *callType = nil;
+    NSDictionary *dic = aCell.model.message.ext;
+    if ([[dic objectForKey:EMCOMMUNICATE_TYPE] isEqualToString:EMCOMMUNICATE_TYPE_VOICE])
+        callType = EMCOMMUNICATE_TYPE_VOICE;
+    if ([[dic objectForKey:EMCOMMUNICATE_TYPE] isEqualToString:EMCOMMUNICATE_TYPE_VIDEO])
+        callType = EMCOMMUNICATE_TYPE_VIDEO;
+    if ([callType isEqualToString:EMCOMMUNICATE_TYPE_VOICE])
+        [[NSNotificationCenter defaultCenter] postNotificationName:CALL_MAKE1V1 object:@{CALL_CHATTER:aCell.model.message.conversationId, CALL_TYPE:@(EMCallTypeVoice)}];
+    if ([callType isEqualToString:EMCOMMUNICATE_TYPE_VIDEO])
+        [[NSNotificationCenter defaultCenter] postNotificationName:CALL_MAKE1V1 object:@{CALL_CHATTER:aCell.model.message.conversationId,   CALL_TYPE:@(EMCallTypeVideo)}];
+}
 ```
 
-### 配置修改
+#### 用户资料回调
 
-`EaseCallKit` 库初始化之后，可调用该方法修改配置：
+用户资料回调（头像昵称等）
 
 ```objectivec
-// 以下为修改铃声过程。 
-EaseCallConfig* config = [[EaseCallManager sharedManager] getEaseCallConfig];
-NSString* path = [[NSBundle mainBundle] pathForResource:@"huahai128" ofType:@"mp3"];
-config.ringFileUrl = [NSURL fileURLWithPath:path];
+/*!
+ @method
+ @brief 返回用户资料
+ @discussion 用户根据 huanxinID 在自己的用户体系中匹配对应的用户资料，并返回相应的信息，否则默认实现
+ @param   huanxinID        环信 ID
+ @result 返回与当前环信 ID 关联的用户资料
+ */
+- (id<EaseUserDelegate>)userData:(NSString*)huanxinID;
 ```
 
-### 头像昵称修改
-
-自 `EaseCallKit` 3.8.1 开始，新增了修改头像昵称的接口，用户加入频道后可修改自己和通话中其他人的头像昵称，修改方法如下：
+#### 用户选中头像的回调
 
 ```objectivec
-EaseCallUser* user = [EaseCallUser userWithNickName:info.nickName image:[NSURL URLWithString:info.avatarUrl]];
-[[[EaseCallManager sharedManager] getEaseCallConfig] setUser:username info:user];
+/*!
+ @method
+ @brief 点击消息头像
+ @discussion 获取用户点击头像回调
+ @param   userData        当前点击的头像所指向的用户资料
+ */
+
+- (void)avatarDidSelected:(id<EaseUserDelegate>)userData;
 ```
 
-## 参考
-
-### 获取声网 token
-
-用户加入音视频通话时，如果需要进行声网 token 鉴权，需要先开启 token 验证开关，开启过程如下：
+获取用户选中头像回调的样例：
 
 ```objectivec
-EaseCallUser* callUser = [[EaseCallUser alloc] init];
-config.enableRTCTokenValidate = YES;// 开启 RTC Token 验证，默认不开启。  
-[[EaseCallManager sharedManager] initWithConfig:config delegate:self];
+//头像点击
+- (void)avatarDidSelected:(id<EaseUserDelegate>)userData
+{
+    //EMPersonalDataViewController 用户自定义的个人信息视图
+    //样例逻辑是选中消息头像后，进入该消息发送者的个人信息页
+    if (userData && userData.easeId) {
+        EMPersonalDataViewController *controller = [[EMPersonalDataViewController alloc]initWithNickName:userData.easeId];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
 ```
 
-获取 token 的过程由用户自己完成，开启后在通话时，会收到 `callDidRequestRTCTokenForAppId`回调，用户需要在回调中，实现从用户自己的 App Server 中获取 token（App Server 的实现参见 [生成声网 Token](https://docportal.shengwang.cn/cn/video-call-4.x/token_server_ios_ng)，然后调用 `setRTCToken:channelName:` 接口。
+#### 用户长按头像的回调
 
 ```objectivec
-- (void)callDidRequestRTCTokenForAppId:(NSString * _Nonnull)aAppId
-      channelName:(NSString * _Nonnull)aChannelName
-          account:(NSString * _Nonnull)aUserAccount
-  {
-  [[EaseCallManager sharedManager] setRTCToken:@"自己的RTC Token"channelName:aChannelName];
-  }
+/*!
+ @method
+ @brief 点击消息头像
+ @discussion 获取用户长按头像回调
+ @param   userData        当前长按的头像所指向的用户资料
+ */
 
-// 自 EaseCallKit 3.8.1 版本开始，`callDidRequestRTCTokenForAppId` 方法中添加了 `uid` 参数，你可以使用数字 uid 加入声网频道。
-- (void)callDidRequestRTCTokenForAppId:(NSString *)aAppId channelName:(NSString *)aChannelName account:(NSString *)aUserAccount uid:(NSInteger)aAgoraUid
-  {
-    [[EaseCallManager sharedManager] setRTCToken:@"自己的RTC Token" channelName:aChannelName uid:自己的声网uid];
-  }
+- (void)avatarDidLongPress:(id<EaseUserDelegate>)userData;
 ```
 
-### 离线推送
+#### 群通知回执详情
 
-为保证被叫用户 App 在后台运行或离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [iOS SDK 集成](push.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。 关于离线推送场景方案，请参见 [iOS 端设置推送](push.html)。
+```objectivec
+/*!
+ @method
+ @brief 群通知回执详情
+ @discussion 获取用户点击群通知的回调（仅在群聊中并且是点击用户群主有效）
+ @param   message        当前群通知消息
+ @param   groupId        当前消息所属群 ID
+ */
 
-## API 列表
+- (void)groupMessageReadReceiptDetail:(EMMessage*)message groupId:(NSString*)groupId;
+```
 
-从 API 的角度看，`EaseCallKit` 库的主要包括管理模块 `EaseCallManager` 和回调模块 `EaseCallDelegate`。
+获取用户点击群通知回执详情的样例：
 
-管理模块 `EaseCallManager` 的 API 列表如下：
+```objectivec
+//群通知阅读回执详情
+- (void)groupMessageReadReceiptDetail:(EMMessage *)message groupId:(NSString *)groupId
+{
+    //EMReadReceiptMsgViewController用户自定义群通知阅读回执详情页（在 EaseIM APP 中有效）
+    EMReadReceiptMsgViewController *readReceiptControl = [[EMReadReceiptMsgViewController alloc] initWithMessage:message groupId:groupId];
+    readReceiptControl.modalPresentationStyle = 0;
+    [self presentViewController:readReceiptControl animated:YES completion:nil];
+}
+```
 
-| 方法                                       | 说明                                                         |
-| :----------------------------------------- | :----------------------------------------------------------- |
-| initWithConfig:delegate                    | 初始化方法                                                   |
-| startSingleCallWithUId:type:ext:completion | 发起一对一通话。                                             |
-| startInviteUsers:type:ext:completion:      | 邀请用户加入多人通话。                                       |
-| getEaseCallConfig                          | 获取 `EaseCallKit` 相关配置。                                |
-| setRTCToken:channelName:                   | 设置声网 Token。该方法自 `EaseCallKit` 3.8.1 版本添加。      |
-| setRTCToken:channelName:uid:               | 设置声网 Token。该方法自 `EaseCallKit` 3.8.1 版本添加。      |
-| setUsers:channelName:                      | 设置环信 ID 与声网 uid 的映射表。该方法自 `EaseCallKit` 3.8.1 版本添加。 |
+#### 输入区回调
 
-回调模块 `EaseCallDelegate` 的 API 列表如下：
+当前会话输入扩展区数据模型组（UI 配置可在聊天视图配置数据模型中设置）
 
-| 方法                                                    | 说明                                                         |
-| :------------------------------------------------------ | :----------------------------------------------------------- |
-| callDidEnd:reason:time:type:                            | 通话结束时触发该事件。                                       |
-| multiCallDidInvitingWithCurVC:excludeUsers:ext:         | 多人通话中点击邀请按钮触发该事件。                           |
-| callDidReceive:inviter:ext:                             | 振铃时触发该事件。                                           |
-| callDidRequestRTCTokenForAppId:channelName:account:     | 获取声网 token 回调。该方法自 `EaseCallKit` 3.8.1 版本添加。 |
-| callDidRequestRTCTokenForAppId:channelName:account:uid: | 获取声网 token 回调。该方法自 `EaseCallKit` 3.8.1 版本添加。 |
-| callDidOccurError:                                      | 通话异常时触发该事件。                                       |
-| remoteUserDidJoinChannel:uid:                           | 对方加入频道时触发。该方法自 `EaseCallKit` 3.8.1 版本添加。  |
-| callDidJoinChannel:uid:                                 | 当前用户加入频道时触发。该方法自 `EaseCallKit` 3.8.1 版本添加。 |
+```objectivec
+/*!
+ @method
+ @brief 当前会话输入扩展区数据模型组
+ @param   defaultInputBarItems     默认功能数据模型组  （默认有序：相册，相机，位置，文件）
+ @param   conversationType         当前会话类型：单聊，群聊，聊天室
+ @result  返回一组输入区扩展功能
+ */
+
+- (NSMutableArray<EaseExtMenuModel*>*)inputBarExtMenuItemArray:
+                (NSMutableArray<EaseExtMenuModel*>*)defaultInputBarItems
+                conversationType:(EMConversationType)conversationType;
+```
+
+当前会话输入扩展区数据模型组回调示例（EaseIM APP 有效）：
+
+```objectivec
+- (NSMutableArray<EaseExtMenuModel *> *)inputBarExtMenuItemArray:(NSMutableArray<EaseExtMenuModel *> *)defaultInputBarItems conversationType:(EMConversationType)conversationType
+{
+NSMutableArray<EaseExtMenuModel *> *menuArray = [[NSMutableArray<EaseExtMenuModel *> alloc]init];
+//相册
+[menuArray addObject:[defaultInputBarItems objectAtIndex:0]];
+//相机
+[menuArray addObject:[defaultInputBarItems objectAtIndex:1]];
+//音视频
+__weak typeof(self) weakself = self;
+if (conversationType != EMConversationTypeChatRoom) {
+    EaseExtMenuModel *rtcMenu = [[EaseExtMenuModel alloc]initWithData:[UIImage imageNamed:@"video_conf"] funcDesc:@"音视频" handle:^(NSString * _Nonnull itemDesc, BOOL isExecuted) {
+        if (isExecuted) {
+            [weakself chatSealRtcAction];
+        }
+    }];
+    [menuArray addObject:rtcMenu];
+}
+//位置
+[menuArray addObject:[defaultInputBarItems objectAtIndex:2]];
+//文件
+[menuArray addObject:[defaultInputBarItems objectAtIndex:3]];
+//群组回执
+if (conversationType == EMConversationTypeGroupChat) {
+    if ([[EMClient.sharedClient.groupManager getGroupSpecificationFromServerWithId:_conversation.conversationId error:nil].owner isEqualToString:EMClient.sharedClient.currentUsername]) {
+        EaseExtMenuModel *groupReadReceiptExtModel = [[EaseExtMenuModel alloc]initWithData:[UIImage imageNamed:@"pin_readReceipt"] funcDesc:@"群组回执" handle:^(NSString * _Nonnull itemDesc, BOOL isExecuted) {
+            //群组回执发送消息页
+            [weakself groupReadReceiptAction];
+        }];
+        [menuArray addObject:groupReadReceiptExtModel];
+    }
+}
+return menuArray;
+}
+```
+
+#### 键盘输入变化回调
+
+```objectivec
+/*!
+ @method
+ @brief 输入区键盘输入变化回调 例：@群成员
+ @result  返回键入内容是否有效
+ */
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
+```
+
+输入区键盘回调示例（EaseIM APP 有效）：
+
+```objectivec
+//@群成员
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (self.conversation.type == EMConversationTypeGroupChat) {
+        if ([text isEqualToString:@"@"]) {
+            [self _willInputAt:textView];
+        } else if ([text isEqualToString:@""]) {
+            __block BOOL isAt = NO;
+            [textView.attributedText enumerateAttributesInRange:NSMakeRange(0, textView.text.length) options:0 usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+                NSString *atUser = attrs[@"AtInfo"];
+                if (atUser) {
+                    if (textView.selectedRange.location == range.location + range.length) {
+                        isAt = YES;
+                        NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithAttributedString:textView.attributedText];
+                        [result deleteCharactersInRange:range];
+                        textView.attributedText = result;
+                        if ([atUser isEqualToString:@"All"]) {
+                            [self.chatController removeAtAll];
+                        } else {
+                            [self.chatController removeAtUser:atUser];
+                        }
+                        *stop = YES;
+                    }
+                }
+            }];
+            return !isAt;
+        }
+    }
+    return YES;
+}
+```
+
+#### 输入框选中回调
+
+```objectivec
+/**
+ * 输入区选中范围变化回调  例：@群成员
+ */
+- (void)textViewDidChangeSelection:(UITextView *)textView;
+```
+
+输入区选中范围变化回调示例（EaseIM APP 有效）：
+
+```objectivec
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+    [textView.attributedText enumerateAttributesInRange:NSMakeRange(0, textView.text.length) options:0 usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+        if (attrs[@"AtInfo"]) {
+            NSUInteger min = textView.selectedRange.location;
+            NSUInteger max = textView.selectedRange.location + textView.selectedRange.length;
+            if (min > range.location && min <= range.location + range.length) {
+                NSUInteger location = range.location + range.length;
+                NSUInteger length = 0;
+                if (textView.selectedRange.location + textView.selectedRange.length > location) {
+                    length = textView.selectedRange.location + textView.selectedRange.length - location;
+                }
+                textView.selectedRange = NSMakeRange(location, length);
+                *stop = YES;
+            } else if (max > range.location && max <= range.location + range.length) {
+                NSUInteger location = min;
+                NSUInteger length = textView.selectedRange.length - (max - range.location - range.length);
+                textView.selectedRange = NSMakeRange(location, length);
+                *stop = YES;
+            }
+        }
+    }];
+}
+```
+
+#### 对方正在输入状态回调
+
+对方正在输入状态回调（单聊有效）
+
+```objectivec
+/**
+ 对方正在输入
+*/
+- (void)beginTyping;
+```
+
+对方结束输入回调（单聊有效）
+
+```objectivec
+/**
+ 对方结束输入
+*/
+- (void)endTyping;
+```
+
+#### 消息长按事件回调
+
+默认消息 cell 长按回调
+
+```objectivec
+/*!
+ @method
+ @brief 默认消息 cell 长按回调
+ @param   defaultLongPressItems       默认长按扩展区功能数据模型组（默认共有：复制，删除，撤回发送消息时 间距当前时间小于 2 分钟）
+ @param   message                     当前长按的消息
+ @result  返回默认消息长按扩展功能组
+ */
+- (NSMutableArray<EaseExtMenuModel*>*)messageLongPressExtMenuItemArray:(NSMutableArray<EaseExtMenuModel*>*)defaultLongPressItems message:(EMMessage*)message;
+```
+
+默认消息 cell 长按回调示例（EaseIM APP 有效）：
+
+```objectivec
+//添加转发消息
+- (NSMutableArray<EaseExtMenuModel *> *)messageLongPressExtMenuItemArray:(NSMutableArray<EaseExtMenuModel *> *)defaultLongPressItems message:(EMMessage *)message
+{
+    NSMutableArray<EaseExtMenuModel *> *menuArray = [[NSMutableArray<EaseExtMenuModel *> alloc]initWithArray:defaultLongPressItems];
+    //转发
+    __weak typeof(self) weakself = self;
+    if (message.body.type == EMMessageBodyTypeText || message.body.type == EMMessageBodyTypeImage || message.body.type == EMMessageBodyTypeLocation || message.body.type == EMMessageBodyTypeVideo) {
+        EaseExtMenuModel *forwardMenu = [[EaseExtMenuModel alloc]initWithData:[UIImage imageNamed:@"forward"] funcDesc:@"转发" handle:^(NSString * _Nonnull itemDesc, BOOL isExecuted) {
+            //用户可自定义转发 CallBack
+            if (isExecuted) {
+                [weakself forwardMenuItemAction:message];
+            }
+        }];
+        [menuArray addObject:forwardMenu];
+    }
+    return menuArray;
+}
+```
+
+#### 自定义 cell 长按回调
+
+用户自定义消息 cell 长按事件回调
+
+```objectivec
+/*!
+ @method
+ @brief 当前所长按的 自定义 cell 的扩展区数据模型组
+ @param   defaultLongPressItems   默认长按扩展区功能数据模型组。默认共有：复制，删除，撤回（发送消息时 间距当前时间小于 2 分钟）
+ @param   customCell              当前长按的自定义 cell
+ @result  返回默认消息长按扩展功能组
+ */
+/**
+ *
+ *
+ * @param   defaultLongPressItems   默认长按扩展区功能数据模型组  默认共有：复制，删除，撤回（发送消息时 间距当前时间小于 2 分钟））
+ * @param   customCell              当前长按的自定义 cell
+ */
+- (NSMutableArray<EaseExtMenuModel*>*)customCellLongPressExtMenuItemArray:(NSMutableArray<EaseExtMenuModel*>*)defaultLongPressItems customCell:(UITableViewCell*)customCell;
+```
+
+### 会话列表自定义功能扩展
+
+实例化 `EaseConversationsViewController` 之后，可选择实现 `EaseConversationsViewControllerDelegate` 协议（会话列表回调代理），接收 `EaseConversationsViewController` 的回调并做进一步的自定义实现。
+
+`EaseConversationsViewControllerDelegate`
+
+#### 自定义 cell
+
+通过实现会话列表回调获取自定义消息 cell 如果返回 nil 会显示默认；如果返回 cell 则会显示用户自定义 cell。
+
+```objectivec
+/*!
+ @method
+ @brief 获取消息自定义 cell
+ @discussion 返回 nil 显示默认 cell，否则显示用户自定义 cell
+ @param     tableView 当前消息视图的 tableView
+ @param     indexPath 当前所要展示 cell 的 indexPath
+ @result 返回用户自定义cell
+ */
+- (UITableViewCell *)easeTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+```
+
+#### 会话列表 cell 选中回调
+
+```objectivec
+/*!
+ @method
+ @brief 会话列表 cell 选中回调
+ @param     tableView 当前消息视图的 tableView
+ @param     indexPath 当前所要展示 cell 的 indexPath
+ */
+- (void)easeTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+```
+
+会话列表 cell 选中回调示例（EaseIM APP 有效）：
+
+```objectivec
+- (void)easeTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    EaseConversationCell *cell = (EaseConversationCell*)[tableView cellForRowAtIndexPath:indexPath];
+    //系统通知
+    if ([cell.model.easeId isEqualToString:@"emsystemnotificationid"]) {
+       //此实例仅为 EaseIM APP 展示系统通知
+        EMNotificationViewController *controller = [[EMNotificationViewController alloc] initWithStyle:UITableViewStylePlain];
+        [self.navigationController pushViewController:controller animated:YES];
+        return;
+    }
+    //跳转至聊天页
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHAT_PUSHVIEWCONTROLLER object:cell.model];
+}
+```
+
+#### 会话列表用户资料回调
+
+```objectivec
+/*!
+ @method
+ @brief 会话列表用户资料回调
+ @discussion 可根据 conversationId 或 type 返回对应的用户资料数据集
+ @param     conversationId 当前会话列表 cell 所拥有的会话 ID
+ @param     type 当前会话列表 cell 所拥有的会话类型
+ */
+- (id<EaseUserDelegate>)easeUserDelegateAtConversationId:(NSString *)conversationId
+                                        conversationType:(EMConversationType)type;
+```
+
+会话列表用户资料回调实例（EaseIM APP 有效）
+
+```objectivec
+- (id<EaseUserDelegate>)easeUserDelegateAtConversationId:(NSString *)conversationId conversationType:(EMConversationType)type
+{
+    //EMConversationUserDataModel 为自定义用户资料数据模型，实现 EaseUserDelegate 接口返回参数
+    //@property (nonatomic, copy, readonly) NSString *easeId;           // 环信 ID
+    //@property (nonatomic, copy, readonly) UIImage *defaultAvatar;     // 默认头像显示
+    EMConversationUserDataModel *userData = [[EMConversationUserDataModel alloc]initWithEaseId:conversationId conversationType:type];
+    return userData;
+}
+```
+
+#### 会话列表 cell 侧滑项回调
+
+```objectivec
+/*!
+ @method
+ @brief 会话列表 cell 侧滑项回调
+ @param     tableView 当前消息视图的 tableView
+ @param     indexPath 当前所要侧滑 cell 的 indexPath
+ @param     actions 返回侧滑项集合
+ */
+- (NSArray<UIContextualAction *> *)easeTableView:(UITableView *)tableView
+           trailingSwipeActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+                                         actions:(NSArray<UIContextualAction *> *)actions;
+```
+
+会话列表 cell 侧滑项回调示例（EaseIM APP 有效）
+
+```objectivec
+- (NSArray<UIContextualAction *> *)easeTableView:(UITableView *)tableView trailingSwipeActionsForRowAtIndexPath:(NSIndexPath *)indexPath actions:(NSArray<UIContextualAction *> *)actions
+{
+    NSMutableArray<UIContextualAction *> *array = [[NSMutableArray<UIContextualAction *> alloc]init];
+    __weak typeof(self) weakself = self;
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal
+                                                                               title:@"删除"
+                                                                             handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL))
+    {
+        //删除操作
+    }];
+    deleteAction.backgroundColor = [UIColor redColor];
+    [array addObject:deleteAction];
+    //返回的 actions 有序：删除，置顶
+    [array addObject:actions[1]];
+    return [array copy];
+}
+```
+
+### 通讯录自定义功能扩展
+
+#### 获取用户联系人资料
+
+获取用户自己的联系人列表填充到 EaseIMKit 通讯录中
+
+```objectivec
+- (void)setContacts:(NSArray<EaseUserDelegate> * _Nonnull)contacts;
+```
+
+实例化 EaseContactsViewController 之后，可选择实现 EaseContactsViewControllerDelegate 协议（通讯录代理），接收 EaseContactsViewController 的回调并做进一步的自定义实现。
+
+EaseConversationsViewControllerDelegate
+
+#### 即将刷新通讯录填充数据
+
+```objectivec
+- (void)willBeginRefresh;
+```
+
+即将刷新通讯录填充数据示例（EaseIM APP 有效）：
+
+```objectivec
+- (void)willBeginRefresh {
+    //从服务器获取当前登录账户的联系人列表
+    [EMClient.sharedClient.contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
+        if (!aError) {
+            self->_contacts = [aList mutableCopy];
+            NSMutableArray<EaseUserDelegate> *contacts = [NSMutableArray<EaseUserDelegate> array];
+            for (NSString *username in aList) {
+                EMContactModel *model = [[EMContactModel alloc] init];
+                model.huanXinId = username;
+                [contacts addObject:model];
+            }
+            //填充联系人列表集合到 EaseIMKit 通讯录实例中
+            [self->_contactsVC setContacts:contacts];
+        }
+        [self->_contactsVC endRefresh];
+    }];
+}
+```
+
+#### 通讯录自定义 cell
+
+```objectivec
+/*!
+@method
+@brief 获取通讯录自定义 cell
+@discussion 返回 nil 显示默认 cell，否则显示用户自定义 cell
+@param     tableView 当前消息视图的 tableView
+@param     contact 当前所要展示 cell 所拥有的数据模型
+@result 返回用户自定义 cell
+*/
+- (UITableViewCell *)easeTableView:(UITableView *)tableView cellForRowAtContactModel:(EaseContactModel *) contact;
+```
+
+#### 通讯录 cell 条目选中回调
+
+```objectivec
+/*!
+@method
+@brief 通讯录 cell 条目选中回调
+@param     tableView 当前消息视图的 tableView
+@param     contact 当前所选中 cell 所拥有的数据模型
+@result 返回用户自定义 cell
+*/
+- (void)easeTableView:(UITableView *)tableView didSelectRowAtContactModel:(EaseContactModel *) contact;
+```
+
+通讯录 cell 条目选中回调示例：
+
+```objectivec
+- (void)easeTableView:(UITableView *)tableView didSelectRowAtContactModel:(EaseContactModel *)contact {
+    //跳转加好友页
+    if ([contact.easeId isEqualToString:@"newFriend"]) {
+        EMInviteFriendViewController *controller = [[EMInviteFriendViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+        return;
+    }
+    //跳转群组列表页
+    if ([contact.easeId isEqualToString:@"groupList"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:GROUP_LIST_PUSHVIEWCONTROLLER object:@{NOTIF_NAVICONTROLLER:self.navigationController}];
+        return;
+    }
+    //跳转聊天室列表页
+    if ([contact.easeId isEqualToString:@"chatroomList"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:CHATROOM_LIST_PUSHVIEWCONTROLLER object:@{NOTIF_NAVICONTROLLER:self.navigationController}];
+        return;
+    }
+    //跳转好友个人资料页
+    [self personData:contact.easeId];
+}
+```
+
+#### 通讯录 cell 侧滑回调
+
+```objectivec
+/*!
+ @method
+ @brief 会话列表 cell 侧滑项回调
+ @param     tableView 当前消息视图的 tableView
+ @param     contact 当前所侧滑 cell 拥有的联系人数据
+ @param     actions 返回侧滑项集合
+ */
+- (NSArray<UIContextualAction *> *)easeTableView:(UITableView *)tableView
+        trailingSwipeActionsForRowAtContactModel:(EaseContactModel *) contact
+                                         actions:(NSArray<UIContextualAction *> * __nullable)actions;
+```
+
+通讯录 cell 侧滑回调示例：
+
+```objectivec
+- (NSArray<UIContextualAction *> *)easeTableView:(UITableView *)tableView trailingSwipeActionsForRowAtContactModel:(EaseContactModel *)contact actions:(NSArray<UIContextualAction *> *)actions
+{
+    //通讯录头部非联系人列表禁止侧滑
+    if ([contact.easeId isEqualToString:@"newFriend"] || [contact.easeId isEqualToString:@"groupList"] || [contact.easeId isEqualToString:@"chatroomList"]) {
+        return nil;
+    }
+    __weak typeof(self) weakself = self;
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive
+                                                                               title:@"删除"
+                                                                             handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL))
+    {
+        //删除联系人操作
+    }];
+    return @[deleteAction];
+}
+```
