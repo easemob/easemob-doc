@@ -41,7 +41,7 @@ miniCore.open({
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 4.3.0 或以上版本 SDK 的初始化，详见 [快速开始](overview.html)；
+- 完成 SDK 4.2.1 或以上版本初始化，详见 [SDK 集成概述](overview.html#sdk-初始化)；
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
 - 集成本地会话存储插件。
 
