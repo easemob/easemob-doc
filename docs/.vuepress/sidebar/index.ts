@@ -31,9 +31,9 @@ export const zhSidebar = sidebar({
       children: [
         { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html' },
         { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html' },
-        { text: '快速开始（不使用 UIKIT）Android', link: '/document/android/quickstart.html' },
-        { text: '快速开始（不使用 UIKIT）iOS', link: '/document/ios/quickstart.html' },
-        { text: '快速开始（不使用 UIKIT）Web', link: '/document/web/quickstart.html' }
+        { text: '快速开始 Android', link: '/document/android/quickstart.html' },
+        { text: '快速开始 iOS', link: '/document/ios/quickstart.html' },
+        { text: '快速开始 Web', link: '/document/web/quickstart.html' }
       ]
     },
     {
