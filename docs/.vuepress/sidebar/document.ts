@@ -47,7 +47,7 @@ const documentSidebar = [
         children: [
           { text: '消息概述', link: 'message_overview.html' },
           { text: '发送和接收消息', link: 'message_send_receive.html' },
-          { text: '管理本地消息数据', link: 'message_manage.html', except: ['web', 'react-native'] },
+          { text: '管理本地会话和消息', link: 'message_manage.html', except: ['react-native'] },
           { text: '管理会话和消息', link: 'message_manage.html', only: ['react-native'] },
           { text: '管理服务端消息', link: 'message_retrieve.html', except: ['react-native'] },
           { text: '管理消息回执', link: 'message_receipt.html' },
