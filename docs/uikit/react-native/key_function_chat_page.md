@@ -7,9 +7,9 @@
 在项目中集成聊天页面组件 `ChatFragment`，并传入相应的参数即可使用。
 
 | 参数           | 是否必需   | 描述      |
-| :------------- | :-----| :----- | :-------- |
+| :------------- | :-----| :----- | 
 | `chatId` | 是 | 会话 ID。  |
-| `chatType` | 是 | <br/> - `0`：单聊；<br/> - `1`：群聊； <br/> - `2`：聊天室。 |
+| `chatType` | 是 | - `0`：单聊；<br/> - `1`：群聊； <br/> - `2`：聊天室。 |
 | `propsRef`   | 否 | 设置聊天组件控制器。   |
 | `screenParams` | 否  | 设置聊天组件的参数。   |
 | `messageBubbleList` | 否  | 设置自定义消息气泡组件。   |
@@ -38,7 +38,8 @@ export default function ChatScreen(): JSX.Element {
 ```
 效果如下图所示：
 
-![img](@static/images/uikitrn/chat_detail_overview.png)
+
+<img src=@static/images/uikitrn/chat_detail_overview.png  width="300" height="700"/>
 
 聊天页面相关的方法如下表所示：
 
@@ -77,7 +78,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/uikitrn/chat_detail_send_voice_msg.png)
+<img src=@static/images/uikitrn/chat_detail_send_voice_msg.png  width="300" height="700"/>
 
 ## 自定义实现
 
@@ -122,9 +123,9 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-<img src=@static/images/uikitrn/chat_detail_msg_list_item_custom_1.png  width="200"/>&nbsp;&nbsp;
-<img src=@static/images/uikitrn/chat_detail_msg_list_item_custom_2.png  width="200"/>&nbsp;&nbsp;
-<img src=@static/images/uikitrn/chat_detail_msg_list_item_custom_3.png  width="200"/>
+<img src=@static/images/uikitrn/chat_detail_msg_list_item_custom_1.png  width="250"/>&nbsp;&nbsp;
+<img src=@static/images/uikitrn/chat_detail_msg_list_item_custom_2.png  width="250"/>&nbsp;&nbsp;
+<img src=@static/images/uikitrn/chat_detail_msg_list_item_custom_3.png  width="250"/>
 
 ### 自定义背景色  
 
@@ -153,7 +154,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/uikitrn/chat_detail_bg.png)
+<img src=@static/images/uikitrn/chat_detail_bg.png  width="300" height="700"/>
 
 ### 自定义时间标签显示和隐藏
 
@@ -182,7 +183,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/uikitrn/chat_detail_time_label.png)
+<img src=@static/images/uikitrn/chat_detail_time_label.png  width="300" height="700"/>
 
 ### 自定义点击消息气泡回调
 
@@ -228,7 +229,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/uikitrn/chat_detail_msg_list_item_long_press.png)
+<img src=@static/images/uikitrn/chat_detail_msg_list_item_long_press.png  width="300" height="700"/>
 
 ### 自定义发送消息前回调
 

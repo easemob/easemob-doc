@@ -1,8 +1,9 @@
+# 快速开始
 
-利用 flutter_chat_uikit 提供的 UI 组件，你可以轻松实现应用内的聊天。flutter_chat_uikit 支持单聊、群聊和聊天室会话，本文介绍如何实现在单聊会话中发送消息。
+利用 flutter_chat_uikit 提供的 UI 组件，你可以轻松实现应用内的聊天。flutter_chat_uikit 支持单聊、群聊和聊天室会话。本文介绍如何实现在单聊会话中发送消息。
 
-<img src=@static/images/uikitflutter/ChatMessagesView.png  title=“聊天界面” width="300"/>&nbsp;&nbsp;
-<img src=@static/images/uikitflutter/ChatConversationsView.png  title=会话列表页面 width="300"/>
+<img src=@static/images/uikitflutter/ChatConversationsView.png  title=“会话列表界面” width="300"/>&nbsp;&nbsp;
+<img src=@static/images/uikitflutter/ChatMessagesView.png  title=聊天页面 width="300"/>
 
 ## 前提条件
 
@@ -45,7 +46,7 @@
 ### iOS  
 
 | 键 | 值 |
-| :------------ | :----- | :------- |
+| :------------ | :------- |
 | `Privacy - Microphone Usage Description` | 麦克风权限   |
 | `Privacy - Camera Usage Description` | 摄像头权限  |
 | `Privacy - Photo Library Usage Description` | 相册权限 |
@@ -153,4 +154,4 @@ class _MessagesPageState extends State<MessagesPage> {
 }
 ```
 
-![image](@static/images/uikitflutter/MessagesPage.png)
+<img src=@static/images/uikitflutter/MessagesPage.png  width="300" height="700"/>

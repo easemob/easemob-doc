@@ -7,7 +7,7 @@
 在项目中集成会话页面组件 `ConversationListFragment`，并传入相应的参数即可使用。
 
 | 参数           | 是否必需   | 描述      |
-| :------------- | :-----| :----- | :-------- |
+| :------------- | :-----| :----- |
 | `chatId `        | 是   | 会话 ID。     |
 | `chatType`         | 是   | 会话类型。 <br/> - `0`：单聊；<br/> - `1`：群聊； <br/> - `2`：聊天室。             |
 | `propsRef` | 否 | 设置会话列表控制器。通过会话列表控制器可以实现以下会话操作：<br/> - 创建会话；<br/> - 更新会话，如更新会话排序、会话样式和消息未读数；<br/> - 删除会话；<br/> - `updateRead`：将会话设置为已读；<br/> - `updateExtension`：设置会话自定义字段。|
@@ -36,7 +36,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/uikitrn/conv_list_overview.png)
+<img src=@static/images/uikitrn/conv_list_overview.png  width="300" height="700"/>
 
 ## 自定义实现
 ### 自定义会话样式
@@ -65,9 +65,9 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-<img src=@static/images/uikitrn/conv_list_custom_1.png  width="200"/>&nbsp;&nbsp;
-<img src=@static/images/uikitrn/conv_list_custom_2.png  width="200"/>&nbsp;&nbsp;
-<img src=@static/images/uikitrn/conversation_list_slide_menu.png  width="200"/>
+<img src=@static/images/uikitrn/conv_list_custom_1.png  width="250"/>&nbsp;&nbsp;
+<img src=@static/images/uikitrn/conv_list_custom_2.png  width="250"/>&nbsp;&nbsp;
+<img src=@static/images/uikitrn/conversation_list_slide_menu.png  width="250"/>
 
 ### 自定义会话排序
 
@@ -97,7 +97,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/uikitrn/conv_list_sort.png)
+<img src=@static/images/uikitrn/conv_list_sort.png  width="300" height="700"/>
 
 ### 自定义会话的未读消息数
 
@@ -123,7 +123,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/uikitrn/conv_list_unread_count.png)
+<img src=@static/images/uikitrn/conv_list_unread_count.png  width="300" height="700"/>
 
 ### 自定义会话点击事件
 
@@ -167,7 +167,7 @@ export default function ChatScreen(): JSX.Element {
 
 效果如下图所示：
 
-![img](@static/images/uikitrn/conv_list_long_press.png)
+<img src=@static/images/uikitrn/conv_list_long_press.png  width="300" height="700"/>
 
 
 

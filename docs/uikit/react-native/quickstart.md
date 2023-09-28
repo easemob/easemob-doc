@@ -1,3 +1,5 @@
+# 快速开始
+
 利用 react-native-chat-uikit 提供的 UI 组件，你可以轻松实现应用内的聊天。react-native-chat-uikit 支持单聊、群聊和聊天室会话，本文介绍如何实现在单聊会话中发送消息。
 
 ## 前提条件
@@ -192,9 +194,9 @@ yarn run ios
 yarn run android
 ```
 
-### 第八步 发送消息验证
+### 第八步 发送消息
 
-![img](@static/images/uikitrn/uikit_quick_start.png)
+<img src=@static/images/uikitrn/uikit_quick_start.png  width="300" height="700"/>
 
 ## 示例源码参考
 

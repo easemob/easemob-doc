@@ -43,7 +43,7 @@ class _MessagesPageState extends State<MessagesPage> {
 }
 ```
 
-![image](@static/images/uikitflutter/ChatMessagesView.png)
+<img src=@static/images/uikitflutter/ChatMessagesView.png  width="300" height="700"/>
 
 ## 自定义实现
 
@@ -127,7 +127,7 @@ class _MessagesPageState extends State<MessagesPage> {
 
 效果如下图所示：
 
-![image](@static/images/uikitflutter/MessagesPage_custom_avatar.png)
+<img src=@static/images/uikitflutter/MessagesPage_custom_avatar.png  width="300" height="700"/>
 
 ### 添加昵称
 
@@ -156,7 +156,7 @@ class _MessagesPageState extends State<MessagesPage> {
 
 效果如下图所示：
 
-![image](@static/images/uikitflutter/MessagesPage_custom_nickname.png)
+<img src=@static/images/uikitflutter/MessagesPage_custom_nickname.png  width="300" height="700"/>
 
 ### 添加气泡点击事件
 
@@ -194,7 +194,7 @@ class _MessagesPageState extends State<MessagesPage> {
 
 效果如下图所示：
 
-![image](@static/images/uikitflutter/MessagesPage_custom_bubble_click.png)
+<img src=@static/images/uikitflutter/MessagesPage_custom_bubble_click.png  width="300" height="700"/>
 
 ### 自定义消息气泡样式
 
@@ -260,7 +260,7 @@ class CustomTextItemWidget extends ChatMessageListItem {
 
 效果如下图所示：
 
-![image](@static/images/uikitflutter/MessagesPage_custom_bubble.png)
+<img src=@static/images/uikitflutter/MessagesPage_custom_bubble.png  width="300" height="700"/>
 
 ### 自定义输入框样式
 
@@ -331,4 +331,4 @@ class _MessagesPageState extends State<MessagesPage> {
 
 效果如下图所示：
 
-![image](@static/images/uikitflutter/MessagesPage_custom_input.png)
+<img src=@static/images/uikitflutter/MessagesPage_custom_input.png  width="300" height="700"/>
