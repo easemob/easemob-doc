@@ -6,20 +6,19 @@
 
 ### 新增特性
 
-1.[IM SDK] 新增 `LocalCache` 模块[实现本地会话数据管理](message_manage.html)。
-2.[IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
+- [IM SDK] 新增 `LocalCache` 模块[实现本地会话数据管理](message_manage.html)。
+- [IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
 
 ## 版本 V4.2.0 Dev 2023-07-27（开发版）
 
 ### 新增特性
 
-1. [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送合并消息)。
-2. [IM SDK] 新增[消息修改功能](message_modify.html)。
+- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送合并消息)。
+- [IM SDK] 新增[消息修改功能](message_modify.html)。
 
 ### 修复
 
 修复发送不必要的消息送达回执的问题。
-
 
 ## 版本 V4.1.7 Dev 2023-06-08（开发版）
 
