@@ -1,6 +1,6 @@
 # 管理本地会话
 
-环信即时通讯 IM Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，支持现代浏览器，例如 Chrome、Firefox、Safari 以及使用这些引擎的其他浏览器（例如 Microsoft Edge），**不支持 Internet Explorer（IE）浏览器**。
+环信即时通讯 IM Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 `LocalCache` 模块对本地会话数据进行管理，支持现代浏览器，例如 Chrome、Firefox、Safari 以及使用这些引擎的其他浏览器（例如 Microsoft Edge），**不支持 Internet Explorer（IE）浏览器**。
 
 使用环信即时通讯 IM Web SDK 时，要支持本地会话存储，需要集成本地存储插件。**该插件只支持通过按需导入的方式集成**。
 
