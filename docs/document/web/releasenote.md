@@ -2,6 +2,18 @@
 
 <Toc />
 
+## 版本 V4.2.1 Dev 2023-09-27（开发版）
+
+### 新增特性
+
+1.[IM SDK] 新增 `LocalCache` 模块实现本地会话数据管理。
+2.[IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
+
+### 新增特性
+
+1.[IM SDK] 新增 `LocalCache` 模块实现管理本地会话数据。
+2.[IM SDK] 申请加群被拒回调`joinPublicGroupDeclined`, 增加申请人的user ID.
+
 ## 版本 V4.2.0 Dev 2023-07-27（开发版）
 
 ### 新增特性
