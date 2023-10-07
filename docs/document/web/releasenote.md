@@ -6,8 +6,8 @@
 
 ### 新增特性
 
-1.[IM SDK] 新增 `LocalCache` 模块[实现本地会话数据管理](message_manage.html)。 </br>
-2.[IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
+- [IM SDK] 新增 `LocalCache` 模块[实现本地会话数据管理](message_manage.html)。
+- [IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
 
 ## 版本 V4.2.0 Dev 2023-07-27（开发版）
 
