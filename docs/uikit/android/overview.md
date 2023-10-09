@@ -2,7 +2,7 @@
 
 <Toc />
 
-在您阅读此文档时，我们假定您已经具备了基础的 Android 应用开发经验，并能够理解相关基础概念。此文档是针对导入 EaseIMKit 库的快速集成文档，如果只是导入 SDK 集成使用，请参考 [环信即时通讯 IM Android 快速开始](quickstart.html)。
+在您阅读此文档时，我们假定您已经具备了基础的 Android 应用开发经验，并能够理解相关基础概念。此文档是针对导入 EaseIMKit 库的快速集成文档，如果只是导入 SDK 集成使用，请参考 [环信即时通讯 IM Android 快速开始](/document/android/quickstart.html)。
 
 ## 简介
 
@@ -35,7 +35,7 @@ EaseIMKit 支持 Gradle 接入和 Module 源码集成
 #### Gradle 接入集成
 
 :::notice 重大变动
-远程仓库统一由 JCenter 迁移到 `MavenCentral`，依赖库的域名由 “com.hyphenate” 修改为 “io.hyphenate”，详见 [环信即时通讯 IM Android 快速开始](quickstart.html)。
+远程仓库统一由 JCenter 迁移到 `MavenCentral`，依赖库的域名由 “com.hyphenate” 修改为 “io.hyphenate”，详见 [环信即时通讯 IM Android 快速开始](/document/android/quickstart.html)。
 :::
 
 ```gradle
@@ -50,7 +50,7 @@ implementation 'io.hyphenate:hyphenate-chat:xxx版本'
 1. IM SDK **3.8.0** 版本以后，远程依赖的 `artifactId` 修改为 `hyphenate-chat`，且该版本以后中不再包含音视频相关逻辑。
 2. IM SDK **3.8.0** 以下，远程依赖，包含音视频的 `artifactId` 为 `hyphenate-sdk`，不包含音视频的 `artifactId` 为 `hyphenate-sdk-lite`。如果想使用不包含音视频通话的 SDK，用 `implementation 'io.hyphenate:hyphenate-sdk-lite:xxx版本`'。
 
-版本号参考 [Android SDK 更新日志](releasenote.html)。
+版本号参考 [Android SDK 更新日志](/document/android/releasenote.html)。
 :::
 
 #### Module 源码集成
@@ -103,7 +103,7 @@ EaseIMKit 提供了 EaseConversationListFragment，需要将其或者其子类�
 ![img](@static/images/android/easeim.jpeg)
 
 :::notice
-要实现自定义头像及昵称，请参考 [设置头像和昵称](userprofile.html#设置当前用户的属性)。
+要实现自定义头像及昵称，请参考 [设置头像和昵称](/document/android/userprofile.html#设置当前用户的属性)。
 :::
 
 ### 创建聊天界面
@@ -218,6 +218,7 @@ conversationListLayout.showUnreadDotPosition(EaseConversationSetStyle.UnreadDotP
 效果如下图：
 
 ![img](@static/images/android/easeim3.jpeg)
+
 更多样式请参考 EaseContactListLayout 控件。
 
 #### 增加长按菜单项
