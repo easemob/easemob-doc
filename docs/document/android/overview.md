@@ -47,7 +47,22 @@ EMClient.getInstance().init(context, options);
 
 ## 注册用户
 
-可以使用如下代码创建账号：
+目前用户注册方式有以下几种：
+- 通过控制台注册。
+- 通过 REST API 接口注册。
+- 调用 SDK 接口注册。
+
+### 控制台注册
+
+控制台的注册请到 [这里](https://console.easemob.com/app/im-service/operative-service/user)。
+
+### REST API 注册
+
+请参考 [注册用户](/document/server-side/account_system.html#注册用户)。
+
+### SDK 注册
+
+若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
 ```java
 // 注册失败会抛出 HyphenateException。
@@ -55,10 +70,8 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 ```
 
 :::notice
-
-- 以上注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用；
-- 正式环境应使用服务器端调用 REST API 接口[注册用户](/document/server-side/account_system.html#注册用户)。
-  :::
+该注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用。
+:::
 
 ## 用户登录
 

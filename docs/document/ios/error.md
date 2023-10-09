@@ -88,9 +88,6 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 705    |       EMErrorChatroomNotExist       | 聊天室不存在：要操作的聊天室不存在。                         |
 | 900    |       EMErrorUserCountExceed        | 获取用户属性的用户个数超过 100。                             |
 | 901    |   EMErrorUserInfoDataLengthExceed   | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。 |
-| 903    |    EMErrorTranslateParamInvalid     | 调用翻译方法传入的参数无效，请检查传参。                     |
-| 904    |        EMErrorTranslateFail         | 翻译服务接口返回错误。                                       |
-| 905    |       EMErrorTranslateNotInit       | 翻译服务未初始化。                                           |
 | 1000   |       EMErrorContactAddFailed       | 添加联系人失败。                                             |
 | 1001   |      EMErrorContactReachLimit       | 邀请者联系人数量已经达到上限。                               |
 | 1002   |    EMErrorContactReachLimitPeer     | 受邀请者联系人达到上限。                                     |

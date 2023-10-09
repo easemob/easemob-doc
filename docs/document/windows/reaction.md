@@ -38,7 +38,7 @@ Reaction 场景示例如下：
 
 ### 在消息上添加 Reaction
 
-调用 `AddReaction` 在消息上添加 Reaction，在 `MessageReactionDidChange` 监听事件中会收到这条消息的最新 Reaction 概览。
+调用 `AddReaction` 在消息上添加 Reaction，在 `MessageReactionDidChange` 监听事件中会收到这条消息的最新 Reaction 概览。对于同一条 Reaction，一个用户只能添加一次，重复添加会报错误 1301。
 
 示例代码如下：
 

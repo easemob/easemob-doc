@@ -46,10 +46,10 @@ SDKClient.Instance.InitWithOptions(options);
 
 ## 注册用户
 
-目前注册的方式有以下几种：
+目前，用户注册方式有以下几种：
 - 通过控制台注册。
 - 通过 REST API 接口注册。
-- 调用 SDK 接口注册。该方法需在 [控制台](https://console.easemob.com/app/im-service/detail) 设置允许 **开放注册**。
+- 调用 SDK 接口注册。
 
 ### 控制台注册
 
@@ -60,6 +60,8 @@ SDKClient.Instance.InitWithOptions(options);
 请参考 [注册用户](/document/server-side/account_system.html#注册用户)。
 
 ### SDK 注册
+
+若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
 ```csharp
 SDKClient.Instance.CreateAccount(username, password,
@@ -75,6 +77,10 @@ SDKClient.Instance.CreateAccount(username, password,
     )
 );
 ```
+
+:::notice
+该注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用。
+:::
 
 ## 用户登录
 
