@@ -10,9 +10,10 @@ Android 中错误码的类为 `EMError`。
 
 | 错误码<div style="width: 50px;"></div> |            错误信息             |                           可能原因                           |
 | :-----: | :----------------------------- | :--------------------------- |
-| 0      |           EM_NO_ERROR           |                        提示操作成功。                        |
-| 1      |          GENERAL_ERROR          | 默认未区分类型的错误：提示 SDK 内部未正确初始化，或者请求服务器时未识别出具体原因的错误。 |
+| 0      |           EM_NO_ERROR           | 操作成功。                        |
+| 1      |          GENERAL_ERROR          | 默认未区分类型的错误：例如，SDK 内部未正确初始化，或者请求服务器时未识别出具体原因的错误。 
 | 2      |          NETWORK_ERROR          | 网络错误：无网络服务时会回调此错误，表示 SDK 与服务器的连接已断开。 |
+| 3      |          `DATABASE_ERROR`          | 数据库操作失败。 |
 | 4      |      EXCEED_SERVICE_LIMIT       | 超过服务限制：超过服务版本的数量限制，比如创建的用户 ID 数量超过购买服务的限制时提示该错误。 |
 | 5      |       SERVICE_ARREARAGES        |                  服务欠费，该错误码已废弃。                  |
 | 8      |       APP_ACTIVE_NUMBER_REACH_LIMITATION    |  应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。                  |
@@ -32,7 +33,7 @@ Android 中错误码的类为 `EMError`。
 | 204    |         USER_NOT_FOUND          |  用户不存在：比如登录或者获取用户会话列表时用户 ID 不存在。  |
 | 205    |      USER_ILLEGAL_ARGUMENT      | 用户参数不正确：比如创建用户 ID 时不符合格式要求，或者更新用户属性时用户参数为空等。 |
 | 206    |    USER_LOGIN_ANOTHER_DEVICE    | 用户在其他设备登录：如果未开启多设备登录，则在其他设备登录会将当前登录的设备踢下线，用户会收到此错误。 |
-| 207    |          USER_REMOVED           | 用户已经被注销：如果当前的登录用户 ID 被从管理后台则会收到此错误。 |
+| 207    |          USER_REMOVED           | 用户已经被注销：如果当前的登录用户 ID 从环信控制台删除会收到此错误。 |
 | 208    |         USER_REG_FAILED         | 用户注册失败：注册用户 ID 时失败，比如未开启开放注册功能等原因。 |
 | 209    |    USER_UPDATEINFO_FAILED       |  更新推送配置错误：用户更新推送昵称或设置免打扰配置时失败。  |
 | 210    |     USER_PERMISSION_DENIED      |   用户无权限：例如如果用户被封禁，发送消息时会提示该错误。   |
@@ -55,8 +56,8 @@ Android 中错误码的类为 `EMError`。
 | 305    |    SERVER_SERVICE_RESTRICTED    | 当前 app 被禁用：如果 app 因为某种原因被禁用时会返回该错误。 |
 | 400    |         FILE_NOT_FOUND          | 文件未找到：当用户获取不到日志文件，或者下载附件失败时提示该错误。 |
 | 401    |          FILE_INVALID           | 文件异常：当上传消息附件或者群组共享文件时可能会提示该错误。 |
-| 402    |       FILE_UPLOAD_FAILED        |         上传文件错误：上传消息附件失败时提示该错误。         |
-| 403    |      FILE_DOWNLOAD_FAILED       |         下载文件错误：下载消息附件失败时提示该错误。         |
+| 402    |       FILE_UPLOAD_FAILED        | 上传文件错误：上传消息附件失败时提示该错误。         |
+| 403    |      FILE_DOWNLOAD_FAILED       |  下载文件错误：下载消息附件失败时提示该错误。         |
 | 404    |       FILE_DELETE_FAILED        | 删除文件错误：通过 API 获取日志文件时会将旧的日志文件删除，如果删除失败提示该错误。 |
 | 405    |         FILE_TOO_LARGE          | 文件太大：消息附件或群共享文件超过文件大小限制时提示该错误。 |
 | 406    |      FILE_CONTENT_IMPROPER      | 文件内容不合规：消息附件或群共享文件内容不合规时提示该错误。 |
@@ -71,12 +72,16 @@ Android 中错误码的类为 `EMError`。
 | 508    | MESSAGE_EXTERNAL_LOGIC_BLOCKED  | 消息执行发送前回调，发送的消息被用户自己的服务器定义的规则拦截掉时提示该错误。 |
 | 509    |      MESSAGE_CURRENT_LIMITING      | 单个用户 ID 发送消息超出频率限制。默认情况下，SDK 对单个用户 ID 发送群消息未做频率限制。如果你联系了环信商务设置了该限制，一旦在在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，则会提示该错误。 |
 | 510    |      MESSAGE_SIZE_LIMIT      | 发送消息时消息体大小超过上限。|
+| 511   | MESSAGE_EDIT_FAILED  | 消息修改失败。  |
 | 600    |        GROUP_INVALID_ID         | 群组 ID 异常：使用群组相关 API，提供的群组 ID 为空时提示该错误。 |
 | 601    |      GROUP_ALREADY_JOINED       | 已在该群组中：调用加入群组的 API 时如果已经在该群组中则提示该错误。 |
 | 602    |        GROUP_NOT_JOINED         | 未加入该群组：尝试在未加入的群组中发送消息或进行群组操作时提示该错误。 |
 | 603    |     GROUP_PERMISSION_DENIED     | 无权限的群组操作：没有权限进行群组操作，比如群组成员不能设置群组管理员。 |
 | 604    |       GROUP_MEMBERS_FULL        |               群组已满：群组已经达到人数上限。               |
-| 605    |         GROUP_NOT_EXIST         |     群组不存在：尝试对不存在的群组进行操作时提示该错误。     |
+| 605    | GROUP_SHARED_FILE_INVALIDID  | 群组共享文件 ID 不合法。|
+| 606    | GROUP_NOT_EXIST  | 群组不存在：尝试对不存在的群组进行操作时提示该错误。|
+| 607    | GROUP_DISABLED | 群组被禁用。 |
+| 608    | GROUP_NAME_VIOLATION        | 群组名称无效。 |
 | 609    |   GROUP_MEMBER_ATTRIBUTES_REACH_LIMIT   | 群组成员自定义属性个数达到上限。                         |
 | 610    |   GROUP_MEMBER_ATTRIBUTES_UPDATE_FAILED   | 设置群成员自定义属性失败。                        |
 | 611    |   GROUP_MEMBER_ATTRIBUTES_KEY_REACH_LIMIT   | 设置的群成员自定义属性 key 长度（不能超过 16 字节）超限。                        |
@@ -85,30 +90,27 @@ Android 中错误码的类为 `EMError`。
 | 701    |     CHATROOM_ALREADY_JOINED     | 已在该聊天室中：调用加入聊天室的 API 时如果已经在该聊天室中则提示该错误。 |
 | 702    |       CHATROOM_NOT_JOINED       | 未加入该聊天室：尝试在未加入的聊天室中发送消息或进行聊天室操作时提示该错误。 |
 | 703    |   CHATROOM_PERMISSION_DENIED    | 无权限的聊天室操作：没有权限进行聊天室操作，比如聊天室成员不能设置聊天室管理员。 |
-| 704    |      CHATROOM_MEMBERS_FULL      |             聊天室已满：聊天室已经达到人数上限。             |
-| 705    |       CHATROOM_NOT_EXIST        |   聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。   |
-| 900    |    USERINFO_USERCOUNT_EXCEED    |               获取用户属性的用户个数超过 100。               |
+| 704    |      CHATROOM_MEMBERS_FULL      | 聊天室已满：聊天室已经达到人数上限。             |
+| 705    |       CHATROOM_NOT_EXIST        | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。   |
+| 900    |    USERINFO_USERCOUNT_EXCEED    | 获取用户属性的用户个数超过 100。               |
 | 901    |   USERINFO_DATALENGTH_EXCEED    | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。 |
-| 903    |    TRANSLATE_INVALID_PARAMS     |    翻译参数无效：调用翻译方法传入的参数无效，请检查传参。    |
-| 904    |         TRANSLATE_FAIL          |               翻译失败：调用翻译方法翻译失败。               |
-| 905    |       TRANSLATE_NOT_INIT        |            翻译服务未初始化：没有初始化翻译模块。            |
-| 1000   |       CONTACT_ADD_FAILED        |                       添加联系人失败。                       |
-| 1001   |       CONTACT_REACH_LIMIT       |                邀请者的联系人数量已经达到上限。                |
-| 1002   |    CONTACT_REACH_LIMIT_PEER     |                   受邀请者联系人达到上限。                   |
+| 1000   |       CONTACT_ADD_FAILED        | 添加联系人失败。                       |
+| 1001   |       CONTACT_REACH_LIMIT       | 邀请者的联系人数量已经达到上限。                |
+| 1002   |    CONTACT_REACH_LIMIT_PEER     | 受邀者的联系人数量达到上限。                   |
 | 1100   |  PRESENCE_PARAM_LENGTH_EXCEED   | 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 |
-| 1101   | PRESENCE_CANNOT_SUBSCRIBE_YOURSELF |                    不能订阅你自己的状态。                    |
-| 1110   |     TRANSLATE_PARAM_INVALID     |                        翻译参数错误。                        |
-| 1111   |  TRANSLATE_SERVICE_NOT_ENABLE   |                       翻译服务未启用。                       |
-| 1112   |      TRANSLATE_USAGE_LIMIT      |                      翻译用量达到上限。     |
-| 1113   |     TRANSLATE_MESSAGE_FAIL      |                      获取翻译服务失败。 |
+| 1101   | PRESENCE_CANNOT_SUBSCRIBE_YOURSELF | 不能订阅你自己的状态。                    |
+| 1110   |     TRANSLATE_PARAM_INVALID     | 翻译参数错误。                        |
+| 1111   |  TRANSLATE_SERVICE_NOT_ENABLE   | 翻译服务未启用。                       |
+| 1112   |      TRANSLATE_USAGE_LIMIT      | 翻译用量达到上限。     |
+| 1113   |     TRANSLATE_MESSAGE_FAIL      | 消息翻译失败。 |
 | 1200   |     MODERATION_FAILED           | 第三方内容审核服务的消息审核结果为“拒绝”。 |
 | 1299   |     THIRD_SERVER_FAILED         | 除第三方内容审核服务的其他服务的消息审核结果为“拒绝”。 |
-| 1300   |      REACTION_REACH_LIMIT       |                  Reaction 数量已达到限制。      |
-| 1301   |   REACTION_HAS_BEEN_OPERATED    |                     Reaction 重复添加。                      |
+| 1300   |      REACTION_REACH_LIMIT       | Reaction 数量已达到限制。      |
+| 1301   |   REACTION_HAS_BEEN_OPERATED    | Reaction 重复添加。                      |
 | 1302   |  REACTION_OPERATION_IS_ILLEGAL  | 用户对该 Reaction 没有操作权限。例如没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接收者进行添加 Reaction 操作。 |
-| 1400   |        THREAD_NOT_EXIST         |                        该子区不存在。                        |
-| 1401   |      THREAD_ALREADY_EXIST       |                 该子区已存在，重复添加子区。                 |
-| 1402   |  THREAD_CREATE_MESSAGE_ILLEGAL  |                   创建子区的消息无效。                   |
+| 1400   |        THREAD_NOT_EXIST         | 该子区不存在。                        |
+| 1401   |      THREAD_ALREADY_EXIST       | 该子区已存在，重复添加子区。                 |
+| 1402   |  THREAD_CREATE_MESSAGE_ILLEGAL  | 创建子区的消息无效。                   |
 | 1500   |        PUSH_NOT_SUPPORT         | 第三方推送不支持：如果用户配置的第三方推送在当前设备上不支持，会提示该错误。 |
 | 1501   |        PUSH_BIND_FAILED         | 绑定第三方推送 token 失败：如果将第三方推送 token 上传到服务器失败时会返回该错误。 |
 | 1502   |       PUSH_UNBIND_FAILED        | 解绑第三方推送 token 失败：如果解绑第三方推送 token 失败会提示该错误。 |
