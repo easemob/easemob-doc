@@ -12,7 +12,7 @@ EaseIMKit 是基于环信 IM SDK 的一款 UI 组件库，它提供了一些通�
 
 EaseIMKit 源码地址
 
-- [EaseIMKit 工程](https://github.com/easemob/easeui_ios/tree/EaseIMKit)
+- [EaseIMKit 工程](https://github.com/easemob/easeui_ios/tree/main)
 
 使用 EaseIMKit 环信 IM App 地址：
 
