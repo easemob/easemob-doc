@@ -43,9 +43,8 @@
 示例代码如下：
 
 ```objectivec
-EMError *error = nil;
-// 同步方法，异步方法见 [EMChatroomManager createChatroomWithSubject:description:invitees:message:maxMembersCount:completion]
-EMChatroom *retChatroom = [[EMClient sharedClient].roomManager createChatroomWithSubject:@"aSubject" description:@"aDescription" invitees:@[@"user1",@[user2]]message:@"aMessage" maxMembersCount:aMaxMembersCount error:&error];
+EMError *error;
+    EMChatroom *chatroom = [[EMClient sharedClient].roomManager createChatroomWithSubject:@"Subject" description:@"description" invitees:@[@"user1",@"user2"] message:@"message" maxMembersCount:100 error:&error];
 ```
 
 ### 加入聊天室
