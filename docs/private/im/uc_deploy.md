@@ -16,9 +16,20 @@
 
 信息安全已成为国家重要安全战略，各行业客户对业务环境、功能及数据存储的安全性要求越来越高。需要将功能完备的即时通讯服务部署到内网物理服务器集群、公有云以及私有云等多种平台，请根据实际使用场景选择安装包及部署手册，下载后请按照部署手册要求准备环境并实施部署。
 
-| 安装包名称                             | 适配环境要求                                                                      | 下载安装包                                                                                                          | 下载部署手册                                                                                                                                                                              |
-| :------------------------------------- | :-------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 环信私有化即时通讯服务安装包（单机版） | 操作系统：Linux、ubuntu 20 及以上、centos 7 及以上 CPU 架构：X86（优先推荐）、ARM | [立即下载](https://zim-private.oss-cn-beijing.aliyuncs.com/zim/ZIM-23.1.5.x86_64-license/20230912/ZIM-23.1.5.x86_64.all.tar) | [立即下载](https://zim-private.oss-cn-beijing.aliyuncs.com/zim/ZIM-23.1.5.x86_64-license/%E7%8E%AF%E4%BF%A1%E7%A7%81%E6%9C%89%E5%8C%96IM%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A320230516.pdf) |
+<table>
+<tr>
+<td width="200px">安装包名称</td>
+<td width="250px">适配环境要求</td>
+<td>下载安装包</td>
+<td>下载部署手册</td>
+</tr>
+<tr>
+<td>环信私有化即时通讯服务安装包（单机版）</td>
+<td>操作系统：Linux、ubuntu 20 及以上、centos 7 及以上 <br/>CPU 架构：X86、ARM</td>
+<td> <a href="https://zim-private.oss-cn-beijing.aliyuncs.com/zim/ZIM-23.1.5.x86_64-license/ZIM-23.1.5.x86_64.all.tar">立即下载(X86)</a><br/><a href="https://zim-private.oss-cn-beijing.aliyuncs.com/zim/ZIM-23.1.5.arm64-v8a-GIT.581a086/ZIM-23.1.5.arm64-v8a.all.tar?OSSAccessKeyId=LTAI5tKdC9mUTVGhhN2t7Ux4&Expires=1700503445&Signature=H81Idh3gQ0S9L4VsnDx5QTlcGxQ%3D">立即下载(ARM)</a></td>
+<td><a href="https://zim-private.oss-cn-beijing.aliyuncs.com/zim/ZIM-23.1.5.x86_64-license/%E7%8E%AF%E4%BF%A1%E7%A7%81%E6%9C%89%E5%8C%96IM%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A320230516.pdf">立即下载</a></td>
+</tr>
+</table>
 
 ### 2.2 申请授权
 
