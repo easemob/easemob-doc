@@ -35,8 +35,8 @@
 使用在线状态功能前，请确保满足以下条件：
 
 1. 完成 `4.0.4 及以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
-2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已联系商务开通在线状态订阅功能。
+2. 了解环信即时通讯 IM API 的 [使用限制](/document/v1/privatization/uc_limitation.html)。
+3. 私有部署已开通在线状态订阅功能。
 
 ## 实现方法
 

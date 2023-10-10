@@ -8,8 +8,8 @@
 
 环信即时通讯 IM iOS SDK 提供 `IEMGroupManager` 类和 `EMGroup` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
+<!--- 管理群成员的自定义属性-->
 - 加入、退出群组
-- 管理群成员的自定义属性
 - 管理群主及群管理员
 - 管理群组白名单
 - 管理群组黑名单
@@ -20,9 +20,9 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/document/v1/privatization/uc_limitation.html)。
 - 了解群成员角色，详见 [群组功能介绍](group_overview.html)。
-- 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
+
 
 ## 实现方法
 
@@ -176,7 +176,7 @@ do {
                          fromGroup:@"groupsID"
                          completion:nil];
 ```
-
+<!--
 ### 管理群成员的自定义属性
 
 群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
@@ -234,7 +234,7 @@ do {
             //根据获取的自定义属性或缓存刷新 UI。
     }];
 ```
-
+-->
 ### 管理群主和群管理员
 
 #### 变更群主

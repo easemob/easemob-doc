@@ -17,7 +17,7 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 :::notice
 
 - 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
-- Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
+- 下载Uni-app Demo 源码地址 [立即下载](https://downloadsdk.easemob.com/mp/downloads/sdk/private-uniapp-20230918.zip)
   :::
 
 ## 功能说明
@@ -32,7 +32,7 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 
 ### 集成前准备
 
-[注册并创建应用](/product/enable_and_configure_IM.html#创建应用)
+[注册并创建应用](/document/v1/privatization/uc_configure.html#创建应用)
 
 ### 搭建开发环境
 
@@ -45,6 +45,7 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 
 ### 配置服务器域名（以微信为例）
 
+<!--
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 
 环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
@@ -62,9 +63,9 @@ SDK 目前支持微信、QQ、百度小程序、字节跳动（请使用低于 1
 应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console 中查看请求域名
 
 ![img](@static/images/applet/console.jpeg)
-
-登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 “开发 > 开发设置” 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
-
+-->
+登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 “开发 > 开发设置” 页面，按私有部署文档中的 **2.2开通防火墙白名单** 配置各服务“地址:端口”。
+<!--
 :::tip
 request 合法域名，uploadFile 合法域名，downloadFile 合法域名
 
@@ -89,7 +90,7 @@ socket 合法域名:
 4. wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）
 5. wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）
    :::
-
+-->
 ### 各端小程序 WebSocket 连接数量
 
 - QQ、微信小程序： `**1.7.0**` 及以上版本，最多可以同时存在 **5** 个 WebSocket 连接
@@ -103,7 +104,7 @@ socket 合法域名:
 
 可以通过以下方式获取 SDK：
 
-- 从环信的 [github 仓库](https://github.com/easemob/webim-uniapp-demo/tree/master/newSDK) 中获取 SDK 中的文件，从 3.3.1 开始支持 uniapp。
+- 从环信的 [Demo包](https://downloadsdk.easemob.com/mp/downloads/sdk/private-uniapp-20230918.zip) 中获取 SDK 中的文件，从 3.3.1 开始支持 uniapp。
 
 #### 引入 SDK
 

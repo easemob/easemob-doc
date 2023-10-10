@@ -12,11 +12,11 @@ EaseIMKit 是基于环信 IM SDK 的一款 UI 组件库，它提供了一些通�
 
 EaseIMKit 源码地址
 
-- [EaseIMKit 工程](https://github.com/easemob/easeui_ios/tree/EaseIMKit)
+- [EaseIMKit 工程](https://github.com/easemob/easeui_ios/tree/EaseIMKit_4.1.0)
 
 使用 EaseIMKit 环信 IM App 地址：
 
-- [环信 IM](https://github.com/easemob/chat-ios)
+- [环信 IM](https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V4.1.1.zip)
 
 ## 导入
 
@@ -43,9 +43,13 @@ EaseIMKit 中包含了拍照，发语音，发图片，发视频，发位置，�
 
 ### 源码集成
 
+<!--
 - [Github 下载源码](https://github.com/easemob/easeui_ios.git)
 
 执行命令：`git clone https://github.com/easemob/easeui_ios.git`
+-->
+[下载IM源码](https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V4.1.1.zip)
+
 
 - 创建 `Podfile` 文件并添加 EaseIMKit 源码依赖
 
@@ -75,7 +79,7 @@ EaseIMKit 中包含了拍照，发语音，发图片，发视频，发位置，�
   1. 终端 cd 到 Podfile 文件所在目录，执行 pod install 命令在项目中安装 EaseIMKit 本地源码
   2. 执行完成后，则在 Xcode 项目目录 Pods/Development Pods/ 可找到 EaseIMKit 源码，如下图所示：
 
-  ![img](@static/images/ios/easeimkit3.png)
+  <img src=@static/images/ios/easeimkit3.png  title=集成本地源码 width="400"/>
 
   3. 可对源码进行符合自己项目目标的自定义修改
 
@@ -334,19 +338,21 @@ typedef enum {
 
 聊天页背景色，输入区颜色配置示例：
 
-![背景色，输入区颜色](@static/images/ios/easeimkit4.png)
+ <img src=@static/images/ios/easeimkit4.png  title=背景色，输入区颜色 width="200"/>
 
 聊天会话输入区类型参数配置示例：
 
-![全部功能，语音不可用，表情不可用，语音和表情不可用，纯文本](@static/images/ios/easeimkit5.png)
+
+ <img src=@static/images/ios/easeimkit5.png  title=纯文本 width="200"/>
 
 输入区扩展功能参数配置示例：
 
-![输入区扩展](@static/images/ios/easeimkit6.jpeg)
+ <img src=@static/images/ios/easeimkit6.jpeg  title=输入区扩展 width="200"/>
 
 聊天会话群聊消息同左排列，时间线背景色，时间字体颜色配置示例：
 
-![群聊消息同左排列，时间线背景色，时间字体颜色](@static/images/ios/easeimkit7.jpeg)
+
+ <img src=@static/images/ios/easeimkit7.jpeg  title=群聊消息 width="200"/>
 
 ### 会话列表样式配置
 
@@ -417,7 +423,7 @@ typedef enum {
 
 通讯录添加头部功能区：新的好友，群聊，聊天室示意图：
 
-![头部功能区：新的好友，群聊，聊天室以及联系人列表](@static/images/ios/easeimkit8.png)
+ <img src=@static/images/ios/easeimkit8.png  title=头部功能区 width="200"/>
 
 ## 自定义功能扩展
 
@@ -476,7 +482,7 @@ EaseChatViewControllerDelegate
 
 通过自定义 cell 展示单聊音视频通话记录的效果图：
 
-![自定义 cell 展示单聊音视频通话记录](@static/images/ios/easeimkit9.png)
+ <img src=@static/images/ios/easeimkit9.png  title=单聊音视频通话记录 width="200"/>
 
 #### 选中消息的回调
 

@@ -33,9 +33,7 @@ composer require maniac/easemob-php
 
 使用 PHP SDK 之前，需准备环信 App Key、Client ID 和 Client Secret。
 
-如果你有环信管理后台账号并创建过应用，请先登录环信管理后台，点击 [这里](https://console.easemob.com/user/login)，然后在 “应用列表” 中点击 “查看” 即可获取 appkey、Client ID 和 ClientSecret。
-
-如果你没有环信管理后台账号，请先注册账号，点击 [这里](https://console.easemob.com/user/register)，注册成功后请登录，然后点击 “添加应用”，添加成功后点击 “查看” 即可获取 appkey、Client ID 和 ClientSecret。
+- 有效的环信即时通讯 IM 开发者账号和 App Key、Client ID、ClientSecret，登录 [环信管理后台](enable_and_configure_IM.html) 到“应用列表” → 点击“管理”即可获取到 App Key、Client ID、ClientSecret。
 
 ## 使用
 
@@ -107,7 +105,7 @@ $user->create($data);
 ## 参考
 
 - PHP SDK 的 API 文档在 [这里](https://easemob.github.io/im-php-server-sdk/annotated.html)
-- PHP SDK 开源地址在 [这里](https://github.com/easemob/im-php-server-sdk)
+- PHP SDK 开源地址在 [这里](https://github.com/easemob/im-php-server-sdk/tree/1.0.0)
 
 ## 常见问题
 

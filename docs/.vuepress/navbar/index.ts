@@ -4,13 +4,13 @@ export const zhNavbar = navbar([
   // { text: '产品简介', link: '/product/introduction.html' },
 
   { text: '即时通讯', children: [
-    // {
-    //   text: 'V1.0',
-    //   link: '/document/v1/privatization/uc_deploy.html'
-    // },
+    /**{
+       text: 'V1.0',
+       link: '/document/v1/privatization/uc_introduction.html'
+     },**/
     {
       text: 'V2.0',
-      link: '/document/v2/privatization/uc_deploy.html'
+      link: '/document/v2/privatization/uc_introduction.html'
     },
   ] },
 //   {

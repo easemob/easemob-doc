@@ -1,4 +1,4 @@
-# 私有化部署流程说明
+# 私有化服务部署
 
 <Toc />
 
@@ -58,7 +58,7 @@
 
 ## 3、集成测试
 
-当服务端验证完成后，可通过下载需要的客户端 SDK 及 Demo 进行集成体验。环信客户端 SDK 已对 IM 核心服务完成封装， 通过调用 SDK API 接口，即可快速获得消息收发 、会话管理 、群组 、好友 、聊天室等功能。目前客户端 SDK 已覆盖 Windows 、Linux 、MacOS 、Android 、iOS 、Web 、小程序等多种平台，服务器端 SDK 已覆盖 Java 、PHP 等平台，[下载私有化客户端 SDK](http://docs-im-beta.easemob.com/private/im/uc_private.html#私有化-sdk-下载)。
+当服务端验证完成后，可通过下载需要的客户端 SDK 及 Demo 进行集成体验。环信客户端 SDK 已对 IM 核心服务完成封装， 通过调用 SDK API 接口，即可快速获得消息收发 、会话管理 、群组 、好友 、聊天室等功能。目前客户端 SDK 已覆盖 Windows 、Linux 、MacOS 、Android 、iOS 、Web 、小程序等多种平台，服务器端 SDK 已覆盖 Java 、PHP 等平台，[下载私有化客户端 SDK](uc_private.html#私有化-sdk-下载)。
 
 示例一：以 Android 端 demo 体验为例
 
@@ -96,13 +96,7 @@
 
 ![img](@static/images/privitization/deploy_wechat_code.png)
 
-2. 提交工单
-
-登录[环信通讯云管理后台](https://console.easemob.com/user/login)，点击“服务支持-工单支持”，点击“进入工单系统”
-
-![img](@static/images/privitization/deploy_ticket.png)
-
-3. Geek 社区
+2. Geek 社区
 
 [Geek 开发者社区](http://www.imgeek.org/)里面的环信专区/环信技术交流板块提供了很多常见问题的讨论和解答，您也可以发帖提问，我们的技术和服务人员会尽力解答您的疑问！
 

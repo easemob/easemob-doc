@@ -1,4 +1,4 @@
-# 开通配置环信即时通讯 IM 服务
+# Console服务开通与配置
 
 <Toc />
 
@@ -94,7 +94,7 @@
 
 ![img](@static/images/privitization/deploy_push_callback.png)
 
-3. 点击 **添加回调地址** 按钮，打开回调配置对话框，在回调配置对话框中，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置，具体配置内容说明见 [回调配置](/document/server-side/callback.html#实现步骤)。
+3. 点击 **添加回调地址** 按钮，打开回调配置对话框，在回调配置对话框中，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置，具体配置内容说明见 [回调配置](/document/v1/server-side/callback.html#实现步骤)。
 
 ![img](@static/images/privitization/deploy_push_window.png)
 
@@ -132,3 +132,15 @@
 ![img](@static/images/privitization/deploy_ip_allow_list.png)
 
 3. 单击 **确认**，则删除该 IP 地址。
+
+### 用户管理
+
+console后台支持管理用户，包括：用户注册、用户删除、修改用户信息、查看用户好友、查看用户黑名单、重置密码、发送REST消息、封禁、强制下线等操作.
+
+1. 在环信即时通讯云的左侧导航栏中，选择  **运营服务** > **用户管理**。
+
+2. 单击 **创建IM用户** 按钮，注册新用户。
+
+3. 在 **用户名单** 列表中，单击操作列的 **更多** 执行更多操作。
+
+![img](@static/images/privitization/deploy_user_manage.png)

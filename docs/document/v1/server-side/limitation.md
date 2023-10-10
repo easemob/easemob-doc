@@ -1,6 +1,6 @@
 ---
 {
-    pageUri: "/product/limitation.html",
+    pageUri: "/document/v1/privatization/uc_limitation.html",
     title: "限制条件"
 }
 ---

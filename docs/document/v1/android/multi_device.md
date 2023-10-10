@@ -11,7 +11,7 @@
 
 多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。
 
-你可以在环信控制台的**功能配置** > **功能配置总览**页面的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置设置各端设备的数量：
+你可以在环信控制台的**服务管理** > **服务概览**页面的下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置设置各端设备的数量：
 
 ![img](@static/images/common/multidevice_device_count.png)
 
@@ -24,7 +24,7 @@
 </head>
 
 <body>
-<table width="815" height="195" border="1">
+<table width="815" height="" border="1">
   <tbody>
     <tr>
       <td width="127" height="49">单端/多端登录</td>
@@ -37,8 +37,8 @@
       <td rowspan="2">设备支持自动登录时，若设备下线后自动重连时需要判断是否踢掉当前在线的最早登录设备，请联系环信商务。 </td>
     </tr>
     <tr>
-      <td height="84">多端登录</td>
-      <td>若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。&lt;br/&gt;即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。</td>
+      <td height="">多端登录</td>
+      <td>若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。</td>
     </tr>
   </tbody>
 </table>
@@ -51,11 +51,13 @@ Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推�
 
 - 获取当前用户的其他已登录设备的登录 ID 列表；
 - 获取指定账号的在线登录设备列表；  
-- 设置登录设备的名称；
-- 设置登录设备的平台；
 - 强制指定账号从单个设备下线；
 - 强制指定账号从所有设备下线；
 - 获取其他设备的好友或者群组操作。
+<!--
+- 设置登录设备的名称；
+- 设置登录设备的平台；-->
+
 
 ## 前提条件
 
@@ -82,7 +84,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ### 获取指定账号的在线登录设备列表  
 
-你可以调用 `getLoggedInDevicesFromServer` 或 `getLoggedInDevicesFromServerWithToken` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`EMDeviceInfo` 中的 `mDeviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
+你可以调用 `getLoggedInDevicesFromServer` 方法通过传入用户 ID 和登录密码从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`EMDeviceInfo` 中的 `mDeviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
 
 ```java
     try {
@@ -91,13 +93,8 @@ EMClient.getInstance().chatManager().sendMessage(message);
         e.printStackTrace();
     }
 
-    try {
-        List<EMDeviceInfo> deviceInfos = EMClient.getInstance().getLoggedInDevicesFromServerWithToken("username","token");
-    } catch (HyphenateException e) {
-        e.printStackTrace();
-    }
 ```
-
+<!--
 ### 设置登录设备的名称
 
 即时通讯 IM 自 4.1.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
@@ -137,7 +134,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 你可以按照以下步骤设置登录设备所属的平台：
 
-1. 在环信控制台的**功能配置** > **功能配置总览**页面，点击**基础功能**页签，然后点击**多端多设备在线**对应的**设置**。在弹出的对话框中点击 **新增自定义平台**，在**添加自定义平台**对话框中设置**设备平台**和**设备数量**。
+1. 在环信控制台的**服务管理** > **服务概览**页面，点击**多端多设备在线**对应的**设置**。在弹出的对话框中点击 **新增自定义平台**，在**添加自定义平台**对话框中设置**设备平台**和**设备数量**。
 
 **设备平台**的取值范围为 [1,100]，**设备数量**的取值范围为 [0,4]。
 
@@ -154,10 +151,10 @@ EMClient.getInstance().chatManager().sendMessage(message);
     options.setCustomOSPlatform(1);
     EMClient.getInstance().init(context,options);
 ```
-
+-->
 ### 强制指定账号从单个设备下线
 
-你可以调用 `kickDevice` 或 `kickDeviceWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。调用这两种方法前，你需要首先通过 `EMClient#getLoggedInDevicesFromServer` 和 `EMDeviceInfo#getResource` 方法获取设备 ID。
+你可以调用 `kickDevice` 方法通过传入用户 ID 和登录密码将指定账号从单个登录设备踢下线。调用这两种方法前，你需要首先通过 `EMClient#getLoggedInDevicesFromServer` 和 `EMDeviceInfo#getResource` 方法获取设备 ID。
 
 :::notice
 不登录也可以使用该接口。
@@ -168,12 +165,12 @@ EMClient.getInstance().chatManager().sendMessage(message);
 List<EMDeviceInfo> deviceInfos = EMClient.getInstance().getLoggedInDevicesFromServer(username, password);
 // username：账户名称，password：账户密码, resource：设备 ID。需要在异步线程中执行。
 EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIndex).getResource());
-//EMClient.getInstance().kickDeviceWithToken(username, token, deviceInfos.get(selectedIndex).getResource());
+
 ```
 
 ### 强制指定账号从所有设备下线
 
-你可以调用 `kickAllDevices` 或 `kickAllDevicesWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备踢下线。
+你可以调用 `kickAllDevices` 方法通过传入用户 ID 和登录密码将指定账号从所有登录设备踢下线。
 
 :::notice
 不登录也可以使用该接口。
@@ -186,11 +183,6 @@ EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIn
         e.printStackTrace();
     }
 
-    try {
-        EMClient.getInstance().kickAllDevicesWithToken("username","token");
-    } catch (HyphenateException e) {
-        e.printStackTrace();
-    }
 ```
 
 ### 获取其他设备上的操作

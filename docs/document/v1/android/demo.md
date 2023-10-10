@@ -4,23 +4,22 @@
 
 环信即时通讯 IM Android 端提供示例应用可供体验。
 
-1. [下载 Demo](https://www.easemob.com/download/demo)。
+1. [下载 Demo](https://downloadsdk.easemob.com/mp/downloads/sdk/imsdkdemo_android-4.1.2.apk)。
 
-2. 输入你的手机号，获取验证码，然后输入。
+2. 输入你的登录账号和密码。
 
 3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
-![img](@static/images/demo/android_login.png)
+<!--![img](@static/images/demo/android_login.png)-->
 
 ## 代码下载
 
 您可以通过以下两种方式获取到源代码：
-- 下载代码压缩包：[IM SDK 及 Demo 下载](https://www.easemob.com/download/im)
-- 下载源代码：[github源码地址](https://github.com/easemob/chat-android)
+- 下载代码压缩包：[IM SDK 及 Demo 下载](https://downloadsdk.easemob.com/downloads/easemob-sdk-4.1.2.zip)
 欢迎大家提交 PR 改进和修复 EaseIM 和 EaseIMKit 中的问题。
 ## 导入 EaseIM
 
-从 [IM SDK 及 Demo 下载](https://www.easemob.com/download/im) 下载 Android SDK 压缩包，然后解压。解压后在 examples 文件夹下，即为 EaseIM 的工程目录。
+下载 Android SDK 压缩包，然后解压。解压后在 examples 文件夹下，即为 EaseIM 的工程目录。
 ### 导入到 Android Studio
 打开 Android Studio，点击 File > Open，打开 EaseIm3.0 根目录即可。
 :::notice
@@ -58,6 +57,14 @@
 - **ContactListFragment**：继承自 EaseIMKit 中的 EaseContactListFragment，展示了添加头布局，添加条目长按功能及实现条目点击事件等；
 - **GroupDetailActivity**：实现了如下功能：添加群成员，修改群公告及群介绍，上传共享文件，进行群组管理，设置消息免打扰及解散或者退出群组等。
 ## 部分 UI 展示
-![会话列表](@static/images/android/app-demo-ui-1.jpeg)
-![联系人列表](@static/images/android/app-demo-ui-2.jpeg)
-![聊天页面](@static/images/android/app-demo-ui-3.jpeg)
+
+<img src=@static/images/android/app-demo-ui-1.jpeg  title=“会话列表” width="200"/>&nbsp;&nbsp;
+<img src=@static/images/android/app-demo-ui-2.jpeg  title=联系人列表 width="200"/>&nbsp;&nbsp;
+<img src=@static/images/android/app-demo-ui-3.jpeg  title=聊天页面 width="200"/>
+<!--
+![会话列表](@static/images/android/app-demo-ui-1.jpeg?w=50)
+<br>
+![联系人列表](@static/images/android/app-demo-ui-2.jpeg?w=50)
+<br>
+![聊天页面](@static/images/android/app-demo-ui-3.jpeg?w=50)
+-->

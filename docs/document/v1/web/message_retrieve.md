@@ -4,28 +4,26 @@
 
 环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。本文介绍如何实现用户从消息服务器获取会话和消息。
 
-:::tip
-本文介绍的功能均为增值服务，需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
-
-:::
 
 ## 技术原理
 
 利用环信即时通讯 IM SDK 可从服务器获取会话和历史消息。
-
+- `getHistoryMessages` 按服务器接收消息的时间顺序获取服务器上保存的指定会话中的消息；
+<!--
 - `getServerConversations` 分页获取会话列表以及会话中的最新一条消息；
 - `getServerPinnedConversations` 获取服务端的置顶会话列表；
 - `pinConversation` 设置是否置顶会话；
 - `getHistoryMessages` 按服务器接收消息的时间顺序获取服务器上保存的指定会话中的消息；
 - `removeHistoryMessages` 单向删除服务端的历史消息；
 - `deleteConversation` 删除服务器端会话及其对应的消息。
+-->
 
 ## 前提条件
 
 开始前，请确保已完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
 
 ## 实现方法
-
+<!--
 ### 从服务器分页获取会话列表
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
@@ -101,40 +99,14 @@ connection.getServerPinnedConversations({pageSize:50, cursor: ''})
 connection.pinConversation({conversationId:'conversationId', conversationType: 'singleChat', isPinned: true})
 ```
 
-### 从服务器获取指定会话的历史消息
 
-你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
-
-```javascript
-let options = {
-  // 对方的用户 ID 或者群组 ID 或聊天室 ID。
-  targetId: "user1",
-  // 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
-  pageSize: 20,
-  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
-  cursor: -1,
-  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊。
-  chatType: "groupChat",
-  // 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
-  searchDirection: "up",
-};
-WebIM.conn
-  .getHistoryMessages(options)
-  .then((res) => {
-    // 成功获取历史消息。
-    console.log(res);
-  })
-  .catch((e) => {
-    // 获取失败。
-  });
-```
 
 ### 单向删除服务端的历史消息
 
 你可以调用 `removeHistoryMessages` 方法按照时间或消息 ID 单向删除服务端的历史消息。每次最多可删除 50 条消息。消息删除后，该账号无法从服务端拉取到该消息。其他用户不受该操作影响。多端多设备登录时，删除成功后会触发 `onMultiDeviceEvent#deleteRoaming` 回调。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V4.1.2 或以上版本并联系商务开通。
+若使用该功能，需将 SDK 升级至 V4.1.2 或以上版本。
 :::
 
 示例代码如下：
@@ -168,5 +140,34 @@ WebIM.conn
   })
   .catch((e) => {
     // 删除失败。
+  });
+```
+-->
+
+### 从服务器获取指定会话的历史消息
+
+你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
+
+```javascript
+let options = {
+  // 对方的用户 ID 或者群组 ID 或聊天室 ID。
+  targetId: "user1",
+  // 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
+  pageSize: 20,
+  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
+  cursor: -1,
+  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊。
+  chatType: "groupChat",
+  // 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
+  searchDirection: "up",
+};
+WebIM.conn
+  .getHistoryMessages(options)
+  .then((res) => {
+    // 成功获取历史消息。
+    console.log(res);
+  })
+  .catch((e) => {
+    // 获取失败。
   });
 ```

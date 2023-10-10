@@ -6,7 +6,6 @@
 
 :::notice
 1. 目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
-2. 私有化版本不支持 Reaction 功能。
 :::
 
 ## 技术原理
@@ -32,8 +31,8 @@
 开始前，请确保满足以下条件：
 
 1. 完成 `4.0.5 及以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
-2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已联系商务开通 Reaction 功能。
+2. 了解环信即时通讯 IM API 的 [使用限制](/document/v1/privatization/uc_limitation.html)。
+3. 私有部署已开通 Reaction 功能。
 
 ## 实现方法
 
