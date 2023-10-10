@@ -12,7 +12,7 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 
 - Java 1.8
 - [Reactor](https://projectreactor.io/)(io.projectreactor:reactor-bom:2020.0.4)
-- 有效的环信即时通讯 IM 开发者账号和 App Key、Client ID、ClientSecret，登录 [环信管理后台](https://console.easemob.com/user/login) 到“应用列表” → 点击“查看”即可获取到 App Key、Client ID、ClientSecret。
+- 有效的环信即时通讯 IM 开发者账号和 App Key、Client ID、ClientSecret，登录 [环信管理后台](enable_and_configure_IM.html) 到“应用列表” → 点击“管理”即可获取到 App Key、Client ID、ClientSecret。
 
 ## 实现方法
 
@@ -128,7 +128,7 @@ public class Config {
 ## 参考
 
 - [Server SDK 的 API 文档](https://easemob.github.io/easemob-im-server-sdk/)。
-- [Server SDK 开源地址](https://github.com/easemob/easemob-im-server-sdk)。
+- [Server SDK 开源地址](https://github.com/easemob/easemob-im-server-sdk/tree/v0.7.5)。
 
 ## 常见问题
 

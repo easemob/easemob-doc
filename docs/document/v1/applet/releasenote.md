@@ -1,7 +1,7 @@
 # 小程序 SDK 更新日志
 
 <Toc />
-
+<!--
 ## 版本 V4.2.0 Dev 2023-07-27（开发版）
 
 ### 新增特性
@@ -100,19 +100,19 @@
 ### 新增特性
 
 - [IM SDK] 新增群组事件回调 [onGroupEvent](https://docs-im-beta.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://docs-im-beta.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
-- [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](/document/web/error.html)
+- [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](/document/v1/web/error.html)
 - [IM SDK] 邀请加入群聊回调 `onGroupChange` 返回中新增 群名称 参数值。
 
 ### 优化
 
-- [IM SDK] 支持批量查询群组详情 [getGroupInfo](/document/web/group_manage.html#获取群组详情信息)。
+- [IM SDK] 支持批量查询群组详情 [getGroupInfo](/document/v1/web/group_manage.html#获取群组详情信息)。
 
 ## 版本 V4.0.7 2022-5-25
 
 ### 新增特性:
 
 - [IM SDK] 新增消息子区（message thread）功能；
-- [IM SDK] 新增 [getConversationList](/document/web/message_retrieve.html) 方法解析会话中的最新一条消息；
+- [IM SDK] 新增 [getConversationList](/document/v1/web/message_retrieve.html) 方法解析会话中的最新一条消息；
 
 ### 优化：
 
@@ -138,14 +138,10 @@
 
 ## 版本 V4.0.4 2022-4-19
 
-:::tip
-仅 V4.0.4 及以下版本支持私有化部署。
-:::
-
 ### 新增特性:
 
 - [IM SDK] 增加用户在线状态(Presence)订阅功能。
-- [IM SDK] 增加自动翻译接口。除了按需翻译，IM 实现自动翻译。
+
 
 ### 优化：
 
@@ -190,7 +186,7 @@
 - [IM SDK] 增加新的构造消息 API
 - [IM SDK] 优化部分 API，减少不必要参数，增加错误提示。
 - [IM SDK] 修复部分已知 bug
-
+-->
 ## 版本：v3.6.3 2021-07-30
 
 - [IM SDK] 增加下载文件验证 secret 功能

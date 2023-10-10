@@ -1,335 +1,97 @@
-# 环信即时通讯 IM Web 快速开始
+# Web SDK 快速集成
 
-<Toc />
+## 搭建本地测试环境
 
-本页面介绍如何快速集成环信即时通讯 IM Web SDK 实现单聊。
+1. 搭建环境之前需要对环信提供的参考文档有个初步的了解，主要为以下形式，请根据下面的关键字选择源码参考
 
-## 实现原理
+- 基于 react 开发的完整的实时 Demo ，关键字：**至少 IE9** ，**完整流程**，**webpack+react**
+- 首先将源码下载到本地，[下载SDK及Demo](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/webdemo-3.4.2.7.zip)
 
-下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![](@static/images/web/sendandreceivemsg.png)
+2. 去官网安装[NodeJS](https://nodejs.org/zh-cn/)，建议4+
 
-## 前提条件
+- 因为整套代码需要依赖于[npm](https://www.npmjs.com/) NodeJS 的包管理工具，安装 NodeJS 会默认安装 NPM 工具
+- 定位到 webim/demo 目录 在终端执行下面的命令，安装测试所需要的依赖模块
 
-- 有效的环信即时通讯 IM 开发者账号；
-- [创建环信即时通讯 IM 项目并获取 App Key](/product/enable_and_configure_IM.html)；
-- [npm](https://www.npmjs.com/get-npm)；
-- SDK 支持 IE 9+、Firefox 10+、Chrome 54+ 和 Safari 6+。
+- 保证此过程没有 error 终止为成功，如果有错误中断，请保留错误日志并再次尝试，大多数情况是网络原因导致的无法连接而中断
 
-## 操作步骤
-
-### 1. 准备开发环境
-
-本节介绍如何创建项目，将环信即时通讯 IM Web SDK 集成到你的项目中。
-
-#### 新建 Web 项目
-
-新建 `Easemob_quickstart` 目录。在该目录下运行 `npm init` 命令创建 `package.json` 文件，然后创建以下文件:
-
-- `index.html`：设置 Web 应用的用户界面；
-- `index.js`：包含消息发送和接收逻辑的实现代码。
-此时你的目录中包含以下文件：
-
-Easemob_quickstart<br>
-├─ index.html<br>
-├─ index.js<br>
-└─ package.json
-
-### 2. 集成 SDK
-
-- 在 `package.json` 中的 `dependencies` 字段中加入 `easemob-websdk` 及对应版本：
-
-```json
-{
-    "name": "web",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "dependencies": {
-    "easemob-websdk": "latest"
-    },
-    "author": "",
-    "license": "ISC"
-}
+```
+npm i
 ```
 
-### 3. 实现用户界面
+3. 上述步骤成功后
 
-`index.html` 的内容如下。
-
-`<script src="./dist/bundle.js"></script>` 用于引用 webpack 打包之后的 `bundle.js` 文件。webpack 的配置在后续步骤中介绍。
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Easemob Chat Examples</title>
-</head>
-
-<body>
-    <h2 class="left-align">Easemob Chat Examples</h2>
-    <form id="loginForm">
-        <div class="col" style="min-width: 433px; max-width: 443px">
-            <div class="card" style="margin-top: 0px; margin-bottom: 0px;">
-                <div class="row card-content" style="margin-bottom: 0px; margin-top: 10px;">
-                    <div class="input-field">
-                        <label>Username</label>
-                        <input type="text" placeholder="Username" id="userID">
-                    </div>
-                    <div class="input-field">
-                        <label>Password</label>
-                        <input type="password" placeholder="Password" id="password">
-                    </div>
-                    <div class="row">
-                        <div>
-                            <button type="button" id="register">register</button>
-                            <button type="button" id="login">login</button>
-                            <button type="button" id="logout">logout</button>
-                        </div>
-                    </div>
-                    <div class="input-field">
-                        <label>Peer username</label>
-                        <input type="text" placeholder="Peer username" id="peerId">
-                    </div>
-                    <div class="input-field">
-                        <label>Peer Message</label>
-                        <input type="text" placeholder="Peer message" id="peerMessage">
-                        <button type="button" id="send_peer_message">send</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <hr>
-    <div id="log"></div>
-</body>
-<script src="./dist/bundle.js"></script>
-</html>
+```
+# 启动测试环境
+npm start （如果需要https 通过HTTPS=true npm start启动）
+# 打包发布，发布后文件在 webim/demo/build 目录下
+npm run build
 ```
 
-### 4. 实现消息发送与接收
+4. 浏览器访问即可看到测试页面：
 
-`index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 `<Your app key>` 替换为你之前获取的 App Key。
+- http：http://localhost:3000/
 
-```Javascript
-import WebIM from 'easemob-websdk'
-const appKey = "<Your app key>"
+- https：https://localhost:3001/
 
-let username, password
+## 集成
 
-// 初始化客户端。相关的参数配置，详见 API 参考中的 `Connection` 类。
-WebIM.conn = new WebIM.connection({
-    //注意这里的 "K" 需大写。
-    appKey: appKey,
-})
+可以通过以下方式引用 Web SDK:
 
-// 添加回调函数。
-WebIM.conn.addEventHandler('connection&message', {
-    onConnected: () => {
-        document.getElementById("log").appendChild(document.createElement('div')).append("Connect success !")
-    },
-    onDisconnected: () => {
-        document.getElementById("log").appendChild(document.createElement('div')).append("Logout success !")
-    },
-    onTextMessage: (message) => {
-        console.log(message)
-        document.getElementById("log").appendChild(document.createElement('div')).append("Message from: " + message.from + " Message: " + message.msg)
-    },
-    onError: (error) => {
-        console.log('on error', error)
-    }
-})
+- 将文件复制到本地，引用本地文件
 
 
-// 按钮行为定义。
-window.onload = function () {
-    // 注册。
-    document.getElementById("register").onclick = function(){
-        username = document.getElementById("userID").value.toString()
-        password = document.getElementById("password").value.toString()
-        WebIM.conn
-            .registerUser({ username, password })
-            .then((res) => {
-                document
-                .getElementById("log")
-                .appendChild(document.createElement("div"))
-                .append(`register user ${username} success`);
-            })
-            .catch((e) => {
-                document
-                .getElementById("log")
-                .appendChild(document.createElement("div"))
-                .append(`${username} already exists`);
-            });
-    }
-    // 登录。
-    document.getElementById("login").onclick = function () {
-        username = document.getElementById("userID").value.toString()
-        password = document.getElementById("password").value.toString()
-        WebIM.conn
-            .open({ user: username, pwd: password })
-            .then((res) => {
-                document
-                .getElementById("log")
-                .appendChild(document.createElement("div"))
-                .append(`Login Success`);
-            })
-            .catch((e) => {
-                document
-                .getElementById("log")
-                .appendChild(document.createElement("div"))
-                .append(`Login failed`);
-            });
-    }
+### 引用本地文件
 
-    // 登出。
-    document.getElementById("logout").onclick = function () {
-        WebIM.conn.close();
-    }
-
-    // 发送一条单聊消息。
-    document.getElementById("send_peer_message").onclick = function () {
-        let peerId = document.getElementById("peerId").value.toString()
-        let peerMessage = document.getElementById("peerMessage").value.toString()
-        let option = {
-            chatType: 'singleChat',    // 会话类型，设置为单聊。
-            type: 'txt',               // 消息类型。
-            to: peerId,                // 消息接收方（用户 ID)。
-            msg: peerMessage           // 消息内容。
-        }
-        let msg = WebIM.message.create(option);
-        WebIM.conn.send(msg).then((res) => {
-            console.log('send private text success');
-            document.getElementById("log").appendChild(document.createElement('div')).append("Message send to: " + peerId + " Message: " + peerMessage)
-        }).catch(() => {
-            console.log('send private text fail');
-        })
-    }
-}
-```
-:::notice
-对于 Typescript，通过以下代码引入类型声明：
-```JavaScript
-import WebIM, { EasemobChat } from 'easemob-websdk'
-```
+1. 下载demo后，将sdk目录下的 webimSDK.js（现SDK包命名为websdk+版本号的形式，例如：websdk3.4.2.js）、EMedia_x1v1.js、EMedia_sdk-dev.js，按照实际项目需求选择对应的SDK拷贝到系统相应的目录下。
+:::tip
+websdk：提供全功能即时通讯SDK接口，Emedia:提供音视频功能相关SDK接口。如需音视频功能，EMedia_x1v1.js与EMedia_sdk-dev.js只引用EMedia_x1v1.js即可。
 :::
 
-### 5. 运行项目
+2. 新版本中 WebIMConfig 文件只做参数定义方便实例化 SDK 时使用，仅与自己项目结构有关。详细使用可以查看 /demo/src/config/WebIM.js文件
 
-本文使用 webpack 对项目进行打包，并使用 `webpack-dev-server` 运行项目。
+3. 新建 html 文件并引入相关 js 脚本。
 
-1.在 `package.json` 的 `dependencies` 字段中添加 `webpack`、`webpack-cli` 和 `webpack-dev-server`，并且在 `scripts` 字段中添加 `build` 和 `start:dev` 命令。
-
-```json
-{
-    "name": "web",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "build": "webpack --config webpack.config.js",
-        "start:dev": "webpack serve --open --config webpack.config.js"
-    },
-    "dependencies": {
-        "easemob-websdk": "latest",
-        "webpack": "^5.50.0",
-        "webpack-dev-server": "^3.11.2",
-        "webpack-cli": "^4.8.0"
-    },
-    "author": "",
-    "license": "ISC"
-}
+```
+<script type='text/javascript' src='WebIMConfig.js'></script>
+<script type='text/javascript' src='webimSDK.js'></script>
 ```
 
-2.在项目根目录中添加 `webpack.config.js` 文件，用于配置 webpack。文件内容如下：
+:::tip
+Web SDK 向下兼容V1.1.2和V1.1.1。关于详细的引用文件和配置参数（WebIMConfig）的方法，请查看本页“兼容性”的内容。
+:::
+初始化 WebIM.connection 和 构造消息 WebIM.message， 需要在中间加上 default，如：WebIM.default.message。
 
-```Javascript
-const path = require('path');
+## 配置
 
-module.exports = {
-    entry: './index.js',
-    mode: 'production',
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, './dist'),
-    },
-    devServer: {
-        compress: true,
-        port: 9000,
-        https: true
-    }
-};
+3.0 SDK，在 WebIMConfig.js 文件内进行以下配置：
+
+```
+socketServer: 'https://xxx.xxxxx.com',    // socket Server地址
+
+restServer: 'https://xxx.xxxxx.com',               // rest Server地址
+
+appkey: 'easemob-demo#chatdemoui',        // App key
+
+https : false,                            // 是否使用https
+
+isHttpDNS: true,                          // 3.0 SDK支持，防止DNS劫持从服务端获取XMPPUrl、restUrl
+
+isMultiLoginSessions: false,              // 是否开启多页面同步收消息，注意，需要先联系商务开通此功能
+
+isDebug: false,                           // 打开调试，会自动打印log，在控制台的console中查看log
+
+autoReconnectNumMax: 2,                   // 断线重连最大次数
+
+heartBeatWait: 30000,                     // 心跳间隔（只在小程序中使用）
+
+delivery: false,                           // 是否发送已读回执
+
+useOwnUploadFun: false,         // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传url）
+
+deviceId: 'webim'               // 设备ID，默认可不传，如果传一个固定值，在没开启多端登录的情况下同一个账号会互踢
+
+注意：
+socketServer与restServer取值见 私有部署文档中的 2.2开通防火墙白名单 配置各服务“地址:端口”。
 ```
 
-此时你的目录中包含以下文件：
-
-Easemob_quickstart<br>
-├─ index.html<br>
-├─ index.js<br>
-├─ package.json<br>
-└─webpack.config.js
-
-3.在项目根目录运行以下命令，安装依赖项。
-
-```bash
-$ npm install
-```
-
-4.运行以下命令使用 `webpack` 构建并运行项目。
-
-```bash
-# 使用 webpack 打包。
-$ npm run build
-
-# 使用 webpack-dev-server 运行项目。
-$ npm run start:dev
-```
-
-项目启动后，在页面输入用户名和密码进行注册，然后利用该用户名和密码登录。登录成功后，输入对方的用户名和要发送的消息，点击**发送**按钮发送消息，可同时打开另一页面相互收发消息。
-
-### 6. 参考信息
-
-可通过以下两种方式集成 SDK：
-
-#### 方法一：通过 npm 安装并导入 SDK
-
-1. 在 `package.json` 中的 `dependencies` 字段中加入 `easemob-websdk` 及对应版本：
-
-```json
-{
-    "name": "web",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "dependencies": {
-    "easemob-websdk": "latest"
-    },
-    "author": "",
-    "license": "ISC"
-}
-```
-
-2. 在你的 `index.js` 文件中导入 `easemob-websdk` 模块：
-
-```JavaScript
-import WebIM from 'easemob-websdk'
-```
-
-#### 方法二：从官网获取并导入 SDK
-
-1. 下载 [Easemob Chat SDK for Web](https://www.easemob.com/download/im)。将 `demo/src/config` 中的 Easemob-chat 文件保存到你的项目下。
-
-2. 在 `index.html` 文件中，对 `index.js` 文件进行引用。
-
-```JavaScript
-<script src="path to the JS file"></script>
-```

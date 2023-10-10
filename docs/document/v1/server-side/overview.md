@@ -4,7 +4,7 @@
 
 环信即时通讯通过 REST 平台提供 REST API，你可以通过你的业务服务器向环信 REST 服务器发送 HTTP 请求，在服务端实现实时通信。
 
-另外环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，具体参见：[Java Server SDK](java_server_sdk.html) 和 [PHP Server SDK](php_server_sdk.html)。
+<!--另外环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，具体参见：[Java Server SDK](java_server_sdk.html) 和 [PHP Server SDK](php_server_sdk.html)。-->
 
 ## REST 平台架构
 
@@ -41,7 +41,8 @@
 
 ## 请求域名
 
-环信不同数据中心的 REST API 请求域名 {host}：
+请参照私有化部署文档 **5.2应用信息** 章节获取REST API请求信息。
+<!--环信不同数据中心的 REST API 请求域名 {host}：
 
 应用所在数据中心可以在环信用户管理后台 > 应用列表找到对应的 App Key 点击 **查看** > **即时通讯** > **服务概览** 中查看：
 
@@ -52,7 +53,7 @@
 2. 国内 VIP 区、客服专区客户请联系商务经理索要 REST API 请求地址。
 3. 支持 HTTP 和 HTTPS。
 :::
-
+-->
 ### 通信协议
 
 环信即时通讯 REST API 支持 HTTP 和 HTTPS 协议。
@@ -73,7 +74,6 @@
 | 名称         | 方法   | 请求                                             | 描述                  |
 | :----------- | :----- | :----------------------------------------------- | :-------------------- |
 | [开放](account_system.html#开放注册单个用户) 和 [授权](account_system.html#授权注册单个用户)注册单个用户 | POST   | /{org_name}/{app_name}/users             | 开放注册和授权注册一个用户。        |
-| 批量注册用户 | POST   | /{org_name}/{app_name}/users                     | 授权注册多个用户。        |
 | 获取单个用户详情 | GET    | /{org_name}/{app_name}/users/{username}          | 获取单个用户的信息。  |
 | 批量获取用户详情 | GET    | /{org_name}/{app_name}/users                     | 获取多个用户的信息。  |
 | 删除单个用户账号| DELETE | /{org_name}/{app_name}/users/{username}          | 删除单个用户。        |
@@ -121,7 +121,6 @@
 | :------------------------- | :----- | :---------------------------------------------- | :------------------------------------------- |
 | 设置用户属性               | PUT    | /{org_name}/{app_name}/metadata/user/{username} | 对指定的用户设置用户属性。                   |
 | 获取指定用户的所有用户属性 | GET    | /{org_name}/{app_name}/metadata/user/{username} | 获取指定用户的所有用户属性。                 |
-| 批量获取用户属性           | POST   | /{org_name}/{app_name}/metadata/user/get        | 根据指定的用户名列表和属性列表查询用户属性。 |
 | 删除用户属性               | DELETE | /{org_name}/{app_name}/metadata/user/{username} | 删除指定用户的所有用户属性。                 |
 | 获取 app 下的用户属性总大小       | GET    | /{org_name}/{app_name}/metadata/user/capacity   | 获取该 app 下所有用户的用户属性总大小。      |
 
@@ -166,7 +165,6 @@
 | 获取群管理员列表  | GET    | /{org_name}/{app_name}/chatgroups/{group_id}/admin           | 获取群组管理员列表。  |
 | 添加群管理员  | POST | /{org_name}/{app_name}/chatgroups/{group_id}/admin | 添加用户至群组管理员列表。 |
 | 移除群管理员| DELETE | /{org_name}/{app_name}/chatgroups/{group_id}/admin/{oldadmin} | 从群组管理员列表中移除用户。|
-| 转让群组  | PUT    | /{org_name}/{app_name}/chatgroups/{group_id}  | 转让群主权限。 |
 | 查询群组黑名单           | GET    | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users    | 查询群组的黑名单列表。             |
 | 添加单个用户至群组黑名单 | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username} | 将用户添加至群组的黑名单列表。     |
 | 批量添加用户至群组黑名单 | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users    | 将用户批量添加至群组的黑名单列表。 |
@@ -178,10 +176,11 @@
 | 将用户移除群组白名单     | DELETE | {org_name}/{app_name}/chatgroups/{group_id}/white/users/{username} | 将指定用户从群组白名单中移除。     |
 | 获取禁言列表             | GET    | /{org_name}/{app_name}/chatgroups/{group_id}/{mute}           | 获得指定群组的禁言列表。           |
 | 禁言指定群成员           | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/mute            | 将指定群成员禁言。                 |
-| 禁言全体成员             | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/ban             | 对所有群组成员一键禁言。           |
+<!--| 禁言全体成员             | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/ban             | 对所有群组成员一键禁言。           |
 | 解除指定成员禁言             | POST   | /{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}(,{member2},…) | 将一个或多个群成员移除禁言列表。   |
 | 解除全员禁言   | PUT    | /{org_name}/{app_name}/chatgroups/{group_id}/ban             | 一键取消对群组全体成员的禁言。     |
-
+-->
+<!--
 ### 管理子区
 
 [子区管理](group.html#管理子区) 包括子区的创建、获取、修改、删除等。
@@ -204,7 +203,7 @@
 | 查询子区成员(分页) | GET    | /{org_name}/{app_name}/thread/{thread_id}/users  | 获取子区下成员列表。 |
 | 批量加入子区       | POST   | /{org_name}/{app_name}/thread/{thread_id}/users  | 批量往子区添加成员。 |
 | 批量踢出子区成员   | DELETE | /{org_name}/{app_name}/threads/{thread_id}/users | 批量踢出子区成员。   |
-
+-->
 ### 聊天室管理
 
 [聊天室管理](chatroom.html) 包括创建、获取、修改、删除聊天室。
@@ -219,11 +218,13 @@
 | 删除聊天室              | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 删除一个聊天室。                         |
 | 获取聊天室公告          | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 获取指定聊天室 ID 的聊天室公告。         |
 | 修改聊天室公告          | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 修改指定聊天室 ID 的聊天室公告。         |
+<!--
 | 获取聊天室自定义属性 | POST  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 获取聊天室指定或所有自定义属性。      |
 | 设置聊天室自定义属性 | PUT  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username} | 设置聊天室单个或多个自定义属性。    |
 | 强制设置聊天室自定义属性 | PUT | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}/forced | 强制设置聊天室单个或多个自定义属性。        |
 | 删除聊天室自定义属性 | DELETE  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username} | 删除单个或多个聊天室自定义属性。 |
 | 强制删除聊天室自定义属性 | DELETE  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}/forced | 强制删除单个或多个聊天室自定义属性。  |
+-->
 
 ### 聊天室成员管理
 
@@ -250,10 +251,9 @@
 | 将用户移除聊天室白名单     | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username} | 将指定用户从聊天室白名单移除。       |
 | 获取聊天室的禁言列表       | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/mute          | 获取当前聊天室的禁言用户列表。       |
 | 禁言聊天室成员             | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/mute          | 将聊天室成员禁言。                   |
-| 禁言聊天室全体成员         | POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/ban           | 对所有聊天室成员一键禁言。           |
 | 解除聊天室禁言成员         | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member1}(,{member2},…) | 将指定用户从禁言列表中移除。         |
-| 解除聊天室全员禁言         | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/ban           | 一键取消对聊天室全体成员的禁言。     |
 
+<!--
 ## 用户在线状态管理
 
 | 名称 | 方法  | 请求 | 描述 |
@@ -264,3 +264,4 @@
 | 查询单个群组的在线成员数量    |  GET   | /{org_name}/{app_name}/presence/online/{group_id}/type/{query_type}  | 查询单个群组的在线成员数量。 |
 |  取消订阅多个用户的在线状态     |  DELETE           | /{org_name}/{app_name}/users/{uid}/presence                  | 取消订阅多个用户的在线状态。   |
 | 查询订阅列表    |   GET       | /{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&pageSize=100 | 查询订阅列表。  |
+-->

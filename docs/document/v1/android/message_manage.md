@@ -9,8 +9,8 @@
 ## 技术原理
 
 环信即时通讯 IM Android SDK 支持管理用户设备上存储的消息会话数据，其中包含如下主要方法：
-
-- `EMChatManager.getAllConversationsBySort` 获取本地所有会话；
+<!--
+- `EMChatManager.getAllConversationsBySort` 获取本地所有会话；-->
 - `EMConversation.getAllMessages` 从数据库中读取指定会话的消息；
 - `EMConversation.getUnreadMsgCount` 获取指定会话的未读消息数；
 - `EMChatManager.getUnreadMessageCount` 获取所有会话的未读消息数；
@@ -24,19 +24,21 @@
 - `EMChatManager.importMessages` 批量导入消息到数据库；
 - `EMChatManager.insertMessage` 在指定会话中插入消息；
 - `EMConversation.updateMessage` 更新消息到本地数据库；
+<!--
 - `EMStatisticsManager.getMessageStatistics` 根据消息 ID 获取消息流量统计信息；
 - `EMStatisticsManager.getMessageCount` 获取一定时间段内发送和/或接收的指定或全部类型的消息条数；
 - `EMStatisticsManager.getMessageSize` 获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量。
+-->
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/document/v1/privatization/uc_limitation.html)。
 
 ## 实现方法
-
+<!--
 ### 获取本地所有会话
 
 你可以调用 `getAllConversationsBySort` 方法一次性获取本地所有会话。
@@ -66,7 +68,7 @@ List<EMMessage> messages = conversation.getAllMessages();
 // SDK 初始化时，为每个会话加载 1 条聊天记录。如需更多消息，请到数据库中获取。该方法获取 `startMsgId` 之前的 `pagesize` 条消息，SDK 会将这些消息自动存入此会话，app 无需添加到会话中。
 List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
 ```
-
+-->
 ### 获取指定会话的未读消息数
 
 你可以调用接口获取特定会话的未读消息数，示例代码如下：
@@ -197,7 +199,7 @@ EMClient.getInstance().chatManager().updateMessage(message);
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 conversation.updateMessage(message);
 ```
-
+<!--
 ### 获取本地消息的流量统计信息
 
 本地消息的流量统计功能默认关闭。若要使用该功能，需在 SDK 初始化前设置 `EMOptions#setEnableStatistics(boolean)` 开启。
@@ -245,3 +247,4 @@ int number = EMClient.getInstance().statisticsManager().getMessageCount(startTim
 ```java
 long size = EMClient.getInstance().statisticsManager().getMessageSize(startTime, endTime, direct, style);
 ```
+-->

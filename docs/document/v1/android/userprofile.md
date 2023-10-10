@@ -7,7 +7,7 @@
 用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。
 
 例如，在招聘场景下，利用用户属性功能可以存储性别、邮箱、用户类型（面试者）、职位类型（web 研发）等。查看用户信息时，可以直接查询服务器存储的用户属性信息。
-
+<!--
 本文介绍如何通过管理用户属性设置、更新、存储并获取实时消息用户的相关信息。
 
 :::notice
@@ -28,7 +28,7 @@
 设置用户属性前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/document/v1/privatization/uc_limitation.html)。
 
 ## 实现方法
 
@@ -73,7 +73,7 @@ EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType
 });
 ```
 
-若[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
+若[调用 RESTful 的接口设置](/document/v1/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/v1/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
 
 | 字段        | 类型   | 描述                                                                                              |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------ |
@@ -145,8 +145,9 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。
 
-可参考 [示例项目](https://www.easemob.com/download/im) 中的以下类：
+可参考 Demo 中的以下类：
 
 - `ChatUserCardAdapterDelegate`
 - `ChatUserCardAdapterDelegate`
 - `ChatRowUserCard`
+-->

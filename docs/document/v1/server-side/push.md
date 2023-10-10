@@ -2,10 +2,10 @@
 
 <Toc />
 
-本文展示如何调用环信即时通讯 RESTful API 实现离线推送，包括设置离线推送通知显示的昵称、推送通知方式及免打扰模式。调用以下方法前，请先参考 [接口频率限制](limitationapi.html) 了解即时通讯 RESTful API 的调用频率限制。
+本文展示如何调用环信即时通讯 RESTful API 实现离线推送，包括设置离线推送通知显示的昵称、推送通知方式及免打扰模式。
 
 :::tip
-若要使用离线推送的高级功能，即设置推送通知模式、免打扰模式和自定义推送模板，你需要在[环信即时通讯云控制后台](https://console.easemob.com/user/login)中点击你的应用后选择 **即时通讯** > **功能配置** > **功能配置总览** 开通离线推送高级功能。
+若要使用离线推送的高级功能，即设置推送通知模式、免打扰模式和自定义推送模板，你需要在环信即时通讯云控制后台中点击你的应用后选择 **服务管理** > **服务概览** 开通离线推送高级功能。
 :::
 
 ## 公共参数
@@ -16,9 +16,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
 | :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 访问 RESTful API 的域名或服务器信息。<br/>-公有云集成为 环信即时通讯控制台的 `即时通讯->服务概览`页面下的 `域名配置- Rest Api`。 <br/> -私有化集成为部署后 `服务器地址:端口`。 |
+| `org_name` | String | 是       | 每个公司（组织）分配的唯一标识。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Orgname`。  |
+| `app_name` | String | 是       | 创建应用时填入的应用名称。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Appname`。   |
 | `username` | String | 是       | 环信用户 ID。                                                                                                                                   |
 
 ### 响应参数
@@ -258,7 +258,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 | `entities.created`   | Number  | 用户注册的 Unix 时间戳，单位为毫秒。                                                                                                                                                                           |
 | `entities.modified`  | Number  | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。                                                                                                                                                               |
 | `entities.username`  | String  | 用户 ID。用户登录的唯一账号。                                                                                                                                                                                  |
-| `entities.activated` | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
+| `entities.activated` | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](account_system.html#账号解禁)解除封禁。</li></ul> |
 | `entities.nickname`  | String  | 推送通知中显示的昵称。                                                                                                                                                                                         |
 
 其他参数及说明详见 [公共参数](#公共参数)。
@@ -340,7 +340,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 | `entities.created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。                                                                                                                                                                           |
 | `entities.modified`                         | Long    | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。                                                                                                                                                               |
 | `entities.username`                         | String  | 用户 ID。用户登录的唯一账号。                                                                                                                                                                                  |
-| `entities.activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
+| `entities.activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](account_system.html#账号封禁)解除封禁。</li></ul> |
 | `entities.notification_no_disturbing`       | Boolean | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>                                                                                                                                     |
 | `entities.notification_no_disturbing_start` | Int     | 免打扰时间段的开始时间。                                                                                                                                                                                       |
 | `entities.notification_no_disturbing_end`   | Int     | 免打扰时间段的结束时间。                                                                                                                                                                                       |
@@ -446,7 +446,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 | `entities.created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。                                                                                                                                                                           |
 | `entities.modified`                         | Long    | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。                                                                                                                                                               |
 | `entities.username`                         | String  | 用户 ID。用户登录的唯一账号。                                                                                                                                                                                  |
-| `entities.activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
+| `entities.activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](account_system.html#账号封禁)解除封禁。</li></ul> |
 | `entities.notification_no_disturbing`       | Boolean | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>                                                                                                                                     |
 | `entities.notification_no_disturbing_start` | Int     | 免打扰时间段的开始时间。                                                                                                                                                                                       |
 | `entities.notification_no_disturbing_end`   | Int     | 免打扰时间段的结束时间。                                                                                                                                                                                       |

@@ -13,17 +13,16 @@
 - 创建、解散群组
 - 获取群组详情
 - 获取群成员列表
-- 获取群组列表
 - 屏蔽、解除屏蔽群消息
 - 监听群组事件
+<!--- 获取群组列表-->
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/document/v1/privatization/uc_limitation.html)。
 
 ## 实现方法
 
@@ -170,7 +169,7 @@ do {
  memberList.addAll(group.getAdminList());//加上管理员
  memberList.add(group.getOwner());//加上群主
 ```
-
+<!--
 ### 获取群组列表
 
 用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。
@@ -208,7 +207,7 @@ EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPu
 List<EMGroupInfo> groupsList = result.getData();
 String cursor = result.getCursor();
 ```
-
+-->
 ### 屏蔽和解除屏蔽群消息
 
 群成员可以屏蔽群消息和解除屏蔽群消息。

@@ -8,26 +8,26 @@ const platformList = getSubDirectories(DOC_PATH)
 const privateSidebar = {
   '/document/v1/privatization/': [ 
     {
-      text: '服务部署', 
+      text: '产品简介', 
       children: [
-        { text: '私有化服务部署', link: 'uc_deploy.html' },
+        { text: '产品概述', link: 'uc_introduction.html' },
+        { text: '产品使用限制', link: 'uc_limitation.html' },
+        { text: '术语表', link: 'uc_glossary.html' },
       ]
-    },
+    } ,
     {
-      text: '配置说明', 
-      children: [
-        { text: 'Console配置说明', link: 'uc_configure.html' },
-        { text: 'Android私有化配置', link: 'uc_android_private.html' },
-        { text: 'iOS私有化配置', link: 'uc_iOS_private.html' },
-        { text: 'Web私有化配置', link: 'uc_Web_private.html' },
-      ]
-    },
-    {
-      text: 'SDK下载', 
-      children: [
-        { text: 'SDK 及 Demo 下载', link: 'uc_private.html' },
-      ]
-    },
+        text: '快速开始', 
+        children: [
+          /**{ text: '服务部署', link: 'uc_deploy.html' },
+          { text: '客户端下载', link: 'uc_private.html' },**/
+          { text: 'Console指南', link: 'uc_configure.html' },
+          { text: 'App Token 鉴权', link: 'easemob_app_token.html' },
+          { text: 'User Token 鉴权', link: 'easemob_user_token.html' },
+          { text: '快速开始(不使用 UIKIT) Android', link: '/document/v1/android/overview.html' },
+          { text: '快速开始(不使用 UIKIT)iOS', link: '/document/v1/ios/quickstart.html' },
+          { text: '快速开始(不使用 UIKIT) Web', link: '/document/v1/web/quickstart.html' },
+        ]   
+      } ,
   ]
 }
 
@@ -46,9 +46,9 @@ const documentSidebar = [
     */
     text: '快速开始',
     children: [
-      { text: 'React Demo（WebIM）体验', link: 'demo_react.html', only: ['web'] },
+     /** { text: 'React Demo（WebIM）体验', link: 'demo_react.html', only: ['web'] },
       { text: 'Vue Demo（WebIM）体验', link: 'demo_vue.html', only: ['web'] },
-      { text: 'Demo（EaseIM App）体验', link: 'demo.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'server-side'] },
+      { text: 'Demo（EaseIM App）体验', link: 'demo.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'server-side'] },*/ 
       { text: '快速开始（不使用 EaseIMKIT）', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
       { text: '快速开始 （不使用 UIKit）', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
       { text: 'SDK 集成概述（不使用 EaseIMKIT）', link: 'overview.html', only: ['android', 'ios', 'web', 'flutter'] },
@@ -60,15 +60,16 @@ const documentSidebar = [
       { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
       { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
       { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
-      { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
+     /** { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },**/ 
     ],
-    except: ['applet']
+    except: ['applet','linux','electron']
   },
   {
     text: '基础功能',
     children: [
-      {
-        text: '消息管理',
+      {text: '消息管理', link: 'message.html' },
+        /**
+        {text: '消息管理',
         collapsible: true,
         children: [
           { text: '消息概述', link: 'message_overview.html' },
@@ -80,10 +81,10 @@ const documentSidebar = [
           { text: '修改消息', link: 'message_modify.html' },
           { text: '翻译', link: 'message_translation.html' },
         ]
-      },
-      { text: '管理用户属性', link: 'userprofile.html' },
-      { text: '管理用户关系', link: 'user_relationship.html' },
-      {
+      },**/
+      /** { text: '管理用户属性', link: 'userprofile.html' },**/
+      { text: '好友管理', link: 'user_relationship.html' },
+      /**{
         text: '群组管理',
         collapsible: true,
         children: [
@@ -92,8 +93,12 @@ const documentSidebar = [
           { text: '管理群组成员', link: 'group_members.html' },
           { text: '管理群组属性', link: 'group_attributes.html' },
         ]
-      },
-      {
+      },**/
+      { text: '群组管理', link: 'group.html' },
+      { text: '聊天室管理', link: 'chatroom.md' },
+      { text: '多设备管理', link: 'multidevices.md' },
+      { text: '导入第三方表情包', link: 'sticker.md' , only: ['web'] },
+      /**{
         text: '聊天室管理',
         collapsible: true,
         children: [
@@ -102,35 +107,37 @@ const documentSidebar = [
           { text: '管理聊天室成员', link: 'room_members.html' },
           { text: '管理聊天室属性', link: 'room_attributes.html' },
         ]
-      },
+      },**/
     ],
-    except: ['applet', 'server-side']
+    except: ['applet', 'server-side', 'electron']
   },
   {
-    text: '进阶功能',
+    text: '消息推送',
     children: [
-      { text: '设置推送', link: 'push.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
-      { text: '登录多个设备', link: 'multi_device.html' },
-      { text: '管理在线状态订阅', link: 'presence.html' },
-      { text: '消息表情回复', link: 'reaction.html' },
-      {
-        text: '子区管理',
-        collapsible: true,
-        children: [
-          { text: '管理子区', link: 'thread.html' },
-          { text: '管理子区消息', link: 'thread_message.html' }
-        ]
-      },
-      { text: '消息审核（举报）', link: 'moderation.html'},
+      { text: '第三方推送集成', link: 'thirdpartypush.html' },
+      { text: '第三方推送异常情况说明', link: 'exceptions.html' },
+      { text: '设置当前登录用户的推送昵称', link: 'nickname.html' },
+      { text: '离线推送问题排查', link: 'troubleshooting.html' },
     ],
-    except: ['applet','server-side']
+    only: ['android']
+  },
+  {
+    text: 'APNs消息推送',
+    children: [
+      { text: 'APNs推送配置', link: 'deploy.html' },
+      { text: 'APNs离线推送', link: 'offline.html' },
+      { text: 'APNs内容解析', link: 'content.md' },
+      /*{ text: '离线推送问题排查', link: '../android/troubleshooting.html' },*/
+    ],
+    only: ['ios']
   },
   {
     text: '其他',
     children: [
       { text: '错误码', link: 'error.html' },
+      { text: '工具类说明', link: 'toolrelated.md' , only: ['web'] },
       { text: 'EaseIMKit 使用指南', link: 'easeimkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
-      { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
+      /**{ text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },**/
     ],
     except: ['applet', 'server-side']
   },
@@ -167,8 +174,8 @@ const documentSidebar = [
           { text: '发送和接收消息', link: 'message_send_receive.html' },
           { text: '管理服务端消息', link: 'message_retrieve.html' },
           { text: '管理消息回执', link: 'message_receipt.html' },
-          { text: '修改消息', link: 'message_modify.html' },
-          { text: '翻译', link: 'message_translation.html' },
+         /** { text: '修改消息', link: 'message_modify.html' },
+          { text: '翻译', link: 'message_translation.html' },**/ 
         ]
       },
       { text: '用户属性', link: 'userprofile.html' },
@@ -199,9 +206,9 @@ const documentSidebar = [
   {
     text: '进阶功能',
     children: [
+      { text: '登录多个设备', link: 'multi_device.md' },
       { text: '设置推送', link: 'push.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
-      { text: '登录多个设备', link: 'multi_device.html' },
-      { text: '管理在线状态订阅', link: 'presence.html' },
+      /**{ text: '管理在线状态订阅', link: 'presence.html' },
       { text: '消息表情回复', link: 'reaction.html' },
       {
         text: '子区管理',
@@ -211,7 +218,7 @@ const documentSidebar = [
           { text: '管理子区消息', link: 'thread_message.html' }
         ]
       },
-      { text: '消息审核（举报）', link: 'moderation.html'},
+      { text: '消息审核（举报）', link: 'moderation.html'},**/
     ],
     only: ['applet']
   },
@@ -229,7 +236,7 @@ const documentSidebar = [
     children: [
       { text: '即时通讯 REST API 概览', link: 'overview.html' },
       { text: '用户体系管理', link: 'account_system.html' },
-      { text: '推送设置', link: 'push.html' },
+      /**{ text: '推送设置', link: 'push.html' },**/
       { 
         text: '消息管理', 
         children: [
@@ -238,19 +245,18 @@ const documentSidebar = [
           { text: '发送聊天室消息', link: 'message_chatroom.html' },
           { text: '上传和下载文件', link: 'message_download.html' },
           { text: '获取历史消息记录', link: 'message_historical.html' },
-          { text: '撤回消息和单向删除会话', link: 'message_recall.html' },
-          { text: '导入消息', link: 'message_import.html' }
+          /**{ text: '导入消息', link: 'message_import.html' }**/
         ]
       },
       { text: '用户属性', link: 'userprofile.html' },
       { text: '用户关系管理', link: 'user_relationship.html' },
       { text: '群组', link: 'group.html' },
       { text: '聊天室', link: 'chatroom.html' },
-      { text: '在线状态订阅', link: 'presence.html' },
-      { text: '消息表情回复', link: 'reaction.html' },
+      /**{ text: '在线状态订阅', link: 'presence.html' },
+      { text: '消息表情回复', link: 'reaction.html' },**/
     ],
     only: ['server-side']
-  },
+  },/**
   {
     text: 'Server SDK',
     children: [
@@ -258,7 +264,7 @@ const documentSidebar = [
       { text: 'PHP Server SDK', link: 'php_server_sdk.html' },
     ],
     only: ['server-side']
-  },
+  }, **/
   {
     text: '错误码',
     children: [
@@ -274,7 +280,45 @@ const documentSidebar = [
       { text: '发送后回调-事件回调', link: 'callback_configurations.html' }
     ],
     only: ['server-side']
-  }
+  },
+  {
+    text: 'Linux开发文档',
+    children: [
+      { text: '集成说明', link: 'overview.html' },
+      { text: '技术参数', link: 'techspec.html' },
+      { text: 'SDK更新日志', link: 'releasenote.html' },
+    ],
+    only: ['linux']
+  },
+  {
+    text: '快速开始',
+    children: [
+      { text: 'Demo下载体验', link: 'demo.html' },
+      { text: '快速开始', link: 'quickstart.html' },
+      { text: '集成概述', link: 'overview.html' },
+      { text: 'SDK更新日志', link: 'releasenote.html' },
+    ],
+    only: ['electron']
+  },
+  {
+    text: '基础功能',
+    children: [
+      { text: '消息管理', link: 'message.html' },
+      { text: '会话管理', link: 'chatmanage.html' },
+      { text: '好友管理', link: 'user_relationship.html' },
+      { text: '群组管理', link: 'group_manage.html' },
+      { text: '聊天室管理', link: 'room_manage.html' },
+    ],
+    only: ['electron']
+  },
+  {
+    text: '进阶功能',
+    children: [
+      { text: '多设备监听', link: 'multi_device.html' },
+      { text: '附录', link: 'appendix.html' },
+    ],
+    only: ['electron']
+  },
 ]
 
 function buildDocSidebar() {

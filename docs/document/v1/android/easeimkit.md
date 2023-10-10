@@ -12,11 +12,11 @@ EaseIMKit 是什么？
 
 EaseIMKit 源码地址
 
-- [EaseIMKit](https://github.com/easemob/easeui/tree/EaseIMKit)
+- [EaseIMKit](https://github.com/easemob/easeui/tree/EaseIMKit_4.1.0)
 
 使用 EaseIMKIt 的环信 IM APP 源码地址：
 
-- [环信 IM](https://github.com/easemob/chat-android)
+- [环信 IM](https://downloadsdk.easemob.com/downloads/easemob-sdk-4.1.2.zip)
 
 ## 导入 EaseIMKit
 
@@ -100,7 +100,8 @@ EaseIMKit 封装了常用 IM 功能，提供了会话，聊天及联系人等基
 
 EaseIMKit 提供了 EaseConversationListFragment，需要将其或者其子类添加到 Activity 中。开发者需要对刷新事件（新消息，删除消息，删除会话等）进行处理。
 
-![img](@static/images/android/easeim.jpeg)
+<img src=@static/images/android/easeim.jpeg  title=创建会话列表 width="200"/>
+
 
 :::notice
 要实现自定义头像及昵称，请参考 [设置头像和昵称](userprofile.html#设置当前用户的属性)。
@@ -136,13 +137,13 @@ public class ChatActivity extends BaseActivity {
 }
 ```
 
-![img](@static/images/android/easeim1.jpeg)
+<img src=@static/images/android/easeim1.jpeg  title=创建聊天页面 width="200"/>
 
 ### 添加联系人界面
 
 EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 中。开发者需要对刷新事件（添加联系人，删除联系人等）进行处理。
 
-![img](@static/images/android/easeim2.jpeg)
+<img src=@static/images/android/easeim2.jpeg  title=添加联系人界面 width="200"/>
 
 ## 设置样式
 
@@ -150,7 +151,7 @@ EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 
 
 EaseIMKit 提供了自定义的标题栏控件 EaseTitleBar。
 
-![img](@static/images/android/easeim-titlebar.jpeg)
+<img src=@static/images/android/easeim-titlebar.jpeg  title=设置标题栏 width="200"/>
 
 标题栏除了做为 View 所具有的属性功能外，还可以设置标题的位置等。
 
@@ -215,10 +216,10 @@ conversationListLayout.hideUnreadDot(false);
 conversationListLayout.showUnreadDotPosition(EaseConversationSetStyle.UnreadDotPosition.LEFT);
 ```
 
-效果如下图：
+效果如下图，更多样式请参考 EaseContactListLayout 控件。
 
-![img](@static/images/android/easeim3.jpeg)
-更多样式请参考 EaseContactListLayout 控件。
+<img src=@static/images/android/easeim3.jpeg  title=设置会话列表 width="200"/>
+
 
 #### 增加长按菜单项
 
@@ -262,7 +263,7 @@ public boolean onMenuItemClick(MenuItem item, int position) {
 
 聊天窗口包括标题栏（不包含在 EaseChatFragment 中），聊天区，输入区及扩展展示区，如下图所示:
 
-![img](@static/images/android/easeim4.png)
+<img src=@static/images/android/easeim4.png  title=设置会话列表 width="600"/>
 
 标题区 EaseTitleBar 的具体布局及实现不在 EaseIMKit 库的聊天控件及 fragment 中，需要你自己去实现。
 开发者可以在 EaseChatFragment 中获取到 EaseChatLayout 这个控件，然后通过这个控件进一步获取到获取其他控件，代码如下：
@@ -295,7 +296,7 @@ messageListLayout.setBackground(new ColorDrawable(Color.parseColor("#DA5A4D")));
 
 效果如下图：
 
-![img](@static/images/android/easeim5.jpeg)
+<img src=@static/images/android/easeim5.jpeg  title=修改聊天列表背景 width="200"/>
 
 #### 修改头像属性
 
@@ -312,7 +313,7 @@ messageListLayout.setAvatarShapeType(1);
 
 效果如下图：
 
-![img](@static/images/android/easeim6.jpeg)
+<img src=@static/images/android/easeim6.jpeg  title=修改头像属性 width="200"/>
 
 #### 修改聊天文本
 
@@ -329,7 +330,7 @@ messageListLayout.setItemTextColor(ContextCompat.getColor(mContext, R.color.red)
 
 效果如下图：
 
-![img](@static/images/android/easeim7.jpeg)
+<img src=@static/images/android/easeim7.jpeg  title=修改聊天文本 width="200"/>
 
 #### 修改时间线样式
 
@@ -348,7 +349,7 @@ messageListLayout.setTimeTextColor(ContextCompat.getColor(mContext, R.color.blac
 
 效果如下图：
 
-![img](@static/images/android/easeim8.jpeg)
+<img src=@static/images/android/easeim8.jpeg  title=修改时间线样式 width="200"/>
 
 #### 修改聊天列表展示样式
 
@@ -363,7 +364,7 @@ messageListLayout.setItemShowType(EaseChatMessageListLayout.ShowType.LEFT);
 
 效果如下图：
 
-![img](@static/images/android/easeim9.jpeg)
+<img src=@static/images/android/easeim9.jpeg  title=修改聊天列表展示样式 width="200"/>
 
 #### 修改输入区样式
 
@@ -395,25 +396,26 @@ if(primaryMenu != null) {
 
 效果（EaseInputMenuStyle.DISABLE_VOICE）如下图：
 
-![img](@static/images/android/easeim10.jpeg)
+
+<img src=@static/images/android/easeim10.jpeg  title=easeim10 width="200"/>
 
 其他样式为：
 
 完整模式（EaseInputMenuStyle.All）：
 
-![img](@static/images/android/easeim11.jpeg)
+<img src=@static/images/android/easeim11.jpeg  title=easeim11 width="200"/>
 
 不可用表情模式（EaseInputMenuStyle.DISABLE_EMOJICON）：
 
-![img](@static/images/android/easeim12.jpeg)
+<img src=@static/images/android/easeim12.jpeg  title=easeim12 width="200"/>
 
 不可用语音和表情模式（EaseInputMenuStyle.DISABLE_VOICE_EMOJICON）：
 
-![img](@static/images/android/easeim13.jpeg)
+<img src=@static/images/android/easeim13.jpeg  title=easeim13 width="200"/>
 
 只有文本输入模式（EaseInputMenuStyle.ONLY_TEXT）：
 
-![img](@static/images/android/easeim14.jpeg)
+<img src=@static/images/android/easeim14.jpeg  title=easeim14 width="200"/>
 
 #### 增加自定义消息类型及其布局
 
@@ -768,7 +770,7 @@ contactList.setHeaderBackGround(ContextCompat.getDrawable(mContext, R.color.whit
 
 效果如图：
 
-![img](@static/images/android/easeim15.jpeg)
+<img src=@static/images/android/easeim15.jpeg  title=设置联系人列表 width="200"/>
 
 设置简洁模式
 
@@ -779,7 +781,8 @@ contactLayout.showSimple();
 
 效果如图：
 
-![img](@static/images/android/easeim16.jpeg)
+<img src=@static/images/android/easeim16.jpeg  title=设置简洁模式 width="200"/>
+
 
 #### 增加长按菜单项
 

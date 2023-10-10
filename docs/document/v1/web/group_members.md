@@ -9,18 +9,18 @@
 环信即时通讯 IM Web SDK 提供以下群成员管理功能：
 
 - 加入、退出群组
-- 管理群成员自定义属性
 - 管理群主及群管理员
 - 管理群组白名单
 - 管理群组黑名单
 - 管理群组禁言
+<!--- 管理群成员自定义属性-->
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/document/v1/privatization/uc_limitation.html)。
 - 了解群成员角色，详见 [群组概述](group_overview.html)。
 
 ## 实现方法
@@ -102,7 +102,7 @@ let option = {
 };
 conn.removeGroupMember(option).then(res => console.log(res))
 ```
-
+<!--
 ### 管理群成员自定义属性
 
 群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
@@ -178,7 +178,7 @@ conn.removeGroupMember(option).then(res => console.log(res))
         console.log(e)
     })
 ```
-
+-->
 ### 管理群主及群管理员
 
 #### 变更群主

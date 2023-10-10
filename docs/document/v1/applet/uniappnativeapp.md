@@ -6,14 +6,9 @@
 
 ## 体验 IM 应用
 
-- 安卓： [https://www.pgyer.com/h4XF](https://www.pgyer.com/h4XF)
-- iOS： [https://www.pgyer.com/9ISC](https://www.pgyer.com/9ISC)
+- 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
+- 下载Uni-app Demo 源码地址 [立即下载](https://downloadsdk.easemob.com/mp/downloads/sdk/private-uniapp-20230918.zip)
 
-:::notice
-
-- Demo 只包含部分 IM 功能，详细参考 **功能说明**
-- Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
-  :::
 
 ## 功能说明
 
@@ -24,7 +19,7 @@
 
 ## 开发者集成
 
-[注册并创建应用](/product/enable_and_configure_IM.html#创建应用)
+[注册并创建应用](/document/v1/privatization/uc_configure.html#创建应用)
 
 ### 搭建 app 开发环境
 
@@ -82,7 +77,7 @@ WebIM.conn = new WebIM.connection({
 });
 ```
 
-IM 基本功能，请参考 [消息管理](/document/web/message_overview.html)。
+IM 基本功能，请参考 [消息管理](/document/v1/web/message_overview.html)。
 
 ## 打包发布
 

@@ -8,6 +8,7 @@
 
 例如，在招聘场景下，利用用户属性功能可存储性别、邮箱、用户类型（面试者）、职位类型（Web 研发）等。查看用户信息时，可直接查询服务器存储的用户属性信息。
 
+<!--
 本文介绍如何管理用户属性，包括设置、更新、存储并获取用户的相关信息。
 
 :::notice
@@ -27,7 +28,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/document/v1/privatization/uc_limitation.html)。
 
 ## 实现方法
 
@@ -68,7 +69,7 @@ conn.updateUserInfo("nickname", "Your nickname").then((res) => {
 });
 ```
 
-若[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
+若[调用 RESTful 的接口设置](/document/v1/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/v1/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
 
 | 字段        | 类型   | 备注                                                                                               |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------- |
@@ -177,4 +178,5 @@ conn
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中添加更多字段。
 
-可参考 [示例项目](https://github.com/easemob/webim/tree/dev_3.0/demo) 中 src/components/contact/ 下 UserInfoModal 组件。
+可参考 Demo 中 src/components/contact/ 下 UserInfoModal 组件。
+-->

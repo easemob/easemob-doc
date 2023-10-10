@@ -9,9 +9,9 @@
 - 位置消息。
 - 透传消息。
 - 自定义消息。
-- 合并消息。
+<!--- 合并消息。
 - 定向消息。
-
+-->
 针对聊天室消息并发量较大的场景，即时通讯服务提供消息分级功能。你可以通过设置消息优先级，将消息划分为高、普通和低三种级别。你可以在创建消息时，将指定消息类型，或指定成员的所有消息设置为高优先级，确保此类消息优先送达。这种方式可以确保在聊天室内消息并发量较大或消息发送频率过高的情况下，服务器首先丢弃低优先级消息，将资源留给高优先级消息，确保重要消息（如打赏、公告等）优先送达，以此提升重要消息的可靠性。请注意，该功能并不保证高优先级消息必达。在聊天室内消息并发量过大的情况下，为保证用户实时互动的流畅性，即使是高优先级消息仍然会被丢弃。
 
 本文介绍如何使用即时通讯 IM SDK 实现发送和接收这些类型的消息。
@@ -38,7 +38,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/document/v1/privatization/uc_limitation.html)。
 
 ## 实现方法
 
@@ -112,7 +112,7 @@ message.priority = EMChatRoomMessagePriorityHigh;
 
 ### 撤回消息
 
-发送方可以撤回一条发送成功的消息。默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
+发送方可以撤回一条发送成功的消息。默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在 环信即时通讯云控制台的**服务管理** > **服务概览** 页面设置消息撤回时长，该时长不超过 7 天。
 
 ```objectivec
 // 异步方法
@@ -481,6 +481,32 @@ message.chatType = EMChatTypeGroupChat;
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
+### 使用消息的扩展字段
+
+当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段来传递自定义的内容，从而生成自己需要的消息类型。
+
+当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
+
+```objectivec
+EMTextMessageBody *textMessageBody = [[EMTextMessageBody alloc] initWithText:content];
+// 增加自定义属性。
+NSDictionary *messageExt = @{@"attribute":@"value"};
+EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:textMessageBody ext:messageExt];
+message.chatType = EMChatTypeChat;
+// 发送消息。
+[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+
+// 接收消息的时候获取扩展属性。
+- (void)messagesDidReceive:(NSArray *)aMessages
+  {
+  // 收到消息，遍历消息列表。
+  for (EMChatMessage *message in aMessages) {
+     // value 为消息扩展里 attribute 字段的值。
+     NSString *value = [message.ext objectForKey:@"attribute"];  }
+  }
+```
+
+<!--
 ### 发送和接收合并消息
 
 为了方便消息互动，即时通讯 IM 自 4.1.0 版本开始支持将多个消息合并在一起进行转发。你可以采取以下步骤进行消息的合并转发：
@@ -580,28 +606,4 @@ msg.receiverList = @[@"A",@"B"];
 ```
 
 接收定向消息与接收普通消息的操作相同，详见[接收消息](#接收消息)。
-
-### 使用消息的扩展字段
-
-当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段来传递自定义的内容，从而生成自己需要的消息类型。
-
-当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
-
-```objectivec
-EMTextMessageBody *textMessageBody = [[EMTextMessageBody alloc] initWithText:content];
-// 增加自定义属性。
-NSDictionary *messageExt = @{@"attribute":@"value"};
-EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:textMessageBody ext:messageExt];
-message.chatType = EMChatTypeChat;
-// 发送消息。
-[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
-
-// 接收消息的时候获取扩展属性。
-- (void)messagesDidReceive:(NSArray *)aMessages
-  {
-  // 收到消息，遍历消息列表。
-  for (EMChatMessage *message in aMessages) {
-     // value 为消息扩展里 attribute 字段的值。
-     NSString *value = [message.ext objectForKey:@"attribute"];  }
-  }
-```
+-->

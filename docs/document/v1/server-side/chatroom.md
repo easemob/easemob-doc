@@ -13,7 +13,7 @@
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](limitationapi.html)。
+
 
 ## 聊天室成员角色
 
@@ -29,9 +29,9 @@
 
 | 参数          | 类型   | 是否必需 | 描述                                                                                                                                            |
 | :------------ | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`        | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name`    | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name`    | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 访问 RESTful API 的域名或服务器信息。<br/>-公有云集成为 环信即时通讯控制台的 `即时通讯->服务概览`页面下的 `域名配置- Rest Api`。 <br/> -私有化集成为部署后 `服务器地址:端口`。 |
+| `org_name` | String | 是       | 每个公司（组织）分配的唯一标识。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Orgname`。  |
+| `app_name` | String | 是       | 创建应用时填入的应用名称。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Appname`。   |
 | `chatroom_id` | String | 是       | 聊天室 ID。                                                                                                                                     |
 | `username`    | String | 是       | 用户 ID。                                                                                                                                       |
 | `name`        | String | 是       | 聊天室名称，最大长度为 128 个字符。                                                                                                             |
@@ -518,8 +518,6 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | `data.owner`              | String | 聊天室所有者的用户 ID。例如：{“owner”: “user1”}。                                                                                                               |
 | `data.created`            | Long   | 创建聊天室时间，Unix 时间戳，单位为毫秒。                                                                                                                       |
 | `data.custom`             | String | 聊天室扩展信息。                                                                                                                                                |
-| `data.affiliations_count` | Int    | 现有聊天室成员总数。                                                                                                                                            |
-| `data.affiliations`       | Array  | 现有聊天室成员列表，包含聊天室所有者和成员（包括聊天室管理员）。例如：“affiliations”:[{“owner”: “user1”},{“member”:”user2”},{“member”:”user3”}]。               |
 | `data.public`             | Bool   | 预留字段，无需关注。                                                                                                                                            |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -919,7 +917,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
   "applicationName": "testapp"
 }
 ```
-
+<!--
 ### 设置聊天室自定义属性
 
 指定用户设置特定聊天室的自定义属性。
@@ -1262,10 +1260,10 @@ DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json'
   }
 }
 ```
-
+-->
 ## 管理聊天室成员
 
-环信即时通讯 IM 提供多个接口实现聊天室成员管理，包括添加和移除聊天室成员、转让聊天室所有权以及聊天室黑名单、白名单和禁言列表相关操作。
+环信即时通讯 IM 提供多个接口实现聊天室成员管理，包括添加和移除聊天室成员、聊天室黑名单、白名单和禁言列表相关操作。
 
 ### 分页获取聊天室成员列表
 
@@ -2701,7 +2699,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
   "applicationName": "testapp"
 }
 ```
-
+<!--
 ### 禁言聊天室全体成员
 
 对所有聊天室成员一键禁言。该操作不影响聊天室禁言列表，即一键禁言不会将聊天室所有成员加入聊天室禁言列表。
@@ -2767,7 +2765,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
   "applicationName": "testapp"
 }
 ```
-
+-->
 ### 解除聊天室禁言成员
 
 解除对一个或多个聊天室成员的禁言。你一次最多可对 60 个成员解除禁言。
@@ -2839,7 +2837,7 @@ curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute/user1  -H 'Authoriz
   "applicationName": "testapp"
 }
 ```
-
+<!--
 ### 解除聊天室全员禁言
 
 一键取消对聊天室全体成员的禁言。解除禁言后，聊天室成员可以在聊天室中正常发送消息。
@@ -2903,3 +2901,4 @@ curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json'
   "applicationName": "testapp"
 }
 ```
+-->
