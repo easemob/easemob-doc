@@ -43,7 +43,7 @@ Reaction 场景示例如下：
 
 ```objectivec
 // 添加 Reaction。异步方法
-[EMClient.sharedClient.chatManager addReaction:"reaction" toMessage:"messageId" completion:^(EMError * _Nullable error) {
+[EMClient.sharedClient.chatManager addReaction:@"reaction" toMessage:@"messageId" completion:^(EMError * _Nullable error) {
 	refreshBlock(error, changeSelectedStateHandle);
 }];
 
@@ -62,7 +62,7 @@ Reaction 场景示例如下：
 
 ```objectivec
 // 删除 Reaction。异步方法
-[EMClient.sharedClient.chatManager removeReaction:"reaction" fromMessage:"messageId" completion:^(EMError * _Nullable error) {
+[EMClient.sharedClient.chatManager removeReaction:@"reaction" fromMessage:@"messageId" completion:^(EMError * _Nullable error) {
 	refreshBlock(error, changeSelectedStateHandle);
 }];
 
