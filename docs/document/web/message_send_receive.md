@@ -162,7 +162,9 @@ conn.addEventHandler("eventName", {
 
 ### 撤回消息
 
-发送方可以撤回一条发送成功的消息。默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
+发送方可以撤回一条发送成功的消息。调用 API 撤回消息后，服务端的该条消息（历史消息，离线消息或漫游消息）均会被移除，消息的接收方会收到 `onRecallMessage` 事件。
+
+默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
 
 ```javascript
 let option = {
@@ -173,8 +175,7 @@ let option = {
   // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
   chatType: "singleChat",
 };
-conn
-  .recallMessage(option)
+conn.recallMessage(option)
   .then((res) => {
     console.log("success", res);
   })
