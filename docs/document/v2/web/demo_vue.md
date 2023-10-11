@@ -21,8 +21,8 @@
 
 ## 代码下载
 
-- Vue 2 下载源代码：[github 源码地址](https://downloadsdk.easemob.com/mp/downloads/sdk/private-vue2-20230918.zip)
-- Vue 3 下载源代码：[github 源码地址]()
+- Vue 2 下载源代码：[源码地址](https://downloadsdk.easemob.com/mp/downloads/sdk/private-vue2-20230918.zip)
+- Vue 3 下载源代码：[源码地址](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/sdk/private-vue3-20231011.zip)
 
 欢迎大家提交 PR 改进和修复 Web IM 中的问题。
 

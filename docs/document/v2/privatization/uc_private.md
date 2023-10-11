@@ -72,7 +72,7 @@
 <p><a href="/document/v2/web/releasenote.html#版本-v4-2-0-dev-2023-07-27-开发版">4.2.0</a></p>
 </td>
 <td>
-<p>&bull; React:&nbsp;<a href="https://downloadsdk.easemob.com/mp/downloads/sdk/private-react-20230918.zip">下载 SDK 及 Demo</a>&nbsp;<a href="https://zq-im-management-hsb.easemob.com/">体验 Demo</a><br /> &bull; Vue 2:&nbsp;<a href="https://downloadsdk.easemob.com/mp/downloads/sdk/private-vue2-20230918.zip">下载 SDK 及 Demo</a><br /> &bull; Vue 3:&nbsp;<a href="">下载 SDK 及 Demo</a></p>
+<p>&bull; React:&nbsp;<a href="https://downloadsdk.easemob.com/mp/downloads/sdk/private-react-20230918.zip">下载 SDK 及 Demo</a>&nbsp;<a href="https://zq-im-management-hsb.easemob.com/">体验 Demo</a><br /> &bull; Vue 2:&nbsp;<a href="https://downloadsdk.easemob.com/mp/downloads/sdk/private-vue2-20230918.zip">下载 SDK 及 Demo</a><br /> &bull; Vue 3:&nbsp;<a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/sdk/private-vue3-20231011.zip">下载 SDK 及 Demo</a></p>
 </td>
 <td>
 <p><a href="/document/v2/web/privatecloud.html">查看</a></p>
