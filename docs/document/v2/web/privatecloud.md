@@ -29,7 +29,7 @@ restServer: 'https://xxx.xxxxx.com',	// 私有化的 RESTful 服务器地址。�
 
 ## Web Vue 3 Demo
 
-对于 Web Vue 3 Demo，进行私有化配置需在 [Vue 3 Demo 源代码](https://download-sdk.oss-cn-beijing.aliyuncs.com/zq/private-vue3-20230104.zip)中进行修改。
+对于 Web Vue 3 Demo，进行私有化配置需在 [Vue 3 Demo 源代码](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/sdk/private-vue3-20231011.zip)中进行修改。
 
 ### 修改环境配置
 
