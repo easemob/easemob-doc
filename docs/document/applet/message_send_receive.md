@@ -160,23 +160,27 @@ WebIM.conn.addEventHandler("eventName", {
 
 ### 撤回消息
 
-发送方可以撤回一条发送成功的消息。默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
+发送方可以撤回一条发送成功的消息。调用 API 撤回消息后，服务端的该条消息（历史消息，离线消息或漫游消息）均会被移除。
+
+默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
 
 ```javascript
 let option = {
   // 要撤回消息的消息 ID。
-    mid: 'msgId',
+  mid: "msgId",
   // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-    to: 'userID',
+  to: "username",
   // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
-    chatType: 'singleChat'
+  chatType: "singleChat",
 };
-WebIM.conn.recallMessage(option).then((res) => {
-    console.log('success', res)
-}).catch((error) => {
+conn.recallMessage(option)
+  .then((res) => {
+    console.log("success", res);
+  })
+  .catch((error) => {
     // 消息撤回失败，原因可能是超过了撤销时限(超过 2 分钟)。
-    console.log('fail', error)
-})
+    console.log("fail", error);
+  });
 ```
 
 你还可以使用 `onRecallMessage` 监听消息撤回状态：

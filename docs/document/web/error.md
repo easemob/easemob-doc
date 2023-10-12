@@ -19,10 +19,10 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 2      | WEBIM_CONNCTION_AUTH_ERROR                     | 鉴权失败：调用 API 时校验 App Key 失败，App Key 不合法。     |
 | 12     | WEBIM_CONNCTION_GETROSTER_ERROR                | 获取 Chat token 失败：通过 Agora token 置换 Chat token 失败。 |
 | 16     | WEBIM_CONNCTION_DISCONNECTED                   | WebSocket 断开连接：由于断网等原因 WebSocket 已经断开。      |
-| 17     | WEBIM_CONNCTION_AJAX_ERROR                     | 默认未区分类型的错误。 |
+| 17     | WEBIM_CONNCTION_AJAX_ERROR                     | 服务请求的通用错误：请求服务器未成功时的默认错误。 |
 | 27     | WEBIM_CONNCTION_APPKEY_NOT_ASSIGN_ERROR        | 未设置 App Key：设置的 App Key 错误，登录时会报此错误。      |
 | 28     | WEBIM_CONNCTION_TOKEN_NOT_ASSIGN_ERROR         | 未传 token：调用 API 时没有携带 token，一般没登录时调用 API 会提示这个错误。 |
-| 31     | WEBIM_CONNCTION_CALLBACK_INNER_ERROR           | 消息发送成功的回调函数内部错误：在接收消息的回调及后续处理的函数中有错误。 |
+| 31     | WEBIM_CONNCTION_CALLBACK_INNER_ERROR           | 消息发送回调函数内部错误：在接收消息的回调及后续处理的函数中有错误。 |
 | 32     | WEBIM_CONNCTION_CLIENT_OFFLINE                 | 当前用户未登录。                                             |
 | 39     | WEBIM_CONNECTION_CLOSED                        | 退出或未登录：未登录或掉线后发送消息。                       |
 | 40     | WEBIM_CONNECTION_ERROR                         | 用户鉴权失败。                  |
@@ -30,8 +30,9 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 51     | MESSAGE_NOT_FOUND                         | 没查到消息，如：没有查询到要举报的消息。                 |
 | 52     | NO_PERMISSION                          | 用户对当前操作没有权限。                 |
 | 53     | OPERATION_UNSUPPORTED                         | 不支持的操作。                 |
+| 55     | LOCAL_DB_OPERATION_FAILED       | 本地数据库操作失败。    |
 | 101    | WEBIM_UPLOADFILE_ERROR                         | 上传文件失败：如文件过大等。                                 |
-| 102    | WEBIM_UPLOADFILE_NO_LOGIN                      | 上传文件未携带 token：如未登录就上传文件。                   |
+| 102    | WEBIM_UPLOADFILE_NO_LOGIN                      | 上传文件的请求中未携带用户 token：如未登录就上传文件。                   |
 | 200    | WEBIM_DOWNLOADFILE_ERROR                       | 下载文件失败：如超时、网络错误。                             |
 | 204    | USER_NOT_FOUND                     | 用户不存在，如创建群拉人时不存在的用户报错。                             |
 | 205    | MESSAGE_PARAMETER_ERROR                     | 消息参数错误。如撤回消息时未传消息 ID 或者发送消息时未传消息接收方的用户 ID。|
@@ -39,7 +40,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 207    | WEBIM_CONNCTION_USER_REMOVED                   | 用户已经被注销：如果登录用户的 ID 被管理员从管理后台删除则会收到此错误。 |
 | 216    | WEBIM_CONNCTION_USER_KICKED_BY_CHANGE_PASSWORD | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 |
 | 217    | WEBIM_CONNCTION_USER_KICKED_BY_OTHER_DEVICE    | 用户被踢下线：开启多设备登录后，如果用户在其他设备上调用 API 或者通过管理后台踢出当前设备登录的 ID，SDK 会提示该错误。 |
-| 219    | USER_MUTED_BY_ADMIN                            | 用户被全局禁言：在管理后台禁言了此用户。                     |
+| 219    | USER_MUTED_BY_ADMIN                            | 用户被全局禁言：在管理后台禁言了此用户后，该用户发送消息时会提示该错误。                     |
 | 221    | USER_NOT_FRIEND                                | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。该功能可在控制台开通。 |
 | 500    | SERVER_BUSY                                    | 服务器忙碌。                                                 |
 | 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT                | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。                     |
@@ -54,13 +55,14 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 510    | MESSAGE_WEBSOCKET_DISCONNECTED                 | 网络断开连接导致消息发送失败。                       |
 | 511    | MESSAGE_SIZE_LIMIT                 | 消息体大小超过限制。关于各端消息体大小的限制，详见[消息管理概述中的描述](message_overview.html#消息类型)。|
 | 601    | GROUP_ALREADY_JOINED                           | 已在群组内：当前用户已在该群组中。                           |
-| 602    | GROUP_NOT_JOINED                               | 不在群组内：用户发送群消息时未加入该群组。                   |
+| 602    | GROUP_NOT_JOINED                               | 不在群组内：用户发送群消息或进行群操作时未加入该群组。                   |
 | 603    | PERMISSION_DENIED                              | 用户无权限：例如如果用户被封禁，发送消息时会提示该错误。     |
-| 604    | WEBIM_LOAD_MSG_ERROR                           | 消息回调函数内部错误：在接收消息的回调及后续处理的函数中有错误。 |
+| 604    | WEBIM_LOAD_MSG_ERROR                           | 消息回调函数内部错误。 |
 | 605    | GROUP_NOT_EXIST                                | 群组不存在：发送消息时群组 ID 不正确。                       |
-| 606    | GROUP_MEMBERS_FULL                             | 群组人数达到上限。                                           |
-| 607    | GROUP_NOT_EXIST                                | 设置的群组最大人数超过限制：创建群组，群成员数量超出了群组设置的最大数量。 |
-| 700    | REST_PARAMS_STATUS                             | 没有 token 或 App Key。                                      |
+| 606    | GROUP_MEMBERS_FULL                             | 群组已满：群组成员数量已达到创建群组时设置的最大人数。  |
+| 607    | GROUP_MEMBERS_LIMIT    | 创建群组时设置的群成员最大数量超过 IM 套餐包中的上限。各版本的即时通讯套餐包支持的群组成员最大数量，详见[产品价格](/product/pricing.html#套餐包功能详情)。 |
+| 609    | GROUP_MEMBER_ATTRIBUTES_SET_FAILED    | 群成员属性设置失败。 |
+| 700    | REST_PARAMS_STATUS                             | 用户 token 或 App Key 不存在或不正确导致 API 调用失败。 |
 | 702    | CHATROOM_NOT_JOINED                             | 被操作的人员不在聊天室。                               |
 | 704    | CHATROOM_MEMBERS_FULL                          | 聊天室已满：聊天室已经达到人数上限。                         |
 | 705    | CHATROOM_NOT_EXIST                             | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。     |
@@ -69,8 +71,10 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 1101   | REACTION_ALREADY_ADDED                         | Reaction 重复添加。                                          |
 | 1102   | REACTION_CREATING                              | 创建 Reaction 时，其他人正在创建。                           |
 | 1103   | REACTION_OPERATION_IS_ILLEGAL                  | 用户对该 Reaction 没有操作权限：没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接受者进行添加 Reaction 操作。 |
-| 1200   | TRANSLATION_NOT_VALID                          | 翻译参数错误。                                               |
+| 1200   | TRANSLATION_NOT_VALID                          | 传入的语言 code 不合法。 |
 | 1201   | TRANSLATION_TEXT_TOO_LONG                      | 翻译的文本过长。                                             |
 | 1204   | TRANSLATION_FAILED                             | 获取翻译服务失败。                                           |
 | 1300   | THREAD_NOT_EXIST                               | 子区不存在：未找到该子区。                                   |
 | 1301   | THREAD_ALREADY_EXIST                           | 该消息 ID 下子区已存在，重复添加子区。                       |
+| 1302   | MODIFY_MESSAGE_NOT_EXIST | 修改的消息不存在。  |
+| 1304   | MODIFY_MESSAGE_FAILED | 消息修改失败。  |

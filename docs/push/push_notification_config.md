@@ -25,6 +25,7 @@
   "easemob":{},
   "apns": {},
   "fcm": {},
+  "fcmV1":{},
   "huawei": {},
   "meizu": {},
   "oppo": {},
@@ -53,6 +54,7 @@
 | `easemob` | Object | 环信推送                       | 否       |
 | `apns`    | Object | Apple 推送通知服务（APNs）     | 否       |
 | `fcm`     | Object | 谷歌 Firebase 云消息传递 (FCM) | 否       |
+| `fcmV1`     | Object | 谷歌 Firebase 云消息传递 (FCM) V1 | 否       |
 | `xiaomi`  | Object | 小米推送。                     | 否       |
 | `vivo`    | Object | vivo 推送。                    | 否       |
 | `oppo`    | Object | OPPO 推送。                    | 否       |
@@ -175,6 +177,69 @@
 | `titleLocArgs`     | List   | 将用于替换 `title_loc_key`（用来将标题文字本地化为用户当前的本地化设置语言）中的格式说明符的变量字符串值。 |
 | `bodyLocKey`       | String | 应用的字符串资源中正文字符串的键，用于将正文文字本地化为用户当前的本地化设置语言。 |
 | `bodyLocArgs`      | List   | 将用于替换 `body_loc_key`（用来将正文文字本地化为用户当前的本地化设置语言）中的格式说明符的变量字符串值。 |
+
+### FCM V1 推送相关字段
+
+| 字段            | 类型   | 描述                                                         |
+| :-------------- | :----- | :----------------------------------------------------------- |
+| `type`          | Enum   | FCM 推送通知类型：`BOTH`、`DATA` 和 `NOTIFICATION`。<Container type="notice" title="注意">不同的推送通知类型对应不同的默认选项。</Container>详见[在 Android 应用中接收消息](https://firebase.google.cn/docs/cloud-messaging/android/receive)。 |
+| `data`          | Object | 自定义推送扩展，为键值对格式，例如 `{"k1":"v1", "k2":"v2"}`。                     |
+| `notification`  | Object | 自定义推送内容，详见 [FCM V1 推送通知的字段](#fcm-v1-推送通知的字段)。          |
+| `androidConfig` | Object | Android 推送配置，详见 [Android 推送配置](#android-推送配置)。           |
+| `webPushConfig` | Object | Web 推送配置，详见 [Web 推送配置](#web-推送配置)。  |
+| `apnsConfig`    | Object | APNs 推送配置，详见 [APNs 推送配置](#apns-推送配置)。   |
+| `options`       | Object | 自定义推送配置选项，为键值对格式，例如，{"k1":"v1", "k2":"v2"}。     |
+| `condition`     | String | 发送推送消息的条件。|
+
+#### FCM V1 推送通知的字段
+
+| 字段    | 类型   | 描述                                          |
+| :------ | :----- | :-------------------------------------------- |
+| `title` | String | 推送标题。                                      |
+| `body`  | String | 推送内容。                                      |
+| `image` | String | 显示在通知中的图片的 URL。图片不能超过 1 MB。 |
+
+#### Android 推送配置
+
+| 字段                  | 类型   | 描述                                                         |
+| :-------------------- | :----- | :----------------------------------------------------------- |
+| `collapseKey`         | String | 消息折叠标识，以便在可以恢复传递时仅发送最后一条消息。在任何指定时间内最多允许使用 4 个不同的折叠键。 |
+| `priority`            | String | 消息优先级：<br/> - `NORMAL`：普通。 <br/> - `HIGH`：高。|
+| `ttl`                 | String | 离线保留时长，默认为 4 周。该参数值的单位为秒，最多可精确到小数点后九位，以 `s` 结尾，例如 `3.5s`。 |
+| `androidNotification` | Object | 安卓推送通知。详见 [Android 推送通知的字段](#android-推送通知的字段)。 |
+| `directBootOk`        | Bool   | 如果设置为 `true`，当设备处于直接启动模式时，消息将被允许传送到应用程序。详见[支持直接启动模式](https://developer.android.google.cn/training/articles/direct-boot?hl=zh-cn)。 |
+
+#### Android 推送通知的字段
+
+| 字段             | 类型   | 描述                                           |
+| :------------- | :----- | :--------------------------------------------- |
+| `title`        | String | 推送标题，覆盖 [FCM V1 推送通知的字段](#fcm-v1-推送通知的字段)中的 `title` 字段。              |
+| `body`         | String | 推送内容，覆盖 [FCM V1 推送通知的字段](#fcm-v1-推送通知的字段)中的 `body` 字段。              |
+| `icon`         | String | 通知的图标。默认为应用图标。                       |
+| `color`        | String | 通知的图标颜色，以 #rrggbb 格式表示。            |
+| `sound`        | String | 通知铃声，声音文件必须位于 /res/raw/。         |
+| `tag`          | String | 替换标识，如果通知栏已存在相同标识的通知则替换 |
+| `image`        | String | 显示的图像的 URL，覆盖 [FCM V1 推送通知的字段](#fcm-v1-推送通知的字段)中的 `image` 字段。    |
+| `clickAction`  | String | 用户点击通知操作。                             |
+| `bodyLocKey`   | String | 推送内容本地化键。                               |
+| `bodyLocArgs`  | Array  | 推送内容本地化参数。                             |
+| `titleLocKey`  | String | 推送标题本地化参数。                             |
+| `titleLocArgs` | Array  | 推送标题本地化参数。                             |
+| `channelId`    | String | 通道 ID。                                        |
+
+#### Web 推送配置
+
+| 字段           | 类型   | 描述                                                         |
+| :------------- | :----- | :----------------------------------------------------------- |
+| `headers`      | Object | web push 协议中定义的 HTTP 标头，例如，`{ "k1": "v1", "k2": "v2"}`。 |
+| `notification` | Object | 推送内容, 详见 [FCM V1 推送通知的字段](#fcm-v1-推送通知的字段)。                 |
+
+#### APNs 推送配置
+
+| 字段      | 类型   | 描述                                                         |
+| :-------- | :----- | :----------------------------------------------------------- |
+| `headers` | Object | Apple 推送通知服务中定义的 HTTP 请求标头。详见 [APNs 请求标头](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/sending_notification_requests_to_apns)了解支持的标头，例如，`{ "apns-push-type": "alert", "apns-priority": "10"}`。 |
+| `payload` | Object | 作为 JSON 对象的 APNs 负载，包括 `aps` 字典和自定义负载。详见[有效负载密钥参考](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification)。例如，`{"aps":{"alert":{"title":"环信推送提醒","subtitle":"环信","body":"欢迎使用环信即时推送服务"}},"EPush":"{}"}`。 |
 
 ### 小米推送说明
 
