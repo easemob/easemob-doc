@@ -51,6 +51,7 @@ export const zhSidebar = sidebar({
           { text: '规则配置', link: 'moderation/moderation_rule_config.html' },
           { text: '规则测试', link: 'moderation/moderation_rule_test.html' },
           { text: '历史记录', link: 'moderation/moderation_history.html' },
+          { text: '关键词审核', link: 'moderation/keyword_review.html' },
           { text: '消息审核机制', link: 'moderation/moderation_mechanism.html' },
         ]},
         { text: '进阶功能', collapsible: true, children: [
