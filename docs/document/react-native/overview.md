@@ -75,7 +75,7 @@ ChatClient.getInstance()
 
 ### 控制台注册
 
-控制台的注册请到 [这里](https://console.easemob.com/app/im-service/operative-service/user)。
+通过控制台注册用户，详见[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)。
 
 ### REST API 注册
 
