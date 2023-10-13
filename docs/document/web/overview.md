@@ -94,7 +94,7 @@ const conn = new EC.connection({
 
 ### 控制台注册
 
-登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择**即时通讯** > **运营服务** > **用户管理**，创建 IM 用户。
+通过控制台注册用户，详见[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)。
 
 ### REST API 注册
 
