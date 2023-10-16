@@ -24,14 +24,12 @@ request 合法域名：
 3. https://a3.easemob.com
 4. https://a4.easemob.com
 5. https://a5.easemob.com
-   :::
+:::
 
 :::tip
 socket 合法域名：
-
-1. wss://im-api.easemob.com（2.0 IM SDK)
-2. wss://im-api-wechat.easemob.com（3.0 IM SDK）
-   :::
+wss://im-api-wechat.easemob.com（3.0 IM SDK）
+:::
 
 :::notice
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
