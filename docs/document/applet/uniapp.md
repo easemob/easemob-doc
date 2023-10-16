@@ -78,7 +78,7 @@ request 合法域名，uploadFile 合法域名，downloadFile 合法域名
 8. https://a41.easemob.com
 9. https://a51.easemob.com
 10. https://a1-chatfile.easemob.com
-    :::
+:::
 
 :::tip
 socket 合法域名:
@@ -87,7 +87,7 @@ socket 合法域名:
 2. wss://im-api-wechat-31.easemob.com
 3. wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）
 4. wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）
-   :::
+:::
 
 ### 各端小程序 WebSocket 连接数量
 
