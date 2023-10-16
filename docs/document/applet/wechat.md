@@ -29,10 +29,8 @@ request 合法域名：
 
 :::tip
 socket 合法域名：
-
-1. wss://im-api.easemob.com（2.0 IM SDK）
-2. wss://im-api-wechat.easemob.com（3.0 IM SDK）
-   :::
+wss://im-api-wechat.easemob.com（3.0 IM SDK）
+:::
 
 :::tip
 uploadFile 合法域名：
