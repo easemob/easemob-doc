@@ -24,7 +24,7 @@ request 合法域名：
 3. https://a3.easemob.com
 4. https://a4.easemob.com
 5. https://a5.easemob.com
-   :::
+:::
 
 :::tip
 socket 合法域名：
