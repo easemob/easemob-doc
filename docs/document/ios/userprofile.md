@@ -52,7 +52,7 @@ userInfo.phone = @"12333333333";
 userInfo.mail = @"123456@qq.com";
 userInfo.gender = 1;
 // 异步方法
-[EMClient.sharedClient.userInfoManager updateOwnUserInfo:userInfo completion:^(EMUserInfo *aUserInfo, EMError *aError)
+[EMClient.sharedClient.userInfoManager updateOwnUserInfo:userInfo completion:^(EMUserInfo *aUserInfo, EMError *aError) {
 
 }];
 ```
