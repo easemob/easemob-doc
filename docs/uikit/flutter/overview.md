@@ -2,7 +2,7 @@
 
 em_chat_uikit 是基于环信 IM SDK 的一款 UI 组件库，提供通用的 UI 组件，例如会话列表、聊天界面。利用该组件库，开发者可根据实际业务需求快速地搭建自定义 IM 应用。em_chat_uikit 中的组件在实现 UI 功能的同时，调用 IM SDK 相关接口实现 IM 相关逻辑和数据的处理，因而开发者在使用 em_chat_uikit 时只需关注自身业务或个性化扩展即可。
 
-查看 em_chat_uikit 源码，请点击[这里](https://github.com/easemob/em_chat_uikit)。
+查看 em_chat_uikit 源码，请点击[这里](https://github.com/easemob/flutter_chat_uikit)。
 
 ## 功能
 
