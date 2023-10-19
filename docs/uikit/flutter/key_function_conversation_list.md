@@ -4,11 +4,11 @@
 
 ## 创建会话列表界面
 
-flutter_chat_uikit 提供了 `ChatConversationsView`，添加到 `build` 中并传入相应的参数。
+em_chat_uikit 提供了 `ChatConversationsView`，添加到 `build` 中并传入相应的参数。
 
 ```dart
 import 'package:flutter/material.dart'; 
-import 'package:flutter_chat_uikit/flutter_chat_uikit.dart';
+import 'package:em_chat_uikit/em_chat_uikit.dart';
 
 class ConversationsPage extends StatefulWidget {
   const ConversationsPage({super.key});
