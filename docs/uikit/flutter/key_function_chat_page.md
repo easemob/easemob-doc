@@ -4,7 +4,7 @@
 
 ## 创建聊天界面
 
-flutter_chat_uikit 提供了 `ChatMessagesView`，添加到 `build` 中并传入相应的参数即可用。
+em_chat_uikit 提供了 `ChatMessagesView`，添加到 `build` 中并传入相应的参数即可用。
 
 | 参数           | 类型 | 是否必需   | 描述      |
 | :------------- | :-----| :----- | :-------- |
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       builder: (context, child) {
-        // ChatUIKit 需要在你使用 `flutter_chat_uikit` widget 的根节点上。
+        // ChatUIKit 需要在你使用 `em_chat_uikit` widget 的根节点上。
         return ChatUIKit(
           // ChatUIKitTheme 主题。
           theme: ChatUIKitTheme(),

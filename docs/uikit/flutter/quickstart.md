@@ -1,13 +1,13 @@
 # 快速开始
 
-利用 flutter_chat_uikit 提供的 UI 组件，你可以轻松实现应用内的聊天。flutter_chat_uikit 支持单聊、群聊和聊天室会话。本文介绍如何实现在单聊会话中发送消息。
+利用 em_chat_uikit 提供的 UI 组件，你可以轻松实现应用内的聊天。em_chat_uikit 支持单聊、群聊和聊天室会话。本文介绍如何实现在单聊会话中发送消息。
 
 <img src=@static/images/uikitflutter/ChatConversationsView.png  title=“会话列表界面” width="300"/>&nbsp;&nbsp;
 <img src=@static/images/uikitflutter/ChatMessagesView.png  title=聊天页面 width="300"/>
 
 ## 前提条件
 
-集成 flutter_chat_uikit 前，你的开发环境需要满足以下条件：
+集成 em_chat_uikit 前，你的开发环境需要满足以下条件：
 
 1. 有效的环信即时通讯 IM 开发者账号，创建应用并获取 App Key。
 2. 在[环信控制台](https://console.easemob.com/index)[创建两个用户用于聊天](/product/enable_and_configure_IM.html#创建-im-用户)。
@@ -62,14 +62,14 @@
 
 ## 发送第一条消息
 
-### 第一步 集成 flutter_chat_uikit
+### 第一步 集成 em_chat_uikit
 
-flutter_chat_uikit 支持 pub.dev 接入和本地源码集成。
+em_chat_uikit 支持 pub.dev 接入和本地源码集成。
 
 - pub.dev 接入集成：
 
 ```dart
-flutter pub add flutter_chat_uikit
+flutter pub add em_chat_uikit
 flutter pub get
 ```
 
@@ -77,11 +77,11 @@ flutter pub get
 
 ```dart
 dependencies:
-    flutter_chat_uikit:
+    em_chat_uikit:
         path: `<#uikit path#>`
 ```
 
-flutter_chat_uikit 使用了以下第三方依赖库：
+em_chat_uikit 使用了以下第三方依赖库：
 
 ```dart
 dependencies:
@@ -98,7 +98,7 @@ dependencies:
 在 app 的 `main` 下调用 SDK 初始化方法。
 
 :::notice
-flutter_chat_uikit 不包含 IM SDK 的初始化和登录，使用时确保已完成 SDK 初始化和登录。
+em_chat_uikit 不包含 IM SDK 的初始化和登录，使用时确保已完成 SDK 初始化和登录。
 :::
 
 ```dart
@@ -114,7 +114,7 @@ void main() async {
 
 #### 第三步 创建聊天界面
 
-flutter_chat_uikit 提供了 `ChatMessagesView`，添加到 `build` 中，传入必填参数 `conversation` 及所需的可选参数即可。详见[聊天界面参数描述](key_function_chat_page.html#创建聊天界面)。
+em_chat_uikit 提供了 `ChatMessagesView`，添加到 `build` 中，传入必填参数 `conversation` 及所需的可选参数即可。详见[聊天界面参数描述](key_function_chat_page.html#创建聊天界面)。
 
 1. 通过 IM SDK 获取一个本地会话。
 
