@@ -59,7 +59,7 @@
 ### HTTP 请求
 
 ```
-PUT https://{host}/{org_name}/{app_name}/users/wzy/push/binding
+PUT https://{host}/{org_name}/{app_name}/users/{username}/push/binding
 ```
 
 #### 路径参数
@@ -160,7 +160,7 @@ curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/wzy/push/binding' \
 ### HTTP 请求
 
 ```
-GET https://{host}/{org_name}/{app_name}/users/wzy/push/binding
+GET https://{host}/{org_name}/{app_name}/users/{username}/push/binding
 ```
 
 #### 路径参数
