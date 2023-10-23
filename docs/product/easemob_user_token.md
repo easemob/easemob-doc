@@ -204,7 +204,7 @@ a. 获取当前时间戳，单位为秒。
     CurTime = 1686207557
 b. 设置过期时间，单位为秒。
     ttl = 600
-c. 生成 signature，将 clientId、appkey、userId、curTime、ttl、clientSecret 六个字段拼成一个字符串，进行 sha1 编码并将编码内容得到的字节转换为十六进制字符串。
+c. 生成 signature，将 clientId、appkey、userId、curTime、ttl、clientSecret 六个字段拼成一个字符串，进行 sha256 编码并将编码内容得到的字节转换为十六进制字符串。
     str = clientId + appkey + userId + curTime + ttl + clientSecret
     sha256hash = sha256.Sum256([]byte(str))
     signature = fmt.Sprintf("%x", shaBytes)
