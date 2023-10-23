@@ -213,7 +213,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/messages/chatgroups/import" -d '{
-    "target": "username2",
+    "target": "1123376564212",
     "type": "txt",
     "body": {
         "msg": "import message."
@@ -229,7 +229,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/messages/chatgroups/import" -d '{
-    "target": "username2",
+    "target": "1123376564212",
     "type": "img",
     "body": {
         "url": "<YourImageUrl>",

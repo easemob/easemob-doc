@@ -178,7 +178,14 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/user_channel
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/users/u1/user_channel" -d '{"channel":"u2", "type":"chat"，"delete_roam": true}'
+curl -L -X DELETE 'https://XXXX/XXXX/XXXX/users/u1/user_channel' \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-H 'Content-Type: application/json'  \
+-H 'Accept: application/json'  \
+-d '
+
+{ "channel": "u2", "type": "chat", "delete_roam": true }
+'
 ```
 
 #### 响应示例

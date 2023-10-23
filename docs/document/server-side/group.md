@@ -399,7 +399,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 
 | 参数     | 类型   | 是否必需 | 描述                                                        |
 | :------- | :----- | :------- | :---------------------------------------------------------- |
-| `limit`  | Int    | 否       | 每次期望返回的群组数量。取值范围为 [1,100]，默认值为 `10`。 |
+| `limit`  | Int    | 否       | 每次期望返回的群组数量。取值范围为 [1,1000]，默认值为 `10`。 |
 | `cursor` | String | 否       | 数据查询的起始位置。                                        |
 
 :::tip
@@ -494,7 +494,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/users/{username}?pagesize={}&pagenum={}
+GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&pagenum={}
 ```
 
 ##### 路径参数
@@ -505,7 +505,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/users/{username}?pagesize={}
 
 | 参数            | 类型   | 是否必需    | 描述                 |
 |:--------------| :----- |:--------|:-------------------|
-| `pagesize`     | String | 否       | 每页获取的群组数量。取值范围为 [1,20]，默认值为 `10`。 |
+| `pagesize`     | String | 否       | 每页获取的群组数量。取值范围为 [1,20]，默认值为 `5`。 |
 | `pagenum`       | String | 否       | 当前页码。默认从第 `0` 页开始获取。 |
 
 ##### 请求 header
@@ -586,7 +586,7 @@ curl --location 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/is_joined
+GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/is_joined
 ```
 
 ##### 路径参数
@@ -1278,7 +1278,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 | 参数       | 类型 | 是否必需 | 描述                                                        |
 | :--------- | :--- | :------- | :---------------------------------------------------------- |
 | `pagenum`  | Int  | 否       | 当前页码。默认从第 1 页开始获取。                           |
-| `pagesize` | Int  | 否       | 每页期望返回的群组成员数量。取值范围为 [1,100]。默认为 10。 |
+| `pagesize` | Int  | 否       | 每页期望返回的群组成员数量。取值范围为 [1,1000]。默认为 `1000`。 |
 
 ##### 请求 header
 
@@ -1696,11 +1696,11 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl --location --request PUT 'https://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup/207059303858177/user/test2' \
+curl --location --request PUT 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/user/XXXX' \
 -H 'Content-Type: application/json' \
--H 'Accept: application/json'
--H 'Authorization: Bearer YWMtozZwfsFFEe2oQTE6aob5eQAAAAAAAAAAAAAAAAAAAAExCXvf5bRGAJBgXNYFJVQ9AQMAAAGG2MUClwBPGgDsI1GYg1QtapTEdGyrm29Eu6L8qx60lDZ9TJRDOQjEsw' \
---data-raw '{
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
     "metaData": {
           "key1": "value1"
     }
@@ -1829,11 +1829,11 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/get
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl --location --request POST 'https://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup/207059303858177/get' \
--H 'Content-Type: application/json' \
--H 'Accept: application/json'
--H 'Authorization: Bearer YWMtozZwfsFFEe2oQTE6aob5eQAAAAAAAAAAAAAAAAAAAAExCXvf5bRGAJBgXNYFJVQ9AQMAAAGG2MUClwBPGgDsI1GYg1QtapTEdGyrm29Eu6L8qx60lDZ9TJRDOQjEsw' \
---data-raw '{
+curl--location--request POST 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/get'\
+-H'Content-Type: application/json'\
+-H'Accept: application/json'\
+-H'Authorization: Bearer <YourAppToken>'\
+-d '{
     "targets":["test1","test2"],
     "properties":["key1","key2"]
 }'
