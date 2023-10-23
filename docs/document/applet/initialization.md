@@ -71,9 +71,7 @@ conn
     /** 用户 ID。 */
     username: string,
     /** 密码。 */
-    password: string,
-    /** 显示昵称。用于移动端推送的时候通知栏显示。 */
-    nickname: string,
+    password: string
   })
   .then((res) => {
     console.log(res);

@@ -77,7 +77,6 @@ POST https://{host}/{org_name}/{app_name}/users
 | :--------- | :----- | :------- | :-------------------------------------------- |
 | `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同的用户 ID；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
 | `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。  |
-| `nickname` | String | 否       | 离线推送该用户发送的消息时在接收方的客户端推送通知栏中显示的昵称。你可以自定义该昵称，长度不能超过 100 个字符。<br/>支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。<br/>若不设置昵称，推送消息详情时，即[设置离线推送通知的展示方式](push.html#设置离线推送通知的展示方式)时将 `notification_display_style` 设置为 `1`，会显示发送方的用户 ID，而非昵称。<br/>该昵称可与用户属性中的昵称设置不同，不过我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。更新用户属性中的昵称的方法，详见 [设置用户属性](userprofile.html#设置用户属性)。  |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -90,7 +89,6 @@ POST https://{host}/{org_name}/{app_name}/users
 | 字段                | 类型   | 描述                                           |
 | :------------------ | :----- | :--------------------------------------------- |
 | `entities.username` | String | 用户 ID。                                      |
-| `entities.nickname` | String | 推送消息时，在消息推送通知栏内显示的用户昵称。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -119,8 +117,7 @@ curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users" -d '{"username":"user1",
       "created": 1542795196504,
       "modified": 1542795196504,
       "username": "user1",
-      "activated": true,
-      "nickname": "testuser"
+      "activated": true
     }
   ],
   "timestamp": 1542795196515,
@@ -164,7 +161,6 @@ POST https://{host}/{org_name}/{app_name}/users
 | :--------- | :----- | :------- | :------------------------ |
 | `username` | String | 是       | 用户 ID，长度不可超过 64 字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
 | `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。 |
-| `nickname` | String | 否       | 离线推送该用户发送的消息时在接收方的客户端推送通知栏中显示的昵称。你可以自定义该昵称，长度不能超过 100 个字符。<br/>支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。<br/>若不设置昵称，推送消息详情时，即[设置离线推送通知的展示方式](push.html#设置离线推送通知的展示方式)时将 `notification_display_style` 设置为 `1`，会显示发送方的用户 ID，而非昵称。<br/>该昵称可与用户属性中的昵称设置不同，不过我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。更新用户属性中的昵称的方法，详见 [设置用户属性](userprofile.html#设置用户属性)。  |
 
 #### HTTP 响应
 
@@ -174,8 +170,7 @@ POST https://{host}/{org_name}/{app_name}/users
 
 | 字段                | 类型   | 描述                                                                                                        |
 | :------------------ | :----- | :---------------------------------------------------------------------------------------------------------- |
-| `entities.username` | String | 用户 ID。                                                                                                   |
-| `entities.nickname` | String | 推送消息时，在消息推送通知栏内显示的用户昵称。<br/>该字段为消息推送显示的用户昵称，而非用户属性的用户昵称。 |
+| `entities.username` | String | 用户 ID。      |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -191,8 +186,7 @@ POST https://{host}/{org_name}/{app_name}/users
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '[
    {
      "username": "user1",
-     "password": "123",
-     "nickname": "testuser"
+     "password": "123"
    }
  ]' 'https://XXXX/XXXX/XXXX/users'
 ```
@@ -212,8 +206,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
       "created": 1542795196504,
       "modified": 1542795196504,
       "username": "user1",
-      "activated": true,
-      "nickname": "testuser"
+      "activated": true
     }
   ],
   "timestamp": 1542795196515,
@@ -254,7 +247,6 @@ POST https://{host}/{org_name}/{app_name}/users
 | :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
 | `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。      |
-| `nickname` | String | 否       | 离线推送用户发送的消息时在接收方的客户端推送通知栏中显示的昵称。你可以自定义该昵称，长度不能超过 100 个字符。<br/>支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。<br/>若不设置昵称，推送消息详情时，即[设置离线推送通知的展示方式](push.html#设置离线推送通知的展示方式)时将 `notification_display_style` 设置为 `1`，会显示发送方的用户 ID，而非昵称。<br/>该昵称可与用户属性中的昵称设置不同，不过我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。更新用户属性中的昵称的方法，详见 [设置用户属性](userprofile.html#设置用户属性)。  |
 
 #### HTTP 响应
 
@@ -265,7 +257,6 @@ POST https://{host}/{org_name}/{app_name}/users
 | 字段                | 类型   | 描述                                           |
 | :------------------ | :----- | :--------------------------------------------- |
 | `entities.username` | String | 用户 ID。                                      |
-| `entities.nickname` | String | 推送消息时，在消息推送通知栏内显示的用户昵称。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -280,7 +271,7 @@ POST https://{host}/{org_name}/{app_name}/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XXXX/users" -d '[{"username":"user1", "password":"123","nickname":"testuser1"}, {"username":"user2", "password":"456","nickname":"testuser2"}]'
+curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XXXX/users" -d '[{"username":"user1", "password":"123"}, {"username":"user2", "password":"456"}]'
 ```
 
 ##### 响应示例一
@@ -298,8 +289,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
       "created": 1541587920710,
       "modified": 1541587920710,
       "username": "user1",
-      "activated": true,
-      "nickname": "testuser1"
+      "activated": true
     },
     {
       "uuid": "278bac80-XXXX-XXXX-b192-73e4cd5078a5",
@@ -307,8 +297,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
       "created": 1541587920712,
       "modified": 1541587920712,
       "username": "user2",
-      "activated": true,
-      "nickname": "testuser2"
+      "activated": true
     }
   ],
   "timestamp": 1541587920714,
@@ -326,7 +315,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XXXX/users" -d '[{"username":"user1", "password":"123","nickname":"testuser1"}, {"username":"user2", "password":"456","nickname":"testuser2"}, {"username":"user3", "password":"789","nickname":"testuser3"}]'
+curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XXXX/users" -d '[{"username":"user1", "password":"123"}, {"username":"user2", "password":"456"}, {"username":"user3", "password":"789"}]'
 ```
 
 ##### 响应示例二
@@ -344,8 +333,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
       "created": 1541587920710,
       "modified": 1541587920710,
       "username": "user1",
-      "activated": true,
-      "nickname": "testuser1"
+      "activated": true
     },
     {
       "uuid": "278bac80-XXXX-XXXX-b192-73e4cd5078a5",
@@ -353,8 +341,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
       "created": 1541587920712,
       "modified": 1541587920712,
       "username": "user2",
-      "activated": true,
-      "nickname": "testuser2"
+      "activated": true
     }
   ],
   "timestamp": 1541587920714,
