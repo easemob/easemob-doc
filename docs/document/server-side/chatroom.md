@@ -125,9 +125,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST 'https://XXXX/XXXX/XXXX//chatrooms/super_admin'
--H 'Authorization: Bearer <YourAppToken>'
--H 'Content-Type: application/json'
+curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/super_admin'  \
+-H 'Authorization: Bearer <YourAppToken>' \
+-H 'Content-Type: application/json' \
 -d '{
     "superadmin": "user1"
 }'
@@ -1247,7 +1247,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
+curl  -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "keys": ["key1","key2"]
  }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1/forced'
 ```
