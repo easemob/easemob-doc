@@ -94,7 +94,9 @@ demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工�
 }
 ```
 
-调用的 SDK 接口参数解释如下：\ App Key: 区别 APP 的标识，请参考[开发者注册及管理后台](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)。 \ apnsCertName: iOS 中推送证书名称，请参考[制作与上传推送证书](https://docs-im.easemob.com/im/ios/apns/deploy)。
+调用的 SDK 接口参数解释如下：
+- App Key: 区别 APP 的标识，请参考[开发者注册及管理后台](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)。
+- apnsCertName: iOS 中推送证书名称，请参考[制作与上传推送证书](https://docs-im.easemob.com/im/ios/apns/deploy)。
 
 ### SDK 登录流程
 
@@ -148,9 +150,9 @@ if (NSClassFromString(@"UNUserNotificationCenter")) {
 
 ##### 2.将获得的 deviceToken 传到 SDK
 
-**注意**
-
+:::notice
 如果是 iOS 13 及以上的系统，请将 SDK 更新至 v3.6.4 或以上版本。
+:::
 
 ```objectiveC
 // 将获得的 deviceToken 传给 SDK。 

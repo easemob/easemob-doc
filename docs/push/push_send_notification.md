@@ -96,6 +96,7 @@ POST https://{host}/{org_name}/{app_name}/push/sync/{target}
 #### 请求示例
 
 ```shell
+将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
@@ -217,8 +218,11 @@ POST https://{host}/{org_name}/{app_name}/push/single
 #### 请求示例
 
 ```shell
-curl -X POST "http://localhost:8099/easemob-demo/testy/push/single" 
--H "Authorization: Bearer <YourAppToken> -H "Content-Type: application/json" -d '{
+将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl -X POST 'http://localhost:8099/easemob-demo/testy/push/single' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-H 'Content-Type: application/json'  \
+-d '{
     "targets": [
         "test2"
     ],
@@ -298,10 +302,11 @@ POST https://{host}/{org_name}/{app_name}/push/list/label
 #### 请求示例
 
 ```shell
+将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl -L -X POST 'http://a1.easemob.com/easemob/easeim/push/list/label' \
--H 'Authorization: Bearer YWMtIPBHKsOyEeAAAAAAAAAAAExCXvf5bRGAJBgXNYFJVQ9AQMAAAGAWu67KQBPGgBOV9ghkGKbtt9H9b1' \
+-H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
---data-raw '{
+-d '{
     "targets": [
         "post-90s"
     ],
@@ -373,9 +378,13 @@ POST https://{host}/{org_name}/{app_name}/push/task
 #### 请求示例
 
 ```shell
-curl -X POST "http://localhost:8099/easemob-demo/testy/push/task" -H "Content-Type: application/json" --data-raw '{
+将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl -X POST "http://localhost:8099/easemob-demo/testy/push/task" \
+-H "Content-Type: application/json" \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-d '{
     "pushMessage": {
-        "title\": "Hello1234",
+        "title": "Hello1234",
         "subTitle": "Hello",
         "content": "Hello",
         "vivo": {}
@@ -444,9 +453,11 @@ POST https://{host}/{org_name}/{app_name}/push/message
 ##### 请求示例
 
 ```shell
-curl -X POST "http://localhost:8099/easemob-demo/testy/push/message" 
--H "Authorization: Bearer YWMtOzQVjJ3mEeuJQv1qXhB5QAAAAAAAAAAAAAAAAAAAAAFDtjwasNNKD6W3CET2O3RNAQMAAAF41YIKUABPGgDuIZeu5IMVC_M9G5JlTjUsZeYVSg5o8BwshLgWveZxjA" 
--H "Content-Type: application/json" -d '{
+将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl -X POST "http://localhost:8099/easemob-demo/testy/push/message"  \
+-H "Authorization: Bearer <YourAppToken>"  \
+-H "Content-Type: application/json" \
+-d '{
     "title": "Hello",
     "subTitle": "Hello",
     "content": "Hello",
@@ -508,8 +519,9 @@ POST https://{host}/{org_name}/{app_name}/push/message/{messageId}
 #### 请求示例
 
 ```shell
-curl -X GET "http://localhost:8099/easemob-demo/testy/push/message/832655326988867864" 
--H "Authorization: Bearer YWMtOzQVjJ3mEeuJQv1qXhB5QAAAAAAAAAAAAAAAAAAAAAFDtjwasNNKD6W3CET2O3RNAQMAAAF41YIKUABPGgDuIZeu5IMVC_M9G5JlTjUsZeYVSg5o8BwshLgWveZxjA"
+将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl -X GET "http://localhost:8099/easemob-demo/testy/push/message/832655326988867864"  \
+-H "Authorization: Bearer <YourAppToken>"
 ```
 
 #### 响应示例
@@ -576,8 +588,10 @@ POST https://{host}/{org_name}/{app_name}/push/task/broadcast
 ##### 请求示例
 
 ```shell
-curl -X POST "http://localhost:8099/easemob-demo/testy/push/task/broadcast" 
--H "Content-Type: application/json" -d '{
+curl -X POST "http://localhost:8099/easemob-demo/testy/push/task/broadcast"  \
+-H "Content-Type: application/json" \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
     "pushMsgId": 832253695868580464
 }'
 ```
