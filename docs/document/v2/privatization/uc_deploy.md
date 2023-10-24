@@ -26,7 +26,7 @@
 <tr>
 <td>环信私有化即时通讯服务安装包（单机版）</td>
 <td>操作系统：Linux、ubuntu 20 及以上、centos 7 及以上 <br/>CPU 架构：X86、ARM</td>
-<td> <a href="https://zim-private.oss-cn-beijing.aliyuncs.com/zim/ZIM-23.1.5.x86_64-license/ZIM-23.1.5.x86_64.all.tar">立即下载(X86)</a><br/><a href="https://zim-private.oss-cn-beijing.aliyuncs.com/zim/ZIM-23.1.5.arm64-v8a-GIT.581a086/ZIM-23.1.5.arm64-v8a.all.tar?OSSAccessKeyId=LTAI5tKdC9mUTVGhhN2t7Ux4&Expires=1700503445&Signature=H81Idh3gQ0S9L4VsnDx5QTlcGxQ%3D">立即下载(ARM)</a></td>
+<td> <a href="https://zim-private.oss-cn-beijing.aliyuncs.com/zim/ZIM-23.1.5.x86_64-license/20230912/ZIM-23.1.5.x86_64.all.tar">立即下载(X86)</a><br/><a href="https://zim-private.oss-cn-beijing.aliyuncs.com/zim/ZIM-23.1.5.arm64-v8a.202309/ZIM-23.1.5.arm64-v8a.all.tar">立即下载(ARM)</a></td>
 <td><a href="https://zim-private.oss-cn-beijing.aliyuncs.com/zim/ZIM-23.1.5.x86_64-license/%E7%8E%AF%E4%BF%A1%E7%A7%81%E6%9C%89%E5%8C%96IM%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A320230516.pdf">立即下载</a></td>
 </tr>
 </table>
