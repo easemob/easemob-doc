@@ -593,8 +593,8 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 | `name`        | String | 是       | 聊天室名称，最大长度为 128 个字符。                                             |
 | `description` | String | 是       | 聊天室描述，最大长度为 512 个字符。                                             |
 | `maxusers`    | Int    | 否       | 聊天室最大成员数（包括聊天室所有者），默认最大值为 10,000，如需调整请联系商务。 |
-| `owner`       | String | 是       | 聊天室的管理员。                                                                |
-| `members`     | Array  | 否       | 聊天室成员的用户 ID。若传该参数，确保至少设置一个数组元素。                     |
+| `owner`       | String | 是       | 聊天室所有者。                                                                |
+| `members`     | Array  | 否       | 聊天室普通成员和管理员的用户 ID 数组，不包含聊天室所有者的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。若传该参数，确保至少设置一个数组元素。                     |
 | `custom`      | String | 否       | 聊天室扩展信息，例如可以给聊天室添加业务相关的标记，不要超过 1,024 个字符。     |
 
 #### HTTP 响应
