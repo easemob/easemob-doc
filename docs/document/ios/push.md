@@ -604,10 +604,11 @@ message.chatType = EMChatTypeChat;
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_apns_ext":@{
-    @"em_alert_title": @"customTitle",
+    @"em_push_title": @"customTitle",
     @"em_alert_subTitle": @"customSubTitle",
-    @"em_alert_body": @"customBody"
+    @"em_push_content": @"customContent"
 }};
+
 message.chatType = EMChatTypeChat;
 [EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:nil];
 ```
@@ -619,9 +620,9 @@ message.chatType = EMChatTypeChat;
 | `from`                | 消息发送方，一般为当前登录 ID。                              |
 | `to`                  | 消息接收方 ID，一般与 `ConversationID` 一致。                |
 | `em_apns_ext`         | 消息扩展，使用扩展的方式向推送中添加自定义字段，该值为固定值，不可修改。 |
-| `em_alert_title`          | 推送通知的自定义标题。 |
+| `em_push_title`          | 推送通知的自定义标题。 |
 | `em_alert_subTitle`        | 推送通知的自定义副标题。 |
-| `em_alert_body`          |推送通知展示的自定义内容。 |
+| `em_push_content`          |推送通知展示的自定义内容。 |
 
 **解析的内容**
 
