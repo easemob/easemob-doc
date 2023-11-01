@@ -581,7 +581,7 @@ EMClient.getInstance().chatManager().sendMessage(customMessage);
 
 1. 利用原始消息列表创建一条合并消息。
 2. 发送合并消息。
-3. 对端收到合并消息后进行解析，获取原始消息列表。
+3. 对端收到合并消息后进行解析，获取原始消息列表。合并消息转发后在接收端显示该消息的标题和预览图。
 
 #### 创建和发送合并消息
 
@@ -600,6 +600,7 @@ EMClient.getInstance().chatManager().sendMessage(customMessage);
 :::notice
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
 2. 不论 `EMOptions#setAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
+3. 合并消息不支持搜索。
 :::
 
 示例代码如下：
