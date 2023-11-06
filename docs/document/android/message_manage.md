@@ -11,7 +11,7 @@
 环信即时通讯 IM Android SDK 支持管理用户设备上存储的消息会话数据，其中包含如下主要方法：
 
 - `EMChatManager.getAllConversationsBySort` 获取本地所有会话；
-- `EMConversation.getAllMessages` 从数据库中读取指定会话的消息；
+- `EMConversation.getAllMessages/loadMoreMsgFromDB` 从本地读取指定会话的消息；
 - `EMConversation.getUnreadMsgCount` 获取指定会话的未读消息数；
 - `EMChatManager.getUnreadMessageCount` 获取所有会话的未读消息数；
 - `EMChatManager.markAllConversationsAsRead` 指定会话的未读消息数清零；
@@ -55,15 +55,17 @@ List<EMConversation> conversations = EMClient.getInstance().chatManager().getAll
 
 你也可以调用 `getAllConversations` 方法返回 `Map <String, EMConversation>` 结构的会话。
 
-### 从数据库中读取指定会话的消息
+### 从本地读取指定会话的消息
 
-你可以从本地数据库中读取指定会话的消息，示例代码如下：
+你可以调用 `getAllMessages` 方法获取指定会话在内存中的所有消息。如果内存中为空，SDK 再从本地数据库中加载最近一条消息。
+
+你也可以调用 `loadMoreMsgFromDB` 方法从本地数据库中分页加载消息，加载的消息会基于消息中的时间戳放入当前会话的内存中。
 
 ```java
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
-// 获取此会话的所有消息。
 List<EMMessage> messages = conversation.getAllMessages();
-// SDK 初始化时，为每个会话加载 1 条聊天记录。如需更多消息，请到数据库中获取。该方法获取 `startMsgId` 之前的 `pagesize` 条消息，SDK 会将这些消息自动存入此会话，app 无需添加到会话中。
+// startMsgId：查询的起始消息 ID。SDK 从该消息 ID 开始按消息时间戳的逆序加载。如果传入消息的 ID 为空，SDK 从最新消息开始按消息时间戳的逆序获取。
+// pageSize：每页期望加载的消息数。取值范围为 [1,400]。
 List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
 ```
 
