@@ -27,12 +27,12 @@
 | `uri`                | String | 请求 URL。                |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
 | `entities`           | JSON   | 响应实体。          |
-| `entities.uuid`      | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。      |
-| `entities.type`      | String | 对象类型，无需关注。             |
-| `entities.created`   | Long   | 注册用户的 Unix 时间戳，单位为毫秒。      |
-| `entities.modified`  | Long   | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。       |
-| `entities.username`  | String | 用户 ID。            |
-| `entities.activated` | Bool   | 用户是否为正常状态：<br/> - `true`：用户为正常状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](#账号解禁)方法解除封禁。 |
+|  `  - uuid`      | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。      |
+|  `  - type`      | String | 对象类型，无需关注。             |
+|  `  - created`   | Long   | 注册用户的 Unix 时间戳，单位为毫秒。      |
+|  `  - modified`  | Long   | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。       |
+|  `  - username`  | String | 用户 ID。            |
+|  `  - activated` | Bool   | 用户是否为正常状态：<br/> - `true`：用户为正常状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](#账号解禁)方法解除封禁。 |
 | `data`               | JSON   | 实际获取的数据详情。            |
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
@@ -673,12 +673,19 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users
+DELETE https://{host}/{org_name}/{app_name}/users?limit={N}&cursor={cursor}
 ```
 
 ##### 路径参数
 
 参数及说明详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数     | 类型   | 是否必需 | 描述        |
+| :------- | :----- | :------- | :----------------- |
+| `limit`  | Int    | 否       | 要删除的用户的数量。取值范围为 [1,100]，默认值为 `10`。 |
+| `cursor` | String | 否       | 开始删除用户的游标位置。第一次批量删除时若不设置 `cursor`，请求成功后会从最先创建的用户开始删除 `limit` 指定的用户数量。从响应 body 中获取 `cursor`，并在下一次请求的 URL 中传入该 `cursor`，直到响应 body 中不再有 `cursor` 字段，则表示已完全删除 app 中的所有用户。 |
 
 ##### 请求 header
 
