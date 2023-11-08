@@ -27,12 +27,12 @@
 | `uri`                | String | 请求 URL。                |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
 | `entities`           | JSON   | 响应实体。          |
-|  `- uuid`      | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。      |
-|  `- type`      | String | 对象类型，无需关注。             |
-|  `- created`   | Long   | 注册用户的 Unix 时间戳，单位为毫秒。      |
-|  `- modified`  | Long   | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。       |
-|  `- username`  | String | 用户 ID。            |
-|  `- activated` | Bool   | 用户是否为正常状态：<br/> - `true`：用户为正常状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](#账号解禁)方法解除封禁。 |
+|  - `uuid`      | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。      |
+|  - `type`      | String | 对象类型，无需关注。             |
+|  - `created`   | Long   | 注册用户的 Unix 时间戳，单位为毫秒。      |
+|  - `modified`  | Long   | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。       |
+|  - `username`  | String | 用户 ID。            |
+|  - `activated` | Bool   | 用户是否为正常状态：<br/> - `true`：用户为正常状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](#账号解禁)方法解除封禁。 |
 | `data`               | JSON   | 实际获取的数据详情。            |
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
