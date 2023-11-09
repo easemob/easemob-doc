@@ -75,7 +75,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users/import
 | `body`          | JSON   | 是       | 消息内容。      |
 | `is_ack_read`   | Bool   | 否       | 是否设置消息为已读。<br/> - `true`：是；<br/> - `false`：否。  |
 | `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。   |
-| `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是；<br/> - （默认）`false`：否。  |
+| `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是。这种情况下，需确保附件地址可正常访问，无需访问权限。若附件地址设置了访问控制权限，该参数需设置为 `false`，调用该 API 前你需自行下载附件，然后上传到服务器。<br/> - （默认）`false`：否。  |
 
 与发送单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [发送单聊消息](message_single.html)。
 
@@ -184,7 +184,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 | `body`          | JSON   | 是       | 消息内容。                  |
 | `is_ack_read`   | Bool   | 否       | 是否设置消息为已读。<br/> - `true`：是；<br/> - `false`：否。    |
 | `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。 |
-| `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是；<br/> - （默认）`false`：否。     |
+| `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是。这种情况下，需确保附件地址可正常访问，无需访问权限。若附件地址设置了访问控制权限，该参数需设置为 `false`，调用该 API 前你需自行下载附件，然后上传到服务器。<br/> - （默认）`false`：否。     |
 
 :::notice
 与发送消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [发送群聊消息](message_group.html)。
