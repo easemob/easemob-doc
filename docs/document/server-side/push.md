@@ -252,14 +252,14 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数                 | 类型    | 描述                                                                                                                                                                                                           |
 | :------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `entities`           | JSON    | 用户在推送通知中显示的昵称以及用户相关信息。                                                                                                                                                                   |
-| `entities.uuid`      | String  | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。                                                                                                                           |
-| `entities.type`      | String  | 用户类型，即 `user`。                                                                                                                                                                                          |
-| `entities.created`   | Number  | 用户注册的 Unix 时间戳，单位为毫秒。                                                                                                                                                                           |
-| `entities.modified`  | Number  | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。                                                                                                                                                               |
-| `entities.username`  | String  | 用户 ID。用户登录的唯一账号。                                                                                                                                                                                  |
-| `entities.activated` | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
-| `entities.nickname`  | String  | 推送通知中显示的昵称。                                                                                                                                                                                         |
+| `entities`           | JSON Array  | 用户在推送通知中显示的昵称以及用户相关信息。     |
+|  - `uuid`      | String  | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。      |
+|  - `type`      | String  | 用户类型，即 `user`。 |
+|  - `created`   | Number  | 用户注册的 Unix 时间戳，单位为毫秒。       |
+|  - `modified`  | Number  | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。      |
+|  - `username`  | String  | 用户 ID。用户登录的唯一账号。         |
+|  - `activated` | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
+|  - `nickname`  | String  | 推送通知中显示的昵称。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -334,19 +334,19 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数      | 类型    | 描述   |
 | :-------------------- | :------ | :------------------------------------------------ |
-| `entities`                                  | JSON    | 用户的离线推送通知的展示方式以及相关信息。        |
-| `entities.uuid`                             | String  | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。                                                                                                                           |
-| `entities.type`                             | String  | 用户类型，即 `user`。                                                                                                                                                                                          |
-| `entities.created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。                                                                                                                                                                           |
-| `entities.modified`                         | Long    | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。                                                                                                                                                               |
-| `entities.username`                         | String  | 用户 ID。用户登录的唯一账号。                                                                                                                                                                                  |
-| `entities.activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
-| `entities.notification_no_disturbing`       | Boolean | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>                                                                                                                                     |
-| `entities.notification_no_disturbing_start` | Int     | 免打扰时间段的开始时间。                                                                                                                                                                                       |
-| `entities.notification_no_disturbing_end`   | Int     | 免打扰时间段的结束时间。                                                                                                                                                                                       |
-| `entities.notification_display_style`       | Int     | 离线推送通知的展示方式。                                                                                                                                                                                       |
-| `entities.nickname`                         | String  | 离线推送通知收到时显示的昵称。                                                                                                                                                                                 |
-| `entities.notifier_name`                    | String  | 推送证书名称。                                                                                                                                                                                                 |
+| `entities`                                  | JSON Array   | 用户的离线推送通知的展示方式以及相关信息。        |
+|  - `uuid`                             | String  | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。   |
+|  - `type`                             | String  | 用户类型，即 `user`。     |
+|  - `created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。            |
+|  - `modified`                         | Long    | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。      |
+|  - `username`                         | String  | 用户 ID。用户登录的唯一账号。      |
+|  - `activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
+|  - `notification_no_disturbing`       | Boolean | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>          |
+|  - `notification_no_disturbing_start` | Int     | 免打扰时间段的开始时间。       |
+|  - `notification_no_disturbing_end`   | Int     | 免打扰时间段的结束时间。 |
+|  - `notification_display_style`       | Int     | 离线推送通知的展示方式。      |
+|  - `nickname`                         | String  | 离线推送通知收到时显示的昵称。    |
+|  - `notifier_name`                    | String  | 推送证书名称。   |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -409,9 +409,9 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 #### 请求 header
 
-| 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
-| :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
-| `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
+| 参数        | 类型   | 描述                   | 是否必需 |
+| :-------------- | :----- | :--------- | :------- |
+| `Content-Type`  | String | 内容类型。请填 `application/json`。               | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
 #### 请求 body
@@ -438,21 +438,21 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
-| 参数                                        | 类型    | 描述                                                                                                                                                                                                           |
-| :------------------------------------------ | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `entities`                                  | JSON    | 用户的免打扰模式的相关信息。                                                                                                                                                                                   |
-| `entities.uuid`                             | String  | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。                                                                                                                           |
-| `entities.type`                             | String  | 用户类型，即 `user`。                                                                                                                                                                                          |
-| `entities.created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。                                                                                                                                                                           |
-| `entities.modified`                         | Long    | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。                                                                                                                                                               |
-| `entities.username`                         | String  | 用户 ID。用户登录的唯一账号。                                                                                                                                                                                  |
-| `entities.activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
-| `entities.notification_no_disturbing`       | Boolean | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>                                                                                                                                     |
-| `entities.notification_no_disturbing_start` | Int     | 免打扰时间段的开始时间。                                                                                                                                                                                       |
-| `entities.notification_no_disturbing_end`   | Int     | 免打扰时间段的结束时间。                                                                                                                                                                                       |
-| `entities.notification_display_style`       | Int     | 离线推送通知的展示方式。                                                                                                                                                                                       |
-| `entities.nickname`                         | String  | 离线推送通知收到时显示的昵称。                                                                                                                                                                                 |
-| `entities.notifier_name`                    | String  | 推送证书名称。                                                                                                                                                                                                 |
+| 参数         | 类型    | 描述      |
+| :------------------------------------------ | :------ | :------------------------------------- |
+| `entities`  | JSON Array   | 用户的免打扰模式的相关信息。    |
+|  - `uuid`                             | String  | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。       |
+|  - `type`                             | String  | 用户类型，即 `user`。       |
+|  - `created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。         |
+|  - `modified`                         | Long    | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。   |
+|  - `username`                         | String  | 用户 ID。用户登录的唯一账号。       |
+|  - `activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
+|  - `notification_no_disturbing`       | Boolean | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>        |
+|  - `notification_no_disturbing_start` | Int     | 免打扰时间段的开始时间。        |
+|  - `notification_no_disturbing_end`   | Int     | 免打扰时间段的结束时间。       |
+|  - `notification_display_style`       | Int     | 离线推送通知的展示方式。        |
+|  - `nickname`                         | String  | 离线推送通知收到时显示的昵称。            |
+|  - `notifier_name`                    | String  | 推送证书名称。                  |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -609,8 +609,8 @@ GET https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 
 #### 路径参数
 
-| 参数       | 类型   | 描述                                                                                        | 是否必需 |
-| :--------- | :----- | :------------------------------------------------------------------------------------------ | :------- |
+| 参数       | 类型   | 描述          | 是否必需 |
+| :--------- | :----- | :--------------------------------- | :------- |
 | `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是       |
 | `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。                      | 是       |
 
@@ -618,8 +618,8 @@ GET https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 
 #### 请求 header
 
-| 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
-| :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
+| 参数            | 类型   | 描述              | 是否必需 |
+| :-------------- | :----- | :----------------------- | :------- |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
 ### HTTP 响应
@@ -682,8 +682,8 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 
 #### 请求 header
 
-| 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
-| :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
+| 参数            | 类型   | 描述    
+| :-------------- | :----- | :-------------- | :------- |
 | `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 

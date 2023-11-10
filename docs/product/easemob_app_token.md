@@ -67,7 +67,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
    "grant_type": "client_credentials",
    "client_id": "YXA6i-Ak8Ol4Eei2l11ZjV-EAg",
    "client_secret": "YXA6VunqiNxoB7IwXHInk1cGiXOOJfc",
-   "ttl": "1024000"
+   "ttl": 1024000
  }' 'http://a1.easemob.com/easemob-demo/testapp/token'
 ```
 

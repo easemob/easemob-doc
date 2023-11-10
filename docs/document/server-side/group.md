@@ -421,12 +421,13 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 
 | 字段                 | 类型   | 描述                                     |
 | :------------------- | :----- | :--------------------------------------- |
-| `data.owner`         | String | 群主的用户 ID。例如：{“owner”: “user1}。 |
-| `data.groupid`       | String | 群组 ID。                                |
-| `data.affiliations`  | int    | 群组现有成员数。                         |
-| `data.type`          | String | “group” 群组类型。                       |
-| `data.last_modified` | String | 最近一次修改的时间戳，单位为毫秒。       |
-| `data.groupname`     | String | 群组名称。                               |
+| `data` | JSON Array | 响应数据。 |
+|  - `owner`         | String | 群主的用户 ID。例如：{“owner”: “user1}。 |
+|  - `groupid`       | String | 群组 ID。                                |
+|  - `affiliations`  | int    | 群组现有成员数。                         |
+|  - `type`          | String | “group” 群组类型。                       |
+|  - `last_modified` | String | 最近一次修改的时间戳，单位为毫秒。       |
+|  - `groupname`     | String | 群组名称。                               |
 | `count`              | Int    | 实际获取的群组数量。                     |
 | `cursor`             | String | 查询游标，指定下次查询的起始位置。       |
 
@@ -524,17 +525,17 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&
 | 参数      | 类型     | 描述     |
 |:-------------------------|:-------|:----------------------------|
 | `total`                    | Int  | 用户加入的群组总数。          |
-| `entities`                 | Array  | 用户加入的群组列表。             |
-| `entities.groupId `     | String | 群组 ID。             |
-| `entities.name`         | String | 群组名称。       |
-| `entities.owner`        | String | 群组管理员的用户 ID。      |
-| `entities.description`  | String | 群组描述。        |
-| `entities.disabled`     | Bool | 群组是否被禁用：<br/> - `true`：禁用。禁用后不能对群组进行任何修改。<br/> - `false`：未禁用。 |
-| `entities.public`       | Bool | 是否是公开群：<br/> - `true`：公开群。公开群可以被搜索到，用户可以申请加入公开群。<br/> - `false`：私有群。私有群无法被搜索到，需要群主或群管理员邀请，用户才可以加入。|
-| `entities.allowinvites` | Bool | 是否允许普通群成员邀请用户加入群组：<br/> - `true`：普通群成员可拉人入群; <br/> - `false`：只有群主或者管理员才可以拉人入群。         |
-| `entities.membersonly`  | Bool | 用户申请入群是否需要群主或者群管理员审批。<br/> - `true`：需要；<br/> - `false`：不需要，用户直接进群。                               |
-| `entities.maxusers`     | Int | 群组最大成员数（包括群主）。      |
-| `entities.created `     | Long | 群组创建时间戳。      |
+| `entities`                 | JSON Array  | 用户加入的群组列表。             |
+|  - `groupId `     | String | 群组 ID。             |
+|  - `name`         | String | 群组名称。       |
+|  - `owner`        | String | 群组管理员的用户 ID。      |
+|  - `description`  | String | 群组描述。        |
+|  - `disabled`     | Bool | 群组是否被禁用：<br/> - `true`：禁用。禁用后不能对群组进行任何修改。<br/> - `false`：未禁用。 |
+|  - `public`       | Bool | 是否是公开群：<br/> - `true`：公开群。公开群可以被搜索到，用户可以申请加入公开群。<br/> - `false`：私有群。私有群无法被搜索到，需要群主或群管理员邀请，用户才可以加入。|
+|  - `allowinvites` | Bool | 是否允许普通群成员邀请用户加入群组：<br/> - `true`：普通群成员可拉人入群; <br/> - `false`：只有群主或者管理员才可以拉人入群。         |
+|  - `membersonly`  | Bool | 用户申请入群是否需要群主或者群管理员审批。<br/> - `true`：需要；<br/> - `false`：不需要，用户直接进群。                               |
+|  - `maxusers`     | Int | 群组最大成员数（包括群主）。      |
+|  - `created `     | Long | 群组创建时间戳。      |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -668,23 +669,24 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段                      | 类型   | 描述                                                                                                                                                                                                        |
-| :------------------------ | :----- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 字段                      | 类型   | 描述      |
+| :---------- | :----- | :----------------- |
 | `count`                 | Int | 获取详情的群组数量。 |
-| `data.id`                 | String | 群组 ID，群组唯一标识符。                                                                                                                                                                                   |
-| `data.name`               | String | 群组名称。                                                                                                                                                                                                  |
-| `data.description`        | String | 群组描述。                                                                                                                                                                                                  |
-| `data.membersonly`        | Bool   | 加入群组是否需要群主或者群管理员审批。<br/> - `true`：是；<br/> - `false`：否。                                                                                                                             |
-| `data.allowinvites`       | Bool   | 是否允许群成员邀请其他用户加入此群。<br/> - `true`：允许群成员邀请其他用户加入此群；<br/> - `false`：只有群主可以邀请其他用户入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
-| `data.maxusers`           | Int    | 群组最大成员数，创建群组的时候设置，可修改。                                                                                                                                                                |
-| `data.permission`         | String | 群组成员角色：<br/> - `owner`：群主；<br/> - `member`：普通成员。                                                                                                                                           |
-| `data.owner`              | String | 群主的用户 ID。例如：{“owner”: “user1”}。                                                                                                                                                                   |
-| `data.created`            | Long   | 创建该群组的 Unix 时间戳。                                                                                                                                                                                  |
-| `data.affiliations_count` | int    | 群组现有成员总数。                                                                                                                                                                                          |
-| `data.disabled`           | Bool   | 群组是否为禁用状态：<br/> - `true`：群组被禁用；<br/> - `false`：群组为启用状态。                                                                                                                           |
-| `data.mute`               | Bool   | 是否处于全员禁言状态。<br/> - `true`：是； <br/> - （默认）`false`：否。                                                                                                                                    |
-| `data.public`             | Bool   | 是否是公开群：<br/> - `true`：公开群；<br/> - `false`：私有群。                                                                                                                                             |
-| `data.custom`             | String | 群组扩展信息，例如，可以给群组添加业务相关的标记，不要超过 1,024 字符。                                                                                                                                     |
+| `data` | JSON Array | 响应数据。|
+|  - `id`                 | String | 群组 ID，群组唯一标识符。     |
+|  - `name`               | String | 群组名称。      |
+|  - `description`        | String | 群组描述。       |
+|  - `membersonly`        | Bool   | 加入群组是否需要群主或者群管理员审批。<br/> - `true`：是；<br/> - `false`：否。      |
+|  - `allowinvites`       | Bool   | 是否允许群成员邀请其他用户加入此群。<br/> - `true`：允许群成员邀请其他用户加入此群；<br/> - `false`：只有群主可以邀请其他用户入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
+|  - `maxusers`           | Int    | 群组最大成员数，创建群组的时候设置，可修改。    |
+|  - `permission`         | String | 群组成员角色：<br/> - `owner`：群主；<br/> - `member`：普通成员。 |
+|  - `owner`              | String | 群主的用户 ID。例如：{“owner”: “user1”}。    |
+|  - `created`            | Long   | 创建该群组的 Unix 时间戳。  |
+|  - `affiliations_count` | int    | 群组现有成员总数。     |
+|  - `disabled`           | Bool   | 群组是否为禁用状态：<br/> - `true`：群组被禁用；<br/> - `false`：群组为启用状态。          |
+|  - `mute`               | Bool   | 是否处于全员禁言状态。<br/> - `true`：是； <br/> - （默认）`false`：否。       |
+|  - `public`             | Bool   | 是否是公开群：<br/> - `true`：公开群；<br/> - `false`：私有群。    |
+|  - `custom`             | String | 群组扩展信息，例如，可以给群组添加业务相关的标记，不要超过 1,024 字符。     |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -976,11 +978,12 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 
 | 字段              | 类型   | 描述                                                    |
 | :---------------- | :----- | :------------------------------------------------------ |
-| `data.file_id`    | String | 群组共享文件的 ID，若要下载或删除该文件需要使用该参数。 |
-| `data.file_name`  | String | 群组共享文件名称。                                      |
-| `data.file_owner` | String | 上传群组共享文件的用户 ID。                             |
-| `data.file_size`  | Long   | 群组共享文件大小，单位为字节。                          |
-| `data.created`    | Long   | 上传群组共享文件的时间。                                |
+| `data` | JSON Array | 响应数据。 |
+|  - `file_id`    | String | 群组共享文件的 ID，若要下载或删除该文件需要使用该参数。 |
+|  - `file_name`  | String | 群组共享文件名称。                                      |
+|  - `file_owner` | String | 上传群组共享文件的用户 ID。                             |
+|  - `file_size`  | Long   | 群组共享文件大小，单位为字节。                          |
+|  - `created`    | Long   | 上传群组共享文件的时间。                                |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1356,8 +1359,8 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
@@ -1590,11 +1593,12 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 
 | 字段           | 类型   | 描述                                                                     |
 | :------------- | :----- | :----------------------------------------------------------------------- |
-| `data.result`  | Bool   | 操作结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。          |
-| `data.action`  | String | 执行的操作。在该响应中，该字段的值为 `remove_member`，表示移除群组成员。 |
-| `data.reason`  | String | 操作失败的原因。                                                         |
-| `data.user`    | String | 被移除成员的用户 ID。                                                    |
-| `data.groupid` | String | 操作的群组 ID。                                                          |
+| `data` | JSON Array | 响应数据。|
+|  - `result`  | Bool   | 操作结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。          |
+|  - `action`  | String | 执行的操作。在该响应中，该字段的值为 `remove_member`，表示移除群组成员。 |
+|  - `reason`  | String | 操作失败的原因。                                                         |
+|  - `user`    | String | 被移除成员的用户 ID。                                                    |
+|  - `groupid` | String | 操作的群组 ID。                                                          |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2300,11 +2304,12 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 | 字段           | 类型   | 描述                                                                            |
 | :------------- | :----- | :------------------------------------------------------------------------------ |
-| `data.result`  | Bool   | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。                 |
-| `data.action`  | String | 执行的操作。在该响应中，该字段的值为 `add_blocks`，表示将群成员加入群组黑名单。 |
-| `data.reason`  | String | 添加失败的原因。                                                                |
-| `data.user`    | String | 添加的用户 ID。                                                                 |
-| `data.groupid` | String | 群组 ID。                                                                       |
+| `data` | JSON Array | 响应数据。|
+|  - `result`  | Bool   | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。                 |
+|  - `action`  | String | 执行的操作。在该响应中，该字段的值为 `add_blocks`，表示将群成员加入群组黑名单。 |
+|  - `reason`  | String | 添加失败的原因。                                                                |
+|  - `user`    | String | 添加的用户 ID。                                                                 |
+|  - `groupid` | String | 群组 ID。                                                                       |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2370,8 +2375,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述            |
+| :-------------- | :----- | :------- | :--------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -2381,8 +2386,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段      | 类型   | 描述                                                                               |
-| :-------- | :----- | :--------------------------------------------------------------------------------- |
+| 字段      | 类型   | 描述           |
+| :-------- | :----- | :-------------------- |
 | `result`  | Bool   | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。                    |
 | `action`  | String | 执行的操作。在该响应中，该字段的值为 `remove_blocks`，表示将群成员移出群组黑名单。 |
 | `user`    | String | 添加的用户 ID。                                                                    |
@@ -2458,10 +2463,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{
 
 | 字段           | 类型   | 描述                                                                                   |
 | :------------- | :----- | :------------------------------------------------------------------------------------- |
-| `data.result`  | Bool   | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。                        |
-| `data.action`  | String | 执行的操作。在该响应中，该字段的值为 `remove_blocks`，表示将用户从群组黑名单批量移除。 |
-| `data.user`    | String | 被移除的用户 ID。                                                                      |
-| `data.groupid` | String | 群组 ID。                                                                              |
+| `data` | JSON Array | 响应数据。|
+|  - `result`  | Bool   | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。                        |
+|  - `action`  | String | 执行的操作。在该响应中，该字段的值为 `remove_blocks`，表示将用户从群组黑名单批量移除。 |
+|  - `user`    | String | 被移除的用户 ID。                                                                      |
+|  - `groupid` | String | 群组 ID。                                                                              |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2685,11 +2691,12 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 | 字段           | 类型   | 描述                                                                                |
 | :------------- | :----- | :---------------------------------------------------------------------------------- |
-| `data.result`  | Bool   | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。                     |
-| `data.action`  | String | 执行的操作。在该响应中，该字段的值为 `add_user_whitelist`，表示将成员加入群白名单。 |
-| `data.user`    | String | 添加的用户 ID。                                                                     |
-| `data.groupid` | String | 群组 ID。                                                                           |
-| `data.reason`  | String | 添加失败的原因。                                                                    |
+| `data` | JSON Array | 响应数据。|
+|  - `result`  | Bool   | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。                     |
+|  - `action`  | String | 执行的操作。在该响应中，该字段的值为 `add_user_whitelist`，表示将成员加入群白名单。 |
+|  - `user`    | String | 添加的用户 ID。                                                                     |
+|  - `groupid` | String | 群组 ID。                                                                           |
+|  - `reason`  | String | 添加失败的原因。                                                                    |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2766,10 +2773,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{u
 
 | 字段           | 类型   | 描述                                                                                     |
 | :------------- | :----- | :--------------------------------------------------------------------------------------- |
-| `data.result`  | Bool   | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。                          |
-| `data.action`  | String | 执行的操作。在该响应中，该字段的值为 `remove_user_whitelist`，表示将成员移出群组白名单。 |
-| `data.user`    | String | 移除群组白名单的用户 ID，多个用户 ID 以英文逗号（","）分隔。                                                  |
-| `data.groupid` | String | 群组 ID。                                                                                |
+| `data` | JSON Array | 响应数据。|
+|  - `result`  | Bool   | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。                          |
+|  - `action`  | String | 执行的操作。在该响应中，该字段的值为 `remove_user_whitelist`，表示将成员移出群组白名单。 |
+|  - `user`    | String | 移除群组白名单的用户 ID，多个用户 ID 以英文逗号（","）分隔。                                                  |
+|  - `groupid` | String | 群组 ID。                                                                                |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2846,8 +2854,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 | 字段          | 类型   | 描述                         |
 | :------------ | :----- | :--------------------------- |
-| `data.expire` | Long   | 禁言到期的时间，单位为毫秒。 |
-| `data.user`   | String | 被禁言用户的 ID。            |
+| `data` | JSON Array | 响应数据。|
+|  - `expire` | Long   | 禁言到期的时间，单位为毫秒。 |
+|  - `user`   | String | 被禁言用户的 ID。            |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2921,9 +2930,10 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 | 字段          | 类型   | 描述                                                            |
 | :------------ | :----- | :-------------------------------------------------------------- |
-| `data.result` | Bool   | 操作结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
-| `data.expire` | Long   | 禁言到期的时间。该时间为 Unix 时间戳，单位为毫秒。              |
-| `data.user`   | String | 被禁言用户的 ID。                                               |
+| `data` | JSON Array | 响应数据。|
+|  - `result` | Bool   | 操作结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。 |
+|  - `expire` | Long   | 禁言到期的时间。该时间为 Unix 时间戳，单位为毫秒。              |
+|  - `user`   | String | 被禁言用户的 ID。                                               |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -3061,8 +3071,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 
 | 字段          | 类型  | 描述                                                            |
 | :------------ | :---- | :-------------------------------------------------------------- |
-| `data.result` | Bool  | 操作结果：<br/> - `true`：解除成功；<br/> - `false`：解除失败。 |
-| `data.user`   | Array | 被移出禁言列表的用户 ID。                                       |
+| `data` | JSON Array | 响应数据。|
+|  - `result` | Bool  | 操作结果：<br/> - `true`：解除成功；<br/> - `false`：解除失败。 |
+|  - `user`   | Array | 被移出禁言列表的用户 ID。                                       |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -3205,7 +3216,8 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 
 | 字段                | 类型   | 描述                               |
 | :------------------ | :----- | :--------------------------------- |
-| `entities.id`       | String | 子区 ID。                          |
+| `entities`       | JSON Array | 响应数据。                          |
+|  - `id`       | String | 子区 ID。                          |
 | `properties.cursor` | String | 查询游标，指定下次查询的起始位置。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -3279,12 +3291,13 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 
 | 字段                | 类型   | 描述                                     |
 | :------------------ | :----- | :--------------------------------------- |
-| `entities.name`     | String | 子区名称。                               |
-| `entities.owner`    | String | 子区创建者的用户 ID。                    |
-| `entities.id`       | String | 子区 ID。                                |
-| `entities.msgId`    | String | 子区的父消息 ID。                        |
-| `entities.groupId`  | String | 子区所属群组 ID。                        |
-| `entities.created`  | Long   | 子区创建时间，Unix 时间戳。              |
+| `entities`       | JSON Array | 响应数据。                          |
+|  - `name`     | String | 子区名称。                               |
+|  - `owner`    | String | 子区创建者的用户 ID。                    |
+|  - `entities.id`       | String | 子区 ID。                                |
+|  - `entities.msgId`    | String | 子区的父消息 ID。                        |
+|  - `entities.groupId`  | String | 子区所属群组 ID。                        |
+|  - `entities.created`  | Long   | 子区创建时间，Unix 时间戳。              |
 | `properties.cursor` | String | 查询游标，指定服务器下次查询的起始位置。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -3363,13 +3376,14 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 
 | 字段                | 描述   | 描述                                    |
 | :------------------ | :----- | :-------------------------------------- |
-| `entities.name`     | String | 子区名称。                              |
-| `entities.owner`    | String | 子区的创建者。                          |
-| `entities.id`       | String | 子区 ID。                               |
-| `entities.msgId`    | String | 子区的父消息 ID。                       |
-| `entities.groupId`  | String | 子区所属群组 ID。                       |
-| `entities.created`  | Long   | 子区创建时间，Unix 时间戳，单位为毫秒。 |
-| `properties.cursor` | String | 查询游标，指定下次查询的起始位置。      |
+| `entities`       | JSON Array | 响应数据。                          |
+|  - `name`     | String | 子区名称。                              |
+|  - `owner`    | String | 子区的创建者。                          |
+|  - `id`       | String | 子区 ID。                               |
+|  - `msgId`    | String | 子区的父消息 ID。                       |
+|  - `groupId`  | String | 子区所属群组 ID。                       |
+|  - `created`  | Long   | 子区创建时间，Unix 时间戳，单位为毫秒。 |
+|  - `cursor` | String | 查询游标，指定下次查询的起始位置。      |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -3805,8 +3819,9 @@ DELETE https://{host}/{org_name}/{app_name}/threads/{thread_id}/users
 
 | 字段     | 类型   | 描述                                                    |
 | :------- | :----- | :------------------------------------------------------ |
-| `result` | Bool   | 操作结果。<br/> - `true`：成功；<br/> - `false`：失败。 |
-| `user`   | String | 被踢出子区的用户 ID。                                   |
+| `entities`       | JSON Array | 响应数据。                          |
+|  - `result` | Bool   | 操作结果。<br/> - `true`：成功；<br/> - `false`：失败。 |
+|  - `user`   | String | 被踢出子区的用户 ID。                                   |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
