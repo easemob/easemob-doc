@@ -123,7 +123,7 @@ miniCore.localCache.setLocalConversationCustomField(options).then(()=>{
 
 ### 从服务器获取历史消息
 
-你可以调用 `getHistoryMessages` 方法基于 `searchOptions` 参数对象从服务器分页拉取单聊和群组聊天的历史消息。
+你可以调用 `getHistoryMessages` 方法基于 `searchOptions` 参数对象允许用户按消息发送方、消息类型或时间段从服务器分页拉取单聊和群组聊天的历史消息。
 
 对于群组聊天，你可以通过设置 `searchOptions` 对象中的 `from` 参数拉取群组中单个成员发送的历史消息。
 
