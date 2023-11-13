@@ -19,48 +19,48 @@
 
 | 成员角色     | 描述                                               | 管理权限       |
 | :----------- | :------------------------------------------------- | :--------------------------------- |
-| 普通成员     | 不具备管理权限的聊天室成员。                       | 普通成员可以修改自己的聊天室信息。                                             |
-| 聊天室管理员 | 由聊天室创建者授权，协助聊天室管理，具有管理权限。 | 管理员可以管理聊天室内的普通成员。 最多支持添加 99 个管理员。                  |
+| 普通成员     | 不具备管理权限的聊天室成员。                       | 普通成员可以修改自己的聊天室信息。   |
+| 聊天室管理员 | 由聊天室创建者授权，协助聊天室管理，具有管理权限。 | 管理员可以管理聊天室内的普通成员。 最多支持添加 99 个管理员。  |
 | 聊天室所有者 | 聊天室的创建者，具有聊天室最高权限。               | 聊天室所有者可以指定聊天室管理员、解散聊天室、更改聊天室信息、管理聊天室成员。 |
 
 ## 公共参数
 
 ### 请求参数
 
-| 参数          | 类型   | 是否必需 | 描述                                                                                                                                            |
-| :------------ | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
+| 参数          | 类型   | 是否必需 | 描述  |
+| :------------ | :----- | :------- | :---------------- |
 | `host`        | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
 | `org_name`    | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name`    | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `chatroom_id` | String | 是       | 聊天室 ID。                                                                                                                                     |
-| `username`    | String | 是       | 用户 ID。                                                                                                                                       |
-| `name`        | String | 是       | 聊天室名称，最大长度为 128 个字符。                                                                                                             |
-| `description` | String | 是       | 聊天室描述，最大长度为 512 个字符。                                                                                                             |
-| `maxusers`    | Int    | 否       | 聊天室成员数上限，创建聊天室时设置。该参数的默认最大值为 10,000，如需调整请联系商务。                                                           |
+| `chatroom_id` | String | 是       | 聊天室 ID。  |
+| `username`    | String | 是       | 用户 ID。    |
+| `name`        | String | 是       | 聊天室名称，最大长度为 128 个字符。       |
+| `description` | String | 是       | 聊天室描述，最大长度为 512 个字符。    |
+| `maxusers`    | Int    | 否       | 聊天室成员数上限，创建聊天室时设置。该参数的默认最大值为 10,000，如需调整请联系商务。  |
 
 ### 响应参数
 
-| 参数                 | 类型   | 描述                                                                                                                                                                                                            |
-| :------------------- | :----- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `action`             | String | 请求方法。                                                                                                                                                                                                      |
-| `host`               | String | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。                                                                                                                                     |
-| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。                                                                                                                                  |
-| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。                                                                                                                                                                    |
-| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。                                                                                                                                  |
-| `uri`                | String | 请求 URL。                                                                                                                                                                                                      |
-| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                                                                                                                                                               |
-| `id`                 | String | 聊天室 ID，聊天室唯一标识，由环信即时通讯 IM 服务器生成。                                                                                                                                                       |
-| `entities`           | JSON   | 响应实体。                                                                                                                                                                                                      |
-| `data`               | JSON   | 数据详情。                                                                                                                                                                                                      |
-| `uuid`               | String | 系统内为用户或者应用生成的系统内唯一标识，开发者无需关心。                                                                                                                                                      |
-| `created`            | String | 用户、群组或聊天室的创建时间，Unix 时间戳，单位为毫秒。                                                                                                                                                         |
-| `username`           | String | 用户 ID。                                                                                                                                                                                                       |
-| `affiliations_count` | Int    | 聊天室现有成员总数。                                                                                                                                                                                            |
+| 参数                 | 类型   | 描述   |
+| :------------------- | :----- | :------------ |
+| `action`             | String | 请求方法。  |
+| `host`               | String | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。    |
+| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。      |
+| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。  |
+| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。   |
+| `uri`                | String | 请求 URL。   |
+| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。   |
+| `id`                 | String | 聊天室 ID，聊天室唯一标识，由环信即时通讯 IM 服务器生成。    |
+| `entities`           | JSON   | 响应实体。  |
+| `data`               | JSON   | 数据详情。 |
+| `uuid`               | String | 系统内为用户或者应用生成的系统内唯一标识，开发者无需关心。   |
+| `created`            | String | 用户、群组或聊天室的创建时间，Unix 时间戳，单位为毫秒。    |
+| `username`           | String | 用户 ID。     |
+| `affiliations_count` | Int    | 聊天室现有成员总数。     |
 | `affiliations`       | Array  | 聊天室现有成员列表，数组类型，包含 `owner` 和 `member` 元素，即聊天室所有者和聊天室成员（包括聊天室管理员）。例如： “affiliations”:[{“owner”: “13800138001”},{“member”:”v3y0kf9arx”},{“member”:”xc6xrnbzci”}]。 |
-| `owner`              | String | 聊天室所有者的用户 ID。例如：{“owner”: “13800138001”}。                                                                                                                                                         |
-| `member`             | String | 聊天室成员的用户 ID，包括聊天室管理员和普通成员的用户 ID。例如：{“member”:”xc6xrnbzci”}。                                                                                                                       |
-| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                                                                                                                                                           |
-| `duration`           | Long   | 从发送 HTTP 请求到响应的时长，单位为毫秒。                                                                                                                                                                      |
+| `owner`              | String | 聊天室所有者的用户 ID。例如：{“owner”: “13800138001”}。     |
+| `member`             | String | 聊天室成员的用户 ID，包括聊天室管理员和普通成员的用户 ID。例如：{“member”:”xc6xrnbzci”}。    |
+| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。   |
+| `duration`           | Long   | 从发送 HTTP 请求到响应的时长，单位为毫秒。     |
 
 ## 认证方式
 
@@ -409,8 +409,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms?pagen
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述          |
+| :-------------- | :----- | :------- | :------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。 |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -422,8 +422,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms?pagen
 
 | 字段        | 类型   | 描述                                                      |
 | :---------- | :----- | :-------------------------------------------------------- |
-| `data.id`   | String | 聊天室 ID，聊天室唯一标识，由环信即时通讯 IM 服务器生成。 |
-| `data.name` | String | 聊天室名称，最大长度为 128 字符。                         |
+| `data` | JSON Array | 聊天室详情。 |
+|  - `id`   | String | 聊天室 ID，聊天室唯一标识，由环信即时通讯 IM 服务器生成。 |
+|  - `name` | String | 聊天室名称，最大长度为 128 字符。                         |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -507,20 +508,20 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段                      | 类型   | 描述                                                                                                                                                            |
-| :------------------------ | :----- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data.id`                 | String | 聊天室 ID，聊天室唯一标识符，由环信即时通讯 IM 服务器生成。                                                                                                     |
-| `data.name`               | String | 聊天室名称。                                                                                                                                                    |
-| `data.description`        | String | 聊天室描述。                                                                                                                                                    |
-| `data.membersonly`        | Bool   | 加入聊天室是否需要群主或者群管理员审批：<br/> - `true`：是。<br/> - `false`：否。                                                                               |
+| 字段                      | 类型   | 描述      |
+| :------------------------ | :----- | :----------------- |
+| `data.id`                 | String | 聊天室 ID，聊天室唯一标识符，由环信即时通讯 IM 服务器生成。    |
+| `data.name`               | String | 聊天室名称。    |
+| `data.description`        | String | 聊天室描述。    |
+| `data.membersonly`        | Bool   | 加入聊天室是否需要群主或者群管理员审批：<br/> - `true`：是。<br/> - `false`：否。    |
 | `data.allowinvites`       | Bool   | 是否允许聊天室成员邀请其他用户加入该聊天室：<br/> - `true`：允许聊天室成员邀请他人加入该聊天室。<br/> - `false`：仅聊天室所有者和管理员可邀请他人加入该聊天室。 |
 | `data.maxusers`           | Int    | 聊天室成员数上限，创建聊天室时设置。                                                                                                                            |
 | `data.owner`              | String | 聊天室所有者的用户 ID。例如：{“owner”: “user1”}。                                                                                                               |
 | `data.created`            | Long   | 创建聊天室时间，Unix 时间戳，单位为毫秒。                                                                                                                       |
-| `data.custom`             | String | 聊天室扩展信息。                                                                                                                                                |
-| `data.affiliations_count` | Int    | 现有聊天室成员总数。                                                                                                                                            |
-| `data.affiliations`       | Array  | 现有聊天室成员列表，包含聊天室所有者和成员（包括聊天室管理员）。例如：“affiliations”:[{“owner”: “user1”},{“member”:”user2”},{“member”:”user3”}]。               |
-| `data.public`             | Bool   | 预留字段，无需关注。                                                                                                                                            |
+| `data.custom`             | String | 聊天室扩展信息。 |
+| `data.affiliations_count` | Int    | 现有聊天室成员总数。 |
+| `data.affiliations`       | Array  | 现有聊天室成员列表，包含聊天室所有者和成员（包括聊天室管理员）。例如：“affiliations”:[{“owner”: “user1”},{“member”:”user2”},{“member”:”user3”}]。  |
+| `data.public`             | Bool   | 预留字段，无需关注。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1302,9 +1303,10 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?pagenum={
 
 | 参数          | 类型   | 描述            |
 | :------------ | :----- | :-------------- |
-| `data.owner`  | String | 聊天室所有者的用户 ID。例如：{“owner”: “user1”}。   |
-| `data.member` | String | 普通聊天室成员或聊天室管理员的用户 ID。例如：{“member”:“user2”}。 |
-| `count` | Number | 本次调用获取的聊天室成员数量。 | 
+| `data` | JSON Array | 聊天室成员信息。  |
+|  - `owner`  | String | 聊天室所有者的用户 ID。例如：{“owner”: “user1”}。   |
+|  - `member` | String | 普通聊天室成员或聊天室管理员的用户 ID。例如：{“member”:“user2”}。 |
+|  `count` | Number | 本次调用获取的聊天室成员数量。 | 
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -1364,8 +1366,8 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :---------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
@@ -1577,8 +1579,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 
 ##### 路径参数
 
-| 参数       | 类型   | 是否必需 | 描述                                                                                                                |
-| :--------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------ |
+| 参数       | 类型   | 是否必需 | 描述         |
+| :--------- | :----- | :------- | :------------------ |
 | `username` | String | 是 | 要移除的一个或多个用户 ID。每次最多可传 100 个用户 ID，用户 ID 之间用英文逗号（","）分隔，逗号在 URL 中转义为 "%2C"。|
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -1587,7 +1589,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。       |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -1598,11 +1600,12 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{userna
 
 | 参数          | 类型   | 描述                                                                  |
 | :------------ | :----- | :-------------------------------------------------------------------- |
-| `data.result` | Bool   | 是否成功批量移除聊天室成员：<br/> - `true`：是；<br/> - `false`：否。 |
-| `data.action` | String | 执行的操作。在该响应中，该字段的值为 `remove_member`，表示移除成员。  |
-| `data.reason` | String | 移除失败的原因。                                                      |
-| `data.user`   | String | 已删除成员的用户 ID 列表。                                            |
-| `data.id`     | String | 聊天室 ID。                                                           |
+| `data` | JSON Array | 响应数据。|
+|  - `result` | Bool   | 是否成功批量移除聊天室成员：<br/> - `true`：是；<br/> - `false`：否。 |
+|  - `action` | String | 执行的操作。在该响应中，该字段的值为 `remove_member`，表示移除成员。  |
+|  - `reason` | String | 移除失败的原因。                                                      |
+|  - `user`   | String | 已删除成员的用户 ID 列表。                                            |
+|  - `id`     | String | 聊天室 ID。                                                           |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2007,10 +2010,10 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| 参数            | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :------- | :----------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。   |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。   |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### 请求 body
@@ -2027,11 +2030,12 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 | 字段              | 类型   | 描述                                                                              |
 | :---------------- | :----- | :-------------------------------------------------------------------------------- |
-| `data.result`     | Bool   | 是否成功批量添加用户至聊天室黑名单：<br/> - `true`：是；<br/> - `false`：否。     |
-| `data.action`     | String | 执行的操作。在该响应中，该字段的值为 `add_blocks`，表示向聊天室黑名单中添加用户。 |
-| `data.reason`     | String | 添加失败的原因。                                                                  |
-| `data.user`       | String | 添加的用户 ID。                                                                   |
-| `data.chatroomid` | String | 聊天室 ID。                                                                       |
+| `data` | JSON Array | 响应数据。 |
+|  - `result`     | Bool   | 是否成功批量添加用户至聊天室黑名单：<br/> - `true`：是；<br/> - `false`：否。     |
+|  - `action`     | String | 执行的操作。在该响应中，该字段的值为 `add_blocks`，表示向聊天室黑名单中添加用户。 |
+|  - `reason`     | String | 添加失败的原因。                                                                  |
+|  - `user`       | String | 添加的用户 ID。                                                                   |
+|  - `chatroomid` | String | 聊天室 ID。                                                                       |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2184,10 +2188,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 
 | 字段              | 类型   | 描述                                                                               |
 | :---------------- | :----- | :--------------------------------------------------------------------------------- |
-| `data.result`     | Bool   | 是否成功将用户批量移出聊天室黑名单：<br/> - `true`：是；<br/> - `false`：否。      |
-| `data.action`     | String | 执行的操作。在该响应中，该字段的值为 `remove_blocks`，表示将用户移出聊天室黑名单。 |
-| `data.user`       | String | 被移除的用户 ID。                                                                  |
-| `data.chatroomid` | String | 聊天室 ID。                                                                        |
+| `data` | JSON Array | 响应数据。 |
+|  - `result`     | Bool   | 是否成功将用户批量移出聊天室黑名单：<br/> - `true`：是；<br/> - `false`：否。      |
+|  - `action`     | String | 执行的操作。在该响应中，该字段的值为 `remove_blocks`，表示将用户移出聊天室黑名单。 |
+|  - `user`       | String | 被移除的用户 ID。                                                                  |
+|  - `chatroomid` | String | 聊天室 ID。                                                                        |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2407,11 +2412,12 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users
 
 | 字段              | 类型   | 描述                                                                                    |
 | :---------------- | :----- | :-------------------------------------------------------------------------------------- |
-| `data.result`     | Bool   | 是否成功将用户批量添加至聊天室白名单：<br/> - `true`：是；<br/> - `false`：否。         |
-| `data.reason`     | String | 添加失败的原因。                                                                        |
-| `data.chatroomid` | String | 聊天室 ID。                                                                             |
-| `data.action`     | String | 执行的操作。在该响应中，该字段的值为 `add_user_whitelist`，表示添加用户至聊天室白名单。 |
-| `data.user`       | String | 添加至聊天室白名单中的用户 ID。                                                         |
+| `data` | JSON Array | 响应数据。|
+|  - `result`     | Bool   | 是否成功将用户批量添加至聊天室白名单：<br/> - `true`：是；<br/> - `false`：否。         |
+|  - `reason`     | String | 添加失败的原因。                                                                        |
+|  - `chatroomid` | String | 聊天室 ID。                                                                             |
+|  - `action`     | String | 执行的操作。在该响应中，该字段的值为 `add_user_whitelist`，表示添加用户至聊天室白名单。 |
+|  - `user`       | String | 添加至聊天室白名单中的用户 ID。                                                         |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2489,10 +2495,11 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/
 
 | 字段              | 类型   | 描述                                                                                       |
 | :---------------- | :----- | :----------------------------------------------------------------------------------------- |
-| `data.result`     | Bool   | 是否成功将用户移出聊天室白名单：<br/> - `true`：是；<br/> - `false`：否。                  |
-| `data.chatroomid` | String | 聊天室 ID。                                                                                |
-| `data.action`     | String | 执行的操作。在该响应中，该字段的值为 `remove_user_whitelist`，表示将用户移出聊天室白名单。 |
-| `data.user`       | String | 移除聊天室白名单的用户 ID。                                            |
+| `data` | JSON Array | 响应数据。 |
+|  - `result`     | Bool   | 是否成功将用户移出聊天室白名单：<br/> - `true`：是；<br/> - `false`：否。                  |
+|  - `chatroomid` | String | 聊天室 ID。                                                                                |
+|  - `action`     | String | 执行的操作。在该响应中，该字段的值为 `remove_user_whitelist`，表示将用户移出聊天室白名单。 |
+|  - `user`       | String | 移除聊天室白名单的用户 ID。    |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2569,8 +2576,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 
 | 字段          | 类型   | 描述                                 |
 | :------------ | :----- | :----------------------------------- |
-| `data.expire` | Long   | 禁言到期的 Unix 时间戳，单位为毫秒。 |
-| `data.user`   | String | 被禁言的用户 ID。                    |
+| `data` | JSON Array | 响应数据。 |
+|  - `expire` | Long   | 禁言到期的 Unix 时间戳，单位为毫秒。 |
+|  - `user`   | String | 被禁言的用户 ID。                    |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2650,9 +2658,10 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 
 | 字段          | 类型   | 描述                                                        |
 | :------------ | :----- | :---------------------------------------------------------- |
-| `data.result` | Bool   | 是否成功禁言用户：<br/> - `true`：是；<br/> - `false`：否。 |
-| `data.expire` | Long   | 禁言到期时间，Unix 时间戳，单位为毫秒。                     |
-| `data.user`   | String | 被禁言的用户 ID。                                           |
+| `data` | JSON Array | 响应数据。 |
+|  - `result` | Bool   | 是否成功禁言用户：<br/> - `true`：是；<br/> - `false`：否。 |
+|  - `expire` | Long   | 禁言到期时间，Unix 时间戳，单位为毫秒。                     |
+|  - `user`   | String | 被禁言的用户 ID。                                           |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -2802,8 +2811,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member
 
 | 字段          | 类型    | 描述                                                                       |
 | :------------ | :------ | :------------------------------------------------------------------------- |
-| `data.result` | Boolean | 是否成功将指定用户移出禁言列表：<br/> - `true`：是； <br/> - `false`：否。 |
-| `data.user`   | String  | 被解除禁言的聊天室成员的用户 ID。                                          |
+| `data` | JSON Array | 响应数据。 |
+|  - `result` | Boolean | 是否成功将指定用户移出禁言列表：<br/> - `true`：是； <br/> - `false`：否。 |
+|  - `user`   | String  | 被解除禁言的聊天室成员的用户 ID。                                          |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
