@@ -39,7 +39,9 @@
 
 ### 在消息上添加 Reaction
 
-调用 `addReaction` 在消息上添加 Reaction，在 `onReactionChange` 监听事件中会收到这条消息的最新 Reaction 概览。对于同一条 Reaction，一个用户只能添加一次，重复添加会报错误 1101。
+调用 `addReaction` 在消息上添加 Reaction。对于单聊会话，对端用户会收到 `onReactionChange` 事件，而群聊会话中，除操作者之外的其他群组成员均会收到该事件。该事件中的信息包括会话 ID、消息 ID，该消息的 Reaction 列表和 Reaction 操作列表（列明添加者的用户 ID、添加的 Reaction 的 ID 以及明确该操作为添加操作）。
+
+对于同一条 Reaction，一个用户只能添加一次，重复添加会报错误 1101。
 
 示例代码如下：
 
@@ -57,7 +59,7 @@ conn.addEventHandler("REACTION", {
 
 ### 删除消息的 Reaction
 
-调用 `deleteReaction` 删除消息的 Reaction，在 `onReactionChange` 监听事件中会收到这条消息的最新 Reaction 概览。
+调用 `deleteReaction` 删除消息的 Reaction。对于单聊会话，对端用户会收到 `onReactionChange` 事件，而群聊会话中，除操作者之外的其他群组成员均会收到该事件。该事件中的信息包括会话 ID、消息 ID，该消息的 Reaction 列表和 Reaction 操作列表（列明添加者的用户 ID、添加的 Reaction 的 ID 以及明确该操作为删除操作）。
 
 示例代码如下：
 

@@ -38,7 +38,9 @@ Reaction 场景示例如下：
 
 ### 在消息上添加 Reaction
 
-调用 `asyncAddReaction` 在消息上添加一条 Reaction，在 `onReactionChanged` 监听事件中会收到这条消息的最新 Reaction 概览。对于同一条 Reaction，一个用户只能添加一次，重复添加会报错误 1301。
+调用 `asyncAddReaction` 在消息上添加一条 Reaction。对于单聊会话，对端用户会收到 `onReactionChanged` 事件，而群聊会话中，除操作者之外的其他群组成员均会收到该事件。该事件中的信息包括会话 ID、消息 ID，该消息的 Reaction 列表、Reaction 操作列表（列明添加者的用户 ID、添加的 Reaction 的 ID 以及明确该操作为添加操作）。
+
+对于同一条 Reaction，一个用户只能添加一次，重复添加会报错误 1301。
 
 示例代码如下：
 
@@ -76,7 +78,7 @@ EMClient.getInstance().chatManager().addMessageListener(listener);
 
 ### 删除消息的 Reaction
 
-调用 `asyncRemoveReaction` 删除消息的 Reaction，在 `onReactionChanged` 监听事件中会收到这条消息的最新 Reaction 概览。
+调用 `asyncRemoveReaction` 删除消息的 Reaction。对于单聊会话，对端用户会收到 `onReactionChanged` 事件，而群聊会话中，除操作者之外的其他群组成员均会收到该事件。该事件中的信息包括会话 ID、消息 ID，该消息的 Reaction 列表和 Reaction 操作列表（列明删除者的用户 ID、删除的 Reaction 的 ID 以及明确该操作为删除操作）。
 
 示例代码如下：
 
@@ -114,7 +116,7 @@ EMClient.getInstance().chatManager().addMessageListener(listener);
 
 ### 获取消息的 Reaction 列表
 
-调用 `asyncGetReactionList` 可以从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，添加或移除 Reaction 的用户数量，以及添加或移除 Reaction 的前三个用户的用户 ID。示例代码如下：
+调用 `asyncGetReactionList` 可以从服务器获取多条指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，添加或移除 Reaction 的用户数量，以及添加或移除 Reaction 的前三个用户的用户 ID。示例代码如下：
 
 ```java
 EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.ChatType.Chat, groupId, new EMValueCallBack<Map<String, List<EMMessageReaction>>>() {

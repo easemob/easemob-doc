@@ -33,6 +33,7 @@ miniCore.open({
 - 获取本地会话列表；
 - 获取单个本地会话；
 - 设置会话自定义字段；
+- 从服务器拉取历史消息；
 - 对会话的未读消息数清零；
 - 删除单个本地会话；
 - 同步服务端会话列表到本地数据库。
@@ -118,6 +119,27 @@ const options = {
 miniCore.localCache.setLocalConversationCustomField(options).then(()=>{
    // 设置会话自定义字段成功。
 })
+```
+
+### 从服务器获取历史消息
+
+你可以调用 `getHistoryMessages` 方法基于 `searchOptions` 参数对象允许用户按消息发送方、消息类型或时间段从服务器分页拉取单聊和群组聊天的历史消息。
+
+对于群组聊天，你可以通过设置 `searchOptions` 对象中的 `from` 参数拉取群组中单个成员发送的历史消息。
+
+```javascript
+connection.getHistoryMessages({
+  targetId: 'targetId', // 单聊为对端用户 ID，群组聊天为群组 ID。
+  chatType: 'groupChat', // 会话类型：单聊和群组聊天分别为 `singleChat` 和 `groupChat`。
+  pageSize: 20, // 每次获取的消息数量，取值范围为 [1,50]，默认值为 `20`。
+  searchDirection: 'down', // 消息搜索方向。`up` 表示按消息时间戳递减的方向获取，即先获取最新消息；`down` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
+  searchOptions: {
+    from: 'message sender userID', // 消息发送方的用户 ID。该参数仅用于群组聊天。 
+    msgTypes: ['txt'], // 要获取的消息类型的数组。若不传值，会获取所有类型的消息。
+    startTime: new Date('2023,11,9').getTime(), // 查询的起始时间戳，单位为毫秒。
+    endTime: new Date('2023,11,10').getTime(), // 查询的结束时间戳，单位为毫秒。
+  },
+});
 ```
 
 ### 对会话的未读消息数清零
