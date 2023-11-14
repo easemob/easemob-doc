@@ -244,7 +244,6 @@ const documentSidebar = [
     text: '设置回调',
     children: [
       { text: '设置回调', link: 'callback.html' },
-      { text: '用户状态回调', link: 'user_status_callback.html' },
       { text: '发送后回调-事件回调', link: 'callback_configurations.html' }
     ],
     only: ['server-side']
