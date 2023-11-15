@@ -62,6 +62,8 @@
 | 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
 | 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key                                              |
 | 拉取会话列表    |   GET    | /{org_name}/{app_name}/user/{username}/user_channels       | 5 次/分钟/单用户 ID，100 次/秒/App Key    |
+| 发送聊天室全局广播消息    | GET | /{org_name}/{app_name}/messages/chatrooms/broadcast       | 1 条/秒  |
+
 
 ## 用户属性
 

@@ -909,3 +909,281 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
   "applicationName": "XXXX"
 }
 ```
+
+## 发送聊天室全局广播消息
+
+可通过该接口向 app 下的所有活跃聊天室（聊天室至少存在一个成员，而且曾经至少发送过一条消息）发送广播消息，支持所有消息类型。
+
+**发送频率**：每分钟最多可发 10 条，而且每天最多可发 100 条广播消息。
+
+### HTTP 请求
+
+```http
+POST https://{host}/{org_name}/{app_name}/messages/chatrooms/broadcast
+```
+
+#### 路径参数
+
+参数及说明详见 [公共参数](#公共参数)。
+
+#### 请求 header
+
+| 参数       | 类型   | 是否必需 | 描述          |
+| :-------------- | :----- | :------- | :-------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。       |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+#### 请求 body
+
+以下为发送文本类型的广播消息的请求 body。
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :--------------- |
+| `from`          | String | 否       | 广播消息发送方的用户 ID。若不传入该字段，服务器默认设置为管理员，即 “admin”；若传入字段但值为空字符串 (“”)，请求失败。  |
+| `chatroom_msg_level` | String | 否       | 聊天室消息优先级：<br/> - `high`：高； <br/> - （默认）`normal`：普通；<br/> - `low`：低。 |
+| `msg` | JSON | 是 | 消息体包含的信息。  |
+| `msg.type` | String | 是 | 广播消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
+| `msg.msg` | String | 是 | 消息内容。  |
+| `ext`           | JSON   | 否       | 广播消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
+| `sync_device`   | Bool   | 否       | 广播消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。      |
+
+不同类型的消息的请求体只在 `msg` 字段有差别，其他参数相同。除了 `type` 字段，`msg` 字段中包含的参数与发送聊天室消息的请求体中的 `body` 字段含义相同，详见各类消息的参数说明。
+- [发送图片消息](#发送图片消息)
+- [发送语音消息](#发送语音消息)
+- [发送视频消息](#发送视频消息)
+- [发送文件消息](#发送文件消息)
+- [发送位置消息](#发送位置消息)
+- [发送透传消息](#发送透传消息)
+- [发送自定义消息](#发送自定义消息)
+
+### HTTP 响应
+
+#### 响应 body
+
+对于各类型的广播消息来说，响应中包含的各字段相同。
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
+
+| 参数   | 类型 | 描述   |
+| :----- | :--- | :----------- |
+| `data.id` | JSON | 广播 ID。 |
+
+其他参数及说明详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+- 发送文本广播消息
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "msg": {
+        "type": "txt",
+        "msg": "send broadcast to all chatroom"
+    },
+    "from": "admin",
+    "ext": {
+        "extKey": "extValue"
+    },
+    "sync_device": false,
+    "chatroom_msg_level": "low"
+}'
+```
+
+- 发送图片广播消息
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "msg": {
+        "type": "img",
+        "filename":"testimg.jpg",
+        "secret":"VfXXXXNb_",
+        "url":"https://XXXX/XXXX/XXXX/chatfiles/55f12940-XXXX-XXXX-8a5b-ff2336f03252",
+        "size":{
+           "width":480,
+           "height":720
+        }
+    },
+    "from": "admin",
+    "ext": {
+        "extKey": "extValue"
+    },
+    "sync_device": false,
+    "chatroom_msg_level": "low"
+}'
+```
+
+- 发送语音广播消息
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "msg": {
+        "type": "audio",
+        "url": "https://XXXX/XXXX/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42",
+        "filename": "testaudio.amr",
+        "length": 10,
+        "secret": "HfXXXXCjM"
+    },
+    "from": "admin",
+    "ext": {
+        "extKey": "extValue"
+    },
+    "sync_device": false,
+    "chatroom_msg_level": "low"
+}'
+```
+
+- 发送视频广播消息
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "msg": {
+        "type": "video",
+        "thumb" : "https://XXXX/XXXX/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97",
+        "length" : 0,
+        "secret":"VfXXXXNb_",
+        "file_length" : 58103,
+        "thumb_secret" : "ZyXXXX2I",
+        "url" : "https://XXXX/XXXX/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"
+    },
+    "from": "admin",
+    "ext": {
+        "extKey": "extValue"
+    },
+    "sync_device": false,
+    "chatroom_msg_level": "low"
+}'
+```
+
+- 发送文件广播消息
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "msg": {
+        "type": "file",
+        "filename":"test.txt",
+        "secret":"1-g0XXXXua",
+        "url":"https://XXXX/XXXX/XXXX/chatfiles/d7eXXXX7444"
+    },
+    "from": "admin",
+    "ext": {
+        "extKey": "extValue"
+    },
+    "sync_device": false,
+    "chatroom_msg_level": "low"
+}'
+```
+
+- 发送位置广播消息
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "msg": {
+        "type": "loc",
+        "lat": "39.966",
+        "lng":"116.322",
+        "addr":"中国北京市海淀区中关村"
+    },
+    "from": "admin",
+    "ext": {
+        "extKey": "extValue"
+    },
+    "sync_device": false,
+    "chatroom_msg_level": "low"
+}'
+```
+
+- 发送透传广播消息
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "msg": {
+        "type": "cmd",
+        "action":"action1"
+    },
+    "from": "admin",
+    "ext": {
+        "extKey": "extValue"
+    },
+    "sync_device": false,
+    "chatroom_msg_level": "low"
+}'
+```
+
+- 发送自定义广播消息
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "msg": {
+        "type": "custom",
+        "customEvent": "custom_event"
+    },
+    "from": "admin",
+    "ext": {
+        "extKey": "extValue"
+    },
+    "sync_device": false,
+    "chatroom_msg_level": "low"
+}'
+```
+
+#### 响应示例
+
+```json
+{
+  "path": "/messages/chatrooms/broadcast",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast",
+  "timestamp": 1699944653964,
+  "organization": "easemob-demo",
+  "application": "331d42e6-ad85-460f-b6b0-d1fb6fef9f12",
+  "action": "post",
+  "data": {
+    "id": 1173998498812376874
+   },
+  "duration": 1,
+  "applicationName": "wang"
+}
+```
