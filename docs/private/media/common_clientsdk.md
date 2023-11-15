@@ -21,7 +21,7 @@
 <td>Web</td><td>环信 WebIM SDK 为 PC /移动 Web 应用，提供完善的即时通信与音视频功能</td><td><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/webdemo-3.4.2.7.zip">下载代码</a></td><td><a href="https://zim-rtc.easemob.com:12005">体验Demo</a></td>
 </tr>
 <tr>
-<td>小程序端</td><td>环信小程序 SDK提供全平台小程序解决方案，支持平台包括微信小程序、QQ小程序、百度小程序、字节跳动以及Uniapp编译的原生应用</td><td><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/webim-weixin-xcx.zip">下载代码</a></td><td>\</td>
+<td>小程序端</td><td>环信小程序 SDK提供全平台小程序解决方案，支持平台包括微信小程序、QQ小程序、百度小程序、抖音以及Uniapp编译的原生应用</td><td><a href="https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/webim-weixin-xcx.zip">下载代码</a></td><td>\</td>
 </tr>
 </tbody>
 </table>

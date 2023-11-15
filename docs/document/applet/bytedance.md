@@ -1,4 +1,4 @@
-# 字节跳动小程序集成介绍
+# 抖音小程序集成介绍
 
 <Toc />
 
@@ -6,15 +6,15 @@
 
 开发者需要在环信管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
 
-### 搭建字节跳动小程序开发环境
+### 搭建抖音小程序开发环境
 
-首先需要下载并安装 [开发者工具](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/developer-instrument/developer-instrument-update-and-download/)，然后按照字节跳动小程序的 [接入流程](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/guide/start/kick-off) 一步步创建一个小程序
+首先需要下载并安装 [开发者工具](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/developer-instrument/developer-instrument-update-and-download/)，然后按照抖音小程序的 [接入流程](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/guide/start/kick-off) 一步步创建一个小程序
 
 ### 配置服务器域名
 
 小程序在发布前，需要配置合法域名。
 
-登录字节跳动小程序 [开发者平台](https://microapp.bytedance.com/)，选择当前小程序（如果没有需要创建一个小程序），进入 “开发管理>开发设置” 页面配置以下服务器地址。
+登录抖音小程序 [开发者平台](https://microapp.bytedance.com/)，选择当前小程序（如果没有需要创建一个小程序），进入 “开发管理>开发设置” 页面配置以下服务器地址。
 
 :::tip
 request 合法域名：
