@@ -298,7 +298,7 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
 
     // 群主或群管理员拒绝用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
     @Override
-    public void onRequestToJoinDeclined(String groupId, String groupName, String decliner, String reason) {
+    public void onRequestToJoinDeclined(String groupId, String groupName, String decliner, String reason, String applicant) {
     }
 
     // 用户同意进群邀请。邀请人收到该回调。

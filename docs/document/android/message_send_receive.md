@@ -120,6 +120,8 @@ EMClient.getInstance().chatManager().addMessageListener(msgListener);
 EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 ```
 
+对于聊天室消息，你可以通过消息的 `EMMessage#isBroadcast` 属性判断通过该消息是否为聊天室全局广播消息。
+
 ### 撤回消息
 
 发送方可以撤回一条发送成功的消息。调用 API 撤回消息后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessageRecalled` 事件。
