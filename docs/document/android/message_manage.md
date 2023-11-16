@@ -39,7 +39,7 @@
 
 ### 获取本地所有会话
 
-你可以调用 `getAllConversationsBySort` 方法一次性获取本地所有会话。
+你可以调用 `getAllConversationsBySort` 方法一次性获取本地所有会话。若在初始化时，将 `EMOptions#setLoadEmptyConversations` 设置为 `true` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
 
 SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
 

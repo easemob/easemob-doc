@@ -32,7 +32,7 @@
 
 对于单聊或群聊，用户发消息时会自动将对方添加到用户的会话列表。
 
-你可以调用 `asyncFetchConversationsFromServer` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
+你可以调用 `asyncFetchConversationsFromServer` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。若在初始化时，将 `EMOptions#setLoadEmptyConversations` 设置为 `true` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
 
 SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表。服务器默认存储 100 条会话，可存储 7 天。若提升这两个上限，需联系环信商务。
 
