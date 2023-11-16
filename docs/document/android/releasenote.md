@@ -2,6 +2,35 @@
 
 <Toc />
 
+## 版本 V4.2.1 Dev 2023-11-17（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[好友备注功能](user_relationship.html#设置好友备注)。
+- [IM SDK] 新增 `EMMessage#isBroadcast` 属性用于判断通过该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](server-side/message_chatroom.html#发送聊天室全局广播消息)。
+- [IM SDK] 新增 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。 
+- [IM SDK] 新增错误码 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#allowChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者离开聊天室时会提示该错误。
+- [IM SDK] 新增 `EMOptions#setLoadEmptyConversations` 用于在初始化时配置是否允许返回空会话。
+- [IM SDK] [申请入群被拒绝的回调](group_manage.html#监听群组事件) `EMGroupChangeListener#onRequestToJoinDeclined` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。  
+- [IM Demo] 好友详情页面可添加和修改好友备注。
+
+### 优化
+
+- [IM SDK] 统一 Agora Token 和 EaseMob Token 登录方式： `EMClient#loginWithAgoraToken` 接口废弃，统一使用 `EMClient#loginWithToken` 接口。此外，新增 EaseMob Token 即将过期及已过期的回调，即 EaseMob Token 已过期或有效期过半时也返回 `EMConnectionListener#onTokenExpired` 和 `EMConnectionListener#onTokenWillExpire` 回调。
+- [IM SDK] 优化发消息时重试的逻辑。
+- [IM SDK] 移除网络请求时对 `NetworkOnMainThreadException` 异常的捕获。
+- [IM SDK] 数据库升级逻辑优化。
+
+### 修复
+
+- [IM SDK] 修复网络恢复时重连 2 次的问题。
+- [IM SDK] 修复未登录时调用 `leaveChatroom` 方法返回的错误提示不准确。
+- [IM CallKit] 一对一视频通话时对方未接听，发起方进入悬浮窗状态，悬浮窗未刷新。 
+- [IM CallKit] 挂断音视频后，最小化 app，最近任务中窗口中仍然显示音视频页面。 
+- [IM CallKit] 悬浮窗需要点击两次才响应。
+- [IM CallKit] 多人音视频前，发起方静音，对方接听后看不到发起方的 UI 界面。
+
+
 ## 版本 V4.1.3 Dev 2023-9-25（开发版）
 
 ### 修复
