@@ -181,16 +181,16 @@ private void doAsyncFetchAllContactsFromServer(List<EMContact> contacts, String 
 List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
 ```
 
-- 从本地数据库获取好友列表：
+- 从本地获取好友列表：
 
 调用以下两种方法后，返回的好友列表包含好友对象，每个对象包含好友的用户 ID 和好友备注。
 
 :::notice
-需要从服务器获取好友列表之后，才能从本地数据库获取到好友列表。
+需要从服务器获取好友列表之后，才能从本地获取到好友列表。
 :::
 
 ```java
-//从本地数据库中获取单个好友
+//从本地获取单个好友
 try {
     EMContact emContact = EMClient.getInstance().contactManager().fetchContactFromLocal(userId);
     String remark = emContact.getRemark();
@@ -200,7 +200,7 @@ try {
     EMLog.e(TAG, "fetchContactFromLocal error:" + e.getMessage());
 };
 
-//一次性从本地数据库获取整个好友列表
+//一次性从本地获取整个好友列表
 EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMValueCallBack<List<EMContact>>() {
     @Override
     public void onSuccess(List<EMContact> value) {
@@ -214,7 +214,7 @@ EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMVal
 });
 ```
 
-你也可以调用 `getContactsFromLocal` 方法从本地数据库获取所有好友的列表，该列表只包含好友的用户 ID。
+你也可以调用 `getContactsFromLocal` 方法从本地获取所有好友的列表，该列表只包含好友的用户 ID。
 
 示例代码如下：
 
