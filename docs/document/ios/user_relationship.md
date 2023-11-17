@@ -11,14 +11,14 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ## 技术原理
 
-环信即时通讯 IM iOS SDK 可以实现好友的添加移除，黑名单的添加移除等功能，主要调用方法如下：
+环信即时通讯 IM iOS SDK 可以实现好友的添加移除，黑名单的添加移除等功能：
 
-- `addContact` 申请添加好友。
-- `deleteContact` 删除好友。
-- `getContactsFromServerWithCompletion` 从服务器获取好友列表。
-- `addUserToBlackList` 添加黑名单。
-- `removeUserFromBlackList` 删除黑名单。
-- `getBlackListFromServerWithCompletion` 从服务器获取黑名单列表。
+- 申请添加好友。
+- 删除好友。
+- 从服务器获取好友列表。
+- 添加黑名单。
+- 删除黑名单。
+- 从服务器获取黑名单列表。
 
 ## 前提条件
 
@@ -134,6 +134,18 @@ if (!aError) {
 // 好友已被删除。
 - (void)friendshipDidRemoveByUser:(NSString *)aUsername
   { }
+```
+
+#### 设置好友备注
+
+你可以调用 `setContactRemark` 方法设置好友备注。
+
+好友备注的长度不能超过 100 个字符。
+
+```objective-c
+[EMClient.sharedClient.contactManager setContactRemark:@"userId" remark:@"remark" completion:^(EMContact * _Nullable contact, EMError * _Nullable aError) {
+            
+    }];
 ```
 
 #### 获取好友列表
