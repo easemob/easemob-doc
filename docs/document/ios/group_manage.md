@@ -214,6 +214,16 @@ do {
 } while (result && result.list < pageSize);
 ```
 
+### 查询当前用户已加入的群组数量
+
+你可以调用 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于你订阅的即时通讯的套餐包，详见[产品价格](product/pricing.html#套餐包功能详情)。
+
+```objectivec
+[EMClient.sharedClient.groupManager getJoinedGroupsCountFromServerWithCompletion:^(NSInteger groupCount, EMError * _Nullable aError) {
+            
+    }];
+```
+
 ### 屏蔽和解除屏蔽群消息
 
 #### 屏蔽群消息
@@ -280,9 +290,9 @@ do {
   }
 
 // 群主或群管理员拒绝用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
-- (void)joinGroupRequestDidDecline:(NSString *)aGroupId reason:(NSString *)aReason
+- (void)joinGroupRequestDidDecline:(NSString *)aGroupId reason:(NSString *)aReason decliner:(NSString *)aDecliner applicant:(NSString *)aApplicant
   {
-
+    
   }
 
 // 用户同意进群邀请。邀请人收到该回调。

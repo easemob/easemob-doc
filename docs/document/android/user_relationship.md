@@ -128,7 +128,7 @@ EMClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, ne
 
 - 从服务端获取好友列表：
 
-调用以下两种方法后，返回的好友列表包含好友对象，每个对象包含好友的用户 ID 和好友备注。
+调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
 ```java
 //一次性从服务端获取整个好友列表
@@ -180,9 +180,9 @@ private void doAsyncFetchAllContactsFromServer(List<EMContact> contacts, String 
 List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
 ```
 
-- 从本地获取好友列表：
+- 从本地获取好友列表
 
-调用以下两种方法后，返回的好友列表包含好友对象，每个对象包含好友的用户 ID 和好友备注。
+调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
 :::notice
 需要从服务器获取好友列表之后，才能从本地获取到好友列表。

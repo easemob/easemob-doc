@@ -13,9 +13,9 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 环信即时通讯 IM iOS SDK 可以实现好友的添加移除，黑名单的添加移除等功能：
 
-- 申请添加好友。
-- 删除好友。
-- 从服务器获取好友列表。
+- 添加、删除好友。
+- 设置好友备注。
+- 获取好友列表。
 - 添加黑名单。
 - 删除黑名单。
 - 从服务器获取黑名单列表。
@@ -150,13 +150,27 @@ if (!aError) {
 
 #### 获取好友列表
 
-你可以从服务器获取好友列表，也可以从本地数据库获取已保存的好友列表。
+你可以从服务器获取好友列表，也可以从本地获取已保存的好友列表。
 
-:::notice
-需要从服务器获取好友列表之后，才能从本地数据库获取到好友列表。
-:::
+- 从服务端获取好友列表
 
-示例代码如下：
+调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+
+```objectivec
+
+//一次性从服务端获取整个好友列表
+[EMClient.sharedClient.contactManager getAllContactsFromServerWithCompletion:^(NSArray<EMContact *> * _Nullable aList, EMError * _Nullable aError) {
+            
+    }];
+
+//从服务端分页获取好友列表
+//pageSize 的取值范围为 [1,50]
+[EMClient.sharedClient.contactManager getContactsFromServerWithCursor:@"" pageSize:50 completion:^(EMCursorResult<EMContact *> * _Nullable aResult, EMError * _Nullable aError) {
+        
+    }];
+```
+
+你也可以调用 `getContactsFromServerWithCompletion` 方法从服务器获取所有好友的列表。该列表只包含好友的用户 ID。
 
 ```objectivec
 // 从服务器获取好友列表。
@@ -168,7 +182,31 @@ if (!aError) {
         NSLog(@"获取所有好友失败的原因 %@", aError.errorDescription);
     }
 }];
-// 从本地数据库获取好友列表。
+```
+
+- 从本地获取好友列表
+
+:::notice
+需要从服务器获取好友列表之后，才能从本地获取到好友列表。
+:::
+
+调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+
+```objectivec
+//从本地获取单个好友
+EMContact* contact = [EMClient.sharedClient.contactManager getContact:@"userId"];
+
+
+//一次性从本地获取整个好友列表
+NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllContacts];
+
+```
+
+你也可以调用 `getContacts` 方法从本地获取所有好友的列表，该列表只包含好友的用户 ID。
+
+示例代码如下：
+
+```objectivec
 NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 ```
 

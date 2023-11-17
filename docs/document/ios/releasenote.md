@@ -9,7 +9,7 @@
 - [IM SDK] 新增好友备注功能。
 - [IM SDK] 新增 `EMChatMessage#broadcast` 属性用于判断通过该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](server-side/message_chatroom.html#发送聊天室全局广播消息)。
 - [IM SDK] 新增 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。
-- [IM SDK] 新增错误码 706 `EMErrorChatroomOwnerNotAllowLeave`，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#canChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者离开聊天室时会提示该错误。
+- [IM SDK] 新增错误码 706 `EMErrorChatroomOwnerNotAllowLeave`，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#canChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatroom` 方法离开聊天室时会提示该错误。
 - [IM SDK] 新增 `EMOptions#loadEmptyConversations` 用于在初始化时配置是否允许返回空会话。
 - [IM SDK] 申请入群被拒绝的回调 `EMGroupManagerDelegate#joinGroupRequestDidDecline:reason:decliner:applicant:` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。  
 - [IM Demo] 好友详情页面可添加和修改好友备注。
@@ -24,7 +24,7 @@
 
 - [IM SDK] 修复网络恢复时重连 2 次的问题。
 
-## 版本 V4.1.1 Dev 2023-8-03（开发版）
+## 版本 V4.1.1 Dev 2023-8-03
 
 ### 修复
 
@@ -66,7 +66,7 @@
 - [IM SDK] 修复在 ARM 64 模拟器下偶现的文件类消息附件路径不对的问题；
 - [IM APP] 修复 Demo 偶现的 UI 刷新崩溃的问题。
 
-## 版本 V4.0.3 Dev 2023-6-19（开发版）
+## 版本 V4.0.3 Dev 2023-6-19
 
 ### 新增特性
 
@@ -86,7 +86,7 @@
 
 - [IM UIKit] 修复发送图片消息时，`compressionRatio` 配置为 1.0 未发送原图的问题。
 
-## 版本 V4.0.2 Dev 2023-4-26（开发版）
+## 版本 V4.0.2 Dev 2023-4-26
 
 ### 新增特性
 
@@ -105,7 +105,7 @@
 - [IM SDK] 优化日志回调逻辑。
 - [IM SDK] 移除代码中使用的 ECB 加密。
 
-## 版本 V4.0.1 Dev 2023-3-16（开发版）
+## 版本 V4.0.1 Dev 2023-3-16
 
 ### 新增特性
 
@@ -149,7 +149,7 @@
 
 [IM SDK] 修复某些场景下调用 `updateMessage` 方法导致的内存与数据库消息不一致问题。
 
-## 版本 V3.9.7.1 Dev 2022-9-30（开发版）
+## 版本 V3.9.7.1 Dev 2022-9-30
 
 ### 新增特性
 
@@ -165,7 +165,7 @@
 - [IM SDK] 修复极少数场景下打印日志导致崩溃的问题。
 - [IM SDK] 修复开启全链路加入（FPA）功能时导致崩溃的问题。
 
-## 版本 V3.9.6.1 Dev 2022-9-21（开发版）
+## 版本 V3.9.6.1 Dev 2022-9-21
 
 ### 优化
 
@@ -173,7 +173,7 @@
 - [IM SDK] 优化聊天室自定义属性移除的回调方法 `onAttributesRemoved`，返回成功移除的聊天室自定义属性的 key 数组。
 - [IMKit] 语音播放切换至媒体音量。
 
-## 版本 V3.9.6 Dev 2022-9-16（开发版）
+## 版本 V3.9.6 Dev 2022-9-16
 
 ### 新增特性
 
@@ -189,7 +189,7 @@
 - [IM SDK] 修复少数场景下，同步或拉取消息时消息量较大时收取失败的问题。
 - [Demo] 修复部分 Demo bug。
 
-## 版本 V3.9.5 2022-8-2（开发版）
+## 版本 V3.9.5 2022-8-2
 
 ### 新增特性
 
