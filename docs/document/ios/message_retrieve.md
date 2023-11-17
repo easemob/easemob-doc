@@ -30,7 +30,7 @@
 
 ### 从服务器分页获取会话列表
 
-你可以调用 `getConversationsFromServerWithCursor:pageSize:completion` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
+你可以调用 `getConversationsFromServerWithCursor:pageSize:completion` 方法从服务端分页获取会话列表。若在初始化时，将 `EMOptions#loadEmptyConversations` 设置为 `YES` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
 
 SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 `0`）以及最新一条消息。从服务端拉取会话列表后会更新本地会话列表。
 
