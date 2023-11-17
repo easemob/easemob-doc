@@ -106,7 +106,7 @@ function sendTextMessage() {
 
 当消息到达时，接收方会收到 `onXXXMessage` 回调。每个回调包含一条或多条消息。你可以遍历消息列表，并可以解析和展示回调中的消息。
 
-对于聊天室消息，你可以通过消息的 `broadcast` 属性判断通过该消息是否为[通过 REST API 发送的聊天室全局广播消息](/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+对于聊天室消息，你可以通过消息的 `broadcast` 属性判断通过该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
 ```javascript
 // 使用 `addEventHandler` 监听回调事件
