@@ -13,16 +13,13 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
+环信即时通讯 IM Android SDK 提供 `EMContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。
 
-- `addContact` 申请添加好友。
-- `acceptInvitation` 同意好友申请。
-- `declineInvitation` 拒绝好友申请。
-- `deleteContact` 删除好友。
-- `getAllContactsFromServer` 从服务器获取好友列表。
-- `addUserToBlackList` 添加用户到黑名单。
-- `removeUserFromBlackList` 将用户从黑名单移除。
-- `getBlackListFromServer` 从服务器获取黑名单列表。
+- 添加、删除好友。
+- 设置和获取好友备注。
+- 从服务器获取好友列表。
+- 将用户添加到或移除黑名单。
+- 从服务器获取黑名单列表。
 
 ## 前提条件
 
@@ -106,21 +103,120 @@ EMClient.getInstance().contactManager().deleteContact(username);
 
 调用 `deleteContact` 删除好友后，对方会收到 `onContactDeleted` 回调。
 
+#### 设置好友备注
+
+你可以调用 `asyncSetContactRemark` 方法设置单个好友的备注。
+
+好友备注的长度不能超过 100 个字符。
+
+```java
+EMClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, new EMCallBack() {
+    @Override
+    public void onSuccess() {
+        
+    }
+
+    @Override
+    public void onError(int code, String error) {
+        
+    }
+});
+```
+
 #### 获取好友列表
 
-你可以从服务器获取好友列表，也可以从本地数据库获取已保存的好友列表。
+- 从服务端获取好友列表：
 
-:::notice
-需要从服务器获取好友列表之后，才能从本地数据库获取到好友列表。
-:::
+调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
-示例代码如下：
+```java
+//一次性从服务端获取整个好友列表
+EMClient.getInstance().contactManager().asyncFetchAllContactsFromServer(new EMValueCallBack<List<EMContact>>() {
+    @Override
+    public void onSuccess(List<EMContact> value) {
+        
+    }
+
+    @Override
+    public void onError(int error, String errorMsg) {
+        
+    }
+});
+
+//从服务端分页获取好友列表
+// limit 的取值范围为 [1,50]
+List<EMContact> contacts=new ArrayList<>();
+String cursor= "";
+int limit=20;
+doAsyncFetchAllContactsFromServer(contacts,cursor,limit);
+
+private void doAsyncFetchAllContactsFromServer(List<EMContact> contacts, String cursor, int limit) {
+    EMClient.getInstance().contactManager().asyncFetchAllContactsFromServer(limit, cursor, new EMValueCallBack<EMCursorResult<EMContact>>() {
+        @Override
+        public void onSuccess(EMCursorResult<EMContact> value) {
+            List<EMContact> data = value.getData();
+            String resultCursor = value.getCursor();
+            if(!CollectionUtils.isEmpty(data)) {
+                contacts.addAll(data);
+            }
+            if(!TextUtils.isEmpty(resultCursor)) {
+                doAsyncFetchAllContactsFromServer(contacts, resultCursor, limit);
+            }
+        }
+
+        @Override
+        public void onError(int error, String errorMsg) {
+            
+        }
+    });
+```
+
+你也可以调用 `getAllContactsFromServer` 方法从服务器获取所有好友的列表，该列表只包含好友的用户 ID。
 
 ```java
 // 从服务器获取好友列表。
 // 同步方法，会阻塞当前线程。异步方法为 asyncGetAllContactsFromServer(EMValueCallBack)。
 List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
-// 从本地数据库获取好友列表。
+```
+
+- 从本地获取好友列表
+
+调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+
+:::notice
+需要从服务器获取好友列表之后，才能从本地获取到好友列表。
+:::
+
+```java
+//从本地获取单个好友
+try {
+    EMContact emContact = EMClient.getInstance().contactManager().fetchContactFromLocal(userId);
+    String remark = emContact.getRemark();
+    String username = emContact.getUsername();
+    EMLog.e(TAG, "fetchContactFromLocal success, username:" + username + ",remark:" + remark);
+} catch (HyphenateException e) {
+    EMLog.e(TAG, "fetchContactFromLocal error:" + e.getMessage());
+};
+
+//一次性从本地获取整个好友列表
+EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMValueCallBack<List<EMContact>>() {
+    @Override
+    public void onSuccess(List<EMContact> value) {
+        
+    }
+
+    @Override
+    public void onError(int error, String errorMsg) {
+        
+    }
+});
+```
+
+你也可以调用 `getContactsFromLocal` 方法从本地获取所有好友的列表，该列表只包含好友的用户 ID。
+
+示例代码如下：
+
+```java
 List<String> usernames = EMClient.getInstance().contactManager().getContactsFromLocal();
 ```
 

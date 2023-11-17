@@ -82,11 +82,11 @@ message.priority = EMChatRoomMessagePriorityHigh;
 
 ### 接收消息
 
-你可以用注册监听 `EMChatManagerDelegate` 接收消息。
-
-该 `EMChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除 `Delegate`，如在`ViewController` `dealloc()` 时。
+你可以用注册监听 `EMChatManagerDelegate` 接收消息。该 `EMChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除 `Delegate`，如在`ViewController` `dealloc()` 时。
 
 在新消息到来时，你会收到 `messagesDidReceive` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
+
+对于聊天室消息，你可以通过消息的 `EMChatMessage#broadcast` 属性判断通过该消息是否为[通过 REST API 发送的聊天室全局广播消息](server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
 ```objectivec
 // 添加代理。

@@ -2,20 +2,48 @@
 
 <Toc />
 
-## 版本 V4.1.3 Dev 2023-9-25（开发版）
+## 版本 V4.2.1 Dev 2023-11-17（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[好友备注功能](user_relationship.html#设置好友备注)。
+- [IM SDK] 新增 `EMMessage#isBroadcast` 属性用于判断通过该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](server-side/message_chatroom.html#发送聊天室全局广播消息)。
+- [IM SDK] 新增 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。 
+- [IM SDK] 新增[错误码 706](error.html) `CHATROOM_OWNER_NOT_ALLOW_LEAVE`，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#allowChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。
+- [IM SDK] 新增 `EMOptions#setLoadEmptyConversations` 方法用于在初始化时配置是否允许返回空会话。
+- [IM SDK] [申请入群被拒绝的回调](group_manage.html#监听群组事件) `EMGroupChangeListener#onRequestToJoinDeclined` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。  
+- [IM Demo] 好友详情页面可添加和修改好友备注。
+
+### 优化
+
+- [IM SDK] 统一 Agora Token 和 EaseMob Token 登录方式： `EMClient#loginWithAgoraToken` 接口废弃，统一使用 `EMClient#loginWithToken` 接口。此外，新增 EaseMob Token 即将过期及已过期的回调，即 EaseMob Token 已过期或有效期过半时也返回 `EMConnectionListener#onTokenExpired` 和 `EMConnectionListener#onTokenWillExpire` 回调。
+- [IM SDK] 优化发消息时重试的逻辑。
+- [IM SDK] 移除网络请求时对 `NetworkOnMainThreadException` 异常的捕获。
+- [IM SDK] 数据库升级逻辑优化。
+
+### 修复
+
+- [IM SDK] 修复网络恢复时重连 2 次的问题。
+- [IM SDK] 修复未登录时调用 `leaveChatroom` 方法返回的错误提示不准确。
+- [IM CallKit] 一对一视频通话时对方未接听，发起方进入悬浮窗状态，悬浮窗未刷新。 
+- [IM CallKit] 挂断音视频后，最小化 app，最近任务中窗口中仍然显示音视频页面。 
+- [IM CallKit] 悬浮窗需要点击两次才响应。
+- [IM CallKit] 多人音视频前，发起方静音，对方接听后看不到发起方的 UI 界面。
+
+## 版本 V4.1.3 Dev 2023-9-25
 
 ### 修复
 
 - [IM SDK] 特殊场景下，SDK 退出后再登录会丢失聊天室监听事件问题。
 
-## 版本 V4.1.2 Dev 2023-9-5（开发版）
+## 版本 V4.1.2 Dev 2023-9-5
 
 ### 优化
 
 - [IM SDK] 适配 Android 14 Beta。
   - 适配以 Android 14 为目标平台时动态注册广播接收者必须设置 `RECEIVER_EXPORTED` 或者 `RECEIVER_NOT_EXPORTED` 的规定。
 
-## 版本 V4.1.1 Dev 2023-8-3（开发版）
+## 版本 V4.1.1 Dev 2023-8-3
 
 ### 修复
 
@@ -59,7 +87,7 @@
 - [IM SDK] 修复调用接口 `EMChatManager#deleteMessagesBeforeTimestamp` 和 `EMConversation#removeMessages(long,long)` 偶现崩溃的问题；
 - [IM UIKit] 修复语音消息自动下载失败后点击语音图标无法再次下载的问题。
 
-## 版本 V4.0.3 Dev 2023-6-19（开发版）
+## 版本 V4.0.3 Dev 2023-6-19
 
 ### 新增特性
 
@@ -82,7 +110,7 @@
 - [IM UIKit] 修复部分空指针问题。
 - [IM UIKit] 修复部分场景下不展示自定义头像的问题。
 
-## 版本 V4.0.2 Dev 2023-4-26（开发版）
+## 版本 V4.0.2 Dev 2023-4-26
 
 ### 新增特性
 
@@ -108,7 +136,7 @@
 - [IM SDK] 修复部分场景下用户调用下载消息附件接口时，附件未下载到私有目录的问题。
 - [IM SDK] 修复某些场景下消息已读状态不更新的问题。
 
-## 版本 V4.0.1 Dev 2023-3-16（开发版）
+## 版本 V4.0.1 Dev 2023-3-16
 
 ### 新增特性
 
@@ -189,7 +217,7 @@
 - [IM SDK] 适配 Android 12，修复依赖环信即时通讯云 SDK 的 APK 在 Android 12 版本的部分手机上第一次安装后打开时出现异常弹框的问题。
 - [IM SDK] 修复某些场景下调用 `updateMessage` 方法导致的内存与数据库消息不一致问题。
 
-## 版本 V3.9.7 Dev 2022-9-30（开发版）
+## 版本 V3.9.7 Dev 2022-9-30
 
 ### 新增特性
 
@@ -206,7 +234,7 @@
 - [IM SDK] 修复开启全链路加入（FPA）功能时导致崩溃的问题。
 - [IM SDK] 修复聊天室自定义属性部分设置失败时，返回的错误码为字符串类型（修改为 Int 类型）的问题。
 
-## 版本 V3.9.6.1 Dev 2022-9-21（开发版）
+## 版本 V3.9.6.1 Dev 2022-9-21
 
 ### 新增特性
 
@@ -218,7 +246,7 @@
 - [IM SDK] 优化聊天室自定义属性移除的回调方法 `onAttributesRemoved`，返回成功移除的聊天室自定义属性的 key 数组。
 - [IMKit] 语音播放切换至媒体音量。
 
-## 版本 V3.9.6 Dev 2022-9-16（开发版）
+## 版本 V3.9.6 Dev 2022-9-16
 
 ### 新增特性
 

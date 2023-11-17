@@ -209,6 +209,24 @@ List<EMGroupInfo> groupsList = result.getData();
 String cursor = result.getCursor();
 ```
 
+### 查询当前用户已加入的群组数量
+
+你可以调用 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](product/pricing.html#套餐包功能详情)。
+
+```java
+EMClient.getInstance().groupManager().asyncGetJoinedGroupsCountFromServer(new EMValueCallBack<Integer>() {
+    @Override
+    public void onSuccess(Integer value) {
+        
+    }
+
+    @Override
+    public void onError(int error, String errorMsg) {
+
+    }
+});
+```
+
 ### 屏蔽和解除屏蔽群消息
 
 群成员可以屏蔽群消息和解除屏蔽群消息。
@@ -280,7 +298,7 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
 
     // 群主或群管理员拒绝用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
     @Override
-    public void onRequestToJoinDeclined(String groupId, String groupName, String decliner, String reason) {
+    public void onRequestToJoinDeclined(String groupId, String groupName, String decliner, String reason, String applicant) {
     }
 
     // 用户同意进群邀请。邀请人收到该回调。

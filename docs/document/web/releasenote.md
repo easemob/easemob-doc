@@ -2,6 +2,22 @@
 
 <Toc />
 
+## 版本 V4.3.0 Dev 2023-11-17（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[好友备注功能](user_relationship.html#设置好友备注)。
+- [IM SDK] 消息结构新增 `broadcast` 字段, 用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](server-side/message_chatroom.html#发送聊天室全局广播消息)。
+
+### 优化
+
+- [IM SDK] Token 登录增加即将过期及已过期的回调，即 Token 已过期或有效期过半时也触发 `onTokenExpired` 和 `onTokenWillExpire` 回调。
+
+### 修复
+
+- [IM SDK] 修复会话列表最后一条消息中获取不到 `reaction` 的问题。
+
+
 ## 版本 V4.2.1 Dev 2023-09-27（开发版）
 
 ### 新增特性
@@ -9,7 +25,7 @@
 - [IM SDK] 新增 `LocalCache` 模块[实现本地会话数据管理](message_manage.html)。
 - [IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
 
-## 版本 V4.2.0 Dev 2023-07-27（开发版）
+## 版本 V4.2.0 Dev 2023-07-27
 
 ### 新增特性
 
@@ -20,7 +36,7 @@
 
 修复发送不必要的消息送达回执的问题。
 
-## 版本 V4.1.7 Dev 2023-06-08（开发版）
+## 版本 V4.1.7 Dev 2023-06-08
 
 ### 新增特性
 
@@ -41,7 +57,7 @@
  - addUsersToBlocklist：将好友添加至黑名单。
  - removeUserFromBlocklist：将好友移出黑名单。
 
-## 版本 V4.1.6 Dev 2023-04-17（开发版）
+## 版本 V4.1.6 Dev 2023-04-17
 
 ### 新增特性
 
@@ -65,7 +81,7 @@
 - [IM SDK] 修复 TypeScript 代码的一些类型错误。
 - [IM SDK] 修复 `getHistoryMessages` 方法无法捕获错误的问题。
 
-## 版本 V4.1.3 Dev 2023-02-21（开发版）
+## 版本 V4.1.3 Dev 2023-02-21
 
 #### 新增特性
 
@@ -83,7 +99,7 @@
 - [IM SDK] 修复 `getConversationlist` 方法的返回值缺少 `customExts` 字段的问题。
 - [IM SDK] 修复设置 `useOwnUploadFun` 允许用户自己上传图片时图片消息中的 `size` 字段不生效的问题。
 
-## 版本 V4.1.2 Dev 2022-11-08（开发版）
+## 版本 V4.1.2 Dev 2022-11-08
 
 ### 新增特性
 
@@ -100,7 +116,7 @@
 
 [IM SDK] 修复调用 `create` 方法创建附件消息时 `file_length` 参数不生效的问题。
 
-## 版本 V4.1.1 Dev 2022-9-26（开发版）
+## 版本 V4.1.1 Dev 2022-9-26
 
 ### 优化
 
@@ -112,7 +128,7 @@
 - [IM SDK] 修复聊天室自定义属性功能中的问题；
 - [IM SDK] 修复 `miniCore` 中的 `uploadFile` 方法中的问题。
 
-## 版本 V4.1.0 Dev 2022-9-16（开发版）
+## 版本 V4.1.0 Dev 2022-9-16
 
 ### 新增特性
 
