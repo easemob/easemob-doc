@@ -6,7 +6,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增好友备注功能。
+- [IM SDK] 新增[好友备注功能](user_relationship.html#设置好友备注)。
 - [IM SDK] 消息结构新增 `broadcast` 字段, 用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
 ### 优化
