@@ -137,7 +137,7 @@ conn
   });
 ```
 
-你可以调用 `getContacts` 方法从本地获取所有好友的列表，该列表只包含好友的用户 ID。
+你可以调用 `getContacts` 方法从服务端获取所有好友的列表，该列表只包含好友的用户 ID。
 
 ```javascript
 conn.getContacts().then((res) => {
