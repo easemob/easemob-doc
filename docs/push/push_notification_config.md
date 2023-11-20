@@ -44,7 +44,7 @@
 | `content`            | String | 通知栏展示的通知内容。默认为“请及时查看”。该字段长度不能超过 100 个字符（一个汉字相当于两个字符）。 | iOS & Android | 是       |
 | `ext`                | Object | 推送自定义扩展信息，为自定义 key-value 键值对。键值对个数不能超过 10 且长度不能超过 1024 个字符。 | iOS & Android | 否       |
 | `config`             | Object | 与用户点击通知相关的操作。以及角标的配置，包含 `clickAction` 和 `badge` 字段。 | iOS & Android | 否       |
-| `config.clickAction` | Object | 在通知栏中点击触发的动作，均为字符串类型：<br/> - `url`：打开自定义的 URL；<br/> - `action`：打开应用的指定页面；<br/> - `activity`：打开应用包名或 Activity 组件路径。若不传该字段，默认打开应用的首页。 | Android       | 否       |
+| `config.clickAction` | Object | 在通知栏中点击触发的动作，均为字符串类型：<br/> - `url`：打开自定义的 URL；<br/> - `action`：打开应用的指定页面；<br/> - `activity`：打开应用包名或 Activity 组件路径。若不传该字段，默认打开应用的首页。<br/><Container type="notice" title="注意">环信 iOS 推送通道只支持设置为 `url`。</Container> | Android       | 否       |
 | `config.badge`       | Object | 推送角标，包含以下三个字段：<br/> - `addNum`：整型，表示推送通知到达设备时，角标数字累加的值。<br/> - `setNum`：整型，表示推送通知到达设备时，角标数字显示的值。<br/> - `activity`：字符串类型，入口类（华为角标需要配置）。 | Android       | 否       |
 
 ## 各厂商推送配置
@@ -108,7 +108,7 @@
 | `needNotification` | boolean | 是否弹出通知：<br/> - （默认）`true`：通知消息；<br/> - `false`：透传消息。 | iOS & Android |
 | `badge`            | Object  | 推送角标。详见 [基本推送配置](#基本推送配置)中的角标说明。 | iOS & Android |
 | `operation`        | Object  | 在通知栏中点击触发的动作。                                   | iOS & Android |
-| `operation.type`   | Int     | 在通知栏中点击触发的动作类型。<br/> - （默认）`0`：启动应用。<br/> - `1`：打开自定义的 URL。需设置 `openUrl` 字段为自定义的 URL，若不设置，点击无效果。<br/> - `2`：打开应用的指定页面。需设置 `openAction` 为打开的应用页面的地址。若不设置，点击无效果。 | iOS & Android |
+| `operation.type`   | Int     | 在通知栏中点击触发的动作类型。<br/> - （默认）`0`：启动应用。<br/> - `1`：打开自定义的 URL。需设置 `openUrl` 字段为自定义的 URL，若不设置，点击无效果。<br/> - `2`：打开应用的指定页面。需设置 `openAction` 为打开的应用页面的地址。若不设置，点击无效果。 <br/><Container type="notice" title="注意">环信 iOS 推送通道只支持启动应用和打开自定义 URL，因此只能设置为 `0` 和 `1`。</Container>| iOS & Android |
 | `channelId`        | String  | 通知渠道 ID，默认为 `chat`。客户端渠道存在则通知。若客户端渠道不存在，则结合 channelName，channelLevel 创建新通道。 | Android       |
 | `channelName`      | String  | 通知渠道名称，默认为 `消息`。只有第一次创建通道时使用。      | Android       |
 | `channelLevel`     | Int     | 通知级别，只有第一次创建通道时使用。<br/> - `0`：最低；<br/> - `3`：默认；<br/> - `4`：高。 | Android       |
