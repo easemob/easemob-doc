@@ -140,7 +140,7 @@
 
 ![img](@static/images/callback/callback_purchase.png)
 
-4. 在支付页面，点击**立即支付**支付费用后即可使用
+4. 在支付页面，点击**立即支付**支付费用后即可使用。
 
 ![img](@static/images/callback/callback_payment.png)
 
