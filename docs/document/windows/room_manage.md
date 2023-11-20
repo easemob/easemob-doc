@@ -129,7 +129,8 @@ Options options = new Options();
 options. DeleteMessagesAsExitRoom = false;
 ```
 
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，例如所有者从服务器下线则 2 分钟后自动离开聊天室。如果所有者重新进入聊天室仍是该聊天室的所有者。
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，离开后重新进入仍是该聊天室的所有者。若 `Options#IsRoomOwnerLeaveAllowed
+` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `LeaveRoom` 方法离开聊天室时会提示错误 706。
 
 ### 解散聊天室
 
