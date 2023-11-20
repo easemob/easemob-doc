@@ -158,7 +158,7 @@
 
 - 配置发送前回调规则
 
-![img](@static/images/product/pre_delivery_rule_add.png)
+![img](@static/images/callback/pre_delivery_rule_add.png)
 
 在**发送前回调**对话框中配置以下参数：
 
