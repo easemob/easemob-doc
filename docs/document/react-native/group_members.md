@@ -511,6 +511,8 @@ ChatClient.getInstance()
 
 ### 管理群组白名单
 
+群主和群组中的管理员默认会被加入群组白名单。
+
 #### 将成员加入群组白名单
 
 仅群主和群管理员可以调用 `addAllowList` 方法将指定群成员加入群白名单。白名单用户不受全员禁言的限制，但是如果白名单用户在群禁言列表中，则该用户不能发言。被加入白名单的成员及管理员和群主收到 `ChatGroupEventListener#onAllowListAdded` 回调。

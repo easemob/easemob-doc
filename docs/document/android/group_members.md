@@ -291,6 +291,8 @@ List<String> adminList = group.getAdminList();
 
 ### 管理群组白名单
 
+群主和群组中的管理员默认会被加入群组白名单。
+
 #### 将成员加入群组白名单
 
 仅群主和群管理员可以调用 `addToGroupWhiteList` 方法将指定群成员加入群白名单。群成员被添加至群白名单后，该群成员及其他未操作的群管理员和群主将会收到群组事件回调 `EMGroupChangeListener#onWhiteListAdded`。

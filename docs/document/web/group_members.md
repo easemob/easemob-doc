@@ -242,6 +242,8 @@ conn.getGroupAdmin(option).then((res) => {
 
 ### 管理群组白名单
 
+群主和群组中的管理员默认会被加入群组白名单。
+
 #### 将成员加入群组白名单
 
 仅群主或者群管理员可调用 `addUsersToGroupAllowlist` 方法将群成员添加到群白名单。添加后，该群成员及群管理员和群主（除操作者外）会收到 `addUserToAllowlist` 事件。

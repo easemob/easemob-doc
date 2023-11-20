@@ -121,6 +121,8 @@ try {
 
 ### 管理聊天室白名单
 
+聊天室所有者和管理员默认会被加入聊天室白名单。
+
 #### 添加成员至聊天室白名单列表
 
 仅聊天室所有者和管理员可以调用 `EMChatRoomManager#addMembersToChatRoomAllowList` 方法将指定成员添加至聊天室白名单。被添加后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onAllowListAddedFromChatRoom` 事件。
