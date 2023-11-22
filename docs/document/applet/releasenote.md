@@ -2,6 +2,27 @@
 
 <Toc />
 
+## 版本 V4.3.0 Dev 2023-11-17（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[好友备注功能](user_relationship.html#设置好友备注)。
+- [IM SDK] 消息结构新增 `broadcast` 字段, 用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+
+### 优化
+
+- [IM SDK] Token 登录增加即将过期及已过期的回调，即 Token 已过期或有效期过半时也触发 `onTokenExpired` 和 `onTokenWillExpire` 回调。
+
+### 修复
+
+- [IM SDK] 修复会话列表最后一条消息中获取不到 `reaction` 的问题。
+
+## 版本 V4.2.1 Dev 2023-09-27（开发版）
+
+### 新增特性
+
+- [IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
+
 ## 版本 V4.2.0 Dev 2023-07-27（开发版）
 
 ### 新增特性
