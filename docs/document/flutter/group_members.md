@@ -44,7 +44,7 @@ try {
 
 ### 群组踢人
 
-1. 仅群主和群管理员可以调用 `EMGroupManager#removeMembers` 方法将指定成员移出群组。
+1. 仅群主和群管理员可以调用 `EMGroupManager#removeMembers` 方法将单个或多个成员移出群组。
 2. 被移出群组后，该成员收到 `EMGroupEventHandler#onUserRemovedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMemberExitedFromGroup` 事件。
 3. 被移出群组后，该用户还可以再次加入群组。
 
