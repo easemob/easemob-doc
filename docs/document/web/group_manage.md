@@ -114,13 +114,13 @@ conn.destroyGroup(option).then((res) => console.log(res));
 
 ### 获取群组详情信息
 
-所有群成员均可调用 `getGroupInfo` 方法根据群组 ID 获取群组详情，包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、、是否已屏蔽群组消息以及群组是否禁用。默认不包含群成员列表。
+所有群成员均可调用 `getGroupInfo` 方法根据群组 ID 获取单个或多个群组的详情，包括群组 ID、群组名称、群组描述、群组基本属性、群成员列表、是否已屏蔽群组消息以及群组是否禁用。
 
 示例代码如下：
 
 ```javascript
 let option = {
-  // 群组 ID 或群组 ID 数组。
+  // 单个群组 ID 或群组 ID 数组。
   groupId: "groupId",
 };
 conn.getGroupInfo(option).then((res) => {

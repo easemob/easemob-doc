@@ -42,7 +42,7 @@ public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cur
 
 ### 将成员移出聊天室
 
-仅聊天室所有者和管理员可调用 `EMChatRoomManager#removeChatRoomMembers` 方法将指定成员移出聊天室。
+仅聊天室所有者和管理员可调用 `EMChatRoomManager#removeChatRoomMembers` 方法将单个或多个成员移出聊天室。
 
 被移出后，该成员收到 `onRemovedFromChatRoom` 回调，其他成员收到 `EMChatRoomChangeListener#BE_KICKED` 回调。
 
