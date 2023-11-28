@@ -91,9 +91,9 @@ conn.leaveGroup(option).then(res => console.log(res))
 
 #### 群成员被移出群组
 
-仅群主和群管理员可以调用 `removeGroupMember` 方法将指定成员移出群组。被踢出群组后，被踢群成员将会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 监听事件。被移出群组后，该用户还可以再次加入群组。
+仅群主和群管理员可以调用 `removeGroupMember` 或 `removeGroupMembers` 方法将指定的单个成员或多个成员移出群组。被踢出群组后，被踢群成员会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 监听事件。被移出群组后，用户还可以再次加入群组。
 
-示例代码如下：
+- 移出单个群成员，示例代码如下：
 
 ```javascript
 let option = {
@@ -101,6 +101,12 @@ let option = {
     username: "username"
 };
 conn.removeGroupMember(option).then(res => console.log(res))
+```
+
+- 批量移出群成员，示例代码如下：
+
+```javascript
+connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 ```
 
 ### 管理群成员自定义属性

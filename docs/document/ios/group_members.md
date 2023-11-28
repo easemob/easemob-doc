@@ -166,15 +166,15 @@ do {
 
 #### 群成员被移出群组
 
-仅群主和群管理员可以调用 `removeMembers` 方法将指定成员移出群组。被踢出群组后，被踢群成员将会收到群组事件回调 `EMGroupManagerDelegate#didLeaveGroup`，其他成员将会收到回调 `EMGroupManagerDelegate#userDidLeaveGroup`。被移出群组后，该用户还可以再次加入群组。
+仅群主和群管理员可以调用 `removeMembers` 方法将单个或多个成员移出群组。被踢出群组后，被踢群成员将会收到群组事件回调 `EMGroupManagerDelegate#didLeaveGroup`，其他成员将会收到回调 `EMGroupManagerDelegate#userDidLeaveGroup`。被移出群组后，该用户还可以再次加入群组。
 
 示例代码如下：
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient].groupManager removeMembers:@{@"member"}
-                         fromGroup:@"groupsID"
-                         completion:nil];
+ [EMClient.sharedClient.groupManager removeMembers:@[@"member1",@"member2"] fromGroup:@"groupId" completion:^(EMGroup * _Nullable aGroup, EMError * _Nullable aError) {
+            
+    }];
 ```
 
 ### 管理群成员的自定义属性

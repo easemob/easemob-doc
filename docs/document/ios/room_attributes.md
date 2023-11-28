@@ -12,8 +12,8 @@
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
-- 设置聊天室自定义属性；
-- 删除聊天室自定义属性。
+- 设置和强制设置聊天室自定义属性；
+- 删除和强制删除聊天室自定义属性。
 
 ## 前提条件
 
@@ -121,7 +121,9 @@ EMError *error = nil;
                 }];
 ```
 
-若要覆盖其他聊天室成员设置的自定义属性，需调用 `setChatroomAttributesForced` 方法。设置成功后，其他聊天室成员收到 `EMChatRoomManagerDelegate` 中的 `chatroomAttributesDidUpdated` 回调。
+#### 强制设置单个聊天室属性
+
+如果除了设置自己的单个自定义属性还需覆盖其他聊天室成员设置的该属性，需调用 `setChatroomAttributesForced` 方法。设置成功后，其他聊天室成员收到 `EMChatRoomManagerDelegate` 中的 `chatroomAttributesDidUpdated` 回调。
 
 示例代码如下：
 
@@ -145,7 +147,9 @@ EMError *error = nil;
                 }];
 ```
 
-若要覆盖其他聊天室成员设置的自定义属性，需调用 `setChatroomAttributesForced` 方法。设置成功后，其他聊天室成员收到 `EMChatRoomManagerDelegate` 中的 `chatroomAttributesDidUpdated` 回调。
+#### 强制设置多个聊天室属性
+
+如果除了设置自己的多个自定义属性还需覆盖其他聊天室成员设置的这些属性，需调用 `setChatroomAttributesForced` 方法。设置成功后，其他聊天室成员收到 `EMChatRoomManagerDelegate` 中的 `chatroomAttributesDidUpdated` 回调。
 
 示例代码如下：
 
@@ -168,7 +172,9 @@ EMError *error = nil;
                 }];
 ```
 
-若要删除其他聊天室成员设置的自定义属性，需调用 `removeChatroomAttributesForced` 方法。删除后聊天室其他成员收到 `EMChatRoomManagerDelegate` 中 `chatroomAttributesDidRemoved` 回调。
+#### 强制删除单个聊天室自定义属性
+
+如果除了删除自己设置的单个自定义属性还需删除其他聊天室成员设置的该属性，需调用 `removeChatroomAttributesForced` 方法。删除后聊天室其他成员收到 `EMChatRoomManagerDelegate` 中 `chatroomAttributesDidRemoved` 回调。
 
 示例代码如下：
 
@@ -192,7 +198,9 @@ EMError *error = nil;
                 }];
 ```
 
-若要删除其他聊天室成员设置的自定义属性，需调用 `removeChatroomAttributesForced` 方法。删除后，聊天室其他成员收到 `EMChatRoomManagerDelegate` 中 `chatroomAttributesDidRemoved` 回调。
+#### 强制删除多个聊天室自定义属性
+
+如果除了删除自己设置的多个自定义属性还需删除其他聊天室成员设置的这些属性，需调用 `removeChatroomAttributesForced` 方法。删除后，聊天室其他成员收到 `EMChatRoomManagerDelegate` 中 `chatroomAttributesDidRemoved` 回调。
 
 示例代码如下：
 

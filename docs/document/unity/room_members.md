@@ -55,10 +55,16 @@ SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, callba
 示例代码如下：
 
 ```csharp
+List<string> members = new List<string>();
+members.Add("member1");
+members.Add("member2");
+
 SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
+        Console.WriteLine($"DeleteRoomMembers success.");
     },
     onError: (code, desc) => {
+        Console.WriteLine($"DeleteRoomMembers failed, code:{code}, desc:{desc}");
     }
 ));
 ```

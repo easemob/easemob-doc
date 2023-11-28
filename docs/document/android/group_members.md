@@ -148,14 +148,31 @@ EMClient.getInstance().groupManager().leaveGroup(groupId);
 
 #### 群成员被移出群组
 
-仅群主和群管理员可以调用 `removeUserFromGroup` 方法将指定成员移出群组。被踢出群组后，被踢成员将会收到群组事件回调 `EMGroupChangeListener#onUserRemoved`，其他成员将会收到回调 `EMGroupChangeListener#onMemberExited`。被移出群组后，该用户还可以再次加入群组。
+仅群主和群管理员可以调用 `removeUserFromGroup` 或 `asyncRemoveUsersFromGroup` 方法将单个或多个成员移出群组。被踢出群组后，被踢成员将会收到群组事件回调 `EMGroupChangeListener#onUserRemoved`，其他成员将会收到回调 `EMGroupChangeListener#onMemberExited`。被移出群组后，用户还可以再次加入群组。
 
-示例代码如下：
+- 移出单个群成员，示例代码如下：
 
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncRemoveUserFromGroup(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
+```
+
+- 批量移出群成员，示例代码如下：
+
+```java
+// 异步方法。
+EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userList, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                
+            }
+
+            @Override
+            public void onError(int code, String error) {
+
+            }
+        });
 ```
 
 ### 管理群成员的自定义属性
