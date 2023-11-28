@@ -24,14 +24,14 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.7.5</version>
+    <version>0.7.9</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:0.7.3'
+implementation 'com.easemob.im:im-sdk-core:0.7.9'
 ```
 
 ### 使用
@@ -234,6 +234,28 @@ EMProperties properties = EMProperties.builder()
 ```
 
 ## 更新日志
+
+### V0.7.9 2023-11-28
+
+增加查看指定用户是否已加入群组的功能。
+
+以上更新内容请到 GroupApi 中查看。
+
+### V0.7.8 2023-11-03
+
+增加指定群主用户发送消息的功能。
+
+以上更新内容请到 MessageApi 中查看。
+
+### V0.7.7 2023-10-18
+
+修复下载历史消息文件失败的问题。
+
+### V0.7.6 2023-08-30
+
+增加获取多个聊天室详情的功能。
+
+以上更新内容请到 RoomApi 中查看。
 
 ### V0.7.5 2023-08-24
 
