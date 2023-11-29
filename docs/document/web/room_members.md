@@ -57,7 +57,7 @@ conn.leaveChatRoom(option).then(res => console.log(res))
 
 #### 成员被移出聊天室
 
-仅聊天室所有者和聊天室管理员可以调用 `removeChatRoomMember` 方法将指定成员移出聊天室。被踢出聊天室后，被踢成员会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 事件。被移出聊天室后，该用户还可以再次加入聊天室。
+仅聊天室所有者和聊天室管理员可以调用 `removeChatRoomMember` 方法将指定的单个成员移出聊天室。被踢出聊天室后，被踢成员会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 事件。被移出聊天室后，该用户还可以再次加入聊天室。
 
 示例代码如下：
 
