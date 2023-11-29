@@ -4,7 +4,7 @@
 
 单聊会话支持消息送达回执、会话已读回执和消息已读回执，发送方发送消息后可及时了解接收方是否及时收到并阅读了信息，也可以了解整个会话是否已读。
 
-群聊会话只支持消息已读回执。群主和群管理员在发送消息时，可以设置该消息是否需要已读回执。仅旗舰版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
+群聊会话只支持消息已读回执。群主和群管理员在发送消息时，可以设置该消息是否需要已读回执。仅专业版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
 
 本文介绍如何使用环信即时通讯 IM Android SDK 实现单聊和群聊的消息回执功能。
 
@@ -41,7 +41,7 @@
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 群消息已读回执功能仅在环信 IM 旗舰版及以上版本支持该功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
+- 群消息已读回执功能仅在环信 IM 专业版及以上版本支持该功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
 
 ## 实现方法
 
@@ -90,7 +90,6 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 Options.setRequireAck = true;
 ```
 
-
 ##### 会话已读回执
 
  参考以下步骤在单聊中实现会话已读回执。
@@ -124,6 +123,8 @@ EMClient.getInstance().chatManager().addConversationListener(new EMConversationL
 > 同一用户 ID 登录多设备的情况下，用户在一台设备上发送会话已读回执，服务器会将会话的未读消息数置为 `0`，同时其他设备会收到 `OnConversationRead` 回调。
 
 ##### 消息已读回执
+
+单聊消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。关于消息在服务端的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。 
 
 参考如下步骤在单聊中实现消息已读回执。
 
@@ -200,7 +201,9 @@ EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() 
 
 对于群聊，群主和群管理员发送消息时，可以设置该消息是否需要已读回执。若需要，每个群成员在阅读消息后，SDK 均会发送已读回执，即阅读该消息的群成员数量即为已读回执的数量。
 
-仅旗舰版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
+群聊已读回执的有效期为 3 天，即群组中的消息发送时间超过 3 天，服务器不记录阅读该条消息的群组成员，也不会发送已读回执。
+
+仅专业版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
 
 1. 群主或群管理员发送消息时若需已读回执，需设置 `EMMessage` 的方法 `setIsNeedGroupAck()` 为 `YES`。
 

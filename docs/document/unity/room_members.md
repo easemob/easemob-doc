@@ -46,7 +46,7 @@ SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, callba
 
 ### 将成员移出聊天室
 
-仅聊天室所有者和管理员可调用 `DeleteRoomMembers` 方法将指定成员移出聊天室。
+仅聊天室所有者和管理员可调用 `DeleteRoomMembers` 方法将单个或多个成员移出聊天室。
 
 被移出后，该成员收到 `OnRemovedFromRoom` 回调，其他成员收到 `OnMemberExitedFromRoom` 回调。
 
