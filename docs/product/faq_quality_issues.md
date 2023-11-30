@@ -80,7 +80,7 @@
 
 ### 如何判断用户是否在线
 
-在使用环信即时通讯 IM 基础聊天业务的场景下，处理特定业务需求时需知晓某些用户是否在线。为此，环信即时通讯 IM 提供单个用户以及批量用户是否在线状态的查询，详见 [用户在线状态回调](/document/server-side/user_status_callback.html)。
+在使用环信即时通讯 IM 基础聊天业务的场景下，处理特定业务需求时需知晓某些用户是否在线。为此，环信即时通讯 IM 提供单个用户以及批量用户是否在线状态的查询，详见 [用户在线状态回调](/document/server-side/callback_configurations.html#用户登入登出)。
 
 除此之外，可以在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 上查询用户连接状态，具体操作如下：
 
