@@ -350,8 +350,6 @@ payload 中字段含义：
 
 ### 群组和聊天室操作
 
-注意：目前 muc:create 仅在开通多设备服务后，才支持回调。
-
 | 事件                       | payload 中类型                         | 群聊触发事件                                   | 聊天室触发事件         |
 | :------------------------- | :------------------------------------- | :--------------------------------------------- | :--------------------- |
 | muc                        | -                                      | 群聊操作所有事件                               | 聊天室操作所有事件     |
@@ -363,8 +361,8 @@ payload 中字段含义：
 | muc:invite_accept          | {“operation”:“invite_accept”}          | 受邀用户同意入群                               | 不支持                 |
 | muc:invite_decline         | {“operation”:“invite_decline”}         | 受邀用户拒绝入群                               | 不支持                 |
 | muc:kick                   | {“operation”:“kick”}                   | 踢出群                                         | 踢出聊天室             |
-| muc:ban                    | {“operation”:“ban”}                    | 封禁群成员，即管理员将用户添加到群组黑名单     | 不支持                 |
-| muc:allow                  | {“operation”:“allow”}                  | 解除群成员封禁，即管理员将用户添加到群组黑名单 | 不支持                 |
+| muc:ban                    | {“operation”:“ban”}                    | 将用户添加到群组黑名单     | 不支持                 |
+| muc:allow                  | {“operation”:“allow”}                  | 将用户移出群组黑名单  | 不支持                 |
 | muc:update                 | {“operation”:“update”}                 | 群信息修改                                     | 聊天室信息修改         |
 | muc:block                  | {“operation”:“block”}                  | 用户屏蔽群                                     | 不支持                 |
 | muc:unblock                | {“operation”:“unblock”}                | 用户解除屏蔽群                                 | 不支持                 |
@@ -786,7 +784,7 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
-封禁群成员（将群成员添加到黑名单）回调请求示例：
+将群成员添加到黑名单的回调请求示例：
 
 ```json
 { 
