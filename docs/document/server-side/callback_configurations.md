@@ -350,8 +350,6 @@ payload 中字段含义：
 
 ### 群组和聊天室操作
 
-注意：目前 muc:create 仅在开通多设备服务后，才支持回调。
-
 | 事件                       | payload 中类型                         | 群聊触发事件                                   | 聊天室触发事件         |
 | :------------------------- | :------------------------------------- | :--------------------------------------------- | :--------------------- |
 | muc                        | -                                      | 群聊操作所有事件                               | 聊天室操作所有事件     |
@@ -363,8 +361,8 @@ payload 中字段含义：
 | muc:invite_accept          | {“operation”:“invite_accept”}          | 受邀用户同意入群                               | 不支持                 |
 | muc:invite_decline         | {“operation”:“invite_decline”}         | 受邀用户拒绝入群                               | 不支持                 |
 | muc:kick                   | {“operation”:“kick”}                   | 踢出群                                         | 踢出聊天室             |
-| muc:ban                    | {“operation”:“ban”}                    | 封禁群成员，即管理员将用户添加到群组黑名单     | 不支持                 |
-| muc:allow                  | {“operation”:“allow”}                  | 解除群成员封禁，即管理员将用户添加到群组黑名单 | 不支持                 |
+| muc:ban                    | {“operation”:“ban”}                    | 将用户添加到群组黑名单     | 不支持                 |
+| muc:allow                  | {“operation”:“allow”}                  | 将用户移出群组黑名单  | 不支持                 |
 | muc:update                 | {“operation”:“update”}                 | 群信息修改                                     | 聊天室信息修改         |
 | muc:block                  | {“operation”:“block”}                  | 用户屏蔽群                                     | 不支持                 |
 | muc:unblock                | {“operation”:“unblock”}                | 用户解除屏蔽群                                 | 不支持                 |
@@ -386,21 +384,21 @@ payload 中字段含义：
 | muc:ban_group              | {“operation”:“ban_group”}              | 群全局禁言                                     | 聊天室全局禁言         |
 | muc:remove_ban_group       | {“operation”:“remove_ban_group”}       | 解除群全局禁言                                 | 解除聊天室全局禁言     |
 
-#### 创建群组或聊天室
+#### 创建群组
 
 payload 字段含义：
 
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
-| `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
+| `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群组 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
 | `is_chatroom` | Bool     | 是否是聊天室。<br> - `true`：是；<br> - `false`：否。             |
-| `operation`   | String   | `create` 创建群聊或聊天室。                                  |
+| `operation`   | String   | `create` 创建群组。                                  |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
-| `description` | String   | 创建群聊或聊天室失败的原因描述。                             |
+| `description` | String   | 创建群组失败的原因描述。                             |
 | `error_code`  | String   | 创建失败对应的错误码。                                       |
 
-创建群聊回调请求示例：
+创建群组回调请求示例：
 
 ```json
 { 
@@ -438,7 +436,7 @@ payload 字段含义：
 | `reason`      | String   | /                                                            |
 | `operation`   | String   | `destroy` 删除群/聊天室。                                    |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
-| `description` | String   | 删除群聊或聊天室失败的原因描述。                             |
+| `description` | String   | 删除群组或聊天室失败的原因描述。                             |
 | `error_code`  | String   | 操作失败对应的错误码。                                       |
 
 删除群聊回调请求示例：
@@ -502,12 +500,12 @@ payload 字段含义：
 
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
-| `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
+| `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群组 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `apply`：申请加入群。                                        |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
-| `description` | String   | 申请加入群聊或聊天室失败的原因描述。                         |
+| `description` | String   | 申请加入群组失败的原因描述。                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
 回调请求示例：
@@ -590,7 +588,7 @@ payload 字段含义：
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `invite`：邀请新成员加入群。                                 |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
-| `description` | String   | 邀请新用户加入群聊失败的原因描述。                           |
+| `description` | String   | 邀请新用户加入群组失败的原因描述。                           |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
 回调请求示例：
@@ -713,7 +711,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
-| `operation`   | String   | `kick`：将成员踢出群聊或聊天室。                             |
+| `operation`   | String   | `kick`：将成员踢出群组或聊天室。                             |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
@@ -772,7 +770,7 @@ payload 字段含义：
 }
 ```
 
-#### 添加成员至黑名单
+#### 添加成员至群组黑名单
 
 payload 字段含义：
 
@@ -786,7 +784,7 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
-封禁群成员（将群成员添加到黑名单）回调请求示例：
+封禁群成员，即将群成员添加到黑名单的回调请求示例：
 
 ```json
 { 
@@ -814,7 +812,7 @@ payload 字段含义：
 }
 ```
 
-#### 将成员从黑名单中移除
+#### 将成员从群组黑名单中移除
 
 payload 字段含义：
 
@@ -924,7 +922,7 @@ payload 字段含义：
 }
 ```
 
-#### 屏蔽群组或聊天室消息
+#### 屏蔽群组
 
 payload 字段含义：
 
@@ -966,7 +964,7 @@ payload 字段含义：
 }
 ```
 
-#### 取消屏蔽群组或聊天室消息
+#### 解除屏蔽群组
 
 payload 字段含义：
 
@@ -975,7 +973,7 @@ payload 字段含义：
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
-| `operation`   | String   | `unblock`：用户屏蔽群/聊天室。                               |
+| `operation`   | String   | `unblock`：用户解除屏蔽群组。                               |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |

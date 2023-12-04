@@ -24,20 +24,24 @@
 审核结果回调的示例代码如下所示：
 
 ```json
-{
-"callId": "100220419126072#demo_54ae7e93-xxxx-xxxx-92f5-323e33187243",
-"moderationResult": "PASS",
-"providerResult": "PASS",
-"security": "1f4857f120b2789b7d0abcd372c4f9e8", 
-"messageType": "txt", 
-"messageId": "1F4MX6iSdI7VFnN7Hm0vrcr3Uwr",
-"targetType": "chat", 
-"appkey": "100220419126072#lydemo", 
-"source": {
-
-},
-"eventType": "moderation", 
-"timestamp": 1668766253245
+ {
+    "callId": "100220419126072#demo_54ae7e93-xxxx-xxxx-92f5-323e33187243",
+    "moderationResult": "PASS",
+    "providerResult": "PASS",
+    "security": "1f4857f120b2789b7d0abcd372c4f9e8", 
+    "messageType": "txt", 
+    "messageId": "1F4MX6iSdI7VFnN7Hm0vrcr3Uwr",
+    "targetType": "chat", 
+    "appkey": "100220419126072#lydemo", 
+    "source": {
+       
+    },
+    "eventType": "moderation", 
+    "from": "qa2",
+    "to": "qa1",
+    "url": "",
+    "msg": "你好",
+    "timestamp": 1668766253245
 }
 ```
 
@@ -52,4 +56,8 @@
 | targetType       | String | 会话类型。<br/> - `chat`：单聊；<br/> - `groupchat`：群聊；<br/> - `chatroom`：聊天室。  |
 | appkey       | String | 你的 App Key。   |
 | eventType       | String | 事件类型，审核服务为 `moderation`。|
+| from      | String | 消息发送方。   |
+| to      | String | 消息接收方：<br/> - 单聊为对端用户 ID；<br/> - 群聊时为群组 ID；<br/> - 聊天室聊天为聊天室 ID。  |
+| msg      | String | 文本消息的内容。该参数仅在 `messageType` 为 `txt` 时存在。|
+| url      | String | 音频消息、视频消息、图片消息中附件 URL。该参数仅在 `messageType` 为 `img`、`audio` 或 `video` 时存在。 |
 | timestamp       | Long | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。   |

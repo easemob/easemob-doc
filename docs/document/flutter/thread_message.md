@@ -47,13 +47,14 @@
 
 ```dart
 // `chatThreadId` 为子区 ID
+
 EMMessage msg = EMMessage.createTxtSendMessage(
-  chatThreadId: threadId,
+  targetId: threadId,
   content: content,
+  // `chatType` 设置为 `GroupChat`，即群聊
+  chatType: ChatType.GroupChat,
 );
-// `chatType` 设置为 `GroupChat`，即群聊
-msg.chatType = ChatType.GroupChat;
-// isChatThreadMessage: 是否是子区消息，这里设置为 `true`，即是子区消息
+// isChatThreadMessage: 是否是子区消息，这里设置为 `true`，即是子区消息。
 msg.isChatThreadMessage = true;
 EMClient.getInstance.chatManager.sendMessage(msg);
 ```
@@ -160,8 +161,8 @@ try {
   String threadId = "threadId";
   // 会话类型，即群聊 `GroupChat`。
   EMConversationType convType = EMConversationType.GroupChat;
-  EMConversation? conversation = await EMClient.getInstance.chatManager
-      .getConversation(threadId, type: convType);
+  EMConversation? converrsation =
+        await EMClient.getInstance.chatManager.getThreadConversation(threadId);
   // 搜索的起始消息 ID。
   String startMsgId = "startMsgId";
   // 每页期望获取的消息数量。
