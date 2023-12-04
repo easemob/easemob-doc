@@ -54,7 +54,7 @@ EMMessage msg = EMMessage.createTxtSendMessage(
   // `chatType` 设置为 `GroupChat`，即群聊
   chatType: ChatType.GroupChat,
 );
-// isChatThreadMessage: 是否是子区消息，这里设置为 `true`，即是子区消息
+// isChatThreadMessage: 是否是子区消息，这里设置为 `true`，即是子区消息。
 msg.isChatThreadMessage = true;
 EMClient.getInstance.chatManager.sendMessage(msg);
 ```
