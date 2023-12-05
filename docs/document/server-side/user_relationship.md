@@ -220,6 +220,79 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 }
 ```
 
+## 设置好友备注
+
+你可以调用该接口设置你在当前 app 下的好友的备注，即你和要设置备注的好友需在同一个 App Key 下。
+
+对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 100，不同服务套餐包的 App Key 的该数量上限不同，详见[套餐包功能详情](/product/pricing.html#套餐包功能详情)。
+
+### HTTP 请求
+
+```http
+PUT https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username}
+```
+
+#### 路径参数
+
+| 参数              | 类型   | 是否必需 | 描述           |
+| :---------------- | :----- | :------- |:-------------|
+| `owner_username`  | String | 是       | 当前用户的用户 ID。  |
+| `friend_username` | String | 是       | 要设置备注的用户 ID。 |
+
+其他参数及描述详见 [公共参数](#公共参数)。
+
+#### 请求 header
+
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述     |
+| :-------------- | :----- | :--------------------------------------- | :------------------------ |
+| `Content-Type`  | String | 是 | 内容类型。请填 `application/json`。    |
+| `Accept`        | String | 是 | 内容类型。请填 `application/json`。  |
+| `Authorization` | String | 是 | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段                 | 类型     | 描述                                    |
+| :------------------- |:-------|:--------------------------------------|
+| `action`           | String | 请求方法。                                 |
+| `status`      | String | 好友备注是否设置成功，`ok` 表示设置成功。                         |
+| `timestamp`   | Long   | HTTP 响应的 UNIX 时间戳，单位为毫秒。                         |
+| `uri`  | Long   | 请求 URL。 |
+
+其他字段及描述详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl -X PUT 'https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username}' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+  "remark": <remark>
+}'
+```
+
+#### 响应示例
+
+```json
+{
+  "action": "put",
+  "duration": 22,
+  "status": "ok",
+  "timestamp": 1700633088329,
+  "uri": "https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username}"
+}
+```
+
 ## 获取好友列表
 
 获取指定用户的好友列表。
