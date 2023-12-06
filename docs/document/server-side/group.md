@@ -3759,7 +3759,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread/1XXXX7/users -d '{
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/threads/{thread_id}/users
+DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 ```
 
 ##### 路径参数
