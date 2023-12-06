@@ -2139,6 +2139,38 @@ payload 示例：
     }
 ```
 
+#### 拉黑好友
+
+payload 字段含义：
+
+| 字段         | 数据类型 | 含义                   |
+| :----------- | :------- | :--------------------- |
+| `operation`  | String   | `ban`：拉黑好友。      |
+| `status`     | object   | 包含 `error_code`。    |
+| `error_code` | String   | 操作失败对应的错误码。 |
+
+payload 示例：
+
+```json
+{
+    "chat_type":"roster",
+    "callId":"XXXX#XXXX_966725184268539960",
+    "security":"00f070116668034ddecf3fb7db92087c",
+    "payload":{
+        "operation":"ban",
+        "status":{
+            "error_code":"ok"
+            }
+        },
+    "host":"XXXX",
+    "appkey":"XXXX#XXXX",
+    "from":"XXXX#XXXX",
+    "to":"tst",
+    "eventType":"chat",
+    "msg_id":"9XXXX0",
+    "timestamp":1642648046912
+}
+```
 
 
 #### 解除拉黑好友
