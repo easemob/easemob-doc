@@ -1057,7 +1057,6 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 | `Accept`          | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization`   | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 | `Content-Type`    | String | 是       | 内容类型。请填 `multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW`。                               |
-| `restrict-access` | Bool   | 否       | 是否仅群成员可见。<br/> - `true`：是。<br/> - `false`：否。                                                          |
 | `file`            | String | 是       | 待上传文件的本地路径。                                                                                               |
 
 #### HTTP 响应
@@ -1086,7 +1085,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -H 'restrict-access: true' -F file=@/Users/test/image/IMG_3.JPG
+curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -F file=@/Users/test/image/IMG_3.JPG
 ```
 
 ##### 响应示例
@@ -1138,18 +1137,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段             | 类型   | 描述                                                       |
-| :--------------- | :----- | :--------------------------------------------------------- |
-| `data.file_url`  | String | 群组共享文件的 URL，在环信即时通讯 IM 服务器上保存的地址。 |
-| `data.group_id`  | String | 群组 ID。                                                  |
-| `data.file_name` | String | 群组共享文件的名称。                                       |
-| `data.created`   | Long   | 上传群组共享文件的时间。                                   |
-| `data.file_id`   | String | 群组共享文件 ID。该参数在删除共享文件时需要提供。          |
-| `data.file_size` | Long   | 群组共享文件大小，单位为字节。                             |
-
-其他字段及描述详见 [公共参数](#公共参数)。
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应体中为上传的文件的内容，例如，上传的文件内容为“Hello world”，响应中返回“Hello world”。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1165,26 +1153,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ##### 响应示例
 
-```json
-{
-  "action": "post",
-  "application": "7fXXXXef",
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files",
-  "entities": [],
-  "data": {
-    "file_url": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files/c6XXXXc0",
-    "group_id": "6XXXX7",
-    "file_name": "img_3.jpg",
-    "created": 1599050554954,
-    "file_id": "c6XXXXc0",
-    "file_size": 13512
-  },
-  "timestamp": 1599050554978,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
+返回上传的文件的内容。例如，上传的文件内容为“Hello world”，响应中返回“Hello world”。
 
 ### 删除群组共享文件
 
