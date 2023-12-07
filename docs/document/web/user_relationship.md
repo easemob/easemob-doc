@@ -109,10 +109,11 @@ conn
 
 #### 获取好友列表
 
-调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+自 4.3.0 版本，你可以调用 `getAllContacts` 或 `getContactsWithCursor` 方法一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+
+- 一次性获取全部好友列表：
 
 ```javascript
-// 一次性获取全部好友列表
 conn
   .getAllContacts()
   .then((res) => {
@@ -121,9 +122,11 @@ conn
   .catch((e) => {
     console.log(e, 'getAllContacts failed');
   });
+```
 
+- 分页获取好友列表：
 
-// 分页获取好友列表
+```javascript
 conn
   .getContactsWithCursor({
     pageSize: 20, // 每页期望获取的联系人数量。取值范围为 [1,50]，默认为 `20`。
@@ -137,7 +140,7 @@ conn
   });
 ```
 
-你可以调用 `getContacts` 方法从服务端获取所有好友的列表，该列表只包含好友的用户 ID。
+此外，你可以调用 `getContacts` 方法从服务端一次性获取好友列表，该列表只包含好友的用户 ID。
 
 ```javascript
 conn.getContacts().then((res) => {

@@ -6,7 +6,10 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[好友备注功能](user_relationship.html#设置好友备注)。
+- [IM SDK] 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
+- [IM SDK] 新增 `asyncFetchAllContactsFromServer` 方法[从服务器一次性或分页获取好友列表](user_relationship.html#获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- [IM SDK] 新增 `fetchContactFromLocal` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从服务端获取好友列表)。
+- [IM SDK] 新增 `asyncFetchAllContactsFromLocal` 方法[从本地分页获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
 - [IM SDK] 新增 `EMMessage#isBroadcast` 属性用于判断通过该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 - [IM SDK] 新增 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。 
 - [IM SDK] 新增[错误码 706](error.html) `CHATROOM_OWNER_NOT_ALLOW_LEAVE`，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#allowChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。
