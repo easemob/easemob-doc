@@ -111,7 +111,7 @@ conn
 
 自 4.3.0 版本，你可以调用 `getAllContacts` 或 `getContactsWithCursor` 方法一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
-- 一次性获取全部好友列表：
+- 一次性获取好友列表：
 
 ```javascript
 conn

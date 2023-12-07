@@ -156,7 +156,7 @@ if (!aError) {
 
 自 4.2.0 版本开始，你可以调用 `getAllContactsFromServerWithCompletion` 或 `getContactsFromServerWithCursor` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
-- 一次性从服务端获取整个好友列表。
+- 一次性获取服务端的好友列表。
 
 ```objectivec
 //一次性从服务端获取整个好友列表
@@ -165,7 +165,7 @@ if (!aError) {
     }];
 ```
 
-- 从服务端分页获取好友列表。
+- 分页获取服务端的好友列表。
 
 ```objectivec
 //pageSize 的取值范围为 [1,50]
@@ -196,13 +196,13 @@ if (!aError) {
 
 自 4.2.0 版本开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
-- 从本地获取单个好友。  
+- 获取本地单个好友。  
 
 ```objectivec
 EMContact* contact = [EMClient.sharedClient.contactManager getContact:@"userId"];
 ```
 
-- 一次性从本地获取整个好友列表。
+- 一次性获取本地好友列表。
 
 ```objectivec
 NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllContacts];
