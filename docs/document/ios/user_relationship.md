@@ -159,7 +159,6 @@ if (!aError) {
 - 一次性获取服务端的好友列表。
 
 ```objectivec
-//一次性从服务端获取整个好友列表
 [EMClient.sharedClient.contactManager getAllContactsFromServerWithCompletion:^(NSArray<EMContact *> * _Nullable aList, EMError * _Nullable aError) {
             
     }];
@@ -177,7 +176,6 @@ if (!aError) {
 此外，你也可以调用 `getContactsFromServerWithCompletion` 方法从服务器获取所有好友的列表。该列表只包含好友的用户 ID。
 
 ```objectivec
-// 从服务器获取好友列表。
 // 异步方法
 [[EMClient sharedClient].contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
     if (!aError) {
