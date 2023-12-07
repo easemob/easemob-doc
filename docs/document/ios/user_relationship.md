@@ -152,14 +152,13 @@ if (!aError) {
 
 你可以从服务器获取好友列表，也可以从本地获取已保存的好友列表。
 
-##### **从服务端获取好友列表**
+#### 从服务端获取好友列表
 
 自 4.2.0 版本开始，你可以调用 `getAllContactsFromServerWithCompletion` 或 `getContactsFromServerWithCursor` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
 - 一次性获取服务端的好友列表。
 
 ```objectivec
-//一次性从服务端获取整个好友列表
 [EMClient.sharedClient.contactManager getAllContactsFromServerWithCompletion:^(NSArray<EMContact *> * _Nullable aList, EMError * _Nullable aError) {
             
     }];
@@ -177,7 +176,6 @@ if (!aError) {
 此外，你也可以调用 `getContactsFromServerWithCompletion` 方法从服务器获取所有好友的列表。该列表只包含好友的用户 ID。
 
 ```objectivec
-// 从服务器获取好友列表。
 // 异步方法
 [[EMClient sharedClient].contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
     if (!aError) {
@@ -188,7 +186,7 @@ if (!aError) {
 }];
 ```
 
-##### **从本地获取好友列表**
+#### 从本地获取好友列表
 
 :::notice
 需要从服务器获取好友列表之后，才能从本地获取到好友列表。
