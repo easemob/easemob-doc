@@ -9,6 +9,7 @@ export const PUSH_SIDEBAR = [
           { text: 'iOS SDK 发布动态', link: 'push_dynamics_ios.html' },
         ]},
         { text: '全球化部署', link: 'push_global_deployment.html' },
+        { text: '接口频率限制', link: 'push_api_call_limitation.html' },
       ]
     },
     {
