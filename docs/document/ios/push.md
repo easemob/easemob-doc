@@ -184,7 +184,7 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 - 设置推送通知，包含设置推送通知方式和免打扰模式。
 - 配置推送翻译和推送模板。
 
-其中，设置推送通知方式、免打扰模式和推送模板为推送的高级功能，使用前需要在[环信即时通讯云控制后台](https://console.easemob.com/user/login)上开通。
+其中，设置推送通知方式、免打扰模式和推送模板为推送的高级功能，使用前需要在 [环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。高级功能激活后，你可以设置推送通知方式、免打扰模式和自定义推送模板。如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。
 
 ![image](@static/images/ios/push/push_ios_27_enable_push.png)
 
