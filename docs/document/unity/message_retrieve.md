@@ -68,7 +68,7 @@ SDKClient.Instance.ChatManager.GetConversationsFromServerWithCursor(pinOnly, cur
 
 ```
 
-此外，你可以调用 `GetConversationsFromServerWithPage` 方法从服务端分页获取会话列表，每个会话包含最新一条历史消息。
+若不支持 `GetConversationsFromServerWithCursor` 方法，你可以调用 `GetConversationsFromServerWithPage` 方法从服务端分页获取会话列表。利用该接口，你总共可获取服务器最近 7 天内存储的 100 个会话。若提升这两个上限，需联系环信商务。
 
 若使用该功能，需将 SDK 升级至 V1.1.0。
 
