@@ -73,7 +73,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增 `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion:` 方法，实现[从服务器拉取会话](message_retrieve.html#从服务器分页获取会话列表)的功能，原接口标记为已废弃。
+- [IM SDK] 新增 `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion:` 方法，实现[从服务器拉取会话](message_retrieve.html#从服务器分页获取会话列表)的功能，原接口 `getConversationsFromServer` 和 `getConversationsFromServerByPage:pageSize:completion:` 标记为已废弃。
 - [IM SDK] 新增置顶服务器会话的功能：
     - 新增 `IEMChatManager#pinConversation:completionBlock:` 方法，实现[置顶或取消置顶服务器会话](message_retrieve.html#置顶会话)：
     - 新增 `IEMChatManager#getPinnedConversationsFromServerWithCursor:pageSize:completion` 方法，实现[获取置顶的服务器会话](message_retrieve.html#获取服务端的置顶会话列表)。
