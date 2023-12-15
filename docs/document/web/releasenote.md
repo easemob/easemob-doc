@@ -2,6 +2,21 @@
 
 <Toc />
 
+## 版本 V4.3.1 Dev 2023-12-13（开发版）
+
+### 新增特性
+
+- [IM SDK] [发送消息方法 `Send`](message_send_receive.html#发送文本消息) 的成功回调参数 `SendMsgResult` 中新增 `message` 字段，用于返回成功发送的消息对象。
+- [IM SDK] MiniCore SDK 增加 logger 实例。
+
+### 优化
+
+- [IM SDK] 优化部分机型断网后 SDK 重连慢的问题。
+
+### 修复
+
+- [IM SDK] 修复 `isInGroupMutelist` API 调用时出现 404 的问题。
+
 ## 版本 V4.3.0 Dev 2023-11-17（开发版）
 
 ### 新增特性
