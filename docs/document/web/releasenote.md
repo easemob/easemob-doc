@@ -6,7 +6,7 @@
 
 ### 新增特性
 
-- [IM SDK] 发送消息方法 `Send` 的成功回调参数 `SendMsgResult` 中新增 `message` 字段，用于返回成功发送的消息对象。
+- [IM SDK] [发送消息方法 `Send`](message_send_receive.html#发送文本消息) 的成功回调参数 `SendMsgResult` 中新增 `message` 字段，用于返回成功发送的消息对象。
 - [IM SDK] MiniCore SDK 增加 logger 实例。
 
 ### 优化
