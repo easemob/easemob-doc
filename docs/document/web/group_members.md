@@ -366,7 +366,7 @@ conn.getGroupBlocklist(option).then(res => console.log(res))
 let option = {
     groupId: "groupId",
     username: "user1" || ["user1", "user2"],
-    muteDuration: 886400000 // 禁言时长，单位为毫秒。
+    muteDuration: 886400000 // 禁言时长，单位为毫秒，传 -1 表示永久禁言。
 };
 conn.muteGroupMember(option).then(res => console.log(res))
 ```
@@ -400,7 +400,9 @@ conn.getGroupMutelist(option).then(res => console.log(res))
 
 #### 开启群组全员禁言
 
-仅群主和群管理员可以调用 `disableSendGroupMsg` 方法开启群组全员禁言。群组全员开启禁言后，群成员将会收到 `muteAllMembers` 事件，除群组白名单中的成员，其他成员将不能发言。
+仅群主和群管理员可以调用 `disableSendGroupMsg` 方法开启群组全员禁言。全员禁言开启后不会在一段时间内自动取消禁言，需要调用 `enableSendGroupMsg` 方法取消全员禁言。
+
+群组全员开启禁言后，群成员将会收到 `muteAllMembers` 事件，除群组白名单中的成员，其他成员将不能发言。
 
 示例代码如下：
 

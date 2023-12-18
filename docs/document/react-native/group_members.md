@@ -423,7 +423,7 @@ ChatClient.getInstance()
 ```typescript
 // groupId：群组 ID
 // members：将要被禁言的成员列表
-// duration：禁言时间
+// duration：禁言时间。若传 -1，表示永久禁言。
 ChatClient.getInstance()
   .groupManager.muteMembers(groupId, members, duration)
   .then(() => {
@@ -477,7 +477,9 @@ ChatClient.getInstance()
 
 #### 开启全员禁言
 
-仅群主和群管理员可以调用 `muteAllMembers` 方法开启全员禁言。群组全员禁言开启后，所有成员收到 `ChatGroupEventListener#onAllGroupMemberMuteStateChanged` 回调，除了在白名单中的群成员，其他成员不能发言。
+仅群主和群管理员可以调用 `muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unMuteAllMembers` 方法解除全员禁言。
+
+群组全员禁言开启后，所有成员收到 `ChatGroupEventListener#onAllGroupMemberMuteStateChanged` 回调，除了在白名单中的群成员，其他成员不能发言。
 
 示例代码如下：
 

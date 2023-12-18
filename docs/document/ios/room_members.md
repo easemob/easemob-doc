@@ -165,6 +165,7 @@ EMError *error = nil;
 
 ```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager muteMembers:muteMilliseconds:fromChatroom:completion]
+// `muteMilliseconds`：禁言时间。传 -1 表示永久禁言。
 EMError *error = nil;
 [[EMClient sharedClient].roomManager muteMembers:@[@"userName"] muteMilliseconds:-1 fromChatroom:@"chatroomId" error:&error];
 ```
@@ -203,7 +204,9 @@ NSArray<NSString *> * muteMembers = [[EMClient sharedClient].roomManager getChat
 
 #### 开启聊天室全员禁言
 
-仅聊天室所有者和管理员可以调用 `muteAllMembersFromChatroom` 方法开启全员禁言。全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `chatroomMuteListDidUpdate: addedMutedMembers: muteExpire` 回调。
+仅聊天室所有者和管理员可以调用 `muteAllMembersFromChatroom` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unmuteAllMembersFromChatroom` 方法解除全员禁言。
+
+全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `chatroomMuteListDidUpdate: addedMutedMembers: muteExpire` 回调。
 
 示例代码如下：
 

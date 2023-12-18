@@ -243,6 +243,7 @@ SDKClient.Instance.GroupManager.GetGroupBlockListFromServer(groupId, pageNum, pa
 示例代码如下：
 
 ```csharp
+// muteMilliseconds：禁言时间。若传 -1，表示永久禁言。
 SDKClient.Instance.GroupManager.MuteGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -290,7 +291,9 @@ SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: ne
 
 #### 开启群组全员禁言
 
-仅群主和群管理员可以调用 `MuteGroupAllMembers` 方法开启全员禁言。群组全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。
+仅群主和群管理员可以调用 `MuteGroupAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动取消禁言，需要调用 `UnMuteGroupAllMembers` 方法取消全员禁言。
+
+群组全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。
 
 示例代码如下：
 

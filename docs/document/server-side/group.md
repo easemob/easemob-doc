@@ -2970,8 +2970,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 | 字段          | 类型 | 描述                                                            |
 | :------------ | :--- | :-------------------------------------------------------------- |
-| `data.result` | Bool | 操作结果：<br/> - `true`：禁言成功；<br/> - `false`：禁言失败。 |
-| `data.expire` | Long | 禁言到期的时间。该时间为 Unix 时间戳，单位为毫秒。              |
+| `data.mute` | Bool | 操作结果：<br/> - `true`：禁言成功；<br/> - `false`：禁言失败。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 

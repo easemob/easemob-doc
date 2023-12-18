@@ -986,7 +986,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/resources
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl --location 'http://XXXX/XXXX/XXXX/users/XXXX/resources' \
 -H 'Accept: application/json' \
--H 'Authorization: Bearer  <YourAppToken>'
+-H 'Authorization: Bearer <YourAppToken>'
 ```
 
 #### 响应示例

@@ -138,7 +138,7 @@ do {
 
    ```objective-c
    [[EMClient sharedClient].groupManager acceptInvitationFromGroup:@"groupId" inviter:@"userId" completion:^(EMGroup *aGroup, EMError *aError) {
-   };
+   }];
    ```
 
    - 受邀人拒绝入群组，需要调用 `declineGroupInvitation` 方法。
@@ -390,6 +390,7 @@ do {
 
 ```objectivec
 // 异步方法
+// `muteMilliseconds`：禁言时间。传 -1 表示永久禁言。
 [[EMClient sharedClient].groupManager muteMembers:members
                          muteMilliseconds:60
                          fromGroup:@"groupID"
@@ -425,7 +426,7 @@ do {
 
 #### 开启群组全员禁言
 
-仅群主和群管理员可以调用 `muteAllMembersFromGroup` 方法开启全员禁言。
+仅群主和群管理员可以调用 `muteAllMembersFromGroup` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unmuteAllMembersFromGroup` 方法解除全员禁言。
 
 群主和群管理员开启群组全员禁言后，除了白名单中的群成员，其他成员将不能发言。开启群组全员禁言后，群成员会收到群组事件回调 `EMGroupManagerDelegate#groupAllMemberMuteChanged`。
 

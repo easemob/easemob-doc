@@ -206,6 +206,7 @@ ChatClient.getInstance()
 示例代码如下：
 
 ```typescript
+// duration：禁言时间。若传 -1，表示永久禁言。
 ChatClient.getInstance()
   .roomManager.muteChatRoomMembers(roomId, muteMembers, duration)
   .then(() => {
@@ -260,7 +261,9 @@ ChatClient.getInstance()
 
 #### 开启聊天室全员禁言
 
-仅聊天室所有者和管理员可以调用 `muteAllChatRoomMembers`方法开启全员禁言。全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `onAllChatRoomMemberMuteStateChanged` 回调。
+仅聊天室所有者和管理员可以调用 `muteAllChatRoomMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unMuteAllChatRoomMembers` 方法解除全员禁言。
+
+全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `onAllChatRoomMemberMuteStateChanged` 回调。
 
 示例代码如下：
 
