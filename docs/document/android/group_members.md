@@ -401,7 +401,7 @@ EMClient.getInstance().groupManager().getBlockedUsers(groupId);
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncMuteGroupMembers(String, List, long, EMValueCallBack)。
-// 若对 `duration` 传 -1，表示永久禁言。
+// `duration`：禁言时间。传 -1 表示永久禁言。
 EMClient.getInstance().groupManager().muteGroupMembers(groupId, muteMembers, duration);
 ```
 
@@ -431,10 +431,10 @@ EMClient.getInstance().groupManager().fetchGroupMuteList(String groupId, int pag
 
 #### 开启群组全员禁言
 
-仅群主和群管理员可以调用 `muteAllMembers` 方法开启全员禁言。
+仅群主和群管理员可以调用 `muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unmuteAllMembers` 方法解除全员禁言。
 
-群主和群管理员开启群组全员禁言后，除了在白名单中的群成员，其他成员将不能发言。开启群组全员禁言后，群成员将会收到群组事件回调 `EMGroupChangeListener#onAllMemberMuteStateChanged`。
-
+开启群组全员禁言后，除了在白名单中的群成员，其他成员将不能发言。开启群组全员禁言后，群成员将会收到群组事件回调 `EMGroupChangeListener#onAllMemberMuteStateChanged`。
+ 
 示例代码如下：
 
 ```java

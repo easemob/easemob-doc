@@ -200,6 +200,7 @@ SDKClient.Instance.RoomManager.RemoveAllowListMembers(roomId, list, new CallBack
 示例代码如下：
 
 ```csharp
+// muteMilliseconds：禁言时间。若传 -1，表示永久禁言。
 SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
     },
@@ -210,7 +211,7 @@ SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
 
 #### 将成员移出聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `UnMuteRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，其他成员收到 `OnMuteListRemovedFromRoom` 回调。
+仅聊天室所有者和管理员可以调用 `UnMuteRoomMembers` 方法将成员移出聊天室禁言列表。被移出的群成员及其他未操作的管理员或者群主将会收到群组事件 `OnMuteListRemovedFromRoom`。
 
 :::notice
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。
@@ -221,7 +222,7 @@ SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
 ```csharp
 SDKClient.Instance.RoomManager.UnMuteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
-    },
+    }, 
     onError: (code, desc) => {
     }
 ));
@@ -248,7 +249,9 @@ SDKClient.Instance.RoomManager.FetchRoomMuteList(roomId, pageSize, pageNum, call
 
 #### 开启聊天室全员禁言
 
-仅聊天室所有者和管理员可以调用 `MuteAllRoomMembers` 方法开启全员禁言。全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `OnAllMemberMuteChangedFromChatroom` 回调。
+仅聊天室所有者和管理员可以调用 `MuteAllRoomMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动取消禁言，需要调用 `UnMuteAllRoomMembers` 方法取消全员禁言。
+
+全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `OnAllMemberMuteChangedFromChatroom` 回调。
 
 示例代码如下：
 
