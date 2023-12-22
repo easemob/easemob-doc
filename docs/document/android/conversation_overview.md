@@ -42,7 +42,7 @@
 | getPinnedTime      | 获取会话置顶时间。会话置顶的 UNIX 时间戳，单位为毫秒。未置顶时值为 `0`。        |           
 | insertMessage      | 在本地数据库的会话中插入一条消息。消息的会话 ID 应与会话的 ID 一致。消息会根据消息里的 Unix 时间戳插入本地数据库，SDK 会更新会话的 `latestMessage` 等属性。       |    
 | updateMessage      | 更新本地数据库的指定消息。消息更新后，消息 ID 不会修改，SDK 会自动更新会话的 `latestMessage` 等属性。       |     
-| removeMessagesFromServer(List<String>, EMCallBack)      | 根据消息 ID 删除单向删除漫游消息。       | 
+| `removeMessagesFromServer(List<String>, EMCallBack)`  | 根据消息 ID 单向删除漫游消息。       | 
 | removeMessagesFromServer(long, EMCallBack)      | 根据时间单向删除漫游消息。       |
 | removeMessages      | 从本地数据库中删除指定时间段内的消息。       |
 

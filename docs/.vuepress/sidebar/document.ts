@@ -147,6 +147,19 @@ const documentSidebar = [
     children: [
       { text: '初始化及登录', link: 'initialization.html' },
       {
+        text: '会话管理',
+        collapsible: true,
+        children: [
+          { text: '会话介绍', link: 'conversation_overview.html' },
+          { text: '会话列表', link: 'conversation_list.html' },
+          { text: '本地会话', link: 'conversation_local.html' },
+          { text: '会话未读数', link: 'conversation_unread.html' },
+          { text: '置顶会话', link: 'conversation_pin.html' },
+          { text: '会话标记', link: 'conversation_mark.html'},
+          { text: '删除会话', link: 'conversation_delete.html'},
+        ]
+      },
+      {
         text: '消息管理',
         collapsible: true,
         children: [
