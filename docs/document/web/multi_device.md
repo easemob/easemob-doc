@@ -61,20 +61,26 @@ conn.addEventHandler("handlerId", {
         //当前用户在其他设备上删除了服务端的会话。
         break;
       case "memberAttributesUpdate":
-        // 群成员属性更新
+        //当前用户在其他设备上更新了群成员属性。
         break;
       case "deleteRoaming":
-        // 删除历史消息
+        //当前用户在其他设备上删除历史消息。
         break;
       case "deleteConversation":
-        // 删除会话
+        //当前用户在其他设备上删除会话。
         break;
       case "pinnedConversation":
-        // 置顶会话
+        //当前用户在其他设备上置顶会话。
         break;
       case "unpinnedConversation":
-        // 取消置顶会话
+        //当前用户在其他设备上取消置顶会话。
         break;
+      case "markConversation":
+        //当前用户在其他设备上标记会话。
+        break;
+      case "unMarkConversation":
+        //当前用户在其他设备上取消标记会话。
+        break;  
       default:
         break;
     }

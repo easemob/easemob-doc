@@ -2,6 +2,24 @@
 
 <Toc />
 
+## 版本 V4.4.0 Dev 2023-12-22（开发版）
+
+### 新增特性
+
+- [IM SDK] 附件消息支持分片上传。
+- [IM SDK] 新增[会话标记功能](conversation_mark.html)。
+  - `addConversationMark`：[标记会话](conversation_mark.html#标记会话)。
+  - `removeConversationMark`：[取消标记会话](conversation_mark.html#取消标记会话)。
+  - `getServerConversationsByFilter`：[根据会话标记从服务器分页查询会话列表](conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
+  - `onMultiDeviceEvent#markConversation`：[多设备场景下的会话标记事件](multi_device.html#实现方法)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+- [IM SDK] 增加 `onMessage` 回调。在收到文本、图片、视频、语音、地理位置和文件等消息时，批量将消息回调给应用。
+- [IM SDK] 视频类型消息增加视频首帧缩略图, 通过 `videoMessage.thumb` 访问。
+
+### 修复
+
+- [IM SDK] SDK 类型修正。
+- [IM SDK] vite 引入 MiniCore SDK 报错。
+
 ## 版本 V4.3.1 Dev 2023-12-13（开发版）
 
 ### 新增特性
@@ -37,7 +55,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增 `LocalCache` 模块[实现本地会话数据管理](message_manage.html)。
+- [IM SDK] 新增 `LocalCache` 模块[实现本地会话数据管理](conversation_local.html)。
 - [IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
 
 ## 版本 V4.2.0 Dev 2023-07-27
@@ -55,9 +73,9 @@
 
 ### 新增特性
 
-1. 新增 `pinConversation` 方法实现[会话置顶和取消置顶](message_retrieve.html#置顶会话)。
-2. 新增 `getServerPinnedConversations` 方法[分页获取服务器端的置顶会话列表](message_retrieve.html#获取服务端的置顶会话列表)。
-3. 新增 `getServerConversations` 方法[分页获取排序后的服务端会话列表](message_retrieve.html#从服务器分页获取会话列表)。原接口 `getConversationlist` 已废弃。
+1. 新增 `pinConversation` 方法实现[会话置顶和取消置顶](conversation_pin.html#置顶会话)。
+2. 新增 `getServerPinnedConversations` 方法[分页获取服务器端的置顶会话列表](conversation_pin.html#获取服务端的置顶会话列表)。
+3. 新增 `getServerConversations` 方法[分页获取排序后的服务端会话列表](conversation_list.html#从服务器分页获取会话列表)。原接口 `getConversationlist` 已废弃。
 4. 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
 5. 在从服务器获取历史消息的方法 `getHistoryMessages` 的返回数据中新增 `isLast` 字段表示返回的是否为最后一页数据。
 6. 在构建图片消息的方法 `create` 中新增 [`thumbnailWidth` 和 `thumbnailHeight`](message_send_receive.html#发送图片消息) 参数用于设置缩略图的宽度和高度。
@@ -76,7 +94,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增 `searchOptions` 参数对象（包含 `from`、`msgTypes`、`startTime` 和 `endTime` 参数），允许用户调用 `getHistoryMessages` 方法时[按消息发送方、消息类型或时间段从服务端拉取历史消息](message_manage.html#在消息上添加-Reaction)。
+- [IM SDK] 新增 `searchOptions` 参数对象（包含 `from`、`msgTypes`、`startTime` 和 `endTime` 参数），允许用户调用 `getHistoryMessages` 方法时[按消息发送方、消息类型或时间段从服务端拉取历史消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
 - [IM SDK] 新增错误码 511，即 MESSAGE_SIZE_LIMIT，若[消息体大小超过限制](message_overview.html#消息类型)时提示用户。
 
 ## 版本 V4.1.4 Dev 2023-03-16
@@ -100,7 +118,7 @@
 
 #### 新增特性
 
-- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
 - [IM SDK] 新增[群组创建事件 `create`](group_manage.html#监听群组事件)。群组创建后，群主的其他设备会收到该事件。
 
 #### 优化
@@ -194,7 +212,7 @@
 ### 新增特性:
 
 - [IM SDK] 新增消息子区（message thread）功能；
-- [IM SDK] 新增 [getConversationlist](message_retrieve.html#从服务器获取消息) 方法解析会话中的最新一条消息；
+- [IM SDK] 新增 [getConversationlist](conversation_list.html#从服务器分页获取会话列表) 方法解析会话中的最新一条消息；
 
 ### 优化：
 

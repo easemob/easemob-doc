@@ -2,6 +2,21 @@
 
 <Toc />
 
+## 版本 V4.4.0 Dev 2023-12-22（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[会话标记功能](conversation_mark.html)。
+  - `addConversationMark`：[标记会话](conversation_mark.html#标记会话)。
+  - `removeConversationMark`：[取消标记会话](conversation_mark.html#取消标记会话)。
+  - `getServerConversationsByFilter`：[根据会话标记从服务器分页查询会话列表](conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
+  - `onMultiDeviceEvent#markConversation`：[多设备场景下的会话标记事件](multi_device.html#实现方法)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+- [IM SDK] 增加 `onMessage` 回调。在收到文本、图片、视频、语音、地理位置和文件等消息时，批量将消息回调给应用。
+
+### 修复
+
+- [IM SDK] SDK 类型修正。
+
 ## 版本 V4.3.0 Dev 2023-11-17（开发版）
 
 ### 新增特性
@@ -63,7 +78,7 @@
 
 #### 新增特性
 
-- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
 - [IM SDK] 新增[群组创建事件 `create`](group_manage.html#监听群组事件)。群组创建后，群主的其他设备会收到该事件。
 
 #### 优化
@@ -134,7 +149,7 @@
 ### 新增特性:
 
 - [IM SDK] 新增消息子区（message thread）功能；
-- [IM SDK] 新增 [getConversationList](/document/web/message_retrieve.html) 方法解析会话中的最新一条消息；
+- [IM SDK] 新增 [getConversationList](/document/web/conversation_list.html) 方法解析会话中的最新一条消息；
 
 ### 优化：
 
