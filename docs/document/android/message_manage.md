@@ -1,22 +1,16 @@
-# 管理本地会话和消息
+# 管理本地消息
 
 <Toc />
 
-本文介绍环信即时通讯 IM SDK 如何管理本地会话和消息。SDK 内部使用 SQLite 保存本地消息，方便消息处理。
+本文介绍环信即时通讯 IM SDK 如何管理本地消息，例如获取消息、搜索消息、导入消息、插入消息、更新消息以及统计消息流量等。
 
-除了发送和接收消息外，环信即时通讯 IM SDK 还支持以会话为单位对本地的消息数据进行管理，如获取与管理未读消息、搜索和删除历史消息以及统计消息流量等。其中，会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息、查看或清空历史消息等操作。
+SDK 内部使用 SQLite 保存本地消息，方便消息处理。
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 支持管理用户设备上存储的消息会话数据，其中包含如下主要方法：
+环信即时通讯 IM Android SDK 支持管理用户设备上存储的消息数据，其中包含如下主要方法：
 
-- `EMChatManager.getAllConversationsBySort` 获取本地所有会话；
 - `EMConversation.getAllMessages/loadMoreMsgFromDB` 从本地读取指定会话的消息；
-- `EMConversation.getUnreadMsgCount` 获取指定会话的未读消息数；
-- `EMChatManager.getUnreadMessageCount` 获取所有会话的未读消息数；
-- `EMChatManager.markAllConversationsAsRead` 指定会话的未读消息数清零；
-- `EMChatManager.deleteConversation` 删除会话及历史消息；
-- `EMConversation.getUnreadMsgCount` 获取指定会话的未读消息数；
 - `EMChatManager.getMessage` 根据消息 ID 获取消息；
 - `EMChatManager.searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)` 获取指定会话中特定类型的消息；
 - `EMChatManager.searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)` 获取指定时间段内发送或接收的消息；
@@ -37,24 +31,6 @@
 
 ## 实现方法
 
-### 获取本地所有会话
-
-你可以调用 `getAllConversationsBySort` 方法一次性获取本地所有会话。若在初始化时，将 `EMOptions#setLoadEmptyConversations` 设置为 `true` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
-
-SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
-
-:::notice
-若使用该功能，需将 SDK 升级至 4.0.3。
-:::
-
-示例代码如下：
-
-```java
-List<EMConversation> conversations = EMClient.getInstance().chatManager().getAllConversationsBySort();
-```
-
-你也可以调用 `getAllConversations` 方法返回 `Map <String, EMConversation>` 结构的会话。
-
 ### 从本地读取指定会话的消息
 
 你可以调用 `getAllMessages` 方法获取指定会话在内存中的所有消息。如果内存中为空，SDK 再从本地数据库中加载最近一条消息。
@@ -68,54 +44,6 @@ List<EMMessage> messages = conversation.getAllMessages();
 // pageSize：每页期望加载的消息数。取值范围为 [1,400]。
 List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
 ```
-
-### 获取指定会话的未读消息数
-
-你可以调用接口获取特定会话的未读消息数，示例代码如下：
-
-```java
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
-conversation.getUnreadMsgCount();
-```
-
-### 获取所有会话的未读消息数
-
-你可以通过接口获取所有会话的未读消息数量，示例代码如下：
-
-```java
-EMClient.getInstance().chatManager().getUnreadMessageCount();
-```
-
-### 指定会话的未读消息数清零
-
-你可以调用接口对特定会话的未读消息数清零，示例代码如下：
-
-```java
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
-// 指定会话的未读消息数清零。
-conversation.markAllMessagesAsRead();
-// 将一条消息置为已读。
-conversation.markMessageAsRead(messageId);
-// 将所有未读消息数清零。
-EMClient.getInstance().chatManager().markAllConversationsAsRead();
-```
-
-### 删除会话及历史消息
-
-你可以删除本地会话和历史消息，示例代码如下：
-
-```java
-// 删除和特定用户的会话，如果需要保留历史消息，传 `false`。
-EMClient.getInstance().chatManager().deleteConversation(username, true);
-```
-
-```java
-// 删除指定会话中指定的一条历史消息。
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
-conversation.removeMessage(deleteMsg.msgId);
-```
-
-删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](conversation_delete.html#单向删除服务端会话及其历史消息)。
 
 ### 根据消息 ID 获取消息
 

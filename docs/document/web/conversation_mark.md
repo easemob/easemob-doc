@@ -6,7 +6,7 @@
 
 如果要使用会话标记功能，你需要确保开通了[会话列表服务](conversation_list.html#从服务器分页获取会话列表)并将 SDK 版本升级至 4.4.0 或以上版本。  
 
-你需要自行维护会话标记与具体业务含义（比如 `MarkType.mark_0`[这里面扔一个连接，跳转到API REFERENCE MarkType] 为待处理会话）之间的映射。
+你需要自行维护会话标记与具体业务含义之间的映射，例如 [`MarkType.mark_0`](https://docs-im-beta.easemob.com/jsdoc/enums/Types.ContactType.MarkType.html)表示待处理会话。
 
 ```javascript
 const MarkMap = new Map();

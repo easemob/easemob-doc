@@ -1,29 +1,21 @@
-# 管理本地会话和消息
+#  管理本地会话和消息
 
 <Toc />
 
-本文介绍即时通讯 IM SDK 如何管理本地会话和消息。
-
-除了发送和接收消息外，环信即时通讯 IM SDK 还支持以会话为单位对本地的消息数据进行管理，如获取与管理未读消息、搜索和删除历史消息等。其中，会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息以及查看或清空历史消息。
-
-本文介绍如何使用环信即时通讯 IM SDK 在 app 中实现这些功能。
+本文介绍即时通讯 IM SDK 如何实现管理本地消息，例如获取消息、搜索消息、导入消息、插入消息、更新消息以及统计消息流量等。
 
 ## 技术原理
 
 SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使用 `IChatManager` 和 `Conversation` 管理本地消息。以下是核心方法：
 
-- `IChatManager.LoadAllConversations` 获取本地所有会话；
-- `Conversation.LoadMessages` 读取指定会话的消息；
-- `Conversation.UnReadCount` 获取指定会话的未读消息数；
-- `IChatManager.GetUnreadMessageCount` 获取所有会话的未读消息数；
-- `IChatManager.MarkAllConversationsAsRead` 指定会话的未读消息数清零；
-- `IChatManager.DeleteConversation` 删除本地会话及历史消息；
-- `IChatManager.DeleteConversationFromServer` 删除服务端的会话及历史消息；
-- `IChatManager.LoadMessage` 根据消息 ID 搜索消息；
-- `Conversation.LoadMessagesWithMsgType` 获取指定会话中特定类型的消息；
-- `Conversation.LoadMessagesWithTime` 获取指定会话中一定时间段内的消息；
-- `IChatManager.SearchMsgFromDB` 根据关键字搜索会话消息；
-- `IChatManager.ImportMessages` 批量导入消息到数据库；
+- `Conversation.LoadMessages` 读取指定会话的消息。
+- `IChatManager.DeleteConversation` 删除本地会话及历史消息。
+- `IChatManager.DeleteConversationFromServer` 删除服务端的会话及历史消息。
+- `IChatManager.LoadMessage` 根据消息 ID 搜索消息。
+- `Conversation.LoadMessagesWithMsgType` 获取指定会话中特定类型的消息。
+- `Conversation.LoadMessagesWithTime` 获取指定会话中一定时间段内的消息。
+- `IChatManager.SearchMsgFromDB` 根据关键字搜索会话消息。
+- `IChatManager.ImportMessages` 批量导入消息到数据库。
 - `Conversation.InsertMessage` 在指定会话中插入消息。
 
 ## 前提条件
@@ -34,17 +26,6 @@ SQLCipher 用于加密存储本地消息的数据库。即时通讯 IM SDK 使�
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
-
-### 获取本地所有会话
-
-你可以调用 `LoadAllConversations` 方法可以根据会话 ID 和会话类型获取本地所有会话:
-
-```csharp
-List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
-
-```
-SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<Conversation>` 结构。
-
 
 ### 读取指定会话的消息
 
@@ -63,56 +44,6 @@ conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>
   }
 ));
 ```
-
-### 获取指定会话的未读消息数
-
-你可以调用接口获取特定会话的未读消息数，示例代码如下：
-
-```csharp
-Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
-int unread = conv.UnReadCount;
-```
-
-### 获取所有会话的未读消息数
-
-你可以通过接口获取所有会话的未读消息数量，示例代码如下：
-
-```csharp
-SDKClient.Instance.ChatManager.GetUnreadMessageCount();
-```
-
-### 指定会话的未读消息数清零
-
-你可以调用接口对特定会话的未读消息数清零，示例代码如下：
-
-```csharp
-Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
-// 指定会话的未读消息数清零。
-conv.MarkAllMessageAsRead();
-
-// 将一条消息置为已读。
-conv.MarkMessageAsRead(msgId);
-
-// 将所有未读消息数清零。
-SDKClient.Instance.ChatManager.MarkAllConversationsAsRead();
-```
-
-### 删除会话及历史消息
-
-SDK 提供两个接口，分别可以删除本地会话和历史消息或者删除当前用户在服务器端的会话和聊天消息。
-
-调用 `DeleteConversation` 和 `DeleteMessage` 删除本地会话和聊天消息，示例代码如下：
-
-```csharp
-//删除和特定用户的会话，如需保留历史消息，传 `false`。
-SDKClient.Instance.ChatManager.DeleteConversation(conversationId, true);
-
-//删除当前会话中指定的一条历史消息。
-Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
-conv.DeleteMessage(msgId);
-```
-
-删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](conversation_delete.html#单向删除服务端会话及其历史消息)。
 
 ### 根据消息 ID 搜索消息
 

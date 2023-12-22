@@ -2,6 +2,20 @@
 
 <Toc />
 
+## 版本 V4.4.0 Dev 2023-12-22（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[会话标记功能](conversation_mark.html)。
+  - `addConversationMark`：[标记会话](conversation_mark.html#标记会话)。
+  - `removeConversationMark`：[取消标记会话](conversation_mark.html#取消标记会话)。
+  - `getServerConversationsByFilter`：[根据会话标记从服务器分页查询会话列表](conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
+- [IM SDK] 增加 `onMessage` 回调。在收到文本、图片、视频、语音、地理位置和文件等消息时，批量将消息回调给应用。
+
+### 修复
+
+- [IM SDK] SDK 类型修正。
+
 ## 版本 V4.3.0 Dev 2023-11-17（开发版）
 
 ### 新增特性

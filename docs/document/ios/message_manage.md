@@ -1,21 +1,14 @@
-# 管理本地会话和消息
+# 管理本地消息
 
 <Toc />
 
-本文介绍环信即时通讯 IM iOS SDK 如何管理本地会话和消息。SDK 内部使用 SQLite 保存本地消息，方便消息处理。
-
-除了发送和接收消息外，环信即时通讯 IM SDK 还支持以会话为单位对本地的消息数据进行管理，如获取与管理未读消息、删除聊天记录、搜索历史消息以及统计消息流量等。其中，会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息或查看历史消息，还可进行清空聊天记录等操作。
-
+本文介绍环信即时通讯 IM iOS SDK 如何管理本地消息，例如获取消息、搜索消息、导入消息、插入消息、更新消息以及统计消息流量等。
+ 
 ## 技术原理
 
 环信即时通讯 IM iOS SDK 支持管理用户设备上存储的消息会话数据，其中包含如下主要方法：
 
-- `IEMChatManager.getAllConversations:` 获取本地所有会话；
 - `EMConversation.loadMessagesStartFromId` 从数据库中读取指定会话的消息；
-- `EMConversation.unreadMessagesCount` 获取指定会话的未读消息数；
-- `EMConversation.unreadMessagesCount` 获取所有会话的未读消息数；
-- `EMConversation.markMessageAsReadWithId` 指定会话的未读消息数清零；
-- `IEMChatManager.deleteConversations` 删除本地会话及历史消息；
 - `IEMChatManager.getMessageWithMessageId` 根据消息 ID 搜索消息；
 - `EMConversation.loadMessagesWithType` 获取指定会话中特定类型的消息；
 - `EMConversation.loadMessagesFrom:to:count:completion:` 获取指定会话中一定时间段内的消息；
@@ -36,24 +29,6 @@
 
 ## 实现方法
 
-### 获取本地所有会话
-
-你可以调用 `getAllConversations:` 方法一次性获取本地所有会话。若在初始化时，将 `EMOptions#loadEmptyConversations` 设置为 `YES` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
-
-SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
-
-:::notice
-若使用该功能，需将 SDK 升级至 4.0.3。
-:::
-
-示例代码如下：
-
-```objectivec
-NSArray <EMConversation *>*conversations = [EMClient.sharedClient.chatManager getAllConversations:YES];
-```
-
-你也可以调用 `getAllConversations` 方法返回 `NSArray <EMConversation *>` 结构的会话。
-
 ### 从数据库中读取指定会话的消息
 
 可以从数据库中读取指定会话的消息：
@@ -65,61 +40,6 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 //searchDirection：消息搜索方向。若消息方向为 `UP`，按消息时间戳的降序获取；若为 `DOWN`，按消息时间戳的升序获取。
 NSArray<EMChatMessage *> *messages = [conversation loadMessagesStartFromId:startMsgId count:count searchDirection:MessageSearchDirectionUp];
 ```
-
-### 获取指定会话的未读消息数
-
-你可以调用接口获取特定会话的未读消息数，示例代码如下：
-
-```objectivec
-// 获取指定会话 ID 的会话。
-EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
-// 获取未读消息数。
-NSInteger unreadCount = conversation.unreadMessagesCount;
-```
-
-### 获取所有会话的未读消息数
-
-示例代码如下：
-
-```objectivec
-NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
-NSInteger unreadCount = 0;
-for (EMConversation *conversation in conversations) {
-    unreadCount += conversation.unreadMessagesCount;
-}
-```
-
-### 指定会话的未读消息数清零
-
-你可以调用接口将指定会话的未读消息数清零，示例代码如下：
-
-```objectivec
-EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
-// 将指定会话的消息未读数清零。
-[conversation markAllMessagesAsRead:nil];
-// 将一条消息置为已读。
-[conversation markMessageAsReadWithId:messageId error:nil];
-```
-
-### 删除会话及历史消息
-
-你可以删除本地会话和历史消息，示例代码如下：
-
-```objectivec
-// 删除指定会话，如果需要保留历史消息，`isDeleteMessages` 参数传 `NO`，异步方法。
-[[EMClient sharedClient].chatManager deleteConversation:conversationId isDeleteMessages:YES completion:nil];
-// 删除一组会话。
-NSArray *conversations = @{@"conversationID1",@"conversationID2"};
-[[EMClient sharedClient].chatManager deleteConversations:conversations isDeleteMessages:YES completion:nil];
-```
-
-```objectivec
-// 删除当前会话中指定的一条历史消息。
-EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
-[conversation deleteMessageWithId:.messageId error:nil];
-```
-
-删除服务端的会话及其历史消息，详见 [删除服务端会话及其历史消息](conversation_delete.html#单向删除服务端会话及其历史消息)。
 
 ### 根据消息 ID 搜索消息
 

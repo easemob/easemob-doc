@@ -1,24 +1,15 @@
-# 管理服务端的会话和消息
+# 管理服务端消息
 
 <Toc />
 
-环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。本文介绍如何实现用户从消息服务器获取会话和消息。
-
-:::tip
-本文介绍的功能均为增值服务，需在[环信即时通讯 IM 管理后台](https://console.easemob.com/user/login)开通。
-
-:::
+环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。本文介绍如何实现从消息服务器获取和删除消息。
 
 ## 技术原理
 
-利用环信即时通讯 IM SDK 可从服务器获取会话和历史消息。
+利用环信即时通讯 IM SDK 可从服务器获取和删除历史消息，主要方法如下：
 
-- `getServerConversations` 分页获取会话列表以及会话中的最新一条消息；
-- `getServerPinnedConversations` 获取服务端的置顶会话列表；
-- `pinConversation` 设置是否置顶会话；
-- `getHistoryMessages` 按服务器接收消息的时间顺序获取服务器上保存的指定会话中的消息；
-- `removeHistoryMessages` 单向删除服务端的历史消息；
-- `deleteConversation` 删除服务器端会话及其对应的消息。
+- `getHistoryMessages`：基于 `searchOptions` 参数对象从服务器获取指定会话的历史消息。
+- `removeHistoryMessages`：单向删除服务端的历史消息。
 
 ## 前提条件
 
@@ -26,89 +17,33 @@
 
 ## 实现方法
 
-### 从服务器分页获取会话列表
-
-对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
-
-你可以调用 `getServerConversations` 方法从服务端分页获取会话列表。SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表。服务器默认存储 100 条会话，可存储 7 天。若提升这两个上限，需联系环信商务。
-
-:::notice
-1. 若使用该功能，需将 SDK 升级至 4.1.7 或以上版本。 
-2. 登录用户的 ID 大小写混用会导致拉取会话列表时提示会话列表为空，因此建议用户 ID 使用小写字母。
-3. 服务端会话列表的更新存在延时，建议你仅在登录时调用该方法。
-4. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需联系商务。
-:::
-
-示例代码如下：
-
-```javascript
-// pageSize: 每页期望获取的会话数量。取值范围为 [1,50]，默认为 `20`。
-// cursor：开始获取数据的游标位置。若传空字符串（''），SDK从最新活跃的会话开始获取。
-connection.getServerConversations({pageSize:50, cursor: ''}).then((res)=>{
-    console.log(res)
-})
-```
-该方法的返回数据包含 `conversations` 和 `cursor` 参数：
-
-- conversations: 会话列表。`conversations` 为 `ConversationItem[]` 类型，`ConversationItem` 包含如下属性：
-
-| 属性名称 | 描述 |
-| :--------- | :----- |
-| `conversationId`  | 会话 ID。 |
-| `conversationType`| 会话类型。|
-| `isPinned` | 是否置顶：<br/> - `true`：置顶；<br/> - `false`：不置顶。 |
-| `pinnedTime`| 会话置顶的 UNIX 时间戳，单位为毫秒。未置顶时值为 `0` |
-| `lastMessage` | 最新一条消息概况。 | 
-| `unReadCount` | 未读消息数。 |  
-
-- cursor: 下次查询数据的游标位置。若 SDK 返回的数据条数小于请求中设置的数目，`cursor` 的值为空字符串（''），表示当前为最后一页数据。否则，SDK 返回具体的游标位置，指定开始获取数据的位置。
-
-### 获取服务端的置顶会话列表
-
-你可以调用 `getServerPinnedConversations` 方法从服务端分页获取置顶会话列表。SDK 按照会话置顶时间的倒序返回。 
-
-你最多可以拉取 50 个置顶会话。
-
-:::notice
-若使用该功能，需将 SDK 升级至 4.1.7 或以上版本。
-:::
-
-示例代码如下，返回数据类型参见getServerConversations： 
-
-```javascript
-// pageSize: 每页返回的会话数。取值范围为 [1,50]。
-// cursor：开始获取数据的游标位置。若传空字符串（''），SDK 从最新置顶的会话开始查询。
-connection.getServerPinnedConversations({pageSize:50, cursor: ''})
-```
-
-该方法的返回数据与[获取服务端的会话列表](#从服务器分页获取会话列表)相同。
-
-### 置顶会话
-
-会话置顶指将单聊或群聊会话固定在会话列表的顶部，方便用户查找。例如，将重点会话置顶，可快速定位会话。
-
-置顶状态会存储在服务器上，多设备登录情况下，更新置顶状态会同步到其他登录设备。你最多可以置顶 50 个会话。
-
-你可以调用 `pinConversation` 方法设置是否置顶会话。多设备登录情况下，会话置顶或取消置顶后，其他登录设备会收到 `onMultiDeviceEvent` 事件，事件名分别为 `pinnedConversation` 和 `unpinnedConversation` 事件。
-
-:::notice
-若使用该功能，需将 SDK 升级至 4.1.7 或以上版本。
-:::
-
-示例代码如下： 
-
-```javascript
-connection.pinConversation({conversationId:'conversationId', conversationType: 'singleChat', isPinned: true})
-```
-
 ### 从服务器获取指定会话的历史消息
 
-你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
+你可以调用 `getHistoryMessages` 方法基于 `searchOptions` 参数对象允许用户按消息发送方、消息类型或时间段从服务器分页拉取单聊和群组聊天的历史消息。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。
 
-:::notice
+对于群组聊天，你可以通过设置 `searchOptions` 对象中的 `from` 参数拉取群组中单个成员发送的历史消息。
+
+:::tip
 1. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
 2. 各类事件通知发送时，若接收的用户离线时，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
 :::
+
+```javascript
+connection.getHistoryMessages({
+  targetId: 'targetId', // 单聊为对端用户 ID，群组聊天为群组 ID。
+  chatType: 'groupChat', // 会话类型：单聊和群组聊天分别为 `singleChat` 和 `groupChat`。
+  pageSize: 20, // 每次获取的消息数量，取值范围为 [1,50]，默认值为 `20`。
+  searchDirection: 'down', // 消息搜索方向。`up` 表示按消息时间戳递减的方向获取，即先获取最新消息；`down` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
+  searchOptions: {
+    from: 'message sender userID', // 消息发送方的用户 ID。该参数仅用于群组聊天。 
+    msgTypes: ['txt'], // 要获取的消息类型的数组。若不传值，会获取所有类型的消息。
+    startTime: new Date('2023,11,9').getTime(), // 查询的起始时间戳，单位为毫秒。
+    endTime: new Date('2023,11,10').getTime(), // 查询的结束时间戳，单位为毫秒。
+  },
+});
+```
+
+同时，你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的历史消息。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
 
 ```javascript
 let options = {
@@ -152,26 +87,4 @@ connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', be
 connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', messageIds: ['messageId']})
 ```
 
-### 删除服务器端会话及其对应的消息
 
-你可以调用 `deleteConversation` 方法删除服务器端会话及其对应的消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息，其他用户不受影响。
-
-```javascript
-
-let options = {
-  // 会话 ID：单聊为对方的用户 ID，群聊为群组 ID。
-  channel: "channel",
-  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊。
-  chatType: "singleChat",
-  // 删除会话时是否同时删除服务端漫游消息。
-  deleteRoam: true,
-};
-WebIM.conn
-  .deleteConversation(options)
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((e) => {
-    // 删除失败。
-  });
-```
