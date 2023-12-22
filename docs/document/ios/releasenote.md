@@ -12,6 +12,7 @@
   - `EMChatManager#removeConversationMark:completion`：[取消标记会话](conversation_mark.html#取消标记会话)。
   - `EMChatManager#getConversationsFromServerWithCursor:filter:completion`：[根据会话标记从服务器分页查询会话列表](conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
   - `EMConversation#marks`：[获取本地单个会话的所有标记](conversation_mark.html#获取本地单个会话的所有标记)。
+  - `multiDevicesConversationEvent#EMMultiDevicesEventConversationUpdateMark`：[多设备场景下的会话标记事件](multi_device.html#获取其他设备上的操作)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
 
 ### 优化
 
