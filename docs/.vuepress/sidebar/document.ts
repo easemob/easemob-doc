@@ -42,13 +42,26 @@ const documentSidebar = [
     text: '基础功能',
     children: [
       {
+        text: '会话管理',
+        collapsible: true,
+        children: [
+          { text: '会话介绍', link: 'conversation_overview.html' },
+          { text: '会话列表', link: 'conversation_list.html' },
+          { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
+          { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
+          { text: '置顶会话', link: 'conversation_pin.html' },
+          { text: '会话标记', link: 'conversation_mark.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
+          { text: '删除会话', link: 'conversation_delete.html' },
+        ]
+      }
+      {
         text: '消息管理',
         collapsible: true,
         children: [
           { text: '消息概述', link: 'message_overview.html' },
           { text: '发送和接收消息', link: 'message_send_receive.html' },
-          { text: '管理本地会话和消息', link: 'message_manage.html', except: ['react-native'] },
-          { text: '管理会话和消息', link: 'message_manage.html', only: ['react-native'] },
+          { text: '管理本地消息', link: 'message_manage.html', except: ['react-native'] },
+          { text: '管理消息', link: 'message_manage.html', only: ['react-native'] },
           { text: '管理服务端消息', link: 'message_retrieve.html', except: ['react-native'] },
           { text: '管理消息回执', link: 'message_receipt.html' },
           { text: '修改消息', link: 'message_modify.html' },
