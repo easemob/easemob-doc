@@ -53,7 +53,7 @@ const documentSidebar = [
           { text: '会话标记', link: 'conversation_mark.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
           { text: '删除会话', link: 'conversation_delete.html' },
         ]
-      }
+      },
       {
         text: '消息管理',
         collapsible: true,
