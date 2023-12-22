@@ -341,6 +341,9 @@ private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
                 case CONVERSATION_DELETED:
                     //当前用户在其他设备上删除了服务端的会话。
                     break;
+                case CONVERSATION_MARK_UPDATE:
+                    //当前用户在其他设备上更新了会话标记，包括添加和移除会话标记。
+                    break;   
             }
 
         }

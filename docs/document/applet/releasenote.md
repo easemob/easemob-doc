@@ -63,7 +63,7 @@
 
 #### 新增特性
 
-- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
 - [IM SDK] 新增[群组创建事件 `create`](group_manage.html#监听群组事件)。群组创建后，群主的其他设备会收到该事件。
 
 #### 优化
@@ -134,7 +134,7 @@
 ### 新增特性:
 
 - [IM SDK] 新增消息子区（message thread）功能；
-- [IM SDK] 新增 [getConversationList](/document/web/message_retrieve.html) 方法解析会话中的最新一条消息；
+- [IM SDK] 新增 [getConversationList](/document/web/conversation_list.html) 方法解析会话中的最新一条消息；
 
 ### 优化：
 

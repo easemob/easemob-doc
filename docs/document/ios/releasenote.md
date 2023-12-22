@@ -2,6 +2,22 @@
 
 <Toc />
 
+## 版本 V4.3.0 Dev 2023-12-22（开发版）
+
+### 新增特性
+
+- [IM SDK] 附件消息支持分片上传。
+- [IM SDK] 支持[会话标记功能](conversation_mark.html)。
+  - `EMChatManager#addConversationMark:completion`：[标记会话](conversation_mark.html#标记会话)。
+  - `EMChatManager#removeConversationMark:completion`：[取消标记会话](conversation_mark.html#取消标记会话)。
+  - `EMChatManager#getConversationsFromServerWithCursor:filter:completion`：[根据会话标记从服务器分页查询会话列表](conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
+  - `EMConversation#marks`：[获取本地单个会话的所有标记](conversation_mark.html#获取本地单个会话的所有标记)。
+
+### 优化
+
+- [IM SDK] 移除 FPA 功能，减小 SDK 体积。
+- [IM SDK] 单个日志文件大小由 2 MB 提升到 5 MB。
+
 ## 版本 V4.2.0 Dev 2023-11-13（开发版）
 
 ### 新增特性
@@ -73,11 +89,11 @@
 
 ### 新增特性
 
-- [IM SDK] 新增 `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion:` 方法，实现[从服务器拉取会话](message_retrieve.html#从服务器分页获取会话列表)的功能，原接口 `getConversationsFromServer` 和 `getConversationsFromServerByPage:pageSize:completion:` 标记为已废弃。
+- [IM SDK] 新增 `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion:` 方法，实现[从服务器拉取会话](conversation_list.html#从服务器分页获取会话列表)的功能，原接口 `getConversationsFromServer` 和 `getConversationsFromServerByPage:pageSize:completion:` 标记为已废弃。
 - [IM SDK] 新增置顶服务器会话的功能：
-    - 新增 `IEMChatManager#pinConversation:completionBlock:` 方法，实现[置顶或取消置顶服务器会话](message_retrieve.html#置顶会话)：
-    - 新增 `IEMChatManager#getPinnedConversationsFromServerWithCursor:pageSize:completion` 方法，实现[获取置顶的服务器会话](message_retrieve.html#获取服务端的置顶会话列表)。
-- [IM SDK] 新增 `IEMChatManager#getAllConversations:` 方法，实现[从本地获取排序后的会话列表](message_manage.html#获取本地所有会话)。
+    - 新增 `IEMChatManager#pinConversation:completionBlock:` 方法，实现[置顶或取消置顶服务器会话](conversation_pin.html#置顶会话)：
+    - 新增 `IEMChatManager#getPinnedConversationsFromServerWithCursor:pageSize:completion` 方法，实现[获取置顶的服务器会话](conversation_pin.html#获取服务端的置顶会话列表)。
+- [IM SDK] 新增 `IEMChatManager#getAllConversations:` 方法，实现[从本地获取排序后的会话列表](conversation_list.html#获取本地所有会话)。
 - [IM SDK] 新增在群组或聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)功能。
 
 ### 优化
@@ -124,7 +140,7 @@
 
 ### 新增特性
 
-[IM SDK] [新增 `EMChatManager#getConversationsFromServerByPage:pageSize:completion` 方法实现从服务端分页获取会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+[IM SDK] [新增 `EMChatManager#getConversationsFromServerByPage:pageSize:completion` 方法实现从服务端分页获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
 
 ### 优化
 
