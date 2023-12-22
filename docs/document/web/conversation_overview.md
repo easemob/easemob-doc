@@ -33,7 +33,8 @@ conn.addEventHandler("handlerId", {
   onChannelMessage: (message) => {
     // 收到会话已读的事件。该事件在以下场景中触发：
     // 1. 当消息接收方调用 `send` 方法发送 `channel` 类型消息。SDK 会触发此回调。
-    // 2. 多端多设备登录时，若一端发送会话已读回执（`send` 方法发送`channel`类型消息），服务器端会将该会话的未读消息数置为 0，同时其他端会触发此回调。
+    // 2. 多端多设备登录时，若一端发送会话已读回执（`send` 方法发送`channel`类型消息），
+    // 服务器端会将该会话的未读消息数置为 0，同时其他端会触发此回调。
     console.log("收到会话已读回执消息", message.from, message.to);
   },
 });
