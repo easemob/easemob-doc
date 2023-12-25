@@ -6,7 +6,6 @@
 
 ### 新增特性
 
-- [IM SDK] 附件消息支持分片上传。
 - [IM SDK] 新增[会话标记功能](conversation_mark.html)。
   - `addConversationMark`：[标记会话](conversation_mark.html#标记会话)。
   - `removeConversationMark`：[取消标记会话](conversation_mark.html#取消标记会话)。
@@ -19,6 +18,7 @@
 
 - [IM SDK] SDK 类型修正。
 - [IM SDK] vite 引入 MiniCore SDK 报错。
+- [IM SDK] 优化附件类型消息发送时的附件上传，支持分片上传。
 
 ## 版本 V4.3.1 Dev 2023-12-13（开发版）
 
