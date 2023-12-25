@@ -323,6 +323,8 @@
 | `extra`           | Object | [推送回调](#vivo-推送回调)。 |
 | `category`        | String | 二级分类，字段的值详见[二级分类标准 中category说明](https://dev.vivo.com.cn/documentCenter/doc/359)。 1. 填写`category` 后，可以不设置 `classification` 参数，但若设置 `classification`，需保证 `category` 与 `classification` 是正确对应关系，否则推送失败。 2. 该参数请按照消息分类规则填写，且必须大写；若传入无效的值，则推送失败。 |
 | `notifyId`        | Int    | 通知 ID，即通知的唯一标识。若多个消息的通知 ID 相同，到达设备的新消息会覆盖旧消息显示在设备通知栏中。取值范围为：1-2147483647。 |
+| `profileId` | String| 关联终端设备登录用户标识，最大长度为 64 字符。|
+| `sendOnline` | Bool| 是否在线直推，设置为 `true` 表示是在线直推，`false` 表示非直推。在线直推功能推送时在设备在线下发一次，设备离线直接丢弃。|
 
 #### vivo 推送回调
 
@@ -451,6 +453,8 @@
 | `fastAppTargetType` | Int    | 快应用发送透传消息时，指定小程序的模式类型。<br/> - `1`：开发态；<br/> - （默认）`2`：生产态。 |
 | `data`              | String | 自定义消息负载，此处如果设置了 data，则会覆盖 `message.data` 字段。 |
 | `notification`      | Object | [安卓通知栏消息结构体](#安卓通知栏消息结构体)。 |
+| `receiptId` | String| 输入一个唯一的回执 ID 指定本次下行消息的回执地址及配置，该回执 ID 可以在回执参数配置中查看。| 
+| `targetUserType` | Int | <br/> - `0`：普通消息（默认值）；<br/> - `1`：测试消息。每个应用每日可发送该测试消息 500 条且不受每日单设备推送数量上限要求。|
 
 ##### 安卓通知栏消息结构体
 
