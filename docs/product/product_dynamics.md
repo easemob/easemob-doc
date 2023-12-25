@@ -4,7 +4,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.3.0 开发版发布 | **新增特性**：<br/> - [会话标记功能](/document/android/conversation_mark.html)：支持标记会话，并按照标记获取会话。<br/> - 附件消息支持分片上传。 <br/> **优化**<br/> - 移动端移除 FPA 功能，减小 SDK 体积。<br/> - 移动端单个日志文件大小由 2 MB 提升到 5 MB。<br/> - Web 端增加 `onMessage` 回调。在收到文本、图片、视频、语音、地理位置和文件等消息时，批量将消息回调给应用。<br/> - Web 端视频类型消息增加视频首帧缩略图, 通过 videoMessage.thumb 访问。    |  2023-12-22     | <br/> - [Android 4.3.0 更新日志](/document/android/releasenote.html)<br/> - [iOS 4.3.0 更新日志](/document/ios/releasenote.html)<br/> - [Web 4.4.0 更新日志](/document/web/releasenote.html)<br/> - [小程序 4.4.0 更新日志](/document/applet/releasenote.html)。   |
+| SDK 4.3.0 开发版发布 | **新增特性**：<br/> - [会话标记功能](/document/android/conversation_mark.html)：支持标记会话，并按照标记获取会话。<br/> **优化**<br/> - 对于原生平台，优化附件类型消息发送时的附件上传，支持分片上传。 <br/> - 移动端移除 FPA 功能，减小 SDK 体积。<br/> - 移动端单个日志文件大小由 2 MB 提升到 5 MB。<br/> - Web 端增加 `onMessage` 回调。在收到文本、图片、视频、语音、地理位置和文件等消息时，批量将消息回调给应用。<br/> - Web 端视频类型消息增加视频首帧缩略图, 通过 videoMessage.thumb 访问。    |  2023-12-22     | <br/> - [Android 4.3.0 更新日志](/document/android/releasenote.html)<br/> - [iOS 4.3.0 更新日志](/document/ios/releasenote.html)<br/> - [Web 4.4.0 更新日志](/document/web/releasenote.html)<br/> - [小程序 4.4.0 更新日志](/document/applet/releasenote.html)。   |
 
 
 ## 2023-11

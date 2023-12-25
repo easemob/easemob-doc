@@ -45,7 +45,12 @@
 
 ```csharp
 public class ChatManagerDelegate : IChatManagerDelegate {
-        // 收到会话已读回调
+        // 收到会话已读的事件。该事件在以下场景中触发：
+       // 1. 当消息接收方调用 `SendConversationReadAck 方法，SDK 会执行此回调，
+       // 会将本地数据库中该会话中消息的 `isAcked` 属性置为 `true`。
+       // 2. 多端多设备登录时，若一端发送会话已读回执（conversation ack），
+       // 服务器端会将会话的未读消息数置为 0，
+       // 同时其他端会回调此方法，并将本地数据库中该会话中消息的 `isRead` 属性置为 `true`。
         public void OnConversationRead(string from, string to)
         {
 
