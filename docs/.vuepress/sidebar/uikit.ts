@@ -18,21 +18,38 @@ const uikitSidebar = [
         collapsible: 子菜单是否允许展开/收起，true: 允许; false: 不允许。请参考「子菜单示例」
         children: 子菜单。请参考「子菜单示例」
     */
-    text: 'UIKit 介绍', link: 'overview.html',
-    except: ['android', 'ios']
-  },
-  {
-    text: '快速开始', link: 'quickstart.html',
-  },
-  {
-    text: '集成聊天页面', link: 'key_function_chat_page.html',
-    except: ['android', 'ios']
-  },  
-  {
-    text: '集成会话列表页面', link: 'key_function_conversation_list.html',
-    except: ['android', 'ios']
-  }
-]
+    text: '聊天 UIKit',
+    children: [
+      { text: 'UIKit 介绍', link: 'overview.html', except: ['android', 'ios']},
+      { text: '快速开始', link: 'quickstart.html'},
+      { text: '集成聊天页面', link: 'key_function_chat_page.html', except: ['android', 'ios']},  
+      { text: '集成会话列表页面', link: 'key_function_conversation_list.html', except: ['android', 'ios']}
+      ],
+      except: ['web']
+      },
+      {
+        text: '聊天室 UIKit',
+        children: [
+          { text: '概述', link: 'roomuikit_overview.html' },
+            {
+              text: '特性',
+              collapsible: true,
+              children: [
+                { text: '通用', link: 'roomfeature_common.html' },
+                { text: '消息扩展', link: 'roomfeature_message.html' },
+                { text: '成员管理', link: 'roomfeature_member' },
+                    ]
+               },
+          { text: '跑通示例项目', link: 'roomkit_run.html' },
+          { text: '集成 ChatroomUIKit', link: 'roomuikit_integrated.html' },
+          { text: '快速开始', link: 'roomuikit_quickstart'},
+          { text: '最佳实践', link: 'roomuikit_best_practice.html' },
+          { text: '可配置项', link: 'roomuikit_configuration_items.html'},
+          { text: '主题', link: 'roomuikit_theme.html' },
+          { text: '自定义', link: 'roomuikit_customize.html' },
+        ]
+       }
+    ]
 
 function buildDocSidebar() {
   const result = {}
