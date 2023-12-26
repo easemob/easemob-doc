@@ -2,8 +2,8 @@
 
 利用 em_chat_uikit 提供的 UI 组件，你可以轻松实现应用内的聊天。em_chat_uikit 支持单聊、群聊和聊天室会话。本文介绍如何实现在单聊会话中发送消息。
 
-<img src=@static/images/uikitflutter/ChatConversationsView.png  title=“会话列表界面” width="300"/>&nbsp;&nbsp;
-<img src=@static/images/uikitflutter/ChatMessagesView.png  title=聊天页面 width="300"/>
+<img src=@static/images/uikit/chatflutter/ChatConversationsView.png  title=“会话列表界面” width="300"/>&nbsp;&nbsp;
+<img src=@static/images/uikit/chatflutter/ChatMessagesView.png  title=聊天页面 width="300"/>
 
 ## 前提条件
 
@@ -154,4 +154,4 @@ class _MessagesPageState extends State<MessagesPage> {
 }
 ```
 
-<img src=@static/images/uikitflutter/MessagesPage.png  width="300" height="700"/>
+<img src=@static/images/uikit/chatflutter/MessagesPage.png  width="300" height="700"/>
