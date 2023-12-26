@@ -97,7 +97,7 @@ SDKClient.Instance.GroupManager.GetGroupAnnouncementFromServer(currentGroupId, n
 
 #### 上传共享文件
 
-所有群组成员均可以调用 `UploadGroupSharedFile` 方法上传共享文件至群组，群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `IGroupManagerDelegate#OnSharedFileAddedFromGroup` 回调。
+所有群组成员均可以调用 `UploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `IGroupManagerDelegate#OnSharedFileAddedFromGroup` 回调。
 
 示例代码如下：
 

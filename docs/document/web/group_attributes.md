@@ -72,7 +72,7 @@ conn.updateGroupAnnouncement(option).then(res => console.log(res))
 
 #### 上传共享文件
 
-所有群组成员均可调用 `uploadGroupSharedFile` 方法上传共享文件至群组，群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `uploadFile` 事件。
+所有群组成员均可调用 `uploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `uploadFile` 事件。
 
 ```javaScript
 let option = {
