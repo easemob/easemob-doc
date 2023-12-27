@@ -76,7 +76,7 @@ export const zhNavbar = navbar([
     text: "UIKit",
     children: [
       {
-        text: "Chat UIKit",
+        text: "聊天 UIKit",
         children: [
           {
             text: "Android",
@@ -87,6 +87,11 @@ export const zhNavbar = navbar([
             text: "iOS",
             icon: "/icon-iOS.svg",
             link: "/uikit/chatuikit/ios/overview.html",
+          },
+          {
+            text: "Web",
+            icon: "/icon-Android.svg",
+            link: "/uikit/chatuikit/web/overview.html",
           },
           {
             text: "React Native",
@@ -101,7 +106,7 @@ export const zhNavbar = navbar([
         ],
       },
       {
-        text: "Chatroom UIKit",
+        text: "聊天室 UIKit",
         children: [
           {
             text: "Android",
