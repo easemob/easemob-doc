@@ -86,7 +86,7 @@ export const zhNavbar = navbar([
          {
            text: 'iOS',
            icon: '/icon-iOS.svg',
-           link: '/uikit/chatuikit/android/overview.html'
+           link: '/uikit/chatuikit/ios/overview.html'
          },
          {
            text: 'Web',
