@@ -47,6 +47,7 @@ const uikitSidebar = [
         { text: '可配置项', link: 'roomuikit_configuration_items.html'},
         { text: '主题', link: 'roomuikit_theme.html' },
         { text: '自定义', link: 'roomuikit_customize.html' },
+        { text: '设计指南', link: 'design_guide.html' },
         ]
        }
     ]
