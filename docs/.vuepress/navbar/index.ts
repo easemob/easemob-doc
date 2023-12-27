@@ -81,17 +81,17 @@ export const zhNavbar = navbar([
          {
            text: 'Android',
            icon: '/icon-Android.svg',
-           link: '/uikit/android/overview.html'
+           link: '/uikit/chatuikit/android/overview.html'
          },
          {
            text: 'iOS',
            icon: '/icon-iOS.svg',
-           link: '/uikit/ios/overview.html'
+           link: '/uikit/chatuikit/android/overview.html'
          },
          {
            text: 'Web',
            icon: '/icon-web.svg',
-           link: '/uikit/web/overview.html'
+           link: '/uikit/chatroomuikit/web/roomuikit_overview.html'
          },
         //  {
         //    text: 'Windows',
@@ -106,12 +106,12 @@ export const zhNavbar = navbar([
          {
            text: 'React Native',
            icon: '/icon-ReactNative.svg',
-           link: '/uikit/react-native/overview.html'
+           link: '/uikit/chatuikit/react-native/overview.html'
          },
          {
            text: 'Flutter',
            icon: '/icon-flutter.svg',
-           link: '/uikit/flutter/overview.html'
+           link: '/uikit/chatuikit/flutter/overview.html'
          },
         //  {
         //    text: 'Unity',
