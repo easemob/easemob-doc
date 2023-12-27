@@ -42,32 +42,6 @@ const PLATFORM_ICON_MAP = {
   },
 }
 
-const platform = ref('android')
-const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value]?.activeIcon)
-const route = useRoute()
-const router = useRouter()
-watch(()=>route.path, ()=> {
-  if (route.path.indexOf('/uikit') == 0) {
-    platform.value = route.path.split('/')[2]
-  }
-}, {immediate:true})
-
-
-// 切换平台，如果有相同路径的route就直接跳转
-const onChange = (platform) => {
-  const nextPlatformDocRouters = router.options.routes.filter(item=>item.hasOwnProperty('name') && item?.path.indexOf('/uikit/'+platform) == 0).map(item=>item.path)
-
-  let newPath = route.path.split('/')
-  newPath[2] = platform
-  const nextPathPath = newPath.join('/')
-
-  if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
-    router.push(nextPathPath)
-  } else {
-    router.push('/uikit/'+platform+'/overview.html')
-  }
-}
-
 const options = [
   {
     label: '平台',
@@ -80,14 +54,10 @@ const options = [
         value: 'ios',
         label: 'iOS',
       },
-      // {
-      //   value: 'web',
-      //   label: 'Web',
-      // },
-      // {
-      //   value: 'windows',
-      //   label: 'Windows',
-      // },
+      {
+        value: 'web',
+        label: 'Web',
+      },
     ],
   },
   {
@@ -101,17 +71,44 @@ const options = [
         value: 'flutter',
         label: 'Flutter',
       },
-      // {
-      //   value: 'unity',
-      //   label: 'Unity',
-      // },
-      // {
-      //   value: 'applet',
-      //   label: '小程序',
-      // },
     ],
   },
 ]
+
+const platform = ref('android')
+const kitType = ref('chatuikit')
+const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value]?.activeIcon)
+const route = useRoute()
+const router = useRouter()
+watch(()=>route.path, ()=> {
+  if (route.path.indexOf('/uikit') == 0) {
+    const splitRoute = route.path.split('/')
+    kitType.value = splitRoute[2]
+    platform.value = splitRoute[3]
+  }
+}, {immediate:true})
+
+
+// 切换平台，如果有相同路径的route就直接跳转
+const onChange = (platform) => {
+  const nextPlatformDocRouters = router.options.routes.filter(item=>item.hasOwnProperty('name') &&
+   item?.path.indexOf(`/uikit/${kitType.value}/${platform}`) == 0).map(item=>item.path)
+
+  let newPath = route.path.split('/')
+  newPath[3] = platform
+  const nextPathPath = newPath.join('/')
+
+  if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
+    router.push(nextPathPath)
+  } else {
+    if (kitType.value == 'chatuikit') {
+      router.push(`/uikit/${kitType.value}/${platform}/overview.html`)
+    }
+    if (kitType.value == 'chatroomuikit') {
+      router.push(`/uikit/${kitType.value}/${platform}/roomuikit_overview.html`)
+    }
+  } 
+}
 </script>
 
 
