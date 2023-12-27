@@ -1,9 +1,8 @@
-
 # 可配置项
 
 `room uikit sdk` 的组件中包含各种属性，你可以根据需求进行设置。
 
-除了[主题组件](#theme.html)， `room uikit sdk` 主要包括如下组件：
+除了[主题组件](#roomuikit_theme.html)，`room uikit sdk` 主要包括如下组件：
 
 | 组件名称        | 组件介绍          | 
 | --------------- | ---------------------------- | 
@@ -222,7 +221,7 @@ const ref = React.useRef<Chatroom>({} as any);
 | joinRoom              | 加入聊天室。加载 `Chatroom` 组件时，你会自动加入聊天室。若由于网络等问题加入失败，开发者可以通过该方法尝试重新加入聊天室。  |
 | leaveRoom             | 退出聊天室，而不用卸载组件。 |
 
-![chatroom](../chatroom.png)
+![img](@static/images/uikit/chatroomrn/chatroom.png)
 
 ## MessageList 组件
 
@@ -266,8 +265,9 @@ ref?.current?.addSendedMessage?.(message);
 | addSendedMessage | 将输入框中的内容发送到消息列表。 |
 | scrollToEnd      | 滚动消息列表到底部。               |
 
-![message_context_menu](../message_context_menu.png)
-![message_report](../message_report.png)
+![img](@static/images/uikit/chatroomrn/message_context_menu.png)
+
+![img](@static/images/uikit/chatroomrn/message_report.png)
 
 ## ParticipantList 组件
 
@@ -275,11 +275,11 @@ ref?.current?.addSendedMessage?.(message);
 
 聊天室所有者可以修改成员状态，例如，对成员禁言或踢出聊天室。
 
-:::notice
+:::tip
 聊天室成员列表组件的显示的入口并不在 `UIKit`, 需要应用开发者自行实现，例如，添加一个按钮，点击后显示聊天室成员列表组件。
 :::
 
-`BottomSheetParticipantList` 组件是一个独立组件，由 `SimulativeModal` 和 `ParticipantList` 组成，可以进行显示和隐藏。 // 显示和隐藏 ParticipantList 组件？还是 `BottomSheetParticipantList` 组件？
+`BottomSheetParticipantList` 组件是一个独立组件，由 `SimulativeModal` 和 `ParticipantList` 组成，可以进行显示和隐藏。
 
 示例代码如下：
 
@@ -321,8 +321,9 @@ ref?.current?.startShow?.();
 | muteMember   | 禁言或者解除禁言成员。                           |
 | closeMenu    | 关闭菜单。                                      |
 
-![member_list](../member_list.png)
-![member_context_menu](../member_context_menu.png)
+![img](@static/images/uikit/chatroomrn/member_list.png)
+
+![img](@static/images/uikit/chatroomrn/member_context_menu.png)
 
 ## GiftMessageList 组件
 
@@ -390,7 +391,7 @@ ref.current?.pushTask?.({
 `GlobalBroadcast` 提供的属性如下表所示：
 
 | 属性                    | 是否必需 | 描述                                                |
-| ----------------------- | -------- | ---------------------------------------------------- |
+| ----------------------- | -------- | ---------------------- |
 | visible                 | 否     | 设置组件是否可见。                                     |
 | playSpeed               | 否     | 消息播放时滚动的速度，默认值为 8。                       |
 | containerStyle          | 否     | 设置组件容器样式。支持背景、位置、大小、边框等的设置。 |
@@ -448,8 +449,9 @@ ref?.current?.close?.();
 | ----- | ------------------------------------ |
 | close | 主动关闭输入状态，切换为聊天室底部工具栏区域。 |
 
-![input_bar](../input_bar.png)
-![emoji_list.png](../emoji_list.png)
+![img](@static/images/uikit/chatroomrn/input_bar.pn)
+
+![img](@static/images/uikit/chatroomrn/emoji_list.png)
 
 ## BottomToolbar 组件
 
@@ -459,7 +461,7 @@ ref?.current?.close?.();
 
 礼物列表组件 `BottomSheetGift` 提供自定义礼物列表，点击礼物项的发送按钮发送到聊天室。
 
-:::notice
+:::tip
 礼物列表组件是一个独立的组件，需要应用开发者自行实现显示和加载等操作。
 :::
 
@@ -496,7 +498,7 @@ const ref = React.useRef<BottomSheetGiftSimuRef>({} as any);
 ref?.current?.startShow?.();
 ```
 
-:::notice
+:::tip
 发送礼物组件提供 `BottomSheetGift` 和 `BottomSheetGift2`，二者的区别为是模态组件还是非模态组件。
 :::
 
@@ -516,7 +518,7 @@ ref?.current?.startShow?.();
 | startShowWithInit | 显示组件，同时可以初始化列表。     |
 | startHide         | 隐藏组件，隐藏动画完成后返回通知。 |
 
-![gift_list](../gift_list.png)
+![img](@static/images/uikit/chatroomrn/gift_list.png)
 
 ## ReportMessage 组件
 
@@ -558,5 +560,6 @@ ref?.current?.startShow?.();
 | startShow | 显示组件。                         |
 | startHide | 隐藏组件，隐藏动画完成后返回通知。 |
 
-![message_report](../message_report.png)
+
+![img](@static/images/uikit/chatroomrn/message_report.png)
 

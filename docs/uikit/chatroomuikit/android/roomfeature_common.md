@@ -5,7 +5,7 @@
 
 ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的接口创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
 
-chatroom_create.png
+![img](@static/images/uikit/chatroomfeature/chatroom_create.png)
 
 ## 离开聊天室
 
@@ -15,9 +15,9 @@ ChatroomUIKit 提供离开聊天室功能。聊天室中的成员可自行离开
 
 ChatroomUIKit 不提供销毁聊天室的功能，你可以[调用即时通讯 IM SDK 的接口销毁聊天室](/document/server-side/chatroom.html#删除聊天室)。
 
-chatroom_destroy.png
+![img](@static/images/uikit/chatroomfeature/chatroom_destroy.png)
 
-## 发送弹幕消息
+## 发送弹幕
 
 用户在聊天室中向其他成员发送文字和表情的消息。发送消息在聊天室中是沟通和交流的基本行为，它使参与者能够分享信息、表达观点、提问、分享内容或与其他人建立联系。
 
@@ -25,7 +25,7 @@ chatroom_destroy.png
 
 用户可以根据业务需要选择显示/隐藏消息发送时间（HH:MM 格式）、用户标识和用户头像。
 
-barrage_send.png
+![img](@static/images/uikit/chatroomfeature/barrage_send.png)
 
 ## 打赏
 
@@ -35,7 +35,7 @@ barrage_send.png
 
 在 UIKit 中，默认提供了 12 种不同的虚拟礼物。同时，用户可以自定义虚拟礼物的样式、名称和金额。
 
-gift.png
+![img](@static/images/uikit/chatroomfeature/gift.png)
 
 ## 全局广播
 
@@ -51,7 +51,7 @@ gift.png
 - 若内容超过一屏宽，则需要滚动，先停留 2 秒展示开头部分，然后以每秒 10 个字符的速度进行滚动，滚动完成后再停留 2 秒。
 - 若同时有多条全局广播消息，则按消息发送的时间顺序播放，一条消息滚动完成后再播放下一条。
 
-global_broadcast.png
+![img](@static/images/uikit/chatroomfeature/global_broadcast.png)
 
 ## 未读消息数
 
@@ -59,7 +59,7 @@ global_broadcast.png
 
 若未读消息的数量不超过 99，则未读消息数显示实际的数量，若达到 100 及以上则显示 99+。
 
-message_unread.png
+![img](@static/images/uikit/chatroomfeature/message_unread.png)
 
 ## 已禁言列表
 
@@ -67,7 +67,7 @@ message_unread.png
 
 在 UIKit 中，默认通过点击聊天室界面右上角的成员按钮，触发已禁言列表。用户在列表中查看聊天室被禁言的所有成员，包括成员的身份、头像和昵称，同时可以通过点击成员右端的管理功能按钮，触发解除禁言选项，实现取消禁言的操作。
 
-mute_list.png
+![img](@static/images/uikit/chatroomfeature/mute_list.png)
 
 ## 暗黑模式
 
@@ -75,7 +75,7 @@ mute_list.png
 
 UIKit 支持暗黑模式的一键切换。UIKit 默认风格为明亮模式，切换为暗黑模式后，聊天室界面中所有元素将替换为暗黑风格设计，提供用户舒适的视觉体验。
 
-dark_mode.png
+![img](@static/images/uikit/chatroomfeature/dark_mode.png)
 
 
 

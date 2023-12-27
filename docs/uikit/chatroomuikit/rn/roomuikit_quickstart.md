@@ -54,7 +54,7 @@ export function App() {
 
 进入聊天室前，需首先通过用户 ID 和用户 Token 登录 ChatroomUIKit。
 
-:::notice
+:::tip
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 ChatroomUIKit。
 :::
 

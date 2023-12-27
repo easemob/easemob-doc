@@ -80,7 +80,7 @@ export function LoginScreen(props: Props) {
 
   return (
     <View style={{ flex: 1 }}>
-      {/* todo: 登录页面代码， 触发登录loginAction  */}
+      {/* todo: 登录页面代码， 触发登录 loginAction  */}
     </View>
   );
 }

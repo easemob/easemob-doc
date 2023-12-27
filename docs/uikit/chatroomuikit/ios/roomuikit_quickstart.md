@@ -63,7 +63,7 @@ ChatroomUIKitClient.shared.login(with userId: "user id", token: "token", complet
 
 2. 创建聊天室视图 `ChatroomView`，传入的参数包括聊天室 ID、布局参数和聊天室所有者的用户 ID。
 
-:::notice
+:::tip
 - 建议 ChatroomView 的宽度初始化为屏幕的宽度，高度不小于以下算式的值：屏幕高度 x 1/5 + 礼物气泡行高 x 2 + 54（底部工具栏的高度）。
 - 对于有刘海屏的机型，ChatroomView 的高度为以上算式的值加上底部安全区域的高度。
 :::

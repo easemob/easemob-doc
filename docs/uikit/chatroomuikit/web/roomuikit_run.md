@@ -26,4 +26,4 @@ npm start
 
 浏览器会显示以下页面：
 
-chatroom_enter.png
+![img](@static/images/uikit/chatroomweb/chatroom_enter.png)

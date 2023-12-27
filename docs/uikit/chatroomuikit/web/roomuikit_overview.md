@@ -2,9 +2,9 @@
 
 环信 ChatroomUIKit 提供 UIKit 的各种组件帮助开发者根据实际业务需求快速搭建聊天室应用。通过该 UIKit，聊天室中的用户可实时交互，发送普通弹幕消息、打赏消息和全局广播等功能。
 
-- 源码链接：// TODO：源码链接
+- 若要访问源码，请点击[这里](https://github.com/easemob/Easemob-UIKit-web)。
 
-- 你可以扫描以下二维码体验环信聊天室 UIKit demo：
+- 你可以扫描以下二维码体验环信聊天室 UIKit demo：// 暂时还没有，后面正式上线后补充
 
 ## 功能
 
@@ -14,7 +14,7 @@ ChatroomUIKit 提供以下功能：
   - 创建聊天室：ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的接口创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
   - 销毁聊天室：ChatroomUIKit 不提供销毁聊天室的功能，你可以[调用即时通讯 IM SDK 的接口销毁聊天室](/document/server-side/chatroom.html#删除聊天室)。
   - 离开聊天室：聊天室中的成员可自行离开聊天室，聊天室所有者也可以将成员移出聊天室。
-  - 发送弹幕消息：用户在聊天室中向其他参与者发送文字和表情的消息。
+  - 发送弹幕：用户在聊天室中向其他参与者发送文字和表情的消息。
   - 打赏：用户通过赠送虚拟礼物，向聊天室中的主播或其他用户表达赞赏或者支持
   - 全局广播：向 App 内所有在线聊天室中的所有用户发送相同的消息或通知。
   - 未读消息数：在一个聊天室中用户尚未读取的消息数量。
@@ -35,6 +35,62 @@ ChatroomUIKit 提供以下功能：
 
 ChatroomUIKit 中提供了聊天室事件的监听接口。你可以通过注册聊天室监听器，获取聊天室事件，并作出相应处理。
 
+ChatroomUIKit 中主动调用 API 的事件监听如下:
+
+```javascript
+import { eventHandler } from "easemob-chat-uikit";
+
+eventHandler.addEventHandler("chatroom", {
+  onError: (error) => {
+    // 所有 API 调用失败除了回调相应的事件外都会回调 onError 事件
+  },
+  joinChatRoom: {
+    error: (err) => {},
+    success: () => {},
+  },
+  recallMessage: {
+    error: (err) => {},
+    success: () => {},
+  },
+  reportMessage: {
+    // ...
+  },
+  sendMessage: {
+    // ...
+  },
+  getChatroomMuteList: {
+    // ...
+  },
+  removeUserFromMuteList: {
+    // ...
+  },
+  unmuteChatRoomMember: {
+    // ...
+  },
+  removerChatroomMember: {
+    // ...
+  },
+});
 ```
 
+从 UIKit 中获取 Chat SDK 实例来监听收到的聊天室事件:
+
+```javascript
+import React, { useEffect } from "react";
+import { useClient } from "easemob-chat-uikit";
+
+const ChatroomApp = () => {
+  const client = useClient();
+
+  useEffect(() => {
+    client.addEventHandler("chatroom", {
+      onChatroomEvent: (event: AgoraChat.EventData) => {
+        if (event.operation === "muteMember") {
+          // console.log('你已被禁言')
+        }
+        // 全部事件请参考 https://docs-im-beta.easemob.com/document/web/room_manage.html#%E7%9B%91%E5%90%AC%E8%81%8A%E5%A4%A9%E5%AE%A4%E4%BA%8B%E4%BB%B6
+      },
+    });
+  }, []);
+};
 ```
