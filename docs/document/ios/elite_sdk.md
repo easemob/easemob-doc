@@ -283,7 +283,7 @@
     <tr>
       <td rowspan="4">管理聊天室基本属性</td>
       <td>获取聊天室公告</td>
-      <td rowspan="4"><a href="https://docs-im-beta.easemob.com/document/ios/room_attributes.html">管理聊天室基本属性</a></td>
+      <td rowspan="4"><a href="https://docs-im-beta.easemob.com/document/ios/room_attributes.html#管理聊天室基本属性">管理聊天室基本属性</a></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
