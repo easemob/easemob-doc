@@ -120,6 +120,14 @@ const documentSidebar = [
       { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
     ],
     except: ['applet', 'server-side']
+
+  },
+  {
+    text: '精简版 SDK',
+    children: [
+      { text: '精简版 SDK 使用说明', link: 'elite_sdk.html' },
+    ],
+    only: ['android', 'ios']
   },
   {
     text: '产品介绍',
