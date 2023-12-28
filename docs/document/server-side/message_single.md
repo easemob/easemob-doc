@@ -808,6 +808,9 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
   "type": "custom",
   "body": {
     "customEvent": "custom_event"
+    "customExts":{
+          "ext_key1":"ext_value1"
+      }
   }
 }'
 ```
