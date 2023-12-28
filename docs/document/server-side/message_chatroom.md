@@ -762,6 +762,9 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
   "type": "custom",
   "body": {
     "customEvent": "custom_event"
+    "customExts":{
+            "ext_key1":"ext_value1"
+        }
   }
 }'
 ```
