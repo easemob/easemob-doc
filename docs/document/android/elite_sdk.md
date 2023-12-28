@@ -18,7 +18,7 @@
 
 精简版 SDK 的功能如下表所示：
 
-[<html>
+<html>
 <head>
 <meta charset="utf-8">
 <title>无标题文档</title>
@@ -39,7 +39,7 @@
       <td rowspan="17">消息管理</td>
       <td rowspan="11">发送和接收消息</td>
       <td>发送和接收消息</td>
-      <td rowspan="11">&lt;a href="https://docs-im-beta.easemob.com/document/android/message_send_receive.html"&gt;发送和接收消息&lt;/a&gt;</td>
+      <td rowspan="11"><p><a href="https://docs-im-beta.easemob.com/document/android/message_send_receive.html">发送和接收消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -96,41 +96,41 @@
     <tr>
       <td>管理本地消息</td>
       <td>管理本地消息</td>
-      <td><p>&lt;a href="https://docs-im-beta.easemob.com/document/android/message_manage.html"&gt;管理本地消息&lt;/a&gt;</p></td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_manage.html">管理本地消息</a></p></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>管理服务端消息</td>
       <td>管理服务端消息</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/message_retrieve.html"&gt;管理服务端消息&lt;/a&gt;</td>
+      <td><p><a href="#" target="https://docs-im-beta.easemob.com/document/android/message_retrieve.html">管理服务端消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
       <td rowspan="2">管理消息回执</td>
       <td>消息送达回执</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/message_receipt.html"&gt;消息送达回执&lt;/a&gt;</td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_receipt.html">消息送达回执</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>消息已读回执</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/message_receipt.html"&gt;消息已读回执&lt;/a&gt;</td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_receipt.html">消息已读回执</a></p></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>修改消息</td>
       <td>单聊会话中已经发送成功的文本消息进行修改</td>
-      <td><p>&lt;a href="https://docs-im-beta.easemob.com/document/android/message_modify.html"&gt;修改消息&lt;/a&gt;</p></td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_modify.html">修改消息</a></p></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
     <tr>
-      <td>翻译</td>
+      <td height="71">翻译</td>
       <td>消息翻译</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/message_modify.html"&gt;消息翻译&lt;/a&gt;</td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_modify.html">消息翻译</a></p></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -138,40 +138,41 @@
       <td rowspan="6">会话管理</td>
       <td rowspan="2">会话列表</td>
       <td>获取本地所有会话 </td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/conversation_list.html#获取本地所有会话"&gt;获取本地所有会话 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/conversation_list.html#获取本地所有会话">获取本地所有会话</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
     <tr>
       <td> 从服务器分页获取会话列表</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/conversation_list.html#从服务器分页获取会话列表"&gt;从服务器分页获取会话列表 &lt;/a&gt;</td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/conversation_list.html#从服务器分页获取会话列表">从服务器分页获取会话列表">从服务器分页获取会话列表</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>会话未读数</td>
       <td>获取或清零本地会话的未读数</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/conversation_unread.html"&gt;从服务器分页获取会话列表 &lt;/a&gt;</td>
+      <td><p>&nbsp;</p>
+      <p><a href="https://docs-im-beta.easemob.com/document/android/conversation_unread.html">会话未读数</a></p></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>置顶会话</td>
       <td>置顶会话</td>
-      <td>&nbsp;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/conversation_pin.html">置顶会话</a></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
       <td rowspan="2">删除会话</td>
       <td>单向删除服务端会话及其历史消息</td>
-      <td>&nbsp;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/conversation_delete.html#单向删除服务端会话及其历史消息">单向删除服务端会话及其历史消息</a></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>删除本地会话及历史消息</td>
-      <td>&nbsp;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/conversation_delete.html#删除本地会话及历史消息">删除本地会话及历史消息</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -179,7 +180,7 @@
       <td>管理用户属性</td>
       <td>设置和获取用户属性</td>
       <td>用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/userprofile.html"&gt;管理用户属性 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/userprofile.html">管理用户属性</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -191,7 +192,7 @@
       <p>从服务器获取好友列表；</p>
       <p>将用户添加到或移除黑名单</p>
       <p>从服务器获取黑名单列表</p></td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/user_relationship.html"&gt;管理用户关系 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/user_relationship.html">管理用户关系</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -201,7 +202,7 @@
       <td><p>创建、管理群组；</p>
       <p>管理群成员；</p>
       <p>管理群成员属性</p></td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/group_overview.html"&gt;群组管理 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/group_overview.html">群组管理</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -209,14 +210,14 @@
       <td rowspan="19">聊天室管理</td>
       <td>聊天室为多人聊天，没有固定的成员关系。</td>
       <td><p>聊天室概述</p></td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/room_overview.html"&gt;聊天室管理 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/room_overview.html">聊天室概述</a></td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
       <td rowspan="6">创建和管理聊天室</td>
       <td>创建聊天室</td>
-      <td rowspan="6">&lt;a href="https://docs-im-beta.easemob.com/document/android/room_manage.html"&gt;创建和管理聊天室以及监听事件 &lt;/a&gt;</td>
+      <td rowspan="6"><a href="https://docs-im-beta.easemob.com/document/android/room_manage.html">创建和管理聊天室</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -248,7 +249,7 @@
     <tr>
       <td rowspan="7">管理聊天室成员</td>
       <td>获取聊天室成员列表</td>
-      <td rowspan="7">&lt;a href="https://docs-im-beta.easemob.com/document/android/room_members.html"&gt;管理聊天室成员 &lt;/a&gt;</td>
+      <td rowspan="7"><a href="https://docs-im-beta.easemob.com/document/android/room_members.html">管理聊天室成员</a></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -285,7 +286,7 @@
     <tr>
       <td rowspan="4">管理聊天室基本属性</td>
       <td>获取聊天室公告</td>
-      <td rowspan="4">&lt;a href="https://docs-im-beta.easemob.com/document/android/room_attributes.html#管理聊天室基本属性"&gt;管理聊天室基本属性 &lt;/a&gt;</td>
+      <td rowspan="4"><a href="https://docs-im-beta.easemob.com/document/android/room_attributes.html">管理聊天室基本属性</a></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -307,7 +308,7 @@
     <tr>
       <td>管理聊天室自定义属性</td>
       <td>管理聊天室自定义属性</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/room_attributes.html#管理聊天室自定义属性-key-value"&gt;管理聊天室自定义属性 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/room_attributes.html#管理聊天室自定义属性-key-value">管理聊天室自定义属性</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -315,7 +316,7 @@
       <td rowspan="7">进阶功能</td>
       <td>离线推送</td>
       <td>集成第三方消息推送服务</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/push.html"&gt;离线推送 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/push.html">离线推送</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -328,35 +329,35 @@
     </tr>
     <tr>
       <td>多设备管理</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/multi_device.html"&gt;多设备登录 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/multi_device.html">多设备登录</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>管理在线状态订阅</td>
       <td>管理在线状态订阅</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/presence.html"&gt;在线状态订阅 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/presence.html">在线状态订阅</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>消息表情回复&nbsp;Reaction</td>
       <td>对单聊和群聊中的消息通过表情回复</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/reaction.html"&gt;消息表情回复 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/reaction.html">消息表情回复</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>子区管理</td>
       <td>子区是群组成员的子集</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/thread.html"&gt;子区管理 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/thread.html">子区管理</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>消息举报</td>
       <td>开发者可以在客户端调用该接口举报违规消息</td>
-      <td>&lt;a href="https://docs-im-beta.easemob.com/document/android/moderation.html"&gt;消息举报 &lt;/a&gt;</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/moderation.html">消息举报</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -364,6 +365,7 @@
 </table>
 </body>
 </html>
+
 
 ## 错误码 
 
