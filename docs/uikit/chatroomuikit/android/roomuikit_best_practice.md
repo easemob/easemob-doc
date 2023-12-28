@@ -6,9 +6,7 @@
 
 初始化 ChatroomUIKit 时，你可以传入 `option` 参数，设置各种选项。
 
-// TODO：代码缩进有问题吗？
-
-```Kotlin
+```kotlin
  		val chatroomUIKitOptions = ChatroomUIKitOptions(
             chatOptions = ChatSDKOptions(enableDebug = true),
             uiOptions = UiOptions(
@@ -21,8 +19,6 @@
 ## 登录 ChatroomUIKit
 
 你可以通过使用工程中的用户对象并遵守 `UserInfoProtocol` 协议登录 ChatroomUIKit，示例代码如下：
-
-// TODO：quickstart 中的内容可以搬过来吧
 
 ```kotlin
 class YourAppUser: UserInfoProtocol {

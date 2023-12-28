@@ -6,6 +6,8 @@
 
 - 你可以扫描以下二维码体验环信聊天室 UIKit demo：
 
+
+
 ## 功能
 
 ChatroomUIKit 提供以下功能：
