@@ -35,7 +35,8 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   },
   plugins: {
     mdEnhance: {
-      container: true
+      container: true,
+      imgSize: true,
     },
   },
 });
