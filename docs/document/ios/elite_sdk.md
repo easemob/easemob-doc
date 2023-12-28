@@ -14,13 +14,6 @@
 
 精简版 SDK 的功能如下表所示：
 
-<html>
-<head>
-<meta charset="utf-8">
-<title>无标题文档</title>
-</head>
-
-<body>
 <table width="994" border="1">
   <tbody>
     <tr>
@@ -359,9 +352,6 @@
     </tr>
   </tbody>
 </table>
-</body>
-</html>
-
 
 ## 错误码 
 
