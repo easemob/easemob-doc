@@ -100,7 +100,7 @@
     <tr>
       <td>管理服务端消息</td>
       <td>管理服务端消息</td>
-      <td><p><a href="#" target="https://docs-im-beta.easemob.com/document/android/message_retrieve.html">管理服务端消息</a></p></td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_retrieve.html">管理服务端消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
