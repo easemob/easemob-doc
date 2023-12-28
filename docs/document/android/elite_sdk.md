@@ -5,10 +5,7 @@
 
 精简版 SDK 对应用的体积增量不大，android 为 1.11 MB，iOS 为 1.09 MB。
 
-精简版 SDK 下载地址如下：
-
-- 要下载 Android 端 SDK，点击[这里](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/SDK-mini/easemob-sdk-4.2.0-lite.zip)。
-- 要下载 iOS 端 SDK，点击[这里](https://downloadsdk.easemob.com/downloads/SDK-mini/iOS_IMLite_SDK_4.2.0_1116.zip)。
+要下载 Android 端精简版 SDK，点击[这里](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/SDK-mini/easemob-sdk-4.2.0-lite.zip)。
 
 :::tip
 精简版 SDK 无本地存储，可以升级为标准版 SDK，但标准版不能降级为精简版。
@@ -369,8 +366,7 @@
 
 ## 错误码 
 
-- [Android 错误码](error.html)
-- [iOS 错误码](error.html)
+[Android 错误码](error.html)
 
 
 
