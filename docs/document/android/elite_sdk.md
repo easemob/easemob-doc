@@ -363,9 +363,9 @@
   </tbody>
 </table>
 </body>
-</html>]
+</html>
 
-## 错误码
+## 错误码 
 
 - [Android 错误码](error.html)
 - [iOS 错误码](error.html)
