@@ -11,7 +11,7 @@ ChatroomUIKit 提供 `Chatroom` 和 `ChatroomMember` 组件，组件中包含各
 `Chatroom` 是整个聊天界面组件，由 `Header`、`MessageList`、`MessageInput` 和 `Broadcast` 子组件组成。每个组件可以用 `renderX` 方法替换成自定义的组件。
 
 | 属性                | 是否必需 | 类型          | 描述       |
-| ---------- | -------- | ----------------- | ------------ | ------------- |
+| ---------- | -------- | ----------------- | ------------ | 
 | className           | 否       | String                                | 组件的类名。                 |
 | prefix              | 否       | String                                | CSS 类名的前缀。             |
 | style               | 否       | React.CSSProperties                   | 组件的样式。                 |
