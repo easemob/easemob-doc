@@ -18,7 +18,7 @@ Appearance.swift 是容纳了所有可配项的类，你需要在初始化 Chatr
 
 4. [Appearance.userIdentifyPlaceHolder](https://github.com/zjc19891106/ChatroomUIKit/blob/main/Sources/ChatroomUIKit/Classes/UI/Components/Chat/Cells/ChatBarrageCell.swift)：用户身份标识默认图。
 
-![img](@static/images/uikit/chatroomios/userIdentifyPlaceHolder.png)
+![img](@static/images/uikit/chatroomios/userIdentityPlaceHolder.png)
 
 5. [Appearance.barrageCellStyle](https://github.com/zjc19891106/ChatroomUIKit/blob/main/Sources/ChatroomUIKit/Classes/UI/Core/UIKit/Utils/Appearance.swift)：弹幕区域 Cell 的展示样式。你可以选择对时间戳、用户标识和用户头像进行显示或隐藏。
 
