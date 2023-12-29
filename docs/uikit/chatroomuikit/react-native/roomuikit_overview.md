@@ -4,10 +4,9 @@
 
 - 若要访问源码，请点击[这里](https://github.com/easemob/UIKit_Chatroom_rn)。
 
-- 你可以扫描以下 [Android](https://www.pgyer.com/miATnL) 和 [iOS](https://www.pgyer.com/ZaEbya) 平台的二维码体验环信聊天室 UIKit demo：
+- 你可以扫描以下 Android 和 iOS 平台的二维码体验环信聊天室 UIKit demo：
 
-<img src=@static/images/uikit/chatroomrn/demo_rn_android.png  title="Android Demo" width="200"/>&nbsp;&nbsp;
-<img src=@static/images/uikit/chatroomrn/demo_rn_ios.png  title=iOS Demo width="200"/>
+![img](@static/images/uikit/chatroomrn/demo_rn.png)
 
 ## 功能
 
