@@ -58,7 +58,7 @@ const chatroomUikitSidebar = [
   { text: "集成 ChatroomUIKit", link: "roomuikit_integrated.html"},
   { text: "快速开始", link: "roomuikit_quickstart.html" },
   { text: "最佳实践", link: "roomuikit_best_practice.html" },
-  { text: "可配置项", link: "roomuikit_configuration_items.html"},
+  { text: "可配置项", link: "roomuikit_configuration_items.html" },
   { text: "主题", link: "roomuikit_theme.html" },
   { text: "自定义", link: "roomuikit_customize.html" },
   { text: "更新日志", link: "roomuikit_releasenote.html" },
