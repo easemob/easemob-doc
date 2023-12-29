@@ -2,7 +2,13 @@
 
 ChatroomUIkit 内置浅色和深色主题，默认为浅色主题。每个 UI 组件都会用到主题。
 
-// TODO：将浅色和深色主题的截图贴在这里。截图
+- 浅色主题
+
+![img](@static/images/uikit/chatroomandroid/light_mode.png)
+
+- 深色主题
+
+![img](@static/images/uikit/chatroomandroid/dark_mode.png)
 
 ## 切换主题 
 
