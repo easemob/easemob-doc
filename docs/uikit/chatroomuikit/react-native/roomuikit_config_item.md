@@ -449,7 +449,7 @@ ref?.current?.close?.();
 | ----- | ------------------------------------ |
 | close | 主动关闭输入状态，切换为聊天室底部工具栏区域。 |
 
-![img](@static/images/uikit/chatroomrn/input_bar.pn)
+![img](@static/images/uikit/chatroomrn/input_bar.png)
 
 ![img](@static/images/uikit/chatroomrn/emoji_list.png)
 
