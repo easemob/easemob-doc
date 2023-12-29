@@ -67,6 +67,7 @@ const chatroomUikitSidebar = [
   },
   { text: "主题", link: "roomuikit_theme.html" },
   { text: "自定义", link: "roomuikit_customize.html" },
+  { text: "更新日志", link: "roomuikit_releasenote.html" },
   { text: "设计指南", link: "design_guide.html" },
 ];
 
