@@ -1,6 +1,6 @@
 # 直播聊天室人机交互界面工具包设计指南 (Beta)
 
-Design Guide of Live Stream Chat UIkit(Beta)
+<Toc />
 
 <img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/crukcover_ease.png" width="100%" >
 

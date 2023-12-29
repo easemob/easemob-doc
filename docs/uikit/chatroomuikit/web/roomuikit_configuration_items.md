@@ -1,5 +1,7 @@
 # 可配置项
 
+<Toc />
+
 ChatroomUIKit 提供 `Chatroom` 和 `ChatroomMember` 组件，组件中包含各种属性，你可以根据需求进行设置。
 
 ## Chatroom 组件

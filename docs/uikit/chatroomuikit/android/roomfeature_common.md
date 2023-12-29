@@ -1,5 +1,7 @@
 # ChatroomUIKit 通用特性
 
+<Toc />
+
 ## 创建聊天室  
 
 ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的接口创建聊天室](/document/server-side/chatroom.html#创建聊天室)。

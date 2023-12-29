@@ -1,5 +1,7 @@
 # 可配项修改
 
+<Toc />
+
 - 修改 `UiOptions` 中的可配项。例如，你可以修改 `UiOptions` 中的 `useGiftsInList` 配置消息列表上是否显示礼物。
 
 ```kotlin

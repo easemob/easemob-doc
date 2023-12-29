@@ -1,5 +1,7 @@
 # 最佳实践
 
+<Toc />
+
 ## 初始化 ChatroomUIKit
 
 初始化是使用 ChatroomUIKit 的必要步骤，需在所有接口方法调用前完成。

@@ -1,5 +1,7 @@
 # 主题
 
+<Toc />
+
 ChatroomUIkit 内置浅色和深色主题，默认为浅色主题。
 
 ![img](@static/images/uikit/chatroomweb/light_mode.png)

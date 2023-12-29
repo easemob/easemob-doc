@@ -1,5 +1,7 @@
 # 集成 ChatroomUIKit
 
+<Toc />
+
 使用 ChatroomUIKit 之前，你需要将 ChatroomUIKit 集成到你的应用中。
 
 ## 前提条件
