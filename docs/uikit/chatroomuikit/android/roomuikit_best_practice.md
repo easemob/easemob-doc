@@ -2,7 +2,7 @@
 
 ## 初始化 ChatroomUIKit
 
-初始化是使用 ChatroomUIKit 的必要步骤，需在所有接口方法调用前完成。如果进行多次初始化操作，只有第一次初始化以及相关的参数生效。
+初始化是使用 ChatroomUIKit 的必要步骤，需在所有接口方法调用前完成。
 
 初始化 ChatroomUIKit 时，你可以传入 `option` 参数，设置各种选项。
 

@@ -4,7 +4,7 @@
 
 - 若要访问源码，请点击[这里](https://github.com/easemob/Easemob-UIKit-web)。
 
-- 你可以扫描以下二维码体验环信聊天室 UIKit demo：// 暂时还没有，后面正式上线后补充
+- 要体验环信聊天室 UIKit demo，请点击[这里](https://livestream-hsb.oss-cn-beijing.aliyuncs.com/index.html)。
 
 ## 功能
 
