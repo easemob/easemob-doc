@@ -14,7 +14,7 @@ Appearance.swift 是容纳了所有可配项的类，你需要在初始化 Chatr
 
 3. [Appearance.avatarPlaceHolder](https://github.com/zjc19891106/ChatroomUIKit/blob/main/Sources/ChatroomUIKit/Classes/UI/Components/Chat/Cells/ChatBarrageCell.swift)：头像默认图。
 
-![img](@static/images/uikit/chatroomios/avatarPlaceHolder.pn)
+![img](@static/images/uikit/chatroomios/avatarPlaceHolder.png)
 
 4. [Appearance.userIdentifyPlaceHolder](https://github.com/zjc19891106/ChatroomUIKit/blob/main/Sources/ChatroomUIKit/Classes/UI/Components/Chat/Cells/ChatBarrageCell.swift)：用户身份标识默认图。
 
