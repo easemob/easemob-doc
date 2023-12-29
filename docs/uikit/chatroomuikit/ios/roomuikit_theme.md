@@ -1,8 +1,14 @@
 # 主题
 
-主题即一个应用的主题颜色。ChatroomUIkit 内置浅色和深色主题，默认为浅色主题。
+ChatroomUIkit 内置浅色和深色主题，默认为浅色主题。
 
-// TODO：将浅色和深色主题的截图贴在这里。截图
+- 浅色主题
+
+![img](@static/images/uikit/chatroomios/light_mode.png =500x500)
+
+- 深色主题
+
+![img](@static/images/uikit/chatroomios/dark_mode.png =500x500)
 
 ## 切换为内置主题 
 
@@ -30,7 +36,7 @@ ChatroomUIKit 中的所有颜色均使用 HSLA 颜色模型定义，该模型是
 
 - A（Alpha）：Alpha 是颜色的透明度。值 `1` 表示完全不透明，`0` 表示完全透明。
 
-通过调整 HSLA 模型的各个分量的值，你可以实现精确的色彩控制。
+通过调整 HSLA 模型的色相值，你可以实现精确的色彩控制。
 
 ```Swift
 Appearance.primaryHue = 191/360.0

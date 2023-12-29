@@ -76,11 +76,8 @@ let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: "Chat room ID",
 
 4. [添加聊天室成员](https://docs-im-beta.easemob.com/product/enable_and_configure_IM.html#创建聊天室)。
 
-// TODO：添加创建好的聊天室 UI 截图（含笑）
-
-
 ### 第四步 发送第一条消息
 
 点击屏幕下方的 `说点什么` 按钮唤起键盘，输入消息内容，点击 **发送** 按钮，发送消息。
 
-// TODO：添加截图
+![img](@static/images/uikit/chatroomios/click_chat.png =500x500)

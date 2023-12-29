@@ -57,10 +57,9 @@ implementation 'ChatroomUIKit'
 
 编译时，需要传入 App Key、用户 ID 和用户 token。因此，编译前，你需要在[环信控制台](https://console.easemob.com/user/login)上创建有效的环信即时通讯 IM 开发者账号，并获取 App Key，[创建环信 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)。此外，还需[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)。
 
-1. 初始化 SDK。  // TODO：初始化 SDK 还是 ChatroomUIKit？
+1. 初始化 ChatroomUIKit。
 
 ```kotlin
-// 初始化 ChatroomUIKit   
 class ChatroomApplication : Application() {
 
   override fun onCreate() {
@@ -91,12 +90,10 @@ class ChatroomActivity : ComponentActivity(){
 }
 ```
 
-
 ### 第四步 体验项目
 
 运行并体验该项目。
 
 ## 注意事项  
 
-示例工程仅用于快速跑通流程，暂时未提供多成员交互测试。// 这里是想说，多个成员不能进行聊天？
-
+示例工程仅用于快速跑通流程，暂时未提供多成员交互测试。

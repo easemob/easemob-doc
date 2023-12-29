@@ -2,11 +2,11 @@
 
 环信 ChatroomUIKit 提供 UIKit 的各种组件帮助开发者根据实际业务需求快速搭建聊天室应用。通过该 UIKit，聊天室中的用户可实时交互，发送普通弹幕消息、打赏消息和全局广播等功能。
 
-- 源码链接：// TODO：源码链接
+- 若要访问源码，请点击[这里](https://github.com/easemob/UIKit_Chatroom_android)。
 
 - 你可以扫描以下二维码体验环信聊天室 UIKit demo：
 
-
+![img](@static/images/uikit/chatroomandroid/demo.png)
 
 ## 功能
 

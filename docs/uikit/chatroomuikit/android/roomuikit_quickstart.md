@@ -104,6 +104,6 @@ class ChatroomActivity : ComponentActivity(){
 
 ### 第四步 发送消息
 
-点击屏幕下方的 `说点什么` 按钮唤起键盘，输入消息内容，点击 **发送** 按钮，发送消息。
+在屏幕下方输入消息内容，点击 **发送** 按钮，发送消息。
 
-// TODO：添加截图
+![img](@static/images/uikit/chatroomandroid/click_chat.png =500x500)
