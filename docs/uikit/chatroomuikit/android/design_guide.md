@@ -455,14 +455,14 @@ Message Bubble(Large Radius)
 头像可配置徽章（Badge）以体现用户的在离线等状态，徽章位置分两种：右下和右上
 本案不涉及
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk245.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk245.png" width="440" >
 
 ## 2.5.操作表单(Action Sheet)
 
 操作表单是以模态形式展示的多操作项表单，单个操作项分为 Enabled、Pressed、Disabled、Destructived 四种状态，以及 Cancel 特殊类型。同时可配置是否显示 icon、是否有分割线(stroke)
 此组件仅限移动端
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk25.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk25.png" width="390" >
 
 ## 2.6.浮层菜单(PopMenu)
 
@@ -521,7 +521,7 @@ Message Bubble(Large Radius)
 样式可配项有：背景色（Alpha0-100）、前景色（Neutral0-100）、圆角、字体的大小（Body Large、Body Medium、Body small）、消息气泡的 Pedding
 可增减的显示内容项有：Label、Badge、Avatar，Title 和 Description 为必要内容，显示内容的顺序是不可修改的。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk311.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk311.png" width="390" >
 
 ### 3.1.2.语音消息（Audio Message）
 
@@ -536,13 +536,13 @@ Message Bubble(Large Radius)
 为国内直播场景常见的样式，可设为 Large、Small 两个尺寸，
 默认驻留时间为 3 秒（可配置），事件并发时排队展示，可同时最多展示 2 条礼物消息
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3131.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3131.png" width="390" >
 
 消息气泡的样式可配项有：背景色、前景色、头像圆角（需要注意的是，消息背景圆角和头像圆角配套以达成风格的一致）、背景模糊（防止在语聊房场景下组件重叠带来的阅读困难）。
 
 #### 3.1.3.2.常驻礼物消息样式
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3132.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3132.png" width="390" >
 
 样式可配项和信息可配项与文本消息相同，只是增加了消息末尾的贴纸展示。
 
@@ -552,19 +552,19 @@ Message Bubble(Large Radius)
 
 #### 3.1.4.1.礼物消息和文本消息分开展示的样式
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3141.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3141.png" width="390" >
 
 此组件默认消息之间的间距为 4(用户可自行配置)，文本消息区域整体高度占屏幕比例用户可自行配置。礼物非常驻消息一直显示在区域顶侧。消息列右侧需留出给用户放置自定义消息组件的区域，所以此处消息的左右间距不可配置，固定左侧 16，右侧 78。
 
 #### 3.1.4.2.礼物消息和文本消息合并展示的样式
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3142.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3142.png" width="390" >
 
 此组件默认消息之间的间距为 4(用户可自行配置)，文本消息区域整体高度占屏幕比例用户可自行配置。消息列右侧需留出给用户放置自定义消息组件的区域，所以此处消息的左右间距不可配置，固定左侧 16，右侧 78。
 
 ### 3.1.5.消息操作（Message Action）
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk315.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk315.png" width="390" >
 
 长按消息弹起 action sheet 显示消息相关操作项，操作列表顶部标题栏显示所操作消息的详情。
 
@@ -572,17 +572,17 @@ Message Bubble(Large Radius)
 
 举报表单为消息操作的次级别页面，提供选择举报原因的单选项，选项数目可增减，选择后可提交举报。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3151.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3151.png" width="390" >
 
 ### 3.1.6.全局广播（Global Message）
 
 全局广播为超级管理员发送的所有直播间同时可见的非常驻消息，分为三种类型（具体类型需开发者自行定义）通过左侧图标和背景色示以区分。样式的可配项有：圆角、背景色、前景色，信息展示的可配项有左侧 icon(有或无)，以及用户可以在自定义广播类型时修改 icon 资源图。消息仅支持单排显示，广播内容超过一屏显示范围为字幕滚动展示，滚动速率可配。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk316.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk316.png" width="440" >
 
 此消息在移动端一般出现在视频流的顶部；在 web 端出现在聊天窗的顶部，为浮层展示。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk316b.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk316b.png" width="790" >
 
 ## 3.2.底部条（Footer Bar）
 
@@ -590,7 +590,7 @@ Message Bubble(Large Radius)
 样式上的可配项支持背景色、前景色、圆角、图标可替换，是否添加背景模糊效果
 发送消息 action 为必要项，礼物消息 action 为可选项，另最多支持 4 个用户可定义的 action。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk32.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk32.png" width="390" >
 
 ## 3.3.输入条（Input Bar）和语音发送器（Audio Input）
 
@@ -603,25 +603,25 @@ Message Bubble(Large Radius)
 
 移动端文本输入条包含文字输入和至多 4 个的键盘切换操作（包括表情键盘、发送语音两个可配项以及另外两个用户可自定义项），可选配文本或者图标形式的发送按钮。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3311.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3311.png" width="390" >
 
 文本输入条内的文本输入区域为输入区域组件，当单行文本放不下时，文字可在输入区域内折行，对应的输入区域会累积行高，至多支持 4 行文本区域，输入文本超过 4 行后，文本分页展示，用户可滚动查看所键入的文本。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3311b.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3311b.png" width="390" >
 
 样式上支持配置分割线（Stroke）、内部输入区域和发送按钮的圆角、描边（Stroke）、前/背景色。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3311c.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3311c.png" width="390" >
 
 #### 3.3.1.2.网页端文本输入条（Input Bar）
 
 网页端文本输入条包含文字输入和至多 4 个的键盘切换操作（包括表情键盘、发送语音、发送礼物三个可配项以及另外一个用户可自定义项），可选配图标形式的发送按钮。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3312.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3312.png" width="390" >
 
 文本输入条内的文本输入区域为输入区域组件，当单行文本放不下时，文字可在输入区域内折行，对应的输入区域会累积行高，至多支持 4 行文本区域，输入文本超过 4 行后，文本分页展示，用户可滚动查看所键入的文本。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3312b.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3312b.png" width="390" >
 
 ### 3.3.2.语音发送器（Audio Input）
 
@@ -649,7 +649,7 @@ Message Bubble(Large Radius)
 
 贴纸键盘在本案内主要应用于发送礼物消息。内容上支持礼物类别（横向滑动切换礼物类别）/类别内礼物个数（上下滑动查看更多礼物）的增减。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk352.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk352.png" width="390" >
 
 ## 3.6.成员列表（Member List）
 
@@ -657,7 +657,7 @@ Message Bubble(Large Radius)
 
 成员列表顶部支持成员类别筛选，可通过点击 tab 或者左右滑动整个列表切换，至少支持一个 tab, tab 超过四个时支持左右滑动
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk361.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk361.png" width="390" >
 
 ### 3.6.2.搜索条（Search Bar）
 
@@ -669,11 +669,11 @@ Message Bubble(Large Radius)
 
 列表项展示当前成员信息，可展示的信息有徽章(Badge)、头像（Avatar）、用户名（Title）、用户详情（Subtitle），用户名为必要项，其他信息可配置。列表项目右侧支持 action btn，同时列表项支持点击/长按等事件
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk363.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk363.png" width="390" >
 
 样式上，列表项可配置分割线（Stroke），头像支持圆角可配。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk363b.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk363b.png" width="390" >
 
 ### 3.6.4.列表（Member List）
 
@@ -681,23 +681,23 @@ Message Bubble(Large Radius)
 
 #### 3.6.4.1.列表整体加载
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3641.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3641.png" width="390" >
 
 #### 3.6.4.2.空列表
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3642.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3642.png" width="390" >
 
 #### 3.6.4.3.列表拉取失败
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3643.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3643.png" width="390" >
 
 #### 3.6.4.4.列表上滑加载
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3644.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3644.png" width="390" >
 
 #### 3.6.4.5.列表展开全屏
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3645.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk3645.png" width="390" >
 
 # 4.UI 设计资源
 
