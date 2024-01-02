@@ -1,4 +1,4 @@
-# 直播聊天室人机交互界面工具包设计指南 (Beta)
+# 直播聊天室人机交互界面工具包设计指南 (V1.0.0)
 
 <Toc />
 
@@ -410,14 +410,14 @@ Message Bubble(Large Radius)
 输入框为需要输入较少文字时使用的组件。
 也按照所放组件的大小分为大中小三种尺寸可配项，样式上，背景色和描边颜色可开关，圆角可配，状态上分为失焦未填写、失焦填写、聚焦未填写、聚焦填写、禁用填写、禁用未填写六种。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk22.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk22.png" width="390" >
 
 ## 2.3.输入域组件(Input Area)
 
 输入框为需要输入较多文字时使用的组件。
 在用于输入器的文本输入，和表单中、发布内容时需要填写较多文本时使用，样式上，背景色和描边颜色可开关，圆角可配，可显示最大输入字符数分数。状态上分为失焦未填写、失焦填写、聚焦未填写、聚焦填写、禁用填写、禁用未填写六种。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk23.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk23.png" width="390" >
 
 ## 2.4.头像组件(Avatar)
 
@@ -643,7 +643,7 @@ Message Bubble(Large Radius)
 礼物图片未读到时显示默认图，礼物价值可配置价值图标。
 单个贴纸状态有 Enabled、Disabled(主要用于慢速发送，需要用户自行实现)、Focused 三种，Focused 时显示发送按钮。
 
-![image text](https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk351.png)
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk351.png" width="390" >
 
 ### 3.5.2.贴纸键盘（Stickers Pick）
 
@@ -657,7 +657,7 @@ Message Bubble(Large Radius)
 
 成员列表顶部支持成员类别筛选，可通过点击 tab 或者左右滑动整个列表切换，至少支持一个 tab, tab 超过四个时支持左右滑动
 
-<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk361.png" width="390" >
+<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk361.png" width="480" >
 
 ### 3.6.2.搜索条（Search Bar）
 
