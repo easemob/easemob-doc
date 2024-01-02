@@ -262,7 +262,69 @@ public class EMFCMMSGService extends FirebaseMessagingService {
    <!-- huawei push end -->
    ```
 
-3. [获取 Token 及 自动初始化](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-client-dev-0000001050042041)。
+3. [获取 Token 及自动初始化](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-client-dev-0000001050042041)。
+
+打开应用，初始化环信 IM SDK 成功且成功登录后，获取一次华为推送 token，将 token 上传至环信服务器，与 IM 的登录账号绑定。
+
+```java
+/**
+     * 申请华为 Push Token：
+     * 1. getToken 接口只有在 AppGallery Connect 平台开通服务后申请 token 才会返回成功。
+     *
+     * 2. EMUI 10.0 及以上版本的华为设备上，getToken 接口直接返回 token。如果当次调用失败 Push 会缓存申请，之后会自动重试申请，成功后则以onNewToken 接口返回。
+     *
+     * 3. 低于 EMUI 10.0 的华为设备上，getToken 接口如果返回为空，确保 Push 服务开通的情况下，结果后续以 onNewToken 接口返回。
+     *
+     * 4. 服务端识别 token 过期后刷新 token，以 onNewToken 接口返回。
+     */
+    public void getHMSToken(Activity activity){
+        // 判断是否启用 FCM 推送
+        if (EMClient.getInstance().isFCMAvailable()) {
+            return;
+        }
+        try {
+            if(Class.forName("com.huawei.hms.api.HuaweiApiClient") != null){
+                Class<?> classType = Class.forName("android.os.SystemProperties");
+                Method getMethod = classType.getDeclaredMethod("get", new Class<?>[] {String.class});
+                String buildVersion = (String)getMethod.invoke(classType, new Object[]{"ro.build.version.emui"});
+                //在某些手机上，invoke 方法不报错
+                if(!TextUtils.isEmpty(buildVersion)){
+                    EMLog.d("HWHMSPush", "huawei hms push is available!");
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                // read from agconnect-services.json
+//                                String appId = AGConnectServicesConfig.fromContext(activity).getString("client/app_id");
+                                String appId = new AGConnectOptionsBuilder().build(activity).getString("client/app_id");
+                                EMLog.e("AGConnectOptionsBuilder","appId:"+appId);
+                                // 申请华为推送 token
+                                String token = HmsInstanceId.getInstance(activity).getToken(appId, "HCM");
+                                EMLog.d("HWHMSPush", "get huawei hms push token:" + token);
+                                if(token != null && !token.equals("")){
+                                    //没有失败回调，假定 token 失败时 token 为 null
+                                    EMLog.d("HWHMSPush", "register huawei hms push token success token:" + token);
+                                    // 上传华为推送 token
+                                    EMClient.getInstance().sendHMSPushTokenToServer(token);
+                                }else{
+                                    EMLog.e("HWHMSPush", "register huawei hms push token fail!");
+                                }
+                            } catch (ApiException e) {
+                                EMLog.e("HWHMSPush","get huawei hms push token failed, " + e);
+                            }
+                        }
+                    }.start();
+                }else{
+                    EMLog.d("HWHMSPush", "huawei hms push is unavailable!");
+                }
+            }else{
+                EMLog.d("HWHMSPush", "no huawei hms push sdk or mobile is not a huawei phone");
+            }
+        } catch (Exception e) {
+            EMLog.d("HWHMSPush", "no huawei hms push sdk or mobile is not a huawei phone");
+        }
+    }
+```
 
 4. 在 SDK 初始化的时候，配置启用华为推送。
 
