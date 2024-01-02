@@ -34,7 +34,7 @@ import ChatroomUIKit
 class AppDelegate：UIResponder，UIApplicationDelegate {
      var window：UIWindow？
      func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-         let error = ChatroomUIKitClient.shared.setup（with: "Appkey"）
+         let error = ChatroomUIKitClient.shared.setup(appKey: "Appkey")
      }
 }
 ```
@@ -43,7 +43,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 
 使用用户 ID 和用户 Token 登录 ChatroomUIKit。
 
-:::notice
+:::tip
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 ChatroomUIKit。
 :::
 
@@ -52,7 +52,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
 
 ```swift
-ChatroomUIKitClient.shared.login(with userId: "user id", token: "token", completion: <#T##(ChatError?) -> Void#>)
+ChatroomUIKitClient.shared.login(userId: "user id", token: "token", completion: <#T##(ChatError?) -> Void#>)
 ```
 
 ### 第三步 创建聊天室视图

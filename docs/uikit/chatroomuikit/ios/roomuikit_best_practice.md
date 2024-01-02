@@ -10,7 +10,7 @@
 let option = ChatroomUIKitInitialOptions.ChatOptions()
 option.enableConsoleLog = true
 option.autoLogin = true
-let error = ChatroomUIKitClient.shared.setup(with: ExampleRequiredConfig.appKey,option: option)
+let error = ChatroomUIKitClient.shared.setup(appKey,option: option)
 ```
 
 ## 登录 ChatroomUIKit
@@ -35,7 +35,7 @@ public final class YourAppUser: NSObject,UserInfoProtocol {
         public var gender: Int = 1
         
     }
-ChatroomUIKitClient.shared.login(with: YourAppUser(), token: "token", completion: <#T##(ChatError?) -> Void#>)
+ChatroomUIKitClient.shared.login(user: YourAppUser(), token: "token", completion: <#T##(ChatError?) -> Void#>)
 ```
 
 ## 初始化聊天室视图
@@ -56,7 +56,7 @@ let options  = ChatroomUIKitInitialOptions.UIOptions()
 options.bottomDataSource = self.bottomBarDatas()
 options.showGiftsBarrage = true
 options.chatBarrageAreaShowGift = false
-let roomView = ChatroomUIKitClient.shared.launchRoomViewWithOptions(roomId: self.roomId, frame: CGRect(x: 0, y: ScreenHeight/2.0, width: ScreenWidth, height: ScreenHeight/2.0), ownerId: "Chatroom's owner user id", options: options)
+let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: self.roomId, frame: CGRect(x: 0, y: ScreenHeight/2.0, width: ScreenWidth, height: ScreenHeight/2.0), ownerId: "Chatroom's owner user id", options: options)
 addSubView(roomView)
 ```
 
