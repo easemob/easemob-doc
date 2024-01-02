@@ -72,4 +72,4 @@ ChatroomUIKitClient.shared.registerRoomEventsListener（listener：self）
 
 ## 参考
 
-若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/UIKit_Chatroom_ios/tree/main/Example)。
+若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。
