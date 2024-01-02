@@ -20,9 +20,7 @@
 
 2. 选择 **File** > **import Module**。
 
-3. 添加模块依赖。
-
-- 本地依赖：
+3. 模块本地依赖。
 
 找到下载的 **ChatroomUIKit** 模块添加为本地依赖。将 [ChatroomUIKit](https://github.com/easemob/UIKit_Chatroom_android/tree/dev/ChatroomUIKit) 和 [ChatroomService](https://github.com/easemob/UIKit_Chatroom_android/tree/dev/ChatroomService) 模块导入到项目中。
 
@@ -37,14 +35,6 @@ project(':ChatroomService').projectDir = new File('../ChatroomUIKit/ChatroomServ
 dependencies {
   implementation(project(mapOf("path" to ":ChatroomUIKit")))
 }
-```
-
-- 远程依赖：
-
-在集成 ChatroomUIKit 的 app 目录下的 `build.gradle` 中添加下行代码：
-
-```
-implementation 'ChatroomUIKit'
 ```
 
 ### 第一步 初始化 ChatroomUIKit

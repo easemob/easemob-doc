@@ -1,4 +1,4 @@
-# 可配项修改
+# 可配项
 
 Appearance.swift 是容纳了所有可配项的类，你需要在初始化 ChatroomView 之前修改其中的属性。
 
