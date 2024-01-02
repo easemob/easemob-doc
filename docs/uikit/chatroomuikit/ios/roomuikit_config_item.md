@@ -1,6 +1,6 @@
-# 可配项
+# 可配置项
 
-[Appearance.swift](https://github.com/zjc19891106/ChatroomUIKit/blob/main/Sources/ChatroomUIKit/Classes/UI/Core/UIKit/Utils/Appearance.swift) 是容纳了所有可配项的类，你需要在初始化 ChatroomView 之前修改其中的属性。
+[Appearance.swift](https://github.com/zjc19891106/ChatroomUIKit/blob/main/Sources/ChatroomUIKit/Classes/UI/Core/UIKit/Utils/Appearance.swift) 是容纳了所有可配置项的类，你需要在初始化 ChatroomView 之前修改其中的属性。
 
 ## 消息视图
 

@@ -1,8 +1,8 @@
-# 可配项
+# 可配置项
 
 <Toc />
 
-- 修改 `UiOptions` 中的可配项。例如，你可以修改 `UiOptions` 中的 `useGiftsInList` 配置消息列表上是否显示礼物。
+- 修改 `UiOptions` 中的可配置项。例如，你可以修改 `UiOptions` 中的 `useGiftsInList` 配置消息列表上是否显示礼物。
 
 ```kotlin
 val chatroomUIKitOptions = ChatroomUIKitOptions(
@@ -13,7 +13,7 @@ val chatroomUIKitOptions = ChatroomUIKitOptions(
 )
 ```
 
-- 修改 `ViewModel` 中的可配项。例如，你可以修改 `MessageListViewModel` 中的可配项，配置是否显示时间和头像。
+- 修改 `ViewModel` 中的可配置项。例如，你可以修改 `MessageListViewModel` 中的可配项，配置是否显示时间和头像。
 
 ```kotlin
 class MessageListViewModel(
