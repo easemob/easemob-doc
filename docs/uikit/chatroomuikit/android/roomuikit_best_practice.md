@@ -57,8 +57,12 @@ class ChatroomActivity : ComponentActivity(){
 
 ## 监听 ChatroomUIKit 事件和错误
 
-你可以调用 `registerRoomEventsListener` 方法添加监听器用于监听 ChatroomUIKit 事件和错误。
+你可以调用 `registerRoomResultListener` 方法添加监听器用于监听 ChatroomUIKit 事件和错误。
 
-```Kotlin
+```kotlin
 ChatroomUIKitClient.getInstance().registerRoomResultListener(this)
 ```
+
+## 参考
+
+若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/Android/ChatroomDemo)。
