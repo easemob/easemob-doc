@@ -4,7 +4,7 @@
 
 ## 创建聊天室  
 
-ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的接口创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
+ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的 REST API 创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
 
 ![img](@static/images/uikit/chatroomfeature/chatroom_create.png =500x500)
 
@@ -14,7 +14,7 @@ ChatroomUIKit 提供离开聊天室功能。聊天室中的成员可自行离开
 
 ## 销毁聊天室
 
-ChatroomUIKit 不提供销毁聊天室的功能，你可以[调用即时通讯 IM SDK 的接口销毁聊天室](/document/server-side/chatroom.html#删除聊天室)。
+ChatroomUIKit 不提供销毁聊天室的功能，你可以[调用即时通讯 IM SDK 的 REST API 销毁聊天室](/document/server-side/chatroom.html#删除聊天室)。
 
 ![img](@static/images/uikit/chatroomfeature/chatroom_destroy.png =500x500)
 

@@ -55,6 +55,70 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 )
 ```
 
+## 聊天室事件
+
+ChatroomUIKit 中提供了聊天室事件的监听接口。你可以通过注册聊天室监听器，获取聊天室事件，并作出相应处理。
+
+ChatroomUIKit 中主动调用 API 的事件监听如下:
+
+```javascript
+import { eventHandler } from "easemob-chat-uikit";
+
+eventHandler.addEventHandler("chatroom", {
+  onError: (error) => {
+    // 所有 API 调用失败除了回调相应的事件外都会回调 onError 事件
+  },
+  joinChatRoom: {
+    error: (err) => {},
+    success: () => {},
+  },
+  recallMessage: {
+    error: (err) => {},
+    success: () => {},
+  },
+  reportMessage: {
+    // ...
+  },
+  sendMessage: {
+    // ...
+  },
+  getChatroomMuteList: {
+    // ...
+  },
+  removeUserFromMuteList: {
+    // ...
+  },
+  unmuteChatRoomMember: {
+    // ...
+  },
+  removerChatroomMember: {
+    // ...
+  },
+});
+```
+
+从 UIKit 中获取 Chat SDK 实例来监听收到的聊天室事件:
+
+```javascript
+import React, { useEffect } from "react";
+import { useClient } from "easemob-chat-uikit";
+
+const ChatroomApp = () => {
+  const client = useClient();
+
+  useEffect(() => {
+    client.addEventHandler("chatroom", {
+      onChatroomEvent: (event: AgoraChat.EventData) => {
+        if (event.operation === "muteMember") {
+          // console.log('你已被禁言')
+        }
+        // 全部事件请参考 https://docs-im-beta.easemob.com/document/web/room_manage.html#%E7%9B%91%E5%90%AC%E8%81%8A%E5%A4%A9%E5%AE%A4%E4%BA%8B%E4%BB%B6
+      },
+    });
+  }, []);
+};
+```
+
 ## 参考
 
 若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/WEB/ChatroomDemo)。
