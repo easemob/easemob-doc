@@ -77,8 +77,8 @@ import {
   useClient,
   rootStore,
   ChatroomMember,
-} from "agora-chat-uikit";
-import "agora-chat-uikit/style.css";
+} from "easemob-chat-uikit";
+import "easemob-chat-uikit/style.css";
 
 const ChatroomApp = observer(() => {
   const client = useClient();

@@ -206,19 +206,19 @@ export const zhNavbar = navbar([
     text: "即时推送",
     link: "/push/push_overview.html",
   },
-  {
-    text: "私有部署",
-    children: [
-      {
-        text: "即时通讯",
-        link: "/private/im/uc_deploy.html",
-      },
-      {
-        text: "音视频",
-        link: "/private/media/common_introduction.html",
-      },
-    ],
-  },
+  // {
+  //   text: "私有部署",
+  //   children: [
+  //     {
+  //       text: "即时通讯",
+  //       link: "/private/im/uc_deploy.html",
+  //     },
+  //    {
+  //      text: "音视频",
+  //      link: "/private/media/common_introduction.html",
+  //    },
+  //  ],
+  // },
   { text: "历史版本", link: "https://docs-im.easemob.com/ccim/intro" },
   { text: "文档“捉虫”活动", link: "https://www.imgeek.org/article/825360944" },
 ]);
