@@ -74,6 +74,10 @@ let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: "Chat room ID",
 
 3. 将聊天室视图添加到目标区域。
 
+在调用 `ChatroomUIKitClient.shared.launchRoomView(roomId: self.roomId, frame: CGRect(x: 0, y: ScreenHeight/2.0, width: ScreenWidth, height: ScreenHeight/2.0), ownerId: "当前聊天室的主播用户ID")` 时，记得将 `ChatroomView` 添加到现有视图之上，以方便拦截和透传点击事件。例如，如果你有一个播放视频流的视图，请添加到视频视图的上方，`ChatroomView` 实质上是全屏覆盖的，传入的 `frame` 是可用区域、弹幕区域、底部工具栏区域以及键盘弹起后输入框中事件的响应高度。
+
+![img](@static/images/uikit/chatroomios/hierarchy.png =800x550)
+
 4. [添加聊天室成员](https://docs-im-beta.easemob.com/product/enable_and_configure_IM.html#创建聊天室)。
 
 ### 第四步 发送第一条消息
