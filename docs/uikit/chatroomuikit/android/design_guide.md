@@ -35,7 +35,7 @@
 
 ##### 1.1.1.3.模型概览：
 
-![img](@static/images/uikit/chatroomdesign/cruk1113.png =600)
+![img](@static/images/uikit/chatroomdesign/cruk1113.png)
 
 #### 1.1.2.三种主题色（Theme Color）的色彩规范：
 
@@ -44,29 +44,29 @@
 用户可设定颜色类的可配项 Hue(0-360)为任意数值，修改后每类颜色的色相会发生变化，以贴合用户场景所需要的主题颜色。
 Hue 值(0-360)与色相的对应关系大致如以下图示所例：
 
-![img](@static/images/uikit/chatroomdesign/cruk11211.png =600)
+![img](@static/images/uikit/chatroomdesign/cruk11211.png)
 
 用户可依据自身产品的品牌色指定色相数值（Hue），从而确认主题色 Primary（主要用于 UI 组件中关键操作与重要文本展示，如推荐的 action、高亮显示的文本等），以及用于积极提示的 Secondary，和表示警示提示的 Error。
 
-![img](@static/images/uikit/chatroomdesign/cruk11212.png =600)
+![img](@static/images/uikit/chatroomdesign/cruk11212.png)
 
 ##### 1.1.2.2.关于饱和度（Saturation value）:
 
 饱和度(Saturation)不开放给用户设置，三种主题色 Primary、 Secondary、Error 默认饱和度为 100%，Neutral 默认为 8%，Neutral Special 默认为 36%
 
-![img](@static/images/uikit/chatroomdesign/cruk1122.png =600)
+![img](@static/images/uikit/chatroomdesign/cruk1122.png)
 
 ##### 1.1.2.3.关于亮度级别（Lightness level）:
 
 亮度(Lightness)百分比用户不可随意设置，每个颜色类提供：0(0%) / 1(10%) / 2(20%) / 3(30%) / 4(40%) / 5(50%) / 6(60%) / 7(70%) / 8(80%) / 9(90%) / 95(95%) / 98(98%) / 100(100%)十三个级别供用户可选；
 
-![img](@static/images/uikit/chatroomdesign/cruk1123.png =600)
+![img](@static/images/uikit/chatroomdesign/cruk1123.png)
 
 ##### 1.1.2.4.示例：
 
 如指定主题色 Primary 色相（Hue）为 203，成功色 Secondary 色相（Hue）为 155，警示色 Error 色相（Hue）为 350，则会生成如下 39 种主题色可供用户在指定 UI 件块（View）颜色时使用：
 
-![img](@static/images/uikit/chatroomdesign/cruk1124.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk1124.png)
 
 其中，主题色 Primary 的 L5 为亮色模式下的基色（Key Color），L6 为暗色模式下的基色（Key Color）。所有的颜色体系都是依照基色生成。
 
@@ -74,13 +74,13 @@ Hue 值(0-360)与色相的对应关系大致如以下图示所例：
 
 渐变主题色是由 Primary 色派生出的渐变色，为线性渐变(Linear Gradient)，渐变方向依图示坐标系分为 8 类：
 
-![img](@static/images/uikit/chatroomdesign/cruk113.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk113.png)
 
 ##### 1.1.3.1.关于渐变色的起始色(Start Color)：
 
 渐变色中 Start Color 规则和 Primary 类的色值保持一致;
 
-![img](@static/images/uikit/chatroomdesign/cruk1131.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk1131.png)
 
 ##### 1.1.3.2.关于渐变色的结束色(End Color)：
 
@@ -88,11 +88,11 @@ End Color 用户可配置色相（Hue），亮度以 0(20%) / 1(30%) / 2(40%) / 
 
 以下以 Hue：233 为例，按照 End Color 颜色公式依旧得到 13 级颜色：
 
-![img](@static/images/uikit/chatroomdesign/cruk11321.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk11321.png)
 
 起始色和结束色结合，得到相应的渐变结果
 
-![img](@static/images/uikit/chatroomdesign/cruk11322.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk11322.png)
 
 ##### 1.1.3.3.关于渐变主题色可配项(End Color Hue Value)：
 
@@ -102,15 +102,15 @@ End Color 用户可配置色相（Hue），亮度以 0(20%) / 1(30%) / 2(40%) / 
 
 用户设置 End Color Hue = 233，选择渐变方向为“↓”，则可得到如下效果：
 
-![img](@static/images/uikit/chatroomdesign/cruk11341.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk11341.png)
 
 如使用渐变主题色，那么它将替代掉所有应用于背景色的 Primary 色
 
-![img](@static/images/uikit/chatroomdesign/cruk11342.png =600)
+![img](@static/images/uikit/chatroomdesign/cruk11342.png)
 
 但一般不替代 UI 件块的前景色，因为没有什么意义，且有干扰文字阅读的可能性
 
-![img](@static/images/uikit/chatroomdesign/cruk11343.png =600)
+![img](@static/images/uikit/chatroomdesign/cruk11343.png)
 
 #### 1.1.4.关于透明色(Alpha)的规范：
 
@@ -118,7 +118,7 @@ End Color 用户可配置色相（Hue），亮度以 0(20%) / 1(30%) / 2(40%) / 
 
 在本案内带有透明度的组件仅有弹幕消息背景色、礼物消息背景色、模态背景色、轻提示背景色四种，应用范围有限，所以单独定义两个特殊的颜色类用于以上四种组件：Alpha onlight(hsl0, 0%, 0%) 和 Alpha ondark(hsl0, 0%, 100%)，Alpha 值被指定为 0(0.0) / 1(0.1) / 2(0.2) / 3(0.3) / 4(0.4) / 5(0.5) / 6(0.6) / 7(0.7) / 8(0.8) / 9(0.9) / 95(0.95) / 98(0.98) / 100(1.0) 十三个梯度值，共 26 种颜色用例，以调整组件的背景色透明度。
 
-![img](@static/images/uikit/chatroomdesign/cruk1141.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk1141.png)
 
 Alpha onlight 和 Alpha ondark 均为默认值，无任何可配置项。
 
@@ -128,7 +128,7 @@ Alpha onlight 和 Alpha ondark 均为默认值，无任何可配置项。
 
 中性色(Neutral)仅有一个可配项：色相（Hue），饱和度(Saturation)固定值为 8，亮度级别（Lightness level）也和主题色相同，分为 0(0%) / 1(10%) / 2(20%) / 3(30%) / 4(40%) / 5(50%) / 6(60%) / 7(70%) / 8(80%) / 9(90%) / 95(95%) / 98(98%) / 100(100%)十三个级别供用户可选；
 
-![img](@static/images/uikit/chatroomdesign/cruk1151.png =600)
+![img](@static/images/uikit/chatroomdesign/cruk1151.png)
 
 Neutral 和 Primary 的默认 Hue 值(色相)相同，也建议用户设置和主题色相同的 Hue 值已达成主题颜色和无彩色系的配套。但这仅仅是建议；
 
@@ -136,26 +136,26 @@ Neutral 和 Primary 的默认 Hue 值(色相)相同，也建议用户设置和�
 
 如指定主题色 Primary 色相（Hue）为 203，饱和度(Saturation)固定值为 100%，中性色（Neutral）则也指定色相（Hue）为 203，饱和度(Saturation)固定值为 8%，则得到以下色列可供用户选择使用：
 
-![img](@static/images/uikit/chatroomdesign/cruk11521.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk11521.png)
 
 其中，L98 为亮色模式下背景色的主色，L1 为亮色模式下前景色的主色；L1 为暗色模式下背景色的主色，L98 为暗色模式下前景色的主色。
 
-![img](@static/images/uikit/chatroomdesign/cruk11522.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk11522.png)
 
 ### 1.1.6.关于特殊中性色（Neutral Special）：
 
 特殊中性色 Neutral Special 主要用于级别低于 Primary 和 Secondary 的强调信息，如当前页面状态、消息发送者的昵称等。
 Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也建议用户设置和主题色近似的 Hue 值已达成主题色和无彩色系的配套。但这仅仅是建议；
 
-![img](@static/images/uikit/chatroomdesign/cruk116a.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk116a.png)
 
-![img](@static/images/uikit/chatroomdesign/cruk116b.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk116b.png)
 
 #### 1.1.6.1.示例：
 
 如指定主题色 Primary 色相（Hue）为 203，特殊中性色（Neutral）通过相似色原理（正负 30 度内）指定色相（Hue）为 220，饱和度(Saturation)固定值为 36%，则得到以下色列可供用户选择使用：
 
-![img](@static/images/uikit/chatroomdesign/cruk1161.png =800)
+![img](@static/images/uikit/chatroomdesign/cruk1161.png)
 
 ## 1.2.主题
 
@@ -608,7 +608,7 @@ Message Bubble(Large Radius)
 
 文本输入条内的文本输入区域为输入区域组件，当单行文本放不下时，文字可在输入区域内折行，对应的输入区域会累积行高，至多支持 4 行文本区域，输入文本超过 4 行后，文本分页展示，用户可滚动查看所键入的文本。
 
-![img](@static/images/uikit/chatroomdesign/cruk3311b.png =390)
+![img](@static/images/uikit/chatroomdesign/cruk3311b.png)
 
 样式上支持配置分割线（Stroke）、内部输入区域和发送按钮的圆角、描边（Stroke）、前/背景色。
 
@@ -644,13 +644,13 @@ Message Bubble(Large Radius)
 礼物图片未读到时显示默认图，礼物价值可配置价值图标。
 单个贴纸状态有 Enabled、Disabled(主要用于慢速发送，需要用户自行实现)、Focused 三种，Focused 时显示发送按钮。
 
-![img](@static/images/uikit/chatroomdesign/cruk351.png =390)
+![img](@static/images/uikit/chatroomdesign/cruk351.png)
 
 ### 3.5.2.贴纸键盘（Stickers Pick）
 
 贴纸键盘在本案内主要应用于发送礼物消息。内容上支持礼物类别（横向滑动切换礼物类别）/类别内礼物个数（上下滑动查看更多礼物）的增减。
 
-![img](@static/images/uikit/chatroomdesign/cruk352.png =390)
+![img](@static/images/uikit/chatroomdesign/cruk352.png)
 
 ## 3.6.成员列表（Member List）
 
@@ -674,7 +674,7 @@ Message Bubble(Large Radius)
 
 样式上，列表项可配置分割线（Stroke），头像支持圆角可配。
 
-![img](@static/images/uikit/chatroomdesign/cruk363b.png =390)
+![img](@static/images/uikit/chatroomdesign/cruk363b.png)
 
 ### 3.6.4.列表（Member List）
 
@@ -682,23 +682,23 @@ Message Bubble(Large Radius)
 
 #### 3.6.4.1.列表整体加载
 
-![img](@static/images/uikit/chatroomdesign/cruk3641.png =390)
+![img](@static/images/uikit/chatroomdesign/cruk3641.png =400x800)
 
 #### 3.6.4.2.空列表
 
-![img](@static/images/uikit/chatroomdesign/cruk3642.png =390)
+![img](@static/images/uikit/chatroomdesign/cruk3642.png =400x800)
 
 #### 3.6.4.3.列表拉取失败
 
-![img](@static/images/uikit/chatroomdesign/cruk3643.png =390)
+![img](@static/images/uikit/chatroomdesign/cruk3643.png  =400x800)
 
 #### 3.6.4.4.列表上滑加载
 
-![img](@static/images/uikit/chatroomdesign/cruk3644.png =390)
+![img](@static/images/uikit/chatroomdesign/cruk3644.png  =400x800)
 
 #### 3.6.4.5.列表展开全屏
 
-![img](@static/images/uikit/chatroomdesign/cruk3645.png =390)
+![img](@static/images/uikit/chatroomdesign/cruk3645.png  =400x800)
 
 # 4.UI 设计资源
 
