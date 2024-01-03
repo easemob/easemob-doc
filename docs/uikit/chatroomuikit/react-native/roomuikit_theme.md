@@ -55,4 +55,4 @@ const palette = createPalette();
 
 - [UI 设计资源](https://www.figma.com/community/file/1322495388317476706/chatroom-uikit)。
 
-- [UI 设计指南](https://www.figma.com/file/OX2dUdilAKHahAh9VwX8aI/Streamuikit?node-id=137)。
+- [UI 设计指南](design_guide.html)。
