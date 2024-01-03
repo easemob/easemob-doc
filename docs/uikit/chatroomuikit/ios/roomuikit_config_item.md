@@ -4,7 +4,7 @@
 
 ## 消息视图
 
-1. Appearance.giftContainerConstraintsSize：礼物弹窗的大小。
+1. Appearance.giftDialogContainerConstraintsSize：礼物弹窗的大小。
 
 ![img](@static/images/uikit/chatroomios/giftContainerConstraintsSize.png)
 
@@ -20,7 +20,7 @@
 
 ![img](@static/images/uikit/chatroomios/userIdentityPlaceHolder.png)
 
-5. Appearance.barrageCellStyle：弹幕区域 Cell 的展示样式。你可以选择对时间戳、用户标识和用户头像进行显示或隐藏。
+5. Appearance.messageDisplayStyle：弹幕区域 Cell 的展示样式。你可以选择对时间戳、用户标识和用户头像进行显示或隐藏。
 
 ![img](@static/images/uikit/chatroomios/customchatbarrage.png)
 
