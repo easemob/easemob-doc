@@ -62,7 +62,7 @@ Hue 值(0-360)与色相的对应关系大致如以下图示所例：
 
 ![img](@static/images/uikit/chatroomdesign/cruk1123.png =600)
 
-##### 1.1.2.4.举个例子吧：
+##### 1.1.2.4.示例：
 
 如指定主题色 Primary 色相（Hue）为 203，成功色 Secondary 色相（Hue）为 155，警示色 Error 色相（Hue）为 350，则会生成如下 39 种主题色可供用户在指定 UI 件块（View）颜色时使用：
 
@@ -72,7 +72,7 @@ Hue 值(0-360)与色相的对应关系大致如以下图示所例：
 
 #### 1.1.3.关于渐变主题色(Primary Gradient)的规范：
 
-渐变主题色是由 Primary 色派生出的渐变色，为线性渐变(Linar Gradient)，渐变方向依图示坐标系分为 8 类：
+渐变主题色是由 Primary 色派生出的渐变色，为线性渐变(Linear Gradient)，渐变方向依图示坐标系分为 8 类：
 
 ![img](@static/images/uikit/chatroomdesign/cruk113.png =800)
 
@@ -132,7 +132,7 @@ Alpha onlight 和 Alpha ondark 均为默认值，无任何可配置项。
 
 Neutral 和 Primary 的默认 Hue 值(色相)相同，也建议用户设置和主题色相同的 Hue 值已达成主题颜色和无彩色系的配套。但这仅仅是建议；
 
-#### 1.1.5.2.举个例子吧：
+#### 1.1.5.2.示例：
 
 如指定主题色 Primary 色相（Hue）为 203，饱和度(Saturation)固定值为 100%，中性色（Neutral）则也指定色相（Hue）为 203，饱和度(Saturation)固定值为 8%，则得到以下色列可供用户选择使用：
 
@@ -151,7 +151,7 @@ Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也
 
 ![img](@static/images/uikit/chatroomdesign/cruk116b.png =800)
 
-#### 1.1.6.1.举个例子吧：
+#### 1.1.6.1.示例：
 
 如指定主题色 Primary 色相（Hue）为 203，特殊中性色（Neutral）通过相似色原理（正负 30 度内）指定色相（Hue）为 220，饱和度(Saturation)固定值为 36%，则得到以下色列可供用户选择使用：
 
@@ -253,9 +253,9 @@ Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也
 
 ## 1.5.效果（Effects）
 
-所应用的效果主要分为两种：背景模糊（Backround Blur）和阴影（Shadow）
+所应用的效果主要分为两种：背景模糊（Background Blur）和阴影（Shadow）
 
-### 1.5.1.背景模糊（Backround Blur）
+### 1.5.1.背景模糊（Background Blur）
 
 背景模糊主要应用于组件背景色使用 Alpha color 时，如组件背景色的透明度会造成组件前后层级干扰的话，则推荐使用背景模糊解决，比如：
 
