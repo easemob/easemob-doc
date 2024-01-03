@@ -14,7 +14,7 @@
 
 ![img](@static/images/uikit/chatroomios/GiftEntityCell.png)
 
-- `ChatInputBar`：聊天输入框类。
+- `MessageInputBar`：聊天输入框类。
 
 ![img](@static/images/uikit/chatroomios/ChatInputBar.png)
 
