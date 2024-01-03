@@ -21,14 +21,14 @@ let error = ChatroomUIKitClient.shared.setup(appKey,option: option)
 public final class YourAppUser: NSObject,UserInfoProtocol {
         
         public func toJsonObject() -> Dictionary<String, Any>? {
-            ["userId":self.userId,"nickName":self.nickName,"avatarURL":self.avatarURL,"identity":self.identity,"gender":self.gender]
+            ["userId":self.userId,"nickName":self.nickname,"avatarURL":self.avatarURL,"identity":self.identity,"gender":self.gender]
         }
         
         public var identity: String = ""//用户级别图像的 URL
         
         public var userId: String = <#T##String#>
         
-        public var nickName: String = "Jack"
+        public var nickname: String = "Jack"
         
         public var avatarURL: String = "https://accktvpic.oss-cn-beijing.aliyuncs.com/pic/sample_avatar/sample_avatar_1.png"
         
