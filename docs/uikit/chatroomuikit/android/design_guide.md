@@ -410,14 +410,14 @@ Message Bubble(Large Radius)
 输入框为需要输入较少文字时使用的组件。
 也按照所放组件的大小分为大中小三种尺寸可配项，样式上，背景色和描边颜色可开关，圆角可配，状态上分为失焦未填写、失焦填写、聚焦未填写、聚焦填写、禁用填写、禁用未填写六种。
 
-![img](@static/images/uikit/chatroomdesign/cruk22.png)
+![img](@static/images/uikit/chatroomdesign/cruk22.png =500x500)
 
 ## 2.3.输入域组件(Input Area)
 
 输入框为需要输入较多文字时使用的组件。
 在用于输入器的文本输入，和表单中、发布内容时需要填写较多文本时使用，样式上，背景色和描边颜色可开关，圆角可配，可显示最大输入字符数分数。状态上分为失焦未填写、失焦填写、聚焦未填写、聚焦填写、禁用填写、禁用未填写六种。
 
-![img](@static/images/uikit/chatroomdesign/cruk23.png)
+![img](@static/images/uikit/chatroomdesign/cruk23.png =500x800)
 
 ## 2.4.头像组件(Avatar)
 
