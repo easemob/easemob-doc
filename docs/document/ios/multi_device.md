@@ -72,11 +72,11 @@ iOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送�
 
 ```objectivec
 [EMClient.sharedClient.contactManager getSelfIdsOnOtherPlatformWithCompletion:^(NSArray<NSString *> * _Nullable aList, EMError * _Nullable aError) {
-    // 选择一个登录 ID 作为消息发送方。
+    // 选择一个登录 ID 作为消息接收方。
     NSString *to = aList.firstObject;
     if (to.length > 0) {
         EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"Hello World"];
-        // 创建一条文本消息，content 为消息文字内容，to 传入登录 ID 作为消息发送方。
+        // 创建一条文本消息，content 为消息文字内容，to 传入登录 ID 作为消息接收方。
         EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:to body:body ext:nil];
         // 发送消息。
         [EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:^(EMChatMessage * _Nullable message, EMError * _Nullable error) {

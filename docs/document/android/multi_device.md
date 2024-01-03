@@ -73,9 +73,9 @@ Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推�
 ```java
 // 同步方法，会阻塞当前线程。异步方法为 asyncGetSelfIdsOnOtherPlatform(EMValueCallBack)。
 List<String> ids = EMClient.getInstance().contactManager().getSelfIdsOnOtherPlatform();
-// 选择一个登录 ID 作为消息发送方。
+// 选择一个登录 ID 作为消息接收方。
 String toChatUsername = ids.get(0);
-// 创建一条文本消息，content 为消息文字内容，toChatUsername 传入登录 ID 作为消息发送方。
+// 创建一条文本消息，content 为消息文字内容，toChatUsername 传入登录 ID 作为消息接收方。
 EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername); 
 // 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message); 

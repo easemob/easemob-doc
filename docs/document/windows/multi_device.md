@@ -74,10 +74,10 @@
 SDKClient.Instance.ContactManager.GetSelfIdsOnOtherPlatform(new ValueCallBack<List<string>>(
   onSuccess: (list) =>
   {
-    // 选择一个登录 ID 作为消息发送方。
+    // 选择一个登录 ID 作为消息接收方。
     string toChatUsername = list[0];
     string content = "content";
-    // 创建一条文本消息，content 为消息文字内容，toChatUsername 传入登录 ID 作为消息发送方。
+    // 创建一条文本消息，content 为消息文字内容，toChatUsername 传入登录 ID 作为消息接收方。
     Message msg = Message.CreateTextSendMessage(toChatUsername, content);
     // 发送消息。
     SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
