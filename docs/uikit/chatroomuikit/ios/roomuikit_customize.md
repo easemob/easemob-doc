@@ -6,7 +6,7 @@
 
 目前，现有组件中的以下控件支持自定义：
 
-- `GiftBarrageCell`：礼物弹幕列表 Cell 类。
+- `GiftMessageCell`：礼物弹幕列表 Cell 类。
 
 ![img](@static/images/uikit/chatroomios/GiftBarrageCell.png)
 
@@ -40,10 +40,10 @@
 
 ## 自定义示例
 
-下面以如何自定义礼物弹幕视图 Cell 为例介绍如何自定义控件。首先，继承 `GiftBarrageCell`，添加自己的逻辑，然后在 ChatroomUIKit 中注册新类替换原有的类。
+下面以如何自定义礼物弹幕视图 Cell 为例介绍如何自定义控件。首先，继承 `GiftMessageCell`，添加自己的逻辑，然后在 ChatroomUIKit 中注册新类替换原有的类。
 
 ````Swift
-class CustomGiftBarragesViewCell: GiftBarrageCell {
+class CustomGiftMessageViewCell: GiftMessageCell {
     lazy var redDot: UIView = {
         UIView().backgroundColor(.red).cornerRadius(.large)
     }()
@@ -59,5 +59,5 @@ class CustomGiftBarragesViewCell: GiftBarrageCell {
     }
 }
 //在创建 ChatroomView 或使用其他 UI 组件之前调用此方法。
-ComponentsRegister.shared.GiftBarragesViewCell = CustomGiftBarragesViewCell.self
+ComponentsRegister.shared.GiftMessagesViewCell = CustomGiftMessageViewCell.self
 ````
