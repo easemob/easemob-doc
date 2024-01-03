@@ -44,7 +44,7 @@
 用户可设定颜色类的可配项 Hue(0-360)为任意数值，修改后每类颜色的色相会发生变化，以贴合用户场景所需要的主题颜色。
 Hue 值(0-360)与色相的对应关系大致如以下图示所例：
 
-<img src="https://raw.githubusercontent.com/StevieJiang/Chatroom-UIkit-Design-Guide/main/Doc%20Image/cruk11211.png" width="600" >
+![img](@static/images/uikit/chatroomdesign/cruk11211.png =600)
 
 用户可依据自身产品的品牌色指定色相数值（Hue），从而确认主题色 Primary（主要用于 UI 组件中关键操作与重要文本展示，如推荐的 action、高亮显示的文本等），以及用于积极提示的 Secondary，和表示警示提示的 Error。
 
