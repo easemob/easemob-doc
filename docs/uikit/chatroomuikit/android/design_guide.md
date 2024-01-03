@@ -1,4 +1,4 @@
-# 直播聊天室人机交互界面工具包设计指南 (Beta)
+# 直播聊天室人机交互界面工具包设计指南 (V1.0.0)
 
 <Toc />
 
@@ -455,6 +455,7 @@ Message Bubble(Large Radius)
 头像可配置徽章（Badge）以体现用户的在离线等状态，徽章位置分两种：右下和右上
 本案不涉及
 
+
 ![img](@static/images/uikit/chatroomdesign/cruk245.png)
 
 ## 2.5.操作表单(Action Sheet)
@@ -607,7 +608,7 @@ Message Bubble(Large Radius)
 
 文本输入条内的文本输入区域为输入区域组件，当单行文本放不下时，文字可在输入区域内折行，对应的输入区域会累积行高，至多支持 4 行文本区域，输入文本超过 4 行后，文本分页展示，用户可滚动查看所键入的文本。
 
-![img](@static/images/uikit/chatroomdesign/cruk3311b.png)
+![img](@static/images/uikit/chatroomdesign/cruk3311b.png =390)
 
 样式上支持配置分割线（Stroke）、内部输入区域和发送按钮的圆角、描边（Stroke）、前/背景色。
 
@@ -643,13 +644,13 @@ Message Bubble(Large Radius)
 礼物图片未读到时显示默认图，礼物价值可配置价值图标。
 单个贴纸状态有 Enabled、Disabled(主要用于慢速发送，需要用户自行实现)、Focused 三种，Focused 时显示发送按钮。
 
-![img](@static/images/uikit/chatroomdesign/cruk351.png)
+![img](@static/images/uikit/chatroomdesign/cruk351.png =390)
 
 ### 3.5.2.贴纸键盘（Stickers Pick）
 
 贴纸键盘在本案内主要应用于发送礼物消息。内容上支持礼物类别（横向滑动切换礼物类别）/类别内礼物个数（上下滑动查看更多礼物）的增减。
 
-![img](@static/images/uikit/chatroomdesign/cruk352.png)
+![img](@static/images/uikit/chatroomdesign/cruk352.png =390)
 
 ## 3.6.成员列表（Member List）
 
@@ -657,7 +658,7 @@ Message Bubble(Large Radius)
 
 成员列表顶部支持成员类别筛选，可通过点击 tab 或者左右滑动整个列表切换，至少支持一个 tab, tab 超过四个时支持左右滑动
 
-![img](@static/images/uikit/chatroomdesign/cruk361.png)
+![img](@static/images/uikit/chatroomdesign/cruk361.png =480)
 
 ### 3.6.2.搜索条（Search Bar）
 
@@ -673,7 +674,7 @@ Message Bubble(Large Radius)
 
 样式上，列表项可配置分割线（Stroke），头像支持圆角可配。
 
-![img](@static/images/uikit/chatroomdesign/cruk363b.png)
+![img](@static/images/uikit/chatroomdesign/cruk363b.png =390)
 
 ### 3.6.4.列表（Member List）
 
@@ -681,23 +682,23 @@ Message Bubble(Large Radius)
 
 #### 3.6.4.1.列表整体加载
 
-![img](@static/images/uikit/chatroomdesign/cruk3641.png)
+![img](@static/images/uikit/chatroomdesign/cruk3641.png =390)
 
 #### 3.6.4.2.空列表
 
-![img](@static/images/uikit/chatroomdesign/cruk3642.png)
+![img](@static/images/uikit/chatroomdesign/cruk3642.png =390)
 
 #### 3.6.4.3.列表拉取失败
 
-![img](@static/images/uikit/chatroomdesign/cruk3643.png)
+![img](@static/images/uikit/chatroomdesign/cruk3643.png =390)
 
 #### 3.6.4.4.列表上滑加载
 
-![img](@static/images/uikit/chatroomdesign/cruk3644.png)
+![img](@static/images/uikit/chatroomdesign/cruk3644.png =390)
 
 #### 3.6.4.5.列表展开全屏
 
-![img](@static/images/uikit/chatroomdesign/cruk3645.png)
+![img](@static/images/uikit/chatroomdesign/cruk3645.png =390)
 
 # 4.UI 设计资源
 
