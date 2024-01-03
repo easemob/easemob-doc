@@ -24,14 +24,14 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.7.9</version>
+    <version>0.8.1</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:0.7.9'
+implementation 'com.easemob.im:im-sdk-core:0.8.1'
 ```
 
 ### 使用
@@ -234,6 +234,21 @@ EMProperties properties = EMProperties.builder()
 ```
 
 ## 更新日志
+
+### V0.8.1 2024-01-2
+
+1. 增加创建大型群组功能。
+2. 删除向大型和小型聊天室发送消息的功能。
+3. 批量 添加群组成员 & 移除群组成员 去掉用户列表数量检查。
+4. 修改获取 用户 Token 功能的注释说明。
+以上更新内容请到 GroupApi & MessageApi & TokenApi 中查看。
+
+### V0.8.0 2023-12-21
+
+1. 增加 向聊天室发送定向消息 功能。
+
+以上更新内容请到 MessageApi 中查看。
+
 
 ### V0.7.9 2023-11-28
 
