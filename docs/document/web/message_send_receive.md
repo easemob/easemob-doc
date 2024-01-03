@@ -212,7 +212,7 @@ conn.addEventHandler('MESSAGES',{
 
    接收方可以自行下载语音、图片、图片缩略图、视频和文件。
 
-#### 发送语音消息
+#### 发送和接收语音消息
 
 发送语音消息前，你应该在 app 级别实现录音，提供录制的语音文件的 URI 和时长。
 
@@ -270,7 +270,21 @@ function sendPrivateAudio() {
 }
 ```
 
-#### 发送图片消息
+接收方收到 `onAudioMessage` 回调，根据消息 `url` 字段获取语音文件的服务器地址，从而获取语音文件。
+
+```javascript
+// 使用 `addEventHandler` 监听回调事件
+conn.addEventHandler("eventName", {
+  // 当前用户收到语音消息。
+  onAudioMessage: function (message) {
+    // 语音文件在服务器的地址。
+    console.log(message.url);
+  },
+});
+
+```
+
+#### 发送和接收图片消息
 
 对于图片消息，服务器会根据用户设置的 `thumbnailHeight` 和 `thumbnailWidth` 参数自动生成图片的缩略图。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。
 
@@ -332,6 +346,22 @@ function sendPrivateImg() {
 }
 ```
 
+接收方收到 `onImageMessage` 回调，根据消息 `url` 字段获取图片文件的服务器地址，从而获取图片文件。
+
+```javascript
+// 使用 `addEventHandler` 监听回调事件
+conn.addEventHandler("eventName", {
+  // 当前用户收到图片消息。
+  onImageMessage: function (message) {
+    // 图片文件在服务器的地址。
+    console.log(message.url);
+    // 图片缩略图文件在服务器的地址。
+    console.log(message.thumb);
+  },
+});
+
+```
+
 #### 发送 URL 图片消息
 
 你也可以将图片上传到自己的服务器，而不是环信服务器，然后调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
@@ -356,7 +386,7 @@ function sendPrivateUrlImg() {
 }
 ```
 
-#### 发送视频消息
+#### 发送和接收视频消息
 
 在发送视频消息之前，应在 app 级别实现视频捕获，获得捕获的视频文件的时长，单位为秒。
 
@@ -414,7 +444,23 @@ function sendPrivateVideo() {
 }
 ```
 
-#### 发送文件消息
+接收方收到 `onVideoMessage` 回调，根据消息 `url` 字段获取视频文件的服务器地址，从而获取视频文件。
+
+```javascript
+// 使用 `addEventHandler` 监听回调事件
+conn.addEventHandler("eventName", {
+  // 当前用户收到视频消息。
+  onVideoMessage: function (message) {
+    // 视频文件在服务器的地址。
+    console.log(message.url);
+    // 视频首帧缩略图文件在服务器的地址。
+    console.log(message.thumb);
+  },
+});
+
+```
+
+#### 发送和接收文件消息
 
 参考以下代码示例创建、发送和接收文件消息：
 
@@ -471,6 +517,20 @@ function sendPrivateFile() {
       });
   }
 }
+```
+
+接收方收到 `onFileMessage` 回调，根据消息 `url` 字段获取文件的服务器地址，从而获取文件。
+
+```javascript
+// 使用 `addEventHandler` 监听回调事件
+conn.addEventHandler("eventName", {
+  // 当前用户收到文件消息。
+  onFileMessage: function (message) {
+    // 文件在服务器的地址。
+    console.log(message.url);
+  },
+});
+
 ```
 
 ### 发送位置消息
