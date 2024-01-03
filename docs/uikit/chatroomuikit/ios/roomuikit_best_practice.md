@@ -69,7 +69,7 @@ addSubView(roomView)
 你可以调用 `registerRoomEventsListener` 方法添加监听器用于监听 ChatroomUIKit 事件和错误。
 
 ```Swift
-ChatroomUIKitClient.shared.registerRoomEventsListener(listener：self)
+ChatroomUIKitClient.shared.registerRoomEventsListener(self)
 ```
 
 ## 参考
