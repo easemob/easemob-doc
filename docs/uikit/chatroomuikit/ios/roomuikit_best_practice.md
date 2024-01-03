@@ -54,8 +54,10 @@ ChatroomUIKitClient.shared.login(user: YourAppUser(), token: "token", completion
 ```Swift
 let options  = ChatroomUIKitInitialOptions.UIOptions()
 options.bottomDataSource = self.bottomBarDatas()
-options.showGiftsBarrage = true
-options.chatBarrageAreaShowGift = false
+// 实现显示礼物消息区域。
+options.showGiftMessageArea = true
+// 是否在聊天区域中显示礼物信息。
+options.chatAreaShowGift = false
 let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: self.roomId, frame: CGRect(x: 0, y: ScreenHeight/2.0, width: ScreenWidth, height: ScreenHeight/2.0), ownerId: "Chatroom's owner user id", options: options)
 addSubView(roomView)
 ```
