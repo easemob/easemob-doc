@@ -22,7 +22,7 @@
 
 - Vue 2 下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)
 - Vue 3 下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/demo-vue3)
-- Vue 3（miniCore） 下载源码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) **miniCore 版本提供 WebIM SDK 按需引入示例以及本地会话使用方式示例，后续新功能将在此版本新增**。
+- Vue 3（miniCore） 下载源码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) **miniCore 版本提供 WebIM SDK 按需引入示例以及本地会话使用方式示例，后续新功能将在此版本添加**。
 
 欢迎大家提交 PR 改进和修复 Web IM 中的问题。
 
