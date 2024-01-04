@@ -14,7 +14,7 @@
 - 新增 `EMGroupManager#fetchJoinedGroupCount` 方法用于从服务器获取当前用户已加入的群组数量。
 - 新增[错误码 706](/android/error.html)，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#isChatRoomOwnerLeaveAllowed` 参数设置为 false，聊天室所有者调用 `EMChatRoomManager#leaveChatroom` 方法离开聊天室时会提示该错误。
 - 新增 `EMOptions#enableEmptyConversation` 属性用于在初始化时配置获取会话列表时是否允许返回空会话。
-- [申请入群被拒绝的回调](group_manage.html#监听群组事件) `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 decliner 和 applicant 参数表示申请者和拒绝者的用户 ID。
+- 申请入群被拒绝的回调 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 decliner 和 applicant 参数表示申请者和拒绝者的用户 ID。
 
 #### 优化
 
