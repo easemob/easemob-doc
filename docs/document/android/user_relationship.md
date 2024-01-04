@@ -6,7 +6,7 @@
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
-- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请和删除好友等操作。
+- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请、删除好友和设置好友备注等操作。
 - 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。
 
 本文介绍如何通过环信即时通讯 IM SDK 管理好友关系。
@@ -105,7 +105,7 @@ EMClient.getInstance().contactManager().deleteContact(username);
 
 #### 设置好友备注
 
-你可以调用 `asyncSetContactRemark` 方法设置单个好友的备注。
+自 4.2.1 版本开始，你可以调用 `asyncSetContactRemark` 方法设置单个好友的备注。
 
 好友备注的长度不能超过 100 个字符。
 
@@ -182,9 +182,9 @@ List<String> usernames = EMClient.getInstance().contactManager().getAllContactsF
 
 #### 从本地获取好友列表
 
-自 4.2.1 版本开始，你可以调用 `asyncFetchAllContactsFromServer` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `asyncFetchAllContactsFromLocal` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+自 4.2.1 版本开始，你可以调用 `fetchContactFromLocal` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `asyncFetchAllContactsFromLocal` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
-:::notice
+:::tip
 需要从服务器获取好友列表之后，才能从本地获取到好友列表。
 :::
 
