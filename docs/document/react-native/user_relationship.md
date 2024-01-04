@@ -119,40 +119,6 @@ ChatClient.getInstance().contactManager.addContactListener(
 );
 ```
 
-### 获取好友列表
-
-你可以从服务器获取好友列表，也可以从本地数据库获取已保存的好友列表。
-
-**注意**
-
-需要从服务器获取好友列表之后，才能从本地数据库获取到好友列表。
-
-1. 从服务器获取好友列表
-
-```typescript
- ChatClient.getInstance()
-   .contactManager.getAllContactsFromServer()
-   .then((value) => {
-     console.log("get contact success.", value);
-   })
-   .catch((reason) => {
-     console.log("get contact fail.", reason);
-   });
- ```
-
- 2. 从本地数据库中获取好友列表
-
- ```typescript
- ChatClient.getInstance()
-   .contactManager.getAllContactsFromDB()
-   .then((value) => {
-     console.log("get contact success.", value);
-   })
-   .catch((reason) => {
-     console.log("get contact fail.", reason);
-   });
- ```
-
 ### 删除好友
 
 删除好友时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
@@ -171,6 +137,107 @@ ChatClient.getInstance()
     console.log("remove fail.", reason);
   });
 ```
+
+#### 设置好友备注
+
+自 1.3.0 版本开始，你可以调用 `setContactRemark` 方法设置单个好友的备注。
+
+好友备注的长度不能超过 100 个字符。
+
+```typescript
+ChatClient.getInstance()
+  .contactManager.setContactRemark({ userId: "xxx", remark: "user remark" })
+  .then()
+  .catch();
+```
+
+#### 从服务端获取好友列表
+
+自 1.3.0 版本开始，你可以调用 `fetchAllContacts` 或者 `fetchContacts` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+
+- 一次性获取服务端好友列表。
+
+```typescript
+ChatClient.getInstance()
+  .contactManager.fetchAllContacts()
+  .then((contactList: Contact[]) => {
+    // todo: 从服务器返回所有的联系人列表。包括好友备注信息。
+  })
+  .catch();
+```
+
+- 分页获取服务端好友列表。
+
+```typescript
+// cursor 数据获取的起始位置，获取第一页设置为 `空字符串` 或者 `undefined`。
+// pageSize 获取每页的最大数目,取值范围为 [1,50]。
+ChatClient.getInstance()
+  .contactManager.fetchContacts({
+    cursor: undefined,
+    pageSize: 20,
+  })
+  .then((contactList: Contact[]) => {
+    // todo: 从服务器返回所有的联系人列表。包括好友备注信息。
+  })
+  .catch();
+```
+
+此外，你也可以调用 `getAllContactsFromServer` 方法从服务器获取所有好友的列表，该列表只包含好友的用户 ID。
+
+```typescript
+ ChatClient.getInstance()
+   .contactManager.getAllContactsFromServer()
+   .then((value) => {
+     console.log("get contact success.", value);
+   })
+   .catch((reason) => {
+     console.log("get contact fail.", reason);
+   });
+ ```
+
+#### 从本地获取好友列表
+
+自 1.3.0 版本开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+
+:::tip
+需要从服务器获取好友列表之后，才能从本地获取到好友列表。
+:::
+
+- 获取本地单个好友。
+
+```typescript
+// userId 获取指定用户的好友备注。
+ChatClient.getInstance()
+  .contactManager.getContact(userId)
+  .then((contactList: Contact | undefined) => {
+    // todo: 获取好友备注对象。
+  })
+  .catch();
+```
+
+- 一次性获取本地好友列表。
+
+```typescript
+ChatClient.getInstance()
+  .contactManager.getAllContacts()
+  .then((contactList: Contact[]) => {
+    // todo: 从服务器返回所有的联系人列表。包括好友备注信息。
+  })
+  .catch();
+```
+
+此外，你也可以调用 `getAllContactsFromDB` 方法从本地一次性获取所有好友的列表，该列表只包含好友的用户 ID。
+
+```typescript
+ ChatClient.getInstance()
+   .contactManager.getAllContactsFromDB()
+   .then((value) => {
+     console.log("get contact success.", value);
+   })
+   .catch((reason) => {
+     console.log("get contact fail.", reason);
+   });
+ ```
 
 ### 将用户加入黑名单
 

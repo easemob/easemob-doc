@@ -115,6 +115,8 @@ ChatClient.getInstance().chatManager.sendMessage(msg!, callback).then().catch();
 
 在新消息到来时，你会收到 `onMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
+对于聊天室消息，你可以通过消息的 `ChatMessage.isBroadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+
 ```typescript
 // 继承并实现 ChatMessageEventListener
 class ChatMessageEvent implements ChatMessageEventListener {
