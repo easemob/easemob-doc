@@ -2390,7 +2390,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。 |
-| `alertReason`  | object   | 敏感词是否合规：<br/> - `through`：表示敏感词为合规内容；<br/> - `intercepted`：表示敏感词为违规词，包含敏感词的消息被拦截。<br/> - `replaced`：表示敏感词为违规词，使用 *** 代替。 | 
+| `alertReason`  | String   | 敏感词是否合规：<br/> - `through`：表示敏感词为合规内容；<br/> - `intercepted`：表示敏感词为违规词，包含敏感词的消息被拦截。<br/> - `replaced`：表示敏感词为违规词，使用 *** 代替。 | 
 | `contentReceiver`  | String   |  内容接收方的用户 ID。 | 
 | `eventType`  |  String |  事件类型，用于标识为敏感词检测还是其他类型的事件。 | 
 | `sensitiveWords`  | List   | 敏感词内容。  | 
