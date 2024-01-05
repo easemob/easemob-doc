@@ -10,7 +10,7 @@
 - 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
 - 新增 `ChatContactManager.fetchAllContacts` 和 `ChatContactManager.fetchContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
 - 新增 `ChatContactManager.getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
-- 新增 `ChatContactManager.getAllContacts` 方法[从本地分页获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- 新增 `ChatContactManager.getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
 - 新增 `ChatMessage.isBroadcast` 属性用于判断通该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 - 新增 `ChatGroupManager.fetchJoinedGroupCount` 方法用于从服务器获取当前用户已加入的群组数量。
 - [申请入群被拒绝的回调](group_manage.html#监听群组事件) `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。
