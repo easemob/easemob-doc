@@ -77,6 +77,7 @@
 | 403              | forbidden_op                       | "forbidden operation on group owner!"                        | 当前操作禁止对群主使用，如将群主加入黑名单。                                    |
 | 403              | forbidden_op                       | "can not join this group, reason：user %s has joined too many groups/chatroom!” | 用户加入的群组或聊天室数超过了限制。                           |
 | 403              | forbidden_op                       | "this appKey has create too many groups/chatrooms!”          | 加入群组或聊天室时，群组或聊天室人数已达到上限。                |
+| 403              | forbidden_op                       | "Forbidden for url: [1111111567788/test/messages/chatgroups]"  | 调用[发送群聊消息接口](message_group.html)时每秒发送的消息数量超过了 20 条。    |
 | 403              |  exceed_limit                    | "Invitee's contact max count"   | 好友请求的接收方已达好友数量上限。         |
 | 403              |  exceed_limit                   | "Inviter's contact max count"      | 好友请求的发送方已达好友数量上限。         |
 | 404              | organization_application_not_found | "Could not find application for hx/hxdeo2 from URI: hx/hxdeo2/token" | hx/hxdeo2 这个设置不正确或不存在，或 baseurl 集群设置错误（只针对 vip 集群的 AppKey），正确的是 orgname/appname，即 AppKey 的 “#” 换成 “/“。 |
