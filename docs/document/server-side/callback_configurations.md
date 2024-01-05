@@ -2393,7 +2393,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `alertReason`  | object   | 敏感词是否合规：<br/> - `through`：表示敏感词为合规内容；<br/> - `intercepted`：表示敏感词为违规词，包含敏感词的消息被拦截。<br/> - `replaced`：表示敏感词为违规词，使用 *** 代替。 | 
 | `contentReceiver`  | String   |  内容接收方的用户 ID。 | 
 | `eventType`  |  String |  事件类型，用于标识为敏感词检测还是其他类型的事件。 | 
-| `sensitiveWords`  | 敏感词内容。   |   | 
+| `sensitiveWords`  | List   | 敏感词内容。  | 
 | `contentOwner`  |  String | 内容发送方的用户 ID。  | 
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。`secret` 详见 [Console 后台的回调规则配置](enable_and_configure_IM.html#配置回调规则)。  | 
 | `contentUri`  |  String | 消息唯一标识，格式为 msync:msgId。 | 

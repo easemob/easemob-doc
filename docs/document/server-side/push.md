@@ -683,7 +683,7 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 #### 请求 header
 
 | 参数            | 类型   | 描述    
-| :-------------- | :----- | :-------------- | :------- |
+| :-------------- | :----- | :-------------- |
 | `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
