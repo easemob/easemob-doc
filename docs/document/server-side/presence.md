@@ -188,6 +188,10 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/
 
 你一次可获取多个用户的在线状态信息。
 
+:::tip
+默认情况下，若用户在 1 秒内进行多次登录和登出，服务器以最后一次操作为准向客户端 SDK 发送状态变更通知。
+:::
+
 ### HTTP 请求
 
 ```http
