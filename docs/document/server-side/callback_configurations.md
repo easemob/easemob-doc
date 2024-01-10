@@ -2288,7 +2288,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
-| `user`      | String   | 登录用户识别号，为 {App Key/设备类型_设备 ID}。              |
+| `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `device ID` 为 SDK 随机生成的设备 ID。 |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 登录请求到环信 IM 服务器的 Unix 时间戳，单位为 ms。          |
 | `status`    | String   | `online`，在线。                                             |
@@ -2304,7 +2304,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
     "ip":"XXXX",
     "host":"XXXX",
     "appkey":"XXXX#XXXX",
-    "user":"XXXX#XXXX_XXXX/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
+    "user":"XXXX#XXXX_XXXX@easemob.com/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
     "version":"3.8.9.1",
     "timestamp":1642585154644,
     "status":"online"
@@ -2324,7 +2324,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
-| `user`      | String   | 登录用户识别号，为 `{App Key/设备类型_设备 ID}`。              |
+| `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `device ID` 为 SDK 随机生成的设备 ID。             |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 请求到环信 IM 服务器的 Unix 时间戳，单位为 ms。              |
 | `status`    | String   | `offline`，离线。                                            |
@@ -2340,7 +2340,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
     "ip":"XXXX",
     "host":"XXXX",
     "appkey":"XXXX#XXXX",
-    "user":"XXXX#XXXX_XXXX/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
+    "user":"XXXX#XXXX_XXXX@easemob.com/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
     "version":"3.8.9.1",
     "timestamp":1642648914742,
     "status":"offline"
@@ -2360,7 +2360,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
-| `user`      | String   | 登录用户识别号，为 `{App Key/设备类型_设备 ID}`。              |
+| `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `device ID` 为 SDK 随机生成的设备 ID。              |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 请求到环信 IM 服务器的 Unix 时间戳，单位为毫秒 。              |
 | `status`    | String   | `offline`，离线。                                            |
@@ -2376,7 +2376,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
     "ip":"223.71.97.198:52709",
     "host":"msync@ebs-ali-beijing-msync40",
     "appkey":"XXXX#XXXX",
-    "user":"XXXX#XXXX_XXXX/ios_a5fa01fd-b5a4-84d5-ebeb-bf10e8950442",
+    "user":"XXXX#XXXX_XXXX@easemob.com/ios_a5fa01fd-b5a4-84d5-ebeb-bf10e8950442",
     "version":"3.8.9.1",
     "timestamp":1642648955563,
     "status":"offline"
