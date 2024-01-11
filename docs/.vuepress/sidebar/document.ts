@@ -69,7 +69,7 @@ const documentSidebar = [
           { text: '删除消息', link: 'message_delete.html' },         
           { text: '实现消息回执', link: 'message_receipt.html'},
           { text: '翻译消息', link: 'message_translation.html' },
-          { text: '获取消息流量统计', link: 'message_translation.html', only: ['android', 'ios'] },
+          { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
         ]
       },
       { text: '管理用户属性', link: 'userprofile.html' },
