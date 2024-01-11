@@ -15,7 +15,7 @@
 
 - `addReaction` 在消息上添加 Reaction；
 - `deleteReaction` 删除消息的 Reaction；
-- `getReactionList` 获取消息的 Reaction 列表；
+- `getReactionlist` 获取消息的 Reaction 列表；
 - `getReactionDetail` 获取 Reaction 详情；
 - `getHistoryMessages ` 获取漫游消息中的 Reaction。
 
@@ -77,11 +77,11 @@ conn.addEventHandler("REACTION", {
 
 ### 获取消息的 Reaction 列表
 
-调用 `getReactionList` 方法可以从服务器获取 Reaction 概览列表，列表内容包含 Reaction 内容，添加或移除 Reaction 的用户数量，以及添加或移除 Reaction 的前三个用户的用户 ID。示例代码如下：
+调用 `getReactionlist` 方法可以从服务器获取 Reaction 概览列表，列表内容包含 Reaction 内容，添加或移除 Reaction 的用户数量，以及添加或移除 Reaction 的前三个用户的用户 ID。示例代码如下：
 
 ```javascript
 conn
-  .getReactionList({ chatType: "singleChat", messageId: "messageId" })
+  .getReactionlist({ chatType: "singleChat", messageId: "messageId" })
   .then((res) => {
     console.log(res);
   });
