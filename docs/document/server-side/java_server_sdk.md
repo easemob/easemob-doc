@@ -24,7 +24,7 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.8.1</version>
+    <version>0.8.2</version>
 </dependency>
 ```
 
@@ -234,6 +234,12 @@ EMProperties properties = EMProperties.builder()
 ```
 
 ## 更新日志
+
+###  V0.8.2 2024-01-11
+
+1.增加发送聊天室全局广播功能。
+2.增加群组封禁&群组解禁的功能。
+以上更新内容请到 GroupApi & MessageApi 中查看。
 
 ### V0.8.1 2024-01-2
 

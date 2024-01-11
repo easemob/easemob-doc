@@ -56,9 +56,9 @@
 
 具体可以参考：
 
-[Android 导入消息至本地数据库](/document/android/message_manage.html#批量导入消息到数据库)
+[Android 导入消息至本地数据库](/document/android/message_import_insert.html#批量导入消息到数据库)
 
-[iOS 导入消息至本地数据库](/document/ios/message_manage.html#批量导入消息到数据库)
+[iOS 导入消息至本地数据库](/document/ios/message_import_insert.html#批量导入消息到数据库)
 
 ## 新老兼容的平滑迁移
 

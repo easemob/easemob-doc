@@ -27,11 +27,11 @@
 
 ## 实现方法
 
-### 从服务器分页获取指定会话的历史消息
+### 从服务器获取指定会话的消息
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `asyncFetchHistoryMessage` 方法从服务器获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
+你可以调用 `asyncFetchHistoryMessage` 方法从服务器分页获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
 
 为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
 
@@ -85,7 +85,7 @@ List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
 EMMessage msg = EMClient.getInstance().chatManager().getMessage(msgId);
 ```
 
-### 获取本地指定会话中特定类型的消息
+### 获取本地会话中特定类型的消息
 
 你可以调用 `searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)` 方法从本地存储中获取指定会话中特定类型的消息。
 
@@ -99,7 +99,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> emMessages = conversation.searchMsgFromDB(EMMessage.Type.TXT, System.currentTimeMillis(), maxCount, from, EMConversation.EMSearchDirection.UP);
 ```
 
-### 获取指定时间段内本地单个会话的消息
+### 获取一定时间内本地会话的消息
 
 你可以调用 `searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)` 方法从本地存储中搜索一定时间段内指定会话中发送和接收的消息。
 

@@ -27,7 +27,7 @@
 
 ## 实现方法
 
-### 分页获取指定会话的历史消息
+### 从服务器获取指定会话的消息
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
@@ -80,7 +80,7 @@ conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("msgId");
 ```
 
-### 获取本地指定会话中特定类型的消息
+### 获取本地会话中特定类型的消息
 
 你可以调用 `LoadMessagesWithMsgType` 方法从本地存储中获取指定会话中特定类型的消息。
 
@@ -101,7 +101,7 @@ conv.LoadMessagesWithMsgType(type: MessageBodyType.TXT, count: 50, direction: Me
 ));
 ```
 
-### 获取指定时间段内本地单个会话的消息
+### 获取一定时间内本地会话的消息
 
 你可以调用 `LoadMessagesWithTime` 方法从本地存储中搜索一定时间段内指定会话中发送和接收的消息。
 

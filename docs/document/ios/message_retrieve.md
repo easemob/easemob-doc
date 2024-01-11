@@ -27,7 +27,7 @@
 
 ## 实现方法
 
-### 从服务器分页获取指定会话的历史消息
+### 从服务器获取指定会话的消息
 
 你可以调用 `asyncFetchHistoryMessagesFromServer` 方法从服务器获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
 
@@ -45,7 +45,7 @@
           }];
 ```
 
-### 从数据库中读取指定会话的消息
+### 从本地读取指定会话的消息
 
 你可以调用以下方法从数据库中读取指定会话的消息：
 
@@ -69,7 +69,7 @@ EMError* err = nil;
 EMChatMessage* message = [EMClient.sharedClient.chatManager getMessageWithMessageId:@"messageId"];
 ```
 
-### 获取本地指定会话中特定类型的消息
+### 获取本地会话中特定类型的消息
 
 你可以调用 `loadMessagesWithType` 方法从本地存储中获取指定会话中特定类型的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
@@ -84,7 +84,7 @@ EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithCon
 }];
 ```
 
-### 获取指定时间段内本地单个会话的消息
+### 获取一定时间内本地会话的消息
 
 你可以调用 `loadMessagesFrom:to:count:completion:` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。
 

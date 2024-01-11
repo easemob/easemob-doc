@@ -152,7 +152,7 @@
 
 ### 新增特性
 
-[IM SDK] 新增[消息流量统计功能](message_manage.html#获取本地消息的流量统计信息)。
+[IM SDK] 新增[消息流量统计功能](message_traffic_statis.html#获取本地消息的流量统计信息)。
 
 ### 修复
 
