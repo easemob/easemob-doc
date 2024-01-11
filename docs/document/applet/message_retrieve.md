@@ -1,6 +1,6 @@
 ---
 {
     pageUri: "/document/web/message_retrieve.html",
-    title: "从服务器获取消息（消息漫游）"
+    title: "获取历史消息"
 }
 ---

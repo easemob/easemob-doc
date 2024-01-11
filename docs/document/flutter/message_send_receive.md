@@ -19,7 +19,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMMessage` 类实现消息的发送、接收与撤回。
+环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMMessage` 类实现消息的发送和接收。
 
 其中，发送和接收消息的逻辑如下：
 
@@ -159,26 +159,6 @@ class _ChatMessagesPageState extends State<ChatMessagesPage> {
 }
 ```
 
-### 撤回消息
-
-发送方可以撤回一条发送成功的消息。调用 API 撤回消息后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessagesRecalled` 事件。
-
-默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
-```dart
-try {
-  await EMClient.getInstance.chatManager.recallMessage(msgId);
-} on EMError catch (e) {
-}
-```
-
-### 设置消息撤回监听
-
-```dart
-// 消息被撤回时触发的回调（此回调位于 EMChatEventHandler 中）。
-void onMessagesRecalled(List<EMMessage> messages) {}
-```
-
-
 ### 发送和接收附件类型的消息
 
 附件消息的发送和接收过程如下：
@@ -208,7 +188,6 @@ EMClient.getInstance.chatManager.addMessageEvent(
 
 /// 移除监听
 EMClient.getInstance.chatManager.removeMessageEvent('UNIQUE_HANDLER_ID');
-
 ```
 
 #### 发送和接收语音消息
@@ -471,10 +450,8 @@ EMClient.getInstance.chatManager.removeEventHandler(
 - 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
 - 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
 
-:::notice 
-
+:::tip 
 用户 A 可根据需要设置透传消息发送间隔。
-
 :::
 
 以下示例代码展示如何发送输入状态的透传消息。
@@ -576,7 +553,7 @@ EMClient.getInstance.chatManager.sendMessage(customMsg);
 | `msgIds` | List      | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。  |
 | `targetId` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。|
 
-:::notice
+:::tip
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
 2. 不论 `EMOptions#serverTransfer` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
 :::
@@ -624,7 +601,7 @@ try {
 
 该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
 
-:::notice
+:::tip
 1. 仅 SDK 4.1.0 及以上版本支持。
 2. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息数。
 3. 定向消息不支持消息漫游功能，因此从服务器拉取漫游消息时，不包含定向消息。
