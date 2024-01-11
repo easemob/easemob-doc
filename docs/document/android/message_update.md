@@ -8,7 +8,7 @@
 
 环信即时通讯 IM Android SDK 支持更新本地数据库中的消息，其中包含如下主要方法：
 
-- `EMConversation#updateMessage` 更新消息到本地数据库。
+- `EMConversation#updateMessage`：更新消息到本地数据库。
 
 ## 前提条件
 

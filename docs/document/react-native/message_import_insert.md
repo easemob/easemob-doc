@@ -38,3 +38,21 @@ ChatClient.getInstance()
     console.log("update message fail.", reason);
   });
 ```
+
+### 插入消息
+
+如果你需要在本地会话中加入一条消息，比如收到某些通知消息时，可以构造一条消息写入会话。
+
+例如插入一条无需发送但有需要显示给用户看的内容，类似 “XXX 撤回一条消息”、“XXX 入群”、“对方正在输入” 等。
+
+消息会根据消息中的 Unix 时间戳插入本地数据库，SDK 会更新会话的 `latestMessage` 等属性。
+
+示例代码如下：
+
+```typescript
+ChatClient.getInstance().chatManager.insertMessage(msg).then(() => {
+    console.log('insert message success.');
+}).catch((e) => {
+    console.log('insert message failed.');
+});
+```

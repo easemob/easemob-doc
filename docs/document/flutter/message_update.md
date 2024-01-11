@@ -21,16 +21,21 @@
 
 ### 更新消息到本地数据库
 
+你可以通过以下方式更新本地数据库中的消息：
+
+- 直接调用 `EMChatManager#updateMessage` 方法更新 SDK 本地数据库中的消息。
+
+```dart 
+await EMClient.getInstance.chatManager.updateMessage(message);
+```
+
+- 若正在使用 `EMConversation` 类，可以先获取会话，再调用 `EMConversation#updateMessage` 方法更新 SDK 本地数据库会话中的消息。
+
 ```dart
-Future<void> updateMessage(EMMessage message) async {
-  Map req = {"message": message.toJson()};
-  Map result =
-      await ChatChannel.invokeMethod(ChatMethodKeys.updateChatMessage, req);
-  try {
-    EMError.hasErrorFromResult(result);
-  } on EMError catch (e) {
-    throw e;
-  }
-}
+EMConversation? conversation =
+        await EMClient.getInstance.chatManager.getConversation(
+      conversationId,
+    );
+    conversation?.updateMessage(message);
 ```
 

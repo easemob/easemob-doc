@@ -46,15 +46,13 @@ await EMClient.getInstance.chatManager.importMessages(messages);
 示例代码如下：
 
 ```dart
-Future<void> insertMessage(EMMessage message) async {
-  Map req = this._toJson();
-  req['msg'] = message.toJson();
-  Map result = await _emConversationChannel.invokeMethod(
-      ChatMethodKeys.insertMessage, req);
-  try {
-    EMError.hasErrorFromResult(result);
-  } on EMError catch (e) {
-    throw e;
-  }
-}
+// 将消息插入到指定会话中。
+    EMConversation? conversation =
+        await EMClient.getInstance.chatManager.getConversation(
+      username,
+    );
+    conversation?.insertMessage(message);
+
+    // 直接插入消息。
+    await EMClient.getInstance.chatManager.importMessages(messages);
 ```

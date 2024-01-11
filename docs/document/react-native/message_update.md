@@ -2,7 +2,7 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM Android SDK 如何更新本地消息。
+本文介绍环信即时通讯 IM React Native SDK 如何更新本地消息。
 
 ## 技术原理
 
@@ -22,8 +22,6 @@
 ### 更新消息
 
 你可以调用 `updateMessage` 方法更新指定消息。该方法会同时更新本地内存和数据库中的消息。
-
-
 
 ```typescript
 ChatClient.getInstance()
