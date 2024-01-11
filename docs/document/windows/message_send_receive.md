@@ -20,13 +20,21 @@
 
 ## 技术原理
 
-环信即时通讯 IM Windows SDK 通过 `IChatManager` 和 `Message` 类实现消息的发送、接收与撤回。
+环信即时通讯 IM Unity SDK 通过 `IChatManager` 和 `Message` 类实现消息的发送和接收。
 
 其中，发送和接收消息的逻辑如下：
 
 1. 发送方调用相应 `Create` 方法创建文本、文件、附件等类型的消息；
 2. 发送方调用 `SendMessage` 发送消息；
-3. 接收方通过 `AddChatManagerDelegate` 方法监听消息回调事件。在收到 `OnMessageReceived` 后，即表示成功接收到消息。
+3. 接收方通过 `AddChatManagerDelegate` 方法监听消息回调事件。在收到 `OnMessagesReceived` 后，即表示成功接收到消息。
+
+消息收发流程如下：
+
+1. 用户 A 发送一条消息到环信的消息服务器;
+2. 单聊消息时，服务器投递消息给用户 B；对于群聊时消息，服务器投递给群内其他每一个成员;
+3. 用户收到消息。
+
+![img](@static/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 
@@ -51,7 +59,7 @@
 Message msg = Message.CreateTextSendMessage(conversationId, content);
 
 //设置会话类型，即 `Message` 类的 `MessageType` 属性。
-//单聊、群聊和聊天室分别设置为 `Chat`、`Group` 和 `Room`，默认为单聊。
+//单聊、群聊和聊天室分别为 `Chat`、`Group` 和 `Room`，默认为单聊。
 msg.MessageType = MessageType.Group;
 
 //对于聊天室消息，可设置消息优先级。
@@ -96,33 +104,6 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 //移除监听。
 SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
-```
-
-### 撤回消息
-
-发送方可以撤回一条发送成功的消息。调用 API 撤回消息后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除。
-
-默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
-
-```csharp
-SDKClient.Instance.ChatManager.RecallMessage("Message ID", new CallBack(
-  onSuccess: () => {
-    Debug.Log("回撤成功");
-  },
-  onProgress: (progress) => {
-    Debug.Log($"回撤进度 {progress}");
-  },
-  onError: (code, desc) => {
-    Debug.Log($"回撤失败，errCode={code}, errDesc={desc}");
-  }
- ));
-```
-
-还可以使用 `IChatManagerDelegate` 设置消息撤回监听：
-
-```csharp
-// 接收到消息被撤回时触发此回调（此回调位于 IChatManagerDelegate 中）。
-void OnMessagesRecalled(List<Message> messages);
 ```
 
 ### 发送和接收附件消息
@@ -426,7 +407,7 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 - 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
 - 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
 
-:::notice
+:::tip
 
 用户 A 可根据需要设置透传消息发送间隔。
 
@@ -511,7 +492,6 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 2. 发送合并消息。
 3. 对端收到合并消息后进行解析，获取原始消息列表。
 
-
 #### 创建和发送合并消息
 
 你可以调用 `CreateCombineSendMessage` 方法创建一条合并消息，然后调用 `SendMessage` 方法发送该条消息。
@@ -527,7 +507,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 | `messageList` | List      | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。  |
 
 
-:::notice
+:::tip
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
 2. 不论 `Options#ServerTransfer` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
 :::
@@ -580,9 +560,9 @@ SDKClient.Instance.ChatManager.FetchCombineMessageDetail(msg, new ValueCallBack<
 
 该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
 
-:::notice
+:::tip
 1. 仅 SDK 1.2.0 及以上版本支持。
-2. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息数。
+2. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息计数。
 3. 定向消息不支持消息漫游功能，因此从服务器拉取漫游消息时，不包含定向消息。
 :::
 

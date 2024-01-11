@@ -84,7 +84,7 @@ message.isChatThread = self.isChatThread;
 
 ### 撤回子区消息
 
-撤回消息的具体逻辑，请参考 [撤回消息](message_send_receive.html#撤回消息)，此处只介绍子区消息和其他消息的区别。
+撤回消息的具体逻辑，请参考 [撤回消息](message_recall.html)，此处只介绍子区消息和其他消息的区别。
 
 子区成员可以设置消息监听回调 `EMChatManagerDelegate#messagesInfoDidRecall` 对子区消息的撤回进行监听。
 

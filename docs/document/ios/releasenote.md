@@ -152,7 +152,7 @@
 
 ### 新增特性
 
-[IM SDK] 新增[消息流量统计功能](message_manage.html#获取本地消息的流量统计信息)。
+[IM SDK] 新增[消息流量统计功能](message_traffic_statis.html#获取本地消息的流量统计信息)。
 
 ### 修复
 
@@ -256,7 +256,7 @@
 ### 优化
 
 - [IM SDK] 优化网络链路，提升网络访问性能；
-- [IM SDK] 优化 [拉取漫游消息接口](message_retrieve.html)，增加指定拉取消息方向的参数；
+- [IM SDK] 优化 [拉取漫游消息接口](message_retrieve.html#从服务器获取指定会话的消息)，增加指定拉取消息方向的参数；
 
 ## 版本 V3.9.2.1 2022-5-25
 

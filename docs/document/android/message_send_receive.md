@@ -20,14 +20,13 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 通过 `EMChatManager` 类和 `EMMessage` 类实现消息的发送、接收与撤回。
+环信即时通讯 IM Android SDK 通过 `EMChatManager` 类和 `EMMessage` 类实现消息的发送和接收。
 
 其中，发送和接收消息的逻辑如下：
 
 1. 发送方调用相应 Create 方法创建文本、文件、附件等类型的消息；
-2. 发送方再调用 `SendMessage` 发送消息；
-3. 发送方可通过 `recallMessage` 撤回自己发出的消息；
-4. 通过 `addMessageListener` 添加消息接收的回调通知。
+2. 发送方调用 `SendMessage` 发送消息；
+3. 通过 `addMessageListener` 添加消息接收的回调通知。
 
 消息收发流程如下：
 
@@ -118,55 +117,6 @@ EMMessageListener msgListener = new EMMessageListener() {
 EMClient.getInstance().chatManager().addMessageListener(msgListener);
 // 解注册消息监听
 EMClient.getInstance().chatManager().removeMessageListener(msgListener);
-```
-
-
-
-### 撤回消息
-
-发送方可以撤回一条发送成功的消息。调用 API 撤回消息后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessageRecalled` 事件。
-
-默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
-
-```java
-try {
-    EMClient.getInstance().chatManager().recallMessage(message);
-    EMLog.d("TAG", "撤回消息成功");
-} catch (EMException e) {
-    e.printStackTrace();
-    EMLog.e("TAG", "撤回消息失败的原因: "+e.getDescription());
-}
-```
-
-或者用异步方法：
-
-```java
-EMClient.getInstance().chatManager().asyncRecallMessage(message, new CallBack() {
-    @Override
-    public void onSuccess() {
-        EMLog.d("TAG", "撤回消息成功");
-    }
-    @Override
-    public void onError(int errorCode, String errorMessage) {
-        EMLog.e("TAG", "撤回消息失败的原因: "+errorMessage);
-    }
-    @Override
-    public void onProgress(int i, String s) {
-    }
-});
-```
-
-### 设置消息撤回监听
-
-```java
-/**
- * \~chinese
- * 接收到消息被撤回时触发此回调。
- *
- * \~english
- * Occurs when a received message is recalled.
- */
-void onMessageRecalled(List<ChatMessage> messages);
 ```
 
 ### 发送和接收附件类型的消息
@@ -475,10 +425,8 @@ EMMessageListener msgListener = new EMMessageListener(){
 - 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
 - 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
 
-:::notice 
-
+:::tip
 用户 A 可根据需要设置透传消息发送间隔。
-
 :::
 
 以下示例代码展示如何发送输入状态的透传消息。
@@ -599,7 +547,7 @@ EMClient.getInstance().chatManager().sendMessage(customMessage);
 | `messageIdList` | List      | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。  |
 | `userId` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。|
 
-:::notice
+:::tip
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
 2. 不论 `EMOptions#setAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
 3. 合并消息不支持搜索。
@@ -659,7 +607,7 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
 
 该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
 
-:::notice
+:::tip
 1. 仅 SDK 4.0.3 及以上版本支持。
 2. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息数。
 3. 定向消息不支持消息漫游功能，因此从服务器拉取漫游消息时，不包含定向消息。

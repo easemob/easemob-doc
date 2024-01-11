@@ -14,36 +14,26 @@
 
 精简版 SDK 的功能如下表所示：
 
-<table width="994" border="1">
+<table width="893" border="1">
   <tbody>
     <tr>
       <td width="85">功能模块</td>
       <td width="103">功能</td>
       <td width="110">功能细分/描述</td>
-      <td width="479"> 接口文档</td>
-      <td width="87"> 精简版 SDK</td>
-      <td width="90">标准版 SDK</td>
+      <td width="301"> 接口文档</td>
+      <td width="122"> 精简版 SDK</td>
+      <td width="132">标准版 SDK</td>
     </tr>
     <tr>
       <td rowspan="17">消息管理</td>
-      <td rowspan="11">发送和接收消息</td>
+      <td rowspan="9">发送和接收消息</td>
       <td>发送和接收消息</td>
-      <td rowspan="11"><p><a href="https://docs-im-beta.easemob.com/document/android/message_send_receive.html">发送和接收消息</a></p></td>
+      <td rowspan="9"><p><a href="https://docs-im-beta.easemob.com/document/android/message_send_receive.html">发送和接收消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>接收消息</td>
-      <td>✅</td>
-      <td>✅</td>
-    </tr>
-    <tr>
-      <td>撤回消息</td>
-      <td>✅</td>
-      <td>✅</td>
-    </tr>
-    <tr>
-      <td>设置消息撤回监听</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -85,14 +75,19 @@
     <tr>
       <td>管理本地消息</td>
       <td>管理本地消息</td>
-      <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_manage.html">管理本地消息</a></p></td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_retrieve.html">获取本地历史消息</a><a href="https://docs-im-beta.easemob.com/document/android/message_retrieve.html"></a></p>
+      <p><a href="https://docs-im-beta.easemob.com/document/android/message_search.html">搜索消息</a></p>
+      <p><a href="https://docs-im-beta.easemob.com/document/android/message_import_insert.html">导入和插入消息</a></p>
+      <p><a href="https://docs-im-beta.easemob.com/document/android/message_update.html">更新消息</a></p>
+      <p><a href="https://docs-im-beta.easemob.com/document/android/message_delete.html">删除消息</a></p></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
     <tr>
       <td>管理服务端消息</td>
       <td>管理服务端消息</td>
-      <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_retrieve.html">管理服务端消息</a></p></td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_retrieve.html">从服务器分页获取指定会话的历史消息</a></p>
+      <p><a href="https://docs-im-beta.easemob.com/document/android/message_delete.html#单向删除服务端的历史消息">单向删除服务端的历史消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -110,11 +105,26 @@
       <td>✅</td>
     </tr>
     <tr>
+      <td>撤回消息</td>
+      <td><p>撤回消息</p>
+      <p>设置消息撤回监听</p></td>
+      <td>&nbsp;</td>
+      <td>✅</td>
+      <td>✅</td>
+    </tr>
+    <tr>
       <td>修改消息</td>
       <td>单聊会话中已经发送成功的文本消息进行修改</td>
       <td><p><a href="https://docs-im-beta.easemob.com/document/android/message_modify.html">修改消息</a></p></td>
       <td>❌</td>
       <td>✅</td>
+    </tr>
+    <tr>
+      <td height="71">获取消息流量统计</td>
+      <td>获取消息流量统计</td>
+      <td><a href="https://docs-im-beta.easemob.com/document/android/message_traffic_statis.html">获取消息流量统计</a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
     </tr>
     <tr>
       <td height="71">翻译</td>
@@ -133,7 +143,7 @@
     </tr>
     <tr>
       <td> 从服务器分页获取会话列表</td>
-      <td><p><a href="https://docs-im-beta.easemob.com/document/android/conversation_list.html#从服务器分页获取会话列表">从服务器分页获取会话列表">从服务器分页获取会话列表</a></p></td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/conversation_list.html#从服务器分页获取会话列表">从服务器分页获取会话列表</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -275,7 +285,7 @@
     <tr>
       <td rowspan="4">管理聊天室基本属性</td>
       <td>获取聊天室公告</td>
-      <td rowspan="4"><a href="https://docs-im-beta.easemob.com/document/android/room_attributes.html#管理聊天室基本属性">管理聊天室基本属性</a></td>
+      <td rowspan="4"><a href="https://docs-im-beta.easemob.com/document/android/room_attributes.html">管理聊天室基本属性</a></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
