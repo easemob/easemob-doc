@@ -143,7 +143,7 @@
     </tr>
     <tr>
       <td> 从服务器分页获取会话列表</td>
-      <td><p><a href="https://docs-im-beta.easemob.com/document/android/conversation_list.html#从服务器分页获取会话列表">从服务器分页获取会话列表">从服务器分页获取会话列表</a></p></td>
+      <td><p><a href="https://docs-im-beta.easemob.com/document/android/conversation_list.html#从服务器分页获取会话列表">从服务器分页获取会话列表</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
