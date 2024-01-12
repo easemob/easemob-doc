@@ -249,6 +249,12 @@ PUT https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{f
 | `Accept`        | String | 是 | 内容类型。请填 `application/json`。  |
 | `Authorization` | String | 是 | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
+#### 请求 body
+
+| 参数              | 类型   | 是否必需 | 描述           |
+| :---------------- | :----- | :------- |:-------------|
+| `remark`  | String | 是   | 好友备注。好友备注的长度不能超过 100 个字符。  |
+
 ### HTTP 响应
 
 #### 响应 body
