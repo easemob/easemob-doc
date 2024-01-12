@@ -253,7 +253,7 @@ PUT https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{f
 
 | 参数              | 类型   | 是否必需 | 描述           |
 | :---------------- | :----- | :------- |:-------------|
-| `remark`  | 是 | String      | 好友备注。好友备注的长度不能超过 100 个字符。  |
+| `remark`  | String | 是   | 好友备注。好友备注的长度不能超过 100 个字符。  |
 
 ### HTTP 响应
 
