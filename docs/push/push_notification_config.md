@@ -113,7 +113,7 @@
 | `channelName`      | String  | 通知渠道名称，默认为 `消息`。只有第一次创建通道时使用。      | Android       |
 | `channelLevel`     | Int     | 通知级别，只有第一次创建通道时使用。<br/> - `0`：最低；<br/> - `3`：默认；<br/> - `4`：高。 | Android       |
 | `autoCancel`       | Int     | 点击通知后是否自动关闭通知栏。<br/> - `0`：否；<br/> - （默认）`1`：是。 | Android       |
-| `expiresTime`      | Long    | 通知展示过期的 Unix 时间戳，单位为毫秒。计算公式：当前时间戳 + 保留时间。           | iOS & Android |
+| `expiresTime`      | Long    | 通知展示过期的 Unix 时间戳，单位为毫秒。<br/>计算公式：当前时间戳 + 保留时间。           | iOS & Android |
 | `sound`            | Int     | 声音提醒。<br/> - （默认）`0`：无声音； <br/> - `1`：声音提醒。           | iOS & Android |
 | `vibrate`          | Int     | 振动提醒。<br/> - （默认）`0`：无振动；<br/> - `1`：振动提醒。             | iOS & Android |
 | `style`            | Int     | 展示样式。<br/> -（默认）`0`：普通样式； <br/>- `1`：大文本样式； <br/>- `2`：大图片样式。 | iOS & Android |
