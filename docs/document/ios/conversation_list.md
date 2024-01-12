@@ -26,8 +26,6 @@
 
 你可以调用 `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion` 方法从服务端分页获取会话列表，包含单聊和群组聊天会话，不包含聊天室会话。SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 `0`）以及最新一条消息。从服务端拉取会话列表后会更新本地会话列表。
 
-若在初始化时，将 `EMOptions#loadEmptyConversations` 设置为 `YES` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
-
 :::tip
 1. **若使用该功能，需在环信控制台开通该功能，并将 SDK 升级至 4.0.3。只有开通该功能，你才能使用置顶会话和会话标记功能。** 
 2. 建议你在首次下载、卸载后重装应用等本地数据库无数据情况下拉取服务端会话列表。其他情况下，调用 `getAllConversations:` 或 `getAllConversations` 方法获取本地所有会话即可。

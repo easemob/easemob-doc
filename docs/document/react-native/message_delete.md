@@ -57,7 +57,7 @@ ChatClient.getInstance()
   });
 ```
 
-#### 删除本地单个会话的指定消息
+### 删除本地单个会话的指定消息
 
 你可以调用 `deleteMessage` 方法删除本地单个会话的指定消息。
 
@@ -75,7 +75,7 @@ ChatClient.getInstance()
   });
 ```
 
-#### 删除本地指定会话的所有消息
+### 删除本地指定会话的所有消息
 
 你可以调用 `deleteAllMessages` 方法删除指定会话的所有消息。
 
@@ -92,7 +92,7 @@ ChatClient.getInstance()
   });
 ```
 
-#### 删除指定时间段的本地消息
+### 删除指定时间段的本地消息
 
 你可以调用 `deleteMessagesWithTimestamp` 方法删除指定时间段的本地消息。
 
