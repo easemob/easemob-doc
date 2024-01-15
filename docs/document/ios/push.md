@@ -507,7 +507,7 @@ message.chatType = EMChatTypeChat;
 
 ### 5. 解析收到的推送字段
 
-当设备收到推送通知并点击时，iOS 会将推送通知中的用户自定义信息（JSON）传递给 app，这样你就可以根据推送内容定制 app 的一些行为，例如，页面跳转等。当收到推送通知并点击推送时，app 获取推送内容的方式如下：
+当设备收到推送通知并点击时，iOS 会将推送通知中的自定义推送内容（JSON）传递给 app，这样你就可以根据推送内容自定义点击推送通知触发的行为，例如，页面跳转等。当收到推送通知并点击时，app 获取推送内容的方式如下：
 
 - 若 app 中使用了 `SceneDelegate`，app 的启动流程通过场景系统进行管理。当你点击离线推送的消息打开 app 时，app 将首先启动场景，然后调用 `SceneDelegate` 中的相应方法处理场景的连接和配置。你需要在 `SceneDelegate` 的 `scene(_:willConnectTo:options:)` 方法中查看 `connectionOptions` 参数获取推送内容，示例代码如下：
 
