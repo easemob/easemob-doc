@@ -426,7 +426,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 |  - `groupid`       | String | 群组 ID。                                |
 |  - `affiliations`  | int    | 群组现有成员数。                         |
 |  - `type`          | String | “group” 群组类型。                       |
-|  - `last_modified` | String | 最近一次修改的时间戳，单位为毫秒。       |
+|  - `lastModified` | String | 最近一次修改的时间戳，单位为毫秒。       |
 |  - `groupname`     | String | 群组名称。                               |
 | `count`              | Int    | 实际获取的群组数量。                     |
 | `cursor`             | String | 查询游标，指定下次查询的起始位置。       |
@@ -469,7 +469,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
       "groupid": "10XXXX60",
       "affiliations": 2,
       "type": "group",
-      "last_modified": "1441021038124",
+      "lastModified": "1441021038124",
       "groupname": "testgroup1"
     },
     {
@@ -477,7 +477,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
       "groupid": "10XXXX76",
       "affiliations": 1,
       "type": "group",
-      "last_modified": "1441074471486",
+      "lastModified": "1441074471486",
       "groupname": "testgroup2"
     }
   ],
@@ -679,7 +679,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 |  - `membersonly`        | Bool   | 加入群组是否需要群主或者群管理员审批。<br/> - `true`：是；<br/> - `false`：否。      |
 |  - `allowinvites`       | Bool   | 是否允许群成员邀请其他用户加入此群。<br/> - `true`：允许群成员邀请其他用户加入此群；<br/> - `false`：只有群主可以邀请其他用户入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
 |  - `maxusers`           | Int    | 群组最大成员数，创建群组的时候设置，可修改。    |
-|  - `permission`         | String | 群组成员角色：<br/> - `owner`：群主；<br/> - `member`：普通成员。 |
+|  - `affiliations`       | Array | 群组成员列表及其对应角色：<br/> - `owner`：群主；<br/> - `member`：群组管理员和普通成员。 |
 |  - `owner`              | String | 群主的用户 ID。例如：{“owner”: “user1”}。    |
 |  - `created`            | Long   | 创建该群组的 Unix 时间戳。  |
 |  - `affiliations_count` | int    | 群组现有成员总数。     |
