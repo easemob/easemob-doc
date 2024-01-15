@@ -891,11 +891,17 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述             |
+| :-------------- | :----- | :------- | :---------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+##### 请求 body
+
+| 参数            | 类型   | 是否必需 | 描述             |
+| :-------------- | :----- | :------- | :---------------- |
+| `announcement`  | String | 是       | 群组通告内容。   |
 
 #### HTTP 响应
 
