@@ -162,9 +162,21 @@ EMClient.getInstance().init(this, options);
 
 **旧版 HTTP 或 XMPP API 于 2024 年 6 月 20 日停用，请尽快迁移到最新的 FCM API（HTTP v1）版本证书。详见 [FCM 控制台](https://console.firebase.google.com)。请确保 V1 证书可用，因为执行转换证书后，旧证书会被删除，若此时新证书不可用，会导致推送失败。**
 
-若要从旧版证书无缝切换到 V1 新证书，你可以在 **证书管理** 页面的 FCM 旧版证书的 **操作** 栏中点击 **编辑**，在弹出的 **编辑推送证书** 窗口的 **谷歌** 页签进行 V1 证书配置。
+你可以参考以下步骤从旧版证书无缝切换到 V1 新证书：
+
+1. 在 **证书管理** 页面的旧版证书的 **操作** 栏中点击 **编辑**。
 
 ![image](@static/images/android/push/hxconsoleedit.png)
+
+2. 在**编辑推送证书** 窗口的 **谷歌** 页签，将**证书类型**切换为 **V1**。
+
+![fcmapp](./old2V1.png)
+
+3. 选择本地保存的 V1 证书文件（.json）。
+
+![fcmapp](./v1Chosefile.png)
+
+4. 点击 **保存** 完成切换。
 
 **步骤四：FCM 推送集成。**
 
