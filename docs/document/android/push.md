@@ -102,17 +102,63 @@ EMClient.getInstance().init(this, options);
 
 详见 [FCM 的官网介绍](https://firebase.google.com/docs/android/setup?hl=zh-cn#console)。<br/>
 
-**步骤二：上传推送证书。**
+**步骤二：获取 FCM V1 版本证书。**
 
-注册完成后，在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书配置**，点击 **添加推送证书**。即时通讯 IM 支持 FCM 的旧版证书和 v1 版证书。
+:::tip
+- 旧版 HTTP 或 XMPP API 于 2024 年 6 月 20 日停用，请尽快迁移到最新的 FCM API（HTTP v1）版本证书。详见 [FCM 控制台](https://console.firebase.google.com)。
+- 请确保 V1 证书可用，因为执行转换证书后，旧证书会被删除，若此时新证书不可用，会导致推送失败。
+:::
 
-- 若 **证书类型** 选择 **旧版**，你需要将 **证书名称** 设置为 FCM 的发送者 ID，**推送秘钥** 设置为 FCM 的服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面中，在 **Cloud Messaging API（旧版）** 区域中获取发送者 ID 和服务器密钥，如下图所示。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
+![image](@static/images/android/push/deadline.png)
 
-![image](@static/images/android/push/fcm_old_version.png)
+获取 FCM V1 版本证书的步骤如下：
 
-- 若 **证书类型** 选择 **V1**，你需要上传证书文件（.json 文件）并将 **证书名称** 设置为 FCM 的发送者 ID。你需要在[Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置** > **服务账号** 页面，点击 **生成新的私钥**，下载推送证书文件（.json），然后在 **项目设置** > **云消息传递** 页面中，在 **Firebase Cloud Messaging API（V1）** 区域中获取 发送者 ID。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
+1. 登录 [FCM 控制台](https://console.firebase.google.com)，选择你的应用。 
+
+![image](@static/images/android/push/fcmapp.png)
+
+2. 进入项目设置。
+
+![image](@static/images/android/push/appsetting.png)
+
+3. 选择**服务账号**页签，点击**生成新的私钥**。
+
+![image](@static/images/android/push/v1json.png)
+
+4. 下载证书，保存备用。
+
+下载证书文件，例如 `myapplication-72d8c-firebase-adminsdk-yqa7z-4766fefcaf.json`。
+
+```json
+{
+  "type": "service_account",
+  "project_id": "myapplication-72d8c",
+  "private_key_id": "xxx",
+  "private_key": "-----BEGIN PRIVATE KEY-----\xxx\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-yqa7z@myapplication-72d8c.iam.gserviceaccount.com",
+  "client_id": "xxx",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-yqa7z%40myapplication-72d8c.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
+```
+
+**步骤三：上传推送证书。**
+
+1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击 **添加推送证书**。
+2. 在 **谷歌** 页签，进行如下配置：
+- **证书类型** 选择 **V1**。
+- 点击 **上传证书** 上传获取的 FCM V1 版本证书文件（.json 文件）。
+- **证书名称** 设置为 FCM 的发送者 ID。你需要在[Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置** > **云消息传递** 页面中，在 **Firebase Cloud Messaging API（V1）** 区域中获取发送者 ID，如下图所示。
+- 设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
 
 ![image](@static/images/android/push/fcm_v1.png)
+
+若你仍使用旧版证书，即 **证书类型** 选择 **旧版**，你需要将 **证书名称** 设置为 FCM 的发送者 ID，**推送秘钥** 设置为 FCM 的服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面中，在 **Cloud Messaging API（旧版）** 区域中获取发送者 ID 和服务器密钥，如下图所示。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
+
+![image](@static/images/android/push/fcm_old_version.png)
 
 **步骤三：FCM 推送集成。**
 
