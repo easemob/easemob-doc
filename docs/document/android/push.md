@@ -98,11 +98,11 @@ EMClient.getInstance().init(this, options);
 
 #### FCM 推送集成
 
-##### **步骤一：在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase。**
+**步骤一：在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase。**
 
 详见 [FCM 的官网介绍](https://firebase.google.com/docs/android/setup?hl=zh-cn#console)。<br/>
 
-##### **步骤二：获取 FCM V1 版本证书。**
+**步骤二：获取 FCM V1 版本证书。**
 
 ![image](@static/images/android/push/deadline.png)
 
@@ -140,7 +140,7 @@ EMClient.getInstance().init(this, options);
 }
 ```
 
-##### **步骤三：上传推送证书。**
+**步骤三：上传推送证书。**
 
 1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书管理**。
 
@@ -153,6 +153,8 @@ EMClient.getInstance().init(this, options);
 - 设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
 
 ![image](@static/images/android/push/fcm_v1.png)
+
+##### **旧版证书无缝切换至 V1 证书**
 
 若你仍使用旧版证书，即 **证书类型** 选择 **旧版**，你需要将 **证书名称** 设置为 FCM 的发送者 ID，**推送秘钥** 设置为 FCM 的服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面中，在 **Cloud Messaging API（旧版）** 区域中获取发送者 ID 和服务器密钥，如下图所示。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
 
