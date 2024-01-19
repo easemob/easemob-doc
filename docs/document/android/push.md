@@ -113,11 +113,11 @@ EMClient.getInstance().init(this, options);
 
 获取 FCM V1 版本证书的步骤如下：
 
-1. 登录 [FCM 控制台](https://console.firebase.google.com)，选择你的应用。 
+1. 登录 [FCM 控制台](https://console.firebase.google.com)，选择你的项目。
 
-![image](@static/images/android/push/fcmapp.png)
+![image](@static/images/android/push/fcmproject.png)
 
-2. 进入项目设置。
+2. 选择该项目下的应用。
 
 ![image](@static/images/android/push/appsetting.png)
 
@@ -147,8 +147,11 @@ EMClient.getInstance().init(this, options);
 
 **步骤三：上传推送证书。**
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击 **添加推送证书**。
-2. 在 **谷歌** 页签，进行如下配置：
+1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击 **添加推送证书**。默认打开 **谷歌** 页签。
+
+![image](@static/images/android/push/fcm_certificate_v1.png)
+
+2. 配置 FCM 推送：
 - **证书类型** 选择 **V1**。
 - 点击 **上传证书** 上传获取的 FCM V1 版本证书文件（.json 文件）。
 - **证书名称** 设置为 FCM 的发送者 ID。你需要在[Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置** > **云消息传递** 页面中，在 **Firebase Cloud Messaging API（V1）** 区域中获取发送者 ID，如下图所示。
@@ -160,7 +163,7 @@ EMClient.getInstance().init(this, options);
 
 ![image](@static/images/android/push/fcm_old_version.png)
 
-**步骤三：FCM 推送集成。**
+**步骤四：FCM 推送集成。**
 
 1. 在项目根目录下的 `build.gradle` 中添加 FCM 服务插件。
 
