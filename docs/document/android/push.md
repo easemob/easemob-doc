@@ -170,11 +170,11 @@ EMClient.getInstance().init(this, options);
 
 2. 在**编辑推送证书** 窗口的 **谷歌** 页签，将**证书类型**切换为 **V1**。
 
-![fcmapp](./old2V1.png)
+![fcmapp](@static/images/android/push/old2V1.png)
 
-3. 选择本地保存的 V1 证书文件（.json）。
+3. 点击 **上传证书** 上传本地保存的 V1 证书文件（.json）。
 
-![fcmapp](./v1Chosefile.png)
+![fcmapp](@static/images/android/push/v1Chosefile.png)
 
 4. 点击 **保存** 完成切换。
 
