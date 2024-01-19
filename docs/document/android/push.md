@@ -104,10 +104,6 @@ EMClient.getInstance().init(this, options);
 
 **步骤二：获取 FCM V1 版本证书。**
 
-![image](@static/images/android/push/deadline.png)
-
-获取 FCM V1 版本证书的步骤如下：
-
 1. 登录 [FCM 控制台](https://console.firebase.google.com)，选择你的项目。
 
 ![image](@static/images/android/push/fcmproject.png)
