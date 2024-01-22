@@ -108,11 +108,11 @@ const ChatroomApp = () => {
 
   useEffect(() => {
     client.addEventHandler("chatroom", {
-      onChatroomEvent: (event: AgoraChat.EventData) => {
+      onChatroomEvent: (event: EasemobChat.EventData) => {
         if (event.operation === "muteMember") {
           // console.log('你已被禁言')
         }
-        // 全部事件请参考 https://docs-im-beta.easemob.com/document/web/room_manage.html#%E7%9B%91%E5%90%AC%E8%81%8A%E5%A4%A9%E5%AE%A4%E4%BA%8B%E4%BB%B6
+        // 全部事件请参考 https://docs-im-beta.easemob.com/document/web/room_manage.html#监听聊天室事件
       },
     });
   }, []);
