@@ -820,28 +820,28 @@ curl -L -X GET '{url}/{org}/{app}/users/{username}/notification/language' \
 4. 接收方设置了推送模板。
 5. 发送消息时通过消息扩展字段指定模板名称。
 
-## 创建离线推送模板
+### 创建离线推送模板
 
 创建离线推送消息模板，包括默认模板和自定模板。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/notification/template
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及说明详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
 | :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
 | `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
-#### 请求 body
+##### 请求 body
 
 | 参数              | 类型   | 描述                                  | 是否必需 |
 | :---------------- | :----- | :------------------------------------ | :------- |
@@ -878,9 +878,9 @@ POST https://{host}/{org_name}/{app_name}/notification/template
   # content: {0} = "欢迎使用im-push" {1} = "加油"
   ```
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
@@ -895,9 +895,9 @@ POST https://{host}/{org_name}/{app_name}/notification/template
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```bash
 curl -X POST '{url}/{org}/{app}/notification/template' \
@@ -910,7 +910,7 @@ curl -X POST '{url}/{org}/{app}/notification/template' \
 }'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -931,17 +931,17 @@ curl -X POST '{url}/{org}/{app}/notification/template' \
 }
 ```
 
-## 查询离线推送模板
+### 查询离线推送模板
 
 查询离线推送消息使用的模板。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数   | 类型   | 描述                     | 是否必需 |
 | :----- | :----- | :----------------------- | :------- |
@@ -949,16 +949,16 @@ GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
 | :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
 | `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
@@ -973,16 +973,16 @@ GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```bash
 curl -X GET '{url}/{org}/{app}/notification/template/{name}' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -1028,7 +1028,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/notification/template
 | :--------- | :----- | :------- | :-------------------------------------------- |
 | `templateName` | String | 是   | 模板名称，最多可包含 64 个字符，支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9。| 
 
-#####  HTTP 响应
+####  HTTP 响应
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
 
@@ -1037,6 +1037,8 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/notification/template
 | `data` | JSON | 响应中的数据详情。`templateName` 为设置成功后的模板名称。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
+
+#### 示例
 
 ##### 请求示例
 
@@ -1128,17 +1130,17 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
 
 接口详情，请参见[发送文本消息](https://docs-im-beta.easemob.com/document/server-side/message_single.html#发送文本消息)。
 
-## 删除离线推送模板
+### 删除离线推送模板
  
 删除离线消息推送模板。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数   | 类型   | 描述                     | 是否必需 |
 | :----- | :----- | :----------------------- | :------- |
@@ -1146,16 +1148,16 @@ DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
 | :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
 | `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
@@ -1170,16 +1172,16 @@ DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```bash
 curl -X DELETE '{url}/{org}/{app}/notification/template/{name}' \
 -H 'Authorization: Bearer {YourAppToken}'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
