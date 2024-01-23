@@ -814,15 +814,17 @@ curl -L -X GET '{url}/{org}/{app}/users/{username}/notification/language' \
 
 通知栏中显示的推送标题和内容可通过以下方式设置，优先级为由低到高：
 
-1. 发送消息时使用默认的推送标题和内容（设置推送通知的展示方式 `notification_display_style`。推送标题为“您有一条新消息”，推送内容为“请点击查看”）。  
-2. 发送消息时使用默认模板（若有默认模板 `default`，发消息时无需指定）。
-3. 发送消息时使用扩展字段自定义要显示的推送标题和推送内容（`em_push_title` 和 `em_push_content`）。
+1. 发送消息时使用默认的推送标题和内容：设置推送通知的展示方式 `notification_display_style`。推送标题为“您有一条新消息”，推送内容为“请点击查看”。  
+2. 发送消息时使用默认模板：若有默认模板 `default`，发消息时无需指定。
+3. 发送消息时使用扩展字段自定义要显示的推送标题和推送内容，即 `em_push_title` 和 `em_push_content`。
 4. 接收方设置了推送模板。
 5. 发送消息时通过消息扩展字段指定模板名称。
 
 ### 创建离线推送模板
 
-创建离线推送消息模板，包括默认模板和自定模板。
+创建离线推送消息模板，包括默认模板 `default` 和自定模板。你可以通过[环信即时通讯云控制台](https://console.easemob.com/user/login)创建推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+
+若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
 
 #### HTTP 请求
 
@@ -836,10 +838,10 @@ POST https://{host}/{org_name}/{app_name}/notification/template
 
 ##### 请求 header
 
-| 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
-| :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
-| `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
-| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
+| 参数            | 类型   | 描述       | 是否必需 |
+| :-------------- | :----- | :---------------------------------- | :------- |
+| `Content-Type`  | String | 内容类型。请填 `application/json`。    | 是       |
+| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是   |
 
 ##### 请求 body
 
@@ -849,15 +851,15 @@ POST https://{host}/{org_name}/{app_name}/notification/template
 | `title_pattern`   | String | 自定义推送标题，例如： 标题 {0}。     | 是       |
 | `content_pattern` | String | 自定义推送内容，例如：内容 {0}, {1}。 | 是       |
 
-`title_pattern`/`content_pattern`：推送标题/内容。String 类型，参数必须填写。这两个参数的设置方式如下：
-- 输入固定的推送标题，例如，标题为 “您好”，内容为“您有一条新消息”。
+`title_pattern` 和 `content_pattern` 的设置方式如下：
+- 输入固定的内容，例如，标题为 “您好”，内容为“您有一条新消息”。
 - 内置参数填充：
   - `{$dynamicFrom}`：按优先级从高到底的顺序填充好友备注、群昵称（仅限群消息）和推送昵称。
   - `{$fromNickname}`：推送昵称。  
   - `{$msg}`：消息内容。
 - 自定义参数填充：模板输入数组索引占位符，格式为: {0} {1} {2} ... {n}
 
- 对于推送标题和内容来说，若使用默认模板 `default`，前两种设置方式在创建消息时无需传入该参数，服务器自动获取，第三种设置方式则需要通过扩展字段 `ext.em_push_template` 传入，JSON 结构如下：
+ 对于推送标题和内容来说，前两种设置方式在创建消息时无需传入该参数，服务器自动获取，第三种设置方式则需要通过扩展字段 `ext.em_push_template` 传入，JSON 结构如下：
 
   ```json
   {
@@ -903,7 +905,7 @@ POST https://{host}/{org_name}/{app_name}/notification/template
 curl -X POST '{url}/{org}/{app}/notification/template' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
---data-raw '{
+-d '{
     "name": "test7",
     "title_pattern": "你好,{0}",
     "content_pattern": "推送测试,{0}"
@@ -1026,7 +1028,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/notification/template
 
 | 参数       | 类型   | 是否必需 | 描述          |
 | :--------- | :----- | :------- | :-------------------------------------------- |
-| `templateName` | String | 是   | 模板名称，最多可包含 64 个字符，支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9。| 
+| `templateName` | String | 是   | 模板名称。| 
 
 ####  HTTP 响应
 
@@ -1073,6 +1075,8 @@ curl -X PUT '{host}/{org}/{app}/users/{username}/notification/template' \
 
 发送消息时，可使用消息扩展参数 `ext.em_push_template.name` 指定推送模板名称。
 
+若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
+
 该扩展参数的 JSON 结构如下：
 
 ```json
@@ -1085,7 +1089,7 @@ curl -X PUT '{host}/{org}/{app}/users/{username}/notification/template' \
 }
 ```
 
-下面以发送单聊文本消息时指定推送模板名称为例进行介绍：
+下面以发送单聊文本消息时使用自定义推送模板为例进行介绍：
 
 #### 请求示例
 
@@ -1093,7 +1097,7 @@ curl -X PUT '{host}/{org}/{app}/users/{username}/notification/template' \
 curl -L -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
---data-raw '{
+-d '{
     "from": "user1",
     "to": [
         "user2"
