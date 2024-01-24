@@ -1300,69 +1300,88 @@ EMClient.getInstance().pushManager().getPreferredNotificationLanguage(new EMValu
 4. 接收方设置了推送模板。
 5. 发送消息时通过消息扩展字段指定模板名称。
 
-创建模板后，你可以在发送消息时选择此推送模板，示例代码如下：
+创建模板后，你可以在发送消息时选择此推送模板，分为以下三种情况：
 
 :::tip
 若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
 :::
 
-- 使用自定义推送模板，而且推送标题和推送内容为固定字符串。
+1. 使用固定内容的推送模板，通过 `ext` 扩展字段指定推送模板名称。
 
-这种情况下，创建消息时无需传入 `title_args` 和 `content_args` 参数。 
+这种情况下，创建消息时无需传入 `titleArgs` 和 `contentArgs` 参数。 
 
-```objectivec
-//下面以文本消息为例，其他类型的消息设置方法相同。
-EMTextMessageBody *body = [[EMTextMessageBody alloc]initWithText:@"test"];
-EMChatMessage *message = [[EMChatMessage alloc]initWithConversationID:@"conversationId" from:@"currentUsername" to:@"conversationId" body:body ext:nil];
-//设置推送模板。设置前需在环信即时通讯云管理后台上创建推送模板。
-NSDictionary *pushObject = @{
-    @"name":@"templateName",//设置推送模板名称。
-};
-message.ext = @{
-    @"em_push_template":pushObject,
-};
-message.chatType = EMChatTypeChat;
-[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+```java
+// 下面以文本消息为例，其他类型的消息设置方法相同。
+EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
+EMTextMessageBody txtBody = new EMTextMessageBody("消息内容");
+message.setTo("6006");
+// 设置推送模板。
+JSONObject pushObject = new JSONObject();
+try {
+    // 设置推送模板名称。设置前需在环信即时通讯云管理后台或调用 REST 接口创建推送模板。
+   //若为默认模板 `default`，无需传入模板名称。
+   //若为自定义模板，需传入模板名称。
+    pushObject.put("name", "test7");
+
+} catch (JSONException e) {
+    e.printStackTrace();
+}
+// 将推送扩展设置到消息中。
+message.setAttribute("em_push_template", pushObject);
+// 设置消息状态回调。
+message.setMessageStatusCallback(new EMCallBack() {...});
+// 发送消息。
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-- 使用自定义推送模板，而且推送标题和推送内容为内置参数。
+2. 使用自定义或者默认推送模板，模板中的推送标题和推送内容使用以下内置参数：
+- `{$dynamicFrom}`：服务器按优先级从高到底的顺序填充备注、群昵称（仅限群消息）和推送昵称。
+- `{$fromNickname}`：推送昵称。  
+- `{$msg}`：消息内容。
 
-这种情况下，创建消息时无需传入 `title_args` 和 `content_args` 参数。
+内置参数的介绍，详见[环信即时通讯控制台文档](/product/enable_and-configure_IM.html#使用默认推送模板)。
 
-```objectivec
-//下面以文本消息为例，其他类型的消息设置方法相同。
-EMTextMessageBody *body = [[EMTextMessageBody alloc]initWithText:@"test"];
-EMChatMessage *message = [[EMChatMessage alloc]initWithConversationID:@"conversationId" from:@"currentUsername" to:@"conversationId" body:body ext:nil];
-//设置推送模板。设置前需在环信即时通讯云管理后台上创建推送模板。
-NSDictionary *pushObject = @{
-    @"name":@"templateName",//设置推送模板名称。
-};
-message.ext = @{
-    @"em_push_template":pushObject,
-};
-message.chatType = EMChatTypeChat;
-[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
-```
+这种方式的示例代码与“使用固定内容的推送模板”的相同。
 
-- 使用自定义推送模板，而且推送标题和推送内容为自定义参数。
+3. 使用自定义推送模板，而且推送标题和推送内容为自定义参数：
 
-这种情况下，创建消息时 `title_args` 和 `content_args` 参数需要通过 value 数组传入。
+例如，推送模板的设置如下图所示：
 
-```objectivec
-//下面以文本消息为例，其他类型的消息设置方法相同。
-EMTextMessageBody *body = [[EMTextMessageBody alloc]initWithText:@"test"];
-EMChatMessage *message = [[EMChatMessage alloc]initWithConversationID:@"conversationId" from:@"currentUsername" to:@"conversationId" body:body ext:nil];
-//设置推送模板。设置前需在环信即时通讯云管理后台上创建推送模板。
-NSDictionary *pushObject = @{
-    @"name":@"templateName",//设置推送模板名称。
-    @"title_args":@[@"titleValue1"],//设置填写模板标题的 value 数组。
-    @"content_args":@[@"contentValue1"]//设置填写模板内容的 value 数组。
-};
-message.ext = @{
-    @"em_push_template":pushObject,
-};
-message.chatType = EMChatTypeChat;
-[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+![img](@static/images/android/push_template_custom.png)
+
+使用下面的示例代码后，通知栏中弹出的推送通知为“您收到了一条消息，请及时查看”。
+
+```java
+// 下面以文本消息为例，其他类型的消息设置方法相同。
+EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
+EMTextMessageBody txtBody = new EMTextMessageBody("消息内容");
+message.setTo("6006");
+// 设置推送模板。设置前需在环信即时通讯云管理后台或调用 REST 接口创建推送模板。
+JSONObject pushObject = new JSONObject();
+JSONArray titleArgs = new JSONArray();
+JSONArray contentArgs = new JSONArray();
+try {
+    // 设置推送模板名称。若不指定，设置默认推送模板的信息。
+    pushObject.put("name", "push");
+    // 设置填写模板标题的 value 数组。
+    titleArgs.put("您");
+    titleArgs.put("消息,");
+    //...
+    pushObject.put("title_args", titleArgs);
+    // 设置填写模板内容的 value 数组。
+    contentArgs.put("请");
+    contentArgs.put("查看");
+    //...
+    pushObject.put("content_args", contentArgs);
+} catch (JSONException e) {
+    e.printStackTrace();
+}
+// 将推送扩展设置到消息中。
+message.setAttribute("em_push_template", pushObject);
+// 设置消息状态回调。
+message.setMessageStatusCallback(new EMCallBack() {...});
+// 发送消息。
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
 ### 5. 解析收到的推送字段
