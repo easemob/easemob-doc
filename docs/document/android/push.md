@@ -1349,7 +1349,10 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ![img](@static/images/android/push_template_custom.png)
 
-使用下面的示例代码后，通知栏中弹出的推送通知为“您收到了一条消息，请及时查看”。
+使用下面的示例代码后，通知栏中弹出的推送通知为：
+
+您收到了一条消息
+请及时查看
 
 ```java
 // 下面以文本消息为例，其他类型的消息设置方法相同。

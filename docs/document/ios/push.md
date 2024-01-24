@@ -539,7 +539,10 @@ message.chatType = EMChatTypeChat;
 
 ![img](@static/images/android/push_template_custom.png)
 
-使用下面的示例代码后，通知栏中弹出的推送通知为“您收到了一条消息，请及时查看”。
+使用下面的示例代码后，通知栏中弹出的推送通知为：
+
+您收到了一条消息
+请及时查看
 
 ```objectivec
 //下面以文本消息为例，其他类型的消息设置方法相同。
@@ -550,7 +553,7 @@ NSDictionary *pushObject = @{
     //设置推送模板名称。若不指定，设置默认推送模板的信息。
     //设置前需在环信即时通讯云管理后台或调用 REST 接口创建推送模板。
     @"name":@"templateName",
-    @"title_args":@[@"您",@"消息,"],//设置填写模板标题的 value 数组。
+    @"title_args":@[@"您",@"消息"],//设置填写模板标题的 value 数组。
     @"content_args":@[@"请",@"查看"]//设置填写模板内容的 value 数组。
 };
 message.ext = @{
