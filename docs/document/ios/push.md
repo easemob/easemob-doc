@@ -550,7 +550,7 @@ NSDictionary *pushObject = @{
     //设置推送模板名称。若不指定，设置默认推送模板的信息。
     //设置前需在环信即时通讯云管理后台或调用 REST 接口创建推送模板。
     @"name":@"templateName",
-    @"title_args":@[@"您",@"消息"],//设置填写模板标题的 value 数组。
+    @"title_args":@[@"您",@"消息,"],//设置填写模板标题的 value 数组。
     @"content_args":@[@"请",@"查看"]//设置填写模板内容的 value 数组。
 };
 message.ext = @{
