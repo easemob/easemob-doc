@@ -2,13 +2,16 @@
 
 <Toc />
 
-本文介绍用户如何单向删除服务端的历史消息。
+本文介绍用户如何单向删除服务端和本地的历史消息。
 
 ## 技术原理
 
-使用环信即时通讯 IM Flutter SDK 可以通过 `EMChatManager` 类从服务器单向删除历史消息，主要方法如下：
+使用环信即时通讯 IM Flutter SDK 可以通过 `EMChatManager` 类单向删除服务端和本地的历史消息，主要方法如下：
 
 - `EMChatManager#deleteRemoteMessagesBefore`/`EMChatManager#deleteRemoteMessagesWithIds`：根据消息时间或消息 ID 单向删除服务端的历史消息。
+- `EMChatManager#deleteAllMessages`：删除本地指定会话的所有消息。
+- `EMChatManager#deleteMessagesWithTs`：删除指定时间段的本地消息。
+- `EMChatManager#deleteMessage`：删除本地单个会话的指定消息。
 
 ## 前提条件
 
@@ -45,4 +48,34 @@ try {
     msgIds: msgIds,
   );
 } on EMError catch (e) {}
+```
+
+### 删除本地指定会话的所有消息
+
+你可以删除本地指定会话的所有消息，示例代码如下：
+
+```dart
+EMConversation? conversation = await EMClient.getInstance.chatManager
+    .getConversation(conversationId);
+await conversation?.deleteAllMessages();
+```
+
+### 删除单个本地会话指定时间段的消息
+
+你可以删除本地指定会话在一段时间内的本地消息，示例代码如下：
+
+```dart
+EMConversation? conversation = await EMClient.getInstance.chatManager
+    .getConversation(conversationId);
+await conversation?.deleteMessagesWithTs(startTs, endTs);
+```
+
+### 删除本地单个会话的指定消息
+
+你可以删除本地单个会话的指定消息，示例代码如下：
+
+```dart
+EMConversation? conversation = await EMClient.getInstance.chatManager
+    .getConversation(conversationId);
+await conversation?.deleteMessage(messageId);
 ```

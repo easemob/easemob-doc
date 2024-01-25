@@ -6,12 +6,12 @@
 
 ## 技术原理
 
-环信即时通讯 IM React Native SDK 通过 `ChatManager` 和 `ChatConversation` 类实现单向删除服务端以及删除本地的历史消息，主要方法如下：
+环信即时通讯 IM React Native SDK 通过 `ChatManager` 类实现单向删除服务端以及本地的历史消息，主要方法如下：
 
-- `removeMessagesFromServerWithTimestamp`/`removeMessagesFromServerWithMsgIds` ：单向删除服务端的历史消息；
-- `deleteMessage`：删除本地单个会话的指定消息；
-- `deleteAllMessages`：删除指定会话的所有消息；
-- `deleteMessagesWithTimestamp`：删除指定时间段的本地消息。
+- `ChatManager#removeMessagesFromServerWithTimestamp`/`removeMessagesFromServerWithMsgIds` ：单向删除服务端的历史消息；
+- `ChatManager#deleteAllMessages`：删除本地指定会话的所有消息；
+- `ChatManager#deleteMessagesWithTimestamp`：删除本地单个会话在指定时间段的消息。
+- `ChatManager#deleteMessage`：删除本地单个会话的指定消息；
 
 ## 前提条件
 
@@ -57,24 +57,6 @@ ChatClient.getInstance()
   });
 ```
 
-### 删除本地单个会话的指定消息
-
-你可以调用 `deleteMessage` 方法删除本地单个会话的指定消息。
-
-```typescript
-// convId：会话 ID
-// convType: 会话类型
-// msgId：消息 ID
-ChatClient.getInstance()
-  .chatManager.deleteMessage(convId, convType, msgId)
-  .then(() => {
-    console.log("delete message success");
-  })
-  .catch((reason) => {
-    console.log("delete message fail.", reason);
-  });
-```
-
 ### 删除本地指定会话的所有消息
 
 你可以调用 `deleteAllMessages` 方法删除指定会话的所有消息。
@@ -92,7 +74,7 @@ ChatClient.getInstance()
   });
 ```
 
-### 删除指定时间段的本地消息
+### 删除本地单个会话在指定时间段的消息
 
 你可以调用 `deleteMessagesWithTimestamp` 方法删除指定时间段的本地消息。
 
@@ -101,6 +83,24 @@ ChatClient.getInstance()
 // endTs: 结束点的时间戳
 ChatClient.getInstance()
   .chatManager.deleteMessagesWithTimestamp({ startTs, endTs })
+  .then(() => {
+    console.log("delete message success");
+  })
+  .catch((reason) => {
+    console.log("delete message fail.", reason);
+  });
+```
+
+### 删除本地单个会话的指定消息
+
+你可以调用 `deleteMessage` 方法删除本地单个会话的指定消息。
+
+```typescript
+// convId：会话 ID
+// convType: 会话类型
+// msgId：消息 ID
+ChatClient.getInstance()
+  .chatManager.deleteMessage(convId, convType, msgId)
   .then(() => {
     console.log("delete message success");
   })
