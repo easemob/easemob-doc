@@ -1300,6 +1300,8 @@ EMClient.getInstance().pushManager().getPreferredNotificationLanguage(new EMValu
 4. 接收方设置了推送模板。
 5. 发送消息时通过消息扩展字段指定模板名称。
 
+##### **发送消息时使用推送模板**
+
 创建模板后，你可以在发送消息时选择此推送模板，分为以下三种情况：
 
 :::tip
@@ -1385,6 +1387,28 @@ message.setAttribute("em_push_template", pushObject);
 message.setMessageStatusCallback(new EMCallBack() {...});
 // 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
+```
+
+##### **消息接收方使用推送模板**
+
+消息接收方可以调用 `setPushTemplate` 方法传入推送模板名称，选择要使用的模板。
+
+:::tip
+若发送方在发送消息时使用了推送模板，则推送通知栏中的显示内容以发送方的推送模板为准。
+:::
+
+```java
+EMClient.getInstance().pushManager().setPushTemplate("Template Name", new CallBack() {
+    @Override
+    public void onSuccess() {
+
+    }
+
+    @Override
+    public void onError(int code, String error) {
+
+    }
+});
 ```
 
 ### 5. 解析收到的推送字段
