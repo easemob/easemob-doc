@@ -1398,7 +1398,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 :::
 
 ```java
-EMClient.getInstance().pushManager().setPushTemplate("Template Name", new CallBack() {
+EMClient.getInstance().pushManager().setPushTemplate("Template Name", new EMCallBack() {
     @Override
     public void onSuccess() {
 
