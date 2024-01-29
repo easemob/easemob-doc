@@ -1349,7 +1349,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 例如，推送模板的设置如下图所示：
 
-![img](@static/images/android/push_template_custom.png)
+![img](@static/images/android/push/push_template_custom.png)
 
 使用下面的示例代码后，通知栏中弹出的推送通知为：
 
