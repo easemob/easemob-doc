@@ -543,7 +543,7 @@ message.chatType = EMChatTypeChat;
 
 使用下面的示例代码后，通知栏中弹出的推送通知为：
 
-您收到了一条消息
+您收到了一条消息<br/>
 请及时查看
 
 ```objectivec
