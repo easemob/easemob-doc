@@ -101,6 +101,7 @@
 | 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送消息显示的昵称。                            |
 | 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送消息展示为仅通知还是详情可见。              |
 | 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送是否开启免打扰模式，以及开启/关闭免打扰的时间。 |
+| 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{username}/notification/template | 接收方配置模板名称。 |
 
 ### 消息发送及文件下载
 
