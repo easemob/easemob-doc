@@ -142,7 +142,7 @@
 
 1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中，点击 **查看**。
 
-![img](@static/images/product/push/app_list.png)
+![img](@static/images/product/push/push_app_list.png)
 
 2. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **消息推送** > **模板管理**，进入 **模板管理** 页面。
 
