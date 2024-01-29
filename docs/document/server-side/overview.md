@@ -101,6 +101,7 @@
 | 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送消息显示的昵称。                            |
 | 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送消息展示为仅通知还是详情可见。              |
 | 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送是否开启免打扰模式，以及开启/关闭免打扰的时间。 |
+| 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{username}/notification/template | 接收方配置模板名称。 |
 
 ### 消息发送及文件下载
 
@@ -135,7 +136,8 @@
 | 添加好友     | POST   | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username} | 添加为好友。           |
 | 移除好友     | DELETE | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username} | 移除好友列表中的用户。 |
 | 设置好友备注     | PUT | /{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username} | 设置好有备注。 |
-| 获取好友列表 | GET    | /{org_name}/{app_name}/users/{owner_username}/contacts/users | 获取好友列表。         |
+| 分页获取好友列表    |  GET  | /{org_name}/{app_name}/user/{username}/contacts?pageSize={N}&cursor={cursor}&needReturnRemark={true/false}  | 100 次/秒/App Key   |
+| 一次性获取好友列表 | GET    | /{org_name}/{app_name}/users/{owner_username}/contacts/users | 获取好友列表。         |
 | 获取黑名单列表   | GET    | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 获取黑名单。           |
 | 添加用户至黑名单   | POST   | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 添加用户至黑名单。     |
 | 将用户从黑名单移除   | DELETE | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username} | 移除黑名单中的用户。   |

@@ -48,6 +48,7 @@
 | 创建离线推送模板          | POST  | /{org_name}/{app_name}/notification/template | 10 次/秒/App Key  |
 | 查询离线推送模板          | GET  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
 | 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
+| 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{username}/notification/template | 100 次/秒/App Key。 |
 
 ## 消息管理
 
@@ -64,7 +65,6 @@
 | 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key                                              |
 | 拉取会话列表    |   GET    | /{org_name}/{app_name}/user/{username}/user_channels       | 5 次/分钟/单用户 ID，100 次/秒/App Key    |
 
-
 ## 用户属性
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
@@ -79,13 +79,14 @@
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率 |
 | :------------- | :----- | :---------------- | :-------------- |
-| 添加好友   |    POST         | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
-| 移除好友    |    DELETE        | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
+| 添加好友   | POST   | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
+| 移除好友    | DELETE | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
 | 设置好友备注 | PUT | /{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username} | 100 次/秒/App Key |
-| 获取好友列表    |  GET      | /{org_name}/{app_name}/users/{owner_username}/contacts/users   | 100 次/秒/App Key                                                 |
-| 获取黑名单列表     |  GET       | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 50 次/秒/App Key                                                  |
-| 添加用户至黑名单    |    POST       | /{org_name}/{app_name}/users/{owner_username}/blocks/users    | 50 次/秒/App Key                                                  |
-| 从黑名单移除用户 |    DELETE      | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username}   | 50 次/秒/App Key                                                  |
+| 分页获取好友列表    |  GET  | /{org_name}/{app_name}/user/{username}/contacts?pageSize={N}&cursor={cursor}&needReturnRemark={true/false}  | 100 次/秒/App Key   |
+| 一次性获取好友列表    |  GET  | /{org_name}/{app_name}/users/{owner_username}/contacts/users   | 100 次/秒/App Key   |
+| 获取黑名单列表     | GET   | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 50 次/秒/App Key                                                  |
+| 添加用户至黑名单    | POST  | /{org_name}/{app_name}/users/{owner_username}/blocks/users    | 50 次/秒/App Key                                                  |
+| 从黑名单移除用户 | DELETE  | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username}   | 50 次/秒/App Key                                                  |
 
 ## 群组管理
 
