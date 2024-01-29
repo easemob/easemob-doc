@@ -319,7 +319,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -410,7 +410,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -501,7 +501,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -587,7 +587,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -672,7 +672,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -756,7 +756,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token

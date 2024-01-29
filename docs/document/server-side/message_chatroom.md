@@ -5,7 +5,8 @@
 聊天室场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异，发送方式与单聊类似，详见[发送单聊消息](message_single.html)。
 
 :::tip
-接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
+1. 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
+2. 聊天室中发消息时，不会同步给发送方。
 :::
 
 **发送频率**：通过 RESTful API 单个应用每秒最多可向聊天室发送 100 条消息，每次最多可向 10 个聊天室发送消息。例如，一次向 10 个聊天室发送消息，视为 10 条消息。
@@ -110,27 +111,6 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 ### 示例
 
 #### 请求示例
-
-发送给目标用户，消息无需同步给发送方：
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
--H 'Content-Type: application/json' \
--H 'Accept: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-  "from": "user1",
-  "to": ["185145305923585"],
-  "type": "txt",
-  "body": {
-    "msg": "testmessages"
-  }
-}'
-```
-
-仅发送给在线用户，消息同步给发送方：
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -308,7 +288,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -400,7 +380,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -488,7 +468,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -574,7 +554,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -659,7 +639,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -743,7 +723,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
