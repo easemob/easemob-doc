@@ -1,11 +1,10 @@
-
-### 发送聊天室消息
+# 发送聊天室消息
 
 本文展示如何调用环信 IM RESTful API 在服务端实现聊天室场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
 
 聊天室场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异，发送方式与单聊类似，详见[发送单聊消息](message_single.html)。
 
-:::notice
+:::tip
 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
 :::
 
@@ -86,8 +85,6 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 | `chatroom_msg_level` | String | 否       | 聊天室消息优先级：<br/> - `high`：高； <br/> - （默认）`normal`：普通；<br/> - `low`：低。 |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
-| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。      |
-| `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。  |
 | `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
 
 请求体中的 `body` 字段说明详见下表。
@@ -148,9 +145,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
   "type": "txt",
   "body": {
     "msg": "testmessages"
-  },
-  "routetype":"ROUTE_ONLINE", 
-  "sync_device":true
+  }
 }'
 ```
 
@@ -824,7 +819,6 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/users
 | `chatroom_msg_level` | String | 否       | 聊天室消息优先级：<br/> - `high`：高； <br/> - （默认）`normal`：普通；<br/> - `low`：低。 |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
-| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。      |
 | `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
 | `users` | Array | 是       | 接收消息的聊天室成员的用户 ID 数组。每次最多可传 20 个用户 ID。 |
 
@@ -854,8 +848,6 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/users
 
 #### 请求示例
 
-发送给目标用户，消息无需同步给发送方：
-
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
@@ -870,27 +862,6 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
   "body": {
     "msg": "testmessages"
   },
-  "users": ["user2", "user3"]
-}'
-```
-
-仅发送给在线用户，消息同步给发送方：
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
--H 'Content-Type: application/json' \
--H 'Accept: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-  "from": "user1",
-  "to": ["185145305923585"],
-  "type": "txt",
-  "body": {
-    "msg": "testmessages"
-  },
-  "sync_device": true,
   "users": ["user2", "user3"]
 }'
 ```
@@ -948,7 +919,6 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/broadcast
 | `msg.type` | String | 是 | 广播消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `msg.msg` | String | 是 | 消息内容。  |
 | `ext`           | JSON   | 否       | 广播消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
-| `sync_device`   | Bool   | 否       | 广播消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。      |
 
 不同类型的消息的请求体只在 `msg` 字段有差别，其他参数相同。除了 `type` 字段，`msg` 字段中包含的参数与发送聊天室消息的请求体中的 `body` 字段含义相同，详见各类消息的参数说明。
 - [发送图片消息](#发送图片消息)
@@ -996,7 +966,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1024,7 +993,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1049,7 +1017,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1076,7 +1043,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1100,7 +1066,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1124,7 +1089,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1146,7 +1110,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1168,7 +1131,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
