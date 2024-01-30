@@ -9,6 +9,8 @@
 环信即时通讯 IM iOS SDK 支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
 
 - `IEMChatManager.loadMessagesWithKeyword` 根据关键字搜索本地数据库中单个会话中指定用户发送的消息。
+- `EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:`: 根据关键字搜索消息时，可以选择搜索范围在所有会话中进行消息搜索。
+- `EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:`：根据关键字搜索消息时，可以选择搜索范围在当前会话中进行消息搜索。
 
 ## 前提条件
 
@@ -19,12 +21,34 @@
 
 ## 实现方法
 
-### 根据关键字搜索会话消息
+### 根据关键字搜索会话中的用户发送的消息  
 
 你可以调用 `loadMessagesWithKeyword` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
 
-```objectivec
+```swift
 // 同步方法，异步方法见[EMConversation loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:completion]
-    EMConversation* conversation = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
-    NSArray<EMChatMessage *> *messages = [conversation loadMessagesWithKeyword:@"keyword" timestamp:0 count:50 fromUser:nil searchDirection:EMMessageSearchDirectionDown];
+EMConversation* conversation = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
+NSArray<EMChatMessage *> *messages = [conversation loadMessagesWithKeyword:@"keyword" timestamp:0 count:50 fromUser:nil searchDirection:EMMessageSearchDirectionDown];
+```
+
+### 根据搜索范围搜索所有会话中的消息 
+
+你可以调用 `EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:` 方法，除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索所有会话中的消息时，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。 
+
+```swift
+EMClient.shared().chatManager?.loadMessages(withKeyword: "keyword", timestamp: 0, count: 50, fromUser: "", searchDirection: .down, scope: .content, completion: { messages, aError in
+            
+        })
+```
+
+### 根据搜索范围搜索当前会话中的消息 
+
+你可以调用 `EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:` 方法除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+
+```swift
+if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("conversationsId") {
+    conversation.loadMessages(withKeyword: "keyword", timestamp: 0, count: 50, fromUser: "", searchDirection: .down, scope: .content, completion: { messages, aError in
+                
+    })
+}
 ```

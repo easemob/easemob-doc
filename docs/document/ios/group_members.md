@@ -430,6 +430,8 @@ do {
 
 群主和群管理员开启群组全员禁言后，除了白名单中的群成员，其他成员将不能发言。开启群组全员禁言后，群成员会收到群组事件回调 `EMGroupManagerDelegate#groupAllMemberMuteChanged`。
 
+群组全员禁言状态（`EMGroup#isMuteAllMembers`）存储在本地数据库中，下次登录时可以直接从本地获取到。
+
 示例代码如下：
 
 ```objectivec
