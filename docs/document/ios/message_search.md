@@ -35,6 +35,10 @@ NSArray<EMChatMessage *> *messages = [conversation loadMessagesWithKeyword:@"key
 
 你可以调用 `EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:` 方法，除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索所有会话中的消息时，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。 
 
+:::tip
+若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
+:::
+
 ```swift
 EMClient.shared().chatManager?.loadMessages(withKeyword: "keyword", timestamp: 0, count: 50, fromUser: "", searchDirection: .down, scope: .content, completion: { messages, aError in
             
@@ -44,6 +48,10 @@ EMClient.shared().chatManager?.loadMessages(withKeyword: "keyword", timestamp: 0
 ### 根据搜索范围搜索当前会话中的消息 
 
 你可以调用 `EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:` 方法除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
+:::
 
 ```swift
 if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("conversationsId") {
