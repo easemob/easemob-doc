@@ -33,7 +33,7 @@
 
 为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
 
-若你在初始化时打开了 `EMOptions#regardImportMessagesAsRead` 开关，调用该接口获取的[通过服务端接口](/server-side/message_import.html)导入的消息为已读状态，即会话中未读取的消息数量 `unreadMessagesCount` 不发生变化。若该开关为关闭状态，`unreadMessagesCount` 的数量会增加。
+若你在初始化时打开了 `EMOptions#regardImportMessagesAsRead` 开关，调用该接口获取的[通过服务端接口](/server-side/message_import.html)导入的消息为已读状态，即会话中未读取的消息数量 `EMConversation#unreadMessagesCount` 不发生变化。若该开关为关闭状态，`EMConversation#unreadMessagesCount` 的数量会增加。
 
 :::tip
 1. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。

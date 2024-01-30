@@ -10,7 +10,7 @@
 - [IM SDK] 新增 `EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:` 和`EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:`，可以在根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
 - [IM SDK] 新增 `EMOptions#useReplacedMessageContents` 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
 - [IM SDK] 新增 `EMOptions#includeSendMessageInMessageListener` 开关。开启后，在 `messagesDidReceive` 回调里增加发送成功的消息。
-- [IM SDK] 新增 `EMOptions#regardImportMessagesAsRead` 开关。开启后，[利用服务端接口](/server-side/message_import.html)导入的消息，客户端上通过[漫游拉取](message_retrieve.html#从服务器获取指定会话的消息)到后，这些消息为已读状态，会话中未读取的消息数量 `unreadMessagesCount` 不发生变化。若该开关为关闭状态，`unreadMessagesCount` 的数量会增加。
+- [IM SDK] 新增 `EMOptions#regardImportMessagesAsRead` 开关。开启后，[利用服务端接口](/server-side/message_import.html)导入的消息，客户端上通过[漫游拉取](message_retrieve.html#从服务器获取指定会话的消息)到后，这些消息为已读状态，会话中未读取的消息数量 `EMConversation#unreadMessagesCount` 不发生变化。若该开关为关闭状态，`EMConversation#unreadMessagesCount` 的数量会增加。
 
 ### 优化
 
