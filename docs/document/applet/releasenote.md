@@ -7,8 +7,8 @@
 ### 新增特性
 
 - [IM SDK] 聊天室和群组成员进出事件增加成员人数 `memberCount` 字段。
-- [IM SDK] 新增 [`deleteAllMessagesAndConversations` 方法, 用于清空当前用户的聊天记录，包括消息和会话](message_delete.html#单向清空服务端的聊天记录)。
-- [IM SDK] 新增 [`getSelfIdsOnOtherPlatform` 方法, 可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息](multi_device.html#获取当前用户的其他登录设备的登录-ID-列表)。
+- [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#单向清空服务端的聊天记录) 方法, 用于清空当前用户的聊天记录，包括消息和会话。
+- [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-ID-列表) 方法, 可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
 
 ### 优化
 
@@ -19,7 +19,6 @@
 ### 修复
 
 - [IM SDK] 修复 `onMessage` 回调消息顺序异常问题。
-
 
 ## 版本 V4.4.0 Dev 2023-12-22（开发版）
 
