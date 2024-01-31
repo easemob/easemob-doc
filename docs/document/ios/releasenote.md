@@ -14,10 +14,13 @@
 
 ### 优化
 
-- [IM SDK] 群组全员禁言状态存储到本地数据库，下次登录时可以直接从本地获取到。
+- [IM SDK] 群组全员禁言状态（`EMGroup#isMuteAllMembers`）存储到本地数据库，下次登录时可以直接从本地获取到。
+- [IM SDK] 转发合并消息时导致的附件重复上传问题。
 
 ### 修复
 
+- [IM SDK] 部分场景下群成员人数计算重复问题。
+- [IM SDK] 搜索消息的关键字中带有单引号 `‘` 引起的 SQL 语句报错问题。
 - [IM SDK] 修复数据上报模块偶现的崩溃问题。
 - [IM SDK] 修复多线程同时调用 `EMClient.sharedClient.chatManager.addDelegate` 导致的偶现崩溃问题。
 - [IM SDK] 修复绑定 APNs Token 时，偶现的 Token 绑定失败的问题。
