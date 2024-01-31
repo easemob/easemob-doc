@@ -9,6 +9,8 @@
 环信即时通讯 IM Android SDK 通过 `EMConversation` 类支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
 
 - `EMConversation#searchMsgFromDB(string keywords, long timeStamp, int maxCount, string from, EMSearchDirection direction)`：根据关键字搜索本地数据库中单个会话中指定用户发送的消息。
+- `EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection, com.hyphenate.chat.EMConversation.EMMessageSearchScope)`: 根据关键字搜索消息时，可以选择搜索范围在所有会话中进行消息搜索。
+- `EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection, com.hyphenate.chat.EMConversation.EMMessageSearchScope)`：根据关键字搜索消息时，可以选择搜索范围在当前会话中进行消息搜索。
 
 ## 前提条件
 
@@ -31,4 +33,33 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> messages = conversation.searchMsgFromDB(keywords, timeStamp, maxCount, from, EMConversation.EMSearchDirection.UP);
 ```
 
+### 根据搜索范围搜索所有会话中的消息 
+
+你可以调用 `EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection, com.hyphenate.chat.EMConversation.EMMessageSearchScope)` 方法，除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索所有会话中的消息时，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。 
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
+:::
+
+```java
+String keyWord = "123";
+List<EMMessage> messages = EMClient.getInstance().chatManager().searchMsgFromDB(keyWord, -1, 200, null, EMConversation.EMSearchDirection.UP, EMConversation.EMMessageSearchScope.ALL);
+
+```
+
+### 根据搜索范围搜索当前会话中的消息 
+
+你可以调用 `com.hyphenate.chat.EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection, com.hyphenate.chat.EMConversation.EMMessageSearchScope)` 方法除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
+:::
+
+```java
+String keyWord = "123";
+String conversationId = "jack";
+EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
+List<EMMessage> messages = conversation.searchMsgFromDB(keyWord, -1, 200, null, EMConversation.EMSearchDirection.UP, EMConversation.EMMessageSearchScope.ALL);
+
+```
 

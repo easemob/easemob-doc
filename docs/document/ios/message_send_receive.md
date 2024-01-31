@@ -80,11 +80,13 @@ message.priority = EMChatRoomMessagePriorityHigh;
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
+若初始化时打开了 `EMOptions#useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。该属性只能在调用 `initializeSDKWithOptions` 时设置，而且 app 运行过程中不能修改该参数的设置。
+
 ### 接收消息
 
 你可以用注册监听 `EMChatManagerDelegate` 接收消息。该 `EMChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除 `Delegate`，如在`ViewController` `dealloc()` 时。
 
-在新消息到来时，你会收到 `messagesDidReceive` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
+在新消息到来时，你会收到 `messagesDidReceive` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `EMOptions#includeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
 
 对于聊天室消息，你可以通过消息的 `EMChatMessage#broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 

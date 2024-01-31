@@ -2,19 +2,36 @@
 
 <Toc />
 
-本文介绍用户如何单向删除服务端的历史消息。
+本文介绍用户如何单向清空本地和服务端的聊天记录和单向删除服务端的历史消息。
 
 ## 技术原理
 
 利用环信即时通讯 IM SDK 可从服务器单向删除历史消息，主要方法如下：
 
 - `removeHistoryMessages`：单向删除服务端的历史消息。
+- `deleteAllMessagesAndConversations`：单向清空服务端的聊天记录，本地若有会话，也会被清除。
 
 ## 前提条件
 
 开始前，请确保已完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
 
 ## 实现方法
+
+### 单向清空服务端的聊天记录
+
+你可以调用 `deleteAllMessagesAndConversations` 方法单向清空服务端的当前用户的聊天记录，包括消息和会话。若存在本地会话，也会被清除。
+
+该操作对其他用户不受该操作影响。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.5.0 或以上版本。
+:::
+
+```javascript
+conn.deleteAllMessagesAndConversations().then(() => {
+  // 清除全部会话和消息记录成功
+})
+```
 
 ### 单向删除服务端的历史消息
 

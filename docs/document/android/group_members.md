@@ -434,6 +434,8 @@ EMClient.getInstance().groupManager().fetchGroupMuteList(String groupId, int pag
 仅群主和群管理员可以调用 `muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unmuteAllMembers` 方法解除全员禁言。
 
 开启群组全员禁言后，除了在白名单中的群成员，其他成员将不能发言。开启群组全员禁言后，群成员将会收到群组事件回调 `EMGroupChangeListener#onAllMemberMuteStateChanged`。
+
+群组全员禁言状态（`isAllMemberMuted` 的返回值）存储在本地数据库中，下次登录时可以直接从本地获取到。
  
 示例代码如下：
 

@@ -98,6 +98,8 @@ function sendTextMessage() {
 }
 ```
 
+若初始化时打开了 `useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
+
 ### 接收消息
 
 你可以通过 `addEventHandler` 注册监听器监听消息事件。你可以添加多个事件。当不再监听事件时，请确保删除监听器。

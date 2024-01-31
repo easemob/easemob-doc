@@ -2,6 +2,29 @@
 
 <Toc />
 
+## 版本 V4.4.0 Dev 2024-01-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 [EMChatManager#deleteAllMessagesAndConversations:completion:](message_delete.html#清空聊天记录) 方法，用于清空当前用户的聊天记录，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- [IM SDK] 新增 [EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search.html#根据搜索范围搜索所有会话中的消息) 和[EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search.html#根据搜索范围搜索当前会话中的消息)，可以在根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+- [IM SDK] 新增 [EMOptions#useReplacedMessageContents](message_send_receive.html#发送文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
+- [IM SDK] 新增 [EMOptions#includeSendMessageInMessageListener](message_send_receive.html#接收消息) 开关。开启后，在 `messagesDidReceive` 回调里增加发送成功的消息。
+- [IM SDK] 新增 [EMOptions#regardImportMessagesAsRead](message_retrieve.html#从服务器获取指定会话的消息) 开关。开启后，[利用服务端接口](/document/server-side/message_import.html)导入的消息，客户端上通过[漫游拉取](message_retrieve.html#从服务器获取指定会话的消息)到后，这些消息为已读状态，会话中未读取的消息数量 `EMConversation#unreadMessagesCount` 不发生变化。若该开关为关闭状态，`EMConversation#unreadMessagesCount` 的数量会增加。
+
+### 优化
+
+- [IM SDK] 群组全员禁言状态（`EMGroup#isMuteAllMembers`）存储到本地数据库，下次登录时可以直接从本地获取到。
+- [IM SDK] 转发合并消息时导致的附件重复上传问题。
+
+### 修复
+
+- [IM SDK] 部分场景下群成员人数计算重复问题。
+- [IM SDK] 搜索消息的关键字中带有单引号 `‘` 引起的 SQL 语句报错问题。
+- [IM SDK] 修复数据上报模块偶现的崩溃问题。
+- [IM SDK] 修复多线程同时调用 `EMClient.sharedClient.chatManager.addDelegate` 导致的偶现崩溃问题。
+- [IM SDK] 修复绑定 APNs Token 时，偶现的 Token 绑定失败的问题。
+
 ## 版本 V4.3.0 Dev 2023-12-22（开发版）
 
 ### 新增特性

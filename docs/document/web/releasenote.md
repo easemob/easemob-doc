@@ -2,6 +2,27 @@
 
 <Toc />
 
+## 版本 V4.5.0 Dev 2024-01-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 聊天室和群组成员进出事件增加成员人数 `memberCount` 字段。
+- [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#单向清空服务端的聊天记录) 方法, 用于清空当前用户的聊天记录，包括消息和会话。
+- [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-ID-列表) 方法, 可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
+- [IM SDK] 新增 [useReplacedMessageContents](message_send_receive.html#发送文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
+
+### 优化
+
+- [IM SDK] Web 本地数据库移除非必要唯一字段。
+- [IM SDK] 格式化会话列表中最近一条自定义消息的 `customExts` 字段。
+- [IM SDK] 重复拉消息问题。
+
+### 修复
+
+- [IM SDK] 修复 `onMessage` 回调消息顺序异常问题。
+- [IM SDK] 修复 vite electron 引入 MiniCore 插件报错。
+- [IM SDK] 修复 H5 引入微信 SDK 后，`updateOwnUserInfo` API 请求参数异常问题。
+
 ## 版本 V4.4.0 Dev 2023-12-22（开发版）
 
 ### 新增特性
