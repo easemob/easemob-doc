@@ -8,7 +8,7 @@
 
 使用环信即时通讯 IM iOS SDK 可以通过 `EMConversation` 类单向删除服务端和本地的历史消息，主要方法如下：
 
-- `EMChatManager#deleteAllMessagesAndConversations:completion:`：清空当前用户的聊天记录，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- `EMChatManager#deleteAllMessagesAndConversations:completion:`：清空当前用户的聊天记录，包括消息和会话，同时可以选择是否单向清除服务端的聊天记录。
 - `EMConversation#removeMessagesFromServerWithTimeStamp`/`removeMessagesFromServerMessageIds`：按消息时间或消息 ID 单向删除服务端的历史消息。
 - `EMConversation#deleteAllMessages`：删除本地指定会话的所有消息。
 - `EMConversation#removeMessagesStart`：删除本地单个会话在指定时间段的消息。
