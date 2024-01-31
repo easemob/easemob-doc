@@ -19,7 +19,9 @@
 
 ### 单向清空服务端的聊天记录
 
-你可以调用 `deleteAllMessagesAndConversations` 方法单向清空服务端的当前用户的聊天记录，包括消息和会话。若存在本地会话，也会被清除。
+你可以调用 `deleteAllMessagesAndConversations` 方法单向清空服务端的当前用户的聊天记录，包括消息和会话。
+
+若存在本地会话和消息，也会被清除。
 
 该操作对其他用户不受该操作影响。
 
