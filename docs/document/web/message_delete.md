@@ -9,7 +9,7 @@
 利用环信即时通讯 IM SDK 可从服务器单向删除历史消息，主要方法如下：
 
 - `removeHistoryMessages`：单向删除服务端的历史消息。
-- `deleteAllMessagesAndConversations`：单向清空服务端的聊天记录，本地若有会话，也会被清除。
+- `deleteAllMessagesAndConversations`：单向清空服务端的聊天记录，本地若有会话和消息，也会被清除。
 
 ## 前提条件
 
@@ -17,9 +17,11 @@
 
 ## 实现方法
 
-### 单向清空服务端的聊天记录
+### 清空聊天记录
 
-你可以调用 `deleteAllMessagesAndConversations` 方法单向清空服务端的当前用户的聊天记录，包括消息和会话。若存在本地会话，也会被清除。
+你可以调用 `deleteAllMessagesAndConversations` 方法单向清空服务端的当前用户的聊天记录，包括消息和会话。
+
+若存在本地会话和消息，也会被清除。
 
 该操作对其他用户不受该操作影响。
 
