@@ -6,7 +6,7 @@
 
 `ContactsView` 可以直接使用，也可以通过[路由](chatuikit_advanceusage.html#路由的使用)使用。
 
-// TODO：添加组件图，研发提供
+![img](@static/images/uikit/chatuikit/android/page_contact_list.png) 
 
 ### 添加联系人列表
 

@@ -18,10 +18,12 @@
 ```
 
 - 浅色主题
-// TODO: 图片
+
+![img](@static/images/uikit/chatuikit/android/light_mode.png)
 
 - 深色主题
-// TODO: 图片
+
+![img](@static/images/uikit/chatuikit/android/dark_mode.png)
 
 ## 切换主题
 

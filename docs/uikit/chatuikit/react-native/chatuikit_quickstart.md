@@ -228,7 +228,7 @@ export default App;
 
 点击登录按钮，进入聊天页面，输入文本内容，点击发送。
 
-![聊天页面](./res/conv_detail.png)
+![img](@static/images/uikit/chatuikit/android/message_first.png) 
 
 ## 示例项目地址
 

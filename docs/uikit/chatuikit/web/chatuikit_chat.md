@@ -10,7 +10,7 @@
 - 删除会话。
 - 从服务器拉取历史消息（消息漫游）。
 
-![img](@static/images/uikit/chatweb/chat.png)
+![img](@static/images/uikit/chatuikit/web/page_chat.png) 
 
 ## 使用示例
 

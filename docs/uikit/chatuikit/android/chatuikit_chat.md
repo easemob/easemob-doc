@@ -10,7 +10,7 @@
 - 删除会话。
 - 从服务器拉取历史消息（消息漫游）。
 
-// TODO：添加组件图，研发提供
+![img](@static/images/uikit/chatuikit/android/page_chat.png) 
 
 ## 使用示例
 

@@ -8,6 +8,8 @@
 
 对于单聊和群聊, 会话展示的名称为你设置的 Profile 中的昵称，若未获取到昵称，则展示 ID；会话头像为你设置的 Profile 中的头像，如果没有设置，则使用默认头像。
 
+![img](@static/images/uikit/chatuikit/android/page_conversation.png) 
+
 ## 添加会话列表
 
 添加会话列表时，只需要将 `ConversationsView` 添加到页面上即可。

@@ -6,6 +6,8 @@
 
 联系人按照名称首字母分类排序，如果是中文则使用汉字首字母排序，如果没有昵称则使用用户 ID。
 
+![img](@static/images/uikit/chatuikit/android/page_contact_list.png)
+
 默认使用示例如下：
 
 ```tsx

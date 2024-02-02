@@ -6,7 +6,7 @@
 - 对于单聊, 会话展示的名称为对方昵称，若对方未设置昵称则展示对方的用户 ID，会话头像是对方的头像，如果没有设置则使用默认头像。
 - 对于群聊，会话名称为当前群组的名称，头像为默认头像。
 
-[](./image2/conversation.png)
+![img](@static/images/uikit/chatuikit/web/page_conversation.png) 
 
 ## 使用示例
 

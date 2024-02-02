@@ -23,6 +23,8 @@
 - 举报消息；
 - 删除消息。
 
+![img](@static/images/uikit/chatuikit/android/page_chat.png) 
+
 ## 添加消息页面
 
 添加消息页面时，可以直接添加到你需要展示的位置并传入 `ChatUIKitProfile` 信息。`ChatUIKitProfile` 为用户信息包装类，详见[用户信息展示](chatuikit_userinfo.html)。

@@ -154,6 +154,12 @@ ChatUIKit.instance.loginWithToken(userId: userId, token: token);
   }
 ```
 
+### 第七步 发送第一条消息
+
+在聊天页面下方输入消息，然后点击**发送**按钮发送消息。
+
+![img](@static/images/uikit/chatuikit/android/message_first.png) 
+
 ## 参考
 
 快速开始整个流程的完整代码如下：

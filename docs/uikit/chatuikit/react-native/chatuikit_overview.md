@@ -69,17 +69,17 @@
 
 单群聊 UIKit 中业务相关的 UI 控件主要包含在以下三个组件中： 
 
-- `ConversationList` 提供所有聊天视图的容器。
-
-![会话列表页面](./res/conv_list.png)
-
 - `ConversationDetail` 提供会话列表容器。
 
-![会话详情页面](./res/conv_detail.png)
+![img](@static/images/uikit/chatuikit/android/page_chat.png) 
+
+- `ConversationList` 提供所有聊天视图的容器。
+
+![img](@static/images/uikit/chatuikit/android/page_conversation.png) 
 
 - `ContactList`  提供联系人、群组及其详情等容器。
 
-![联系人页面](./res/contact_list.png)
+![img](@static/images/uikit/chatuikit/android/page_contact_list.png)
 
 
 

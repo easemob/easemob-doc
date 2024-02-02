@@ -6,6 +6,8 @@
 
 该组件支持消息发送、消息接收、加载历史消息、编辑消息、回复消息、撤回消息、重新发送等操作。
 
+![img](@static/images/uikit/chatuikit/android/page_chat.png) 
+
 示例代码如下：
 
 ```tsx

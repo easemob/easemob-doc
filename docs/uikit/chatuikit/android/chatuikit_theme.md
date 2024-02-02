@@ -6,11 +6,11 @@ EaseChatUIKit 内置浅色和深色主题，默认为浅色主题。
 
 - 浅色主题
 
-![img](@static/images/uikit/chatandroid/light_mode.png)
+![img](@static/images/uikit/chatuikit/android/light_mode.png)
 
 - 深色主题
 
-![img](@static/images/uikit/chatandroid/dark_mode.png)
+![img](@static/images/uikit/chatuikit/android/dark_mode.png)
 
 ## 实现方式
 

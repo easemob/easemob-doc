@@ -6,11 +6,11 @@
 
 - 浅色主题
 
-![img](./res/theme_light.png)
+![img](@static/images/uikit/chatuikit/android/light_mode.png)
 
 - 深色主题
 
-![img](./res/theme_dark.png)
+![img](@static/images/uikit/chatuikit/android/dark_mode.png)
 
 使用默认主题，代码如下：
 

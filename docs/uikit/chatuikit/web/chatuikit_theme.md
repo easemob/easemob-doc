@@ -6,11 +6,11 @@
 
 - 浅色主题
 
-![img](@static/images/uikit/chatweb/light_mode.png)
+![img](@static/images/uikit/chatuikit/web/light_mode.png)
 
 - 深色主题
 
-![img](@static/images/uikit/chatweb/dark_mode.png)
+![img](@static/images/uikit/chatuikit/web/dark_mode.png)
 
 ## 切换内置主题
 
