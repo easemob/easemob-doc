@@ -88,11 +88,11 @@ export const zhNavbar = navbar([
             icon: "/icon-iOS.svg",
             link: "/uikit/chatuikit/ios/overview.html",
           },
-          //{
-         //   text: "Web",
-         //   icon: "/icon-Android.svg",
-         //   link: "/uikit/chatuikit/web/overview.html",
-         // },
+          {
+            text: "Web",
+            icon: "/icon-Android.svg",
+            link: "/uikit/chatuikit/web/overview.html",
+          },
           {
             text: "React Native",
             icon: "/icon-ReactNative.svg",
