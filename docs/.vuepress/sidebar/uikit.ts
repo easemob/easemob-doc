@@ -161,11 +161,11 @@ const chatUikitSidebar = [
   {
     text: '历史文档',
     children: [
-      { text: '历史文档', link: 'chatuikit_historic.html', only: ['android','ios']},
-      { text: 'UIKit 介绍', link: 'chatui_overview.html', except: ['android'] },
-      { text: '快速开始', link: 'chatui_quickstart.html', except: ['android'] },
-      { text: '集成聊天页面', link: 'chatui_chat.html', except: ['android'] },
-      { text: '集成会话列表页面', link: 'chatui_conversation.html', except: ['android'] },
+      { text: '历史文档', link: 'ui_historic.html', only: ['android','ios']},
+      { text: 'UIKit 介绍', link: 'ui_overview.html', except: ['android','ios'] },
+      { text: '快速开始', link: 'ui_quickstart.html', except: ['android','ios'] },
+      { text: '集成聊天页面', link: 'ui_chat.html', except: ['android','ios'] },
+      { text: '集成会话列表页面', link: 'ui_conversation.html', except: ['android','ios'] },
     ],
     only: ['android', 'react-native', 'flutter', 'ios']
   }
