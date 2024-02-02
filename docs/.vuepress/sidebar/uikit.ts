@@ -34,7 +34,7 @@ const chatUikitSidebar = [
         ],
       },
     ],
-    only: ['iOS']
+    only: ['ios']
   },
   {
     text: '快速开始',
@@ -43,7 +43,7 @@ const chatUikitSidebar = [
       { text: '集成单群聊 UIKit', link: 'chatuikit_integrated.html' },
       { text: '快速开始', link: 'chatuikit_quickstart.html' },
     ],
-    only: ['iOS']
+    only: ['ios']
   },
   {
     text: '集成文档',
@@ -55,22 +55,15 @@ const chatUikitSidebar = [
       { text: '事件监听', link: 'chatuikit_listener.html' },
       { text: '拦截主要页面点击跳转事件', link: 'chatuikit_customize_clickjump.html' },
     ],
-    only: ['iOS']
+    only: ['ios']
   }, 
   {
     text: '设计文档',
     children: [
       { text: '设计指南', link: 'chatuikit_design_guide.html' },
     ],
-    only: ['iOS']
+    only: ['ios']
   }, 
-  {
-    text: '历史文档',
-    children: [
-      { text: '历史文档', link: 'chatuikit_historic.html' },
-    ],
-    only: ['iOS']
-  },
   {
     text: '产品介绍',
     children: [
@@ -83,14 +76,14 @@ const chatUikitSidebar = [
         ],
       },
     ],
-    only: ['Web']
+    only: ['web']
   },
   {
     text: '快速开始',
     children: [
       { text: '快速开始', link: 'chatuikit_quickstart.html' },
     ],
-    only: ['Web']
+    only: ['web']
   },
   {
     text: '集成文档',
@@ -106,21 +99,21 @@ const chatUikitSidebar = [
       { text: '音视频通话', link: 'chatuikit_video.html' },
       { text: '主题', link: 'chatuikit_theme.html' },
     ],
-    only: ['Web']
+    only: ['web']
   }, 
   {
     text: '组件文档',
     children: [
       { text: '组件文档', link: 'chatuikit_storybook.html' },
     ],
-    only: ['Web']
+    only: ['web']
   },
   {
     text: '设计文档',
     children: [
       { text: '设计指南', link: 'chatuikit_design_guide.html' },
     ],
-    only: ['Web']
+    only: ['web']
   },   
   {
     text: '产品介绍',
@@ -134,7 +127,7 @@ const chatUikitSidebar = [
         ],
       },
     ],
-    only: ['Android', 'React Native', 'Flutter']
+    only: ['android', 'react-native', 'flutter']
   },
   {
     text: '快速开始',
@@ -142,7 +135,7 @@ const chatUikitSidebar = [
       { text: '跑通示例项目', link: 'chatuikit_run.html', except: ['android'] },
       { text: '快速开始', link: 'chatuikit_quickstart.html' },
     ],
-    only: ['Android', 'React Native', 'Flutter']
+    only: ['android', 'react-native', 'flutter']
   },
   {
     text: '集成文档',
@@ -156,25 +149,25 @@ const chatUikitSidebar = [
       { text: '主题', link: 'chatuikit_theme.html' },
       { text: '国际化', link: 'chatuikit_internationalization.html', except: ['android'] },
     ],
-    only: ['Android', 'React Native', 'Flutter']
+    only: ['android', 'react-native', 'flutter']
   }, 
   {
     text: '设计文档',
     children: [
       { text: '设计指南', link: 'chatuikit_design_guide.html' },
     ],
-    only: ['Android', 'React Native', 'Flutter']
+    only: ['android', 'react-native', 'flutter']
   }, 
   {
     text: '历史文档',
     children: [
-      { text: '历史文档', link: 'chatuikit_historic.html', only: ['android']},
+      { text: '历史文档', link: 'chatuikit_historic.html', only: ['android','ios']},
       { text: 'UIKit 介绍', link: 'chatui_overview.html', except: ['android'] },
       { text: '快速开始', link: 'chatui_quickstart.html', except: ['android'] },
       { text: '集成聊天页面', link: 'chatui_chat.html', except: ['android'] },
       { text: '集成会话列表页面', link: 'chatui_conversation.html', except: ['android'] },
     ],
-    only: ['Android', 'React Native', 'Flutter']
+    only: ['android', 'react-native', 'flutter', 'ios']
   }
 ]
 const chatroomUikitSidebar = [
