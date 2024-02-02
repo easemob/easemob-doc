@@ -274,7 +274,6 @@ val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 
 ![img](@static/images/uikit/chatuikit/android/editor2.png =500x900)
 
-
 ### 监听扩展条目点击事件
 
 开发者可以利用 `EaseChatFragment#Builder#setOnChatExtendMenuItemClickListener` 进行监听，也可以在自定义的 `Fragment` 中重写 `onChatExtendMenuItemClick` 方法。
