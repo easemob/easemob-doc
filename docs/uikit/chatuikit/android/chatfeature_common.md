@@ -6,13 +6,13 @@
 
 会话列表呈现了用户所有正在进行的对话，帮助用户快速找到所需联系人并查看消息进展。
 
-![img](@static/images/uikit/chatuikit/feature/common/conversation_list.png)
+![img](@static/images/uikit/chatuikit/feature/common/conversation_list.png =350x700)
 
 ## 聊天	
 
 聊天是即时通讯的核心功能之一，它允许用户与其他用户进行实时文字交流。聊天通常以会话的形式进行，每个会话由两个或多个用户组成。
 
-![img](@static/images/uikit/chatuikit/feature/common/chat.png)
+![img](@static/images/uikit/chatuikit/feature/common/chat.png  =350x750)
 
 ## 创建会话
 
@@ -42,7 +42,7 @@
 
 用户列表显示了用户的所有联系人，包括联系人列表，群成员列表和黑名单等。用户可以通过用户列表快速找到需要联系的人。
 
-![img](@static/images/uikit/chatuikit/feature/common/user_list.png) 
+![img](@static/images/uikit/chatuikit/feature/common/user_list.png =350x760) 
 
 ## 联系人备注	
 
@@ -60,13 +60,13 @@
 
 文件共享允许用户通过即时通讯应用发送和接收文件。文件共享可以用于分享文档、图片、视频等文件。
 
-![img](@static/images/uikit/chatuikit/feature/common/file_share.png) 
+![img](@static/images/uikit/chatuikit/feature/common/file_share.png =600x630) 
 
 ## 未读消息数	
 
 未读消息数是指用户收到的但尚未查看的消息数量。
 
-![img](@static/images/uikit/chatuikit/feature/common/message_unread_count.png) 
+![img](@static/images/uikit/chatuikit/feature/common/message_unread_count.png =600x630) 
 
 ## 已发送回执	
 
