@@ -6,12 +6,9 @@
 
 若要访问源码，请点击[这里](https://github.com/easemob/chatuikit-ios)。
 
-## 功能优势
-
-产品提供
-
 ## 项目结构
 
+```
 Classes
 ├─ Service // 基础服务组件。
 │ ├─ Client //单群聊 UIKit 用户主要初始化、登录、缓存等使用 API。
@@ -35,6 +32,7 @@ Classes
        ├─ Foundation // 日志以及一些音频转换工具类。
        ├─ Theme // 主题相关组件，包括颜色、字体、换肤协议及其组件。
        └─ Extension // 一些方便的系统类扩展。
+ ```    
 
 ## 功能
 
