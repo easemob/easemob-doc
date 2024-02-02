@@ -30,7 +30,7 @@ Theme.switchTheme(style: .light)
 
 ## 切换为自定义主题   
 
-自定义设置主题时，需要参考[设计指南](https://github.com/StevieJiang/Chatroom-UIkit-Design-Guide/blob/main/README.md)的主题色定义以下五种主题色的色相值。
+自定义设置主题时，需要参考设计指南的主题色定义以下五种主题色的色相值。
 
 EaseChatUIKit 中的所有颜色均使用 HSLA 颜色模型定义，该模型是一种使用色调、饱和度、亮度和 Alpha 表示颜色的方式。
 
@@ -72,11 +72,3 @@ extension YourView: ThemeSwitchProtocol {
 ```
 
 3. 在 `switchTheme` 方法中根据主题类型（浅色、深色和自定义）给你的子视图设置对应颜色。
-
-## 设计指南 
-
-如果你对主题颜色，设计指南和细节有任何疑问，您可以在 Figma 设计稿中添加评论并提及我们的设计师 Stevie Jiang。
-
-- [UI 设计资源](https://www.figma.com/community/file/1322495388317476706/chatroom-uikit)。
-
-- [UI 设计指南](design_guide.html)。

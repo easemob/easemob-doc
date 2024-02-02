@@ -4,7 +4,7 @@
 
 环信单群聊 UIKit 是基于环信即时通讯云 IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
-若要访问源码，请点击[这里](https://github.com/easemob/Easemob-UIKit-flutter)。
+若要访问源码，请点击[这里](https://github.com/easemob/chatuikit-flutter)。
 
 ## UIKit 基本项目结构
 

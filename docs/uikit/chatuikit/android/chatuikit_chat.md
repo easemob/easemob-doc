@@ -37,8 +37,7 @@ class ChatActivity: AppCompactActivity() {
 }
 ```
 
-![img](@static/images/uikit/chatweb/buble1.png =400x450)
-
+![img](@static/images/uikit/chatuikit/android/buble1.png =400x450)
 
 ## 进阶用法
 
@@ -222,7 +221,7 @@ class CustomMessageAdapter: EaseMessagesAdapter() {
 builder.setCustomAdapter(CustomMessageAdapter())
 ```
 
-![img](@static/images/uikit/chatweb/buble2.png =400x450)
+![img](@static/images/uikit/chatuikit/android/buble2.png =400x450)
 
 ### 列表控件相关功能设置
 
@@ -273,7 +272,7 @@ val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 | setMenuOrder()     | 对指定的菜单项进行排序。 |
 | registerMenuItem() | 添加新的菜单项。         |
 
-![img](@static/images/uikit/chatweb/editor2.png =400x450)
+![img](@static/images/uikit/chatuikit/android/editor2.png =400x450)
 
 
 ### 监听扩展条目点击事件

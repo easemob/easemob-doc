@@ -28,7 +28,7 @@ const ChatContainer = () => {
 };
 ```
 
-![img](@static/images/uikit/chatweb/buble1.png =400x450)
+![img](@static/images/uikit/chatuikit/web/buble1.png =400x450)
 
 ## 自定义
 
@@ -74,7 +74,7 @@ const ChatContainer = () => {
 };
 ```
 
-![img](@static/images/uikit/chatweb/buble2.png =400x450)
+![img](@static/images/uikit/chatuikit/web/buble2.png =400x450)
 
 ### 在消息编辑器中添加自定义图标
 
@@ -114,7 +114,7 @@ const ChatContainer = () => {
 };
 ```
 
-![img](@static/images/uikit/chatweb/editor2.png =400x450)
+![img](@static/images/uikit/chatuikit/web/editor2.png =400x450)
 
 ### 实现发送自定义消息
 
@@ -195,7 +195,7 @@ const ChatContainer = () => {
 };
 ```
 
-![img](@static/images/uikit/chatweb/custom-msg.png =400x450)
+![img](@static/images/uikit/chatuikit/web/custom-msg.png =400x450)
 
 ### 修改聊天相关的主题
 

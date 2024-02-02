@@ -42,12 +42,12 @@ Classes
 
 - Chat 模块提供所有聊天视图的容器。
 
-![img](@static/images/uikit/chatuikit/android/page_chat.png) 
+![img](@static/images/uikit/chatuikit/ios/page_chat.png) 
 
 - Conversation 模块提供会话列表容器。
 
-![img](@static/images/uikit/chatuikit/android/page_conversation.png) 
+![img](@static/images/uikit/chatuikit/ios/page_conversation.png) 
 
 - Contact 模块提供联系人、群组及其详情等容器。
 
-![img](@static/images/uikit/chatuikit/android/page_contact_list.png) 
+![img](@static/images/uikit/chatuikit/ios/page_contact_list.png) 

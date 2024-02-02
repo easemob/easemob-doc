@@ -34,7 +34,7 @@ const App = () => {
 
 在单群聊 UIKit 中， 主题色要用于默认头像颜色，消息气泡颜色，按钮颜色等位置。默认的主题色如下图所示，你可以自定义为其他颜色。
 
-![img](@static/images/uikit/chatweb/image.png)
+![img](@static/images/uikit/chatuikit/web/image.png)
 
 ```javascript
 import { UIKitProvider } from 'agora-chat-uikit';
@@ -111,11 +111,3 @@ module.exports = {
   },
 };
 ```
-
-## 设计指南
-
-如果你对主题颜色，设计指南和细节有任何疑问，您可以在 Figma 设计稿中添加评论并提及我们的设计师 Stevie Jiang。
-
-- [UI 设计资源](https://www.figma.com/community/file/1322495388317476706/chatroom-uikit)。
-
-- [UI 设计指南](design_guide.html)。

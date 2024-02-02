@@ -42,7 +42,7 @@ const Conversation = () => {
 };
 ```
 
-[](./image2/contact-header.png)
+![img](@static/images/uikit/chatuikit/web/contact-header.png)
 
 ### 在联系人列表中添加黑名单
 
@@ -80,7 +80,7 @@ const Conversation = () => {
 };
 ```
 
-[](./image2/contact-block.png)
+![img](@static/images/uikit/chatuikit/web/contact-block.png)
 
 ### 设置成可选择的联系人列表
 
@@ -108,7 +108,7 @@ const ContactListContainer = () => {
 };
 ```
 
-[](./image2/contact-select.png)
+![img](@static/images/uikit/chatuikit/web/contact-select.png)
 
 ## ContactList 属性总览
 

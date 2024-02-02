@@ -38,7 +38,7 @@ pod install --repo-update
 
 2. 在键盘上按 `cmd+B` 进行编译，编译结果会报错，如下图所示：
 
-![img](./buildError.png) 
+![img](@static/images/uikit/chatuikit/ios/buildError.png) 
 
 3. 在[环信即时通讯控制台](https://console.easemob.com/user/login)创建有效的环信即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#创建应用)。然后，将 App Key 填入 `appKey` 字段。
 

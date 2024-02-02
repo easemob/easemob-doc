@@ -32,7 +32,7 @@ _localization.displayLanguageWhenNotSupported = const Locale('en');
 
 可以通过 `ChatUIKitLocalizations.addLocales` 方法扩展国际化支持的语言，对应文字的常量定义在 `ChatUIKitLocal` 文件中。你可以添加自己的 `MapLocale` 对象传入到 `ChatUIKitLocalizations` 中实现国际化。
 
-比如需要添加法语支持可以通过以下方式：
+例如，你可以通过以下方式添加法语支持：
 
 ```dart
 

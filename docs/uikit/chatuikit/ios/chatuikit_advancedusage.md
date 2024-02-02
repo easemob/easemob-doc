@@ -43,7 +43,7 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
  }
 ```
 
-## 会话列表页面及 Provider
+## 会话列表页面及其 Provider
 
 1. 创建会话列表页面。
 
@@ -134,11 +134,11 @@ let vc = EaseChatUIKit.ComponentsRegister.shared.ContactsController.init(provide
 
 2. 实现联系人列表 Provider。
 
-实现联系人列表 Provider 与[实现会话列表 Provider 相似](#会话列表页面及-provider)。实现 EaseProfileProvider 协议后，使用协程异步返回你要显示的联系人信息。对于 Objective-C，实现 EaseProfileProviderOC 即可。 
+实现联系人列表 Provider 与[实现会话列表 Provider 相似](#会话列表页面及其-provider)。实现 EaseProfileProvider 协议后，使用协程异步返回你要显示的联系人信息。对于 Objective-C，实现 `EaseProfileProviderOC` 即可。 
 
 ## 初始化聊天页面
 
-聊天页面中大部分消息处理以及页面处理逻辑均可覆盖（override），包括 ViewModel。
+聊天页面中大部分消息处理以及页面处理逻辑均可覆盖（override），包括 `ViewModel`。
 
 ```
 // 在环信即时通讯云控制台中创建一个新用户，将用户 ID 传入下面构造方法参数中，跳转到聊天页面即可。

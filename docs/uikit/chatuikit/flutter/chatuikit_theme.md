@@ -47,7 +47,7 @@
 
 ## 切换为自定义主题
 
-自定义设置主题时，需要参考[设计指南](https://github.com/StevieJiang/Chatroom-UIkit-Design-Guide/blob/main/README.md)的主题色定义以下五种主题色的色相值。
+自定义设置主题时，需要参考设计指南的主题色定义以下五种主题色的色相值。
 
 单群聊 UIKit 中的所有颜色均使用 HSLA 颜色模型定义，该模型是一种使用色调、饱和度、亮度和 Alpha 表示颜色的方式。
 

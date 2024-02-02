@@ -29,11 +29,3 @@ Android 利用自己的平台特性，可以在 `res` 目录下创建 `values-ni
  AppCompactDelegate.setDefaultNightMode(if (isBlack) AppCompactDelegate.MODE_NIGHT_NO else AppCompactDelegate.MODE_NIGHT_YES)
  EasePreferenceManager.getInstance().putBoolean("isBlack", !isBlack)
 ```
-
-## 设计指南 
-
-如果你对主题颜色，设计指南和细节有任何疑问，您可以在 Figma 设计稿中添加评论并提及我们的设计师 Stevie Jiang。
-
-- [UI 设计资源](https://www.figma.com/community/file/1322495388317476706/chatroom-uikit)。
-
-- [UI 设计指南](design_guide.html)。

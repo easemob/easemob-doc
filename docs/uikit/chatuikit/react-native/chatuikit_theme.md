@@ -110,9 +110,3 @@ export function App() {
   );
 }
 ```
-
-## 设计指南
-
-对比 `react-native` 的其它的主题方案(例如：`react-native-paper`, `sendbird-uikit-react-native`), 这里设计更加简单实用。
-
-[主题设计参考](https://www.figma.com/community/file/1322495388317476706)
