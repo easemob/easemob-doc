@@ -10,7 +10,7 @@
 - 删除会话。
 - 从服务器拉取历史消息（消息漫游）。
 
-![img](@static/images/uikit/chatuikit/android/page_chat.png) 
+![img](@static/images/uikit/chatuikit/android/page_chat.png =300x630) 
 
 ## 使用示例
 
@@ -37,7 +37,7 @@ class ChatActivity: AppCompactActivity() {
 }
 ```
 
-![img](@static/images/uikit/chatuikit/android/buble1.png =400x450)
+![img](@static/images/uikit/chatuikit/android/buble1.png =500x900)
 
 ## 进阶用法
 
@@ -221,7 +221,7 @@ class CustomMessageAdapter: EaseMessagesAdapter() {
 builder.setCustomAdapter(CustomMessageAdapter())
 ```
 
-![img](@static/images/uikit/chatuikit/android/buble2.png =400x450)
+![img](@static/images/uikit/chatuikit/android/buble2.png =400x750)
 
 ### 列表控件相关功能设置
 
@@ -272,7 +272,7 @@ val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 | setMenuOrder()     | 对指定的菜单项进行排序。 |
 | registerMenuItem() | 添加新的菜单项。         |
 
-![img](@static/images/uikit/chatuikit/android/editor2.png =400x450)
+![img](@static/images/uikit/chatuikit/android/editor2.png =500x900)
 
 
 ### 监听扩展条目点击事件

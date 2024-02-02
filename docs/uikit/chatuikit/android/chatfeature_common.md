@@ -78,7 +78,7 @@
 
 已读回执用于告知消息发送者，接收者已经阅读了其发送的消息。
 
-![img](@static/images/uikit/chatuikit/feature/common/message_read_receipt.png) 
+![img](@static/images/uikit/chatuikit/feature/common/message_read_receipt.png =300x630) 
 
 ## 联系人名片	
 
@@ -90,10 +90,10 @@
 
 语音消息指以语音形式发送和接收的消息，可替代文字交流。
 
-![img](@static/images/uikit/chatuikit/feature/common/message_audio.png) 
+![img](@static/images/uikit/chatuikit/feature/common/message_audio.png =700x730) 
 
 ## 消息举报
 
 消息举报对用户发送的消息内容进行审查，判断其是否符合平台的社区准则、服务条款和相关法律法规。
 
-![img](@static/images/uikit/chatuikit/feature/common/message_report.png) 
+![img](@static/images/uikit/chatuikit/feature/common/message_report.png =300x630) 

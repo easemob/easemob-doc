@@ -6,7 +6,7 @@
 - 对于单聊, 会话展示的名称为对端用户的昵称，若对端用户未设置昵称则展示对方的用户 ID；会话头像是对方的头像，如果没有设置则使用默认头像。
 - 对于群聊，会话名称为当前群组的名称，头像为默认头像。
 
-![img](@static/images/uikit/chatuikit/android/page_conversation.png) 
+![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x800) 
 
 ## 使用示例
 
@@ -101,7 +101,7 @@ builder.setCustomAdapter(customConversationListAdapter);
 builder.setCustomFragment(customConversationListFragment);
 ```
 
-![img](@static/images/uikit/chatuikit/android/conversation_list_custom.png =200x450)
+![img](@static/images/uikit/chatuikit/android/conversation_list_custom.png)
 
 ### 设置会话头像和昵称
 
@@ -135,7 +135,7 @@ EaseIM.setConversationInfoProvider(object : EaseConversationInfoProvider {
 })
 ```
 
-![img](@static/images/uikit/chatuikit/android/cvs-nick.png =200x450)
+![img](@static/images/uikit/chatuikit/android/cvs-nick.png =450x800)
 
 ## EaseConversationListFragment 中默认实现的功能
 
@@ -161,7 +161,7 @@ EaseIM.setConversationInfoProvider(object : EaseConversationInfoProvider {
 
 使用 `EaseConversationListViewModel` 提供的方法 `deleteConversation` 方法删除会话。
 
-![img](@static/images/uikit/chatuikit/android/cvs-action.png =200x450)
+![img](@static/images/uikit/chatuikit/android/cvs-action.png =350x600)
 
 ## 事件监听
 

@@ -6,7 +6,7 @@
 
 消息复制是指用户可以将一条消息复制到剪贴板。消息复制可以帮助用户将消息保存到其他地方，或将其粘贴到其他应用程序中。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_copy.png) 
+![img](@static/images/uikit/chatuikit/feature/message/message_copy.png =600x600) 
 
 ## 消息删除	
 
