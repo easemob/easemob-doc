@@ -4,7 +4,7 @@
 
 `EaseContactsListFragment` 用于展示通讯录列表。昵称在中文或者英文的情况下可以实现按首字母分类。
 
-![img](@static/images/uikit/chatuikit/android/page_contact_list.png) 
+![img](@static/images/uikit/chatuikit/android/page_contact_list.png =400x850) 
 
 ## 使用示例
 

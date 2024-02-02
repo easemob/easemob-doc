@@ -272,7 +272,7 @@ val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 | setMenuOrder()     | 对指定的菜单项进行排序。 |
 | registerMenuItem() | 添加新的菜单项。         |
 
-![img](@static/images/uikit/chatuikit/android/editor2.png =500x900)
+![img](@static/images/uikit/chatuikit/android/editor2.png =400x700)
 
 ### 监听扩展条目点击事件
 
