@@ -99,7 +99,3 @@ export function ConversationListScreen(props: Props) {
 ### 事件通知
 
 事件通知在列表中已经实现，收到对应事件会更新列表。通常情况下，不需要开发者关注。
-
-### 示例应用
-
-TODO：添加如何获取会话中未读消息总数，添加描述+示例代码 没时间不做了

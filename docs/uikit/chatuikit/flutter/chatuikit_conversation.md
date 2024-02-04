@@ -4,7 +4,7 @@
 
 会话列表 `ConversationsView` 是 `ChatUIKit` 提供的主要组件, 用于展示用户会话列表，包括会话名称、最后一条消息、最后一条消息的时间以及置顶和禁言状态等。
 
-`ConversationsView` 可以直接使用，也可以通过[路由](chatuikit_advanceusage.html#路由的使用)使用。
+`ConversationsView` 可以直接使用，也可以通过[路由](chatuikit_advancedusage.html#路由的使用)使用。
 
 对于单聊和群聊, 会话展示的名称为你设置的 Profile 中的昵称，若未获取到昵称，则展示 ID；会话头像为你设置的 Profile 中的头像，如果没有设置，则使用默认头像。
 

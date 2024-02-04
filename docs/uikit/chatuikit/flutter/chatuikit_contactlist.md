@@ -4,7 +4,7 @@
 
 会话列表 `ContactsView` 是 `ChatUIKit` 提供的主要组件, 用于展示用户列表，包括联系人搜索，添加联系人，好友申请列表入口，群组列表入口，联系人列表。
 
-`ContactsView` 可以直接使用，也可以通过[路由](chatuikit_advanceusage.html#路由的使用)使用。
+`ContactsView` 可以直接使用，也可以通过[路由](chatuikit_advancedusage.html#路由的使用)使用。
 
 ![img](@static/images/uikit/chatuikit/android/page_contact_list.png =400x850)  
 

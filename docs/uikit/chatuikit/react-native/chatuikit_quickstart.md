@@ -24,7 +24,7 @@
 npx react-native@latest init ProjectName
 ```
 
-** 可能提示安装 `react-native` 最新版本。**
+**可能提示安装 `react-native` 最新版本。**
 
 创建完成，默认会初始化项目，安装依赖到 `node_modules`，以及生成 `package-lock.json`文件。如果使用 `yarn` 初始化，将生成 `yarn.lock` 文件。
 

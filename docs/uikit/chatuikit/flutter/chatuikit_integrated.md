@@ -114,7 +114,7 @@ class _ConversationsState extends State<Conversations> {
 }
 ```
 
-#### 第六步 打包 app
+### 第六步 打包 app
 
 安卓打包时，需要在 `project/android/app/proguard-rules.pro` 文件中（如不存在，新建一个即可）增加以下代码：
 
