@@ -4,17 +4,19 @@
 
 环信单群聊 UIKit 提供 `EaseChatActivity` 和 `EaseChatFragment` 两种方式方便用户快速集成聊天页面和自定义聊天页面。该页面提供如下功能：
 
-- 发送和接收消息, 包括文本、表情、图片、语音、视频、文件、名片和合并类型的消息。
-- 对消息进行表情回复、引用、撤回、删除、翻译和编辑的操作。
+- 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
+- 对消息进行复制、引用、撤回、删除、编辑、重新发送和举报。
+- 从服务器拉取漫游消息。
 - 清除本地消息。
-- 删除会话。
-- 从服务器拉取历史消息（消息漫游）。
+
+消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
 ![img](@static/images/uikit/chatuikit/android/page_chat.png =300x630) 
 
 ## 使用示例
 
 `EaseChatActivity` 页面主要进行了权限的请求，比如相机权限，语音权限等。
+
 ```kotlin
 // conversationId: 1v1 is peer's userID, group chat is groupID
 // chatType can be EaseChatType#SINGLE_CHAT, EaseChatType#GROUP_CHAT

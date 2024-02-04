@@ -2,7 +2,7 @@
 
 <Toc />
 
-会话列表 `ConversationsView` 是 `ChatUIKit` 提供的主要组件, 用于展示用户会话列表，包括会话名称、最后一条消息、最后一条消息的时间以及置顶和禁言状态等。
+会话列表 `ConversationsView` 是 `ChatUIKit` 提供的主要组件, 用于展示当前用户的所有会话，包含单聊和群组聊天（不包括聊天室），并且提供会话搜索、删除、置顶和免打扰功能。单条会话展示用户会话列表，包括会话名称、最后一条消息、最后一条消息的时间以及置顶和禁言状态等。
 
 `ConversationsView` 可以直接使用，也可以通过[路由](chatuikit_advancedusage.html#路由的使用)使用。
 
