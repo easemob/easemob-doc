@@ -67,9 +67,9 @@ Widget build(BuildContext context) {
 | final MessageItemBuilder? itemBuilder | 消息 item 自定义 builder。如果需要重写消息样式(包括头像，昵称，消息气泡, 消息引用等所有样式)，在此处实现。|
 | final MessageItemBuilder? alertItemBuilder | 提示消息 item 自定义 builder。如果需要重写提示消息样式，在此处实现。|
 | final FocusNode? focusNode | 输入控件焦点控制器，不建议设置。如果自定义了 `inputBar` 则设置不生效。|
-| final List&lt;ChatUIKitBottomSheetItem&gt? morePressActions | 默认 `inputBar` 中提供的 更多按钮菜单项。如不设置会使用默认菜单。自定义`inputBar` 后不生效。|
+| final List&lt;ChatUIKitBottomSheetItem&gt;? morePressActions | 默认 `inputBar` 中提供的 更多按钮菜单项。如不设置会使用默认菜单。自定义`inputBar` 后不生效。|
 | final MessagesViewMorePressHandler? onMoreActionsItemsHandler | 点击 默认 `inputBar` 时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `morePressActions` 中设置的内容，如果没设置 `morePressActions` 则使用默认的。|
-| final List&lt;ChatUIKitBottomSheetItem&gt? longPressActions | 消息长按菜单, 如不设置会使用默认菜单。|
+| final List&lt;ChatUIKitBottomSheetItem&gt;? longPressActions | 消息长按菜单, 如不设置会使用默认菜单。|
 | final MessagesViewItemLongPressHandler? onItemLongPressHandler | 消息长按菜单项时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `longPressActions` 中设置的内容，如果没设置 `longPressActions` 则使用默认的。|
 | final bool? forceLeft | 强制所有消息在左侧。|
 | final Widget? emojiWidget | 表情 widget，如果不设置则使用默认的。|
