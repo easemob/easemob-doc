@@ -23,26 +23,153 @@ const chatUikitSidebar = [
         collapsible: 子菜单是否允许展开/收起，true: 允许; false: 不允许。请参考「子菜单示例」
         children: 子菜单。请参考「子菜单示例」
     */
-    text: "UIKit 介绍",
-    link: "overview.html",
+    text: '产品介绍',
+    children: [
+      { text: '概述', link: 'chatuikit_overview.html' },
+      { text: '特性', 
+      children: [
+        { text: '通用', link: 'chatfeature_common.html' },
+        { text: '会话', link: 'chatfeature_conversation.html' },
+        { text: '消息', link: 'chatfeature_message.html' },
+        ],
+      },
+    ],
+    only: ['ios']
   },
   {
-    text: "快速开始",
-    link: "quickstart.html",
-    except: ["android", "ios"],
+    text: '快速开始',
+    children: [
+      { text: '跑通示例项目', link: 'chatuikit_run.html' },
+      { text: '集成单群聊 UIKit', link: 'chatuikit_integrated.html' },
+      { text: '快速开始', link: 'chatuikit_quickstart.html' },
+    ],
+    only: ['ios']
   },
   {
-    text: "集成聊天页面",
-    link: "key_function_chat_page.html",
-    except: ["android", "ios"],
+    text: '集成文档',
+    children: [
+      { text: '进阶用法', link: 'chatuikit_advancedusage.html' },
+      { text: '可配项', link: 'chatuikit_config_item.html' },
+      { text: '主题', link: 'chatuikit_theme.html' },
+      { text: '自定义', link: 'chatuikit_customize.html' },
+      { text: '事件监听', link: 'chatuikit_listener.html' },
+      { text: '拦截主要页面点击跳转事件', link: 'chatuikit_customize_clickjump.html' },
+    ],
+    only: ['ios']
+  }, 
+  {
+    text: '设计文档',
+    children: [
+      { text: '设计指南', link: 'chatuikit_design_guide.html' },
+    ],
+    only: ['ios']
+  }, 
+  {
+    text: '产品介绍',
+    children: [
+      { text: '概述', link: 'chatuikit_overview.html' },
+      { text: '特性', 
+      children: [
+        { text: '通用', link: 'chatfeature_common.html' },
+        { text: '会话', link: 'chatfeature_conversation.html' },
+        { text: '消息', link: 'chatfeature_message.html' },
+        ],
+      },
+    ],
+    only: ['web']
   },
   {
-    text: "集成会话列表页面",
-    link: "key_function_conversation_list.html",
-    except: ["android", "ios"],
+    text: '快速开始',
+    children: [
+      { text: '快速开始', link: 'chatuikit_quickstart.html' },
+    ],
+    only: ['web']
   },
-];
-
+  {
+    text: '集成文档',
+    children: [
+      { text: '集成单群聊 UIKit', link: 'chatuikit_integrated.html' },
+      { text: '用户信息提供', link: 'chatuikit_provider.html' },
+      { text: '全局上下文', link: 'chatuikit_context.html' },
+      { text: '登录', link: 'chatuikit_login.html' },
+      { text: '事件监听器', link: 'chatuikit_listener.html' },
+      { text: '会话列表', link: 'chatuikit_conversation.html' },
+      { text: '消息', link: 'chatuikit_chat.html' },
+      { text: '通讯录', link: 'chatuikit_contactlist.html' },
+      { text: '音视频通话', link: 'chatuikit_video.html' },
+      { text: '主题', link: 'chatuikit_theme.html' },
+    ],
+    only: ['web']
+  }, 
+  {
+    text: '组件文档',
+    children: [
+      { text: '组件文档', link: 'chatuikit_storybook.html' },
+    ],
+    only: ['web']
+  },
+  {
+    text: '设计文档',
+    children: [
+      { text: '设计指南', link: 'chatuikit_design_guide.html' },
+    ],
+    only: ['web']
+  },   
+  {
+    text: '产品介绍',
+    children: [
+      { text: '概述', link: 'chatuikit_overview.html' },
+      { text: '特性', 
+      children: [
+        { text: '通用', link: 'chatfeature_common.html' },
+        { text: '会话', link: 'chatfeature_conversation.html' },
+        { text: '消息', link: 'chatfeature_message.html' },
+        ],
+      },
+    ],
+    only: ['android', 'react-native', 'flutter']
+  },
+  {
+    text: '快速开始',
+    children: [
+      { text: '跑通示例项目', link: 'chatuikit_run.html', except: ['android'] },
+      { text: '快速开始', link: 'chatuikit_quickstart.html' },
+    ],
+    only: ['android', 'react-native', 'flutter']
+  },
+  {
+    text: '集成文档',
+    children: [
+      { text: '集成单群聊 UIKit', link: 'chatuikit_integrated.html' },
+      { text: '进阶用法', link: 'chatuikit_advancedusage.html' },
+      { text: '用户信息提供', link: 'chatuikit_userinfo.html' },
+      { text: '会话列表', link: 'chatuikit_conversation.html' },
+      { text: '消息', link: 'chatuikit_chat.html' },
+      { text: '通讯录', link: 'chatuikit_contactlist.html' },
+      { text: '主题', link: 'chatuikit_theme.html' },
+      { text: '国际化', link: 'chatuikit_internationalization.html', except: ['android'] },
+    ],
+    only: ['android', 'react-native', 'flutter']
+  }, 
+  {
+    text: '设计文档',
+    children: [
+      { text: '设计指南', link: 'chatuikit_design_guide.html' },
+    ],
+    only: ['android', 'react-native', 'flutter']
+  }, 
+  {
+    text: '历史文档',
+    children: [
+      { text: '历史文档', link: 'ui_historic.html', only: ['android','ios']},
+      { text: 'UIKit 介绍', link: 'ui_overview.html', except: ['android','ios'] },
+      { text: '快速开始', link: 'ui_quickstart.html', except: ['android','ios'] },
+      { text: '集成聊天页面', link: 'ui_chat.html', except: ['android','ios'] },
+      { text: '集成会话列表页面', link: 'ui_conversation.html', except: ['android','ios'] },
+    ],
+    only: ['android', 'react-native', 'flutter', 'ios']
+  }
+]
 const chatroomUikitSidebar = [
   { text: "概述", link: "roomuikit_overview.html" },
   {

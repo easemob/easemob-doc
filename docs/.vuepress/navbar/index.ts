@@ -76,32 +76,32 @@ export const zhNavbar = navbar([
     text: "UIKit",
     children: [
       {
-        text: "聊天 UIKit",
+        text: "单群聊 UIKit",
         children: [
           {
             text: "Android",
             icon: "/icon-Android.svg",
-            link: "/uikit/chatuikit/android/overview.html",
+            link: "/uikit/chatuikit/android/chatuikit_overview.html",
           },
           {
             text: "iOS",
             icon: "/icon-iOS.svg",
-            link: "/uikit/chatuikit/ios/overview.html",
+            link: "/uikit/chatuikit/ios/chatuikit_overview.html",
           },
-          //{
-         //   text: "Web",
-         //   icon: "/icon-Android.svg",
-         //   link: "/uikit/chatuikit/web/overview.html",
-         // },
+          {
+            text: "Web",
+            icon: "/icon-web.svg",
+            link: "/uikit/chatuikit/web/chatuikit_overview.html",
+          },
           {
             text: "React Native",
             icon: "/icon-ReactNative.svg",
-            link: "/uikit/chatuikit/react-native/overview.html",
+            link: "/uikit/chatuikit/react-native/chatuikit_overview.html",
           },
           {
             text: "Flutter",
             icon: "/icon-flutter.svg",
-            link: "/uikit/chatuikit/flutter/overview.html",
+            link: "/uikit/chatuikit/flutter/chatuikit_overview.html",
           },
         ],
       },
