@@ -64,10 +64,18 @@ jobs:
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
           TARGET: /data/apps/data/docs-im-beta/ # 服务器目标路径
 
-      - name: CDN Refresh
+      - name: CDN Refresh HTTPS
         uses: visionwx/ali-cdn-refresh@main
         with:
           accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
           accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
           type: Directory
-          path: https://docs-im-beta.easemob.com/\r\nhttp://docs-im-beta.easemob.com/
+          path: https://docs-im-beta.easemob.com/
+          
+      - name: CDN Refresh HTTP
+        uses: visionwx/ali-cdn-refresh@main
+        with:
+          accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
+          accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
+          type: Directory
+          path: http://docs-im-beta.easemob.com/
