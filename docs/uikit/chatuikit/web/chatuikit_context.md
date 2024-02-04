@@ -119,6 +119,8 @@ const ChatAPP = () => {
 
 ### useConversationContext 概览
 
+下表中黑色字体为属性名称，蓝色字体为方法名称。
+
 <table>
     <tr>
         <td>属性/方法</td>
@@ -197,6 +199,8 @@ const ChatAPP = () => {
 ```
 
 ### useChatContext 概览
+
+下表中黑色字体为属性名称，蓝色字体为方法名称。
 
 <table>
     <tr>
@@ -289,6 +293,8 @@ const ChatAPP = () => {
 ```
 
 ### useAddressContext 概览
+
+下表中黑色字体为属性名称，蓝色字体为方法名称。
 
 <table>
     <tr>
