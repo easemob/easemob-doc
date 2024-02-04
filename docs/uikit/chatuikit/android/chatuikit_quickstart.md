@@ -52,33 +52,22 @@
     ```
 3. 在项目中引入单群聊 UIKit。
 
-在 `/Gradle Scripts/build.gradle(Module: app)` 中, 添加单群聊 UIKit 到项目中:
+从 GitHub 获取[单群聊 UIKit](https://github.com/easemob/chatuikit-android) 源码，按照下面的方式集成：
+
+- 在根目录 `settings.gradle.kts` 文件（/Gradle Scripts/settings.gradle.kts）中添加如下代码：
 
 ```kotlin
-android {
-    compileSdk = 34
-    defaultConfig {
-        // Android 21 或以上版本
-        minSdk = 21
-    }
-    buildFeatures{
-        viewBinding = true
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-}
-dependencies {
-    ...
-    // 将 X.Y.Z 替换为单群聊 UIKit 的最新版本
-    // 若查看单群聊 UIKit 的最新版本，点击 https://search.maven.org/。
-    implementation("io.hyphenate:ease-im-kit:X.Y.Z")
-}
+include(":ease-im-kit")
+project(":ease-im-kit").projectDir = File("../chatuikit-android/ease-im-kit")
 ```
+
+- 在 app 的 `build.gradle.kts` 文件（/Gradle Scripts/build.gradle）中添加如下代码：
+
+```kotlin
+//chatuikit-android
+implementation(project(mapOf("path" to ":ease-im-kit")))
+```
+
 4. 防止代码混淆
 
 在 `/Gradle Scripts/proguard-rules.pro` 文件中添加如下代码：
@@ -87,6 +76,7 @@ dependencies {
   -keep class com.hyphenate.** {*;}
     -dontwarn  com.hyphenate.**
   ```
+  
 ## 实现发送第一条单聊消息
 
 本节介绍如何通过单群聊 UIKit 实现发送第一条单聊消息。

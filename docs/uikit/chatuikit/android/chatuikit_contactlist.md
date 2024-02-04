@@ -70,8 +70,8 @@ EaseContactsListFragment.Builder()
 | setOnItemLongClickListener()     | 设置条目长按事件监听器。                                                                                  |
 | setOnContactSelectedListener()   | 设置条目选中事件监听器。                                                                                  |
 | setEmptyLayout()                 | 设置会话列表的空白页面。                                                                                  |
-| setCustomAdapter()               | 设置自定义的适配器，默认为 `EaseConversationListAdapter`。                                                    |
-| setCustomFragment()              | 设置自定义聊天 Fragment，需要继承自 `EaseConversationListFragment`。                                          |
+| setCustomAdapter()               | 设置自定义的适配器，默认为 `EaseContactListAdapter`。                                                    |
+| setCustomFragment()              | 设置自定义聊天 Fragment，需要继承自 `EaseContactsListFragment`。                                          |
 
 ## 自定义联系人列表
 
@@ -133,6 +133,8 @@ EaseContactsListFragment.Builder()
 
 
 ## 更多
+
+### 获取联系人系统通知未读数
 
 ```kotlin
 val systemConversation = EaseNotificationMsgManager.getInstance().getConversation() 

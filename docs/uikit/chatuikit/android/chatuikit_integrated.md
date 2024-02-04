@@ -57,27 +57,6 @@ dependencyResolutionManagement {
 }
 ```
 
-在项目的 `/app/build.gradle` 文件添加 ease-im-kit 依赖项（X.Y.Z 为当前版本号）。
-
-```kotlin
-android {
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-}
-dependencies {
-    ...
-    // 将 X.Y.Z 替换为当前版本号
-    implementation 'io.hyphenate:ease-im-kit:X.Y.Z'
-}
-```
-
-:::tip
-若获取最新版本的单群聊 UIKit，请转到 [Sonatype](https://search.maven.org/search?q=a:ease-im-kit)。
-:::
-
 ### Module 源码集成
 
 从 GitHub 获取[单群聊 UIKit](https://github.com/easemob/chatuikit-android) 源码，按照下面的方式集成：

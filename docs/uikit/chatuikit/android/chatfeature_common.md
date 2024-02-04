@@ -32,29 +32,11 @@
 
 ![img](@static/images/uikit/chatuikit/feature/common/group_admin.png) 
 
-## 群成员昵称	
-
-群成员可以设置自己的昵称，以便在群聊中被其他成员识别。
-
-![img](@static/images/uikit/chatuikit/feature/common/group_member_nickname.png) 
-
 ## 用户列表	
 
 用户列表显示了用户的所有联系人，包括联系人列表，群成员列表和黑名单等。用户可以通过用户列表快速找到需要联系的人。
 
 ![img](@static/images/uikit/chatuikit/feature/common/user_list.png =350x760) 
-
-## 联系人备注	
-
-联系人备注允许用户为通讯录中的每个联系人添加自定义信息，协助用户组织和管理联系人信息。这些信息可以是文本、标签、数字或其他相关细节。它们不会公开显示，仅供个人使用。
-
-![img](@static/images/uikit/chatuikit/feature/common/contact_remark.png) 
-
-## 消息搜索	
-
-消息搜索允许用户查找过去发送或接收过的消息。消息搜索可以根据消息内容和关键词进行模糊匹配。
-
-![img](@static/images/uikit/chatuikit/feature/common/message_search.png) 
 
 ## 文件共享	
 

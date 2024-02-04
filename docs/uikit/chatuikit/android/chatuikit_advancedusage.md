@@ -24,8 +24,8 @@ companion object {
         Intent(context, EaseChatActivity::class.java).apply {
              putExtra(EaseConstant.EXTRA_CONVERSATION_ID, conversationId)
              putExtra(EaseConstant.EXTRA_CHAT_TYPE, chatType.ordinal)
-             EaseIM.getCustomActivityRoute()?.getActivityRoute(this)?.let {
-                if (it.isTargetRoute(EaseChatActivity::class.java)) {
+             EaseIM.getCustomActivityRoute()?.getActivityRoute(this.clone() as Intent)?.let {
+                    if (it.hasRoute()) {
                     context.startActivity(it)
                     return
                 }
@@ -99,21 +99,4 @@ EaseIM.init(this, options, config)
 |--------------------------------------|-------------------|
 | useDefaultMultiDeviceContactEvent    | 是否启用默认的多设备联系人事件处理。 |
 | useDefaultMultiDeviceGroupEvent      | 是否启用默认的多设备群组事件处理。  |
-
-## 使用默认标题栏
-
-单群聊 UIKit 的 Fragment 中默认提供了基于 `EaseTitleBar` 的标题栏。`EaseTitleBar` 继承自 `MaterialToolbar`，另外增加了一些自定义属性，如下所示：
-
-```xml
-<!-- 设置日志大小 -->
-<attr name="titleBarLogoSize" format="dimension"/>
-<!-- Set menu item's title color 设置菜单项的标题颜色 -->
-<attr name="titleBarMenuTitleColor" format="color"/>
-<!-- Set menu icon tint 设置菜单图标颜色 -->
-<attr name="titleBarMenuIconTint" format="color"/>
-<!-- 是否开启 home as up 功能：是否显示标题栏左侧的返回按钮 -->
-<attr name="titleBarDisplayHomeAsUpEnabled" format="boolean"/>
-<!-- 是否替换 activity 的 Action Bar：是否替换 AppCompactActivity 下的 ActionBar-->
-<attr name="titleBarReplaceActionBar" format="boolean"/>
-```
 
