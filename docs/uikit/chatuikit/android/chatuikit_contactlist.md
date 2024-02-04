@@ -103,8 +103,6 @@ class CustomContactListAdapter : EaseContactListAdapter() {
 builder.setCustomAdapter(CustomContactListAdapter)
 ```
 
-//TODO：添加图片，研发提供
-
 ### 设置成可选择的联系人列表
 
 例如，创建群组时需添加多个用户，可点击联系人对应的复选框进行选择。
@@ -113,7 +111,7 @@ builder.setCustomAdapter(CustomContactListAdapter)
 builder.setSearchType(EaseSearchType.SELECT_USER)  
 ```
 
-//TODO：添加图片，研发提供
+![img](@static/images/uikit/chatuikit/android/group_creating.png =350x600) 
 
 ## 事件监听
 
