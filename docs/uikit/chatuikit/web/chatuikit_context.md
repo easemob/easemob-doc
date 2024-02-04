@@ -38,7 +38,7 @@ rootStore 包含以下数据模块:
     </tr>
    <tr>
         <td>message</td>
-        <td style=font-size:15px>整个 app 的消息，里面包含单聊（`singleChat`）和群聊（`groupChat`）的消息以及根据消息 ID 存储的消息（`byId`）。</td>style=font-size:15px>
+        <td style=font-size:15px>整个 app 的消息，里面包含单聊（singleChat）和群聊（groupChat）的消息以及根据消息 ID 存储的消息（byId）。</td>
     </tr> 
    <tr>
         <td>selectedMessage</td>

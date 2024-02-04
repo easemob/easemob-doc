@@ -2,7 +2,7 @@
 
 <Toc />
 
-如果[初始化](chatuikit_integrated.html#第三步-初始化)时设置了用户 ID `userId` 和 `token`，单群聊 UIKit 在 [Provider](provider.html) 加载完成时会自动登录，在 Provider 被卸载时会自动登出。
+如果[初始化](chatuikit_integrated.html#第三步-初始化)时设置了用户 ID `userId` 和 `token`，单群聊 UIKit 在 [Provider](chatuikit_provider.html) 加载完成时会自动登录，在 Provider 被卸载时会自动登出。
 
 ```javascript
 import { UIKitProvider } from "easemob-chat-uikit";
