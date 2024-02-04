@@ -2,7 +2,7 @@
 
 <Toc />
 
-单群聊 UIKit 提供 eventHandler 注册监听事件，可以监听 UIKit 内部所有调用的 API，事件名称则为 SDK 提供的相应 API 的名字。
+单群聊 UIKit 提供 eventHandler 注册监听事件，可以监听 UIKit 内部所有调用的 API，事件名称则为 SDK 提供的相应 API 的名称。
 
 ## 使用示例
 
