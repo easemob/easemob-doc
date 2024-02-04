@@ -9,7 +9,6 @@
 ## UIKit 基本项目结构
 
 ```bash
-.
 ├── chat_uikit.dart // 主类
 ├── chat_uikit_context.dart // 数据缓存
 ├── chat_uikit_localizations.dart // 国际化

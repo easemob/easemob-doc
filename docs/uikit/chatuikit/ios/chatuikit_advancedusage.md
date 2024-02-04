@@ -148,9 +148,9 @@ let vc = ComponentsRegister.shared.MessageViewController.init(conversationId: <#
 ControllerStack.toDestination(vc: vc)
 ```
 
-## 监听用户及 UIKit 与服务器的连接状态的相关事件
+## 监听用户及与服务器的连接事件
 
-你可以调用 `registerUserStateListener` 方法监听 EaseChatUIKit 中用户以及连接状态变更相关的事件和错误。
+你可以调用 `registerUserStateListener` 方法监听 EaseChatUIKit 中用户以及与服务器之间的连接状态变更的相关事件和错误。
 
 ```
 EaseChatUIKitClient.shared.registerUserEventsListener(self)

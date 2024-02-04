@@ -99,7 +99,7 @@ const App = () => {
 };
 ```
 
-# 相关参考
+## 相关参考
 
 - [组件库源码](https://github.com/easemob/Easemob-UIKit-web)
 - [其他示例 demo](https://github.com/easemob/Easemob-UIKit-web/demo)

@@ -307,7 +307,7 @@ fun Context.showToast(msg: String) {
 
 ![img](@static/images/uikit/chatuikit/android/message_first.png =300x650) 
 
-## 第四步 测试应用
+## 测试应用
 
 1. 在 Android Studio 中，点击 `Run ‘app’` 按钮，将应用运行到你的设备或者模拟器上。
 
