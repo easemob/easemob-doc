@@ -64,13 +64,13 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
 )
 ```
 
-如要了解更多配置，详见 [`UIKitProvider` 文档](provider.html)。
+如要了解更多配置，详见 [`UIKitProvider` 文档](chatuikit_provider.html)。
 
 ### 第四步 登录
 
 当 Provider 渲染和销毁时，单群聊 UIKit 内部会自动完成登录登出。
 
-关于自动和手动登录，详见[登录文档](login.html)。
+关于自动和手动登录，详见[登录文档](chatuikit_login.html)。
 
 ### 第五步 搭建界面
 
