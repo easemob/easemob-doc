@@ -23,7 +23,7 @@
 - 举报消息；
 - 删除消息。
 
-![img](@static/images/uikit/chatuikit/android/page_chat.png) 
+![img](@static/images/uikit/chatuikit/android/page_chat.png =300x630) 
 
 ## 添加消息页面
 

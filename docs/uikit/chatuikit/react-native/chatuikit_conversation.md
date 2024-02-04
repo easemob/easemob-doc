@@ -15,7 +15,7 @@
 
 - 对于群聊，会话名称为当前群组的名称，头像为默认头像。
 
-![img](@static/images/uikit/chatuikit/android/page_conversation.png) 
+![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x800) 
 
 使用默认参数时的示例代码如下：
 

@@ -71,15 +71,15 @@
 
 - `ConversationDetail` 提供会话列表容器。
 
-![img](@static/images/uikit/chatuikit/android/page_chat.png) 
+![img](@static/images/uikit/chatuikit/android/page_chat.png =400x830) 
 
 - `ConversationList` 提供所有聊天视图的容器。
 
-![img](@static/images/uikit/chatuikit/android/page_conversation.png) 
+![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x830) 
 
 - `ContactList`  提供联系人、群组及其详情等容器。
 
-![img](@static/images/uikit/chatuikit/android/page_contact_list.png)
+![img](@static/images/uikit/chatuikit/android/page_contact_list.png =400x830) 
 
 
 
