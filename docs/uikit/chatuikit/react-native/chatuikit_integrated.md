@@ -20,7 +20,7 @@
 
 已有项目需要满足一定条件，如果 React Native 版本太低可能会出现编译或者运行问题。如果 Xcode 或者 Android Studio 版本太低，也可能导致编译和运行问题。通常推荐同期的工具和组件，兼容性也是 React Native 常见问题。
 
-## 集成 Chat UIKit SDK npm 包
+## 集成单群聊 UIKit SDK npm 包
 
 `Chat UIKit SDK` npm 包 `react-native-chat-uikit` 需要依赖包，可通过以下代码安装。
 

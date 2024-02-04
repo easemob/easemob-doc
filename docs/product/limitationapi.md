@@ -82,7 +82,7 @@
 | 添加好友   | POST   | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
 | 移除好友    | DELETE | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |
 | 设置好友备注 | PUT | /{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username} | 100 次/秒/App Key |
-| 分页获取好友列表    |  GET  | /{org_name}/{app_name}/user/{username}/contacts?pageSize={N}&cursor={cursor}&needReturnRemark={true/false}  | 100 次/秒/App Key   |
+| 分页获取好友列表    |  GET  | /{org_name}/{app_name}/user/{username}/contacts?limit={N}&cursor={cursor}&needReturnRemark={true/false}  | 100 次/秒/App Key   |
 | 一次性获取好友列表    |  GET  | /{org_name}/{app_name}/users/{owner_username}/contacts/users   | 100 次/秒/App Key   |
 | 获取黑名单列表     | GET   | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 50 次/秒/App Key                                                  |
 | 添加用户至黑名单    | POST  | /{org_name}/{app_name}/users/{owner_username}/blocks/users    | 50 次/秒/App Key                                                  |

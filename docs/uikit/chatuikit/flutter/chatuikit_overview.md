@@ -196,15 +196,15 @@
 
 单群聊 UIKit 中业务相关的 UI 控件主要包含在以下三个 View 中：
 
-- MessagesView 提供所有聊天视图的容器。
+- MessagesView 提供所有聊天视图。
 
 ![img](@static/images/uikit/chatuikit/android/page_chat.png =400x830) 
 
-- ConversationsView 提供会话列表容器。
+- ConversationsView 提供会话列表。
 
 ![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x830) 
 
-- ContactsView 提供联系人、群组及其详情等容器。
+- ContactsView 提供联系人、群组及其详情等。
 
 ![img](@static/images/uikit/chatuikit/android/page_contact_list.png =400x830) 
 

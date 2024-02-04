@@ -18,8 +18,8 @@
 `EaseChatActivity` 页面主要进行了权限的请求，比如相机权限，语音权限等。
 
 ```kotlin
-// conversationId: 1v1 is peer's userID, group chat is groupID
-// chatType can be EaseChatType#SINGLE_CHAT, EaseChatType#GROUP_CHAT
+// conversationId: 单聊为对端用户的用户 ID，群聊为群组 ID。
+// chatType：单聊和群聊分别为 EaseChatType#SINGLE_CHAT 和 EaseChatType#GROUP_CHAT。
 EaseChatActivity.actionStart(mContext, conversationId, chatType)
 ```
 
@@ -28,8 +28,8 @@ class ChatActivity: AppCompactActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-        // conversationID: 1v1 is peer's userID, group chat is groupID
-        // chatType can be EaseChatType#SINGLE_CHAT, EaseChatType#GROUP_CHAT
+        // conversationId: 单聊为对端用户的用户 ID，群聊为群组 ID。
+        // chatType：单聊和群聊分别为 EaseChatType#SINGLE_CHAT 和 EaseChatType#GROUP_CHAT。
         EaseChatFragment.Builder(conversationId, chatType)
                         .build()?.let { fragment ->
                             supportFragmentManager.beginTransaction()
@@ -48,8 +48,8 @@ class ChatActivity: AppCompactActivity() {
 `EaseChatFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置，目前提供的设置项如下：
 
 ```kotlin
-// conversationID: 1v1 is peer's userID, group chat is groupID
-// easeChatType: SINGLE_CHAT, GROUP_CHAT, CHATROOM
+// conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
+// easeChatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
 EaseChatFragment.Builder(conversationID, easeChatType)
         .useTitleBar(true)
         .setTitleBarTitle("title")
@@ -171,7 +171,7 @@ class CustomChatTypeViewViewHolder(
 
     override fun onBubbleClick(message: EaseMessage?) {
         super.onBubbleClick(message)
-        // Add click event
+        // 添加点击事件
     }
 }
 ```
@@ -328,7 +328,6 @@ override fun onDismiss() {
     // 可以在这里处理快捷菜单的隐藏事件。
 }
 ```
-
 
 ### 设置输入菜单相关属性
 

@@ -89,7 +89,7 @@ ChatUIKit.instance.loginWithPassword(userId: userId, password: password);
 ChatUIKit.instance.loginWithToken(userId: userId, token: token);
 ```
 
-### 第五步 搭建界面
+### 第六步 搭建界面
 
 单群聊 UIKit 提供会话列表、聊天、群组设置和通讯录等组件。你可以使用这些组件搭建界面，这些组件支持自定义，具体可以参考相应组件的文档。
 
@@ -114,7 +114,7 @@ class _ConversationsState extends State<Conversations> {
 }
 ```
 
-### 第六步 打包 app
+### 第七步 打包 app
 
 安卓打包时，需要在 `project/android/app/proguard-rules.pro` 文件中（如不存在，新建一个即可）增加以下代码：
 

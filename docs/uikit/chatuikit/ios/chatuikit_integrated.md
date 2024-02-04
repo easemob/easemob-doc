@@ -1,4 +1,4 @@
-# 集成 EaseChatUIKit
+# 集成单群聊 UIKit
 
 <Toc />
 

@@ -306,7 +306,7 @@ curl -X PUT 'https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?pageSize={N}&cursor={cursor}&needReturnRemark={true/false} 
+GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&cursor={cursor}&needReturnRemark={true/false} 
 ```
 
 #### 路径参数
