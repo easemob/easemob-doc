@@ -42,7 +42,7 @@
 │   ├── types.tsx // 类型定义
 │   ├── ui // 基础 UI 组件，为业务组件提供基础服务
 │   ├── utils // 工具函数
-│   └── version.ts // `Chat UIKit SDK` 版本信息
+│   └── version.ts // Chat UIKit SDK 版本信息
 ├── tsconfig.build.json // 编译配置 
 └── tsconfig.json // 编译配置
 ```
