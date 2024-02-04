@@ -32,9 +32,9 @@ Widget build(BuildContext context) {
 | final bool enableAppBar | 是否开启 `appBar`，默认开启。关闭后将不再显示 `appBar`，传入的 `appBar` 也不再生效。|
 | final String? title | 默认 `appBar` 的标题展示内容。如果传入了自定义 `appBar`, 本设置将不生效。|
 | final AppBarMoreActionsBuilder? appBarMoreActionsBuilder | 默认 `appBar` 右上角**更多**按钮点击回调, 会提供一个默认操作列表，返回一个新的操作列表。|
-| final void Function(List<ConversationModel> data)? onSearchTap | 会话列表搜索点击事件回调，点击后会把当前所有的会话回调出来，如果不设置会有默认实现。|
-| final List<Widget>? beforeWidgets | 展示在会话列表前面的 widget。|
-| final List<Widget>? afterWidgets | 展示在会话列表后面的 widget。|
+| final void Function(List&lt;ConversationModel&gt; data)? onSearchTap | 会话列表搜索点击事件回调，点击后会把当前所有的会话回调出来，如果不设置会有默认实现。|   
+| final List&lt;Widget&gt;? beforeWidgets | 展示在会话列表前面的 widget。|
+| final List&lt;Widget&gt;? afterWidgets | 展示在会话列表后面的 widget。|
 | final ConversationItemBuilder? listViewItemBuilder | 会话列表 item builder。如果需要重写会话列表，在此处实现。|
 | final void Function(BuildContext context, ConversationModel info)? onTap | 会话列表点击回调。如果不实现，默认会跳转到消息页面。|
 | final ConversationsViewItemLongPressHandler? onLongPressHandler | 会话列表长按事件。会提供一个默认操作列表，返回一个新的操作列表。|
