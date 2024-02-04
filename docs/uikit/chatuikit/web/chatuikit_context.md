@@ -20,64 +20,64 @@ rootStore 包含以下数据模块:
     </tr> 
     <tr>
       <td rowspan="4" >conversationStore</td>
-    </<tr>
+    </tr>
     <tr>
         <td>currentCvs</td>
-        <td style=font-size:10px>当前的会话。</td>
+        <td style=font-size:15px>当前的会话。</td>
     </tr> 
     <tr>
         <td>conversationList</td>
-        <td style=font-size:10px>全部会话。</td>
+        <td style=font-size:15px>全部会话。</td>
     </tr> 
     <tr>
         <td>searchList</td>
-        <td style=font-size:10px>搜索到的会话。</td>
+        <td style=font-size:15px>搜索到的会话。</td>
     </tr> 
      <tr>
       <td rowspan="6" >messageStore</td>
     </tr>
    <tr>
         <td>message</td>
-        <td style=font-size:10px>整个 app 的消息，里面包含单聊（`singleChat`）和群聊（`groupChat`）的消息以及根据消息 ID 存储的消息（`byId`）。</td style=font-size:10px>
+        <td style=font-size:15px>整个 app 的消息，里面包含单聊（`singleChat`）和群聊（`groupChat`）的消息以及根据消息 ID 存储的消息（`byId`）。</td>style=font-size:15px>
     </tr> 
    <tr>
         <td>selectedMessage</td>
-        <td style=font-size:10px>多选选中的消息</td>
+        <td style=font-size:15px>多选选中的消息</td>
     </tr>
     <tr>
         <td>repliedMessage</td>
-        <td style=font-size:10px>被引用的消息</td>
+        <td style=font-size:15px>被引用的消息</td>
     </tr>
     <tr>
         <td>typing</td>
-        <td style=font-size:10px>是否正在输入</td>
+        <td style=font-size:15px>是否正在输入</td>
     </tr>
     <tr>
         <td>unreadMessageCount</td>
-        <td style=font-size:10px>当前会话中未读的消息数</td>
+        <td style=font-size:15px>当前会话中未读的消息数</td>
     </tr>
     <tr>
       <td rowspan="6" >addressStore</td>
     </tr>
     <tr>
         <td>appUsersInfo</td>
-        <td style=font-size:10px>所有用户的用户属性，展示头像昵称时用到</td>
+        <td style=font-size:15px>所有用户的用户属性，展示头像昵称时用到</td>
     </tr>
     <tr>
         <td>contacts</td>
-        <td style=font-size:10px>所有的联系人</td>
+        <td style=font-size:15px>所有的联系人</td>
     </tr>
     <tr>
         <td>groups</td>
-        <td style=font-size:10px>所有加入的群组</td>
+        <td style=font-size:15px>所有加入的群组</td>
     </tr>
     <tr>
         <td>searchList</td>
-        <td style=font-size:10px>搜索到的联系人或群组</td>
+        <td style=font-size:15px>搜索到的联系人或群组</td>
     </tr>
     <tr>
         <td>requests</td>
-        <td style=font-size:10px>好友请求</td>
+        <td style=font-size:15px>好友请求</td>
     </tr>
 </table>
 
@@ -127,38 +127,38 @@ const ChatAPP = () => {
     </tr> 
     <tr>
         <td>currentConversation</td>
-        <td style=font-size:10px>CurrentConversation</td>
-        <td style=font-size:10px>当前会话。</td>
+        <td style=font-size:15px>CurrentConversation</td>
+        <td style=font-size:15px>当前会话。</td>
     </tr> 
     <tr>
         <td>conversationList</td>
-        <td style=font-size:10px>Conversation[]</td>
-        <td style=font-size:10px>所有会话。</td>
+        <td style=font-size:15px>Conversation[]</td>
+        <td style=font-size:15px>所有会话。</td>
     </tr> 
     <tr>
         <td style=color:blue>setCurrentConversation</td>
-        <td style=font-size:10px>(currentCvs: CurrentConversation) => void</td>
-        <td style=font-size:10px>设置当前会话。</td>
+        <td style=font-size:15px>(currentCvs: CurrentConversation) => void</td>
+        <td style=font-size:15px>设置当前会话。</td>
     </tr>
     <tr>
         <td style=color:blue>deleteConversation</td>
-        <td style=font-size:10px>(conversation: CurrentConversation) => void</td>
-        <td style=font-size:10px>将会话从会话列表删除。</td>
+        <td style=font-size:15px>(conversation: CurrentConversation) => void</td>
+        <td style=font-size:15px>将会话从会话列表删除。</td>
     </tr>
     <tr>
         <td style=color:blue>topConversation</td>
-        <td style=font-size:10px> (conversation: Conversation) => void</td>
-        <td style=font-size:10px>置顶会话。</td>
+        <td style=font-size:15px> (conversation: Conversation) => void</td>
+        <td style=font-size:15px>置顶会话。</td>
     </tr>
     <tr>
         <td style=color:blue>addConversation</td>
-        <td style=font-size:10px> (conversation: Conversation) => void</td>
-        <td style=font-size:10px>将会话添加到会话列表</td>
+        <td style=font-size:15px> (conversation: Conversation) => void</td>
+        <td style=font-size:15px>将会话添加到会话列表</td>
     </tr>
     <tr>
         <td style=color:blue>modifyConversation</td>
-        <td style=font-size:10px> (conversation: Conversation) => void</td>
-        <td style=font-size:10px>修改会话。</td>
+        <td style=font-size:15px> (conversation: Conversation) => void</td>
+        <td style=font-size:15px>修改会话。</td>
     </tr>
 </table>
 
@@ -206,68 +206,68 @@ const ChatAPP = () => {
     </tr> 
     <tr>
         <td>messages</td>
-        <td style=font-size:10px>Message</td>
-        <td style=font-size:10px>UIKit 中的所有消息数据。</td>
+        <td style=font-size:15px>Message</td>
+        <td style=font-size:15px>UIKit 中的所有消息数据。</td>
     </tr> 
     <tr>
         <td>repliedMessage</td>
-        <td style=font-size:10px>easemobChat.MessagesType</td>
-        <td style=font-size:10px>正在回复的消息</td>
+        <td style=font-size:15px>easemobChat.MessagesType</td>
+        <td style=font-size:15px>正在回复的消息</td>
     </tr> 
     <tr>
         <td>typing</td>
-        <td style=font-size:10px>Typing</td>
-        <td style=font-size:10px>正在输入的用户对象。</td>
+        <td style=font-size:15px>Typing</td>
+        <td style=font-size:15px>正在输入的用户对象。</td>
     </tr> 
     <tr>
         <td style=color:blue>sendMessage</td>
-        <td style=font-size:10px>(message: easemobChat.MessageBody) => Promise&lt;void&gt;</td>
-        <td style=font-size:10px>发送消息。</td>
+        <td style=font-size:15px>(message: easemobChat.MessageBody) => Promise&lt;void&gt;</td>
+        <td style=font-size:15px>发送消息。</td>
     </tr>
     <tr>
         <td style=color:blue>deleteMessage</td>
-        <td style=font-size:10px>deleteMessage: (cvs: CurrentConversation, messageId: string | string[]) => void | Promise&lt;void&gt;</td>
-        <td style=font-size:10px>删除消息。</td>
+        <td style=font-size:15px>deleteMessage: (cvs: CurrentConversation, messageId: string | string[]) => void | Promise&lt;void&gt;</td>
+        <td style=font-size:15px>删除消息。</td>
     </tr>
     <tr>
         <td style=color:blue>recallMessage</td>
-        <td style=font-size:10px>(cvs: CurrentConversation, messageId: string, isChatThread?: boolean) => Promise&lt;void&gt;</td>
-        <td style=font-size:10px>撤回消息。</td>
+        <td style=font-size:15px>(cvs: CurrentConversation, messageId: string, isChatThread?: boolean) => Promise&lt;void&gt;</td>
+        <td style=font-size:15px>撤回消息。</td>
     </tr>
     <tr>
         <td style=color:blue>translateMessage</td>
-        <td style=font-size:10px>(cvs: CurrentConversation, messageId: string, language: string) => Promise&lt;boolean&gt;</td>
-        <td style=font-size:10px>翻译文本消息。</td>
+        <td style=font-size:15px>(cvs: CurrentConversation, messageId: string, language: string) => Promise&lt;boolean&gt;</td>
+        <td style=font-size:15px>翻译文本消息。</td>
     </tr>
     <tr>
         <td style=color:blue>modifyMessage</td>
-        <td style=font-size:10px>(messageId: string, msg: easemobChat.TextMsgBody) => Promise&lt;void&gt;</td>
-        <td style=font-size:10px>编辑服务器上的消息。编辑后，对端用户会显示修改后的消息。该方法仅对文本消息有效。</td>
+        <td style=font-size:15px>(messageId: string, msg: easemobChat.TextMsgBody) => Promise&lt;void&gt;</td>
+        <td style=font-size:15px>编辑服务器上的消息。编辑后，对端用户会显示修改后的消息。该方法仅对文本消息有效。</td>
     </tr>
     <tr>
         <td style=color:blue>modifyLocalMessage</td>
-        <td style=font-size:10px>(id: string, message: easemobChat.MessageBody | RecallMessage) => void</td>
-        <td style=font-size:10px>编辑本地消息。该方法对任何类型的消息均有效。</td>
+        <td style=font-size:15px>(id: string, message: easemobChat.MessageBody | RecallMessage) => void</td>
+        <td style=font-size:15px>编辑本地消息。该方法对任何类型的消息均有效。</td>
     </tr>
     <tr>
         <td style=color:blue>updateMessageStatus</td>
-        <td style=font-size:10px>(msgId: string, status: 'received' | 'read' | 'unread' | 'sent' | 'failed' | 'sending' | 'default') => void</td>
-        <td style=font-size:10px>更新消息状态。</td>
+        <td style=font-size:15px>(msgId: string, status: 'received' | 'read' | 'unread' | 'sent' | 'failed' | 'sending' | 'default') => void</td>
+        <td style=font-size:15px>更新消息状态。</td>
     </tr>
     <tr>
         <td style=color:blue>sendTypingCommand</td>
-        <td style=font-size:10px> (cvs: CurrentConversation) => void</td>
-        <td style=font-size:10px>发送正在输入的命令。</td>
+        <td style=font-size:15px> (cvs: CurrentConversation) => void</td>
+        <td style=font-size:15px>发送正在输入的命令。</td>
     </tr>
     <tr>
         <td style=color:blue>setRepliedMessage</td>
-        <td style=font-size:10px>(message: easemobChat.MessageBody | null) => void</td>
-        <td style=font-size:10px>设置回复的消息。</td>
+        <td style=font-size:15px>(message: easemobChat.MessageBody | null) => void</td>
+        <td style=font-size:15px>设置回复的消息。</td>
     </tr>
     <tr>
         <td style=color:blue>clearMessages</td>
-        <td style=font-size:10px>(cvs: CurrentConversation) => void</td>
-        <td style=font-size:10px>清空会话的本地消息。</td>
+        <td style=font-size:15px>(cvs: CurrentConversation) => void</td>
+        <td style=font-size:15px>清空会话的本地消息。</td>
     </tr>
 </table>
 
@@ -298,27 +298,27 @@ const ChatAPP = () => {
     </tr> 
     <tr>
         <td>appUsersInfo</td>
-        <td style=font-size:10px>Record&lt;string, AppUserInfo&gt;</td>
-        <td style=font-size:10px>所有用户的信息。</td>
+        <td style=font-size:15px>Record&lt;string, AppUserInfo&gt;</td>
+        <td style=font-size:15px>所有用户的信息。</td>
     </tr> 
     <tr>
         <td>groups</td>
-        <td style=font-size:10px>GroupItem[]</td>
-        <td style=font-size:10px>所有群组。</td>
+        <td style=font-size:15px>GroupItem[]</td>
+        <td style=font-size:15px>所有群组。</td>
     </tr> 
     <tr>
         <td style=color:blue>setAppUserInfo</td>
-        <td style=font-size:10px>(appUsersInfo: Record&lt;string, AppUserInfo&gt;) => void</td>
-        <td style=font-size:10px>设置用户信息。</td>
+        <td style=font-size:15px>(appUsersInfo: Record&lt;string, AppUserInfo&gt;) => void</td>
+        <td style=font-size:15px>设置用户信息。</td>
     </tr>
     <tr>
         <td style=color:blue>setGroups</td>
-        <td style=font-size:10px> (groups: GroupItem[]) => void</td>
-        <td style=font-size:10px>设置群组数据。</td>
+        <td style=font-size:15px> (groups: GroupItem[]) => void</td>
+        <td style=font-size:15px>设置群组数据。</td>
     </tr>
     <tr>
         <td style=color:blue>setGroupMemberAttributes</td>
-        <td style=font-size:10px>(groupId: string, userId: string, attributes: easemobChat.MemberAttributes) => void</td>
-        <td style=font-size:10px>设置群成员属性。</td>
+        <td style=font-size:15px>(groupId: string, userId: string, attributes: easemobChat.MemberAttributes) => void</td>
+        <td style=font-size:15px>设置群成员属性。</td>
     </tr>
 </table>

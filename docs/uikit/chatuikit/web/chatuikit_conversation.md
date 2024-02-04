@@ -6,7 +6,7 @@
 - 对于单聊, 会话展示的名称为对方昵称，若对方未设置昵称则展示对方的用户 ID，会话头像是对方的头像，如果没有设置则使用默认头像。
 - 对于群聊，会话名称为当前群组的名称，头像为默认头像。
 
-![img](@static/images/uikit/chatuikit/web/page_conversation.png) 
+![img](@static/images/uikit/chatuikit/web/page_conversation.png =400x900) 
 
 ## 使用示例
 
@@ -24,7 +24,7 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-header1.png =200x450)
+![img](@static/images/uikit/chatuikit/web/cvs-header1.png)
 
 ## 自定义会话列表
 
@@ -61,7 +61,7 @@ const Conversation = () => {
 }
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-bg.png =200x450)
+![img](@static/images/uikit/chatuikit/web/cvs-bg.png =300x800)
 
 ### 自定义会话列表页面的 header
 
@@ -99,7 +99,7 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-header2.png =200x450)
+![img](@static/images/uikit/chatuikit/web/cvs-header2.png)
 
 ### 设置用户的头像和昵称
 
@@ -148,7 +148,7 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-nick.png =200x450)
+![img](@static/images/uikit/chatuikit/web/cvs-nick.png =300x700)
 
 ### 添加和置顶会话
 
@@ -212,7 +212,7 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-action.png =200x450)
+![img](@static/images/uikit/chatuikit/web/cvs-action.png =300x700)
 
 ### 修改会话列表相关的主题
 
@@ -256,49 +256,49 @@ $cvs-item-time-margin-bottom: 9px;
         <td>描述</td>
     </tr>
     <tr>
-     <td style=font-size:10px>
+     <td style=font-size:15px>
     className
 	  </td>
-      <td style=font-size:10px>
+      <td style=font-size:15px>
     String
 	  </td>
-	  <td style=font-size:10px>
+	  <td style=font-size:15px>
 	  组件的类名
 	  </td>
 	  <tr>
-		<td style=font-size:10px>prefix</td>
-        <td style=font-size:10px>String</td>
-		<td style=font-size:10px>CSS 类名的前缀</td>
+		<td style=font-size:15px>prefix</td>
+        <td style=font-size:15px>String</td>
+		<td style=font-size:15px>CSS 类名的前缀</td>
 	  </tr>
 	  <tr>
-		<td style=font-size:10px>headerProps</td>
-        <td style=font-size:10px>HeaderProps</td>
-		<td style=font-size:10px>Header 组件的参数</td>
+		<td style=font-size:15px>headerProps</td>
+        <td style=font-size:15px>HeaderProps</td>
+		<td style=font-size:15px>Header 组件的参数</td>
 	  </tr>
 	  <tr>
-		<td style=font-size:10px>itemProps</td>
-        <td style=font-size:10px>ConversationItemProps</td>
-		<td style=font-size:10px>ConversationItem 组件的参数</td>
+		<td style=font-size:15px>itemProps</td>
+        <td style=font-size:15px>ConversationItemProps</td>
+		<td style=font-size:15px>ConversationItem 组件的参数</td>
 	  </tr>
 	   <tr>
-		<td style=font-size:10px>renderHeader</td>
-        <td style=font-size:10px>() => React.ReactNode</td>
-		<td style=font-size:10px>自定义渲染 Header 组件的方法</td> 
+		<td style=font-size:15px>renderHeader</td>
+        <td style=font-size:15px>() => React.ReactNode</td>
+		<td style=font-size:15px>自定义渲染 Header 组件的方法</td> 
 	  </tr>
 	  <tr>
-		<td style=font-size:10px>renderSearch</td>
-        <td style=font-size:10px>() => React.ReactNode</td>
-		<td style=font-size:10px>自定义渲染 Search 组件的方法</td> 
+		<td style=font-size:15px>renderSearch</td>
+        <td style=font-size:15px>() => React.ReactNode</td>
+		<td style=font-size:15px>自定义渲染 Search 组件的方法</td> 
 	  </tr>
 	  <tr>
-		<td style=font-size:10px>onItemClick</td>
-        <td style=font-size:10px>(data: ConversationData[0]) => void</td>
-		<td style=font-size:10px>点击会话列表中每个会话的回调事件</td> 
+		<td style=font-size:15px>onItemClick</td>
+        <td style=font-size:15px>(data: ConversationData[0]) => void</td>
+		<td style=font-size:15px>点击会话列表中每个会话的回调事件</td> 
 	  </tr>
 	  <tr>
-		<td style=font-size:10px>onSearch</td>
-        <td style=font-size:10px>(e: React.ChangeEvent<HTMLInputElement>) => boolean</td>
-		<td style=font-size:10px> 搜索输入框的 change 事件，当函数返回 false 时，会组织默认的搜索行为，你可以使用自己的搜索条件来搜索</td>
-	  </tr>
-   </tr>
+		<td style=font-size:15px>onSearch</td>
+        <td style=font-size:15px>(e: React.ChangeEvent&lt;HTMLInputElement&gt;) => boolean</td>
+		<td style=font-size:15px> 搜索输入框的 change 事件，当函数返回 false 时，会组织默认的搜索行为，你可以使用自己的搜索条件来搜索</td>
+	  </tr> 
+    </tr>
 </table>

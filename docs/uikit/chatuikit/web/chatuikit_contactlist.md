@@ -4,7 +4,7 @@
 
 `ContactList` 组件用于展示通讯录，包含联系人列表、群组列表和好友请求列表。昵称在中文或者英文的情况下可以实现按首字母分类。
 
-![img](@static/images/uikit/chatuikit/web/page_contact_list.png) 
+![img](@static/images/uikit/chatuikit/web/page_contact_list.png =400x880) 
 
 ## 使用示例
 
@@ -121,64 +121,64 @@ const ContactListContainer = () => {
     <td>描述</td>
 </tr>
   <tr>
-    <td style=font-size:10px>
+    <td style=font-size:15px>
 	    className
 	  </td>
-    <td style=font-size:10px>
+    <td style=font-size:15px>
 	    String
 	  </td>
-	  <td style=font-size:10px>
+	  <td style=font-size:15px>
 	    组件的类名。
 	  </td>
   </tr>
 	  <tr>
-	    <td style=font-size:10px>prefix</td>
-      <td style=font-size:10px>String</td>
-		  <td style=font-size:10px>CSS 类名的前缀。</td>
+	    <td style=font-size:15px>prefix</td>
+      <td style=font-size:15px>String</td>
+		  <td style=font-size:15px>CSS 类名的前缀。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>style</td>
-        <td style=font-size:10px>React.CSSProperties</td>
-		<td style=font-size:10px>ContactList 组件的样式。</td>
+	    <td style=font-size:15px>style</td>
+        <td style=font-size:15px>React.CSSProperties</td>
+		<td style=font-size:15px>ContactList 组件的样式。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>onItemClick</td>
-        <td style=font-size:10px>(info: { id: string; type: 'contact' | 'group' | 'request'; name: string }) => void;</td>
-		<td style=font-size:10px>点击每一个 item 的回调。</td>
+	    <td style=font-size:15px>onItemClick</td>
+        <td style=font-size:15px>(info: { id: string; type: 'contact' | 'group' | 'request'; name: string }) => void;</td>
+		<td style=font-size:15px>点击每一个 item 的回调。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>hasMenu</td>
-        <td style=font-size:10px> boolean </td>
-		<td style=font-size:10px>是否显示分类的菜单项，默认值 `true`。通讯录中只有一个菜单项时才能设置为 `false`。</td>
+	    <td style=font-size:15px>hasMenu</td>
+        <td style=font-size:15px> boolean </td>
+		<td style=font-size:15px>是否显示分类的菜单项，默认值 `true`。通讯录中只有一个菜单项时才能设置为 `false`。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>checkable</td>
-        <td style=font-size:10px>boolean</td>
-		<td style=font-size:10px>是否在联系人后面显示复选框。</td>  
+	    <td style=font-size:15px>checkable</td>
+        <td style=font-size:15px>boolean</td>
+		<td style=font-size:15px>是否在联系人后面显示复选框。</td>  
 	  </tr>
 	   <tr>
-	    <td style=font-size:10px>onCheckboxChange</td>
-        <td style=font-size:10px>(checked: boolean, data: UserInfoData) => void; </td>
-		<td style=font-size:10px>点击联系人后面显示复选框的回调。 </td>
+	    <td style=font-size:15px>onCheckboxChange</td>
+        <td style=font-size:15px>(checked: boolean, data: UserInfoData) => void; </td>
+		<td style=font-size:15px>点击联系人后面显示复选框的回调。 </td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>header </td>
-         <td style=font-size:10px>React.ReactNode; </td>
-		<td style=font-size:10px>组件的 Header。</td>
+	    <td style=font-size:15px>header </td>
+         <td style=font-size:15px>React.ReactNode; </td>
+		<td style=font-size:15px>组件的 Header。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>checkedList</td>
-        <td style=font-size:10px>{ id: string; type: 'contact' | 'group'; name?: string }[] </td>
-		<td style=font-size:10px>checkable 为 true 的情况下，设置已经选中的 item。</td>  
+	    <td style=font-size:15px>checkedList</td>
+        <td style=font-size:15px>{ id: string; type: 'contact' | 'group'; name?: string }[] </td>
+		<td style=font-size:15px>checkable 为 true 的情况下，设置已经选中的 item。</td>  
 	  </tr>
     <tr>
-	    <td style=font-size:10px>defaultCheckedList</td>
-        <td style=font-size:10px>{ id: string; type: 'contact' | 'group'; name?: string }[] </td>
-		<td style=font-size:10px>checkable 为 true 的情况下，设置默认选中的 item。</td>  
+	    <td style=font-size:15px>defaultCheckedList</td>
+        <td style=font-size:15px>{ id: string; type: 'contact' | 'group'; name?: string }[] </td>
+		<td style=font-size:15px>checkable 为 true 的情况下，设置默认选中的 item。</td>  
 	  </tr>
     <tr>
-	    <td style=font-size:10px>menu</td>
-        <td style=font-size:10px>(
+	    <td style=font-size:15px>menu</td>
+        <td style=font-size:15px>(
         | 'contacts'
         | 'groups'
         | 'requests'
@@ -187,7 +187,6 @@ const ContactListContainer = () => {
             data: ({ remark?: string; userId: string } | { groupname: string; groupid: string })[];
           }
       )[];</td>
-		<td style=font-size:10px>自定义 ContactList 有哪些菜单项。</td>  
+		<td style=font-size:15px>自定义 ContactList 有哪些菜单项。</td>  
 	  </tr>
-   </tr>
 </table>

@@ -114,7 +114,7 @@ const ChatContainer = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/editor2.png =400x450)
+![img](@static/images/uikit/chatuikit/web/editor2.png =500x450)
 
 ### 实现发送自定义消息
 
@@ -247,54 +247,54 @@ $msg-time-width: 106px;
         <td>描述</td>
     </tr>
  <tr>
-      <td style=font-size:10px>
+      <td style=font-size:15px>
 	className
 	  </td>
-      <td style=font-size:10px>
+      <td style=font-size:15px>
 	String
 	  </td>
-	  <td style=font-size:10px>
+	  <td style=font-size:15px>
 	  组件的类名。
 	  </td>
 	  <tr>
-	    <td style=font-size:10px>prefix</td>
-        <td style=font-size:10px>String</td>
-		<td style=font-size:10px>CSS 类名前缀。</td>
+	    <td style=font-size:15px>prefix</td>
+        <td style=font-size:15px>String</td>
+		<td style=font-size:15px>CSS 类名前缀。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>headerProps</td>
-        <td style=font-size:10px>HeaderProps</td>
-		<td style=font-size:10px>Header 组件中的属性。</td>
+	    <td style=font-size:15px>headerProps</td>
+        <td style=font-size:15px>HeaderProps</td>
+		<td style=font-size:15px>Header 组件中的属性。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>messageListProps</td>
-        <td style=font-size:10px>MsgListProps</td>
-		<td style=font-size:10px>MessageList 组件中的属性。</td>
+	    <td style=font-size:15px>messageListProps</td>
+        <td style=font-size:15px>MsgListProps</td>
+		<td style=font-size:15px>MessageList 组件中的属性。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>messageInputProps</td>
-        <td style=font-size:10px> MessageInputProps</td>
-		<td style=font-size:10px>MessageInput 组件中的属性。</td>
+	    <td style=font-size:15px>messageInputProps</td>
+        <td style=font-size:15px> MessageInputProps</td>
+		<td style=font-size:15px>MessageInput 组件中的属性。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>renderHeader</td>
-        <td style=font-size:10px>(cvs: CurrentCvs) => React.ReactNode</td>
-		<td style=font-size:10px>自定义渲染 Header 组件的方法。</td>  
+	    <td style=font-size:15px>renderHeader</td>
+        <td style=font-size:15px>(cvs: CurrentCvs) => React.ReactNode</td>
+		<td style=font-size:15px>自定义渲染 Header 组件的方法。</td>  
 	  </tr>
 	   <tr>
-	    <td style=font-size:10px>renderMessageList</td>
-        <td style=font-size:10px>() => ReactNode; </td>
-		<td style=font-size:10px>自定义渲染 MessageList 组件的方法。</td>
+	    <td style=font-size:15px>renderMessageList</td>
+        <td style=font-size:15px>() => ReactNode; </td>
+		<td style=font-size:15px>自定义渲染 MessageList 组件的方法。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>renderMessageInput </td>
-         <td style=font-size:10px>() => ReactNode; </td>
-		<td style=font-size:10px>自定义渲染 MessageInput 组件的方法。</td>
+	    <td style=font-size:15px>renderMessageInput </td>
+         <td style=font-size:15px>() => ReactNode; </td>
+		<td style=font-size:15px>自定义渲染 MessageInput 组件的方法。</td>
 	  </tr>
 	  <tr>
-	    <td style=font-size:10px>renderEmpty</td>
-        <td style=font-size:10px>() => ReactNode; </td>
-		<td style=font-size:10px>自定义渲染空内容组件的方法。</td>  
+	    <td style=font-size:15px>renderEmpty</td>
+        <td style=font-size:15px>() => ReactNode; </td>
+		<td style=font-size:15px>自定义渲染空内容组件的方法。</td>  
 	  </tr>
    </tr>
 </table>

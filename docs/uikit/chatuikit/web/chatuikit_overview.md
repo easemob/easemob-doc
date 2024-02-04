@@ -10,7 +10,7 @@
 
 环信单群聊 UIKit 组件内部集成 IM SDK 和环信服务器连接，实现收发消息等功能。组件使用 React Context API 管理内部状态，用户可以使用 UIKit 提供的自定义 hooks 从全局数据获取需要的数据，也可以用自定义 hooks 获取操作这些数据的方法。
 
-![img](@static/images/uikit/chatuikit/web/uikit.png)
+![img](@static/images/uikit/chatuikit/web/uikit.png =400x530)
 
 ## 功能
 
@@ -24,12 +24,12 @@
 
 - Chat 提供所有聊天视图的容器。
 
-![img](@static/images/uikit/chatuikit/web/page_chat.png) 
+![img](@static/images/uikit/chatuikit/web/page_chat.png =500x550) 
 
 - ConversationList 提供会话列表容器。
 
-![img](@static/images/uikit/chatuikit/web/page_conversation.png) 
+![img](@static/images/uikit/chatuikit/web/page_conversation.png =400x900) 
 
 - ContactList 提供联系人、群组及其详情等容器。
 
-![img](@static/images/uikit/chatuikit/web/page_contact_list.png) 
+![img](@static/images/uikit/chatuikit/web/page_contact_list.png =400x900) 

@@ -97,47 +97,48 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
         <td>描述</td>
     </tr>
     <tr>
-      <td style=font-size:10px>
+      <td style=font-size:15px>
         initConfig
       </td>
-      <td style=font-size:10px>
+      <td style=font-size:15px>
         ProviderProps['initConfig']
       </td>
-	  <td style=font-size:10px>初始化参数，如设置 appKey、userId、token、是否使用用户属性、翻译的目标语言</td>
+	  <td style=font-size:15px>初始化参数，如设置 appKey、userId、token、是否使用用户属性、翻译的目标语言</td>
       </tr>
 	   <tr>
-	   <td style=font-size:10px>
+	   <td style=font-size:15px>
        local
         </td>
-        <td style=font-size:10px>
+        <td style=font-size:15px>
        ProviderProps['local']
         </td>
-	   <td style=font-size:10px>国际化配置参数，你可以在初始化时配置 `i18next` 的参数。</td>
+	   <td style=font-size:15px>国际化配置参数，你可以在初始化时配置 i18next 的参数。</td>
 	   </tr>
         <tr>
-	   <td style=font-size:10px>
+	   <td style=font-size:15px>
        features
         </td>
-        <td style=font-size:10px>
+        <td style=font-size:15px>
        ProviderProps['features']
         </td>
-	   <td style=font-size:10px>全局配置你需要的功能，UIKit 默认展示全部的功能。如果在相应的组件中也配置了需要的功能，以组件中的配置为准。</td> 
+	   <td style=font-size:15px>全局配置你需要的功能，UIKit 默认展示全部的功能。如果在相应的组件中也配置了需要的功能，以组件中的配置为准。</td> 
 	   </tr>
         <tr>
-	   <td style=font-size:10px>
+	   <td style=font-size:15px>
        reactionConfig
         </td>
-        <td style=font-size:10px>
+        <td style=font-size:15px>
        ProviderProps['reactionConfig']
         </td>
-	   <td style=font-size:10px>全局配置消息表情回复功能的表情。如果在消息组件中也设置了这个参数，以消息组件中设置的为准。</td>
+	   <td style=font-size:15px>全局配置消息表情回复功能的表情。如果在消息组件中也设置了这个参数，以消息组件中设置的为准。</td>
 	   </tr>
-     <td style=font-size:10px>
+     <tr>
+     <td style=font-size:15px>
        theme
         </td>
-        <td style=font-size:10px>
+        <td style=font-size:15px>
        ProviderProps['theme']
         </td>
-	   <td style=font-size:10px>主题相关配置，如主要色、明暗主题、组件圆角。</td> 
+	   <td style=font-size:15px>主题相关配置，如主要色、明暗主题、组件圆角。</td> 
 	   </tr>
 </table>

@@ -99,8 +99,6 @@ const App = () => {
 };
 ```
 
-TODO: 补充一张图  // 研发待提供
-
 # 相关参考
 
 [组件库源码](https://github.com/easemob/Easemob-UIKit-web)
