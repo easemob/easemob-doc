@@ -40,7 +40,7 @@
 | `messageStatusChanged`    | 收到消息状态发生变更回调。     | 是     |
 | `messageAttachmentStatusChanged`    | 收到消息附件状态变更回调。     | 是     |
 
-UI 事件的回调，详见[自定义拦截主要页面点击事件](custom_click_jump.html) 。
+UI 事件的回调，详见[自定义拦截主要页面点击事件](chatuikit_customize_clickjump.html) 。
 
 
 ## 联系人列表
