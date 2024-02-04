@@ -90,7 +90,7 @@ export const zhNavbar = navbar([
           },
           {
             text: "Web",
-            icon: "/icon-Android.svg",
+            icon: "/icon-web.svg",
             link: "/uikit/chatuikit/web/chatuikit_overview.html",
           },
           {

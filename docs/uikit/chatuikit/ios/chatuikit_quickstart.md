@@ -99,5 +99,5 @@ let vc = ComponentsRegister.shared.MessageViewController.init(conversationId: <#
 
 在聊天页面下方输入消息，然后点击**发送**按钮发送消息。
 
-![img](@static/images/uikit/chatuikit/ios/message_first.png) 
+![img](@static/images/uikit/chatuikit/ios/message_first.png =350x750) 
 
