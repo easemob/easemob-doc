@@ -8,7 +8,7 @@
 
 会话列表呈现了用户所有正在进行的对话，帮助用户快速找到所需联系人并查看消息进展。
 
-![img](@static/images/uikit/chatuikit/feature/common/conversation_list.png =350x700)
+![img](@static/images/uikit/chatuikit/feature/common/conversation_list.png =350x750)
 
 ## 聊天	
 

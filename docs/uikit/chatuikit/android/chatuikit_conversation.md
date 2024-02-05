@@ -16,7 +16,7 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x800) 
+![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x840) 
 
 ## 使用示例
 

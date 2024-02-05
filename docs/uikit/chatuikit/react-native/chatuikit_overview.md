@@ -75,7 +75,7 @@
 
 - `ConversationList` 提供所有聊天视图的容器。
 
-![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x830) 
+![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x850) 
 
 - `ContactList`  提供联系人、群组及其详情等容器。
 
