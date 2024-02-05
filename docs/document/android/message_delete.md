@@ -113,7 +113,7 @@ if(conversation != null) {
 ```java
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 if(conversation != null) {
-    conversation.removeMessage(targetMessageId);
+    conversation.removeMessage(messageId);
 }
 ```
 
