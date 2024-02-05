@@ -1,8 +1,6 @@
-# 直播聊天室人机交互界面工具包设计指南 (V1.0.0)
+# 移动端单/群聊人机交互界面工具包设计指南
 
-<Toc />
-
-![img](@static/images/uikit/chatroomdesign/crukcover_ease.png)
+![img](@static/images/uikit/chatuikit/design/CUIcover2.png)
 
 ## 0.总的设计原则
 
@@ -62,7 +60,7 @@ Hue 值(0-360)与色相的对应关系大致如以下图示所例：
 
 ![img](@static/images/uikit/chatroomdesign/cruk1123.png)
 
-##### 1.1.2.4.示例：
+##### 1.1.2.4.举个例子吧：
 
 如指定主题色 Primary 色相（Hue）为 203，成功色 Secondary 色相（Hue）为 155，警示色 Error 色相（Hue）为 350，则会生成如下 39 种主题色可供用户在指定 UI 件块（View）颜色时使用：
 
@@ -116,7 +114,7 @@ End Color 用户可配置色相（Hue），亮度以 0(20%) / 1(30%) / 2(40%) / 
 
 ##### 1.1.4.1.透明色（Alpha Color）:
 
-在本案内带有透明度的组件仅有弹幕消息背景色、礼物消息背景色、模态背景色、轻提示背景色四种，应用范围有限，所以单独定义两个特殊的颜色类用于以上四种组件：Alpha onlight(hsl0, 0%, 0%) 和 Alpha ondark(hsl0, 0%, 100%)，Alpha 值被指定为 0(0.0) / 1(0.1) / 2(0.2) / 3(0.3) / 4(0.4) / 5(0.5) / 6(0.6) / 7(0.7) / 8(0.8) / 9(0.9) / 95(0.95) / 98(0.98) / 100(1.0) 十三个梯度值，共 26 种颜色用例，以调整组件的背景色透明度。
+在本案内带有透明度的组件仅有模态背景色、轻提示背景色，应用范围有限，单独定义两个特殊的颜色类用于以上四种组件：Alpha onlight(hsl0, 0%, 0%) 和 Alpha ondark(hsl0, 0%, 100%)，Alpha 值被指定为 0(0.0) / 1(0.1) / 2(0.2) / 3(0.3) / 4(0.4) / 5(0.5) / 6(0.6) / 7(0.7) / 8(0.8) / 9(0.9) / 95(0.95) / 98(0.98) / 100(1.0) 十三个梯度值，共 26 种颜色用例，以调整组件的背景色透明度。
 
 ![img](@static/images/uikit/chatroomdesign/cruk1141.png)
 
@@ -132,7 +130,7 @@ Alpha onlight 和 Alpha ondark 均为默认值，无任何可配置项。
 
 Neutral 和 Primary 的默认 Hue 值(色相)相同，也建议用户设置和主题色相同的 Hue 值已达成主题颜色和无彩色系的配套。但这仅仅是建议；
 
-#### 1.1.5.2.示例：
+#### 1.1.5.2.举个例子吧：
 
 如指定主题色 Primary 色相（Hue）为 203，饱和度(Saturation)固定值为 100%，中性色（Neutral）则也指定色相（Hue）为 203，饱和度(Saturation)固定值为 8%，则得到以下色列可供用户选择使用：
 
@@ -151,7 +149,7 @@ Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也
 
 ![img](@static/images/uikit/chatroomdesign/cruk116b.png)
 
-#### 1.1.6.1.示例：
+#### 1.1.6.1.举个例子吧：
 
 如指定主题色 Primary 色相（Hue）为 203，特殊中性色（Neutral）通过相似色原理（正负 30 度内）指定色相（Hue）为 220，饱和度(Saturation)固定值为 36%，则得到以下色列可供用户选择使用：
 
@@ -165,13 +163,13 @@ Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也
 
 组件一般采用较大的圆角，柔和轻盈
 
-![img](@static/images/uikit/chatroomdesign/cruk121.png)
+![image text](@static/images/uikit/chatuikit/design/1.2.1.png)
 
 ### 1.2.2.硬朗主题
 
-组件一般避免比较大的圆，硬朗实在
+组件一般避免比较大的圆角，硬朗实在
 
-![img](@static/images/uikit/chatroomdesign/cruk122.png)
+![image text](@static/images/uikit/chatuikit/design/1.2.2.png)
 
 以上两种主题可通过应用渐变主题色（Primary Gradient）得到两外两种渐变色主题。
 至于业务相关的主题，如“社交”、“游戏”、“教育”、“商务”等主题分类，因违反本案的最基本设计原则“在业务形态上尽量不替用户做决定”，所以不在本期考虑范围内。
@@ -257,11 +255,9 @@ Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也
 
 ### 1.5.1.背景模糊（Background Blur）
 
-背景模糊主要应用于组件背景色使用 Alpha color 时，如组件背景色的透明度会造成组件前后层级干扰的话，则推荐使用背景模糊解决，比如：
-
-![img](@static/images/uikit/chatroomdesign/cruk151.png)
-
+背景模糊主要应用于组件背景色使用 Alpha color 时，如组件背景色的透明度会造成组件前后层级干扰的话，则推荐使用背景模糊解决，
 也应用于模态显示的弹出层的背景虚化；
+
 背景模糊的模糊半径值默认为 20
 
 ```
@@ -364,12 +360,10 @@ Message Bubble(Large Radius)
 
 <img src="@static/images/uikit/chatroomdesign/cruk162.png" width="390" >
 
-本案不涉及。
+## 2.小控件（Widgets）
+小控件为最基础的视觉交互模块。
 
-# 2.基础组件（Widgets）
-
-## 2.1.按钮组件(Button)
-
+### 2.1.按钮(Bottom)
 按钮组件分为普通按钮、文本按钮、图标按钮三种，每种包含的状态有 Enabled、Hovered(限 web 端) 、Pressed、Loading、Pressed 五种状态，同时分为大、中、小三种按钮尺寸以贴合不同容器的使用。
 
 ### 2.1.1.普通按钮（Normal）
@@ -405,103 +399,94 @@ Message Bubble(Large Radius)
 
 ![img](@static/images/uikit/chatroomdesign/cruk213b.png)
 
-## 2.2.输入框组件(Input)
+### 2.2.输入框(Input)
 
 输入框为需要输入较少文字时使用的组件。
 也按照所放组件的大小分为大中小三种尺寸可配项，样式上，背景色和描边颜色可开关，圆角可配，状态上分为失焦未填写、失焦填写、聚焦未填写、聚焦填写、禁用填写、禁用未填写六种。
 
 <img src="@static/images/uikit/chatroomdesign/cruk22.png" width="390" >
 
-## 2.3.输入域组件(Input Area)
+### 2.3.输入区域(InputArea)
 
 输入框为需要输入较多文字时使用的组件。
 在用于输入器的文本输入，和表单中、发布内容时需要填写较多文本时使用，样式上，背景色和描边颜色可开关，圆角可配，可显示最大输入字符数分数。状态上分为失焦未填写、失焦填写、聚焦未填写、聚焦填写、禁用填写、禁用未填写六种。
 
 <img src="@static/images/uikit/chatroomdesign/cruk23.png" width="390" >
 
-## 2.4.头像组件(Avatar)
+### 2.4.单选器和多选器(Checkboxes n' Radios)
+单选器和多选器允许终端用户在列表中选择一项或者多项。分为选中、未选中、选中禁用、未选中禁用四种状态。
 
-头像组件是一类信息数据展示的组件，如用户、某个操作项的头像展示，常放置于个人信息页、与用户相关的列表项中
+
+### 2.5.开关(Switch)
+开关为终端用户对列表项打开和关闭的直观操作。
+分为关闭、打开、关闭禁用、打开禁用四中状态。
+此操作一般需要避免自动化开启和关闭，必须终端用户主动操作。
+
+样式采用iOS或Material 默认样式，开启颜色对应Primary5/Primary6的KeyColor色值。
+
+
+### 2.6.滑块(Slider)
+滑块用于终端用户精确设置数值。
+可配项有：两侧图标或单侧数值，状态上分为禁用和可用。
+
+### 2.7.浮层菜单(PopMenu)
+浮层菜单为非常住的的选项或列表的展示。支持配置操作项有无左侧icon
+
+### 2.8.头像(Avatar)
+头像是一类信息数据展示的控件，如用户、某个操作项的头像展示，常放置于个人信息页、与用户相关的列表项中
 头像圆角有两个枚举值：Extra Small（r=4）、Extra Large（r=½ Height）以配合不同主题的使用
 头像的尺寸可以依据所属组件的大小自由配置，但需要注意的是，头像的比例永远是 1:1
 
-### 2.4.1.图片头像
+### 2.8.1.图片头像
 
 能读取用户头像信息时展示图片头像。
 
 ![img](@static/images/uikit/chatroomdesign/cruk241.png)
 
-### 2.4.2.字符头像
+### 2.8.2.字符头像
 
 用户未上传头像时显示字符头像，字符头像分为单字符和双字符两种
 
 ![img](@static/images/uikit/chatroomdesign/cruk242.png)
 
-### 2.4.3.组合头像
+### 2.8.3.组合头像
 
 组合头像用于用户未上传数据时的群组聊天自动生成头像
 本案不涉及
 
 ![img](@static/images/uikit/chatroomdesign/cruk243.png)
 
-### 2.4.4.图标头像
+### 2.8.4.图标头像
 
 图标头像用于获取不到用户头像信息的空状态以及表单单项有 icon 时的头像。
 
 ![img](@static/images/uikit/chatroomdesign/cruk244.png)
 
-### 2.4.5.头像徽章
+### 2.8.5.头像徽章
 
 头像可配置徽章（Badge）以体现用户的在离线等状态，徽章位置分两种：右下和右上
-本案不涉及
-
 
 <img src="@static/images/uikit/chatroomdesign/cruk245.png" width="440" >
 
-## 2.5.操作表单(Action Sheet)
+### 2.9.徽章(Badge)
+徽章用于导航项、列表项、头像处，用于显示状态、通知和计数。
+配置项有：计数的有无、标准和小、icon的有无。
+(配图)
 
-操作表单是以模态形式展示的多操作项表单，单个操作项分为 Enabled、Pressed、Disabled、Destructived 四种状态，以及 Cancel 特殊类型。同时可配置是否显示 icon、是否有分割线(stroke)
-此组件仅限移动端
+### 2.10.表情符号(Emojis)
 
-<img src="@static/images/uikit/chatroomdesign/cruk25.png" width="390" >
-
-## 2.6.浮层菜单(PopMenu)
-
-浮层菜单是以浮层形式展示的多操作项菜单，单个操作项分为 Enabled、Hovered、Pressed、Focused、Disabled、Destructived 六种状态，同时可配置是否显示 icon、是否有字段 2（Body），样式上可配置单项圆角、是否有分割线(Stroke)。
-此组件仅限 web 端
-
-![img](@static/images/uikit/chatroomdesign/cruk26.png)
-
-## 2.7.弹窗通知(Alert)
-
-弹窗通知是一类模态提示，会提示用户正在进行的操作所需的关键信息，如警告等，或需要用户填写关键信息（通过输入框），需用户做出主要操作或次要操作。
-内容上，description 可配、输入框可配、操作项支持最多三个。
-样式上，弹窗的圆角可配，需要注意的是，组件内部的输入框和操作按钮圆角需要同弹窗按钮的圆角适配，以达成风格的一致性。
-
-![img](@static/images/uikit/chatroomdesign/cruk27.png)
-
-## 2.8.浮层提示(Popover)
-
-浮层提示为 web 端的非常驻提示信息。仅在鼠标 Hoverd 相关组件时展示，最多支持两个字段(Title 和 Subtitle)，因为是浮层提示，背景色需和底色有极大反差，具体表现为：亮色模式上用深色（Neutral1）、暗色模式上用亮色（Neutral98）
-且依据需提示内容在页面上的实际位置，分为 10 个方向(上左、上、上右、右上、右、右下、下右、下、下左、左下、左、左上)。
-
-![img](@static/images/uikit/chatroomdesign/cruk28.png)
-
-## 2.9.表情符号(Emoji)
-
-### 2.9.1.Twemoji [↗](https://github.com/twitter/twemoji)
+### 2.10.1.Twemoji [↗](https://github.com/twitter/twemoji)
 
 表情使用开源可免费商用的 Twemoji 作为基本表情，默认提供 52 个表情作为内置的表情，用户可根据自己的产品规划从 twemoji 提供的 3,245 个表情中进行替换增减；
 
 ![img](@static/images/uikit/chatroomdesign/cruk291.png)
-
-### 2.9.2.表情模版(Emoji Template)
+### 2.10.2.表情模版(Emoji Template)
 
 如用户需替换 Twemoji，或者需要自己创作表情，需依照以下模板进行替换或绘制；
 
 ![img](@static/images/uikit/chatroomdesign/cruk292.png)
 
-### 2.9.3.表情组件状态（State）
+### 2.10.3.表情组件状态（State）
 
 表情组件的状态分为以下 4 种：
 启用 Enabled、悬停 Hovered（仅限 web 端）、按下 Pressed、聚焦 Focused（本案不涉及）
@@ -509,126 +494,55 @@ Message Bubble(Large Radius)
 
 ![img](@static/images/uikit/chatroomdesign/cruk293.png)
 
-# 3.业务组件（Components）
+### 2.11.轻提示(Toast)
+请提示为针对终端用户当前操作的简单反馈。
+分为有图标、无图标两类。
 
-## 3.1.消息组件（Message）
+### 2.12.模态背景(Model)
+模态为临时的弹出的关键信息，需要用户主动操作来退出。
+模态背需配合弹窗(Alert)使用。颜色可配置为任意AlphaColor，也可设置背景模糊效果。
+(配图)
 
-本案支持发送文本(含 Emoji)、语音(本期不涉及)、礼物消息、全局广播等消息类型
-样式上所有的配置项都是为要保障消息文本的可阅读性。
+### 2.13.索引(Index)
+索引应用于联系人页面通过分类迅速查找联系人。
 
-### 3.1.1.文本消息（Text Message）
+#### 2.13.1.目录索引(SectionIndex)
+目录索引位于联系人或成员列表最右侧，为快速通过字母定位到相关联系人的滚动条。
 
-文本消息为用户发送的文字消息展示样式
-样式可配项有：背景色（Alpha0-100）、前景色（Neutral0-100）、圆角、字体的大小（Body Large、Body Medium、Body small）、消息气泡的 Pedding
-可增减的显示内容项有：Label、Badge、Avatar，Title 和 Description 为必要内容，显示内容的顺序是不可修改的。
+#### 2.13.2.列表索引(IndexInList)
+列表内的索引用于不同字母分类的联系人的分割。可以配置是否有底部分割线。
 
-<img src="@static/images/uikit/chatroomdesign/cruk311.png" width="390" >
+### 2.14.底部标签栏(BottomTabs)
+底部导航栏应用于移动设备上不同视图(View)的切换，最少两个切换项，超过5个项时分页展示。
 
-### 3.1.2.语音消息（Audio Message）
+### 2.15.顶部标签栏(TopTabs)
+顶部部导航栏应用于移动设备上不同视图(View)的切换，最少一个项，超过5个项时分页展示。
 
-本期不涉及
+## 3.控件（Components）
 
-### 3.1.3.礼物消息（Gift Message）
+### 3.1.顶部条（TopBar）
+顶部条用于展示当前视图标题，并可对当前页面进行整体的控制。
+左侧支持配置返回操作、支持有/无头像、支持有/无小标题，右侧支持 1 至 3 个action。
 
-礼物消息依据国内国外使用场景的不同，分为两种样式
+### 3.2.搜索条（SearchBar）
+搜索条用于搜索当前页面的项。
+可配项有左侧返回icon、是否显示取消按钮。
 
-#### 3.1.3.1.非常驻礼物消息样式
+### 3.3.底部条（BottomBars）
 
-为国内直播场景常见的样式，可设为 Large、Small 两个尺寸，
-默认驻留时间为 3 秒（可配置），事件并发时排队展示，可同时最多展示 2 条礼物消息
+#### 3.3.1.底部操作条(navigation_bar)
+底部操作条用于针对当前视图的操作，最少支持一项，最多支持三项，操作按钮支持配置为文本按钮或图标按钮。
 
-<img src="@static/images/uikit/chatroomdesign/cruk3131.png" width="390" >
+#### 3.3.2.输入条(InputBar)
 
-消息气泡的样式可配项有：背景色、前景色、头像圆角（需要注意的是，消息背景圆角和头像圆角配套以达成风格的一致）、背景模糊（防止在语聊房场景下组件重叠带来的阅读困难）。
+输入条为会话详情页文本等消息的发布器。
+可配置左侧actionbtn、右侧Action1、Action2、Action3、sendbtn
+样式上支持配置顶部分割线、输入框圆角样式、sendbtn可配置为文本按钮或者图标按钮。
 
-#### 3.1.3.2.常驻礼物消息样式
+#### 3.3.3.录音浮层(RecordingModel)
+录音浮层为录制和发送语音消息的控件。
 
-<img src="@static/images/uikit/chatroomdesign/cruk3132.png" width="390" >
-
-样式可配项和信息可配项与文本消息相同，只是增加了消息末尾的贴纸展示。
-
-### 3.1.4.消息列（Massage List）
-
-为消息按照时间顺序组合后浮动在直播流上的组件样式，依据国内外用户习惯不同，分为两类样式
-
-#### 3.1.4.1.礼物消息和文本消息分开展示的样式
-
-<img src="@static/images/uikit/chatroomdesign/cruk3141.png" width="390" >
-
-此组件默认消息之间的间距为 4(用户可自行配置)，文本消息区域整体高度占屏幕比例用户可自行配置。礼物非常驻消息一直显示在区域顶侧。消息列右侧需留出给用户放置自定义消息组件的区域，所以此处消息的左右间距不可配置，固定左侧 16，右侧 78。
-
-#### 3.1.4.2.礼物消息和文本消息合并展示的样式
-
-<img src="@static/images/uikit/chatroomdesign/cruk3142.png" width="390" >
-
-此组件默认消息之间的间距为 4(用户可自行配置)，文本消息区域整体高度占屏幕比例用户可自行配置。消息列右侧需留出给用户放置自定义消息组件的区域，所以此处消息的左右间距不可配置，固定左侧 16，右侧 78。
-
-### 3.1.5.消息操作（Message Action）
-
-<img src="@static/images/uikit/chatroomdesign/cruk315.png" width="390" >
-
-长按消息弹起 action sheet 显示消息相关操作项，操作列表顶部标题栏显示所操作消息的详情。
-
-#### 3.1.5.1.消息的举报表单（Report From）
-
-举报表单为消息操作的次级别页面，提供选择举报原因的单选项，选项数目可增减，选择后可提交举报。
-
-<img src="@static/images/uikit/chatroomdesign/cruk3151.png" width="390" >
-
-### 3.1.6.全局广播（Global Message）
-
-全局广播为超级管理员发送的所有直播间同时可见的非常驻消息，分为三种类型（具体类型需开发者自行定义）通过左侧图标和背景色示以区分。样式的可配项有：圆角、背景色、前景色，信息展示的可配项有左侧 icon(有或无)，以及用户可以在自定义广播类型时修改 icon 资源图。消息仅支持单排显示，广播内容超过一屏显示范围为字幕滚动展示，滚动速率可配。
-
-<img src="@static/images/uikit/chatroomdesign/cruk316.png" width="500" >
-
-此消息在移动端一般出现在视频流的顶部；在 web 端出现在聊天窗的顶部，为浮层展示。
-
-<img src="@static/images/uikit/chatroomdesign/cruk316b.png" width="780" >
-
-## 3.2.底部条（Footer Bar）
-
-底部条为移动端的底部操作项展示区域
-样式上的可配项支持背景色、前景色、圆角、图标可替换，是否添加背景模糊效果
-发送消息 action 为必要项，礼物消息 action 为可选项，另最多支持 4 个用户可定义的 action。
-
-<img src="@static/images/uikit/chatroomdesign/cruk32.png" width="390" >
-
-## 3.3.输入条（Input Bar）和语音发送器（Audio Input）
-
-输入条为键入文本、发送语音和扩展消息的组件。在移动端点击底部条的发送消息操作触发，和键盘搭配使用；在 web 端为在消息窗内底部常驻显示。
-样式上，输入条支持配置分割线、内部的输入框和按钮支持圆角配置
-
-### 3.3.1.文本输入条（Input Bar）
-
-#### 3.3.1.1.移动端文本输入条（Input Bar）
-
-移动端文本输入条包含文字输入和至多 4 个的键盘切换操作（包括表情键盘、发送语音两个可配项以及另外两个用户可自定义项），可选配文本或者图标形式的发送按钮。
-
-<img src="@static/images/uikit/chatroomdesign/cruk3311.png" width="390" >
-
-文本输入条内的文本输入区域为输入区域组件，当单行文本放不下时，文字可在输入区域内折行，对应的输入区域会累积行高，至多支持 4 行文本区域，输入文本超过 4 行后，文本分页展示，用户可滚动查看所键入的文本。
-
-<img src="@static/images/uikit/chatroomdesign/cruk3311b.png" width="390" >
-
-样式上支持配置分割线（Stroke）、内部输入区域和发送按钮的圆角、描边（Stroke）、前/背景色。
-
-<img src="@static/images/uikit/chatroomdesign/cruk3311c.png" width="390" >
-
-#### 3.3.1.2.网页端文本输入条（Input Bar）
-
-网页端文本输入条包含文字输入和至多 4 个的键盘切换操作（包括表情键盘、发送语音、发送礼物三个可配项以及另外一个用户可自定义项），可选配图标形式的发送按钮。
-
-<img src="@static/images/uikit/chatroomdesign/cruk3312.png" width="360" >
-
-文本输入条内的文本输入区域为输入区域组件，当单行文本放不下时，文字可在输入区域内折行，对应的输入区域会累积行高，至多支持 4 行文本区域，输入文本超过 4 行后，文本分页展示，用户可滚动查看所键入的文本。
-
-<img src="@static/images/uikit/chatroomdesign/cruk3312b.png" width="360" >
-
-### 3.3.2.语音发送器（Audio Input）
-
-本期不涉及
-
-## 3.4.表情键盘（Emoji Pick）
+### 3.4.表情盘(EmojisPick)
 
 表情键盘是发送 app 内自建表情的键盘，内容上支持表情个数的增减，底部发送和退格按钮支持修改圆角。同时应满足接入第三方表情/贴纸库。
 
@@ -636,70 +550,119 @@ Message Bubble(Large Radius)
 
 本键盘不同于系统自带的 emoji 输入键盘，通过此组件输入的 emoji 不会同步为系统的 emoji，而是在任何平台同一 app 内均显示 app 内自建的表情符号。为满足版权方面的法律要求，请勿使用非申明开源可免费商用的表情符号（不限资源图或者源码）在 App 中（如：集成苹果表情符号在自己的 app 内，这样或许会导致 App 无法上架苹果应用商店）
 
-## 3.5.贴纸键盘（Stickers Pick）
+### 3.5.列表项(ListItem)
 
-### 3.5.1.单个贴纸（Sticker）
+#### 3.5.1.表单列表项(FromItem)
+表单列表项应用再联系人/群组详情页面/App设置页面的表单中，
+支持点击事件、右侧可配置按钮、数据展示、开关、滑动条、单/多选器等功能，左侧可配置单/多选器。
+信息展示上可配置左侧头像、subtitle、列表项的分类标题（Headline）和注解（postil）
 
-单个贴纸用以展示单个礼物消息样式，展示的信息有：礼物图片、礼物名称（Title）、礼物价值（Subtitle）。
-礼物图片未读到时显示默认图，礼物价值可配置价值图标。
-单个贴纸状态有 Enabled、Disabled(主要用于慢速发送，需要用户自行实现)、Focused 三种，Focused 时显示发送按钮。
+#### 3.5.2.会话列表项(ConversationItem)
+会话列表项为会话详情的入口，可展示的信息有:联系人头像(Avatar)、联系人昵称(Title)、最新消息（Subtitle）、新消息通知（Badge）、新消息时间戳（Time）。
+样式上支持头像配置大/小圆角、是否配置列表项的分割线。
 
-<img src="@static/images/uikit/chatroomdesign/cruk351.png" width="390" >
+#### 3.5.3.联系人列表项(ContactsItem)
+联系人列表项为联系人详情的入口，可展示的信息有:联系人头像(Avatar)、联系人昵称(Title)、联系人状态（Subtitle）。
+样式上支持头像配置大/小圆角、是否配置列表项的分割线。
 
-### 3.5.2.贴纸键盘（Stickers Pick）
+### 3.6.弹窗(Alert)
+弹窗通知是一类模态提示，会提示用户正在进行的操作所需的关键信息，如警告等，或需要用户填写关键信息（通过输入框），需用户做出主要操作或次要操作。
+内容上，description 可配、输入框可配、操作项支持最多三个。
+样式上，弹窗的圆角可配，需要注意的是，组件内部的输入框和操作按钮圆角需要同弹窗按钮的圆角适配，以达成风格的一致性。
 
-贴纸键盘在本案内主要应用于发送礼物消息。内容上支持礼物类别（横向滑动切换礼物类别）/类别内礼物个数（上下滑动查看更多礼物）的增减。
+![img](@static/images/uikit/chatroomdesign/cruk27.png)
 
-<img src="@static/images/uikit/chatroomdesign/cruk352.png" width="390" >
+### 3.7.操作面板(ActionSheet)
+操作表单是以模态形式展示的多操作项表单，单个操作项分为 Enabled、Pressed、Disabled、Destructived 四种状态，以及 Cancel 特殊类型。同时可配置是否显示 icon、是否有分割线(stroke)
+此组件仅限移动端
 
-## 3.6.成员列表（Member List）
+<img src="@static/images/uikit/chatroomdesign/cruk25.png" width="390" >
 
-### 3.6.1.列表筛选（Tab）
 
-成员列表顶部支持成员类别筛选，可通过点击 tab 或者左右滑动整个列表切换，至少支持一个 tab, tab 超过四个时支持左右滑动
+## 4.消息气泡(MessageBubble)
 
-<img src="@static/images/uikit/chatroomdesign/cruk361.png" width="440" >
+### 4.1.文本消息(TextsMsg)
+文本消息为发送字符和emoji表情时使用的气泡样式。
 
-### 3.6.2.搜索条（Search Bar）
+### 4.2.语音消息(AudioMsg)
+文本消息为发送语音时使用的气泡样式。
+气泡宽度会随着语音消息的时长而改变宽度。支持点击后播放。播放中有动画显示。
 
-搜索条一般位于列表顶端，分为 Enabled n‘ unfilled、Enabled n‘ filled、Focused n‘ unfilled、Focused n‘ filled 四种状态，依据所在列表组件性质的不同可配置左侧返回按钮和右侧 action 按钮，样式上可配置分割线、输入框圆角大小、输入框背景色和描边的增减。
+### 4.3.文件消息(FileMsg)
+文件消息为发送文件时候展示的气泡样式。
+支持显示的字段有：文件图标、文件名（Title）、文件大小（Subtitle）
 
-![img](@static/images/uikit/chatroomdesign/cruk362.png)
+### 4.4.联系人消息(ContactMsg)
+联系人消息为一种展示联系人的气泡样式，支持点击事件，
+支持显示的字段有：联系人头像、联系人昵称（Title）
 
-### 3.6.3.成员列表项（Member Item）
+### 4.5.缩略图消息(ImgMsg)
+缩略图消息为发送图片和视频消息时的消息气泡。
+展示规则:
 
-列表项展示当前成员信息，可展示的信息有徽章(Badge)、头像（Avatar）、用户名（Title）、用户详情（Subtitle），用户名为必要项，其他信息可配置。列表项目右侧支持 action btn，同时列表项支持点击/长按等事件
 
-<img src="@static/images/uikit/chatroomdesign/cruk363.png" width="390" >
+### 4.6.顶部附加消息(DescantMsg)
+顶部附加消息为本消息的附属信息的展示，如：消息的回复（Reply）
+支持点击事件
 
-样式上，列表项可配置分割线（Stroke），头像支持圆角可配。
+### 4.7.底部附加消息(OrganumMsg)
+*本期不涉及*
 
-<img src="@static/images/uikit/chatroomdesign/cruk363b.png" width="390" >
+### 4.8.消息的长按操作列表(MsgActionSheet)
+支持对当前消息进行复制、编辑、撤回、回复等的操作。
 
-### 3.6.4.列表（Member List）
+## 5.模块视图（Module View）
 
-将 3.6.1.-3.6.3.组合起来即为整个列表项
+### 5.1.会话视图(ConversationView)
 
-#### 3.6.4.1.列表整体加载
+#### 5.1.1.会话列表(ConversationList)
+会话视图为会话搜索、会话列表项组合而成的页面。
 
-<img src="@static/images/uikit/chatroomdesign/cruk3641.png" width="390" >
+#### 5.1.2.新会话(NewMsg)
+通过会话右上角action调取的操作列表，可以此发起会话、创建群、添加联系人。
+##### 5.1.2.1. 发起会话(StartConversation)
+点击此项将调取联系人列表，终端用户可点选或者搜索联系人，点击后将进入会话详情页面，用户可以通过发送消息发起会话。
+##### 5.1.2.2. 创建群组(CreateGroup)
+点击此项将调取多选状态的联系人列表，终端用户在此页面点选群组成员，当群成员≥2(包含群主和群成员)时，用户可以点击创建进入群组会话详情页面，以创建一个群组。
+##### 5.1.2.3. 添加联系人(Addcontact)
+点击此项将大家添加联系人弹窗，终端用户输入要添加的联系人ID后发送添加信息。
 
-#### 3.6.4.2.空列表
+### 5.2.联系人视图(ContactsView)
+联系人视图是联系人搜索、联系人列表项组合而成的页面。
 
-<img src="@static/images/uikit/chatroomdesign/cruk3642.png" width="390" >
+#### 5.2.2.新申请列表(NewRequest)
+如用户收到添加联系人的申请，将在此展示相关信息。用户可以通过添加操作处理联系人添加请求。
 
-#### 3.6.4.3.列表拉取失败
+#### 5.2.3.群组列表(GroupList)
+将在此展示用户加入的所有群。用户可以通过添加操作处理联系人添加请求。
 
-<img src="@static/images/uikit/chatroomdesign/cruk3643.png" width="390" >
+### 5.3.会话详情视图(ConversationDetailView)
+会话详情为群聊或者群组聊天的详情页面
+页面分为header(展示会话title信息)，body（消息气泡列表），footer（消息发送三部分）
 
-#### 3.6.4.4.列表上滑加载
+#### 5.3.1.会话的顶部导航栏(header)
+顶部导航栏承接两项主要功能：
 
-<img src="@static/images/uikit/chatroomdesign/cruk3644.png" width="390" >
+1)会话关键信息的展示：联系人/群的头像、联系人昵称/群名称、联系人的在/离线状态等
 
-#### 3.6.4.5.列表展开全屏
+2)关于相关会话的操作：退出会话、查看联系人/群详情、针对当前会话的 1-3 个操作
 
-<img src="@static/images/uikit/chatroomdesign/cruk3645.png" width="390" >
+#### 5.3.2.消息气泡列表(body)
+会话内成员所发送的消息将以时间的先后顺序在此视图内进行由上到下的排列。
 
-# 4.UI 设计资源
+#### 5.3.3.消息的发送(footer)
+用于发送文本、语音、附件、自定义消息。
 
-设计资源详见 [figma 链接](https://www.figma.com/community/file/1322495388317476706/chatroom-uikit)。
+### 5.4.联系人详情视图（ContactDetailView）
+联系人详情为联系人详情展示的页面，主要展示联系人头像、昵称、ID等联系人信息；
+支持在本页面操作联系人免打扰、联系人删除操作；
+支持在本页面进入消息详情等入口；
+
+### 5.5.群组详情视图(GroupDetailView)
+群组详情为群组详情展示的页面，主要展示群组头像、群组名称、群ID等群组信息；
+支持在本页面操作群组免打扰、退出群组等操作；
+管理员（Owner和Admins）支持修改群信息（群名称、群详情等），支持群主（Owner）转让群主身份和解散群组；
+支持在本页面进入消息详情等入口；
+
+## 6.设计资源（Design Resources）
+设计资源详见 [figma 链接](https://www.figma.com/community/file/1327193019424263350/chat-uikit-for-mobile)。
