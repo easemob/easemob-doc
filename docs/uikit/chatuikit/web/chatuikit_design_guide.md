@@ -33,7 +33,7 @@
 
 ##### 1.1.1.3.模型概览：
 
-[img](@static/images/uikit/chatroomdesign/cruk1113.png)
+![img](@static/images/uikit/chatroomdesign/cruk1113.png)
 
 #### 1.1.2.三种主题色（Theme Color）的色彩规范：
 
