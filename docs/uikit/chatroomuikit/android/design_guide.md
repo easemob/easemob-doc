@@ -489,7 +489,7 @@ Message Bubble(Large Radius)
 
 ## 2.9.表情符号(Emoji)
 
-### 2.9.1.Twemoji [↗](https://raw.githubusercontent.com/twitter/twemoji)
+### 2.9.1.Twemoji [↗](https://github.com/twitter/twemoji)
 
 表情使用开源可免费商用的 Twemoji 作为基本表情，默认提供 52 个表情作为内置的表情，用户可根据自己的产品规划从 twemoji 提供的 3,245 个表情中进行替换增减；
 
