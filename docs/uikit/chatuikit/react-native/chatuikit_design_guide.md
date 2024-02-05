@@ -665,5 +665,5 @@ Message Bubble(Large Radius)
 管理员（Owner和Admins）支持修改群信息（群名称、群详情等），支持群主（Owner）转让群主身份和解散群组；
 支持在本页面进入消息详情等入口；
 
-## 5.设计资源（Design Resources）
+## 6.设计资源（Design Resources）
 设计资源详见 [figma 链接](https://www.figma.com/community/file/1327193019424263350/chat-uikit-for-mobile)。
