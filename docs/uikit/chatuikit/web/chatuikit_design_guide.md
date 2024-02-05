@@ -1,7 +1,6 @@
-# 移动端单/群聊人机交互界面工具包设计指南
-Design Guide of Chat UIkit Mobile
+# Web 端单/群聊人机交互界面工具包设计指南
 
-<img src="https://github.com/StevieJiang/Chat-UIkit-Design-Guide/blob/main/CUIimg/CUIcover2.png" width="100%" >
+![img](@static/images/uikit/chatuikit/design/CUIcover2.png)
 
 ## 0.总的设计原则
 
@@ -164,13 +163,13 @@ Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也
 
 组件一般采用较大的圆角，柔和轻盈
 
-![image text](https://github.com/StevieJiang/Chat-UIkit-Design-Guide/blob/main/CUIimg/1.2.1.png)
+![image text](@static/images/uikit/chatuikit/design/1.2.1.png)
 
 ### 1.2.2.硬朗主题
 
 组件一般避免比较大的圆角，硬朗实在
 
-![image text](https://github.com/StevieJiang/Chat-UIkit-Design-Guide/blob/main/CUIimg/1.2.2.png)
+![image text](@static/images/uikit/chatuikit/design/1.2.2.png)
 
 以上两种主题可通过应用渐变主题色（Primary Gradient）得到两外两种渐变色主题。
 至于业务相关的主题，如“社交”、“游戏”、“教育”、“商务”等主题分类，因违反本案的最基本设计原则“在业务形态上尽量不替用户做决定”，所以不在本期考虑范围内。
@@ -643,7 +642,9 @@ Message Bubble(Large Radius)
 
 #### 5.3.1.会话的顶部导航栏(header)
 顶部导航栏承接两项主要功能：
+
 1)会话关键信息的展示：联系人/群的头像、联系人昵称/群名称、联系人的在/离线状态等
+
 2)关于相关会话的操作：退出会话、查看联系人/群详情、针对当前会话的 1-3 个操作
 
 #### 5.3.2.消息气泡列表(body)
@@ -663,5 +664,5 @@ Message Bubble(Large Radius)
 管理员（Owner和Admins）支持修改群信息（群名称、群详情等），支持群主（Owner）转让群主身份和解散群组；
 支持在本页面进入消息详情等入口；
 
-## 5.设计资源（Design Resources）
+## 6.设计资源（Design Resources）
 设计资源详见 [figma 链接](https://www.figma.com/community/file/1327193019424263350/chat-uikit-for-mobile)。
