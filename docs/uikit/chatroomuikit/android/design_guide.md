@@ -460,14 +460,14 @@ Message Bubble(Large Radius)
 
 ## 2.5.操作表单(Action Sheet)
 
-操作表单是以模态形式展示的多操作项表单，单个操作项分为 Enabled、Pressed、Disabled、Destructived 四种状态，以及 Cancel 特殊类型。同时可配置是否显示 icon、是否有分割线(stroke)
+操作表单是以模态形式展示的多操作项表单，单个操作项分为 Enabled、Pressed、Disabled、Destructive 四种状态，以及 Cancel 特殊类型。同时可配置是否显示 icon、是否有分割线(stroke)
 此组件仅限移动端
 
 <img src="@static/images/uikit/chatroomdesign/cruk25.png" width="390" >
 
 ## 2.6.浮层菜单(PopMenu)
 
-浮层菜单是以浮层形式展示的多操作项菜单，单个操作项分为 Enabled、Hovered、Pressed、Focused、Disabled、Destructived 六种状态，同时可配置是否显示 icon、是否有字段 2（Body），样式上可配置单项圆角、是否有分割线(Stroke)。
+浮层菜单是以浮层形式展示的多操作项菜单，单个操作项分为 Enabled、Hovered、Pressed、Focused、Disabled、Destructive 六种状态，同时可配置是否显示 icon、是否有字段 2（Body），样式上可配置单项圆角、是否有分割线(Stroke)。
 此组件仅限 web 端
 
 ![img](@static/images/uikit/chatroomdesign/cruk26.png)
