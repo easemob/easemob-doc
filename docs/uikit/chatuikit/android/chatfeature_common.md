@@ -76,8 +76,8 @@
 
 ![img](@static/images/uikit/chatuikit/feature/common/message_audio.png =700x730) 
 
-## 消息举报
+## 消息审核
 
-消息举报对用户发送的消息内容进行审查，判断其是否符合平台的社区准则、服务条款和相关法律法规。
+消息审核对用户发送的消息内容进行审查，判断其是否符合平台的社区准则、服务条款和相关法律法规。
 
 ![img](@static/images/uikit/chatuikit/feature/common/message_report.png =300x630) 
