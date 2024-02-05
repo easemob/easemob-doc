@@ -202,7 +202,7 @@
 
 - ConversationsView 提供会话列表。
 
-![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x830) 
+![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x850) 
 
 - ContactsView 提供联系人、群组及其详情等。
 
