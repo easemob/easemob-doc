@@ -513,7 +513,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | `data.id`                 | String | 聊天室 ID，聊天室唯一标识符，由环信即时通讯 IM 服务器生成。    |
 | `data.name`               | String | 聊天室名称。    |
 | `data.description`        | String | 聊天室描述。    |
-| `data.membersonly`        | Bool   | 加入聊天室是否需要群主或者群管理员审批：<br/> - `true`：是。<br/> - `false`：否。    |
+| `data.membersonly`        | Bool   | 加入聊天室是否需要聊天室所有者或者聊天室管理员审批：<br/> - `true`：是。<br/> - `false`：否。    |
 | `data.allowinvites`       | Bool   | 是否允许聊天室成员邀请其他用户加入该聊天室：<br/> - `true`：允许聊天室成员邀请他人加入该聊天室。<br/> - `false`：仅聊天室所有者和管理员可邀请他人加入该聊天室。 |
 | `data.maxusers`           | Int    | 聊天室成员数上限，创建聊天室时设置。                                                                                                                            |
 | `data.owner`              | String | 聊天室所有者的用户 ID。例如：{“owner”: “user1”}。                                                                                                               |

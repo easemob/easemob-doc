@@ -93,7 +93,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | `scale`           | String | 否      | 群组规模，取决于群成员总数 `maxusers` 参数。<br/> - （默认）`normal`：普通群，即群成员总数不超过 3000。<br/> - `large`：大型群，群成员总数超过 3000。<br/><Container type="notice" title="注意"><br/>- 创建大型群时，该参数必传；<br/>- 大型群不支持离线推送。仅旗舰版支持创建大型群，如需该功能，请联系环信商务。</Container>|
 | `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。    |
 | `allowinvites`        | Bool   | 否       | 是否允许群成员邀请用户加入群组：<br/> - `true`：群成员可拉人入群;<br/> - （默认）`false`：只有群主或者管理员才可以拉人入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
-| `membersonly`         | Bool   | 否       | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：需要； <br/> - （默认）`false`：不需要，用户直接进群。     |
+| `membersonly`         | Bool   | 否       | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：需要； <br/> - （默认）`false`：不需要，用户直接进群。<br/>该参数仅对公开群生效，因为对于私有群，用户无法申请加入群组，只能通过群成员邀请加入群。     |
 | `invite_need_confirm` | Bool   | 否       | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 | `owner`               | String | 是       | 群主的用户 ID。  |
 | `members`             | Array  | 否       | 群成员的用户 ID 数组，不包含群主的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。        |
