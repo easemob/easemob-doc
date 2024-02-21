@@ -382,7 +382,9 @@ payload 中字段含义：
 | muc:add_user_white_list    | {“operation”:“add_user_white_list”}    | 将成员加入群白名单                             | 将成员加入聊天室白名单 |
 | muc:remove_user_white_list | {“operation”:“remove_user_white_list”} | 将成员移除群白名单                             | 将成员移除聊天室白名单 |
 | muc:ban_group              | {“operation”:“ban_group”}              | 群全局禁言                                     | 聊天室全局禁言         |
-| muc:remove_ban_group       | {“operation”:“remove_ban_group”}       | 解除群全局禁言                                 | 解除聊天室全局禁言     |
+| muc:remove_ban_group       | {“operation”:“remove_ban_group”}   | 解除群全局禁言                                 | 解除聊天室全局禁言     |
+| muc:set_metadata | {“operation”:“set_metadata”} | 不支持| 设置/更新聊天室自定义属性。|
+| muc:delete_metadata | {“operation”:“delete_metadata”} | 不支持| 删除聊天室自定义属性。|
 
 #### 创建群组
 
@@ -2000,6 +2002,103 @@ payload 字段含义：
     "eventType": "chat", 
     "msg_id": "XXXX", 
     "timestamp": 1644913522735 
+}
+```
+
+#### 设置/更新聊天室自定义属性
+
+payload 字段含义：
+
+| 字段          | 数据类型 | 含义                                                         |
+| :------------ | :------- | :----------------------------------------------------------- |
+| `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{聊天室 ID}@conference.easemob.com`。 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。 |
+| `event_info.ext`   | String   | 消息的扩展字段，包含聊天室的自定义属性内容。   |
+| `event_info.type`   | String   | 聊天室自定义属性类型。    |
+| `operation`   | String   | `set_metadata`：设置或更新聊天室自定义属性。  |
+| `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
+| `description` | String   | 操作失败的原因描述。|
+| `error_code`  | String   | 失败对应的错误码。|
+
+此外，`from` 为聊天室 ID，`to` 为聊天室中成员的用户 ID。
+
+设置/更新聊天室自定义属性回调请求示例：
+
+```json
+{ 
+    "chat_type": "muc", 
+    "callId": "XXXX#XXXX_976432657191668068", 
+    "security": "f8956ab6d6f78df93efb2dbca5f2eb83", 
+    "payload": { 
+        "muc_id": "XXXX#XXXX@conference.easemob.com", 
+        "is_chatroom": false, 
+        "event_info":{
+           "ext":"{\"result\":{\"successKeys\": [\"key1\",\"key2\"],\"errorKeys\":{}},\"identify\":\"\",\"is_forced\":false,\"muc_name\":\"Take\",\"need_notify\":true, \"properties\":{\"key1\": \"value1\",\"key2\": \"value2 \"}, \"operator \": \"user1\"}",
+           "type":"event_none" 
+        },
+        "operation": "set_metadata", 
+        "status": { 
+            "description": "", 
+            "error_code": "ok" 
+        } 
+    }, 
+    "group_id": "XXXX", 
+    "host": "XXXX", 
+    "appkey": "XXXX#XXXX", 
+    "from": "XXXX#XXXX", 
+    "to": "aaa111", 
+    "eventType": "chat", 
+    "msg_id": "976432657191668068", 
+    "timestamp": 1644908244060 
+}
+```
+
+
+#### 删除聊天室自定义属性
+
+payload 字段含义：
+
+| 字段          | 数据类型 | 含义                                                         |
+| :------------ | :------- | :----------------------------------------------------------- |
+| `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{聊天室 ID}@conference.easemob.com`。 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。 |
+| `event_info.ext`   | String   | 消息的扩展字段，包含聊天室的自定义属性内容。   |
+| `event_info.type`   | String   | 聊天室自定义属性类型。    |
+| `operation`   | String   | `delete_metadata`：删除聊天室自定义属性。  |
+| `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
+| `description` | String   | 操作失败的原因描述。|
+| `error_code`  | String   | 失败对应的错误码。|
+
+此外，`from` 为聊天室 ID，`to` 为聊天室中成员的用户 ID。
+
+删除聊天室自定义属性回调请求示例：
+
+```json
+{ 
+    "chat_type": "muc", 
+    "callId": "XXXX#XXXX_976432657191668068", 
+    "security": "f8956ab6d6f78df93efb2dbca5f2eb83", 
+    "payload": { 
+        "muc_id": "XXXX#XXXX@conference.easemob.com", 
+        "is_chatroom": false, 
+        "event_info":{
+           "ext":"{\"result\":{\"successKeys\": [\"key1\",\"key2\"],\"errorKeys\":{}},\"identify\":\"\",\"is_forced\":false,\"muc_name\":\"Take\",\"need_notify\":true, \"properties\":{\"key1\": \"value1\",\"key2\": \"value2 \"}, \"operator \": \"user1\"}",
+           "type":"event_none" 
+        },
+        "operation": "delete_metadata", 
+        "status": { 
+            "description": "", 
+            "error_code": "ok" 
+        } 
+    }, 
+    "group_id": "XXXX", 
+    "host": "XXXX", 
+    "appkey": "XXXX#XXXX", 
+    "from": "XXXX#XXXX", 
+    "to": "aaa111", 
+    "eventType": "chat", 
+    "msg_id": "976432657191668068", 
+    "timestamp": 1644908244060 
 }
 ```
 
