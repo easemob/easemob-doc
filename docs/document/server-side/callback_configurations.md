@@ -385,7 +385,7 @@ payload 中字段含义：
 | muc:remove_ban_group       | {“operation”:“remove_ban_group”}   | 解除群全局禁言                                 | 解除聊天室全局禁言     |
 | muc:set_metadata | {“operation”:“set_metadata”} | 不支持 | 设置/更新聊天室自定义属性。|
 | muc:delete_metadata | {“operation”:“delete_metadata”} | 不支持| 删除聊天室自定义属性。|
-| muc:group_member_metadata_update | {“operation”:“group_member_metadata_update”} | 不支持| 设置群成员的自定义属性。|
+| muc:group_member_metadata_update | {“operation”:“group_member_metadata_update”} | 设置群成员的自定义属性 | 不支持 |
 
 #### 创建群组
 
