@@ -2043,7 +2043,7 @@ payload 字段含义：
             "error_code": "ok" 
         } 
     }, 
-    "group_id": "XXXX", 
+    "group_id": "662XXXX13", 
     "host": "XXXX", 
     "appkey": "XXXX#XXXX", 
     "from": "XXXX#XXXX", 
@@ -2094,7 +2094,7 @@ payload 字段含义：
     "group_id": "XXXX", 
     "host": "XXXX", 
     "appkey": "XXXX#XXXX", 
-    "from": "XXXX#XXXX", 
+    "from": "662XXXX13", 
     "to": "aaa111", 
     "eventType": "chat", 
     "msg_id": "976432657191668068", 
@@ -2142,7 +2142,7 @@ payload 字段含义：
     "group_id": "XXXX", 
     "host": "XXXX", 
     "appkey": "XXXX#XXXX", 
-    "from": "XXXX#XXXX", 
+    "from": "662XXXX13", 
     "to": "aaa111", 
     "eventType": "chat", 
     "msg_id": "976432657191668068", 
