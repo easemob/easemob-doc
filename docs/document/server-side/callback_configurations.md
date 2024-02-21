@@ -383,8 +383,9 @@ payload 中字段含义：
 | muc:remove_user_white_list | {“operation”:“remove_user_white_list”} | 将成员移除群白名单                             | 将成员移除聊天室白名单 |
 | muc:ban_group              | {“operation”:“ban_group”}              | 群全局禁言                                     | 聊天室全局禁言         |
 | muc:remove_ban_group       | {“operation”:“remove_ban_group”}   | 解除群全局禁言                                 | 解除聊天室全局禁言     |
-| muc:set_metadata | {“operation”:“set_metadata”} | 不支持| 设置/更新聊天室自定义属性。|
+| muc:set_metadata | {“operation”:“set_metadata”} | 不支持 | 设置/更新聊天室自定义属性。|
 | muc:delete_metadata | {“operation”:“delete_metadata”} | 不支持| 删除聊天室自定义属性。|
+| muc:group_member_metadata_update | {“operation”:“group_member_metadata_update”} | 不支持| 设置群成员的自定义属性。|
 
 #### 创建群组
 
@@ -2031,7 +2032,7 @@ payload 字段含义：
     "security": "f8956ab6d6f78df93efb2dbca5f2eb83", 
     "payload": { 
         "muc_id": "XXXX#XXXX@conference.easemob.com", 
-        "is_chatroom": false, 
+        "is_chatroom": true, 
         "event_info":{
            "ext":"{\"result\":{\"successKeys\": [\"key1\",\"key2\"],\"errorKeys\":{}},\"identify\":\"\",\"is_forced\":false,\"muc_name\":\"Take\",\"need_notify\":true, \"properties\":{\"key1\": \"value1\",\"key2\": \"value2 \"}, \"operator \": \"user1\"}",
            "type":"event_none" 
@@ -2042,7 +2043,7 @@ payload 字段含义：
             "error_code": "ok" 
         } 
     }, 
-    "group_id": "XXXX", 
+    "group_id": "662XXXX13", 
     "host": "XXXX", 
     "appkey": "XXXX#XXXX", 
     "from": "XXXX#XXXX", 
@@ -2052,7 +2053,6 @@ payload 字段含义：
     "timestamp": 1644908244060 
 }
 ```
-
 
 #### 删除聊天室自定义属性
 
@@ -2080,7 +2080,7 @@ payload 字段含义：
     "security": "f8956ab6d6f78df93efb2dbca5f2eb83", 
     "payload": { 
         "muc_id": "XXXX#XXXX@conference.easemob.com", 
-        "is_chatroom": false, 
+        "is_chatroom": true, 
         "event_info":{
            "ext":"{\"result\":{\"successKeys\": [\"key1\",\"key2\"],\"errorKeys\":{}},\"identify\":\"\",\"is_forced\":false,\"muc_name\":\"Take\",\"need_notify\":true, \"properties\":{\"key1\": \"value1\",\"key2\": \"value2 \"}, \"operator \": \"user1\"}",
            "type":"event_none" 
@@ -2094,7 +2094,55 @@ payload 字段含义：
     "group_id": "XXXX", 
     "host": "XXXX", 
     "appkey": "XXXX#XXXX", 
-    "from": "XXXX#XXXX", 
+    "from": "662XXXX13", 
+    "to": "aaa111", 
+    "eventType": "chat", 
+    "msg_id": "976432657191668068", 
+    "timestamp": 1644908244060 
+}
+```
+
+#### 设置群成员的自定义属性
+
+payload 字段含义：
+
+| 字段          | 数据类型 | 含义                                                         |
+| :------------ | :------- | :----------------------------------------------------------- |
+| `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{群组 ID}@conference.easemob.com`。 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。 |
+| `event_info.ext`   | String   | 消息的扩展字段，包含群组成员的自定义属性内容。   |
+| `event_info.type`   | String   | 群组成员的自定义属性类型。    |
+| `operation`   | String   | `group_member_metadata_update`：设置或更新群组成员的自定义属性。  |
+| `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
+| `description` | String   | 操作失败的原因描述。|
+| `error_code`  | String   | 失败对应的错误码。|
+
+此外，`from` 为群组 ID，`to` 为群组成员的用户 ID。
+
+设置群成员的自定义属性的回调请求示例：
+
+```json
+{ 
+    "chat_type": "muc", 
+    "callId": "XXXX#XXXX_976432657191668068", 
+    "security": "f8956ab6d6f78df93efb2dbca5f2eb83", 
+    "payload": { 
+        "muc_id": "XXXX#XXXX@conference.easemob.com", 
+        "is_chatroom": false, 
+        "event_info":{
+           "ext":"{\"result\":{\"successKeys\": [\"key1\",\"key2\"],\"errorKeys\":{}},\"identify\":\"\",\"is_forced\":false,\"muc_name\":\"Take\",\"need_notify\":true, \"properties\":{\"key1\": \"value1\",\"key2\": \"value2 \"}, \"operator \": \"user1\"}",
+           "type":"event_none" 
+        },
+        "operation": "group_member_metadata_update", 
+        "status": { 
+            "description": "", 
+            "error_code": "ok" 
+        } 
+    }, 
+    "group_id": "XXXX", 
+    "host": "XXXX", 
+    "appkey": "XXXX#XXXX", 
+    "from": "662XXXX13", 
     "to": "aaa111", 
     "eventType": "chat", 
     "msg_id": "976432657191668068", 
