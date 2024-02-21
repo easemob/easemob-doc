@@ -14,12 +14,11 @@
 | 批量注册用户 |  POST   | /{org_name}/{app_name}/users       |
 | 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} |
 | 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 
-| 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} |
 | 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/wzy/push/binding |
 | 查询当前用户的所有设备的推送绑定信息    | GET  | /{org_name}/{app_name}/users/wzy/push/binding |
 | 获取指定账号的在线登录设备列表    | GET  | /{org_name}/{app_name}/users/{username}/resources |
 
-以上八个接口的总调用频率（默认值）为 100 次/秒/App Key。
+以上七个接口的总调用频率（默认值）为 100 次/秒/App Key。
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :----------- | :----- | :------------------- | :------------- |
