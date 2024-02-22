@@ -109,7 +109,7 @@ curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
   "new_msg": { 
     "type": "txt",
     "msg": "update message content"
-  }
+  },
   "new_ext": { 
     "key": "value",
     "old_key": "new_value"
