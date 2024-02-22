@@ -69,6 +69,7 @@ const documentSidebar = [
           { text: '删除消息', link: 'message_delete.html' },         
           { text: '实现消息回执', link: 'message_receipt.html'},
           { text: '翻译消息', link: 'message_translation.html' },
+          { text: '只投在线用户', link: 'message_deliver_only_online.html'},
           { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
         ]
       },
@@ -181,7 +182,8 @@ const documentSidebar = [
           { text: '撤回消息', link: 'message_recall.html' },
           { text: '修改消息', link: 'message_modify.html' },
           { text: '删除消息', link: 'message_delete.html' }, 
-          { text: '实现消息回执', link: 'message_receipt.html' },         
+          { text: '实现消息回执', link: 'message_receipt.html' }, 
+          { text: '只投在线用户', link: 'message_deliver_only_online.html'},        
           { text: '翻译消息', link: 'message_translation.html' },
         ]
       },
