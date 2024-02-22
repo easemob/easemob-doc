@@ -136,10 +136,6 @@ curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
       "ext_key1":"ext_value1"
     }
   }
-  "new_ext": { 
-    "key": "value",
-    "old_key": "new_value"
-  }
   "is_combine_ext": true
 }'
 ```
