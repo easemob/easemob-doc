@@ -53,7 +53,9 @@ PUT https://{host}/{org_name}/{app_name}/messages/rewrite/{msg_id}
 | `user`| String | 否 | 修改消息的用户。|
 | `new_msg` | JSON | 是 | 修改后的消息。|
 | `new_msg.type` | String | 是 | 修改的消息类型：<br/> - `txt`：文本消息；<br/> - `custom`：自定义消息。|
-| `new_msg.msg` | String | 是 | 修改后的消息内容。|
+| `new_msg.msg` | String | 是 | 修改后的消息内容。**该字段只对文本消息生效。**|
+| `new_msg.customEvent` | String | 否      | 用户自定义的事件类型。该参数的值必须满足正则表达式 `[a-zA-Z0-9-_/\.]{1,32}`，长度为 1-32 个字符。**该字段只对自定义消息生效。**  |
+| `new_msg.customExts`  | JSON   | 否       | 用户自定义的事件属性，类型必须是 `Map<String,String>`，最多可以包含 16 个元素。**该字段只对自定义消息生效。** |
 | `new_ext` | JSON | 否 | 修改后的消息扩展信息。|
 | `is_combine_ext` | Boolean | 否 | 修改后的消息扩展信息与原有扩展信息是合并还是替换。<br/> - （默认）`true`：合并；<br/> - `false`：替换。|
 
@@ -93,6 +95,8 @@ PUT https://{host}/{org_name}/{app_name}/messages/rewrite/{msg_id}
 
 ### 请求示例
 
+- 修改发送成功的文本消息：
+
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
@@ -105,6 +109,32 @@ curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
   "new_msg": { 
     "type": "txt",
     "msg": "update message content"
+  }
+  "new_ext": { 
+    "key": "value",
+    "old_key": "new_value"
+  }
+  "is_combine_ext": true
+}'
+```
+
+- 修改发送成功的自定义消息：
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+  "user": "user1",
+  "new_msg": { 
+    "type": "custom",
+    "customEvent": "custom_event"
+    "customExts":{
+      "ext_key1":"ext_value1"
+    }
   }
   "new_ext": { 
     "key": "value",
