@@ -5,7 +5,7 @@
 **调用频率**：100 次/秒/App Key
 
 :::tip
-若使用该功能，需联系商务开通。
+若使用该功能，需联系环信商务开通。
 :::
 
 ## 前提条件
@@ -83,7 +83,7 @@ PUT https://{host}/{org_name}/{app_name}/messages/rewrite/{msg_id}
 | `InvalidMessageIdException`  | 400   | The provided message ID is not a valid number.  | 消息 ID 必须是数字。  |
 | `RewriteMessageNotAuthorizedException` | 401  | You are not authorized to edit this message.  | 修改的消息 ID 不属于当前app。   |
 | `EditLimitExceededException` | 403  | The message has reached its edit limit and cannot be modified further.  | 当前消息修改次数达到上限。目前，每条消息最多可修改 10 次。    | 
-| `EditFeatureNotEnabledException`  | 403   | The edit message feature is not enabled for this user or system.   | 消息功能未开通   | 
+| `EditFeatureNotEnabledException`  | 403   | The edit message feature is not enabled for this user or system.   | 消息修改功能未开通。使用该功能前，你需要联系环信商务开通。   | 
 | `MessageUnavailableException`  | 404  | The message is unavailable or has expired.   | 修改的消息不存在或者已经过期。   |
 | `RewriteMessageInternalErrorException` | 500  | An unknown error occurred while processing the request.   | 内部服务异常，修改消息失败。   |
 
