@@ -342,7 +342,7 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 
 | 字段                       | 类型     | 描述             |
 |:-------------------------|:-------|:---------------|
-| `count`                  | Int    | 当前用户的好友数量。     | 
+| `count`                  | Int    | 当前页的好友数量。     | 
 | `data`                   | Object | 返回的好友列表对象。     |
 | `data.contacts`          | Array  | 返回的好友列表数据。      |
 | `data.contacts.remark`   | String | 好友备注。           |
