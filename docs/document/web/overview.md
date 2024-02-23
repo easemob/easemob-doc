@@ -14,16 +14,48 @@
 
 ## 引入 SDK
 
-对于 JavaScript SDK，导入代码如下：
+- 对于 JavaScript SDK，导入代码如下：
 
 ```javascript
 import EC from "easemob-websdk";
 ```
 
-对于 TypeScript SDK，导入代码如下, EasemobChat 是 SDK 类型的命名空间。
+- 对于 TypeScript SDK，导入代码如下, EasemobChat 是 SDK 类型的命名空间。
 
 ```javascript
 import EC, { EasemobChat } from "easemob-websdk";
+```
+
+- 对于服务端渲染框架, 如 Nuxt、Next 等，需要在客户端渲染阶段引入 SDK。
+
+Nuxt 项目, 你可以在 mounted 生命周期动态导入 SDK：
+
+```javascript
+export default {
+  mounted: () => {
+    import("easemob-websdk").then((res) => {
+      const EC = res.default;
+      console.log(EC, "easemob websdk");
+    });
+  }
+};
+```
+
+Next 项目, 要使用客户端组件，你可以在文件顶部的导入上方添加 `use client` 指令。
+
+```tsx
+'use client'
+ 
+import { useEffect } from 'react'
+ 
+export default function Home() {
+  useEffect(() => {
+    import('easemob-websdk').then((res)=>{
+      const EC = res.default;
+      console.log(EC, "easemob websdk");
+   }) 
+  }, [])
+}
 ```
 
 如果对 SDK 大小有要求，可根据功能按需导入 SDK 文件。
