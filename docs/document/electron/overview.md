@@ -4,7 +4,7 @@
 
 目前支持登录、注册、单聊、群聊、聊天室、文本消息、图片、语音、位置等消息以及透传消息，还可以实现好友管理、群组管理等功能。
 
-**注意：**之前的 Windows SDK 将不再维护，同时对应的 demo ，文档也一并下线。如需查看旧版文档，点击[Windows SDK 集成说明](https://docs-im.easemob.com/im/windows/intro/integration)
+**注意：** 之前的 Windows SDK 将不再维护，同时对应的 demo ，文档也一并下线。如需查看旧版文档，点击[Windows SDK 集成说明](https://docs-im.easemob.com/im/windows/intro/integration)
 
 ------
 
