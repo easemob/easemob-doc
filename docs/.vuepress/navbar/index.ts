@@ -176,7 +176,7 @@ export const zhNavbar = navbar([
           {
             text: "Web/小程序",
             icon: "/icon-web.svg",
-            link: "https://docs-im-beta.easemob.com/jsdoc/index.html",
+            link: "https://doc.easemob.com/jsdoc/index.html",
           },
           {
             text: "Windows",

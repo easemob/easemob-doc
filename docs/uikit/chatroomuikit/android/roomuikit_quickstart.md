@@ -92,7 +92,7 @@ class ChatroomActivity : ComponentActivity(){
 }
 ```
 
-3. [添加聊天室成员](https://docs-im-beta.easemob.com/product/enable_and_configure_IM.html#创建聊天室)。
+3. [添加聊天室成员](https://doc.easemob.com/product/enable_and_configure_IM.html#创建聊天室)。
 
 ### 第四步 发送消息
 

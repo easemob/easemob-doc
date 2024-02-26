@@ -31,14 +31,14 @@
 
 2. 一对一音视频还需要用到环信即时通讯云的基础IM功能，请详见文档：
 
-服务器端：[服务端集成](http://docs-im-beta.easemob.com/document/server-side/overview.html)
+服务器端：[服务端集成](http://doc.easemob.com/document/server-side/overview.html)
 
-Android：[Android SDK 介绍及导入](http://docs-im-beta.easemob.com/document/android/quickstart.html)
+Android：[Android SDK 介绍及导入](http://doc.easemob.com/document/android/quickstart.html)
 
-iOS：[iOS SDK 快速集成](http://docs-im-beta.easemob.com/document/ios/quickstart.html)
+iOS：[iOS SDK 快速集成](http://doc.easemob.com/document/ios/quickstart.html)
 
-web端： [Web IM 介绍](http://docs-im-beta.easemob.com/document/web/quickstart.html)
+web端： [Web IM 介绍](http://doc.easemob.com/document/web/quickstart.html)
 
-微信小程序： [微信小程序SDK简介](http://docs-im-beta.easemob.com/document/applet/wechat.html)
+微信小程序： [微信小程序SDK简介](http://doc.easemob.com/document/applet/wechat.html)
 
 PC端： [桌面端集成说明](https://docs-im.easemob.com/im/pc/intro/integration)

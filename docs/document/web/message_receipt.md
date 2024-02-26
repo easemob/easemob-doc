@@ -14,7 +14,7 @@
 
 单聊消息送达回执：
 
-1. SDK 初始化时，用户将 [`Connection` 类中的 `delivery` 参数](https://docs-im-beta.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true` 开启消息送达回执。
+1. SDK 初始化时，用户将 [`Connection` 类中的 `delivery` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true` 开启消息送达回执。
 2. 发送方发送一条消息。
 3. 接收方收到消息后，SDK 会自动向发送方发送送达回执。
 4. 发送方通过监听 `onDeliveredMessage` 收到送达回执。

@@ -70,7 +70,7 @@ jobs:
           accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
           accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
           type: Directory
-          path: https://docs-im-beta.easemob.com/
+          path: https://doc.easemob.com/
           
       - name: CDN Refresh HTTP
         uses: visionwx/ali-cdn-refresh@main
@@ -78,4 +78,4 @@ jobs:
           accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
           accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
           type: Directory
-          path: http://docs-im-beta.easemob.com/
+          path: http://doc.easemob.com/
