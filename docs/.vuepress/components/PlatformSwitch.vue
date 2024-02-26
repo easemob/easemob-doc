@@ -40,6 +40,14 @@ const PLATFORM_ICON_MAP = {
     icon : '/icon-platform.svg',
     activeIcon: '/icon-platform-hover.svg',
   },
+  electron: {
+    icon : '/icon-Electron.svg',
+    activeIcon: '/icon-Electron-hover.svg',
+  },
+  linux: {
+    icon : '/icon-linux.svg',
+    activeIcon: '/icon-linux-hover.svg',
+  },
 }
 
 const platform = ref('android')
@@ -87,6 +95,14 @@ const options = [
       {
         value: 'windows',
         label: 'Windows',
+      },
+      {
+        value: 'electron',
+        label: 'Electron',
+      },
+      {
+        value: 'linux',
+        label: 'Linux',
       },
     ],
   },

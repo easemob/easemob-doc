@@ -6,9 +6,8 @@
 
 :::notice
 
-1. 目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
-2. 私有化版本不支持 Reaction 功能。
-   :::
+目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+:::
 
 ## 技术原理
 
