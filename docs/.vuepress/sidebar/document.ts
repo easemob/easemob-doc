@@ -241,6 +241,45 @@ const documentSidebar = [
     only: ['applet']
   },
   {
+    text: 'SDK 集成介绍',
+    children: [
+      { text: '集成说明', link: 'integration.html' },
+      { text: 'SDK 基础功能', link: 'sdk_basic_function.html' },
+      { text: 'Demo 下载体验', link: 'demo_download.html' },
+      { text: '桌面 SDK API 文档', link: 'sdk_api.html' },
+    ],
+    only: ['electron']
+  },
+  {
+    text: 'IM 基本功能',
+    children: [
+      { text: '消息', link: 'message.html' },
+      { text: '会话管理', link: 'conversation.html' },
+      { text: '好友管理', link: 'contact.html' },
+      { text: '群组', link: 'group.html' },
+      { text: '聊天室管理', link: 'chatroom.html' },
+      { text: '多设备监听', link: 'multi_device.html' },
+      { text: '附录', link: 'annex.html' },
+    ],
+    only: ['electron']
+  },
+  {
+    text: '更新日志',
+    children: [
+      { text: 'SDK 更新日志', link: 'releasenote.html' },
+    ],
+    only: ['electron']
+  },
+  {
+    text: 'Linux SDK 集成介绍',
+    children: [
+      { text: 'Linux SDK 集成说明', link: 'integration.html' },
+      { text: '技术参数', link: 'technical_parameter.html' },
+      { text: 'Linux SDK 更新日志', link: 'releasenote.html' },
+    ],
+    only: ['linux']
+  },
+  {
     text: '服务端 REST API',
     children: [
       { text: '即时通讯 REST API 概览', link: 'overview.html' },
