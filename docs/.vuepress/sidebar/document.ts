@@ -28,7 +28,7 @@ const documentSidebar = [
       { text: 'SDK 集成概述', link: 'overview.html', only: ['android', 'ios', 'web', 'flutter'] },
       { text: 'SDK 集成概述', link: 'overview.html', only: ['windows', 'react-native', 'unity'] },
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
-      { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
+      { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side', 'electron']},
       /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
       { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
       { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
