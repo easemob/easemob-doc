@@ -355,6 +355,10 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em_” 和 “easemob::” 开头的 action 为内部保留字段，注意不要使用。
 
+:::tip
+透传消息发送后，不支持撤回。
+:::
+
 ```csharp
 //`action` 可以自定义。
 string action = "actionXXX";
