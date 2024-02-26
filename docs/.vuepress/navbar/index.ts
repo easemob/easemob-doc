@@ -28,6 +28,16 @@ export const zhNavbar = navbar([
             icon: "/icon-windows.svg",
             link: "/document/windows/quickstart.html",
           },
+          {
+            text: "Electron",
+            icon: "/icon-Electron.svg",
+            link: "/document/electron/integration.html",
+          },
+          {
+            text: "Linux",
+            icon: "/icon-linux.svg",
+            link: "/document/linux/integration.html",
+          },
         ],
       },
       {
