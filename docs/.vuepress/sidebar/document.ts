@@ -28,7 +28,7 @@ const documentSidebar = [
       { text: 'SDK 集成概述', link: 'overview.html', only: ['android', 'ios', 'web', 'flutter'] },
       { text: 'SDK 集成概述', link: 'overview.html', only: ['windows', 'react-native', 'unity'] },
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
-      { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side', 'electron']},
+      { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
       /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
       { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
       { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
@@ -36,7 +36,7 @@ const documentSidebar = [
       { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
       { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
     ],
-    except: ['applet']
+    except: ['applet', 'electron','linux']
   },
   {
     text: '基础功能',
@@ -96,7 +96,7 @@ const documentSidebar = [
         ]
       },
     ],
-    except: ['applet', 'server-side']
+    except: ['applet', 'server-side', 'electron','linux']
   },
   {
     text: '进阶功能',
@@ -115,7 +115,7 @@ const documentSidebar = [
       },
       { text: '消息审核（举报）', link: 'moderation.html'},
     ],
-    except: ['applet','server-side']
+    except: ['applet','server-side','electron','linux']
   },
   {
     text: '其他',
@@ -124,7 +124,7 @@ const documentSidebar = [
       //{ text: 'EaseIMKit 使用指南', link: 'easeimkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
       { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
     ],
-    except: ['applet', 'server-side']
+    except: ['applet', 'server-side','electron','linux']
 
   },
   {
@@ -243,7 +243,7 @@ const documentSidebar = [
   {
     text: 'SDK 集成介绍',
     children: [
-      { text: '集成说明', link: 'integration.html' },
+      { text: '集成说明', link: 'overview.html' },
       { text: 'SDK 基础功能', link: 'sdk_basic_function.html' },
       { text: 'Demo 下载体验', link: 'demo_download.html' },
       { text: '桌面 SDK API 文档', link: 'sdk_api.html' },
@@ -273,7 +273,7 @@ const documentSidebar = [
   {
     text: 'Linux SDK 集成介绍',
     children: [
-      { text: 'Linux SDK 集成说明', link: 'integration.html' },
+      { text: 'Linux SDK 集成说明', link: 'overview.html' },
       { text: '技术参数', link: 'technical_parameter.html' },
       { text: 'Linux SDK 更新日志', link: 'releasenote.html' },
     ],

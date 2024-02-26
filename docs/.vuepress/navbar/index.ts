@@ -31,12 +31,12 @@ export const zhNavbar = navbar([
           {
             text: "Electron",
             icon: "/icon-Electron.svg",
-            link: "/document/electron/integration.html",
+            link: "/document/electron/overview.html",
           },
           {
             text: "Linux",
             icon: "/icon-linux.svg",
-            link: "/document/linux/integration.html",
+            link: "/document/linux/overview.html",
           },
         ],
       },
@@ -182,6 +182,11 @@ export const zhNavbar = navbar([
             text: "Windows",
             icon: "/icon-windows.svg",
             link: "https://sdkdocs.easemob.com/apidoc/unity/annotated.html",
+          },
+          {
+            text: "Electron",
+            icon: "/icon-Electron.svg",
+            link: "https://downloads.easemob.com/doc/desktop/apidoc/index.html",
           },
         ],
       },
