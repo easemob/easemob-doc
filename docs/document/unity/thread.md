@@ -6,10 +6,6 @@
 
 如需查看消息相关内容，参见 [子区消息管理](thread_message.html)。
 
-:::notice
-私有化版本不支持子区功能。
-:::
-
 ## 技术原理
 
 环信即时通讯 IM Unity SDK 提供 `IChatThreadManager`、`ChatThread`、`ChatThreadEvent` 和 `IChatThreadManagerDelegate` 类，用于管理子区，支持你通过调用 API 在项目中实现如下功能：
