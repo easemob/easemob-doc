@@ -68,6 +68,16 @@ export const zhNavbar = navbar([
             icon: "/icon-platform.svg",
             link: "/document/server-side/overview.html",
           },
+          {
+            text: "Java",
+            icon: "/icon-platform.svg",
+            link: "/document/server-side/java_server_sdk.html",
+          },
+          {
+            text: "PHP",
+            icon: "/icon-platform.svg",
+            link: "/document/server-side/php_server_sdk.html",
+          },
         ],
       },
     ],

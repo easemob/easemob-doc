@@ -27,7 +27,7 @@ const documentSidebar = [
       { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
       { text: 'SDK 集成概述', link: 'overview.html', only: ['android', 'ios', 'web', 'flutter'] },
       { text: 'SDK 集成概述', link: 'overview.html', only: ['windows', 'react-native', 'unity'] },
-      { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
+      // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
       { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
       /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
       { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
