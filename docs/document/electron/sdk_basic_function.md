@@ -221,7 +221,7 @@ log.Error("Error Test");
 log.Error(5);
 ```
 
-**注：**由于 EMChatConfig 对象创建时会指定日志输出路径，日志对象的创建一般放到 EMChatConfig 创建之后。
+**注：** 由于 EMChatConfig 对象创建时会指定日志输出路径，日志对象的创建一般放到 EMChatConfig 创建之后。
 
 Windows 桌面端日志生成在 c:/用户/{user}/AppData/Roaming/{ProcessName}/easemob-desktop/easemobLog 路径下的`easemob.log`，{user}为操作系统用户名，{ProcessName}为进程名称，热启动时为**electron**，安装后启动时为**IM-SDK桌面端Demo**。
 
