@@ -28,7 +28,7 @@
 </td>
 <td rowspan="2" width="279">
 <p>1.发送消息时，可选的 `from` 字段用于指定发送方。</p>
-<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://docs-im-beta.easemob.com/document/ios/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">APNs 自定义显示</a>和 <a href="https://docs-im-beta.easemob.com/document/android/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">Android 推送字段说明</a>。</p>
+<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://doc.easemob.com/document/ios/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">APNs 自定义显示</a>和 <a href="https://doc.easemob.com/document/android/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">Android 推送字段说明</a>。</p>
 </td>
 </tr>
 <tr>
@@ -36,7 +36,7 @@
 <p>图片/语音/视频/文件消息</p>
 </td>
 <td width="189">
-<p>1. 调用<a href="https://docs-im-beta.easemob.com/document/server-side/message_download.html#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
+<p>1. 调用<a href="https://doc.easemob.com/document/server-side/message_download.html#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
 <p>2. 调用发送消息方法，在请求 body 中传入该 UUID。</p>
 </td>
 </tr>

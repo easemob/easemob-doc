@@ -180,7 +180,7 @@
 
 ### 初始化设置
 
-加入语聊房前，进行[环信 IM SDK 初始化](http://docs-im-beta.easemob.com/document/android/quickstart.html#实现单聊)和 [Agora Audio 初始化](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_ios_ng?platform=iOS#实现语音通话逻辑)设置。
+加入语聊房前，进行[环信 IM SDK 初始化](http://doc.easemob.com/document/android/quickstart.html#实现单聊)和 [Agora Audio 初始化](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_ios_ng?platform=iOS#实现语音通话逻辑)设置。
 
 ### 加入/离开环信 IM 聊天室或者声网 RTC 频道
 

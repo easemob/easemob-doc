@@ -223,7 +223,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增群组事件回调 [onGroupEvent](https://docs-im-beta.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://docs-im-beta.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
+- [IM SDK] 新增群组事件回调 [onGroupEvent](https://doc.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://doc.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
 - [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](error.html)
 - [IM SDK] 邀请加入群聊回调 onGroupChange 返回中新增 群名称 参数值。
 

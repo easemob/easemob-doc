@@ -78,7 +78,7 @@ let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: "Chat room ID",
 
 ![img](@static/images/uikit/chatroomios/hierarchy.png =800x550)
 
-4. [添加聊天室成员](https://docs-im-beta.easemob.com/product/enable_and_configure_IM.html#创建聊天室)。
+4. [添加聊天室成员](https://doc.easemob.com/product/enable_and_configure_IM.html#创建聊天室)。
 
 ### 第四步 发送第一条消息
 

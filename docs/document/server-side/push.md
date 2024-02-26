@@ -1018,7 +1018,7 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
 }
 ```
 
-接口详情，请参见[发送文本消息](https://docs-im-beta.easemob.com/document/server-side/message_single.html#发送文本消息)。
+接口详情，请参见[发送文本消息](https://doc.easemob.com/document/server-side/message_single.html#发送文本消息)。
 
 ### 删除离线推送模板
  

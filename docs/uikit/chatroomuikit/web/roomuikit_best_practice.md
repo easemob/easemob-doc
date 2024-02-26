@@ -112,7 +112,7 @@ const ChatroomApp = () => {
         if (event.operation === "muteMember") {
           // console.log('你已被禁言')
         }
-        // 全部事件请参考 https://docs-im-beta.easemob.com/document/web/room_manage.html#监听聊天室事件
+        // 全部事件请参考 https://doc.easemob.com/document/web/room_manage.html#监听聊天室事件
       },
     });
   }, []);

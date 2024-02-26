@@ -86,8 +86,8 @@ emedia.config({
 
 ### 5. 环信ID注册、登录
 
-在进行音视频通话前，需要首先登录IM账户，登录过程参见[账号登录](http://docs-im-beta.easemob.com/document/web/overview.html#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95)。<br>
-若您还没有IM账户，需要先注册账户，注册过程参见[账号注册](http://docs-im-beta.easemob.com/document/web/overview.html#%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7)。<br>
+在进行音视频通话前，需要首先登录IM账户，登录过程参见[账号登录](http://doc.easemob.com/document/web/overview.html#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95)。<br>
+若您还没有IM账户，需要先注册账户，注册过程参见[账号注册](http://doc.easemob.com/document/web/overview.html#%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7)。<br>
 
 ### 6. 进入会议
 
