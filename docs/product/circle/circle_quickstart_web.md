@@ -1,5 +1,7 @@
 # 环信超级社区 （Circle） 快速开始
 
+<Toc />
+
 ## 集成准备
 
 使用 Circle 前，确保你已经集成环信即时通讯 IM Web SDK 4.1.4-beta，详见 [环信即时通讯 IM Web 快速开始](/document/web/quickstart.html)。
