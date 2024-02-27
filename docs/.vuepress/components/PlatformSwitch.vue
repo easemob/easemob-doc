@@ -97,10 +97,6 @@ const options = [
         label: 'Windows',
       },
       {
-        value: 'electron',
-        label: 'Electron',
-      },
-      {
         value: 'linux',
         label: 'Linux',
       },
@@ -124,6 +120,10 @@ const options = [
       {
         value: 'applet',
         label: '小程序',
+      },
+      {
+        value: 'electron',
+        label: 'Electron',
       },
     ],
   },
