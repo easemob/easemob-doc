@@ -29,11 +29,6 @@ export const zhNavbar = navbar([
             link: "/document/windows/quickstart.html",
           },
           {
-            text: "Electron",
-            icon: "/icon-Electron.svg",
-            link: "/document/electron/overview.html",
-          },
-          {
             text: "Linux",
             icon: "/icon-linux.svg",
             link: "/document/linux/overview.html",
@@ -67,6 +62,11 @@ export const zhNavbar = navbar([
             text: "uni-app",
             icon: "/icon-uni-app.svg",
             link: "/document/applet/uniapp.html",
+          },
+          {
+            text: "Electron",
+            icon: "/icon-Electron.svg",
+            link: "/document/electron/overview.html",
           },
         ],
       },
@@ -183,11 +183,6 @@ export const zhNavbar = navbar([
             icon: "/icon-windows.svg",
             link: "https://sdkdocs.easemob.com/apidoc/unity/annotated.html",
           },
-          {
-            text: "Electron",
-            icon: "/icon-Electron.svg",
-            link: "https://downloads.easemob.com/doc/desktop/apidoc/index.html",
-          },
         ],
       },
       {
@@ -207,6 +202,11 @@ export const zhNavbar = navbar([
             text: "Unity",
             icon: "/icon-unity.svg",
             link: "https://sdkdocs.easemob.com/apidoc/unity/annotated.html",
+          },
+          {
+            text: "Electron",
+            icon: "/icon-Electron.svg",
+            link: "https://downloads.easemob.com/doc/desktop/apidoc/index.html",
           },
         ],
       },
