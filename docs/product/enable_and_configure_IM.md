@@ -373,6 +373,8 @@
 
 环信即时通讯云控制台支持查询用户设备端的日志，或将设备端的日志上传到环信日志服务器。目前，仅支持使用了高于 3.3.2 的 Android/iOS SDK 的设备。
 
+![img](@static/images/product/enable_and_configure/user_device_log.png)
+
 ### 上传设备日志到环信日志服务器
 
 输入用户 ID 后，点击**下发上传log指令**，服务端将对指定用户设备下发指令：
