@@ -228,7 +228,7 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 
 例如，SDK 在 2024 年 1 月 1 日上午 8:00:00 记录日志时会生成 `easemob.log` 文件，若在 8:30:00 将 `easemob.log` 文件写满则会将其重命名为 `easemob_2024-01-01_08-30-00.log` 文件，随后在 9:30:30 和 10:30:30 分别生成了 `easemob_2024-01-01_09-30-30.log` 和 `easemob_2024-01-01_10-30-30.log` 文件，则此时 `easemob_2024-01-01_08-30-00.log` 文件会被移除。
 
-SDK 默认输出调试信息，如果只需输出错误日志，需要关闭调试模式。
+SDK 默认输出调试信息（所有日志，包括调试信息、警告和错误），如果只需输出错误日志，需要关闭调试模式。
 
 ```java
 // 需要在 SDK 初始化后调用
