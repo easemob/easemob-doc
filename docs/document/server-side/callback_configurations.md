@@ -2353,13 +2353,41 @@ payload 示例：
 }
 ```
 
-### ack 事件
+### 发送会话已读回执
 
-| 事件         | payload 中类型 | 触发事件     |
-| :----------- | :------------- | :----------- |
-| `read_ack`     | 无             | 发送已读回执 |
+回调请求主要字段含义：
 
-#### 发送已读回执
+| 字段          | 数据类型 | 含义                                                         |
+| :------------ | :------- | :----------------------------------------------------------- |
+| chat_type | String    |  会话已读回执。           |
+| payload.ack_message_id | String     | 会话中消息的消息 ID。                  |
+| payload.type | 会话已读回执类型。       |                |
+| from | String          | 发送已读回执的用户。|
+| to | String    |  接收已读回执的用户。                 |
+| msg_id | String      | 已读回执消息的消息 ID。 |
+
+会话已读回执的回调请求示例：
+
+```json
+{
+"callId": "easemob-demo#testy_1252106597610555348",
+"eventType": "chat",  
+"chat_type": "channel_ack", 
+"security": "203e3c86710ebdbd776d8aa9cc057b2d",
+"payload": {
+"ack_message_id": "1252106100258375636", 
+"type": "channel_ack" 
+},
+"host": "easemob@hsb-im-msync0",
+"appkey": "easemob-demo#testy",
+"from": "wzy",   
+"to": "wzy1",   
+"msg_id": "1252106597610555348",  
+"timestamp": 1709093585046
+}
+```
+
+#### 发送消息已读回执
 
 回调请求主要字段含义：
 
