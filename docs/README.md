@@ -68,6 +68,8 @@ projects:
           - link: #
             text: 离线推送
           - link: #
+            text: 即时推送
+          - link: #
             text: 内容审核
       - name: 服务端 API
         links:
@@ -92,8 +94,10 @@ projects:
           - link: #
             text: 离线推送
           - link: #
+            text: 即时推送  
+          - link: #
             text: 内容审核      
-      - name: 单群聊 UIKIT
+      - name: UIKIT-单群聊 
         links:
           - link: #
             text: 会话
@@ -103,7 +107,7 @@ projects:
             text: 群组
           - link: #
             text: 联系人
-      - name: 聊天室 UIKIT
+      - name: UIKIT-聊天室
         links:
           - link: #
             text: 聊天室管理
