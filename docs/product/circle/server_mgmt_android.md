@@ -13,7 +13,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMCircleManager` 类和 `EMCircleServer` 类用于社区管理，支持你通过调用 API 在项目中实现如下功能：
+环信 Circle Android SDK 提供 `EMCircleManager` 类和 `EMCircleServer` 类用于社区管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建和管理社区；
 - 管理社区成员；

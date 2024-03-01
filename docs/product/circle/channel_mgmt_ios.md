@@ -13,7 +13,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM iOS SDK 提供 `IEMCircleManager` 类和 `EMCircleManagerChannelDelegate` 类用于频道管理，支持你通过调用 API 在项目中实现如下功能：
+环信 Circle Android SDK 提供 `IEMCircleManager` 类和 `EMCircleManagerChannelDelegate` 类用于频道管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建和管理频道；
 - 管理频道成员；
