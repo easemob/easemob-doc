@@ -27,7 +27,7 @@ const documentSidebar = [
       { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
       { text: 'SDK 集成概述', link: 'overview.html', only: ['android', 'ios', 'web', 'flutter'] },
       { text: 'SDK 集成概述', link: 'overview.html', only: ['windows', 'react-native', 'unity'] },
-      { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
+      // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
       { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
       /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
       { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
@@ -36,23 +36,41 @@ const documentSidebar = [
       { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
       { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
     ],
-    except: ['applet']
+    except: ['applet', 'electron','linux']
   },
   {
     text: '基础功能',
     children: [
+      {
+        text: '会话管理',
+        collapsible: true,
+        children: [
+          { text: '会话介绍', link: 'conversation_overview.html' },
+          { text: '会话列表', link: 'conversation_list.html' },
+          { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
+          { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
+          { text: '置顶会话', link: 'conversation_pin.html' },
+          { text: '会话标记', link: 'conversation_mark.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
+          { text: '删除会话', link: 'conversation_delete.html' },
+        ]
+      },
       {
         text: '消息管理',
         collapsible: true,
         children: [
           { text: '消息概述', link: 'message_overview.html' },
           { text: '发送和接收消息', link: 'message_send_receive.html' },
-          { text: '管理本地会话和消息', link: 'message_manage.html', except: ['react-native'] },
-          { text: '管理会话和消息', link: 'message_manage.html', only: ['react-native'] },
-          { text: '管理服务端消息', link: 'message_retrieve.html', except: ['react-native'] },
-          { text: '管理消息回执', link: 'message_receipt.html' },
-          { text: '修改消息', link: 'message_modify.html' },
-          { text: '翻译', link: 'message_translation.html' },
+          { text: '获取历史消息', link: 'message_retrieve.html' },
+          { text: '撤回消息', link: 'message_recall.html' },
+          { text: '搜索消息', link: 'message_search.html', except: ['web']},
+          { text: '修改消息', link: 'message_modify.html'},
+          { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
+          { text: '更新消息', link: 'message_update.html', except: ['web']},
+          { text: '删除消息', link: 'message_delete.html' },         
+          { text: '实现消息回执', link: 'message_receipt.html'},
+          { text: '翻译消息', link: 'message_translation.html' },
+          { text: '只投在线用户', link: 'message_deliver_only_online.html'},
+          { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
         ]
       },
       { text: '管理用户属性', link: 'userprofile.html' },
@@ -78,7 +96,7 @@ const documentSidebar = [
         ]
       },
     ],
-    except: ['applet', 'server-side']
+    except: ['applet', 'server-side', 'electron','linux']
   },
   {
     text: '进阶功能',
@@ -97,7 +115,7 @@ const documentSidebar = [
       },
       { text: '消息审核（举报）', link: 'moderation.html'},
     ],
-    except: ['applet','server-side']
+    except: ['applet','server-side','electron','linux']
   },
   {
     text: '其他',
@@ -106,7 +124,15 @@ const documentSidebar = [
       //{ text: 'EaseIMKit 使用指南', link: 'easeimkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
       { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
     ],
-    except: ['applet', 'server-side']
+    except: ['applet', 'server-side','electron','linux']
+
+  },
+  {
+    text: '精简版 SDK',
+    children: [
+      { text: '精简版 SDK 使用说明', link: 'elite_sdk.html' },
+    ],
+    only: ['android', 'ios']
   },
   {
     text: '产品介绍',
@@ -134,15 +160,31 @@ const documentSidebar = [
     children: [
       { text: '初始化及登录', link: 'initialization.html' },
       {
+        text: '会话管理',
+        collapsible: true,
+        children: [
+          { text: '会话介绍', link: 'conversation_overview.html' },
+          { text: '会话列表', link: 'conversation_list.html' },
+          { text: '本地会话', link: 'conversation_local.html' },
+          { text: '会话未读数', link: 'conversation_unread.html' },
+          { text: '置顶会话', link: 'conversation_pin.html' },
+          { text: '会话标记', link: 'conversation_mark.html'},
+          { text: '删除会话', link: 'conversation_delete.html'},
+        ]
+      },
+      {
         text: '消息管理',
         collapsible: true,
         children: [
           { text: '消息概述', link: 'message_overview.html' },
           { text: '发送和接收消息', link: 'message_send_receive.html' },
-          { text: '管理服务端消息', link: 'message_retrieve.html' },
-          { text: '管理消息回执', link: 'message_receipt.html' },
+          { text: '获取历史消息', link: 'message_retrieve.html' },
+          { text: '撤回消息', link: 'message_recall.html' },
           { text: '修改消息', link: 'message_modify.html' },
-          { text: '翻译', link: 'message_translation.html' },
+          { text: '删除消息', link: 'message_delete.html' }, 
+          { text: '实现消息回执', link: 'message_receipt.html' }, 
+          { text: '只投在线用户', link: 'message_deliver_only_online.html'},        
+          { text: '翻译消息', link: 'message_translation.html' },
         ]
       },
       { text: '用户属性', link: 'userprofile.html' },
@@ -199,6 +241,45 @@ const documentSidebar = [
     only: ['applet']
   },
   {
+    text: 'SDK 集成介绍',
+    children: [
+      { text: '集成说明', link: 'overview.html' },
+      { text: 'SDK 基础功能', link: 'sdk_basic_function.html' },
+      { text: 'Demo 下载体验', link: 'demo_download.html' },
+      { text: '桌面 SDK API 文档', link: 'sdk_api.html' },
+    ],
+    only: ['electron']
+  },
+  {
+    text: 'IM 基本功能',
+    children: [
+      { text: '消息', link: 'message.html' },
+      { text: '会话管理', link: 'conversation.html' },
+      { text: '好友管理', link: 'contact.html' },
+      { text: '群组', link: 'group.html' },
+      { text: '聊天室管理', link: 'chatroom.html' },
+      { text: '多设备监听', link: 'multi_device.html' },
+      { text: '附录', link: 'annex.html' },
+    ],
+    only: ['electron']
+  },
+  {
+    text: '更新日志',
+    children: [
+      { text: 'SDK 更新日志', link: 'releasenote.html' },
+    ],
+    only: ['electron']
+  },
+  {
+    text: 'Linux SDK 集成介绍',
+    children: [
+      { text: 'Linux SDK 集成说明', link: 'overview.html' },
+      { text: '技术参数', link: 'technical_parameter.html' },
+      { text: 'Linux SDK 更新日志', link: 'releasenote.html' },
+    ],
+    only: ['linux']
+  },
+  {
     text: '服务端 REST API',
     children: [
       { text: '即时通讯 REST API 概览', link: 'overview.html' },
@@ -213,6 +294,7 @@ const documentSidebar = [
           { text: '上传和下载文件', link: 'message_download.html' },
           { text: '获取历史消息记录', link: 'message_historical.html' },
           { text: '撤回消息和单向删除会话', link: 'message_recall.html' },
+          { text: '修改文本或自定义消息', link: 'message_modify_text_custom.html' },
           { text: '导入消息', link: 'message_import.html' }
         ]
       },

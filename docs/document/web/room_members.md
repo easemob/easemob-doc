@@ -44,7 +44,7 @@ conn.listChatRoomMembers(option).then(res => console.log(res))
 
 #### 成员主动退出聊天室
 
-聊天室所有成员均可以调用 `leaveChatRoom` 退出当前聊天室。成员退出聊天室时，其他成员收到 `memberAbsence` 事件。与群主无法退出群组不同，聊天室所有者可以离开聊天室，如果所有者从服务器下线则 2 分钟后自动离开聊天室。如果所有者重新进入聊天室仍是该聊天室的所有者。
+聊天室所有成员均可以调用 `leaveChatRoom` 退出当前聊天室。成员退出聊天室时，其他成员收到 `memberAbsence` 事件。与群主无法退出群组不同，聊天室所有者可以离开聊天室，退出后重新进入仍是该聊天室的所有者。
 
 示例代码如下：
 
@@ -57,7 +57,7 @@ conn.leaveChatRoom(option).then(res => console.log(res))
 
 #### 成员被移出聊天室
 
-仅聊天室所有者和聊天室管理员可以调用 `removeChatRoomMember` 方法将指定成员移出聊天室。被踢出聊天室后，被踢成员会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 事件。被移出聊天室后，该用户还可以再次加入聊天室。
+仅聊天室所有者和聊天室管理员可以调用 `removeChatRoomMember` 方法将指定的单个成员移出聊天室。被踢出聊天室后，被踢成员会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 事件。被移出聊天室后，该用户还可以再次加入聊天室。
 
 示例代码如下：
 
@@ -237,7 +237,10 @@ conn.unmuteChatRoomMember(option).then(res => console.log(res))
 
 #### 开启全员禁言
 
-仅聊天室所有者和管理员可调用 `disableSendChatRoomMsg` 方法设置全员禁言。全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。调用成功后，聊天室成员会收到 `muteAllMembers` 事件。
+仅聊天室所有者和管理员可调用 `disableSendChatRoomMsg` 方法设置全员禁言。全员禁言开启后不会在一段时间内自动取消禁言，需要调用 `enableSendChatRoomMsg` 方法取消全员禁言。
+
+
+全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。调用成功后，聊天室成员会收到 `muteAllMembers` 事件。
 
 示例代码如下：
 

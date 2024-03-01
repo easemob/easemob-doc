@@ -15,6 +15,7 @@
 - 获取群组详情
 - 获取群成员列表
 - 获取群组列表
+- 查询当前用户已加入的群组数量
 - 屏蔽、解除屏蔽群消息
 - 监听群组事件
 
@@ -207,6 +208,21 @@ try {
     cursor: cursor,
   );
 } on EMError catch (e) {
+}
+```
+
+### 查询当前用户已加入的群组数量
+
+自 4.2.0 版本开始，你可以调用 `EMGroupManager#fetchJoinedGroupCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+
+```dart
+void fetchJoinedGroupCount() async {
+  try {
+    int count =
+        await EMClient.getInstance.groupManager.fetchJoinedGroupCount();
+  } on EMError catch (e) {
+    // error.
+  }
 }
 ```
 

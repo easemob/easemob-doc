@@ -138,7 +138,7 @@ do {
 
    ```objective-c
    [[EMClient sharedClient].groupManager acceptInvitationFromGroup:@"groupId" inviter:@"userId" completion:^(EMGroup *aGroup, EMError *aError) {
-   };
+   }];
    ```
 
    - 受邀人拒绝入群组，需要调用 `declineGroupInvitation` 方法。
@@ -166,15 +166,15 @@ do {
 
 #### 群成员被移出群组
 
-仅群主和群管理员可以调用 `removeMembers` 方法将指定成员移出群组。被踢出群组后，被踢群成员将会收到群组事件回调 `EMGroupManagerDelegate#didLeaveGroup`，其他成员将会收到回调 `EMGroupManagerDelegate#userDidLeaveGroup`。被移出群组后，该用户还可以再次加入群组。
+仅群主和群管理员可以调用 `removeMembers` 方法将单个或多个成员移出群组。被踢出群组后，被踢群成员将会收到群组事件回调 `EMGroupManagerDelegate#didLeaveGroup`，其他成员将会收到回调 `EMGroupManagerDelegate#userDidLeaveGroup`。被移出群组后，该用户还可以再次加入群组。
 
 示例代码如下：
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient].groupManager removeMembers:@{@"member"}
-                         fromGroup:@"groupsID"
-                         completion:nil];
+ [EMClient.sharedClient.groupManager removeMembers:@[@"member1",@"member2"] fromGroup:@"groupId" completion:^(EMGroup * _Nullable aGroup, EMError * _Nullable aError) {
+            
+    }];
 ```
 
 ### 管理群成员的自定义属性
@@ -390,6 +390,7 @@ do {
 
 ```objectivec
 // 异步方法
+// `muteMilliseconds`：禁言时间。传 -1 表示永久禁言。
 [[EMClient sharedClient].groupManager muteMembers:members
                          muteMilliseconds:60
                          fromGroup:@"groupID"
@@ -425,9 +426,11 @@ do {
 
 #### 开启群组全员禁言
 
-仅群主和群管理员可以调用 `muteAllMembersFromGroup` 方法开启全员禁言。
+仅群主和群管理员可以调用 `muteAllMembersFromGroup` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unmuteAllMembersFromGroup` 方法解除全员禁言。
 
 群主和群管理员开启群组全员禁言后，除了白名单中的群成员，其他成员将不能发言。开启群组全员禁言后，群成员会收到群组事件回调 `EMGroupManagerDelegate#groupAllMemberMuteChanged`。
+
+群组全员禁言状态（`EMGroup#isMuteAllMembers`）存储在本地数据库中，下次登录时可以直接从本地获取到。
 
 示例代码如下：
 

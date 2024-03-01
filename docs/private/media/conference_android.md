@@ -255,8 +255,8 @@ EMConferenceListener listener = new EMConferenceListener() {
 
 ### 8. 加入会议
 
-在进行音视频通话前，需要首先登录IM账户，登录过程参见[账号登录](http://docs-im-beta.easemob.com/document/android/overview.html#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95)。<br>
-若您还没有IM账户，需要先注册账户，注册过程参见[账号注册](http://docs-im-beta.easemob.com/document/android/overview.html#%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7)。<br>
+在进行音视频通话前，需要首先登录IM账户，登录过程参见[账号登录](http://doc.easemob.com/document/android/overview.html#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95)。<br>
+若您还没有IM账户，需要先注册账户，注册过程参见[账号注册](http://doc.easemob.com/document/android/overview.html#%E6%B3%A8%E5%86%8C%E7%94%A8%E6%88%B7)。<br>
 登录环信ID以后，可以加入会议了，通过 [EMConferenceManager#joinRoom](http://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conference_manager.html#a8940f54febf2086ccd978d75980c7763) API加入房间。<br>
 - 创建会议成功以后，默认超时时间为三分钟，超过三分钟没有人加入，会议会自动销毁；
 - 另外当会议中所有人离开2分钟后，会议也会被销毁；

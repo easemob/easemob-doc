@@ -1,15 +1,19 @@
-
-### 发送聊天室消息
+# 发送聊天室消息
 
 本文展示如何调用环信 IM RESTful API 在服务端实现聊天室场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
 
 聊天室场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异，发送方式与单聊类似，详见[发送单聊消息](message_single.html)。
 
-:::notice
-接口调用过程中，请求体若超过 5 KB 会导致 413 错误，需要拆成几个较小的请求体重试。同时，请求体和扩展字段的总长度不能超过 3 KB。
+:::tip
+1. 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
+2. 聊天室中发消息时，不会同步给发送方。
 :::
 
-**发送频率**：通过 RESTful API 单个应用每秒最多可向聊天室发送 100 条消息，每次最多可向 10 个聊天室发送消息。例如，一次向 10 个聊天室发送消息，视为 10 条消息。
+**发送频率**：对于单个应用来说，调用该 API 每次最多可向 10 个聊天室发送消息，而且该 API 存在以下两个限制：
+
+- 每秒最多可发送 100 条消息：例如，你每次向 10 个聊天室发送消息，即发送了 10 条消息，你每秒最多可调用 10 次该接口。第 11 次调用时，则报 403 错误。
+
+- 每秒最大可调用 20 次：例如，你每次调用该 API 向单个聊天室发送消息，可调用 20 次，第 21 次调用时会报 429 错误。
 
 对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。 当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
 
@@ -81,13 +85,11 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :--------------- |
-| `from`          | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为管理员，即 “admin”；若传入字段但值为空字符串 (“”)，请求失败。  |
-| `to`            | Array   | 是       | 消息接收方聊天室 ID 数组。每次最多可向 10 个聊天室发送消息。 |
+| `from`          | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为 `admin`。<Container type="tip" title="提示">1. 服务器不校验传入的用户 ID 是否存在，因此，如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。<br/>2. 若传入字段但值为空字符串 (“”)，请求失败。</Container>   |
+| `to`            | Array   | 是       | 消息接收方聊天室 ID 数组。每次最多可向 10 个聊天室发送消息。<Container type="tip" title="提示">服务器不校验传入的聊天室 ID 是否存在，因此，如果你传入的聊天室 ID 不存在，服务器并不会提示，仍照常发送消息。</Container>  |
 | `chatroom_msg_level` | String | 否       | 聊天室消息优先级：<br/> - `high`：高； <br/> - （默认）`normal`：普通；<br/> - `low`：低。 |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
-| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。      |
-| `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。  |
 | `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
 
 请求体中的 `body` 字段说明详见下表。
@@ -114,8 +116,6 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 #### 请求示例
 
-发送给目标用户，消息无需同步给发送方：
-
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
@@ -130,27 +130,6 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
   "body": {
     "msg": "testmessages"
   }
-}'
-```
-
-仅发送给在线用户，消息同步给发送方：
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
--H 'Content-Type: application/json' \
--H 'Accept: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-  "from": "user1",
-  "to": ["185145305923585"],
-  "type": "txt",
-  "body": {
-    "msg": "testmessages"
-  },
-  "routetype":"ROUTE_ONLINE", 
-  "sync_device":true
 }'
 ```
 
@@ -200,7 +179,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------- |
-| `filename` | String | 是       | 图片名称。          |
+| `filename` | String | 否       | 图片名称。建议传入该参数，否则客户端收到图片消息时无法显示图片名称。           |
 | `secret`   | String | 否       | 图片的访问密钥，即成功上传图片后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果图片文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `size`     | JSON   | 否       | 图片尺寸，单位为像素，包含以下字段：<br/> - `height`：图片高度；<br/> - `width`：图片宽度。   |
 | `url`      | String | 是       | 图片 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
@@ -292,7 +271,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 | 参数       | 类型   | 是否必需 | 描述      |
 | :--------- | :----- | :------- | :---------- |
-| `filename` | String | 是       | 语音文件的名称。    |
+| `filename` | String | 否       | 语音文件的名称。建议传入该参数，否则客户端收到语音消息时无法显示语音文件名称。    |
 | `secret`   | String | 否       | 语音文件访问密钥，即成功上传语音文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。 如果语音文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `Length`   | Int    | 否      | 语音时长，单位为秒。         |
 | `url`      | String | 是       | 语音文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为文件 ID，成功上传语音文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
@@ -313,7 +292,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -381,7 +360,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 | 参数           | 类型   | 是否必需 | 描述    |
 | :------------- | :----- | :------- | :---------------- |
-| `filename` | String | 是 | 视频文件名称。|
+| `filename` | String | 否 | 视频文件名称。建议传入该参数，否则客户端收到视频消息时无法显示视频文件名称。|
 | `thumb`        | String | 否       | 视频缩略图 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为视频缩略图唯一标识，成功上传缩略图文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
 | `length`       | Int    | 否       | 视频时长，单位为秒。  |
 | `secret`       | String | 否       | 视频文件访问密钥，即成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果视频文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。        |
@@ -405,7 +384,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -473,7 +452,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 | 参数       | 类型   | 是否必需 | 描述     |
 | :--------- | :----- | :------- | :------------ |
-| `filename` | String | 是       | 文件名称。   |
+| `filename` | String | 否      | 文件名称。建议传入该参数，否则客户端收到文件消息时无法显示文件名称。   |
 | `secret`   | String | 否       | 文件访问密钥，即成功上传文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。      |
 | `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
 
@@ -493,7 +472,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -579,7 +558,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -664,7 +643,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -748,7 +727,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -762,6 +741,9 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
   "type": "custom",
   "body": {
     "customEvent": "custom_event"
+    "customExts":{
+            "ext_key1":"ext_value1"
+        }
   }
 }'
 ```
@@ -821,7 +803,6 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/users
 | `chatroom_msg_level` | String | 否       | 聊天室消息优先级：<br/> - `high`：高； <br/> - （默认）`normal`：普通；<br/> - `low`：低。 |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
-| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。      |
 | `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
 | `users` | Array | 是       | 接收消息的聊天室成员的用户 ID 数组。每次最多可传 20 个用户 ID。 |
 
@@ -851,8 +832,6 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/users
 
 #### 请求示例
 
-发送给目标用户，消息无需同步给发送方：
-
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
@@ -867,27 +846,6 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
   "body": {
     "msg": "testmessages"
   },
-  "users": ["user2", "user3"]
-}'
-```
-
-仅发送给在线用户，消息同步给发送方：
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
--H 'Content-Type: application/json' \
--H 'Accept: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-  "from": "user1",
-  "to": ["185145305923585"],
-  "type": "txt",
-  "body": {
-    "msg": "testmessages"
-  },
-  "sync_device": true,
   "users": ["user2", "user3"]
 }'
 ```
@@ -945,7 +903,6 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/broadcast
 | `msg.type` | String | 是 | 广播消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `msg.msg` | String | 是 | 消息内容。  |
 | `ext`           | JSON   | 否       | 广播消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
-| `sync_device`   | Bool   | 否       | 广播消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。      |
 
 不同类型的消息的请求体只在 `msg` 字段有差别，其他参数相同。除了 `type` 字段，`msg` 字段中包含的参数与发送聊天室消息的请求体中的 `body` 字段含义相同，详见各类消息的参数说明。
 - [发送图片消息](#发送图片消息)
@@ -993,7 +950,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1021,7 +977,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1046,7 +1001,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1073,7 +1027,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1097,7 +1050,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1121,7 +1073,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1143,7 +1094,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```
@@ -1165,7 +1115,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
     "ext": {
         "extKey": "extValue"
     },
-    "sync_device": false,
     "chatroom_msg_level": "low"
 }'
 ```

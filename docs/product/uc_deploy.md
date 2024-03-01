@@ -58,7 +58,7 @@
 
 ## 3、集成测试
 
-当服务端验证完成后，可通过下载需要的客户端 SDK 及 Demo 进行集成体验。环信客户端 SDK 已对  IM 核心服务完成封装， 通过调用 SDK API 接口，即可快速获得消息收发 、会话管理 、群组 、好友 、聊天室等功能。目前客户端 SDK 已覆盖 Windows 、Linux 、MacOS 、Android 、iOS 、Web 、小程序等多种平台，服务器端 SDK 已覆盖 Java 、PHP 等平台，[下载私有化客户端 SDK](http://docs-im-beta.easemob.com/product/uc_private.html#私有化-sdk-下载)。
+当服务端验证完成后，可通过下载需要的客户端 SDK 及 Demo 进行集成体验。环信客户端 SDK 已对  IM 核心服务完成封装， 通过调用 SDK API 接口，即可快速获得消息收发 、会话管理 、群组 、好友 、聊天室等功能。目前客户端 SDK 已覆盖 Windows 、Linux 、MacOS 、Android 、iOS 、Web 、小程序等多种平台，服务器端 SDK 已覆盖 Java 、PHP 等平台，[下载私有化客户端 SDK](http://doc.easemob.com/product/uc_private.html#私有化-sdk-下载)。
 
 示例一：以 Android 端 demo 体验为例
 

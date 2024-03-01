@@ -80,13 +80,15 @@ message.priority = EMChatRoomMessagePriorityHigh;
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
+若初始化时打开了 `EMOptions#useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。该属性只能在调用 `initializeSDKWithOptions` 时设置，而且 app 运行过程中不能修改该参数的设置。
+
 ### 接收消息
 
 你可以用注册监听 `EMChatManagerDelegate` 接收消息。该 `EMChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除 `Delegate`，如在`ViewController` `dealloc()` 时。
 
-在新消息到来时，你会收到 `messagesDidReceive` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
+在新消息到来时，你会收到 `messagesDidReceive` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `EMOptions#includeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
 
-对于聊天室消息，你可以通过消息的 `EMChatMessage#broadcast` 属性判断通过该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+对于聊天室消息，你可以通过消息的 `EMChatMessage#broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
 ```objectivec
 // 添加代理。
@@ -108,33 +110,6 @@ message.priority = EMChatRoomMessagePriorityHigh;
   {
   [[EMClient sharedClient].chatManager removeDelegate:self];
   }
-
-```
-
-### 撤回消息
-
-发送方可以撤回一条发送成功的消息。调用 API 撤回消息后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `messagesInfoDidRecall` 事件。
-
-默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
-
-```objectivec
-// 异步方法
-[[EMClient sharedClient].chatManager recallMessageWithMessageId:messageId completion:^(EMError *aError) {
-    if (!aError) {
-        NSLog(@"撤回消息成功");
-    } else {
-        NSLog(@"撤回消息失败的原因 --- %@", aError.errorDescription);
-    }
-}];
-```
-
-#### 设置消息撤回回执
-
-```objectivec
-- (void)messagesDidRecall:(NSArray *)aMessages
-{
-    // `aMessages` 为被撤回的消息列表
-}
 ```
 
 ### 发送和接收附件类型的消息
@@ -336,9 +311,13 @@ message.chatType = EMChatTypeGroupChat;
 
 ### 发送透传消息
 
-可以把透传消息理解为一条指令，通过发送这条指令给对方，通知对方要执行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。另外，以 “em_” 和 “easemob::” 开头的 `action` 为内部保留字段，注意不要使用。
+可以把透传消息理解为一条指令，通过发送这条指令给对方，通知对方要执行的操作，收到消息可以自定义处理。（透传消息不会存入本地数据库中，所以在 UI 上不会显示）。具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 “em_” 和 “easemob::” 开头的 `action` 为内部保留字段，注意不要使用。
 
 透传消息适用于更新头像、更新昵称等场景。
+
+:::tip
+透传消息发送后，不支持撤回。
+:::
 
 ```objectivec
 // `action` 自定义 `NSString` 类型的命令内容。
@@ -381,7 +360,7 @@ EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:action];
 - 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
 - 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
 
-:::notice
+:::tip
 用户 A 可根据需要设置透传消息发送间隔。
 :::
 
@@ -494,19 +473,19 @@ message.chatType = EMChatTypeGroupChat;
 
 创建合并消息体时，需要设置以下参数：
 
-| 属性             | 类型   | 描述                                                                                                                                                                                       |
-| :--------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `title`          | String | 合并消息的标题。                                                                                                                                                                           |
-| `summary`        | String | 合并消息的概要。                                                                                                                                                                           |
+| 属性             | 类型   | 描述           |
+| :--------------- | :----- | :------------------------------- |
+| `title`          | String | 合并消息的标题。      |
+| `summary`        | String | 合并消息的概要。      |
 | `compatibleText` | String | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。 |
-| `messageIdList`  | List   | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。                                                                                                                                 |
+| `messageIdList`  | List   | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。       |
 
-:::notice
+:::tip
 
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
 2. 只有成功发送或接收的消息才能合并转发。
 3. 不论 `EMOptions#isAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
-   :::
+:::
 
 示例代码如下：
 
@@ -552,7 +531,7 @@ EMChatMessage* msg = [[EMChatMessage alloc] initWithConversationID:@"conversatio
 
 该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
 
-:::notice
+:::tip
 1. 仅 SDK 4.0.3 及以上版本支持。
 2. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息数。
 3. 定向消息不支持消息漫游功能，因此从服务器拉取漫游消息时，不包含定向消息。

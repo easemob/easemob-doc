@@ -164,9 +164,9 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :------- | :---------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。    |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
@@ -225,15 +225,15 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                 |
-| :-------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Content-Type`  | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述     |
+| :-------------- | :----- | :--------------------- | :--------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。    |
+| `Authorization` | String | 是         | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### 请求 body
 
 | 参数         | 类型  | 是否必需 | 描述                                                                       |
-| :----------- | :---- | :------- | :------------------------------------------------------------------------- |
+| :----------- | :---- | :------- | :-------------------- |
 | `targets`    | Array | 是       | 用户 ID 列表，最多可传 100 个用户 ID。                                     |
 | `properties` | Array | 是       | 属性名列表，查询结果只返回该列表中包含的属性，不在该列表中的属性将被忽略。 |
 
@@ -258,7 +258,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type:  application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
+curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
   "properties": [
     "avatarurl",
     "ext",

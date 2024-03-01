@@ -65,7 +65,7 @@
 
 2. 受邀用户需要确认才能进群。
 
-只有 `AgoraChatGroupOptions#IsInviteNeedConfirm` 设置为 `true` 和 `isAutoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `EMGroupManagerDelegate#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
+只有 `EMGroupOptions#IsInviteNeedConfirm` 设置为 `true` 和 `isAutoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `EMGroupManagerDelegate#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
 
 - 用户同意入群邀请后，邀请人收到 `EMGroupManagerDelegate#groupInvitationDidAccept` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调；其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
 - 用户拒绝入群邀请后，邀请人收到 `EMGroupManagerDelegate#groupInvitationDidDecline` 回调。
@@ -115,7 +115,8 @@ NSArray *members = @{@"member1",@"member2"};
 ### 获取群组详情
 
 :::notice
-从 3.7.4 版本开始支持是否获取群组成员参数 `fetchMembers` 。
+从 3.7.4 版本开始支持是否获取群组成员参数 `fetchMembers`。
+对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
 :::
 
 群成员也可以调用 `getGroupSpecificationFromServerWithId` 方法从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用。另外，若将该方法的 `fetchMembers` 参数设置为 `true`，可获取群成员列表，默认最多包括 200 个成员。
@@ -216,7 +217,7 @@ do {
 
 ### 查询当前用户已加入的群组数量
 
-你可以调用 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于你订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+自 4.2.0 版本开始，你可以调用 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于你订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
 
 ```objectivec
 [EMClient.sharedClient.groupManager getJoinedGroupsCountFromServerWithCompletion:^(NSInteger groupCount, EMError * _Nullable aError) {

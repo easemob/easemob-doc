@@ -6,7 +6,7 @@
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
-- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请和删除好友等操作。
+- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请、删除好友和设置好友备注等操作。
 - 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。
 
 本文介绍如何通过环信即时通讯 IM Flutter SDK 管理用户关系。
@@ -19,8 +19,12 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 - `deleteContact` 删除好友；
 - `acceptInvitation` 同意好友申请；
 - `declineInvitation` 拒绝好友申请；
-- `getAllContactsFromServer` 从服务器获取好友列表；
-- `getAllContactsFromDB` 从本地数据库中获取好友列表；
+- `setContactRemark` 设置好友备注；
+- `fetchAllContacts`/`fetchContacts`：一次性/分页从服务器获取好友列表（每个好友对象包含好友的用户 ID 和好友备注）；
+- `fetchAllContactIds` 一次性从服务器获取好友列表(列表只包含好友的用户 ID)；
+- `getContact`：获取本地单个好友（单个好友的用户 ID 和好友备注）；
+- `getAllContacts`：一次性获取本地好友列表（每个好友对象包含好友的用户 ID 和好友备注）；
+- `getAllContactIds`：一次性获取本地好友列表（列表只包含好友的用户 ID）；
 - `addUserToBlockList` 添加用户到黑名单；
 - `removeUserFromBlockList` 将用户从黑名单移除；
 - `getBlockListFromServer` 从服务器获取黑名单列表。
@@ -34,8 +38,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ## 实现方法
 
-### 管理好友列表
-#### 添加好友
+### 添加好友
 
 1. 用户添加指定用户为好友
 
@@ -104,21 +107,7 @@ EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
     EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
-#### 获取好友列表
-
-1. 从服务器获取好友列表
-
-```dart
-List<String> contacts = await EMClient.getInstance.contactManager.getAllContactsFromServer();
-```
-
-2. 从本地数据库中获取好友列表
-
-```dart
-List<String> contacts = await EMClient.getInstance.contactManager.getAllContactsFromDB();
-```
-
-#### 删除好友
+### 删除好友
 
 删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
@@ -138,13 +127,125 @@ try {
 }
 ```
 
-### 管理黑名单
+### 设置好友备注
+
+自 4.2.0 版本开始，你可以调用 `asyncSetContactRemark` 方法设置单个好友的备注。
+
+好友备注的长度不能超过 100 个字符。
+
+```dart
+void updateRemark(String userId, String newRemark) async {
+  try {
+    await EMClient.getInstance.contactManager.setContactRemark(
+      userId: userId,
+      remark: newRemark,
+    );
+  } on EMError catch (e) {
+    // error.
+  }
+}
+```
+
+### 从服务端获取好友列表
+
+自 4.2.0 版本开始，你可以调用 `fetchAllContactsFromServer` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+
+- 一次性获取服务端好友列表。
+
+```dart
+void fetchAllContactsFromServer() async {
+  try {
+    List<EMContact> list = await EMClient.getInstance.contactManager.fetchAllContacts();
+  } on EMError catch (e) {
+    // error.
+  }
+}
+```
+
+- 分页获取服务端好友列表。
+
+```dart
+// pageSize 的取值范围为 [1,50]
+void fetchContactsFromServer(String cursor, int pageSize) async {
+  try {
+    EMCursorResult<EMContact> result =
+        await EMClient.getInstance.contactManager.fetchContacts(
+      cursor: cursor,
+      pageSize: pageSize,
+    );
+  } on EMError catch (e) {
+    // error.
+  }
+}
+```
+
+此外，你也可以调用 `fetchAllContactIds` 方法从服务器获取所有好友的列表，该列表只包含好友的用户 ID。
+
+```dart
+void fetchAllContactIds() async {
+  try {
+    List<String> userIds =
+        await EMClient.getInstance.contactManager.fetchAllContactIds();
+  } on EMError catch (e) {
+    // error.
+  }
+}
+```
+
+### 从本地获取好友列表
+
+自 4.2.0 版本开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+
+:::tip
+需要从服务器获取好友列表之后，才能从本地获取到好友列表。
+:::
+
+- 获取本地单个好友。
+
+```dart
+void getLocalContact(String userId) async {
+  try {
+    EMContact? contact =
+        await EMClient.getInstance.contactManager.getContact(userId: userId);
+  } on EMError catch (e) {
+    // error.
+  }
+}
+```
+
+- 一次性获取本地好友列表。
+
+```dart
+void getAllLocalContact() async {
+  try {
+    List<EMContact> contacts =
+        await EMClient.getInstance.contactManager.getAllContacts();
+  } on EMError catch (e) {
+    // error.
+  }
+}
+```
+
+此外，你也可以调用 `getAllContactIds` 方法从本地一次性获取所有好友的列表，该列表只包含好友的用户 ID。
+
+示例代码如下：
+
+```dart
+void getAllLocalContactIds() async {
+  try {
+    List<String> userIds =
+        await EMClient.getInstance.contactManager.getAllContactIds();
+  } on EMError catch (e) {
+    // error.
+  }
+}
+```
+
+#### 将用户加入黑名单
 
 黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。
 
 黑名单功能包括加入黑名单，从黑名单移出用户和获取黑名单列表。对于获取黑名单，你可从服务器获取黑名单列表，也可从本地数据库获取已保存的黑名单列表。
-
-#### 将用户加入黑名单
 
 你可以调用 `addUserToBlockList` 将指定用户加入黑名单。用户被加入黑名单后将无法向你发送消息，也无法发送好友申请。
 
@@ -159,7 +260,7 @@ try {
 }
 ```
 
-#### 查看当前用户黑名单列表
+### 查看当前用户黑名单列表
 
 1. 通过服务器获取黑名单列表
 
@@ -183,7 +284,7 @@ try {
 }
 ```
 
-#### 将用户从黑名单移除
+### 将用户从黑名单移除
 
 你可以调用 `removeUserFromBlockList` 将用户从黑名单移除，用户发送消息等行为将恢复。
 

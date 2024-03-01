@@ -93,7 +93,7 @@ try {
 
 #### 上传共享文件
 
-所有群组成员均可以调用 `EMGroupManager#uploadGroupSharedFile` 方法上传共享文件至群组，群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `EMGroupEventHandler#onSharedFileAddedFromGroup` 事件。
+所有群组成员均可以调用 `EMGroupManager#uploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `EMGroupEventHandler#onSharedFileAddedFromGroup` 事件。
 
 示例代码如下：
 

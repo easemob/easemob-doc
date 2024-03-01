@@ -648,9 +648,13 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ### 批量删除用户
 
-删除某个 App 下指定数量的用户账号。建议一次删除的用户数量不要超过 100。需要注意的是，这里只指定了要删除的用户数量，并未指定要删除的具体用户，你可以在响应中查看删除的用户。
+删除某个 App 下指定数量的用户账号。建议一次删除的用户数量不要超过 100。
 
-如果删除的多个用户中包含群组或者聊天室的管理员，该用户管理的群组和聊天室也会相应删除。
+需要注意的是，这里只指定了要删除的用户数量，并未指定要删除的具体用户，你可以在响应中查看删除的用户。如果删除的多个用户中包含群组或者聊天室的管理员，该用户管理的群组和聊天室也会相应删除。若删除了群主或聊天室所有者，对应的群组或聊天室会解散。
+
+:::tip
+该 API 用于删除你在集成了即时通讯 IM 后上线前的测试阶段创建的用户。
+:::
 
 #### HTTP 请求
 
@@ -986,7 +990,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/resources
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl --location 'http://XXXX/XXXX/XXXX/users/XXXX/resources' \
 -H 'Accept: application/json' \
--H 'Authorization: Bearer  <YourAppToken>'
+-H 'Authorization: Bearer <YourAppToken>'
 ```
 
 #### 响应示例

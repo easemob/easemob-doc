@@ -1,5 +1,7 @@
 # 管理社区及其成员
 
+<Toc />
+
 社区（Server）是一群有着共同兴趣爱好的人的专属天地，也可以是同学朋友的社交圈子。社区是环信圈子三层基础架构的最上层，各种消息事件均发生在社区内。社区分为公开社区和私密社区。用户可查询公开社区列表，但无法查询私密社区列表。
 
 **超级社区中的频道基于即时通讯 IM 的群组或聊天室（频道 ID 为群组 ID 或聊天室 ID）创建，删除群组或聊天室时需注意以下几点：**
@@ -13,8 +15,8 @@
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](http://docs-im-beta.easemob.com/document/server-side/enable_and_configure_IM.html)。
-- 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](http://docs-im-beta.easemob.com/product/limitationapi.html)。
+- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](http://doc.easemob.com/document/server-side/enable_and_configure_IM.html)。
+- 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](http://doc.easemob.com/product/limitationapi.html)。
 
 ## 公共参数
 
@@ -22,9 +24,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述                                                         |
 | :--------- | :----- | :------- | :----------------------------------------------------------- |
-| `host`       | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见[获取环信即时通讯 IM 的信息](http://docs-im-beta.easemob.com/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name`   | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见[获取环信即时通讯 IM 的信息](http://docs-im-beta.easemob.com/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `app_name`   | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见[获取环信即时通讯 IM 的信息](http://docs-im-beta.easemob.com/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `host`       | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见[获取环信即时通讯 IM 的信息](http://doc.easemob.com/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `org_name`   | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见[获取环信即时通讯 IM 的信息](http://doc.easemob.com/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `app_name`   | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见[获取环信即时通讯 IM 的信息](http://doc.easemob.com/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
 | `server_id` | String | 是       | 社区 ID。                                                  |
 | `channel_id` | String | 是       | 频道 ID。                                                 |
 | `user_id`  | String | 是       | 用户 ID。                                                    |
@@ -60,7 +62,7 @@
 
 Authorization：`Bearer ${YourAppToken}`
 
-为提高项目的安全性，环信使用 App Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 需使用 App Token 的鉴权方式，详见 [使用环信 App Token 鉴权](http://docs-im-beta.easemob.com/product/easemob_app_token.html)。
+为提高项目的安全性，环信使用 App Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 需使用 App Token 的鉴权方式，详见 [使用环信 App Token 鉴权](http://doc.easemob.com/product/easemob_app_token.html)。
 
 ### 查询环信超级社区用户是否存在
 
@@ -94,7 +96,7 @@ GET https://{host}/{org_name_}/{app_name}/circle/user/{user_id}
 | `code`   | Int     | 环信超级社区的服务状态码。                               |
 | `result` | Boolean | 查询结果：<br/> - `true`：用户存在；<br/> - `false`：用户不存在。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -157,7 +159,7 @@ GET https://{host}/{org_name}/{app_name}/circle/server/list/by-app?limit={limit}
 
 其他字段及描述详见[公共参数](https://docs-im.easemob.com/ccim/circle/rest/channelapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -243,7 +245,7 @@ POST https://{host}/{org_name}/{app_name}/circle/server
 | `code`      | Int    | 环信超级社区的服务状态码。 |
 | `server_id` | String | 社区 ID。         |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -320,7 +322,7 @@ PUT https://{host}/{org_name}/{app_name}/circle/server/{server_id}
 
 其他字段及描述详见 [公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -404,7 +406,7 @@ POST https://{host}/{org_name}/{app_name}/circle/server/{server_id}/tag/add
 
 其他字段及描述详见[公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -466,7 +468,7 @@ GET https://{host}/{org_name}/{app_name}/circle/server/{server_id}/tag
 
 其他字段及描述详见[公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -530,7 +532,7 @@ POST https://{host}/{org_name}/{app_name}/circle/server/{server_id}/tag/remove
 | :--- | :--- | :------------------ |
 | `code` | Int  | 环信超级社区的服务状态码。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -598,7 +600,7 @@ GET https://{host}/{org_name}/{app_name}/circle/server/search/{name}?type=0&limi
 
 其他字段及描述详见[公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -667,7 +669,7 @@ GET https://{host}/{org_name}/{app_name}/circle/server/{server_id}/by-id
 
 其他字段及描述详见[公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -741,7 +743,7 @@ GET https://{host}/{org_name}/{app_name}/circle/server/recommend/list
 
 其他字段及描述详见[公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -827,7 +829,7 @@ GET https://{host}/{org_name}/{app_name}/circle/server/list?userId={user_id}&lim
 
 其他字段及描述详见[公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -900,7 +902,7 @@ DELETE https://{host}/{org_name}/{app_name}/circle/server/{server_id}
 | :--- | :--- | :------------------ |
 | `code` | Int  | 环信超级社区的服务状态码。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -964,7 +966,7 @@ GET https://{host}/{org_name}/{app_name}/circle/server/{server_id}/users?limit={
 
 其他字段及描述详见[公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -1025,7 +1027,7 @@ GET https://{host}/{org_name}/{app_name}/circle/server/{server_id}/users/count
 
 其他字段及描述详见[公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -1088,7 +1090,7 @@ POST https://{host}/{org_name}/{app_name}/circle/server/{server_id}/join?userId=
 
 其他字段及描述详见[公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -1217,7 +1219,7 @@ GET https://{host}/{org_name}/{app_name}/circle/server/{server_id}/user/role?use
 
 其他字段及描述详见 [公共参数](https://docs-im.easemob.com/ccim/circle/rest/serverapi#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -1275,7 +1277,7 @@ PUT https://{host}/{org_name}/{app_name}/circle/server/{server_id}/user/role?use
 | :--- | :--- | :------------------ |
 | `code` | Int  | 环信超级社区的服务状态码。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 
@@ -1331,7 +1333,7 @@ POST https://{host}/{org_name}/{app_name}/circle/server/{server_id}/user/remove?
 | :--- | :--- | :------------------ |
 | `code` | Int  | 环信超级社区的服务状态码。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://docs-im-beta.easemob.com/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
 #### 示例
 

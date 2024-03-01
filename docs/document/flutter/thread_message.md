@@ -47,13 +47,14 @@
 
 ```dart
 // `chatThreadId` 为子区 ID
+
 EMMessage msg = EMMessage.createTxtSendMessage(
-  chatThreadId: threadId,
+  targetId: threadId,
   content: content,
+  // `chatType` 设置为 `GroupChat`，即群聊
+  chatType: ChatType.GroupChat,
 );
-// `chatType` 设置为 `GroupChat`，即群聊
-msg.chatType = ChatType.GroupChat;
-// isChatThreadMessage: 是否是子区消息，这里设置为 `true`，即是子区消息
+// isChatThreadMessage: 是否是子区消息，这里设置为 `true`，即是子区消息。
 msg.isChatThreadMessage = true;
 EMClient.getInstance.chatManager.sendMessage(msg);
 ```
@@ -91,7 +92,7 @@ EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
 
 ### 撤回子区消息
 
-接收消息的具体逻辑，请参考 [撤回消息](message_send_receive.html#撤回消息)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考 [撤回消息](message_recall.html)，此处只介绍子区消息和其他消息的区别。
 
 子区有消息撤回时，子区所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 事件，子区成员收到 `EMChatEventHandler#onMessagesRecalled` 事件。
 
@@ -160,8 +161,8 @@ try {
   String threadId = "threadId";
   // 会话类型，即群聊 `GroupChat`。
   EMConversationType convType = EMConversationType.GroupChat;
-  EMConversation? conversation = await EMClient.getInstance.chatManager
-      .getConversation(threadId, type: convType);
+  EMConversation? converrsation =
+        await EMClient.getInstance.chatManager.getThreadConversation(threadId);
   // 搜索的起始消息 ID。
   String startMsgId = "startMsgId";
   // 每页期望获取的消息数量。

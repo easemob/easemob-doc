@@ -391,120 +391,6 @@ curl -X PUT -H "Authorization: Bearer <YourAppToken>" -i  https://XXXX/XXXX/XXXX
 }
 ```
 
-## 设置免打扰模式
-
-设置离线推送免打扰模式，在免打扰期间，用户将不会收到离线消息推送。
-
-该 API 为旧版接口，推荐使用新版的[设置离线推送 API](#设置离线推送)。
-
-### HTTP 请求
-
-```http
-PUT https://{host}/{org_name}/{app_name}/users/{username}
-```
-
-#### 路径参数
-
-参数及说明详见 [公共参数](#公共参数)。
-
-#### 请求 header
-
-| 参数        | 类型   | 描述                   | 是否必需 |
-| :-------------- | :----- | :--------- | :------- |
-| `Content-Type`  | String | 内容类型。请填 `application/json`。               | 是       |
-| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
-
-#### 请求 body
-
-请求包体为 JSON Object 类型，包含以下字段：
-
-| 参数                               | 类型    | 描述                                                                                             | 是否必需<div style="width: 80px;"></div> |
-| :--------------------------------- | :------ | :----------------------------------------------------------------------------------------------- | :--------------------------------------- |
-| `notification_no_disturbing`       | Boolean | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>                       | 否                                       |
-| `notification_no_disturbing_start` | String  | 免打扰时间段的开始时间，精确到小时，取值范围为 [0,23]。例如 “8” 表示每日 8:00 开启免打扰模式。   | 否                                       |
-| `notification_no_disturbing_end`   | String  | 免打扰时间段的结束时间，精确到小时，取值范围为 [0,23]。例如 “18” 表示每日 18:00 关闭免打扰模式。 | 否                                       |
-
-:::tip
-免打扰时间段的设置，应注意以下几项：
-
-1. 开始时间和结束时间的设置立即生效，免打扰模式每天定时触发。例如，开始时间为 `8`，结束时间为 `10`，免打扰模式在每天的 8:00-10:00 内生效。若你在 11:00 设置开始时间为 `8`，结束时间为 `12`，则免打扰模式在当天的 11:00-12:00 生效，以后每天均在 8:00-12:00 生效。
-2. 若开始时间和结束时间相同，则全天免打扰。
-3. 若结束时间早于开始时间，则免打扰模式在每天的开始时间到次日的结束时间内生效。例如，开始时间为 `10`，结束时间为 `8`，则免打扰模式的在当天的 10:00 到次日的 8:00 生效。
-   :::
-
-### HTTP 响应
-
-#### 响应 body
-
-如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
-
-| 参数         | 类型    | 描述      |
-| :------------------------------------------ | :------ | :------------------------------------- |
-| `entities`  | JSON Array   | 用户的免打扰模式的相关信息。    |
-|  - `uuid`                             | String  | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。       |
-|  - `type`                             | String  | 用户类型，即 `user`。       |
-|  - `created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。         |
-|  - `modified`                         | Long    | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。   |
-|  - `username`                         | String  | 用户 ID。用户登录的唯一账号。       |
-|  - `activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
-|  - `notification_no_disturbing`       | Boolean | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>        |
-|  - `notification_no_disturbing_start` | Int     | 免打扰时间段的开始时间。        |
-|  - `notification_no_disturbing_end`   | Int     | 免打扰时间段的结束时间。       |
-|  - `notification_display_style`       | Int     | 离线推送通知的展示方式。        |
-|  - `nickname`                         | String  | 离线推送通知收到时显示的昵称。            |
-|  - `notifier_name`                    | String  | 推送证书名称。                  |
-
-其他参数及说明详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
-
-### 示例
-
-#### 请求示例
-
-**设置免打扰时间段**
-
-```bash
-curl -X PUT -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XXXX/users/a " -d '{"notification_no_disturbing": true,"notification_no_disturbing_start": "1","notification_no_disturbing_end": "3"}'
-```
-
-**关闭免打扰模式**
-
-```bash
-curl -X PUT -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XXXX/users/a " -d '{"notification_no_disturbing": false}'
-```
-
-#### 响应示例
-
-```json
-{
-  "action": "put",
-  "application": "17d59e50-XXXX-XXXX-XXXX-0dc80c0f5e99",
-  "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users",
-  "entities": [
-    {
-      "uuid": "3b8c9890-XXXX-XXXX-XXXX-f50bf55cafad",
-      "type": "user",
-      "created": 1530276298905,
-      "modified": 1534405429835,
-      "username": "User1",
-      "activated": true,
-      "notification_no_disturbing": true,
-      "notification_no_disturbing_start": 1,
-      "notification_no_disturbing_end": 3,
-      "notification_display_style": 0,
-      "nickname": "testuser",
-      "notifier_name": "2882303761517426801"
-    }
-  ],
-  "timestamp": 1534405429833,
-  "duration": 4,
-  "organization": "1112171214115068",
-  "applicationName": "testapp"
-}
-```
-
 ## 设置离线推送
 
 你可以设置全局离线推送的通知方式和免打扰模式以及单个单聊或群聊会话的离线推送设置。
@@ -683,7 +569,7 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 #### 请求 header
 
 | 参数            | 类型   | 描述    
-| :-------------- | :----- | :-------------- | :------- |
+| :-------------- | :----- | :-------------- |
 | `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
@@ -798,38 +684,91 @@ curl -L -X GET '{url}/{org}/{app}/users/{username}/notification/language' \
 }
 ```
 
-## 创建离线推送模板
+## 使用推送模板
 
-创建离线推送消息模板。
+你可以使用推送模板设置推送标题和内容。你可以调用以下 REST API 配置默认推送模板 `default` 和自定义推送模板。除此之外，你也可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
 
-### HTTP 请求
+使用推送模板有以下优势：
+
+1. 自定义修改环信服务端默认推送内容。   
+
+2. 接收方可以决定使用哪个模板。 
+
+3. 按优先级选择模板使用方式。
+
+**推送通知栏内容设置的使用优先级**
+
+通知栏中显示的推送标题和内容可通过以下方式设置，优先级为由低到高：
+
+1. 发送消息时使用默认的推送标题和内容：设置推送通知的展示方式 `notification_display_style`。推送标题为“您有一条新消息”，推送内容为“请点击查看”。  
+2. 发送消息时使用默认模板：若有默认模板 `default`，发消息时无需指定。
+3. 发送消息时使用扩展字段自定义要显示的推送标题和推送内容，即 `em_push_title` 和 `em_push_content`。
+4. 接收方设置了推送模板。
+5. 发送消息时通过消息扩展字段指定模板名称。
+
+### 创建离线推送模板
+
+创建离线推送消息模板，包括默认模板 `default` 和自定模板。你可以通过[环信即时通讯云控制台](https://console.easemob.com/user/login)创建推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+
+若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
+
+#### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/notification/template
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及说明详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
-| 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
-| :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
-| `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
-| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
+| 参数            | 类型   | 描述       | 是否必需 |
+| :-------------- | :----- | :---------------------------------- | :------- |
+| `Content-Type`  | String | 内容类型。请填 `application/json`。    | 是       |
+| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是   |
 
-#### 请求 body
+##### 请求 body
 
 | 参数              | 类型   | 描述                                  | 是否必需 |
 | :---------------- | :----- | :------------------------------------ | :------- |
-| `name`            | String | 要添加的推送模板的名称。              | 是       |
+| `name`            | String | 要添加的推送模板的名称。模板名称最多可包含 64 个字符，支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9。              | 是       |
 | `title_pattern`   | String | 自定义推送标题，例如： 标题 {0}。     | 是       |
 | `content_pattern` | String | 自定义推送内容，例如：内容 {0}, {1}。 | 是       |
 
-### HTTP 响应
+`title_pattern` 和 `content_pattern` 的设置方式如下：
+- 输入固定的内容，例如，标题为 “您好”，内容为“您有一条新消息”。
+- 内置参数填充：
+  - `{$dynamicFrom}`：按优先级从高到底的顺序填充好友备注、群昵称（仅限群消息）和推送昵称。
+  - `{$fromNickname}`：推送昵称。  
+  - `{$msg}`：消息内容。
+- 自定义参数填充：模板输入数组索引占位符，格式为: {0} {1} {2} ... {n}
 
-#### 响应 body
+ 对于推送标题和内容来说，前两种设置方式在创建消息时无需传入该参数，服务器自动获取，第三种设置方式则需要通过扩展字段 `ext.em_push_template` 传入，JSON 结构如下：
+
+  ```json
+  {
+      "ext":{
+          "em_push_template":{
+              "title_args":[
+                  "环信"
+              ],
+              "content_args":[
+                  "欢迎使用im-push",
+                  "加油"
+              ]
+          }
+      }
+  }
+  
+  # title: {0} = "环信"
+  # content: {0} = "欢迎使用im-push" {1} = "加油"
+  ```
+
+#### HTTP 响应
+
+##### 响应 body
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
@@ -844,22 +783,22 @@ POST https://{host}/{org_name}/{app_name}/notification/template
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```bash
 curl -X POST '{url}/{org}/{app}/notification/template' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
---data-raw '{
+-d '{
     "name": "test7",
     "title_pattern": "你好,{0}",
     "content_pattern": "推送测试,{0}"
 }'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -880,17 +819,17 @@ curl -X POST '{url}/{org}/{app}/notification/template' \
 }
 ```
 
-## 查询离线推送模板
+### 查询离线推送模板
 
 查询离线推送消息使用的模板。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数   | 类型   | 描述                     | 是否必需 |
 | :----- | :----- | :----------------------- | :------- |
@@ -898,16 +837,16 @@ GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
 | :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
 | `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
@@ -922,16 +861,16 @@ GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```bash
 curl -X GET '{url}/{org}/{app}/notification/template/{name}' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -952,17 +891,146 @@ curl -X GET '{url}/{org}/{app}/notification/template/{name}' \
 }
 ```
 
-## 删除离线推送模板
+### 接收方配置模板名称
 
+接收方可以调用该 API 设置推送模板。
+
+#### HTTP 请求
+
+```
+PUT https://{host}/{org_name}/{app_name}/users/{username}/notification/template
+```
+
+##### 请求 Header
+
+| 参数            | 类型   | 是否必需 | 描述                                                         |
+| :-------------- | :----- | :------- | :----------------------------------------------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                          |
+| `Authorization` | String | 是       | App User 鉴权 token，格式为 `Bearer YourUserToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 user token。 |
+
+其他参数及说明详见 [公共参数](#公共参数)。
+
+##### 请求 body 
+
+| 参数       | 类型   | 是否必需 | 描述          |
+| :--------- | :----- | :------- | :-------------------------------------------- |
+| `templateName` | String | 是   | 模板名称。| 
+
+####  HTTP 响应
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
+
+| 参数   | 类型 | 描述                                                    |
+| :----- | :--- | :------------------------------------------------------ |
+| `data` | JSON | 响应中的数据详情。`templateName` 为设置成功后的模板名称。 |
+
+其他参数及说明详见 [公共参数](#公共参数)。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+curl -X PUT '{host}/{org}/{app}/users/{username}/notification/template' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <YourUserToken>' \
+  -d '{    
+  	"templateName": "hxtest"
+ }
+```
+
+##### 响应示例
+
+```json
+{
+    "path": "/users",
+    "uri": "http://XXX/XXX/XXX/users/XXX/notification/template",
+    "timestamp": 1705470003984,
+    "organization": "XXX",
+    "application": "cc7380d5-099c-4d11-a93e-51d6d590b475",
+    "action": "put",
+    "data": {
+        "templateName": "hxtest"
+    },
+    "duration": 43,
+    "applicationName": "XXX"
+}
+```
+
+### 发消息时配置模板名称
+
+发送消息时，可使用消息扩展参数 `ext.em_push_template.name` 指定推送模板名称。
+
+若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
+
+该扩展参数的 JSON 结构如下：
+
+```json
+{
+    "ext":{
+        "em_push_template":{
+            "name":"hxtest"
+        }
+    }
+}
+```
+
+下面以发送单聊文本消息时使用自定义推送模板为例进行介绍：
+
+#### 请求示例
+
+```shell
+curl -L -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "from": "user1",
+    "to": [
+        "user2"
+    ],
+    "type": "txt",
+    "body": {
+        "msg": "testmessages"
+    },
+    "ext": {
+        "em_push_template": {
+            "name": "hxtest"
+        }
+    }
+}'
+```
+
+#### 响应示例 
+
+```json
+{
+  "path": "/messages/users",
+  "uri": "https://XXXX/XXXX/XXXX/messages/users",
+  "timestamp": 1657254052191,
+  "organization": "XXXX",
+  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
+  "action": "post",
+  "data": {
+    "user2": "1029457500870543736"
+  },
+  "duration": 0,
+  "applicationName": "XXXX"
+}
+```
+
+接口详情，请参见[发送文本消息](https://doc.easemob.com/document/server-side/message_single.html#发送文本消息)。
+
+### 删除离线推送模板
+ 
 删除离线消息推送模板。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数   | 类型   | 描述                     | 是否必需 |
 | :----- | :----- | :----------------------- | :------- |
@@ -970,16 +1038,16 @@ DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
 | :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
 | `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
@@ -994,16 +1062,16 @@ DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```bash
 curl -X DELETE '{url}/{org}/{app}/notification/template/{name}' \
 -H 'Authorization: Bearer {YourAppToken}'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -1023,3 +1091,5 @@ curl -X DELETE '{url}/{org}/{app}/notification/template/{name}' \
   "applicationName": "hxdemo"
 }
 ```
+
+

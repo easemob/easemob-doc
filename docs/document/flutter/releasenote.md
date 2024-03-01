@@ -2,6 +2,29 @@
 
 <Toc />
 
+## 4.2.0 2024-1-4
+
+#### 新增特性
+
+- 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
+- 新增 `EMContactManager#fetchContacts` 和 `EMContactManager#fetchAllContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。从服务器一次性获取好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromServer` 已废弃，由 `fetchAllContactIds` 替换。
+- 新增 `EMContactManager#getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
+- 新增 `EMContactManager#getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。一次性获取本地好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromDB` 已废弃，由 `getAllContactIds` 替换。
+- 新增 `EMMessage#isBroadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+- 新增 `EMGroupManager#fetchJoinedGroupCount` 方法用于从服务器获取当前用户已加入的群组数量。
+- 新增[错误码 706](/document/android/error.html)，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#isChatRoomOwnerLeaveAllowed` 参数设置为 false，聊天室所有者调用 `EMChatRoomManager#leaveChatroom` 方法离开聊天室时会提示该错误。
+- 新增 `EMOptions#enableEmptyConversation` 属性用于在初始化时配置获取会话列表时是否允许返回空会话。
+- 申请入群被拒绝的回调 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 decliner 和 applicant 参数表示申请者和拒绝者的用户 ID。
+
+#### 优化
+
+- 统一 Agora Token 和 EaseMob Token 登录方式，原 `EMClient#login` 方法废弃，使用 `EMClient#loginWithToken` 和 `EMClient#loginWithPassword` 方法代替。此外，新增 EaseMob Token 即将过期及已过期的回调，即 EaseMob Token 已过期或有效期过半时也返回 `EMConnectionEventHandler#onTokenDidExpire` 和 `EMClientDelegate#onTokenWillExpire` 回调。
+
+#### 修复
+
+- 修复网络恢复时重连 2 次的问题。
+- 修复未登录时调用 leaveChatroom 方法返回的错误提示不准确。
+
 ## 版本 4.1.3 2023-11-1
 
 #### 新增
@@ -30,14 +53,14 @@
 - 新增[消息修改功能](message_modify.html)：
   - 新增 `EMChatManager#modifyMessage` 方法用户修改已发送的消息，目前只支持文本消息;
   - 新增 `EMChatEventHandler#onMessageContentChanged` 回调，用户监听消息修改实现；
-- 新增[会话置顶功能](message_retrieve.html#置顶会话)：
+- 新增[会话置顶功能](conversation_pin.html#置顶会话)：
   - 新增 `EMChatManager#pinConversation` 方法，实现在服务器会话列表中置顶/取消置顶会话；
   - 新增 `EMChatManager#fetchPinnedConversations` 方法，从服务器获取已置顶会话；
 - [以下方法新增支持用户 token](multi_device.html#获取指定账号的在线登录设备列表)：  
   - 新增 `EMClient#fetchLoggedInDevices` 方法，可使用 token 获取已登录的设备列表；
   - 新增 `EMClient#kickDevice` 方法，可以使用 token 踢掉指定设备；
   - 新增 `EMClient#kickAllDevices` 方法，可以使用 token 踢掉所有已登录设备；
-- 新增 `EMChatManager#fetchConversation` 方法，[获取服务器会话列表](message_retrieve.html#从服务器分页获取会话列表)，原方法 `EMChatManager#getConversationsFromServer` 作废；
+- 新增 `EMChatManager#fetchConversation` 方法，[获取服务器会话列表](conversation_list.html#从服务器分页获取会话列表)，原方法 `EMChatManager#getConversationsFromServer` 作废；
 - 新增 `EMMessage#receiverList` 属性，用于在群组/聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)；
 
 ### 优化

@@ -42,7 +42,7 @@ public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cur
 
 ### 将成员移出聊天室
 
-仅聊天室所有者和管理员可调用 `EMChatRoomManager#removeChatRoomMembers` 方法将指定成员移出聊天室。
+仅聊天室所有者和管理员可调用 `EMChatRoomManager#removeChatRoomMembers` 方法将单个或多个成员移出聊天室。
 
 被移出后，该成员收到 `onRemovedFromChatRoom` 回调，其他成员收到 `EMChatRoomChangeListener#BE_KICKED` 回调。
 
@@ -186,6 +186,7 @@ EMClient.getInstance().chatroomManager().removeFromChatRoomWhiteList(chatRoomId,
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncMuteChatRoomMembers(String, List, long, EMValueCallBack)。
+// `duration`：禁言时间。传 -1 表示永久禁言。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().muteChatRoomMembers(chatRoomId, members, duration);
 ```
 
@@ -223,7 +224,9 @@ Map<String, Long> memberMap =  EMClient.getInstance().chatroomManager().fetchCha
 
 #### 开启全员禁言
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteAllMembers` 方法开启全员禁言。全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `EMChatRoomChangeListener#onAllMemberMuteStateChanged` 回调。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `EMChatRoomManager#unmuteAllMembers` 方法解除禁言。
+
+全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `EMChatRoomChangeListener#onAllMemberMuteStateChanged` 回调。
 
 示例代码如下：
 

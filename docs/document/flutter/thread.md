@@ -6,10 +6,6 @@
 
 本文介绍如何使用环信即时通讯 IM Flutter SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
 
-:::notice
-私有化版本不支持子区功能。
-:::
-
 ## 技术原理
 
 环信即时通讯 IM Flutter SDK 提供 `EMChatThreadManager`、`EMChatThread`、`EMChatThreadEventHandler` 和 `EMChatThreadEvent` 类，用于管理子区，支持你通过调用 API 在项目中实现如下功能：

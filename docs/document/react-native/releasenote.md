@@ -2,6 +2,19 @@
 
 <Toc />
 
+## 版本 V1.3.0 2024-1-4
+
+#### 新增特性
+
+- 依赖的原生 SDK 升级到版本（`iOS` 4.2.0 和`Android` 4.2.1）。添加原生 SDK 提供的新功能。
+- 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
+- 新增 `ChatContactManager.fetchAllContacts` 和 `ChatContactManager.fetchContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- 新增 `ChatContactManager.getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
+- 新增 `ChatContactManager.getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- 新增 `ChatMessage.isBroadcast` 属性用于判断通该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+- 新增 `ChatGroupManager.fetchJoinedGroupCount` 方法用于从服务器获取当前用户已加入的群组数量。
+- [申请入群被拒绝的回调](group_manage.html#监听群组事件) `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。
+
 ## 版本 V1.2.1 2023-8-16
 
 ### 修复
@@ -14,8 +27,8 @@
 
 - React-Native 从 0.66.5 升级到 0.71.11。
 - 依赖的原生 SDK（iOS 和 Android）升级到版本 4.1.1。添加原生 SDK 提供的新功能。
-- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法[从服务器分页获取会话列表](message_manage.html#获取会话列表)。
-- 新增[置顶服务器会话的功能](message_manage.html#获取服务端的置顶会话列表)：
+- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法[从服务器分页获取会话列表](conversation_list.html#获取会话列表)。
+- 新增[置顶服务器会话的功能](conversation_list.html#获取服务端的置顶会话列表)：
   - 新增 `ChatManager.pinConversation` 方法，实现置顶或取消置顶服务器会话；
   - 新增 `ChatManager.fetchPinnedConversationsFromServerWithCursor` 从服务器分页获取置顶会话列表。
 - 新增 `ChatManager.modifyMessageBody` 方法，用于修改本地消息或服务器端消息。
@@ -71,7 +84,7 @@
 - 新增 `ChatGroupManager.setMemberAttribute` 方法用于[设置单个群组成员的属性](group_members.html#设置群组成员自定义属性)。
 - 新增 `ChatGroupManager.fetchMemberAttributes` 方法用于[从服务器获取单个群成员的所有自定义属性](group_members.html#获取单个群成员的所有自定义属性)以及[根据属性 key 获取多个群成员的自定义属性](group_members.html#根据属性-key-获取多个群成员的自定义属性)。
 - 添加 `ChatManager.fetchHistoryMessagesByOptions` 根据消息拉取参数配置类（`ChatFetchMessageOptions`）从服务器分页获取指定会话的历史消息。`ChatFetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数。
-- 新增 `ChatManager.deleteMessagesWithTimestamp` 方法实现[删除指定时间段内的本地消息](message_manage.html#删除指定时间段的本地消息)。
+- 新增 `ChatManager.deleteMessagesWithTimestamp` 方法实现[删除指定时间段内的本地消息](message_delete.html#删除指定时间段的本地消息)。
 - 新增 [`ChatGroupEventListener.onMemberAttributesChanged` 事件](group_manage.html#监听群组事件)，在单个群成员的属性发生变更时，群内其他成员会收到该事件。
 - 新增 `ChatConnectEventListener.onAppActiveNumberReachLimit` 事件，在应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时触发该事件。
 - 新增日志回调接口 `handler`。

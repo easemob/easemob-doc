@@ -2,7 +2,72 @@
 
 <Toc />
 
-## 版本 V4.2.0 Dev 2023-07-27（开发版）
+## 版本 V4.5.1 Dev 2024-02-22（开发版）
+
+### 优化
+
+- [IM SDK] 统一消息附件的 URL 格式。
+
+### 修复
+
+- [IM SDK] 修复 uni-app SDK 运行到 iOS 平台发送群组定向消息报错的问题。
+
+## 版本 V4.5.0 Dev 2024-01-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 聊天室和群组成员进出事件增加成员人数 `memberCount` 字段。
+- [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#单向清空服务端的聊天记录) 方法, 用于清空当前用户的聊天记录，包括消息和会话。
+- [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-id-列表) 方法, 可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
+- [IM SDK] 新增 [useReplacedMessageContents](message_send_receive.html#发送文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
+
+### 优化
+
+- [IM SDK] 抖音小程序重连缓慢。
+- [IM SDK] 格式化会话列表中最近一条自定义消息的 `customExts` 字段。
+- [IM SDK] 重复拉消息问题。
+
+### 修复
+
+- [IM SDK] 修复 `onMessage` 回调消息顺序异常问题。
+
+## 版本 V4.4.0 Dev 2023-12-22（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[会话标记功能](conversation_mark.html)。
+  - `addConversationMark`：[标记会话](conversation_mark.html#标记会话)。
+  - `removeConversationMark`：[取消标记会话](conversation_mark.html#取消标记会话)。
+  - `getServerConversationsByFilter`：[根据会话标记从服务器分页查询会话列表](conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
+  - `onMultiDeviceEvent#markConversation/unMarkConversation`：[多设备场景下的会话标记事件](multi_device.html#实现方法)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+- [IM SDK] 增加 `onMessage` 回调。在收到文本、图片、视频、语音、地理位置和文件等消息时，批量将消息回调给应用。
+
+### 修复
+
+- [IM SDK] SDK 类型修正。
+
+## 版本 V4.3.0 Dev 2023-11-17
+
+### 新增特性
+
+- [IM SDK] 新增[好友备注功能](user_relationship.html#设置好友备注)。
+- [IM SDK] 消息结构新增 `broadcast` 字段, 用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+
+### 优化
+
+- [IM SDK] Token 登录增加即将过期及已过期的回调，即 Token 已过期或有效期过半时也触发 `onTokenExpired` 和 `onTokenWillExpire` 回调。
+
+### 修复
+
+- [IM SDK] 修复会话列表最后一条消息中获取不到 `reaction` 的问题。
+
+## 版本 V4.2.1 Dev 2023-09-27
+
+### 新增特性
+
+- [IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
+
+## 版本 V4.2.0 Dev 2023-07-27
 
 ### 新增特性
 
@@ -14,14 +79,14 @@
 
 修复发送不必要的消息送达回执的问题。
 
-## 版本 V4.1.6 Dev 2023-04-17（开发版）
+## 版本 V4.1.6 Dev 2023-04-17
 
 ### 新增特性
 
 - [IM SDK] `getHistoryMessages` 方法的 `searchOptions` 中新增 `from`、`msgTypes`、`startTime` 和 `endTime` 参数，允许用户按消息发送方、消息类型或时间段从服务端拉取历史消息。
 - [IM SDK] 新增错误码 511，即 MESSAGE_SIZE_LIMIT，若[消息体大小超过限制](message_overview.html#消息类型)时提示用户。
 
-## 版本 V4.1.4 Dev 2023-03-16（开发版）
+## 版本 V4.1.4 Dev 2023-03-16
 
 ### 新增特性
 
@@ -38,11 +103,11 @@
 - [IM SDK] 修复 TypeScript 代码的一些类型错误。
 - [IM SDK] 修复 `getHistoryMessages` 方法无法捕获错误的问题。
 
-## 版本 V4.1.3 Dev 2023-02-21（开发版）
+## 版本 V4.1.3 Dev 2023-02-21
 
 #### 新增特性
 
-- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
 - [IM SDK] 新增[群组创建事件 `create`](group_manage.html#监听群组事件)。群组创建后，群主的其他设备会收到该事件。
 
 #### 优化
@@ -56,7 +121,7 @@
 - [IM SDK] 修复 `getConversationlist` 方法的返回值缺少 `customExts` 字段的问题。
 - [IM SDK] 修复设置 `useOwnUploadFun` 允许用户自己上传图片时图片消息中的 `size` 字段不生效的问题。
 
-## 版本 V4.1.2 Dev 2022-11-08（开发版）
+## 版本 V4.1.2 Dev 2022-11-08
 
 ### 新增特性
 
@@ -100,7 +165,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增群组事件回调 [onGroupEvent](https://docs-im-beta.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://docs-im-beta.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
+- [IM SDK] 新增群组事件回调 [onGroupEvent](https://doc.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://doc.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
 - [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](/document/web/error.html)
 - [IM SDK] 邀请加入群聊回调 `onGroupChange` 返回中新增 群名称 参数值。
 
@@ -113,7 +178,7 @@
 ### 新增特性:
 
 - [IM SDK] 新增消息子区（message thread）功能；
-- [IM SDK] 新增 [getConversationList](/document/web/message_retrieve.html) 方法解析会话中的最新一条消息；
+- [IM SDK] 新增 [getConversationList](/document/web/conversation_list.html) 方法解析会话中的最新一条消息；
 
 ### 优化：
 

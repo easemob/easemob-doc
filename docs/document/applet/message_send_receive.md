@@ -19,7 +19,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM SDK 可以实现消息的发送、接收与撤回。
+环信即时通讯 IM SDK 可以实现消息的发送和接收。
 
 发送和接收消息：
 
@@ -98,6 +98,8 @@ function sendTextMessage() {
 }
 ```
 
+若初始化时打开了 `useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
+
 ### 接收消息
 
 你可以通过 `addEventHandler` 注册监听器监听消息事件。你可以添加多个事件。当不再监听事件时，请确保删除监听器。
@@ -160,49 +162,13 @@ WebIM.conn.addEventHandler("eventName", {
 });
 ```
 
-### 撤回消息
-
-发送方可以撤回一条发送成功的消息。调用 API 撤回消息后，服务端的该条消息（历史消息，离线消息或漫游消息）均会被移除。
-
-默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
-
-```javascript
-let option = {
-  // 要撤回消息的消息 ID。
-  mid: "msgId",
-  // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-  to: "username",
-  // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
-  chatType: "singleChat",
-};
-conn.recallMessage(option)
-  .then((res) => {
-    console.log("success", res);
-  })
-  .catch((error) => {
-    // 消息撤回失败，原因可能是超过了撤销时限(超过 2 分钟)。
-    console.log("fail", error);
-  });
-```
-
-你还可以使用 `onRecallMessage` 监听消息撤回状态：
-
-```javascript
-WebIM.conn.addEventHandler('MESSAGES',{
-   onRecallMessage: (msg) => {
-      // 这里需要在本地删除对应的消息，也可以插入一条消息：“XXX撤回一条消息”。
-      console.log('Recalling the message success'，msg)
-   }
-})
-```
-
 ### 发送附件消息
 
 语音、图片、视频和文件消息本质上是附件消息。发送和接收附件消息的流程如下：
 
 1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器，获取消息的基本信息以及服务器上附件文件的路径。
 
-   对于图片消息来说，服务器会自动生成图片的缩略图；而对于视频消息来说，服务器不会自动生成视频缩略图。
+   对于图片消息来说，服务器会自动生成图片的缩略图；而对于视频消息来说，视频的首帧为缩略图。
 
 2. 接收附件消息。
 
@@ -543,6 +509,10 @@ const sendLocMsg = () => {
 ### 发送透传消息
 
 透传消息是通知指定用户采取特定操作的命令消息。接收方自己处理透传消息。
+
+:::tip
+透传消息发送后，不支持撤回。
+:::
 
 参考以下代码示例发送和接收透传消息：
 

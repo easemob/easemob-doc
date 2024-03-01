@@ -44,7 +44,7 @@ try {
 
 ### 群组踢人
 
-1. 仅群主和群管理员可以调用 `EMGroupManager#removeMembers` 方法将指定成员移出群组。
+1. 仅群主和群管理员可以调用 `EMGroupManager#removeMembers` 方法将单个或多个成员移出群组。
 2. 被移出群组后，该成员收到 `EMGroupEventHandler#onUserRemovedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMemberExitedFromGroup` 事件。
 3. 被移出群组后，该用户还可以再次加入群组。
 
@@ -225,6 +225,7 @@ try {
 示例代码如下：
 
 ```dart
+// duration：禁言时间。若传 -1，表示永久禁言。
 try {
   await EMClient.getInstance.groupManager.muteMembers(
     groupId,
@@ -271,7 +272,9 @@ try {
 
 #### 开启全员禁言
 
-仅群主和群管理员可以调用 `EMGroupManager#muteAllMembers` 方法开启全员禁言。群组全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。
+仅群主和群管理员可以调用 `EMGroupManager#muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `EMGroupManager#unMuteAllMembers` 方法解除禁言。
+
+群组全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。
 
 示例代码如下：
 

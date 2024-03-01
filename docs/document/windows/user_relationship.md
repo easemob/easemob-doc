@@ -35,9 +35,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 本节展示如何在项目中管理好友的添加移除和黑名单的添加移除。
 
-### 管理好友列表
-
-#### 添加好友
+### 添加好友
 
 好友请求部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
 
@@ -124,7 +122,7 @@ SDKClient.Instance.ContactManager.DeclineInvitation(username, callback: new Call
 
 当你同意或者拒绝后，对方会通过好友事件回调，收到 `OnFriendRequestAccepted` 或者 `OnFriendRequestDeclined` 回调。
 
-#### 删除好友
+### 删除好友
 
 调用 `DeleteContact` 删除指定联系人。被删除的用户收到 `OnContactDeleted` 回调。删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
@@ -141,18 +139,9 @@ SDKClient.Instance.ContactManager.DeleteContact(username, callback: new CallBack
 
 调用 `DeleteContact` 删除好友后，对方会收到 `OnContactDeleted` 回调。
 
-#### 获取好友列表
-
-你可以从服务器获取好友列表，也可以从本地数据库获取保存的好友列表。
-
-:::notice
-从服务器获取好友列表之后才能从本地数据库获取到好友列表。
-:::
-
-示例代码如下：
+### 从服务器获取好友列表
 
 ```csharp
-//从服务器获取好友列表。
 SDKClient.Instance.ContactManager.GetAllContactsFromServer(new ValueCallBack<List<string>>(
   onSuccess: (list) =>
   {
@@ -161,18 +150,23 @@ SDKClient.Instance.ContactManager.GetAllContactsFromServer(new ValueCallBack<Lis
   {
   }
 ));
+```
 
-//从本地数据库获取好友列表。
+### 从本地获取好友列表
+
+从服务器获取好友列表之后才能从本地数据库获取到好友列表。
+
+示例代码如下：
+
+```csharp
 List<string>list = SDKClient.Instance.ContactManager.GetAllContactsFromDB();
 ```
 
-### 管理黑名单
+### 添加用户到黑名单
 
 黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。
 
 黑名单功能包括加入黑名单，从黑名单移出用户和获取黑名单列表。
-
-#### 添加用户到黑名单
 
 你可以调用 `AddUserToBlockList` 添加用户到黑名单。用户被加入黑名单后，无法向你发送消息，也无法发送好友申请。
 
@@ -190,7 +184,7 @@ SDKClient.Instance.ContactManager.AddUserToBlockList(username, callback: new Cal
 ));
 ```
 
-#### 将用户从黑名单移除
+### 将用户从黑名单移除
 
 你可以调用 `RemoveUserFromBlockList` 将用户从黑名单移除，用户发送消息等行为将恢复。
 
@@ -205,7 +199,7 @@ SDKClient.Instance.ContactManager.RemoveUserFromBlockList(username, callback: ne
 ));
 ```
 
-#### 从服务器获取黑名单列表
+### 从服务器获取黑名单列表
 
 你可以调用 `GetBlockListFromServer` 从服务端获取黑名单列表。示例代码如下：
 

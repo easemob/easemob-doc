@@ -38,7 +38,7 @@ conn.getSupportedLanguages().then(res => console.log(res))
 接收方调用 `translateMessage` 将接收到的消息翻译成目标语言。示例代码如下：
 
 ```javascript
-conn.translateMessage('hello', ['zh']).then(res => console.log(res))
+conn.translateMessage({text: 'hello', languages: [zh-Hans]})
 ```
 
 ### 自动翻译
@@ -54,7 +54,7 @@ let option = {
     type: 'txt',
     to: 'userId',
     msg: 'hello',
-    msgConfig:{ languages: ['zh'] } // 设置目标语言。
+    msgConfig:{ languages: ['zh-Hans'] } // 设置目标语言。
 }
 let msg = WebIM.message.create(option);
 conn.send(msg)

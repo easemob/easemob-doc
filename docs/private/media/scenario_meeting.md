@@ -41,15 +41,15 @@
 
 2. 多人视频会议如果需要环信即时通讯云的文字聊天室实现IM沟通功能，请详见文档：
 
-服务器端: [聊天室管理](http://docs-im-beta.easemob.com/document/server-side/chatroom.html)
+服务器端: [聊天室管理](http://doc.easemob.com/document/server-side/chatroom.html)
 
-Android: [聊天室管理](http://docs-im-beta.easemob.com/document/android/room_overview.html)
+Android: [聊天室管理](http://doc.easemob.com/document/android/room_overview.html)
 
-iOS: [聊天室管理](http://docs-im-beta.easemob.com/document/ios/room_overview.html)
+iOS: [聊天室管理](http://doc.easemob.com/document/ios/room_overview.html)
 
-web端: [聊天室管理](http://docs-im-beta.easemob.com/document/web/room_overview.html)
+web端: [聊天室管理](http://doc.easemob.com/document/web/room_overview.html)
 
-微信小程序: [聊天室管理](http://docs-im-beta.easemob.com/document/applet/room_overview.html)
+微信小程序: [聊天室管理](http://doc.easemob.com/document/applet/room_overview.html)
 
 PC端: [聊天室管理](https://docs-im.easemob.com/im/pc/basics/chatroom)
 

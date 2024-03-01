@@ -94,7 +94,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ### 撤回子区消息
 
-接收消息的具体逻辑，请参考[撤回消息](message_send_receive.html#撤回消息)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考[撤回消息](message_recall.html)，此处只介绍子区消息和其他消息的区别。
 
 子区有消息撤回时，子区所属群组的所有成员收到 `IChatThreadManagerDelegate#OnUpdateMyThread` 回调，子区成员收到 `IChatManagerDelegate#OnMessagesRecalled` 回调。
 

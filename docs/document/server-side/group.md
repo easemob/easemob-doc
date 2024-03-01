@@ -90,10 +90,10 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | `groupname`           | String | 否       | 群组名称，最大长度为 128 字符。|
 | `description`         | String | 否       | 群组描述，最大长度为 512 字符。|
 | `public`              | Bool   | 是       | 是否是公开群。公开群可以被搜索到，用户可以申请加入公开群；私有群无法被搜索到，因此需要群主或群管理员添加，用户才可以加入。<br/> - `true`：公开群；<br/> - `false`：私有群。   |
-| `scale`           | String | 否      | 群组规模，取决于群成员总数 `maxusers` 参数。<br/> - （默认）`normal`：普通群，即群成员总数不超过 3000。<br/> - `large`：大型群，群成员总数超过 3000。<br/><Container type="notice" title="注意"><br/>- 创建大型群时，该参数必传。；<br/>- 大型群不支持离线推送。如需默认创建大型群，请联系环信商务。</Container>|
-| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 [产品价格](https://www.easemob.com/pricing/im)。    |
+| `scale`           | String | 否      | 群组规模，取决于群成员总数 `maxusers` 参数。<br/> - （默认）`normal`：普通群，即群成员总数不超过 3000。<br/> - `large`：大型群，群成员总数超过 3000。<br/><Container type="notice" title="注意"><br/>- 创建大型群时，该参数必传；<br/>- 大型群不支持离线推送。仅旗舰版支持创建大型群，如需该功能，请联系环信商务。</Container>|
+| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。    |
 | `allowinvites`        | Bool   | 否       | 是否允许群成员邀请用户加入群组：<br/> - `true`：群成员可拉人入群;<br/> - （默认）`false`：只有群主或者管理员才可以拉人入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
-| `membersonly`         | Bool   | 否       | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：需要； <br/> - （默认）`false`：不需要，用户直接进群。     |
+| `membersonly`         | Bool   | 否       | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：需要； <br/> - （默认）`false`：不需要，用户直接进群。<br/>该参数仅对公开群生效，因为对于私有群，用户无法申请加入群组，只能通过群成员邀请加入群。     |
 | `invite_need_confirm` | Bool   | 否       | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 | `owner`               | String | 是       | 群主的用户 ID。  |
 | `members`             | Array  | 否       | 群成员的用户 ID 数组，不包含群主的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。        |
@@ -310,7 +310,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | :-------------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------- |
 | `groupname`           | String | 否       | 群组名称，最大长度为 128 字符。 |
 | `description`         | String | 否       | 群组描述，最大长度为 512 字符。 |
-| `maxusers`            | Int    | 否       | 群组成员最大数（包括群主），值为数值类型。                                                                                        |
+| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。 |
 | `membersonly`         | Bool   | 否       | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。                                                   |
 | `allowinvites`        | Bool   | 否       | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群；<br/> - `false`：只有群主或群管理员才可以邀请用户入群。 |
 | `invite_need_confirm` | Bool   | 否       | 受邀人加入群组前是否需接受入群邀请：<br/> - `true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
@@ -400,7 +400,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 | 参数     | 类型   | 是否必需 | 描述                                                        |
 | :------- | :----- | :------- | :---------------------------------------------------------- |
 | `limit`  | Int    | 否       | 每次期望返回的群组数量。取值范围为 [1,1000]，默认值为 `10`。 |
-| `cursor` | String | 否       | 数据查询的起始位置。                                        |
+| `cursor` | String | 否       | 数据查询的起始位置。首次调用该接口，不传 `cursor`，服务器按群组创建时间倒序返回 `limit` 指定的群组数量。后续接口调用时，需要从上次调用的响应中获取 `cursor` 参数的值传入请求中的该参数。   |
 
 :::tip
 若请求中均未设置 `limit` 和 `cursor` 参数，环信服务器按群组创建时间倒序返回前 10 个群组。
@@ -426,7 +426,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 |  - `groupid`       | String | 群组 ID。                                |
 |  - `affiliations`  | int    | 群组现有成员数。                         |
 |  - `type`          | String | “group” 群组类型。                       |
-|  - `last_modified` | String | 最近一次修改的时间戳，单位为毫秒。       |
+|  - `lastModified` | String | 最近一次修改的时间戳，单位为毫秒。       |
 |  - `groupname`     | String | 群组名称。                               |
 | `count`              | Int    | 实际获取的群组数量。                     |
 | `cursor`             | String | 查询游标，指定下次查询的起始位置。       |
@@ -469,7 +469,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
       "groupid": "10XXXX60",
       "affiliations": 2,
       "type": "group",
-      "last_modified": "1441021038124",
+      "lastModified": "1441021038124",
       "groupname": "testgroup1"
     },
     {
@@ -477,7 +477,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
       "groupid": "10XXXX76",
       "affiliations": 1,
       "type": "group",
-      "last_modified": "1441074471486",
+      "lastModified": "1441074471486",
       "groupname": "testgroup2"
     }
   ],
@@ -679,7 +679,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 |  - `membersonly`        | Bool   | 加入群组是否需要群主或者群管理员审批。<br/> - `true`：是；<br/> - `false`：否。      |
 |  - `allowinvites`       | Bool   | 是否允许群成员邀请其他用户加入此群。<br/> - `true`：允许群成员邀请其他用户加入此群；<br/> - `false`：只有群主可以邀请其他用户入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
 |  - `maxusers`           | Int    | 群组最大成员数，创建群组的时候设置，可修改。    |
-|  - `permission`         | String | 群组成员角色：<br/> - `owner`：群主；<br/> - `member`：普通成员。 |
+|  - `affiliations`       | Array | 群组成员列表及其对应角色：<br/> - `owner`：群主；<br/> - `member`：群组管理员和普通成员。 |
 |  - `owner`              | String | 群主的用户 ID。例如：{“owner”: “user1”}。    |
 |  - `created`            | Long   | 创建该群组的 Unix 时间戳。  |
 |  - `affiliations_count` | int    | 群组现有成员总数。     |
@@ -891,11 +891,17 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述             |
+| :-------------- | :----- | :------- | :---------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+##### 请求 body
+
+| 参数            | 类型   | 是否必需 | 描述             |
+| :-------------- | :----- | :------- | :---------------- |
+| `announcement`  | String | 是       | 群组通告内容。   |
 
 #### HTTP 响应
 
@@ -1057,7 +1063,6 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 | `Accept`          | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization`   | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 | `Content-Type`    | String | 是       | 内容类型。请填 `multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW`。                               |
-| `restrict-access` | Bool   | 否       | 是否仅群成员可见。<br/> - `true`：是。<br/> - `false`：否。                                                          |
 | `file`            | String | 是       | 待上传文件的本地路径。                                                                                               |
 
 #### HTTP 响应
@@ -1086,7 +1091,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -H 'restrict-access: true' -F file=@/Users/test/image/IMG_3.JPG
+curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -F file=@/Users/test/image/IMG_3.JPG
 ```
 
 ##### 响应示例
@@ -1138,18 +1143,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段             | 类型   | 描述                                                       |
-| :--------------- | :----- | :--------------------------------------------------------- |
-| `data.file_url`  | String | 群组共享文件的 URL，在环信即时通讯 IM 服务器上保存的地址。 |
-| `data.group_id`  | String | 群组 ID。                                                  |
-| `data.file_name` | String | 群组共享文件的名称。                                       |
-| `data.created`   | Long   | 上传群组共享文件的时间。                                   |
-| `data.file_id`   | String | 群组共享文件 ID。该参数在删除共享文件时需要提供。          |
-| `data.file_size` | Long   | 群组共享文件大小，单位为字节。                             |
-
-其他字段及描述详见 [公共参数](#公共参数)。
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应体中为上传的文件的内容，例如，上传的文件内容为“Hello world”，响应中返回“Hello world”。
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1165,26 +1159,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ##### 响应示例
 
-```json
-{
-  "action": "post",
-  "application": "7fXXXXef",
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files",
-  "entities": [],
-  "data": {
-    "file_url": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files/c6XXXXc0",
-    "group_id": "6XXXX7",
-    "file_name": "img_3.jpg",
-    "created": 1599050554954,
-    "file_id": "c6XXXXc0",
-    "file_size": 13512
-  },
-  "timestamp": 1599050554978,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
+返回上传的文件的内容。例如，上传的文件内容为“Hello world”，响应中返回“Hello world”。
 
 ### 删除群组共享文件
 
@@ -3001,8 +2976,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 | 字段          | 类型 | 描述                                                            |
 | :------------ | :--- | :-------------------------------------------------------------- |
-| `data.result` | Bool | 操作结果：<br/> - `true`：禁言成功；<br/> - `false`：禁言失败。 |
-| `data.expire` | Long | 禁言到期的时间。该时间为 Unix 时间戳，单位为毫秒。              |
+| `data.mute` | Bool | 操作结果：<br/> - `true`：禁言成功；<br/> - `false`：禁言失败。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -3372,9 +3346,11 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段。
 
-| 字段                | 描述   | 描述                                    |
+若为最后一页数据，响应中仍会返回 `cursor`，而且获取的子区数量小于请求中的 `limit` 的值；若响应中不再返回子区数据，表示你已经获取该群组下的所有子区数据。
+
+| 字段                | 描述   | 描述                                    | 
 | :------------------ | :----- | :-------------------------------------- |
 | `entities`       | JSON Array | 响应数据。                          |
 |  - `name`     | String | 子区名称。                              |
@@ -3788,7 +3764,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread/1XXXX7/users -d '{
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/threads/{thread_id}/users
+DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 ```
 
 ##### 路径参数

@@ -48,17 +48,22 @@ SDKClient.Instance.GroupManager.AddGroupMembers(groupId, members, new CallBack(
 
 ### 群组踢人
 
-仅群主和群管理员可以调用 `DeleteGroupMembers` 方法将指定成员移出群组。被移出后，该成员收到 `IGroupManagerDelegate#OnUserRemovedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。被移出群组后，该用户还可以再次加入群组。
+仅群主和群管理员可以调用 `DeleteGroupMembers` 方法将单个或多个成员移出群组。被移出后，该成员收到 `IGroupManagerDelegate#OnUserRemovedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。被移出群组后，该用户还可以再次加入群组。
 
 示例代码如下：
 
 ```csharp
-SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, list, new CallBack (
-    onSuccess: () =>
-    {
+List<string> members = new List<string>();
+members.Add("member1");
+members.Add("member2");
+
+SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, members, callback: new CallBack(
+    onSuccess: () => {
+        Console.WriteLine($"DeleteGroupMembers success");
     },
     onError: (code, desc) =>
     {
+        Console.WriteLine($"DeleteGroupMembers failed, code:{code}, desc:{desc}");
     }
 ));
 ```
@@ -243,6 +248,7 @@ SDKClient.Instance.GroupManager.GetGroupBlockListFromServer(groupId, pageNum, pa
 示例代码如下：
 
 ```csharp
+// muteMilliseconds：禁言时间。若传 -1，表示永久禁言。
 SDKClient.Instance.GroupManager.MuteGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -290,7 +296,9 @@ SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: ne
 
 #### 开启群组全员禁言
 
-仅群主和群管理员可以调用 `MuteGroupAllMembers` 方法开启全员禁言。群组全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。
+仅群主和群管理员可以调用 `MuteGroupAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动取消禁言，需要调用 `UnMuteGroupAllMembers` 方法取消全员禁言。
+
+群组全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。
 
 示例代码如下：
 

@@ -1,10 +1,10 @@
-# 消息回执
+# 实现消息回执
 
 <Toc />
 
 单聊会话支持消息送达回执、会话已读回执和消息已读回执，发送方发送消息后可及时了解接收方是否及时收到并阅读了信息，也可以了解整个会话是否已读。
 
-群聊会话只支持消息已读回执。群主和群管理员在发送消息时，可以设置该消息是否需要已读回执。仅旗舰版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
+群聊会话只支持消息已读回执。群主和群管理员在发送消息时，可以设置该消息是否需要已读回执。仅专业版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
 
 本文介绍如何使用环信即时通讯 IM Web SDK 实现单聊和群聊的消息回执功能。
 
@@ -14,7 +14,7 @@
 
 单聊消息送达回执：
 
-1. SDK 初始化时，用户将 [`Connection` 类中的 `delivery` 参数](https://docs-im-beta.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true` 开启消息送达回执。
+1. SDK 初始化时，用户将 [`Connection` 类中的 `delivery` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true` 开启消息送达回执。
 2. 发送方发送一条消息。
 3. 接收方收到消息后，SDK 会自动向发送方发送送达回执。
 4. 发送方通过监听 `onDeliveredMessage` 收到送达回执。
@@ -37,7 +37,7 @@
 
 - 已经集成和初始化环信 IM SDK，并实现了注册账号和登录功能。详情请参见 [快速开始](quickstart.html)。
 - 了解 [使用限制](/product/limitation.html) 中的 API 调用频率限制。
-- 群消息已读回执功能仅在环信 IM 旗舰版及以上版本支持该功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
+- 群消息已读回执功能仅在环信 IM 专业版及以上版本支持该功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
 
 ## 实现方法
 
@@ -104,6 +104,8 @@ conn.addEventHandler("customEvent", {
 
 ##### 消息已读回执
 
+单聊消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。 
+
 参考如下步骤在单聊中实现消息已读回执。
 
 1. 接收方发送消息已读回执。
@@ -147,7 +149,9 @@ conn.addEventHandler("customEvent", {
 
 对于群聊，群主和群管理员发送消息时，可以设置该消息是否需要已读回执。若需要，每个群成员在阅读消息后，SDK 均会发送已读回执，即阅读该消息的群成员数量即为已读回执的数量。
 
-仅旗舰版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
+群聊已读回执的有效期为 3 天，即群组中的消息发送时间超过 3 天，服务器不记录阅读该条消息的群组成员，也不会发送已读回执。
+
+仅专业版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
 
 1. 群主或群管理员发送消息时若需已读回执，需设置 `allowGroupAck` 为 `true`：
 

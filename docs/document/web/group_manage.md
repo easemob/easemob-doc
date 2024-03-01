@@ -44,7 +44,7 @@
 | `approval`          | Bool   | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `public` 设置为 `true` 时，对私有群无效。       |
 | `allowinvites`      | Bool   | 是否允许普通群成员邀请人入群：<br/> - `true`：允许；<br/> - `false`：不允许。只有群主和管理员才可以向群组添加用户。<br/>该参数仅对私有群有效，即 `public` 设置为 `false` 时， 因为公开群（public：`true`）仅支持群主和群管理员邀请人入群，不支持普通群成员邀请人入群。 |
 | `inviteNeedConfirm` | Bool   | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。  |
-| `maxusers`          | Int    | 群组最大成员数，默认为 `200`。不同套餐支持的人数上限不同，详见 [产品价格](https://www.easemob.com/pricing/im)。            |
+| `maxusers`          | Int    | 群组最大成员数，默认为 `200`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。            |
 | `ext`          | String    | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。           |
 
 创建群组的示例代码如下：
@@ -114,13 +114,17 @@ conn.destroyGroup(option).then((res) => console.log(res));
 
 ### 获取群组详情信息
 
-所有群成员均可调用 `getGroupInfo` 方法根据群组 ID 获取群组详情，包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、、是否已屏蔽群组消息以及群组是否禁用。默认不包含群成员列表。
+所有群成员均可调用 `getGroupInfo` 方法根据群组 ID 获取单个或多个群组的详情，包括群组 ID、群组名称、群组描述、群组基本属性、群成员列表、是否已屏蔽群组消息以及群组是否禁用。
+
+:::tip
+对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
+:::
 
 示例代码如下：
 
 ```javascript
 let option = {
-  // 群组 ID 或群组 ID 数组。
+  // 单个群组 ID 或群组 ID 数组。
   groupId: "groupId",
 };
 conn.getGroupInfo(option).then((res) => {

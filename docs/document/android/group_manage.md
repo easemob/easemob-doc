@@ -109,6 +109,10 @@ EMClient.getInstance().groupManager().destroyGroup(groupId);
 
 群成员也可以调用 `getGroupFromServer(String groupId, boolean fetchMembers)` 方法从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用等信息。另外，若将该方法的 `fetchMembers` 参数设置为 `true`，可获取群成员列表，默认最多包括 200 个成员。
 
+:::tip
+对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
+:::
+
 示例代码如下：
 
 ```java
@@ -211,7 +215,7 @@ String cursor = result.getCursor();
 
 ### 查询当前用户已加入的群组数量
 
-你可以调用 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+自 4.2.1 版本开始，你可以调用 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
 
 ```java
 EMClient.getInstance().groupManager().asyncGetJoinedGroupsCountFromServer(new EMValueCallBack<Integer>() {

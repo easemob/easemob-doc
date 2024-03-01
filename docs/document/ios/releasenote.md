@@ -2,12 +2,55 @@
 
 <Toc />
 
-## 版本 V4.2.0 Dev 2023-11-13（开发版）
+## 版本 V4.4.0 Dev 2024-01-30（开发版）
 
 ### 新增特性
 
-- [IM SDK] 新增[好友备注功能](user_relationship.html#设置好友备注)。
-- [IM SDK] 新增 `EMChatMessage#broadcast` 属性用于判断通过该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+- [IM SDK] 新增 [EMChatManager#deleteAllMessagesAndConversations:completion:](message_delete.html#清空聊天记录) 方法，用于清空当前用户的聊天记录，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- [IM SDK] 新增 [EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search.html#根据搜索范围搜索所有会话中的消息) 和[EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search.html#根据搜索范围搜索当前会话中的消息)，可以在根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+- [IM SDK] 新增 [EMOptions#useReplacedMessageContents](message_send_receive.html#发送文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
+- [IM SDK] 新增 [EMOptions#includeSendMessageInMessageListener](message_send_receive.html#接收消息) 开关。开启后，在 `messagesDidReceive` 回调里增加发送成功的消息。
+- [IM SDK] 新增 [EMOptions#regardImportMessagesAsRead](message_retrieve.html#从服务器获取指定会话的消息) 开关。开启后，[利用服务端接口](/document/server-side/message_import.html)导入的消息，客户端上通过[漫游拉取](message_retrieve.html#从服务器获取指定会话的消息)到后，这些消息为已读状态，会话中未读取的消息数量 `EMConversation#unreadMessagesCount` 不发生变化。若该开关为关闭状态，`EMConversation#unreadMessagesCount` 的数量会增加。
+
+### 优化
+
+- [IM SDK] 群组全员禁言状态（`EMGroup#isMuteAllMembers`）存储到本地数据库，下次登录时可以直接从本地获取到。
+- [IM SDK] 转发合并消息时导致的附件重复上传问题。
+
+### 修复
+
+- [IM SDK] 部分场景下群成员人数计算重复问题。
+- [IM SDK] 搜索消息的关键字中带有单引号 `‘` 引起的 SQL 语句报错问题。
+- [IM SDK] 修复数据上报模块偶现的崩溃问题。
+- [IM SDK] 修复多线程同时调用 `EMClient.sharedClient.chatManager.addDelegate` 导致的偶现崩溃问题。
+- [IM SDK] 修复绑定 APNs Token 时，偶现的 Token 绑定失败的问题。
+
+## 版本 V4.3.0 Dev 2023-12-22（开发版）
+
+### 新增特性
+
+[IM SDK] 支持[会话标记功能](conversation_mark.html)。
+- `EMChatManager#addConversationMark:completion`：[标记会话](conversation_mark.html#标记会话)。
+- `EMChatManager#removeConversationMark:completion`：[取消标记会话](conversation_mark.html#取消标记会话)。
+- `EMChatManager#getConversationsFromServerWithCursor:filter:completion`：[根据会话标记从服务器分页查询会话列表](conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
+- `EMConversation#marks`：[获取本地单个会话的所有标记](conversation_mark.html#获取本地单个会话的所有标记)。
+- `multiDevicesConversationEvent#EMMultiDevicesEventConversationUpdateMark`：[多设备场景下的会话标记事件](multi_device.html#获取其他设备上的操作)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+
+### 优化
+
+- [IM SDK] 移除 FPA 功能，减小 SDK 体积。
+- [IM SDK] 单个日志文件大小由 2 MB 提升到 5 MB。
+- [IM SDK] 优化附件类型消息发送时中的附件上传，支持分片上传。
+
+## 版本 V4.2.0 Dev 2023-11-13
+
+### 新增特性
+
+- [IM SDK] 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
+- [IM SDK] 新增 `getAllContactsFromServerWithCompletion` 和 `getContactsFromServerWithCursor` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- [IM SDK] 新增 `getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
+- [IM SDK] 新增 `getAllContacts` 方法[从本地分页获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- [IM SDK] 新增 `EMChatMessage#broadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 - [IM SDK] 新增 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。
 - [IM SDK] 新增[错误码 706](error.html) `EMErrorChatroomOwnerNotAllowLeave`，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#canChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatroom` 方法离开聊天室时会提示该错误。
 - [IM SDK] 新增 `EMOptions#loadEmptyConversations` 属性用于在初始化时配置获取会话列表时是否允许返回空会话。
@@ -70,11 +113,11 @@
 
 ### 新增特性
 
-- [IM SDK] 新增 `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion:` 方法，实现[从服务器拉取会话](message_retrieve.html#从服务器分页获取会话列表)的功能，原接口标记为已废弃。
+- [IM SDK] 新增 `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion:` 方法，实现[从服务器拉取会话](conversation_list.html#从服务器分页获取会话列表)的功能，原接口 `getConversationsFromServer` 和 `getConversationsFromServerByPage:pageSize:completion:` 标记为已废弃。
 - [IM SDK] 新增置顶服务器会话的功能：
-    - 新增 `IEMChatManager#pinConversation:completionBlock:` 方法，实现[置顶或取消置顶服务器会话](message_retrieve.html#置顶会话)：
-    - 新增 `IEMChatManager#getPinnedConversationsFromServerWithCursor:pageSize:completion` 方法，实现[获取置顶的服务器会话](message_retrieve.html#获取服务端的置顶会话列表)。
-- [IM SDK] 新增 `IEMChatManager#getAllConversations:` 方法，实现[从本地获取排序后的会话列表](message_manage.html#获取本地所有会话)。
+    - 新增 `IEMChatManager#pinConversation:completionBlock:` 方法，实现[置顶或取消置顶服务器会话](conversation_pin.html#置顶会话)：
+    - 新增 `IEMChatManager#getPinnedConversationsFromServerWithCursor:pageSize:completion` 方法，实现[获取置顶的服务器会话](conversation_pin.html#获取服务端的置顶会话列表)。
+- [IM SDK] 新增 `IEMChatManager#getAllConversations:` 方法，实现[从本地获取排序后的会话列表](conversation_list.html#获取本地所有会话)。
 - [IM SDK] 新增在群组或聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)功能。
 
 ### 优化
@@ -121,7 +164,7 @@
 
 ### 新增特性
 
-[IM SDK] [新增 `EMChatManager#getConversationsFromServerByPage:pageSize:completion` 方法实现从服务端分页获取会话列表](message_retrieve.html#从服务器分页获取会话列表)。
+[IM SDK] [新增 `EMChatManager#getConversationsFromServerByPage:pageSize:completion` 方法实现从服务端分页获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
 
 ### 优化
 
@@ -132,7 +175,7 @@
 
 ### 新增特性
 
-[IM SDK] 新增[消息流量统计功能](message_manage.html#获取本地消息的流量统计信息)。
+[IM SDK] 新增[消息流量统计功能](message_traffic_statis.html#获取本地消息的流量统计信息)。
 
 ### 修复
 
@@ -236,7 +279,7 @@
 ### 优化
 
 - [IM SDK] 优化网络链路，提升网络访问性能；
-- [IM SDK] 优化 [拉取漫游消息接口](message_retrieve.html)，增加指定拉取消息方向的参数；
+- [IM SDK] 优化 [拉取漫游消息接口](message_retrieve.html#从服务器获取指定会话的消息)，增加指定拉取消息方向的参数；
 
 ## 版本 V3.9.2.1 2022-5-25
 

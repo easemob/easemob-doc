@@ -57,7 +57,27 @@
 
 填写回执配置，测试回执通过后进行提交。 
 
-![img](@static/images/instantpush/push_huawei_callbackconfig.png)
+![img](@static/images/instantpush/huawei_report_v1.png)
+
+如果您有多个回执地址，且环信回执地址并非默认选项，则需要指定回执配置ID，详情见 [华为配置推送通知receiptId ](push_notification_config.html#华为推送说明)
+
+![img](@static/images/instantpush/huawei_receipt_id.png)
+
+示例：
+
+```json
+{
+    "pushMessage":{
+        "huawei":{
+            "message":{
+                "android":{
+                    "receiptId":"RCP78C959D4"
+                }
+            }
+        }
+    }
+}
+```
 
 ##### 2.4.1、回调地址
 
@@ -66,14 +86,6 @@
 您可以在环信后台，**即时通讯** > **服务概览** 中查看当前 Appkey 的 Rest API 域名地址，仅支持填写 `easemob.com` 类型。 
 
 ![img](@static/images/instantpush/push_domain_name.png)
-
-##### 2.4.2、证书内容
-
-[easemob.txt.zip](https://docs-im.easemob.com/_media/playground/push/apppush/easemob.txt.zip)
-
-:::notice
-证书内容在2023年3月4日过期，环信将在2023年2月进行更新，届时您需要同步更新。
-:::
 
 ### 3、FCM 客户端处理上报
 

@@ -1,5 +1,7 @@
 # 环信超级社区（Circle）快速开始
 
+<Toc />
+
 ## 集成准备
 
 使用 Circle 之前，确保你已经集成环信即时通讯 IM Android SDK 3.9.9.2，详见 [环信即时通讯 IM Android 快速开始](/document/android/quickstart.html)。

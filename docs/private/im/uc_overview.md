@@ -82,5 +82,5 @@
 | Android | [下载体验](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/poc/android/app-release.apk) |
 | iOS | [下载体验](https://testflight.apple.com/join/j1ssvXm0)|
 
-<span style="color:#000;font-weight:bold;font-size:20px;">授权开源</span><br>
+<span style="color:#000;font-weight:bold;font-size:20px;">授权免费开源</span><br>
 <span>通过签署授权协议，环信可提供环信通源码以帮助合作伙伴或最终客户降低开发成本，加速项目进程。请联系程先生 (Tel:17611319060)。</span>

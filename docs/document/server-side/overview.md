@@ -100,7 +100,7 @@
 | 查询当前用户的所有设备的推送绑定信息    | GET  | /{org_name}/{app_name}/users/wzy/push/binding |查询用户设备与推送信息进行绑定和解绑。  |
 | 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送消息显示的昵称。                            |
 | 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送消息展示为仅通知还是详情可见。              |
-| 设置免打扰           | PUT  | /{org_name}/{app_name}/users/{username} | 设置用户离线推送是否开启免打扰模式，以及开启/关闭免打扰的时间。 |
+| 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{username}/notification/template | 接收方配置模板名称。 |
 
 ### 消息发送及文件下载
 
@@ -109,6 +109,7 @@
 | 名称<div style="width: 150px;"></div>             | 方法 | 请求                                        | 描述                                                         |
 | :--------------- | :--- | :------------------------------------------ | :----------------------------------------------------------- |
 | 发送消息         | POST | 三种请求场景如下：<br/> - 单聊：/{org_name}/{app_name}/messages/users <br/> - 群聊：/{org_name}/{app_name}/messages/chatgroups <br/> - 聊天室：/{org_name}/{app_name}/messages/chatrooms  | 聊天相关 API，一般是模拟系统管理员给用户、群组或聊天室发送消息，支持发送文本消息、图片消息、语音消息、视频消息，透传消息，扩展消息以及文件类型消息。 |
+| 发送聊天室广播消息         | POST | /{org_name}/{app_name}/messages/chatrooms/broadcast   | 向 app 下的所有活跃聊天室（聊天室至少存在一个成员，而且曾经至少发送过一条消息）发送广播消息。                                       |
 | 上传文件         | POST | /{org_name}/{app_name}/chatfiles            | 上传语音和图片等文件。                                       |
 | 下载文件         | GET | /{org_name}/{app_name}/chatfiles/{file_uuid}     | 下载语音和图片等文件。                                       |
 | 获取聊天记录文件 | GET  | /{org_name}/{app_name}/chatmessages/${time} | 获取聊天记录文件。                                           |
@@ -133,7 +134,9 @@
 | :----------- | :----- | :----------------------------------------------------------- | :--------------------- |
 | 添加好友     | POST   | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username} | 添加为好友。           |
 | 移除好友     | DELETE | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username} | 移除好友列表中的用户。 |
-| 获取好友列表 | GET    | /{org_name}/{app_name}/users/{owner_username}/contacts/users | 获取好友列表。         |
+| 设置好友备注     | PUT | /{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username} | 设置好有备注。 |
+| 分页获取好友列表    |  GET  | /{org_name}/{app_name}/user/{username}/contacts?limit={N}&cursor={cursor}&needReturnRemark={true/false}  | 100 次/秒/App Key   |
+| 一次性获取好友列表 | GET    | /{org_name}/{app_name}/users/{owner_username}/contacts/users | 获取好友列表。         |
 | 获取黑名单列表   | GET    | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 获取黑名单。           |
 | 添加用户至黑名单   | POST   | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 添加用户至黑名单。     |
 | 将用户从黑名单移除   | DELETE | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username} | 移除黑名单中的用户。   |

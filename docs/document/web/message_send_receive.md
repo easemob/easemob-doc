@@ -23,7 +23,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Web SDK 可以实现消息的发送、接收与撤回。
+环信即时通讯 IM Web SDK 可以实现消息的发送和接收。
 
 发送和接收消息：
 
@@ -100,13 +100,15 @@ function sendTextMessage() {
 }
 ```
 
+若初始化时打开了 `useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
+
 ### 接收消息
 
 你可以通过 `addEventHandler` 注册监听器监听消息事件。你可以添加多个事件。当不再监听事件时，请确保删除监听器。
 
 当消息到达时，接收方会收到 `onXXXMessage` 回调。每个回调包含一条或多条消息。你可以遍历消息列表，并可以解析和展示回调中的消息。
 
-对于聊天室消息，你可以通过消息的 `broadcast` 属性判断通过该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+对于聊天室消息，你可以通过消息的 `broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
 ```javascript
 // 使用 `addEventHandler` 监听回调事件
@@ -164,55 +166,19 @@ conn.addEventHandler("eventName", {
 });
 ```
 
-### 撤回消息
-
-发送方可以撤回一条发送成功的消息。调用 API 撤回消息后，服务端的该条消息（历史消息，离线消息或漫游消息）均会被移除，消息的接收方会收到 `onRecallMessage` 事件。
-
-默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
-
-```javascript
-let option = {
-  // 要撤回消息的消息 ID。
-  mid: "msgId",
-  // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-  to: "username",
-  // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
-  chatType: "singleChat",
-};
-conn.recallMessage(option)
-  .then((res) => {
-    console.log("success", res);
-  })
-  .catch((error) => {
-    // 消息撤回失败，原因可能是超过了撤销时限(超过 2 分钟)。
-    console.log("fail", error);
-  });
-```
-
-你还可以使用 `onRecallMessage` 监听消息撤回状态：
-
-```javascript
-conn.addEventHandler('MESSAGES',{
-   onRecallMessage: (msg) => {
-      // 这里需要在本地删除对应的消息，也可以插入一条消息：“XXX撤回一条消息”。
-      console.log('Recalling the message success'，msg)
-   }
-})
-```
-
 ### 发送附件消息
 
 语音、图片、视频和文件消息本质上是附件消息。发送和接收附件消息的流程如下：
 
 1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器，获取消息的基本信息以及服务器上附件文件的路径。
 
-  对于图片消息来说，环信服务器会自动生成图片缩略图；而对于视频消息来说，服务器不会生成视频缩略图。
+  对于图片消息来说，环信服务器会自动生成图片缩略图；而对于视频消息来说，视频的首帧为缩略图。
 
 2. 接收附件消息。
 
    接收方可以自行下载语音、图片、图片缩略图、视频和文件。
 
-#### 发送语音消息
+#### 发送和接收语音消息
 
 发送语音消息前，你应该在 app 级别实现录音，提供录制的语音文件的 URI 和时长。
 
@@ -270,7 +236,21 @@ function sendPrivateAudio() {
 }
 ```
 
-#### 发送图片消息
+接收方收到 `onAudioMessage` 回调，根据消息 `url` 字段获取语音文件的服务器地址，从而获取语音文件。
+
+```javascript
+// 使用 `addEventHandler` 监听回调事件
+conn.addEventHandler("eventName", {
+  // 当前用户收到语音消息。
+  onAudioMessage: function (message) {
+    // 语音文件在服务器的地址。
+    console.log(message.url);
+  },
+});
+
+```
+
+#### 发送和接收图片消息
 
 对于图片消息，服务器会根据用户设置的 `thumbnailHeight` 和 `thumbnailWidth` 参数自动生成图片的缩略图。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。
 
@@ -332,11 +312,27 @@ function sendPrivateImg() {
 }
 ```
 
+接收方收到 `onImageMessage` 回调，根据消息 `url` 字段获取图片文件的服务器地址，从而获取图片文件。
+
+```javascript
+// 使用 `addEventHandler` 监听回调事件
+conn.addEventHandler("eventName", {
+  // 当前用户收到图片消息。
+  onImageMessage: function (message) {
+    // 图片文件在服务器的地址。
+    console.log(message.url);
+    // 图片缩略图文件在服务器的地址。
+    console.log(message.thumb);
+  },
+});
+
+```
+
 #### 发送 URL 图片消息
 
 你也可以将图片上传到自己的服务器，而不是环信服务器，然后调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
 
-发送 URL 图片消息之前，确保在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://docs-im-beta.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。
+发送 URL 图片消息之前，确保在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。
 
 ```javascript
 function sendPrivateUrlImg() {
@@ -356,7 +352,7 @@ function sendPrivateUrlImg() {
 }
 ```
 
-#### 发送视频消息
+#### 发送和接收视频消息
 
 在发送视频消息之前，应在 app 级别实现视频捕获，获得捕获的视频文件的时长，单位为秒。
 
@@ -414,7 +410,23 @@ function sendPrivateVideo() {
 }
 ```
 
-#### 发送文件消息
+接收方收到 `onVideoMessage` 回调，根据消息 `url` 字段获取视频文件的服务器地址，从而获取视频文件。
+
+```javascript
+// 使用 `addEventHandler` 监听回调事件
+conn.addEventHandler("eventName", {
+  // 当前用户收到视频消息。
+  onVideoMessage: function (message) {
+    // 视频文件在服务器的地址。
+    console.log(message.url);
+    // 视频首帧缩略图文件在服务器的地址。
+    console.log(message.thumb);
+  },
+});
+
+```
+
+#### 发送和接收文件消息
 
 参考以下代码示例创建、发送和接收文件消息：
 
@@ -471,6 +483,20 @@ function sendPrivateFile() {
       });
   }
 }
+```
+
+接收方收到 `onFileMessage` 回调，根据消息 `url` 字段获取文件的服务器地址，从而获取文件。
+
+```javascript
+// 使用 `addEventHandler` 监听回调事件
+conn.addEventHandler("eventName", {
+  // 当前用户收到文件消息。
+  onFileMessage: function (message) {
+    // 文件在服务器的地址。
+    console.log(message.url);
+  },
+});
+
 ```
 
 ### 发送位置消息

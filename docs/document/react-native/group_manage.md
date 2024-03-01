@@ -13,6 +13,7 @@
 - 创建、解散群组
 - 获取群组详情
 - 获取群组列表
+- 查询当前用户已加入的群组数量
 - 屏蔽和解除屏蔽群消息
 - 监听群组事件
 
@@ -136,6 +137,10 @@ ChatClient.getInstance()
 - `getGroupWithId`：从内存获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群主、公告信息、群成员列表数量、消息屏蔽、是否全体禁言、权限类型等，默认不包含群成员。
 - `fetchGroupInfoFromServer`：从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、是否已屏蔽群组消息和群组是否禁用等信息。若将该方法的 `fetchMembers` 参数设置为 `true`，可获取群成员列表，默认最多包括 200 个成员。
 
+:::tip
+对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
+:::
+
 ```typescript
 // 从本地获取群组详情。
 ChatClient.getInstance()
@@ -205,6 +210,19 @@ ChatClient.getInstance()
   .catch((reason) => {
     console.log("get group list fail.", groups);
   });
+```
+
+### 查询当前用户已加入的群组数量
+
+自 1.3.0 版本开始，你可以调用 `fetchJoinedGroupCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+
+```typescript
+ChatClient.getInstance()
+  .groupManager.fetchJoinedGroupCount()
+  .then((count: number) => {
+    // todo: 获取已加入群组的数目。
+  })
+  .catch();
 ```
 
 ### 屏蔽和解除屏蔽群消息
@@ -308,6 +326,7 @@ const groupListener: ChatGroupEventListener = new (class
     groupId: string;
     decliner: string;
     groupName?: string | undefined;
+    applicant?: string;
     reason?: string | undefined;
   }): void {
     console.log(
@@ -315,6 +334,7 @@ const groupListener: ChatGroupEventListener = new (class
       params.groupId,
       params.decliner,
       params.groupName,
+      params.applicant
       params.reason
     );
   }

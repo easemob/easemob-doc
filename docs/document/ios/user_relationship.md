@@ -3,10 +3,12 @@
 <Toc />
 
 用户登录后，可进行添加联系人、获取好友列表等操作。
+
 本文介绍如何通过环信即时通讯 IM SDK 管理好友关系，包括添加、同意、拒绝、删除、查询好友，以及管理黑名单，包括添加、移出、查询黑名单。
+
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
-- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请和删除好友等操作。
+- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请、删除好友和设置好友备注等操作。
 - 黑名单管理：查询黑名单列表、将添加用户至黑名单以及从黑名单中移出用户等操作。
 
 ## 技术原理
@@ -33,9 +35,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 本节展示如何在项目中管理好友的添加移除和黑名单的添加移除。
 
-### 管理好友列表
-
-#### 添加好友
+### 添加好友
 
 添加好友部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
 
@@ -110,7 +110,7 @@ if (!aError) {
   { }
 ```
 
-#### 删除好友
+### 删除好友
 
 删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
@@ -136,9 +136,9 @@ if (!aError) {
   { }
 ```
 
-#### 设置好友备注
+### 设置好友备注
 
-你可以调用 `setContactRemark` 方法设置好友备注。
+自 4.2.0 版本开始，你可以调用 `setContactRemark` 方法设置好友备注。
 
 好友备注的长度不能超过 100 个字符。
 
@@ -148,32 +148,32 @@ if (!aError) {
     }];
 ```
 
-#### 获取好友列表
+### 从服务端获取好友列表
 
 你可以从服务器获取好友列表，也可以从本地获取已保存的好友列表。
 
-- 从服务端获取好友列表
+自 4.2.0 版本开始，你可以调用 `getAllContactsFromServerWithCompletion` 或 `getContactsFromServerWithCursor` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
-调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+- 一次性获取服务端的好友列表。
 
 ```objectivec
-
-//一次性从服务端获取整个好友列表
 [EMClient.sharedClient.contactManager getAllContactsFromServerWithCompletion:^(NSArray<EMContact *> * _Nullable aList, EMError * _Nullable aError) {
             
     }];
+```
 
-//从服务端分页获取好友列表
+- 分页获取服务端的好友列表。
+
+```objectivec
 //pageSize 的取值范围为 [1,50]
 [EMClient.sharedClient.contactManager getContactsFromServerWithCursor:@"" pageSize:50 completion:^(EMCursorResult<EMContact *> * _Nullable aResult, EMError * _Nullable aError) {
         
     }];
 ```
 
-你也可以调用 `getContactsFromServerWithCompletion` 方法从服务器获取所有好友的列表。该列表只包含好友的用户 ID。
+此外，你也可以调用 `getContactsFromServerWithCompletion` 方法从服务器获取所有好友的列表。该列表只包含好友的用户 ID。
 
 ```objectivec
-// 从服务器获取好友列表。
 // 异步方法
 [[EMClient sharedClient].contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
     if (!aError) {
@@ -184,25 +184,27 @@ if (!aError) {
 }];
 ```
 
-- 从本地获取好友列表
+### 从本地获取好友列表
 
-:::notice
+:::tip
 需要从服务器获取好友列表之后，才能从本地获取到好友列表。
 :::
 
-调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+自 4.2.0 版本开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+
+- 获取本地单个好友。  
 
 ```objectivec
-//从本地获取单个好友
 EMContact* contact = [EMClient.sharedClient.contactManager getContact:@"userId"];
-
-
-//一次性从本地获取整个好友列表
-NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllContacts];
-
 ```
 
-你也可以调用 `getContacts` 方法从本地获取所有好友的列表，该列表只包含好友的用户 ID。
+- 一次性获取本地好友列表。
+
+```objectivec
+NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllContacts];
+```
+
+此外，你也可以调用 `getContacts` 方法从本地一次性获取所有好友的列表，该列表只包含好友的用户 ID。
 
 示例代码如下：
 
@@ -210,13 +212,11 @@ NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllCont
 NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 ```
 
-### 管理黑名单
+### 查看当前用户黑名单列表
 
 黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。
 
 黑名单功能包括加入黑名单，从黑名单移出用户和获取黑名单列表。对于获取黑名单，你可从服务器获取黑名单列表，也可从本地数据库获取已保存的黑名单列表。
-
-#### 查看当前用户黑名单列表
 
 1. 通过服务器获取黑名单列表
 
@@ -241,7 +241,7 @@ NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 ```
 
-#### 将用户加入黑名单
+### 将用户加入黑名单
 
 你可以调用 `addUserToBlackList` 将指定用户加入黑名单。用户被加入黑名单后将无法向你发送消息，也无法发送好友申请。
 
@@ -260,7 +260,7 @@ NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 }];
 ```
 
-#### 将用户移出黑名单
+### 将用户移出黑名单
 
 你可以调用 `removeUserFromBlackList` 将用户从黑名单移除，用户发送消息等行为将恢复。
 

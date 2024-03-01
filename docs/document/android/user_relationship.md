@@ -6,7 +6,7 @@
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
-- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请和删除好友等操作。
+- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请、删除好友和设置好友备注等操作。
 - 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。
 
 本文介绍如何通过环信即时通讯 IM SDK 管理好友关系。
@@ -32,9 +32,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 本节展示如何在项目中管理好友的添加移除和黑名单的添加移除。
 
-### 管理好友列表
-
-#### 添加好友
+### 添加好友
 
 添加好友部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
 
@@ -89,7 +87,7 @@ EMClient.getInstance().contactManager().declineInvitation(username);
 
 当你同意或者拒绝后，对方会通过好友事件回调，收到 `onContactAgreed` 或者 `onContactRefused`。
 
-#### 删除好友
+### 删除好友
 
 删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
@@ -103,9 +101,9 @@ EMClient.getInstance().contactManager().deleteContact(username);
 
 调用 `deleteContact` 删除好友后，对方会收到 `onContactDeleted` 回调。
 
-#### 设置好友备注
+### 设置好友备注
 
-你可以调用 `asyncSetContactRemark` 方法设置单个好友的备注。
+自 4.2.1 版本开始，你可以调用 `asyncSetContactRemark` 方法设置单个好友的备注。
 
 好友备注的长度不能超过 100 个字符。
 
@@ -123,14 +121,13 @@ EMClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, ne
 });
 ```
 
-#### 获取好友列表
+### 从服务端获取好友列表
 
-- 从服务端获取好友列表：
+自 4.2.1 版本开始，你可以调用 `asyncFetchAllContactsFromServer` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
-调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+- 一次性获取服务端好友列表。
 
 ```java
-//一次性从服务端获取整个好友列表
 EMClient.getInstance().contactManager().asyncFetchAllContactsFromServer(new EMValueCallBack<List<EMContact>>() {
     @Override
     public void onSuccess(List<EMContact> value) {
@@ -142,8 +139,11 @@ EMClient.getInstance().contactManager().asyncFetchAllContactsFromServer(new EMVa
         
     }
 });
+```
 
-//从服务端分页获取好友列表
+- 分页获取服务端好友列表。
+
+```java
 // limit 的取值范围为 [1,50]
 List<EMContact> contacts=new ArrayList<>();
 String cursor= "";
@@ -171,24 +171,24 @@ private void doAsyncFetchAllContactsFromServer(List<EMContact> contacts, String 
     });
 ```
 
-你也可以调用 `getAllContactsFromServer` 方法从服务器获取所有好友的列表，该列表只包含好友的用户 ID。
+此外，你也可以调用 `getAllContactsFromServer` 方法从服务器获取所有好友的列表，该列表只包含好友的用户 ID。
 
 ```java
-// 从服务器获取好友列表。
 // 同步方法，会阻塞当前线程。异步方法为 asyncGetAllContactsFromServer(EMValueCallBack)。
 List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
 ```
 
-- 从本地获取好友列表
+### 从本地获取好友列表
 
-调用以下两种方法返回好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+自 4.2.1 版本开始，你可以调用 `fetchContactFromLocal` 方法从本地获取单个好友的用户 ID 和好友备注。你也可以调用 `asyncFetchAllContactsFromLocal` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
-:::notice
+:::tip
 需要从服务器获取好友列表之后，才能从本地获取到好友列表。
 :::
 
+- 获取本地单个好友。
+
 ```java
-//从本地获取单个好友
 try {
     EMContact emContact = EMClient.getInstance().contactManager().fetchContactFromLocal(userId);
     String remark = emContact.getRemark();
@@ -197,8 +197,11 @@ try {
 } catch (HyphenateException e) {
     EMLog.e(TAG, "fetchContactFromLocal error:" + e.getMessage());
 };
+```
 
-//一次性从本地获取整个好友列表
+- 一次性获取本地好友列表。
+
+```java
 EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMValueCallBack<List<EMContact>>() {
     @Override
     public void onSuccess(List<EMContact> value) {
@@ -212,7 +215,7 @@ EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMVal
 });
 ```
 
-你也可以调用 `getContactsFromLocal` 方法从本地获取所有好友的列表，该列表只包含好友的用户 ID。
+此外，你也可以调用 `getContactsFromLocal` 方法从本地一次性获取所有好友的列表，该列表只包含好友的用户 ID。
 
 示例代码如下：
 
@@ -220,13 +223,11 @@ EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMVal
 List<String> usernames = EMClient.getInstance().contactManager().getContactsFromLocal();
 ```
 
-### 管理黑名单
+### 添加用户到黑名单
 
 黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。
 
 黑名单功能包括加入黑名单，从黑名单移出用户和获取黑名单列表。对于获取黑名单，你可从服务器获取黑名单列表，也可从本地数据库获取已保存的黑名单列表。
-
-#### 添加用户到黑名单
 
 你可以调用 `addUserToBlackList` 添加用户到黑名单。用户被加入黑名单后，无法向你发送消息，也无法发送好友申请。
 
@@ -238,7 +239,7 @@ List<String> usernames = EMClient.getInstance().contactManager().getContactsFrom
 EMClient.getInstance().contactManager().addUserToBlackList(username,true);
 ```
 
-#### 将用户从黑名单移除
+### 将用户从黑名单移除
 
 你可以调用 `removeUserFromBlackList` 将用户从黑名单移除，用户发送消息等行为将恢复。
 
@@ -248,7 +249,7 @@ EMClient.getInstance().contactManager().addUserToBlackList(username,true);
 EMClient.getInstance().contactManager().removeUserFromBlackList(username);
 ```
 
-#### 从服务器获取黑名单列表
+### 从服务器获取黑名单列表
 
 你可以调用 `getBlackListFromServer` 从服务端获取黑名单列表。示例代码如下：
 
@@ -258,7 +259,7 @@ EMClient.getInstance().contactManager().removeUserFromBlackList(username);
 EMClient.getInstance().contactManager().getBlackListFromServer();
 ```
 
-#### 从本地数据库获取黑名单列表
+### 从本地数据库获取黑名单列表
 
 从服务器获取黑名单列表之后，才能从本地数据库获取到黑名单列表。
 

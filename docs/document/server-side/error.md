@@ -23,7 +23,7 @@
 | :------------------------- | :----------------------------------------------------------- |
 | 400                        | （错误请求）服务器不理解请求的语法。                         |
 | 401                        | （未授权）请求要求身份验证。对于需要 token 的接口，服务器可能返回此响应。 |
-| 403                        | （禁止）服务器拒绝请求。对于群组/聊天室服务，表示本次调用不符合群组/聊天室操作的正确逻辑，例如调用添加成员接口，添加已经在群组里的用户，或者移除聊天室中不存在的成员等操作。 |
+| 403                        | （禁止）服务器拒绝请求。对于群组/聊天室服务，在以下两种情况会报该错误：<br/>- 本次调用不符合群组/聊天室操作的正确逻辑，例如调用添加成员接口，添加已经在群组里的用户，或者移除聊天室中不存在的成员等操作。<br/>- 每秒发送的消息条数超过了[发送群组消息 API](message_group.html) 和[发送聊天室消息 API](message_chatroom.html) 的限制，即群组消息的每秒发送上限为 20，聊天室为 100。 |
 | 404                        | （未找到）服务器找不到请求的接口。                           |
 | 405                        | （请求方式错误）请按照环信官网接口说明，正确的使用接口 GET，POST 等请求方式。 |
 | 408                        | （请求超时）服务器等候请求时发生超时。                       |
@@ -77,6 +77,7 @@
 | 403              | forbidden_op                       | "forbidden operation on group owner!"                        | 当前操作禁止对群主使用，如将群主加入黑名单。                                    |
 | 403              | forbidden_op                       | "can not join this group, reason：user %s has joined too many groups/chatroom!” | 用户加入的群组或聊天室数超过了限制。                           |
 | 403              | forbidden_op                       | "this appKey has create too many groups/chatrooms!”          | 加入群组或聊天室时，群组或聊天室人数已达到上限。                |
+| 403              | forbidden_op                       | "Forbidden for url: [1111111567788/test/messages/chatgroups]"  | 调用[发送群聊消息接口](message_group.html)时每秒发送的消息数量超过了 20 条。    |
 | 403              |  exceed_limit                    | "Invitee's contact max count"   | 好友请求的接收方已达好友数量上限。         |
 | 403              |  exceed_limit                   | "Inviter's contact max count"      | 好友请求的发送方已达好友数量上限。         |
 | 404              | organization_application_not_found | "Could not find application for hx/hxdeo2 from URI: hx/hxdeo2/token" | hx/hxdeo2 这个设置不正确或不存在，或 baseurl 集群设置错误（只针对 vip 集群的 AppKey），正确的是 orgname/appname，即 AppKey 的 “#” 换成 “/“。 |

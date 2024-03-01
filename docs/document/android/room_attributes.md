@@ -12,8 +12,8 @@
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
-- 设置聊天室自定义属性；
-- 删除聊天室自定义属性。
+- 设置和强制设置聊天室自定义属性；
+- 删除和强制删除聊天室自定义属性。
 
 ## 前提条件
 
@@ -174,7 +174,9 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(
 });
 ```
 
-若要覆盖其他聊天室成员设置的自定义属性，需调用 `asyncSetChatroomAttributeForced` 方法。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
+#### 强制设置单个聊天室属性
+
+如果除了设置自己的单个自定义属性还需覆盖其他聊天室成员设置的该属性，需调用 `asyncSetChatroomAttributeForced` 方法。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
 
 示例代码如下：
 
@@ -239,7 +241,9 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributes(
 });
 ```
 
-若要覆盖其他聊天室成员设置的自定义属性，需调用 `asyncSetChatroomAttributesForced` 方法。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
+#### 强制设置多个聊天室属性
+
+如果除了设置自己的多个自定义属性还需覆盖其他聊天室成员设置的这些属性，需调用 `asyncSetChatroomAttributesForced` 方法。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
 
 示例代码如下：
 
@@ -294,7 +298,9 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServer(
 });
 ```
 
-若要删除其他聊天室成员设置的自定义属性，需调用 `asyncRemoveChatRoomAttributeFromServerForced` 方法。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
+#### 强制删除单个聊天室自定义属性
+
+如果除了删除自己设置的单个自定义属性还需删除其他聊天室成员设置的该属性，需调用 `asyncRemoveChatRoomAttributeFromServerForced` 方法。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
 
 示例代码如下：
 
@@ -345,7 +351,9 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromServer
                 });
 ```
 
-若要删除其他聊天室成员设置的自定义属性，需调用 `asyncRemoveChatRoomAttributesFromServerForced` 方法。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
+#### 强制删除多个聊天室自定义属性
+
+如果除了删除自己设置的多个自定义属性还需删除其他聊天室成员设置的这些属性，需调用 `asyncRemoveChatRoomAttributesFromServerForced` 方法。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
 
 示例代码如下：
 

@@ -1,4 +1,4 @@
-# 发送单聊消息
+ # 发送单聊消息
 
 <Toc />
 
@@ -28,7 +28,7 @@
 </td>
 <td rowspan="2" width="279">
 <p>1.发送消息时，可选的 `from` 字段用于指定发送方。</p>
-<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://docs-im-beta.easemob.com/document/ios/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">APNs 自定义显示</a>和 <a href="https://docs-im-beta.easemob.com/document/android/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">Android 推送字段说明</a>。</p>
+<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://doc.easemob.com/document/ios/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">APNs 自定义显示</a>和 <a href="https://doc.easemob.com/document/android/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">Android 推送字段说明</a>。</p>
 </td>
 </tr>
 <tr>
@@ -36,7 +36,7 @@
 <p>图片/语音/视频/文件消息</p>
 </td>
 <td width="189">
-<p>1. 调用<a href="https://docs-im-beta.easemob.com/document/server-side/message_download.html#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
+<p>1. 调用<a href="https://doc.easemob.com/document/server-side/message_download.html#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
 <p>2. 调用发送消息方法，在请求 body 中传入该 UUID。</p>
 </td>
 </tr>
@@ -47,7 +47,7 @@
 单聊场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异。
 
 :::notice
-在接口调用过程中，请求体若超过 5 KB 会导致 413 错误，需要拆成几个较小的请求体重试。同时，请求体和扩展字段的总长度不能超过 3 KB。
+接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
 :::
 
 **发送频率**：通过 RESTful API 单个应用每分钟最多可发送 6000 条消息，每次最多可向 600 人发送。例如，一次向 600 人发消息，视为 600 条消息。
@@ -117,8 +117,8 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 | 参数            | 类型   | 是否必需 | 描述            |
 | :-------------- | :----- | :------- | :----------------------------------------------------- |
-| `from`          | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为管理员，即 “admin”；若传入字段但值为空字符串 (“”)，请求失败。   |
-| `to`            | List   | 是       | 消息接收方的用户 ID 数组。每次最多可向 600 个用户发送消息。  |
+| `from`          | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为 `admin`。 <Container type="tip" title="提示">1. 服务器不校验传入的用户 ID 是否存在，因此，如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。<br/>2. 若传入字段但值为空字符串 (“”)，请求失败。</Container>  |
+| `to`            | List   | 是       | 消息接收方的用户 ID 数组。每次最多可向 600 个用户发送消息。<Container type="tip" title="提示">服务器不校验传入的用户 ID 是否存在，因此，如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。</Container> |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。     |
 | `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。   |
@@ -241,7 +241,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------- |
-| `filename` | String | 是       | 图片名称。          |
+| `filename` | String | 否       | 图片名称。建议传入该参数，否则客户端收到图片消息时无法显示图片名称。          |
 | `secret`   | String | 否       | 图片的访问密钥，即成功上传图片后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果图片文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `size`     | JSON   | 否       | 图片尺寸，单位为像素，包含以下字段：<br/> - `height`：图片高度；<br/> - `width`：图片宽度。   |
 | `url`      | String | 是       | 图片 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
@@ -333,7 +333,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 | 参数       | 类型   | 是否必需 | 描述      |
 | :--------- | :----- | :------- | :---------- |
-| `filename` | String | 是       | 语音文件的名称。    |
+| `filename` | String | 否       | 语音文件的名称。建议传入该参数，否则客户端收到语音消息时无法显示语音文件名称。    |
 | `secret`   | String | 否       | 语音文件访问密钥，即成功上传语音文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。 如果语音文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `Length`   | Int    | 否       | 语音时长，单位为秒。         |
 | `url`      | String | 是       | 语音文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为文件 ID，成功上传语音文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
@@ -422,7 +422,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 | 参数           | 类型   | 是否必需 | 描述    |
 | :------------- | :----- | :------- | :---------------- |
-| `filename` | String | 是       | 文件名称。   |
+| `filename` | String | 否       | 文件名称。建议传入该参数，否则客户端收到视频消息时无法显示视频文件名称。  |
 | `thumb`        | String | 否       | 视频缩略图 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为视频缩略图唯一标识，成功上传缩略图文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
 | `length`       | Int    | 否       | 视频时长，单位为秒。  |
 | `secret`       | String | 否       | 视频文件访问密钥，即成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果视频文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。        |
@@ -517,7 +517,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 | 参数       | 类型   | 是否必需 | 描述     |
 | :--------- | :----- | :------- | :------------ |
-| `filename` | String | 是       | 文件名称。   |
+| `filename` | String | 否       | 文件名称。建议传入该参数，否则客户端收到文件消息时无法显示文件名称。   |
 | `secret`   | String | 否       | 文件访问密钥，即成功上传文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。      |
 | `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
 
@@ -808,6 +808,9 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
   "type": "custom",
   "body": {
     "customEvent": "custom_event"
+    "customExts":{
+          "ext_key1":"ext_value1"
+      }
   }
 }'
 ```

@@ -38,7 +38,7 @@
 
 仅 [超级管理员](/document/server-side/chatroom.html#管理超级管理员) 可以调用 `CreateRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
 
-你也可以直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
+建议直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
 
 示例代码如下：
 
@@ -129,7 +129,8 @@ Options options = new Options();
 options. DeleteMessagesAsExitRoom = false;
 ```
 
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，例如所有者从服务器下线则 2 分钟后自动离开聊天室。如果所有者重新进入聊天室仍是该聊天室的所有者。
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，离开后重新进入仍是该聊天室的所有者。若 `Options#IsRoomOwnerLeaveAllowed
+` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `LeaveRoom` 方法离开聊天室时会提示错误 706。
 
 ### 解散聊天室
 

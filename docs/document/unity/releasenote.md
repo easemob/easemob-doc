@@ -25,7 +25,7 @@
   - `SDKClient#GetLoggedInDevicesFromServerWithToken`：获取指定账号下登录的在线设备列表；
   - `SDKClient#KickDeviceWithToken`：将指定账号登录的指定设备踢下线；
   - `SDKClient#KickAllDevicesWithToken`：将指定账号登录的所有设备都踢下线。
-- [IM SDK] 新增[会话置顶功能](message_retrieve.html#置顶会话)：
+- [IM SDK] 新增[会话置顶功能](conversation_pin.html#置顶会话)：
   - `Conversation#IsPinned`：判断该会话是否被置顶；
   - `Conversation#PinnedTime`：会话置顶时间戳。
 - [IM SDK] 新增 `ChatManager#FetchHistoryMessagesFromServerBy` 方法根据消息拉取参数配置类 `FetchServerMessagesOption` 从服务器获取历史消息<br/>
@@ -37,7 +37,7 @@
   - `FetchServerMessagesOption#MsgTypes`：要查询的消息类型列表;
   - `FetchServerMessagesOption#StartTime`：消息查询的起始时间;
   - `FetchServerMessagesOption#EndTime`：消息查询的结束时间。
-- [IM SDK] 新增 `GetConversationsFromServerWithCursor` 方法[从服务端分页获取会话列表](message_retrieve.html#从服务器获取会话)。
+- [IM SDK] 新增 `GetConversationsFromServerWithCursor` 方法[从服务端分页获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
 - [IM SDK] 新增[在群组或聊天室中发送定向消息功能](message_send_receive.html#发送和接收定向消息)：
   - `Message#ReceiverList`：设置群组或聊天室消息接收列表。
 - [IM SDK] 新增 `Conversation#DeleteMessages`方法删除本地数据库中指定时间段的消息。
@@ -84,7 +84,7 @@
 
 ### 修复
 
-1. 修复 [`ChatManager#FetchHistoryMessageFromServer`](message_retrieve.html#从服务器获取会话) 方法在安卓环境下调用失败的问题。
+1. 修复 [`ChatManager#FetchHistoryMessageFromServer`](conversation_list.html#从服务器分页获取会话列表) 方法在安卓环境下调用失败的问题。
 2. 修复在安卓环境下发送视频消息没有回调的问题。
 
 ## 版本 V1.1.0 Dev 2023-2-25
@@ -213,7 +213,7 @@
 - 消息表情回复；
 - 管理子区等。
 
-关于详细功能概述，请参见[产品概述](https://docs-im-beta.easemob.com/product/introduction.html)。
+关于详细功能概述，请参见[产品概述](https://doc.easemob.com/product/introduction.html)。
 
 具体集成请参考以下文档：
 

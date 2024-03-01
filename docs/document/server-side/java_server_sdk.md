@@ -24,14 +24,14 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.7.5</version>
+    <version>0.8.2</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:0.7.3'
+implementation 'com.easemob.im:im-sdk-core:0.8.1'
 ```
 
 ### 使用
@@ -234,6 +234,49 @@ EMProperties properties = EMProperties.builder()
 ```
 
 ## 更新日志
+
+###  V0.8.2 2024-01-11
+
+1.增加发送聊天室全局广播功能。
+2.增加群组封禁&群组解禁的功能。
+以上更新内容请到 GroupApi & MessageApi 中查看。
+
+### V0.8.1 2024-01-2
+
+1. 增加创建大型群组功能。
+2. 删除向大型和小型聊天室发送消息的功能。
+3. 批量 添加群组成员 & 移除群组成员 去掉用户列表数量检查。
+4. 修改获取 用户 Token 功能的注释说明。
+以上更新内容请到 GroupApi & MessageApi & TokenApi 中查看。
+
+### V0.8.0 2023-12-21
+
+1. 增加 向聊天室发送定向消息 功能。
+
+以上更新内容请到 MessageApi 中查看。
+
+
+### V0.7.9 2023-11-28
+
+增加查看指定用户是否已加入群组的功能。
+
+以上更新内容请到 GroupApi 中查看。
+
+### V0.7.8 2023-11-03
+
+增加指定群主用户发送消息的功能。
+
+以上更新内容请到 MessageApi 中查看。
+
+### V0.7.7 2023-10-18
+
+修复下载历史消息文件失败的问题。
+
+### V0.7.6 2023-08-30
+
+增加获取多个聊天室详情的功能。
+
+以上更新内容请到 RoomApi 中查看。
 
 ### V0.7.5 2023-08-24
 

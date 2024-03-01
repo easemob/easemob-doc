@@ -58,7 +58,7 @@
 同时，为了保证聊天文件的安全，我们的 API 保证了以下几点：
 
 - 上传文件的大小不能超过 10 MB，超过会上传失败。
-- 支持对上传的文件限制访问。该功能开启后，你需要通过密钥才能下载被限制访问的文件。消息回调（包含发送前回调和发送后回调）和获取历史消息涉及下载文件时，都需要在下载 URL 中拼接密钥，才能正常下载文件，拼接规则为：`{{url}}?share-secret={{secret}}`。
+- 支持对上传的文件限制访问。要使用该功能，请联系商务开通。该功能开启后，你需要从文件上传响应中返回的 `share-secret` 通过密钥才能下载被限制访问的文件。消息回调（包含发送前回调和发送后回调）和获取历史消息涉及下载文件时，都需要在下载 URL 中拼接密钥，才能正常下载文件，拼接规则为：`{{url}}?share-secret={{secret}}`。
 
 ### HTTP 请求
 
@@ -76,7 +76,7 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | :---------------- | :----- | :------- | :------------------------ |
 | `Content-Type`    | String | 否       | 内容类型： `multipart/form-data`。上传文件会自动填充该请求头。  |
 | `Authorization`   | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-| `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（`share-secret`）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。 |
+| `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（`share-secret`）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。<br/><Container type="tip" title="提示">要使用文件访问限制功能，请联系商务开通。</Container>|
 
 #### 请求 body
 
@@ -142,7 +142,7 @@ curl L -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
 
 你可利用该方法下载图片、语音、视频或其他类型的文件。
 
-:::notice
+:::tip
 如果上传文件时设置了文件访问限制（`restrict-access` 设置为 `true`），需要在下载请求头中包含文件上传响应中返回的 `share-secret` 和当前登录用户的 token 才能下载文件。
 :::
 

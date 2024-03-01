@@ -350,8 +350,6 @@ payload 中字段含义：
 
 ### 群组和聊天室操作
 
-注意：目前 muc:create 仅在开通多设备服务后，才支持回调。
-
 | 事件                       | payload 中类型                         | 群聊触发事件                                   | 聊天室触发事件         |
 | :------------------------- | :------------------------------------- | :--------------------------------------------- | :--------------------- |
 | muc                        | -                                      | 群聊操作所有事件                               | 聊天室操作所有事件     |
@@ -363,8 +361,8 @@ payload 中字段含义：
 | muc:invite_accept          | {“operation”:“invite_accept”}          | 受邀用户同意入群                               | 不支持                 |
 | muc:invite_decline         | {“operation”:“invite_decline”}         | 受邀用户拒绝入群                               | 不支持                 |
 | muc:kick                   | {“operation”:“kick”}                   | 踢出群                                         | 踢出聊天室             |
-| muc:ban                    | {“operation”:“ban”}                    | 封禁群成员，即管理员将用户添加到群组黑名单     | 不支持                 |
-| muc:allow                  | {“operation”:“allow”}                  | 解除群成员封禁，即管理员将用户添加到群组黑名单 | 不支持                 |
+| muc:ban                    | {“operation”:“ban”}                    | 将用户添加到群组黑名单     | 不支持                 |
+| muc:allow                  | {“operation”:“allow”}                  | 将用户移出群组黑名单  | 不支持                 |
 | muc:update                 | {“operation”:“update”}                 | 群信息修改                                     | 聊天室信息修改         |
 | muc:block                  | {“operation”:“block”}                  | 用户屏蔽群                                     | 不支持                 |
 | muc:unblock                | {“operation”:“unblock”}                | 用户解除屏蔽群                                 | 不支持                 |
@@ -384,23 +382,26 @@ payload 中字段含义：
 | muc:add_user_white_list    | {“operation”:“add_user_white_list”}    | 将成员加入群白名单                             | 将成员加入聊天室白名单 |
 | muc:remove_user_white_list | {“operation”:“remove_user_white_list”} | 将成员移除群白名单                             | 将成员移除聊天室白名单 |
 | muc:ban_group              | {“operation”:“ban_group”}              | 群全局禁言                                     | 聊天室全局禁言         |
-| muc:remove_ban_group       | {“operation”:“remove_ban_group”}       | 解除群全局禁言                                 | 解除聊天室全局禁言     |
+| muc:remove_ban_group       | {“operation”:“remove_ban_group”}   | 解除群全局禁言                                 | 解除聊天室全局禁言     |
+| muc:set_metadata | {“operation”:“set_metadata”} | 不支持 | 设置/更新聊天室自定义属性。|
+| muc:delete_metadata | {“operation”:“delete_metadata”} | 不支持| 删除聊天室自定义属性。|
+| muc:group_member_metadata_update | {“operation”:“group_member_metadata_update”} | 设置群成员的自定义属性 | 不支持 |
 
-#### 创建群组或聊天室
+#### 创建群组
 
 payload 字段含义：
 
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
-| `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
+| `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群组 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
 | `is_chatroom` | Bool     | 是否是聊天室。<br> - `true`：是；<br> - `false`：否。             |
-| `operation`   | String   | `create` 创建群聊或聊天室。                                  |
+| `operation`   | String   | `create` 创建群组。                                  |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
-| `description` | String   | 创建群聊或聊天室失败的原因描述。                             |
+| `description` | String   | 创建群组失败的原因描述。                             |
 | `error_code`  | String   | 创建失败对应的错误码。                                       |
 
-创建群聊回调请求示例：
+创建群组回调请求示例：
 
 ```json
 { 
@@ -438,7 +439,7 @@ payload 字段含义：
 | `reason`      | String   | /                                                            |
 | `operation`   | String   | `destroy` 删除群/聊天室。                                    |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
-| `description` | String   | 删除群聊或聊天室失败的原因描述。                             |
+| `description` | String   | 删除群组或聊天室失败的原因描述。                             |
 | `error_code`  | String   | 操作失败对应的错误码。                                       |
 
 删除群聊回调请求示例：
@@ -502,12 +503,12 @@ payload 字段含义：
 
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
-| `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
+| `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群组 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `apply`：申请加入群。                                        |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
-| `description` | String   | 申请加入群聊或聊天室失败的原因描述。                         |
+| `description` | String   | 申请加入群组失败的原因描述。                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
 回调请求示例：
@@ -590,7 +591,7 @@ payload 字段含义：
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
 | `operation`   | String   | `invite`：邀请新成员加入群。                                 |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
-| `description` | String   | 邀请新用户加入群聊失败的原因描述。                           |
+| `description` | String   | 邀请新用户加入群组失败的原因描述。                           |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
 回调请求示例：
@@ -713,7 +714,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
-| `operation`   | String   | `kick`：将成员踢出群聊或聊天室。                             |
+| `operation`   | String   | `kick`：将成员踢出群组或聊天室。                             |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
@@ -772,7 +773,7 @@ payload 字段含义：
 }
 ```
 
-#### 添加成员至黑名单
+#### 添加成员至群组黑名单
 
 payload 字段含义：
 
@@ -786,7 +787,7 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
-封禁群成员（将群成员添加到黑名单）回调请求示例：
+封禁群成员，即将群成员添加到黑名单的回调请求示例：
 
 ```json
 { 
@@ -814,7 +815,7 @@ payload 字段含义：
 }
 ```
 
-#### 将成员从黑名单中移除
+#### 将成员从群组黑名单中移除
 
 payload 字段含义：
 
@@ -924,7 +925,7 @@ payload 字段含义：
 }
 ```
 
-#### 屏蔽群组或聊天室消息
+#### 屏蔽群组
 
 payload 字段含义：
 
@@ -966,7 +967,7 @@ payload 字段含义：
 }
 ```
 
-#### 取消屏蔽群组或聊天室消息
+#### 解除屏蔽群组
 
 payload 字段含义：
 
@@ -975,7 +976,7 @@ payload 字段含义：
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
-| `operation`   | String   | `unblock`：用户屏蔽群/聊天室。                               |
+| `operation`   | String   | `unblock`：用户解除屏蔽群组。                               |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
@@ -2005,6 +2006,150 @@ payload 字段含义：
 }
 ```
 
+#### 设置/更新聊天室自定义属性
+
+payload 字段含义：
+
+| 字段          | 数据类型 | 含义                                                         |
+| :------------ | :------- | :----------------------------------------------------------- |
+| `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{聊天室 ID}@conference.easemob.com`。 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。 |
+| `event_info.ext`   | String   | 消息的扩展字段，包含聊天室的自定义属性内容。   |
+| `event_info.type`   | String   | 聊天室自定义属性类型。    |
+| `operation`   | String   | `set_metadata`：设置或更新聊天室自定义属性。  |
+| `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
+| `description` | String   | 操作失败的原因描述。|
+| `error_code`  | String   | 失败对应的错误码。|
+
+此外，`from` 为聊天室 ID，`to` 为聊天室中成员的用户 ID。
+
+设置/更新聊天室自定义属性回调请求示例：
+
+```json
+{ 
+    "chat_type": "muc", 
+    "callId": "XXXX#XXXX_976432657191668068", 
+    "security": "f8956ab6d6f78df93efb2dbca5f2eb83", 
+    "payload": { 
+        "muc_id": "XXXX#XXXX@conference.easemob.com", 
+        "is_chatroom": true, 
+        "event_info":{
+           "ext":"{\"result\":{\"successKeys\": [\"key1\",\"key2\"],\"errorKeys\":{}},\"identify\":\"\",\"is_forced\":false,\"muc_name\":\"Take\",\"need_notify\":true, \"properties\":{\"key1\": \"value1\",\"key2\": \"value2 \"}, \"operator \": \"user1\"}",
+           "type":"event_none" 
+        },
+        "operation": "set_metadata", 
+        "status": { 
+            "description": "", 
+            "error_code": "ok" 
+        } 
+    }, 
+    "group_id": "662XXXX13", 
+    "host": "XXXX", 
+    "appkey": "XXXX#XXXX", 
+    "from": "662XXXX13", 
+    "to": "aaa111", 
+    "eventType": "chat", 
+    "msg_id": "976432657191668068", 
+    "timestamp": 1644908244060 
+}
+```
+
+#### 删除聊天室自定义属性
+
+payload 字段含义：
+
+| 字段          | 数据类型 | 含义                                                         |
+| :------------ | :------- | :----------------------------------------------------------- |
+| `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{聊天室 ID}@conference.easemob.com`。 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。 |
+| `event_info.ext`   | String   | 消息的扩展字段，包含聊天室的自定义属性内容。   |
+| `event_info.type`   | String   | 聊天室自定义属性类型。    |
+| `operation`   | String   | `delete_metadata`：删除聊天室自定义属性。  |
+| `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
+| `description` | String   | 操作失败的原因描述。|
+| `error_code`  | String   | 失败对应的错误码。|
+
+此外，`from` 为聊天室 ID，`to` 为聊天室中成员的用户 ID。
+
+删除聊天室自定义属性回调请求示例：
+
+```json
+{ 
+    "chat_type": "muc", 
+    "callId": "XXXX#XXXX_976432657191668068", 
+    "security": "f8956ab6d6f78df93efb2dbca5f2eb83", 
+    "payload": { 
+        "muc_id": "XXXX#XXXX@conference.easemob.com", 
+        "is_chatroom": true, 
+        "event_info":{
+           "ext":"{\"result\":{\"successKeys\": [\"key1\",\"key2\"],\"errorKeys\":{}},\"identify\":\"\",\"is_forced\":false,\"muc_name\":\"Take\",\"need_notify\":true, \"properties\":{\"key1\": \"value1\",\"key2\": \"value2 \"}, \"operator \": \"user1\"}",
+           "type":"event_none" 
+        },
+        "operation": "delete_metadata", 
+        "status": { 
+            "description": "", 
+            "error_code": "ok" 
+        } 
+    }, 
+    "group_id": "662XXXX13", 
+    "host": "XXXX", 
+    "appkey": "XXXX#XXXX", 
+    "from": "662XXXX13", 
+    "to": "aaa111", 
+    "eventType": "chat", 
+    "msg_id": "976432657191668068", 
+    "timestamp": 1644908244060 
+}
+```
+
+#### 设置群成员的自定义属性
+
+payload 字段含义：
+
+| 字段          | 数据类型 | 含义                                                         |
+| :------------ | :------- | :----------------------------------------------------------- |
+| `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{群组 ID}@conference.easemob.com`。 |
+| `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。 |
+| `event_info.ext`   | String   | 消息的扩展字段，包含群组成员的自定义属性内容。   |
+| `event_info.type`   | String   | 群组成员的自定义属性类型。    |
+| `operation`   | String   | `group_member_metadata_update`：设置或更新群组成员的自定义属性。  |
+| `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
+| `description` | String   | 操作失败的原因描述。|
+| `error_code`  | String   | 失败对应的错误码。|
+
+此外，`from` 为群组 ID，`to` 为群组成员的用户 ID。
+
+设置群成员的自定义属性的回调请求示例：
+
+```json
+{ 
+    "chat_type": "muc", 
+    "callId": "XXXX#XXXX_976432657191668068", 
+    "security": "f8956ab6d6f78df93efb2dbca5f2eb83", 
+    "payload": { 
+        "muc_id": "XXXX#XXXX@conference.easemob.com", 
+        "is_chatroom": false, 
+        "event_info":{
+           "ext":"{\"result\":{\"successKeys\": [\"key1\",\"key2\"],\"errorKeys\":{}},\"identify\":\"\",\"is_forced\":false,\"muc_name\":\"Take\",\"need_notify\":true, \"properties\":{\"key1\": \"value1\",\"key2\": \"value2 \"}, \"operator \": \"user1\"}",
+           "type":"event_none" 
+        },
+        "operation": "group_member_metadata_update", 
+        "status": { 
+            "description": "", 
+            "error_code": "ok" 
+        } 
+    }, 
+    "group_id": "632XXXX13", 
+    "host": "XXXX", 
+    "appkey": "XXXX#XXXX", 
+    "from": "632XXXX13", 
+    "to": "aaa111", 
+    "eventType": "chat", 
+    "msg_id": "976432657191668068", 
+    "timestamp": 1644908244060 
+}
+```
+
 ### 好友关系操作
 
 | 事件                  | payload 中类型                 | 触发事件             |
@@ -2014,8 +2159,6 @@ payload 字段含义：
 | `roster:remove`         | `{“operation”:“remove”}`         | 删除好友             |
 | `roster:accept`         | `{“operation”:“accept”}`         | 同意好友申请。对方用户收到该事件。         |
 | `roster:decline`        | `{“operation”:“decline”}`        | 拒绝好友申请。对方用户收到该事件。       |
-| `roster:remote_accept`  | `{“operation”:“remote_accept”}`  | 远程同意。申请人收到该事件。            |
-| `roster:remote_decline` | `{“operation”:“remote_decline”}` | 远程拒绝。申请人收到该事件。             |
 | `roster:ban`            | `{“operation”:“ban”}`           | 拉黑好友             |
 | `roster:allow`          | `{“operation”:“allow”}`          | 解除拉黑好友         |
 
@@ -2143,70 +2286,6 @@ payload 示例：
     }
 ```
 
-#### 远程同意
-
-用户发送好友申请后，对方用户同意加好友后，申请方会收到服务器发送的该事件。
-
-payload 字段含义：
-
-| 字段         | 数据类型 | 含义                                                        |
-| :----------- | :------- | :---------------------------------------------------------- |
-| `roster_ver` | String   | 好友列表的版本号。                                          |
-| `operation`  | String   | `remote_accept`：远程同意。 |
-
-payload 示例：
-
-```json
-{ 
-    "chat_type": "roster", 
-    "callId": "XXXX#XXXX_967182720616630320", 
-    "security": "f4bc73eb6e7764e383521c2e88dc2729", 
-    "payload": { 
-        "roster_ver": "1BD5718E9C9D3F0C572A5157CFC711D4F6FA490F", 
-        "operation": "remote_accept" 
-        }, 
-    "host": "XXXX", 
-    "appkey": "XXXX#XXXX", 
-    "from": "XXXX#XXXX_XXXX/android_XXXX", 
-    "to": "2222", 
-    "eventType": "chat", 
-    "msg_id": "967182720616630320", 
-    "timestamp": 1642754575382 
-    }
-```
-
-#### 远程拒绝
-
-用户发送好友申请后，对方用户拒绝添加好友后，申请方会收到服务器发送的该事件。
-
-payload 字段含义：
-
-| 字段         | 数据类型 | 含义                                                         |
-| :----------- | :------- | :----------------------------------------------------------- |
-| `roster_ver` | String   | 好友列表的版本号。                                           |
-| `operation`  | String   | `remote_decline`：远程拒绝。 |
-
-payload 示例：
-
-```json
-{ 
-    "chat_type": "roster", 
-    "callId": "XXXX#XXXX_967182895737210928", 
-    "security": "27f5b919623380cc11d863ef957aa61b", 
-    "payload": { 
-        "roster_ver": "CFC06E0BA39E8B7FD493D102E2F8F3CAE678B380", 
-        "operation": "remote_decline" 
-        }, 
-    "host": "XXXX", 
-    "appkey": "XXXX#XXXX", 
-    "from": "XXXX#XXXX/android_XXXX", 
-    "to": "2222", 
-    "eventType": "chat", 
-    "msg_id": "967182895737210928", 
-    "timestamp": 1642754616149 
-}
-```
-
 #### 拉黑好友
 
 payload 字段含义：
@@ -2239,6 +2318,7 @@ payload 示例：
     "timestamp":1642648046912
 }
 ```
+
 
 #### 解除拉黑好友
 
@@ -2273,13 +2353,41 @@ payload 示例：
 }
 ```
 
-### ack 事件
+### 发送会话已读回执
 
-| 事件         | payload 中类型 | 触发事件     |
-| :----------- | :------------- | :----------- |
-| `read_ack`     | 无             | 发送已读回执 |
+回调请求主要字段含义：
 
-#### 发送已读回执
+| 字段          | 数据类型 | 含义                                                         |
+| :------------ | :------- | :----------------------------------------------------------- |
+| chat_type | String    |  会话已读回执。           |
+| payload.ack_message_id | String     | 会话中消息的消息 ID。                  |
+| payload.type | 会话已读回执类型。       |                |
+| from | String          | 发送已读回执的用户。|
+| to | String    |  接收已读回执的用户。                 |
+| msg_id | String      | 已读回执消息的消息 ID。 |
+
+会话已读回执的回调请求示例：
+
+```json
+{
+"callId": "easemob-demo#testy_1252106597610555348",
+"eventType": "chat",  
+"chat_type": "channel_ack", 
+"security": "203e3c86710ebdbd776d8aa9cc057b2d",
+"payload": {
+"ack_message_id": "1252106100258375636", 
+"type": "channel_ack" 
+},
+"host": "easemob@hsb-im-msync0",
+"appkey": "easemob-demo#testy",
+"from": "wzy",   
+"to": "wzy1",   
+"msg_id": "1252106597610555348",  
+"timestamp": 1709093585046
+}
+```
+
+#### 发送消息已读回执
 
 回调请求主要字段含义：
 
@@ -2355,7 +2463,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
-| `user`      | String   | 登录用户识别号，为 {App Key/设备类型_设备 ID}。              |
+| `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。 |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 登录请求到环信 IM 服务器的 Unix 时间戳，单位为 ms。          |
 | `status`    | String   | `online`，在线。                                             |
@@ -2371,7 +2479,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
     "ip":"XXXX",
     "host":"XXXX",
     "appkey":"XXXX#XXXX",
-    "user":"XXXX#XXXX_XXXX/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
+    "user":"XXXX#XXXX_XXXX@easemob.com/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
     "version":"3.8.9.1",
     "timestamp":1642585154644,
     "status":"online"
@@ -2391,7 +2499,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
-| `user`      | String   | 登录用户识别号，为 `{App Key/设备类型_设备 ID}`。              |
+| `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。             |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 请求到环信 IM 服务器的 Unix 时间戳，单位为 ms。              |
 | `status`    | String   | `offline`，离线。                                            |
@@ -2407,7 +2515,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
     "ip":"XXXX",
     "host":"XXXX",
     "appkey":"XXXX#XXXX",
-    "user":"XXXX#XXXX_XXXX/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
+    "user":"XXXX#XXXX_XXXX@easemob.com/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
     "version":"3.8.9.1",
     "timestamp":1642648914742,
     "status":"offline"
@@ -2427,7 +2535,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
-| `user`      | String   | 登录用户识别号，为 `{App Key/设备类型_设备 ID}`。              |
+| `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。  |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 请求到环信 IM 服务器的 Unix 时间戳，单位为毫秒 。              |
 | `status`    | String   | `offline`，离线。                                            |
@@ -2443,7 +2551,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
     "ip":"223.71.97.198:52709",
     "host":"msync@ebs-ali-beijing-msync40",
     "appkey":"XXXX#XXXX",
-    "user":"XXXX#XXXX_XXXX/ios_a5fa01fd-b5a4-84d5-ebeb-bf10e8950442",
+    "user":"XXXX#XXXX_XXXX@easemob.com/ios_a5fa01fd-b5a4-84d5-ebeb-bf10e8950442",
     "version":"3.8.9.1",
     "timestamp":1642648955563,
     "status":"offline"
@@ -2452,14 +2560,95 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 ### 敏感词监测
 
-| 事件                       | payload 中类型                | 触发事件             |
-| :------------------------- | :---------------------------- | :------------------- |
-| `sensitiveWords`             | -                             | 敏感词所有事件       |
-| `sensitiveWords:intercepted` | `{“alertReason”:“intercepted”}` | 因为触发敏感词被拦截 |
+回调请求主要字段含义：
+
+| 字段        | 数据类型 | 含义                                                         |
+| :---------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。 |
+| `alertReason`  | String   | 敏感词是否合规：<br/> - `through`：表示敏感词为合规内容；<br/> - `intercepted`：表示敏感词为违规词，包含敏感词的消息被拦截。<br/> - `replaced`：表示敏感词为违规词，使用 *** 代替。 | 
+| `contentReceiver`  | String   |  内容接收方的用户 ID。 | 
+| `eventType`  |  String |  事件类型，用于标识为敏感词检测还是其他类型的事件。 | 
+| `sensitiveWords`  | List   | 敏感词内容。  | 
+| `contentOwner`  |  String | 内容发送方的用户 ID。  | 
+| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。`secret` 详见 [Console 后台的回调规则配置](enable_and_configure_IM.html#配置回调规则)。  | 
+| `contentUri`  |  String | 消息唯一标识，格式为 msync:msgId。 | 
+| `host`  | String  | 服务器名称。  | 
+| `appkey`  | String  | 即时通讯服务分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成。  |  
+| `contentType`  |  String |  内容类型，目前为 `message`，表示为消息。 |  
+| `timestamp`  | Long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。 | 
+| `chatType`  | String  | 会话类型，默认全选：<br/> - `chat`：单聊回调；<br/> - `groupchat`：群聊回调包含了群组和聊天室的消息回调；<br/> - `notify`：通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 `type` 字段确定具体类型。  | 
+| `status`  | String  | 对敏感词或消息的处理动作。<br/> - `pass`：敏感词为合规内容，包含敏感词的消息通过审核。<br/> - `refuse`：敏感词为违规词，对包含敏感词的消息进行拦截，不下发。<br/> - `replace`：敏感词为违规词，由 `***` 替换。  | 
+
+- 敏感词审核通过的回调请求示例：
+
+```json
+{
+    "callId": "XXXX#XXXX_0e1b4c8e-a95c-4db1-85f3-2cbf6197d73c",
+    "alertReason": "through",
+    "contentReceiver": "XXXX#XXXX_test1@easemob.com",
+    "eventType": "keyword_alert",
+    "sensitiveWords": [],
+    "contentOwner": "XXXX#XXXX_test2@easemob.com",
+    "security": "36e8e82243ce96e1ac3f530fb815cef8",
+    "contentUri": "msync:1218049757197370792",
+    "host": "msync@ebs-ali-beijing-msync62",
+    "appkey": "XXXX#XXXX",
+    "contentType": "message",
+    "timestamp": 1701164109042,
+    "chatType": "chat:user:text",
+    "status": "pass"
+}
+```
+
+- 包含敏感词的消息被直接拦截的回调请求示例：
+
+```json
+{
+    "callId": "XXXX#XXXX_16396528-2a9c-4d96-8219-15723e436fd6",
+    "alertReason": "intercepted",
+    "contentReceiver": "XXXX#XXXX_test1@easemob.com",
+    "eventType": "keyword_alert",
+    "sensitiveWords": [
+        "12"
+    ],
+    "contentOwner": "XXXX#XXXX_test2@easemob.com",
+    "security": "47ce006af8a8f9ad26acf125244093ab",
+    "contentUri": "msync:1232040174779635136",
+    "host": "msync@ebs-ali-beijing-msync68",
+    "appkey": "XXXX#XXXX",
+    "contentType": "message",
+    "timestamp": 1704421506954,
+    "chatType": "chat:user:text",
+    "status": "refuse"
+}
+```
+
+- 敏感词使用 *** 替换的回调请求示例：
+
+```json
+{
+    "callId": "XXXX#XXXX_3a49331a-e554-48d2-bacb-797739020e2a",
+    "alertReason": "intercepted",
+    "contentReceiver": "XXXX#XXXX_test1@easemob.com",
+    "eventType": "keyword_alert",
+    "sensitiveWords": [
+        "12"
+    ],
+    "contentOwner": "XXXX#XXXX_test2@easemob.com",
+    "security": "e8b50122636487eacb55ada441f8f3cb",
+    "contentUri": "msync:1218049329273505228",
+    "host": "msync@ebs-ali-beijing-msync71",
+    "appkey": "easemob-demo#restys",
+    "contentType": "message",
+    "timestamp": 1701164009349,
+    "chatType": "chat:user:text",
+    "status": "replace"
+}
+```
 
 ### Reaction 回调事件
 
-响应体字段含义：
+回调请求主要字段含义：
 
 | 字段             | 数据类型   | 含义             |
 |:---------------|:-------|:---------------|

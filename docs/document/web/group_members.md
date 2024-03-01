@@ -91,9 +91,9 @@ conn.leaveGroup(option).then(res => console.log(res))
 
 #### 群成员被移出群组
 
-仅群主和群管理员可以调用 `removeGroupMember` 方法将指定成员移出群组。被踢出群组后，被踢群成员将会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 监听事件。被移出群组后，该用户还可以再次加入群组。
+仅群主和群管理员可以调用 `removeGroupMember` 或 `removeGroupMembers` 方法将指定的单个成员或多个成员移出群组。被踢出群组后，被踢群成员会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 监听事件。被移出群组后，用户还可以再次加入群组。
 
-示例代码如下：
+- 移出单个群成员，示例代码如下：
 
 ```javascript
 let option = {
@@ -101,6 +101,12 @@ let option = {
     username: "username"
 };
 conn.removeGroupMember(option).then(res => console.log(res))
+```
+
+- 批量移出群成员，示例代码如下：
+
+```javascript
+connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 ```
 
 ### 管理群成员自定义属性
@@ -360,7 +366,7 @@ conn.getGroupBlocklist(option).then(res => console.log(res))
 let option = {
     groupId: "groupId",
     username: "user1" || ["user1", "user2"],
-    muteDuration: 886400000 // 禁言时长，单位为毫秒。
+    muteDuration: 886400000 // 禁言时长，单位为毫秒，传 -1 表示永久禁言。
 };
 conn.muteGroupMember(option).then(res => console.log(res))
 ```
@@ -394,7 +400,9 @@ conn.getGroupMutelist(option).then(res => console.log(res))
 
 #### 开启群组全员禁言
 
-仅群主和群管理员可以调用 `disableSendGroupMsg` 方法开启群组全员禁言。群组全员开启禁言后，群成员将会收到 `muteAllMembers` 事件，除群组白名单中的成员，其他成员将不能发言。
+仅群主和群管理员可以调用 `disableSendGroupMsg` 方法开启群组全员禁言。全员禁言开启后不会在一段时间内自动取消禁言，需要调用 `enableSendGroupMsg` 方法取消全员禁言。
+
+群组全员开启禁言后，群成员将会收到 `muteAllMembers` 事件，除群组白名单中的成员，其他成员将不能发言。
 
 示例代码如下：
 

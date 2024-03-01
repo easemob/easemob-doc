@@ -92,7 +92,7 @@ connection.addEventHandler('THREADMESSAGE',{
 
 ### 撤回子区消息
 
-撤回子区消息和撤回群组消息的方法基本一致，详情请参考 [撤回消息](message_send_receive.html#撤回消息)。唯一不同的是，撤回子区消息需要指定标记 `isChatThread` 为 `true`。
+撤回子区消息和撤回群组消息的方法基本一致，详情请参考 [撤回消息](message_recall.html)。唯一不同的是，撤回子区消息需要指定标记 `isChatThread` 为 `true`。
 
 子区成员可以设置消息监听回调 `onRecallMessage` 对子区消息的撤回进行监听。
 
