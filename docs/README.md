@@ -129,8 +129,16 @@ projects:
           - link: #
             text: 语聊房
           - link: #
-            text: 内容审核        
-
+            text: 内容审核 
+  - title: 回调和错误码
+    info:
+      - links:
+          - link: #
+            text: 设置回调
+          - link: #
+            text: 回调事件
+          - link: #
+            text: 错误码                           
   - title: API 参考
     info:
       - name: IM 客户端 API
