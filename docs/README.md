@@ -147,7 +147,7 @@ projects:
             text: 内容审核                          
   - title: API 参考
     info:
-      - name: IM 客户端 API
+      - name: IM 客户端
         links:
           - link: #
             icon: /icon-Android-hover.svg
@@ -171,7 +171,7 @@ projects:
             icon: /icon-Electron-hover.svg
           - link: #
             icon: /icon-platform-hover.svg
-      - name: IM 服务端 API
+      - name: IM 服务端
         links:
           - link: #
             text: Java
