@@ -13,7 +13,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMCircleManager` 类和 `EMCircleChannel` 类用于频道管理，支持你通过调用 API 在项目中实现如下功能：
+环信 Circle Android SDK 提供 `EMCircleManager` 类和 `EMCircleChannel` 类用于频道管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建和管理频道；
 - 管理频道成员；
@@ -23,8 +23,9 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 3.9.9.2 版本的初始化，详见 [快速开始](/document/android/quickstart.html)；
+- 完成 Circle SDK 的初始化，即完成 IM SDK 3.9.9.2 版本的初始化，详见 [IM SDK 初始化](/document/android/overview.html#sdk-初始化)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解 Circle 的使用限制，详见 [使用限制](circle_overview.html#限制条件)。
 
 ## 实现方法
 
