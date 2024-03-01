@@ -130,7 +130,7 @@ projects:
 
   - title: 主要功能
     info:
-      - name: SDK（无UIKIT）
+      - name: SDK
         links:
           - link: #
             text: 会话
@@ -154,6 +154,30 @@ projects:
             text: 离线推送
           - link: #
             text: 内容审核
+      - name: 服务端 API
+        links:
+          - link: #
+            text: 会话
+          - link: #
+            text: 消息
+          - link: #
+            text: 群组
+          - link: #
+            text: 聊天室
+          - link: #
+            text: 用户属性
+          - link: #
+            text: 用户关系
+          - link: #
+            text: 在线状态订阅
+          - link: #
+            text: 消息表情恢复
+          - link: #
+            text: 子区
+          - link: #
+            text: 离线推送
+          - link: #
+            text: 内容审核      
       - name: 单群聊 UIKIT
         links:
           - link: #
