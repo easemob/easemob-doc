@@ -121,15 +121,6 @@ projects:
             text: 消息管理
           - link: #
             text: 成员管理
-  - title: 场景方案
-    info:
-      - links:
-          - link: #
-            text: 超级社区
-          - link: #
-            text: 语聊房
-          - link: #
-            text: 内容审核 
   - title: 回调和错误码
     info:
       - links:
@@ -138,7 +129,16 @@ projects:
           - link: #
             text: 回调事件
           - link: #
-            text: 错误码                           
+            text: 错误码           
+  - title: 场景方案
+    info:
+      - links:
+          - link: #
+            text: 超级社区
+          - link: #
+            text: 语聊房
+          - link: #
+            text: 内容审核                          
   - title: API 参考
     info:
       - name: IM 客户端 API
