@@ -6,107 +6,22 @@ title: 主页
 # tagline: 12小时快速集成、二进制私有协议、亿级高并发、消息及时到达、全球互联互通三大范德萨发生发大水范德萨三大法师法as的撒发的
 heroText: false
 tagline: false
-products:
-  - title: 产品介绍
-    links:
-      - link: #
-        text: 产品概述
-      - link: #
-        text: 产品动态
-      - link: #
-        text: 产品价格
-
-  - title: 使用限制
-    links:
-      - link: #
-        text: 使用限制
-      - link: #
-        text: REST API调用策略
-
-  - title: 隐私与合规
-    links:
-      - link: #
-        text: 隐私协议
-      - link: #
-        text: 合规要求
-      - link: #
-        text: 最佳实践
-
-  - title: 回调
-    links:
-      - link: #
-        text: 设置回调
-      - link: #
-        text: 回调事件
-      - link: #
-        text: 产品价格
-
-  - title: 错误码
-    links:
-      - link: #
-        text: Android
-      - link: #
-        text: iOS
-      - link: #
-        text: Web
-      - link: #
-        text: Unity/Windows
-      - link: #
-        text: RESTful
-  - title: 最新发版
-    links:
-      - link: #
-        icon: /icon-Android-hover.svg
-      - link: #
-        icon: /icon-iOS-hover.svg
-      - link: #
-        icon: /icon-web-hover.png
-      - link: #
-        icon: /icon-windows-hover.svg
-      - link: #
-        icon: /icon-linux-hover.svg
-      - link: #
-        icon: /icon-ReactNative-hover.svg
-      - link: #
-        icon: /icon-flutter-hover.png
-      - link: #
-        icon: /icon-unity-hover.svg
-      - link: #
-        icon: /icon-mini-program-hover.svg
-      - link: #
-        icon: /icon-Electron-hover.svg
-      - link: #
-        icon: /icon-platform-hover.svg
-  - title: 超级社区
-    links:
-      - link: #
-        text: 社区管理
-      - link: #
-        text: 频道管理
-      - link: #
-        text: 频道分组管理
-  - title: 语聊房
-    links:
-      - link: #
-        text: 跑通示例项目
-      - link: #
-        text: 客户端实现
-
 projects:
   - title: 产品简介
-    links:
-      - link: #
-        text: 产品概述
-      - link: #
-        text: 产品价格
-      - link: #
-        text: 产品动态
-      - link: #
-        text: 最新发版
-      - link: #
-        text: 隐私协议
-      - link: #
-        text: 安全最佳实践
+    info:
+      - links:
+          - link: 
+            text: 产品概述
+          - link: #
+            text: 产品价格
+          - link: #
+            text: 产品动态
+          - link: #
+            text: 最新发版
+          - link: #
+            text: 隐私协议
+          - link: #
+            text: 安全最佳实践
   - title: SDK 快速开始
     desc: 
     info:
@@ -202,10 +117,19 @@ projects:
             text: 消息管理
           - link: #
             text: 成员管理
-
-  - title: API参考
+  - title: 场景方案
     info:
-      - name: IM客户端API
+      - links:
+          - link: #
+            text: 超级社区
+          - link: #
+            text: 语聊房
+          - link: #
+            text: 内容审核        
+
+  - title: API 参考
+    info:
+      - name: IM 客户端 API
         links:
           - link: #
             icon: /icon-Android-hover.svg
