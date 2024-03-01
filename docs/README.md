@@ -64,7 +64,9 @@ projects:
           - link: #
             text: 在线状态订阅
           - link: #
-            text: 消息表情恢复
+            text: 消息表情回复
+          - link: #
+            text: 消息举报  
           - link: #
             text: 子区
           - link: #
@@ -123,6 +125,12 @@ projects:
             text: 消息管理
           - link: #
             text: 成员管理
+      - name: Callkit 
+        links:
+          - link: #
+            text: 一对一/多人通话
+          - link: #
+            text: 通话异常回调     
   - title: 回调和错误码
     info:
       - links:
