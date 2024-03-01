@@ -6,7 +6,7 @@ title: 主页
 # tagline: 12小时快速集成、二进制私有协议、亿级高并发、消息及时到达、全球互联互通三大范德萨发生发大水范德萨三大法师法as的撒发的
 heroText: false
 tagline: false
-# products:
+products:
   - title: 产品介绍
     links:
       - link: #
