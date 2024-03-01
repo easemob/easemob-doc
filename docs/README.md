@@ -19,6 +19,8 @@ projects:
           - link: #
             text: 最新发版
           - link: #
+            text: 使用限制  
+          - link: #
             text: 隐私协议
           - link: #
             text: 安全最佳实践
