@@ -73,12 +73,10 @@ projects:
             text: 离线推送
           - link: #
             text: 即时推送
-          - link: #
-            text: 内容审核
       - name: 服务端 API
         links:
           - link: #
-            text: 会话
+            text: 用户体系
           - link: #
             text: 消息
           - link: #
@@ -92,15 +90,13 @@ projects:
           - link: #
             text: 在线状态订阅
           - link: #
-            text: 消息表情恢复
+            text: 消息表情回复
           - link: #
             text: 子区
           - link: #
             text: 离线推送
           - link: #
-            text: 即时推送  
-          - link: #
-            text: 内容审核      
+            text: 即时推送      
       - name: UIKIT-单群聊 
         links:
           - link: #
@@ -175,7 +171,7 @@ projects:
             icon: /icon-Electron-hover.svg
           - link: #
             icon: /icon-platform-hover.svg
-      - name: IM服务端API
+      - name: IM 服务端 API
         links:
           - link: #
             text: Java
