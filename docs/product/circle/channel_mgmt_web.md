@@ -23,8 +23,9 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 4.1.4-beta 版本的初始化，详见 [快速开始](/document/web/quickstart.html)；
+- 完成环信即时通讯 Web Circle SDK 的初始化。Circle SDK 初始化与 IM SDK 相同，详见 [IM SDK 初始化](/document/web/overview.html#sdk-初始化)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解 Circle 的使用限制，详见 [使用限制](circle_overview.html#限制条件)。
 
 ## 实现方法
 

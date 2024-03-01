@@ -23,8 +23,9 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 3.9.9.1 版本的初始化，详见 [快速开始](/document/ios/quickstart.html)；
+- 完成 Circle SDK 的初始化，即完成 IM SDK 3.9.9.1 版本的初始化，详见 [IM SDK 初始化](/document/ios/overview.html#sdk-初始化)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解 Circle 的使用限制，详见 [使用限制](circle_overview.html#限制条件)。
 
 ## 实现方法
 

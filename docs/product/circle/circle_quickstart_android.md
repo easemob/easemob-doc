@@ -4,7 +4,7 @@
 
 ## 集成准备
 
-使用 Circle 之前，确保你已经集成环信即时通讯 IM Android SDK 3.9.9.2，详见 [环信即时通讯 IM Android 快速开始](/document/android/quickstart.html)。
+使用 Circle 之前，确保你已经集成环信 Circle SDK（IM Android SDK 3.9.9.2），详见 [环信即时通讯 IM Android 快速开始](/document/android/quickstart.html)。
 
 ## 技术原理
 

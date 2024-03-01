@@ -4,7 +4,7 @@
 
 ## 集成准备
 
-使用 Circle 前，确保你已经集成环信即时通讯 IM Web SDK 4.1.4-beta，详见 [环信即时通讯 IM Web 快速开始](/document/web/quickstart.html)。
+使用 Circle 前，确保你已经集成环信即时通讯 IM Web Circle SDK，Circle SDK 的集成方式与环信即时通讯 IM SDK 相同，详见 [环信即时通讯 IM Web 快速开始](/document/web/quickstart.html)。
 
 ## 技术原理
 
