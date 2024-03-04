@@ -64,7 +64,7 @@
                       v-else
                       placement="top"
                       :title="link.text"
-                      :width="200"
+                      :width="260"
                       trigger="click"
                     >
                       <template #reference>
@@ -82,23 +82,33 @@
                       <template #default>
                         <div>
                           <div v-if="link.children" class="project-detail">
-                            <a
-                              class="feature-link-item"
-                              v-for="subLink in link.children"
-                              :key="subLink.link"
-                              :href="subLink.link"
-                            >
-                              <img
-                                width="20"
-                                height="20"
-                                v-if="subLink.icon"
-                                :src="subLink.icon"
-                                alt="Platform"
-                              />
-                              <span v-if="subLink.text">
-                                {{ subLink.text }}
-                              </span>
-                            </a>
+                            <div class="project-sub-content">
+                              <div
+                                v-if="link.desc"
+                                class="project-sub-content-desc"
+                              >
+                                {{ link.desc }}
+                              </div>
+                              <div>
+                                <a
+                                  class="feature-link-item"
+                                  :href="subLink.link"
+                                  v-for="subLink in link.children"
+                                  :key="subLink.link"
+                                >
+                                  <img
+                                    width="20"
+                                    height="20"
+                                    v-if="subLink.icon"
+                                    :src="subLink.icon"
+                                    alt="Platform"
+                                  />
+                                  <span v-if="subLink.text">
+                                    {{ subLink.text }}
+                                  </span>
+                                </a>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </template>
@@ -179,5 +189,17 @@ const projects = frontmatter.value.projects || [];
 
 .project-detail a:hover {
   background-color: #ddd;
+}
+
+.project-sub-content {
+  display: flex;
+}
+
+.project-sub-content-desc {
+  width: 40%;
+  margin: 0.5rem;
+  padding-right: 0.5rem;
+  border-right: 1px solid #ddd;
+  color: #ddd;
 }
 </style>

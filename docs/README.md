@@ -51,6 +51,7 @@ projects:
         links:
           - link: #
             text: 会话
+            desc: Java是最好的语言
             children:
               - link: #
                 text: Android
@@ -60,6 +61,7 @@ projects:
                 text: Web
           - link: #
             text: 消息
+            desc: PHP是最好的语言
             children:
               - link: #
                 icon: /icon-Android-hover.svg
