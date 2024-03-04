@@ -10,7 +10,7 @@ projects:
   - title: 产品简介
     info:
       - links:
-          - link: 
+          - link:
             text: 产品概述
           - link: #
             text: 产品价格
@@ -19,13 +19,13 @@ projects:
           - link: #
             text: 最新发版
           - link: #
-            text: 使用限制  
+            text: 使用限制
           - link: #
             text: 隐私协议
           - link: #
             text: 安全最佳实践
   - title: SDK 快速开始
-    desc: 
+    desc:
     info:
       - links:
           - link: #
@@ -51,8 +51,22 @@ projects:
         links:
           - link: #
             text: 会话
+            children:
+              - link: #
+                text: Android
+              - link: #
+                text: iOS
+              - link: #
+                text: Web
           - link: #
             text: 消息
+            children:
+              - link: #
+                icon: /icon-Android-hover.svg
+                text: Android
+              - link: #
+                icon: /icon-iOS-hover.svg
+                text: iOS
           - link: #
             text: 群组
           - link: #
@@ -66,12 +80,12 @@ projects:
           - link: #
             text: 消息表情回复
           - link: #
-            text: 消息举报  
+            text: 消息举报
           - link: #
             text: 子区
           - link: #
             text: 离线推送
-          - link: #
+          - link: http://localhost:8080/push/push_overview.html
             text: 即时推送
       - name: 服务端 API
         links:
@@ -96,8 +110,8 @@ projects:
           - link: #
             text: 离线推送
           - link: #
-            text: 即时推送      
-      - name: UIKIT-单群聊 
+            text: 即时推送
+      - name: UIKIT-单群聊
         links:
           - link: #
             text: 会话
@@ -121,12 +135,12 @@ projects:
             text: 消息管理
           - link: #
             text: 成员管理
-      - name: Callkit 
+      - name: Callkit
         links:
           - link: #
             text: 一对一/多人通话
           - link: #
-            text: 通话异常回调     
+            text: 通话异常回调
   - title: 回调和错误码
     info:
       - links:
@@ -135,7 +149,7 @@ projects:
           - link: #
             text: 回调事件
           - link: #
-            text: 错误码           
+            text: 错误码
   - title: 场景方案
     info:
       - links:
@@ -144,7 +158,7 @@ projects:
           - link: #
             text: 语聊房
           - link: #
-            text: 内容审核                          
+            text: 内容审核
   - title: API 参考
     info:
       - name: IM 客户端

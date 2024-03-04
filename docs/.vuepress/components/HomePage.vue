@@ -41,21 +41,70 @@
             <template v-for="info in project.info" :key="info.link">
               <h4 v-if="info.name">{{ info.name }}</h4>
               <div class="feature-link-wrapper">
-                <a
-                  v-for="link in info.links"
-                  :key="link.text"
-                  class="feature-link-item"
-                  :href="link.link"
-                >
-                  <img
-                    width="20"
-                    height="20"
-                    v-if="link.icon"
-                    :src="link.icon"
-                    alt="Platform"
-                  />
-                  <span v-if="link.text"> {{ link.text }} </span>
-                </a>
+                <ClientOnly>
+                  <template v-for="link in info.links" :key="link.text">
+                    <a
+                      v-if="!link.children"
+                      class="feature-link-item"
+                      :href="link.link"
+                    >
+                      <img
+                        width="20"
+                        height="20"
+                        v-if="link.icon"
+                        :src="link.icon"
+                        alt="Platform"
+                      />
+                      <span v-if="link.text">
+                        {{ link.text }}
+                      </span>
+                    </a>
+
+                    <el-popover
+                      v-else
+                      placement="top"
+                      :title="link.text"
+                      :width="200"
+                      trigger="click"
+                    >
+                      <template #reference>
+                        <a class="feature-link-item" :href="link.link">
+                          <img
+                            width="20"
+                            height="20"
+                            v-if="link.icon"
+                            :src="link.icon"
+                            alt="Platform"
+                          />
+                          <span v-if="link.text"> {{ link.text }} </span>
+                        </a>
+                      </template>
+                      <template #default>
+                        <div>
+                          <div v-if="link.children" class="project-detail">
+                            <a
+                              class="feature-link-item"
+                              v-for="subLink in link.children"
+                              :key="subLink.link"
+                              :href="subLink.link"
+                            >
+                              <img
+                                width="20"
+                                height="20"
+                                v-if="subLink.icon"
+                                :src="subLink.icon"
+                                alt="Platform"
+                              />
+                              <span v-if="subLink.text">
+                                {{ subLink.text }}
+                              </span>
+                            </a>
+                          </div>
+                        </div>
+                      </template>
+                    </el-popover>
+                  </template>
+                </ClientOnly>
               </div>
             </template>
           </div>
@@ -100,6 +149,8 @@ const projects = frontmatter.value.projects || [];
   flex-wrap: wrap;
 }
 .feature-link-item {
+  display: flex;
+  align-items: center;
   padding: 0.5rem 1rem 0.5rem 0;
   transition: color 0.2s linear;
   transition: padding 0.2s linear;
@@ -108,5 +159,25 @@ const projects = frontmatter.value.projects || [];
 .feature-link-item:hover {
   color: var(--accent-color);
   padding-top: 0.3rem;
+}
+
+.project-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-width: 0 0 1px 0;
+  border-color: var(--border-color);
+  border-style: solid;
+}
+
+.project-detail a {
+  padding: 0.5rem 0;
+  width: 100%;
+  transition: background-color 0.2s linear;
+}
+
+.project-detail a:hover {
+  background-color: #ddd;
 }
 </style>
