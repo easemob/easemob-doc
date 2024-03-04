@@ -28,14 +28,18 @@ projects:
     desc:
     info:
       - links:
-          - link: #
+          - link: https://doc.easemob.com/document/android/quickstart.html
             icon: /icon-Android-hover.svg
+            text: Android
           - link: #
             icon: /icon-iOS-hover.svg
+            text: iOS
           - link: #
             icon: /icon-web-hover.png
+            text: Web
           - link: #
             icon: /icon-windows-hover.svg
+            text: Windows
           - link: #
             icon: /icon-linux-hover.svg
           - link: #
@@ -44,12 +48,10 @@ projects:
             icon: /icon-flutter-hover.png
           - link: #
             icon: /icon-unity-hover.svg
-
-  - title: 主要功能
+  - title: SDK/服务端功能
     info:
-      - name: SDK
-        links:
-          - link: #
+      - links:
+          - link: 
             text: 会话
             desc: Java是最好的语言
             children:
@@ -74,7 +76,9 @@ projects:
           - link: #
             text: 聊天室
           - link: #
-            text: 用户属性
+            text: 用户体系  
+          - link: #
+            text: 用户属性 
           - link: #
             text: 用户关系
           - link: #
@@ -82,40 +86,21 @@ projects:
           - link: #
             text: 消息表情回复
           - link: #
-            text: 消息举报
+            text: 消息举报 
           - link: #
             text: 子区
           - link: #
             text: 离线推送
           - link: http://localhost:8080/push/push_overview.html
             text: 即时推送
-      - name: 服务端 API
-        links:
           - link: #
-            text: 用户体系
+            text: 回调
           - link: #
-            text: 消息
-          - link: #
-            text: 群组
-          - link: #
-            text: 聊天室
-          - link: #
-            text: 用户属性
-          - link: #
-            text: 用户关系
-          - link: #
-            text: 在线状态订阅
-          - link: #
-            text: 消息表情回复
-          - link: #
-            text: 子区
-          - link: #
-            text: 离线推送
-          - link: #
-            text: 即时推送
-      - name: UIKIT-单群聊
-        links:
-          - link: #
+            text: 错误码       
+  - title: UIKIT-单群聊
+    info:
+      - links:
+          - link: 
             text: 会话
           - link: #
             text: 消息
@@ -123,9 +108,10 @@ projects:
             text: 群组
           - link: #
             text: 联系人
-      - name: UIKIT-聊天室
-        links:
-          - link: #
+  - title: UIKIT-聊天室
+    info:
+      - links:
+          - link: 
             text: 聊天室管理
           - link: #
             text: 弹幕和打赏
@@ -136,22 +122,14 @@ projects:
           - link: #
             text: 消息管理
           - link: #
-            text: 成员管理
-      - name: Callkit
-        links:
-          - link: #
-            text: 一对一/多人通话
-          - link: #
-            text: 通话异常回调
-  - title: 回调和错误码
+            text: 成员管理  
+  - title: Callkit
     info:
       - links:
+          - link: 
+            text: 一对一/多人通话
           - link: #
-            text: 设置回调
-          - link: #
-            text: 回调事件
-          - link: #
-            text: 错误码
+            text: 通话异常回调          
   - title: 场景方案
     info:
       - links:
