@@ -48,7 +48,7 @@ projects:
             icon: /icon-flutter-hover.png
           - link: #
             icon: /icon-unity-hover.svg
-  - title: SDK/服务端功能和服务
+  - title: SDK/服务端功能
     info:
       - links:
           - link: 
