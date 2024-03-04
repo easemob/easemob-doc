@@ -28,14 +28,18 @@ projects:
     desc:
     info:
       - links:
-          - link: #
+          - link: https://doc.easemob.com/document/android/quickstart.html
             icon: /icon-Android-hover.svg
+            text: Android
           - link: #
             icon: /icon-iOS-hover.svg
+            text: iOS
           - link: #
             icon: /icon-web-hover.png
+            text: Web
           - link: #
             icon: /icon-windows-hover.svg
+            text: Windows
           - link: #
             icon: /icon-linux-hover.svg
           - link: #
