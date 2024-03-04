@@ -48,7 +48,7 @@ projects:
             icon: /icon-flutter-hover.png
           - link: #
             icon: /icon-unity-hover.svg
-  - title: SDK/服务端功能
+  - title: 功能和服务
     info:
       - links:
           - link: 
@@ -96,6 +96,8 @@ projects:
           - link: #
             text: 回调
           - link: #
+            text: 内容审核
+          - link: #
             text: 错误码       
   - title: UIKIT-单群聊
     info:
@@ -137,8 +139,6 @@ projects:
             text: 超级社区
           - link: #
             text: 语聊房
-          - link: #
-            text: 内容审核
   - title: API 参考
     info:
       - name: IM 客户端
