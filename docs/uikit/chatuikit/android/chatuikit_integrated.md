@@ -14,50 +14,7 @@
 
 ## 集成单群聊 UIKit
 
-单群聊 UIKit 支持 Gradle 接入和 Module 源码集成。
-
-### Gradle 接入集成
-
-#### Gradle 7.0 之前
-
-在项目根目录的 `build.gradle` 或者 `build.gradle.kts` 文件中添加 MavenCentral 远程仓库。
-
-```kotlin
-buildscript {
-    repositories {
-        ...
-        mavenCentral()
-    }
-}
-allprojects {
-    repositories {
-        ...
-        mavenCentral()
-    }
-}
-```
-
-#### Gradle 7.0 及以上版本
-
-在项目根目录的 `settings.gradle` 或者 `settings.gradle.kts` 文件中检查并添加 MavenCentral 远程仓库。
-
-```kotlin
-pluginManagement {
-    repositories {
-        ...
-        mavenCentral()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        ...
-        mavenCentral()
-    }
-}
-```
-
-### Module 源码集成
+单群聊 UIKit 支持 Module 源码集成。
 
 从 GitHub 获取[单群聊 UIKit](https://github.com/easemob/chatuikit-android) 源码，按照下面的方式集成：
 
