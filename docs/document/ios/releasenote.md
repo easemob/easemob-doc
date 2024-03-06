@@ -2,6 +2,16 @@
 
 <Toc />
 
+## 版本 V4.4.1 Dev 2024-03-06（开发版）
+
+### 新增特性
+
+- [IM SDK] SDK 中增加了隐私协议 `PrivacyInfo.xcprivacy`。
+
+### 修复
+
+- [IM SDK] 修复极端情况下，连续修改同一条消息的扩展字段 `ext`，调用 `EMChatManager#updateMessage` 后偶现的崩溃问题。
+
 ## 版本 V4.4.0 Dev 2024-01-30（开发版）
 
 ### 新增特性
