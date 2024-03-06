@@ -45,7 +45,9 @@ connection.getHistoryMessages({
 });
 ```
 
-同时，你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的历史消息。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
+此外，你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的历史消息。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
+
+为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。
 
 ```javascript
 let options = {

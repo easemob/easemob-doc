@@ -12,7 +12,7 @@
 
 环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMConversation` 类实现对本地消息的管理，其中核心方法如下：
 
-- `EMChatManager#fetchHistoryMessages`：获取服务器保存的指定会话中的消息。
+- `EMChatManager#fetchHistoryMessages`：根据 `FetchMessageOptions` 类获取服务器保存的指定会话中的消息。
 - `EMChatManager.getConversation`：读取本地指定会话的消息。
 - `EMChatManager.loadMessage`：根据消息 ID 获取消息。
 - `EMConversation.loadMessagesWithMsgType`：获取本地存储的指定会话中特定类型的消息。
@@ -27,16 +27,60 @@
 
 ## 实现方法
 
-### 分页获取指定会话的历史消息
+### 从服务器获取指定会话的历史消息
 
-你可以调用 `fetchHistoryMessages` 方法从服务器获取指定会话的消息（消息漫游）。
+对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
+你可以调用 `fetchHistoryMessagesByOption` 方法基于 `FetchMessageOptions` 类从服务端分页拉取单聊和群组聊天的历史消息（消息漫游）。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。
+
+通过设置 `FetchMessageOptions` 类，你可以根据以下条件拉取历史消息：
+
+- 消息发送方；
+- 消息类型；
+- 消息时间段；
+- 消息搜索方向；
+- 是否将拉取的消息保存到数据库；
+- 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
 
 :::tip
-1. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
-2. 各类事件通知发送时，若接收的用户离线时，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
+1. 若使用该 API，需将 SDK 版本升级至 V4.0.2 版本或以上。
+2. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+3. 各类事件通知发送时，若接收的用户离线，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
 :::
+
+```dart
+// fromUserId: 消息发送者的用户ID
+    // msgTypes: 消息类型，可以是 [MessageType.TXT, MessageType.IMAGE, MessageType.VIDEO, MessageType.LOCATION, MessageType.VOICE, MessageType.FILE, MessageType.CUSTOM, MessageType.COMBINE]
+    // startTs: 开始时间戳
+    // endTs: 结束时间戳
+    // needSave: 是否需要保存到本地数据库
+
+    FetchMessageOptions options = FetchMessageOptions(
+      from: fromUserId,
+      msgTypes: [MessageType.TXT],
+      startTs: 1709284487000,
+      endTs: 1709284499000,
+      needSave: true,
+    );
+
+    // conversationId: 会话ID, 单聊时为对方用户ID, 群聊时为群ID
+    // type: 会话类型
+    // options: 查询条件
+    // cursor: 分页查询时的游标， 首次可以传 null或不传，如果是分页查询，传上一次查询结果的游标 result.cursor
+    // pageSize: 每页查询的数量
+    EMCursorResult<EMMessage> result =
+        await EMClient.getInstance.chatManager.fetchHistoryMessagesByOption(
+      conversationId,
+      type,
+      options: options,
+      cursor: cursor,
+      pageSize: 20,
+    );
+```
+
+此外，你也可以调用 `fetchHistoryMessages` 方法从服务器获取指定会话的消息。
+
+为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 
 ```dart
 try {
