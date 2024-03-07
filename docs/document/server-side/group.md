@@ -2058,7 +2058,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 | 参数       | 类型   | 描述                      |
 | :--------- | :----- | :------------------------ |
-| `newowner` | String | 群组的新管理员的用户 ID。 |
+| `newowner` | String | 群组的新群主的用户 ID。 |
 
 #### HTTP 响应
 
