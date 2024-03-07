@@ -807,7 +807,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
   "to": ["user2"],
   "type": "custom",
   "body": {
-    "customEvent": "custom_event"
+    "customEvent": "custom_event",
     "customExts":{
           "ext_key1":"ext_value1"
       }

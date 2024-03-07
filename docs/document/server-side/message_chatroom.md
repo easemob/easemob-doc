@@ -740,7 +740,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
   "to": ["185145305923585"],
   "type": "custom",
   "body": {
-    "customEvent": "custom_event"
+    "customEvent": "custom_event",
     "customExts":{
             "ext_key1":"ext_value1"
         }
@@ -1109,7 +1109,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 -d '{
     "msg": {
         "type": "custom",
-        "customEvent": "custom_event"
+        "customEvent": "custom_event",
     },
     "from": "admin",
     "ext": {
