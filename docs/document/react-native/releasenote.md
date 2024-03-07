@@ -83,7 +83,7 @@
 - 新增 `ChatClient.version` 属性用于获取当前 SDK 的版本号。
 - 新增 `ChatGroupManager.setMemberAttribute` 方法用于[设置单个群组成员的属性](group_members.html#设置群组成员自定义属性)。
 - 新增 `ChatGroupManager.fetchMemberAttributes` 方法用于[从服务器获取单个群成员的所有自定义属性](group_members.html#获取单个群成员的所有自定义属性)以及[根据属性 key 获取多个群成员的自定义属性](group_members.html#根据属性-key-获取多个群成员的自定义属性)。
-- 添加 `ChatManager.fetchHistoryMessagesByOptions` 根据消息拉取参数配置类（`ChatFetchMessageOptions`）从服务器分页获取指定会话的历史消息。`ChatFetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数。
+- 添加 `ChatManager.fetchHistoryMessagesByOptions` [根据消息拉取参数配置类（`ChatFetchMessageOptions`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的历史消息)。`ChatFetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数。
 - 新增 `ChatManager.deleteMessagesWithTimestamp` 方法实现[删除指定时间段内的本地消息](message_delete.html#删除指定时间段的本地消息)。
 - 新增 [`ChatGroupEventListener.onMemberAttributesChanged` 事件](group_manage.html#监听群组事件)，在单个群成员的属性发生变更时，群内其他成员会收到该事件。
 - 新增 `ChatConnectEventListener.onAppActiveNumberReachLimit` 事件，在应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时触发该事件。

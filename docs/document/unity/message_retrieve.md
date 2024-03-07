@@ -12,7 +12,7 @@
 
 使用环信即时通讯 IM SDK 可以通过 `IChatManager` 和 `Conversation` 类的以下方法从服务器获取和删除历史消息：
 
-- `IChatManager.FetchHistoryMessagesFromServer` 获取服务器保存的指定会话中的消息;
+- `IChatManager.FetchHistoryMessagesFromServerBy` 根据 `FetchServerMessagesOption` 类分页获取服务器保存的指定会话中的消息。
 - `Conversation.LoadMessages` 读取本地指定会话的消息。
 - `IChatManager.LoadMessage` 根据消息 ID 获取消息。
 - `Conversation.LoadMessagesWithMsgType` 获取本地单个会话中特定类型的消息。
@@ -31,14 +31,62 @@
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `FetchHistoryMessagesFromServer` 方法从服务器分页获取指定会话的消息（消息漫游）。
+你可以调用 `FetchHistoryMessagesFromServerBy` 方法基于 `FetchServerMessagesOption` 类从服务端分页拉取单聊和群组聊天的历史消息（消息漫游）。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。
 
-为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
+通过设置 `FetchServerMessagesOption` 类，你可以根据以下条件拉取历史消息：
+
+- 消息发送方；
+- 消息类型；
+- 消息时间段；
+- 消息搜索方向；
+- 是否将拉取的消息保存到数据库；
+- 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
 
 :::tip
-1. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
-2. 各类事件通知发送时，若接收的用户离线时，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
+1. 若使用该 API，需将 SDK 升级至 V1.2.0 版本或以上。
+2. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+3. 各类事件通知发送时，若接收的用户离线，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
 :::
+
+```csharp
+  FetchServerMessagesOption option = new FetchServerMessagesOption();
+  // 消息搜索方向。`UP` 表示按消息时间戳递减的方向获取，即先获取最新消息；`DOWN` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
+  option.Direction = MessageSearchDirection.UP;
+  //消息发送方的用户 ID, 仅用于群组消息，即当FetchHistoryMessagesFromServerBy中的type为ConversationType.Group时使用。
+  option.From = "xxx";
+  // 要获取的消息类型的数组。若不传值，会获取所有类型的消息。
+  option.MsgTypes = new List<MessageBodyType>() { MessageBodyType.TXT };
+  // 查询的起始时间戳，单位为毫秒。
+  option.StartTime = 1709284487000;
+  // 查询的结束时间戳，单位为毫秒。
+  option.EndTime = 1709284499000;
+
+  // conversationId 单聊为对端用户 ID，群组聊天为群组 ID。
+  // type: 会话类型：单聊和群组聊天分别为Chat, Group, Room
+  // cursor: 查询的起始消息 ID。若该参数设置为空字符串，从最新消息开始。
+  // pageSize: 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 10。
+  // option: FetchServerMessagesOption类型的查找选项。
+  SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServerBy(conversationId, type:ConversationType.Group, cursor:"", pageSize:10, option, new ValueCallBack<CursorResult<Message>>(
+      onSuccess: (result) =>
+      {
+          if (0 == result.Data.Count)
+          {
+              return;
+          }
+          foreach (var msg in result.Data)
+          {
+              //process every msg
+          }
+      },
+      onError: (code, desc) =>
+      {
+      }
+  ));
+```
+
+此外，你还可以调用 `FetchHistoryMessagesFromServer` 方法从服务器获取指定会话的消息。
+
+为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 
 ```csharp
 SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(conversationId, type, startId, pageSize, new ValueCallBack<CursorResult<Message>>(

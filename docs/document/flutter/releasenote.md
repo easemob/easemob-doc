@@ -81,7 +81,7 @@
     - 新增 `GroupManager#setMemberAttributes` 方法，用于设置群成员属性；
     - 新增 `GroupManager#fetchMemberAttributes` 和 `GroupManager#fetchMembersAttributes` 方法用于用户获取群成员属性；
     - 新增 `GroupEventHandler#onAttributesChangedOfGroupMember` 群成员属性变更回调;
-- 新增 `ChatManager#fetchHistoryMessagesByOption` 方法，用于根据消息拉取参数配置类（`FetchMessageOptions`）从服务器分页获取指定会话的历史消息。`FetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数；
+- 新增 `ChatManager#fetchHistoryMessagesByOption` 方法，用于[根据消息拉取参数配置类（`FetchMessageOptions`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的历史消息)。`FetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数；
 - 新增 `Conversation#deleteMessagesWithTs` 方法，用于从本地数据库中删除指定时间段内的消息；
 - 新增 `Message#deliverOnlineOnly` 属性用于设置只向在线用户投递消息；
 

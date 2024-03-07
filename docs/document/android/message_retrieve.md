@@ -12,7 +12,7 @@
 
 环信即时通讯 IM Android SDK 提供 `EMChatManager` 和 `EMConversation` 类支持获取服务器和本地的消息，包含如下主要方法：
 
-- `EMChatManager.asyncFetchHistoryMessage`：从服务端分页获取指定会话的历史消息；
+- `EMChatManager.asyncFetchHistoryMessages`：根据 `EMFetchMessageOption` 类从服务端分页获取指定会话的历史消息；
 - `EMConversation.getAllMessages/loadMoreMsgFromDB`：读取本地指定会话的消息；
 - `EMChatManager.getMessage`：根据消息 ID 获取本地消息；
 - `EMChatManager.searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)`：获取本地存储的指定会话中特定类型的消息；
@@ -27,20 +27,72 @@
 
 ## 实现方法
 
-### 从服务器获取指定会话的消息
+### 从服务器获取指定会话的历史消息
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `asyncFetchHistoryMessage` 方法从服务器分页获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
+你可以调用 `asyncFetchHistoryMessages` 方法基于 `EMFetchMessageOption` 类从服务端分页拉取单聊和群组聊天的历史消息。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。
 
-为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
+通过设置 `EMFetchMessageOption` 类，你可以根据以下条件拉取历史消息：
+
+- 消息发送方；
+- 消息类型；
+- 消息时间段；
+- 消息搜索方向；
+- 是否将拉取的消息保存到数据库；
+- 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
 
 若你在初始化时打开了 `EMOptions#setRegardImportedMsgAsRead` 开关，调用该接口获取的[通过服务端接口](/server-side/message_import.html)导入的消息为已读状态，会话中未读取的消息数量，即 `EMConversation#getUnreadMsgCount` 的返回值不发生变化。若该开关为关闭状态，`EMConversation#getUnreadMsgCount` 的返回值会增加。
 
 :::tip
-1. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
-2. 各类事件通知发送时，若接收的用户离线时，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
+1. 若使用该 API，需将 SDK 版本升级至 V4.0.2 版本或以上。
+2. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+3. 各类事件通知发送时，若接收的用户离线，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
 :::
+
+```java
+String conversationId = " ";
+EMConversation.EMConversationType type = EMConversation.EMConversationType.Chat;
+EMFetchMessageOption option = new EMFetchMessageOption();
+//例如，设置获取的消息保存到数据库。
+//option.setIsSave(true);
+int pageSize = 40;
+String cursor = "";
+List<EMMessage> messages = new ArrayList<>();
+doAsyncFetchHistoryMessages(conversationId, type, pageSize, cursor, option, messages);
+
+private void doAsyncFetchHistoryMessages(String conversationId,
+        EMConversation.EMConversationType type,
+int pageSize,String cursor,
+        EMFetchMessageOption option,
+        List<EMMessage> messages){
+    EMClient.getInstance().chatManager().asyncFetchHistoryMessages(conversationId, type, pageSize, 
+                                cursor, option, new EMValueCallBack<EMCursorResult<EMMessage>>() {
+        @Override
+        public void onSuccess(EMCursorResult<EMMessage> value) {
+            if (value != null ) {
+                List<EMMessage> list = value.getData();
+                if (list != null && list.size() > 0) {
+                    messages.addAll(list);
+                }
+                String newCursor = value.getCursor();
+                if( !TextUtils.isEmpty(newCursor)) {
+                    doAsyncFetchHistoryMessages(conversationId, type, pageSize, newCursor, option, messages);
+                }
+            }
+        }
+
+        @Override
+        public void onError(int error, String errorMsg) {
+
+        }
+    });
+}
+```
+
+此外，你可以调用 `asyncFetchHistoryMessage` 方法从服务器分页获取指定会话的消息。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
+
+为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
 
 ```java
 // 异步方法。同步方法为 fetchHistoryMessages(String, EMConversationType, int, String, EMConversation.EMSearchDirection)。

@@ -2,6 +2,16 @@
 
 <Toc />
 
+## 版本 V4.4.1 Dev 2024-03-06（开发版）
+
+### 新增特性
+
+- [IM SDK] SDK 中增加了隐私协议 `PrivacyInfo.xcprivacy`。
+
+### 修复
+
+- [IM SDK] 修复极端情况下，连续修改同一条消息的扩展字段 `ext`，调用 `EMChatManager#updateMessage` 后偶现的崩溃问题。
+
 ## 版本 V4.4.0 Dev 2024-01-30（开发版）
 
 ### 新增特性
@@ -134,7 +144,7 @@
 ### 新增特性
 
 - [IM SDK] 新增 Reaction 回调操作类型。
-- [IM SDK] 新增 `EMChatManager#fetchMessagesFromServerBy` 方法，根据消息拉取参数配置接口（`EMFetchServerMessagesOption`）从服务器分页获取指定会话的历史消息。`EMFetchServerMessagesOption` 接口中包括起始时间戳、消息类型和消息发送方等参数。
+- [IM SDK] 新增 `EMChatManager#fetchMessagesFromServerBy` 方法，[根据消息拉取参数配置接口（`EMFetchServerMessagesOption`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的历史消息)。`EMFetchServerMessagesOption` 接口中包括起始时间戳、消息类型和消息发送方等参数。
 - [IM SDK] 新增 `EMConversation#removeMessagesStart` 方法，实现从本地数据库中删除指定时间段内的消息。
 - [IM SDK] 新增[错误码 510 `EMErrorMessageSizeLimit`](error.html)，发送消息时若消息体大小超过上限时提示错误。
 - [IM SDK] 新增[错误码 8 `EMAppActiveNumbersReachLimitation`](error.html)，应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时提示错误。

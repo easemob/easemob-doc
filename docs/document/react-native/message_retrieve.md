@@ -29,16 +29,52 @@
 
 ## 实现方法
 
-### 从服务器获取指定会话的消息
+### 从服务器获取指定会话的历史消息
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `fetchHistoryMessages` 方法从服务器分页获取指定会话的历史消息（消息漫游）。为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
+你可以调用 `fetchHistoryMessagesByOptions` 方法基于 `ChatFetchMessageOptions` 类从服务端分页拉取单聊和群组聊天的历史消息（消息漫游）。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。
+
+通过设置 `ChatFetchMessageOptions` 类，你可以根据以下条件拉取历史消息：
+
+- 消息发送方；
+- 消息类型；
+- 消息时间段；
+- 消息搜索方向；
+- 是否将拉取的消息保存到数据库；
+- 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
 
 :::tip
-1. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
-2. 各类事件通知发送时，若接收的用户离线时，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
+1. 若使用该 API，需将 SDK 版本升级至 V1.1.2 版本或以上。
+2. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+3. 各类事件通知发送时，若接收的用户离线，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
 :::
+
+```tsx
+// convId 会话ID
+// convType 会话类型
+// cursor 查询的起始消息 ID。若该参数设置为空字符串，从最新消息开始。
+// pageSize 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 10。
+// option
+// option.from 消息发送者
+// option.msgTypes 过滤获取消息的类型
+// option.startTs 过滤消息开始时间
+// option.endTs 过滤消息结束时间
+// option.direction 消息方向
+// option.needSave 消息是否保存
+ChatClient.getInstance()
+  .chatManager.fetchHistoryMessagesByOptions(convId, convType, {
+    cursor: cursor,
+    pageSize: pageSize,
+    options: options as ChatFetchMessageOptions,
+  })
+  .then((res) => {
+    console.log('fetchHistoryMessagesByOptions is success.', res);
+  })
+  .catch();
+```
+
+此外，你也可以调用 `fetchHistoryMessages` 方法从服务器分页获取指定会话的历史消息。为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 
 ```typescript
 // 会话 ID。

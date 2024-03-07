@@ -12,7 +12,7 @@
 
 环信即时通讯 IM iOS SDK 提供 `IEMChatManager` 和 `EMConversation` 类支持获取服务器和本地的消息，包含如下主要方法：
 
-- `IEMChatManager#asyncFetchHistoryMessagesFromServer`：从服务器分页获取指定会话的历史消息
+- `IEMChatManager#fetchMessagesFromServer`：根据 `EMFetchServerMessagesOption` 类从服务器分页获取指定会话的历史消息；
 - `EMConversation#loadMessagesStartFromId`：从数据库中读取指定会话的消息；
 - `IEMChatManager#getMessageWithMessageId`：根据消息 ID 获取本地消息；
 - `EMConversation#loadMessagesWithType`：获取本地存储的指定会话中特定类型的消息；
@@ -27,18 +27,41 @@
 
 ## 实现方法
 
-### 从服务器获取指定会话的消息
+### 从服务器获取指定会话的历史消息
 
-你可以调用 `asyncFetchHistoryMessagesFromServer` 方法从服务器获取指定会话的消息（消息漫游）。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
+对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
+你可以调用 `fetchMessagesFromServer` 方法基于 `EMFetchServerMessagesOption` 类从服务端分页拉取单聊和群组聊天的历史消息。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。
+
+通过设置 `EMFetchServerMessagesOption` 类，你可以根据以下条件拉取历史消息：
+
+- 消息发送方；
+- 消息类型；
+- 消息时间段；
+- 消息搜索方向；
+- 是否将拉取的消息保存到数据库；
+- 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
 
 若你在初始化时打开了 `EMOptions#regardImportMessagesAsRead` 开关，调用该接口获取的[通过服务端接口](/server-side/message_import.html)导入的消息为已读状态，即会话中未读取的消息数量 `EMConversation#unreadMessagesCount` 不发生变化。若该开关为关闭状态，`EMConversation#unreadMessagesCount` 的数量会增加。
 
 :::tip
-1. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
-2. 各类事件通知发送时，若接收的用户离线时，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
+1. 若使用该 API，需将 SDK 版本升级至 V4.0.2 版本或以上。
+2. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+3. 各类事件通知发送时，若接收的用户离线，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
 :::
+
+```swift
+let option = EMFetchServerMessagesOption();
+        EMClient.shared().chatManager?.fetchMessagesFromServer(by: "conversationId", conversationType: .chat, cursor: "", pageSize: 50, option: option, completion: { result, err in
+            if let err = err {
+                // 获取失败
+            } else {
+                // 获取成功
+            }
+        })
+```
+
+此外，你也可以调用 `asyncFetchHistoryMessagesFromServer` 方法从服务器获取指定会话的消息。你可以指定消息查询方向，即明确按时间顺序或逆序获取。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
 
 ```objectivec
 // 异步方法

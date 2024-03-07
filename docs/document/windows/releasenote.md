@@ -30,7 +30,7 @@
   - `Conversation#PinnedTime`：会话置顶时间戳。
 - [IM SDK] 新增 `ChatManager#FetchHistoryMessagesFromServerBy` 方法根据消息拉取参数配置类 `FetchServerMessagesOption` 从服务器获取历史消息。<br/>
   作废 `ChatManager#GetConversationsFromServer`。
-- 新增 `ChatManager#FetchHistoryMessagesFromServerBy` 方法根据消息拉取参数配置类 `FetchServerMessagesOption` 从服务器获取历史消息;
+- 新增 `ChatManager#FetchHistoryMessagesFromServerBy` 方法[根据消息拉取参数配置类 `FetchServerMessagesOption` 从服务器获取历史消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
 - [IM SDK] 新增消息拉取参数配置类 `FetchServerMessagesOption`：
   - `FetchServerMessagesOption#IsSave`：获取的消息是否保存到数据库;
   - `FetchServerMessagesOption#Direction`：消息搜索方向;
