@@ -8,7 +8,7 @@
 
 使用环信即时通讯 IM Android SDK 可以通过 `EMConversation` 和 `EMChatManager` 类从服务器单向删除历史消息，主要方法如下：
 
-- `EMChatManager#asyncDeleteAllMsgsAndConversations`：清空当前用户的聊天记录，包括消息和会话，同时可以选择是否单向清除服务端的聊天记录。
+- `EMChatManager#asyncDeleteAllMsgsAndConversations`：清空当前用户的聊天记录，包括单聊、群聊和聊天室的消息和会话，同时可以选择是否单向清除服务端的聊天记录。
 - `EMConversation#removeMessagesFromServer`：按消息时间或消息 ID 单向删除服务端的历史消息。
 - `EMChatManager#clearAllMessages`：删除本地指定会话的所有消息。
 - `EMChatManager#removeMessages(startTime, endTime)`：删除指定时间段的本地消息。
@@ -23,7 +23,7 @@
 
 ### 清空聊天记录
 
-你可以调用 `EMChatManager#asyncDeleteAllMsgsAndConversations` 方法清空当前用户的聊天记录，包括消息和会话。同时你也可以选择是否清除服务端的聊天记录。若你清除了服务端的聊天记录，当前用户无法从服务端拉取到该消息。其他用户不受该操作影响。
+你可以调用 `EMChatManager#asyncDeleteAllMsgsAndConversations` 方法清空当前用户的聊天记录，包括单聊、群组聊天和聊天室的消息和会话。同时你也可以选择是否清除服务端的聊天记录。若你清除了服务端的聊天记录，你无法从服务端拉取到会话和消息，而其他用户不受影响。
 
 :::tip
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
@@ -95,7 +95,7 @@ if(conversation != null) {
 }
 ```
 
-### 删除指定时间段的本地消息
+### 删除单个本地会话指定时间段的消息
 
 你可以删除本地指定会话在一段时间内的本地消息，示例代码如下：
 

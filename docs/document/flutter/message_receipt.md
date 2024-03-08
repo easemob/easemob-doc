@@ -4,7 +4,7 @@
 
 单聊会话支持消息送达回执、会话已读回执和消息已读回执，发送方发送消息后可及时了解接收方是否及时收到并阅读了信息，也可以了解整个会话是否已读。
 
-群聊会话只支持消息已读回执。群主和群管理员在发送消息时，可以设置该消息是否需要已读回执。仅专业版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
+群聊会话只支持消息已读回执。群成员在发送消息时，可以设置该消息是否需要已读回执。仅专业版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
 
 本文介绍如何使用环信即时通讯 IM Flutter SDK 实现单聊和群聊的消息回执功能。
 
@@ -22,14 +22,15 @@
 
 - 消息送达回执
 
-  1. 消息发送方在发送消息前通过 `EMOptions.requireDeliveryAck` 开启送达回执功能
-  2. 消息接收方收到消息后，SDK 自动向发送方触发送达回执
-  3. 消息发送方通过监听 `onMessageDelivered` 回调接收消息送达回执
+  1. 消息发送方在发送消息前通过 `EMOptions.requireDeliveryAck` 开启送达回执功能。
+  2. 消息接收方收到消息后，SDK 自动向发送方触发送达回执。
+  3. 消息发送方通过监听 `onMessageDelivered` 回调接收消息送达回执。
+
 - 会话及消息已读回执
 
-  1. 消息发送方在发送消息前通话 `EMOptions.requireAck` 开启已读回执功能
-  2. 消息接收方收到消息后，调用 API `SendConversationReadAck` 或 `SendMessageReadAck` 发送会话或消息已读回执
-  3. 消息发送方通过监听 `onConversationRead` 或 `onMessagesRead` 回调接收会话或消息已读回执
+  1. 消息发送方在发送消息前通话 `EMOptions.requireAck` 开启已读回执功能。
+  2. 消息接收方收到消息后，调用 API `SendConversationReadAck` 或 `SendMessageReadAck` 发送会话或消息已读回执。
+  3. 消息发送方通过监听 `onConversationRead` 或 `onMessagesRead` 回调接收会话或消息已读回执。
 
 ## 前提条件
 
