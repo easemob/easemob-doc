@@ -35,6 +35,7 @@
 | 账号封禁   |  POST     | /{org_name}/{app_name}/users/{username}/deactivate          | 100 次/秒/App Key     |
 | 账号解禁    |  POST                    | /{org_name}/{app_name}/users/{username}/activate         | 100 次/秒/App Key      |
 | 强制下线         |  GET    | /{org_name}/{app_name}/users/{username}/disconnect    | 100 次/秒/App Key   |
+| 强制指定账号从单设备下线 | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} | 100 次/秒/App Key |
 
 ## 消息推送
 
@@ -145,6 +146,7 @@
 | 获取聊天室详情     |    GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}       | 100 次/秒/App Key       |
 | 创建一个聊天室   |    POST   | /{org_name}/{app_name}/chatrooms                                 | 50 次/秒/App Key                                                  |
 | 修改聊天室信息 |    PUT     | /{org_name}/{app_name}/chatrooms/{chatroom_id}                   | 100 次/秒/App Key                                                 |
+| 转让聊天室          | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 100 次/秒/App Key    |
 | 删除聊天室  |  DELETE  | /{org_name}/{app_name}/chatrooms/{chatroom_id}                   | 100 次/秒/App Key                                                 |
 | 获取聊天室公告  |   GET  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement      | 100 次/秒/App Key                                                 |
 | 修改聊天室公告   |    POST | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement      | 100 次/秒/App Key        |

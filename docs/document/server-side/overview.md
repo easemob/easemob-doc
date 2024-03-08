@@ -88,7 +88,8 @@
 | 获取某条离线消息状态  | GET  | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id} | 获取用户的离线消息的状态，即查看该消息是否已投递。|
 | 用户账号封禁 |  POST | /{org_name}/{app_name}/users/{username}/deactivate | 禁用用户账号，账号被禁用将立即下线并无法登录进入环信即时通讯 IM，直到被解禁后才能恢复登录。|
 | 用户账号解禁 | POST | /{org_name}/{app_name}/users/{username}/activate | 解禁用户账号。 |
-| 强制下线 | GET | /{org_name}/{app_name}/users/{username}/disconnect | 强制用户即把用户状态改为离线，用户需要重新登录才能正常使用。 |
+| 强制用户下线 | GET | /{org_name}/{app_name}/users/{username}/disconnect | 强制用户即将用户状态改为离线，用户需要重新登录才能正常使用。 |
+| 强制指定账号从单设备下线 | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} | 强制指定用户在单台设备上下线。 |
 
 ### 设置消息离线推送
 
@@ -219,6 +220,7 @@
 | 获取聊天室详情          | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 根据聊天室 ID 获取此聊天室的详情         |
 | 创建一个聊天室          | POST   | /{org_name}/{app_name}/chatrooms                            | 创建一个新聊天室。                       |
 | 修改聊天室信息          | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 修改聊天室信息。                         |
+| 转让聊天室          | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 修改聊天室所有者为同一聊天室中的其他成员。                      |
 | 删除聊天室              | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 删除一个聊天室。                         |
 | 获取聊天室公告          | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 获取指定聊天室 ID 的聊天室公告。         |
 | 修改聊天室公告          | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 修改指定聊天室 ID 的聊天室公告。         |

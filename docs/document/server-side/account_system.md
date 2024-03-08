@@ -1550,6 +1550,8 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 强制用户即将用户状态改为离线，用户需要重新登录才能正常使用。
 
+多设备登录情况下，调用该接口会强制将指定用户从所有登录的设备下线；若将用户从指定设备上下线，你可以调用[强制指定账号从单设备下线](#强制指定账号从单设备下线)接口。
+
 #### HTTP 请求
 
 ```http
@@ -1606,3 +1608,70 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   "count": 0
 }
 ```
+
+### 强制用户从单设备下线
+
+如果用户在多个设备上登录，你可以调用该接口强制其在某一台设备上下线。若强制用户从所有设备下线，可以调用[强制用户下线](#强制用户下线)接口。
+
+#### HTTP 请求
+
+```http
+DELETE https://{host}/{org_name}/{app_name}/users/{username}/disconnect/{resourceId}
+```
+
+##### 路径参数
+
+| 参数       | 类型     | 描述               |
+|:---------|:-------|:-----------------|
+| `username` | String | 要将哪个用户从指定设备下线。|
+| `resourceId` | String | 要将用户从哪个设备下线，即用户已登录设备的资源 ID，即服务器分配给每个设备资源的唯一标识符。资源 ID 的格式为 `{device type}_{resource ID}`，其中设备类型 `device type` 可以是 `android`、`ios` 或 `web`，`resource ID` 由 SDK 分配。例如，`android_123423453246`。|
+
+其他参数及描述详见[公共参数](#公共参数)。
+
+##### 请求 header
+
+| 参数            | 类型   | 是否必需 | 描述                                                         |
+| :-------------- | :----- | :------- | :----------------------------------------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                          |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段     | 类型 | 描述               |
+| :------- | :--- | :----------------- |
+| `result` | Bool  | 用户是否已被强制从该设备下线：<br/> - `true`：是；<br/> - `false`：否。|
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](error.html)了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+将 <YourAppToken> 替换为你在服务端生成的 App Token 
+curl -X DELETE -H 'Accept: application/json'   \
+-H 'Authorization: Bearer <YourAppToken>' 'https://XXX/XXX/XXX/users/{userName}/disconnect/{resourceId}'
+```
+
+##### 响应示例
+
+```json
+{
+    "uri": "https://XXX/XXX/XXX",
+    "timestamp": 1709865422596,
+    "organization": "XXX",
+    "application": "6b58d05d-XXX-1ff3e95a3dc0",
+    "entities": [],
+    "action": "delete",
+    "data": {
+        "result": true
+    },
+    "duration": 0,
+    "applicationName": "90"
+}
+```
+
