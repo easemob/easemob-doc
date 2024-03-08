@@ -153,7 +153,7 @@ conn.addEventHandler("customEvent", {
 
 仅专业版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
 
-1. 群主或群管理员发送消息时若需已读回执，需设置 `allowGroupAck` 为 `true`：
+1. 群成员发送消息时若需已读回执，需设置 `allowGroupAck` 为 `true`：
 
 ```javascript
 sendGroupReadMsg = () => {

@@ -195,7 +195,7 @@ EMChatManagerDelegate
 
 仅专业版及以上版本支持群消息已读回执功能。若要使用该功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通。
 
-1. 群主或群管理员设置 `EMChatMessage` 的属性 `isNeedGroupAck` 为 `YES`。
+1. 群成员设置 `EMChatMessage` 的属性 `isNeedGroupAck` 为 `YES`。
 
 ```objectivec
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:to from:from to:to body:aBody ext:aExt];

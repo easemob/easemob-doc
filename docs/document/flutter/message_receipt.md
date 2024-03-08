@@ -173,7 +173,7 @@ EMClient.getInstance.chatManager.addEventHandler(
 );
 ```
 
-2. 群主或群管理员发送消息时若需已读回执，需设置 `needGroupAck` 为 `true`。
+2. 群成员发送消息时若需已读回执，需设置 `needGroupAck` 为 `true`。
 
 ```dart
 // 设置消息类型为群消息
