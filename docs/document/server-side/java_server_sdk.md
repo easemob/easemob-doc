@@ -1,4 +1,4 @@
-# Java Server SDK
+# Java Server SDK 1.0
 
 <Toc />
 
