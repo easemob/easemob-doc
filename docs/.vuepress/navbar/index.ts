@@ -81,7 +81,7 @@ export const zhNavbar = navbar([
           {
             text: "Java",
             icon: "/icon-platform.svg",
-            link: "/document/server-side/java_server_sdk.html",
+            link: "/document/server-side/java_server_sdk_2.0.html",
           },
           {
             text: "PHP",
