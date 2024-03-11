@@ -710,7 +710,7 @@ function sendCustomMsg() {
 | `title`                | String                                          | 合并消息的标题。   |
 | `summary`              | String                                          | 合并消息的概要。   |
 | `compatibleText`       | String                                          | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。 |
-| `messageIdList`        | MessagesType[]                                  | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。        |
+| `messageList`        | MessagesType[]                                  | 合并消息的消息列表。该列表最多包含 300 个消息。        |
 | `onFileUploadComplete` | (data: { url: string; secret: string;}) => void | 合并消息文件上传完成的回调。     |
 | `onFileUploadError`    | (error: any) => void                            | 合并消息文件上传失败的回调。      |
 
