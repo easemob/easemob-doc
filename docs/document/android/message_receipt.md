@@ -268,7 +268,7 @@ void onGroupMessageRead(List<EMGroupReadAck> groupReadAcks);
  *
  * @param msgId         消息 ID。
  * @param pageSize      每次获取群消息已读回执的条数。
- * @param startAckId    已读回执 ID，如果为空，从最新的回执向前开始获取。
+ * @param startAckId    查询起始的已读回执 ID。首次调用为空，SDK 从最新的已读回执开始按服务器接收回执时间的逆序获取。后续调用从 EMCursorResult 中的 cursor 获取。
  * @param callBack      结果回调，成功执行 {@link EMValueCallBack#onSuccess(Object)}，失败执行 {@link EMValueCallBack#onError(int, String)}。
  *
  */
