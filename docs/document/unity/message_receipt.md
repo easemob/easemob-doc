@@ -279,6 +279,8 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 你可以调用 `FetchGroupReadAcks` 获取群组消息的已读回执的详情，示例代码如下：
 
 ```csharp
+// startAckId：查询起始的已读回执 ID。首次调用为空，SDK 从最新的已读回执开始按服务器接收回执时间的逆序获取。后续调用从 CursorResult 中的 cursor 获取。
+// pageSize：每页获取群消息已读回执的条数。
 SDKClient.Instance.ChatManager.FetchGroupReadAcks(messageId, groupId, startAckId, pageSize, new ValueCallBack<List<GroupReadAck>>(
     onSuccess: (list) =>
     {

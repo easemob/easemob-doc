@@ -298,7 +298,7 @@ ChatClient.getInstance()
 ```typescript
 // msgId： 消息 ID
 // groupId：群组 ID
-// startAckId: 回执的起始位置
+// startAckId: 查询起始的已读回执 ID。首次调用为空，SDK 从最新的已读回执开始按服务器接收回执时间的逆序获取。后续调用从 ChatCursorResult 中的 cursor 获取。
 // pageSize：期望请求的最大数量，取值范围是 0-400
 ChatClient.getInstance()
   .chatManager.fetchGroupAcks(msgId, groupId, startAckId, pageSize)

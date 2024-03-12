@@ -254,7 +254,7 @@ EMChatManagerDelegate
  *
  * @param  aMessageId           要获取的消息 ID。
  * @param  aGroupId             要获取回执对应的群 ID。
- * @param  aGroupAckId          要获取的群回执 ID。
+ * @param  aGroupAckId          查询起始的已读回执 ID。首次调用为空，SDK 从最新的已读回执开始按服务器接收回执时间的逆序获取。后续调用从 EMCursorResult 中的 cursor 获取。
  * @param  aPageSize            获取消息条数。
  * @param  aCompletionBlock     获取消息结束的回调。
  */
