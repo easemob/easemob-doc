@@ -63,6 +63,10 @@
 | 获取历史消息（聊天记录）文件   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 次/分钟/App Key                                               |
 | 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
 | 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key                                              |
+| 修改文本或自定义消息 | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 条/秒/App Key  |
+| 清空指定用户的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{username}/delete/all | 100 条/秒/App Key  |
+| 导入单聊消息 | POST  | /{org_name}/{app_name}/messages/users/import | 100 条/秒/App Key                                          |
+| 导入群聊消息 | POST  | /{org_name}/{app_name}/messages/chatgroups/import | 100 条/秒/App Key                                    |
 | 拉取会话列表    |   GET    | /{org_name}/{app_name}/user/{username}/user_channels       | 5 次/分钟/单用户 ID，100 次/秒/App Key    |
 
 ## 用户属性
