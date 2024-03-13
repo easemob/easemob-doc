@@ -34,7 +34,7 @@ POST https://{host}/{org_name}/{app_name}/rest/message/roaming/user/{username}/d
 | `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `username`  | String | 是       | 当前用户的用户 ID。  |
+| `username`  | String | 是       | 要清空哪个用户的漫游消息。需传入该用户的用户 ID。  |
 
 ### 请求 header
 
