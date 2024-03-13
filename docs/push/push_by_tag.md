@@ -4,7 +4,7 @@
 
 你可以通过环信即时通讯控制台创建和管理标签，也可以通过 REST API 进行标签管理。用户与标签是多对多的关系，即一个用户可以对应多个标签，一个标签也可以对应多个用户。
 
-本文档主要介绍如何调用即时推送 REST API 实现创建及管理推送标签。调用以下方法前，请先参考 [接口频率限制](/document/server-side/error.html/product/limitation.html)了解即时通讯 RESTful API 的调用频率限制。
+本文档主要介绍如何调用即时推送 REST API 实现创建及管理推送标签。调用以下方法前，请先参考 [接口频率限制](/product/limitation.html)了解即时通讯 RESTful API 的调用频率限制。
 
 ## 公共参数
 

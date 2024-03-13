@@ -1546,7 +1546,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-### 强制下线
+### 强制用户下线
 
 强制用户即将用户状态改为离线，用户需要重新登录才能正常使用。
 

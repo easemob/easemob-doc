@@ -23,7 +23,7 @@
 - 多端登录：若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。
 
 :::tip
-你可以调用 REST API 将指定账号强制[从单个设备下线](/document/server-side/account_system.html#强制用户从单设备下线 )和[从所有设备下线](/document/server-side/account_system.html#强制下线)。
+你可以调用 REST API 将指定账号强制[从单个设备下线](/document/server-side/account_system.html#强制用户从单设备下线 )和[从所有设备下线](/document/server-side/account_system.html#强制用户下线)。
 :::
 
 ## 技术原理

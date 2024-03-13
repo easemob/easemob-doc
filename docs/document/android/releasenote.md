@@ -610,7 +610,7 @@
 
 ### 更新(2021-05-08)：
 
-- [EaseCallkit] 修改加入声网频道的方式，改为使用数字 uid 加入，增加与小程序的互通，`与之前版本不互通`，参见[EaseCallKit 使用指南](/uikit/android/overview.html);
+- [EaseCallkit] 修改加入声网频道的方式，改为使用数字 uid 加入，增加与小程序的互通，`与之前版本不互通`，参见[EaseCallKit 使用指南](easecallkit.html);
 
 ```
 **重大变动：**

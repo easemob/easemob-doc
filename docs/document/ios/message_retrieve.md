@@ -42,7 +42,7 @@
 - 是否将拉取的消息保存到数据库；
 - 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
 
-若你在初始化时打开了 `EMOptions#regardImportMessagesAsRead` 开关，调用该接口获取的[通过服务端接口](/server-side/message_import.html)导入的消息为已读状态，即会话中未读取的消息数量 `EMConversation#unreadMessagesCount` 不发生变化。若该开关为关闭状态，`EMConversation#unreadMessagesCount` 的数量会增加。
+若你在初始化时打开了 `EMOptions#regardImportMessagesAsRead` 开关，调用该接口获取的[通过服务端接口](/document/server-side/message_import.html)导入的消息为已读状态，即会话中未读取的消息数量 `EMConversation#unreadMessagesCount` 不发生变化。若该开关为关闭状态，`EMConversation#unreadMessagesCount` 的数量会增加。
 
 :::tip
 1. 若使用该 API，需将 SDK 版本升级至 V4.0.2 版本或以上。
