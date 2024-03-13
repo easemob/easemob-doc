@@ -114,7 +114,7 @@ void main() async {
 
 #### 第三步 创建聊天界面
 
-em_chat_uikit 提供了 `ChatMessagesView`，添加到 `build` 中，传入必填参数 `conversation` 及所需的可选参数即可。详见[聊天界面参数描述](chatui_chat.html#创建聊天界面)。
+em_chat_uikit 提供了 `ChatMessagesView`，添加到 `build` 中，传入必填参数 `conversation` 及所需的可选参数即可。详见[聊天界面参数描述](ui_chat.html#创建聊天界面)。
 
 1. 通过 IM SDK 获取一个本地会话。
 
