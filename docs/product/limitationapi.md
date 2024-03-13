@@ -34,7 +34,7 @@
 | 获取离线消息的状态    |  GET   | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id}   | 100 次/秒/App Key                                                 |
 | 账号封禁   |  POST     | /{org_name}/{app_name}/users/{username}/deactivate          | 100 次/秒/App Key     |
 | 账号解禁    |  POST                    | /{org_name}/{app_name}/users/{username}/activate         | 100 次/秒/App Key      |
-| 强制下线         |  GET    | /{org_name}/{app_name}/users/{username}/disconnect    | 100 次/秒/App Key   |
+| 强制用户下线         |  GET    | /{org_name}/{app_name}/users/{username}/disconnect    | 100 次/秒/App Key   |
 | 强制指定账号从单设备下线 | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} | 100 次/秒/App Key |
 
 ## 消息推送

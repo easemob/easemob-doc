@@ -4,7 +4,7 @@
 
 聊天消息 `MessagesView` 是 `ChatUIKit` 提供的主要组件, 用于展示用户之间的消息。
 
-`MessagesView` 可以直接使用，也可以通过[路由](chatuikit_advanceusage.html#路由的使用)使用。
+`MessagesView` 可以直接使用，也可以通过[路由](chatuikit_advancedusage.html#路由的使用)使用。
 
 目前消息页面中提供以下功能：
 

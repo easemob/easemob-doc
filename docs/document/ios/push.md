@@ -477,7 +477,7 @@ NSArray *conversations = @[conversation1,conversation2];
 你可以使用推送模板设置推送标题和内容。推送模板包括默认推送模板 `default` 和自定义推送模板，你可以通过以下两种方式设置：
 
 - [调用 REST API 配置](/document/server-side/push.html#使用推送模板)。
-- 在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](/document/product/enable_and_configure_IM.html#配置推送模板)。
+- 在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](/product/enable_and_configure_IM.html#配置推送模板)。
 
 使用推送模板有以下优势：
 
@@ -531,7 +531,7 @@ message.chatType = EMChatTypeChat;
 - `{$fromNickname}`：推送昵称。  
 - `{$msg}`：消息内容。
 
-内置参数的介绍，详见[环信即时通讯控制台文档](/product/enable_and-configure_IM.html#使用默认推送模板)。
+内置参数的介绍，详见[环信即时通讯控制台文档](/product/enable_and_configure_IM.html#使用默认推送模板)。
 
 这种方式的示例代码与“使用固定内容的推送模板”的相同。
 

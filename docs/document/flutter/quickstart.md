@@ -259,7 +259,7 @@ void _initSDK() async {
 
 ### 注册环信 IM 用户
 
-Demo 中使用 [开放注册](/server-side/account_system.html#开放注册单个用户)，此操作需要在环信后台开启 `开放注册`。在开放注册模式下，允许通过 App 客户端直接注册环信用户，正式环境中请使用 [授权注册](server-side/account_system.html#授权注册单个用户)。
+Demo 中使用 [开放注册](/document/server-side/account_system.html#开放注册单个用户)，此操作需要在环信后台开启 `开放注册`。在开放注册模式下，允许通过 App 客户端直接注册环信用户，正式环境中请使用 [授权注册](/document/server-side/account_system.html#授权注册单个用户)。
 
 在 `_signUp` 方法中添加注册代码：
 
