@@ -242,3 +242,10 @@ curl --location --request DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/gro
   "timestamp": 1710309184114
 }
 ```
+
+## 常见错误
+
+| HTTP 返回码（Status Code）<div style="width: 220px;"></div> | 说明（Description）                                          |
+| :------------------------- | :----------------------------------------------------------- |
+| 401                        | （未授权）请求要求身份验证。对于需要 token 的接口，服务器可能返回此响应。 |
+| 403                        | （禁止）服务器拒绝请求。例如，调用频率超过了 100 次/秒/App Key。 |
