@@ -33,7 +33,6 @@
 | `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | String | 请求 URL。      |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。   |
-| `entities`        | JSON   | 响应实体。       |
 | `data`            | JSON   | 实际获取的数据详情。     |
 | `timestamp`       | Long   | Unix 时间戳，单位为毫秒。     |
 | `duration`        | Int    | 从发送请求到响应的时长，单位为毫秒。    |
