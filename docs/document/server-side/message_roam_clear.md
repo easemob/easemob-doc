@@ -228,7 +228,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl --location --request DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX/time?groupId=XXXX&delTime=1659014868000' \
---header 'Authorization: Bearer <YourAppToken>'
+-H 'Authorization: Bearer <YourAppToken>'
 ```
 
 #### 响应示例
