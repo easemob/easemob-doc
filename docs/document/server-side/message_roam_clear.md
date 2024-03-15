@@ -25,21 +25,18 @@
 
 ### 响应参数
 
-| 参数              | 类型   | 描述                                                                           |
-| :---------------- | :----- | :----------------------------------------------------------------------------- |
-| `action`          | String | 请求方法。                                                                     |
+| 参数              | 类型   | 描述     |
+| :---------------- | :----- | :----------------------------- |
+| `action`          | String | 请求方法。   |
 | `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
 | `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
 | `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
-| `uri`             | String | 请求 URL。                                                                     |
-| `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
-| `entities`        | JSON   | 响应实体。                                                                     |
-| `data`            | JSON   | 实际获取的数据详情。                                                           |
-| `uuid`            | String | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
-| `created`         | Long   | 群组创建时间，Unix 时间戳，单位为毫秒。                                        |
-| `timestamp`       | Long   | Unix 时间戳，单位为毫秒。                                                      |
-| `duration`        | Int    | 从发送请求到响应的时长，单位为毫秒。                                           |
-| `properties`      | String | 响应属性。                                                                     |
+| `uri`             | String | 请求 URL。      |
+| `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。   |
+| `entities`        | JSON   | 响应实体。       |
+| `data`            | JSON   | 实际获取的数据详情。     |
+| `timestamp`       | Long   | Unix 时间戳，单位为毫秒。     |
+| `duration`        | Int    | 从发送请求到响应的时长，单位为毫秒。    |
 
 ## 认证方式
 
