@@ -117,7 +117,9 @@
 | 撤回消息 | POST  | /{org_name}/{app_name}/messages/msg_recall | 发送方可以撤回一条发送成功的消息。                                           |
 | 单向删除会话 | DELETE  | /{org_name}/{app_name}/users/{username}/user_channel| 从服务器中删除会话，其他用户不受影响。                                          |
 | 修改文本或自定义消息 | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 修改发送成功的文本消息或自定义消息。  |
-| 清空指定用户的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{username}/delete/all | 清空指定用户当前时间及之前的所有漫游消息。  |
+| 单向清空指定用户的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{username}/delete/all | 清空指定用户当前时间及之前的所有漫游消息。  |
+| 单向清空指定单聊会话一段时间内的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/chat/user/{username}/time?userId={userId}&delTime={delTime} | 单向清空指定单聊会话一段时间内的漫游消息。  |
+| 单向清空指定群组或聊天室会话一段时间内的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/group/user/{username}/time?groupId={groupId}&delTime={delTime} | 单向清空指定群组或聊天室会话一段时间内的漫游消息。  |
 | 导入单聊消息 | POST  | /{org_name}/{app_name}/messages/users/import | 在数据迁移时导入单聊消息。                                           |
 | 导入群聊消息 | POST  | /{org_name}/{app_name}/messages/chatgroups/import | 在数据迁移时导入群聊消息。                                           |
 
