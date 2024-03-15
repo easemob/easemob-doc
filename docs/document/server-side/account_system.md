@@ -1645,7 +1645,19 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/disconnect/{resourc
 | :------- | :--- | :----------------- |
 | `result` | Bool  | 用户是否已被强制从该设备下线：<br/> - `true`：是；<br/> - `false`：否。|
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。常见的错误为 404 错误，即用户不存在，如下所示：
+
+```
+{
+    "error": "service_resource_not_found",
+    "exception": "UserNotFoundException",
+    "timestamp": 1709867821788,
+    "duration": 0,
+    "error_description": "Service resource not found"
+}
+```
+
+关于其他异常，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 #### 示例
 
@@ -1674,6 +1686,8 @@ curl -X DELETE -H 'Accept: application/json'   \
     "applicationName": "90"
 }
 ```
+
+
 
 
 
