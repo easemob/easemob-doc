@@ -103,9 +103,12 @@
 
 1. 联系方案负责人
 
-微信 扫一扫，添加方案负责人：
+联系电话：何先生 (Tel:15910649500) 或者 微信 扫一扫，快速添加：
 
 ![img](@static/images/privitization/deploy_wechat_code.png)
+
+
+
 
 2. Geek 社区
 

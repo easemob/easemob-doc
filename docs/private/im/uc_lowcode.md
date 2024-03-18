@@ -93,5 +93,7 @@
 | Android | [下载体验](https://www.pgyer.com/Bt7N) |
 | iOS | [下载体验](https://www.pgyer.com/lbTC)|
 -->
-<span style="color:#000;font-weight:bold;font-size:20px;">授权开源</span><br>
-<span>通过签署授权协议，环信可提供个性化协同源码以帮助合作伙伴或最终客户降低开发成本，加速项目进程。请联系程先生 (Tel:17611319060)。</span>
+<span style="color:#000;font-weight:bold;font-size:20px;">免费授权开源</span><br><br>
+<span>通过签署授权协议，环信可提供个性化协同源码以帮助合作伙伴或最终客户降低开发成本，加速项目进程。请联系何先生 (Tel:15910649500) 或者微信 扫一扫，快速添加</span>
+
+![img](@static/images/privitization/deploy_wechat_code.png)

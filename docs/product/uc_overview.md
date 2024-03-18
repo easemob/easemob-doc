@@ -82,6 +82,8 @@
 | Android | [下载体验](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/poc/android/app-release.apk) |
 | iOS | [下载体验](https://testflight.apple.com/join/j1ssvXm0)|
 
-**授权开源**
+**免费授权开源**
 
-通过签署授权协议，环信可提供环信通源码以帮助合作伙伴或最终客户降低开发成本，加速项目进程。请联系程先生 (Tel:17611319060)。
+通过签署授权协议，环信可提供环信通源码以帮助合作伙伴或最终客户降低开发成本，加速项目进程。请联系何先生 (Tel:15910649500) 或者微信 扫一扫，快速添加
+
+![img](@static/images/privitization/deploy_wechat_code.png)
