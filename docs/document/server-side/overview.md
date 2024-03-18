@@ -152,7 +152,7 @@
 
 ### 群组管理
 
-[群组管理](group.html) 包括创建、获取、修改和删除群组。
+[群组管理](group.html) 包括创建、获取、修改和解散群组。
 
 | 名称        | 方法   | 请求           | 描述          |
 | :---------------- | :----- | :----------------- | :-------------------- |
@@ -162,7 +162,7 @@
 | 获取群组详情 | GET | /{org_name}/{app_name}/chatgroups/{group_ids} | 根据群组 ID 获取群组的详情。  |
 | 创建一个群组  | POST   | /{org_name}/{app_name}/chatgroups     | 创建一个群组。  |
 | 修改群组信息  | PUT   | /{org_name}/{app_name}/chatgroups/{group_id}   | 修改群组信息。   |
-| 删除群组  | DELETE | /{org_name}/{app_name}/chatgroups/{group_id}   | 删除一个群组。   |
+| 解散群组  | DELETE | /{org_name}/{app_name}/chatgroups/{group_id}   | 解散一个群组。   |
 
 ### 群组成员管理
 
@@ -219,7 +219,7 @@
 
 ### 聊天室管理
 
-[聊天室管理](chatroom.html) 包括创建、获取、修改、删除聊天室。
+[聊天室管理](chatroom.html) 包括创建、获取、修改、解散聊天室。
 
 | 名称                    | 方法   | 请求                                                        | 描述                                     |
 | :---------------------- | :----- | :---------------------------------------------------------- | :--------------------------------------- |
@@ -229,7 +229,7 @@
 | 创建一个聊天室          | POST   | /{org_name}/{app_name}/chatrooms                            | 创建一个新聊天室。                       |
 | 修改聊天室信息          | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 修改聊天室信息。                         |
 | 转让聊天室          | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 修改聊天室所有者为同一聊天室中的其他成员。                      |
-| 删除聊天室              | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 删除一个聊天室。                         |
+| 解散聊天室              | DELETE | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 删除一个聊天室。                         |
 | 获取聊天室公告          | GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 获取指定聊天室 ID 的聊天室公告。         |
 | 修改聊天室公告          | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 修改指定聊天室 ID 的聊天室公告。         |
 | 获取聊天室自定义属性 | POST  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 获取聊天室指定或所有自定义属性。      |

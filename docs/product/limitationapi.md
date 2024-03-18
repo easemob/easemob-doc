@@ -104,7 +104,7 @@
 | 获取群组详情        |  GET        | /{org_name}/{app_name}/chatgroups/{group_ids}           | 100 次/秒/App Key            |
 | 创建一个群组  |    POST      | /{org_name}/{app_name}/chatgroups                  | 100 次/秒/App Key                                                 |
 | 修改群组信息   |    PUT         | /{org_name}/{app_name}/chatgroups/{group_id}             | 100 次/秒/App Key                                                 |
-| 删除群组 |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}                    | 100 次/秒/App Key                                                 |
+| 解散群组 |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}                    | 100 次/秒/App Key                                                 |
 | 获取群组公告     |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/announcement         | 100 次/秒/App Key                                                 |
 | 修改群组公告  |    POST| /{org_name}/{app_name}/chatgroups/{group_id}/announcement          | 100 次/秒/App Key                                                 |
 | 分页获取群组共享文件   |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagenum=1&pagesize=10        | 100 次/秒/App Key                                                 |
@@ -153,7 +153,7 @@
 | 创建一个聊天室   |    POST   | /{org_name}/{app_name}/chatrooms                                 | 50 次/秒/App Key                                                  |
 | 修改聊天室信息 |    PUT     | /{org_name}/{app_name}/chatrooms/{chatroom_id}                   | 100 次/秒/App Key                                                 |
 | 转让聊天室          | PUT    | /{org_name}/{app_name}/chatrooms/{chatroom_id}              | 100 次/秒/App Key    |
-| 删除聊天室  |  DELETE  | /{org_name}/{app_name}/chatrooms/{chatroom_id}                   | 100 次/秒/App Key                                                 |
+| 解散聊天室  |  DELETE  | /{org_name}/{app_name}/chatrooms/{chatroom_id}                   | 100 次/秒/App Key                                                 |
 | 获取聊天室公告  |   GET  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement      | 100 次/秒/App Key                                                 |
 | 修改聊天室公告   |    POST | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement      | 100 次/秒/App Key        |
 | 获取聊天室自定义属性 | POST  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement | 100 次/秒/App Key       |

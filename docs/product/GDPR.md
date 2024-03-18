@@ -7,7 +7,7 @@
 ## 数据删除
 
 
-为保护用户隐私，环信提供数据删除 REST API 供开发者对环信即时通讯服务器存储的用户相关数据进行删除，例如：删除用户账号、删除用户属性、删除群组和删除聊天室。
+为保护用户隐私，环信提供数据删除 REST API 供开发者对环信即时通讯服务器存储的用户相关数据进行删除，例如：删除用户账号、删除用户属性、解散群组和聊天室。
 
 ### 认证方式
 
@@ -27,13 +27,13 @@
 
 [删除 App 下指定用户的用户属性](/document/server-side/userprofile.html#删除用户属性)。
 
-#### 删除群组
+#### 解散群组
 
-[删除 App 下指定群 ID 的群组](/document/server-side/group.html#删除群组)。
+[删除 App 下指定群 ID 的群组](/document/server-side/group.html#解散群组)。
 
-#### 删除聊天室
+#### 解散聊天室
 
-[删除 App 下指定 ID 的聊天室](/document/server-side/chatroom.html#删除聊天室)。
+[删除 App 下指定 ID 的聊天室](/document/server-side/chatroom.html#解散聊天室)。
 
 ## 数据导出
 

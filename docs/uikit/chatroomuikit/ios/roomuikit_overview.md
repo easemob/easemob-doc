@@ -14,7 +14,7 @@ ChatroomUIKit 提供以下功能：
 
 - **通用特性**
   - 创建聊天室：ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的接口创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
-  - 销毁聊天室：ChatroomUIKit 不提供销毁聊天室的功能，你可以[调用即时通讯 IM SDK 的接口销毁聊天室](/document/server-side/chatroom.html#删除聊天室)。
+  - [解散聊天室](roomfeature_common.html#解散聊天室)：ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 IM SDK 的接口解散聊天室](/document/server-side/chatroom.html#解散聊天室)。
   - 离开聊天室：聊天室中的成员可自行离开聊天室，聊天室所有者也可以将成员移出聊天室。
   - 发送弹幕：用户在聊天室中向其他参与者发送文字和表情的消息。
   - 打赏：用户通过赠送虚拟礼物，向聊天室中的主播或其他用户表达赞赏或者支持

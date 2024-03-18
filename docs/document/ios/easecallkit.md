@@ -77,6 +77,8 @@ target 'AppName' do
 end
 ```
 
+使用 easecallkit 4.0.0 时，请使用声网音视频库 `AgoraRtcEngine_iOS/RtcBasic` 的 4.1.1 版本。
+
 - 在 Terminal 内运行 `pod update` 命令更新本地库版本。
 - 运行 `pod install` 命令安装 `EaseCallKit` UI 库。成功安装后，Terminal 中会显示 **Pod installation complete!**，此时项目文件夹下会生成一个 `xcworkspace` 文件。
 - 打开新生成的 `xcworkspace` 文件，连接手机，运行 demo。

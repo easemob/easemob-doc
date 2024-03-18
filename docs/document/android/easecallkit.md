@@ -81,6 +81,8 @@ implementation 'io.hyphenate:hyphenate-chat:3.8.0' (`hyphenate-chat` 只支持 3
 implementation 'io.agora.rtc:full-sdk:3.8.0'
 ```
 
+使用 easecallkit 4.0.0 时，请使用声网音视频库 `AgoraRtcEngine_iOS/RtcBasic` 的 4.1.1 版本。
+
 ### 添加权限
 
 根据场景需要，本库需要增加麦克风、相机和悬浮窗等权限:
