@@ -210,4 +210,6 @@ Demo下载请见： [demo下载](https://www.easemob.com/download/rtc)
 -->
 ## 计费说明
 
-环信私有化音视频服务计费规则及功能详情，请联系商务经理程先生(Tel:17611319060)
+环信私有化音视频服务计费规则及功能详情，请联系商务经理何先生 (Tel:15910649500) 或者微信 扫一扫，快速添加
+
+![img](@static/images/privitization/deploy_wechat_code.png)
