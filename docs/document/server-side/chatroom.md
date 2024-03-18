@@ -791,9 +791,9 @@ curl -X PUT -H 'Content-Type: application/json' \
 }
 ```
 
-### 删除聊天室
+### 解散聊天室
 
-删除单个聊天室。如果要删除的聊天室不存在，会返回错误。
+解散单个聊天室。如果要解散的聊天室不存在，会返回错误。
 
 #### HTTP 请求
 
@@ -824,8 +824,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 | 参数           | 类型   | 描述                                                          |
 | :------------- | :----- | :------------------------------------------------------------ |
-| `data.success` | Bool   | 是否成功删除聊天室：<br/> - `true`：是；<br/> - `false`：否。 |
-| `data.id`      | String | 删除的聊天室的 ID。                                           |
+| `data.success` | Bool   | 是否成功解散聊天室：<br/> - `true`：是；<br/> - `false`：否。 |
+| `data.id`      | String | 解散的聊天室的 ID。                                           |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 

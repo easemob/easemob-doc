@@ -744,9 +744,9 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 删除群组
+### 解散群组
 
-删除指定的群组。删除群组时会同时删除群组下所有的子区（Thread）。
+解散指定的群组。解散群组时会同时删除群组下所有的子区（Thread）。
 
 #### HTTP 请求
 

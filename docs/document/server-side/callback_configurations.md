@@ -354,7 +354,7 @@ payload 中字段含义：
 | :------------------------- | :------------------------------------- | :--------------------------------------------- | :--------------------- |
 | muc                        | -                                      | 群聊操作所有事件                               | 聊天室操作所有事件     |
 | muc:create                 | {“operation”:“create”}                 | 创建群                                         | 不支持                 |
-| muc:destroy                | {“operation”:“destroy”}                | 删除群                                         | 删除聊天室             |
+| muc:destroy                | {“operation”:“destroy”}                | 解散群                                         | 解散聊天室             |
 | muc:apply                  | {“operation”:“apply”}                  | 用户申请加入群                                 | 不支持                 |
 | muc:apply_accept           | {“operation”:“apply_accept”}           | 同意用户加群申请                               | 不支持                 |
 | muc:invite                 | {“operation”:“invite”}                 | 邀请新用户进群                                 | 不支持                 |
@@ -429,7 +429,7 @@ payload 字段含义：
 }
 ```
 
-#### 删除群/聊天室
+#### 解散群/聊天室
 
 payload 字段含义：
 
@@ -437,12 +437,12 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `reason`      | String   | /                                                            |
-| `operation`   | String   | `destroy` 删除群/聊天室。                                    |
+| `operation`   | String   | `destroy` 解散群/聊天室。                                    |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
-| `description` | String   | 删除群组或聊天室失败的原因描述。                             |
+| `description` | String   | 解散群组或聊天室失败的原因描述。                             |
 | `error_code`  | String   | 操作失败对应的错误码。                                       |
 
-删除群聊回调请求示例：
+解散群组回调请求示例：
 
 ```json
 { 
@@ -470,7 +470,7 @@ payload 字段含义：
 }
 ```
 
-删除聊天室回调请求示例：
+解散聊天室回调请求示例：
 
 ```json
 { 
