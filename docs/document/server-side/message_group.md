@@ -86,6 +86,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 | `from`          | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为 `admin`。<Container type="tip" title="提示">1. 服务器不校验传入的用户 ID 是否存在，因此，如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。<br/>2. 若传入字段但值为空字符串 (“”)，请求失败。</Container>  |
 | `to`            | Array   | 是       | 消息接收方群组 ID 数组。每次最多可向 3 个群组发送消息。<Container type="tip" title="提示">服务器不校验传入的群组 ID 是否存在，因此，如果你传入的群组 ID 不存在，服务器并不会提示，仍照常发送消息。</Container> |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
+| `need_group_ack` | Bool | 否 | 该条消息发送后是否要已读回执：<br/> - `true`：需要；<br/> -（默认）`false`：不需要。 |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
 | `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。  |
 | `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
@@ -128,6 +129,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' \
     "from": "user1",
     "to": ["184524748161025"],
     "type": "txt",
+    "need_group_ack": false,
     "body": {
         "msg": "testmessages"
     },
