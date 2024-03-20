@@ -123,7 +123,7 @@
 | 批量移除群组成员    |    DELETE     | /{org_name}/{app_name}/chatgroups/{group_id}/users/{usernames}    | 100 次/秒/App Key                                                 |
 | 设置群成员自定义属性    |  PUT       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}              | 100 次/秒/App Key                                                 |
 | 获取单个群成员的所有自定义属性    |  GET       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}            | 100 次/秒/App Key                                                 |
-| 根据属性 key 获取多个群成员的自定义属性    |  GET       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/get              | 100 次/秒/App Key                                                 |
+| 根据属性 key 获取多个群成员的自定义属性    |  POST       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/get              | 100 次/秒/App Key                                                 |
 | 获取群管理员列表    |  GET       | /{org_name}/{app_name}/chatgroups/{group_id}/admin              | 100 次/秒/App Key   |
 | 添加群管理员     |    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/admin              | 100 次/秒/App Key                                                 |
 | 移除群管理员     |    DELETE  | /{org_name}/{app_name}/chatgroups/{group_id}/admin/{oldadmin}    | 100 次/秒/App Key                                                 |
