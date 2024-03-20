@@ -25,7 +25,7 @@
 
 ## 实现方法
 
-你可以调用 `com.hyphenate.chat.EMChatManager#asyncModifyMessage` 方法修改已经发送成功的消息。一条消息默认最多可修改 10 次，若要提升修改次数，需联系商务。
+你可以调用 `com.hyphenate.chat.EMChatManager#asyncModifyMessage` 方法修改已经发送成功的消息。一条消息默认最多可修改 10 次。
 
 示例代码如下：
 

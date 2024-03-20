@@ -24,7 +24,7 @@
 
 ## 实现方法
 
-你可以调用 `EMChatManager::modifyMessage:body:completion:` 方法修改已经发送成功的消息。一条消息默认最多可修改 10 次，若要提升修改次数，需联系商务。
+你可以调用 `EMChatManager::modifyMessage:body:completion:` 方法修改已经发送成功的消息。一条消息默认最多可修改 10 次。
 
 消息修改后，消息的接收方会收到 `EMChatManagerDelegate#onMessageContentChanged:operatorId:operationTime` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群聊会话，除了修改消息的用户，群组内的其他成员均会收到该事件。
 
