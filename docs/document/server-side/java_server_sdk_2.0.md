@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:1.0.0'
+implementation 'com.easemob.im:im-sdk-core:1.0.2'
 ```
 
 ### 使用
