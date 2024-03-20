@@ -1019,6 +1019,8 @@ payload 字段含义：
 | `operation`   | String   | `presence`：成员进群/聊天室。                                |
 | `is_chatroom` | Bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
 
+此外，`from` 为*新成员用户 ID*@easemob.com，`to` 为群组 ID 或聊天室 ID。
+
 有新成员加入了群组时，即时通讯 IM 服务会向你的应用服务器发送用户加入了群组的通知。回调请求示例：
 
 ```json
@@ -1074,6 +1076,8 @@ payload 字段含义：
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `operation`   | String   | `absence`：成员离开群/聊天室。                                |
 | `is_chatroom` | Bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
+
+此外，`from` 为*离开的成员的用户 ID*@easemob.com，`to` 为群组 ID 或聊天室 ID。
 
 有新成员主动离开了群组或被移出时，即时通讯 IM 服务会向你的应用服务器发送用户离开了群组的通知。回调请求示例：
 
