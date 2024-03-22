@@ -29,11 +29,11 @@
     3. 消息发送方通过监听 `onMessageDelivered` 回调接收消息送达回执。
 - 单聊会话及消息已读回执
     1. 消息发送方在发送消息前通话 `ChatOptions.requireAck` 开启已读回执功能。
-    2. 消息接收方收到消息后，调用 API `ChatManager.sendConversationReadAck` 或 `ChatManager.sendMessageReadAck` 发送会话或消息已读回执。
+    2. 消息接收方收到或阅读消息后，调用 API `ChatManager.sendConversationReadAck` 或 `ChatManager.sendMessageReadAck` 发送会话或消息已读回执。
     3. 消息发送方通过监听 `onConversationRead` 或 `onMessageRead` 回调接收会话或消息已读回执。
 - 群聊只支持消息已读回执：
     1. 你可以通过设置 `ChatOptions.NeedGroupAck` 为 `true` 开启群聊消息已读回执功能；
-    2. 消息接收方收到消息后通过 `ChatManager.sendGroupMessageReadAck` 发送群组消息的已读回执。
+    2. 消息接收方收到或阅读消息后通过 `ChatManager.sendGroupMessageReadAck` 发送群组消息的已读回执。
 
 ## 前提条件
 

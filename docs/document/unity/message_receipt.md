@@ -23,21 +23,27 @@
 
 实现消息送达和已读回执的逻辑分别如下：
 
-单聊消息送达回执：
+- 单聊消息送达回执：
 
-1. 消息发送方在发送消息前通过 `ChatOptions.RequireDeliveryAck` 开启送达回执功能；
-2. 消息接收方收到消息后，SDK 自动向发送方触发送达回执；
-3. 消息发送方通过监听 `OnMessageDelivered` 回调接收消息送达回执。
+  1. 消息发送方在发送消息前通过 `ChatOptions.RequireDeliveryAck` 开启送达回执功能；
 
-已读回执：
+  2. 消息接收方收到消息后，SDK 自动向发送方触发送达回执；
+
+  3. 消息发送方通过监听 `OnMessageDelivered` 回调接收消息送达回执。
 
 - 单聊会话及消息已读回执
+
   1. 设置 `RequireAck` 为 `true`；
-  2. 消息接收方收到消息后，调用 API `SendConversationReadAck` 或 `SendMessageReadAck` 发送会话或消息已读回执；
+
+  2. 消息接收方收到或阅读消息后，调用 API `SendConversationReadAck` 或 `SendMessageReadAck` 发送会话或消息已读回执；
+
   3. 消息发送方通过监听 `OnConversationRead` 或 `OnMessageRead` 回调接收会话或消息已读回执。
+
 - 群聊只支持消息已读回执：
+
   1. 你可以通过设置 `isNeedGroupAck` 开启群聊消息已读回执功能；
-  2. 消息接收方收到消息后通过 `SendReadAckForGroupMessage` 发送群组消息的已读回执。
+
+  2. 消息接收方收到或阅读消息后通过 `SendReadAckForGroupMessage` 发送群组消息的已读回执。
 
 ## 前提条件
 

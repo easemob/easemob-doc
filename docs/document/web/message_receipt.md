@@ -16,23 +16,32 @@
 
 实现消息送达回执和已读回执的逻辑如下：
 
-单聊消息送达回执：
+- 单聊消息送达回执：
 
 1. SDK 初始化时，用户将 [`Connection` 类中的 `delivery` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true` 开启消息送达回执。
+
 2. 发送方发送一条消息。
+
 3. 接收方收到消息后，SDK 会自动向发送方发送送达回执。
+
 4. 发送方通过监听 `onDeliveredMessage` 收到送达回执。
 
-消息已读回执：
-
 - 单聊会话及消息已读回执
+
   1. 发送方发送一条消息。
+
   2. 消息接收方收到消息后，调用 `send` 发送会话或消息已读回执；
+
   3. 消息发送方通过监听 `onChannelMessage` 或 `onReadMessage` 回调接收会话或消息已读回执。
+
 - 群聊只支持消息已读回执：
+
   1. 发送方发送一条消息，消息中的 `allowGroupAck` 字段设置为 `true`，要求返回已读回执；
+
   2. 消息接收方收到消息后调用 `send` 方法发送群组消息的已读回执。
+
   3. 发送方在线监听 `onReadMessage` 回调或离线监听 `onStatisticsMessage` 回调接收消息回执。
+  
   4. 发送方通过 `getGroupMsgReadUser` 获取阅读消息的用户的详情。
 
 ## 前提条件
