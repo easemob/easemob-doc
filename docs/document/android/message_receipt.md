@@ -33,11 +33,11 @@
 
 - 单聊会话及消息已读回执
   1. 调用 `setRequireAck(boolean)` 设置需要发送已读回执，传 `true`；
-  2. 消息接收方收到消息后，调用 API `ackConversationRead` 或 `ackMessageRead` 发送会话或消息已读回执；
+  2. 消息接收方收到或阅读消息后，调用 API `ackConversationRead` 或 `ackMessageRead` 发送会话或消息已读回执；
   3. 消息发送方通过监听 `OnConversationRead` 或 `OnMessageRead` 回调接收会话或消息已读回执。
 - 群聊只支持消息已读回执：
   1. 你可以通过设置 `isNeedGroupAck` 为 `true` 开启群聊消息已读回执功能；
-  2. 消息接收方收到消息后通过 `ackGroupMessageRead` 发送群组消息的已读回执。
+  2. 消息接收方收到或阅读消息后通过 `ackGroupMessageRead` 发送群组消息的已读回执。
 
 ## 前提条件
 
