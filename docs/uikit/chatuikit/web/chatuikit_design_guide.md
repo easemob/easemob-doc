@@ -665,4 +665,4 @@ Message Bubble(Large Radius)
 支持在本页面进入消息详情等入口；
 
 ## 6.设计资源（Design Resources）
-设计资源详见 [figma 链接](https://www.figma.com/community/file/1327193019424263350/chat-uikit-for-mobile)。
+设计资源详见 [figma 链接](https://www.figma.com/community/file/1354086936214250154/chat-uikit-for-web)。
