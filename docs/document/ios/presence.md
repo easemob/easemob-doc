@@ -116,6 +116,7 @@
 
 ```objectivec
 // 异步方法
+// 每次最多可传 100 个用户 ID。
 [[[EMClient sharedClient] presenceManager] fetchPresenceStatus:@[@"Alice",@"Tom"] completion:^(NSArray<EMPresence*>* presences,EMError*error){
 }];
 ```
