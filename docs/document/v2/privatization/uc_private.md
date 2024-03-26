@@ -33,7 +33,7 @@
 </thead>
 <tbody>
 <tr>
-<td rowspan="11" width="75">
+<td rowspan="12" width="75">
 <p>&nbsp;</p>
 <p>客户端 SDK</p>
 </td>
@@ -188,6 +188,20 @@
 </td>
 <td>
 <p><a href="/document/v2/flutter/quickstart.html">查看</a></p>
+</td>
+</tr>
+<tr>
+<td width="97">
+<p>React Native</p>
+</td>
+<td>
+<p><a href="/document/v2/react-native/releasenote.html#版本-v1-2-1-2023-8-16">1.2.1</a></p>
+</td>
+<td>
+<p><a href="https://www.npmjs.com/package/react-native-chat-sdk/v/1.2.1">下载 SDK</a></p>
+</td>
+<td>
+<p><a href="/document/v2/react-native/quickstart.html">查看</a></p>
 </td>
 </tr>
 <tr>
