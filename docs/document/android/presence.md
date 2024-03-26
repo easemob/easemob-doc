@@ -146,6 +146,7 @@ EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSiz
 如果不关注用户的在线状态变更，你可以调用 `com.hyphenate.chat.EMPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
 ```java
+// contactsList：要查询状态的用户 ID，每次最多可传 100 个用户 ID。
 EMClient.getInstance().presenceManager().fetchPresenceStatus(contactsList, new EMValueCallBack<List<EMPresence>>() {
     @Override
     public void onSuccess(List<EMPresence> presences) {

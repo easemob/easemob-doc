@@ -116,6 +116,7 @@ conn.getSubscribedPresencelist(option).then(res => {console.log(res)})
 
 ```javascript
 let option = {
+//usernames：要查询状态的用户 ID，每次最多可传 100 个用户 ID。
   usernames: ['Alice','Bob']
 }
 conn.getPresenceStatus(option).then(res => {console.log(res)})

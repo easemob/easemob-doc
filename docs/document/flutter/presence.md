@@ -131,7 +131,7 @@ try {
 如果不关注用户的在线状态变更，你可以调用 `EMPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
 ```dart
-// memberIds: 要查询状态的用户 ID
+// memberIds: 要查询状态的用户 ID，每次最多可传 100 个用户 ID。
 try {
   List<EMPresence> list = await EMClient.getInstance.presenceManager
       .fetchPresenceStatus(members: memberIds);
