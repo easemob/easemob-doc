@@ -36,6 +36,8 @@
 
 ```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMemberListFromServerWithId:cursor:pageSize:completion]
+//cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
+//pageSize：每页期望返回的成员数,最大值为 1,000。
 EMError *error = nil;
 EMCursorResult<NSString*> * result = [[EMClient sharedClient].roomManager getChatroomMemberListFromServerWithId:@"chatroomId" cursor:1 pageSize:20 error:&error];
 ```

@@ -35,6 +35,8 @@
 示例代码如下：
 
 ```csharp
+//cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
+//pageSize：每页期望返回的成员数,最大值为 1,000。
 SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, callback: new ValueCallBack<CursorResult<string>>(
   // members 类型为 CursorResult<string>。
   onSuccess: (members) => {
