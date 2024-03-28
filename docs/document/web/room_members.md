@@ -32,6 +32,8 @@
 示例代码如下：
 
 ```javascript
+//pageNum：当前页码，从 1 开始。
+//pageSize：每页期望返回的成员数,最大值为 1,000。
 let option = {
     pageNum: 1,
     pageSize: 10,

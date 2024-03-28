@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:1.0.2'
+implementation 'com.easemob.im:im-sdk-core:1.0.3'
 ```
 
 ### 使用
@@ -197,6 +197,20 @@ try {
 ```
 
 ## 更新日志
+
+### V1.0.3 2024-03-28
+
+1.增加 "单向清空漫游消息" 功能。
+
+2.增加 "修改文本或自定义消息" 功能。
+
+3.增加 "群组和聊天室定向消息" 功能。
+
+4.对 "创建群组" 和 "修改群组信息" 方法中的 membersonly 注释进行修改。
+
+5."获取单个用户加入的所有群组" 方法返回值增加 total 参数。
+
+以上更新内容请到 MessageApi 、EMCreateMessage、EMCreateGroup、EMModifyGroup、EMGetUserJoinedGroupsResult 中查看。
 
 ###  V1.0.2 2024-03-21
 
