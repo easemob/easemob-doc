@@ -123,6 +123,7 @@ const documentSidebar = [
       { text: '错误码', link: 'error.html' },
       //{ text: 'EaseIMKit 使用指南', link: 'easeimkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
       { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
+      { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
     ],
     except: ['applet', 'server-side','electron','linux']
 
