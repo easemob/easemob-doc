@@ -2,6 +2,27 @@
 
 <Toc />
 
+## 版本 V4.6.0 Dev 2024-04-02（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[置顶消息功能](message_pin.html)。
+  - `pinMessage`: 置顶消息。
+  - `unpinMessage`: 取消置顶消息。
+  - `getServerPinnedMessages`：从服务器获取指定会话的置顶消息。
+  - `onMessagePinEvent`: 当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
+- [IM SDK] 消息修改回调 `onModifiedMessage` 中支持返回通过 RESTful API 修改的自定义消息。
+- [IM SDK] 加入聊天室时，除了要从服务器获取聊天室 ID 之外，支持用户直接传入聊天室 ID。你可以决定传入的聊天室 ID 不存在时是否要自动创建聊天室。
+- [IM SDK] 支持获取聊天室漫游消息。
+
+### 优化
+
+- [IM SDK] 优化 Token 登录时的错误提示信息，使错误提示更精细。
+
+### 修复
+
+- [IM SDK] 修复消息 `onlineState` 状态错误问题。
+
 ## 版本 V4.5.1 Dev 2024-02-22（开发版）
 
 ### 优化
