@@ -2,6 +2,34 @@
 
 <Toc />
 
+## 版本 V4.5.0 Dev 2024-04-03（开发版）
+
+## 新增特性
+
+- [IM SDK] 新增[置顶消息功能](message_pin.html)。
+  - 新增 `EMChatManager#pinMessage:completion:` 方法，用于置顶消息。
+  - 新增 `EMChatManager#unpinMessage:completion:` 方法，用于取消置顶消息。
+  - 新增 `EMChatManager#getPinnedMessagesFromServer:completion:` 方法，用于从服务器获取指定会话的置顶消息。
+  - 新增 `EMConversation#pinnedMessages` 属性，用于返回会话下的所有置顶消息。
+  - 新增 `EMMessagePinInfo` 类，包含置顶以及取消置顶的操作者以及操作时间。
+  - 新增 `EMChatMessage#pinnedInfo` 属性，展示消息的置顶详情。
+  - 新增 `EMMessageListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。 
+- [IM SDK] 加入聊天室时，若传入的聊天室 ID 不存在，可实现[自动创建聊天室](room_manage.html#加入聊天室)。
+- [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
+- [IM SDK] 新增 `EMChatManager#markAllConversationsAsRead` 方法[将所有会话的未读消息设为已读](conversation_unread.html#将所有会话的未读消息数清零)。
+- [IM SDK] 消息修改回调 `EMChatManagerDelegate#onMessageContentChanged:operatorId:operationTime` 中支持[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
+
+## 优化
+
+- [IM SDK] 支持使用消息 body 完成[单条转发](message_forward.html)，附件消息无需重新上传附件。
+- [IM SDK] 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。
+- [IM SDK] 在聊天室成员进出时更新聊天室成员人数，使人数更新更及时准确。
+- [IM SDK] 优化 token 登录时的错误提示信息，使错误提示更精细。
+- [IM SDK] 优化 SDK 内部随机取服务器地址的逻辑，提升请求成功率。
+- [IM SDK] 优化聊天室进出的超时时间。
+- [IM SDK] 部分场景下连接失败重连的优化。
+
+
 ## 版本 V4.4.1 Dev 2024-03-06（开发版）
 
 ### 新增特性

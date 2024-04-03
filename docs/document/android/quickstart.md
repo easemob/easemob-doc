@@ -10,7 +10,7 @@
 - 请在点击获取隐私权限以后启动环信 SDK 初始化。
 - `EMChatService` 和 `EMJobService` 为早期 SDK 内在应用退到后台后，对应用进行保活的程序，可以不进行注册。
 - `EMMonitorReceiver` 为监听开机自启动服务，可以不注册，同时请移除对应的权限申请：`<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>`。
-  :::
+:::
 
 ## 实现原理
 
@@ -120,6 +120,35 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 | x86_64 文件夹        | /app/src/main/jniLibs/ |
 
 如果对生成的 `apk` 大小比较敏感，我们建议使用 `jar` 方式，并且手工拷贝 `so`，而不是使用 `Aar`，因为 `Aar` 方式会把各个平台的 `so` 文件都包含在其中。采用 `jar` 方式，可以仅保留一个 `ARCH` 目录，建议仅保留 `armeabi-v7a`，这样虽然在对应平台执行的速度会降低，但是能有效减小 `apk` 的大小。
+
+#### 方法三：动态加载 .so 库文件
+
+为了减少应用安装包的大小，SDK 提供了 `EMOptions#setNativeLibBasePath` 方法支持动态加载 SDK 所需的 `.so` 文件。以 SDK 4.5.0 为例，`.so` 文件包括 `libcipherdb.so` 和 `libhyphenate.so` 两个文件。该功能的实现步骤如下：
+
+1. 下载最新版本的 SDK 并解压缩。
+2. 集成 `hyphenatechat_4.5.0.jar` 到你的项目中。
+3. 将所有架构的 `.so` 文件上传到你的服务器，并确保应用程序可以通过网络下载目标架构的 `.so` 文件。
+4. 应用运行时，会检查 `.so` 文件是否存在。如果未找到，应用会下载该 `.so` 文件并将其保存到你自定义的应用程序的私有目录中。
+5. 调用 `EMClient#init` 初始化时，将 `.so` 文件所在的 app 私有目录作为参数设置进 `EMOptions#setNativeLibBasePath` 方法中。
+6. 调用 `EMClient#init` 初始化后，SDK 会自动从指定路径加载 `.so` 文件。
+
+:::tip
+1. 该方法仅适合手动集成 Android SDK，不适用于通过 Maven Central 集成。
+2. so 库的路径取决于 `EMOptions#setNativeLibBasePath` 方法的 `path` 参数：
+- `path` 参数为空或者不调用该方法时，SDK 内部会使用 `system.loadLibrary` 从系统默认路径中搜索并加载 so 库。
+- `path` 参数不为空时，SDK 内部会使用 `System.load` 从设置的路径下搜索和加载 so 库。该路径必须为有效的 app 的私有目录路径。
+:::
+
+```java
+//假设用户已经通过动态下发的方式，将环信 SDK 中的 libcipherdb.so 和 libhyphenate.so 两个 so 库，放到 app 的 /data/data/packagename/files 目录下。
+String filesPath = mContext.getFilesDir().getAbsolutePath();
+
+EMOptions options = new EMOptions();
+options.setNativeLibBasePath(filesPath);
+
+EMClient.getInstance().init(mContext, options);
+
+```
 
 ### 3. 添加项目权限
 
