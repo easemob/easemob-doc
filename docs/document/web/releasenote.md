@@ -12,8 +12,8 @@
   - `getServerPinnedMessages`：从服务器获取指定会话的置顶消息。
   - `onMessagePinEvent`: 当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - [IM SDK] 消息修改回调 `onModifiedMessage` 中支持返回通过 RESTful API 修改的自定义消息。
-- [IM SDK] 加入聊天室时，除了要从服务器获取聊天室 ID 之外，支持用户直接传入聊天室 ID。你可以决定传入的聊天室 ID 不存在时是否要自动创建聊天室。
-- [IM SDK] 支持获取聊天室漫游消息。
+- [IM SDK] 加入聊天室时，若传入的聊天室 ID 不存在，可实现[自动创建聊天室](room_manage.html#加入聊天室)。
+- [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
 
 ### 优化
 
