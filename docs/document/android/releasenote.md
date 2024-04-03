@@ -17,7 +17,7 @@
 - [IM SDK] 消息修改回调 `com.hyphenate.EMMessageListener#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
 - [IM SDK] 加入聊天室时，若传入的聊天室 ID 不存在，可实现[自动创建聊天室](room_manage.html#加入聊天室)。
 - [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
-- [IM SDK] 支持[动态加载 .so 库文件](quickstart.html#方法三-动态加载-.so-库文件)。
+- [IM SDK] 支持[动态加载 .so 库文件](quickstart.html#方法三-动态加载-so-库文件)。
 
 ## 优化
 
