@@ -4,7 +4,7 @@
 
 目前，**群组和聊天室**聊天支持对消息置顶和取消置顶，单聊消息不支持该功能。
 
-**若使用该功能，你需要将 IM SDK 升级至 4.6.0 版本并联系环信商务开通。**
+**若使用该功能，你需要将 IM SDK 升级至 4.6.0 或以上版本并联系环信商务开通。**
 
 ## 前提条件
 
@@ -34,11 +34,11 @@
 ```javascript
 
 const options = {
-   // 会话类型 groupChat | chatRoom
+   // 会话类型：群组聊天和聊天室分别为 `groupChat` 和 `chatRoom`。
    conversationType: 'groupChat',
-   // 会话ID
+   // 会话 ID
    conversationId: 'conversationId',
-   // 消息ID
+   // 消息 ID
    messageId: 'messageId'
 }
 
@@ -58,11 +58,11 @@ conn.pinMessage(options).then(()=>{
 ```javascript
 
 const options = {
-   // 会话类型 groupChat | chatRoom
+   // 会话类型：群组聊天和聊天室分别为 `groupChat` 和 `chatRoom`。
    conversationType: 'groupChat',
-   // 会话ID
+   // 会话 ID
    conversationId: 'conversationId',
-   // 消息ID
+   // 消息 ID
    messageId: 'messageId'
 }
 
@@ -86,13 +86,13 @@ conn.unpinMessage(options).then(()=>{
 
 ```javascript
 const options = {
-   /** 会话 ID */
+   // 会话 ID
    conversationId: 'conversationId',
-   /** 会话类型 groupChat | chatRoom */
+   // 会话类型：群组聊天和聊天室分别为 `groupChat` 和 `chatRoom`。
    conversationType: 'groupChat',
-   /** 每页期望获取的置顶消息数量。取值范围为 [1,50]，默认为 `10`。*/
+   // 每页期望获取的置顶消息数量。取值范围为 [1,50]，默认为 `10`。
    pageSize: 20,
-   /** 开始获取数据的游标位置。首次获取传 ''。*/
+   // 开始获取数据的游标位置。首次获取传 ''。
    cursor: ''
 }
 
