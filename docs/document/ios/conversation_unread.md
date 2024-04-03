@@ -15,8 +15,9 @@
 
 环信即时通讯 IM iOS SDK 通过 `IEMChatManager` 和 `EMConversation` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
 
-- `IEMChatManager#getAllConversations`：获取本地所有会话的未读消息数。
+- `EMChatManager#getAllConversations`：获取本地所有会话的未读消息数。
 - `EMConversation#unreadMessagesCount`：获取本地指定会话的未读消息数。
+- `EMChatManager#markAllConversationsAsRead`：将所有会话的未读消息数清零。
 - `EMConversation#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
 - `EMConversation#markMessageAsReadWithId`：将指定会话的单条未读消息置为已读。
 
@@ -44,6 +45,21 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 // 获取未读消息数。
 NSInteger unreadCount = conversation.unreadMessagesCount;
 ```
+
+### 将所有会话的未读消息数清零
+
+你可以调用 `EMChatManager#markAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零，示例代码如下：
+
+```swift
+let err = EMClient.shared().chatManager?.markAllConversationsAsRead()
+    if err == nil {
+        // 标记所有会话为已读成功
+    }
+```
+
+:::tip
+要使用该功能，你需要将 SDK 升级至 4.5.0 及以上版本。
+:::
 
 ### 指定会话的未读消息数清零
 

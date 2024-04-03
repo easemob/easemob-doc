@@ -539,6 +539,10 @@ EMClient.getInstance().chatManager().sendMessage(customMessage);
 2. 发送合并消息。
 3. 对端收到合并消息后进行解析，获取原始消息列表。合并消息转发后在接收端显示该消息的标题和预览图。
 
+:::tip
+对于转发合并消息，例如，用户 A 向 用户 B 发送了合并消息，用户 B 将该合并消息转发给用户 C，需要调用转发单条合并消息的 API。详见[转发单条消息](message_forward.html#转发单条消息)。
+:::
+
 #### 创建和发送合并消息
 
 你可以调用 `createCombinedSendMessage` 方法创建一条合并消息，然后调用 `sendMessage` 方法发送该条消息。

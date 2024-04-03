@@ -467,6 +467,10 @@ message.chatType = EMChatTypeGroupChat;
 2. 发送合并消息。
 3. 对端收到合并消息后进行解析，获取原始消息列表。
 
+:::tip
+对于转发合并消息，例如，用户 A 向 用户 B 发送了合并消息，用户 B 将该合并消息转发给用户 C，需要调用转发单条合并消息的 API。详见[转发单条消息](message_forward.html#转发单条消息)。
+:::
+
 #### 创建和发送合并消息
 
 你可以调用 `EMCombineMessageBody#initWithTitle:summary:compatibleText:messageList` 方法构造一条合并消息体，然后创建消息 `EMChatMessage` 并调用 `sendMessage` 方法发送该条消息。
