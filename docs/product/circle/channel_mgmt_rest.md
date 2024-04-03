@@ -236,7 +236,7 @@ PUT https://{host}/{org_name}/{app_name}/circle/channel/{channel_id}?serverId={s
 | ----------- | ------ | -------- | ------------------------------------------------------------ |
 | `name`        | String | 否       | 频道名称，长度不能超过 50 个字符。                           |
 | `type`        | Int    | 否       | 频道类型：<br/> - `0`：公开频道；<br/> - `1`：私密频道。 |
-| `maxUsers` | Long    | 否       | 频道最大成员数量。<br/> - 对于语聊房频道，该参数的取值范围为 [1,20]。<br/> - 对于其他模式的频道，该参数的取值范围为 [1,2000]，如需要提高上限请联系商务。    |
+| `max_users` | Long    | 否       | 频道最大成员数量。<br/> - 对于语聊房频道，该参数的取值范围为 [1,20]。<br/> - 对于其他模式的频道，该参数的取值范围为 [1,2000]，如需要提高上限请联系商务。    |
 | `description` | String | 否       | 频道描述，长度不能超过 500 个字符。                          |
 | `custom`      | String | 否       | 频道的扩展信息，例如可以给社区添加业务相关的标记，长度不能超过 500 个字符。 |
 | `rtc_name`      | String | 否       | 目前该名称用于使用声网 RTC 时，生成 Token 以及端上加入声网 RTC 频道时使用，长度不能超过 50 个字符。该字段目前仅在修改语聊房频道时才有效。若创建语聊房频道时未指定 `rtc_name`，服务器将使用频道 ID 作为 `rtc_name` 的值返回。|
@@ -340,7 +340,7 @@ GET https://{host}/{org_name}/{app_name}/circle/channel/{channel_id}?serverId={s
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXX/XXX/XXX/circle/channel?serverId=XXX'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXX/XXX/XXX/circle/channel/XXX?serverId=XXX'
 ```
 
 ##### 响应示例
