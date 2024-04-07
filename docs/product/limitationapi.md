@@ -211,8 +211,7 @@
 |  取消订阅多个用户的在线状态     |  DELETE           | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key    |
 | 查询订阅列表    |   GET       | /{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&pageSize=100 | 50 次/秒/App Key  |
 
-### 消息表情回复 Reaction
-
+## 消息表情回复 Reaction
 
 | RESTful API 接口      | 方法   | 接口 URL        | 接口最高调用频率（默认值） |
 | :------------------- | :----- | :------------------------ | :----------- |
@@ -221,7 +220,7 @@
 | 删除 Reaction     | DELETE | /{org_name}/{app_name}/reaction/user/{userId} | 100 次/秒/App Key  |
 | 根据消息 ID 和表情 ID 获取 Reaction 信息 | GET    | /{org_name}/{app_name}/reaction/user/{userId}/detail | 100 次/秒/App Key  |
 
-### 子区管理
+## 子区管理
 
 | RESTful API 接口      | 方法   | 接口 URL        | 接口最高调用频率（默认值） |
 | :------------------- | :----- | :------------------------ | :----------- |
