@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:1.0.3'
+implementation 'com.easemob.im:im-sdk-core:1.0.5'
 ```
 
 ### 使用
@@ -198,26 +198,36 @@ try {
 
 ## 更新日志
 
+### V1.0.5 2024-04-08
+
+处理开发者引用 okhttp、gson 与 sdk 内部引用相同依赖版本不同产生的冲突问题。
+
+### V1.0.4 2024-04-08
+
+修复 "群组和聊天室定向消息" 功能不生效的问题。
+
+以上更新内容请到 MessageApi 中查看。
+
 ### V1.0.3 2024-03-28
 
-1.增加 "单向清空漫游消息" 功能。
+1. 增加 "单向清空漫游消息" 功能。
 
-2.增加 "修改文本或自定义消息" 功能。
+2. 增加 "修改文本或自定义消息" 功能。
 
-3.增加 "群组和聊天室定向消息" 功能。
+3. 增加 "群组和聊天室定向消息" 功能。
 
-4.对 "创建群组" 和 "修改群组信息" 方法中的 membersonly 注释进行修改。
+4. 对 "创建群组" 和 "修改群组信息" 方法中的 membersonly 注释进行修改。
 
-5."获取单个用户加入的所有群组" 方法返回值增加 total 参数。
+5. "获取单个用户加入的所有群组" 方法返回值增加 total 参数。
 
 以上更新内容请到 MessageApi 、EMCreateMessage、EMCreateGroup、EMModifyGroup、EMGetUserJoinedGroupsResult 中查看。
 
 ###  V1.0.2 2024-03-21
 
-1.增加 Push & Presence & Reaction 管理功能。
+1. 增加 Push & Presence & Reaction 管理功能。
 
-2.降低 OkHttp 版本，避免与开发者引入的版本冲突。
+2. 降低 OkHttp 版本，避免与开发者引入的版本冲突。
 
 ###  V1.0.0 2024-03-08
 
-1.Java Server SDK 2.0 版本发布。
+1. Java Server SDK 2.0 版本发布。
