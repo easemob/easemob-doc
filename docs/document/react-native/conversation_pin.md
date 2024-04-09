@@ -18,12 +18,12 @@
 
 环信即时通讯 IM 支持会话置顶，主要方法如下：
 
-- `ChatManager.pinConversation`：置顶会话。
+- `ChatManager.pinConversation`：置顶/取消置顶会话。
 - `ChatManager.asyncFetchPinnedConversationsFromServer`：获取服务端置顶会话列表。
 
 ## 实现方法
 
-### 置顶会话
+### 置顶/取消置顶会话
 
 你可以调用 `pinConversation` 方法设置是否置顶会话。置顶状态会存储在服务器上，多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `CONVERSATION_PINNED` 和 `CONVERSATION_UNPINNED` 事件。
 

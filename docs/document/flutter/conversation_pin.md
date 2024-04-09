@@ -4,7 +4,7 @@
 
 会话置顶指将单聊或群聊会话固定在会话列表的顶部，方便用户查找。例如，将重点会话置顶，可快速定位会话。
 
-**若使用会话置顶功能，需将 SDK 升级至 4.0.3，并[开通服务端会话列表功能](conversation_list#从服务器分页获取会话列表)。**
+**若使用会话置顶功能，需将 SDK 升级至 4.1.0，并[开通服务端会话列表功能](conversation_list#从服务器分页获取会话列表)。**
 
 ## 前提条件
 
@@ -18,12 +18,12 @@
 
 环信即时通讯 IM 支持会话置顶，主要方法如下：
 
-- `EMChatManager#pinConversation`：置顶会话。
+- `EMChatManager#pinConversation`：置顶/取消置顶会话。
 - `EMChatManager#fetchPinnedConversations`：分页获取服务器保存的置顶会话列表。
 
 ## 实现方法
 
-### 置顶会话
+### 置顶/取消置顶会话
 
 你可以调用 `pinConversation` 方法设置是否置顶会话。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMMultiDevicesEvent.CONVERSATION_PINNED` 和 `EMMultiDevicesEvent.CONVERSATION_UNPINNED` 事件。
 

@@ -168,7 +168,7 @@
 
 - [IM SDK] 新增 `EMChatManager#asyncFetchConversationsFromServer` 方法实现[从服务器拉取会话](conversation_list.html#从服务器分页获取会话列表)，原接口标记为已废弃。
 - [IM SDK] 新增置顶服务器会话的功能：
-    - 新增 `EMChatManager#asyncPinConversation` 方法，实现[置顶或取消置顶服务器会话](conversation_pin.html#置顶会话)：
+    - 新增 `EMChatManager#asyncPinConversation` 方法，实现[置顶或取消置顶服务器会话](conversation_pin.html#置顶/取消置顶会话)：
     - 新增 `EMChatManager#asyncFetchPinnedConversationsFromServer` 方法，实现[获取置顶的服务器会话](conversation_pin.html#获取服务端的置顶会话列表)。
 - [IM SDK] 新增 `EMChatManager#getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](conversation_list.html#获取本地所有会话)；
 - [IM SDK] 新增在群组或聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)的功能；
