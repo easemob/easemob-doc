@@ -121,7 +121,7 @@
 
 ### 新增特性
 
-1. 新增 `pinConversation` 方法实现[会话置顶和取消置顶](conversation_pin.html#置顶会话)。
+1. 新增 `pinConversation` 方法实现[会话置顶和取消置顶](conversation_pin.html#置顶/取消置顶会话)。
 2. 新增 `getServerPinnedConversations` 方法[分页获取服务器端的置顶会话列表](conversation_pin.html#获取服务端的置顶会话列表)。
 3. 新增 `getServerConversations` 方法[分页获取排序后的服务端会话列表](conversation_list.html#从服务器分页获取会话列表)。原接口 `getConversationlist` 已废弃。
 4. 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。

@@ -26,6 +26,7 @@
   - `SDKClient#KickDeviceWithToken`：将指定账号登录的指定设备踢下线；
   - `SDKClient#KickAllDevicesWithToken`：将指定账号登录的所有设备都踢下线。
 - [IM SDK] 新增[会话置顶功能](conversation_pin.html#置顶会话)：
+  - `IChatManager#PinConversation`：置顶或取消置顶会话；
   - `Conversation#IsPinned`：判断该会话是否被置顶；
   - `Conversation#PinnedTime`：会话置顶时间戳。
 - [IM SDK] 新增 `ChatManager#FetchHistoryMessagesFromServerBy` 方法[根据消息拉取参数配置类 `FetchServerMessagesOption` 从服务器获取历史消息](message_retrieve.html#从服务器获取指定会话的历史消息)。<br/>
