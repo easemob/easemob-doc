@@ -66,9 +66,7 @@
 
 ### 获取当前用户的其他登录设备的登录 ID 列表
 
-你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表。
-
-选择目标登录 ID 作为消息接收方发出消息，则其他端均会收到该消息，实现不同设备之间的消息同步。
+你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
 ```typescript
 ChatClient.getInstance()
