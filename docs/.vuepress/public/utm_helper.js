@@ -6,14 +6,16 @@ function getUTMParametersAndSetCookie() {
       utmParameters[key] = value;
     }
   }
-  if (Object.keys(utmParameters).length !== 0) {
-    utmParameters['referrer'] = document.referrer;
-    var rootDomain = getRootDomain(document.domain);
-    console.log(document.domain)
-    var existingCookie = getCookieByName("utmParameters");
-    if (!existingCookie) {
-      setCookie("utmParameters", JSON.stringify(utmParameters), 30, rootDomain);
-    }
+  if (document.referrer) {
+    var referrerDomain = new URL(document.referrer).hostname;
+    utmParameters['referrer'] = referrerDomain
+  } else {
+    utmParameters['referrer'] = "direct"
+  }
+  var rootDomain = getRootDomain(document.domain);
+  var existingCookie = getCookieByName("utmParameters");
+  if (!existingCookie) {
+    setCookie("utmParameters", JSON.stringify(utmParameters), 30, rootDomain);
   }
 }
 
