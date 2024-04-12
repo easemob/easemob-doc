@@ -1,3 +1,8 @@
+var script = document.createElement('script');
+script.setAttribute('type','text/javascript');
+script.setAttribute('src',"https://cdn.jsdelivr.net/npm/browser-tool@1.2.2/dist/browser.min.js");
+document.getElementsByTagName('head')[0].appendChild(script);
+
 function getUTMParametersAndSetCookie() {
   var utmParameters = {};
   var params = new URLSearchParams(window.location.search);
@@ -8,9 +13,14 @@ function getUTMParametersAndSetCookie() {
   }
   if (document.referrer) {
     var referrerDomain = new URL(document.referrer).hostname;
-    utmParameters['referrer'] = referrerDomain
+    utmParameters['referrer'] = referrerDomain;
   } else {
-    utmParameters['referrer'] = "direct"
+    utmParameters['referrer'] = "direct";
+  }
+  if (browser) {
+    uaInfo = browser()
+    utmParameters['browser'] = uaInfo.browser
+    utmParameters['device'] = uaInfo.device
   }
   var rootDomain = getRootDomain(document.domain);
   var existingCookie = getCookieByName("utmParameters");
@@ -48,4 +58,4 @@ function setCookie(name, value, days, domain) {
   document.cookie = name + "=" + encodeURIComponent(value) + expires + "; domain=." + domain + "; path=/";
 }
 
-getUTMParametersAndSetCookie();
+window.onload = getUTMParametersAndSetCookie;
