@@ -272,7 +272,9 @@ try {
 
 #### 开启全员禁言
 
-仅群主和群管理员可以调用 `EMGroupManager#muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `EMGroupManager#unMuteAllMembers` 方法解除禁言。
+仅群主和群管理员可以调用 `EMGroupManager#muteAllMembers` 方法开启全员禁言。群组中的所有成员都会收到 `EMGroupEventHandler#onAllGroupMemberMuteStateChanged` 事件。
+
+全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `EMGroupManager#unMuteAllMembers` 方法解除禁言。
 
 群组全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。
 

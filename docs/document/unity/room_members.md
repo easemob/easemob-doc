@@ -253,7 +253,7 @@ SDKClient.Instance.RoomManager.FetchRoomMuteList(roomId, pageSize, pageNum, call
 
 仅聊天室所有者和管理员可以调用 `MuteAllRoomMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动取消禁言，需要调用 `UnMuteAllRoomMembers` 方法取消全员禁言。
 
-全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `OnAllMemberMuteChangedFromChatroom` 回调。
+全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `IRoomManagerDelegate#OnAllMemberMuteChangedFromChatroom` 回调。
 
 示例代码如下：
 
@@ -268,7 +268,7 @@ SDKClient.Instance.RoomManager.MuteAllRoomMembers(roomId, new ValueCallBack<Room
 
 #### 关闭聊天室全员禁言
 
-仅聊天室所有者和管理员可以调用 `UnMuteAllRoomMembers` 方法取消全员禁言。调用成功后，聊天室成员会收到 `OnAllMemberMuteChangedFromChatroom` 回调。
+仅聊天室所有者和管理员可以调用 `UnMuteAllRoomMembers` 方法取消全员禁言。调用成功后，聊天室成员会收到 `IRoomManagerDelegate#OnAllMemberMuteChangedFromChatroom` 回调。
 
 示例代码如下：
 

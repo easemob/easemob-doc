@@ -86,7 +86,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :--------------- |
 | `from`          | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为 `admin`。<Container type="tip" title="提示">1. 服务器不校验传入的用户 ID 是否存在，因此，如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。<br/>2. 若传入字段但值为空字符串 (“”)，请求失败。</Container>   |
-| `to`            | Array   | 是       | 消息接收方聊天室 ID 数组。每次最多可向 10 个聊天室发送消息。<Container type="tip" title="提示">服务器不校验传入的聊天室 ID 是否存在，因此，如果你传入的聊天室 ID 不存在，服务器并不会提示，仍照常发送消息。</Container>  |
+| `to`            | Array   | 是       | 消息接收方聊天室 ID 数组。每次最多可向 10 个聊天室发送消息。<Container type="tip" title="提示">服务器不校验传入的聊天室 ID 是否存在，因此，如果你传入的聊天室 ID 不存在，服务器并不会提示，仍照常发送消息。</Container> |
 | `chatroom_msg_level` | String | 否       | 聊天室消息优先级：<br/> - `high`：高； <br/> - （默认）`normal`：普通；<br/> - `low`：低。 |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
