@@ -58,4 +58,6 @@ function setCookie(name, value, days, domain) {
   document.cookie = name + "=" + encodeURIComponent(value) + expires + "; domain=." + domain + "; path=/";
 }
 
-window.onload = getUTMParametersAndSetCookie;
+window.addEventListener('load', function() {
+  getUTMParametersAndSetCookie;
+});
