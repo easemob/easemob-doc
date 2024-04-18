@@ -4,13 +4,6 @@
 
 本文介绍如何快速集成环信即时通讯 IM Android SDK 实现单聊。
 
-:::notice
-最近遇到因 app 隐私问题下架的开发者需注意：
-
-- 请在点击获取隐私权限以后启动环信 SDK 初始化。
-- `EMChatService` 和 `EMJobService` 为早期 SDK 内在应用退到后台后，对应用进行保活的程序，可以不进行注册。
-- `EMMonitorReceiver` 为监听开机自启动服务，可以不注册，同时请移除对应的权限申请：`<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>`。
-:::
 
 ## 实现原理
 
@@ -53,7 +46,7 @@
 :::notice
 
 - 以下集成方式只需选择一种，同时使用多种集成方式可能会报错。
-- 请点击查看发版说明获得最新版本号。
+- 请点击查看[发版说明](releasenote.html)获得最新版本号。
   :::
 
 #### 方法一：使用 mavenCentral 自动集成
@@ -85,7 +78,7 @@ allprojects {
 ...
 dependencies {
     ...
-    // x.y.z 请填写具体版本号，如：3.9.4。
+    // x.y.z 请填写具体版本号，如：4.5.0。
     // 可通过 SDK 发版说明获得最新版本号。
     implementation 'io.hyphenate:hyphenate-chat:x.x.x'
 }
@@ -182,17 +175,6 @@ EMClient.getInstance().init(mContext, options);
     <!-- 申请闹钟定时权限，SDK 心跳中使用，3.9.8及以后版本可以不添加 -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <!-- IM SDK required end -->
-    <application>
-
-        <!-- 声明 SDK 所需的 service 的核心功能-->
-        <service
-            android:name="com.hyphenate.chat.EMChatService"
-            android:exported="true" />
-        <service
-            android:name="com.hyphenate.chat.EMJobService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-    </application>
 
 </manifest>
 ```
@@ -229,19 +211,19 @@ EMClient.getInstance().init(context, options);
 
 ```java
 try {
-                        // 注册失败会抛出 HyphenateException。
-                        // 同步方法，会阻塞当前线程。
-                        EMClient.getInstance().createAccount(userName, pwd);
-                        //成功
-                        //callBack.onSuccess(createLiveData(userName));
-                    } catch (HyphenateException e) {
-                        //失败
-                        //callBack.onError(e.getErrorCode(), e.getMessage());
-                    }
+        // 注册失败会抛出 HyphenateException。
+        // 同步方法，会阻塞当前线程。
+        EMClient.getInstance().createAccount(userName, pwd);
+        //成功
+        //callBack.onSuccess(createLiveData(userName));
+    } catch (HyphenateException e) {
+        //失败
+        //callBack.onError(e.getErrorCode(), e.getMessage());
+    }
 ```
 
 :::notice
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#注册单个用户)。
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在[环信控制台](https://console.easemob.com/user/login)中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#注册单个用户)。
 :::
 
 ### 3. 登录账号
