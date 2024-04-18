@@ -199,3 +199,31 @@ public interface EMChatRoomChangeListener {
 
 }
 ```
+
+### 实时更新聊天室成员人数
+
+如果聊天室短时间内有成员频繁加入或退出时，实时更新聊天室成员人数的逻辑如下：
+
+1. 聊天室内有成员加入时，其他成员会收到 `onMemberJoined` 事件。有成员主动或被动退出时，其他成员会收到 `onMemberExited` 和 `onRemovedFromChatRoom` 事件。
+
+2. 收到通知事件后，调用 `EMChatRoomManager#getChatRoom` 方法获取本地聊天室详情，再通过`EMChatRoom#getMemberCount`获取聊天室当前人数。
+
+```java
+EMClient.getInstance().chatroomManager().addChatRoomChangeListener(new EMChatRoomChangeListener() {
+
+            @Override
+            public void onMemberJoined(String roomId, String participant) {
+                //获取聊天室在线人数
+                int memberCount = EMClient.getInstance().chatroomManager().getChatRoom(roomId).getMemberCount();
+
+            }
+
+            @Override
+            public void onMemberExited(String roomId, String roomName, String participant) {
+                //int memberCount = EMClient.getInstance().chatroomManager().getChatRoom(roomId).getMemberCount();
+            }
+
+            ……
+        });
+
+```
