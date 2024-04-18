@@ -44,7 +44,7 @@
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}
+DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}
 ```
 
 #### 路径参数
@@ -91,7 +91,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl --location --request DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/{XXXX}?userId={XXXX}&msgIdList=XXXX' \
+curl --location --request DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX?userId=XXXX&msgIdList=XXXX' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'
@@ -117,7 +117,7 @@ curl --location --request DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/ch
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{userId}
+DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}
 ```
 
 #### 路径参数
@@ -375,7 +375,7 @@ curl --location --request DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/gro
 
 ## 常见错误
 
-| HTTP 返回码（Status Code）<div style="width: 220px;"></div> | 说明（Description）                                          |
+| HTTP 返回码<div style="width: 220px;"></div> | 说明                                        |
 | :------------------------- | :----------------------------------------------------------- |
 | 401                        | （未授权）请求要求身份验证。对于需要 token 的接口，服务器可能返回此响应。 |
 | 403                        | （禁止）服务器拒绝请求。例如，调用频率超过了 100 次/秒/App Key。 |
