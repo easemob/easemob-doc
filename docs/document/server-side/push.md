@@ -19,7 +19,7 @@
 | `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `username` | String | 是       | 环信用户 ID。                                                                                                                                   |
+| `username` | String | 是       | 环信用户 ID。                                 |
 
 ### 响应参数
 
@@ -64,7 +64,11 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/push/binding
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数       | 类型   | 描述   | 是否必需 | 
+| :--------- | :----- | :------- | :------------------ |
+| `username` | String | 当前用户的用户 ID。    | 是       | 
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -100,7 +104,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/push/binding
 **绑定请求**
 
 ```shell
-curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/wzy/push/binding' \
+curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{    
@@ -113,7 +117,7 @@ curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/wzy/push/binding' \
 **解除绑定**
 
 ```shell
-curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/wzy/push/binding' \
+curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{    
@@ -165,7 +169,11 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/push/binding
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数       | 类型   | 描述   | 是否必需 | 
+| :--------- | :----- | :------- | :------------------ |
+| `username` | String | 当前用户的用户 ID。    | 是       | 
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -188,7 +196,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/push/binding
 ### 请求示例
 
 ```shell
-curl --location --request GET 'https://a1-hsb.easemob.com/easemob-demo/testy/users/wzy/push/binding' \
+curl --location --request GET 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -199,13 +207,13 @@ curl --location --request GET 'https://a1-hsb.easemob.com/easemob-demo/testy/use
   "timestamp": 1688031327535,   
   "entities": [       
     {            
-      "device_id": "8ce08cad-9369-4bdd-86c8-695a0d247cda",      
-      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",  
+      "device_id": "8ce08cad-9369-XXXX-XXXX-695a0d247cda",      
+      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-XXXX_XXXX_Ksoqxo8Y",  
       "notifier_name": "104410638"      
     }   
     {            
-      "device_id": "8ce08cad-9369-4bdd-86c8-695a0d247cda",      
-      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",  
+      "device_id": "8ce08cad-9369-XXXX-XXXX-695a0d247cda",      
+      "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-XXXX_XXXX_Ksoqxo8Y",  
       "notifier_name": "104410638"      
     }  
   ],    
@@ -226,7 +234,11 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数       | 类型   | 描述   | 是否必需 | 
+| :--------- | :----- | :------- | :------------------ |
+| `username` | String | 当前用户的用户 ID。    | 是       | 
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -270,7 +282,11 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 #### 请求示例
 
 ```bash
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{    "nickname": "testuser"   }' 'https://XXXX/XXXX/XXXX/users/user1'
+curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX  \
+-H 'Content-Type: application/json'  \
+-H 'Accept: application/json'  \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-d '{ "nickname": "testuser"   }' 
 ```
 
 #### 响应示例
@@ -280,7 +296,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
   "action": "put",
   "application": "8be024f0-XXXX-XXXX-XXXX-5d598d5f8402",
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users",
+  "uri": "https://XXXX/XXXX/XXXX/users/XXXX",
   "entities": [
     {
       "uuid": "4759aa70-XXXX-XXXX-XXXX-6fa0510823ba",
@@ -311,7 +327,11 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数       | 类型   | 描述   | 是否必需 | 
+| :--------- | :----- | :------- | :------------------ |
+| `username` | String | 当前用户的用户 ID。    | 是       | 
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -357,8 +377,12 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 #### 请求示例
 
 ```bash
-curl -X PUT -H "Authorization: Bearer <YourAppToken>" -i  https://XXXX/XXXX/XXXX/users/a -d '{"notification_display_style": "1"}'
+curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
+-H 'Content-Type: application/json'  \
+-H "Authorization: Bearer <YourAppToken>"
+-d '{"notification_display_style": "1"}'
 ```
+
 
 #### 响应示例
 
@@ -367,7 +391,7 @@ curl -X PUT -H "Authorization: Bearer <YourAppToken>" -i  https://XXXX/XXXX/XXXX
   "action": "put",
   "application": "17d59e50-XXXX-XXXX-XXXX-0dc80c0f5e99",
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users",
+  "uri": "https://XXXX/XXXX/XXXX/users/XXXX",
   "entities": [
     {
       "uuid": "3b8c9890-XXXX-XXXX-XXXX-f50bf55cafad",
@@ -407,6 +431,7 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 | :--------- | :----- | :------------------------------------------------------------------------------------------ | :------- |
 | `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是       |
 | `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。                      | 是       |
+| `username` | String | 当前用户的用户 ID。    | 是       | 
 
 :::tip
 如需设置 app 全局离线推送，`chattype` 需传 `user`，`key` 为当前用户 ID。
@@ -453,10 +478,10 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 #### 请求示例
 
 ```bash
-curl -L -X PUT '{url}/{org_name}/{app_name}/users/{username}/notification/user/{key}' \
+curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
---data-raw '{
+-d '{
     "type":"NONE",
     "ignoreInterval":"21:30-08:00",
     "ignoreDuration":86400000
@@ -468,7 +493,7 @@ curl -L -X PUT '{url}/{org_name}/{app_name}/users/{username}/notification/user/{
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users/notification/user/hxtest",
+  "uri": "https://XXXX/XXXX/XXXX/users/notification/user/XXXX",
   "timestamp": 1647503749918,
   "organization": "hx",
   "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
@@ -497,6 +522,7 @@ GET https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 
 | 参数       | 类型   | 描述          | 是否必需 |
 | :--------- | :----- | :--------------------------------- | :------- |
+| `username` | String | 当前用户的用户 ID。    | 是       | 
 | `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是       |
 | `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。                      | 是       |
 
@@ -506,7 +532,7 @@ GET https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 
 | 参数            | 类型   | 描述              | 是否必需 |
 | :-------------- | :----- | :----------------------- | :------- |
-| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
+| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是  |
 
 ### HTTP 响应
 
@@ -528,7 +554,7 @@ GET https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 #### 请求示例
 
 ```bash
-curl -L -X GET '{url}/{org}/{app}/users/{username}/notification/chatgroup/{key}' \
+curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -548,7 +574,7 @@ curl -L -X GET '{url}/{org}/{app}/users/{username}/notification/chatgroup/{key}'
     "ignoreInterval": "21:30-08:00"
   },
   "duration": 20,
-  "applicationName": "hxdemo"
+  "applicationName": "XXXX"
 }
 ```
 
@@ -564,7 +590,11 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数       | 类型   | 描述          | 是否必需 |
+| :--------- | :----- | :--------------------------------- | :------- |
+| `username` | String | 当前用户的用户 ID。    | 是       | 
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -597,10 +627,10 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 #### 请求示例
 
 ```bash
-curl -L -X PUT '{url}/{org}/{app}/users/{username}/notification/language' \
+curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
---data-raw '{
+-d '{
     "translationLanguage":"EU"
 }'
 ```
@@ -610,7 +640,7 @@ curl -L -X PUT '{url}/{org}/{app}/users/{username}/notification/language' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users/notification/language",
+  "uri": "https://XXXX/XXXX/XXXX/users/XXXX/notification/language",
   "timestamp": 1648089630244,
   "organization": "hx",
   "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
@@ -635,14 +665,17 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/notification/language
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数       | 类型   | 描述          | 是否必需 |
+| :--------- | :----- | :--------------------------------- | :------- |
+| `username` | String | 当前用户的用户 ID。    | 是       | 
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
-| :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
-| `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
-| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
+| 参数         | 类型   | 描述    | 是否必需 |
+| :-------------- | :----- | :------------------------ | :------- |
+| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是   |
 
 ### HTTP 响应
 
@@ -662,7 +695,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/notification/language
 #### 请求示例
 
 ```bash
-curl -L -X GET '{url}/{org}/{app}/users/{username}/notification/language' \
+curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -788,9 +821,9 @@ POST https://{host}/{org_name}/{app_name}/notification/template
 ##### 请求示例
 
 ```bash
-curl -X POST '{url}/{org}/{app}/notification/template' \
--H 'Authorization: Bearer <YourAppToken>' \
+curl -X POST 'https://XXXX/XXXX/XXXX/notification/template' \
 -H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
 -d '{
     "name": "test7",
     "title_pattern": "你好,{0}",
@@ -815,7 +848,7 @@ curl -X POST '{url}/{org}/{app}/notification/template' \
     "content_pattern": "推送测试,{0}"
   },
   "duration": 26,
-  "applicationName": "hxdemo"
+  "applicationName": "XXXX"
 }
 ```
 
@@ -839,10 +872,9 @@ GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 
 ##### 请求 header
 
-| 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
-| :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
-| `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
-| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
+| 参数            | 类型   | 描述        | 是否必需 |
+| :-------------- | :----- | :------------------------- | :------- |
+| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是 |
 
 #### HTTP 响应
 
@@ -866,7 +898,7 @@ GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 ##### 请求示例
 
 ```bash
-curl -X GET '{url}/{org}/{app}/notification/template/{name}' \
+curl -X GET 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -931,11 +963,11 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/notification/template
 ##### 请求示例
 
 ```shell
-curl -X PUT '{host}/{org}/{app}/users/{username}/notification/template' \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer <YourUserToken>' \
-  -d '{    
-  	"templateName": "hxtest"
+curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/template' \
+-H 'Content-Type: application/json' \
+-H 'Authorization: Bearer <YourUserToken>' \
+-d '{    
+  "templateName": "hxtest"
  }
 ```
 
@@ -947,7 +979,7 @@ curl -X PUT '{host}/{org}/{app}/users/{username}/notification/template' \
     "uri": "http://XXX/XXX/XXX/users/XXX/notification/template",
     "timestamp": 1705470003984,
     "organization": "XXX",
-    "application": "cc7380d5-099c-4d11-a93e-51d6d590b475",
+    "application": "cc7380d5-XXXX-XXXX-a93e-51d6d590b475",
     "action": "put",
     "data": {
         "templateName": "hxtest"
@@ -1020,6 +1052,8 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
 
 接口详情，请参见[发送文本消息](https://doc.easemob.com/document/server-side/message_single.html#发送文本消息)。
 
+单聊和群聊会话中发送其他类型的消息的接口，请参见[发送单聊消息](message_single.html)和[群聊消息](message_group.html)接口描述。
+
 ### 删除离线推送模板
  
 删除离线消息推送模板。
@@ -1040,10 +1074,10 @@ DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 
 ##### 请求 header
 
-| 参数            | 类型   | 描述                                                                                                                 | 是否必需 |
-| :-------------- | :----- | :------------------------------------------------------------------------------------------------------------------- | :------- |
-| `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
-| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
+| 参数      | 类型   | 描述           | 是否必需 |
+| :-------------- | :----- | :----------------------------- | :------- |
+| `Content-Type`  | String | 内容类型。请填 `application/json`。        | 是  |
+| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是  |
 
 #### HTTP 响应
 
@@ -1067,7 +1101,7 @@ DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 ##### 请求示例
 
 ```bash
-curl -X DELETE '{url}/{org}/{app}/notification/template/{name}' \
+curl -X DELETE 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 -H 'Authorization: Bearer {YourAppToken}'
 ```
 
@@ -1075,7 +1109,7 @@ curl -X DELETE '{url}/{org}/{app}/notification/template/{name}' \
 
 ```json
 {
-  "uri": "https://XXXX/XXXX/XXXX/notification/template/test7",
+  "uri": "https://XXXX/XXXX/XXXX/notification/template/XXXX",
   "timestamp": 1646989686393,
   "organization": "hx",
   "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
@@ -1088,7 +1122,7 @@ curl -X DELETE '{url}/{org}/{app}/notification/template/{name}' \
     "content_pattern": "推送测试,{0}"
   },
   "duration": 11,
-  "applicationName": "hxdemo"
+  "applicationName": "XXXX"
 }
 ```
 
