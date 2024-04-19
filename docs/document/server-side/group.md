@@ -1675,7 +1675,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl --location --request PUT 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/user/XXXX' \
+curl -L -X PUT 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/user/XXXX' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -1740,7 +1740,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl --location --request GET 'https://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup/207059303858177/user/test2' \
+curl -L -X GET 'https://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup/207059303858177/user/test2' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'
 -H 'Authorization: Bearer YWMtozZwfsFFEe2oQTE6aob5eQAAAAAAAAAAAAAAAAAAAAExCXvf5bRGAJBgXNYFJVQ9AQMAAAGG2MUClwBPGgDsI1GYg1QtapTEdGyrm29Eu6L8qx60lDZ9TJRDOQjEsw' \
@@ -1808,7 +1808,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/get
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl--location--request POST 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/get'\
+curl -L -X POST 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/get'\
 -H'Content-Type: application/json'\
 -H'Accept: application/json'\
 -H'Authorization: Bearer <YourAppToken>'\

@@ -103,7 +103,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/push/binding
 **绑定请求**
 
 ```shell
-curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
+curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{    
@@ -116,7 +116,7 @@ curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 **解除绑定**
 
 ```shell
-curl --location --request PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
+curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{    
@@ -195,7 +195,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/push/binding
 ### 请求示例
 
 ```shell
-curl --location --request GET 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
+curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
