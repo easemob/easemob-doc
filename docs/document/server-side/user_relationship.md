@@ -358,7 +358,7 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl --location 'https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit=10&needReturnRemark=true' \
+curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRemark=true' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer  <YourAppToken>'
@@ -368,7 +368,7 @@ curl --location 'https://{host}/{org_name}/{app_name}/user/{username}/contacts?l
 
 ```json
 {
-  "uri": "http://{host}/{org_name}/{app_name}/users/{username}/rostersByPage",  
+  "uri": "http://XXXX/XXXX/XXXX/users/XXXX/rostersByPage",  
   "timestamp": 1706238297509,
   "entities": [],
   "count": 1,
@@ -596,7 +596,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ```json
 {
-    "uri": "https://a1.easemob.com/easemob-demo/wang/users/tst/blocks/users",
+    "uri": "https://XXXX/XXXX/XXXX/users/XXXX/blocks/users",
     "timestamp": 1682064422108,
     "entities": [],
     "cursor": "MTA5OTAwMzMwNDUzNTA2ODY1NA==",

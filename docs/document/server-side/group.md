@@ -547,7 +547,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl --location 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
+curl -L -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
 -H 'Authorization: Bearer  <YourAppToken>'
 ```
 

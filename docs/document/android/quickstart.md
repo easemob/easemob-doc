@@ -106,7 +106,7 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 
 | 文件或文件夹         | 项目路径               |
 | :------------------- | :--------------------- |
-| easemob_xxx.jar 文件 | /app/libs/             |
+| hyphenatechat_xxx.jar 文件 | /app/libs/             |
 | arm64-v8a 文件夹     | /app/src/main/jniLibs/ |
 | armeabi-v7a 文件夹   | /app/src/main/jniLibs/ |
 | x86 文件夹           | /app/src/main/jniLibs/ |
