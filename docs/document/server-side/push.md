@@ -261,8 +261,8 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 如果返回的 HTTP 状态码为 200，表示请求成功，响应包体中包含以下字段：
 
-| 参数                 | 类型    | 描述                                                                                                                                                                                                           |
-| :------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 参数        | 类型    | 描述      |
+| :------------------- | :------ | :-------------- |
 | `entities`           | JSON Array  | 用户在推送通知中显示的昵称以及用户相关信息。     |
 |  - `uuid`      | String  | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。      |
 |  - `type`      | String  | 用户类型，即 `user`。 |
@@ -336,7 +336,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数            | 类型   | 描述                               | 是否必需 |
 | :-------------- | :----- | :-------------------------------------- | :------- |
-| `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
+| `Content-Type`  | String | 内容类型。请填 `application/json`。     | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
 #### 请求 body
@@ -353,7 +353,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数      | 类型    | 描述   |
 | :-------------------- | :------ | :------------------------------------------------ |
-| `entities`                                  | JSON Array   | 用户的离线推送通知的展示方式以及相关信息。        |
+| `entities`                            | JSON Array   | 用户的离线推送通知的展示方式以及相关信息。        |
 |  - `uuid`                             | String  | 用户的 UUID。系统为该请求中的 app 或用户生成的唯一内部标识，用于生成用户权限 token。   |
 |  - `type`                             | String  | 用户类型，即 `user`。     |
 |  - `created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。            |
@@ -428,9 +428,9 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 
 | 参数       | 类型   | 描述                                                                                        | 是否必需 |
 | :--------- | :----- | :------------------------------------------------------------------------------------------ | :------- |
+| `username` | String | 当前用户的用户 ID。    | 是       | 
 | `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是       |
 | `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。                      | 是       |
-| `username` | String | 当前用户的用户 ID。    | 是       | 
 
 :::tip
 如需设置 app 全局离线推送，`chattype` 需传 `user`，`key` 为当前用户 ID。
