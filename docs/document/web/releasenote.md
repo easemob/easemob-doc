@@ -33,7 +33,7 @@
 
 ### 新增特性
 
-- [IM SDK] 聊天室和群组成员进出事件增加成员人数 `memberCount` 字段。
+- [IM SDK] [聊天室和群组成员进出事件增加成员人数 `memberCount` 字段](room_manage.html#实时更新聊天室成员人数)。
 - [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#清空聊天记录) 方法，用于清空当前用户的聊天记录，包括消息和会话。
 - [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-id-列表) 方法，可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
 - [IM SDK] 新增 [useReplacedMessageContents](message_send_receive.html#发送文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。

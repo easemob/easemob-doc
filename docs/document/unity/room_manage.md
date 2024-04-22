@@ -19,6 +19,7 @@
 - 退出聊天室
 - 解散聊天室
 - 监听聊天室事件
+- 实时更新聊天室成员人数
 
 ## 前提条件
 
@@ -208,4 +209,31 @@ public interface IRoomManagerDelegate
     //聊天室详情变更。聊天室的所有成员会收到该事件。
     void OnSpecificationChangedFromRoom(Room room);
 }
+```
+
+### 实时更新聊天室成员人数
+
+如果聊天室短时间内有成员频繁加入或退出时，实时更新聊天室成员人数的逻辑如下：
+
+1. 聊天室内有成员加入时，其他成员会收到 `OnMemberJoinedFromRoom` 事件。有成员主动或被动退出时，其他成员会收到 `OnMemberExitedFromRoom` 和 `OnRemovedFromRoom` 事件。
+
+2. 收到通知事件后，调用 `RoomManager#GetChatRoom` 方法获取本地聊天室详情，再通过`RoomManager#MemberCount` 获取聊天室当前人数。
+
+```csharp
+class RoomManagerDelegate : IRoomManagerDelegate
+{
+    public void OnMemberJoinedFromRoom(string roomId, string participant)
+    {
+        int memberCount = SDKClient.Instance.RoomManager.GetChatRoom(roomId).MemberCount;
+    }
+
+    public void OnMemberExitedFromRoom(string roomId, string roomName, string participant)
+    {
+    }
+    // 这里实现 IRoomManagerDelegate 中的其他功能
+}
+
+RoomManagerDelegate roomManagerDelegate = new RoomManagerDelegate();
+SDKClient.Instance.RoomManager.AddRoomManagerDelegate(roomManagerDelegate);
+
 ```
