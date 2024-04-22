@@ -80,7 +80,7 @@ try {
 @Service
 public class UserService {
 
-    private UserApi userApi = new UserApi;
+    private UserApi userApi = new UserApi();
 
     private void createUser() {
         List<EMCreateUser> emCreateUserList = new ArrayList<>();
