@@ -216,3 +216,24 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
   
   }
 ```
+
+### 实时更新聊天室成员人数
+
+如果聊天室短时间内有成员频繁加入或退出时，实时更新聊天室成员人数的逻辑如下：
+
+1. 聊天室内有成员加入时，其他成员会收到 `userDidJoinChatroom:user:` 事件。有成员主动或被动退出时，其他成员会收到 `userDidLeaveChatroom:user:`  事件。
+
+2. 收到通知事件后，通过 `EMChatroom#occupantsCount` 获取聊天室当前人数。
+
+```Swift
+extension ViewController: EMChatroomManagerDelegate {
+    func userDidJoin(_ aChatroom: EMChatroom, user aUsername: String) {
+        let memberCount = aChatroom.occupantsCount
+    }
+    func userDidLeave(_ aChatroom: EMChatroom, user aUsername: String) {
+        let memberCount = aChatroom.occupantsCount
+    }
+}
+
+EMClient.shared().roomManager?.add(self, delegateQueue: nil)
+```
