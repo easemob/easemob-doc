@@ -18,6 +18,7 @@
 - 退出聊天室
 - 解散聊天室
 - 监听聊天室事件
+- 实时更新聊天室成员人数
 
 ## 前提条件
 
@@ -322,4 +323,25 @@ ChatClient.getInstance().roomManager.removeAllRoomListener();
 
 // 添加聊天室监听器。
 ChatClient.getInstance().roomManager.addRoomListener(roomListener);
+```
+
+### 实时更新聊天室成员人数
+
+如果聊天室短时间内有成员频繁加入或退出时，实时更新聊天室成员人数的逻辑如下：
+
+1. 聊天室内有成员加入时，其他成员会收到 `ChatRoomEventListener#onMemberJoined` 事件。有成员主动或被动退出时，其他成员会收到 `ChatRoomEventListener#onMemberExited` 事件。
+
+2. 收到通知事件后，调用 `fetchChatRoomInfoFromServer` 方法获取本地聊天室详情，其中包括聊天室当前人数。
+
+```typescript
+ChatClient.getInstance()
+  .chatManager.fetchChatRoomInfoFromServer(
+    roomId // 房间ID
+  )
+  .then((res) => {
+    // todo: 操作成功, 获取房间信息
+  })
+  .catch((error) => {
+    // todo: 发生错误
+  });
 ```

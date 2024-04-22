@@ -8,8 +8,10 @@
 
 环信即时通讯 IM React Native SDK 通过 `ChatManager` 类支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
 
-- `getMessagesWithKeyword`：根据关键字搜索本地数据库中单个会话中指定用户发送的消息。
-- `searchMsgFromDB`：根据关键字搜索指定用户在一定时间内发送的消息。
+- `ChatManager#getMessagesWithKeyword`：根据关键字搜索本地数据库中单个会话中指定用户发送的消息。
+- `ChatManager#searchMsgFromDB`：根据关键字搜索指定用户在一定时间内发送的消息。
+- `ChatManager#getMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
+- `ChatConversation#getMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。
 
 ## 前提条件
 
@@ -22,7 +24,7 @@
 
 ### 获取指定会话中包含特定关键字的消息
 
-你可以调用 `getMessagesWithKeyword` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
+你可以调用 `ChatManager#getMessagesWithKeyword` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
 
 ```typescript
 // convId: 会话 ID。
@@ -52,7 +54,7 @@ ChatClient.getInstance()
 
 ### 获取指定用户在一定时间内发送包含关键字的消息
 
-你可以调用 `searchMsgFromDB` 方法根据关键字搜索指定用户在一定时间内发送的消息。
+你可以调用 `ChatManager#searchMsgFromDB` 方法根据关键字搜索指定用户在一定时间内发送的消息。
 
 ```typescript
 // keywords: 搜索消息的关键字。
@@ -67,5 +69,60 @@ ChatClient.getInstance()
   })
   .catch((reason) => {
     console.log("get message fail.", reason);
+  });
+```
+
+### 根据搜索范围搜索所有会话中的消息
+
+你可以调用 `ChatManager#getMessagesWithKeyword` 方法，除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索所有会话中的消息时，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V1.4.0 或以上版本。
+:::
+
+```typescript
+ChatClient.getInstance()
+  .chatManager.getMsgsWithKeyword({
+    keywords, // 搜索关键字
+    direction, // 搜索方向
+    timestamp, // 搜索消息的时间戳，从该时间戳开始按照搜索方向 `direction` 搜索。
+    maxCount: 20, // 请求的消息数量
+    from: "", // 消息发送者
+    searchScope: ChatMessageSearchScope.All, // 搜索范围，详见 `ChatMessageSearchScope` 类型。
+  })
+  .then((res) => {
+    // todo: 操作成功, 处理返回的结果
+  })
+  .catch((error) => {
+    // todo: 发生错误
+  });
+```
+
+### 根据搜索范围搜索当前会话中的消息
+
+你可以调用 `ChatConversation#getMessagesWithKeyword` 方法除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.5.0 或以上版本。
+:::
+
+```typescript
+ChatClient.getInstance()
+  .chatManager.getConvMsgsWithKeyword({
+    convId, // 会话 ID。
+    convType, // 会话类型：单聊、群组聊天
+    keywords, // 搜索关键字
+    direction, // 搜索方向
+    timestamp, // 搜索消息的时间戳，从该时间戳开始按照搜索方向 `direction` 搜索。
+    count: 20, // 请求的消息数量
+    sender: "", // 消息发送者
+    isChatThread: false, // 是否是子区消息。子区消息只在子区中使用。
+    searchScope: ChatMessageSearchScope.All, // 搜索范围，详见 `ChatMessageSearchScope` 类型。
+  })
+  .then((res) => {
+    // todo: 操作成功, 处理返回的结果
+  })
+  .catch((error) => {
+    // todo: 发生错误
   });
 ```
