@@ -17,7 +17,8 @@
 - 加入聊天室；
 - 获取聊天室详情；
 - 解散聊天室；
-- 监听聊天室事件。
+- 监听聊天室事件；
+- 实时更新聊天室成员人数。
 
 ## 前提条件
 
@@ -182,4 +183,31 @@ conn.addEventHandler("eventName", {
         }
     }
 })
+```
+
+### 实时更新聊天室成员人数
+
+如果聊天室短时间内有成员频繁加入或退出时，实时更新聊天室成员人数的逻辑如下：
+
+1. 聊天室内有成员加入时，其他成员会收到 `onChatroomEvent` 的 `memberPresence` 事件。有成员主动或被动退出时，其他成员会收到 `onChatroomEvent` 的 `memberAbsence` 事件。
+
+2. 收到通知事件后，可以通过事件回调参数获取聊天室当前人数。
+
+```javascript
+conn.addEventHandler("CHATROOM", {
+        onChatroomEvent: (e) => {
+          switch (e.operation) {
+            case "memberPresence":
+              // 当前聊天室在线人数
+              console.log(e?.memberCount);
+              break;
+            case "memberAbsence":
+              // 当前聊天室在线人数
+              console.log(e?.memberCount);
+              break;
+            default:
+              break;
+          }
+        }
+      });
 ```
