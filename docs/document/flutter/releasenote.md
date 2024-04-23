@@ -11,7 +11,7 @@
   - `MessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
   - `ChatManager#loadMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
   - `Conversation#loadMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。
-- 支持[会话标记](conversation.mark.html)功能。
+- 支持[会话标记](conversation_mark.html)功能。
   - `ConversationFetchOptions` 从服务器获取会话的选项，可以用来回去置顶会话或者是标记后的会话。
   - `ChatManager#addRemoteAndLocalConversationsMark`：标记会话。
   - `ChatManager#deleteRemoteAndLocalConversationsMark`：取消标记会话。
@@ -20,7 +20,7 @@
   - `ChatMultiDevicesEvent#CONVERSATION_UPDATE_MARK`：多设备场景下的会话标记事件。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
 - 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
 - 新增 `ChatOptions#useReplacedMessageContents` 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以收到替换后的内容。
-- 新增置顶消息功能。
+- 新增[置顶消息](message_pin.html)功能。
   - 新增 `ChatManager#pinMessage` 方法，用于置顶消息。
   - 新增 `ChatManager#unpinMessage` 方法，用于取消置顶消息。
   - 新增 `ChatManager#fetchPinnedMessages` 方法，从服务器获取指定会话的置顶消息。
@@ -33,7 +33,7 @@
 
 #### 优化
 
-- 支持使用消息 body 完成单条转发，无需重新上传附件。  
+- 支持使用消息 body 完成[单条转发](message_forward.html)，无需重新上传附件。  
 - 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。  
 - 在[聊天室成员进出时更新聊天室成员人数](room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。   
 - 优化 token 登录时的错误提示信息，使错误提示更精细。   
@@ -43,7 +43,7 @@
 - 优化部分场景下连接失败后重连的逻辑。  
 - 优化附件类型消息发送时中的附件上传，支持分片上传。    
 - 优化发消息时重试的逻辑。
-- 移除网络请求时对 `NetworkOnMainThreadException` 异常的捕获。
+- Android/iOS SDK 移除网络请求时对 `NetworkOnMainThreadException` 异常的捕获。
 - 数据库升级逻辑优化。  
 - 单个日志文件大小由 2 MB 提升到 5 MB。 
 - iOS 平台增加了隐私协议 `PrivacyInfo.xcprivacy`。

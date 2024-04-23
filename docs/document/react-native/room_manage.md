@@ -151,7 +151,7 @@ ChatOptions options = new ChatOptions();
 options.deleteMessagesAsExitChatRoom = false;
 ```
 
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，离开后重新进入仍是该聊天室的所有者。若 `ChatOptions.isChatRoomOwnerLeaveAllowed` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706。
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，离开后重新进入仍是该聊天室的所有者。若 `ChatOptions#isChatRoomOwnerLeaveAllowed` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706。
 
 ### 解散聊天室
 
