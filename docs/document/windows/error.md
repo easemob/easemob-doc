@@ -106,7 +106,8 @@ SDKClient.Instance.Login(username, passwd,
 | 702    | CHATROOM_NOT_JOINED                   | 未加入该聊天室：尝试在未加入的聊天室中发送消息或进行聊天室操作时提示该错误。                                                                                                          |
 | 703    | CHATROOM_PERMISSION_DENIED            | 无权限的聊天室操作：没有权限进行聊天室操作，比如聊天室成员不能设置聊天室管理员。                                                                                                      |
 | 704    | CHATROOM_MEMBERS_FULL                 | 聊天室已满：聊天室已经达到人数上限。                                                                                                                                                  |
-| 705    | CHATROOM_NOT_EXIST                    | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。                                                                                                                              |
+| 705    | CHATROOM_NOT_EXIST                    | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。             |
+| 706 | CHATROOM_OWNER_NOT_ALLOW_LEAVE | 聊天室所有者不允许离开聊天室。若初始化时，`Options#IsRoomOwnerLeaveAllowed` 参数设置为 `false`，聊天室所有者调用 `LeaveRoom` 方法离开聊天室时会提示该错误。|
 | 900    | USERINFO_USERCOUNT_EXCEED             | 获取用户属性的用户个数超过 100。                                                                                                                                                      |
 | 901    | USERINFO_DATALENGTH_EXCEED            | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。                                                                                    |
 | 1000   | CONTACT_ADD_FAILED                    | 添加联系人失败。                                                                                                                                                                      |

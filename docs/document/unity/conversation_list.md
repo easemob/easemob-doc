@@ -83,6 +83,8 @@ SDKClient.Instance.ChatManager.GetConversationsFromServerWithPage(pageNum, pageS
 
 本地会话列表包含单聊和群组聊天会话，至于是否包含聊天室会话，取决于在 SDK 初始化时 `Options#DeleteMessagesAsExitRoom` 参数的设置。若设置为 `true`，即离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。若设置为 `false`，即保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。
 
+若在初始化时，将 `Options#EnableEmptyConversation` 设置为 `true` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
+
 示例代码如下：
 
 ```csharp
