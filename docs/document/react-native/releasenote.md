@@ -9,8 +9,8 @@
 - 新增 `ChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
 - 新增[根据搜索范围搜索消息](message.search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `ChatMessageSearchScope` 中的搜索范围。
   - `ChatMessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
-  - `ChatManager#getMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
-  - `ChatConversation#getMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。
+  - `ChatManager#getMsgsWithKeyword`：根据搜索范围搜索所有会话中的消息。
+  - `ChatManager#getConvMsgsWithKeyword`：根据搜索范围搜索当前会话中的消息。
 - 支持[会话标记](conversation_mark.html)功能。
   - `ChatConversationFetchOptions` 从服务器获取会话的选项，可以用来回去置顶会话或者是标记后的会话。
   - `ChatManager#addRemoteAndLocalConversationsMark`：标记会话。
