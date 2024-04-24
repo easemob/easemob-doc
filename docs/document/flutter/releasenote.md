@@ -29,7 +29,7 @@
   - 新增 `EMChatMessage#pinInfo` 方法，展示消息的置顶详情。
   - 新增 `EMChatEventHandler#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - 新增 `EMOptions#messagesReceiveCallbackIncludeSend` 开关。开启后，在 `EMChatEventHandler#onMessagesReceived` 回调里增加发送成功的消息。
-- 消息修改回调 `EMChatEventHandler#onMessageContentChanged` 中支持返回通过 RESTful API 修改的自定义消息。
+- 消息修改回调 `EMChatEventHandler#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
 
 #### 优化
 
@@ -66,7 +66,7 @@
 - 新增 `EMContactManager#getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
 - 新增 `EMContactManager#getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。一次性获取本地好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromDB` 已废弃，由 `getAllContactIds` 替换。
 - 新增 `EMMessage#isBroadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
-- 新增 `EMGroupManager#fetchJoinedGroupCount` 方法用于从服务器获取当前用户已加入的群组数量。
+- 新增 `EMGroupManager#fetchJoinedGroupCount` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。
 - 新增[错误码 706](/document/android/error.html)，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#isChatRoomOwnerLeaveAllowed` 参数设置为 false，聊天室所有者调用 `EMChatRoomManager#leaveChatroom` 方法离开聊天室时会提示该错误。
 - 新增 `EMOptions#enableEmptyConversation` 属性用于在初始化时配置获取会话列表时是否允许返回空会话。
 - 申请入群被拒绝的回调 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 decliner 和 applicant 参数表示申请者和拒绝者的用户 ID。

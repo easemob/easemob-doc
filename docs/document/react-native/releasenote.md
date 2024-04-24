@@ -30,7 +30,7 @@
   - 新增 `ChatMessage#pinInfo` 方法，展示消息的置顶详情。
   - 新增 `ChatMessageEventListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - 新增 `ChatOptions#messagesReceiveCallbackIncludeSend` 开关。开启后，在 `ChatMessageEventListener#onMessagesReceived` 回调里增加发送成功的消息。
-- 消息修改回调 `ChatMessageEventListener#onMessageContentChanged` 中支持返回通过 RESTful API 修改的自定义消息。
+- 消息修改回调 `ChatMessageEventListener#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
 
 #### 优化
 

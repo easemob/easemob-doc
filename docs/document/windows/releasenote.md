@@ -2,6 +2,73 @@
 
 <Toc />
 
+## 版本 V1.3.0 Dev 2024-4-30 （开发版）
+
+#### 新增特性
+
+- 新增 `ChatManager#DeleteAllMessagesAndConversations` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- 新增[根据搜索范围搜索消息](message.search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
+  - `MessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+  - `ChatManager#SearchMsgFromDB(string, long, in, string, MessageSearchDirection, MessageSearchScope, ValueCallBack<List<Message>>)`：根据搜索范围搜索所有会话中的消息。
+  - `Conversation#LoadMessagesWithScope(string, MessageSearchScope, long, int, string, MessageSearchDirection, ValueCallBack<List<Message>>)`：根据搜索范围搜索当前会话中的消息。
+- 支持[会话标记](conversation_mark.html)功能。
+  - `ChatManager#MarkConversations`：标记会话或取消标记会话。
+  - `ChatManager#GetConversationsFromServerWithCursor`：根据会话标记从服务器分页查询会话列表。
+  - `Conversation#Marks`：获取本地单个会话的所有标记。
+  - `MultiDevicesOperation#CONVERSATION_MARK`：多设备场景下的会话标记事件。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+- 新增 `Message#Broadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+- 新增 `GroupManager#FetchMyGroupsCount` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。 
+- 新增错误码 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`，表示聊天室所有者不允许离开聊天室。若初始化时，`Options#IsRoomOwnerLeaveAllowed` 参数设置为 `false`，聊天室所有者调用 `LeaveRoom` 方法离开聊天室时会提示该错误。
+- 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
+- 新增 `Options#UseReplacedMessageContents` 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以收到替换后的内容。
+- 新增 `Message#IsContentReplaced` 属性判断文本消息的内容是否在文本审核过程中进行了替换。
+- 新增[置顶消息](message_pin.html)功能。
+  - 新增 `ChatManager#PinMessage` 方法，用于置顶消息或取消置顶消息。
+  - 新增 `ChatManager#GetPinnedMessagesFromServer` 方法，从服务器获取指定会话的置顶消息。
+  - 新增 `Conversation#PinnedMessages` 方法，返回本地会话下的所有置顶消息。
+  - 新增 `Message#PinnedInfo` 方法，展示消息的置顶详情。
+  - 新增 `PinnedInfo` 类，包含置顶以及取消置顶的操作者以及操作时间。
+  - 新增 `IChatManagerDelegate#OnMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
+- 新增 `Options#EnableEmptyConversation` 方法用于在初始化时配置获取会话列表时是否允许返回空会话。
+- 申请入群被拒绝的回调 `IGroupManagerDelegate#OnRequestToJoinDeclinedFromGroup` 中新增 `applicant` 和 `decliner` 参数表示申请者和拒绝者的用户 ID。 
+- 新增 `Options#IncludeSendMessageInMessageListener` 开关。开启后，在 `MessageListener#onMessageReceived` 回调里增加发送成功的消息。
+- 新增 `SDKClient#LoginWithToken` 方法，用于通过用户 ID 和用户 token 登录。
+- 新增 `SDKClient#RenewToken` 方法，用于更新用户 token。
+- 消息修改回调 `IChatManagerDelegate#OnMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
+
+#### 优化
+
+- 废弃 `SDKClient#LoginWithAgoraToken` 和 `SDKClient#Login` 方法，使用 `LoginWithToken` 方法替代。
+- 废弃 `SDKClient#RenewAgoraToken` 方法，使用 `RenewToken` 替代。
+- 添加 `Facility` 库，优化 DNS 获取逻辑，并支持数据上报。
+- 将 `ChatManager#SearchMsgFromDB(string, long, int, string, MessageSearchDirection, ValueCallBack<List<Message>>)` 方法从同步方式转换为异步方式。
+- 将 TCP 套接字从阻断模式转换为非阻断模式。
+- 支持使用消息 body 完成单条转发，无需重新上传附件。  
+- 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。  
+- 在[聊天室成员进出时更新聊天室成员人数](room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。   
+- 优化 token 登录时的错误提示信息，使错误提示更精细。 
+- 优化将所有会话置为已读的时间。    
+- 优化 SDK 内部随机取服务器地址的逻辑，提升请求成功率。   
+- 优化进出聊天室超时时间。   
+- 优化部分场景下连接失败后重连的逻辑。  
+- 优化附件类型消息发送时中的附件上传，支持分片上传。    
+- 优化发消息时重试的逻辑。
+- 移除网络请求时对 `NetworkOnMainThreadException` 异常的捕获。
+- 数据库升级逻辑优化。  
+- 单个日志文件大小由 2 MB 提升到 5 MB。 
+- iOS 平台增加了隐私协议 `PrivacyInfo.xcprivacy`。
+
+#### 修复
+
+- 数据库名称加密，但数据库中的内容仍为明文。
+- 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
+- 特殊场景下，SDK 退出后再登录会丢失聊天室监听事件问题。
+- 修复网络恢复时重连 2 次的问题。
+- 修复未登录时调用 `LeaveRoom` 方法返回的错误提示不准确。
+- 部分场景下群成员人数计算重复问题。
+- 修复数据上报模块偶现的崩溃问题。
+- 修复部分场景下调用 `ChatManager#UpdateMessage` 方法更新消息时导致的崩溃问题。
+
 ## 版本 V1.2.0 Dev 2023-8-30（开发版）
 
 ### 新增特性
