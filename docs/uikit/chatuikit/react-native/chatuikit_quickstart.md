@@ -38,16 +38,14 @@ npx react-native@latest init ProjectName
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-camera-roll/camera-roll": "^5.6.0",
     "@react-native-clipboard/clipboard": "^1.11.2",
-    "@react-native-firebase/app": "^18.0.0",
-    "@react-native-firebase/messaging": "^18.0.0",
     "date-fns": "^2.30.0",
     "pinyin-pro": "^3.18.3",
     "pure-uuid": "^1.6.3",
     "react": "18.2.0",
     "react-native": "0.73.2",
-    "react-native-agora": "~4.2.6",
-    "react-native-chat-uikit": "~2.0.0",
-    "react-native-chat-sdk": "~1.3.1",
+    "react-native-agora": "^4.2.6",
+    "react-native-chat-uikit": "/Users/asterisk/Downloads/2024-04-19/react-native-chat-uikit-2.0.0-beta.0",
+    "react-native-chat-sdk": "1.3.1",
     "react-native-audio-recorder-player": "^3.5.3",
     "@easemob/react-native-create-thumbnail": "^1.6.6",
     "react-native-device-info": "^10.6.0",
@@ -63,7 +61,7 @@ npx react-native@latest init ProjectName
     "react-native-video": "^5.2.1",
     "react-native-web": "~0.19.6",
     "react-native-webview": "13.2.2",
-    "twemoji": "~14.0.2"
+    "twemoji": ">=14.0.2"
   }
 }
 ```
@@ -132,14 +130,14 @@ import {
   useChatContext,
 } from "react-native-chat-uikit";
 
-// 修改默认值
-const appKey = "<your app key>";
-const userId = "<current user ID>";
-const userPs = "<current user password>";
-const peerId = "<conversation ID>";
+const appKey = "easemob#easeim";
+const userId = "du004";
+const userPs = "1";
+const peerId = "du005";
 
 function SendMessage() {
   const [page, setPage] = React.useState(0);
+  const [appkey, setAppkey] = React.useState(appKey);
   const [id, setId] = React.useState(userId);
   const [ps, setPs] = React.useState(userPs);
   const [peer, setPeer] = React.useState(peerId);
@@ -148,6 +146,11 @@ function SendMessage() {
   if (page === 0) {
     return (
       <SafeAreaView style={{ flex: 1 }}>
+        <TextInput
+          placeholder="Please App Key."
+          value={appkey}
+          onChangeText={setAppkey}
+        />
         <TextInput
           placeholder="Please Login ID."
           value={id}
@@ -165,12 +168,14 @@ function SendMessage() {
         />
         <Pressable
           onPress={() => {
+            console.log("test:zuoyu:login", id, ps);
             im.login({
               userId: id,
               userToken: ps,
               usePassword: true,
               result: (res) => {
                 console.log("login result", res);
+                console.log("test:zuoyu:error", res);
                 if (res.isOk === true) {
                   setPage(1);
                 }
@@ -199,7 +204,11 @@ function SendMessage() {
           convType={0}
           onBack={() => {
             setPage(0);
+            im.logout({
+              result: () => {},
+            });
           }}
+          type={"chat"}
         />
       </SafeAreaView>
     );
@@ -210,7 +219,7 @@ function SendMessage() {
 
 function App(): React.JSX.Element {
   return (
-    <Container options={{ appKey: appKey }}>
+    <Container options={{ appKey: appKey, autoLogin: false }}>
       <SendMessage />
     </Container>
   );
@@ -221,14 +230,14 @@ export default App;
 
 ### 第四步 编译和运行
 
-- 对于 `iOS` 平台，运行 `yarn run ios`； 
+- 对于 `iOS` 平台，运行 `yarn run ios`；
 - 对于 `Android` 平台，运行 `yarn run android`。
 
 ### 第五步 发送第一条消息
 
 点击登录按钮，进入聊天页面，输入文本内容，点击发送。
 
-![img](@static/images/uikit/chatuikit/android/message_first.png =400x800) 
+![img](@static/images/uikit/chatuikit/android/message_first.png =400x800)
 
 ## 示例项目地址
 

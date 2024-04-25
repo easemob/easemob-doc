@@ -20,37 +20,73 @@
 
 ```tsx
 export function App() {
-  const onRequestMultiData = React.useCallback(
-    (params: {
-      ids: Map<DataModelType, string[]>;
-      result: (
-        data?: Map<DataModelType, DataModel[]>,
-        error?: UIKitError
-      ) => void;
-    }) => {
-      // 需要数据加载的时候该回调会被调用，ids 为需要的数据ID，数据类型 `DataModelType` 分为 用户和群组。
-      // 当准备好数据之后，通过 `result` 返回头像和昵称结果。
-      // 具体参考 `useApp` 的实现。
-      const finalUsers = userIds?.map<DataModel>((id) => {
-        return list.current.get(id) as DataModel;
+  const onUsersHandler = React.useCallback(
+    async (data: Map<string, DataModel>) => {
+      if (data.size === 0) return data;
+      const userIds = Array.from(data.keys());
+      const ret = new Promise<Map<string, DataModel>>((resolve, reject) => {
+        im.getUsersInfo({
+          userIds: userIds,
+          onResult: (res) => {
+            if (res.isOk && res.value) {
+              const finalUsers = [] as DataModel[];
+              for (const user of res.value) {
+                finalUsers.push({
+                  id: user.userId,
+                  type: "user",
+                  name: user.userName,
+                  avatar: user.avatarURL,
+                  remark: user.remark,
+                } as DataModel);
+              }
+              resolve(DataProfileProvider.toMap(finalUsers));
+            } else {
+              reject(data);
+            }
+          },
+        });
       });
-      const finalGroups = groupIds?.map<DataModel>((id) => {
-        return list.current.get(id) as DataModel;
-      });
-      params?.result(
-        new Map([
-          ["user", finalUsers ?? []],
-          ["group", finalGroups ?? []],
-        ])
-      );
+      return ret;
     },
-    []
+    [im]
+  );
+  const onGroupsHandler = React.useCallback(
+    async (data: Map<string, DataModel>) => {
+      if (data.size === 0) return data;
+      const ret = new Promise<Map<string, DataModel>>((resolve, reject) => {
+        im.getJoinedGroups({
+          onResult: (res) => {
+            if (res.isOk && res.value) {
+              const finalGroups = res.value.map<DataModel>((v) => {
+                // !!! Not recommended: only for demo
+                const g = v as ChatGroup;
+                const avatar = g.options?.ext?.includes("http")
+                  ? g.options.ext
+                  : undefined;
+                return {
+                  id: v.groupId,
+                  name: v.groupName,
+                  avatar: v.groupAvatar ?? avatar,
+                  type: "group",
+                } as DataModel;
+              });
+              resolve(DataProfileProvider.toMap(finalGroups));
+            } else {
+              reject(data);
+            }
+          },
+        });
+      });
+      return ret;
+    },
+    [im]
   );
 
   return (
     <Container
       options={{ appKey: "appKey" }}
-      onRequestMultiData={onRequestMultiData}
+      onGroupsHandler={onGroupsHandler}
+      onUsersHandler={onUsersHandler}
     >
       {/* 添加子组件。 */}
     </Container>
@@ -62,7 +98,7 @@ export function App() {
 
 和注册相比这种被动使用数据，这里还提供了主动更新数据。
 
-通过使用 `ChatService.updateRequestData` 接口实现数据更新。
+通过使用 `ChatService.updateDataList` 接口实现数据更新。
 
 示例如下：
 
@@ -81,14 +117,33 @@ export function SomeComponent() {
         if (r.value) {
           const groups: DataModel[] = [];
           r.value.forEach((conv) => {
+            const avatar =
+              conv.options?.ext && conv.options?.ext.includes("http")
+                ? conv.options.ext
+                : undefined;
             groups.push({
               id: conv.groupId,
-              type: 'group',
+              type: "group",
               name: conv.groupName,
+              avatar: avatar,
             });
           });
-          im.updateRequestData({
-            data: new Map([['group', groups ?? []]]),
+          im.updateDataList({
+            dataList: DataProfileProvider.toMap(groups),
+            isUpdateNotExisted: true,
+            dispatchHandler: (data) => {
+              const items = [];
+              for (const d of data) {
+                const item = {
+                  groupId: d[0],
+                  groupName: d[1].name,
+                  groupAvatar: d[1].avatar,
+                } as GroupModel;
+                items.push(item);
+              }
+              im.sendUIEvent(UIListenerType.Group, "onUpdatedListEvent", items);
+              return false;
+            },
           });
         }
       },
@@ -98,8 +153,7 @@ export function SomeComponent() {
   React.useEffect(() => {
     const listener: EventServiceListener = {
       onFinished: (params) => {
-        if (params.event === 'getAllConversations') {
-            // 关注 `getAllConversations` 事件，触发更新群组名称
+        if (params.event === "getAllConversations") {
           timeoutTask(500, updateData);
         }
       },
@@ -114,7 +168,7 @@ export function SomeComponent() {
 }
 ```
 
-除此之外，还有公开的接口获取已经更新的数据。 详见 `ChatService.getRequestData`。通过这个接口可以获取指定用户的头像和昵称。方便自定义组件中使用。
+除此之外，还有公开的接口获取已经更新的数据。 详见 `ChatService.getDataModel`。通过这个接口可以获取指定用户的头像和昵称。方便自定义组件中使用。
 
 ## 会话列表页面和群组列表页面
 

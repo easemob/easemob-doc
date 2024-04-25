@@ -16,6 +16,13 @@
 - 对于 `iOS` 平台，需要 `Xcode` 工具，版本建议 14 或以上；
 - 对于 `Android` 平台，需要 `Android studio` 工具，版本建议 2022 或以上。
 
+## AppServer
+
+该实例项目运行需要配置 AppServer。在服务端部署 AppServer 服务，在客户端 实现 RestApi 接口。
+本示例项目中，配置服务器地址 `RestApi.setServer`, 提供 获取手机号验证码、手机号登录、上传头像、获取 rtcToken、获取 rtcMap、获取群主头像接口。
+
+详见 `example/src/demo/common/rest.api.ts`
+
 ## 操作步骤
 
 ### 下载项目
@@ -47,13 +54,13 @@ cd example/ios && pod install
 例如：
 
 ```js
-export const test = false;
+export const useSendBox = false;
 export const isDevMode = true;
-export const appKey = "xxxx";
-export const accountType = "easemob";
-export const agoraAppId = "";
-export const demoType = 2; // 1: ui-dev; 2: dev; 3：prod
-export const account = [{ id: "aa", token: "bb" }];
+export const appKey = "xxx";
+export const accountType = "easemob"; // agora or easemob
+export const agoraAppId = "xxx";
+export const fcmSenderId = "xxx";
+export const account = [{ id: "xxx", token: "xxx" }];
 ```
 
 手动设置区域，目前支持国内和海外。配置文件在 `packages/react-native-chat-uikit/src/config.local.ts`
@@ -81,4 +88,4 @@ yarn run android
 
 1. Q：Android 平台应用编译失败，可能的原因是什么？
 
-A: 可能需要 Android Studio 工具的 `cmake 3.10.2` 插件。
+A: 可能需要 `Android Studio` 工具的 `cmake 3.10.2` 插件。
