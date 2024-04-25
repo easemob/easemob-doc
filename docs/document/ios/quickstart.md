@@ -53,7 +53,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 ### 方法二：手动导入 SDK v3.8.9.1 及以上版本
 
-1. 下载最新版的 [HyphenateChat iOS SDK](https://downloadsdk.easemob.com/downloads/iOS_IM_SDK_V3.8.9.1.zip) 并解压。
+1. 下载最新版的 [HyphenateChat iOS SDK](https://www.easemob.com/download/im) 并解压。
 2. 复制 SDK 包中的 `HyphenateChat.framework` 至项目路径下。
 3. 打开 Xcode，进入 **TARGETS > Project Name > General > Frameworks, Libraries, and Embedded Content**菜单。
 4. 点击 **+ > Add Other… > Add Files** 添加对应动态库，并确保添加的动态库 **Embed** 属性设置为 **Embed & Sign**。
