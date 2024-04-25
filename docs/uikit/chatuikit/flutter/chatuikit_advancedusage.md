@@ -32,17 +32,17 @@
 | ChatUIKitRouteNames.searchUsersView |  '/SearchUsersView' | 搜索联系人页面。|
 | ChatUIKitRouteNames.searchGroupMembersView |  '/SearchGroupMembersView' | 搜索群成员页面。|
 | ChatUIKitRouteNames.selectContactsView |  '/SelectContactsView' | 选择联系人页面 |
-| ChatUIKitRouteNames.showImageView |  '/ShowImageView'; | 查看图片页面。|
-| ChatUIKitRouteNames.showVideoView |  '/ShowVideoView'; | 查看视频页面。|
-| ChatUIKitRouteNames.searchHistoryView |  '/SearchHistoryView'; | 搜索历史消息页面|
-| ChatUIKitRouteNames.threadMessagesView |  '/ThreadMessagesView'; | Thread 消息页面。|
-| ChatUIKitRouteNames.threadMembersView |  '/ThreadMembersView'; | Thread 成员页面。|
+| ChatUIKitRouteNames.showImageView |  '/ShowImageView' | 查看图片页面。|
+| ChatUIKitRouteNames.showVideoView |  '/ShowVideoView' | 查看视频页面。|
+| ChatUIKitRouteNames.searchHistoryView |  '/SearchHistoryView' | 搜索历史消息页面|
+| ChatUIKitRouteNames.threadMessagesView |  '/ThreadMessagesView' | Thread 消息页面。|
+| ChatUIKitRouteNames.threadMembersView |  '/ThreadMembersView' | Thread 成员页面。|
 | ChatUIKitRouteNames.threadsView |  '/ThreadsView'; | Thread 列表页面。|
   
 
 ### 路由的使用
 
-需要自定义页面跳转或者页面样式时可以对路由进行拦截和自定义，之后将自定义的 `RouteSettings` 传给 `ChatUIKitRoute.generateRoute`;
+需要自定义页面跳转或者页面样式时可以对路由进行拦截和自定义，然后将自定义的 `RouteSettings` 传给 `ChatUIKitRoute.generateRoute`。
 
 ```dart
 final ChatUIKitRoute _route = ChatUIKitRoute.instance;
@@ -129,9 +129,9 @@ Widget build(BuildContext context) {
 | SelectContactViewArguments | 选择联系人页面参数包装类。|
 | ShowImageViewArguments | 展示图片页面参数包装类。|
 | ShowVideoViewArguments | 展示视频页面参数包装类。|
-| ThreadMembersViewArguments | thread 成员列表页面参数包装类。|
-| ThreadMessagesViewArguments | thread 消息列表页面参数包装类。|
-| ThreadsViewArguments| thread 列表页面参数包装类。|
+| ThreadMembersViewArguments | Thread 成员列表页面参数包装类。|
+| ThreadMessagesViewArguments | Thread 消息列表页面参数包装类。|
+| ThreadsViewArguments| Thread 列表页面参数包装类。|
 
 ## 配置消息和会话显示的时间格式
 
@@ -148,12 +148,11 @@ ChatUIKitTimeFormatter.instance.formatterHandler = (context, type, time) {
 
 ## 配置联系人首字母排序
 
-
-当用户昵称中出现中文时需要将中文中的姓氏转化为字母才能正确的在联系人列表中索引，此时可以通过以下方式将showName的值改为字符返回。
+当用户昵称中出现中文时，需要将中文中的姓氏转化为字母才能正确的在联系人列表中索引。此时，可以通过以下方式将 `showName` 的值改为字符返回。
 
 ```dart
 ChatUIKitAlphabetSortHelper.instance.sortHandler = (showName) {
-  // 将showName的第一个字母返回，如果中文，可以用第三方库进行转换，之后返回。
+  // 将 showName 的第一个字母返回。如果中文，可以用第三方库进行转换，之后返回。
   return '#';
 };
 ```
@@ -266,32 +265,31 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
 
 ### 设置消息长按顺序
 
-消息长按时回弹出对消息的操作菜单，可以通过 `ChatUIKitSettings.msgItemLongPressActions` 进行默认值修改，默认为：
+长按消息时会弹出消息操作菜单，可以通过 `ChatUIKitSettings.msgItemLongPressActions` 进行默认值修改。默认设置如下：
 
 ```dart
   static List<MessageLongPressActionType> msgItemLongPressActions = [
     MessageLongPressActionType.reaction,
-    MessageLongPressActionType.copy, // only text message
+    MessageLongPressActionType.copy, // 仅适用于文本消息。
     MessageLongPressActionType.reply,
     MessageLongPressActionType.forward,
     MessageLongPressActionType.multiSelect,
-    MessageLongPressActionType.translate, // only text message
-    MessageLongPressActionType.thread, // only group message
-    MessageLongPressActionType.edit, // only text message
+    MessageLongPressActionType.translate, // 仅适用于文本消息。
+    MessageLongPressActionType.thread, // 仅适用于群组消息。
+    MessageLongPressActionType.edit, // 仅适用于文本消息。
     MessageLongPressActionType.report,
     MessageLongPressActionType.recall,
     MessageLongPressActionType.delete,
   ];
 ```
 
-此时长按消息时，可以通过调整顺序和内容对弹出的菜单进行修改，如去掉 `ChatUIKitSettings.msgItemLongPressActions` 中的 `MessageLongPressActionType.copy`, 长按文本消息时将不再显示"copy"。
+此时长按消息时，可以通过调整顺序和内容对弹出的菜单进行修改，例如，移除 `ChatUIKitSettings.msgItemLongPressActions` 中的 `MessageLongPressActionType.copy`, 长按文本消息时将不再显示 "copy"。
 
+### 设置是否开启消息话题
 
-### 设置是否开启 消息话题 功能
+消息话题（即 `Thread`）指用户可以在群组聊天中根据一条消息创建话题进行深入探讨，讨论和追踪特定项目任务，而不影响其他聊天内容。
 
-话题（即 `Thread`）指用户可以在群组聊天中根据一条消息创建话题进行深入探讨，讨论和追踪特定项目任务，而不影响其他聊天内容。
-
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/)上已申请试用该功能。
+使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/)上已开通该功能。
 
 消息话题特性在 `ChatUIKitSettings.enableChatThreadMessage` 中提供开关，默认值为 `false`。要开启该特性，需将该参数设置为 `true`。
 
@@ -301,11 +299,11 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
     ChatUIKitSettings.enableMessageThread = true;
 ```
 
-### 设置是否开启 消息翻译 功能
+### 设置是否开启消息翻译
 
 消息翻译是指用户可以将一条消息翻译成其他语言。消息翻译可以帮助使用不同语言的用户进行沟通。
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/)上已申请试用该功能。
+使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/)上已试用该功能。
 
 1. 开启消息翻译特性。
 
@@ -315,7 +313,7 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
    ChatUIKitSettings.enableMessageTranslation = true;
 ```
 
-1. 设置翻译的目标语言。
+2. 设置翻译的目标语言。
 
 单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了 `translateTargetLanguage` 属性设置目标翻译语言。
 
@@ -323,20 +321,21 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
    ChatUIKitSettings.translateTargetLanguage = 'zh-Hans';
 ```
 
-更多翻译目标语言请参考 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)
+如果未设置翻译的目标语言，则默认使用中文。
 
-### 设置是否开启表情回复功能
+更多翻译目标语言，请参考[翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
+
+### 设置是否开启表情回复
 
 表情回复（即 `Reaction`）指用户可以使用表情符号回复消息。表情回复可以帮助用户表达情绪、态度、进行调查或投票。在单群聊 UIKit 中，用户可以长按单条消息触发消息拓展功能菜单，选择表情回复。
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/)上已申请试用该功能。
+使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/)上已开通该功能。
 
 单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了 `enableMessageReaction` 属性用于设置是否开启 `Reaction` 功能, 默认值为 `false`。要开启该功能，将该参数设置为 `true`。示例代码如下：
 
 ```dart
     ChatUIKitSettings.enableMessageReaction = true;
 ```
-
 
 ### 设置是否开启消息引用
 
@@ -346,26 +345,23 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
 ChatUIKitSettings.enableMessageReply = false;
 ```
 
-### 设置是否开启消息撤回功能
+### 设置是否开启消息撤回
 
-消息撤回，即消息的发送方可以在规定时间内对消息进行撤回的操作。该功能默认 `true`， 如果不需要，可以将参数设置为 `false`。 示例代码如下：
+消息撤回，即消息的发送方可以在规定时间内对消息进行撤回的操作。该功能默认 `true`，如果不需要，可以将参数设置为 `false`。示例代码如下：
 
 ```dart
 ChatUIKitSettings.enableMessageRecall = false;
 ```
 
-配置 `撤回消息` Item 显示的时长。若超过该时长，长按消息后将不再显示 `撤回消息`。
-
-该时长默认为 `120秒`。
+配置 `撤回消息` 条目显示的时长，默认为 `120` 秒。若超过该时长，长按消息后将不再显示 `撤回消息`。
 
 ```dart
 ChatUIKitSettings.recallExpandTime = 120;
 ```
 
-
 ### 设置是否开启消息编辑
 
-消息编辑，即对自己发出的文字消息进行编辑，该功能默认为 `true`, 如果不需要，可以将参数设置为 `false`。 示例代码如下：
+消息编辑，即对自己发出的文本消息进行编辑，该功能默认为 `true`, 如果不需要，可以将参数设置为 `false`。 示例代码如下：
 
 ```dart
 ChatUIKitSettings.enableMessageEdit = false;
@@ -379,11 +375,12 @@ ChatUIKitSettings.enableMessageEdit = false;
 ChatUIKitSettings.enableMessageReport = false;
 ```
 
-设置举报内容，举报内容是一组 k-v. Map<String, String>，即 report tag 和 report reason。uikit中提供了设置 report tag的方式，对应的reason需要在国际化文件中进行填写。代码如下：
+设置举报内容，举报内容是一组键值对（key-value），为 Map<String, String> 结构，即非法消息的标签和举报原因。UIKit 中提供了设置非法消息标签的方式，对应的举报原因需要在国际化文件中进行填写。示例代码如下：
 
 ```dart
-  /// 消息举报tag, 可以用于自定义，举报的 reason 需要写在国际化文件中，国际化文件中的reason的key要和tag一致。可以参考 [ChatUIKitLocal.reportTarget1]
-  static List<String> reportMessageReason = [
+  /// 非法消息的标签, 可以自定义。
+  // 举报原因需要填写在国际化文件中，国际化文件中的举报原因的 key 要和非法消息的标签一致。可以参考 [ChatUIKitLocal.reportTarget1]。
+  static List<String> reportMessageTags = [
     'tag1',
     'tag2',
     'tag3',
@@ -398,7 +395,7 @@ ChatUIKitSettings.enableMessageReport = false;
 
 ### 是否开启消息合并转发功能
 
-合并转发，即同时选择多条消息进行转发，该功能默认为 `true`, 如果不需要，可以将参数设置为 `false`。 示例代码如下：
+合并转发，即同时选择多条消息进行转发，该功能默认为 `true`。如果不需要，可以将参数设置为 `false`。 示例代码如下：
 
 ```dart
 ChatUIKitSettings.enableMessageMultiSelect = false;
@@ -406,7 +403,7 @@ ChatUIKitSettings.enableMessageMultiSelect = false;
 
 ### 是否开启单条消息转发功能
 
-单条消息转发，即转发收到或者发送成功的消息，该功能默认为 `true`, 如果不需要，可以将参数设置为 `false`。 示例代码如下：
+单条消息转发，即转发收到或者发送成功的消息，该功能默认为 `true`。如果不需要，可以将参数设置为 `false`。 示例代码如下：
 
 ```dart
 ChatUIKitSettings.enableMessageForward = false;
@@ -414,7 +411,7 @@ ChatUIKitSettings.enableMessageForward = false;
 
 ### 联系人首字母索引顺序
 
-联系人首字母索引顺序，即通讯录中联系人排序顺序，默认为 `ABCDEFGHIJKLMNOPQRSTUVWXYZ#`, 如果需要修改，可以参考一下代码
+联系人首字母索引顺序，即通讯录中联系人排序顺序，默认为 `ABCDEFGHIJKLMNOPQRSTUVWXYZ#`, 如果需要修改，可以参考一下代码：
 
 ```dart
 // 将首字母排序中的#号排到最前面

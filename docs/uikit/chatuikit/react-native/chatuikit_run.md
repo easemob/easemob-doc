@@ -18,10 +18,11 @@
 
 ## AppServer
 
-该实例项目运行需要配置 AppServer。在服务端部署 AppServer 服务，在客户端 实现 RestApi 接口。
-本示例项目中，配置服务器地址 `RestApi.setServer`, 提供 获取手机号验证码、手机号登录、上传头像、获取 rtcToken、获取 rtcMap、获取群主头像接口。
+该实例项目运行需要配置 AppServer。在服务端部署 AppServer 服务，在客户端实现 RESTful API 接口。
 
-详见 `example/src/demo/common/rest.api.ts`
+本示例项目中，配置服务器地址 `RestApi.setServer`, 提供获取手机号验证码、手机号登录、上传头像、获取 rtcToken、获取 rtcMap、获取群主头像接口。
+
+详见 `example/src/demo/common/rest.api.ts`。
 
 ## 操作步骤
 

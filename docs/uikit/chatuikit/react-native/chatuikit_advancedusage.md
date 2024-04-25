@@ -12,32 +12,32 @@
 
 | 属性               | 类型                   | 是否必填 | 描述                                                                                                         |
 | ------------------ | ---------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
-| options            | ChatOptionsType        | 是       | 复合参数集合，和 `ChatOptions` 一致，必填参数只有 `appKey`。                                                 |
-| language           | LanguageCode           | 否       | 语言码。指定 UI 组件显示内容的语言。例如：中文、英文。                                                       |
-| translateLanguage  | LanguageCode           | 否       | 语言码。指定 消息翻译的目标语言。例如：中文、英文。                                                          |
-| palette            | Palette                | 否       | 主题调色板。主题会从调色板中选择颜色和样式搭配组成主题。                                                     |
-| theme              | Theme                  | 否       | 主题。默认提供明暗两种主题。                                                                                 |
-| fontFamily         | string                 | 否       | 自定义 UI 组件字体的样式。                                                                                   |
-| emojiFontFamily    | string                 | 否       | 自定义 emoji 表情字体的样式。                                                                                |
-| headerFontFamily   | string                 | 否       | 自定义 导航栏 字体的样式。                                                                                   |
-| releaseArea        | ReleaseArea            | 否       | 设置发布区域。例如：全球、中国。                                                                             |
-| formatTime         | object                 | 否       | 会话列表、聊天页面的时间格式化回调通知。如果没有提供则使用默认格式化。                                       |
-| recallTimeout      | number                 | 否       | 回调超时时间。单位为毫秒。默认 120 秒。                                                                      |
-| group              | object                 | 否       | 创建群组选择成员数的最大数目。默认 1000.                                                                     |
-| conversationDetail | ConversationDetailType | 否       | 聊天页面的配置集合。详见对应定义。                                                                           |
-| avatar             | object                 | 否       | 全局头像样式设置。支持边框圆角设置。                                                                         |
-| input              | object                 | 否       | 全局输入组件样式设置。支持边框圆角设置。                                                                     |
-| alert              | object                 | 否       | 全局警告框组件样式设置。支持边框圆角设置。                                                                   |
-| onInitLanguageSet  | function               | 否       | 注册语言包的回调通知。可以自定义语言包。                                                                     |
-| onInitialized      | function               | 否       | 注册初始化完成的回调通知。                                                                                   |
+| options            | ChatOptionsType        | 是       | 复合参数集合，和 `ChatOptions` 一致，必填参数只有 `appKey`。      |
+| language           | LanguageCode           | 否       | 语言码。指定 UI 组件显示内容的语言。例如：中文、英文。   |
+| translateLanguage  | LanguageCode           | 否       | 语言码。指定 消息翻译的目标语言。例如：中文、英文。  |
+| palette            | Palette                | 否       | 主题调色板。主题会从调色板中选择颜色和样式搭配组成主题。    |
+| theme              | Theme                  | 否       | 主题。默认提供明暗两种主题。  |
+| fontFamily         | string                 | 否       | 自定义 UI 组件字体的样式。 |
+| emojiFontFamily    | string                 | 否       | 自定义 emoji 表情字体的样式。   |
+| headerFontFamily   | string                 | 否       | 自定义 导航栏 字体的样式。   |
+| releaseArea        | ReleaseArea            | 否       | 设置发布区域。例如：全球、中国。  |
+| formatTime         | object                 | 否       | 会话列表、聊天页面的时间格式化回调通知。如果没有提供则使用默认格式化。   |
+| recallTimeout      | number                 | 否       | 回调超时时间。单位为毫秒。默认 120 秒。  |
+| group              | object                 | 否       | 创建群组选择成员数的最大数目。默认 1000.     |
+| conversationDetail | ConversationDetailType | 否       | 聊天页面的配置集合。详见对应定义。    |
+| avatar             | object                 | 否       | 全局头像样式设置。支持边框圆角设置。   |
+| input              | object                 | 否       | 全局输入组件样式设置。支持边框圆角设置。|
+| alert              | object                 | 否       | 全局警告框组件样式设置。支持边框圆角设置。    |
+| onInitLanguageSet  | function               | 否       | 注册语言包的回调通知。可以自定义语言包。   |
+| onInitialized      | function               | 否       | 注册初始化完成的回调通知。   |
 | onUsersHandler    | function               | 否       | 注册获取用户数据的回调通知。如果用户提供该接口，那么用户的头像和昵称通过该接口获取。如果没有提供则使用默认。 |
 | onGroupsHandler   | function               | 否       | 注册获取群组数据的回调通知。如果用户提供该接口，那么群组的头像和昵称通过该接口获取。如果没有提供则使用默认。 |
-| onChangeStatus     | function               | 否       | 注册 Presence 状态回调通知。如果用户提供该接口，将收到用户的状态改变通知。                                   |
-| enableTranslate    | boolean                | 否       | 是否启用翻译功能。如果启用还需要后台开启。                                                                   |
-| enableThread       | boolean                | 否       | 是否启用话题功能。如果启用还需要后台开启。                                                                   |
-| enableReaction     | boolean                | 否       | 是否启用表情回复功能。如果启用还需要后台开启。                                                               |
-| enablePresence     | boolean                | 否       | 是否启用状态订阅功能。如果启用还需要后台开启。                                                               |
-| enableAVMeeting    | boolean                | 否       | 是否启用音视频通话功能。如果启用还需要后台开启。 默认开启。                                                  |
+| onChangeStatus     | function               | 否       | 注册 Presence 状态回调通知。如果用户提供该接口，将收到用户的状态变更通知。  |
+| enableTranslate    | boolean                | 否       | 是否启用翻译功能。如果启用，还需要后台开启。     |
+| enableThread       | boolean                | 否       | 是否启用话题功能。如果启用，还需要后台开启。       |
+| enableReaction     | boolean                | 否       | 是否启用表情回复功能。如果启用，还需要后台开启。  |
+| enablePresence     | boolean                | 否       | 是否启用状态订阅功能。如果启用，还需要后台开启。  |
+| enableAVMeeting    | boolean                | 否       | 是否启用音视频通话功能。如果启用，还需要后台开启。 默认开启。    |
 
 ## Chat SDK 组件 ChatService
 

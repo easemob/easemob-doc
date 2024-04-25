@@ -18,10 +18,10 @@ enum ChatUIKitProfileType {
 
 /// ChatUIKitProfile 类，用于存储联系人或群组的信息。
 class ChatUIKitProfile {
-  /// id ,如果是联系人，则为用户 id，如果是群组，则为群组 id。
+  /// id：如果是联系人，则为用户 ID；如果是群组，则为群组 ID。
   final String id;
 
-  /// 名称,如果是联系人，则为用户名称，如果是群组，则为群组名称。
+  /// 名称，如果是联系人，则为用户名称，如果是群组，则为群组名称。
   final String? name;
 
   /// 头像地址, 如果是联系人，则为用户头像地址，如果是群组，则为群组头像地址。
@@ -33,12 +33,12 @@ class ChatUIKitProfile {
   /// 扩展字段，用于存储一些额外的信息。
   final Map<String, String>? extension;
 
-  /// 时间戳，uikit 内部不使用。开发者可以使用该字段存储一些时间戳信息。
+  /// 时间戳，UIKit 内部不使用。开发者可以使用该字段存储一些时间戳信息。
   final int timestamp;
 
   final String? remark;
 
-  /// 用于展示的名称，如果 name 为空，则展示 id
+  /// 用于展示的名称，如果 name 为空，则展示 id。
   String get showName {
     if (remark != null && remark!.isNotEmpty && type == ChatUIKitProfileType.contact) {
       return remark!;
@@ -99,7 +99,7 @@ class ChatUIKitProfile {
           timestamp: timestamp,
         );
 
-  /// 用于复制一个新的 profile 对象，如果传入的参数不为空，则使用传入的参数，否则使用当前 profile 的参数。
+  /// 用于复制一个新的 profile 对象。如果传入的参数不为空，则使用传入的参数，否则使用当前 profile 的参数。
   ChatUIKitProfile copyWith({
     String? name,
     String? avatarUrl,

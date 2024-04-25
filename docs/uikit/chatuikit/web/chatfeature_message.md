@@ -100,7 +100,7 @@ features.chat.message.translate = false;
 
 目前，单群聊 UIKit 支持对消息添加表情回复。
 
-该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等
+该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
 [界面截图]
 
@@ -116,7 +116,7 @@ features.chat.message.reaction = false;
 
 ## 消息话题
 
-话题（即 `Thread`）指用户可以在群组聊天中根据一条消息创建话题进行深入探讨，讨论和追踪特定项目任务，而不影响其他聊天内容。
+消息话题（即 `Thread`）指用户可以在群组聊天中根据一条消息创建话题进行深入探讨，讨论和追踪特定项目任务，而不影响其他聊天内容。
 
 单群聊 UIKit 中实现了 Thread 页面 `EaseChatThreadActivity`，开发者只需要调用 `EaseChatThreadActivity.actionStart` 启动该页面传入需要的参数即可。
 
@@ -140,19 +140,19 @@ features.chat.message.thread = false;
 
 消息转发指用户可以将消息转发给其他用户。可以选择多条消息进行合并转发。
 
-该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等
+该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
 [界面截图]
 
 ### 如何使用
 
-消息合并转发特性默认开启，若要在全局配置中关闭，可以进行如下设置：
+1. 消息合并转发特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
 ```jsx
 features.chat.message.select = false;
 ```
 
-在 Chat 组件中监听 `onSendMessage` 事件，判断如果是合并消息可以显示联系人组件，选择要转发的人，然后发送消息。
+2. 在 Chat 组件中监听 `onSendMessage` 事件，判断如果是合并消息，可以显示联系人组件，选择消息转发的目标用户，然后发送消息。
 
 示例代码：
 
@@ -197,19 +197,19 @@ features.chat.message.select = false;
 
 消息转发指用户可以将消息转发给其他用户。你可以转发单条消息。
 
-该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等
+该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
 [界面截图]
 
 ### 如何使用
 
-消息单条转发特性默认开启，若要在全局配置中关闭，可以进行如下设置：
+1. 消息单条转发特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
 ```jsx
 features.chat.message.forward = false;
 ```
 
-在 Chat 组件监听 `onForwardMessage` 事件， 显示联系人组件，选择要转发的人，然后发送消息。
+2. 在 Chat 组件监听 `onForwardMessage` 事件， 显示联系人组件，选择消息转发的目标用户，然后发送消息。
 
 示例代码：
 
@@ -228,5 +228,5 @@ features.chat.message.forward = false;
 }}
 ></Chat>
 
-// 联系人组件同上面合并转发
+// 联系人组件与合并转发的相同
 ```

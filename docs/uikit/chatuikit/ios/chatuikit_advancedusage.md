@@ -53,10 +53,10 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 
 ```
     
-        //userProfileProvider为用户数据的提供者，使用协程实现与userProfileProviderOC不能同时存在userProfileProviderOC使用闭包实现
+        //userProfileProvider 为用户数据的提供者，使用协程实现与 userProfileProviderOC 不能同时存在。userProfileProviderOC 使用闭包实现。
         EaseChatUIKitContext.shared?.userProfileProvider = self
         EaseChatUIKitContext.shared?.userProfileProviderOC = nil
-        //groupProvider原理同上
+        //groupProvider 原理同上
         EaseChatUIKitContext.shared?.groupProfileProvider = self
         EaseChatUIKitContext.shared?.groupProfileProviderOC = nil
 ```
@@ -64,10 +64,10 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 - 使用闭包返回会话列表相关信息，Swift 和 OC 均可使用。
 
 ```
-        //userProfileProvider为用户数据的提供者，使用协程实现与userProfileProviderOC不能同时存在userProfileProviderOC使用闭包实现
+        //userProfileProvider 为用户数据的提供者，使用协程实现与 userProfileProviderOC 不能同时存在。userProfileProviderOC 使用闭包实现。
         EaseChatUIKitContext.shared?.userProfileProvider = nil
         EaseChatUIKitContext.shared?.userProfileProviderOC = self
-        //groupProvider原理同上
+        //groupProvider 原理同上
         EaseChatUIKitContext.shared?.groupProfileProvider = nil
         EaseChatUIKitContext.shared?.groupProfileProviderOC = self
 ```
@@ -93,7 +93,7 @@ extension YourMainViewController: EaseProfileProvider {
                 }
                 return resultProfiles
             }
-            //Await all task were executed.Return values.
+            //等待所有任务执行完毕。返回值。
             for await result in group {
                 resultProfiles.append(contentsOf: result)
             }
