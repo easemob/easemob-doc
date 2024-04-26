@@ -18,7 +18,8 @@
 环信即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
 
 - `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion`：从服务器获取会话列表。
-- `IEMChatManager#getAllConversations:`：获取本地所有会话。
+- `IEMChatManager#filterConversationsFromDB`：获取本地所有会话（`filter` 参数为 `nil`）或筛选要获取的会话。
+- `IEMChatManager#getAllConversations:`：一次性获取本地所有会话。
 
 ## 实现方法
 
@@ -42,7 +43,7 @@ NSString *cursor = @"";
 }];
 ```
 
-### 获取本地所有会话
+### 获取本地会话
 
 - 你可以调用 `filterConversationsFromDB` 方法，获取本地所有会话（`filter` 参数为 `nil`）或筛选要获取的会话。
 
@@ -61,11 +62,14 @@ NSString *cursor = @"";
         })
  ```
 
+ 下表为初始化时设置的会话相关选项：
+
+ | 选项 | 描述    | 
+ | :--------- | :----- |
+ | `EMOptions#isDeleteMessagesWhenExitChatRoom`   | 获取本地会话时是否返回聊天室会话。默认情况下，只包含单聊和群组聊天会话。<br/> - `YES`：离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。<br/> - `NO`：离开聊天室时保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。| 
+ |`EMOptions#loadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `YES`：返回空会话。<br/> - `NO`：不包含空会话。| 
+
 - 要一次性获取本地所有会话，你可以调用 `getAllConversations:` 方法。SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
-
-本地会话列表包含单聊和群组聊天会话，至于是否包含聊天室会话，取决于在 SDK 初始化时 `EMOptions#isDeleteMessagesWhenExitChatRoom` 参数的设置。若设置为 `true`，即离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。若设置为 `false`，即保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。
-
-若在初始化时，将 `EMOptions#loadEmptyConversations` 设置为 `YES` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
 
 :::tip
 若使用该功能，需将 SDK 升级至 4.0.3。
