@@ -86,5 +86,5 @@
 
 联系人备注允许用户为通讯录中的联系人添加自定义信息，如文本、标签、数字等信息，协助用户组织和管理联系人信息。联系人备注不会公开显示，仅供个人使用。
 
-[界面截图] [界面截图]
+![img](@static/images/uikit/chatuikit/feature/common/contact_remark.png) 
 
