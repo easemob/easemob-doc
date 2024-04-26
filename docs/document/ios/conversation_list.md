@@ -44,7 +44,24 @@ NSString *cursor = @"";
 
 ### 获取本地所有会话
 
-你可以调用 `getAllConversations:` 方法一次性获取本地所有会话。SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
+- 你可以调用 `filterConversationsFromDB` 方法，获取本地所有会话（`filter` 参数为 `nil`）或筛选要获取的会话。
+
+:::tip
+若使用该功能，需将 SDK 升级至 4.7.0。
+:::
+
+```Swift
+        EMClient.shared().chatManager?.filterConversationsFromDB(cleanMemoryCache: true, filter: { conversation in
+               //case1: 判断 ext 中是否含有某个 key 然后返回 `true` or `false`
+              //case2: 根据会话类型返回 Boolean 值
+              //case3: 根据会话 ID 返回 Boolean 值
+              //case4: 是否置顶会话
+             //case5: 是否全部消息已读会话
+             //case6: 会话中最后一条消息时间戳
+        })
+ ```
+
+- 要一次性获取本地所有会话，你可以调用 `getAllConversations:` 方法。SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
 
 本地会话列表包含单聊和群组聊天会话，至于是否包含聊天室会话，取决于在 SDK 初始化时 `EMOptions#isDeleteMessagesWhenExitChatRoom` 参数的设置。若设置为 `true`，即离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。若设置为 `false`，即保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。
 
@@ -60,4 +77,6 @@ NSString *cursor = @"";
 NSArray <EMConversation *>*conversations = [EMClient.sharedClient.chatManager getAllConversations:YES];
 ```
 
-你也可以调用 `getAllConversations` 方法返回 `NSArray <EMConversation *>` 结构的会话。
+- 你也可以调用 `getAllConversations` 方法返回 `NSArray <EMConversation *>` 结构的会话。
+
+

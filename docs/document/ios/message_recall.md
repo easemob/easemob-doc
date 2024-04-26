@@ -27,9 +27,22 @@
 
 ### 撤回消息
 
-你可以调用 `recallMessageWithMessageId` 方法撤回一条发送成功的消息。
+- 对于 SDK 4.6.0 及以上版本，调用 `recallMessageWithMessageId:ext:completion:` 方法撤回一条发送成功的消息。调用该方法时，你可以通过 `ext` 字段传入自定义信息。
 
 调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `messagesInfoDidRecall` 事件。
+
+```objectivec
+// 异步方法
+[[EMClient sharedClient].chatManager recallMessageWithMessageId:messageId ext:@"extension info" completion:^(EMError *aError) {
+    if (!aError) {
+        NSLog(@"撤回消息成功");
+    } else {
+        NSLog(@"撤回消息失败的原因 --- %@", aError.errorDescription);
+    }
+}];
+```
+
+- 对于 SDK 4.6.0 之前的版本，你可以调用 `recallMessageWithMessageId` 方法撤回一条发送成功的消息。该方法不支持通过 `ext` 字段传入自定义信息。
 
 ```objectivec
 // 异步方法
@@ -45,6 +58,9 @@
 ### 设置消息撤回监听
 
 你可以设置消息撤回监听，通过 `messagesInfoDidRecall` 事件监听发送方对已接收的消息的撤回。
+
+- 若用户在线接收了消息，消息撤回时，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为撤回的消息的内容，`recallMessageId` 属性返回撤回的消息的 ID。
+- 若消息发送和撤回时接收方离线，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为空，`recallMessageId` 属性返回撤回的消息的 ID。
 
 ```objectivec
 - (void)messagesInfoDidRecall:(NSArray<EMRecallMessageInfo *> * _Nonnull)aRecallMessagesInfo;

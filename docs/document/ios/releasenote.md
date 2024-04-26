@@ -2,6 +2,24 @@
 
 <Toc />
 
+## 版本 V4.6.0 Dev 2024-04-26（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 `recallMessageWithMessageId:ext:completion:` 方法，支持消息撤回时携带自定义信息。
+- [IM SDK] 消息撤回事件 `messagesInfoDidRecall` 的 `EMRecallMessageInfo` 对象中新增`recallMessageId` 属性，支持离线期间撤回的消息通知给接收方。
+- [IM SDK] 新增 `filterConversationsFromDB` 方法，支持自定义筛选获取本地会话列表。使用该 API 时，需要在 `EMOptions` 中设置新增的 `autoLoadConversation` 属性为 `false`。
+
+### 修复
+
+[IM SDK] 修复 Web 端在聊天室中发送会话已读回执（channel ack）时，移动端 SDK 会新增会话且会话类型错误的问题。
+
+### 重大变更
+
+从 V4.6.0 版本开始会启用 Swift 语言编写的新的 `EaseChatUIKit` 与 `EaseChatDemo`，老版本 Demo 和 UIKit 逐渐不再维护，请参考：
+- [UIKit 文档](https://doc.easemob.com/uikit/chatuikit/ios/chatuikit_overview.html)
+- [Demo 源码](https://github.com/easemob/chat-ios/tree/SwiftDemo)
+
 ## 版本 V4.5.0 Dev 2024-04-03（开发版）
 
 ## 新增特性
