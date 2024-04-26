@@ -85,7 +85,7 @@
 
 单群聊 UiKit 的 `EaseChatFragment.Builder` 对象中提供了 `setTargetTranslation` 方法设置目标翻译语言。
 
-如果未设置翻译的目标语言或设置的翻译目标语言的枚举不在范围内，则默认使用中文。
+如果未设置翻译的目标语言，则默认使用中文。
 
 更多翻译目标语言，请参考 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
 
