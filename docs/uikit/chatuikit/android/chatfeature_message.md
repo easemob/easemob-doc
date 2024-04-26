@@ -65,7 +65,7 @@
 
 - 长按消息气泡弹出的显示和隐藏翻译菜单的逻辑在 `EaseChatMessageTranslationController` 中。
 
-[界面截图] [界面截图]
+![img](@static/images/uikit/chatuikit/feature/message/message_translate.png) 
 
 ### 如何使用
 
@@ -112,7 +112,7 @@
 
 - 消息气泡中添加 view 以及显示和隐藏 Reaction 布局的逻辑在 `EaseChatAddExtendFunctionViewController` 中的 `addReactionViewToMessage`方法。
 
-[界面截图] [界面截图]
+![img](@static/images/uikit/chatuikit/feature/message/message_reactions.png) 
 
 ### 如何使用
 
@@ -132,7 +132,7 @@
 
 单群聊 UIKit 中实现了 Thread 页面 `EaseChatThreadActivity`，开发者只需要调用 `EaseChatThreadActivity.actionStart` 启动该页面传入需要的参数即可。
 
-[界面截图] [界面截图]
+![img](@static/images/uikit/chatuikit/feature/message/message_thread.png) 
 
 ### 如何使用
 
@@ -172,7 +172,7 @@ class ChatThreadActivity:EaseChatThreadActivity() {
 - `Forward EaseChatMessageMultipleSelectController`：处理 UI 布局变更(隐藏/显示 `EaseChatLayout` 中的 `EaseChatInputMenu` 输入菜单)以及转发和删除的逻辑。
 - `Forward EaseChatMessageMultiSelectHelper`：消息选择帮助类用于记录选中的消息信息并提供获取方法。
 
-[界面截图] [界面截图]
+![img](@static/images/uikit/chatuikit/feature/message/message_forward.png) 
 
 ### 如何使用
 

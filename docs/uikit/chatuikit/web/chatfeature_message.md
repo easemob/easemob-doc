@@ -4,6 +4,12 @@
 
 本文介绍消息相关特性，包括消息删除、撤回、编辑、引用、翻译、表情回复、话题和转发。你可以决定是否开启或关闭这些特性。
 
+## 消息复制
+
+消息复制是指用户可以将一条消息复制到剪贴板。消息复制可以帮助用户将消息保存到其他地方，或将其粘贴到其他应用程序中。
+
+![img](@static/images/uikit/chatuikit/feature/web/message/message_copy.png) 
+
 ## 消息删除
 
 消息删除是指用户可以删除一条消息。消息删除可以帮助用户删除错误发送的消息，或删除不想保留的消息。
@@ -18,7 +24,7 @@
 features.chat.message.delete = false;
 ```
 
-![img](@static/images/uikit/chatuikit/feature/message/message_delete.png)
+![img](@static/images/uikit/chatuikit/feature/web/message/message_delete.png)
 
 ## 消息撤回
 
@@ -26,7 +32,7 @@ features.chat.message.delete = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage` 和 `FileMessage` 等。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_recall.png)
+![img](@static/images/uikit/chatuikit/feature/web/message/message_recall.png)
 
 ### 如何使用
 
@@ -42,7 +48,7 @@ features.chat.message.recall = false;
 
 该功能在 UIKit 里的 `TextMessage` 组件中。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_edit.png)
+![img](@static/images/uikit/chatuikit/feature/web/message/message_edit.png)
 
 ### 如何使用
 
@@ -58,7 +64,7 @@ features.chat.message.edit = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等
 
-![img](@static/images/uikit/chatuikit/feature/message/message_reply.png)
+![img](@static/images/uikit/chatuikit/feature/web/message/message_reply.png)
 
 ### 如何使用
 
@@ -74,7 +80,7 @@ features.chat.message.reply = false;
 
 该功能在 UIKit 里的 `TextMessage` 组件中。
 
-[界面截图]
+![img](@static/images/uikit/chatuikit/feature/web/message/message_translate.png) 
 
 ### 如何使用
 
@@ -102,7 +108,7 @@ features.chat.message.translate = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-[界面截图]
+![img](@static/images/uikit/chatuikit/feature/web/message/message_reactions.png) 
 
 ### 如何使用
 
@@ -122,7 +128,7 @@ features.chat.message.reaction = false;
 
 该功能在 UIKit 里的 `TextMessage` 组件中。
 
-[界面截图]
+![img](@static/images/uikit/chatuikit/feature/web/message/message_thread.png) 
 
 ### 如何使用
 
@@ -142,7 +148,7 @@ features.chat.message.thread = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-[界面截图]
+![img](@static/images/uikit/chatuikit/feature/web/message/messages_forward.png) 
 
 ### 如何使用
 
@@ -199,7 +205,7 @@ features.chat.message.select = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-[界面截图]
+![img](@static/images/uikit/chatuikit/feature/web/message/message_forward.png) 
 
 ### 如何使用
 

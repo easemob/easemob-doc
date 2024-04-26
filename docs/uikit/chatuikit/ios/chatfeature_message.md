@@ -84,7 +84,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 目前，单群聊 UIKit 支持翻译文本消息。消息翻译的 UI 和逻辑部分在 `Appearance.swift` 中。
 
-[界面截图] [界面截图]
+![img](@static/images/uikit/chatuikit/feature/message/message_translate.png) 
 
 ### 如何使用
 
@@ -118,7 +118,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 目前，单群聊 UIKit 支持 Reaction，可在 `Appearance.swift` 中开启或关闭。
 
-[界面截图] [界面截图]
+![img](@static/images/uikit/chatuikit/feature/message/message_reactions.png) 
 
 ### 如何使用
 
@@ -141,7 +141,7 @@ Appearance.chat.contentStyle.append(.withMessageReaction)
 
 单群聊 UIKit 中实现了 Thread，可在 `Appearance.swift` 中开启或关闭。
 
-[界面截图] [界面截图]
+![img](@static/images/uikit/chatuikit/feature/message/message_thread.png) 
 
 ### 如何使用
 
