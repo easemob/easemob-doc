@@ -69,7 +69,7 @@ export function ContactListScreen(props: Props) {
 | onForwardMessage      | function  | 否       | 转发的回调通知。可能用到路由。                                         |
 | onChangeRequestCount  | function  | 否       | 新通知数量变更的回调通知。可能用到路由。                               |
 | getFullLetter         | function  | 否       | 获取分类排序的回调通知。例如：返回汉字的全拼音。 可能用到路由。        |
-| indexList             | array     | 否       | 索引头列表。默认为`ABCDEFGHIJKLMNOPQRSTUVWXYZ#`                        |
+| indexList             | array     | 否       | 索引头列表。默认为 `ABCDEFGHIJKLMNOPQRSTUVWXYZ#`                        |
 | visibleEmptyIndex     | boolean   | 否       | 是否显示空索引分类，默认不显示。                                       |
 
 ## 头像和昵称
@@ -79,7 +79,7 @@ export function ContactListScreen(props: Props) {
 可通过以下方式提供头像和昵称：
 
 - 注册回调：使用 `Container` 组件的 `onUsersHandler` 属性实现。
-- 主动调用：使用 `ChatService.updateDataList` 方法实现。调用该方法会触发内部事件分发，刷新已加载的组件页面。
+- 主动调用：使用 `ChatService#updateDataList` 方法实现。调用该方法会触发内部事件分发，刷新已加载的组件页面。
 
 :::tip
 无论哪种更新方式，都会更新缓存数据，主动更新还会触发 UI 组件刷新。
