@@ -43,11 +43,9 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
  }
 ```
 
-## 会话列表页面及其 Provider
+## EaseChatUIKitContext中的Provider
 
-1. 创建会话列表页面。
-
-继承单群聊 UIKit 提供的会话列表页面类注册后的自定义类可以调用 ViewModel 的 `ConversationListController().viewModel.registerEventsListener` 方法监听相关事件。
+1.设置Provider实现类
 
 - 使用协程异步返回会话列表相关信息，仅限于 Swift 下使用。
 
@@ -79,9 +77,10 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 下面示例代码为实现带协程功能的 Swift 特有的 provider。
 
 ```
-extension YourMainViewController: EaseProfileProvider {
-
-        //MARK: - EaseProfileProvider
+//MARK: - EaseProfileProvider for conversations&contacts usage.
+//For example using conversations controller,as follows.
+extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
+    //MARK: - EaseProfileProvider
     func fetchProfiles(profileIds: [String]) async -> [any EaseChatUIKit.EaseProfileProtocol] {
         return await withTaskGroup(of: [EaseChatUIKit.EaseProfileProtocol].self, returning: [EaseChatUIKit.EaseProfileProtocol].self) { group in
             var resultProfiles: [EaseChatUIKit.EaseProfileProtocol] = []
@@ -93,7 +92,7 @@ extension YourMainViewController: EaseProfileProvider {
                 }
                 return resultProfiles
             }
-            //等待所有任务执行完毕。返回值。
+            //Await all task were executed.Return values.
             for await result in group {
                 resultProfiles.append(contentsOf: result)
             }
@@ -181,31 +180,36 @@ extension YourMainViewController: EaseProfileProvider {
 }
 ```
 
-## 联系人列表页面及其 Provider
+## 会话列表页面
+
+1.创建会话列表页面
+```Swift
+    
+        let vc = EaseChatUIKit.ComponentsRegister.shared.ConversationsController.init()
+        vc.tabBarItem.tag = 0
+```
+
+2.监听会话列表页面事件
+```Swift
+        
+        vc.viewModel?.registerEventsListener(listener: self)
+```
+
+## 联系人列表页面
 
 1. 创建联系人列表页面。
 
 继承单群聊 UIKit 提供的联系人列表页面类注册后的自定义类可以调用 ViewModel 的 `ContactViewController().viewModel.registerEventsListener` 方法监听相关事件。
 
-- 使用协程异步返回联系人相关信息，仅限于 Swift 下使用。
-
-```
-        //userProfileProvider为用户数据的提供者，使用协程实现与userProfileProviderOC不能同时存在userProfileProviderOC使用闭包实现
-        EaseChatUIKitContext.shared?.userProfileProvider = self
-        EaseChatUIKitContext.shared?.userProfileProviderOC = nil
+```Swift
+        let vc = EaseChatUIKit.ComponentsRegister.shared.ContactsController.init(headerStyle: .contact)
 ```
 
-- 使用闭包返回会话列表相关信息，Swift 和 OC 均可使用。
+2.监听联系人列表页面事件
 
+```Swift
+        vc.viewModel?.registerEventsListener(listener: self)
 ```
-        //userProfileProvider为用户数据的提供者，使用协程实现与userProfileProviderOC不能同时存在userProfileProviderOC使用闭包实现
-        EaseChatUIKitContext.shared?.userProfileProvider = nil
-        EaseChatUIKitContext.shared?.userProfileProviderOC = self
-```
-
-2. 实现联系人列表 Provider。
-
-实现联系人列表 Provider 与[实现会话列表 Provider 相似](#会话列表页面及其-provider)。实现 EaseProfileProvider 协议后，使用协程异步返回你要显示的联系人信息。对于 Objective-C，实现 `EaseProfileProviderOC` 即可。 
 
 ## 初始化聊天页面
 
