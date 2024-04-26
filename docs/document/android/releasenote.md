@@ -2,9 +2,31 @@
 
 <Toc />
 
+## 版本 V4.6.0 Dev 2024-04-26（开发版）
+
+### 新增特性
+
+- [IM SDK] 支持自定义筛选获取本地会话列表。
+- [IM SDK] 撤回消息的 `recallMessage` 方法中新增 `ext` 字段，支持消息撤回时携带自定义信息。
+- [IM SDK] 消息撤回事件 `onMessageRecalled` 的 `EMRecallMessageInfo` 对象中新增`recallMessageId` 属性，支持离线期间撤回的消息通知给接收方。// 替换成 Android 的。
+
+
+### 优化
+
+- [IM SDK] 添加绑定推送 token 成功的回调。
+
+### 修复
+
+- [IM SDK] 修复发送消息时 `to` 为空导致的崩溃。
+
+### 重大变更
+
+- [EaseIM App] 项目改用 Kotlin 语言实现。
+- [EaseIMKIt] 项目改用 Kotlin 语言实现。
+
 ## 版本 V4.5.0 Dev 2024-04-03（开发版）
 
-## 新增特性
+### 新增特性
 
 - [IM SDK] 新增[置顶消息功能](message_pin.html)。
   - 新增 `EMChatManager#asyncPinMessage` 方法，用于置顶消息。
@@ -19,7 +41,7 @@
 - [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
 - [IM SDK] 支持[动态加载 .so 库文件](quickstart.html#方法三-动态加载-so-库文件)。
 
-## 优化
+### 优化
 
 - [IM SDK] 支持使用消息 body 完成[单条转发](message_forward.html#转发单条消息)，附件消息无需重新上传附件。
 - [IM SDK] 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。
