@@ -68,7 +68,7 @@
 
 联系人名片指包含联系人详细信息的电子卡片，通常包括头像和昵称等信息。通过联系人名片，用户可以快速添加联系人或开始会话。
 
-![img](@static/images/uikit/chatuikit/feature/web/common/contact_card.png) 
+![img](@static/images/uikit/chatuikit/feature/web/common/contact_namecard.png) 
 
 ## 语音消息
 
