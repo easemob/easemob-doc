@@ -43,22 +43,31 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
  }
 ```
 
-## 会话列表页面及其 Provider
+## EaseChatUIKitContext中的Provider
 
-1. 创建会话列表页面。
-
-继承单群聊 UIKit 提供的会话列表页面类注册后的自定义类可以调用 ViewModel 的 `registerEventsListener` 方法监听相关事件。
+1.设置Provider实现类
 
 - 使用协程异步返回会话列表相关信息，仅限于 Swift 下使用。
 
 ```
-let conversations = EaseChatUIKit.ComponentsRegister.shared.ConversationsController.init(provider: self)
+    
+        //userProfileProvider 为用户数据的提供者，使用协程实现与 userProfileProviderOC 不能同时存在。userProfileProviderOC 使用闭包实现。
+        EaseChatUIKitContext.shared?.userProfileProvider = self
+        EaseChatUIKitContext.shared?.userProfileProviderOC = nil
+        //groupProvider 原理同上
+        EaseChatUIKitContext.shared?.groupProfileProvider = self
+        EaseChatUIKitContext.shared?.groupProfileProviderOC = nil
 ```
 
 - 使用闭包返回会话列表相关信息，Swift 和 OC 均可使用。
 
 ```
-let conversations = EaseChatUIKit.ComponentsRegister.shared.ConversationsController.init(providerOC: self)
+        //userProfileProvider 为用户数据的提供者，使用协程实现与 userProfileProviderOC 不能同时存在。userProfileProviderOC 使用闭包实现。
+        EaseChatUIKitContext.shared?.userProfileProvider = nil
+        EaseChatUIKitContext.shared?.userProfileProviderOC = self
+        //groupProvider 原理同上
+        EaseChatUIKitContext.shared?.groupProfileProvider = nil
+        EaseChatUIKitContext.shared?.groupProfileProviderOC = self
 ```
 
 2. 实现会话列表 Provider。
@@ -68,73 +77,139 @@ let conversations = EaseChatUIKit.ComponentsRegister.shared.ConversationsControl
 下面示例代码为实现带协程功能的 Swift 特有的 provider。
 
 ```
-extension YourViewController: EaseProfileProvider {
-
-    func fetchProfiles(profilesMap: [EaseChatUIKit.EaseProfileProviderType : [String]]) async -> [EaseChatUIKit.EaseProfileProtocol] {
-        //Create a task group 
+//MARK: - EaseProfileProvider for conversations&contacts usage.
+//For example using conversations controller,as follows.
+extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
+    //MARK: - EaseProfileProvider
+    func fetchProfiles(profileIds: [String]) async -> [any EaseChatUIKit.EaseProfileProtocol] {
         return await withTaskGroup(of: [EaseChatUIKit.EaseProfileProtocol].self, returning: [EaseChatUIKit.EaseProfileProtocol].self) { group in
             var resultProfiles: [EaseChatUIKit.EaseProfileProtocol] = []
-            for (type,profileIds) in profilesMap {
-                //According to condition, add task execution 
-                if type == .chat {
-                    group.addTask {
-                        var resultProfiles: [EaseChatUIKit.EaseProfileProtocol] = []
-                        let result = await ChatClient.shared().userInfoManager?.fetchUserInfo(byId: profileIds, type: [NSNumber(integerLiteral: UserInfoType.avatarURL.rawValue),NSNumber(integerLiteral: UserInfoType.nickName.rawValue)])
-                        if result?.1 != nil {
-                            return resultProfiles
-                        } else {
-                            let userInfoMap = result?.0 ?? [:]
-                            for (key, value) in userInfoMap {
-                                let profile = EaseProfile()
-                                profile.id = key
-                                profile.nickname = value.nickname ?? ""
-                                profile.avatarURL = value.avatarUrl ?? ""
-                                resultProfiles.append(profile)
-                            }
-                            return resultProfiles
-                        }
-                    }
-                } else {
-                    group.addTask {
-                    var resultProfiles: [EaseChatUIKit.EaseProfileProtocol] = []
-                    // 此处仅为示例，你需要根据 profileIds 调用你们服务器获取对应群组的头像和昵称信息，并且返回下面的数组中。
-                        return resultProfiles
-                    }
+            group.addTask {
+                var resultProfiles: [EaseChatUIKit.EaseProfileProtocol] = []
+                let result = await self.requestUserInfos(profileIds: profileIds)
+                if let infos = result {
+                    resultProfiles.append(contentsOf: infos)
                 }
+                return resultProfiles
             }
-            //等所有任务都执行完毕，返回值。
+            //Await all task were executed.Return values.
             for await result in group {
                 resultProfiles.append(contentsOf: result)
             }
             return resultProfiles
         }
-
+    }
+    //MARK: - EaseGroupProfileProvider
+    func fetchGroupProfiles(profileIds: [String]) async -> [any EaseChatUIKit.EaseProfileProtocol] {
         
+        return await withTaskGroup(of: [EaseChatUIKit.EaseProfileProtocol].self, returning: [EaseChatUIKit.EaseProfileProtocol].self) { group in
+            var resultProfiles: [EaseChatUIKit.EaseProfileProtocol] = []
+            group.addTask {
+                var resultProfiles: [EaseChatUIKit.EaseProfileProtocol] = []
+                let result = await self.requestGroupsInfo(groupIds: profileIds)
+                if let infos = result {
+                    resultProfiles.append(contentsOf: infos)
+                }
+                return resultProfiles
+            }
+            //Await all task were executed.Return values.
+            for await result in group {
+                resultProfiles.append(contentsOf: result)
+            }
+            return resultProfiles
+        }
+    }
+    
+    private func requestUserInfos(profileIds: [String]) async -> [EaseProfileProtocol]? {
+        var unknownIds = [String]()
+        var resultProfiles = [EaseProfileProtocol]()
+        for profileId in profileIds {
+            if let profile = EaseChatUIKitContext.shared?.userCache?[profileId] {
+                if profile.nickname.isEmpty {
+                    unknownIds.append(profile.id)
+                } else {
+                    resultProfiles.append(profile)
+                }
+            } else {
+                unknownIds.append(profileId)
+            }
+        }
+        if unknownIds.isEmpty {
+            return resultProfiles
+        }
+        let result = await ChatClient.shared().userInfoManager?.fetchUserInfo(byId: unknownIds)
+        if result?.1 == nil,let infoMap = result?.0 {
+            for (userId,info) in infoMap {
+                let profile = EaseChatProfile()
+                let nickname = info.nickname ?? ""
+                profile.id = userId
+                profile.nickname = nickname
+                if let remark = ChatClient.shared().contactManager?.getContact(userId)?.remark {
+                    profile.remark = remark
+                }
+                profile.avatarURL = info.avatarUrl ?? ""
+                resultProfiles.append(profile)
+                if (EaseChatUIKitContext.shared?.userCache?[userId]) != nil {
+                    profile.updateFFDB()
+                } else {
+                    profile.insert()
+                }
+                EaseChatUIKitContext.shared?.userCache?[userId] = profile
+            }
+            return resultProfiles
+        }
+        return []
+    }
+    
+    private func requestGroupsInfo(groupIds: [String]) async -> [EaseProfileProtocol]? {
+        var resultProfiles = [EaseProfileProtocol]()
+        let groups = ChatClient.shared().groupManager?.getJoinedGroups() ?? []
+        for groupId in groupIds {
+            if let group = groups.first(where: { $0.groupId == groupId }) {
+                let profile = EaseChatProfile()
+                profile.id = groupId
+                profile.nickname = group.groupName
+                profile.avatarURL = group.settings.ext
+                resultProfiles.append(profile)
+                EaseChatUIKitContext.shared?.groupCache?[groupId] = profile
+            }
+
+        }
+        return resultProfiles
     }
 }
 ```
 
-## 联系人列表页面及其 Provider
+## 会话列表页面
+
+1.创建会话列表页面
+```Swift
+    
+        let vc = EaseChatUIKit.ComponentsRegister.shared.ConversationsController.init()
+        vc.tabBarItem.tag = 0
+```
+
+2.监听会话列表页面事件
+```Swift
+        
+        vc.viewModel?.registerEventsListener(listener: self)
+```
+
+## 联系人列表页面
 
 1. 创建联系人列表页面。
 
-继承单群聊 UIKit 提供的联系人列表页面类注册后的自定义类可以调用 ViewModel 的 `registerEventsListener` 方法监听相关事件。
+继承单群聊 UIKit 提供的联系人列表页面类注册后的自定义类可以调用 ViewModel 的 `ContactViewController().viewModel.registerEventsListener` 方法监听相关事件。
 
-- 使用协程异步返回联系人相关信息，仅限于 Swift 下使用。
-
-```
-let vc = EaseChatUIKit.ComponentsRegister.shared.ContactsController.init(provider: self)
+```Swift
+        let vc = EaseChatUIKit.ComponentsRegister.shared.ContactsController.init(headerStyle: .contact)
 ```
 
-- 使用闭包返回会话列表相关信息，Swift 和 OC 均可使用。
+2.监听联系人列表页面事件
 
+```Swift
+        vc.viewModel?.registerEventsListener(listener: self)
 ```
-let vc = EaseChatUIKit.ComponentsRegister.shared.ContactsController.init(providerOC: self)
-```
-
-2. 实现联系人列表 Provider。
-
-实现联系人列表 Provider 与[实现会话列表 Provider 相似](#会话列表页面及其-provider)。实现 EaseProfileProvider 协议后，使用协程异步返回你要显示的联系人信息。对于 Objective-C，实现 `EaseProfileProviderOC` 即可。 
 
 ## 初始化聊天页面
 
@@ -162,5 +237,6 @@ EaseChatUIKitClient.shared.registerUserEventsListener(self)
 EaseChatUIKitClient.shared.unregisterUserEventsListener(self)
 ```
 
+## 更多进阶用法请参考Demo中源码
 
-
+https://github.com/zjc19891106/chat-ios/tree/SwiftDemo
