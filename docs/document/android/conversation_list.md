@@ -55,13 +55,28 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cu
 });
 ```
 
-### 获取本地所有会话
+### 获取本地会话
 
-你可以调用 `getAllConversationsBySort` 方法一次性获取本地所有会话。SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
+- 你可以调用 `asyncFilterConversationsFromDB` 方法，获取本地所有会话（`filter` 参数为 `null`）或筛选会话。
 
-本地会话列表包含单聊和群组聊天会话，至于是否包含聊天室会话，取决于在 SDK 初始化时 `com.hyphenate.chat.EMOptions#setDeleteMessagesAsExitChatRoom` 参数的设置。若设置为 `true`，即离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。若设置为 `false`，即保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。
- 
-若在初始化时，将 `EMOptions#setLoadEmptyConversations` 设置为 `true` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
+  如果要筛选会话，你需要自己实现 `EMCustomConversationFilter` 接口中的过滤器 `filter`，而且将 `com.hyphenate.chat.EMOptions#setAutoLoadAllConversations` 方法设置为 `false`。
+
+  :::tip
+  若使用该功能，需将 SDK 升级至 4.6.0。
+  :::
+
+```java
+
+```
+
+下表为初始化时设置的会话相关选项：
+
+ | 选项 | 描述    | 
+ | :--------- | :----- |
+ | `com.hyphenate.chat.EMOptions#setDeleteMessagesAsExitChatRoom`   | 通过该选项确定获取本地会话时是否返回聊天室会话。默认情况下，只包含单聊和群组聊天会话。<br/> - `true`：离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。<br/> - `false`：离开聊天室时保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。| 
+ |`EMOptions#setLoadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `true`：返回空会话。<br/> - `false`：不包含空会话。| 
+
+- 要一次性获取本地所有会话，你可以调用 `getAllConversationsBySort` 方法。SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
 
 :::tip
 若使用该功能，需将 SDK 升级至 4.0.3。
@@ -73,4 +88,16 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cu
 List<EMConversation> conversations = EMClient.getInstance().chatManager().getAllConversationsBySort();
 ```
 
-你也可以调用 `getAllConversations` 方法返回 `Map <String, EMConversation>` 结构的会话。
+- 你也可以调用 `getAllConversations` 方法返回 `Map <String, EMConversation>` 结构的会话。
+
+### 清除内存中的会话
+
+你可以调用 `cleanConversationsMemoryCache` 方法，清除本地内存中的所有会话，从而释放内存。
+
+释放内存后，你通过调用[获取本地会话](#获取本地会话)的接口从内存中获取到的会话数可能为 0，而且你调用 `getUnreadMessageCount` 方法获取到的未读消息数可能也为 0。若需要获取所有会话和未读数，需要先调用 `loadAllConversations` 或者 `asyncFilterConversationsFromDB(EMCustomConversationFilter, boolean, EMValueCallBack)` 方法将数据库中的会话重新加载到内存。此外，若将 `com.hyphenate.chat.EMOptions#setAutoLoadAllConversations` 方法设置为 `true`，用户登录成功后数据库中的所有会话会自动加载到内存。
+
+```java
+
+
+```
+

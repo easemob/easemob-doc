@@ -47,8 +47,10 @@ NSString *cursor = @"";
 
 - 你可以调用 `filterConversationsFromDB` 方法，获取本地所有会话（`filter` 参数为 `nil`）或筛选要获取的会话。
 
+如果要筛选会话，你需要自己实现 `EMCustomConversationFilter` 接口中的过滤器 `filter`，而且将 `EMOptions#autoLoadConversation` 属性设置为 `NO`。
+
 :::tip
-若使用该功能，需将 SDK 升级至 4.7.0。
+若使用该功能，需将 SDK 升级至 4.6.0。
 :::
 
 ```Swift
@@ -66,7 +68,7 @@ NSString *cursor = @"";
 
  | 选项 | 描述    | 
  | :--------- | :----- |
- | `EMOptions#isDeleteMessagesWhenExitChatRoom`   | 获取本地会话时是否返回聊天室会话。默认情况下，只包含单聊和群组聊天会话。<br/> - `YES`：离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。<br/> - `NO`：离开聊天室时保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。| 
+ | `EMOptions#isDeleteMessagesWhenExitChatRoom`   | 通过该选项确定获取本地会话时是否返回聊天室会话。默认情况下，只包含单聊和群组聊天会话。<br/> - `YES`：离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。<br/> - `NO`：离开聊天室时保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。| 
  |`EMOptions#loadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `YES`：返回空会话。<br/> - `NO`：不包含空会话。| 
 
 - 要一次性获取本地所有会话，你可以调用 `getAllConversations:` 方法。SDK 从内存中获取会话，若未从本地数据库中加载过，会先从数据库加载到内存中。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
