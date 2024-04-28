@@ -52,6 +52,8 @@
 
 - 消息翻译的 UI 布局在 `MessageText` 中。
 
+![img](@static/images/uikit/chatuikit/feature/message/message_translate.png)
+
 ### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
@@ -78,6 +80,8 @@
 
 - Reaction 表情列表的弹窗 `BottomSheetEmojiList`。
 
+![img](@static/images/uikit/chatuikit/feature/message/message_reactions.png)
+
 ### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
@@ -88,7 +92,7 @@
 
 消息话题（即 `Thread`）指用户可以在群组聊天中根据一条消息创建话题进行深入探讨，讨论和追踪特定项目任务，而不影响其他聊天内容。
 
-[界面截图] [界面截图]
+![img](@static/images/uikit/chatuikit/feature/message/message_thread.png)
 
 ### 如何使用
 
@@ -104,7 +108,7 @@
 
 - 选择转发消息接收人页面 `MessageForwardSelector`。
 
-[界面截图] [界面截图]
+![img](@static/images/uikit/chatuikit/feature/message/message_forward.png)
 
 ### 如何使用
 
