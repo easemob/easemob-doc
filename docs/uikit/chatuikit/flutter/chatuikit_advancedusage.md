@@ -393,7 +393,7 @@ ChatUIKitSettings.enableMessageReport = false;
   ];
 ```
 
-### 是否开启消息合并转发功能
+### 设置是否开启消息合并转发
 
 合并转发，即同时选择多条消息进行转发，该功能默认为 `true`。如果不需要，可以将参数设置为 `false`。 示例代码如下：
 
@@ -401,7 +401,7 @@ ChatUIKitSettings.enableMessageReport = false;
 ChatUIKitSettings.enableMessageMultiSelect = false;
 ```
 
-### 是否开启单条消息转发功能
+### 设置是否开启单条消息转发
 
 单条消息转发，即转发收到或者发送成功的消息，该功能默认为 `true`。如果不需要，可以将参数设置为 `false`。 示例代码如下：
 
