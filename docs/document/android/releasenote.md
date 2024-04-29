@@ -6,9 +6,9 @@
 
 ### 新增特性
 
-- [IM SDK] 新增 `asyncFilterConversationsFromDB` 方法，支持[自定义筛选获取本地会话列表](conversation_list.html#获取本地会话)。
+- [IM SDK] 新增 `asyncFilterConversationsFromDB` 方法，支持[自定义筛选获取本地会话列表](conversation_list.html#获取本地会话)。使用该 API 时，需要将 `com.hyphenate.chat.EMOptions#setAutoLoadAllConversations` 方法设置为 `false`。
   - 新增 `EMCustomConversationFilter` 接口，由开发者自己实现会话过滤器。
-- [IM SDK] 新增 `cleanConversationsMemoryCache` 方法，[清除本地内存中的所有会话](conversation_list.html#清除内存中的会话)释放内存。
+- [IM SDK] 新增 `cleanConversationsMemoryCache` 方法，清除本地内存中的所有会话释放内存。
 - [IM SDK] 新增 `com.hyphenate.chat.EMOptions#setAutoLoadAllConversations` 方法，[设置是否在登录成功后将数据库中的所有会话自动加载到缓存](conversation_list.html#清除内存中的会话)。
 - [IM SDK] 新增 `recallMessage(message,ext)` 方法，[支持消息撤回时携带自定义信息](message_recall.html#撤回消息)，`ext` 参数为字符串类型。
 - [IM SDK] 新增[消息撤回事件](message_recall.html#设置消息撤回监听) `onMessageRecalledWithExt`，支持离线期间撤回的消息通知给接收方。
