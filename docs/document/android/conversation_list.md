@@ -18,6 +18,7 @@
 环信即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
 
 - `asyncFetchConversationsFromServer`：从服务器获取会话列表。
+- `asyncFilterConversationsFromDB`：获取本地所有会话或筛选要获取的会话。
 - `getAllConversationsBySort`：获取本地所有会话。
 
 ## 实现方法
@@ -89,15 +90,3 @@ List<EMConversation> conversations = EMClient.getInstance().chatManager().getAll
 ```
 
 - 你也可以调用 `getAllConversations` 方法返回 `Map <String, EMConversation>` 结构的会话。
-
-### 清除内存中的会话
-
-你可以调用 `cleanConversationsMemoryCache` 方法，清除本地内存中的所有会话，从而释放内存。
-
-释放内存后，你通过调用[获取本地会话](#获取本地会话)的接口从内存中获取到的会话数可能为 0，而且你调用 `getUnreadMessageCount` 方法获取到的未读消息数可能也为 0。若需要获取所有会话和未读数，需要先调用 `loadAllConversations` 或者 `asyncFilterConversationsFromDB(EMCustomConversationFilter, boolean, EMValueCallBack)` 方法将数据库中的会话重新加载到内存。此外，若将 `com.hyphenate.chat.EMOptions#setAutoLoadAllConversations` 方法设置为 `true`，用户登录成功后数据库中的所有会话会自动加载到内存。
-
-```java
-
-
-```
-

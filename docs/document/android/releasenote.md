@@ -16,7 +16,7 @@
 ### 优化
 
 - [IM SDK] 添加绑定推送 token 成功的回调。
-- `onMessageRecalled` 已过时，请用 `onMessageRecalledWithExt` 代替。
+- [IM SDK] `onMessageRecalled` 已过时，请用 `onMessageRecalledWithExt` 代替。
 
 ### 修复
 
@@ -25,7 +25,7 @@
 ### 重大变更
 
 - [EaseIM App] 项目改用 Kotlin 语言实现。
-- [EaseIMKIt] 项目改用 Kotlin 语言实现。
+- [EaseIMKIt] 项目改用 Kotlin 语言实现。详见[单群聊 UIKit 文档](/uikit/chatuikit/android/chatuikit_overview.html)。
 
 ## 版本 V4.5.0 Dev 2024-04-03（开发版）
 
@@ -195,7 +195,7 @@
 - [IM SDK] 新增置顶服务器会话的功能：
     - 新增 `EMChatManager#asyncPinConversation` 方法，实现[置顶或取消置顶服务器会话](conversation_pin.html#置顶-取消置顶会话)：
     - 新增 `EMChatManager#asyncFetchPinnedConversationsFromServer` 方法，实现[获取置顶的服务器会话](conversation_pin.html#获取服务端的置顶会话列表)。
-- [IM SDK] 新增 `EMChatManager#getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](conversation_list.html#获取本地所有会话)；
+- [IM SDK] 新增 `EMChatManager#getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](conversation_list.html#获取本地会话)；
 - [IM SDK] 新增在群组或聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)的功能；
 - [IM SDK] 新增[荣耀推送](push.html#荣耀推送集成)。
 
@@ -203,7 +203,6 @@
 
 - [IM SDK] 优化登录时若消息过多，从本地数据库加载会话太慢的问题；
 - [IM SDK] 优化绑定及解绑推送设备的逻辑。
-
 
 ### 修复
 

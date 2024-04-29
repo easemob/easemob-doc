@@ -18,7 +18,7 @@
 环信即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
 
 - `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion`：从服务器获取会话列表。
-- `IEMChatManager#filterConversationsFromDB`：获取本地所有会话（`filter` 参数为 `nil`）或筛选要获取的会话。
+- `IEMChatManager#filterConversationsFromDB`：获取本地所有会话或筛选要获取的会话。
 - `IEMChatManager#getAllConversations:`：一次性获取本地所有会话。
 
 ## 实现方法
@@ -84,5 +84,3 @@ NSArray <EMConversation *>*conversations = [EMClient.sharedClient.chatManager ge
 ```
 
 - 你也可以调用 `getAllConversations` 方法返回 `NSArray <EMConversation *>` 结构的会话。
-
-
