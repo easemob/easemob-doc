@@ -10,7 +10,7 @@
   - 新增 `EMConversationFilter` 接口，由开发者自己实现会话过滤器。
 - [IM SDK] 新增 `cleanConversationsMemoryCache` 方法，清除本地内存中的所有会话释放内存。
 - [IM SDK] 新增 `recallMessageWithMessageId:ext:completion:` 方法，[支持消息撤回时携带自定义信息](message_recall.html#撤回消息)。
-- [IM SDK] 消息撤回事件 `messagesInfoDidRecall` 的 `EMRecallMessageInfo` 对象中新增`recallMessageId` 属性，[支持离线期间撤回的消息通知给接收方](message_recall.html#设置消息撤回监听)。
+- [IM SDK] 消息撤回事件 `messagesInfoDidRecall` 的 `EMRecallMessageInfo` 对象中新增 `recallMessageId` 属性，[支持离线期间撤回的消息通知给接收方](message_recall.html#设置消息撤回监听)。
 
 ### 修复
 
