@@ -10,7 +10,7 @@
 
 3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
-![img](@static/images/demo/ios_login.png)
+![img](@static/images/demo/ios_login.png =350x750)
 
 ## 代码下载
 
@@ -56,7 +56,7 @@ Demo 中有几大 UI 功能模块，在集成时将对应的模块添加到工�
 - **MainViewController**：此页面中包含了包含 Provider 实现 以及 1v1 实时通话以及多人实时通话的功能的初始化与回调处理。
 - **MineMessageListViewController&MineContactDetailViewController&MineGroupDetailViewController**：中 `EaseCallManager.shared()` 是如何发起音视频通话的示例代码。
 - **DemoLanguage**：Demo 层语言偏好设置切换。
-- **EMContactsViewController**：Demo 展示的联系人页面，展示了添加条目长按侧滑及实现条目点击事件等。
+- **MineMessageListViewController**：Demo 中聊天页面。
 - **EasemobBusinessRequest**：实现了 RESTful 的几种基本业务请求工具类，可以根据请求时需要返回参数类型来返回对应模型无需用户解析但是依赖第三方解析库 `Kakajson`，也有只返回 Dictionary 的请求方法，便于用户使用。
 - **Appdelegate&NotificationService**：推送相关设置。
 
