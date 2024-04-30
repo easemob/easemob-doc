@@ -27,6 +27,8 @@
 
 调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onRecallMessage` 事件。
 
+对于 4.7.0 及以上版本，该接口新增 `ext` 参数，支持传入自定义字符串，设置扩展信息。
+
 ```javascript
 let option = {
   // 要撤回消息的消息 ID。
@@ -35,6 +37,8 @@ let option = {
   to: "username",
   // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
   chatType: "singleChat",
+  // 撤回消息自定义字段。
+  ext: 'ext'
 };
 conn.recallMessage(option)
   .then((res) => {
@@ -51,10 +55,13 @@ conn.recallMessage(option)
 你可以设置消息撤回监听，通过 `onRecallMessage` 监听消息撤回状态。
 
 ```javascript
-conn.addEventHandler('MESSAGES',{
+  conn.addEventHandler('MESSAGES',{
    onRecallMessage: (msg) => {
       // 这里需要在本地删除对应的消息，也可以插入一条消息：“XXX撤回一条消息”。
       console.log('Recalling the message success'，msg)
+      // 消息撤回方设置的自定义字段。
+      console.log('recall message ext', msg?.ext)
    }
 })
+
 ```

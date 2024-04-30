@@ -228,6 +228,10 @@ options.setPushConfig(builder.build());
 EMClient.getInstance().init(this, options);
 // 即时通讯 IM SDK 初始化后
 EMPushHelper.getInstance().setPushListener(new PushListener() {
+    @Override
+    public void onBindTokenSuccess(EMPushType pushType, String pushToken) {
+        EMLog.e("PushClient", "Push client bind token to easemob server success: " + pushType + " - " + pushToken);
+    }
    @Override
    public void onError(EMPushType pushType, long errorCode) {
        EMLog.e("PushClient", "Push client occur a error: " + pushType + " - " + errorCode);
@@ -1682,7 +1686,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :---------------------- | :----------------------------------------------------------------------------------------------------- |
 | `txtBody`               | 消息体。                                                                                               |
 | `toChatUsername`        | 消息接收方：<br/> - 单聊为对端用户的用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。    |
-| `em_force_notification` | 是否为强制推送：<br/> - `YES`：强制推送<br/> - （默认）`NO`：非强制推送。<br/>该字段名固定，不可修改。 |
+| `em_force_notification` | 是否为强制推送：<br/> - `true`：强制推送<br/> - （默认）`false`：非强制推送。<br/>该字段名固定，不可修改。 |
 
 ### 发送静默消息
 

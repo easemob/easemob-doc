@@ -254,6 +254,19 @@ conn.addEventHandler("handlerId", {
 ```javascript
 logger.enableAll();
 ```
+- 设置日志不输出到控制台：
+
+```javascript
+logger.setConsoleLogVisibility(false)
+```
+
+- 监听 SDK 日志事件：
+
+```javascript
+logger.onLog = (log)=>{
+  console.log('im logger', log)
+}
+```
 
 关闭日志输出：
 
