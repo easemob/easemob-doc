@@ -46,7 +46,7 @@ NSString *cursor = @"";
 
 ### 获取本地所有或筛选的会话
 
-你可以调用 `IEMChatManager#filterConversationsFromDB` 方法，获取本地所有会话（`filter` 参数为 `null`）或实现筛选器闭包根据闭包中的会话对象返回对应的 Boolean 值。
+你可以调用 `IEMChatManager#filterConversationsFromDB` 方法，获取本地所有会话（`filter` 参数为 `nil`）或实现筛选器闭包根据闭包中的会话对象返回对应的 Boolean 值。
 
 :::tip
 若使用该功能，需将 SDK 升级至 4.6.0。
