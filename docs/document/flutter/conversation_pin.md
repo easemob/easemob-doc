@@ -48,26 +48,14 @@ try {
 
 ## 获取服务端的置顶会话列表
 
-你可以调用 `fetchPinnedConversations` 方法从服务端分页获取置顶会话列表。SDK 按照会话置顶时间的倒序返回。 
+你可以调用 `fetchConversationsByOptions` 方法从服务端分页获取置顶会话列表。SDK 按照会话置顶时间的倒序返回。 
 
 你最多可以拉取 50 个置顶会话。
 
 示例代码如下： 
 
 ```dart
-// pageSize: 每页返回的会话数。取值范围为 [1,50]。
-// cursor: 开始获取数据的游标位置。若获取数据时传 `null` 或者空字符串（""），SDK 从最新置顶的会话开始查询。
-try {
-  int pageSize = 10;
-  String cursor = "";
-  EMCursorResult<EMConversation> result =
-      await EMClient.getInstance.chatManager.fetchPinnedConversations(
-    pageSize: pageSize,
-    cursor: cursor,
-  );
-  // 获取到的会话列表
-  List<EMConversation> conversations = result.data;
-  // 下一次请求的 cursor
-  String? nextCursor = result.cursor;
-} on EMError catch (e) {}
+EMCursorResult<EMConversation> result = await EMClient.getInstance.chatManager.fetchConversationsByOptions(
+      options: ConversationFetchOptions.pinned(),
+    )
 ```
