@@ -2,7 +2,7 @@
 
 <Toc />
 
-## 版本 V4.6.0 Dev 2024-04-26（开发版）
+## 版本 V4.6.0 Dev 2024-04-30（开发版）
 
 ### 新增特性
 
@@ -25,8 +25,9 @@
 
 ### 重大变更
 
-- [EaseIM App] 项目改用 Kotlin 语言实现。
-- [EaseIMKIt] 项目改用 Kotlin 语言实现。详见[单群聊 UIKit 文档](/uikit/chatuikit/android/chatuikit_overview.html)。
+从 V4.6.0 版本开始会启用 Kotlin 语言编写的新的 EaseIM App 项目与 EaseIMKIt 项目，老版本的项目将逐渐不再维护，请参考：
+- [EaseIMKIt 文档](/document/uikit/chatuikit/android/chatuikit_overview.html) 
+- [EaseIM App 项目](https://github.com/easemob/chat-android-kotlin)。
 
 ## 版本 V4.5.0 Dev 2024-04-03（开发版）
 
