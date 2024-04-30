@@ -20,6 +20,7 @@
 - `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion`：从服务器获取会话列表。
 - `IEMChatManager#filterConversationsFromDB`：获取本地所有会话或筛选要获取的会话。
 - `IEMChatManager#getAllConversations:`：一次性获取本地所有会话。
+- `cleanConversationsMemoryCache`：清除内存中的会话。
 
 ## 实现方法
 

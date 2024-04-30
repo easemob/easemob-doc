@@ -19,7 +19,8 @@
 
 - `asyncFetchConversationsFromServer`：从服务器获取会话列表。
 - `asyncFilterConversationsFromDB`：获取本地所有会话或筛选要获取的会话。
-- `getAllConversationsBySort`：获取本地所有会话。
+- `getAllConversationsBySort`：一次性获取本地所有会话。
+- `cleanConversationsMemoryCache`：清除内存中的会话。
 
 ## 实现方法
 
@@ -60,7 +61,7 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cu
 
 你可以调用 `asyncFilterConversationsFromDB` 方法，获取本地所有会话（`filter` 参数为 `null`）或筛选会话。
 
-如果要筛选会话，你需要自己实现 `EMCustomConversationFilter` 接口中的过滤器 `filter`，根据 `filter` 方法中传递过来的会话对象 `emConversation` 自己决定是返回 `true` 还是 `false`。如果返回 `true`，这条会话会被添加到内存中，并最终在 `callback` 中返回给调用者，如果返回 `false`，这条会话会被舍弃，不会被添加到内存里，不会在`callback` 中返回给调用者。
+如果要筛选会话，你需要自己实现 `EMCustomConversationFilter` 接口中的过滤器 `filter`，根据 `filter` 方法中传递过来的会话对象 `emConversation` 自己决定是返回 `true` 还是 `false`。如果返回 `true`，这条会话会被添加到内存中，并最终在 `callback` 中返回给调用者，如果返回 `false`，会话会被舍弃，不会被添加到内存中，不会在 `callback` 中返回给调用者。
 
 :::tip
 若使用该功能，需将 SDK 升级至 4.6.0。
@@ -70,7 +71,7 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cu
 EMClient.getInstance().chatManager().asyncFilterConversationsFromDB(new EMCustomConversationFilter() {
     @Override
     public boolean filter(EMConversation emConversation) {
-        //在这里可以根据会话 emConversation 的属性决定返回 true 或false 来过滤会话。
+        //在这里可以根据会话 emConversation 的属性决定返回 true 或 false 来过滤会话。
         return true;
     }
 },false, new EMValueCallBack<List<EMConversation>>() {

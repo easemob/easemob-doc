@@ -15,7 +15,7 @@
 
 ### 优化
 
-- [IM SDK] 添加绑定推送 token 成功的回调。
+- [IM SDK] 添加绑定推送 token 成功的回调，详见 [FCM 推送集成](/push.html#fcm-推送集成)步骤四中的在环信即时通讯 IM SDK 中启用 FCM 的描述。
 - [IM SDK] `onMessageRecalled` 已过时，请用 `onMessageRecalledWithExt` 代替。
 
 ### 修复
