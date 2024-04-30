@@ -56,7 +56,7 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cu
 });
 ```
 
-### 获取本地所有会话或筛选的会话
+### 获取本地所有或筛选的会话
 
 你可以调用 `asyncFilterConversationsFromDB` 方法，获取本地所有会话（`filter` 参数为 `null`）或筛选会话。
 
@@ -93,7 +93,7 @@ EMClient.getInstance().chatManager().asyncFilterConversationsFromDB(new EMCustom
  | `com.hyphenate.chat.EMOptions#setDeleteMessagesAsExitChatRoom`   | 通过该选项确定获取本地会话时是否返回聊天室会话。默认情况下，只包含单聊和群组聊天会话。<br/> - `true`：离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。<br/> - `false`：离开聊天室时保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。| 
  |`EMOptions#setLoadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `true`：返回空会话。<br/> - `false`：不包含空会话。| 
 
-### 一次性获取所有会话
+### 一次性获取本地所有会话
 
 - 要一次性获取本地所有会话，你可以调用 `getAllConversationsBySort` 方法。SDK 首先从内存中获取会话，若会话未从本地数据库加载过，SDK 会先将数据库中的会话加载到内存。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<EMConversation>` 结构。
 
