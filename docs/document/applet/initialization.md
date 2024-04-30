@@ -181,6 +181,19 @@ conn.addEventHandler("handlerId", {
 ```javascript
 logger.enableAll();
 ```
+- 设置日志不输出到控制台：
+
+```javascript
+logger.setConsoleLogVisibility(false)
+```
+
+- 监听 SDK 日志事件：
+
+```javascript
+logger.onLog = (log)=>{
+  console.log('im logger', log)
+}
+```
 
 关闭日志输出：
 
@@ -193,4 +206,21 @@ logger.disableAll();
 ```javascript
 // 0 - 5 或者 'TRACE'，'DEBUG'，'INFO'，'WARN'，'ERROR'，'SILENT';
 logger.setLevel(0);
+```
+
+设置缓存日志：
+
+```javascript
+logger.setConfig({
+  useCache: false, // 是否缓存
+  maxCache: 3 * 1024 * 1024, // 最大缓存字节
+});
+// 缓存全部等级日志
+logger.setLevel(0);
+```
+
+下载日志：
+
+```javascript
+logger.download();
 ```
