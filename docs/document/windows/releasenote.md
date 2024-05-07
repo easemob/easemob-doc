@@ -7,7 +7,7 @@
 #### 新增特性
 
 - 新增 `ChatManager#DeleteAllMessagesAndConversations` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
-- 新增[根据搜索范围搜索消息](message.search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
+- 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
   - `MessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
   - `ChatManager#SearchMsgFromDB(string, long, in, string, MessageSearchDirection, MessageSearchScope, ValueCallBack<List<Message>>)`：根据搜索范围搜索所有会话中的消息。
   - `Conversation#LoadMessagesWithScope(string, MessageSearchScope, long, int, string, MessageSearchDirection, ValueCallBack<List<Message>>)`：根据搜索范围搜索当前会话中的消息。
@@ -19,7 +19,7 @@
 - 新增 `Message#Broadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 - 新增 `GroupManager#FetchMyGroupsCount` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。 
 - 新增错误码 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`，表示聊天室所有者不允许离开聊天室。若初始化时，`Options#IsRoomOwnerLeaveAllowed` 参数设置为 `false`，聊天室所有者调用 `LeaveRoom` 方法离开聊天室时会提示该错误。
-- 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
+- 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
 - 新增 `Options#UseReplacedMessageContents` 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以收到替换后的内容。
 - 新增 `Message#IsContentReplaced` 属性判断文本消息的内容是否在文本审核过程中进行了替换。
 - 新增[置顶消息](message_pin.html)功能。
@@ -43,7 +43,7 @@
 - 添加 `Facility` 库，优化 DNS 获取逻辑，并支持数据上报。
 - 将 `ChatManager#SearchMsgFromDB(string, long, int, string, MessageSearchDirection, ValueCallBack<List<Message>>)` 方法从同步方式转换为异步方式。
 - 将 TCP 套接字从阻断模式转换为非阻断模式。
-- 支持使用消息 body 完成单条转发，无需重新上传附件。  
+- 支持使用消息 body 完成[单条转发](message_forward.html)，无需重新上传附件。  
 - 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。  
 - 在[聊天室成员进出时更新聊天室成员人数](room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。   
 - 优化 token 登录时的错误提示信息，使错误提示更精细。 
@@ -98,7 +98,7 @@
   - `Conversation#PinnedTime`：会话置顶时间戳。
 - [IM SDK] 新增 `ChatManager#FetchHistoryMessagesFromServerBy` 方法根据消息拉取参数配置类 `FetchServerMessagesOption` 从服务器获取历史消息。<br/>
   作废 `ChatManager#GetConversationsFromServer`。
-- 新增 `ChatManager#FetchHistoryMessagesFromServerBy` 方法[根据消息拉取参数配置类 `FetchServerMessagesOption` 从服务器获取历史消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
+- 新增 `ChatManager#FetchHistoryMessagesFromServerBy` 方法[根据消息拉取参数配置类 `FetchServerMessagesOption` 从服务器获取历史消息](message_retrieve.html#从服务器获取指定会话的消息)。
 - [IM SDK] 新增消息拉取参数配置类 `FetchServerMessagesOption`：
   - `FetchServerMessagesOption#IsSave`：获取的消息是否保存到数据库;
   - `FetchServerMessagesOption#Direction`：消息搜索方向;

@@ -7,7 +7,7 @@
 #### 新增特性
 
 - 新增 `EMChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
-- 新增[根据搜索范围搜索消息](message.search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
+- 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
   - `MessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
   - `EMChatManager#loadMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
   - `EMConversation#loadMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。
@@ -18,7 +18,7 @@
   - `EMChatManager#fetchConversationsByOptions`：根据 `ConversationFetchOptions` 选项从服务器分页查询会话列表。
   - `EMConversation#marks`：获取本地单个会话的所有标记。
   - `EMChatMultiDevicesEvent#CONVERSATION_UPDATE_MARK`：多设备场景下的会话标记事件。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
-- 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
+- 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
 - 新增 `EMChatOptions#useReplacedMessageContents` 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以收到替换后的内容。
 - 新增[置顶消息](message_pin.html)功能。
   - 新增 `EMChatManager#pinMessage` 方法，用于置顶消息。
@@ -136,7 +136,7 @@
     - 新增 `GroupManager#setMemberAttributes` 方法，用于设置群成员属性；
     - 新增 `GroupManager#fetchMemberAttributes` 和 `GroupManager#fetchMembersAttributes` 方法用于用户获取群成员属性；
     - 新增 `GroupEventHandler#onAttributesChangedOfGroupMember` 群成员属性变更回调;
-- 新增 `ChatManager#fetchHistoryMessagesByOption` 方法，用于[根据消息拉取参数配置类（`FetchMessageOptions`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的历史消息)。`FetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数；
+- 新增 `ChatManager#fetchHistoryMessagesByOption` 方法，用于[根据消息拉取参数配置类（`FetchMessageOptions`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的消息)。`FetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数；
 - 新增 `Conversation#deleteMessagesWithTs` 方法，用于从本地数据库中删除指定时间段内的消息；
 - 新增 `Message#deliverOnlineOnly` 属性用于设置只向在线用户投递消息；
 
