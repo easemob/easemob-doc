@@ -174,7 +174,7 @@ ChatClient.getInstance()
 你可以调用 `getMsgWithTimestamp` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
 
 :::tip
-要使用该方法，需将 SDK 升级至 1.4.0 或以上版本。
+要使用该方法，需将 SDK 升级至 V1.4.0 或以上版本。
 :::
 
 ```typescript
@@ -208,7 +208,7 @@ ChatClient.getInstance()
 你可以调用 `getMsgs` 获取本地指定会话中一定数量的消息。
 
 :::tip
-要使用该方法，需将 SDK 升级至 1.4.0 或以上版本。
+要使用该方法，需将 SDK 升级至 V1.4.0 或以上版本。
 :::
 
 ```typescript
