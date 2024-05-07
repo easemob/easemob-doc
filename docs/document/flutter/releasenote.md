@@ -4,7 +4,7 @@
 
 ## 版本 V4.5.0 2024-5-7
 
-#### 新增特性
+### 新增特性
 
 - 新增 `EMChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
 - 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
@@ -32,7 +32,7 @@
 - 加入聊天室时，若传入的聊天室 ID 不存在，可实现[自动创建聊天室](room_manage.html#加入聊天室)。
 - 消息修改回调 `EMChatEventHandler#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
 
-#### 优化
+### 优化
 
 - `EMChatManager#fetchConversation` 和 `EMChatManager#fetchPinnedConversations` 方法废弃，使用 `EMChatManager#fetchConversationsByOptions` 方法替代。
 - 支持使用消息 body 完成[单条转发](message_forward.html)，无需重新上传附件。
@@ -51,7 +51,7 @@
 - iOS 平台增加了隐私协议 `PrivacyInfo.xcprivacy`。
 - Android 平台适配 Android 14 Beta：适配以 Android 14 为目标平台时动态注册广播接收者必须设置 `RECEIVER_EXPORTED` 或者 `RECEIVER_NOT_EXPORTED` 的规定。
 
-#### 修复
+### 修复
 
 - 特殊场景下，SDK 退出后再登录会丢失聊天室监听事件问题。
 - 部分场景下群成员人数计算重复问题。
@@ -60,7 +60,7 @@
 
 ## 版本 V4.2.0 2024-1-4
 
-#### 新增特性
+### 新增特性
 
 - 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
 - 新增 `EMContactManager#fetchContacts` 和 `EMContactManager#fetchAllContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。从服务器一次性获取好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromServer` 已废弃，由 `fetchAllContactIds` 替换。
@@ -72,23 +72,23 @@
 - 新增 `EMOptions#enableEmptyConversation` 属性用于在初始化时配置获取会话列表时是否允许返回空会话。
 - 申请入群被拒绝的回调 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 decliner 和 applicant 参数表示申请者和拒绝者的用户 ID。
 
-#### 优化
+### 优化
 
 - 统一 Agora Token 和 EaseMob Token 登录方式，原 `EMClient#login` 方法废弃，使用 `EMClient#loginWithToken` 和 `EMClient#loginWithPassword` 方法代替。此外，新增 EaseMob Token 即将过期及已过期的回调，即 EaseMob Token 已过期或有效期过半时也返回 `EMConnectionEventHandler#onTokenDidExpire` 和 `EMClientDelegate#onTokenWillExpire` 回调。
 
-#### 修复
+### 修复
 
 - 修复网络恢复时重连 2 次的问题。
 - 修复未登录时调用 leaveChatroom 方法返回的错误提示不准确。
 
 ## 版本 V4.1.3 2023-11-1
 
-#### 新增
+### 新增
 
 - 支持安卓 14;
 - 新增 `EMOptions#enableHonorPush` 方法用于开启荣耀推送。
 
-#### 修复
+### 修复
 
 - 修复调用 `EMChatManager#getThreadConversation` 报错；
 - 修复 `EMMessage#chatThread` 方法报错;

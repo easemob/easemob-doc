@@ -4,7 +4,7 @@
 
 ## 版本 V1.3.0 Dev 2024-5-7 （开发版）
 
-#### 新增特性
+### 新增特性
 
 - 新增 `ChatManager#DeleteAllMessagesAndConversations` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
 - 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
@@ -37,7 +37,7 @@
 - 加入聊天室时，若传入的聊天室 ID 不存在，可实现[自动创建聊天室](room_manage.html#加入聊天室)。
 - 消息修改回调 `IChatManagerDelegate#OnMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
 
-#### 优化
+### 优化
 
 - 废弃 `SDKClient#LoginWithAgoraToken` 和 `SDKClient#Login` 方法，使用 `LoginWithToken` 方法替代。
 - 废弃 `SDKClient#RenewAgoraToken` 方法，使用 `RenewToken` 替代。
@@ -59,7 +59,7 @@
 - 单个日志文件大小由 2 MB 提升到 5 MB。 
 - iOS 平台增加了隐私协议 `PrivacyInfo.xcprivacy`。
 
-#### 修复
+### 修复
 
 - 数据库名称加密，但数据库中的内容仍为明文。该问题只存在于 Windows 平台的 Unity SDK 中。
 - 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
