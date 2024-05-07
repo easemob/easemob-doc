@@ -61,7 +61,7 @@ ChatClient.getInstance()
 ChatClient.getInstance()
   .chatManager.getConvMsgsWithKeyword({
     convId, // 会话ID。
-    convType, // 会话类型：个人、群组
+    convType, // 会话类型：单聊为 `PeerChat`，群聊为 `GroupChat`。
     keywords, // 搜索关键字
     direction, // 搜索方向
     timestamp, // 搜索消息的时间戳，从该时间戳开始按照搜索方向 `direction` 搜索。
