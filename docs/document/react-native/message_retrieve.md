@@ -149,7 +149,7 @@ ChatClient.getInstance()
 // timestamp: 消息搜索的起始时间戳，单位为毫秒。该参数设置后，SDK 从指定的时间戳的消息开始，按照搜索方向对消息进行搜索。若设置为负数，SDK 从当前时间开始，按消息时间戳的逆序搜索。
 // count: 每次搜索的消息数量。取值范围为 [1,400]。
 // sender：消息发送方。
-// isChatThread: 是否是话题类型
+// isChatThread: 是否是子区会话类型
 ChatClient.getInstance()
   .getMsgsWithMsgType({
     convId,
@@ -184,7 +184,7 @@ ChatClient.getInstance()
 // endTime：搜索的结束时间戳，单位为毫秒。
 // direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
 // count：每次获取的消息数量。取值范围为 [1,400]。
-// isChatThread: 是否是话题类型
+// isChatThread: 是否是子区会话类型
 ChatClient.getInstance()
   .getMsgWithTimestamp({
     convId,
@@ -217,7 +217,7 @@ ChatClient.getInstance()
 // startMsgId: 搜索的起始消息 ID。
 // direction: 消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
 // loadCount: 每次获取的消息数量。取值范围为 [1,400]。
-// isChatThread: 是否是话题类型
+// isChatThread: 是否是子区会话类型
 ChatClient.getInstance()
   .getMsgs({ convId, convType, startMsgId, direction, loadCount, isChatThread })
   .then((messages) => {
