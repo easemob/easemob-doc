@@ -47,7 +47,7 @@ ChatClient.getInstance()
   });
 ```
 
-若不支持 `fetchConversationsFromServerWithCursor`，你可以调用 `fetchConversationsFromServerWithPage` 接口从服务器获取会话列表。利用该接口，你总共可获取服务器最近 7 天内存储的 100 个会话。若提升这两个上限，需联系环信商务。
+若不支持 `fetchConversationsFromServerWithCursor`，你可以调用 `fetchConversationsFromServerWithPage` 接口从服务器获取会话列表。利用该接口，你总共可获取服务器存储的 100 个会话。若提升这两个上限，需联系环信商务。
 
 ### 获取本地所有会话
 

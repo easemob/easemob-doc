@@ -24,14 +24,14 @@
     case withAvatar = 2  
     case withNickName = 4
     case withDateAndTime = 8
-    case withMessageTopic = 16
+    case withMessageThread = 16
     case withMessageReaction = 32
 }
 // 若不显示，可将其隐藏。
-Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAvatar,.withNickName,.withDateAndTime,.withMessageTopic,.withMessageReaction]
+Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAvatar,.withNickName,.withDateAndTime,.withMessageThread,.withMessageReaction]
 
         if hiddenTopic {
-            Appearance.chat.contentStyle.removeAll { $0 == .withMessageTopic }
+            Appearance.chat.contentStyle.removeAll { $0 == .withMessageThread }
         }
         if hiddenReaction {
             Appearance.chat.contentStyle.removeAll { $0 == .withMessageReaction }
@@ -71,7 +71,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 消息引用特性默认开启，若不需要可将其隐藏，示例代码如下：
 
 ```Swift
-Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAvatar,.withNickName,.withDateAndTime,.withMessageTopic,.withMessageReaction]
+Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAvatar,.withNickName,.withDateAndTime,.withMessageThread,.withMessageReaction]
 
         if hiddenTopic {
             Appearance.chat.contentStyle.removeAll { $0 == .withReply }
@@ -147,12 +147,12 @@ Appearance.chat.contentStyle.append(.withMessageReaction)
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
-Thread 特性在 `Appearance.swift` 中默认关闭，即` Appearance.chat.contentStyle` 数组中默认不包含 `.withMessageTopic`。
+Thread 特性在 `Appearance.swift` 中默认关闭，即` Appearance.chat.contentStyle` 数组中默认不包含 `.withMessageThread`。
 
-要开启该特性，需在该数组中添加 `.withMessageReaction`。**注意不要重复添加**。
+要开启该特性，需在该数组中添加 `.withMessageThread`。**注意不要重复添加**。
 
 ```swift
-Appearance.chat.contentStyle.append(.withMessageTopic)
+Appearance.chat.contentStyle.append(.withMessageThread)
 
 ```
 
