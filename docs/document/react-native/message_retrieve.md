@@ -14,9 +14,9 @@
 
 - `fetchHistoryMessages`：从服务器分页获取指定会话的历史消息；
 - `getMessage`：根据消息 ID 获取本地消息；
-- `getMessagesWithMsgType`：获取本地指定会话中特定类型的消息；
-- `getMessageWithTimestamp` ：获取本地指定会话中一定时间段内的消息；
-- `getMessages`：获取本地指定会话中一定数量的消息；
+- `getMsgsWithMsgType`：获取本地指定会话中特定类型的消息；
+- `getMsgWithTimestamp` ：获取本地指定会话中一定时间段内的消息；
+- `getMsgs`：获取本地指定会话中一定数量的消息；
 - `getLatestMessage`：获取本地指定会话的最新消息；
 - `getLastReceivedMessage`：获取本地指定会话最新接收到的消息。
 
@@ -43,11 +43,12 @@
 - 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
 
 :::tip
+
 1. 若使用该 API，需将 SDK 版本升级至 V1.1.2 版本或以上。
 2. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需联系环信商务。**
 3. 历史消息和离线消息在服务器上的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。
 4. 各类事件通知发送时，若接收的用户离线，事件通知的存储时间与离线消息的存储时间一致，即也取决于你订阅的套餐包。
-:::
+   :::
 
 ```tsx
 // convId 会话 ID：单聊、群聊和聊天室分别为对端用户 ID、群组 ID 和聊天室 ID。
@@ -68,7 +69,7 @@ ChatClient.getInstance()
     options: options as ChatFetchMessageOptions,
   })
   .then((res) => {
-    console.log('fetchHistoryMessagesByOptions is success.', res);
+    console.log("fetchHistoryMessagesByOptions is success.", res);
   })
   .catch();
 ```
@@ -134,26 +135,28 @@ ChatClient.getInstance()
 
 ### 获取本地会话中特定类型的消息
 
-你可以调用 `getMessagesWithMsgType` 方法从本地存储中获取指定会话中特定类型的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
+你可以调用 `getMsgsWithMsgType` 方法从本地存储中获取指定会话中特定类型的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
 ```typescript
 // convId: 会话 ID。
 // convType：会话类型：单聊、群聊和聊天室分别为 `PeerChat`、`GroupChat` 和 `RoomChat`。
 // msgType: 消息类型。
-// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-// timestamp：消息搜索的起始时间戳，单位为毫秒。该参数设置后，SDK 从指定的时间戳的消息开始，按照搜索方向对消息进行搜索。若设置为负数，SDK 从当前时间开始，按消息时间戳的逆序搜索。
+// direction: 消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+// timestamp: 消息搜索的起始时间戳，单位为毫秒。该参数设置后，SDK 从指定的时间戳的消息开始，按照搜索方向对消息进行搜索。若设置为负数，SDK 从当前时间开始，按消息时间戳的逆序搜索。
 // count: 每次搜索的消息数量。取值范围为 [1,400]。
 // sender：消息发送方。
+// isChatThread: 是否是话题类型
 ChatClient.getInstance()
-  .getMessagesWithMsgType(
+  .getMsgsWithMsgType({
     convId,
     convType,
     msgType,
     direction,
     timestamp,
     count,
-    sender
-  )
+    sender,
+    isChatThread,
+  })
   .then((messages) => {
     console.log("get message success");
   })
@@ -164,7 +167,7 @@ ChatClient.getInstance()
 
 ### 获取一定时间内本地会话的消息
 
-你可以调用 `getMessageWithTimestamp` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
+你可以调用 `getMsgWithTimestamp` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
 
 ```typescript
 // convId：会话 ID。
@@ -173,15 +176,17 @@ ChatClient.getInstance()
 // endTime：搜索的结束时间戳，单位为毫秒。
 // direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
 // count：每次获取的消息数量。取值范围为 [1,400]。
+// isChatThread: 是否是话题类型
 ChatClient.getInstance()
-  .getMessageWithTimestamp(
+  .getMsgWithTimestamp({
     convId,
     convType,
     startTime,
     endTime,
     direction,
-    count
-  )
+    count,
+    isChatThread,
+  })
   .then((messages) => {
     console.log("get message success");
   })
@@ -192,16 +197,17 @@ ChatClient.getInstance()
 
 ### 获取本地会话中一定数量的消息
 
-你可以调用 `getMessages` 获取本地指定会话中一定数量的消息。
+你可以调用 `getMsgs` 获取本地指定会话中一定数量的消息。
 
 ```typescript
 // convId: 会话 ID。
 // convType：会话类型。
 // startMsgId: 搜索的起始消息 ID。
-// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
+// direction: 消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
 // loadCount: 每次获取的消息数量。取值范围为 [1,400]。
+// isChatThread: 是否是话题类型
 ChatClient.getInstance()
-  .getMessages(convId, convType, startMsgId, direction, loadCount)
+  .getMsgs({ convId, convType, startMsgId, direction, loadCount, isChatThread })
   .then((messages) => {
     console.log("get message success");
   })
@@ -247,4 +253,3 @@ ChatClient.getInstance()
     console.log("get message fail.", reason);
   });
 ```
-
