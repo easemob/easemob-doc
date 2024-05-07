@@ -2,7 +2,7 @@
 
 <Toc />
 
-## 4.5.0 2024-4-26
+## 4.5.0 2024-5-7
 
 #### 新增特性
 
@@ -29,6 +29,7 @@
   - 新增 `EMChatMessage#pinInfo` 方法，展示消息的置顶详情。
   - 新增 `EMChatEventHandler#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - 新增 `EMOptions#messagesReceiveCallbackIncludeSend` 开关。开启后，在 `EMChatEventHandler#onMessagesReceived` 回调里增加发送成功的消息。
+- 加入聊天室时，若传入的聊天室 ID 不存在，可实现[自动创建聊天室](room_manage.html#加入聊天室)。
 - 消息修改回调 `EMChatEventHandler#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
 
 #### 优化
