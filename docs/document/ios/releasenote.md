@@ -24,7 +24,7 @@
 
 ## 版本 V4.5.0 Dev 2024-04-03（开发版）
 
-## 新增特性
+### 新增特性
 
 - [IM SDK] 新增[置顶消息功能](message_pin.html)。
   - 新增 `EMChatManager#pinMessage:completion:` 方法，用于置顶消息。
@@ -39,7 +39,7 @@
 - [IM SDK] 新增 `EMChatManager#markAllConversationsAsRead` 方法[将所有会话的未读消息设为已读](conversation_unread.html#将所有会话的未读消息数清零)。
 - [IM SDK] 消息修改回调 `EMChatManagerDelegate#onMessageContentChanged:operatorId:operationTime` 中支持[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
 
-## 优化
+### 优化
 
 - [IM SDK] 支持使用消息 body 完成[单条转发](message_forward.html#转发单条消息)，附件消息无需重新上传附件。
 - [IM SDK] 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。

@@ -4,7 +4,7 @@
 
 ## 版本 V1.4.0 2024-5-7
 
-#### 新增特性
+### 新增特性
 
 - 新增 `ChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
 - 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `ChatMessageSearchScope` 中的搜索范围。
@@ -33,7 +33,7 @@
 - 加入聊天室时，若传入的聊天室 ID 不存在，可实现[自动创建聊天室](room_manage.html#加入聊天室)。
 - 消息修改回调 `ChatMessageEventListener#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
 
-#### 优化
+### 优化
 
 - 支持使用消息 body 完成[单条转发](message_forward.html)，无需重新上传附件。
 - 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。
@@ -58,7 +58,7 @@
   - `getMessagesWithMsgType`: `getConvMsgsWithMsgType`替换该接口。
   - `searchMsgFromDB`: `getMsgsWithMsgType`替换该接口。
 
-#### 修复
+### 修复
 
 - 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
 - 特殊场景下，SDK 退出后再登录会丢失聊天室监听事件问题。
@@ -70,7 +70,7 @@
 
 ## 版本 V1.3.0 2024-1-4
 
-#### 新增特性
+### 新增特性
 
 - 依赖的原生 SDK 升级到版本（`iOS` 4.2.0 和`Android` 4.2.1）。添加原生 SDK 提供的新功能。
 - 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
