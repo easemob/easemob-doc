@@ -8,11 +8,8 @@
 
 与[快速开始中的初始化](chatuikit_quickstart.html##第一步-初始化)相比，这里增加了 `ChatOptions` 的参数，包括 SDK 中是否打印日志、是否自动登录以及是否默认使用用户属性的开关配置。
 
-```
-let error = EaseChatUIKitClient.shared.setup(
-    with: "Your appkey",
-    option: EaseChatUIKitInitialOptions.ChatOptions()
-)
+```Swift
+let error = EaseChatUIKitClient.shared.setup(option: ChatOptions(appkey: appKey))
 ```
 
 ## 登录
@@ -228,15 +225,17 @@ ControllerStack.toDestination(vc: vc)
 你可以调用 `registerUserStateListener` 方法监听 EaseChatUIKit 中用户以及与服务器之间的连接状态变更的相关事件和错误。
 
 ```
-EaseChatUIKitClient.shared.registerUserEventsListener(self)
+EaseChatUIKitClient.shared.registerUserStateListener(self)
 ```
 
-不使用该监听时，可调用 `unregisterUserEventsListener` 方法移除：
+不使用该监听时，可调用 `unregisterUserStateListener` 方法移除：
 
 ```
-EaseChatUIKitClient.shared.unregisterUserEventsListener(self)
+EaseChatUIKitClient.shared.unregisterUserStateListener(self)
 ```
 
-## 更多进阶用法请参考Demo中源码
+## 更多
 
-https://github.com/zjc19891106/chat-ios/tree/SwiftDemo
+更多进阶用法，请参考 [Demo 中源码](https://github.com/zjc19891106/chat-ios/tree/SwiftDemo)。
+
+
