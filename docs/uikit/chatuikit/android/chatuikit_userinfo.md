@@ -27,55 +27,6 @@ EaseIM.login(
 )
 ```
 
-## 会话列表信息提供
-
-单群聊 UIKit 提供 `EaseIM.setConversationInfoProvider` 接口进行会话列表信息的提供。
-
-`EaseConversationInfoProvider` 接口如下所示：
-
-```kotlin
-interface EaseConversationInfoProvider {
-    // 同步获取会话信息
-    fun getProfile(id: String?, type: ChatConversationType = ChatConversationType.Chat): EaseProfile?
-
-    // 异步获取会话信息
-    fun fetchProfiles(idsMap: Map<ChatConversationType, List<String>>, onValueSuccess: OnValueSuccess<List<EaseProfile>>)
-}
-```
-
-使用方法如下所示：
-
-```kotlin
-EaseIM.setConversationInfoProvider(object : EaseConversationInfoProvider {
-    // 同步获取会话信息
-    override fun getProfile(id: String?, type: ChatConversationType): EaseProfile? {
-        return when(type) {
-            ChatConversationType.Chat ->{
-                // 可以从本地数据库或者缓存中获取用户信息，并返回，不可进行异步操作。
-                loadUserInfoFromLocal(id)
-            }
-
-            ChatConversationType.GroupChat -> {
-                // 可以从本地数据库或者缓存中获取群组信息，并返回，不可进行异步操作。
-                loadGroupInfoFromLocal(id)
-            }
-
-            else -> null
-        }
-        return null
-    }
-
-    override fun fetchProfiles(
-        idsMap: Map<ChatConversationType, List<String>>,
-        onValueSuccess: OnValueSuccess<List<EaseProfile>>
-    ) {
-        fetchProfilesFromServer(idsMap, onValueSuccess)
-    }
-
-})
-
-```
-
 ## 联系人信息提供
 
 单群聊 UIKit 提供 `EaseIM.setUserProfileProvider` 接口进行联系人信息的提供。

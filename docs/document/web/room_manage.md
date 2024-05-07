@@ -14,6 +14,7 @@
 
 - 创建聊天室；
 - 从服务器获取聊天室列表；
+- 获取当前用户加入的聊天室列表；
 - 加入聊天室；
 - 获取聊天室详情；
 - 解散聊天室；
@@ -83,6 +84,21 @@ let option = {
     message: 'reason'
 }
 conn.joinChatRoom(option).then(res => console.log(res))
+```
+
+### 获取当前用户加入的聊天室列表
+
+你可以调用 `getJoinedChatRooms` 方法获取当前用户加入的聊天室列表，示例代码如下：
+
+```javascript
+conn
+  .getJoinedChatRooms({
+    pageNum: 1,
+    pageSize: 20
+  })
+  .then((res) => {
+    console.log(res);
+  });
 ```
 
 ### 获取聊天室详情

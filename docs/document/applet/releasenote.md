@@ -2,6 +2,18 @@
 
 <Toc />
 
+## 版本 V4.7.0 Dev 2024-04-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 `getJoinedChatRooms` 方法，用于[获取当前用户加入的聊天室列表](room_manage.html#获取当前用户加入的聊天室列表)。
+- [IM SDK] [撤回消息](message_recall.html#实现方法)接口 `recallMessage` 中新增 `ext` 参数，支持传入自定义字符串，设置扩展信息。
+- [IM SDK] SDK logger 中新增 `setConsoleLogVisibility` 方法，用于[设置日志是否输出到控制台](initialization.html#输出信息到日志文件)。
+
+### 修复
+
+- [IM SDK] 修复消息 `allowGroupAck` 状态错误问题。
+
 ## 版本 V4.6.0 Dev 2024-04-02（开发版）
 
 ### 新增特性

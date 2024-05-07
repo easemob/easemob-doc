@@ -19,7 +19,7 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x840) 
+![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x840)
 
 使用默认参数时的示例代码如下：
 
@@ -36,9 +36,6 @@ export function ConversationListScreen(props: Props) {
       }}
     >
       <ConversationList
-        containerStyle={{
-          flexGrow: 1,
-        }}
         onClickedSearch={() => {
           // 跳转到搜索页面
           navigation.push("SearchConversation", {});
@@ -77,15 +74,16 @@ export function ConversationListScreen(props: Props) {
 | ------------------------ | --------- | -------- | ---------------------------------------------------------------------- |
 | containerStyle           | object    | 否       | 修改组件样式。                                                         |
 | onSort                   | function  | 否       | 自定义列表排序策略。                                                   |
-| onClickedNewConversation | function  | 否       | 点击创建新会话按钮的回调。                                             |
-| onClickedNewGroup        | function  | 否       | 点击创建群组按钮的回调。                                               |
-| onClickedNewContact      | function  | 否       | 点击添加联系人按钮的回调。                                             |
+| onClickedNewConversation | function  | 否       | 点击创建新会话按钮的回调。可能用到路由。                               |
+| onClickedNewGroup        | function  | 否       | 点击创建群组按钮的回调。可能用到路由。                                 |
+| onClickedNewContact      | function  | 否       | 点击添加联系人按钮的回调。 可能用到路由。                              |
 | ListItemRender           | function  | 否       | 自定义会话列表项的组件。可以实现修改布局、样式、是否可见等。           |
 | onStateChanged           | function  | 否       | 列表组件状态通知。包括：加载失败、列表为空等。                         |
 | propsRef                 | reference | 否       | 列表组件的引用对象，可以主动添加、修改、删除会话列表项，注意操作条件。 |
 | onInitNavigationBarMenu  | function  | 否       | 自定义列表导航栏，可以修改样式、事件行为等。                           |
 | onInitBottomMenu         | function  | 否       | 注册菜单项，自定义菜单。                                               |
 | filterEmptyConversation  | function  | 否       | 是否过滤空会话。                                                       |
+| onChangeUnreadCount      | function  | 否       | 未读消息总数变更的回调通知。                                           |
 
 ## 头像和昵称
 
@@ -93,8 +91,8 @@ export function ConversationListScreen(props: Props) {
 
 可通过以下方式提供头像和昵称：
 
-- 注册回调：使用 `Container` 组件的 `onRequestMultiData` 属性实现。
-- 主动调用：使用 `ChatService.updateRequestData` 方法实现。调用该方法会触发内部事件分发，刷新已加载的组件页面。
+- 注册回调：使用 `Container` 组件的 `onUsersHandler` 和 `onGroupsHandler` 属性实现。
+- 主动调用：使用 `ChatService.updateDataList` 方法实现。调用该方法会触发内部事件分发, 还可以自定义分发句柄，刷新已加载的组件页面。
 
 :::tip
 无论哪种更新方式，都会更新缓存数据，主动更新还会触发 UI 组件刷新。

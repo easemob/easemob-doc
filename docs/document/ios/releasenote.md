@@ -2,6 +2,26 @@
 
 <Toc />
 
+## 版本 V4.6.0 Dev 2024-04-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 `filterConversationsFromDB` 方法，支持[自定义筛选获取本地会话列表](conversation_list.html#获取本地所有或筛选的会话)。
+- [IM SDK] 新增 `cleanConversationsMemoryCache` 方法，[清除本地内存中的所有会话](conversation_list.html#清除内存中的会话)释放内存。
+- [IM SDK] 新增 `EMOptions#autoLoadConversations` 方法，[设置是否在登录成功后将数据库中的所有会话自动加载到缓存](conversation_list.html#一次性获取本地所有会话)。
+- [IM SDK] 新增 `recallMessageWithMessageId:ext:completion:` 方法，[支持消息撤回时携带自定义信息](message_recall.html#实现方法)。
+- [IM SDK] 消息撤回事件 `messagesInfoDidRecall` 的 `EMRecallMessageInfo` 对象中新增 `recallMessageId` 属性，[支持离线期间撤回的消息通知给接收方](message_recall.html#设置消息撤回监听)。
+
+### 修复
+
+[IM SDK] 修复 Web 端在聊天室中发送会话已读回执（channel ack）时，移动端 SDK 会新增会话且会话类型错误的问题。
+
+### 重大变更
+
+从 V4.6.0 版本开始会启用 Swift 语言编写的新的 `EaseChatUIKit` 与 `EaseChatDemo`，老版本 Demo 和 UIKit 逐渐不再维护，请参考：
+- [UIKit 文档](https://doc.easemob.com/uikit/chatuikit/ios/chatuikit_overview.html)
+- [Demo 源码](https://github.com/easemob/chat-ios/tree/SwiftDemo)
+
 ## 版本 V4.5.0 Dev 2024-04-03（开发版）
 
 ## 新增特性
@@ -155,7 +175,7 @@
 - [IM SDK] 新增置顶服务器会话的功能：
     - 新增 `IEMChatManager#pinConversation:completionBlock:` 方法，实现[置顶或取消置顶服务器会话](conversation_pin.html#置顶-取消置顶会话)：
     - 新增 `IEMChatManager#getPinnedConversationsFromServerWithCursor:pageSize:completion` 方法，实现[获取置顶的服务器会话](conversation_pin.html#获取服务端的置顶会话列表)。
-- [IM SDK] 新增 `IEMChatManager#getAllConversations:` 方法，实现[从本地获取排序后的会话列表](conversation_list.html#获取本地所有会话)。
+- [IM SDK] 新增 `IEMChatManager#getAllConversations:` 方法，实现[从本地获取排序后的会话列表](conversation_list.html#获取本地会话)。
 - [IM SDK] 新增在群组或聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)功能。
 
 ### 优化

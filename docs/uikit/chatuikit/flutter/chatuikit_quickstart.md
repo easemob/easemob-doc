@@ -36,22 +36,6 @@ NSMicrophoneUsageDescription
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 ```
 
-3. `em_chat_uikit` 用到的三方库如下所示，已经添加到单群聊 UIKit 中，你不需要重复添加：
-
-```xml
-  im_flutter_sdk: ^4.2.0
-  flutter_sound_record: ^3.3.2
-  shared_preferences: ^2.2.2
-  chat_uikit_theme: ^0.0.3
-  path_provider: ^2.1.1
-  file_picker: ^6.1.1
-  audioplayers: ^5.2.1
-  image_picker: ^1.0.5
-  video_thumbnail: ^0.5.3
-  video_player: ^2.7.2
-  flutter_localization: ^0.2.0
-  scroll_to_index: ^3.0.1
-```
 
 ## 实现发送第一条单聊消息
 

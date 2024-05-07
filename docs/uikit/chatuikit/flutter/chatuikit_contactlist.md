@@ -12,7 +12,7 @@
 
 ### 添加联系人列表
 
-添加会话列表时，只需要将 `ConversationsView` 添加到页面上即可。
+添加会话列表时，只需要将 `ContactsView` 添加到页面上即可。
 
 ```dart
 @override

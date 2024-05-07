@@ -136,8 +136,8 @@
     <tr>
       <td rowspan="6">会话管理</td>
       <td rowspan="2">会话列表</td>
-      <td>获取本地所有会话 </td>
-      <td><a href="https://doc.easemob.com/document/ios/conversation_list.html#获取本地所有会话">获取本地所有会话</a></td>
+      <td>获取本地会话 </td>
+      <td><a href="https://doc.easemob.com/document/ios/conversation_list.html#获取本地会话">获取本地会话</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
