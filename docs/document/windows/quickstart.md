@@ -44,7 +44,7 @@
 
 你可以参考以下步骤集成 SDK：
 
-1. 下载：点击 [Windows SDK](https://downloadsdk.easemob.com/downloads/SDK/WinSDK/agora_chat_sdk.1.0.9.nupkg) 进行下载，下载的 `NuGet` 包一般存放在 `C:\Users\XXX\Downloads` (`XXX` 为本机用户名)；
+1. 下载：点击 [Windows SDK](https://www.easemob.com/download/im) 进行下载，下载的 `NuGet` 包一般存放在 `C:\Users\XXX\Downloads` (`XXX` 为本机用户名)；
 2. 将下载的 `NuGet` 包拷贝到自己的工作目录，比如 `D:\workspace\WinSDK` 下，以下说明以此目录举例；
 3. 在 Visual Studio 开发环境里，右键点击 `windows-example` 项目，选择 **管理 NuGet 程序包 (N)...**；
 4. 在弹出的 `NuGet:windows-example` tab 页面里，点击右上角的小齿轮会弹出 NuGet 程序包源的设置窗体，点击窗体右上角的 **+** 按钮，在 **包源** 的文本框内会出现 **Package source** 这一栏，点击选中，并修改文本框下的 **名称** 和 **源**。例如 **名称** 可以设置为 `Local Package source`，**源** 则设置为第 2 步中的目录， `D:\workspace\WinSDK`，点击确定；
@@ -116,6 +116,19 @@ SDKClient.Instance.Login(UserIdTextBox.Text,  PasswordTextBox.Text, false, callb
      {
        AddLogToLogText($"sign in sdk failed, code: {code}, desc: {desc}");
      }
+));
+
+// 说明：从1.3.0版本之后，建议使用LoginWithToken替代Login。PasswordTextBox中的内容需要由输入密码改为输入token
+SDKClient.Instance.LoginWithToken(UserIdTextBox.Text, PasswordTextBox.Text, callback: new CallBack(
+    onSuccess: () =>
+    {
+         AddLogToLogText("sign in sdk succeed");
+    },
+
+    onError: (code, desc) =>
+    {
+        AddLogToLogText($"sign in sdk failed, code: {code}, desc: {desc}");
+    }
 ));
 ```
 
@@ -261,6 +274,14 @@ public void OnConversationRead(string from, string to)
 public void MessageReactionDidChange(List<MessageReactionChange> list)
 {
 }
+
+public void OnMessageContentChanged(Message msg, string operatorId, long operationTime)
+{
+}
+// added in 1.3.0
+public void OnMessagePinChanged(string messageId, string conversationId, bool isPinned, string operatorId, long operationTime)
+{
+}
 ```
 
 在 `AddChatDelegate` 函数中添加以下代码，以将 `MainWindow` 对象实例加入到监听列表中
@@ -274,7 +295,6 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(this);
 ```csharp
 SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 ```
-
 
 ### 9.测试修改后的项目
 

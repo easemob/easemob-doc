@@ -67,7 +67,7 @@
 
 你可以参考以下步骤集成 SDK：
 
-1. [下载 Unity SDK](https://downloadsdk.easemob.com/downloads/SDK/Unity/agora_chat_unity_sdk1.0.9.unitypackage)。
+1. [下载 Unity SDK](https://www.easemob.com/download/im)。
 2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 unitypackage 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
 
@@ -135,6 +135,20 @@ SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, cal
     AddLogToLogText($"sign in sdk failed, code: {code}, desc: {desc}");
   }
 ));
+
+// 说明：从 1.3.0 版本之后，建议使用 LoginWithToken 替代 Login。Password.text中的内容需要由输入密码改为输入token
+SDKClient.Instance.LoginWithToken(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
+    onSuccess: () =>
+    {
+         AddLogToLogText("sign in sdk succeed");
+    },
+
+    onError: (code, desc) =>
+    {
+        AddLogToLogText($"sign in sdk failed, code: {code}, desc: {desc}");
+    }
+));
+
 ```
 
 ### 6. 登出账号
@@ -262,6 +276,14 @@ public void OnConversationRead(string from, string to)
 }
 
 public void MessageReactionDidChange(List<MessageReactionChange> list)
+{
+}
+
+public void OnMessageContentChanged(Message msg, string operatorId, long operationTime)
+{
+}
+// added in 1.3.0
+public void OnMessagePinChanged(string messageId, string conversationId, bool isPinned, string operatorId, long operationTime)
 {
 }
 ```

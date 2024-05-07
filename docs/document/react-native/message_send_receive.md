@@ -106,13 +106,15 @@ if (msg.chatType === ChatMessageChatType.ChatRoom) {
 ChatClient.getInstance().chatManager.sendMessage(msg!, callback).then().catch();
 ```
 
+若初始化时打开了 `ChatOptions#useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
+
 ### 接收消息
 
 你可以用注册监听 `ChatMessageEventListener` 接收消息。
 
 该监听可添加多次，可在不需要的时移除。
 
-在新消息到来时，你会收到 `onMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
+在新消息到来时，你会收到 `onMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `ChatOptions#messagesReceiveCallbackIncludeSend` 开关，则该回调中会返回发送成功的消息。
 
 对于聊天室消息，你可以通过消息的 `ChatMessage.isBroadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
