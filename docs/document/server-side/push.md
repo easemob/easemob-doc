@@ -1015,7 +1015,7 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/template' \
             "name":"hxtest"
         },
          "em_push_ext":{
-                "group_user_nickname":"法外狂徒"
+                "group_user_nickname":"Jane"
             }
     }
 }
@@ -1092,7 +1092,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'
             "name": "hxtest"
         },
         "em_push_ext":{
-                "group_user_nickname":"法外狂徒"
+                "group_user_nickname":"Jane"
             }
     },        
     "routetype":"ROUTE_ONLINE"
