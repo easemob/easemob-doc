@@ -531,6 +531,18 @@ message.chatType = EMChatTypeChat;
 - `{$fromNickname}`：推送昵称。  
 - `{$msg}`：消息内容。
 
+群昵称即群成员在群组中的昵称，群成员在发送群消息时通过扩展字段设置，JSON 结构如下：
+
+```json
+  {
+    "ext":{
+            "em_push_ext":{
+                "group_user_nickname":"Jane"
+            }
+        }
+  }      
+```   
+
 内置参数的介绍，详见[环信即时通讯控制台文档](/product/enable_and_configure_IM.html#使用默认推送模板)。
 
 这种方式的示例代码与“使用固定内容的推送模板”的相同。

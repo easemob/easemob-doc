@@ -185,6 +185,18 @@
   # content: {0} = "欢迎使用im-push" {1} = "加油"
   ```    
 
+  群昵称即群成员在群组中的昵称，群成员在发送群消息时通过扩展字段设置，JSON 结构如下：
+
+```json
+  {
+    "ext":{
+            "em_push_ext":{
+                "group_user_nickname":"Jane"
+            }
+        }
+  }      
+```   
+
   ![img](@static/images/product/push/push_template_add.png)
 
 ### 使用自定义推送模板
