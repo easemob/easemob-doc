@@ -1090,10 +1090,11 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'
     "ext": {
         "em_push_template": {
             "name": "hxtest"
-        }
+        },
         "em_push_ext":{
                 "group_user_nickname":"法外狂徒"
             }
+    },        
     "routetype":"ROUTE_ONLINE"
 }'
 ```
