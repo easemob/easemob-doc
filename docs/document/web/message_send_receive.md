@@ -786,7 +786,7 @@ connection
 
 下面以文本消息为例介绍如何发送定向消息，示例代码如下：
 
-```javaScript
+```javascript
 // 发送定向文本消息。
 function sendTextMessage() {
   let option = {
