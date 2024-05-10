@@ -118,4 +118,4 @@
 | ------------ | ---- |
 | 海外加速节点 | 全球 |
 
-节点价格请查看[价格页](https://www.easemob.com/pricing/im#p12)。
+节点价格请查看[价格页](https://www.easemob.com/pricing/im)。
