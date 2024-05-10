@@ -58,6 +58,8 @@ export default function Home() {
 }
 ```
 
+- 按需导入 SDK 文件。
+
 如果对 SDK 大小有要求，可根据功能按需导入 SDK 文件。
 
 | 功能             | 导入文件                                                                      | 使用方式                                              |

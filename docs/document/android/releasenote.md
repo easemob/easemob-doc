@@ -38,7 +38,7 @@
   - 新增 `EMChatManager#asyncUnPinMessage` 方法，用于取消置顶消息。
   - 新增 `EMChatManager#asyncGetPinnedMessagesFromServer` 方法，从服务器获取指定会话的置顶消息。
   - 新增 `EMConversation#pinnedMessages` 方法，返回会话下的所有置顶消息。
-  - 新增 `EMMessagePinInfo` 类，包含置顶以及取消置顶的操作者以及操作时间。
+  - 新增 `EMMessagePinInfo` 类，包含消息置顶的操作者以及置顶时间。
   - 新增 `EMChatMessage#pinnedInfo` 方法，展示消息的置顶详情。
   - 新增 `EMMessageListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - [IM SDK] 消息修改回调 `com.hyphenate.EMMessageListener#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。

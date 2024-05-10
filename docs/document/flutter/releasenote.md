@@ -25,7 +25,7 @@
   - 新增 `EMChatManager#unpinMessage` 方法，用于取消置顶消息。
   - 新增 `EMChatManager#fetchPinnedMessages` 方法，从服务器获取指定会话的置顶消息。
   - 新增 `EMConversation#loadPinnedMessages` 方法，返回会话下的所有置顶消息。
-  - 新增 `MessagePinInfo` 类，包含置顶以及取消置顶的操作者以及操作时间。
+  - 新增 `MessagePinInfo` 类，包含消息置顶的操作者以及置顶时间。
   - 新增 `EMChatMessage#pinInfo` 方法，展示消息的置顶详情。
   - 新增 `EMChatEventHandler#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - 新增 `EMOptions#messagesReceiveCallbackIncludeSend` 开关。开启后，在 `EMChatEventHandler#onMessagesReceived` 回调里增加发送成功的消息。

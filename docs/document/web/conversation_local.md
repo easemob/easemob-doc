@@ -2,7 +2,7 @@
 
 环信即时通讯 IM Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 `LocalCache` 模块对本地会话数据进行管理，支持现代浏览器，例如 Chrome、Firefox、Safari 以及使用这些引擎的其他浏览器（例如 Microsoft Edge），**不支持 Internet Explorer（IE）浏览器**。
 
-使用环信即时通讯 IM Web SDK 时，要支持本地会话存储，需要集成本地存储插件。**该插件只支持通过按需导入的方式集成**。
+使用环信即时通讯 IM Web SDK 时，要支持本地会话存储，需要集成本地存储插件。**该插件只支持通过[按需导入](overview.html#引入-sdk)的方式集成**。
 
 示例代码如下：
 
@@ -140,7 +140,9 @@ miniCore.localCache.clearConversationUnreadCount(options).then(()=>{
 
 ### 删除单个本地会话
 
-你可以调用 `removeLocalConversation` 方法删除单个本地会话，示例代码如下：
+你可以调用 `removeLocalConversation` 方法删除单个本地会话。会话删除后，其他用户不受影响。
+
+示例代码如下：
 
 ```javascript
 const options = {

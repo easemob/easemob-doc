@@ -31,7 +31,7 @@
   - 新增 `EMChatManager#unpinMessage:completion:` 方法，用于取消置顶消息。
   - 新增 `EMChatManager#getPinnedMessagesFromServer:completion:` 方法，用于从服务器获取指定会话的置顶消息。
   - 新增 `EMConversation#pinnedMessages` 属性，用于返回会话下的所有置顶消息。
-  - 新增 `EMMessagePinInfo` 类，包含置顶以及取消置顶的操作者以及操作时间。
+  - 新增 `EMMessagePinInfo` 类，包含消息置顶的操作者以及置顶时间。
   - 新增 `EMChatMessage#pinnedInfo` 属性，展示消息的置顶详情。
   - 新增 `EMMessageListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。 
 - [IM SDK] 加入聊天室时，若传入的聊天室 ID 不存在，可实现[自动创建聊天室](room_manage.html#加入聊天室)。

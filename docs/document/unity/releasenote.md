@@ -27,7 +27,7 @@
   - 新增 `ChatManager#GetPinnedMessagesFromServer` 方法，从服务器获取指定会话的置顶消息。
   - 新增 `Conversation#PinnedMessages` 方法，返回本地会话下的所有置顶消息。
   - 新增 `Message#PinnedInfo` 方法，展示消息的置顶详情。
-  - 新增 `PinnedInfo` 类，包含置顶以及取消置顶的操作者以及操作时间。
+  - 新增 `PinnedInfo` 类，包含消息置顶的操作者以及置顶时间。
   - 新增 `IChatManagerDelegate#OnMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - 新增 `Options#EnableEmptyConversation` 开关用于在初始化时配置获取会话列表时是否允许返回空会话。
 - 申请入群被拒绝的回调 `IGroupManagerDelegate#OnRequestToJoinDeclinedFromGroup` 中新增 `applicant` 和 `decliner` 参数表示申请者和拒绝者的用户 ID。 
