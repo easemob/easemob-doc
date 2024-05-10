@@ -26,7 +26,7 @@
   - 新增 `ChatManager#unpinMessage` 方法，用于取消置顶消息。
   - 新增 `ChatManager#fetchPinnedMessages` 方法，从服务器获取指定会话的置顶消息。
   - 新增 `ChatConversation#getPinnedMessages` 方法，返回会话下的所有置顶消息。
-  - 新增 `ChatMessagePinInfo` 类，包含置顶以及取消置顶的操作者以及操作时间。
+  - 新增 `ChatMessagePinInfo` 类，包含消息置顶的操作者以及置顶时间。
   - 新增 `ChatMessage#pinInfo` 方法，展示消息的置顶详情。
   - 新增 `ChatMessageEventListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - 新增 `ChatOptions#messagesReceiveCallbackIncludeSend` 开关。开启后，在 `ChatMessageEventListener#onMessagesReceived` 回调里增加发送成功的消息。
