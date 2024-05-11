@@ -40,9 +40,13 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
  }
 ```
 
-## EaseChatUIKitContext中的Provider
+## EaseChatUIKitContext 中的 Provider
 
-1.设置Provider实现类
+:::tip
+Provider 仅用于会话列表以及联系人列表。若只通过快速开始进入聊天页面，则不需要实现 Provider。
+:::
+
+1.设置 Provider 实现类
 
 - 使用协程异步返回会话列表相关信息，仅限于 Swift 下使用。
 
@@ -180,6 +184,7 @@ extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
 ## 会话列表页面
 
 1.创建会话列表页面
+
 ```Swift
     
         let vc = EaseChatUIKit.ComponentsRegister.shared.ConversationsController.init()
@@ -187,6 +192,7 @@ extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
 ```
 
 2.监听会话列表页面事件
+
 ```Swift
         
         vc.viewModel?.registerEventsListener(listener: self)
