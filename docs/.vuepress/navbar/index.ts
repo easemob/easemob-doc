@@ -216,7 +216,7 @@ export const zhNavbar = navbar([
           {
             text: "Java",
             icon: "/icon-platform.svg",
-            link: "https://easemob.github.io/easemob-im-server-sdk/",
+            link: "https://github.com/easemob/easemob-im-server-sdk/tree/master_java_2.0/src/test/java/com/easemob/im/api",
           },
           {
             text: "PHP",
