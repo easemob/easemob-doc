@@ -35,10 +35,10 @@ EaseIM.login(
 
 ```kotlin
 interface EaseUserProfileProvider {
-    // 同步获取联系人信息
+    // 同步获取用户信息
     fun getUser(userId: String?): EaseProfile?
 
-    // 异步获取联系人信息
+    // 异步获取用户信息
     fun fetchUsers(userIds: List<String>, onValueSuccess: OnValueSuccess<List<EaseProfile>>)
 }
 ```
@@ -47,7 +47,6 @@ interface EaseUserProfileProvider {
 
 ```kotlin
 EaseIM.setUserProfileProvider(object : EaseUserProfileProvider {
-    // 同步获取会话信息
     override fun getUser(userId: String?): EaseProfile? {
         return getLocalUserInfo(userId)
     }
