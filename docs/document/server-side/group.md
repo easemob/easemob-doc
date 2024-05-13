@@ -315,7 +315,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `allowinvites`        | Bool   | 否       | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群；<br/> - `false`：只有群主或群管理员才可以邀请用户入群。 |
 | `invite_need_confirm` | Bool   | 否       | 受邀人加入群组前是否需接受入群邀请：<br/> - `true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
 | `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。                                                             |
-| `public`              | Bool   | 是       | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                                                                   |
+| `public`              | Bool   | 否       | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                                                                   |
 
 #### HTTP 响应
 
