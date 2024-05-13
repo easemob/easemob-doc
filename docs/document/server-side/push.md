@@ -58,14 +58,14 @@
 ### HTTP 请求
 
 ```
-PUT https://{host}/{org_name}/{app_name}/users/{username}/push/binding
+PUT https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 描述   | 是否必需 | 
 | :--------- | :----- | :------- | :------------------ |
-| `username` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 当前用户的用户 ID。    | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -163,14 +163,14 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 ### HTTP 请求
 
 ```
-GET https://{host}/{org_name}/{app_name}/users/{username}/push/binding
+GET https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 描述   | 是否必需 | 
 | :--------- | :----- | :------- | :------------------ |
-| `username` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 当前用户的用户 ID。    | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -228,14 +228,14 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/users/{username}
+PUT https://{host}/{org_name}/{app_name}/users/{userId}
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 描述   | 是否必需 | 
 | :--------- | :----- | :------- | :------------------ |
-| `username` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 当前用户的用户 ID。    | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -321,14 +321,14 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX  \
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/users/{username}
+PUT https://{host}/{org_name}/{app_name}/users/{userId}
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 描述   | 是否必需 | 
 | :--------- | :----- | :------- | :------------------ |
-| `username` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 当前用户的用户 ID。    | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -421,14 +421,14 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
+PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 描述                                                                                        | 是否必需 |
 | :--------- | :----- | :------------------------------------------------------------------------------------------ | :------- |
-| `username` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 当前用户的用户 ID。    | 是       | 
 | `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是       |
 | `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。                      | 是       |
 
@@ -703,7 +703,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users/notification/language",
+  "uri": "https://XXXX/XXXX/XXXX/users/XXXX/notification/language",
   "timestamp": 1648089630244,
   "organization": "hx",
   "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
@@ -917,7 +917,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 
 ```json
 {
-  "uri": "https://XXXX/XXXX/XXXX/notification/template/test7",
+  "uri": "https://XXXX/XXXX/XXXX/notification/template/XXXX",
   "timestamp": 1646989686393,
   "organization": "hx",
   "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
@@ -943,6 +943,15 @@ curl -X GET 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 ```
 PUT https://{host}/{org_name}/{app_name}/users/{username}/notification/template
 ```
+
+##### 路径参数
+
+| 参数       | 类型   | 描述          | 是否必需 |
+| :--------- | :----- | :--------------------------------- | :------- |
+| `username` | String | 当前用户的用户 ID。    | 是       | 
+
+其他参数及说明详见 [公共参数](#公共参数)。
+
 
 ##### 请求 Header
 
