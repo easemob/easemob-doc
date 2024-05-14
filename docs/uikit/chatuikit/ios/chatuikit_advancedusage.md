@@ -242,6 +242,6 @@ EaseChatUIKitClient.shared.unregisterUserStateListener(self)
 
 ## 更多
 
-更多进阶用法，请参考 [Demo 中源码](https://github.com/zjc19891106/chat-ios/tree/SwiftDemo)。
+更多进阶用法，请参考 [Demo 中源码](https://github.com/easemob/easemob-demo-ios/tree/SwiftDemo)。
 
 
