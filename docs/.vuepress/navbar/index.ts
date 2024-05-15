@@ -214,7 +214,12 @@ export const zhNavbar = navbar([
         text: "服务端",
         children: [
           {
-            text: "Java",
+            text: "Java 1.0",
+            icon: "/icon-platform.svg",
+            link: "https://easemob.github.io/easemob-im-server-sdk/",
+          },
+          {
+            text: "Java 2.0",
             icon: "/icon-platform.svg",
             link: "https://github.com/easemob/easemob-im-server-sdk/tree/master_java_2.0/src/test/java/com/easemob/im/api",
           },
