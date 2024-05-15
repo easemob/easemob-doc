@@ -90,16 +90,9 @@
 
 ```json
 {
-    "customExts": {
-        "moderation": {
-            "enable": true,
-            "contents": [
-                {
-                    "type": "text",
-                    "data": "你好"
-                }
-            ]
-        }
+    "customExts":
+    {
+        "moderation": "{\"enable\": true,\"contents\":[{\"type\": \"text\",\"data\": \"你好\"}]}"
     }
 }
 ```
