@@ -205,3 +205,5 @@ SDK 内部使用 SQLite 保存本地消息，方便消息处理。
 
 发送消息时如果  WebSocket 已经断开正在进行重连时，重新连接后会重新发送消息；若 WebSocket  断开时发送消息，SDK 会提示网络断开连接导致消息发送失败的错误，即错误码 510 `MESSAGE_WEBSOCKET_DISCONNECTED`。
 
+
+
