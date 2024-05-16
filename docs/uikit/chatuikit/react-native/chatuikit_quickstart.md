@@ -44,7 +44,7 @@ npx react-native@latest init ProjectName
     "react": "18.2.0",
     "react-native": "0.73.2",
     "react-native-agora": "^4.2.6",
-    "react-native-chat-uikit": "/Users/asterisk/Downloads/2024-04-19/react-native-chat-uikit-2.0.0-beta.0",
+    "react-native-chat-uikit": "2.1.0",
     "react-native-chat-sdk": "1.3.1",
     "react-native-audio-recorder-player": "^3.5.3",
     "@easemob/react-native-create-thumbnail": "^1.6.6",
@@ -241,4 +241,4 @@ export default App;
 
 ## 示例项目地址
 
-[仓库地址](https://github.com/AsteriskZuo/TestRNUIKIT)
+[仓库地址](https://github.com/easemob/easemob-uikit-reactnative)
