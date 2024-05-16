@@ -135,7 +135,7 @@ EMChatManagerDelegate
 消息接收方进入会话时，发送会话已读回执。
 
 ```objectivec
-[[EMClient sharedClient].chatManager sendMessageReadAck:messageId toUser:conversationId completion:nil];
+[[EMClient sharedClient].chatManager ackConversationRead:conversationId completion:nil];
 ```
 
 在会话页面，接收到消息时，根据消息类型发送消息已读回执，如下所示：
