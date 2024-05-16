@@ -58,37 +58,20 @@ twemoji@>=14.0.2
 
 ### iOS 平台
 
-1. 更新 `Podfile` 文件：
+更新 iOS 文件夹下 `ProjectName/Info.plist` 文件内容：
 
-```ruby
-# ...
-target 'ProjectName' do
-  # ...
-
-  pod 'GoogleUtilities', :modular_headers => true
-  pod 'FirebaseCore', :modular_headers => true
-
-  permissions_path = File.join(File.dirname(`node --print "require.resolve('react-native-permissions/package.json')"`), "ios")
-  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
-  pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary"
-  pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone"
-  pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
-  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
-
-  # ...
-end
-```
-
-2. 更新 `Info.plist` 文件：
+在 dict 节点下，追加下面的权限。示例如下：
 
 ```xml
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+  <!-- 追加部分开始 -->
+        <key>NSCameraUsageDescription</key>
+        <string></string>
+        <key>NSMicrophoneUsageDescription</key>
+        <string></string>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string></string>
+  <!-- 追加部分结束 -->
 </dict>
 ```
 
