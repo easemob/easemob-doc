@@ -86,7 +86,7 @@
 
 ## 自定义消息
 
-如果使用自定义消息审核，**需首先要在[环信控制台](https://console.easemob.com/)上[开通文本审核](moderation_enable.html)和[图片审核](moderation_enable.html)，再联系商务开通自定义消息审核。**
+如果使用自定义消息审核，**需首先在[环信控制台](https://console.easemob.com/)[开通文本审核](moderation_enable.html)和[图片审核](moderation_enable.html)，再联系商务开通自定义消息审核。**
 
 对于提交审核的自定义消息，消息中的 `customExts` 参数必须包含 `moderation` 节点，示例如下：
 
