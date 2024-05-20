@@ -63,6 +63,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 404    |       EMErrorFileDeleteFailed       | 删除日志文件错误：通过 API 获取日志文件时会将旧的日志文件删除，然后生成新的日志文件。如果删除旧日志文件失败会提示该错误。 |
 | 405    |         EMErrorFileTooLarge         | 文件太大：例如，消息附件或群共享文件超过文件大小限制时提示该错误。 |
 | 406    |     EMErrorFileContentImproper      | 文件内容不合规：例如，消息附件或群共享文件内容不合规时提示该错误。  |
+| 407    |      EMErrorFileExpired      | 文件已过期：例如，用户下载过期的消息附件或群共享文件时提示该错误。消息附件和群共享文件默认可存储 7 天。要提升存储时间上限，请联系商务。 |
 | 500    |        EMErrorMessageInvalid        | 消息异常：例如，发送消息时，若消息对象或消息 ID 为空或者消息的发送方 ID 与当前登录 ID 不同则会提示该错误。 |
 | 501    | EMErrorMessageIncludeIllegalContent | 消息含有非法内容：消息被过滤系统识别为非法消息。             |
 | 502    |     EMErrorMessageTrafficLimit      | 消息限流：消息发送速度过快，建议降低频率或者减少消息内容。   |
