@@ -21,7 +21,7 @@
 运行以下命令，创建项目。
 
 ```sh
-npx react-native@latest init ProjectName
+npx react-native --version 0.73.2 init ProjectName
 ```
 
 **可能提示安装 `react-native` 最新版本。**
