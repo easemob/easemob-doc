@@ -10,7 +10,6 @@
   }
 }
 
-
 div[class*=language-] {
   padding-top: 2px;
 } 
@@ -30,4 +29,15 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
 
 .sidebar-group .sidebar-group .sidebar-heading {
   font-size: 1.0em
+}
+
+.el-anchor .el-anchor__list .el-anchor__item a {
+  font-size: 14px; 
+}
+
+.el-anchor > .el-anchor__list >.el-anchor__item  {
+    > .el-anchor__link {
+      font-size:16px;
+      color: #000;
+    }
 }

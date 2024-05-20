@@ -24,6 +24,6 @@
     "vuepress-theme-hope": "2.0.0-beta.189"
   },
   "dependencies": {
-    "element-plus": "^2.2.34"
+    "element-plus": "^2.7.3"
   }
 }

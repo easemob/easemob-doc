@@ -1,182 +1,243 @@
 ---
 home: true
-title: 主页
-# heroImage: https://www.easemob.com/statics/product/im/images/banner-pic.png
-# heroText: 环信IM文档
-# tagline: 12小时快速集成、二进制私有协议、亿级高并发、消息及时到达、全球互联互通三大范德萨发生发大水范德萨三大法师法as的撒发的
+title: 导航页
 heroText: false
 tagline: false
+products:
+  - link: "/product/introduction.html"
+    text: 产品概述
+  - link: #
+    text: 产品价格
+  - link: #
+    text: 产品动态
+  - link: #
+    text: 最新发版
+  - link: #
+    text: 使用限制
+  - link: #
+    text: 隐私协议
+  - link: #
+    text: 安全最佳实践
+sdkStarter:
+  title: "SDK快速开始"
+  platform:
+    - icon: /sdk/android.svg
+      link: /document/android/quickstart.html
+      text: Android
+    - icon: /sdk/iOS.svg
+      link: #
+      text: iOS
+    - icon: /sdk/web.svg
+      link: #
+      text: Web
+    - icon: /sdk/uniapp.svg
+      text: Uniapp
+    - icon: /sdk/react.svg
+      link: #
+      text: React Native
+    - icon: /sdk/windows.svg
+      link: #
+      text: Windows
+    - icon: /sdk/flutter.svg
+      link: #
+      text: Flutter
+    - icon: /sdk/unity.svg
+      link: #
+      text: Unity
+
 projects:
-  - title: 产品简介
-    info:
-      - links:
-          - link:
-            text: 产品概述
-          - link: #
-            text: 产品价格
-          - link: #
-            text: 产品动态
-          - link: #
-            text: 最新发版
-          - link: #
-            text: 使用限制
-          - link: #
-            text: 隐私协议
-          - link: #
-            text: 安全最佳实践
-  - title: SDK 快速开始
-    desc:
-    info:
-      - links:
-          - link: https://doc.easemob.com/document/android/quickstart.html
-            icon: /icon-Android-hover.svg
-            text: Android
-          - link: #
-            icon: /icon-iOS-hover.svg
-            text: iOS
-          - link: #
-            icon: /icon-web-hover.png
-            text: Web
-          - link: #
-            icon: /icon-windows-hover.svg
-            text: Windows
-          - link: #
-            icon: /icon-linux-hover.svg
-          - link: #
-            icon: /icon-ReactNative-hover.svg
-          - link: #
-            icon: /icon-flutter-hover.png
-          - link: #
-            icon: /icon-unity-hover.svg
   - title: SDK/服务端功能
-    info:
-      - links:
-          - link: 
-            text: 会话
-            desc: Java是最好的语言
-            children:
-              - link: #
+    features:
+      - title: 消息和会话
+        icon: /feature/message.svg
+        contexts:
+          - text: 发送/接收消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
                 text: Android
-              - link: #
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/iOS.svg
                 text: iOS
-              - link: #
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/web.svg
                 text: Web
-          - link: #
-            text: 消息
-            desc: PHP是最好的语言
-            children:
-              - link: #
-                icon: /icon-Android-hover.svg
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/uniapp.svg
+                text: Uniapp
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/react.svg
+                text: React-Native
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/java.svg
+                text: Java 1.0
+                link: /document/flutter/quickstart.html
+          - text: 获取消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
                 text: Android
-              - link: #
-                icon: /icon-iOS-hover.svg
+                link: /document/flutter/quickstart.html
+          - text: 撤回消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+          - text: 消息回执
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+          - text: 修改消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+          - text: 消息翻译
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+          - text: 会话列表
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+      - title: 群组和聊天室
+        icon: /feature/group.svg
+        contexts:
+          - text: 发送/接收消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+          - text: 获取消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+      - title: 用户
+        icon: /feature/user.svg
+        contexts:
+          - text: 发送/接收消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+          - text: 获取消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+      - title: 推送
+        icon: /feature/push.svg
+        contexts:
+          - text: 发送/接收消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+          - text: 获取消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+      - title: 其他
+        icon: /feature/others.svg
+        contexts:
+          - text: 发送/接收消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+          - text: 获取消息
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+  - title: UIKit
+    features:
+      - title: UIKit-单群聊
+        icon: /feature/uikit.svg
+        contexts:
+          - text: 回话列表界面
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/iOS.svg
                 text: iOS
-          - link: #
-            text: 群组
-          - link: #
-            text: 聊天室
-          - link: #
-            text: 用户体系  
-          - link: #
-            text: 用户属性 
-          - link: #
-            text: 用户关系
-          - link: #
-            text: 在线状态订阅
-          - link: #
-            text: 消息表情回复
-          - link: #
-            text: 消息举报 
-          - link: #
-            text: 子区
-          - link: #
-            text: 离线推送
-          - link: http://localhost:8080/push/push_overview.html
-            text: 即时推送
-          - link: #
-            text: 回调
-          - link: #
-            text: 内容审核
-          - link: #
-            text: 错误码       
-  - title: UIKIT-单群聊
-    info:
-      - links:
-          - link: 
-            text: 会话
-          - link: #
-            text: 消息
-          - link: #
-            text: 群组
-          - link: #
-            text: 联系人
-  - title: UIKIT-聊天室
-    info:
-      - links:
-          - link: 
-            text: 聊天室管理
-          - link: #
-            text: 弹幕和打赏
-          - link: #
-            text: 禁言
-          - link: #
-            text: 全局广播
-          - link: #
-            text: 消息管理
-          - link: #
-            text: 成员管理  
-  - title: Callkit
-    info:
-      - links:
-          - link: 
-            text: 一对一/多人通话
-          - link: #
-            text: 通话异常回调          
-  - title: 场景方案
-    info:
-      - links:
-          - link: #
-            text: 超级社区
-          - link: #
-            text: 语聊房
-  - title: API 参考
-    info:
-      - name: IM 客户端
-        links:
-          - link: #
-            icon: /icon-Android-hover.svg
-          - link: #
-            icon: /icon-iOS-hover.svg
-          - link: #
-            icon: /icon-web-hover.png
-          - link: #
-            icon: /icon-windows-hover.svg
-          - link: #
-            icon: /icon-linux-hover.svg
-          - link: #
-            icon: /icon-ReactNative-hover.svg
-          - link: #
-            icon: /icon-flutter-hover.png
-          - link: #
-            icon: /icon-unity-hover.svg
-          - link: #
-            icon: /icon-mini-program-hover.svg
-          - link: #
-            icon: /icon-Electron-hover.svg
-          - link: #
-            icon: /icon-platform-hover.svg
-      - name: IM 服务端
-        links:
-          - link: #
-            text: Java
-          - link: #
-            text: PHP
-      - name: 超级社区
-        links:
-          - link: #
-            text: Android
-          - link: #
-            text: iOS
-          - link: #
-            text: Web
+                link: /document/flutter/quickstart.html
+      - title: UIKit-聊天室
+        icon: /feature/uikit-chatroom.svg
+        contexts:
+          - text: 聊天室管理
+            desc: 我是描述，在这里进行feature的相关描述
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/flutter/quickstart.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/flutter/quickstart.html
+  - title: CallKit
+    features:
+      - contexts:
+          - text: 一对一/多人通话
+            link: #
+          - text: 通话异常回调
+            link: #
+  - title: API参考
+    features:
+      - title: IM客户端
+        icon: /feature/api-client.svg
+        contexts:
+          - text: Android
+            link: #
+          - text: iOS
+            link: #
+          - text: Web/Applet
+            link: #
+      - title: IM服务端
+        icon: /feature/api-server.svg
+        contexts:
+          - text: JAVA
+            link: #
+          - text: PHP
+            link: #
+      - title: 超级社区
+        icon: /feature/api-circle.svg
+        contexts:
+          - text: Android
+            link: #
+          - text: iOS
+            link: #
+          - text: Web
+            link: #
 ---

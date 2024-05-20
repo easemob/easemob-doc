@@ -1,205 +1,545 @@
 <template>
   <HopeHomePage>
     <template #center>
-      <div class="feature-panel">
-        <div class="feature-wrapper">
-          <div
-            class="feature-item"
-            v-for="product in products"
-            :key="product.title"
-          >
-            <h3>{{ product.title }}</h3>
-            <div class="feature-link-wrapper">
-              <a
-                v-for="link in product.links"
-                :key="link.link"
-                class="feature-link-item"
-                :href="link.link"
-              >
-                <img
-                  width="20"
-                  height="20"
-                  v-if="link.icon"
-                  :src="link.icon"
-                  alt="Platform"
-                />
-                <span v-if="link.text"> {{ link.text }} </span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="feature-wrapper">
-          <div
-            v-for="project in projects"
-            :key="project.title"
-            class="feature-item"
-            style="flex-basis: 100%"
-          >
-            <h3>{{ project.title }}</h3>
-            <p v-if="project.desc">{{ project.desc }}</p>
-            <template v-for="info in project.info" :key="info.link">
-              <h4 v-if="info.name">{{ info.name }}</h4>
-              <div class="feature-link-wrapper">
-                <ClientOnly>
-                  <template v-for="link in info.links" :key="link.text">
-                    <a
-                      v-if="!link.children"
-                      class="feature-link-item"
-                      :href="link.link"
+      <ClientOnly>
+        <div class="main-container">
+          <HeroSection />
+          <main :ref="containerRef" class="main-content">
+            <div class="columns">
+              <div class="toc column">
+                <el-affix :offset="80">
+                  <el-anchor
+                    :container="containerRef"
+                    type="underline"
+                    :offset="60"
+                  >
+                    <el-anchor-link
+                      v-for="anchorLink in anchorLinks"
+                      :key="anchorLink.text"
+                      :href="`#${anchorLink.text}`"
                     >
-                      <img
-                        width="20"
-                        height="20"
-                        v-if="link.icon"
-                        :src="link.icon"
-                        alt="Platform"
-                      />
-                      <span v-if="link.text">
-                        {{ link.text }}
-                      </span>
-                    </a>
-
-                    <el-popover
-                      v-else
-                      placement="top"
-                      :title="link.text"
-                      :width="260"
-                      trigger="click"
-                    >
-                      <template #reference>
-                        <a class="feature-link-item" :href="link.link">
-                          <img
-                            width="20"
-                            height="20"
-                            v-if="link.icon"
-                            :src="link.icon"
-                            alt="Platform"
-                          />
-                          <span v-if="link.text"> {{ link.text }} </span>
-                        </a>
+                      {{ anchorLink.text }}
+                      <template v-if="anchorLink.children" #sub-link>
+                        <el-anchor-link
+                          v-for="subLink in anchorLink.children"
+                          :key="subLink.text"
+                          :href="`#${subLink.text}`"
+                        >
+                          {{ subLink.text }}
+                        </el-anchor-link>
                       </template>
-                      <template #default>
-                        <div>
-                          <div v-if="link.children" class="project-detail">
-                            <div class="project-sub-content">
-                              <div
-                                v-if="link.desc"
-                                class="project-sub-content-desc"
-                              >
-                                {{ link.desc }}
-                              </div>
-                              <div>
-                                <a
-                                  class="feature-link-item"
-                                  :href="subLink.link"
-                                  v-for="subLink in link.children"
-                                  :key="subLink.link"
-                                >
-                                  <img
-                                    width="20"
-                                    height="20"
-                                    v-if="subLink.icon"
-                                    :src="subLink.icon"
-                                    alt="Platform"
-                                  />
-                                  <span v-if="subLink.text">
-                                    {{ subLink.text }}
-                                  </span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </template>
-                    </el-popover>
-                  </template>
-                </ClientOnly>
+                    </el-anchor-link>
+                  </el-anchor>
+                </el-affix>
               </div>
-            </template>
-          </div>
+              <div class="column">
+                <section class="product-section">
+                  <div class="product-links">
+                    <template
+                      v-for="(item, index) in products"
+                      :key="item.text"
+                    >
+                      <el-link
+                        :href="item.link"
+                        type="primary"
+                        class="product-link"
+                      >
+                        {{ item.text }}
+                      </el-link>
+                      <span v-if="index < products.length - 1">|</span>
+                    </template>
+                  </div>
+                  <div id="SDK快速开始">
+                    <h2 class="sdk-start-title">{{ sdkStarter.title }}</h2>
+                    <div class="sdk-start-list">
+                      <div
+                        class="sdk-start-item"
+                        v-for="item in sdkStarter.platform"
+                        :key="item.text"
+                        @click="goTo(item.link)"
+                      >
+                        <div class="sdk-start-icon">
+                          <img
+                            :src="item.icon"
+                            width="28px"
+                            height="28px"
+                            alt="Platform Icon"
+                            class="platform-icon"
+                          />
+                          <span class="platform-name">{{ item.text }}</span>
+                        </div>
+                        <img
+                          src="/arrow_right.svg"
+                          alt="Arrow icon"
+                          class="arrow-icon"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    :id="project.title"
+                    v-for="project in projects"
+                    :key="project.title"
+                  >
+                    <h2 class="sdk-features-title">{{ project.title }}</h2>
+                    <div
+                      class="sdk-feature-item"
+                      v-for="feature in project.features"
+                      :key="feature.title"
+                      :id="feature.title || null"
+                    >
+                      <div v-if="feature.title" class="sdk-feature-header">
+                        <img
+                          v-if="feature.icon"
+                          :src="feature.icon"
+                          class="feature-icon"
+                        />
+                        <h3 class="feature-title">{{ feature.title }}</h3>
+                      </div>
+                      <div class="sdk-feature-links">
+                        <template
+                          v-for="context in feature.contexts"
+                          :key="context.text"
+                        >
+                          <a
+                            v-if="context.link"
+                            class="feature-link"
+                            type="primary"
+                          >
+                            {{ context.text }}
+                          </a>
+
+                          <el-popover
+                            v-else
+                            placement="bottom-start"
+                            :width="436"
+                            trigger="click"
+                          >
+                            <template #reference>
+                              <a class="feature-link" type="primary">
+                                {{ context.text }}
+                              </a>
+                            </template>
+                            <template #default>
+                              <CardMenu
+                                :title="context.text"
+                                :sdks="context.sdks"
+                                :desc="context.desc"
+                              />
+                            </template>
+                          </el-popover>
+                        </template>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </main>
         </div>
-      </div>
+      </ClientOnly>
     </template>
   </HopeHomePage>
 </template>
+
 <script setup lang="ts">
-import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
-import Sidebar from "vuepress-theme-hope/modules/sidebar/components/Sidebar.js";
-import { usePageFrontmatter } from "@vuepress/client";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
-
+import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
+import HeroSection from "./CustomHero.vue";
+import CardMenu from "./CardMenu.vue";
+import { usePageFrontmatter } from "@vuepress/client";
 const frontmatter = usePageFrontmatter();
+const router = useRouter();
 const products = frontmatter.value.products || [];
+const sdkStarter = frontmatter.value.sdkStarter || [];
 const projects = frontmatter.value.projects || [];
-// const router = useRouter()
-// router.push('/product/introduction')
+const containerRef = ref<HTMLElement | null>(null);
+
+const goTo = (path: string) => {
+  router.push(path);
+};
+
+interface AnchorLink {
+  text: string;
+  children?: AnchorLink[];
+}
+
+const buildAnchorLink = () => {
+  const values: AnchorLink[] = [];
+  values.push({ text: sdkStarter.title });
+  projects.forEach((project) => {
+    const children = [];
+    project.features.forEach((feature) => {
+      if (feature.title) {
+        children.push({ text: feature.title });
+      }
+    });
+    values.push({ text: project.title, children });
+  });
+  return values;
+};
+
+const anchorLinks = buildAnchorLink();
 </script>
+
 <style scoped>
-.home {
-  padding-top: var(--navbar-height);
+.main-container {
+  border-radius: 4px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
-.feature-wrapper {
-  justify-content: flex-start;
-  border-width: 0 0 1px 0;
-  border-color: var(--border-color);
-  border-style: solid;
+.main-content {
+  align-self: center;
+  margin-top: 16px;
+  width: 100%;
+  max-width: 1006px;
 }
 
-@media screen and ((min-width: 1440px)) {
-  .feature-item {
-    flex-basis: calc(33% - 3rem);
+@media (max-width: 991px) {
+  .main-content {
+    max-width: 100%;
   }
 }
 
-.feature-link-wrapper {
+.columns {
+  gap: 20px;
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-.feature-link-item {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem 0.5rem 0;
-  transition: color 0.2s linear;
-  transition: padding 0.2s linear;
+  justify-content: center;
 }
 
-.feature-link-item:hover {
-  color: var(--accent-color);
-  padding-top: 0.3rem;
+@media (max-width: 991px) {
+  .columns {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
 }
 
-.project-detail {
+.column {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  border-width: 0 0 1px 0;
-  border-color: var(--border-color);
-  border-style: solid;
+  line-height: normal;
+  width: 19%;
+  margin-left: 0;
 }
 
-.project-detail a {
-  padding: 0.5rem 0;
-  width: 100%;
-  transition: background-color 0.2s linear;
+.toc {
+  visibility: visible;
+  width: unset;
+  height: unset;
 }
 
-.project-detail a:hover {
-  background-color: #ddd;
+@media (max-width: 1096px) {
+  .toc {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
 }
 
-.project-sub-content {
+@media (max-width: 991px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.sdk-features {
+  justify-content: flex-end;
+  border-radius: 4px;
+  background-color: #fff;
   display: flex;
+  gap: 20px;
+  white-space: nowrap;
+  padding: 10px;
 }
 
-.project-sub-content-desc {
-  width: 40%;
-  margin: 0.5rem;
-  padding-right: 0.5rem;
-  border-right: 1px solid #ddd;
-  color: #ddd;
+@media (max-width: 991px) {
+  .sdk-features {
+    white-space: initial;
+  }
+}
+
+.feature-title {
+  font-family: PingFang SC, sans-serif;
+  flex-grow: 1;
+  flex-basis: auto;
+}
+
+.sdk-list {
+  display: flex;
+  padding-left: 12px;
+  flex-direction: column;
+  font-size: 14px;
+  color: #808080;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .sdk-list {
+    white-space: initial;
+  }
+}
+
+.sdk-item {
+  font-family: PingFang SC, sans-serif;
+  align-items: start;
+  border-left: 2px solid rgba(204, 204, 204, 1);
+  background-color: #fff;
+  justify-content: center;
+  padding: 10px 12px;
+}
+
+@media (max-width: 991px) {
+  .sdk-item {
+    padding-right: 20px;
+    white-space: initial;
+  }
+}
+
+.sdk-item.active {
+  border-left-color: rgba(9, 109, 217, 1);
+  color: #096dd9;
+  padding: 9px 12px;
+}
+
+.column:last-child {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 81%;
+  margin-left: 20px;
+}
+
+@media (max-width: 991px) {
+  .column:last-child {
+    width: 100%;
+  }
+}
+
+.product-section {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+@media (max-width: 991px) {
+  .product-section {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+
+.product-links {
+  justify-content: space-between;
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #096dd9;
+  font-weight: 400;
+  white-space: nowrap;
+  padding: 8px;
+}
+
+@media (max-width: 991px) {
+  .product-links {
+    max-width: 100%;
+    flex-wrap: wrap;
+    white-space: initial;
+  }
+}
+
+.product-link {
+  font-family: PingFang SC, sans-serif;
+}
+
+.sdk-start-title {
+  border-bottom: 1px solid rgba(230, 230, 230, 1);
+  margin-top: 20px;
+  color: #1a1a1a;
+  white-space: nowrap;
+  justify-content: center;
+  padding: 8px 0;
+  font: 600 20px PingFang SC, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .sdk-start-title {
+    max-width: 100%;
+    white-space: initial;
+  }
+}
+
+.sdk-start-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  gap: 12px;
+  font-size: 14px;
+  color: #000;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .sdk-start-list {
+    flex-wrap: wrap;
+    white-space: initial;
+  }
+}
+
+.sdk-start-item {
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(230, 230, 230, 1);
+  background-color: #fff;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 6px 12px;
+  width: 157px;
+}
+
+.sdk-start-item:hover {
+  cursor: pointer;
+  background: #e1f3d8;
+}
+
+@media (max-width: 991px) {
+  .sdk-start-item {
+    white-space: initial;
+  }
+}
+
+.sdk-start-icon {
+  display: flex;
+  gap: 4px;
+}
+
+@media (max-width: 991px) {
+  .sdk-start-icon {
+    white-space: initial;
+  }
+}
+
+.platform-icon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  width: 28px;
+}
+
+.platform-name {
+  font-family: PingFang SC, sans-serif;
+  margin: auto 0;
+}
+
+.arrow-icon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  width: 16px;
+  margin: auto 0;
+}
+
+.sdk-features-title {
+  border-bottom: 1px solid rgba(230, 230, 230, 1);
+  margin-top: 36px;
+  color: #1a1a1a;
+  white-space: nowrap;
+  justify-content: center;
+  padding: 8px 0;
+  font: 600 20px PingFang SC, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .sdk-features-title {
+    max-width: 100%;
+    white-space: initial;
+  }
+}
+
+.sdk-feature-item {
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(230, 230, 230, 1);
+  display: flex;
+  margin-top: 16px;
+  flex-direction: column;
+  font-size: 14px;
+  color: #096dd9;
+  font-weight: 400;
+  white-space: nowrap;
+  padding: 16px;
+}
+
+@media (max-width: 991px) {
+  .sdk-feature-item {
+    max-width: 100%;
+    white-space: initial;
+  }
+}
+
+.sdk-feature-header {
+  align-self: start;
+  display: flex;
+  gap: 2px;
+  font-size: 16px;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+@media (max-width: 991px) {
+  .sdk-feature-header {
+    white-space: initial;
+  }
+}
+
+.feature-icon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  width: 20px;
+}
+
+.feature-title {
+  font-family: PingFang SC, sans-serif;
+  margin: 0;
+}
+
+.sdk-feature-links {
+  align-content: flex-start;
+  flex-wrap: wrap;
+  display: flex;
+  margin-top: 16px;
+  gap: 20px;
+  padding: 8px 0;
+}
+
+@media (max-width: 991px) {
+  .sdk-feature-links {
+    max-width: 100%;
+    white-space: initial;
+  }
+}
+
+.feature-link {
+  font-family: PingFang SC, sans-serif;
+  text-decoration: underline;
+  min-width: 120px;
+  cursor: pointer;
+}
+
+.feature-link-group {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+@media (max-width: 991px) {
+  .feature-link-group {
+    white-space: initial;
+  }
 }
 </style>
