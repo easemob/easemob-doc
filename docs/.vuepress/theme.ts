@@ -8,7 +8,7 @@ interface CustomConfig {
 
 export default hopeTheme(<ThemeOptions & CustomConfig>{
   hostname: "https://doc.easemob.com/",
-  home: "/product/introduction",
+  home: "/",
   iconAssets: "iconfont",
   logo: "/logo.png",
   repo: "easemob/easemob-doc",
