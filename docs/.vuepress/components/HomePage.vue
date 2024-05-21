@@ -114,7 +114,6 @@
                             v-else
                             placement="bottom-start"
                             :width="436"
-                            trigger="click"
                           >
                             <template #reference>
                               <a class="feature-link" type="primary">
@@ -266,6 +265,7 @@ const anchorLinks = buildAnchorLink();
 .feature-title {
   font-family: PingFang SC, sans-serif;
   flex-grow: 1;
+  font-size: 16px;
   flex-basis: auto;
 }
 
