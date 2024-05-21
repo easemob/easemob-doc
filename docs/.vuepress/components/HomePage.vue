@@ -1,12 +1,12 @@
 <template>
   <HopeHomePage>
     <template #center>
-      <ClientOnly>
-        <div class="main-container">
-          <HeroSection />
-          <main :ref="containerRef" class="main-content">
-            <div class="columns">
-              <div class="toc column">
+      <div class="main-container">
+        <HeroSection />
+        <main :ref="containerRef" class="main-content">
+          <div class="columns">
+            <div class="toc column">
+              <ClientOnly>
                 <el-affix :offset="80">
                   <el-anchor
                     :container="containerRef"
@@ -31,113 +31,110 @@
                     </el-anchor-link>
                   </el-anchor>
                 </el-affix>
-              </div>
-              <div class="column">
-                <section class="product-section">
-                  <div class="product-links">
-                    <template
-                      v-for="(item, index) in products"
-                      :key="item.text"
-                    >
-                      <el-link
-                        :href="item.link"
-                        type="primary"
-                        class="product-link"
-                      >
-                        {{ item.text }}
-                      </el-link>
-                      <span v-if="index < products.length - 1">|</span>
-                    </template>
-                  </div>
-                  <div id="SDK快速开始">
-                    <h2 class="sdk-start-title">{{ sdkStarter.title }}</h2>
-                    <div class="sdk-start-list">
-                      <div
-                        class="sdk-start-item"
-                        v-for="item in sdkStarter.platform"
-                        :key="item.text"
-                        @click="goTo(item.link)"
-                      >
-                        <div class="sdk-start-icon">
-                          <img
-                            :src="item.icon"
-                            alt="Platform Icon"
-                            class="platform-icon"
-                          />
-                          <span class="platform-name">{{ item.text }}</span>
-                        </div>
-                        <img
-                          src="/arrow_right.svg"
-                          alt="Arrow icon"
-                          class="arrow-icon"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    :id="project.title"
-                    v-for="project in projects"
-                    :key="project.title"
-                  >
-                    <h2 class="sdk-features-title">{{ project.title }}</h2>
-                    <div
-                      class="sdk-feature-item"
-                      v-for="feature in project.features"
-                      :key="feature.title"
-                      :id="feature.title || null"
-                    >
-                      <div v-if="feature.title" class="sdk-feature-header">
-                        <img
-                          v-if="feature.icon"
-                          :src="feature.icon"
-                          class="feature-icon"
-                        />
-                        <h3 v-if="feature.title" class="feature-title">
-                          {{ feature.title }}
-                        </h3>
-                      </div>
-                      <div class="sdk-feature-links">
-                        <template
-                          v-for="context in feature.contexts"
-                          :key="context.text"
-                        >
-                          <a
-                            v-if="context.link"
-                            class="feature-link"
-                            type="primary"
-                          >
-                            {{ context.text }}
-                          </a>
-
-                          <el-popover
-                            v-else
-                            placement="bottom-start"
-                            :width="436"
-                          >
-                            <template #reference>
-                              <a class="feature-link" type="primary">
-                                {{ context.text }}
-                              </a>
-                            </template>
-                            <template #default>
-                              <CardMenu
-                                :title="context.text"
-                                :sdks="context.sdks"
-                                :desc="context.desc"
-                              />
-                            </template>
-                          </el-popover>
-                        </template>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
+              </ClientOnly>
             </div>
-          </main>
-        </div>
-      </ClientOnly>
+            <div class="column">
+              <section class="product-section">
+                <div class="product-links">
+                  <template v-for="(item, index) in products" :key="item.text">
+                    <el-link
+                      :href="item.link"
+                      type="primary"
+                      class="product-link"
+                    >
+                      {{ item.text }}
+                    </el-link>
+                    <span v-if="index < products.length - 1">|</span>
+                  </template>
+                </div>
+                <div id="SDK快速开始">
+                  <h2 class="sdk-start-title">{{ sdkStarter.title }}</h2>
+                  <div class="sdk-start-list">
+                    <div
+                      class="sdk-start-item"
+                      v-for="item in sdkStarter.platform"
+                      :key="item.text"
+                      @click="goTo(item.link)"
+                    >
+                      <div class="sdk-start-icon">
+                        <img
+                          :src="item.icon"
+                          alt="Platform Icon"
+                          class="platform-icon"
+                        />
+                        <span class="platform-name">{{ item.text }}</span>
+                      </div>
+                      <img
+                        src="/arrow_right.svg"
+                        alt="Arrow icon"
+                        class="arrow-icon"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  :id="project.title"
+                  v-for="project in projects"
+                  :key="project.title"
+                >
+                  <h2 class="sdk-features-title">{{ project.title }}</h2>
+                  <div
+                    class="sdk-feature-item"
+                    v-for="feature in project.features"
+                    :key="feature.title"
+                    :id="feature.title || null"
+                  >
+                    <div v-if="feature.title" class="sdk-feature-header">
+                      <img
+                        v-if="feature.icon"
+                        :src="feature.icon"
+                        class="feature-icon"
+                      />
+                      <h3 v-if="feature.title" class="feature-title">
+                        {{ feature.title }}
+                      </h3>
+                    </div>
+                    <div class="sdk-feature-links">
+                      <template
+                        v-for="context in feature.contexts"
+                        :key="context.text"
+                      >
+                        <a
+                          v-if="context.link"
+                          class="feature-link"
+                          type="primary"
+                        >
+                          {{ context.text }}
+                        </a>
+
+                        <el-popover
+                          v-else
+                          placement="bottom-start"
+                          :width="436"
+                        >
+                          <template #reference>
+                            <a class="feature-link" type="primary">
+                              {{ context.text }}
+                            </a>
+                          </template>
+                          <template #default>
+                            <CardMenu
+                              :title="context.text"
+                              :sdks="context.sdks"
+                              :desc="context.desc"
+                            />
+                          </template>
+                        </el-popover>
+                      </template>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </main>
+      </div>
     </template>
   </HopeHomePage>
 </template>
