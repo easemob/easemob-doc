@@ -88,6 +88,90 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
 );
 ```
 
+## 头像和昵称
+
+### 联系人
+
+UIKit 直接使用不做任何设置时，默认展示用户的用户 ID, 头像默认为用户 ID 的前两个字母。UIKit 提供两种方式设置用户的头像和昵称：
+
+- 如果用户的头像和昵称存放在环信的服务器，UIKit 内部默认使用用户属性功能获取头像昵称。用户首次登录可以调用 SDK 的 API 设置自己的头像和昵称。
+
+示例代码：
+
+```javascript
+rootStore.client.updateUserInfo({
+  nickname: 'nickname',
+  avatarurl: 'https://example.com/image',
+});
+```
+
+对于在联系人列表、会话列表、会话、群成员等位置，UIKit 内部会自动获取其他用户的个人信息展示头像和昵称。
+
+- 如果用户头像和昵称的不存放在环信服务器，初始化时需要配置不使用用户属性功能：
+
+```jsx
+
+// ...
+
+<UIKitProvider initConfig={{
+    useUserInfo: false // 关闭自动使用用户属性
+}}>
+    <ChatApp>
+</UIKitProvider>
+
+```
+
+然后监听联系人数据，自己获取每个用户的头像和昵称后设置到 UIKit 中，示例代码如下所示：
+
+```jsx
+import { useEffect } from 'react';
+
+useEffect(() => {
+  if (rootStore.loginState) {
+    // 筛选出没有用户信息的用户 ID。
+    const userIds = rootStore.addressStore.contacts
+      .filter(item => !rootStore.addressStore.appUsersInfo[item.id])
+      .map(item => {
+        return item.id;
+      });
+    // 从自己的服务器获取用户头像昵称。
+    getUserInfo(userIds).then(usersInfo => {
+      //usersInfo: {[userId]: {avatarurl: '', nickname: '', userId: ''}}
+      rootStore.addressStore.setAppUserInfo(usersInfo);
+    });
+  }
+}, [rootStore.loginState, rootStore.addressStore.contacts.length]);
+```
+
+在群组会话中， UIKit 内部发消息时会在消息扩展中携带发送方的头像和昵称，收到消息的成员会根据消息中的信息展示头像和昵称，同时 UIKit 也会将这些信息存储到 `appUsersInfo` 中。当你需要查看群成员列表时，UIKit 会首先在 `appUsersInfo` 中获取个人信息，你需要查看哪些群成员的信息没有在 `appUsersInfo` 中，然后获取这些成员的个人信息设置到 `appUsersInfo` 中。
+
+### 群头像
+
+UIKit 内部没有获取群头像，需要用户自己设置到 UIKit 内部，形式和设置与个人信息类似。
+
+示例代码：
+
+```jsx
+useEffect(() => {
+  if (rootStore.loginState) {
+    const groupIds =
+      rootStore.addressStore.groups
+        .filter(item => !item.avatarUrl)
+        .map(item => {
+          return item.groupid;
+        }) || [];
+    // 获取群组头像
+    getGroupAvatar(groupIds).then(res => {
+      // res: {[groupId]: 'avatarurl'}
+      for (let groupId in res) {
+        rootStore.addressStore.updateGroupAvatar(groupId, res[groupId]);
+      }
+    });
+  }
+}, [rootStore.loginState, rootStore.addressStore.groups.length]);
+```
+
+
 ## UIKitProvider 属性概览
 
 <table>

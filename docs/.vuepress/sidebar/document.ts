@@ -297,7 +297,7 @@ const documentSidebar = [
           { text: '上传和下载文件', link: 'message_download.html' },
           { text: '获取历史消息记录', link: 'message_historical.html' },
           { text: '撤回消息和单向删除会话', link: 'message_recall.html' },
-          { text: '单向清空漫游消息', link: 'message_roam_clear.html' },
+          { text: '单向删除漫游消息', link: 'message_delete.html' },
           { text: '修改文本或自定义消息', link: 'message_modify_text_custom.html' },
           { text: '导入消息', link: 'message_import.html' }
         ]

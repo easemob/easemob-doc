@@ -2,6 +2,18 @@
 
 <Toc />
 
+## 版本 V4.7.0 Dev 2024-04-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 `getJoinedChatRooms` 方法，用于[获取当前用户加入的聊天室列表](room_manage.html#获取当前用户加入的聊天室列表)。
+- [IM SDK] [撤回消息](message_recall.html#实现方法)接口 `recallMessage` 中新增 `ext` 参数，支持传入自定义字符串，设置扩展信息。
+- [IM SDK] SDK logger 中新增 `setConsoleLogVisibility` 方法，用于[设置日志是否输出到控制台](initialization.html#输出信息到日志文件)。
+
+### 修复
+
+- [IM SDK] 修复消息 `allowGroupAck` 状态错误问题。
+
 ## 版本 V4.6.0 Dev 2024-04-02（开发版）
 
 ### 新增特性
@@ -13,7 +25,7 @@
   - `onMessagePinEvent`: 当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - [IM SDK] 消息修改回调 `onModifiedMessage` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
 - [IM SDK] 加入聊天室时，若传入的聊天室 ID 不存在，可实现[自动创建聊天室](room_manage.html#加入聊天室)。
-- [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的历史消息)。
+- [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
 
 ### 优化
 
@@ -37,7 +49,7 @@
 
 ### 新增特性
 
-- [IM SDK] 聊天室和群组成员进出事件增加成员人数 `memberCount` 字段。
+- [IM SDK] [聊天室和群组成员进出事件增加成员人数 `memberCount` 字段](room_manage.html#实时更新聊天室成员人数)。
 - [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#单向清空服务端的聊天记录) 方法, 用于清空当前用户的聊天记录，包括消息和会话。
 - [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-id-列表) 方法, 可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
 - [IM SDK] 新增 [useReplacedMessageContents](message_send_receive.html#发送文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。

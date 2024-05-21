@@ -2,9 +2,75 @@
 
 <Toc />
 
+## 版本 V1.4.0 2024-5-7
+
+### 新增特性
+
+- 新增 `ChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `ChatMessageSearchScope` 中的搜索范围。
+  - `ChatMessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+  - `ChatManager#getMsgsWithKeyword`：根据搜索范围搜索所有会话中的消息。
+  - `ChatManager#getConvMsgsWithKeyword`：根据搜索范围搜索当前会话中的消息。
+- 支持[会话标记](conversation_mark.html)功能。
+  - `ChatConversationFetchOptions` 从服务器获取会话的选项，可以用来回去置顶会话或者是标记后的会话。
+  - `ChatManager#addRemoteAndLocalConversationsMark`：标记会话。
+  - `ChatManager#deleteRemoteAndLocalConversationsMark`：取消标记会话。
+  - `ChatManager#fetchConversationsByOptions`：根据 `ChatConversationFetchOptions` 选项从服务器分页查询会话列表。
+  - `ChatConversation#marks`：获取本地单个会话的所有标记。
+  - `ChatMultiDevicesEvent#CONVERSATION_UPDATE_MARK`：多设备场景下的会话标记事件。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+- 新增[错误码 706](/document/android/error.html)，表示聊天室所有者不允许离开聊天室。若初始化时，`ChatOptions#isChatRoomOwnerLeaveAllowed` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。
+- 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
+- 新增 `ChatOptions#useReplacedMessageContents` 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以收到替换后的内容。
+- 新增[置顶消息](message_pin.html)功能。
+  - 新增 `ChatManager#pinMessage` 方法，用于置顶消息。
+  - 新增 `ChatManager#unpinMessage` 方法，用于取消置顶消息。
+  - 新增 `ChatManager#fetchPinnedMessages` 方法，从服务器获取指定会话的置顶消息。
+  - 新增 `ChatConversation#getPinnedMessages` 方法，返回会话下的所有置顶消息。
+  - 新增 `ChatMessagePinInfo` 类，包含消息置顶的操作者以及置顶时间。
+  - 新增 `ChatMessage#pinInfo` 方法，展示消息的置顶详情。
+  - 新增 `ChatMessageEventListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
+- 新增 `ChatOptions#messagesReceiveCallbackIncludeSend` 开关。开启后，在 `ChatMessageEventListener#onMessagesReceived` 回调里增加发送成功的消息。
+- 加入聊天室时，若传入的聊天室 ID 不存在，可实现[自动创建聊天室](room_manage.html#加入聊天室)。
+- 消息修改回调 `ChatMessageEventListener#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
+
+### 优化
+
+- 支持使用消息 body 完成[单条转发](message_forward.html)，无需重新上传附件。
+- 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。
+- 在[聊天室成员进出时更新聊天室成员人数](room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。
+- 优化 token 登录时的错误提示信息，使错误提示更精细。
+- 优化将所有会话置为已读的时间。 
+- 优化 SDK 内部随机取服务器地址的逻辑，提升请求成功率。
+- 优化进出聊天室超时时间。
+- 优化部分场景下连接失败后重连的逻辑。
+- 优化附件类型消息发送时中的附件上传，支持分片上传。
+- 统一 Agora Token 和 EaseMob Token 登录方式：`ChatClient#loginWithAgoraToken` 接口废弃，统一使用 `ChatClient#login` 接口。此外，新增 EaseMob Token 即将过期及已过期的回调，即 EaseMob Token 已过期或有效期过半时也返回 `ChatConnectEventListener#onTokenDidExpire` 和 `ChatConnectEventListener#onTokenWillExpire` 回调。
+- 优化发消息时重试的逻辑。
+- Android/iOS SDK 移除网络请求时对 `NetworkOnMainThreadException` 异常的捕获。
+- 数据库升级逻辑优化。
+- 单个日志文件大小由 2 MB 提升到 5 MB。
+- iOS 平台中增加了隐私协议 `PrivacyInfo.xcprivacy`。
+- Android 平台适配 Android 14 Beta：适配以 Android 14 为目标平台时动态注册广播接收者必须设置 `RECEIVER_EXPORTED` 或者 `RECEIVER_NOT_EXPORTED` 的规定。
+- 作废接口说明：
+  - `getMessagesWithKeyword`: `getMsgsWithKeyword` 替换该接口。
+  - `getMessages`: `getMsgs` 替换该接口。
+  - `getMessageWithTimestamp`: `getMsgWithTimestamp`替换该接口。
+  - `getMessagesWithMsgType`: `getConvMsgsWithMsgType`替换该接口。
+  - `searchMsgFromDB`: `getMsgsWithMsgType`替换该接口。
+
+### 修复
+
+- 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
+- 特殊场景下，SDK 退出后再登录会丢失聊天室监听事件问题。
+- 修复网络恢复时重连 2 次的问题。
+- 修复未登录时调用 `leaveChatroom` 方法返回的错误提示不准确。
+- 部分场景下群成员人数计算重复问题。
+- 修复数据上报模块偶现的崩溃问题。
+- 修复部分场景下调用 `ChatManager#updateMessage` 方法更新消息时导致的崩溃问题。
+
 ## 版本 V1.3.0 2024-1-4
 
-#### 新增特性
+### 新增特性
 
 - 依赖的原生 SDK 升级到版本（`iOS` 4.2.0 和`Android` 4.2.1）。添加原生 SDK 提供的新功能。
 - 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
@@ -83,7 +149,7 @@
 - 新增 `ChatClient.version` 属性用于获取当前 SDK 的版本号。
 - 新增 `ChatGroupManager.setMemberAttribute` 方法用于[设置单个群组成员的属性](group_members.html#设置群组成员自定义属性)。
 - 新增 `ChatGroupManager.fetchMemberAttributes` 方法用于[从服务器获取单个群成员的所有自定义属性](group_members.html#获取单个群成员的所有自定义属性)以及[根据属性 key 获取多个群成员的自定义属性](group_members.html#根据属性-key-获取多个群成员的自定义属性)。
-- 添加 `ChatManager.fetchHistoryMessagesByOptions` [根据消息拉取参数配置类（`ChatFetchMessageOptions`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的历史消息)。`ChatFetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数。
+- 添加 `ChatManager.fetchHistoryMessagesByOptions` [根据消息拉取参数配置类（`ChatFetchMessageOptions`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的消息)。`ChatFetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数。
 - 新增 `ChatManager.deleteMessagesWithTimestamp` 方法实现[删除指定时间段内的本地消息](message_delete.html#删除指定时间段的本地消息)。
 - 新增 [`ChatGroupEventListener.onMemberAttributesChanged` 事件](group_manage.html#监听群组事件)，在单个群成员的属性发生变更时，群内其他成员会收到该事件。
 - 新增 `ChatConnectEventListener.onAppActiveNumberReachLimit` 事件，在应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时触发该事件。

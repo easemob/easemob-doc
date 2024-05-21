@@ -58,6 +58,8 @@ export default function Home() {
 }
 ```
 
+- 按需导入 SDK 文件。
+
 如果对 SDK 大小有要求，可根据功能按需导入 SDK 文件。
 
 | 功能             | 导入文件                                                                      | 使用方式                                              |
@@ -253,6 +255,19 @@ conn.addEventHandler("handlerId", {
 
 ```javascript
 logger.enableAll();
+```
+- 设置日志不输出到控制台：
+
+```javascript
+logger.setConsoleLogVisibility(false)
+```
+
+- 监听 SDK 日志事件：
+
+```javascript
+logger.onLog = (log)=>{
+  console.log('im logger', log)
+}
 ```
 
 关闭日志输出：

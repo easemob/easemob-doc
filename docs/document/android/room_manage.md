@@ -3,7 +3,7 @@
 <Toc />
 
 聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，超过 2 分钟会自动退出聊天室。聊天室可以应用于直播、消息广播等。若需调整该时间，需联系环信商务经理。
-
+ 
 本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
 
 消息相关内容见 [消息管理](message_overview.html)。
@@ -198,4 +198,32 @@ public interface EMChatRoomChangeListener {
     default void onChatroomAttributesDidRemoved(String chatRoomId, Map<String,String> attributeMap , String from){}
 
 }
+```
+
+### 实时更新聊天室成员人数
+
+如果聊天室短时间内有成员频繁加入或退出时，实时更新聊天室成员人数的逻辑如下：
+
+1. 聊天室内有成员加入时，其他成员会收到 `onMemberJoined` 事件。有成员主动或被动退出时，其他成员会收到 `onMemberExited` 和 `onRemovedFromChatRoom` 事件。
+
+2. 收到通知事件后，调用 `EMChatRoomManager#getChatRoom` 方法获取本地聊天室详情，再通过`EMChatRoom#getMemberCount`获取聊天室当前人数。
+
+```java
+EMClient.getInstance().chatroomManager().addChatRoomChangeListener(new EMChatRoomChangeListener() {
+
+            @Override
+            public void onMemberJoined(String roomId, String participant) {
+                //获取聊天室在线人数
+                int memberCount = EMClient.getInstance().chatroomManager().getChatRoom(roomId).getMemberCount();
+
+            }
+
+            @Override
+            public void onMemberExited(String roomId, String roomName, String participant) {
+                //int memberCount = EMClient.getInstance().chatroomManager().getChatRoom(roomId).getMemberCount();
+            }
+
+            ……
+        });
+
 ```

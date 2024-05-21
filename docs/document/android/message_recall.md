@@ -27,15 +27,17 @@
 
 ### 撤回消息
 
-你可以调用 `recallMessage` 方法撤回一条发送成功的消息。
+对于 SDK 4.6.0 及以上版本，调用 `recallMessage` 方法撤回一条发送成功的消息。调用该方法时，你可以通过 `ext` 字段（字符串类型）传入自定义信息。
 
-调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessageRecalled` 事件。
+对于 SDK 4.6.0 之前的版本，`recallMessage` 方法不支持通过 `ext` 字段传入自定义信息。
+
+调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessageRecalledWithExt` 事件。
 
 - 同步方法：
 
 ```java
 try {
-    EMClient.getInstance().chatManager().recallMessage(message);
+    EMClient.getInstance().chatManager().recallMessage(message,ext);
     EMLog.d("TAG", "撤回消息成功");
 } catch (EMException e) {
     e.printStackTrace();
@@ -46,7 +48,7 @@ try {
 - 异步方法：
 
 ```java
-EMClient.getInstance().chatManager().asyncRecallMessage(message, new CallBack() {
+EMClient.getInstance().chatManager().asyncRecallMessage(message,ext,new CallBack() {
     @Override
     public void onSuccess() {
         EMLog.d("TAG", "撤回消息成功");
@@ -63,8 +65,15 @@ EMClient.getInstance().chatManager().asyncRecallMessage(message, new CallBack() 
 
 ### 设置消息撤回监听
 
-你可以设置消息撤回监听，通过 `onMessageRecalled` 事件监听发送方对已接收的消息的撤回。
+你可以设置消息撤回监听，通过 `onMessageRecalledWithExt` 事件监听发送方对已接收的消息的撤回。
+
+- 若用户在线接收了消息，消息撤回时，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为撤回的消息的内容，`recallMessageId` 属性返回撤回的消息的 ID。
+- 若消息发送和撤回时接收方离线，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为空，`recallMessageId` 属性返回撤回的消息的 ID。
 
 ```java
-void onMessageRecalled(List<ChatMessage> messages);
+void onMessageRecalledWithExt(List<EMRecallMessageInfo> recallMessageInfo){}
 ```
+
+
+
+

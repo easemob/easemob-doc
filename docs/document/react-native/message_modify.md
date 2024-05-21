@@ -49,6 +49,10 @@ ChatClient.getInstance()
 
 消息修改后，消息的接收方会收到 `onMessageContentChanged` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群聊会话，除了修改消息的用户，群组内的其他成员均会收到该事件。
 
+:::tip
+若通过 RESTful API 修改自定义消息，消息的接收方也通过 `ChatMessageEventListener#onMessageContentChanged` 事件接收修改后的自定义消息。
+:::
+
 ```typescript
 ChatClient.getInstance().chatManager.addMessageListener({
   onMessageContentChanged: (

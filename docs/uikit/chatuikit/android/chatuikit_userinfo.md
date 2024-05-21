@@ -27,67 +27,18 @@ EaseIM.login(
 )
 ```
 
-## 会话列表信息提供
+## 用户信息提供
 
-单群聊 UIKit 提供 `EaseIM.setConversationInfoProvider` 接口进行会话列表信息的提供。
-
-`EaseConversationInfoProvider` 接口如下所示：
-
-```kotlin
-interface EaseConversationInfoProvider {
-    // 同步获取会话信息
-    fun getProfile(id: String?, type: ChatConversationType = ChatConversationType.Chat): EaseProfile?
-
-    // 异步获取会话信息
-    fun fetchProfiles(idsMap: Map<ChatConversationType, List<String>>, onValueSuccess: OnValueSuccess<List<EaseProfile>>)
-}
-```
-
-使用方法如下所示：
-
-```kotlin
-EaseIM.setConversationInfoProvider(object : EaseConversationInfoProvider {
-    // 同步获取会话信息
-    override fun getProfile(id: String?, type: ChatConversationType): EaseProfile? {
-        return when(type) {
-            ChatConversationType.Chat ->{
-                // 可以从本地数据库或者缓存中获取用户信息，并返回，不可进行异步操作。
-                loadUserInfoFromLocal(id)
-            }
-
-            ChatConversationType.GroupChat -> {
-                // 可以从本地数据库或者缓存中获取群组信息，并返回，不可进行异步操作。
-                loadGroupInfoFromLocal(id)
-            }
-
-            else -> null
-        }
-        return null
-    }
-
-    override fun fetchProfiles(
-        idsMap: Map<ChatConversationType, List<String>>,
-        onValueSuccess: OnValueSuccess<List<EaseProfile>>
-    ) {
-        fetchProfilesFromServer(idsMap, onValueSuccess)
-    }
-
-})
-
-```
-
-## 联系人信息提供
-
-单群聊 UIKit 提供 `EaseIM.setUserProfileProvider` 接口进行联系人信息的提供。
+单群聊 UIKit 提供 `EaseIM.setUserProfileProvider` 接口提供用户信息，包括联系人和群组成员的信息。
 
 `EaseUserProfileProvider` 接口如下所示：
 
 ```kotlin
 interface EaseUserProfileProvider {
-    // 同步获取联系人信息
+    // 同步获取用户信息
     fun getUser(userId: String?): EaseProfile?
 
-    // 异步获取联系人信息
+    // 异步获取用户信息
     fun fetchUsers(userIds: List<String>, onValueSuccess: OnValueSuccess<List<EaseProfile>>)
 }
 ```
@@ -96,7 +47,6 @@ interface EaseUserProfileProvider {
 
 ```kotlin
 EaseIM.setUserProfileProvider(object : EaseUserProfileProvider {
-    // 同步获取会话信息
     override fun getUser(userId: String?): EaseProfile? {
         return getLocalUserInfo(userId)
     }
@@ -112,38 +62,39 @@ EaseIM.setUserProfileProvider(object : EaseUserProfileProvider {
 
 ```
 
-## 群组成员信息提供
+## 群组信息提供
 
-单群聊 UIKit 提供 `EaseIM.setGroupMemberProfileProvider` 接口进行联系人信息的提供。
+单群聊 UIKit 提供 `EaseIM.setGroupProfileProvider` 接口进行群组信息的提供。
 
-`EaseGroupMemberProfileProvider` 接口如下所示：
+`EaseGroupProfileProvider` 接口如下所示：
 
 ```kotlin
-interface EaseGroupMemberProfileProvider {
-    // 同步获取群成员信息
-    fun getMemberProfile(groupId: String?, username: String?): EaseProfile?
+interface EaseGroupProfileProvider {
+    // 同步获取群组信息
+    fun getGroup(id: String?): EaseGroupProfile?
 
-    // 异步获取群成员信息
-    fun fetchMembers(members: Map<String, List<String>>, onValueSuccess: OnValueSuccess<Map<String, EaseProfile>>)
+    // 异步获取群组信息
+    fun fetchGroups(groupIds: List<String>, onValueSuccess: OnValueSuccess<List<EaseGroupProfile>>)
 }
 ```
 
 使用方法如下：
 
 ```kotlin
-EaseIM.setGroupMemberProfileProvider(object : EaseGroupMemberProfileProvider {
-    // 同步获取会话信息
-    override fun getMemberProfile(groupId: String?, username: String?): EaseProfile? {
-        return getLocalGroupMemberInfo(groupId, username)
+EaseIM.setGroupProfileProvider(object : EaseGroupProfileProvider {
+    override fun getGroup(id: String?): EaseGroupProfile? {
+        ChatClient.getInstance().groupManager().getGroup(id)?.let {
+            return EaseGroupProfile(it.groupId, it.groupName, it.extension)
+        }
+        return null
     }
 
-    override fun fetchMembers(
-        members: Map<String, List<String>>,
-        onValueSuccess: OnValueSuccess<Map<String, EaseProfile>>
+    override fun fetchGroups(
+        groupIds: List<String>,
+        onValueSuccess: OnValueSuccess<List<EaseGroupProfile>>
     ) {
-        fetchGroupMemberInfoFromServer(members, onValueSuccess)
+        // 根据 groupId 列表获取群组相关的信息通过 onValueSuccess() 进行返回，并更新缓存信息。
     }
-
 })
 
 ```
@@ -162,13 +113,11 @@ EaseIM.setGroupMemberProfileProvider(object : EaseGroupMemberProfileProvider {
 
 ## 更新 UIKit 缓存信息
 
-因为单群聊 UIKit 会对信息进行缓存。如果用户的信息发生改变，可以通过 UIKit 提供的 update 方法对缓存信息进行更新。
+因为单群聊 UIKit 会对信息进行缓存。如果用户的信息发生改变，可以通过 UIKit 提供的 `update` 方法对缓存信息进行更新。
 
 ```kotlin
 // 更新当前用户信息
 EaseIM.updateCurrentUser(currentUserProfile)
-// 更新会话信息
-EaseIM.updateConversationInfo(conversationProfileList)
 // 更新联系人信息
 EaseIM.updateUsersInfo(userProfileList)
 // 更新群组成员信息

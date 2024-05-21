@@ -19,6 +19,7 @@ export const zhSidebar = sidebar({
       text: "产品简介",
       children: [
         { text: "产品概述", link: "introduction.html" },
+        { text: "数据中心", link: "data_center.html" },
         { text: "产品动态", link: "product_dynamics.html" },
         { text: "IM 产品使用限制", link: "limitation.html" },
         { text: "接口频率限制", link: "limitationapi.html" },
@@ -34,6 +35,11 @@ export const zhSidebar = sidebar({
         { text: "快速开始 Android", link: "/document/android/quickstart.html" },
         { text: "快速开始 iOS", link: "/document/ios/quickstart.html" },
         { text: "快速开始 Web", link: "/document/web/quickstart.html" },
+        { text: "快速开始 Applet", link: "/document/applet/wechat.html" },
+        { text: "快速开始 Flutter", link: "/document/flutter/quickstart.html" },
+        { text: "快速开始 React Native", link: "/document/react-native/quickstart.html" },
+        { text: "快速开始 Unity", link: "/document/unity/quickstart.html" },
+        { text: "快速开始 Windows", link: "/document/windows/quickstart.html" },
       ],
     },
     {
@@ -166,6 +172,24 @@ export const zhSidebar = sidebar({
                 {
                   text: "Web 频道分组管理",
                   link: "circle/category_mgmt_web.html",
+                },
+              ],
+            },
+            {
+              text: "错误码",
+              collapsible: false,
+              children: [
+                {
+                  text: "Android 错误码",
+                  link: "circle/circle_errorcode_android.html",
+                },
+                {
+                  text: "iOS 错误码",
+                  link: "circle/circle_errorcode_ios.html",
+                },
+                {
+                  text: "Web 错误码",
+                  link: "circle/circle_errorcode_web.html",
                 },
               ],
             },

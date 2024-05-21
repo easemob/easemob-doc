@@ -43,7 +43,7 @@ HTTP Request
 #### 请求示例
 
 ```
-curl --location --request POST 'http://127.0.0.1:8031/easemob-demo/chatdemoui/whiteboards/joinorcreate/byname' \
+curl -L -X POST 'http://127.0.0.1:8031/easemob-demo/chatdemoui/whiteboards/joinorcreate/byname' \
 --header 'Authorization: Bearer YWMtmSQukKrsEeqv9QV7AzcHWwAAAAAAAAAAAAAAAAAAAAFDtjwasNNKD6W3CET2O3RNAQMAAAFynSVq-wBPGgBKfz02AUoGLesKFexM4_1uAAW25lj33z0siltXBgRoWQ' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -79,7 +79,7 @@ HTTP Request 注意这里的whiteboardUserId不是IM的useId,是上一个创建�
 #### 请求示例
 
 ```
-curl --location --request POST 'http://127.0.0.1:8031/easemob-demo/chatdemoui/whiteboards/upload/ZBW51UX8XTGFYJX8LL0-0' \
+curl -L -X POST 'http://127.0.0.1:8031/easemob-demo/chatdemoui/whiteboards/upload/ZBW51UX8XTGFYJX8LL0-0' \
 --header 'Content-Type: multipart/form-data' \
 --form 'file=@/D:/easemob/文档/中文名字1.jpg'
 ```

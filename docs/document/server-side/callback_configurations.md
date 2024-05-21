@@ -2368,7 +2368,7 @@ payload 示例：
 | payload.type | 会话已读回执类型。       |                |
 | from | String          | 发送已读回执的用户。|
 | to | String    |  接收已读回执的用户。                 |
-| msg_id | String      | 已读回执消息的消息 ID。 |
+| msg_id | String      | 已读回执的消息 ID。 |
 
 会话已读回执的回调请求示例：
 

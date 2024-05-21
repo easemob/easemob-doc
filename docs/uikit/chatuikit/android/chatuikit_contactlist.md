@@ -115,7 +115,7 @@ builder.setCustomAdapter(CustomContactListAdapter)
 builder.setSearchType(EaseSearchType.SELECT_USER)  
 ```
 
-![img](@static/images/uikit/chatuikit/android/contactlist_configurable.png =350x600) 
+![img](@static/images/uikit/chatuikit/android/contactlist_configurable.png) 
 
 ## 事件监听
 

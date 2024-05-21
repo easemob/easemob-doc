@@ -109,7 +109,7 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token，将 file 的路径替换为待上传文件所在的本地完整路径
-curl L -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
+curl -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
 -H 'Authorization: Bearer <YourAppToken>'   \
 -H 'Content-Type: multipart/form-data; boundary=---WebKitFormBoundary7MA4YWxkTrZu0gW'   \
 -H 'restrict-access: true'   \

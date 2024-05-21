@@ -67,7 +67,7 @@
 #### 请求示例
 
 ```
-curl --location --request POST 'http://127.0.0.1:9090/easemob-demo/hcl/conferences' \
+curl -L -X POST 'http://127.0.0.1:9090/easemob-demo/hcl/conferences' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer YWMtaJszCI5vEemOhnkmxEo52QAAAAAAAAAAAAAAAAAAAAHmqirKW28R6ZB2cYf5QmSUAQMAAAFrVLgKfgBPGgC863CANqOsZOAF1tnxLeMc0Z-gRFCQwqV-0MB5nVAB5A' \
 --header 'Content-Type: application/json' \

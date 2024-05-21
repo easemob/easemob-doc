@@ -14,8 +14,8 @@
 | 批量注册用户 |  POST   | /{org_name}/{app_name}/users       |
 | 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} |
 | 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 
-| 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/wzy/push/binding |
-| 查询当前用户的所有设备的推送绑定信息    | GET  | /{org_name}/{app_name}/users/wzy/push/binding |
+| 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/{userId}/push/binding |
+| 查询当前用户的所有设备的推送绑定信息    | GET  | /{org_name}/{app_name}/users/{userId}/push/binding |
 | 获取指定账号的在线登录设备列表    | GET  | /{org_name}/{app_name}/users/{username}/resources |
 
 以上七个接口的总调用频率（默认值）为 100 次/秒/App Key。
@@ -41,14 +41,14 @@
 
 | RESTful API 接口        | 方法 | 接口 URL           | 接口最高调用频率（默认值） |
 | :----------- | :--- | :------------- | :----------- |
-| 设置离线推送         | PUT  | /{org}/{app_name}/users/{username}/notification/{chattype}/{key} | 100 次/秒/App Key          |
-| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{username}/notification/{chattype}/{key} | 100 次/秒/App Key          |
-| 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{username}/notification/language | 100 次/秒/App Key          |
-| 获取推送通知的首选语言 | PUT  | /{org_name}/{app_name}/users/{username}/notification/language | 100 次/秒/App Key  |
+| 设置离线推送         | PUT  | /{org}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key          |
+| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key          |
+| 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 次/秒/App Key          |
+| 获取推送通知的首选语言 | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 次/秒/App Key  |
 | 创建离线推送模板          | POST  | /{org_name}/{app_name}/notification/template | 10 次/秒/App Key  |
 | 查询离线推送模板          | GET  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
 | 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
-| 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{username}/notification/template | 100 次/秒/App Key。 |
+| 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template | 100 次/秒/App Key。 |
 
 ## 消息管理
 
@@ -64,9 +64,11 @@
 | 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
 | 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key                                              |
 | 修改文本或自定义消息 | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 次/秒/App Key  |
-| 单向清空指定用户的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{username}/delete/all | 100 次/秒/App Key  |
-| 单向清空指定单聊会话一段时间内的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/chat/user/{username}/time?userId={userId}&delTime={delTime} | 100 次/秒/App Key  |
-| 单向清空指定群组或聊天室会话一段时间内的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/group/user/{username}/time?groupId={groupId}&delTime={delTime} | 100 次/秒/App Key  |
+| 根据消息 ID 单向删除单聊漫游消息  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}    | 100 次/秒/App Key   |
+| 根据消息 ID 单向删除群聊漫游消息  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}   | 100 次/秒/App Key   |
+| 单向清空指定用户的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{userId}/delete/all | 100 次/秒/App Key  |
+| 单向清空单聊会话某个时间点及之前的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}/time?userId={userId}&delTime={delTime} | 100 次/秒/App Key  |
+| 单向清空群组或聊天室会话某个时间点及之前的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}/time?groupId={groupId}&delTime={delTime} | 100 次/秒/App Key  |
 | 导入单聊消息 | POST  | /{org_name}/{app_name}/messages/users/import | 100 条/秒/App Key                                          |
 | 导入群聊消息 | POST  | /{org_name}/{app_name}/messages/chatgroups/import | 100 条/秒/App Key                                    |
 | 拉取会话列表    |   GET    | /{org_name}/{app_name}/user/{username}/user_channels       | 5 次/分钟/单用户 ID，100 次/秒/App Key    |

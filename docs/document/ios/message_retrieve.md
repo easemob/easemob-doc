@@ -27,11 +27,11 @@
 
 ## 实现方法
 
-### 从服务器获取指定会话的历史消息
+### 从服务器获取指定会话的消息
 
 对于单聊或群聊，用户发消息时，会自动将对方添加到用户的会话列表。
 
-你可以调用 `fetchMessagesFromServer` 方法基于 `EMFetchServerMessagesOption` 类从服务端分页拉取单聊和群组聊天的历史消息。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。
+你可以调用 `fetchMessagesFromServer` 方法基于 `EMFetchServerMessagesOption` 类从服务端分页拉取单聊和群组聊天的历史消息。为确保数据可靠，我们建议你每次获取 20 条消息，最大不超过 50。分页查询时，若满足查询条件的消息总数大于 `pageSize` 的数量，则返回 `pageSize` 数量的消息，若小于 `pageSize` 的数量，返回实际条数。消息查询完毕时，返回的消息条数小于 `pageSize` 的数量。
 
 通过设置 `EMFetchServerMessagesOption` 类，你可以根据以下条件拉取历史消息：
 

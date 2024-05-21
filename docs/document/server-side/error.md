@@ -27,7 +27,7 @@
 | 404                        | （未找到）服务器找不到请求的接口。                           |
 | 405                        | （请求方式错误）请按照环信官网接口说明，正确的使用接口 GET，POST 等请求方式。 |
 | 408                        | （请求超时）服务器等候请求时发生超时。                       |
-| 413                        | （请求体过大）请求体超过了 5 KB，拆成更小的请求体重试即可。  |
+| 413                        | （消息附件过大）调用[上传文件](message_download.html#上传文件)接口上传的消息附件超过了最大限制。  |
 | 415                        | 请求体的类型不支持。                                         |
 | 429                        | （服务不可用）请求接口超过调用频率限制，即接口被限流。或超过社区版限制，如有需要可联系商务。 |
 | 500                        | （服务器内部错误）服务器遇到错误，无法完成请求。             |
@@ -47,7 +47,6 @@
 | 400              | illegal_argument                   | "password or pin must provided"                              | 注册用户请求未提供用户密码（`password`）或提供的密码为空。 |
 | 400              | illegal_argument                   | "newpassword is required"                                    | 修改用户密码的请求体未提供 `newpassword` 属性。   |
 | 400              | illegal_argument                   | "oldPassword is required"                                    | 修改用户密码的请求体未提供 `oldPassword` 属性。 |
-| 400              | illegal_argument                   | "group member username1 doesn’t exist"                       | 批量添加群组成员时，`username1` 不存在。         |
 | 400              | illegal_argument                   | "this is an invalid request."                                | 请求无效，请检查调用接口的 url、header、body，是否符合所调用接口的要求，可以使用 curl 命令进行测试。 |
 | 400              | illegal_argument                   | "from can't be empty"                                        | 消息发送方（`from`）为空。若不传该字段， 服务器会默认设置为 `admin`。 |
 | 400              | illegal_argument                   | "target_type can only be 'users' or 'chatgroups' or 'chatrooms'" | 发送消息时，对象类型（`target_type`）只能传入 `users`、`chatgroups` 或 `chatrooms`。若传入其他值，提示该错误。 |
@@ -84,8 +83,9 @@
 | 403              |  exceed_limit                    | "Invitee's contact max count"   | 好友请求的接收方已达好友数量上限。         |
 | 403              |  exceed_limit                   | "Inviter's contact max count"      | 好友请求的发送方已达好友数量上限。         |
 | 404              | organization_application_not_found | "Could not find application for hx/hxdeo2 from URI: hx/hxdeo2/token" | hx/hxdeo2 这个设置不正确或不存在，或 baseurl 集群设置错误（只针对 vip 集群的 AppKey），正确的是 orgname/appname，即 AppKey 的 “#” 换成 “/“。 |
-| 404              | service_resource_not_found         | "Service resource not found"                                 | URL 指定的资源不存在，如用户相关接口提示用户不存在，群组相关接口提示群组不存在，聊天室相关接口提示聊天室不存在。 |
+| 404              | service_resource_not_found         | "Service resource not found"                                 | URL 指定的资源不存在，例如用户体系相关接口提示用户不存在，群组相关接口提示群组不存在，聊天室相关接口提示聊天室不存在。 |
 | 404              | service_resource_not_found         | "Service resource not found"                                 | 获取的 username 不存在，若用户列表存在该 username，则是因为存在脏数据，可以使用 uuid 代替 username 将该 ID 删除，再使用该 username 重新创建。 |
+| 404              |  resource_not_found        | username XXXX doesn't exist!      | 创建群组时添加的用户不存在。 |
 | 404              | service_resource_not_found         | "Service resource not found"                                 | 要删除的 username 不存在，若用户列表存在该 username，则可使用 user 的 uuid 代替 username 删除。 |
 | 404              | storage_object_not_found           | "Failed to find chat message history download url for appkey: hx#hxdemo2, time: 2018020912" | 对应的时间没有历史消息，如确定有历史消息，请联系[环信技术支持](mailto:support@easemob.com)。 |
 | 413              | Request Entity Too Large           | "Request Entity Too Large"                                   | 请求体过大，如上传文件时文件过大，需要拆成几个更小的请求体重试。 |

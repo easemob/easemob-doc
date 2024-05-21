@@ -116,32 +116,38 @@ builder.setCustomFragment(customConversationListFragment);
 ### 设置会话头像和昵称
 
 ```kotlin
-EaseIM.setConversationInfoProvider(object : EaseConversationInfoProvider {
-    // 同步获取会话信息
-    override fun getProfile(id: String?, type: ChatConversationType): EaseProfile? {
-        return when(type) {
-            ChatConversationType.Chat ->{
-                // 可以从本地数据库或者缓存中获取用户信息，并返回，不可进行异步操作。
-                loadUserInfoFromLocal(id)
-            }
 
-            ChatConversationType.GroupChat -> {
-                // 可以从本地数据库或者缓存中获取群组信息，并返回，不可进行异步操作。
-                loadGroupInfoFromLocal(id)
-            }
+ // Chat 类型设置 setUserProfileProvider 
+ EaseIM.setUserProfileProvider(object : EaseUserProfileProvider {
+     override fun getUser(userId: String?): EaseProfile? {
+         // 从本地查询对应 userId 的信息进行返回
+         return DemoHelper.getInstance().getDataModel().getAllContacts()[userId]?.toProfile()
+     }
 
-            else -> null
+     override fun fetchUsers(
+         userIds: List<String>,
+         onValueSuccess: OnValueSuccess<List<EaseProfile>>
+     ) {
+         // Provider 提供者。用户可以根据 userId 列表从自己服务器获取对应 ID 的 Profile 信息，通过 onValueSuccess() 进行返回。
+         // 同时可以将获取到的信息通过 EaseIM.updateUsersInfo() 更新到缓存中。获取 Profile 时，UIKit 会先从缓存中查询。
+     }
+ })
+ // Group 类型设置 setGroupProfileProvider
+ EaseIM.setGroupProfileProvider(object : EaseGroupProfileProvider {
+
+    override fun getGroup(id: String?): EaseGroupProfile? {
+        ChatClient.getInstance().groupManager().getGroup(id)?.let {
+            return EaseGroupProfile(it.groupId, it.groupName, it.extension)
         }
         return null
     }
 
-    override fun fetchProfiles(
-        idsMap: Map<ChatConversationType, List<String>>,
-        onValueSuccess: OnValueSuccess<List<EaseProfile>>
+    override fun fetchGroups(
+        groupIds: List<String>,
+        onValueSuccess: OnValueSuccess<List<EaseGroupProfile>>
     ) {
-        fetchProfilesFromServer(idsMap, onValueSuccess)
+        // 根据 groupId 列表获取群组相关的信息通过 onValueSuccess() 并更新缓存信息。
     }
-
 })
 ```
 

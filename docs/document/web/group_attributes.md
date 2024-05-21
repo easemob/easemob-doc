@@ -27,7 +27,7 @@
 
 示例代码如下：
 
-```javaScript
+```javascript
 let option = {
     groupId: "groupId",
     groupName: "groupName",
@@ -45,7 +45,7 @@ conn.modifyGroup(option).then(res => console.log(res))
 
 示例代码如下：
 
-```javaScript
+```javascript
 let option = {
     groupId: "groupId"
 };
@@ -60,7 +60,7 @@ conn.fetchGroupAnnouncement(option).then(res => console.log(res))
 
 示例代码如下：
 
-```javaScript
+```javascript
 let option = {
     groupId: "groupId",
     announcement: "A announcement of group"
@@ -74,7 +74,7 @@ conn.updateGroupAnnouncement(option).then(res => console.log(res))
 
 所有群组成员均可调用 `uploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `uploadFile` 事件。
 
-```javaScript
+```javascript
 let option = {
     groupId: "groupId",
     file: file, // <input type="file"/>获取的文件对象。
@@ -90,7 +90,7 @@ conn.uploadGroupSharedFile(option);
 
 所有群成员均可调用 `downloadGroupSharedFile` 方法下载共享文件。
 
-```javaScript
+```javascript
 let option = {
     groupId: "groupId",
     fileId: "fileId", // 文件 ID。
@@ -108,7 +108,7 @@ conn.downloadGroupSharedFile(option);
 
 示例代码如下：
 
-```javaScript
+```javascript
 let option = {
     groupId: "groupId",
     fileId: "fileId", // 文件 ID。
@@ -120,7 +120,7 @@ conn.deleteGroupSharedFile(option).then(res => console.log(res))
 
 所有群成员均可调用 `getGroupSharedFilelist` 方法获取群组的共享文件列表。
 
-```javaScript
+```javascript
 let option = {
     groupId: "groupId"
 };

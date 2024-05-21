@@ -40,16 +40,23 @@ implementation 'com.easemob.im:im-sdk-core:1.0.5'
 #### 1. 使用 Easemob App Credentials 的情况
 
 ```java
-确保在服务启动之后进行初始化 SDK 即可，示例如下：
-try {
-    Configuration.setDefaultApiClient(ApiClient.builder()
-            .setBasePath("Rest BasePath")
-            .setAppKey("Appkey")
-            .setClientId("Client ID")
-            .setClientSecret("Client Secret")
-            .build());
-} catch (ApiException e) {
-    throw new RuntimeException(e);
+SDK 初始化建议写到配置类中，示例如下：
+@Configuration
+public class Config {
+
+    static {
+        try {
+            com.easemob.im.Configuration.setDefaultApiClient(ApiClient.builder()
+                    .setBasePath("Rest BasePath")
+                    .setAppKey("Appkey")
+                    .setClientId("Client ID")
+                    .setClientSecret("Client Secret")
+                    .build());
+        } catch (ApiException e) {
+            // exception handling
+        }
+    }
+
 }
 ```
 
@@ -80,7 +87,7 @@ try {
 @Service
 public class UserService {
 
-    private UserApi userApi = new UserApi;
+    private UserApi userApi = new UserApi();
 
     private void createUser() {
         List<EMCreateUser> emCreateUserList = new ArrayList<>();

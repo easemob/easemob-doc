@@ -19,6 +19,7 @@
 - 退出聊天室
 - 解散聊天室
 - 监听聊天室事件
+- 实时更新聊天室成员人数
 
 ## 前提条件
 
@@ -55,6 +56,10 @@ try {
 
 1. 调用 `EMChatRoomManager#fetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
 2. 调用 `EMChatRoomManager#joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `EMChatRoomEventHandler#onMemberJoinedFromChatRoom` 事件。
+
+:::tip
+若传入的聊天室 ID 不存在，你可以联系环信商务实现自动创建聊天室。若开启了该功能，环信服务器会自动创建聊天室，`joinChatRoom` 方法中的参数无变化。
+:::
 
 示例代码如下：
 
@@ -114,8 +119,7 @@ EMOptions options = EMOptions(
     );
 ```
 
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，离开后重新进入仍是该聊天室的所有者。若 `ChatOptions#isChatRoomOwnerLeaveAllowed
-` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706。
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，离开后重新进入仍是该聊天室的所有者。若 `ChatOptions#isChatRoomOwnerLeaveAllowed` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706。
 
 ### 解散聊天室
 
@@ -178,4 +182,30 @@ EMClient.getInstance.chatRoomManager.addEventHandler(
 
     // 移除监听器
     EMClient.getInstance.chatRoomManager.removeEventHandler("UNIQUE_HANDLER_ID");
+```
+
+### 实时更新聊天室成员人数
+
+如果聊天室短时间内有成员频繁加入或退出时，实时更新聊天室成员人数的逻辑如下：
+
+1. 聊天室内有成员加入时，其他成员会收到 `EMChatRoomEventHandler#onMemberJoinedFromChatRoom` 事件。有成员主动或被动退出时，其他成员会收到 `EMChatRoomEventHandler#onMemberExitedFromChatRoom` 事件。
+
+2. 收到通知事件后，调用 `EMChatRoomManager#getChatRoomWithId` 方法获取本地聊天室详情，其中包括聊天室当前人数。
+
+```dart
+EMClient.getInstance.chatRoomManager.addEventHandler(
+    'UNIQUE_HANDLER_ID',
+    ChatRoomEventHandler(
+      onMemberJoinedFromChatRoom: (roomId, participant) async {
+        EMChatRoom? room = await EMClient.getInstance.chatRoomManager.getChatRoomWithId(roomId);
+        debugPrint("current room member count ${room?.memberCount}");
+      },
+      onMemberExitedFromChatRoom: (roomId, roomName, participant) async {
+        EMChatRoom? room = await EMClient.getInstance.chatRoomManager.getChatRoomWithId(roomId);
+        debugPrint("current room member count ${room?.memberCount}");
+      },
+    ));
+
+// ...
+EMClient.getInstance.chatRoomManager.removeEventHandler('UNIQUE_HANDLER_ID');
 ```

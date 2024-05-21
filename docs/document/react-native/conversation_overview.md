@@ -32,10 +32,10 @@
 | deleteMessage   | 删除本地数据库中的指定消息。    |
 | deleteMessagesWithTimestamp  | 从本地数据库中删除指定时间段内的消息。   |
 | deleteAllMessages  | 删除内存和本地数据库中的所有消息。   |
-| getMessagesWithMsgType  | 从本地数据库获取会话中的指定用户发送的某些类型的消息。   |
-| getMessages  | 从本地数据库获取指定会话中一定数量的消息。   |
-| getMessagesWithKeyword  | 从本地数据库获取会话中的指定用户发送的一定数量的特定消息。   |
-| getMessageWithTimestamp  | 从本地数据库获取指定会话在一段时间内的消息。   |
+| getConvMsgsWithMsgType  | 从本地数据库获取会话中的指定用户发送的某些类型的消息。   |
+| getMsgs  | 从本地数据库获取指定会话中一定数量的消息。   |
+| getMsgsWithKeyword  | 从本地数据库获取会话中的指定用户发送的一定数量的特定消息。   |
+| getMsgWithTimestamp  | 从本地数据库获取指定会话在一段时间内的消息。   |
 | fetchHistoryMessages  | 分页获取指定会话的历史消息。   |
 | fetchHistoryMessagesByOptions  | 根据消息拉取参数配置从服务器分页获取指定会话的历史消息。   |
 | removeMessagesFromServerWithMsgIds  | 根据消息 ID 单向删除漫游消息。   |

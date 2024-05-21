@@ -281,7 +281,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl --location --request DELETE 'https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX'
+curl -L -X DELETE 'https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX'
 --header 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -365,7 +365,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl --location --request GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
+curl -L -X GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
 --header 'Authorization: Bearer <YourAppToken>'
 ```
 
