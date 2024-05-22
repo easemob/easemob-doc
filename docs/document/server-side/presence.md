@@ -396,7 +396,7 @@ curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presenc
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{username}/presence/sublist?pageNum=1&pageSize=100
+GET https://{host}/{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum={pagenumber}&pageSize={pagesize}
 ```
 
 #### 路径参数

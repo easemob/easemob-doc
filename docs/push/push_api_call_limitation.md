@@ -27,4 +27,4 @@
 | [创建全量推送任务](push_send_notification.html#创建全量推送任务) | POST | /{org_name}/{app_name}/push/task | 1 次/秒/App Key |
 | [创建推送通知](push_send_notification.html#创建推送通知) | POST | /{org_name}/{app_name}/push/message  | 1 次/秒/App Key |
 | [查询推送通知](push_send_notification.html#查询推送通知) | POST| /{org_name}/{app_name}/push/message/{messageId} | 1 次/秒/App Key|
-| [创建全量推送任务](push_send_notification.html#创建全量推送任务-1)| POST | /{org_name}/{app_name}/push/task/broadcast |1 次/秒/App Key |
+| [创建全量推送任务](push_send_notification.html#创建全量推送任务-1)| POST | /{org_name}/{app_name}/push/task/broadcast |1 次/秒/App Key | 

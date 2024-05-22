@@ -44,7 +44,7 @@
 | 设置离线推送         | PUT  | /{org}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key          |
 | 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key          |
 | 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 次/秒/App Key          |
-| 获取推送通知的首选语言 | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 次/秒/App Key  |
+| 获取推送通知的首选语言 | GET  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 次/秒/App Key  |
 | 创建离线推送模板          | POST  | /{org_name}/{app_name}/notification/template | 10 次/秒/App Key  |
 | 查询离线推送模板          | GET  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
 | 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
@@ -56,6 +56,7 @@
 | :-------- | :----- | :---------------- | :--------------------- |
 | 发送单聊消息                 | POST   | /{org_name}/{app_name}/messages/users                | 6000 条/分钟/App Key                                         |
 | 发送群聊消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | 20 条/秒/App Key                                             |
+| 发送定向消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups/users           | 100 条/秒/App Key      |
 | 发送聊天室消息               | POST   | /{org_name}/{app_name}/messages/chatrooms            | 100 条/秒/App Key                                            |
 | 发送聊天室广播消息 | POST | /{org_name}/{app_name}/messages/chatrooms/broadcast | 每分钟最多可发 10 次，而且每天最多可发 100 次广播消息。 |
 | 上传文件  |    POST  | /{org_name}/{app_name}/chatfiles       | 100 次/秒/App Key                                                 |
@@ -104,7 +105,9 @@
 | 获取一个用户加入的所有群组   |  GET         | /{org_name}/{app_name}/users/{username}/joined_chatgroups        | 50 次/秒/App Key                                                  |
 | 查看指定用户是否已加入群组 | POST  | /{org_name}/{app_name}/chatgroups/{group_id}/user/{user_id}/is_joined | 100 次/秒/App Key |
 | 获取群组详情        |  GET        | /{org_name}/{app_name}/chatgroups/{group_ids}           | 100 次/秒/App Key            |
-| 创建一个群组  |    POST      | /{org_name}/{app_name}/chatgroups                  | 100 次/秒/App Key                                                 |
+| 创建群组  |    POST      | /{org_name}/{app_name}/chatgroups                  | 100 次/秒/App Key   |
+| 封禁群组  |    POST      | /{org_name}/{app_name}/chatgroups/{group_id}/disable                  | 100 次/秒/App Key            |
+| 解禁群组  |    POST      | /{org_name}/{app_name}/chatgroups/{group_id}/enable                  | 100 次/秒/App Key            |
 | 修改群组信息   |    PUT         | /{org_name}/{app_name}/chatgroups/{group_id}             | 100 次/秒/App Key                                                 |
 | 解散群组 |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}                    | 100 次/秒/App Key                                                 |
 | 获取群组公告     |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/announcement         | 100 次/秒/App Key                                                 |
@@ -211,7 +214,7 @@
 | 批量获取在线状态信息    |  POST   | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key |
 | 查询单个群组的在线成员数量    |  GET   | /{org_name}/{app_name}/presence/online/{group_id}/type/{query_type}  | 100 次/秒/App Key |
 |  取消订阅多个用户的在线状态     |  DELETE           | /{org_name}/{app_name}/users/{uid}/presence                  | 50 次/秒/App Key    |
-| 查询订阅列表    |   GET       | /{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum=1&pageSize=100 | 50 次/秒/App Key  |
+| 查询订阅列表    |   GET       | /{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum={pagenumber}&pageSize={pagesize} | 50 次/秒/App Key  |
 
 ## 消息表情回复 Reaction
 
