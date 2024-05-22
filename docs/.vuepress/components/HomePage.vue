@@ -104,6 +104,7 @@
                         v-if="context.link"
                         class="feature-link"
                         type="primary"
+                        :href="context.link"
                       >
                         {{ context.text }}
                       </a>

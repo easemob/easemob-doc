@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 interface SDKLink {
   icon?: string;
   text: string;
