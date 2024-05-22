@@ -14,7 +14,7 @@
 
 ## 引入 SDK
 
-- 按需导入 SDK 文件。为了减少 SDK 体积，推荐这种方式，详见[按需引入 SDK 功能模块](import_sdk_minicore)。
+- 按需导入 SDK 文件。为了减少 SDK 体积，推荐这种方式，详见[按需引入 SDK 功能模块](import_sdk_minicore.html)。
 
 - 对于 JavaScript SDK，导入代码如下：
 
