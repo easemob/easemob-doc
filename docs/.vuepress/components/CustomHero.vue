@@ -2,11 +2,11 @@
   <div class="hero-section">
     <img src="/hero_bg.png" alt="Background image" class="background-image" />
     <div class="hero-content">
-      <h1 class="hero-title">环信 IM</h1>
+      <h1 class="hero-title">环信 IM 开发文档</h1>
       <p class="hero-description">
         12小时快速集成单聊、群聊、聊天室、推送系统通知等完备 IM 功能，全平台覆盖
       </p>
-      <div class="hero-actions">
+      <div class="hero-actions" @click="openAi">
         <div class="documentation-button">
           <img
             src="/aibot.png"
@@ -15,7 +15,7 @@
           />
           <span>有集成问题？问环信文档AI助手</span>
         </div>
-        <button class="go-button" @click="openAi">Go</button>
+        <button class="go-button">Go</button>
       </div>
     </div>
   </div>
@@ -99,6 +99,7 @@ export default defineComponent({
   max-width: 100%;
   gap: 0;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 @media (max-width: 991px) {

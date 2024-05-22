@@ -32,8 +32,20 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
   font-size: 1.0em
 }
 
+.el-popper__arrow {
+  display: none;
+}
+
 .el-anchor .el-anchor__list .el-anchor__item a {
   font-size: 14px; 
+}
+
+.el-anchor .el-anchor__list .el-anchor__link:first-child {
+  padding-top: 0;
+}
+
+.el-anchor .el-anchor__list .el-anchor__link {
+  padding: 7px 0;
 }
 
 .el-anchor > .el-anchor__list >.el-anchor__item  {
