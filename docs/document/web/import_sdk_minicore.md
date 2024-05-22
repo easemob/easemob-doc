@@ -10,7 +10,7 @@ miniCore 是一个基座，支持登录登出和发送消息等[基础功能](ht
 只有按需导入 SDK 的方式才支持[本地会话管理功能](conversation_local.html)。
 :::
 
-下表为支持按需导入的 SDK 模块。
+## 支持按需导入的 SDK 模块
 
 | 功能        | 导入文件     | 使用方式          |
 | :--------------- | :--------------------------- | :---------------- |
@@ -21,7 +21,7 @@ miniCore 是一个基座，支持登录登出和发送消息等[基础功能](ht
 | 翻译             | import \* as translationPlugin from "easemob-websdk/translation/translation"; | miniCore.usePlugin(translationPlugin, "translation"); |
 | 在线状态订阅     | import \* as presencePlugin from "easemob-websdk/presence/presence";   | miniCore.usePlugin(presencePlugin, "presence");       |
 
-## 使用方法
+## 按需导入 SDK 模块
 
 ### 1. 安装 SDK
 
@@ -66,7 +66,7 @@ miniCore.usePlugin(contactPlugin, "contact");
 miniCore.contact.getContacts();
 ```
 
-## 与整体导入的 SDK 的 API 使用差别
+## 与整体导入的接口差别
 
 通过按需导入的 SDK 与[整体导入](overview.html#引入-sdk)的 SDK 在接口使用方面类似，唯一差别是后者将所有方法都挂载到 connection 类, 而使用 miniCore 时，基础的登录登出方法挂载在 miniCore 上，其他功能模块上的方法挂载在相应的模块上。
 
