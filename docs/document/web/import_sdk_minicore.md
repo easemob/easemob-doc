@@ -66,7 +66,7 @@ miniCore.usePlugin(contactPlugin, "contact");
 miniCore.contact.getContacts();
 ```
 
-## 与整体导入方式的接口差别
+## 与整体导入的接口差别
 
 通过按需导入的 SDK 与[整体导入](overview.html#引入-sdk)的 SDK 在接口使用方面类似，唯一差别是后者将所有方法都挂载到 connection 类, 而使用 miniCore 时，基础的登录登出方法挂载在 miniCore 上，其他功能模块上的方法挂载在相应的模块上。
 
