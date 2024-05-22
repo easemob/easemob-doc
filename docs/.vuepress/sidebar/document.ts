@@ -25,6 +25,7 @@ const documentSidebar = [
       { text: 'Demo（EaseIM App）体验', link: 'demo.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
+      { text: '按需导入 SDK（推荐）', link: 'import_sdk_minicore.html', only: ['web'] },
       { text: 'SDK 集成概述', link: 'overview.html', only: ['android', 'ios', 'web', 'flutter'] },
       { text: 'SDK 集成概述', link: 'overview.html', only: ['windows', 'react-native', 'unity'] },
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },

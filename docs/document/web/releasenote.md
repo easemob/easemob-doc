@@ -213,7 +213,7 @@
 
 ### 优化
 
-- [IM SDK] [miniCore](overview.html#引入SDK) 支持配置私有化配置。
+- [IM SDK] [miniCore](import_sdk_minicore.html) 支持配置私有化配置。
 - 优化重连逻辑。
 
 ### 修复

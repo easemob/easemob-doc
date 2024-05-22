@@ -14,6 +14,8 @@
 
 ## 引入 SDK
 
+- 按需导入 SDK 文件。为了减少 SDK 体积，推荐这种方式，详见[按需引入 SDK 功能模块](import_sdk_minicore)。
+
 - 对于 JavaScript SDK，导入代码如下：
 
 ```javascript
@@ -56,47 +58,6 @@ export default function Home() {
    }) 
   }, [])
 }
-```
-
-- 按需导入 SDK 文件。
-
-如果对 SDK 大小有要求，可根据功能按需导入 SDK 文件。
-
-| 功能             | 导入文件                                                                      | 使用方式                                              |
-| :--------------- | :---------------------------------------------------------------------------- | :---------------------------------------------------- |
-| 联系人和消息管理 | import \* as contactPlugin from "easemob-websdk/contact/contact";             | miniCore.usePlugin(contactPlugin, "contact");         |
-| 群组             | import \* as groupPlugin from "easemob-websdk/group/group";                   | miniCore.usePlugin(groupPlugin, "group");             |
-| 聊天室           | import \* as chatroomPlugin from "easemob-websdk/chatroom/chatroom";          | miniCore.usePlugin(chatroomPlugin, "chatroom");       |
-| 子区             | import \* as threadPlugin from "easemob-websdk/thread/thread";                | miniCore.usePlugin(threadPlugin, "thread");           |
-| 翻译             | import \* as translationPlugin from "easemob-websdk/translation/translation"; | miniCore.usePlugin(translationPlugin, "translation"); |
-| 在线状态订阅     | import \* as presencePlugin from "easemob-websdk/presence/presence";          | miniCore.usePlugin(presencePlugin, "presence");       |
-
-示例代码如下：
-
-```javascript
-import MiniCore from "easemob-websdk/miniCore/miniCore";
-import * as contactPlugin from "easemob-websdk/contact/contact";
-
-const miniCore = new MiniCore({
-  appKey: "your appKey",
-});
-
-// "contact" 为固定值
-miniCore.usePlugin(contactPlugin, "contact");
-
-// 获取联系人列表
-miniCore.contact.getContacts();
-
-// 添加监听事件
-miniCore.addEventHandler("handlerId", {
-  onTextMessage: (message) => {},
-});
-
-// 登录
-miniCore.open({
-  username: "username",
-  password: "password",
-});
 ```
 
 ## SDK 初始化

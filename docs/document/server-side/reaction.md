@@ -41,14 +41,14 @@
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/reaction/user/{username}
+POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 ```
 
 #### 路径参数
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :-------------------------------------------------------- |
-| `username` | String | 是       | 当前用户的用户 ID。 |
+| `userId` | String | 是       | 当前用户的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -125,14 +125,14 @@ curl -g -X POST 'https://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/reaction/user/{username}?msgIdList={N,M}&msgType={msgType}&groupId={groupId}
+GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgIdList={N,M}&msgType={msgType}&groupId={groupId}
 ```
 
 #### 路径参数
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :-------------------------------------------------------- |
-| `username` | String | 是       | 当前用户的用户 ID。 |
+| `userId` | String | 是       | 当前用户的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -227,14 +227,14 @@ curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/{{userI
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/reaction/user/{username}?msgId={msgId}&message={message}
+DELETE https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgId={msgId}&message={message}
 ```
 
 ### 路径参数
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :-------------------------------------------------------- |
-| `username` | String | 是       | 当前用户的用户 ID。 |
+| `userId` | String | 是       | 当前用户的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -288,14 +288,14 @@ curl -g -X DELETE 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz?m
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/reaction/user/{username}/detail?msgId={msgId}&message={message}&limit={limit}&cursor={cursor}
+GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={msgId}&message={message}&limit={limit}&cursor={cursor}
 ```
 
 #### 路径参数
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :-------------------------------------------------------- |
-| `username` | String | 是       | 当前用户的用户 ID。 |
+| `userId` | String | 是       | 当前用户的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
