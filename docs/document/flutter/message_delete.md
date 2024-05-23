@@ -46,7 +46,7 @@ try {
 登录该账号的其他设备会收到 `EMMultiDeviceEventHandler` 中的 `onRemoteMessagesRemoved` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V4.0.0 或以上版本并联系商务。
+若使用该功能，需将 SDK 升级至 V4.0.0 或以上版本。
 :::
 
 ```dart

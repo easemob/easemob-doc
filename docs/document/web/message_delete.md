@@ -40,7 +40,7 @@ conn.deleteAllMessagesAndConversations().then(() => {
 多端多设备登录时，删除成功后会触发 `onMultiDeviceEvent#deleteRoaming` 回调。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V4.1.2 或以上版本并联系商务开通。
+若使用该功能，需将 SDK 升级至 V4.1.2 或以上版本。
 :::
 
 示例代码如下：
