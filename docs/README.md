@@ -26,7 +26,7 @@ sdkStarter:
       text: Android
     - icon: /sdk/iOS.svg
       link: /document/ios/quickstart.html
-      text: iOS
+      text: iOS 
     - icon: /sdk/web.svg
       link: /document/web/quickstart.html
       text: Web
