@@ -1101,7 +1101,7 @@ projects:
                 link: /uikit/chatuikit/android/chatfeature_message.html#消息引用
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /doc/uikit/chatuikit/ios/chatfeature_message.html#消息引用
+                link: /uikit/chatuikit/ios/chatfeature_message.html#消息引用
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatfeature_message.html#消息引用
@@ -1636,6 +1636,33 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /document/android/easecallkit.html#通话异常回调
+  - title: 场景方案
+    features:
+      - contexts:
+          - text: 超级社区
+            desc: 环信超级社区（Circle）是一款基于环信 IM 打造的类 Discord 实时社区应用场景方案，支持社区（Server）、频道（Channel） 和子区（Thread） 三层结构。一个 App 下可以有多个社区，同时支持陌生人/好友单聊。用户可创建和管理自己的社区，在社区中设置和管理频道将一个话题下的子话题进行分区，在频道中根据感兴趣的某条消息发起子区讨论，实现万人实时群聊，满足超大规模用户的顺畅沟通需求。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /product/circle/circle_quickstart_android.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /product/circle/circle_quickstart_ios.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /product/circle/circle_quickstart_web.html
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /product/circle/server_mgmt_rest.html
+          - text: 语聊房
+            desc: 环信语聊房（Easemob Chat Room）场景方案是环信打造的一款低门槛、高可用的语聊房场景方案。该场景方案融合了环信即时通讯云的聊天室和声网 RTC 的音频技术，提供市面主流的语聊房 App 的功能，其核心功能包括房间管理、麦位控制、聊天打赏和音频特效等，覆盖语音游戏、语音社交、相亲交友等场景，能够较为全面满足客户的语聊房开发需求。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /product/circle/circle_quickstart_android.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /product/circle/circle_quickstart_ios.html           
   - title: API 参考
     features:
       - title: IM 客户端
