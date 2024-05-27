@@ -34,16 +34,16 @@ sdkStarter:
       link: /document/applet/wechat.html
       text: Applet
     - icon: /sdk/flutter.svg
-      link: /document/flutter/overview.html
+      link: /document/flutter/quickstart.html
       text: Flutter
     - icon: /sdk/react.svg
-      link: /document/react-native/overview.html
+      link: /document/react-native/quickstart.html
       text: React Native
     - icon: /sdk/unity.svg
-      link: /document/unity/overview.html
+      link: /document/unity/quickstart.html
       text: Unity
     - icon: /sdk/windows.svg
-      link: /document/windows/overview.html
+      link: /document/windows/quickstart.html
       text: Windows 
 
 projects:
@@ -707,7 +707,7 @@ projects:
                 text: REST
                 link: /document/server-side/chatroom.html    
           - text: 管理聊天室成员
-            desc: 支持聊天室白名单、黑名单、禁言、退出聊天室、获取聊天室成员列表、管理聊天室所有者和管理员以及监听聊天室事件。
+            desc: 支持创建、加入和退出聊天室、聊天室白名单、黑名单、禁言、以及监听聊天室事件等功能。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
