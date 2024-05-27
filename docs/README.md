@@ -609,7 +609,7 @@ projects:
                 link: /document/electron/group.html#群组管理 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group.html    
+                link: /document/server-side/group.html#创建和管理群组    
           - text: 管理群成员
             desc: 支持加入、退出群组、群组白名单、黑名单、禁言和设置群成员的自定义属性。
             sdks:
@@ -642,7 +642,7 @@ projects:
                 link: /document/electron/group.html#群成员管理 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group.html   
+                link: /document/server-side/group.html#管理群组成员   
           - text: 管理群组属性
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:
@@ -675,7 +675,7 @@ projects:
                 link: /document/electron/group.html#修改群组信息 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group.html     
+                link: /document/server-side/group.html#修改群组信息     
           - text: 创建和管理聊天室
             desc: 支持创建和加入聊天室、获取聊天室详情、退出和解散聊天室、更新聊天室成员人数以及监听聊天室事件。
             sdks:
@@ -708,7 +708,7 @@ projects:
                 link: /document/electron/chatroom.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/chatroom.html    
+                link: /document/server-side/chatroom.html#管理聊天室    
           - text: 管理聊天室成员
             desc: 支持创建、加入和退出聊天室、聊天室白名单、黑名单、禁言、以及监听聊天室事件等功能。
             sdks:
@@ -741,7 +741,7 @@ projects:
                 link: /document/electron/chatroom.html#加入聊天室
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/chatroom.html
+                link: /document/server-side/chatroom.html#管理聊天室成员
           - text: 管理聊天室属性
             desc: 管理聊天室基本属性，包括聊天室名称、描述和公告，以及自定义属性。
             sdks:
@@ -771,10 +771,10 @@ projects:
                 link: /document/windows/room_attributes.html 
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/chatroom.html#查询聊天室信息
+                link: /document/electron/chatroom.html#修改聊天室信息
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/chatroom.html
+                link: /document/server-side/chatroom.html#设置聊天室自定义属性
           - text: 子区管理
             desc: 支持创建、解散、加入、退出子区，修改子区名称、获取子区详情和子区成员列表和子区列表，获取子区中最新一条消息以及监听子区事件。
             sdks:
