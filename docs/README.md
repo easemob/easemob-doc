@@ -279,7 +279,7 @@ projects:
                 link: /document/windows/message_import_insert.html
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/conversation.html#插入消息  
+                link: /document/electron/conversation.html#插入消息
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/message_import.html
@@ -478,6 +478,9 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/conversation_unread.html
+              - icon: /sdk/electron.svg
+                text: Electron
+                link: /document/electron/conversation.html#获取会话中的未读消息计数   
           - text: 本地会话
             desc: Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 LocalCache 模块对本地会话数据进行管理。
             sdks:
@@ -567,10 +570,10 @@ projects:
                 link: /document/windows/conversation_delete.html  
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/conversation_delete.html#删除会话  
+                link: /document/electron/conversation.html#删除会话
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_recall.html        
+                link: /document/server-side/message_recall.html#单向删除会话        
       - title: 群组和聊天室
         icon: /feature/group.svg
         contexts:
