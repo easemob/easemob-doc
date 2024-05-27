@@ -1396,6 +1396,24 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_common.html#创建聊天室
+          - text: 界面主题管理
+            desc: 聊天室 UIKit 内置浅色和深色主题，默认为浅色主题。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /uikit/chatroomuikit/android/roomuikit_theme.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /uikit/chatroomuikit/ios/roomuikit_theme.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /uikit/chatroomuikit/web/roomuikit_theme.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /uikit/chatroomuikit/flutter/roomuikit_theme.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /uikit/chatroomuikit/react-native/roomuikit_theme.html        
           - text: 弹幕和打赏
             desc: 用户可在聊天室中向其他成员发送文字和表情的消息，也可以通过赠送虚拟礼物，向聊天室中的主播或其他用户表达赞赏或者支持。
             sdks:
@@ -1504,24 +1522,6 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_message.html#消息撤回  
-          - text: 界面主题管理
-            desc: 聊天室 UIKit 内置浅色和深色主题，默认为浅色主题。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomuikit_theme.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomuikit_theme.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomuikit_theme.html
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomuikit_theme.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomuikit_theme.html  
           - text: 查看成员列表
             desc: 聊天室成员列表显示了该聊天室中的当前在线用户。
             sdks:
