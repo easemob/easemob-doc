@@ -421,7 +421,7 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_deliver_only_online.html
-           - text: 消息流量统计
+          - text: 消息流量统计
             desc: 本地消息的流量统计功能。
             sdks:
               - icon: /sdk/android.svg
