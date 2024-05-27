@@ -927,7 +927,34 @@ projects:
                 link: /document/windows/presence.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/presence.html          
+                link: /document/server-side/presence.html
+          - text: 多设备登录
+            desc: 同一账号在多个设备上登录，所有已登录的设备之间可以同步消息、好友和群组相关操作、子区操作以及会话操作。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/multi_device.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/multi_device.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/multi_device.html
+              - icon: /sdk/uniapp.svg
+                text: 小程序
+                link: /document/applet/multi_device.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/multi_device.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/multi_device.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/multi_device.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/multi_device.html                
       - title: 推送
         icon: /feature/push.svg
         contexts:
