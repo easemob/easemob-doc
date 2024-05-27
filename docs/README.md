@@ -1098,19 +1098,19 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /uikit/chatuikit/android/chatfeature_message.html#消息引用
+                link: /doc/uikit/chatuikit/android/chatfeature_message.html#消息引用
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_message.html#消息引用
+                link: /doc/uikit/chatuikit/ios/chatfeature_message.html#消息引用
               - icon: /sdk/web.svg
                 text: Web
-                link: /uikit/chatuikit/web/chatfeature_message.html#消息引用
+                link: /doc/uikit/chatuikit/web/chatfeature_message.html#消息引用
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_message.html#消息引用
+                link: /doc/uikit/chatuikit/flutter/chatfeature_message.html#消息引用
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_message.html#消息引用
+                link: /doc/uikit/chatuikit/react-native/chatfeature_message.html#消息引用
           - text: 表情回复
             desc: 指用户可以使用表情符号回复消息。在单群聊 UIKit 中，用户可以长按单条消息触发消息拓展功能菜单，选择表情回复。
             sdks:
