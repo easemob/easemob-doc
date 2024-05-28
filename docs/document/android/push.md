@@ -1615,15 +1615,19 @@ EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("message content");
 // 设置要发送的用户 ID。
 message.setTo("toChatUsername");
-// 设置自定义推送提示。
-JSONObject extObject = new JSONObject();
-try {
-    extObject.put("test1", "test 01");
-} catch (JSONException e) {
-    e.printStackTrace();
-}
+// 设置自定义推送扩展。
+JSONObject emPushExt = new JSONObject() {
+   {
+        put("custom", new JSONObject() {
+            {
+                put("key1", "value1");
+                put("key2", "value2");
+            }
+        });
+    }
+};
 // 将推送扩展设置到消息中。
-message.setAttribute("em_apns_ext", extObject);
+message.setAttribute("em_push_ext", emPushExt);
 // 设置消息体。
 message.addBody(txtBody);
 // 设置消息回调。
@@ -1636,8 +1640,9 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :--------------- | :----------------------------------------------------------------------- |
 | `txtBody`        | 消息体。                                                                 |
 | `toChatUsername` | 消息接收方 ID。                                                          |
-| `em_apns_ext`    | 消息扩展，使用扩展的方式向推送中添加自定义字段，该值为固定值，不可修改。 |
-| `test1`          | 自定义 key，用户自定义。                                                 |
+| `em_push_ext`    | 环信消息推送扩展固定值，不可修改。 |
+| `custom`         | 消息扩展，使用扩展的方式向推送中添加自定义字段，该值为固定值。 |
+| `key1`/`key2`    | 自定义消息推送扩展的具体内容。 |
 
 应用端解析自定义字段，参见 [解析收到的推送字段](#_5-解析收到的推送字段)。
 
