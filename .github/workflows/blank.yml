@@ -2,7 +2,7 @@ name: note build
 # 触发workflow的条件
 on:
   push:
-    branches: ["doc-v2"]
+    branches: ["feature-homepage"]
 
 env:
   SERVER_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }} # 服务器私钥
@@ -23,34 +23,17 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
+      - name: Run install
+        uses: borales/actions-yarn@v4
         with:
-          version: 7
-          run_install: false
+          cmd: install
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: Build production bundle
+        uses: borales/actions-yarn@v4
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
-        run: pnpm docs:build
+          cmd: docs:build
 
       # 上传打包资源
       - name: Deploy
@@ -62,20 +45,21 @@ jobs:
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_PORT: ${{ secrets.SERVER_PORT }} -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
-          TARGET: /data/apps/data/docs-im-beta/ # 服务器目标路径
+          TARGET: /data/apps/data/docs-im-beta2/ # 服务器目标路径
 
-      - name: CDN Refresh HTTPS
-        uses: visionwx/ali-cdn-refresh@main
-        with:
-          accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
-          accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
-          type: Directory
-          path: https://doc.easemob.com/
-          
-      - name: CDN Refresh HTTP
-        uses: visionwx/ali-cdn-refresh@main
-        with:
-          accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
-          accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
-          type: Directory
-          path: http://doc.easemob.com/
+
+      # - name: CDN Refresh HTTPS
+      #   uses: visionwx/ali-cdn-refresh@main
+      #   with:
+      #     accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
+      #     accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
+      #     type: Directory
+      #     path: https://doc.easemob.com/
+
+      # - name: CDN Refresh HTTP
+      #   uses: visionwx/ali-cdn-refresh@main
+      #   with:
+      #     accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
+      #     accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
+      #     type: Directory
+      #     path: http://doc.easemob.com/

@@ -8,7 +8,7 @@ interface CustomConfig {
 
 export default hopeTheme(<ThemeOptions & CustomConfig>{
   hostname: "https://doc.easemob.com/",
-  home: "/product/introduction",
+  home: "/",
   iconAssets: "iconfont",
   logo: "/logo.png",
   repo: "easemob/easemob-doc",
@@ -21,7 +21,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   navbar: zhNavbar,
   // sidebar
   sidebar: zhSidebar,
-  footer: "环信IM文档",
+  footer: "环信 IM 文档 Version: 1.0.0 ©️环信",
   displayFooter: true,
   headerDepth: 2,
   extra_nav: [
