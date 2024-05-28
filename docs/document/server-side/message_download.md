@@ -75,7 +75,7 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | 参数              | 类型   | 是否必需 | 描述      |
 | :---------------- | :----- | :------- | :------------------------ |
 | `Content-Type`    | String | 是       | 内容类型： `multipart/form-data`。 |
-| `Authorization`   | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+| `Authorization`   | String | 否       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 | `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（`share-secret`）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。<br/><Container type="tip" title="提示">要使用文件访问限制功能，请联系商务开通。</Container>|
 
 #### 请求 body
@@ -165,7 +165,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | 参数            | 类型   | 是否必需 | 描述           |
 | :-------------- | :----- | :------- | :--------------- |
 | `Accept`        | String | 否       | 内容类型。填写 `application/octet-stream`，表示下载二进制数据流格式的文件。   |
-| `Authorization` | String | 是      | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。     |
+| `Authorization` | String | 否      | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。     |
 | `share-secret`  | String | 否       | 文件访问密钥。若上传文件时限制了访问，下载该文件时则需要该访问密钥。成功上传文件后，从 [文件上传](#上传文件) 的响应 body 中获取该密钥。 |
 
 ### HTTP 响应
@@ -223,7 +223,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | 参数            | 类型   | 是否必需       | 描述       |
 | :-------------- | :----- | :--------------------- | :------------------ |
 | `Accept`        | String | 否     | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。        |
-| `Authorization` | String | 是     | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。                                                        |
+| `Authorization` | String | 否     | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。                                                        |
 | `thumbnail`     | Bool   | 否      | 是否下载缩略图：<ul><li> `true`：是，下载缩略图。</li><li>`false`：否，下载原文件。</li></ul> <Container type="notice" title="注意">若该参数为空，下载原文件。</Container> |
 | `share-secret`  | String | 否    | 缩略图访问密钥。若上传图片时限制了访问（`restrict-access` 设置为 `true`），下载缩略图时则需要该访问密钥。成功上传图片后，从 [文件上传](#上传文件) 的响应 body 中获取该密钥。 |
 

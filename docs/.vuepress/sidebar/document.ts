@@ -51,7 +51,7 @@ const documentSidebar = [
           { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
           { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
           { text: '置顶会话', link: 'conversation_pin.html' },
-          { text: '会话标记', link: 'conversation_mark.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
+          { text: '会话标记', link: 'conversation_mark.html' },
           { text: '删除会话', link: 'conversation_delete.html' },
         ]
       },
@@ -64,9 +64,9 @@ const documentSidebar = [
           { text: '获取历史消息', link: 'message_retrieve.html' },
           { text: '撤回消息', link: 'message_recall.html' },
           { text: '搜索消息', link: 'message_search.html', except: ['web']},
-          { text: '实现消息回执', link: 'message_receipt.html'},
+          { text: '消息回执', link: 'message_receipt.html'},
           { text: '修改消息', link: 'message_modify.html'},
-          { text: '转发消息', link: 'message_forward.html', only: ['android', 'ios']},
+          { text: '转发消息', link: 'message_forward.html', except: ['web']},
           { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
           { text: '更新消息', link: 'message_update.html', except: ['web']},
           { text: '删除消息', link: 'message_delete.html' },         
@@ -184,9 +184,10 @@ const documentSidebar = [
           { text: '发送和接收消息', link: 'message_send_receive.html' },
           { text: '获取历史消息', link: 'message_retrieve.html' },
           { text: '撤回消息', link: 'message_recall.html' },
-          { text: '实现消息回执', link: 'message_receipt.html' }, 
+          { text: '消息回执', link: 'message_receipt.html' }, 
           { text: '修改消息', link: 'message_modify.html' },
-          { text: '删除消息', link: 'message_delete.html' }, 
+          { text: '删除消息', link: 'message_delete.html' },
+          { text: '置顶消息', link: 'message_pin.html' }, 
           { text: '翻译消息', link: 'message_translation.html' },
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},        
         ]
@@ -238,6 +239,7 @@ const documentSidebar = [
   {
     text: '其他帮助',
     children: [
+      { text: '错误码', link: 'error.html' },
       { text: 'Uniapp 生成原生 Android、iOS 应用', link: 'uniappnativeapp.html' },
       { text: '小程序模板使用指南', link: 'uniappuikit.html' },
       { text: '如何配置服务器域名', link: 'serverconfig.html' },
@@ -288,7 +290,6 @@ const documentSidebar = [
     children: [
       { text: '即时通讯 REST API 概览', link: 'overview.html' },
       { text: '用户体系管理', link: 'account_system.html' },
-      { text: '推送设置', link: 'push.html' },
       { 
         text: '消息管理', 
         children: [
@@ -309,6 +310,7 @@ const documentSidebar = [
       { text: '聊天室', link: 'chatroom.html' },
       { text: '在线状态订阅', link: 'presence.html' },
       { text: '消息表情回复', link: 'reaction.html' },
+      { text: '离线推送', link: 'push.html' },
     ],
     only: ['server-side']
   },
