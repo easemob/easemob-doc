@@ -475,7 +475,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/contacts/import
 
 | 参数      | 类型 | 是否必需 | 描述    |
 |:--------|:--------|:-----|:----------------------|
-| `isSendNotice` | Boolean | 否    | 好友导入后是否向 SDK 发送通知：</br> - `true`：是；</br> -（默认）`false`：否。 |
+| `isSendNotice` | Boolean | 否    | 好友导入后是否向 SDK 发送通知：<br/> - `true`：是；<br/> -（默认）`false`：否。 |
 
 #### 请求 body
 
