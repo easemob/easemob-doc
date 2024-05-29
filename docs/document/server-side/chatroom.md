@@ -1011,11 +1011,15 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数            | 类型   | 是否必需 | 描述     |
+| :-------------- | :----- | :------- | :-------------------- |
+| `username`    | String | 是       | 要设置的聊天室自定义属性的所属用户 ID。   |
+
+其它参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :-------------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
@@ -1063,6 +1067,9 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ```json
 {
+  "uri":"https://XXXX/XXXX/XXXX/metadata/chatroom",  
+  "timestamp":1716887320215,
+  "action":"put",
   "data": {
     "successKeys": ["key1"],
     "errorKeys": { "key2": "errorDesc" }
@@ -1128,8 +1135,11 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ```json
 {
+  "uri": "https://XXXX/XXXX/XXXX/metadata/chatroom", 
+  "timestamp": 1716891388636, 
+  "action": "post", 
   "data": {
-    "key1": "value1",
+    "key1": "value1", 
     "key2": "value2"
   }
 }
@@ -1149,7 +1159,11 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数            | 类型   | 是否必需 | 描述     |
+| :-------------- | :----- | :------- | :-------------------- |
+| `username`    | String | 是       | 要删除的聊天室自定义属性的所属用户 ID。    |
+
+其它参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -1196,6 +1210,10 @@ DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json'
 
 ```json
 {
+  "uri":"https://XXXX/XXXX/XXXX/metadata/chatroom",
+  "status":"ok",
+  "timestamp":1716887320215,
+  "action":"delete",
   "data": {
     "successKeys": ["key1"],
     "errorKeys": { "key2": "errorDesc" }
@@ -1215,23 +1233,26 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数            | 类型   | 是否必需 | 描述     |
+| :-------------- | :----- | :------- | :-------------------- |
+| `username`    | String | 是       | 强制设置的聊天室自定义属性的所属用户 ID。    |
+
+其它参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述         |
+| :-------------- | :----- | :------- | :------------------ |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### 请求 body
 
-| 参数         | 类型   | 是否必需 | 描述                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| :----------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 参数         | 类型   | 是否必需 | 描述   |
+| :----------- | :----- | :------- | :---------- |
 | `metaData`   | JSON   | 是       | 聊天室的自定义属性，存储为键值对（key-value pair）集合，即 Map<String,String>。该集合中最多可包含 10 个键值对，在每个键值对中，key 为属性名称，最多可包含 128 个字符；value 为属性值，不能超过 4096 个字符。每个聊天室最多可有 100 个自定义属性，每个应用的聊天室自定义属性总大小为 10 GB。<br/> key 支持以下字符集：<br/> • 26 个小写英文字母 a-z；<br/> • 26 个大写英文字母 A-Z；<br/> • 10 个数字 0-9；<br/> • “\_”, “-”, “.”。 |
-| `autoDelete` | String | 否       | 当前成员退出聊天室时是否自动删除该自定义属性。 <br/> • （默认）'DELETE'：是； <br/> • 'NO_DELETE'：否。                                                                                                                                                                                                                                                                                                                            |
-
+| `autoDelete` | String | 否   | 当前成员退出聊天室时是否自动删除该自定义属性。 <br/> • （默认）'DELETE'：是； <br/> • 'NO_DELETE'：否。    |
 #### HTTP 响应
 
 ##### 响应 body
@@ -1239,7 +1260,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 字段               | 类型   | 描述                                                                     |
-| :----------------- | :----- | :----------------------------------------------------------------------- |
+| :----------------- | :----- | :---------------------------- |
 | `data.successKeys` | Array  | 设置成功的聊天室属性名称列表。                                           |
 | `data.errorKeys`   | Object | 设置失败的聊天室属性。这里返回键值对，key 为属性名称，value 为失败原因。 |
 
@@ -1257,7 +1278,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "metaData": {
         "key1": "value1",
-		"key2": "value2"
+		    "key2": "value2"
     },
     "autoDelete": "DELETE"
  }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1/forced'
@@ -1288,7 +1309,11 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数            | 类型   | 是否必需 | 描述     |
+| :-------------- | :----- | :------- | :-------------------- |
+| `username`    | String | 是       | 强制删除的聊天室自定义属性的所属用户 ID。    |
+
+其它参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
