@@ -32,7 +32,7 @@ sdkStarter:
       text: Web
     - icon: /sdk/uniapp.svg
       link: /document/applet/wechat.html
-      text: Applet
+      text: 小程序
     - icon: /sdk/flutter.svg
       link: /document/flutter/quickstart.html
       text: Flutter
@@ -65,7 +65,7 @@ projects:
                 text: Web
                 link: /document/web/message_send_receive.html
               - icon: /sdk/uniapp.svg
-                text: Applet
+                text: 小程序
                 link: /document/applet/message_send_receive.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -98,7 +98,7 @@ projects:
                 text: Web
                 link: /document/web/message_retrieve.html
               - icon: /sdk/uniapp.svg
-                text: Applet
+                text: 小程序
                 link: /document/applet/message_retrieve.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -131,7 +131,7 @@ projects:
                 text: Web
                 link: /document/web/message_recall.html
               - icon: /sdk/uniapp.svg
-                text: Applet
+                text: 小程序
                 link: /document/applet/message_recall.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1659,10 +1659,10 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /product/circle/circle_quickstart_android.html
+                link: /product/voiceroom/demo_scenario_introduction.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /product/circle/circle_quickstart_ios.html           
+                link: /product/voiceroom/demo_scenario_introduction.html          
   - title: API 参考
     features:
       - title: IM 客户端
@@ -1672,7 +1672,7 @@ projects:
             link: https://sdkdocs.easemob.com/apidoc/android/chat3.0/annotated.html
           - text: iOS
             link: https://sdkdocs.easemob.com/apidoc/ios/chat3.0/annotated.html
-          - text: Web/Applet
+          - text: Web/小程序
             link: https://doc.easemob.com/jsdoc/index.html
           - text: Flutter
             link: https://sdkdocs.easemob.com/apidoc/flutter/index.html
