@@ -30,7 +30,7 @@ sdkStarter:
     - icon: /sdk/web.svg
       link: /document/web/quickstart.html
       text: Web
-    - icon: /sdk/applet.svg.svg
+    - icon: /sdk/applet.svg
       link: /document/applet/wechat.html
       text: 小程序
     - icon: /sdk/flutter.svg
@@ -64,7 +64,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/message_send_receive.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_send_receive.html
               - icon: /sdk/flutter.svg
@@ -97,7 +97,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/message_retrieve.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_retrieve.html
               - icon: /sdk/flutter.svg
@@ -130,7 +130,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/message_recall.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_recall.html
               - icon: /sdk/flutter.svg
@@ -184,7 +184,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/message_receipt.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_receipt.html
               - icon: /sdk/flutter.svg
@@ -211,7 +211,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/message_modify.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_modify.html
               - icon: /sdk/flutter.svg
@@ -241,7 +241,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/message_send_receive.html#发送合并消息
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_send_receive.html#发送合并消息
               - icon: /sdk/flutter.svg
@@ -319,7 +319,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/message_delete.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_delete.html
               - icon: /sdk/flutter.svg
@@ -352,7 +352,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/message_pin.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_pin.html
               - icon: /sdk/flutter.svg
@@ -379,7 +379,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/message_translation.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_translation.html
               - icon: /sdk/flutter.svg
@@ -406,7 +406,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/message_deliver_only_online.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_deliver_only_online.html
               - icon: /sdk/flutter.svg
@@ -442,7 +442,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/conversation_list.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/conversation_list.html
               - icon: /sdk/flutter.svg
@@ -499,7 +499,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/conversation_pin.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/conversation_pin.html
               - icon: /sdk/flutter.svg
@@ -526,7 +526,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/conversation_mark.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/conversation_mark.html
               - icon: /sdk/flutter.svg
@@ -553,7 +553,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/conversation_delete.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/conversation_delete.html
               - icon: /sdk/flutter.svg
@@ -589,7 +589,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/group_manage.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/group_manage.html
               - icon: /sdk/flutter.svg
@@ -622,7 +622,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/group_members.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/group_members.html
               - icon: /sdk/flutter.svg
@@ -655,7 +655,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/group_attributes.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/group_attributes.html
               - icon: /sdk/flutter.svg
@@ -688,7 +688,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/room_manage.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/room_manage.html
               - icon: /sdk/flutter.svg
@@ -721,7 +721,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/room_members.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/room_members.html
               - icon: /sdk/flutter.svg
@@ -754,7 +754,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/room_attributes.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/room_attributes.html
               - icon: /sdk/flutter.svg
@@ -787,7 +787,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/thread.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/thread.html
               - icon: /sdk/flutter.svg
@@ -817,7 +817,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/thread_message.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/thread_message.html
               - icon: /sdk/flutter.svg
@@ -853,7 +853,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/userprofile.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/userprofile.html
               - icon: /sdk/flutter.svg
@@ -883,7 +883,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/user_relationship.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/user_relationship.html
               - icon: /sdk/flutter.svg
@@ -913,7 +913,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/presence.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/presence.html
               - icon: /sdk/flutter.svg
@@ -943,7 +943,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/multi_device.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/multi_device.html
               - icon: /sdk/flutter.svg
@@ -996,7 +996,7 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/error.html
-              - icon: /sdk/applet.svg.svg
+              - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/error.html
               - icon: /sdk/flutter.svg
