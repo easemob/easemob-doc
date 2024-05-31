@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import { ContactList } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
-const Conversation = () => {
+const ContactList = () => {
   return (
     <div style={{ width: "30%", height: "100%" }}>
       <ContactList />
@@ -33,7 +33,7 @@ import React, { useEffect, useState } from "react";
 import { ContactList } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
-const Conversation = () => {
+const ContactList = () => {
   return (
     <div style={{ width: "30%", height: "100%" }}>
       <ContactList header={<div>自定义 Header</div>} />
@@ -53,7 +53,7 @@ import React, { useEffect, useState } from "react";
 import { ContactList } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
-const Conversation = () => {
+const ContactList = () => {
   return (
     <div style={{ width: "30%", height: "100%" }}>
       <ContactList

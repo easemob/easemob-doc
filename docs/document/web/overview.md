@@ -38,6 +38,9 @@ export default {
     import("easemob-websdk").then((res) => {
       const EC = res.default;
       console.log(EC, "easemob websdk");
+      const conn = new EC.connection({
+        appKey: "your appkey"
+      });
     });
   }
 };
@@ -55,7 +58,10 @@ export default function Home() {
     import('easemob-websdk').then((res)=>{
       const EC = res.default;
       console.log(EC, "easemob websdk");
-   }) 
+      const conn = new EC.connection({
+        appKey: "your appkey"
+      });
+    }) 
   }, [])
 }
 ```

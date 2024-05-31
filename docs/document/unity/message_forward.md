@@ -22,7 +22,7 @@
 
 ### 转发单条消息
 
-你可以调用 `Message#CreateSendMessage` 和 `Message#Attributes` 方法通过传入原消息的消息体和扩展字段（若原消息有的话），创建一条与原消息完全相同的消息，然后调用 `ChatManager#SendMessage` 方法转发消息。
+你可以调用 `Message#CreateSendMessage` 方法和 `Message#Attributes` 属性通过传入原消息的消息体和扩展字段（若原消息有的话），创建一条与原消息完全相同的消息，然后调用 `ChatManager#SendMessage` 方法转发消息。
 
 你可以在单聊、群组聊天、聊天室以及子区中转发所有类型的消息。对于附件类型的消息，转发时无需重新上传附件，不过，若消息过期（即由于超过了存储时间已从环信服务器上删除），转发后接收方可查看附件地址，但无法下载附件。
 
