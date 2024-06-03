@@ -45,7 +45,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
-```objectivec
+```Objective-C
 // 异步方法
 [[EMClient sharedClient] registerWithUsername:@"username"
                                          password:@"your password"
@@ -72,7 +72,11 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
-```objectivec
+```Objective-C
+    //SDK 初始化 `EMOptions` 时可以传入 `loginExtensionInfo` 属性投递给被踢下线的设备。该属性需要开启多设备登录的情况下才能生效。
+    EMOptions *options = [EMOptions optionsWithAppkey:<#AppKey#>];
+    options.loginExtensionInfo = @"you was kicked out by other device";
+    [EMClient.sharedClient initializeSDKWithOptions:options];
 // 异步方法
 [[EMClient sharedClient] loginWithUsername:@"username"
                                      password:@"your password"
@@ -167,10 +171,18 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 你可以通过监听 `EMClientDelegate` 中的以下回调，调用 `EMClient#logout:completion:` 退出登录并返回登录界面。
 
 ```objectivec
-// 当前登录账号在其它设备登录时会触发回调
-- (void)userAccountDidLoginFromOtherDevice
+// 当前登录账号在其它设备登录时，当前登录的设备被踢下线时会触发该回调。该回调在 4.7.0 及其以后版本已经被弃用，由 `userAccountDidLoginFromOtherDeviceWithInfo` 回调替换。
+- (void)userAccountDidLoginFromOtherDevice 
 {
 }
+// 当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。
+- (void)userAccountDidLoginFromOtherDeviceWithInfo:(EMLoginExtensionInfo* _Nullable)info {
+    //`EMLoginExtensionInfo` 中包含 `deviceName`（将当前设备踢下线的设备）以及 `loginExtensionInfo` 属性。`loginExtensionInfo` 即 SDK 初始化时传入的登录时携带给其他设备的扩展信息。
+}
+
+    //若每次登录都设置 `loginExtensionInfo`，需要通过 `EMClient` 获取 SDK 初始化时的options 属性进行设置。
+    EMClient.sharedClient.options.loginExtensionInfo = @"";
+    //然后再调用登录
 
 // 当前登录账号被强制退出时会收到该回调，如密码被修改、登录设备过多、服务被封禁、被强制下线等原因
 - (void)userAccountDidForcedToLogout:(EMError *_Nullable)aError
