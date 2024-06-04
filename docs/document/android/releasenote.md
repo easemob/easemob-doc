@@ -17,7 +17,8 @@
 
 ### 优化
 
-[IM SDK] 从服务端拉取群组时，不再先清除本地群组，而是将拉取的信息与缓存中的信息进行对比，将本地现有信息进行更新，将新的信息插入缓存。若要清除数据库和缓存中的群组信息，可以调用 `com.hyphenate.chat.EMGroupManager#cleanAllGroupsFromLocal` 方法。
+- [IM SDK] 从服务端拉取群组时，不再先清除本地群组，而是将拉取的信息与本地信息进行对比，将本地现有信息进行更新，将新的信息在本地插入。若要清除数据库和缓存中的群组信息，可以调用 `com.hyphenate.chat.EMGroupManager#cleanAllGroupsFromLocal` 方法。
+- 登出方法 `EMConnectionListener#onLogout(int, java.lang.String)` 已过期，请用 `onLogout(int errorCode, EMLoginExtensionInfo info)` 方法代替。
 
 ### 修复
 

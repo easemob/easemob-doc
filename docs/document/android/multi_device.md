@@ -101,7 +101,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ### 设置登录设备的名称
 
-即时通讯 IM 自 4.1.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
+即时通讯 IM 自 4.1.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，被踢就能知道是被哪个设备挤下线的。
 
 初始化 SDK 时，你可以调用 `EMOptions#setCustomDeviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `EMConnectionListener#onLogout` 回调会包含导致该设备被踢下线的自定义设备名称。
 
@@ -126,8 +126,9 @@ EMClient.getInstance().chatManager().sendMessage(message);
             }
 
             @Override
-            public void onLogout(int errorCode, String info) {
-               // 当 errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}，info 表示将当前设备踢出/挤下线的自定义设备名称，若这种情况下设备未设置自定义名称，默认回调设备的型号。其他错误码场景下，info 为空。
+            public void onLogout(int errorCode, EMLoginExtensionInfo info) {
+                //自 4.7.0 开始，原有的 EMConnectionListener#onLogout(int, java.lang.String) 方法废弃，自定义设备信息包装在 EMLoginExtensionInfo 类中。
+               // 当 errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}，info.deviceInfo 表示将当前设备踢出/挤下线的自定义设备名称，若这种情况下设备未设置自定义名称，默认回调设备的型号。其他错误码场景下，info.deviceInfo为空。
             }
         });
 ```
@@ -154,6 +155,39 @@ EMClient.getInstance().chatManager().sendMessage(message);
     EMOptions options=new EMOptions();
     options.setCustomOSPlatform(1);
     EMClient.getInstance().init(context,options);
+```
+
+### 设置登录设备的扩展信息
+
+即时通讯 IM 自 4.7.0 版本开始支持设备的自定义扩展信息，这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
+
+初始化 SDK 时，你可以调用 `EMOptions#setLoginCustomExt` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `EMConnectionListener#onLogout` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
+
+:::notice
+登录成功后才会将该设置发送到服务器。
+:::
+
+```java
+    EMOptions options =  new EMOptions();
+    options.setLoginCustomExt("你的自定义扩展信息json字符串");
+    EMClient.getInstance().init(context,options);
+
+    EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+        @Override
+        public void onConnected() {
+
+        }
+
+        @Override
+        public void onDisconnected(int errorCode) {
+
+        }
+
+        @Override
+        public void onLogout(int errorCode, EMLoginExtensionInfo info) {
+            //当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}，info.deviceExt 是将当前设备挤下线的新登录设备的自定义扩展信息。其他错误码场景下 info.deviceExt 为空。
+        }
+    });
 ```
 
 ### 强制指定账号从单个设备下线
