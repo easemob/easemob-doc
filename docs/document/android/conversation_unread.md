@@ -18,7 +18,7 @@
 - `EMChatManager#getUnreadMessageCount`：获取本地所有会话的未读消息数。
 - `EMConversation#getUnreadMsgCount`：获取本地指定会话的未读消息数。
 - `EMChatManager#markAllConversationsAsRead`：将本地所有会话的未读消息数清零。
-- `EMChatManager#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
+- `EMConversation#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
 - `EMConversation#markMessageAsRead`：将指定会话的单条未读消息置为已读。
 
 ## 实现方法

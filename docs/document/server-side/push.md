@@ -65,7 +65,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 
 | 参数       | 类型   | 描述   | 是否必需 | 
 | :--------- | :----- | :------- | :------------------ |
-| `userId` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 要绑定或解绑哪个用户的设备与推送信息。    | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -170,7 +170,7 @@ GET https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 
 | 参数       | 类型   | 描述   | 是否必需 | 
 | :--------- | :----- | :------- | :------------------ |
-| `userId` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 要查询哪个用户的推送绑定信息。    | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
