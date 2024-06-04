@@ -177,10 +177,10 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 }
 // 当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。
 - (void)userAccountDidLoginFromOtherDeviceWithInfo:(EMLoginExtensionInfo* _Nullable)info {
-    //`EMLoginExtensionInfo` 中包含 `deviceName`（将当前设备踢下线的设备）以及 `loginExtensionInfo` 属性。`loginExtensionInfo` 即 SDK 初始化时传入的登录时携带给其他设备的扩展信息。
+    //`EMLoginExtensionInfo` 中包含 `deviceName`（将当前设备踢下线的设备）以及 `loginExtensionInfo` 属性。`loginExtensionInfo` 即 SDK 初始化时传入的登录时携带给其他设备的扩展信息。该扩展信息在多设备登录情况下才生效。
 }
 
-    //若每次登录都设置 `loginExtensionInfo`，需要通过 `EMClient` 获取 SDK 初始化时的options 属性进行设置。
+    //若每次登录都设置 `loginExtensionInfo`，需要通过 `EMClient` 获取 SDK 初始化时的 options 属性进行设置。
     EMClient.sharedClient.options.loginExtensionInfo = @"";
     //然后再调用登录
 
