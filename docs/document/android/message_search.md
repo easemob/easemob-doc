@@ -74,7 +74,7 @@ List<EMMessage> messages = conversation.searchMsgFromDB(keyWord, -1, 200, null, 
 :::
 
 ```java
-// count：要查询的消息条数。建议最大 400 条。
+// count：要查询的消息条数。取值范围为 [1,400]。
 // fromuser：会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 Set types=new HashSet<>();
 types.add(EMMessage.Type.TXT);
@@ -100,7 +100,7 @@ for (int i = 0; i < messages.size(); i++) {
 :::
 
 ```java
-// count：要查询的消息条数。建议最大 400 条。
+// count：要查询的消息条数。取值范围为 [1,400]。
 // fromuser：当前会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 Set types=new HashSet<>();
 types.add(EMMessage.Type.TXT);

@@ -72,7 +72,7 @@ if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("
 :::
 
 ```Swift
-// count：要查询的消息条数。建议最大 50 条。
+// count：要查询的消息条数。取值范围为 [1,400]。
 // fromuser：会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 EMClient.shared().chatManager?.searchMessages (withTypes: [NSNumber (integerLiteral:
 EMMessageBodyType.text.rawValue), NSNumber (integerLiteral: EMMessageBodyType.image.rawValue)], timestamp：-1, count:10, fromuser："user123",searchDirection:.up,completion: { messages, error in
@@ -89,7 +89,7 @@ EMMessageBodyType.text.rawValue), NSNumber (integerLiteral: EMMessageBodyType.im
 :::
 
 ```Swift
-// count：要查询的消息条数。建议最大 50 条。
+// count：要查询的消息条数。取值范围为 [1,400]。
 // fromuser：当前会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 EMConversation().searchMessages(withTypes: [NSNumber(integerLiteral: EMMessageBodyType.text.rawValue),NSNumber(integerLiteral: EMMessageBodyType.image.rawValue)], timestamp: -1, count: 20, fromUser: "send message user id", searchDirection: .up) { messages, error in
             
