@@ -102,12 +102,12 @@ socket 合法域名:
 
 可以通过以下方式获取 SDK：
 
-- 从环信的 [github 仓库](https://github.com/easemob/webim-uniapp-demo/tree/master/newSDK) 中获取 SDK 中的文件，从 3.3.1 开始支持 uniapp。
+- 从npm [easemob-websdk](https://www.npmjs.com/package/easemob-websdk/) 中获取。
 
 #### 引入 SDK
 
 - 开始一个全新的项目
-  1. 将 SDK 目录下（src/sdk/）的文件全部导入到自己的项目中。
+  1. 安装 `easemob-websdk` npm 包。
   2. 直接使用 import/require 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
 - 基于 Demo 二次开发
 
@@ -115,9 +115,20 @@ socket 合法域名:
 
 #### 调用示例
 
+若项目之前未使用npm管理依赖（项目根目录下无package.json文件），先在项目根目录执行命令初始化npm工程：
+
+```bash 
+npm init -y
+```
+在项目根目录执行命令安装npm包：
+
+```bash 
+npm i easemob-websdk
+```
+引入uniApp SDK
+
 ```javascript
-//使用示例
-import SDK from "../newSDK/uni_sdk3.6.3";
+import SDK from 'easemob-websdk/uniApp/Easemob-chat';
 ```
 
 #### 实例调用方式
@@ -125,16 +136,12 @@ import SDK from "../newSDK/uni_sdk3.6.3";
 实例化 SDK，并挂载在全局对象下
 
 ```javascript
-//实例化 SDK 对象
+// 实例化 SDK 对象
 const WebIM = wx.WebIM = SDK;
-WebIM.conn = new WebIM.connection({
-    appKey: 'your appKey'//注意这里的 "K" 需大写
-    isMultiLoginSessions: false, //是否可以登录多个，并在所有端上接收消息
-    https: false, //是否使用 HTTPS
-    url: 'wss://im-api-wechat.easemob.com/websocket', // socket server (3.0 SDK)
-    apiUrl: 'https://a1.easemob.com',    // rest server
-    heartBeatWait: 30000, //心跳间隔
-    autoReconnectNumMax: 5, //自动重连次数
-    useOwnUploadFun: false // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
+const conn = new WebIM.connection({
+    appKey: 'your appKey', //注意这里的 "K" 需大写
+    url: 'wss://im-api-wechat.easemob.com/websocket', // websocket 连接地址
+    apiUrl: 'https://a1.easemob.com',// rest api 连接地址
+    useOwnUploadFun: true // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
 });
 ```
