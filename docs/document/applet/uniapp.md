@@ -4,7 +4,7 @@
 
 环信小程序 SDK 为各端小程序开发提供一套完整的技术解决方案，在各端小程序的开发环境下，集成 IM 相关的功能更加便捷、高效。让您的小程序快速获得安全稳定的 IM 能力，集成简单，使用方便，帮助您快速拓展业务，赢得先机。
 
-:::notice
+:::tip
 SDK 目前支持微信、支付宝、QQ、百度小程序、抖音（请使用低于 1.70.0 以下的版本基础库）、uni-app 编译的 原生 Android 以及 iOS。
 :::
 
@@ -63,7 +63,7 @@ SDK 目前支持微信、支付宝、QQ、百度小程序、抖音（请使用�
 
 ![img](@static/images/applet/console.jpeg)
 
-登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 “开发 > 开发设置” 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
+登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 **开发 > 开发设置** 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
 
 :::tip
 request 合法域名，uploadFile 合法域名，downloadFile 合法域名
@@ -106,26 +106,26 @@ socket 合法域名:
 
 #### 引入 SDK
 
-- 开始一个全新的项目
+- 开始一个全新的项目：
   1. 安装 `easemob-websdk` npm 包。
-  2. 直接使用 import/require 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
-- 基于 Demo 二次开发
+  2. 直接使用 `import/require` 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
+- 基于 Demo 二次开发。
 
-拉取代码，HBuilder 运行
+拉取代码，HBuilder 运行。
 
 #### 调用示例
 
-若项目之前未使用npm管理依赖（项目根目录下无package.json文件），先在项目根目录执行命令初始化npm工程：
+若项目之前未使用 npm 管理依赖（项目根目录下无 package.json 文件），先在项目根目录执行命令初始化 npm 工程：
 
 ```bash 
 npm init -y
 ```
-在项目根目录执行命令安装npm包：
+在项目根目录执行命令安装 npm 包：
 
 ```bash 
 npm i easemob-websdk
 ```
-引入uniApp SDK
+引入 uniApp SDK
 
 ```javascript
 import SDK from 'easemob-websdk/uniApp/Easemob-chat';
@@ -133,7 +133,7 @@ import SDK from 'easemob-websdk/uniApp/Easemob-chat';
 
 #### 实例调用方式
 
-实例化 SDK，并挂载在全局对象下
+实例化 SDK，并挂载在全局对象下。
 
 ```javascript
 // 实例化 SDK 对象
@@ -141,7 +141,7 @@ const WebIM = wx.WebIM = SDK;
 const conn = new WebIM.connection({
     appKey: 'your appKey', //注意这里的 "K" 需大写
     url: 'wss://im-api-wechat.easemob.com/websocket', // websocket 连接地址
-    apiUrl: 'https://a1.easemob.com',// rest api 连接地址
+    apiUrl: 'https://a1.easemob.com',// REST API 连接地址
     useOwnUploadFun: true // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
 });
 ```
