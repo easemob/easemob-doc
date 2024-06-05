@@ -185,7 +185,10 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
         @Override
         public void onLogout(int errorCode, EMLoginExtensionInfo info) {
-            //当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}，info.deviceExt 是将当前设备挤下线的新登录设备的自定义扩展信息。其他错误码场景下 info.deviceExt 为空。
+            //当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。
+            //errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}。
+            //info.deviceExt 是将当前设备挤下线的新登录设备的自定义扩展信息。
+            //其他错误码场景下 info.deviceExt 为空。
         }
     });
 ```
