@@ -627,7 +627,7 @@ options.enableCustomizeVideoData = YES;
 | [addDelegate:delegateQueue:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_call_manager-p.html#a367328bcd0bf83a51dc08ddaec68872f) | 添加回调代理                             |
 | [removeDelegate:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_call_manager-p.html#aa9b3da07b69c09e892f828791b1370cb) | 移除回调代理                             |
 | [setBuilderDelegate:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_call_manager-p.html#ab186d489c2779e2984498f79b63432fd) | 添加离线推送回调代理，该代理只能设置一个 |
-| [setCallOptions:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_call_manager-p.html#a8bdffc278012912e6b647496f950f2d0) | 设置设置项                               |
+| [setCallOptions:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_call_manager-p.html#a8bdffc278012912e6b647496f950f2d0) | 配置设置项                               |
 | [getCallOptions](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_call_manager-p.html#aa57c5e2e99d712a9e228fa4a3456cab4) | 获取设置项                               |
 | [startCall:remoteName:ext:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_call_manager-p.html#afb034d6e9e45e8712f6ce152c83cde51) | 发起实时会话                             |
 | [startCall:remoteName:record:mergeStream:ext:completion:](http://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_call_manager-p.html#a96844b40a066c066bc0e1dd99d98c535) | 发起实时会话,可选择是否录制              |

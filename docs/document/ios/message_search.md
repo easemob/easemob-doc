@@ -65,7 +65,7 @@ if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("
 
 ### 根据消息类型搜索所有会话中的消息
 
-你可以调用 `EMChatManager#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:` 方法除了设置设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中所有会话的消息。
+你可以调用 `EMChatManager#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中所有会话的消息。
 
 :::tip
 若使用该功能，需将 SDK 升级至 V4.7.0 或以上版本。
@@ -82,7 +82,7 @@ EMMessageBodyType.text.rawValue), NSNumber (integerLiteral: EMMessageBodyType.im
 
 ### 根据消息类型搜索当前会话中的消息
 
-你可以调用 `EMConversation#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:` 方法除了设置设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中单个会话的消息。
+你可以调用 `EMConversation#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中单个会话的消息。
 
 :::tip
 若使用该功能，需将 SDK 升级至 V4.7.0 或以上版本。
