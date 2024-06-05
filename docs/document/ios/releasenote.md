@@ -17,17 +17,17 @@
 
 ### 优化
 
-[IM SDK] `userAccountDidLoginFromOtherDevice` 回调已被弃用，由 `userAccountDidLoginFromOtherDeviceWithInfo` 回调替换，表示当前登录账号在其它设备登录时，当前登录的设备被踢下线时会触发该回调。
+- [IM SDK] `userAccountDidLoginFromOtherDevice` 回调已被弃用，由 `userAccountDidLoginFromOtherDeviceWithInfo` 回调替换，表示当前登录账号在其它设备登录时，当前登录的设备被踢下线时会触发该回调。
 
 # 修复
 
-[IM SDK] 从服务端拉取群组时，不再先清除本地群组，而是将拉取的信息与本地信息进行对比，将本地现有信息进行更新，将新的信息在本地插入。若要清除数据库和缓存中的群组信息，可以调用 `IEMGroupManager#cleanAllGroupsFromDB` 方法。
+- [IM SDK] 从服务端拉取群组时，不再先清除本地群组，而是将拉取的信息与本地信息进行对比，将本地现有信息进行更新，将新的信息在本地插入。若要清除数据库和缓存中的群组信息，可以调用 `IEMGroupManager#cleanAllGroupsFromDB` 方法。
 
 ## 版本 V4.6.1 Dev 2024-05-20（开发版）
 
 ### 新增特性
 
-[IM SDK] 新增错误码 407 `EMErrorFileExpired`。若用户下载已过期的消息附件或群共享文件时，SDK 会触发该错误。
+- [IM SDK] 新增错误码 407 `EMErrorFileExpired`。若用户下载已过期的消息附件或群共享文件时，SDK 会触发该错误。
 
 ### 修复
 
@@ -47,7 +47,7 @@
 
 ### 修复
 
-[IM SDK] 修复 Web 端在聊天室中发送会话已读回执（channel ack）时，移动端 SDK 会新增会话且会话类型错误的问题。
+- [IM SDK] 修复 Web 端在聊天室中发送会话已读回执（channel ack）时，移动端 SDK 会新增会话且会话类型错误的问题。
 
 ### 重大变更
 

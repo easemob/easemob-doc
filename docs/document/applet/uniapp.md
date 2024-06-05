@@ -102,7 +102,7 @@ socket 合法域名:
 
 可以通过以下方式获取 SDK：
 
-- 从npm [easemob-websdk](https://www.npmjs.com/package/easemob-websdk/) 中获取。
+- 从 npm [easemob-websdk](https://www.npmjs.com/package/easemob-websdk/) 中获取。
 
 #### 引入 SDK
 
