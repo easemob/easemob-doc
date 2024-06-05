@@ -145,7 +145,7 @@ option.customOSType = 60;
 
 即时通讯 IM 自 4.7.0 版本开始支持设备的自定义扩展信息。这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
 
-初始化 SDK 时，可通过 `EMOptions#loginExtensionInfo` 属性设置设备扩展信息。设置后，多设备场景下，登录该设备后，若因达到了登录设备数量限制而导致当前登录设备被踢下线，被踢设备收到的 `EMClientDelegate#userAccountDidLoginFromOtherDeviceWithInfo` 回调中会包含该设备的自定义扩展信息。
+初始化 SDK 时，可通过 `EMOptions#loginExtensionInfo` 属性设置设备扩展信息。设置后，多设备场景下，登录该设备后，若因达到了登录设备数量限制而导致当前登录设备被踢下线（`206` 错误，`EMErrorUserLoginOnAnotherDevice`），被踢设备收到的 `EMClientDelegate#userAccountDidLoginFromOtherDeviceWithInfo` 回调中会包含该设备的自定义扩展信息。
 
 :::notice
 登录成功后才会将该设置发送到服务器。
