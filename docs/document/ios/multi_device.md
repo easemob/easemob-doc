@@ -155,7 +155,8 @@ option.customOSType = 60;
 EMClient.sharedClient.option.loginExtensionInfo = @"you was kicked out by other device";
 
 - (void)userAccountDidLoginFromOtherDeviceWithInfo:(EMLoginExtensionInfo* _Nullable)info {
-    //`EMLoginExtensionInfo` 中包含 `deviceName` 以及 `loginExtensionInfo` 属性。`loginExtensionInfo` 即 SDK 初始化时传入的登录时携带给被踢设备的扩展信息。
+    //`EMLoginExtensionInfo` 中包含 `deviceName` 以及 `loginExtensionInfo` 属性。
+    //`loginExtensionInfo` 即 SDK 初始化时传入的登录时携带给被踢设备的扩展信息。
 }
 ```
 
