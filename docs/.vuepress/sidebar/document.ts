@@ -43,19 +43,6 @@ const documentSidebar = [
     text: '基础功能',
     children: [
       {
-        text: '会话管理',
-        collapsible: true,
-        children: [
-          { text: '会话介绍', link: 'conversation_overview.html' },
-          { text: '会话列表', link: 'conversation_list.html' },
-          { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
-          { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
-          { text: '置顶会话', link: 'conversation_pin.html' },
-          { text: '会话标记', link: 'conversation_mark.html' },
-          { text: '删除会话', link: 'conversation_delete.html' },
-        ]
-      },
-      {
         text: '消息管理',
         collapsible: true,
         children: [
@@ -74,6 +61,19 @@ const documentSidebar = [
           { text: '翻译消息', link: 'message_translation.html' },
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},
           { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
+        ]
+      },
+      {
+        text: '会话管理',
+        collapsible: true,
+        children: [
+          { text: '会话介绍', link: 'conversation_overview.html' },
+          { text: '会话列表', link: 'conversation_list.html' },
+          { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
+          { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
+          { text: '置顶会话', link: 'conversation_pin.html' },
+          { text: '会话标记', link: 'conversation_mark.html' },
+          { text: '删除会话', link: 'conversation_delete.html' },
         ]
       },
       { text: '管理用户属性', link: 'userprofile.html' },
@@ -164,19 +164,6 @@ const documentSidebar = [
     children: [
       { text: '初始化及登录', link: 'initialization.html' },
       {
-        text: '会话管理',
-        collapsible: true,
-        children: [
-          { text: '会话介绍', link: 'conversation_overview.html' },
-          { text: '会话列表', link: 'conversation_list.html' },
-          { text: '本地会话', link: 'conversation_local.html' },
-          { text: '会话未读数', link: 'conversation_unread.html' },
-          { text: '置顶会话', link: 'conversation_pin.html' },
-          { text: '会话标记', link: 'conversation_mark.html'},
-          { text: '删除会话', link: 'conversation_delete.html'},
-        ]
-      },
-      {
         text: '消息管理',
         collapsible: true,
         children: [
@@ -192,8 +179,21 @@ const documentSidebar = [
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},        
         ]
       },
-      { text: '用户属性', link: 'userprofile.html' },
-      { text: '好友管理', link: 'user_relationship.html' },
+      {
+        text: '会话管理',
+        collapsible: true,
+        children: [
+          { text: '会话介绍', link: 'conversation_overview.html' },
+          { text: '会话列表', link: 'conversation_list.html' },
+          { text: '本地会话', link: 'conversation_local.html' },
+          { text: '会话未读数', link: 'conversation_unread.html' },
+          { text: '置顶会话', link: 'conversation_pin.html' },
+          { text: '会话标记', link: 'conversation_mark.html'},
+          { text: '删除会话', link: 'conversation_delete.html'},
+        ]
+      },
+      { text: '管理用户属性', link: 'userprofile.html' },
+      { text: '管理用户关系', link: 'user_relationship.html' },
       {
         text: '群组管理',
         collapsible: true,
@@ -261,9 +261,9 @@ const documentSidebar = [
     children: [
       { text: '消息', link: 'message.html' },
       { text: '会话管理', link: 'conversation.html' },
-      { text: '好友管理', link: 'contact.html' },
+      { text: '用户关系管理', link: 'contact.html' },
       { text: '群组', link: 'group.html' },
-      { text: '聊天室管理', link: 'chatroom.html' },
+      { text: '聊天室', link: 'chatroom.html' },
       { text: '多设备监听', link: 'multi_device.html' },
       { text: '附录', link: 'annex.html' },
     ],
