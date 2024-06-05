@@ -2,17 +2,38 @@
 
 <Toc />
 
+## 版本 V4.7.0 Dev 2024-06-04（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)。
+  - `EMLoginExtensionInfo.extensionInfo`：设备的登录扩展信息。
+  - `EMOptions#loginExtensionInfo`：设置登录时携带的扩展信息。
+  - `EMClientDelegate#userAccountDidLoginFromOtherDeviceWithInfo.EMLoginExtensionInfo`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的登录事件中会携带新设备的扩展信息。
+- [IM SDK] 新增根据多个消息类型搜索本地消息：
+  - `EMChatManager#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
+  - `EMConversation#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:` [根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
+- [IM SDK] 支持[从服务端单向删除聊天室漫游消息](message_delete.html#单向删除服务端的历史消息)。
+
+### 优化
+
+- [IM SDK] `userAccountDidLoginFromOtherDevice` 回调已被弃用，由 `userAccountDidLoginFromOtherDeviceWithInfo` 回调替换，表示当前登录账号在其它设备登录时，当前登录的设备被踢下线时会触发该回调。
+
+# 修复
+
+- [IM SDK] 从服务端拉取群组时，不再先清除本地群组，而是将拉取的信息与本地信息进行对比，将本地现有信息进行更新，将新的信息在本地插入。若要清除数据库和缓存中的群组信息，可以调用 `IEMGroupManager#cleanAllGroupsFromDB` 方法。
+
 ## 版本 V4.6.1 Dev 2024-05-20（开发版）
 
 ### 新增特性
 
-新增错误码 407 `EMErrorFileExpired`。若用户下载已过期的消息附件或群共享文件时，SDK 会触发该错误。
+- [IM SDK] 新增错误码 407 `EMErrorFileExpired`。若用户下载已过期的消息附件或群共享文件时，SDK 会触发该错误。
 
 ### 修复
 
-1. 修复服务端获取好友列表（包含好友备注）时，在好友列表无变化时，第二次请求获取不到数据的问题。
-2. 修复特殊情况下附件发送失败，消息仍然成功发送的问题。
-3. 修复拉取漫游消息时 nextkey 错误的问题。
+- [IM SDK] 修复服务端获取好友列表（包含好友备注）时，在好友列表无变化时，第二次请求获取不到数据的问题。
+- [IM SDK] 修复特殊情况下附件发送失败，消息仍然成功发送的问题。
+- [IM SDK] 修复拉取漫游消息时 nextkey 错误的问题。
 
 ## 版本 V4.6.0 Dev 2024-04-30（开发版）
 
@@ -26,7 +47,7 @@
 
 ### 修复
 
-[IM SDK] 修复 Web 端在聊天室中发送会话已读回执（channel ack）时，移动端 SDK 会新增会话且会话类型错误的问题。
+- [IM SDK] 修复 Web 端在聊天室中发送会话已读回执（channel ack）时，移动端 SDK 会新增会话且会话类型错误的问题。
 
 ### 重大变更
 

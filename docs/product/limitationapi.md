@@ -12,13 +12,8 @@
 | :------------ | :--- | :--------------------------- |
 | 注册单个用户  |  POST  | /{org_name}/{app_name}/users        |
 | 批量注册用户 |  POST   | /{org_name}/{app_name}/users       |
-| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} |
-| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 
-| 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/{userId}/push/binding |
-| 查询当前用户的所有设备的推送绑定信息    | GET  | /{org_name}/{app_name}/users/{userId}/push/binding |
-| 获取指定账号的在线登录设备列表    | GET  | /{org_name}/{app_name}/users/{username}/resources |
 
-以上七个接口的总调用频率（默认值）为 100 次/秒/App Key。
+以上两个接口的总调用频率（默认值）为 100 次/秒/App Key。
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :----------- | :----- | :------------------- | :------------- |
@@ -31,11 +26,12 @@
 | 获取用户在线状态  |  GET | /{org_name}/{app_name}/users/{username}/status   | 100 次/秒/App Key  |
 | 批量获取用户在线状态  |  POST    | /{org_name}/{app_name}/users/batch/status  | 50 次/秒/App Key |
 | 获取离线消息数       |  GET     | /{org_name}/{app_name}/users/{owner_username}/offline_msg_count    | 100 次/秒/App Key |
-| 获取离线消息的状态    |  GET   | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id}   | 100 次/秒/App Key                                                 |
+| 获取离线消息的状态    |  GET   | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id}   | 100 次/秒/App Key   |
 | 账号封禁   |  POST     | /{org_name}/{app_name}/users/{username}/deactivate          | 100 次/秒/App Key     |
 | 账号解禁    |  POST                    | /{org_name}/{app_name}/users/{username}/activate         | 100 次/秒/App Key      |
 | 强制用户下线         |  GET    | /{org_name}/{app_name}/users/{username}/disconnect    | 100 次/秒/App Key   |
 | 强制用户从单设备下线 | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} | 100 次/秒/App Key |
+| 获取指定账号的在线登录设备列表    | GET  | /{org_name}/{app_name}/users/{username}/resources | 100 次/秒/App Key  |
 
 ## 消息推送
 
@@ -49,6 +45,20 @@
 | 查询离线推送模板          | GET  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
 | 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |
 | 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template | 100 次/秒/App Key。 |
+
+| RESTful API 接口        | 方法 | 接口 URL           | 
+| :----------- | :--- | :------------- | 
+| 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/{userId}/push/binding |
+| 查询当前用户的所有设备的推送绑定信息    | GET  | /{org_name}/{app_name}/users/{userId}/push/binding |
+
+以上两个接口的总调用频率（默认值）为 100 次/秒/App Key。
+
+| RESTful API 接口        | 方法 | 接口 URL           | 
+| :----------- | :--- | :------------- | 
+| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} |
+| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 
+
+以上两个接口的总调用频率（默认值）为 100 次/秒/App Key。
 
 ## 消息管理
 

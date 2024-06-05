@@ -2,15 +2,17 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM Android SDK 如何搜索本地消息。
+本文介绍环信即时通讯 IM Android SDK 如何搜索本地消息。调用本文中的消息搜索方法可以搜索本地数据库中除命令消息之外的所有类型的消息，因为命令消息不在本地数据库中存储。
 
 ## 技术原理
 
 环信即时通讯 IM Android SDK 通过 `EMConversation` 类支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
 
 - `EMConversation#searchMsgFromDB(string keywords, long timeStamp, int maxCount, string from, EMSearchDirection direction)`：根据关键字搜索本地数据库中单个会话中指定用户发送的消息。
-- `EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection, com.hyphenate.chat.EMConversation.EMMessageSearchScope)`: 根据关键字搜索消息时，可以选择搜索范围在所有会话中进行消息搜索。
-- `EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection, com.hyphenate.chat.EMConversation.EMMessageSearchScope)`：根据关键字搜索消息时，可以选择搜索范围在当前会话中进行消息搜索。
+- `EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)`: 根据关键字搜索消息时，可以选择搜索范围在所有会话中进行消息搜索。
+- `EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)`：根据关键字搜索消息时，可以选择搜索范围在当前会话中进行消息搜索。
+-`EMChatManager#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)`：根据单个或多个消息类型，搜索本地数据库中所有会话的消息。
+- `EMConversation#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)` 根据单个或多个消息类型，搜索本地数据库中单个会话的消息。
 
 ## 前提条件
 
@@ -35,7 +37,7 @@ List<EMMessage> messages = conversation.searchMsgFromDB(keywords, timeStamp, max
 
 ### 根据搜索范围搜索所有会话中的消息 
 
-你可以调用 `EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection, com.hyphenate.chat.EMConversation.EMMessageSearchScope)` 方法，除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索所有会话中的消息时，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。 
+你可以调用 `EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)` 方法，除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索所有会话中的消息时，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。 
 
 :::tip
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
@@ -49,7 +51,7 @@ List<EMMessage> messages = EMClient.getInstance().chatManager().searchMsgFromDB(
 
 ### 根据搜索范围搜索当前会话中的消息 
 
-你可以调用 `com.hyphenate.chat.EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection, com.hyphenate.chat.EMConversation.EMMessageSearchScope)` 方法除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+你可以调用 `EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)` 方法除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
 
 :::tip
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
@@ -62,4 +64,56 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> messages = conversation.searchMsgFromDB(keyWord, -1, 200, null, EMConversation.EMSearchDirection.UP, EMConversation.EMMessageSearchScope.ALL);
 
 ```
+
+### 根据消息类型搜索所有会话中的消息
+
+你可以调用 `EMChatManager#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中所有会话的消息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.7.0 或以上版本。
+:::
+
+```java
+// count：要查询的消息条数。取值范围为 [1,400]。
+// fromuser：会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
+Set types=new HashSet<>();
+types.add(EMMessage.Type.TXT);
+types.add(EMMessage.Type.VOICE);
+List messages = EMClient.getInstance().chatManager().searchMsgFromDB(types, -1, 400, "xu", EMConversation.EMSearchDirection.UP);
+for (int i = 0; i < messages.size(); i++) {
+    EMMessage message = (EMMessage) messages.get(i);
+    if (message.getBody() instanceof EMTextMessageBody) {
+        EMTextMessageBody body = (EMTextMessageBody) message.getBody();
+        EMLog.e(TAG, "message: " + body.getMessage() + ",time: " + message.getMsgTime());
+    } else {
+        EMLog.e(TAG, "message: " + message.getBody() + ",time: " + message.getMsgTime());
+    }
+}
+``` 
+
+### 根据消息类型搜索当前会话中的消息
+
+你可以调用 `EMConversation#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中单个会话的消息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.7.0 或以上版本。
+:::
+
+```java
+// count：要查询的消息条数。取值范围为 [1,400]。
+// fromuser：当前会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
+Set types=new HashSet<>();
+types.add(EMMessage.Type.TXT);
+types.add(EMMessage.Type.VOICE);
+List messages = EMClient.getInstance().chatManager().getConversation("xu").searchMsgFromDB(types, -1, 400, "xu", EMConversation.EMSearchDirection.UP);
+for (int i = 0; i < messages.size(); i++) {
+    EMMessage message = (EMMessage) messages.get(i);
+    if (message.getBody() instanceof EMTextMessageBody) {
+        EMTextMessageBody body = (EMTextMessageBody) message.getBody();
+        EMLog.e(TAG, "message: " + body.getMessage() + ",time: " + message.getMsgTime());
+    } else {
+        EMLog.e(TAG, "message: " + message.getBody() + ",time: " + message.getMsgTime());
+    }
+}
+```         
 
