@@ -19,7 +19,7 @@
 
 - [IM SDK] `userAccountDidLoginFromOtherDevice` 回调已被弃用，由 `userAccountDidLoginFromOtherDeviceWithInfo` 回调替换，表示当前登录账号在其它设备登录时，当前登录的设备被踢下线时会触发该回调。
 
-# 修复
+### 修复
 
 - [IM SDK] 从服务端拉取群组时，不再先清除本地群组，而是将拉取的群组与本地对比，将本地现有群组进行更新，将新增部分在本地插入。若要清除本地群组信息，可以调用 `IEMGroupManager#cleanAllGroupsFromDB` 方法。
 
