@@ -110,31 +110,11 @@ iOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送�
 登录成功后才会将该设置发送到服务器。
 :::
 
-```Objective-C
+```objectivec
 EMOptions* option = [EMOptions optionsWithAppkey:Appkey];
 option.customDeviceName = @"XXX的iPad";
 [EMClient.sharedClient initializeSDKWithOptions:option]; 
 
-```
-
-### 设置登录设备的扩展信息
-
-即时通讯 IM 自 4.7.0 版本开始支持设备的自定义扩展信息。这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
-
-初始化 SDK 时，可通过 `EMOptions#loginExtensionInfo` 属性设置设备扩展信息。设置后，多设备场景下，登录该设备后，若因达到了登录设备数量限制而导致当前登录设备被踢下线，被踢设备收到的 `EMClientDelegate#userAccountDidLoginFromOtherDeviceWithInfo` 回调中会包含该设备的自定义扩展信息。
-
-可以在登录之前调用下面示例代码设置设备扩展信息：
-
-```Objective-C
-   EMClient.sharedClient.option.loginExtensionInfo = @"you was kicked out by other device";
-```
-
-若登录该设备会将某个设备踢下线，被踢设备会收到 `userAccountDidLoginFromOtherDeviceWithInfo` 回调，其中携带设备的扩展信息。
-
-```
-- (void)userAccountDidLoginFromOtherDeviceWithInfo:(EMLoginExtensionInfo* _Nullable)info {
-    //`EMLoginExtensionInfo` 中包含 `deviceName` 以及 `loginExtensionInfo` 属性。`loginExtensionInfo` 即 SDK 初始化时传入的登录时携带给被踢设备的扩展信息。
-}
 ```
 
 ### 设置登录设备的平台
@@ -159,6 +139,30 @@ option.customDeviceName = @"XXX的iPad";
 EMOptions* option = [EMOptions optionsWithAppkey:Appkey];
 option.customOSType = 60;
 [EMClient.sharedClient initializeSDKWithOptions:option];
+```
+
+### 设置登录设备的扩展信息
+
+即时通讯 IM 自 4.7.0 版本开始支持设备的自定义扩展信息。这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
+
+初始化 SDK 时，可通过 `EMOptions#loginExtensionInfo` 属性设置设备扩展信息。设置后，多设备场景下，登录该设备后，若因达到了登录设备数量限制而导致当前登录设备被踢下线，被踢设备收到的 `EMClientDelegate#userAccountDidLoginFromOtherDeviceWithInfo` 回调中会包含该设备的自定义扩展信息。
+
+1. 可在登录之前设置设备扩展信息：
+
+```objectivec
+   EMClient.sharedClient.option.loginExtensionInfo = @"you was kicked out by other device";
+```
+
+:::notice
+登录成功后才会将该设置发送到服务器。
+:::
+
+2. 若登录该设备会将某个设备踢下线，被踢设备收到的回调中会携带设备的扩展信息。
+
+```objectivec
+- (void)userAccountDidLoginFromOtherDeviceWithInfo:(EMLoginExtensionInfo* _Nullable)info {
+    //`EMLoginExtensionInfo` 中包含 `deviceName` 以及 `loginExtensionInfo` 属性。`loginExtensionInfo` 即 SDK 初始化时传入的登录时携带给被踢设备的扩展信息。
+}
 ```
 
 ### 强制指定账号从单个设备下线
