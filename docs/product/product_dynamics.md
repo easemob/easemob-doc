@@ -4,7 +4,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.7.0 开发版发布  | **新增特性**：<br/> -  客户端[设备登录时允许携带自定义扩展消息并传递给被踢的设备](/document/android/multi_device.html#设置登录设备的扩展信息)，应用于被踢设备展示提示信息或进行业务判断。<br/> - 客户端支持[根据多个消息类型搜索本地所有会话或单个会话中的消息](/document/android/message_search.html#根据消息类型搜索所有会话中的消息)。<br/> -  移动端支持本地获取群组记录，有助于降低接口调用频率，提升群组信息获取效率。<br/>**优化** <br/> - 客户端支持[从服务端单向删除聊天室漫游消息](/document/android/message_delete.html#单向删除服务端的历史消息)。 | 2024-06-05   | <br/> - [Android 4.7.0 更新日志](/document/android/releasenote.html#版本-v4-7-0-dev-2024-06-05-开发版)<br/> - [iOS 4.7.0 更新日志](/document/ios/releasenote.html#版本-v4-7-0-dev-2024-06-05-开发版)。  |
+| SDK 4.7.0 开发版发布  | **新增特性**：<br/> -  客户端[设备登录时允许携带自定义扩展消息并传递给被踢的设备](/document/android/multi_device.html#设置登录设备的扩展信息)，应用于被踢设备展示提示信息或进行业务判断。<br/> - 客户端支持[根据多个消息类型搜索本地所有会话或单个会话中的消息](/document/android/message_search.html#根据消息类型搜索所有会话中的消息)。<br/> -  移动端支持本地获取群组记录，有助于降低接口调用频率，提升群组信息获取效率。<br/> - 客户端支持[从服务端单向删除聊天室漫游消息](/document/android/message_delete.html#单向删除服务端的历史消息)。 | 2024-06-05   | <br/> - [Android 4.7.0 更新日志](/document/android/releasenote.html#版本-v4-7-0-dev-2024-06-05-开发版)<br/> - [iOS 4.7.0 更新日志](/document/ios/releasenote.html#版本-v4-7-0-dev-2024-06-05-开发版)。  |
 
 ## 2024-04
 
