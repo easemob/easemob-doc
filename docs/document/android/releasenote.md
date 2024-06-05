@@ -2,7 +2,7 @@
 
 <Toc />
 
-## 版本 V4.7.0 Dev 2024-06-04（开发版）
+## 版本 V4.7.0 Dev 2024-06-05（开发版）
 
 ### 新增特性
 
@@ -11,7 +11,7 @@
   - `EMOptions#getLoginCustomExt`：获取设备的登录扩展信息。
   - `EMConnectionListener#onLogout(int, com.hyphenate.chat.EMLoginExtensionInfo)`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的登录事件中会携带新设备的扩展信息。
 - [IM SDK] 新增根据多个消息类型搜索本地消息：
-  -` EMConversation#searchMsgFromDB(java.util.Set<com.hyphenate.chat.EMMessage.Type>, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection)`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
+  - `EMConversation#searchMsgFromDB(java.util.Set<com.hyphenate.chat.EMMessage.Type>, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection)`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
   - `EMChatManager#searchMsgFromDB(java.util.Set<com.hyphenate.chat.EMMessage.Type>, long, int, java.lang.String, com.hyphenate.chat.EMConversation.EMSearchDirection)`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
 - [IM SDK] 支持[从服务端单向删除聊天室漫游消息](message_delete.html#单向删除服务端的历史消息)。
 
