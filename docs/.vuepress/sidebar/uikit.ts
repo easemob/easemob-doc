@@ -88,7 +88,8 @@ const chatUikitSidebar = [
   {
     text: '集成文档',
     children: [
-      { text: '集成单群聊 UIKit', link: 'chatuikit_integrated.html' },
+      { text: 'React 集成单群聊 UIKit', link: 'chatuikit_integrated_react.html' },
+      { text: 'Vue 集成单群聊 UIKit', link: 'chatuikit_integrated_vue.html' },
       { text: '用户信息提供', link: 'chatuikit_provider.html' },
       { text: '全局上下文', link: 'chatuikit_context.html' },
       { text: '登录', link: 'chatuikit_login.html' },
