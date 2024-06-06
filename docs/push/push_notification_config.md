@@ -6,58 +6,58 @@
 
 ```json
 {
-        "title": "环信推送服务",
-        "content": "你好，欢迎使用环信推送服务",
-        "sub_title": "环信",
-        "config": {
-            "clickAction": {
-                "url": "https://www.easemob.com"
+    "title": "环信推送服务",
+    "content": "你好，欢迎使用环信推送服务",
+    "sub_title": "环信",
+    "config": {
+        "clickAction": {
+            "url": "https://www.easemob.com"
+        }
+    },
+    "easemob": {
+        "style": 2,
+        "iconUrl": "https://www.easemob.com/statics/common/images/logo.png?20211109",
+        "bigPicture": "https://www.easemob.com/statics/images/push/case1@2x.png",
+        "sound": 1,
+        "vibrate": 1
+    },
+    "huawei": {
+        "message": {
+            "android": {
+                "category": "IM",
+                "targetUserType": "1" # 配置华为推送消息为测试类型，可突破分类限制，仅供测试推送收发使用。
             }
-        },
-        "easemob": {
-            "style": 2,
-            "iconUrl": "https://www.easemob.com/statics/common/images/logo.png?20211109",
-            "bigPicture": "https://www.easemob.com/statics/images/push/case1@2x.png",
-            "sound": 1,
-            "vibrate": 1
-        },
-        "huawei": {
-            "message": {
-                "android": {
-                    "category": "IM",
-                    "targetUserType": "1" # 配置华为推送消息为测试类型，可突破分类限制，仅供测试推送收发使用。
-                }
+        }
+    },
+    "honor": {
+        "androidConfig": {
+            "androidNotification": {
+                "importance": "NORMAL"
             }
-        },
-        "honor": {
-            "androidConfig": {
-                "androidNotification": {
-                    "importance": "NORMAL"
-                }
-            }
-        },
-        "xiaomi": {
-            "channelId": "{{xiaomi_channel_id}}"# 配置对应平台的通道ID
-        },
-        "oppo": {
-            "channelId": "{{oppo_channel_id}}" # 配置对应平台的通道ID
-        },
-        "vivo": {
-            "classification": 1,
-            "category": "IM"
-        },
-        "apns": {
-            "contentAvailable": true,
-            "mutableContent": true
-        },
-        "fcmV1": {
-            "androidConfig": {
-                "androidNotification": {
-                    "image": "https://www.easemob.com/statics/common/images/logo.png?20211109"
-                }
+        }
+    },
+    "xiaomi": {
+        "channelId": "{{xiaomi_channel_id}}" # 配置对应平台的通道ID
+    },
+    "oppo": {
+        "channelId": "{{oppo_channel_id}}" # 配置对应平台的通道ID
+    },
+    "vivo": {
+        "classification": 1,
+        "category": "IM"
+    },
+    "apns": {
+        "contentAvailable": true,
+        "mutableContent": true
+    },
+    "fcmV1": {
+        "androidConfig": {
+            "androidNotification": {
+                "image": "https://www.easemob.com/statics/common/images/logo.png?20211109"
             }
         }
     }
+}
 ```
 
 环信通道推送通知示例如下：
