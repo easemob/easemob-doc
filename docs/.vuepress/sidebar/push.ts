@@ -35,7 +35,7 @@ export const PUSH_SIDEBAR = [
         { text: '推送集成说明', link: 'push_integration_note_android' },
         { text: '推送集成过程', link: 'push_integration_process_android' },
         { text: '厂商统计', link: 'push_androidvendor_statistics' },
-        { text: '推送厂商消息分类', link: 'push_androidvendor_msgclassification' },
+        // { text: '推送厂商消息分类', link: 'push_androidvendor_msgclassification' },
         { text: '厂商通道限制及解决方案', link: 'push_androidchannel_restriction.html' },
       ]
     },
