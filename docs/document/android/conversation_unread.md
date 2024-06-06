@@ -36,7 +36,7 @@ EMClient.getInstance().chatManager().getUnreadMessageCount();
 你可以调用 `getUnreadMsgCount` 获取本地指定会话的未读消息数，示例代码如下：
 
 ```java
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
+EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 conversation.getUnreadMsgCount();
 ```
 
@@ -53,7 +53,7 @@ EMClient.getInstance().chatManager().markAllConversationsAsRead();
 你可以调用 `markAllMessagesAsRead` 方法对指定会话的未读消息数清零，示例代码如下：
 
 ```java
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
+EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 conversation.markAllMessagesAsRead();
 ```
 
@@ -62,6 +62,6 @@ conversation.markAllMessagesAsRead();
 你可以调用 `markMessageAsRead` 方法将指定会话的单条未读消息置为已读。
 
 ```java
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
+EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 conversation.markMessageAsRead(messageId);
 ```
