@@ -10,7 +10,7 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- 即时通讯 IM 项目和 App Key。
+- [即时通讯 IM 应用和 App Key](/product/enable_and_configure_IM.html#创建应用)。
 
 ## 操作步骤
 
