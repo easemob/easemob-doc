@@ -25,7 +25,7 @@
         "message": {
             "android": {
                 "category": "IM",
-                "targetUserType": "1" # 配置华为推送消息为测试类型，可突破分类限制，仅供测试推送收发使用。
+                "targetUserType": 1 # 配置华为推送消息为测试类型，可突破分类限制，仅供测试推送收发使用。
             }
         }
     },
