@@ -1740,6 +1740,8 @@ projects:
             link: https://sdkdocs.easemob.com/apidoc/ios/chat3.0/annotated.html
           - text: Web/小程序
             link: https://doc.easemob.com/jsdoc/index.html
+          - text: HarmonyOS
+            link: https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/index.html
           - text: Flutter
             link: https://sdkdocs.easemob.com/apidoc/flutter/index.html
           - text: React Native
