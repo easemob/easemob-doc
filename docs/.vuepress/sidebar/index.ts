@@ -36,6 +36,7 @@ export const zhSidebar = sidebar({
         { text: "快速开始 iOS", link: "/document/ios/quickstart.html" },
         { text: "快速开始 Web", link: "/document/web/quickstart.html" },
         { text: "快速开始 Applet", link: "/document/applet/wechat.html" },
+        { text: "快速开始 HarmonyOS", link: "/document/harmonyos/quickstart.html" },
         { text: "快速开始 Flutter", link: "/document/flutter/quickstart.html" },
         { text: "快速开始 React Native", link: "/document/react-native/quickstart.html" },
         { text: "快速开始 Unity", link: "/document/unity/quickstart.html" },

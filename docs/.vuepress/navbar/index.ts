@@ -24,6 +24,11 @@ export const zhNavbar = navbar([
             link: "/document/web/quickstart.html",
           },
           {
+            text: "Harmonyos",
+            icon: "/icon-harmonyos.svg",
+            link: "/document/harmonyos/quickstart.html",
+          },
+          {
             text: "Windows",
             icon: "/icon-windows.svg",
             link: "/document/windows/quickstart.html",
@@ -177,6 +182,11 @@ export const zhNavbar = navbar([
             text: "Web/小程序",
             icon: "/icon-web.svg",
             link: "https://doc.easemob.com/jsdoc/index.html",
+          },
+          {
+            text: "HarmonyOS",
+            icon: "/icon-harmonyos.svg",
+            link: "https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html",
           },
           {
             text: "Windows",

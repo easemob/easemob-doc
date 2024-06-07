@@ -16,7 +16,7 @@
 
 #### 群组与聊天室的功能对比
 
-见 <Link title="群组概述" to="group_overview.html" />。
+详见 <Link title="群组概述" to="group_overview.html" />。
 
 ### 功能列表
 

@@ -16,6 +16,10 @@ const PLATFORM_ICON_MAP = {
     icon : '/icon-web.svg',
     activeIcon: '/icon-web-hover.png',
   },
+  harmonyos: {
+    icon : '/icon-harmonyos.svg',
+    activeIcon: '/icon-harmonyos-hover.svg',
+  },
   windows: {
     icon : '/icon-windows.svg',
     activeIcon: '/icon-windows-hover.svg',
@@ -91,6 +95,10 @@ const options = [
       {
         value: 'web',
         label: 'Web',
+      },
+      {
+        value: 'harmonyos',
+        label: 'HarmonyOS',
       },
       {
         value: 'windows',
