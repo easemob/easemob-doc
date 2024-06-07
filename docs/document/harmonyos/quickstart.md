@@ -8,7 +8,7 @@
 ## 实现原理
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
-// todo 
+
 ![img](@static/images/android/sendandreceivemsg.png)
 
 ## 前提条件
