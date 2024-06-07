@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:1.0.5'
+implementation 'com.easemob.im:im-sdk-core:1.0.6'
 ```
 
 ### 使用
@@ -204,6 +204,16 @@ try {
 ```
 
 ## 更新日志
+
+### V1.0.6 2024-06-07
+
+1. 增加批量移除群组成员功能。
+
+2. 增加一次性获取好友列表功能。
+
+3. 注册用户增加推送昵称参数。
+
+以上更新内容请到 GroupApi、ContactApi、UserApi 中查看。
 
 ### V1.0.5 2024-04-08
 
