@@ -106,12 +106,12 @@ ChatClient.getInstance().chatroomManager()?.removeListener(chatroomListener);
 interface ChatroomListener{
     /**
      * 有新成员加入聊天室。
-     * 聊天室的所有成员会收到该事件
+     * 聊天室的所有成员会收到该事件。
      */
     onMemberJoined?: (roomId: string, userId: string) => void;
     /**
      * 有新成员退出聊天室。
-     * 聊天室的所有成员会收到该事件
+     * 聊天室的所有成员会收到该事件。
      */
     onMemberExited?: (roomId: string, roomName: string, userId: string) => void;
     /**
@@ -121,52 +121,52 @@ interface ChatroomListener{
     onRemovedFromChatroom?: (reason: LEAVE_REASON, roomId: string, roomName: string) => void
     /**
      * 有成员被禁言。
-     * 被添加的成员收到该事件。禁言期间成员不能发送发消息
+     * 被添加的成员收到该事件。禁言期间成员不能发送发消息。
      */
     onMutelistAdded?: (roomId: string, mutes: Array<string>, expireTime: number) => void;
     /**
      * 有成员从禁言列表中移除。
-     * 被解除禁言的成员会收到该事件
+     * 被解除禁言的成员会收到该事件。
      */
     onMutelistRemoved?: (roomId: string, mutes: Array<string>) => void;
     /**
      * 有成员被加入白名单。
-     * 被添加的成员收到该事件
+     * 被添加的成员收到该事件。
      */
     onWhitelistAdded?: (roomId: string, whitelist: Array<string>) => void;
     /**
      * 有成员被移出白名单。
-     * 被移出白名单的成员收到该事件
+     * 被移出白名单的成员收到该事件。
      */
     onWhitelistRemoved?: (roomId: string, whitelist: Array<string>) => void;
     /**
      * 全员禁言状态有变更。
-     * 聊天室所有成员会收到该事件
+     * 聊天室所有成员会收到该事件。
      */
     onAllMemberMuteStateChanged?: (roomId: string, isMuted: boolean) => void;
     /**
      * 有成员被设置为管理员。
-     * 所有成员会收到此通知
+     * 所有成员会收到此通知。
      */
     onAdminAdded?: (roomId: string, adminId: string) => void;
     /**
      * 有成员被移出管理员列表。
-     * 所有成员会收到此通知
+     * 所有成员会收到此通知。
      */
     onAdminRemoved?: (roomId: string, adminId: string) => void;
     /**
      * 聊天室所有者变更。
-     * 聊天室所有成员会收到该事件
+     * 聊天室所有成员会收到该事件。
      */
     onOwnerChanged?: (roomId: string, newOwner: string, oldOwner: string) => void;
     /**
      * 聊天室公告变更。
-     * 聊天室所有成员会收到该事件
+     * 聊天室所有成员会收到该事件。
      */
     onAnnouncementChanged?: (roomId: string, announcement: string) => void;
     /**
      * 聊天室信息有更新。
-     * 聊天室所有成员会收到该事件
+     * 聊天室所有成员会收到该事件。
      */
     onSpecificationChanged?: (room: Chatroom) => void;
 }
