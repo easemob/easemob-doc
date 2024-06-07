@@ -34,7 +34,7 @@
    - **Compatible SDK**：项目的支持的最低 API 等级，选择 `5.0.0(12)` 及以上。
    - **Module name**：module的名称，默认为 `entry`。
 
-然后点击 **Finish**。根据屏幕提示，安装所需插件。
+4. 点击 **Finish**。根据屏幕提示，安装所需插件。
 
 上述步骤使用 **DevEco Studio NEXT Developer Beta1（5.0.3.300）** 示例。
 
@@ -106,7 +106,7 @@ ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
 ```
 
 :::notice
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在[环信控制台](https://console.easemob.com/user/login)中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#注册单个用户)。
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在[环信控制台](https://console.easemob.com/user/login)中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
 :::
 
 ### 3. 登录账号

@@ -48,7 +48,7 @@ ChatClient.getInstance().chatManager()?.fetchConversationsFromServer(limit, curs
 
 ### 一次性获取本地所有会话
 
-- 要一次性获取本地所有会话，你可以调用 `getConversations` 方法。SDK 首先从内存中获取会话，若会话未从本地数据库加载过，SDK 会先将数据库中的会话加载到内存。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，会话列表为 `Array<Conversation>` 结构。
+要一次性获取本地所有会话，你可以调用 `getConversations` 方法。SDK 首先从内存中获取会话，若会话未从本地数据库加载过，SDK 会先将数据库中的会话加载到内存。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，会话列表为 `Array<Conversation>` 结构。
 
 示例代码如下：
 
