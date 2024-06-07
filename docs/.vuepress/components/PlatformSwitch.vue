@@ -16,6 +16,10 @@ const PLATFORM_ICON_MAP = {
     icon : '/icon-web.svg',
     activeIcon: '/icon-web-hover.png',
   },
+  harmony: {
+    icon : '/icon-harmony.svg',
+    activeIcon: '/icon-harmony-hover.png',
+  },
   windows: {
     icon : '/icon-windows.svg',
     activeIcon: '/icon-windows-hover.svg',
