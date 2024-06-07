@@ -33,6 +33,9 @@ sdkStarter:
     - icon: /sdk/applet.svg
       link: /document/applet/wechat.html
       text: 小程序
+    - icon: /sdk/harmonyos.svg
+      link: /document/harmonyos/quickstart.html
+      text: HarmonyOS 
     - icon: /sdk/flutter.svg
       link: /document/flutter/quickstart.html
       text: Flutter
@@ -67,6 +70,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_send_receive.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /document/harmonyos/message_send_receive.html
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_send_receive.html
@@ -100,6 +106,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_retrieve.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /document/harmonyos/message_retrieve.html
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_retrieve.html
@@ -133,6 +142,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_recall.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_recall.html 
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_recall.html
@@ -187,6 +199,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_receipt.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_receipt.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_receipt.html
@@ -244,6 +259,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_send_receive.html#发送合并消息
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_forward.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_forward.html
@@ -265,6 +283,9 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /document/ios/message_import_insert.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_import_insert.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_import_insert.html
@@ -292,6 +313,9 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /document/ios/message_update.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_update.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_update.html
@@ -322,6 +346,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_delete.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_delete.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_delete.html
@@ -409,6 +436,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_deliver_only_online.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_deliver_only_online.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_deliver_only_online.html
@@ -445,6 +475,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/conversation_list.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/conversation_list.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/conversation_list.html
@@ -466,6 +499,9 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /document/ios/conversation_unread.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/conversation_unread.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/conversation_unread.html
@@ -556,6 +592,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/conversation_delete.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/conversation_delete.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/conversation_delete.html
@@ -592,6 +631,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/group_manage.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/group_manage.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/group_manage.html
@@ -625,6 +667,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/group_members.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/group_members.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/group_members.html
@@ -658,6 +703,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/group_attributes.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/group_attributes.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/group_attributes.html
@@ -691,6 +739,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/room_manage.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/room_manage.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/room_manage.html
@@ -724,6 +775,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/room_members.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/room_members.html    
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/room_members.html
@@ -757,6 +811,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/room_attributes.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/room_attributes.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/room_attributes.html
@@ -886,6 +943,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/user_relationship.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/user_relationship.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/user_relationship.html
@@ -946,6 +1006,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/multi_device.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/multi_device.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/multi_device.html
@@ -999,6 +1062,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/error.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/error.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/error.html
