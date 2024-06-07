@@ -119,7 +119,7 @@ SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callbac
 ```
 
 :::notice
-该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端调用 Restful API 进行注册，详见 [注册单个用户](/document/server-side/account_system.html#注册单个用户)。
+该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端调用 Restful API 进行注册，详见 [注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
 :::
 
 ### 5. 登录账号

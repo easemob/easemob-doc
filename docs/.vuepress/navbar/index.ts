@@ -186,7 +186,7 @@ export const zhNavbar = navbar([
           {
             text: "HarmonyOS",
             icon: "/icon-harmonyos.svg",
-            link: "https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/index.html",
+            link: "https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html",
           },
           {
             text: "Windows",

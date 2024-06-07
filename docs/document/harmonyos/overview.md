@@ -170,8 +170,7 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 - `USER_DEVICE_CHANGED = 220`: 和上次设备不同导致下线
 - `SERVER_SERVING_DISABLED = 305`: 服务器服务停止
 
-// todo 替换为鸿蒙的
-以上参数具体可以参考 [ChatError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 对应说明。
+以上参数具体可以参考 [ChatError](https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/ChatError.ChatError.html#errorCode) 对应说明。
 
 ## 输出信息到日志文件
 

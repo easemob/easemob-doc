@@ -1741,7 +1741,7 @@ projects:
           - text: Web/小程序
             link: https://doc.easemob.com/jsdoc/index.html
           - text: HarmonyOS
-            link: https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/index.html
+            link: https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html
           - text: Flutter
             link: https://sdkdocs.easemob.com/apidoc/flutter/index.html
           - text: React Native
