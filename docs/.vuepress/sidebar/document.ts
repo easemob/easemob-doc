@@ -26,7 +26,7 @@ const documentSidebar = [
       { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
       { text: '按需导入 SDK（推荐）', link: 'import_sdk_minicore.html', only: ['web'] },
-      { text: 'SDK 集成概述', link: 'overview.html', only: ['android', 'ios', 'web', 'harmony', 'flutter'] },
+      { text: 'SDK 集成概述', link: 'overview.html', only: ['android', 'ios', 'web', 'harmonyos', 'flutter'] },
       { text: 'SDK 集成概述', link: 'overview.html', only: ['windows', 'react-native', 'unity'] },
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
       { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
@@ -50,15 +50,15 @@ const documentSidebar = [
           { text: '发送和接收消息', link: 'message_send_receive.html' },
           { text: '获取历史消息', link: 'message_retrieve.html' },
           { text: '撤回消息', link: 'message_recall.html' },
-          { text: '搜索消息', link: 'message_search.html', except: ['web', 'harmony']},
+          { text: '搜索消息', link: 'message_search.html', except: ['web', 'harmonyos']},
           { text: '消息回执', link: 'message_receipt.html'},
-          { text: '修改消息', link: 'message_modify.html', except: ['harmony']},
+          { text: '修改消息', link: 'message_modify.html', except: ['harmonyos']},
           { text: '转发消息', link: 'message_forward.html', except: ['web']},
           { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
           { text: '更新消息', link: 'message_update.html', except: ['web']},
           { text: '删除消息', link: 'message_delete.html' },    
-          { text: '置顶消息', link: 'message_pin.html', except: ['harmony']},         
-          { text: '翻译消息', link: 'message_translation.html', except: ['harmony']},
+          { text: '置顶消息', link: 'message_pin.html', except: ['harmonyos']},         
+          { text: '翻译消息', link: 'message_translation.html', except: ['harmonyos']},
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},
           { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
         ]
@@ -71,12 +71,12 @@ const documentSidebar = [
           { text: '会话列表', link: 'conversation_list.html' },
           { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
           { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
-          { text: '置顶会话', link: 'conversation_pin.html', except: ['harmony'] },
-          { text: '会话标记', link: 'conversation_mark.html', except: ['harmony'] },
+          { text: '置顶会话', link: 'conversation_pin.html', except: ['harmonyos'] },
+          { text: '会话标记', link: 'conversation_mark.html', except: ['harmonyos'] },
           { text: '删除会话', link: 'conversation_delete.html' },
         ]
       },
-      { text: '管理用户属性', link: 'userprofile.html', except: ['harmony'] },
+      { text: '管理用户属性', link: 'userprofile.html', except: ['harmonyos'] },
       { text: '管理用户关系', link: 'user_relationship.html' },
       {
         text: '群组管理',
@@ -104,19 +104,19 @@ const documentSidebar = [
   {
     text: '进阶功能',
     children: [
-      { text: '设置推送', link: 'push.html', except: ['harmony', 'windows', 'react-native', 'flutter', 'unity'] },
+      { text: '设置推送', link: 'push.html', except: ['harmonyos', 'windows', 'react-native', 'flutter', 'unity'] },
       { text: '登录多个设备', link: 'multi_device.html' },
-      { text: '管理在线状态订阅', link: 'presence.html', except: ['harmony'] },
-      { text: '消息表情回复', link: 'reaction.html', except: ['harmony'] },
+      { text: '管理在线状态订阅', link: 'presence.html', except: ['harmonyos'] },
+      { text: '消息表情回复', link: 'reaction.html', except: ['harmonyos'] },
       {
         text: '子区管理',
         collapsible: true,
         children: [
-          { text: '管理子区', link: 'thread.html', except: ['harmony'] },
-          { text: '管理子区消息', link: 'thread_message.html', except: ['harmony'] }
+          { text: '管理子区', link: 'thread.html', except: ['harmonyos'] },
+          { text: '管理子区消息', link: 'thread_message.html', except: ['harmonyos'] }
         ]
       },
-      { text: '消息审核（举报）', link: 'moderation.html', except: ['harmony']},
+      { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
     ],
     except: ['applet','server-side','electron','linux']
   },
@@ -125,7 +125,7 @@ const documentSidebar = [
     children: [
       { text: '错误码', link: 'error.html' },
       //{ text: 'EaseIMKit 使用指南', link: 'easeimkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
-      { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'harmony'] },
+      { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'harmonyos'] },
       { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
     ],
     except: ['applet', 'server-side','electron','linux']
