@@ -18,37 +18,83 @@ products:
     text: 隐私协议
   - link: "/product/security_best_practices.html"
     text: 安全最佳实践
-sdkStarter:
-  title: "SDK 快速开始"
-  platform:
-    - icon: /sdk/android.svg
-      link: /document/android/quickstart.html
-      text: Android
-    - icon: /sdk/iOS.svg
-      link: /document/ios/quickstart.html
-      text: iOS 
-    - icon: /sdk/web.svg
-      link: /document/web/quickstart.html
-      text: Web
-    - icon: /sdk/applet.svg
-      link: /document/applet/wechat.html
-      text: 小程序
-    - icon: /sdk/harmonyos.svg
-      link: /document/harmonyos/quickstart.html
-      text: HarmonyOS 
-    - icon: /sdk/flutter.svg
-      link: /document/flutter/quickstart.html
-      text: Flutter
-    - icon: /sdk/react.svg
-      link: /document/react-native/quickstart.html
-      text: React Native
-    - icon: /sdk/unity.svg
-      link: /document/unity/quickstart.html
-      text: Unity
-    - icon: /sdk/windows.svg
-      link: /document/windows/quickstart.html
-      text: Windows 
-
+starter:
+  - title: "SDK 快速开始"
+    platform:
+      - icon: /sdk/android.svg
+        link: /document/android/quickstart.html
+        text: Android
+      - icon: /sdk/iOS.svg
+        link: /document/ios/quickstart.html
+        text: iOS 
+      - icon: /sdk/web.svg
+        link: /document/web/quickstart.html
+        text: Web
+      - icon: /sdk/applet.svg
+        link: /document/applet/wechat.html
+        text: 小程序
+      - icon: /sdk/harmonyos.svg
+        link: /document/harmonyos/quickstart.html
+        text: HarmonyOS 
+      - icon: /sdk/flutter.svg
+        link: /document/flutter/quickstart.html
+        text: Flutter
+      - icon: /sdk/react.svg
+        link: /document/react-native/quickstart.html
+        text: React Native
+      - icon: /sdk/unity.svg
+        link: /document/unity/quickstart.html
+        text: Unity
+      - icon: /sdk/windows.svg
+        link: /document/windows/quickstart.html
+        text: Windows
+  - title: "服务端 API"
+    platform:
+      - icon: /sdk/rest.svg
+        link: /document/server-side/overview.html
+        text: REST
+  - title: "单群聊 UIKit 集成"
+    platform:
+      - icon: /sdk/android.svg
+        link: /uikit/chatuikit/android/chatuikit_integrated.html
+        text: Android
+      - icon: /sdk/iOS.svg
+        link: /uikit/chatuikit/ios/chatuikit_integrated.html
+        text: iOS 
+      - icon: /sdk/web.svg
+        link: /uikit/chatuikit/web/chatuikit_integrated_react.html
+        text: Web
+      - icon: /sdk/flutter.svg
+        link: /uikit/chatuikit/flutter/chatuikit_integrated.html
+        text: Flutter
+      - icon: /sdk/react.svg
+        link: /uikit/chatuikit/react-native/chatuikit_integrated.html
+        text: React Native
+  - title: "聊天室 UIKit 集成"
+    platform:
+      - icon: /sdk/android.svg
+        link: /uikit/chatroomuikit/android/roomuikit_integrated.html
+        text: Android
+      - icon: /sdk/iOS.svg
+        link: /uikit/chatroomuikit/ios/roomuikit_integrated.html
+        text: iOS 
+      - icon: /sdk/web.svg
+        link: /uikit/chatroomuikit/web/roomuikit_integrated.html
+        text: Web
+      - icon: /sdk/flutter.svg
+        link: /uikit/chatroomuikit/flutter/roomuikit_integrated.html
+        text: Flutter
+      - icon: /sdk/react.svg
+        link: /uikit/chatroomuikit/react-native/roomuikit_integrated.html
+        text: React Native
+  - title: "CallKit" 
+    platform:
+      - icon: /sdk/android.svg
+        link: /document/android/easecallkit.html
+        text: Android
+      - icon: /sdk/iOS.svg
+        link: /document/ios/easecallkit.html
+        text: iOS  
 projects:
   - title: SDK/服务端功能
     features:
@@ -1082,7 +1128,7 @@ projects:
                 link: /document/server-side/error.html
           - text: 内容审核
             link: /product/moderation/moderation_overview.html           
-  - title: UIKit
+  - title: UIKit 功能
     features:
       - title: UIKit-单群聊
         icon: /feature/uikit.svg
@@ -1681,27 +1727,6 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_member.html#移除成员        
-  - title: CallKit
-    features:
-      - contexts:
-          - text: 一对一/多人通话
-            desc: EaseCallKit 是基于环信 IM 和声网音视频结合开发的音视频 UI 库，实现了一对一语音和视频通话以及多人音视频通话的功能。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/easecallkit.html#发起通话邀请
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/easecallkit.html#发起通话邀请
-          - text: 通话异常回调
-            desc: 通话过程中如果有异常或者错误发生，会触发通话异常回调。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/easecallkit.html#通话异常回调
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/android/easecallkit.html#通话异常回调
   - title: 场景方案
     features:
       - contexts:

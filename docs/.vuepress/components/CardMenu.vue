@@ -12,7 +12,7 @@
       <section class="links-section">
         <div class="links-header">文档链接</div>
         <div v-for="sdk in sdks" :key="sdk.text" class="link-item">
-          <img :src="sdk.icon" class="link-icon" width="24px" :alt="sdk.text" />
+          <img v-if="sdk.icon" :src="sdk.icon" class="link-icon" width="24px" :alt="sdk.text" />
           <el-link :href="sdk.link" class="link-label">{{ sdk.text }}</el-link>
         </div>
       </section>
