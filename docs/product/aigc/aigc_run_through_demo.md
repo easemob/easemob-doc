@@ -24,7 +24,9 @@ Windows 或者 Linux 服务器
 
 服务端配置信息全部集中在以下文件中，主要配置包含三个部分：环信即时通讯 IM、miniMax 和 redis，配置内容如下：
 
+```
 src/main/resources/application.yml
+```
 
 **环信即时通讯 IM 信息配置**
  
