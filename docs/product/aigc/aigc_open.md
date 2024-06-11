@@ -25,7 +25,7 @@
 选择**应用概览** > **用户认证**，创建 8 个机器人的账号。
 
 :::tip
-不能修改这八个基础账号的用户 ID，否则需要调整代码中 `BotSettingUtil` 中八个对应机器人的账号。
+不能修改这 8 个基础账号的用户 ID，否则需要调整代码中 `BotSettingUtil` 中 8 个对应机器人的账号。
 :::
 
 ![img](@static/images/aigc/robot_account_create.png)
