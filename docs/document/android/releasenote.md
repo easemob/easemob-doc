@@ -7,8 +7,8 @@
 ### 新增特性
 
 - [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)： 
-  - `EMOptions#setLoginCustomExt`：设置设备的登录扩展信息；
-  - `EMOptions#getLoginCustomExt`：获取设备的登录扩展信息。
+  - `EMOptions#setLoginCustomExt`：设置设备的扩展信息；
+  - `EMOptions#getLoginCustomExt`：获取设备的扩展信息。
   - `EMConnectionListener#onLogout(int, EMLoginExtensionInfo)`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
 - [IM SDK] 新增根据多个消息类型搜索本地消息：
   - `EMChatManager#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索所有会话中的消息)。

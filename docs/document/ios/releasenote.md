@@ -7,7 +7,7 @@
 ### 新增特性
 
 - [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)。
-  - `EMLoginExtensionInfo.extensionInfo`：设备的登录扩展信息。
+  - `EMLoginExtensionInfo.extensionInfo`：设备的扩展信息。
   - `EMOptions#loginExtensionInfo`：设置登录时携带的扩展信息。
   - `EMClientDelegate#userAccountDidLoginFromOtherDeviceWithInfo.EMLoginExtensionInfo`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
 - [IM SDK] 新增根据多个消息类型搜索本地消息：
