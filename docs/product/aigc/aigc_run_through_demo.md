@@ -64,7 +64,7 @@ easemob:
 
 ![img](@static/images/aigc/callback_address.png)
 
-**LLM 模型信息配置**
+**大语言模型（LLM）信息配置**
 
 本代码示例以 miniMax 为例 [MiniMax 开放平台快速开始](https://platform.minimaxi.com/document/guides/example?id=6433f36f94878d408fc82947)，若使用其他大语言模型，可按其他语言模型配置要求进行调整。
 
@@ -106,11 +106,11 @@ redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，�
 
 4. 使用 `mvn install` 将项目打包为 jar。
 
-jar.png
+![img](@static/images/aigc/jar.png)
 
 5. 找到对应位置的 jar 包，上传到服务器。
 
-使用命令启动即可
+使用命令启动即可：
 
 ```
 nohup java -jar $APP_DIR/chattyai-0.0.1-SNAPSHOT.jar --server.port=$PORT ./chattyai.log 2>&1 &
