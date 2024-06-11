@@ -87,10 +87,8 @@
 
 ### 1. SDK 初始化
 
-
 ```TypeScript
-let options = new ChatOptions();
-options.setAppKey("Your appkey");
+let options = new ChatOptions("Your appkey");
 ......// 其他 ChatOptions 配置。
 ChatClient.getInstance().init(options);
 ```

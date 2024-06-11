@@ -47,12 +47,12 @@
                   <span v-if="index < products.length - 1">|</span>
                 </template>
               </div>
-              <div id="SDK快速开始">
-                <h2 class="sdk-start-title">{{ sdkStarter.title }}</h2>
+              <div v-for="s in starter" :id="s.title">
+                <h2 class="sdk-start-title">{{ s.title }}</h2>
                 <div class="sdk-start-list">
                   <div
                     class="sdk-start-item"
-                    v-for="item in sdkStarter.platform"
+                    v-for="item in s.platform"
                     :key="item.text"
                     @click="goTo(item.link)"
                   >
@@ -146,7 +146,7 @@ import { usePageFrontmatter } from "@vuepress/client";
 const frontmatter = usePageFrontmatter();
 const router = useRouter();
 const products = frontmatter.value.products || [];
-const sdkStarter = frontmatter.value.sdkStarter || [];
+const starter = frontmatter.value.starter || []
 const projects = frontmatter.value.projects || [];
 const containerRef = ref<HTMLElement | null>(null);
 
@@ -161,7 +161,9 @@ interface AnchorLink {
 
 const buildAnchorLink = () => {
   const values: AnchorLink[] = [];
-  values.push({ text: sdkStarter.title });
+  starter.forEach((s) => {
+    values.push({ text: s.title });
+  });
   projects.forEach((project) => {
     const children = [];
     project.features.forEach((feature) => {

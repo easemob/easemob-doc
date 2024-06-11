@@ -124,6 +124,16 @@ export const zhSidebar = sidebar({
       text: "场景方案",
       children: [
         {
+          text: "环信 AIGC",
+          collapsible: true,
+          children: [
+            { text: "新手指引", link: "aigc/aigc_landing_page.html" },
+            { text: "场景介绍", link: "aigc/aigc_scenario_introduction.html" },
+            { text: "开通服务", link: "aigc/aigc_open.html" },
+            { text: "跑通示例项目", link: "aigc/aigc_run_through_demo.html" },
+          ],  
+        },    
+        {
           text: "超级社区",
           collapsible: true,
           children: [
