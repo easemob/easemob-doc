@@ -1705,6 +1705,17 @@ projects:
   - title: 场景方案
     features:
       - contexts:
+          - text: 环信 AIGC
+            desc: 环信 AIGC 决方案，充分发挥即时通讯的实时性和便利性，同时叠加 AI 的智能化能力，可快速搭建多类低延迟的 AI 实时互动场景，实现了更便捷的开发、更具沉浸感和个性化的用户体验。
+            sdks:
+              - text: 新手指引
+                link: /product/aigc/aigc_landing_page.html
+              - text: 场景介绍
+                link: /product/aigc/aigc_scenario_introduction.html
+              - text: 开通服务
+                link: /product/aigc/aigc_open.html
+              - text: 跑通示例项目
+                link: /product/aigc/aigc_run_through_demo.html
           - text: 超级社区
             desc: 环信超级社区（Circle）是一款基于环信 IM 打造的类 Discord 实时社区应用场景方案，支持社区（Server）、频道（Channel） 和子区（Thread） 三层结构。一个 App 下可以有多个社区，同时支持陌生人/好友单聊。用户可创建和管理自己的社区，在社区中设置和管理频道将一个话题下的子话题进行分区，在频道中根据感兴趣的某条消息发起子区讨论，实现万人实时群聊，满足超大规模用户的顺畅沟通需求。
             sdks:

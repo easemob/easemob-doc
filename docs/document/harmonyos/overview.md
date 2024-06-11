@@ -33,9 +33,8 @@ ohos.permission.GET_NETWORK_INFO
 初始化示例代码：
 
 ```TypeScript
-let options = new ChatOptions();
-options.setAppKey("Your appkey");
-......// 其他 EMOptions 配置。
+let options = new ChatOptions("Your appkey");
+......// 其他 ChatOptions 配置。
 ChatClient.getInstance().init(options);
 ```
 
