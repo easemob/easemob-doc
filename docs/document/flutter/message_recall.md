@@ -29,19 +29,26 @@
 
 你可以调用 `recallMessage` 方法撤回一条发送成功的消息。
 
-调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessagesRecalled` 事件。
+调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessagesRecalledInfo` 事件。
+
+:::tip
+对于 4.6.1 及以上版本的 SDK，你可以通过 ext 字段（字符串类型）传入自定义信息。
+:::
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.recallMessage(msgId);
+  await EMClient.getInstance.chatManager.recallMessage(msgId, ext: 'ext');
 } on EMError catch (e) {
 }
 ```
 
 ### 设置消息撤回监听
 
-你可以设置消息撤回监听，通过 `onMessagesRecalled` 事件监听发送方对已接收的消息的撤回。
+你可以设置消息撤回监听，通过 `onMessagesRecalledInfo` 事件监听发送方对已接收的消息的撤回。
+
+- 若用户在线接收了消息，消息撤回时，该事件中的 `RecallMessageInfo` 中的 `recallMessage` 为撤回的消息的内容，`recallMessageId` 属性返回撤回的消息的 ID。
+- 若消息发送和撤回时接收方离线，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为空，`recallMessageId` 属性返回撤回的消息的 ID。
 
 ```dart
-void onMessagesRecalled(List<EMMessage> messages) {}
+void onMessagesRecalledInfo(List<RecallMessageInfo> infos) {}
 ```
