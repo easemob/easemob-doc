@@ -102,15 +102,15 @@ redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，�
 
 1. `host` 填写为 `127.0.0.1`。
 2. `port` 填写为 redis 所占用的端口。
-3. `password` 填写 redis 的密码(如果没有密码，使用 # 注释该配置)。
+3. `password` 填写 redis 的密码(如果没有密码，使用 `#` 注释该配置)。
 
 ![img](@static/images/aigc/redis_password.png)
 
-4. 使用 `mvn install` 将项目打包为 jar。
+4. 使用 `mvn install` 将项目打包为 `jar`。
 
 ![img](@static/images/aigc/jar.png)
 
-5. 找到对应位置的 jar 包，上传到服务器。
+5. 找到对应位置的 `jar` 包，上传到服务器。
 
 使用命令启动即可：
 
@@ -118,8 +118,8 @@ redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，�
 nohup java -jar $APP_DIR/chattyai-0.0.1-SNAPSHOT.jar --server.port=$PORT ./chattyai.log 2>&1 &
 ```
 
-- $APP_DIR 替换为上传 jar 包存在的根路径。
-- $PORT 替换为需要占用的端口。
+- `$APP_DIR` 替换为上传 jar 包存在的根路径。
+- `$PORT` 替换为需要占用的端口。
 
 6. 查看启动日志
 
