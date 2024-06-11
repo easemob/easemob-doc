@@ -6,8 +6,8 @@
 
 ### 新增特性
 
-- 撤回消息方法 `recallMessage` 中增加了 `ext` 参数（字符串类型），支持消息撤回时携带自定义信息。
-- 新增消息撤回事件 `EMChatEventHandler#onMessagesRecalledInfo`, 支持离线期间撤回的消息通知给接收方。
+- 撤回消息方法 `recallMessage` 中增加了 `ext` 参数（字符串类型），[支持消息撤回时携带自定义信息](message_recall.html#撤回消息)。
+- 新增消息撤回事件 `EMChatEventHandler#onMessagesRecalledInfo`, [支持离线期间撤回的消息通知给接收方](message_recall.html#设置消息撤回监听)。
 
 ### 修复
 
