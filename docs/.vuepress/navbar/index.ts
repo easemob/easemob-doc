@@ -24,7 +24,7 @@ export const zhNavbar = navbar([
             link: "/document/web/quickstart.html",
           },
           {
-            text: "Harmonyos",
+            text: "HarmonyOS",
             icon: "/icon-harmonyos.svg",
             link: "/document/harmonyos/quickstart.html",
           },
