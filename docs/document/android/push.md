@@ -1759,7 +1759,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 4. 查看推送证书是否存和证书推送测试。
 
-在[环信即时通讯控制台](https://console.easemob.com) 的 **即时通讯** > **功能配置** > **功能配置总览** > **消息推送**  > **证书管理**页面选择要测试的推送证书（用户绑定的推送证书），选择 **更多** > **测试**。
+在[环信即时通讯控制台](https://console.easemob.com) 的 **即时通讯** > **功能配置** > **消息推送** > **证书管理**页面选择要测试的推送证书（用户绑定的推送证书），选择 **更多** > **测试**。
 
 ![image](@static/images/android/push/push_notification_test.png)
 
