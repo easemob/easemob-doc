@@ -45,10 +45,6 @@
 1. 调用 `fetchPublicChatroomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
 2. 调用 `joinChatroom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `onMemberJoined` 回调。
 
-:::tip
-若传入的聊天室 ID 不存在，你可以联系环信商务实现自动创建聊天室。若开启了该功能，环信服务器会自动创建聊天室，`joinChatroom` 方法中的参数无变化。
-:::
-
 示例代码如下：
 
 ```TypeScript

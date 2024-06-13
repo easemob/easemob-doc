@@ -49,7 +49,7 @@
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
+GET https://{host}/{org_name}/{app_name}/chatmessages/{time}
 ```
 
 #### 路径参数
