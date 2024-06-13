@@ -921,8 +921,4 @@ message.chatType = EMChatTypeChat;
 
 ![image](@static/images/android/push/huawei_push_notification_test.png)
 
-5. 查看是否超过了厂商通道限制。
-
-详见[厂商通道限制以及解决方案](#厂商通道限制及解决方案)。
-
-6. 若以上均已排查后问题仍存在，请联系环信技术支持进一步排查问题原因。
+5. 若以上均已排查后问题仍存在，请联系环信技术支持进一步排查问题原因。
