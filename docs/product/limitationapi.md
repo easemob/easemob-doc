@@ -55,8 +55,8 @@
 
 | RESTful API 接口        | 方法 | 接口 URL           | 
 | :----------- | :--- | :------------- | 
-| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{username} |
-| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{username} | 
+| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{userId} |
+| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{userId} | 
 
 以上两个接口的总调用频率（默认值）为 100 次/秒/App Key。
 
