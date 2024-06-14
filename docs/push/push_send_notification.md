@@ -603,3 +603,18 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/task/broadcast'  \
     "duration": 1
 }
 ```
+
+## 常见错误码
+
+调用发送推送通知相关的 REST API 时，若返回的 HTTP 状态码非 200，则请求失败，提示错误。本节列出这些接口的常见错误码。 
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 403 | ServiceNotOpenException | push service not open | 即时推送功能未开通 | 确认并开通即时推送功能。 |
+| 403 | LimitException | limit request | 因为数量或其他限制导致请求失败 | 根据返回信息的限制原因处理。 |
+| 400 | MessageException | bad_request | 推送消息配置错误 | 检查并修改，使用正确的推送消息体。 |
+| 400 | IllegalArgumentException | 任意 | 推送参数配置错误 | 检查并修改，使用正确的对应参数。 |
+| 404 | 请求路径不存在 | url is invalid | 请求路径错误 | 检查并修改，使用正确的请求路径。 |
+| 5xx | 服务器内部错误   | 任意      | 服务器在尝试处理请求时发生内部错误 | 联系环信技术支持。 |
+
+其他错误，你可以参考 [错误码](/document/server-side/error.html) 了解可能的原因。

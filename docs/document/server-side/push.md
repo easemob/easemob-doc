@@ -96,6 +96,8 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+
 ### 示例
 
 #### 请求示例
@@ -135,7 +137,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
   "timestamp": 1688030642443, 
   "entities": [ 
     {            
-      "device_id": "8ce08cad-9369-4bdd-86c8-695a0d247cda",
+      "device_id": "8ce08cad-9369-XXXX-XXXX-695a0d247cda",
       "device_token": "BAEAAAAAB.jkuDmf8hRUPDgOel-zX9exVlcjS1akCWQIUA3cBbB_DprnHMeFR11PV1of1sVNKPmKdKhMB22YuO8-Z_Ksoqxo8Y",
       "notifier_name": "104410638"       
     }   
@@ -192,6 +194,8 @@ GET https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+
 ### 请求示例
 
 ```shell
@@ -235,7 +239,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 
 | 参数       | 类型   | 描述   | 是否必需 | 
 | :--------- | :----- | :------- | :------------------ |
-| `userId` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 要设置哪个用户的推送显示昵称。传入该用户的用户 ID。    | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -274,7 +278,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -328,7 +332,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 
 | 参数       | 类型   | 描述   | 是否必需 | 
 | :--------- | :----- | :------- | :------------------ |
-| `userId` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 要设置哪个用户的推送通知的展示方式。传入该用户的用户 ID。   | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -369,7 +373,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -426,9 +430,9 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 
 #### 路径参数
 
-| 参数       | 类型   | 描述                                                                                        | 是否必需 |
-| :--------- | :----- | :------------------------------------------------------------------------------------------ | :------- |
-| `userId` | String | 当前用户的用户 ID。    | 是       | 
+| 参数       | 类型   | 描述              | 是否必需 |
+| :--------- | :----- | :----------------------- | :------- |
+| `userId` | String | 要设置哪个用户的离线推送设置。传入该用户的用户 ID。    | 是       | 
 | `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是       |
 | `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。                      | 是       |
 
@@ -470,7 +474,7 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 | `data.ignoreInterval` | String | 离线推送免打扰时间段。 |
 | `data.ignoreDuration` | Long   | 离线推送免打扰时长。   |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -514,14 +518,14 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
+GET https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 描述          | 是否必需 |
 | :--------- | :----- | :--------------------------------- | :------- |
-| `username` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 要查询哪个用户的离线推送设置。传入该用户的用户 ID。    | 是       | 
 | `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是       |
 | `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。                      | 是       |
 
@@ -546,7 +550,7 @@ GET https://{host}/{org}/{app}/users/{username}/notification/{chattype}/{key}
 | `data.ignoreInterval` | String | 离线推送免打扰时间段。 |
 | `data.ignoreDuration` | Long   | 离线推送免打扰时长。   |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -584,14 +588,14 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org}/{app}/users/{username}/notification/language
+PUT https://{host}/{org}/{app}/users/{userId}/notification/language
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 描述          | 是否必需 |
 | :--------- | :----- | :--------------------------------- | :------- |
-| `username` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 要设置哪个用户的推送通知的首选语言。传入该用户的用户 ID。   | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -599,13 +603,13 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 
 | 参数            | 类型   | 描述    
 | :-------------- | :----- | :-------------- |
-| `Content-Type`  | String | 内容类型。请填 `application/json`。                                                                                  | 是       |
+| `Content-Type`  | String | 内容类型。请填 `application/json`。    | 是       |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
 #### 请求 body
 
-| 参数                  | 类型   | 描述                                                                                               | 是否必需 |
-| :-------------------- | :----- | :------------------------------------------------------------------------------------------------- | :------- |
+| 参数                  | 类型   | 描述                        | 是否必需 |
+| :-------------------- | :----- | :--- | :------- |
 | `translationLanguage` | String | 用户接收的推送通知的首选语言的代码。如果设置为空字符串，表示无需翻译，服务器直接推送原语言的通知。 | 是       |
 
 ### HTTP 响应
@@ -619,7 +623,7 @@ PUT https://{host}/{org}/{app}/users/{username}/notification/language
 | `data`          | JSON   | 用户接收推送通知的首选语言。       |
 | `data.language` | String | 用户接收推送通知的首选语言的代码。 |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -659,14 +663,14 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{username}/notification/language
+GET https://{host}/{org_name}/{app_name}/users/{userId}/notification/language
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 描述          | 是否必需 |
 | :--------- | :----- | :--------------------------------- | :------- |
-| `username` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 要获取哪个用户的推送通知的首选语言。传入该用户的用户 ID。  | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -687,7 +691,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/notification/language
 | `data`          | JSON   | 用户接收推送通知的首选语言。       |
 | `data.language` | String | 用户接收推送通知的首选语言的代码。 |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -825,7 +829,7 @@ POST https://{host}/{org_name}/{app_name}/notification/template
 | `data.title_pattern`   | String | 推送模板的自定义标题。                       |
 | `data.content_pattern` | String | 推送模板的自定义内容。                       |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 #### 示例
 
@@ -902,7 +906,7 @@ GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 | `data.title_pattern`   | String | 推送模板的自定义标题。                         |
 | `data.content_pattern` | String | 推送模板的自定义内容。                         |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 #### 示例
 
@@ -941,14 +945,14 @@ curl -X GET 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 #### HTTP 请求
 
 ```
-PUT https://{host}/{org_name}/{app_name}/users/{username}/notification/template
+PUT https://{host}/{org_name}/{app_name}/users/{userId}/notification/template
 ```
 
 ##### 路径参数
 
 | 参数       | 类型   | 描述          | 是否必需 |
 | :--------- | :----- | :--------------------------------- | :------- |
-| `username` | String | 当前用户的用户 ID。    | 是       | 
+| `userId` | String | 当前用户的用户 ID。    | 是       | 
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -956,16 +960,16 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/notification/template
 ##### 请求 Header
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
-| :-------------- | :----- | :------- | :----------------------------------------------------------- |
+| :-------------- | :----- | :------- | :------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                          |
-| `Authorization` | String | 是       | App User 鉴权 token，格式为 `Bearer YourUserToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 user token。 |
+| `Authorization` | String | 是       | App User 鉴权 token，格式为 `Bearer YourUserToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 user token。<Container type="notice" title="注意">这里是用户 token，而非 App token。</Container> |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 body 
 
 | 参数       | 类型   | 是否必需 | 描述          |
-| :--------- | :----- | :------- | :-------------------------------------------- |
+| :--------- | :----- | :------- | :------------ |
 | `templateName` | String | 是   | 模板名称。| 
 
 ####  HTTP 响应
@@ -1170,7 +1174,7 @@ DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 | `data.title_pattern`   | String | 推送模板的自定义标题。                         |
 | `data.content_pattern` | String | 推送模板的自定义内容。                         |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1201,5 +1205,61 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
   "applicationName": "XXXX"
 }
 ```
+
+## 常见错误码
+
+调用离线推送相关的 REST API 时，若返回的 HTTP 状态码非 200，则请求失败，提示错误。本节列出这些接口的常见错误码。 
+
+### 推送设置和查询相关的常见错误码
+
+离线推送的设置以及查询相关的 REST API（包括**设置接收方配置模板名称**和**获取接收方配置模板名称**两个接口）如下表所示：
+
+| RESTful API 接口        | 方法 | 接口 URL           |
+| :----------- | :--- | :------------- |
+| 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/{userId}/push/binding |
+| 查询推送绑定信息    | GET  | /{org_name}/{app_name}/users/{userId}/push/binding |
+| 设置离线推送时显示的昵称 | PUT  | /{org_name}/{app_name}/users/{userId} |
+| 设置离线推送通知的展示方式 | PUT  | /{org_name}/{app_name}/users/{userId} |
+| 设置离线推送         | PUT  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} |
+| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} |
+| 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language |
+| 获取推送通知的首选语言 | GET  | /{org_name}/{app_name}/users/{userId}/notification/language |
+| 设置接收方配置模板名称 | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template |
+| 获取接收方配置模板名称 | GET | /{org_name}/{app_name}/users/{userId}/notification/template |
+
+以上 API 的常见错误码如下所示：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 400 | RequiredPropertyNotFoundException | Entity user requires a property named username | 用户不存在 | 检查并修改请求参数，请使用正确的且存在的用户 ID。 |
+| 400  | IllegalArgumentException | parameters is invalid : XXX | XXX 属性值不合法 | 检查并修改请求参数，在限定范围内使用请求参数。|
+| 404 | 请求路径不存在 | url is invalid | 请求路径错误 | 检查并修改，请使用正确的请求路径。 |
+| 5xx | 服务器内部错误   | 任意      | 服务器在尝试处理请求时发生内部错误| 联系环信技术支持。 |
+
+#### 推送模板相关接口的常见错误码
+
+离线推送模板相关的接口如下：
+
+| RESTful API 接口        | 方法 | 接口 URL           |
+| :----------- | :--- | :------------- |
+| 创建离线推送模板          | POST  | /{org_name}/{app_name}/notification/template |
+| 修改离线推送模板      | PUT  | /{org_name}/{app_name}/notification/template/{name} |
+| 查询离线推送模板 | GET | /{org_name}/{app_name}/notification/template/{name} |
+| 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} |
+
+这些 REST API 的常见错误码如下所示：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 400  | EntityNotFoundException | XXX template is not exist | XXX 模板不存在 | 检查并修改请求参数，使用正确存在的模板名称。 |
+| 404 | 请求路径不存在 | url is invalid | 请求路径错误 | 检查并修改，使用正确的请求路径。 |
+| 5xx | 服务器内部错误   | 任意      | 服务器在尝试处理请求时发生内部错误 | 联系环信技术支持。 |
+
+其他错误，你可以参考 [错误码](error.html) 了解可能的原因。
+
+
+
+
+
 
 
