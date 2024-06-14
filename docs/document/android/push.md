@@ -237,8 +237,9 @@ EMPushHelper.getInstance().setPushListener(new PushListener() {
        EMLog.e("PushClient", "Push client occur a error: " + pushType + " - " + errorCode);
    }
    @Override
+   // 选择推送类型。当设备同时支持 FCM 推送和其它推送时，可以使用 isSupportPush 选择使用其中一种推送。
    public boolean isSupportPush(EMPushType pushType, EMPushConfig pushConfig) {
-       // 设置是否支持 FCM
+       // 设置是否支持 FCM。
        if(pushType == EMPushType.FCM) {
            return GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this)
                     == ConnectionResult.SUCCESS;

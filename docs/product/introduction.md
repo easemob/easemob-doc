@@ -191,6 +191,7 @@ Reaction 的功能如下：
 | Android      | Android 5.0 或以上版本（API 级别 21 或以上）   |
 | iOS          | iOS 10.0 或以上版本                                            |
 | Web          | <br/> - Internet Explorer 9 或以上 <br/> - FireFox 10 或以上 <br/> - Chrome 54 或以上 Safari 6 或以上<br/> - Edge 12 或以上 <br/> - Opera 58 或以上<br/> - iOS Safari 7 或以上<br/> - Android Browser 4.4 (KitKat) 或以上 |
+| HarmonyOS        | HarmonyOS NEXT（API 级别 12 或以上）   |
 | Unity        | Unity 2017 或以上版本                                         |
 | Windows      | Windows 10 或以上版本                                       |
 | React Native | React Native 0.63.4 或以上版本                              |
