@@ -16,6 +16,16 @@
 
 单群聊 UIKit 支持 Module 源码集成。
 
+### Module 远程依赖
+
+在 app 项目 build.gradle.kts 中添加以下依赖：
+
+```kotlin
+implementation("io.hyphenate:ease-chat-kit:4.5.0")
+```
+
+### 本地依赖
+
 从 GitHub 获取[单群聊 UIKit](https://github.com/easemob/chatuikit-android) 源码，按照下面的方式集成：
 
 1. 在根目录 `settings.gradle.kts` 文件（/Gradle Scripts/settings.gradle.kts）中添加如下代码：
