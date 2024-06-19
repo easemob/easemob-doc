@@ -14,8 +14,6 @@
 
 ## 集成单群聊 UIKit
 
-单群聊 UIKit 支持 Module 源码集成。
-
 ### Module 远程依赖
 
 在 app 项目 build.gradle.kts 中添加以下依赖：
