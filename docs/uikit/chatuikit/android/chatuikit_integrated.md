@@ -21,7 +21,7 @@
 在 app 项目 build.gradle.kts 中添加以下依赖：
 
 ```kotlin
-implementation("io.hyphenate:ease-chat-kit:4.5.0")
+implementation("io.hyphenate:ease-chat-kit:4.7.0")
 ```
 
 ### 本地依赖
