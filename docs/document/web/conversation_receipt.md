@@ -8,7 +8,7 @@
     
 例如，你可以实现下图所示的效果。 
 
-[image] //TODO： 提供截图
+![img](@static/images/uikit/chatuikit/feature/web/conversation/conversation_read.png) 
 
 ## 技术原理
 
