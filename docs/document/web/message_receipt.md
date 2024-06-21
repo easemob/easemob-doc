@@ -8,10 +8,13 @@
 
 本文介绍如何使用环信即时通讯 IM Web SDK 实现单聊和群聊的消息回执功能。
 
-消息送达回执和已读回执的效果示例，如下图所示：
+消息送达回执的效果示例，如下图所示：
 
-<img src=@static/images/uikit/chatuikit/feature/web/common/message_delivery_receipt.png  title=“单聊消息送达回执” />&nbsp;&nbsp;
-<img src=@static/images/uikit/chatuikit/feature/web/common/message_read_receipt.png  title=单聊消息的已读回执 />
+![img](@static/images/uikit/chatuikit/feature/web/common/message_delivery_receipt.png) 
+
+消息已读回执的效果示例，如下图所示：
+
+![img](@static/images/uikit/chatuikit/feature/web/common/message_read_receipt.png) 
 
 ## 技术原理
 
