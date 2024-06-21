@@ -8,10 +8,7 @@
 
 消息送达回执和已读回执的效果示例，如下图所示：
 
-<img src=@static/images/uikit/chatuikit/feature/common/message_delivery_receipt.png  title=“单聊消息送达回执” />&nbsp;&nbsp;
-<img src=@static/images/uikit/chatuikit/feature/common/message_read_receipt.png  title=单聊消息的已读回执 width="300" height="630"/>
-
-[image]
+![img](@static/images/android/message_receipt.png)
 
 ## 技术原理
 
