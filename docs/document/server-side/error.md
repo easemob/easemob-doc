@@ -27,7 +27,7 @@
 | 404                        | （未找到）服务器找不到请求的接口。                           |
 | 405                        | （请求方式错误）请按照环信官网接口说明，正确的使用接口 GET，POST 等请求方式。 |
 | 408                        | （请求超时）服务器等候请求时发生超时。                       |
-| 409                        | （并发操作同一资源）同时请求同一资源时报错，例如，同一时间调用两次获取用户 token，则会上报该错误。       |
+| 409                        | 并发调用[通过用户 ID 获取用户 token 的 API](#easemob_user_token.html#通过用户-id-获取用户-token) 时若设置了自动创建用户则报错。也就是说，调用了该 API 时将 `grant_type` 设置为 `inherit`，`autoCreateUser` 设置为 `true`，则会上报该错误。如果获取 token 的用户已注册，并发调用该 API 则不会报错。|
 | 413                        | （消息附件过大）调用[上传文件](message_download.html#上传文件)接口上传的消息附件超过了最大限制。  |
 | 415                        | 请求体的类型不支持。                                         |
 | 429                        | （服务不可用）请求接口超过调用频率限制，即接口被限流。或超过社区版限制，如有需要可联系商务。 |
@@ -89,6 +89,7 @@
 | 404              |  resource_not_found        | username XXXX doesn't exist!      | 创建群组时添加的用户不存在。 |
 | 404              | service_resource_not_found         | "Service resource not found"                                 | 要删除的 username 不存在，若用户列表存在该 username，则可使用 user 的 uuid 代替 username 删除。 |
 | 404              | storage_object_not_found           | "Failed to find chat message history download url for appkey: hx#hxdemo2, time: 2018020912" | 对应的时间没有历史消息，如确定有历史消息，请联系[环信技术支持](mailto:support@easemob.com)。 |
+| 409          | concurrent_operation_error    | "concurrency create app user failed"            | 并发调用[通过用户 ID 获取用户 token 的 API](easemob_user_token.html#通过用户-id-获取用户-token) 时若设置了自动创建用户则报错。也就是说，调用了该 API 时将 `grant_type` 设置为 `inherit`，`autoCreateUser` 设置为 `true`，则会上报该错误。如果获取 token 的用户已注册，并发调用该 API 则不会报错。|
 | 413              | Request Entity Too Large           | "Request Entity Too Large"                                   | 请求体过大，如上传文件时文件过大，需要拆成几个更小的请求体重试。 |
 | 415              | web_application                    | "Unsupported Media Type"                                     | 请求体的类型不支持，请检查请求头是否添加了 `Content-Type`: `application/json`，请求包体是否符合标准的 JSON 格式，以及请求头中是否有接口不需要的参数。 |
 | 429              | resource_limited                   | "You have exceeded the limit of the Free edition. Please upgrade to higher edition." | 超过免费版套餐包限制。如需开通其他版本套餐包，需联系环信商务。               |
