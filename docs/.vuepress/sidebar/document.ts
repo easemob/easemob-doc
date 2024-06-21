@@ -70,7 +70,7 @@ const documentSidebar = [
           { text: '会话介绍', link: 'conversation_overview.html' },
           { text: '会话列表', link: 'conversation_list.html' },
           { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
-          { text: '会话回执', link: 'conversation_receipt.html', only: ['android', 'ios', 'web'] },
+          { text: '会话已读回执', link: 'conversation_receipt.html', only: ['android', 'ios', 'web'] },
           { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
           { text: '置顶会话', link: 'conversation_pin.html', except: ['harmonyos'] },
           { text: '会话标记', link: 'conversation_mark.html', except: ['harmonyos'] },
