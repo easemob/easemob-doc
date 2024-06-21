@@ -4,7 +4,7 @@
 
 目前，只有单聊会话支持已读回执。本文介绍如何使用环信即时通讯 IM Android SDK 实现会话已读回执功能。
 
-例如，你可以实现下图所示的效果。
+会话已读回执的效果示例，如下图所示：
 
 ![img](@static/images/uikit/chatuikit/feature/conversation/conversation_read.png) 
 
