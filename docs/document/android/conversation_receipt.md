@@ -13,7 +13,6 @@
  单聊会话已读回执实现的流程如下：
 
   1. 设置 `EMOptions#setRequireAck` 为 `true` 开启已读回执功能。
-
   2. 消息接收方进入会话页面，阅读消息后，调用 `ackConversationRead` 方法发送会话已读回执。
   3. 消息发送方通过监听 `OnConversationRead` 回调接收会话已读回执。
 

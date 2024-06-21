@@ -6,13 +6,11 @@
 
 **群聊会话只支持消息已读回执，不支持送达回执**。群成员在发送消息时，可以设置该消息是否需要已读回执。要使用该功能，你需要[在环信即时通讯云控制台上开通该功能](enable_and_configure.html#设置群消息已读回执)，具体费用详见[产品价格](/product/pricing.html#增值服务费用)。
 
-本文介绍如何使用环信即时通讯 IM Web SDK 实现单聊和群聊的消息回执功能。
-
-消息送达回执的效果示例，如下图所示：
+- 消息送达回执的效果示例，如下图所示：
 
 ![img](@static/images/uikit/chatuikit/feature/web/common/message_delivery_receipt.png) 
 
-消息已读回执的效果示例，如下图所示：
+- 消息已读回执的效果示例，如下图所示：
 
 ![img](@static/images/uikit/chatuikit/feature/web/common/message_read_receipt.png) 
 
