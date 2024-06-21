@@ -460,7 +460,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   "to": ["user2"],
   "type": "video",
   "body": {
-    "filename" : "test.avi"
+    "filename" : "test.avi",
     "thumb" : "https://XXXX/XXXX/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97",
     "length" : 0,
     "secret":"VfXXXXNb_",
