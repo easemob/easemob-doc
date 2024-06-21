@@ -20,11 +20,11 @@
 
 - 单聊消息送达回执：
 
-1. SDK 初始化时，用户将 [`ConnectionParameters` 类型中的 `delivery` 参数](https://doc.easemob.com/jsdoc/interfaces/Connection.ConnectionParameters.html#delivery)设置为 `true`。 
+  1. SDK 初始化时，用户将 [`ConnectionParameters` 类型中的 `delivery` 参数](https://doc.easemob.com/jsdoc/interfaces/Connection.ConnectionParameters.html#delivery)设置为 `true`。 
 
-2. 接收方收到消息后，SDK 会自动向发送方发送送达回执。
+  2. 接收方收到消息后，SDK 会自动向发送方发送送达回执。
 
-3. 发送方通过监听 `onDeliveredMessage` 收到消息送达回执。
+  3. 发送方通过监听 `onDeliveredMessage` 收到消息送达回执。
 
 - 单聊消息已读回执：
 
