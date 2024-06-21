@@ -528,7 +528,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&
 | `entities`                 | JSON Array  | 用户加入的群组列表。             |
 |  - `groupId `     | String | 群组 ID。             |
 |  - `name`         | String | 群组名称。       |
-|  - `owner`        | String | 群组管理员的用户 ID。      |
+|  - `owner`        | String | 群主的用户 ID。      |
 |  - `description`  | String | 群组描述。        |
 |  - `disabled`     | Bool | 群组是否被禁用：<br/> - `true`：禁用。禁用后不能对群组进行任何修改。<br/> - `false`：未禁用。 |
 |  - `public`       | Bool | 是否是公开群：<br/> - `true`：公开群。公开群可以被搜索到，用户可以申请加入公开群。<br/> - `false`：私有群。私有群无法被搜索到，需要群主或群管理员邀请，用户才可以加入。|
