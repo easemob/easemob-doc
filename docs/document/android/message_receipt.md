@@ -12,12 +12,7 @@
 
 ## 技术原理
 
-使用环信即时通讯 IM Android SDK 可以实现消息的送达回执与已读回执。核心方法如下：
-
-- `EMOptions#setRequireDeliveryAck` 开启消息送达回执；
-- `EMOptions#setRequireAck` 开启消息已读回执功能；
-- `EMChatManager#ackMessageRead` 发出指定消息的已读回执；
-- `EMChatManager#ackGroupMessageRead` 发出群组消息的已读回执。
+使用环信即时通讯 IM Android SDK 可以实现消息的送达回执与已读回执。
 
 - 单聊消息送达回执的逻辑如下：
 
