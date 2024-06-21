@@ -27,6 +27,7 @@
 | 404                        | （未找到）服务器找不到请求的接口。                           |
 | 405                        | （请求方式错误）请按照环信官网接口说明，正确的使用接口 GET，POST 等请求方式。 |
 | 408                        | （请求超时）服务器等候请求时发生超时。                       |
+| 409                        | （并发操作同一资源）同时请求同一资源时报错，例如，同一时间调用两次获取用户 token，则会上报该错误。       |
 | 413                        | （消息附件过大）调用[上传文件](message_download.html#上传文件)接口上传的消息附件超过了最大限制。  |
 | 415                        | 请求体的类型不支持。                                         |
 | 429                        | （服务不可用）请求接口超过调用频率限制，即接口被限流。或超过社区版限制，如有需要可联系商务。 |
@@ -38,8 +39,8 @@
 
 ## 索引 错误结果说明
 
-| HTTP Status Code | Error                              | Error Description                                            | 可能原因                                                     |
-| :--------------- | :--------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| HTTP Status Code | Error                              | Error Description                                            | 可能原因          |
+| :--------------- | :--------------------------------- | :----------------------- | :----------------------------------------------------------- |
 | 400              | invalid_grant                      | invalid username or password                                 | 用户名或者密码输入错误。                                     |
 | 400              | invalid_grant                      | "client_id does not match"                                   | <br/>- "client_id does not match"：传入的 client_id 不正确；<br/>- "client_secret does not match"：传入的 client_secret 不正确。<br/>client_id 以及 client_secret 在环信管理后台的**应用详情**页面中查看。 |
 | 400              | json_parse                         | "Unexpected character (‘=’ (code 61)): was expecting a colon to separate field name and value\n at [Source: java.io.BufferedInputStream@170e3f35; line: 1, column: 23]" | 发送请求时请求体不符合标准的 JSON 格式，服务器无法正确解析。 |
