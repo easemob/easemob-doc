@@ -118,8 +118,6 @@ EaseIM.setGroupProfileProvider(object : EaseGroupProfileProvider {
 ```kotlin
 // 更新当前用户信息
 EaseIM.updateCurrentUser(currentUserProfile)
-// 更新联系人信息
+// 更新单聊用户/群成员信息
 EaseIM.updateUsersInfo(userProfileList)
-// 更新群组成员信息
-EaseIM.updateGroupMemberProfiles(groupId, groupMemberProfileList)
 ```

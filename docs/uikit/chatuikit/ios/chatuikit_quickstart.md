@@ -62,7 +62,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 public final class YourAppUser: NSObject, EaseProfileProtocol {
 
             public func toJsonObject() -> Dictionary<String, Any>? {
-        ["ease_chat_uikit_info":["nickname":self.nickname,"avatarURL":self.avatarURL,"userId":self.id]]
+        ["ease_chat_uikit_user_info":["nickname":self.nickname,"avatarURL":self.avatarURL,"userId":self.id]]
     }
     
     
