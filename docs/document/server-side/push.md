@@ -399,6 +399,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
       "created": 1530276298905,
       "modified": 1534407146060,
       "username": "user1",
+      "activated": true,
       "notification_display_style": 1,
       "nickname": "testuser",
       "notifier_name": "2882303761517426801"
