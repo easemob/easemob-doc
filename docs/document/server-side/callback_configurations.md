@@ -360,7 +360,7 @@ payload 中字段含义：
 | muc:invite                 | {“operation”:“invite”}                 | 邀请新用户进群                                 | 不支持                 |
 | muc:invite_accept          | {“operation”:“invite_accept”}          | 受邀用户同意入群                               | 不支持                 |
 | muc:invite_decline         | {“operation”:“invite_decline”}         | 受邀用户拒绝入群                               | 不支持                 |
-| muc:kick                   | {“operation”:“kick”}                   | 踢出群                                         | 踢出聊天室             |
+| muc:kick                   | {“operation”:“kick”}                   | 踢出群      | 踢出聊天室（包括聊天室成员被聊天室所有者或管理员移出聊天室以及聊天室成员离线 2 分钟后退出聊天室时会发送该事件）             |
 | muc:ban                    | {“operation”:“ban”}                    | 将用户添加到群组黑名单     | 不支持                 |
 | muc:allow                  | {“operation”:“allow”}                  | 将用户移出群组黑名单  | 不支持                 |
 | muc:update                 | {“operation”:“update”}                 | 群信息修改                                     | 聊天室信息修改         |
@@ -710,14 +710,14 @@ payload 字段含义：
 
 payload 字段含义：
 
-| 字段          | 数据类型 | 含义                                                         |
-| :------------ | :------- | :----------------------------------------------------------- |
+| 字段          | 数据类型 | 含义         |
+| :------------ | :------- | :---------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。                 |
-| `operation`   | String   | `kick`：将成员踢出群组或聊天室。                             |
-| `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
-| `description` | String   | 操作失败的原因描述。                                         |
-| `error_code`  | String   | 失败对应的错误码。                                           |
+| `operation`   | String   | `kick`：将成员踢出群组或聊天室。<br/>对于聊天室来说，环信服务器会在以下两种情况向你的应用服务器发送回调请求：<br/> - 聊天室成员被聊天室所有者或管理员移出聊天室；<br/> - 聊天室成员离线 2 分钟后退出聊天室。    |
+| `status`      | object   | 状态，包括 `description` 和 `error_code`。    |
+| `description` | String   | 操作失败的原因描述。  |
+| `error_code`  | String   | 失败对应的错误码。  |
 
 踢出群回调请求示例：
 
