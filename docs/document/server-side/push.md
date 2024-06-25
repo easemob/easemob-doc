@@ -364,9 +364,6 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 |  - `modified`                         | Long    | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。      |
 |  - `username`                         | String  | 用户 ID。用户登录的唯一账号。      |
 |  - `activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
-|  - `notification_no_disturbing`       | Boolean | 是否设置为免打扰模式：<ul><li>`true`：是；</li><li>`false`：否。</li></ul>          |
-|  - `notification_no_disturbing_start` | Int     | 免打扰时间段的开始时间。       |
-|  - `notification_no_disturbing_end`   | Int     | 免打扰时间段的结束时间。 |
 |  - `notification_display_style`       | Int     | 离线推送通知的展示方式。      |
 |  - `nickname`                         | String  | 离线推送通知收到时显示的昵称。    |
 |  - `notifier_name`                    | String  | 推送证书名称。   |
@@ -402,10 +399,6 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
       "created": 1530276298905,
       "modified": 1534407146060,
       "username": "user1",
-      "activated": true,
-      "notification_no_disturbing": false,
-      "notification_no_disturbing_start": 1,
-      "notification_no_disturbing_end": 3,
       "notification_display_style": 1,
       "nickname": "testuser",
       "notifier_name": "2882303761517426801"
