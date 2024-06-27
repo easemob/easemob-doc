@@ -37,13 +37,6 @@
 
 **审核模型单价如下：**
 
-<html>
-<head>
-<meta charset="utf-8">
-<title>无标题文档</title>
-</head>
-
-<body>
 <table width="913" border="1">
   <tbody>
     <tr>
@@ -173,8 +166,6 @@
     </tr>
   </tbody>
 </table>
-</body>
-</html>
 
 **多语言说明**
 

@@ -17,13 +17,6 @@
 
 单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
 
-<html>
-<head>
-<meta charset="utf-8">
-<title>无标题文档</title>
-</head>
-
-<body>
 <table width="807" height="327" border="1">
   <tbody>
     <tr>
@@ -43,8 +36,6 @@
     </tr>
   </tbody>
 </table>
-</body>
-</html>
 
 ## 技术原理
 
