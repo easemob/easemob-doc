@@ -97,7 +97,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | `invite_need_confirm` | Bool   | 否       | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 | `owner`               | String | 是       | 群主的用户 ID。  |
 | `members`             | Array  | 否       | 群成员的用户 ID 数组，不包含群主的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。        |
-| `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。     |
+| `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。     |
 
 #### HTTP 响应
 
