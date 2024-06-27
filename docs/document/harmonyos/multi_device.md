@@ -16,7 +16,6 @@
 
 单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
 
-<body>
 <table width="807" height="327" border="1">
   <tbody>
     <tr>
