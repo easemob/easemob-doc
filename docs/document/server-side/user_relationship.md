@@ -67,7 +67,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 
 | 参数              | 类型   | 是否必需 | 描述                |
 | :---------------- | :----- | :------- | :------------------ |
-| `owner_username`  | String | 是       | 当前用户的用户 ID。 |
+| `owner_username`  | String | 是       | 为哪个用户添加好友。 |
 | `friend_username` | String | 是       | 要添加的用户 ID。   |
 
 其他参数及描述详见 [公共参数](#公共参数)。
@@ -151,7 +151,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 
 | 参数              | 类型   | 是否必需 | 描述                  |
 | :---------------- | :----- | :------- | :-------------------- |
-| `owner_username`  | String | 是       | 发起操作的用户 ID。   |
+| `owner_username`  | String | 是       | 移除哪个用户的好友。   |
 | `friend_username` | String | 是       | 被移除好友的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
@@ -236,7 +236,7 @@ PUT https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{f
 
 | 参数              | 类型   | 是否必需 | 描述           |
 | :---------------- | :----- | :------- |:-------------|
-| `owner_username`  | String | 是       | 当前用户的用户 ID。  |
+| `owner_username`  | String | 是       | 要设置哪个用户的好友备注。  |
 | `friend_username` | String | 是       | 要设置备注的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
@@ -313,7 +313,7 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 
 | 参数              | 类型   | 是否必需 | 描述           |
 | :---------------- | :----- | :------- |:-------------|
-| `username`  | String | 是       | 当前用户的用户 ID。  |
+| `username`  | String | 是       | 要获取哪个用户的好友列表。  |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -467,7 +467,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/contacts/import
 
 | 参数              | 类型   | 是否必需 | 描述           |
 | :---------------- | :----- | :------- |:-------------|
-| `username`  | String | 是  | 当前用户的用户 ID。  |
+| `username`  | String | 是  | 为哪个用户导入好友列表。  |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -576,7 +576,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 | 参数             | 类型   | 是否必需 | 描述                |
 | :--------------- | :----- | :------- | :------------------ |
-| `owner_username` | String | 是       | 当前用户的用户 ID。 |
+| `owner_username` | String | 是       | 添加到哪个用户的黑名单。 |
 
 其他参数及描述详见[公共参数](#公共参数)。
 
@@ -652,7 +652,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pag
 
 | 参数             | 类型   | 是否必需 | 描述                |
 | :--------------- | :----- | :------- | :------------------ |
-| `owner_username` | String | 是       | 当前用户的用户 ID。 |
+| `owner_username` | String | 是       | 获取哪个用户的黑名单。 |
 
 其他参数及描述详见[公共参数](#公共参数)。
 
@@ -734,7 +734,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 | 参数               | 类型   | 是否必需 | 描述                    |
 | :----------------- | :----- | :------- | :---------------------- |
-| `owner_username`   | String | 是       | 当前用户的用户 ID。     |
+| `owner_username`   | String | 是       | 从哪个用户的黑名单中移除用户。     |
 | `blocked_username` | String | 是       | 要移出黑名单的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。

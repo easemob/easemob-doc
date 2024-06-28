@@ -52,7 +52,7 @@ const documentSidebar = [
           { text: '撤回消息', link: 'message_recall.html' },
           { text: '搜索消息', link: 'message_search.html', except: ['web', 'harmonyos']},
           { text: '消息回执', link: 'message_receipt.html'},
-          { text: '修改消息', link: 'message_modify.html', except: ['harmonyos']},
+          { text: '修改消息', link: 'message_modify.html'},
           { text: '转发消息', link: 'message_forward.html', except: ['web']},
           { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
           { text: '更新消息', link: 'message_update.html', except: ['web']},
@@ -105,7 +105,7 @@ const documentSidebar = [
   {
     text: '进阶功能',
     children: [
-      { text: '设置推送', link: 'push.html', except: ['harmonyos', 'windows', 'react-native', 'flutter', 'unity'] },
+      { text: '设置推送', link: 'push.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
       { text: '登录多个设备', link: 'multi_device.html' },
       { text: '管理在线状态订阅', link: 'presence.html', except: ['harmonyos'] },
       { text: '消息表情回复', link: 'reaction.html', except: ['harmonyos'] },

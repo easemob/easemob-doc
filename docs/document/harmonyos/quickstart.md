@@ -90,7 +90,8 @@
 ```TypeScript
 let options = new ChatOptions("Your appkey");
 ......// 其他 ChatOptions 配置。
-ChatClient.getInstance().init(options);
+// 初始化时传入上下文以及options
+ChatClient.getInstance().init(context, options);
 ```
 
 ### 2. 创建账号

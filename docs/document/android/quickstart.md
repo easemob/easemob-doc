@@ -98,7 +98,7 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 
 #### 方法二：手动复制 SDK 文件
 
-打开 SDK 下载页面，获取最新版的环信即时通讯 IM Android SDK，然后解压。
+打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的环信即时通讯 IM Android SDK，然后解压。
 
 ![img](@static/images/android/sdk-files.png)
 
