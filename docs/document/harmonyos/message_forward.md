@@ -2,13 +2,14 @@
 
 转发消息即将会话中发送成功或收到的消息转发给别人，例如，用户 A 向用户 B 发送了一条消息，用户 B 收到后，将其转发给用户 C。
 
-环信即时通讯 IM 支持用户转发单条。
+环信即时通讯 IM 支持用户转发单条或多条消息。
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 通过 `ChatManager` 类和 `ChatMessage` 类实现消息的转发。
+环信即时通讯 IM HarmonyOS SDK 通过 `ChatManager` 类和 `ChatMessage` 类实现消息的转发。
 
-创建一条与原消息完全相同的消息，调用 `ChatManager#sendMessage` 方法转发消息。
+- 转发单条消息：创建一条与原消息完全相同的消息，调用 `ChatManager#sendMessage` 方法转发消息。
+- 转发多条消息：通过[发送合并消息](message_send_receive.html#发送和接收合并消息)实现。
 
 ## 前提条件
 
@@ -47,3 +48,7 @@ let ext = targetMessage.ext();
 newMessage.setExt(ext);
 ChatClient.getInstance().chatManager()?.sendMessage(newMessage);
 ```
+
+### 转发多条消息
+
+对于转发多条消息，环信即时通讯 IM 支持将多个消息合并在一起进行转发，详见[发送合并消息](message_send_receive.html#发送和接收合并消息)。

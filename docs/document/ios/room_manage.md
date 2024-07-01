@@ -67,7 +67,7 @@ EMError *error;
 [[EMClient sharedClient].roomManager joinChatroom:@"aChatroomId" completion:nil];
 ```
 
-同时，你可以调用 `EMChatroomManager#joinChatroom:ext:leaveOtherRooms:completion:` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatroomManagerDelegate#userDidJoinChatroom:user:ext:` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+同时，你可以调用 `EMChatroomManager#joinChatroom:ext:leaveOtherRooms:completion:` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatroomManagerDelegate#userDidJoinChatroom:user:ext:` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 
 ```swift
 // 加入聊天室时，传入 ext (以昵称为例)，同时退出其他聊天室
