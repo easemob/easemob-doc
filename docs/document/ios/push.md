@@ -264,9 +264,36 @@ EMClient.shared().pushManager?.syncSilentModeConversations(fromServerCompletion:
 
 ```
 
-3. 
+3. 本地设置推送通知方式
 
-iOS SDK 利用 `EMConversation#disturbType` 属性在本地存储会话的推送通知方式。多设备登录情况下，若用户在一台设备上变更会话推送通知方式，其他设备会收到 `EMMultiDevicesDelegate#multiDevicesConversationEvent:conversationId:conversationType:` 事件。
+在本机上调用 `EMPushManager#setSilentModeForConversation:conversationType:params:completion` 设置会话的推送通知方式，在多设备事件 `EMMultiDevicesDelegate#onConversationEvent:conversationId:conversationType` 里会回调当前操作,此时参数 `event` 的值为 `EMMultiDevicesEventConversationMuteInfoChanged`。
+
+```swift
+//对会话设置推送通知方式
+let param = EMSilentModeParam(paramType: .remindType)
+        param.remindType = .none
+        EMClient.shared().pushManager?.setSilentModeForConversation("conversationId", conversationType: .chat, params: param, completion: { result, err in
+    if err == nil {
+        print("setSilentModeForConversation success")
+    }
+})
+
+
+// 监听多设备事件
+EMClient.shared().addMultiDevices(delegate: self, queue: nil)
+
+// 接收多设备事件回调
+extension ViewController: EMMultiDevicesDelegate {
+    func multiDevicesConversationEvent(_ event: EMMultiDevicesEvent, conversationId: String, conversationType: EMConversationType) {
+        switch event {
+        case .conversationMuteInfoChanged:
+            print("multiDevicesConversationEvent mute info changed")
+        default:
+            break
+        }
+    }
+}
+```
 
 **免打扰模式**
 
