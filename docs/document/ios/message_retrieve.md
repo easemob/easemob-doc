@@ -17,6 +17,7 @@
 - `IEMChatManager#getMessageWithMessageId`：根据消息 ID 获取本地消息；
 - `EMConversation#loadMessagesWithType`：获取本地存储的指定会话中特定类型的消息；
 - `EMConversation#loadMessagesFrom:to:count:completion:` 获取指定时间段内本地指定会话中发送和接收的消息；
+- `EMConversation#getMessageCountStart:to:`：获取会话在一定时间内的消息数。
 
 ## 前提条件
 
@@ -123,4 +124,14 @@ EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithCon
 [conv loadMessagesFrom:startTime to:endTime count:50 completion:^(NSArray<EMChatMessage *> * _Nullable aMessages, EMError * _Nullable aError) {
             
 }];
+```
+
+### 获取会话在一定时间内的消息数
+
+你可以调用 `EMConversation#getMessageCountStart:to:` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
+
+```swift
+if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("conversationId") {
+    let count = conversation.getMessageCountStart(startTimestamp, to: endTimestamp)
+}
 ```

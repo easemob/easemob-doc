@@ -9,6 +9,7 @@
 - 位置消息。
 - 透传消息。
 - 自定义消息。
+- 合并消息。
 - 定向消息。
 
 对于单聊，环信即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
@@ -405,6 +406,95 @@ let msgListener: ChatMessageListener = {
     // 接收到透传消息
   }
 }
+```
+
+### 发送自定义类型消息
+
+除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。自定义消息内容为 string 类型的 key-value 格式，你需要自己添加并解析该内容。
+
+```TypeScript
+// `event` 为需要传递的自定义消息事件，比如礼物消息，可以设置：
+let event = "gift";
+let customBody = new CustomMessageBody(event);
+// `params` 类型为 `Map<string, string>`。
+customBody.setParams(params);
+// 创建一条发送消息，`to` 指另一方环信用户 ID（或者群组 ID，聊天室 ID）；
+// 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
+let customMessage = ChatMessage.createSendMessage(to, customBody, ChatType.GroupChat);
+// 发送消息
+ChatClient.getInstance().chatManager()?.sendMessage(customMessage);
+```
+
+### 发送和接收合并消息
+
+为了方便消息互动，SDK 支持将多个消息合并在一起进行转发。你可以采取以下步骤进行消息的合并转发：
+
+1. 利用原始消息列表创建一条合并消息。
+2. 发送合并消息。
+3. 对端收到合并消息后进行解析，获取原始消息列表。合并消息转发后在接收端显示该消息的标题和预览图。
+
+:::tip
+对于转发合并消息，例如，用户 A 向 用户 B 发送了合并消息，用户 B 将该合并消息转发给用户 C，需要调用转发单条合并消息的 API。详见[转发单条消息](message_forward.html#转发单条消息)。
+:::
+
+#### 创建和发送合并消息
+
+你可以调用 `createCombinedSendMessage` 方法创建一条合并消息，然后调用 `sendMessage` 方法发送该条消息。
+
+创建合并消息时，需要设置以下参数：
+
+| 属性   | 类型        | 描述    |
+| :-------------- | :-------------------- | :-------------------- |
+| `title`  | String    | 合并消息的标题。    |
+| `summary` | String       | 合并消息的概要。   |
+| `compatibleText` | String       | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |
+| `messageIds` | Array      | 合并消息的原始消息 ID 数组。该数组最多包含 300 个消息 ID。  |
+| `to` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 聊天室聊天：聊天室 ID。|
+
+:::tip
+1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
+2. 不论 `ChatOptions#setAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
+3. 合并消息不支持搜索。
+:::
+
+示例代码如下：
+
+```TypeScript
+let title = "A和B的聊天记录";
+let summary = "A:这是A的消息内容\nB:这是B的消息内容";
+let compatibleText = "您当前的版本不支持该消息，请升级到最新版本";
+let message = ChatMessage.createCombinedSendMessage(title, {summary: summary, compatibleText: compatibleText, messageIds: ["msgId1", "msgId2"]});
+let messageCallback: ChatCallback = {
+  onSuccess: () => {
+    // 消息发送成功的处理逻辑
+  },
+  onError: (code: number, error: string) => {
+    // 消息发送失败的处理逻辑
+  }
+}
+message.setMessageStatusCallback(messageCallback);
+ChatClient.getInstance().chatManager()?.sendMessage(message);
+```
+
+接收合并消息与接收普通消息的操作相同，详见[接收消息](#接收消息)。
+
+对于不支持合并转发消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText` 携带的内容，其他字段会被忽略。
+
+#### 解析合并消息
+
+合并消息实际上是一种附件消息。收到合并消息后，你可以调用 `downloadAndParseCombineMessage` 方法下载合并消息附件并解析出原始消息列表。
+
+对于一条合并消息，首次调用该方法会下载和解析合并消息附件，然后返回原始消息列表，而后续调用会存在以下情况：
+
+- 若附件已存在，该方法会直接解析附件并返回原始消息列表。
+- 若附件不存在，该方法首先下载附件，然后解析附件并返回原始消息列表。
+
+```TypeScript
+ChatClient.getInstance().chatManager()?.downloadAndParseCombineMessage(message).then((result) => {
+  // 处理并展示消息列表
+}).catch((e: ChatError) => {
+  // 处理出错信息
+});
 ```
 
 ### 发送和接收定向消息

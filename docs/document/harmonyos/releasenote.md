@@ -2,6 +2,20 @@
 
 <Toc />
 
+## 版本 V1.1.0 Dev 2024-06-28（开发版）
+
+### 新增特性
+
+- 新增[修改消息](message_modify.html)功能。
+- 新增[自定义消息](message_send_receive.html#发送自定义类型消息)功能。
+- 新增[合并转发消息](message_send_receive.html#发送和接收合并消息)功能。
+- 支持 [HarmonyOS 推送](push.html)能力。
+
+### 优化
+
+- `ChatClient#init` 方法中新增 `Context` 参数。
+- 修改 SDK 文件路径到应用级的应用文件路径下。
+
 ## 版本 V1.0.0 Dev 2024-06-7（开发版）
 
 ### 新增特性

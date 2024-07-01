@@ -12,11 +12,12 @@
 
 环信即时通讯 IM Android SDK 提供 `EMChatManager` 和 `EMConversation` 类支持获取服务器和本地的消息，包含如下主要方法：
 
-- `EMChatManager.asyncFetchHistoryMessages`：根据 `EMFetchMessageOption` 类从服务端分页获取指定会话的历史消息；
-- `EMConversation.getAllMessages/loadMoreMsgFromDB`：读取本地指定会话的消息；
-- `EMChatManager.getMessage`：根据消息 ID 获取本地消息；
-- `EMChatManager.searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)`：获取本地存储的指定会话中特定类型的消息；
-- `EMChatManager.searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)`：获取一定时间段内本地指定会话中发送和接收的消息；
+- `EMChatManager#asyncFetchHistoryMessages`：根据 `EMFetchMessageOption` 类从服务端分页获取指定会话的历史消息；
+- `EMConversation#getAllMessages/loadMoreMsgFromDB`：读取本地指定会话的消息；
+- `EMChatManager#getMessage`：根据消息 ID 获取本地消息；
+- `EMChatManager#searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)`：获取本地存储的指定会话中特定类型的消息；
+- `EMChatManager#searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)`：获取一定时间段内本地指定会话中发送和接收的消息；
+- `EMConversation#getAllMsgCount`：从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
 
 ## 前提条件
 
@@ -163,4 +164,18 @@ List<EMMessage> emMessages = conversation.searchMsgFromDB(EMMessage.Type.TXT, Sy
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 // startTimeStamp：搜索的起始时间戳；endTimeStamp：搜索的结束时间戳；maxCount：每次获取的消息数量，取值范围为 [1,400]。
 List<EMMessage> messageList = conversation.searchMsgFromDB(startTimeStamp,endTimeStamp, maxCount);
+```
+
+### 获取会话在一定时间段内的消息数
+
+你可以调用 `getAllMsgCount` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
+
+```java
+String conversationId = "pu";
+EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
+if(conversation!=null) {
+    long startTimestamp = System.currentTimeMillis() - 24 * 60 * 60 * 1000;
+    int count = conversation.getAllMsgCount(startTimestamp, System.currentTimeMillis());
+    EMLog.i(TAG, "queryMsgCountWithDuration count:" + count);
+}
 ```

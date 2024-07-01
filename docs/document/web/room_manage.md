@@ -62,7 +62,8 @@ conn.createChatRoom(options).then(res => console.log(res))
 申请加入聊天室的步骤如下：
 
 - 调用 `getChatRooms` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-- 调用 `joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `memberPresence` 事件。
+- 调用 `joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `onChatRoomEvent#memberPresence` 事件。
+  该方法支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。若进行了设置，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 
 示例代码如下：
 
@@ -77,9 +78,27 @@ conn.getChatRooms(option).then(res => console.log(res))
 // 加入聊天室。聊天室所有成员均可调用该接口。
 let option = {
     roomId: 'roomId',
-    message: 'reason'
+    // 加入聊天室时携带的扩展信息
+    ext: 'custom ext',
+    // 加入聊天室时，是否退出已加入的聊天室
+    leaveOtherRooms: false
 }
 conn.joinChatRoom(option).then(res => console.log(res))
+
+// 监听聊天室事件
+conn.addEventHandler("CHATROOM", {
+        onChatroomEvent: (e) => {
+    switch (e.operation) {
+      // 用户加入聊天室事件
+      case "memberPresence":
+        // 用户加入聊天室时携带的扩展信息
+        console.log(e.ext);
+        break;
+      default:
+        break;
+    }
+  }
+});
 ```
 
 ### 获取当前用户加入的聊天室列表

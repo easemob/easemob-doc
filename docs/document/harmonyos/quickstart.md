@@ -40,8 +40,7 @@
 
 ### 2. 集成 SDK
 
-打开 SDK 下载页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
-
+打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
 
 将 SDK 文件，拷贝到 `Harmony` 工程，例如放至 `HelloWorld` 工程下 `entry` 模块下的 `libs` 目录。
 
@@ -90,7 +89,8 @@
 ```TypeScript
 let options = new ChatOptions("Your appkey");
 ......// 其他 ChatOptions 配置。
-ChatClient.getInstance().init(options);
+// 初始化时传入上下文以及options
+ChatClient.getInstance().init(context, options);
 ```
 
 ### 2. 创建账号

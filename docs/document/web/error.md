@@ -30,7 +30,6 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 51     | MESSAGE_NOT_FOUND                         | 没查到消息，如：没有查询到要举报的消息。                 |
 | 52     | NO_PERMISSION                          | 用户对当前操作没有权限。                 |
 | 53     | OPERATION_UNSUPPORTED                         | 不支持的操作。                 |
-| 55     | LOCAL_DB_OPERATION_FAILED       | 本地数据库操作失败。    |
 | 101    | WEBIM_UPLOADFILE_ERROR                         | 上传文件失败：如文件过大等。                                 |
 | 102    | WEBIM_UPLOADFILE_NO_LOGIN                      | 上传文件的请求中未携带用户 token：如未登录就上传文件。                   |
 | 200    | WEBIM_DOWNLOADFILE_ERROR                       | 下载文件失败：如超时、网络错误。                             |
@@ -66,6 +65,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 702    | CHATROOM_NOT_JOINED                             | 被操作的人员不在聊天室。                               |
 | 704    | CHATROOM_MEMBERS_FULL                          | 聊天室已满：聊天室已经达到人数上限。                         |
 | 705    | CHATROOM_NOT_EXIST                             | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。     |
+| 800    | LOCAL_DB_OPERATION_FAILED       | 本地数据库操作失败。    |
 | 999    | SDK_RUNTIME_ERROR                              | Websocket 发送消息错误。                                     |
 | 1100   | PRESENCE_PARAM_EXCEED                          | 发布自定义在线状态时，参数长度超出限制。                     |
 | 1101   | REACTION_ALREADY_ADDED                         | Reaction 重复添加。                                          |
