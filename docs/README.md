@@ -275,6 +275,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_modify.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_modify.html    
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_modify.html
@@ -1079,6 +1082,9 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /document/ios/push.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/push.html    
           - text: 即时推送
             desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、VIVO 等主流手机厂商通道。
             sdks:
