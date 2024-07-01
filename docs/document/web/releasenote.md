@@ -2,6 +2,26 @@
 
 <Toc />
 
+## 版本 V4.8.0 Dev 2024-07-01（开发版）
+
+### 新增特性
+
+- [IM SDK] [`onDisconnected` 事件](overview.html#连接状态相关)新增断开原因回调参数, 告知用户触发 `onDisconnected` 的原因。
+- [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)： 
+  - `setLoginInfoCustomExt`：设置登录设备的扩展信息。
+  - `onDisconnected`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
+- [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+  - `joinChatRoom` 方法新增 `ext` 和 `leaveOtherRooms` 参数，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
+  - `ChatroomEvent` 新增 `ext` 扩展字段，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+- [IM SDK] 新增 `ConnectionParameters#isFixedDeviceId` 初始化参数，默认为 `true`，[使用固定的设备 ID](multi_device.html)。之前，每个 SDK 实例连接时，SDK 默认均使用不同的随机字符串作为设备标识。
+- [IM SDK] `destroyChatRoom` 方法支持聊天室所有者解散聊天室。
+- [IM SDK] 新增[日志上报](overview.html#日志上报)功能, 即，将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
+
+### 修复
+
+- [IM SDK] 修复 SDK 在 uniapp Vue3 平台无法自动重连的问题。
+- [IM SDK] 将[数据库操作失败错误码](error.html) `LOCAL_DB_OPERATION_FAILED` 为 从 `55` 修改为 `800`。
+
 ## 版本 V4.7.0 Dev 2024-04-30（开发版）
 
 ### 新增特性

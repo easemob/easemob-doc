@@ -16,7 +16,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 1      |           EMErrorGeneral            | SDK 或请求相关的默认错误，未区分具体错误类型：例如，SDK 内部未正确初始化，或者请求服务器时未识别出具体原因的错误。|
 | 2      |      EMErrorNetworkUnavailable      | 网络错误：无网络服务时会回调此错误，表示 SDK 与服务器的连接已断开。 |
 | 3      |   EMErrorDatabaseOperationFailed    | 数据库操作失败：打开本地数据库失败。                         |
-| 4      |      EMErrorExceedServiceLimit      | 超过服务限制：超过当前服务版本的数量限制，例如，创建的用户 ID 数量超过购买服务的限制时提示该错误。|
+| 4      |      EMErrorExceedServiceLimit      | 超过服务限制：超过当前服务版本的数量限制，例如，创建的用户 ID 数量超过购买服务的限制时提示该错误；设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)、[获取单个或多个用户的用户属性](userprofile.html#获取用户属性)和[获取指定用户的指定用户属性](userprofile.html#获取指定用户的指定用户属性)，超过调用频率限制时，会上报该错误。|
 | 5      |      EMErrorServiceArrearages       | 服务欠费，该错误码已废弃。                                   |
 | 8      |      EMAppActiveNumbersReachLimitation       | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。                                 |
 | 100    |        EMErrorInvalidAppkey         | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看 App Key。   |

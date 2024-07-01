@@ -1082,9 +1082,73 @@ OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q 上接收 OPPO 推送�
 </tbody>
 </table>
 <p>&nbsp;</p>
+
+1. app 和会话的推送通知方式优先级
+
 会话级别的推送通知方式设置优先于 app 级别的设置，未设置推送通知方式的会话默认采用 app 的设置。
 
 例如，假设 app 的推送方式设置为 `MENTION_ONLY`，而指定会话的推送方式设置为 `ALL`。你会收到来自该会话的所有推送通知，而对于其他会话来说，你只会收到提及你的消息的推送通知。
+
+2. 从服务器获取所有会话的推送通知方式设置
+
+你可以调用 `EMPushManager#syncSilentModeConversationsFromServer` 方法从服务器同步所有会话的推送通知方式设置。同步后成功后的结果会存储到本地数据库，然后你可以通过`EMConversation#pushRemindType`查询当前会话的推送通知方式。
+
+```java
+//同步会话的推送通知方式
+EMClient.getInstance().pushManager().syncSilentModeConversationsFromServer(new EMCallBack() {
+    @Override
+    public void onSuccess() {
+        EMLog.i(TAG, "syncNoDisturb onSuccess");
+    }
+
+    @Override
+    public void onError(int code, String error) {
+        EMLog.i(TAG, "syncNoDisturb onError code:" + code + " error:" + error);
+    }
+});
+
+//查询会话的推送通知方式
+String conversationId = "pu";
+EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
+if(conversation!=null) {
+    EMPushManager.EMPushRemindType emPushRemindType = conversation.pushRemindType();
+    EMLog.i(TAG, "conversationRemindType emPushRemindType:" + emPushRemindType);
+}
+```
+
+3. 本地设置推送通知方式
+
+在本机上调用 `EMPushManager#setSilentModeForConversation` 设置会话的推送通知方式，在多设备事件 `EMMultiDeviceListener#onConversationEvent` 里会回调当前操作,此时参数 `event` 的值为 `EMMultiDeviceListener#CONVERSATION_MUTE_INFO_CHANGED`。
+
+```java
+//对会话设置推送通知方式
+String conversationId = "pu";
+EMSilentModeParam emSilentModeParam = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.REMIND_TYPE);
+emSilentModeParam.setRemindType(EMPushManager.EMPushRemindType.NONE);
+EMClient.getInstance().pushManager().setSilentModeForConversation(conversationId, EMConversation.EMConversationType.Chat, emSilentModeParam, new EMValueCallBack<EMSilentModeResult>() {
+    @Override
+    public void onSuccess(EMSilentModeResult value) {
+        EMLog.i(TAG, "conversationRemindType onSuccess value:" + value);
+    }
+
+    @Override
+    public void onError(int error, String errorMsg) {
+        EMLog.i(TAG, "conversationRemindType onError error:" + error + " errorMsg:" + errorMsg);
+    }
+});
+
+
+//多设备事件
+EMClient.getInstance().addMultiDeviceListener(new EMMultiDeviceListener() {
+    ……
+
+    @Override
+    public void onConversationEvent(int event, String conversationId, EMConversation.EMConversationType type) {
+        EMLog.i(TAG, "onConversationEvent event:" + event + " conversationId:" + conversationId + " type:" + type);
+    }
+});
+
+```
 
 **免打扰模式**
 

@@ -75,6 +75,35 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 });
 ```
 
+同时，你可以调用 `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+
+```java
+String ext= "your ext info";
+boolean leaveOtherRooms=true;
+EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomID,leaveOtherRooms,ext, new EMValueCallBack<com.hyphenate.chat.EMChatRoom>() {
+    @Override
+    public void onSuccess(com.hyphenate.chat.EMChatRoom value) {
+        EMLog.i(TAG, "joinChatRoom onSuccess value:" + value);
+    }
+
+    @Override
+    public void onError(int error, String errorMsg) {
+        EMLog.i(TAG, "joinChatRoom onError error:" + error + " errorMsg:" + errorMsg);
+    }
+});
+
+EMChatRoomChangeListener chatRoomChangeListener = new EMChatRoomChangeListener() {
+    ……
+
+    @Override
+    public void onMemberJoined(String roomId, String participant, String ext) {
+        EMLog.e(TAG, "onMemberJoined roomId:" + roomId + " participant:" + participant + " ext:" + ext);
+    }
+}
+EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChangeListener);
+
+```
+
 ### 获取聊天室详情
 
 聊天室所有成员均可调用 `fetchChatRoomFromServer` 方法获取聊天室的详情，包括聊天室 ID、聊天室名称，聊天室描述、最大成员数、聊天室所有者、是否全员禁言以及聊天室角色类型。聊天室公告、管理员列表、成员列表、黑名单列表、禁言列表需单独调用接口获取。

@@ -2,6 +2,36 @@
 
 <Toc />
 
+## 版本 V4.8.0 Dev 2024-07-01（开发版）
+
+### 新增特性
+
+- [IM SDK] 支持 AUT 协议，优化弱网环境下的服务连接成功率。
+- [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+  - 新增 `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
+  - 新增 `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+- [IM SDK] 支持[会话推送通知方式的本地存储](push.html#_4-1-设置推送通知)。
+  - 新增 `EMPushManager#syncSilentModeConversationsFromServer` 方法，支持从服务器获取所有会话的推送通知方式的设置。
+  - 新增 `EMConversation#pushRemindType` 属性，用于本地存储会话的推送通知方式。
+  - 若用户在一台设备上变更会话的推送通知方式，其他设备会收到 `EMMultiDeviceListener#onConversationEvent` 事件。
+- [IM SDK] 新增 `EMConversation#getAllMsgCount(long, long)` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
+
+### 优化
+
+- [IM SDK] 设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)、[获取单个或多个用户的用户属性](userprofile.html#获取用户属性)和[获取指定用户的指定用户属性](userprofile.html#获取指定用户的指定用户属性)，超过调用频率限制时，会上报错误码 4 `EXCEED_SERVICE_LIMIT`。
+
+### 修复
+
+- [IM SDK] 修复拉黑联系人时缓存未及时更新的问题。
+- [IM SDK] 修复多线程场景下重复调用 `EMCustomMessageBody#setParams` 引起的崩溃问题。
+- [EaseIMKIt] 会话列表部分场景下不显示问题。
+
+## 版本 V4.7.1 Dev 2024-07-01（开发版）
+
+### 优化
+
+更改混淆规则。
+
 ## 版本 V4.7.0 Dev 2024-06-05（开发版）
 
 ### 新增特性

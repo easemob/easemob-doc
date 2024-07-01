@@ -67,6 +67,22 @@ EMError *error;
 [[EMClient sharedClient].roomManager joinChatroom:@"aChatroomId" completion:nil];
 ```
 
+同时，你可以调用 `EMChatroomManager#joinChatroom:ext:leaveOtherRooms:completion:` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatroomManagerDelegate#userDidJoinChatroom:user:ext:` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+
+```swift
+// 加入聊天室时，传入 ext (以昵称为例)，同时退出其他聊天室
+EMClient.shared().roomManager?.joinChatroom("roomId", ext: "nickname=myNickname", leaveOtherRooms: true, completion: { room, err in
+    
+})
+
+
+// 收到其他人加入聊天室的回调
+extension ViewController: EMChatroomManagerDelegate {
+    func userDidJoin(_ aChatroom: EMChatroom, user aUsername: String, ext: String?) {
+        
+}
+```
+
 ### 获取聊天室详情
 
 聊天室所有成员均可调用 [`getChatroomSpecificationFromServerWithId`](room_manage.html#获取聊天室详情) 获取聊天室的详情，包括聊天室 ID、聊天室名称，聊天室描述、最大成员数、聊天室所有者、是否全员禁言以及聊天室角色类型。聊天室公告、成员列表、管理员列表、黑名单列表、禁言列表需单独调用接口获取。

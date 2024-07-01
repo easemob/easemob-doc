@@ -241,9 +241,32 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 </table>
 <p>&nbsp;</p>
 
+1. app 和会话的推送通知方式优先级
+
 会话级别的推送通知方式设置优先于 app 级别的设置，未设置推送通知方式的会话默认采用 app 的设置。
 
 例如，假设 app 的推送方式设置为 `MentionOnly`，而指定会话的推送方式设置为 `All`。你会收到来自该会话的所有推送通知，而对于其他会话来说，你只会收到提及你的消息的推送通知。
+
+2. 从服务器获取所有会话的推送通知方式设置
+
+你可以调用 `EMPushManager#syncSilentModeConversationsFromServerCompletion:` 方法从服务器同步所有会话的推送通知方式设置。同步后成功后的结果会存储到本地数据库，然后你可以通过 `EMConversation#disturbType` 查询当前会话的推送通知方式。
+
+```swift
+EMClient.shared().pushManager?.syncSilentModeConversations(fromServerCompletion: { err in
+    if err == nil {
+        if let conversations = EMClient.shared().chatManager?.getAllConversations() {
+            for conversation in conversations {
+                let disturbType = conversation.disturbType
+                }
+        }
+    }
+})
+
+```
+
+3. 
+
+iOS SDK 利用 `EMConversation#disturbType` 属性在本地存储会话的推送通知方式。多设备登录情况下，若用户在一台设备上变更会话推送通知方式，其他设备会收到 `EMMultiDevicesDelegate#multiDevicesConversationEvent:conversationId:conversationType:` 事件。
 
 **免打扰模式**
 
