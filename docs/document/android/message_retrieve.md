@@ -166,7 +166,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> messageList = conversation.searchMsgFromDB(startTimeStamp,endTimeStamp, maxCount);
 ```
 
-### 获取会话在一定时间段内的消息数
+### 获取会话在一定时间内的消息数
 
 你可以调用 `getAllMsgCount` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
 

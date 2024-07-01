@@ -39,11 +39,11 @@
 
 ## 在客户端实现推送
 
-### 1. 开通推送服务与配置 Client ID。
+### 1. 开通推送服务与配置 Client ID
 
 在华为开发者后台创建应用，并开启推送服务，并上传对应的证书指纹。详见华为官方介绍：[开通推送服务与配置Client ID](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-config-setting-V5)。
 
-### 2. 上传推送证书。
+### 2. 上传推送证书
 
 注册完成后，需要在环信即时通讯云控制台上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书管理**。点击 **添加推送证书**，在 **添加推送证书** 窗口选择 **鸿蒙** 页签，然后设置推送证书相关参数。
 
@@ -60,7 +60,7 @@
 | Category | - | 否      | 通知消息类别。详见 [HarmonyOS NEXT 官网相关文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-apply-right-V5#section16708911111611)。 |
 | Action        | - | 否  | 消息接收方在收到离线推送通知时单击通知栏时打开的应用指定页面的自定义标记。 |
 
-### 3. 在项目中配置 Client ID。
+### 3. 在项目中配置 Client ID
 
 在项目模块级别下的 `src/main/module.json5`（例如 `entry/src/main/module.json5`）中，新增 `metadata` 并配置 `client_id`，如下所示：
 
@@ -87,7 +87,7 @@
 
 ```
 
-### 4. 在 SDK 初始化时配置应用的推送 Client ID。
+### 4. 在 SDK 初始化时配置应用的推送 Client ID
 
 ```TypeScript
 // ChatOptions 需要传入 appkey 参数。
@@ -98,7 +98,7 @@ options.setAppIDForPush('Your ClientID');
 ChatClient.getInstance().init(context, options);
 ```
 
-### 5. 监听 Push Token 上传结果。
+### 5. 监听 Push Token 上传结果
 
 你可以设置 `PushListener` 监听 Push Token 的上传结果。
 
