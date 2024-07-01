@@ -15,7 +15,7 @@
   - `ChatroomEvent` 新增 `ext` 扩展字段，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 - [IM SDK] 新增 `ConnectionParameters#isFixedDeviceId` 初始化参数，默认为 `true`，[使用固定的设备 ID](multi_device.html)。之前，每个 SDK 实例连接时，SDK 默认均使用不同的随机字符串作为设备标识。
 - [IM SDK] `destroyChatRoom` 方法支持聊天室所有者解散聊天室。
-- [IM SDK] 新增[日志上报](overview.html#日志上报)功能, 即，将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
+- [IM SDK] 新增[日志上报](overview.html#日志上报)功能, 即将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
 
 ### 修复
 
