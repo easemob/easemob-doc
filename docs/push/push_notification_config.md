@@ -56,7 +56,13 @@
                 "image": "https://www.easemob.com/statics/common/images/logo.png?20211109"
             }
         }
+    },
+    "harmonyOS":{
+        "title":"鸿蒙推送",
+        "body":"欢迎测试环信鸿蒙推送",
+        "image":"https://www.easemob.com/statics/common/images/logo.png?20211109"
     }
+    
 }
 ```
 
@@ -164,7 +170,7 @@ FCM 通道推送通知示例如下：
 | `collapseId`       | String | 用于将多个通知合并为用户的单个通知的标识符。                 |
 | `apnsId`           | String | 通知的唯一标识。                                             |
 | `badge`            | Int    | 应用的图标上方显示的角标数字。                               |
-| `sound`            | String | 设备收到通知时要播放的铃声：<br/> - 设置的铃声最多为 30 秒。若超过该时间，系统会启用默认铃声 `default`; <br/> - 铃声文件只支持 `aiff`、`wav` 和 `caf` 格式，例如 test.caf。<br/> - 铃声文件必须放在 app 的 /Library/Sounds 目录中。 |
+| `sound`            | String | 设备收到通知时要播放的铃声：<br/> - 设置的铃声最多为 30 秒。若超过该时间，系统会启用默认铃声 `default`; <br/> - 铃声文件只支持 `aiff`、`wav` 和 `caf` 格式，例如 `test.caf`。<br/> - 铃声文件必须放在 app 的 `/Library/Sounds` 目录中。 |
 | `mutableContent`   | Bool   | 是否向推送中增加 `mutable-content` 字段开启 APNs 通知扩展。<br/> - `true`：是；<br/> - `false`：否。 |
 | `contentAvailable` | Bool   | 是否配置后台更新通知。开启后系统会在后台唤醒您的应用程序，并将通知传递。<br/> - `true`：是；<br/> - `false`：否。 |
 | `categoryName`     | String | 通知的类型。                                                 |
@@ -180,6 +186,14 @@ FCM 通道推送通知示例如下：
 | `bodyLocArgs`      | List   | 字符串的数组，用于替换消息文本中的变量。                     |
 | `ext`              | Object | 自定义推送扩展信息。                                         |
 | `launchImage`      | String | 要显示的启动图像文件的名称。                                 |
+| `interruptionLevel` | String | 中断等级，详见 [管理通知](https://developer.apple.com/design/human-interface-guidelines/managing-notifications)。<br/> - `ACTIVE`：系统立即显示通知，点亮屏幕，并可播放声音。<br/> - `CRITICAL`：系统立即显示通知，点亮屏幕，并绕过静音开关播放声音。<br/> - `PASSIVE`：系统将通知添加到通知列表中，但不点亮屏幕或播放声音。<br/> - `TIME_SENSITIVE`：系统立即显示通知，点亮屏幕，播放声音，并突破系统通知控制。 |
+| `liveActivityEvent` | String | 实时活动，详见[使用 ActivityKit 推送通知启动和更新实时活动](https://developer.apple.com/documentation/activitykit/starting-and-updating-live-activities-with-activitykit-push-notifications)。<br/> - `START` ：开始 <br/> - `UPDATE`：更新<br/> - `END`：结束 |
+| `timestamp`         | Long   | 实时活动时间戳。协助始终显示最新的 ActivityKit 推送更新。      |
+| `dismissalDate`     | Long   | 实时活动通知的解除时间戳。<br/>默认情况下，实时活动在结束后会在锁定屏幕上显示长达四个小时，可以自行定义实时窗口自动解除时间。 |
+| `staleDate`         | Long   | 实时活动数据有效期时间戳。<br/>在某些情况下（例如进入没有网络连接的区域），可能无法使用新信息更新实时活动，从而导致其显示过时的数据。若要提供最佳的用户体验并让用户知道实时活动显示过时的信息，请在可选字段中添加此时间戳，以提供系统将实时活动视为过时的时间。每次更新时，都可以携带数据有效期时间戳。 |
+| `attributesType`    | String | 实时活动动态数据类型。  |
+| `attributes`        | Object | 实时活动动态数据。|
+| `contentState`      | Object | 实时活动动态数据结构和内容。|
 
 ### FCM 推送说明
 
@@ -644,7 +658,7 @@ FCM 通道推送通知示例如下：
 | :----------- | :------- | :------- | :----------------------------------------------------------- |
 | `name`       | 是       | String   | 按钮名称，最大长度为 40 个字符。                             |
 | `actionType` | 是       | Int      | 按钮动作类型：<br/> - `0`：打开应用首页；<br/> - `1`：打开应用自定义页面；<br/> - `2`：打开指定的页面。 |
-| `intentType` | 否       | Int      | 打开自定义页面的方式： <br/> - `0`：设置通过 `intent` 打开应用自定义页面；<br/> - `1`：设置通过 `action` 打开应用自定义页面。 当 `actionType` 为 `1` 时，该字段必填。 |
+| `intentType` | 否       | Int      | 打开自定义页面的方式：<br/> - `0`：设置通过 `intent` 打开应用自定义页面；<br/> - `1`：设置通过 `action` 打开应用自定义页面。 当 `actionType` 为 `1` 时，该字段必填。 |
 | `intent`     | 否       | String   | <br/> - 若 `actionType` 为 `1`，按照 `intentType` 字段设置应用页面的 URL 或 `action`。具体设置方式参见打开应用自定义页面。<br/> - 若 `actionType` 为 `2`，此字段设置打开指定网页的 URL，URL 使用的协议必须是 HTTPS 协议，例如，https://example.com/image.png。 |
 | `data`       | 否       | String   | 最大长度为 1024 个字符。 若 `actionType` 为 `0` 或 `1`，该参数用于在点击按钮后给应用透传数据，格式必须为 key-value 形式，例如 {“key1”:“value1”,“key2”:“value2”,…}。 |
 
@@ -655,3 +669,43 @@ FCM 通道推送通知示例如下：
 | `addNum`     | 否       | Int      | 应用角标累加数字非应用角标实际显示数字，为大于 `0` 小于 `100` 的整数。 |
 | `badgeClass` | 是       | String   | 应用入口 Activity 类全路径。 例如，com.example.test.MainActivity。 |
 | `setNum`     | 否       | Int      | 角标设置数字，大于等于 `0` 小于 `100` 的整数。如果 `setNum` 与 `addNum` 同时存在时，以 `setNum` 为准。 |
+
+### 鸿蒙推送说明
+
+多行文本推送示例：
+
+```json
+{
+    "title": "鸿蒙推送",
+    "body": "欢迎测试环信鸿蒙推送",
+    "style": 3,
+    "inboxContent": [
+        "1. 环信通知",
+        "2. Hello world"
+    ]
+}
+```
+推送字段说明如下：    
+
+| 字段            | 类型         | 描述                                                         |
+| :-------------- | :----------- | :----------------------------------------------------------- |
+| `pushType`      | Integer      | 推送消息类型：<br/> - （默认）`0`：Alert 消息（通知消息、授权订阅消息）<br/> - `1`：卡片刷新消息<br/> - `2`：通知扩展消息<br/> - `6`：后台消息<br/> - `7`：实况窗更新消息<br/> - `10`：VoIP 呼叫消息 |
+| `isTestMessage` | Boolean      | 是否是测试消息。                                               |
+| `receiptId`     | String       | 回执 ID。                                                       |
+| `category`      | String       | 消息分类，默认 `IM`。                                          |
+| `title`         | String       | 推送通知标题。                                                 |
+| `body`          | String       | 推送通知内容。                                                 |
+| `image`         | String       | 通知右侧大图标 URL，必须是 HTTPS 协议。支持类型 png、jpg、jpeg、heif、gif、bmp。 图片长宽建议小于 128x128 像素，若超过49152 像素，则图片不展示。 |
+| `style`         | Integer      | 通知样式：<br/> - （默认）`0`：普通通知 <br/> - `1`：大文本样式 <br/> - `3`：多行文本样式 |
+| `bigTitle`      | String       | 大文本标题，当 `style` 为 `1` 时必选。      |
+| `bigBody`       | String       | 大文本内容，当 `style` 为 `1` 时必选。    |
+| `inboxContent`  | List<String> | 多行文本样式的内容，当 `style` 为 `3` 时，本字段必填，最多支持 3 条内容。<br/>样例："inboxContent": ["1.content1","2.content2","3.content3"]。 |
+| `notifyId`      | Integer      | 唯一标识，相同覆盖。                                           |
+| `addNum`        | Integer      | 自增。                                                         |
+| `setNum`        | Integer      | 覆盖，优先级高于 `addNum`。                                     |
+| `actionType`    | Integer      | 点击行为：<br/> - （默认）`0`：打开应用首页。<br/> - `1`：打开应用自定义页面。 |
+| `action`        | String       | 应用内置页面 `ability` 对应的 `action`。                            |
+| `uri`           | String       | 应用内置页面 `ability` 对应的 `uri`。                               |
+| `data`          | Object       | 自定义扩展参数。                                             |
+| `payload`       | Object       | 更多推送类型载体，见[请求体结构说明-场景化消息](https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/push-scenariozed-api-request-struct-V5#section25212233520) 注意：推送消息类型非0时使用。 |
+
