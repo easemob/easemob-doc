@@ -31,6 +31,23 @@ socket 合法域名：
 wss://im-api-alipay.easemob.com/websocket
 :::
 
+环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
+
+| 数据中心      | REST API 请求地址      | WebSocket 访问域名          |
+| ------------- | ------------------ | -------------------------------- |
+| 国内 1 区   | a1.easemob.com    | im-api-alipay.easemob.com 或 im-api-alipay.easecdn.com   |
+| 国内 2 区   | a31.easemob.com   | im-api-alipay-31.easemob.com 或 im-api-alipay-31.easecdn.com |
+| 国内 VIP 区 | 请咨询商务经理    | 请咨询商务经理     |
+| 客服专用    | 请咨询商务经理    | 请咨询商务经理   |
+| 新加坡 1 区   | a1-sgp.easemob.com 或 a1-sgp.easecdn.com | im-api-alipay-sgp.easemob.com  或 im-api-alipay-sgp.easecdn.com  |
+| 新加坡 2 区   | a61.easemob.com 或 a61.easecdn.com | im-api-alipay-61.easemob.com 或 im-api-alipay-61.easecdn.com |
+| 美东 1 区     | a41.easemob.com 或 a41.easecdn.com       | im-api-alipay-41.easemob.com 或 im-api-alipay-41.easecdn.com   |
+| 德国 2 区 | a71.easemob.com 或 a71.easecdn.com       | im-api-alipay-71.easemob.com 或 im-api-alipay-71.easecdn.com   |
+
+应用所在数据中心可以在环信用户管理后台 > **即时通讯** > **服务概览**中查看：
+
+![img](@static/images/applet/service_overview.png)
+
 ### 说明
 
 支付宝小程序：支付宝小程序在一段时间内只能保留一个 WebSocket 连接，如果当前已存在 WebSocket 连接，那么会自动关闭该连接，并重新创建一个新的 WebSocket 连接。
