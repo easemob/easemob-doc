@@ -699,7 +699,7 @@ FCM 通道推送通知示例如下：
 | `style`         | Integer      | 通知样式：<br/> - （默认）`0`：普通通知 <br/> - `1`：大文本样式 <br/> - `3`：多行文本样式 |
 | `bigTitle`      | String       | 大文本标题，当 `style` 为 `1` 时必选。      |
 | `bigBody`       | String       | 大文本内容，当 `style` 为 `1` 时必选。    |
-| `inboxContent`  | List<String> | 多行文本样式的内容，当 `style` 为 `3` 时，本字段必填，最多支持 3 条内容。<br/>样例："inboxContent": ["1.content1","2.content2","3.content3"]。 |
+| `inboxContent`  | List | 多行文本样式的内容，当 `style` 为 `3` 时，本字段必填，最多支持 3 条内容。<br/>样例："inboxContent": ["1.content1","2.content2","3.content3"]。 |
 | `notifyId`      | Integer      | 唯一标识，相同覆盖。                                           |
 | `addNum`        | Integer      | 自增。                                                         |
 | `setNum`        | Integer      | 覆盖，优先级高于 `addNum`。                                     |
