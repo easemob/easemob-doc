@@ -69,7 +69,7 @@ downloadFile 合法域名：
 
 应用所在数据中心可以在环信用户管理后台>应用信息中查看：
 
-![img](@static/images/applet/console.jpeg)
+![img](@static/images/applet/service_overview.png)
 
 ### 集成 SDK
 
