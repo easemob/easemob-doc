@@ -49,15 +49,16 @@ SDK 目前支持微信、支付宝、QQ、百度小程序、抖音（请使用�
 
 环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
 
-| 数据中心      | REST API 请求地址                        | WebSocket 访问域名                                     |
-| ------------- | ---------------------------------------- | ------------------------------------------------------ |
-| 国内 1 区     | a1.easemob.com 或 a1.easecdn.com         | im-api-v2.easemob.com 或 im-api-v2.easecdn.com         |
-| 国内 2 区     | a31.easemob.com 或 a31.easecdn.com       | im-api-v2-31.easemob.com 或 im-api-v2-31.easecdn.com   |
-| 国内 VIP 区   | 请咨询商务经理                           | 请咨询商务经理                                         |
-| 客服专用      | 请咨询商务经理                           | 请咨询商务经理                                         |
-| 新加坡 1 区   | a1-sgp.easemob.com 或 a1-sgp.easecdn.com | im-api-sgp-v2.easemob.com 或 im-api-sgp-v2.easecdn.com |
-| 美东 1 区     | a41.easemob.com 或 a41.easecdn.com       | msync-api-41.easemob.com 或 msync-api-41.easecdn.com   |
-| 法兰克福 1 区 | a51.easemob.com 或 a51.easecdn.com       | msync-api-51.easemob.com 或 msync-api-51.easecdn.com   |
+| 数据中心      | REST API 请求地址      | WebSocket 访问域名          |
+| ------------- | ------------------ | -------------------------------- |
+| 国内 1 区   | a1.easemob.com    | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com   |
+| 国内 2 区   | a31.easemob.com   | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com |
+| 国内 VIP 区 | 请咨询商务经理    | 请咨询商务经理     |
+| 客服专用    | 请咨询商务经理    | 请咨询商务经理   |
+| 新加坡 1 区   | a1-sgp.easemob.com 或 a1-sgp.easecdn.com | im-api-wechat-sgp.easemob.com  或 im-api-wechat-sgp.easecdn.com  |
+| 新加坡 2 区   | a61.easemob.com 或 a61.easecdn.com | im-api-wechat-61.easemob.com 或 im-api-wechat-61.easecdn.com |
+| 美东 1 区     | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
+| 德国 2 区 | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
 
 应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console 中查看请求域名
 

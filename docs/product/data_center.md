@@ -57,7 +57,7 @@
 | :--------- | :----- | :----- |
 | 国内 1 区      | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com       | im-api-alipay.easemob.com 或 im-api-alipay.easecdn.com   |
 | 国内 2 区      | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com | im-api-alipay-31.easemob.com 或 im-api-alipay-31.easecdn.com |
-| 国内 VIP 区    | 请咨询你的商务经理   |                                                              |
+| 国内 VIP 区    | 请咨询你的商务经理   | 请咨询你的商务经理                                                          |
 
 ### 国内集群迁移到海外
 
