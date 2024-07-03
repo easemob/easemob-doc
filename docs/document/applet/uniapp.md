@@ -62,7 +62,7 @@ SDK 目前支持微信、支付宝、QQ、百度小程序、抖音（请使用�
 
 应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console 中查看请求域名
 
-![img](@static/images/applet/console.jpeg)
+![img](@static/images/applet/service_overview.png)
 
 登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 **开发 > 开发设置** 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
 
