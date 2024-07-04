@@ -29,7 +29,7 @@ function getUTMParametersAndSetCookie() {
   } else {
     var existingCookieObj = JSON.parse(existingCookie);
     if (Object.keys(existingCookieObj).length == 1 && Object.keys(existingCookieObj[0] == 'register_referrer')) {
-      setCookie("utmParameters", JSON.stringify(Object.assign({}, utmParameters, existingCookie)), 30, rootDomain);
+      setCookie("utmParameters", JSON.stringify(Object.assign({}, utmParameters, existingCookieObj)), 30, rootDomain);
     }
   }
 }
