@@ -1,6 +1,6 @@
 var script = document.createElement('script');
 script.setAttribute('type','text/javascript');
-script.setAttribute('src',"https://cdn.jsdelivr.net/npm/browser-tool@1.2.2/dist/browser.min.js");
+script.setAttribute('src',"https://doc.easemob.com/browser.min.js");
 document.getElementsByTagName('head')[0].appendChild(script);
 
 function getUTMParametersAndSetCookie() {
@@ -33,7 +33,7 @@ function getRegisterClickReferrer() {
   document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', function(event) {
       if (this.href.includes('console.easemob.com/user/register')) {
-        var utmParameters = getCookieByName("utmParameters") || {}
+        var utmParameters = getCookieByName("utmParameters") || '{}'
         var currentPath = window.location.pathname
         var utmParametersObj = JSON.parse(utmParameters);
         utmParametersObj['register_referrer'] = currentPath;
@@ -46,7 +46,6 @@ function getRegisterClickReferrer() {
 
 function handlerUTMInfo() {
   getUTMParametersAndSetCookie()
-  getRegisterClickReferrer()
 }
 
 function getRootDomain(domain) {
@@ -78,4 +77,6 @@ function setCookie(name, value, days, domain) {
   document.cookie = name + "=" + encodeURIComponent(value) + expires + "; domain=." + domain + "; path=/";
 }
 
+
+getRegisterClickReferrer();
 window.addEventListener('load', handlerUTMInfo);
