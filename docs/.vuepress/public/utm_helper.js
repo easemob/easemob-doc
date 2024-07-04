@@ -35,18 +35,27 @@ function getUTMParametersAndSetCookie() {
 }
 
 function getRegisterClickReferrer() {
-  document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', function(event) {
-      if (this.href.includes('console.easemob.com/user/register')) {
-        var utmParameters = getCookieByName("utmParameters") || '{}'
-        var currentPath = window.location.pathname
-        var utmParametersObj = JSON.parse(utmParameters);
-        utmParametersObj['register_referrer'] = currentPath;
-        var rootDomain = getRootDomain(document.domain);
-        setCookie("utmParameters", JSON.stringify(utmParametersObj), 30, rootDomain);
-      }
-    })
-  })
+  var domain = window.location.hostname
+  if (domain != 'console.easemob.com') {
+    var utmParameters = getCookieByName("utmParameters") || '{}'
+    var currentPath = window.location.pathname
+    var utmParametersObj = JSON.parse(utmParameters);
+    utmParametersObj['register_referrer'] = currentPath;
+    var rootDomain = getRootDomain(window.location.hostname);
+    setCookie("utmParameters", JSON.stringify(utmParametersObj), 30, rootDomain);
+  }
+  // document.querySelectorAll('a').forEach(link => {
+  //   link.addEventListener('click', function(event) {
+  //     if (this.href.includes('console.easemob.com/user/register')) {
+  //       var utmParameters = getCookieByName("utmParameters") || '{}'
+  //       var currentPath = window.location.pathname
+  //       var utmParametersObj = JSON.parse(utmParameters);
+  //       utmParametersObj['register_referrer'] = currentPath;
+  //       var rootDomain = getRootDomain(window.location.hostname);
+  //       setCookie("utmParameters", JSON.stringify(utmParametersObj), 30, rootDomain);
+  //     }
+  //   })
+  // })
 }
 
 function handlerUTMInfo() {
