@@ -36,7 +36,7 @@ function getUTMParametersAndSetCookie() {
 
 function getRegisterClickReferrer() {
   var domain = window.location.hostname
-  if (domain != 'console.easemob.com') {
+  if (domain == 'www.easemob.com') {
     var utmParameters = getCookieByName("utmParameters") || '{}'
     var currentPath = window.location.pathname
     var utmParametersObj = JSON.parse(utmParameters);
