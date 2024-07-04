@@ -93,3 +93,17 @@ function setCookie(name, value, days, domain) {
 
 getRegisterClickReferrer();
 window.addEventListener('load', handlerUTMInfo);
+
+(() => {
+  var oldPushState = history.pushState;
+  history.pushState = function pushState() {
+      var ret = oldPushState.apply(this, arguments);
+      window.dispatchEvent(new Event('pushstate'));
+      window.dispatchEvent(new Event('locationchange'));
+      return ret;
+  };
+})();
+
+window.addEventListener('locationchange', function () {
+  getRegisterClickReferrer()
+});
