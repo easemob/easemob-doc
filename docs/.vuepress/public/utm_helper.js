@@ -1,6 +1,6 @@
 var script = document.createElement('script');
 script.setAttribute('type','text/javascript');
-script.setAttribute('src',"https://doc.easemob.com/browser.min.js");
+script.setAttribute('src',"https://cdn.jsdelivr.net/npm/browser-tool@1.2.2/dist/browser.min.js");
 document.getElementsByTagName('head')[0].appendChild(script);
 
 function getUTMParametersAndSetCookie() {
@@ -17,7 +17,7 @@ function getUTMParametersAndSetCookie() {
   } else {
     utmParameters['referrer'] = "direct";
   }
-  if (browser) {
+  if (window.browser) {
     uaInfo = browser()
     utmParameters['browser'] = uaInfo.browser
     utmParameters['device'] = uaInfo.device
@@ -26,6 +26,11 @@ function getUTMParametersAndSetCookie() {
   var existingCookie = getCookieByName("utmParameters");
   if (!existingCookie) {
     setCookie("utmParameters", JSON.stringify(utmParameters), 30, rootDomain);
+  } else {
+    var existingCookieObj = JSON.parse(existingCookie);
+    if (Object.keys(existingCookieObj).length == 1 && Object.keys(existingCookieObj[0] == 'register_referrer')) {
+      setCookie("utmParameters", JSON.stringify(Object.assign({}, utmParameters, existingCookie)), 30, rootDomain);
+    }
   }
 }
 
@@ -45,7 +50,7 @@ function getRegisterClickReferrer() {
 }
 
 function handlerUTMInfo() {
-  getUTMParametersAndSetCookie()
+  getUTMParametersAndSetCookie();
 }
 
 function getRootDomain(domain) {
@@ -76,7 +81,6 @@ function setCookie(name, value, days, domain) {
   }
   document.cookie = name + "=" + encodeURIComponent(value) + expires + "; domain=." + domain + "; path=/";
 }
-
 
 getRegisterClickReferrer();
 window.addEventListener('load', handlerUTMInfo);
