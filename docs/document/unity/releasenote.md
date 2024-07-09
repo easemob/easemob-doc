@@ -2,6 +2,19 @@
 
 <Toc />
 
+## 版本 V1.3.1 Dev 2024-7-9 （开发版）
+
+### 新增特性
+
+- [IM SDK] 撤回消息的方法 `RecallMessage` 中新增 `ext` 参数（字符串类型），[支持消息撤回时携带自定义信息](message_recall.html#实现方法)。
+- [IM SDK] [消息撤回事件](message_recall.html#设置消息撤回监听)  `OnMessagesRecalled` 的返回参数由 `List<Message>` 变更为 `List<RecallMessageInfo>`。
+
+### 修复
+
+- [IM SDK] 修复服务端获取好友列表（包含好友备注）时，在好友列表无变化时，第二次请求获取不到数据的问题。
+- [IM SDK] 修复特殊情况下附件发送失败，消息仍然成功发送的问题。
+- [IM SDK] 修复拉取漫游消息时 nextkey 错误的问题。
+
 ## 版本 V1.3.0 Dev 2024-5-7 （开发版）
 
 ### 新增特性
