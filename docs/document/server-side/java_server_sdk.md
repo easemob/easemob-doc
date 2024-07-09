@@ -24,14 +24,14 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.8.52</version>
+    <version>0.8.53</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:0.8.52'
+implementation 'com.easemob.im:im-sdk-core:0.8.53'
 ```
 
 ### 使用
@@ -234,6 +234,12 @@ EMProperties properties = EMProperties.builder()
 ```
 
 ## 更新日志
+
+### V0.8.53 2024-06-28
+
+1. 增加 "批量设置离线推送时显示的昵称" 功能。
+
+以上更新内容请到 PushApi 中查看。
 
 ### V0.8.52 2024-06-07
 

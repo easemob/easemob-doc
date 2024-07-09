@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:1.0.6'
+implementation 'com.easemob.im:im-sdk-core:1.0.7'
 ```
 
 ### 使用
@@ -204,6 +204,14 @@ try {
 ```
 
 ## 更新日志
+
+### V1.0.7 2024-06-28
+
+1. 增加“批量修改用户推送昵称”功能。
+
+2. 增加发送图片、语音、视频、文件、透传、扩展、自定义消息示例功能。
+
+以上更新内容请到 UserApi、MessageApiTest 中查看。
 
 ### V1.0.6 2024-06-07
 

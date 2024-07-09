@@ -38,7 +38,8 @@
 | RESTful API 接口        | 方法 | 接口 URL           | 接口最高调用频率（默认值） |
 | :----------- | :--- | :------------- | :----------- |
 | 设置离线推送         | PUT  | /{org}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key          |
-| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key          |
+| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key  |
+| 批量设置离线推送时显示的昵称     | PUT | /{org_name}/{app_name}/push/nickname | 100 次/秒/App Key  |
 | 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 次/秒/App Key          |
 | 获取推送通知的首选语言 | GET  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 次/秒/App Key  |
 | 创建离线推送模板          | POST  | /{org_name}/{app_name}/notification/template | 10 次/秒/App Key  |
