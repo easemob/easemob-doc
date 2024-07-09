@@ -55,7 +55,7 @@
 
 添加好友，好友必须是和当前用户在一个 App Key 下的用户。
 
-对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 1000，不同服务版本的 App Key 的该数量上限不同，具体可参考[版本功能介绍](https://www.easemob.com/pricing/im)。
+对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 100，不同服务版本的 App Key 的该数量上限不同，具体可参考[版本功能介绍](https://www.easemob.com/pricing/im)。
 
 ### HTTP 请求
 
