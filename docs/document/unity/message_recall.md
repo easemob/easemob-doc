@@ -31,8 +31,12 @@
 
 调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `OnMessagesRecalled` 事件。
 
+:::tip
+对于 1.3.1 及以上版本的 SDK，你可以通过 `ext` 字段传入自定义字符串，设置扩展信息。
+:::
+
 ```csharp
-SDKClient.Instance.ChatManager.RecallMessage("Message ID", new CallBack(
+SDKClient.Instance.ChatManager.RecallMessage("Message ID", "Please ignore the message", new CallBack(
   onSuccess: () => {
     Debug.Log("回撤成功");
   },
@@ -47,8 +51,11 @@ SDKClient.Instance.ChatManager.RecallMessage("Message ID", new CallBack(
 
 ### 设置消息撤回监听
 
-你可以使用 `IChatManagerDelegate` 设置消息撤回监听，通过 `OnMessagesRecalled` 事件监听发送方对已接收的消息的撤回。
+你可以设置消息撤回监听，通过 `OnMessagesRecalled` 事件监听发送方对已接收的消息的撤回。
+
+- 若用户在线接收了消息，消息撤回时，该事件中的 `RecallMessageInfo` 中的 `RecallMessage` 为撤回的消息的内容，`RecallMessageId` 属性返回撤回的消息的 ID。
+- 若消息发送和撤回时接收方离线，该事件中的 `RecallMessageInfo` 中的 `RecallMessage` 为空，`RecallMessageId` 属性返回撤回的消息的 ID。
 
 ```csharp
-void OnMessagesRecalled(List<Message> messages);
+void OnMessagesRecalled(List<RecallMessageInfo> recallMessagesInfo);
 ```

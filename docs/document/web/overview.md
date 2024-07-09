@@ -267,7 +267,3 @@ logger.setLevel(0);
 ```javascript
 logger.download();
 ```
-
-## 日志上报
-
-自 4.8.0 版本，Web SDK 支持日志上报功能, 即将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
