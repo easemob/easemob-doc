@@ -70,7 +70,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{
 
 | 参数  | 类型 | 是否必需  | 描述             | 
 | :---- | :----- | :---------------------- | :------- |
-| `ext` | String | 是 | 在线状态扩展信息。建议不超过 64 字节。 | 
+| `ext` | String | 是 | 在线状态扩展信息。建议不超过 1024 字节。 | 
 
 ### HTTP 响应
 
