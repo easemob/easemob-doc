@@ -83,7 +83,6 @@
 | 单向清空群组或聊天室会话某个时间点及之前的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}/time?groupId={groupId}&delTime={delTime} | 100 次/秒/App Key  |
 | 导入单聊消息 | POST  | /{org_name}/{app_name}/messages/users/import | 100 条/秒/App Key                                          |
 | 导入群聊消息 | POST  | /{org_name}/{app_name}/messages/chatgroups/import | 100 条/秒/App Key                                    |
-| 拉取会话列表    |   GET    | /{org_name}/{app_name}/user/{username}/user_channels       | 5 次/分钟/单用户 ID，100 次/秒/App Key    |
 
 ## 用户属性
 
