@@ -7,6 +7,12 @@
 ### 新增特性
 
 - 新增 `getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](conversation_list.html#一次性获取本地所有会话)。 
+- 新增[表情回复 Reaction](reaction.html) 功能：
+  - `addReaction`：在消息上添加 Reaction。
+  - `removeReaction`：删除消息的 Reaction。
+  - `fetchReactions`：获取消息的 Reaction 列表。
+  - `fetchReactionDetail`：获取 Reaction 详情。
+  - `ChatMessage.getReactions()`：从 `ChatMessage` 对象获取 Reaction 列表。
 - 新增[会话标记](conversation_mark.html)功能：
   - `ChatManager#addConversationMark`：标记会话。
   - `ChatManager#removeConversationMark`：取消标记会话。
