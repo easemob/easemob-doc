@@ -11,9 +11,9 @@
 
 **2、进入功能配置总览页**
 
-在环信控制台首页，在 **应用列表** 区域下，点击 **操作** 一栏中的 **查看**。
+在环信控制台首页，在 **应用列表** 区域下，点击 **操作** 一栏中的 **管理**。
 
-![img](@static/images/moderation/moderation_enable_01.png)
+![img](@static/images/product/app-setting.png)
 
 选择 **即时通讯 > 功能配置 > 功能配置总览**。
 

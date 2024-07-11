@@ -10,7 +10,7 @@
 
 2. 获取配置信息。
 
-选中创建的应用，点击**查看**，进入**应用详情**页面，获取 **App Key**、**ClientID** 及**ClientSecret**。
+选中创建的应用，点击**管理**，进入**应用详情**页面，获取 **App Key**、**ClientID** 及**ClientSecret**。
 
 ![img](@static/images/aigc/app_view.png)
 
