@@ -8,7 +8,6 @@
 
 - 消息：包括在线消息、离线消息、推送通知（若开启了第三方推送服务，离线设备收到）以及对应的回执和已读状态等；
 - 好友和群组相关操作；
-- 子区相关操作；
 - 会话相关操作。
 
 多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置各端设备的数量：
@@ -41,6 +40,7 @@
 
 HarmonyOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送时识别设备，并将该 ID 发送到服务器。服务器会自动将新消息发送到用户登录的设备，可以自动监听到其他设备上进行的操作。即时通讯 IM HarmonyOS SDK 提供以下多设备场景功能：
 
+- 获取当前用户的其他已登录设备的登录 ID 列表；
 - 获取其他设备的好友或者群组操作；
 
 ## 前提条件
@@ -50,6 +50,24 @@ HarmonyOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息�
 2. 设置登录设备的自定义名称和平台需在 SDK 初始化时完成。
 
 ## 实现方法   
+
+### 获取当前用户的其他登录设备的登录 ID 列表  
+
+你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
+
+```TypeScript
+ChatClient.getInstance().contactManager()?.getSelfIdsOnOtherPlatform().then(ids => {
+  // 选择一个登录 ID 作为消息接收方。
+  let toChatUsername = ids[0];
+  // 创建一条文本消息，content 为消息文字内容，toChatUsername 传入登录 ID 作为消息接收方。
+  let content = "";
+  let message = ChatMessage.createTextSendMessage(toChatUsername, content);
+  // 发送消息。
+  if (message) {
+    ChatClient.getInstance().chatManager()?.sendMessage(message);
+  }
+});
+```
 
 ### 获取其他设备上的操作
 
@@ -142,6 +160,22 @@ let multiDeviceListener: MultiDevicesListener = {
       case MultiDevicesEvent.GROUP_REMOVE_MUTE:
         break;
       default:
+        break;
+    }
+  },
+  onConversationEvent:(event: MultiDevicesEvent, conversationId: string, type: ConversationType) => {
+    switch (event) {
+      case MultiDevicesEvent.CONVERSATION_PINNED:
+      //当前用户在其他设备上置顶会话。
+        break;
+      case MultiDevicesEvent.CONVERSATION_UNPINNED:
+      //当前用户在其他设备上取消会话置顶。
+        break;
+      case MultiDevicesEvent.CONVERSATION_DELETED:
+      //当前用户在其他设备上删除了服务端的会话。
+        break;
+      case MultiDevicesEvent.CONVERSATION_MARK_UPDATE:
+      //当前用户在其他设备上更新了会话标记，包括添加和移除会话标记。
         break;
     }
   },

@@ -2,6 +2,24 @@
 
 <Toc />
 
+## 版本 V1.2.0 Dev 2024-07-11（开发版）
+
+### 新增特性
+
+- 新增 `getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](conversation_list.html#一次性获取本地所有会话)。 
+- 新增[会话标记](conversation_mark.html)功能：
+  - `ChatManager#addConversationMark`：标记会话。
+  - `ChatManager#removeConversationMark`：取消标记会话。
+  - `ChatManager#fetchConversationsFromServerWithFilter`：根据会话标记从服务器分页查询会话列表。
+  - `Conversation#marks`：获取本地单个会话的所有标记。
+  - `onConversationEvent#MultiDevicesEvent.CONVERSATION_MARK_UPDATE`：[多设备场景下的会话标记事件](multi_device.html#获取其他设备上的操作)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+- 新增[会话置顶](conversation_pin.html)功能。
+  - `ChatManager#pinConversation`：设置置顶或取消置顶会话。
+  - `fetchPinnedConversationsFromServer`：从服务端分页获取置顶会话列表。
+- 新增[用户属性](userprofile.html)功能。
+  - `UserInfoManager#updateUserInfo`：设置和修改当前用户自己的属性信息。
+  - `UserInfoManager#fetchUserInfoById`：获取指定用户的属性信息。
+
 ## 版本 V1.1.0 Dev 2024-07-01（开发版）
 
 ### 新增特性
