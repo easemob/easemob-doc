@@ -260,6 +260,39 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_receipt.html
+          - text: 表情回复
+            desc: 消息表情回复（“Reaction”）功能，即用户可以在单聊和群聊中对消息添加、删除表情。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/reaction.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/reaction.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/reaction.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/reaction.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/reaction.html 
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/reaction.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/reaction.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/reaction.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/reaction.html
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/server-side/reaction.html  
           - text: 修改消息
             desc: 修改单聊或群组聊天会话中已经发送成功的文本消息。
             sdks:
@@ -470,6 +503,33 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_translation.html
+          - text: 消息审核（举报）
+            desc: 你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在环信即时通讯云控制台展示。你可在环信即时通讯云控制台查看举报记录，并进行相应处理。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/moderation.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/moderation.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/moderation.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/moderation.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/moderation.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/moderation.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/moderation.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/moderation.html
           - text: 消息只投在线
             desc: 只将消息投递给在线用户。若接收方不在线，则无法收到消息。
             sdks:
@@ -587,6 +647,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/conversation_pin.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/conversation_pin.html    
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/conversation_pin.html
@@ -614,6 +677,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/conversation_mark.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/conversation_mark.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/conversation_mark.html
@@ -959,6 +1025,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /document/web/userprofile.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/userprofile.html     
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/userprofile.html

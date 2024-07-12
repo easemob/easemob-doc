@@ -102,6 +102,9 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 1113   |     TRANSLATE_MESSAGE_FAIL      | 消息翻译失败。 |
 | 1200   |     MODERATION_FAILED           | 第三方内容审核服务的消息审核结果为“拒绝”。 |
 | 1299   |     THIRD_SERVER_FAILED         | 除第三方内容审核服务的其他服务的消息审核结果为“拒绝”。 |
+| 1300   |      REACTION_REACH_LIMIT       | 该消息的 Reaction 数量已达到限制。      |
+| 1301   |   REACTION_HAS_BEEN_OPERATED    | 用户已添加该 Reaction，不能重复添加。                      |
+| 1302   |  REACTION_OPERATION_IS_ILLEGAL  | 用户对该 Reaction 没有操作权限。例如，未添加过该 Reaction 的用户进行删除操作，或者既非单聊消息的发送方也不是接收方的用户对消息添加 Reaction。 |
 | 1500   |        PUSH_NOT_SUPPORT         | 第三方推送不支持：如果用户配置的第三方推送在当前设备上不支持，会提示该错误。 |
 | 1501   |        PUSH_BIND_FAILED         | 绑定第三方推送 token 失败：如果将第三方推送 token 上传到服务器失败会返回该错误。 |
 | 1502   |       PUSH_UNBIND_FAILED        | 解绑第三方推送 token 失败：如果解绑第三方推送 token 失败会提示该错误。 |

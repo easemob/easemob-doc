@@ -8,7 +8,8 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.1.0 开发版发布 |**新增特性**：<br/> - HarmonyOS 端新增[修改消息](/document/harmonyos/message_modify.html)功能。<br/> - HarmonyOS 端新增[自定义消息](/document/harmonyos/message_send_receive.html#发送自定义类型消息)功能。<br/> - HarmonyOS 端新增[合并转发消息](/document/harmonyos/message_send_receive.html#发送和接收合并消息)功能。<br/> - HarmonyOS 端新增[离线推送](/document/harmonyos/push.html)功能。  | 2024-07-01  | [HarmonyOS 1.1.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-1-0-dev-2024-07-01-开发版)。 | 
+| HarmonyOS SDK 1.2.0 开发版发布 |**新增特性**：<br/> - HarmonyOS 端新增[表情回复 Reaction](/document/harmonyos/reaction.html)功能。<br/> - HarmonyOS 端新增[会话标记](/document/harmonyos/conversation_mark.html)功能。<br/> - HarmonyOS 端新增[会话置顶](/document/harmonyos/conversation_pin.html)功能。<br/> - HarmonyOS 端新增[用户属性](/document/harmonyos/userprofile.html)功能。  | 2024-07-11  | [HarmonyOS 1.1.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-2-0-dev-2024-07-11-开发版) | 
+| HarmonyOS SDK 1.1.0 开发版发布 |**新增特性**：<br/> - HarmonyOS 端新增[修改消息](/document/harmonyos/message_modify.html)功能。<br/> - HarmonyOS 端新增[自定义消息](/document/harmonyos/message_send_receive.html#发送自定义类型消息)功能。<br/> - HarmonyOS 端新增[合并转发消息](/document/harmonyos/message_send_receive.html#发送和接收合并消息)功能。<br/> - HarmonyOS 端新增[离线推送](/document/harmonyos/push.html)功能。  | 2024-07-01  | [HarmonyOS 1.1.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-1-0-dev-2024-07-01-开发版) | 
 
 ## 2024-06
 
@@ -38,7 +39,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.3.0 开发版发布 | **新增特性**：<br/> - [会话标记功能](/document/android/conversation_mark.html)：支持标记会话，并按照标记获取会话。<br/> **优化**<br/> - 对于原生平台，优化附件类型消息发送时的附件上传，支持分片上传。 <br/> - 移动端移除 FPA 功能，减小 SDK 体积。<br/> - 移动端单个日志文件大小由 2 MB 提升到 5 MB。<br/> - Web 端增加 `onMessage` 回调。在收到文本、图片、视频、语音、地理位置和文件等消息时，批量将消息回调给应用。<br/> - Web 端视频类型消息增加视频首帧缩略图, 通过 videoMessage.thumb 访问。    |  2023-12-22     | <br/> - [Android 4.3.0 更新日志](/document/android/releasenote.html#版本-v4-3-0-dev-2023-12-22-开发版)<br/> - [iOS 4.3.0 更新日志](/document/ios/releasenote.html#版本-v4-3-0-dev-2023-12-22-开发版)<br/> - [Web 4.4.0 更新日志](/document/web/releasenote.html#版本-v4-4-0-dev-2023-12-22-开发版)<br/> - [小程序 4.4.0 更新日志](/document/applet/releasenote.html#版本-v4-4-0-dev-2023-12-22-开发版)。   |
+| SDK 4.3.0 开发版发布 | **新增特性**：<br/> - [会话标记功能](/document/android/conversation_mark.html)：支持标记会话，并按照标记获取会话。<br/> **优化**<br/> - 对于原生平台，优化附件类型消息发送时的附件上传，支持分片上传。 <br/> - 移动端移除 FPA 功能，减小 SDK 体积。<br/> - 移动端单个日志文件大小由 2 MB 提升到 5 MB。<br/> - Web 端增加 `onMessage` 回调。在收到文本、图片、视频、语音、地理位置和文件等消息时，批量将消息回调给应用。<br/> - Web 端视频类型消息增加视频首帧缩略图, 通过 videoMessage.thumb 访问。    |  2023-12-22     | <br/> - [Android 4.3.0 更新日志](/document/android/releasenote.html#版本-v4-3-0-dev-2023-12-22-开发版)<br/> - [iOS 4.3.0 更新日志](/document/ios/releasenote.html#版本-v4-3-0-dev-2023-12-22-开发版)<br/> - [Web 4.4.0 更新日志](/document/web/releasenote.html#版本-v4-4-0-dev-2023-12-22-开发版)<br/> - [小程序 4.4.0 更新日志](/document/applet/releasenote.html#版本-v4-4-0-dev-2023-12-22-开发版)   |
 
 ## 2023-11
 

@@ -18,7 +18,7 @@
 环信即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
 
 - `fetchConversationsFromServer`：从服务器获取会话列表。
-- `getConversations`：一次性获取本地所有会话。
+- `getAllConversationsBySort`：一次性获取本地所有会话。
 
 ## 实现方法
 
@@ -28,7 +28,7 @@
 
 :::tip
 1. **若使用该功能，需在环信控制台开通。** 
-2. 建议你在首次下载、卸载后重装应用等本地数据库无数据情况下拉取服务端会话列表。其他情况下，调用 `getConversations` 方法获取本地所有会话即可。
+2. 建议你在首次下载、卸载后重装应用等本地数据库无数据情况下拉取服务端会话列表。其他情况下，调用 `getAllConversationsBySort`、`getConversations` 方法获取本地所有会话即可。
 3. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需联系商务。
 :::
 
@@ -48,10 +48,12 @@ ChatClient.getInstance().chatManager()?.fetchConversationsFromServer(limit, curs
 
 ### 一次性获取本地所有会话
 
-要一次性获取本地所有会话，你可以调用 `getConversations` 方法。SDK 首先从内存中获取会话，若会话未从本地数据库加载过，SDK 会先将数据库中的会话加载到内存。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，会话列表为 `Array<Conversation>` 结构。
+要一次性获取本地所有会话，你可以调用 `getAllConversationsBySort` 方法。SDK 首先从内存中获取会话，若会话未从本地数据库加载过，SDK 会先将数据库中的会话加载到内存。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `Array<Conversation>` 结构。
 
 示例代码如下：
 
 ```TypeScript
-let conversations = ChatClient.getInstance().chatManager()?.getConversations();
+let conversations = ChatClient.getInstance().chatManager()?.getAllConversationsBySort();
 ```
+
+- 你也可以调用 `getConversations` 方法返回 `Array<Conversation>` 结构的无序会话。
