@@ -72,12 +72,12 @@ const documentSidebar = [
           { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
           { text: '会话已读回执', link: 'conversation_receipt.html', only: ['android', 'ios', 'web'] },
           { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
-          { text: '置顶会话', link: 'conversation_pin.html', except: ['harmonyos'] },
-          { text: '会话标记', link: 'conversation_mark.html', except: ['harmonyos'] },
+          { text: '置顶会话', link: 'conversation_pin.html' },
+          { text: '会话标记', link: 'conversation_mark.html' },
           { text: '删除会话', link: 'conversation_delete.html' },
         ]
       },
-      { text: '管理用户属性', link: 'userprofile.html', except: ['harmonyos'] },
+      { text: '管理用户属性', link: 'userprofile.html' },
       { text: '管理用户关系', link: 'user_relationship.html' },
       {
         text: '群组管理',
@@ -108,7 +108,7 @@ const documentSidebar = [
       { text: '设置推送', link: 'push.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
       { text: '登录多个设备', link: 'multi_device.html' },
       { text: '管理在线状态订阅', link: 'presence.html', except: ['harmonyos'] },
-      { text: '消息表情回复', link: 'reaction.html', except: ['harmonyos'] },
+      { text: '消息表情回复', link: 'reaction.html' },
       {
         text: '子区管理',
         collapsible: true,
