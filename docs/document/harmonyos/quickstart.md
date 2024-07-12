@@ -55,7 +55,7 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "chatsdk": "file:./libs/chatsdk-x.x.x.har"
+    "@easemob/chatsdk": "file:./libs/chatsdk-x.x.x.har"
   }
 }
 ```
