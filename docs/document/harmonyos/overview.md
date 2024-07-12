@@ -185,3 +185,13 @@ SDK 默认输出调试信息（所有日志，包括调试信息、警告和错�
 ```TypeScript
 ChatLog.setLogLevel(ChatLogLevel.ERROR_LEVEL);
 ```
+
+### 获取本地日志
+
+打开以下目录，获取本地日志。
+
+```
+hdc file recv /data/app/el2/100/base/{应用包名}/{App Key}/core_log
+```
+
+获取本地日志，需要将 `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`；`{App Key}` 需要替换为应用的环信 App Key。
