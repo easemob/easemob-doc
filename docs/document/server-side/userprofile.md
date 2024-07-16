@@ -146,6 +146,19 @@ curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorizati
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。    |
+| 403     | FORBIDDEN         | size of metadata for this single user exceeds the user defined limit, {}Bytes        | 单个用户的用户属性用量超过限制。默认单个用户的属性总长度不得超过 2 KB。 | 调整用量或联系商务提升用量上限。 |
+| 403     | FORBIDDEN         | size of metadata for this single user exceeds the current mysql column size, {}Bytes        | 单个用户的用户属性超过字段长度限制。关于用户属性字段（例如，用户昵称）的长度限制，详见[设置用户属性](/document/server-side/userprofile.html#设置用户属性)。  | 减少用户属性字段的长度。    |
+| 403     | FORBIDDEN          | total size of user metadata for this app exceeds the user defined limit, {}Bytes        | 整个应用的用户属性用量超过限制。默认单个 app 下所有用户的属性总长度不得超过 10 GB。   | 调整用量或联系商务提升用量上限。    |
+| 500     | INTERNAL_SERVER_ERROR          | update metadata failed        | 服务异常导致更新用户属性失败。  |     |
+
+
 ## 获取用户属性
 
 获取单个用户的全部用户属性键值对。需要在请求中填写 {username}，指定获取用户属性的用户 ID。
@@ -206,6 +219,16 @@ curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourA
   "duration": 166
 }
 ```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | metadata_error          | auth error        | 鉴权失败。例如，使用的 token 与路径参数 `username` 不匹配。   | 使用正确的 token。     |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow        | 用户属性功能未开通。  | 联系商务开通用户属性功能。 |
+| 500     | INTERNAL_SERVER_ERROR          |         | 服务未知异常。  |    
 
 ## 批量获取用户属性
 
@@ -298,6 +321,16 @@ curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer <Your
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 400     | BAD_REQUEST  | exceed allowed batch size %s   | 超过允许获取的用户数的用户属性。每次最多可获取 100 个用户的用户属性。  |  减少批量获取用户属性的用户数。   |
+| 401     | metadata_error  | auth error        | 鉴权失败。   |     |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。  |
+
 ## 获取 app 下用户属性总大小
 
 获取该 app 下所有用户的属性数据大小，单位为字节。
@@ -314,8 +347,8 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述           |
+| :-------------- | :----- | :------- | :----------------------------------------- |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
@@ -351,6 +384,16 @@ curl -X GET -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/me
   "duration": 55
 }
 ```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | unauthorized          | unauthorized        | 鉴权失败。   | 获取应用容量时需要使用 app 级别权限。    |
+| 401     | metadata_error          | auth error        | 鉴权失败。   | 使用正确的 token。     |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。   |
 
 ## 删除用户属性
 
@@ -405,3 +448,12 @@ curl -X DELETE -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX
   "data": true
 }
 ```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | metadata_error          | auth error        | 鉴权失败。   |  使用正确的 token。    |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow        | 用户属性功能未开通。  | 联系商务开通用户属性功能。 |

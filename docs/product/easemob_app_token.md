@@ -80,3 +80,15 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
   "application": "8be024f0-e978-11e8-b697-5d598d5f8402"
 }
 ```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型     | 错误提示         | 可能原因           | 处理建议       |
+| :---------- | :-------- | :-------------- | :------------ | :----|
+| 400         | illegal_argument    | client_id must be provided.        | 请求 body 中没有传 `client_id`。| 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **Client ID** 参数。 |
+| 400         | illegal_argument                   | client_secret must be provided    | 请求 body 中没有传 `client_secret`。 | 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **ClientSecret** 参数。 |
+| 400         | invalid_grant                      | client_id does not match   | app key 对应的 `client_id` 与请求 body 中传入的 `client_id` 不匹配。 | 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **Client ID** 参数，确保请求 body 中传入的与该参数一致。 |
+| 400         | invalid_grant                      | client_secret does not match     | app key 对应的 `client_secret` 与请求 body 中传入的 `client_secret` 不匹配。 | 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **ClientSecret** 参数，确保请求 body 中传入的与该参数一致。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |

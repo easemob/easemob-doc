@@ -106,6 +106,18 @@ curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX?us
 }
 ```
 
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型      | 错误提示                                          | 可能原因            | 处理建议           |
+|:---------|:-------------------|:----------------------------------------------|:----------------|:---------------|
+| 400      | service open exception  | this appKey not open message roaming   | 消息漫游服务未开通。  | 联系商务开通。  |
+| 400      | param exception  | delete msg list limit can not greater than 50 | 一次删除的消息 ID 数量超过限制（50）。 | 减少一次删除的消息 ID 数量。 |
+| 400      | Bad Request  | Bad Request    | 缺少必填参数，例如查询参数 `userId` 或 `msgIdList`。 | 校验参数是否传入正确。  |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 根据消息 ID 单向删除群聊漫游消息
 
 根据消息 ID 单向删除指定用户的某个群聊会话的一条或多条漫游消息。
@@ -179,6 +191,17 @@ curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX?g
 }
 ```
 
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型     | 错误提示     | 可能原因    | 处理建议   |
+|:---------|:----------|:-----------------------|:--------|:--------------|
+| 400   | service open exception    | this appKey not open message roaming | 消息漫游服务未开通。 | 联系商务开通。 |
+| 400      | param exception         | delete msg list limit can not greater than 50 | 一次删除的消息 ID 数量超过限制（50）。 | 减少一次删除的消息 ID 数量。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 单向清空指定用户的漫游消息
 
 清空指定用户当前时间及之前的所有漫游消息。
@@ -240,6 +263,16 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/rest/message/roaming/user/XXXX/delete/al
   "timestamp": 1710309184114
 }
 ```
+
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型    | 错误提示       | 可能原因    | 处理建议       |
+|:---------|:-----------|:--------------|:--------------|:----------------------|
+| 400      | service open exception    | this appKey not open message roaming    | 消息漫游服务未开通。 | 联系商务开通。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 单向清空单聊会话某个时间点及之前的漫游消息
 
@@ -312,6 +345,16 @@ curl -L -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX/tim
 }
 ```
 
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型    | 错误提示       | 可能原因    | 处理建议       |
+|:---------|:-------------------|:--------------|:--------------|:----------------------|
+| 400      | service open exception    | this appKey not open message roaming    | 消息漫游服务未开通。 | 联系商务开通。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 单向清空群组或聊天室会话某个时间点及之前的漫游消息
 
 你可以调用该 RESTful API 清空指定用户的某个群组或聊天室会话在某个时间点及之前的的漫游消息。
@@ -383,9 +426,12 @@ curl -L -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX/ti
 }
 ```
 
-## 常见错误
+### 错误码
 
-| HTTP 返回码<div style="width: 220px;"></div> | 说明                                        |
-| :------------------------- | :----------------------------------------------------------- |
-| 401                        | （未授权）请求要求身份验证。对于需要 token 的接口，服务器可能返回此响应。 |
-| 403                        | （禁止）服务器拒绝请求。例如，调用频率超过了 100 次/秒/App Key。 |
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型    | 错误提示       | 可能原因    | 处理建议       |
+|:---------|:-------------------|:--------------|:--------------|:----------------------|
+| 400      | service open exception    | this appKey not open message roaming    | 消息漫游服务未开通。 | 联系商务开通。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

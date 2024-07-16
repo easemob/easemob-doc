@@ -154,6 +154,18 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
 }
 ```
 
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型    | 错误提示       | 可能原因    | 处理建议       |
+|:---------|:-------------------|:--------------|:--------------|:----------------------|
+| 400      | invalid_request_body     | Request body is invalid. Please check body is correct.    | 请求体格式不正确。  | 检查请求体内容是否合法(字段类型是否正确)。 |
+| 400      | illegal_argument   | message body not allow empty  | 请求参数 `body` 是空。  | 输入正确的请求参数 `body`。         |
+| 400      | illegal_argument    | type not allow empty  | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。         |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 导入群聊消息
 
 你可以在数据迁移时导入群聊消息。每次调用该接口只能导入一条消息。
@@ -265,3 +277,15 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/
   "applicationName": "XXXX"
 }
 ```
+
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型       | 错误提示   | 可能原因    | 处理建议                  |
+|:---------|:-------------------|:----------------|:--------------|:----------------------|
+| 400      | invalid_request_body | Request body is invalid. Please check body is correct.   | 请求体格式不正确。  | 检查请求体内容是否合法(字段类型是否正确)。 |
+| 400      | illegal_argument   | message body not allow empty    | 请求参数 `body` 是空。    | 输入正确的请求参数 `body`。  |
+| 400      | illegal_argument  | type not allow empty   | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

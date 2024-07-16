@@ -46,13 +46,13 @@
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本篇涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
-### HTTP 请求
+## HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatmessages/{time}
 ```
 
-#### 路径参数
+### 路径参数
 
 | 参数   | 类型   | 是否必需 | 描述         |
 | :----- | :----- | :------- | :------------- |
@@ -60,16 +60,16 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/{time}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :------------------ |
 | `Accept`        | String | 是       | 内容类型，请填 `application/json`。       |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+## HTTP 响应
 
-#### 响应 body
+### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -82,9 +82,9 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/{time}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 示例
+## 示例
 
-#### 请求示例
+### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -92,7 +92,7 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/{time}
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatmessages/2018112717'
 ```
 
-#### 响应示例
+### 响应示例
 
 ```json
 {
@@ -111,7 +111,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 历史消息记录的内容
+## 历史消息记录的内容
 
 查询历史消息记录成功后，你可以访问 URL 下载历史消息记录文件，查看历史消息记录的具体内容。
 
@@ -152,7 +152,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-#### 文本消息
+### 文本消息
 
 文本消息的 bodies 包含如下字段：
 
@@ -167,7 +167,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 "bodies": [{"msg":"welcome to easemob!", "type":"txt"}]
 ```
 
-#### 图片消息
+### 图片消息
 
 图片消息的 bodies 包含如下字段：
 
@@ -200,7 +200,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-#### 位置消息
+### 位置消息
 
 位置消息的 bodies 包含如下字段：
 
@@ -223,7 +223,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
     }]
 ```
 
-#### 语音消息
+### 语音消息
 
 语音消息的 bodies 包含如下字段：
 
@@ -252,7 +252,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
    ]
 ```
 
-#### 视频消息
+### 视频消息
 
 视频消息的 bodies 包含如下字段：
 
@@ -285,7 +285,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   "url": "https://XXXX/XXXX/chatdemoui/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"   }]
 ```
 
-#### 文件消息
+### 文件消息
 
 文件消息的 bodies 包含如下字段：
 
@@ -312,7 +312,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ]
 ```
 
-#### 透传消息
+### 透传消息
 
 透传消息的 bodies 包含如下字段：
 
@@ -333,7 +333,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ]
 ```
 
-#### 自定义消息
+### 自定义消息
 
 自定义消息的 bodies 包含如下字段：
 
@@ -360,3 +360,14 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
  }
 ]
 ```
+
+## 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型   | 错误提示      | 可能原因    | 处理建议   |
+|:---------|:-------------------|:--------------------|:---------|:--------------|
+| 400      | illegal_argument | illegal arguments: appkey: XXXX#XXXX, time: xxxxxx | 请求参数 `time` 格式不正确。  | 输入正确的请求参数 `time`:UTC 时间，使用 ISO8601 标准，格式为 yyyyMMddHH。例如 time 为 2018112717，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。若海外集群为 UTC 时区，需要根据自己所在的时区进行时间转换。 |
+| 400      | illegal_argument | illegal arguments: appkey: XXXX#XXXX, time: xxxxxx, maybe chat message history is expired or unstored" | `time` 对应时间段内的历史文件已过期或者暂未存储。 | 输入正确的请求参数 `time`。 |
+| 404      | storage_object_not_found | Failed to find chat message history download url for appkey: XXXX#XXXX, time: xxxxxx" | 对应 `time` 对应时间段内不存在历史文件。      |  |
+
