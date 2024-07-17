@@ -161,7 +161,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(
     attributeKey,
     attributeValue,
     autoDelete, 
-    new EMResultCallBack<Map<String, String>>() {
+    new EMCallBack() {
         @Override
         public void onSuccess() {
 
@@ -196,7 +196,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributeForced(
     attributeKey,
     attributeValue,
     autoDelete, 
-    new EMResultCallBack<Map<String, String>>() {
+    new EMCallBack() {
         @Override
         public void onSuccess() {
 
