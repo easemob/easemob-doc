@@ -140,6 +140,8 @@ curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users" -d '{"username":"user1",
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用)。 |
 | 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐包的限制。 | 联系商务开通付费版。   |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ### 授权注册单个用户
 
 授权注册模式指注册环信即时通讯 IM 账号时携带管理员身份认证信息，即 App Token。
@@ -245,6 +247,8 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 401         | unauthorized                       | Open registration doesn't allow, so register user need token| 授权注册模式，注册用户时需要 token。 | 请求时携带 token。 |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用) |
 | 429         | resource_limited                   | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐版本的限制。 | 联系商务开通付费版。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 批量注册用户
 
@@ -406,6 +410,8 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 | 429         | resource_limited                   | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐版本的限制。 | 联系商务开通付费版。 |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 获取用户详情
 
 ### 获取单个用户的详情
@@ -424,8 +430,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :-------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -494,6 +500,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | 401         | unauthorized                       | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用)。 |
 | 404         | service_resource_not_found         | Service resource not found  | 用户不存在。  | 先注册用户或者检查用户名是否正确。  |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 批量获取用户详情
 
@@ -656,6 +664,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | 401         | unauthorized       | Unable to authenticate (OAuth)     | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。|
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。|
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 删除用户账号
 
 ### 删除单个用户
@@ -674,8 +684,8 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述        |
+| :-------------- | :----- | :------- | :------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -735,6 +745,8 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | 401         | unauthorized   | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 | 404         | service_resource_not_found         | Service resource not found   | 用户不存在。    | 先注册用户或者检查用户名是否正确。  |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 批量删除用户
 
@@ -838,6 +850,8 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | 401         | unauthorized   | Unable to authenticate (OAuth)  | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 修改用户密码
 
 可以通过服务端接口修改用户的登录密码，不需要提供原密码。
@@ -856,8 +870,8 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 
 | 参数            | 类型   | 是否必需 | 描述              |
 | :-------------- | :----- | :------- | :---------------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。      |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。      |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### 请求 body
@@ -913,6 +927,8 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 | 401         | unauthorized    | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 | 404         | entity_not_found  | User null not found    | 用户不存在。  | 先注册用户或者检查用户名是否正确。    |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 获取用户在线状态
 
@@ -985,6 +1001,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | :----- | :----------- | :--| :-------------- | :---|
 | 401         | unauthorized     | Unable to authenticate (OAuth)       | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。   |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 批量获取用户在线状态
 
@@ -1067,6 +1085,8 @@ curl -X POST https://XXXX/XXXX/chatdemoui/users/batch/status -H 'Authorization: 
 | 400   | illegal_argument      | request body exceeds maximum limit, maximum limit is 100     | 请求 body 中 `usernames` 的用户数量超过 100 个。 | 请调整`usernames` 中传入的用户 ID 数量。 |
 | 401 | unauthorized  | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
 | 404  | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 |  检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 获取指定账号的在线登录设备列表
 
@@ -1152,6 +1172,8 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/users/XXXX/resources' \
 | :----- | :--------- | :--------------- | :---------- | :------------- |
 | 401         | unauthorized    | Unable to authenticate (OAuth)     | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 用户全局禁言
 
@@ -1255,6 +1277,8 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/mutes' \
 | 401         | unauthorized                       | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。              |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ### 查询单个用户 ID 全局禁言
 
 查询单个用户的单聊、群聊和聊天室的全局禁言详情。
@@ -1282,13 +1306,13 @@ GET https://{host}/{org_name}/{app_name}/mutes/{username}
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段             | 类型   | 描述                                                                                                                                                                                 |
-| :--------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data.userid`    | String | 设置禁言的用户 ID。                                                                                                                                                                  |
+| 字段             | 类型   | 描述      |
+| :--------------- | :----- | :------------------ |
+| `data.userid`    | String | 设置禁言的用户 ID。      |
 | `data.chat`      | Int    | 单聊剩余禁言时间，单位为秒。最大值为 `2147483647`。<br/> - > 0：该用户 ID 剩余的单聊禁言时长。<br/> - `0`：该用户的单聊消息禁言已取消。 <br/> - `-1`：该用户被设置永久单聊消息禁言。 |
-| `data.groupchat` | Int    | 群组消息剩余禁言时长，单位为秒，规则同单聊禁言。                                                                                                                                     |
-| `data.chatroom`  | Int    | 聊天室消息剩余禁言时长，单位为秒，规则同单聊禁言。                                                                                                                                   |
-| `data.unixtime`  | Int    | 当前操作的 Unix 时间戳。                                                                                                                                                             |
+| `data.groupchat` | Int    | 群组消息剩余禁言时长，单位为秒，规则同单聊禁言。     |
+| `data.chatroom`  | Int    | 聊天室消息剩余禁言时长，单位为秒，规则同单聊禁言。       |
+| `data.unixtime`  | Int    | 当前操作的 Unix 时间戳。    |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -1337,6 +1361,8 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
 | 400         | required_property_not_found        | Entity user requires a property named username     | 用户不存在。 | 先注册用户或者检查用户名是否正确。 |
 | 401         | unauthorized      | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。              |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。|
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 查询 app 下的所有全局禁言的用户
 
@@ -1454,6 +1480,8 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes?pageNum=1&pageSize=10' \
 | 401         | unauthorized    | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。              |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 获取用户离线消息数据
 
 ### 获取用户离线消息数量
@@ -1476,8 +1504,8 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/offline_msg_coun
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :------- | :-------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -1530,6 +1558,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | 401         | unauthorized                       | Unable to authenticate (OAuth)  | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ### 获取指定离线消息的投递状态
 
 获取用户的指定离线消息的投递状态，即查看该消息是否已投递。
@@ -1551,8 +1581,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/offline_msg_status/{ms
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :-------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -1562,8 +1592,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/offline_msg_status/{ms
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中的字段如下：
 
-| 字段   | 类型 | 描述                                                                                                                                         |
-| :----- | :--- | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| 字段   | 类型 | 描述     |
+| :----- | :--- | :--------------- |
 | `data` | JSON | 指定离线消息的投递状态。数据格式为 "消息 ID": "投递状态"。消息的投递状态有两种：<br/> - `delivered`：已投递；<br/> - `undelivered`：未投递。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -1605,6 +1635,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | 401         | unauthorized                       | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。     |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 用户账号封禁、解禁和强制下线
 
 ### 账号封禁
@@ -1623,8 +1655,8 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :------- | :------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
@@ -1684,6 +1716,8 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 | 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#开放注册单个用户)或者检查用户名是否正确。 |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ### 账号解禁
 
 环信即时通讯 IM 提供了对用户的禁用以及解禁接口操作。对用户禁用后，用户将立即下线并无法登录进入环信即时通讯 IM，直到被解禁后才能恢复登录。该功能常于对异常用户的即时处理场景。
@@ -1700,8 +1734,8 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述         |
+| :-------------- | :----- | :------- | :--------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
@@ -1712,8 +1746,8 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段     | 类型   | 描述                                                                       |
-| :------- | :----- | :------------------------------------------------------------------------- |
+| 字段     | 类型   | 描述                 |
+| :------- | :----- | :----------------------------- |
 | `action` | String | 执行的操作。在该响应中，该参数的值为 `activate user`，表示对账号进行解禁。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -1744,11 +1778,13 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
-| HTTP 状态码 | 错误类型                           | 错误提示                         | 可能原因                           | 处理建议                         |
-| :---------- | :------------------| :--------------------------------------------| :------------------| :--------------------------------------------|
+| HTTP 状态码 | 错误类型     | 错误提示      | 可能原因       | 处理建议    |
+| :---------- | :---------| :---------------------| :----------| :--------|
 | 401         | unauthorized                       | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 | 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#开放注册单个用户)或者检查用户名是否正确。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 强制用户下线
 
@@ -1768,8 +1804,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述     |
+| :-------------- | :----- | :------- | :---------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -1780,7 +1816,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 字段          | 类型 | 描述                                                            |
-| :------------ | :--- | :-------------------------------------------------------------- |
+| :------------ | :--- | :----------------------------------- |
 | `data.result` | Bool | 用户是否已被强制下线：<br/> - `true`：是；<br/> - `false`：否。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
@@ -1821,6 +1857,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | :---------- | :-------| :------| :---------| :------------------|
 | 401   | unauthorized     | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
 | 404   | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 强制用户从单设备下线
 
@@ -1908,6 +1946,8 @@ curl -X DELETE -H 'Accept: application/json'   \
 | :---------- | :-------| :------| :---------| :------------------|
 | 401  | unauthorized    | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
 | 404  | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 
 
