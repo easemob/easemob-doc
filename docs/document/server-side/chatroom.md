@@ -646,7 +646,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 | `description` | String | 是       | 聊天室描述，最大长度为 512 个字符。                                             |
 | `maxusers`    | Int    | 否       | 聊天室最大成员数（包括聊天室所有者）。取值范围为 [1,10,000]，默认值为 `1000`。如需调整请联系商务。 |
 | `owner`       | String | 是       | 聊天室所有者。                                                                |
-| `members`     | Array  | 否       | 聊天室普通成员和管理员的用户 ID 数组，不包含聊天室所有者的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。若传该参数，确保至少设置一个数组元素。                     |
+| `members`     | Array  | 否       | 聊天室普通成员和管理员的用户 ID 数组，不包含聊天室所有者的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。若传该参数，确保至少设置一个数组元素。   |
 | `custom`      | String | 否       | 聊天室扩展信息，例如可以给聊天室添加业务相关的标记，不要超过 1,024 个字符。     |
 
 #### HTTP 响应
@@ -877,6 +877,7 @@ curl -X PUT -H 'Content-Type: application/json' \
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。|
 | 404     | resource_not_found | grpID XX does not exist! | 聊天室 ID 不存在。 | 传入存在的合法的聊天室 ID。 |
 | 404     | resource_not_found | username XX doesn't exist! | 传入的聊天室新所有者的用户 ID 不存在。 | 传入存在的合法的用户 ID。|
+| 403     | forbidden_op     | "new owner and old owner are the same" | 新的聊天室所有者和旧的所有者不能是同一聊天室成员。 | 传入的聊天室新所有者的用户 ID 不能与旧的所有者的用户 ID 相同。
 
 ### 解散聊天室
 

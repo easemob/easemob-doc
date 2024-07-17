@@ -333,23 +333,23 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述     |
+| :-------------- | :----- | :------- | :--------------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ##### 请求 body
 
-| 参数                  | 类型   | 是否必需 | 描述                                                                                                                              |
-| :-------------------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| 参数                  | 类型   | 是否必需 | 描述           |
+| :-------------------- | :----- | :------- | :---------------------------- |
 | `groupname`           | String | 否       | 群组名称，最大长度为 128 字符。 |
 | `description`         | String | 否       | 群组描述，最大长度为 512 字符。 |
 | `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。 |
-| `membersonly`         | Bool   | 否       | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。                                                   |
+| `membersonly`         | Bool   | 否       | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。    |
 | `allowinvites`        | Bool   | 否       | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群；<br/> - `false`：只有群主或群管理员才可以邀请用户入群。 |
 | `invite_need_confirm` | Bool   | 否       | 受邀人加入群组前是否需接受入群邀请：<br/> - `true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
-| `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。                                                             |
+| `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。  |
 | `public`              | Bool   | 否       | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                                                                   |
 
 #### HTTP 响应
@@ -1551,7 +1551,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | forbidden_op | an not join this group, reason:user: XX already in group: XX\n | 用户已经在群里。 | 不要重复加入。 |
+| 403     | forbidden_op | can not join this group, reason:user: XX already in group: XX\n | 用户已经在群里。 | 不要重复加入。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
 | 404     | resource_not_found | username XX doesn't exist! | 要添加的用户不存在 | 使用合法的用户，即 `username` 传入存在的用户 ID。|
 | 403     | exceed_limit | user XX has joined too many groups! | 用户可加入的群组数达到上限。 | 退出不用的群组或联系商务调整上限。 | 
@@ -1663,9 +1663,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| 参数            | 类型   | 是否必需 | 描述         |
+| :-------------- | :----- | :------- | :---------------------------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。     |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -2315,8 +2315,8 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述          |
+| :-------------- | :----- | :------- | :------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
@@ -2474,8 +2474,8 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{us
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述           |
+| :-------------- | :----- | :------- | :---------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
@@ -2836,9 +2836,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| 参数            | 类型   | 是否必需 | 描述           |
+| :-------------- | :----- | :------- | :---------- |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。   |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -2913,8 +2913,8 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :------- | :------------------------ |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -2925,7 +2925,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 字段           | 描述                                                                              |
-| :------------- | :-------------------------------------------------------------------------------- |
+| :------------- | :----------------------- |
 | `data.result`  | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。                   |
 | `data.action`  | 执行操作。在该响应中，该字段的值为 `add_user_whitelist`，表示将成员加入群白名单。 |
 | `data.user`    | 添加的用户 ID。                                                                   |
@@ -2994,16 +2994,16 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述    |
+| :-------------- | :----- | :------- | :----------------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ##### 请求 body
 
-| 参数        | 类型  | 描述                            |
-| :---------- | :---- | :------------------------------ |
+| 参数        | 类型  | 描述           |
+| :---------- | :---- | :----------------- |
 | `usernames` | Array | 待添加至群组白名单中的用户 ID 数组，每次最多可传 60 个用户 ID。 |
 
 #### HTTP 响应
@@ -3013,7 +3013,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 字段           | 类型   | 描述                                                                                |
-| :------------- | :----- | :---------------------------------------------------------------------------------- |
+| :------------- | :----- | :--------------- |
 | `data` | JSON Array | 响应数据。|
 |  - `result`  | Bool   | 添加结果：<br/> - `true`：添加成功；<br/> - `false`：添加失败。                     |
 |  - `action`  | String | 执行的操作。在该响应中，该字段的值为 `add_user_whitelist`，表示将成员加入群白名单。 |
