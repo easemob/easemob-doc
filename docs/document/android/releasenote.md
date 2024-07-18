@@ -2,6 +2,16 @@
 
 <Toc />
 
+## 版本 V4.8.1 Dev 2024-07-18（开发版）
+
+### 优化
+
+更新第三方推送 SDK 版本：
+- OPPO 推送更新至 `oppo_push_3.5.2.aar`。
+- vivo 推送更新至 `vivo_push_v4.0.4.0_504.aar`。
+- 小米推送更新至 `MiPush_SDK_Client_6_0_1-C_3rd.aar`。
+- 魅族推送更新至 `com.meizu.flyme.internet:push-internal:4.3.0`。
+
 ## 版本 V4.8.0 Dev 2024-07-01（开发版）
 
 ### 新增特性

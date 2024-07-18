@@ -181,7 +181,7 @@ EMClient.getInstance().init(this, options);
 ```gradle
 dependencies {
    // FCM 推送
-   classpath 'com.google.gms:google-services:4.3.8'
+   classpath 'com.google.gms:google-services:4.4.1'
 }
 ```
 
@@ -192,7 +192,7 @@ dependencies {
    // ...
 
    // FCM：导入 Firebase BoM
-   implementation platform('com.google.firebase:firebase-bom:28.4.1')
+   implementation platform('com.google.firebase:firebase-bom:32.7.4')
    // FCM：声明 FCM 的依赖项
    // 使用 BoM 时，不要在 Firebase 库依赖中指定版本
    implementation 'com.google.firebase:firebase-messaging'
@@ -914,10 +914,11 @@ private void getIntentData(Intent intent) {
    EMOptions options = new EMOptions();
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
-   // 需设置 enableVivoPush.agreePrivacyStatement 参数，明确是否同意隐私声明：
+   // 需设置 agreePrivacyStatement boolean类型参数，明确是否同意隐私声明：
    // true：若用户未同意隐私声明，而这里设为 `true`，可能存在合规风险，需业务自己承担合规风险。
    // false：不同意隐私声明, 会影响推送功能
-   builder.enableVivoPush();
+   // 如使用环信自动登录功能 agreePrivacyStatement 需由客户自行本地记录用户授权行为
+   builder.enableVivoPush(agreePrivacyStatement);
    // 将 pushconfig 设置为 ChatOptions
    options.setPushConfig(builder.build());
    // 初始化 IM SDK
@@ -940,13 +941,13 @@ private void getIntentData(Intent intent) {
 
 **步骤三、集成魅族推送 SDK。**
 
-1. 配置魅族推送 jar 包：
+1. 配置魅族推送远程依赖包：
    在 app level/build.gradle 中添加依赖。
 
    ```gradle
    dependencies{
-       // 该 jar 托管在 jcenter 中，请确保当前项目已配置 jcenter 仓库。
-       implementation 'com.meizu.flyme.internet:push-internal:3.7.0@aar'
+       // 从PushSDK4.1.0开始 其已发布⾄ mavenCentral
+       implementation 'com.meizu.flyme.internet:push-internal:4.3.0'
    }
    ```
 
