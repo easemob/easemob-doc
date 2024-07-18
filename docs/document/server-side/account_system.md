@@ -1390,7 +1390,7 @@ GET https://{host}/{org_name}/{app_name}/mutes
 | 参数            | 类型   | 是否必需 | 描述                                     |
 | :-------------- | :----- | :------- | :--------------------------------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。      |
-| `Authorization` | String | 是       | 鉴权 token，管理员 token（含）以上权限。 |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
 
