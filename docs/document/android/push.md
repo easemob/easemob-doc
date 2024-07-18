@@ -181,7 +181,7 @@ EMClient.getInstance().init(this, options);
 ```gradle
 dependencies {
    // FCM 推送
-   classpath 'com.google.gms:google-services:4.3.8'
+   classpath 'com.google.gms:google-services:4.4.1'
 }
 ```
 
@@ -192,7 +192,7 @@ dependencies {
    // ...
 
    // FCM：导入 Firebase BoM
-   implementation platform('com.google.firebase:firebase-bom:28.4.1')
+   implementation platform('com.google.firebase:firebase-bom:32.7.4')
    // FCM：声明 FCM 的依赖项
    // 使用 BoM 时，不要在 Firebase 库依赖中指定版本
    implementation 'com.google.firebase:firebase-messaging'
@@ -681,7 +681,7 @@ private void getIntentData(Intent intent) {
 
 #### 小米推送集成
 
-环信即时通讯 IM SDK 中已经集成了小米推送（基于 `MiPush_SDK_Client_3_6_12.jar`）相关逻辑，你还需要完成以下步骤：
+环信即时通讯 IM SDK 中已经集成了小米推送（基于 ` MiPush_SDK_Client_6_0_1-C_3rd.aar`）相关逻辑，你还需要完成以下步骤：
 
 **步骤一、在小米开放平台创建应用。**
 
@@ -693,7 +693,7 @@ private void getIntentData(Intent intent) {
 
 **步骤三 集成小米推送 SDK。**
 
-1. 下载 [小米推送 SDK](https://admin.xmpush.xiaomi.com/zh_CN/mipush/downpage) ，将 Jar 包添加到项目中。
+1. 下载 [小米推送 SDK](https://admin.xmpush.xiaomi.com/zh_CN/mipush/downpage) ，将 aar 包添加到项目中。
 
 2. 配置 `AndroidManifest.xml`，详见 [官方文档](https://dev.mi.com/console/doc/detail?pId=41#_0_0)。
 
@@ -806,12 +806,12 @@ private void getIntentData(Intent intent) {
 
 **步骤三、集成 OPPO 推送 SDK。**
 
-1. 配置 OPPO 推送 jar 包：在 OPPO 推送官网下载推送 SDK 包，把 jar 包放到 libs 目录下并 sync 。也可以直接使用环信 Android IM Demo 中集成的 OPPO 推送的 jar 包。
+1. 配置 OPPO 推送 aar 包：在 OPPO 推送官网下载推送 SDK 包，把 aar 包放到 libs 目录下并 sync 。也可以直接使用环信 Android IM Demo 中集成的 OPPO 推送的 aar 包。
 
 2. 配置 `AndroidManifest.xml`。
 
 :::tip
-OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q 上接收 OPPO 推送需要升级环信 SDK 到 3.7.1 以及之后的版本，并使用 OPPO 推送 2.1.0 的包。从 3.9.1 版本开始，升级 OPPO 推送版本到 3.0.0。
+从 4.8.1 版本开始，oppo 推送 SDK 版本更新至 3.5.2 版本。
 :::
 
    - 推送服务需要的权限列表：
@@ -846,7 +846,7 @@ OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q 上接收 OPPO 推送�
    <!-- OPPO 推送配置 end -->
    ```
 
-3. 在 SDK 初始化的时候，配置启用 OPPO 推送。
+1. 在 SDK 初始化的时候，配置启用 OPPO 推送。
 
    ```java
    EMOptions options = new EMOptions();
@@ -859,7 +859,7 @@ OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q 上接收 OPPO 推送�
    EMClient.getInstance().init(this, options);
    ```
 
-4. 调用 OPPO 推送的初始化。
+2. 调用 OPPO 推送的初始化。
 
    ```java
    HeytapPushManager.init(context, true);
@@ -867,7 +867,7 @@ OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q 上接收 OPPO 推送�
 
 #### VIVO 推送集成
 
-环信即时通讯 IM SDK 中已经集成了 VIVO 推送（基于 `vivo_push_v2.3.1.jar`）相关逻辑，你还需要完成以下步骤：
+环信即时通讯 IM SDK 中已经集成了 VIVO 推送（基于 `vivo_push_v4.0.4.0_504.aar`）相关逻辑，你还需要完成以下步骤：
 
 **步骤一、在 VIVO 开发者后台创建应用。**
 
@@ -887,23 +887,16 @@ OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q 上接收 OPPO 推送�
 
    ```xml
    <!-- VIVO 推送配置 start -->
-   <!--VIVO Push SDK 的版本信息-->
-   <meta-data
-       android:name="sdk_version_vivo"
-       android:value="484"/>
-   <meta-data
-       android:name="local_iv"
-       android:value="MzMsMzQsMzUsMzYsMzcsMzgsMzksNDAsNDEsMzIsMzgsMzcsMzYsMzUsMzQsMzMsI0AzNCwzMiwzMywzNywzMywzNCwzMiwzMywzMywzMywzNCw0MSwzNSwzNSwzMiwzMiwjQDMzLDM0LDM1LDM2LDM3LDM4LDM5LDQwLDQxLDMyLDM4LDM3LDMzLDM1LDM0LDMzLCNAMzQsMzIsMzMsMzcsMzMsMzQsMzIsMzMsMzMsMzMsMzQsNDEsMzUsMzIsMzIsMzI" />
    <service
        android:name="com.vivo.push.sdk.service.CommandClientService"
        android:permission="com.push.permission.UPSTAGESERVICE"
        android:exported="true" />
-   <activity
-       android:name="com.vivo.push.sdk.LinkProxyClientActivity"
-       android:exported="false"
-       android:screenOrientation="portrait"
-       android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-   <!--推送配置项-->
+   <receiver android:name="com.hyphenate.push.platform.vivo.EMVivoMsgReceiver" >
+       <intent-filter>
+           <!-- 接收推送消息 -->
+           <action android:name="com.vivo.pushclient.action.RECEIVE" />
+       </intent-filter>
+   </receiver>
    <meta-data
        android:name="com.vivo.push.api_key"
        android:value="开发者自己申请的 appKey" />
@@ -911,12 +904,7 @@ OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q 上接收 OPPO 推送�
        android:name="com.vivo.push.app_id"
        android:value="开发者自己申请的 appId" />
 
-   <receiver android:name="com.hyphenate.push.platform.vivo.EMVivoMsgReceiver" >
-       <intent-filter>
-           <!-- 接收推送消息 -->
-           <action android:name="com.vivo.pushclient.action.RECEIVE" />
-       </intent-filter>
-   </receiver>
+   
    <!-- VIVO 推送配置 end -->
    ```
 
@@ -926,7 +914,11 @@ OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q 上接收 OPPO 推送�
    EMOptions options = new EMOptions();
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
-   builder.enableVivoPush();
+   // 需设置 agreePrivacyStatement boolean类型参数，明确是否同意隐私声明：
+   // true：若用户未同意隐私声明，而这里设为 `true`，可能存在合规风险，需业务自己承担合规风险。
+   // false：不同意隐私声明, 会影响推送功能
+   // 如使用环信自动登录功能 agreePrivacyStatement 需由客户自行本地记录用户授权行为
+   builder.enableVivoPush(agreePrivacyStatement);
    // 将 pushconfig 设置为 ChatOptions
    options.setPushConfig(builder.build());
    // 初始化 IM SDK
@@ -949,13 +941,13 @@ OPPO 推送在 2.1.0 适配了 Android Q，在 Android Q 上接收 OPPO 推送�
 
 **步骤三、集成魅族推送 SDK。**
 
-1. 配置魅族推送 jar 包：
+1. 配置魅族推送远程依赖包：
    在 app level/build.gradle 中添加依赖。
 
    ```gradle
    dependencies{
-       // 该 jar 托管在 jcenter 中，请确保当前项目已配置 jcenter 仓库。
-       implementation 'com.meizu.flyme.internet:push-internal:3.7.0@aar'
+       // 从PushSDK4.1.0开始 其已发布⾄ mavenCentral
+       implementation 'com.meizu.flyme.internet:push-internal:4.3.0'
    }
    ```
 

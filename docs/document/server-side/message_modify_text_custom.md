@@ -77,19 +77,7 @@ PUT https://{host}/{org_name}/{app_name}/messages/rewrite/{msg_id}
 | `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。 |
 | `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败，常见的异常类型如下表所示。
-
-| 异常类型 |  HTTP 状态码  | 错误信息     | 错误描述    |
-| :-------- | :----- | :------ |:----- |
-| `UnsupportedMessageTypeException` | 400  | The message is of a type that is currently not supported for modification.  | 不支持修改的消息类型。目前只支持修改文本消息和自定义消息。   |
-| `InvalidMessageIdException`  | 400   | The provided message ID is not a valid number.  | 消息 ID 必须是数字。  |
-| `RewriteMessageNotAuthorizedException` | 401  | You are not authorized to edit this message.  | 修改的消息 ID 不属于当前app。   |
-| `EditLimitExceededException` | 403  | The message has reached its edit limit and cannot be modified further.  | 当前消息修改次数达到上限。目前，每条消息最多可修改 10 次。    | 
-| `EditFeatureNotEnabledException`  | 403   | The edit message feature is not enabled for this user or system.   | 消息修改功能未开通。使用该功能前，你需要联系环信商务开通。   | 
-| `MessageUnavailableException`  | 404  | The message is unavailable or has expired.   | 修改的消息不存在或者已经过期。   |
-| `RewriteMessageInternalErrorException` | 500  | An unknown error occurred while processing the request.   | 内部服务异常，修改消息失败。   |
-
-关于其他异常，你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 示例
 
@@ -154,6 +142,25 @@ curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
   "applicationName": "XXXX"
 }
 ```
+
+## 错误码
+
+调用该 REST API 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型   | 错误提示   | 可能原因      | 处理建议     |
+|:---------|:-------------------|:----------------------|:------------------|:----------------------|
+| 400      | invalid_request_body   | Request body is invalid. Please check body is correct.   | 请求体格式不正确。 | 检查请求体内容是否合法(字段类型是否正确)。 |
+| 400      |  illegal_argument  | new_msg is required     | 请求参数 `new_msg` 是空。  | 输入正确的请求参数 `new_msg`。 |
+| 400      | message_rewrite_error    | The message is of a type that is currently not supported for modification. | 请求参数 `msg.type` 内容不正确。 | 输入正确的请求参数 `msg.type`。|
+| 400 | InvalidMessageIdException  | The provided message ID is not a valid number.  | 消息 ID 必须是数字。 | 消息 ID 只能传入数字。   |
+| 404      | message_rewrite_error  | The message is unavailable or has expired.   | 请求参数 `msg_id` 不存在。 | 输入正确的请求参数 `msg_id`。     |
+| 401      | message_rewrite_error   | You are not authorized to edit this message.   | 请求参数 `msg_id` 不正确。 |  输入正确的请求参数 `msg_id`。 |
+| 403      | message_rewrite_error   | The message has reached its edit limit and cannot be modified further.   | 消息 `msg_id` 的修改次数到达上线。 | 消息修改次数限制在 10 次以内。   |
+| 403      | message_rewrite_error   | The rewrite message feature is not open.   | 消息修改功能未开通。  |  联系商务开通消息修改功能。  |
+| 404 | MessageUnavailableException  | The message is unavailable or has expired.   | 修改的消息不存在或者已经过期。 | 只能修改服务端存储的消息，若消息不存在或已过期，则不能修改。|
+| 500 | RewriteMessageInternalErrorException | An unknown error occurred while processing the request.   | 内部服务异常，修改消息失败。 |    |
+
+关于其他异常，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 
 

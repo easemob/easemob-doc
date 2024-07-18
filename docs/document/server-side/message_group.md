@@ -595,7 +595,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups"  \
+curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'  \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -681,15 +681,15 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups" \
- -H 'Content-Type: application/json' \
- -H 'Accept: application/json' \ 
- -H "Authorization:Bearer <YourAppToken>" \
- -d '{
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json'  \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-d '{
   "from": "user1",
   "to": ["184524748161025"],
   "type": "cmd",
-  "body":{
-    "action":"action1"
+  "body": {
+    "action": "action1"
   }
 }'
 ```
@@ -910,4 +910,38 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups/users' \
   "applicationName": "XXXX"
 }
 ```
+
+## 错误码
+
+1. 调用发送群聊消息的接口发送各类消息时，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型      | 错误提示        | 可能原因      | 处理建议    |
+|:---------|:-------------------|:------------|:-----------|:---------|
+| 400      | invalid_request_body                   | Request body is invalid. Please check body is correct. | 请求体格式不正确。 | 检查请求体内容是否合法(字段类型是否正确)。 |
+| 400      | message_send_error | param from can't be empty   | 请求参数 `from` 是空字符串。| 输入正确的请求参数 `from`。  |
+| 400      | message_send_error | param to can't be empty   | 请求参数 `to` 是空数组。| 输入正确的请求参数 `to`。每次最多可向 3 个群组发送消息。   |
+| 400      | message_send_error | param type can't be empty | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。         |
+| 400      | message_send_error | param body can't be empty    | 请求参数 `body` 是空 JSON。 | 输入正确的请求参数 `body`。         |
+| 400      | message_send_error | param ext must be JSONObject  | 请求参数 `ext` 类型不正确。 | 输入正确的请求参数 `ext`（JSON 格式）。  |
+| 400      | message_send_error | params to's size can't exceed limit 3  | 请求参数 `to` 数量超出最大限制 3 个群组 ID。 | 输入正确的请求参数 `to`（数量限制在 3 个群组 ID 以内）。 |
+| 400      | message_send_error | message is too large    | 请求体内容中 `body` 和 `ext` 字段的内容过大。  | 限制 `body` 和 `ext` 字段的内容。   |
+| 403      | message_send_error | message send reach limit  | 消息发送频率超出限制(默认 1 秒内只允许发送 20 条群聊消息) | 限制消息发送频率，详见[文档说明](message_group.html)。|
+
+2. 对于定向消息来说，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型      | 错误提示          | 可能原因       | 处理建议       |
+|:---------|:-------------------|:-------------------|:-----------|:----------------------|
+| 400      | invalid_request_body     | Request body is invalid. Please check body is correct. | 请求体格式不正确。    | 检查请求体内容是否合法(字段类型是否正确)。 |
+| 400      | message_send_error | param from can't be empty | 请求参数 `from` 是空字符串。   | 输入正确的请求参数 `from`。  |
+| 400      | message_send_error | param to can't be empty  | 请求参数 `to` 是空数组。  | 输入正确的请求参数 `to`。  |
+| 400      | message_send_error | param type can't be empty | 请求参数 `type` 是空字符串。   | 输入正确的请求参数 `type`。         |
+| 400      | message_send_error | param body can't be empty  | 请求参数 `body` 是空 JSON。   | 输入正确的请求参数 `body`。         |
+| 400      | message_send_error | param ext must be JSONObject  | 请求参数 `ext` 类型不正确。  | 输入正确的请求参数 `ext`（JSON 格式）。  |
+| 400      | message_send_error | param users can't be empty  | 请求参数 `users` 是空数组。 | 输入正确的请求参数 `users`。每次最多可传 20 个用户 ID。 |
+| 400      | message_send_error | params to's size can't exceed limit 3   | 请求参数 `to` 数量超出最大限制 3。 | 输入正确的请求参数 `to`。每次最多能传入 3 个群组 ID。 |
+| 400      | message_send_error | message is too large   | 请求体内容中 `body` 和 `ext` 字段的内容过大。 | 限制 `body` 和 `ext` 字段的内容。         |
+| 403      | message_send_error | message send reach limit  | 消息发送频率超出限制(默认 1 秒内只允许发送 100 条定向消息) | 限制消息发送频率，详见[文档说明](message_group.html#发送定向消息)。  |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 

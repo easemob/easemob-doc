@@ -8,7 +8,7 @@
 {
     "title": "环信推送服务",
     "content": "你好，欢迎使用环信推送服务",
-    "sub_title": "环信",
+    "subTitle": "环信",
     "config": {
         "clickAction": {
             "url": "https://www.easemob.com"

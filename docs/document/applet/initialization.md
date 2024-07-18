@@ -147,6 +147,7 @@ conn.addEventHandler("handlerId", {
   onConnected: () => {
     console.log("onConnected");
   },
+  // 自 4.8.0 版本，`onDisconnected` 事件新增断开原因回调参数, 告知用户触发 `onDisconnected` 的原因。
   onDisconnected: () => {
     console.log("onDisconnected");
   },
@@ -224,3 +225,7 @@ logger.setLevel(0);
 ```javascript
 logger.download();
 ```
+
+## 日志上报
+
+自 4.8.1 版本，小程序 SDK 支持日志上报功能, 即将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。

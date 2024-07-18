@@ -118,6 +118,18 @@ curl -g -X POST 'https://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H
 }
 ```
 
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 处理建议        |
+|:---------|:--------------------|:-----------|:----------|:------------|
+| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction 功能未开通。 | 请在环信即时通讯控制台开通 Reaction 服务。 |
+| 400      | Bad Request         | The quantity has exceeded the limit!  | 一条消息上的 Reaction 数量达到上限。| 每条消息默认可添加 20 个 Reaction。若需提升该上限，需联系环信商务。|
+| 400      | Bad Request                | the user operation is illegal!                      | 不是会话双方。 | 只有会话双方才能操作 Reaction。       |
+| 400      | Bad Request                | the user is already operation this message                      | 同一个用户重复添加相同的 Reaction。 | 同一用户不能重复添加相同的 Reaction。      |
+
+
 ## 根据消息 ID 获取 Reaction
 
 该方法根据单聊或群聊中的消息 ID 获取单个或多个消息的 Reaction 信息，包括 Reaction ID、使用的表情 ID、以及使用该 Reaction 的用户 ID 及用户人数。获取的 Reaction 的用户列表只展示最早三个添加 Reaction 的用户。
@@ -220,6 +232,15 @@ curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/{{userI
 }
 ```
 
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型 | 错误提示          | 可能原因            | 处理建议        |
+|:---------| :--- | :------------- |:-----------------------------------|:------------|
+| 400      | Bad Request          | msgIdList exceeds the maximum number limit   | 单次传入的消息 ID 超过了数量限制。  | 减少单次传入的消息 ID。最多可传 20 个消息 ID。 |
+| 400      | Bad Request          | groupId can not be null!        | 群组聊天时（即 `msgType` 为 `groupchat`），群组 ID 参数（`groupId`）设置为了 `null`。 | 请传入群组 ID。 |
+
 ## 删除 Reaction
 
 删除当前用户追加的 Reaction。
@@ -280,6 +301,15 @@ curl -g -X DELETE 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz?m
   "timestamp": 1645774821181
 }
 ```
+
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因                     | 处理建议        |
+| :----------- | :--- | :------------- |:-------------------------|:------------|
+| 400     | Bad Request   | the user operation is illegal!        | 传入的用户 ID 没有操作过该 Reaction。 | 传入正确的用户 ID。 |
+| 400      | Bad Request  | this appKey is not open reaction service!   | Reaction 服务未开通。 | 请在环信即时通讯控制台开通 Reaction 服务。 |
 
 ## 根据消息 ID 和表情 ID 获取 Reaction 信息
 
@@ -372,3 +402,11 @@ curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz/deta
   }
 }
 ```
+
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因           | 处理建议       |
+| :----------- | :--- | :------------- |:---------------|:-----------|
+| 400     | Bad Request    | Limit exceeds the maximum quantity limit    | 传入的 `limit` 超过单次限制（50）。 | 传入的 `limit` 值需在 [1,50] 范围内。 |

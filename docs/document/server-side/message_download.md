@@ -138,6 +138,17 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
 }
 ```
 
+## 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型    | 错误提示          | 可能原因          | 处理建议        |
+|:---------|:-------------------|:---------------|:--------------|:------------|
+| 400      | illegal_argument | file must be provided.   | 未传入请求参数 `file`。   | 输入正确的请求参数 `file`。 |
+| 413      | file exceeding maximum limit | the file size exceeds the maximum limit.    | 上传文件的大小超出最大限制。 | 输入正确大小的 `file`。默认情况下，消息附件，例如图片、音频、视频和其他文件不能超过 10 MB。若要提升该上限，请联系商务。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 下载文件
 
 你可利用该方法下载图片、语音、视频或其他类型的文件。
@@ -200,6 +211,17 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 }
 ```
 
+## 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型               | 错误提示                  | 可能原因    | 处理建议      |
+|:---------|:-------------------|:----------------------|:--------|:----------|
+| 404      | entity_not_found | file may not exists | 传入的 `file_uuid` 不存在。 | 输入正确的路径参数 `file_uuid`。 |
+| 404      | file_expired | file xxxxx is expired | 文件已过期。 | 默认情况下，消息附件，例如图片、音频、视频和其他文件可存储 7 天。若要提升该上限，请联系商务。  |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 下载缩略图
 
 收到图片或视频消息，你可以先下载图片或视频的缩略图，需要时再下载图片或视频原文件。下载缩略图与下载原文件的唯一区别是前者在请求 header 中多了 `thumbnail: true`。当服务器收到包含该字段的请求 header 时，返回缩略图，否则返回原文件。
@@ -247,13 +269,20 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 
 #### 响应示例
 
-若返回值为 `200`，表示下载缩略图成功。
-
 ```json
 {
   //缩略图信息
 }
 ```
+
+## 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型               | 错误提示                  | 可能原因    | 处理建议      |
+|:---------|:-------------------|:----------------------|:--------|:----------|
+| 404      | entity_not_found | file may not exists | 传入的 `file_uuid` 不存在。 | 输入正确的路径参数 `file_uuid`。 |
+| 404      | file_expired | file xxxxx is expired | 文件已过期。 | 默认情况下，消息附件，例如图片、音频、视频和其他文件可存储 7 天。若要提升该上限，请联系商务。|
 
 若返回值 `401`，表示未授权，例如无 token、token 错误或 token 过期。
 
@@ -266,3 +295,5 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
   "error_description": "Unable to authenticate due to corrupt access token"
 }
 ```
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
