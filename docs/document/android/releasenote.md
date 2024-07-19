@@ -8,6 +8,7 @@
 
 [IM SDK] 更新第三方推送 SDK 版本：
 - OPPO 推送更新至 `oppo_push_3.5.2.aar`。
+  OPPO 推送支持 REALME 类型设备。
 - vivo 推送更新至 `vivo_push_v4.0.4.0_504.aar`。
 - 小米推送更新至 `MiPush_SDK_Client_6_0_1-C_3rd.aar`。
 - 魅族推送更新至 `com.meizu.flyme.internet:push-internal:4.3.0`。
