@@ -6,7 +6,7 @@
 
 ### 优化
 
-更新第三方推送 SDK 版本：
+[IM SDK] 更新第三方推送 SDK 版本：
 - OPPO 推送更新至 `oppo_push_3.5.2.aar`。
 - vivo 推送更新至 `vivo_push_v4.0.4.0_504.aar`。
 - 小米推送更新至 `MiPush_SDK_Client_6_0_1-C_3rd.aar`。
