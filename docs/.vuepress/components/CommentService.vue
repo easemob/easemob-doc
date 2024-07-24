@@ -16,7 +16,7 @@ onMounted(() => {
   artalk = Artalk.init({
     el: commentRef.value, // 绑定元素的 Selector
     darkMode: false, // 默认 false, 设置为 true 则开启暗色模式
-    pageKey: pageData.value.path, // 固定链接,
+    pageKey: 'https://doc.easemob.com' + pageData.value.path, // 链接地址,
     useBackendConf: true,
     pageTitle: pageData.value.title, // 页面标题 (留空自动获取)
     server: 'https://doc-comment.easemob.com', // 后端地址
