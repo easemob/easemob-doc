@@ -24,6 +24,7 @@
     "vuepress-theme-hope": "2.0.0-beta.189"
   },
   "dependencies": {
+    "artalk": "^2.8.7",
     "element-plus": "^2.7.3"
   }
 }

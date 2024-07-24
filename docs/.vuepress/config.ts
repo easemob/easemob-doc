@@ -1,28 +1,25 @@
-import { defineUserConfig, UserConfig } from "vuepress";
+import { defineUserConfig, UserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
 // import AutoImport from 'unplugin-auto-import/vite'
 // import Components from 'unplugin-vue-components/vite'
 // import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { containerPlugin } from './markdown/plugin'
-import theme from "./theme.js";
-import path from "node:path"
-
+import theme from './theme.js'
+import path from 'node:path'
 
 export default defineUserConfig({
-  base: "/",
-  lang: "zh-CN",
-  title: "环信 IM 文档",
-  head: [
-    ['link', { rel: 'icon', href: '/logo.png' }]
-  ],
-  description: "环信 IM 文档",
+  base: '/',
+  lang: 'zh-CN',
+  title: '环信 IM 文档',
+  head: [['link', { rel: 'icon', href: '/logo.png' }]],
+  description: '环信 IM 文档',
   bundler: viteBundler({
     viteOptions: {
       resolve: {
         alias: {
-          '@static': path.resolve(__dirname, '../../static')
-        }
+          '@static': path.resolve(__dirname, '../../static'),
+        },
       },
       plugins: [
         // AutoImport({
@@ -32,17 +29,15 @@ export default defineUserConfig({
         //   resolvers: [ElementPlusResolver({ssr: true })],
         // }),
       ],
-
     },
-    vuePluginOptions: {
-    },
+    vuePluginOptions: {},
   }),
   markdown: {
     headers: {
-      level: [2, 3]
+      level: [2, 3],
     },
   },
-  extendsMarkdown: (md)=> {
+  extendsMarkdown: (md) => {
     containerPlugin(md)
   },
   templateBuild: path.resolve(__dirname, './templates/index.build.html'),
@@ -93,7 +88,7 @@ export default defineUserConfig({
             reportMissingResultsLinkText: '点击反馈',
           },
         },
-      }
+      },
     }),
   ],
   onPrepared: async (app) => {
@@ -103,24 +98,29 @@ export default defineUserConfig({
     )
   },
   alias: {
-    "@theme-hope/components/HomePage": path.resolve(
+    '@theme-hope/components/HomePage': path.resolve(
       __dirname,
-      "./components/HomePage.vue"
+      './components/HomePage.vue'
     ),
 
-    "@theme-hope/modules/sidebar/components/Sidebar": path.resolve(
+    '@theme-hope/modules/sidebar/components/Sidebar': path.resolve(
       __dirname,
-      "./components/Sidebar.vue"
+      './components/Sidebar.vue'
     ),
 
-    "@theme-hope/modules/navbar/components/Navbar": path.resolve(
+    '@theme-hope/modules/navbar/components/Navbar': path.resolve(
       __dirname,
-      "./components/Navbar.vue"
+      './components/Navbar.vue'
     ),
 
-    "@theme-hope/components/MarkdownContent": path.resolve(
+    '@theme-hope/components/MarkdownContent': path.resolve(
       __dirname,
-      "./components/MarkdownContent.vue"
-    )
+      './components/MarkdownContent.vue'
+    ),
+
+    '@theme-hope/components/PageNav': path.resolve(
+      __dirname,
+      './components/PageNav.vue'
+    ),
   },
-});
+})

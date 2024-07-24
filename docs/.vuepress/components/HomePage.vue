@@ -137,46 +137,46 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
-import HeroSection from "./CustomHero.vue";
-import CardMenu from "./CardMenu.vue";
-import { usePageFrontmatter } from "@vuepress/client";
-const frontmatter = usePageFrontmatter();
-const router = useRouter();
-const products = frontmatter.value.products || [];
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import HopeHomePage from 'vuepress-theme-hope/components/HomePage.js'
+import HeroSection from './CustomHero.vue'
+import CardMenu from './CardMenu.vue'
+import { usePageFrontmatter } from '@vuepress/client'
+const frontmatter = usePageFrontmatter()
+const router = useRouter()
+const products = frontmatter.value.products || []
 const starter = frontmatter.value.starter || []
-const projects = frontmatter.value.projects || [];
-const containerRef = ref<HTMLElement | null>(null);
+const projects = frontmatter.value.projects || []
+const containerRef = ref<HTMLElement | null>(null)
 
 const goTo = (path: string) => {
-  router.push(path);
-};
+  router.push(path)
+}
 
 interface AnchorLink {
-  text: string;
-  children?: AnchorLink[];
+  text: string
+  children?: AnchorLink[]
 }
 
 const buildAnchorLink = () => {
-  const values: AnchorLink[] = [];
+  const values: AnchorLink[] = []
   starter.forEach((s) => {
-    values.push({ text: s.title });
-  });
+    values.push({ text: s.title })
+  })
   projects.forEach((project) => {
-    const children = [];
+    const children = []
     project.features.forEach((feature) => {
       if (feature.title) {
-        children.push({ text: feature.title });
+        children.push({ text: feature.title })
       }
-    });
-    values.push({ text: project.title, children });
-  });
-  return values;
-};
+    })
+    values.push({ text: project.title, children })
+  })
+  return values
+}
 
-const anchorLinks = buildAnchorLink();
+const anchorLinks = buildAnchorLink()
 </script>
 
 <style scoped>

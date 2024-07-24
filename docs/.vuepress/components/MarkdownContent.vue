@@ -1,7 +1,5 @@
 <script setup lang="ts">
-
-import { Content } from "@vuepress/client";
-
+import { Content } from '@vuepress/client'
 import { usePageData, useSiteData } from '@vuepress/client'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -15,14 +13,14 @@ const frontmatter = pageData.value.frontmatter
 const redirectUri = frontmatter.pageUri
 
 if (redirectUri) {
-    const redirectPage = pages.find(item => item.path === redirectUri);
-    if (redirectPage) {
-      pageData.value.headers = redirectPage.headers
-      redirectPageKey.value =  redirectPage.key
-    }
+  const redirectPage = pages.find((item) => item.path === redirectUri)
+  if (redirectPage) {
+    pageData.value.headers = redirectPage.headers
+    redirectPageKey.value = redirectPage.key
+  }
 }
 </script>
 
 <template>
-      <Content class="theme-hope-content" :page-key="redirectPageKey"  />
+  <Content class="theme-hope-content" :page-key="redirectPageKey" />
 </template>
