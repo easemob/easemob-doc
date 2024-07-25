@@ -206,6 +206,8 @@ conn.addEventHandler("handlerId", {
 
 如果由于网络信号弱、切换网络等引起的连接中断，系统会自动尝试重连。重连成功或者失败分别会收到 `onConnected` 和 `onDisconnected` 通知。
 
+你可以设置最大重连次数 `autoReconnectNumMax`，该参数默认为 5 次。
+
 ### 被动退出登录
 
 对于 `onDisconnected` 通知，错误码（`errorCode`）可能为以下几种，建议 App 返回登录界面。

@@ -1056,7 +1056,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/circle/server/{server_id}/join?userId={user_id} 
+POST https://{host}/{org_name}/{app_name}/circle/server/{server_id}/join?userId={user_id}&isJoinDefaultChannel={true/false}
 ```
 
 ##### 路径参数
@@ -1068,6 +1068,7 @@ POST https://{host}/{org_name}/{app_name}/circle/server/{server_id}/join?userId=
 | 参数          | 类型   | 是否必需 | 描述                    |
 | :------------ | :----- | :------- | :-------------------- |
 |  `user_id`       | String | 是       | 用户 ID。    |
+|  `isJoinDefaultChannel`       | Boolean | 否       | 是否加入社区的默认频道：<br/> - （默认）`true`：加入默认频道； - `false`：不加入社区下的任何频道。    |
 
 ##### 请求 header
 
