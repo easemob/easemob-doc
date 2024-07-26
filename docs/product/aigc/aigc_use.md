@@ -53,17 +53,17 @@
 
 2. 用户 **aitest** 与机器人 **aaa** 进行聊天，以下截图以 Android 设备为例。
 
-![img](@static/images/aigc/ai_chat.png)
+<img src=@static/images/aigc/ai_chat.png  width="400" height="900"/>
 
 若关闭了好友检查功能，则无需添加好友即可聊天。
 
-## 数据统计
+## 4. 查看数据统计
 
 你可以在即时通讯云控制台的左侧导航栏选择 **即时通讯** > **AI 智能** > **数据统计**，查看机器人账号消耗的 token 数和消耗趋势。
 
 目前，大模型平台只能选择 **MINIMAX**。
 
-<img src=@static/images/aigc/ai_token_statistic.png  width="300" height="700"/>
+![img](@static/images/aigc/ai_token_statistic.png)
 
 
 
