@@ -350,6 +350,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | 参数                  | 类型   | 是否必需 | 描述           |
 | :-------------------- | :----- | :------- | :---------------------------- |
 | `groupname`           | String | 否       | 群组名称，最大长度为 128 字符。 |
+| `avatar`              | String | 否       | 群组头像的 URL，最大长度为 1024 字符。|
 | `description`         | String | 否       | 群组描述，最大长度为 512 字符。 |
 | `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。 |
 | `membersonly`         | Bool   | 否       | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。    |
@@ -369,6 +370,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.description`         | Bool   | 群组描述是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。   |
 | `data.maxusers`            | Bool   | 群组最大成员数是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。                         |
 | `data.groupname`           | Bool   | 群组名称是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。    |
+| `data.avatar`              | Bool   | 群组头像否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。|
 | `data.membersonly`         | Bool   | “加入群组是否需要群主或者群管理员审批”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。 |
 | `data.public`              | Bool   | “是否是公开群”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。                         |
 | `data.allowinvites`        | Bool   | “是否允许群成员邀请其他用户入群”是否修改成功：<br/> -`true`：修改成功；<br/>- `false`：修改失败。         |
@@ -386,6 +388,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7' -d '{
     "groupname": "test groupname",
+    "avatar": "https://www.XXXX.com/XXX/image",
     "description": "updategroupinfo12311",
     "maxusers": 1500,
     "membersonly": true,
@@ -593,6 +596,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&
 | `entities`                 | JSON Array  | 用户加入的群组列表。             |
 |  - `groupId `     | String | 群组 ID。             |
 |  - `name`         | String | 群组名称。       |
+|  - `avatar`       | String | 群组头像的 URL。|
 |  - `owner`        | String | 群主的用户 ID。      |
 |  - `description`  | String | 群组描述。        |
 |  - `disabled`     | Bool | 群组是否被禁用：<br/> - `true`：禁用。禁用后不能对群组进行任何修改。<br/> - `false`：未禁用。 |
@@ -626,6 +630,7 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
   "entities": [
     {
       "name": "群组名称",
+      "avatar": "https://www.XXXX.com/XXX/image",
       "owner": "群组管理员",
       "id": "2XXXX1",
       "groupId": "2XXXX1",
@@ -760,6 +765,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data` | JSON Array | 响应数据。|
 |  - `id`                 | String | 群组 ID，群组唯一标识符。     |
 |  - `name`               | String | 群组名称。      |
+|  - `avatar`             | String | 群组头像的 URL。|
 |  - `description`        | String | 群组描述。       |
 |  - `membersonly`        | Bool   | 加入群组是否需要群主或者群管理员审批。<br/> - `true`：是；<br/> - `false`：否。      |
 |  - `allowinvites`       | Bool   | 是否允许群成员邀请其他用户加入此群。<br/> - `true`：允许群成员邀请其他用户加入此群；<br/> - `false`：只有群主可以邀请其他用户入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
@@ -799,6 +805,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
         {
             "id": "XXXX",
             "name": "XXXX",
+            "avatar": "https://www.XXXX.com",
             "description": "XXXX",
             "membersonly": true,
             "allowinvites": false,
