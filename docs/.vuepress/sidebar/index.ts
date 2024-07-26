@@ -146,9 +146,7 @@ export const zhSidebar = sidebar({
                 ], 
             }, 
           ], 
-         }, 
-        ]
-      }    
+        },   
         {
           text: "超级社区",
           collapsible: true,
