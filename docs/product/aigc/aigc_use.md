@@ -18,9 +18,13 @@
 
 1. 选择**即时通讯** > **AI 智能** > **AI机器人**，进入 **AI 机器人**页面。点击**创建机器人**。
 
+:::tip
+每个 app 默认支持 200 个机器人，可联系环信商务提升该上限。
+:::
+
 ![img](@static/images/aigc/aichatbot_create.png)
 
-2. 配置机器人相关信息。
+1. 配置机器人相关信息。
 
 | 参数   | 类型   | 是否必需     | 描述      |
 | :--------- | :----- | :----------- | :--------- |
@@ -32,10 +36,6 @@
 | System prompt                   | String      | 是  | 具体机器人的设定，长度影响接口性能。关于该参数的更多详情，请参阅 [MiniMax 官方文档](https://platform.minimaxi.com/document/ChatCompletion%20Pro?key=66718f6ba427f0c8a57015ff)。 | 
 | Top-p              | Int         | 是  | 控制生成环节采样范围，参数值越小，生成结果越稳定。关于该参数的更多详情，请参阅 [MiniMax 官方文档](https://platform.minimaxi.com/document/ChatCompletion%20Pro?key=66718f6ba427f0c8a57015ff)。|
 | Temperature        | Int         | 是  | 控制生成环境采样随机性，参数值越小，生成结果越稳定。关于该参数的更多详情，请参阅 [MiniMax 官方文档](https://platform.minimaxi.com/document/ChatCompletion%20Pro?key=66718f6ba427f0c8a57015ff)。 |
-
-:::tip
-每个 app 默认支持 200 个机器人，可联系环信商务提升该上限。
-:::
 
 ![img](@static/images/aigc/aichatbot_configure.png)
 
