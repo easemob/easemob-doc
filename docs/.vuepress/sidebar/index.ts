@@ -143,10 +143,12 @@ export const zhSidebar = sidebar({
               children: [
                 { text: "使用 AI 智能功能", link: "aigc/aigc_use.html" },
                 { text: "REST API", link: "aigc/aigc_rest_api.html" },
-              ], 
+                ], 
             }, 
           ], 
-        },    
+         }, 
+        ]
+      }    
         {
           text: "超级社区",
           collapsible: true,
