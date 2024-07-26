@@ -25,7 +25,10 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  artalk?.destroy()
+  if(artalk) {
+    console.log(artalk)
+   // artalk?.destroy()
+  }
 })
 </script>
 
