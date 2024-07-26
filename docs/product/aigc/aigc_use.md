@@ -51,7 +51,7 @@
 
 ![img](@static/images/aigc/ai_add_contact.png)
 
-1. **aitest** 用户与机器人 **aaa** 进行聊天，以下截图以 Android 设备为例。
+2. 用户 **aitest** 与机器人 **aaa** 进行聊天，以下截图以 Android 设备为例。
 
 ![img](@static/images/aigc/ai_chat.png)
 
