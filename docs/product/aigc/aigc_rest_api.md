@@ -1,6 +1,6 @@
 # AI 智能
 
-环信即时通讯云提供 REST API 获取 app 下的机器人列表。
+环信即时通讯云提供 REST API 获取 app 下的机器人列表。如果需要该功能相关的其他 REST API，请联系环信商务。
 
 ## 公共参数
 
@@ -78,7 +78,7 @@ GET https://{host}/{org_name}/{app_name}/robot/rule?&page={page}&size={size}
 |  - `robotAppId`   | String       | robot ID 对应的 robot app ID。   |  
 |  - `msgType` | String  | 消息类型，目前固定值为 `txt`，即文本消息。 |
 |  - `targetType`  | String | 会话类型，目前固定值为 `chat`，即单聊。 |
-|  - `targetId`  | List<String> | 机器人对应的 IM 的用户 ID。目前只有一个用户 ID。 |
+|  - `targetId`  | List | 机器人对应的 IM 的用户 ID。目前只有一个用户 ID。 |
 |  - `providerType`  | String | AI 大模型厂商，目前固定值为 `MINIMAX`。 |
 |  - `providerId`   | String       | 机器人对应的厂商 ID。  |
 |  - `timeout`  | Int  | 超时时间，目前未启用。 |
