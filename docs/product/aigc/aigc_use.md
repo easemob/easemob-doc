@@ -63,7 +63,7 @@
 
 目前，大模型平台只能选择 **MINIMAX**。
 
-![img](@static/images/aigc/ai_token_statistic.png)
+![img](@static/images/aigc/ai_token_statistic.png width="300" height="700")
 
 
 
