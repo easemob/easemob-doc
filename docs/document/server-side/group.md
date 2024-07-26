@@ -123,6 +123,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
    "groupname": "testgroup",
+   "avatar": "https://www.XXXX.com/XXX/image",
    "description": "test",
    "public": true,
    "maxusers": 300,
