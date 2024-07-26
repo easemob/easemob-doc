@@ -127,7 +127,7 @@ export const zhSidebar = sidebar({
           text: "环信 AIGC",
           collapsible: true,
           children: [
-            { text: "场景介绍", link: "aigc/aigc_scenario_introduction.html" },
+            { text: "方案介绍", link: "aigc/aigc_scenario_introduction.html" },
             { 
               text: "AIGC 解决方案",
               collapsible: false,

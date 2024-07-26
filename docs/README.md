@@ -1810,7 +1810,7 @@ projects:
             sdks:
               - text: 新手指引
                 link: /product/aigc/aigc_landing_page.html
-              - text: 场景介绍
+              - text: 方案介绍
                 link: /product/aigc/aigc_scenario_introduction.html
               - text: 开通服务
                 link: /product/aigc/aigc_open.html
