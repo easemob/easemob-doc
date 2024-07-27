@@ -23,7 +23,7 @@
 
 登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，获取应用信息，包括 `App Key`、`Client ID` 及 `ClientSecret` 、创建机器人用户以及配置回调规则。
 
-有关更多信息，请参见[开通服务文档说明](aigc_use.html)
+有关更多信息，请参见[开通服务文档说明](aigc_use.html)。
 
 #### 跑通示例项目
 
