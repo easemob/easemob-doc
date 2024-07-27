@@ -1,4 +1,4 @@
-## 开通服务
+# 开通服务
 
 本文介绍如何在[环信即时通讯云控制台](https://console.easemob.com/user/login)上开通 AIGC 服务。
 
