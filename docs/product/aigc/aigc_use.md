@@ -4,7 +4,7 @@
 
 ## 1. 开通 AI 智能功能
 
-你可以在[环信即时通讯控制台](https://console.easemob.com/user/login)开通 AI 机器人功能。
+你可以在[环信即时通讯控制台](https://console.easemob.com/user/login)开通 AI 智能功能。
 
 1. 登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，在首页的**应用列表**区域点击目标应用的**操作**一栏中的**管理**。
 
@@ -43,7 +43,7 @@
 
 ![img](@static/images/aigc/aichatbot_view.png)
 
-## 3. 体验用机器人聊天
+## 3. 使用机器人聊天
 
 创建机器人账户后，你可以体验和它进行聊天。
 
@@ -63,7 +63,7 @@
 
 ## 4. 查看数据统计
 
-你可以在即时通讯云控制台的左侧导航栏选择 **即时通讯** > **AI 智能** > **数据统计**，查看机器人账号消耗的 token 数和消耗趋势。
+你可以在[环信即时通讯控制台](https://console.easemob.com/user/login)的左侧导航栏选择 **即时通讯** > **AI 智能** > **数据统计**，查看机器人账号消耗的 token 数和消耗趋势。
 
 目前，大模型平台只能选择 **MINIMAX**。
 
