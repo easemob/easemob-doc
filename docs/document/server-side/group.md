@@ -112,7 +112,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -167,6 +167,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数量达到上限。 | 退出不用的群组或联系商务调整上限。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。 |
 | 403     | exceed_limit | members size is greater than max user size ! | 创建群时加入的人数超过最大限制。 | 调整创建群的加群人数。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。|
 | 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
+| 404     |  resource_not_found  | username XXXX doesn't exist!       | 创建群组时添加的用户不存在。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -206,7 +207,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -282,7 +283,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/enable
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -326,7 +327,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 修改群组信息
 
-修改指定的群组信息，可修改 `groupname`、`description`、`maxusers`、`membersonly`、`allowinvites`、`invite_need_confirm`、`public` 和 `custom` 属性。如果传入其他字段，或传入的字段不存在，则不能修改的字段会抛出异常。
+修改指定的群组信息，可修改 `groupname`、`avatar`、`description`、`maxusers`、`membersonly`、`allowinvites`、`invite_need_confirm`、`public` 和 `custom` 属性。如果传入其他字段，或传入的字段不存在，则不能修改的字段会抛出异常。
 
 #### HTTP 请求
 
@@ -378,7 +379,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `data.invite_need_confirm` | Bool   | “受邀人加入群组前是否需接受入群邀请”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。   |
 | `data.custom`              | Bool | 群组扩展信息是否修改成功：<br/> -`true`：修改成功；<br/>- `false`：修改失败。        |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -436,6 +437,7 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
 | 403     | group_announce_violation | group announcement is violation, please change it. | 群公告不合法。 | 使用合法的群公告。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
+| 400     | invalid_parameter                  | "some of [groupid] are not valid fields"  | 修改的群组信息时，传入的参数不支持，例如修改 `groupid`。| 
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -609,7 +611,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -694,7 +696,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/i
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -782,7 +784,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -882,7 +884,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -960,7 +962,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1042,7 +1044,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1132,7 +1134,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagen
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1232,7 +1234,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1307,7 +1309,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应体中为上传的文件的内容，例如，上传的文件内容为“Hello world”，响应中返回“Hello world”。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1374,7 +1376,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{f
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1462,7 +1464,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1550,7 +1552,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1639,7 +1641,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1726,7 +1728,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1767,7 +1769,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 403     | forbidden_op | users [XX] are not members of this group! | 用户不在群组中。 | 传入群组中成员的用户 ID。|
-| 403     | forbidden_op | forbidden operation on group owner! | 群主不能被移除。 | 无 |
+| 403     | forbidden_op | forbidden operation on group owner! | 群主不能被移除。 | 不要将群主移出群组。 |
 | 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数达到上限。 | 退出不用的群组或联系商务调整上限。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
 
@@ -1815,7 +1817,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1919,7 +1921,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1996,7 +1998,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2075,7 +2077,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/get
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2153,7 +2155,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2233,7 +2235,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2310,7 +2312,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin/{usernam
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2393,7 +2395,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2474,7 +2476,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2553,7 +2555,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{us
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2595,6 +2597,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 403     | forbidden_op | users [XX] are not members of this group! | 要添加黑名单的用户 ID 不在群组中。 | 使用群组成员的用户 ID。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
+| 403    | forbidden_op   | forbidden operation on group owner!   | 无法将群主加入群组黑名单。  | 
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -2645,7 +2648,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2740,7 +2743,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2828,7 +2831,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -2919,7 +2922,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3001,7 +3004,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3093,7 +3096,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3187,7 +3190,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{u
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3279,7 +3282,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3367,7 +3370,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3411,6 +3414,7 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -d '{"usernames":["u
 | 403     | forbidden_op | users [XX] are not members of this group! | 要禁言的用户 ID 不在群组中。 | 传入群组中的用户 ID。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
 | 400     | invalid_parameter | userNames size is more than max limit : 60 | 批量禁言指定群成员数量超过60 | 控制禁言指定群成员数量在 60 以内。 |
+| 403    | forbidden_op   | "forbidden operation on group owner!"   | 无法对群主禁言。  | 
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -3448,7 +3452,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3530,7 +3534,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3609,7 +3613,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/ban
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3698,7 +3702,7 @@ GET https://{host}/{org_name}/{app_name}/thread?limit={limit}&cursor={cursor}&so
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3790,7 +3794,7 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3889,7 +3893,7 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -3980,7 +3984,7 @@ POST https://{host}/{org_name}/{app_name}/thread
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -4078,7 +4082,7 @@ PUT https://{host}/{org_name}/{app_name}/thread/{thread_id}
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -4155,7 +4159,7 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -4239,7 +4243,7 @@ GET https://{host}/{org_name}/{app_name}/thread/{thread_id}/users?limit={N}&curs
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -4323,7 +4327,7 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 
@@ -4414,7 +4418,7 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 #### 示例
 

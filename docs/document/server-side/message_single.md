@@ -840,7 +840,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
 | HTTP 状态码 | 错误类型  | 错误提示  | 可能原因     | 处理建议   |
 |:---------|:-----------|:----------|:----------|:--------|
 | 400      | invalid_request_body       | Request body is invalid. Please check body is correct. | 请求体格式不正确。  | 检查请求体内容是否合法(字段类型是否正确) 。  |
-| 400      | message_send_error | param from can't be empty   | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from`。  |
+| 400      | message_send_error | param from can't be empty   | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from`。若不传该字段， 服务器会默认设置为 `admin`。 |
 | 400      | message_send_error | param to can't be empty    | 请求参数 `to` 是空数组。| 输入正确的请求参数 `to`。|
 | 400      | message_send_error | param type can't be empty   | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。 |
 | 400      | message_send_error | param body can't be empty | 请求参数 `body` 是空 JSON。 | 输入正确的请求参数 `body`。 |

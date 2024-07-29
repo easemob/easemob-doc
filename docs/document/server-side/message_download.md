@@ -145,7 +145,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
 | HTTP 状态码 | 错误类型    | 错误提示          | 可能原因          | 处理建议        |
 |:---------|:-------------------|:---------------|:--------------|:------------|
 | 400      | illegal_argument | file must be provided.   | 未传入请求参数 `file`。   | 输入正确的请求参数 `file`。 |
-| 413      | file exceeding maximum limit | the file size exceeds the maximum limit.    | 上传文件的大小超出最大限制。 | 输入正确大小的 `file`。默认情况下，消息附件，例如图片、音频、视频和其他文件不能超过 10 MB。若要提升该上限，请联系商务。 |
+| 413      | file exceeding maximum limit | the file size exceeds the maximum limit.    | 上传文件的大小超出最大限制。 | 输入正确大小的 `file`。默认情况下，消息附件，例如图片、音频、视频和其他文件默认不能超过 10 MB。若要提升该上限，请联系商务。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 

@@ -120,7 +120,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -158,6 +158,7 @@ curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorizati
 | 403     | FORBIDDEN          | total size of user metadata for this app exceeds the user defined limit, {}Bytes        | 整个应用的用户属性用量超过限制。默认单个 app 下所有用户的属性总长度不得超过 10 GB。   | 调整用量或联系商务提升用量上限。    |
 | 500     | INTERNAL_SERVER_ERROR          | update metadata failed        | 服务异常导致更新用户属性失败。  |     |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 获取用户属性
 
@@ -194,7 +195,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -228,7 +229,9 @@ curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourA
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | metadata_error          | auth error        | 鉴权失败。例如，使用的 token 与路径参数 `username` 不匹配。   | 使用正确的 token。     |
 | 403     | FORBIDDEN       | {appkey} user metadata service not allow        | 用户属性功能未开通。  | 联系商务开通用户属性功能。 |
-| 500     | INTERNAL_SERVER_ERROR          |         | 服务未知异常。  |    
+| 500     | INTERNAL_SERVER_ERROR          |         | 服务未知异常。  | 
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 批量获取用户属性
 
@@ -272,7 +275,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -331,6 +334,8 @@ curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer <Your
 | 401     | metadata_error  | auth error        | 鉴权失败。   |     |
 | 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。  |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 获取 app 下用户属性总大小
 
 获取该 app 下所有用户的属性数据大小，单位为字节。
@@ -363,7 +368,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -394,6 +399,8 @@ curl -X GET -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/me
 | 401     | unauthorized          | unauthorized        | 鉴权失败。   | 获取应用容量时需要使用 app 级别权限。    |
 | 401     | metadata_error          | auth error        | 鉴权失败。   | 使用正确的 token。     |
 | 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。   |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 删除用户属性
 
@@ -427,7 +434,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -457,3 +464,5 @@ curl -X DELETE -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | metadata_error          | auth error        | 鉴权失败。   |  使用正确的 token。    |
 | 403     | FORBIDDEN       | {appkey} user metadata service not allow        | 用户属性功能未开通。  | 联系商务开通用户属性功能。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

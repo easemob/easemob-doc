@@ -83,7 +83,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 
 关于其他字段及描述，详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -168,7 +168,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -241,7 +241,7 @@ POST https://{host}/{org_name}/{app_name}/rest/message/roaming/user/{userId}/del
 | `requestStatusCode`      | String | 操作结果，返回 `ok` 表示该用户的漫游消息清除成功。 |
 | `timestamp`          | Long | HTTP 响应的 Unix 时间戳，单位为毫秒。|
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -324,7 +324,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -405,7 +405,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 

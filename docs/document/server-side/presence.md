@@ -112,6 +112,8 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/c1/presence/a
 | 400   | service open exception | the app not open presence | 没有开通在线状态 Presence 服务。 | 联系商务开通在线状态 Presence 服务。|
 | 401  | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 
+关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
+
 ## 批量订阅在线状态
 
 一次可订阅多个用户的在线状态。
@@ -208,6 +210,8 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/
 | 400         | service open exception | the app not open presence  | 没有开通 Presence 服务。                 | 联系商务开通 Presence 服务。    |
 | 401         | unauthorized           | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。      | 使用新的 token 访问。           |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 批量获取在线状态信息
 
 你一次可获取多个用户的在线状态信息。
@@ -303,6 +307,8 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence'
 | 400         | service open exception | the app not open presence      | 没有开通 presence 服务。  | 联系商务开通 presence 服务。    |
 | 401         | unauthorized           | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。   | 使用新的 token 访问。  |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 查询单个群组的在线成员数量
 
 你可以查询单个群组的在线成员数量。**如需使用该 API，需要联系环信商务开通。**
@@ -343,7 +349,7 @@ GET https://{host}/{org_name}/{app_name}/presence/online/{group_id}/type/{query_
 | :------- | :--- | :----------------- |
 | `result` | Int  | 群组内的在线成员数量。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](#错误码)了解可能的原因。
 
 ### 示例
 
@@ -373,6 +379,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | 400         | illegal_argument       | Type must be 0 or 1.     | 查询类型（`query_type`）不为 0 或 1。  | 若查询单个群组的在线成员数量，需保证查询类型为 `1`。若传 `0` 是获取超级社区中社区 server 在线成员数量，与群组不相关。 |
 | 400         | service open exception | this appkey not open rest group online service | 没有开通统计群组在线人数服务。 | 联系商务开通统计群组在线人数服务。 |
 | 401         | unauthorized           | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ##  取消订阅多个用户的在线状态
 
@@ -443,6 +451,8 @@ curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presenc
 | 400         | illegal_argument       | too many unsub presences      | 取消订阅在线状态的用户列表超过了 100 个用户 ID。 | 控制取消订阅在线状态的用户列表在 100 个用户 ID 以内。 |
 | 400         | service open exception | the app not open presence      | 没有开通 Presence 服务。        | 联系商务开通 Presence 服务。   |
 | 401         | unauthorized           | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。  | 使用新的 token 访问。  |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 查询订阅列表
 
@@ -528,3 +538,5 @@ curl -X GET 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/s
 | :---------- | :--- | :----------- | :------------ | :----- |
 | 400         | service open exception | the app not open presence   | 没有开通 presence 服务。  | 联系商务开通 presence 服务。 |
 | 401         | unauthorized           | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。|
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

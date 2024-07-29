@@ -198,12 +198,12 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 400         | invalid_grant                      | user not activated   | 用户被封禁。  | 解禁用户后，再获取用户 token。 |
 | 400         | invalid_grant                      | invalid password   | 用户的密码错误。 | 请求传入用户正确的密码。 |
 | 401         | unauthorized                       | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。  | 使用新的 token 访问。  |
-| 401         | auth_bad_access_token              | Unable to authenticate due to corrupt access token           | token 权限错误（可能使用的是用户 token）或生成 token 时使用的 app key 与 请求 url 中使用的 app key 不相同。 | 请保证使用的 token 正确。          |
+| 401         | auth_bad_access_token              | Unable to authenticate due to corrupt access token           | token 权限错误（可能使用的是用户 token）或生成 token 时使用的 app key 与 请求 url 中使用的 app key 不相同。 | 请保证使用的 token 正确。   |
 | 404         | invalid_grant                      | user not found     | 用户不存在。  | 先注册用户或者检查用户名是否正确。|
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。|
 | 404         | entity_not_found                   | User null not found     | 用户不存在。   | 先注册用户或者检查用户名是否正确。    |
 | 409         | concurrent_operation_error         | concurrency create app user failed    | 同一秒内多次获取用户 token 时，若自动创建用户（即请求 body 中的 `grant_type` 为 `inherit`，`autoCreateUser` 为 `true`），引起的并发注册用户问题。 | 避免同一秒内多次调用该 API 自动创建用户获取用户 token。 如果获取 token 的用户已注册，并发调用该 API 则不会报错。  |
-| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 请求 body 中 `grant_type` 为 `inherit`，`autoCreateUser` 为 `true`（用户不存在时，自动注册用户） ，在使用注册用户的数量超过版的限制 | 联系商务开通付费版          |
+| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 请求 body 中 `grant_type` 为 `inherit`，`autoCreateUser` 为 `true`（用户不存在时，自动注册用户） ，在使用注册用户的数量超过版的限制 | 联系商务开通付费版。 |
 
 ## 生成动态的用户 Token
 

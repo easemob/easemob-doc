@@ -28,7 +28,7 @@
 | `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `username` | String | 是       | 用户 ID。                                                                                                                                       |
+| `username` | String | 是       | 用户 ID。     |
 
 ### 响应参数
 
@@ -99,7 +99,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -147,6 +147,8 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 403     | exceed_limit | user contact number exceed limit | 好友数量达到上限。对于免费版来说，单个用户的好友数上限为 100， 对于专业版和旗舰版 IM 来说，该上限为 3000。 | 检查添加的和被添的用户好友数量是否达到上限。 |
 | 404     | service_resource_not_found | Service resource not found | 要添加的好友或被添加好友的用户 ID 不存在。 | 检查添加和被添加的用户 ID 是否存在。 |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 移除好友
 
 从用户的好友列表中移除一个用户。
@@ -192,7 +194,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -238,6 +240,8 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | service_resource_not_found | Service resource not found | 要移除或被移除好友的用户 ID 不存在。 | 检查要移除和被移除的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 设置好友备注
 
@@ -289,7 +293,7 @@ PUT https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{f
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -327,6 +331,8 @@ curl -X PUT 'https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts
 | 400     | illegal_argument | updateRemark they are not friends, please add as a friend first. | 要添加备注的两个用户不是好友关系。 | 先成为好友再设置好友备注。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | service_resource_not_found | Service resource not found | 要设置或被设置好友备注的用户 ID 不存在。 | 检查要设置和被设置好友备注的用户 ID 是否存在。|
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 分页获取好友列表
 
@@ -379,7 +385,7 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -424,6 +430,8 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRem
 | 404      | service_resource_not_found | Service resource not found | 获取好友列表的用户 ID 不存在。   | 检查获取好友列表的用户 ID 是否存在。 |
 | 400      | illegal_argument | getContacts | page size more than max limit : 50 | 传入的每页好友数 `limit` 超过 50。 | 下调 `limit` 参数的值。 |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 一次性获取好友列表
 
 一次性获取指定用户的好友列表。
@@ -463,7 +471,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -498,6 +506,8 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/user1/contacts/users' \
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | service_resource_not_found | Service resource not found | 获取好友列表的用户 ID 不存在。 | 检查获取好友列表的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 导入好友列表
 
@@ -565,7 +575,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/contacts/import
 | `illegal_argument` | 400  | `request user over flow limit:10.`  | 请求 body 中传入的用户 ID 数量超过了 10。  |
 | `exceed_limit`  | 403   | `Inviter's contact max count.`  | 调用该接口的用户的好友数量已达上限。单个用户的好友数上限与你购买的套餐包相关，详见[套餐包功能详情](/product/pricing.html#套餐包功能详情)。 |
 
-关于其他异常，你可以参考 [响应状态码](error.html) 了解可能的原因。
+关于其他异常，你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -615,6 +625,8 @@ curl --location 'https://{host}/{org_name}/{app_name}/users/{username}/contacts/
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | service_resource_not_found | Service resource not found | 导入好友列表的用户 ID 不存在。 | 检查导入好友列表的用户 ID 是否存在。 |
 
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 添加用户至黑名单
 
 将一个或多个用户添加用户到黑名单。用户被加入黑名单后，无法向你发送消息，也无法发送好友申请。
@@ -663,7 +675,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -703,6 +715,8 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | service_resource_not_found | Service resource not found | 要添加或被添加的用户 ID 不存在。 | 检查添加和被添加的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 获取黑名单列表
 
@@ -753,7 +767,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pag
 
 其他字段及描述详见[公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -791,6 +805,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | service_resource_not_found | Service resource not found | 要查询的用户 ID 不存在。 | 检查查询的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 从黑名单中移除用户
 
@@ -840,7 +856,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 其他字段及描述详见[公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
 
 ### 示例
 
@@ -886,3 +902,5 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | service_resource_not_found | Service resource not found | 要移除或被移除的用户 ID 不存在。 | 检查要移除和被移除的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
