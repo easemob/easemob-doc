@@ -239,7 +239,7 @@ do {
 
 #### 变更群主
 
-仅群主可以调用 `updateGroupOwner` 方法将群所有权移交给指定群成员。成功移交后，原群主变为普通成员，其他群组成员收到 `EMGroupManagerDelegate#groupOwnerDidUpdate` 回调。
+仅群主可以调用 `updateGroupOwner` 方法将群所有权移交给指定群成员。成功移交后，原群主变为普通成员，新群主收到 `EMGroupManagerDelegate#groupOwnerDidUpdate` 回调。
 
 示例如下：
 

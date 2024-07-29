@@ -226,7 +226,7 @@ conn.addEventHandler("eventName", {
       // 设置管理员。群主、新管理员和其他管理员会收到该回调。
       case "setAdmin":
         break;
-      // 转让群组。原群主和新群主会收到该回调。
+      // 转让群组。新群主会收到该回调。
       case "changeOwner":
         break;
       // 群组所有者和管理员拉用户进群时，无需用户确认时会触发该回调。被拉进群的用户会收到该回调。

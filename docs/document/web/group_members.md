@@ -189,7 +189,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 
 #### 变更群主
 
-仅群主可以调用 `changeGroupOwner` 方法将群所有权移交给指定群成员。成功移交后，原群主变为普通成员，其他群组成员会收到 `changeOwner` 事件。
+仅群主可以调用 `changeGroupOwner` 方法将群所有权移交给指定群成员。成功移交后，原群主变为普通成员，新群主会收到 `changeOwner` 事件。
 
 ```javascript
 let option = {

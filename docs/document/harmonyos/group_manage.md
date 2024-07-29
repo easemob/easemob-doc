@@ -282,7 +282,7 @@ let groupListener: GroupListener = {
     // 群组管理员被移除。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
   },
   onOwnerChanged: (groupId: string, newOwner: string, oldOwner: string): void => {
-    // 群主转移权限。原群主和新群主会收到该回调。
+    // 群主转移权限。新群主会收到该回调。
   },
   onMemberJoined: (groupId: string, member: string): void => {
     // 有新成员加入群组。除了新成员，其他群成员会收到该回调。

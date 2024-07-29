@@ -365,7 +365,7 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
     public void onAdminRemoved(String groupId, String administrator) {
     }
 
-    // 群主转移权限。原群主和新群主会收到该回调。
+    // 群主转移权限。新群主会收到该回调。
     @Override
     public void onOwnerChanged(String groupId, String newOwner, String oldOwner) {
     }

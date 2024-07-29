@@ -195,7 +195,9 @@ GET https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
-### 请求示例
+### 示例
+
+#### 请求示例
 
 ```shell
 curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \

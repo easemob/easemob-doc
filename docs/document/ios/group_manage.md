@@ -356,7 +356,7 @@ do {
 
   }
 
-// 群主变更。原群主和新群主会收到该回调。
+// 群主变更。新群主会收到该回调。
 - (void)groupOwnerDidUpdate:(EMGroup *)aGroup newOwner:(NSString *)aNewOwner oldOwner:(NSString *)aOldOwner
   {
 
