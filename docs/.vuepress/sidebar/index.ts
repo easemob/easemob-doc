@@ -279,7 +279,11 @@ export const zhSidebar = sidebar({
     },
     {
       text: "常见方案",
-      children: [{ text: "迁移到环信", link: "migrate_to_easemob.html" }],
+      children: [
+        { text: "群 @ 消息", link: "solution_common/group_@.html" },
+        { text: "消息引用", link: "solution_common/message_quote.html" },
+        { text: "迁移到环信", link: "solution_common/migrate_to_easemob.html" },
+      ],
     },
     {
       text: "FAQ",

@@ -45,6 +45,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
     mdEnhance: {
       container: true,
       imgSize: true,
+      tabs: true
     },
   },
 })

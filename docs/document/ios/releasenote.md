@@ -2,6 +2,12 @@
 
 <Toc />
 
+## 版本 V4.8.1 Dev 2024-07-26（开发版）
+
+### 修复
+
+修复部分场景下 `IEMChatManager#filterConversationsFromDB:filter:` 对象由于内部成员变量缺失引起的崩溃问题。
+
 ## 版本 V4.8.0 Dev 2024-07-01（开发版）
 
 ### 新增特性

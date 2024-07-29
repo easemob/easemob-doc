@@ -334,7 +334,7 @@ EMClient.getInstance.groupManager.addEventHandler(
     // 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
     onMuteListRemovedFromGroup: (groupId, mutes) {},
 
-    // 群主转移权限。原群主和新群主会收到该回调。
+    // 群主转移权限。新群主会收到该回调。
     onOwnerChangedFromGroup: (groupId, newOwner, oldOwner) {},
 
     // 对端用户接受当前用户发送的群组申请的回调。当前用户收到该回调。

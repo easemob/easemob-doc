@@ -307,7 +307,7 @@ ChatClient.getInstance()
 
 #### 变更群主
 
-仅群主可以调用 `changeOwner` 方法将权限移交给群组中指定成员。成功移交后，原群主变为普通成员，其他群成员收到 `ChatGroupEventListener#onOwnerChanged` 回调。
+仅群主可以调用 `changeOwner` 方法将权限移交给群组中指定成员。成功移交后，原群主变为普通成员，新群主收到 `ChatGroupEventListener#onOwnerChanged` 回调。
 
 示例代码如下：
 

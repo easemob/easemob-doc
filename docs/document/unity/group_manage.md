@@ -351,7 +351,7 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     public void OnAdminRemovedFromGroup(string groupId, string administrator)
     {
     }
-    // 群主变更。原群主和新群主会收到该回调。
+    // 群主变更。新群主会收到该回调。
     public void OnOwnerChangedFromGroup(string groupId, string newOwner, string oldOwner)
     {
     }

@@ -419,7 +419,7 @@ const groupListener: ChatGroupEventListener = new (class
       group_listener: `onAdminRemoved: ` + params.groupId + params.admin,
     });
   }
-  // 群主转移权限，所有群成员收到该回调
+  // 群主转移权限，新群主收到该回调
   onOwnerChanged(params: {
     groupId: string;
     newOwner: string;
