@@ -13,10 +13,13 @@
 3. 如果有消息 @ 我，会收到会话更新，例如，“Somebody@You”。
 4. 打开会话页面，查看消息。
 
-|  客户端                 | Web 端   |
-| :------------------- | :----- | 
-| Android/iOS | ![img](@static/images/product/solution_common/group_mention/group_@_mobile.png)  |
-| Web | ![img](@static/images/product/solution_common/group_mention/group_@_web.png)  |
+- Android/iOS 的 UI 实现示例图：
+
+![img](@static/images/product/solution_common/group_mention/group_@_mobile.png)
+
+- Web 的 UI 实现示例图：
+
+![img](@static/images/product/solution_common/group_mention/group_@_web.png)
 
 ## 前提条件
 
