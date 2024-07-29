@@ -106,11 +106,11 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 | 400      | message_recall_error | param to can't be empty | 请求参数 `to` 是空字符串。| 输入正确的请求参数 `to`。 |
 | 400      | message_recall_error | param chat_type can't be empty | 请求参数 `chat_type` 是空字符串。| 输入正确的请求参数`chat_type`。  |
 | 400      | message_recall_error | param force can't be empty | 请求参数 `force` 是空。 | 输入正确的请求参数 `force`。  |
-|          | message_recall_error | can’t find msg to | 未找到撤回消息的接收⽅。 | 需传入正确的消息接收方。 |
-|          | message_recall_error | exceed recall time limit | 消息撤回超时。 | 消息撤回时长默认为消息发送后的 2 分钟。  |
-|          | message_recall_error | not_found msg | 消息因过期在服务端删除或消息已被撤回。 | 若撤回过期的消息，你需要开启强制撤回，即将 `force` 设置为 `true`。这种情况下，会撤回接收方在本地保存的消息，但发送方本地消息仍存在。<br/>若消息已被撤回，则无需重复撤回。        |
-|          | forbidden_op         | message recall service is unopened | 消息撤回服务未在环信即时通讯云管理后台开通。|                              |
-| 500      |                      | internal error | 后端服务出现异常。 |                              |
+| 400      | message_recall_error | can’t find msg to | 未找到撤回消息的接收⽅。 | 需传入正确的消息接收方。 |
+| 403        | message_recall_error | exceed recall time limit | 消息撤回超时。 | 消息撤回时长默认为消息发送后的 2 分钟。  |
+| 403      | message_recall_error | not_found msg | 消息因过期在服务端删除或消息已被撤回。 | 若撤回过期的消息，你需要开启强制撤回，即将 `force` 设置为 `true`。这种情况下，会撤回接收方在本地保存的消息，但发送方本地消息仍存在。<br/>若消息已被撤回，则无需重复撤回。        |
+| 403       | forbidden_op         | message recall service is unopened | 消息撤回服务未在环信即时通讯云管理后台开通。| 请先在环信即时通讯云管理后台开通该服务。 |
+| 500      |                      | internal error | 后端服务出现异常。 |      |
 
 例如，消息撤回服务未在环信即时通讯云管理后台开通，返回示例如下：
 

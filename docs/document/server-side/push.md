@@ -40,7 +40,6 @@
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 仅支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
-
 ## 绑定和解绑推送信息 
 
 推送消息时，设备与推送信息会进行绑定，包括设备 ID、推送证书和 device token。
@@ -96,7 +95,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -194,7 +193,7 @@ GET https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 ### 请求示例
 
@@ -278,7 +277,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -372,7 +371,7 @@ PUT https://{host}/{org_name}/{app_name}/push/nickname
 | 400         | illegal_argument | XXX push nickname length exceeds the limit         | 推送昵称的长度超过限制。 | 控制设置的推送昵称长度不要超过 100 个字符。        |
 | 401         | unauthorized     | Unable to authenticate (OAuth)                     | token 不合法，可能过期或 token 错误。| 使用新的 token 访问。 |
 
-关于其他错误码，你可以参考 [响应状态码](error.html) 了解可能的原因。
+关于其他错误码，你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -465,7 +464,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -563,7 +562,7 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 | `data.ignoreInterval` | String | 离线推送免打扰时间段。 |
 | `data.ignoreDuration` | Long   | 离线推送免打扰时长。   |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -639,7 +638,7 @@ GET https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 | `data.ignoreInterval` | String | 离线推送免打扰时间段。 |
 | `data.ignoreDuration` | Long   | 离线推送免打扰时长。   |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -712,7 +711,7 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/language
 | `data`          | JSON   | 用户接收推送通知的首选语言。       |
 | `data.language` | String | 用户接收推送通知的首选语言的代码。 |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -780,7 +779,7 @@ GET https://{host}/{org_name}/{app_name}/users/{userId}/notification/language
 | `data`          | JSON   | 用户接收推送通知的首选语言。       |
 | `data.language` | String | 用户接收推送通知的首选语言的代码。 |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -918,7 +917,7 @@ POST https://{host}/{org_name}/{app_name}/notification/template
 | `data.title_pattern`   | String | 推送模板的自定义标题。                       |
 | `data.content_pattern` | String | 推送模板的自定义内容。                       |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 #### 示例
 
@@ -995,7 +994,7 @@ GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 | `data.title_pattern`   | String | 推送模板的自定义标题。                         |
 | `data.content_pattern` | String | 推送模板的自定义内容。                         |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1070,6 +1069,8 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}/notification/template
 | `data` | JSON | 响应中的数据详情。`templateName` 为设置成功后的模板名称。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 #### 示例
 
@@ -1263,7 +1264,7 @@ DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 | `data.title_pattern`   | String | 推送模板的自定义标题。                         |
 | `data.content_pattern` | String | 推送模板的自定义内容。                         |
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [常见错误码](#常见错误码) 了解可能的原因。
 
 #### 示例
 

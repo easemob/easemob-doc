@@ -1144,7 +1144,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 | HTTP 状态码 | 错误类型  | 错误提示      | 可能原因             | 处理建议    |
 |:---------|:-----------|:-----------------|:-----------------|:---------|
 | 400      | invalid_request_body  | Request body is invalid. Please check body is correct. | 请求体格式不正确。| 检查请求体内容是否合法(字段类型是否正确)。|
-| 400      | message_send_error | param from can't be empty  | 请求参数 `from` 是空字符串。| 输入正确的请求参数 `from`。  |
+| 400      | message_send_error | param from can't be empty  | 请求参数 `from` 是空字符串。| 输入正确的请求参数 `from`。 若不传该字段， 服务器会默认设置为 `admin`。 |
 | 400      | message_send_error | param to can't be empty  | 请求参数 `to` 是空数组。 | 输入正确的请求参数 `to`。|
 | 400      | message_send_error | param type can't be empty  | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。|
 | 400      | message_send_error | param body can't be empty  | 请求参数 `body` 是空 JSON。 | 输入正确的请求参数 `body`。|
@@ -1158,7 +1158,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 | HTTP 状态码 | 错误类型      | 错误提示          | 可能原因       | 处理建议       |
 |:---------|:-------------------|:-------------------|:-----------|:----------------------|
 | 400      | invalid_request_body     | Request body is invalid. Please check body is correct. | 请求体格式不正确。  | 检查请求体内容是否合法(字段类型是否正确)。 |
-| 400      | message_send_error | param from can't be empty      | 请求参数 `from` 是空字符串。 | 输入正确的请求参数 `from`。  |
+| 400      | message_send_error | param from can't be empty      | 请求参数 `from` 是空字符串。 | 输入正确的请求参数 `from`。若不传该字段， 服务器会默认设置为 `admin`。 |
 | 400      | message_send_error | param to can't be empty   | 请求参数 `to` 是空数组。  | 输入正确的请求参数 `to`。  |
 | 400      | message_send_error | param type can't be empty | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。         |
 | 400      | message_send_error | param body can't be empty  | 请求参数 `body` 是空JSON。 | 输入正确的请求参数 `body`。         |
@@ -1168,12 +1168,12 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 | 400      | message_send_error | message is too large | 请求体内容中 `body` 和 `ext` 字段的内容过大。 | 限制 `body` 和 `ext` 字段的内容。 |
 | 403      | message_send_error | message send reach limit  | 消息发送频率超出限制(默认 1 秒内只允许发送 100 条聊天室消息)。 | 限制消息发送频率，详见[文档说明](message_group.html#发送定向消息)。  |
 
-3. 对于聊天室广播消息，如果返回的 HTTP 状态码非 `200`，表示请求失败。除了发送普通消息的常见错误码，还可能提示以下错误码：
+1. 对于聊天室广播消息，如果返回的 HTTP 状态码非 `200`，表示请求失败。除了发送普通消息的常见错误码，还可能提示以下错误码：
 
 | HTTP 状态码 | 错误类型   | 错误提示      | 可能原因    | 处理建议     |
 |:---------|:-------------------|:-----------------|:-----------|:----------|
 | 400      | invalid_request_body    | Request body is invalid. Please check body is correct. | 请求体格式不正确。 | 检查请求体内容是否合法(字段类型是否正确)。  |
-| 400      | illegal_argument | from can't be empty  | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from` 。   |
+| 400      | illegal_argument | from can't be empty  | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from` 。若不传该字段， 服务器会默认设置为 `admin`。   |
 | 400      | illegal_argument | ext must be JSONObject | 请求参数 `ext` 类型不正确。  | 输入正确的请求参数 `ext`（JSON 格式）。  |
 | 403      | forbidden_op | message broadcast service is unopened  | 未开通发送聊天室广播消息的功能配置。| 联系商务开通。 |
 
