@@ -2357,41 +2357,7 @@ payload 示例：
 }
 ```
 
-### 发送会话已读回执
-
-回调请求主要字段含义：
-
-| 字段          | 数据类型 | 含义                                                         |
-| :------------ | :------- | :----------------------------------------------------------- |
-| chat_type | String    |  会话已读回执。           |
-| payload.ack_message_id | String     | 会话中消息的消息 ID。                  |
-| payload.type | 会话已读回执类型。       |                |
-| from | String          | 发送已读回执的用户。|
-| to | String    |  接收已读回执的用户。                 |
-| msg_id | String      | 已读回执的消息 ID。 |
-
-会话已读回执的回调请求示例：
-
-```json
-{
-"callId": "easemob-demo#testy_1252106597610555348",
-"eventType": "chat",  
-"chat_type": "channel_ack", 
-"security": "203e3c86710ebdbd776d8aa9cc057b2d",
-"payload": {
-"ack_message_id": "1252106100258375636", 
-"type": "channel_ack" 
-},
-"host": "easemob@hsb-im-msync0",
-"appkey": "easemob-demo#testy",
-"from": "wzy",   
-"to": "wzy1",   
-"msg_id": "1252106597610555348",  
-"timestamp": 1709093585046
-}
-```
-
-#### 发送消息已读回执
+#### 发送单聊消息已读回执
 
 回调请求主要字段含义：
 
@@ -2400,7 +2366,7 @@ payload 示例：
 | `chat_type` | String   | `read_ack` 已读回执。                                        |
 | `callId`    | String   | `callId` 为 `{appkey}_{uuid}` 其中 uuid 为随机生成，作为每条回调的唯一标识。 |
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 Console 后台回调规则。 |
-| `payload`   | object   | 包括：<br/> - `ext`：消息的扩展字段、<br/> - `ack_message_id`：消息 ID、<br/> - `bodies`：消息体内容。 |
+| `payload`   | object   | 包括：<br/> - `ext`：消息的扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `bodies`：消息体内容。 |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
 | `from`      | String   | 发送已读回执用户 ID。                                        |
