@@ -91,7 +91,6 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | `avatar`           | String | 否       | 群组头像的 URL，最大长度为 1024 字符。|
 | `description`         | String | 否       | 群组描述，最大长度为 512 字符。|
 | `public`              | Bool   | 是       | 是否是公开群。公开群可以被搜索到，用户可以申请加入公开群；私有群无法被搜索到，因此需要群主或群管理员添加，用户才可以加入。<br/> - `true`：公开群；<br/> - `false`：私有群。   |
-| `scale`           | String | 否      | 群组规模，取决于群成员总数 `maxusers` 参数。<br/> - （默认）`normal`：普通群，即群成员总数不超过 3000。<br/> - `large`：大型群，群成员总数超过 3000。<br/><Container type="notice" title="注意"><br/>- 创建大型群时，该参数必传；<br/>- 大型群不支持离线推送。仅旗舰版支持创建大型群，如需该功能，请联系环信商务。</Container>|
 | `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。    |
 | `allowinvites`        | Bool   | 否       | 是否允许普通群成员邀请用户加入群组：<br/> - `true`：普通群成员可拉人入群;<br/> - （默认）`false`：只有群主和群管理员才能拉人入群。<br/><Container type="notice" title="提示"><br/>创建群组时，该参数仅对私有群有效，对公开群无效。也就是说，创建公有群（`public` 设置为 `true`）时，即使将 `allowinvites` 设置为 `true`，该设置也会自动修改为 `false`。如果要允许公开群的普通成员拉人入群，你在创建群后可调用[修改群组信息](#修改群组信息)接口将 `allowinvites` 的设置修改为 `true`。</Container> |
 | `membersonly`         | Bool   | 否       | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：需要； <br/> - （默认）`false`：不需要，用户直接进群。<br/>该参数仅对公开群生效，因为对于私有群，用户无法申请加入群组，只能通过群成员邀请加入群。     |
