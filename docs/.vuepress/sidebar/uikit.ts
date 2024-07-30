@@ -24,9 +24,11 @@ const chatUikitSidebar = [
         children: 子菜单。请参考「子菜单示例」
     */
     text: '产品介绍',
+    collapsible: true,
     children: [
       { text: '概述', link: 'chatuikit_overview.html' },
       { text: '特性', 
+        collapsible: true,
       children: [
         { text: '通用', link: 'chatfeature_common.html' },
         { text: '会话', link: 'chatfeature_conversation.html' },
@@ -38,6 +40,7 @@ const chatUikitSidebar = [
   },
   {
     text: '快速开始',
+    collapsible: true,
     children: [
       { text: '跑通示例项目', link: 'chatuikit_run.html' },
       { text: '集成单群聊 UIKit', link: 'chatuikit_integrated.html' },
@@ -47,6 +50,7 @@ const chatUikitSidebar = [
   },
   {
     text: '集成文档',
+    collapsible: true,
     children: [
       { text: '进阶用法', link: 'chatuikit_advancedusage.html' },
       { text: '可配项', link: 'chatuikit_config_item.html' },
@@ -59,6 +63,7 @@ const chatUikitSidebar = [
   }, 
   {
     text: '设计文档',
+    collapsible: true,
     children: [
       { text: '设计指南', link: 'chatuikit_design_guide.html' },
     ],
@@ -66,9 +71,11 @@ const chatUikitSidebar = [
   }, 
   {
     text: '产品介绍',
+    collapsible: true,
     children: [
       { text: '概述', link: 'chatuikit_overview.html' },
       { text: '特性', 
+        collapsible: true,
       children: [
         { text: '通用', link: 'chatfeature_common.html' },
         { text: '会话', link: 'chatfeature_conversation.html' },
@@ -80,6 +87,7 @@ const chatUikitSidebar = [
   },
   {
     text: '快速开始',
+    collapsible: true,
     children: [
       { text: '快速开始', link: 'chatuikit_quickstart.html' },
     ],
@@ -87,6 +95,7 @@ const chatUikitSidebar = [
   },
   {
     text: '集成文档',
+    collapsible: true,
     children: [
       { text: 'React 集成单群聊 UIKit', link: 'chatuikit_integrated_react.html' },
       { text: 'Vue 集成单群聊 UIKit', link: 'chatuikit_integrated_vue.html' },
@@ -104,6 +113,7 @@ const chatUikitSidebar = [
   }, 
   {
     text: '组件文档',
+    collapsible: true,
     children: [
       { text: '组件文档', link: 'chatuikit_storybook.html' },
     ],
@@ -111,6 +121,7 @@ const chatUikitSidebar = [
   },
   {
     text: '设计文档',
+    collapsible: true,
     children: [
       { text: '设计指南', link: 'chatuikit_design_guide.html' },
     ],
@@ -118,9 +129,11 @@ const chatUikitSidebar = [
   },   
   {
     text: '产品介绍',
+    collapsible: true,
     children: [
       { text: '概述', link: 'chatuikit_overview.html' },
       { text: '特性', 
+        collapsible: true,
       children: [
         { text: '通用', link: 'chatfeature_common.html' },
         { text: '会话', link: 'chatfeature_conversation.html' },
@@ -132,6 +145,7 @@ const chatUikitSidebar = [
   },
   {
     text: '快速开始',
+    collapsible: true,
     children: [
       { text: '跑通示例项目', link: 'chatuikit_run.html', except: ['android'] },
       { text: '快速开始', link: 'chatuikit_quickstart.html' },
@@ -140,6 +154,7 @@ const chatUikitSidebar = [
   },
   {
     text: '集成文档',
+    collapsible: true,
     children: [
       { text: '集成单群聊 UIKit', link: 'chatuikit_integrated.html' },
       { text: '进阶用法', link: 'chatuikit_advancedusage.html' },
@@ -154,6 +169,7 @@ const chatUikitSidebar = [
   }, 
   {
     text: '设计文档',
+    collapsible: true,
     children: [
       { text: '设计指南', link: 'chatuikit_design_guide.html' },
     ],
@@ -161,6 +177,7 @@ const chatUikitSidebar = [
   }, 
   {
     text: '历史文档',
+    collapsible: true,
     children: [
       { text: '历史文档', link: 'ui_historic.html', only: ['android','ios']},
       { text: 'UIKit 介绍', link: 'ui_overview.html', except: ['android','ios'] },
