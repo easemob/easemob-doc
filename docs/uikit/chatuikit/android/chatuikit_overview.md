@@ -49,8 +49,54 @@
 单群聊 UIKit 中业务相关的 UI 控件主要包含在以下三个 Fragment 中：
 
 - Chat Fragment 提供所有聊天视图的容器。
+  
+<table width="860" border="1">
+  <tbody>
+    <tr>
+      <td width="512" height="26" align="center" bgcolor="#D6D6D6">聊天页面</td>
+      <td width="546" align="center" bgcolor="#D6D6D6">发送多种类型的消息</td>
+    </tr>
+    <tr>
+      <td height="749" align="center" bgcolor="#FFFFFF"><img src="/@fs/D:/Easemob/easemob-doc/static/uikit/page_chat.png" width="406" height="654" alt=""/></td>
+      <td align="center" bgcolor="#FFFFFF"><img src="/@fs/D:/Easemob/easemob-doc/static/uikit/file_share.png" width="380" height="650" alt=""/></td>
+    </tr>
+    <tr>
+      <td height="27" align="center" bgcolor="#D6D6D6">已发送回执</td>
+      <td align="center" bgcolor="#D6D6D6">已读回执</td>
+    </tr>
+    <tr>
+      <td height="843" align="center"><img src="/@fs/D:/Easemob/easemob-doc/static/uikit/message_deliver_receipt_0.png" width="425" height="790" alt=""/></td>
+      <td align="center"><img src="/@fs/D:/Easemob/easemob-doc/static/uikit/message_read_receipt.png" width="445" height="784" alt=""/></td>
+    </tr>
+    <tr>
+      <td height="26" align="center" bgcolor="#D6D6D6">消息相关操作</td>
+      <td align="center" bgcolor="#D6D6D6">消息审核</td>
+    </tr>
+    <tr>
+      <td height="841" align="center"><img src="/@fs/D:/Easemob/easemob-doc/static/uikit/message_operation.png" width="446" height="797" alt=""/></td>
+      <td align="center"><img src="/@fs/D:/Easemob/easemob-doc/static/uikit/message_report.png" width="458" height="800" alt=""/></td>
+    </tr>
+    <tr>
+      <td height="25" colspan="2" align="center" bgcolor="#D6D6D6">消息未读数</td>
+    </tr>
+    <tr>
+      <td height="1000" colspan="2" align="center"><img src="/@fs/D:/Easemob/easemob-doc/static/uikit/message_unread_count.png" width="1008" height="956" alt=""/></td>
+    </tr>
+    <tr>
+      <td height="25" colspan="2" align="center" bgcolor="#D6D6D6">联系人名片</td>
+    </tr>
+    <tr>
+      <td height="1000" colspan="2" align="center"><img src="/@fs/D:/Easemob/easemob-doc/static/uikit/contact_namecard.png" width="1008" height="956" alt=""/></td>
+    </tr>
+    <tr>
+      <td height="25" colspan="2" align="center" bgcolor="#D6D6D6">会话列表</td>
+    </tr>
+    <tr>
+      <td height="1000" colspan="2" align="center"><img src="/@fs/D:/Easemob/easemob-doc/static/uikit/page_conversation.png" width="1008" height="956" alt=""/></td>
+    </tr>
+  </tbody>
+</table>
 
-![img](@static/images/uikit/chatuikit/android/page_chat.png =400x866) 
 
 - Conversation Fragment 提供会话列表容器。
 
