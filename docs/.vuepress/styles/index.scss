@@ -54,3 +54,13 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
       color: #000;
     }
 }
+
+.sidebar {
+  background-color: rgb(245, 247, 250);
+  .sidebar-heading {
+    font-weight: 600;
+  }
+  > .sidebar-links {
+    font-weight: 200;
+  }
+}
