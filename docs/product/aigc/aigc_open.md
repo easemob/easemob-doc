@@ -34,6 +34,8 @@
 
 选择**即时通讯** > **功能配置** > **消息回调**，点击**添加回调地址**，配置发送前和发送后回调地址。请确保环信即时通讯 IM 可以通过外网访问到回调地址。
 
+若使用消息回调功能，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通该功能，详见[回调相关文档](/product/enable_and_configure_IM.html#配置消息回调)。
+
 ![img](@static/images/aigc/callback_address.png)
 
 
