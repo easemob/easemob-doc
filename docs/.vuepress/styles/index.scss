@@ -62,13 +62,16 @@ $fade-amount: 15; // 每级字体颜色变淡的递减值
 
 #sidebar {
   background-color: rgb(245, 247, 250);
-
   > .sidebar-links > li {
     > a {
       font-weight: 600;
     }
     > .sidebar-group {
       font-weight: 600;
+      > .sidebar-links {
+        border-left: 1px solid #ccc;
+        margin-left: 12px;
+      }
     }
 
     @for $i from 1 through $sidebar-levels {
