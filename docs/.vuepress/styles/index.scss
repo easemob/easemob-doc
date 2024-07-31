@@ -55,12 +55,36 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
     }
 }
 
-.sidebar {
+
+$sidebar-levels: 5; // 菜单的级数
+$base-color: #000000; // 初始字体颜色
+$fade-amount: 15; // 每级字体颜色变淡的递减值
+
+#sidebar {
   background-color: rgb(245, 247, 250);
-  .sidebar-heading {
-    font-weight: 600;
-  }
-  > .sidebar-links {
-    font-weight: 200;
+
+  > .sidebar-links > li {
+    > a {
+      font-weight: 600;
+    }
+    > .sidebar-group {
+      font-weight: 600;
+    }
+
+    @for $i from 1 through $sidebar-levels {
+      $color: lighten($base-color, $i * $fade-amount);
+      $selector: '';
+      @for $j from 1 through $i {
+        $selector: #{$selector} + '.sidebar-group > .sidebar-links ';
+      }
+      #{$selector} {
+        > li > a {
+          color: $color;
+        }
+        .title {
+          color: $color;
+        }
+      }
+    }
   }
 }
