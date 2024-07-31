@@ -70,7 +70,7 @@ easemob:
 
 **大语言模型（LLM）信息配置**
 
-本代码示例以 miniMax 为例 [MiniMax 开放平台快速开始](https://platform.minimaxi.com/document/guides/example?id=6433f36f94878d408fc82947)，若使用其他大语言模型，可按其他语言模型配置要求进行调整。
+本代码示例以 miniMax 为例 [MiniMax 开放平台快速开始](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)，若使用其他大语言模型，可按其他语言模型配置要求进行调整。
 
 ```yaml
 miniMax:

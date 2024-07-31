@@ -24,7 +24,7 @@
 
 ![img](@static/images/aigc/aichatbot_create.png)
 
-1. 配置机器人相关信息。
+2. 配置机器人相关信息。
 
 ![img](@static/images/aigc/aichatbot_configure.png)
 
@@ -55,7 +55,7 @@
 
 ![img](@static/images/aigc/ai_add_contact.png)
 
-1. 用户 **aitest** 与机器人 **aaa** 进行聊天，以下截图以 Android 设备为例。
+2. 用户 **aitest** 与机器人 **aaa** 进行聊天，以下截图以 Android 设备为例。
 
 <img src=@static/images/aigc/ai_chat.png  width="400" height="900"/>
 
