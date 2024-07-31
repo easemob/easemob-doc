@@ -71,6 +71,12 @@ $fade-amount: 15; // 每级字体颜色变淡的递减值
       > .sidebar-links {
         border-left: 1px solid #ccc;
         margin-left: 12px;
+        > li > .sidebar-link {
+          padding-inline-start: 0.7rem;
+        }
+        > li > .sidebar-group {
+          padding-inline-start: 0.2rem;
+        }
       }
     }
 
