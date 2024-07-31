@@ -127,12 +127,27 @@ export const zhSidebar = sidebar({
           text: "环信 AIGC",
           collapsible: true,
           children: [
-            { text: "新手指引", link: "aigc/aigc_landing_page.html" },
-            { text: "场景介绍", link: "aigc/aigc_scenario_introduction.html" },
-            { text: "开通服务", link: "aigc/aigc_open.html" },
-            { text: "跑通示例项目", link: "aigc/aigc_run_through_demo.html" },
-          ],  
-        },    
+            { text: "方案介绍", link: "aigc/aigc_scenario_introduction.html" },
+            { text: "方案选择", link: "aigc/aigc_selection.html" },
+
+            { 
+              text: "方案一",
+              collapsible: false,
+              children: [
+                { text: "跑通准备", link: "aigc/aigc_open.html" },
+                { text: "跑通示例项目", link: "aigc/aigc_run_through_demo.html" },
+              ], 
+            }, 
+            { 
+              text: "方案二",
+              collapsible: false,
+              children: [
+                { text: "使用 AI 智能功能", link: "aigc/aigc_use.html" },
+                { text: "REST API", link: "aigc/aigc_rest_api.html" },
+                ], 
+            }, 
+          ], 
+        },   
         {
           text: "超级社区",
           collapsible: true,

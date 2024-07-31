@@ -5,9 +5,11 @@ import CommentService from './CommentService.vue'
 
 <template>
   <PageNav />
+  <!--
   <ClientOnly>
     <CommentService />
   </ClientOnly>
+  -->
 </template>
 
 <style scope></style>
