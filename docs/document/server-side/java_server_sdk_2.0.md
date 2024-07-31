@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:1.0.8'
+implementation 'com.easemob.im:im-sdk-core:1.0.9'
 ```
 
 ### 使用
@@ -204,6 +204,18 @@ try {
 ```
 
 ## 更新日志
+
+### V1.0.9 2024-07-29
+
+1. 增加发送聊天室全局广播消息功能。
+2. 增加导入好友列表功能。
+3. 增加强制用户从单设备下线功能。
+4. 创建群组增加群组头像属性。
+5. 修改群组信息支持群组头像修改。
+6. 获取群组详情增加群组头像属性。
+7. 获取用户已加入的群组列表中增加群组头像属性。
+
+以上更新内容请到 MessageApi、ContactApi、UserApi、GroupApi 中查看。
 
 ### V1.0.8 2024-07-15
 

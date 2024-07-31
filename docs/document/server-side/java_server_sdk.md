@@ -24,14 +24,14 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.8.53</version>
+    <version>0.8.54</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:0.8.53'
+implementation 'com.easemob.im:im-sdk-core:0.8.54'
 ```
 
 ### 使用
@@ -234,6 +234,15 @@ EMProperties properties = EMProperties.builder()
 ```
 
 ## 更新日志
+
+### V0.8.54 2024-07-29
+
+1. 创建群组增加群组头像属性。
+2. 修改群组信息支持群组头像修改。
+3. 获取群组详情增加群组头像属性。
+4. 获取用户已加入的群组列表中增加群组头像属性。
+
+以上更新内容请到 GroupApi 中查看。
 
 ### V0.8.53 2024-06-28
 
