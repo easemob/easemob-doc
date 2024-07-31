@@ -2623,23 +2623,35 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | 字段             | 数据类型   | 含义             |
 |:---------------|:-------|:---------------|
 | `chat_type` | String | 固定值为 `notify`。通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 type 字段确定具体类型。｜
-| `payload.type`         | String | 固定值 `reaction`。 |
+| `host`            | String | 服务器名称。              |
+| `appkey`          | String | 你在环信管理后台注册的应用唯一标识。        |
+| `from`            | String | 消息的发送方。     |
+| `to`              | String | 消息的接收方。   |
+| `eventType`       | String | “chat” 上行消息、“chat_offline” 离线消息。   |
+| `msg_id`          | String | 该回调请求的消息 ID。       |
+| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。 |
+| `payload.num`          | Int | 操作次数。       |
 | `payload.channel_type` | String | 会话类型：<br/> - `chat`：单聊。<br/> - `groupchat`：群聊。  |
-| `payload.data.ts` | Long | 当前 Reaction 操作的 Unix 时间戳，单位为毫秒。
-| `payload.num`          | Number | 操作次数。       |
+| `payload.type`         | String | 固定值 `reaction`。 |
 | `payload.data`         | List   | Reaction 操作详细内容。 |
+| `payload.data.messageId`         | String   | Reaction 对应的消息 ID。 |
+| `payload.data.from`         | String   | Reaction 消息的发送方。 |
+| `payload.data.ts` | Long | 当前 Reaction 操作的 Unix 时间戳，单位为毫秒。 |
 | `payload.data.to` | String | 消息接收方。 |
 | `payload.data.reactions`    | List | Reaction 通知数据结构。 |
 | `payload.data.reactions.reaction`  | String | Reaction 表情。 |  
-| `payload.data.reactions.userList`  | List | Reaction 表情操作人员列表。 |
-| `payload.data.reactions.count`    | Number  | Reaction 表情被操作次数。 |
+| `payload.data.reactions.userList`  | List | 添加该 Reaction 表情人的员列表。 |
+| `payload.data.reactions.count`    | Int  | Reaction 表情被添加的次数。 |
 | `payload.data.reactions.op`    | List | Reaction 当前操作详情。 |
+| `payload.data.reactions.op.reaction`    | String | 表情。 |
+| `payload.data.reactions.op.userList`    | List | 操作表情的用户。 |
+| `payload.data.reactions.op.count`    | List | 表情操作人数。 |
 | `payload.data.reactions.op.reactionType`    | String| Reaction 当前操作类型。 |
 | `payload.data.reactions.op.operator`    | String | Reaction 当前操作人。 ｜
 
 其他字段见 [公共参数](#回调内容中单聊、群聊、聊天室事件的公共参数描述)。
 
-回调请求示例：
+例如，在下面的回调请求示例中，消息 ID 为 `99XXXX32` 的消息，当前存在 `test` Reaction，若有用户（本例中为 `user2`） 添加了 Reaction `test-1`，则 Chat 服务器会向你的 app server 发送回调：
 
 ```json
 {
