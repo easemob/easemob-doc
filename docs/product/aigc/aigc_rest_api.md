@@ -93,7 +93,7 @@ GET https://{host}/{org_name}/{app_name}/robot/rule?&page={page}&size={size}
 | `totalPages`  | Int  | 总页数。  |
 | `totalElements` | Int | App 下的机器人总数。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -191,6 +191,8 @@ curl --location 'http://XXXX/XXXX/XXXX/robot/rule?page=0&size=10'
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 500     | Internal Server Error | Internal Server Error | 服务内部错误。 | 检查请求参数是否合理。|
 | 400     | Bad Request | Request param error | 请求参数错误。 | 检查请求参数是否合理。|
+
+关于其他错误，你可以参考 [响应状态码](/document/server-side/overview.html) 了解可能的原因。
 
 
 

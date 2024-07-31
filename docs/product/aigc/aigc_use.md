@@ -59,8 +59,6 @@
 
 <img src=@static/images/aigc/ai_chat.png  width="400" height="900"/>
 
-
-
 ## 4. 查看数据统计
 
 你可以在[环信即时通讯控制台](https://console.easemob.com/user/login)的左侧导航栏选择 **即时通讯** > **AI 智能** > **数据统计**，查看机器人账号消耗的 token 数和消耗趋势。
