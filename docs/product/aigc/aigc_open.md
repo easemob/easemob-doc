@@ -1,6 +1,6 @@
-# 开通服务
+# 跑通准备
 
-本文介绍如何在[环信即时通讯云控制台](https://console.easemob.com/user/login)上开通 AIGC 服务。
+本文介绍如何在[环信即时通讯云控制台](https://console.easemob.com/user/login)上完成跑通 AIGC 服务示例项目的准备。
 
 ### 1. 创建应用
 
