@@ -34,9 +34,9 @@ GET https://{host}/{org_name}/{app_name}/robot/rule?&page={page}&size={size}
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 
 #### 查询参数
 
@@ -76,7 +76,7 @@ GET https://{host}/{org_name}/{app_name}/robot/rule?&page={page}&size={size}
 |  - `createDateTime`  | DATETIME       | 开通使用 MINIMAX AI 聊天服务的时间。  | 
 |  - `updateDateTime`   | DATETIME      | 更新 MINIMAX AI 聊天服务开通状态的时间。 |
 |  - `providerTextApi`  | String | 厂商支持的 AI 接口，默认使用 `chatcompletion_pro`，当前不支持可选。 |
-|  - `providerModel`  | String  | 厂商支持的 AI 模型类别。当前可支持选择，选项列表可从[获取 app 支持的大模型厂商列表](获取-app-支持的大模型厂商列表) 接口中获取。  |
+|  - `providerModel`  | String  | 厂商支持的 AI 模型类别。|
 |  - `providerAttribute`  |  JSONObject   | 机器人的一些属性。 |
 |    - `historyNum`          | Int  | 传递给机器人的历史消息数，固定为 `10`。开发者忽略该字段。 |
 |    - `avatar`         | String  | 机器人头像图片链接。                      |
