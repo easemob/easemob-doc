@@ -58,15 +58,15 @@ easemob:
 
 4. 创建机器人的账号。
 
-要跑通示例项目，需要设置 8 个机器人账号。选择**应用概览** > **用户认证** 创建机器人账号。
+选择**应用概览** > **用户认证** 创建 8 个机器人账号。
 
-- 建议机器人账号的用户 ID 与下图中的保持一致。
+示例项目中提供了 8 个智能体，因此需要设置 8 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系。
+
+下图红框中的用户 ID 为示例项目中的与智能体绑定的机器人账号，若使用其他用户 ID，则需同步修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
 
 ![img](@static/images/aigc/robot_account_create.png)
 
-- 若使用上图之外的用户 ID，则需同步修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
-
-```
+```java
 static{
 
 BotBean botBean0 = new BotBean();
@@ -81,7 +81,7 @@ bots.put("boy0",botBean0);
 }
 ```
 
-5. 配置发送前回调规则。
+1. 配置发送前回调规则。
 
 若使用消息发送前回调功能，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通该功能，详见[回调配置相关文档](/product/enable_and_configure_IM.html#配置消息回调)。该功能为增值服务，费用详见[功能费用文档](/product/pricing.html#增值服务费用)。
 
