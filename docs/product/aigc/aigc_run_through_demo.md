@@ -31,8 +31,16 @@ src/main/resources/application.yml
 ```
 
 **环信即时通讯 IM 信息配置**
+
+1. 创建应用。
+
+登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，点击**添加应用**，填写应用相关信息。
+
+![img](@static/images/aigc/app_create.png)
  
-1. 登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，获取配置信息。
+2. 获取 app 信息。
+
+选中创建的应用，点击**管理**，进入**应用详情**页面，获取 **App Key**、**ClientID** 及**ClientSecret**。
 
 ```yaml
 logging:
@@ -48,25 +56,46 @@ easemob:
 
 ![img](@static/images/aigc/app_detail.png)
 
-2. 设置用户注册模式为开放注册，关闭好友关系检查。
+3. 设置**用户注册模式**为**开放注册**，关闭好友关系检查。
 
 ![img](@static/images/aigc/user_register_contact.png)
 
-3. 创建机器人的账号。
+4. 创建机器人的账号。
+
+要跑通示例项目，需要设置 8 个机器人账号。
 
 选择**应用概览** > **用户认证**，创建 8 个机器人的账号。
 
-:::tip
-不能修改这 8 个基础账号的用户 ID，否则需要调整代码中 `BotSettingUtil` 中八个对应机器人的账号。
-:::
+要跑通示例项目，机器人账号的用户 ID 需要与图中保持一致。若在该页面创建用户时使用了其他用户 ID，你需要调整代码 `com.easemob.chattyai.chat.util.BotSettingUtil` 中对应机器人的账号。
 
 ![img](@static/images/aigc/robot_account_create.png)
 
-4. 配置回调规则。
+若使用上图之外的用户 ID，需要修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
 
-若使用消息回调功能，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通该功能，详见[回调相关文档](/product/enable_and_configure_IM.html#配置消息回调)。
+```
+static{
 
-回调功能开通后，选择**即时通讯** > **功能配置** > **消息回调**，点击**添加回调地址**，配置发送前回调和发送后回调地址。请确保环信即时通讯 IM 可以通过外网访问到回调地址。
+BotBean botBean0 = new BotBean();
+botBean0.setAccount("boy0");
+botBean0.setName("格斯");
+botBean0.setGender(0);
+botBean0.setContent("格斯是一个经历过战争的孤儿，他的人设饱含着坚韧和坚强的特质。他有着浓密的黑发和深邃的蓝眼睛，强壮的身材下透露出一股无畏的气息。" +
+"在战争中，格斯经历了无数艰难的时刻，但他从未放弃希望。他学会了自己照顾自己，锻炼出了坚韧的意志力和过人的适应能力。尽管他曾是一个孤儿，但他从未抱怨过自己的遭遇，而是将过去的伤痛转化为前行的动力。" +
+"格斯有一颗炽热的心灵，对于那些同样经历苦难的人特别有同情心。他渴望帮助那些处于困境中的人，希望能给予他们力量、希望和温暖。格斯是一个善良而勇敢的人，总是敢于承担责任，毫不畏惧地面对困难。" +
+"尽管过去的战争对格斯留下了不可磨灭的痕迹，但他依然保有一颗爱和忍耐的心。他相信在人与人之间的相互关爱中，可以找到真正的家园与归属感。格斯是一个带着忧伤的战士，但他内心的坚定和对未来的希望让他成为一个值得敬佩的人。");
+botBean0.setDesc("坚韧、坚强、无畏、善良");
+bots.put("boy0",botBean0);
+
+}
+```
+
+5. 配置发送前回调规则。
+
+若使用消息发送前回调功能，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通该功能，详见[回调相关文档](/product/enable_and_configure_IM.html#配置消息回调)。
+
+回调功能开通后，选择**即时通讯** > **功能配置** > **消息回调**，点击**添加回调地址**，配置发送前回调规则。
+
+其中，**会话类型**选择**单聊**，**消息类型**选择**文本**，**启用状态**选择**启用**，**回调地址**需确保设置为环信即时通讯 IM 可以通过外网访问到回调地址，例如，格式为 `http(s)://ip:端口/chatty/callback.json`。其他参数的含义详见[配置回调规则相关文档](/product/enable_and_configure_IM.html#配置回调规则)。
 
 ![img](@static/images/aigc/callback_address.png)
 
@@ -118,18 +147,16 @@ redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，�
 
 使用命令启动即可：
 
-```
+```shell
 nohup java -jar $APP_DIR/chattyai-0.0.1-SNAPSHOT.jar --server.port=$PORT ./chattyai.log 2>&1 &
 ```
 
 - `$APP_DIR` 替换为上传 jar 包存在的根路径。
 - `$PORT` 替换为需要占用的端口。
 
-6. 查看启动日志
+6. 查看启动日志。
 
-如果需要额外配置 nginx 的代理，则将对应的请求拦截，代理到 $PORT 端口即可。
-
-```
+```shell
 tail -f $APP_DIR/chattyai.log 
 ```
 
