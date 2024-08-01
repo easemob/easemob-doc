@@ -60,7 +60,7 @@ easemob:
 
 选择**应用概览** > **用户认证** 创建 8 个机器人账号。
 
-示例项目中提供了 8 个智能体，因此需要设置 8 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系。
+示例项目中提供了 8 个智能体，因此需要设置 8 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系，见下方代码。
 
 下图红框中的用户 ID 为示例项目中的与智能体绑定的机器人账号，若使用其他用户 ID，则需同步修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
 
