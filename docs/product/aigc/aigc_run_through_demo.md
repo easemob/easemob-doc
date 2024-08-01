@@ -32,7 +32,7 @@ src/main/resources/application.yml
 
 **环信即时通讯 IM 信息配置**
 
-1. 创建应用
+1. 创建应用。
 
 登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，点击**添加应用**，填写应用相关信息。
 
