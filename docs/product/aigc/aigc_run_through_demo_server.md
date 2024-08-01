@@ -1,6 +1,6 @@
 # 服务端配置
 
-通过配置服务端和客户端，利用环信即时通信 IM 服务器回调功能，在 IM 中引入 AI 服务（以 miniMax 中文大语言模型为例），创建机器人账号，从而跑通示例项目。
+通过配置服务端和客户端，利用环信即时通信 IM 服务器回调功能，在 IM 中引入 AI 服务（以 MiniMax 中文大语言模型为例），创建机器人账号，从而跑通示例项目。
 
 本文介绍通过跑通示例项目如何配置服务端。
 
@@ -91,7 +91,7 @@ bots.put("boy0",botBean0);
 
 ### 大语言模型（LLM）信息配置
 
-本代码示例以 miniMax 为例 [MiniMax 开放平台快速开始](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)，若使用其他大语言模型，可按其他语言模型配置要求进行调整。
+本代码示例以 MiniMax 为例 [MiniMax 开放平台快速开始](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)，若使用其他大语言模型，可按其他语言模型配置要求进行调整。
 
 ```yaml
 miniMax:

@@ -73,8 +73,8 @@ GET https://{host}/{org_name}/{app_name}/robot/rule?&page={page}&size={size}
 |  - `providerId`   | String       | 机器人对应的厂商 ID。  |
 |  - `timeout`  | Int  | 超时时间，目前未启用。 |
 |  - `status`   | String | 机器人的状态，`ACTIVE` 为启用状态，默认是启用。  |
-|  - `createDateTime`  | DATETIME       | 开通使用 MINIMAX AI 聊天服务的时间。  | 
-|  - `updateDateTime`   | DATETIME      | 更新 MINIMAX AI 聊天服务开通状态的时间。 |
+|  - `createDateTime`  | DATETIME       | 开通使用 MiniMax AI 聊天服务的时间。  | 
+|  - `updateDateTime`   | DATETIME      | 更新 MiniMax AI 聊天服务开通状态的时间。 |
 |  - `providerTextApi`  | String | 厂商支持的 AI 接口，默认使用 `chatcompletion_pro`，当前不支持可选。 |
 |  - `providerModel`  | String  | 厂商支持的 AI 模型类别。|
 |  - `providerAttribute`  |  JSONObject   | 机器人的一些属性。 |
