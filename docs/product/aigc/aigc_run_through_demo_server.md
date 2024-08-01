@@ -81,7 +81,7 @@ bots.put("boy0",botBean0);
 }
 ```
 
-1. 配置发送前回调规则。
+5. 配置发送前回调规则。
 
 若使用消息发送前回调功能，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通该功能，详见[回调配置相关文档](/product/enable_and_configure_IM.html#配置消息回调)。该功能为增值服务，费用详见[功能费用文档](/product/pricing.html#增值服务费用)。
 
