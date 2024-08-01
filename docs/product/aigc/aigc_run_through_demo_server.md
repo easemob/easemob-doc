@@ -1,6 +1,6 @@
 # 服务端配置
 
-通过配置服务端和客户端，利用环信即时通信 IM 服务器回调功能，在 IM 中引入 AI 服务（以 miniMax 中文大语言模型为例），创建机器人账号，从而跑通示例项目。
+通过配置服务端和客户端，利用环信即时通信 IM 服务器回调功能，在 IM 中引入 AI 服务（以 MiniMax 中文大语言模型为例），创建机器人账号，从而跑通示例项目。
 
 本文介绍通过跑通示例项目如何配置服务端。
 
@@ -58,15 +58,15 @@ easemob:
 
 4. 创建机器人的账号。
 
-要跑通示例项目，需要设置 8 个机器人账号。选择**应用概览** > **用户认证** 创建机器人账号。
+选择**应用概览** > **用户认证** 创建 8 个机器人账号。
 
-- 建议机器人账号的用户 ID 与下图中的保持一致。
+示例项目中提供了 8 个智能体，因此需要设置 8 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系，见下方代码。
+
+下图红框中的用户 ID 为示例项目中的与智能体绑定的机器人账号，若使用其他用户 ID，则需同步修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
 
 ![img](@static/images/aigc/robot_account_create.png)
 
-- 若使用上图之外的用户 ID，则需同步修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
-
-```
+```java
 static{
 
 BotBean botBean0 = new BotBean();
@@ -91,7 +91,7 @@ bots.put("boy0",botBean0);
 
 ### 大语言模型（LLM）信息配置
 
-本代码示例以 miniMax 为例 [MiniMax 开放平台快速开始](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)，若使用其他大语言模型，可按其他语言模型配置要求进行调整。
+本代码示例以 MiniMax 为例 [MiniMax 开放平台快速开始](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)，若使用其他大语言模型，可按其他语言模型配置要求进行调整。
 
 ```yaml
 miniMax:
