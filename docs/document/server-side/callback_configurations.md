@@ -2618,13 +2618,17 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 ### Reaction 回调事件
 
-回调请求主要字段含义：
+若对消息中的表情回复 Reaction 进行了操作，环信服务器会向你的 app server 发送回调请求。
+
+Reaction 回调请求中主要包含消息中的 Reaction 的信息（即 Reaction 数量和添加 Reaction 的用户列表）以及被操作的 Reaction 的相关信息（即被操作的 Reaction、执行操作的用户列表和用户数量以及 Reaction 操作类型）。
+
+Reaction 回调请求中的字段含义如下表所示：
 
 | 字段             | 数据类型   | 含义             |
 |:---------------|:-------|:---------------|
 | `chat_type` | String | 固定值为 `notify`。通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 type 字段确定具体类型。｜
 | `host`            | String | 服务器名称。              |
-| `appkey`          | String | 你在环信管理后台注册的应用唯一标识。        |
+| `appkey`          | String | 即时通讯服务分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成，生成后无法修改。 |
 | `from`            | String | 消息的发送方。     |
 | `to`              | String | 消息的接收方。   |
 | `eventType`       | String | “chat” 上行消息、“chat_offline” 离线消息。   |
@@ -2645,13 +2649,11 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `payload.data.reactions.op`    | List | Reaction 当前操作详情。 |
 | `payload.data.reactions.op.reaction`    | String | 表情。 |
 | `payload.data.reactions.op.userList`    | List | 操作表情的用户。 |
-| `payload.data.reactions.op.count`    | List | 表情操作人数。 |
-| `payload.data.reactions.op.reactionType`    | String| Reaction 当前操作类型。 |
+| `payload.data.reactions.op.count`  | List | 表情操作人数。 |
+| `payload.data.reactions.op.reactionType`  | String| Reaction 当前操作类型。`create` 为添加 Reaction。 |
 | `payload.data.reactions.op.operator`    | String | Reaction 当前操作人。 ｜
 
-其他字段见 [公共参数](#回调内容中单聊、群聊、聊天室事件的公共参数描述)。
-
-例如，在下面的回调请求示例中，消息 ID 为 `99XXXX32` 的消息，当前存在 `test` Reaction，若有用户（本例中为 `user2`） 添加了 Reaction `test-1`，则 Chat 服务器会向你的 app server 发送回调：
+例如，在下面回调请求示例中，消息 ID 为 `99XXXX32` 的消息，当前存在 Reaction `test`，用户 `user2` 添加了 Reaction `test-1`，则 Chat 服务器会向你的 app server 发送回调：
 
 ```json
 {
@@ -2710,23 +2712,47 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 ### Thread 回调事件
 
-主要字段含义：
+若对 Thread 中的一条消息进行相关操作，包括发送、撤回或修改，环信服务器会向你的 app server 发送回调请求。
+
+Thread 回调请求中的字段含义如下表所示：
 
 | 字段                 | 数据类型 | 含义                              |
 | :------------------- | :------- | :-------------------------------- |
 | `chat_type` | String | 固定值为 `notify`。通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 type 字段确定具体类型。 |
+
+| `host`            | String | 服务器名称。              |
+| `appkey`          | String | 即时通讯服务分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成，生成后无法修改。 |
+| `from`            | String | 固定为 `admin`。  |
+| `to`              | String | 消息所属的 Thread 的群组 ID。 |
+| `eventType`       | String | 事件类型，固定为 `chat`。     |
+| `msg_id`          | Long   | 回调事件的消息 ID。       |
+| `timestamp`       | Long   | 生成回调事件的时间。 |
 | `payload.type`               | String   | 固定值 `thread`。                 |
 | `payload.data`               | JSON     | Thread 操作数据结构。             |
-| `payload.data.id`            | String   | Thread 的 ID。                    |
-| `payload.data.name`          | String   | Thread 名称。                     |
-| `payload.data.from`          | String   | Thread 消息的操作人。             |
-| `payload.data.operation`     | String   | Thread 发送消息的事件：`update_msg`：消息更新。           |
 | `payload.data.msg_parent_id` | String   | 创建 Thread 的消息 ID，可能为空。 |
-| `payload.data.message_count` | Number   | Thread 消息的总数。               |
+| `payload.data.name`          | String   | Thread 名称。    |
+| `payload.data.from`          | String   | Thread 消息的操作人。             |
+| `payload.data.id`            | String   | Thread ID。                    |
+| `payload.data.message_count` | Number   | Thread 中的消息数量。               |
+| `payload.data.operation`     | String   | Thread 中的消息操作：`update_msg`，表示消息的发送、撤回或修改。|
 | `payload.data.muc_parent_id` | String   | 创建 Thread 时所在的群组 ID。     |
+| `payload.data.timestamp` | Long   | 操作消息的时间。     |
 | `payload.data.last_message`  | JSON     | 最近一条消息的内容。              |
-
-其他字段见 [公共参数](#回调内容中单聊、群聊、聊天室事件的公共参数描述)。
+| `payload.data.last_message.from`   | String   | Thread 中最新一条消息的操作者。 |
+| `payload.data.last_message.id`   | String  | 最新一条消息的消息 ID。  |
+| `payload.data.last_message.to`   | String  | Thread 中最新一条消息的接收方，即 Thread ID。 |
+| `payload.data.last_message.timestamp`   | Long  | 操作最新一条消息的时间。 |
+| `payload.data.last_message.payload.ext` | JSON  | Thread 中最新一条消息包含的扩展内容   |
+| `payload.data.last_message.payload.bodies` | List  | Thread 中最新一条消息的消息体。   |
+| `payload.data.last_message.payload.bodies.msg` | String  | Thread 中最新一条消息的消息内容。   |
+| `payload.data.last_message.payload.bodies.txt` | String  | Thread 中最新一条消息的消息类型。   |
+| `payload.data.last_message.meta` | JSON | 最新一条消息的界面不可见的元数据。 |
+| `payload.data.last_message.meta.thread.msg_parent_id`   | String  | 创建 Thread 的消息 ID。 |
+| `payload.data.last_message.meta.thread.thread_name`   | String  | Thread 名称。 |
+| `payload.data.last_message.meta.thread.muc_parent_id`   | String  | 创建 Thread 时所在的群组 ID。 |
+| `payload.data.last_message.payload.from` | String  | 消息操作者传入的 `from` 字段的值。  |
+| `payload.data.last_message.payload.to`   | String    | Thread 中最新一条消息的接收方，即 Thread ID。  |
+| `payload.data.last_message.payload.type`   | String  | 群聊，固定为 `groupchat`。 |
 
 回调请求示例：
 
