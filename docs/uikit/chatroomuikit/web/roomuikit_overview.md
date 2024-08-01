@@ -6,7 +6,7 @@
 
 - 若要访问源码，请点击[这里](https://github.com/easemob/Easemob-UIKit-web)。
 
-- 要体验环信聊天室 UIKit demo，请点击[这里](https://livestream-hsb.oss-cn-beijing.aliyuncs.com/index.html)。
+- 要体验环信聊天室 UIKit demo，请点击[这里](https://webim-live.easemob.com/login)。
 
 ## 功能
 
