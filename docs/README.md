@@ -1813,7 +1813,7 @@ projects:
               - text: 方案选择
                 link: /product/aigc/aigc_selection.html
               - text: 方案一
-                link: /product/aigc/aigc_open.html
+                link: /product/aigc/aigc_run_through_demo_server.html
               - text: 方案二
                 link: /product/aigc/aigc_use.html
           - text: 超级社区

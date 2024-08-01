@@ -1,15 +1,17 @@
 # 环信 AIGC 方案选择
 
-本文提供两种方案供你接入环信 AI 聊天服务，实现与机器人的聊天功能：
+本文提供两种方案供你接入环信 AI **单聊**服务，实现与机器人的聊天功能：
 
 - **方案一**：利用服务器回调服务，在 IM 中引入 AI 服务。
-- **方案二**：使用环信即时通讯云提供的 AI 智能功能。目前只支持**单聊**。
+- **方案二**：使用环信即时通讯云提供的 AI 智能功能。
 
 ## 方案一
 
+通过配置服务端和客户端，利用环信即时通信 IM 服务器回调功能，在 IM 中引入 AI 服务（以 miniMax 中文大语言模型为例），创建机器人账号，从而跑通示例项目。
+
 ### 技术架构
 
-目前，环信 AIGC 方案可通过服务器回调服务实现与机器人聊天，工作流程如下：
+目前，环信 AIGC 方案可通过服务器回调服务实现与机器人**一对一聊天**，工作流程如下：
 
 1. 用户发消息给机器人。
 2. 环信服务器收到消息后，通过服务端回调将事件通知第三方大模型厂商。
@@ -19,15 +21,9 @@
 
 ![img](@static/images/aigc/technical_architecture1.png)
 
-### 跑通准备
-
-登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，获取应用信息，包括 `App Key`、`Client ID` 及 `ClientSecret` 、创建机器人用户以及配置回调规则。
-
-有关更多信息，请参见[开通服务文档说明](aigc_use.html)。
-
 ### 跑通示例项目
 
-跑通 [GitHub 示例项目](https://github.com/easemob/Easemob-AIGCService-Example)，体验与 AIGC 数字人沟通方案。
+完成客户端和服务端配置，跑通 [GitHub 示例项目](https://github.com/easemob/Easemob-AIGCService-Example)，体验与 AIGC 数字人沟通方案。
 
 有关更多信息，请参见[跑通示例项目文档说明](aigc_run_through_demo.html)。
 

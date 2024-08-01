@@ -134,8 +134,8 @@ export const zhSidebar = sidebar({
               text: "方案一",
               collapsible: false,
               children: [
-                { text: "跑通准备", link: "aigc/aigc_open.html" },
-                { text: "跑通示例项目", link: "aigc/aigc_run_through_demo.html" },
+                { text: "服务端配置", link: "aigc/aigc_run_through_demo_server.html" },
+                { text: "客户端配置", link: "aigc/aigc_run_through_demo_client.html" },
               ], 
             }, 
             { 
