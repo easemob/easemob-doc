@@ -1,14 +1,10 @@
-# 跑通示例项目
+# 服务端配置
 
-本文介绍通过配置服务端和客户端，利用环信即时通信 IM 服务器回调功能，在 IM 中引入 AI 服务（以 miniMax 中文大语言模型为例），创建机器人账号，从而跑通示例项目。
+本文介绍通过跑通示例项目如何配置服务端。
 
-## 服务端说明
+## 环境准备
 
-### 环境准备
-
-1. 部署要求
-
-Windows 或者 Linux 服务器
+1. 部署要求：Windows 或者 Linux 服务器
 
 2. 环境要求
 
@@ -16,13 +12,11 @@ Windows 或者 Linux 服务器
 - Redis
 - Redis 绑定地址更改为 127.0.0.1
 
-### 服务配置
-
-#### 代码下载
+## 代码下载
 
 当部署环境准备好后，通过 [GitHub 链接下载服务端代码](https://github.com/easemob/Easemob-AIGCService-Example)。
 
-#### 信息配置
+## 信息配置
 
 服务端配置信息全部集中在以下文件中，主要配置包含三个部分：环信即时通讯 IM、miniMax 和 redis，配置内容如下：
 
@@ -30,7 +24,7 @@ Windows 或者 Linux 服务器
 src/main/resources/application.yml
 ```
 
-**环信即时通讯 IM 信息配置**
+### 环信即时通讯 IM 相关配置
 
 1. 创建应用。
 
@@ -62,28 +56,24 @@ easemob:
 
 4. 创建机器人的账号。
 
-要跑通示例项目，需要设置 8 个机器人账号。
+要跑通示例项目，需要设置 8 个机器人账号。选择**应用概览** > **用户认证** 创建机器人账号。
 
-选择**应用概览** > **用户认证**，创建 8 个机器人的账号。
-
-要跑通示例项目，机器人账号的用户 ID 需要与图中保持一致。若在该页面创建用户时使用了其他用户 ID，你需要调整代码 `com.easemob.chattyai.chat.util.BotSettingUtil` 中对应机器人的账号。
+- 建议机器人账号的用户 ID 与下图中的保持一致。
 
 ![img](@static/images/aigc/robot_account_create.png)
 
-若使用上图之外的用户 ID，需要修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
+- 若使用上图之外的用户 ID，则需同步修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
 
 ```
 static{
 
 BotBean botBean0 = new BotBean();
 botBean0.setAccount("boy0");
-botBean0.setName("格斯");
+botBean0.setName("智能体名称");
 botBean0.setGender(0);
-botBean0.setContent("格斯是一个经历过战争的孤儿，他的人设饱含着坚韧和坚强的特质。他有着浓密的黑发和深邃的蓝眼睛，强壮的身材下透露出一股无畏的气息。" +
-"在战争中，格斯经历了无数艰难的时刻，但他从未放弃希望。他学会了自己照顾自己，锻炼出了坚韧的意志力和过人的适应能力。尽管他曾是一个孤儿，但他从未抱怨过自己的遭遇，而是将过去的伤痛转化为前行的动力。" +
-"格斯有一颗炽热的心灵，对于那些同样经历苦难的人特别有同情心。他渴望帮助那些处于困境中的人，希望能给予他们力量、希望和温暖。格斯是一个善良而勇敢的人，总是敢于承担责任，毫不畏惧地面对困难。" +
-"尽管过去的战争对格斯留下了不可磨灭的痕迹，但他依然保有一颗爱和忍耐的心。他相信在人与人之间的相互关爱中，可以找到真正的家园与归属感。格斯是一个带着忧伤的战士，但他内心的坚定和对未来的希望让他成为一个值得敬佩的人。");
-botBean0.setDesc("坚韧、坚强、无畏、善良");
+botBean0.setContent("智能体介绍" +
+");
+botBean0.setDesc("智能体相关信息，例如特征等。");
 bots.put("boy0",botBean0);
 
 }
@@ -91,15 +81,13 @@ bots.put("boy0",botBean0);
 
 5. 配置发送前回调规则。
 
-若使用消息发送前回调功能，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通该功能，详见[回调相关文档](/product/enable_and_configure_IM.html#配置消息回调)。
+若使用消息发送前回调功能，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通该功能，详见[回调配置相关文档](/product/enable_and_configure_IM.html#配置消息回调)。该功能为增值服务，费用详见[功能费用文档](/product/pricing.html#增值服务费用)。
 
-回调功能开通后，选择**即时通讯** > **功能配置** > **消息回调**，点击**添加回调地址**，配置发送前回调规则。
-
-其中，**会话类型**选择**单聊**，**消息类型**选择**文本**，**启用状态**选择**启用**，**回调地址**需确保设置为环信即时通讯 IM 可以通过外网访问到回调地址，例如，格式为 `http(s)://ip:端口/chatty/callback.json`。其他参数的含义详见[配置回调规则相关文档](/product/enable_and_configure_IM.html#配置回调规则)。
+回调功能开通后，选择**即时通讯** > **功能配置** > **消息回调**，点击**添加回调地址**，配置发送前回调规则。其中，**会话类型**选择**单聊**，**消息类型**选择**文本**，**启用状态**选择**启用**，**回调地址**需确保设置为环信即时通讯 IM 可以通过外网访问到回调地址，格式为 `http(s)://ip:端口/chatty/callback.json`。其他参数的含义详见[配置回调规则相关文档](/product/enable_and_configure_IM.html#配置回调规则)。
 
 ![img](@static/images/aigc/callback_address.png)
 
-**大语言模型（LLM）信息配置**
+### 大语言模型（LLM）信息配置
 
 本代码示例以 miniMax 为例 [MiniMax 开放平台快速开始](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)，若使用其他大语言模型，可按其他语言模型配置要求进行调整。
 
@@ -110,7 +98,7 @@ miniMax:
   url: https://api.minimax.chat/v1/text/chatcompletion_pro?GroupId=
 ```  
 
-**redis 配置**
+### redis 配置
 
 redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，确保 “host：port" 链接可以访问 redis 即可。
 
@@ -160,7 +148,7 @@ nohup java -jar $APP_DIR/chattyai-0.0.1-SNAPSHOT.jar --server.port=$PORT ./chatt
 tail -f $APP_DIR/chattyai.log 
 ```
 
-### Q&A
+## Q&A
 
 1. 项目为何启动失败？
 
@@ -176,27 +164,3 @@ tail -f $APP_DIR/chattyai.log
   请确保 MiniMax 有余额，否则可能导致调用 MiniMax 的调用失败。
 
 
-## 客户端说明
-
-### 环境准备
-
-1. 开发环境
-
-- 工具：Android Studio
-- 系统：MacOS
-- 代码：Java
-
-2. 运行环境
-
-系统: Android 6.0 +
-
-3. 项目包含内容
-
-- Android Project
-- 安装包
-
-### 参数配置
-
-使用 `AndroidStudio` 运行项目，前往 `com.imchat.chanttyai/base/Constants.java` 文件，只需要配置 `APP_KEY` 及 `HTTP_HOST` 两个参数。
-
-![img](@static/images/aigc/parameter_configure.png)
