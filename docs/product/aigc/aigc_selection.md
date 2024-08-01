@@ -25,7 +25,7 @@
 
 完成客户端和服务端配置，跑通 [GitHub 示例项目](https://github.com/easemob/Easemob-AIGCService-Example)，体验与 AIGC 数字人沟通方案。
 
-有关更多信息，请参见[跑通示例项目文档说明](aigc_run_through_demo.html)。
+有关更多信息，请参见[跑通示例项目文档说明](aigc_run_through_demo_server.html)。
 
 ## 方案二
 
