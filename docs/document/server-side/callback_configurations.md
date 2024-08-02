@@ -2718,8 +2718,7 @@ Thread 回调请求中的字段含义如下表所示：
 
 | 字段                 | 数据类型 | 含义                              |
 | :------------------- | :------- | :-------------------------------- |
-| `chat_type` | String | 固定值为 `notify`。通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 type 字段确定具体类型。 |
-
+| `chat_type` | String | 固定值为 `notify`。通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 `type` 字段确定具体类型。 |
 | `host`            | String | 服务器名称。              |
 | `appkey`          | String | 即时通讯服务分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成，生成后无法修改。 |
 | `from`            | String | 固定为 `admin`。  |
