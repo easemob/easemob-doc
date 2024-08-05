@@ -176,7 +176,27 @@ conn.addEventHandler("eventName", {
 
 2. 接收附件消息。
 
-   接收方可以自行下载语音、图片、图片缩略图、视频和文件。
+  接收方可以自行下载语音、图片、图片缩略图、视频和文件。
+
+对于消息附件，你也可以将附件上传到自己的服务器，而不是环信服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
+
+```javascript
+function sendPrivateUrlImg() {
+  let option = {
+    chatType: "singleChat",
+    // 消息类型。
+    type: "img",
+    // 图片文件的 URL 地址。
+    url: "img url",
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "username",
+  };
+  // 创建一条图片消息。
+  let msg = WebIM.message.create(option);
+  //  调用 `send` 方法发送该图片消息。
+  conn.send(msg);
+}
+```
 
 #### 发送和接收语音消息
 
@@ -326,30 +346,6 @@ conn.addEventHandler("eventName", {
   },
 });
 
-```
-
-#### 发送 URL 图片消息
-
-你也可以将图片上传到自己的服务器，而不是环信服务器，然后调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
-
-发送 URL 图片消息之前，确保在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。
-
-```javascript
-function sendPrivateUrlImg() {
-  let option = {
-    chatType: "singleChat",
-    // 消息类型。
-    type: "img",
-    // 图片文件的 URL 地址。
-    url: "img url",
-    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-    to: "username",
-  };
-  // 创建一条图片消息。
-  let msg = WebIM.message.create(option);
-  //  调用 `send` 方法发送该图片消息。
-  conn.send(msg);
-}
 ```
 
 #### 发送和接收视频消息
