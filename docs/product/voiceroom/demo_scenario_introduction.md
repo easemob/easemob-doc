@@ -21,11 +21,11 @@
 
 Android Demo 架构如下图所示：
 
-![img](@static/images/voiceroom/voiceroom_demo_architecture_android.png)
+![img](/images/voiceroom/voiceroom_demo_architecture_android.png)
 
 iOS Demo 架构如下图所示：
 
-![img](@static/images/voiceroom/voiceroom_demo_architecture_ios.png)
+![img](/images/voiceroom/voiceroom_demo_architecture_ios.png)
 
 各模块实现的功能如下：  
 

@@ -12,7 +12,7 @@
 
 多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置各端设备的数量：
 
-![img](@static/images/common/multidevice_device_count.png)
+![img](/images/common/multidevice_device_count.png)
 
 单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
 

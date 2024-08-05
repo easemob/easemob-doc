@@ -14,7 +14,7 @@
 
 1. 登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，在首页的**应用列表**区域点击 **添加应用** 按钮，创建即时通讯 IM 应用。
 
-![img](@static/images/product/console.png)
+![img](/images/product/console.png)
 
 2. 在 **创建应用** 对话框中，输入新应用的相关信息，点击 **创建** 按钮创建应用。新建应用的服务版本默认为免费版。
 
@@ -24,13 +24,13 @@
 3. `数据中心`：设置后无法修改。
 :::
 
-![img](@static/images/product/create-app.png)
+![img](/images/product/create-app.png)
 
 ## 购买服务
 
 1. 创建应用后，在 **应用列表** 中点击所创建应用的 **操作** 栏中的 **管理** 按钮，进入 **应用详情** 页面。
 
-![img](@static/images/product/app-setting.png)
+![img](/images/product/app-setting.png)
 
 2. 开通或升级版本。
 
@@ -38,11 +38,11 @@
 
 - 在页面左侧的导航栏，选择 **即时通讯** > **功能配置** > **版本开通**，查看各种套餐的详情，选择需要的版本，点击 **立即开通**。
 
-![img](@static/images/product/select-version.png)
+![img](/images/product/select-version.png)
 
 - 在页面左侧的导航栏，选择 **即时通讯** > **服务概览**，在 **服务版本** 区域中单击 **升级版本**，进入即时通讯 IM 服务版本购买页面。
 
-![img](@static/images/product/upgrade-version.png)
+![img](/images/product/upgrade-version.png)
 
 - 在页面左侧的导航栏，选择 **即时通讯** > **功能配置** > **功能配置总览**，点击各功能的 **操作** 一栏中的 **升级** 或 **增值服务**。
 
@@ -58,7 +58,7 @@
 服务购买页显示的预估费用仅用于做参考，预估费用仅包含基础费用，具体费用以每月账单为准。
 :::
 
-![img](@static/images/product/add-service.png)
+![img](/images/product/add-service.png)
 
 3. 勾选 **我已阅读并同意《环信云服务购买协议》**。
 
@@ -66,7 +66,7 @@
 
 购买成功后即刻生效，当天开始计费，每月 1 号自动扣除上月总消耗费用。
 
-![img](@static/images/product/success.png)
+![img](/images/product/success.png)
 
 ## 获取环信即时通讯 IM 的信息
 
@@ -91,7 +91,7 @@
 3. **升级**：功能如果当前服务版本中不包含、或需要提高功能状态中的参数值，则可点击 **升级**，购买升级至符合业务需求的服务版本即可；
 4. **增值服务**：点击**增值服务**，进入增值服务购买页面，根据实际需求选择购买。
 
-![img](@static/images/product/functional.png)
+![img](/images/product/functional.png)
 
 ## 设置消息撤回（REST & 客户端）
 
@@ -99,7 +99,7 @@
 2. 在弹出的 **消息撤回时间设置** 对话框中，设置消息可撤回时长。端消息撤回时长和 REST 消息撤回时长均不能超过 7 天。
 3. 单击 **确定** 保存配置。
 
-![img](@static/images/product/rest.png)
+![img](/images/product/rest.png)
 
 ## 设置群消息已读回执
 
@@ -107,7 +107,7 @@
 
 在环信即时通讯云的左侧导航栏中，选择 **即时通讯** > **功能配置** > **功能配置总览**。在 **功能配置总览** 页面的 **基础功能** 页签下，搜索找到**消息已读回执（群聊）**开通功能。
 
-![img](@static/images/product/message/message_receipt.png)
+![img](/images/product/message/message_receipt.png)
 
 ## 配置推送证书
 
@@ -117,19 +117,19 @@
 
 1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中，点击 **管理**。
 
-![img](@static/images/product/push/push_app_list.png)
+![img](/images/product/push/push_app_list.png)
 
 2. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **消息推送** > **证书管理**，进入 **证书管理** 页面。
 
-![img](@static/images/product/push/push_settings.png)
+![img](/images/product/push/push_settings.png)
 
 3. 点击 **添加推送证书** 按钮，打开 **添加推送证书** 对话框。
 
-![img](@static/images/product/push/push_settings_window.png)
+![img](/images/product/push/push_settings_window.png)
 
 4. 在 **添加推送证书** 对话框中，填写各厂商平台的相关推送信息，点击 **保存** 按钮，完成证书配置。
 
-![img](@static/images/product/push/push_settings_form.png)
+![img](/images/product/push/push_settings_form.png)
 
 
 ## 配置推送模板
@@ -138,7 +138,7 @@
 
 开启后，你可以配置默认推送模板和自定义推送模板。
 
-![img](@static/images/product/push/enable_advanced_function.png)
+![img](/images/product/push/enable_advanced_function.png)
 
 ### 使用默认推送模板 
 
@@ -150,11 +150,11 @@
 
 1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中，点击 **管理**。
 
-![img](@static/images/product/push/push_app_list.png)
+![img](/images/product/push/push_app_list.png)
 
 2. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **消息推送** > **模板管理**，进入 **模板管理** 页面。
 
-![img](@static/images/product/push/push_template.png)
+![img](/images/product/push/push_template.png)
 
 3. 点击 **添加推送模板**，在弹出的窗口中配置**模板名称**、**标题**和**内容**。
 
@@ -205,7 +205,7 @@
   }      
 ```   
 
-  ![img](@static/images/product/push/push_template_add.png)
+  ![img](/images/product/push/push_template_add.png)
 
 ### 使用自定义推送模板
 
@@ -223,19 +223,19 @@
 
 1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
 
-![img](@static/images/product/push/push_app_list.png)
+![img](/images/product/push/push_app_list.png)
 
 2. 选择**即时通讯** > **功能配置** > **功能配置总览**，在**基础功能**页签的功能列表上，点击**回调**对应的 **增值服务**。
 
-![img](@static/images/callback/callback_activation.png)
+![img](/images/callback/callback_activation.png)
 
 3. 在弹出页面的**可选增值服务**区域，选择**回调**对应的**付费开通**，确定购买时长，选择 **我已阅读并同意《环信云服务购买协议》**，然后点击**提交订单**。
 
-![img](@static/images/callback/callback_purchase.png)
+![img](/images/callback/callback_purchase.png)
 
 4. 在支付页面，点击**立即支付**支付费用后即可使用。
 
-![img](@static/images/callback/callback_payment.png)
+![img](/images/callback/callback_payment.png)
 
 ### 配置回调规则
 
@@ -243,13 +243,13 @@
 
 1. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **消息回调**，进入 **消息回调** 页面。
 
-![img](@static/images/product/push-callback.png)
+![img](/images/product/push-callback.png)
 
 2. 点击 **添加回调地址** 按钮，打开回调配置对话框，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置。
 
 - 配置发送前回调规则
 
-![img](@static/images/callback/pre_delivery_rule_add.png)
+![img](/images/callback/pre_delivery_rule_add.png)
 
 在**发送前回调**对话框中配置以下参数：
 
@@ -266,7 +266,7 @@
 
 - 配置发送后回调规则
 
-![img](@static/images/callback/post_delivery_rule_add.png)
+![img](/images/callback/post_delivery_rule_add.png)
 
 在**发送后回调**对话框中配置以下参数：
 
@@ -313,7 +313,7 @@
 消息举报功能与内容审核功能为两个独立的功能，没有任何关联，因此使用该功能无需提前开通内容审核功能。
 :::
 
-![img](@static/images/product/enable_and_configure/message_report_enable.png)
+![img](/images/product/enable_and_configure/message_report_enable.png)
 
 2. 查看消息举报记录。
 
@@ -325,7 +325,7 @@
 2. 在敏感词配置页面，单击 **服务设置** 旁边的 **编辑**，在弹出的 **敏感词服务** 对话框中，按需求选择对应设置。
 3. 单击 **确定** 保存配置。
 
-![img](@static/images/product/sensitive-words.png)
+![img](/images/product/sensitive-words.png)
 
 ## REST-IP 白名单设置
 
@@ -340,7 +340,7 @@
 :::
 3. 单击 **保存** 完成配置。
 
-![img](@static/images/product/ip-whitelist.png)
+![img](/images/product/ip-whitelist.png)
 
 ### 删除 IP 白名单
 
@@ -350,7 +350,7 @@
 
 2. 在 **IP白名单** 列表中，单击目标 IP 右侧的 **删除**。
 
-![img](@static/images/product/delete-ip-allow-list.png)
+![img](/images/product/delete-ip-allow-list.png)
 
 3. 单击 **确认**，则删除该 IP 地址。
 
@@ -371,11 +371,11 @@
 
    各参数的设置要求，详见[注册用户 RESTful API](/document/server-side/account_system.html#开放注册单个用户)。
 
-![img](@static/images/product/user_create.png)
+![img](/images/product/user_create.png)
 
 创建用户后，你可以点击 **操作** 栏中的 **更多** 对该用户进行管理，包括修改用户信息和查看好友等。
 
-![img](@static/images/product/user_operation.png)
+![img](/images/product/user_operation.png)
 
 ## 创建聊天室
 
@@ -393,7 +393,7 @@
 
 环信即时通讯云控制台支持查询用户设备端的日志，或将设备端的日志上传到环信日志服务器。目前，仅支持使用了高于 3.3.2 的 Android/iOS SDK 的设备。
 
-![img](@static/images/product/enable_and_configure/user_device_log.png)
+![img](/images/product/enable_and_configure/user_device_log.png)
 
 ### 上传设备日志到环信日志服务器
 
@@ -413,13 +413,13 @@
 
 登录环信即时通讯云控制台，选择 **费用中心** > **账户中心**，可查看你当前的账户余额和支出明细。
 
-![img](@static/images/product/account-bills.png)
+![img](/images/product/account-bills.png)
 
 ## 查看订单记录
 
 登录环信即时通讯云控制台，选择 **费用中心** > **订单中心**，可查看你当前的所有订单记录。
 
-![img](@static/images/product/order-records.png)
+![img](/images/product/order-records.png)
 
 **订单中心**页面上的订单状态说明如下：
 
@@ -427,14 +427,14 @@
 - **服务中**：表示当前订单中购买的服务在使用中。同一 App Key 同时仅能有 1 个服务版本的订单状态为**服务中**。
 - **已完结**：表示当前订单中购买的服务已关闭。当客户升级新服务后，原服务版本订单和相关增值服务订单均会自动关闭，变为**已完结**状态。
 
-![img](@static/images/product/order-status.png)
+![img](/images/product/order-status.png)
 
 点击 **操作** 栏中的 **详情**，可查看订单详情。
 
-![img](@static/images/product/order-detail.png)
+![img](/images/product/order-detail.png)
 
 ## 查看账单记录
 
 登录环信即时通讯云控制台，选择 **费用中心** > **消费账单**，可查看你当前的已生成的账单记录。
 
-![img](@static/images/product/bill-records.png)
+![img](/images/product/bill-records.png)

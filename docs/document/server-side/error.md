@@ -10,7 +10,7 @@
 
 返回示例如下图所示：
 
-![REST API返回错误示例](@static/images/server-side/response_icon.jpeg)
+![REST API返回错误示例](/images/server-side/response_icon.jpeg)
 
 建议对 App 自己的服务器端调用的 REST API 结果进行容错处理，例如：
 

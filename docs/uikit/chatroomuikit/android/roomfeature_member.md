@@ -10,7 +10,7 @@
 
 在 UIKit 中，默认通过点击聊天室界面右上角的成员按钮，触发成员列表弹窗。在成员列表中，用户可以查看聊天室当前在线成员，包括成员的身份、头像和昵称，同时可以点击每位成员右侧的按钮，触发禁言和移除的操作。
 
-![img](@static/images/uikit/chatroomfeature/member_list.png =500x500)
+![img](/images/uikit/chatroomfeature/member_list.png =500x500)
 
 ## 搜索成员
 
@@ -18,7 +18,7 @@
 
 UIKit 中的成员搜索功能放置在[成员列表](#查看成员列表)中。当聊天室中的成员较多时，用户可以在成员列表搜索框中输入成员昵称快速找到指定成员。
 
-![img](@static/images/uikit/chatroomfeature/member_search.png =300x600)
+![img](/images/uikit/chatroomfeature/member_search.png =300x600)
 
 ## 禁言成员
 
@@ -30,7 +30,7 @@ UIKit 中的成员搜索功能放置在[成员列表](#查看成员列表)中。
 
 如果用户想要取消禁言成员，需要在已禁言列表中找到该成员，点击成员右端的管理功能按钮，触发解除禁言选项，实现取消禁言的操作。
 
-![img](@static/images/uikit/chatroomfeature/member_mute.png =500x500)
+![img](/images/uikit/chatroomfeature/member_mute.png =500x500)
 
 ## 移除成员
 
@@ -38,4 +38,4 @@ UIKit 中的成员搜索功能放置在[成员列表](#查看成员列表)中。
 
 在 UIKit 的成员列表中，聊天室所有者通过点击单个成员的管理功能按钮，触发移除成员的选项，实现对指定成员的踢出操作。
 
-![img](@static/images/uikit/chatroomfeature/member_mute.png =500x500)
+![img](/images/uikit/chatroomfeature/member_mute.png =500x500)

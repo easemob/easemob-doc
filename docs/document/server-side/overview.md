@@ -20,7 +20,7 @@
 
 不同 org 之间的用户数据相互隔离；同一个 org 下，不同 app 之间的用户数据也相互隔离。一个 org 的数据架构如下图：
 
-![img](@static/images/server-side/prepare_to_use_api.png)
+![img](/images/server-side/prepare_to_use_api.png)
 
 ## 前提条件
 
@@ -45,7 +45,7 @@
 
 应用所在数据中心可以在环信用户管理后台 > 应用列表找到对应的 App Key 点击 **管理** > **即时通讯** > **服务概览** 中查看：
 
-![img](@static/images/applet/service_overview.png)
+![img](/images/applet/service_overview.png)
 
 :::notice
 1. 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。请根据您所在数据中心选择请求域名。

@@ -4,7 +4,7 @@
 
 环信音视频能力有几种典型的应用模式，包括：一对一音视频、多人音视频会议、多人音视频互动直播。
 
-![img](@static/images/privitization/em-rtcsdk-scenarios.png)
+![img](/images/privitization/em-rtcsdk-scenarios.png)
 
 多人音视频互动直播的典型场景包括多人视频相亲、线上KTV、狼人杀直播、教育小班课、教育双师课等。
 

@@ -9,7 +9,7 @@
 
 HTTP Request
 
-| ![img](@static/images/privitization/post.png) | /{orgName}/{appName}/whiteboards/joinorcreate/byname |
+| ![img](/images/privitization/post.png) | /{orgName}/{appName}/whiteboards/joinorcreate/byname |
 | ---- | ---------------------------------------------------- |
 
 | 参数          | 说明             |
@@ -73,7 +73,7 @@ curl -L -X POST 'http://127.0.0.1:8031/easemob-demo/chatdemoui/whiteboards/joino
 
 HTTP Request 注意这里的whiteboardUserId不是IM的useId,是上一个创建或者加入白板里返回的userId
 
-| ![img](@static/images/privitization/post.png) | /{orgName}/{appName}/whiteboards/upload/{whiteboardUserId} |
+| ![img](/images/privitization/post.png) | /{orgName}/{appName}/whiteboards/upload/{whiteboardUserId} |
 | ---- | ---------------------------------------------------------- |
 
 #### 请求示例

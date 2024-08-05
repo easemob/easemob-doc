@@ -14,7 +14,7 @@
 
 1. 登录环信即时通讯云控制台，在首页的**应用列表**区域点击 **创建应用** 按钮，创建即时通讯 IM 应用。
 
-![img](@static/images/privitization/deploy_index.png)
+![img](/images/privitization/deploy_index.png)
 
 2. 在 **创建应用** 对话框中，输入新应用的相关信息，点击 **创建** 按钮创建应用。
 
@@ -23,7 +23,7 @@
 2. `Appkey`：即时通讯服务分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成，生成后无法修改。
 :::
 
-![img](@static/images/privitization/deploy_create_app.png)
+![img](/images/privitization/deploy_create_app.png)
 
 
 
@@ -47,7 +47,7 @@
 2. **设置**：指该功能已开通且有需要设置的配置项，点击 **设置**，即可进入对应设置页配置；
 3. **可调整，联系商务升级**：功能如果当前服务版本中不包含、或需要提高功能状态中的参数值，则通过联系商务调整升级至符合业务需求的服务版本即可；
 
-![img](@static/images/privitization/deploy_service.png)
+![img](/images/privitization/deploy_service.png)
 
 ## 设置消息撤回（REST & 客户端）
 
@@ -55,7 +55,7 @@
 2. 在弹出的 **消息撤回时间设置** 对话框中，设置消息可撤回时长。端消息撤回时长和 REST 消息撤回时长均不能超过 7 天。
 3. 单击 **确定** 保存配置。
 
-![img](@static/images/privitization/deploy_rest.png)
+![img](/images/privitization/deploy_rest.png)
 
 ## 配置推送证书
 
@@ -65,20 +65,20 @@
 
 1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中，点击 **管理**。
 
-![img](@static/images/privitization/deploy_credentials.png)
+![img](/images/privitization/deploy_credentials.png)
 
 2. 在左侧导航栏，选择 **即时推送** > **配置证书**，进入 **配置证书** 页面。
 
-![img](@static/images/privitization/deploy_push_settings.png)
+![img](/images/privitization/deploy_push_settings.png)
 
 3. 点击 **添加推送证书** 按钮，打开 **添加推送证书** 对话框。
 
 
-![img](@static/images/privitization/deploy_push-settings_window.png)
+![img](/images/privitization/deploy_push-settings_window.png)
 
 4. 在 **添加推送证书** 对话框中，填写各厂商平台的相关推送信息，点击 **保存** 按钮，完成证书配置。
 
-![img](@static/images/privitization/deploy_push-settings_form.png)
+![img](/images/privitization/deploy_push-settings_form.png)
 
 ## 配置消息回调
 
@@ -88,15 +88,15 @@
 
 1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
 
-![img](@static/images/privitization/deploy_credentials.png)
+![img](/images/privitization/deploy_credentials.png)
 
 2. 在左侧导航栏，选择 **服务管理** > **回调服务**，进入 **回调服务** 页面。
 
-![img](@static/images/privitization/deploy_push_callback.png)
+![img](/images/privitization/deploy_push_callback.png)
 
 3. 点击 **添加回调地址** 按钮，打开回调配置对话框，在回调配置对话框中，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置，具体配置内容说明见 [回调配置](/document/server-side/callback.html#实现步骤)。
 
-![img](@static/images/privitization/deploy_push_window.png)
+![img](/images/privitization/deploy_push_window.png)
 
 
 ## 敏感词设置
@@ -105,7 +105,7 @@
 2. 在敏感词配置页面，单击 **添加敏感词**，在弹出的 **添加敏感词** 对话框中，自定义敏感词库。
 3. 单击 **确定** 保存配置。
 
-![img](@static/images/privitization/deploy_sensitive_words.png)
+![img](/images/privitization/deploy_sensitive_words.png)
 
 ## REST-IP 白名单设置
 
@@ -119,7 +119,7 @@
 3. 若白名单列表为空，则所有 IP 地址均可发 REST 消息。
 :::
 3. 单击 **保存** 完成配置。
-![img](@static/images/privitization/deploy_ip_whitelist.png)
+![img](/images/privitization/deploy_ip_whitelist.png)
 
 ### 删除 IP 白名单
 
@@ -129,6 +129,6 @@
 
 2. 在 **IP白名单** 列表中，单击目标 IP 右侧的 **删除**。
 
-![img](@static/images/privitization/deploy_ip_allow_list.png)
+![img](/images/privitization/deploy_ip_allow_list.png)
 
 3. 单击 **确认**，则删除该 IP 地址。

@@ -165,13 +165,13 @@ config.agoraAppId=@"声网 AppID";
 
 发起通话后的 UI 界面如下：
 
-<img src="@static/images/ios/sendcall.png" width="400" />
+<img src="/images/ios/sendcall.png" width="400" />
 
 ### 收到邀请
 
 主叫方调用邀请接口后，如果被叫方在线且并未处于通话过程中，将弹出通话页面，被叫用户可选择接听或者拒绝。通话页面如下：
 
-<img src="@static/images/ios/recvcall.png" width="400" />
+<img src="/images/ios/recvcall.png" width="400" />
 
 被叫振铃的同时，会触发以下回调：
 

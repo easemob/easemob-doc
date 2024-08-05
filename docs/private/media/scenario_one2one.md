@@ -4,7 +4,7 @@
 
 环信音视频能力有几种典型的应用模式，包括：一对一音视频、多人音视频会议、多人音视频互动直播。
 
-![img](@static/images/privitization/em-rtcsdk-scenarios.png)
+![img](/images/privitization/em-rtcsdk-scenarios.png)
 
 一对一音视频用于实现1对1语音通话和1对1视频通话，典型场景包括社交交友，远程心理咨询、远程医疗、视频面试、一对一在线教育、远程视频辅助等。
 

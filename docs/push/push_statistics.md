@@ -12,11 +12,11 @@
 - 推送成功率
 - 推送厂商通道占比
 
-![img](@static/images/instantpush/push_statistics_1.png)
+![img](/images/instantpush/push_statistics_1.png)
 
 环信 PUSH 提供一定时间段的推送数据及推送指标统计详情：
 
 - 推送数量：各个通道（全部、环信在线通道、谷歌、华为、小米、魅族、OPPO、VIVO、APNs）的推送详情：推送成功数、推送失败数、推送未知数
 - 推送指标：全部通道（包含环信在线通道、小米、魅族、VIVO、APNS）、环信在线通道、小米、魅族、VIVO、APNS 通道的发送数、送达数、点击数
 
-![img](@static/images/instantpush/push_statistics_2.png)
+![img](/images/instantpush/push_statistics_2.png)

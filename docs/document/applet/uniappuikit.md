@@ -24,7 +24,7 @@ HBuilderx ⇒ 工具 ⇒ 插件安装 ⇒ 安装新插件 ⇒ 前往插件市场
 
 所有依赖配置项都在 utils 中：
 
-![img](@static/images/applet/utils.jpeg)
+![img](/images/applet/utils.jpeg)
 
 具体 SDK 集成，详见 [Uniapp 全平台](uniapp.html)
 
@@ -34,7 +34,7 @@ HBuilderx ⇒ 工具 ⇒ 插件安装 ⇒ 安装新插件 ⇒ 前往插件市场
 
 ## 组件介绍
 
-<img src="@static/images/applet/component.jpeg" width="400" />
+<img src="/images/applet/component.jpeg" width="400" />
 
 ## 组件使用
 
@@ -55,7 +55,7 @@ import chat from "@/components/chat/chat.vue";
    </chat>
 ```
 
-<img src="@static/images/applet/uniappuikit.jpeg" width="400" />
+<img src="/images/applet/uniappuikit.jpeg" width="400" />
 
 ### chat 组件详细介绍
 
@@ -68,7 +68,7 @@ import chat from "@/components/chat/chat.vue";
 
 - chat 组件依赖  utils  中的文件，因此使用 chat 组件时，务必保证 utils 中的文件一并存在
 
-<img src="@static/images/applet/utils1.jpeg" width="400" />
+<img src="/images/applet/utils1.jpeg" width="400" />
 
 #### chat 组件的消息存取
 
@@ -96,7 +96,7 @@ import longPressModal from "@/components/longPressModal/index";
    :popStyle="popStyle"/>     // 样式
 ```
 
-<img src="@static/images/applet/huadong.jpeg" width="400" />
+<img src="/images/applet/huadong.jpeg" width="400" />
 
 ### 长按组件详细介绍
 

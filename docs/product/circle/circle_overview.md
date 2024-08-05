@@ -6,7 +6,7 @@
 
 ## 社区、频道和子区介绍
 
-![img](@static/images/circle/circle_product_overview.png)
+![img](/images/circle/circle_product_overview.png)
 
 ### 社区、频道和子区的基本概念与关系
 

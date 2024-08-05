@@ -4,7 +4,7 @@
 
 环信音视频能力有几种典型的应用模式，包括：一对一音视频、多人音视频会议、多人音视频互动直播。
 
-![img](@static/images/privitization/em-rtcsdk-scenarios.png)
+![img](/images/privitization/em-rtcsdk-scenarios.png)
 
 多人音视频会议的典型场景包括企业多人视频会议、移动协同办公、远程医疗会诊、会诊模式的视频客服等。
 
@@ -100,7 +100,7 @@ Demo下载地址请见： [demo下载](common_clientsdk#场景demo及源码下�
 请选择“以主播身份进入房间”。<br>
 “以观众身份进入房间”属于环信多人音视频互动直播API的一部分，使用说明请见 [互动直播介绍](scenario_live)
 :::
-![img](@static/images/privitization/meeting-demo4.png?w=300)
+![img](/images/privitization/meeting-demo4.png?w=300)
 #### **音视频会议主界面**
 
 在音视频会议的主界面，演示了以下功能：
@@ -116,4 +116,4 @@ Demo下载地址请见： [demo下载](common_clientsdk#场景demo及源码下�
 “上麦/下麦”属于环信多人音视频互动直播API的一部分，使用说明请见 [互动直播介绍](scenario_live)
 :::
 
-![img](@static/images/privitization/meeting-demo5.png?w=300)
+![img](/images/privitization/meeting-demo5.png?w=300)

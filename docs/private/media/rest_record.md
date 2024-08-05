@@ -62,7 +62,7 @@
 :::
 #### HTTP Request
 
-| ![img](@static/images/privitization/get.png)  | **{orgName}/{appName}/audio/{confrId}** |
+| ![img](/images/privitization/get.png)  | **{orgName}/{appName}/audio/{confrId}** |
 | :----------------------------------------------------------- | :-------------------------------------- |
 
 需要在请求时对应填写{confrId}会议ID，如果当前没有会议ID，请从其他接口获取。
@@ -141,7 +141,7 @@ curl -X GET -i "http://a1.easemob.com/easemob-demo/testapp/audio/IM_X36482952464
 
 #### HTTP Request
 
-| ![img](@static/images/privitization/get.png) | **{orgName}/{appName}/audio/{beginTime}/{endTime}/{startId}/{length}** |
+| ![img](/images/privitization/get.png) | **{orgName}/{appName}/audio/{beginTime}/{endTime}/{startId}/{length}** |
 | :----------------------------------------------------------- | :----------------------------------------------------------- |
 
 
@@ -201,7 +201,7 @@ curl -X GET -i "http://a1.easemob.com/easemob-demo/testapp/audio/20190101080607/
 
 #### HTTP Request
 
-| ![img](@static/images/privitization/get.png) | **{orgName}/{appName}/audio/merge/{beginTime}/{endTime}/{startId}/{length}** |
+| ![img](/images/privitization/get.png) | **{orgName}/{appName}/audio/merge/{beginTime}/{endTime}/{startId}/{length}** |
 | :----------------------------------------------------------- | :----------------------------------------------------------- |
 
 需要在请求时对应填写{beginTime}/{endTime}，起始录制文件id编号{startId}，获取的数量{length}。`length限制长度是100，如果请求超过100是会返回错误`。 
@@ -260,7 +260,7 @@ curl -X GET -i "http://a1.easemob.com/easemob-demo/testapp/audio/merge/201901010
 
 #### HTTP Request
 
-| ![img](@static/images/privitization/get.png)| **{orgName}/{appName}/audio/{userName}/{confrId}** |
+| ![img](/images/privitization/get.png)| **{orgName}/{appName}/audio/{userName}/{confrId}** |
 | :----------------------------------------------------------- | :------------------------------------------------- |
 
 需要在请求时对应填写{confrId}会议ID，如果当前没有会议ID，请从其他接口获取。以及{userName}用户名。

@@ -12,17 +12,17 @@
 
 开通内容审核-文本审核功能后，规则配置页面中会有默认规则，各类会话场景下均提供了默认规则。
 
-![img](@static/images/moderation/moderation_rule_config_01.png)
+![img](/images/moderation/moderation_rule_config_01.png)
 
 **2、点击操作-更多-编辑，进入编辑规则窗口**
 
 如果需要审核单聊里的文本消息，则可编辑单聊文本规则，群聊、聊天室均同理。
 
-![img](@static/images/moderation/moderation_rule_config_02.png)
+![img](/images/moderation/moderation_rule_config_02.png)
 
 以单聊文本为例，编辑规则窗口如下：
 
-![img](@static/images/moderation/moderation_rule_config_03.png)
+![img](/images/moderation/moderation_rule_config_03.png)
 
 规则中的字段详细介绍如下：
 
@@ -58,20 +58,20 @@
   - **是（报错）**：即发送方会感知到消息发送失败（如下图示例）；
   - **否（不报错）**：即发送方不会感知到消息发送失败（即不会出现感叹号提示）；如果应用内违规内容较多，建议选择**否**，以避免违规用户感知到被拦截后频繁尝试变体违规内容。
 
-![img](@static/images/moderation/moderation_rule_config_04.png)
+![img](/images/moderation/moderation_rule_config_04.png)
 
 **4、点击启用规则**
 
 规则状态默认是不启用。点击启用规则后，规则立即生效，表示文本消息会按该规则配置进行内容审核。
 
-![img](@static/images/moderation/moderation_rule_config_05.png)
+![img](/images/moderation/moderation_rule_config_05.png)
 
 **5、点击确定**
 
-![img](@static/images/moderation/moderation_rule_config_06.png)
+![img](/images/moderation/moderation_rule_config_06.png)
 
 点击**确定**后，即规则修改保存成功。
 
-![img](@static/images/moderation/moderation_rule_config_07.png)
+![img](/images/moderation/moderation_rule_config_07.png)
 
 所有经过审核的内容可在 [历史记录](moderation_history.html) 页面查看。

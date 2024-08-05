@@ -21,7 +21,7 @@
 
 应用服务器可以通过发送前回调实时监控用户的聊天消息，对消息进行处理，例如，拦截用户的消息请求。可拦截所有类型的消息，包含文本、图片、自定义消息等；
 
-![](@static/images/server-side/im-callback.jpeg)
+![](/images/server-side/im-callback.jpeg)
 
 ### 回调发生时间
 
@@ -123,7 +123,7 @@
 如果您对聊天消息没有时效性需求，可以直接通过免费的 [聊天记录拉取 REST API](message_historical.html#历史消息记录的内容) 获取聊天记录，无需使用发送后回调。
 :::
 
-![](@static/images/server-side/im-callback1.png)
+![](/images/server-side/im-callback1.png)
 
 ### 前提条件
 

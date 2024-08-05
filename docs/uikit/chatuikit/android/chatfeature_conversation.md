@@ -10,7 +10,7 @@
 
 在单群聊 UIKit 中，用户可以通过左滑会话/右滑会话或长按会话的操作触发会话拓展功能菜单，选择会话已读选项，指定会话将会被置为已读。
 
-![img](@static/images/uikit/chatuikit/feature/conversation/conversation_read.png) 
+![img](/images/uikit/chatuikit/feature/conversation/conversation_read.png) 
 
 ## 会话置顶
 
@@ -18,7 +18,7 @@
 
 在单群聊 UIKit 中，用户可以通过左滑会话/右滑会话或长按会话的操作触发会话拓展功能菜单，选择会话置顶选项，指定会话将会被放置在会话列表前排区域。
 
-![img](@static/images/uikit/chatuikit/feature/conversation/conversation_pin.png) 
+![img](/images/uikit/chatuikit/feature/conversation/conversation_pin.png) 
 
 ## 会话免打扰
 
@@ -26,7 +26,7 @@
 
 在单群聊 UIKit 中，用户可以通过左滑会话/右滑会话或长按会话的操作触发会话拓展功能菜单，选择会话免打扰选项，指定会话将不再接收通知。
 
-![img](@static/images/uikit/chatuikit/feature/conversation/conversation_dnd.png) 
+![img](/images/uikit/chatuikit/feature/conversation/conversation_dnd.png) 
 
 ## 会话删除	
 
@@ -34,4 +34,4 @@
 
 在单群聊 UIKit 中，用户可以通过左滑会话/右滑会话或长按会话的操作触发会话拓展功能菜单，选择会话删除选项，指定会话将会被删除。
 
-![img](@static/images/uikit/chatuikit/feature/conversation/conversation_delete.png) 
+![img](/images/uikit/chatuikit/feature/conversation/conversation_delete.png) 

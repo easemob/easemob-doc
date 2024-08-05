@@ -2,7 +2,7 @@
 
 **推送任务** 页面用于查看历史推送的统计详情。
 
-![img](@static/images/instantpush/push_task_list.png)
+![img](/images/instantpush/push_task_list.png)
 
 点击 **查看** 可查询具体每个任务的下发状态，每当推送状态变更，环信PUSH都会有相应记录，用户每次更新网页可得到当前实时的推送结果展示。
 
@@ -16,4 +16,4 @@
 - 推送成功率
 - 本次推送涉及到的通道（在线通道、苹果、小米、VIVO、魅族）的送达数、送达率、点击数、点击率
 
-![img](@static/images/instantpush/push_task_statistics.png)
+![img](/images/instantpush/push_task_statistics.png)

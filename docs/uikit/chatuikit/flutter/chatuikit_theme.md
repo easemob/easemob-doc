@@ -19,11 +19,11 @@
 
 - 浅色主题
 
-![img](@static/images/uikit/chatuikit/android/light_mode.png)
+![img](/images/uikit/chatuikit/android/light_mode.png)
 
 - 深色主题
 
-![img](@static/images/uikit/chatuikit/android/dark_mode.png)
+![img](/images/uikit/chatuikit/android/dark_mode.png)
 
 ## 切换主题
 

@@ -19,7 +19,7 @@
 
 #### 3.1 Demo代码目录简介
 
-![img](@static/images/privitization/conference_android_demo.png)
+![img](/images/privitization/conference_android_demo.png)
 源码目录如上所示，主要目录如以下介绍：<br>
 - ui是有关所有Activity的具体实现
 - runtimepermissions是有关运行是有关动态权限的获取的封装

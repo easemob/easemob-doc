@@ -69,9 +69,9 @@ import emedia from 'easemob-emedia';
 #### 3.4 获取SDK静态资源文件
 
 1. 首先 [下载 WebIM Demo 包](common_clientsdk.html#音视频sdk下载)<br>
-![img](@static/images/privitization/wechatimg_download.png)
+![img](/images/privitization/wechatimg_download.png)
 2. 从Demo 中选取 SDK 文件**EMedia_sdk-dev.js**<br>
-![img](@static/images/privitization/wechatimg_path.png)
+![img](/images/privitization/wechatimg_path.png)
 
 
 ### 4. 初始化SDK

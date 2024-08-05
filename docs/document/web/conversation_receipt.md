@@ -8,7 +8,7 @@
     
 会话已读回执的效果示例，如下图所示：
 
-![img](@static/images/uikit/chatuikit/feature/web/conversation/conversation_read.png) 
+![img](/images/uikit/chatuikit/feature/web/conversation/conversation_read.png) 
 
 ## 技术原理
 

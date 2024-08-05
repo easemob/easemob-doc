@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 
@@ -452,7 +452,7 @@ export default App;
 3. 依次点击 **Targets** > **simple_demo** > **Signing & Capabilities** 在签名选项下设置应用签名；
 4. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
 
-![img](@static/images/react-native/ios-1.png)
+![img](/images/react-native/ios-1.png)
 
 编译并在 iOS 模拟器中运行：
 
@@ -460,7 +460,7 @@ export default App;
 2. 在 `xcode` 中，选择模拟器 `iphone13`；
 3. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
 
-![img](@static/images/react-native/ios-2.png)
+![img](/images/react-native/ios-2.png)
 
 编译并在 Android 真机运行：
 
@@ -475,11 +475,11 @@ yarn start
 
 5. 程序构建完成后，自动安装和运行，并显示应用界面。
 
-![img](@static/images/react-native/android-1.png)
+![img](/images/react-native/android-1.png)
 
 demo 的界面:
 
-![img](@static/images/react-native/main.png)
+![img](/images/react-native/main.png)
 
 ## 测试你的 app
 

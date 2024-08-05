@@ -24,7 +24,7 @@
 
 #### HTTP Request
 
-| ![img](@static/images/privitization/post.png) | /{org_name}/{app_name}/conferences |
+| ![img](/images/privitization/post.png) | /{org_name}/{app_name}/conferences |
 | :----------------------------------------------------------- | :--------------------------------- |
 
 #### Request Headers
@@ -122,7 +122,7 @@ curl -L -X POST 'http://127.0.0.1:9090/easemob-demo/hcl/conferences' \
 
 #### HTTP Request
 
-| ![img](@static/images/privitization/delete.png) | /{orgName}/{appName}/conferences/{confrId} |
+| ![img](/images/privitization/delete.png) | /{orgName}/{appName}/conferences/{confrId} |
 | :----------------------------------------------------------- | :----------------------------------------- |
 
 需要在请求时对应填写{confrId}，需要删除的会议 ID 。
@@ -153,7 +153,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer YWMt7Coyj
 
 #### HTTP Request
 
-| ![img](@static/images/privitization/delete.png) | /{orgName}/{appName}/conferences/{confrId}/{userName} |
+| ![img](/images/privitization/delete.png) | /{orgName}/{appName}/conferences/{confrId}/{userName} |
 | :----------------------------------------------------------- | :----------------------------------------- |
 
 需要在请求时对应填写{confrId}，需要删除的会议 ID 。
@@ -186,7 +186,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer YWMt7Coyj
 
 #### HTTP Request
 
-| ![img](@static/images/privitization/get.png) | /{orgName}/{appName}/conferences/{confrId} |
+| ![img](/images/privitization/get.png) | /{orgName}/{appName}/conferences/{confrId} |
 | :----------------------------------------------------------- | :----------------------------------------- |
 
 需要在请求时对应填写{confrId}，需要获取的会议 ID 。

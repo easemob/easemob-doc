@@ -23,7 +23,7 @@
 
 如下为按需翻译示例：
 
-![img](@static/images/ios/translation.png)
+![img](/images/ios/translation.png)
 
 ## 技术原理
 

@@ -24,7 +24,7 @@
 
 ## 临场变更
 
-![img](@static/images/privitization/tc_logic_scene.png)
+![img](/images/privitization/tc_logic_scene.png)
 
 | 步骤                                                         | iOS API                                                      | Android API                                                  | REST API |
 | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- | :------- |
@@ -41,7 +41,7 @@
 
 ## 临场变更恢复
 
-![img](@static/images/privitization/tc_logic_scene_reset.png)
+![img](/images/privitization/tc_logic_scene_reset.png)
 
 | 步骤                                                         | iOS API                                                      | Android API                                                  | REST API |
 | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- | :------- |

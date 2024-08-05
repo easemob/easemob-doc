@@ -12,7 +12,7 @@ SDK 目前支持微信、QQ、百度小程序、抖音、uni-app 编译的原生
 
 扫描下方小程序二维码，或者微信搜索 **环信即时通讯云** 即可快速体验环信小程序 Demo 在线版本：
 
-![img](@static/images/applet/applet-demo.jpeg)
+![img](/images/applet/applet-demo.jpeg)
 
 点击链接，扫描二维码，即可快速体验环信 Uniapp 编译生成的移动端原生应用：
 

@@ -6,15 +6,15 @@
 
 1. 登录环信后台，进入**即时通讯 > 功能配置 > 消息回调**。
 
-![img](@static/images/moderation/moderation_callback_01.png)
+![img](/images/moderation/moderation_callback_01.png)
 
 2. 点击添加回调地址，选择**发送后回调**。
 
-![img](@static/images/moderation/moderation_callback_02.png)
+![img](/images/moderation/moderation_callback_02.png)
 
 3. 勾选 **内容审核**，其他字段的设置详见[设置回调](/document/server-side/callback.html)。
 
-![img](@static/images/moderation/moderation_callback_03.png)
+![img](/images/moderation/moderation_callback_03.png)
 
 
 ## 审核回调内容

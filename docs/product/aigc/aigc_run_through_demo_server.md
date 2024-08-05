@@ -32,7 +32,7 @@ src/main/resources/application.yml
 
 登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，点击**添加应用**，填写应用相关信息。
 
-![img](@static/images/aigc/app_create.png)
+![img](/images/aigc/app_create.png)
  
 2. 获取 app 信息。
 
@@ -50,11 +50,11 @@ easemob:
   clientSecret:{clientSecret}  #  App 的 client_secret，可通过环信即时通讯云控制台的 “应用详情” 页面上的 “ClientSecret” 字段获取。
 ```
 
-![img](@static/images/aigc/app_detail.png)
+![img](/images/aigc/app_detail.png)
 
 3. 设置**用户注册模式**为**开放注册**，关闭好友关系检查。
 
-![img](@static/images/aigc/user_register_contact.png)
+![img](/images/aigc/user_register_contact.png)
 
 4. 创建机器人的账号。
 
@@ -64,7 +64,7 @@ easemob:
 
 下图红框中的用户 ID 为示例项目中的与智能体绑定的机器人账号，若使用其他用户 ID，则需同步修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
 
-![img](@static/images/aigc/robot_account_create.png)
+![img](/images/aigc/robot_account_create.png)
 
 ```java
 static{
@@ -87,7 +87,7 @@ bots.put("boy0",botBean0);
 
 回调功能开通后，选择**即时通讯** > **功能配置** > **消息回调**，点击**添加回调地址**，配置发送前回调规则。其中，**会话类型**选择**单聊**，**消息类型**选择**文本**，**启用状态**选择**启用**，**回调地址**需确保设置为环信即时通讯 IM 可以通过外网访问到回调地址，格式为 `http(s)://ip:端口/chatty/callback.json`。其他参数的含义详见[配置回调规则相关文档](/product/enable_and_configure_IM.html#配置回调规则)。
 
-![img](@static/images/aigc/callback_address.png)
+![img](/images/aigc/callback_address.png)
 
 ### 大语言模型（LLM）信息配置
 
@@ -127,11 +127,11 @@ redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，�
 2. `port` 填写为 redis 所占用的端口。
 3. `password` 填写 redis 的密码(如果没有密码，使用 `#` 注释该配置)。
 
-![img](@static/images/aigc/redis_password.png)
+![img](/images/aigc/redis_password.png)
 
 4. 使用 `mvn install` 将项目打包为 `jar`。
 
-![img](@static/images/aigc/jar.png)
+![img](/images/aigc/jar.png)
 
 5. 找到对应位置的 `jar` 包，上传到服务器。
 

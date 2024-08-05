@@ -26,7 +26,7 @@ SDK 支持你通过调用 API 在项目中实现如下功能：
 
 如下为按需翻译示例：
 
-![img](@static/images/ios/translation.png)
+![img](/images/ios/translation.png)
 
 ## 实现方法
 

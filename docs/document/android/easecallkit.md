@@ -203,7 +203,7 @@ public void startInviteMultipleCall(final String[] users,final String ext){}
 
 发起通话后的 UI 界面如下：
 
-![img](@static/images/android/sendcall.png)
+![img](/images/android/sendcall.png)
 
 ### 被叫收到通话邀请
 
@@ -223,7 +223,7 @@ void onRevivedCall(EaseCallType callType, String userId,String ext){}
 
 收到通话邀请后的界面如下:
 
-![img](@static/images/android/called.jpeg)
+![img](/images/android/called.jpeg)
 
 ### 多人通话中邀请
 

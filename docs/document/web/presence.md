@@ -18,7 +18,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![Presence_web](@static/images/ios/presence.png)
+![Presence_web](/images/ios/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -28,7 +28,7 @@
 
 效果如下图：
 
-![img](@static/images/web/web_chats_status_setting.png)
+![img](/images/web/web_chats_status_setting.png)
 
 ## 前提条件
 

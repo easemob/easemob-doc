@@ -18,7 +18,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![img](@static/images/ios/presence.png)
+![img](/images/ios/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -28,7 +28,7 @@
 
 效果如下图：
 
-![img](@static/images/ios/status.png)
+![img](/images/ios/status.png)
 
 ## 前提条件
 

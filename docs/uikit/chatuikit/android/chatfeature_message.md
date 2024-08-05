@@ -10,25 +10,25 @@
 
 消息复制是指用户可以将一条消息复制到剪贴板。消息复制可以帮助用户将消息保存到其他地方，或将其粘贴到其他应用程序中。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_copy.png =600x600) 
+![img](/images/uikit/chatuikit/feature/message/message_copy.png =600x600) 
 
 ## 消息删除	
 
 消息删除是指用户可以删除一条消息。消息删除可以帮助用户删除错误发送的消息，或删除不想保留的消息。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_delete.png) 
+![img](/images/uikit/chatuikit/feature/message/message_delete.png) 
 
 ## 消息撤回
 
 消息撤回是指用户可以撤回一条已发送的消息。消息撤回可以帮助用户撤回错误发送的消息，或撤回不想让其他用户看到的消息。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_recall.png) 
+![img](/images/uikit/chatuikit/feature/message/message_recall.png) 
 
 ## 消息编辑
 
 消息编辑是指用户可以编辑一条已发送的消息。消息编辑可以帮助用户纠正错误，或添加新信息。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_edit.png) 
+![img](/images/uikit/chatuikit/feature/message/message_edit.png) 
 
 ## 消息引用	
 
@@ -39,7 +39,7 @@
 - `EaseChatExtendMessageReplyView`：底部输入框组件上方展示的引用消息自定义 View。
 - `EaseChatMessageReplyController`：控制引用功能的显示、隐藏、跳转等逻辑。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_reply.png) 
+![img](/images/uikit/chatuikit/feature/message/message_reply.png) 
 
 ### 如何使用
 
@@ -65,7 +65,7 @@
 
 - 长按消息气泡弹出的显示和隐藏翻译菜单的逻辑在 `EaseChatMessageTranslationController` 中。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_translate.png) 
+![img](/images/uikit/chatuikit/feature/message/message_translate.png) 
 
 ### 如何使用
 
@@ -112,7 +112,7 @@
 
 - 消息气泡中添加 view 以及显示和隐藏 Reaction 布局的逻辑在 `EaseChatAddExtendFunctionViewController` 中的 `addReactionViewToMessage`方法。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_reactions.png) 
+![img](/images/uikit/chatuikit/feature/message/message_reactions.png) 
 
 ### 如何使用
 
@@ -132,7 +132,7 @@
 
 单群聊 UIKit 中实现了 Thread 页面 `EaseChatThreadActivity`，开发者只需要调用 `EaseChatThreadActivity.actionStart` 启动该页面传入需要的参数即可。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_thread.png) 
+![img](/images/uikit/chatuikit/feature/message/message_thread.png) 
 
 ### 如何使用
 
@@ -172,7 +172,7 @@ class ChatThreadActivity:EaseChatThreadActivity() {
 - `Forward EaseChatMessageMultipleSelectController`：处理 UI 布局变更(隐藏/显示 `EaseChatLayout` 中的 `EaseChatInputMenu` 输入菜单)以及转发和删除的逻辑。
 - `Forward EaseChatMessageMultiSelectHelper`：消息选择帮助类用于记录选中的消息信息并提供获取方法。
 
-![img](@static/images/uikit/chatuikit/feature/message/message_forward.png) 
+![img](/images/uikit/chatuikit/feature/message/message_forward.png) 
 
 ### 如何使用
 

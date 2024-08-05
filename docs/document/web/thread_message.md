@@ -19,13 +19,13 @@
 2. 客户端 A 和 B 登录即时通讯。
 3. 客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 子区创建和查看如下图：
 
-![img](@static/images/web/web_group_chat_chreat_new_thread_step_01.png)
+![img](/images/web/web_group_chat_chreat_new_thread_step_01.png)
 
-![img](@static/images/web/web_group_chat_new_thread_created.png)
+![img](/images/web/web_group_chat_new_thread_created.png)
 
 ## 前提条件
 

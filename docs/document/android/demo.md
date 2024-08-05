@@ -10,7 +10,7 @@
 
 3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
-![img](@static/images/demo/android_login.png)
+![img](/images/demo/android_login.png)
 
 ## 代码下载
 
@@ -58,6 +58,6 @@
 - **ContactListFragment**：继承自 EaseIMKit 中的 EaseContactListFragment，展示了添加头布局，添加条目长按功能及实现条目点击事件等；
 - **GroupDetailActivity**：实现了如下功能：添加群成员，修改群公告及群介绍，上传共享文件，进行群组管理，设置消息免打扰及解散或者退出群组等。
 ## 部分 UI 展示
-![会话列表](@static/images/android/app-demo-ui-1.jpeg)
-![联系人列表](@static/images/android/app-demo-ui-2.jpeg)
-![聊天页面](@static/images/android/app-demo-ui-3.jpeg)
+![会话列表](/images/android/app-demo-ui-1.jpeg)
+![联系人列表](/images/android/app-demo-ui-2.jpeg)
+![聊天页面](/images/android/app-demo-ui-3.jpeg)

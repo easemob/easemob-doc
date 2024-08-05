@@ -37,9 +37,9 @@
 
 3.开通后，点击**关键词审核**对应的**操作**栏中的**配置**，进入**关键词名单**页面。
 
-![img](@static/images/moderation/keyword_enable.png)
+![img](/images/moderation/keyword_enable.png)
 
-![img](@static/images/moderation/keyword_keywordreview.png)
+![img](/images/moderation/keyword_keywordreview.png)
 
 ### 第三步 配置关键词名单
 
@@ -52,7 +52,7 @@
 
 2. 单击**创建黑/白名单**，填写名单信息。
 
-![img](@static/images/moderation/keyword_create.png)
+![img](/images/moderation/keyword_create.png)
 
 创建黑/白名单，需配置以下参数：
 
@@ -67,23 +67,23 @@
 
 名单创建成功后会显示在名单列表中，默认为开启状态。若不需要使用该名单，可以在**状态**栏中将其关闭。
 
-![img](@static/images/moderation/keyword_creationsuccess.png)
+![img](/images/moderation/keyword_creationsuccess.png)
 
 4. 添加关键词。
 
 创建关键词名单后，你可以在名单列表上选择**更多** > **进入名单**。
 
-![img](@static/images/moderation/keyword_creationsuccess.png)
+![img](/images/moderation/keyword_creationsuccess.png)
 
 选择通过手动添加或文件导入方式添加关键词。
 
-![img](@static/images/moderation/keyword_addword.png)
+![img](/images/moderation/keyword_addword.png)
 
 - 手动添加
 
 单击**添加关键词**，手动输入关键词。每次最多添加 200 个词条。
 
-![img](@static/images/moderation/keyword_manualadd.png)
+![img](/images/moderation/keyword_manualadd.png)
 
 - 文件导入
 
@@ -94,7 +94,7 @@
 文件上传后应确保单个名单的词条总数不超过 10,000，否则超出部分将添加失败。
 :::
 
-![img](@static/images/moderation/keyword_fileimport.png)
+![img](/images/moderation/keyword_fileimport.png)
 
 5. 可根据业务实际需要，搜索名单或关键词。
 
@@ -105,17 +105,17 @@
 
 在关键词名单列表上，点击指定的名单名称，进入该名单的关键词列表。在指定关键词的**操作**栏中点击**删除**将其删除，或选择多个关键词名称前的复选框，然后点击**批量删除**。
 
-![img](@static/images/moderation/keyword_search_delete.png)
+![img](/images/moderation/keyword_search_delete.png)
 
 ### 第四步 在文本审核规则中应用关键词名单
 
 文本审核开通后，默认会生成 3 条规则。本节以默认的单聊文本规则为例，介绍如何文本审核规则中应用关键词名单。
 
-![img](@static/images/moderation/keyword_rulelist.png)
+![img](/images/moderation/keyword_rulelist.png)
 
 1. 点击默认的单聊文本规则的**操作**栏中**更多** > **编辑**，进入**编辑规则**对话框。
 
-![img](@static/images/moderation/keyword_singlechatrule.png)
+![img](/images/moderation/keyword_singlechatrule.png)
 
 2. 配置使用关键词名单。
 

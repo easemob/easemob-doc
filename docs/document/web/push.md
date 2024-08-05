@@ -36,7 +36,7 @@
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 你已在环信即时通讯云管理后台中激活推送高级功能。推送高级功能包括设置推送通知模式和免打扰模式。
 
-![image](@static/images/web/push_web_enable_push.png)
+![image](/images/web/push_web_enable_push.png)
 
 ## 实现方法
 

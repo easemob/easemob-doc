@@ -8,7 +8,7 @@
 
 环信个性化协同 SDK 是基于 IM+RTC+即时推送整体解决方案，不仅提供好友关系、音视频通话、富媒体消息、群组管理、即时推送等底层通讯能力，还提供了丰富的场景功能及开放的接口设计，能够实现应用复用、个性化开发、数据抓取及横向业务协同，快速为企业高价值客户提供了定制化、个性化的专属服务，提升用户体验，提高用户留存与转化，为企业带来更多的附加价值。
 
-![img](@static/images/privitization/lowcode.png)
+![img](/images/privitization/lowcode.png)
 
 
 ## 应用场景
@@ -72,7 +72,7 @@
 
 ### 自主可控，全面信创适配
 
-![img](@static/images/privitization/uc_client.png)
+![img](/images/privitization/uc_client.png)
 
 ## 下载体验
 

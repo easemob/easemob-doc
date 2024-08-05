@@ -6,7 +6,7 @@
 
 1. 登录 [Vue 3 Demo](https://webim-vue3.easemob.com/login)
 
-![img](@static/images/demo/web_vue3_login.png)
+![img](/images/demo/web_vue3_login.png)
 
 2. 输入你的手机号，获取验证码，然后输入。
 
@@ -45,6 +45,6 @@ Demo 中的主要模块如下：
 
 ## 部分 Vue 3 Demo 界面展示
 
-![img](@static/images/web/vue3_home.png)
+![img](/images/web/vue3_home.png)
 
-![img](@static/images/web/vue3_chat.png)
+![img](/images/web/vue3_chat.png)

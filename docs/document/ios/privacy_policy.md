@@ -57,6 +57,6 @@ IM SDK 4.4.1 及以上版本默认包含 **PrivacyInfo.xcprivacy** 隐私协议�
 
 -  通过 Property List 方式添加：
 
-![img](@static/images/ios/apple_privacy_policy.png) 
+![img](/images/ios/apple_privacy_policy.png) 
 
 

@@ -47,7 +47,7 @@ npm run dev
 
 运行成功后打开 "http://localhost:5173/" ，可以看到下图所示界面：
 
-![img](@static/images/uikit/chatuikit/web/vue_project_create.png)
+![img](/images/uikit/chatuikit/web/vue_project_create.png)
 
 ### 第二步 安装和配置 Veaury
 
@@ -112,7 +112,7 @@ export default defineConfig({
 
 2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用环信即时通讯 IM 的 App Key 和用户信息初始化 UIKit。
    
-  ![img](@static/images/uikit/chatuikit/web/vue_initialization.png)
+  ![img](/images/uikit/chatuikit/web/vue_initialization.png)
 
 代码如下：
 
@@ -235,11 +235,11 @@ const switchTheme = () => {
 ```
 删除 `App.vue` 文件 `template` 中的无关代码，仅保留 RouterView，当访问 http://localhost:5173 时，界面如下：
 
-![img](@static/images/uikit/chatuikit/web/vue_initial_page.png)
+![img](/images/uikit/chatuikit/web/vue_initial_page.png)
 
 点击右上角的 **Switch Theme** 切换主题：
 
-![img](@static/images/uikit/chatuikit/web/vue_switch_theme.png)
+![img](/images/uikit/chatuikit/web/vue_switch_theme.png)
 
 ## 相关参考
 

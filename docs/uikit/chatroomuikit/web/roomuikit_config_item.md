@@ -6,7 +6,7 @@ ChatroomUIKit 提供 `Chatroom` 和 `ChatroomMember` 组件，组件中包含各
 
 ## Chatroom 组件
 
-![img](@static/images/uikit/chatroomweb/chatroom.png)
+![img](/images/uikit/chatroomweb/chatroom.png)
 
 `Chatroom` 是整个聊天界面组件，由 `Header`、`MessageList`、`MessageInput` 和 `Broadcast` 子组件组成。每个组件可以用 `renderX` 方法替换成自定义的组件。
 
@@ -43,7 +43,7 @@ const ChatApp = () => {
 
 ## ChatroomMember 组件
 
-![img](@static/images/uikit/chatroomweb/chatroomMember.png)
+![img](/images/uikit/chatroomweb/chatroomMember.png)
 
 `ChatroomMember` 用于展示聊天室所有者和聊天室成员，以及禁言列表。聊天室所有者可以对成员禁言或踢出聊天室。
 

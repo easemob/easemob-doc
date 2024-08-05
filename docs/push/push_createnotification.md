@@ -7,7 +7,7 @@
 - 通知消息：指定通知标题和内容后，由环信SDK自动处理后、在系统通知栏中以通知栏消息的形式展示，同时响铃或震动提醒用户。
 - 透传消息：即自定义消息，消息体格式客户可以自己定义。透传消息环信只传递数据，不做任何处理，客户端接收到透传消息后需要自己去做后续动作处理，如通知栏展示、弹框等。
 
-![img](@static/images/instantpush/push_notification_create.png)
+![img](/images/instantpush/push_notification_create.png)
 
 ### 通知消息
 
@@ -20,7 +20,7 @@
 - 子标题：只有 iOS 支持
 - 通知内容
 
-![img](@static/images/instantpush/push_notification_edit.png)
+![img](/images/instantpush/push_notification_edit.png)
 
 #### 推送目标：
 
@@ -28,9 +28,9 @@
 - 指定用户：接受人以英文逗号分开，最多 1000 个接收人
 - 指定标签用户：支持最多选择3个标签，支持交集运算
 
-![img](@static/images/instantpush/push_user_certain.png)
+![img](/images/instantpush/push_user_certain.png)
 
-![img](@static/images/instantpush/push_user_tagged.png)
+![img](/images/instantpush/push_user_tagged.png)
 
 #### 推送设置：
 
@@ -51,11 +51,11 @@
   - 选择不变时，表示不改变角标数字（小米设备由于系统控制，无论选择环信通道还是厂商通道下发，默认角标 +1 的效果）
 - 提醒方式：设置提醒方式，包含提示音和震动
 
-![img](@static/images/instantpush/push_setting.png)
+![img](/images/instantpush/push_setting.png)
 
 另外，推送支持发送预览，Web界面会弹出推送预览界面，点击 **确认推送** 即可。
 
-![img](@static/images/instantpush/push_preview.png)
+![img](/images/instantpush/push_preview.png)
 
 推送完成后，在 **推送任务** 推送任务界面查看推送结果
 
@@ -65,6 +65,6 @@
 
 透传消息可以进行推送目标、推送时间、附加字段的设置。
 
-![img](@static/images/instantpush/push_transparent_message.png)
+![img](/images/instantpush/push_transparent_message.png)
 
 同样，透传消息支持 **发送预览** ，推送完成后，在 **推送任务** 推送任务界面查看推送结果。

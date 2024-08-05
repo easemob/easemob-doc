@@ -37,7 +37,7 @@
 
 体验Demo：打开Demo，打开联系人，选择视频通话或语音通话，即可体验。
 
-![img](@static/images/privitization/1v1-demo.png)
+![img](/images/privitization/1v1-demo.png)
 
 ## 计费说明
 

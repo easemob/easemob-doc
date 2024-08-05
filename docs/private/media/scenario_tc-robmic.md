@@ -15,7 +15,7 @@
 
 我们可以通过一张图，来了解抢麦模式中接口的调用逻辑：
 
-![img](@static/images/privitization/tc_logic_robmic.png)
+![img](/images/privitization/tc_logic_robmic.png)
 
 上图中每步涉及到的 iOS/Android 接口如下，其中部分调用到了 AppServer 的接口，开发者需要自己实现 AppServer 功能
 

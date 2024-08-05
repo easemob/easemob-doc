@@ -8,11 +8,11 @@
 
 1. 登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，在首页的**应用列表**区域点击目标应用的**操作**一栏中的**管理**。
 
-![img](@static/images/aigc/app_select.png)
+![img](/images/aigc/app_select.png)
 
 2. 选择**即时通讯** > **功能配置** > **功能配置总览**。选择**试用功能**页签，点击**智能机器人 Chatbot** 对应的**操作**一栏中的**申请试用**。
 
-![img](@static/images/aigc/ai_open.png)
+![img](/images/aigc/ai_open.png)
 
 ## 2. 创建机器人
 
@@ -22,11 +22,11 @@
 每个 app 默认支持 200 个机器人，可联系环信商务提升该上限。
 :::
 
-![img](@static/images/aigc/aichatbot_create.png)
+![img](/images/aigc/aichatbot_create.png)
 
 2. 配置机器人相关信息。
 
-![img](@static/images/aigc/aichatbot_configure.png)
+![img](/images/aigc/aichatbot_configure.png)
 
 | 参数   | 类型   | 是否必需     | 描述      |
 | :--------- | :----- | :----------- | :--------- |
@@ -41,7 +41,7 @@
 
 3. 查看新创建的机器人。
 
-![img](@static/images/aigc/aichatbot_view.png)
+![img](/images/aigc/aichatbot_view.png)
 
 ## 3. 使用机器人聊天
 
@@ -53,11 +53,11 @@
 若关闭了好友检查功能，则无需添加好友即可聊天。
 :::
 
-![img](@static/images/aigc/ai_add_contact.png)
+![img](/images/aigc/ai_add_contact.png)
 
 2. 用户 **aitest** 与机器人 **aaa** 进行聊天，以下截图以 Android 设备为例。
 
-<img src=@static/images/aigc/ai_chat.png  width="400" height="900"/>
+<img src=/images/aigc/ai_chat.png  width="400" height="900"/>
 
 ## 4. 查看数据统计
 
@@ -65,7 +65,7 @@
 
 目前，大模型平台只能选择 **MINIMAX**。
 
-![img](@static/images/aigc/ai_token_statistic.png)
+![img](/images/aigc/ai_token_statistic.png)
 
 
 

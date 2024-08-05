@@ -10,7 +10,7 @@
 
 ## 2、部署流程
 
-![img](@static/images/privitization/deploy_flowchart.png)
+![img](/images/privitization/deploy_flowchart.png)
 
 ### 2.1 下载部署资料
 
@@ -28,7 +28,7 @@
 
 使用部署手册中提供的环信控制台信息（包括登录地址、登录账号）进行登录，登录成功后，在环信控制台首页获取机器码标识。
 
-![img](@static/images/privitization/deploy_machine_code.png)
+![img](/images/privitization/deploy_machine_code.png)
 
 2. 申请授权码 license
 
@@ -42,7 +42,7 @@
 
 获取授权码后，登录环信控制台首页，点击 **激活 License** 按钮，在弹窗中填写授权码信息，点击 **确定** 生效。
 
-![img](@static/images/privitization/deploy_auth_code.png)
+![img](/images/privitization/deploy_auth_code.png)
 
 ### 2.3 验证服务
 
@@ -71,7 +71,7 @@
 -  IM Port：msync 端口，6717
 - Rest server 地址&端口：Rest API 地址
 
-![img](@static/images/privitization/deploy_android_custom_server.png)
+![img](/images/privitization/deploy_android_custom_server.png)
 
 示例二：以iOS端 demo体验为例
 
@@ -84,7 +84,7 @@
 -  IM Port：msync端口，6717
 - Rest server 地址&端口：Rest api地址
 
-![img](@static/images/privitization/deploy_ios_custom_server.png)
+![img](/images/privitization/deploy_ios_custom_server.png)
 
 ## 4、联系我们
 
@@ -94,13 +94,13 @@
 
 微信 扫一扫，添加方案负责人：
 
-![img](@static/images/privitization/deploy_wechat_code.png)
+![img](/images/privitization/deploy_wechat_code.png)
 
 2. 提交工单
 
 登录[环信通讯云管理后台](https://console.easemob.com/user/login)，点击“服务支持-工单支持”，点击“进入工单系统”
 
-![img](@static/images/privitization/deploy_ticket.png)
+![img](/images/privitization/deploy_ticket.png)
 
 3. Geek 社区
 

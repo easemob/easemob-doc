@@ -18,7 +18,7 @@
 
 ## 技术原理
 
-![image](@static/images/harmonyos/push/harmonyos_flowchart.png)
+![image](/images/harmonyos/push/harmonyos_flowchart.png)
 
 消息推送流程如下：
 
@@ -51,7 +51,7 @@
 该步骤须在登录环信 IM SDK 成功后进行。
 :::
 
-![image](@static/images/harmonyos/push/harmonyos_certificate.png)
+![image](/images/harmonyos/push/harmonyos_certificate.png)
 
 | 推送证书参数    | 类型   | 是否必需 | 描述   |
 | :-------- | :----- | :------- | :---------------- |

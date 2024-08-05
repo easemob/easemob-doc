@@ -24,7 +24,7 @@
 
 目录 VideoCallDemo/EMiOSVideoCallDemo 中的 Demo 关键类介绍
 
-![img](@static/images/privitization/conference_ios_demo.png)
+![img](/images/privitization/conference_ios_demo.png)
 
 多人音视频Demo主要包含3个target，SharedDesktop和SharedDesktopSetupUI用于实现共享桌面功能，EMiOSVideoCallDemo是会议target，实现类如下：
 

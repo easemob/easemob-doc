@@ -13,17 +13,17 @@
 
 在环信控制台首页，在 **应用列表** 区域下，点击 **操作** 一栏中的 **管理**。
 
-![img](@static/images/product/app-setting.png)
+![img](/images/product/app-setting.png)
 
 选择 **即时通讯 > 功能配置 > 功能配置总览**。
 
-![img](@static/images/moderation/moderation_enable_02.png)
+![img](/images/moderation/moderation_enable_02.png)
 
 在 **功能配置总览** 页面上，点击 **内容审核** 页签，如下图所示：
 
 如果使用自定义消息审核，**需首先开通文本审核和图片审核，再联系商务开通自定义消息审核。**
 
-![img](@static/images/moderation/moderation_enable_03.png)
+![img](/images/moderation/moderation_enable_03.png)
 
 **3、点击 开通**
 
@@ -33,5 +33,5 @@
 
 开通成功后，点击 **设置**，即可进入规则配置页。
 
-![img](@static/images/moderation/moderation_enable_04.png)
+![img](/images/moderation/moderation_enable_04.png)
 

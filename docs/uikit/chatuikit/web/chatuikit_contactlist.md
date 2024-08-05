@@ -4,7 +4,7 @@
 
 `ContactList` 组件用于展示通讯录，包含联系人列表、群组列表和好友请求列表。昵称在中文或者英文的情况下可以实现按首字母分类。
 
-![img](@static/images/uikit/chatuikit/web/page_contact_list.png =400x880) 
+![img](/images/uikit/chatuikit/web/page_contact_list.png =400x880) 
 
 ## 使用示例
 
@@ -42,7 +42,7 @@ const ContactList = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/contact-header.png)
+![img](/images/uikit/chatuikit/web/contact-header.png)
 
 ### 在联系人列表中添加黑名单
 
@@ -80,7 +80,7 @@ const ContactList = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/contact-block.png)
+![img](/images/uikit/chatuikit/web/contact-block.png)
 
 ### 设置成可选择的联系人列表
 
@@ -108,7 +108,7 @@ const ContactListContainer = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/contact-select.png)
+![img](/images/uikit/chatuikit/web/contact-select.png)
 
 ## ContactList 属性总览
 

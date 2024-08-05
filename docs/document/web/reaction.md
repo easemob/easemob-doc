@@ -20,11 +20,11 @@
 
 添加 Reaction：
 
-![](@static/images/web/web_chat_reaction_add_reaction.png)
+![](/images/web/web_chat_reaction_add_reaction.png)
 
 查看 Reaction：
 
-![](@static/images/web/web_group_chat_reaction_detail_another_version.png)
+![](/images/web/web_group_chat_reaction_detail_another_version.png)
 
 ## 前提条件
 

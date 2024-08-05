@@ -6,7 +6,7 @@
 
 昵称在中文或者英文的情况下可以实现按首字母分类。
 
-![img](@static/images/uikit/chatuikit/android/page_contact_list.png =400x850) 
+![img](/images/uikit/chatuikit/android/page_contact_list.png =400x850) 
 
 ## 使用示例
 
@@ -105,7 +105,7 @@ class CustomContactListAdapter : EaseContactListAdapter() {
 builder.setCustomAdapter(CustomContactListAdapter)
 ```
 
-![img](@static/images/uikit/chatuikit/android/group_creating.png =350x600) 
+![img](/images/uikit/chatuikit/android/group_creating.png =350x600) 
 
 ### 设置成可选择的联系人列表
 
@@ -115,7 +115,7 @@ builder.setCustomAdapter(CustomContactListAdapter)
 builder.setSearchType(EaseSearchType.SELECT_USER)  
 ```
 
-![img](@static/images/uikit/chatuikit/android/contactlist_configurable.png) 
+![img](/images/uikit/chatuikit/android/contactlist_configurable.png) 
 
 ## 事件监听
 

@@ -14,25 +14,25 @@
 
 | 消息类型  | 原消息存在 | 原消息不存在 |
 | :--------- | :----- | :------- |
-| 文本消息 | ![img](@static/images/product/solution_common/message_reply/text_normal_mobile.png) | ![img](@static/images/product/solution_common/message_reply/text_no_mobile.png) |
-| 图片消息 | ![img](@static/images/product/solution_common/message_reply/image_normal_mobile.png)  | ![img](@static/images/product/solution_common/message_reply/image_no_mobile.png)|
-| 语音消息 | ![img](@static/images/product/solution_common/message_reply/voice_normal_mobile.png)| ![img](@static/images/product/solution_common/message_reply/voice_no_mobile.png)|
-| 视频消息 | ![img](@static/images/product/solution_common/message_reply/video_normal_mobile.png)| ![img](@static/images/product/solution_common/message_reply/video_no_mobile.png)|
-| 文件消息 | ![img](@static/images/product/solution_common/message_reply/file_normal_mobile.png)| ![img](@static/images/product/solution_common/message_reply/file_no_mobile.png)|
-| 名片消息 | ![img](@static/images/product/solution_common/message_reply/card_normal_mobile.png)| ![img](@static/images/product/solution_common/message_reply/card_no_mobile.png)|
-| 合并消息 | ![img](@static/images/product/solution_common/message_reply/combine_normal_mobile.png)| ![img](@static/images/product/solution_common/message_reply/combine_no_mobile.png)| 
+| 文本消息 | ![img](/images/product/solution_common/message_reply/text_normal_mobile.png) | ![img](/images/product/solution_common/message_reply/text_no_mobile.png) |
+| 图片消息 | ![img](/images/product/solution_common/message_reply/image_normal_mobile.png)  | ![img](/images/product/solution_common/message_reply/image_no_mobile.png)|
+| 语音消息 | ![img](/images/product/solution_common/message_reply/voice_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/voice_no_mobile.png)|
+| 视频消息 | ![img](/images/product/solution_common/message_reply/video_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/video_no_mobile.png)|
+| 文件消息 | ![img](/images/product/solution_common/message_reply/file_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/file_no_mobile.png)|
+| 名片消息 | ![img](/images/product/solution_common/message_reply/card_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/card_no_mobile.png)|
+| 合并消息 | ![img](/images/product/solution_common/message_reply/combine_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/combine_no_mobile.png)| 
 
 2. Web 端各类型的消息引用的 UI 展示示例如下表所示：
 
 | 消息类型  | 原消息存在 | 原消息不存在 |
 | :--------- | :----- | :------- |
-| 文本消息 | ![img](@static/images/product/solution_common/message_reply/text_normal_web.png) | ![img](@static/images/product/solution_common/message_reply/text_no_web.png) |
-| 图片消息 | ![img](@static/images/product/solution_common/message_reply/image_normal_web.png)  | ![img](@static/images/product/solution_common/message_reply/image_no_web.png)|
-| 语音消息 | ![img](@static/images/product/solution_common/message_reply/voice_normal_web.png)| ![img](@static/images/product/solution_common/message_reply/voice_no_web.png)|
-| 视频消息 | ![img](@static/images/product/solution_common/message_reply/video_normal_web.png)| ![img](@static/images/product/solution_common/message_reply/video_no_web.png)|
-| 文件消息 | ![img](@static/images/product/solution_common/message_reply/file_normal_web.png)| ![img](@static/images/product/solution_common/message_reply/file_no_web.png)|
-| 名片消息 | ![img](@static/images/product/solution_common/message_reply/card_normal_web.png)| ![img](@static/images/product/solution_common/message_reply/card_no_web.png)|
-| 合并消息 | ![img](@static/images/product/solution_common/message_reply/combine_normal_web.png)| ![img](@static/images/product/solution_common/message_reply/combine_no_web.png)| 
+| 文本消息 | ![img](/images/product/solution_common/message_reply/text_normal_web.png) | ![img](/images/product/solution_common/message_reply/text_no_web.png) |
+| 图片消息 | ![img](/images/product/solution_common/message_reply/image_normal_web.png)  | ![img](/images/product/solution_common/message_reply/image_no_web.png)|
+| 语音消息 | ![img](/images/product/solution_common/message_reply/voice_normal_web.png)| ![img](/images/product/solution_common/message_reply/voice_no_web.png)|
+| 视频消息 | ![img](/images/product/solution_common/message_reply/video_normal_web.png)| ![img](/images/product/solution_common/message_reply/video_no_web.png)|
+| 文件消息 | ![img](/images/product/solution_common/message_reply/file_normal_web.png)| ![img](/images/product/solution_common/message_reply/file_no_web.png)|
+| 名片消息 | ![img](/images/product/solution_common/message_reply/card_normal_web.png)| ![img](/images/product/solution_common/message_reply/card_no_web.png)|
+| 合并消息 | ![img](/images/product/solution_common/message_reply/combine_normal_web.png)| ![img](/images/product/solution_common/message_reply/combine_no_web.png)| 
 
 
 ## 前提条件

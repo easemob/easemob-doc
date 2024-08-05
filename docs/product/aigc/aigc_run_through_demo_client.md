@@ -24,7 +24,7 @@
 
 使用 `AndroidStudio` 运行项目，打开 `com.imchat.chanttyai/base/Constants.java` 文件，只需将 `APP_KEY` 及 `HTTP_HOST` 参数分别修改为环信 App Key 和服务端部署域名或 IP 地址。
 
-![img](@static/images/aigc/parameter_configure.png)
+![img](/images/aigc/parameter_configure.png)
 
 ## 运行示例项目
 
@@ -32,10 +32,10 @@
 
 - 启动页面和机器人列表用户界面如下图所示：
   
-<img src=@static/images/aigc/ai_start.png  title=启动页面 width="200"/>&nbsp;&nbsp;
-<img src=@static/images/aigc/ai_user_list.png  title="机器人用户列表" width="200"/>
+<img src=/images/aigc/ai_start.png  title=启动页面 width="200"/>&nbsp;&nbsp;
+<img src=/images/aigc/ai_user_list.png  title="机器人用户列表" width="200"/>
 
 - 聊天页面如下图所示：
   
-<img src=@static/images/aigc/ai_chat1.png  title="聊天页面" width="200"/>&nbsp;&nbsp;
-<img src=@static/images/aigc/ai_chat2.png  title="聊天页面" width="200"/>
+<img src=/images/aigc/ai_chat1.png  title="聊天页面" width="200"/>&nbsp;&nbsp;
+<img src=/images/aigc/ai_chat2.png  title="聊天页面" width="200"/>

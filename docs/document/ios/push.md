@@ -14,7 +14,7 @@
 
 ## 技术原理
 
-![image](@static/images/ios/push/push_ios_1_understand.png)
+![image](/images/ios/push/push_ios_1_understand.png)
 
 ## 前提条件
 
@@ -26,15 +26,15 @@
 
 生成 Certificate Signing Request(CSR)：
 
-![image](@static/images/ios/push/push_ios_2_keychain_access_csr.jpeg)
+![image](/images/ios/push/push_ios_2_keychain_access_csr.jpeg)
 
 填写你的邮箱（该邮箱是申请 App ID 的付费帐号）和常用名称（一般默认是计算机名，不用更改），并选择保存到硬盘：
 
-![image](@static/images/ios/push/push_ios_3_cert_assistant_cert_info.jpeg)
+![image](/images/ios/push/push_ios_3_cert_assistant_cert_info.jpeg)
 
 点击继续: 
 
-![image](@static/images/ios/push/push_ios_4_cert_assistant_cert_save.jpeg)
+![image](/images/ios/push/push_ios_4_cert_assistant_cert_save.jpeg)
 
 在本地生成了名为 `EMImDemoAPS.certSigningRequest` 的 CSR 文件。
 
@@ -42,49 +42,49 @@
 
 生成 App ID ，如果已经有 App ID 可以跳至第 3 步。
 
-![image](@static/images/ios/push/push_ios_5_create_app_id.jpeg)
+![image](/images/ios/push/push_ios_5_create_app_id.jpeg)
 
 选择 App ID，点击 `Continue`；
 
-![image](@static/images/ios/push/push_ios_6_register_new_id.jpeg)
+![image](/images/ios/push/push_ios_6_register_new_id.jpeg)
 
 选择 App， 点击 `Continue`；
 
-![image](@static/images/ios/push/push_ios_7_register_select_type.jpeg)
+![image](/images/ios/push/push_ios_7_register_select_type.jpeg)
 
 输入你的 App ID 描述信息，可以输入工程名；Bundle ID（在工程的 General 信息中），一般格式为 com.youcompany.youprojname。
 
-![image](@static/images/ios/push/push_ios_8_register_type_app_desc.jpeg)
+![image](/images/ios/push/push_ios_8_register_type_app_desc.jpeg)
 
 选择需要支持 `Push Notification`，点击 `Continue`;
 
-![image](@static/images/ios/push/push_ios_9_register_support_push_notifi.jpeg)
+![image](/images/ios/push/push_ios_9_register_support_push_notifi.jpeg)
 
 确定信息无误，点击 `Register`;
 
-![image](@static/images/ios/push/push_ios_10_register_confirm_appid.jpeg)
+![image](/images/ios/push/push_ios_10_register_confirm_appid.jpeg)
 
 ### 3. 创建 app 的 APS 证书
 
 回到 App IDs 选择你需要推送的 app。
 
-![image](@static/images/ios/push/push_ios_11_select_app_for_push.jpeg)
+![image](/images/ios/push/push_ios_11_select_app_for_push.jpeg)
 
 找到 `Push Notifications`， 点击 `Configure`。
 
-![image](@static/images/ios/push/push_ios_12_edit_app_id_config.jpeg)
+![image](/images/ios/push/push_ios_12_edit_app_id_config.jpeg)
 
 如果是开发模式，点击 `Development SSL Certificate` 下的 `Create Certificate`。如果是生产模式，点击 `Production SSL Certificate` 下的 `Create Certificate`。
 
-![image](@static/images/ios/push/push_ios_13_APNs_SSL_cert.jpeg)
+![image](/images/ios/push/push_ios_13_APNs_SSL_cert.jpeg)
 
 `Platform` 选择 `iOS`，`Choose File` 选择第一步中创建的 `CSR` 文件，点击 `Continue`。
 
-![image](@static/images/ios/push/push_ios_14_select_csr.jpeg)
+![image](/images/ios/push/push_ios_14_select_csr.jpeg)
 
 aps 文件创建成功了，点击 `Download` 下载到本地。（文件名：开发版本为 aps_development.cer，发布版本为 aps.cer）：
 
-![image](@static/images/ios/push/push_ios_15_download_your_cert.jpeg)
+![image](/images/ios/push/push_ios_15_download_your_cert.jpeg)
 
 ### 4. 生成 Push 证书
 
@@ -92,41 +92,41 @@ aps 文件创建成功了，点击 `Download` 下载到本地。（文件名：�
 
 双击上一节下载的文件（`aps_development.cer` 和 `aps.cer`）将其安装到电脑，在 `Keychain Access` 中，可以看到已经导入的证书。
 
-![image](@static/images/ios/push/push_ios_16_keychain_access_apple_develop.jpeg)
+![image](/images/ios/push/push_ios_16_keychain_access_apple_develop.jpeg)
 
 右键选择导出为 p12 文件， (例：存储为 `EMImDemoAPS.p12`):
 
-![image](@static/images/ios/push/push_ios_17_keychain_access_export.jpeg)
+![image](/images/ios/push/push_ios_17_keychain_access_export.jpeg)
 
 ### 5. 生成 Provisioning Profile 文件（PP 文件）
 
-![image](@static/images/ios/push/push_ios_18_generate_provision_file.jpeg)
+![image](/images/ios/push/push_ios_18_generate_provision_file.jpeg)
 
 选择 `iOS App Development`（这里演示开发版描述文件的创建, 发布版本的创建流程一样，如果发布版本，请选择 App Store），点击 `Continue`。
 
-![image](@static/images/ios/push/push_ios_19_generate_pr_register.png)
+![image](/images/ios/push/push_ios_19_generate_pr_register.png)
 
 App ID 选择需要创建 PP 文件的 App ID， 点击 `Continue`。
 
-![image](@static/images/ios/push/push_ios_20_generate_pr_select_appid.jpeg)
+![image](/images/ios/push/push_ios_20_generate_pr_select_appid.jpeg)
 
-![image](@static/images/ios/push/push_ios_21_generate_pr_select_cert.jpeg)
+![image](/images/ios/push/push_ios_21_generate_pr_select_cert.jpeg)
 
 选择需要加入开发的设备，只有加入了的设备才能进行真机调试，创建发布版本时没有这个步骤，点击 `Continue`。
 
-![image](@static/images/ios/push/push_ios_22_generate_pr_select_devices.jpeg)
+![image](/images/ios/push/push_ios_22_generate_pr_select_devices.jpeg)
 
 输入 PP 文件的名称，点击 `Generate`。
 
-![image](@static/images/ios/push/push_ios_23_generate_pr_review_name.jpeg)
+![image](/images/ios/push/push_ios_23_generate_pr_review_name.jpeg)
 
 PP 文件生成完成， 点击 `Download`。
 
-![image](@static/images/ios/push/push_ios_24_generate_pr_download_install.jpeg)
+![image](/images/ios/push/push_ios_24_generate_pr_download_install.jpeg)
 
 ### 6. 上传到环信即时通讯 IM 管理后台
 
-![image](@static/images/ios/push/push_ios_25_upload_cert.png)
+![image](/images/ios/push/push_ios_25_upload_cert.png)
 
 ## 在客户端实现推送
 
@@ -134,7 +134,7 @@ PP 文件生成完成， 点击 `Download`。
 
 需要在 xcode 中为 app 开启推送权限。选择 `TARGETS > Capabilities > Push Notifications`。
 
-![image](@static/images/ios/push/push_ios_26_xcode_enable_push_notifi.jpeg)
+![image](/images/ios/push/push_ios_26_xcode_enable_push_notifi.jpeg)
 
 ### 2. 将证书名称传递给 SDK
 
@@ -186,7 +186,7 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 
 其中，设置推送通知方式、免打扰模式和推送模板为推送的高级功能，使用前需要在 [环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活。如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。
 
-![image](@static/images/ios/push/push_ios_27_enable_push.png)
+![image](/images/ios/push/push_ios_27_enable_push.png)
 
 #### 4.1 设置推送通知 
 
@@ -601,7 +601,7 @@ message.chatType = EMChatTypeChat;
 
 例如，推送模板的设置如下图所示：
 
-![img](@static/images/android/push/push_template_custom.png)
+![img](/images/android/push/push_template_custom.png)
 
 使用下面的示例代码后，通知栏中弹出的推送通知为：
 
@@ -949,26 +949,26 @@ message.chatType = EMChatTypeChat;
 
 1. 查看 iOS 端通知权限是否打开，即通道通知权限是否打开。
 
-![image](@static/images/ios/push/push_notification_channel_ios.png)
+![image](/images/ios/push/push_notification_channel_ios.png)
 
 2. 检查推送通知的接收用户是否存在。
 
-![image](@static/images/android/push/push_notification_user_search.png)
+![image](/images/android/push/push_notification_user_search.png)
 
 3. 查看推送通知的接收用户是否绑定了推送信息。
 
-![image](@static/images/android/push/push_notification_user_bind.png)
+![image](/images/android/push/push_notification_user_bind.png)
 
-![image](@static/images/android/push/push_notification_user_bind_info.png)
+![image](/images/android/push/push_notification_user_bind_info.png)
 
 4. 查看推送证书是否存和证书推送测试。
 
 在[环信即时通讯控制台](https://console.easemob.com) 的 **即时通讯** > **功能配置** > **消息推送** > **证书管理**页面选择要测试的推送证书（用户绑定的推送证书），选择 **更多** > **测试**。
 
-![image](@static/images/android/push/push_notification_test.png)
+![image](/images/android/push/push_notification_test.png)
 
 在弹出的 **测试推送证书** 对话框中输入用户绑定的**设备Token**、**推送标题**、**推送内容**，然后点击**测试**，返回对应平台的测试结果。
 
-![image](@static/images/android/push/huawei_push_notification_test.png)
+![image](/images/android/push/huawei_push_notification_test.png)
 
 5. 若以上均已排查后问题仍存在，请联系环信技术支持进一步排查问题原因。

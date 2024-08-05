@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收单聊文本消息的工作流程。
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 如上图所示，发送和接收单聊消息的步骤如下：
 
@@ -304,7 +304,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 
 在 Unity Editor 的左侧导航栏下方，点击 **Project** 页签，选择 **Assets** 下的 **Scenes** 目录，双击右侧的 **SampleScene** 场景，然后点击 Unity Editor 上方的 Play 按钮运行场景。
 
-![图片](@static/images/unity/unity-running.png)
+![图片](/images/unity/unity-running.png)
 
 :::notice
 若未安装 iOS Build Support，运行项目前，将 `Assets/ChatSDK/Scripts/Editor` 路径下的 `iOSBuildSetting.cs` 文件移除项目文件夹。

@@ -76,18 +76,18 @@
 2. 搜索指定的用户 ID，在用户列表中，点击操作的 **
 更多** 按钮，可以对用户进行封禁、强制下线、删除操作。
 
-![img](@static/images/moderation/moderation_usermgmt_01.png)
+![img](/images/moderation/moderation_usermgmt_01.png)
 
 ### 群组成员管理
 
 1. 在 Console 中点击具体应用的 **管理** 按钮，然后依次点击左侧导航栏的 **即时通讯** > **运营服务** > **群组管理**，进入群组管理页面；
 2. 搜索指定的群组 ID，在群组列表中，点击操作的 **更多** 按钮，可以对群成员进行删除、加入黑名单操作；
 
-![img](@static/images/moderation/moderation_usermgmt_02.png)
+![img](/images/moderation/moderation_usermgmt_02.png)
 
 ### 聊天室成员管理
 
 1. 在 Console 中点击具体应用的 **管理** 按钮，然后依次点击左侧导航栏的 **即时通讯** > **运营服务** > **聊天室管理**，进入聊天室管理页面；
 2. 搜索指定的聊天室 ID，在聊天室列表中，点击操作的 **更多** 按钮，可以对聊天室成员进行删除、加入黑名单操作；
 
-![img](@static/images/moderation/moderation_usermgmt_03.png)
+![img](/images/moderation/moderation_usermgmt_03.png)

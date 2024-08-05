@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收单聊文本消息的工作流程。
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 如上图所示，发送和接收单聊消息的步骤如下：
 

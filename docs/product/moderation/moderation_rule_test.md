@@ -12,21 +12,21 @@
 
 选择**内容审核 > 文本审核 > 规则测试**，打开**规则测试**页面。
 
-![img](@static/images/moderation/moderation_rule_test_01.png)
+![img](/images/moderation/moderation_rule_test_01.png)
 
 **2、选择规则名称**
 
 **规则名称**可显示当前已创建的所有规则，选择后即会按对应规则审核，此处以单聊文本为例演示。
 
-![img](@static/images/moderation/moderation_rule_test_02.png)
+![img](/images/moderation/moderation_rule_test_02.png)
 
 **3、输入要审核的文本内容**
 
-![img](@static/images/moderation/moderation_rule_test_03.png)
+![img](/images/moderation/moderation_rule_test_03.png)
 
 **4、点击立即审核，查看结果**
 
-![img](@static/images/moderation/moderation_rule_test_04.png)
+![img](/images/moderation/moderation_rule_test_04.png)
 
 审核结果：表示智能模型审核返回的结果。如果该结果不符合预期，可通过新增自定义调整，如有疑问可联系商务。
 

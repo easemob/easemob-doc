@@ -18,7 +18,7 @@ export default defineUserConfig({
     viteOptions: {
       resolve: {
         alias: {
-          '@static': path.resolve(__dirname, '../../static'),
+          '@static': path.resolve(__dirname, './public'),
         },
       },
       plugins: [

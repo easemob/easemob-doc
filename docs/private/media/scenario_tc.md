@@ -48,7 +48,7 @@ DEMO开发者名称：北京易掌云峰科技有限公司 [隐私协议](https:
 - 多种连麦模式
 
 要实现一个具备以上功能的语音聊天室，大致可以分为三步：**实现语音连麦、支持本地混音，多种连麦模式**的设计，基于设计需求，语音聊天室场景化方案的架构图与实现思路如下：<br>
-![img](@static/images/privitization/tc_architecture.png)
+![img](/images/privitization/tc_architecture.png)
 
 
 ------
@@ -77,7 +77,7 @@ DEMO开发者名称：北京易掌云峰科技有限公司 [隐私协议](https:
 
 我们可以通过一张图，来了解创建语聊房间接口的调用逻辑：
 
-![img](@static/images/privitization/tc_logic_create.png)
+![img](/images/privitization/tc_logic_create.png)
 
 上图中每步涉及到的 iOS/Android 接口如下，其中部分调用到了 AppServer 的接口，开发者需要自己实现 AppServer 功能。
 
@@ -99,7 +99,7 @@ DEMO开发者名称：北京易掌云峰科技有限公司 [隐私协议](https:
 
 我们可以通过一张图，来了解观众进入语聊房间接口的调用逻辑：
 
-![img](@static/images/privitization/tc_logic_join.png)
+![img](/images/privitization/tc_logic_join.png)
 
 上图中每步涉及到的 iOS/Android 接口如下，其中部分调用到了 AppServer 的接口，开发者需要自己实现 AppServer 功能。
 
@@ -118,7 +118,7 @@ DEMO开发者名称：北京易掌云峰科技有限公司 [隐私协议](https:
 
 我们可以通过一张图，来了解观众上麦接口的调用逻辑：
 
-![img](@static/images/privitization/tc_logic_mic.png)
+![img](/images/privitization/tc_logic_mic.png)
 
 上图中每步涉及到的 iOS/Android 接口如下：
 
@@ -139,7 +139,7 @@ DEMO开发者名称：北京易掌云峰科技有限公司 [隐私协议](https:
 
 我们可以通过一张图，来了解主播下麦、房主销毁语聊房间接口的调用逻辑：
 
-![img](@static/images/privitization/tc_logic_down.png)
+![img](/images/privitization/tc_logic_down.png)
 
 上图中每步涉及到的 iOS/Android 接口如下，其中部分调用到了 AppServer 的接口，开发者需要自己实现 AppServer 功能
 

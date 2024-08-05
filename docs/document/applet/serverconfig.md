@@ -7,23 +7,23 @@
 1. 打开 [微信公众平台官网](https://mp.weixin.qq.com/)，登录微信小程序账号，然后进入微信小程序管理主界面；
 2. 在微信小程序主界面的左侧菜单栏里面找到 “</>开发” 模块。
 
-![img](@static/images/applet/config1.png)
+![img](/images/applet/config1.png)
 
 3. 在 “</>开发” 模块，点击 “开发管理”，找到 “开发设置” 选项，下拉找到 “服务器域名” 模块。
 
-![img](@static/images/applet/config2.png)
+![img](/images/applet/config2.png)
 
 4. 首次设置服务器域名的话，会有一个 “开始配置” 按钮，点击进入。
 
-![img](@static/images/applet/config3.png)
+![img](/images/applet/config3.png)
 
 5. 进入配置服务器信息之前需要先进行身份确认，需要管理员扫码进行身份认证。
 
-![img](@static/images/applet/config4.png)
+![img](/images/applet/config4.png)
 
 6. 管理员身份认证之后，就进入到 “配置服务器信息” 模块，设置第二个选项 “socket合法域名” 里面的域名即可。
 
-![img](@static/images/applet/config5.png)
+![img](/images/applet/config5.png)
 
 7. 登陆环信后台获取 socket 域名，进入即时通讯-服务概览页，即可看到如图的域名展示。
 
@@ -31,10 +31,10 @@
 抖音小程序、QQ 小程序、百度小程序、uniapp 全平台等同微信小程序的域名一致，使用微信小程序栏的域名即可。
 :::
 
-![img](@static/images/applet/config6.png)
+![img](/images/applet/config6.png)
 
 8. 填写完域名信息之后，点击下面 “保存并提及” 按钮即可设置完成。
 
-![img](@static/images/applet/config7.png)
+![img](/images/applet/config7.png)
 
 9. 设置完成小程序服务器域名之后，如果想修改服务器域名或者删除服务器域名，依然在 “</>开发” 模块进入，然后进入服务器域名设置部分进行操作设置即可。

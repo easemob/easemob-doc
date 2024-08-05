@@ -47,7 +47,7 @@ pod install --repo-update
 
 demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工程中，并勾选截图中标注的三项。
 
-![img](@static/images/instantpush/push_iossdk_import.png)
+![img](/images/instantpush/push_iossdk_import.png)
 
 ### 设置工程属性
 
@@ -57,7 +57,7 @@ demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工�
 将**Do Not Embed** 改成**Embed & Sign**。
 :::
 
-![img](@static/images/instantpush/push_ios_projectpropertysetting.png)
+![img](/images/instantpush/push_ios_projectpropertysetting.png)
 
 ## SDK 基础功能
 

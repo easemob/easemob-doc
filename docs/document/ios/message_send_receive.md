@@ -33,7 +33,7 @@
 1. 用户 A 发送一条消息到环信即时通讯 IM 消息服务器。
 2. 消息服务器投递消息给用户 B，用户 B 收到该消息。
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 
@@ -352,7 +352,7 @@ EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:action];
 
 下图为输入指示器的工作原理。
 
-![img](@static/images/common/typing_indicator.png)
+![img](/images/common/typing_indicator.png)
 
 监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
 

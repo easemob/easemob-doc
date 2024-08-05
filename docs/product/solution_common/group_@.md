@@ -15,11 +15,11 @@
 
 - Android/iOS 的 UI 实现示例图：
 
-![img](@static/images/product/solution_common/group_mention/group_@_mobile.png)
+![img](/images/product/solution_common/group_mention/group_@_mobile.png)
 
 - Web 的 UI 实现示例图：
 
-![img](@static/images/product/solution_common/group_mention/group_@_web.png)
+![img](/images/product/solution_common/group_mention/group_@_web.png)
 
 ## 前提条件
 

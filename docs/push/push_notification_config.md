@@ -68,11 +68,11 @@
 
 环信通道推送通知示例如下：
 
-![img](@static/images/instantpush/easemob_example.png)
+![img](/images/instantpush/easemob_example.png)
 
 FCM 通道推送通知示例如下：
 
-![img](@static/images/instantpush/fcm_example.png)
+![img](/images/instantpush/fcm_example.png)
 
 ## 基本推送配置
 

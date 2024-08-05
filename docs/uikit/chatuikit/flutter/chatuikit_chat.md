@@ -15,7 +15,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-![img](@static/images/uikit/chatuikit/android/page_chat.png =300x630) 
+![img](/images/uikit/chatuikit/android/page_chat.png =300x630) 
 
 ## 添加消息页面
 

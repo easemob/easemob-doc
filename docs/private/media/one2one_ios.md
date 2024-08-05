@@ -22,7 +22,7 @@
 
 目录 EaseIM —>Class 中的 Demo 目录介绍
 
-![img](@static/images/privitization/ios_demo.png)
+![img](/images/privitization/ios_demo.png)
 
 - Account：主要是 demo 的注册，登录
 - AppDelegate：主要是 demo 中初始化环信SDK，注册推送等
@@ -117,7 +117,7 @@ end
 
 通话界面可以参考Demo中Call1v1VideoViewController，效果如下：
 
-![img](@static/images/privitization/1v1video.png)
+![img](/images/privitization/1v1video.png)
 
 ### 6. 初始化SDK
 

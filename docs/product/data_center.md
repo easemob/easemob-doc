@@ -25,7 +25,7 @@
 
 应用所在数据中心可以在环信用户管理后台的**即时通讯>服务概览**页面中查看：
 
-![img](@static/images/product/data_center.png)
+![img](/images/product/data_center.png)
 
 ## 国内数据中心
 

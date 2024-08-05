@@ -16,7 +16,7 @@
 
 ## 技术原理
 
-![image](@static/images/android/push/push_android_understand.png)
+![image](/images/android/push/push_android_understand.png)
 
 消息推送流程如下：
 
@@ -61,7 +61,7 @@ SDK 内部会按照该顺序检测设备的推送支持情况。如果未设置�
 
 ### 上传到设备证书到环信即时通讯云控制台
 
-![image](@static/images/android/push/fcm_certificate_v1.png)
+![image](/images/android/push/fcm_certificate_v1.png)
 
 ## 在客户端实现推送
 
@@ -106,15 +106,15 @@ EMClient.getInstance().init(this, options);
 
 1. 登录 [FCM 控制台](https://console.firebase.google.com)，选择你的项目。
 
-![image](@static/images/android/push/fcmproject.png)
+![image](/images/android/push/fcmproject.png)
 
 2. 选择该项目下的应用。
 
-![image](@static/images/android/push/appsetting.png)
+![image](/images/android/push/appsetting.png)
 
 3. 选择**服务账号**页签，点击**生成新的私钥**。
 
-![image](@static/images/android/push/v1json.png)
+![image](/images/android/push/v1json.png)
 
 4. 下载证书，保存备用。
 
@@ -140,7 +140,7 @@ EMClient.getInstance().init(this, options);
 
 1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书管理**。
 
-![image](@static/images/android/push/fcm_certificate_v1.png)
+![image](/images/android/push/fcm_certificate_v1.png)
 
 2. 点击 **添加推送证书**。在默认打开的 **谷歌** 页签中，配置 FCM 推送：
 - **证书类型** 选择 **V1**。
@@ -148,13 +148,13 @@ EMClient.getInstance().init(this, options);
 - **证书名称** 设置为 FCM 的发送者 ID。你需要在[Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置** > **云消息传递** 页面中，在 **Firebase Cloud Messaging API（V1）** 区域中获取发送者 ID，如下图所示。
 - 设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
 
-![image](@static/images/android/push/fcm_v1.png)
+![image](/images/android/push/fcm_v1.png)
 
 ##### **旧版证书无缝切换至 V1 证书**
 
 若你仍使用旧版证书，即 **证书类型** 选择 **旧版**，你需要将 **证书名称** 设置为 FCM 的发送者 ID，**推送秘钥** 设置为 FCM 的服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面中，在 **Cloud Messaging API（旧版）** 区域中获取发送者 ID 和服务器密钥，如下图所示。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
 
-![image](@static/images/android/push/fcm_old_version.png)
+![image](/images/android/push/fcm_old_version.png)
 
 **旧版 HTTP 或 XMPP API 于 2024 年 6 月 20 日停用，请尽快迁移到最新的 FCM API（HTTP v1）版本证书。详见 [FCM 控制台](https://console.firebase.google.com)。请确保 V1 证书可用，因为执行转换证书后，旧证书会被删除，若此时新证书不可用，会导致推送失败。**
 
@@ -162,15 +162,15 @@ EMClient.getInstance().init(this, options);
 
 1. 在 **证书管理** 页面的旧版证书的 **操作** 栏中点击 **编辑**。
 
-![image](@static/images/android/push/hxconsoleedit.png)
+![image](/images/android/push/hxconsoleedit.png)
 
 2. 在**编辑推送证书** 窗口的 **谷歌** 页签，将**证书类型**切换为 **V1**。
 
-![fcmapp](@static/images/android/push/old2V1.png)
+![fcmapp](/images/android/push/old2V1.png)
 
 3. 点击 **上传证书** 上传本地保存的 V1 证书文件（.json）。
 
-![fcmapp](@static/images/android/push/v1Chosefile.png)
+![fcmapp](/images/android/push/v1Chosefile.png)
 
 4. 点击 **保存** 完成切换。
 
@@ -420,7 +420,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 2. 在右侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
 3. 在**添加推送证书**对话框中选择**荣耀**，配置荣耀推送参数。
 
-![image](@static/images/android/push/add_honor_push_template.png)
+![image](/images/android/push/add_honor_push_template.png)
 
 | 推送证书参数    | 类型   | 是否必需 | 描述                                                                                               |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------- |
@@ -434,7 +434,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 关于**App ID**、**Client ID**和**Client Secret**，可在荣耀开发者服务平台申请开通推送服务后，在**推送服务**页面选择创建的应用，在[**查看推送服务**](https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=guides&docId=app-registration.md&token=#申请开通推送服务)页面查看。
 :::
 
-![image](@static/images/android/push/view_push_service.png)
+![image](/images/android/push/view_push_service.png)
 
 **步骤 3：在环信即时通讯云 IM 中集成荣耀推送。**
 
@@ -1021,7 +1021,7 @@ private void getIntentData(Intent intent) {
 
 其中，设置推送通知方式、免打扰模式和推送模板为推送的高级功能，使用前需要在 [环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。
 
-![image](@static/images/android/push/push_android_enable_push.png)
+![image](/images/android/push/push_android_enable_push.png)
 
 #### 4.1 设置推送通知
 
@@ -1422,7 +1422,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 例如，推送模板的设置如下图所示：
 
-![img](@static/images/android/push/push_template_custom.png)
+![img](/images/android/push/push_template_custom.png)
 
 使用下面的示例代码后，通知栏中弹出的推送通知为：
 
@@ -1620,7 +1620,7 @@ public class MyVivoMsgReceiver extends EMVivoMsgReceiver {
 
 2. 环信证书补充华为配置 category，如下图所示：
 
-![image](@static/images/android/push/huawei-notifier-category.png)
+![image](/images/android/push/huawei-notifier-category.png)
 
 ### OPPO
 
@@ -1634,7 +1634,7 @@ OPPO PUSH 推送服务将增加区分应用类型的推送频控限制，公信�
 
 3. 环信推送证书补充 OPPO 配置 channelId，如下图所示：
 
-![image](@static/images/android/push/oppo-notifier-channelId.png)
+![image](/images/android/push/oppo-notifier-channelId.png)
 
 ### 小米
 
@@ -1646,7 +1646,7 @@ OPPO PUSH 推送服务将增加区分应用类型的推送频控限制，公信�
 
 2. 环信推送证书补充小米配置 channelId，如下图所示：
 
-![image](@static/images/android/push/xiaomi-notifier-channelId.png)
+![image](/images/android/push/xiaomi-notifier-channelId.png)
 
 ### vivo
 
@@ -1664,7 +1664,7 @@ vivo 推送通道区分 “系统消息” 和”运营消息”，消息类别�
 vivo 提醒配置使用请确保 category 与**推送类型**为正确对应关系，否则推送失败。
 :::
 
-![image](@static/images/android/push/vivo-notifier-category.png)
+![image](/images/android/push/vivo-notifier-category.png)
 
 ## 更多功能
 
@@ -1802,27 +1802,27 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 1. 查看 Android 端通知权限是否打开，即通道通知权限是否打开。
 
-![image](@static/images/android/push/push_notification_channel_android.png)
+![image](/images/android/push/push_notification_channel_android.png)
 
 2. 检查推送通知的接收用户是否存在。
 
-![image](@static/images/android/push/push_notification_user_search.png)
+![image](/images/android/push/push_notification_user_search.png)
 
 3. 查看推送通知的接收用户是否绑定了推送信息。
 
-![image](@static/images/android/push/push_notification_user_bind.png)
+![image](/images/android/push/push_notification_user_bind.png)
 
-![image](@static/images/android/push/push_notification_user_bind_info.png)
+![image](/images/android/push/push_notification_user_bind_info.png)
 
 4. 查看推送证书是否存和证书推送测试。
 
 在[环信即时通讯控制台](https://console.easemob.com) 的 **即时通讯** > **功能配置** > **消息推送** > **证书管理**页面选择要测试的推送证书（用户绑定的推送证书），选择 **更多** > **测试**。
 
-![image](@static/images/android/push/push_notification_test.png)
+![image](/images/android/push/push_notification_test.png)
 
 在弹出的 **测试推送证书** 对话框中输入用户绑定的**设备Token**、**推送标题**、**推送内容**，然后点击**测试**，返回对应平台的测试结果。
 
-![image](@static/images/android/push/huawei_push_notification_test.png)
+![image](/images/android/push/huawei_push_notification_test.png)
 
 5. 查看是否超过了厂商通道限制。
 

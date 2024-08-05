@@ -8,7 +8,7 @@
 
 企业智能办公场景解决方案（简称：环信通）是环信基于 10 年以上的行业服务经验，深挖企事业单位办公场景需求，全力打造的安全统一通讯平台，具有低代码、跨平台、易扩展、灵活部署、定制化、全面信创适配等特性，帮助企事业单位快速搭建一站式智慧办公平台，提升沟通与业务协同效率，实现安全高效的数字化转型。
 
-![img](@static/images/privitization/uc_architecture.png)
+![img](/images/privitization/uc_architecture.png)
 
 ## 产品功能
 
@@ -61,7 +61,7 @@
 
 ## 全面信创适配
 
-![img](@static/images/privitization/uc_client.png)
+![img](/images/privitization/uc_client.png)
 
 ## 产品规格
 

@@ -9,7 +9,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 
@@ -100,7 +100,7 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 
 打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的环信即时通讯 IM Android SDK，然后解压。
 
-![img](@static/images/android/sdk-files.png)
+![img](/images/android/sdk-files.png)
 
 将 SDK 包内 libs 路径下的如下文件，拷贝到你的项目路径下：
 

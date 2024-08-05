@@ -16,7 +16,7 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-![img](@static/images/uikit/chatuikit/web/page_conversation.png =400x930) 
+![img](/images/uikit/chatuikit/web/page_conversation.png =400x930) 
 
 ## 使用示例
 
@@ -34,7 +34,7 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-header1.png)
+![img](/images/uikit/chatuikit/web/cvs-header1.png)
 
 ## 自定义会话列表
 
@@ -71,7 +71,7 @@ const Conversation = () => {
 }
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-bg.png =300x800)
+![img](/images/uikit/chatuikit/web/cvs-bg.png =300x800)
 
 ### 自定义会话列表页面的 header
 
@@ -109,7 +109,7 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-header2.png)
+![img](/images/uikit/chatuikit/web/cvs-header2.png)
 
 ### 设置用户的头像和昵称
 
@@ -158,7 +158,7 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-nick.png =300x700)
+![img](/images/uikit/chatuikit/web/cvs-nick.png =300x700)
 
 ### 添加和置顶会话
 
@@ -222,7 +222,7 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-action.png =300x700)
+![img](/images/uikit/chatuikit/web/cvs-action.png =300x700)
 
 ### 修改会话列表相关的主题
 

@@ -20,7 +20,7 @@ SDK 支持你通过调用 API 在项目中实现如下功能：
 
 Reaction 场景示例如下：
 
-![img](@static/images/ios/reactions.png)
+![img](/images/ios/reactions.png)
 
 分别展示如何添加 Reaction，群聊中 Reaction 的效果，以及查看 Reaction 列表。
 

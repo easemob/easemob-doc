@@ -19,7 +19,7 @@
 
 Reaction 场景示例如下：
 
-![](@static/images/ios/reactions.png)
+![](/images/ios/reactions.png)
 
 分别展示如何添加 Reaction，群聊中 Reaction 的效果，以及查看 Reaction 列表。
 

@@ -15,7 +15,7 @@
 
 下图展示在客户端发送和接收消息的工作流程：
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 如上图所示，消息收发流程如下：
 
@@ -25,7 +25,7 @@
 
 子区创建和查看如下图：
 
-![](@static/images/ios/threads.png)
+![](/images/ios/threads.png)
 
 ## 前提条件
 

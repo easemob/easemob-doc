@@ -14,7 +14,7 @@
 ## 实现方案
 我们可以通过一张图，来了解主持模式中接口的调用逻辑：
 
-![img](@static/images/privitization/tc_logic_host.png)
+![img](/images/privitization/tc_logic_host.png)
 
 上图中每步涉及到的iOS/Android接口如下：
 

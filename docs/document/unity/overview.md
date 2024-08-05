@@ -286,7 +286,7 @@ XXX：Windows 用户名; YYY: Unity 中设置的公司名称，如果没有设�
 - 打开 Xcode，连接设备，选择 **Xcode** > **Window** > **Devices and Simulators**。
 - 进入 **Devices** 选项卡，在左侧选择目标设备，例如 Easemob IM，点击设置图标，然后选择 **Download Container**。
 
-![img](@static/images/ios/overview_fetchlogfile.png)
+![img](/images/ios/overview_fetchlogfile.png)
 
 日志文件 `easemob.log` 文件在下载包的 AppData/Library/Application Support/HyphenateSDK/easemobLog 目录下。
 

@@ -6,7 +6,7 @@
 
 1. [登录 Demo](https://webim-h5.easemob.com/#/login)。
 
-![img](@static/images/demo/web_react_login.png)
+![img](/images/demo/web_react_login.png)
 
 2. 输入你的手机号，获取验证码，然后输入。
 
@@ -43,4 +43,4 @@ Demo 中的主要模块如下：
 
 ## 部分 UI 展示
 
-![img](@static/images/web/react_demo.png)
+![img](/images/web/react_demo.png)

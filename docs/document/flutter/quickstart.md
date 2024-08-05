@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 如上图所示，发送和接收单聊消息的步骤如下：
 
@@ -457,18 +457,18 @@ flutter run
 
 运行结果如下：
 
-<img src="@static/images/flutter/simulator_screen_shot1.png" width="500" />
+<img src="/images/flutter/simulator_screen_shot1.png" width="500" />
 
 参考以下步骤发送和接收文本消息：
 
 1. 输入任意用户名（如 `flutter001` 和 `flutter002`）和密码 `1`，点击 `SIGN UP` 创建用户；
 2. 以 `flutter001` 身份登录 Demo，将 `Enter the username you want to send` 输如为 `flutter002`， 发送文本消息；
 
-<img src="@static/images/flutter/simulator_screen_shot2.png" width="500" />
+<img src="/images/flutter/simulator_screen_shot2.png" width="500" />
 
 3. 以 `flutter002` 身份登录 Demo，查看 Log 信息确认是否都到消息。
 
-<img src="@static/images/flutter/simulator_screen_shot3.png" width="500" />
+<img src="/images/flutter/simulator_screen_shot3.png" width="500" />
 
 ## 后续步骤
 

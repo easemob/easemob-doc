@@ -6,13 +6,13 @@
 
 ## 平台架构
 
-![环信 IM 后台](@static/images/product/framework.png)
+![环信 IM 后台](/images/product/framework.png)
 
 ## 集成概述
 
 在 [环信即时通讯控制台](enable_and_configure_IM.html) 注册和开通服务后，开发者需要了解服务端和客户端的交互过程，如下图所示。
 
-![img](@static/images/product/integration-overview.png)
+![img](/images/product/integration-overview.png)
 
 服务端和客户端集成以及 Demo 介绍详见下表中的链接文档。
 

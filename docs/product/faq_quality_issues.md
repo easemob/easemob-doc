@@ -74,7 +74,7 @@
 2. 在首页的 应用列表 区域中，点击具体应用的 **操作** 栏中的 **管理**。
 3. 在界面左侧导航栏中选择**应用详情**下的**即时通讯** > **实时查询** > **IM消息投递查询**。
 
-![img](@static/images/product/faq-msgdeliveryquery.png)
+![img](/images/product/faq-msgdeliveryquery.png)
 
 ## 参考
 
@@ -88,6 +88,6 @@
 2. 在首页的 **应用列表** 区域中，点击具体应用的 **操作** 栏中的 **管理**。
 3. 在界面左侧导航栏中选择 **应用详情** 下的 **即时通讯** > **实时查询** > **IM用户连接状态**。
 
-![img](@static/images/product/faq-userconnectionstatus.png)
+![img](/images/product/faq-userconnectionstatus.png)
 
 说明: 环信即时通讯 IM SDK 未提供直接查询用户是否在线的方法，客户端可以封装查询用户是否在线的接口调用或者让自己服务器端来调用再与自己客户端交互。

@@ -16,7 +16,7 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-![img](@static/images/uikit/chatuikit/android/page_conversation.png =400x840) 
+![img](/images/uikit/chatuikit/android/page_conversation.png =400x840) 
 
 ## 使用示例
 
@@ -111,7 +111,7 @@ builder.setCustomAdapter(customConversationListAdapter);
 builder.setCustomFragment(customConversationListFragment);
 ```
 
-![img](@static/images/uikit/chatuikit/android/conversation_list_custom.png)
+![img](/images/uikit/chatuikit/android/conversation_list_custom.png)
 
 ### 设置会话头像和昵称
 
@@ -151,7 +151,7 @@ builder.setCustomFragment(customConversationListFragment);
 })
 ```
 
-![img](@static/images/uikit/chatuikit/android/cvs-nick.png =450x800)
+![img](/images/uikit/chatuikit/android/cvs-nick.png =450x800)
 
 ## EaseConversationListFragment 中默认实现的功能
 
@@ -177,7 +177,7 @@ builder.setCustomFragment(customConversationListFragment);
 
 使用 `EaseConversationListViewModel` 提供的方法 `deleteConversation` 方法删除会话。
 
-![img](@static/images/uikit/chatuikit/android/cvs-action.png =350x600)
+![img](/images/uikit/chatuikit/android/cvs-action.png =350x600)
 
 ## 事件监听
 

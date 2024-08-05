@@ -13,7 +13,7 @@
 
 多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置各端设备的数量：
 
-![img](@static/images/common/multidevice_device_count.png)
+![img](/images/common/multidevice_device_count.png)
 
 单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
 
@@ -124,7 +124,7 @@ EMClient.getInstance.addConnectionEventHandler(
 
 **设备平台**的取值范围为 [1,100]，**设备数量**的取值范围为 [0,4]。
 
-![img](@static/images/common/multidevice_device_platform.png)
+![img](/images/common/multidevice_device_platform.png)
 
 2. 初始化 SDK 时，调用 `EMOptions#osType` 方法自定义设置登录设备的平台。确保该方法中的 `osType` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
 

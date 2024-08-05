@@ -4,11 +4,11 @@ ChatroomUIkit 内置浅色和深色主题，默认为浅色主题。
 
 - 浅色主题
 
-![img](@static/images/uikit/chatroomios/light_mode.png)
+![img](/images/uikit/chatroomios/light_mode.png)
 
 - 深色主题
 
-![img](@static/images/uikit/chatroomios/dark_mode.png)
+![img](/images/uikit/chatroomios/dark_mode.png)
 
 ## 切换为内置主题 
 

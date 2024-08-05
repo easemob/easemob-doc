@@ -22,19 +22,19 @@ iOS 10 苹果增加了推送通知服务应用扩展（Notification Service Exte
 
 - 点击 **Xcode**，选择 **File** > **New** > **Target**。
 
-![img](@static/images/instantpush/push_xcode_target.png)
+![img](/images/instantpush/push_xcode_target.png)
 
 - 在 **iOS** > **Application Extension** 下选中 **Notification Service Extension**，点击 **Next**。
 
-![img](@static/images/instantpush/push_apns_notificationextension.png)
+![img](/images/instantpush/push_apns_notificationextension.png)
 
 - 为您的应用程序扩展指定名称和其他配置细节，点击完成。
 
-![img](@static/images/instantpush/push_apns_targetconfi.png)
+![img](/images/instantpush/push_apns_targetconfi.png)
 
 - 创建完后在工程里会自动生成三个文件 (NotificationService.h、NotificationService.m、info.plist) 和扩展应用的 Target（工程名就是创建时候填的 Product Name）。
 
-![img](@static/images/instantpush/push_apns_serviceext.png)
+![img](/images/instantpush/push_apns_serviceext.png)
 
 ## 3、推送服务扩展导入 SDK
 
@@ -64,7 +64,7 @@ APNs 的送达统计 SDK 下载地址：
 
 下载下来之后，将 **EMPushExtension.framework** 加入到应用扩展目录下即可。
 
-![img](@static/images/instantpush/push_apns_extension_directory.png) 
+![img](/images/instantpush/push_apns_extension_directory.png) 
 
 ## 4、SDK 使用
 

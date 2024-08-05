@@ -82,9 +82,9 @@ iOS:
 白板操作有3类，分别为：页面类操作、元素类操作、文档类操作；
 <center>表1.白板支持功能</center>
 
-![img](@static/images/privitization/whiteboard_function.png)
+![img](/images/privitization/whiteboard_function.png)
 
 <center>图2.白板操作界面</center>
 
-![img](@static/images/privitization/whiteboard_view.png)
+![img](/images/privitization/whiteboard_view.png)
 

@@ -8,11 +8,11 @@
 
 - 消息送达回执的效果示例，如下图所示：
 
-![img](@static/images/uikit/chatuikit/feature/web/common/message_delivery_receipt.png) 
+![img](/images/uikit/chatuikit/feature/web/common/message_delivery_receipt.png) 
 
 - 消息已读回执的效果示例，如下图所示：
 
-![img](@static/images/uikit/chatuikit/feature/web/common/message_read_receipt.png) 
+![img](/images/uikit/chatuikit/feature/web/common/message_read_receipt.png) 
 
 ## 技术原理
 

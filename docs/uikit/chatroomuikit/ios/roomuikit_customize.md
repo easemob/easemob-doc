@@ -8,27 +8,27 @@
 
 - `GiftMessageCell`：礼物弹幕列表 Cell 类。
 
-![img](@static/images/uikit/chatroomios/GiftBarrageCell.png)
+![img](/images/uikit/chatroomios/GiftBarrageCell.png)
 
 - `GiftEntityCell`：礼物视图 Cell 类。
 
-![img](@static/images/uikit/chatroomios/GiftEntityCell.png)
+![img](/images/uikit/chatroomios/GiftEntityCell.png)
 
 - `MessageInputBar`：聊天输入框类。
 
-![img](@static/images/uikit/chatroomios/ChatInputBar.png)
+![img](/images/uikit/chatroomios/ChatInputBar.png)
 
 - `ReportOptionsController`：消息举报控制器类。
 
-![img](@static/images/uikit/chatroomios/ReportOptionsController.png)
+![img](/images/uikit/chatroomios/ReportOptionsController.png)
 
 - `ParticipantsController`：聊天室成员列表/黑名单列表控制器类。
 
-![img](@static/images/uikit/chatroomios/ParticipantsController.png)
+![img](/images/uikit/chatroomios/ParticipantsController.png)
 
 - `ChatroomParticipantsCell`：聊天室成员列表/黑名单列表 Cell 类。
 
-![img](@static/images/uikit/chatroomios/ChatroomParticipantsCell.png)
+![img](/images/uikit/chatroomios/ChatroomParticipantsCell.png)
 
 - `GiftsViewController`：礼物视图控制器类。
 
@@ -36,7 +36,7 @@
 
 你需要在确保你的服务器端的礼物业务处理完毕，再调用 ChatroomUIKit 提供的发送礼物消息 API。
 
-![img](@static/images/uikit/chatroomios/GiftsViewController.png)
+![img](/images/uikit/chatroomios/GiftsViewController.png)
 
 ## 自定义示例
 

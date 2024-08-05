@@ -50,7 +50,7 @@ wss://im-api-wechat.easemob.com（3.0 IM SDK）
 
 应用所在数据中心可以在环信用户管理后台 > **即时通讯** > **服务概览**中查看：
 
-![img](@static/images/applet/service_overview.png)
+![img](/images/applet/service_overview.png)
 
 ### 说明
 

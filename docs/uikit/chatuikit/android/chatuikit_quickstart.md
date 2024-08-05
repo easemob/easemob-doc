@@ -315,7 +315,7 @@ fun Context.showToast(msg: String) {
 
 在聊天页面下方输入消息，然后点击**发送**按钮发送消息。
 
-![img](@static/images/uikit/chatuikit/android/message_first.png =300x650) 
+![img](/images/uikit/chatuikit/android/message_first.png =300x650) 
 
 ## 测试应用
 

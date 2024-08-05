@@ -90,8 +90,8 @@ QPS计算规则只适用于中国大陆。
 
 | 消息类型   | 定义      | 提醒方式     | 消息样式                                                     |
 | :--------- | :---------- | :------- | :------------------------------ |
-| 服务与通讯 | 包括社交通讯类消息和服务提醒类消息。社交通讯，指用户间的聊天消息、通话等信息。服务提醒，指应用借助通知中心及时向用户传递重要通知提醒，通常用户对接收此类消息有预期。 | 锁屏、铃声、振动                   | 文本+小图（可选）<br/>![img](@static/images/instantpush/push_huawei_tinyimage1.png)|
-| 资讯营销   | 包括资讯类消息和营销类消息，指的是运营人员向用户发送的活动信息、内容推荐、资讯等。 | 静默通知，仅在下拉通知栏时展示消息 | 文本+小图（可选）<br/>![img](@static/images/instantpush/push_huawei_tinyimage2.png) |
+| 服务与通讯 | 包括社交通讯类消息和服务提醒类消息。社交通讯，指用户间的聊天消息、通话等信息。服务提醒，指应用借助通知中心及时向用户传递重要通知提醒，通常用户对接收此类消息有预期。 | 锁屏、铃声、振动                   | 文本+小图（可选）<br/>![img](/images/instantpush/push_huawei_tinyimage1.png)|
+| 资讯营销   | 包括资讯类消息和营销类消息，指的是运营人员向用户发送的活动信息、内容推荐、资讯等。 | 静默通知，仅在下拉通知栏时展示消息 | 文本+小图（可选）<br/>![img](/images/instantpush/push_huawei_tinyimage2.png) |
 
 #### 华为消息分类方式
 
@@ -131,7 +131,7 @@ QPS计算规则只适用于中国大陆。
 
 目前OPPO PUSH推送数量限制的规则是：
 
-![img](@static/images/instantpush/push_oppo_quantityrestriction.png)
+![img](/images/instantpush/push_oppo_quantityrestriction.png)
 
 通知栏推送测试权限与正式权限仅有推送数量上的差异，api推送环境都使用正式环境。
 
@@ -145,7 +145,7 @@ QPS计算规则只适用于中国大陆。
 OPPO推送服务将于2023年1月15日优化推送数量限制规则，对已申请正式权限的应用增加区分应用类别的推送频控限制。
 :::
 
-![img](@static/images/instantpush/push_oppo_singleuser.png)
+![img](/images/instantpush/push_oppo_singleuser.png)
 
 具体限制请参考[OPPO推送文档](https://open.oppomobile.com/new/developmentDoc/info?id=11210)。
 
@@ -199,7 +199,7 @@ channel_id 参数在 notification 的 android 字段下。
 
 #### 推送数量限制
 
-![img](@static/images/instantpush/push_mi_pushrestriction.png)
+![img](/images/instantpush/push_mi_pushrestriction.png)
 
 如果特殊情况需要额外提升推送量级，开发者可以向小米推送进行申诉。
 

@@ -196,7 +196,7 @@ yarn run android
 
 ### 第八步 发送消息
 
-<img src=@static/images/uikit/chatrn/uikit_quick_start.png  width="300" height="700"/>
+<img src=/images/uikit/chatrn/uikit_quick_start.png  width="300" height="700"/>
 
 ## 示例源码参考
 

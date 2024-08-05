@@ -19,7 +19,7 @@
 4. app server 调用 Restful API 将回复内容发送给环信服务器。
 5. 环信服务器将回复内容发送给用户。
 
-![img](@static/images/aigc/technical_architecture1.png)
+![img](/images/aigc/technical_architecture1.png)
 
 ### 跑通示例项目
 
@@ -44,6 +44,6 @@
 3. 第三方大模型厂商对用户消息进行回复，将消息回复内容发送给环信机器人服务。
 4. 环信机器人服务收到消息后，通过环信服务器将回复内容发送给用户。
 
-![img](@static/images/aigc/technical_architecture2.png)
+![img](/images/aigc/technical_architecture2.png)
 
 

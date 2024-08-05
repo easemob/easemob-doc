@@ -8,7 +8,7 @@
 
 消息送达回执和已读回执的效果示例，如下图所示：
 
-![img](@static/images/android/message_receipt.png)
+![img](/images/android/message_receipt.png)
 
 ## 技术原理
 

@@ -13,7 +13,7 @@
 - 撤回子区消息
 - 获取子区消息
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 如上图所示，消息收发流程如下：
 
@@ -23,7 +23,7 @@
 
 子区创建和查看如下图：
 
-![img](@static/images/android/threads.png)
+![img](/images/android/threads.png)
 
 ## 前提条件
 

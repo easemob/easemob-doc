@@ -10,24 +10,24 @@
 
 登陆 [魅族开放平台](https://open.flyme.cn/)，点击【Flyme 推送】。
 
-![img](@static/images/instantpush/push_meizu_flymeconsole.png)
+![img](/images/instantpush/push_meizu_flymeconsole.png)
 
 #### 1.2、选择配置应用
 
 选择您要设置的应用名称，点击【打开应用】。
 
-![img](@static/images/instantpush/push_flyme_openapp.png)
+![img](/images/instantpush/push_flyme_openapp.png)
 
 #### 1.3、设置回调地址
 
 根据所在集群设置回调地址（配置 http）
 格式为：`http://域名/orgname/appname/push/report/meizu`。
 
-![img](@static/images/instantpush/push_flyme_callbackaddr.png)
+![img](/images/instantpush/push_flyme_callbackaddr.png)
 
 您可以在环信后台，**即时通讯** → **服务概览** 中查看当前 Appkey 的 Rest API 域名地址，仅支持填写 `easemob.com` 类型。
 
-![img](@static/images/instantpush/push_domain_name.png)
+![img](/images/instantpush/push_domain_name.png)
 
 #### 1.4、开启送达回执
 
@@ -39,29 +39,29 @@
 
 登陆 [华为消息推送平台](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/)，点击【我的项目】。
 
-![img](@static/images/instantpush/push_huawei_console.png)
+![img](/images/instantpush/push_huawei_console.png)
 
 #### 2.2、选择配置应用
 
 选择您要设置的应用名称，点击【推送服务】，点击【配置】。
 
-![img](@static/images/instantpush/push_huawei_config.png)
+![img](/images/instantpush/push_huawei_config.png)
 
 #### 2.3、开通应用回执状态
 
 开通回执状态
 
-![img](@static/images/instantpush/push_huawei_callback.png)
+![img](/images/instantpush/push_huawei_callback.png)
 
 #### 2.4、测试并添加回执
 
 填写回执配置，测试回执通过后进行提交。 
 
-![img](@static/images/instantpush/huawei_report_v1.png)
+![img](/images/instantpush/huawei_report_v1.png)
 
 如果您有多个回执地址，且环信回执地址并非默认选项，则需要指定回执配置ID，详情见 [华为配置推送通知receiptId ](push_notification_config.html#华为推送说明)
 
-![img](@static/images/instantpush/huawei_receipt_id.png)
+![img](/images/instantpush/huawei_receipt_id.png)
 
 示例：
 
@@ -85,7 +85,7 @@
 格式为：`https://域名/orgname/appname/push/report/huawei`
 您可以在环信后台，**即时通讯** > **服务概览** 中查看当前 Appkey 的 Rest API 域名地址，仅支持填写 `easemob.com` 类型。 
 
-![img](@static/images/instantpush/push_domain_name.png)
+![img](/images/instantpush/push_domain_name.png)
 
 ### 3、FCM 客户端处理上报
 

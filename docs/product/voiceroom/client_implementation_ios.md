@@ -20,7 +20,7 @@
 
 以下为房间管理流程图。
 
-![img](@static/images/voiceroom/voiceroom_mgmt.png)
+![img](/images/voiceroom/voiceroom_mgmt.png)
 
 房间管理流程如下：
 
@@ -46,7 +46,7 @@
 
 以下为麦位管理流程图：
 
-![img](@static/images/voiceroom/voiceroom_seatmgmt.png)
+![img](/images/voiceroom/voiceroom_seatmgmt.png)
 
 麦位相关操作如下所示：
 
@@ -63,7 +63,7 @@
 
 ### 发送单向消息流程图
 
-![img](@static/images/voiceroom/voiceroom_oneway_msg.png)
+![img](/images/voiceroom/voiceroom_oneway_msg.png)
 
 邀请用户上麦的流程如下：
 
@@ -81,7 +81,7 @@
 
 ### 发送礼物消息流程图
 
-![img](@static/images/voiceroom/voiceroom_gift_msg.png)
+![img](/images/voiceroom/voiceroom_gift_msg.png)
 
 发送礼物消息的流程如下：
 

@@ -21,7 +21,7 @@
 
 ## SDK架构
 
-![img](@static/images/privitization/em-rtcsdk-architecture.png)
+![img](/images/privitization/em-rtcsdk-architecture.png)
 
 环信音视频SDK提供3套API体系，[1对1通话](one2one_introduction)，[多人通话](conference_introduction)，<!-- [互动白板](whiteboard_introduction)，-->以上API能满足客户的绝大多数使用场景。
 
@@ -29,18 +29,18 @@
 
 环信音视频能力有几种典型的应用模式，包括：一对一音视频、多人音视频会议、多人音视频互动直播。
 
-![img](@static/images/privitization/em-rtcsdk-scenarios.png)
+![img](/images/privitization/em-rtcsdk-scenarios.png)
 
 ## 兼容性说明
 
 环信音视频SDK支持Android、iOS、Web、微信小程序、Windows、macOS、Linux，支持各平台互通，平台兼容性见下表:
 
-![img](@static/images/privitization/em-rtcsdk-compatibility.png)
+![img](/images/privitization/em-rtcsdk-compatibility.png)
 
 对于浏览器的支持情况见下表：
 
 
-![img](@static/images/privitization/em-rtcsdk-compatibility-web.png)
+![img](/images/privitization/em-rtcsdk-compatibility-web.png)
 
 注意：
 
