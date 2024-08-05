@@ -415,7 +415,8 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
     "custom": true,
     "description": true,
     "maxusers": true,
-    "groupname": true
+    "groupname": true,
+    "avatar": true
   },
   "duration": 0,
   "entities": [],
