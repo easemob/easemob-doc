@@ -47,7 +47,7 @@
                   <span v-if="index < products.length - 1">|</span>
                 </template>
               </div>
-              <div v-for="s in starter" :id="s.title">
+              <div v-for="s in starter" :key="s.title" :id="s.title">
                 <h2 class="sdk-start-title">{{ s.title }}</h2>
                 <div class="sdk-start-list">
                   <div
