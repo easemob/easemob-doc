@@ -113,18 +113,18 @@ const documentSidebar = [
           { 
             text: '集成第三方推送', 
             collapsible: true,
-        children: [
-          { text: 'FCM 推送', link: 'push_fcm.html', only: ['android'] }, 
-          { text: '华为推送', link: 'push_huawei.html', only: ['android'] }, 
-          { text: '荣耀推送', link: 'push_honor.html', only: ['android'] }, 
-          { text: 'OPPO 推送', link: 'push_oppo.html', only: ['android'] }, 
-          { text: 'vivo 推送', link: 'push_vivo.html', only: ['android'] }, 
-          { text: '小米推送', link: 'push_xiaomi.html', only: ['android'] }, 
-          { text: '魅族推送', link: 'push_meizu.html', only: ['android'] }, 
-          { text: 'APNs 推送', link: 'push_apns.html', only: ['ios'] }, 
-          { text: 'HarmonyOS 推送', link: 'push_harmony.html', only: ['harmony'] }
+            children: [
+            { text: 'FCM 推送', link: 'push_fcm.html', only: ['android'] }, 
+            { text: '华为推送', link: 'push_huawei.html', only: ['android'] }, 
+            { text: '荣耀推送', link: 'push_honor.html', only: ['android'] }, 
+            { text: 'OPPO 推送', link: 'push_oppo.html', only: ['android'] }, 
+            { text: 'vivo 推送', link: 'push_vivo.html', only: ['android'] }, 
+            { text: '小米推送', link: 'push_xiaomi.html', only: ['android'] }, 
+            { text: '魅族推送', link: 'push_meizu.html', only: ['android'] }, 
+            { text: 'APNs 推送', link: 'push_apns.html', only: ['ios'] }, 
+            { text: 'HarmonyOS 推送', link: 'push_harmony.html', only: ['harmony'] },
            ]
-          }
+          }, 
           { text: '解析推送消息', link: 'push_parsing.html', only: ['android', 'ios'] },
           { text: '厂商通道限制及方案', link: 'push_channel_restrict_solution.html', only: ['android'] },
           { text: '设置通知的显示内容', link: 'push_display.html', only: ['android', 'ios'] },
@@ -132,7 +132,7 @@ const documentSidebar = [
           { text: '设置推送模板', link: 'push_template.html', only: ['web']},
           { text: '设置推送翻译', link: 'push_translation.html', only: ['android', 'ios', 'web']},
           { text: '设置推送扩展功能', link: 'push_extension.html', only: ['android', 'ios', 'web']},
-          { text: 'FAQ', link: 'push_solution.html', only: ['android', 'ios']}
+          { text: 'FAQ', link: 'push_solution.html', only: ['android', 'ios']},
         ]
       },
       { text: '登录多个设备', link: 'multi_device.html' },
