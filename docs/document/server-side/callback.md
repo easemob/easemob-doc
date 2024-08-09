@@ -40,7 +40,7 @@
 ### 实现步骤
 
 1. 在管理后台开通消息回调服务。
-2. [在环信控制台配置发送前回调规则](/document/server-side/callback.html#_1、发送前回调)。
+2. [在环信控制台配置发送前回调规则](/document/product/enable_and_configure_IM.html#配置回调规则)。
 3. 从环信服务器向你的应用服务器发送请求。
 
 请求采用 POST 方式，支持 `HTTP/HTTPS`，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
