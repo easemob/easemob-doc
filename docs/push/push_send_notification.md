@@ -83,6 +83,8 @@ POST https://{host}/{org_name}/{app_name}/push/sync/{target}
 | :---------------- | :----- | :----------------------------------------------------------- |
 | `data`            | Object | 推送结果。服务器根据推送结果判断推送状态。                   |
 | `data.pushStatus` | String | 推送状态：<br/> - `SUCCESS`：推送成功；<br/> - `FAIL`：推送失败，即非服务端导致的错误，例如 `bad device token`，表示移动端传给服务端的 device token 错误，对应推送厂商不接受。<br/> - `ERROR`：推送异常，即服务端导致错误，例如连接超时或读写超时。 |
+| `data.data`       | Object | 绑定推送信息对应平台返回的推送结果数据。                   |
+| `data.desc`       | String | 推送失败描述信息。                   |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
