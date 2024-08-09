@@ -30,7 +30,7 @@ if (redirectUri) {
       class="advisor"
       @click="dialogVisible = !dialogVisible"
     >
-      参与调查
+      有奖调研
     </div>
     <el-dialog v-model="dialogVisible" :fullscreen="true">
       <iframe
