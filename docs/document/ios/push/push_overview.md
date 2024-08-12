@@ -1,4 +1,4 @@
-# 离线推送概述
+# **离线推送概述**
 
 即时通讯 IM 支持集成 APNs 消息推送服务，为 iOS 开发者提供低延时、高送达、高并发、不侵犯用户个人数据的离线消息推送服务。
 
@@ -16,7 +16,7 @@
 
 除了满足用户离线条件外，要使用 APNs 离线推送，用户还需在环信控制台配置推送证书信息并调用客户端 SDK 提供的 `bindDeviceToken` 方法向环信服务器上传 device token。
 
-## 技术原理
+## **技术原理**
 
 ![image](@static/images/ios/push/push_ios_1_understand.png)
 
@@ -35,7 +35,7 @@
 device token 是 APNs 推送提供的推送 token，即初次启动你的应用时，APNs SDK 为客户端应用实例生成的推送 token。该 token 用于标识每台设备上的每个应用，APNs 通过该 token 明确消息是发送给哪个设备的，然后将消息转发给设备，设备再通知应用程序。你可以调用 `registerForRemoteNotifications` 方法获得 token。另外，如果退出即时通讯 IM 登录时不解绑 device token（调用 `logout` 方法时对 `aIsUnbindDeviceToken` 参数传 `NO` 表示不解绑 device token，传 `YES` 表示解绑 token），用户在推送证书有效期和 token 有效期内仍会接收到离线推送通知。
 :::
 
-## 前提条件
+## **前提条件**
 
 使用 APNs 推送前，确保满足以下条件：
 
