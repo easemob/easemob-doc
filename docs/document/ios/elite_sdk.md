@@ -315,7 +315,7 @@
       <td rowspan="7">进阶功能</td>
       <td>离线推送</td>
       <td>集成第三方消息推送服务</td>
-      <td><a href="https://doc.easemob.com/document/ios/push.html">离线推送</a></td>
+      <td><a href="https://doc.easemob.com/document/ios/push/push_overview.html">离线推送</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>

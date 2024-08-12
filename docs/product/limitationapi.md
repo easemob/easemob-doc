@@ -113,7 +113,7 @@
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
 | 分页获取 app 中的群组  |  GET     | /{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}        | 100 次/秒/App Key                                                 |
-| 获取一个用户加入的所有群组   |  GET         | /{org_name}/{app_name}/users/{username}/joined_chatgroups        | 50 次/秒/App Key                                                  |
+| 获取一个用户加入的所有群组   |  GET         | /{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&pagenum={}        | 50 次/秒/App Key   |
 | 查看指定用户是否已加入群组 | POST  | /{org_name}/{app_name}/chatgroups/{group_id}/user/{user_id}/is_joined | 100 次/秒/App Key |
 | 获取群组详情        |  GET        | /{org_name}/{app_name}/chatgroups/{group_ids}           | 100 次/秒/App Key            |
 | 创建群组  |    POST      | /{org_name}/{app_name}/chatgroups                  | 100 次/秒/App Key   |

@@ -78,7 +78,7 @@
 
 客户端断开连接或应用进程被关闭等原因导致用户离线时，即时通讯 IM 会通过第三方消息推送服务向该离线用户的设备推送消息通知。当用户再次上线时，服务器会将离线期间的消息发送给用户，确保用户收到离线期间的消息。
 
-[Android 推送](/document/android/push.html)支持 Firebase Cloud Message(FCM)、华为、OPPO、小米、vivo 和魅族推送。[iOS 推送](/document/ios/push.html)使用 Apple Push Notification service(APNs) 。
+[Android 推送](/document/android/push/push_overview.html)支持 Firebase Cloud Message(FCM)、华为、OPPO、小米、vivo 和魅族推送。[iOS 推送](/document/ios/push/push_overview.html)使用 Apple Push Notification service(APNs) 。
 
 ### 多设备登录
 

@@ -27,7 +27,7 @@
 - [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
   - 新增 `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
   - 新增 `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
-- [IM SDK] 支持[会话推送通知方式的本地存储](push.html#_4-1-设置推送通知)。
+- [IM SDK] 支持[会话推送通知方式的本地存储](/document/android/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置)。
   - 新增 `EMPushManager#syncSilentModeConversationsFromServer` 方法，支持从服务器获取所有会话的推送通知方式的设置。
   - 新增 `EMConversation#pushRemindType` 属性，用于本地存储会话的推送通知方式。
   - 若用户在一台设备上变更会话的推送通知方式，其他设备会收到 `EMMultiDeviceListener#onConversationEvent` 事件。
@@ -97,7 +97,7 @@
 
 ### 优化
 
-- [IM SDK] 添加绑定推送 token 成功的回调，详见 [FCM 推送集成](push.html#fcm-推送集成)步骤四中的在环信即时通讯 IM SDK 中启用 FCM 的描述。
+- [IM SDK] 添加绑定推送 token 成功的回调，详见 [FCM 推送集成](/document/android/push/push_fcm.html)步骤四中的在环信即时通讯 IM SDK 中启用 FCM 的描述。
 - [IM SDK] `onMessageRecalled` 已过时，请用 `onMessageRecalledWithExt` 代替。
 
 ### 修复
@@ -280,7 +280,7 @@
     - 新增 `EMChatManager#asyncFetchPinnedConversationsFromServer` 方法，实现[获取置顶的服务器会话](conversation_pin.html#获取服务端的置顶会话列表)。
 - [IM SDK] 新增 `EMChatManager#getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](conversation_list.html#获取本地会话)；
 - [IM SDK] 新增在群组或聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)的功能；
-- [IM SDK] 新增[荣耀推送](push.html#荣耀推送集成)。
+- [IM SDK] 新增[荣耀推送](/document/android/push/push_honor.html)。
 
 ### 优化
 

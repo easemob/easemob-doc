@@ -57,4 +57,4 @@ public void onNotificationClick(Context context, EMNotificationMessage notificat
 
 ## 3、离线推送集成
 
-离线推送需参考环信 IM 的[第三方推送集成](/document/android/push.html)，集成各个厂商的推送（如不需要离线推送，可忽略）。
+离线推送需参考环信 IM 的[第三方推送集成](/document/harmonyos/push/push_overview.html)，集成各个厂商的推送（如不需要离线推送，可忽略）。

@@ -33,7 +33,7 @@
 - 新增[修改消息](message_modify.html)功能。
 - 新增[自定义消息](message_send_receive.html#发送自定义类型消息)功能。
 - 新增[合并转发消息](message_send_receive.html#发送和接收合并消息)功能。
-- 支持 [HarmonyOS 推送](push.html)能力。
+- 支持 [HarmonyOS 推送](/document/harmonyos/push/push_overview.html)能力。
 
 ### 优化
 

@@ -84,4 +84,4 @@ List<EMTranslationInfo> infoList = body.getTranslations();
 
 ### 设置和获取推送的目标语言
 
-设置推送的目标语言，设置之后收到的离线推送就会是目标语言，如果目标语言在消息里不存在，就以原文推送，详见 [设置推送翻译](push.html#_4-3-设置推送翻译)。
+设置推送的目标语言，设置之后收到的离线推送就会是目标语言，如果目标语言在消息里不存在，就以原文推送，详见 [设置推送翻译](/document/android/push/push_translation.html)。
