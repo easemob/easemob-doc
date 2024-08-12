@@ -189,7 +189,7 @@ message.chatType = EMChatTypeChat;
 }];
 ```
 
-### 使用消息扩展字段设置推送通知显示内容
+## 使用消息扩展字段设置推送通知显示内容
 
 创建推送消息时，你可以设置消息扩展字段自定义要显示的推送标题 `em_push_title` 和推送内容 `em_push_content`。
 
