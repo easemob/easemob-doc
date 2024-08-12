@@ -34,7 +34,7 @@ OPPO 推送服务将增加区分应用类型的推送频控限制，公信消息
 
 1. [申请小米公私信渠道id](https://dev.mi.com/console/doc/detail?pId=2422#_2)。
 
-2. 环信推送证书补充小米配置 channelId，如下图所示：
+2. 环信推送证书补充小米配置 channel ID，如下图所示：
 
 ![image](/images/android/push/xiaomi-notifier-channelId.png)
 

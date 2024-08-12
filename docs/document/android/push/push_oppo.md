@@ -1,14 +1,12 @@
-# 在即时通讯 IM 中集成 oppo 推送
+# 在即时通讯 IM 中集成 OPPO 推送
 
 环信即时通讯 IM SDK 中已集成 OPPO 推送相关逻辑，你还需要完成以下步骤。
 
-## OPPO 推送集成
+## **步骤一 在 OPPO 开发者后台创建应用**
 
-### **步骤一 在 OPPO 开发者后台创建应用**
+在 [OPPO 开发者后台](https://open.oppomobile.com/new/loginForHeyTap?location=https%3A%2F%2Fopen.oppomobile.com)创建应用，开启推送服务，上传对应的证书指纹，详见 OPPO 官方介绍：[OPPO 推送服务集成](https://open.oppomobile.com/new/developmentDoc/info?id=10195)。
 
-在 [OPPO 开发者后台](https://open.oppomobile.com/new/loginForHeyTap?location=https%3A%2F%2Fopen.oppomobile.com)创建应用，开启推送服务，并上传对应的证书指纹，详见 OPPO 官方介绍：[OPPO 推送服务集成](https://open.oppomobile.com/new/developmentDoc/info?id=10195)。
-
-### **步骤二 上传推送证书**
+## **步骤二 上传推送证书**
 
 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传 OPPO 推送证书。
 
@@ -28,7 +26,7 @@
 | `Channel ID`     | String |  否    | 填写 Channel ID。   |
 | `Activity`| String | 否     | 选择点击通知后的动作。  |
 
-### **步骤三 集成 OPPO 推送**
+## **步骤三 集成 OPPO 推送**
 
 1. 配置 OPPO 推送 `aar` 包：在 OPPO 推送官网下载推送 SDK 包，将 `aar` 包存放在 `libs` 目录下并 sync。
    
@@ -72,7 +70,7 @@
    <!-- OPPO 推送配置 end -->
    ```
 
-1. 在即时通讯 IM SDK 初始化时，配置启用 OPPO 推送。
+3. 在即时通讯 IM SDK 初始化时，配置启用 OPPO 推送。
 
    ```java
    EMOptions options = new EMOptions();
@@ -85,7 +83,7 @@
    EMClient.getInstance().init(this, options);
    ```
 
-2. 调用 OPPO 推送的初始化。
+4. 调用 OPPO 推送的初始化方法。
 
    ```java
    HeytapPushManager.init(context, true);

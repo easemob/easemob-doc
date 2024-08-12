@@ -203,7 +203,7 @@ EMClient.getInstance().pushManager().setPushTemplate("Template Name", new EMCall
 });
 ```
 
-### 使用消息扩展字段设置推送通知显示内容
+## 使用消息扩展字段设置推送通知显示内容
 
 创建推送消息时，你可以设置消息扩展字段自定义要显示的推送标题 `em_push_title` 和推送内容 `em_push_content`。
 
@@ -231,8 +231,8 @@ message.setMessageStatusCallback(new CallBack() {...});
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-| 参数              | 描述                                                                     |
-| :---------------- | :----------------------------------------------------------------------- |
+| 参数              | 描述          |
+| :---------------- | :----------- |
 | `toChatUsername`  | 消息接收方 ID。                                                          |
 | `em_apns_ext`     | 消息扩展，使用扩展的方式向推送中添加自定义字段，该值为固定值，不可修改。 |
 | `em_push_title`   | 自定义字段 key，用于设置自定义的标题，该值为固定值，不可修改。           |

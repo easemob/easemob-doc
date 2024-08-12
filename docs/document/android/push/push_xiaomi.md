@@ -1,16 +1,12 @@
 # 在即时通讯 IM 中集成小米推送
 
-环信即时通讯 IM SDK 中已集成小米推送相关逻辑，你还需要完成以下步骤。
+环信即时通讯 IM SDK 中已经集成了小米推送（基于 ` MiPush_SDK_Client_6_0_1-C_3rd.aar`）相关逻辑，你还需要完成以下步骤。
 
-## 小米推送集成
-
-环信即时通讯 IM SDK 中已经集成了小米推送（基于 ` MiPush_SDK_Client_6_0_1-C_3rd.aar`）相关逻辑，你还需要完成以下步骤：
-
-### **步骤一 在小米开放平台创建应用**
+## **步骤一 在小米开放平台创建应用**
 
 在 [小米开放平台](https://dev.mi.com/platform) 创建应用，开启推送服务。详见小米官方网站的 [推送服务接入指南](https://dev.mi.com/console/doc/detail?pId=68)。
 
-### **步骤二 上传推送证书**
+## **步骤二 上传推送证书**
 
 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书：
 
@@ -30,7 +26,7 @@
 | `Channel ID`  | String | 是     | 填写 Channel ID。             |
 | `Action`      | String | 否     | 选择点击通知后的动作。            |
 
-### **步骤三 集成小米推送 SDK**
+## **步骤三 集成小米推送 SDK**
 
 1. 下载 [小米推送 SDK](https://admin.xmpush.xiaomi.com/zh_CN/mipush/downpage) ，将 `aar` 包添加到项目中。
 

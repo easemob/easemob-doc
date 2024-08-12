@@ -2,11 +2,11 @@
 
 本页介绍如何在即时通讯 IM 中集成 APNs 并测试推送是否成功集成。
 
-## 创建推送证书
+## **创建推送证书**
 
 按照以下步骤，在苹果开发者平台创建 APNs 推送证书。
 
-### 步骤一 生成 CSR 文件
+### **步骤一 生成 CSR 文件**
 
 1. 生成 Certificate Signing Request(CSR)：
 
@@ -22,7 +22,7 @@
 
 本地生成 CSR 文件 `EMImDemoAPS.certSigningRequest`。
 
-### 步骤二 创建 App ID
+### **步骤二 创建 App ID**
 
 1. 生成 App ID。如果已经有 App ID 可以跳至[步骤三](步骤三-创建-app-的-aps-证书)。// TODO：验证链接。在本文中查找“步骤”，验证链接。
 
@@ -48,7 +48,7 @@
 
 ![image](/images/ios/push/push_ios_10_register_confirm_appid.jpeg)
 
-### 步骤三 创建 app 的 APS 证书
+### **步骤三 创建 app 的 APS 证书**
 
 1. 返回到 App IDs 选择你需要推送的 app。
 
@@ -70,7 +70,7 @@
 
 ![image](/images/ios/push/push_ios_15_download_your_cert.jpeg)
 
-### 步骤四 生成推送证书
+### **步骤四 生成推送证书**
 
 1. 导入证书：双击[步骤三](步骤三-创建-app-的-aps-证书)下载的文件（**aps_development.cer** 和 **aps.cer**）将其安装到电脑，在 **Keychain Access** 中，可以看到导入的证书。
 
@@ -80,7 +80,7 @@
 
 ![image](/images/ios/push/push_ios_17_keychain_access_export.jpeg)
 
-### 步骤五 生成 Provisioning Profile 文件（PP 文件）
+### **步骤五 生成 Provisioning Profile 文件（PP 文件）**
 
 1. 在 [iOS Developer Center](https://developer.apple.com/cn/)，选择 **Account** > **Certificates, Identifiers & Profiles** > **Profiles**。在 **Provisioning** 页签，点击 **Profiles** 右侧的 **+** 图标。
 
@@ -108,7 +108,7 @@
 
 ![image](/images/ios/push/push_ios_24_generate_pr_download_install.jpeg)
 
-## 上传推送证书
+## **上传推送证书**
 
 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传 APNs 推送证书。
 
@@ -134,13 +134,13 @@
 
 ## 在客户端集成 APNs
 
-### 1. 在 app 中开启推送权限
+### **步骤一 在 app 中开启推送权限**
 
 打开 Xcode，选择 **TARGETS** > **Signing & Capabilities** > **Push Notifications** 开启消息推送权限。
 
 ![image](/images/ios/push/push_ios_26_xcode_enable_push_notifi.jpeg)
 
-### 2. 将证书名称传递给 SDK
+### **步骤二 将证书名称传递给 SDK**
 
 ```plaintext
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -160,7 +160,7 @@
   
 ```
 
-### 3. 获取 device token 并传递给 SDK
+### **步骤三 获取 device token 并传递给 SDK**
 
 DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给你，你需要把 DeviceToken 传给 SDK。
 

@@ -120,7 +120,7 @@ message.setAttribute("em_apns_ext", extObject);
 | `em_apns_ext`    | 内置的推送扩展字段。 |
 | `em_push_collapse_key`   | 指定一组可折叠的消息（例如，含有 collapse_key: “Updates Available”），以便恢复传送时只发送最后一条消息，从而避免设备恢复在线状态或变为活跃状态时重复发送过多相同的消息。   |
 
-### 强制推送
+## 强制推送
 
 设置强制推送后，用户发送消息时会忽略接收方的免打扰设置，不论是否处于免打扰时间段都会正常向接收方推送消息。
 
@@ -138,7 +138,7 @@ message.setMessageStatusCallback(new CallBack() {...});
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-### 发送静默消息
+## 发送静默消息
 
 发送静默消息指发送方在发送消息时设置不推送消息，即用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。
 

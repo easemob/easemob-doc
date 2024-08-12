@@ -2,15 +2,13 @@
 
 环信即时通讯 IM SDK 中已经集成了 VIVO 推送（基于 `vivo_push_v4.0.4.0_504.aar`）相关逻辑，你还需要完成以下步骤。
 
-## VIVO 推送集成
-
-**步骤一 在 VIVO 开发者后台创建应用**
+## **步骤一 在 VIVO 开发者后台创建应用**
 
 在 [VIVO 开发者后台](https://id.vivo.com.cn/?callback=https://dev.vivo.com.cn#/user/login)创建应用，开启推送服务，并上传对应的证书指纹。
 
 详见 VIVO 官方介绍：[VIVO 推送服务集成](https://dev.vivo.com.cn/documentCenter/doc/281)。
 
-**步骤二 上传推送证书**
+## **步骤二 上传推送证书**
 
 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书：
 
@@ -32,7 +30,7 @@
 | `Activity`| String | 否     | 选择点击通知后的动作。  |
 | `推送类型`     | String |  否    |<br/> - **运营消息**<br/> - **系统消息**  |
 
-**步骤三 集成 VIVO 推送 SDK**
+## **步骤三 集成 VIVO 推送 SDK**
 
 1. 配置 VIVO 推送 `jar` 包：
  
@@ -40,7 +38,7 @@
 
 此外，也可以直接使用环信 Android IM Demo 中集成的 VIVO 推送的 `jar` 包。
 
-1. 配置 `AndroidManifest.xml` 。
+2. 配置 `AndroidManifest.xml` 。
 
    推送服务需要的 `service` 和 `receiver`，并且需要配置 VIVO 的 `app_id` 和 `app_key`：
 
@@ -67,7 +65,7 @@
    <!-- VIVO 推送配置 end -->
    ```
 
-2. 在即时通讯 IM SDK 初始化的时，配置启用 VIVO 推送。
+3. 在即时通讯 IM SDK 初始化的时，配置启用 VIVO 推送。
 
    ```java
    EMOptions options = new EMOptions();
@@ -84,4 +82,4 @@
    EMClient.getInstance().init(this, options);
    ```
 
-3. VIVO 设备安装应用后默认没有打开允许通知权限，测试前请先在设置中打开该应用的允许通知权限。
+4. VIVO 设备安装应用后默认没有打开允许通知权限，测试前请先在设置中打开该应用的允许通知权限。

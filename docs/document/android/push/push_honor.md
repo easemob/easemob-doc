@@ -1,16 +1,12 @@
-# 在即时通讯 IM 中集成荣耀推送
-
-环信即时通讯 IM SDK 中已集成荣耀推送相关逻辑，你还需要完成以下步骤。
-
-## 荣耀推送集成
+# 在即时通讯 IM 中集成荣耀推
 
 环信即时通讯 IM SDK 4.0.3 版本中集成了荣耀推送。本节介绍如何集成荣耀厂商的离线推送通道，使消息通过荣耀推送服务推送至离线的用户。
 
-### **步骤一 在[荣耀开发者服务平台](https://developer.hihonor.com/cn/)创建应用并申请开通推送服务**
+## **步骤一 在[荣耀开发者服务平台](https://developer.hihonor.com/cn/)创建应用并申请开通推送服务**
 
-详见[荣耀推送官网说明](https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=guides&docId=kit-history.md&token=)。
+详见[荣耀推送官网说明](https://developer.honor.com/cn/docs/11002/guides/kit-history)。
 
-### 步骤二 在环信即时通讯云控制台上传荣耀推送证书**
+## **步骤二 在环信即时通讯云控制台上传荣耀推送证书**
 
 1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
    
@@ -20,8 +16,8 @@
 
 ![image](/images/android/push/add_honor_push_template.png)
 
-| 推送证书参数    | 类型   | 是否必需 | 描述                                                                                               |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------- |
+| 推送证书参数    | 类型   | 是否必需 | 描述           |
+| :-------------- | :----- | :------- | :--------------------------------------- |
 | `App ID`        | String | 是       | 应用标识符，应用的唯一标识，在荣耀开发者服务平台开通对应用的荣耀推送服务时生成。                   |
 | `Client ID`     | String | 是       | 应用的客户 ID，用于获取发送消息令牌的 ID，在荣耀开发者服务平台开通对应应用的荣耀推送服务时生成。   |
 | `Client Secret` | String | 是       | 应用的客户密钥，用于获取发送消息令牌的密钥，在荣耀开发者服务平台开通对应应用的荣耀推送服务时生成。 |
@@ -29,18 +25,18 @@
 | `Action`        | String | 否       | 消息接收方在收到离线推送通知时单击通知栏时打开的应用指定页面的自定义标记。该参数需要与客户端 `AndroidManifest.xml` 文件中注册启动的 `Activity` 类中 `intent-filter` 标签中设置的 `action` 一致。   |
 
 :::tip
-关于**App ID**、**Client ID**和**Client Secret**，可在荣耀开发者服务平台申请开通推送服务后，在**推送服务**页面选择创建的应用，在[**查看推送服务**](https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=guides&docId=app-registration.md&token=#申请开通推送服务)页面查看。
+关于**App ID**、**Client ID**和**Client Secret**，可在荣耀开发者服务平台申请开通推送服务后，在**推送服务**页面选择创建的应用，在[**查看推送服务**](https://developer.honor.com/cn/docs/11002/guides/app-registration#申请开通推送服务)页面查看。
 :::
 
 ![image](/images/android/push/view_push_service.png)
 
-### **步骤三 集成荣耀推送 SDK**
+## **步骤三 集成荣耀推送 SDK**
 
-本节以荣耀推送 SDK 7.0 版本为例介绍如何在 IM 中集成荣耀推送。关于如何集成荣耀推送 SDK 7.1 或 7.0 以下版本，详见[荣耀官网](https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=guides&docId=intergrate.md&token=)。
+本节以荣耀推送 SDK 7.0 版本为例介绍如何在 IM 中集成荣耀推送。关于如何集成荣耀推送 SDK 7.1 或 7.0 以下版本，详见[荣耀官网](https://developer.honor.com/cn/docs/11002/guides/intergrate)。
 
 1. 选择本地或远程集成方式。
 
-- 在荣耀官网[下载荣耀推送 SDK](https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=sdk&docId=android.md)，将 SDK 导入项目，添加本地依赖。
+- 在荣耀官网[下载荣耀推送 SDK](https://developer.honor.com/cn/docs/11002/sdk/android)，将 SDK 导入项目，添加本地依赖。
 
 - 在 app 级的 `build.gradle` 文件中添加远程依赖。
 
@@ -122,7 +118,7 @@ EMPushHelper.getInstance().setPushListener(new PushListener() {
 });
 ```
 
-### **步骤四 清单文件配置**
+## **步骤四 清单文件配置**
 
 在 `AndroidManifest.xml` 文件中，配置荣耀推送 App ID 和注册荣耀推送服务。
 
@@ -164,7 +160,7 @@ public class HONORPushService extends HonorMessageService {
 }
 ```
 
-### **步骤五 将 device token 与 IM 的登录账号绑定**
+## **步骤五 将 device token 与 IM 的登录账号绑定**
 
 打开应用，初始化环信 IM SDK 成功且成功登录后，获取一次 device token，将 token 上传至环信服务器，与 IM 的登录账号绑定。
 
@@ -188,7 +184,7 @@ if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
 }
 ```
 
-### **步骤六 实现通知栏消息点击动作**
+## **步骤六 实现通知栏消息点击动作**
 
 通知栏消息点击动作分为以下两类：
 - （默认）点击后打开应用首页；
@@ -261,7 +257,7 @@ private void getIntentData(Intent intent) {
 }
 ```
 
-### **步骤七 配置混淆脚本**
+## **步骤七 配置混淆脚本**
 
 你编译 APK 前需要配置混淆配置文件，避免混淆荣耀推送 SDK 导致功能异常。
 
@@ -276,8 +272,4 @@ private void getIntentData(Intent intent) {
   -keepattributes SourceFile,LineNumberTable
 ```
 
-关于荣耀推送详情，请参见[荣耀推送官网](https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=guides&docId=introduction.md&token=)。
-
-## 测试荣耀推送集成
-
-XXXX
+关于荣耀推送详情，请参见[荣耀推送官网](https://developer.honor.com/cn/docs/11002/guides/introduction)。

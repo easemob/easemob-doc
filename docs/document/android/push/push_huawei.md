@@ -30,7 +30,7 @@
 | `Action`       | String |  否    | 选择点击通知后的动作。                     |
 | `ActivityClass`| String | 否     | 填写 ActivityClass。                      |
 
-### **步骤三 集成华为推送 SDK**
+## **步骤三 集成华为推送 SDK**
 
 1. 集成 HMS Core SDK，参见 [华为官网集成文档](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-integrating-sdk-0000001050040084)。
 
