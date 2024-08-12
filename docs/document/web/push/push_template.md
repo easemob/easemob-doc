@@ -67,7 +67,8 @@ option.ext = {
 
 使用下面的示例代码后，通知栏中弹出的推送通知为：
 
-![img](/images/android/push/push_template_custom_example.png)
+您收到了一条消息<br/>
+请及时查看
 
 ```javascript
 // 下面以文本消息为例，其他类型的消息设置方法相同。
