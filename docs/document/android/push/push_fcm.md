@@ -4,11 +4,11 @@
 
 ## FCM 推送集成
 
-### 步骤一 在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase
+### **步骤一 在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase**
 
 详见 [FCM 的官网介绍](https://firebase.google.com/docs/android/setup?hl=zh-cn#console)。
 
-### 步骤二 获取 FCM V1 版本证书
+### **步骤二 获取 FCM V1 版本证书**
 
 1. 登录 [FCM 控制台](https://console.firebase.google.com)，选择你的项目。
 
@@ -42,7 +42,7 @@
 }
 ```
 
-### 步骤三 上传推送证书
+### **步骤三 上传推送证书**
 
 1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书管理**。
 
@@ -80,7 +80,7 @@
 
 4. 点击 **保存** 完成切换。
 
-### 步骤四 FCM 推送集成
+### **步骤四 FCM 推送集成**
 
 1. 在你的 app 项目的 `build.gradle` 文件中，配置 FCM 库的依赖：
 
