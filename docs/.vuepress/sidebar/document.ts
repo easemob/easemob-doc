@@ -105,7 +105,36 @@ const documentSidebar = [
   {
     text: '进阶功能',
     children: [
-      { text: '设置推送', link: 'push.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
+      { 
+        text: '离线推送', 
+        collapsible: true,
+        children: [
+          { text: '离线推送概述', link: 'push/push_overview.html', only: ['android', 'ios', 'web','harmonyos'] },
+          { 
+            text: '集成第三方推送', 
+            collapsible: true,
+            children: [
+            { text: 'FCM 推送', link: 'push/push_fcm.html', only: ['android'] }, 
+            { text: '华为推送', link: 'push/push_huawei.html', only: ['android'] }, 
+            { text: '荣耀推送', link: 'push/push_honor.html', only: ['android'] }, 
+            { text: 'OPPO 推送', link: 'push/push_oppo.html', only: ['android'] }, 
+            { text: 'vivo 推送', link: 'push/push_vivo.html', only: ['android'] }, 
+            { text: '小米推送', link: 'push/push_xiaomi.html', only: ['android'] }, 
+            { text: '魅族推送', link: 'push/push_meizu.html', only: ['android'] }, 
+            { text: 'APNs 推送', link: 'push/push_apns.html', only: ['ios'] }, 
+            { text: 'HarmonyOS 推送', link: 'push/push_harmony.html', only: ['harmonyos'] }
+           ]
+          }, 
+          { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
+          { text: '厂商通道限制及方案', link: 'push/push_channel_restrict_solution.html', only: ['android'] },
+          { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios'] },
+          { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web']},
+          { text: '设置推送模板', link: 'push/push_template.html', only: ['web']},
+          { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web']},
+          { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web']},
+          { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
+        ]
+      },
       { text: '登录多个设备', link: 'multi_device.html' },
       { text: '管理在线状态订阅', link: 'presence.html', except: ['harmonyos'] },
       { text: '消息表情回复', link: 'reaction.html' },
@@ -221,7 +250,16 @@ const documentSidebar = [
   {
     text: '进阶功能',
     children: [
-      { text: '设置推送', link: 'push.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
+      { text: '离线推送', 
+        collapsible: true,
+        children: [
+        { text: '离线推送概述', link: 'push/push_overview.html' }, 
+        { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html' },
+        { text: '设置推送模板', link: 'push/push_template.html' },
+        { text: '设置推送翻译', link: 'push/push_translation.html' },
+        { text: '设置推送扩展功能', link: 'push/push_extension.html' }
+        ]
+      }, 
       { text: '登录多个设备', link: 'multi_device.html' },
       { text: '管理在线状态订阅', link: 'presence.html' },
       { text: '消息表情回复', link: 'reaction.html' },
