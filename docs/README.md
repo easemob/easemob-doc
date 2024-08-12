@@ -1147,13 +1147,19 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/push.html
+                link: /document/android/push/push_overview.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/push.html
+                link: /document/ios/push/push_overview.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/push/push_overview.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/push/push_overview.html  
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
-                link: /document/harmonyos/push.html
+                link: /document/harmonyos/push/push_overview.html
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/push.html      

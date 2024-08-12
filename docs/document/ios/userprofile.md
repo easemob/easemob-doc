@@ -157,7 +157,7 @@ A：你可以调用[客户端](#设置当前用户的属性) 或[RESTful API](/d
 
 1. 调用 RESTful 接口设置用户昵称时，若要确保在客户端能够获取设置，请求中必须传 `nickname` 键名。
 
-2. 调用 RESTful API [获取用户详情](/document/server-side/account_system.html#获取用户详情)和[删除用户账户](/document/server-side/account_system.html#删除用户账号)中返回的响应中的 `nickname` 参数表示为推送昵称，即离线推送时在接收方的客户端推送通知栏中显示的发送方的昵称，与用户属性中的用户昵称不同。不过，我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。例如，对于 iOS，更推送昵称的方法为 [updatePushDisplayName](push.html#_4-设置离线推送)，对于 RESTful API，详见 [离线推送通知的显示属性配置](/document/server-side/push.html#设置离线推送时显示的昵称)。
+2. 调用 RESTful API [获取用户详情](/document/server-side/account_system.html#获取用户详情)和[删除用户账户](/document/server-side/account_system.html#删除用户账号)中返回的响应中的 `nickname` 参数表示为推送昵称，即离线推送时在接收方的客户端推送通知栏中显示的发送方的昵称，与用户属性中的用户昵称不同。不过，我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。例如，对于 iOS，更推送昵称的方法为 [updatePushDisplayName](/document/ios/push/push_display.html#设置和获取推送通知的显示属性)，对于 RESTful API，详见 [离线推送通知的显示属性配置](/document/server-side/push.html#设置离线推送时显示的昵称)。
 
 Q: 调用设置或获取用户属性的接口时，上报错误码 4 的原因是什么？
 
