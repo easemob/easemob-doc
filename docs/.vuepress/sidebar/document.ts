@@ -109,7 +109,7 @@ const documentSidebar = [
         text: '离线推送', 
         collapsible: true,
         children: [
-          { text: '离线推送概述', link: 'push_overview', only: ['android', 'ios', 'web','harmonyos'] },
+          { text: '离线推送概述', link: 'push_overview.html', only: ['android', 'ios', 'web','harmonyos'] },
           { 
             text: '集成第三方推送', 
             collapsible: true,
@@ -253,7 +253,7 @@ const documentSidebar = [
       { text: '离线推送', 
         collapsible: true,
         children: [
-        { text: '离线推送概述', link: 'push_overview' }, 
+        { text: '离线推送概述', link: 'push_overview.html' }, 
         { text: '设置通知方式和免打扰', link: 'push_notification_mode_dnd.html' },
         { text: '设置推送模板', link: 'push_template.html' },
         { text: '设置推送翻译', link: 'push_translation.html' },
