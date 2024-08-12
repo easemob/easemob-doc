@@ -101,7 +101,7 @@ dependencies {
 }
 ```
 
-在你的根级（项目级）Gradle 文件 (<project>/build.gradle)：
+在你的根级（项目级）Gradle 文件 (\<project\>/build.gradle)：
 
 ```gradle
 plugins {
