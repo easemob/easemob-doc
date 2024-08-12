@@ -250,7 +250,16 @@ const documentSidebar = [
   {
     text: '进阶功能',
     children: [
-      { text: '设置推送', link: 'push.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
+      { text: '离线推送', 
+        collapsible: true,
+        children: [
+        { text: '离线推送概述', link: 'push_overview' }, 
+        { text: '设置通知方式和免打扰', link: 'push_notification_mode_dnd.html' },
+        { text: '设置推送模板', link: 'push_template.html' },
+        { text: '设置推送翻译', link: 'push_translation.html' },
+        { text: '设置推送扩展功能', link: 'push_extension.html' }
+        ]
+      }, 
       { text: '登录多个设备', link: 'multi_device.html' },
       { text: '管理在线状态订阅', link: 'presence.html' },
       { text: '消息表情回复', link: 'reaction.html' },
