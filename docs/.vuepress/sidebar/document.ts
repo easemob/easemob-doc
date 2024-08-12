@@ -109,7 +109,7 @@ const documentSidebar = [
         text: '离线推送', 
         collapsible: true,
         children: [
-          { text: '离线推送概述', link: 'push_overview', only: ['android', 'ios', 'web','harmonyos']},
+          { text: '离线推送概述', link: 'push_overview', only: ['android', 'ios', 'web','harmonyos'] },
           { 
             text: '集成第三方推送', 
             collapsible: true,
