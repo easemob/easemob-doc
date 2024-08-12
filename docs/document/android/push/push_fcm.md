@@ -2,7 +2,7 @@
 
 环信即时通讯 IM SDK 中已集成 FCM 推送相关逻辑，你还需要完成以下步骤。
 
-## FCM 推送集成
+## **FCM 推送集成**
 
 ### **步骤一 在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase**
 
@@ -213,11 +213,11 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 }
 ```
 
-## 测试 FCM 推送
+## **测试 FCM 推送**
 
 在即时通讯 IM 中集成并启用 FCM 后，可测试推送是否成功集成。
 
-### 前提条件
+### **前提条件**
 
 准备一台在海外正式发售的 Android 设备用于接收推送通知，确保该设备满足以下条件：
 - 使用国外 IP 地址与即时通讯 IM 建立连接。
@@ -226,7 +226,7 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 
 为了确保测试效果可靠，请避免使用模拟器进行测试。
 
-### 测试步骤
+### **测试步骤**
 
 1. 在设备上登录应用，并确认 device token 绑定成功。
    可以查看日志或调用[获取用户详情的 RESTful 接口](https://doc.easemob.com/document/server-side/account_system.html#获取单个用户的详情)确认 device token 是否绑定成功。成功后在 `entities` 字段下会有 `pushInfo` 字段，且 `pushInfo` 下会有 `device_Id`、`device_token`、`notifier_name` 等相关信息。
@@ -236,7 +236,7 @@ public class MyFCMMSGService extends FirebaseMessagingService {
    在左侧导航栏中选择 **即时推送** > **创建推送**。在**创建推送**页面中，按提示，输入消息内容，然后点击 **发送预览**。
 5. 查看设备是否收到推送通知。
 
-### 故障排除
+### **故障排除**
 
 1. 检查在即时通讯 IM 中是否正确集成或启用了 FCM 推送。
    在左侧导航栏中选择 **即时通讯 > 运营服务 > 用户管理**。在**用户管理**页面中，在对应用户 ID 的 **更多** 栏中选择 **查看IM用户绑定推送证书**。在弹出框中查看是否正确显示了证书名称和 device token。
