@@ -70,7 +70,7 @@ ChatUIKitSettings.enableMessageEdit = false;
 示例代码如下：
 
 ```dart
-    ChatUIKitSettings.enableMessageReply = false;
+ChatUIKitSettings.enableMessageReply = false;
 ```
 
 ## 消息翻译
@@ -92,7 +92,7 @@ ChatUIKitSettings.enableMessageEdit = false;
 单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了  `ChatUIKitSettings.enableMessageTranslation` 设置是否开启消息翻译功能，默认值为 `false`。要开启该特性，需将该参数设置为 `true`。示例代码如下：
 
 ```dart
-   ChatUIKitSettings.enableMessageTranslation = true;
+ChatUIKitSettings.enableMessageTranslation = true;
 ```
 
 2. 设置翻译的目标语言。
@@ -100,7 +100,7 @@ ChatUIKitSettings.enableMessageEdit = false;
 单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了 `translateTargetLanguage` 属性设置目标翻译语言。
 
 ```dart
-   ChatUIKitSettings.translateTargetLanguage = 'zh-Hans';
+ChatUIKitSettings.translateTargetLanguage = 'zh-Hans';
 ```
 
 如果未设置翻译的目标语言，则默认使用中文。
@@ -126,7 +126,7 @@ ChatUIKitSettings.enableMessageEdit = false;
 单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了 `enableMessageReaction` 属性用于设置是否开启 `Reaction` 功能, 默认值为 `false`。要开启该功能，将该参数设置为 `true`。示例代码如下：
 
 ```dart
-    ChatUIKitSettings.enableMessageReaction = true;
+ChatUIKitSettings.enableMessageReaction = true;
 ```
 
 ## 消息话题
@@ -144,7 +144,7 @@ ChatUIKitSettings.enableMessageEdit = false;
 示例代码如下：
 
 ```dart
-    ChatUIKitSettings.enableMessageThread = true;
+ChatUIKitSettings.enableMessageThread = true;
 ```
 
 ## 消息合并转发
@@ -162,8 +162,9 @@ ChatUIKitSettings.enableMessageEdit = false;
 消息转发特性在 `ChatUIKitSettings.enableMessageMultiSelect` 中提供开关，默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
 示例代码如下：
+
 ```dart
-    ChatUIKitSettings.enableMessageMultiSelect = true;
+ChatUIKitSettings.enableMessageMultiSelect = true;
 ```
 
 ## 单条消息转发
@@ -195,6 +196,6 @@ ChatUIKitSettings.enableMessageForward = false;
 示例代码如下：
 
 ```dart
-    ChatUIKitSettings.enablePinMsg = false;
+ChatUIKitSettings.enablePinMsg = false;
 ```
 
