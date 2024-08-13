@@ -18,7 +18,7 @@ app 的响应内容不能超过 1,000 个字符。
 
 | 参数 | 类型   | 描述 |
 | :---------------- | :----- |:------------------------------------------------------------------|
-| `callId`          | String | `callId` 为 `{appkey}_{uuid}` 其中 `uuid` 为随机生成，作为每条回调的唯一标识。              |
+| `callId`          | String | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
 | `eventType`       | String | “chat” 上行消息、“chat_offline” 离线消息。                      |
 | `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                           |
 | `chat_type`       | String | 会话类型（默认全选）：<br/> - "chat"：单聊回调；<br/> - "groupchat"：群聊回调包含了群组和聊天室的消息回调；<br/> - "notify"：通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 type 字段确定具体类型。 |
@@ -211,7 +211,7 @@ payload 示例：
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
 | `chat_type` | String   | `read_ack` 已读回执。                                        |
-| `callId`    | String   | `callId` 为 `{appkey}_{uuid}` 其中 uuid 为随机生成，作为每条回调的唯一标识。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 Console 后台回调规则。 |
 | `payload`   | object   | 包括：<br/> - `ext`：消息的扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `bodies`：消息体内容。 |
 | `host`      | String   | 服务器名称。                                                 |
@@ -342,7 +342,7 @@ payload 示例：
 
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | `callId` 为 `{appkey}_{uuid}` 其中 `uuid` 为随机生成，作为每条回调的唯一标识。 |
+| `callId`          | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
 | `eventType`       | String   | “chat” 上行消息、“chat_offline” 离线消息。                   |
 | `timestamp`       | long     | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为 ms。        |
 | `chat_type`       | String   | “chat” 单聊回调、“groupchat” 群聊回调包含了群组和聊天室的消息回调，默认全选。 |
@@ -370,7 +370,7 @@ payload 中字段含义：
 ```json
 {
     "chat_type":"recall",
-    "callId":"orgname#appname_966475585536657404",
+    "callId":"XXXX#XXXX_966475585536657404",
     "security":"ea7a867314fb0e0833d5f4f169eb4f8d",
     "payload":{
         "ext":{},
@@ -2426,7 +2426,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | `callId` 为 `{appkey}_{uuid}` 其中 `uuid` 为随机生成，作为每条回调的唯一标识。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
 | `reason`    | object   | `login`，用户登录。                                          |
 | `security`  | String   | 签名，格式如下: MD5（callId+secret+timestamp）。 Secret 见 Console 后台回调规则。 |
 | `os`        | String   | 设备类型。                                                   |
@@ -2462,7 +2462,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | `callId` 为 `{appkey}_{uuid}` 其中 `uuid` 为随机生成，作为每条回调的唯一标识。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
 | `reason`    | object   | `logout` 该用户登出账号。                                    |
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 Console 后台回调规则。 |
 | `os`        | String   | 设备类型。                                                   |
@@ -2498,7 +2498,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | `callId` 为 `{appkey}_{uuid}` 其中 `uuid` 为随机生成，作为每条回调的唯一标识。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
 | `reason`    | object   | `replaced`，该用户登出，原因是被其他设备登录踢掉。           |
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 Console 后台回调规则。 |
 | `os`        | String   | 设备类型。                                                   |
@@ -2534,7 +2534,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
 | `alertReason`  | String   | 敏感词是否合规：<br/> - `through`：表示敏感词为合规内容；<br/> - `intercepted`：表示敏感词为违规词，包含敏感词的消息被拦截。<br/> - `replaced`：表示敏感词为违规词，使用 *** 代替。 | 
 | `contentReceiver`  | String   |  内容接收方的用户 ID。 | 
 | `eventType`  |  String |  事件类型，用于标识为敏感词检测还是其他类型的事件。 | 

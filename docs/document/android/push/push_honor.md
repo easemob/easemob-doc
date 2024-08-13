@@ -40,7 +40,7 @@
 
 - 在 app 级的 `build.gradle` 文件中添加远程依赖。
 
-  ```
+  ```gradle
   implementation 'com.hihonor.mcs:push:7.0.41.301'
   ```
 
@@ -48,7 +48,7 @@
 
   如果 App 中已添加 `mcs-services.json` 文件，则需要在 `buildscript` > `dependencies` 中添加 `asplugin` 插件配置。
 
-  ```
+  ```gradle
   buildscript {
       repositories {
           google()
@@ -68,7 +68,7 @@
 
   打开项目级 `settings.gradle` 文件，配置 SDK 的 Maven 仓地址。
 
-  ```
+  ```gradle
   dependencyResolutionManagement {
     ...
     repositories {
@@ -84,7 +84,7 @@
 
 3. 初始化配置。可以参考 Demo 中 demoHelper 的 `initPush()` 方法中的荣耀推送配置。
 
-```
+```java
 // 初始化 IM，开启荣耀推送。
 EMOptions options = new EMOptions();
 EMPushConfig.Builder builder = new EMPushConfig.Builder(context);
@@ -122,7 +122,7 @@ EMPushHelper.getInstance().setPushListener(new PushListener() {
 
 在 `AndroidManifest.xml` 文件中，配置荣耀推送 App ID 和注册荣耀推送服务。
 
-```
+```xml
 <!-- 荣耀推送配置 start -->
 <meta-data
     android:name="com.hihonor.push.app_id"
@@ -140,7 +140,7 @@ EMPushHelper.getInstance().setPushListener(new PushListener() {
 
 对于注册荣耀推送服务，需自定义 Service，继承荣耀推送的 `HonorMessageService` 类，重写 `onNewToken` 方法。
 
-```
+```java
 public class HONORPushService extends HonorMessageService {
   //Device token 发生变化时，会触发 `onNewToken` 回调返回新 Token。
   @Override
@@ -166,7 +166,7 @@ public class HONORPushService extends HonorMessageService {
 
 如果当前 IM 的登录账号已经绑定了 device token，则 IM SDK 不会上传 token。
 
-```
+```java
 if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
     // 获取荣耀 device token。
     HonorPushClient.getInstance().getPushToken(new HonorPushCallback<String>() {
@@ -228,7 +228,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 2. 在 `AndroidMainfest.xml` 中配置 Activity intent-filter。
 
-```
+```xml
   <activity android:name=".YourActivity">
     <intent-filter>
         <!-- `name` 为 Activity 类全路径，例如 com.example.test.MainActivity。 -->
@@ -242,7 +242,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 客户端应用主 Activity 中接收数据。在 `YourActivity` 类的 `onCreate` 方法中实现数据读取。
 
-```
+```java
 private void getIntentData(Intent intent) {
   if (null != intent) {
       // 获取 data 里的值
@@ -263,7 +263,7 @@ private void getIntentData(Intent intent) {
 
 在 app 级根目录下打开混淆配置文件 `proguard-rules.pro`，加入排除荣耀推送 SDK 的混淆配置脚本。
 
-```
+```java
   -ignorewarnings
   -keepattributes *Annotation*
   -keepattributes Exceptions
