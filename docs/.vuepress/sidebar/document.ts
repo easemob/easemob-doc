@@ -126,12 +126,12 @@ const documentSidebar = [
            ]
           }, 
           { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
-          { text: '厂商通道限制及方案', link: 'push/push_channel_restrict_solution.html', only: ['android'] },
           { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios'] },
           { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web']},
           { text: '设置推送模板', link: 'push/push_template.html', only: ['web']},
           { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web']},
           { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web']},
+          { text: '推送消息分类', link: 'push/push_channel_restrict_solution.html', only: ['android'] },
           { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
         ]
       },
