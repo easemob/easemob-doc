@@ -127,13 +127,17 @@
 
 ### 如何使用
 
-开启消息置顶功能。
+消息置顶特性默认开启，即 `enableMessagePin` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
+
+在聊天页面对消息置顶/取消置顶操作。在消息气泡上调用上下文菜单，选择消息置顶/取消置顶选项，执行成功后，更新消息置顶列表。
+
+下面的示例代码为如何开启消息置顶功能：
 
 ```tsx
 import { NavigationContainer } from "@react-navigation/native";
 import { Container as UIKitContainer } from "react-native-chat-uikit";
 export function App() {
-  // If not set, it is enabled by default. If disabled, set it to false
+  // 默认为开启。若关闭，设置为 false。
   const enableMessagePin = true;
   return (
     <UIKitContainer
@@ -142,10 +146,10 @@ export function App() {
       }}
       enableMessagePin={enableMessagePin}
     >
-      {/** other example code */}
+      {/** 其他示例代码 */}
     </UIKitContainer>
   );
 }
 ```
 
-在聊天页面对消息置顶/取消置顶操作。 在消息气泡上调用上下文菜单，选择消息置顶/取消置顶选项，执行成功后，更新消息置顶列表。
+
