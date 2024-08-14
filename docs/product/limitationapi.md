@@ -65,10 +65,10 @@
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :-------- | :----- | :---------------- | :--------------------- |
-| 发送单聊消息                 | POST   | /{org_name}/{app_name}/messages/users                | 6000 条/分钟/App Key                                         |
-| 发送群聊消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | 20 条/秒/App Key                                             |
-| 发送定向消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups/users           | 100 条/秒/App Key      |
-| 发送聊天室消息               | POST   | /{org_name}/{app_name}/messages/chatrooms            | 100 条/秒/App Key                                            |
+| 发送单聊消息                 | POST   | /{org_name}/{app_name}/messages/users                | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 100 次/秒/App Key <br/> - 6000 条/分钟  <br/> - 600 人/次。若一次向 600 人发消息，视为 600 条消息。  |
+| 发送群聊消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 20 条/秒/App Key   <br/> - 20 次/秒 <br/> -  3 个群/次   |
+| 发送定向消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups/users           | 100 条/秒/App Key   |
+| 发送聊天室消息               | POST   | /{org_name}/{app_name}/messages/chatrooms            | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 100 条/秒  <br/> - 20 次/秒   <br/> -  10 个聊天室/次   |
 | 发送聊天室广播消息 | POST | /{org_name}/{app_name}/messages/chatrooms/broadcast | 每分钟最多可发 10 次，而且每天最多可发 100 次广播消息。 |
 | 上传文件  |    POST  | /{org_name}/{app_name}/chatfiles       | 100 次/秒/App Key                                                 |
 | 下载文件      |  GET     | /{org_name}/{app_name}/chatfiles/{file_uuid}       | 100 次/秒/App Key                                                 |
