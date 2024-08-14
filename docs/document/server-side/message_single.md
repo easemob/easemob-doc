@@ -50,7 +50,10 @@
 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
 :::
 
-**发送频率**：通过 RESTful API 单个应用每分钟最多可发送 6000 条消息，每次最多可向 600 人发送。例如，一次向 600 人发消息，视为 600 条消息。若超过了每分钟的消息条数限制，报 403 错误，即 "Forbidden for url: [XXXX/XXXX/messages/users]"；若超过了每次发送的人数限制，报 400 错误，即 "params to's size can't exceed limit"。
+**发送频率**：对于单个 app，该 REST API 存在以下三个限制：
+- 100 次/秒/App Key。若超限，提示 429 错误。
+- 6000 条/分钟。若超限报 403 错误，即 "Forbidden for url: [XXXX/XXXX/messages/users]"
+- 600 人/次。例如，一次向 600 人发消息，视为 600 条消息。若超限，报 400 错误，即 "params to's size can't exceed limit"。
 
 ## 前提条件
 
