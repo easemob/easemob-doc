@@ -7,7 +7,8 @@ SDK 提供了灵活的模块化设计，允许开发者根据需求引入功能�
 miniCore 是一个基座，支持登录登出和发送消息等[基础功能](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)，而且包含消息对象。因此，若只使用收发消息功能，则只需引入 miniCore。若使用其他功能，miniCore 支持使用插件的方式引入其他功能模块。按需引入模块的方式实现了不同模块的灵活组合，从而避免不必要的代码加载，减小了应用程序的体积。
 
 :::tip
-只有按需导入 SDK 的方式才支持[本地会话管理功能](conversation_local.html)。
+1. 只有按需导入 SDK 的方式才支持[本地会话管理功能](conversation_local.html)。
+2. 小程序 uniapp 不支持使用 miniCore 的集成方式。
 :::
 
 ## 支持按需导入的 SDK 模块
