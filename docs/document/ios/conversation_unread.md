@@ -15,7 +15,7 @@
 
 环信即时通讯 IM iOS SDK 通过 `IEMChatManager` 和 `EMConversation` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
 
-- `EMChatManager#getAllConversations`：获取本地所有会话的未读消息数。
+- `EMChatManager#getAllConversations + EMConversation#unreadMessagesCount`：获取本地每个会话的未读消息数，然后累加获取所有会话的未读消息数。
 - `EMConversation#unreadMessagesCount`：获取本地指定会话的未读消息数。
 - `EMChatManager#markAllConversationsAsRead`：将所有会话的未读消息数清零。
 - `EMConversation#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
@@ -25,7 +25,7 @@
 
 ### 获取所有会话的未读消息数
 
-你可以调用 `getAllConversations` 方法获取本地所有会话的未读消息数量，示例代码如下：
+你可以调用 `getAllConversations` 方法获取每个本地会话的未读消息数量，即`EMConversation#unreadMessagesCount`，然后累加该数量，得到所有会话的未读消息数，示例代码如下：
 
 ```objectivec
 NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
