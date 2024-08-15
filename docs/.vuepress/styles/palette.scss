@@ -1,3 +1,8 @@
 // you can change colors here
 $theme-color: #096dd9;
 $content-width: 885px;
+
+:root {
+  --docsearch-modal-width: 860px !important;
+  --docsearch-modal-height: 600px !important;
+}

@@ -1,5 +1,6 @@
 import { defineUserConfig, UserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
+import { hopeTheme } from 'vuepress-theme-hope'
 // import AutoImport from 'unplugin-auto-import/vite'
 // import Components from 'unplugin-vue-components/vite'
 // import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -7,6 +8,19 @@ import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { containerPlugin } from './markdown/plugin'
 import theme from './theme.js'
 import path from 'node:path'
+
+// import type { DocSearchProps } from '@docsearch/react'
+
+// type DocSearchClientLocaleOptions = Omit<
+//   DocSearchProps,
+//   'hitComponent' | 'navigator' | 'transformSearchClient'
+// >
+
+// interface DocSearchClientOptions extends DocSearchClientLocaleOptions {
+//   locales?: Record<string, DocSearchClientLocaleOptions>
+// }
+
+// const defineDocSearchConfig: (options: DocSearchClientOptions) => void
 
 export default defineUserConfig({
   base: '/',
@@ -18,8 +32,8 @@ export default defineUserConfig({
     viteOptions: {
       resolve: {
         alias: {
-          '@static': path.resolve(__dirname, './public'),
-        },
+          '@static': path.resolve(__dirname, './public')
+        }
       },
       plugins: [
         // AutoImport({
@@ -28,14 +42,14 @@ export default defineUserConfig({
         // Components({
         //   resolvers: [ElementPlusResolver({ssr: true })],
         // }),
-      ],
+      ]
     },
-    vuePluginOptions: {},
+    vuePluginOptions: {}
   }),
   markdown: {
     headers: {
-      level: [2, 3],
-    },
+      level: [2, 3]
+    }
   },
   extendsMarkdown: (md) => {
     containerPlugin(md)
@@ -47,21 +61,35 @@ export default defineUserConfig({
       appId: '5K8UTB3JVE',
       apiKey: 'df9e938d06f6531ce8dd8de71f907f0d',
       indexName: 'im-beta-easemob',
-      // transformItems: (items)=>{
-      //   return items.map(items=>({ ...items, content: 'xxxxx'}))
+      searchParameters: {
+        attributesToSnippet: [
+          'hierarchy.lvl1:20',
+          'hierarchy.lvl2:20',
+          'hierarchy.lvl3:20',
+          'hierarchy.lvl4:20',
+          'hierarchy.lvl5:20',
+          'hierarchy.lvl6:20',
+          'content:50'
+        ],
+        hitsPerPage: 30
+      },
+      maxResultsPerGroup: 10,
+      // transformItems: (items) => {
+      //   console.log(items)
+      //   return items.map((items) => ({ ...items, content: 'xxxxxx' }))
       // },
       placeholder: '搜索文档',
       translations: {
         button: {
           buttonText: '搜索',
-          buttonAriaLabel: '搜索文档',
+          buttonAriaLabel: '搜索文档'
         },
         modal: {
           searchBox: {
             resetButtonTitle: '清除查询条件',
             resetButtonAriaLabel: '清除查询条件',
             cancelButtonText: '取消',
-            cancelButtonAriaLabel: '取消',
+            cancelButtonAriaLabel: '取消'
           },
           startScreen: {
             recentSearchesTitle: '搜索历史',
@@ -69,27 +97,27 @@ export default defineUserConfig({
             saveRecentSearchButtonTitle: '保存至搜索历史',
             removeRecentSearchButtonTitle: '从搜索历史中移除',
             favoriteSearchesTitle: '收藏',
-            removeFavoriteSearchButtonTitle: '从收藏中移除',
+            removeFavoriteSearchButtonTitle: '从收藏中移除'
           },
           errorScreen: {
             titleText: '无法获取结果',
-            helpText: '你可能需要检查你的网络连接',
+            helpText: '你可能需要检查你的网络连接'
           },
           footer: {
             selectText: '选择',
             navigateText: '切换',
             closeText: '关闭',
-            searchByText: '搜索提供者',
+            searchByText: '搜索提供者'
           },
           noResultsScreen: {
             noResultsText: '无法找到相关结果',
             suggestedQueryText: '你可以尝试查询',
             reportMissingResultsText: '你认为该查询应该有结果？',
-            reportMissingResultsLinkText: '点击反馈',
-          },
-        },
-      },
-    }),
+            reportMissingResultsLinkText: '点击反馈'
+          }
+        }
+      }
+    })
   ],
   onPrepared: async (app) => {
     await app.writeTemp(
@@ -121,6 +149,6 @@ export default defineUserConfig({
     '@theme-hope/components/PageNav': path.resolve(
       __dirname,
       './components/PageNav.vue'
-    ),
-  },
+    )
+  }
 })

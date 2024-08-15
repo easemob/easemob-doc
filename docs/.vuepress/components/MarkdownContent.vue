@@ -24,7 +24,7 @@ if (redirectUri) {
 
 <template>
   <Content class="theme-hope-content" :page-key="redirectPageKey" />
-  <ClientOnly>
+  <!-- <ClientOnly>
     <div
       id="wjxFloatInsertBtn"
       class="advisor"
@@ -38,7 +38,7 @@ if (redirectUri) {
         style="overflow: auto"
       ></iframe>
     </el-dialog>
-  </ClientOnly>
+  </ClientOnly> -->
 </template>
 
 <style scoped>

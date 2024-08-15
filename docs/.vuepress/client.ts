@@ -4,6 +4,7 @@ import Toc from './components/Toc.vue'
 import Link from './components/Link.vue'
 import ImageGallery from './components/ImageGallery.vue'
 import ImageItem from './components/ImageItem.vue'
+import WjxLayout from './layouts/WjxLayout.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
@@ -18,5 +19,8 @@ export default defineClientConfig({
     app.component('ImageItem', ImageItem)
   },
   setup() {},
-  rootComponents: [],
+  layouts: {
+    WjxLayout
+  },
+  rootComponents: []
 })

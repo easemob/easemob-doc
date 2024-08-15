@@ -9,14 +9,15 @@ const extraNavList = themeData.value.extra_nav || []
 <template>
   <Sidebar>
     <template #endBefore>
+      <Docsearch />
       <el-link
         class="extra-link"
         :type="item.type"
         v-for="item in extraNavList"
         :key="item.text"
         :href="item.link"
-        >{{ item.text }}</el-link
-      >
+        >{{ item.text }}
+      </el-link>
     </template>
   </Sidebar>
 </template>

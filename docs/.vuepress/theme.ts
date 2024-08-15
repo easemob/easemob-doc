@@ -19,6 +19,11 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   contributors: false,
   // navbar
   navbar: zhNavbar,
+  navbarLayout: {
+    start: ['Brand'],
+    center: ['Links'],
+    end: ['Language', 'Repo', 'Outlook']
+  },
   // sidebar
   sidebar: zhSidebar,
   footer: '环信 IM 文档 Version: 1.0.0 ©️环信',
@@ -29,23 +34,23 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
     {
       text: '登录',
       link: 'https://console.easemob.com/user/login',
-      type: 'success',
+      type: 'success'
     },
     {
       text: '注册',
       link: 'https://console.easemob.com/user/register',
-      type: 'primary',
-    },
+      type: 'primary'
+    }
   ],
   // page meta
   metaLocales: {
-    editLink: '在 GitHub 上编辑此页',
+    editLink: '在 GitHub 上编辑此页'
   },
   plugins: {
     mdEnhance: {
       container: true,
       imgSize: true,
       tabs: true
-    },
-  },
+    }
+  }
 })
