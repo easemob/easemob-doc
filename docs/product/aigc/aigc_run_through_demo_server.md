@@ -11,12 +11,13 @@
 2. 环境要求
 
 - JDK 1.8+
-- Redis
+- Redis 3.0.504
 - Redis 绑定地址更改为 127.0.0.1
+- MySQL 8.0.30
 
 ## 代码下载
 
-当部署环境准备好后，通过 [GitHub 链接下载服务端代码](https://github.com/easemob/Easemob-AIGCService-Example)。
+当部署环境准备好后，通过 [GitHub 链接下载服务端代码](https://github.com/easemob/Demo-ChattyAI/tree/dev/chattyai_server)。
 
 ## 信息配置
 
@@ -58,11 +59,11 @@ easemob:
 
 4. 创建机器人的账号。
 
-选择**应用概览** > **用户认证** 创建 8 个机器人账号。
+选择**应用概览** > **用户认证** 创建 3 个机器人账号，进行单聊或群组聊天。
 
-示例项目中提供了 8 个智能体，因此需要设置 8 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系，见下方代码。
+示例项目中提供了 3 个智能体，因此建议设置 3 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系，见下方代码。
 
-下图红框中的用户 ID 为示例项目中的与智能体绑定的机器人账号，若使用其他用户 ID，则需同步修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
+下图红框中的用户 ID（`bot1222700215765565440`、`bot1223027765968633856` 和 `bot1223027786982096896`）为示例项目中的与智能体绑定的机器人账号，若使用其他用户 ID，则需同步修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
 
 ![img](/images/aigc/robot_account_create.png)
 
@@ -100,6 +101,23 @@ miniMax:
   url: https://api.minimax.chat/v1/text/chatcompletion_pro?GroupId=
 ```  
 
+### MySQL 配置
+
+```yaml
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: xxxx
+      username: xxxx
+      password: xxxx
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+```
 ### redis 配置
 
 redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，确保 “host：port" 链接可以访问 redis 即可。
@@ -165,4 +183,46 @@ tail -f $APP_DIR/chattyai.log
 
   请确保 MiniMax 有余额，否则可能导致调用 MiniMax 的调用失败。
 
+4. 如何实现问候语？
 
+在 `com.easemob.chattyai.chat.util.GreetUtil` 类里存在一个静态代码块和下面三个镜头属性。
+
+静态代码用于加载该类时，分别向这三个 List 中添加对应的问候语。
+
+```java
+    /**
+     * 早上问候语 list
+     */
+    public static List<String> moringGreetList = new ArrayList<>();
+
+    /**
+     * 中午问候语 list
+     */
+    public static List<String> noonGreetList = new ArrayList<>();
+
+    /**
+     * 晚上问候语 list
+     */
+    public static List<String> eveningGreetList = new ArrayList<>();
+```
+
+设置问候语后，可在 `com.easemob.chattyai.task.GreetTask` 类中设置定时任务。定时任务触发的 Cron 如下所示。例如，若用户 A 与机器人用户 B 聊过天，机器人用户 B 会在每天早上 9 点、中午 12 点和晚上 21 点给用户发送消息。
+
+```java
+0 0 9,12,21 * * ? 
+```
+
+5. 如何获取历史消息？
+
+下图中的 `MiniMaxAiSingleHandler` 为单聊的 MinMax 处理类，`MiniMaxAiGroupHandler` 为群聊的 MinMax 的处理类。
+
+![img](/images/aigc/historical_message.png)
+
+在本示例项目中，与智能体交互后，聊天记录会同步处理到 从 redis 获取的 key （`Constant.CHAT_GROUP_HISTORY_REDIS_KEY_PREFIX+发送人的环信用户ID+:+机器人的环信 ID`）的对应的 value 中，方便下一次聊天时作为历史消息传递给 AI。示例项目中只取最近 10 条消息作为历史数据，对应的代码如下所示：
+
+```java
+long l = redisUtil.lGetListSize(key);
+if (l > 10) {
+    redisUtil.leftpop(key, 2L);
+}
+```
