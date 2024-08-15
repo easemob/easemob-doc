@@ -36,7 +36,7 @@ Android 中错误码的类为 `EMError`。
 | 207    |          USER_REMOVED           | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。 |
 | 208    |         USER_REG_FAILED         | 用户注册失败：例如，注册用户之前未开启开放注册功能等原因。 |
 | 209    |    USER_UPDATEINFO_FAILED       | 更新推送配置错误：例如，用户更新推送昵称或设置免打扰配置时失败。  |
-| 210    |     USER_PERMISSION_DENIED      | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。|
+| 210    |     USER_PERMISSION_DENIED      | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。|
 | 211    |   USER_BINDDEVICETOKEN_FAILED   | 用户更新推送 token 错误，该错误码已废弃。  |
 | 212    | USER_UNBIND_DEVICETOKEN_FAILED  | 用户更新推送 token 错误，该错误码已废弃。  |
 | 213    |    USER_BIND_ANOTHER_DEVICE     | 用户已在其他设备登录：在单设备登录场景中，默认情况下，后登录的设备会踢掉当前设备的登录。若设置为先登录的设备优先，则后登录设备登录失败并提示该错误。该错误码已废弃。 |

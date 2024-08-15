@@ -55,7 +55,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 511    | MESSAGE_SIZE_LIMIT                 | 消息体大小超过限制。关于各端消息体大小的限制，详见[消息管理概述中的描述](message_overview.html#消息类型)。|
 | 601    | GROUP_ALREADY_JOINED                           | 已在群组内：当前用户已在该群组中。                           |
 | 602    | GROUP_NOT_JOINED                               | 不在群组内：用户发送群消息或进行群操作时未加入该群组。                   |
-| 603    | PERMISSION_DENIED                              | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。 |
+| 603    | PERMISSION_DENIED                              | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。 |
 | 604    | WEBIM_LOAD_MSG_ERROR                           | 消息回调函数内部错误。 |
 | 605    | GROUP_NOT_EXIST                                | 群组不存在：发送消息时群组 ID 不正确。                       |
 | 606    | GROUP_MEMBERS_FULL                             | 群组已满：群组成员数量已达到创建群组时设置的最大人数。  |
