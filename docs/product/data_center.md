@@ -61,7 +61,7 @@
 
 ### 国内集群迁移到海外
 
-请查看[平滑迁移文档](migrate_to_easemob.html)。
+请查看[平滑迁移文档](/product/solution_common/migrate_to_easemob.html)。
 
 ## 海外数据中心
 
