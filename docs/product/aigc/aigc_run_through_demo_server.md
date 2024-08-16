@@ -162,7 +162,7 @@ redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，�
 使用命令启动即可：
 
 ```shell
-nohup java -jar $APP_DIR/chattyai-0.0.1-SNAPSHOT.jar --server.port=$PORT ./chattyai.log 2>&1 &
+nohup java -jar $APP_DIR/chattyai-0.0.1-SNAPSHOT.jar --server.port=$PORT >> ./chattyai.log 2>&1 &
 ```
 
 - `$APP_DIR` 替换为上传 jar 包存在的根路径。
