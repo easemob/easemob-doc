@@ -1,6 +1,10 @@
 # 服务端配置
 
-通过配置服务端和客户端，利用环信即时通信 IM 服务器回调功能，在 IM 中引入 AI 服务（以 MiniMax 中文大语言模型为例），创建机器人账号，从而跑通示例项目。
+通过配置服务端和客户端，利用环信即时通信 IM 服务器回调功能，在 IM 中引入 AI 服务（以 MiniMax 中文大语言模型为例），创建机器人账号，从而跑通示例项目。此外，利用 AI 聊天功能，你可以设置问候语，让机器人用户每天定时主动向聊天用户发送问候语，实现详情请参见 [FAQ](#FAQ)。 
+
+若要体验 Demo，你可以扫描以下二维码： 
+
+![img](/images/aigc/ai_solution1_demo.png)
 
 本文介绍通过跑通示例项目如何配置服务端。
 
@@ -29,13 +33,13 @@ src/main/resources/application.yml
 
 ### 环信即时通讯 IM 相关配置
 
-1. 创建应用。
+#### 1. 创建应用
 
 登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，点击**添加应用**，填写应用相关信息。
 
 ![img](/images/aigc/app_create.png)
  
-2. 获取 app 信息。
+#### 2. 获取 app 信息
 
 选中创建的应用，点击**管理**，进入**应用详情**页面，获取 **App Key**、**ClientID** 及**ClientSecret**。
 
@@ -53,15 +57,17 @@ easemob:
 
 ![img](/images/aigc/app_detail.png)
 
-3. 设置**用户注册模式**为**开放注册**，关闭好友关系检查。
+#### 3. 关闭好友关系检查
+  
+设置**用户注册模式**为**开放注册**，关闭好友关系检查。
 
 ![img](/images/aigc/user_register_contact.png)
 
-4. 创建机器人的账号。
+#### 4. 创建机器人账号
 
-选择**应用概览** > **用户认证** 创建 3 个机器人账号，进行单聊或群组聊天。
+选择**应用概览** > **用户认证** 创建机器人账号，进行单聊或群组聊天。
 
-示例项目中提供了 3 个智能体，因此建议设置 3 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系，见下方代码。
+示例项目中创建了 3 个智能体，因此建议设置 3 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系，见下方代码。
 
 下图红框中的用户 ID（`bot1222700215765565440`、`bot1223027765968633856` 和 `bot1223027786982096896`）为示例项目中的与智能体绑定的机器人账号，若使用其他用户 ID，则需同步修改 `BotSettingUtil` 的 `botBean0.setAccount` 中的值，否则无法跑通示例项目。
 
@@ -82,7 +88,7 @@ bots.put("boy0",botBean0);
 }
 ```
 
-5. 配置发送前回调规则。
+#### 5. 配置发送前回调规则
 
 若使用消息发送前回调功能，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通该功能，详见[回调配置相关文档](/product/enable_and_configure_IM.html#配置消息回调)。该功能为增值服务，费用详见[功能费用文档](/product/pricing.html#增值服务费用)。
 
@@ -168,24 +174,27 @@ nohup java -jar $APP_DIR/chattyai-0.0.1-SNAPSHOT.jar --server.port=$PORT ./chatt
 tail -f $APP_DIR/chattyai.log 
 ```
 
-## Q&A
+## FAQ
 
-1. 项目为何启动失败？
+1. Q: 项目为何启动失败？
 
-  确保 JDK 配置正确，端口没有被占用，redis 能被访问到。
+A: 确保 JDK 配置正确，端口没有被占用，redis 能被访问到。
 
-2. 项目启动后为何无法访问？
+1. Q: 项目启动后为何无法访问？
 
+A: 检查以下两方面：
   - 配置 nginx 的情况下，请确保 nginx 配置正确。
   - 未配置 nginx 的情况下，请确保端口对外开放。
 
-3. MiniMax 的调用失败，无返回结果，是什么原因？
+3. Q: MiniMax 的调用失败，无返回结果，是什么原因？
 
-  请确保 MiniMax 有余额，否则可能导致调用 MiniMax 的调用失败。
+A: 请确保 MiniMax 有余额，否则可能导致调用 MiniMax 的调用失败。
 
-4. 如何实现问候语？
+4. Q: 如何实现问候语？
+   
+A: 你可以设置问候语，让机器人用户每天定时主动向聊天用户发送问候语。  
 
-在 `com.easemob.chattyai.chat.util.GreetUtil` 类里存在一个静态代码块和下面三个镜头属性。
+`com.easemob.chattyai.chat.util.GreetUtil` 类中存在一个静态代码块和以下三个镜头属性。
 
 静态代码用于加载该类时，分别向这三个 List 中添加对应的问候语。
 
@@ -212,9 +221,9 @@ tail -f $APP_DIR/chattyai.log
 0 0 9,12,21 * * ? 
 ```
 
-5. 如何获取历史消息？
+5. Q: 如何获取历史消息？
 
-下图中的 `MiniMaxAiSingleHandler` 为单聊的 MinMax 处理类，`MiniMaxAiGroupHandler` 为群聊的 MinMax 的处理类。
+A: 下图中的 `MiniMaxAiSingleHandler` 为单聊的 MinMax 处理类，`MiniMaxAiGroupHandler` 为群聊的 MinMax 的处理类。
 
 ![img](/images/aigc/historical_message.png)
 
