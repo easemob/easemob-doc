@@ -71,9 +71,9 @@ export default defineUserConfig({
           'hierarchy.lvl6:20',
           'content:50'
         ],
-        hitsPerPage: 30
+        hitsPerPage: 50
       },
-      maxResultsPerGroup: 10,
+      maxResultsPerGroup: 30,
       // transformItems: (items) => {
       //   console.log(items)
       //   return items.map((items) => ({ ...items, content: 'xxxxxx' }))
