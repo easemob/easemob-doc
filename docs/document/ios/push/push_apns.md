@@ -24,7 +24,7 @@
 
 ### **步骤二 创建 App ID**
 
-1. 生成 App ID。如果已经有 App ID 可以跳至[步骤三](步骤三-创建-app-的-aps-证书)。// TODO：验证链接。在本文中查找“步骤”，验证链接。
+1. 生成 App ID。如果已经有 App ID 可以跳至[步骤三](#步骤三-创建-app-的-aps-证书)。
 
 ![image](/images/ios/push/push_ios_5_create_app_id.jpeg)
 
@@ -72,7 +72,7 @@
 
 ### **步骤四 生成推送证书**
 
-1. 导入证书：双击[步骤三](步骤三-创建-app-的-aps-证书)下载的文件（**aps_development.cer** 和 **aps.cer**）将其安装到电脑，在 **Keychain Access** 中，可以看到导入的证书。
+1. 导入证书：双击[步骤三](#步骤三-创建-app-的-aps-证书)下载的文件（**aps_development.cer** 和 **aps.cer**）将其安装到电脑，在 **Keychain Access** 中，可以看到导入的证书。
 
 ![image](/images/ios/push/push_ios_16_keychain_access_apple_develop.jpeg)
 
