@@ -17,7 +17,7 @@
 您可以通过以下两种方式获取到源代码：
 
 - 下载代码压缩包：[IM SDK 及 Demo 下载](https://www.easemob.com/download/im)
-- 下载源代码：[github 源码地址](https://github.com/easemob/chat-ios/tree/SwiftDemo)
+- 下载源代码：[github 源码地址](https://github.com/easemob/easemob-demo-ios)
 
 ## 运行 EaseChatDemo 工程
 
