@@ -1,12 +1,12 @@
 # 服务端配置
 
-通过配置服务端和客户端，利用环信即时通信 IM 服务器回调功能，在 IM 中引入 AI 服务（以 MiniMax 中文大语言模型为例），创建机器人账号，从而跑通示例项目。此外，利用 AI 聊天功能，你可以设置问候语，让机器人用户每天定时主动向聊天用户发送问候语，实现详情请参见 [FAQ](#FAQ)。 
+通过配置服务端和客户端，利用环信即时通信 IM 服务器回调功能，在 IM 中引入 AI 服务（以 MiniMax 中文大语言模型为例），创建机器人账号，从而跑通示例项目。本文介绍通过跑通示例项目如何配置服务端。
+
+此外，利用 AI 聊天功能，你可以设置问候语，让机器人用户每天定时主动向聊天用户发送问候语，实现详情请参见 [FAQ](#faq)。 
 
 若要体验 Demo，你可以扫描以下二维码： 
 
 ![img](/images/aigc/ai_solution1_demo.png)
-
-本文介绍通过跑通示例项目如何配置服务端。
 
 ## 环境准备
 
@@ -162,7 +162,7 @@ redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，�
 使用命令启动即可：
 
 ```shell
-nohup java -jar $APP_DIR/chattyai-0.0.1-SNAPSHOT.jar --server.port=$PORT ./chattyai.log 2>&1 &
+nohup java -jar $APP_DIR/chattyai-0.0.1-SNAPSHOT.jar --server.port=$PORT >> ./chattyai.log 2>&1 &
 ```
 
 - `$APP_DIR` 替换为上传 jar 包存在的根路径。
