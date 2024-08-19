@@ -104,7 +104,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
     "pushMessage": {
         "title": "环信推送",
         "content": "你好，欢迎使用环信推送服务",
-        "sub_title": "环信",
+        "sub_title": "环信"
       }
 }'
 ```
@@ -136,7 +136,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
 }
 ```
 
-2. 因未绑定推送信息导致推送失败的响应示例：
+2. 走厂商通道时，因未绑定推送信息导致推送失败的响应示例如下：
 
 ```json
 {
@@ -151,7 +151,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
 }
 ```
 
-3. 因接收推送通知的用户 ID 不存在导致推送失败的响应示例：
+3. 走厂商通道时，因接收推送通知的用户 ID 不存在导致推送失败的响应示例如下：
 
 ```json
 {
