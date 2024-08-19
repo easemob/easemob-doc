@@ -124,9 +124,10 @@ spring:
       max-wait: 60000
       pool-prepared-statements: true
 ```
+
 ### redis 配置
 
-redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，确保 “host：port" 链接可以访问 redis 即可。
+redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，确保 "host：port" 链接可以访问 redis 即可。
 
 ```yaml
   redis:
@@ -143,7 +144,59 @@ redis 安装完成以后，设置上 redis 的密码(也可以设置为空)，�
     max-active: 100
     # 连接池最大阻塞等待时间（使用负值表示没有限制）
     max-wait: -1
-```      
+```   
+
+### 数据库初始化
+
+导入下方脚本：
+
+```yaml
+/*
+SQLyog 企业版 - MySQL GUI v8.14 
+MySQL - 8.3.0 : Database - chattyai
+*********************************************************************
+*/
+
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`chattyai` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+USE `chattyai`;
+
+/*Table structure for table `chat_bot` */
+
+DROP TABLE IF EXISTS `chat_bot`;
+
+CREATE TABLE `chat_bot` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `bot_name` varchar(50) DEFAULT NULL COMMENT '名称',
+  `describe` varchar(2000) DEFAULT NULL COMMENT '描述',
+  `pic` varchar(50) DEFAULT NULL COMMENT '头像地址',
+  `open` tinyint NOT NULL DEFAULT '1' COMMENT '是否公开',
+  `ea_account` varchar(50) DEFAULT NULL COMMENT '环信账号',
+  `create_account` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB COMMENT='聊天机器人';
+
+/*Data for the table `chat_bot` */
+
+insert into `chat_bot` (`id`, `bot_name`, `describe`, `pic`, `open`, `ea_account`, `create_account`, `create_time`) values('1','智能助手','理解人类语言、生成内容，是生活和工作的智能助手。','1','1','bot1222700215765565440','default','2024-03-28 00:14:08');
+insert into `chat_bot` (`id`, `bot_name`, `describe`, `pic`, `open`, `ea_account`, `create_account`, `create_time`) values('2','编程助手','一个经验丰富的程序员开发助手，擅长 web 前端、springboot 后端和 Android 开发','2','1','bot1223027765968633856','default','2024-03-28 00:14:07');
+insert into `chat_bot` (`id`, `bot_name`, `describe`, `pic`, `open`, `ea_account`, `create_account`, `create_time`) values('3','法律顾问','你精通各个领域的法律知识，能够提供专业且贴心的法律咨询服务','3','1','bot1223027786982096896','default','2024-03-28 00:14:06');
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+```
 
 ### 启动说明
 
