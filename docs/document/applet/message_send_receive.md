@@ -194,8 +194,7 @@ function sendPrivateAudio(tempFilePath, duration) {
     filePath: tempFilePath,
     name: "file",
     header: {
-      "Content-Type": "multipart/form-data",
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + token
     },
     success(res) {
       var dataObj = JSON.parse(res.data);
@@ -275,8 +274,7 @@ function sendPrivateImg(res) {
           filePath: tempFilePaths[0],
           name: "file",
           header: {
-            "Content-Type": "multipart/form-data",
-            Authorization: "Bearer " + token,
+            Authorization: "Bearer " + token
           },
           success(res) {
             if (res.statusCode === 400) {
@@ -367,7 +365,6 @@ function sendPrivateVideo(){
 						filePath: tempFilePaths,
 						name: "file",
 						header: {
-							"Content-Type": "multipart/form-data",
 							Authorization: "Bearer " + token
 						},
 						success(res){
@@ -438,7 +435,6 @@ function sendFileMessage() {
             filePath: filePath,
             name: "file",
             header: {
-              "Content-Type": "multipart/form-data",
               Authorization: "Bearer " + token
             },
             success(res) {
