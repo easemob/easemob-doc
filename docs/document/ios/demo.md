@@ -18,6 +18,8 @@
 
 - 下载代码压缩包：[IM SDK 及 Demo 下载](https://www.easemob.com/download/im)
 - 下载源代码：[github 源码地址](https://github.com/easemob/easemob-demo-ios)
+  - 4.5.0 及之前版本的 Demo 为 Objective-C 语言。点击[这里](https://github.com/easemob/easemob-demo-ios/tree/OCDemo)查看 Demo 源码地址。环信已不再维护该地址的 Demo 源码。
+  - 4.6.0 及之后版本的 Demo 为 Swift 语言。点击[这里](https://github.com/easemob/easemob-demo-ios)查看 Demo 源码地址。
 
 ## 运行 EaseChatDemo 工程
 

@@ -14,9 +14,7 @@
 
 ## 代码下载
 
-下载源代码：[github 源码地址](https://github.com/easemob/webim)
-
-欢迎大家提交 PR 改进和修复 Web IM 中的问题。
+下载源代码：[GitHub 源码地址](https://github.com/easemob/easemob-demo-react/tree/dev_4.0)
 
 ## 运行 Web IM 项目
 

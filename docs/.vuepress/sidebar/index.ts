@@ -28,6 +28,12 @@ export const zhSidebar = sidebar({
       ],
     },
     {
+      text: "Demo",
+      children: [
+        { text: "Demo 体验及源码地址", link: "demo_sourcecode_address.html" },
+      ],
+    },
+    {
       text: "快速开始",
       children: [
         { text: "使用环信 App Token 鉴权", link: "easemob_app_token.html" },
@@ -67,6 +73,7 @@ export const zhSidebar = sidebar({
             },
           ],
         },
+
         {
           text: "快速开始",
           collapsible: true,
