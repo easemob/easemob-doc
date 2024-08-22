@@ -87,7 +87,7 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -182,7 +182,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgIdList={N,M}&
 | `data.reactionList.state`      | Bool       | 当前请求用户是否添加过该 Reaction： <br/> - `true`: 是； <br/> - `false`：否。                          |
 | `data.reactionList.userList`   | Array      | 添加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。                                 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -286,7 +286,7 @@ DELETE https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgId={msgId}
 | `requestStatusCode` | String | 操作结果。`ok` 表示成功删除 Reaction。    |
 | `timestamp`         | Long   | 请求响应的时间，Unix 时间戳，单位为毫秒。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -375,7 +375,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={ms
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 

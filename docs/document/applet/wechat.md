@@ -2,6 +2,12 @@
 
 <Toc />
 
+### Demo 体验
+
+要体验微信小程序 Demo，请点击[这里](https://www.easemob.com/download/demo)，使用微信扫描二维码。
+
+要查看 Demo 源码，请点击[这里](https://github.com/easemob/webim-weixin-xcx)。
+
 ### 注册环信账号
 
 开发者需要在环信管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。

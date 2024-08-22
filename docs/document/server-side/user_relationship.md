@@ -99,7 +99,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -194,7 +194,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -293,7 +293,7 @@ PUT https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{f
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码)了解可能的原因。
 
 ### 示例
 
@@ -385,7 +385,7 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -471,7 +471,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -575,7 +575,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/contacts/import
 | `illegal_argument` | 400  | `request user over flow limit:10.`  | 请求 body 中传入的用户 ID 数量超过了 10。  |
 | `exceed_limit`  | 403   | `Inviter's contact max count.`  | 调用该接口的用户的好友数量已达上限。单个用户的好友数上限与你购买的套餐包相关，详见[套餐包功能详情](/product/pricing.html#套餐包功能详情)。 |
 
-关于其他异常，你可以参考 [错误码][#错误码] 了解可能的原因。
+关于其他异常，你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -675,7 +675,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -767,7 +767,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pag
 
 其他字段及描述详见[公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -856,7 +856,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 其他字段及描述详见[公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码][#错误码] 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 

@@ -19,7 +19,7 @@ SDK 目前支持微信、支付宝、QQ、百度小程序、抖音（请使用�
 - 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
 - Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
   :::
-
+  
 ## 功能说明
 
 - 支持账户注册登录
