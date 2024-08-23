@@ -48,12 +48,14 @@ starter:
       - icon: /sdk/windows.svg
         link: /document/windows/quickstart.html
         text: Windows
-  - title: Demo
-        contexts:
-          - text: Demo 体验
-            link: https://www.easemob.com/download/demo
-          - text: Demo 源码地址
-            link: https://doc.easemob.com/product/demo_sourcecode_address.html      
+  - title: "Demo" 
+    platform:
+      - icon: /sdk/demo_list.svg
+        link: "https://www.easemob.com/download/demo"
+        text: Demo 体验
+      - icon: /sdk/demo_sourcecode.svg
+        link: /product/demo_sourcecode_address.html
+        text: Demo 源码       
   - title: "服务端 API"
     platform:
       - icon: /sdk/rest.svg

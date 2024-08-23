@@ -151,7 +151,12 @@ const projects = frontmatter.value.projects || []
 const containerRef = ref<HTMLElement | null>(null)
 
 const goTo = (path: string) => {
-  router.push(path)
+  if(path.indexOf('http')==0) {
+    window.open(path)
+  } else {
+    router.push(path)
+  }
+
 }
 
 interface AnchorLink {
