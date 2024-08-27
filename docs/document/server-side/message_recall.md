@@ -36,8 +36,8 @@ POST https://{host}/{org_name}/{app_name}/messages/msg_recall
 | `to`        | String | 是       | 要撤回消息的接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。<br/> 若不传入该参数，请求失败。        |
 | `chat_type` | String | 是       | 要撤回消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊 ；<br/> - `chatroom`：聊天室 。  |
 | `from`      | String | 否       | 消息撤回方的用户 ID。若不传该参数，默认为 `admin`。    |
-| `sync_device`| Bool | 否       | 是否支持单聊消息撤回同步给消息发送方（支持多端多设备撤回）：<br/> - (默认) `true`：是； <br/> - `false`：否。<Container type="tip" title="提示">若消息已过期，则消息撤回同步 `from` 参数设置的消息撤回方。</Container>|
-| `force`     | Bool   | 否       | 是否支持强制撤回消息。<br/> - `true`：是。这种情况下，无论消息是否过期，你都可以撤回。<br/> - （默认）`false`：否。这种情况下，你只能在撤回时长内撤销服务端存在的消息。  |
+| `sync_device`| Bool | 否       | 是否支持单聊消息撤回同步给消息发送方（支持多端多设备撤回）：<br/> - (默认) `true`：是； <br/> - `false`：否。<Container type="tip" title="提示">若强制撤回参数 `force` 设置为 `true` 且消息已过期，此时如果需要将消息撤回同步发送方，则需将 `from` 参数设置为消息发送方。</Container>|
+| `force`     | Bool   | 否       | 是否支持强制撤回消息。<br/> - `true`：是。这种情况下，无论消息是否过期，你都可以撤回。若需撤回已过期的消息，`force` 须设置为 `true`。 <br/> - （默认）`false`：否。这种情况下，你只能在撤回时长内撤销服务端存在的消息。  |
 
 ### HTTP 响应
 
