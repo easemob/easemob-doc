@@ -88,12 +88,13 @@
 
 本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/android/message_send_receive.html#通过透传消息实现输入指示器)。
 
-<img src=/images/uikit/chatuikit/feature/flutter/typing_indicator_enable.png  title="开启输入状态提示" width="200"/>&nbsp;&nbsp;
-<img src=/images/uikit/chatuikit/feature/flutter/typing_indicator_disable.png  title="关闭输入状态提示" width="200"/>
+| 开启输入状态提示            | 关闭输入状态提示   | 
+| :-------------- | :----- | 
+| <img src=/images/uikit/chatuikit/feature/flutter/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/flutter/typing_indicator_disable.png width="300"/>  | 
 
 ### 如何使用
 
-输入状态指示特性在 [ChatUIKitSettings.enableTypingIndicator] 中默认开启，即 XXX 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
+输入状态指示特性在 `ChatUIKitSettings.enableTypingIndicator` 中默认开启，即默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
 示例代码如下：
 

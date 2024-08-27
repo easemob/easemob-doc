@@ -88,7 +88,9 @@
 
 在单聊页面中，当前用户持续输入文本字符，该行为会通过服务器将该状态传输给对方，对方收到输入状态，将状态显示在 UI 上。
 
-// image
+| 开启输入状态提示            | 关闭输入状态提示   | 
+| :-------------- | :----- | 
+| <img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  width="300"/>  | 
 
 ### 如何使用
 
@@ -122,7 +124,7 @@ export function App() {
 
 在消息搜索页面，输入关键字搜索当前会话的历史消息，如果有结果会以列表的形式返回，点击搜索结果可以跳转到该消息的位置。
 
-// image
+![img](/images/uikit/chatuikit/feature/common/message_search.png) 
 
 ### 如何使用
 

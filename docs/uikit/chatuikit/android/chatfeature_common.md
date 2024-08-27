@@ -92,8 +92,9 @@
   - 输入状态投递为透传消息，接收到透传消息后，通过 `EaseChatFragment.Builder` 提供的 `setOnPeerTypingListener` 监听对方输入状态。
   - 输入状态回调为 `onPeerTyping(action: String?)`，其中 `action` 代表状态 `EaseChatLayout.ACTION_TYPING_BEGI` ｜ `EaseChatLayout.ACTION_TYPING_END`。
 
-<img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png  title="开启输入状态提示" width="200"/>&nbsp;&nbsp;
-<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  title="关闭输入状态提示" width="200"/>
+| 开启输入状态提示            | 关闭输入状态提示   | 
+| :-------------- | :----- | 
+| <img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  width="300"/>  | 
 
 ### 如何使用
 
@@ -122,6 +123,8 @@
 UIKit 提供封装的 `EaseSearchActivity` 搜索页面，用户根据 `EaseSearchType` 和输入关键词后，将根据 `EaseSearchType` 类型搜索数据展示搜索结果。
 
 同时，UIKit 也提供搜索基类 `EaseBaseSearchFragment`，用户可以更好地继承扩展实现。`EaseBaseSearchFragment` 中的 `initAdapter()` 抽象方法实现自己的 adapter，进行数据处理和展示。
+
+例如，以下为搜索消息的页面。
 
 ![img](/images/uikit/chatuikit/feature/common/message_search.png) 
 

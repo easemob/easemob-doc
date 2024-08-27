@@ -92,8 +92,9 @@
   - 输入状态投递为透传消息，接收到透传消息后，通过 `MessageListViewModel#notifyTypingState()` 回调，更新输入状态。
   - 输入状态回调为 `MessageListViewModel#onOtherPartyTypingText`。
 
-<img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png  title="开启输入状态提示" width="200"/>&nbsp;&nbsp;
-<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  title="关闭输入状态提示" width="200"/>
+| 开启输入状态提示            | 关闭输入状态提示   | 
+| :-------------- | :----- | 
+| <img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  width="300"/>  | 
 
 ### 如何使用
 
