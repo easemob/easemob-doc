@@ -171,6 +171,7 @@ ChatClient.getInstance()
 ```typescript
 // 构建语音消息
 // 需传入本地语音文件地址、显示名称和播放时长（单位为秒）
+// 传入的语音文件的路径时，不需要添加 file://。
 const filePath = "data/.../foo.wav";
 const displayName = "bar.mp4";
 const duration = 5;
@@ -194,6 +195,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 ```typescript
 // 构建图片消息
 // 需要图片的本地地址，长宽，和界面用来显示的名称
+// 传入的图片路径时，不需要添加 file://。
 const filePath = "/data/.../image.jpg";
 const width = 100;
 const height = 100;
@@ -249,6 +251,7 @@ ChatClient.getInstance()
 // 构建视频消息
 // 视频消息相当于包含 2 个附件的消息，主要由视频和视频缩略图组成。视频参数包括视频本地地址、视频长宽值，显示名称，播放时间长度；
 // 如果设置缩略图，需指定缩略图的本地地址。
+// 传入的视频文件的路径和视频缩略图的路径时，不需要添加 file://。
 const filePath = "data/.../foo.mp4";
 const width = 100;
 const height = 100;
@@ -287,6 +290,7 @@ ChatClient.getInstance()
 ```typescript
 // 构建文件消息
 // 文件消息主要需要本地文件地址和文件在页面显示的名称。
+// 传入的文件路径时，不需要添加 file://。
 const filePath = "data/.../foo.zip";
 const displayName = "study_data.zip";
 const msg = ChatMessage.createFileMessage(targetId, filePath, chatType, {
