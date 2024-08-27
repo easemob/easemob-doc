@@ -81,3 +81,108 @@
 消息审核对用户发送的消息内容进行审查，判断其是否符合平台的社区准则、服务条款和相关法律法规。
 
 ![img](/images/uikit/chatuikit/feature/common/message_report.png =300x630) 
+
+## 输入状态指示
+
+输入状态指示功能指在单聊会话中实时显示会话的一方正在输入的状态，增强通讯互动的实时性。此功能有助于用户了解对方是否正在回复，从而优化沟通体验，提升对话流畅度。
+
+输入状态指示的 UI 和逻辑结构如下：
+- `EaseTitleBar` 中的 `subtitle` 控件显示用户的状态以及输入状态指示，收到输入状态后会先显示输入状态，用户取消输入状态后显示用户的状态，输入状态消失。
+- 输入状态相关回调和方法：
+  - 输入状态投递为透传消息，接收到透传消息后，通过 `EaseChatFragment.Builder` 提供的 `setOnPeerTypingListener` 监听对方输入状态。
+  - 输入状态回调为 `onPeerTyping(action: String?)`，其中 `action` 代表状态 `EaseChatLayout.ACTION_TYPING_BEGI` ｜ `EaseChatLayout.ACTION_TYPING_END`。
+
+| 开启输入状态提示            | 关闭输入状态提示   | 
+| :-------------- | :----- | 
+| <img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  width="300"/>  | 
+
+### 如何使用
+
+输入状态指示特性在 `EaseIM.getConfig()?.chatConfig?.enableChatTyping` 中默认开启，即 `enableChatTyping` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
+
+同时也支持通过代码进行设置，`EaseChatFragment.Builder` 提供开启或关闭的 API `builder.turnOnTypingMonitor(true|false)`。通过代码设置优先级更高。
+
+示例代码如下：
+
+```kotlin
+    
+    EaseIM.getConfig()?.chatConfig?.enableChatTyping = true
+
+```
+
+### 自定义输入状态指示 UI
+
+本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/android/message_send_receive.html#通过透传消息实现输入指示器)。
+
+用户需要监听透传消息回调处理导航相关 UI 显示效果。
+
+## 本地搜索
+
+本地搜索功能允许用户快速根据类型搜索，包括搜索联系人（带有或无选择框）、会话、历史消息和黑名单，支持关键词匹配。该功能帮助用户高效找到所需信息，提高工作效率和信息管理的便捷性。
+
+UIKit 提供封装的 `EaseSearchActivity` 搜索页面，用户根据 `EaseSearchType` 和输入关键词后，将根据 `EaseSearchType` 类型搜索数据展示搜索结果。
+
+同时，UIKit 也提供搜索基类 `EaseBaseSearchFragment`，用户可以更好地继承扩展实现。`EaseBaseSearchFragment` 中的 `initAdapter()` 抽象方法实现自己的 adapter，进行数据处理和展示。
+
+例如，以下为搜索消息的页面。
+
+![img](/images/uikit/chatuikit/feature/common/message_search.png) 
+
+### 如何使用
+
+跳转 `EaseSearchActivity` 页面，根据自己需要搜索的类型（`EaseSearchType：USER、SELECT_USER、CONVERSATION、MESSAGE、BLOCK_USER`）传入需要的参数，将匹配关键词并展示搜索结果。
+
+例如，搜索黑名单的示例代码如下 ：
+
+```kotlin
+    
+    private val returnSearchClickResult: ActivityResultLauncher<Intent> = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result -> onClickResult(result) }
+
+    returnSearchClickResult.launch(
+        EaseSearchActivity.createIntent(
+            context = mContext,
+            searchType = EaseSearchType.BLOCK_USER
+        )
+    )
+    private fun onClickResult(result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.getSerializableExtra("user")?.let {
+                if (it is EaseUser) {
+                    // it 为搜索结果 
+                }
+            }
+        }
+    }
+
+```
+
+## 群组 @ 提及
+
+群组@提及功能使用户能在群聊中通过 @ 符号直接提及特定成员，被提及者将收到特别通知。该功能便于高效传递重要信息，确保关键消息得到及时关注和回应。
+
+群组@提及功能的 UI 和逻辑结构如下：
+
+首先在 `MessageListController` 的 `MessageListView` 中的 `MessageInputBar`中输入 `@` 字符后会告知 `ViewModel` 以及 `Controller` 用户输入了 `@` 字符，选择 @ 的用户后，输入框中会显示被 @ 的用户的名称或者昵称。
+
+![img](/images/uikit/chatuikit/feature/common/group_@.png) 
+
+### 如何使用
+
+群组@提及特性默认开启。要关闭该特性，则不需理会 `MessageListController#onInputBoxEventsOccur` 方法，记重载此方法后不需要处理 mention 事件即可。
+
+示例代码如下：
+
+```Swift
+        public func onInputBoxEventsOccur(action type: MessageInputBarActionType, attributeText: NSAttributedString?) {
+            switch type {
+            case .audio: self.audioDialog()
+            case .mention:  self.mentionAction()
+            case .attachment: self.attachmentDialog()
+            default:
+                break
+            }
+      }
+```
+
