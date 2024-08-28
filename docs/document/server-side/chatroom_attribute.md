@@ -14,7 +14,7 @@
 
 ## 公共参数
 
-### 请求参数
+#### 请求参数
 
 | 参数          | 类型   | 是否必需 | 描述  |
 | :------------ | :----- | :------- | :---------------- |
@@ -27,7 +27,7 @@
 | `description` | String | 是       | 聊天室描述，最大长度为 512 个字符。    |
 | `maxusers`    | Int    | 否       | 聊天室成员数上限，创建聊天室时设置。该参数的默认最大值为 10,000，如需调整请联系商务。  |
 
-### 响应参数
+#### 响应参数
 
 | 参数                 | 类型   | 描述   |
 | :------------------- | :----- | :------------ |
@@ -63,17 +63,17 @@
 
 获取指定聊天室 ID 的聊天室公告。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :-------------- |
@@ -81,9 +81,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。    |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -97,9 +97,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -107,7 +107,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -125,7 +125,7 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -140,13 +140,13 @@ curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 修改指定聊天室 ID 的聊天室公告。聊天室公告内容不能超过 512 个字符。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
@@ -158,15 +158,15 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。     |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 | 字段           | 类型   | 是否必需 | 描述                 |
 | :------------- | :----- | :------- | :------------------- |
 | `announcement` | String | 是       | 修改后的聊天室公告。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -179,9 +179,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -189,7 +189,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/announcement' -d '{"announcement" : "聊天室公告…"}'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -208,7 +208,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -224,13 +224,13 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 指定用户设置特定聊天室的自定义属性。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :-------------------- |
@@ -238,7 +238,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 
 其它参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :-------------------- |
@@ -246,16 +246,16 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。    |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 | 参数         | 类型   | 是否必需 | 描述             |
 | :----------- | :----- | :------- | :----------------------- |
 | `metaData`   | JSON   | 是       | 聊天室的自定义属性，存储为键值对（key-value）集合，即 Map<String,String>。该集合中最多可包含 10 个键值对，在每个键值对中，key 为属性名称，最多可包含 128 个字符；value 为属性值，不能超过 4096 个字符。每个聊天室最多可有 100 个自定义属性，每个应用的聊天室自定义属性总大小为 10 GB。<br/> key 支持以下字符集：<br/> • 26 个小写英文字母 a-z；<br/> • 26 个大写英文字母 A-Z；<br/> • 10 个数字 0-9；<br/> • “\_”, “-”, “.”。 |
 | `autoDelete` | String | 否       | 当前成员退出聊天室时是否自动删除该自定义属性。 <br/> • （默认）'DELETE'：是； <br/> • 'NO_DELETE'：否。   |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -268,9 +268,9 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -284,7 +284,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
  }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -298,7 +298,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -332,17 +332,17 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 获取指定聊天室的自定义属性信息。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述            |
 | :-------------- | :----- | :------- | :----------------------------------- |
@@ -350,15 +350,15 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。   |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 | 参数   | 类型  | 是否必需 | 描述                       |
 | :----- | :---- | :------- | :------------------------- |
 | `keys` | Array | 否       | 聊天室自定义属性名称列表。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -370,9 +370,9 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -382,7 +382,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
  }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -396,7 +396,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -413,13 +413,13 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 该方法每次最多可删除 10 个自定义属性。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :-------------------- |
@@ -427,7 +427,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 
 其它参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述            |
 | :-------------- | :----- | :------- | :------------------------ |
@@ -435,15 +435,15 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。          |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 | 参数   | 类型  | 是否必需 | 描述                                                         |
 | :----- | :---- | :------- | :----------------------------------------------------------- |
 | `keys` | Array | 否       | 聊天室自定义属性名称列表。每次最多可传 10 个自定义属性名称。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -456,9 +456,9 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -468,7 +468,7 @@ DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json'
  }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -483,7 +483,7 @@ DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json'
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -499,13 +499,13 @@ DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json'
 
 用户强制设置指定聊天室的自定义属性信息，即该方法可覆盖其他用户设置的聊天室自定义属性。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}/forced
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :-------------------- |
@@ -513,7 +513,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 
 其它参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述         |
 | :-------------- | :----- | :------- | :------------------ |
@@ -521,16 +521,16 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### 请求 body
+#### 请求 body
 
 | 参数         | 类型   | 是否必需 | 描述   |
 | :----------- | :----- | :------- | :---------- |
 | `metaData`   | JSON   | 是       | 聊天室的自定义属性，存储为键值对（key-value pair）集合，即 Map<String,String>。该集合中最多可包含 10 个键值对，在每个键值对中，key 为属性名称，最多可包含 128 个字符；value 为属性值，不能超过 4096 个字符。每个聊天室最多可有 100 个自定义属性，每个应用的聊天室自定义属性总大小为 10 GB。<br/> key 支持以下字符集：<br/> • 26 个小写英文字母 a-z；<br/> • 26 个大写英文字母 A-Z；<br/> • 10 个数字 0-9；<br/> • “\_”, “-”, “.”。 |
 | `autoDelete` | String | 否   | 当前成员退出聊天室时是否自动删除该自定义属性。 <br/> • （默认）'DELETE'：是； <br/> • 'NO_DELETE'：否。    |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -543,9 +543,9 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{u
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -559,7 +559,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
  }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1/forced'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -570,7 +570,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -605,13 +605,13 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 该方法每次最多可删除 10 个自定义属性。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}/forced
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :-------------------- |
@@ -619,7 +619,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 
 其它参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :-------------------------------------------------------------- |
@@ -627,15 +627,15 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 | 参数   | 类型  | 是否必需 | 描述                                                           |
 | :----- | :---- | :------- | :------------------------------------------------------------- |
 | `keys` | Array | 否       | 聊天室自定义属性的名称列表。每次最多可传 10 个自定义属性名称。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -648,9 +648,9 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -660,7 +660,7 @@ curl  -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json
  }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1/forced'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -671,7 +671,7 @@ curl  -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 

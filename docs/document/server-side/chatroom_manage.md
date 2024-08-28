@@ -15,9 +15,10 @@
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](limitationapi.html)。
 - 了解不同套餐版本支持的聊天室总数，详见[套餐包功能详情](/product/pricing.html#套餐包功能详情)。
+  
 ## 公共参数
 
-### 请求参数
+#### 请求参数
 
 | 参数          | 类型   | 是否必需 | 描述  |
 | :------------ | :----- | :------- | :---------------- |
@@ -30,7 +31,7 @@
 | `description` | String | 是       | 聊天室描述，最大长度为 512 个字符。    |
 | `maxusers`    | Int    | 否       | 聊天室成员数上限，创建聊天室时设置。该参数的默认最大值为 10,000，如需调整请联系商务。  |
 
-### 响应参数
+#### 响应参数
 
 | 参数                 | 类型   | 描述   |
 | :------------------- | :----- | :------------ |
@@ -66,17 +67,17 @@
 
 分页获取应用下的聊天室列表和信息。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 查询参数
+##### 查询参数
 
 | 参数     | 类型   | 是否必需 | 描述                                                                                      |
 | :------- | :----- | :------- | :---------------------------------------------------------------------------------------- |
@@ -87,16 +88,16 @@ GET https://{host}/{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}
 若请求中均未设置 `limit` 和 `cursor`，环信服务器返回聊天室列表的第一页中前 10 个聊天室。
 :::
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -111,9 +112,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -122,7 +123,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
 --header 'Authorization: Bearer <YourAppToken>'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -135,7 +136,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -149,17 +150,17 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
 
 根据用户 ID 分页获取该用户加入的聊天室。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms?pagenum={N}&pagesize={N}
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 查询参数
+##### 查询参数
 
 | 参数       | 类型 | 是否必需 | 描述                                    |
 | :--------- | :--- | :------- | :-------------------------------------- |
@@ -170,16 +171,16 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms?pagen
 若查询参数 `pagenum` 和 `pagesize` 均不传，服务器返回用户最新加入的 500 个聊天室。
 :::
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。 |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -193,9 +194,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms?pagen
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -203,7 +204,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/joined_chatrooms?pagen
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/joined_chatrooms?pagenum=1&pagesize=10'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -240,7 +241,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -254,13 +255,13 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 查询一个或多个聊天室的详情。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数          | 类型   | 是否必需 | 描述        |
 | :------------ | :----- | :------- | :--------------------------------- |
@@ -268,16 +269,16 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述         |
 | :-------------- | :----- | :------- | :-------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -300,9 +301,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -310,7 +311,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -338,7 +339,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -353,17 +354,17 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 创建一个聊天室，需设置聊天室名称、聊天室描述、聊天室成员最大人数（包括管理员）、聊天室管理员和普通成员以及聊天室扩展信息。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/chatrooms
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :----------------- |
@@ -371,7 +372,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 | 参数          | 类型   | 是否必需 | 描述                                                                            |
 | :------------ | :----- | :------- | :------------------------------------------------------------------------------ |
@@ -382,9 +383,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 | `members`     | Array  | 否       | 聊天室普通成员和管理员的用户 ID 数组，不包含聊天室所有者的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。若传该参数，确保至少设置一个数组元素。   |
 | `custom`      | String | 否       | 聊天室扩展信息，例如可以给聊天室添加业务相关的标记，不要超过 1,024 个字符。     |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -396,9 +397,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -414,7 +415,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
  }' 'https://XXXX/XXXX/XXXX/chatrooms'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -424,7 +425,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -444,17 +445,17 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 修改指定聊天室的信息。仅支持修改聊天室名称、聊天室描述和聊天室最大成员数。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述            |
 | :-------------- | :----- | :------- | :---------------- |
@@ -462,7 +463,7 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。   |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 你只能修改聊天室名称、聊天室描述和聊天室最大成员数。
 
@@ -474,7 +475,7 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 #### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -488,9 +489,9 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -502,7 +503,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
  }' 'https://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -514,7 +515,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -533,13 +534,13 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 修改聊天室所有者为同一聊天室中的其他成员。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数          | 类型   | 是否必需 | 描述  |
 | :-------------- | :----- | :------- | :----------------------------------------- |
@@ -547,7 +548,7 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 其他参数及描述详见[公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :------- | :----------------------------------------- |
@@ -555,15 +556,15 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。      |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 | 参数       | 类型   | 描述                      |
 | :--------- | :----- | :------------------------ |
 | `newowner` | String | 聊天室新的所有者的用户 ID。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -574,9 +575,9 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -589,7 +590,7 @@ curl -X PUT -H 'Content-Type: application/json' \
    }' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX85'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -607,7 +608,7 @@ curl -X PUT -H 'Content-Type: application/json' \
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -624,30 +625,30 @@ curl -X PUT -H 'Content-Type: application/json' \
 
 解散单个聊天室。如果要解散的聊天室不存在，会返回错误。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :-------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 参数及描述详见 [公共参数](#公共参数)。
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -660,9 +661,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -670,7 +671,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/662XXXX13'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -689,7 +690,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
