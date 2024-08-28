@@ -14,7 +14,7 @@
 
 ## 公共参数
 
-### 请求参数
+#### 请求参数
 
 | 参数       | 类型   | 是否必需 | 描述        |
 | :--------- | :----- | :------- | :--------------- |
@@ -24,7 +24,7 @@
 | `group_id` | String | 是       | 群组 ID。    |
 | `username` | String | 是       | 用户 ID。             |
 
-### 响应参数
+#### 响应参数
 
 | 参数              | 类型   | 描述                                                                           |
 | :---------------- | :----- | :----------------------------------------------------------------------------- |
@@ -54,17 +54,17 @@
 
 创建一个群组，并设置群组名称、群组描述、公开群/私有群属性、群成员最大人数（包括群主）、加入公开群是否需要批准、群主、群成员和群组扩展信息。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/chatgroups
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数     | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :------------------ |
@@ -72,7 +72,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 | 参数                  | 类型   | 是否必需 | 描述          |
 | :------------ | :----- | :------- | :------------------------------------------- |
@@ -88,9 +88,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | `members`             | Array  | 否       | 群成员的用户 ID 数组，不包含群主的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。        |
 | `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。     |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -102,9 +102,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -122,7 +122,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
  }' 'https://XXXX/XXXX/XXXX/chatgroups'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -140,7 +140,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -165,17 +165,17 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 群组封禁后，可调用[解禁群组](#解禁群组) API 对该群组解禁。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :------- | :----------------- |
@@ -185,7 +185,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
 
 #### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -197,9 +197,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -207,7 +207,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/disable'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -226,7 +226,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -241,17 +241,17 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 解除对指定群组的封禁。群组解禁后，群成员可以在该群组以及该群组下的子区中发送和接收消息并进行群组和子区管理相关操作。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/enable
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述           |
 | :-------------- | :----- | :------- | :----------------------------------------- |
@@ -259,9 +259,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/enable
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -273,9 +273,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/enable
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -283,7 +283,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/enable
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/enable'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -302,7 +302,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -317,17 +317,17 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 修改指定的群组信息，可修改 `groupname`、`avatar`、`description`、`maxusers`、`membersonly`、`allowinvites`、`invite_need_confirm`、`public` 和 `custom` 属性。如果传入其他字段，或传入的字段不存在，则不能修改的字段会抛出异常。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :--------------------- |
@@ -335,7 +335,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 | 参数                  | 类型   | 是否必需 | 描述           |
 | :-------------------- | :----- | :------- | :---------------------------- |
@@ -349,9 +349,9 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。  |
 | `public`              | Bool   | 否       | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                                                                   |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -369,9 +369,9 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -389,7 +389,7 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -416,7 +416,7 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -434,17 +434,17 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 分页获取应用下的群组的信息。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 查询参数
+##### 查询参数
 
 | 参数     | 类型   | 是否必需 | 描述                                                        |
 | :------- | :----- | :------- | :---------------------------------------------------------- |
@@ -455,16 +455,16 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 若请求中均未设置 `limit` 和 `cursor` 参数，环信服务器按群组创建时间倒序返回前 10 个群组。
 :::
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述            |
 | :-------------- | :----- | :------- | :-------------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -484,7 +484,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-#### 请求示例
+##### 请求示例
 
 第一页
 
@@ -502,7 +502,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups?limit=2&cursor=ZGNXXXX6Mg'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -537,7 +537,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -552,33 +552,33 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 根据用户 ID 分页获取指定用户加入的所有群组。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&pagenum={}
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 查询参数
+##### 查询参数
 
 | 参数            | 类型   | 是否必需    | 描述                 |
 |:--------------| :----- |:--------|:-------------------|
 | `pagesize`     | String | 否       | 每页获取的群组数量。取值范围为 [1,20]，默认值为 `5`。若传入的值大于 `20`，每页仍返回 `20` 个群组。|
 | `pagenum`       | String | 否       | 当前页码。默认从第 `0` 页开始获取。 |
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :------------------ |
 | `Accept`        | String | 是       | 内容类型，请填 `application/json`。       |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -602,9 +602,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -612,7 +612,7 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
 -H 'Authorization: Bearer  <YourAppToken>'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -642,7 +642,7 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -656,13 +656,13 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
 
 查看单个用户是否已加入了指定的群组。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/is_joined
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
@@ -673,9 +673,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/i
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。         |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -687,9 +687,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/i
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -697,7 +697,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/i
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/user/XXXX/is_joined'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -710,7 +710,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -724,13 +724,13 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 可以获取一个或多个群组的详情，最多可获取 100 个群组的详情。当获取多个群组的详情时，返回所有存在的群组的详情；对于不存在的群组，返回 “group id doesn’t exist”。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数       | 类型   | 是否必需 | 描述           |
 | :--------- | :----- | :------- | :------------- |
@@ -738,16 +738,16 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :------------------------------ |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。         |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -775,9 +775,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -785,7 +785,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -828,7 +828,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -843,26 +843,26 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 解散指定的群组。解散群组时会同时删除群组下所有的子区（Thread）。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述              |
 | :-------------- | :----- | :------- | :--------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -875,9 +875,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -885,7 +885,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://a1.Ago ra.com/XXXX/testapp/chatgroups/6XXXX7'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -904,7 +904,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 

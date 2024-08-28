@@ -62,32 +62,32 @@
 
 添加一个聊天室超级管理员。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述  |
 | :-------------- | :----- | :------- | :-------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。   |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### 请求 body
+#### 请求 body
 
 | 参数         | 类型   | 是否必需 | 描述                                          |
 | :----------- | :----- | :------- | :-------------------------------------------- |
 | `superadmin` | String | 是       | 添加的超级管理员的用户 ID，每次只能添加一个。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -100,9 +100,9 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -115,7 +115,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/super_admin'  \
 }'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -134,7 +134,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/super_admin'  \
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -149,7 +149,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/super_admin'  \
 
 可以分页获取超级管理员列表的接口。
 
-### HTTP 请求
+#### HTTP 请求
 
 直接获取：
 
@@ -163,26 +163,26 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pagesize={N}
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-#### 查询参数
+##### 查询参数
 
 | 参数       | 类型 | 是否必需 | 描述                                    |
 | :--------- | :--- | :------- | :-------------------------------------- |
 | `pagenum`  | Int  | 否       | 当前页码，默认值为 `1`。                  |
 | `pagesize` | Int  | 否       | 每页返回的超级管理员数量，取值范围为 [1,1000]，默认值为 `10`。 |
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -196,9 +196,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pages
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -206,7 +206,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pages
 curl -X GET https://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -227,7 +227,7 @@ curl -X GET https://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -241,13 +241,13 @@ curl -X GET https://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H
 
 撤销超级管理员权限，用户将不能再创建聊天室。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数         | 类型   | 是否必需 | 描述                            |
 | :----------- | :----- | :------- | :------------------------------ |
@@ -255,15 +255,15 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -277,9 +277,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -288,7 +288,7 @@ curl -L -X DELETE 'https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX'
 --header 'Authorization: Bearer <YourAppToken>'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -308,7 +308,7 @@ curl -L -X DELETE 'https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX'
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
