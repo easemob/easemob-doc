@@ -29,11 +29,11 @@
 
 #### 解散群组
 
-[删除 App 下指定群 ID 的群组](/document/server-side/group.html#解散群组)。
+[删除 App 下指定群 ID 的群组](/document/server-side/group_member.html#解散群组)。
 
 #### 解散聊天室
 
-[删除 App 下指定 ID 的聊天室](/document/server-side/chatroom.html#解散聊天室)。
+[删除 App 下指定 ID 的聊天室](/document/server-side/chatroom_manage.html#解散聊天室)。
 
 ## 数据导出
 
@@ -56,14 +56,14 @@
 
 | REST API                                                     | 描述                                      |
 | :----------------------------------------------------------- | :---------------------------------------- |
-| [群组详情](/document/server-side/group.html#获取群组详情) | 获取 App 下指定群组 ID 的群组详情。       |
-| [App 下所有的群组](/document/server-side/group.html#获取-app-中所有的群组-可分页) | 获取 App 下包含所有群组的列表。           |
-| [群组管理员列表](/document/server-side/group.html#获取群管理员列表) | 获取 App 下指定群组 ID 的群组管理员列表。 |
-| [群组成员列表](/document/server-side/group.html#分页获取群组成员) | 获取 App下指定群组 ID 的群组成员列表。    |
-| [群组公告](/document/server-side/group.html#获取群组公告) | 获取 App 下指定群组 ID 的群组公告。       |
-| [群组共享文件](/document/server-side/group.html#获取群组共享文件) | 获取 App 下指定群组 ID 的群组共享文件。   |
-| [群组黑名单列表](/document/server-side/group.html#查询群组黑名单) | 获取 App 下指定群组 ID 的群组黑名单列表。 |
-| [群组禁言列表](/document/server-side/group.html#获取禁言列表) | 获取 App 下指定群组 ID 的群组禁言列表。   |
+| [群组详情](/document/server-side/group_manage.html#获取群组详情) | 获取 App 下指定群组 ID 的群组详情。       |
+| [App 下所有的群组](/document/server-side/group_manage.html#获取-app-中所有的群组-可分页) | 获取 App 下包含所有群组的列表。           |
+| [群组管理员列表](/document/server-side/group_member.html#获取群管理员列表) | 获取 App 下指定群组 ID 的群组管理员列表。 |
+| [群组成员列表](/document/server-side/group_member.html#分页获取群组成员) | 获取 App下指定群组 ID 的群组成员列表。    |
+| [群组公告](/document/server-side/group_file.html#获取群组公告) | 获取 App 下指定群组 ID 的群组公告。       |
+| [群组共享文件](/document/server-side/group_file.html#获取群组共享文件) | 获取 App 下指定群组 ID 的群组共享文件。   |
+| [群组黑名单列表](/document/server-side/group_member.html#查询群组黑名单) | 获取 App 下指定群组 ID 的群组黑名单列表。 |
+| [群组禁言列表](/document/server-side/group_member.html#获取禁言列表) | 获取 App 下指定群组 ID 的群组禁言列表。   |
 
 #### 导出聊天室数据
 

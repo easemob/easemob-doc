@@ -1,10 +1,8 @@
-# 群组管理
+# 群成员管理
 
 <Toc />
 
-环信即时通讯 IM 提供了 RESTful API 管理 App 中的群组。
-
-单个 App 创建群组数量有限制，而且单个用户可加入群组的数量视版本而定，详见 [使用限制](limitation.html#群组限制)。
+环信即时通讯 IM 提供了 RESTful API 管理 App 中群组的成员，包括添加和移除群组成员、转让群组所有权以及群组黑名单、白名单和禁言列表相关操作。
 
 ## 前提条件
 
@@ -12,6 +10,7 @@
 
 - 已在环信即时通讯 IM 管理后台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 群成员的相关限制，详见 [使用限制](limitation.html#群组)。
 
 ## 公共参数
 
@@ -59,1400 +58,36 @@
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
-## 创建和管理群组
-
-### 创建群组
-
-创建一个群组，并设置群组名称、群组描述、公开群/私有群属性、群成员最大人数（包括群主）、加入公开群是否需要批准、群主、群成员和群组扩展信息。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/{org_name}/{app_name}/chatgroups
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数     | 类型   | 是否必需 | 描述     |
-| :-------------- | :----- | :------- | :------------------ |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-##### 请求 body
-
-| 参数                  | 类型   | 是否必需 | 描述          |
-| :------------ | :----- | :------- | :------------------------------------------- |
-| `groupname`           | String | 否       | 群组名称，最大长度为 128 字符。|
-| `avatar`           | String | 否       | 群组头像的 URL，最大长度为 1024 字符。|
-| `description`         | String | 否       | 群组描述，最大长度为 512 字符。|
-| `public`              | Bool   | 是       | 是否是公开群。公开群可以被搜索到，用户可以申请加入公开群；私有群无法被搜索到，因此需要群主或群管理员添加，用户才可以加入。<br/> - `true`：公开群；<br/> - `false`：私有群。   |
-| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。该参数的默认值为 `200`，若设置的值超过 `3000`，将不再支持离线推送。对于超过 3000 人的群组，若希望提供离线推送功能，你必须在创建群组之前联系商务开通，否则群组创建后无法再开通该功能。<br/>不同套餐的群组支持的最大人数的上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。|
-| `allowinvites`        | Bool   | 否       | 是否允许普通群成员邀请用户加入群组：<br/> - `true`：普通群成员可拉人入群;<br/> - （默认）`false`：只有群主和群管理员才能拉人入群。<br/><Container type="notice" title="提示"><br/>创建群组时，该参数仅对私有群有效，对公开群无效。也就是说，创建公有群（`public` 设置为 `true`）时，即使将 `allowinvites` 设置为 `true`，该设置也会自动修改为 `false`。如果要允许公开群的普通成员拉人入群，你在创建群后可调用[修改群组信息](#修改群组信息)接口将 `allowinvites` 的设置修改为 `true`。</Container> |
-| `membersonly`         | Bool   | 否       | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：需要； <br/> - （默认）`false`：不需要，用户直接进群。<br/>该参数仅对公开群生效，因为对于私有群，用户无法申请加入群组，只能通过群成员邀请加入群。     |
-| `invite_need_confirm` | Bool   | 否       | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
-| `owner`               | String | 是       | 群主的用户 ID。  |
-| `members`             | Array  | 否       | 群成员的用户 ID 数组，不包含群主的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。        |
-| `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。     |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段           | 类型   | 描述      |
-| :------------- | :----- | :-------- |
-| `data.groupid` | String | 群组 ID。 |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
-   "groupname": "testgroup",
-   "avatar": "https://www.XXXX.com/XXX/image",
-   "description": "test",
-   "public": true,
-   "maxusers": 300,
-   "owner": "testuser",
-   "members": [
-     "user2"
-   ]
- }' 'https://XXXX/XXXX/XXXX/chatgroups'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "post",
-  "application": "8bXXXX02",
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups",
-  "entities": [],
-  "data": {
-    "groupid": "6XXXX7"
-  },
-  "timestamp": 1542361730243,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | invalid_parameter | XX must be provided | XX 字段没有设置。 | 请传入必传字段。  |
-| 400     | invalid_parameter | avatar length is too big | 头像字段长度达到上限 | 修改头像字段在长度限制下。 |
-| 400     | invalid_parameter | group must contain public field! | 创建群组必须设置 `public` 字段 | 设置 `public` 字段。 |
-| 400     | illegal_argument | group ID XX already exists! | groupId 重复。 | 使用新的群组 ID。 |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | exceed_limit | appKey:XX#XX has create too many groups! | appKey 的群组数量达到上限。 | 删除不用的群组或联系商务调整上限。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。 |
-| 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数量达到上限。 | 退出不用的群组或联系商务调整上限。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。 |
-| 403     | exceed_limit | members size is greater than max user size ! | 创建群时加入的人数超过最大限制。 | 调整创建群的加群人数。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。|
-| 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
-| 404     |  resource_not_found  | username XXXX doesn't exist!       | 创建群组时添加的用户不存在。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 封禁群组
-
-封禁指定的群组。例如，群成员经常在群中发送违规消息，可以调用该 API 对该群进行封禁。群组被封禁后，群中任何成员均无法在群组以及该群组下的子区中发送和接收消息，也无法进行群组和子区管理操作。
-
-群组封禁后，可调用[解禁群组](#解禁群组) API 对该群组解禁。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述      |
-| :-------------- | :----- | :------- | :----------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。       |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。          |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段          | 类型 | 描述                                                                              |
-| :------------ | :--- | :-------------------------------------------------------------------------------- |
-| data.disabled | Bool | 群组是否为禁用状态：<br/> - `true`：群组被禁用；<br/> - `false`：群组为启用状态。 |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/disable'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "post",
-  "application": "XXXX",
-  "applicationName": "XXXX",
-  "data": {
-    "disabled": true
-  },
-  "duration": 740,
-  "entities": [],
-  "organization": "XXXX",
-  "properties": {},
-  "timestamp": 1672974260359,
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/XXXX/disable"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 解禁群组
-
-解除对指定群组的封禁。群组解禁后，群成员可以在该群组以及该群组下的子区中发送和接收消息并进行群组和子区管理相关操作。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/enable
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述           |
-| :-------------- | :----- | :------- | :----------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段          | 类型 | 描述            |
-| :------------ | :--- | :------------------------- |
-| data.disabled | Bool | 群组是否为禁用状态：<br/> - `true`：群组被禁用；<br/> - `false`：群组为启用状态。 |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/enable'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "post",
-  "application": "XXXX",
-  "applicationName": "XXXX",
-  "data": {
-    "disabled": false
-  },
-  "duration": 22,
-  "entities": [],
-  "organization": "XXXX",
-  "properties": {},
-  "timestamp": 1672974668171,
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/XXXX/enable"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 修改群组信息
-
-修改指定的群组信息，可修改 `groupname`、`avatar`、`description`、`maxusers`、`membersonly`、`allowinvites`、`invite_need_confirm`、`public` 和 `custom` 属性。如果传入其他字段，或传入的字段不存在，则不能修改的字段会抛出异常。
-
-#### HTTP 请求
-
-```http
-PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述     |
-| :-------------- | :----- | :------- | :--------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-##### 请求 body
-
-| 参数                  | 类型   | 是否必需 | 描述           |
-| :-------------------- | :----- | :------- | :---------------------------- |
-| `groupname`           | String | 否       | 群组名称，最大长度为 128 字符。 |
-| `avatar`              | String | 否       | 群组头像的 URL，最大长度为 1024 字符。|
-| `description`         | String | 否       | 群组描述，最大长度为 512 字符。 |
-| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。 |
-| `membersonly`         | Bool   | 否       | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。    |
-| `allowinvites`        | Bool   | 否       | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群；<br/> - `false`：只有群主或群管理员才可以邀请用户入群。 |
-| `invite_need_confirm` | Bool   | 否       | 受邀人加入群组前是否需接受入群邀请：<br/> - `true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
-| `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。  |
-| `public`              | Bool   | 否       | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                                                                   |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段                       | 类型   | 描述        |
-| :------------------------- | :----- | :------------------------ |
-| `data.description`         | Bool   | 群组描述是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。   |
-| `data.maxusers`            | Bool   | 群组最大成员数是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。                         |
-| `data.groupname`           | Bool   | 群组名称是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。    |
-| `data.avatar`              | Bool   | 群组头像否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。|
-| `data.membersonly`         | Bool   | “加入群组是否需要群主或者群管理员审批”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。 |
-| `data.public`              | Bool   | “是否是公开群”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。                         |
-| `data.allowinvites`        | Bool   | “是否允许群成员邀请其他用户入群”是否修改成功：<br/> -`true`：修改成功；<br/>- `false`：修改失败。         |
-| `data.invite_need_confirm` | Bool   | “受邀人加入群组前是否需接受入群邀请”是否修改成功：<br/> - `true`：修改成功；<br/> - `false`：修改失败。   |
-| `data.custom`              | Bool | 群组扩展信息是否修改成功：<br/> -`true`：修改成功；<br/>- `false`：修改失败。        |
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7' -d '{
-    "groupname": "test groupname",
-    "avatar": "https://www.XXXX.com/XXX/image",
-    "description": "updategroupinfo12311",
-    "maxusers": 1500,
-    "membersonly": true,
-    "allowinvites": false,
-    "invite_need_confirm": true,
-    "custom":"abc",
-    "public": true
-}'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "put",
-  "application": "XXXXXX",
-  "applicationName": "XXXX",
-  "data": {
-    "allowinvites": true,
-    "invite_need_confirm": true,
-    "membersonly": true,
-    "public": true,
-    "custom": true,
-    "description": true,
-    "maxusers": true,
-    "groupname": true,
-    "avatar": true
-  },
-  "duration": 0,
-  "entities": [],
-  "organization": "XXXX",
-  "properties": {},
-  "timestamp": 1666062065529,
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
-| 403     | group_announce_violation | group announcement is violation, please change it. | 群公告不合法。 | 使用合法的群公告。 |
-| 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-| 400     | invalid_parameter                  | "some of [groupid] are not valid fields"  | 修改的群组信息时，传入的参数不支持，例如修改 `groupid`。| 
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 获取 App 中的群组
-
-分页获取应用下的群组的信息。
-
-#### HTTP 请求
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 查询参数
-
-| 参数     | 类型   | 是否必需 | 描述                                                        |
-| :------- | :----- | :------- | :---------------------------------------------------------- |
-| `limit`  | Int    | 否       | 每次期望返回的群组数量。取值范围为 [1,1000]，默认值为 `10`。若传入的值超过 `1000`，每页仍返回 1000 个群组。 |
-| `cursor` | String | 否       | 数据查询的起始位置。首次调用该接口，不传 `cursor`，服务器按群组创建时间倒序返回 `limit` 指定的群组数量。后续接口调用时，需要从上次调用的响应中获取 `cursor` 参数的值传入请求中的该参数。   |
-
-:::tip
-若请求中均未设置 `limit` 和 `cursor` 参数，环信服务器按群组创建时间倒序返回前 10 个群组。
-:::
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述            |
-| :-------------- | :----- | :------- | :-------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段                 | 类型   | 描述                                     |
-| :------------------- | :----- | :--------------------------------------- |
-| `data` | JSON Array | 响应数据。 |
-|  - `owner`         | String | 群主的用户 ID。例如：{“owner”: “user1}。 |
-|  - `groupid`       | String | 群组 ID。                                |
-|  - `affiliations`  | int    | 群组现有成员数。                         |
-|  - `type`          | String | “group” 群组类型。                       |
-|  - `lastModified` | String | 最近一次修改的时间戳，单位为毫秒。       |
-|  - `groupname`     | String | 群组名称。                               |
-| `count`              | Int    | 实际获取的群组数量。                     |
-| `cursor`             | String | 查询游标，指定下次查询的起始位置。       |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-##### 请求示例
-
-第一页
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups?limit=2'
-```
-
-第二页
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups?limit=2&cursor=ZGNXXXX6Mg'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "get",
-  "params": {
-    "limit": ["2"]
-  },
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups",
-  "entities": [],
-  "data": [
-    {
-      "owner": "XXXX#testapp_user1",
-      "groupid": "10XXXX60",
-      "affiliations": 2,
-      "type": "group",
-      "lastModified": "1441021038124",
-      "groupname": "testgroup1"
-    },
-    {
-      "owner": "XXXX#testapp_user2",
-      "groupid": "10XXXX76",
-      "affiliations": 1,
-      "type": "group",
-      "lastModified": "1441074471486",
-      "groupname": "testgroup2"
-    }
-  ],
-  "timestamp": 1441094193812,
-  "duration": 14,
-  "cursor": "Y2hhdGdyb3VwczplYXNlbW9iLWRlbW8vY2hhdGRlbW91aV8z",
-  "count": 2
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 获取单个用户加入的所有群组
-
-根据用户 ID 分页获取指定用户加入的所有群组。
-
-#### HTTP 请求
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&pagenum={}
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 查询参数
-
-| 参数            | 类型   | 是否必需    | 描述                 |
-|:--------------| :----- |:--------|:-------------------|
-| `pagesize`     | String | 否       | 每页获取的群组数量。取值范围为 [1,20]，默认值为 `5`。若传入的值大于 `20`，每页仍返回 `20` 个群组。|
-| `pagenum`       | String | 否       | 当前页码。默认从第 `0` 页开始获取。 |
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述       |
-| :-------------- | :----- | :------- | :------------------ |
-| `Accept`        | String | 是       | 内容类型，请填 `application/json`。       |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数      | 类型     | 描述     |
-|:-------------------------|:-------|:----------------------------|
-| `total`                    | Int  | 用户加入的群组总数。          |
-| `entities`                 | JSON Array  | 用户加入的群组列表。             |
-|  - `groupId `     | String | 群组 ID。             |
-|  - `name`         | String | 群组名称。       |
-|  - `avatar`       | String | 群组头像的 URL。|
-|  - `owner`        | String | 群主的用户 ID。      |
-|  - `description`  | String | 群组描述。        |
-|  - `disabled`     | Bool | 群组是否被禁用：<br/> - `true`：禁用。禁用后不能对群组进行任何修改。<br/> - `false`：未禁用。 |
-|  - `public`       | Bool | 是否是公开群：<br/> - `true`：公开群。公开群可以被搜索到，用户可以申请加入公开群。<br/> - `false`：私有群。私有群无法被搜索到，需要群主或群管理员邀请，用户才可以加入。|
-|  - `allowinvites` | Bool | 是否允许普通群成员邀请用户加入群组：<br/> - `true`：普通群成员可拉人入群; <br/> - `false`：只有群主或者管理员才可以拉人入群。         |
-|  - `membersonly`  | Bool | 用户申请入群是否需要群主或者群管理员审批。<br/> - `true`：需要；<br/> - `false`：不需要，用户直接进群。                               |
-|  - `maxusers`     | Int | 群组最大成员数（包括群主）。      |
-|  - `created `     | Long | 群组创建时间戳。      |
-
-其他参数及说明详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
--H 'Authorization: Bearer  <YourAppToken>'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "get",
-  "applicationName": "XXXX",
-  "duration": 0,
-  "entities": [
-    {
-      "name": "群组名称",
-      "avatar": "https://www.XXXX.com/XXX/image",
-      "owner": "群组管理员",
-      "id": "2XXXX1",
-      "groupId": "2XXXX1",
-      "description": "群组描述",
-      "disabled": false,
-      "public": false,
-      "allowinvites": false,
-      "membersonly": true,
-      "maxusers": 2000,
-      "created": 1692687427254
-    }
-  ],
-  "organization": "XXXX",
-  "timestamp": 1692687427254,
-  "total": 10,
-  "uri": "http://XXXX/XXXX/XXXX/chatgroups/user/XXXX"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 查看指定用户是否已加入群组
-
-查看单个用户是否已加入了指定的群组。
-
-#### HTTP 请求
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/is_joined
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数     | 类型   | 是否必需 | 描述     |
-| :-------------- | :----- | :------- | :------------------ |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。         |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段           | 类型   | 描述      |
-| :------------- | :----- | :-------- |
-| `data` | Boolean | 该用户是否已加入群组：<br/> - `true`：用户已加入该群组；<br/> - `false`：用户未加入该群组。 |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/user/XXXX/is_joined'
-```
-
-##### 响应示例
-
-```json
-{
-    "action": "get",
-    "application": "8bXXXX02",
-    "data": false,
-    "duration": 0,
-    "organization": "XXXX",
-    "timestamp": 1691547476492
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 获取群组详情
-
-可以获取一个或多个群组的详情，最多可获取 100 个群组的详情。当获取多个群组的详情时，返回所有存在的群组的详情；对于不存在的群组，返回 “group id doesn’t exist”。
-
-#### HTTP 请求
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
-```
-
-##### 路径参数
-
-| 参数       | 类型   | 是否必需 | 描述           |
-| :--------- | :----- | :------- | :------------- |
-| `group_id` | String | 是       | 要获取详情的群组 ID。最多可传 100 个群组 ID，群组 ID 之间用英文逗号（","）分隔。 |
-
-其他参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述          |
-| :-------------- | :----- | :------- | :------------------------------ |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。         |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段                      | 类型   | 描述      |
-| :---------- | :----- | :----------------- |
-| `count`                 | Int | 获取详情的群组数量。 |
-| `data` | JSON Array | 响应数据。|
-|  - `id`                 | String | 群组 ID，群组唯一标识符。     |
-|  - `name`               | String | 群组名称。      |
-|  - `avatar`             | String | 群组头像的 URL。|
-|  - `description`        | String | 群组描述。       |
-|  - `membersonly`        | Bool   | 加入群组是否需要群主或者群管理员审批。<br/> - `true`：是；<br/> - `false`：否。      |
-|  - `allowinvites`       | Bool   | 是否允许群成员邀请其他用户加入此群。<br/> - `true`：允许群成员邀请其他用户加入此群；<br/> - `false`：只有群主可以邀请其他用户入群。<br/> 注：该参数仅对私有群有效，因为公开群不允许群成员邀请其他用户入群。 |
-|  - `maxusers`           | Int    | 群组最大成员数，创建群组的时候设置，可修改。    |
-|  - `affiliations`       | Array | 群组成员列表及其对应角色：<br/> - `owner`：群主；<br/> - `member`：群组管理员和普通成员。 |
-|  - `owner`              | String | 群主的用户 ID。例如：{“owner”: “user1”}。    |
-|  - `created`            | Long   | 创建该群组的 Unix 时间戳。  |
-|  - `affiliations_count` | int    | 群组现有成员总数。     |
-|  - `disabled`           | Bool   | 群组是否为禁用状态：<br/> - `true`：群组被禁用；<br/> - `false`：群组为启用状态。          |
-|  - `mute`               | Bool   | 是否处于全员禁言状态。<br/> - `true`：是； <br/> - （默认）`false`：否。       |
-|  - `public`             | Bool   | 是否是公开群：<br/> - `true`：公开群；<br/> - `false`：私有群。    |
-|  - `custom`             | String | 群组扩展信息，例如，可以给群组添加业务相关的标记，不要超过 1,024 字符。     |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85'
-```
-
-##### 响应示例
-
-```json
-{
-    "action": "get",
-    "application": "09ebbf8b-XXXX-XXXX-bd4b-d47c3b38e434",
-    "applicationName": "XXXX",
-    "count": 1,
-    "data": [
-        {
-            "id": "XXXX",
-            "name": "XXXX",
-            "avatar": "https://www.XXXX.com",
-            "description": "XXXX",
-            "membersonly": true,
-            "allowinvites": false,
-            "maxusers": 2000,
-            "owner": "XXXX",
-            "created": 1682588716646,
-            "custom": "",
-            "mute": false,
-            "affiliations_count": 2,
-            "disabled": false,
-            "affiliations": [
-                {
-                    "member": "XXXX"
-                },
-                {
-                    "owner": "XXXX"
-                }
-            ],
-            "public": false
-        }
-    ],
-    "duration": 35,
-    "entities": [],
-    "organization": "XXXX",
-    "properties": {},
-    "timestamp": 1682588814419,
-    "uri": "http://XXXX/XXXX/XXXX/chatgroups/XXXX"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 解散群组
-
-解散指定的群组。解散群组时会同时删除群组下所有的子区（Thread）。
-
-#### HTTP 请求
-
-```http
-DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述              |
-| :-------------- | :----- | :------- | :--------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段           | 类型   | 描述                                                                 |
-| :------------- | :----- | :---------------------- |
-| `data.success` | Bool   | 群组删除结果: <br/> - `true`：删除成功； <br/> - `false`：删除失败。 |
-| `data.groupid` | String | 删除的群组的 ID。                                                    |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://a1.Ago ra.com/XXXX/testapp/chatgroups/6XXXX7'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "delete",
-  "application": "8bXXXX02",
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7",
-  "entities": [],
-  "data": {
-    "success": true,
-    "groupid": "6XXXX7"
-  },
-  "timestamp": 1542363546590,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | resource_not_found | grpID XX does not exist! | 群组不存在 | 使用合法的群 ID。|
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-## 管理群组公告和共享文件
-
-### 获取群组公告
-
-获取指定群组 ID 的群组公告。
-
-#### HTTP 请求
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述             |
-| :-------------- | :----- | :------- | :--------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段                | 类型   | 描述         |
-| :------------------ | :----- | :----------- |
-| `data.announcement` | String | 群公告内容。 |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/announcement'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "get",
-  "application": "8bXXXX02",
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/announcement",
-  "entities": [],
-  "data": {
-    "announcement": "群组公告..."
-  },
-  "timestamp": 1542363546590,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 修改群组公告
-
-修改指定群组 ID 的群组公告。群组公告不能超过 512 个字符。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/announcement
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述             |
-| :-------------- | :----- | :------- | :---------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-##### 请求 body
-
-| 参数            | 类型   | 是否必需 | 描述             |
-| :-------------- | :----- | :------- | :---------------- |
-| `announcement`  | String | 是       | 群组通告内容。   |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段          | 类型   | 描述                                                           |
-| :------------ | :----- | :------------------------------------------------------------- |
-| `data.id`     | String | 群组 ID。                                                      |
-| `data.result` | Bool   | 修改结果：<br/> - `true`：修改成功；<br/>- `false`：修改失败。 |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{"announcement" : "群组公告…"}' 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/announcement'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "post",
-  "application": "8bXXXX02",
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/announcement",
-  "entities": [],
-  "data": {
-    "id": "6XXXX7",
-    "result": true
-  },
-  "timestamp": 1542363546590,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | illegal_argument | announcement is null | 没有传递公告内容。 | 需传递公告内容。 |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-| 403     | FORBIDDEN | announce info length exceeds limit! | 设置公告长度超限制。 | 设置较短的公告 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 获取群组共享文件
-
-可以分页获取指定群组 ID 的群组共享文件。获取文件后，你可以根据响应中返回的文件 ID（`file_id`）调用 [下载群组共享文件](#下载群组共享文件) 接口下载文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除文件。
-
-#### HTTP 请求
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagenum={N}&pagesize={N}
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 查询参数
-
-| 参数       | 类型   | 是否必需 | 描述        |
-| :--------- | :----- | :------- | :---------------- |
-| `pagesize` | String | 否       | 每页期望返回的共享文件数。取值范围为 [1,1000]，默认为 `1000`。若传入的值超过 `1000`，返回 1000 个共享文件。  |
-| `pagenum`  | Int    | 否       | 当前页码。默认从第 1 页开始获取。                              |
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述                  |
-| :-------------- | :----- | :------- | :---------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段              | 类型   | 描述                                                    |
-| :---------------- | :----- | :------------------------------------------------------ |
-| `data` | JSON Array | 响应数据。 |
-|  - `file_id`    | String | 群组共享文件的 ID，若要下载或删除该文件需要使用该参数。 |
-|  - `file_name`  | String | 群组共享文件名称。                                      |
-|  - `file_owner` | String | 上传群组共享文件的用户 ID。                             |
-|  - `file_size`  | Long   | 群组共享文件大小，单位为字节。                          |
-|  - `created`    | Long   | 上传群组共享文件的时间。                                |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files?pagenum=1&pagesize=10'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "get",
-  "application": "8bXXXX02",
-  "params": {
-    "pagesize": ["10"],
-    "pagenum": ["1"]
-  },
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files",
-  "entities": [],
-  "data": [
-    {
-      "file_id": "dbd88d20-e1d4-11ea-95fc-638fc2d59a8d",
-      "file_name": "159781149272586.jpg",
-      "file_owner": "u1",
-      "file_size": 326127,
-      "created": 1597811492594
-    },
-    {
-      "file_id": "b30XXXX4f",
-      "file_name": "159781141836993.jpg",
-      "file_owner": "u1",
-      "file_size": 326127,
-      "created": 1597811424158
-    }
-  ],
-  "timestamp": 1542363546590,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | RestGroupFeignException | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 上传群组共享文件
-
-上传指定群组 ID 的群组共享文件。注意上传的文件大小不能超过 10 MB。
-
-分页获取指定群组 ID 的群组共享文件，然后可以根据响应中返回的文件 ID（`file_id`）调用 [下载群组共享文件](#下载群组共享文件) 接口下载该文件，或调用 [删除群组共享文件](#删除群组共享文件) 接口删除该文件。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数              | 类型   | 是否必需 | 描述            |
-| :---------------- | :----- | :------- | :----------------------------- |
-| `Accept`          | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization`   | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-| `Content-Type`    | String | 是       | 内容类型。请填 `multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW`。      |
-| `file`            | String | 是       | 待上传文件的本地路径。      |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段             | 类型   | 描述                                                       |
-| :--------------- | :----- | :--------------------------------------------------------- |
-| `data.file_url`  | String | 群组共享文件的 URL，在环信即时通讯 IM 服务器上保存的地址。 |
-| `data.group_id`  | String | 群组 ID。                                                  |
-| `data.file_name` | String | 群组共享文件名称。                                         |
-| `data.created`   | Long   | 上传群组共享文件的时间。                                   |
-| `data.file_id`   | String | 群组共享文件 ID，可以用于下载和删除共享文件。              |
-| `data.file_size` | Long   | 群组共享文件大小，单位为字节。                             |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -F file=@/Users/test/image/IMG_3.JPG
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "post",
-  "application": "7fXXXXef",
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files",
-  "entities": [],
-  "data": {
-    "file_url": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files/c6XXXXc0",
-    "group_id": "6XXXX7",
-    "file_name": "img_3.jpg",
-    "created": 1599050554954,
-    "file_id": "c6XXXXc0",
-    "file_size": 13512
-  },
-  "timestamp": 1599050554978,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | RestGroupFeignException | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-| 400     | IllegalArgumentException | file must be provided. | 群共享文件未提供 | 上传群共享文件 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 下载群组共享文件
-
-根据指定的群组 ID 与文件 ID（`file_id`）下载群组共享文件，文件 ID 可从 [获取群组共享文件](#获取群组共享文件) 接口的响应中获取。
-
-#### HTTP 请求
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file_id}
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述      |
-| :-------------- | :----- | :------- | :------------------ |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应体中为上传的文件的内容，例如，上传的文件内容为“Hello world”，响应中返回“Hello world”。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X GET -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files/b30XXXX4f'
-```
-
-##### 响应示例
-
-返回上传的文件的内容。例如，上传的文件内容为“Hello world”，响应中返回“Hello world”。
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | RestGroupFeignException | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 删除群组共享文件
-
-根据指定的群组 ID 与 文件 ID（`file_id`）删除群组共享文件，文件 ID 可从 [获取群组共享文件](#获取群组共享文件) 接口的响应中获取。
-
-#### HTTP 请求
-
-```http
-DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file_id}
-```
-
-##### 路径参数
-
-| 参数      | 类型   | 是否必需 | 描述      |
-| :-------- | :----- | :------- | :-------- |
-| `file_id` | String | 是       | 文件 ID。 |
-
-其他参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述         |
-| :-------------- | :----- | :------- | :--------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。      |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。         |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段            | 类型   | 描述                                                                          |
-| :-------------- | :----- | :---------------------------------------------------------------------------- |
-| `data.group_id` | String | 群组 ID。                                                                     |
-| `data.file_id`  | String | 群组共享文件 ID。在下载共享文件时需提供该参数。                               |
-| `data.result`   | Bool   | 删除群组共享文件的结果：<br/> - `true`：删除成功；<br/> - `false`：删除失败。 |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X DELETE -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files/b30XXXX4f'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "delete",
-  "application": "8bXXXX02",
-  "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/share_files/b30XXXX4f",
-  "entities": [],
-  "data": {
-    "group_id": "6XXXX7",
-    "file_id": "b30XXXX4f",
-    "result": true
-  },
-  "timestamp": 1599049350114,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | RestGroupFeignException | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-## 管理群组成员
-
-环信即时通讯 IM 提供多个接口实现对群组成员的管理，包括添加和移除群组成员、转让群组所有权以及群组黑名单、白名单和禁言列表相关操作。
-
-### 分页获取群成员列表
+## 分页获取群成员列表
 
 可以分页获取群组成员列表。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}&pagesize={N}
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 查询参数
+#### 查询参数
 
 | 参数       | 类型 | 是否必需 | 描述            |
 | :--------- | :--- | :------- | :------------------- |
 | `pagenum`  | Int  | 否       | 当前页码。默认从第 1 页开始获取。                           |
 | `pagesize` | Int  | 否       | 每页期望返回的群组成员数量。取值范围为 [1,1000]。默认为 `1000`。若传入的值大于 `1000`，则获取 1000 个群组成员。 |
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :-------------------------- |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -1466,9 +101,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -1476,7 +111,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -1504,7 +139,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagenum=2&pagesize=2
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -1515,21 +150,21 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagenum=2&pagesize=2
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 添加单个群组成员
+## 添加单个群组成员
 
 每次添加一个群成员。若添加的用户已是群成员，则添加失败，返回错误。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :------------ |
@@ -1537,9 +172,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -1554,9 +189,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -1564,7 +199,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user4'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -1585,7 +220,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -1599,21 +234,21 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 批量添加群组成员
+## 批量添加群组成员
 
 一次为群组添加多个成员，每次最多可以添加 60 位成员。如果所有用户均已是群成员，添加失败，返回错误。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :------------------- |
@@ -1621,15 +256,15 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。      |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-##### 请求 body
+#### 请求 body
 
 | 参数        | 类型  | 是否必需 | 描述     |
 | :---------- | :---- | :------- | :---------- |
 | `usernames` | Array | 是   | 要添加为群组成员的用户 ID 数组，每次最多可传 60 个用户 ID。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -1643,9 +278,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -1657,7 +292,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
  }' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -1677,7 +312,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -1692,30 +327,30 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 移除单个群组成员
+## 移除单个群组成员
 
 从群中移除指定成员。如果被移除用户不是群成员，将移除失败，并返回错误。移除后，该成员也会被移除其在该群组中加入的子区。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述         |
 | :-------------- | :----- | :------- | :---------------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。     |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -1730,9 +365,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -1740,7 +375,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user3'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -1761,7 +396,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -1775,17 +410,17 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 批量移除群组成员
+## 批量移除群组成员
 
 一次移除多名群成员。如果所有被移除用户均不是群成员，将移除失败，并返回错误。移除后，这些成员也会被移除其在该群组中加入的子区。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members}
 ```
 
-##### 路径参数
+#### 路径参数
 
 | 参数      | 类型   | 是否必需 | 描述                                                                                                            |
 | :-------- | :----- | :------- | :-------------------------------------------------------------------------------------------------------------- |
@@ -1793,16 +428,16 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述           |
 | :-------------- | :----- | :------- | :-------------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -1819,9 +454,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -1829,7 +464,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/ttXXXX81,user2,user3'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -1865,7 +500,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -1879,23 +514,23 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 设置群成员自定义属性
+## 设置群成员自定义属性
 
 群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
 
 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述            |
 | :-------------- | :----- | :------- | :----------------------------------- |
@@ -1903,15 +538,15 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-##### 请求 body
+#### 请求 body
 
 | 参数       | 类型 | 是否必需 | 描述        |
 | :--------- | :--- | :------- | :----------------------------------------- |
 | `metaData` | JSON | 是       | 要设置的群成员自定义属性，为 key-value 键值对。对于单个键值对：<br/> - key 表示属性名称，不能超过 16 字节。<br/> - value 表示属性值，不能超过 512 个字节。若 value 设置为空字符串即删除该自定义属性。<Container type="notice" title="注意">单个群成员的自定义属性总长度不能超过 4 KB。</Container> |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -1923,9 +558,9 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -1940,7 +575,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/user/XXXX' \
 }'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -1952,7 +587,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/user/XXXX' \
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -1964,21 +599,21 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/user/XXXX' \
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 获取单个群成员的所有自定义属性
+## 获取单个群成员的所有自定义属性
 
 获取单个群成员的所有自定义属性。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述           |
 | :-------------- | :----- | :------- | :---------------------------- |
@@ -1986,9 +621,9 @@ GET https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。     |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -2000,9 +635,9 @@ GET https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -2013,7 +648,7 @@ curl -L -X GET 'https://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup
 --data-raw ''
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -2025,7 +660,7 @@ curl -L -X GET 'https://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -2036,21 +671,21 @@ curl -L -X GET 'https://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 根据属性 key 获取多个群成员的自定义属性
+## 根据属性 key 获取多个群成员的自定义属性
 
 根据指定的属性 key 获取多个群成员的自定义属性。每次最多可获取 10 个群成员的自定义属性。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/get
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :---------------------------- |
@@ -2058,16 +693,16 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/get
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。      |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-##### 请求 body
+### 请求 body
 
 | 参数         | 类型       | 是否必需 | 描述                     |
 | :----------- | :--------- | :------- | :--------------------------------- |
 | `targets`    | JSON Array | 是       | 要获取自定义属性的群成员的用户 ID。一次最多可传 10 个用户 ID。                                |
 | `properties` | JSON Array | 是       | 要获取自定义属性的 key 的数组。若该参数设置为空数组或不传，则获取这些群成员的所有自定义属性。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -2079,9 +714,9 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/get
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -2095,7 +730,7 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/get'\
 }'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -2112,7 +747,7 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/get'\
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -2123,29 +758,29 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/get'\
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 获取群管理员列表
+## 获取群管理员列表
 
 获取群组管理员列表。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述            |
 | :-------------- | :----- | :------- | :-------------------------------- |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -2157,9 +792,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -2167,7 +802,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -2184,7 +819,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -H 'Authorization: B
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -2195,35 +830,35 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -H 'Authorization: B
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 添加群管理员
+## 添加群管理员
 
 将一个普通群成员设为为群管理员。群管理员有管理黑名单、禁言等权限。最多可以添加 99 个群管理员。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述    |
 | :-------------- | :----- | :------- | :-------- |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-##### 请求 body
+#### 请求 body
 
 | 参数       | 类型   | 是否必需 | 描述                        |
 | :--------- | :----- | :------- | :-------------------------- |
 | `newadmin` | String | 是       | 要添加的新管理员的用户 ID。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -2237,9 +872,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -2247,7 +882,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -d '{"newadmin":"user1"}' -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -2267,7 +902,7 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -d '{"newadmin":"us
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -2279,29 +914,29 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -d '{"newadmin":"us
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 移除群管理员
+## 移除群管理员
 
 将用户的角色从群管理员降为群普通成员。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin/{username}
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :----------- |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -2314,9 +949,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin/{usernam
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -2324,7 +959,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin/{usernam
 curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin/user1 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -2343,7 +978,7 @@ curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin/user1 -H 'Authori
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -2355,21 +990,21 @@ curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin/user1 -H 'Authori
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 转让群组
+## 转让群组
 
 修改群主为同一群组中的其他成员。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```
 
-##### 路径参数
+#### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :------------- |
@@ -2377,15 +1012,15 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-##### 请求 body
+#### 请求 body
 
 | 参数       | 类型   | 描述                      |
 | :--------- | :----- | :------------------------ |
 | `newowner` | String | 群组的新群主的用户 ID。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -2397,9 +1032,9 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -2407,7 +1042,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{     "newowner": "user2"   }' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -2425,7 +1060,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 

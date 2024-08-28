@@ -344,8 +344,24 @@ const documentSidebar = [
       },
       { text: '用户属性', link: 'userprofile.html' },
       { text: '用户关系管理', link: 'user_relationship.html' },
-      { text: '群组', link: 'group.html' },
-      { text: '聊天室', link: 'chatroom.html' },
+      { 
+        text: '群组',
+        children: [
+          { text: '管理群组', link: 'group_manage.html' },
+          { text: '管理群组文件', link: 'group_file.html' },
+          { text: '管理群组成员', link: 'group_member.html' },
+          { text: '管理子区', link: 'group_thread.html' }
+        ]
+      },
+      { 
+        text: '聊天室',
+        children: [
+          { text: '管理超级管理员', link: 'chatroom_superadmin.html' },
+          { text: '管理聊天室', link: 'chatroom_manage.html' },
+          { text: '管理聊天室属性', link: 'chatroom_attribute.html' },
+          { text: '管理聊天室成员', link: 'chatroom_member.html' }
+        ]
+      },
       { text: '在线状态订阅', link: 'presence.html' },
       { text: '消息表情回复', link: 'reaction.html' },
       { text: '离线推送', link: 'push.html' },
