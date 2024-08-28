@@ -569,6 +569,10 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&
 | `pagesize`     | String | 否       | 每页获取的群组数量。取值范围为 [1,20]，默认值为 `5`。若传入的值大于 `20`，每页仍返回 `20` 个群组。|
 | `pagenum`       | String | 否       | 当前页码。默认从第 `0` 页开始获取。 |
 
+:::tip
+若 `pagesize` 和 `pagenum` 参数均不设置，服务器按照用户加入群组的时间的倒序返回最新加入的 500 个群组。
+:::
+
 ##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
@@ -722,7 +726,9 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ## 获取群组详情
 
-可以获取一个或多个群组的详情，最多可获取 100 个群组的详情。当获取多个群组的详情时，返回所有存在的群组的详情；对于不存在的群组，返回 “group id doesn’t exist”。
+可以获取一个或多个群组的详情，最多可获取 100 个群组的详情，每个群组最多可返回 10,000 个群成员（包括群主）。
+
+当获取多个群组的详情时，返回所有存在的群组的详情；对于不存在的群组，返回 “group id doesn’t exist”。
 
 #### HTTP 请求
 
