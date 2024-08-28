@@ -104,7 +104,7 @@
 | 回调   | 功能介绍详见[回调](/document/server-side/callback.html)。    | 预付费   | 1000 元/月   | —     |
 | 用户在线状态（Presence）订阅   | 功能介绍详见[用户在线状态订阅](/document/server-side/presence.html)。     | 预付费   | 1000 元/月     | —   |
 | 消息表情回复 Reaction   | 功能介绍详见[消息表情回复](/document/server-side/reaction.html)。    | 预付费   | 600 元/月     | —    |
-| 子区 Thread    | 功能介绍详见[管理子区](/document/server-side/group.html#管理子区)。        | 预付费   | 600 元/月    | —     |
+| 子区 Thread    | 功能介绍详见[管理子区](/document/server-side/group_thread.html#管理子区)。        | 预付费   | 600 元/月    | —     |
 | 消息举报       | 功能介绍详见[消息举报](/document/android/moderation.html)。       | 预付费   | 500 元/月     | —   |
 | 回调异常缓存     | 功能介绍详见[补发回调存储信息接口描述](/document/server-side/callback.html#补发回调存储信息接口描述)。      | 预付费   | 2000 元/月  | 2000 元/月            |
 | 消息人工审核     | 功能介绍详见[消息人工审核](https://docs-im.easemob.com/ccim/moderation/censor)。       | 预付费   |1000 元/月     | 1000 元/月            |

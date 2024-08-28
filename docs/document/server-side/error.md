@@ -47,8 +47,8 @@
 | 用户属性            | 设置/删除/获取用户属性、获取 app 下用户属性总大小。 | 关于错误码，详见[用户属性模块](userprofile.html)中各接口对应的错误码列表。 |
 | 用户关系            | 添加/移除好友、设置好友备注、获取好友列表和导入好友列表。 | 关于错误码，详见[用户关系管理模块](user_relationship.html)中各接口对应的错误码列表。|
 | 消息                | 消息相关功能，包括发送消息、上传/下载文件、撤回消息、删除漫游消息、修改/导入消息。  | 详见以下 API 对应的错误码列表：<br/> - [发送单聊消息](message_single.html) <br/> - [发送群聊消息](message_group.html) <br/> - [发送聊天室消息](message_chatroom.html)<br/> - [上传和下载文件](message_download.html) <br/> - [撤回消息和单向删除会话](message_recall.html)<br/> - [单向删除漫游消息](message_delete.html)<br/> - [修改文本或自定义消息](message_modify_text_custom.html) <br/> - [导入消息](message_import.html)  |
-| 群组                | 群组管理、群成员管理、子区管理。        | 关于错误码，详见[群组模块](group.html)中各接口对应的错误码列表。 |
-| 聊天室              | 聊天室管理、聊天室属性管理、聊天室成员管理。  | 关于错误码，详见[聊天室模块](chatroom.html)中各接口对应的错误码列表。 |
+| 群组                | 群组管理、群成员管理、子区管理。        | 关于错误码，详见[群组管理](group_manage.html)、[群组文件管理](group_file.html)、[群成员管理](group_member.html)和[子区管理](group_thread.html)中各接口对应的错误码列表。 |
+| 聊天室              | 聊天室管理、聊天室属性管理、聊天室成员管理。  | 关于错误码，详见[超级管理员管理](chatroom_superadmin.html)、[聊天室管理](chatroom_manage.html)、[聊天室属性管理](chatroom_attribute.html)和[聊天室成员管理](chatroom_member.html)中各接口对应的错误码列表。 |
 | 在线状态订阅    | 设置用户在线状态、订阅/取消订阅/查询用户在线状态、查询单个群组的在线成员数量。  | 关于错误码，详见[在线状态订阅](presence.html)中各接口对应的错误码列表。           |
 | 消息表情回复（Reaction）   | 创建/追加/删除 Reaction、根据消息 ID 获取 Reaction、根据消息 ID 和表情 ID 获取 Reaction 信息。 | 关于错误码，详见[消息表情回复](reaction.html)中各接口对应的错误码列表。  |
 | 离线推送    | 绑定/解除绑定推送信息、查询推送绑定信息、设置离线推送时显示的昵称、展示方式、免打扰、通知首选语言、使用推送模板。| 关于错误码，详见[离线推送](push.html)中各接口对应的错误码列表。  |
