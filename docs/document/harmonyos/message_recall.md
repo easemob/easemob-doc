@@ -27,7 +27,7 @@
 
 ### 撤回消息
 
-调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessageRecalled` 事件。
+调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessageRecalled` 事件。对于附件类型消息，包括图片、音频和视频和文件消息，撤回消息后，消息附件也相应删除。
 
 ```TypeScript
 ChatClient.getInstance().chatManager()?.recallMessage(message, ext).then(()=> {
