@@ -199,6 +199,12 @@ conn.addEventHandler("handlerId", {
   onTokenExpired: () => {
     console.log("onTokenExpired");
   },
+  onOfflineMessageSyncStart: () => {
+    console.log("onOfflineMessageSyncStart");
+  },
+  onOfflineMessageSyncFinish: () => {
+    console.log("onOfflineMessageSyncFinish");
+  },
 });
 ```
 

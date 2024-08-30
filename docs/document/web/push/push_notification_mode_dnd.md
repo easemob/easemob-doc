@@ -120,7 +120,9 @@ WebIM.conn.getSilentModeForAll()
 
 ## 设置单个会话的推送通知
 
-你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知设置，示例代码如下：
+你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知设置，即推送通知方式或免打扰时间（时长或时间段）示例代码如下。
+
+调用该接口后，你的其他设备会收到 `setSilentModeForConversation` 事件。
 
 ```javascript
 /**
@@ -207,6 +209,8 @@ WebIM.conn.getSilentModeForConversations(params)
 ## 清除单个会话的推送通知方式的设置
 
 你可以调用 `clearRemindTypeForConversation` 方法清除指定会话的推送通知方式的设置。清除后，默认情况下，此会话会继承 app 的设置。
+
+调用该接口后，你的其他设备会收到 `removeSilentModeForConversation` 事件。
 
 示例代码如下：
 

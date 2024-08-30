@@ -2,6 +2,25 @@
 
 <Toc />
 
+## 版本 V4.9.0 2024-08-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](overview.html#连接状态相关): `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish`。
+- [IM SDK] 原消息置顶接口 `pinMessage` 和 `unpinMessage` [增加对单聊会话中置顶消息的支持](message_pin.html)。接口无变化。
+- [IM SDK] `onMultiDeviceEvent` 新增以下两个离线推送相关的多设备通知事件： 
+  - `setSilentModeForConversation`：若你调用了 `setSilentModeForConversation` API [设置指定会话的推送通知方式或免打扰时间](/document/web/push/push_notification_mode_dnd.html#设置单个会话的推送通知)，其他设备会收到该事件。
+  - `removeSilentModeForConversation`：若你调用了 `clearRemindTypeForConversation` API [清除指定会话的推送通知方式的设置](/document/web/push/push_notification_mode_dnd.html#清除单个会话的推送通知方式的设置)，其他设备会收到该事件。
+
+### 优化
+
+- [IM SDK] IM 重连逻辑优化。
+- [IM SDK] 增加请求 DNS 失败的回调。
+
+### 修复
+- [IM SDK] 修复一些类型问题。
+- [IM SDK] 加群事件 `requestToJoin`（群组和群管理员收到）新增申请原因字段 `reason`。 
+
 ## 版本 V4.8.1 Dev 2024-07-17（开发版）
 
 ### 新增特性

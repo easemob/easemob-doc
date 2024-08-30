@@ -133,7 +133,13 @@ conn.addEventHandler("handlerId", {
         break;
       case "unMarkConversation":
         //当前用户在其他设备上取消标记会话。
+        break;
+      case "setSilentModeForConversation":
+        //当前用户在其他设备上取消标记会话。
         break;  
+      case "removeSilentModeForConversation":
+        //当前用户在其他设备上取消标记会话。
+        break;        
       default:
         break;
     }

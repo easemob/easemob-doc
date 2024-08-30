@@ -192,6 +192,18 @@ EMConnectionListener connectionListener = new EMConnectionListener() {
     public void onTokenExpired() {
 
     }
+    @Override
+    // 连接成功，开始从服务器拉取离线消息时触发。
+   // 注意：如果本次登录服务器没有离线消息，不会触发该回调。
+    public void onOfflineMessageSyncStart() {
+
+    }
+    @Override
+    // 离线用户上线后从服务器拉取离线消息结束时触发。
+   // 注意：如果再拉取离线过程中因网络或其他原因导致连接断开，不会触发该回调。
+    public void onOfflineMessageSyncFinish() {
+
+    }
 };
 // 注册连接状态监听
 EMClient.getInstance().addConnectionListener(connectionListener);
