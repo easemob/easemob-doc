@@ -166,6 +166,90 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
 }
 ```
 
+## 以异步方式向单个用户发送推送通知
+
+调用该接口以异步方式向单个用户发送推送通知。
+
+### HTTP 请求
+
+```http
+POST {host}/{org}/{app}/push/async/{target}
+```
+
+#### 路径参数
+
+| 字段      | 类型 | 描述           | 是否必需 |
+| :------------ | :--- | :------------------------ | :------- |
+| `target`     | String | 接收推送通知的用户 ID。      | 是       |
+
+其它参数及描述详见 [公共参数](#公共参数)。
+
+#### 请求 header
+
+| 参数     | 类型   | 描述       | 是否必需 |
+| :-------------- | :----- | :------------------ | :------- |
+| `Content-Type`  | String | 内容类型：`application/json`     | 是    |
+| `Authorization` | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是       |
+
+#### 请求 body
+
+| 字段      | 类型 | 描述           | 是否必需 |
+| :------------ | :--- | :------------------------ | :------- |
+| `strategy`    | Int  | 推送策略：<br/> -`0`：第三方厂商通道优先，失败时走环信通道。<br/> - `1`：只走环信通道：若用户在线，则直接推送；若用户离线，消息会保留一段时间（视购买的套餐包而定），等用户上线后向其推送消息。若用户在超过消息存储期限时仍为上线，则丢弃消息。<br/> -（默认）`2`：只走第三方厂商通道：若用户离线，消息保留时间视不同厂商而定。若推送失败，直接丢弃推送消息。<br/> - `3`：在线走环信通道，离线走第三方厂商通道。如果厂商推送失败，则等待用户上线后通过环信通道下发。<br/> - `4`：只走环信通道且只推在线用户。离线用户收不到推送通知。 | 否       |
+| `pushMessage` | JSON | 推送通知。关于通知内容，请查看 [配置推送通知](push_notification_config.html)。 | 是       |
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段         | 类型   | 描述                                     |
+| :----------- | :----- | :--------------------------------------- |
+| `data`       | Object | 异步推送的结果，即成功或失败。           |
+| `data.data`         | String | 推送通知的内容。               |
+| `data.pushStatus` | String | 推送状态：`ASYNC_SUCCESS` 表示推送成功。 |
+| `data.desc`       | String | 推送结果的相关描述。                     |
+
+其他参数及说明详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+```shell
+将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl -X POST 'http://XXXX/XXXX/XXXX/push/async/test1' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-H 'Content-Type: application/json' \
+-d '{
+    "strategy": 3,
+    "pushMessage": {
+        "title": "环信推送",
+        "content": "你好，欢迎使用环信推送服务",
+        "sub_title": "环信"
+     }
+}'
+```
+
+#### 响应示例
+
+```json
+{
+    "timestamp": 1723512536934,
+    "data": [
+       {
+            "pushStatus": "ASYNC_SUCCESS",
+            "data": "",
+            "desc": "success"
+       }
+   ],
+    "duration": 7
+}
+```
+
 ## 以异步方式批量发送推送通知
 
 调用该接口以异步方式为指定的单个或多个用户进行消息推送。
