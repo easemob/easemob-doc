@@ -57,10 +57,10 @@
 
 ### 设置消息撤回监听
 
-你可以设置消息撤回监听，通过 `messagesInfoDidRecall` 事件监听发送方对已接收的消息的撤回。
+你可以设置消息撤回监听，通过 `messagesInfoDidRecall` 事件监听发送方对已接收的消息的撤回。该事件的 `EMRecallMessageInfo` 中的 `recallBy` 为消息撤回者的用户 ID，`recallMessageId` 为撤回的消息 ID，`ext` 为扩展信息，`conversationId` 为撤回的消息所属的会话 ID。
 
-- 若用户在线接收了消息，消息撤回时，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为撤回的消息的内容，`recallMessageId` 属性返回撤回的消息的 ID。
-- 若消息发送和撤回时接收方离线，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为空，`recallMessageId` 属性返回撤回的消息的 ID。
+- 若用户在线接收了消息，消息撤回时，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为撤回的消息。
+- 若消息发送和撤回时接收方离线，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为空。
 
 ```objectivec
 - (void)messagesInfoDidRecall:(NSArray<EMRecallMessageInfo *> * _Nonnull)aRecallMessagesInfo;

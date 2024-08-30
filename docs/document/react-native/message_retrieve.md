@@ -12,7 +12,6 @@
 
 环信即时通讯 IM React Native SDK 通过 `ChatManager` 和 `ChatConversation` 类实现对会话和消息的管理。
 
-- `fetchHistoryMessages`：从服务器分页获取指定会话的历史消息；
 - `getMessage`：根据消息 ID 获取本地消息；
 - `getMsgsWithMsgType`：获取本地指定会话中特定类型的消息；
 - `getMsgWithTimestamp` ：获取本地指定会话中一定时间段内的消息；
@@ -72,33 +71,6 @@ ChatClient.getInstance()
     console.log("fetchHistoryMessagesByOptions is success.", res);
   })
   .catch();
-```
-
-此外，你也可以调用 `fetchHistoryMessages` 方法从服务器分页获取指定会话的历史消息。为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
-
-```typescript
-// 会话 ID。
-const convId = "convId";
-// 会话类型。详见 `ChatConversationType` 枚举类型。
-const convType = ChatConversationType.PeerChat;
-// 获取的最大消息数目。
-const pageSize = 10;
-// 搜索的起始消息 ID。
-const startMsgId = "";
-// 消息搜索方向
-const direction = ChatSearchDirection.UP;
-ChatClient.getInstance()
-  .chatManager.fetchHistoryMessages(convId, chatType, {
-    pageSize,
-    startMsgId,
-    direction,
-  })
-  .then((messages) => {
-    console.log("get message success: ", messages);
-  })
-  .catch((reason) => {
-    console.log("load conversions fail.", reason);
-  });
 ```
 
 你可以调用 `getConversation` 方法从本地获取指定会话 ID 的会话，如果不存在可以创建。

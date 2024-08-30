@@ -2,9 +2,8 @@
 
 消息置顶指将会话中的消息固定在会话顶部，方便会话中的所有用户快速查看重要消息。
 
-目前，**群组和聊天室**聊天支持对消息置顶和取消置顶，单聊消息不支持该功能。
-
-**若使用该功能，你需要将 IM SDK 升级至 4.5.0 版本并联系环信商务开通。**
+- 若使用**群组和聊天室**的消息置顶功能，你需要将 IM SDK 升级至 4.5.0 版本并联系环信商务开通。
+- 若要使用**单聊、群组和聊天室**的消息置顶功能，你需要将 IM SDK 升级至 4.9.0 版本并联系环信商务开通。
 
 ## 前提条件
 
@@ -23,9 +22,9 @@
 
 ## 置顶消息
 
-你可以调用 `EMChatManager#pinMessage` 方法在群组或聊天室聊天中置顶消息。消息置顶状态变化后，群组或聊天室会话中的其他成员会收到 `EMChatManagerDelegate#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMChatManagerDelegate#onMessagePinChanged` 事件。
+你可以调用 `EMChatManager#pinMessage` 方法置顶消息。消息置顶状态变化后，会话中的其他成员会收到 `EMChatManagerDelegate#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMChatManagerDelegate#onMessagePinChanged` 事件。
 
-在群组和聊天室会话中，支持多个用户置顶同一条消息，最新的消息置顶信息会覆盖较早的信息，即 `EMMessagePinInfo` 的置顶消息的操作者的用户 ID 和置顶时间为最新置顶操作的相关信息。
+在会话中，支持多个用户置顶同一条消息，最新的消息置顶信息会覆盖较早的信息，即 `EMMessagePinInfo` 的置顶消息的操作者的用户 ID 和置顶时间为最新置顶操作的相关信息。
 
 若消息在本地存储，而在服务端因过期而删除，则消息置顶失败。
 
@@ -41,9 +40,9 @@ EMClient.shared().chatManager?.pinMessage("messageId", completion: { message, er
 
 ## 取消置顶消息
 
-你可以调用 `EMChatManager#unpinMessage` 方法在群组或聊天室聊天中取消置顶消息。与置顶消息相同，取消置顶消息后，群组或聊天室会话中的其他成员会收到 `EMChatManagerDelegate#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMChatManagerDelegate#onMessagePinChanged` 事件。
+你可以调用 `EMChatManager#unpinMessage` 方法取消置顶消息。与置顶消息相同，取消置顶消息后，会话中的其他成员会收到 `EMChatManagerDelegate#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMChatManagerDelegate#onMessagePinChanged` 事件。
 
-群组或聊天室中的所有成员均可取消置顶消息，不论该消息是由哪个成员进行置顶的。取消置顶消息后，`EMMessagePinInfo` 中的信息为空，该会话的置顶消息列表中也不再包含该消息。
+单聊、群组或聊天室中的所有成员均可取消置顶消息，不论该消息是由哪个成员进行置顶的。取消置顶消息后，`EMMessagePinInfo` 中的信息为空，该会话的置顶消息列表中也不再包含该消息。
 
 ```swift
 EMClient.shared().chatManager?.unpinMessage("messageId", completion: { message, err in

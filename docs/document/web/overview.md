@@ -199,6 +199,16 @@ conn.addEventHandler("handlerId", {
   onTokenExpired: () => {
     console.log("onTokenExpired");
   },
+  // 连接成功，开始从服务器拉取离线消息时触发。
+  // 注意：如果本次登录服务器没有离线消息，不会触发该回调。
+  onOfflineMessageSyncStart: () => {
+    console.log("onOfflineMessageSyncStart");
+  },
+  // 离线用户上线后从服务器拉取离线消息结束时触发。
+  // 注意：如果再拉取离线过程中因网络或其他原因导致连接断开，不会触发该回调。
+  onOfflineMessageSyncFinish: () => {
+    console.log("onOfflineMessageSyncFinish");
+  },
 });
 ```
 

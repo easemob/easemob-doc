@@ -36,7 +36,6 @@
 | getMsgs  | 从本地数据库获取指定会话中一定数量的消息。   |
 | getMsgsWithKeyword  | 从本地数据库获取会话中的指定用户发送的一定数量的特定消息。   |
 | getMsgWithTimestamp  | 从本地数据库获取指定会话在一段时间内的消息。   |
-| fetchHistoryMessages  | 分页获取指定会话的历史消息。   |
 | fetchHistoryMessagesByOptions  | 根据消息拉取参数配置从服务器分页获取指定会话的历史消息。   |
 | removeMessagesFromServerWithMsgIds  | 根据消息 ID 单向删除漫游消息。   |
 | removeMessagesFromServerWithTimestamp  | 根据消息时间戳单向删除漫游消息。   |

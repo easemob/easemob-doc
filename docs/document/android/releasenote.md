@@ -2,11 +2,43 @@
 
 <Toc />
 
+## 版本 V4.9.0 Dev 2024-08-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](/document/android/overview.html#连接状态相关): `EMConnectionListener#onOfflineMessageSyncStart` 和 `EMConnectionListener#onOfflineMessageSyncFinish`。
+- [IM SDK] 新增 `EMGroupManager#asyncCheckIfInMuteList` 接口，可以查看当前用户是否在群组禁言名单中。
+- [IM SDK] 原消息置顶接口 `EMChatManager#asyncPinMessage` 和 `EMChatManager#asyncUnPinMessage` [增加对单聊会话中置顶消息的支持](message_pin.html)。接口无变化。
+- [IM SDK] 新增 `EMRecallMessageInfo#getConversationId` 接口，在撤回消息的 `messagesInfoDidRecall` 事件中[返回被撤回的消息所属的会话 ID](message_recall.html#设置消息撤回监听)。
+
+### 优化
+
+- [IM SDK] `EMMessage#getBody` 增加同步锁。
+- [IM SDK] 更新 facility 库到 0.0.60.7。
+- [IM SDK] 聊天室消息聚合的处理。
+- [IM SDK] `EMClient#check()` 接口废弃，标记为 Deprecated。
+- [IM SDK] 移除 `EMConversationType#DiscussionGroup` 和 `EMConversationType#HelpDesk` 类型。
+
+### 修复
+
+[IM SDK] 部分场景下，多设备离线消息未读数不同步的问题。
+
+### [单群聊 UIKit](/uikit/chatuikit/android/chatfeature_message.html#消息置顶)
+
+- **新增**：消息置顶功能支持单聊会话。
+- **修复**：
+  - 一些内存泄漏问题。
+  - 接收方缩略图展示错乱问题。
+
 ## 版本 V4.8.2 Dev 2024-07-26（开发版）
 
 ### 修复
 
 修复部分场景下 `EMCustomConversationFilter#filter` 回调出的 `conversation` 对象由于内部成员变量缺失引起的崩溃问题。
+
+### CallKit
+
+[添加声网私有化环境接口，对外暴露 RTCEngine](easecallkit.html#私有化部署)。
 
 ## 版本 V4.8.1 Dev 2024-07-18（开发版）
 

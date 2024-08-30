@@ -351,6 +351,48 @@ public void onRemoteUserJoinChannel(String channelName, String userName, int uid
 }
 ```
 
+### 私有化部署
+
+CallKit 4.8.2 及更高版本支持私有化部署，包括初始化和初测监听器。
+
+#### 初始化
+
+配置私有化 AgoraAppId。其他可配置的选项，详见本文档中的[初始化](https://doc.easemob.com/document/android/easecallkit.html#初始化)一节。
+
+```kotlin
+EaseCallKitConfig().apply {
+    ……
+    agoraAppId = "2d4f114e22304cee8d31ae909f3289d2"
+    ……
+    EaseCallKit.getInstance().init(context, this)
+}
+```
+
+#### 注册监听器
+
+监听 `com.hyphenate.easecallkit.base.EaseCallKitListener#onRtcEngineCreated` 事件，在 RTC 引擎创建的回调里进行私有化配置。详见 [API 参考](https://doc.shengwang.cn/api-ref/rtc/android/API/toc_network#api_irtcengine_setlocalaccesspoint)。
+
+```kotlin
+private val callKitListener by lazy { object :EaseCallKitListener {
+        ……
+
+        override fun onRtcEngineCreated(engine: RtcEngine?) {
+            var configuration= LocalAccessPointConfiguration().apply {
+                        //设置你的私有化地址
+                        ipList = arrayListOf<String>().apply { add("101.111.111.111" )}
+                        verifyDomainName = "ap.955011.agora.local"
+                        mode = LOCAL_RPOXY_LOCAL_ONLY
+                      }
+            engine?.setLocalAccessPoint(configuration)
+        }
+
+        ……
+
+    } }
+
+EaseCallKit.getInstance().setCallKitListener(callKitListener)
+```
+
 ## 参考
 
 ### 获取声网 token

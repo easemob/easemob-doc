@@ -2,9 +2,8 @@
 
 消息置顶指将会话中的消息固定在会话顶部，方便会话中的所有用户快速查看重要消息。
 
-目前，**群组和聊天室**聊天支持对消息置顶和取消置顶，单聊消息不支持该功能。
-
-**若使用该功能，你需要将 IM SDK 升级至 4.6.0 或以上版本并联系环信商务开通。**
+- 若使用**群组和聊天室**的消息置顶功能，你需要将 IM SDK 升级至 4.6.0 版本并联系环信商务开通。
+- 若要使用**单聊、群组和聊天室**的消息置顶功能，你需要将 IM SDK 升级至 4.9.0 版本并联系环信商务开通。
 
 ## 前提条件
 
@@ -25,16 +24,16 @@
 
 ### 置顶消息
 
-你可以调用 `pinMessage` 方法在群组或聊天室聊天中置顶消息。消息置顶状态变化后，群组或聊天室会话中的其他成员会收到 `onMessagePinEvent` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `onMessagePinEvent` 事件。
+你可以调用 `pinMessage` 方法在会话中置顶消息。消息置顶状态变化后，会话中的其他成员会收到 `onMessagePinEvent` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `onMessagePinEvent` 事件。
 
-在群组和聊天室会话中，支持多个用户置顶同一条消息，最新的消息置顶信息会覆盖较早的信息，即 `PinnedMessageInfo` 的置顶消息的操作者的用户 ID 和置顶时间为最新置顶操作的相关信息。
+在会话中，支持多个用户置顶同一条消息，最新的消息置顶信息会覆盖较早的信息，即 `PinnedMessageInfo` 的置顶消息的操作者的用户 ID 和置顶时间为最新置顶操作的相关信息。
 
 对于单个会话来说，默认可置顶 20 条消息。你可以联系环信商务提升该上限，最大可调整至 100。
 
 ```javascript
 
 const options = {
-   // 会话类型：群组聊天和聊天室分别为 `groupChat` 和 `chatRoom`。
+   // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
    conversationType: 'groupChat',
    // 会话 ID
    conversationId: 'conversationId',
@@ -51,14 +50,14 @@ conn.pinMessage(options).then(()=>{
 
 ### 取消置顶消息
 
-你可以调用 `unpinMessage` 方法在群组或聊天室聊天中取消置顶消息。与置顶消息相同，取消置顶消息后，群组或聊天室会话中的其他成员会收到 `onMessagePinEvent` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `onMessagePinEvent` 事件。
+你可以调用 `unpinMessage` 方法在会话中取消置顶消息。与置顶消息相同，取消置顶消息后，会话中的其他成员会收到 `onMessagePinEvent` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `onMessagePinEvent` 事件。
 
-群组或聊天室中的所有成员均可取消置顶消息，不论该消息是由哪个成员置顶。取消置顶消息后，该会话的置顶消息列表中也不再包含该消息。
+会话中的所有成员均可取消置顶消息，不论该消息是由哪个成员置顶。取消置顶消息后，该会话的置顶消息列表中也不再包含该消息。
 
 ```javascript
 
 const options = {
-   // 会话类型：群组聊天和聊天室分别为 `groupChat` 和 `chatRoom`。
+   // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
    conversationType: 'groupChat',
    // 会话 ID
    conversationId: 'conversationId',
@@ -88,7 +87,7 @@ conn.unpinMessage(options).then(()=>{
 const options = {
    // 会话 ID
    conversationId: 'conversationId',
-   // 会话类型：群组聊天和聊天室分别为 `groupChat` 和 `chatRoom`。
+   // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
    conversationType: 'groupChat',
    // 每页期望获取的置顶消息数量。取值范围为 [1,50]，默认为 `10`。
    pageSize: 20,

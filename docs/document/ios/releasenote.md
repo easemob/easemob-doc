@@ -2,6 +2,26 @@
 
 <Toc />
 
+## 版本 V4.9.0 Dev 2024-08-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](overview.html#连接状态相关): `EMClientDelegate#onOfflineMessageSyncStart` 和`EMClientDelegate#onOfflineMessageSyncFinish`。
+- [IM SDK] 新增 `IEMGroupManager#isMemberInMuteListFromServerWithGroupId:completion:` 接口，可以查看当前用户是否在群组禁言名单中。
+- [IM SDK] 原消息置顶接口 `IEMChatManager#pinMessage` 和 `IEMChatManager#unpinMessage` [增加对单聊会话中置顶消息的支持](message_pin.html)。接口参数无变化。
+- [IM SDK] 新增 `EMRecallMessageInfo#conversationId` 属性，在撤回消息的 `messagesInfoDidRecall` 事件中[返回被撤回的消息所属的会话 ID](message_recall.html#设置消息撤回监听)
+
+### 优化
+
+- [IM SDK] 调用 `EMClient#applicationDidEnterBackground` 接口时，立即断开与服务器的连接，再申请后台任务，而不是先申请后台任务，在后台任务中断开连接。
+- [IM SDK] 支持聊天室消息聚合功能。
+
+### 修复
+
+- [IM SDK] 修复多线程同时调用获取会话列表时，偶现会话未读数不正确的问题。
+- [IM SDK] 修复调用 [REST API](/document/server-side/group_member.html#转让群组) 转让群主后，SDK 上原群主离开群失败的问题。
+- [IM SDK] 修复开启多设备登录后，偶现的收到会话已读多设备同步事件，导致未读数不同步的问题。
+
 ## 版本 V4.8.1 Dev 2024-07-26（开发版）
 
 ### 修复
