@@ -18,6 +18,7 @@
 - [IM SDK] 增加请求 DNS 失败的回调。
 
 ### 修复
+
 - [IM SDK] 修复一些类型问题。
 - [IM SDK] 加群事件 `requestToJoin`（群组和群管理员收到）新增申请原因字段 `reason`。 
 
