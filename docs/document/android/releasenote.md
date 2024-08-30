@@ -9,7 +9,7 @@
 - [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](/document/android/overview.html#连接状态相关): `EMConnectionListener#onOfflineMessageSyncStart` 和 `EMConnectionListener#onOfflineMessageSyncFinish`。
 - [IM SDK] 新增 `EMGroupManager#asyncCheckIfInMuteList` 接口，可以查看当前用户是否在群组禁言名单中。
 - [IM SDK] 原消息置顶接口 `EMChatManager#asyncPinMessage` 和 `EMChatManager#asyncUnPinMessage` [增加对单聊会话中置顶消息的支持](message_pin.html)。接口无变化。
-- [IM SDK] 新增 `EMRecallMessageInfo#getConversationId` 接口，在撤回消息的 `messagesInfoDidRecall` 事件中[返回被撤回的消息所属的会话 ID](message_recall.html#设置消息撤回监听)。
+- [IM SDK] 新增 `EMRecallMessageInfo#getConversationId` 接口，在撤回消息的 `EMMessageListener#onMessageRecalledWithExt` 事件中[返回被撤回的消息所属的会话 ID](message_recall.html#设置消息撤回监听)。
 
 ### 优化
 

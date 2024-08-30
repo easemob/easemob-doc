@@ -6,6 +6,7 @@
 
 ### 新增特性
 
+- [IM SDK] 新增 `getSilentModeRemindTypeConversations` 方法，用于分页获取所有设置了推送通知方式的会话。
 - [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](overview.html#连接状态相关): `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish`。
 - [IM SDK] 原消息置顶接口 `pinMessage` 和 `unpinMessage` [增加对单聊会话中置顶消息的支持](message_pin.html)。接口无变化。
 - [IM SDK] `onMultiDeviceEvent` 新增以下两个离线推送相关的多设备通知事件： 

@@ -118,6 +118,15 @@ WebIM.conn.setSilentModeForAll(params)
 WebIM.conn.getSilentModeForAll()
 ```
 
+## 获取设置了推送通知方式的所有会话
+
+你可以调用 `getAllSilentModeConversations` 方法获取设置了推送通知方式的所有会话。
+
+```javascript
+// pageSize 的取值范围为 [1,100]，默认值为 10。
+connection.getAllSilentModeConversations({pageSize: 10})
+```
+
 ## 设置单个会话的推送通知
 
 你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知设置，即推送通知方式或免打扰时间（时长或时间段）示例代码如下。
