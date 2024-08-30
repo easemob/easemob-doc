@@ -15,9 +15,11 @@
 - `getMessage`：根据消息 ID 获取本地消息；
 - `getMsgsWithMsgType`：获取本地指定会话中特定类型的消息；
 - `getMsgWithTimestamp` ：获取本地指定会话中一定时间段内的消息；
+- `getMessageCountWithTimestamp`：获取本地会话指定时间段的消息数量。
 - `getMsgs`：获取本地指定会话中一定数量的消息；
 - `getLatestMessage`：获取本地指定会话的最新消息；
 - `getLastReceivedMessage`：获取本地指定会话最新接收到的消息。
+
 
 ## 前提条件
 
@@ -172,6 +174,26 @@ ChatClient.getInstance()
   })
   .catch((reason) => {
     console.log("get message fail.", reason);
+  });
+```
+
+### 获取本地会话指定时间段的消息数量
+
+你可以调用 `ChatManager.getMessageCountWithTimestamp` 方法从数据库中获取指定会话的指定时间段的消息数量。
+
+```typescript
+ChatClient.getInstance()
+  .chatManager.getMessageCountWithTimestamp({
+    convId: "foo",
+    convType: 0,
+    start: 0,
+    end: 1725009277205,
+  })
+  .then((count) => {
+    console.log("success", count);
+  })
+  .catch((e) => {
+    console.warn("fail:", e);
   });
 ```
 

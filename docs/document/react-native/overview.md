@@ -191,7 +191,7 @@ let listener = new (class s implements ChatConnectEventListener {
   onAppActiveNumberReachLimit?(): void {
     // todo: 达到日活上限，被服务器断开。
   }
-  onUserDidLoginFromOtherDevice?(deviceName?: string): void {
+  onUserDidLoginFromOtherDeviceWithInfo?(deviceName?: string): void {
     // todo: 用户在其它设备登录，本设备被服务器断开。
   }
   onUserDidRemoveFromServer?(): void {
@@ -226,7 +226,7 @@ ChatClient.getInstance().addConnectionListener(listener);
 用户需要关心什么原因被服务器踢下线，需要关注对应事件，并且进行处理。
 
 - onAppActiveNumberReachLimit:
-- onUserDidLoginFromOtherDevice:
+- onUserDidLoginFromOtherDeviceWithInfo:
 - onUserDidRemoveFromServer:
 - onUserDidForbidByServer:
 - onUserDidChangePassword:

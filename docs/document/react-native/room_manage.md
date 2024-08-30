@@ -68,28 +68,22 @@ ChatClient.getInstance()
 用户申请加入聊天室的步骤如下：
 
 1. 调用 `fetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-2. 调用 `joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `onMemberJoined` 回调。
+2. 调用 `joinChatRoomEx` 方法传入聊天室 ID，申请加入对应聊天室。该接口支持加入时设置扩展信息，决定是否退出所有聊天室。加入后，聊天室中的其他成员会收到 `ChatRoomEventListener#onMemberJoined` 事件。
 
 示例代码如下：
 
 ```typescript
-// 获取公开聊天室列表，每次最多可获取 1,000 个。
 ChatClient.getInstance()
-  .roomManager.fetchPublicChatRoomsFromServer(pageNum, pageSize)
-  .then((rooms) => {
-    console.log("get room success.", rooms);
+  .chatManager.joinChatRoomEx({
+    roomId: "foo",
+    exitOtherRoom: false,
+    ext: "test",
   })
-  .catch((reason) => {
-    console.log("get room fail.", reason);
-  });
-// 加入聊天室
-ChatClient.getInstance()
-  .roomManager.joinChatRoom(roomId)
   .then(() => {
-    console.log("join room success.");
+    console.log("success");
   })
-  .catch((reason) => {
-    console.log("join room fail.", reason);
+  .catch((e) => {
+    console.warn("fail:", e);
   });
 ```
 
