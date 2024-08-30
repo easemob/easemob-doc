@@ -122,6 +122,8 @@ WebIM.conn.getSilentModeForAll()
 
 你可以调用 `getAllSilentModeConversations` 方法获取设置了推送通知方式的所有会话。
 
+[推送通知方式](#推送通知方式)包含以下三类：接收所有离线消息的推送通知、仅接收提及某些用户的消息的推送通知、不接收离线消息的推送通知。
+
 ```javascript
 // pageSize 的取值范围为 [1,100]，默认值为 10。
 connection.getAllSilentModeConversations({pageSize: 10})
