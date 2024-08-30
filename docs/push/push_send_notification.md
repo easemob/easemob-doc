@@ -173,7 +173,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
 ### HTTP 请求
 
 ```http
-POST {host}/{org}/{app}/push/async/{target}
+POST https://{host}/{org_name}/{app_name}/push/async/{target}
 ```
 
 #### 路径参数

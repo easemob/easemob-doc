@@ -22,6 +22,7 @@
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :----------- | :----- | :------------------- | :------------- |
 | [以同步方式发送推送通知](push_send_notification.html#以同步方式发送推送通知) | POST  | /{org_name}/{app_name}/push/sync/{target} | 1 次/秒/App Key  |
+| [以异步方式向单个用户发送推送通知](push_send_notification.html#以异步方式向单个用户发送推送通知) | POST  | /{org_name}/{app_name}/push/sync/{target} | 200 次/秒/App Key  |
 | [以异步方式批量发送推送通知](push_send_notification.html#以异步方式批量发送推送通知) | POST | /{org_name}/{app_name}/push/single | 10 次/秒/App Key |
 | [使用标签推送接口发送推送通知](push_send_notification.html#使用标签推送接口发送推送通知) | POST | /{org_name}/{app_name}/push/list/label | 10 次/秒/App Key |
 | [创建全量推送任务](push_send_notification.html#创建全量推送任务) | POST | /{org_name}/{app_name}/push/task | 1 次/秒/App Key |
