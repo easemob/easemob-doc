@@ -38,7 +38,7 @@
 
 ### CallKit
 
-添加声网私有化环境接口，对外暴露 RTCEngine。
+[添加声网私有化环境接口，对外暴露 RTCEngine](easecallkit.html#私有化部署)。
 
 ## 版本 V4.8.1 Dev 2024-07-18（开发版）
 

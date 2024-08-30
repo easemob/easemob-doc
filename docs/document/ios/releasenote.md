@@ -19,7 +19,7 @@
 ### 修复
 
 - [IM SDK] 修复多线程同时调用获取会话列表时，偶现会话未读数不正确的问题。
-- [IM SDK] 修复调用 [REST API](/server-side/group_member.html#转让群组) 转让群主后，SDK 上原群主离开群失败的问题。
+- [IM SDK] 修复调用 [REST API](/document/server-side/group_member.html#转让群组) 转让群主后，SDK 上原群主离开群失败的问题。
 - [IM SDK] 修复开启多设备登录后，偶现的收到会话已读多设备同步事件，导致未读数不同步的问题。
 
 ## 版本 V4.8.1 Dev 2024-07-26（开发版）
