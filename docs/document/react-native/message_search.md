@@ -10,6 +10,8 @@
 
 - `ChatManager#getMsgsWithKeyword`: 根据搜索范围搜索所有会话中的消息。
 - `ChatConversation#getMsgsWithKeyword`: 根据搜索范围搜索当前会话中的消息。
+- `ChatManager.searchMessages`：搜索所有会话的多种类型的消息。
+- `ChatManager.searchMessagesInConversation`：搜索指定会话的多种类型的消息。
 
 ## 前提条件
 
@@ -100,5 +102,51 @@ conv
   })
   .catch((error) => {
     // todo: 发生错误
+  });
+```
+
+### 根据消息类型搜索所有会话中的消息
+
+你可以调用 `ChatManager#searchMessages` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中所有会话的消息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V1.6.0 或以上版本。
+:::
+
+```typescript
+ChatClient.getInstance()
+  .chatManager.searchMessages({
+    msgTypes: [ChatMessageType.TXT],
+    timestamp: 1725009277205,
+  })
+  .then((msgs: ChatMessage[]) => {
+    console.log("success:", msgs);
+  })
+  .catch((e) => {
+    console.warn(e);
+  });
+```
+
+### 根据消息类型搜索当前会话中的消息
+
+你可以调用 `ChatManager#searchMessagesInConversation` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中单个会话的消息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V1.6.0 或以上版本。
+:::
+
+```typescript
+ChatClient.getInstance()
+  .chatManager.searchMessagesInConversation({
+    convId: "foo",
+    convType: 0,
+    msgTypes: [ChatMessageType.TXT],
+    timestamp: 1725009277205,
+  })
+  .then((msgs: ChatMessage[]) => {
+    console.log("success:", msgs);
+  })
+  .catch((e) => {
+    console.warn(e);
   });
 ```

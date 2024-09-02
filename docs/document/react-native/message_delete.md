@@ -130,3 +130,22 @@ ChatClient.getInstance()
     console.log("delete message fail.", reason);
   });
 ```
+
+### 单向删除服务器端的聊天室消息
+
+你可以调用 `ChatManager#removeMessagesWithTimestamp` 方法删除服务端的聊天室消息。删除后，该用户无法从服务端拉取到该消息，不过，聊天室会话中的其它用户的服务器消息不受影响，可以漫游获取。
+
+```typescript
+ChatClient.getInstance()
+  .chatManager.removeMessagesWithTimestamp({
+    convId: "foo",
+    convType: 0,
+    timestamp: 1725009277205,
+  })
+  .then(() => {
+    console.log("success");
+  })
+  .catch((e) => {
+    console.warn("fail:", e);
+  });
+```

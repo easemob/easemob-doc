@@ -166,6 +166,53 @@ ChatClient.getInstance()
   });
 ```
 
+### 设置登录设备的扩展信息
+
+即时通讯 IM 自 1.6.0 版本开始支持设备的自定义扩展信息，这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
+
+初始化 SDK 时，你可以利用 `ChatOptions#loginExtraInfo` 属性设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，Android 为 `USER_LOGIN_ANOTHER_DEVICE`，iOS 为 `EMErrorUserLoginOnAnotherDevice`），被踢设备收到的 `ChatConnectEventListener#onUserDidLoginFromOtherDeviceWithInfo` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
+
+:::notice
+登录成功后才会将该设置发送到服务器。
+:::
+
+```typescript
+// 初始化设置登录额外信息
+ChatClient.getInstance()
+  .init(
+    new ChatOptions({
+      appKey: "foo",
+      loginExtraInfo: "test",
+    })
+  )
+  .then(() => {
+    console.log("success");
+  })
+  .catch((e) => {
+    console.warn("fail:", e);
+  });
+
+// 用户设备B关注通知
+ChatClient.getInstance().addConnectionListener({
+  onUserDidLoginFromOtherDeviceWithInfo: (params: {
+    deviceName?: string;
+    ext?: string;
+  }): void => {
+    console.log(params);
+  },
+});
+
+// 用户执行登录设备A，用户设备B收到被踢通知
+ChatClient.getInstance()
+  .login("userId", "userPass", true)
+  .then(() => {
+    console.log("success");
+  })
+  .catch((e) => {
+    console.log("fail:", e);
+  });
+```
+
 ### 强制指定账号从单个设备下线
 
 你可以调用 `kickDevice` 方法将指定账号从单个登录设备踢下线。调用该方法前，你需要首先通过 `ChatClient#getLoggedInDevicesFromServer` 方法获取设备 ID。
