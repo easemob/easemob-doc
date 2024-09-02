@@ -19,7 +19,7 @@
 
 - 原生平台优化弱网服务器连接成功率。
 - 作废 `ChatConnectEventListener` 中的 `onUserDidLoginFromOtherDevice` 事件，由 [onUserDidLoginFromOtherDeviceWithInfo](overview.html#连接状态相关) 替代。
-- 作废 `fetchHistoryMessages` 接口，由 [fetchHistoryMessagesByOptions](从服务器获取指定会话的消息) 替代。
+- 作废 `fetchHistoryMessages` 接口，由 [fetchHistoryMessagesByOptions](message_retrieve.html#从服务器获取指定会话的消息) 替代。
 - 作废 `joinChatRoom` 接口，由 [joinChatRoomEx](room_manage.html#加入聊天室) 替代。
 
 ### 修复
