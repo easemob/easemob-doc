@@ -7,20 +7,20 @@
 ### 新增特性
 
 - 依赖的原生 SDK 升级到版本：iOS 4.8.1 和 Android 4.8.2。
-- 新增 `ChatManager.searchMessages` 方法，支持一次搜索所有会话的多种类型的消息。
-- 新增 `ChatManager.searchMessagesInConversation` 方法，支持一次搜索指定会话的多种类型的消息。
-- 新增 `ChatManager.removeMessagesWithTimestamp` 方法，支持只删除服务器端的聊天室消息。
-- 新增 `ChatRoomManager.joinChatRoomEx` 方法，支持加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室。用户加入聊天室后，聊天室内其他成员收到 `ChatRoomEventListener.onMemberJoined` 事件获取到扩展信息。
-- 新增 `ChatManager.getMessageCountWithTimestamp` 方法，支持从数据库中获取指定会话指定时间段的消息数量。
-- 新增 `ChatOptions.loginExtraInfo` 选项，支持设备登录时允许携带自定义消息，并将其传递给被踢的设备。被踢设备收到 `ChatConnectEventListener#onUserDidLoginFromOtherDeviceWithInfo` 事件中会携带新设备的扩展信息。
-- 原生平台新增错误码 407。
+- 新增 `ChatManager.searchMessages` 方法，支持[一次搜索所有会话的多种类型的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
+- 新增 `ChatManager.searchMessagesInConversation` 方法，支持[一次搜索指定会话的多种类型的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
+- 新增 `ChatManager.removeMessagesWithTimestamp` 方法，支持[只删除服务器端的聊天室消息](message_delete.html#单向删除服务器端的聊天室消息)。
+- 新增 `ChatRoomManager.joinChatRoomEx` 方法，支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)。用户加入聊天室后，聊天室内其他成员收到 `ChatRoomEventListener.onMemberJoined` 事件获取到扩展信息。
+- 新增 `ChatManager.getMessageCountWithTimestamp` 方法，支持[从数据库中获取指定会话指定时间段的消息数量](message_retrieve.html#获取本地会话指定时间段的消息数量)。
+- 新增 `ChatOptions.loginExtraInfo` 选项，支持[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)。被踢设备收到 `ChatConnectEventListener#onUserDidLoginFromOtherDeviceWithInfo` 事件中会携带新设备的扩展信息。
+- 原生平台新增[错误码 407](/document/android/error.html)。
 
 ### 优化
 
 - 原生平台优化弱网服务器连接成功率。
-- 作废 `ChatConnectEventListener` 中的 `onUserDidLoginFromOtherDevice` 事件，由`onUserDidLoginFromOtherDeviceWithInfo` 替代。
-- 作废 `fetchHistoryMessages` 接口，由 `fetchHistoryMessagesByOptions` 替代。
-- 作废 `joinChatRoom` 接口，由 `joinChatRoomEx` 替代。
+- 作废 `ChatConnectEventListener` 中的 `onUserDidLoginFromOtherDevice` 事件，由 [onUserDidLoginFromOtherDeviceWithInfo](overview.html#连接状态相关) 替代。
+- 作废 `fetchHistoryMessages` 接口，由 [fetchHistoryMessagesByOptions](从服务器获取指定会话的消息) 替代。
+- 作废 `joinChatRoom` 接口，由 [joinChatRoomEx](room_manage.html#加入聊天室) 替代。
 
 ### 修复
 
