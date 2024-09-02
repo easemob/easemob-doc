@@ -191,8 +191,11 @@ let listener = new (class s implements ChatConnectEventListener {
   onAppActiveNumberReachLimit?(): void {
     // todo: 达到日活上限，被服务器断开。
   }
-  onUserDidLoginFromOtherDeviceWithInfo?(deviceName?: string): void {
-    // todo: 用户在其它设备登录，本设备被服务器断开。
+  onUserDidLoginFromOtherDeviceWithInfo?(params: {
+    deviceName?: string;
+    ext?: string;
+  }): void {
+  // todo: 用户在其它设备登录，本设备被服务器断开。
   }
   onUserDidRemoveFromServer?(): void {
     // todo: 当前用户被移除，被服务器断开。

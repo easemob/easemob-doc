@@ -4,8 +4,8 @@
 
 会话已读回执指接收方进入指定会话后就阅读了该会话中的所有未读消息。例如，当接收方进入会话页面，向服务器发送会话已读回执，服务器将该回执下发给发送方，并将接收方的指定会话的未读消息数置为 0。
 
-目前，只有单聊支持会话已读回执。本文介绍如何使用环信即时通讯 IM Web SDK 实现会话已读回执功能。
-    
+目前，单聊和群组聊天支持会话已读回执。本文介绍如何使用环信即时通讯 IM Web SDK 实现会话已读回执功能。
+        
 会话已读回执的效果示例，如下图所示：
 
 ![img](/images/uikit/chatuikit/feature/web/conversation/conversation_read.png) 
@@ -47,6 +47,10 @@ conn.send(msg);
 
 同一用户 ID 登录多设备的情况下，用户在一台设备上发送会话已读回执，服务器会将会话的未读消息数置为 0，同时其他设备会收到 `onChannelMessage` 回调。
 
+:::tip
+对于群组聊天，会话已读回执只用于清空服务端的群组会话的未读数，用户不会通过该回调收到会话已读回执。
+:::
+
 ```javascript
 conn.addEventHandler("customEvent", {
   onChannelMessage: (message) => {},
@@ -57,7 +61,7 @@ conn.addEventHandler("customEvent", {
 
 - 对于单聊会话，接收方发送会话已读回执后，服务器会将该会话的未读数置为 0。若你开启了本地存储，则需要调用 `clearConversationUnreadCount` 方法，清空本地会话的未读数。
 
-- 对于群聊会话，你可以调用以下接口发送已读回执，清空指定群组会话的未读数。与单聊会话不同，对于群聊会话来说，调用以下接口只会清空群组会话的未读数，不会触发 `onChannelMessage` 回调。
+- 对于群聊会话，你可以调用以下接口发送已读回执，清空指定群组会话的未读数。与单聊会话不同，对于群聊会话，调用以下接口只会清空服务端的群组会话的未读数，不会触发 `onChannelMessage` 回调。
 
 ```javascript
 let option = {
