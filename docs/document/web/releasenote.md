@@ -12,6 +12,7 @@
 - [IM SDK] `onMultiDeviceEvent` 新增以下两个离线推送相关的多设备通知事件： 
   - `setSilentModeForConversation`：若你调用了 `setSilentModeForConversation` API [设置指定会话的推送通知方式或免打扰时间](/document/web/push/push_notification_mode_dnd.html#设置单个会话的推送通知)，其他设备会收到该事件。
   - `removeSilentModeForConversation`：若你调用了 `clearRemindTypeForConversation` API [清除指定会话的推送通知方式的设置](/document/web/push/push_notification_mode_dnd.html#清除单个会话的推送通知方式的设置)，其他设备会收到该事件。
+- [IM SDK] SDK `message` 对象中新增 `getFileUrl` 方法。目前，SDK 的 `utils` 对象和 `message` 对象中均包含 `getFileUrl` 方法。 
 
 ### 优化
 

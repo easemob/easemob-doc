@@ -208,7 +208,7 @@ function sendPrivateUrlImg() {
 function sendPrivateAudio() {
   // 获取语音文件。
   let input = document.getElementById("audio");
-  let file = WebIM.utils.getFileUrl(input);
+  let file = WebIM.message.getFileUrl(input);
   let allowType = {
     mp3: true,
     amr: true,
@@ -280,7 +280,7 @@ conn.addEventHandler("eventName", {
 function sendPrivateImg() {
   // 选择本地图片文件。
   let input = document.getElementById("image");
-  let file = WebIM.utils.getFileUrl(input);
+  let file = WebIM.message.getFileUrl(input);
   let allowType = {
     jpg: true,
     gif: true,
@@ -358,7 +358,7 @@ conn.addEventHandler("eventName", {
 function sendPrivateVideo() {
   // 选择本地视频文件。
   let input = document.getElementById("video");
-  let file = WebIM.utils.getFileUrl(input);
+  let file = WebIM.message.getFileUrl(input);
   let allowType = {
     mp4: true,
     wmv: true,
@@ -430,7 +430,7 @@ conn.addEventHandler("eventName", {
 function sendPrivateFile() {
   // 选择本地文件。
   let input = document.getElementById("file");
-  let file = WebIM.utils.getFileUrl(input);
+  let file = WebIM.message.getFileUrl(input);
   let allowType = {
     jpg: true,
     gif: true,
