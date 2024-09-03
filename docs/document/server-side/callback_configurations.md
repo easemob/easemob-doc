@@ -211,8 +211,8 @@ payload 示例：
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
 | `chat_type` | String   | `read_ack` 已读回执。                                        |
-| `callId`    | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
-| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 Console 后台回调规则。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_回执消息的消息 ID”。 | 
+| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 | `payload`   | object   | 包括：<br/> - `ext`：消息的扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `bodies`：消息体内容。 |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
@@ -272,7 +272,7 @@ payload 示例：
 
 ```json
 {
-    "callId":"{appkey}_{uuid}",
+    "callId":"{appkey}_8924312242322", 
     "eventType":"chat_offline",
     "timestamp":1600060847294,
     "chat_type":"groupchat", 
@@ -287,6 +287,13 @@ payload 示例：
     "security":"2ca02c394bef9e7abc83958bcc3156d3"
  }
 ```
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_发送的消息的 ID”。 | 
+| `msg_id`    | String   | 发送的消息 ID。 | 
 
 ### 聊天室
 
@@ -316,14 +323,14 @@ payload 示例：
 
 ```json
 {
-    "callId":"{appkey}_{uuid}",
+    "callId":"{appkey}_8924312242322",
     "eventType":"chat_offline",
     "timestamp":1600060847294,
     "chat_type":"groupchat", 
     "group_id":"16934809238921545",
     "from":"user1",
     "to":"user2",
-    "msg_id":"8924312242322",
+    "msg_id":"8924312242322", 
     "payload":{
         // 具体的消息内容
     },
@@ -331,6 +338,13 @@ payload 示例：
     "security":"2ca02c394bef9e7abc83958bcc3156d3"
 }
 ```
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_发送的消息的 ID”。 | 
+| `msg_id`    | String   | 发送的消息 ID。 | 
 
 ### 消息撤回
 
@@ -342,7 +356,7 @@ payload 示例：
 
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
+| `callId`          | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_该撤回事件消息的 ID”。 |
 | `eventType`       | String   | “chat” 上行消息、“chat_offline” 离线消息。                   |
 | `timestamp`       | long     | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为 ms。        |
 | `chat_type`       | String   | “chat” 单聊回调、“groupchat” 群聊回调包含了群组和聊天室的消息回调，默认全选。 |
@@ -353,7 +367,7 @@ payload 示例：
 | `msg_id`          | String   | 该撤回事件消息的 ID，与发送消息时的 `msg_id` 一致。                                       |
 | `payload`         | object   | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。 |
 | `securityVersion` | String   | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
-| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 Console 后台回调规则。 |
+| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 | `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
 | `host`            | String   | 服务器名称。                                                 |
 
@@ -441,6 +455,13 @@ payload 字段含义：
 | `description` | String   | 创建群组失败的原因描述。                             |
 | `error_code`  | String   | 创建失败对应的错误码。                                       |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群组创建事件的消息 ID”。 | 
+| `msg_id`    | String   | 群组创建事件的消息 ID。 | 
+
 创建群组回调请求示例：
 
 ```json
@@ -482,12 +503,19 @@ payload 字段含义：
 | `description` | String   | 解散群组或聊天室失败的原因描述。                             |
 | `error_code`  | String   | 操作失败对应的错误码。                                       |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群组解散事件的消息 ID”。 | 
+| `msg_id`    | String   | 群组解散事件的消息 ID。 | 
+
 解散群组回调请求示例：
 
 ```json
 { 
     "chat_type": "muc", 
-    "callId": "XXXX#XXXX_976430482738645348", 
+    "callId": "XXXX#XXXX_976430482738645348",  
     "security": "c6f411dedb43ebc499b14779eaa9a82b", 
     "payload": { 
         "muc_id": "XXXX#XXXX_173548612157441@conference.easemob.com", 
@@ -512,10 +540,17 @@ payload 字段含义：
 
 解散聊天室回调请求示例：
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_聊天室解散事件的消息 ID”。 | 
+| `msg_id`    | String   | 聊天室解散事件的消息 ID。 | 
+
 ```json
 { 
     "chat_type": "muc", 
-    "callId": "XXXX#XXXX_XXXX", 
+    "callId": "XXXX#XXXX_XXXX",  
     "security": "776cbf0b06df9a59d660f6c024aeeb81", 
     "payload": { 
         "muc_id": "XXXX#XXXX_XXXX@conference.easemob.com", 
@@ -550,6 +585,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 申请加入群组失败的原因描述。                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_用户申请入群事件的消息 ID”。 | 
+| `msg_id`    | String   | 用户申请入群事件的消息 ID。 | 
 
 回调请求示例：
 
@@ -593,6 +635,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_用户同意入群事件的消息 ID”。 | 
+| `msg_id`    | String   | 用户同意入群事件的消息 ID。 | 
+
 回调请求示例：
 
 ```json
@@ -633,6 +682,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 邀请新用户加入群组失败的原因描述。                           |
 | `error_code`  | String   | 失败对应的错误码。                                           |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_邀请新用户入群事件的消息 ID”。 | 
+| `msg_id`    | String   | 邀请新用户入群事件的消息 ID。 | 
 
 回调请求示例：
 
@@ -676,6 +732,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_受邀用户同意入群事件的消息 ID”。 | 
+| `msg_id`    | String   | 受邀用户同意入群事件的消息 ID。 | 
+
 回调示例：
 
 ```json
@@ -718,6 +781,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_受邀用户拒绝入群事件的消息 ID”。 | 
+| `msg_id`    | String   | 受邀用户拒绝入群事件的消息 ID。 | 
+
 回调请求示例：
 
 ```json
@@ -758,6 +828,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。    |
 | `description` | String   | 操作失败的原因描述。  |
 | `error_code`  | String   | 失败对应的错误码。  |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_用户被踢出群/聊天室事件的消息 ID”。 | 
+| `msg_id`    | String   | 用户被踢出群/聊天室事件的消息 ID。 | 
 
 踢出群回调请求示例：
 
@@ -827,6 +904,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_用户被添加至群黑名单事件的消息 ID”。 | 
+| `msg_id`    | String   | 用户被添加至群黑名单事件的消息 ID。 | 
+
 封禁群成员，即将群成员添加到黑名单的回调请求示例：
 
 ```json
@@ -869,7 +953,14 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
-payload 示例：
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_用户被移出群黑名单事件的消息 ID”。 | 
+| `msg_id`    | String   | 用户被移出群黑名单事件的消息 ID。 | 
+
+回调示例如下所示：
 
 ```json
 { 
@@ -910,6 +1001,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群/聊天室信息修改事件的消息 ID”。 | 
+| `msg_id`    | String   | 群/聊天室信息修改事件的消息 ID。 | 
 
 群信息修改回调请求示例：
 
@@ -979,6 +1077,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群组屏蔽事件的消息 ID”。 | 
+| `msg_id`    | String   | 群组屏蔽事件的消息 ID。 | 
+
 用户屏蔽群回调请求示例：
 
 ```json
@@ -1021,6 +1126,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_解除屏蔽群组事件的消息 ID”。 | 
+| `msg_id`    | String   | 解除屏蔽群组事件的消息 ID。 | 
+
 请求示例：
 
 ```json
@@ -1059,7 +1171,14 @@ payload 字段含义：
 | `operation`   | String   | `presence`：成员进群/聊天室。                                |
 | `is_chatroom` | Bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
 
-此外，`from` 为*新成员用户 ID*@easemob.com，`to` 为群组 ID 或聊天室 ID。
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_新成员加入群组或聊天室事件的消息 ID”。 | 
+| `msg_id`    | String   | 新成员加入群组或聊天室事件的消息 ID。 | 
+| `from`    | String   | 格式为：新成员的用户 ID*@easemob.com。 | 
+| `to`    | String   | 群组 ID 或聊天室 ID。 | 
 
 有新成员加入了群组时，即时通讯 IM 服务会向你的应用服务器发送用户加入了群组的通知。回调请求示例：
 
@@ -1117,7 +1236,14 @@ payload 字段含义：
 | `operation`   | String   | `absence`：成员离开群/聊天室。                                |
 | `is_chatroom` | Bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
 
-此外，`from` 为*离开的成员的用户 ID*@easemob.com，`to` 为群组 ID 或聊天室 ID。
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_有成员离开了群组或聊天室事件的消息 ID”。 | 
+| `msg_id`    | String   | 有成员离开了群组或聊天室事件的消息 ID。 | 
+| `from`    | String   | 格式为：离开的成员的用户 ID*@easemob.com。 | 
+| `to`    | String   | 群组 ID 或聊天室 ID。 | 
 
 有新成员主动离开了群组或被移出时，即时通讯 IM 服务会向你的应用服务器发送用户离开了群组的通知。回调请求示例：
 
@@ -1177,6 +1303,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_有成员退出了群组或聊天室事件的消息 ID”。 | 
+| `msg_id`    | String   | 有成员退出了群组或聊天室事件的消息 ID。 | 
 
 成员主动退出群回调请求示例：
 
@@ -1245,6 +1378,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群组转让事件的消息 ID”。 | 
+| `msg_id`    | String   | 群组转让事件的消息 ID。 | 
+
 转让群回调请求示例：
 
 ```json
@@ -1285,6 +1425,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_添加群/聊天室管理员事件的消息 ID”。 | 
+| `msg_id`    | String   | 添加群/聊天室管理员事件的消息 ID。 | 
 
 添加群管理员回调请求示例：
 
@@ -1354,6 +1501,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_删除群/聊天室管理员事件的消息 ID”。 | 
+| `msg_id`    | String   | 删除群/聊天室管理员事件的消息 ID。 | 
+
 删除群管理员回调请求示例：
 
 ```json
@@ -1421,6 +1575,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_禁言群/聊天室成员事件的消息 ID”。 | 
+| `msg_id`    | String   | 禁言群/聊天室成员事件的消息 ID。 | 
 
 将群成员禁言回调示例：
 
@@ -1491,6 +1652,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_解除禁言群/聊天室成员事件的消息 ID”。 | 
+| `msg_id`    | String   | 解除禁言群/聊天室成员事件的消息 ID。 | 
+
 将群成员解除禁言回调请求示例：
 
 ```json
@@ -1558,6 +1726,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_更新群/聊天室公告事件的消息 ID”。 | 
+| `msg_id`    | String   | 更新群/聊天室公告事件的消息 ID。 | 
 
 更新群公告示例：
 
@@ -1628,6 +1803,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_删除群/聊天室公告事件的消息 ID”。 | 
+| `msg_id`    | String   | 删除群/聊天室公告事件的消息 ID。 | 
 
 删除群公告回调请求示例：
 
@@ -1704,6 +1886,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_上传群共享文件事件的消息 ID”。 | 
+| `msg_id`    | String   | 上传群共享文件事件的消息 ID。 | 
+
 上传群共享文件回调请求示例：
 
 ```json
@@ -1754,6 +1943,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_删除群共享文件事件的消息 ID”。 | 
+| `msg_id`    | String   | 删除群共享文件事件的消息 ID。 | 
+
 删除群共享文件回调请求示例：
 
 ```json
@@ -1794,6 +1990,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_添加用户进群/聊天室白名单事件的消息 ID”。 | 
+| `msg_id`    | String   | 添加用户进群/聊天室白名单事件的消息 ID。 | 
 
 添加用户进群白名单回调请求示例：
 
@@ -1862,6 +2065,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_将用户移出群/聊天室白名单事件的消息 ID”。 | 
+| `msg_id`    | String   | 将用户移出群/聊天室白名单事件的消息 ID。 | 
+
 将用户移出群白名单回调请求示例：
 
 ```json
@@ -1929,6 +2139,13 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群/聊天室全局禁言事件的消息 ID”。 | 
+| `msg_id`    | String   | 群/聊天室全局禁言事件的消息 ID。 | 
+
 群全局禁言回调请求示例：
 
 ```json
@@ -1995,6 +2212,13 @@ payload 字段含义：
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_解除群/聊天室全局禁言事件的消息 ID”。 | 
+| `msg_id`    | String   | 解除群/聊天室全局禁言事件的消息 ID。 | 
 
 解除群全局禁言回调请求示例：
 
@@ -2065,7 +2289,14 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。|
 | `error_code`  | String   | 失败对应的错误码。|
 
-此外，`from` 为聊天室 ID，`to` 为聊天室中成员的用户 ID。
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_设置/更新聊天室自定义属性事件的消息 ID”。 | 
+| `msg_id`    | String   | 设置/更新聊天室自定义属性事件的消息 ID。 | 
+| `from`    | String   | 聊天室 ID。 | 
+| `to`    | String   | 聊天室中成员的用户 ID。 | 
 
 设置/更新聊天室自定义属性回调请求示例：
 
@@ -2113,7 +2344,14 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。|
 | `error_code`  | String   | 失败对应的错误码。|
 
-此外，`from` 为聊天室 ID，`to` 为聊天室中成员的用户 ID。
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_删除聊天室自定义属性事件的消息 ID”。 | 
+| `msg_id`    | String   | 删除聊天室自定义属性事件的消息 ID。 | 
+| `from`    | String   | 聊天室 ID。 | 
+| `to`    | String   | 聊天室中成员的用户 ID。 | 
 
 删除聊天室自定义属性回调请求示例：
 
@@ -2161,7 +2399,14 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。|
 | `error_code`  | String   | 失败对应的错误码。|
 
-此外，`from` 为群组 ID，`to` 为群组成员的用户 ID。
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_设置群成员的自定义属性事件的消息 ID”。 | 
+| `msg_id`    | String   | 设置群成员的自定义属性事件的消息 ID。 | 
+| `from`    | String   | 群组 ID。 | 
+| `to`    | String   | 群组成员的用户 ID。 | 
 
 设置群成员的自定义属性的回调请求示例：
 
@@ -2215,6 +2460,13 @@ payload 字段含义：
 | `reason`    | object   | /                 |
 | `operation` | String   | `add`：添加好友。 |
 
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_添加好友事件的消息 ID”。 | 
+| `msg_id`    | String   | 添加好友事件的消息 ID。 | 
+
 payload 示例：
 
 ```json
@@ -2244,6 +2496,13 @@ payload 字段含义：
 | :----------- | :------- | :------------------- |
 | `roster_ver` | String   | 好友列表的版本号。   |
 | `operation`  | String   | `remove`：移除好友。 |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_删除好友事件的消息 ID”。 | 
+| `msg_id`    | String   | 删除好友事件的消息 ID。 | 
 
 payload 示例：
 
@@ -2277,7 +2536,14 @@ payload 字段含义：
 | `roster_ver` | String   | 好友列表的版本号。       |
 | `operation`  | String   | `accept`：同意好友申请。 |
 
-payload 示例：
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_同意好友申请事件的消息 ID”。 | 
+| `msg_id`    | String   | 同意好友申请事件的消息 ID。 | 
+
+回调请求示例：
 
 ```json
 {
@@ -2309,7 +2575,14 @@ payload 字段含义：
 | `roster_ver` | String   | 好友列表的版本号。        |
 | `operation`  | String   | `decline`：拒绝好友申请。 |
 
-payload 示例：
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_拒绝好友申请事件的消息 ID”。 | 
+| `msg_id`    | String   | 拒绝好友申请事件的消息 ID。 | 
+
+回调请求示例：
 
 ```json
 {
@@ -2339,6 +2612,13 @@ payload 字段含义：
 | `operation`  | String   | `ban`：拉黑好友。      |
 | `status`     | object   | 包含 `error_code`。    |
 | `error_code` | String   | 操作失败对应的错误码。 |
+
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_拉黑好友事件的消息 ID”。 | 
+| `msg_id`    | String   | 拉黑好友事件的消息 ID。 | 
 
 payload 示例：
 
@@ -2374,7 +2654,14 @@ payload 字段含义：
 | `status`     | object   | 包含 `error_code`。     |
 | `error_code` | String   | 操作失败对应的错误码。  |
 
-payload 示例：
+payload 之外的字段如下表所示：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_解除拉黑好友事件的消息 ID”。 | 
+| `msg_id`    | String   | 解除拉黑好友事件的消息 ID。 | 
+
+回调请求示例：
 
 ```json
 {
@@ -2426,9 +2713,9 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 |
 | `reason`    | object   | `login`，用户登录。                                          |
-| `security`  | String   | 签名，格式如下: MD5（callId+secret+timestamp）。 Secret 见 Console 后台回调规则。 |
+| `security`  | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 | `os`        | String   | 设备类型。                                                   |
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
@@ -2462,9 +2749,9 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
-| `reason`    | object   | `logout` 该用户登出账号。                                    |
-| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 Console 后台回调规则。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
+| `reason`    | object   | 值为 `logout`，表示用户登出。                                    |
+| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 | `os`        | String   | 设备类型。                                                   |
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
@@ -2498,9 +2785,9 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 |
 | `reason`    | object   | `replaced`，该用户登出，原因是被其他设备登录踢掉。           |
-| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 Console 后台回调规则。 |
+| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 | `os`        | String   | 设备类型。                                                   |
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
@@ -2534,7 +2821,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | `callId` 为每个回调请求的唯一标识，以 App Key 为开头，即示例中的 `XXXX#XXXX`。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
 | `alertReason`  | String   | 敏感词是否合规：<br/> - `through`：表示敏感词为合规内容；<br/> - `intercepted`：表示敏感词为违规词，包含敏感词的消息被拦截。<br/> - `replaced`：表示敏感词为违规词，使用 *** 代替。 | 
 | `contentReceiver`  | String   |  内容接收方的用户 ID。 | 
 | `eventType`  |  String |  事件类型，用于标识为敏感词检测还是其他类型的事件。 | 
@@ -2574,7 +2861,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 ```json
 {
-    "callId": "XXXX#XXXX_16396528-2a9c-4d96-8219-15723e436fd6",
+    "callId": "XXXX#XXXX_16396528-2a9c-4d96-8219-15723e436fd6",  
     "alertReason": "intercepted",
     "contentReceiver": "XXXX#XXXX_test1@easemob.com",
     "eventType": "keyword_alert",
@@ -2597,7 +2884,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 
 ```json
 {
-    "callId": "XXXX#XXXX_3a49331a-e554-48d2-bacb-797739020e2a",
+    "callId": "XXXX#XXXX_3a49331a-e554-48d2-bacb-797739020e2a",  
     "alertReason": "intercepted",
     "contentReceiver": "XXXX#XXXX_test1@easemob.com",
     "eventType": "keyword_alert",
