@@ -88,7 +88,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 #### 请求 body
 
-请求 body 为 `x-www-form-urlencoded` 类型，长度不得超过 4 KB，包含以下字段：
+请求 body 为 `x-www-form-urlencoded` 类型，包含以下字段：
 
 | 字段    | 类型   | 描述     | 是否必需 |
 | :------ | :----- | :------- | :------- |
