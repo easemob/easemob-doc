@@ -1130,6 +1130,8 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/template' \
 
 #### 请求示例
 
+关于推送标题和推送内容参数的填充，即 `title_pattern` 和 `content_pattern`，详见[创建离线推送模板](#创建离线推送模板)。
+
 ```shell
 curl -L -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
 -H 'Content-Type: application/json' \
