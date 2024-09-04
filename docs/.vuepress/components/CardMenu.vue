@@ -12,7 +12,13 @@
       <section class="links-section">
         <div class="links-header">文档链接</div>
         <div v-for="sdk in sdks" :key="sdk.text" class="link-item">
-          <img v-if="sdk.icon" :src="sdk.icon" class="link-icon" width="24px" :alt="sdk.text" />
+          <img
+            v-if="sdk.icon"
+            :src="sdk.icon"
+            class="link-icon"
+            width="24px"
+            :alt="sdk.text"
+          />
           <el-link :href="sdk.link" class="link-label">{{ sdk.text }}</el-link>
         </div>
       </section>
@@ -21,17 +27,21 @@
 </template>
 
 <script setup lang="ts">
+window.onload = () => {
+  console.log('CardMenu loaded')
+}
+
 interface SDKLink {
-  icon?: string;
-  text: string;
-  link: string;
+  icon?: string
+  text: string
+  link: string
 }
 
 defineProps<{
-  title?: string;
-  desc?: string;
-  sdks?: SDKLink[];
-}>();
+  title?: string
+  desc?: string
+  sdks?: SDKLink[]
+}>()
 </script>
 
 <style scoped>
@@ -56,11 +66,11 @@ defineProps<{
 .message-header {
   font-weight: 500;
   color: #000;
-  font-family: "PingFang SC", sans-serif;
+  font-family: 'PingFang SC', sans-serif;
 }
 .message-description {
   color: #666;
-  font-family: "PingFang SC", sans-serif;
+  font-family: 'PingFang SC', sans-serif;
   font-weight: 400;
   margin-top: 8px;
 }
@@ -79,7 +89,7 @@ defineProps<{
 }
 .links-header {
   color: #000;
-  font-family: "PingFang SC";
+  font-family: 'PingFang SC';
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -98,7 +108,7 @@ defineProps<{
   object-position: center;
 }
 .link-label {
-  font-family: "SF Pro", sans-serif;
+  font-family: 'SF Pro', sans-serif;
   margin: auto 0;
 }
 @media (max-width: 991px) {

@@ -12,6 +12,23 @@ const router = useRouter()
 const frontmatter = pageData.value.frontmatter
 const redirectUri = frontmatter.pageUri
 
+const nameMap = {
+  android: 'Andorid 集成文档',
+  ios: 'iOS 集成文档',
+  web: 'Web 集成文档',
+  applet: '小程序集成文档',
+  harmonyos: 'HarmonyOS 集成文档',
+  flutter: 'Flutter 集成文档',
+  'react-native': 'React Native 集成文档',
+  unity: 'Unity 集成文档',
+  windows: 'Windows 集成文档',
+  'server-side': 'REST API',
+  product: '产品介绍',
+  push: '即时推送',
+  moderation: '内容审核',
+  aigc: 'AI 集成'
+}
+
 const getCategoryFromPath = () => {
   const pathSegments = pageData.value.path.split('/')
   const segmentLength = pathSegments.length
@@ -22,22 +39,7 @@ const getCategoryFromPath = () => {
   if (secondLastSegment == 'push' && segmentLength > 3) {
     secondLastSegment = pathSegments[segmentLength - 3]
   }
-  const nameMap = {
-    android: 'Andorid 集成文档',
-    ios: 'iOS 集成文档',
-    web: 'Web 集成文档',
-    applet: '小程序集成文档',
-    harmonyos: 'HarmonyOS 集成文档',
-    flutter: 'Flutter 集成文档',
-    'react-native': 'React Native 集成文档',
-    unity: 'Unity 集成文档',
-    windows: 'Windows 集成文档',
-    'server-side': 'REST API',
-    product: '产品介绍',
-    push: '即时推送',
-    moderation: '内容审核',
-    aigc: 'AI 集成'
-  }
+
   let result = nameMap[secondLastSegment] || secondLastSegment
   if (segmentLength >= 3 && pathSegments[1] == 'uikit') {
     result = 'UIKit-' + result

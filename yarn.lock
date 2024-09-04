@@ -48,6 +48,15 @@
   dependencies:
     "@algolia/cache-common" "4.18.0"
 
+"@algolia/client-abtesting@5.2.5":
+  version "5.2.5"
+  resolved "https://registry.npmmirror.com/@algolia/client-abtesting/-/client-abtesting-5.2.5.tgz#cee7112b5d483c4be61caeec3230fc9930e25db8"
+  integrity sha512-9cTeOOGaw1IY1GeFbPDwHlL/GiNuSUmZWKLoQkovQ4mgP/6qAU03kKgYO/fXLTb4YFpt4VrCfJRyZD0a0XTqlQ==
+  dependencies:
+    "@algolia/client-common" "5.2.5"
+    "@algolia/requester-browser-xhr" "5.2.5"
+    "@algolia/requester-node-http" "5.2.5"
+
 "@algolia/client-account@4.18.0":
   version "4.18.0"
   resolved "https://registry.npmmirror.com/@algolia/client-account/-/client-account-4.18.0.tgz"
@@ -67,6 +76,15 @@
     "@algolia/requester-common" "4.18.0"
     "@algolia/transporter" "4.18.0"
 
+"@algolia/client-analytics@5.2.5":
+  version "5.2.5"
+  resolved "https://registry.npmmirror.com/@algolia/client-analytics/-/client-analytics-5.2.5.tgz#70541695004e4b67c08772f3f04f4412b23ef43b"
+  integrity sha512-2rFMISyJj7BBdtrMMdFD0OVhiIaLwcdxJj7r24did9Ai3ffXQZr5kbPvnhCFoGhKu1pMDeZHRsjow+nl+OjhAw==
+  dependencies:
+    "@algolia/client-common" "5.2.5"
+    "@algolia/requester-browser-xhr" "5.2.5"
+    "@algolia/requester-node-http" "5.2.5"
+
 "@algolia/client-common@4.18.0":
   version "4.18.0"
   resolved "https://registry.npmmirror.com/@algolia/client-common/-/client-common-4.18.0.tgz"
@@ -74,6 +92,11 @@
   dependencies:
     "@algolia/requester-common" "4.18.0"
     "@algolia/transporter" "4.18.0"
+
+"@algolia/client-common@5.2.5":
+  version "5.2.5"
+  resolved "https://registry.npmmirror.com/@algolia/client-common/-/client-common-5.2.5.tgz#a58317fdcf22efc9304918bd15682ca3bc4fadaf"
+  integrity sha512-ITE85veJWwClnoNyv7Zydh9U0eKA82cDy8pLw+2hzL+zlzFIvV68ihGOEQ/kXt8N4v+R4MFzvsxnIpMruQzEug==
 
 "@algolia/client-personalization@4.18.0":
   version "4.18.0"
@@ -84,6 +107,15 @@
     "@algolia/requester-common" "4.18.0"
     "@algolia/transporter" "4.18.0"
 
+"@algolia/client-personalization@5.2.5":
+  version "5.2.5"
+  resolved "https://registry.npmmirror.com/@algolia/client-personalization/-/client-personalization-5.2.5.tgz#6d8e32b0f75177a5429d63512ca96ce71601b618"
+  integrity sha512-QcAprWgmO7XUfyJWA6r+Bkqc+n74H9oVewa044UmRXEnfgNTXZa59KA6wBpqRqqK1lfj/pbk1CuVHaG27jJOCA==
+  dependencies:
+    "@algolia/client-common" "5.2.5"
+    "@algolia/requester-browser-xhr" "5.2.5"
+    "@algolia/requester-node-http" "5.2.5"
+
 "@algolia/client-search@4.18.0":
   version "4.18.0"
   resolved "https://registry.npmmirror.com/@algolia/client-search/-/client-search-4.18.0.tgz"
@@ -92,6 +124,20 @@
     "@algolia/client-common" "4.18.0"
     "@algolia/requester-common" "4.18.0"
     "@algolia/transporter" "4.18.0"
+
+"@algolia/client-search@5.2.5":
+  version "5.2.5"
+  resolved "https://registry.npmmirror.com/@algolia/client-search/-/client-search-5.2.5.tgz#d0c0c5b4042ca314b409bd9cb3d3aa92b8d752f7"
+  integrity sha512-OVDLzm5BEUbJmjfMm7b0Xx8vkK+NyEh7whPHuap2qy0x7RxQDLMXjiKsBbt1WNq+9nfX6+M/f2t0CJ8ENVuyYQ==
+  dependencies:
+    "@algolia/client-common" "5.2.5"
+    "@algolia/requester-browser-xhr" "5.2.5"
+    "@algolia/requester-node-http" "5.2.5"
+
+"@algolia/events@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.npmmirror.com/@algolia/events/-/events-4.0.1.tgz#fd39e7477e7bc703d7f893b556f676c032af3950"
+  integrity sha512-FQzvOCgoFXAbf5Y6mYozw2aj5KCJoA3m4heImceldzPSMbdyS4atVjJzXKMsfX3wnZTFYwkkt8/z8UesLHlSBQ==
 
 "@algolia/logger-common@4.18.0":
   version "4.18.0"
@@ -105,12 +151,28 @@
   dependencies:
     "@algolia/logger-common" "4.18.0"
 
+"@algolia/recommend@5.2.5":
+  version "5.2.5"
+  resolved "https://registry.npmmirror.com/@algolia/recommend/-/recommend-5.2.5.tgz#c5d09f5f6e1cbd89d0becf7ab2ba0e6b7ee494ff"
+  integrity sha512-txceAPW8PLRfO+8vy0yQVlh+IIggsZWnghW30u+xzMS+t7wAKvfT7IeTl9kgTveOl66bJKBAnqpdgT+rqP/Y1g==
+  dependencies:
+    "@algolia/client-common" "5.2.5"
+    "@algolia/requester-browser-xhr" "5.2.5"
+    "@algolia/requester-node-http" "5.2.5"
+
 "@algolia/requester-browser-xhr@4.18.0":
   version "4.18.0"
   resolved "https://registry.npmmirror.com/@algolia/requester-browser-xhr/-/requester-browser-xhr-4.18.0.tgz"
   integrity sha512-/AcWHOBub2U4TE/bPi4Gz1XfuLK6/7dj4HJG+Z2SfQoS1RjNLshZclU3OoKIkFp8D2NC7+BNsPvr9cPLyW8nyQ==
   dependencies:
     "@algolia/requester-common" "4.18.0"
+
+"@algolia/requester-browser-xhr@5.2.5":
+  version "5.2.5"
+  resolved "https://registry.npmmirror.com/@algolia/requester-browser-xhr/-/requester-browser-xhr-5.2.5.tgz#197e7a988312b4be8716e823a265e1abcd71ff50"
+  integrity sha512-Ri73PphNy1ceig94xJW9bPdN7uIYFAjpsABpp2Fsun4DmeZD5a4rMCNwwOXXsbC8h+lUzW34zpUf+h4Nk+eaqA==
+  dependencies:
+    "@algolia/client-common" "5.2.5"
 
 "@algolia/requester-common@4.18.0":
   version "4.18.0"
@@ -123,6 +185,13 @@
   integrity sha512-TGfwj9aeTVgOUhn5XrqBhwUhUUDnGIKlI0kCBMdR58XfXcfdwomka+CPIgThRbfYw04oQr31A6/95ZH2QVJ9UQ==
   dependencies:
     "@algolia/requester-common" "4.18.0"
+
+"@algolia/requester-node-http@5.2.5":
+  version "5.2.5"
+  resolved "https://registry.npmmirror.com/@algolia/requester-node-http/-/requester-node-http-5.2.5.tgz#fc6fc5096be7a8255217c04ebd17e168c304eda2"
+  integrity sha512-/tTdEuWcWHSe/mGMomWkuaFDoRcpfl/jvGISVTPRq3pJvM1FPAzxlh2MXge6C30aUS9bxh3V0aWwgKFCilzyMQ==
+  dependencies:
+    "@algolia/client-common" "5.2.5"
 
 "@algolia/transporter@4.18.0":
   version "4.18.0"
@@ -1047,6 +1116,13 @@
   resolved "https://registry.npmmirror.com/@babel/regjsgen/-/regjsgen-0.8.0.tgz"
   integrity sha512-x/rqGMdzj+fWZvCOYForTghzbtqPDZ5gPwaoNGHdgDfF2QA/XZbCBp4Moo5scrkAMPhB7z26XM/AaHuIJdgauA==
 
+"@babel/runtime@^7.1.2":
+  version "7.25.6"
+  resolved "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.25.6.tgz#9afc3289f7184d8d7f98b099884c26317b9264d2"
+  integrity sha512-VBj9MYyDb9tuLq7yzqjgzt6Q+IBQLrGZfdjOekyEirZPHxXWoTSGUTMrpsfi58Up73d13NfYLv8HT9vmznjzhQ==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
 "@babel/runtime@^7.11.2", "@babel/runtime@^7.8.4":
   version "7.22.6"
   resolved "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.22.6.tgz"
@@ -1640,6 +1716,11 @@
   dependencies:
     "@types/ms" "*"
 
+"@types/dom-speech-recognition@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.npmmirror.com/@types/dom-speech-recognition/-/dom-speech-recognition-0.0.1.tgz#e326761a04b4a49c0eec2ac7948afc1c6aa12baa"
+  integrity sha512-udCxb8DvjcDKfk1WTBzDsxFbLgYxmQGKrE/ricoMqHRNjSlSUCcamVTA5lIQqzY10mY5qCY0QDwBfFEwhfoDPw==
+
 "@types/estree@0.0.39":
   version "0.0.39"
   resolved "https://registry.npmmirror.com/@types/estree/-/estree-0.0.39.tgz"
@@ -1658,10 +1739,20 @@
     "@types/jsonfile" "*"
     "@types/node" "*"
 
+"@types/google.maps@^3.55.12":
+  version "3.57.0"
+  resolved "https://registry.npmmirror.com/@types/google.maps/-/google.maps-3.57.0.tgz#3ed0290126a90fa95587de02babab25b1ab34559"
+  integrity sha512-8X/HqaUXob25aVslslO84p9ESInpOQd3lMxW085IxqZZ1opRuFfwx2/c1JIUFVvCkkK+sCQHFDJ+Kw60Gsi1qA==
+
 "@types/hash-sum@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmmirror.com/@types/hash-sum/-/hash-sum-1.0.0.tgz"
   integrity sha512-FdLBT93h3kcZ586Aee66HPCVJ6qvxVjBlDWNmxSGSbCZe9hTsjRKdSsl4y1T+3zfujxo9auykQMnFsfyHWD7wg==
+
+"@types/hogan.js@^3.0.0":
+  version "3.0.5"
+  resolved "https://registry.npmmirror.com/@types/hogan.js/-/hogan.js-3.0.5.tgz#09f5b916ad88e1975b093ab7a25a37ffc0418be5"
+  integrity sha512-/uRaY3HGPWyLqOyhgvW9Aa43BNnLZrNeQxl2p8wqId4UHMfPKolSB+U7BlZyO1ng7MkLnyEAItsBzCG0SDhqrA==
 
 "@types/jsonfile@*":
   version "6.1.1"
@@ -1726,6 +1817,11 @@
   version "17.0.45"
   resolved "https://registry.npmmirror.com/@types/node/-/node-17.0.45.tgz"
   integrity sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==
+
+"@types/qs@^6.5.3":
+  version "6.9.15"
+  resolved "https://registry.npmmirror.com/@types/qs/-/qs-6.9.15.tgz#adde8a060ec9c305a82de1babc1056e73bd64dce"
+  integrity sha512-uXHQKES6DQKKCLh441Xv/dwxOq1TVS3JPUMlEqoEglvlhR6Mxnlew/Xq/LRVHpLyk7iK3zODe1qYHIMltO7XGg==
 
 "@types/raphael@2.3.3":
   version "2.3.3"
@@ -2259,6 +2355,11 @@
     marked "^4.3.0"
     vue "^3.3.2"
 
+abbrev@1:
+  version "1.1.1"
+  resolved "https://registry.npmmirror.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
+  integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
+
 abortcontroller-polyfill@^1.7.5:
   version "1.7.5"
   resolved "https://registry.npmmirror.com/abortcontroller-polyfill/-/abortcontroller-polyfill-1.7.5.tgz"
@@ -2279,6 +2380,13 @@ ajv@^8.6.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
+algoliasearch-helper@3.22.4:
+  version "3.22.4"
+  resolved "https://registry.npmmirror.com/algoliasearch-helper/-/algoliasearch-helper-3.22.4.tgz#a9de9b69a79528c65d0149978c0d5bece7240484"
+  integrity sha512-fvBCywguW9f+939S6awvRMstqMF1XXcd2qs1r1aGqL/PJ1go/DqN06tWmDVmhCDqBJanm++imletrQWf0G2S1g==
+  dependencies:
+    "@algolia/events" "^4.0.1"
+
 algoliasearch@^4.0.0:
   version "4.18.0"
   resolved "https://registry.npmmirror.com/algoliasearch/-/algoliasearch-4.18.0.tgz"
@@ -2298,6 +2406,20 @@ algoliasearch@^4.0.0:
     "@algolia/requester-common" "4.18.0"
     "@algolia/requester-node-http" "4.18.0"
     "@algolia/transporter" "4.18.0"
+
+algoliasearch@^5.2.5:
+  version "5.2.5"
+  resolved "https://registry.npmmirror.com/algoliasearch/-/algoliasearch-5.2.5.tgz#2692431c02fcdfc15667b5655a1b73784e90120a"
+  integrity sha512-9MpULI7o+ICN3XX0vqMf+6DJhQ0wLW+np920LOGtsCX7UGiJMdSjZXzahN+S7tBk/PnVw0U0rA2lJu0Vq3xknQ==
+  dependencies:
+    "@algolia/client-abtesting" "5.2.5"
+    "@algolia/client-analytics" "5.2.5"
+    "@algolia/client-common" "5.2.5"
+    "@algolia/client-personalization" "5.2.5"
+    "@algolia/client-search" "5.2.5"
+    "@algolia/recommend" "5.2.5"
+    "@algolia/requester-browser-xhr" "5.2.5"
+    "@algolia/requester-node-http" "5.2.5"
 
 ansi-regex@^5.0.1:
   version "5.0.1"
@@ -3767,6 +3889,19 @@ hls.js@^1.3.4:
   resolved "https://registry.npmmirror.com/hls.js/-/hls.js-1.4.9.tgz"
   integrity sha512-i2BuNh7C7sd+wpW1V9p+P37KKCWNc6Ph/3BiPr+8nfJ7eZdtQQvSQUn2QwKU+7Fvc7b5BpS/lM6RJ3LUf+XbWg==
 
+hogan.js@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.npmmirror.com/hogan.js/-/hogan.js-3.0.2.tgz#4cd9e1abd4294146e7679e41d7898732b02c7bfd"
+  integrity sha512-RqGs4wavGYJWE07t35JQccByczmNUXQT0E12ZYV1VKYu5UiAU9lsos/yBAcf840+zrUQQxgVduCR5/B8nNtibg==
+  dependencies:
+    mkdirp "0.3.0"
+    nopt "1.0.10"
+
+htm@^3.0.0:
+  version "3.1.1"
+  resolved "https://registry.npmmirror.com/htm/-/htm-3.1.1.tgz#49266582be0dc66ed2235d5ea892307cc0c24b78"
+  integrity sha512-983Vyg8NwUE7JkZ6NmOqpCZ+sh1bKv2iYTlUkzlWmA5JD2acKoxd4KVxbMmxX/85mtfdnDmTFoNKcg5DGAvxNQ==
+
 html-entities@^1.2.1:
   version "1.4.0"
   resolved "https://registry.npmmirror.com/html-entities/-/html-entities-1.4.0.tgz"
@@ -3846,6 +3981,36 @@ insane@^2.6.2:
   dependencies:
     assignment "2.0.0"
     he "0.5.0"
+
+instantsearch-ui-components@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.npmmirror.com/instantsearch-ui-components/-/instantsearch-ui-components-0.9.0.tgz#f7ae71fe623d18eff32b73071749f31826cb7b89"
+  integrity sha512-ugQ+XdPx3i3Sxu+woRo6tPE0Fz/kWd4KblTUfZD1TZZBsm/8qFvcbg5dVBDvXX9v7ntoyugXCzC/XCZMzrSkig==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+
+instantsearch.css@^8.5.0:
+  version "8.5.0"
+  resolved "https://registry.npmmirror.com/instantsearch.css/-/instantsearch.css-8.5.0.tgz#f6a2e4345d5fab81fcf25a0d5d15006afd6992bc"
+  integrity sha512-nw7VPo/KglBWXHSuoSjf0UH8A6aVtYhkphPA4HWnQ7gtgejFBOlKmPKX/0OQI0JA+aIc6x5pyAKvZAzKyOuggQ==
+
+instantsearch.js@4.74.0:
+  version "4.74.0"
+  resolved "https://registry.npmmirror.com/instantsearch.js/-/instantsearch.js-4.74.0.tgz#af5205c40c3b49daec29bf977cb30e19893257e0"
+  integrity sha512-IbKAvnQ03cxb1Ni1OpLv6Yuu1W7Cu1zGru77rvgzYyPsurknpjQHdBicszSZlKaK/zND7D5vhSNZoliiz9nuEQ==
+  dependencies:
+    "@algolia/events" "^4.0.1"
+    "@types/dom-speech-recognition" "^0.0.1"
+    "@types/google.maps" "^3.55.12"
+    "@types/hogan.js" "^3.0.0"
+    "@types/qs" "^6.5.3"
+    algoliasearch-helper "3.22.4"
+    hogan.js "^3.0.2"
+    htm "^3.0.0"
+    instantsearch-ui-components "0.9.0"
+    preact "^10.10.0"
+    qs "^6.5.1 < 6.10"
+    search-insights "^2.15.0"
 
 internal-slot@^1.0.3, internal-slot@^1.0.5:
   version "1.0.5"
@@ -4446,6 +4611,11 @@ minimatch@^9.0.0:
   dependencies:
     brace-expansion "^2.0.1"
 
+mitt@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmmirror.com/mitt/-/mitt-2.1.0.tgz#f740577c23176c6205b121b2973514eade1b2230"
+  integrity sha512-ILj2TpLiysu2wkBbWjAmww7TkZb65aiQO+DkVdUTBpBXq+MHYiETENkKFMtsJZX1Lf4pe4QOrTSjIfUwN5lRdg==
+
 mitt@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmmirror.com/mitt/-/mitt-3.0.1.tgz"
@@ -4455,6 +4625,11 @@ mj-context-menu@^0.6.1:
   version "0.6.1"
   resolved "https://registry.npmmirror.com/mj-context-menu/-/mj-context-menu-0.6.1.tgz"
   integrity sha512-7NO5s6n10TIV96d4g2uDpG7ZDpIhMh0QNfGdJw/W47JswFcosz457wqz/b5sAKvl12sxINGFCn80NZHKwxQEXA==
+
+mkdirp@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npmmirror.com/mkdirp/-/mkdirp-0.3.0.tgz#1bbf5ab1ba827af23575143490426455f481fe1e"
+  integrity sha512-OHsdUcVAQ6pOtg5JYWpCBo9W/GySVuwvP9hueRMW7UqshC0tbfzLv8wjySTPm3tfUZ/21CE9E1pJagOA91Pxew==
 
 mlly@^1.2.0, mlly@^1.4.0:
   version "1.4.0"
@@ -4493,6 +4668,13 @@ non-layered-tidy-tree-layout@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmmirror.com/non-layered-tidy-tree-layout/-/non-layered-tidy-tree-layout-2.0.2.tgz"
   integrity sha512-gkXMxRzUH+PB0ax9dUN0yYF0S25BqeAYqhgMaLUFmpXLEk7Fcu8f4emJuOAY0V8kjDICxROIKsTAKsV/v355xw==
+
+nopt@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.npmmirror.com/nopt/-/nopt-1.0.10.tgz#6ddd21bd2a31417b92727dd585f8a6f37608ebee"
+  integrity sha512-NWmpvLSqUrgrAC9HCuxEvb+PSloHpqVu+FqcO4eeF2h5qYRhA7ev6KvelyQAKtegUbC6RypJnlEOhd8vloNKYg==
+  dependencies:
+    abbrev "1"
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
@@ -4727,6 +4909,11 @@ preact@^10.0.0:
   resolved "https://registry.npmmirror.com/preact/-/preact-10.16.0.tgz"
   integrity sha512-XTSj3dJ4roKIC93pald6rWuB2qQJO9gO2iLLyTe87MrjQN+HklueLsmskbywEWqCHlclgz3/M4YLL2iBr9UmMA==
 
+preact@^10.10.0:
+  version "10.23.2"
+  resolved "https://registry.npmmirror.com/preact/-/preact-10.23.2.tgz#52deec92796ae0f0cc6b034d9c66e0fbc1b837dc"
+  integrity sha512-kKYfePf9rzKnxOAKDpsWhg/ysrHPqT+yQ7UW4JjdnqjFIeNUnNcEJvhuA8fDenxAGWzUqtd51DfVg7xp/8T9NA==
+
 pretty-bytes@^5.3.0:
   version "5.6.0"
   resolved "https://registry.npmmirror.com/pretty-bytes/-/pretty-bytes-5.6.0.tgz"
@@ -4751,6 +4938,11 @@ qrcode@^1.5.1:
     encode-utf8 "^1.0.3"
     pngjs "^5.0.0"
     yargs "^15.3.1"
+
+"qs@^6.5.1 < 6.10":
+  version "6.9.7"
+  resolved "https://registry.npmmirror.com/qs/-/qs-6.9.7.tgz#4610846871485e1e048f44ae3b94033f0e675afe"
+  integrity sha512-IhMFgUmuNpyRfxA90umL7ByLlgRXu6tIfKPpF5TmcfRLlLCckfP/g3IQmju6jjpu+Hh8rA+2p6A27ZSPOOHdKw==
 
 queue-microtask@^1.2.2:
   version "1.2.3"
@@ -4808,6 +5000,11 @@ regenerator-runtime@^0.13.11:
   version "0.13.11"
   resolved "https://registry.npmmirror.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
+
+regenerator-runtime@^0.14.0:
+  version "0.14.1"
+  resolved "https://registry.npmmirror.com/regenerator-runtime/-/regenerator-runtime-0.14.1.tgz#356ade10263f685dda125100cd862c1db895327f"
+  integrity sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==
 
 regenerator-transform@^0.15.1:
   version "0.15.1"
@@ -4984,6 +5181,11 @@ scule@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmmirror.com/scule/-/scule-1.0.0.tgz"
   integrity sha512-4AsO/FrViE/iDNEPaAQlb77tf0csuq27EsVpy6ett584EcRTp6pTDLoGWVxCD77y5iU5FauOvhsI4o1APwPoSQ==
+
+search-insights@^2.15.0:
+  version "2.17.1"
+  resolved "https://registry.npmmirror.com/search-insights/-/search-insights-2.17.1.tgz#89caded6cbe596bedd17ef23c2bdd8ccab04c03a"
+  integrity sha512-HHFjYH/0AqXacETlIbe9EYc3UNlQYGNNTY0fZ/sWl6SweX+GDxq9NB5+RVoPLgEFuOtCz7M9dhYxqDnhbbF0eQ==
 
 section-matter@^1.0.0:
   version "1.0.0"
@@ -5525,6 +5727,15 @@ vue-demi@*, vue-demi@>=0.14.5:
   version "0.14.5"
   resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.14.5.tgz"
   integrity sha512-o9NUVpl/YlsGJ7t+xuqJKx8EBGf1quRhCiT6D/J0pfwmk9zUwYkC7yrF4SZCe6fETvSM3UNL2edcbYrSyc4QHA==
+
+vue-instantsearch@^4.19.3:
+  version "4.19.3"
+  resolved "https://registry.npmmirror.com/vue-instantsearch/-/vue-instantsearch-4.19.3.tgz#ce3d66cac2190b5becf6354f640efcb29261c9c6"
+  integrity sha512-qNR1JI9X9POW9QUCBmalDaTzxQlwbh5jGEoxI65VSrSvaOMe+4Si3EJlfhQ8iC2J4Rj66065DlLOpkr6rW2LIQ==
+  dependencies:
+    instantsearch-ui-components "0.9.0"
+    instantsearch.js "4.74.0"
+    mitt "^2.1.0"
 
 vue-router@4.1.6:
   version "4.1.6"

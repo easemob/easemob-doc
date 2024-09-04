@@ -24,7 +24,10 @@
     "vuepress-theme-hope": "2.0.0-beta.189"
   },
   "dependencies": {
+    "algoliasearch": "^5.2.5",
     "artalk": "^2.8.7",
-    "element-plus": "^2.7.3"
+    "element-plus": "^2.7.3",
+    "instantsearch.css": "^8.5.0",
+    "vue-instantsearch": "^4.19.3"
   }
 }
