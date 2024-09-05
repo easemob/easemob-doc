@@ -1,5 +1,5 @@
 <script setup>
-import Sidebar from 'vuepress-theme-hope/modules/navbar/components/Navbar.js'
+import Navbar from 'vuepress-theme-hope/modules/navbar/components/Navbar.js'
 import { useThemeLocaleData } from 'vuepress-theme-hope/composables/index'
 
 const themeData = useThemeLocaleData()
@@ -7,7 +7,7 @@ const extraNavList = themeData.value.extra_nav || []
 </script>
 
 <template>
-  <Sidebar>
+  <Navbar>
     <template #endBefore>
       <Docsearch />
       <el-link
@@ -19,7 +19,7 @@ const extraNavList = themeData.value.extra_nav || []
         >{{ item.text }}
       </el-link>
     </template>
-  </Sidebar>
+  </Navbar>
 </template>
 
 <style scope></style>

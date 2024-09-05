@@ -1,4 +1,5 @@
 <template>
+  <navbar />
   <ClientOnly>
     <ais-instant-search
       index-name="im-beta-easemob"
@@ -6,7 +7,7 @@
       :initial-ui-state="initialUiState"
     >
       <ais-configure
-        :hitsPerPage="8"
+        :hitsPerPage="6"
         :maxValuesPerFacet="22"
         :attributesToSnippet="[
           'hierarchy.lvl1:20',
@@ -62,12 +63,15 @@
 </template>
 
 <script>
+import Navbar from '../components/Navbar.vue'
 import { liteClient } from 'algoliasearch/lite'
 import { useRoute } from 'vue-router'
 
 export default {
   name: 'InstanceSearchLayout',
-
+  components: {
+    Navbar
+  },
   data() {
     return {
       searchClient: liteClient(
@@ -94,9 +98,12 @@ export default {
 </script>
 
 <style>
+body {
+  height: 100%;
+}
 .searchBoxContainer {
-  max-width: 1280px;
-  margin: 1em auto;
+  max-width: 1080px;
+  margin: 75px auto 20px;
   display: flex;
   font-family: sans-serif;
   padding: 1em;
