@@ -77,14 +77,14 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | `Content-Type`    | String | 是       | 内容类型： `multipart/form-data`。 |
 | `Authorization`   | String | 否       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 | `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（`share-secret`）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。<br/><Container type="tip" title="提示">要使用文件访问限制功能，请联系商务开通。</Container>|
+| `thumbnail-height` | Int    | 否       | 缩略图的高度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，上传的图片即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的高度取决于该参数的设置。<br/> - 若不传该参数，缩略图的高度默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。 |
+| `thumbnail-width`  | Int    | 否       | 缩略图的宽度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，图片原图即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的宽度取决于该参数的设置。<br/> - 若不传该参数，缩略图的宽度默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。   |
 
 #### 请求 body
 
 | 参数               | 类型   | 是否必需 | 描述        |
 | :----------------- | :----- | :------- | :--------------- |
 | `file`             | String | 是       | 文件本地路径。    |
-| `thumbnail-height` | Int    | 否       | 缩略图的高度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，上传的图片即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的高度取决于该参数的设置。<br/> - 若不传该参数，缩略图的高度默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。 |
-| `thumbnail-width`  | Int    | 否       | 缩略图的宽度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，图片原图即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的宽度取决于该参数的设置。<br/> - 若不传该参数，缩略图的宽度默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。   |
 
 ### HTTP 响应
 
@@ -113,6 +113,8 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
 -H 'Authorization: Bearer <YourAppToken>'   \
 -H 'Content-Type: multipart/form-data; boundary=---WebKitFormBoundary7MA4YWxkTrZu0gW'   \
 -H 'restrict-access: true'   \
+-H 'thumbnail-height: 180' \
+-H 'thumbnail-width: 180' \
 -F 'file="@/Users/test/9.2/easemob/image/IMG_2953.JPG"'
 ```
 
