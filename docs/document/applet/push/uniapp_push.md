@@ -31,7 +31,7 @@
 更多详情，参见 [Android 离线推送](/document/android/push/push_fcm.html)和 [APNs 离线推送](/document/ios/push/push_apns.html)。
 :::
 
-### 步骤一 配置 uni-app 应用支持推送插件
+### 步骤二 配置 uni-app 应用支持推送插件
 
 1. 新建 uni-app 工程，并引入[环信 uni-app 推送插件](https://downloadsdk.easemob.com/downloads/WEB_SDK/EMPushUniPlugin_V1.0.0.zip)。
    
