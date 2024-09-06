@@ -1,10 +1,16 @@
 # 产品动态
 
+## 2024-09
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| SDK 4.9.1 开发版发布   | uni-app SDK 支持[离线推送](/push/uniapp_push.html)。 | 2024-09-06      | [小程序 4.9.1 更新日志](/document/applet/releasenote.html#版本-v4-9-1-dev-2024-09-06-开发版)         |
+
 ## 2024-08
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.9.0 开发版发布  | **新增特性**：<br/> - 用户上线后从服务端拉取离线消息时，会[收到拉取开始和结束的通知](/document/android/overview.html#连接状态相关)。<br/> - 单聊会话支持[消息置顶](/document/android/message_pin.html)。<br/> - 移动端支持查看当前用户是否在指定的群组的禁言列表中。<br/> - 移动端撤回消息后，你[收到的通知中会体现消息所属的会话 ID](/document/android/message_recall.html#设置消息撤回监听)。<br/> - Web 端可[查看 app 下设置了推送通知方式（接收所有人通知、只接收 @ 我的通知和不接收任何通知）的所有会话](/document/web/push/push_notification_mode_dnd.html#获取设置了推送通知方式的所有会话)。<br/> - 对于 Web 端，你若设置了指定会话的推送通知方式或免打扰时长或时间段，[其他设备会收到事件通知](/document/web/push/push_notification_mode_dnd.html#设置单个会话的推送通知)。<br/> - 对于 Web 端，你若清除了会话的推送通知方式，[其他设备会收到事件通知](/document/web/push/push_notification_mode_dnd.html#清除单个会话的推送通知方式的设置)。| 2024-08-30       |  <br/> - [Android 4.9.0 更新日志](/document/android/releasenote.html#版本-v4-9-0-dev-2024-08-30-开发版)<br/> - [iOS 4.9.0 更新日志](/document/ios/releasenote.html#版本-v4-9-0-dev-2024-08-30-开发版) <br/> - [Web 4.9.0 更新日志](/document/web/releasenote.html#版本-v4-9-0-dev-2024-08-30-开发版)          |
+| SDK 4.9.0 开发版发布  | **新增特性**：<br/> - 用户上线后从服务端拉取离线消息时，会[收到拉取开始和结束的通知](/document/android/overview.html#连接状态相关)。<br/> - 单聊会话支持[消息置顶](/document/android/message_pin.html)。<br/> - 移动端支持查看当前用户是否在指定的群组的禁言列表中。<br/> - 移动端撤回消息后，你[收到的通知中会体现消息所属的会话 ID](/document/android/message_recall.html#设置消息撤回监听)。<br/> - Web 端可[查看 app 下设置了推送通知方式（接收所有人通知、只接收 @ 我的通知和不接收任何通知）的所有会话](/document/web/push/push_notification_mode_dnd.html#获取设置了推送通知方式的所有会话)。<br/> - 对于 Web 端，你若设置了指定会话的推送通知方式或免打扰时长或时间段，[其他设备会收到事件通知](/document/web/push/push_notification_mode_dnd.html#设置单个会话的推送通知)。<br/> - 对于 Web 端，你若清除了会话的推送通知方式，[其他设备会收到事件通知](/document/web/push/push_notification_mode_dnd.html#清除单个会话的推送通知方式的设置)。| 2024-08-30       |  <br/> - [Android 4.9.0 更新日志](/document/android/releasenote.html#版本-v4-9-0-dev-2024-08-30-开发版)<br/> - [iOS 4.9.0 更新日志](/document/ios/releasenote.html#版本-v4-9-0-dev-2024-08-30-开发版) <br/> - [Web 4.9.0 更新日志](/document/web/releasenote.html#版本-v4-9-0-dev-2024-08-30-开发版) |
 
 ## 2024-07
 
