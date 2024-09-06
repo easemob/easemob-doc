@@ -4,7 +4,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.9.1 开发版发布   | uni-app SDK 支持[离线推送](/push/uniapp_push.html)。 | 2024-09-06      | [小程序 4.9.1 更新日志](/document/applet/releasenote.html#版本-v4-9-1-dev-2024-09-06-开发版)         |
+| SDK 4.9.1 开发版发布   | uni-app SDK 支持[离线推送](/document/applet/push/uniapp_push.html)。 | 2024-09-06      | [小程序 4.9.1 更新日志](/document/applet/releasenote.html#版本-v4-9-1-dev-2024-09-06-开发版)         |
 
 ## 2024-08
 
