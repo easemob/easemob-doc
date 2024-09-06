@@ -2,6 +2,16 @@
 
 <Toc />
 
+## 版本 V4.9.1 Dev 2024-09-06（开发版）
+
+### 新增特性
+
+- [IM SDK] uni-app SDK 支持 [uni-app 推送插件](/document/applet/push/uniapp_push.html)。
+
+### 修复
+  
+- [IM SDK] 修复一些类型问题。
+
 ## 版本 V4.8.1 Dev 2024-07-17（开发版）
 
 ### 新增特性

@@ -1163,7 +1163,7 @@ projects:
                 text: Web
                 link: /document/web/push/push_overview.html
               - icon: /sdk/applet.svg
-                text: 小程序
+                text: 小程序（包括 uni-app）
                 link: /document/applet/push/push_overview.html  
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
