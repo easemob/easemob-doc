@@ -19,7 +19,9 @@
     - APNS 推送：在 IOS 系统上可用。
 插件内部会按照以上顺序检测设备的推送支持情况。如果未设置第三方推送或者不满足使用第三方推送的条件，环信 IM SDK 会通过一些保活手段尽可能的保持与环信服务器的长连接，以确保消息及时送达。
 
-## 上传推送证书至环信即时通讯控制台
+## 实现流程
+
+### 步骤一 上传推送证书至环信即时通讯控制台
 
 1. 在第三方推送服务后台注册应用，获取应用信息，开启推送服务。
    
@@ -29,7 +31,7 @@
 更多详情，参见 [Android 离线推送](/document/android/push/push_fcm.html)和 [APNs 离线推送](/document/ios/push/push_apns.html)。
 :::
 
-## 配置 uni-app 应用支持推送插件
+### 步骤一 配置 uni-app 应用支持推送插件
 
 1. 新建 uni-app 工程，并引入[环信 uni-app 推送插件](https://downloadsdk.easemob.com/downloads/WEB_SDK/EMPushUniPlugin_V1.0.0.zip)。
    
@@ -80,7 +82,7 @@
   
 ![img](/images/applet/push_tip6.png)
 
-## 集成 EMPushUniPlugin 插件
+### 步骤三 集成 EMPushUniPlugin 插件
 
 :::tip
 SDK 4.9.1 及以上版本支持 uni-app 推送。
@@ -145,7 +147,7 @@ onLaunch(() => {
 
 ```
 
-## 测试离线推送
+### 步骤四 测试离线推送
 
 消息接收方登录 IM 账户后，SDK 会自动上传对应的推送证书, 杀死应用，收到离线消息，能够接收到推送消息。
 
