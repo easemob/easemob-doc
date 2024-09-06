@@ -6,7 +6,7 @@
 
 ### 新增特性
 
-- [IM SDK] uni-app SDK 支持 [uni-app 推送插件](/applet/push/uniapp_push.html)。
+- [IM SDK] uni-app SDK 支持 [uni-app 推送插件](/document/applet/push/uniapp_push.html)。
 
 ### 修复
   
