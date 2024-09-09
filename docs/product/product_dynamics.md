@@ -6,6 +6,10 @@
 | :----- | :------- | :---------------- | :---------------- |
 | SDK 4.9.1 开发版发布   | uni-app SDK 支持[离线推送](/document/applet/push/uniapp_push.html)。 | 2024-09-06      | [小程序 4.9.1 更新日志](/document/applet/releasenote.html#版本-v4-9-1-dev-2024-09-06-开发版)         |
 
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS SDK 1.3.0 开发版发布     | **新增特性**：<br/> - HarmonyOS 端新增[群成员自定义属性](/document/harmonyos/group_members.html#管理群成员的自定义属性)功能。 <br/> - HarmonyOS 端新增[设置推送通知的显示内容](/document/harmonyos/push/push_display.html) 、[推送通知方式和免打扰模式功能](/document/harmonyos/push/push_notification_mode_dnd.html)。 <br/> - HarmonyOS 端新增[用户在线状态订阅](presence.html)功能。 <br/> - 新增[聊天室自定义属性](/document/harmonyos/room_attributes.html#管理聊天室自定义属性-key-value)功能。 | 2024-09-09         | [HarmonyOS 1.3.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-3-0-dev-2024-09-10-开发版)  |
+
 ## 2024-08
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
@@ -20,7 +24,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.2.0 开发版发布 |**新增特性**：<br/> - HarmonyOS 端新增[表情回复 Reaction](/document/harmonyos/reaction.html)功能。<br/> - HarmonyOS 端新增[会话标记](/document/harmonyos/conversation_mark.html)功能。<br/> - HarmonyOS 端新增[会话置顶](/document/harmonyos/conversation_pin.html)功能。<br/> - HarmonyOS 端新增[用户属性](/document/harmonyos/userprofile.html)功能。  | 2024-07-11  | [HarmonyOS 1.1.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-2-0-dev-2024-07-11-开发版) | 
+| HarmonyOS SDK 1.2.0 开发版发布 |**新增特性**：<br/> - HarmonyOS 端新增[表情回复 Reaction](/document/harmonyos/reaction.html)功能。<br/> - HarmonyOS 端新增[会话标记](/document/harmonyos/conversation_mark.html)功能。<br/> - HarmonyOS 端新增[会话置顶](/document/harmonyos/conversation_pin.html)功能。<br/> - HarmonyOS 端新增[用户属性](/document/harmonyos/userprofile.html)功能。  | 2024-07-11  | [HarmonyOS 1.2.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-2-0-dev-2024-07-11-开发版) | 
 | HarmonyOS SDK 1.1.0 开发版发布 |**新增特性**：<br/> - HarmonyOS 端新增[修改消息](/document/harmonyos/message_modify.html)功能。<br/> - HarmonyOS 端新增[自定义消息](/document/harmonyos/message_send_receive.html#发送自定义类型消息)功能。<br/> - HarmonyOS 端新增[合并转发消息](/document/harmonyos/message_send_receive.html#发送和接收合并消息)功能。<br/> - HarmonyOS 端新增[离线推送](/document/harmonyos/overview.html)功能。  | 2024-07-01  | [HarmonyOS 1.1.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-1-0-dev-2024-07-01-开发版) | 
 
 ## 2024-06
