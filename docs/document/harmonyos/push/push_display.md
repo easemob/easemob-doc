@@ -7,8 +7,6 @@
 
 ## 设置推送显示属性
 
-### 设置推送通知的显示属性
-
 你可以调用 `updatePushNickname` 设置推送通知中显示的昵称，如以下代码示例所示：
 
 ```TypeScript
@@ -59,9 +57,8 @@ ChatClient.getInstance().pushManager()?.updatePushDisplayStyle(displayStyle).the
 
 1. 发送消息时使用默认的推送标题和内容：设置推送通知的展示方式 `PushDisplayStyle`。推送标题为“您有一条新消息”，推送内容为“请点击查看”。  
 2. 发送消息时使用默认模板：若有默认模板 `default`，发消息时无需指定。
-3. 发送消息时使用扩展字段自定义要显示的推送标题和推送内容，即 `em_push_title` 和 `em_push_content`。
-4. 接收方设置了推送模板。
-5. 发送消息时通过消息扩展字段指定模板名称。
+3. 接收方设置了推送模板。
+4. 发送消息时通过消息扩展字段指定模板名称。
 
 #### **发送消息时使用推送模板**
 
