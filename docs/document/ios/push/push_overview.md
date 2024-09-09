@@ -27,7 +27,7 @@
 
 ## **技术原理**
 
-![image](@static/images/ios/push/push_ios_1_understand.png)
+![image](/images/ios/push/push_ios_1_understand.png)
 
 消息推送流程如下：
 
