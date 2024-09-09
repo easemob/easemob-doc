@@ -11,7 +11,7 @@
   - `fetchMemberAttributes`：获取单个群成员的所有自定义属性。
   - `fetchMembersAttributes`：根据属性 key 获取多个群成员的自定义属性。
   - `GroupListener#onGroupMemberAttributeChanged`：群组成员自定义属性变化的回调。
-- 新增[设置推送通知的显示内容](/push/push_display.html) 、[推送通知方式和免打扰模式功能](/push/push_notification_mode_dnd.html)。
+- 新增[设置推送通知的显示内容](/harmonyos/push/push_display.html) 、[推送通知方式和免打扰模式功能](/harmonyos/push/push_notification_mode_dnd.html)。
 - 新增[在线状态订阅](presence.html)功能。
 - 新增[聊天室自定义属性](room_attributes.html#管理聊天室自定义属性-key-value)功能。
   - `fetchChatroomAttributes`：获取聊天室自定义属性。
