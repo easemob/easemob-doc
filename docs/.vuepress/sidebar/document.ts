@@ -136,7 +136,7 @@ const documentSidebar = [
         ]
       },
       { text: '登录多个设备', link: 'multi_device.html' },
-      { text: '管理在线状态订阅', link: 'presence.html', except: ['harmonyos'] },
+      { text: '管理在线状态订阅', link: 'presence.html' },
       { text: '消息表情回复', link: 'reaction.html' },
       {
         text: '子区管理',
