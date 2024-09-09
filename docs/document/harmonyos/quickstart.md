@@ -9,7 +9,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 
@@ -40,7 +40,7 @@
 
 ### 2. 在工程 `build-profile.json5` 中设置支持字节码 HAR 包。
 
-修改工程级 `build-profile.json5` 文件，在 `products` 节点下设置 `useNormalizedOHMUrl` 为 true 。
+修改工程级 `build-profile.json5` 文件，在 `products` 节点下设置 `useNormalizedOHMUrl` 为 `true`。
 
 ```json
 {
@@ -57,11 +57,11 @@
   }
 }
 ````
-***注：***
 
-  - *此配置需要将 `DevEco Studio` 升级到 `Beta2（5.0.3.502）` 及以上版本;*
-
-  - *SDK 1.3.0 及以上版本采用字节码构建方式打包，必须设置 `useNormalizedOHMUrl` 为 true；之前版本无需此设置。*
+:::tip
+- 此配置需要将 `DevEco Studio` 升级到 `Beta2（5.0.3.502）` 及以上版本。
+- SDK 1.3.0 及以上版本采用字节码构建方式打包，必须设置 `useNormalizedOHMUrl` 为 `true`。之前版本无需此设置。
+:::
 
 ### 2. 集成 SDK
 
