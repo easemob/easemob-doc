@@ -9,11 +9,11 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![img](/images/android/sendandreceivemsg.png)
+![img](@static/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 
-- DevEco Studio NEXT Developer Beta1（5.0.3.300）及以上；
+- DevEco Studio NEXT Developer Beta2（5.0.3.502）及以上；
 - HarmonyOS SDK API 12 及以上；
 - 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
 
@@ -36,7 +36,32 @@
 
 4. 点击 **Finish**。根据屏幕提示，安装所需插件。
 
-上述步骤使用 **DevEco Studio NEXT Developer Beta1（5.0.3.300）** 示例。
+上述步骤使用 **DevEco Studio NEXT Developer Beta2（5.0.3.502）** 示例。
+
+### 2. 在工程 `build-profile.json5` 中设置支持字节码 HAR 包。
+
+修改工程级 `build-profile.json5` 文件，在 `products` 节点下设置 `useNormalizedOHMUrl` 为 true 。
+
+```json
+{
+  "app": {
+    "products": [
+      {
+         "buildOption": {
+           "strictMode": {
+             "useNormalizedOHMUrl": true
+           }
+         }
+      }
+    ]
+  }
+}
+````
+***注：***
+
+  - *此配置需要将 `DevEco Studio` 升级到 `Beta2（5.0.3.502）` 及以上版本;*
+
+  - *SDK 1.3.0 及以上版本采用字节码构建方式打包，必须设置 `useNormalizedOHMUrl` 为 true；之前版本无需此设置。*
 
 ### 2. 集成 SDK
 

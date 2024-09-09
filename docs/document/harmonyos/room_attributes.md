@@ -10,10 +10,10 @@
 
 环信即时通讯 IM SDK 提供 `ChatRoomManager` 类和 `ChatRoom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
 
-- `ChatRoomManager#fetchChatroomAnnouncement`：获取聊天室公告。
-- `ChatRoomManager#changeChatroomAnnouncement`：更新聊天室公告。
-- `ChatRoomManager#changeChatroomName`：修改聊天室名称。
-- `ChatRoomManager#changeChatroomDescription`：修改聊天室描述。
+- 获取和更新聊天室基本属性；
+- 获取聊天室自定义属性；
+- 设置和强制设置聊天室自定义属性；
+- 删除和强制删除聊天室自定义属性。
 
 ## 前提条件
 
@@ -24,8 +24,6 @@
 - 了解聊天室的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
-
-
 
 ### 获取聊天室公告
 
@@ -72,6 +70,108 @@ ChatClient.getInstance().chatroomManager()?.changeChatroomDescription(chatRoomId
     // success logic
 });
 ```
+
+### 管理聊天室自定义属性（key-value）
+
+#### 获取聊天室所有自定义属性和指定自定义属性
+
+聊天室所有成员均可调用 `fetchChatroomAttributes` 方法获取聊天室指定自定义属性。
+
+示例代码如下：
+
+```TypeScript
+// 举例，如有'key1'和'key2'两个聊天室自定义 key 。
+const keyArr = ['key1', 'key2'];
+ChatClient.getInstance().chatroomManager()?.fetchChatroomAttributes(chatroomId, keyArr).then(mapResult => {
+  // success logic
+}).catch((e: ChatError) => {
+  // failure logic
+})
+```
+
+如果不设置`keyArr` 参数，则表示获取聊天室所有自定义属性。
+
+```TypeScript
+ChatClient.getInstance().chatroomManager()?.fetchChatroomAttributes(chatroomId).then(mapResult => {
+  // success logic
+}).catch((e: ChatError) => {
+  // failure logic
+})
+```
+
+#### 设置聊天室自定义属性
+
+聊天室成员可以调用 `setChatroomAttributes` 方法设置单个聊天室自定义属性。该方法只可添加新自定义属性字段和更新自己设置的现有属性。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
+
+示例代码如下：
+
+```TypeScript
+let params: SetChatroomAttributeParams = {
+  chatroomId: chatroomId,// 聊天室 ID
+  attributeKeyOrMap: 'key',// 聊天室属性 key
+  attributeValue: 'value',// 聊天室属性 value
+  autoDelete: true,// 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
+  isForced: false,// 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
+}
+ChatClient.getInstance().chatroomManager()?.setChatroomAttributes(params).then(result => {
+  // success logic
+}).catch((e: ChatError) => {
+  // failure logic
+})
+```
+
+聊天室成员也可以调用 `setChatroomAttributes` 方法设置多个聊天室自定义属性，`attributeKeyOrMap` 参数传入 Map<string, string> 结构的聊天室自定义属性，不设置`attributeValue` 参数。
+
+示例代码如下：
+
+```TypeScript
+let attributeMap = new Map<string, string>();
+attributeMap.set('key1', 'value1');
+attributeMap.set('key2', 'value2');
+let params: SetChatroomAttributeParams = {
+  chatroomId: chatroomId,// 聊天室 ID
+  attributeKeyOrMap: attributeMap,// 聊天室属性，为 Map<string, string> 格式
+  autoDelete: true,// 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
+  isForced: false,// 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
+}
+ChatClient.getInstance().chatroomManager()?.setChatroomAttributes(params).then(result => {
+  if (result.code === ChatError.EM_NO_ERROR) {
+    // success logic
+  } else {
+    // partial success logic
+    result.errorKeyMap?.forEach((errorCode, key) => {
+      // 'errorCode' 是 ‘key’ 设置失败的原因
+    })
+  }
+}).catch((e: ChatError) => {
+  // failure logic
+})
+```
+
+如果除了设置自己的自定义属性还需覆盖其他聊天室成员设置的该属性，需将参数 `SetChatroomAttributeParams#isForced` 设置为 `true`。
+
+#### 删除聊天室自定义属性
+
+聊天室成员可以调用 `removeChatroomAttributes` 方法删除聊天室自定义属性。删除后，聊天室其他成员收到 `onAttributesRemoved` 回调。
+
+示例代码如下：
+
+```TypeScript
+let params: RemoveChatroomAttributeParams = {
+  chatroomId: chatroomId,// 聊天室 ID
+  attributeKey: 'key',// 聊天室属性 key
+  isForced: false,// 强制删除聊天室自定义属性，即是否支持删除其他成员设置的属性（可选，默认为 `false`）
+}
+ChatClient.getInstance().chatroomManager()?.removeChatroomAttributes(params).then(result => {
+  // success logic
+}).catch((e: ChatError) => {
+  // failure logic
+})
+```
+如果除了删除自己设置的自定义属性还需删除其他聊天室成员设置的该属性，需将参数 `RemoveChatroomAttributeParams#isForced` 设置为 `true`。
+
+如果要删除多个自定义属性，需将参数`RemoveChatroomAttributeParams#attributeKey` 设置为数组即可。
+
 
 ### 监听聊天室事件
 

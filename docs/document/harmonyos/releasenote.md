@@ -2,6 +2,39 @@
 
 <Toc />
 
+## 版本 V1.3.0 Dev 2024-09-09（开发版）
+
+### 新增特性
+
+- 新增[群成员自定义属性](group_members.html#管理群成员的自定义属性)功能：
+  - `setMemberAttributes`：设置群成员自定义属性。
+  - `fetchMemberAttributes`：获取单个群成员的所有自定义属性。
+  - `fetchMembersAttributes`：根据属性 key 获取多个群成员的自定义属性。
+  - `GroupListener#onGroupMemberAttributeChanged`：群组成员自定义属性变化的回调。
+- 新增[设置推送通知](push.html#设置离线推送) 功能。
+- 新增[在线状态订阅](presence.html)功能。
+- 新增[聊天室自定义属性](room_attributes.html#管理聊天室自定义属性-key-value)功能。
+  - `fetchChatroomAttributes`：获取聊天室自定义属性。
+  - `setChatroomAttributes`：设置聊天室自定义属性。
+  - `removeChatroomAttributes`：删除聊天室自定义属性。
+  - `ChatroomListener#onAttributesUpdate`：聊天室自定义属性有更新。
+  - `ChatroomListener#onAttributesRemoved`：聊天室自定义属性被移除。
+
+### 优化
+
+- 适配在 HarmonyOS NEXT 应用中使用 HarmonyOS APK 的 SDK 加密数据库。
+
+### 修复
+
+- 修复 CMD 消息不能设置 action 的问题；
+- 修复消息不能设置 JSON 格式数据的问题；
+  - 新增 `setJsonAttribute` 方法。
+- 修复部分回调存在跨线程调用 JS 对象的问题；
+- 修复枚举 `LEAVE_REASON` 没有导出的问题；
+- 修复发送图片时获取图片宽高失败的问题。
+
+**注意**：SDK V1.3.0 采用官方推荐的字节码构建方式，使用之后版本需要 DevEco Studio 升级到 5.0.3.502 及以上，并需要工程支持该构建模式。详见[快速开始](quickstart.html)。
+
 ## 版本 V1.2.0 Dev 2024-07-11（开发版）
 
 ### 新增特性

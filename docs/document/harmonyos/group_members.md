@@ -1,4 +1,4 @@
-+# 管理群组成员
+# 管理群组成员
 
 <Toc />
 
@@ -173,6 +173,66 @@ ChatClient.getInstance().groupManager()?.leaveGroup(groupId).then(() => {
 ChatClient.getInstance().groupManager()?.removeUsersFromGroup(groupId, members).then((group) => {
     // success logic
 });
+```
+
+### 管理群成员的自定义属性
+
+群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
+
+- 单个群成员的自定义属性总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节，否则会报错。
+
+- 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
+
+#### 设置群成员自定义属性
+
+你可以调用 `GroupManager#setMemberAttributes` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。
+
+设置后，群内其他成员会收到 `GroupListener#onGroupMemberAttributeChanged` 事件。
+
+示例代码如下：
+
+```TypeScript
+let attributes = new Map<string, string>();
+attributes.set('key1', 'value1');
+attributes.set('key2', 'value2');
+ChatClient.getInstance().groupManager()?.setMemberAttributes(groupId, member, attributes).then(()=> {
+  // success logic
+}).catch((e: ChatError) => {
+  // failure logic
+})
+```
+
+#### 获取单个群成员的所有自定义属性
+
+你可以调用 `GroupManager#fetchMemberAttributes` 方法获取单个群成员的所有自定义属性。
+
+示例代码如下：
+
+```TypeScript
+ChatClient.getInstance().groupManager()?.fetchMemberAttributes(groupId, member).then(resultMap => {
+  // success logic
+}).catch((e: ChatError) => {
+  // failure logic
+})
+```
+
+#### 根据属性 key 获取多个群成员的自定义属性
+
+你可调用 `EMGroupManager#asyncFetchGroupMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
+
+:::notice
+每次最多可获取 10 个群成员的自定义属性。
+:::
+
+示例代码如下：
+
+```TypeScript
+// keys：要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
+ChatClient.getInstance().groupManager()?.fetchMembersAttributes(groupId, members, keys).then(resultMap => {
+  // success logic
+}).catch((e: ChatError) => {
+  // failure logic
+})
 ```
 
 ### 管理群主和群管理员
