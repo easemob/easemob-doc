@@ -24,14 +24,14 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.8.54</version>
+    <version>0.8.55</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:0.8.54'
+implementation 'com.easemob.im:im-sdk-core:0.8.55'
 ```
 
 ### 使用
@@ -71,6 +71,7 @@ public class Config {
 - [Push](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/push/PushApi.html) 用于管理用户推送(设置推送免打扰等)。
 - [Token](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/token/TokenApi.html) 用于获取用户 Token。
 - [Room](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/room/RoomApi.html) 用于管理聊天室。
+- [Presence](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/presence/PresenceApi.html) 用于管理在线状态订阅。
 
 每个业务资源对应一个方法，例如，用户相关的 API，都可以在 `.user()` 找到。
 
@@ -234,6 +235,13 @@ EMProperties properties = EMProperties.builder()
 ```
 
 ## 更新日志
+
+### V0.8.55 2024-09-09
+
+1.增加 Presence 功能。
+2.更新 javadoc sdk 文档。
+
+以上更新内容请到 PresenceApi 中查看。
 
 ### V0.8.54 2024-07-29
 
