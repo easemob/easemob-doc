@@ -8,7 +8,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.3.0 开发版发布     | **新增特性**：<br/> - HarmonyOS 端新增[群成员自定义属性](/document/harmonyos/group_members.html#管理群成员的自定义属性)功能。 <br/> - HarmonyOS 端新增[设置推送通知的显示内容](/document/harmonyos/push/push_display.html) 、[推送通知方式和免打扰模式功能](/document/harmonyos/push/push_notification_mode_dnd.html)。 <br/> - HarmonyOS 端新增[用户在线状态订阅](presence.html)功能。 <br/> - 新增[聊天室自定义属性](/document/harmonyos/room_attributes.html#管理聊天室自定义属性-key-value)功能。 | 2024-09-09         | [HarmonyOS 1.3.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-3-0-dev-2024-09-10-开发版)  |
+| HarmonyOS SDK 1.3.0 开发版发布     | **新增特性**：<br/> - HarmonyOS 端新增[群成员自定义属性](/document/harmonyos/group_members.html#管理群成员的自定义属性)功能。 <br/> - HarmonyOS 端新增[设置推送通知的显示内容](/document/harmonyos/push/push_display.html) 、[推送通知方式和免打扰模式功能](/document/harmonyos/push/push_notification_mode_dnd.html)。 <br/> - HarmonyOS 端新增[用户在线状态订阅](/document/harmonyos/presence.html)功能。 <br/> - 新增[聊天室自定义属性](/document/harmonyos/room_attributes.html#管理聊天室自定义属性-key-value)功能。 | 2024-09-09         | [HarmonyOS 1.3.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-3-0-dev-2024-09-10-开发版)  |
 
 ## 2024-08
 
