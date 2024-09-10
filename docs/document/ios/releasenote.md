@@ -42,11 +42,11 @@
   - 若用户在一台设备上变更会话推送通知方式，其他设备会收到 `EMMultiDevicesDelegate#multiDevicesConversationEvent:conversationId:conversationType:` 事件。
 - 新增 `EMConversation#getMessageCountStart:to:` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
 
-## 优化
+### 优化
 
 - [IM SDK] 设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)、[获取单个或多个用户的用户属性](userprofile.html#获取用户属性)和[获取指定用户的指定用户属性](userprofile.html#获取指定用户的指定用户属性)，超过调用频率限制时，会上报错误码 4 `EMErrorExceedServiceLimit`。
 
-## 修复
+### 修复
 
 - 修复拉黑联系人时缓存未及时更新的问题。
 - 修复退出登录再登录后推送可能不工作的问题。
