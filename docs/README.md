@@ -1102,6 +1102,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/presence.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/presence.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/presence.html
