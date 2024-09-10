@@ -14,7 +14,6 @@
 ### 优化
 
 - [IM SDK] `EMMessage#getBody` 增加同步锁。
-- [IM SDK] 更新 facility 库到 0.0.60.7。
 - [IM SDK] 聊天室消息聚合的处理。
 - [IM SDK] `EMClient#check()` 接口废弃，标记为 Deprecated。
 - [IM SDK] 移除 `EMConversationType#DiscussionGroup` 和 `EMConversationType#HelpDesk` 类型。
