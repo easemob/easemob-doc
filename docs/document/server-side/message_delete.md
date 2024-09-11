@@ -44,7 +44,7 @@
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}
+DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}&isNotify={isNotify}
 ```
 
 #### 路径参数
@@ -61,6 +61,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 |:--------|:-------|:-----|:-------------------|
 | `userId` | String | 是    | 单聊会话中的对端用户 ID。     |
 | `msgIdList` | String | 是    | 要删除的消息的消息 ID。每次最多可传入 50 个消息 ID，消息 ID 之间以英文逗号分隔，例如 message ID 1,message ID 2。 |
+| `isNotify` | Boolean | 否       | 消息删除后，是否同步到消息所属用户的所有在线设备。<br/> -  （默认）`true`：是<br/> -  `false`：否 |
 
 #### 请求 header
 
@@ -91,7 +92,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX?userId=XXXX&msgIdList=XXXX' \
+curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX?userId=XXXX&msgIdList=XXXX&isNotify=false' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'
@@ -129,7 +130,7 @@ curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX?us
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}
+DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}&isNotify={isNotify}
 ```
 
 #### 路径参数
@@ -140,12 +141,13 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求参数
+#### 查询参数
 
 | 参数      | 类型     | 是否必需 | 描述                                    |
 |:--------|:-------|:-----|:----------------------|
 | `groupId` | String | 是    | 群组 ID。                                 |
 | `msgIdList` | String | 是    | 要删除的消息的消息 ID。每次最多可传入 50 个消息 ID，消息 ID 之间以英文逗号分隔，例如 message ID 1,message ID 2。 |
+| `isNotify` | Boolean | 否       | 消息删除后，是否同步到消息所属用户的所有在线设备。<br/> -  （默认）`true`：是<br/> -  `false`：否 |
 
 #### 请求 header
 
@@ -176,7 +178,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX?groupId=XXXX&msgIdList=XXXX' \
+curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX?groupId=XXXX&msgIdList=XXXXisNotify=false' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'
@@ -285,7 +287,7 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/rest/message/roaming/user/XXXX/delete/al
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}/time?userId={userId}&delTime={delTime}
+DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}/time?userId={userId}&delTime={delTime}&isNotify={isNotify}
 ```
 
 #### 路径参数
@@ -302,6 +304,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 |:--------|:-------|:-----|:----------------------|
 | `userId` | String | 是       | 单聊会话中的对端用户，即要清空和哪个用户之间的漫游消息。需传入该用户 ID。  |
 | `delTime`  | Long | 是       | 要清空哪个时间点及之前的单聊漫游消息。该时间为 Unix 时间戳，单位为毫秒。 |
+| `isNotify` | Boolean | 否       | 消息删除后，是否同步到消息所属用户的所有在线设备。<br/> -  （默认）`true`：是<br/> -  `false`：否 |
 
 #### 请求 header
 
@@ -332,7 +335,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX/time?userId=XXXX&delTime=1659014868000' \
+curl -L -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX/time?userId=XXXX&delTime=1659014868000&isNotify=false' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -366,7 +369,7 @@ curl -L -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX/tim
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{userId}/time?groupId={groupId}&delTime={delTime}
+DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{userId}/time?groupId={groupId}&delTime={delTime}&isNotify={isNotify}
 ```
 
 #### 路径参数
@@ -383,6 +386,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 |:--------|:-------|:-----|:----------------------|
 | `groupId` | String  | 是    | 要清空哪个群组或聊天室的漫游消息。你可以传入群组 ID 或聊天室 ID。|
 | `delTime` | Long  | 是    | 要清空哪个时间点及之前的群组或聊天室的漫游消息。该时间为 Unix 时间戳，单位为毫秒。 |
+| `isNotify` | Boolean | 否       | 消息删除后，是否同步到消息所属用户的所有在线设备。<br/> -  （默认）`true`：是<br/> -  `false`：否 |
 
 #### 请求 header
 
@@ -413,7 +417,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX/time?groupId=XXXX&delTime=1659014868000' \
+curl -L -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX/time?groupId=XXXX&delTime=1659014868000&isNotify=false' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
