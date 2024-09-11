@@ -1,0 +1,31 @@
+diff --git a/node_modules/@vuepress/plugin-docsearch/lib/client/components/Docsearch.js b/node_modules/@vuepress/plugin-docsearch/lib/client/components/Docsearch.js
+index ecd2b21..75b7b9c 100644
+--- a/node_modules/@vuepress/plugin-docsearch/lib/client/components/Docsearch.js
++++ b/node_modules/@vuepress/plugin-docsearch/lib/client/components/Docsearch.js
+@@ -46,6 +46,26 @@ export const Docsearch = defineComponent({
+                     ...options.value.searchParameters,
+                     facetFilters: getFacetFilters(options.value.searchParameters?.facetFilters, lang.value),
+                 },
++                resultsFooterComponent({ state }) {
++                    return {
++                        // The HTML `tag`
++                        type: 'a',
++                        ref: undefined,
++                        constructor: undefined,
++                        key: state.query,
++                        // Its props
++                        props: {
++                        href: `/form/search?query=${state.query}`,
++                        target: '_blank',
++                        onClick: (event) => {
++                            console.log(event, state);
++                        },
++                        // Raw text rendered in the HTML element
++                        children: `查看总计${state.context.nbHits}条搜索结果`,
++                        },
++                        __v: null,
++                    };
++                },
+             });
+             // mark as initialized
+             hasInitialized.value = true;
