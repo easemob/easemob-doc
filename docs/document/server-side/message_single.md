@@ -124,7 +124,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | `to`            | List   | 是       | 消息接收方的用户 ID 数组。每次最多可向 600 个用户发送消息。<Container type="tip" title="提示">服务器不校验传入的用户 ID 是否存在，因此，如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。</Container> |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。     |
-| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方的其他设备。<br/> - `true`：是；<br/> - （默认）`false`：否。   |
+| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方的所有在线设备。<br/> - `true`：是；<br/> - （默认）`false`：否。   |
 | `roam_ignore_users`   | List   | 否 | 设置哪些用户拉漫游消息时拉不到该消息。|
 | `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。 |
 | `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
