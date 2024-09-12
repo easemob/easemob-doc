@@ -27,7 +27,7 @@
 
 ## 技术原理
 
-### Android 端离线推送
+### Android 平台离线推送
 
 ![image](/images/android/push/push_android_understand.png)
 
@@ -48,7 +48,7 @@
 2. 关于获取和发送推送 token（device token），详见[获取或更新推送 token](push_get_device_token.html)和[发送推送 token 到服务器端](send_token_to_server.html)。
 :::
 
-### iOS 端离线推送
+### iOS 平台离线推送
 
 ![image](/images/ios/push/push_ios_1_understand.png)
 
