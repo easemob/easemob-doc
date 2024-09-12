@@ -6,7 +6,7 @@
 
 本文介绍如何在 React Native 平台集成 APNs、FCM、华为、荣耀、vivo、OPPO、小米、魅族等推送服务，获取或更新推送 token。
 
-## 获取或更新推送 Token 的流程
+## 实现流程
 
 ### 1. 创建项目
 
