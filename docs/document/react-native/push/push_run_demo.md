@@ -1,6 +1,6 @@
 # 运行示例项目
 
-查看完整实例项目，请点击[这里](https://github.com/AsteriskZuo/RNTestPushExample/tree/chat)。
+查看完整示例项目，请点击[这里](https://github.com/AsteriskZuo/RNTestPushExample/tree/chat)。
 
 启动项目后，界面如下图所示。
 
@@ -16,7 +16,7 @@
 
 4. 输入 `target id` 和 `content`，点击 `send text message` 按钮发送文本消息。
    
-5. 接收方的登录设备会在通知栏收到离线推送通知。
+5. 接收方的登录设备会在通知栏收到离线推送通知，如下图所示。
 
 **注意：接收离线消息，需要杀死当前登录的应用，否则服务端将按照在线推送消息，不推送离线消息。**
 

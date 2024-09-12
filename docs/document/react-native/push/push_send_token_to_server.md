@@ -2,19 +2,20 @@
 
 环信即时通讯 IM SDK 通过 `react-native-push-collection` 获取推送 token。本文介绍如何将推送 token 发送到服务器端。
 
-## 添加即时通讯 IM SDK 依赖
+## 步骤一 添加即时通讯 IM SDK 依赖
 
 在当前应用中添加依赖。
 
 ```sh
-yarn add react-native-chat-sdk 
+yarn add react-native-chat-sdk
 ```
 
-## 更新服务端的推送 token
+## 步骤二 从环信即时通讯云控制台获取推送证书信息
 
 初始化环信即时通讯 IM SDK 和推送 SDK，更新服务端的推送 token。
 
 在实际应用中，需要配置应用的 App Key（`appKey` 参数）和推送证书名称（`pushId` 参数）信息。
+
 - `appKey`：在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。
 - `pushId`：推送证书名称。不同厂商的推送证书名称也不同。
 
@@ -42,8 +43,11 @@ const pushType = React.useMemo(() => {
   }
   return ret;
 }, []);
+```
 
-// 初始化即时通讯 IM SDK
+## 步骤三 初始化即时通讯 IM SDK
+
+```tsx
 ChatClient.getInstance()
   .init(
     new ChatOptions({
@@ -52,7 +56,7 @@ ChatClient.getInstance()
         deviceId: pushId,
         deviceToken: undefined,
       }),
-    }),
+    })
   )
   .then(() => {
     onLog("chat:init:success");
@@ -60,8 +64,11 @@ ChatClient.getInstance()
   .catch((e) => {
     onLog("chat:init:failed:" + JSON.stringify(e));
   });
+```
 
-// 初始化推送 SDK
+## 步骤四 初始化推送 SDK
+
+```tsx
 ChatPushClient.getInstance()
   .init({
     platform: getPlatform(),
@@ -80,19 +87,6 @@ ChatPushClient.getInstance()
         onLog("onReceivePushToken:" + pushToken);
         if (pushToken) {
           // 更新服务端的推送 token
-          ChatClient.getInstance()
-            .updatePushConfig(
-              new ChatPushConfig({
-                deviceId: pushId,
-                deviceToken: pushToken,
-              }),
-            )
-            .then(() => {
-              onLog("updatePushConfig:success");
-            })
-            .catch((e) => {
-              onLog("updatePushConfig:error:" + JSON.stringify(e));
-            });
         }
       },
     } as ChatPushListener);
@@ -102,4 +96,20 @@ ChatPushClient.getInstance()
   });
 ```
 
+## 步骤五 更新服务端的推送 token
 
+```tsx
+ChatClient.getInstance()
+  .updatePushConfig(
+    new ChatPushConfig({
+      deviceId: pushId,
+      deviceToken: pushToken,
+    })
+  )
+  .then(() => {
+    onLog("updatePushConfig:success");
+  })
+  .catch((e) => {
+    onLog("updatePushConfig:error:" + JSON.stringify(e));
+  });
+```
