@@ -10,7 +10,9 @@
 2.  配置 iOS 平台（若无需该平台，则忽略）：下载必要证书文件、配置工程、编写代码。
 3.  配置 Android 平台（若无需该平台，则忽略）：下载必要证书文件、配置工程、编写代码。
 
-## 创建项目
+## 获取或更新推送 token 的流程
+
+### 1. 创建项目
 
 创建项目，例如，项目名称为 `PushProjectDemo`：
 
@@ -25,19 +27,19 @@ npx react-native@latest init --version 0.73.2 PushProjectDemo
 yarn add react-native-push-collection
 ```
 
-## iOS 平台设置
+### 2. iOS 平台设置
 
 对于 iOS 平台，你可以在初始化时（调用 `ChatPushClient.init`）选择使用 APNs 或 FCM 服务。不支持动态切换。
 
 :::tip
-对于 APNs 推送服务，请忽略[下载必要证书文件](步骤一-下载必要证书文件)和[配置工程](步骤二-配置工程)两个步骤。
+对于 APNs 推送服务，请忽略[下载必要证书文件](#步骤一-下载必要证书文件)和[配置工程](#步骤二-配置工程)两个步骤。
 :::
 
-### 步骤一 下载必要证书文件
+#### 步骤一 下载必要证书文件
 
 对于 FCM，下载文件 `GoogleService-Info.plist`，放在 app 的 iOS 根部目录下，例如 `example/ios/PushProjectDemo/GoogleService-Info.plist`。
 
-### 步骤二 配置工程
+#### 步骤二 配置工程
 
 对于 FCM，完成以下配置：
 
@@ -75,7 +77,7 @@ target 'PushProjectDemo' do
 end
 ```
 
-### 步骤三 获取或更新 token（iOS）
+#### 步骤三 获取或更新 token（iOS）
 
 添加 iOS 平台的必要代码，获取或更新 token。
 
@@ -113,31 +115,31 @@ end
 [[PushClient sharedInstance] application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
 ```
 
-## Android 平台设置
+### 3. Android 平台设置
 
 对于 Android 平台，用户可以选择 FCM、华为、荣耀、OPPO、vivo、小米或魅族。不支持动态切换。
 
-### 步骤一 下载必要证书文件
+#### 步骤一 下载必要证书文件
 
-对于 FCM、华为和荣耀推送，即使你只使用其中一种推送服务，也需要下载其他推送证书。例如，若你只使用 FCM 推送，你需要下载 FCM、华为和荣耀推送证书。简单起见，可以使用[模板](https://github.com/easemob/react-native-push-collection/tree/main/template)占位。
+对于 FCM、华为和荣耀推送，即使你只使用其中一种推送服务，也需要下载其他推送证书。例如，若你只使用 FCM 推送，你需要下载 FCM、华为和荣耀推送证书。简单起见，可以使用 `react-native-push-collection` 包下的 `template` 文件夹下的对应文件占位。
 
-#### FCM
+- FCM 推送
 
 下载文件 `google-services.json`，放在 App 的 Android 根目录下，例如， `example/android/app/google-services.json`。
 
-#### 华为
+- 华为推送
 
 下载文件 `agconnect-services.json`，放在 App 的 Android 根目录下，例如，`example/android/app/agconnect-services.json`。
 
-#### 荣耀
+- 荣耀推送
 
 下载文件 `mcs-services.json`，放在 App 的 Android 根目录下，例如，`example/android/app/mcs-services.json`。
 
-#### 其他厂商
+- 其他推送服务
 
 对于魅族、OPPO、vivo 和小米推送，无需下载证书放在 App 的 Android 根目录下。
 
-### 步骤二 配置工程
+#### 步骤二 配置工程
 
 1. 配置项目级别的 `build.gradle`：
 
@@ -223,7 +225,7 @@ HUAWEI_PUSH_APPID=xxx
 配置会在同步项目时生成对应文件，完成静态配置。
 :::
 
-### 步骤三 获取或更新 token（Android）
+#### 步骤三 获取或更新 token（Android）
 
 添加必要的 Android 代码，获取或更新 token。
 
@@ -233,7 +235,7 @@ HUAWEI_PUSH_APPID=xxx
 registerActivityLifecycleCallbacks(new PushActivityLifecycleCallbacks());
 ```
 
-** `MainApplication` 为入口文件。**
+**`MainApplication` 为入口文件。**
 
 ```xml
   <application
@@ -241,16 +243,13 @@ registerActivityLifecycleCallbacks(new PushActivityLifecycleCallbacks());
   </application>
 ```
 
-## 获取推送 token（React Native）
+### 4. 获取推送 token（React Native）
 
 完成 Android 或 iOS 平台配置后，编写 TypeScript/JavaScript 代码获取推送 token。
 
-若访问源码，需点击[这里](https://github.com/AsteriskZuo/react-native-push-collection/blob/main/example/src/App.tsx)。
+#### 步骤一 初始化推送 SDK
 
 ```tsx
-import * as React from "react";
-
-import { View, Text, Pressable, ToastAndroid } from "react-native";
 import {
   ChatPushClient,
   getPlatform,
@@ -259,81 +258,59 @@ import {
   type ChatPushListener,
 } from "react-native-push-collection";
 
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  const init = React.useCallback(() => {
-    // todo: 获取当前设备平台 `ios` 或者 `android`
-    const platform = getPlatform();
-    let pushType: PushType;
-    if (platform === "ios") {
-      // todo: 可以设置为 `fcm` 或者 `apns`
-      pushType = "fcm";
-    } else {
-      // todo: 通过 `getDeviceType()` 方法自动获取当前类型。具体详见源码。
-      pushType = (getDeviceType() ?? "unknown") as PushType;
-    }
-
-    // todo: 1. 初始化推送 SDK
-    ChatPushClient.getInstance()
-      .init({
-        platform: getPlatform(),
-        pushType: pushType as any,
-      })
-      .then(() => {
-        // todo: 2. 添加推送监听器，通过该监听器获取推送 token 或者失败结果
-        ChatPushClient.getInstance().addListener({
-          onError: (error) => {
-            ToastAndroid.show(
-              "onError" + JSON.stringify(error),
-              ToastAndroid.SHORT
-            );
-          },
-          onReceivePushToken: (token) => {
-            ToastAndroid.show("onReceivePushToken" + token, ToastAndroid.SHORT);
-          },
-        } as ChatPushListener);
-      })
-      .catch((e) => {
-        ToastAndroid.show("init error:" + e.toString(), ToastAndroid.SHORT);
-      });
-  }, []);
-
-  const uninit = React.useCallback(() => {
-    ChatPushClient.getInstance().clearListener();
-  }, []);
-
-  const onGetTokenAsync = () => {
-    // todo: 3. 通过 `onReceivePushToken` 接收推送 token
-    ChatPushClient.getInstance()
-      .getTokenAsync()
-      .then(() => {
-        ToastAndroid.show("get token success", ToastAndroid.SHORT);
-      })
-      .catch((e) => {
-        ToastAndroid.show(
-          "get token error:" + e.toString(),
-          ToastAndroid.SHORT
-        );
-      });
-  };
-
-  React.useEffect(() => {
-    init();
-    return () => {
-      uninit();
-    };
-  }, [init, uninit]);
-
-  return (
-    <View>
-      <Text>Result: {result}</Text>
-      <Pressable onPress={onGetTokenAsync}>
-        <Text>{"get token async"}</Text>
-      </Pressable>
-    </View>
-  );
+// todo: 获取当前设备平台 `ios` 或者 `android`
+const platform = getPlatform();
+let pushType: PushType;
+if (platform === "ios") {
+  // todo: 可以设置为 `fcm` 或者 `apns`
+  pushType = "fcm";
+} else {
+  // todo: 通过 `getDeviceType()` 方法自动获取当前类型。具体详见源码。
+  pushType = (getDeviceType() ?? "unknown") as PushType;
 }
+
+// todo: 1. 初始化推送 SDK
+ChatPushClient.getInstance()
+  .init({
+    platform: getPlatform(),
+    pushType: pushType as any,
+  })
+  .then(() => {
+    // todo: 添加推送监听器，通过该监听器获取推送 token 或者失败结果
+  })
+  .catch((e) => {
+    ToastAndroid.show("init error:" + e.toString(), ToastAndroid.SHORT);
+  });
+```
+
+#### 步骤二 添加推送监听器
+
+添加推送监听器，通过该监听器获取推送 token 或者失败结果。
+
+```tsx
+ChatPushClient.getInstance().addListener({
+  onError: (error) => {
+    ToastAndroid.show("onError" + JSON.stringify(error), ToastAndroid.SHORT);
+  },
+  onReceivePushToken: (token) => {
+    ToastAndroid.show("onReceivePushToken" + token, ToastAndroid.SHORT);
+  },
+} as ChatPushListener);
+```
+
+#### 步骤三 接收推送 Token
+
+通过 `onReceivePushToken` 接收推送 Token。
+
+```tsx
+ChatPushClient.getInstance()
+  .getTokenAsync()
+  .then(() => {
+    ToastAndroid.show("get token success", ToastAndroid.SHORT);
+  })
+  .catch((e) => {
+    ToastAndroid.show("get token error:" + e.toString(), ToastAndroid.SHORT);
+  });
 ```
 
 ## 注意事项
