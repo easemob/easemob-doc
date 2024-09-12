@@ -35,7 +35,7 @@ yarn add react-native-push-collection
 
 ### 步骤一 下载必要证书文件
 
-对于 FCM，下载文件 `GoogleService-Info.plist`，放在 app 的 iOS 根部目录下，例如`example/ios/PushProjectDemo/GoogleService-Info.plist`。
+对于 FCM，下载文件 `GoogleService-Info.plist`，放在 app 的 iOS 根部目录下，例如 `example/ios/PushProjectDemo/GoogleService-Info.plist`。
 
 ### 步骤二 配置工程
 
@@ -77,7 +77,7 @@ end
 
 ### 步骤三 获取或更新 token（iOS）
 
-添加 iOS 的必要代码，获取或更新 token。
+添加 iOS 平台的必要代码，获取或更新 token。
 
 以 `objc` 版本为例。在 `AppDelegate.mm` 中，添加如下代码。
 

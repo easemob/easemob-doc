@@ -53,7 +53,10 @@ ChatClient.getInstance()
 
 下表以单聊文本消息为例介绍这显示属性的设置。
 
-<div class="alert info">对于群聊，下表中的“消息发送方的推送昵称”和“消息发送方的 IM 用户 ID”显示为“群组 ID”。</div>
+:::tip
+对于群聊，下表中的“消息发送方的推送昵称”和“消息发送方的 IM 用户 ID”显示为“群组 ID”。
+:::
+
 | 参数设置      | 推送显示 | 图片    |
 | :--------- | :----- |:------------- |
 | <ul><li>`displayStyle`：（默认）`Simple`</li><li>`nickname`：设置或不设置</li></ul>  | <ul><li>推送标题：“您有一条新消息”</li><li>推送内容：“请点击查看”</li></ul>   | ![img](/images/android/push/push_displayattribute_1.png) |
@@ -113,7 +116,7 @@ ChatClient.getInstance().chatManager.sendMessage(message, {
 } as ChatMessageStatusCallback);
 ```
 
-1. 使用自定义或者默认推送模板，模板中的推送标题和推送内容使用以下内置参数：
+2. 使用自定义或者默认推送模板，模板中的推送标题和推送内容使用以下内置参数：
 
 - `{$dynamicFrom}`：服务器按优先级从高到底的顺序填充备注、群昵称（仅限群消息）和推送昵称。
 - `{$fromNickname}`：推送昵称。
