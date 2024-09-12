@@ -1,4 +1,4 @@
-# 获取或更新推送 token
+# 获取或更新推送 Token
 
 推送 token（device token）由第三方推送服务提供，用于标识每台设备上的每个应用，推送服务通过该 token 明确消息是发送给哪个设备的，然后将消息转发给设备，设备再通知应用程序。例如，对于 FCM 推送，初次启动你的应用时，FCM SDK 为客户端应用实例生成的注册令牌 (registration token)。你可以调用 `FirebaseMessaging.getInstance().getToken()` 方法获得 token。
 
@@ -6,11 +6,12 @@
 
 本文介绍如何在 React Native 平台集成 APNs、FCM、华为、荣耀、vivo、OPPO、小米、魅族等推送服务，获取或更新推送 token。主要操作步骤包括：
 
-1.  创建项目（若项目已存在，则忽略）。
-2.  配置 iOS 平台（若无需该平台，则忽略）：下载必要证书文件、配置工程、编写代码。
-3.  配置 Android 平台（若无需该平台，则忽略）：下载必要证书文件、配置工程、编写代码。
+1.  创建项目：若已有项目，则跳过该步骤。
+2.  配置 iOS 平台（若无需该平台，则忽略）：下载必要证书文件、配置工程、添加 iOS 平台的必要代码获取或更新 token。
+3.  配置 Android 平台（若无需该平台，则忽略）：下载必要证书文件、配置工程、添加必要的 Android 代码，获取或更新 token。
+4.  获取推送 token（React Native）。
 
-## 获取或更新推送 token 的流程
+## 获取或更新推送 Token 的流程
 
 ### 1. 创建项目
 
@@ -77,7 +78,7 @@ target 'PushProjectDemo' do
 end
 ```
 
-#### 步骤三 获取或更新 token（iOS）
+#### 步骤三 获取或更新 Token（iOS）
 
 添加 iOS 平台的必要代码，获取或更新 token。
 
@@ -117,7 +118,7 @@ end
 
 ### 3. Android 平台设置
 
-对于 Android 平台，用户可以选择 FCM、华为、荣耀、OPPO、vivo、小米或魅族。不支持动态切换。
+对于 Android 平台，用户可以选择 FCM、华为、荣耀、OPPO、vivo、小米或魅族推送。不支持动态切换。
 
 #### 步骤一 下载必要证书文件
 
@@ -159,8 +160,6 @@ buildscript {
         classpath("com.facebook.react:react-native-gradle-plugin")
 
       // FCM 推送配置
-      // NOTE: if you are on react-native 0.71 or below, you must not update
-      //       the google-services plugin past version 4.3.15 as it requires gradle >= 7.3.0
       // 注意：若使用 React Native 0.71 或更低版本，不能将 google-services 创建升级至 4.3.15 以上版本，因为这些版本要求 gradle 7.3.0 或更高版本。
       classpath 'com.google.gms:google-services:4.3.15'
 
@@ -193,13 +192,13 @@ allprojects {
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
-// fcm config
+// FCM 配置
 apply plugin: 'com.google.gms.google-services'
 
-// honor config
+// 荣耀推送配置
 apply plugin: 'com.hihonor.mcs.asplugin'
 
-// huawei config
+// 华为推送配置
 apply plugin: 'com.huawei.agconnect'
 ```
 
@@ -225,9 +224,9 @@ HUAWEI_PUSH_APPID=xxx
 配置会在同步项目时生成对应文件，完成静态配置。
 :::
 
-#### 步骤三 获取或更新 token（Android）
+#### 步骤三 获取或更新推送 Token（Android）
 
-添加必要的 Android 代码，获取或更新 token。
+添加必要的 Android 平台代码，获取或更新推送 token。
 
 在 `MainApplication` 文件中，在方法 `onCreate` 中添加如下代码：
 
@@ -243,7 +242,7 @@ registerActivityLifecycleCallbacks(new PushActivityLifecycleCallbacks());
   </application>
 ```
 
-### 4. 获取推送 token（React Native）
+### 4. 获取推送推送 Token（React Native）
 
 完成 Android 或 iOS 平台配置后，编写 TypeScript/JavaScript 代码获取推送 token。
 
@@ -318,7 +317,7 @@ ChatPushClient.getInstance()
 1. 该 npm 不能和 `@react-native-firebase/messaging` 一起使用。如果需要使用，则请不要使用该库。
 2. 国内用户如果需要使用 FCM，可能需要正常访问外网。
 3. 对于 iOS 平台，如果使用 `apns`，返回的 `token` 是经过 `base64` 编码的字符串，如果传给原生，需要 `base64` 解码操作。
-4. iOS 平台使用了`[UNUserNotificationCenter currentNotificationCenter].delegate = self;`，可能导致用户无法使用该代理接收通知。
+4. iOS 平台使用了 `[UNUserNotificationCenter currentNotificationCenter].delegate = self;`，可能导致用户无法使用该代理接收通知。
 
 ## 常见问题
 
