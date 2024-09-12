@@ -45,7 +45,7 @@
 
 :::tip
 1. 开发者通过[环信即时通讯云控制台](https://console.easemob.com/user/login)配置 App 的推送证书，需填写证书名称（或者 App Key）。该步骤须在登录环信 IM SDK 成功后进行。证书名称是环信服务器用于判断目标设备使用哪种推送通道的唯一条件，因此必须确保与 Android 终端设备上传的证书名称一致。
-2. 关于获取和发送推送 token（device token），详见[获取或更新推送 token](push_get_device_token.html)和[发送推送 token 到服务器端](send_token_to_server.html)。
+2. 关于获取和发送推送 token（device token），详见[获取或更新推送 token](push_get_device_token.html)和[发送推送 token 到服务器端](push_send_token_to_server.html)。
 :::
 
 ### iOS 平台离线推送
