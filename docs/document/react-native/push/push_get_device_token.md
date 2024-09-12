@@ -4,16 +4,13 @@
 
 另外，如果退出即时通讯 IM 登录时不解绑推送 token（调用 `logout` 方法时对 `unbindDeviceToken` 参数传 `false` 时不解绑推送 token，传 `true` 表示解绑 token），用户在推送证书有效期和 token 有效期内仍会接收到离线推送通知。
 
-本文介绍如何在 React Native 平台集成 APNs、FCM、华为、荣耀、vivo、OPPO、小米、魅族等推送服务，获取或更新推送 token。主要操作步骤包括：
-
-1.  创建项目：若已有项目，则跳过该步骤。
-2.  配置 iOS 平台（若无需该平台，则忽略）：下载必要证书文件、配置工程、添加 iOS 平台的必要代码获取或更新 token。
-3.  配置 Android 平台（若无需该平台，则忽略）：下载必要证书文件、配置工程、添加必要的 Android 代码，获取或更新 token。
-4.  获取推送 token（React Native）。
+本文介绍如何在 React Native 平台集成 APNs、FCM、华为、荣耀、vivo、OPPO、小米、魅族等推送服务，获取或更新推送 token。
 
 ## 获取或更新推送 Token 的流程
 
 ### 1. 创建项目
+
+**若已有项目，请跳过该步骤。**
 
 创建项目，例如，项目名称为 `PushProjectDemo`：
 
@@ -33,7 +30,8 @@ yarn add react-native-push-collection
 对于 iOS 平台，你可以在初始化时（调用 `ChatPushClient.init`）选择使用 APNs 或 FCM 服务。不支持动态切换。
 
 :::tip
-对于 APNs 推送服务，请忽略[下载必要证书文件](#步骤一-下载必要证书文件)和[配置工程](#步骤二-配置工程)两个步骤。
+1. 对于 APNs 推送服务，请忽略[下载必要证书文件](#步骤一-下载必要证书文件)和[配置工程](#步骤二-配置工程)两个步骤。
+2. 若不需要 iOS 平台，请跳过本节配置步骤。
 :::
 
 #### 步骤一 下载必要证书文件
@@ -120,29 +118,22 @@ end
 
 对于 Android 平台，用户可以选择 FCM、华为、荣耀、OPPO、vivo、小米或魅族推送。不支持动态切换。
 
+**若不需要 Android 平台，请跳过本节配置步骤。**
+
 #### 步骤一 下载必要证书文件
 
 对于 FCM、华为和荣耀推送，即使你只使用其中一种推送服务，也需要下载其他推送证书。例如，若你只使用 FCM 推送，你需要下载 FCM、华为和荣耀推送证书。简单起见，可以使用 `react-native-push-collection` 包下的 `template` 文件夹下的对应文件占位。
 
-- FCM 推送
-
-下载文件 `google-services.json`，放在 App 的 Android 根目录下，例如， `example/android/app/google-services.json`。
-
-- 华为推送
-
-下载文件 `agconnect-services.json`，放在 App 的 Android 根目录下，例如，`example/android/app/agconnect-services.json`。
-
-- 荣耀推送
-
-下载文件 `mcs-services.json`，放在 App 的 Android 根目录下，例如，`example/android/app/mcs-services.json`。
-
-- 其他推送服务
-
-对于魅族、OPPO、vivo 和小米推送，无需下载证书放在 App 的 Android 根目录下。
+| 推送类型       | 下载证书   |
+| :--------- | :------------------------- |
+| FCM 推送    | 下载文件 `google-services.json`，放在 App 的 Android 根目录下，例如， `example/android/app/google-services.json`。  |
+| 华为推送   | 下载文件 `agconnect-services.json`，放在 App 的 Android 根目录下，例如，`example/android/app/agconnect-services.json`。 |
+| 荣耀推送   | 下载文件 `mcs-services.json`，放在 App 的 Android 根目录下，例如，`example/android/app/mcs-services.json`。 |
+| 其他推送服务   | 对于魅族、OPPO、vivo 和小米推送，无需下载证书放在 App 的 Android 根目录下。  |
 
 #### 步骤二 配置工程
 
-1. 配置项目级别的 `build.gradle`：
+1. 配置项目级别的 `build.gradle`。
 
 ```groove
 buildscript {

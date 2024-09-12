@@ -117,9 +117,7 @@ ChatClient.getInstance()
 
 ## 运行示例项目
 
-查看完整示例项目，请点击[这里](https://github.com/AsteriskZuo/RNTestPushExample/tree/chat)。
-
-启动项目后，界面如下图所示。
+查看完整示例项目，请点击[这里](https://github.com/AsteriskZuo/RNTestPushExample/tree/chat)。启动项目后，界面如下图所示。
 
 <ImageGallery>
 <ImageItem src="/images/react-native/push/push_example_ui.png" title="运行示例项目后的界面" />
