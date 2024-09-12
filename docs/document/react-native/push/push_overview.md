@@ -64,7 +64,7 @@
 8. APNs 推送服务器将消息发送给用户 B。
 
 :::tip
-关于获取和发送推送 token（device token），详见[获取或更新推送 token](push_get_device_token.html)和[发送推送 token 到服务器端](push_send_token_to_server.html)。
+关于获取和发送推送 token（device token），详见[获取或更新推送 token](push_get_device_token.html)和[发送推送 token 到服务器端](push_send_token_to_server.html)。 
 :::
 
 ## 前提条件

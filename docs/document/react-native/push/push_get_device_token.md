@@ -258,7 +258,7 @@ import {
   type ChatPushListener,
 } from "react-native-push-collection";
 
-// todo: 获取当前设备平台 `ios` 或者 `android`
+// todo: 获取当前设备平台 `ios` 或者 `android` 
 const platform = getPlatform();
 let pushType: PushType;
 if (platform === "ios") {
