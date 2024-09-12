@@ -6,8 +6,6 @@
 
 关于各推送相关的环信即时控制台上的推送证书参数描述，详见下表中 [iOS 离线推送文档](/document/ios/push/push_overview.html)和 [Android 离线推送文档](/document/android/push/push_overview.html)中的相关链接。
 
-**对于 FCM、华为和荣耀推送，即使你只使用其中一种推送服务，同样需要配置其他推送证书。例如，若你只使用 FCM 推送，你需要配置 FCM、华为和荣耀推送证书。**
-
 | 推送服务类型      | 在推送厂商后台获取推送证书信息   | 在环信即时通讯控制台上传推送证书 |
 | :--------- | :----- | :------- | 
 | APNs 推送       | 详见 [iOS 端 APNs 推送集成文档](/document/ios/push/push_apns.html#创建推送证书)。   | 详见 [iOS 端 APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。   |        
