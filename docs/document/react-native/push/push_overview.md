@@ -23,13 +23,13 @@
 
 **注意**：多端登录时若有设备被踢下线，即使接入了 IM 离线推送，也收不到离线推送消息。
 
-![image](/images/android/push/push_multidevice_policy.png)
+![img](/images/android/push/push_multidevice_policy.png)
 
 ## 技术原理
 
 ### Android 平台离线推送
 
-![image](/images/android/push/push_android_understand.png)
+![img](/images/android/push/push_android_understand.png)
 
 推送流程如下：
 
