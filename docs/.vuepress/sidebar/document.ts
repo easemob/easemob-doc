@@ -128,7 +128,6 @@ const documentSidebar = [
           { text: '上传推送证书到环信控制台', link: 'push/push_easemob_console.html', only: ['react-native'] },
           { text: '获取或更新推送 token', link: 'push/push_get_device_token.html', only: ['react-native'] },
           { text: '发送推送 token 到服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
-          { text: '运行示例项目', link: 'push/push_run_demo.html', only: ['react-native'] },
           { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
           { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios', 'harmonyos', 'react-native'] },
           { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native']},
