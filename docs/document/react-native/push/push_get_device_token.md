@@ -242,7 +242,7 @@ registerActivityLifecycleCallbacks(new PushActivityLifecycleCallbacks());
   </application>
 ```
 
-### 4. 获取推送推送 Token（React Native）
+### 4. 获取推送 Token（React Native）
 
 完成 Android 或 iOS 平台配置后，编写 TypeScript/JavaScript 代码获取推送 token。
 

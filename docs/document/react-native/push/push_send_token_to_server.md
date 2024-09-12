@@ -127,13 +127,15 @@ ChatClient.getInstance()
 
 在该页面，你可以发送消息，接收方若离线会收到推送通知：
 
-1. 在页面上输入 `pushtype` 和 `appkey`，点击 `init action` 按钮, 执行初始化。初始化日志以及后续日志会在空白位置显示。
+1. 在页面上输入 `pushtype` 和 `appkey`，点击 `init action` 按钮, 执行初始化。
+   
+   初始化日志以及后续日志会在空白位置显示。
 
 2. 在页面上输入用户 ID 和密码，点击 `login action` 按钮进行登录。
 
-3. 点击 `get token action` 按钮获取 Token，并发送到服务端。
+3. 点击 `get token action` 按钮获取推送 Token，并发送到服务端。
 
-4. 输入 `target id` 和 `content`，点击 `send text message` 按钮发送文本消息。
+4. 设置 `target id` 和 `content` 输入对端用户 ID 和消息内容，点击 `send text message` 按钮发送文本消息。
    
 5. 接收方的登录设备会在通知栏收到离线推送通知，如下图所示。
 
