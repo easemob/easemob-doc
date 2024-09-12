@@ -1171,6 +1171,9 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/push/push_overview.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/push/push_overview.html  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/push.html      
