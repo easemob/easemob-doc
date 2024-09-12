@@ -109,7 +109,7 @@ const documentSidebar = [
         text: '离线推送', 
         collapsible: true,
         children: [
-          { text: '离线推送概述', link: 'push/push_overview.html', only: ['android', 'ios', 'web','harmonyos'] },
+          { text: '离线推送概述', link: 'push/push_overview.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native'] },
           { 
             text: '集成第三方推送', 
             collapsible: true,
@@ -125,12 +125,15 @@ const documentSidebar = [
             { text: 'HarmonyOS 推送', link: 'push/push_harmony.html', only: ['harmonyos'] }
            ]
           }, 
+          { text: '上传推送证书到环信控制台', link: 'push/push_easemob_console.html', only: ['react-native'] },
+          { text: '获取或更新推送 token', link: 'push/push_get_device_token.html', only: ['react-native'] },
+          { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
           { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
-          { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios', 'harmonyos'] },
-          { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos']},
+          { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios', 'harmonyos', 'react-native'] },
+          { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native']},
           { text: '设置推送模板', link: 'push/push_template.html', only: ['web']},
-          { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web']},
-          { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web']},
+          { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native']},
+          { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native']},
           { text: '推送消息分类', link: 'push/push_message_classification.html', only: ['android'] },
           { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
         ]
