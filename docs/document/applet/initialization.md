@@ -41,6 +41,7 @@ const conn = new EC.connection({
 | `appKey`    | String     | 是      | 环信即时通讯云控制台为你的应用生成的唯一标识，由应用名称（`Appname`）和组织名称（`Orgname`）组成。                  |
 | `isHttpDNS`  | Bool  | 否 | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。        |
 | `delivery`         | Bool  | 否    | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。      |
+| `enableReportLogs`         | Bool  | 否    | 小程序平台是否允许上传日志：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。      |
 | `https`      | Bool  | 否  | 是否支持通过 HTTPS 访问即时通讯 IM：<br/> - （默认）`true`：支持 HTTPS 和 HTTP；<br/> -`false`：浏览器根据使用的域名自行判断。     |
 | `heartBeatWait`      | Int  | 否 | 心跳间隔，单位为毫秒，默认为 30000。       |
 | `deviceId`           | String  | 否  | 设备 ID，为默认随机值。               |
@@ -230,4 +231,4 @@ logger.download();
 
 ## 日志上报
 
-自 4.8.1 版本，小程序 SDK 支持日志上报功能, 即将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
+自 4.8.1 版本，小程序 SDK 支持日志上报功能, 即将日志会上传到环信服务器。该功能默认关闭，如有需要, 在初始化时，可将 `enableReportLogs` 参数设置为 `true`，然后联系商务开通日志上报功能。
