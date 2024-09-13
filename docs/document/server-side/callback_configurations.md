@@ -53,7 +53,7 @@ app 的响应内容不能超过 1,000 个字符。
 
 | 字段     | 数据类型 | 描述                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `ext`    | object   | 消息的扩展字段。                                             |
+| `ext`    | object   | 消息扩展字段。                                             |
 | `bodies` | object   | 该回调的主体内容，包含以下两个字段 `msg`，`type`。           |
 | `msg`    | String    | 消息内容。                                                   |
 | `type`   | String   | 消息类型，包括：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 命令消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
@@ -71,7 +71,7 @@ app 的响应内容不能超过 1,000 个字符。
 
 | 字段          | 类型   | 描述                                                        |
 | :------------ | :----- | :----------------------------------------------------------- |
-| `ext`         | Json   | 消息的扩展字段。                                             |
+| `ext`         | Json   | 消息扩展字段。                                             |
 | `bodies`      | object | 该回调的主体内容，包含以下六个字段 `filename`，`secret`，`file_length`，`size`，`url`，`type`。 |
 | `filename`    | String | 图片名称。                                                   |
 | `secret`      | String | 成功上传文件后返回的 `secret`。                              |
@@ -100,7 +100,7 @@ payload 示例：
 
 | 字段          | 类型   | 描述                                                        |
 | :------------ | :----- | :----------------------------------------------------------- |
-| `ext`         | Json   | 消息的扩展字段。                                             |
+| `ext`         | Json   | 消息扩展字段。                                             |
 | `filename`    | String | 文件名称。                                                   |
 | `secret`      | String | 成功上传文件后返回的 secret。                                |
 | `file_length` | Long   | 语音文件大小（单位：字节）。                                 |
@@ -127,7 +127,7 @@ payload 示例：
 
 | 字段           | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `ext`          | Json   | 消息的扩展字段。                                             |
+| `ext`          | Json   | 消息扩展字段。                                             |
 | `bodies`       | object | 该回调的主体内容，包含以下字段 `thumb_secret`、`thumb`、`filename`，`secret`，`file_length`，`size`，`url`，`type`。 |
 | `thumb_secret` | String | 成功上传视频缩略图后返回的 secret。                          |
 | `filename`     | String | 文件名称。                                                   |
@@ -213,7 +213,7 @@ payload 示例：
 | `chat_type` | String   | `read_ack` 已读回执。                                        |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_回执消息的消息 ID”。 | 
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
-| `payload`   | object   | 包括：<br/> - `ext`：消息的扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `bodies`：消息体内容。 |
+| `payload`   | object   | 包括：<br/> - `ext`：消息扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `bodies`：消息体内容。 |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
 | `from`      | String   | 发送已读回执用户 ID。                                        |
@@ -263,7 +263,7 @@ payload 示例：
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `ext`    | String   | 消息的扩展字段。                                             |
+| `ext`    | String   | 消息扩展字段。                                             |
 | `bodies` | object   | 该回调的主体内容，包含以下两个字段 `msg`，`type`。           |
 | `msg`    | String   | 消息内容。                                                   |
 | `type`   | String   | 消息类型，包括：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 命令消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
@@ -314,7 +314,7 @@ payload 之外的字段如下表所示：
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `ext`    | object   | 消息的扩展字段。                                             |
+| `ext`    | object   | 消息扩展字段。                                             |
 | `bodies` | object   | 该回调的主体内容，包含以下两个字段 `msg`，`type`。           |
 | `msg`    | String   | 消息内容。                                                   |
 | `type`   | String   | 消息类型，包括：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 命令消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
@@ -375,7 +375,7 @@ payload 中字段含义：
 
 | 参数             | 数据类型 | 描述                                     |
 | :--------------- | :------- | :--------------------------------------- |
-| `ext`            | object   | 消息的扩展字段，撤回行为时为空。         |
+| `ext`            | object   | 消息扩展字段，撤回行为时为空。         |
 | `ack_message_id` | String   | 跟 `recall_id` 一致，为要撤回的消息 ID。 |
 | `bodies`         | object   | 该回调的主体内容，撤回行为时为空。       |
 
@@ -2282,7 +2282,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{聊天室 ID}@conference.easemob.com`。 |
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。 |
-| `event_info.ext`   | String   | 消息的扩展字段，包含聊天室的自定义属性内容。   |
+| `event_info.ext`   | String   | 消息扩展字段，包含聊天室的自定义属性内容。   |
 | `event_info.type`   | String   | 聊天室自定义属性类型。    |
 | `operation`   | String   | `set_metadata`：设置或更新聊天室自定义属性。  |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
@@ -2337,7 +2337,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{聊天室 ID}@conference.easemob.com`。 |
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。 |
-| `event_info.ext`   | String   | 消息的扩展字段，包含聊天室的自定义属性内容。   |
+| `event_info.ext`   | String   | 消息扩展字段，包含聊天室的自定义属性内容。   |
 | `event_info.type`   | String   | 聊天室自定义属性类型。    |
 | `operation`   | String   | `delete_metadata`：删除聊天室自定义属性。  |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
@@ -2392,7 +2392,7 @@ payload 字段含义：
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{群组 ID}@conference.easemob.com`。 |
 | `is_chatroom` | Bool     | 是否是聊天室。 <br/> - `true`：是；<br/> - `false`：否。 |
-| `event_info.ext`   | String   | 消息的扩展字段，包含群组成员的自定义属性内容。   |
+| `event_info.ext`   | String   | 消息扩展字段，包含群组成员的自定义属性内容。   |
 | `event_info.type`   | String   | 群组成员的自定义属性类型。    |
 | `operation`   | String   | `group_member_metadata_update`：设置或更新群组成员的自定义属性。  |
 | `status`      | object   | 状态，包括 `description` 和 `error_code`。                   |
