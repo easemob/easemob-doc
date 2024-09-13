@@ -135,7 +135,7 @@ conn
 
 1. 将消息类型设置为 `custom`。
 2. 将自定义消息中的 `customEvent` 设置为 `userCard`。
-3. 在用户属性中查询 `nickname`、`mail` 和 `avatarurl` 的值，然后使用 `customExts` 将其设置为自定义消息的扩展信息。
+3. 在用户属性中查询 `nickname`、`mail` 和 `avatarurl` 的值，然后使用 `customExts` 将其设置为自定义消息扩展信息。
 
 参考以下示例代码创建和发送名片消息：
 
