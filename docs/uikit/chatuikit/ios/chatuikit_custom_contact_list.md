@@ -1,6 +1,6 @@
 # 设置联系人列表页面
 
-你可以自定义联系人列表页面的头部导航栏、联系人列表 Header、联系人列表和联系人列表项。
+你可以自定义联系人列表页面的头部导航栏、联系人列表 Header、联系人列表和联系人列表项。详见[ContactViewController](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller)。
 
 ![img](/images/uikit/chatuikit/ios/custom_contact_list.png)
 

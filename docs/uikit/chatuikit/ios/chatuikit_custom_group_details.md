@@ -1,6 +1,6 @@
 # 设置群详情页面
 
-你可以配置群详情页面的头部导航栏、点击右侧图片显示的群组操作和群详情自定义列表项等。
+你可以配置群详情页面的头部导航栏、点击右侧图片显示的群组操作和群详情自定义列表项等。详见 [GroupInfoViewController](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/groupinfoviewcontroller)。
 
 ![img](/images/uikit/chatuikit/ios/custom_group_details.png)
 

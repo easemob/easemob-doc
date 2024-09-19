@@ -1,6 +1,6 @@
 # 设置联系人详情页面
 
-你可以配置联系人详情页面的头部导航栏、点击右侧图片显示的联系人操作和联系人详情自定义列表项等。
+你可以配置联系人详情页面的头部导航栏、点击右侧图片显示的联系人操作和联系人详情自定义列表项等。详见 [ContactInfoViewController](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactinfoviewcontroller)。
 
 <img src=/images/uikit/chatuikit/ios/configurationitem/contact/Appearance_contact_moreActions.png  title=“点击图片显示联系人操作” />&nbsp;&nbsp;
 <img src=/images/uikit/chatuikit/ios/configurationitem/contact/Appearance_contact_detailExtensionActionItems.png  title="联系人详情自定义列表项"/>
