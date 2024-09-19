@@ -71,7 +71,17 @@ export default defineUserConfig({
           'hierarchy.lvl6:20',
           'content:50'
         ],
-        hitsPerPage: 50
+        hitsPerPage: 50,
+        facetFilters: [
+          [
+            'type:lvl0',
+            'type:lvl1',
+            'type:lvl2',
+            'type:lvl3',
+            'type:lvl4',
+            'type:lvl5'
+          ]
+        ]
       },
       maxResultsPerGroup: 30,
       // transformItems: (items) => {

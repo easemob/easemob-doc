@@ -21,6 +21,7 @@
         <div class="searchLeft">
           <h3 class="searchCategory">文档分类</h3>
           <ais-refinement-list attribute="category" />
+          <ais-refinement-list v-show="false" attribute="type" />
         </div>
         <div class="searchRight">
           <ais-search-box />
@@ -31,14 +32,6 @@
 
           <ais-hits>
             <template v-slot:item="{ item }">
-              <!-- <ais-hierarchical-menu
-              :attributes="[
-                'hierarchy.lvl0',
-                'hierarchy.lvl1',
-                'hierarchy.lvl2',
-                'hierarchy.lvl3'
-              ]"
-            /> -->
               <p>
                 <a :href="item.url" target="_blank">
                   <ais-highlight attribute="hierarchy.lvl0" :hit="item" />
@@ -48,10 +41,18 @@
                   <ais-highlight attribute="hierarchy.lvl2" :hit="item" />
                   <span v-if="item.hierarchy.lvl3"> > </span>
                   <ais-highlight attribute="hierarchy.lvl3" :hit="item" />
+                  <span v-if="item.hierarchy.lvl4"> > </span>
+                  <ais-highlight attribute="hierarchy.lvl4" :hit="item" />
+                  <span v-if="item.hierarchy.lvl5"> > </span>
+                  <ais-highlight attribute="hierarchy.lvl5" :hit="item" />
                 </a>
               </p>
-              <div>
-                <ais-snippet attribute="content" :hit="item" />
+              <div class="content-snippet">
+                <ais-snippet
+                  style="font-size: 14px"
+                  attribute="content"
+                  :hit="item"
+                />
               </div>
             </template>
           </ais-hits>
@@ -64,7 +65,8 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
-import { liteClient } from 'algoliasearch/lite'
+import { liteClient as algoliasearch } from 'algoliasearch/lite'
+
 import { useRoute } from 'vue-router'
 
 export default {
@@ -74,13 +76,16 @@ export default {
   },
   data() {
     return {
-      searchClient: liteClient(
+      searchClient: algoliasearch(
         '5K8UTB3JVE',
         'df9e938d06f6531ce8dd8de71f907f0d'
       ),
       initialUiState: {
         ['im-beta-easemob']: {
-          query: useRoute().query.query || ''
+          query: useRoute().query.query || '',
+          refinementList: {
+            type: ['content']
+          }
         }
       },
       snippet: [
@@ -136,9 +141,23 @@ body {
   width: calc(100% - 1rem) !important;
 }
 
+.ais-HierarchicalMenu-count,
+.ais-Menu-count,
+.ais-RefinementList-count,
+.ais-ToggleRefinement-count {
+  margin-left: 0.3em;
+}
+
 .ais-InstantSearch {
   /* display: grid;
   grid-template-columns: 1fr 4fr;
   grid-gap: 1em; */
+}
+.content-snippet {
+  color: #888;
+}
+
+.content-snippet .ais-Snippet-highlighted {
+  font-size: 14px;
 }
 </style>
