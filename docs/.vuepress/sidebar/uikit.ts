@@ -62,7 +62,7 @@ const chatUikitSidebar = [
         { text: '联系人列表页面', link: 'chatuikit_custom_contact_list.html' },
         { text: '联系人详情页面', link: 'chatuikit_custom_contact_details.html' },
         { text: '群详情页面', link: 'chatuikit_custom_group_details.html' },
-        { text: '可配项', link: 'chatuikit_config_item.html' }
+        { text: '通用可配项', link: 'chatuikit_config_item.html' }
         ],
       },
       { text: '事件监听', link: 'chatuikit_listener.html' },
