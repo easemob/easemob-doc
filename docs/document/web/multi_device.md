@@ -87,6 +87,10 @@ conn.getSelfIdsOnOtherPlatform().then((res) => {
 
 对于好友和群组的相关操作来说，多设备事件与单设备事件的名称相同，唯一区别在于事件中的 `from` 字段，即多端多设备事件中该字段的值为当前用户的用户 ID，而单设备事件中，该字段的值为操作方的用户 ID。详见[群组事件](group_manage.html#监听群组事件)和[用户关系事件](user_relationship.html#添加好友)。
 
+:::tip
+多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
+:::
+
 子区和删除漫游消息事件会触发 `onMultiDeviceEvent` 事件，示例代码如下：
 
 ```javascript

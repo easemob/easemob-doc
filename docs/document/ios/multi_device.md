@@ -198,6 +198,10 @@ NSString *password = @"";
 
 你需要先实现 `EMMultiDevicesDelegate` 类监听其他设备上的操作，然后调用 `addMultiDevicesDelegate:delegateQueue:` 方法添加多设备监听。
 
+:::tip
+多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
+:::
+
 ```objectivec
  //实现 `EMMultiDevicesDelegate` 监听其他设备上的操作。
 @interface ViewController () <EMMultiDevicesDelegate>
