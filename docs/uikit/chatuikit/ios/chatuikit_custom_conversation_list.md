@@ -2,7 +2,7 @@
 
 你可以配置会话列表页面的头部导航栏、会话列表项。详见 [ConversationListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Conversation/Controllers/ConversationListController.swift)。
 
-![img](/images/uikit/chatuikit/ios/custom_conversation_list.png =350x750)
+![img](/images/uikit/chatuikit/ios/chatuikit_custom_conversation_list.png)
 
 ## 自定义头部导航栏
 
