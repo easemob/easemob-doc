@@ -58,7 +58,7 @@ const chatUikitSidebar = [
       { text: '界面风格', 
         collapsible: true,
       children: [
-        { text: '会话列表页面', link: 'chatuikit_custom_contact_list.html' },
+        { text: '会话列表页面', link: 'chatuikit_custom_conversation_list.html' },
         { text: '聊天页面', link: 'chatuikit_custom_chat.html' },
         { text: '联系人列表页面', link: 'chatuikit_custom_contact_list.html' },
         { text: '联系人详情页面', link: 'chatuikit_custom_contact_details.html' },
