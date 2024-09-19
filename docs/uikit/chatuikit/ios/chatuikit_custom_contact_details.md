@@ -20,7 +20,7 @@
      Appearance.contact.moreActions.removeAll { $0. tag == "you want remove" }
 ```
 
-获取该数组中某单个项的点击事件，示例：
+获取该数组中某单个项的点击事件，示例如下：
 
 ```Swift
         if let item = Appearance.contact.moreActions.first(where: { $0.tag == "xxx" }) {
@@ -38,7 +38,6 @@
 ## 自定义列表项
 
 联系人详情页面 Header 中按钮 `CollectionView` 中数据源可配项 `Appearance.contact.detailExtensionActionItems`，主要功能包括聊天、音视频通话等。关于事件监听，详见[设置点击右侧图片显示的联系人操作](#设置点击右侧图片显示的联系人操作)。首先继承联系人详情页面，然后将继承后的群详情页面注册入 `EaseChatUIKit`，即 `ComponentsRegister.shared.ContactInfoController = MineContactDetailViewController.self`，增加可配项，示例如下所示： 
-
 
 ```Swift
 final class MineContactDetailViewController: ContactInfoViewController {
