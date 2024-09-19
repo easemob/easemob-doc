@@ -2,7 +2,7 @@
 
 你可以自定义联系人列表页面的头部导航栏、联系人列表 Header、联系人列表和联系人列表项。
 
-![img](/images/uikit/chatuikit/ios/chatuikit_custom_contact_list.png)
+![img](/images/uikit/chatuikit/ios/custom_contact_list.png)
 
 ## 自定义头部导航栏
 

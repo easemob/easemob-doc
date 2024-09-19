@@ -2,7 +2,7 @@
 
 你可以配置聊天页面的头部导航栏、消息列表项、输入框和跳转事件等。详见 [MessageListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Conversation/Controllers/ConversationListController.swift)。
 
-![img](/images/uikit/chatuikit/ios/chatuikit_custom_chat.png)
+![img](/images/uikit/chatuikit/ios/custom_chat.png)
 
 ## 自定义头部导航栏
 
