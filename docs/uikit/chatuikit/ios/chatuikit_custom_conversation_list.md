@@ -55,7 +55,7 @@
 
 对于导航点击事件的监听，你需要重载会话列表页面中的 `navigationClick` 方法，然后根据对应的点击区域做对应的处理，示例代码如下：
 
-```swift
+```Swift
     override func navigationClick(type: EaseChatNavigationBarClickEvent, indexPath: IndexPath?) {
         switch type {
         case .back: self.backAction()
@@ -85,7 +85,7 @@
 
 1. 继承 `EaseChatUIKit` 中的 `ConversationCell` 类创建新的自定义类 `CustomConversationCell`，然后进行如下代码设置：
 
-```swift
+```Swift
     ComponentsRegister.shared.ConversationCell = CustomConversationCell.self
 ```
 
@@ -126,7 +126,7 @@
 
 默认情况下，左滑菜单项包括禁言、置顶会话和删除会话，右滑菜单包括会话已读和唤起更多菜单 `ActionSheet`。因为是枚举数组，只支持删减菜单项，不能新增。 
 
-```swift
+```Swift
      //Remove
      Appearance.conversation.swipeLeftActions.removeAll { $0 == .more }
 ```

@@ -12,7 +12,7 @@
 
 群详情页面中右上角按钮 `...` 点击后弹出 `ActionSheet` 菜单中的数据源可配项 `Appearance.contact.moreActions`。你可以增加或删除菜单项，示例代码如下：
 
-```
+```Swift
      //增加菜单项
      Appearance.contact.moreActions.append(ActionSheetItem(title: "new list item", type: .destructive, tag: "contact_custom"))
      //删除菜单项
@@ -21,7 +21,7 @@
 
 获取该数组中某单个项的点击事件，示例如下所示：
 
-```
+```Swift
         if let item = Appearance.contact.moreActions.first(where: { $0.tag == "xxx" }) {
             item.actionClosure = { [weak self] _ in
                 //do something

@@ -182,12 +182,12 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 
 对于自定义跳转事件，可以查看聊天页面中的标记为 open 的可重载方法，进行对应的重载，即可跳转自己的业务页面。下表为重载常用的 API：
   
-| 方法                 | 描述                                                         | 是否可重载 |
-| ---------------------- | ------------------------------------------------------------ | ---------- |
-| `messageBubbleClicked` | 消息气泡点击。                                                 | 是         |
-| `messageAvatarClick`   | 消息头像点击。                                                 | 是         |
-| `audioDialog`          | 输入框音频按钮点击事件。                                        | 是         |
-| `attachmentDialog`     | 输入框发送附件消息点击事件。                                     | 是         |
+| 方法                 | 描述            | 是否可重载 |
+| ---------------------- | -------------------------------- | ---------- |
+| `messageBubbleClicked` | 消息气泡点击。         | 是 |
+| `messageAvatarClick`   | 消息头像点击。        | 是         |
+| `audioDialog`          | 输入框音频按钮点击事件。           | 是    |
+| `attachmentDialog`     | 输入框发送附件消息点击事件。       | 是         |
 
 ## 拦截原有组件点击事件
 
