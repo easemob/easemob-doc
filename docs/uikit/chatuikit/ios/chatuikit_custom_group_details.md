@@ -2,7 +2,7 @@
 
 你可以配置群详情页面的头部导航栏、点击右侧图片显示的群组操作和群详情自定义列表项等。
 
-![img](/images/uikit/chatuikit/ios/chatuikit_custom_group_details.png)
+![img](/images/uikit/chatuikit/ios/custom_group_details.png)
 
 ## 自定义头部导航栏
 
@@ -36,7 +36,7 @@
 
 ## 群详情自定义列表项
 
-群组详情页面 Header 中按钮 `CollectionView` 中数据源可配项 `Appearance.contact.detailExtensionActionItems`，主要功能包括聊天、音视频通话等。关于事件监听，详见[设置点击右侧图片显示的群组操作](#设置点击右侧图片显示的联系人操作)。首先，继承群组详情页面，然后，将继承后的群详情页面注册入 `EaseChatUIKit`，即 `ComponentsRegister.shared.GroupInfoController = MineGroupDetailViewController.self`，增加可配项，示例如下所示： 
+群组详情页面 Header 中按钮 `CollectionView` 中数据源可配项 `Appearance.contact.detailExtensionActionItems`，主要功能包括聊天、音视频通话等。关于事件监听，详见[设置点击右侧图片显示的群组操作](#设置点击右侧图片显示的群组操作)。首先，继承群组详情页面，然后，将继承后的群详情页面注册入 `EaseChatUIKit`，即 `ComponentsRegister.shared.GroupInfoController = MineGroupDetailViewController.self`，增加可配项，示例如下所示： 
 
 ```Swift
 final class MineGroupDetailViewController: GroupInfoViewController {
