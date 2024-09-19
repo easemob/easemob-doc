@@ -295,6 +295,10 @@ SDKClient.Instance.KickAllDevicesWithToken(username, token,
 
 你需要先实现 `IMultiDeviceDelegate` 监听其他设备上的操作，再设置多设备监听器。
 
+:::tip
+多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
+:::
+
 ```csharp
 //继承并实现 IMultiDeviceDelegate。
 public class MultiDeviceDelegate : IMultiDeviceDelegate {

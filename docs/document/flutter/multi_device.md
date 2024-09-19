@@ -193,6 +193,10 @@ try {
 
 可以通过 `EMMultiDeviceEventHandler` 类监听其他设备上的操作。
 
+:::tip
+多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
+:::
+
 ```dart
 //实现 `EMMultiDeviceEventHandler` 监听其他设备上的操作。
 final multiDeviceEventHandler = EMMultiDeviceEventHandler(

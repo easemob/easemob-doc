@@ -228,6 +228,10 @@ EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIn
 
 你需要先实现 `EMMultiDeviceListener` 类监听其他设备上的操作，然后调用 `addMultiDeviceListener` 方法添加多设备监听。
 
+:::tip
+多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
+:::
+
 ```java
 //实现 `EMMultiDeviceListener` 监听其他设备上的操作。
 private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
@@ -391,7 +395,6 @@ EMClient.getInstance().addMultiDeviceListener(chatMultiDeviceListener);
 //移除多设备监听。
 EMClient.getInstance().removeMultiDeviceListener(chatMultiDeviceListener);
 ```
-
 
 ### 典型示例
 
