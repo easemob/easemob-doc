@@ -11,7 +11,7 @@
 - `EMConversation#searchMsgFromDB(string keywords, long timeStamp, int maxCount, string from, EMSearchDirection direction)`：根据关键字搜索本地数据库中单个会话中指定用户发送的消息。
 - `EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)`: 根据关键字搜索消息时，可以选择搜索范围在所有会话中进行消息搜索。
 - `EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)`：根据关键字搜索消息时，可以选择搜索范围在当前会话中进行消息搜索。
--`EMChatManager#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)`：根据单个或多个消息类型，搜索本地数据库中所有会话的消息。
+- `EMChatManager#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)`：根据单个或多个消息类型，搜索本地数据库中所有会话的消息。
 - `EMConversation#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)` 根据单个或多个消息类型，搜索本地数据库中单个会话的消息。
 
 ## 前提条件
