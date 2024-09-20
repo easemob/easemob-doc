@@ -102,6 +102,10 @@ export function ConversationDetailScreen(props: Props) {
 | onThreadKicked       | function                    | 否       | 离开话题的回调通知。例如，进行路由跳转。   |
 | onForwardMessage     | function                    | 否       | 转发消息的回调通知。例如，进行路由跳转。   |
 
+## 自定义导航栏
+
+导航栏组件为通用组件，布局为左中右。自定义方式和方法与会话列表类似，详见[会话列表页面的自定义导航栏部分](chatuikit_conversation.html#自定义导航栏)。
+
 ## 输入组件
 
 `MessageInput` 组件主要发送消息。默认支持发送文本、表情、图片、语音、视频、文件、自定义等消息。还支持发送复合类型消息，例如：引用消息、修改消息、名片消息等。
@@ -224,6 +228,158 @@ export function ConversationDetailScreen(props: Props) {
 - 注册回调：使用 `Container` 组件的 `onRequestMultiData` 属性实现。
 - 主动调用：使用 `ChatService.updateDataList` 方法实现。调用该方法会触发内部事件分发，刷新已加载的组件页面。
 - 消息携带：优先使用消息携带的头像和昵称。
+
+### 设置消息列表的背景颜色
+
+```tsx
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function ConversationDetailScreen(props: Props) {
+  const { route } = props;
+  const convId = ((route.params as any)?.params as any)?.convId;
+  const convType = ((route.params as any)?.params as any)?.convType;
+
+  return (
+    <ConversationDetail
+      type={'chat'}
+      convId={convId}
+      convType={convType}
+      list={{
+        props: {
+          containerStyle: { backgroundColor: 'red' },
+        },
+      }}
+    />
+  );
+}
+```
+
+### 设置消息列表的背景图片
+
+```tsx
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function ConversationDetailScreen(props: Props) {
+  const { route } = props;
+  const convId = ((route.params as any)?.params as any)?.convId;
+  const convType = ((route.params as any)?.params as any)?.convType;
+
+  return (
+    <ConversationDetail
+      type={'chat'}
+      convId={convId}
+      convType={convType}
+      list={{
+        props: {
+          backgroundImage: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        },
+      }}
+    />
+  );
+}
+```
+
+### 自定义消息时间戳
+
+设置消息气泡下面的时间戳，需要在初始化部分进行。 示例代码如下：
+
+```tsx
+export function App() {
+  const { getOptions } = useApp();
+
+  return (
+    <UIKitContainer
+      options={getOptions()}
+      formatTime={{
+        locale: enAU,
+        conversationDetailCallback(timestamp, enAU) {
+          return format(timestamp, 'yyyy-MM-dd HH:mm:ss', { locale: enAU });
+        },
+      }}
+    >
+      {/* sub component */}
+    </UIKitContainer>
+  );
+}
+```
+
+### 自定义消息列表项样式
+
+对于消息列表项，可以设置头像、昵称、气泡布局、样式、事件等。
+
+```tsx
+export function MyMessageContent(props: MessageContentProps) {
+  const { msg, layoutType, isSupport, contentMaxWidth } = props;
+  if (msg.body.type === ChatMessageType.TXT) {
+    // todo: 如果是文本类型消息，则使用该样式进行显示。
+    return (
+      <MessageText
+        msg={msg}
+        layoutType={layoutType}
+        isSupport={isSupport}
+        maxWidth={contentMaxWidth}
+      />
+    );
+  }
+  return <MessageContent {...props} />;
+}
+
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function ConversationDetailScreen(props: Props) {
+  const { route } = props;
+  const convId = ((route.params as any)?.params as any)?.convId;
+  const convType = ((route.params as any)?.params as any)?.convType;
+
+  return (
+    <ConversationDetail
+      type={'chat'}
+      convId={convId}
+      convType={convType}
+      list={{
+        props: {
+          listItemRenderProps: {
+            MessageContent: MyMessageContent,
+          },
+        },
+      }}
+    />
+  );
+}
+```
+
+自定义消息列表项，例如：隐藏左边消息的头像。
+
+其它自定义的内容，可以参考 `MessageViewProps` 属性。
+
+```tsx
+export function MyMessageView(props: MessageViewProps) {
+  if (props.model.layoutType === 'left') {
+    // todo: 如果是左边的消息，则不显示头像
+    return <MessageView {...props} avatarIsVisible={false} />;
+  }
+  return MessageView(props);
+}
+
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function ConversationDetailScreen(props: Props) {
+  const { route } = props;
+  const convId = ((route.params as any)?.params as any)?.convId;
+  const convType = ((route.params as any)?.params as any)?.convType;
+
+  return (
+    <ConversationDetail
+      type={'chat'}
+      convId={convId}
+      convType={convType}
+      list={{
+        props: {
+          listItemRenderProps: {
+            MessageView: MyMessageView,
+          },
+        },
+      }}
+    />
+  );
+}
+```
 
 ### 事件通知
 

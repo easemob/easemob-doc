@@ -50,6 +50,10 @@ export function ContactListScreen(props: Props) {
 }
 ```
 
+## 自定义导航栏
+
+导航栏组件为通用组件，布局为左中右。自定义方式和方法与会话列表类似，详见[会话列表页面的自定义导航栏部分](chatuikit_conversation.html#自定义导航栏)。
+
 ## 自定义联系人列表
 
 `ContactList` 组件的核心属性如下：
@@ -69,10 +73,75 @@ export function ContactListScreen(props: Props) {
 | onForwardMessage      | function  | 否       | 转发的回调通知。例如，进行路由跳转。                                         |
 | onChangeRequestCount  | function  | 否       | 新通知数量变更的回调通知。例如，进行路由跳转。                               |
 | getFullLetter         | function  | 否       | 获取分类排序的回调通知。例如：返回汉字的全拼音。 例如，进行路由跳转。        |
-| indexList             | array     | 否       | 索引头列表。默认为 `ABCDEFGHIJKLMNOPQRSTUVWXYZ#`                        |
+| indexList             | array     | 否       | 索引头列表。默认为 `ABCDEFGHIJKLMNOPQRSTUVWXYZ#`。                        |
 | visibleEmptyIndex     | boolean   | 否       | 是否显示空索引分类，默认不显示。                                       |
 
-## 头像和昵称
+## 自定义联系人列表 Header
+
+自定义 Header 列表项，可以添加、删除、修改列表项，每个列表项可以实现样式、布局、颜色等属性的修改。
+
+```tsx
+export const MyCustomItemView = (props: ContactItemProps) => {
+  const {} = props;
+  return <View style={{ width: 100, height: 44, backgroundColor: 'red' }} />;
+};
+
+export type MyContactListScreenProps = {};
+function MyContactListScreen(props: MyContactListScreenProps) {
+  const {} = props;
+
+  return (
+    <ContactList
+      contactType={'contact-list'}
+      onInitListItemActions={(
+        defaultItems: React.ReactElement<ContactItemProps>[]
+      ) => {
+        defaultItems.push(<MyCustomItemView name={'custom item'} />);
+        return defaultItems;
+      }}
+    />
+  );
+}
+```
+
+## 是否显示字母索引表和字母导航列表
+
+```tsx
+export type MyContactListScreenProps = {};
+function MyContactListScreen(props: MyContactListScreenProps) {
+  const {} = props;
+
+  return (
+    <ContactList
+      contactType={'contact-list'}
+      isVisibleIndex={false}
+      isVisibleItemHeader={false}
+    />
+  );
+}
+```
+
+### 自定义列表项样式
+
+自定义列表项可以修改头像、昵称、样式（例如，列表项的高度和背景颜色）、布局等。
+
+```tsx
+export type MyContactListScreenProps = {};
+function MyContactListScreen(props: MyContactListScreenProps) {
+  const {} = props;
+
+  return (
+    <ContactList
+      contactType={'contact-list'}
+      ListItemRender={() => (
+        <View style={{ height: 20, backgroundColor: 'red' }} />
+      )}
+    />
+  );
+}
+```
+
+## 设置头像和昵称
 
 `ContactList` 组件内部并没有头像和昵称的默认值，需要用户提供。若未提供，则展示默认头像和用户 ID。
 
