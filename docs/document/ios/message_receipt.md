@@ -244,15 +244,14 @@ EMChatManagerDelegate
 
 | 字段       | 描述   | 
 | :--------- | :----- | 
-| `EMChatMessage#isRead` | 用户是否已读了该消息。如果是自己发送的消息，该字段的值固定为 `false`。 | 
+| `EMChatMessage#isRead` | 用户是否已读了该消息。如果是自己发送的消息，该字段的值固定为 `true`。 | 
 | `EMChatMessage#isReadAcked`      | 是否（消息接收方）已发送或（消息发送方）已收到消息已读回执。如果是自己发送的消息，记录的是对方是否已读。如果是对方的消息，则记录的是自己是否发送过已读回执。| 
 
 对于群聊消息，本地数据库通过以下字段存储消息已读状态：
 
 | 字段       | 描述   | 
 | :--------- | :----- | 
-| `EMChatMessage#isRead` | 接收方是否已读了消息。   | 
-| `EMChatMessage#isReadAcked`      | 是否（消息接收方）已发送或（消息发送方）已收到消息已读回执。只要收到了一个接收方的已读回执，该参数即为 `YES`。   | 
+| `EMChatMessage#isRead` | 用户是否已读了该消息。如果是自己发送的消息，该字段的值固定为 `true`。   | 
 | `EMChatMessage#groupAckCount`  | 已阅读消息的群成员数量。    | 
 
 ### 已读回执与未读消息数
