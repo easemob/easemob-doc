@@ -95,12 +95,12 @@ export function ConversationDetailScreen(props: Props) {
 | parentId             | string                      | 否       | 创建话题模式参数。该话题的所在群组 ID。  |
 | newThreadName        | string                      | 否       | 创建话题模式参数。该话题的名称。   |
 | onCreateThreadResult | string                      | 否       | 创建话题模式参数。创建话题的结果回调通知。      |
-| onClickedThread      | function                    | 否       | 点击消息气泡，打开话题页面的回调通知。可能用到路由。  |
-| onClickedVoice       | function                    | 否       | 点击导航栏音频按钮的回调通知。可能用到路由。  |
-| onClickedVideo       | function                    | 否       | 点击导航栏视频按钮的回调通知。可能用到路由。   |
-| onThreadDestroyed    | function                    | 否       | 话题销毁的回调通知。可能用到路由。   |
-| onThreadKicked       | function                    | 否       | 离开话题的回调通知。可能用到路由。   |
-| onForwardMessage     | function                    | 否       | 转发消息的回调通知。可能用到路由。   |
+| onClickedThread      | function                    | 否       | 点击消息气泡，打开话题页面的回调通知。例如，进行路由跳转。  |
+| onClickedVoice       | function                    | 否       | 点击导航栏音频按钮的回调通知。例如，进行路由跳转。  |
+| onClickedVideo       | function                    | 否       | 点击导航栏视频按钮的回调通知。例如，进行路由跳转。   |
+| onThreadDestroyed    | function                    | 否       | 话题销毁的回调通知。例如，进行路由跳转。   |
+| onThreadKicked       | function                    | 否       | 离开话题的回调通知。例如，进行路由跳转。   |
+| onForwardMessage     | function                    | 否       | 转发消息的回调通知。例如，进行路由跳转。   |
 
 ## 输入组件
 
@@ -183,18 +183,18 @@ export function ConversationDetailScreen(props: Props) {
 | messageLayoutType             | MessageLayoutType          | 否       | 消息列表是居左还是居右。默认接收消息在左边，发送消息在右边。                |
 | messageLayoutType             | MessageLayoutType          | 否       | 消息列表是居左还是居右。默认接收消息在左边，发送消息在右边。                |
 | onNoMoreMessage               | function                   | 否       | 已经没有更多消息的回调通知。可能多次通知注意去重。                          |
-| onCreateThread                | function                   | 否       | 请求创建话题的回调通知。可能用到路由。                                      |
-| onOpenThread                  | function                   | 否       | 打开话题的回调通知。可能用到路由。                                          |
-| onCreateThreadResult          | function                   | 否       | 创建话题结果的回调通知。可能用到路由。                                      |
-| onClickedEditThreadName       | function                   | 否       | 编辑话题名称的回调通知。可能用到路由。                                      |
-| onClickedOpenThreadMemberList | function                   | 否       | 查看话题成员列表的回调通知。可能用到路由。                                  |
-| onClickedLeaveThread          | function                   | 否       | 离开话题的回调通知。可能用到路由。                                          |
-| onClickedDestroyThread        | function                   | 否       | 销毁话题的回调通知。可能用到路由。                                          |
+| onCreateThread                | function                   | 否       | 请求创建话题的回调通知。例如，进行路由跳转。                                      |
+| onOpenThread                  | function                   | 否       | 打开话题的回调通知。例如，进行路由跳转。                                          |
+| onCreateThreadResult          | function                   | 否       | 创建话题结果的回调通知。例如，进行路由跳转。                                      |
+| onClickedEditThreadName       | function                   | 否       | 编辑话题名称的回调通知。例如，进行路由跳转。                                      |
+| onClickedOpenThreadMemberList | function                   | 否       | 查看话题成员列表的回调通知。例如，进行路由跳转。                                  |
+| onClickedLeaveThread          | function                   | 否       | 离开话题的回调通知。例如，进行路由跳转。                                          |
+| onClickedDestroyThread        | function                   | 否       | 销毁话题的回调通知。例如，进行路由跳转。                                          |
 | onClickedMultiSelected        | function                   | 否       | 点击多选菜单的回调通知。                                                    |
 | onChangeMultiItems            | function                   | 否       | 多选结果的回调通知。                                                        |
 | onClickedSingleSelect         | function                   | 否       | 点击转发的回调通知。                                                        |
-| onClickedHistoryDetail        | function                   | 否       | 点击历史消息的回调通知。可能用到路由。                                      |
-| onChangeUnreadCount           | function                   | 否       | 未读数发生变更的回调通知。可能用到路由。                                    |
+| onClickedHistoryDetail        | function                   | 否       | 点击历史消息的回调通知。例如，进行路由跳转。                                      |
+| onChangeUnreadCount           | function                   | 否       | 未读数发生变更的回调通知。例如，进行路由跳转。                                    |
 
 对象引用的方法如下：
 

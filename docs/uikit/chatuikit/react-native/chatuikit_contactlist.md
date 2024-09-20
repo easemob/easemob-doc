@@ -60,15 +60,15 @@ export function ContactListScreen(props: Props) {
 | onSort                | function  | 否       | 自定义列表排序策略。                                                   |
 | onInitListItemActions | function  | 否       | 自定义联系人列表组件中的单独列表项。默认包括联系人申请列表、群组列表。 |
 | groupId               | string    | 否       | 该参数只会用在 `add-group-member` 类型的联系人列表中。                 |
-| onClickedNewRequest   | function  | 否       | 点击联系人通知列表的回调。可能用到路由。                               |
+| onClickedNewRequest   | function  | 否       | 点击联系人通知列表的回调。例如，进行路由跳转。                               |
 | onClickedGroupList    | function  | 否       | 点击群列表的回调。                                                     |
 | ListItemRender        | function  | 否       | 自定义联系人列表项的组件。可以实现修改布局、样式、是否可见等。         |
 | ListItemHeaderRender  | function  | 否       | 自定义联系人列表项 header 的组件。可以实现修改布局、样式、是否可见等。 |
 | onStateChanged        | function  | 否       | 列表组件状态通知。包括：加载失败、列表为空等。                         |
 | propsRef              | reference | 否       | 列表组件的引用对象，可以主动添加、修改、删除会话列表项，注意操作条件。 |
-| onForwardMessage      | function  | 否       | 转发的回调通知。可能用到路由。                                         |
-| onChangeRequestCount  | function  | 否       | 新通知数量变更的回调通知。可能用到路由。                               |
-| getFullLetter         | function  | 否       | 获取分类排序的回调通知。例如：返回汉字的全拼音。 可能用到路由。        |
+| onForwardMessage      | function  | 否       | 转发的回调通知。例如，进行路由跳转。                                         |
+| onChangeRequestCount  | function  | 否       | 新通知数量变更的回调通知。例如，进行路由跳转。                               |
+| getFullLetter         | function  | 否       | 获取分类排序的回调通知。例如：返回汉字的全拼音。 例如，进行路由跳转。        |
 | indexList             | array     | 否       | 索引头列表。默认为 `ABCDEFGHIJKLMNOPQRSTUVWXYZ#`                        |
 | visibleEmptyIndex     | boolean   | 否       | 是否显示空索引分类，默认不显示。                                       |
 

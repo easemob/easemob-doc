@@ -74,9 +74,9 @@ export function ConversationListScreen(props: Props) {
 | ------------------------ | --------- | -------- | ---------------------------------------------------------------------- |
 | containerStyle           | object    | 否       | 修改组件样式。                                                         |
 | onSort                   | function  | 否       | 自定义列表排序策略。                                                   |
-| onClickedNewConversation | function  | 否       | 点击创建新会话按钮的回调。可能用到路由。                               |
-| onClickedNewGroup        | function  | 否       | 点击创建群组按钮的回调。可能用到路由。                                 |
-| onClickedNewContact      | function  | 否       | 点击添加联系人按钮的回调。 可能用到路由。                              |
+| onClickedNewConversation | function  | 否       | 点击创建新会话按钮的回调。例如，进行路由跳转。                               |
+| onClickedNewGroup        | function  | 否       | 点击创建群组按钮的回调。例如，进行路由跳转。                                 |
+| onClickedNewContact      | function  | 否       | 点击添加联系人按钮的回调。 例如，进行路由跳转。                              |
 | ListItemRender           | function  | 否       | 自定义会话列表项的组件。可以实现修改布局、样式、是否可见等。           |
 | onStateChanged           | function  | 否       | 列表组件状态通知。包括：加载失败、列表为空等。                         |
 | propsRef                 | reference | 否       | 列表组件的引用对象，可以主动添加、修改、删除会话列表项，注意操作条件。 |
