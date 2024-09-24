@@ -28,21 +28,21 @@ Widget build(BuildContext context) {
 | 参数 | 描述 |
 |---|---|
 | final ConversationListViewController? controller | 会话列表控制器， 如果不传内部会使用默认的控制器。|
-| final ChatUIKitAppBar? appBar | 自定义会话列表 `appBar`。如不设置会使用默认的。|
-| final bool enableAppBar | 是否开启 `appBar`，默认开启。关闭后将不再显示 `appBar`，传入的 `appBar` 也不再生效。|
-| final String? title | 默认 `appBar` 的标题展示内容。如果传入了自定义 `appBar`, 本设置将不生效。|
-| final AppBarMoreActionsBuilder? appBarMoreActionsBuilder | 默认 `appBar` 右上角**更多**按钮点击回调, 会提供一个默认操作列表，返回一个新的操作列表。|
-| final void Function(List&lt;ConversationModel&gt; data)? onSearchTap | 会话列表搜索点击事件回调，点击后会把当前所有的会话回调出来，如果不设置会有默认实现。|   
+| final ChatUIKitAppBarModel? appBarModel | 会话列表的 AppBar 模型，用于自定义 AppBar。具体参考 [ChatUIKitAppBarModel]。| // TODO：请提供链接
+| final void Function(List&lt;ConversationModel&gt; data)? onSearchTap | 会话列表搜索点击事件回调，点击后会把当前所有的会话回调出来，如果不设置会有默认实现。|
 | final List&lt;Widget&gt;? beforeWidgets | 展示在会话列表前面的 widget。|
 | final List&lt;Widget&gt;? afterWidgets | 展示在会话列表后面的 widget。|
-| final ConversationItemBuilder? listViewItemBuilder | 会话列表 item builder。如果需要重写会话列表，在此处实现。|
-| final void Function(BuildContext context, ConversationModel info)? onTap | 会话列表点击回调。如果不实现，默认会跳转到消息页面。|
-| final ConversationsViewItemLongPressHandler? onLongPressHandler | 会话列表长按事件。会提供一个默认操作列表，返回一个新的操作列表。|
+| final ConversationItemBuilder? itemBuilder | 会话列表 item builder。如果需要重写会话列表，在此处实现。|
+| final void Function(BuildContext context, ConversationItemModel info)? onItemTap | 点击会话列表的回调，点击后会把当前的会话数据传递过来。具体参考 [ConversationItemModel]。 如果不是设置默认会跳转到消息页面。具体参考 [MessagesView]。 | // TODO：请提供链接
+| final ConversationsViewItemLongPressHandler? onItemLongPressHandler | 长按会话列表的回调，如果不设置默认会弹出默认的长按菜单。如果设置长按时会把默认的弹出菜单项传给你，你需要调整后返回来，返回来的数据会用于菜单显示，如果返回 `null` 将不会显示菜单。 |
 | final String? searchBarHideText | 搜索框中默认展示的文字内容。|
 | final bool enableSearchBar | 是否使用搜索。<br/> - （默认）`true`：使用；<br/> - `false`：不使用。|
 | final Widget? listViewBackground | 列表为空时展示的背景图。|
+| final bool enableAppBar | 是否开启 `appBar`，默认开启。关闭后将不再显示 `appBar`，传入的 `appBar` 也不再生效。|
 | final String? attributes | 扩展参数，会传入到下一个页面。|
-
+| final ChatUIKitViewObserver? viewObserver | 用于刷新页面的 Observer。 |
+| final AppBarMoreActionsBuilder? appBarMoreActionsBuilder | 默认 `appBar` 右上角**更多**按钮点击回调, 会提供一个默认操作列表，返回一个新的操作列表。|
+| final bool enablePinHighlight | 是否开启置顶消息点击高亮，默认为 `true`。如果设置为 `false` 将不会显示置顶高亮。|
 
 ## 更多
 
