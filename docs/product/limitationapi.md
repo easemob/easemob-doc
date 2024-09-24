@@ -2,36 +2,36 @@
 
 <Toc />
 
-除部分 API 接口有特殊说明外，API 调用频率限制默认为 100 次/秒，具体每个接口限制以下表为准。
+除部分 API 接口有特殊说明外，API 调用频率限制默认为 100 次/秒，你可以按模块查看每个接口的调用频率限制。
 
-按模块查看接口调用频率限制：
+对于环信即时通讯 IM 来说，大部分客户端接口调用时，实际上后台调用的是 RESTful API，除接口名称带星号 * 的之外。表格中所示的每个接口的调用频率实则为 RESTful API 及其对应的客户端接口的调用频率总和。带 * 的接口由于没有对应的客户端接口，此类接口的调用频率仅为该 RESTful API 的调用频率。
 
 ##  用户帐号管理
 
 | Restful API 接口 |方法  | 接口 URL|
 | :------------ | :--- | :--------------------------- |
 | 注册单个用户  |  POST  | /{org_name}/{app_name}/users        |
-| 批量注册用户 |  POST   | /{org_name}/{app_name}/users       |
+| * 批量注册用户 |  POST   | /{org_name}/{app_name}/users       |
 
 以上两个接口的总调用频率（默认值）为 100 次/秒/App Key。
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :----------- | :----- | :------------------- | :------------- |
-| 获取 app/用户 token  | POST   | /{org_name}/{app_name}/token   | 300 次/秒/App Key          |
+| * 获取 app/用户 token  | POST   | /{org_name}/{app_name}/token   | 300 次/秒/App Key          |
 | 获取单个用户  |  GET | /{org_name}/{app_name}/users/{username}   | 100 次/秒/App Key   |
-| 批量获取用户 |  GET  | /{org_name}/{app_name}/users      | 100 次/秒/App Key|
-| 删除单个用户 |  DELETE  | /{org_name}/{app_name}/users/{username}         | 100 次/秒/App Key |
-| 批量删除用户 |  DELETE   | /{org_name}/{app_name}/users  | 30 次/秒/App Key   |
-| 修改用户密码  |  POST | /{org_name}/{app_name}/users/{username}/password   | 100 次/秒/App Key   |
-| 获取用户在线状态  |  GET | /{org_name}/{app_name}/users/{username}/status   | 100 次/秒/App Key  |
-| 批量获取用户在线状态  |  POST    | /{org_name}/{app_name}/users/batch/status  | 50 次/秒/App Key |
-| 获取离线消息数       |  GET     | /{org_name}/{app_name}/users/{owner_username}/offline_msg_count    | 100 次/秒/App Key |
-| 获取离线消息的状态    |  GET   | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id}   | 100 次/秒/App Key   |
-| 账号封禁   |  POST     | /{org_name}/{app_name}/users/{username}/deactivate          | 100 次/秒/App Key     |
-| 账号解禁    |  POST                    | /{org_name}/{app_name}/users/{username}/activate         | 100 次/秒/App Key      |
-| 强制用户下线         |  GET    | /{org_name}/{app_name}/users/{username}/disconnect    | 100 次/秒/App Key   |
-| 强制用户从单设备下线 | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} | 100 次/秒/App Key |
-| 获取指定账号的在线登录设备列表    | GET  | /{org_name}/{app_name}/users/{username}/resources | 100 次/秒/App Key  |
+| * 批量获取用户 |  GET  | /{org_name}/{app_name}/users      | 100 次/秒/App Key|
+| * 删除单个用户 |  DELETE  | /{org_name}/{app_name}/users/{username}         | 100 次/秒/App Key |
+| * 批量删除用户 |  DELETE   | /{org_name}/{app_name}/users  | 30 次/秒/App Key   |
+| * 修改用户密码  |  POST | /{org_name}/{app_name}/users/{username}/password   | 100 次/秒/App Key   |
+| * 获取用户在线状态  |  GET | /{org_name}/{app_name}/users/{username}/status   | 100 次/秒/App Key  |
+| * 批量获取用户在线状态  |  POST    | /{org_name}/{app_name}/users/batch/status  | 50 次/秒/App Key |
+| * 获取离线消息数       |  GET     | /{org_name}/{app_name}/users/{owner_username}/offline_msg_count    | 100 次/秒/App Key |
+| * 获取离线消息的状态    |  GET   | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id}   | 100 次/秒/App Key   |
+| * 账号封禁   |  POST     | /{org_name}/{app_name}/users/{username}/deactivate          | 100 次/秒/App Key     |
+| * 账号解禁    |  POST                    | /{org_name}/{app_name}/users/{username}/activate         | 100 次/秒/App Key      |
+| * 强制用户下线         |  GET    | /{org_name}/{app_name}/users/{username}/disconnect    | 100 次/秒/App Key   |
+| * 强制用户从单设备下线 | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} | 100 次/秒/App Key |
+| * 获取指定账号的在线登录设备列表    | GET  | /{org_name}/{app_name}/users/{username}/resources | 100 次/秒/App Key  |
 
 ## 消息推送
 
@@ -65,15 +65,15 @@
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :-------- | :----- | :---------------- | :--------------------- |
-| 发送单聊消息                 | POST   | /{org_name}/{app_name}/messages/users                | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 100 次/秒/App Key <br/> - 6000 条/分钟  <br/> - 600 人/次。若一次向 600 人发消息，视为 600 条消息。  |
-| 发送群聊消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 20 条/秒/App Key   <br/> - 20 次/秒 <br/> -  3 个群/次   |
-| 发送定向消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups/users           | 100 条/秒/App Key   |
-| 发送聊天室消息               | POST   | /{org_name}/{app_name}/messages/chatrooms            | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 100 条/秒  <br/> - 20 次/秒   <br/> -  10 个聊天室/次   |
-| 发送聊天室广播消息 | POST | /{org_name}/{app_name}/messages/chatrooms/broadcast | 每分钟最多可发 10 次，而且每天最多可发 100 次广播消息。 |
+| * 发送单聊消息                 | POST   | /{org_name}/{app_name}/messages/users                | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 100 次/秒/App Key <br/> - 6000 条/分钟  <br/> - 600 人/次。若一次向 600 人发消息，视为 600 条消息。  |
+| * 发送群聊消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 20 条/秒/App Key   <br/> - 20 次/秒 <br/> -  3 个群/次   |
+| * 发送定向消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups/users           | 100 条/秒/App Key   |
+| * 发送聊天室消息               | POST   | /{org_name}/{app_name}/messages/chatrooms            | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 100 条/秒  <br/> - 20 次/秒   <br/> -  10 个聊天室/次   |
+| * 发送聊天室广播消息 | POST | /{org_name}/{app_name}/messages/chatrooms/broadcast | 每分钟最多可发 10 次，而且每天最多可发 100 次广播消息。 |
 | 上传文件  |    POST  | /{org_name}/{app_name}/chatfiles       | 100 次/秒/App Key                                                 |
 | 下载文件      |  GET     | /{org_name}/{app_name}/chatfiles/{file_uuid}       | 100 次/秒/App Key                                                 |
-| 获取历史消息（聊天记录）文件   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 次/分钟/App Key                                               |
-| 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
+| * 获取历史消息（聊天记录）文件   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 次/分钟/App Key                                               |
+| * 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
 | 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key                                              |
 | 修改文本或自定义消息 | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 次/秒/App Key  |
 | 根据消息 ID 单向删除单聊漫游消息  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}    | 100 次/秒/App Key   |
@@ -81,8 +81,8 @@
 | 单向清空指定用户的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{userId}/delete/all | 100 次/秒/App Key  |
 | 单向清空单聊会话某个时间点及之前的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}/time?userId={userId}&delTime={delTime} | 100 次/秒/App Key  |
 | 单向清空群组或聊天室会话某个时间点及之前的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}/time?groupId={groupId}&delTime={delTime} | 100 次/秒/App Key  |
-| 导入单聊消息 | POST  | /{org_name}/{app_name}/messages/users/import | 100 条/秒/App Key                                          |
-| 导入群聊消息 | POST  | /{org_name}/{app_name}/messages/chatgroups/import | 100 条/秒/App Key                                    |
+| * 导入单聊消息 | POST  | /{org_name}/{app_name}/messages/users/import | 100 条/秒/App Key                                          |
+| * 导入群聊消息 | POST  | /{org_name}/{app_name}/messages/chatgroups/import | 100 条/秒/App Key                                    |
 
 ## 用户属性
 
@@ -92,7 +92,7 @@
 | 批量获取用户属性    | POST      | /{org_name}/{app_name}/metadata/user/get           | 100 次/秒/App Key    |
 | 删除用户属性   | DELETE     | /{org_name}/{app_name}/metadata/user/{username}      | 100 次/秒/App Key  |
 | 获取指定用户的所有用户属性   | GET     | /{org_name}/{app_name}/metadata/user/{username}      | 100 次/秒/App Key |
-| 获取 app 下的用户属性总大小   | GET     | /{org_name}/{app_name}/metadata/user/capacity   | 100 次/秒/App Key |
+| * 获取 app 下的用户属性总大小   | GET     | /{org_name}/{app_name}/metadata/user/capacity   | 100 次/秒/App Key |
 
 ## 用户关系管理
 
@@ -103,7 +103,7 @@
 | 设置好友备注 | PUT | /{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username} | 100 次/秒/App Key |
 | 分页获取好友列表    |  GET  | /{org_name}/{app_name}/user/{username}/contacts?limit={N}&cursor={cursor}&needReturnRemark={true/false}  | 100 次/秒/App Key   |
 | 一次性获取好友列表    |  GET  | /{org_name}/{app_name}/users/{owner_username}/contacts/users   | 100 次/秒/App Key   |
-| 导入好友列表    |  POST  | /{org_name}/{app_name}/users/{username}/contacts/import   | 100 次/秒/App Key   |
+| * 导入好友列表    |  POST  | /{org_name}/{app_name}/users/{username}/contacts/import   | 100 次/秒/App Key   |
 | 获取黑名单列表     | GET   | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 50 次/秒/App Key                                                  |
 | 添加用户至黑名单    | POST  | /{org_name}/{app_name}/users/{owner_username}/blocks/users    | 50 次/秒/App Key                                                  |
 | 从黑名单移除用户 | DELETE  | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username}   | 50 次/秒/App Key                                                  |
@@ -212,9 +212,9 @@
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
 | :--------------- |:------ | :------------  | :----------- |
-| 设置用户全局禁言  |  POST      | /{org_name}/{app_name}/mutes         | 100 次/秒/App Key  |
-| 查询单个用户 ID 全局禁言 |   GET   | /{org_name}/{appName}/mutes/username  | 100 次/秒/App Key  |
-| 查询 app 下的所有全局禁言的用户  |   GET  | /{org_name}/{app_name}/mutes        | 100 次/秒/App Key  |
+| * 设置用户全局禁言  |  POST      | /{org_name}/{app_name}/mutes         | 100 次/秒/App Key  |
+| * 查询单个用户 ID 全局禁言 |   GET   | /{org_name}/{appName}/mutes/username  | 100 次/秒/App Key  |
+| * 查询 app 下的所有全局禁言的用户  |   GET  | /{org_name}/{app_name}/mutes        | 100 次/秒/App Key  |
 
 ## 用户在线状态管理
 

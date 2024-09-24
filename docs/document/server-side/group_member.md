@@ -518,8 +518,6 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
 
-群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
-
 #### HTTP 请求
 
 ```http
