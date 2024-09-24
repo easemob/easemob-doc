@@ -72,7 +72,9 @@ export function ConversationDetailScreen(props: Props) {
     </SafeAreaView>
   );
 }
-```
+``` 
+
+## 聊天页面的核心属性
 
 `ConversationDetail` 组件的核心属性介绍如下：
 
