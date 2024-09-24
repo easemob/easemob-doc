@@ -17,7 +17,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-![img](/images/uikit/chatuikit/android/page_chat.png =300x630)
+![img](/images/uikit/chatuikit/ios/custom_chat.png)
 
 示例代码如下：
 
