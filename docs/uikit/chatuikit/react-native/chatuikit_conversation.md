@@ -66,7 +66,7 @@ export function ConversationListScreen(props: Props) {
 }
 ```
 
-## 自定义会话列表页面
+## 会话列表组件的核心属性
 
 `ConversationList` 组件提供的核心属性如下：
 
@@ -85,7 +85,7 @@ export function ConversationListScreen(props: Props) {
 | filterEmptyConversation  | function  | 否       | 是否过滤空会话。                                                       |
 | onChangeUnreadCount      | function  | 否       | 未读消息总数变更的回调通知。                                           |
 
-### 自定义导航栏
+## 自定义导航栏
 
 导航栏组件为通用组件，布局为左中右。该组件 `TopNavigationBar` 支持自定义左中右布局。左中右子组件可选且支持自定义，例如，修改样式、布局、行为、颜色等。
 
@@ -134,7 +134,7 @@ function MyConversationListScreen(props: MyConversationListScreenProps) {
 }
 ```
 
-### 设置会话列表项
+## 设置会话列表项
 
 通过 `ListItemRender` 属性实现列表项的样式、布局修改，例如，会话列表项的高度、宽度、背景颜色、上下边距、左右边距以及会话列表项的自定义点击行为和长按行为等。
 
@@ -233,7 +233,7 @@ function MyConversationListScreen(props: MyConversationListScreenProps) {
 }
 ```
 
-### 设置头像和昵称
+## 设置头像和昵称
 
 `ConversationList` 组件列表项主要分为用户和群组。列表项的头像和昵称优先使用用户提供的数据，缺省使用默认头像和 ID，例如，群组类型缺省使用默认头像和群组 ID。
 
@@ -246,6 +246,6 @@ function MyConversationListScreen(props: MyConversationListScreenProps) {
 无论哪种更新方式，都会更新缓存数据，主动更新还会触发 UI 组件刷新。
 :::
 
-### 事件通知
+## 事件通知
 
 事件通知在列表中已经实现，收到对应事件会更新列表。通常情况下，不需要开发者关注。
