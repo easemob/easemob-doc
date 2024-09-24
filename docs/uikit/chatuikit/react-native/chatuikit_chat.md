@@ -1,8 +1,8 @@
-# 聊天消息
+# 聊天页面
 
 <Toc />
 
-`ConversationDetail` 组件主要由输入组件、消息列表组件、菜单组件和导航栏组件组成。该组件支持以下功能：
+聊天页面组件 `ConversationDetail` 主要由输入组件、消息列表组件、菜单组件和导航栏组件组成。该组件支持以下功能：
 
 - 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
 - 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。
@@ -17,7 +17,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-![img](/images/uikit/chatuikit/android/page_chat.png =300x630)
+![img](/images/uikit/chatuikit/ios/custom_chat.png)
 
 示例代码如下：
 
@@ -72,7 +72,9 @@ export function ConversationDetailScreen(props: Props) {
     </SafeAreaView>
   );
 }
-```
+``` 
+
+## 聊天页面的核心属性
 
 `ConversationDetail` 组件的核心属性介绍如下：
 
@@ -95,12 +97,16 @@ export function ConversationDetailScreen(props: Props) {
 | parentId             | string                      | 否       | 创建话题模式参数。该话题的所在群组 ID。  |
 | newThreadName        | string                      | 否       | 创建话题模式参数。该话题的名称。   |
 | onCreateThreadResult | string                      | 否       | 创建话题模式参数。创建话题的结果回调通知。      |
-| onClickedThread      | function                    | 否       | 点击消息气泡，打开话题页面的回调通知。可能用到路由。  |
-| onClickedVoice       | function                    | 否       | 点击导航栏音频按钮的回调通知。可能用到路由。  |
-| onClickedVideo       | function                    | 否       | 点击导航栏视频按钮的回调通知。可能用到路由。   |
-| onThreadDestroyed    | function                    | 否       | 话题销毁的回调通知。可能用到路由。   |
-| onThreadKicked       | function                    | 否       | 离开话题的回调通知。可能用到路由。   |
-| onForwardMessage     | function                    | 否       | 转发消息的回调通知。可能用到路由。   |
+| onClickedThread      | function                    | 否       | 点击消息气泡，打开话题页面的回调通知。例如，进行路由跳转。  |
+| onClickedVoice       | function                    | 否       | 点击导航栏音频按钮的回调通知。例如，进行路由跳转。  |
+| onClickedVideo       | function                    | 否       | 点击导航栏视频按钮的回调通知。例如，进行路由跳转。   |
+| onThreadDestroyed    | function                    | 否       | 话题销毁的回调通知。例如，进行路由跳转。   |
+| onThreadKicked       | function                    | 否       | 离开话题的回调通知。例如，进行路由跳转。   |
+| onForwardMessage     | function                    | 否       | 转发消息的回调通知。例如，进行路由跳转。   |
+
+## 自定义导航栏
+
+导航栏组件为通用组件，布局为左中右。自定义方式和方法与会话列表类似，详见[会话列表页面的自定义导航栏部分](chatuikit_conversation.html#自定义导航栏)。
 
 ## 输入组件
 
@@ -183,18 +189,18 @@ export function ConversationDetailScreen(props: Props) {
 | messageLayoutType             | MessageLayoutType          | 否       | 消息列表是居左还是居右。默认接收消息在左边，发送消息在右边。                |
 | messageLayoutType             | MessageLayoutType          | 否       | 消息列表是居左还是居右。默认接收消息在左边，发送消息在右边。                |
 | onNoMoreMessage               | function                   | 否       | 已经没有更多消息的回调通知。可能多次通知注意去重。                          |
-| onCreateThread                | function                   | 否       | 请求创建话题的回调通知。可能用到路由。                                      |
-| onOpenThread                  | function                   | 否       | 打开话题的回调通知。可能用到路由。                                          |
-| onCreateThreadResult          | function                   | 否       | 创建话题结果的回调通知。可能用到路由。                                      |
-| onClickedEditThreadName       | function                   | 否       | 编辑话题名称的回调通知。可能用到路由。                                      |
-| onClickedOpenThreadMemberList | function                   | 否       | 查看话题成员列表的回调通知。可能用到路由。                                  |
-| onClickedLeaveThread          | function                   | 否       | 离开话题的回调通知。可能用到路由。                                          |
-| onClickedDestroyThread        | function                   | 否       | 销毁话题的回调通知。可能用到路由。                                          |
+| onCreateThread                | function                   | 否       | 请求创建话题的回调通知。例如，进行路由跳转。                                      |
+| onOpenThread                  | function                   | 否       | 打开话题的回调通知。例如，进行路由跳转。                                          |
+| onCreateThreadResult          | function                   | 否       | 创建话题结果的回调通知。例如，进行路由跳转。                                      |
+| onClickedEditThreadName       | function                   | 否       | 编辑话题名称的回调通知。例如，进行路由跳转。                                      |
+| onClickedOpenThreadMemberList | function                   | 否       | 查看话题成员列表的回调通知。例如，进行路由跳转。                                  |
+| onClickedLeaveThread          | function                   | 否       | 离开话题的回调通知。例如，进行路由跳转。                                          |
+| onClickedDestroyThread        | function                   | 否       | 销毁话题的回调通知。例如，进行路由跳转。                                          |
 | onClickedMultiSelected        | function                   | 否       | 点击多选菜单的回调通知。                                                    |
 | onChangeMultiItems            | function                   | 否       | 多选结果的回调通知。                                                        |
 | onClickedSingleSelect         | function                   | 否       | 点击转发的回调通知。                                                        |
-| onClickedHistoryDetail        | function                   | 否       | 点击历史消息的回调通知。可能用到路由。                                      |
-| onChangeUnreadCount           | function                   | 否       | 未读数发生变更的回调通知。可能用到路由。                                    |
+| onClickedHistoryDetail        | function                   | 否       | 点击历史消息的回调通知。例如，进行路由跳转。                                      |
+| onChangeUnreadCount           | function                   | 否       | 未读数发生变更的回调通知。例如，进行路由跳转。                                    |
 
 对象引用的方法如下：
 
@@ -224,6 +230,158 @@ export function ConversationDetailScreen(props: Props) {
 - 注册回调：使用 `Container` 组件的 `onRequestMultiData` 属性实现。
 - 主动调用：使用 `ChatService.updateDataList` 方法实现。调用该方法会触发内部事件分发，刷新已加载的组件页面。
 - 消息携带：优先使用消息携带的头像和昵称。
+
+### 设置消息列表的背景颜色
+
+```tsx
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function ConversationDetailScreen(props: Props) {
+  const { route } = props;
+  const convId = ((route.params as any)?.params as any)?.convId;
+  const convType = ((route.params as any)?.params as any)?.convType;
+
+  return (
+    <ConversationDetail
+      type={'chat'}
+      convId={convId}
+      convType={convType}
+      list={{
+        props: {
+          containerStyle: { backgroundColor: 'red' },
+        },
+      }}
+    />
+  );
+}
+```
+
+### 设置消息列表的背景图片
+
+```tsx
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function ConversationDetailScreen(props: Props) {
+  const { route } = props;
+  const convId = ((route.params as any)?.params as any)?.convId;
+  const convType = ((route.params as any)?.params as any)?.convType;
+
+  return (
+    <ConversationDetail
+      type={'chat'}
+      convId={convId}
+      convType={convType}
+      list={{
+        props: {
+          backgroundImage: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        },
+      }}
+    />
+  );
+}
+```
+
+### 自定义消息时间戳
+
+设置消息气泡下面的时间戳，需要在初始化部分进行。 示例代码如下：
+
+```tsx
+export function App() {
+  const { getOptions } = useApp();
+
+  return (
+    <UIKitContainer
+      options={getOptions()}
+      formatTime={{
+        locale: enAU,
+        conversationDetailCallback(timestamp, enAU) {
+          return format(timestamp, 'yyyy-MM-dd HH:mm:ss', { locale: enAU });
+        },
+      }}
+    >
+      {/* sub component */}
+    </UIKitContainer>
+  );
+}
+```
+
+### 自定义消息列表项样式
+
+对于消息列表项，可以设置头像、昵称、气泡布局、样式、事件等。
+
+```tsx
+export function MyMessageContent(props: MessageContentProps) {
+  const { msg, layoutType, isSupport, contentMaxWidth } = props;
+  if (msg.body.type === ChatMessageType.TXT) {
+    // todo: 如果是文本类型消息，则使用该样式进行显示。
+    return (
+      <MessageText
+        msg={msg}
+        layoutType={layoutType}
+        isSupport={isSupport}
+        maxWidth={contentMaxWidth}
+      />
+    );
+  }
+  return <MessageContent {...props} />;
+}
+
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function ConversationDetailScreen(props: Props) {
+  const { route } = props;
+  const convId = ((route.params as any)?.params as any)?.convId;
+  const convType = ((route.params as any)?.params as any)?.convType;
+
+  return (
+    <ConversationDetail
+      type={'chat'}
+      convId={convId}
+      convType={convType}
+      list={{
+        props: {
+          listItemRenderProps: {
+            MessageContent: MyMessageContent,
+          },
+        },
+      }}
+    />
+  );
+}
+```
+
+自定义消息列表项，例如：隐藏左边消息的头像。
+
+其它自定义的内容，可以参考 `MessageViewProps` 属性。
+
+```tsx
+export function MyMessageView(props: MessageViewProps) {
+  if (props.model.layoutType === 'left') {
+    // todo: 如果是左边的消息，则不显示头像
+    return <MessageView {...props} avatarIsVisible={false} />;
+  }
+  return MessageView(props);
+}
+
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function ConversationDetailScreen(props: Props) {
+  const { route } = props;
+  const convId = ((route.params as any)?.params as any)?.convId;
+  const convType = ((route.params as any)?.params as any)?.convType;
+
+  return (
+    <ConversationDetail
+      type={'chat'}
+      convId={convId}
+      convType={convType}
+      list={{
+        props: {
+          listItemRenderProps: {
+            MessageView: MyMessageView,
+          },
+        },
+      }}
+    />
+  );
+}
+```
 
 ### 事件通知
 

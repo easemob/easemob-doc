@@ -1,8 +1,8 @@
-# 会话列表
+# 会话列表页面
 
 <Toc />
 
-`ConversationList` 组件提供显示和管理会话列表。默认情况下，该组件提供创建新会话、删除会话、会话消息免打扰、会话置顶等功能：
+会话列表组件 `ConversationList` 组件提供显示和管理会话列表。默认情况下，该组件提供创建新会话、删除会话、会话消息免打扰、会话置顶等功能：
 
 - 点击搜索按钮，跳转到搜索页面，搜索会话。
 - 点击会话列表项，跳转到会话详情页面。
@@ -19,7 +19,7 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-![img](/images/uikit/chatuikit/android/page_conversation.png =400x840)
+![img](/images/uikit/chatuikit/ios/custom_conversation_list.png)
 
 使用默认参数时的示例代码如下：
 
@@ -66,28 +66,176 @@ export function ConversationListScreen(props: Props) {
 }
 ```
 
-## 自定义会话列表
+## 会话列表组件的核心属性
 
 `ConversationList` 组件提供的核心属性如下：
 
-| 属性                     | 类型      | 是否必选 | 描述                                                                   |
-| ------------------------ | --------- | -------- | ---------------------------------------------------------------------- |
-| containerStyle           | object    | 否       | 修改组件样式。                                                         |
-| onSort                   | function  | 否       | 自定义列表排序策略。                                                   |
-| onClickedNewConversation | function  | 否       | 点击创建新会话按钮的回调。可能用到路由。                               |
-| onClickedNewGroup        | function  | 否       | 点击创建群组按钮的回调。可能用到路由。                                 |
-| onClickedNewContact      | function  | 否       | 点击添加联系人按钮的回调。 可能用到路由。                              |
-| ListItemRender           | function  | 否       | 自定义会话列表项的组件。可以实现修改布局、样式、是否可见等。           |
-| onStateChanged           | function  | 否       | 列表组件状态通知。包括：加载失败、列表为空等。                         |
+| 属性                     | 类型      | 是否必选 | 描述      |
+| ------------------------ | --------- | -------- | ------------------------ |
+| containerStyle           | object    | 否       | 修改组件样式。     |
+| onSort                   | function  | 否       | 自定义列表排序策略。          |
+| onClickedNewConversation | function  | 否       | 点击导航栏右上角的按钮，创建新会话后的回调。例如，进行路由跳转。 |
+| onClickedNewGroup        | function  | 否       | 点击导航栏右上角的按钮，点击创建群组按钮的回调。例如，进行路由跳转。    |
+| onClickedNewContact      | function  | 否       | 点击导航栏右上角的按钮，点击添加联系人按钮的回调。 例如，进行路由跳转。  |
+| ListItemRender           | function  | 否       | 自定义会话列表项的组件。可以实现修改布局、样式、是否可见等，包括头像、昵称、时间，最后一条消息的快照等。 |
+| onStateChanged           | function  | 否       | 列表组件状态通知。包括：加载失败、列表为空等。   |
 | propsRef                 | reference | 否       | 列表组件的引用对象，可以主动添加、修改、删除会话列表项，注意操作条件。 |
-| onInitNavigationBarMenu  | function  | 否       | 自定义列表导航栏，可以修改样式、事件行为等。                           |
-| onInitBottomMenu         | function  | 否       | 注册菜单项，自定义菜单。                                               |
-| filterEmptyConversation  | function  | 否       | 是否过滤空会话。                                                       |
-| onChangeUnreadCount      | function  | 否       | 未读消息总数变更的回调通知。                                           |
+| onInitNavigationBarMenu  | function  | 否       | 自定义列表导航栏，可以修改样式、事件行为等。  |
+| onInitBottomMenu         | function  | 否       | 注册菜单项，自定义菜单。    |
+| filterEmptyConversation  | function  | 否       | 是否过滤空会话。       |
+| onChangeUnreadCount      | function  | 否       | 未读消息总数变更的回调通知。             |
 
-## 头像和昵称
+## 自定义导航栏
 
-`ConversationList` 组件列表项主要分为用户和群组。列表项的头像和昵称优先使用用户提供的数据，缺省使用默认头像和 ID。如果群组类型缺省使用默认头像和 ID。（有人会问为啥不使用群组名称，因为这里还没有获取到群组列表，后续会优化）。
+导航栏组件为通用组件，布局为左中右。该组件 `TopNavigationBar` 支持自定义左中右布局。左中右子组件可选且支持自定义，例如，修改样式、布局、行为、颜色等。
+
+例如，导航栏左侧可添加返回按钮、头像，中部组件可添加标题，右侧可添加扩展菜单等。
+
+你也可以使用 `View` 组件实现自定义导航栏。相对于 `TopNavigationBar` 组件，`View` 组件较为灵活，例如支持设置导航栏背景色。
+
+```tsx
+type MyConversationListScreenProps = {};
+function MyConversationListScreen(props: MyConversationListScreenProps) {
+  const {} = props;
+  const convRef = React.useRef<ConversationListRef>({} as any);
+  const { tr } = useI18nContext();
+
+  return (
+    <ConversationList
+      propsRef={convRef}
+      customNavigationBar={
+        <TopNavigationBar
+          Left={
+            <StatusAvatar
+              url={
+                'https://cdn3.iconfinder.com/data/icons/vol-2/128/dog-128.png'
+              }
+              size={32}
+              onClicked={() => {
+                convRef.current?.showStatusActions?.();
+              }}
+              userId={'userId'}
+            />
+          }
+          Right={TopNavigationBarRight}
+          RightProps={{
+            onClicked: () => {
+              convRef.current?.showMoreActions?.();
+            },
+            iconName: 'plus_in_circle',
+          }}
+          Title={TopNavigationBarTitle({
+            text: tr('_uikit_navi_title_chat'),
+          })}
+        />
+      }
+    />
+  );
+}
+```
+
+## 设置会话列表项
+
+通过 `ListItemRender` 属性实现列表项的样式、布局修改，例如，会话列表项的高度、宽度、背景颜色、上下边距、左右边距以及会话列表项的自定义点击行为和长按行为等。
+
+```tsx
+type MyConversationListScreenProps = {};
+function MyConversationListScreen(props: MyConversationListScreenProps) {
+  const {} = props;
+  const convRef = React.useRef<ConversationListRef>({} as any);
+
+  return (
+    <ConversationList
+      propsRef={convRef}
+      ListItemRender={() => {
+        // todo: 自定义列表项样式
+        return (
+          <Pressable
+            style={{
+              height: 40,
+              width: '100%',
+              marginVertical: 10,
+              backgroundColor: 'red',
+            }}
+            onPress={() => {
+              // todo: 自定义点击行为
+            }}
+            onLongPress={() => {
+              // todo: 自定义长按行为
+            }}
+          />
+        );
+      }}
+    />
+  );
+}
+```
+
+默认组件不支持侧滑，你需要自定义列表项组件，例如，在左滑和右滑菜单中添加按钮。其中，`SlideListItem` 组件在 `uikit` 中提供，示例如下：
+
+```tsx
+type MyConversationListScreenProps = {};
+function MyConversationListScreen(props: MyConversationListScreenProps) {
+  const {} = props;
+  const convRef = React.useRef<ConversationListRef>({} as any);
+
+  return (
+    <ConversationList
+      propsRef={convRef}
+      ListItemRender={() => {
+        const { data } = props;
+        return (
+          <SlideListItem    
+            height={100}
+            leftExtraWidth={100}
+            rightExtraWidth={100}
+            data={data}
+            key={data.convId}
+            containerStyle={{
+              backgroundColor: 'orange',
+            }}
+            onPress={() => {
+              console.log('test:zuoyu: onPress');
+            }}
+            onLongPress={() => {
+              console.log('test:zuoyu: onLongPress');
+            }}
+          >
+            <View 
+              style={{
+                width: Dimensions.get('window').width + 200,
+                height: '100%',
+                backgroundColor: 'orange',
+                flexDirection: 'row',
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: 'yellow',
+                  height: '100%',
+                  width: 100,
+                }}
+              />
+              <View
+                style={{
+                  backgroundColor: 'blue',
+                  height: '100%',
+                  width: Dimensions.get('window').width,
+                }}
+              />
+              <View />
+            </View>
+          </SlideListItem>
+        );
+      }}
+    />
+  );
+}
+```
+
+## 设置头像和昵称
+
+`ConversationList` 组件列表项主要分为用户和群组。列表项的头像和昵称优先使用用户提供的数据，缺省使用默认头像和 ID，例如，群组类型缺省使用默认头像和群组 ID。
 
 可通过以下方式提供头像和昵称：
 
@@ -98,6 +246,6 @@ export function ConversationListScreen(props: Props) {
 无论哪种更新方式，都会更新缓存数据，主动更新还会触发 UI 组件刷新。
 :::
 
-### 事件通知
+## 事件通知
 
 事件通知在列表中已经实现，收到对应事件会更新列表。通常情况下，不需要开发者关注。

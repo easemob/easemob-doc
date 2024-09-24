@@ -171,6 +171,8 @@ const chatUikitSidebar = [
       { text: '会话列表', link: 'chatuikit_conversation.html' },
       { text: '消息', link: 'chatuikit_chat.html' },
       { text: '通讯录', link: 'chatuikit_contactlist.html' },
+      { text: '联系人详情', link: 'chatuikit_custom_contact_details.html' },
+      { text: '群详情', link: 'chatuikit_custom_group_details.html' },
       { text: '主题', link: 'chatuikit_theme.html' },
       { text: '国际化', link: 'chatuikit_internationalization.html', except: ['android'] },
     ],
