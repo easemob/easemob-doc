@@ -418,7 +418,7 @@ ChatUIKitSettings.enableMessageForward = false;
 ChatUIKitSettings.sortAlphabetical = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 ```
 
-## 自定义 appBar // TODO：是啥？
+## 自定义 appBar
 
 在包含 AppBar 的页面中，可以通过 `appBarModel` 进行自定义。
 
@@ -482,9 +482,9 @@ appBarModel: ChatUIKitAppBarModel(
 ),
 ```
 
-## 自定义 ListItemBuilder //TODO：是啥？
+## 自定义 ListItemBuilder
 
-包含 list 的组件都可以通过 `itemBuilder` 对单独的 `item` 进行自定义。 // TODO：list 替换为列表？
+包含 list 的组件都可以通过 `itemBuilder` 对单独的 `item` 进行自定义。
 
 ### 示例
 

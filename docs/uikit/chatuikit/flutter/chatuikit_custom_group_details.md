@@ -4,7 +4,7 @@
 
 <img src="imgs/group_details.png" width=50%>
 
-联系人详情页提供三处自定义项，
+与联系人详情页面的自定义相似，群详情页提供三处自定义项：
 
 1. 可以通过 `appBarModel` 进行自定义。
 2. 中间部分可以通过 `actionsBuilder` 进行自定义，默认 actions 会通过 builder 返回，需要返回要展示的 actions。

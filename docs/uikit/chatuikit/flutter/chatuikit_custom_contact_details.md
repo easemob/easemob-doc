@@ -4,13 +4,13 @@
 
 <img src="imgs/contact_details.jpg" width=50%>
 
-联系人详情页提供三处自定义项，
+联系人详情页提供三处自定义项：
 
 1. 可以通过 `appBarModel` 进行自定义。
-2. 中间部分可以通过 `actionsBuilder` 进行自定义，默认 actions 会通过 builder 返回，需要返回要展示的 actions。 // TODO：actions 要替换为动作？
-3. 可以通过 `itemsBuilder` 进行自定义，默认 items 会通过 builder 回调，需要返回需要展示的 items。// TODO：items 是列表项？
-
-直接设置
+2. 中间部分可以通过 `actionsBuilder` 进行自定义，默认事件会通过 builder 返回，需要返回要展示的事件。
+3. 可以通过 `itemsBuilder` 进行自定义，默认列表项会通过 builder 回调，需要返回需要展示的列表项。
+   
+- 直接在 ContactDetailsView 中设置
 
 ```dart
   ContactDetailsView(
@@ -46,7 +46,7 @@
   );
 ```
 
-通过 arguments 设置  // TODO：通过参数设置？
+- 通过路由参数设置
 
 ```dart
   static RouteSettings contactDetails(RouteSettings settings) {

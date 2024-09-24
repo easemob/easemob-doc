@@ -66,11 +66,11 @@ Widget build(BuildContext context) {
 | final MessageItemBubbleBuilder? bubbleBuilder | 消息气泡。如果需要自定义消息气泡需要在此处实现，如果不设置则默认使用 `ChatUIKitMessageListViewBubble`。|
 | final MessageBubbleContentBuilder? bubbleContentBuilder | 消息气泡内容。如果需要自定义实现气泡内容需要在此处实现，如果不设置则使用默认。|
 | final String? attributes | 扩展参数，会传入到下一个页面。|
-| final Widget? multiSelectBottomBar | 多选时显示的 bottom bar。 | // TODO：啥样的
-| final MessageReactionItemTapHandler? onReactionItemTap | 表情回复 Reaction 点击事件，如果设置后将会替换默认的反应点击事件。详细参考 [MessageReactionItemTapHandler]。| // TODO：添加链接？下同
-| final MessageItemTapHandler? onReactionInfoTap | 表情回复 Reaction 信息点击事件，如果设置后将会替换默认的反应信息点击事件。详细参考 [MessageItemTapHandler]。|
-| final MessageItemBuilder? reactionItemsBuilder | 表情回复 Reaction 构建器，如果设置后将会替换默认的反应构建器。详细参考 [MessageItemBuilder]。|
-| final MessageItemTapHandler? onThreadItemTap | 消息话题 Thread 点击事件，如果设置后将会替换默认的线程点击事件。详细参考 [MessageItemTapHandler]。|
-| final MessageItemBuilder? threadItemBuilder | 消息话题 Thread 构建器，如果设置后将会替换默认的线程构建器。详细参考 [MessageItemBuilder]。|
+| final Widget? multiSelectBottomBar | 多选时显示的 bottom bar。 |
+| final MessageReactionItemTapHandler? onReactionItemTap | 表情回复 Reaction 点击事件，如果设置后将会替换默认的反应点击事件。| 
+| final MessageItemTapHandler? onReactionInfoTap | 表情回复 Reaction 信息点击事件，如果设置后将会替换默认的反应信息点击事件。|
+| final MessageItemBuilder? reactionItemsBuilder | 表情回复 Reaction 构建器，如果设置后将会替换默认的反应构建器。|
+| final MessageItemTapHandler? onThreadItemTap | 消息话题 Thread 点击事件，如果设置后将会替换默认的线程点击事件。|
+| final MessageItemBuilder? threadItemBuilder | 消息话题 Thread 构建器，如果设置后将会替换默认的线程构建器。|
 | final ChatUIKitViewObserver? viewObserver | 用于刷新页面的 Observer。 |
 

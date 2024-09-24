@@ -28,12 +28,12 @@ Widget build(BuildContext context) {
 | 参数 | 描述 |
 |---|---|
 | final ConversationListViewController? controller | 会话列表控制器， 如果不传内部会使用默认的控制器。|
-| final ChatUIKitAppBarModel? appBarModel | 会话列表的 AppBar 模型，用于自定义 AppBar。具体参考 [ChatUIKitAppBarModel]。| // TODO：请提供链接
+| final ChatUIKitAppBarModel? appBarModel | 会话列表的 AppBar 模型，用于自定义 AppBar。| 
 | final void Function(List&lt;ConversationModel&gt; data)? onSearchTap | 会话列表搜索点击事件回调，点击后会把当前所有的会话回调出来，如果不设置会有默认实现。|
 | final List&lt;Widget&gt;? beforeWidgets | 展示在会话列表前面的 widget。|
 | final List&lt;Widget&gt;? afterWidgets | 展示在会话列表后面的 widget。|
 | final ConversationItemBuilder? itemBuilder | 会话列表 item builder。如果需要重写会话列表，在此处实现。|
-| final void Function(BuildContext context, ConversationItemModel info)? onItemTap | 点击会话列表的回调，点击后会把当前的会话数据传递过来。具体参考 [ConversationItemModel]。 如果不是设置默认会跳转到消息页面。具体参考 [MessagesView]。 | // TODO：请提供链接
+| final void Function(BuildContext context, ConversationItemModel info)? onItemTap | 点击会话列表的回调，点击后会把当前的会话数据传递过来。如果不是设置默认会跳转到消息页面。| 
 | final ConversationsViewItemLongPressHandler? onItemLongPressHandler | 长按会话列表的回调，如果不设置默认会弹出默认的长按菜单。如果设置长按时会把默认的弹出菜单项传给你，你需要调整后返回来，返回来的数据会用于菜单显示，如果返回 `null` 将不会显示菜单。 |
 | final String? searchBarHideText | 搜索框中默认展示的文字内容。|
 | final bool enableSearchBar | 是否使用搜索。<br/> - （默认）`true`：使用；<br/> - `false`：不使用。|
