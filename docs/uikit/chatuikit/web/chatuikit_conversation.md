@@ -169,7 +169,7 @@ const Conversation = () => {
 />
 ```
 
-### 设置更多操作
+### 设置更多会话操作
 
 通过配置 `itemProps` 的 `moreAction` 属性控制显示哪些功能，或者添加自定义功能。
 
