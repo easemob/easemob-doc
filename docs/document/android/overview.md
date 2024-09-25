@@ -179,7 +179,7 @@ EMConnectionListener connectionListener = new EMConnectionListener() {
     }
 
     @Override
-    public void onLogout(int errorCode) {
+    public void onLogout(final int errorCode,EMLoginExtensionInfo info) {
 
     }
 
