@@ -52,6 +52,7 @@ const chatUikitSidebar = [
     text: '集成文档',
     collapsible: true,
     children: [
+      { text: '主题', link: 'chatuikit_theme.html' },
       { text: '进阶用法', link: 'chatuikit_advancedusage.html' },
       { text: '界面自定义', 
         collapsible: true,
@@ -64,7 +65,6 @@ const chatUikitSidebar = [
         { text: '通用可配项', link: 'chatuikit_config_item.html' }
         ],
       },
-      { text: '主题', link: 'chatuikit_theme.html' },
       { text: '页面 ViewModel 中可重载方法', link: 'chatuikit_listener.html' },
       { text: '拦截主要页面点击跳转事件', link: 'chatuikit_customize_clickjump.html' },
     ],
@@ -112,11 +112,11 @@ const chatUikitSidebar = [
       { text: '全局上下文', link: 'chatuikit_context.html' },
       { text: '登录', link: 'chatuikit_login.html' },
       { text: '事件监听器', link: 'chatuikit_listener.html' },
+      { text: '主题', link: 'chatuikit_theme.html' },
       { text: '会话列表', link: 'chatuikit_conversation.html' },
       { text: '消息', link: 'chatuikit_chat.html' },
       { text: '通讯录', link: 'chatuikit_contactlist.html' },
       { text: '音视频通话', link: 'chatuikit_video.html' },
-      { text: '主题', link: 'chatuikit_theme.html' },
     ],
     only: ['web']
   }, 
@@ -166,13 +166,13 @@ const chatUikitSidebar = [
     collapsible: true,
     children: [
       { text: '集成单群聊 UIKit', link: 'chatuikit_integrated.html' },
+      { text: '主题', link: 'chatuikit_theme.html' },
       { text: '会话列表', link: 'chatuikit_conversation.html' },
       { text: '消息', link: 'chatuikit_chat.html' },
       { text: '通讯录', link: 'chatuikit_contactlist.html' },
       { text: '联系人详情', link: 'chatuikit_custom_contact_details.html' },
       { text: '群详情', link: 'chatuikit_custom_group_details.html' },
       { text: '用户信息提供', link: 'chatuikit_userinfo.html' },
-      { text: '主题', link: 'chatuikit_theme.html' },
       { text: '国际化', link: 'chatuikit_internationalization.html', except: ['android'] },
       { text: '进阶用法', link: 'chatuikit_advancedusage.html' },
     ],
