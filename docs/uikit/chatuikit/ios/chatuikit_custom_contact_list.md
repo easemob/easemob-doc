@@ -6,7 +6,7 @@
 
 ## 自定义头部导航栏
 
-联系人列表页面、聊天页面、会话列表页面、群详情页面和联系人详情页面的标题栏均使用 `EaseChatNavigationBar`。如果联系人列表页面（`ContactViewController.swift`）的标题栏不满足需求，建议自定义标题栏，重载方法传入自定义的导航类。关于头部导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的头部标题栏](chatuikit_custom_conversation_list.html#自定义头部导航栏)。
+联系人列表页面、聊天页面、会话列表页面、群详情页面和联系人详情页面的导航栏均使用 `EaseChatNavigationBar`。如果联系人列表页面（`ContactViewController.swift`）的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于头部导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的头部导航栏](chatuikit_custom_conversation_list.html#自定义头部导航栏)。
 
 ## 自定义联系人列表 Header 
 

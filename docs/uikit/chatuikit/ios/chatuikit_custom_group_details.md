@@ -6,7 +6,7 @@
 
 ## 自定义导航栏
 
-群详情页面、联系人列表页面、聊天页面、会话列表页面和联系人详情页面的标题栏均使用 `EaseChatNavigationBar`。如果群详情页面的标题栏不满足需求，建议自定义标题栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的标题栏](chatuikit_custom_conversation_list.html#自定义导航栏)。
+群详情页面、联系人列表页面、聊天页面、会话列表页面和联系人详情页面的导航栏均使用 `EaseChatNavigationBar`。如果群详情页面的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的导航栏](chatuikit_custom_conversation_list.html#自定义导航栏)。
 
 ### 设置点击右侧图片显示的群组操作
 
@@ -34,7 +34,7 @@
         }
 ```
 
-## 自定义群详情列表项
+## 自定义按钮
 
 群组详情页面 Header 中按钮 `CollectionView` 中数据源可配项 `Appearance.contact.detailExtensionActionItems`，主要功能包括聊天、音视频通话等。关于事件监听，详见[设置点击右侧图片显示的群组操作](#设置点击右侧图片显示的群组操作)。首先，继承群组详情页面，然后，将继承后的群详情页面注册入 `EaseChatUIKit`，即 `ComponentsRegister.shared.GroupInfoController = MineGroupDetailViewController.self`，增加可配项，示例如下所示： 
 
