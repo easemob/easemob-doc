@@ -8,8 +8,8 @@
 
 目前消息页面中提供以下功能：
 
-- 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
-- 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。
+- 发送和接收消息, 包括文本、表情、图片、语音、视频、文件、名片和合并类型的消息。
+- 对消息进行复制、表情回复、引用、撤回、删除、置顶、编辑、重新发送和审核。
 - 从服务器拉取漫游消息。
 - 清除本地消息。
 
@@ -55,8 +55,8 @@ Widget build(BuildContext context) {
 | final MessageItemTapHandler? onNicknameTap | 昵称长按事件，默认没有实现。自定义时如果需要拦截点击，返回 `true`, 如果不拦截，返回 `false`。|
 | final MessageItemBuilder? itemBuilder | 消息 item 自定义 builder。如果需要重写消息样式(包括头像，昵称，消息气泡, 消息引用等所有样式)，在此处实现。|
 | final MessageItemBuilder? alertItemBuilder | 提示消息 item 自定义 builder。如果需要重写提示消息样式，在此处实现。|
-| final List&lt;ChatUIKitBottomSheetAction&gt;? morePressActions | 默认 `inputBar` 中提供的 更多按钮菜单项。如不设置会使用默认菜单。自定义`inputBar` 后不生效。|
-| final MessagesViewMorePressHandler? onMoreActionsItemsHandler | 点击 默认 `inputBar` 时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `morePressActions` 中设置的内容，如果没设置 
+| final List&lt;ChatUIKitBottomSheetAction&gt;? morePressActions | 默认 `inputBar` 中提供的 更多按钮菜单项。如不设置会使用默认菜单。自定义 `inputBar` 后不生效。|
+| final MessagesViewMorePressHandler? onMoreActionsItemsHandler | 点击默认 `inputBar` 时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `morePressActions` 中设置的内容，如果没设置 
 | final MessagesViewItemLongPressHandler? onItemLongPressHandler | 消息长按菜单项时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `longPressActions` 中设置的内容，如果没设置 
 | final bool? forceLeft | 强制所有消息在左侧。|
 | final Widget? emojiWidget | 表情 widget，如果不设置则使用默认的。|
@@ -74,3 +74,141 @@ Widget build(BuildContext context) {
 | final MessageItemBuilder? threadItemBuilder | 消息话题 Thread 构建器，如果设置后将会替换默认的线程构建器。|
 | final ChatUIKitViewObserver? viewObserver | 用于刷新页面的 Observer。 |
 
+## 自定义 AppBar
+
+你可通过 `enableAppBar` 设置是否显示 `appBar`，也可通过 `appBarModel` 对 `appBar` 进行自定义。
+
+```dart
+MessagesView(
+  appBarModel: ChatUIKitAppBarModel(
+    title: 'Title',
+    subtitle: 'Subtitle',
+  ),
+);
+```
+
+## 消息列表组件
+
+消息页面可通过以下两种方式自定义：
+
+- 需要跳转到 `MessagesView` 页面时直接自定义。
+- 通过路由跳转时对 `RouteSettings` 进行自定义。该方式详见 [路由的使用](chatuikit_advancedusage.html#路由的使用)。
+
+### 消息列表的头像和昵称
+
+消息列表展示遵循 `ChatUIKitProvider` 原则，如果需要设置头像和昵称，可以查看[头像和昵称](chatuikit_userinfo.html)设置。若需设置头像和昵称是否显示，可通过 `showMessageItemAvatar` 和 `showMessageItemNickname` 进行设置。
+
+对于头像的圆角、默认头像等设置，详见[全局配置项文档](chatuikit_advancedusage.html#其他全局配置项)。
+
+```dart
+MessagesView(
+  profile: ChatUIKitProfile.contact(id: 'userId', nickname: 'nickname'),
+  showMessageItemAvatar: (model) {
+    return true;
+  },
+  showMessageItemNickname: (model) {
+    return true;
+  },
+  ...
+);
+```
+
+### 自定义消息气泡
+
+可通过 `bubbleBuilder` 自定义消息气泡，包括气泡的颜色和圆角类型。
+
+```dart
+MessagesView(
+  profile: ChatUIKitProfile.contact(id: 'userId', nickname: 'nickname'),
+  ...
+  bubbleBuilder: (context, child, model) {
+    // 自定义气泡
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: child,
+    );
+  },
+);
+```
+
+### 自定义列表组件
+
+若需自定义消息列表项，可通过 `itemBuilder` 实现自定义。如果返回 `null`，则表示不修改本列表项，使用默认实现。
+
+```dart
+MessagesView(
+  profile: ChatUIKitProfile.contact(id: 'userId', nickname: 'nickname'),
+  ...
+  itemBuilder: (context, model) {
+    if (model.message.bodyType == MessageType.TXT) {
+      return Text(model.message.textContent);
+    } else {
+      return null;
+    }
+  },
+);
+```
+
+通过 `bubbleBuilder` 可以实现消息气泡的自定义, 如果返回 `null`， 则使用默认实现。
+
+```dart
+MessagesView(
+  profile: ChatUIKitProfile.contact(id: 'userId'),
+  bubbleBuilder: (context, child, model) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.yellow,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: child,
+    );
+  },
+);
+
+```
+
+通过 `bubbleContentBuilder` 可以实现气泡内容的自定义, 如果返回 `null`， 则使用默认实现。
+
+```dart
+MessagesView(
+  profile: ChatUIKitProfile.contact(id: 'userId'),
+  bubbleContentBuilder: (context, model) {
+    if (model.message.bodyType == MessageType.TXT) {
+      return Text(
+        model.message.textContent,
+        style: const TextStyle(fontSize: 30),
+      );
+    } else {
+      return null;
+    }
+  },
+);
+```
+
+### 自定义消息时间戳
+
+会话列表项、消息列表项、置顶消息列表项都有消息时间。默认规则为当天的消息显示具体时间，非当天的显示日期。若不满足需求，可通过 `ChatUIKitTimeFormatter` 进行自定义。
+
+```dart
+ChatUIKitTimeFormatter.instance.formatterHandler = (ctx, type, time) {
+  if (type == ChatUIKitTimeType.message) {
+    return 'message time';
+  }
+  return null;
+};
+```
+
+消息时间戳由 `type` 和 `time` 两个参数决定，根据这两个参数返回格式化后的时间样式。
+
+- `type` 为枚举类型，包括会话、消息和消息置顶三种类型。
+
+```dart
+enum ChatUIKitTimeType { conversation, message, messagePinTime }
+```
+
+- `time` 为时间戳。
