@@ -133,7 +133,7 @@ Widget build(BuildContext context) {
 | ThreadMessagesViewArguments | Thread 消息列表页面参数包装类。|
 | ThreadsViewArguments| Thread 列表页面参数包装类。|
 
-## 配置消息和会话显示的时间格式
+## 配置消息和会话时间格式
 
 ```dart
 ChatUIKitTimeFormatter.instance.formatterHandler = (context, type, time) {
@@ -307,7 +307,7 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
 
 1. 开启消息翻译特性。
 
-单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了  `ChatUIKitSettings.enableMessageTranslation` 设置是否开启消息翻译功能，默认值为 `false`。要开启该特性，需将该参数设置为 `true`。示例代码如下：
+单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了 `ChatUIKitSettings.enableMessageTranslation` 设置是否开启消息翻译功能，默认值为 `false`。要开启该特性，需将该参数设置为 `true`。示例代码如下：
 
 ```dart
    ChatUIKitSettings.enableMessageTranslation = true;

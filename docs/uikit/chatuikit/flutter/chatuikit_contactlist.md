@@ -1,4 +1,4 @@
-# 联系人列表
+# 设置联系人列表页面
 
 <Toc />
 
@@ -8,9 +8,9 @@
 
 `ContactsView` 可以直接使用，也可以通过[路由](chatuikit_advancedusage.html#路由的使用)使用。
 
-![img](/images/uikit/chatuikit/android/page_contact_list.png =400x850)  
+![img](/images/uikit/chatuikit/flutter/custom_contact_list.png)
 
-### 添加联系人列表
+## 添加联系人列表
 
 添加会话列表时，只需要将 `ContactsView` 添加到页面上即可。
 
@@ -21,7 +21,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-### 自定义联系人列表
+## 自定义联系人列表
 
 | 参数 | 描述 |
 |---|---|
@@ -40,6 +40,63 @@ Widget build(BuildContext context) {
 | final Widget? listViewBackground | 联系人为空时展示的背景图。如果不设置会有默认实现。|
 | final String? loadErrorMessage | 联系人加载失败时现实的文字信息。如果设置会有默认实现。|
 | final String? attributes | 扩展参数，会传入到下一个页面。|
+
+## 自定义 AppBar
+
+可通过 `enableAppBar` 设置是否显示 `appBar`，也可通过 `appBarModel` 自定义 `appBar`。
+
+```dart
+ContactsView(
+  appBarModel: ChatUIKitAppBarModel( 
+    title: 'Title',
+    subtitle: 'Subtitle',
+  ),
+);
+```
+
+关于 AppBar 的自定义详细描述，参见[进阶用法文档](chatuikit_advancedusage.html#自定义-appbar)。
+
+## 自定义联系人列表前后的 widget
+
+- `beforeItems`：展示在联系人列表前面的 widget，设置后将不再显示好友申请和群组列表入口。
+
+- `afterItems`：展示在联系人列表后面的 widget。
+
+`beforeItems` 和 `afterItems` 分别在列表的 `header` 和 `footer` 中。
+
+```dart
+ContactsView(
+  beforeItems: const [
+    ChatUIKitListViewMoreItem(
+      title: 'before',
+    )
+  ],
+  afterItems: const [
+    ChatUIKitListViewMoreItem(
+      title: 'after',
+    )
+  ],
+);
+```
+
+## 自定义列表项
+
+可通过 `itemBuilder` 自定义列表项，`model` 是 `ContactItemModel` 对象。返回的 `Widget` 会替换原有显示，如果返回 `null`, 则使用默认样式显示。
+
+```dart
+ContactsView(
+  itemBuilder: (context, model) {
+    return ListTile(
+      title: Text(model.profile.showName),
+      leading: CircleAvatar(
+        child: Text(model.profile.showName[0].toUpperCase()),
+      ),
+    );
+  },
+);
+```
+
+
 
 ## 更多
 

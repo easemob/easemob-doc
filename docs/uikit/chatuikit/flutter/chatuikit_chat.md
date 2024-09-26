@@ -1,4 +1,4 @@
-# 聊天消息
+# 设置聊天页面
 
 <Toc />
 
@@ -15,7 +15,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-![img](/images/uikit/chatuikit/android/page_chat.png =300x630) 
+![img](/images/uikit/chatuikit/flutter/custom_chat.png)
 
 ## 添加消息页面
 
@@ -56,8 +56,8 @@ Widget build(BuildContext context) {
 | final MessageItemBuilder? itemBuilder | 消息 item 自定义 builder。如果需要重写消息样式(包括头像，昵称，消息气泡, 消息引用等所有样式)，在此处实现。|
 | final MessageItemBuilder? alertItemBuilder | 提示消息 item 自定义 builder。如果需要重写提示消息样式，在此处实现。|
 | final List&lt;ChatUIKitBottomSheetAction&gt;? morePressActions | 默认 `inputBar` 中提供的 更多按钮菜单项。如不设置会使用默认菜单。自定义 `inputBar` 后不生效。|
-| final MessagesViewMorePressHandler? onMoreActionsItemsHandler | 点击默认 `inputBar` 时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `morePressActions` 中设置的内容，如果没设置 
-| final MessagesViewItemLongPressHandler? onItemLongPressHandler | 消息长按菜单项时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `longPressActions` 中设置的内容，如果没设置 
+| final MessagesViewMorePressHandler? onMoreActionsItemsHandler | 点击默认 `inputBar` 时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `morePressActions` 中设置的内容。|
+| final MessagesViewItemLongPressHandler? onItemLongPressHandler | 消息长按菜单项时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `longPressActions` 中设置的内容。|
 | final bool? forceLeft | 强制所有消息在左侧。|
 | final Widget? emojiWidget | 表情 widget，如果不设置则使用默认的。|
 | final MessageItemBuilder? replyBarBuilder | 自定义 `replyBar` 组件, 用于在消息引用时临时在输入框上方展示消息内容，如不设置会使用默认的 `ChatUIKitReplyBar`。|
@@ -86,6 +86,8 @@ MessagesView(
   ),
 );
 ```
+
+关于 `AppBar` 的自定义详细描述，参见[进阶用法文档](chatuikit_advancedusage.html#自定义-appbar)。
 
 ## 消息列表组件
 
@@ -146,43 +148,6 @@ MessagesView(
   itemBuilder: (context, model) {
     if (model.message.bodyType == MessageType.TXT) {
       return Text(model.message.textContent);
-    } else {
-      return null;
-    }
-  },
-);
-```
-
-通过 `bubbleBuilder` 可以实现消息气泡的自定义, 如果返回 `null`， 则使用默认实现。
-
-```dart
-MessagesView(
-  profile: ChatUIKitProfile.contact(id: 'userId'),
-  bubbleBuilder: (context, child, model) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.yellow,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: child,
-    );
-  },
-);
-
-```
-
-通过 `bubbleContentBuilder` 可以实现气泡内容的自定义, 如果返回 `null`， 则使用默认实现。
-
-```dart
-MessagesView(
-  profile: ChatUIKitProfile.contact(id: 'userId'),
-  bubbleContentBuilder: (context, model) {
-    if (model.message.bodyType == MessageType.TXT) {
-      return Text(
-        model.message.textContent,
-        style: const TextStyle(fontSize: 30),
-      );
     } else {
       return null;
     }

@@ -1,8 +1,10 @@
-# 群组详情
+# 设置群组详情页面
 
 <Toc />
 
-<img src="imgs/group_details.png" width=50%>
+你可以配置群详情页面的 App Bar、页面中间的按钮和群详情自定义列表项等。
+
+![img](/images/uikit/chatuikit/flutter/custom_group_details.png)
 
 与联系人详情页面的自定义相似，群详情页提供三处自定义项：
 
@@ -10,7 +12,7 @@
 2. 中间部分可以通过 `actionsBuilder` 进行自定义，默认 actions 会通过 builder 返回，需要返回要展示的 actions。
 3. 可以通过 `itemsBuilder` 进行自定义，默认 items 会通过 builder 回调，需要返回需要展示的 items。
 
-直接设置
+- 直接在 `GroupDetailsView` 中设置：
 
 ```dart
   GroupDetailsView(
@@ -46,7 +48,7 @@
   );
 ```
 
-通过 arguments 设置
+- 通过 `GroupDetailsViewArguments` 设置：
 
 ```dart
   static RouteSettings groupDetails(RouteSettings settings) {

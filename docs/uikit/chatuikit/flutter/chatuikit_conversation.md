@@ -1,4 +1,4 @@
-# 会话列表
+# 设置会话列表页面
 
 <Toc />
 
@@ -8,7 +8,7 @@
 
 对于单聊和群聊, 会话展示的名称为你设置的 Profile 中的昵称，若未获取到昵称，则展示 ID；会话头像为你设置的 Profile 中的头像，如果没有设置，则使用默认头像。
 
-![img](/images/uikit/chatuikit/android/page_conversation.png =400x840) 
+![img](/images/uikit/chatuikit/flutter/custom_conversation_list.png)
 
 ## 添加会话列表
 
@@ -43,6 +43,44 @@ Widget build(BuildContext context) {
 | final ChatUIKitViewObserver? viewObserver | 用于刷新页面的 Observer。 |
 | final AppBarMoreActionsBuilder? appBarMoreActionsBuilder | 默认 `appBar` 右上角**更多**按钮点击回调, 会提供一个默认操作列表，返回一个新的操作列表。|
 | final bool enablePinHighlight | 是否开启置顶消息点击高亮，默认为 `true`。如果设置为 `false` 将不会显示置顶高亮。|
+
+
+## 自定义 AppBar
+
+可通过 `enableAppBar` 设置是否显示 `appBar`，也可通过 `appBarModel` 对 `appBar` 进行自定义。 
+
+```dart
+ConversationsView(
+  appBarModel: ChatUIKitAppBarModel(
+    title: 'Title',
+    subtitle: 'Subtitle',
+  ),
+);
+```
+
+关于 AppBar 的自定义详细描述，参见[进阶用法文档](chatuikit_advancedusage.html#自定义-appbar)。
+
+## 设置会话列表项
+
+可以通过 `itemBuilder` 自定义列表项，`model` 是 `ConversationItemModel` 对象。返回的 `Widget` 会替换原有显示，如果返回 `null`, 则使用默认样式显示。
+
+```dart
+ConversationsView(
+  itemBuilder: (context, model) {
+    return ListTile(
+      title: Text('title'),
+      subtitle: Text('subtitle'),
+      onTap: () {},
+    );
+  },
+);
+```
+
+## 设置头像昵称
+
+会话列表展示遵循 `ChatUIKitProvider` 原则，如果需要设置头像和昵称，可以查看[头像和昵称](chatuikit_userinfo.html)设置。若需设置头像和昵称是否显示，可通过 `showMessageItemAvatar` 和 `showMessageItemNickname` 进行设置。
+
+对于头像的圆角、默认头像等设置，详见[全局配置项文档](chatuikit_advancedusage.html#其他全局配置项)。
 
 ## 更多
 
