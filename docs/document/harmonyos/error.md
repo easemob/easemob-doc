@@ -27,7 +27,7 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 110    |          INVALID_PARAM          | 参数无效。                          |
 | 200    |       USER_ALREADY_LOGIN        | 用户已登录：该用户 ID 已经登录。            |
 | 201    |         USER_NOT_LOGIN          | 用户未登录：例如，如果未登录成功时发送消息或者使用群组操作的 API，SDK 会提示该错误。 |
-| 202    |   USER_AUTHENTICATION_FAILED    | 用户鉴权失败：一般为 token 无效或已过期。   |
+| 202    |   USER_AUTHENTICATION_FAILED    | 用户鉴权失败：<br/> - 若使用用户 ID 和密码登录，用户 ID 或密码不正确时会上报改错误；<br/> - 若使用用户 ID 和用户 token 登录，一般为用户 token 无效或已过期。 |
 | 203    |       USER_ALREADY_EXIST        | 用户已经存在：注册用户时，传入的的用户 ID 已经存在会提示该错误。 |
 | 204    |         USER_NOT_FOUND          | 用户不存在：例如，登录或获取用户会话列表时，用户 ID 不存在。 |
 | 205    |      USER_ILLEGAL_ARGUMENT      | 用户参数不正确：例如，创建用户或更新用户属性时，用户 ID 为空或无效。 |
