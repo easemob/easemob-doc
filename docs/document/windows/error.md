@@ -48,7 +48,7 @@ SDKClient.Instance.Login(username, passwd,
 | 109    | TOKEN_WILL_EXPIRE                     | 声网 token 即将过期：超出声网 token 有效期一半时间时会开始回调此错误码。        |
 | 200    | USER_ALREADY_LOGIN                    | 用户已经登录：同一个用户 ID 已经登录。                                                                                                                                                |
 | 201    | USER_NOT_LOGIN                        | 用户未登录：例如，如果未登录成功时发送消息，或者使用群组操作的 API，SDK 会提示该错误。                                                                                                      |
-| 202    | USER_AUTHENTICATION_FAILED            | 用户鉴权失败：一般是 token 鉴权失败或者 token 已经过期。    |
+| 202    | USER_AUTHENTICATION_FAILED            | 用户鉴权失败：<br/> - 若使用用户 ID 和密码登录，用户 ID 或密码不正确时会上报改错误；<br/> - 若使用用户 ID 和用户 token 登录，一般为用户 token 无效或已过期。 |
 | 203    | USER_ALREADY_EXIST                    | 用户已经存在：注册用户 ID 时如果该 ID 已经存在会提示该错误。  |
 | 204    | USER_NOT_FOUND                        | 用户不存在：例如，登录或者获取用户会话列表时用户 ID 不存在。    |
 | 205    | USER_ILLEGAL_ARGUMENT                 | 用户参数不正确：比如创建用户 ID 时不符合格式要求， 或者更新用户属性时用户参数为空等。      |
