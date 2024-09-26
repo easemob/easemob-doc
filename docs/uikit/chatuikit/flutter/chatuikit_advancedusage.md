@@ -38,7 +38,7 @@
 | ChatUIKitRouteNames.threadMessagesView |  '/ThreadMessagesView' | Thread 消息页面。|
 | ChatUIKitRouteNames.threadMembersView |  '/ThreadMembersView' | Thread 成员页面。|
 | ChatUIKitRouteNames.threadsView |  '/ThreadsView'; | Thread 列表页面。|
-  
+
 
 ### 路由的使用
 
@@ -133,7 +133,7 @@ Widget build(BuildContext context) {
 | ThreadMessagesViewArguments | Thread 消息列表页面参数包装类。|
 | ThreadsViewArguments| Thread 列表页面参数包装类。|
 
-## 配置消息和会话显示的时间格式
+## 配置消息和会话时间格式
 
 ```dart
 ChatUIKitTimeFormatter.instance.formatterHandler = (context, type, time) {
@@ -307,7 +307,7 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
 
 1. 开启消息翻译特性。
 
-单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了  `ChatUIKitSettings.enableMessageTranslation` 设置是否开启消息翻译功能，默认值为 `false`。要开启该特性，需将该参数设置为 `true`。示例代码如下：
+单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了 `ChatUIKitSettings.enableMessageTranslation` 设置是否开启消息翻译功能，默认值为 `false`。要开启该特性，需将该参数设置为 `true`。示例代码如下：
 
 ```dart
    ChatUIKitSettings.enableMessageTranslation = true;
@@ -417,3 +417,90 @@ ChatUIKitSettings.enableMessageForward = false;
 // 将首字母排序中的#号排到最前面
 ChatUIKitSettings.sortAlphabetical = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 ```
+
+## 自定义 AppBar
+
+在包含 AppBar 的页面中，可以通过 `appBarModel` 进行自定义。
+
+```dart
+  /// ChatUIKitAppBarModel 构造函数
+  /// [title] 标题
+  /// [centerWidget] 中间控件, 优先级高于 title 和 subtitle，如果设置了 centerWidget，title 和 subtitle 将不会显示
+  /// [titleTextStyle] 标题样式
+  /// [subtitle] 副标题
+  /// [subTitleTextStyle] 副标题样式
+  /// [leadingActions] 左侧控件
+  /// [leadingActionsBuilder] 左侧控件构建器, 当存在默认值时会回调
+  /// [trailingActions] 右侧控件
+  /// [trailingActionsBuilder] 右侧控件构建器, 当存在默认值时会回调
+  /// [showBackButton] 是否显示返回键
+  /// [onBackButtonPressed] 返回键点击事件, 不设置是默认为返回上一页
+  /// [centerTitle] 是否居中显示标题
+  /// [systemOverlayStyle] 状态栏样式
+  /// [backgroundColor] 状态栏样式
+  /// [bottomLine] 是否显示底部分割线
+  /// [bottomLineColor] 底部分割线颜色
+
+  ChatUIKitAppBarModel({
+    this.title,
+    this.centerWidget,
+    this.titleTextStyle,
+    this.subtitle,
+    this.subTitleTextStyle,
+    this.leadingActions,
+    this.leadingActionsBuilder,
+    this.trailingActions,
+    this.trailingActionsBuilder,
+    this.showBackButton = true,
+    this.onBackButtonPressed,
+    this.centerTitle = false,
+    this.systemOverlayStyle,
+    this.backgroundColor,
+    this.bottomLine,
+    this.bottomLineColor,
+  });
+```
+
+#### 示例
+
+```dart
+appBarModel: ChatUIKitAppBarModel(
+  title: "聊天",
+  leadingActions: ["返回"].map((e) {
+    return ChatUIKitAppBarAction(
+      child: Text(
+        e,
+        style: const TextStyle(fontSize: 18),
+      ),
+      onTap: (context) {
+        Navigator.of(context).pop();
+      },
+    );
+  }).toList(),
+  showBackButton: false,
+  centerTitle: true,
+),
+```
+
+## 自定义 ListItemBuilder
+
+包含 list 的组件都可以通过 `itemBuilder` 对单独的 `item` 进行自定义。
+
+#### 示例
+
+```dart
+itemBuilder: (context, model) {
+  return ListTile(
+    title: Text(model.showName),
+    subtitle: const Text('子标题'),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MessagesView(profile: model.profile)),
+      );
+    },
+  );
+},
+```
+

@@ -49,34 +49,6 @@ export function GroupParticipantListScreen(props: Props) {
 }
 ```
 
-## 自定义列表项
-
-对于详情页面提供了 属性 `customItemRender` 可以修改列表项。默认包括消息免打扰、清空聊天记录等。
-
-可以添加、删除、修改列表项，每个列表项可以修改样式、布局、事件等内容。
-
-```tsx
-type Props = NativeStackScreenProps<RootScreenParamsList>;
-export function GroupInfoScreen(props: Props) {
-  const { route } = props;
-  const groupId = ((route.params as any)?.params as any)?.groupId;
-  const ownerId = ((route.params as any)?.params as any)?.ownerId;
-
-  return (
-    <GroupInfo
-      groupId={groupId}
-      ownerId={ownerId}
-      customItemRender={(items) => {
-        items.push(
-          <View style={{ height: 100, width: 100, backgroundColor: "green" }} />
-        );
-        return items;
-      }}
-    />
-  );
-}
-```
-
 ## 自定义按钮
 
 对于详情页面，提供了属性 `onInitButton` 自定义按钮。默认包括发消息、音频通话、视频通话等。
@@ -98,6 +70,34 @@ export function GroupInfoScreen(props: Props) {
         items.length = 0;
         items.push(
           <BlockButton key={"1001"} iconName="2_bars_in_circle" text="test" />
+        );
+        return items;
+      }}
+    />
+  );
+}
+```
+
+## 自定义列表项
+
+对于详情页面提供了 属性 `customItemRender` 可以修改列表项。默认包括消息免打扰、清空聊天记录等。
+
+可以添加、删除、修改列表项，每个列表项可以修改样式、布局、事件等内容。
+
+```tsx
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function GroupInfoScreen(props: Props) {
+  const { route } = props;
+  const groupId = ((route.params as any)?.params as any)?.groupId;
+  const ownerId = ((route.params as any)?.params as any)?.ownerId;
+
+  return (
+    <GroupInfo
+      groupId={groupId}
+      ownerId={ownerId}
+      customItemRender={(items) => {
+        items.push(
+          <View style={{ height: 100, width: 100, backgroundColor: "green" }} />
         );
         return items;
       }}

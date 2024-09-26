@@ -46,7 +46,7 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 Provider 仅用于会话列表以及联系人列表。若只通过快速开始进入聊天页面，则不需要实现 Provider。
 :::
 
-1.设置 Provider 实现类
+1. 设置 Provider 实现类
 
 - 使用协程异步返回会话列表相关信息，仅限于 Swift 下使用。
 
@@ -71,7 +71,7 @@ Provider 仅用于会话列表以及联系人列表。若只通过快速开始�
         EaseChatUIKitContext.shared?.groupProfileProviderOC = self
 ```
 
-2. 实现会话列表 Provider。
+2. 实现会话列表 Provider
 
 对于 Objective-C，实现 EaseProfileProviderOC 即可。 
 
@@ -183,7 +183,7 @@ extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
 
 ## 会话列表页面
 
-1.创建会话列表页面
+1. 创建会话列表页面
 
 ```Swift
     
@@ -191,7 +191,7 @@ extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
         vc.tabBarItem.tag = 0
 ```
 
-2.监听会话列表页面事件
+2. 监听会话列表页面事件
 
 ```Swift
         
@@ -200,7 +200,7 @@ extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
 
 ## 联系人列表页面
 
-1. 创建联系人列表页面。
+1. 创建联系人列表页面
 
 继承单群聊 UIKit 提供的联系人列表页面类注册后的自定义类可以调用 ViewModel 的 `ContactViewController().viewModel.registerEventsListener` 方法监听相关事件。
 
@@ -208,7 +208,7 @@ extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
         let vc = EaseChatUIKit.ComponentsRegister.shared.ContactsController.init(headerStyle: .contact)
 ```
 
-2.监听联系人列表页面事件
+2. 监听联系人列表页面事件
 
 ```Swift
         vc.viewModel?.registerEventsListener(listener: self)
