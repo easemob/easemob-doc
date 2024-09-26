@@ -30,7 +30,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 110    |       EMErrorInvalidParam        | 参数无效。  |
 | 200    |     EMErrorUserAlreadyLoginSame     | 当前用户已经登录：该用户 ID 已经登录。 |
 | 201    |         EMErrorUserNotLogin         | 用户未登录：例如，如果未登录成功时调用发送消息或群组操作的 API 会提示该错误。 |
-| 202    |   EMErrorUserAuthenticationFailed   | 用户鉴权失败：一般为 token 无效或已过期。 |
+| 202    |   EMErrorUserAuthenticationFailed   | 用户鉴权失败：<br/> - 若使用用户 ID 和密码登录，用户 ID 或密码不正确时会上报改错误；<br/> - 若使用用户 ID 和用户 token 登录，一般为用户 token 无效或已过期。 |
 | 203    |       EMErrorUserAlreadyExist       | 用户已经存在：注册用户时，传入的的用户 ID 已经存在会提示该错误。 |
 | 204    |         EMErrorUserNotFound         | 用户不存在：例如，登录或获取用户会话列表时，用户 ID 不存在。|
 | 205    |     EMErrorUserIllegalArgument      | 用户参数不正确：例如，创建用户或更新用户属性时，用户 ID 为空或无效。 |

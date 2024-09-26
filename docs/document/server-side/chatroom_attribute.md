@@ -463,7 +463,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-DELETE -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
+curl -X DELETE POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
     "keys": ["key1","key2"]
  }' 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/user1'
 ```
