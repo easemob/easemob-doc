@@ -147,7 +147,7 @@
 │   │   └── show_video_view.dart // 显示视频组件
 │   └── widgets // widget 级别组件
 │       ├── chat_uikit_alphabetical_widget.dart // 字母索引组件
-│       ├── chat_uikit_app_bar.dart // appBar 组件
+│       ├── chat_uikit_app_bar.dart // AppBar 组件
 │       ├── chat_uikit_avatar.dart // 头像组件
 │       ├── chat_uikit_badge.dart // 角标组件
 │       ├── chat_uikit_bottom_sheet.dart // bottom sheet 组件

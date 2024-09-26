@@ -42,8 +42,8 @@ Widget build(BuildContext context) {
 |---|---|
 | final ChatUIKitProfile profile | 用户信息包装类，具体可以参考 [用户信息展示](chatuikit_userinfo.html)。|
 | final MessageListViewController? controller | 消息列表控制器。|
-| final ChatUIKitAppBarModel? appBarModel | 自定义消息页面 `appBar`, 如不设置会使用默认的。|
-| final bool enableAppBar | 是否开启 `appBar`，默认开启，关闭后将不再显示 `appBar`，传入的 `appBar` 也不再生效。|
+| final ChatUIKitAppBarModel? appBarModel | 自定义消息页面 AppBar, 如不设置会使用默认的。|
+| final bool enableAppBar | 是否开启 AppBar，默认开启，关闭后将不再显示 AppBar，传入的 AppBar 也不再生效。|
 | final Widget? inputBar | 自定义输入组件。如不设置会使用默认的 `ChatUIKitInputBar`。|
 | final CustomTextEditingController? inputBarTextEditingController | `inputBar` 控制器。如果自定义了 `inputBar` 此处设置将不生效。|
 | final bool showMessageItemAvatar | 是否显示头像。|

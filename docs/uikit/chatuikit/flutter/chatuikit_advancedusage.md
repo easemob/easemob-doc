@@ -418,7 +418,7 @@ ChatUIKitSettings.enableMessageForward = false;
 ChatUIKitSettings.sortAlphabetical = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 ```
 
-## 自定义 appBar
+## 自定义 AppBar
 
 在包含 AppBar 的页面中，可以通过 `appBarModel` 进行自定义。
 
