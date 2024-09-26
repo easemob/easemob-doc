@@ -76,7 +76,7 @@ Widget build(BuildContext context) {
 
 ## 自定义 AppBar
 
-你可通过 `enableAppBar` 设置是否显示 `appBar`，也可通过 `appBarModel` 对 `appBar` 进行自定义。
+你可通过 `enableAppBar` 设置是否显示 AppBar，也可通过 `appBarModel` 对 AppBar 进行自定义。
 
 ```dart
 MessagesView(
@@ -87,7 +87,7 @@ MessagesView(
 );
 ```
 
-关于 `AppBar` 的自定义详细描述，参见[进阶用法文档](chatuikit_advancedusage.html#自定义-appbar)。
+关于 AppBar 的自定义详细描述，参见[进阶用法文档](chatuikit_advancedusage.html#自定义-appbar)。
 
 ## 消息列表组件
 

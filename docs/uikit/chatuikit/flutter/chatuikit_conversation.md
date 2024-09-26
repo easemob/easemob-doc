@@ -38,16 +38,16 @@ Widget build(BuildContext context) {
 | final String? searchBarHideText | 搜索框中默认展示的文字内容。|
 | final bool enableSearchBar | 是否使用搜索。<br/> - （默认）`true`：使用；<br/> - `false`：不使用。|
 | final Widget? listViewBackground | 列表为空时展示的背景图。|
-| final bool enableAppBar | 是否开启 `appBar`，默认开启。关闭后将不再显示 `appBar`，传入的 `appBar` 也不再生效。|
+| final bool enableAppBar | 是否开启 AppBar，默认开启。关闭后将不再显示 AppBar，传入的 AppBar 也不再生效。|
 | final String? attributes | 扩展参数，会传入到下一个页面。|
 | final ChatUIKitViewObserver? viewObserver | 用于刷新页面的 Observer。 |
-| final AppBarMoreActionsBuilder? appBarMoreActionsBuilder | 默认 `appBar` 右上角**更多**按钮点击回调, 会提供一个默认操作列表，返回一个新的操作列表。|
+| final AppBarMoreActionsBuilder? appBarMoreActionsBuilder | 默认 AppBar 右上角**更多**按钮点击回调, 会提供一个默认操作列表，返回一个新的操作列表。|
 | final bool enablePinHighlight | 是否开启置顶消息点击高亮，默认为 `true`。如果设置为 `false` 将不会显示置顶高亮。|
 
 
 ## 自定义 AppBar
 
-可通过 `enableAppBar` 设置是否显示 `appBar`，也可通过 `appBarModel` 对 `appBar` 进行自定义。 
+可通过 `enableAppBar` 设置是否显示 AppBar，也可通过 `appBarModel` 对 AppBar 进行自定义。 
 
 ```dart
 ConversationsView(
@@ -76,7 +76,7 @@ ConversationsView(
 );
 ```
 
-## 设置头像昵称
+## 设置头像和昵称
 
 会话列表展示遵循 `ChatUIKitProvider` 原则，如果需要设置头像和昵称，可以查看[头像和昵称](chatuikit_userinfo.html)设置。若需设置头像和昵称是否显示，可通过 `showMessageItemAvatar` 和 `showMessageItemNickname` 进行设置。
 
@@ -118,7 +118,7 @@ try {
 }
 ```
 
-获取指定会话中有未读消息的会话数量,  一般用于显示聚合会话中有新消息的会话数。
+- 获取指定会话中有未读消息的会话数量,  一般用于显示聚合会话中有新消息的会话数。
 
 ```dart
 try {

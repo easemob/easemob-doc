@@ -461,7 +461,7 @@ ChatUIKitSettings.sortAlphabetical = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   });
 ```
 
-### 示例
+#### 示例
 
 ```dart
 appBarModel: ChatUIKitAppBarModel(
@@ -486,7 +486,7 @@ appBarModel: ChatUIKitAppBarModel(
 
 包含 list 的组件都可以通过 `itemBuilder` 对单独的 `item` 进行自定义。
 
-### 示例
+#### 示例
 
 ```dart
 itemBuilder: (context, model) {
