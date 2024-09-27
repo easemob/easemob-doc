@@ -2,6 +2,41 @@
 
 <Toc />
 
+## 版本 V4.10.0 Dev 2024-09-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 `EMChatManager#asyncGetMessageCount` 方法，用于获取数据库中的消息总数。 
+- [IM SDK] 新增两个错误码：
+  - `EMError#GROUP_USER_IN_BLOCKLIST`（613）：该用户在群组黑名单中。群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。
+  - `EMError#CHATROOM_USER_IN_BLOCKLIST`（707）：该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。
+  
+### 优化
+ 
+- [IM SDK] [发送前回调](/document/server-side/callback.html#_1、发送前回调)时修改的[消息扩展字段](/document/android/message_send_receive.html#使用消息扩展字段)，会同步到发送方。
+- [IM SDK] 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。对于之前版本，可设置调用该接口删除会话的本地消息，但该接口不删除本地会话。
+- [IM SDK] 适配 Android 15 的 16K page size。
+- [IM SDK] 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
+- [IM SDK] 底层长连接使用 poll 代替 select，解决文件描述符（fd）最大数量 1024 的限制问题。
+
+### 修复
+
+- [IM SDK] 修复发送图片消息时指定缩略图尺寸未生效的问题。
+- [IM SDK] 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
+
+### [单群聊 UIKit](/uikit/chatuikit/android/chatuikit_overview.html)
+
+- 修复发送方发送的部分表情与接收方收到的不匹配的问题。
+
+### [EaseCallKIt](easecallkit.html)
+
+- 修复部分手机在拨号时，切换到悬浮窗口后再返回时，通话状态显示错误的问题。
+- 修复切换悬浮窗时，悬浮窗闪烁一次的问题.
+
+### [EaseIM App (Demo)](https://github.com/easemob/easemob-demo-android)
+
+- 增加隐私协议时间声明。
+
 ## 版本 V4.9.0 Dev 2024-08-30（开发版）
 
 ### 新增特性
