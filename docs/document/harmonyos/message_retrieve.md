@@ -133,3 +133,18 @@ conversation.searchMessagesByKeywords(keywords, timestamp, maxCount, from, direc
     // success logic
 });
 ```
+
+### 获取会话在一定时间内的消息数
+
+你可以调用 `getMsgCountInRange` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
+
+```TypeScript
+//conversationId：会话 ID
+let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
+if (!conversation) {
+  return;
+}
+// startTimestamp：起始时间戳(包含)，单位为毫秒。
+// endTimestamp：结束时间戳(包含)，单位为毫秒。
+const msgCount = conversation.getMsgCountInRange(startTimestamp, endTimestamp);
+```

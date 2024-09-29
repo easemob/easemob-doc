@@ -14,7 +14,7 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 1      |          GENERAL_ERROR          | SDK 或请求相关的默认错误，未区分具体错误类型：例如，SDK 内部未正确初始化，或者请求服务器时未识别出具体原因的错误。 |
 | 2      |          NETWORK_ERROR          | 网络错误：无网络服务时会回调此错误，表示 SDK 与服务器的连接已断开。 |
 | 3      |          DATABASE_ERROR         | 数据库操作失败：打开本地数据库失败。 |
-| 4      |      EXCEED_SERVICE_LIMIT       | 超过服务限制：超过当前服务版本的数量限制，例如，创建的用户 ID 数量超过购买服务的限制时提示该错误。 |
+| 4      |      EXCEED_SERVICE_LIMIT       | 超过服务限制：超过当前服务版本的数量限制，例如以下场景会提示该错误：<br/> - 创建的用户 ID 数量超过购买服务的限制时提示该错误。<br/> - 用户属性相关 API 超过调用频率限制，包括[设置当前用户的属性、获取单个或多个用户的用户属性和获取指定用户的指定用户属性的接口](userprofile.html)。 |
 | 7      |       PARTIAL_SUCCESS           | 服务请求返回成功，但有一些错误，例如，设置多个参数，有一些设置成功，另一些失败。                  |
 | 8      |       APP_ACTIVE_NUMBER_REACH_LIMITATION    | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。                  |
 | 100    |         INVALID_APP_KEY         | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看 App Key。  |

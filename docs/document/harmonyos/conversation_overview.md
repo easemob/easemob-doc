@@ -20,11 +20,12 @@
 | getUnreadMsgCount   | 获取会话中未读的消息数量。       |     
 | markAllMessagesAsRead   | 将所有未读消息设置为已读。       |    
 | markMessageAsRead      | 设置指定消息为已读。       |   
-| getAllMsgCount      | 获取 SDK 本地数据库中会话的全部消息数。       |   
-| loadMoreMessagesFromDB(startMsgId: string, pageSize: number, direction: SearchDirection)    | 从指定消息 ID 开始分页加载数据库中的消息。       |      
-| searchMessagesFromDB(timestamp: number, maxCount: number, direction: SearchDirection)  | 基于 Unix 时间戳搜索本地数据库中的消息。       |      
-| searchMessagesByType(type: ContentType, timestamp: number, maxCount: number, from: string, direction: SearchDirection)      | 从本地数据库获取指定会话的一定数量的特定类型的消息。       |     
-| searchMessagesByKeywords(keywords: string, timestamp: number, maxCount: number, from: string, direction: SearchDirection)      | 从本地数据库获取会话中的指定用户发送的包含特定关键词的消息。       |      
+| getAllMsgCount      | 获取 SDK 本地数据库中会话的全部消息数。       |
+| getMsgCountInRange      | 获取 SDK 本地数据库中会话某个时间段内的全部消息数。       |      
+| loadMoreMessagesFromDB(startMsgId: string, pageSize: number, direction?: SearchDirection)    | 从指定消息 ID 开始分页加载数据库中的消息。       |      
+| searchMessagesFromDB(timestamp: number, maxCount: number, direction?: SearchDirection)  | 基于 Unix 时间戳搜索本地数据库中的消息。       |      
+| searchMessagesByType(type: ContentType | Array<ContentType>, timestamp: number, maxCount: number, from?: string, direction: SearchDirection)      | 从本地数据库获取指定会话的一定数量的特定类型的消息。       |     
+| searchMessagesByKeywords(keywords: string, timestamp: number, maxCount: number, from?: string, direction?: SearchDirection)      | 从本地数据库获取会话中的指定用户发送的包含特定关键词的消息。       |      
 | searchMessagesBetweenTime(startTimestamp: number, endTimestamp: number, maxCount: number)      | 从本地数据库中搜索指定时间段内发送或接收的一定数量的消息。       | 
 | getMessage      | 根据消息 ID 获取已读的消息。       | 
 | removeMessage      | 删除本地数据库中的一条指定消息。       |      
@@ -36,6 +37,7 @@
 | insertMessage      | 在本地数据库的会话中插入一条消息。消息的会话 ID 应与会话的 ID 一致。消息会根据消息里的 Unix 时间戳插入本地数据库，SDK 会更新会话的 `latestMessage` 等属性。       |    
 | updateMessage      | 更新本地数据库的指定消息。消息更新后，消息 ID 不会修改，SDK 会自动更新会话的 `latestMessage` 等属性。       |     
 | marks | 获取会话的所有本地标记。       | 
+| pushRemindType | 从本地获取会话的推送提醒类型。如果本地没有则默认返回{@link PushRemindType#ALL}。       | 
 
 
 ## 会话事件
