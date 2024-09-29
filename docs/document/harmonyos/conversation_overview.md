@@ -37,7 +37,7 @@
 | insertMessage      | 在本地数据库的会话中插入一条消息。消息的会话 ID 应与会话的 ID 一致。消息会根据消息里的 Unix 时间戳插入本地数据库，SDK 会更新会话的 `latestMessage` 等属性。       |    
 | updateMessage      | 更新本地数据库的指定消息。消息更新后，消息 ID 不会修改，SDK 会自动更新会话的 `latestMessage` 等属性。       |     
 | marks | 获取会话的所有本地标记。       | 
-| pushRemindType | 从本地获取会话的推送提醒类型。如果本地没有则默认返回{@link PushRemindType#ALL}。       | 
+| pushRemindType | 从本地获取会话的推送提醒类型。如果本地没有则默认返回 `ALL`。       | 
 
 
 ## 会话事件

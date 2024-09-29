@@ -226,6 +226,9 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /document/ios/message_search.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_search.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_search.html
@@ -472,6 +475,9 @@ projects:
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/message_pin.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_pin.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_pin.html

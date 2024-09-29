@@ -10,12 +10,12 @@
 - 新增根据多个消息类型[搜索本地消息](message_search.html#搜索消息)功能。
   - `ChatManager#searchMessagesFromDB`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索会话消息)。
   - `Conversation#searchMessagesByType`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search.html#根据消息类型搜索会话消息)。
-- 新增`ChatOptions#setEnableTLSConnection`选项，支持私有部署时设置是否开启 TLS 连接。
+- 新增 `ChatOptions#setEnableTLSConnection` 选项，支持私有部署时设置是否开启 TLS 连接。
 - 支持[会话推送通知方式的本地存储](push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置):
   - 新增 `PushManager#syncConversationsSilentModeFromServer` 方法，支持从服务器同步所有会话的推送通知方式设置。
-  - 新增`Conversation#pushRemindType`属性，用于获取本地存储会话的推送通知方式。
-  - 若用户在一台设备上变更会话的推送通知方式，其他设备会收到`MultiDeviceListener#onConversationEvent`事件。
-- 新增`Conversation#getMsgCountInRange`方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
+  - 新增 `Conversation#pushRemindType` 属性，用于获取本地存储会话的推送通知方式。
+  - 若用户在一台设备上变更会话的推送通知方式，其他设备会收到 `MultiDeviceListener#onConversationEvent` 事件。
+- 新增 `Conversation#getMsgCountInRange` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
 - 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)：
   - `ChatOptions#setLoginCustomExt`：设置设备的扩展信息；
   - `ChatOptions#getLoginCustomExt`：获取设备的扩展信息。
