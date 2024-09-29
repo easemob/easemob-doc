@@ -11,7 +11,6 @@
 - `ChatManager#searchMessagesFromDB(keywords: string, timestamp: number, maxCount: number, from: string, direction?: SearchDirection)`: 从本地数据库获取包含特定关键字的消息。
 - `Conversation#searchMessagesByKeywords(keywords: string, timestamp: number, maxCount: number, from: string, direction: SearchDirection)`：从本地数据库获取`会话`中的指定用户发送的包含特定关键词的消息。
 - `Conversation#loadMoreMessagesFromDB(startMsgId: string, pageSize: number, direction: SearchDirection)`：从`指定会话`中指定消息 ID 开始分页加载数据库中的消息。
-- `ChatManager#searchMessagesFromDB(contentType: ContentType, timestamp: number, maxCount: number, from: string, direction?: SearchDirection)`: 从本地数据库获取一定数量的特定类型的消息。
 - `ChatManager#searchMessagesFromDB(types: Array<ContentType>, timestamp: number, maxCount: number, from?: string, direction?: SearchDirection)`: 按照消息类型从本地数据库搜索消息。
 - `Conversation#searchMessagesByType(type: ContentType | Array<ContentType>, timestamp: number, maxCount: number, from?: string, direction?: SearchDirection)`：从本地数据库获取`指定会话`的一定数量的特定类型的消息。
 - `Conversation#searchMessagesFromDB(timestamp: number, maxCount: number, direction?: SearchDirection)`: 基于 Unix 时间戳搜索本地数据库中`指定会话`的消息。
