@@ -7,7 +7,7 @@
 ### 新增特性
 
 - [IM SDK] 新增 `EMChatManager#asyncGetMessageCount` 方法，用于获取数据库中的消息总数。 
-- [IM SDK] 新增两个错误码：
+- [IM SDK] 新增[两个错误码](error.html)：
   - `EMError#GROUP_USER_IN_BLOCKLIST`（613）：该用户在群组黑名单中。群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。
   - `EMError#CHATROOM_USER_IN_BLOCKLIST`（707）：该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。
   
