@@ -39,7 +39,7 @@ class ConversationListActivity: AppCompactActivity() {
 
 你可以配置会话列表页面的标题栏、会话列表项。
 
-![img](/images/uikit/chatuikit/ios/custom_conversation_list.png)
+![img](/images/uikit/chatuikit/android/custom_conversation_list.png)
 
 ### 通过 EaseConversationListFragment.Builder 自定义设置
 

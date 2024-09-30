@@ -27,6 +27,10 @@ class ContactListActivity: AppCompactActivity() {
 
 ## 自定义联系人列表页面
 
+你可以设置联系人页面标题栏、联系人列表 Header 和联系人列表条目
+
+![img](/images/uikit/chatuikit/android/custom_contact_list.png)
+
 ### 通过 EaseContactsListFragment.Builder 自定义
 
 `EaseContactsListFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置。目前提供的设置项如下：

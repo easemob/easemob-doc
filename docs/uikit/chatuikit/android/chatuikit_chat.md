@@ -45,7 +45,7 @@ class ChatActivity: AppCompactActivity() {
 
 你可以配置聊天页面的标题栏、消息列表项和输入菜单等。
 
-![img](/images/uikit/chatuikit/ios/custom_chat.png)
+![img](/images/uikit/chatuikit/android/custom_chat.png)
 
 ### 通过 EaseChatFragment.Builder 自定义设置
 
