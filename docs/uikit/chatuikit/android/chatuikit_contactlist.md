@@ -25,7 +25,7 @@ class ContactListActivity: AppCompactActivity() {
 }
 ```
 
-## 进阶用法
+## 自定义界面
 
 ### 通过 EaseContactsListFragment.Builder 自定义设置
 
@@ -75,9 +75,54 @@ EaseContactsListFragment.Builder()
 | setCustomAdapter()               | 设置自定义的适配器，默认为 `EaseContactListAdapter`。                                                    |
 | setCustomFragment()              | 设置自定义聊天 Fragment，需要继承自 `EaseContactsListFragment`。                                          |
 
-## 自定义联系人列表
+### 自定义标题栏
 
-### 添加自定义联系人布局
+聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `EaseTitleBar`。如果聊天页面的标题栏不满足需求，建议自定义标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的标题栏](chatuikit_custom_conversation_list.html#自定义标题栏)。
+
+### 自定义联系人列表 Header 
+
+本节中的自定义联系人列表 header 基于使用 `EaseContactsListFragment`。
+
+### 设置联系人列表 Header List 数据源
+
+你可以通过 `EaseContactsListFragment#Builder中的setHeaderItemList` 设置联系人列表 Header List 数据源。
+
+下面的示例代码展示如何设置数据项：
+
+```kotlin
+     
+     EaseContactsListFragment.Builder().setHeaderItemList(mutableListOf(
+        EaseCustomHeaderItem(
+            headerId = "",              //唯一 itemId
+            order = 0,                  //排列次序
+            headerIconRes = -1,         //图标资源
+            headerTitle = "",           //标题
+            headerContent = "",         //内容
+            headerEndIconRes = -1,      //尾部图标资源
+            headerItemDivider = true,   //是否显示分割线
+            headerItemShowArrow = false //是否显示尾部图标
+        )
+     ))
+
+```
+
+添加 Header List Item 点击事件：
+
+```kotlin
+
+    EaseContactsListFragment.Builder().setOnHeaderItemClickListener(object : OnHeaderItemClickListener{
+            override fun onHeaderItemClick(v: View, itemIndex: Int, itemId: Int?) {
+                        
+            }
+    })
+
+```
+
+![img](/images/uikit/chatuikit/.png)
+
+### 自定义联系人列表
+
+#### 添加自定义联系人布局
 
 开发者可以继承 `EaseContactListAdapter` 实现自己的 `CustomContactListAdapter`，然后将 `CustomContactListAdapter` 设置到 `EaseContactsListFragment#Builder#setCustomAdapter` 中。
 
@@ -107,7 +152,7 @@ builder.setCustomAdapter(CustomContactListAdapter)
 
 ![img](/images/uikit/chatuikit/android/group_creating.png =350x600) 
 
-### 设置成可选择的联系人列表
+#### 设置成可选择的联系人列表
 
 例如，创建群组时需添加多个用户，可点击联系人对应的复选框进行选择。
 
@@ -117,7 +162,21 @@ builder.setSearchType(EaseSearchType.SELECT_USER)
 
 ![img](/images/uikit/chatuikit/android/contactlist_configurable.png) 
 
-## 事件监听
+#### 设置联系人头像
+
+```kotlin
+ // ease_configures.xml style文件 支持修改以下配置
+ <!-- Set default avatar shape type: NONE = 0, ROUND = 1, RECTANGLE = 2 -->
+    <integer name="ease_avatar_shape_type">2</integer>
+    <!-- Set default avatar round radius -->
+    <dimen name="ease_avatar_round_radius">@dimen/ease_corner_extra_small</dimen>
+    <!-- Set default avatar border width -->
+    <dimen name="ease_avatar_border_width">-1dp</dimen>
+    <!-- Set default avatar border color -->
+    <color name="ease_avatar_border_color">@color/ease_color_primary</color>
+```
+
+## 事件监听 // TODO：// 是自定义界面的一部分？
 
 ```kotlin
 EaseContactsListFragment.Builder()
@@ -136,7 +195,9 @@ EaseContactsListFragment.Builder()
 | setOnContactSelectedListener()   | 设置条目选中事件监听器。                                                                                  |
 
 
-## 更多
+## 联系人列表页面其他设置
+
+其他标记为 open 的方法均为可重载方法。如有需要，可重载对应方法实现自己业务逻辑。
 
 ### 获取联系人系统通知未读数
 
