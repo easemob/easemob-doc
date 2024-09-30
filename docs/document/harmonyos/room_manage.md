@@ -59,6 +59,18 @@ ChatClient.getInstance().chatroomManager()?.joinChatroom(chatRoomId).then(room =
 });
 ```
 
+同时，你可以调用 `ChatroomManager#joinChatroom(roomId: string, leaveOtherRooms?: boolean, ext?: string)` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `ChatroomListener#onMemberJoined(roomId: string, userId: string, ext?: string)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。 
+
+```TypeScript
+const ext = "chatroom ext info";
+const leaveOtherRooms = true;
+ChatClient.getInstance().chatroomManager()?.joinChatroom(chatroomId, leaveOtherRooms, ext).then(room => {
+  // success logic
+}).catch((e: ChatError) => {
+  // failure logic
+});
+```
+
 ### 退出聊天室
 
 聊天室所有成员均可以调用 `leaveChatroom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `onMemberExited` 回调。

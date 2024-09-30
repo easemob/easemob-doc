@@ -37,7 +37,7 @@ ChatClient.getInstance().chatManager()?.recallMessage(message, ext).then(()=> {
 
 ### 设置消息撤回监听
 
-你可以设置消息撤回监听，通过 `onMessageRecalled` 事件监听发送方对已接收的消息的撤回。
+你可以设置消息撤回监听，通过 `onMessageRecalled` 事件监听发送方对已接收的消息的撤回。该事件的 `RecallMessageInfo` 中的 `recallBy` 为消息撤回者的用户 ID，`recallMessageId` 为撤回的消息 ID，`ext` 为扩展信息，`conversationId` 为撤回的消息所属的会话 ID。
 
 - 若用户在线接收了消息，消息撤回时，该事件中的 `RecallMessageInfo` 中的 `getRecallMessage` 为撤回的消息的内容，`getRecallMessageId` 为返回撤回的消息的 ID。
 - 若消息发送和撤回时接收方离线，该事件中的 `RecallMessageInfo` 中的 `getRecallMessage` 为空，`getRecallMessageId` 为返回撤回的消息的 ID。

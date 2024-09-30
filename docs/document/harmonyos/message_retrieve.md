@@ -13,11 +13,8 @@
 环信即时通讯 IM HarmonyOS SDK 提供 `ChatManager` 和 `Conversation` 类支持获取服务器和本地的消息，包含如下主要方法：
 
 - `ChatManager.fetchHistoryMessages`：根据 `FetchMessageOption` 类从服务端分页获取指定会话的历史消息；
-- `Conversation.loadMoreMessagesFromDB`：读取本地指定会话的消息；
 - `ChatManager.getMessage`：根据消息 ID 获取本地消息；
-- `Conversation.searchMessagesByType`：获取本地存储的指定会话中特定类型的消息；
-- `Conversation.searchMessagesBetweenTime`：获取本地存储的一定时间内的消息；
-- `Conversation.searchMessagesByKeywords`：根据关键字搜索本地数据库中单个会话中指定用户发送的消息；
+- `Conversation.getMsgCountInRange`：获取本地数据库中单个会话在某个时间段内的全部消息数。
 
 ## 前提条件
 
@@ -57,18 +54,6 @@ ChatClient.getInstance().chatManager()?.fetchHistoryMessages(conversationId, con
 })
 ```
 
-### 从本地读取指定会话的消息
-
-你可以调用 `loadMoreMessagesFromDB` 方法从本地数据库中分页加载消息。
-
-```TypeScript
-// startMessageId：查询的起始消息 ID。SDK 从该消息 ID 开始按消息时间戳的逆序加载。如果传入消息的 ID 为空，SDK 从最新消息开始按消息时间戳的逆序获取。
-// pageSize：每页期望加载的消息数。取值范围为 [1,400]。
-conversation.loadMoreMessagesFromDB(startMessageId, pageSize).then((result) => {
-  // success logic
-})
-```
-
 ### 根据消息 ID 获取本地消息
 
 你可以调用 `getMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
@@ -81,55 +66,17 @@ if (msg) {
 }
 ```
 
-### 获取本地会话中特定类型的消息
+### 获取会话在一定时间内的消息数
 
-你可以调用 `searchMessagesByType` 方法从本地存储中获取指定会话中特定类型的消息。
-
-每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
+你可以调用 `getMsgCountInRange` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
 
 ```TypeScript
 //conversationId：会话 ID
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 if (!conversation) {
-    return;
+  return;
 }
-// ContentType：消息类型；timeStamp：消息搜索的起始时间戳，单位为毫秒。该参数设置后，SDK 从指定的时间戳的消息开始，按照搜索方向对消息进行搜索。若设置为负数，SDK 从当前时间开始，按消息时间戳的逆序搜索。
-// maxCount：每次获取的消息数量，取值范围为 [1,400]；direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-conversation.searchMessagesByType(ContentType.TXT, systemDateTime.getTime(), maxCount, from, SearchDirection.UP).then((messages) => {
-    // success logic      
-});
-```
-
-### 获取一定时间内本地会话的消息
-
-你可以调用 `searchMessagesBetweenTime` 方法从本地存储中搜索一定时间段内指定会话中发送和接收的消息。
-
-每次最多可获取 400 条消息。
-
-```TypeScript
-//conversationId：会话 ID
-let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
-if (!conversation) {
-    return;
-}
-// startTimeStamp：搜索的起始时间戳；endTimeStamp：搜索的结束时间戳；maxCount：每次获取的消息数量，取值范围为 [1,400]。
-conversation.searchMessagesBetweenTime(startTimeStamp, endTimeStamp, maxCount).then((messages) => {
-    // success logic
-});
-```
-### 根据关键字搜索会话消息
-
-你可以调用 `searchMessagesByKeywords` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
-
-```TypeScript
-//conversationId：会话 ID
-let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
-if (!conversation) {
-    return;
-}
-// keywords：搜索关键字；timestamp：搜索的起始时间戳；maxCount：每次获取的消息数量，取值范围为 [1,400]。
-// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-conversation.searchMessagesByKeywords(keywords, timestamp, maxCount, from, direction).then((messages) => {
-    // success logic
-});
+// startTimestamp：起始时间戳(包含)，单位为毫秒。
+// endTimestamp：结束时间戳(包含)，单位为毫秒。
+const msgCount = conversation.getMsgCountInRange(startTimestamp, endTimestamp);
 ```

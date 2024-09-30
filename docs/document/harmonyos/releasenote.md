@@ -2,6 +2,41 @@
 
 <Toc />
 
+## 版本 V1.4.0 Dev 2024-09-30（开发版）
+
+### 新增特性
+
+- 新增[置顶消息功能](message_pin.html#消息置顶)。
+- 新增根据多个消息类型[搜索本地消息](message_search.html)功能。
+  - `ChatManager#searchMessagesFromDB`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索会话消息)。
+  - `Conversation#searchMessagesByType`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search.html#根据消息类型搜索会话消息)。
+- 新增 `ChatOptions#setEnableTLSConnection` 选项，支持私有部署时设置是否开启 TLS 连接。
+- 支持[会话推送通知方式的本地存储](/document/harmonyos/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置):
+  - 新增 `PushManager#syncConversationsSilentModeFromServer` 方法，支持从服务器同步所有会话的推送通知方式设置。
+  - 新增 `Conversation#pushRemindType` 属性，用于获取本地存储会话的推送通知方式。
+  - 若用户在一台设备上变更会话的推送通知方式，其他设备会收到 `MultiDeviceListener#onConversationEvent` 事件。
+- 新增 `Conversation#getMsgCountInRange` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
+- 新增[设备登录时允许携带自定义信息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)：
+  - `ChatOptions#setLoginCustomExt`：设置设备的扩展信息；
+  - `ChatOptions#getLoginCustomExt`：获取设备的扩展信息。
+  - `ConnectionListener#onLogout(errorCode: number, info: LoginExtInfo)`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
+- 新增[从服务器拉取离线消息的开始和结束的事件回调](overview.html#连接状态相关): `ConnectionListener#onOfflineMessageSyncStart` 和 `ConnectionListener#onOfflineMessageSyncFinish`。
+- 新增 `GroupManager#checkIfInGroupMutelist` 接口，可以[查看当前用户是否在群组禁言列表中](group_members.html#检查自己是否在禁言列表中)。
+- 新增 [错误码 213 ChatError#USER_BIND_ANOTHER_DEVICE](error.html)，用于当用户达到登录设备上线时，当前设备无法登录的场景。
+- 在撤回消息的 `ChatMessageListener#onMessageRecalled` 事件中[返回被撤回的消息所属的会话 ID](message_recall.html#设置消息撤回监听)。
+- 支持[加入聊天室时携带扩展信息，并指定是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+  - 新增 `ChatroomManager#joinChatroom(roomId: string, leaveOtherRooms?: boolean, ext?: string)` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
+  - 新增 `ChatroomListener#onMemberJoined(roomId: string, userId: string, ext?: string)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+- 支持 AUT 协议，优化弱网环境下的服务连接成功率。
+- 支持文件分片上传。
+- 支持[从服务端单向删除聊天室漫游消息](message_delete.html#单向删除服务端的历史消息)。
+
+### 优化
+
+- 从服务端拉取群组时，不再先清除本地群组，而是将拉取的群组与本地对比，将本地现有群组进行更新，将新增部分在本地插入。若要清除本地群组信息，可以调用 `GroupManager#clearAllLocalGroups` 方法。
+- 构建附件消息时，SDK 内部会读取文件长度，并设置给 `fileLength` 参数。
+- 设置和获取用户属性的接口，包括[设置当前用户的属性、获取单个或多个用户的用户属性和获取指定用户的指定用户属性](userprofile.html)，超过调用频率限制时，会上报错误码 `4` (`ChatError#EXCEED_SERVICE_LIMIT`)。
+
 ## 版本 V1.3.0 Dev 2024-09-10（开发版）
 
 ### 新增特性

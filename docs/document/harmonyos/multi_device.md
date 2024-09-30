@@ -69,15 +69,42 @@ ChatClient.getInstance().contactManager()?.getSelfIdsOnOtherPlatform().then(ids 
 });
 ```
 
+### 设置登录设备的扩展信息
+
+即时通讯 IM 自 1.4.0 版本开始支持设备的自定义扩展信息，这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
+
+初始化 SDK 时，你可以调用 `ChatOptions#setLoginCustomExt` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，`USER_LOGIN_ANOTHER_DEVICE`），被踢设备收到的 `ConnectionListener#onLogout` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
+
+:::notice
+登录成功后才会将该设置发送到服务器。
+:::
+
+```TypeScript
+let options = new ChatOptions("您的AppKey");
+options.setLoginCustomExt("您要设置的自定义扩展信息");
+ChatClient.getInstance().init(this.context, options);
+
+ChatClient.getInstance().addConnectionListener({
+  onConnected:() => {
+
+  },
+  onDisconnected: (errorCode: number) => {
+
+  },
+  onLogout: (errorCode: number, info: LoginExtInfo) => {
+    // 当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。
+    // errorCode 为 {@link ChatError#USER_LOGIN_ANOTHER_DEVICE}。
+    // info.deviceExt 是将当前设备挤下线的新登录设备的自定义扩展信息。
+    // 其他错误码场景下 info.deviceExt 为空。
+  }
+});
+```
+
 ### 获取其他设备上的操作
 
 例如，账号 A 同时在设备 A 和 B 上登录，账号 A 在设备 A 上进行操作，设备 B 会收到这些操作对应的通知。
 
 你需要先实现 `MultiDeviceListener` 类监听其他设备上的操作，然后调用 `addMultiDeviceListener` 方法添加多设备监听。
-
-:::tip
-多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
-:::
 
 ```TypeScript
 //实现 `MultiDeviceListener` 监听其他设备上的操作。

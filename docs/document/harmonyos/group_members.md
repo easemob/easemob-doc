@@ -218,7 +218,7 @@ ChatClient.getInstance().groupManager()?.fetchMemberAttributes(groupId, member).
 
 #### 根据属性 key 获取多个群成员的自定义属性
 
-你可调用 `EMGroupManager#asyncFetchGroupMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
+你可调用 `GroupManager#fetchMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
 
 :::notice
 每次最多可获取 10 个群成员的自定义属性。
@@ -403,6 +403,16 @@ ChatClient.getInstance().groupManager()?.unmuteGroupMembers(groupId, members).th
 });
 ```
 
+#### 检查自己是否在禁言列表中
+
+所有群成员可以调用 `checkIfInGroupMutelist` 方法检查自己是否在群禁言列表中，示例代码如下：
+
+```TypeScript
+ChatClient.getInstance().groupManager()?.checkIfInGroupMutelist(groupId).then((res) => {
+    // success logic
+});
+```
+
 #### 获取群组禁言列表
 
 仅群主和群管理员可以调用 `fetchGroupMutelist` 方法从服务器获取当前群组的禁言列表。
@@ -421,7 +431,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupMutelist(groupId, pageNum, pa
 
 开启群组全员禁言后，除了在白名单中的群成员，其他成员将不能发言。开启群组全员禁言后，群成员将会收到群组事件回调 `GroupChangeListener#onAllMemberMuteStateChanged`。
 
-群组全员禁言状态（`isAllMemberMuted` 的返回值）存储在本地数据库中，下次登录时可以直接从本地获取到。
+群组全员禁言状态（`Group#isAllMemberMuted`）存储在本地数据库中，下次登录时可以直接从本地获取到。
  
 示例代码如下：
 

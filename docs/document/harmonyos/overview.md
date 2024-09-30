@@ -143,6 +143,14 @@ let connectionListener: ConnectionListener = {
   },
   onTokenWillExpire: (): void => {
     // 使用 token 登录时，token 将要过期时触发。
+    // 注意：如果本次登录服务器没有离线消息，不会触发该回调。
+  },
+  onOfflineMessageSyncStart: () => {
+    // 连接成功，开始从服务器拉取离线消息时触发。
+  },
+  onOfflineMessageSyncFinish: () => {
+    // 离线用户上线后从服务器拉取离线消息结束时触发。
+    // 注意：如果再拉取离线过程中因网络或其他原因导致连接断开，不会触发该回调。
   }
 }
 // 注册连接状态监听
@@ -164,6 +172,7 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 - `APP_ACTIVE_NUMBER_REACH_LIMITATION = 8`: 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限
 - `USER_LOGIN_ANOTHER_DEVICE = 206`: 用户已经在其他设备登录
 - `USER_REMOVED = 207`: 用户账户已经被移除
+- `USER_BIND_ANOTHER_DEVICE = 213`: 用户已经绑定其他设备
 - `USER_LOGIN_TOO_MANY_DEVICES = 214`: 用户登录设备超出数量限制
 - `USER_KICKED_BY_CHANGE_PASSWORD = 216`: 由于密码变更被踢下线
 - `USER_KICKED_BY_OTHER_DEVICE = 217`: 由于其他设备登录被踢下线
