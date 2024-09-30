@@ -27,7 +27,7 @@ class ContactListActivity: AppCompactActivity() {
 
 ## 自定义联系人列表页面
 
-你可以设置联系人页面标题栏、联系人列表 Header 和联系人列表条目
+你可以设置联系人页面标题栏、联系人列表 Header 和联系人列表条目。
 
 ![img](/images/uikit/chatuikit/android/custom_contact_list.png)
 
