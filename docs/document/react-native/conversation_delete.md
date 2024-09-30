@@ -18,18 +18,18 @@
 - `ChatManager.removeConversationFromServer`：单向删除服务端的单个会话及其历史消息。
 - `ChatManager.deleteConversation`：删除本地单个会话及其历史消息。
 
-## 实现方法
+## 实现方法 
 
 #### 单向删除服务端会话及其历史消息
 
-你可以调用 `removeConversationFromServer` 方法删除服务器端会话，并选择是否删除服务端的历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息。调用该接口会删除会话的本地消息，但不会删除本地会话。该接口不影响其他用户的会话和消息。
+你可以调用 `removeConversationFromServer` 方法删除服务器端会话，并选择是否删除服务端和本地的历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息。调用该接口不会删除本地会话。该接口不影响其他用户的会话和消息。
 
 示例代码如下：
 
 ```typescript
 // convId: 会话 ID。
 // convType：会话类型。
-// isDeleteMessage：删除会话时是否同时删除服务端该会话中的消息。
+// isDeleteMessage：删除会话时是否同时删除服务端和本地的该会话中的消息。
 ChatClient.getInstance()
   .chatManager.removeConversationFromServer(convId, convType, isDeleteMessage)
   .then(() => {

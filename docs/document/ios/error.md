@@ -89,6 +89,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 610    |   EMErrorGroupMemberAttributesUpdateFailed   | 设置群成员自定义属性失败。                        |
 | 611    |   EMErrorGroupMemberAttributesKeyReachLimit   | 设置的群成员自定义属性 key 长度（不能超过 16 字节）超限。                        |
 | 612    |   EMErrorGroupMemberAttributesValueReachLimit   | 设置的群成员自定义属性 value 长度（不能超过 512 字节）超限。  |
+| 613   | EMErrorGroupUserInBlockList    | 该用户在群组黑名单中。群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。     |
 | 700    |      EMErrorChatroomInvalidId       | 聊天室 ID 无效：调用聊天室相关 API，传入的聊天室 ID 为空时提示该错误。 |
 | 701    |    EMErrorChatroomAlreadyJoined     | 已在该聊天室中：调用加入聊天室的 API 时如果已经在该聊天室中则提示该错误。 |
 | 702    |      EMErrorChatroomNotJoined       | 未加入该聊天室：用户在未加入的聊天室中发送消息或进行聊天室操作时提示该错误。 |
@@ -96,6 +97,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 704    |     EMErrorChatroomMembersFull      | 聊天室已满：聊天室成员数量已达到创建聊天室时设置的最大人数。|
 | 705    |       EMErrorChatroomNotExist       | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。 |
 | 706 | EMErrorChatroomOwnerNotAllowLeave | 聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#allowChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatroom` 方法离开聊天室时会提示该错误。 |
+| 707    | EMErrorChatroomUserInBlockList        | 该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。   |
 | 900    |       EMErrorUserCountExceed        | 获取用户属性的用户个数超过 100。                             |
 | 901    |   EMErrorUserInfoDataLengthExceed   | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。 |
 | 1000   |       EMErrorContactAddFailed       | 添加联系人失败。                                             |

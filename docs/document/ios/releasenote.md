@@ -2,6 +2,30 @@
 
 <Toc />
 
+## 版本 V4.10.0 Dev 2024-09-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 `EMChatManager#getMessageCountWithCompletion:` 方法，用于获取数据库中的消息总数。 
+- [IM SDK] 新增[两个错误码](error.html)：
+  - `EMErrorGroupUserInBlockList`（613）：该用户在群组黑名单中。例如，群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。
+  - `EMErrorChatroomUserInBlockList`（707）：该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。
+  
+### 优化
+ 
+- [IM SDK] [发送前回调](/document/server-side/callback.html#_1、发送前回调)时修改的[消息扩展字段](/document/android/message_send_receive.html#使用消息扩展字段)，会同步到发送方。
+- [IM SDK] 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。对于之前版本，可设置调用该接口删除会话的本地消息，但该接口不删除本地会话。
+- [IM SDK] 群组和聊天室操作的默认错误码提示由 `EMErrorGroupMembersFull`（604）和 `EMErrorChatroomMembersFull`（704）调整为 `EMErrorGroupPermissionDenied`（603）和 `EMErrorChatroomPermissionDeniedD`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
+
+### 修复
+
+- [IM SDK] 修复发送图片消息时指定缩略图尺寸未生效的问题。
+- [IM SDK] 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
+
+### [EaseCallKIt](easecallkit.html)
+
+- 升级依赖的 `AgoraRtcEngine` 版本，防止因为旧版本包含 Bitcode 无法上传 App Store。
+
 ## 版本 V4.9.0 Dev 2024-08-30（开发版）
 
 ### 新增特性

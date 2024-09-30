@@ -87,6 +87,7 @@ Android 中错误码的类为 `EMError`。
 | 610    |   GROUP_MEMBER_ATTRIBUTES_UPDATE_FAILED   | 设置群成员自定义属性失败。  |
 | 611    |   GROUP_MEMBER_ATTRIBUTES_KEY_REACH_LIMIT   | 设置的群成员自定义属性 key 长度（不能超过 16 字节）超限。 |
 | 612    |   GROUP_MEMBER_ATTRIBUTES_VALUE_REACH_LIMIT   | 设置的群成员自定义属性 value 长度（不能超过 512 字节）超限。  |
+| 613   | GROUP_USER_IN_BLOCKLIST    | 该用户在群组黑名单中。群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。     |
 | 700    |       CHATROOM_INVALID_ID       | 聊天室 ID 无效：调用聊天室相关 API，传入的聊天室 ID 为空时提示该错误。 |
 | 701    |     CHATROOM_ALREADY_JOINED     | 已在该聊天室中：调用加入聊天室的 API 时如果已经在该聊天室中则提示该错误。 |
 | 702    |       CHATROOM_NOT_JOINED       | 未加入该聊天室：用户在未加入的聊天室中发送消息或进行聊天室操作时提示该错误。 |
@@ -94,6 +95,7 @@ Android 中错误码的类为 `EMError`。
 | 704    |      CHATROOM_MEMBERS_FULL      | 聊天室已满：聊天室成员数量已达到创建聊天室时设置的最大人数。 |
 | 705    |       CHATROOM_NOT_EXIST        | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。   |
 | 706    |       CHATROOM_OWNER_NOT_ALLOW_LEAVE        | 聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#allowChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。   |
+| 707    |       CHATROOM_USER_IN_BLOCKLIST        | 该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。   |
 | 900    |    USERINFO_USERCOUNT_EXCEED    | 获取用户属性的用户个数超过 100。               |
 | 901    |   USERINFO_DATALENGTH_EXCEED    | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。 |
 | 1000   |       CONTACT_ADD_FAILED        | 添加联系人失败。  |
