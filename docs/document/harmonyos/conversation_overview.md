@@ -24,7 +24,7 @@
 | getMsgCountInRange      | 获取 SDK 本地数据库中会话某个时间段内的全部消息数。       |      
 | loadMoreMessagesFromDB(startMsgId: string, pageSize: number, direction?: SearchDirection)    | 从指定消息 ID 开始分页加载数据库中的消息。       |      
 | searchMessagesFromDB(timestamp: number, maxCount: number, direction?: SearchDirection)  | 基于 Unix 时间戳搜索本地数据库中的消息。       |      
-| searchMessagesByType(type: ContentType | Array<ContentType>, timestamp: number, maxCount: number, from?: string, direction: SearchDirection)      | 从本地数据库获取指定会话的一定数量的特定类型的消息。       |     
+| searchMessagesByType(type: ContentType | `Array<ContentType>`, timestamp: number, maxCount: number, from?: string, direction: SearchDirection)      | 从本地数据库获取指定会话的一定数量的特定类型的消息。       |     
 | searchMessagesByKeywords(keywords: string, timestamp: number, maxCount: number, from?: string, direction?: SearchDirection)      | 从本地数据库获取会话中的指定用户发送的包含特定关键词的消息。       |      
 | searchMessagesBetweenTime(startTimestamp: number, endTimestamp: number, maxCount: number)      | 从本地数据库中搜索指定时间段内发送或接收的一定数量的消息。       | 
 | getMessage      | 根据消息 ID 获取已读的消息。       | 
