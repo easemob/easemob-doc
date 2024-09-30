@@ -41,7 +41,11 @@ class ChatActivity: AppCompactActivity() {
 
 ![img](/images/uikit/chatuikit/android/buble1.png =500x900)
 
-## 自定义界面概览
+## 自定义聊天页面概览
+
+你可以配置聊天页面的标题栏、消息列表项和输入菜单等。
+
+![img](/images/uikit/chatuikit/android/custom_chat.png)
 
 ### 通过 EaseChatFragment.Builder 自定义设置
 
@@ -293,13 +297,19 @@ override fun onChatExtendMenuItemClick(view: View?, itemId: Int): Boolean {
 
 ### 设置消息长按后的菜单项
 
-TODO:// 设置消息长按后的菜单项// 新增的这个标题下的内容可以移掉。
-
 - 增加自定义菜单条目
 
 ```kotlin
 binding?.let {
     it.layoutChat.addItemMenu(menuId, menuOrder, menuTile)
+}
+```
+
+- 显示或隐藏指定菜单
+
+```kotlin
+binding?.let {
+    it.findItemVisible(itemId: Int, visible: Boolean)
 }
 ```
 
@@ -414,15 +424,15 @@ binding?.let {
 }
 ```
 
-## 自定义界面示例
+## 自定义聊天页面样式
 
 你可以配置聊天页面的标题栏、消息列表项等。以下设置均以使用或继承 `EaseChatFragment` 为前提条件。
 
 ![img](/images/uikit/chatuikit/ios/custom_chat.png)
 
-### 标题栏
+### 设置标题栏
 
-聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `EaseTitleBar`。如果聊天页面的标题栏不满足需求，建议自定义标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的标题栏](chatuikit_custom_conversation_list.html#自定义标题栏)。
+聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `EaseTitleBar`。如果聊天页面的标题栏不满足需求，建议自定义标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见[设置会话列表页面的标题栏](chatuikit_custom_conversation_list.html#设置标题栏)。
 
 ### 消息列表项
 
@@ -563,6 +573,10 @@ class CustomMessageAdapter: EaseMessagesAdapter() {
 ```kotlin
 builder.setCustomAdapter(CustomMessageAdapter())
 ```
+
+### 设置头像和昵称
+
+关于设置头像和昵称，详见[用户自定义信息文档中的介绍](chatuikit_userinfo.html#设置会话头像和昵称)。
 
 #### 设置列表相关事件
 
