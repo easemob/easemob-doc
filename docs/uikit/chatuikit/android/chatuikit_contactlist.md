@@ -25,9 +25,9 @@ class ContactListActivity: AppCompactActivity() {
 }
 ```
 
-## 自定义界面
+## 自定义联系人列表页面
 
-### 通过 EaseContactsListFragment.Builder 自定义设置
+### 通过 EaseContactsListFragment.Builder 自定义
 
 `EaseContactsListFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置。目前提供的设置项如下：
 
@@ -75,15 +75,13 @@ EaseContactsListFragment.Builder()
 | setCustomAdapter()               | 设置自定义的适配器，默认为 `EaseContactListAdapter`。                                                    |
 | setCustomFragment()              | 设置自定义聊天 Fragment，需要继承自 `EaseContactsListFragment`。                                          |
 
-### 自定义标题栏
+### 设置标题栏
 
-聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `EaseTitleBar`。如果聊天页面的标题栏不满足需求，建议自定义标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的标题栏](chatuikit_custom_conversation_list.html#自定义标题栏)。
+聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `EaseTitleBar`。如果聊天页面的标题栏不满足需求，建议自定义标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的标题栏](chatuikit_custom_conversation_list.html#设置标题栏)。
 
 ### 自定义联系人列表 Header 
 
 本节中的自定义联系人列表 header 基于使用 `EaseContactsListFragment`。
-
-### 设置联系人列表 Header List 数据源
 
 你可以通过 `EaseContactsListFragment#Builder中的setHeaderItemList` 设置联系人列表 Header List 数据源。
 
@@ -118,11 +116,7 @@ EaseContactsListFragment.Builder()
 
 ```
 
-![img](/images/uikit/chatuikit/.png)
-
-### 自定义联系人列表
-
-#### 添加自定义联系人布局
+### 添加自定义联系人布局
 
 开发者可以继承 `EaseContactListAdapter` 实现自己的 `CustomContactListAdapter`，然后将 `CustomContactListAdapter` 设置到 `EaseContactsListFragment#Builder#setCustomAdapter` 中。
 
@@ -152,7 +146,7 @@ builder.setCustomAdapter(CustomContactListAdapter)
 
 ![img](/images/uikit/chatuikit/android/group_creating.png =350x600) 
 
-#### 设置成可选择的联系人列表
+### 设置成可选择的联系人列表
 
 例如，创建群组时需添加多个用户，可点击联系人对应的复选框进行选择。
 
@@ -162,10 +156,10 @@ builder.setSearchType(EaseSearchType.SELECT_USER)
 
 ![img](/images/uikit/chatuikit/android/contactlist_configurable.png) 
 
-#### 设置联系人头像
+### 设置联系人头像样式
 
 ```kotlin
- // ease_configures.xml style文件 支持修改以下配置
+ // ease_configures.xml style 文件 支持修改以下配置：
  <!-- Set default avatar shape type: NONE = 0, ROUND = 1, RECTANGLE = 2 -->
     <integer name="ease_avatar_shape_type">2</integer>
     <!-- Set default avatar round radius -->
@@ -176,7 +170,7 @@ builder.setSearchType(EaseSearchType.SELECT_USER)
     <color name="ease_avatar_border_color">@color/ease_color_primary</color>
 ```
 
-## 事件监听 // TODO：// 是自定义界面的一部分？
+## 事件监听
 
 ```kotlin
 EaseContactsListFragment.Builder()
@@ -187,8 +181,8 @@ EaseContactsListFragment.Builder()
   .build()
 ```
 
-| 方法                               | 描述                                                                                            |
-|----------------------------------|-----------------------------------------------------------------------------------------------|
+| 方法                     | 描述           |
+|----------------------|----------------|
 | setOnHeaderItemClickListener()   | 设置列表头部 Item 点击事件。                                                                               |
 | setOnUserListItemClickListener() | 设置列表条目点击事件。                                                                                   |
 | setOnItemLongClickListener()     | 设置条目长按事件监听器。                                                                                  |
