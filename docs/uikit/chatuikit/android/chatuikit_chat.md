@@ -41,7 +41,7 @@ class ChatActivity: AppCompactActivity() {
 
 ![img](/images/uikit/chatuikit/android/buble1.png =500x900)
 
-## 进阶用法
+## 自定义界面概览
 
 ### 通过 EaseChatFragment.Builder 自定义设置
 
@@ -291,7 +291,9 @@ override fun onChatExtendMenuItemClick(view: View?, itemId: Int): Boolean {
 }
 ```
 
-### 长按菜单功能设置
+### 设置消息长按后的菜单项
+
+TODO:// 设置消息长按后的菜单项// 新增的这个标题下的内容可以移掉。
 
 - 增加自定义菜单条目
 
@@ -334,7 +336,26 @@ override fun onDismiss() {
 - 获取 `EaseChatInputMenu` 对象：
 
 ```kotlin
-val chatInputMenu: EaseChatInputMenu? = binding?.layoutChat?.chatInputMenu
+    val chatInputMenu: EaseChatInputMenu? = binding?.layoutChat?.chatInputMenu
+
+    chatInputMenu?.let{
+        it.setCustomPrimaryMenu()           //设置自定义的菜单项，支持 View 和 Fragment 两种方式 
+        it.setCustomEmojiconMenu()          //设置自定义的表情功能，支持 View 和 Fragment 两种方式  
+        it.setCustomExtendMenu()            //设置自定义的扩展功能，支持 View、Dialog 和 Fragment 三种方式 
+        it.setCustomTopExtendMenu()         //设置自定义的菜单顶部布局，支持 View 和 Fragment 两种方式 
+
+        it.hideInputMenu()                  //隐藏除了菜单顶部区域外的区域   
+        it.hideExtendContainer()            //隐藏扩展区域，包括表情区域和扩展功能区域 
+
+        it.chatPrimaryMenu                  //获取菜单项接口
+        it.chatExtendMenu                   //获取扩展功能接口  
+        it.chatEmojiMenu                    //获取表情功能菜单接口   
+
+    }
+
+    //例如，设置自定义的扩展功能
+    val menuDialog = EaseChatExtendMenuDialog(mContext)
+    binding?.layoutChat?.chatInputMenu?.setCustomExtendMenu(menuDialog)
 ```
 
 `EaseChatInputMenu` 提供了如下方法：
@@ -356,7 +377,9 @@ val chatInputMenu: EaseChatInputMenu? = binding?.layoutChat?.chatInputMenu
 | chatExtendMenu            | 获取扩展功能接口。                                             |
 | chatTopExtendMenu        | 获取顶部扩展功能接口。                                            |
 
-- 获取菜单项对象：
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_input.png)
+
+- 获取输入菜单项对象：
 
 ```kotlin
 val primaryMenu: IChatPrimaryMenu? = binding?.layoutChat?.chatInputMenu?.chatPrimaryMenu
@@ -382,7 +405,6 @@ val emojiconMenu: IChatEmojiconMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 | --------------------- | ------------------ |
 | addEmojiconGroup()    | 添加自定义表情。     |
 | removeEmojiconGroup() | 移除指定的表情组。   |
-| setTabBarVisibility() | 设置 `TabBar` 可见性。 |
 
 添加自定义表情：
 
@@ -391,6 +413,215 @@ binding?.let {
     it.layoutChat.chatInputMenu?.chatEmojiMenu?.addEmojiconGroup(EmojiconExampleGroupData.getData())
 }
 ```
+
+## 自定义界面示例
+
+你可以配置聊天页面的标题栏、消息列表项等。以下设置均以使用或继承 `EaseChatFragment` 为前提条件。
+
+![img](/images/uikit/chatuikit/ios/custom_chat.png)
+
+### 标题栏
+
+聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `EaseTitleBar`。如果聊天页面的标题栏不满足需求，建议自定义标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的标题栏](chatuikit_custom_conversation_list.html#自定义标题栏)。
+
+### 消息列表项
+
+#### 设置消息列表控件功能
+
+```kotlin
+
+//获取 EaseChatMessageListLayout 对象：
+val chatMessageListLayout:EaseChatMessageListLayout? = binding?.layoutChat?.chatMessageListLayout
+chatMessageListLayout?.let{
+    it.setTimeBackground()      //设置时间线的背景。 
+    it.setItemTextSize()        //设置文本消息的字体大小。
+    it.setItemTextColor()       //设置文本消息的字体颜色。
+    it.setAvatarDefaultSrc()    //设置条目的默认头像。
+    it.setAvatarShapeType()     //设置头像的样式，分为默认样式，圆形和矩形三种样式。
+}
+
+// EaseChatFragment#Builder 中也提供了部分消息列表相关配置项
+EaseChatFragment.Builder(conversationID, easeChatType)
+    .showNickname()                     //是否显示昵称：true：是；(默认) false: 否。 
+    .setMsgTimeTextColor()              //设置时间线文本的颜色。
+    .setMsgTimeTextSize()               //设置时间线文本的字体大小。
+    .setReceivedMsgBubbleBackground()   //设置接收消息气泡区域的背景。
+    .setSentBubbleBackground()          //设置发送消息气泡区域的背景。     
+    .hideReceiverAvatar()               //设置不展示接收方头像，默认展示接收方头像。
+    .hideSenderAvatar()                 //设置不展示发送方头像，默认展示发送方头像。
+    .setChatBackground()                //设置聊天列表区域的背景。 
+    .sendMessageByOriginalImage()       //设置图片消息是否发送原图：true：是；(默认) false: 否。
+    .setEmptyLayout()                   //设置聊天列表的空白页面。   
+```
+
+#### 自定义消息列表项
+
+自定义消息表中列表项的内容，即各种消息类型的自定义消息布局。
+
+开发者可以继承 `EaseMessageAdapter`、`EaseChatRowViewHolder` 和 `EaseChatRow` 实现自己的 `CustomMessageAdapter`、`CustomChatTypeViewViewHolder` 和 `CustomTypeChatRow`，然后将 `CustomMessageAdapter` 设置到 `EaseChatFragment#Builder#setCustomAdapter` 中。
+
+1. 创建自定义适配器 `CustomMessageAdapter` 继承自 `EaseMessageAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
+
+```kotlin
+class CustomMessageAdapter: EaseMessagesAdapter() {
+
+    override fun getItemNotEmptyViewType(position: Int): Int {
+        // 根据消息类型，设置自己的 itemViewType。
+        // 如果要使用默认的，返回 super.getItemNotEmptyViewType(position) 即可。
+        return CUSTOM_YOUR_MESSAGE_TYPE
+    }
+
+    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<EaseMessage> {
+        // 根据返回的 viewType 返回对应的 ViewHolder。
+        // 返回自定义的 ViewHolder 或者使用默认的 super.getViewHolder(parent, viewType)。
+        return CUSTOM_VIEW_HOLDER()
+    }
+}
+```
+
+2. 创建 `CustomTypeChatRow` ，继承自 `EaseChatRow`。
+
+```kotlin
+class CustomTypeChatRow(
+    private val context: Context,
+    private val attrs: AttributeSet? = null,
+    private val defStyle: Int = 0,
+    isSender: Boolean = false
+): EaseChatRow(context, attrs, defStyle, isSender) {
+
+    override fun onInflateView() {
+        inflater.inflate(if (!isSender) R.layout.layout_row_received_custom_type
+        else R.layout.layout_row_sent_custom_type,
+            this)
+    }
+
+    override fun onSetUpView() {
+        (message?.getMessage()?.body as? ChatTextMessageBody)?.let { txtBody ->
+            contentView.text = txtBody.message
+        }
+    }
+}
+```
+
+3. 创建 `CustomChatTypeViewViewHolder`，继承自 `EaseChatRowViewHolder`。
+
+```kotlin
+class CustomChatTypeViewViewHolder(
+    itemView: View
+): EaseChatRowViewHolder(itemView) {
+
+    override fun onBubbleClick(message: EaseMessage?) {
+        super.onBubbleClick(message)
+        // Add click event
+    }
+}
+```
+
+4. 完善 `CustomMessageAdapter`。
+
+```kotlin
+class CustomMessageAdapter: EaseMessagesAdapter() {
+
+    override fun getItemNotEmptyViewType(position: Int): Int {
+        // 根据消息类型设置自己的 itemViewType。
+        mData?.get(position)?.getMessage()?.let { msg ->
+            msg.getStringAttribute("type", null)?.let { type ->
+                if (type == CUSTOM_TYPE) {
+                    return if (msg.direct() == ChatMessageDirection.SEND) {
+                        VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME
+                    } else {
+                        VIEW_TYPE_MESSAGE_CUSTOM_VIEW_OTHER
+                    }
+                }
+            }
+        }
+        // 如果要使用默认的，返回 super.getItemNotEmptyViewType(position) 即可。
+        return super.getItemNotEmptyViewType(position)
+    }
+
+    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<EaseMessage> {
+        // 根据返回的 viewType 返回对应的 ViewHolder。
+        if (viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME || viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_OTHER) {
+            CustomChatTypeViewViewHolder(
+                CustomTypeChatRow(parent.context, isSender = viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME)
+            )
+        }
+        // 返回自定义的 ViewHolder 或者 使用默认的 super.getViewHolder(parent, viewType)。
+        return super.getViewHolder(parent, viewType)
+    }
+
+    companion object {
+        private const val CUSTOM_TYPE = "custom_type"
+        private const val VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME = 1000
+        private const val VIEW_TYPE_MESSAGE_CUSTOM_VIEW_OTHER = 1001
+    }
+}
+```
+
+5. 添加 `CustomMessageAdapter` 到 `EaseChatFragment#Builder`。
+
+```kotlin
+builder.setCustomAdapter(CustomMessageAdapter())
+```
+
+#### 设置列表相关事件
+
+`EaseChatFragment#Builder` 设置消息条目的点击事件监听，包括气泡区域及头像的点击及长按事件。
+
+```kotlin
+    builder.setOnMessageItemClickListener(object : OnMessageItemClickListener{
+            //聊天气泡点击事件
+            override fun onBubbleClick(message: ChatMessage?): Boolean {}
+            //聊天气泡长按事件，return true 消费事件，不继续向下传递（即不执行 uikit 中的默认逻辑）
+            override fun onBubbleLongClick(v: View?, message: ChatMessage?): Boolean {}
+            //重发事件，用于发送消息失败后的重试操作，return true 消费事件 不继续向下传递（即不执行 uikit 中的默认逻辑）
+            override fun onResendClick(message: ChatMessage?): Boolean {}
+            //头像点击事件
+            override fun onUserAvatarClick(userId: String?) {}
+            //头像长按事件
+            override fun onUserAvatarLongClick(userId: String?) {}
+        })   
+```
+
+#### 设置消息日期
+
+`EaseDateFormatConfig` 提供如下配置项：
+
+| 属性                                    | 描述                                                             |
+| -------------------------------------- | ---------------------------------------------------------------- |
+| chatTodayFormat                       | 消息列表当天日期格式，英文环境默认为："HH:mm"。                            |
+| chatOtherDayFormat                    | 消息列表其他日期的格式，英文环境默认为： "MMM dd, HH:mm"。                        |
+| chatOtherYearFormat                   | 消息列表其他年份的日期格式，英文环境默认为： "MMM dd, yyyy HH:mm"。                |
+
+```kotlin
+    // 日期语言区域切换（跟随手机区域语言设置） 默认值为 false 采用 ENGLISH。 
+    // 举例：chatOtherDayFormat = "MMM dd, yyyy"  a.false: Sep 25, 2024  b.true(本地语言中文): 9月 25, 2024
+    EaseIM.getConfig()?.dateFormatConfig?.useDefaultLocale = true  
+    // 消息中今天的日期格式
+    EaseIM.getConfig()?.dateFormatConfig?.chatTodayFormat = "HH:mm"
+    // 消息中其他日期的日期格式
+    EaseIM.getConfig()?.dateFormatConfig?.chatOtherDayFormat = "MMM dd, yyyy"
+    // 消息中其他年份的日期格式
+    EaseIM.getConfig()?.dateFormatConfig?.chatOtherYearFormat = "MMM dd, yyyy HH:mm"
+```
+
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_dateFormat.png)
+
+#### 设置消息撤回时间
+
+你可以通过 `EaseIM.getConfig()?.chatConfig?.timePeriodCanRecallMessage` 设置聊天页面消息撤回的有效时间，默认为 120 秒。
+
+#### 设置消息翻译
+
+- `EaseIM.getConfig()?.chatConfig?.enableTranslationMessage`：是否开启文本消息长按翻译功能，默认为 `false`，即该功能默认关闭。如需开启该特性，需设置为 `true`。
+- `EaseIM.getConfig()?.chatConfig?.targetTranslationLanguage = "zh"`：翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[环信即时通讯云控制台](https://console.easemob.com/user/login)申请试用翻译功能，然后将 `EaseIM.getConfig()?.chatConfig?.enableTranslationMessage` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
+- `<style name="ease_chat_message_received_translation_content_style">`：消息接收方翻译文本 style 样式 可以自行修改文本任意属性。
+- `<style name="ease_chat_message_sent_translation_content_style">`：消息发送方翻译文本 style 样式 可以自行修改文本任意属性。
+
+## 聊天页面其他设置
+
+其他标记为 open 的方法均为可重载方法。如有需要，可重载对应方法实现自己业务逻辑。
+
 
 
 
