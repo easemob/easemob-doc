@@ -17,6 +17,10 @@ ChatroomUIKit 提供离开聊天室功能。聊天室中的成员可自行离开
 <ImageGallery>
   <ImageItem src="/images/uikit/chatroomfeature/chatroom_create.png" title="聊天室创建" />
   <ImageItem src="/images/uikit/chatroomfeature/chatroom_destroy.png" title="聊天室销毁" />
+  <ImageItem src="/images/uikit/chatroomfeature/chatroom_create.png" title="聊天室创建" />
+  <ImageItem src="/images/uikit/chatroomfeature/chatroom_destroy.png" title="聊天室销毁" />
+  <ImageItem src="/images/uikit/chatroomfeature/chatroom_create.png" title="聊天室创建" />
+  <ImageItem src="/images/uikit/chatroomfeature/chatroom_destroy.png" title="聊天室销毁" />
 </ImageGallery>
 
 

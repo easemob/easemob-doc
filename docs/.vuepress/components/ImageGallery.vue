@@ -11,11 +11,17 @@
 <script>
 export default {
   name: 'ImageGallery',
+  props: {
+    columns: {
+      type: Number,
+      default: 2
+    }
+  },
   computed: {
     imageRows() {
       const rows = []
       const slotsContent = this.$slots.default()
-      const imagesPerRow = 2
+      const imagesPerRow = this.columns
       for (let i = 0; i < slotsContent.length; i += imagesPerRow) {
         rows.push(slotsContent.slice(i, i + imagesPerRow))
       }
@@ -29,13 +35,13 @@ export default {
 .image-gallery {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* 行之间的间距 */
-  padding: 20px;
+  gap: 5px; /* 行之间的间距 */
+  padding: 10px;
 
   .image-row {
     display: flex;
     justify-content: space-between; /* 确保每行两个图片均匀分布 */
-    gap: 15px; /* 图片之间的间距 */
+    gap: 5px; /* 图片之间的间距 */
     // padding: 5px; /* 行的内边距 */
     // border: 1px solid #ccc; /* 行的边框样式 */
     // box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* 行的阴影 */
@@ -49,7 +55,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center; /* 居中对齐 */
-    border-radius: 6px;
+    border-radius: 8px;
   }
 
   .image-item .image-title {
@@ -58,16 +64,15 @@ export default {
     font-weight: 600;
     background-color: #ebeff5;
     padding: 12px 0;
+    border-radius: 8px;
   }
 
   .image-item img {
-    height: 346px;
+    height: 400px;
     display: block;
     margin-top: 20px;
     margin-bottom: 40px;
-    border-radius: 16px;
-    max-width: 98%;
-    border: 4px solid #dde5ee;
+    max-width: 97%;
   }
 }
 </style>
