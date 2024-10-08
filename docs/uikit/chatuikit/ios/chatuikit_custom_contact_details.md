@@ -1,12 +1,12 @@
 # 设置联系人详情页面
 
-你可以配置联系人详情页面的头部导航栏、点击右侧图片显示的联系人操作和联系人详情自定义列表项等。详见 [ContactInfoViewController](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactinfoviewcontroller)。
+你可以配置联系人详情页面的导航栏、点击右侧图片显示的联系人操作和联系人详情自定义列表项等。详见 [ContactInfoViewController](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactinfoviewcontroller)。
 
 ![img](/images/uikit/chatuikit/ios/custom_contact_details.png)
 
 ## 自定义导航栏
 
-联系人详情页面、聊天页面、会话列表页面、联系人列表页面和群详情页面的导航栏均使用 `EaseChatNavigationBar`。如果联系人详情页面的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的导航栏](chatuikit_custom_conversation_list.html#自定义头部导航栏)。
+联系人详情页面、聊天页面、会话列表页面、联系人列表页面和群详情页面的导航栏均使用 `EaseChatNavigationBar`。如果联系人详情页面的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的导航栏](chatuikit_custom_conversation_list.html#自定义导航栏)。
 
 ### 设置点击右侧图片显示的联系人操作
 
