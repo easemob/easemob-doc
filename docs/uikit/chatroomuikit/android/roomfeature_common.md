@@ -24,7 +24,9 @@ ChatroomUIKit 提供离开聊天室功能。聊天室中的成员可自行离开
 
 ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 IM SDK 的 REST API 解散聊天室](/document/server-side/chatroom.html#解散聊天室)。
 
-![img](/images/uikit/chatroomfeature/chatroom_destroy.png =500x500)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatroomfeature/chatroom_destroy.png" title="解散聊天室" />
+</ImageGallery>
 
 ## 发送弹幕
 
@@ -34,7 +36,9 @@ ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 I
 
 用户可以根据业务需要选择显示或隐藏消息发送时间（HH:MM 格式）、用户标识和用户头像。
 
-![img](/images/uikit/chatroomfeature/barrage_send.png =500x500)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatroomfeature/barrage_send.png" title="发送弹幕" />
+</ImageGallery>
 
 ## 打赏
 
@@ -44,7 +48,9 @@ ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 I
 
 在 UIKit 中，默认提供了 12 种不同的虚拟礼物。同时，用户可以自定义虚拟礼物的样式、名称和金额。
 
-![img](/images/uikit/chatroomfeature/gift.png =500x500)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatroomfeature/gift.png " title="打赏" />
+</ImageGallery>
 
 ## 全局广播
 
@@ -70,7 +76,9 @@ ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 I
 
 若未读消息的数量不超过 99，则未读消息数显示实际的数量，若达到 100 及以上则显示 99+。
 
-![img](/images/uikit/chatroomfeature/message_unread.png =300x600)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatroomfeature/message_unread.png" title="未读消息数" />
+</ImageGallery>
 
 ## 已禁言列表
 
@@ -78,7 +86,10 @@ ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 I
 
 在 UIKit 中，默认通过点击聊天室界面右上角的成员按钮，触发已禁言列表。用户在列表中查看聊天室被禁言的所有成员，包括成员的身份、头像和昵称，同时可以通过点击成员右端的管理功能按钮，触发解除禁言选项，实现取消禁言的操作。
 
-![img](/images/uikit/chatroomfeature/mute_list.png =300x700)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatroomfeature/mute_list.png" title="已禁言列表" />
+</ImageGallery>
+
 
 ## 暗黑模式
 
@@ -86,8 +97,9 @@ ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 I
 
 UIKit 支持暗黑模式的一键切换。UIKit 默认风格为明亮模式，切换为暗黑模式后，聊天室界面中所有元素将替换为暗黑风格设计，提供用户舒适的视觉体验。
 
-![img](/images/uikit/chatroomfeature/dark_mode.png)
-
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatroomfeature/dark_mode.png" title="暗黑模式" />
+</ImageGallery>
 
 
 
