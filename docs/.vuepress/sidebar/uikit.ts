@@ -53,17 +53,12 @@ const chatUikitSidebar = [
     collapsible: true,
     children: [
       { text: '主题', link: 'chatuikit_theme.html' },
-      { text: '功能界面', 
-        collapsible: true,
-      children: [
-        { text: '会话列表', link: 'chatuikit_custom_conversation_list.html' },
-        { text: '消息', link: 'chatuikit_custom_chat.html' },
-        { text: '通讯录', link: 'chatuikit_custom_contact_list.html' },
-        { text: '联系人详情', link: 'chatuikit_custom_contact_details.html' },
-        { text: '群详情', link: 'chatuikit_custom_group_details.html' },
-        { text: '通用可配项', link: 'chatuikit_config_item.html' }
-        ],
-      },
+      { text: '会话列表', link: 'chatuikit_custom_conversation_list.html' },
+      { text: '消息', link: 'chatuikit_custom_chat.html' },
+      { text: '通讯录', link: 'chatuikit_custom_contact_list.html' },
+      { text: '联系人详情', link: 'chatuikit_custom_contact_details.html' },
+      { text: '群详情', link: 'chatuikit_custom_group_details.html' },
+      { text: '通用可配项', link: 'chatuikit_config_item.html' },
       { text: '进阶用法', link: 'chatuikit_advancedusage.html' },
       { text: '页面 ViewModel 中可重载方法', link: 'chatuikit_listener.html' },
       { text: '拦截主要页面点击跳转事件', link: 'chatuikit_customize_clickjump.html' },
