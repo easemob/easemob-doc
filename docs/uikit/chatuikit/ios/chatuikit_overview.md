@@ -34,18 +34,31 @@ Classes
        └─ Extension // 一些方便的系统类扩展。
  ```    
 
-## 功能
+## 功能介绍
 
-单群聊 UIKit 中业务相关的 UI 控件主要包含在以下三个模块中：
+单群聊 UIKit 中业务相关的 UI 控件主要包含在以下三个模块：Chat 模块、Conversation 模块 和 Contact 模块。
 
-- Chat 模块提供所有聊天视图的容器。
+### 聊天页面功能
 
-![img](/images/uikit/chatuikit/ios/page_chat.png =400x866) 
+Chat 模块提供所有聊天视图的容器。
 
-- Conversation 模块提供会话列表容器。
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/chat_detail.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types.png" title="发送多种类型的消息" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_longpress.png" title="消息长按操作" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_reply.png" title="消息引用" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_deliveryreceipt.png" title="已发送回执" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_readreceipt.png" title="已读回执" />
+</ImageGallery>
+
+### 会话列表页面功能
+
+Conversation 模块提供会话列表容器。
 
 ![img](/images/uikit/chatuikit/ios/page_conversation.png =400x866) 
 
-- Contact 模块提供联系人、群组及其详情等容器。
+### 通讯录页面功能
+
+Contact 模块提供联系人、群组及其详情等容器。
 
 ![img](/images/uikit/chatuikit/ios/page_contact_list.png =400x866) 
