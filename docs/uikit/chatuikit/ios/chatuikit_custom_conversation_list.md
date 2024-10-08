@@ -4,7 +4,7 @@
 
 - 点击搜索按钮，跳转到搜索页面，搜索会话。
 - 点击会话列表项，跳转到会话详情页面。
-- 点击标题栏的扩展按钮，选择新会话，创建新会话。
+- 点击导航栏的扩展按钮，选择新会话，创建新会话。
 - 左滑、右滑或长按会话触发会话拓展功能菜单，可进行删除会话、置顶会话、消息免打扰操作。
 
 单条会话展示会话名称、最后一条消息、最后一条消息的时间以及置顶和禁言状态等。
@@ -14,7 +14,7 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-你可以配置会话列表页面的头部导航栏、会话列表项。详见 [ConversationListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Conversation/Controllers/ConversationListController.swift)。
+你可以配置会话列表页面的导航栏、会话列表项。详见 [ConversationListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Conversation/Controllers/ConversationListController.swift)。
 
 ![img](/images/uikit/chatuikit/ios/custom_conversation_list.png)
 
