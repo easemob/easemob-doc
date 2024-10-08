@@ -1,4 +1,13 @@
-# 设置聊天页面
+# 聊天消息
+
+环信单群聊 UIKit 的聊天页面提供如下功能：
+
+- 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
+- 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。
+- 从服务器拉取漫游消息。
+- 清除本地消息。
+
+消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
 你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [MessageListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift)。
 
