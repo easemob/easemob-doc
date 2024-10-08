@@ -65,10 +65,18 @@ Chat Fragment 提供所有聊天视图的容器。
 
 Conversation Fragment 提供会话列表容器。
 
-![img](/images/uikit/chatuikit/android/page_conversation.png =400x866) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_longpress.png" title="会话长按操作" />
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_operation.png" title="会话操作" />
+</ImageGallery>
 
 ### 通讯录页面功能
 
 Contact Fragment 提供联系人、群组及其详情等容器。
 
-![img](/images/uikit/chatuikit/android/page_contact_list.png =400x866) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/contact list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact_detail.png" title="联系人详情" />
+  <ImageItem src="/images/uikit/chatuikit/android/block_list.png" title="联系人黑名单" />
+  <ImageItem src="/images/uikit/chatuikit/android/group_list.png" title="群组列表" />
+</ImageGallery>

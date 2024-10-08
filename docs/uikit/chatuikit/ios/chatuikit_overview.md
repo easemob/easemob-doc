@@ -55,10 +55,18 @@ Chat 模块提供所有聊天视图的容器。
 
 Conversation 模块提供会话列表容器。
 
-![img](/images/uikit/chatuikit/ios/page_conversation.png =400x866) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/conversation_slide.png" title="会话左滑/右滑" />
+  <ImageItem src="/images/uikit/chatuikit/ios/conversation_operation.png" title="会话操作" />
+</ImageGallery>
 
 ### 通讯录页面功能
 
 Contact 模块提供联系人、群组及其详情等容器。
 
-![img](/images/uikit/chatuikit/ios/page_contact_list.png =400x866) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/contact list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/ios/contact_detail.png" title="联系人详情" />
+  <ImageItem src="/images/uikit/chatuikit/ios/block_list.png" title="联系人黑名单" />
+  <ImageItem src="/images/uikit/chatuikit/ios/group_list.png" title="群组列表" />
+</ImageGallery>
