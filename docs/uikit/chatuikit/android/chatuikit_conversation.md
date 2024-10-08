@@ -227,8 +227,6 @@ binding?.titleConversations?.setBackgroundColor(ContextCompat.getColor(mContext,
     
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_list_more.png)
-
 ### 设置搜索区域
 
 #### 设置是否需要搜索功能
@@ -303,6 +301,10 @@ EaseIM.setCustomActivityRoute(object : EaseCustomActivityRoute {
 
 ## EaseConversationListFragment 中默认实现的功能
 
+`EaseConversationListFragment` 中默认实现会话免打扰、会话置顶、会话已读和会话删除功能。
+
+![img](/images/uikit/chatuikit/android/cvs-action.png =350x600)
+
 ### 免打扰
 
 使用 `EaseConversationListViewModel` 提供的方法设置免打扰，例如:
@@ -324,8 +326,6 @@ EaseIM.setCustomActivityRoute(object : EaseCustomActivityRoute {
 ### 会话删除
 
 使用 `EaseConversationListViewModel` 提供的方法 `deleteConversation` 方法删除会话。
-
-![img](/images/uikit/chatuikit/android/cvs-action.png =350x600)
 
 ## 事件监听
 
