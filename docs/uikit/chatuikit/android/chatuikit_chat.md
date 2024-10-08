@@ -39,8 +39,6 @@ class ChatActivity: AppCompactActivity() {
 }
 ```
 
-![img](/images/uikit/chatuikit/android/buble1.png =500x900)
-
 ## 自定义聊天页面概览
 
 你可以配置聊天页面的标题栏、消息列表项和输入菜单等。
