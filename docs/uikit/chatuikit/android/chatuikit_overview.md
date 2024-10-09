@@ -44,18 +44,68 @@
     └── widget                                   // UIKit SDK 自定义 View
 ```
 
-## 功能
+## 功能介绍
 
-单群聊 UIKit 中业务相关的 UI 控件主要包含在以下三个 Fragment 中：
+单群聊 UIKit 中业务相关的 UI 控件主要包含在以下三个 Fragment 中：Chat Fragment、Conversation Fragment 和 Contact Fragment。下图展示单群聊 UIKit 的主要功能：
 
-- Chat Fragment 提供所有聊天视图的容器。
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_contact_list.png" title="通讯录" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat_group.png" title="群聊" />
+</ImageGallery>
 
-![img](/images/uikit/chatuikit/android/page_chat.png =400x866) 
+### 聊天页面功能
 
-- Conversation Fragment 提供会话列表容器。
+Chat Fragment 提供所有聊天视图的容器。
 
-![img](/images/uikit/chatuikit/android/page_conversation.png =400x866) 
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/android/chat_detail.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_types.png" title="发送多种类型的消息" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_longpress.png" title="消息长按操作" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_reply.png" title="消息引用" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_deliveryreceipt.png" title="已发送回执" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_readreceipt.png" title="已读回执" />
+</ImageGallery>
 
-- Contact Fragment 提供联系人、群组及其详情等容器。
+### 会话列表页面功能
 
-![img](/images/uikit/chatuikit/android/page_contact_list.png =400x866) 
+Conversation Fragment 提供会话列表容器。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_longpress.png" title="会话长按操作" />
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_operation.png" title="会话操作" />
+</ImageGallery>
+
+### 通讯录页面功能
+
+Contact Fragment 提供联系人、群组及其详情等容器。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/contact list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact_detail.png" title="联系人详情" />
+  <ImageItem src="/images/uikit/chatuikit/android/block_list.png" title="联系人黑名单" />
+  <ImageItem src="/images/uikit/chatuikit/android/group_list.png" title="群组列表" />
+</ImageGallery>
+
+### 群组管理页面功能
+
+群组管理页面提供以下功能：
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/group_detail.png" title="群详情管理" />
+  <ImageItem src="/images/uikit/chatuikit/android/group_member.png" title="群成员管理" />
+  <ImageItem src="/images/uikit/chatuikit/android/group_thread.png" title="话题" />
+  <ImageItem src="/images/uikit/chatuikit/android/group_pin.png" title="消息置顶" />
+</ImageGallery>
+
+### 页面搜索功能
+
+单群聊 UIKit 提供以下搜索功能：
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/android/search_conversation.png" title="搜索会话名称" />
+  <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索联系人名称" />
+  <ImageItem src="/images/uikit/chatuikit/android/search_chat_history.png" title="搜索聊天历史" />
+</ImageGallery>
+
