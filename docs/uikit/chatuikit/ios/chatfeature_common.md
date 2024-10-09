@@ -82,37 +82,6 @@
 
 ![img](/images/uikit/chatuikit/feature/common/message_report.png =300x630) 
 
-## 输入状态指示
-
-输入状态指示功能指在单聊会话中实时显示会话的一方正在输入的状态，增强通讯互动的实时性。此功能有助于用户了解对方是否正在回复，从而优化沟通体验，提升对话流畅度。
-
-输入状态指示的 UI 和逻辑结构如下：
-- `EaseChatNavigationBar` 中的 `subtitle` 控件显示用户的状态以及输入状态指示，收到输入状态后会先显示输入状态，用户取消输入状态后显示用户的状态，输入状态消失。
-- 输入状态相关回调和方法：
-  - 输入状态投递为透传消息，接收到透传消息后，通过 `MessageListViewModel#notifyTypingState()` 回调，更新输入状态。
-  - 输入状态回调为 `MessageListViewModel#onOtherPartyTypingText`。
-
-| 开启输入状态提示            | 关闭输入状态提示   | 
-| :-------------- | :----- | 
-| <img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  width="300"/>  | 
-
-### 如何使用
-
-输入状态指示特性在 `Appearance.chat.enableTyping` 中默认开启，即 `Appearance.chat.enableTyping` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
-
-示例代码如下：
-
-```Swift
-    Appearance.chat.enableTyping = false 
-
-```
-
-### 自定义输入状态指示 UI
-
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/ios/message_send_receive.html#通过透传消息实现输入指示器)。
-
-用户需要监听透传消息回调处理导航相关 UI 显示效果。
-
 ## 本地消息搜索
 
 本地消息搜索功能允许用户快速在会话内搜索历史消息内容，支持关键词匹配。该功能帮助用户高效找到所需信息，提高工作效率和信息管理的便捷性。
@@ -125,7 +94,7 @@
 
 ![img](/images/uikit/chatuikit/feature/common/message_search.png) 
 
-### 如何使用
+#### 如何使用
 
 跳转 `SearchHistoryMessagesViewController` 页面，入参为会话 ID，输入关键词后，将在历史消息中匹配关键词并展示搜索结果。
 
@@ -148,7 +117,7 @@
 
 ![img](/images/uikit/chatuikit/feature/common/group_@.png) 
 
-### 如何使用
+#### 如何使用
 
 群组 @ 提及特性默认开启。要关闭该特性，则不需理会 `MessageListController#onInputBoxEventsOccur` 方法，记重载此方法后不需要处理 mention 事件即可。
 

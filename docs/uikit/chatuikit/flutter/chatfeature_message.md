@@ -24,7 +24,7 @@
 
 ![img](/images/uikit/chatuikit/feature/message/message_recall.png) 
 
-### 如何使用
+#### 如何使用
 
 消息撤回功能默认开启，即 `ChatUIKitSettings.enableMessageRecall` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。 示例代码如下：
 
@@ -44,7 +44,7 @@ ChatUIKitSettings.recallExpandTime = 120;
 
 ![img](/images/uikit/chatuikit/feature/message/message_edit.png) 
 
-### 如何使用
+#### 如何使用
 
 消息编辑功能默认开启，即 `ChatUIKitSettings.enableMessageEdit` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。 示例代码如下：
 
@@ -63,7 +63,7 @@ ChatUIKitSettings.enableMessageEdit = false;
 - `ChatUIKitQuoteWidget`：消息气泡的引用消息自定义 View。
 - `ChatUIKitReplyBar`：底部输入框组件上方展示的引用消息自定义 View。
 
-### 如何使用
+#### 如何使用
 
 消息转发特性默认开启，即 `ChatUIKitSettings.enableMessageReply` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
@@ -83,7 +83,7 @@ ChatUIKitSettings.enableMessageReply = false;
 
 ![img](/images/uikit/chatuikit/feature/message/message_translate.png)
 
-### 如何使用
+#### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
@@ -119,7 +119,7 @@ ChatUIKitSettings.translateTargetLanguage = 'zh-Hans';
 
 ![img](/images/uikit/chatuikit/feature/message/message_reactions.png)
 
-### 如何使用
+#### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
@@ -135,7 +135,7 @@ ChatUIKitSettings.enableMessageReaction = true;
 
 ![img](/images/uikit/chatuikit/feature/message/message_thread.png)
 
-### 如何使用
+#### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
@@ -157,7 +157,7 @@ ChatUIKitSettings.enableMessageThread = true;
 
 ![img](/images/uikit/chatuikit/feature/message/message_forward.png)
 
-### 如何使用
+#### 如何使用
 
 消息转发特性在 `ChatUIKitSettings.enableMessageMultiSelect` 中提供开关，默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
@@ -175,7 +175,7 @@ ChatUIKitSettings.enableMessageMultiSelect = true;
 
 - 选择转发消息接收人页面 `ForwardMessageSelectView`。
 
-### 如何使用
+#### 如何使用
 
 该功能默认开启，即 `ChatUIKitSettings.enableMessageForward` 的默认值为 `true`。如果不需要，可以将参数设置为 `false`。 示例代码如下：
 
@@ -189,7 +189,7 @@ ChatUIKitSettings.enableMessageForward = false;
 
 ![img](/images/uikit/chatuikit/feature/message/message_pin.png) 
 
-### 如何使用
+#### 如何使用
 
 消息置顶功能默认开启，即 `ChatUIKitSettings.enablePinMsg` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
@@ -198,4 +198,25 @@ ChatUIKitSettings.enableMessageForward = false;
 ```dart
 ChatUIKitSettings.enablePinMsg = false;
 ```
+
+## 输入状态指示
+
+输入状态指示功能指在单聊会话中实时显示会话的一方正在输入的状态，增强通讯互动的实时性。此功能有助于用户了解对方是否正在回复，从而优化沟通体验，提升对话流畅度。
+
+本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/android/message_send_receive.html#通过透传消息实现输入指示器)。
+
+| 开启输入状态提示            | 关闭输入状态提示   | 
+| :-------------- | :----- | 
+| <img src=/images/uikit/chatuikit/feature/flutter/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/flutter/typing_indicator_disable.png width="300"/>  | 
+
+#### 如何使用
+
+输入状态指示特性在 `ChatUIKitSettings.enableTypingIndicator` 中默认开启，即默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
+
+示例代码如下：
+
+```
+ChatUIKitSettings.enableTypingIndicator = false;
+```
+
 

@@ -86,7 +86,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 ![img](/images/uikit/chatuikit/feature/message/message_translate.png) 
 
-### 如何使用
+#### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
@@ -117,7 +117,7 @@ Appearance.chat.targetLanguage = .English
 
 ![img](/images/uikit/chatuikit/feature/message/message_reactions.png) 
 
-### 如何使用
+#### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
@@ -140,7 +140,7 @@ Appearance.chat.contentStyle.append(.withMessageReaction)
 
 ![img](/images/uikit/chatuikit/feature/message/message_thread.png) 
 
-### 如何使用
+#### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
@@ -176,7 +176,7 @@ Appearance.chat.contentStyle.append(.withMessageThread)
 
 ![img](/images/uikit/chatuikit/feature/message/message_pin.png) 
 
-### 如何使用
+#### 如何使用
 
 消息置顶特性在 `Appearance.chat` 中默认开启，即 `enablePinMessage` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
@@ -186,4 +186,35 @@ Appearance.chat.contentStyle.append(.withMessageThread)
 Appearance.chat.enablePinMessage = false
 Appearance.chat.messageLongPressedActions.removeAll { $0.tag == "Pin" }
 ```
+
+## 输入状态指示
+
+输入状态指示功能指在单聊会话中实时显示会话的一方正在输入的状态，增强通讯互动的实时性。此功能有助于用户了解对方是否正在回复，从而优化沟通体验，提升对话流畅度。
+
+输入状态指示的 UI 和逻辑结构如下：
+- `EaseChatNavigationBar` 中的 `subtitle` 控件显示用户的状态以及输入状态指示，收到输入状态后会先显示输入状态，用户取消输入状态后显示用户的状态，输入状态消失。
+- 输入状态相关回调和方法：
+  - 当单聊会话中的一个用户输入文字时，可以调用 `MessageListViewModel#notifyTypingState()` 方法告知对方。
+  - 会话中的对方会收到 `MessageListViewModel#onOtherPartyTypingText` 回调，更新对方的输入状态。
+
+| 开启输入状态提示            | 关闭输入状态提示   | 
+| :-------------- | :----- | 
+| <img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  width="300"/>  | 
+
+#### 如何使用
+
+输入状态指示特性在 `Appearance.chat.enableTyping` 中默认开启，即 `Appearance.chat.enableTyping` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
+
+示例代码如下：
+
+```Swift
+    Appearance.chat.enableTyping = false 
+
+```
+
+#### 自定义输入状态指示 UI
+
+本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/ios/message_send_receive.html#通过透传消息实现输入指示器)。
+
+用户需要监听透传消息回调处理导航相关 UI 显示效果。
 
