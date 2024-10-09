@@ -42,7 +42,7 @@ Classes
 
 Chat 模块提供所有聊天视图的容器。
 
-<ImageGallery>
+<ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/ios/chat_detail.png" title="聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/ios/message_types.png" title="发送多种类型的消息" />
   <ImageItem src="/images/uikit/chatuikit/ios/message_longpress.png" title="消息长按操作" />
@@ -86,7 +86,7 @@ Contact 模块提供联系人、群组及其详情等容器。
 
 单群聊 UIKit 提供以下搜索功能：
 
-<ImageGallery>
+<ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/ios/search_conversation.png" title="搜索会话名称" />
   <ImageItem src="/images/uikit/chatuikit/ios/search_contact.png" title="搜索联系人名称" />
   <ImageItem src="/images/uikit/chatuikit/ios/search_chat_history.png" title="搜索聊天历史" />

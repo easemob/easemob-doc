@@ -96,7 +96,7 @@ Contact Fragment 提供联系人、群组及其详情等容器。
 
 单群聊 UIKit 提供以下搜索功能：
 
-<ImageGallery>
+<ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/android/search_conversation.png" title="搜索会话名称" />
   <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索联系人名称" />
   <ImageItem src="/images/uikit/chatuikit/android/search_chat_history.png" title="搜索聊天历史" />
