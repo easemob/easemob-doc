@@ -90,7 +90,7 @@
 
 ![img](/images/uikit/chatuikit/feature/common/message_search.png) 
 
-### 如何使用
+#### 如何使用
 
 消息搜索组件 `MessageSearch` 为独立页面，需要输入必要参数 `convId`, `convType`, `onClickedItem`。
 
@@ -127,6 +127,6 @@ export function MessageSearchScreen(props: Props) {
 }
 ```
 
-### 自定义本地消息搜索
+#### 自定义本地消息搜索
 
 消息搜索组件 `MessageSearch` 提供了基本的样式等参数修改。也可以自行实现消息搜索组件。

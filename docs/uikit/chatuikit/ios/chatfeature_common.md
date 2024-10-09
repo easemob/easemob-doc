@@ -94,7 +94,7 @@
 
 ![img](/images/uikit/chatuikit/feature/common/message_search.png) 
 
-### 如何使用
+#### 如何使用
 
 跳转 `SearchHistoryMessagesViewController` 页面，入参为会话 ID，输入关键词后，将在历史消息中匹配关键词并展示搜索结果。
 
@@ -117,7 +117,7 @@
 
 ![img](/images/uikit/chatuikit/feature/common/group_@.png) 
 
-### 如何使用
+#### 如何使用
 
 群组 @ 提及特性默认开启。要关闭该特性，则不需理会 `MessageListController#onInputBoxEventsOccur` 方法，记重载此方法后不需要处理 mention 事件即可。
 

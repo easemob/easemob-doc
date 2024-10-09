@@ -40,7 +40,7 @@
 
 - `MessageQuoteBubble`：消息气泡的引用消息自定义 View。
 
-### 如何使用
+#### 如何使用
 
 消息引用特性默认开启，即 `ContainerProps.enableMessageQuote` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
@@ -54,7 +54,7 @@
 
 ![img](/images/uikit/chatuikit/feature/message/message_translate.png)
 
-### 如何使用
+#### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
@@ -82,7 +82,7 @@
 
 ![img](/images/uikit/chatuikit/feature/message/message_reactions.png)
 
-### 如何使用
+#### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
@@ -94,7 +94,7 @@
 
 ![img](/images/uikit/chatuikit/feature/message/message_thread.png)
 
-### 如何使用
+#### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
@@ -110,7 +110,7 @@
 
 ![img](/images/uikit/chatuikit/feature/message/message_forward.png)
 
-### 如何使用
+#### 如何使用
 
 消息转发特性在 `ContainerProps.enableMessageMultiSelect` 中提供开关，默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
@@ -125,7 +125,7 @@
 
 ![img](/images/uikit/chatuikit/feature/message/message_pin.png) 
 
-### 如何使用
+#### 如何使用
 
 消息置顶特性默认开启，即 `enableMessagePin` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
@@ -162,7 +162,7 @@ export function App() {
 | :-------------- | :----- | 
 | <img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  width="300"/>  | 
 
-### 如何使用
+#### 如何使用
 
 输入状态指示特性默认开启，默认值为 `true`。要关闭该特性，需将 `ContainerProps.enableTyping` 参数设置为 `false`。
 
@@ -182,7 +182,7 @@ export function App() {
 }
 ```
 
-### 自定义输入状态指示 UI
+#### 自定义输入状态指示 UI
 
 本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/android/message_send_receive.html#通过透传消息实现输入指示器)。
 

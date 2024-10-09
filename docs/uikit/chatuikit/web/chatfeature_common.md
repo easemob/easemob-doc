@@ -90,7 +90,7 @@
 
 ![img](/images/uikit/chatuikit/feature/web/common/group_@.png) 
 
-### 如何使用
+#### 如何使用
 
 群组 @ 提及特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 

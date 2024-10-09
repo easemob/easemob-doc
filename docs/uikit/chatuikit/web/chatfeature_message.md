@@ -16,7 +16,7 @@
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-### 如何使用
+#### 如何使用
 
 消息删除特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -34,7 +34,7 @@ features.chat.message.delete = false;
 
 ![img](/images/uikit/chatuikit/feature/web/message/message_recall.png)
 
-### 如何使用
+#### 如何使用
 
 消息撤回特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -50,7 +50,7 @@ features.chat.message.recall = false;
 
 ![img](/images/uikit/chatuikit/feature/web/message/message_edit.png)
 
-### 如何使用
+#### 如何使用
 
 消息编辑特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -66,7 +66,7 @@ features.chat.message.edit = false;
 
 ![img](/images/uikit/chatuikit/feature/web/message/message_reply.png)
 
-### 如何使用
+#### 如何使用
 
 消息编辑特性默认开启，若要在全局配置中关闭可以进行如下设置：
 
@@ -82,7 +82,7 @@ features.chat.message.reply = false;
 
 ![img](/images/uikit/chatuikit/feature/web/message/message_translate.png) 
 
-### 如何使用
+#### 如何使用
 
 1. 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
@@ -110,7 +110,7 @@ features.chat.message.translate = false;
 
 ![img](/images/uikit/chatuikit/feature/web/message/message_reactions.png) 
 
-### 如何使用
+#### 如何使用
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
@@ -130,7 +130,7 @@ features.chat.message.reaction = false;
 
 ![img](/images/uikit/chatuikit/feature/web/message/message_thread.png) 
 
-### 如何使用
+#### 如何使用
 
 1. 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
@@ -150,7 +150,7 @@ features.chat.message.thread = false;
 
 ![img](/images/uikit/chatuikit/feature/web/message/messages_forward.png) 
 
-### 如何使用
+#### 如何使用
 
 1. 消息合并转发特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -207,7 +207,7 @@ features.chat.message.select = false;
 
 ![img](/images/uikit/chatuikit/feature/web/message/message_forward.png) 
 
-### 如何使用
+#### 如何使用
 
 1. 消息单条转发特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -245,7 +245,7 @@ features.chat.message.forward = false;
 
 ![img](/images/uikit/chatuikit/feature/web/message/message_pin.png) 
 
-### 如何使用
+#### 如何使用
 
 消息置顶特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -262,7 +262,7 @@ features.chat.message.pin = false;
 
 ![img](/images/uikit/chatuikit/feature/web/common/typing_indicator.png) 
 
-### 如何使用
+#### 如何使用
 
 输入状态指示特性默认开启。若要在全局配置中关闭，可以进行如下设置：
 
@@ -270,7 +270,7 @@ features.chat.message.pin = false;
 features.chat.messageInput.typing = false;
 ```
 
-### 自定义
+#### 自定义
 
 本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/web/message_send_receive.html#通过透传消息实现输入指示器)。
 
