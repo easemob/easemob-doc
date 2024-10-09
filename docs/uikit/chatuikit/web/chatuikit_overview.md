@@ -22,11 +22,21 @@
 
 单群聊 UIKit 中业务相关的 UI 控件主要包含在三个组件中：`Chat`、`ConversationList` 和 `ContactList`。
 
+下图展示单群聊 UIKit 的主要功能：
+
+<ImageGallery :columns="1">
+  <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_chat.png" title="会话列表+聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_group_detail.png" title="会话列表+群组设置" />
+  <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_contact_detail.png" title="会话列表+联系人设置" />
+  <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_group.png" title="联系人列表+群组" />
+  <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_contact.png" title="联系人列表+联系人" />
+</ImageGallery>
+
 ### 聊天页面功能
 
 `Chat` 提供所有聊天视图的容器。
 
-<ImageGallery>
+<ImageGallery :columns="1">
   <ImageItem src="/images/uikit/chatuikit/web/message_types.png" title="聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/web/message_operation.png" title="消息操作" />
   <ImageItem src="/images/uikit/chatuikit/web/message_reply.png" title="消息引用" />
@@ -46,7 +56,7 @@
 
 `ContactList` 提供联系人、群组及其详情等容器。
 
-<ImageGallery>
+<ImageGallery :columns="1">
   <ImageItem src="/images/uikit/chatuikit/web/contact_list_info.png" title="联系人列表及详情" />
   <ImageItem src="/images/uikit/chatuikit/web/contact_block_list.png" title="联系人黑名单" />
 </ImageGallery>
@@ -55,7 +65,7 @@
 
 群组管理页面提供以下功能：
 
-<ImageGallery>
+<ImageGallery :columns="1">
   <ImageItem src="/images/uikit/chatuikit/web/group_mgmt.png" title="群组管理" />
   <ImageItem src="/images/uikit/chatuikit/web/group_thread.png" title="话题" />
 </ImageGallery>
@@ -64,7 +74,7 @@
 
 单群聊 UIKit 提供以下搜索功能：
 
-<ImageGallery>
+<ImageGallery :columns="1">
   <ImageItem src="/images/uikit/chatuikit/web/search_conversation.png" title="搜索会话名称" />
   <ImageItem src="/images/uikit/chatuikit/web/search_contact.png" title="搜索联系人名称" />
   <ImageItem src="/images/uikit/chatuikit/web/search_chat_history.png" title="搜索聊天历史" />

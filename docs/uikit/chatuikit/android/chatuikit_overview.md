@@ -46,7 +46,14 @@
 
 ## 功能介绍
 
-单群聊 UIKit 中业务相关的 UI 控件主要包含在以下三个 Fragment 中：Chat Fragment、Conversation Fragment 和 Contact Fragment。 
+单群聊 UIKit 中业务相关的 UI 控件主要包含在以下三个 Fragment 中：Chat Fragment、Conversation Fragment 和 Contact Fragment。下图展示单群聊 UIKit 的主要功能：
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_contact_list.png" title="通讯录" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat_group.png" title="群聊" />
+</ImageGallery>
 
 ### 聊天页面功能
 

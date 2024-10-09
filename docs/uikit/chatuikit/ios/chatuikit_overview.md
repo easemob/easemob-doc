@@ -38,6 +38,15 @@ Classes
 
 单群聊 UIKit 中业务相关的 UI 控件主要包含在以下三个模块：Chat 模块、Conversation 模块 和 Contact 模块。
 
+下图展示单群聊 UIKit 的主要功能：
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/main_chat.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/ios/main_conversation_list.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/ios/main_contact_list.png" title="通讯录" />
+  <ImageItem src="/images/uikit/chatuikit/ios/main_chat_group.png" title="群聊" />
+</ImageGallery>
+
 ### 聊天页面功能
 
 Chat 模块提供所有聊天视图的容器。
