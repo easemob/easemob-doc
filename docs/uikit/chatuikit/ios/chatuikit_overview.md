@@ -65,8 +65,30 @@ Conversation 模块提供会话列表容器。
 Contact 模块提供联系人、群组及其详情等容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/contact list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/ios/contact_list.png" title="联系人列表" />
   <ImageItem src="/images/uikit/chatuikit/ios/contact_detail.png" title="联系人详情" />
   <ImageItem src="/images/uikit/chatuikit/ios/block_list.png" title="联系人黑名单" />
   <ImageItem src="/images/uikit/chatuikit/ios/group_list.png" title="群组列表" />
 </ImageGallery>
+
+### 群组管理页面功能
+
+群组管理页面提供以下功能：
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/group_detail.png" title="群详情管理" />
+  <ImageItem src="/images/uikit/chatuikit/ios/group_member.png" title="群成员管理" />
+  <ImageItem src="/images/uikit/chatuikit/ios/group_thread.png" title="话题" />
+  <ImageItem src="/images/uikit/chatuikit/ios/group_pin.png" title="消息置顶" />
+</ImageGallery>
+
+### 页面搜索功能
+
+单群聊 UIKit 提供以下搜索功能：
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/search_conversation.png" title="搜索会话名称" />
+  <ImageItem src="/images/uikit/chatuikit/ios/search_contact.png" title="搜索联系人名称" />
+  <ImageItem src="/images/uikit/chatuikit/ios/search_chat_history.png" title="搜索聊天历史" />
+</ImageGallery>
+
