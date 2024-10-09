@@ -82,26 +82,6 @@
 
 ![img](/images/uikit/chatuikit/feature/web/common/message_report.png) 
 
-## 输入状态指示
-
-输入状态指示功能指在单聊会话中实时显示会话的一方正在输入的状态，增强通讯互动的实时性。此功能有助于用户了解对方是否正在回复，从而优化沟通体验，提升对话流畅度。
-
-该功能在 UIKit 里的 `Typing` 组件中。
-
-![img](/images/uikit/chatuikit/feature/web/common/typing_indicator.png) 
-
-### 如何使用
-
-输入状态指示特性默认开启。若要在全局配置中关闭，可以进行如下设置：
-
-```jsx
-features.chat.messageInput.typing = false;
-```
-
-### 自定义
-
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/web/message_send_receive.html#通过透传消息实现输入指示器)。
-
 ## 群组 @ 提及
 
 群组 @ 提及功能使用户能在群聊中通过 @ 符号直接提及特定成员，被提及者将收到特别通知。该功能便于高效传递重要信息，确保关键消息得到及时关注和回应。
