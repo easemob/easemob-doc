@@ -18,9 +18,9 @@
 - `deleteConversationFromServer`：单向删除服务端的单个会话及其历史消息。
 - `IEMChatManager.deleteConversations`：删除本地单个会话及其历史消息。
 
-### 单向删除服务端会话及其历史消息
+### 单向删除服务端会话及本地会话
 
-你可以调用 `deleteServerConversation` 方法删除服务器端和本地会话，并选择是否删除服务端和本地的历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息。该接口不影响其他用户的会话和消息。
+你可以调用 `deleteServerConversation` 方法单向删除服务器端和本地会话，并选择是否删除服务端和本地的历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息。该接口不影响其他用户的会话和消息。
 
 ```objectivec
 // 删除指定会话，如果需要保留服务端和本地的历史消息，`isDeleteServerMessages` 参数传 `NO`，异步方法。

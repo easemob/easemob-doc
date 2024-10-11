@@ -14,7 +14,7 @@
 ### 优化
  
 - [IM SDK] [发送前回调](/document/server-side/callback.html#_1、发送前回调)时修改的[消息扩展字段](/document/android/message_send_receive.html#使用消息扩展字段)，会同步到发送方。
-- [IM SDK] 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。对于之前版本，可设置调用该接口删除会话的本地消息，但该接口不删除本地会话。
+- [IM SDK] 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
 - [IM SDK] 群组和聊天室操作的默认错误码提示由 `EMErrorGroupMembersFull`（604）和 `EMErrorChatroomMembersFull`（704）调整为 `EMErrorGroupPermissionDenied`（603）和 `EMErrorChatroomPermissionDeniedD`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
 
 ### 修复
