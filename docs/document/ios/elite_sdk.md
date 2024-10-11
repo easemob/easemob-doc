@@ -164,8 +164,8 @@
     </tr>
     <tr>
       <td rowspan="2">删除会话</td>
-      <td>单向删除服务端会话及其历史消息</td>
-      <td><a href="https://doc.easemob.com/document/ios/conversation_delete.html#单向删除服务端会话及其历史消息">单向删除服务端会话及其历史消息</a></td>
+      <td>单向删除服务端会话及本地会话</td>
+      <td><a href="https://doc.easemob.com/document/ios/conversation_delete.html#单向删除服务端会话及本地会话">单向删除服务端会话和本地会话及其历史消息</a></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
