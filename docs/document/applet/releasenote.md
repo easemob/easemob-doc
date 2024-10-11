@@ -7,7 +7,7 @@
 ### 新增特性
 
 - 聊天室公告修改事件中增加公告内容：`updateAnnouncement` 事件中增加 `announcement` 字段，表示更新的公告。
-- 新增两个错误码：
+- 新增两个[错误码](error.html)：
   - `WEBIM_USER_ALREADY_LOGIN` 208：用户已登录。单设备登录时，若调用登录方法 `open` 时用户已经登录，会触发该错误。
   - `MESSAGE_SEND_TIMEOUT` 512：发送消息超时。例如，发消息时连接断开，会提示该错误。
 - 新增 `onShow` 方法，小程序或 uniapp 在 `onShow` 生命周期中执行该方法，可优化重连速度。
