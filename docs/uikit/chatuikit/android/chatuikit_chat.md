@@ -305,7 +305,7 @@ binding?.let {
 
 ```kotlin
 binding?.let {
-    it.findItemVisible(itemId: Int, visible: Boolean)
+    it.layoutChat.findItemVisible(itemId: Int, visible: Boolean)
 }
 ```
 
