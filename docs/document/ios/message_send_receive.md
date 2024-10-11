@@ -20,10 +20,9 @@
 
 ## 技术原理
 
-环信即时通讯 IM iOS SDK 提供 `ChatManager` 类和 `EMChatMessage` 类，支持发送、接收消息，发送、接收消息已读回执，并管理用户设备上存储的消息会话数据，其中包含如下主要方法：
+环信即时通讯 IM iOS SDK 提供 `ChatManager` 类和 `EMChatMessage` 类，支持发送和接收消息，其中包含如下主要方法：
 
 - `sendMessage` 发送消息给某个用户，群组或者聊天室；
-- `recallMessage` 撤回自己发出的消息；
 - `addMessageListener` 添加消息接收的回调通知；
 - `ackConversationRead` 发送会话已读通知；
 - `ackMessageRead` 发送指定消息已读的通知；
