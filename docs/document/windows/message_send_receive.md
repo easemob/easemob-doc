@@ -494,6 +494,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ```
 
 ### 发送和接收合并消息
+
 为了方便消息互动，即时通讯 IM 自 1.2.0 版本开始支持将多个消息合并在一起进行转发。你可以采取以下步骤进行消息的合并转发：
 
 1. 利用原始消息列表创建一条合并消息。
