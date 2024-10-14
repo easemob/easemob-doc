@@ -2,6 +2,36 @@
 
 <Toc />
 
+## 版本 V4.8.1 2024-10-14
+
+#### 新增特性
+
+- [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+  - 新增 `EMChatRoomManager.joinChatRoom(String roomId, {bool leaveOther = true,String? ext,})` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
+  - 新增 `EMChatRoomEventHandler.onMemberJoinedFromChatRoom(String roomId, String participant, String? ext)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+- 新增 `EMPushManager.syncConversationsSilentMode()` 方法，支持从服务器获取所有会话的推送通知方式的设置。
+- 新增 `EMPushManager.bindDeviceToken(String notifierName, String deviceToken)` 方法。
+- 新增 `EMConversation.remindType()` 方法，用于本地存储会话的推送通知方式。
+- 新增 `EMConversation.getLocalMessageCount()` 方法，用于[获取 SDK 本地数据库中会话在某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
+- 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)：
+  - 新增 `LoginExtensionInfo` 用户设备扩展信息。
+  - 新增 `EMOptions.loginExtension` 设置登录时携带的扩展信息。
+- [IM SDK] 新增根据多个消息类型搜索本地消息：
+  - `EMChatManager#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
+  - `EMConversation#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
+
+#### 优化
+
+- 支持 AUT 协议， 优化弱网环境下的服务连接成功率;
+- `updateHMSPushToken`、`updateFCMPushToken`、`updateAPNsDeviceToken` 方法过期，`EMOptions` 中的 `enableOppoPush`、`enableMiPush`、`enableMeiZuPush`、`enableFCM`、`enableVivoPush`、`enableHWPush`、`enableAPNs`、`enableHonorPush` 过期， 使用 `EMPushManager.bindDeviceToken` 代替；
+- 修改 `EMConnectionEventHandler.onUserDidLoginFromOtherDevice(String deviceName)` 方法为 `EMConnectionEventHandler.onUserDidLoginFromOtherDevice(LoginExtensionInfo info)`
+
+#### 修复
+
+- 修复 `fetchConversationsByOptions` 偶尔引起的崩溃；
+- 修复拉黑联系人时缓存未及时更新的问题；
+- 修复退出登录再登录后推送可能不工作的问题。
+
 ## 版本 V4.6.1 2024-6-11
 
 ### 新增特性

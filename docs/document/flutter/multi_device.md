@@ -137,6 +137,42 @@ final options = EMOptions(appKey: appKey, osType: 1);
 EMClient.getInstance.init(options);
 ```
 
+### 设置登录设备的扩展信息
+
+即时通讯 IM 自 4.8.1 版本开始支持设备的自定义扩展信息，这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
+
+初始化 SDK 时，你可以调用 `EMOptions.loginExtension` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（例如 Android 平台提示 `206` 错误，`USER_LOGIN_ANOTHER_DEVICE`），被踢设备收到的 `EMConnectionEventHandler#onUserDidLoginFromOtherDevice` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
+
+:::notice
+登录成功后才会将该设置发送到服务器。
+:::
+
+```java
+    EMOptions options =  new EMOptions();
+    options.setLoginCustomExt("你的自定义扩展信息json字符串");
+    EMClient.getInstance().init(context,options);
+
+    EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+        @Override
+        public void onConnected() {
+
+        }
+
+        @Override
+        public void onDisconnected(int errorCode) {
+
+        }
+
+        @Override
+        public void onLogout(int errorCode, EMLoginExtensionInfo info) {
+            //当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。
+            //errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}。
+            //info.deviceExt 是将当前设备挤下线的新登录设备的自定义扩展信息。
+            //其他错误码场景下 info.deviceExt 为空。
+        }
+    });
+```
+
 ### 强制指定账号从单个设备下线
 
 你可以调用 `kickDevice` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。被踢设备会收到 `onUserKickedByOtherDevice` 回调。调用该方法前，你需要首先通过 `EMClient#fetchLoggedInDevices` 方法获取设备 ID。

@@ -11,6 +11,8 @@
 - `EMChatManager.searchMsgFromDB`：根据关键字搜索会话消息。
 - `EMChatManager#loadMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
 - `EMConversation#loadMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。
+- `EMChatManager#searchMsgsByOptions`：根据单个或多个消息类型，搜索本地数据库中所有会话的消息。
+- `EMConversation#searchMsgsByOptions` 根据单个或多个消息类型，搜索本地数据库中单个会话的消息。
 
 ## 前提条件
 
@@ -91,3 +93,55 @@ try {
 }
 
 ```
+
+### 根据消息类型搜索所有会话中的消息
+
+你可以调用 `EMChatManager#searchMsgsByOptions` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中所有会话的消息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.8.1 或以上版本。
+:::
+
+```java
+// count：要查询的消息条数。取值范围为 [1,400]。
+// fromuser：会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
+Set types=new HashSet<>();
+types.add(EMMessage.Type.TXT);
+types.add(EMMessage.Type.VOICE);
+List messages = EMClient.getInstance().chatManager().searchMsgFromDB(types, -1, 400, "xu", EMConversation.EMSearchDirection.UP);
+for (int i = 0; i < messages.size(); i++) {
+    EMMessage message = (EMMessage) messages.get(i);
+    if (message.getBody() instanceof EMTextMessageBody) {
+        EMTextMessageBody body = (EMTextMessageBody) message.getBody();
+        EMLog.e(TAG, "message: " + body.getMessage() + ",time: " + message.getMsgTime());
+    } else {
+        EMLog.e(TAG, "message: " + message.getBody() + ",time: " + message.getMsgTime());
+    }
+}
+``` 
+
+### 根据消息类型搜索当前会话中的消息
+
+你可以调用 `EMConversation#searchMsgsByOptions` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中单个会话的消息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.8.1 或以上版本。
+:::
+
+```java
+// count：要查询的消息条数。取值范围为 [1,400]。
+// fromuser：当前会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
+Set types=new HashSet<>();
+types.add(EMMessage.Type.TXT);
+types.add(EMMessage.Type.VOICE);
+List messages = EMClient.getInstance().chatManager().getConversation("xu").searchMsgFromDB(types, -1, 400, "xu", EMConversation.EMSearchDirection.UP);
+for (int i = 0; i < messages.size(); i++) {
+    EMMessage message = (EMMessage) messages.get(i);
+    if (message.getBody() instanceof EMTextMessageBody) {
+        EMTextMessageBody body = (EMTextMessageBody) message.getBody();
+        EMLog.e(TAG, "message: " + body.getMessage() + ",time: " + message.getMsgTime());
+    } else {
+        EMLog.e(TAG, "message: " + message.getBody() + ",time: " + message.getMsgTime());
+    }
+}
+```         
