@@ -389,7 +389,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
       "subType": "sub_combine",
       "summary": ":yyuu\n:[图片]\n:[文件]\n",
       "title": "聊天记录",
-      "url": "https://a1-hsb.easemob.com/sandbox-dee1/wdtest/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
+      "url": "https://XXXX/XXXX/XXXX/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
     }
 ]
 ```
