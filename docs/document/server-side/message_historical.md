@@ -368,9 +368,9 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | 参数          | 类型   | 描述                                             |
 | :------------ | :----- | :----------------------------------------------- |
 | `combineLevel`  | Int   | 合并消息的嵌套层级数。 |
-| `file_length` | Int | 合并消息的大小。               |
+| `file_length` | Int | 合并消息附件的大小，单位为字节。               |
 | `filename`        | String | 合并消息的附件名称。     |
-| `secret`        | String | 合并消息附件的访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。  |
+| `secret`        | String | 合并消息附件的访问密钥。如果[文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。  |
 | `subType`        | String | 表示消息类型为合并消息。                |
 | `summary`        | String | 合并消息的概要。                |
 | `title`        | String | 合并消息的标题。                |
@@ -379,17 +379,18 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 例如，下面示例为源消息包括文本、图片和文件消息的合并消息格式：
 
 ```json
-"bodies": [
-           {
-              "combineLevel": 1,
-              "file_length": 550,
-              "filename": "17289718748990036",
-              "secret": "a_OTmoq6Ee-CygH0PRzcUyFniZDmSsX1ur0j-9RtCj3tK6Gr",
-              "subType": "sub_combine",
-              "summary": ":yyuu\n:[图片]\n:[文件]\n",
-              "title": "聊天记录",
-              "url": "https://a1-hsb.easemob.com/sandbox-dee1/wdtest/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
-           }
+"bodies": 
+[
+   {
+      "combineLevel": 1,
+      "file_length": 550,
+      "filename": "17289718748990036",
+      "secret": "a_OTmoq6Ee-CygH0PRzcUyFniZDmSsX1ur0j-9RtCj3tK6Gr",
+      "subType": "sub_combine",
+      "summary": ":yyuu\n:[图片]\n:[文件]\n",
+      "title": "聊天记录",
+      "url": "https://a1-hsb.easemob.com/sandbox-dee1/wdtest/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
+    }
 ]
 ```
 
