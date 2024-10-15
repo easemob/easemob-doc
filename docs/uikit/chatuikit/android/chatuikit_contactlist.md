@@ -130,7 +130,7 @@ EaseContactsListFragment.Builder()
 class CustomContactListAdapter : EaseContactListAdapter() {
     override fun getItemNotEmptyViewType(position: Int): Int {
         // 根据消息类型设置自定义 itemViewType。
-        // 如果使用默认的 itemViewTyp，返回 super.getItemNotEmptyViewType(position) 即可。
+        // 如果使用默认的 itemViewTyp2，返回 super.getItemNotEmptyViewType(position) 即可。
         return CUSTOM_YOUR_CONTACT_TYPE
     }
 
