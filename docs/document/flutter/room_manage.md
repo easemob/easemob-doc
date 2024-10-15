@@ -78,6 +78,27 @@ try {
 }
 ```
 
+同时，你可以调用 `EMChatRoomManager.joinChatRoom` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatRoomEventHandler.onMemberJoinedFromChatRoom(String roomId, String participant, String? ext)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+
+```dart
+EMClient.getInstance.chatRoomManager.joinChatRoom(
+  "roomId",
+  leaveOther: false,
+  ext: 'ext',
+);
+
+// 添加聊天室事件监听
+EMClient.getInstance.chatRoomManager.addEventHandler(
+  "identifier",
+  EMChatRoomEventHandler(
+    onMemberJoinedFromChatRoom: (roomId, participant, ext) {},
+  ),
+);
+
+// 移除聊天室事件监听
+EMClient.getInstance.chatRoomManager.removeEventHandler("identifier");
+```
+
 ### 获取聊天室详情
 
 聊天室所有成员均可以调用 `EMChatManager#fetchChatRoomInfoFromServer` 获取聊天室详情，包括聊天室 ID、聊天室名称，聊天室描述、最大成员数、聊天室所有者、是否全员禁言以及聊天室权限类型。聊天室公告、管理员列表、成员列表、黑名单列表、禁言列表需单独调用接口获取。

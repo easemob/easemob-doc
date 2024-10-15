@@ -43,7 +43,7 @@
 
 #### 如何使用
 
-消息转发特性在 `EaseChatConfig` 中默认开启，即 `enableReplyMessage` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
+消息引用特性在 `EaseChatConfig` 中默认开启，即 `enableReplyMessage` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
 示例代码如下：
 
