@@ -523,7 +523,7 @@ void cancelTimer() {
 
 ### 发送自定义类型消息
 
-除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。自定义消息内容为 String 类型的 key-value 格式，你需要自己添加并解析该内容。
+除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
 ```dart
 final customMsg = EMMessage.createCustomSendMessage(

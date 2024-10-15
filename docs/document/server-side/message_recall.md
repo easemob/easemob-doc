@@ -40,6 +40,7 @@ POST https://{host}/{org_name}/{app_name}/messages/msg_recall
 | `from`      | String | 否       | 消息撤回方的用户 ID。若不传该参数，默认为 `admin`。    |
 | `sync_device`| Bool | 否       | 是否支持单聊消息撤回同步给消息发送方的所有在线设备：<br/> - (默认) `true`：是； <br/> - `false`：否。<Container type="tip" title="提示">当参数 `force` 设置为 `true` 且消息已过期，此时若要将消息撤回同步发送方，则需将 `from` 参数设置为消息发送方。</Container>|
 | `force`     | Bool   | 否       | 是否支持强制撤回消息。<br/> - `true`：是。这种情况下，无论消息是否过期，你都可以撤回。若需撤回已过期的消息，`force` 须设置为 `true`。 <br/> - （默认）`false`：否。这种情况下，你只能在撤回时长内撤销服务端存在的消息。  |
+| `recallMessageExtensionInfo`    | String | 否       | 消息撤回相关的扩展信息。 |
 
 ### HTTP 响应
 
@@ -73,7 +74,8 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
     "to": "user2",
     "from": "user1",
     "chat_type": "chat",
-    "force": true
+    "force": true,
+    "recallMessageExtensionInfo": "{"type": "chat"}"
 }'
 ```
 

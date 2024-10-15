@@ -359,8 +359,8 @@ payload 之外的字段如下表所示：
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_该撤回事件消息的 ID”。 |
 | `eventType`       | String   | “chat” 上行消息、“chat_offline” 离线消息。                   |
 | `timestamp`       | long     | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为 ms。        |
-| `chat_type`       | String   | “chat” 单聊回调、“groupchat” 群聊回调包含了群组和聊天室的消息回调，默认全选。 |
-| `group_id`        | String   | 当 `chat_type` 为 `groupchat` 有此参数，表示回调消息所在的群组或聊天室。 |
+| `chat_type`       | String   | `recall`，表示消息撤回。 |
+| `group_id`        | String   | 该参数对于群组聊天或聊天室有效，表示回调消息所在的群组或聊天室。 |
 | `from`            | String   | 消息的发送方。                                               |
 | `to`              | String   | 消息的接收方。                                               |
 | `recall_id`       | String   | 要撤回的消息 ID。                                            |

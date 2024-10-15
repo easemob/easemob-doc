@@ -361,6 +361,40 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ]
 ```
 
+### 合并消息
+
+合并消息的 bodies 包含如下字段：
+
+| 参数          | 类型   | 描述                                             |
+| :------------ | :----- | :----------------------------------------------- |
+| `combineLevel`  | Int   | 合并消息的嵌套层级数。 |
+| `file_length` | Int | 合并消息的大小。               |
+| `filename`        | String | 合并消息的附件名称。     |
+| `secret`        | String | 合并消息附件的访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。  |
+| `subType`        | String | 表示消息类型为合并消息。                |
+| `summary`        | String | 合并消息的概要。                |
+| `title`        | String | 合并消息的标题。                |
+| `url`        | String | 合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。                |
+
+例如，下面示例为源消息包括文本、图片和文件消息的合并消息格式：
+
+```json
+"bodies": [
+           {
+              "combineLevel": 1,
+              "file_length": 550,
+              "filename": "17289718748990036",
+              "secret": "a_OTmoq6Ee-CygH0PRzcUyFniZDmSsX1ur0j-9RtCj3tK6Gr",
+              "subType": "sub_combine",
+              "summary": ":yyuu\n:[图片]\n:[文件]\n",
+              "title": "聊天记录",
+              "url": "https://a1-hsb.easemob.com/sandbox-dee1/wdtest/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
+           }
+]
+```
+
+
+
 ## 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
