@@ -172,14 +172,15 @@ EMConversation? conv =
 
 ### 获取会话在一定时间内的消息数
 
-你可以调用 `getLocalMessageCount` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
+你可以调用 `loadMessagesFromTime` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
 
-```java
-String conversationId = "pu";
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
-if(conversation!=null) {
-    long startTimestamp = System.currentTimeMillis() - 24 * 60 * 60 * 1000;
-    int count = conversation.getAllMsgCount(startTimestamp, System.currentTimeMillis());
-    EMLog.i(TAG, "queryMsgCountWithDuration count:" + count);
+```dart
+EMConversation? conversation =
+    await EMClient.getInstance.chatManager.getConversation(conversationId);
+if (conversation != null) {
+    List<EMMessage> messages = await conversation.loadMessagesFromTime(
+    startTime: startMs,
+    endTime: endMs,
+    );
 }
 ```

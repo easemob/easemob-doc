@@ -102,23 +102,25 @@ try {
 若使用该功能，需将 SDK 升级至 V4.8.1 或以上版本。
 :::
 
-```java
+```dart
+// from：会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 // count：要查询的消息条数。取值范围为 [1,400]。
-// fromuser：会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
-Set types=new HashSet<>();
-types.add(EMMessage.Type.TXT);
-types.add(EMMessage.Type.VOICE);
-List messages = EMClient.getInstance().chatManager().searchMsgFromDB(types, -1, 400, "xu", EMConversation.EMSearchDirection.UP);
-for (int i = 0; i < messages.size(); i++) {
-    EMMessage message = (EMMessage) messages.get(i);
-    if (message.getBody() instanceof EMTextMessageBody) {
-        EMTextMessageBody body = (EMTextMessageBody) message.getBody();
-        EMLog.e(TAG, "message: " + body.getMessage() + ",time: " + message.getMsgTime());
-    } else {
-        EMLog.e(TAG, "message: " + message.getBody() + ",time: " + message.getMsgTime());
-    }
+try {
+  const searchOptions = MessageSearchOptions(
+    types: [MessageType.TXT, MessageType.IMAGE],
+    from: fromUser,
+    ts: startTime,
+    direction: EMSearchDirection.Up,
+    count: 50
+  );
+  List<EMMessage> msgs =
+      await EMClient.getInstance.chatManager.searchMsgsByOptions(
+    searchOptions,
+  );
+} on EMError catch (e) {
+  debugPrint("error code: ${e.code}, desc: ${e.description}");
 }
-``` 
+```
 
 ### 根据消息类型搜索当前会话中的消息
 
@@ -128,20 +130,20 @@ for (int i = 0; i < messages.size(); i++) {
 若使用该功能，需将 SDK 升级至 V4.8.1 或以上版本。
 :::
 
-```java
+```dart
+// from：当前会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 // count：要查询的消息条数。取值范围为 [1,400]。
-// fromuser：当前会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
-Set types=new HashSet<>();
-types.add(EMMessage.Type.TXT);
-types.add(EMMessage.Type.VOICE);
-List messages = EMClient.getInstance().chatManager().getConversation("xu").searchMsgFromDB(types, -1, 400, "xu", EMConversation.EMSearchDirection.UP);
-for (int i = 0; i < messages.size(); i++) {
-    EMMessage message = (EMMessage) messages.get(i);
-    if (message.getBody() instanceof EMTextMessageBody) {
-        EMTextMessageBody body = (EMTextMessageBody) message.getBody();
-        EMLog.e(TAG, "message: " + body.getMessage() + ",time: " + message.getMsgTime());
-    } else {
-        EMLog.e(TAG, "message: " + message.getBody() + ",time: " + message.getMsgTime());
-    }
-}
-```         
+  try {
+    const searchOptions = MessageSearchOptions(
+        types: [MessageType.TXT, MessageType.IMAGE],
+        from: fromUser,
+        ts: startTime,
+        direction: EMSearchDirection.Up,
+        count: 50);
+    conversation.searchMsgsByOptions(
+      searchOptions,
+    );
+  } on EMError catch (e) {
+    debugPrint("error code: ${e.code}, desc: ${e.description}");
+  }
+```     

@@ -147,30 +147,29 @@ EMClient.getInstance.init(options);
 登录成功后才会将该设置发送到服务器。
 :::
 
-```java
-    EMOptions options =  new EMOptions();
-    options.setLoginCustomExt("你的自定义扩展信息json字符串");
-    EMClient.getInstance().init(context,options);
+```dart
+// 设置登录设备的扩展信息
+final options = EMOptions(appKey: appKey, loginExtension: "extension");
 
-    EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
-        @Override
-        public void onConnected() {
+// 添加连接事件监听   
+EMClient.getInstance.addConnectionEventHandler(
+  "identifier",
+  EMConnectionEventHandler(
+    onUserDidLoginFromOtherDevice: (info) {
+      debugPrint(info.deviceName);
+      debugPrint(info.ext);
+    },
+  ),
+);
 
-        }
 
-        @Override
-        public void onDisconnected(int errorCode) {
+... 
 
-        }
+// 移除连接事件监听
+EMClient.getInstance.removeConnectionEventHandler("identifier");
+...
 
-        @Override
-        public void onLogout(int errorCode, EMLoginExtensionInfo info) {
-            //当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。
-            //errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}。
-            //info.deviceExt 是将当前设备挤下线的新登录设备的自定义扩展信息。
-            //其他错误码场景下 info.deviceExt 为空。
-        }
-    });
+
 ```
 
 ### 强制指定账号从单个设备下线
