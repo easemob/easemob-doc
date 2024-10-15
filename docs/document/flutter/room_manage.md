@@ -78,33 +78,25 @@ try {
 }
 ```
 
-同时，你可以调用 `EMChatRoomManager.joinChatRoom(String roomId, {bool leaveOther = true,String? ext,})` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatRoomEventHandler.onMemberJoinedFromChatRoom(String roomId, String participant, String? ext)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+同时，你可以调用 `EMChatRoomManager.joinChatRoom` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatRoomEventHandler.onMemberJoinedFromChatRoom(String roomId, String participant, String? ext)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 
-```java
-String ext= "your ext info";
-boolean leaveOtherRooms=true;
-EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomID,leaveOtherRooms,ext, new EMValueCallBack<com.hyphenate.chat.EMChatRoom>() {
-    @Override
-    public void onSuccess(com.hyphenate.chat.EMChatRoom value) {
-        EMLog.i(TAG, "joinChatRoom onSuccess value:" + value);
-    }
+```dart
+EMClient.getInstance.chatRoomManager.joinChatRoom(
+  "roomId",
+  leaveOther: false,
+  ext: 'ext',
+);
 
-    @Override
-    public void onError(int error, String errorMsg) {
-        EMLog.i(TAG, "joinChatRoom onError error:" + error + " errorMsg:" + errorMsg);
-    }
-});
+// 添加聊天室事件监听
+EMClient.getInstance.chatRoomManager.addEventHandler(
+  "identifier",
+  EMChatRoomEventHandler(
+    onMemberJoinedFromChatRoom: (roomId, participant, ext) {},
+  ),
+);
 
-EMChatRoomChangeListener chatRoomChangeListener = new EMChatRoomChangeListener() {
-    ……
-
-    @Override
-    public void onMemberJoined(String roomId, String participant, String ext) {
-        EMLog.e(TAG, "onMemberJoined roomId:" + roomId + " participant:" + participant + " ext:" + ext);
-    }
-}
-EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChangeListener);
-
+// 移除聊天室事件监听
+EMClient.getInstance.chatRoomManager.removeEventHandler("identifier");
 ```
 
 ### 获取聊天室详情
