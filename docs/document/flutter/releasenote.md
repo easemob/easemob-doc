@@ -14,7 +14,7 @@
 - 新增 `EMConversation.remindType()` 方法，用于本地存储会话的推送通知方式。
 - 新增 `EMConversation.getLocalMessageCount()` 方法，用于[获取 SDK 本地数据库中会话在某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
 - 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)：
-  - 新增 `LoginExtensionInfo` 用户设备扩展信息。
+  - 新增 `LoginExtensionInfo` 类接收用户设备扩展信息。
   - 新增 `EMOptions.loginExtension` 设置登录时携带的扩展信息。
 - [IM SDK] 新增根据多个消息类型搜索本地消息：
   - `EMChatManager#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
