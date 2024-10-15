@@ -75,7 +75,7 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
     "from": "user1",
     "chat_type": "chat",
     "force": true,
-    "recallMessageExtensionInfo": "{"type": "chat"}"
+    "recallMessageExtensionInfo": "{\"type\": \"chat\"}"
 }'
 ```
 
