@@ -233,7 +233,7 @@ binding?.titleConversations?.setBackgroundColor(ContextCompat.getColor(mContext,
 
 ```kotlin
 
-// 是否使用默认的搜索功能（跳转 EaseSearchActivity 搜索页面 目前支持搜索用户、会话、消息、黑名单用户。
+// 是否使用默认的搜索功能（跳转 EaseSearchActivity 搜索页面）。目前支持搜索用户、会话、消息、黑名单用户。
 // true：是；(默认) false: 否。 
 EaseConversationListFragment.Builder().useSearchBar(true)
     
