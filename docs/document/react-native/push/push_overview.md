@@ -81,3 +81,22 @@
   - 魅族推送：在魅族设备上可用；
   - OPPO 推送：在 OPPO 设备上可用；
   - vivo 推送：在 vivo 设备上可用。
+
+
+## 配置推送接口   // TODO：这里是 Android 的，Flutter 的需要吗？
+
+你需要在 SDK 初始化时进行推送接口的配置。
+
+```java
+EMOptions options = new EMOptions();
+...
+EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
+// 设置支持哪家手机厂商推送。
+builder.enableMiPush(String appId, String appKey)
+       //开发者需要调用该方法开启华为推送。
+       .enableHWPush();
+// 将 pushconfig 设置为 ChatOptions.
+options.setPushConfig(builder.build());
+// 初始化即时通讯 IM SDK。
+EMClient.getInstance().init(this, options);
+```
