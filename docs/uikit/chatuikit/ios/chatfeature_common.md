@@ -119,7 +119,7 @@
 
 #### 如何使用
 
-群组 @ 提及特性默认开启。要关闭该特性，则不需理会 `MessageListController#onInputBoxEventsOccur` 方法，记重载此方法后不需要处理 mention 事件即可。
+群组 @ 提及特性默认开启。要关闭该特性，则不需理会 `MessageListController#onInputBoxEventsOccur` 方法，即重载此方法后不需要处理 mention 事件即可。
 
 示例代码如下：
 
