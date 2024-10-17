@@ -98,7 +98,7 @@ POST https://{host}/{org_name}/{app_name}/circle/channel
 | `name`        | String | 是       | 频道名称，长度不能超过 50 个字符。                       |
 | `type`        | Int    | 否       | 频道类型：<br/> - （默认）`0`：公开频道；<br/> - `1`：私密频道。           |
 | `mode`        | Int    | 否       | 频道模式：<br/> - （默认）`0`：文字频道；<br/> - `1`：语聊频道。  |
-| `maxUsers`        | Long | 否       | 频道最大成员数量。<br/> - 对于语聊频道（即 `mode` 为 `1`），该参数的取值范围为 [1,20]，默认值为 `8`。<br/> - 对于文字频道，该参数的取值范围为 [1,2000]，默认值为 `2000`。如需要提高上限请联系商务。                      |
+| `max_users`        | Long | 否       | 频道最大成员数量。<br/> - 对于语聊频道（即 `mode` 为 `1`），该参数的取值范围为 [1,20]，默认值为 `8`。<br/> - 对于文字频道，该参数的取值范围为 [1,2000]，默认值为 `2000`。如需要提高上限请联系商务。                      |
 | `description` | String | 否       | 频道描述，长度不能超过 500 个字符。                      |
 | `custom`      | String | 否       | 频道扩展信息，例如可以给社区添加业务相关的标记，长度不能超过 500 个字符。 |
 | `rtc_name`      | String | 否       | RTC 频道名称，长度不能超过 50 个字符。该名称在加入 RTC 频道时使用，仅在创建语聊频道时返回。若使用声网 RTC，该名称还用于[生成 RTC Token](https://docportal.shengwang.cn/cn/voice-call-4.x/token_server_android_ng?platform=Android)。<br/>若创建语聊频道时未指定 `rtc_name`，服务器将使用频道 ID 作为该参数的值返回。|
