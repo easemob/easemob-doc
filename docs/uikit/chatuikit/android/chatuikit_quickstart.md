@@ -2,7 +2,7 @@
 
 <Toc />
 
-利用环信单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
+利用环信单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊和群聊会话中发送消息。
 
 ## 前提条件
 
@@ -278,7 +278,7 @@ class MainActivity : AppCompactActivity(), ChatConnectionListener {
             showToast("Please login first!")
             ChatLog.e(TAG, "Please login first!")
             return
-        }
+        }// 对于群聊，`username` 替换为群组 ID，`EaseChatType.SINGLE_CHAT` 替换为 `EaseChatType.GROUP_CHAT`。
         EaseChatActivity.actionStart(this, username, EaseChatType.SINGLE_CHAT)
     }
 

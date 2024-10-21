@@ -103,10 +103,10 @@ EaseIM.setGroupProfileProvider(object : EaseGroupProfileProvider {
 
 ```kotlin
 
- // Chat 类型设置 setUserProfileProvider 
+ // 调用 setUserProfileProvider 设置单聊时的用户属性，包括用户头像和昵称。
  EaseIM.setUserProfileProvider(object : EaseUserProfileProvider {
      override fun getUser(userId: String?): EaseProfile? {
-         // 从本地查询对应 userId 的信息进行返回
+         // 返回对应 userId 的本地用户属性
          return DemoHelper.getInstance().getDataModel().getAllContacts()[userId]?.toProfile()
      }
 
@@ -118,7 +118,7 @@ EaseIM.setGroupProfileProvider(object : EaseGroupProfileProvider {
          // 同时可以将获取到的信息通过 EaseIM.updateUsersInfo() 更新到缓存中。获取 Profile 时，UIKit 会先从缓存中查询。
      }
  })
- // Group 类型设置 setGroupProfileProvider
+ // 通过 setGroupProfileProvider 设置群组信息
  EaseIM.setGroupProfileProvider(object : EaseGroupProfileProvider {
 
     override fun getGroup(id: String?): EaseGroupProfile? {
@@ -141,15 +141,11 @@ EaseIM.setGroupProfileProvider(object : EaseGroupProfileProvider {
 
 ## UIKit 信息处理逻辑
 
-1. 如果信息已经缓存到内存，当页面需要显示信息时，UIKit 会首先从内存中获取缓存数据并进行页面的渲染。如果缓存没有，则进入下一步。
+1. 如果信息已经缓存到内存，当页面需要显示信息时，UIKit 会首先从内存中获取缓存数据并进行页面的渲染。
 
-2. 单群聊 UIKit 调用 provider 同步方法从应用本地获取信息，开发者可以从应用本地的数据库或者内存中获取并提供对应信息。
+2. 如果没有缓存数据，你可以从 app 的本地数据库或内存中获取数据，构建 `EaseProfile` 对象，使用 `getUser` 方法返回 `EaseProfile` 对象。这样，UIKit 会利用 `EaseProfile` 对象更新 UI 上的信息。
 
-   UIKit 获取到信息后进行页面的渲染。同时，对获取到的信息进行缓存。
-
-3. 如果同步方法获取数据为空，当列表页面停止滑动时，UIKit 会将当前页面可见的条目所需的信息，在排除缓存和同步方法提供的数据后，通过 provider 提供的异步方法返给开发者。
-
-   开发者从服务器获取对应的信息后，通过 `onValueSuccess` 提供给 UIKit。UIKit 收到数据后，会对列表进行刷新并更新对应的数据。
+3. 若通过 `getUser` 方法未获取到数据，UIKit provider 会通过 `fetchUsers` 方法从你的服务器中获取数据：列表页面停止滑动时，UIKit 会首先从缓存中获取数据，提供不存在缓存数据的用户 ID 列表，从服务器查询这些用户的数据。你可以构建 `List<EaseProfile>` 对象，调用 `fetchUsers` 方法时，会通过 `onValueSuccess(List<EaseProfile>)` 返回数据。
 
 ## 更新 UIKit 缓存信息
 

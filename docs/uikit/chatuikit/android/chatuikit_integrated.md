@@ -16,7 +16,7 @@
 
 ### Module 远程依赖
 
-在 app 项目 build.gradle.kts 中添加以下依赖：
+在 app 项目 `build.gradle.kts` 中添加以下依赖：
 
 ```kotlin
 implementation("io.hyphenate:ease-chat-kit:4.7.0")
