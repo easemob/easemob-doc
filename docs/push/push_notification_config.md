@@ -536,7 +536,7 @@ FCM 通道推送通知示例如下：
 | `useDefaultVibrate` | Bool   | 是否使用系统默认振动模式控制开关。<br/> - `true`：是；<br/> - `false`：否。 |
 | `useDefaultLight`   | Bool   | 是否使用默认呼吸灯模式控制开关。<br/> - `true`：是；<br/> - `false`：否。 |
 | `vibrateConfig`     | String | 安卓自定义通知消息振动模式，每个数组元素按照 “[0-9]+｜[0-9]+[sS]｜[0-9]+[.][0-9]{1,9}｜[0-9]+[.][0-9]{1,9}[sS]“ 格式，取值样例 [“3.5S”,”2S”,“1S”,“1.5S”]，数组元素最多支持 10 个，每个元素数值整数大于 0 小于等于 60。 |
-| `visibility`        | String | 安卓通知栏消息可见性，取值如下：`VISIBILITY_UNSPECIFIEDPRIVATEPUBLICSECRET`。取值说明请参考[锁屏不展示通知内容](https://developer.huawei.com/consumer/cn/doc/development/HMS-Guides/push-other#h1-1576835261364)。 |
+| `visibility`        | String | 安卓通知栏消息可见性，取值如下：<br/>`VISIBILITY_UNSPECIFIED`：未指定 `visibility`，效果等同于设置了 `PRIVATE`。<br/>`PUBLIC`：锁屏时收到通知栏消息，显示消息内容。<br/>`SECRET`：锁屏时收到通知栏消息，不提示收到通知消息。<br/>`PRIVATE`：设置了锁屏密码，**锁屏通知**（导航：**设置**--**通知中心**）选择**隐藏通知内容**时收到通知消息，不显示消息内容。<br/>取值说明请参考[锁屏不展示通知内容](https://developer.huawei.com/consumer/cn/doc/development/HMS-Guides/push-other#h1-1576835261364)。 |
 | `lightSettings`     | Object | [自定义呼吸灯模式](#自定义呼吸灯模式)。 |
 | `foregroundShow`    | Bool   | 设备应用在前台时通知栏消息是否前台展示开关。<br/> - `true`：是；<br/> - `false`：否。 |
 | `inboxContent`      | List   | 当 style 为 `3` 时，Inbox 样式的内容（必选），支持最大 5 条内容，每条最大长度 1024 字符。展示效果请参考[Inbox 样式](https://developer.huawei.com/consumer/cn/doc/development/HMS-Guides/push-other#inbox_style)章节。 |
