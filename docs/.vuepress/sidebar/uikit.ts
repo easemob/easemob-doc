@@ -60,6 +60,7 @@ const chatUikitSidebar = [
       { text: '群详情', link: 'chatuikit_custom_group_details.html' },
       { text: '通用可配项', link: 'chatuikit_config_item.html' },
       { text: '进阶用法', link: 'chatuikit_advancedusage.html' },
+      { text: '国际化', link: 'chatuikit_internationalization.html' },
       { text: '页面 ViewModel 中可重载方法', link: 'chatuikit_listener.html' },
       { text: '拦截主要页面点击跳转事件', link: 'chatuikit_customize_clickjump.html' },
     ],
