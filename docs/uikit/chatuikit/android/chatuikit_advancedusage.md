@@ -6,14 +6,14 @@
 
 如果默认的 Activity 及其提供的可配置项不满足需求时，需要你继承默认的 Activity 新增需要的逻辑。如果该 Activity 为 UIKit 内部调用的页面，你可以通过下面方法修改 Activity 的跳转。
 
-例如，若 `EaseChatActivity` 无法满足当前需求，可以继承 `EaseChatActivity` 实现新的 `ChatActivity`。当调用 `EaseChatActivity.actionStart` 跳转页面时，UIKit 会通过`getActivityRoute()` 拦截原有跳转，而将跳转指向 `ChatActivity`。
+例如，若 `EaseChatActivity` 无法满足当前需求，可以继承 `EaseChatActivity` 实现新的 `ChatActivity`。当调用 `EaseChatActivity.actionStart` 跳转页面时，UIKit 会通过 `getActivityRoute()` 拦截原有跳转，而将跳转指向 `ChatActivity`。
 
 :::tip
 只有实现了 `EaseIM.getCustomActivityRoute()?.getActivityRoute()` 的 Activity 才可以进行拦截。
 :::
 
 ```kotlin
-// EaseChatActivity 中的跳转实现
+//实现 EaseChatActivity 页面的 getActivityRoute
 
 companion object {
     private const val REQUEST_CODE_STORAGE_PICTURE = 111

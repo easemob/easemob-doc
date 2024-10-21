@@ -60,6 +60,7 @@ const chatUikitSidebar = [
       { text: '群详情', link: 'chatuikit_custom_group_details.html' },
       { text: '通用可配项', link: 'chatuikit_config_item.html' },
       { text: '进阶用法', link: 'chatuikit_advancedusage.html' },
+      { text: '国际化', link: 'chatuikit_internationalization.html' },
       { text: '页面 ViewModel 中可重载方法', link: 'chatuikit_listener.html' },
       { text: '拦截主要页面点击跳转事件', link: 'chatuikit_customize_clickjump.html' },
     ],
@@ -112,6 +113,7 @@ const chatUikitSidebar = [
       { text: '消息', link: 'chatuikit_chat.html' },
       { text: '通讯录', link: 'chatuikit_contactlist.html' },
       { text: '音视频通话', link: 'chatuikit_video.html' },
+      { text: '国际化', link: 'chatuikit_internationalization.html' },
     ],
     only: ['web']
   }, 
@@ -168,7 +170,7 @@ const chatUikitSidebar = [
       { text: '联系人详情', link: 'chatuikit_custom_contact_details.html' },
       { text: '群详情', link: 'chatuikit_custom_group_details.html' },
       { text: '用户信息提供', link: 'chatuikit_userinfo.html' },
-      { text: '国际化', link: 'chatuikit_internationalization.html', except: ['android'] },
+      { text: '国际化', link: 'chatuikit_internationalization.html' },
       { text: '进阶用法', link: 'chatuikit_advancedusage.html' },
     ],
     only: ['android', 'react-native', 'flutter']

@@ -130,7 +130,7 @@ EaseContactsListFragment.Builder()
 class CustomContactListAdapter : EaseContactListAdapter() {
     override fun getItemNotEmptyViewType(position: Int): Int {
         // 根据消息类型设置自定义 itemViewType。
-        // 如果使用默认的 itemViewTyp2，返回 super.getItemNotEmptyViewType(position) 即可。
+        // 如果使用默认的 itemViewType，返回 super.getItemNotEmptyViewType(position) 即可。
         return CUSTOM_YOUR_CONTACT_TYPE
     }
 
@@ -197,7 +197,7 @@ EaseContactsListFragment.Builder()
 
 其他标记为 open 的方法均为可重载方法。如有需要，可重载对应方法实现自己业务逻辑。
 
-### 获取联系人系统通知未读数
+### 获取好友请求未读数
 
 ```kotlin
 val systemConversation = EaseNotificationMsgManager.getInstance().getConversation() 
