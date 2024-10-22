@@ -368,7 +368,13 @@ const documentSidebar = [
       },
       { text: '在线状态订阅', link: 'presence.html' },
       { text: '消息表情回复', link: 'reaction.html' },
-      { text: '离线推送', link: 'push.html' },
+      { 
+        text: '离线推送',
+        children: [
+          { text: '离线推送设置', link: 'push.html' },
+          { text: '离线推送的消息扩展', link: 'push_extension.html' }
+        ]
+      },
     ],
     only: ['server-side']
   },
