@@ -9,7 +9,7 @@
 | 字段                   | 类型         | 作用  |
 | ---------------------- | ------------ | ------------------ |
 | `em_push_filter`     | Object       | 推送过滤。                                                   |
-| `em_at_list`             | List<String> | @列表。      |
+| `em_at_list`             | `List<String>` | `@`列表。      |
 | `em_push_template `      | Object       | 推送模板。     |
 | `em_ignore_notification` | Boolean      | 静默消息开关，`true` 表示不推送。  |
 | `em_force_notification`  | Boolean      | 强制推送开关，`true` 则不检查用户是否开启免打扰。  |
@@ -22,18 +22,18 @@
 
 | 字段                 | 类型         | 作用                     |
 | ----------------     | ------------ | ------------------------ |
-| `accept_device_id`     | List<String> | 接收推送通知的设备 ID 列表。   |
-| `ignore_device_id`     | List<String> | 不接收推送通知的设备 ID 列表。 |
-| `accept_notifier_name` | List<String> | 接收推送的证书名列表。     |
-| `ignore_notifier_name` | List<String> | 不接收推送的证书名列表。   |
+| `accept_device_id`     | `List<String>` | 接收推送通知的设备 ID 列表。   |
+| `ignore_device_id`     | `List<String>` | 不接收推送通知的设备 ID 列表。 |
+| `accept_notifier_name` | `List<String>` | 接收推送的证书名列表。     |
+| `ignore_notifier_name` | `List<String>` | 不接收推送的证书名列表。   |
 
 `em_push_template` 结构如下：
 
 | 字段         | 类型         | 作用                                                         |
 | ------------ | ------------ | ------------------------------------------------------------ |
 | `name`         | String       | 推送模板名称。                                                 |
-| `title_args`   | List<String> | 推送模板标题参数，内置参数：发送者昵称 `{$fromNickname}`。      |
-| `content_args` | List<String> | 推送模板内容参数，内置参数：消息内容 `{$msg}`，如果开通了翻译，消息内容会跟随翻译结果显示。 |
+| `title_args`   | `List<String>` | 推送模板标题参数，内置参数：发送者昵称 `{$fromNickname}`。      |
+| `content_args` | `List<String>` | 推送模板内容参数，内置参数：消息内容 `{$msg}`，如果开通了翻译，消息内容会跟随翻译结果显示。 |
 
 关于 `title_args` 和 `content_args` 字段的设置，详见[推送模板文档](push.html#使用推送模板)。
 
