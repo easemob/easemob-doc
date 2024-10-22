@@ -74,7 +74,7 @@ String cursor = result.getCursor();
    EMClient.getInstance().groupManager().applyJoinToGroup(groupId, "your reason");
    ```
 
-   群主或群管理员收到 `EMGroupChangeListener#OnRequestToJoinReceivedFromGroup` 回调：
+   群主或群管理员收到 `EMGroupChangeListener#OnRequestToJoinReceived` 回调：
 
    - 若同意加入群组，需要调用 `acceptApplication` 方法。
 
