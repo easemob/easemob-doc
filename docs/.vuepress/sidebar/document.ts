@@ -372,7 +372,7 @@ const documentSidebar = [
         text: '离线推送',
         children: [
           { text: '离线推送设置', link: 'push.html' },
-          { text: '离线推送的消息扩展', link: 'chatroom_manage.html' }
+          { text: '离线推送的消息扩展', link: 'push_extension.html' }
         ]
       },
     ],
