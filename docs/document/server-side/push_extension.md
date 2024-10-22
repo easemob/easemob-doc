@@ -84,7 +84,7 @@
 | `category`        | String  | 消息分类。                              |
 | `click_action`    | String  | 点击跳转应用内页。                      |
 | `is_test_message` | Boolean | 是否是推送测试消息(beta 版仅支持测试)。 |
-| `notify_id`       | Integer  | 通知 ID，相同的 ID 通知替换。             |
+| `notify_id`       | Integer | 通知 ID，相同的 ID 通知替换。             |
 | `receipt_id`      | String  | 回执 ID。                                |
 
 ## 示例
@@ -141,21 +141,23 @@
             "fcm_options": {
                 "key": "value"
             },
-            "em_push_xiaomi_notify_id": 1,
-            "em_push_xiaomi_channel_id": "",
-            "em_push_huawei_category": "",
-            "xiaomi_click_action": "",
-            "vivo_click_activity": "",
-            "oppo_click_activity": "",
-            "meizu_click_activity": "",
-            "huawei_click_action": "",
-            "huawei_channel_id": "",
             "fcm_channel_id": "",
-            "oppo_channel_id": "",
-            "xiaomi_channel_id": "",
-            "vivo_category": "",
             "honor_click_action": "",
             "honor_importance": ""
+            "honor_target_user_type": 0
+            "huawei_target_user_type": 0
+            "huawei_category": "",
+            "huawei_receipt_id": "",
+            "huawei_click_action": "",
+            "huawei_channel_id": "",
+            "meizu_click_activity": "",
+            "xiaomi_channel_id": "",
+            "oppo_channel_id": "",
+            "oppo_click_activity": "",
+            "vivo_category": "",
+            "vivo_click_activity": "",
+            "xiaomi_channel_id": "",
+            "xiaomi_click_action": "",
         },
         "em_harmony_push_ext": {
           "click_action": "com.a.b.shot",
