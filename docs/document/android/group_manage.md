@@ -292,7 +292,7 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
     }
 
     // 群主或群管理员收到进群申请。群主和所有管理员收到该回调。
-    public void OnRequestToJoinReceivedFromGroup(string groupId, string groupName, string applicant, string reason){
+    public void onRequestToJoinReceived(String groupId, String groupName, String applicant, String reason){
     }
 
     // 群主或群管理员同意用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
