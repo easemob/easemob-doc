@@ -16,7 +16,7 @@
 | `em_apns_ext`            | Object       | APNs 配置。 |
 | `em_android_push_ext`    | Object       | Android 配置。 |
 | `em_harmony_push_ext`    | Object       | 鸿蒙推送扩展配置。 |
-| `em_push_ext`            | Object       | 新的推送配置，用于集中管理，后续通用的配置会添加到该字段。 |
+| `em_push_ext`            | Object       | 通用的配置。 |
 
 `em_push_filter` 结构如下：
 
