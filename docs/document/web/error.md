@@ -16,7 +16,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | -3     | REQUEST_PARAMETER_ERROR               | 参数错误。                                     |
 | -4     | REQUEST_ABORT               | 取消请求。                                     |
 | 1      | WEBIM_CONNCTION_OPEN_ERROR                    | 登录失败：获取 token 接口请求失败或 Token 无效。                          |
-| 2      | WEBIM_CONNCTION_AUTH_ERROR                     | 鉴权失败：调用 API 时校验 App Key 失败，App Key 不合法。     |
+| 2      | WEBIM_CONNCTION_AUTH_ERROR                     | 登录鉴权失败。     |
 | 12     | WEBIM_CONNCTION_GETROSTER_ERROR                | 获取 Chat token 失败：通过 Agora token 置换 Chat token 失败。 |
 | 16     | WEBIM_CONNCTION_DISCONNECTED                   | WebSocket 断开连接：由于断网等原因 WebSocket 已经断开。      |
 | 17     | WEBIM_CONNCTION_AJAX_ERROR                     | 服务请求的通用错误：请求服务器未成功时的默认错误。 |
