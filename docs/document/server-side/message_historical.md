@@ -122,6 +122,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | `msg_id`    | String | 消息 ID。       |
 | `timestamp` | Long   | 消息发送完成的 UNIX 时间戳，单位为毫秒，UTC 时间。         |
 | `direction` | String | 消息方向，值为 `outgoing`，即当前用户发送的消息。 |
+| `to` | String | 内部字段，开发者可忽略。 |
+| `from` | String | 内部字段，开发者可忽略。 |
 | `chat_type` | String | 会话类型：<br/> - `chat`: 单聊；<br/> - `groupchat`: 群聊；<br/> - `chatroom`: 聊天室。 |
 | `payload`   | JSON   | 消息的具体内容。例如，消息扩展信息等。   |
 | `payload.from`      | String | 消息发送方的用户 ID。       |
