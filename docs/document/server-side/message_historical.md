@@ -122,10 +122,12 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | `msg_id`    | String | 消息 ID。       |
 | `timestamp` | Long   | 消息发送完成的 UNIX 时间戳，单位为毫秒，UTC 时间。         |
 | `direction` | String | 消息方向，值为 `outgoing`，即当前用户发送的消息。 |
-| `from`      | String | 消息发送方的用户 ID。       |
-| `to`        | String | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。  |
+| `to` | String | 内部字段，开发者可忽略。 |
+| `from` | String | 内部字段，开发者可忽略。 |
 | `chat_type` | String | 会话类型：<br/> - `chat`: 单聊；<br/> - `groupchat`: 群聊；<br/> - `chatroom`: 聊天室。 |
 | `payload`   | JSON   | 消息的具体内容。例如，消息扩展信息等。   |
+| `payload.from`      | String | 消息发送方的用户 ID。       |
+| `payload.to`        | String | 消息接收方：<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。  |
 
 历史消息记录为 JSON 类型，示例如下：
 
@@ -146,8 +148,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
       "ext":
       {
         "key1": "value1",              ...        },
-        "from":"XXXX",
-        "to":"XXXX"
+      "from":"XXXX",
+      "to":"XXXX"
   }
 }
 ```
@@ -339,7 +341,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 | 参数          | 类型   | 描述                                             |
 | :------------ | :----- | :----------------------------------------------- |
-| `customExts`  | JSON   | 自定义扩展属性。你可以自行设置扩展属性中的字段。 |
+| `customExts`/`v2:customExts`  | Array/JSON     | 用户自定义的事件属性。该参数为可选，不需要可以不传。<br/> - `customExts` 为旧版参数，数组类型，最多可包含 16 个元素。<br/> - `v2:customExts` 为新版参数，Map<String,String> 类型，最多可以包含 16 个元素。推荐使用该新版参数。 |
 | `customEvent` | String | 自定义事件类型。                                 |
 | `type`        | String | 消息类型。自定义消息为 `custom`。                |
 

@@ -20,7 +20,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Unity SDK 通过 `IChatManager` 和 `Message` 类实现消息的发送和接收。
+环信即时通讯 IM SDK 通过 `IChatManager` 和 `Message` 类实现消息的发送和接收。
 
 其中，发送和接收消息的逻辑如下：
 
