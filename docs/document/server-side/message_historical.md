@@ -348,18 +348,29 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 自定义类型消息格式示例如下：
 
 ```json
-"bodies":
+
+"bodies": 
 [
-  {
-  "customExts":
     {
-    "name":"flower",
-    "size":"16",
-    "price":"100"
-    },
-  "customEvent":"gift_1",
-  "type":"custom"
- }
+        "v2:customExts": {
+            "name": "flower",
+            "size": "16",
+            "price": "100"
+        },
+        "customExts": [
+            {
+                "name": "flower"
+            },
+            {
+                "size": "16"
+            },
+            {
+                "price": "100"
+            }
+        ],
+        "customEvent": "gift_1",
+        "type": "custom"
+    }
 ]
 ```
 
