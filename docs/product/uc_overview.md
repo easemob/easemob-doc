@@ -84,6 +84,7 @@
 
 **免费授权开源**
 
-通过签署授权协议，环信可提供环信通源码以帮助合作伙伴或最终客户降低开发成本，加速项目进程。请联系何先生 (Tel:15910649500) 或者微信 扫一扫，快速添加
+通过签署授权协议，环信可提供环信通源码以帮助合作伙伴或最终客户降低开发成本，加速项目进程。请通过微信 扫一扫，快速添加
 
-![img](@static/images/privitization/deploy_wechat_code.png)
+<br/>
+<img src="@static/images/privitization/deploy_wechat_code.jpg" width="200" />

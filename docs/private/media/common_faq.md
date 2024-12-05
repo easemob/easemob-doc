@@ -28,9 +28,11 @@
 -----
 
 
-开通环信私有化音视频服务，请联系商务经理何先生 (Tel:15910649500) 或者微信 扫一扫，快速添加
+<span>开通环信私有化音视频服务，请微信 扫一扫，快速添加</span>
 
-![img](@static/images/privitization/deploy_wechat_code.png)
+<br/>
+<img src="@static/images/privitization/deploy_wechat_code.jpg" width="200" />
+
 
 ### 网络异常和用户异常退出的处理
 

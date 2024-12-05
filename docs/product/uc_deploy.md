@@ -94,7 +94,8 @@
 
 微信 扫一扫，添加方案负责人：
 
-![img](@static/images/privitization/deploy_wechat_code.png)
+<img src="@static/images/privitization/deploy_wechat_code.jpg" width="200" />
+
 
 2. 提交工单
 
