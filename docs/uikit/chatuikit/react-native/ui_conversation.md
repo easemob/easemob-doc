@@ -43,7 +43,7 @@ export default function ChatScreen(): JSX.Element {
 
 你可以设置 `ConversationListFragment` 中的 `RenderItem` 自定义会话样式，例如自定义头像、消息未读数以及消息时间戳等。
 
-:::notice
+:::tip
 如果开启侧滑功能，则需要设置侧滑组件的宽度。
 :::
 

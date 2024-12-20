@@ -58,7 +58,7 @@
 
 单设备登录时，子区所属群组的所有成员均会收到 `EMChatThreadManagerDelegate#onChatThreadDestroyed` 回调；多设备登录时，其他设备会同时收到 `- (void)multiDevicesThreadEventDidReceive:(EMMultiDevicesEvent)aEvent threadId:(NSString *)aThreadId ext:(id)aExt;` 回调，回调事件为 `EMMultiDevicesEventThreadDestroy`。
 
-:::notice
+:::tip
 解散子区后，将删除本地数据库及内存中的群相关信息及群会话，谨慎操作。
 :::
 

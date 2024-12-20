@@ -150,7 +150,7 @@ conn.getChatRoomAllowlist(option).then(res => console.log(res));
 
 所有聊天室成员可以调用 `isInChatRoomAllowlist` 方法检查自己是否在聊天室白名单中。
 
-:::notice
+:::tip
 聊天室的管理员可查询所有用户，普通成员只能查询自己。
 :::
 
@@ -213,7 +213,7 @@ conn.getChatRoomMuteList(option).then(res => console.log(res))
 
 仅聊天室所有者和管理员可调用 `muteChatRoomMember` 方法将指定成员添加至聊天室禁言列表。被禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `muteMember` 事件。
 
-:::notice
+:::tip
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
 :::
 
@@ -232,7 +232,7 @@ conn.muteChatRoomMember(option).then(res => console.log(res))
 
 仅聊天室所有者和管理员可调用 `unmuteChatRoomMember` 方法将一组成员解除禁言。
 
-:::notice
+:::tip
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。被解除禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `unmuteMember` 事件。
 :::
 

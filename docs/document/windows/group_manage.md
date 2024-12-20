@@ -74,7 +74,7 @@ SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, ca
   - 群主和群管理员同意入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinAcceptedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
   - 群主和群管理员拒绝入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinDeclinedFromGroup` 回调。
 
-:::notice
+:::tip
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
 :::
 
@@ -111,7 +111,7 @@ SDKClient.Instance.GroupManager.JoinPublicGroup(groupId, new CallBack(
 
 仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `OnDestroyedFromGroup` 回调并被踢出群组。
 
-:::notice
+:::tip
 该操作只有群主才能进行，是危险操作，解散群组后，将删除本地数据库及内存中的群相关信息及群会话。
 :::
 

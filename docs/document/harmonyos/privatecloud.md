@@ -14,7 +14,7 @@ options.setImPort(100);//设置私有云 IM 端口号
 
 ChatClient.getInstance().init(options);//最后初始化 SDK
 ```
-:::notice
+:::tip
 如果需要配置 HTTPS 只需在 REST 地址前加一个前缀。
 :::
 

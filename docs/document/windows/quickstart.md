@@ -98,7 +98,7 @@ SDKClient.Instance.CreateAccount(username, password, callback: new CallBack(
 ));
 ```
 
-:::notice
+:::tip
 该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见：[注册单个用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册单个用户)。
 :::
 

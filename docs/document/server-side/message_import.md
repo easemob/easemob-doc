@@ -206,7 +206,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 | `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。 |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是。这种情况下，需确保附件地址可直接访问，没有访问权限的限制。<br/> - （默认）`false`：否。     |
 
-:::notice
+:::tip
 与发送消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [发送群聊消息](message_group.html)。
 :::
 

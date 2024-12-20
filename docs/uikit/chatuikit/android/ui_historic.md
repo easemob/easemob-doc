@@ -34,7 +34,7 @@ EaseIMKit 支持 Gradle 接入和 Module 源码集成
 
 #### Gradle 接入集成
 
-:::notice 重大变动
+:::tip 重大变动
 远程仓库统一由 JCenter 迁移到 `MavenCentral`，依赖库的域名由 “com.hyphenate” 修改为 “io.hyphenate”，详见 [环信即时通讯 IM Android 快速开始](/document/android/quickstart.html)。
 :::
 
@@ -45,7 +45,7 @@ implementation 'io.hyphenate:hyphenate-chat:xxx版本'
 
 **EaseIMKit 必须依赖环信 IM SDK，因而在使用 EaseIMKit 时必须同时添加环信 IM SDK 依赖。**
 
-:::notice
+:::tip
 
 1. IM SDK **3.8.0** 版本以后，远程依赖的 `artifactId` 修改为 `hyphenate-chat`，且该版本以后中不再包含音视频相关逻辑。
 2. IM SDK **3.8.0** 以下，远程依赖，包含音视频的 `artifactId` 为 `hyphenate-sdk`，不包含音视频的 `artifactId` 为 `hyphenate-sdk-lite`。如果想使用不包含音视频通话的 SDK，用 `implementation 'io.hyphenate:hyphenate-sdk-lite:xxx版本`'。
@@ -72,7 +72,7 @@ EaseIMKit 中位置消息使用的是百度地图定位 jar 包，为了防止�
 
 在 application 的 onCreate 下调用初始化 EaseIMKit 的方法。
 
-:::notice
+:::tip
 EaseIMKit 初始化里已包含 SDK 的初始化，不需要再去调用 SDK 的初始化。
 :::
 
@@ -102,7 +102,7 @@ EaseIMKit 提供了 ChatUIKitConversationListFragment，需要将其或者其子
 
 ![img](/images/android/easeim.jpeg)
 
-:::notice
+:::tip
 要实现自定义头像及昵称，请参考 [设置头像和昵称](/document/android/userprofile.html#设置当前用户的属性)。
 :::
 
@@ -615,7 +615,7 @@ public class ChatTxtNewAdapterDelegate extends EaseMessageAdapterDelegate <EMMes
 }
 ```
 
-:::notice
+:::tip
 （1）相同的消息类型（比如例子中消息类型是 EMMessage.Type.TXT）且通过标记判断类型时，在第 5 步注册对话类型时，应将该对话类型注册于基类的对话类型之前（即 ChatTxtNewAdapterDelegate 注册应在 EaseTextAdapterDelegate 之前）。
 
 （2）对于 `item.getBooleanAttribute(ChatUIKitConstant.MESSAGE_ATTR_IS_TXT_NEW, false)` 可以理解为一种标记，在发送消息时设置，如下；
@@ -886,7 +886,7 @@ ChatUIKitClient.getInstance().setUserProvider(new ChatUIKitUserProfileProvider()
 
 EaseIMKit 中会话列表，聊天列表及联系人列表，内部已经添加 ChatUIKitUserProfileProvider 的判断，当展示数据时优先从 ChatUIKitUserProfileProvider 获取头像和昵称数据，如果有则展示，如果没有头像采用默认头像，昵称展示为环信 ID。
 
-:::notice 建议方案
+:::tip 建议方案
 开发者先将相关用户信息从服务器中获取并存储到数据库中，在 getUser(String username) 方法调用时，从数据库中根据 username（环信 ID）取出相应的用户数据，生成 ChatUIKitUser 对象 user，并给 user 赋值 nickname 及 avatar 属性，最后返回这个 user 即可。
 :::
 

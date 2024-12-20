@@ -6,7 +6,7 @@
 
 关于用户的在线、离线和自定义状态的定义，详见[用户在线状态管理](/product/product_user_presence.html)。
 
-:::notice
+:::tip
 使用该特性前，你需要联系商务开通。
 :::
 

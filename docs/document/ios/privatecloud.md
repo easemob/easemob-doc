@@ -16,7 +16,7 @@ options.rtcUrlDomain= "wss://mprtc.easemob.com";//设置多人音视频的服务
 [[EMClient sharedClient] initializeSDKWithOptions:options];
 ```
 
-:::notice
+:::tip
 如果需要配置 HTTPS 只需加一个属性即可。
 :::
 

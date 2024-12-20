@@ -192,7 +192,7 @@ ChatClient.getInstance().chatroomManager()?.removeFromChatroomWhitelist(chatroom
 
 仅聊天室所有者和管理员可以调用 `ChatroomManager#muteChatroomMembers` 方法将指定成员添加至聊天室禁言列表，操作者外其他成员收到 `ChatroomListener#onMutelistAdded` 回调。
 
-:::notice
+:::tip
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
 :::
 
@@ -209,7 +209,7 @@ ChatClient.getInstance().chatroomManager()?.muteChatroomMembers(chatroomId, memb
 
 仅聊天室所有者和管理员可以调用 `ChatroomManager#unmuteChatroomMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，其他成员收到 `ChatroomListener#onMutelistRemoved` 回调。
 
-:::notice
+:::tip
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。
 :::
 

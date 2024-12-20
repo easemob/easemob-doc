@@ -78,7 +78,7 @@ try {
 
 仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `EMGroupEventHandler#onGroupDestroyed` 事件并被踢出群组。
 
-:::notice
+:::tip
 解散群组后，将删除本地数据库及内存中的群相关信息及群会话，谨慎操作。
 :::
 
@@ -99,7 +99,7 @@ try {
     - 群主或群管理员同意入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinAcceptedFromGroup` 事件，其他群成员收到`EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
     - 群主或群管理员拒绝入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 事件。
 
-:::notice
+:::tip
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
 :::
 

@@ -91,7 +91,7 @@ emedia.config({
 
 ### 6. 进入会议
 
-:::notice
+:::tip
 加入会议之前必须先要调用 emedia.mgr.setIdentity 方法设置 emedia 对象的memName 、token。
 :::
 ```
@@ -163,7 +163,7 @@ emedia.mgr.streamBindVideo(pushedStream, videoTag);
 #### 8.1 监听 onStreamAdded 方法
 场景：当有远端流加入时。
 
-:::notice
+:::tip
 自己发布的本地流也会触发 onStreamAdded 方法，
 stream.located() == true 为自己发的本地流，
 也可以在这里绑定 video标签，显示本地流。
@@ -298,7 +298,7 @@ emedia.mgr.onNetworkDisconnect = streamId => {} //streamId 会议中的流 ID
 
 这里的创建会议 不同于快速集成中的加入会议，这里的是属于另一套逻辑，建议使用快速集成中的加入会议
 
-:::notice
+:::tip
 如果只单纯的创建，没进行操作，则创建者不是会议的成员，没有相应的角色，不能进行其他操作。
 :::
 ##### **1.1 调用 emedia.mgr.createConference 方法创建会议**
@@ -372,7 +372,7 @@ const confr = await emedia.mgr.createConference(params);
 ```
 
 ##### **2.2 调用 emedia.mgr.joinRoom 加入会议时配置**
-:::notice
+:::tip
 只有第一个加入会议的人，配置的才有效，参数需要放到 config 对象中。
 :::
 ```
@@ -933,7 +933,7 @@ emedia.mgr.grantRole(option.confr, option.memberNames, option.role)
 
 #### **4. 角色降级**
 
-:::notice
+:::tip
 注意：只能角色降级 从管理员到主播、从主播到观众、从管理员到观众，不可逆向操作
 :::
 与会成员调用 **emedia.mgr.degradeRole** 方法就会角色降级。
@@ -945,7 +945,7 @@ emedia.mgr.degradeRole(confrId, [memName], toRole);
 
 #### **5. 管理员踢人**
 
-:::notice
+:::tip
 只有管理员可踢人
 :::
 ```
@@ -956,7 +956,7 @@ emedia.mgr.kickMembersById(confr, memberNames)
 
 #### **6. 管理员执行全体静音/取消全体静音**
 
-:::notice
+:::tip
 只有管理员可操作，其他角色操作不生效，管理员不会被静音
 :::
 
@@ -984,7 +984,7 @@ emedia.mgr.onUnMuteAll = () => {
 
 #### **7. 管理员指定成员静音/取消指定成员静音**
 
-:::notice
+:::tip
 只有管理员可操作，其他角色操作不生效
 :::
 

@@ -201,7 +201,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <YourToken>' -H 'share-secret: f0Vr-uyyEeiHpHmsu53XXXXXXXXZYgyLkdfsZ4xo2Z0cSBnB' 'https://XXXX/XXXX/XXXX/chatfiles/7f456bf0-XXXX-XXXX-b630-777db304f26c'-o /Users/test/easemob/image/image.JPG
 ```
 
-:::notice
+:::tip
 上述请求示例中，`/Users/test/easemob/image/image.JPG` 为环信即时通讯 IM 的本地文件路径，使用时请替换为自己的文件路径，否则会请求失败。
 :::
 

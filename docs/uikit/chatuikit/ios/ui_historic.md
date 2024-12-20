@@ -35,7 +35,7 @@ pod 'EaseIMKit'
 
 需要在 `Podfile` 文件加上 `use_frameworks!`
 
-:::notice
+:::tip
 EaseIMKit: 对应 HyphenateChat SDK（HyphenateChat 不包含实时音视频，EaseIMKit 不包含音视频，EaseIM 依赖音视频库 EaseCallKit 后实现了音视频功能）
 
 EaseIMKit 中包含了拍照，发语音，发图片，发视频，发位置，发文件的功能，需要使用录音，摄像头，相册，地理位置的权限。需要在您项目的 info.plist 中添加对应权限。

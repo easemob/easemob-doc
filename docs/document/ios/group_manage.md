@@ -94,13 +94,13 @@ NSArray *members = @{@"member1",@"member2"};
                          error:nil];
 ```
 
-:::notice
+:::tip
 如果 `options.IsInviteNeedConfirm` 设置为 `false`，即直接加被邀请人进群。在此情况下，被邀请人设置非自动进群是不起作用的。
 :::
 
 ### 解散群组
 
-:::notice
+:::tip
 该操作只能群主才能进行。该操作是危险操作，解散群组后，将删除本地数据库及内存中的群相关信息及群会话。
 :::
 
@@ -114,7 +114,7 @@ NSArray *members = @{@"member1",@"member2"};
 
 ### 获取群组详情
 
-:::notice
+:::tip
 从 3.7.4 版本开始支持是否获取群组成员参数 `fetchMembers`。
 对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
 :::

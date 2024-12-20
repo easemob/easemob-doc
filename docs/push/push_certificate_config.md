@@ -12,6 +12,6 @@ iOS端推送集成：[iOS 推送集成](push_integration_process_ios.html)
 
 ![img](/images/instantpush/push_certificate_add.png)
 
-:::notice
+:::tip
 Push与IM使用相同的SDK，证书配置可以通用。
 :::

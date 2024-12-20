@@ -53,7 +53,7 @@ demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工�
 
 在 Xcode 中，向 **General > Embedded Binaries** 中添加依赖库。
 
-:::notice
+:::tip
 将**Do Not Embed** 改成**Embed & Sign**。
 :::
 
@@ -150,7 +150,7 @@ if (NSClassFromString(@"UNUserNotificationCenter")) {
 
 ##### 2.将获得的 deviceToken 传到 SDK
 
-:::notice
+:::tip
 如果是 iOS 13 及以上的系统，请将 SDK 更新至 v3.6.4 或以上版本。
 :::
 

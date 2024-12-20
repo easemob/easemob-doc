@@ -98,7 +98,7 @@ public class UserService {
 
 API 的返回值是响应式的，如果希望阻塞，可以使用上面例子中的 `.block()`。
 
-:::notice
+:::tip
 如果你的项目不是响应式的编程，那么请在调用的 Server SDK API 的结尾添加 `.block()`
 对使用的 API 添加 try/catch ，如果使用的 API 没有抛出异常，代表请求成功，反之则请求失败，通过异常 `EMException` 对象的 `getErrorCode()/getMessage()` 拿到错误码以及错误描述。
 :::

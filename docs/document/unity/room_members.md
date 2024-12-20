@@ -233,7 +233,7 @@ SDKClient.Instance.RoomManager.RemoveAllowListMembers(roomId, list, new CallBack
 
 仅聊天室所有者和管理员可以调用 `MuteRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `OnMuteListAddedFromRoom` 回调。
 
-:::notice
+:::tip
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
 :::
 
@@ -253,7 +253,7 @@ SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
 
 仅聊天室所有者和管理员可以调用 `UnMuteRoomMembers` 方法将成员移出聊天室禁言列表。被移出的群成员及其他未操作的管理员或者群主将会收到群组事件 `OnMuteListRemovedFromRoom`。
 
-:::notice
+:::tip
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。
 :::
 

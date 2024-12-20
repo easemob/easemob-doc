@@ -9,7 +9,7 @@
 - 安卓： [https://www.pgyer.com/h4XF](https://www.pgyer.com/h4XF)
 - iOS： [https://www.pgyer.com/9ISC](https://www.pgyer.com/9ISC)
 
-:::notice
+:::tip
 
 - Demo 只包含部分 IM 功能，详细参考 **功能说明**
 - Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo):::
@@ -29,7 +29,7 @@
 
 1. 下载 HBuilderx 编辑器 https://www.dcloud.io/hbuilderx.html
 
-:::notice
+:::tip
 项目中 HBuilderx 目前使用的最新版本，如果此前下载过 HBuilderx，为保证开发环境统一请更新到最新版本
 :::
 

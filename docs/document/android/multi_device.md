@@ -188,7 +188,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 你可以调用 `kickDevice` 或 `kickDeviceWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。调用这两种方法前，你需要首先通过 `EMClient#getLoggedInDevicesFromServer` 和 `EMDeviceInfo#getResource` 方法获取设备 ID。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 
@@ -204,7 +204,7 @@ EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIn
 
 你可以调用 `kickAllDevices` 或 `kickAllDevicesWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备踢下线。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 

@@ -80,7 +80,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 下表为发送各类消息的通用请求体，为 JSON 对象，是所有消息的外层结构。与单聊消息类似，不同类型的消息的请求体只是 `body` 字段内容存在差异。
 
-:::notice
+:::tip
 聊天室消息的通用请求体中的参数与[发送单聊消息](message_single.html)类似，唯一区别在于聊天室中的 `to` 字段表示消息接收方聊天室 ID 数组并增加了 `chatroom_msg_level` 参数用于设置消息优先级。<br/>
 :::
 

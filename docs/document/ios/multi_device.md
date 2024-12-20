@@ -155,7 +155,7 @@ EMClient.sharedClient.option.loginExtensionInfo = @"you was kicked out by other 
 
 你可以调用 `kickDeviceWithUsername` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录的设备踢下线。你需要首先调用 `getLoggedInDevicesFromServerWithUsername` 方法获取设备 ID。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 
@@ -177,7 +177,7 @@ NSString *password = @"";
 
 你可以调用 `kickAllDevicesWithUsername` 或 `kickAllDevicesWithUserId` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备都踢下线。 
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 

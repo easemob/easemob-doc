@@ -59,7 +59,7 @@ ChatClient.getInstance()
 
 单设备登录时，子区所属群组的所有成员均会收到 `ChatMessageEventListener#onChatMessageThreadDestroyed` 回调；多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventListener#onThreadEvent` 回调，回调事件为 `THREAD_DESTROY`。
 
-:::notice
+:::tip
 解散子区或解散子区所在的群组后，将删除本地数据库及内存中关于该子区的全部数据，需谨慎操作。
 :::
 

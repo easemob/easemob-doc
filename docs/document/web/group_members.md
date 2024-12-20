@@ -164,7 +164,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 
 你可使用 `getGroupMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
 
-:::notice
+:::tip
 每次最多可获取 10 个群成员的自定义属性。
 :::
 

@@ -47,7 +47,7 @@
 
 ![img](/images/applet/service_overview.png)
 
-:::notice
+:::tip
 1. 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。请根据您所在数据中心选择请求域名。
 2. 国内 VIP 区、客服专区客户请联系商务经理索要 REST API 请求地址。
 3. 支持 HTTP 和 HTTPS。

@@ -75,7 +75,7 @@ dependencies {
 }
 ```
 
-:::notice
+:::tip
 如果使用 3.8.0 之前的版本，gradle 依赖需要按照下面格式添加：
 :::
 

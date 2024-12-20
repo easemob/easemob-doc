@@ -33,7 +33,7 @@ APP创建成功后，将显示至【应用列表】中，选中创建的APP，�
 
 ![img](/images/instantpush/push_sdk_download.png)
 
-:::notice
+:::tip
 环信IM用户可直接使用，无需进行移动端集成。
 :::
 

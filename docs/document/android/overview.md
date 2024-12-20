@@ -41,7 +41,7 @@ options.setAppKey("Your appkey");
 EMClient.getInstance().init(context, options);
 ```
 
-:::notice
+:::tip
 需要在主进程中进行初始化。
 :::
 
@@ -69,7 +69,7 @@ EMClient.getInstance().init(context, options);
 EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 ```
 
-:::notice
+:::tip
 该注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用。
 :::
 
@@ -109,7 +109,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 
 **用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
-:::notice
+:::tip
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 :::
 

@@ -97,7 +97,7 @@ dependencies:
 
 在 app 的 `main` 下调用 SDK 初始化方法。
 
-:::notice
+:::tip
 em_chat_uikit 不包含 IM SDK 的初始化和登录，使用时确保已完成 SDK 初始化和登录。
 :::
 

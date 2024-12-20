@@ -6,7 +6,7 @@
 
 环信为用户使用uni-app开发原生应用并拥有音视频功能，特别提供了适配uni-app的音视频SDK和[uni-app原生插件](https://ext.dcloud.net.cn/plugin?id=3507)，用户可以集成后快速在android和ios原生客户端使用音视频功能。
 
-:::notice
+:::tip
 目前音视频插件仅支持运行在iOS以及Android，暂不支持运行在微信小程序使用。如需运行到微信小程序我们为此提供了小程序音视频SDK，请移步小程序集成多人音视频文档部分。
 :::
 使用 uni-app 集成多人音视频SDK，需要下载环信uni-app原生插件**emlive-pusher**、**emlive-player**配合一起使用。音视频SDK依赖IM SDK， 所以要先集成IM，并把IM SDK实例挂载在全局变量下：uni.WebIM = websdk， 可以参考[uni-app demo](https://download-sdk.oss-cn-beijing.aliyuncs.com/mp/downloads/webim-uniapp-demo.zip) utils/WebIM 文件。

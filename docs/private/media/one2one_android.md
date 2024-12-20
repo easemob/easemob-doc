@@ -143,7 +143,7 @@ dependencies {
  ...
 </manifest>
 ```
-:::notice
+:::tip
 在创建应用后，获取EASEMOB_APPKEY对应的value
 :::
 
@@ -224,7 +224,7 @@ protected void setGlobalListeners(){
 
 
 通过addCallStateChangeListener监听通话状态，在onCreate里面增加这个监听，包括网络连接状态呼入电话状态，听电话状态等都可以在这监听。<br>
-:::notice
+:::tip
 在收到 DISCONNECTED回调时才能finish当前页面保证通话所占用的资源都释放完，然后开始下一个通话;
 :::
 
@@ -370,7 +370,7 @@ EMClient.getInstance().callManager().switchCamera();
 #### 最大音频码率
 
 通话之前，可以设置通话音频的最大音频码率，设置方法如下
-:::notice
+:::tip
 设置最大音频比特率，取值范围 6 ~ 510。
 :::
 

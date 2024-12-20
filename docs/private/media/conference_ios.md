@@ -433,7 +433,7 @@ SDK没有提供邀请接口，可以自己实现，比如使用环信IM通过发
     [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 }
 ```
-:::notice
+:::tip
   使用环信IM邀请多个人时，建议使用群组消息。如果使用单聊发消息请注意每条消息中间的时间间隔，以防触发环信的垃圾消息防御机制。
   
   被邀请人解析出邀请消息中带的confrId和password，调用SDK的join接口加入会议，成为会议成员且角色是Speaker。

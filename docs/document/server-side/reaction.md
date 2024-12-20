@@ -343,7 +343,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={ms
 | `limit`   | Int    | 否       | 每页显示添加 Reaction 的用户数量。取值范围为 [1,50]，默认值为 `50`。   |
 | `cursor`  | String | 否       | 查询游标，指定数据查询的起始位置，分页获取时使用。             |
 
-:::notice
+:::tip
 
 分页获取时，服务器按用户 Reaction 添加时间的正序返回。若 `limit` 和 `cursor` 均不传值，服务器返回最早添加 Reaction 的 50 个用户。
 

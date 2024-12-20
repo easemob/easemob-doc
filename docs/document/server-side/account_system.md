@@ -274,7 +274,7 @@ POST https://{host}/{org_name}/{app_name}/users
 
 ##### 请求 body
 
-:::notice
+:::tip
 单次请求最多可注册 60 个用户 ID。
 :::
 

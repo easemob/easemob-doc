@@ -15,7 +15,7 @@
 
 ![img](/images/applet/applet-demo.png)
 
-:::notice
+:::tip
 
 - 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
 - Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)

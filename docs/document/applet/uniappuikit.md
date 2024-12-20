@@ -18,7 +18,7 @@ HBuilderx ⇒ 工具 ⇒ 插件安装 ⇒ 安装新插件 ⇒ 前往插件市场
 
 ### 集成说明
 
-:::notice
+:::tip
 小程序模版必须依赖环信 IM SDK，因而在使用小程序模版时必须同时添加环信 IM SDK 依赖。
 :::
 
@@ -111,7 +111,7 @@ import longPressModal from "@/components/longPressModal/index";
 - `hidePop` – Function，显隐框操作事件
 - `popStyle` – string，样式
 
-:::notice
+:::tip
 使用长按组件时候需要先获取当前窗口，再根据当前点击的位置来显示组件框：
 :::
 

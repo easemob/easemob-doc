@@ -144,7 +144,7 @@ dependencies {
 </manifest>
 ```
 
-:::notice
+:::tip
 在创建应用后，获取EASEMOB_APPKEY对应的value
 :::
 
@@ -193,7 +193,7 @@ DemoHelper还有一个重要的功能就是设置[EMConferenceListener](http://s
 通过这个监听可以在加入会议的时候获取到已经在会议的流或人员，
 调用EMConferenceManager#addConferenceListener(EMConferenceListener listener)方法指定回调监听
 成员加入或离开会议，数据流更新等。
-:::notice
+:::tip
 回调监听中的所有方法运行在子线程中，请勿在其中操作UI
 :::
 
@@ -353,7 +353,7 @@ pirvate void pubLocalStream() {
     });
 }
 ```
-:::notice
+:::tip
 注意：如果是纯音频会议，只需要在发布数据流时将EMStreamParam中的setVideoOff置为true即可，
       共享桌面时候发布的是桌面流 EMConferenceStream.StreamType.DESKTOP  
 :::
@@ -409,7 +409,7 @@ pirvate void pubLocalStream() {
 
 成员B可以调用EMConferenceManager#exitConference接口离开会议，
 会议中的其他成员会收到回调EMConferenceListener#onMemberExited
-:::notice
+:::tip
 注意：当最后一个成员调用leave接口后，会议会自动销毁
 :::
 ```
@@ -586,7 +586,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 ```
 EMClient.getInstance().conferenceManager().destoryConference()
 ``` 
-:::notice
+:::tip
   注意：只有管理员角色可以调用这个接口，可以在会议中显式调用这个接口，强制结束进行中的会议，会议中其他人在EMConferenceListener#onPassiveLeave回调里收到 error为 -411，message为 reason-conference-dismissed，收到这个以后调EMClient.getInstance().conferenceManager().exitConference() 主动退出会议。
 :::
 ```
@@ -666,7 +666,7 @@ EMClient.getInstance().conferenceManager().destroyConference(new EMValueCallBack
                                {...};
       }
 ```
-:::notice
+:::tip
 注意：设置会议人数限制只有是加入会议的第一个设置才有效，也就是会议的创建者。
 :::
 
@@ -1057,7 +1057,7 @@ isRecord(是否支持录制)和isMergeRecord(是否支持和流)这两个参数�
                                {...};
       }
 ```
-:::notice
+:::tip
 注意：设置会议人数限制只有是加入会议的第一个设置才有效，也就是会议的创建者。
 :::
 
@@ -1256,7 +1256,7 @@ EMClient.getInstance().conferenceManager().unsubscribe(emConferenceStream, new E
  // 关闭视频传输 
  EMClient.getInstance().conferenceManager().closeVideoTransfer();
 ```
-:::notice
+:::tip
 以上这四个方法都是修改 stream，群里其他成员都会收到 EMConferenceListener.onStreamUpdate()回调。
 :::
 ```
@@ -1769,7 +1769,7 @@ public void publishDesktop() {
 
 管理员可以调用kickMember api强制将成员从会议中移除。
 
-:::notice
+:::tip
 只有管理员角色可以调用踢人接口，可以在会议中踢走主播，被踢的主播在EMConferenceListener#onPassiveLeave回调里
 收到  error为 -412，message为 reason-beenkicked 。<br>收到这个以后调用 EMClient.getInstance().conferenceManager().
 exitConference()主动退出会议。

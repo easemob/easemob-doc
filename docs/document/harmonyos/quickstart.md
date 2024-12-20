@@ -128,7 +128,7 @@ ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
 });
 ```
 
-:::notice
+:::tip
 该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在[环信控制台](https://console.easemob.com/user/login)中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
 :::
 
@@ -142,7 +142,7 @@ ChatClient.getInstance().login(userId, pwd).then(() => {
 })
 ```
 
-:::notice
+:::tip
 1. 除了注册监听器，其他的 SDK 操作均需在登录之后进行。
 :::
 
