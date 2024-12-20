@@ -68,7 +68,7 @@
 | `invalid message`           | 无效的消息（协议内容一般不会有这个错误）。                     |
 | `expire message`            | 过期的消息，推送延迟超过一天的消息，不再推送。                 |
 | `user ignore push`          | 主动免打扰。      | 
-| `ignore push device id`     | 忽略用户设备推送（扩展限制接收或不接受推送设备）。    |
+| `ignore push device id`     | 忽略用户设备推送（扩展限制接收或不接收推送设备）。    |
 | `invalid VOIP notification` | 无效的 APNs VoIP 类型推送。   | 
 | `get push token fail`       | 获取推送 token 失败。       |
 | `push yet but fail `        | 已经推送，但是返回失败。       |

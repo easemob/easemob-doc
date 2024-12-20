@@ -485,7 +485,7 @@ void _sendBeginTyping() async {
 
 ```
 
-以下示例代码展示如何接受和解析输入状态的透传消息。
+以下示例代码展示如何接收和解析输入状态的透传消息。
 
 ```dart
 final int typingTime = 10;

@@ -80,7 +80,7 @@ ChatClient.getInstance().chatManager()?.removeMessageListener(msgListener);
 
 1. App 开启已读回执功能，即 SDK 初始化时将 `ChatOptions.setRequireReadAck` 设置为 `true`。
 ```TypeScript
-// 设置是否需要接受方已读确认,默认为true
+// 设置是否需要接收方已读确认,默认为true
 options.setRequireReadAck(true);
 ```
 
@@ -155,7 +155,7 @@ ChatClient.getInstance().chatManager()?.addMessageListener(msgListener);
 该功能开启后，接收方阅读消息后，SDK 底层会自动进行消息已读回执。
 
 ```TypeScript
-// 设置是否需要接受方已读确认,默认为 `true`。
+// 设置是否需要接收方已读确认,默认为 `true`。
 options.setRequireReadAck(true);
 ```
 

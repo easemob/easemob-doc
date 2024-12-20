@@ -74,7 +74,7 @@ ChatClient.getInstance().chatManager.addMessageListener({
 1. App 开启已读回执功能，即 SDK 初始化时将 `ChatOptions#requireAck` 设置为 `true`。
 
 ```TypeScript
-// 设置是否需要接受方已读确认,默认为true
+// 设置是否需要接收方已读确认,默认为true
 options.requireAck = true;
 ```
 

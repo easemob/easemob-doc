@@ -124,7 +124,7 @@ SDKClient.Instance.Login(username, passwd,
 | 1299   | THIRD_DEFAULT_FAILED                  | 除第三方内容审核服务的其他服务的消息审核结果为“拒绝”。    |
 | 1300   | REACTION_REACH_LIMIT                  | 该消息的 Reaction 数量已达到限制。   |
 | 1301   | REACTION_HAS_BEEN_OPERATED            | Reaction 重复添加。    |
-| 1302   | REACTION_OPERATION_IS_ILLEGAL         | 没有操作权限：用户对该 Reaction 没有操作权限。例如，没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接受者进行添加 Reaction 操作。  |
+| 1302   | REACTION_OPERATION_IS_ILLEGAL         | 没有操作权限：用户对该 Reaction 没有操作权限。例如，没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接收者进行添加 Reaction 操作。  |
 | 1400   | THREAD_NOT_EXIST                      | 未找到该子区，该子区不存在。 |
 | 1401   | THREAD_ALREADY_EXIST                  | 该消息 ID 下子区已存在，重复添加子区。   |
 | 1402   | THREAD_CREATE_MESSAGE_ILLEGAL         | 创建子区的消息无效：创建子区时父消息被撤回了，或者无法使用。    |

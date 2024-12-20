@@ -72,7 +72,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 1100   | PRESENCE_PARAM_EXCEED                          | 发布自定义在线状态时，参数长度超出限制。                     |
 | 1101   | REACTION_ALREADY_ADDED                         | Reaction 重复添加。                                          |
 | 1102   | REACTION_CREATING                              | 创建 Reaction 时，其他人正在创建。                           |
-| 1103   | REACTION_OPERATION_IS_ILLEGAL                  | 用户对该 Reaction 没有操作权限：没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接受者进行添加 Reaction 操作。 |
+| 1103   | REACTION_OPERATION_IS_ILLEGAL                  | 用户对该 Reaction 没有操作权限：没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接收者进行添加 Reaction 操作。 |
 | 1200   | TRANSLATION_NOT_VALID                          | 传入的语言 code 不合法。 |
 | 1201   | TRANSLATION_TEXT_TOO_LONG                      | 翻译的文本过长。                                             |
 | 1204   | TRANSLATION_FAILED                             | 获取翻译服务失败。                                           |

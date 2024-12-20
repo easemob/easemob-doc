@@ -30,7 +30,7 @@
  1. 开启已读回执功能，即 SDK 初始化时设置 `EMOptions#requireAck` 为 `true`。
 
  ```dart
-// 设置是否需要接受方已读确认,默认为 true
+// 设置是否需要接收方已读确认,默认为 true
     final options = EMOptions(
       appKey: appKey,
       requireAck: true,
