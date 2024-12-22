@@ -410,7 +410,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-2. 接收自定义消息与其他类型消息一致，详见[接收文本消息](#接收文本消息)。
+2. 接收自定义消息与其他类型消息一致，详见[接收文本消息](#发送和接收文本消息)。
 
 ## 发送和接收合并消息
 
@@ -526,7 +526,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-接收群定向消息与接收普通消息的操作相同，详见[接收文本消息](#接收文本消息)。
+接收群定向消息与接收普通消息的操作相同，详见[接收文本消息](#发送和接收文本消息)。
 
 ## 使用消息扩展字段
 
