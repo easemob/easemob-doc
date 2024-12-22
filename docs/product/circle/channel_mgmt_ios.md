@@ -183,7 +183,7 @@ EMClient.shared().circleManager?.fetchPrivateChannels(inCategory: self.serverId,
 
 ### 发送消息
 
-在频道中发送消息与在群组中发送消息的方式类似，唯一的区别在于接收方需要设置为频道 ID。详见 [发送群聊消息](/document/ios/message_send_receive.html#发送文本消息)。
+在频道中发送消息与在群组中发送消息的方式类似，唯一的区别在于接收方需要设置为频道 ID。详见 [发送群聊消息](/document/ios/message_send_receive.html)。
 
 ### 管理频道成员
 

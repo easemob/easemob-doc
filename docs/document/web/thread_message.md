@@ -74,7 +74,7 @@ function sendTextMessage() {
 
 ### 接收子区消息
 
-可以通过 `addEventHandler` 注册监听器接收各类消息的回调，详情参考 [接收消息](message_send_receive.html#接收消息)。
+可以通过 `addEventHandler` 注册监听器接收各类消息的回调，详情参考 [接收消息](message_send_receive.html#发送和接收文本消息)。
 
 示例代码如下：
 

@@ -354,10 +354,10 @@ projects:
                 link: /document/ios/message_forward.html
               - icon: /sdk/web.svg
                 text: Web
-                link: /document/web/message_send_receive.html#发送合并消息
+                link: /document/web/message_send_receive.html#发送和接收合并消息
               - icon: /sdk/applet.svg
                 text: 小程序
-                link: /document/applet/message_send_receive.html#发送合并消息
+                link: /document/applet/message_send_receive.html#发送和接收合并消息
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_forward.html   

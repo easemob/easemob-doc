@@ -272,5 +272,5 @@ features.chat.messageInput.typing = false;
 
 #### 自定义
 
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/web/message_send_receive.html#通过透传消息实现输入指示器)。
+本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/product/typing_indication.html)。
 

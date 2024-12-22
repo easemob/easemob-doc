@@ -52,7 +52,7 @@
 #### 一、App 未上线时，使用环信即时通讯 IM SDK 集成阶段测试用户出现消息丢失
 
 - 用户 B 在线的情况下收不到用户 A 发的群组消息：
-    1. 检查用户 A 在构建消息时，传的消息类型是不是群聊类型的，如果不是则用户 B 收不到用户 A 发的群组消息，详见 [Android 版构建消息](/document/android/message_send_receive.html#发送文本消息) 或 [iOS 版构建消息](/document/ios/message_send_receive.html#发送文本消息)。
+    1. 检查用户 A 在构建消息时，传的消息类型是不是群聊类型的，如果不是则用户 B 收不到用户 A 发的群组消息，详见 [Android 版构建消息](/document/android/message_send_receive.html#发送和接收文本消息) 或 [iOS 版构建消息](/document/ios/message_send_receive.html#发送和接收文本消息)。
     2. 检查用户 A 发送的消息是否成功，可以根据 SDK 发消息方法返回的结果判断消息是否发送成功，如果发送失败，则用户 B 收不到用户 A 发送的群组消息。
     3. 检查用户 A 给用户 B 发消息时，传的群组 ID 是否正确(是否为 A 与 B 共同加入的群组 ID)，如果传的不是正确的群组 ID，那么用户 B 收不到消息用户 A 发的群组消息。
     4. 检查用户 B 是否在群组中，可以获取群组详情，看群组中是否有用户 B，详见 [获取群组详情](/document/server-side/group_manage.html#获取群组详情)。

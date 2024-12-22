@@ -42,7 +42,7 @@ SDKClient.Instance.InitWithOptions(options);
 | `DeleteMessagesAsExitGroup` | 是否需要在离开群组时自动删除聊天历史消息。设置为 `true` 则在退出群组的时候，会删除聊天记录。  |
 | `DeleteMessagesAsExitRoom` | 是否需要在离开聊天室时自动删除聊天历史消息。设置为 `true` 则在退出聊天室的时候，会删除记录。 |
 | `IsRoomOwnerLeaveAllowed`  | 是否允许聊天室所有者离开聊天室。设置为 `true` 则允许。详见 [聊天室](room_overview.html) 章节。  |
-| `IsAutoDownload`  | 是否开启自动下载。设置为 `true` 则收到图片、视频、音频、语音消息会自动下载。详见 [消息](message_send_receive.html#接收消息) 章节。 |
+| `IsAutoDownload`  | 是否开启自动下载。设置为 `true` 则收到图片、视频、音频、语音消息会自动下载。详见 [消息](message_send_receive.html#发送和接收图片消息) 章节。 |
 
 ## 注册用户
 

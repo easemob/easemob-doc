@@ -290,7 +290,7 @@ class ChatThreadActivity:ChatUIKitThreadActivity() {
 
 #### 自定义输入状态指示 UI
 
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/android/message_send_receive.html#通过透传消息实现输入指示器)。
+本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/product/typing_indication.html)。
 
 用户需要监听透传消息回调处理导航相关 UI 显示效果。
 

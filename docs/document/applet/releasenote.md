@@ -118,7 +118,7 @@
 - [IM SDK] [聊天室和群组成员进出事件增加成员人数 `memberCount` 字段](room_manage.html#实时更新聊天室成员人数)。
 - [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#单向清空服务端的聊天记录) 方法, 用于清空当前用户的聊天记录，包括消息和会话。
 - [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-id-列表) 方法, 可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
-- [IM SDK] 新增 [useReplacedMessageContents](message_send_receive.html#发送文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
+- [IM SDK] 新增 [useReplacedMessageContents](message_send_receive.html#发送和接收文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
 
 ### 优化
 
@@ -170,9 +170,9 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送合并消息)。
+- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送和接收合并消息)。
 - [IM SDK] 新增[消息修改功能](message_modify.html)。
-- [IM SDK] 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
+- [IM SDK] 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送和接收定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
 
 ### 修复
 
@@ -226,7 +226,7 @@
 
 - [IM SDK] [创建群组方法 `createGroup`](group_manage.html#创建群组) 和[修改群信息方法 `modifyGroup`](group_attributes.html#修改群组信息) 新增 `ext` 字段支持群扩展信息。
 - [IM SDK] 群组通知事件增加[群组信息修改事件 `updateInfo`](group_manage.html#监听群组事件)。
-- [IM SDK] 新增[聊天室消息优先级](message_send_receive.html)。
+- [IM SDK] 新增[聊天室消息优先级](#设置聊天室消息优先级)。
 - [IM SDK] 支持同时[对多个群组成员禁言和解除禁言](group_members.html#管理群组禁言)。
 
 ## 版本 V4.1.1 Dev 2022-9-26
