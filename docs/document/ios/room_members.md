@@ -34,7 +34,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMemberListFromServerWithId:cursor:pageSize:completion]
 //cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
 //pageSize：每页期望返回的成员数,最大值为 1,000。
@@ -50,20 +50,20 @@ EMCursorResult<NSString*> * result = [[EMClient sharedClient].roomManager getCha
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [[EMClient sharedClient].roomManager leaveChatroom:@"aChatroomId" completion:nil];
 ```
 
 退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `isDeleteMessagesWhenExitChatRoom` 设置为 `NO`。
 
-```objective-c
+```objectivec
 @property (nonatomic, assign) BOOL isDeleteMessagesWhenExitChatRoom;
 ```
 
 示例代码如下：
 
-```objective-c
+```objectivec
 EMOptions *retOpt = [EMOptions optionsWithAppkey:@"appkey"];
 retOpt.isDeleteMessagesWhenExitChatRoom = NO;
 ```
@@ -80,7 +80,7 @@ retOpt.isDeleteMessagesWhenExitChatRoom = NO;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager removeMembers:fromChatroom:completion]
  [EMClient.sharedClient.roomManager removeMembers:@[@"member1",@"member2"] fromChatroom:@"roomId" completion:^(EMChatroom * _Nullable aChatroom, EMError * _Nullable aError) {
             
@@ -108,7 +108,7 @@ retOpt.isDeleteMessagesWhenExitChatRoom = NO;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager blockMembers:fromChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager blockMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
@@ -120,7 +120,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager unblockMembers:fromChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager unblockMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
@@ -132,7 +132,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomBlacklistFromServerWithId:pageNumber:pageSize:completion]
 EMError *error = nil;
 NSArray<NSString *> * blockMembers = [[EMClient sharedClient].roomManager getChatroomBlacklistFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
@@ -150,7 +150,7 @@ NSArray<NSString *> * blockMembers = [[EMClient sharedClient].roomManager getCha
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomWhiteListFromServerWithId:completion]
 EMError *error = nil;
 NSArray<NSString *> *allowMembers = [EMClient.sharedClient.roomManager getChatroomWhiteListFromServerWithId:@"aChatroomId" error:&error];
@@ -160,7 +160,7 @@ NSArray<NSString *> *allowMembers = [EMClient.sharedClient.roomManager getChatro
 
 所有聊天室成员可以调用 `isMemberInWhiteListFromServerWithChatroomId` 方法检查自己是否在白名单中，示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager isMemberInWhiteListFromServerWithChatroomId:completion]
 EMError *error = nil;
 BOOL isAllowed = [EMClient.sharedClient.roomManager isMemberInWhiteListFromServerWithChatroomId:@"aChatroomId" error:&error];
@@ -172,7 +172,7 @@ BOOL isAllowed = [EMClient.sharedClient.roomManager isMemberInWhiteListFromServe
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager addWhiteListMembers:fromChatroom:completion]
 EMError *error = nil;
 [EMClient.sharedClient.roomManager addWhiteListMembers:@[@"userId1",@"userId2"] fromChatroom:@"aChatroomId" error:&error];
@@ -184,7 +184,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager removeWhiteListMembers:fromChatroom:completion]
 EMError *error = nil;
 [EMClient.sharedClient.roomManager removeWhiteListMembers:@[@"userId1",@"userId2"] fromChatroom:@"aChatroomId" error:&error];
@@ -202,7 +202,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager muteMembers:muteMilliseconds:fromChatroom:completion]
 // `muteMilliseconds`：禁言时间。传 -1 表示永久禁言。
 EMError *error = nil;
@@ -219,7 +219,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager unmuteMembers:fromChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager unmuteMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
@@ -231,7 +231,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMuteListFromServerWithId:pageNumber:pageSize:completion]
 EMError *error = nil;
 NSArray<NSString *> * muteMembers = [[EMClient sharedClient].roomManager getChatroomMuteListFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
@@ -249,7 +249,7 @@ NSArray<NSString *> * muteMembers = [[EMClient sharedClient].roomManager getChat
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager muteAllMembersFromChatroom:completion]
 EMError *error = nil;
 [EMClient.sharedClient.roomManager muteAllMembersFromChatroom:@"chatRoomId" error:&error];
@@ -261,7 +261,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager unmuteAllMembersFromChatroom:completion]
 EMError *error = nil;
 [EMClient.sharedClient.roomManager unmuteAllMembersFromChatroom:@"chatRoomId" error:&error];
@@ -275,7 +275,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager updateChatroomOwner:newOwner:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager updateChatroomOwner:@"chatroomId" newOwner:@"textString" error:&error];
@@ -287,7 +287,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager addAdmin:toChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager addAdmin:@"userName" toChatroom:@"chatroomId" error:&error];
@@ -299,7 +299,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager removeAdmin:fromChatroom:completion]
 EMError *error = nil;
 [[EMClient sharedClient].roomManager removeAdmin:@"userName" fromChatroom:@"chatroomId" error:&error];

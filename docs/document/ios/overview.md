@@ -20,7 +20,7 @@
 
 初始化示例代码：
 
-```objective-c
+```objectivec
 // appkey 替换成你在环信即时通讯 IM 管理后台注册应用中的 App Key
 EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 [[EMClient sharedClient] initializeSDKWithOptions:options];
@@ -45,7 +45,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
-```objective-c
+```objectivec
 // 异步方法
 [[EMClient sharedClient] registerWithUsername:@"username"
                                          password:@"your password"
@@ -74,7 +74,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
-```objective-c
+```objectivec
     //SDK 初始化 `EMOptions` 时可以传入 `loginExtensionInfo` 属性投递给被踢下线的设备。该属性需要开启多设备登录的情况下才能生效。
     EMOptions *options = [EMOptions optionsWithAppkey:<#AppKey#>];
     options.loginExtensionInfo = @"you was kicked out by other device";
@@ -95,7 +95,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 使用 token 登录时需要处理 token 过期的问题，比如每次登录时更新 token 等机制。
 :::
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient loginWithUsername:@"username" token:@"token" completion:^(NSString * _Nonnull aUsername, EMError * _Nullable aError) {
 
@@ -113,7 +113,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 自动登录完成后，触发 `EMClientDelegate` 中的以下回调：
 
-```objective-c
+```objectivec
 - (void)autoLoginDidCompleteWithError:(EMError * _Nullable)aError
 {
 }
@@ -123,7 +123,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 ## 退出登录
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient logout:YES completion:^(EMError * _Nullable aError) {
 
@@ -134,7 +134,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 你可以通过注册连接监听 `EMClientDelegate` 确认连接状态。
 
-```objective-c
+```objectivec
 - viewDidLoad
 {
     ...
@@ -184,7 +184,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 你可以通过监听 `EMClientDelegate` 中的以下回调，调用 `EMClient#logout:completion:` 退出登录并返回登录界面。
 
-```objective-c
+```objectivec
 // 当前登录账号在其它设备登录时，当前登录的设备被踢下线时会触发该回调。该回调在 4.7.0 及其以后版本已经被弃用，由 `userAccountDidLoginFromOtherDeviceWithInfo` 回调替换。
 - (void)userAccountDidLoginFromOtherDevice 
 {
@@ -230,7 +230,7 @@ SDK 的 `EMOptions#logLevel` 指定了日志输出级别，默认为 `EMLogLevel
 
 开发阶段若希望在 XCode console 上输出 SDK 日志，可在 SDK 初始化时打开开关。
 
-```objective-c
+```objectivec
 EMOptions* option = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 // 日志输出到 XCode console
 option.enableConsoleLog = YES;

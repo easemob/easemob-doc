@@ -19,8 +19,9 @@
 在 app 项目 `build.gradle.kts` 中添加以下依赖：
 
 ```kotlin
-implementation("io.hyphenate:ease-chat-kit:4.7.0")
+implementation("io.hyphenate:ease-chat-kit:4.11.1")
 ```
+若要查看最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
 
 ### 本地依赖
 
@@ -47,6 +48,21 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 ```kotlin
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
+```
+
+## 初始化
+
+在使用 UIKit 的控件前，必须要先初始化。例如在 `Application` 中：
+
+```kotlin
+class DemoApplication: Application() {
+    
+    override fun onCreate() {
+        val options = ChatOptions()
+        options.appKey = "你的appkey"
+        ChatUIKitClient.init(this, options)
+    }
+}
 ```
 
 ## 快速搭建页面

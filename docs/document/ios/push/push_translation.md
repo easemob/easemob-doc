@@ -6,7 +6,7 @@
 
 以下代码示例显示了如何设置和获取推送通知的首选语言：
 
-```objective-c
+```objectivec
 //设置离线推送的首选语言。
 // 异步方法
 [[EMClient sharedClient].pushManager setPreferredNotificationLanguage:@"EU" completion:^(EMError *aError) {

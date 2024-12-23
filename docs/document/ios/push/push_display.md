@@ -14,7 +14,7 @@
 
 你可以调用 `updatePushDisplayName` 设置推送通知中显示的昵称，如以下代码示例所示：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.pushManager updatePushDisplayName:@"displayName" completion:^(NSString * aDisplayName, EMError * aError) {
     if (aError) {
@@ -25,7 +25,7 @@
 
 你也可以调用 `updatePushDisplayStyle` 设置推送通知的显示样式，如下代码示例所示：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.pushManager updatePushDisplayStyle:EMPushDisplayStyleSimpleBanner completion:^(EMError * aError)
 {
@@ -56,7 +56,7 @@
 
 你可以调用 `getPushNotificationOptionsFromServerWithCompletion` 方法获取推送通知中的显示属性，如以下代码示例所示：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.pushManager getPushNotificationOptionsFromServerWithCompletion:^(EMPushOptions * aOptions, EMError * aError)
 {
@@ -112,7 +112,7 @@
 
 这种情况下，创建消息时无需传入 `title_args` 和 `content_args` 参数。 
 
-```objective-c
+```objectivec
 //下面以文本消息为例，其他类型的消息设置方法相同。
 EMTextMessageBody *body = [[EMTextMessageBody alloc]initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc]initWithConversationID:@"conversationId" from:@"currentUsername" to:@"conversationId" body:body ext:nil];
@@ -160,7 +160,7 @@ message.chatType = EMChatTypeChat;
 
 ![img](/images/android/push/push_template_custom_example.png)
 
-```objective-c
+```objectivec
 //下面以文本消息为例，其他类型的消息设置方法相同。
 EMTextMessageBody *body = [[EMTextMessageBody alloc]initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc]initWithConversationID:@"conversationId" from:@"currentUsername" to:@"conversationId" body:body ext:nil];
@@ -187,7 +187,7 @@ message.chatType = EMChatTypeChat;
 若发送方在发送消息时使用了推送模板，则推送通知栏中的显示内容以发送方的推送模板为准。
 :::
 
-```objective-c
+```objectivec
 [EMClient.sharedClient.pushManager setPushTemplate:@"templateName" completion:^(EMError * _Nullable aError) {
 
 }];
@@ -197,7 +197,7 @@ message.chatType = EMChatTypeChat;
 
 创建推送消息时，你可以设置消息扩展字段自定义要显示的推送标题 `em_push_title` 和推送内容 `em_push_content`。
 
-```objective-c
+```objectivec
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_apns_ext":@{

@@ -28,7 +28,7 @@
 
 推荐一次导入 1,000 条以内的数据。
 
-```objective-c
+```objectivec
 // 异步方法
 [[EMClient sharedClient].chatManager importMessages:messages completion:nil];
 ```
@@ -41,7 +41,7 @@
 
 消息会根据消息中的 Unix 时间戳插入本地数据库，SDK 会更新会话的 `latestMessage` 等属性。
 
-```objective-c
+```objectivec
 EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
 [conversation insertMessage:message error:nil];
 ```

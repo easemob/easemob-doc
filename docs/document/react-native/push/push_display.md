@@ -102,7 +102,7 @@ ChatClient.getInstance()
 
 这种情况下，创建消息时无需传入 `titleArgs` 和 `contentArgs` 参数。
 
-```ts
+```typescript
 const message = ChatMessage.createTextMessage("<target id>", "<send content>");
 // 设置推送模板
 message.attributes = {
@@ -152,7 +152,7 @@ ChatClient.getInstance().chatManager.sendMessage(message, {
 
 ![img](/images/android/push/push_template_custom_example.png)
 
-```ts
+```typescript
 const message = ChatMessage.createTextMessage("<target id>", "<send content>");
 // 设置推送模板
 message.attributes = {
@@ -180,7 +180,7 @@ ChatClient.getInstance().chatManager.sendMessage(message, {
 若发送方在发送消息时使用了推送模板，则推送通知栏中的显示内容以发送方的推送模板为准。
 :::
 
-```ts
+```typescript
 ChatClient.getInstance()
   .pushManager.selectPushTemplate("<selected template name>")
   .then(() => {

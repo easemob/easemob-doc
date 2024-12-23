@@ -10,7 +10,7 @@
   
 示例代码如下所示： 
   
-```objective-c
+```objectivec
 // 异步方法
 [[EMClient sharedClient] registerWithUsername:@"username"
                                          password:@"your password"
@@ -40,7 +40,7 @@ EMClient.shared().login(withUsername: "userId", token: "token") { userId, err in
 
 2. **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
-```objective-c
+```objectivec
     //SDK 初始化 `EMOptions` 时可以传入 `loginExtensionInfo` 属性投递给被踢下线的设备。该属性需要开启多设备登录的情况下才能生效。
     EMOptions *options = [EMOptions optionsWithAppkey:<#AppKey#>];
     options.loginExtensionInfo = @"you was kicked out by other device";

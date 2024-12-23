@@ -6,7 +6,7 @@
 
 SDK 默认指向公有云地址，在部署私有云后，需要将地址重新指向到新的地址，以下是地址修改方法：
 
-```objective-c
+```objectivec
 EMOptions *options = [EMOptions optionsWithAppkey:appkey];
 options.enableDnsConfig = NO;
 options.chatPort = 8080;//设置端口号
@@ -20,7 +20,7 @@ options.rtcUrlDomain= "wss://mprtc.easemob.com";//设置多人音视频的服务
 如果需要配置 HTTPS 只需加一个属性即可。
 :::
 
-```objective-c
+```objectivec
 options.usingHttpsOnly = YES;
 ```
 
@@ -29,6 +29,6 @@ options.usingHttpsOnly = YES;
 1. 服务器端配置 DNS 地址表
 2. 设置服务器端配置的 URL 地址
 
-```objective-c
+```objectivec
 options.dnsURL = @"xxxx";//设置服务器端配置的 URL 地址
 ```

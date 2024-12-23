@@ -48,7 +48,7 @@
 
 当接收方收到消息后，SDK 底层会自动进行消息送达回执。
 
-```objective-c
+```objectivec
 // 设置是否需要接收方送达确认，默认为 `NO` 即不需要。
 options.enableDeliveryAck = YES;
 ```
@@ -57,7 +57,7 @@ options.enableDeliveryAck = YES;
    
 3. 发送方监听 `EMChatManagerDelegate#messagesDidDeliver` 事件，收到接收方的送达回执。你可以在收到该通知时，显示消息的送达状态。
 
-```objective-c
+```objectivec
 // 继承并实现监听器。
 EMChatManagerDelegate
 
@@ -88,7 +88,7 @@ EMChatManagerDelegate
 
 该功能开启后，接收方阅读消息后，SDK 底层会自动进行消息已读回执。
 
-```objective-c
+```objectivec
 options.enableRequireReadAck = YES;
 ```
 
@@ -98,13 +98,13 @@ options.enableRequireReadAck = YES;
   
   聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
 
-```objective-c
+```objectivec
 [[EMClient sharedClient].chatManager ackConversationRead:conversationId completion:nil];
 ```
 
 - 接收方在聊天页面打开时，接收到消息时，再根据消息类型发送单个消息已读回执。  
 
-```objective-c
+```objectivec
 // 接收消息回调。
 - (void)messagesDidReceive:(NSArray *)aMessages
   {
@@ -134,7 +134,7 @@ options.enableRequireReadAck = YES;
 
 消息发送方可以通过 `EMChatManagerDelegate#messagesDidRead` 事件监听指定消息是否已读，示例代码如下：
 
-```objective-c
+```objectivec
 // 继承并实现监听器。
 EMChatManagerDelegate
 
@@ -172,20 +172,20 @@ EMChatManagerDelegate
 
 该功能开启后，接收方阅读消息后，SDK 底层会自动进行消息已读回执。
 
-```objective-c
+```objectivec
 options.enableRequireReadAck = YES;
 ```
 
 2. 发送方发送消息时设置 `EMChatMessage#isNeedGroupAck` 属性为 `YES`。
 
-```objective-c
+```objectivec
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:to from:from to:to body:aBody ext:aExt];
 message.isNeedGroupAck = YES;
 ```
 
 3. 消息接收方发送群组消息的已读回执。
 
-```objective-c
+```objectivec
 - (void)sendGroupMessageReadAck:(EMChatMessage *)msg
   {
     if (msg.isNeedGroupAck && !msg.isReadAcked) {
@@ -204,7 +204,7 @@ message.isNeedGroupAck = YES;
 
 发送方接收到群组消息已读回执后，其发出消息的属性 `groupAckCount` 会有相应变化。
 
-```objective-c
+```objectivec
 // 继承并实现监听器。
 EMChatManagerDelegate
 
@@ -227,7 +227,7 @@ EMChatManagerDelegate
 
 你可以调用 `IEMChatManager#asyncFetchGroupMessageAcksFromServer` 方法从服务器获取单条消息的已读回执的详情。
 
-```objective-c
+```objectivec
  // 异步方法。
  // aMessageId           要获取的消息 ID。
  // aGroupId             要获取回执对应的群 ID。

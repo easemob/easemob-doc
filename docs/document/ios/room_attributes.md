@@ -39,7 +39,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager getChatroomAnnouncementWithId:@"chatRoomId" completion:nil];
 ```
@@ -50,7 +50,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 EMError *error =  nil;
 // 异步方法
 [[EMClient sharedClient].roomManager updateChatroomAnnouncementWithId:_chatroomId announcement:textString completion:nil];
@@ -62,7 +62,7 @@ EMError *error =  nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 EMError *error = nil;
 // 异步方法
 [[EMClient sharedClient].roomManager updateSubject:textString forChatroom:self.chatroom.chatroomId completion:nil];
@@ -74,7 +74,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 EMError *error = nil;
 // 异步方法
 [[EMClient sharedClient].roomManager updateDescription:textString forChatroom:self.chatroom.chatroomId completion:nil];
@@ -88,7 +88,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager fetchChatroomAttributes:self.currentConversation.conversationId keys:@[@"123"] completion:^(NSDictionary * _Nullable map, EMError * _Nullable error) {
 
@@ -101,7 +101,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager fetchChatroomAllAttributes:self.currentConversation.conversationId completion:^(NSDictionary * _Nullable map, EMError * _Nullable error) {
 
@@ -114,7 +114,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager setChatroomAttributes:self.currentConversation.conversationId key:@"234" value:@"123" autoDelete:YES completionBlock:^(EMError * _Nullable aError, NSDictionary<NSString *,NSString *> * _Nullable failureKeys) {
 
@@ -127,7 +127,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager setChatroomAttributesForced:self.currentConversation.conversationId key:@"234" value:@"123" autoDelete:YES completionBlock:^(EMError * _Nullable aError, NSDictionary<NSString *,NSString *> * _Nullable failureKeys) {
 
@@ -140,7 +140,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager setChatroomAttributes:self.currentConversation.conversationId attributes:@{@"testKey":@"123"} autoDelete:YES completionBlock:^(EMError * _Nullable aError, NSDictionary<NSString *,NSString *> * _Nullable failureKeys) {
 
@@ -153,7 +153,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager setChatroomAttributesForced:self.currentConversation.conversationId attributes:@{@"testKey":@"123"} autoDelete:YES completionBlock:^(EMError * _Nullable aError, NSDictionary<NSString *,NSString *> * _Nullable failureKeys) {
                 }];
@@ -165,7 +165,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager removeChatroomAttributes:self.currentConversation.conversationId key:@"234" autoDelete:YES completionBlock:^(EMError * _Nullable aError, NSDictionary<NSString *,NSString *> * _Nullable failureKeys) {
 
@@ -178,7 +178,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager removeChatroomAttributesForced:self.currentConversation.conversationId key:@"234" autoDelete:YES completionBlock:^(EMError * _Nullable aError, NSDictionary<NSString *,NSString *> * _Nullable failureKeys) {
 
@@ -191,7 +191,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager removeChatroomAttributes:self.currentConversation.conversationId attributes:@[@"testKey"] completionBlock:^(EMError * _Nullable aError, NSDictionary<NSString *,NSString *> * _Nullable failureKeys) {
 
@@ -204,7 +204,7 @@ EMError *error = nil;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.roomManager removeChatroomAttributesForced:self.currentConversation.conversationId attributes:@[@"testKey"] completionBlock:^(EMError * _Nullable aError, NSDictionary<NSString *,NSString *> * _Nullable failureKeys) {
 

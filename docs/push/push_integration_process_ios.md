@@ -61,13 +61,13 @@ pod install
 
 #### 1. 引入头文件
 
-```objective-c
+```objectivec
 #import <EMPush/EMPush.h>
 ```
 
 #### 2. 初始化 EMPush
 
-```objective-c
+```objectivec
 EMPushClientOptions *option = [EMPushClientOptions optionsWithAppkey:@"appkey"];
 option.enableConsoleLog = YES;
 option.isAutoLogin = YES;
@@ -82,7 +82,7 @@ option.apnsCertName = @"apnsname";
 
 强烈建议开发者通过后台调用 REST 接口去注册环信 ID，不建议使用客户端注册。
 
-```objective-c
+```objectivec
 [EMPushClient  registerWithUsername:@"name" password:@"pswd" completion:^(NSString *aUsername, EMError *aError) {
         if (!aError) {
             // 注册完成。
@@ -94,7 +94,7 @@ option.apnsCertName = @"apnsname";
 
 #### 4. 连接服务器
 
-```objective-c
+```objectivec
 [EMPushClient connectWithUsername:name password:pswd completion:^(NSString *aUsername, EMError *aError) {
         if (!aError) {
             // 连接到服务器。
@@ -106,7 +106,7 @@ option.apnsCertName = @"apnsname";
 
 #### 5. 断开服务器连接
 
-```objective-c
+```objectivec
 [EMPushClient disConnect:YES completion:^(EMError *aError) {
         if (!aError) {
             // 断开服务器连接。
@@ -120,6 +120,6 @@ option.apnsCertName = @"apnsname";
 
 添加代理的类必须实现 `EMClientDelegate`，进行代理实现。
 
-```objective-c
+```objectivec
 [EMPushClient addConnectDelegate:self delegateQueue:nil];
 ```

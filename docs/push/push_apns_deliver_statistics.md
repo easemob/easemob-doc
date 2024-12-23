@@ -70,13 +70,13 @@ APNs 的送达统计 SDK 下载地址：
 
 在 **NotificationService.m** 里引入头文件：
 
-```objective-c
+```objectivec
 #import <EMPushExtension/EMPushExtension.h> 
 ```
 
 在系统提供处理推送的方法里调用 EMPushServiceExt 的两个方法，这两个方法必须都调用，且设置 Appkey的方法需要先调用。
 
-```objective-c
+```objectivec
 - (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
     self.contentHandler = contentHandler;
     self.bestAttemptContent = [request.content mutableCopy];

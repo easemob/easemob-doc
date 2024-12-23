@@ -38,7 +38,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // pageSize: 每页返回的会话数。取值范围为 [1,50]。
 // cursor：查询的开始位置。若传入 `nil` 或 `@""`，SDK 从最新活跃的会话开始获取。
 NSString *cursor = @"";
@@ -82,7 +82,7 @@ NSString *cursor = @"";
 
 示例代码如下：
 
-```objective-c
+```objectivec
 NSArray <EMConversation *>*conversations = [EMClient.sharedClient.chatManager getAllConversations:YES];
 ```
 

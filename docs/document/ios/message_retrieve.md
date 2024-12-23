@@ -65,7 +65,7 @@ let option = EMFetchServerMessagesOption();
 
 此外，你也可以调用 `asyncFetchHistoryMessagesFromServer` 方法从服务器获取指定会话的消息。你可以指定消息查询方向，即明确按时间顺序或逆序获取。为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
 
-```objective-c
+```objectivec
 // 异步方法
  [[EMClient sharedClient].chatManager asyncFetchHistoryMessagesFromServer:conversation.conversationId conversationType:conversation.type startMessageId:self.moreMsgId pageSize:10 completion:^(EMCursorResult *aResult, EMError *aError) {
              [self.conversation loadMessagesStartFromId:self.moreMsgId count:10 searchDirection:EMMessageSearchDirectionUp completion:block];
@@ -76,7 +76,7 @@ let option = EMFetchServerMessagesOption();
 
 你可以调用以下方法从数据库中读取指定会话的消息：
 
-```objective-c
+```objectivec
 // 获取指定会话 ID 的会话。
 EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
 //startMsgId：查询的起始消息 ID； count：每次获取的消息条数。如果设为小于等于 0，SDK 获取 1 条消息。
@@ -88,7 +88,7 @@ NSArray<EMChatMessage *> *messages = [conversation loadMessagesStartFromId:start
 
 你可以调用 `getMessageWithMessageId` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 
-```objective-c
+```objectivec
 // 同步方法
 EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
 EMError* err = nil;
@@ -100,7 +100,7 @@ EMChatMessage* message = [EMClient.sharedClient.chatManager getMessageWithMessag
 
 你可以调用 `loadMessagesWithType` 方法从本地存储中获取指定会话中特定类型的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
-```objective-c
+```objectivec
 // 异步方法
 EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
 // timestamp：消息搜索的起始时间戳，单位为毫秒。该参数设置后，SDK 从指定的时间戳的消息开始，按照搜索方向对消息进行搜索。若设置为负数，SDK 从当前时间开始，按消息时间戳的逆序搜索。
@@ -117,7 +117,7 @@ EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithCon
 
 每次最多可获取 400 条消息。
 
-```objective-c
+```objectivec
 // 异步方法
 EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
 // startTime：查询的起始时间戳，单位为毫秒；endTime：查询的结束时间戳，单位为毫秒；count：每次获取的消息数量。取值范围为 [1,400]。

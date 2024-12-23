@@ -76,7 +76,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 EMGroupOptions *options = [[EMGroupOptions alloc] init];
 // 设置群组最大成员数量。
 options.maxUsersCount = self.maxMemNum;
@@ -106,7 +106,7 @@ NSArray *members = @{@"member1",@"member2"};
 
 示例代码如下：
 
-```objective-c
+```objectivec
 //群组解散后，群成员将会收到 `EMGroupManagerDelegate#didLeaveGroup` 回调。
 // 同步方法，异步方法见 [EMGroupManager destroyGroup:finishCompletion:]
 [[EMClient sharedClient].groupManager destroyGroup:@"groupID"];
@@ -121,7 +121,7 @@ NSArray *members = @{@"member1",@"member2"};
 
 群成员也可以调用 `getGroupSpecificationFromServerWithId` 方法从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用。另外，若将该方法的 `fetchMembers` 参数设置为 `true`，可获取群成员列表，默认最多包括 200 个成员。
 
-```objective-c
+```objectivec
 // 原型 异步方法
 - (void)getGroupSpecificationFromServerWithId:(NSString *)aGroupId
                                    fetchMembers:(BOOL)fetchMembers
@@ -146,7 +146,7 @@ NSArray *admins = aGroup.adminList;
 
 - 当群成员少于 200 人时，你可以调用从服务器获取群组详情的方法 `getGroupSpecificationFromServerWithId` 获取获取群成员列表，包括群主、群管理员和普通群成员：
 
-```objective-c
+```objectivec
 // 第二个参数传入 TRUE，默认取 200 人的群成员列表。
 // 同步方法，异步方法见 [EMGroupManager getGroupSpecificationFromServerWithId:fetchMembers:completion:]
 EMGroup *group = [[EMClient sharedClient].groupManager
@@ -158,7 +158,7 @@ NSArray *memberList = group.memberList;
 
 - 当群成员数量大于等于 200 时，你可以首先调用 `getGroupSpecificationFromServerWithId` 方法获取群主和群管理员，然后调用 `getGroupMemberListFromServerWithId` 方法获取普通群成员列表：
 
-```objective-c
+```objectivec
 EMGroup *group = [[EMClient sharedClient].groupManager
                                           getGroupSpecificationFromServerWithId:@"groupID"
                                           fetchMembers:NO
@@ -183,7 +183,7 @@ do {
 
 用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroupsFromServerWithPage:0 pageSize:20 needMemberCount:YES needRole:YES completion:^(NSArray<EMGroup *> * _Nullable aList, EMError * _Nullable aError) {
         // got group list
@@ -192,14 +192,14 @@ NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroupsFromSe
 
 - 用户可以调用 `getJoinedGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，本地缓存加载
 NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroups];
 ```
 
 - 用户还可以调用 `getPublicGroupsFromServerWithCursor` 方法分页获取公开群列表：
 
-```objective-c
+```objectivec
 NSMutableArray *memberList = [[NSMutableArray alloc]init];
 NSInteger pageSize = 50;
 NSString *cursor = nil;
@@ -219,7 +219,7 @@ do {
 
 自 4.2.0 版本开始，你可以调用 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于你订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
 
-```objective-c
+```objectivec
 [EMClient.sharedClient.groupManager getJoinedGroupsCountFromServerWithCompletion:^(NSInteger groupCount, EMError * _Nullable aError) {
             
     }];
@@ -231,7 +231,7 @@ do {
 
 群成员可以调用 `blockGroup` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息，群主和群管理员不能进行此操作。示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，异步方法见 [EMGroupManager blockGroup:completion:]
 [[EMClient sharedClient].groupManager blockGroup:@"groupID" error:nil];
 ```
@@ -240,7 +240,7 @@ do {
 
 群成员可以调用 `unblockGroup` 方法解除屏蔽群消息。示例代码如下：
 
-```objective-c
+```objectivec
 // 同步方法，异步方法见 [EMGroupManager unblockGroup:completion:]
 [[EMClient sharedClient].groupManager unblockGroup:@"groupID" error:nil];
 ```
@@ -255,7 +255,7 @@ do {
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 添加代理。
 - (void)viewDidLoad
   {
@@ -271,7 +271,7 @@ do {
 
 群组事件如下（在该方法的举例中，用户 A 表示当前用户）：
 
-```objective-c
+```objectivec
 // 当前用户收到了入群邀请。受邀用户会收到该回调。例如，用户 B 邀请用户 A 入群，则用户 A 会收到该回调。
 - (void)groupInvitationDidReceive:(NSString *)aGroupId inviter:(NSString *)aInviter message:(NSString *)aMessage
   {

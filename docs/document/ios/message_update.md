@@ -23,7 +23,7 @@
 
 你可以调用 `updateMessage` 方法更新本地数据库中的消息。
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.chatManager updateMessage:message completion:^(EMChatMessage *aMessage, EMError *aError) {
     if (!aError) {

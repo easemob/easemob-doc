@@ -59,6 +59,7 @@
 ```kotlin
 implementation("io.hyphenate:ease-chat-kit:4.11.1")
 ```
+若要查看 UIKit 的最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
 
 **本地依赖**
 
@@ -168,7 +169,9 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 
 ### 第二步 实现代码逻辑
 
-1. 实现登录和退出页面。
+1. 初始化UIKit。
+
+2. 实现登录和退出页面。
 
 :::tip
 若你已集成了即时通讯 IM SDK，SDK 的所有用户 ID 均可用于登录单群聊 UIKit。
@@ -176,7 +179,9 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 
 你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，登录时传入用户 ID 和密码。
 
-打开 `MainActivity` 文件，并替换为如下代码：
+完整实现示例代码：
+
+打开 `MainActivity` 文件，并替换为如下代码。
 
 ```kotlin
 package com.easemob.quickstart
@@ -311,7 +316,7 @@ fun Context.showToast(msg: String) {
 }
 ```
 
-2. 点击 `Sync Project with Gradle Files` 同步工程。现在可以测试你的应用了。
+3. 点击 `Sync Project with Gradle Files` 同步工程。现在可以测试你的应用了。
 
 ### 第三步 发送第一条消息
 

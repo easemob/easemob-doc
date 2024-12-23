@@ -40,7 +40,7 @@
 
 ### 2. 集成 SDK
 
-你可以使用 mavenCentral 自动集成。该方法仅适用于 v3.8.2 或以上版本。获取最新 SDK 的版本号，详见 [SDK 更新日志](releasenote.html)。
+你可以使用 mavenCentral 自动集成。该方法仅适用于 v3.8.2 或以上版本。
 
 除此之外，你还可以通过手动复制 SDK 文件和动态加载 `.so` 库文件的方法集成 IM SDK，详见[集成文档](integration.html)。
 
@@ -84,6 +84,8 @@ implementation 'io.hyphenate:hyphenate-sdk:3.7.5' // 完整版本，包含音视
 
 implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含IM功能
 ```
+
+若要查看最新版本号，请点击[这里](releasenote.html)。
 
 ### 3. 添加项目权限
 

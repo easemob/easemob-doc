@@ -54,7 +54,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 按时间删除消息
 [self.conversation removeMessagesFromServerWithTimeStamp:message.timestamp completion:^(EMError * _Nullable aError) {
 

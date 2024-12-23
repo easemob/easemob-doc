@@ -31,7 +31,7 @@
 
 调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `messagesInfoDidRecall` 事件。对于附件类型消息，包括图片、音频和视频和文件消息，撤回消息后，消息附件也相应删除。
 
-```objective-c
+```objectivec
 // 异步方法
 [[EMClient sharedClient].chatManager recallMessageWithMessageId:messageId ext:@"extension info" completion:^(EMError *aError) {
     if (!aError) {
@@ -44,7 +44,7 @@
 
 - 对于 SDK 4.6.0 之前的版本，你可以调用 `recallMessageWithMessageId` 方法撤回一条发送成功的消息。该方法不支持通过 `ext` 字段传入自定义信息。
 
-```objective-c
+```objectivec
 // 异步方法
 [[EMClient sharedClient].chatManager recallMessageWithMessageId:messageId completion:^(EMError *aError) {
     if (!aError) {
@@ -62,7 +62,7 @@
 - 若用户在线接收了消息，消息撤回时，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为撤回的消息。
 - 若消息发送和撤回时接收方离线，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为空。
 
-```objective-c
+```objectivec
 - (void)messagesInfoDidRecall:(NSArray<EMRecallMessageInfo *> * _Nonnull)aRecallMessagesInfo;
 {
 }

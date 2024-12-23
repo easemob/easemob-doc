@@ -38,7 +38,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // threadName：子区名称，长度不超过 64 个字符
 // messageId：消息 ID，基于该消息创建子区
 // parentId：群组 ID
@@ -64,7 +64,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
     [EMClient.sharedClient.threadManager destroyChatThread:self.conversationId completion:^(EMError *aError) {
         if (!aError) {
@@ -88,7 +88,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.threadManager joinChatThread:model.message.threadOverView.threadId completion:^(EMChatThread *thread,EMError *aError) {
     if (!aError || aError.code == EMErrorUserAlreadyExist) {
@@ -107,7 +107,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [EMClient.sharedClient.threadManager leaveChatThread:self.conversationId completion:^(EMError *aError) {
     if (!aError) {
@@ -126,7 +126,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // chatThreadId：子区 ID
 // member：子区成员的用户 ID
 // 异步方法
@@ -147,7 +147,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // threadId：子区 ID
 // ThreadName：修改后的子区名称（不超过 64 个字符）
 // 异步方法
@@ -166,7 +166,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // threadId：子区 ID
 // 异步方法
 [EMClient.sharedClient.threadManager getChatThreadDetail:self.currentConversation.conversationId completion:^(EMChatThread *thread, EMError *aError) {
@@ -182,7 +182,7 @@
 
 子区所属群组的所有成员均可以调用 `getChatThreadMemberListFromServerWithId` 方法从服务器分页获取子区成员列表。
 
-```objective-c
+```objectivec
 // threadId：子区 ID
 // pageSize：单次请求返回的成员数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `nil` 或空字符串
@@ -196,7 +196,7 @@
 
 1. 用户可以调用 `getJoinedChatThreadsFromServer` 方法从服务器分页获取自己加入和创建的子区列表：
 
-```objective-c
+```objectivec
 // limit：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `nil` 或空字符串 
 // 异步方法
@@ -207,7 +207,7 @@
 
 2. 用户可以调用 `getJoinedChatThreadsFromServer` 方法从服务器分页获取指定群组中自己加入和创建的子区列表：
 
-```objective-c
+```objectivec
 // parentId：群组 ID
 // pageSize：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `nil` 或空字符串
@@ -221,7 +221,7 @@
 
 3. 用户还可以调用 `getChatThreadsFromServer` 方法从服务器分页获取指定群组的子区列表：
 
-```objective-c
+```objectivec
 // parentId: 群组 ID
 // pageSize: 单次请求返回的子区数，取值范围为 [1,50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `nil` 或空字符串
@@ -239,7 +239,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // threadIds：要查询的子区 ID 列表，每次最多可传入 20 个子区 ID
 // 异步方法
 [[EMClient sharedClient].threadManager getLastMessageFromSeverWithChatThreads:ids completion:^(NSDictionary<NSString *,EMChatMessage *> * _Nonnull messageMap, EMError * _Nonnull aError) {
@@ -255,7 +255,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 EMChatThreadManagerDelegate 
 
 // 子区创建。子区所属群组的所有成员收到该事件。

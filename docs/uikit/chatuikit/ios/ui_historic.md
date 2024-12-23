@@ -87,13 +87,13 @@ EaseIMKit 中包含了拍照，发语音，发图片，发视频，发位置，�
 
 第 1 步：引入相关头文件
 
-```objective-c
+```objectivec
 #import <EaseIMKit/EaseIMKit.h>
 ```
 
 第 2 步：在在工程的 AppDelegate 中的以下方法中调用 EaseIMKitManager 的初始化方法一并初始化环信 SDK。(注: 此方法不需要重复调用)
 
-```objective-c
+```objectivec
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     EMOptions *options = [EMOptions optionsWithAppkey:@"您的APPKEY"];
@@ -109,7 +109,7 @@ EaseIMKitManager 主要包含系统通知（好友申请，群邀请/申请）�
 
 #### 是否需要系统通知
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 是否需要系统通知：好友/群 申请等
@@ -121,7 +121,7 @@ EaseIMKitManager 主要包含系统通知（好友申请，群邀请/申请）�
 
 #### 收到系统通知所展示信息回调接口
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 收到请求返回展示信息
@@ -141,7 +141,7 @@ EaseIMKitManager 主要包含系统通知（好友申请，群邀请/申请）�
 
 #### 收到系统通知扩展信息回调接口
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 收到请求返回扩展信息
@@ -159,7 +159,7 @@ EaseIMKitManager 主要包含系统通知（好友申请，群邀请/申请）�
 
 #### 未读总数变化回调接口
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 会话未读总数变化。
@@ -174,13 +174,13 @@ EaseIMKitManager 主要包含系统通知（好友申请，群邀请/申请）�
 
 导入 EaseIMKit 头文件
 
-```objective-c
+```objectivec
 #import <EaseIMKit/EaseIMKit.h>
 ```
 
 EaseIMKit 提供现成的聊天会话 ViewController，可以通过创建 EaseChatViewController 对象实例，嵌入进自己的聊天控制器方式（参考 EaseIM 中 EMChatViewController）实现对 EaseIMKit 聊天会话的集成。 创建聊天会话页实例，需传递用户‘环信 ID’或‘群 ID’ ，会话类型（EMConversationType）以及必须传入聊天视图配置数据模型 EaseChatViewModel 实例。
 
-```objective-c
+```objectivec
 EaseChatViewModel *viewModel = [[EaseChatViewModel alloc]init];
 EaseChatViewController *chatController = [EaseChatViewController initWithConversationId:@"custom"
                                               conversationType:EMConversationTypeChat
@@ -192,7 +192,7 @@ chatController.view.frame = self.view.bounds;
 
 聊天控制器嵌入自己的聊天页后还需传入消息列表 messageList 以供 EaseChatViewController 展示使用
 
-```objective-c
+```objectivec
 //isScrollBottom 是否滑动到页面底部
 - (void)loadData:(BOOL)isScrollBottom
 {
@@ -213,13 +213,13 @@ chatController.view.frame = self.view.bounds;
 
 导入 EaseIMKit 头文件
 
-```objective-c
+```objectivec
 #import <EaseIMKit/EaseIMKit.h>
 ```
 
 在自己聊天控制器内可嵌入 EaseIMKit 的会话列表页，创建会话列表实例，实例化会话列表必须传入会话列表视图数据配置模型 EaseConversationViewModel 实例。
 
-```objective-c
+```objectivec
 EaseConversationViewModel *viewModel = [[EaseConversationViewModel alloc] init];
 
 EaseConversationsViewController *easeConvsVC = [[EaseConversationsViewController alloc] initWithModel:viewModel];
@@ -235,13 +235,13 @@ easeConvsVC.delegate = self;
 
 导入 EaseIMKit 头文件
 
-```objective-c
+```objectivec
 #import <EaseIMKit/EaseIMKit.h>
 ```
 
 在自己聊天控制器内可嵌入 EaseIMKit 的会话列表页，创建通讯录实例，必须传入通讯录视图数据模型 EaseContactsViewModel 实例以构建通讯录 UI 界面。
 
-```objective-c
+```objectivec
 EaseContactsViewModel *model = [[EaseContactsViewModel alloc] init];
 EaseContactsViewController *contactsVC = [[EaseContactsViewController alloc] initWithModel:model];
 //通讯录头部功能区（加好友/群聊/聊天室 入口）
@@ -276,7 +276,7 @@ contactsVC.delegate = self;
 
 聊天会话可配置参数如下：
 
-```objective-c
+```objectivec
 @property (nonatomic, strong) UIColor *chatViewBgColor; //聊天页背景色
 @property (nonatomic, strong) UIColor *chatBarBgColor; //输入区背景色
 @property (nonatomic, strong) EaseExtFuncModel *extFuncModel; //输入区扩展功能数据模型
@@ -296,7 +296,7 @@ contactsVC.delegate = self;
 
 其中参数：EaseExtFuncModel 输入区扩展功能数据配置模型(聊天会话页相机，相册，音视频等区域)内含可配参数：
 
-```objective-c
+```objectivec
 @property (nonatomic, strong) UIColor *iconBgColor;//图标所在 view 背景色
 @property (nonatomic, strong) UIColor *viewBgColor;//视图背景色
 @property (nonatomic, strong) UIColor *fontColor;//字体颜色
@@ -306,7 +306,7 @@ contactsVC.delegate = self;
 
 其中参数：inputBarStyle（输入区）包含五种类型：
 
-```objective-c
+```objectivec
 typedef NS_ENUM(NSInteger, EaseInputBarStyle) {
     EaseInputBarStyleAll = 1,          //全部功能
     EaseInputBarStyleNoAudio,          //无语音
@@ -318,7 +318,7 @@ typedef NS_ENUM(NSInteger, EaseInputBarStyle) {
 
 其中参数：EaseAlignmentStyle （消息排列方式,仅群聊可生效）包含两种类型
 
-```objective-c
+```objectivec
 typedef enum {
     EaseAlignmentNormal = 1,     //左右排列
     EaseAlignmentlLeft,          //居左排列
@@ -327,7 +327,7 @@ typedef enum {
 
 实例化的聊天控制器可通过重置视图 UI 配置模型刷新页面
 
-```objective-c
+```objectivec
 //重置聊天控制器
 - (void)resetChatVCWithViewModel:(EaseChatViewModel *)viewModel;
 ```
@@ -352,7 +352,7 @@ typedef enum {
 
 会话列表可配置参数如下：
 
-```objective-c
+```objectivec
 @property (nonatomic) EaseAvatarStyle avatarType;   // 头像样式
 @property (nonatomic, strong) UIImage *defaultAvatarImage;  // 默认头像
 @property (nonatomic) CGSize avatarSize;    // 头像尺寸
@@ -377,7 +377,7 @@ typedef enum {
 
 会话列表以及联系人列表共用其父类可配置参数如下：
 
-```objective-c
+```objectivec
 @property (nonatomic) BOOL canRefresh;  // 是否可下拉刷新
 @property (nonatomic, strong) UIView *bgView;   // tableView 背景图
 @property (nonatomic, strong) UIColor *cellBgColor;  // UITableViewCell 背景色
@@ -389,7 +389,7 @@ typedef enum {
 
 通讯录可配置参数如下：
 
-```objective-c
+```objectivec
 @property (nonatomic) EaseAvatarStyle avatarType;   // 头像样式
 @property (nonatomic, strong) UIImage *defaultAvatarImage;  // 默认头像
 @property (nonatomic) CGSize avatarSize;    // 头像尺寸
@@ -407,7 +407,7 @@ typedef enum {
 
 以及通讯录和会话列表共用的参数配置
 
-```objective-c
+```objectivec
 @property (nonatomic) BOOL canRefresh;  // 是否可下拉刷新
 @property (nonatomic, strong) UIView *bgView;   // tableView 背景图
 @property (nonatomic, strong) UIColor *cellBgColor;  // UITableViewCell 背景色
@@ -431,7 +431,7 @@ EaseChatViewControllerDelegate
 
 下拉加载更多消息回调（可得到当前第一条消息 ID 作为下次加载更多消息的参考 ID；当前消息列表）
 
-```objective-c
+```objectivec
 /**
  * 下拉加载更多消息回调
  *
@@ -445,7 +445,7 @@ EaseChatViewControllerDelegate
 
 通过实现聊天控制回调获取自定义消息 cell，根据 messageModel，用户自己判断是否显示自定义消息 cell。如果返回 nil 会显示默认；如果返回 cell 会显示用户自定义消息 cell。
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 获取消息自定义 cell
@@ -459,7 +459,7 @@ EaseChatViewControllerDelegate
 
 具体创建自定义 Cell 的示例：
 
-```objective-c
+```objectivec
 //自定义通话记录cell
 - (UITableViewCell *)cellForItem:(UITableView *)tableView messageModel:(EaseMessageModel *)messageModel
 {
@@ -482,7 +482,7 @@ EaseChatViewControllerDelegate
 
 选中消息的回调（EaseIMKit 没有对于自定义 cell 的选中事件回调，需用户自定义实现选中响应）
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 消息点击事件
@@ -496,7 +496,7 @@ EaseChatViewControllerDelegate
 
 EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实现，例：EaseIM 单聊通话记录 cell 点击事件再次发起通话
 
-```objective-c
+```objectivec
 - (void)messageCellDidSelected:(EMMessageCell *)aCell
 {
     //使用‘通知’的方式发起通话，其中所定义的宏仅在 EaseIM APP 中生效
@@ -517,7 +517,7 @@ EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实�
 
 用户资料回调（头像昵称等）
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 返回用户资料
@@ -530,7 +530,7 @@ EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实�
 
 #### 用户选中头像的回调
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 点击消息头像
@@ -543,7 +543,7 @@ EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实�
 
 获取用户选中头像回调的样例：
 
-```objective-c
+```objectivec
 //头像点击
 - (void)avatarDidSelected:(id<EaseUserDelegate>)userData
 {
@@ -558,7 +558,7 @@ EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实�
 
 #### 用户长按头像的回调
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 点击消息头像
@@ -571,7 +571,7 @@ EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实�
 
 #### 群通知回执详情
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 群通知回执详情
@@ -585,7 +585,7 @@ EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实�
 
 获取用户点击群通知回执详情的样例：
 
-```objective-c
+```objectivec
 //群通知阅读回执详情
 - (void)groupMessageReadReceiptDetail:(EMMessage *)message groupId:(NSString *)groupId
 {
@@ -600,7 +600,7 @@ EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实�
 
 当前会话输入扩展区数据模型组（UI 配置可在聊天视图配置数据模型中设置）
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 当前会话输入扩展区数据模型组
@@ -616,7 +616,7 @@ EaseIMKit 选中是消息气泡，自定义 cell 的点击事件需自定义实�
 
 当前会话输入扩展区数据模型组回调示例（EaseIM APP 有效）：
 
-```objective-c
+```objectivec
 - (NSMutableArray<EaseExtMenuModel *> *)inputBarExtMenuItemArray:(NSMutableArray<EaseExtMenuModel *> *)defaultInputBarItems conversationType:(EMConversationType)conversationType
 {
 NSMutableArray<EaseExtMenuModel *> *menuArray = [[NSMutableArray<EaseExtMenuModel *> alloc]init];
@@ -654,7 +654,7 @@ return menuArray;
 
 #### 键盘输入变化回调
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 输入区键盘输入变化回调 例：@群成员
@@ -665,7 +665,7 @@ return menuArray;
 
 输入区键盘回调示例（EaseIM APP 有效）：
 
-```objective-c
+```objectivec
 //@群成员
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
@@ -700,7 +700,7 @@ return menuArray;
 
 #### 输入框选中回调
 
-```objective-c
+```objectivec
 /**
  * 输入区选中范围变化回调  例：@群成员
  */
@@ -709,7 +709,7 @@ return menuArray;
 
 输入区选中范围变化回调示例（EaseIM APP 有效）：
 
-```objective-c
+```objectivec
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
     [textView.attributedText enumerateAttributesInRange:NSMakeRange(0, textView.text.length) options:0 usingBlock:^(NSDictionary<NSAttributedStringKey,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
@@ -739,7 +739,7 @@ return menuArray;
 
 对方正在输入状态回调（单聊有效）
 
-```objective-c
+```objectivec
 /**
  对方正在输入
 */
@@ -748,7 +748,7 @@ return menuArray;
 
 对方结束输入回调（单聊有效）
 
-```objective-c
+```objectivec
 /**
  对方结束输入
 */
@@ -759,7 +759,7 @@ return menuArray;
 
 默认消息 cell 长按回调
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 默认消息 cell 长按回调
@@ -772,7 +772,7 @@ return menuArray;
 
 默认消息 cell 长按回调示例（EaseIM APP 有效）：
 
-```objective-c
+```objectivec
 //添加转发消息
 - (NSMutableArray<EaseExtMenuModel *> *)messageLongPressExtMenuItemArray:(NSMutableArray<EaseExtMenuModel *> *)defaultLongPressItems message:(EMMessage *)message
 {
@@ -796,7 +796,7 @@ return menuArray;
 
 用户自定义消息 cell 长按事件回调
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 当前所长按的 自定义 cell 的扩展区数据模型组
@@ -823,7 +823,7 @@ return menuArray;
 
 通过实现会话列表回调获取自定义消息 cell 如果返回 nil 会显示默认；如果返回 cell 则会显示用户自定义 cell。
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 获取消息自定义 cell
@@ -837,7 +837,7 @@ return menuArray;
 
 #### 会话列表 cell 选中回调
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 会话列表 cell 选中回调
@@ -849,7 +849,7 @@ return menuArray;
 
 会话列表 cell 选中回调示例（EaseIM APP 有效）：
 
-```objective-c
+```objectivec
 - (void)easeTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EaseConversationCell *cell = (EaseConversationCell*)[tableView cellForRowAtIndexPath:indexPath];
@@ -867,7 +867,7 @@ return menuArray;
 
 #### 会话列表用户资料回调
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 会话列表用户资料回调
@@ -881,7 +881,7 @@ return menuArray;
 
 会话列表用户资料回调实例（EaseIM APP 有效）
 
-```objective-c
+```objectivec
 - (id<EaseUserDelegate>)easeUserDelegateAtConversationId:(NSString *)conversationId conversationType:(EMConversationType)type
 {
     //EMConversationUserDataModel 为自定义用户资料数据模型，实现 EaseUserDelegate 接口返回参数
@@ -894,7 +894,7 @@ return menuArray;
 
 #### 会话列表 cell 侧滑项回调
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 会话列表 cell 侧滑项回调
@@ -909,7 +909,7 @@ return menuArray;
 
 会话列表 cell 侧滑项回调示例（EaseIM APP 有效）
 
-```objective-c
+```objectivec
 - (NSArray<UIContextualAction *> *)easeTableView:(UITableView *)tableView trailingSwipeActionsForRowAtIndexPath:(NSIndexPath *)indexPath actions:(NSArray<UIContextualAction *> *)actions
 {
     NSMutableArray<UIContextualAction *> *array = [[NSMutableArray<UIContextualAction *> alloc]init];
@@ -934,7 +934,7 @@ return menuArray;
 
 获取用户自己的联系人列表填充到 EaseIMKit 通讯录中
 
-```objective-c
+```objectivec
 - (void)setContacts:(NSArray<EaseUserDelegate> * _Nonnull)contacts;
 ```
 
@@ -944,13 +944,13 @@ EaseConversationsViewControllerDelegate
 
 #### 即将刷新通讯录填充数据
 
-```objective-c
+```objectivec
 - (void)willBeginRefresh;
 ```
 
 即将刷新通讯录填充数据示例（EaseIM APP 有效）：
 
-```objective-c
+```objectivec
 - (void)willBeginRefresh {
     //从服务器获取当前登录账户的联系人列表
     [EMClient.sharedClient.contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
@@ -972,7 +972,7 @@ EaseConversationsViewControllerDelegate
 
 #### 通讯录自定义 cell
 
-```objective-c
+```objectivec
 /*!
 @method
 @brief 获取通讯录自定义 cell
@@ -986,7 +986,7 @@ EaseConversationsViewControllerDelegate
 
 #### 通讯录 cell 条目选中回调
 
-```objective-c
+```objectivec
 /*!
 @method
 @brief 通讯录 cell 条目选中回调
@@ -999,7 +999,7 @@ EaseConversationsViewControllerDelegate
 
 通讯录 cell 条目选中回调示例：
 
-```objective-c
+```objectivec
 - (void)easeTableView:(UITableView *)tableView didSelectRowAtContactModel:(EaseContactModel *)contact {
     //跳转加好友页
     if ([contact.easeId isEqualToString:@"newFriend"]) {
@@ -1024,7 +1024,7 @@ EaseConversationsViewControllerDelegate
 
 #### 通讯录 cell 侧滑回调
 
-```objective-c
+```objectivec
 /*!
  @method
  @brief 会话列表 cell 侧滑项回调
@@ -1039,7 +1039,7 @@ EaseConversationsViewControllerDelegate
 
 通讯录 cell 侧滑回调示例：
 
-```objective-c
+```objectivec
 - (NSArray<UIContextualAction *> *)easeTableView:(UITableView *)tableView trailingSwipeActionsForRowAtContactModel:(EaseContactModel *)contact actions:(NSArray<UIContextualAction *> *)actions
 {
     //通讯录头部非联系人列表禁止侧滑

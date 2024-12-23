@@ -40,7 +40,7 @@
 
 参考如下示例代码，在你的项目中当前用户设置自己的所有属性或者仅设置某一项属性。
 
-```objective-c
+```objectivec
 // 设置用户所有属性。
 EMUserInfo *userInfo = [[EMUserInfo alloc] init];
 userInfo.userId = EMClient.sharedClient.currentUsername;
@@ -57,7 +57,7 @@ userInfo.gender = 1;
 }];
 ```
 
-```objective-c
+```objectivec
 // 以修改用户头像为例，演示如何修改指定用户属性。
 NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMDemo/avatar/Image1.png";
 
@@ -89,14 +89,14 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 获取用户所有属性，一次调用用户 ID 数量不能超过 100。
 // 异步方法
 [[EMClient sharedClient].userInfoManager fetchUserInfoById:@[EMClient.sharedClient.currentUsername] 		completion:^(NSDictionary *aUserDatas, EMError *aError) {
 }];
 ```
 
-```objective-c
+```objectivec
 // 获取指定用户的指定用户属性。
 NSString *userIds = @[@"user1",@"user2"];
 NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTypePhone),@(EMUserInfoTypeMail)];
@@ -121,7 +121,7 @@ NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTy
 
 如果你的场景中涉及名片消息，你也可以使用自定义属性功能，并参考如下示例代码实现：
 
-```objective-c
+```objectivec
 // 设置自定义消息的 `event` 为 `userCard` ，并在 `ext` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
 EMCustomMessageBody *body = [[EMCustomMessageBody alloc] init];
 body.event = @"userCard";

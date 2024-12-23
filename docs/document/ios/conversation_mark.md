@@ -8,7 +8,7 @@
 
 你需要自行维护会话标记与具体业务含义（比如 `EMMarkType0` 为重要会话）之间的映射关系。例如：
 
-```objective-c
+```objectivec
 NSDictionary* mapping = @{
         @(EMMarkType0): @"important",
         @(EMMarkType1): @"normal",
@@ -48,7 +48,7 @@ NSDictionary* mapping = @{
 对会话添加标记，例如会话标星，并不影响会话的其他逻辑，例如会话的未读消息数。
 :::
 
-```objective-c
+```objectivec
 [EMClient.sharedClient.chatManager addConversationMark:@[@"conversationId1"] mark:EMMarkType0 completion:^(EMError * _Nullable aError) {
             
     }];
@@ -60,7 +60,7 @@ NSDictionary* mapping = @{
 
 调用该方法会同时移除本地和服务器端会话的标记。
 
-```objective-c
+```objectivec
 [EMClient.sharedClient.chatManager removeConversationMark:@[@"conversationId1"] mark:EMMarkType0 completion:^(EMError * _Nullable aError) {
             
     }];
@@ -71,7 +71,7 @@ NSDictionary* mapping = @{
 你可以调用 `getConversationsFromServerWithCursor` 方法根据会话标记从服务器分页获取会话列表。SDK 会按会话标记的时间的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 `0`）、会话标记以及最新一条消息。从服务端拉取会话列表后会更新本地会话列表。
 
 
-```objective-c
+```objectivec
 //cursor：查询的开始位置。若传入空字符串，SDK 从最新标记操作的会话开始获取。
 // filter：会话查询选项，包括会话标记和每页获取的会话条数（最多可获取 10 条）。
 EMConversationFilter* filter = [[EMConversationFilter alloc] initWithMark:EMMarkType0 pageSize:10];
@@ -84,7 +84,7 @@ EMConversationFilter* filter = [[EMConversationFilter alloc] initWithMark:EMMark
 
 对于本地会话，你可以调用 `getAllConversations` 方法获取本地所有会话后自己进行会话过滤。下面以查询标记了 `EMMarkType0` 的所有本地会话为例。
 
-```objective-c
+```objectivec
 //最终的查询结果全部放入 result 中。
 NSMutableArray<EMConversation*>* result = [NSMutableArray array];
  NSArray<EMConversation*>* allConversations = [EMClient.sharedClient.chatManager getAllConversations];
@@ -99,7 +99,7 @@ for (EMConversation* conversation in allConversations) {
 
 要获取本地单个会话的所有标记，你需要首先调用 `getConversationWithConvId` 方法获取本地单个会话，然后从会话的 `marks` 属性中查看该会话的所有标记，示例代码如下：
 
-```objective-c
+```objectivec
 EMConversation* conversation = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
     NSArray<NSNumber*>* marks = conversation.marks;
 ```

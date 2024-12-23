@@ -142,7 +142,7 @@
 
 ### **步骤二 将证书名称传递给 SDK**
 
-```objective-c
+```objectivec
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // 注册推送。
   [application registerForRemoteNotifications];
@@ -164,7 +164,7 @@
 
 DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给你，你需要把 DeviceToken 传给 SDK。
 
-```objective-c
+```objectivec
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   // 异步方法
   [EMClient.sharedClient registerForRemoteNotificationsWithDeviceToken:deviceToken completion:^(EMError *aError) {

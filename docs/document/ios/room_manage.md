@@ -42,7 +42,7 @@
 
 示例代码如下：
 
-```objective-c
+```objectivec
 EMError *error;
     EMChatroom *chatroom = [[EMClient sharedClient].roomManager createChatroomWithSubject:@"Subject" description:@"description" invitees:@[@"user1",@"user2"] message:@"message" maxMembersCount:100 error:&error];
 ```
@@ -56,7 +56,7 @@ EMError *error;
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
 // 异步方法
 [[EMClient sharedClient].roomManager getChatroomsFromServerWithPage:1 pageSize:50 completion:nil];
@@ -88,7 +88,7 @@ extension ViewController: EMChatroomManagerDelegate {
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecificationFromServerWithId:@“chatroomId” completion:nil];
 ```
@@ -99,7 +99,7 @@ EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecifica
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [[EMClient sharedClient].roomManager destroyChatroom:self.chatroom.chatroomId completion:nil];
 ```
@@ -110,7 +110,7 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 注册聊天室回调。
 [[EMClient sharedClient].roomManager addDelegate:self delegateQueue:nil];
 // 移除聊天室回调。
@@ -119,7 +119,7 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 
 具体事件如下：
 
-```objective-c
+```objectivec
 // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
 - (void)userDidJoinChatroom:(EMChatroom *)aChatroom
       user:(NSString *)aUsername {
