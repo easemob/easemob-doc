@@ -12,7 +12,7 @@
 
 初始化示例代码：
 
-```TypeScript
+```typescript
 let options = new ChatOptions("Your appkey");
 ......// 其他 ChatOptions 配置。
 // 初始化时传入上下文以及 options

@@ -28,7 +28,7 @@
 
 示例代码如下：
 
-```Java
+```java
 //获取指定的会话 ID。
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 
@@ -50,12 +50,12 @@ EMClient.getInstance().chatManager().deleteConversationFromServer(conversationId
 
 你可以删除本地会话和历史消息，示例代码如下：
 
-```Java
+```java
 // 删除指定用户的会话，如果需要保留历史消息，传 `false`。
 EMClient.getInstance().chatManager().deleteConversation(conversationId, true);
 ```
 
-```Java
+```java
 // 删除指定会话中指定的一条历史消息。
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 conversation.removeMessage(deleteMsg.msgId);

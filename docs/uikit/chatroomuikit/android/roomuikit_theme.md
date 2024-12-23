@@ -16,7 +16,7 @@ ChatroomUIkit 内置浅色和深色主题，默认为浅色主题。
 
 你可以通过更新主题相关的配置项自定义主题。若对任何配置项不做修改，可以使用默认主题。
 
-```Kotlin
+```kotlin
 @Composable
 fun ChatroomUIKitTheme(
     isDarkTheme: Boolean = isSystemInDarkTheme(),

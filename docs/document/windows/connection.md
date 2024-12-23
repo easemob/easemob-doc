@@ -8,7 +8,7 @@
 
 你可以通过注册连接监听确认连接状态。
 
-```C#
+```csharp
 
 // 监听器建议在初始化完成之后，登录之前设置，这样可确保收到登录通知。
 class ConnectionDelegate : IConnectionDelegate

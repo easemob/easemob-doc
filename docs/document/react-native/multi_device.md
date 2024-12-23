@@ -59,7 +59,7 @@
 
 你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .contactManager.getSelfIdsOnOtherPlatform()
   .then((ids) => {
@@ -92,7 +92,7 @@ ChatClient.getInstance()
 
 你可以调用 `getLoggedInDevicesFromServer` 方法从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`ChatDeviceInfo` 中的 `deviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
 
-```TypeScript
+```typescript
 // userId: 用户 ID.
 // pwdOrToken: 密码或者token
 // isPassword: 是否使用密码登录
@@ -114,7 +114,7 @@ ChatClient.getInstance()
 登录成功后才会将该设置发送到服务器。
 :::
 
-```TypeScript
+```typescript
 // customDeviceName: 自定义设备名称。
 ChatClient.getInstance()
   .init(
@@ -149,7 +149,7 @@ ChatClient.getInstance()
 登录成功后才会将该设置发送到服务器。
 :::
 
-```TypeScript
+```typescript
 // customOSType: 自定义设备类型。取值范围 [1,100]。
 ChatClient.getInstance()
   .init(
@@ -176,7 +176,7 @@ ChatClient.getInstance()
 登录成功后才会将该设置发送到服务器。
 :::
 
-```TypeScript
+```typescript
 // 初始化设置登录额外信息
 ChatClient.getInstance()
   .init(
@@ -221,7 +221,7 @@ ChatClient.getInstance()
 不登录也可以使用该接口。
 :::
 
-```TypeScript
+```typescript
 // resource: 可以通过 `getLoggedInDevicesFromServer` 获取。
 const deviceInfo = await ChatClient.getInstance().getLoggedInDevicesFromServer(
   userId,
@@ -246,7 +246,7 @@ ChatClient.getInstance()
 不登录也可以使用该接口。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .kickAllDevices(userId, pwdOrToken, isPassword)
   .then(() => {
@@ -267,7 +267,7 @@ ChatClient.getInstance()
 多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
 :::
 
-```TypeScript
+```typescript
 let listener: ChatMultiDeviceEventListener = new (class
   implements ChatMultiDeviceEventListener
 {

@@ -6,7 +6,7 @@
 
 以下代码示例显示了如何设置和获取推送通知的首选语言：
 
-```Java
+```java
 // 设置离线推送的首选语言。
 EMClient.getInstance().pushManager().setPreferredNotificationLanguage("en", new EMCallBack(){});
 

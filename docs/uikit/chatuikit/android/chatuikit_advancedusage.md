@@ -12,7 +12,7 @@
 只有实现了 `ChatUIKitClient.getCustomActivityRoute()?.getActivityRoute()` 的 Activity 才可以进行拦截。
 :::
 
-```Kotlin
+```kotlin
 //实现 UIKitChatActivity 页面的 getActivityRoute
 
 companion object {
@@ -51,7 +51,7 @@ ChatUIKitClient.setCustomActivityRoute(object : ChatUIKitCustomActivityRoute {
 
 单群聊 UIKit 提供了一些全局配置，可以在初始化时进行设置，示例代码如下：
 
-```Kotlin
+```kotlin
 val avatarConfig = ChatUIKitAvatarConfig()
 // 将头像设置为圆角
 avatarConfig.avatarShape = ChatUIKitImageView.ShapeType.ROUND

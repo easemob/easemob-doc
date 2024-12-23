@@ -41,7 +41,7 @@
 
 > 配置 `client_id` 的 `value` 时，不能通过 `resource` 中的值配置（例如 `$media.icon`），请直接写入 `client_id` 的值。
 
-```TypeScript
+```typescript
 "module": {
   "name": "entry",
   "type": "xxx",
@@ -64,7 +64,7 @@
 
 ## 步骤四 在 SDK 初始化时配置应用的推送 Client ID
 
-```TypeScript
+```typescript
 // ChatOptions 需要传入 appkey 参数。
 let options = new ChatOptions("Your appKey");
 // 传入 AppGallery Connect 获取到的 ClientID。
@@ -77,7 +77,7 @@ ChatClient.getInstance().init(context, options);
 
 你可以设置 `PushListener` 监听 Push Token 的上传结果。
 
-```TypeScript
+```typescript
 private pushListener: PushListener = {
     onError: (error: ChatError) => {
       // push token 绑定失败。

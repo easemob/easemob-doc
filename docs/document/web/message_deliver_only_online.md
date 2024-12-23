@@ -26,7 +26,7 @@
 
 下面以发送文本消息为例进行说明：
 
-```JavaScript
+```javascript
 // 发送文本消息。
 function sendTextMessage() {
   let option = {

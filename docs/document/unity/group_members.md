@@ -35,7 +35,7 @@
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.AddGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -52,7 +52,7 @@ SDKClient.Instance.GroupManager.AddGroupMembers(groupId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 List<string> members = new List<string>();
 members.Add("member1");
 members.Add("member2");
@@ -84,7 +84,7 @@ SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, members, callback: n
 
 示例代码如下：
 
-```C#
+```csharp
 Dictionary<string, string> dict = new Dictionary<string, string>();
 dict.Add("key", "value");
 
@@ -110,7 +110,7 @@ SDKClient.Instance.GroupManager.SetMemberAttributes(groupId, userId, dict, new C
 
 示例代码如下：
 
-```C#
+```csharp
 List<string> userList = new List<string>();
 userList.Add("user");
 
@@ -139,7 +139,7 @@ SDKClient.Instance.GroupManager.FetchMemberAttributes(groupId, userList, keyList
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.ChangeGroupOwner(groupId, newOwner, new CallBack(
     onSuccess: () =>
     {
@@ -158,7 +158,7 @@ SDKClient.Instance.GroupManager.ChangeGroupOwner(groupId, newOwner, new CallBack
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.AddGroupAdmin(groupId, adminId, new CallBack(
     onSuccess: () =>
     {
@@ -175,7 +175,7 @@ SDKClient.Instance.GroupManager.AddGroupAdmin(groupId, adminId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.RemoveGroupAdmin(groupId, adminId, new CallBack(
     onSuccess: () =>
     {
@@ -194,7 +194,7 @@ SDKClient.Instance.GroupManager.RemoveGroupAdmin(groupId, adminId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.BlockGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -211,7 +211,7 @@ SDKClient.Instance.GroupManager.BlockGroupMembers(groupId, members, new CallBack
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.UnBlockGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -228,7 +228,7 @@ SDKClient.Instance.GroupManager.UnBlockGroupMembers(groupId, members, new CallBa
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.GetGroupBlockListFromServer(groupId, pageNum, pageSize, callback: new ValueCallBack<List<string>>(
     onSuccess: (list) =>
     {
@@ -247,7 +247,7 @@ SDKClient.Instance.GroupManager.GetGroupBlockListFromServer(groupId, pageNum, pa
 
 示例代码如下：
 
-```C#
+```csharp
 // muteMilliseconds：禁言时间。若传 -1，表示永久禁言。
 SDKClient.Instance.GroupManager.MuteGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
@@ -265,7 +265,7 @@ SDKClient.Instance.GroupManager.MuteGroupMembers(groupId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.UnMuteGroupMembers(groupId, members, new CallBack(
     onSuccess: () =>
     {
@@ -282,7 +282,7 @@ SDKClient.Instance.GroupManager.UnMuteGroupMembers(groupId, members, new CallBac
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: new ValueCallBack<Dictionary<string, long>>(
     onSuccess: (dict) => {
     },
@@ -302,7 +302,7 @@ SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: ne
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.MuteGroupAllMembers(groupId, new CallBack(
     onSuccess: () => {
     },
@@ -316,7 +316,7 @@ SDKClient.Instance.GroupManager.MuteGroupAllMembers(groupId, new CallBack(
 
 仅群主和群管理员可以调用 `UnMuteGroupAllMembers` 方法取消全员禁言，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.UnMuteGroupAllMembers(groupId, new CallBack(
     onSuccess: () => {
     },
@@ -336,7 +336,7 @@ SDKClient.Instance.GroupManager.UnMuteGroupAllMembers(groupId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.AddGroupAllowList(groupId, members, new CallBack(
     onSuccess: () => {
     },
@@ -352,7 +352,7 @@ SDKClient.Instance.GroupManager.AddGroupAllowList(groupId, members, new CallBack
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.RemoveGroupAllowList(groupId, members, new CallBack(
     onSuccess: () => {
     },
@@ -366,7 +366,7 @@ SDKClient.Instance.GroupManager.RemoveGroupAllowList(groupId, members, new CallB
 
 所有群成员可以调用 `CheckIfInGroupAllowList` 方法检查自己是否在群白名单中，示例代码如下：
 
-```C#
+```csharp
 public void CheckIfInGroupAllowList(final String groupId, EMValueCallBack<Boolean> callBack)
 SDKClient.Instance.GroupManager.CheckIfInGroupAllowList(groupId, new ValueCallBack<bool>(
     onSuccess: (ret) => {
@@ -382,7 +382,7 @@ SDKClient.Instance.GroupManager.CheckIfInGroupAllowList(groupId, new ValueCallBa
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.GetGroupAllowListFromServer(currentGroupId, callback: new ValueCallBack<List<string>>(
     onSuccess: (list) => {
     },

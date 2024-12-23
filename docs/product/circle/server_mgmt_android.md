@@ -39,7 +39,7 @@
 
 示例代码如下：
 
-```Java
+```java
 EMCircleServerAttribute attribute = new EMCircleServerAttribute();
     attribute.setName(name);
     attribute.setDesc(desc);
@@ -74,7 +74,7 @@ EMClient.getInstance().chatCircleManager().createServer(attribute, new EMValueCa
 
 示例代码如下：
 
-```Java
+```java
   EMClient.getInstance().chatCircleManager().inviteUserToServer(serverId, inviteeUserId, "欢迎加入server", new EMCallBack() {
             @Override
             public void onSuccess() {
@@ -94,7 +94,7 @@ EMClient.getInstance().chatCircleManager().createServer(attribute, new EMValueCa
 
   - 若同意加入社区，调用 `acceptServerInvitation` 方法。邀请人收到 `EMCircleServerListener#onInvitationBeAccepted` 事件，社区内所有成员（不包括加入社区的该新成员）会收到 `EMCircleServerListener#onMemberJoinedServer` 事件。示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().acceptServerInvitation(serverId, inviterUserID, new EMValueCallBack<EMCircleServer>() {
     @Override
     public void onSuccess(EMCircleServer value) {
@@ -110,7 +110,7 @@ EMClient.getInstance().chatCircleManager().acceptServerInvitation(serverId, invi
 
   - 若拒绝加入社区，调用 `declineServerInvitation` 方法。邀请人收到 `EMCircleServerListener#onInvitationBeDeclined` 事件。示例代码如下：
 
- ```Java
+ ```java
 EMClient.getInstance().chatCircleManager().declineServerInvitation(serverId, inviterUserID, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -130,7 +130,7 @@ EMClient.getInstance().chatCircleManager().declineServerInvitation(serverId, inv
 
 示例代码如下：
 
-```Java
+```java
 EMCircleServerAttribute serverAttribute = new EMCircleServerAttribute();
                 serverAttribute.setName("name");
                 serverAttribute.setIcon("iconUrl");
@@ -155,7 +155,7 @@ EMClient.getInstance().chatCircleManager().updateServer(serverId, serverAttribut
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().destroyServer(serverId, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -175,7 +175,7 @@ EMClient.getInstance().chatCircleManager().destroyServer(serverId, new EMCallBac
 
 示例代码如下：
 
-```Java
+```java
 String tag = "动漫";
 ArrayList<String> tags = new ArrayList<>();
 tags.add(tag);
@@ -199,7 +199,7 @@ EMClient.getInstance().chatCircleManager().addTagsToServer(serverId, tags, new E
 
 示例代码如下：
 
-```Java
+```java
 ArrayList<String> tagsRemoved = new ArrayList<>();
 tagsRemoved.add("你要移除的tagId");
 EMClient.getInstance().chatCircleManager().removeTagsFromServer(serverId, tagsRemoved, new EMCallBack() {
@@ -219,7 +219,7 @@ EMClient.getInstance().chatCircleManager().removeTagsFromServer(serverId, tagsRe
 
 社区成员可调用 `fetchServerTags` 方法获取社区的标签列表。
 
-```Java
+```java
  EMClient.getInstance().chatCircleManager().fetchServerTags(serverId, new EMValueCallBack<List<EMCircleTag>>() {
     @Override
     public void onSuccess(List<EMCircleTag> value) {
@@ -239,7 +239,7 @@ EMClient.getInstance().chatCircleManager().removeTagsFromServer(serverId, tagsRe
  - 根据社区名称搜索，支持基于通过社区全名搜索和模糊搜索分页获取数据。若使用模糊搜索，你需要传入社区名称中最左侧的单个字或词汇，或包含该字或词汇的关键字。例如社区名称为 `足球社区01`，传入 `足`或`足球` 都可搜索出该社区，而使用 `球` 或 `社区01` 则搜索不到该社区。
  - 若根据标签名称搜索，需传入完整的标签名称，不支持模糊搜索。该类型查询直接获取带有该标签的所有社区，不支持分页查询。 
 
-```Java
+```java
 EMCircleServerSearchType searchType=EMCircleServerSearchType.EM_CIRCLE_SERVER_SEARCH_TYPE_NAME;
 String keyword="足球";
 EMClient.getInstance().chatCircleManager().fetchServers(searchType, keyword, 20, null, new EMValueCallBack<EMCursorResult<EMCircleServer>>() {
@@ -261,7 +261,7 @@ EMClient.getInstance().chatCircleManager().fetchServers(searchType, keyword, 20,
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchServerDetail(serverId, new EMValueCallBack<EMCircleServer>() {
     @Override
     public void onSuccess(EMCircleServer value) {
@@ -281,7 +281,7 @@ EMClient.getInstance().chatCircleManager().fetchServerDetail(serverId, new EMVal
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchJoinedServers(20, null, new EMValueCallBack<EMCursorResult<EMCircleServer>>() {
     @Override
     public void onSuccess(EMCursorResult<EMCircleServer> value) {
@@ -301,7 +301,7 @@ EMClient.getInstance().chatCircleManager().fetchJoinedServers(20, null, new EMVa
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchServerMembers(serverID, 20, null, new EMValueCallBack<EMCursorResult<EMCircleUser>>() {
     @Override
     public void onSuccess(EMCursorResult<EMCircleUser> value) {
@@ -336,7 +336,7 @@ EMClient.getInstance().chatCircleManager().fetchServerMembers(serverID, 20, null
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().joinServer(serverId, new EMValueCallBack<EMCircleServer>() {
       @Override
       public void onSuccess(EMCircleServer value) {
@@ -363,7 +363,7 @@ EMClient.getInstance().chatCircleManager().joinServer(serverId, new EMValueCallB
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().leaveServer(serverId, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -383,7 +383,7 @@ EMClient.getInstance().chatCircleManager().leaveServer(serverId, new EMCallBack(
 
 示例代码如下：
 
-```Java
+```java
  EMClient.getInstance().chatCircleManager().removeUserFromServer(serverId, userId, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -403,7 +403,7 @@ EMClient.getInstance().chatCircleManager().leaveServer(serverId, new EMCallBack(
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().checkSelfIsInServer(serverId, new EMValueCallBack<Boolean>() {
     @Override
     public void onSuccess(Boolean value) {
@@ -423,7 +423,7 @@ EMClient.getInstance().chatCircleManager().checkSelfIsInServer(serverId, new EMV
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchSelfServerRole(serverId, new EMValueCallBack<EMCircleUserRole>() {
     @Override
     public void onSuccess(EMCircleUserRole value) {
@@ -445,7 +445,7 @@ EMClient.getInstance().chatCircleManager().fetchSelfServerRole(serverId, new EMV
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().addModeratorToServer(serverId, userId, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -467,7 +467,7 @@ EMClient.getInstance().chatCircleManager().addModeratorToServer(serverId, userId
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().removeModeratorFromServer(serverId, userId, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -485,7 +485,7 @@ EMClient.getInstance().chatCircleManager().removeModeratorFromServer(serverId, u
 
 `EMCircleManager` 中提供社区事件的监听接口。开发者可以通过设置此监听，获取社区中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
-```Java
+```java
 EMCircleServerListener circleServerListener = new EMCircleServerListener() {
 
     //社区被创建。参数社区创建的成员（除操作者外）会收到该事件。

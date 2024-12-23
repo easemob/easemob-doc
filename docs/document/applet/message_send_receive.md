@@ -23,7 +23,7 @@
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
 
-```JavaScript
+```javascript
 // 发送文本消息。
 function sendTextMessage() {
   let option = {
@@ -53,7 +53,7 @@ function sendTextMessage() {
 
 对于聊天室消息，你可以通过消息的 `broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
-```JavaScript
+```javascript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   onTextMessage: function (message) {},
@@ -75,7 +75,7 @@ conn.addEventHandler("eventName", {
    
 对于消息附件，你也可以将附件上传到自己的服务器，而不是环信服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
 
-```JavaScript
+```javascript
 function sendPrivateUrlImg() {
   let option = {
     chatType: "singleChat",
@@ -99,7 +99,7 @@ function sendPrivateUrlImg() {
 
 1. 创建和发送语音消息。
 
-```JavaScript
+```javascript
 /**
  * @param {Object} tempFilePath - 要上传的文件的小程序临时文件路径。
  * @param {Object} duration - 语音时长，单位为秒。
@@ -153,7 +153,7 @@ function sendPrivateAudio(tempFilePath, duration) {
 
 2. 接收方收到 `onAudioMessage` 回调，根据消息 `url` 字段获取语音文件的服务器地址，从而获取语音文件。
 
-```JavaScript
+```javascript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   // 当前用户收到语音消息。
@@ -171,7 +171,7 @@ conn.addEventHandler("eventName", {
 
 1. 创建和发送图片消息。
 
-```JavaScript
+```javascript
 function sendImage() {
   var me = this;
   wx.chooseImage({
@@ -255,7 +255,7 @@ function sendPrivateImg(res) {
 
 2. 接收方收到 `onImageMessage` 回调，根据消息 `url` 字段获取图片文件的服务器地址，从而获取图片文件。
 
-```JavaScript
+```javascript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   onImageMessage: function (message) {},
@@ -268,7 +268,7 @@ conn.addEventHandler("eventName", {
 
 1. 创建和发送视频消息。
 
-```JavaScript
+```javascript
 function sendPrivateVideo(){
 			var me = this;
 			var token = WebIM.conn.context.accessToken
@@ -327,7 +327,7 @@ function sendPrivateVideo(){
 
 2. 接收方收到 `onVideoMessage` 回调，根据消息 `url` 字段获取视频文件的服务器地址，从而获取视频文件。
 
-```JavaScript
+```javascript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   // 当前用户收到视频消息。
@@ -346,7 +346,7 @@ conn.addEventHandler("eventName", {
 
 1. 创建和发送文件消息。
 
-```JavaScript
+```javascript
 // 发送文件消息。
 function sendFileMessage() {
       const me = this;
@@ -416,7 +416,7 @@ function sendFileMessage() {
 
 2. 接收方收到 `onFileMessage` 回调，根据消息 `url` 字段获取文件的服务器地址，从而获取文件。
 
-```JavaScript
+```javascript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   // 当前用户收到文件消息。
@@ -435,7 +435,7 @@ conn.addEventHandler("eventName", {
 1. 创建和发送位置消息。
 
 发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。
-```JavaScript
+```javascript
 const sendLocMsg = () => {
   let option = {
     chatType: "singleChat",
@@ -457,7 +457,7 @@ const sendLocMsg = () => {
 
 2. 接收方收到 `onLocationMessage` 回调，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
-```JavaScript
+```javascript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   onLocationMessage: function (message) {},
@@ -474,7 +474,7 @@ conn.addEventHandler("eventName", {
 
 1. 创建和发送透传消息。
 
-```JavaScript
+```javascript
 function sendCMDMessage() {
   let option = {
     // 消息类型。
@@ -506,7 +506,7 @@ function sendCMDMessage() {
 
 2. 接收方通过 `onCmdMessage` 回调接收透传消息。
 
-```JavaScript
+```javascript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   onCmdMessage: function (message) {},
@@ -521,7 +521,7 @@ conn.addEventHandler("eventName", {
 
 1. 创建和发送自定义消息。
 
-```JavaScript
+```javascript
 function sendCustomMsg() {
   // 设置自定义事件。
   let customEvent = "customEvent";
@@ -558,7 +558,7 @@ function sendCustomMsg() {
 
 2. 接收方通过 `onCustomMessage` 回调接收自定义消息。
 
-```JavaScript
+```javascript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   onCustomMessage: function (message) {},
@@ -603,7 +603,7 @@ conn.addEventHandler("eventName", {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   chatType: "singleChat",
   type: "combine",
@@ -641,7 +641,7 @@ conn.send
 
 合并消息实际上是一种附件消息。收到合并消息后，你可以调用 `downloadAndParseCombineMessage` 方法下载合并消息附件并解析出原始消息列表。
 
-```JavaScript
+```javascript
 connection
   .downloadAndParseCombineMessage({
     url: msg.url,
@@ -669,7 +669,7 @@ connection
 
 下面以文本消息为例介绍如何发送定向消息，示例代码如下：
 
-```JavaScript
+```javascript
 // 发送定向文本消息。
 function sendTextMessage() {
   let option = {
@@ -701,7 +701,7 @@ function sendTextMessage() {
 
 如果上述类型的消息无法满足要求，你可以使用消息扩展为消息添加属性。这种情况可用于更复杂的消息传递场景，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
 
-```JavaScript
+```javascript
 function sendTextMessage() {
   let option = {
     type: "txt",
@@ -737,7 +737,7 @@ function sendTextMessage() {
 
 对于聊天室消息，可设置消息优先级，包括高、普通和低优先级。示例代码如下：
 
-```JavaScript
+```javascript
 // 发送文本消息。
 function sendTextMessage() {
     let option = {
@@ -765,4 +765,4 @@ function sendTextMessage() {
 
 - 设置发送方收到内容审核替换后的内容
 
-若初始化时打开了 `EMOptions#setUseReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
+若初始化时打开了 `EMOptions#useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。

@@ -23,7 +23,7 @@
 
 你可以调用 `updateMessage` 方法更新指定消息。该方法会同时更新本地内存和数据库中的消息。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.updateMessage(newMsg)
   .then(() => {

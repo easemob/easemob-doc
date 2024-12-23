@@ -35,7 +35,7 @@
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchChatRoomAnnouncement(String, EMValueCallBack)。
 String announcement = EMClient.getInstance().chatroomManager().fetchChatRoomAnnouncement(chatRoomId);
@@ -47,7 +47,7 @@ String announcement = EMClient.getInstance().chatroomManager().fetchChatRoomAnno
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncUpdateChatRoomAnnouncement(String, String, EMCallBack)。
 EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, announcement);
@@ -59,7 +59,7 @@ EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, 
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncChangeChatRoomSubject(String, String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatRoomSubject(chatRoomId, newSubject);
@@ -71,7 +71,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatRoomSub
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncChangeChatroomDescription(String, String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatroomDescription(chatRoomId, newDescription);
@@ -85,7 +85,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatroomDes
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 异步方法。
  *
@@ -116,7 +116,7 @@ EMClient.getInstance().chatroomManager().asyncFetchChatroomAttributesFromServer(
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 异步方法。
  *
@@ -145,7 +145,7 @@ EMClient.getInstance().chatroomManager().asyncFetchChatRoomAllAttributesFromServ
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 异步方法。
  *
@@ -180,7 +180,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 异步方法。
  *
@@ -215,7 +215,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributeForced(
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 异步方法。
  *
@@ -247,7 +247,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributes(
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 异步方法。
  *
@@ -279,7 +279,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 异步方法。
  *
@@ -304,7 +304,7 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServer(
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 异步方法。
  *
@@ -329,7 +329,7 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServerF
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 异步方法。
  *
@@ -357,7 +357,7 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromServer
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 异步方法。
  *

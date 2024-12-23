@@ -40,7 +40,7 @@
 
 参考如下示例代码，在你的项目中当前用户设置自己的所有属性或者仅设置某一项属性。
 
-```Java
+```java
 // 设置所有用户属性。
 EMUserInfo userInfo = new EMUserInfo();
 userInfo.setUserId(EMClient.getInstance().getCurrentUser());
@@ -92,7 +92,7 @@ EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType
 
 示例代码如下：
 
-```Java
+```java
 // 获取一个或多个用户的所有属性，一次调用用户 ID 数量不超过 100。
 String[] userId = new String[1];
 //username 指用户 ID。
@@ -104,7 +104,7 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByUserId(userId, new EMVal
 
 用户可以获取指定用户的指定用户属性信息。
 
-```Java
+```java
 String[] userId = new String[1];
 userId[0] = EMClient.getInstance().getCurrentUser();
 EMUserInfo.EMUserInfoType[] userInfoTypes = new EMUserInfo.EMUserInfoType[2];
@@ -129,7 +129,7 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userIn
 
 如果使用场景中涉及名片消息，你也可以使用自定义属性功能，并参考如下示例代码实现：
 
-```Java
+```java
 //设置自定义消息的 `event` 为 `"userCard"`，并在 `ext` 中添加展示名片所需要的用户 ID 、昵称和头像等字段。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.CUSTOM);
 EMCustomMessageBody body = new EMCustomMessageBody(DemoConstant.USER_CARD_EVENT);

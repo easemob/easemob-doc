@@ -48,7 +48,7 @@
 
 默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `ChatPresenceManager#subscribe` 方法订阅指定用户的在线状态，示例代码如下：
 
-```TypeScript
+```typescript
 // memberIds: 要订阅的用户列表
 // expiry: 过期时长，单位为秒
 ChatClient.getInstance()
@@ -74,7 +74,7 @@ ChatClient.getInstance()
 
 若取消指定用户的在线状态订阅，可调用 `ChatPresenceManager#unSubscribe` 方法，示例代码如下：
 
-```TypeScript
+```typescript
 // memberIds: 将要取消订阅的用户列表
 ChatClient.getInstance()
   .presenceManager.unSubscribe(memberIds)
@@ -90,7 +90,7 @@ ChatClient.getInstance()
 
 用户在线时，可调用 `ChatPresenceManager#publishPresence` 方法发布自定义在线状态：
 
-```TypeScript
+```typescript
 // description: 状态描述
 ChatClient.getInstance()
   .presenceManager.publishPresence(description)
@@ -108,7 +108,7 @@ ChatClient.getInstance()
 
 添加用户在线状态的监听器以及接收状态变更事件通知，示例代码如下：
 
-```TypeScript
+```typescript
 // 导入 Presence 监听模块
 class ChatPresenceEvent implements ChatPresenceEventListener {
   onPresenceStatusChanged(list: ChatPresence[]): void {
@@ -127,7 +127,7 @@ ChatClient.getInstance().presenceManager.addPresenceListener(
 
 为方便用户管理订阅关系，SDK 提供 `ChatPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
-```TypeScript
+```typescript
 // pageNum: 页码
 // pageSize: 单次请求返回的成员数，取值范围为 [1, 50]
 ChatClient.getInstance()
@@ -144,7 +144,7 @@ ChatClient.getInstance()
 
 如果不关注用户的在线状态变更，你可以调用 `ChatPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
-```TypeScript
+```typescript
 // memberIds: 要查询在线状态的用户列表，每次最多可传 100 个用户 ID。
 ChatClient.getInstance()
   .presenceManager.fetchPresenceStatus(memberIds)

@@ -37,7 +37,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.fetchChatRoomAnnouncement(roomId)
   .then((ann) => {
@@ -54,7 +54,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.updateChatRoomAnnouncement(roomId, announcement)
   .then(() => {
@@ -71,7 +71,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.changeChatRoomSubject(roomId, subject)
   .then(() => {
@@ -88,7 +88,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.changeChatRoomDescription(roomId, desc)
   .then(() => {
@@ -104,7 +104,7 @@ ChatClient.getInstance()
 
 聊天室所有成员均可调用 `fetchChatRoomAttributes` 方法获取聊天室指定自定义属性。
 
-```TypeScript
+```typescript
 // 通过指定聊天室 ID 和属性 key 检索某些自定义属性。 如果 key 为 `null` 或空字符串，则获取所有内容。
 ChatClient.getInstance()
   .roomManager.fetchChatRoomAttributes(roomId, keys)
@@ -120,7 +120,7 @@ ChatClient.getInstance()
 
 所有聊天室成员均可调用 `addAttributes` 方法设置或更新一个或多个聊天室自定义属性。利用该方法可设置新属性，也可以修改自己或其他成员设置的现有属性。设置后，其他聊天室成员收到  `onAttributesUpdated` 回调。
 
-```TypeScript
+```typescript
 // 通过指定聊天室 ID、属性 key、属性值、deleteWhenLeft 和 overwrite 设置自定义属性。
 // deleteWhenLeft：当前成员退出聊天室时是否自动删除其设置的自定义属性。
 // overwrite：是否覆盖其他成员设置的 key 相同的属性。
@@ -144,7 +144,7 @@ ChatClient.getInstance()
 
 聊天室成员可以调用 `removeAttributes` 方法删除聊天室自定义属性。利用该方法可删除自己和其他成员设置的自定义属性。删除后，聊天室其他成员收到  `onAttributesRemoved` 回调。
 
-```TypeScript
+```typescript
 // 通过指定聊天室 ID、属性 key 和 `forced` 删除自定义属性。
 // keys 可为数组格式，表示同时删除多个属性，失败返回错误信息。
 // `forced` 表示是否删除其他成员设置的 key 相同的属性。

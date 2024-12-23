@@ -14,7 +14,7 @@
 
 群组详情页面中按钮数据源可配项以及按钮点击事件，例如，添加音频通话、视频通话按钮。默认情况下，`super.getDetailItem()` 包含聊天和搜索。 
 
-```Kotlin
+```kotlin
     // 实现 MyGroupDetailActivity 继承 ChatUIKitGroupDetailActivity 并重写以下方法
 
     override fun getDetailItem(): MutableList<ChatUIKitMenuItem>? {

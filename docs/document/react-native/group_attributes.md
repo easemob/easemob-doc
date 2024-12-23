@@ -31,7 +31,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 修改群组名称。
 ChatClient.getInstance()
   .groupManager.changeGroupName(groupId, local_name)
@@ -49,7 +49,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.changeGroupDescription(groupId, desc)
   .then(() => {
@@ -68,7 +68,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.updateGroupAnnouncement(groupId, announcement)
   .then(() => {
@@ -85,7 +85,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.fetchAnnouncementFromServer(groupId)
   .then((ann) => {
@@ -106,7 +106,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 设置文件进度回调
 const callback = new (class implements ChatGroupFileStatusCallback {
   that: any;
@@ -140,7 +140,7 @@ ChatClient.getInstance()
 
 群主和群管理员可删除全部的群共享文件，群成员只能删除自己上传的群文件。示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.removeGroupSharedFile(groupId, fileId)
   .then(() => {
@@ -155,7 +155,7 @@ ChatClient.getInstance()
 
 所有群成员均可以调用  `fetchGroupFileListFromServer` 方法从服务器获取群组的共享文件列表。
 
-```TypeScript
+```typescript
 // 分页获取群组文件
 ChatClient.getInstance()
   .groupManager.fetchGroupFileListFromServer(groupId, pageSize, pageNum)
@@ -173,7 +173,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 设置扩展字段
 const extension = { key: "value" };
 ChatClient.getInstance()

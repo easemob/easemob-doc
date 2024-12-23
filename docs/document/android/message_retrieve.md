@@ -50,7 +50,7 @@
 4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
 :::
 
-```Java
+```java
 String conversationId = " ";
 EMConversation.EMConversationType type = EMConversation.EMConversationType.Chat;
 EMFetchMessageOption option = new EMFetchMessageOption();
@@ -94,7 +94,7 @@ int pageSize,String cursor,
 
 为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
 
-```Java
+```java
 // 异步方法。同步方法为 fetchHistoryMessages(String, EMConversationType, int, String, EMConversation.EMSearchDirection)。
 EMClient.getInstance().chatManager().asyncFetchHistoryMessage(
     conversationId,
@@ -122,7 +122,7 @@ EMClient.getInstance().chatManager().asyncFetchHistoryMessage(
 
 你也可以调用 `loadMoreMsgFromDB` 方法从本地数据库中分页加载消息，加载的消息会基于消息中的时间戳放入当前会话的内存中。
 
-```Java
+```java
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
 List<EMMessage> messages = conversation.getAllMessages();
 // startMsgId：查询的起始消息 ID。SDK 从该消息 ID 开始按消息时间戳的逆序加载。如果传入消息的 ID 为空，SDK 从最新消息开始按消息时间戳的逆序获取。
@@ -134,7 +134,7 @@ List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
 
 你可以调用 `getMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 
-```Java
+```java
 // msgId：要获取消息的消息 ID。
 EMMessage msg = EMClient.getInstance().chatManager().getMessage(msgId);
 ```
@@ -145,7 +145,7 @@ EMMessage msg = EMClient.getInstance().chatManager().getMessage(msgId);
 
 每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
-```Java
+```java
 //conversationId：会话 ID
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 // Type：消息类型；timeStamp：消息搜索的起始时间戳，单位为毫秒。该参数设置后，SDK 从指定的时间戳的消息开始，按照搜索方向对消息进行搜索。若设置为负数，SDK 从当前时间开始，按消息时间戳的逆序搜索。
@@ -159,7 +159,7 @@ List<EMMessage> emMessages = conversation.searchMsgFromDB(EMMessage.Type.TXT, Sy
 
 每次最多可获取 400 条消息。
 
-```Java
+```java
 //conversationId：会话 ID
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 // startTimeStamp：搜索的起始时间戳；endTimeStamp：搜索的结束时间戳；maxCount：每次获取的消息数量，取值范围为 [1,400]。
@@ -170,7 +170,7 @@ List<EMMessage> messageList = conversation.searchMsgFromDB(startTimeStamp,endTim
 
 你可以调用 `getAllMsgCount` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
 
-```Java
+```java
 String conversationId = "pu";
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 if(conversation!=null) {

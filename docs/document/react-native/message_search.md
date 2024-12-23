@@ -30,7 +30,7 @@
 若使用该功能，需将 SDK 升级至 V1.4.0 或以上版本。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.getMsgsWithKeyword({
     keywords, // 搜索关键字
@@ -58,7 +58,7 @@ ChatClient.getInstance()
 
 - 方式一：
 
-```TypeScript
+```typescript
 // 直接调用
 ChatClient.getInstance()
   .chatManager.getConvMsgsWithKeyword({
@@ -82,7 +82,7 @@ ChatClient.getInstance()
 
 - 方式二：
 
-```TypeScript
+```typescript
 // 通过会话对象调用
 const conv = ChatClient.getInstance().chatManager.getConversation(
   convId,
@@ -113,7 +113,7 @@ conv
 若使用该功能，需将 SDK 升级至 V1.6.0 或以上版本。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.searchMessages({
     msgTypes: [ChatMessageType.TXT],
@@ -135,7 +135,7 @@ ChatClient.getInstance()
 若使用该功能，需将 SDK 升级至 V1.6.0 或以上版本。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.searchMessagesInConversation({
     convId: "foo",

@@ -38,7 +38,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 示例代码如下：
 
-```Java
+```java
 // 添加好友。
 // 同步方法，会阻塞当前线程。异步方法为 asyncAddContact(String, String, EMCallBack)。
 EMClient.getInstance().contactManager().addContact(toAddUsername, reason);
@@ -48,7 +48,7 @@ EMClient.getInstance().contactManager().addContact(toAddUsername, reason);
 
 请监听与好友请求相关事件的回调，这样当用户收到好友请求，可以调用接受请求的 RESTful API 添加好友。服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。设置监听示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
     // 对方同意了好友请求。
     @Override
@@ -74,7 +74,7 @@ EMClient.getInstance().contactManager().setContactListener(new EMContactListener
 
 3. 收到好友请求后，可以选择同意加好友申请或者拒绝加好友申请，示例代码如下：
 
-```Java
+```java
 // 同意好友申请。
 // 同步方法，会阻塞当前线程。异步方法为 asyncAcceptInvitation(String, EMCallBack)。
 EMClient.getInstance().contactManager().acceptInvitation(username);
@@ -91,7 +91,7 @@ EMClient.getInstance().contactManager().declineInvitation(username);
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncDeleteContact(String, EMCallBack)。
 EMClient.getInstance().contactManager().deleteContact(username);
@@ -105,7 +105,7 @@ EMClient.getInstance().contactManager().deleteContact(username);
 
 好友备注的长度不能超过 100 个字符。
 
-```Java
+```java
 EMClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -125,7 +125,7 @@ EMClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, ne
 
 - 一次性获取服务端好友列表。
 
-```Java
+```java
 EMClient.getInstance().contactManager().asyncFetchAllContactsFromServer(new EMValueCallBack<List<EMContact>>() {
     @Override
     public void onSuccess(List<EMContact> value) {
@@ -141,7 +141,7 @@ EMClient.getInstance().contactManager().asyncFetchAllContactsFromServer(new EMVa
 
 - 分页获取服务端好友列表。
 
-```Java
+```java
 // limit 的取值范围为 [1,50]
 List<EMContact> contacts=new ArrayList<>();
 String cursor= "";
@@ -171,7 +171,7 @@ private void doAsyncFetchAllContactsFromServer(List<EMContact> contacts, String 
 
 此外，你也可以调用 `getAllContactsFromServer` 方法从服务器获取所有好友的列表，该列表只包含好友的用户 ID。
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。异步方法为 asyncGetAllContactsFromServer(EMValueCallBack)。
 List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
 ```
@@ -186,7 +186,7 @@ List<String> usernames = EMClient.getInstance().contactManager().getAllContactsF
 
 - 获取本地单个好友。
 
-```Java
+```java
 try {
     EMContact emContact = EMClient.getInstance().contactManager().fetchContactFromLocal(userId);
     String remark = emContact.getRemark();
@@ -199,7 +199,7 @@ try {
 
 - 一次性获取本地好友列表。
 
-```Java
+```java
 EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMValueCallBack<List<EMContact>>() {
     @Override
     public void onSuccess(List<EMContact> value) {
@@ -217,7 +217,7 @@ EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMVal
 
 示例代码如下：
 
-```Java
+```java
 List<String> usernames = EMClient.getInstance().contactManager().getContactsFromLocal();
 ```
 
@@ -231,7 +231,7 @@ List<String> usernames = EMClient.getInstance().contactManager().getContactsFrom
 
 用户可以将任何其他用户添加到黑名单列表，无论该用户是否是好友。好友被加入黑名单后仍在好友列表上显示。
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncAddUserToBlackList(String, boolean, EMCallBack)。
 EMClient.getInstance().contactManager().addUserToBlackList(username,true);
@@ -241,7 +241,7 @@ EMClient.getInstance().contactManager().addUserToBlackList(username,true);
 
 你可以调用 `removeUserFromBlackList` 将用户从黑名单移除，用户发送消息等行为将恢复。
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncRemoveUserFromBlackList(String, EMCallBack)。
 EMClient.getInstance().contactManager().removeUserFromBlackList(username);
@@ -251,7 +251,7 @@ EMClient.getInstance().contactManager().removeUserFromBlackList(username);
 
 你可以调用 `getBlackListFromServer` 从服务端获取黑名单列表。示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncGetBlackListFromServer(EMValueCallBack)。
 EMClient.getInstance().contactManager().getBlackListFromServer();
@@ -263,6 +263,6 @@ EMClient.getInstance().contactManager().getBlackListFromServer();
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().contactManager().getBlackListUsernames();
 ```

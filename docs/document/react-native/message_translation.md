@@ -30,7 +30,7 @@ SDK 支持你通过调用 API 在项目中实现如下功能：
 
 无论是按需翻译还是自动翻译，都需先调用 `fetchSupportedLanguages` 获取支持的翻译语言。获取支持的翻译语言的示例代码如下：
 
-```TypeScript
+```typescript
 // 获取支持的翻译语言
 ChatClient.getInstance()
   .chatManager.fetchSupportedLanguages()
@@ -46,7 +46,7 @@ ChatClient.getInstance()
 
 接收方调用 `translateMessage` 对收到的文本消息进行翻译。翻译调用过程如下：
 
-```TypeScript
+```typescript
 // 创建文本消息，只有文本消息可以翻译
 const msg = ChatMessage.createTextMessage(targetId, content);
 // 指定需要翻译的目标语言
@@ -64,7 +64,7 @@ ChatClient.getInstance()
 
 翻译成功之后，译文信息会保存到消息中。调用 `translations` 获取译文内容。示例代码如下：
 
-```TypeScript
+```typescript
 const body = result.body as ChatTextMessageBody;
 console.log("translation: ", body.translations);
 ```
@@ -73,7 +73,7 @@ console.log("translation: ", body.translations);
 
 创建消息时，发送方设置 `ChatTextMessageBody` 中的 `targetLanguages` 字段为译文语言，设置过程如下：
 
-```TypeScript
+```typescript
 // 指定翻译的目标语言
 const languages: string[] = ["en"];
 const msg = ChatMessage.createTextMessage(
@@ -88,7 +88,7 @@ const msg = ChatMessage.createTextMessage(
 
 接收方收到消息后，调用 `translations` 获取消息的译文列表，示例代码如下：
 
-```TypeScript
+```typescript
 const body = result.body as ChatTextMessageBody;
 console.log("translation: ", body.translations);
 ```

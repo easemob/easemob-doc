@@ -60,7 +60,7 @@ yarn add easemob-websdk
 
 根据项目需求引入相应的功能模块。例如，引入用户关系模块：
 
-```JavaScript
+```javascript
 import MiniCore from "easemob-websdk/miniCore/miniCore";
 import * as contactPlugin from "easemob-websdk/contact/contact";
 ```
@@ -69,7 +69,7 @@ import * as contactPlugin from "easemob-websdk/contact/contact";
 
 将引入的功能模块注册到 miniCore 中：
 
-```JavaScript
+```javascript
 const miniCore = new MiniCore({
   appKey: "your appKey",
 });
@@ -82,7 +82,7 @@ miniCore.usePlugin(contactPlugin, "contact");
 
 注册所需模块后，即可在项目中使用这些模块提供的功能：
 
-```JavaScript
+```javascript
 // 获取联系人列表
 miniCore.contact.getContacts();
 ```
@@ -95,7 +95,7 @@ miniCore.contact.getContacts();
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 登录
 miniCore.open({
   username: "username",
@@ -111,7 +111,7 @@ miniCore.close();
 
 示例代码如下：
 
-```JavaScript
+```javascript
 miniCore.addEventHandler("handlerId", {
   onTextMessage: (message) => {
     console.log(message);
@@ -123,7 +123,7 @@ miniCore.addEventHandler("handlerId", {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 import { EasemobChat } from "easemob-websdk";
 //发送文本消息
 const sendTextMsg = () => {
@@ -147,7 +147,7 @@ const sendTextMsg = () => {
 
 ### 引入 JavaScript SDK
 
-```JavaScript
+```javascript
 import EC from "easemob-websdk";
 ```
 
@@ -155,7 +155,7 @@ import EC from "easemob-websdk";
 
 在下面的导入代码中，`EasemobChat` 是 SDK 类型的命名空间。
 
-```JavaScript
+```javascript
 import EC, { EasemobChat } from "easemob-websdk";
 ```
 
@@ -165,7 +165,7 @@ import EC, { EasemobChat } from "easemob-websdk";
 
 2. 在 `index.html` 文件中，对 `index.js` 文件进行引用。
 
-```JavaScript
+```javascript
 <script src="path to the JS file"></script>
 ```
 
@@ -175,7 +175,7 @@ import EC, { EasemobChat } from "easemob-websdk";
 
 1. Nuxt 项目, 你可以在 mounted 生命周期动态导入 SDK：
 
-```JavaScript
+```javascript
 export default {
   mounted: () => {
     import("easemob-websdk").then((res) => {
@@ -191,7 +191,7 @@ export default {
 
 2. 对于 Next 项目, 要使用客户端组件，你可以在文件顶部的导入上方添加 `use client` 指令。
 
-```TypeScript
+```typescript
 'use client'
  
 import { useEffect } from 'react'

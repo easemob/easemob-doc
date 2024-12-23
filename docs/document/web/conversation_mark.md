@@ -8,7 +8,7 @@
 
 你需要自行维护会话标记与具体业务含义之间的映射，例如 [`MarkType.mark_0`](https://doc.easemob.com/jsdoc/enums/Types.ContactType.MarkType.html)表示待处理会话。
 
-```JavaScript
+```javascript
 const MarkMap = new Map();
 MarkMap.set(0, 'IMPORTANT');
 MarkMap.set(1, 'NORMAL');
@@ -44,7 +44,7 @@ MarkMap.set(2, 'STAR');
 :::
 
 
-```JavaScript
+```javascript
 const options = {
   conversations: [
     {conversationId: 'test', conversationType: 'singleChat'},
@@ -64,7 +64,7 @@ conn.addConversationMark(options).then(() => {
 
 调用该方法会同时移除本地和服务器端会话的标记。
 
-```JavaScript
+```javascript
 const options = {
   conversations: [
     {conversationId: 'test', conversationType: 'singleChat'},
@@ -82,7 +82,7 @@ conn.removeConversationMark(options).then(() => {
 
 你可以调用 `getServerConversationsByFilter` 方法根据会话标记从服务器分页获取会话列表。SDK 会按会话标记的时间的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 `0`）、未读消息数、会话标记以及最新一条消息。
 
-```JavaScript
+```javascript
 const options = {
   pageSize: 10,
   cursor: '',

@@ -76,7 +76,7 @@ EaseIMKit 中位置消息使用的是百度地图定位 jar 包，为了防止�
 EaseIMKit 初始化里已包含 SDK 的初始化，不需要再去调用 SDK 的初始化。
 :::
 
-```Java
+```java
 public class DemoApplication extends Application {
     @Override
     public void onCreate() {
@@ -119,7 +119,7 @@ EaseIMKit 提供了 UIKitChatFragment，添加到 Activity 中并传递相应的
 - `history_msg_id`——消息 ID，用于查询历史记录时的定位消息 ID；
 - `isRoaming`——是否开启漫游，布尔类型，用于标记是否优先从服务器拉取消息。
 
-```Java
+```java
 public class ChatActivity extends BaseActivity {
     private UIKitChatFragment chatFragment;
 
@@ -172,7 +172,7 @@ xml 中设置如下：
 
 也可进行代码设置，如下：
 
-```Java
+```java
 ChatUIKitTitleBar titleBarMessage = findViewById(R.id.title_bar_message);
 //设置右侧菜单图标
 titleBarMessage.setRightImageResource(R.drawable.chat_user_info);
@@ -200,7 +200,7 @@ titleBarMessage.setOnBackPressListener(this);
 
 代码如下：
 
-```Java
+```java
 //设置头像尺寸
 conversationListLayout.setAvatarSize(EaseCommonUtils.dip2px(mContext, 50));
 //设置头像样式：0 为默认，1 为圆形，2 为方形(设置方形时，需要配合设置 avatarRadius，默认的 avatarRadius 为 50dp)
@@ -226,7 +226,7 @@ conversationListLayout.showUnreadDotPosition(EaseConversationSetStyle.UnreadDotP
 `ChatUIKitConversationListLayout` 提供了增加菜单项的 API，开发者可方便的增加更多的菜单功能。
 示例代码如下：
 
-```Java
+```java
 @Override
 public void initView(Bundle savedInstanceState) {
    super.initView(savedInstanceState);
@@ -268,7 +268,7 @@ public boolean onMenuItemClick(MenuItem item, int position) {
 标题区 ChatUIKitTitleBar 的具体布局及实现不在 EaseIMKit 库的聊天控件及 fragment 中，需要你自己去实现。
 开发者可以在 UIKitChatFragment 中获取到 ChatUIKitLayout 这个控件，然后通过这个控件进一步获取到获取其他控件，代码如下：
 
-```Java
+```java
 //获取到聊天列表控件
 ChatUIKitMessageListLayout messageListLayout = chatLayout.getChatMessageListLayout();
 //获取到菜单输入父控件
@@ -287,7 +287,7 @@ IChatEmojiconMenu emojiconMenu = chatInputMenu.getEmojiconMenu();
 
 #### 修改聊天列表背景
 
-```Java
+```java
 //获取到聊天列表控件
 ChatUIKitMessageListLayout messageListLayout = chatLayout.getChatMessageListLayout();
 //设置聊天列表背景
@@ -302,7 +302,7 @@ messageListLayout.setBackground(new ColorDrawable(Color.parseColor("#DA5A4D")));
 
 开发者可以设置默认头像和头像形状。
 
-```Java
+```java
 //获取到聊天列表控件
 ChatUIKitMessageListLayout messageListLayout = chatLayout.getChatMessageListLayout();
 //设置默认头像
@@ -319,7 +319,7 @@ messageListLayout.setAvatarShapeType(1);
 
 开发者可以修改聊天文本的字体大小及字体颜色，发送方及接收方需保持一致。
 
-```Java
+```java
 //获取到聊天列表控件
 ChatUIKitMessageListLayout messageListLayout = chatLayout.getChatMessageListLayout();
 //设置文本字体大小
@@ -336,7 +336,7 @@ messageListLayout.setItemTextColor(ContextCompat.getColor(mContext, R.color.red)
 
 开发者可以修改时间线的背景，文字的大小及颜色。
 
-```Java
+```java
 //获取到聊天列表控件
 ChatUIKitMessageListLayout messageListLayout = chatLayout.getChatMessageListLayout();
 //设置时间线的背景
@@ -355,7 +355,7 @@ messageListLayout.setTimeTextColor(ContextCompat.getColor(mContext, R.color.blac
 
 开发者可以设置聊天列表的样式，发送方和接收方位于两侧还是位于一侧。
 
-```Java
+```java
 //获取到聊天列表控件
 ChatUIKitMessageListLayout messageListLayout = chatLayout.getChatMessageListLayout();
 //设置聊天列表样式：两侧及均位于左侧
@@ -370,7 +370,7 @@ messageListLayout.setItemShowType(ChatUIKitMessageListLayout.ShowType.LEFT);
 
 输入区控件为 ChatUIKitInputMenu，它由输入控件 ChatUIKitPrimaryMenu，扩展控件 ChatUIKitExtendMenu 和表情控件 ChatUIKitEmojiconMenu 组成。
 
-```Java
+```java
 //获取到菜单输入父控件
 ChatUIKitInputMenu chatInputMenu = chatLayout.getChatInputMenu();
 //获取到菜单输入控件
@@ -383,7 +383,7 @@ IChatEmojiconMenu emojiconMenu = chatInputMenu.getEmojiconMenu();
 
 开发者可以修改菜单输入控件的样式，其有 5 种模式，即 `完整模式`，`不可用语音模式`，`不可用表情模式`，`不可用语音和表情模式` 和 `只有文本输入模式`。
 
-```Java
+```java
 //获取到菜单输入父控件
 ChatUIKitInputMenu chatInputMenu = chatLayout.getChatInputMenu();
 //获取到菜单输入控件
@@ -424,7 +424,7 @@ EaseIMKit 中已经为八种基本消息类型文本，表情，图片，视频�
 
 1、新建 ChatTxtNewAdapterDelegate 继承 EaseMessageAdapterDelegate。
 
-```Java
+```java
 public class ChatTxtNewAdapterDelegate extends EaseMessageAdapterDelegate <EMMessage, ChatUIKitRowViewHolder> {
     @Override
     protected ChatUIKitRow getEaseChatRow(ViewGroup parent, boolean isSender) {
@@ -440,7 +440,7 @@ public class ChatTxtNewAdapterDelegate extends EaseMessageAdapterDelegate <EMMes
 
 2、新建 ChatRowTxtNew 继承 ChatUIKitRow 并实现相关方法
 
-```Java
+```java
 public class ChatRowTxtNew extends ChatUIKitRow {
     private TextView contentView;
 
@@ -578,7 +578,7 @@ public class ChatRowTxtNew extends ChatUIKitRow {
 
 3、新建 ChatTxtNewViewHolder 继承 ChatUIKitRowViewHolder 并实现相关方法
 
-```Java
+```java
 public class ChatTxtNewViewHolder extends ChatUIKitRowViewHolder {
     public ChatTxtNewViewHolder(@NonNull View itemView, MessageListItemClickListener itemClickListener) {
         super(itemView, itemClickListener);
@@ -596,7 +596,7 @@ public class ChatTxtNewViewHolder extends ChatUIKitRowViewHolder {
 
 4、补全 ChatTxtNewAdapterDelegate 并重写 isForViewType 方法
 
-```Java
+```java
 public class ChatTxtNewAdapterDelegate extends EaseMessageAdapterDelegate <EMMessage, ChatUIKitRowViewHolder> {
     @Override
     public boolean isForViewType(EMMessage item, int position) {
@@ -621,7 +621,7 @@ public class ChatTxtNewAdapterDelegate extends EaseMessageAdapterDelegate <EMMes
 （2）对于 `item.getBooleanAttribute(ChatUIKitConstant.MESSAGE_ATTR_IS_TXT_NEW, false)` 可以理解为一种标记，在发送消息时设置，如下；
 :::
 
-```Java
+```java
 /**
  * 发送新文本消息
  * @param content
@@ -637,7 +637,7 @@ public void sendTxtNewMessage(String content) {
 
 5、注册 ChatTxtNewAdapterDelegate 对话类型（通过 EaseMessageTypeSetManager 进行注册）
 
-```Java
+```java
 /**
  * 注册对话类型
  */
@@ -661,7 +661,7 @@ ChatUIKitLayout 提供了增加菜单项的 API，开发者可方便的增加更
 
 示例代码如下：
 
-```Java
+```java
 @Override
 public void initView(Bundle savedInstanceState) {
     super.initView(savedInstanceState);
@@ -691,7 +691,7 @@ EaseIMKit 提供了常用的一些扩展功能，比如发送图片，发送文�
 
 以添加视频通话和音视频会议为例，示例代码如下：
 
-```Java
+```java
 private void resetChatExtendMenu() {
     // 获取到扩展功能控件
     IChatExtendMenu chatExtendMenu = chatLayout.getChatInputMenu().getChatExtendMenu();
@@ -735,7 +735,7 @@ EaseIMKit 也提供了增加自定义表情的接口，开发者可仿照 Emojic
 
 代码如下：
 
-```Java
+```java
 // 添加扩展表情
 chatLayout.getChatInputMenu().getEmojiconMenu().addEmojiconGroup(EmojiconExampleGroupData.getData());
 ```
@@ -752,7 +752,7 @@ chatLayout.getChatInputMenu().getEmojiconMenu().addEmojiconGroup(EmojiconExample
 
 代码如下：
 
-```Java
+```java
 // 获取列表控件
 ChatUIKitContactListLayout contactList = contactLayout.getContactList();
 // 设置条目高度
@@ -773,7 +773,7 @@ contactList.setHeaderBackGround(ContextCompat.getDrawable(mContext, R.color.whit
 
 设置简洁模式
 
-```Java
+```java
 //设置为简洁模式
 contactLayout.showSimple();
 ```
@@ -788,7 +788,7 @@ ChatUIKitContactListLayout 提供了增加菜单项的 API，开发者可方便�
 
 示例代码如下：
 
-```Java
+```java
 // 通过增加 `OnPopupMenuPreShowListener` 监听，并在 `onMenuPreShow` 中增加菜单项更简单
 @Override
 public void onMenuPreShow(EasePopupMenuHelper menuHelper, int position) {
@@ -821,7 +821,7 @@ EaseIMKit 默认是不再通讯录列表之前增加头布局的，但是内部�
 
 示例代码如下：
 
-```Java
+```java
 /**
  * 添加头布局
  */
@@ -866,7 +866,7 @@ public void initListener() {
 
 首先需要在合适的时机去设置 ChatUIKitUserProfileProvider，例如：
 
-```Java
+```java
 ChatUIKitClient.getInstance().setUserProvider(new ChatUIKitUserProfileProvider() {
     @Override
     public ChatUIKitUser getUser(String username) {
@@ -896,7 +896,7 @@ EaseIMKit 提供了 `EaseAvatarOptions` 这个类用于全局配置头像的样�
 
 示例代码如下：
 
-```Java
+```java
 //设置头像配置属性
 ChatUIKitClient.getInstance().setAvatarOptions(getAvatarOptions());
 ......
@@ -926,7 +926,7 @@ EaseIMKit 还帮助开发者实现了一系列的事件监听接口，比如条�
 
 代码如下：
 
-```Java
+```java
 @Override
 public void onItemClick(View view, int position) {
     super.onItemClick(view, position);
@@ -938,7 +938,7 @@ public void onItemClick(View view, int position) {
 
 代码如下：
 
-```Java
+```java
 conversationListLayout.setOnItemClickListener(new OnItemClickListener() {
     @Override
     public void onItemClick(View view, int position) {
@@ -955,7 +955,7 @@ conversationListLayout.setOnItemClickListener(new OnItemClickListener() {
 
 代码如下：
 
-```Java
+```java
 @Override
 public boolean onMenuItemClick(MenuItem item, int position) {
     //添加具体的点击事件实现逻辑，并返回 true
@@ -967,7 +967,7 @@ public boolean onMenuItemClick(MenuItem item, int position) {
 
 代码如下：
 
-```Java
+```java
 conversationListLayout.setOnPopupMenuItemClickListener(new OnPopupMenuItemClickListener() {
     @Override
     public boolean onMenuItemClick(MenuItem item, int position) {
@@ -981,7 +981,7 @@ conversationListLayout.setOnPopupMenuItemClickListener(new OnPopupMenuItemClickL
 
 代码如下：
 
-```Java
+```java
 conversationListLayout.setOnItemLongClickListener(new OnItemLongClickListener() {
     @Override
     public boolean onItemLongClick(View view, int position) {
@@ -999,7 +999,7 @@ conversationListLayout.setOnItemLongClickListener(new OnItemLongClickListener() 
 
 `OnChatLayoutListener` 中有如下事件监听：
 
-```Java
+```java
 public interface OnChatLayoutListener {
     /**
      * 点击消息 bubble 区域
@@ -1070,7 +1070,7 @@ ChatUIKitLayout 中已经实现了一套默认的长按弹出菜单逻辑，并�
 
 代码如下：
 
-```Java
+```java
 @Override
 public boolean onMenuItemClick(MenuItemBean item, EMMessage message) {
     //添加菜单条目点击事件实现逻辑，并返回 true
@@ -1083,7 +1083,7 @@ public boolean onMenuItemClick(MenuItemBean item, EMMessage message) {
 
 示例代码如下：
 
-```Java
+```java
 @Override
 public void onPreMenu(EasePopupWindowHelper helper, EMMessage message) {
     // 默认两分钟后，即不可撤回
@@ -1114,7 +1114,7 @@ public void onPreMenu(EasePopupWindowHelper helper, EMMessage message) {
 
 代码如下：
 
-```Java
+```java
 chatLayout.setOnPopupWindowItemClickListener(new OnMenuChangeListener() {
     @Override
     public void onPreMenu(EasePopupWindowHelper helper, EMMessage message) {
@@ -1132,7 +1132,7 @@ chatLayout.setOnPopupWindowItemClickListener(new OnMenuChangeListener() {
 
 代码如下：
 
-```Java
+```java
 chatLayout.getChatMessageListLayout().setOnItemLongClickListener(new OnItemLongClickListener() {
     @Override
     public boolean onItemLongClick(View view, int position) {
@@ -1150,7 +1150,7 @@ chatLayout.getChatMessageListLayout().setOnItemLongClickListener(new OnItemLongC
 
 代码如下：
 
-```Java
+```java
 @Override
 public void onItemClick(View view, int position) {
     super.onItemClick(view, position);
@@ -1162,7 +1162,7 @@ public void onItemClick(View view, int position) {
 
 代码如下：
 
-```Java
+```java
 contactLayout.getContactList().setOnItemClickListener(new OnItemClickListener() {
     @Override
     public void onItemClick(View view, int position) {
@@ -1179,7 +1179,7 @@ ChatUIKitContactListLayout 中已经实现了一套默认的长按弹出菜单�
 
 代码如下：
 
-```Java
+```java
 @Override
 public boolean onMenuItemClick(MenuItem item, int position) {
     // 添加具体的点击事件实现逻辑，并返回 'true'
@@ -1193,7 +1193,7 @@ public boolean onMenuItemClick(MenuItem item, int position) {
 
 代码如下：
 
-```Java
+```java
 contactLayout.getContactList().setOnPopupMenuItemClickListener(new OnPopupMenuItemClickListener() {
     @Override
     public boolean onMenuItemClick(MenuItem item, int position) {
@@ -1205,7 +1205,7 @@ contactLayout.getContactList().setOnPopupMenuItemClickListener(new OnPopupMenuIt
 
 相应的菜单项预处理，需要通过 ChatUIKitContactListLayout 设置菜单预处理监听事件。 代码如下：
 
-```Java
+```java
 contactLayout.getContactList().setOnPopupMenuPreShowListener(new OnPopupMenuPreShowListener() {
     @Override
     public void onMenuPreShow(EasePopupMenuHelper menuHelper, int position) {
@@ -1218,7 +1218,7 @@ contactLayout.getContactList().setOnPopupMenuPreShowListener(new OnPopupMenuPreS
 
 代码如下：
 
-```Java
+```java
 contactLayout.getContactList().setOnItemLongClickListener(new OnItemLongClickListener() {
     @Override
     public boolean onItemLongClick(View view, int position) {
@@ -1236,7 +1236,7 @@ EaseIMKit 中 ChatUIKitConversationListLayout 已经封装了 IM 通知的展示
 
 EaseIMKit 可处理的系统消息有如下要求：
 
-```Java
+```java
 // 设置为文本消息
 EMMessage emMessage = EMMessage.createReceiveMessage(EMMessage.Type.TXT);
 // 设置 from 为固定的 "em_system"
@@ -1247,7 +1247,7 @@ emMessage.setStatus(EMMessage.Status.SUCCESS);
 
 当然 EaseSystemMsgManager 管理类已经做了默认处理，开发者只需传入文本内容（会话列表中展示的内容）及扩展内容 ext(Map<String, Object>)即可。 示例如下：
 
-```Java
+```java
 @Override
 public void onFriendRequestDeclined(String username) {
     EMLog.i("ChatContactListener", "onFriendRequestDeclined");

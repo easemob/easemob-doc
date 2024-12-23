@@ -44,7 +44,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 添加 Reaction。
 conn.addReaction({ messageId: "messageId", reaction: "reaction" });
 
@@ -62,7 +62,7 @@ conn.addEventHandler("REACTION", {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 删除 Reaction。
 conn.deleteReaction({ messageId: "messageId", reaction: "reaction" });
 
@@ -78,7 +78,7 @@ conn.addEventHandler("REACTION", {
 
 调用 `getReactionlist` 方法可以从服务器获取 Reaction 概览列表，列表内容包含 Reaction 内容，添加或移除 Reaction 的用户数量，以及添加或移除 Reaction 的前三个用户的用户 ID。示例代码如下：
 
-```JavaScript
+```javascript
 conn
   .getReactionlist({ chatType: "singleChat", messageId: "messageId" })
   .then((res) => {
@@ -90,7 +90,7 @@ conn
 
 调用 `getReactionDetail` 方法可以从服务器获取 Reaction 详情，包括 Reaction 内容，添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的全部用户列表。示例代码如下：
 
-```JavaScript
+```javascript
 conn
   .getReactionDetail({
     messageId: "messageId",
@@ -109,7 +109,7 @@ conn
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
   // 对方的用户 ID 或者群组 ID 或聊天室 ID。
   targetId: "user1",

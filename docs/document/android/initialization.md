@@ -16,7 +16,7 @@
 
 初始化示例代码：
 
-```Java
+```java
 EMOptions options = new EMOptions();
 options.setAppKey("Your appkey");
 ......// 其他 EMOptions 配置。

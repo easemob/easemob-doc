@@ -27,7 +27,7 @@
 
 推荐一次导入 1,000 条以内的数据。
 
-```TypeScript
+```typescript
 // msgs：将要插入的消息数组
 ChatClient.getInstance()
   .chatManager.importMessages(msgs)
@@ -49,7 +49,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager.insertMessage(msg).then(() => {
     console.log('insert message success.');
 }).catch((e) => {

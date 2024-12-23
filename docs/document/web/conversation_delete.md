@@ -23,7 +23,7 @@
 
 你可以调用 `deleteConversation` 方法删除服务器端会话及其对应的消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息，其他用户不受影响。
 
-```JavaScript
+```javascript
 let options = {
   // 会话 ID：单聊为对方的用户 ID，群聊为群组 ID。
   channel: "channel",

@@ -29,7 +29,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 let messageBody = new TextMessageBody("new content");
 ChatClient.getInstance().chatManager()?.modifyMessage(messageId, messageBody).then((result) => {
   // 消息修改成功的逻辑
@@ -42,7 +42,7 @@ ChatClient.getInstance().chatManager()?.modifyMessage(messageId, messageBody).th
 若通过 RESTful API 修改自定义消息，消息的接收方也通过 `ChatMessageListener#onMessageContentChanged` 事件接收修改后的自定义消息。
 :::
 
-```TypeScript
+```typescript
 let listener: ChatMessageListener = {
   onMessageReceived: (messages: ChatMessage[]): void => {
     

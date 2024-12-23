@@ -72,7 +72,7 @@
 
 3. 在即时通讯 IM SDK 初始化时，配置启用 OPPO 推送。
 
-   ```Java
+   ```java
    EMOptions options = new EMOptions();
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
@@ -85,6 +85,6 @@
 
 4. 调用 OPPO 推送的初始化方法。
 
-   ```Java
+   ```java
    HeytapPushManager.init(context, true);
    ```

@@ -84,7 +84,7 @@
 
 3. 初始化配置。可以参考 Demo 中 demoHelper 的 `initPush()` 方法中的荣耀推送配置。
 
-```Java
+```java
 // 初始化 IM，开启荣耀推送。
 EMOptions options = new EMOptions();
 EMPushConfig.Builder builder = new EMPushConfig.Builder(context);
@@ -140,7 +140,7 @@ EMPushHelper.getInstance().setPushListener(new PushListener() {
 
 对于注册荣耀推送服务，需自定义 Service，继承荣耀推送的 `HonorMessageService` 类，重写 `onNewToken` 方法。
 
-```Java
+```java
 public class HONORPushService extends HonorMessageService {
   //Device token 发生变化时，会触发 `onNewToken` 回调返回新 Token。
   @Override
@@ -166,7 +166,7 @@ public class HONORPushService extends HonorMessageService {
 
 如果当前 IM 的登录账号已经绑定了 device token，则 IM SDK 不会上传 token。
 
-```Java
+```java
 if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
     // 获取荣耀 device token。
     HonorPushClient.getInstance().getPushToken(new HonorPushCallback<String>() {
@@ -200,7 +200,7 @@ if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
 
 以下为环信 IM 提供的通知栏消息点击动作的扩展字段：
 
-```Java
+```java
 {
     "payload":{
         "ext":{
@@ -214,7 +214,7 @@ if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
 
 示例代码如下：
 
-```Java
+```java
 // 下面以 TXT 消息为例，图片、文件等类型的消息设置方法相同。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("test");
@@ -242,7 +242,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 客户端应用主 Activity 中接收数据。在 `YourActivity` 类的 `onCreate` 方法中实现数据读取。
 
-```Java
+```java
 private void getIntentData(Intent intent) {
   if (null != intent) {
       // 获取 data 里的值
@@ -263,7 +263,7 @@ private void getIntentData(Intent intent) {
 
 在 app 级根目录下打开混淆配置文件 `proguard-rules.pro`，加入排除荣耀推送 SDK 的混淆配置脚本。
 
-```Java
+```java
   -ignorewarnings
   -keepattributes *Annotation*
   -keepattributes Exceptions

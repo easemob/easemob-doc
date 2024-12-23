@@ -29,7 +29,7 @@
 
 仅群主和群管理员可以调用 `changeGroupSubject` 方法设置和修改群组名称，其他群成员都会收到 `EMGroupManagerDelegate#groupSpecificationDidUpdate` 回调，群名称的长度限制为 128 个字符。
 
-```Objective-C
+```objective-c
 [[EMClient sharedClient].groupManager changeGroupSubject:@"subject"];
 ```
 
@@ -37,7 +37,7 @@
 
 仅群主和群管理员可以调用 `changeDescription` 方法设置和修改群组描述，其他群成员都会收到 `EMGroupManagerDelegate#groupSpecificationDidUpdate` 回调，群描述的长度限制为 512 个字符。
 
-```Objective-C
+```objective-c
 [[EMClient sharedClient].groupManager changeDescription:@"desc"
                          forGroup:@"groupID"
                          error:nil];
@@ -49,7 +49,7 @@
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 同步方法，异步方法见 [EMGroupManager updateGroupAnnouncementWithId:announcement:completion:]
 [[EMClient sharedClient].groupManager updateGroupAnnouncementWithId:@"groupID"
                          announcement:@"announcement"
@@ -62,7 +62,7 @@
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 同步方法，异步方法见 [EMGroupManager getGroupAnnouncementWithId:completion:]
 [[EMClient sharedClient].groupManager getGroupAnnouncementWithId:@"groupID" error:nil];
 ```
@@ -75,7 +75,7 @@
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 异步方法
 [[EMClient sharedClient].groupManager uploadGroupSharedFileWithId:@"groupID"
                          filePath:@"filePath"
@@ -87,7 +87,7 @@
 
 所有群成员均可调用 `downloadGroupSharedFileWithId` 方法下载群组共享文件。
 
-```Objective-C
+```objective-c
 [EMClient.sharedClient.groupManager downloadGroupSharedFileWithId:@"groupId" filePath:@"filePath" sharedFileId:@"fileId" progress:nil completion:^(EMGroup * _Nullable aGroup, EMError * _Nullable aError) {
 
     }];
@@ -99,7 +99,7 @@
 
 群主和群管理员可删除全部的群共享文件，群成员只能删除自己上传的群文件。
 
-```Objective-C
+```objective-c
 // 同步方法，异步方法见 [EMGroupManager removeGroupSharedFileWithId:sharedFileId:completion:]
 [[EMClient sharedClient].groupManager removeGroupSharedFileWithId:@"groupID"
                          sharedFileId:@"fileID"
@@ -110,7 +110,7 @@
 
 所有群成员均可以调用 `getGroupFileListWithId` 方法获取群共享文件。
 
-```Objective-C
+```objective-c
 // 同步方法，异步方法见 [EMGroupManager getGroupFileListWithId:pageNumber:pageSize:completion:]
 [[EMClient sharedClient].groupManager getGroupFileListWithId:@"groupID"
                          pageNumber:pageNumber
@@ -124,7 +124,7 @@
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 同步方法，异步方法见 [EMGroupManager updateGroupExtWithId:ext:completion:]
 [[EMClient sharedClient].groupManager updateGroupExtWithId:@"groupID"
                          ext:@"ext"

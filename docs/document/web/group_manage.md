@@ -49,7 +49,7 @@
 
 创建群组的示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   data: {
     groupname: "groupName",
@@ -74,7 +74,7 @@ conn.createGroup(option).then((res) => console.log(res));
 
 1. 群成员调用 `inviteUsersToGroup` 方法邀请用户入群。
 
-```JavaScript
+```javascript
 conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 ```
 
@@ -87,13 +87,13 @@ conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 
      - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
 
-     ```JavaScript
+     ```javascript
      conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
      ```
 
      - 受邀用户拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。邀请人会收到 `rejectInvite` 事件。
 
-     ```JavaScript
+     ```javascript
      conn.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
      ```
 
@@ -105,7 +105,7 @@ conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   groupId: "groupId",
 };
@@ -122,7 +122,7 @@ conn.destroyGroup(option).then((res) => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   // 单个群组 ID 或群组 ID 数组。
   groupId: "groupId",
@@ -138,7 +138,7 @@ conn.getGroupInfo(option).then((res) => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let pageNum = 1,
   pageSize = 100;
 let option = {
@@ -153,7 +153,7 @@ conn.listGroupMembers(option).then((res) => console.log(res));
 
 - 用户可以调用 `getJoinedGroups` 方法获取当前用户加入和创建的群组列表，代码如下：
 
-```JavaScript
+```javascript
 conn.getJoinedGroups({
   pageNum: 0,
   pageSize: 20,
@@ -164,7 +164,7 @@ conn.getJoinedGroups({
 
 - 用户还可以分页获取公开群列表：
 
-```JavaScript
+```javascript
 let option = {
   limit: 20,
   cursor: cursor,
@@ -178,7 +178,7 @@ SDK 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 创建一个群组事件监听器
 // 在该方法的举例中，用户 A 表示当前用户。
 conn.addEventHandler("eventName", {

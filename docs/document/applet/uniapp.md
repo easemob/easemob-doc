@@ -131,7 +131,7 @@ npm i easemob-websdk
 ```
 引入 uniApp SDK
 
-```JavaScript
+```javascript
 import SDK from 'easemob-websdk/uniApp/Easemob-chat';
 ```
 
@@ -139,7 +139,7 @@ import SDK from 'easemob-websdk/uniApp/Easemob-chat';
 
 实例化 SDK，并挂载在全局对象下。
 
-```JavaScript
+```javascript
 // 实例化 SDK 对象
 const WebIM = wx.WebIM = SDK;
 const conn = new WebIM.connection({

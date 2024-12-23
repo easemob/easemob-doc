@@ -69,7 +69,7 @@ npm i @vitejs/plugin-react
 
 [Veaury 配置参考](https://github.com/gloriasoft/veaury/blob/master/README_zhcn.md#vite)
 
-```JavaScript
+```javascript
 import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -166,7 +166,7 @@ export default EaseChat;
 3. 定义 `theme` 变量，传递给 EaseChat 组件，用于切换 UIKit 的主题。
 4. 添加一些样式，美化界面。
 
-```JavaScript
+```javascript
 <script setup>
 import { ref } from "vue";
 import { applyPureReactInVue } from "veaury";

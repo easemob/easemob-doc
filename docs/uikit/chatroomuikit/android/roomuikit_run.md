@@ -32,7 +32,7 @@
 
 找到下载的 **ChatroomUIKit** 模块添加为本地依赖。将 [ChatroomUIKit](https://github.com/easemob/UIKit_Chatroom_android/tree/dev/ChatroomUIKit) 和 [ChatroomService](https://github.com/easemob/UIKit_Chatroom_android/tree/dev/ChatroomService) 模块导入到项目中。
 
-```Kotlin
+```kotlin
 // settings.gradle
 include ':ChatroomUIKit'
 include ':ChatroomService'
@@ -51,7 +51,7 @@ dependencies {
 
 1. 初始化 ChatroomUIKit。
 
-```Kotlin
+```kotlin
 class ChatroomApplication : Application() {
 
   override fun onCreate() {
@@ -65,13 +65,13 @@ class ChatroomApplication : Application() {
 
 2. 登录 ChatroomUIKit。
 
-```Kotlin  
+```kotlin  
  ChatroomUIKitClient.getInstance().login("userId", "token")
 ```
 
 3. 加载 ComposeChatroom 视图，传入 `roomId` 和聊天室所有者的 `UserEntity` 对象。
 
-```Kotlin  
+```kotlin  
 class ChatroomActivity : ComponentActivity(){
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)

@@ -31,7 +31,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.fetchChatroomAnnouncement(chatRoomId).then(announcement => console.log(announcement));
 ```
 
@@ -41,7 +41,7 @@ ChatClient.getInstance().chatroomManager()?.fetchChatroomAnnouncement(chatRoomId
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.changeChatroomAnnouncement(chatRoomId, announcement).then(chatroom => {
     // success logic
 });
@@ -53,7 +53,7 @@ ChatClient.getInstance().chatroomManager()?.changeChatroomAnnouncement(chatRoomI
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.changeChatroomName(chatRoomId, newName).then(chatroom => {
     // success logic
 });
@@ -65,7 +65,7 @@ ChatClient.getInstance().chatroomManager()?.changeChatroomName(chatRoomId, newNa
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.changeChatroomDescription(chatRoomId, newDescription).then(chatroom => {
     // success logic
 });
@@ -79,7 +79,7 @@ ChatClient.getInstance().chatroomManager()?.changeChatroomDescription(chatRoomId
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 举例，如有'key1'和'key2'两个聊天室自定义 key 。
 const keyArr = ['key1', 'key2'];
 ChatClient.getInstance().chatroomManager()?.fetchChatroomAttributes(chatroomId, keyArr).then(mapResult => {
@@ -91,7 +91,7 @@ ChatClient.getInstance().chatroomManager()?.fetchChatroomAttributes(chatroomId, 
 
 如果不设置`keyArr` 参数，则表示获取聊天室所有自定义属性。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.fetchChatroomAttributes(chatroomId).then(mapResult => {
   // success logic
 }).catch((e: ChatError) => {
@@ -105,7 +105,7 @@ ChatClient.getInstance().chatroomManager()?.fetchChatroomAttributes(chatroomId).
 
 示例代码如下：
 
-```TypeScript
+```typescript
 let params: SetChatroomAttributeParams = {
   chatroomId: chatroomId,// 聊天室 ID
   attributeKeyOrMap: 'key',// 聊天室属性 key
@@ -124,7 +124,7 @@ ChatClient.getInstance().chatroomManager()?.setChatroomAttributes(params).then(r
 
 示例代码如下：
 
-```TypeScript
+```typescript
 let attributeMap = new Map<string, string>();
 attributeMap.set('key1', 'value1');
 attributeMap.set('key2', 'value2');
@@ -156,7 +156,7 @@ ChatClient.getInstance().chatroomManager()?.setChatroomAttributes(params).then(r
 
 示例代码如下：
 
-```TypeScript
+```typescript
 let params: RemoveChatroomAttributeParams = {
   chatroomId: chatroomId,// 聊天室 ID
   attributeKey: 'key',// 聊天室属性 key

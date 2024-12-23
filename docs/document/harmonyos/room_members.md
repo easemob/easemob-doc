@@ -34,7 +34,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 //cursor：从该游标位置开始取数据。首次调用 cursor 传空字符串，从最新数据开始获取。
 //pageSize：每页期望返回的成员数,最大值为 1,000。
 ChatClient.getInstance().chatroomManager()?.fetchChatroomMembers(chatroomId, cursor, pageSize).then(cursorResult => {
@@ -50,7 +50,7 @@ ChatClient.getInstance().chatroomManager()?.fetchChatroomMembers(chatroomId, cur
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.leaveChatroom(chatRoomId).then(()=> {
     // success logic
 });
@@ -60,7 +60,7 @@ ChatClient.getInstance().chatroomManager()?.leaveChatroom(chatRoomId).then(()=> 
 
 示例代码如下：
 
-```TypeScript
+```typescript
 let options = new ChatOptions();
 options.setDeleteMessagesOnLeaveChatroom(false);
 ```
@@ -77,7 +77,7 @@ options.setDeleteMessagesOnLeaveChatroom(false);
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.removeChatroomMembers(chatroomId, members).then(room => {
     // success logic
 });
@@ -104,7 +104,7 @@ ChatClient.getInstance().chatroomManager()?.removeChatroomMembers(chatroomId, me
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.blockChatroomMembers(chatroomId, members).then(room => {
     // success logic
 });
@@ -116,7 +116,7 @@ ChatClient.getInstance().chatroomManager()?.blockChatroomMembers(chatroomId, mem
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.unblockChatroomMembers(chatroomId, members).then(room => {
     // success logic
 });
@@ -128,7 +128,7 @@ ChatClient.getInstance().chatroomManager()?.unblockChatroomMembers(chatroomId, m
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.fetchChatroomBlocklist(chatroomId, pageNum, pageSize).then(blocklist => {
     // success logic
 });
@@ -146,7 +146,7 @@ ChatClient.getInstance().chatroomManager()?.fetchChatroomBlocklist(chatroomId, p
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.fetchChatroomWhitelist(chatroomId).then(whitelist => {
     // success logic
 });
@@ -156,7 +156,7 @@ ChatClient.getInstance().chatroomManager()?.fetchChatroomWhitelist(chatroomId).t
 
 所有聊天室成员可以调用 `checkIfInChatRoomWhiteList` 方法检查自己是否在聊天室白名单中，示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.checkIfInWhitelist(chatroomId).then(inWhitelist => {
     // success logic
 });
@@ -168,7 +168,7 @@ ChatClient.getInstance().chatroomManager()?.checkIfInWhitelist(chatroomId).then(
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.addToChatroomWhitelist(chatroomId, members).then(room => {
     // success logic
 });
@@ -180,7 +180,7 @@ ChatClient.getInstance().chatroomManager()?.addToChatroomWhitelist(chatroomId, m
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.removeFromChatroomWhitelist(chatroomId, members).then(room => {
     // success logic
 });
@@ -198,7 +198,7 @@ ChatClient.getInstance().chatroomManager()?.removeFromChatroomWhitelist(chatroom
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // `duration`：禁言时间。传 -1 表示永久禁言。
 ChatClient.getInstance().chatroomManager()?.muteChatroomMembers(chatroomId, members, duration).then(room => {
     // success logic
@@ -215,7 +215,7 @@ ChatClient.getInstance().chatroomManager()?.muteChatroomMembers(chatroomId, memb
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.unmuteChatroomMembers(chatroomId, members).then(room => {
     // success logic
 });
@@ -227,7 +227,7 @@ ChatClient.getInstance().chatroomManager()?.unmuteChatroomMembers(chatroomId, me
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.fetchChatroomMutes(chatroomId, pageNum, pageSize).then(result => {
     // success logic
 });
@@ -245,7 +245,7 @@ ChatClient.getInstance().chatroomManager()?.fetchChatroomMutes(chatroomId, pageN
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.muteAllMembers(chatroomId).then(room => {
     // success logic
 });
@@ -257,7 +257,7 @@ ChatClient.getInstance().chatroomManager()?.muteAllMembers(chatroomId).then(room
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.unmuteAllMembers(chatroomId).then(room => {
     // success logic
 });
@@ -271,7 +271,7 @@ ChatClient.getInstance().chatroomManager()?.unmuteAllMembers(chatroomId).then(ro
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.changeChatroomOwner(chatroomId, newOwner).then(room => {
     // success logic
 });
@@ -283,7 +283,7 @@ ChatClient.getInstance().chatroomManager()?.changeChatroomOwner(chatroomId, newO
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.addChatroomAdmin(chatroomId, admin).then(room => {
     // success logic
 });
@@ -295,7 +295,7 @@ ChatClient.getInstance().chatroomManager()?.addChatroomAdmin(chatroomId, admin).
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatroomManager()?.removeChatroomAdmin(chatroomId, admin).then(room => {
     // success logic
 });

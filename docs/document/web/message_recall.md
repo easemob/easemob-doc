@@ -32,7 +32,7 @@
 2. 附件类型消息，包括图片、音频和视频和文件消息，撤回消息后，消息附件也相应删除。
 :::
 
-```JavaScript
+```javascript
 let option = {
   // 要撤回消息的消息 ID。
   mid: "msgId",
@@ -57,7 +57,7 @@ conn.recallMessage(option)
 
 你可以设置消息撤回监听，通过 `onRecallMessage` 监听消息撤回状态。
 
-```JavaScript
+```javascript
   conn.addEventHandler('MESSAGES',{
    onRecallMessage: (msg) => {
       // 这里需要在本地删除对应的消息，也可以插入一条消息：“XXX撤回一条消息”。

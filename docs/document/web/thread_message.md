@@ -48,7 +48,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 在子区内发送文本消息
 function sendTextMessage() {
     let option = {
@@ -78,7 +78,7 @@ function sendTextMessage() {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 监听收到的文本消息
 connection.addEventHandler('THREADMESSAGE',{
   onTextMessage:(message) => {
@@ -98,7 +98,7 @@ connection.addEventHandler('THREADMESSAGE',{
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   // 设置要撤回消息的 ID。
   mid: 'msgId',
@@ -129,7 +129,7 @@ conn.addEventHandler('MESSAGES',{
 
 调用 `getHistoryMessages` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
 
-```JavaScript
+```javascript
 let options = {
   // 子区 ID。
   targetId: "threadId",

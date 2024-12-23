@@ -63,7 +63,7 @@
 
 你可以调用 `EMPushManager#syncSilentModeConversationsFromServerCompletion:` 方法从服务器同步所有会话的推送通知方式设置。同步后成功后的结果会存储到本地数据库，然后你可以通过 `EMConversation#disturbType` 查询当前会话的推送通知方式。
 
-```Swift
+```swift
 EMClient.shared().pushManager?.syncSilentModeConversations(fromServerCompletion: { err in
     if err == nil {
         if let conversations = EMClient.shared().chatManager?.getAllConversations() {
@@ -80,7 +80,7 @@ EMClient.shared().pushManager?.syncSilentModeConversations(fromServerCompletion:
 
 在本机上调用 `EMPushManager#setSilentModeForConversation:conversationType:params:completion` 设置会话的推送通知方式，在多设备事件 `EMMultiDevicesDelegate#onConversationEvent:conversationId:conversationType` 里会回调当前操作，此时参数 `event` 的值为 `EMMultiDevicesEventConversationMuteInfoChanged`。
 
-```Swift
+```swift
 //对会话设置推送通知方式
 let param = EMSilentModeParam(paramType: .remindType)
         param.remindType = .none
@@ -132,7 +132,7 @@ extension ViewController: EMMultiDevicesDelegate {
 
 你可以调用 `setSilentModeForAll` 设置 app 级别的推送通知，并通过指定 `EMSilentModeParam` 字段设置推送通知方式和免打扰模式，如下代码示例所示：
 
-```Objective-C
+```objective-c
 //设置推送通知方式为 `MentionOnly`。
 EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentModeParamTypeRemindType];
 param.remindType = EMPushRemindTypeMentionOnly;
@@ -159,7 +159,7 @@ param.silentModeEndTime = [[EMSilentModeTime alloc]initWithHours:15 minutes:0];
 
 你可以调用 `getSilentModeForAll` 获取 app 级别的推送通知设置，如以下代码示例所示：
 
-```Objective-C
+```objective-c
 // 异步方法
 [[EMClient sharedClient].pushManager getSilentModeForAllWithCompletion:^(EMSilentModeResult *aResult, EMError *aError) {
     if (!aError) {
@@ -180,7 +180,7 @@ param.silentModeEndTime = [[EMSilentModeTime alloc]initWithHours:15 minutes:0];
 
 你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知，并通过指定 `EMSilentModeParam` 字段设置推送通知方式和免打扰模式，如以下代码示例所示：
 
-```Objective-C
+```objective-c
 //设置推送通知方式为 `MentionOnly`。
 EMSilentModeParam *param = [[EMSilentModeParam alloc]initWithParamType:EMSilentModeParamTypeRemindType];
 param.remindType = EMPushRemindTypeMentionOnly;
@@ -202,7 +202,7 @@ EMConversationType conversationType = EMConversationTypeGroupChat;
 
 你可以调用 `getSilentModeForAllWithCompletion` 获取指定会话的推送通知设置，如以下代码示例所示：
 
-```Objective-C
+```objective-c
 // 异步方法
 [[EMClient sharedClient].pushManager getSilentModeForAllWithCompletion:^(EMSilentModeResult *aResult, EMError *aError) {
     if (!aError) {
@@ -229,7 +229,7 @@ EMConversationType conversationType = EMConversationTypeGroupChat;
 
 你可以调用 `getSilentModeForConversations` 获取多个会话的推送通知设置，如以下代码示例所示：
 
-```Objective-C
+```objective-c
 NSArray *conversations = @[conversation1,conversation2];
 // 异步方法
     [[EMClient sharedClient].pushManager getSilentModeForConversations:conversationArray completion:^(NSDictionary<NSString*,EMSilentModeResult*>*aResult, EMError *aError) {
@@ -245,7 +245,7 @@ NSArray *conversations = @[conversation1,conversation2];
 
 以下代码示例显示了如何清除会话的推送通知方式的设置：
 
-```Objective-C
+```objective-c
 //清除指定会话的推送通知方式的设置。清除后，该会话会采取 app 的设置。
 // 异步方法
 [[EMClient sharedClient].pushManager clearRemindTypeForConversation:@"" conversationType:conversationType completion:^(EMSilentModeResult *aResult, EMError *aError) {

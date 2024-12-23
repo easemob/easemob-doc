@@ -31,7 +31,7 @@
 
 对于单个会话来说，默认可置顶 20 条消息。你可以联系环信商务提升该上限，最大可调整至 100。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.pinMessage(messageId).then(() => {
   // success logic
 }).catch((e: ChatError) => {
@@ -45,7 +45,7 @@ ChatClient.getInstance().chatManager()?.pinMessage(messageId).then(() => {
 
 单聊、群组或聊天室中的所有成员均可取消置顶消息，不论该消息由哪个成员置顶。取消置顶消息后，该会话的置顶消息列表中不再包含该消息。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.unpinMessage(messageId).then(() => {
   // success logic
 }).catch((e: ChatError) => {
@@ -62,7 +62,7 @@ ChatClient.getInstance().chatManager()?.unpinMessage(messageId).then(() => {
 2. 若消息置顶后，用户撤回了该消息，则该消息从服务端移除，所有用户在从服务器拉取置顶消息列表时无法拉取到该消息。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.fetchPinnedMessagesFromServer(conversationId).then((result: Array<ChatMessage>) => {
   // success logic
 }).catch((e: ChatError) => {
@@ -72,7 +72,7 @@ ChatClient.getInstance().chatManager()?.fetchPinnedMessagesFromServer(conversati
 
 你可以调用 `Conversation#getPinnedMessages` 方法从本地取单个会话中的置顶消息。
 
-```TypeScript
+```typescript
 // conversationId：会话 ID。
 const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 conversation?.getPinnedMessages().then((result: Array<ChatMessage>) => {
@@ -89,7 +89,7 @@ conversation?.getPinnedMessages().then((result: Array<ChatMessage>) => {
 - 若消息为置顶状态，该类返回消息置顶的时间以及操作者的用户 ID。
 - 若消息为非置顶状态，该类返回 `undefined`。
 
-```TypeScript
+```typescript
 const pinnedInfo = message.getPinnedInfo()
 if (pinnedInfo) {
   // 获取消息置顶信息
@@ -102,7 +102,7 @@ if (pinnedInfo) {
 
 ## 监听消息置顶事件
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.addMessageListener({
   onMessageReceived:(messages: Array<ChatMessage>) => {
     // received logic

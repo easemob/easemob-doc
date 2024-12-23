@@ -30,7 +30,7 @@
 
 示例代码如下：
 
-```Java
+```java
     EMTextMessageBody messageBody=new EMTextMessageBody("new content");
     EMClient.getInstance().chatManager().asyncModifyMessage(msgId, messageBody, new EMCallBack() {
         @Override
@@ -52,7 +52,7 @@
 若通过 RESTful API 修改自定义消息，消息的接收方也通过 `com.hyphenate.EMMessageListener#onMessageContentChanged` 事件接收修改后的自定义消息。
 :::
 
-```Java
+```java
     EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
         @Override
         public void onMessageReceived(List<EMMessage> messages) {

@@ -46,7 +46,7 @@
 
 1. 开启消息送达功能，即 SDK 初始化时将 `ChatOptions.setRequireDeliveryAck` 设置为 `true`。
 
-```TypeScript
+```typescript
 // 设置是否需要接收方送达确认，默认 `false` 即不需要。
 options.setRequireDeliveryAck(true);
 ```
@@ -55,7 +55,7 @@ options.setRequireDeliveryAck(true);
 
 3. 发送方监听 `ChatMessageListener#onMessageDelivered` 事件，收到接收方的送达回执。你可以在收到该通知时，显示消息的送达状态。
 
-```TypeScript
+```typescript
 let msgListener: ChatMessageListener = {
     onMessageReceived: (messages: ChatMessage[]): void => {
         // 收到消息
@@ -79,7 +79,7 @@ ChatClient.getInstance().chatManager()?.removeMessageListener(msgListener);
 参考如下步骤在单聊中实现消息已读回执。
 
 1. App 开启已读回执功能，即 SDK 初始化时将 `ChatOptions.setRequireReadAck` 设置为 `true`。
-```TypeScript
+```typescript
 // 设置是否需要接收方已读确认,默认为true
 options.setRequireReadAck(true);
 ```
@@ -88,7 +88,7 @@ options.setRequireReadAck(true);
 
 - 聊天页面打开时，若收到消息，发送单条消息已读回执。
   
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.ackConversationRead(conversationId);
 ```
 
@@ -96,7 +96,7 @@ ChatClient.getInstance().chatManager()?.ackConversationRead(conversationId);
     
   聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
 
-```TypeScript
+```typescript
 let msgListener: ChatMessageListener = {
     onMessageReceived: (messages: ChatMessage[]): void => {
         // 收到消息
@@ -123,7 +123,7 @@ private sendReadAck(message: ChatMessage) {
 
 消息发送方可以通过 `ChatMessageListener.onMessageRead` 事件监听指定消息是否已读，示例代码如下：
 
-```TypeScript
+```typescript
 let msgListener: ChatMessageListener = {
     ......
     onMessageRead: (messages: ChatMessage[]): void => {
@@ -154,7 +154,7 @@ ChatClient.getInstance().chatManager()?.addMessageListener(msgListener);
 
 该功能开启后，接收方阅读消息后，SDK 底层会自动进行消息已读回执。
 
-```TypeScript
+```typescript
 // 设置是否需要接收方已读确认,默认为 `true`。
 options.setRequireReadAck(true);
 ```
@@ -163,7 +163,7 @@ options.setRequireReadAck(true);
 
 与单聊消息的 app 层级设置已读回执功能不同，群聊消息是在发送消息时设置指定消息是否需要已读回执。
 
-```TypeScript
+```typescript
 let message = ChatMessage.createTextSendMessage(to, content);
 if (!message) {
     return;
@@ -174,7 +174,7 @@ message.setIsNeedGroupAck(true);
 
 3. 消息接收方发送群组消息的已读回执。
 
-```TypeScript
+```typescript
 if (message.isNeedGroupAck() && !message.isUnread()) {
   ChatClient.getInstance().chatManager()?.ackGroupMessageRead(message, ext);
   message.setUnread(false);
@@ -187,7 +187,7 @@ if (message.isNeedGroupAck() && !message.isUnread()) {
 
 发送方接收到群组消息已读回执后，其发出消息的属性 `ChatMessage.groupAckCount` 会有相应变化。
 
-```TypeScript
+```typescript
 let msgListener: ChatMessageListener = {
     ......
     onGroupMessageRead?: (groupReadAcks: Array<GroupReadAck>) => {
@@ -202,7 +202,7 @@ ChatClient.getInstance().chatManager()?.addMessageListener(msgListener);
 
 你可以调用 `ChatManager#fetchGroupReadAcks` 方法从服务器获取单条消息的已读回执的详情。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.fetchGroupReadAcks(messageId, pageSize, startAckId).then((result) => {
   // success logic
 })

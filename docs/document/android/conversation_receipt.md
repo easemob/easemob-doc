@@ -29,7 +29,7 @@
 
  1. 开启已读回执功能，即 SDK 初始化时设置 `EMOptions#setRequireAck` 为 `true`。
 
- ```Java
+ ```java
 // 设置是否需要接受方已读确认,默认为 true
 options.setRequireAck(true);
  ```
@@ -40,7 +40,7 @@ options.setRequireAck(true);
 
 若会话中存在多条未读消息，建议调用该方法，因为若调用发送消息已读回执方法 `ackMessageRead`，则需要调用多次。
 
-```Java
+```java
 try {
     EMClient.getInstance().chatManager().ackConversationRead(conversationId);
 } catch (HyphenateException e) {
@@ -56,7 +56,7 @@ try {
 对于群组聊天，会话已读回执只用于清空服务端的群组会话的未读数，消息发送方不会通过 `OnConversationRead` 回调收到会话已读回执。
 :::
 
-```Java
+```java
 EMClient.getInstance().chatManager().addConversationListener(new EMConversationListener() {
         ……
         @Override

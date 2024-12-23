@@ -37,7 +37,7 @@
 
 参考如下示例代码，在你的项目中当前用户设置自己的所有属性或者仅设置某一项属性。
 
-```TypeScript
+```typescript
 // 更新当前用户信息
 // 除了用户 ID，其他属性都可以更新
 // 可以同时更新任何一个或者多个属性
@@ -79,7 +79,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 指定获取的一个或者多个用户 ID，一次调用用户 ID 数量不超过 100。
 const userIds = ["tom", "json"];
 // 执行获取操作
@@ -95,7 +95,7 @@ ChatClient.getInstance()
 
 ### 获取当前用户的属性
 
-```TypeScript
+```typescript
 // 执行获取操作
 ChatClient.getInstance()
   .userManager.fetchOwnInfo()
@@ -122,7 +122,7 @@ ChatClient.getInstance()
 
 如果使用场景中涉及名片消息，你也可以使用自定义属性功能，并参考如下示例代码实现：
 
-```TypeScript
+```typescript
 // 自定义消息。消息内容由两部分组成：消息事件和扩展字段。
 // 扩展字段用户可以自行实现和使用。
 const event = "userCard";

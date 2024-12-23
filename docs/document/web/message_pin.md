@@ -30,7 +30,7 @@
 
 对于单个会话来说，默认可置顶 20 条消息。你可以联系环信商务提升该上限，最大可调整至 100。
 
-```JavaScript
+```javascript
 
 const options = {
    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
@@ -54,7 +54,7 @@ conn.pinMessage(options).then(()=>{
 
 会话中的所有成员均可取消置顶消息，不论该消息是由哪个成员置顶。取消置顶消息后，该会话的置顶消息列表中也不再包含该消息。
 
-```JavaScript
+```javascript
 
 const options = {
    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
@@ -83,7 +83,7 @@ conn.unpinMessage(options).then(()=>{
 
 示例代码如下：
 
-```JavaScript
+```javascript
 const options = {
    // 会话 ID
    conversationId: 'conversationId',
@@ -105,7 +105,7 @@ conn.getServerPinnedMessages(options).then((res)=>{
 
 你可以设置消息置顶监听，通过 `onMessagePinEvent` 事件监听消息的置顶。
 
-```JavaScript
+```javascript
 conn.addEventHandler("eventName", {
   onMessagePinEvent: (event) => {
     console.log(event, '收到消息置顶操作事件')

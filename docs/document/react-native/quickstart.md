@@ -84,7 +84,7 @@ cd ios && pod install && cd ..
 
 建议使用 `visual studio code` 打开文件夹 `simple_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
 
-```JavaScript
+```javascript
 // 导入依赖库
 import React, {useEffect} from 'react';
 import {

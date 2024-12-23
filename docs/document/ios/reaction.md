@@ -42,7 +42,7 @@ Reaction 场景示例如下：
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 添加 Reaction。异步方法
 [EMClient.sharedClient.chatManager addReaction:@"reaction" toMessage:@"messageId" completion:^(EMError * _Nullable error) {
 	refreshBlock(error, changeSelectedStateHandle);
@@ -61,7 +61,7 @@ Reaction 场景示例如下：
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 删除 Reaction。异步方法
 [EMClient.sharedClient.chatManager removeReaction:@"reaction" fromMessage:@"messageId" completion:^(EMError * _Nullable error) {
 	refreshBlock(error, changeSelectedStateHandle);
@@ -78,7 +78,7 @@ Reaction 场景示例如下：
 
 调用 `getReactionList` 方法从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，添加或移除 Reaction 的用户数量，以及添加或移除 Reaction 的前三个用户的用户 ID。示例代码如下：
 
-```Objective-C
+```objective-c
 // 异步方法
 [EMClient.sharedClient.chatManager getReactionList:@["messageId"] groupId:@"groupId" chatType:EMChatTypeChat completion:^(NSDictionary<NSString *, EMMessageReaction *> * _Nonnull, EMError * _Nullable) {
 
@@ -89,7 +89,7 @@ Reaction 场景示例如下：
 
 调用 `getReactionDetail` 方法可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的全部用户列表。示例代码如下：
 
-```Objective-C
+```objective-c
 // 异步方法
 [EMClient.sharedClient.chatManager getReactionDetail:@"messageId" reaction:@"reaction" cursor:nil pageSize:30 completion:^(EMMessageReaction * _Nonnull, NSString * _Nullable cursor, EMError * _Nullable) {
 

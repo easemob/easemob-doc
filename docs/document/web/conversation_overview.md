@@ -28,7 +28,7 @@ SDK 提供了会话已读事件 `onChannelMessage`，用户可以通过该事件
 
 示例代码如下：
 
-```JavaScript
+```javascript
 conn.addEventHandler("handlerId", {
   onChannelMessage: (message) => {
     // 收到会话已读的事件。该事件在以下场景中触发：

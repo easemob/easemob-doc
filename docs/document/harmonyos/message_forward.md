@@ -26,7 +26,7 @@
 
 你可以在单聊、群组聊天、聊天室中转发所有类型的消息。对于附件类型的消息，转发时无需重新上传附件，不过，若消息过期（即由于超过了存储时间已从环信服务器上删除），转发后接收方可查看附件地址，但无法下载附件。
 
-```TypeScript
+```typescript
 // messageId 为要转发的消息 ID。
 let messageId = "";
 let targetMessage = ChatClient.getInstance().chatManager()?.getMessage(messageId);

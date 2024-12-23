@@ -6,18 +6,18 @@
 
 开启日志输出：
 
-```JavaScript
+```javascript
 logger.enableAll();
 ```
 - 设置日志不输出到控制台：
 
-```JavaScript
+```javascript
 logger.setConsoleLogVisibility(false)
 ```
 
 - 监听 SDK 日志事件：
 
-```JavaScript
+```javascript
 logger.onLog = (log)=>{
   console.log('im logger', log)
 }
@@ -25,20 +25,20 @@ logger.onLog = (log)=>{
 
 关闭日志输出：
 
-```JavaScript
+```javascript
 logger.disableAll();
 ```
 
 设置日志输出等级：
 
-```JavaScript
+```javascript
 // 0 - 5 或者 'TRACE'，'DEBUG'，'INFO'，'WARN'，'ERROR'，'SILENT';
 logger.setLevel(0);
 ```
 
 设置缓存日志：
 
-```JavaScript
+```javascript
 logger.setConfig({
   useCache: false, // 是否缓存
   maxCache: 3 * 1024 * 1024, // 最大缓存字节
@@ -49,7 +49,7 @@ logger.setLevel(0);
 
 下载日志：
 
-```JavaScript
+```javascript
 logger.download();
 ```
 

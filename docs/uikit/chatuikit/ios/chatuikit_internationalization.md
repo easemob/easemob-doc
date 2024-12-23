@@ -6,7 +6,7 @@
 
 示例代码:
 
-```Swift
+```swift
     Appearance.ease_chat_language = .Chinese
     Appearance.ease_chat_language = .English
 ```

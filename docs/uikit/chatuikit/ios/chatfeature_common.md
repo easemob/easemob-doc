@@ -108,7 +108,7 @@
 
 示例代码如下：
 
-```Swift
+```swift
     Appearance.contact.detailExtensionActionItems.removeAll { $0.featureIdentify ==  "SearchMessages" }
 
 ```
@@ -129,7 +129,7 @@
 
 示例代码如下：
 
-```Swift
+```swift
     public func onInputBoxEventsOccur(action type: MessageInputBarActionType, attributeText: NSAttributedString?) {
         switch type {
         case .audio: self.audioDialog()

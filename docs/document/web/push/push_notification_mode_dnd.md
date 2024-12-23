@@ -77,7 +77,7 @@
 
 你可以调用 `setSilentModeForAll` 方法在 app 级别设置推送通知，并通过指定 `paramType` 字段设置推送通知方式和免打扰模式，如下代码示例所示：
 
-```JavaScript
+```javascript
 /**
   options // 推送通知配置选项。
 	options: {
@@ -113,7 +113,7 @@ WebIM.conn.setSilentModeForAll(params)
 
 你可以调用 `getSilentModeForAll` 获取 app 的推送通知设置，示例代码如下：
 
-```JavaScript
+```javascript
 // 无需传参数，直接调用。
 WebIM.conn.getSilentModeForAll()
 ```
@@ -124,7 +124,7 @@ WebIM.conn.getSilentModeForAll()
 
 [推送通知方式](#推送通知方式)包含以下三类：接收所有离线消息的推送通知、仅接收提及某些用户的消息的推送通知、不接收离线消息的推送通知。
 
-```JavaScript
+```javascript
 // pageSize 的取值范围为 [1,100]，默认值为 10。
 connection.getSilentModeRemindTypeConversations({pageSize: 10})
 ```
@@ -135,7 +135,7 @@ connection.getSilentModeRemindTypeConversations({pageSize: 10})
 
 调用该接口后，你的其他设备会收到 `onMultiDeviceEvent#setSilentModeForConversation` 事件。
 
-```JavaScript
+```javascript
 /**
 	const params = {
     conversationId: 'test', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
@@ -186,7 +186,7 @@ WebIM.conn.setSilentModeForConversation(params)
 
 调用 `getSilentModeForConversation` 获取单个会话的推送通知设置，示例代码如下：
 
-```JavaScript
+```javascript
 const params = {
   conversationId: 'test', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
   type: 'singleChat', // 会话类型：singleChat（单聊）、groupChat（群聊）和 chatRoom（聊天室）。
@@ -201,7 +201,7 @@ WebIM.conn.getSilentModeForConversation(params)
 
 你可以调用 `getSilentModeForConversations` 获取多个会话的推送通知设置，示例代码如下：
 
-```JavaScript
+```javascript
 const params = {
   conversationList: [
     {
@@ -225,7 +225,7 @@ WebIM.conn.getSilentModeForConversations(params)
 
 示例代码如下：
 
-```JavaScript
+```javascript
 const params = {
   conversationId: '12345', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
   type: 'groupChat', // 会话类型：singleChat（单聊）、groupChat（群聊）或 chatRoom（聊天室）。

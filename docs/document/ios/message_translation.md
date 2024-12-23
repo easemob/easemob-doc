@@ -39,7 +39,7 @@ iOS SDK 支持你通过调用 API 在项目中实现如下功能：
 
 SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManager 模块的如下接口获取翻译功能支持的目标语言。
 
-```Objective-C
+```objective-c
 /**
  *  获取翻译服务支持的语言。
  *  @param aCompletionBlock 完成的回调。
@@ -50,7 +50,7 @@ SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManage
 
 使用过程如下:
 
-```Objective-C
+```objective-c
 // 异步方法
 [[[EMClient sharedClient] chatManager] fetchSupportedLanguages:^(NSArray<EMTranslateLanguage *> * _Nullable languages, EMError * _Nullable error) {
 
@@ -63,7 +63,7 @@ SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManage
 
 用户可以在收到文本消息后调用消息翻译接口进行翻译。接口定义如下：
 
-```Objective-C
+```objective-c
 /**
  *  翻译消息，异步方法。
  *
@@ -78,7 +78,7 @@ SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManage
 
 调用过程如下：
 
-```Objective-C
+```objective-c
 // 消息必须为文本消息。
 [[[EMClient sharedClient] chatManager] translateMessage:msg targetLanguages:@[@"en",@"ja"] completion:^(EMChatMessage *message, EMError *error) {
     // 翻译后的译文信息获取。
@@ -91,7 +91,7 @@ SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManage
 
 用户可以在发送文本消息时，设置消息的目标语言，消息将在翻译后进行发送，接收方收到的消息将包含译文信息。使用过程如下：
 
-```Objective-C
+```objective-c
 EMTextMessageBody* msgBody = [[EMTextMessageBody alloc] initWithText:@"你好"];
 msgBody.targetLanguages = @[@"en",@"ja"];
 EMMessage*message = [[EMMessage alloc] initWithConversationID:@"to" from:@"from" to:@"to" body:msgBody ext:nil];

@@ -61,7 +61,7 @@ Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推�
 
 你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。异步方法为 asyncGetSelfIdsOnOtherPlatform(EMValueCallBack)。
 List<String> ids = EMClient.getInstance().contactManager().getSelfIdsOnOtherPlatform();
 // 选择一个登录 ID 作为消息接收方。
@@ -76,7 +76,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 你可以调用 `getLoggedInDevicesFromServer` 或 `getLoggedInDevicesFromServerWithToken` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`EMDeviceInfo` 中的 `mDeviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
 
-```Java
+```java
     try {
         List<EMDeviceInfo> deviceInfos = EMClient.getInstance().getLoggedInDevicesFromServer("username","pwd");
     } catch (HyphenateException e) {
@@ -100,7 +100,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 登录成功后才会将该设置发送到服务器。
 :::
 
-```Java
+```java
     EMOptions options =  new EMOptions();
     options.setCustomDeviceName("你的自定义设备名称");
     EMClient.getInstance().init(context,options);
@@ -142,7 +142,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 登录成功后才会将该设置发送到服务器。
 :::
 
-```Java
+```java
     EMOptions options=new EMOptions();
     options.setCustomOSPlatform(1);
     EMClient.getInstance().init(context,options);
@@ -158,7 +158,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 登录成功后才会将该设置发送到服务器。
 :::
 
-```Java
+```java
     EMOptions options =  new EMOptions();
     options.setLoginCustomExt("你的自定义扩展信息json字符串");
     EMClient.getInstance().init(context,options);
@@ -192,7 +192,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 不登录也可以使用该接口。
 :::
 
-```Java
+```java
 // username：账户名称，password：账户密码。需要在异步线程中执行。
 List<EMDeviceInfo> deviceInfos = EMClient.getInstance().getLoggedInDevicesFromServer(username, password);
 // username：账户名称，password：账户密码, resource：设备 ID。需要在异步线程中执行。
@@ -208,7 +208,7 @@ EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIn
 不登录也可以使用该接口。
 :::
 
-```Java
+```java
     try {
         EMClient.getInstance().kickAllDevices("username","pwd");
     } catch (HyphenateException e) {
@@ -232,7 +232,7 @@ EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIn
 多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
 :::
 
-```Java
+```java
 //实现 `EMMultiDeviceListener` 监听其他设备上的操作。
 private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
 //@param event 事件。
@@ -400,6 +400,6 @@ EMClient.getInstance().removeMultiDeviceListener(chatMultiDeviceListener);
 
 当 PC 端和移动端登录同一个账号时，在移动端可以通过调用方法获取到 PC 端的登录 ID。该登录 ID 相当于特殊的好友用户 ID，可以直接使用于聊天，使用方法与好友的用户 ID 类似。
 
-```Java
+```java
 List<String> selfIds = EMClient.getInstance().contactManager().getSelfIdsOnOtherPlatform();
 ```

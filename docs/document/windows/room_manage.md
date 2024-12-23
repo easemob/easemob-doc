@@ -42,7 +42,7 @@
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.CreateRoom(
 // 聊天室名称，不能超过 128 个字符
 subject,
@@ -71,7 +71,7 @@ callback: new ValueCallBack<Room>(
 
 示例代码如下：
 
-```C#
+```csharp
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
 SDKClient.Instance.RoomManager.FetchPublicRoomsFromServer(callback: new ValueCallBack<PageResult<Room>>(
     //result 为 PageResult<Room> 类型
@@ -96,7 +96,7 @@ SDKClient.Instance.RoomManager.JoinRoom(roomId, new ValueCallBack<Room>(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.FetchRoomInfoFromServer(roomId, new ValueCallBack<Room>(
   onSuccess: (room) => {
   },
@@ -111,7 +111,7 @@ SDKClient.Instance.RoomManager.FetchRoomInfoFromServer(roomId, new ValueCallBack
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.DestroyRoom(roomId, new CallBack(
     onSuccess: () => {
     },
@@ -126,7 +126,7 @@ SDKClient.Instance.RoomManager.DestroyRoom(roomId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 // 实现监听器以及定义监听器对象
 public class RoomManagerDelegate : IRoomManagerDelegate {
     ......
@@ -145,7 +145,7 @@ SDKClient.Instance.RoomManager.AddRoomManagerDelegate(adelegate);
 
 具体可以添加的回调事件如下：
 
-```C#
+```csharp
 public interface IRoomManagerDelegate
 {
     // 解散聊天室。聊天室所有成员会收到该事件。
@@ -191,7 +191,7 @@ public interface IRoomManagerDelegate
 
 2. 收到通知事件后，调用 `RoomManager#GetChatRoom` 方法获取本地聊天室详情，再通过`RoomManager#MemberCount` 获取聊天室当前人数。
 
-```C#
+```csharp
 class RoomManagerDelegate : IRoomManagerDelegate
 {
     public void OnMemberJoinedFromRoom(string roomId, string participant)

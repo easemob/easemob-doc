@@ -16,7 +16,7 @@
 
 初始化示例代码：
 
-```C#
+```csharp
 var options = new Options("appkey"); //将该参数设置为你的 App Key
 //其他 Options 配置。
 SDKClient.Instance.InitWithOptions(options);

@@ -98,7 +98,7 @@ UIKit 直接使用不做任何设置时，默认展示用户的用户 ID, 头像
 
 示例代码：
 
-```JavaScript
+```javascript
 rootStore.client.updateUserInfo({
   nickname: 'nickname',
   avatarurl: 'https://example.com/image',

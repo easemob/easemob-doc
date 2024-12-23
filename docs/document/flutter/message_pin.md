@@ -63,7 +63,7 @@ try {
 2. 若消息置顶后，用户撤回了该消息，则该消息从服务端移除，所有用户在从服务器拉取置顶消息列表时无法拉取到该消息。
 :::
 
-```Java
+```java
 try {
   List<EMMessage> pinnedMessages = await EMClient.getInstance.chatManager.fetchPinnedMessages(
     conversationId: conversationId,

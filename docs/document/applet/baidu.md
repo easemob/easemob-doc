@@ -78,7 +78,7 @@ wss://im-api-wechat.easemob.com（3.0 IM SDK）
 
 #### 调用示例
 
-```JavaScript
+```javascript
 //使用示例
 import SDK from "../sdk/connection"; // 2.0 SDK
 import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
@@ -88,7 +88,7 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
 
 实例化 SDK，并挂载在全局对象下。
 
-```JavaScript
+```javascript
 //实例化 SDK 对象
 const WebIM = (wx.WebIM = SDK);
 WebIM.conn = new WebIM.connection({

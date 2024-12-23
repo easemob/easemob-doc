@@ -43,7 +43,7 @@ Reaction 场景示例如下：
 
 示例代码如下：
 
-```Java
+```java
 // 添加 Reaction。
  EMClient.getInstance().chatManager().asyncAddReaction(message.getMsgId(), reaction, new EMCallBack() {
     @Override
@@ -81,7 +81,7 @@ EMClient.getInstance().chatManager().addMessageListener(listener);
 
 示例代码如下：
 
-```Java
+```java
 // 删除 Reaction。
 EMClient.getInstance().chatManager().asyncRemoveReaction(message.getMsgId(), reaction, new EMCallBack() {
     @Override
@@ -117,7 +117,7 @@ EMClient.getInstance().chatManager().addMessageListener(listener);
 
 调用 `asyncGetReactionList` 可以从服务器获取多条指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，添加或移除 Reaction 的用户数量，以及添加或移除 Reaction 的前三个用户的用户 ID。示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.ChatType.Chat, groupId, new EMValueCallBack<Map<String, List<EMMessageReaction>>>() {
     @Override
     public void onSuccess(Map<String, List<EMMessageReaction>> stringListMap) {
@@ -135,7 +135,7 @@ EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.C
 
 调用 `asyncGetReactionDetail` 可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的全部用户列表。示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatManager().asyncGetReactionDetail(mMsgId, emojiconId,
                 pageCursor, 30, new EMValueCallBack<EMCursorResult<EMMessageReaction>>() {
     @Override

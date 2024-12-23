@@ -111,7 +111,7 @@
 
 ### 1. SDK 初始化
 
-```TypeScript
+```typescript
 let options = new ChatOptions("Your appkey");
 ......// 其他 ChatOptions 配置。
 // 初始化时传入上下文以及options
@@ -122,7 +122,7 @@ ChatClient.getInstance().init(context, options);
 
 测试期间，可以使用如下代码创建账户：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
     // success logic
 });
@@ -136,7 +136,7 @@ ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
 
 使用如下代码实现用户登录：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().login(userId, pwd).then(() => {
     // success logic        
 })
@@ -148,7 +148,7 @@ ChatClient.getInstance().login(userId, pwd).then(() => {
 
 ### 4. 发送一条单聊消息
 
-```TypeScript
+```typescript
 // `content` 为要发送的文本内容，`toChatUsername` 为对方的账号。
 let message = ChatMessage.createTextSendMessage(toChatUsername, content);
 if (!message) {

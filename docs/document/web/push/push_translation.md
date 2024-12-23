@@ -6,7 +6,7 @@
 
 你可以调用 `setPushPerformLanguage` 设置推送通知的首选语言，示例代码如下：
 
-```JavaScript
+```javascript
 /**
 	language: string, // 推送通知的首选语言。
 */
@@ -18,7 +18,7 @@ WebIM.conn.setPushPerformLanguage(params)
 
 你可以调用 `getPushPerformLanguage` 获取推送通知的首选语言，示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.getPushPerformLanguage() // 无需传参数，直接调用。
 ```
 

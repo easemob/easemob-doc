@@ -36,7 +36,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // body 必须是文本消息体。可以从创建或者接收消息中获取。
 ChatClient.getInstance()
   .chatManager.modifyMessageBody(msgId, body)
@@ -54,7 +54,7 @@ ChatClient.getInstance()
 若通过 RESTful API 修改自定义消息，消息的接收方也通过 `ChatMessageEventListener#onMessageContentChanged` 事件接收修改后的自定义消息。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager.addMessageListener({
   onMessageContentChanged: (
     message: ChatMessage,

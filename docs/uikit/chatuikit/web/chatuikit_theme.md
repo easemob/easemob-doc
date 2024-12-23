@@ -40,7 +40,7 @@ const App = () => {
 
 ![img](/images/uikit/chatuikit/web/image.png)
 
-```JavaScript
+```javascript
 import { UIKitProvider } from 'agora-chat-uikit';
 
 const App = () => {
@@ -58,7 +58,7 @@ const App = () => {
 
 默认情况下，组件为大圆角形状。你可以设置 `componentsShape` 修改消息气泡、头像和输入框的圆角。
 
-```JavaScript
+```javascript
 import { UIKitProvider } from 'easemob-chat-uikit';
 
 const App = () => {
@@ -94,7 +94,7 @@ const App = () => {
 
 通过配置 SCSS 加载器自动引入自定义的 `style.scss` 文件，覆盖 UIKit 内部的 SCSS 变量。
 
-```JavaScript
+```javascript
 module.exports = {
   module: {
     rules: [

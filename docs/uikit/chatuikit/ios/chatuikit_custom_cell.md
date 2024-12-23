@@ -6,7 +6,7 @@
 
 根据需求继承 `EaseChatUIKit` 中的自定义消息 Cell。
 
-```Swift
+```swift
 import UIKit
 import EaseChatUIKit
 
@@ -37,7 +37,7 @@ class RedPackageCell: CustomMessageCell {
 
 根据需求继承 `EaseChatUIKit` 中的 Cell 的渲染模型 `MessageEntity`，并指定气泡大小，其中 `redPackageIdentifier` 为红包的自定义消息的 `event` 事件。
 
-```Swift
+```swift
 import UIKit
 import EaseChatUIKit
 
@@ -72,7 +72,7 @@ final class MineMessageEntity: MessageEntity {
 
 添加附件消息的类型，例如，增加红包消息。
 
-```Swift
+```swift
         
         let redPackage = ActionSheetItem(title: "红包".chat.localize, type: .normal,tag: "Red",image: UIImage(named: "photo", in: .chatBundle, with: nil))
         Appearance.chat.inputExtendActions.append(redPackage)
@@ -82,7 +82,7 @@ final class MineMessageEntity: MessageEntity {
 
 继承 `MessageListController`，处理新增的附件消息类型的点击事件。
 
-```Swift
+```swift
 class CustomMessageListController: MessageListController {
 
         //要实现微信样式（followInput），需要同时重载下面的方法以及仿系统 UIActionSheet 样式（ActionSheet）的方法
@@ -148,7 +148,7 @@ let redPackageIdentifier = "redPackage"
 
 在 `EaseChatUIKit` 的 `MessageListViewModel` 中增加发送红包消息的方法。
 
-```Swift
+```swift
 extension MessageListViewModel {
     func sendRedPackageMessage() {
         var ext = Dictionary<String,Any>()
@@ -186,7 +186,7 @@ extension MessageListViewModel {
 
 将上述继承的对象初始化后，在 `EaseChatUIKit` 中进行注册。
 
-```Swift
+```swift
         
         ComponentsRegister.shared.MessageRenderEntity = MineMessageEntity.self
         ComponentsRegister.shared.Conversation = MineConversationInfo.self
@@ -198,7 +198,7 @@ extension MessageListViewModel {
 
 例如，在以下示例代码中，会话中收到新消息时显示为 "[红包]"，主要调整了在非文本消息类型的 `else` 中根据自定义消息的 `event` 显示对应的内容。
   
-```Swift
+```swift
 import UIKit
 import EaseChatUIKit
 

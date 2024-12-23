@@ -33,7 +33,7 @@ setTheme(theme === light ? dark : light);
 
 `usePresetPalette` 可以使用内置的默认主题颜色，也可以使用 `useCreatePalette` 设置自定义主题颜色。
 
-```Swift
+```swift
 // 自定义颜色。通过修改颜色具体值，组件中对应颜色将统一改变。
 // 参考这里：https://www.figma.com/file/OX2dUdilAKHahAh9VwX8aI/Streamuikit?type=design&node-id=101-41012&mode=design&t=Fzou3Gwsk4owLLbr-4
 const { createPalette } = useCreatePalette({

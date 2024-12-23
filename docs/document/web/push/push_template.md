@@ -16,7 +16,7 @@
 
 这种情况下，创建消息时无需传入 `titleArgs` 和 `contentArgs` 参数。 
 
-```JavaScript
+```javascript
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 
 const option = {
@@ -70,7 +70,7 @@ option.ext = {
 您收到了一条消息<br/>
 请及时查看
 
-```JavaScript
+```javascript
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 
 const option = {

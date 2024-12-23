@@ -30,7 +30,7 @@
 该功能也支持转发单条合并消息。
 :::
 
-```TypeScript
+```typescript
 const msg: ChatMessage = ChatMessage.createTextMessage("A", "hello", 0); // 原来的消息
 const newMsg: ChatMessage = ChatMessage.createSendMessage({
   ...msg,

@@ -21,7 +21,7 @@
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
 
-```TypeScript
+```typescript
 // 创建一条文本消息，`content` 为消息文字内容。
 // `conversationId` 为消息接收方，单聊时为对端用户 ID、群聊时为群组 ID，聊天室时为聊天室 ID。
 let message = ChatMessage.createTextSendMessage(conversationId, content);
@@ -36,7 +36,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 2. 通过 `ChatManager` 将该消息发出。发送消息时可以设置 `ChatCallback` 的实例，获取消息发送状态。
 
-```TypeScript
+```typescript
 // 发送消息时可以设置 `ChatCallback` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
 let callback: ChatCallback = {
   onSuccess: (): void => {
@@ -60,7 +60,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 对于聊天室消息，你可以通过消息的 `ChatMessage#isBroadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
-```TypeScript
+```typescript
 let msgListener: ChatMessageListener = {
   onMessageReceived: (messages: ChatMessage[]): void => {
     // 收到消息，遍历消息队列，解析和显示。
@@ -89,7 +89,7 @@ ChatClient.getInstance().chatManager()?.removeMessageListener(msgListener);
 1. 发送语音消息前，在应用层录制语音文件。
 2. 发送方调用 `createVoiceSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）、语音文件的路径和语音时长创建语音消息，然后调用 `sendMessage` 方法发送消息。SDK 会将语音文件上传至环信服务器。
 
-```TypeScript
+```typescript
 // `filePathOrUri` 为语音文件的本地路径或者文件的 URI，`duration` 为语音时长（单位为秒）。
 let message = ChatMessage.createVoiceSendMessage(to, filePathOrUri, duration);
 if (!message) {
@@ -105,7 +105,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `getRemoteUrl` 或 `getLocalPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
 
-```TypeScript
+```typescript
 let voiceBody = message.getBody() as VoiceMessageBody;
 // 获取语音文件在服务器的地址。
 let voiceRemoteUrl = voiceBody.getRemoteUrl();
@@ -119,7 +119,7 @@ let voiceLocalPath = voiceBody.getLocalPath();
 
 1. 发送方调用 `createImageSendMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID （群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息，然后调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
    
-```TypeScript
+```typescript
 // `imageFilePathOrUri` 为图片本地路径或者Uri。
 let message = ChatMessage.createImageSendMessage(toChatUsername, imageFilePathOrUri);
 // 会话类型，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
@@ -135,7 +135,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 3. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 下载原图。
 
-```TypeScript
+```typescript
 let msgListener: ChatMessageListener = {
   onMessageReceived: (messages: ChatMessage[]): void => {
     messages.forEach( message => {
@@ -162,7 +162,7 @@ let msgListener: ChatMessageListener = {
 
 4. 获取图片消息的缩略图和附件。
 
-```TypeScript
+```typescript
 let imgBody = message.getBody() as ImageMessageBody;
 // 从服务器端获取图片文件。
 let imgRemoteUrl = imgBody.getRemoteUrl();
@@ -182,7 +182,7 @@ let thumbnailLocalPath = imgBody.getThumbnailLocalPath();
 
 2. 发送方调用 `createVideoSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）、视频文件的本地路径、视频时长以及缩略图的本地存储路径，然后调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoSendMessage` 方法。
 
-```TypeScript
+```typescript
 // 在应用层获取视频首帧
 let thumbPath = this.getThumbPath(videoPath);
 let message = ChatMessage.createVideoSendMessage(toChatUsername, videoPath, videoLength, thumbPath);
@@ -199,7 +199,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，可以调用 `ChatClient.getInstance().chatManager()?.downloadAttachment(message)` 方法下载视频原文件。
 
-```TypeScript
+```typescript
 let msgListener: ChatMessageListener = {
   onMessageReceived: (messages: ChatMessage[]): void => {
     messages.forEach( message => {
@@ -226,7 +226,7 @@ let msgListener: ChatMessageListener = {
 
 5. 获取视频缩略图和视频原文件。
 
-```TypeScript
+```typescript
 let body = message.getBody() as VideoMessageBody;
 // 从服务器端获取视频文件。
 let imgRemoteUrl = body.getRemoteUrl();
@@ -244,7 +244,7 @@ let localThumbPath = body.getThumbnailLocalPath();
 
 1. 发送方调用 `createFileSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）和文件的本地路径创建文件消息，然后调用 `sendMessage` 方法发送文件消息。SDK 将文件上传至环信服务器。
 
-```TypeScript
+```typescript
 // `fileLocalPathOrUri` 为本地文件路径或者本地文件Uri。
 let message = ChatMessage.createFileSendMessage(toChatUsername, fileLocalPathOrUri);
 if (!message) {
@@ -258,7 +258,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 2. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 方法下载文件。
 
-```TypeScript
+```typescript
 /**
  * 下载文件。
  */
@@ -282,7 +282,7 @@ private downloadFile(message: ChatMessage) {
 
 3. 调用以下方法从服务器或本地获取文件附件：
 
-```TypeScript
+```typescript
 let fileMessageBody = message.getBody() as FileMessageBody;
 // 从服务器获取文件。
 let fileRemoteUrl = fileMessageBody.getRemoteUrl();
@@ -296,7 +296,7 @@ let fileLocalPath = fileMessageBody.getLocalPath();
   
 发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。
 
-```TypeScript
+```typescript
 // `latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容。
 let message = ChatMessage.createLocationSendMessage(toChatUsername, latitude, longitude, locationAddress);
 if (!message) {
@@ -325,7 +325,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 1. 创建和发送透传消息。
 
-```TypeScript
+```typescript
 let action = "action1";
 // `action` 可以自定义。
 let cmdBody = new CmdMessageBody(action);
@@ -341,7 +341,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(cmdMsg);
 
 2. 接收方通过 `onMessageReceived` 和 `onCmdMessageReceived` 回调接收透传消息，方便用户进行不同的处理。
 
-```TypeScript
+```typescript
 let msgListener: ChatMessageListener = {
   onMessageReceived: (messages: ChatMessage[]): void => {
     // 接收到消息
@@ -358,7 +358,7 @@ let msgListener: ChatMessageListener = {
 
 1. 创建和发送自定义类型消息。
 
-```TypeScript
+```typescript
 // `event` 为需要传递的自定义消息事件，比如礼物消息，可以设置：
 let event = "gift";
 let customBody = new CustomMessageBody(event);
@@ -407,7 +407,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(customMessage);
 
 示例代码如下：
 
-```TypeScript
+```typescript
 let title = "A和B的聊天记录";
 let summary = "A:这是A的消息内容\nB:这是B的消息内容";
 let compatibleText = "您当前的版本不支持该消息，请升级到最新版本";
@@ -437,7 +437,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 - 若附件已存在，该方法会直接解析附件并返回原始消息列表。
 - 若附件不存在，该方法首先下载附件，然后解析附件并返回原始消息列表。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.downloadAndParseCombineMessage(message).then((result) => {
   // 处理并展示消息列表
 }).catch((e: ChatError) => {
@@ -465,7 +465,7 @@ ChatClient.getInstance().chatManager()?.downloadAndParseCombineMessage(message).
 
 下面以文本消息为例介绍如何发送定向消息，示例代码如下：
 
-```TypeScript
+```typescript
 // 创建一条文本消息。
 let message = ChatMessage.createTextSendMessage(groupId, content);
 // 会话类型：群组和聊天室聊天，分别为 `GroupChat` 和 `ChatRoom`。
@@ -484,7 +484,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
 
-```TypeScript
+```typescript
 let message = ChatMessage.createTxtSendMessage(toChatUsername, content);
 // 增加自定义属性。
 let attributes = new Map<string, MessageExtType>();
@@ -506,7 +506,7 @@ let attr2 = exts.get("attribute2") as boolean;
 
 对于聊天室消息，可设置消息优先级，包括高、普通和低优先级。示例代码如下：
 
-```TypeScript
+```typescript
 let message = ChatMessage.createTextSendMessage(conversationId, content);
 if (!message) {
     return;
@@ -521,7 +521,7 @@ sendMessage(message);
 
 发送附件类型消息时，可以在 `onProgress` 回调中获取附件上传的进度，以百分比表示，示例代码如下：
 
-```TypeScript
+```typescript
 // 发送消息时可以设置 `ChatCallback` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如，消息发送失败后的提示等等。
  let callback: ChatCallback = {
   onSuccess: (): void => {

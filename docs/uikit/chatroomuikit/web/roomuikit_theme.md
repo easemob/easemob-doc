@@ -16,7 +16,7 @@ ChatroomUIkit 内置浅色和深色主题，默认为浅色主题。
 
 你可以设置 `Provider` 组件的主题属性修改主题：
 
-```JavaScript
+```javascript
 import { Chatroom, UIKitProvider } from 'easemob-chat-uikit';
 
 const ChatApp = () => {

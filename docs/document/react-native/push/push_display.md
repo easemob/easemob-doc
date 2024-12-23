@@ -11,7 +11,7 @@
 
 你可以分别调用 `updatePushNickname` 和 `updatePushDisplayStyle` 方法设置推送通知中显示的昵称（`nickname`）和通知显示样式（`displayStyle`），确定通知栏中的推送标题和推送内容。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .pushManager.updatePushNickname(nickname)
   .then(() => {
@@ -22,7 +22,7 @@ ChatClient.getInstance()
   });
 ```
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .pushManager.updatePushDisplayStyle(displayStyle)
   .then(() => {
@@ -35,7 +35,7 @@ ChatClient.getInstance()
 
 你可以调用 `fetchPushOptionFromServer` 方法获取推送通知中的显示属性，如以下代码示例所示：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .pushManager.fetchPushOptionFromServer()
   .then(() => {
@@ -195,7 +195,7 @@ ChatClient.getInstance()
 
 创建推送消息时，你可以设置消息扩展字段自定义要显示的推送标题 `em_push_title` 和推送内容 `em_push_content`。
 
-```TypeScript
+```typescript
 msg.attributes = {
   // 消息扩展字段。该字段为内置内置字段，字段名不可修改。
   em_apns_ext: {
@@ -207,7 +207,7 @@ msg.attributes = {
 
 自定义显示字段的数据结构如下：
 
-```Java
+```java
 {
     "em_apns_ext": {
         "em_push_title": "custom push title",

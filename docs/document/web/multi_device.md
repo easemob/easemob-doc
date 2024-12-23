@@ -31,7 +31,7 @@
 
 你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
-```JavaScript
+```javascript
 conn.getSelfIdsOnOtherPlatform().then((res) => {
   console.log(res, '获取当前用户其他登录设备的登录 Id 列表成功');
   // 选择一个登录 ID 作为消息接收方。
@@ -60,7 +60,7 @@ conn.getSelfIdsOnOtherPlatform().then((res) => {
 登录成功后才会将该设置发送到服务器。
 :::
 
-```JavaScript
+```javascript
     // 设置自定义扩展信息
     conn.setLoginInfoCustomExt("你的自定义扩展信息json字符串");
 
@@ -93,7 +93,7 @@ conn.getSelfIdsOnOtherPlatform().then((res) => {
 
 子区和删除漫游消息事件会触发 `onMultiDeviceEvent` 事件，示例代码如下：
 
-```JavaScript
+```javascript
 conn.addEventHandler("handlerId", {
   onContactAgreed: (event) => {},
   onGroupEvent: (event) => {},

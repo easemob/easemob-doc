@@ -37,7 +37,7 @@
 3. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需在[环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
 :::
 
-```C#
+```csharp
 // limit: 每页返回的会话数。取值范围为 [1,50]。
 // cursor: 开始获取数据的游标位置。若获取数据时传 `null` 或者空字符串（""），SDK 从最新活跃的会话开始查询。
 int limit = 10;
@@ -66,7 +66,7 @@ SDKClient.Instance.ChatManager.GetConversationsFromServerWithCursor(pinOnly, cur
 
 若使用该功能，需将 SDK 升级至 V1.1.0 或以上版本。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.GetConversationsFromServerWithPage(pageNum, pageSize, new ValueCallBack<List<Conversation>>(
     //获取会话成功后的处理逻辑。
     //list 为 List<Conversation> 类型。
@@ -89,6 +89,6 @@ SDKClient.Instance.ChatManager.GetConversationsFromServerWithPage(pageNum, pageS
 
 示例代码如下：
 
-```C#
+```csharp
 List<Conversation>list = SDKClient.Instance.ChatManager.LoadAllConversations();
 ```

@@ -41,7 +41,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverID',
    isPublic: true,
@@ -81,7 +81,7 @@ WebIM.conn.createChannel(options).then((res) => {
 
 - 调用 `inviteUserToChannel` 方法邀请用户加入频道，示例代码如下：
  
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    channelId: 'channelId',
@@ -99,7 +99,7 @@ WebIM.conn.inviteUserToChannel(options).then(() => {
 
  - 用户调用 `acceptChannelInvite` 方法同意加入频道。邀请人会收到 `onChannelEvent` 回调，事件为 `acceptInvite`，频道所有成员（不包括该新加入的成员）收到 `onChannelEvent` 回调，事件为`memberPresence`。示例代码如下：
 
-   ```JavaScript
+   ```javascript
    let options = {
       serverId: 'serverId',
       channelId: 'channelId',
@@ -111,7 +111,7 @@ WebIM.conn.inviteUserToChannel(options).then(() => {
 
  - 用户调用 `rejectChannelInvite` 方法拒绝加入频道。邀请人会收到 `onChannelEvent` 回调，事件为 `rejectInvite`。示例代码如下：
 
-   ```JavaScript
+   ```javascript
    let options = {
       serverId: 'serverId',
       channelId: 'channelId',
@@ -129,7 +129,7 @@ WebIM.conn.inviteUserToChannel(options).then(() => {
 
 若更换频道所属的频道分组，需调用 [`transferChannel`](#更换指定频道的频道分组)方法。
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
  	channelId: 'channelId'
@@ -149,7 +149,7 @@ WebIM.conn.updateChannel(options).then((res) => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    channelId: 'channelId',
@@ -166,7 +166,7 @@ WebIM.conn.destroyChannel(options).then(() => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    channelId: 'channelId',
@@ -183,7 +183,7 @@ WebIM.conn.getChannelDetail(options).then((res) => {
 
 社区成员可以调用 `getPublicChannels` 方法获取社区下的所有公开频道的列表，示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    pageSize: 20,
@@ -199,7 +199,7 @@ WebIM.conn.getPublicChannels(options).then((res) => {
 
 社区成员可以调用 `getPrivateChannels` 方法获取社区下所有私密频道的列表，示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
  	pageSize: 20,
@@ -215,7 +215,7 @@ WebIM.conn.getPrivateChannels(options).then((res) => {
 
 社区成员可以调用 `getCategoryPublicChannels` 方法获取频道分组下的所有公开频道列表，示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    categoryId: 'categoryId',
@@ -232,7 +232,7 @@ WebIM.conn.getCategoryPublicChannels(options).then((res) => {
 
 社区成员可以调用 `getCategoryPrivateChannels` 方法获取频道分组下的所有私密频道列表，示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    categoryId: 'categoryId',
@@ -263,7 +263,7 @@ WebIM.conn.getCategoryPrivateChannels(options).then((res) => {
 
 2. 调用 `joinChannel` 方法传入社区 ID 和频道 ID，申请加入对应频道。用户加入频道后，频道所有成员（不包括该新加入的成员）会收到 `onChannelEvent` 回调，事件为 `memberPresence`。示例代码如下：
 
-   ```JavaScript
+   ```javascript
    let options = {
       serverId: 'serverId',
       channelId: 'channelId'
@@ -288,7 +288,7 @@ WebIM.conn.getCategoryPrivateChannels(options).then((res) => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    channelId: 'channelId'
@@ -309,7 +309,7 @@ WebIM.conn.leaveChannel(options).then(() => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    channelId: 'channelId',
@@ -329,7 +329,7 @@ WebIM.conn.removeChannelMember(options).then(() => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    channelId: 'channelId',
@@ -348,7 +348,7 @@ WebIM.conn.muteChannelMember(options).then(() => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    channelId: 'channelId',
@@ -364,7 +364,7 @@ WebIM.conn.unmuteChannelMember(options).then(() => {
 
 社区所有者和社区管理员可以调用 `getChannelMutelist` 方法获取频道下的禁言列表。
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    channelId: 'channelId',
@@ -384,7 +384,7 @@ WebIM.conn.getChannelMutelist(options).then((res) => {
 - 对于其他模式的频道创建时，创建者直接加入频道。因此，频道创建者算入频道成员数量，查询频道成员列表返回频道创建者。
 
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    channelId: 'channelId',
@@ -401,7 +401,7 @@ WebIM.conn.getChannelMembers(options).then((res) => {
 
 社区成员可以调用 `isInChannel` 方法查询自己是否在指定频道中。示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
    serverId: 'serverId',
    channelId: 'channelId',
@@ -416,7 +416,7 @@ WebIM.conn.isInChannel(options).then((res) => {
 
 Circle 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通过设置此监听，获取频道分组中的事件。
 
-```JavaScript
+```javascript
 WebIM.conn.addEventHandler("channelEvent", {
    onChannelEvent: (e) => {
       const { operation } = e;

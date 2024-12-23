@@ -36,7 +36,7 @@
 
 - 同步方法：
 
-```Java
+```java
 try {
     EMClient.getInstance().chatManager().recallMessage(message,ext);
     EMLog.d("TAG", "撤回消息成功");
@@ -48,7 +48,7 @@ try {
 
 - 异步方法：
 
-```Java
+```java
 EMClient.getInstance().chatManager().asyncRecallMessage(message,ext,new CallBack() {
     @Override
     public void onSuccess() {
@@ -71,7 +71,7 @@ EMClient.getInstance().chatManager().asyncRecallMessage(message,ext,new CallBack
 - 若用户在线接收了消息，消息撤回时，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为撤回的消息的内容。
 - 若消息发送和撤回时接收方离线，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为空。
 
-```Java
+```java
 void onMessageRecalledWithExt(List<EMRecallMessageInfo> recallMessageInfo){}
 ```
 

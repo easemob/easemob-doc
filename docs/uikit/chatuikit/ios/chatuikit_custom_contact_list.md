@@ -20,7 +20,7 @@
    
 下面的示例代码展示如何增加或删减数据项：
 
-```Swift
+```swift
      //增加数据项
      Appearance.contact.listHeaderExtensionActions.append(ContactListHeaderItem(featureIdentify: "New", featureName: "NewFeature", featureIcon: UIImage(named: "NewFeature")))
      //删减数据项
@@ -29,7 +29,7 @@
 
 获取该数组中某单个项的点击事件，示例如下：
 
-```Swift
+```swift
         if let item = Appearance.contact.listHeaderExtensionActions.first(where: { $0.featureIdentify == "NewFriendRequest" }) {
             item.actionClosure = { [weak self] _ in
                 //do something
@@ -58,7 +58,7 @@
 
 自定义联系人列表 TableView，需要重载联系人列表页面中的 `createContactList` 方法后，返回你继承 `EaseChatUIKit` 中 `ContactView` 后的类对象。关于在导航栏中实现业务逻辑，详见 `ContactView.swift` 类。示例代码如下：
 
-```Swift
+```swift
     override open func createContactList() -> ContactView {
         CustomContactView(frame: CGRect(x: 0, y: self.search.frame.maxY+5, width: self.view.frame.width, height: self.view.frame.height-NavigationHeight-BottomBarHeight-(self.tabBarController?.tabBar.frame.height ?? 49)), style: .plain)
     }
@@ -70,7 +70,7 @@
 
 1. 继承 `EaseChatUIKit` 中的 `ContactCell` 类创建新的自定义类 `CustomContactCell`，然后进行如下代码设置：
 
-```Swift
+```swift
     ComponentsRegister.shared.ContactsCell = CustomContactCell.self
 ```
 
@@ -78,7 +78,7 @@
    
    如果需要复用已有逻辑再增加新逻辑，则只需重载对应方法后调用 `super.xxx`，例如：
 
-```Swift
+```swift
     override open func refresh(profile: EaseProfileProtocol) {
        super.refresh(profile: profile)
        //继续你的新逻辑

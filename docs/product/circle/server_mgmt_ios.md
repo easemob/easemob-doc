@@ -39,7 +39,7 @@
 
 示例代码如下：
 
-```Swift
+```swift
 let attribute = EMCircleServerAttribute()
 attribute.name = serverName
 attribute.icon = serverIcon
@@ -68,7 +68,7 @@ EMClient.shared().circleManager?.createServer(attribute) { server, error in
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.inviteUserToServer(serverId: serverId, userId: userId, welcome: welcome) { error in
 }
 ```
@@ -77,14 +77,14 @@ EMClient.shared().circleManager?.inviteUserToServer(serverId: serverId, userId: 
 
   - 若同意加入社区，调用 `acceptServerInvitation` 方法。邀请人收到 `EMCircleManagerServerDelegate#onServerInvitationBeAccepted` 事件，社区内所有成员（不包括加入社区的该新成员）会收到 `EMCircleManagerServerDelegate#onMemberJoinedServer` 事件。示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.acceptServerInvitation(serverId, inviter: inviter) { server, error in
 }
 ```
 
   - 若拒绝加入社区，调用 `declineServerInvitation` 方法。邀请人收到 `EMCircleManagerServerDelegate#onServerInvitationBeDeclined` 事件。示例代码如下：
 
- ```Swift
+ ```swift
 EMClient.shared().circleManager?.declineServerInvitation(serverId, inviter: inviter) { error in
 }
  ```
@@ -95,7 +95,7 @@ EMClient.shared().circleManager?.declineServerInvitation(serverId, inviter: invi
 
 示例代码如下：
 
-```Swift
+```swift
 let attribute = EMCircleServerAttribute()
 attribute.name = serverName
 attribute.desc = serverDesc
@@ -112,7 +112,7 @@ EMClient.shared().circleManager?.updateServer(serverId, attribute: attribute) { 
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.destroyServer(serverId) { error in
 }
 ```
@@ -123,7 +123,7 @@ EMClient.shared().circleManager?.destroyServer(serverId) { error in
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.addTags(toServer: serverId, tags: ["tag1", "tag2"]) { tags, error in
 }
 ```
@@ -134,7 +134,7 @@ EMClient.shared().circleManager?.addTags(toServer: serverId, tags: ["tag1", "tag
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.removeTags(fromServer: serverId, tagIds: ["tagId1", "tagId2"]) { error in
 }
 ```
@@ -143,7 +143,7 @@ EMClient.shared().circleManager?.removeTags(fromServer: serverId, tagIds: ["tagI
 
 社区成员可调用 `fetchServerTags` 方法获取社区的标签列表。
 
-```Swift
+```swift
 EMClient.shared.circleManager?.fetchServerTags(serverId, completion: { tags, error in
             
 })
@@ -155,7 +155,7 @@ EMClient.shared.circleManager?.fetchServerTags(serverId, completion: { tags, err
  - 根据社区名称搜索，支持基于通过社区全名搜索和模糊搜索分页获取数据。若使用模糊搜索，你需要传入社区名称中最左侧的单个字或词汇，或包含该字或词汇的关键字。例如社区名称为 `足球社区01`，传入 `足`或`足球` 都可搜索出该社区，而使用 `球` 或 `社区01` 则搜索不到该社区。
  - 若根据标签名称搜索，需传入完整的标签名称，不支持模糊搜索。该类型查询直接获取带有该标签的所有社区，不支持分页查询。 
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchServers(with: .name, keyword: keyword, limit: 20, cursor: nil, completion: { servers, error in
                 
 })
@@ -167,7 +167,7 @@ EMClient.shared().circleManager?.fetchServers(with: .name, keyword: keyword, lim
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchServerDetail(serverId) { server, error in
 }
 ```
@@ -178,7 +178,7 @@ EMClient.shared().circleManager?.fetchServerDetail(serverId) { server, error in
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchJoinedServers(20, cursor: cursor) { result, error in
 }
 ```
@@ -189,7 +189,7 @@ EMClient.shared().circleManager?.fetchJoinedServers(20, cursor: cursor) { result
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchServerMembers(serverId, limit: 20, cursor: cursor) { result, error in
 }
 ```
@@ -214,7 +214,7 @@ EMClient.shared().circleManager?.fetchServerMembers(serverId, limit: 20, cursor:
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.joinServer(serverId) { server, error in
 }
 ```
@@ -231,7 +231,7 @@ EMClient.shared().circleManager?.joinServer(serverId) { server, error in
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.leaveServer(serverId) { error in
 }
 ```
@@ -242,7 +242,7 @@ EMClient.shared().circleManager?.leaveServer(serverId) { error in
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.removeUser(fromServer: serverId, userId: userId) { error in
 }
 ```
@@ -253,7 +253,7 @@ EMClient.shared().circleManager?.removeUser(fromServer: serverId, userId: userId
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.checkSelfIs(inServer: serverId) { isIn, error in
 }
 ```
@@ -264,7 +264,7 @@ EMClient.shared().circleManager?.checkSelfIs(inServer: serverId) { isIn, error i
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchSelfServerRole(serverId) { role, error in
 }
 ```
@@ -277,7 +277,7 @@ EMClient.shared().circleManager?.fetchSelfServerRole(serverId) { role, error in
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.addModerator(toServer: serverId, userId: userId) { error in
 }
 ```
@@ -290,7 +290,7 @@ EMClient.shared().circleManager?.addModerator(toServer: serverId, userId: userId
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.removeModerator(fromServer: serverId, userId: userId) { error in
 }
 ```
@@ -299,14 +299,14 @@ EMClient.shared().circleManager?.removeModerator(fromServer: serverId, userId: u
 
 `IEMCircleManager` 中提供社区事件的监听接口。开发者可以通过设置此监听，获取社区中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
-```Swift
+```swift
 //添加社区回调代理。
 EMClient.shared().circleManager?.add(serverDelegate: self, queue: nil)
 //移除社区回调代理。
 EMClient.shared().circleManager?.remove(serverDelegate: self)
 ```
 
-```Swift
+```swift
 //社区信息更新。社区所有成员（除操作者外）会收到该事件。
 func onServerUpdated(_ event: EMCircleServerEvent) {
         

@@ -20,13 +20,13 @@
 
 `UIKitChatActivity` 页面主要进行了权限的请求，比如相机权限，语音权限等。
 
-```Kotlin
+```kotlin
 // conversationId: 单聊为对端用户的用户 ID，群聊为群组 ID。
 // chatType：单聊和群聊分别为 ChatUIKitType#SINGLE_CHAT 和 ChatUIKitType#GROUP_CHAT。
 UIKitChatActivity.actionStart(mContext, conversationId, chatType)
 ```
 
-```Kotlin
+```kotlin
 class ChatActivity: AppCompactActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +50,7 @@ class ChatActivity: AppCompactActivity() {
 
 `UIKitChatFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置，目前提供的设置项如下：
 
-```Kotlin
+```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
 // easeChatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
 UIKitChatFragment.Builder(conversationID, easeChatType)
@@ -124,7 +124,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 1. 创建自定义适配器 `CustomMessageAdapter` 继承自 `EaseMessageAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
 
-```Kotlin
+```kotlin
 class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 
     override fun getItemNotEmptyViewType(position: Int): Int {
@@ -143,7 +143,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 
 2. 创建` CustomTypeChatRow` ，继承自 `ChatUIKitRow`。
 
-```Kotlin
+```kotlin
 class CustomTypeChatRow(
     private val context: Context,
     private val attrs: AttributeSet? = null,
@@ -167,7 +167,7 @@ class CustomTypeChatRow(
 
 3. 创建 `CustomChatTypeViewViewHolder`，继承自 `ChatUIKitRowViewHolder`。
 
-```Kotlin
+```kotlin
 class CustomChatTypeViewViewHolder(
     itemView: View
 ): ChatUIKitRowViewHolder(itemView) {
@@ -181,7 +181,7 @@ class CustomChatTypeViewViewHolder(
 
 4. 完善 `CustomMessageAdapter`。
 
-```Kotlin
+```kotlin
 class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 
     override fun getItemNotEmptyViewType(position: Int): Int {
@@ -222,7 +222,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 
 5. 添加 `CustomMessageAdapter` 到 `UIKitChatFragment#Builder`。
 
-```Kotlin
+```kotlin
 builder.setCustomAdapter(CustomMessageAdapter())
 ```
 
@@ -232,7 +232,7 @@ builder.setCustomAdapter(CustomMessageAdapter())
 
 ### 列表控件相关功能设置
 
-```Kotlin
+```kotlin
 val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.chatMessageListLayout
 ```
 
@@ -265,7 +265,7 @@ val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.cha
 
 ### 扩展功能设置
 
-```Kotlin
+```kotlin
 val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatExtendMenu
 ```
 
@@ -288,7 +288,7 @@ val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 
 开发者可以利用 `UIKitChatFragment#Builder#setOnChatExtendMenuItemClickListener` 进行监听，也可以在自定义的 `Fragment` 中重写 `onChatExtendMenuItemClick` 方法。
 
-```Kotlin
+```kotlin
 override fun onChatExtendMenuItemClick(view: View?, itemId: Int): Boolean {
     if(itemId == CUSTOM_YOUR_EXTEND_MENU_ID) {
         // 处理你自己的点击事件逻辑
@@ -305,13 +305,13 @@ override fun onChatExtendMenuItemClick(view: View?, itemId: Int): Boolean {
 
 1. 若实现消息长按后弹出类似微信样式的弹窗，可进行如下设置：
 
-```Kotlin
+```kotlin
 ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = true
 ```
 
 2. 若实现消息长按后弹出仿系统 UIActionSheet 样式的弹窗，可进行如下设置：
 
-```Kotlin
+```kotlin
 ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
 ```
 
@@ -324,7 +324,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
 
 - 增加自定义菜单条目
 
-```Kotlin
+```kotlin
 binding?.let {
     it.layoutChat.addItemMenu(menuId, menuOrder, menuTile)
 }
@@ -332,7 +332,7 @@ binding?.let {
 
 - 显示或隐藏指定菜单
 
-```Kotlin
+```kotlin
 binding?.let {
     it.layoutChat.findItemVisible(itemId: Int, visible: Boolean)
 }
@@ -351,7 +351,7 @@ binding?.let {
 
   在自定义的 `Fragment` 中重写以下方法：
 
-```Kotlin
+```kotlin
 override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) {
     // 菜单展示前的回调事件，可以通过 helper 对象在这里设置菜单条目是否展示。
 }
@@ -370,13 +370,13 @@ override fun onDismiss() {
 
 1. 若实现发送附件消息时弹出类似微信样式的弹窗，可进行如下设置：
    
-```Kotlin
+```kotlin
 ChatUIKitClient.getConfig()?.chatConfig?.enableWxExtendStyle = true
 ```
     
 2. 若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
 
-```Kotlin
+```kotlin
 ChatUIKitClient.getConfig()?.chatConfig?.enableWxExtendStyle = false
 ```  
 
@@ -389,7 +389,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxExtendStyle = false
 
 - 获取 `ChatUIKitInputMenu` 对象：
 
-```Kotlin
+```kotlin
     val chatInputMenu: ChatUIKitInputMenu? = binding?.layoutChat?.chatInputMenu
 
     chatInputMenu?.let{
@@ -437,7 +437,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxExtendStyle = false
 
 - 获取输入菜单项对象：
 
-```Kotlin
+```kotlin
 val primaryMenu: IChatPrimaryMenu? = binding?.layoutChat?.chatInputMenu?.chatPrimaryMenu
 ```
 
@@ -451,7 +451,7 @@ IChatPrimaryMenu 提供了如下方法：
 
 - 获取表情菜单对象：
 
-```Kotlin
+```kotlin
 val emojiconMenu: IChatEmojiconMenu? = binding?.layoutChat?.chatInputMenu?.chatEmojiMenu
 ```
 
@@ -464,7 +464,7 @@ val emojiconMenu: IChatEmojiconMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 
 添加自定义表情：
 
-```Kotlin
+```kotlin
 binding?.let {
     it.layoutChat.chatInputMenu?.chatEmojiMenu?.addEmojiconGroup(EmojiconExampleGroupData.getData())
 }
@@ -490,7 +490,7 @@ binding?.let {
 
 #### 设置消息列表控件功能
 
-```Kotlin
+```kotlin
 
 //获取 ChatUIKitMessageListLayout 对象：
 val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.chatMessageListLayout
@@ -524,7 +524,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 1. 创建自定义适配器 `CustomMessageAdapter` 继承自 `EaseMessageAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
 
-```Kotlin
+```kotlin
 class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 
     override fun getItemNotEmptyViewType(position: Int): Int {
@@ -543,7 +543,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 
 2. 创建 `CustomTypeChatRow` ，继承自 `ChatUIKitRow`。
 
-```Kotlin
+```kotlin
 class CustomTypeChatRow(
     private val context: Context,
     private val attrs: AttributeSet? = null,
@@ -567,7 +567,7 @@ class CustomTypeChatRow(
 
 3. 创建 `CustomChatTypeViewViewHolder`，继承自 `ChatUIKitRowViewHolder`。
 
-```Kotlin
+```kotlin
 class CustomChatTypeViewViewHolder(
     itemView: View
 ): ChatUIKitRowViewHolder(itemView) {
@@ -581,7 +581,7 @@ class CustomChatTypeViewViewHolder(
 
 4. 完善 `CustomMessageAdapter`。
 
-```Kotlin
+```kotlin
 class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 
     override fun getItemNotEmptyViewType(position: Int): Int {
@@ -622,7 +622,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 
 5. 添加 `CustomMessageAdapter` 到 `UIKitChatFragment#Builder`。
 
-```Kotlin
+```kotlin
 builder.setCustomAdapter(CustomMessageAdapter())
 ```
 
@@ -634,7 +634,7 @@ builder.setCustomAdapter(CustomMessageAdapter())
 
 `UIKitChatFragment#Builder` 设置消息条目的点击事件监听，包括气泡区域及头像的点击及长按事件。
 
-```Kotlin
+```kotlin
     builder.setOnMessageItemClickListener(object : OnMessageItemClickListener{
             //聊天气泡点击事件
             override fun onBubbleClick(message: ChatMessage?): Boolean {}
@@ -659,7 +659,7 @@ builder.setCustomAdapter(CustomMessageAdapter())
 | chatOtherDayFormat                    | 消息列表其他日期的格式，英文环境默认为： "MMM dd, HH:mm"。                        |
 | chatOtherYearFormat                   | 消息列表其他年份的日期格式，英文环境默认为： "MMM dd, yyyy HH:mm"。                |
 
-```Kotlin
+```kotlin
     // 日期语言区域切换（跟随手机区域语言设置） 默认值为 false 采用 ENGLISH。 
     // 举例：chatOtherDayFormat = "MMM dd, yyyy"  a.false: Sep 25, 2024  b.true(本地语言中文): 9月 25, 2024
     ChatUIKitClient.getConfig()?.dateFormatConfig?.useDefaultLocale = true  

@@ -29,7 +29,7 @@
 
 重写 `FirebaseMessagingService.onMessageReceived` 方法可以在 `RemoteMessage` 对象中获取自定义扩展：
 
-```Java
+```java
 public class EMFCMMSGService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -49,7 +49,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 
 `RemoteMessage` 对象中的扩展信息的数据结构如下：
 
-```Java
+```java
 {
     "t":"receiver",
     "f":"fromUsername",
@@ -63,7 +63,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 
 华为推送字段默认在应用启动页的 `onCreate` 方法中可以获取到，如下所示：
 
-```Java
+```java
 public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class SplashActivity extends BaseActivity {
 
 重写 `EMMiMsgReceiver.onNotificationMessageClicked` 方法可以在 `MiPushMessage` 对象中获取自定义扩展：
 
-```Java
+```java
 public class MiMsgReceiver extends EMMiMsgReceiver {
 
     @Override
@@ -113,7 +113,7 @@ public class MiMsgReceiver extends EMMiMsgReceiver {
 
 对于版本号为 480，版本名为 3.0.0.0 之前的推送 SDK，重写 `EMVivoMsgReceiver.onNotificationMessageClicked` 方法可以在 `UPSNotificationMessage` 对象中获取自定义扩展。
 
-```Java
+```java
 public class MyVivoMsgReceiver extends EMVivoMsgReceiver {
     @Override
     public void onNotificationMessageClicked(Context context, UPSNotificationMessage upsNotificationMessage) {

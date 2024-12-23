@@ -89,7 +89,7 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 1. 在控制台[关闭好友关系检查功能](/product/enable_and_configure_IM.html#好友关系检查)，即无需添加好友即可聊天。
 2. 调用 `init` 方法将在控制台上创建的用户的用户 ID 传入 `conversationId` 参数，向该用户发送消息。
 
-```Swift
+```swift
 let vc = ComponentsRegister.shared.MessageViewController.init(conversationId: <#创建用户的id#>, chatType: .chat)
 //或者 push 或者 present 都可
  ControllerStack.toDestination(vc: vc)

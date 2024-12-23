@@ -31,7 +31,7 @@
 
 示例代码如下： 
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.PinConversation(convId, isPinned, new CallBack(
     onSuccess: () =>
     {

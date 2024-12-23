@@ -37,7 +37,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 创建子区
 conn.createChatThread({parentId: 'parentId',name: 'threadName',messageId: 'messageId'})
 // 监听子区创建回调
@@ -56,7 +56,7 @@ conn.addEventHandler('THREAD',{
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 解散子区
 conn.destroyChatThread({chatThreadId: 'chatThreadId'})
 // 监听子区解散回调
@@ -80,7 +80,7 @@ conn.addEventHandler('THREAD',{
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 加入子区
 conn.joinChatThread({chatThreadId: 'chatThreadId'});
 ```
@@ -95,7 +95,7 @@ conn.joinChatThread({chatThreadId: 'chatThreadId'});
 
 示例代码如下：
 
-```JavaScript
+```javascript
 conn.leaveChatThread({chatThreadId: 'chatThreadId'});
 ```
 
@@ -107,7 +107,7 @@ conn.leaveChatThread({chatThreadId: 'chatThreadId'});
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // chatThreadId: 子区 ID
 // username: 子区成员的用户 ID
 conn.removeChatThreadMember({chatThreadId: 'chatThreadId',username:'username'}); 
@@ -121,7 +121,7 @@ conn.removeChatThreadMember({chatThreadId: 'chatThreadId',username:'username'});
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // chatThreadId：子区 ID
 // name：修改后的子区名称，长度不超过 64 个字符
 conn.changeChatThreadName({chatThreadId: 'chatThreadId',name: 'name'})
@@ -139,7 +139,7 @@ conn.addEventHandler('THREAD',{
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // chatThreadID：子区 ID
 conn.getChatThreadDetail({chatThreadId: 'chatThreadId'}).then((res)=>{
   console.log(res)
@@ -150,7 +150,7 @@ conn.getChatThreadDetail({chatThreadId: 'chatThreadId'}).then((res)=>{
 
 子区所属群组的所有成员均可以调用 `getChatThreadMembers` 方法从服务器分页获取子区成员列表。
 
-```JavaScript
+```javascript
 // chatThreadId：子区 ID
 // pageSize：单次请求返回的成员数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -163,7 +163,7 @@ conn.getChatThreadMembers({chatThreadId: 'chatThreadId ',pageSize:20,cursor:'cur
 
 1. 用户可以调用 `getJoinedChatThreads` 方法从服务器分页获取自己加入的子区列表：
 
-```JavaScript
+```javascript
 // pageSize：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 conn.getJoinedChatThreads({cursor: 'cursor',pageSize: 20}).then((res)=>{
@@ -173,7 +173,7 @@ conn.getJoinedChatThreads({cursor: 'cursor',pageSize: 20}).then((res)=>{
 
 2. 用户可以调用 `getJoinedChatThreads` 方法从服务器分页获取指定群组中自己加入的子区列表：
 
-```JavaScript
+```javascript
 // parentId：群组 ID
 // pageSize：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -184,7 +184,7 @@ conn.getJoinedChatThreads({parentId: 'parentId',cursor: 'cursor',pageSize: 20}).
 
 3. 用户还可以调用 `getChatThreads` 方法从服务器分页获取指定群组的子区列表：
 
-```JavaScript
+```javascript
 // parentId：群组 ID
 // pageSize：单次请求返回的子区数，取值范围为 [1,50]
 // cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -199,7 +199,7 @@ conn.getChatThreads({parentId: 'parentId', cursor:'cursor', pageSize: 20}).then(
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // chatThreadIds：要查询的子区 ID 列表，每次最多可传入 20 个子区 ID
 conn.getChatThreadLastMessage({chatThreadIds: ['chatThreadId1','chatThreadId2']}).then((res)=>{
   console.log(res)
@@ -212,7 +212,7 @@ SDK 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 创建一个子区事件监听器
 conn.addEventHandler("eventName", {
   onChatThreadChange: function (msg) {

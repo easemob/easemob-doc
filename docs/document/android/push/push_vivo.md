@@ -67,7 +67,7 @@
 
 3. 在即时通讯 IM SDK 初始化的时，配置启用 VIVO 推送。
 
-   ```Java
+   ```java
    EMOptions options = new EMOptions();
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);

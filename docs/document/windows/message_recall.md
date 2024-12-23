@@ -36,7 +36,7 @@
 2. 附件类型消息，包括图片、音频和视频和文件消息，撤回消息后，消息附件也相应删除。
 :::
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.RecallMessage("Message ID", "Please ignore the message", new CallBack(
   onSuccess: () => {
     Debug.Log("回撤成功");
@@ -57,6 +57,6 @@ SDKClient.Instance.ChatManager.RecallMessage("Message ID", "Please ignore the me
 - 若用户在线接收了消息，消息撤回时，该事件中的 `RecallMessageInfo` 中的 `RecallMessage` 为撤回的消息的内容，`RecallMessageId` 属性返回撤回的消息的 ID。
 - 若消息发送和撤回时接收方离线，该事件中的 `RecallMessageInfo` 中的 `RecallMessage` 为空，`RecallMessageId` 属性返回撤回的消息的 ID。
 
-```C#
+```csharp
 void OnMessagesRecalled(List<RecallMessageInfo> recallMessagesInfo);
 ```

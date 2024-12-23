@@ -31,7 +31,7 @@
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncChangeGroupName(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().changeGroupName(groupId,changedGroupName);
@@ -43,7 +43,7 @@ EMClient.getInstance().groupManager().changeGroupName(groupId,changedGroupName);
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncChangeGroupDescription(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().changeGroupDescription(groupId,description);
@@ -55,7 +55,7 @@ EMClient.getInstance().groupManager().changeGroupDescription(groupId,description
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncUpdateGroupAnnouncement(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().updateGroupAnnouncement(groupId, announcement);
@@ -67,7 +67,7 @@ EMClient.getInstance().groupManager().updateGroupAnnouncement(groupId, announcem
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchGroupAnnouncement(String, EMValueCallBack)。
 EMClient.getInstance().groupManager().fetchGroupAnnouncement(groupId);
@@ -81,7 +81,7 @@ EMClient.getInstance().groupManager().fetchGroupAnnouncement(groupId);
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncUploadGroupSharedFile(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().uploadGroupSharedFile(groupId, filePath, callBack);
@@ -91,7 +91,7 @@ EMClient.getInstance().groupManager().uploadGroupSharedFile(groupId, filePath, c
 
 所有群成员均可调用 `asyncDownloadGroupSharedFile` 方法下载群组共享文件。
 
-```Java
+```java
 // 同步方法，需要放到异步线程
 List<EMMucSharedFile> sharedFiles = EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum, pageSize);
 // 获取需要的共享文件信息
@@ -117,7 +117,7 @@ EMClient.getInstance().groupManager().asyncDownloadGroupSharedFile(groupId, shar
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncDeleteGroupSharedFile(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().deleteGroupSharedFile(groupId, fileId);
@@ -127,7 +127,7 @@ EMClient.getInstance().groupManager().deleteGroupSharedFile(groupId, fileId);
 
 所有群成员均可以调用 `fetchGroupSharedFileList` 方法从服务器获取群组的共享文件列表。
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchGroupSharedFileList(String, int, int, EMValueCallBack)。
 EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum, pageSize);
@@ -139,7 +139,7 @@ EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum,
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 EMClient.getInstance().groupManager().updateGroupExtension(groupId, extension);
 ```

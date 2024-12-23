@@ -58,7 +58,7 @@
 
 #### 调用示例
 
-```JavaScript
+```javascript
 //使用示例
 import SDK from "../sdk/webimSDK3.x.x"; // 3.0sdk
 ```
@@ -67,7 +67,7 @@ import SDK from "../sdk/webimSDK3.x.x"; // 3.0sdk
 
 实例化 SDK，并挂载在全局对象下。
 
-```JavaScript
+```javascript
 //实例化 SDK 对象
 const WebIM = (wx.WebIM = SDK);
 WebIM.conn = new WebIM.connection({

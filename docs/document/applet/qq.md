@@ -82,7 +82,7 @@ QQ、微信小程序： 1.7.0 及以上版本，最多可以同时存在 5 个 W
 
 #### 调用示例
 
-```JavaScript
+```javascript
 // 使用示例
 import SDK from "../sdk/connection"; // 2.0 SDK
 import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
@@ -92,7 +92,7 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
 
 实例化 SDK，并挂载在全局对象下。
 
-```JavaScript
+```javascript
 // 实例化 SDK 对象
 const WebIM = (wx.WebIM = SDK);
 WebIM.conn = new WebIM.connection({

@@ -27,7 +27,7 @@
 
 你可以调用 `GetUnreadMessageCount` 方法获取本地所有会话的未读消息数量，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.GetUnreadMessageCount();
 ```
 
@@ -35,7 +35,7 @@ SDKClient.Instance.ChatManager.GetUnreadMessageCount();
 
 你可以调用 `UnReadCount` 方法获取本地指定会话的未读消息数，示例代码如下：
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 int unread = conv.UnReadCount;
 ```
@@ -44,7 +44,7 @@ int unread = conv.UnReadCount;
 
 你可以调用 `MarkAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零，示例代码如下：
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 SDKClient.Instance.ChatManager.MarkAllConversationsAsRead();
 ```
@@ -53,7 +53,7 @@ SDKClient.Instance.ChatManager.MarkAllConversationsAsRead();
 
 你可以调用 `MarkAllMessageAsRead` 方法对指定会话的未读消息数清零，示例代码如下：
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 conv.MarkAllMessageAsRead();
 ```
@@ -62,7 +62,7 @@ conv.MarkAllMessageAsRead();
 
 你可以调用 `markMessageAsRead` 方法将指定会话的单条未读消息置为已读。
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 conv.MarkMessageAsRead(msgId);
 ```

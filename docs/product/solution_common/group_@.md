@@ -51,7 +51,7 @@
 
 @tab Java
 
-```Java
+```java
 JSONArray atUserList = new JSONArray();
 atUserList.put("@User1");
 atUserList.put("@User2");
@@ -67,7 +67,7 @@ EMClient.getInstance().chatManager().sendMessage(msg);
 
 @tab Kotlin
 
-```Kotlin
+```kotlin
   val atUserList = JSONArray()
   atUserList.put("@User1")
   atUserList.put("@User2")
@@ -89,7 +89,7 @@ EMClient.getInstance().chatManager().sendMessage(msg);
 
 @tab iOS
 
-```Swift
+```swift
 let textBody = EMTextMessageBody(text: "@userId1 你好")
 // @ 指定用户的消息构造如下。如果要 @ 所有人，ext 可以设置为 ["em_at_list": "All"]。
 let msg = EMMessage(conversationID: "groupId", body: textBody, ext: ["em_at_list": ["userId1"]])
@@ -105,7 +105,7 @@ EMClient.shared().chatManager?.send(msg, progress: nil, completion: { msg, err i
 
 @tab Web
 
-```JavaScript
+```javascript
 const message = chatSDK.message.create({
   to: "userId",
   chatType: "groupChat",
@@ -131,7 +131,7 @@ client.send(message);
 
 @tab Java
 
-```Java
+```java
 private void handleMentionedMessage(EMMessage messages) {
    try {
       String groupId = msg.getTo();
@@ -170,7 +170,7 @@ private void handleMentionedMessage(EMMessage messages) {
 
 @tab Kotlin
 
-```Kotlin
+```kotlin
     private fun handleMentionedMessage(messages: EMMessage) {
         try {
             val groupId: String = messages.to
@@ -210,7 +210,7 @@ private void handleMentionedMessage(EMMessage messages) {
 
 @tab iOS
 
-```Swift
+```swift
 func handleMentionedMessage(_ message: EMChatMessage) {
     let atListInfo = message.ext?["em_at_list"]
         if let atListInfo = atListInfo as? String, 
@@ -235,7 +235,7 @@ func messagesDidReceive(_ aMessages: [EMChatMessage]) {
 
 @tab Web
 
-```JavaScript
+```javascript
 receiveMessage(message){
     let mentionList = message?.ext?.em_at_list;
     // 收到文本消息            

@@ -31,7 +31,7 @@
 
 你可以调用 `createServer` 方法创建一个社区：
 
-```JavaScript
+```javascript
 let options = {
   name: 'server name',
   icon: 'image url',
@@ -50,7 +50,7 @@ WebIM.conn.createServer(options).then(res => {
 
 你可以调用 `joinServer` 方法加入一个现有社区：
 
-```JavaScript
+```javascript
 WebIM.conn.joinServer({serverId: 'serverId'}).then(res=>{
   console.log(res)
 })
@@ -60,7 +60,7 @@ WebIM.conn.joinServer({serverId: 'serverId'}).then(res=>{
 
 你可以调用 `getJoinedServers` 方法获取已加入的社区列表：
 
-```JavaScript
+```javascript
 WebIM.conn.getJoinedServers({pageSize: '10',cursor: ''}).then(res=>{
   console.log(res)
 })
@@ -79,7 +79,7 @@ WebIM.conn.getJoinedServers({pageSize: '10',cursor: ''}).then(res=>{
 
 你可以调用 `createChannel` 方法创建频道：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverID',
   isPublic: true,
@@ -100,7 +100,7 @@ WebIM.conn.createChannel(options).then(res => {
 
 你可以调用 `joinChannel` 方法加入频道：
 
-```JavaScript
+```javascript
 WebIM.conn.joinChannel({serverId: 'serverId', channelId: 'channelId'}).then(res => {
   console.log(res)
 })
@@ -110,7 +110,7 @@ WebIM.conn.joinChannel({serverId: 'serverId', channelId: 'channelId'}).then(res 
 
 你可以调用 `getPublicChannels` 方法获取社区下的公开频道列表：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverId',
   pageSize: 20,
@@ -125,7 +125,7 @@ WebIM.conn.getPublicChannels(options).then(res => {
 
 你可以调用 `getPrivateChannels` 方法获取社区下所有私密频道的列表：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverId',
   pageSize: 20,
@@ -146,7 +146,7 @@ WebIM.conn.getPrivateChannels(options).then(res => {
 
 你可以调用 `create` 方法构建一条文本消息并在指定频道中发送：
 
-```JavaScript
+```javascript
 // 在指定频道发送文本消息。
 function sendChannelText() {
     let option = {
@@ -168,7 +168,7 @@ function sendChannelText() {
 
 你可以通过 `addEventHandler` 注册监听器接收文本消息的回调 。
 
-```JavaScript
+```javascript
 WebIM.conn.addEventHandler('messageHandler', {
   // 收到文本消息。
    onTextMessage: function ( message ) {

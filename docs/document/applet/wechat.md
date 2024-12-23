@@ -99,7 +99,7 @@ downloadFile 合法域名：
 
 #### 调用示例
 
-```JavaScript
+```javascript
 //使用示例
 import SDK from "../sdk/connection"; // 2.0sdk
 import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0sdk
@@ -109,7 +109,7 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0sdk
 
 实例化 SDK，并挂载在全局对象下。
 
-```JavaScript
+```javascript
 //实例化SDK对象
 const WebIM = (wx.WebIM = SDK);
 WebIM.conn = new WebIM.connection({

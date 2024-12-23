@@ -91,7 +91,7 @@
 
 继承`FirebaseMessagingService`的`Service`里去实现`handleIntent`方法，添加上报送达事件的代码
 
-```Java
+```java
 public class EMFCMMSGService extends FirebaseMessagingService {
 
     @Override
@@ -123,7 +123,7 @@ public class EMFCMMSGService extends FirebaseMessagingService {
 
 启动页的`onCreate`里添加上报点击事件的代码。
 
-```Java
+```java
 Bundle bundle = getIntent().getExtras();
     if(bundle !=null){
         String push = bundle.getString("EPush");
@@ -155,7 +155,7 @@ EMClient.getInstance().pushManager().asyncReportPushAction(taskId, provider, act
 
 以小米推送为例，在厂商的点击回调里去解析上报点击事件。
 
-```Java
+```java
 public void onNotificationMessageClicked(Context context, MiPushMessage message) {
 
     String content = message.getContent();

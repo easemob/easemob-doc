@@ -42,7 +42,7 @@
 
 下面以如何自定义礼物弹幕视图 Cell 为例介绍如何自定义控件。首先，继承 `GiftMessageCell`，添加自己的逻辑，然后在 ChatroomUIKit 中注册新类替换原有的类。
 
-````Swift
+````swift
 class CustomGiftMessageViewCell: GiftMessageCell {
     lazy var redDot: UIView = {
         UIView().backgroundColor(.red).cornerRadius(.large)

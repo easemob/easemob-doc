@@ -38,7 +38,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 1. 用户添加指定用户为好友
 
-```TypeScript
+```typescript
 // 用户 ID
 const userId = "foo";
 // 申请加为好友的理由
@@ -57,7 +57,7 @@ ChatClient.getInstance()
 
 同意成为好友：
 
-```TypeScript
+```typescript
 // 用户 ID
 const userId = "bar";
 ChatClient.getInstance()
@@ -72,7 +72,7 @@ ChatClient.getInstance()
 
 拒绝成为好友：
 
-```TypeScript
+```typescript
 // 用户 ID
 const userId = "bar";
 ChatClient.getInstance()
@@ -87,7 +87,7 @@ ChatClient.getInstance()
 
 3. 接收方对于同意，申请方收到监听事件 `onContactInvited`
 
-```TypeScript
+```typescript
 const contactEventListener = new (class implements ChatContactEventListener {
   that: any;
   constructor(parent: any) {
@@ -104,7 +104,7 @@ ChatClient.getInstance().contactManager.addContactListener(
 
 4. 对方拒绝，收到监听事件 `onFriendRequestDeclined`
 
-```TypeScript
+```typescript
 const contactEventListener = new (class implements ChatContactEventListener {
   that: any;
   constructor(parent: any) {
@@ -123,7 +123,7 @@ ChatClient.getInstance().contactManager.addContactListener(
 
 删除好友时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
-```TypeScript
+```typescript
 // 用户 ID
 const userId = "tom";
 // 是否保留聊天会话
@@ -144,7 +144,7 @@ ChatClient.getInstance()
 
 好友备注的长度不能超过 100 个字符。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .contactManager.setContactRemark({ userId: "xxx", remark: "user remark" })
   .then()
@@ -157,7 +157,7 @@ ChatClient.getInstance()
 
 - 一次性获取服务端好友列表。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .contactManager.fetchAllContacts()
   .then((contactList: Contact[]) => {
@@ -168,7 +168,7 @@ ChatClient.getInstance()
 
 - 分页获取服务端好友列表。
 
-```TypeScript
+```typescript
 // cursor 数据获取的起始位置，获取第一页设置为 `空字符串` 或者 `undefined`。
 // pageSize 获取每页的最大数目,取值范围为 [1,50]。
 ChatClient.getInstance()
@@ -184,7 +184,7 @@ ChatClient.getInstance()
 
 此外，你也可以调用 `getAllContactsFromServer` 方法从服务器获取所有好友的列表，该列表只包含好友的用户 ID。
 
-```TypeScript
+```typescript
  ChatClient.getInstance()
    .contactManager.getAllContactsFromServer()
    .then((value) => {
@@ -205,7 +205,7 @@ ChatClient.getInstance()
 
 - 获取本地单个好友。
 
-```TypeScript
+```typescript
 // userId 获取指定用户的好友备注。
 ChatClient.getInstance()
   .contactManager.getContact(userId)
@@ -217,7 +217,7 @@ ChatClient.getInstance()
 
 - 一次性获取本地好友列表。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .contactManager.getAllContacts()
   .then((contactList: Contact[]) => {
@@ -228,7 +228,7 @@ ChatClient.getInstance()
 
 此外，你也可以调用 `getAllContactsFromDB` 方法从本地一次性获取所有好友的列表，该列表只包含好友的用户 ID。
 
-```TypeScript
+```typescript
  ChatClient.getInstance()
    .contactManager.getAllContactsFromDB()
    .then((value) => {
@@ -245,7 +245,7 @@ ChatClient.getInstance()
 
 用户可以将任何其他用户添加到黑名单列表，无论该用户是否是好友。好友被加入黑名单后仍在好友列表上显示。
 
-```TypeScript
+```typescript
 // 用户 ID
 const userId = "tom";
 // 将用户添加到黑名单
@@ -263,7 +263,7 @@ ChatClient.getInstance()
 
 1. 使用本地缓存获取黑名单列表
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .contactManager.getBlockListFromDB()
   .then((list) => {
@@ -278,7 +278,7 @@ ChatClient.getInstance()
 
 从服务器获取黑名单列表之后，才能从本地数据库获取到黑名单列表。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .contactManager.getBlockListFromServer()
   .then((list) => {
@@ -293,7 +293,7 @@ ChatClient.getInstance()
 
 被移出黑名单后，用户发送消息等行为将恢复。
 
-```TypeScript
+```typescript
 // 用户 ID
 const userId = "tom";
 // 将用户从黑名单移除

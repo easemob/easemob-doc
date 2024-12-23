@@ -54,7 +54,7 @@
 
 1. 调用 `fetchPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。示例代码如下：
 
-```TypeScript
+```typescript
 // 通过分页的方式获取公开群组的列表。
 // 每页期望返回的群组数。
 const pageSize = 10;
@@ -77,7 +77,7 @@ ChatClient.getInstance()
 
    示例代码如下：
 
-   ```TypeScript
+   ```typescript
    // groupId: 群组 ID
    ChatClient.getInstance()
      .groupManager.joinPublicGroup(groupId)
@@ -91,7 +91,7 @@ ChatClient.getInstance()
 
    2. 调用 `requestToJoinPublicGroup` 方法加入需要群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicJoinNeedApproval`。示例代码如下：
 
-   ```TypeScript
+   ```typescript
    // 申请加入指定群组。
    const groupId = "100";
    const reason = "study typescript";
@@ -113,7 +113,7 @@ ChatClient.getInstance()
 
    示例代码如下：
 
-   ```TypeScript
+   ```typescript
    // groupId: 群组 ID
    // username：用户 ID
    ChatClient.getInstance()
@@ -130,7 +130,7 @@ ChatClient.getInstance()
 
    示例代码如下：
 
-   ```TypeScript
+   ```typescript
    // groupId: 群组 ID
    // username：用户 ID
    // reason：拒绝的理由
@@ -154,7 +154,7 @@ ChatClient.getInstance()
 
    - 群主或群管理员加人，需要调用 `addMembers` 方法：
 
-   ```TypeScript
+   ```typescript
    // 群主或者管理员添加群成员
    const groupId = "100";
    // 群成员列表
@@ -175,7 +175,7 @@ ChatClient.getInstance()
 
    `EMGroupStyle` 设置为 `PrivateMemberCanInvite` 时，所有群成员均可以邀请人进群。
 
-   ```TypeScript
+   ```typescript
    // groupId: 群组 ID
    // members：受邀用户列表
    // reason：邀请的原因
@@ -193,7 +193,7 @@ ChatClient.getInstance()
 
    - 受邀用户同意加入群组，需要调用 `acceptInvitation` 方法。
 
-   ```TypeScript
+   ```typescript
    // groupId: 群组 ID
    // inviter：邀请人的 ID
    ChatClient.getInstance()
@@ -208,7 +208,7 @@ ChatClient.getInstance()
 
    - 受邀人拒绝入群组，需要调用 `declineInvitation` 方法。
 
-   ```TypeScript
+   ```typescript
    // groupId: 群组 ID
    // inviter：邀请人的 ID
    // reason：拒绝的理由
@@ -228,7 +228,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.removeMembers(groupId, members)
   .then(() => {
@@ -250,7 +250,7 @@ ChatClient.getInstance()
 
 你可以调用 `setMemberAttribute` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。设置后，群内其他成员会收到 `ChatGroupEventListener.onMemberAttributesChanged` 事件。
 
-```TypeScript
+```typescript
 // groupId：群组 ID。
 // member：群组成员的用户 ID。
 // attributes：需要设置的群成员属性。
@@ -268,7 +268,7 @@ ChatClient.getInstance()
 
 你可以调用 `fetchMemberAttributes` 方法获取单个群成员的所有自定义属性。
 
-```TypeScript
+```typescript
 // groupId：群组 ID。
 // member：群组成员的用户 ID。
 ChatClient.getInstance()
@@ -289,7 +289,7 @@ ChatClient.getInstance()
 每次最多可获取 10 个群成员的自定义属性。
 :::
 
-```TypeScript
+```typescript
 // groupId：群组 ID
 // members：群成员的用户 ID，数组类型。
 // attributeKeys: 要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
@@ -311,7 +311,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.changeOwner(groupId, newOwner)
   .then(() => {
@@ -328,7 +328,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.addAdmin(groupId, memberId)
   .then(() => {
@@ -345,7 +345,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.removeAdmin(groupId, memberId)
   .then(() => {
@@ -366,7 +366,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.blockMembers(groupId, members)
   .then(() => {
@@ -383,7 +383,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.unblockMembers(groupId, members)
   .then(() => {
@@ -399,7 +399,7 @@ ChatClient.getInstance()
 仅群主和群管理员可以调用 `fetchBlockListFromServer` 方法获取当前群组的黑名单。默认最多取 200 个。
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.fetchBlockListFromServer(groupId, pageSize, pageNum)
   .then((list) => {
@@ -420,7 +420,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // groupId：群组 ID
 // members：将要被禁言的成员列表
 // duration：禁言时间。若传 -1，表示永久禁言。
@@ -440,7 +440,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.unMuteMembers(groupId, members)
   .then(() => {
@@ -457,7 +457,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // groupId：群组 ID
 // pageSize：期望获取的最大数量
 // pageNum：请求第几页，从 1 开始
@@ -483,7 +483,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.muteAllMembers(groupId)
   .then(() => {
@@ -500,7 +500,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.unMuteAllMembers(groupId)
   .then(() => {
@@ -521,7 +521,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.addAllowList(groupId, members)
   .then(() => {
@@ -540,7 +540,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.removeAllowList(groupId, members)
   .then(() => {
@@ -555,7 +555,7 @@ ChatClient.getInstance()
 
 所有群成员可以调用 `isMemberInAllowListFromServer` 方法检查自己是否在群白名单中，示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.isMemberInAllowListFromServer(groupId)
   .then((isMember) => {
@@ -572,7 +572,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.fetchAllowListFromServer(groupId)
   .then(() => {
@@ -587,7 +587,7 @@ ChatClient.getInstance()
 
 #### 通过服务器分页获取群组成员
 
-```TypeScript
+```typescript
 // groupId：群组 ID
 // pageSize：期望获取的最大数量
 // cursor：开始分页的位置，第一页为空，后续页面请使用第一页返回的结果

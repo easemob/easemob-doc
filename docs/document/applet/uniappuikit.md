@@ -38,7 +38,7 @@ HBuilderx ⇒ 工具 ⇒ 插件安装 ⇒ 安装新插件 ⇒ 前往插件市场
 
 ## 组件使用
 
-```JavaScript
+```javascript
 import chat from "@/components/chat/chat.vue";
 // chatType=singleChat 单聊
    <chat 
@@ -78,14 +78,14 @@ import chat from "@/components/chat/chat.vue";
 
 ### 滑动组件
 
-```JavaScript
+```javascript
 import swipeDelete from "@/components/swipedelete/swipedelete";
 <swipe-delete> ... </swipe-delete>
 ```
 
 ### 长按功能框
 
-```JavaScript
+```javascript
 import longPressModal from "@/components/longPressModal/index";
 <long-press-modal
    :winSize="winSize"         // 当前窗口高宽
@@ -115,7 +115,7 @@ import longPressModal from "@/components/longPressModal/index";
 使用长按组件时候需要先获取当前窗口，再根据当前点击的位置来显示组件框：
 :::
 
-```JavaScript
+```javascript
 onLoad(){
  /* 获取窗口尺寸 */
  uni.getSystemInfo({

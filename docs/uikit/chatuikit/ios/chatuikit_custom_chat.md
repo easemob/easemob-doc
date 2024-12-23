@@ -35,7 +35,7 @@
 
 如果需要复用已有逻辑再增加新逻辑，则只需重载对应方法后调用 `super.xxx`，例如：
 
-```Swift
+```swift
     override open func refresh(entity: MessageEntity) {
        super.refresh(entity:entity)
        //继续你的新逻辑
@@ -72,7 +72,7 @@
 
 你可以将不需要的功能移除，也还可添加表情回应（`MessageReaction`）和话题（`MessageThread`）。**注意，添加表情回应和话题功能前，需在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。** 
 
-```Swift
+```swift
         //是否显示消息话题。
         if self.messageThread {
             Appearance.chat.contentStyle.append(.withMessageThread)
@@ -111,13 +111,13 @@
 
 1. 若实现发送附件消息时弹出类似微信样式的弹窗，可进行如下设置：
 
-```Swift 
+```swift 
     Appearance.chat.messageAttachmentMenuStyle = .followInput
 ```
 
 2. 若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
 
-```Swift 
+```swift 
     Appearance.chat.messageAttachmentMenuStyle = .actionSheet
 ```
 
@@ -179,7 +179,7 @@
 
 你可以通过 `Appearance.chat.messageLongPressedActions = value` 设置聊天页面长按消息后的 `ActionSheet` 菜单项。你可以继承 `MessageListController`，重载页面中的方法，移除或添加长按消息后的动作（action）。
 
-```Swift
+```swift
 override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemProtocol] {
         if let ext = message.message.ext,let value = ext[callIdentifier] as? String,value == callValue {
             return [
@@ -195,7 +195,7 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 
 获取某个 action 的点击事件，示例代码:
 
-```Swift
+```swift
         Appearance.chat.messageLongPressedActions.first { $0.tag == "xxx" }?.action = { [weak self ] in 
            //action handler
         }
@@ -207,13 +207,13 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 
 1. 若实现消息长按后弹出类似微信样式的弹窗，可进行如下设置：
 
-```Swift 
+```swift 
     Appearance.chat.messageLongPressMenuStyle = .withArrow
 ```
 
 2. 若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
 
-```Swift 
+```swift 
     Appearance.chat.messageLongPressMenuStyle = .actionSheet
 ```
 
@@ -236,7 +236,7 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
     
 获取某个 action 的点击事件，示例代码:
 
-```Swift
+```swift
         Appearance.chat.inputExtendActions.first { $0.tag == "xxx" }?.action = { [weak self ] in 
            //action handler
         }

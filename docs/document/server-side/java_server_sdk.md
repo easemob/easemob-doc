@@ -40,7 +40,7 @@ implementation 'com.easemob.im:im-sdk-core:0.8.56'
 
 #### 1. 使用 Easemob App Credentials 的情况
 
-```Java
+```java
 建议写到配置类中，示例如下：
 @Configuration
 public class Config {
@@ -77,7 +77,7 @@ public class Config {
 
 举个例子，我们要注册一个用户，就可以这样写：
 
-```Java
+```java
 @Service
 public class UserService {
 
@@ -107,7 +107,7 @@ API 的返回值是响应式的，如果希望阻塞，可以使用上面例子�
 
 建议写到配置类中，示例如下：
 
-```Java
+```java
 @Configuration
 public class Config {
 
@@ -153,7 +153,7 @@ logging.level.com.easemob.im.shaded.io.netty=error
 
 示例：
 
-```Java
+```java
 @Configuration
 public class Config {
 
@@ -186,7 +186,7 @@ public class Config {
 
 如果不想使用 Server SDK 注册环信 ID 的限制，可以在初始化配置时添加 ‘turnOffUserNameValidation()’ （SDK 需要使用 0.3.5 以上的版本）
 
-```Java
+```java
 // 强烈建议不要使用纯数字或者有规律的字符串来注册环信 ID，否则用户可能容易遭受到攻击、接收到垃圾消息。
 EMProperties properties = EMProperties.builder()
         .setAppkey("appkey")
@@ -202,7 +202,7 @@ EMProperties properties = EMProperties.builder()
 
 如果你使用的代代理不需要认证，那么需要传入自己的 IP、端口。
 
-```Java
+```java
 EMProxy proxy = EMProxy.builder()
                 .setIP("ip")
                 .setPort(80)
@@ -218,7 +218,7 @@ EMProperties properties = EMProperties.builder()
 
 如果你使用的代理需要认证，那么需要传入自己的 IP、端口、账号以及密码。
 
-```Java
+```java
 EMProxy proxy = EMProxy.builder()
                 .setIP("ip")
                 .setPort(80)

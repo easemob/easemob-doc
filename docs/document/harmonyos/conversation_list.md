@@ -36,7 +36,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // limit: 每页返回的会话数。取值范围为 [1,50]。
 // cursor: 开始获取数据的游标位置。若获取数据时传空字符串（""），SDK 从最新活跃的会话开始获取。
 let limit = 50;
@@ -54,7 +54,7 @@ ChatClient.getInstance().chatManager()?.fetchConversationsFromServer(limit, curs
 
 示例代码如下：
 
-```TypeScript
+```typescript
 let conversations = ChatClient.getInstance().chatManager()?.getAllConversationsBySort();
 ```
 

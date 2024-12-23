@@ -43,7 +43,7 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
 
 示例代码如下：
 
-```Java
+```java
 EMMessageStatistics statistics = EMClient.getInstance().statisticsManager().getMessageStatistics(messageId);
 ```
 
@@ -51,7 +51,7 @@ EMMessageStatistics statistics = EMClient.getInstance().statisticsManager().getM
 
 你可以统计一定时间段内发送和/或接收的指定或全部类型的消息，示例代码如下：
 
-```Java
+```java
 int number = EMClient.getInstance().statisticsManager().getMessageCount(startTime, endTime, direct, style);
 ```
 
@@ -61,6 +61,6 @@ int number = EMClient.getInstance().statisticsManager().getMessageCount(startTim
 
 示例代码如下：
 
-```Java
+```java
 long size = EMClient.getInstance().statisticsManager().getMessageSize(startTime, endTime, direct, style);
 ```

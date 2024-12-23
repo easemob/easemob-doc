@@ -84,13 +84,13 @@ end
 
 1. 添加头文件：
 
- ```Objective-C
+ ```objective-c
 #import <react-native-push-collection/PushClient.h>
 ```
 
 2. 在 `AppDelegate` 的 `- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions` 中添加代码：
 
- ```Objective-C
+ ```objective-c
 [[PushClient sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 ```
 
@@ -98,19 +98,19 @@ end
 
 在 `AppDelegate` 的 `- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken` 中添加代码：
 
- ```Objective-C
+ ```objective-c
 [[PushClient sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 ```
 
 在 `AppDelegate` 的 `- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error;` 中添加代码：
 
- ```Objective-C
+ ```objective-c
 [[PushClient sharedInstance] application:application didFailToRegisterForRemoteNotificationsWithError:error];
 ```
 
 在 `AppDelegate` 的 `- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler` 中添加代码：
 
- ```Objective-C
+ ```objective-c
 [[PushClient sharedInstance] application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
 ```
 
@@ -221,7 +221,7 @@ HUAWEI_PUSH_APPID=xxx
 
 在 `MainApplication` 文件中，在方法 `onCreate` 中添加如下代码：
 
-```Java
+```java
 registerActivityLifecycleCallbacks(new PushActivityLifecycleCallbacks());
 ```
 
@@ -239,7 +239,7 @@ registerActivityLifecycleCallbacks(new PushActivityLifecycleCallbacks());
 
 #### 步骤一 初始化推送 SDK
 
-```TypeScript
+```typescript
 import {
   ChatPushClient,
   getPlatform,
@@ -277,7 +277,7 @@ ChatPushClient.getInstance()
 
 添加推送监听器，通过该监听器获取推送 token 或者失败结果。
 
-```TypeScript
+```typescript
 ChatPushClient.getInstance().addListener({
   onError: (error) => {
     ToastAndroid.show("onError" + JSON.stringify(error), ToastAndroid.SHORT);
@@ -292,7 +292,7 @@ ChatPushClient.getInstance().addListener({
 
 通过 `onReceivePushToken` 接收推送 Token。
 
-```TypeScript
+```typescript
 ChatPushClient.getInstance()
   .getTokenAsync()
   .then(() => {

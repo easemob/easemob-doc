@@ -10,7 +10,7 @@
   
 示例代码如下所示：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
     // success logic
 });
@@ -28,7 +28,7 @@ ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
 
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().loginWithToken(userId, token).then(() => {
     // 登录成功回调
 }).catch((e: ChatError) => {
@@ -38,7 +38,7 @@ ChatClient.getInstance().loginWithToken(userId, token).then(() => {
 
 **用户 ID + 密码** 登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_system.html#开放注册单个用户)。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().login(userId, pwd).then(() => {
     // 登录成功回调
 }).catch((e: ChatError) => {
@@ -62,7 +62,7 @@ ChatClient.getInstance().login(userId, pwd).then(() => {
 
 你可以调用 `logout` 方法退出登录。退出登录后，你不会再收到其他用户发送的消息。 
 
-```TypeScript
+```typescript
 ChatClient.getInstance().logout().then(()=> {
     // success logic       
 })

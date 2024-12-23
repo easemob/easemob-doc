@@ -58,7 +58,7 @@
 
 当接收方收到消息后，SDK 底层会自动进行消息送达回执。
 
-```JavaScript
+```javascript
 const conn = new websdk.connection({
   appKey: "your appKey",
   delivery: true,
@@ -67,7 +67,7 @@ const conn = new websdk.connection({
 
 2. 接收方收到消息后，发送方会收到 `onDeliveredMessage` 回调，得知消息已送达接收方。
 
-```JavaScript
+```javascript
 conn.addEventHandler("customEvent", {
   onReceivedMessage: function (message) {}, // 收到消息送达服务器回执。
   onDeliveredMessage: function (message) {}, // 收到消息送达客户端回执。
@@ -88,7 +88,7 @@ conn.addEventHandler("customEvent", {
 
 聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
 
-```JavaScript
+```javascript
 let option = {
   chatType: "singleChat", // 会话类型，设置为单聊。
   type: "channel", // 消息类型。
@@ -100,7 +100,7 @@ conn.send(msg);
 
 - 聊天页面打开时，若收到消息，发送消息已读回执，如下所示：
 
-```JavaScript
+```javascript
 let option = {
   type: "read", // 消息类型为消息已读回执。
   chatType: "singleChat", // 会话类型，这里为单聊。
@@ -115,7 +115,7 @@ conn.send(msg);
 
 你可以调用接口监听指定消息是否已读，示例代码如下：
 
-```JavaScript
+```javascript
 conn.addEventHandler("customEvent", {
   onReadMessage: (message) => {},
 });
@@ -139,7 +139,7 @@ conn.addEventHandler("customEvent", {
 
 1. 群成员发送消息时若需已读回执，需设置 `allowGroupAck` 为 `true`：
 
-```JavaScript
+```javascript
 sendGroupReadMsg = () => {
     let option = {
         type: 'txt',            // 消息类型。
@@ -160,7 +160,7 @@ sendGroupReadMsg = () => {
 
 2. 阅读消息后，消息接收方发送群消息已读回执。
 
-```JavaScript
+```javascript
 sendReadMsg = () => {
   let option = {
     type: "read", // 消息是否已读。
@@ -179,7 +179,7 @@ sendReadMsg = () => {
    - `onReadMessage`：消息发送方在线时监听该回调。
    - `onStatisticMessage`：消息发送方离线时监听该回调。
 
-   ```JavaScript
+   ```javascript
    // 在线时可以在 onReadMessage 里监听。
    conn.addEventHandler("customEvent", {
      onReadMessage: (message) => {
@@ -203,7 +203,7 @@ sendReadMsg = () => {
 
 4. 消息发送方收到群消息已读回执后，可以获取已阅读该消息的用户的详细信息：
 
-   ```JavaScript
+   ```javascript
    conn
      .getGroupMsgReadUser({
        msgId: "messageId", // 消息 ID。

@@ -34,7 +34,7 @@ SDK 支持你通过调用 API 在项目中实现如下功能：
 
 无论是按需翻译还是自动翻译，都需先调用 `fetchSupportLanguages` 获取支持的翻译语言。获取支持的翻译语言的示例代码如下：
 
-```Java
+```java
 //获取支持的翻译语言。
 EMClient.getInstance().chatManager().fetchSupportLanguages(new EMValueCallBack<List<EMLanguage>>{});
 ```
@@ -43,7 +43,7 @@ EMClient.getInstance().chatManager().fetchSupportLanguages(new EMValueCallBack<L
 
 接收方调用 `translateMessage` 对收到的文本消息进行翻译。翻译调用过程如下：
 
-```Java
+```java
 List<String> languageList = new ArrayList<>();
 languageList.add("en");
 ...
@@ -55,7 +55,7 @@ EMClient.getInstance().chatManager().translateMessage(
 
 翻译成功之后，译文信息会保存到消息中。调用 `getTranslations` 获取译文内容。示例代码如下：
 
-```Java
+```java
 EMTextMessageBody body = (EMTextMessageBody)message.getBody();
 List<EMTranslationInfo> infoList = body.getTranslations();
 ```
@@ -64,7 +64,7 @@ List<EMTranslationInfo> infoList = body.getTranslations();
 
 创建消息时，发送方设置 `MessageBody` 中的 `setTargetLanguages` 字段为译文语言，设置过程如下：
 
-```Java
+```java
 ...
 EMTextMessageBody body = new EMTextMessageBody("文本内容");
 body.setTargetLanguages(languageList);
@@ -75,7 +75,7 @@ body.setTargetLanguages(languageList);
 
 接收方收到消息后，调用 `getTranslations` 获取消息的译文列表，示例代码如下：
 
-```Java
+```java
 EMTextMessageBody body = (EMTextMessageBody)message.getBody();
 List<EMTranslationInfo> infoList = body.getTranslations();
 ```

@@ -44,7 +44,7 @@
 
 示例代码如下：
 
-```Java
+```java
 // 创建一条文本消息，`content` 为消息文字内容，`chatThreadId` 为子区 ID。
 EMMessage message = EMMessage.createTxtSendMessage(content, chatThreadId); 
 // 设置消息类型，子区消息需要将 `ChatType` 设置为 `GroupChat`。
@@ -77,7 +77,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 示例代码如下：
 
-```Java
+```java
 EMMessageListener msgListener = new EMMessageListener() {
    // 收到消息，遍历消息队列，解析和显示。
    @Override
@@ -104,7 +104,7 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 
 示例代码如下：
 
-```Java
+```java
 EMMessageListener msgListener = new EMMessageListener() {
    // 收到撤回消息回调，遍历消息队列，解析和显示。
    @Override
@@ -129,7 +129,7 @@ EMMessageListener msgListener = new EMMessageListener() {
 
 调用 `asyncFetchHistoryMessage` 从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
 
-```Java
+```java
 String chatThreadId = "{your chatThreadId}";
 EMConversation.EMConversationType type = EMConversation.EMConversationType.GroupChat;
 int pageSize = 10;
@@ -155,7 +155,7 @@ EMClient.getInstance().chatManager().asyncFetchHistoryMessage(chatThreadId, type
 
 调用 `EMChatManager#getAllConversations` 方法只能获取单聊或群聊会话。你可以调用以下方法从本地获取单个子区的消息：
 
-```Java
+```java
 // 需要指定会话类型为 `EMConversationType.GroupChat` 且 `isChatThread` 设置为 `true`
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(chatThreadId, EMConversationType.GroupChat, createIfNotExists, isChatThread);
 // 获取此会话的所有内存中的消息

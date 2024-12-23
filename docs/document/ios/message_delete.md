@@ -31,7 +31,7 @@
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
 :::
 
-```Swift
+```swift
  EMClient.shared().chatManager?.deleteAllMessagesAndConversations(true, completion: { aError in
     if let aError = aError {
         print("deleteAllMessagesAndConversations failed")
@@ -54,7 +54,7 @@
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 按时间删除消息
 [self.conversation removeMessagesFromServerWithTimeStamp:message.timestamp completion:^(EMError * _Nullable aError) {
 
@@ -70,7 +70,7 @@
 
 你可以删除本地指定会话的所有消息，示例代码如下：
 
-```Swift
+```swift
 if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("conversationId") {
     var err: EMError? = nil
     conversation.deleteAllMessages(&err)
@@ -86,7 +86,7 @@ if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("
 
 你可以删除本地指定会话在一段时间内的本地消息，示例代码如下：
 
-```Swift
+```swift
 if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("conversationId") {
     conversation.removeMessagesStart(startTime, to: endTime)
 }
@@ -96,7 +96,7 @@ if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("
 
 你可以删除本地单个会话的指定消息，示例代码如下：
 
-```Swift
+```swift
 if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("conversationId") {
       var err: EMError? = nil
      conversation.deleteMessage(withId: "messageId", error:&err)

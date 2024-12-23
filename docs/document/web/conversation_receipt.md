@@ -33,7 +33,7 @@
 
 若会话中存在多条未读消息，建议发送会话已读回执，因为若发送消息已读回执，则需要调用多次。
 
-```JavaScript
+```javascript
 let option = {
   chatType: "singleChat", // 会话类型，设置为单聊。
   type: "channel", // 消息类型。channel 表示会话已读回执。
@@ -51,7 +51,7 @@ conn.send(msg);
 对于群组聊天，会话已读回执只用于清空服务端的群组会话的未读数，消息发送方不会通过 `onChannelMessage` 回调接收会话已读回执。
 :::
 
-```JavaScript
+```javascript
 conn.addEventHandler("customEvent", {
   onChannelMessage: (message) => {},
 });
@@ -63,7 +63,7 @@ conn.addEventHandler("customEvent", {
 
 - 对于群聊会话，你可以调用以下接口发送已读回执，清空指定群组会话的未读数。与单聊会话不同，对于群聊会话，调用以下接口只会清空服务端的群组会话的未读数，不会触发 `onChannelMessage` 回调。
 
-```JavaScript
+```javascript
 let option = {
   chatType: "groupChat", // 会话类型，设置为群聊。
   type: "channel", // 消息类型。channel 表示会话已读回执。

@@ -79,7 +79,7 @@
 
 你可以调用 `setSilentModeForAll` 设置 app 级别的推送通知，并通过指定 `ChatSilentModeParam` 字段设置推送通知方式和免打扰模式，如下代码示例所示：
 
-```TypeScript
+```typescript
 // convId：会话 ID。
 // convType：会话类型。
 // 将推送通知方式设置为 `MENTION_ONLY`。
@@ -108,7 +108,7 @@ ChatClient.getInstance()
 
 你可以调用 `fetchSilentModeForAll` 获取 app 级别的推送通知设置，如以下代码示例所示：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .pushManager.fetchSilentModeForAll()
   .then((result) => {
@@ -123,7 +123,7 @@ ChatClient.getInstance()
 
 你可以调用 `setSilentModeForConversation` 方法设置指定会话的推送通知，并通过指定 `ChatSilentModeParam` 字段设置推送通知方式和免打扰模式，如以下代码示例所示：
 
-```TypeScript
+```typescript
 // convId：会话 ID。
 // convType：会话类型。
 // 将推送通知方式设置为 `MENTION_ONLY`。
@@ -156,7 +156,7 @@ ChatClient.getInstance()
 
 你可以调用 `fetchSilentModeForConversation` 方法获取指定会话的推送通知设置，如以下代码示例所示：
 
-```TypeScript
+```typescript
 // convId：会话 ID。
 // convType：会话类型。
 ChatClient.getInstance()
@@ -180,7 +180,7 @@ ChatClient.getInstance()
 
 你可以调用 `fetchSilentModeForConversations` 方法获取多个会话的推送通知设置，如以下示例代码所示：
 
-```TypeScript
+```typescript
 // conversations：会话列表。
 ChatClient.getInstance()
   .pushManager.fetchSilentModeForConversations(conversations)
@@ -198,7 +198,7 @@ ChatClient.getInstance()
 
 以下代码示例显示了如何清除会话的推送通知方式：
 
-```TypeScript
+```typescript
 // convId：会话 ID。
 // convType：会话类型。
 ChatClient.getInstance()

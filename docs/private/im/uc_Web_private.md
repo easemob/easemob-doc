@@ -8,7 +8,7 @@
 
 在 `src/utils/WebIMConfig.js` 文件中，进行如下修改：
 
-```JavaScript
+```javascript
 appkey: 'easemob#easeim',	// 私有化的 App Key
 isHttpDNS: false,	// 是否允许通过 DNS 获取。由于私有云需自己配置，这里必须为 `false`。
 socketServer: 'https://xxx.xxxxx.com',  // 私有化的 WebSocket 地址
@@ -19,7 +19,7 @@ restServer: 'https://xxx.xxxxx.com',	// 私有化的 RESTful 服务器地址。�
 
 在 `src/utils/WebIM.js` 文件中，进行如下修改：
 
-```JavaScript
+```javascript
  appKey: WebIM.config.appkey,
  url: WebIM.config.socketServer,
  apiUrl: WebIM.config.restServer,
@@ -35,7 +35,7 @@ restServer: 'https://xxx.xxxxx.com',	// 私有化的 RESTful 服务器地址。�
 
 在 `src/IM/initwebsdk.js` 文件中，进行如下修改：
 
-```JavaScript
+```javascript
 const DEFAULT_APPKEY = "easemob#easeim"; // 私有化的 App Key
 const DEFAULT_URL = "https://xxx.xxxxx.com"; // 私有化的 WebSocket 地址
 const DEFAULT_APIURL = "https://xxx.xxxxx.com"; // 私有化的 RESTful 服务器地址
@@ -49,7 +49,7 @@ const DEFAULT_APIURL = "https://xxx.xxxxx.com"; // 私有化的 RESTful 服务�
 
 1. 在 `/demo/src/config/WebIMConfig.js` 中修改配置信息，如下所示：
 
-```JavaScript
+```javascript
 	appkey: appkey || 'easemob-demo#zim',
 	isHttpDNS: false,
 	restServer: rest.restServer || (window.location.protocol === 'https:' ? 'https:' : 'http:') + '//xxx.xxxxx.com',
@@ -58,7 +58,7 @@ const DEFAULT_APIURL = "https://xxx.xxxxx.com"; // 私有化的 RESTful 服务�
 
 2. 在 `/demo/src/config/WebIM.js` 中修改初始化配置，如下所示：
 
-```JavaScript
+```javascript
     appKey: WebIM.config.appkey,
     url: WebIM.config.socketServer,
     apiUrl: WebIM.config.restServer,

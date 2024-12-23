@@ -17,7 +17,7 @@
 | `sortPolicy` | 否 | 设置会话列表项的排序规则。  |
 | `RenderItem`  | 否 | 自定义会话列表项的样式。  |
 
-```TypeScript
+```typescript
 import * as React from "react";
 import {
   ConversationListFragment,
@@ -47,7 +47,7 @@ export default function ChatScreen(): JSX.Element {
 如果开启侧滑功能，则需要设置侧滑组件的宽度。
 :::
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;
@@ -73,7 +73,7 @@ export default function ChatScreen(): JSX.Element {
 
 会话默认按会话 ID `convId` 排序。你可以设置 `ConversationListFragment` 中的 `sortPolicy` 自定义会话排序，如置顶会话或按会话中的最新一条消息的时间戳排序。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;
@@ -105,7 +105,7 @@ export default function ChatScreen(): JSX.Element {
 
 你可以设置 `ConversationListFragment` 中的 `onUpdateReadCount` 自定义会话的未读消息数。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;
@@ -129,7 +129,7 @@ export default function ChatScreen(): JSX.Element {
 
 你可以设置 `ConversationListFragment` 中的 `onPress` 自定义会话点击事件。例如，你可以点击会话列表项，进入聊天页面。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;
@@ -149,7 +149,7 @@ export default function ChatScreen(): JSX.Element {
 
 你可以设置 `ConversationListFragment` 中的 `onLongPress` 自定义会话列表项，例如长按后显示该项目的右键菜单。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;

@@ -73,7 +73,7 @@
 
 @tab Java
 
-```Java
+```java
 
 EMMessage msg = EMMessage.createTextSendMessage("hi", conversationId);
  JSONObject jsonObject = new JSONObject();
@@ -93,7 +93,7 @@ EMMessage msg = EMMessage.createTextSendMessage("hi", conversationId);
 
 @tab Kotlin
 
-```Kotlin
+```kotlin
 
  val msg = EMMessage.createTextSendMessage("hi", conversationId)
  val jsonObject = JSONObject()
@@ -118,7 +118,7 @@ EMMessage msg = EMMessage.createTextSendMessage("hi", conversationId);
 
 @tab iOS
 
-```Swift
+```swift
 let textBody = EMTextMessageBody(text: "hi")
         let ext = ["msgQuote": [
             "msgID": <#quoted messageId#>
@@ -135,7 +135,7 @@ let textBody = EMTextMessageBody(text: "hi")
 
 @tab Web
 
-```JavaScript
+```javascript
 sendMessage(message){
    // 若引用消息存在，则将该消息到要发送的消息扩展中。
     if (
@@ -194,7 +194,7 @@ sendMessage(message){
 
 @tab Java
 
-```Java
+```java
 private void handleQuotedMessage(EMMessage message) {
   if(message.ext() != null && message.ext().containsKey("msgQuote")) {
       String msgQuote = message.getStringAttribute("msgQuote","");
@@ -238,7 +238,7 @@ private void handleQuotedMessage(EMMessage message) {
 
 @tab Kotlin
 
-```Kotlin
+```kotlin
     private fun handleMentionedMessage(message: EMMessage) {
         message.ext()?.let {
             if (it.containsKey("msgQuote")){
@@ -290,7 +290,7 @@ private void handleQuotedMessage(EMMessage message) {
 
 @tab iOS
 
-```Swift
+```swift
     func handleQuotedMessage(_ message: EMChatMessage) {
         if let ext = message.ext {
             if let quotedInfo = ext["msgQuote"] as? [String: AnyObject] {
@@ -313,7 +313,7 @@ func messagesDidReceive(_ aMessages: [EMChatMessage]) {
 
 @tab Web
 
-```JavaScript
+```javascript
 
 receiveMessage(message){
    let msgQuote = message.ext.msgQuote;

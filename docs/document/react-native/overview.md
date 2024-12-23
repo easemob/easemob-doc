@@ -34,7 +34,7 @@
 
 初始化示例代码：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .init(
     new ChatOptions({
@@ -85,7 +85,7 @@ ChatClient.getInstance()
 
 若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .createAccount(username, password)
   .then((value: any) => {
@@ -117,7 +117,7 @@ ChatClient.getInstance()
 
 **用户 ID +密码** 登录是传统的登录方式。用户名和密码都是你的终端用户自行决定，密码需要符合密码规则要求。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .login(username, password, true)
   .then((value: any) => {
@@ -134,7 +134,7 @@ ChatClient.getInstance()
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .login(username, token, false)
   .then((value: any) => {
@@ -160,7 +160,7 @@ ChatClient.getInstance()
 
 登出也是异步返回。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .logout()
   .then(() => {
@@ -175,7 +175,7 @@ ChatClient.getInstance()
 
 你需添加 `ChatConnectEventListener#onConnected` 回调。
 
-```TypeScript
+```typescript
 // 监听器建议在初始化完成之后，登录之前设置，这样可以恰当地收到登录通知。
 let listener = new (class s implements ChatConnectEventListener {
   onTokenWillExpire(): void {
@@ -251,6 +251,6 @@ ChatClient.getInstance().addConnectionListener(listener);
 
 如果开启日志调试模式，会通过控制台输出日志。`debugModel` 设置为 `true`。
 
-```TypeScript
+```typescript
 chatlog.log(`${ChatClient.TAG}: login: `, userName, "******", isPassword);
 ```

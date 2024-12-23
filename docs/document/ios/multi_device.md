@@ -61,7 +61,7 @@ iOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送�
 
 你可以调用 `getSelfIdsOnOtherPlatformWithCompletion:` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
-```Objective-C
+```objective-c
 [EMClient.sharedClient.contactManager getSelfIdsOnOtherPlatformWithCompletion:^(NSArray<NSString *> * _Nullable aList, EMError * _Nullable aError) {
     // 选择一个登录 ID 作为消息接收方。
     NSString *to = aList.firstObject;
@@ -80,7 +80,7 @@ iOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送�
 
 你可以调用 `getLoggedInDevicesFromServerWithUsername` 或 `getLoggedInDevicesFromServerWithUserId` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`EMDeviceConfig` 中的 `deviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
 
-```Objective-C
+```objective-c
 // 用户 ID + 密码
 [EMClient.sharedClient getLoggedInDevicesFromServerWithUsername:<#userId#>  password:<#password#>  completion:^(NSArray<EMDeviceConfig *> * _Nullable aList, EMError * _Nullable aError) {
             
@@ -101,7 +101,7 @@ iOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送�
 登录成功后才会将该设置发送到服务器。
 :::
 
-```Objective-C
+```objective-c
 EMOptions* option = [EMOptions optionsWithAppkey:Appkey];
 option.customDeviceName = @"XXX的iPad";
 [EMClient.sharedClient initializeSDKWithOptions:option]; 
@@ -126,7 +126,7 @@ option.customDeviceName = @"XXX的iPad";
 登录成功后才会将该设置发送到服务器。
 :::
 
-```Objective-C
+```objective-c
 EMOptions* option = [EMOptions optionsWithAppkey:Appkey];
 option.customOSType = 60;
 [EMClient.sharedClient initializeSDKWithOptions:option];
@@ -142,7 +142,7 @@ option.customOSType = 60;
 登录成功后才会将该设置发送到服务器。
 :::
 
-```Objective-C
+```objective-c
 EMClient.sharedClient.option.loginExtensionInfo = @"you was kicked out by other device";
 
 - (void)userAccountDidLoginFromOtherDeviceWithInfo:(EMLoginExtensionInfo* _Nullable)info {
@@ -159,7 +159,7 @@ EMClient.sharedClient.option.loginExtensionInfo = @"you was kicked out by other 
 不登录也可以使用该接口。
 :::
 
-```Objective-C
+```objective-c
 // username：账户名称，password：账户密码。
 NSString *username = @"";
 NSString *password = @"";
@@ -181,7 +181,7 @@ NSString *password = @"";
 不登录也可以使用该接口。
 :::
 
-```Objective-C
+```objective-c
 // 用户 ID + 密码
 [EMClient.sharedClient kickAllDevicesWithUsername:username password:password completion:^(EMError * _Nullable aError) {
 }];
@@ -202,7 +202,7 @@ NSString *password = @"";
 多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
 :::
 
-```Objective-C
+```objective-c
  //实现 `EMMultiDevicesDelegate` 监听其他设备上的操作。
 @interface ViewController () <EMMultiDevicesDelegate>
 
@@ -353,7 +353,7 @@ NSString *password = @"";
 
 当 PC 端和移动端登录同一个账号时，在移动端可以通过调用方法获取到 PC 端的登录 ID。该登录 ID 相当于特殊的好友用户 ID，可以直接使用于聊天，使用方法与好友的用户 ID 类似。
 
-```Objective-C
+```objective-c
  NSArray *otherPlatformIds = [[EMClient sharedClient].contactManager getSelfIdsOnOtherPlatformWithError:nil];
 if ([otherPlatformIds count] > 0) {
     NSString *chatter = otherPlatformIds[0];

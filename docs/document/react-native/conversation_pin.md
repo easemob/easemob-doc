@@ -31,7 +31,7 @@
 
 示例代码如下： 
 
-```TypeScript
+```typescript
 // isPinned: 设置是否置顶会话。
 ChatClient.getInstance()
   .chatManager.pinConversation(convId, isPinned)
@@ -53,7 +53,7 @@ ChatClient.getInstance()
 
 示例代码如下： 
 
-```TypeScript
+```typescript
 // pageSize: 每页返回的会话数。取值范围为 [1,50]。
 // cursor: 开始获取数据的游标位置。若获取数据时传 `undefined` 或者空字符串（""），SDK 从最新置顶的会话开始查询。
 ChatClient.getInstance()

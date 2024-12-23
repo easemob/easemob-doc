@@ -41,7 +41,7 @@
 
 参考如下示例代码，设置所有用户属性：
 
-```JavaScript
+```javascript
 let option = {
   nickname: "The nickname",
   avatarurl: "https://avatarurl",
@@ -62,7 +62,7 @@ conn.updateUserInfo(option).then((res) => {
 
 参考如下示例代码，设置指定用户属性，例如昵称：
 
-```JavaScript
+```javascript
 conn.updateUserInfo("nickname", "Your nickname").then((res) => {
   console.log(res);
 });
@@ -87,7 +87,7 @@ conn.updateUserInfo("nickname", "Your nickname").then((res) => {
 
 参考以下示例代码获取指定用户的所有属性：
 
-```JavaScript
+```javascript
 /**
  * @param {String|Array} users 用户 ID。可设置一个用户 ID，也可通过数组形式设置多个。
  */
@@ -99,7 +99,7 @@ conn.fetchUserInfoById(users).then((res) => {
 
 参考以下示例代码获取用户的指定属性。
 
-```JavaScript
+```javascript
 /**
  * @param {String|Array} users 用户 ID。可设置一个用户 ID，也可通过数组形式设置多个。
  * @param {String|Array} properties 查询的用户属性。
@@ -139,7 +139,7 @@ conn
 
 参考以下示例代码创建和发送名片消息：
 
-```JavaScript
+```javascript
 // 将自定义事件类型设置为 `userCard`。
 let customEvent = "userCard";
 // 通过 `customExts` 将这些属性设置为自定义消息的扩展信息。

@@ -26,7 +26,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // convId: 会话 ID。
 // convType：会话类型。
 // isDeleteMessage：删除会话时是否同时删除服务端和本地的该会话中的消息。
@@ -44,7 +44,7 @@ ChatClient.getInstance()
 
 你可以调用 `deleteConversation` 方法删除本地保存的指定会话，示例代码如下：
 
-```TypeScript
+```typescript
 // convId: 会话 ID。
 // withMessage：删除会话时是否同时删除该会话中的消息。
 ChatClient.getInstance()

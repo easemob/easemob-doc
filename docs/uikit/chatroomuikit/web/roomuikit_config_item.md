@@ -28,7 +28,7 @@ ChatroomUIKit 提供 `Chatroom` 和 `ChatroomMember` 组件，组件中包含各
 
 例如，可以通过组件的属性传递 `className`、`style` 和 `prefix` 修改样式：
 
-```JavaScript
+```javascript
 import { Chatroom, Button } from "easemob-chat-uikit";
 
 const ChatApp = () => {
@@ -58,7 +58,7 @@ const ChatApp = () => {
 | memberListProps | 否       | { search?: boolean; placeholder?: string; renderEmpty?: () => ReactNode; renderItem?: (item: AppUserInfo) => ReactNode; UserItemProps?: UserItemProps; } | 成员列表组件的属性。 |
 | muteListProps   | 否       | { search?: boolean; placeholder?: string; renderEmpty?: () => ReactNode; renderItem?: (item: AppUserInfo) => ReactNode; UserItemProps?: UserItemProps; } | 禁言列表组件的属性。 |
 
-```JavaScript
+```javascript
 import { ChatroomMember } from "easemob-chat-uikit";
 
 const ChatApp = () => {

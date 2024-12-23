@@ -46,7 +46,7 @@
 
 1. 开启消息送达功能，即 SDK 初始化时将 `EMOptions#setRequireDeliveryAck` 设置为 `true`。
 
-```Java
+```java
 // 设置是否需要接收方送达确认，默认 `false` 即不需要。
 options.setRequireDeliveryAck(true);
 ```
@@ -55,7 +55,7 @@ options.setRequireDeliveryAck(true);
 
 3. 发送方监听 `EMMessageListener#onMessageDelivered` 事件，收到接收方的送达回执。你可以在收到该通知时，显示消息的送达状态。
 
-```Java
+```java
 EMMessageListener msgListener = new EMMessageListener() {
     // 收到消息。
     @Override
@@ -82,7 +82,7 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 
 1. App 开启已读回执功能，即 SDK 初始化时将 `EMOptions#setRequireAck` 设置为 `true`。
    
-```Java
+```java
 // 设置是否需要接收方已读确认,默认为 true
 options.setRequireAck(true);
 ```
@@ -93,7 +93,7 @@ options.setRequireAck(true);
   
   聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
 
-```Java
+```java
 try {
     EMClient.getInstance().chatManager().ackConversationRead(conversationId);
 } catch (HyphenateException e) {
@@ -103,7 +103,7 @@ try {
 
 - 接收方在聊天页面打开时，接收到消息时，再根据消息类型发送单个消息已读回执。  
 
-```Java
+```java
 EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
     ......
 
@@ -146,7 +146,7 @@ public void sendReadAck(EMMessage message) {
 
 消息发送方可以通过 `EMMessageListener#onMessageRead` 事件监听指定消息是否已读，示例代码如下：
 
-```Java
+```java
 EMMessageListener msgListener = new EMMessageListener() {
     ......
      @Override
@@ -181,7 +181,7 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 1. 开启已读回执功能，即 SDK 初始化时将 `EMOptions#setRequireAck` 设置为 `true`。
 
 该功能开启后，接收方阅读消息后，SDK 底层会自动进行消息已读回执。
-```Java
+```java
 // 设置是否需要接受方已读确认,默认为 `true`。
 options.setRequireAck(true);
 ```
@@ -190,14 +190,14 @@ options.setRequireAck(true);
 
 与单聊消息的 app 层级设置已读回执功能不同，群聊消息是在发送消息时设置指定消息是否需要已读回执。
 
-```Java
+```java
 EMMessage message = EMMessage.createTxtSendMessage(content, to);
 message.setIsNeedGroupAck(true);
 ```
 
 3. 消息接收方发送群组消息的已读回执。
 
-```Java
+```java
 public void sendAckMessage(EMMessage message) {
     if (!validateMessage(message)) {
         return;
@@ -232,7 +232,7 @@ public void sendAckMessage(EMMessage message) {
 
 发送方接收到群组消息已读回执后，其发出消息的属性 `EMMessage#groupAckCount` 会有相应变化。
 
-```Java
+```java
 EMMessageListener msgListener = new EMMessageListener() {
     ......
     // 接收到群组消息体的已读回执, 表明消息的接收方已经阅读此消息。
@@ -252,7 +252,7 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 
 你可以调用 `EMChatManager#asyncFetchGroupReadAcks` 方法从服务器获取单条消息的已读回执的详情。
 
-```Java
+```java
 // 异步方法。
 // msgId         消息 ID。
 // pageSize      每次获取群消息已读回执的条数。

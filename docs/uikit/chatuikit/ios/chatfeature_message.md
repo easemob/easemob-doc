@@ -17,7 +17,7 @@
 
 若不显示某个模块，可将其隐藏，示例代码如下：
 
-```Swift
+```swift
 // 消息 cell 包含的显示模块
    @objc public enum MessageContentDisplayStyle: UInt {
     case withReply = 1  
@@ -70,7 +70,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 消息引用特性默认开启，若不需要可将其隐藏，示例代码如下：
 
-```Swift
+```swift
 Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAvatar,.withNickName,.withDateAndTime,.withMessageThread,.withMessageReaction]
 
         if hiddenTopic {
@@ -104,7 +104,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 示例代码如下：
 
-```Swift
+```swift
 Appearance.chat.enableTranslation = true
 Appearance.chat.targetLanguage = .English
 ```
@@ -127,7 +127,7 @@ Appearance.chat.targetLanguage = .English
 
 示例代码如下：
 
-```Swift
+```swift
 Appearance.chat.contentStyle.append(.withMessageReaction)
 
 ```
@@ -148,7 +148,7 @@ Thread 特性在 `Appearance.swift` 中默认关闭，即` Appearance.chat.conte
 
 要开启该特性，需在该数组中添加 `.withMessageThread`。**注意不要重复添加**。
 
-```Swift
+```swift
 Appearance.chat.contentStyle.append(.withMessageThread)
 
 ```
@@ -182,7 +182,7 @@ Appearance.chat.contentStyle.append(.withMessageThread)
 
 示例代码如下：
 
-```Swift
+```swift
 Appearance.chat.enablePinMessage = false
 Appearance.chat.messageLongPressedActions.removeAll { $0.tag == "Pin" }
 ```
@@ -207,7 +207,7 @@ Appearance.chat.messageLongPressedActions.removeAll { $0.tag == "Pin" }
 
 示例代码如下：
 
-```Swift
+```swift
     Appearance.chat.enableTyping = false 
 
 ```

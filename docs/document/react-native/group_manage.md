@@ -69,7 +69,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 群组选项。核心选项为 `style`，用于设置群组类型。详见 `ChatGroupStyle`。
 option.style = PrivateOnlyOwnerInvite;
 // 群组的名称，不能超过 128 个字符
@@ -99,7 +99,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 将要解散的群组 ID
 const groupId = "100";
 ChatClient.getInstance()
@@ -119,7 +119,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.leaveGroup(groupId)
   .then(() => {
@@ -141,7 +141,7 @@ ChatClient.getInstance()
 对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
 :::
 
-```TypeScript
+```typescript
 // 从本地获取群组详情。
 ChatClient.getInstance()
   .groupManager.getGroupWithId(groupId)
@@ -153,7 +153,7 @@ ChatClient.getInstance()
   });
 ```
 
-```TypeScript
+```typescript
 // 从服务器获取群组详情。
 ChatClient.getInstance()
   .groupManager.fetchGroupInfoFromServer(groupId)
@@ -169,7 +169,7 @@ ChatClient.getInstance()
 
 用户可以调用 `fetchJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：
 
-```TypeScript
+```typescript
 // pageNum：当前页码，从 0 开始。
 // pageSize：每页期望返回的群组数量，取值范围为[1,20]。
 const pageSize = 10;
@@ -187,7 +187,7 @@ ChatClient.getInstance()
 
 - 用户可以调用 `getJoinedGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.getJoinedGroups()
   .then((groups) => {
@@ -200,7 +200,7 @@ ChatClient.getInstance()
 
 - 用户还可以分页获取公开群列表：
 
-```TypeScript
+```typescript
 // 获取的群组列表来自服务器，但是不包括成员列表
 ChatClient.getInstance()
   .groupManager.fetchPublicGroupsFromServer(pageSize, cursor)
@@ -216,7 +216,7 @@ ChatClient.getInstance()
 
 自 1.3.0 版本开始，你可以调用 `fetchJoinedGroupCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.fetchJoinedGroupCount()
   .then((count: number) => {
@@ -233,7 +233,7 @@ ChatClient.getInstance()
 
 群成员可以调用 `blockGroup` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收消息，群主和群管理员不能进行此操作。示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.blockGroup(groupId)
   .then(() => {
@@ -248,7 +248,7 @@ ChatClient.getInstance()
 
 群成员可以调用 `unblockGroup` 方法解除屏蔽群消息。示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .groupManager.unblockGroup(groupId)
   .then(() => {
@@ -269,7 +269,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 创建一个群组事件监听
 const groupListener: ChatGroupEventListener = new (class
   implements ChatGroupEventListener

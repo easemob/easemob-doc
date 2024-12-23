@@ -33,7 +33,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 1. 调用 `conn.addEventHandler()` 注册监听好友状态，示例代码如下：
 
-```JavaScript
+```javascript
 /**
  * `msg` 为触发回调后的结果。
  * `contactEvent` 可自定义。
@@ -55,7 +55,7 @@ conn.addEventHandler("contactEvent", {
 
 2. 调用 `addContact` 请求添加好友，示例代码如下：
 
-```JavaScript
+```javascript
 conn.addContact("userId", "加个好友呗!");
 ```
 
@@ -64,7 +64,7 @@ conn.addContact("userId", "加个好友呗!");
 
     示例代码如下：
     
-    ```JavaScript
+    ```javascript
     conn.acceptContactInvite("userId");
     ```
     
@@ -72,7 +72,7 @@ conn.addContact("userId", "加个好友呗!");
     
     示例代码如下：
     
-    ```JavaScript
+    ```javascript
     conn.declineContactInvite("userId");
     ```
 
@@ -82,7 +82,7 @@ conn.addContact("userId", "加个好友呗!");
 
 你可以调用 `deleteContact` 方法删除好友，示例代码如下：
 
-```JavaScript
+```javascript
 conn.deleteContact("userId");
 ```
 
@@ -94,7 +94,7 @@ conn.deleteContact("userId");
 
 好友备注的长度不能超过 100 个字符。
 
-```JavaScript
+```javascript
 conn
   .setContactRemark({
     userId: "userId", // 添加备注的目标好友的用户 ID
@@ -114,7 +114,7 @@ conn
 
 - 一次性获取好友列表：
 
-```JavaScript
+```javascript
 conn
   .getAllContacts()
   .then((res) => {
@@ -127,7 +127,7 @@ conn
 
 - 分页获取好友列表：
 
-```JavaScript
+```javascript
 conn
   .getContactsWithCursor({
     pageSize: 20, // 每页期望获取的联系人数量。取值范围为 [1,50]，默认为 `20`。
@@ -143,7 +143,7 @@ conn
 
 此外，你可以调用 `getContacts` 方法从服务端一次性获取好友列表，该列表只包含好友的用户 ID。
 
-```JavaScript
+```javascript
 conn.getContacts().then((res) => {
     console.log(res) // res.data > ['user1', 'user2']
 })
@@ -155,7 +155,7 @@ conn.getContacts().then((res) => {
 
 用户可以将任何其他用户添加到黑名单列表，无论该用户是否是好友。好友被加入黑名单后仍在好友列表上显示。
 
-```JavaScript
+```javascript
 conn.addUsersToBlocklist({
     //可以添加单个用户 ID 或批量添加多个用户 ID 组成的数组。
     name: ["user1", "user2"],
@@ -166,7 +166,7 @@ conn.addUsersToBlocklist({
 
 你可以调用 `removeUserFromBlocklist` 方法将用户移出黑名单，示例代码如下：
 
-```JavaScript
+```javascript
 conn.removeUserFromBlocklist({
     //可以添加单个用户 ID 或批量添加多个用户 ID 组成的数组。
     name: ["user1", "user2"],
@@ -177,7 +177,7 @@ conn.removeUserFromBlocklist({
 
 你可以调用 `getBlocklist` 方法获取用户黑名单列表，示例代码如下：
 
-```JavaScript
+```javascript
 conn.getBlocklist().then((res) => {
     console.log(res);
 });

@@ -32,7 +32,7 @@ ohos.permission.GET_NETWORK_INFO
 
 初始化示例代码：
 
-```TypeScript
+```typescript
 let options = new ChatOptions("Your appkey");
 ......// 其他 ChatOptions 配置。
 // 初始化时传入上下文以及 options
@@ -58,7 +58,7 @@ ChatClient.getInstance().init(context, options);
 
 若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
     // success logic
 });
@@ -85,7 +85,7 @@ ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
 
 **用户 ID + 密码** 登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().login(userId, pwd).then(() => {
     // 登录成功回调
 }).catch((e: ChatError) => {
@@ -99,7 +99,7 @@ ChatClient.getInstance().login(userId, pwd).then(() => {
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance().loginWithToken(userId, token).then(() => {
     // 登录成功回调
 }).catch((e: ChatError) => {
@@ -120,7 +120,7 @@ ChatClient.getInstance().loginWithToken(userId, token).then(() => {
 
 ## 退出登录
 
-```TypeScript
+```typescript
 ChatClient.getInstance().logout().then(()=> {
     // success logic       
 })
@@ -129,7 +129,7 @@ ChatClient.getInstance().logout().then(()=> {
 
 你可以通过注册连接监听确认连接状态。
 
-```TypeScript
+```typescript
 let connectionListener: ConnectionListener = {
   onConnected: (): void => {
     // 长连接建立
@@ -193,7 +193,7 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 
 SDK 默认输出调试信息（所有日志，包括调试信息、警告和错误），如果只需输出错误日志，需要关闭调试模式。
 
-```TypeScript
+```typescript
 ChatLog.setLogLevel(ChatLogLevel.ERROR_LEVEL);
 ```
 

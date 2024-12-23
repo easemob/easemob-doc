@@ -30,7 +30,7 @@ SDK 支持你通过调用 API 在项目中实现如下功能：
 
 无论是按需翻译还是自动翻译，都需先调用 `FetchSupportLanguages` 获取支持的翻译语言。示例代码如下：
 
-```C#
+```csharp
 // 获取翻译服务支持的语言。
 SDKClient.Instance.ChatManager.FetchSupportLanguages(new ValueCallBack<List<SupportLanguage>>(
      onSuccess: (list) =>
@@ -52,7 +52,7 @@ SDKClient.Instance.ChatManager.FetchSupportLanguages(new ValueCallBack<List<Supp
 
 接收方调用 `TranslateMessage` 对收到的文本消息进行翻译。翻译调用过程如下：
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.TranslateMessage(msg, targetLanguages, new ValueCallBack<Message>(
  onSuccess: (dmsg) =>
  {
@@ -75,7 +75,7 @@ SDKClient.Instance.ChatManager.TranslateMessage(msg, targetLanguages, new ValueC
 
 创建消息时，发送方设置 `TextBody` 中的 `TargetLanguages` 字段为译文语言，设置过程如下：
 
-```C#
+```csharp
 Message msg = Message.CreateTextSendMessage(to, text);
 TextBody tb = (TextBody)msg.Body;
 tb.TargetLanguages = languageList;
@@ -85,7 +85,7 @@ tb.TargetLanguages = languageList;
 
 接收方收到消息后，接收方从 `TextBody` 中获取消息的译文列表，示例代码如下：
 
-```C#
+```csharp
 TextBody tb = (TextBody)msg.Body;
 foreach(var it in tb.Translations)
 {

@@ -46,7 +46,7 @@
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 创建一条文本消息，`content` 为消息文字内容，`chatThreadId` 为子区 ID。
 NSString *from = [[EMClient sharedClient] currentUsername];
 NSString *chatThreadId = self.currentConversation.conversationId;
@@ -71,7 +71,7 @@ message.isChatThread = self.isChatThread;
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 - (void)messagesDidReceive:(NSArray *)aMessages
 {
     // 做相关处理。
@@ -90,7 +90,7 @@ message.isChatThread = self.isChatThread;
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 - (void)messagesInfoDidRecall:(NSArray<EMRecallMessageInfo *> *)aRecallMessagesInfo
 {}
 ```
@@ -105,7 +105,7 @@ message.isChatThread = self.isChatThread;
 
 调用 `asyncFetchHistoryMessagesFromServer` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
 
-```Objective-C
+```objective-c
 [EMClient.sharedClient.chatManager asyncFetchHistoryMessagesFromServer:@"threadId" conversationType:EMConversationTypeGroupChat startMessageId:@"" fetchDirection:EMMessageFetchHistoryDirectionUp pageSize:20 completion:^(EMCursorResult<EMChatMessage *> * _Nullable aResult, EMError * _Nullable aError) {
             
     }];
@@ -115,7 +115,7 @@ message.isChatThread = self.isChatThread;
 
 调用 `EMChatManager#getAllConversations` 方法只能获取单聊或群聊会话。要获取本地单个子区会话中的消息，参考以下示例代码：
 
-```Objective-C
+```objective-c
 // 需设置会话类型为 `EMConversationTypeGroupChat` 和 `isThread` 为 `YES`
 EMConversation* conversation = [EMClient.sharedClient.chatManager getConversation:conversationId type:EMConversationTypeGroupChat createIfNotExist:NO isThread:YES];
 // 获取该子区会话的消息

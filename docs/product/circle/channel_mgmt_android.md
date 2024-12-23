@@ -41,7 +41,7 @@
 
 示例代码如下：
 
-```Java
+```java
 EMCircleChannelAttribute attribute = new EMCircleChannelAttribute();
     attribute.setName(name);
     attribute.setDesc(desc);
@@ -82,7 +82,7 @@ EMClient.getInstance().chatCircleManager().createChannel(serverId, categoryId, a
 
 频道创建者调用 `inviteUserToChannel` 方法邀请用户加入频道。受邀用户收到 `EMCircleChannelListener#onReceiveInvitation` 事件。
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().inviteUserToChannel(serverId, channelId, inviteeUserId, "welcome", new EMCallBack() {
                     @Override
                     public void onSuccess() {
@@ -100,7 +100,7 @@ EMClient.getInstance().chatCircleManager().inviteUserToChannel(serverId, channel
 
  - 用户调用 `acceptChannelInvitation` 方法同意加入频道，邀请人收到 `EMCircleChannelListener#onInvitationBeAccepted` 事件，频道所有成员（不包括该新加入的成员）收到 `EMCircleChannelListener#onMemberJoinedChannel` 事件。示例代码如下：
 
-   ```Java
+   ```java
    EMClient.getInstance().chatCircleManager().acceptChannelInvitation(serverId, channelId, inviterUserId, new EMValueCallBack<EMCircleChannel>() {
         @Override
         public void onSuccess(EMCircleChannel circleChannel) {
@@ -116,7 +116,7 @@ EMClient.getInstance().chatCircleManager().inviteUserToChannel(serverId, channel
 
 - 用户调用 `declineChannelInvitation` 方法拒绝加入频道，邀请人收到 `EMCircleChannelListener#onInvitationBeDeclined` 事件。示例代码如下：
 
-   ```Java
+   ```java
    EMClient.getInstance().chatCircleManager().declineChannelInvitation(serverId,channelId, inviterUserId, new EMCallBack() {
         @Override
         public void onSuccess() {
@@ -140,7 +140,7 @@ EMClient.getInstance().chatCircleManager().inviteUserToChannel(serverId, channel
 
 示例代码如下：
 
-```Java
+```java
 EMCircleChannelAttribute attribute = new EMCircleChannelAttribute();
     attribute.setName(name);
     attribute.setDesc(desc);
@@ -165,7 +165,7 @@ EMClient.getInstance().chatCircleManager().updateChannel(serverId, channelId, at
 
 示例代码如下：
 
-```Java
+```java
  EMClient.getInstance().chatCircleManager().destroyChannel(serverId, channelId, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -185,7 +185,7 @@ EMClient.getInstance().chatCircleManager().updateChannel(serverId, channelId, at
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchChannelDetail(serverId, channelId, new EMValueCallBack<EMCircleChannel>() {
     @Override
     public void onSuccess(EMCircleChannel value) {
@@ -205,7 +205,7 @@ EMClient.getInstance().chatCircleManager().fetchChannelDetail(serverId, channelI
 
 社区成员可以调用 `fetchPublicChannelsInServer` 方法获取社区下的所有公开频道的列表，示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchPublicChannelsInServer(serverId, 20, null, new EMValueCallBack<EMCursorResult<EMCircleChannel>>() {
     @Override
     public void onSuccess(EMCursorResult<EMCircleChannel> value) {
@@ -225,7 +225,7 @@ EMClient.getInstance().chatCircleManager().fetchPublicChannelsInServer(serverId,
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchVisiblePrivateChannelsInServer(serverId, 20, null, new EMValueCallBack<EMCursorResult<EMCircleChannel>>() {
     @Override
     public void onSuccess(EMCursorResult<EMCircleChannel> value) {
@@ -243,7 +243,7 @@ EMClient.getInstance().chatCircleManager().fetchVisiblePrivateChannelsInServer(s
 
 社区成员可以调用 `fetchJoinedChannelIdsInServer` 方法获取社区下加入的频道列表。
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchJoinedChannelIdsInServer(serverId, 20, null, new EMValueCallBack<EMCursorResult<String>>() {
     @Override
     public void onSuccess(EMCursorResult<String> value) {
@@ -261,7 +261,7 @@ EMClient.getInstance().chatCircleManager().fetchJoinedChannelIdsInServer(serverI
 
 社区成员可以调用 `fetchPublicChannelsInCategory` 方法获取频道分组下所有公开频道的列表，示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchPublicChannelsInCategory(serverId, categoryId,20, null, new EMValueCallBack<EMCursorResult<EMCircleChannel>>() {
     @Override
     public void onSuccess(EMCursorResult<EMCircleChannel> value) {
@@ -279,7 +279,7 @@ EMClient.getInstance().chatCircleManager().fetchPublicChannelsInCategory(serverI
 
 调用 `fetchPrivateChannelsInCategory` 方法获取频道分组下的所有私密频道的列表，示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchPrivateChannelsInCategory(serverId, categoryId,20, null, new EMValueCallBack<EMCursorResult<EMCircleChannel>>() {
     @Override
     public void onSuccess(EMCursorResult<EMCircleChannel> value) {
@@ -313,7 +313,7 @@ EMClient.getInstance().chatCircleManager().fetchPrivateChannelsInCategory(server
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().joinChannel(serverId, channelId, new EMValueCallBack<EMCircleChannel>() {
     @Override
     public void onSuccess(EMCircleChannel value) {
@@ -341,7 +341,7 @@ EMClient.getInstance().chatCircleManager().joinChannel(serverId, channelId, new 
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().leaveChannel(serverId, channelId, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -365,7 +365,7 @@ EMClient.getInstance().chatCircleManager().leaveChannel(serverId, channelId, new
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().removeUserFromChannel(serverId, channelId, userId, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -385,7 +385,7 @@ EMClient.getInstance().chatCircleManager().removeUserFromChannel(serverId, chann
 
 禁言列表中的成员无法在频道中发送消息，但可以接收频道中的消息。
 
-```Java
+```java
 long muteDuration = 24 * 60 * 60 * 1000;//毫秒
 EMClient.getInstance().chatCircleManager().muteUserInChannel(serverId, channelId, username, muteDuration, new EMCallBack() {
     @Override
@@ -406,7 +406,7 @@ EMClient.getInstance().chatCircleManager().muteUserInChannel(serverId, channelId
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().unmuteUserInChannel(serverId, channelId, username, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -424,7 +424,7 @@ EMClient.getInstance().chatCircleManager().unmuteUserInChannel(serverId, channel
 
 社区所有者和社区管理员可以调用 `fetchChannelMuteUsers` 方法获取频道下的禁言列表。
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchChannelMuteUsers(serverId, channelId, new EMValueCallBack<Map<String, Long>>() {
                     @Override
                     public void onSuccess(Map<String, Long> usersMuted) {
@@ -446,7 +446,7 @@ EMClient.getInstance().chatCircleManager().fetchChannelMuteUsers(serverId, chann
 
 - 对于其他模式的频道创建时，创建者直接加入频道。因此，频道创建者算入频道成员数量，查询频道成员列表返回频道创建者。
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchChannelMembers(serverId, channelId, 20, null, new EMValueCallBack<EMCursorResult<EMCircleUser>>() {
     @Override
     public void onSuccess(EMCursorResult<EMCircleUser> value) {
@@ -464,7 +464,7 @@ EMClient.getInstance().chatCircleManager().fetchChannelMembers(serverId, channel
 
 社区成员可调用 `checkSelfIsInChannel` 方法查询自己是否在指定频道中。示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().checkSelfIsInChannel(serverId, channelId, new EMValueCallBack<Boolean>() {
     @Override
     public void onSuccess(Boolean value) {
@@ -484,7 +484,7 @@ EMClient.getInstance().chatCircleManager().checkSelfIsInChannel(serverId, channe
 
 `EMCircleManager` 中提供频道事件的监听接口。开发者可以通过设置此监听，获取频道中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
-```Java
+```java
 EMCircleChannelListener chatChannelListener = new EMCircleChannelListener() {
     //创建频道。参与创建的初始成员会收到该事件。
     @Override
@@ -548,7 +548,7 @@ EMClient.getInstance().chatCircleManager().clearChannelListeners();
 
 #### 多设备登录监听事件 
 
-```Java
+```java
 public void onCircleChannelEvent(int event, String channelId, List<String> usernames) {
     switch (event) {
         // 当前用户在其他设备上创建频道。

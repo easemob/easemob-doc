@@ -25,7 +25,7 @@
 
 你可以调用 `LoadMessagesWithKeyword` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation("convId");
 
 conv.LoadMessagesWithKeyword(
@@ -60,7 +60,7 @@ conv.LoadMessagesWithKeyword(
 若使用该功能，需将 SDK 升级至 V1.3.0 或以上版本。
 :::
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.SearchMsgFromDB("keywords", -1, 10, "from", MessageSearchDirection.UP, MessageSearchScope.CONTENT, new ValueCallBack<List<Message>>(
   onSuccess: (list) => {
       foreach (var it in list)
@@ -80,7 +80,7 @@ SDKClient.Instance.ChatManager.SearchMsgFromDB("keywords", -1, 10, "from", Messa
 若使用该功能，需将 SDK 升级至 V1.3.0 或以上版本。
 :::
 
-```C#
+```csharp
 conv.LoadMessagesWithScope("keywords", MessageSearchScope.CONTENT, -1, 10, "from", MessageSearchDirection.UP, new ValueCallBack<List<Message>>(
     onSuccess: (list) => {
         foreach (var it in list)

@@ -38,7 +38,7 @@
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.createCategory(serverId, name: name, completion: { category, error in
 })
 ```
@@ -49,7 +49,7 @@ EMClient.shared().circleManager?.createCategory(serverId, name: name, completion
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.updateCategory(serverId, categoryId: categoryId, name: name, completion: { category, error in
 })
 ```
@@ -60,7 +60,7 @@ EMClient.shared().circleManager?.updateCategory(serverId, categoryId: categoryId
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.destroyCategory(self.serverId, categoryId: self.groupId, completion: { error in
 })
 ```
@@ -71,7 +71,7 @@ EMClient.shared().circleManager?.destroyCategory(self.serverId, categoryId: self
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchCategories(inServer: self.serverId, limit: 20, cursor: refresh ? nil : self.result?.cursor, completion: { result, error in
 })
 ```
@@ -86,7 +86,7 @@ EMClient.shared().circleManager?.fetchCategories(inServer: self.serverId, limit:
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.transferChannel(self.serverId, channelId: self.channelId, newCategoryId: category.categoryId, completion: { error in
 })
 ```
@@ -95,14 +95,14 @@ EMClient.shared().circleManager?.transferChannel(self.serverId, channelId: self.
 
 `IEMCircleManager` 中提供频道分组事件的监听接口。开发者可以通过设置此监听，获取频道分组中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
-```Swift
+```swift
 //添加频道分组回调代理。
 EMClient.shared().circleManager?.add(categoryDelegate: self, queue: nil)
 //移除频道分组回调代理。
 EMClient.shared().circleManager?.remove(categoryDelegate: self)
 ```
 
-```Swift
+```swift
 //创建了频道分组。社区所有成员（除创建者外）会收到该事件。
 func onCategoryCreated(_ category: EMCircleCategory, creator: String) {
 }

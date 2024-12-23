@@ -43,7 +43,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // chatThreadID: 子区 ID。
 // content: 文本消息内容
 // convType: 会话类型为群组会话，即 ChatConversationType.GroupChat
@@ -75,7 +75,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 继承并实现 `ChatMessageEventListener`
 class ChatMessageEvent implements ChatMessageEventListener {
   onMessagesReceived(messages: ChatMessage[]): void {
@@ -106,7 +106,7 @@ ChatClient.getInstance().chatManager.removeAllMessageListener();
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 继承并实现 `ChatMessageEventListener`
 class ChatMessageEvent implements ChatMessageEventListener {
   onMessagesRecalledInfo(infos: ChatRecalledMessageInfo[]): void {
@@ -129,7 +129,7 @@ class ChatMessageEvent implements ChatMessageEventListener {
 
 调用 `fetchHistoryMessages` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
 
-```TypeScript
+```typescript
 // chatThreadID: 子区 ID。
 const chatThreadID = "chatThreadID";
 // 会话类型为群聊，即 ChatConversationType.GroupChat。
@@ -160,7 +160,7 @@ ChatClient.getInstance()
 
 你可以调用 `getThreadConversation` 方法获取子区会话，然后从本地数据库中读取指定会话的消息：
 
-```TypeScript
+```typescript
 // 获取子区会话
 ChatClient.getInstance()
   .chatManager.getThreadConversation(chatThreadID, createIfNeed)

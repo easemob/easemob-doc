@@ -66,7 +66,7 @@
 
 在 `MainWindow.xaml.cs` 头部添加以下命名空间：
 
-```C#
+```csharp
 using AgoraChat;
 using AgoraChat.MessageBody;
 ```
@@ -75,7 +75,7 @@ using AgoraChat.MessageBody;
 
 在 `InitSDK` 函数中添加以下代码完成 SDK 初始化：
 
-```C#
+```csharp
 var options = new Options("appkey"); //此处填入你的appkey
 options.UsingHttpsOnly = true;
 SDKClient.Instance.InitWithOptions(options);
@@ -85,7 +85,7 @@ SDKClient.Instance.InitWithOptions(options);
 
 在 `SignUp_Click` 函数尾部添加以下代码，用于创建 AppServer 上的登录账户，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.CreateAccount(username, password, callback: new CallBack(
      onSuccess: () =>
      {
@@ -106,7 +106,7 @@ SDKClient.Instance.CreateAccount(username, password, callback: new CallBack(
 
 在 `SignIn_Click` 函数尾部添加以下代码，用于使用账号登录即时通讯系统，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.Login(UserIdTextBox.Text,  PasswordTextBox.Text, false, callback: new CallBack(
      onSuccess: () =>
      {
@@ -136,7 +136,7 @@ SDKClient.Instance.LoginWithToken(UserIdTextBox.Text, PasswordTextBox.Text, call
 
 在 `SignOut_Click` 函数尾部添加以下代码，用于登出即时通讯系统，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.Logout(true, callback: new CallBack(
     onSuccess: () =>
     {
@@ -153,7 +153,7 @@ SDKClient.Instance.Logout(true, callback: new CallBack(
 
 在 `SendBtn_Click` 函数尾部添加以下代码，可以用于创建一条文本消息，然后发送该消息：
 
-```C#
+```csharp
 Message msg = Message.CreateTextSendMessage(SingleChatIdTextBox.Text, MessageContentTextBox.Text);
     SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
     onSuccess: () =>
@@ -182,7 +182,7 @@ Message msg = Message.CreateTextSendMessage(SingleChatIdTextBox.Text, MessageCon
 
 在类声明的头部继承 `IChatManagerDelegate` 对象。
 
-```C#
+```csharp
 public partial class MainWindow : Window, IChatManagerDelegate
 
 ```
@@ -193,7 +193,7 @@ public partial class MainWindow : Window, IChatManagerDelegate
 由于这里只测试消息接收回调，所以其他回调暂时无需实现，保留空函数即可。
 :::
 
-```C#
+```csharp
 public void OnMessagesReceived(List<Message> messages)
 {
     foreach (Message msg in messages)
@@ -286,13 +286,13 @@ public void OnMessagePinChanged(string messageId, string conversationId, bool is
 
 在 `AddChatDelegate` 函数中添加以下代码，以将 `MainWindow` 对象实例加入到监听列表中
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.AddChatManagerDelegate(this);
 ```
 
 在 `RemoveChatDelegate` 函数中添加以下代码，以便在关闭窗体时将 `MainWindow` 对象实例从监听列表中移除
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 ```
 

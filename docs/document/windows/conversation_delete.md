@@ -24,7 +24,7 @@
 
 你可以调用 `DeleteConversationFromServer` 方法删除服务器端会话，并选择是否删除服务端的历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息。调用该接口会删除本地会话。该接口不影响其他用户的会话和消息。
 
-```C#
+```csharp
 // 如果需要保留服务端和本地的历史消息，`isDeleteServerMessages` 传 `false`。
 SDKClient.Instance.ChatManager.DeleteConversationFromServer(conversationId, conversationType, isDeleteServerMessages, new CallBack(
     onSuccess: () =>
@@ -40,14 +40,14 @@ SDKClient.Instance.ChatManager.DeleteConversationFromServer(conversationId, conv
 
 - 你可以调用 `DeleteConversation` 方法删除本地会话及其聊天消息：
 
-```C#
+```csharp
 //如需保留历史消息，传 `false`。
 SDKClient.Instance.ChatManager.DeleteConversation(conversationId, true);
 ```
 
 - 你可以调用 `DeleteMessage` 方法删除指定会话中指定的一条历史消息。
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 conv.DeleteMessage(msgId);
 ```

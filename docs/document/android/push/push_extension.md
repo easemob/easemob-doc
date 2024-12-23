@@ -8,7 +8,7 @@
 
 创建推送消息时，可以在消息中添加自定义字段，实现自定义推送设置。
 
-```Java
+```java
 // 下面以文本消息为例，附件等类型的消息设置方法相同。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("message content");
@@ -60,7 +60,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 设置强制推送后，用户发送消息时会忽略接收方的免打扰设置，不论是否处于免打扰时间段都会正常向接收方推送消息。
 
-```Java
+```java
 // 下面以文本消息为例，图片、文件等类型的消息设置方法相同。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("test");
@@ -80,7 +80,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方在发送消息时设置，而免打扰模式为接收方设置在指定时间段内不接收推送通知。
 
-```Java
+```java
 // 下面以文本消息为例，图片、文件等类型的消息设置方法相同。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("test");

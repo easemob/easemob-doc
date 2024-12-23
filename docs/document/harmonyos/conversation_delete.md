@@ -28,7 +28,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 //获取指定的会话 ID。
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 
@@ -45,12 +45,12 @@ ChatClient.getInstance().chatManager()?.deleteConversationFromServer(conversatio
 
 你可以删除本地会话和历史消息，示例代码如下：
 
-```TypeScript
+```typescript
 // 删除指定用户的会话，如果需要保留历史消息，`isDeleteServerMessages` 设置为 `false`。
 ChatClient.getInstance().chatManager()?.deleteConversation(conversationId, isDeleteServerMessages);
 ```
 
-```TypeScript
+```typescript
 // 删除指定会话中指定的一条历史消息。
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 if (conversation) {

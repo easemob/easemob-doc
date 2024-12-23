@@ -31,7 +31,7 @@
 
 示例代码如下： 
 
-```JavaScript
+```javascript
 connection.pinConversation({conversationId:'conversationId', conversationType: 'singleChat', isPinned: true})
 ```
 
@@ -43,7 +43,7 @@ connection.pinConversation({conversationId:'conversationId', conversationType: '
 
 示例代码如下，返回数据类型参见[从服务器分页获取会话列表](conversation_list#从服务器分页获取会话列表)。
 
-```JavaScript
+```javascript
 // pageSize: 每页返回的会话数。取值范围为 [1,50]。
 // cursor：开始获取数据的游标位置。若传空字符串（''），SDK 从最新置顶的会话开始查询。
 connection.getServerPinnedConversations({pageSize:50, cursor: ''})

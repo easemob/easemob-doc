@@ -31,7 +31,7 @@
 
 你可以调用 `createServer` 方法创建一个社区：
 
-```Swift
+```swift
 let attribute = EMCircleServerAttribute()
 attribute.name = name
 attribute.icon = icon
@@ -50,7 +50,7 @@ EMClient.shared().circleManager?.createServer(attribute) { server, error in
 
 你可以调用 `joinServer` 方法加入一个现有社区：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.joinServer(serverId) { server, error in
     if let error = error {
         Toast.show(error.errorDescription, duration: 2)
@@ -64,7 +64,7 @@ EMClient.shared().circleManager?.joinServer(serverId) { server, error in
 
 你可以调用 `fetchJoinedServers` 方法获取已加入的社区列表：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchJoinedServers(20, cursor: self.cursor) { result, error in
     if let error = error {
         Toast.show(error.errorDescription, duration: 2)
@@ -86,7 +86,7 @@ EMClient.shared().circleManager?.fetchJoinedServers(20, cursor: self.cursor) { r
 
 你可以调用 `createChannel` 方法创建频道：
 
-```Swift
+```swift
 let attribute = EMCircleChannelAttribute()
 attribute.name = name
 attribute.desc = desc
@@ -103,7 +103,7 @@ EMClient.shared().circleManager?.createChannel(self.serverId, categoryId: self.c
 
 你可以调用 `joinChannel` 方法加入一个频道：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.joinChannel(serverId, channelId: channelId) { channel, error in
     if let error = error {
         Toast.show(error.errorDescription, duration: 2)
@@ -117,7 +117,7 @@ EMClient.shared().circleManager?.joinChannel(serverId, channelId: channelId) { c
 
 你可以调用 `fetchPublicChannelsInServer` 方法获取社区下的公开频道列表：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchPublicChannels(inServer: serverId, limit: 20, cursor: nil) { result, error in
     if let error = error {
         Toast.show(error.errorDescription, duration: 2)
@@ -130,7 +130,7 @@ EMClient.shared().circleManager?.fetchPublicChannels(inServer: serverId, limit: 
 
 你可以调用 `fetchPrivateChannelsInServer` 方法获取社区下所有私密频道的列表：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchPrivateChannels(inServer: self.serverId, limit: 20, cursor: nil) { result, error in
     if let error = error {
         Toast.show(error.errorDescription, duration: 2)
@@ -149,7 +149,7 @@ EMClient.shared().circleManager?.fetchPrivateChannels(inServer: self.serverId, l
 
 你可以调用 `sendMessage` 方法在指定频道中发送一条消息：
 
-```Swift
+```swift
 let messageBody = EMTextMessageBody(text: text)
 let message = EMChatMessage(conversationID: channelId, from: selfUserId, to: channelId, body: messageBody, ext: nil)
 message.isChannelMessage = true
@@ -167,13 +167,13 @@ EMClient.shared().chatManager.send(message, progress: nil) { message, error in
 
 添加 `ChatManager` 回调的代理对象：
 
-```Swift
+```swift
 EMClient.shared().chatManager?.add(self, delegateQueue: nil)
 ```
 
 代理对象实现 `EMChatManagerDelegate` 接口的 `messagesDidReceive` 方法。
 
-```Swift
+```swift
 extension ChatViewController : EMChatManagerDelegate {
     func messagesDidReceive(_ aMessages: [EMChatMessage]) {
        

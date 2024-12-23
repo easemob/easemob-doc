@@ -48,7 +48,7 @@
 3. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
 :::
 
-```C#
+```csharp
   FetchServerMessagesOption option = new FetchServerMessagesOption();
   // 消息搜索方向。`UP` 表示按消息时间戳递减的方向获取，即先获取最新消息；`DOWN` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
   option.Direction = MessageSearchDirection.UP;
@@ -88,7 +88,7 @@
 
 为确保数据可靠，我们建议你多次调用该方法，且每次获取的消息数小于 50 条。获取到数据后，SDK 会自动将消息更新到本地数据库。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(conversationId, type, startId, pageSize, new ValueCallBack<CursorResult<Message>>(
     // 获取历史消息成功。
     // result 为 CursorResult<Message> 类型。
@@ -105,7 +105,7 @@ SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(conversationId, ty
 
 你可以从本地数据库中读取指定会话的消息，示例代码如下：
 
-```C#
+```csharp
 // 获取本地会话。
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 // 该方法获取 `startMsgId` 之前的 `pagesize` 条消息。
@@ -123,7 +123,7 @@ conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>
 
 你可以调用 `LoadMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 
-```C#
+```csharp
 // msgId：要获取消息的消息 ID。
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("msgId");
 ```
@@ -134,7 +134,7 @@ Message msg = SDKClient.Instance.ChatManager.LoadMessage("msgId");
 
 每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation("convId");
 // type：消息类型；count：每次获取的消息数量，取值范围为 [1,400]；direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
 conv.LoadMessagesWithMsgType(type: MessageBodyType.TXT, count: 50, direction: MessageSearchDirection.UP, new ValueCallBack<List<Message>>(
@@ -155,7 +155,7 @@ conv.LoadMessagesWithMsgType(type: MessageBodyType.TXT, count: 50, direction: Me
 
 每次最多可获取 400 条消息。
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation("convId");
 // startTime：搜索的起始时间戳；endTime：搜索的结束时间戳；count：每次获取的消息数量，取值范围为 [1,400]。
 conv.LoadMessagesWithTime(startTime: startTime, endTime: endTime, count: 50, new ValueCallBack<List<Message>>(

@@ -18,7 +18,7 @@
 
 在 app 项目 `build.gradle.kts` 中添加以下依赖：
 
-```Kotlin
+```kotlin
 implementation("io.hyphenate:ease-chat-kit:4.7.0")
 ```
 
@@ -28,14 +28,14 @@ implementation("io.hyphenate:ease-chat-kit:4.7.0")
 
 1. 在根目录 `settings.gradle.kts` 文件（/Gradle Scripts/settings.gradle.kts）中添加如下代码：
 
-```Kotlin
+```kotlin
 include(":ease-im-kit")
 project(":ease-im-kit").projectDir = File("../chatuikit-android/ease-im-kit")
 ```
 
 2. 在 app 的 `build.gradle.kts` 文件（/Gradle Scripts/build.gradle）中添加如下代码：
 
-```Kotlin
+```kotlin
 //chatuikit-android
 implementation(project(mapOf("path" to ":ease-im-kit")))
 ```
@@ -44,7 +44,7 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 
 在 `app/proguard-rules.pro` 文件中添加如下行，防止代码混淆：
 
-```Kotlin
+```kotlin
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
 ```
@@ -57,7 +57,7 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 
 单群聊 UIKit 提供 `UIKitChatActivity` 页面，调用 `UIKitChatActivity#actionStart` 方法即可，示例代码如下：
 
-```Kotlin
+```kotlin
 // conversationId: 单聊会话为对端用户 ID，群聊会话为群组 ID。
 // chatType：单聊为 ChatUIKitType#SINGLE_CHAT，群聊为 ChatUIKitType#GROUP_CHAT。
 UIKitChatActivity.actionStart(mContext, conversationId, chatType)
@@ -68,7 +68,7 @@ UIKitChatActivity.actionStart(mContext, conversationId, chatType)
 
 开发者也可以使用单群聊 UIKit 提供的 `UIKitChatFragment` 创建聊天页面，示例代码如下：
 
-```Kotlin
+```kotlin
 class ChatActivity: AppCompactActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +90,7 @@ class ChatActivity: AppCompactActivity() {
 
 示例如下：
 
-```Kotlin
+```kotlin
 class ConversationListActivity: AppCompactActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,7 +111,7 @@ class ConversationListActivity: AppCompactActivity() {
 
 示例如下：
 
-```Kotlin
+```kotlin
 class ContactListActivity: AppCompactActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

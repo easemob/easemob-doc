@@ -8,7 +8,7 @@
 
 ## 初始化参数说明
 
-```JavaScript
+```javascript
 import ChatSDK from "easemob-websdk";
 const conn = new ChatSDK.connection({
   appKey: "Your appKey",

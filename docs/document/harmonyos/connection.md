@@ -8,7 +8,7 @@
 
 你可以通过注册连接监听确认连接状态。
 
-```TypeScript
+```typescript
 let connectionListener: ConnectionListener = {
   onConnected: (): void => {
     // 长连接建立

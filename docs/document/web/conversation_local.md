@@ -32,7 +32,7 @@
 
 会话对象的结构如下所示:
 
-```TypeScript
+```typescript
 interface ConversationItem {
 	// 会话 ID。
 	conversationId: string;
@@ -51,7 +51,7 @@ interface ConversationItem {
 
 若支持本地会话存储，需要集成本地存储插件。**该插件只支持通过[按需导入 SDK](import_sdk_minicore.html)的方式集成**。示例代码如下：
 
-```JavaScript
+```javascript
 import MiniCore from "easemob-websdk/miniCore/miniCore";
 import * as contactPlugin from "easemob-websdk/contact/contact";
 import * as localCachePlugin from "easemob-websdk/localCache/localCache";
@@ -77,7 +77,7 @@ miniCore.open({
 
 示例代码如下：
 
-```JavaScript
+```javascript
 
 miniCore.localCache.getLocalConversations().then((res)=>{
    // 获取本地会话列表成功。
@@ -89,7 +89,7 @@ miniCore.localCache.getLocalConversations().then((res)=>{
 
 你可以调用 `getLocalConversation` 方法获取单个本地会话对象，示例代码如下：
 
-```JavaScript
+```javascript
 const options = {
    // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
    conversationType: 'singleChat',
@@ -109,7 +109,7 @@ miniCore.localCache.getLocalConversation(options).then((res)=>{
 
 示例代码如下：
 
-```JavaScript
+```javascript
 
 const options = {
    // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
@@ -129,7 +129,7 @@ miniCore.localCache.setLocalConversationCustomField(options).then(()=>{
 
 你可以调用 `clearConversationUnreadCount` 方法对单个本地会话的未读消息数清零。示例代码如下：
 
-```JavaScript
+```javascript
 
 const options = {
    // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
@@ -149,7 +149,7 @@ miniCore.localCache.clearConversationUnreadCount(options).then(()=>{
 
 示例代码如下：
 
-```JavaScript
+```javascript
 const options = {
    // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
    conversationType: 'singleChat',
@@ -168,7 +168,7 @@ miniCore.localCache.removeLocalConversation(options).then(()=>{
 
 你可以调用 `getServerConversations` 方法获取服务端会话列表并同步到本地数据库。示例代码如下：
 
-```JavaScript
+```javascript
 const options = {
    /** 每页期望获取的会话数量。取值范围为 [1,50]，默认为 `20`。*/
    pageSize: 20,

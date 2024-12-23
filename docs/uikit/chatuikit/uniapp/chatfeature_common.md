@@ -76,7 +76,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
     ChatUIKit.hideFeature(['inputMention'])
 ```
 

@@ -40,7 +40,7 @@
 
 示例代码如下：
 
-```Java
+```java
 // parentId：群组 ID
 // messageId：消息 ID，基于该消息创建子区
 // threadName：子区名称，长度不超过 64 个字符
@@ -68,7 +68,7 @@ EMClient.getInstance().chatThreadManager().createChatThread(parentId, messageId,
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatThreadManager().destroyChatThread(chatThreadId, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -93,7 +93,7 @@ EMClient.getInstance().chatThreadManager().destroyChatThread(chatThreadId, new E
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatThreadManager().joinChatThread(chatThreadId, new EMValueCallBack<EMChatThread>() {
     @Override
     public void onSuccess(EMChatThread value) {
@@ -115,7 +115,7 @@ EMClient.getInstance().chatThreadManager().joinChatThread(chatThreadId, new EMVa
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatThreadManager().leaveChatThread(chatThreadId, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -135,7 +135,7 @@ EMClient.getInstance().chatThreadManager().leaveChatThread(chatThreadId, new EMC
 
 示例代码如下：
 
-```Java
+```java
 // chatThreadId: 子区 ID
 // member: 子区成员的用户 ID
 EMClient.getInstance().chatThreadManager().removeMemberFromChatThread(chatThreadId, member, new EMCallBack() {
@@ -157,7 +157,7 @@ EMClient.getInstance().chatThreadManager().removeMemberFromChatThread(chatThread
 
 示例代码如下：
 
-```Java
+```java
 // chatThreadId: 子区 ID
 // newChatThreadName: 修改的子区名称，长度不超过 64 个字符
 EMClient.getInstance().chatThreadManager().updateChatThreadName(chatThreadId, newChatThreadName, new EMCallBack() {
@@ -177,7 +177,7 @@ EMClient.getInstance().chatThreadManager().updateChatThreadName(chatThreadId, ne
 
 示例代码如下：
 
-```Java
+```java
 // chatThreadID: 子区 ID
 EMClient.getInstance().chatThreadManager().getChatThreadFromServer(chatThreadId, new EMValueCallBack<EMChatThread>() {
     @Override
@@ -194,7 +194,7 @@ EMClient.getInstance().chatThreadManager().getChatThreadFromServer(chatThreadId,
 
 子区所属群组的所有成员均可以调用 `getChatThreadMembers` 方法从服务器分页获取子区成员列表。
 
-```Java
+```java
 // chatThreadId: 子区 ID
 // limit: 单次请求返回的成员数，取值范围为 [1,50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -214,7 +214,7 @@ EMClient.getInstance().chatThreadManager().getChatThreadMembers(chatThreadId, li
 
 1. 用户可以调用 `getJoinedChatThreadsFromServer` 方法从服务器分页获取自己加入和创建的子区列表：
 
-```Java
+```java
 // limit: 单次请求返回的子区数，取值范围为 [1,50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 EMClient.getInstance().chatThreadManager().getJoinedChatThreadsFromServer(limit, cursor, 
@@ -231,7 +231,7 @@ EMClient.getInstance().chatThreadManager().getJoinedChatThreadsFromServer(limit,
 
 2. 用户可以调用 `getJoinedChatThreadsFromServer` 方法从服务器分页获取指定群组中自己加入和创建的子区列表：
 
-```Java
+```java
 // parentId: 群组 ID
 // limit: 单次请求返回的子区数，取值范围为 [1,50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -249,7 +249,7 @@ EMClient.getInstance().chatThreadManager().getJoinedChatThreadsFromServer(parent
 
 3. 用户还可以调用 `getChatThreadsFromServer` 方法从服务器分页获取指定群组的子区列表：
 
-```Java
+```java
 // parentId: 群组 ID
 // limit: 单次请求返回的子区数，取值范围为 [1,50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -271,7 +271,7 @@ EMClient.getInstance().chatThreadManager().getChatThreadsFromServer(parentId, li
 
 示例代码如下：
 
-```Java
+```java
 // chatThreadIdList: 要查询的子区 ID 列表，每次最多可传入 20 个子区 ID
 EMClient.getInstance().chatThreadManager().getChatThreadLatestMessage(chatThreadIdList, 
         new EMValueCallBack<Map<String, EMMessage>>() {
@@ -291,7 +291,7 @@ EMClient.getInstance().chatThreadManager().getChatThreadLatestMessage(chatThread
 
 示例代码如下：
 
-```Java
+```java
 EMChatThreadChangeListener chatThreadChangeListener = new EMChatThreadChangeListener() {
     @Override
     // 子区创建。子区所属群组的所有成员收到该事件。

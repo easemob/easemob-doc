@@ -26,7 +26,7 @@ Android 利用自己的平台特性，可以在 `res` 目录下创建 `values-ni
 
 若从当前的主题切换到 EaseChatUIKit 内置的浅色或深色主题，可使用以下方法：
 
-```Kotlin
+```kotlin
  // 在 sp 中存入一个 Boolean 类型变量，记录当前是浅色还是深色主题。
  val isBlack = ChatUIKitPreferenceManager.getInstance().getBoolean("isBlack")
  // 调用系统 API 切换模式。

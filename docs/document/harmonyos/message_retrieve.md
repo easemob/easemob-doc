@@ -43,7 +43,7 @@
 2. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.fetchHistoryMessages(conversationId, conversationType, pageSize, cursor, fetchMessageOption).then((result) => {
   let cursor = result.getNextCursor();
   let list = result.getResult();
@@ -57,7 +57,7 @@ ChatClient.getInstance().chatManager()?.fetchHistoryMessages(conversationId, con
 
 你可以调用 `getMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 
-```TypeScript
+```typescript
 // msgId：要获取消息的消息 ID。
 let msg = ChatClient.getInstance().chatManager()?.getMessage(msgId);
 if (msg) {
@@ -69,7 +69,7 @@ if (msg) {
 
 你可以调用 `getMsgCountInRange` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
 
-```TypeScript
+```typescript
 //conversationId：会话 ID
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 if (!conversation) {

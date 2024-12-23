@@ -50,7 +50,7 @@
 3. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
    :::
 
-```TypeScript
+```typescript
 // convId 会话 ID：单聊、群聊和聊天室分别为对端用户 ID、群组 ID 和聊天室 ID。
 // convType 会话类型：单聊、群聊和聊天室分别为 PeerChat、GroupChat 和 RoomChat。
 // cursor 查询的起始消息 ID。若该参数设置为空字符串，从最新消息开始。
@@ -76,7 +76,7 @@ ChatClient.getInstance()
 
 你可以调用 `getConversation` 方法从本地获取指定会话 ID 的会话，如果不存在可以创建。
 
-```TypeScript
+```typescript
 // convId: 会话 ID。
 // convType： 会话类型。
 // createIfNeed：如果不存在则创建设置该值为 true。
@@ -94,7 +94,7 @@ ChatClient.getInstance()
 
 你可以调用 `getMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 
-```TypeScript
+```typescript
 // msgId: 要获取的消息的消息 ID。
 ChatClient.getInstance()
   .chatManager.getMessage(msgId)
@@ -114,7 +114,7 @@ ChatClient.getInstance()
 要使用该方法，需将 SDK 升级至 1.4.0 或以上版本。
 :::
 
-```TypeScript
+```typescript
 // convId: 会话 ID。
 // convType：会话类型：单聊、群聊和聊天室分别为 `PeerChat`、`GroupChat` 和 `RoomChat`。
 // msgType: 消息类型。
@@ -150,7 +150,7 @@ ChatClient.getInstance()
 要使用该方法，需将 SDK 升级至 V1.4.0 或以上版本。
 :::
 
-```TypeScript
+```typescript
 // convId：会话 ID。
 // convType：会话类型：单聊、群聊和聊天室分别为 `PeerChat`、`GroupChat` 和 `RoomChat`。
 // startTime：搜索的起始时间戳，单位为毫秒。
@@ -180,7 +180,7 @@ ChatClient.getInstance()
 
 你可以调用 `ChatManager.getMessageCountWithTimestamp` 方法从数据库中获取指定会话的指定时间段的消息数量。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.getMessageCountWithTimestamp({
     convId: "foo",
@@ -204,7 +204,7 @@ ChatClient.getInstance()
 要使用该方法，需将 SDK 升级至 V1.4.0 或以上版本。
 :::
 
-```TypeScript
+```typescript
 // convId: 会话 ID。
 // convType：会话类型。
 // startMsgId: 搜索的起始消息 ID。
@@ -225,7 +225,7 @@ ChatClient.getInstance()
 
 你可以调用 `getLatestMessage` 方法获取指定会话中的最新一条消息。
 
-```TypeScript
+```typescript
 // convId: 会话 ID。
 // convType：会话类型。
 ChatClient.getInstance()
@@ -242,7 +242,7 @@ ChatClient.getInstance()
 
 你可以调用 `getLastReceivedMessage` 方法获取指定会话中最新收到的一条消息。
 
-```TypeScript
+```typescript
 // convId: 会话 ID
 // convType：会话类型
 ChatClient.getInstance()

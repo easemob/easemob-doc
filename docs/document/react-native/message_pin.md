@@ -32,7 +32,7 @@
 
 对于单个会话来说，默认可置顶 20 条消息。你可以联系环信商务提升该上限，最大可调整至 100。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.pinMessage(
     messageId // 消息ID
@@ -51,7 +51,7 @@ ChatClient.getInstance()
 
 群组或聊天室中的所有成员均可取消置顶消息，不论该消息由哪个成员置顶。取消置顶消息后，`EMMessage#pinnedInfo` 获取到的信息为空，该会话的置顶消息列表中也不再包含该消息。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.unpinMessage(
     messageId // 消息ID
@@ -74,7 +74,7 @@ ChatClient.getInstance()
 2. 若消息置顶后，用户撤回了该消息，则该消息从服务端移除，所有用户在从服务器拉取置顶消息列表时无法拉取到该消息。
    :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.fetchPinnedMessages(
     convId, // 会话 ID
@@ -95,7 +95,7 @@ ChatClient.getInstance()
 - 若消息为置顶状态，该类返回消息置顶的时间以及操作者的用户 ID。
 - 若消息为非置顶状态，该类返回空。
 
-```TypeScript
+```typescript
 // ...
 const msg: ChatMessage;
 const info = await msg.getPinInfo;
@@ -104,7 +104,7 @@ const info = await msg.getPinInfo;
 
 ## 监听消息置顶事件
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager.addMessageListener({
   onMessagePinChanged: (params) => {
     // todo: 接收消息置顶状态变更

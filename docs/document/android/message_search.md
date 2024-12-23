@@ -27,7 +27,7 @@
 
 你可以调用 `searchMsgFromDB(string keywords, long timeStamp, int maxCount, string from, EMSearchDirection direction)` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
 
-```Java
+```java
 //conversationId：会话 ID
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 // keywords：搜索关键字；timeStamp：搜索的起始时间戳；maxCount：每次获取的消息数量，取值范围为 [1,400]。
@@ -43,7 +43,7 @@ List<EMMessage> messages = conversation.searchMsgFromDB(keywords, timeStamp, max
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
 :::
 
-```Java
+```java
 String keyWord = "123";
 List<EMMessage> messages = EMClient.getInstance().chatManager().searchMsgFromDB(keyWord, -1, 200, null, EMConversation.EMSearchDirection.UP, EMConversation.EMMessageSearchScope.ALL);
 
@@ -57,7 +57,7 @@ List<EMMessage> messages = EMClient.getInstance().chatManager().searchMsgFromDB(
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
 :::
 
-```Java
+```java
 String keyWord = "123";
 String conversationId = "jack";
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
@@ -73,7 +73,7 @@ List<EMMessage> messages = conversation.searchMsgFromDB(keyWord, -1, 200, null, 
 若使用该功能，需将 SDK 升级至 V4.7.0 或以上版本。
 :::
 
-```Java
+```java
 // count：要查询的消息条数。取值范围为 [1,400]。
 // fromuser：会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 Set types=new HashSet<>();
@@ -99,7 +99,7 @@ for (int i = 0; i < messages.size(); i++) {
 若使用该功能，需将 SDK 升级至 V4.7.0 或以上版本。
 :::
 
-```Java
+```java
 // count：要查询的消息条数。取值范围为 [1,400]。
 // fromuser：当前会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 Set types=new HashSet<>();

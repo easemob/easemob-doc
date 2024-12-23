@@ -31,7 +31,7 @@
 
 示例代码如下： 
 
-```Java
+```java
 EMClient.getInstance().chatManager().asyncPinConversation(conversationId, isPinned, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -55,7 +55,7 @@ EMClient.getInstance().chatManager().asyncPinConversation(conversationId, isPinn
 
 示例代码如下： 
 
-```Java
+```java
 // limit: 每页返回的会话数。取值范围为 [1,50]。
 // cursor: 开始获取数据的游标位置。若获取数据时传 `null` 或者空字符串（""），SDK 从最新置顶的会话开始查询。
 int limit = 10;

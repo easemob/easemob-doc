@@ -91,7 +91,7 @@ SDK 4.9.1 及以上版本支持 uni-app 推送。
 
 1. 安装并引入环信 uni-app SDK。
 
-```JavaScript
+```javascript
 // 安装环信 SDK
 npm install easemob-websdk 
 // 在 App.vue 文件中引入 SDK
@@ -100,7 +100,7 @@ import websdk from "easemob-websdk/uniApp/Easemob-chat";
 
 2. 初始化 IM SDK 并集成推送插件。
    
-```JavaScript
+```javascript
 // 初始化 IM SDK
 const conn = websdk.connection({
   appKey: 'xxxxx', // 你的环信 app Key

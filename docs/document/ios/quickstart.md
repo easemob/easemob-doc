@@ -64,7 +64,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 在工程的 AppDelegate 中的以下方法中，调用 SDK 对应方法。
 
-```Objective-C
+```objective-c
 (BOOL)application:(UIApplication *)applicationdidFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
     // appkey 替换成你在环信即时通讯 IM 管理后台注册应用中的 App Key
@@ -80,7 +80,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 向工程中导入 Chat 文件。
 
-```Objective-C
+```objective-c
 // ConversationId 接收消息方的环信ID:@"user2"
 // type 聊天类型:EMConversationTypeChat    单聊类型
 // createIfNotExist 如果会话不存在是否创建会话：YES
@@ -94,7 +94,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 设置用户名和密码创建账号。
 
-```Objective-C
+```objective-c
 // 异步方法
 [[EMClient sharedClient] registerWithUsername:@"username"
                                          password:@"your password"
@@ -106,7 +106,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 利用创建的用户名和密码登录环信 IM。
 
-```Objective-C
+```objective-c
 [[EMClient sharedClient] loginWithUsername:@"username"
                                      password:@"your password"
                                    completion:^(NSString *aUsername, EMError *aError) {
@@ -118,7 +118,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 利用创建的用户名和密码登录环信 IM，向对端用户发送消息。在下面示例中，向 user 2 发送文本消息。
 
-```Objective-C
+```objective-c
 // 创建消息
 EMTextMessageBody* textBody = [[EMTextMessageBody alloc] initWithText:@"hello"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"user2"

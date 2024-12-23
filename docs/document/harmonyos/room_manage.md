@@ -46,7 +46,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
 ChatClient.getInstance().chatroomManager()?.fetchPublicChatroomsFromServer(pageNumber, pageSize).then(roomArray => {
     // success logic
@@ -60,7 +60,7 @@ ChatClient.getInstance().chatroomManager()?.joinChatroom(chatRoomId).then(room =
 
 同时，你可以调用 `ChatroomManager#joinChatroom(roomId: string, leaveOtherRooms?: boolean, ext?: string)` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `ChatroomListener#onMemberJoined(roomId: string, userId: string, ext?: string)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。 
 
-```TypeScript
+```typescript
 const ext = "chatroom ext info";
 const leaveOtherRooms = true;
 ChatClient.getInstance().chatroomManager()?.joinChatroom(chatroomId, leaveOtherRooms, ext).then(room => {
@@ -77,7 +77,7 @@ ChatClient.getInstance().chatroomManager()?.joinChatroom(chatroomId, leaveOtherR
 示例代码如下：
 
 
-```TypeScript
+```typescript
 // 注册聊天室回调
 ChatClient.getInstance().chatroomManager()?.addListener(chatroomListener);
 // 移除聊天室回调
@@ -86,7 +86,7 @@ ChatClient.getInstance().chatroomManager()?.removeListener(chatroomListener);
 
 具体事件如下：
 
-```TypeScript
+```typescript
 interface ChatroomListener{
     /**
      * 有新成员加入聊天室。

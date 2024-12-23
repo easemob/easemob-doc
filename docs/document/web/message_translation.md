@@ -29,7 +29,7 @@ SDK 支持你通过调用 API 在项目中实现如下功能：
 
 无论是按需翻译还是自动翻译，都需先调用 `getSupportLanguages` 获取支持的翻译语言。示例代码如下：
 
-```JavaScript
+```javascript
 conn.getSupportedLanguages().then(res => console.log(res))
 ```
 
@@ -37,7 +37,7 @@ conn.getSupportedLanguages().then(res => console.log(res))
 
 接收方调用 `translateMessage` 将接收到的消息翻译成目标语言。示例代码如下：
 
-```JavaScript
+```javascript
 conn.translateMessage({text: 'hello', languages: [zh-Hans]})
 ```
 
@@ -47,7 +47,7 @@ conn.translateMessage({text: 'hello', languages: [zh-Hans]})
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 发送消息。
 let option = {
     chatType: 'singleChat',

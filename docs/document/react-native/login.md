@@ -10,7 +10,7 @@
   
 示例代码如下所示：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .createAccount(username, password)
   .then((value: any) => {
@@ -31,7 +31,7 @@ ChatClient.getInstance()
 
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
-```TypeScript
+```typescript
 // userId: 用户ID
 // userPassword: 用户密码或者token
 // isPassword: 是否使用密码
@@ -61,7 +61,7 @@ ChatClient.getInstance()
 
 你可以调用 `logout` 方法退出登录。退出登录后，你不会再收到其他用户发送的消息。
 
-```TypeScript
+```typescript
 // unbindDeviceToken: 是否基础推送token绑定
 ChatClient.getInstance()
   .logout(unbindDeviceToken)

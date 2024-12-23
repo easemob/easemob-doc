@@ -27,7 +27,7 @@
 
 你可以调用 `getAllConversations` 方法获取每个本地会话的未读消息数量，即`EMConversation#unreadMessagesCount`，然后累加该数量，得到所有会话的未读消息数，示例代码如下：
 
-```Objective-C
+```objective-c
 NSArray *conversations = [[EMClient sharedClient].chatManager getAllConversations];
 NSInteger unreadCount = 0;
 for (EMConversation *conversation in conversations) {
@@ -39,7 +39,7 @@ for (EMConversation *conversation in conversations) {
 
 你可以调用 `unreadMessagesCount` 方法获取本地指定会话的未读消息数，示例代码如下：
 
-```Objective-C
+```objective-c
 // 获取指定会话 ID 的会话。
 EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
 // 获取未读消息数。
@@ -50,7 +50,7 @@ NSInteger unreadCount = conversation.unreadMessagesCount;
 
 你可以调用 `EMChatManager#markAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零，示例代码如下：
 
-```Swift
+```swift
 let err = EMClient.shared().chatManager?.markAllConversationsAsRead()
     if err == nil {
         // 标记所有会话为已读成功
@@ -65,7 +65,7 @@ let err = EMClient.shared().chatManager?.markAllConversationsAsRead()
 
 你可以调用 `markAllMessagesAsRead` 方法对指定会话的未读消息数清零，示例代码如下：
 
-```Objective-C
+```objective-c
 EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
 [conversation markAllMessagesAsRead:nil];
 ```
@@ -74,7 +74,7 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 
 你可以调用 `markMessageAsReadWithId` 方法将指定会话的单条未读消息置为已读。
 
-```Objective-C
+```objective-c
 EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
 [conversation markMessageAsReadWithId:messageId error:nil];
 ```

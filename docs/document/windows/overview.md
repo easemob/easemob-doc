@@ -20,7 +20,7 @@
 
 初始化示例代码：
 
-```C#
+```csharp
 Options options = new Options(appkey);
 options.AutoLogin = false;
 options.UsingHttpsOnly = true;
@@ -63,7 +63,7 @@ SDKClient.Instance.InitWithOptions(options);
 
 若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
-```C#
+```csharp
 SDKClient.Instance.CreateAccount(username, password,
     callback: new CallBack(
 
@@ -97,7 +97,7 @@ SDK 不支持自动登录，只支持通过以下方式手动登录：
 
 1. **用户 ID + 密码** 登录是传统的登录方式。
 
-```C#
+```csharp
 SDKClient.Instance.Login(username, password,
     callback: new CallBack(
 
@@ -127,7 +127,7 @@ SDKClient.Instance.Login(username, password,
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 :::
 
-```C#
+```csharp
 SDKClient.Instance.Login(username, token, true,
     callback: new CallBack(
 
@@ -160,7 +160,7 @@ SDKClient.Instance.Login(username, token, true,
 
 登出也是异步返回。
 
-```C#
+```csharp
 SDKClient.Instance.Logout(false,
     callback: new CallBack(
     onSuccess: () =>
@@ -180,7 +180,7 @@ SDKClient.Instance.Logout(false,
 
 你需添加 `IConnectionDelegate#OnConnected` 回调。
 
-```C#
+```csharp
 // 监听器建议在初始化完成之后，登录之前设置，这样可确保收到登录通知。
 class ConnectionDelegate : IConnectionDelegate
 {
@@ -255,7 +255,7 @@ SDKClient.Instance.DeleteConnectionDelegate(connectionDelegate);
 
 SDK 默认不输出调试信息（所有日志，包括调试信息、警告和错误），只需输出错误日志。若需调试信息，首先要开启调试模式。
 
-```C#
+```csharp
 Options options = new Options("YourAppKey");
 options.DebugMode = true;
 SDKClient.Instance.InitWithOptions(options);

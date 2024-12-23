@@ -27,7 +27,7 @@
 
 初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
 
-```Swift    
+```swift    
 import ChatroomUIKit
     
 @UIApplicationMain
@@ -51,7 +51,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 
 在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
 
-```Swift
+```swift
 ChatroomUIKitClient.shared.login(userId: "user id", token: "token", completion: <#T##(ChatError?) -> Void#>)
 ```
 
@@ -68,7 +68,7 @@ ChatroomUIKitClient.shared.login(userId: "user id", token: "token", completion: 
 - 对于有刘海屏的机型，ChatroomView 的高度为以上算式的值加上底部安全区域的高度。
 :::
 
-```Swift
+```swift
 let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: "Chat room ID",frame: CGRect, ownerId: "Chatroom owner ID")       
 ```
 

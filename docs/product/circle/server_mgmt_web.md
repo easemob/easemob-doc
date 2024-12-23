@@ -39,7 +39,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
  let options = {
   name: 'server name',
   icon: 'image url',
@@ -70,7 +70,7 @@ WebIM.conn.createServer(options).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverId',
   userId: 'userId',
@@ -87,7 +87,7 @@ WebIM.conn.inviteUserToServer(options).then(res => {
 
   示例代码如下：
 
-  ```JavaScript
+  ```javascript
   let options = {
     serverId: 'serverId',
     inviter: 'userId',
@@ -101,7 +101,7 @@ WebIM.conn.inviteUserToServer(options).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverId',
   inviter: 'userId',
@@ -117,7 +117,7 @@ WebIM.conn.rejectServerInvite(options).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverId',
   name: 'new name',
@@ -138,7 +138,7 @@ WebIM.conn.updateServer(options).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.destroyServer({serverId: 'serverId'}).then(res => {
   console.log(res)
 })
@@ -150,7 +150,7 @@ WebIM.conn.destroyServer({serverId: 'serverId'}).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverId',
   tags: ['学习', '体育'],
@@ -166,7 +166,7 @@ WebIM.conn.addServerTags(options).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverId',
   tags: ['tagId', 'tagId'],
@@ -182,7 +182,7 @@ WebIM.conn.removeServerTags(options).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverId',
 }
@@ -199,7 +199,7 @@ WebIM.conn.getServerTags(options).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.getServers({keyword: 'keyword',type:'serverName'}).then(res => {
   console.log(res)
 })
@@ -211,7 +211,7 @@ WebIM.conn.getServers({keyword: 'keyword',type:'serverName'}).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.getServerDetail({serverId: 'serverId'}).then(res => {
   console.log(res)
 })
@@ -223,7 +223,7 @@ WebIM.conn.getServerDetail({serverId: 'serverId'}).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.getJoinedServers({pageSize: '10',cursor: ''}).then(res => {
   console.log(res)
 })
@@ -235,7 +235,7 @@ WebIM.conn.getJoinedServers({pageSize: '10',cursor: ''}).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.getServerMembers({serverId: 'serverId'}).then(res => {
   console.log(res)
 })
@@ -261,7 +261,7 @@ WebIM.conn.getServerMembers({serverId: 'serverId'}).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.joinServer({serverId: 'serverId'}).then(res => {
   console.log(res)
 })
@@ -279,7 +279,7 @@ WebIM.conn.joinServer({serverId: 'serverId'}).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.leaveServer({serverId: 'serverId'}).then(res => {
   console.log(res)
 })
@@ -290,7 +290,7 @@ WebIM.conn.leaveServer({serverId: 'serverId'}).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.removeServerMember({serverId: 'serverId',userId:'userId'}).then(res => {
   console.log(res)
 })
@@ -302,7 +302,7 @@ WebIM.conn.removeServerMember({serverId: 'serverId',userId:'userId'}).then(res =
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.isInServer({serverId: 'serverId'}).then(res => {
   console.log(res)
 })
@@ -313,7 +313,7 @@ WebIM.conn.isInServer({serverId: 'serverId'}).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.getServerRole({serverId: 'serverId'}).then(res => {
   console.log(res)
 })
@@ -327,7 +327,7 @@ WebIM.conn.getServerRole({serverId: 'serverId'}).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.setServerAdmin({serverId: 'serverId',userId:'userId'}).then(res => {
   console.log(res)
 })
@@ -341,7 +341,7 @@ WebIM.conn.setServerAdmin({serverId: 'serverId',userId:'userId'}).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.removeServerAdmin({serverId: 'serverId',userId:'userId'}).then(res => {
   console.log(res)
 })
@@ -351,7 +351,7 @@ WebIM.conn.removeServerAdmin({serverId: 'serverId',userId:'userId'}).then(res =>
 
 Circle 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通过设置此监听，获取频道分组中的事件。
 
-```JavaScript
+```javascript
 WebIM.conn.addEventHandler('CIRCLE',{
   onServerEvent:(msg) => {
 		switch (msg.operation){

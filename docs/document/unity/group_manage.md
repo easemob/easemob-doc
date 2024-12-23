@@ -54,7 +54,7 @@
 
 示例代码如下：
 
-```C#
+```csharp
 GroupOptions option = new GroupOptions(GroupStyle.PrivateMemberCanInvite);
 option.MaxCount = 100;
 SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, callback:new ValueCallBack<Group>(
@@ -85,7 +85,7 @@ SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, ca
 
 示例代码如下：
 
-```C#
+```csharp
 // 获取公开群组列表
 SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(callback: new ValueCallBack<CursorResult<GroupInfo>>(
     //result 为 CursorResult<GroupInfo>
@@ -117,7 +117,7 @@ SDKClient.Instance.GroupManager.JoinPublicGroup(groupId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
     onSuccess: () =>
     {
@@ -134,7 +134,7 @@ SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.LeaveGroup(groupId, new CallBack(
     onSuccess: () =>
     {
@@ -157,7 +157,7 @@ SDKClient.Instance.GroupManager.LeaveGroup(groupId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 // 根据群组 ID 从本地获取群组详情。
 Group group = SDKClient.Instance.GroupManager.GetGroupWithId(groupId);
 
@@ -177,7 +177,7 @@ SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(groupId, new Val
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.GetGroupMemberListFromServer(groupId, pageSize, cursor, callback: new ValueCallBack<CursorResult<string>>(
     onSuccess: (result) =>
     {
@@ -192,7 +192,7 @@ SDKClient.Instance.GroupManager.GetGroupMemberListFromServer(groupId, pageSize, 
 
 用户可以调用 `FetchJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.FetchJoinedGroupsFromServer(callback: new ValueCallBack<List<Group>>(
     onSuccess: (groupList) => {
     },
@@ -204,13 +204,13 @@ SDKClient.Instance.GroupManager.FetchJoinedGroupsFromServer(callback: new ValueC
 
 用户可以调用 `GetJoinedGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
 
-```C#
+```csharp
 List<Group> groupList = SDKClient.Instance.GroupManager.GetJoinedGroups();
 ```
 
 用户还可以调用 `FetchPublicGroupsFromServer` 方法从服务器分页获取公开群组列表。示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(pageSize, cursor, callback: new ValueCallBack<CursorResult<GroupInfo>>(
     onSuccess: (result) =>
     {
@@ -225,7 +225,7 @@ SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(pageSize, cursor, ca
 
 自 1.3.0 版本开始，你可以调用 `FetchMyGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.FetchMyGroupsCount(new ValueCallBack<int>(
     onSuccess: (count) =>
     {
@@ -242,7 +242,7 @@ SDKClient.Instance.GroupManager.FetchMyGroupsCount(new ValueCallBack<int>(
 
 所有群成员均可以调用 `BlockGroup` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息。示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.BlockGroup(groupId, new CallBack(
     onSuccess: () =>
     {
@@ -257,7 +257,7 @@ SDKClient.Instance.GroupManager.BlockGroup(groupId, new CallBack(
 
 群成员可以调用 `UnBlockGroup` 方法解除屏蔽群消息。示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.UnBlockGroup(groupId, new CallBack(
     onSuccess: () =>
     {
@@ -274,7 +274,7 @@ SDKClient.Instance.GroupManager.UnBlockGroup(groupId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(currentGroupId, new ValueCallBack<Group>(
     onSuccess: (group) => {
         // 检查用户是否屏蔽了该群的消息
@@ -295,7 +295,7 @@ SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(currentGroupId, 
 
 示例代码如下：
 
-```C#
+```csharp
 // 实现监听器以及定义监听器对象
 // 在本例中，用户 A 为当前用户。
 public class GroupManagerDelegate : IGroupManagerDelegate {

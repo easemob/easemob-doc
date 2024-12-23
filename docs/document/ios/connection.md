@@ -8,7 +8,7 @@
 
 你可以通过注册连接监听确认连接状态。
 
-```Swift
+```swift
 override func viewDidLoad() {
     ...
     // 注册连接状态监听，在 SDK 初始化之后调用。

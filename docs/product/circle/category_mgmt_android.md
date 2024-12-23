@@ -38,7 +38,7 @@
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().createCategory(serverId, categoryName, new EMValueCallBack<EMCircleCategory>() {
     @Override
     public void onSuccess(EMCircleCategory value) {
@@ -58,7 +58,7 @@ EMClient.getInstance().chatCircleManager().createCategory(serverId, categoryName
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().updateCategory(serverId, categoryId, categoryName, new EMValueCallBack<EMCircleCategory>() {
     @Override
     public void onSuccess(EMCircleCategory value) {
@@ -78,7 +78,7 @@ EMClient.getInstance().chatCircleManager().updateCategory(serverId, categoryId, 
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().destroyCategory(serverId, categoryId, new EMCallBack() {
                     @Override
                     public void onSuccess() {
@@ -98,7 +98,7 @@ EMClient.getInstance().chatCircleManager().destroyCategory(serverId, categoryId,
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchCategoriesInServer(serverID, 20, null, new EMValueCallBack<EMCursorResult<EMCircleCategory>>() {
             @Override
             public void onSuccess(EMCursorResult<EMCircleCategory> value) {
@@ -122,7 +122,7 @@ EMClient.getInstance().chatCircleManager().fetchCategoriesInServer(serverID, 20,
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().transferChannel(serverId,channelId, newCategoryId, new EMCallBack() {
                     @Override
                     public void onSuccess() {
@@ -140,7 +140,7 @@ EMClient.getInstance().chatCircleManager().transferChannel(serverId,channelId, n
 
 `EMCircleManager` 中提供频道分组事件的监听接口。开发者可以通过设置此监听，获取频道分组中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
-```Java
+```java
 EMCircleCategoryListener chatCategoryListener = new EMCircleCategoryListener() {
     //创建了频道分组。社区所有成员（除创建者外）会收到该事件。
     @Override

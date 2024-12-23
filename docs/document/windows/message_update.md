@@ -25,13 +25,13 @@
 
 - 直接调用 `UpdateMessage` 方法更新 SDK 本地数据库中的消息。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.UpdateMessage(message):
 ```
 
 - 若正在使用 `Conversation` 类，可以先获取会话，再调用 `UpdateMessage` 方法更新 SDK 本地数据库会话中的消息。
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, type);
 conv.UpdateMessage(message);
 ```

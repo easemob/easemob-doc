@@ -29,7 +29,7 @@
 
  1. 开启已读回执功能，即 SDK 初始化时设置 `Options#RequireAck` 为 `true`。
 
- ```C#
+ ```csharp
 // 设置是否需要接收方已读确认,默认为 true
 options.RequireAck = true;
  ```
@@ -40,7 +40,7 @@ options.RequireAck = true;
 
 若会话中存在多条未读消息，建议调用该方法，因为若调用发送消息已读回执方法 `SendMessageReadAck`，则需要调用多次。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.SendConversationReadAck(conversationId, new CallBack(
     onSuccess: () =>
     {
@@ -59,7 +59,7 @@ SDKClient.Instance.ChatManager.SendConversationReadAck(conversationId, new CallB
 对于群组聊天，会话已读回执只用于清空服务端的群组会话的未读数，消息发送方不会通过 `OnConversationRead` 回调收到会话已读回执。
 :::
 
-```C#
+```csharp
 public class MyDelegate : IChatManagerDelegate
 {
 	//...	

@@ -12,7 +12,7 @@
 
 初始化示例代码：
 
-```Swift
+```swift
 let options = EMOptions(appkey: "Your appkey")
 ......// 其他 EMOptions 配置。
 EMClient.shared().initializeSDK(with: options)

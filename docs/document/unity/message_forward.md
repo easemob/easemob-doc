@@ -30,7 +30,7 @@
 该功能也支持转发单条合并消息。
 :::
 
-```C#
+```csharp
 // messageId 为要转发的消息 ID。
 //string messageId = "xxx";
 

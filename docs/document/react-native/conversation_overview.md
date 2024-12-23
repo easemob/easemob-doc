@@ -48,7 +48,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager.addMessageListener({
   onConversationRead(from: string, to?: string): void {
     // 收到会话已读的事件。该事件在以下场景中触发：

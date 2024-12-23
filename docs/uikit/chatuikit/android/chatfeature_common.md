@@ -108,7 +108,7 @@ UIKit 提供封装的 `ChatUIKitSearchActivity` 搜索页面，用户根据 `Cha
 
 例如，搜索黑名单的示例代码如下 ：
 
-```Kotlin
+```kotlin
     
     private val returnSearchClickResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -142,7 +142,7 @@ UIKit 提供封装的 `ChatUIKitSearchActivity` 搜索页面，用户根据 `Cha
 
 示例代码如下：
 
-```Kotlin
+```kotlin
     ChatUIKitClient.getConfig()?.chatConfig?.enableMention == false
 ```
 

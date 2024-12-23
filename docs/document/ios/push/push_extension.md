@@ -6,7 +6,7 @@
 
 ## 自定义推送字段
 
-```Objective-C
+```objective-c
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_apns_ext":@{@"extern":@"custom string"}}; 
@@ -61,7 +61,7 @@ message.chatType = EMChatTypeChat;
 
 更多内容可以参考苹果官方文档：[生成远程推送通知](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification?language=objc)。
 
-```Objective-C
+```objective-c
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_apns_ext":@{@"em_push_sound":@"custom.caf"}};
@@ -109,7 +109,7 @@ message.chatType = EMChatTypeChat;
 
 使用该方式设置后，本条消息会忽略接收方的免打扰设置，不论是否处于免打扰时间段都会正常向对方推送通知；
 
-```Objective-C
+```objective-c
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_force_notification":@YES};
@@ -130,7 +130,7 @@ message.ext = @{@"em_force_notification":@YES};
 
 发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方在发送消息时设置，而免打扰模式为接收方设置在指定时间段内不接收推送通知。
 
-```Objective-C
+```objective-c
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_ignore_notification":@YES};
@@ -149,7 +149,7 @@ message.ext = @{@"em_ignore_notification":@YES};
 
 如果你的目标平台是 iOS 10.0 或以上版本，你可以参考如下代码实现 [`UNNotificationServiceExtension`](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension?language=objc) 的富文本推送功能。
 
-```Objective-C
+```objective-c
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_apns_ext":@{@"em_push_mutable_content":@YES}}; 
@@ -168,7 +168,7 @@ message.chatType = EMChatTypeChat;
 
 接收方收到富文本推送时，会进入回调 `didReceiveNotificationRequest:withContentHandler:`，示例代码如下：
 
-```Objective-C
+```objective-c
 - (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
     // 推送扩展字段
     NSDictionary *userInfo = request.content.userInfo;

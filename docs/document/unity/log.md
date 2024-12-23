@@ -10,7 +10,7 @@
 
 SDK 默认不输出调试信息（所有日志，包括调试信息、警告和错误），只需输出错误日志。若需调试信息，首先要开启调试模式。
 
-```C#
+```csharp
 Options options = new Options("YourAppKey");
 options.DebugMode = true;
 SDKClient.Instance.InitWithOptions(options);

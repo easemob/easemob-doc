@@ -34,7 +34,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 //cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
 //pageSize：每页期望返回的成员数,最大值为 1,000。
 ChatClient.getInstance()
@@ -55,7 +55,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.leaveChatRoom(roomId)
   .then(() => {
@@ -70,7 +70,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatOptions options = new ChatOptions();
 options.deleteMessagesAsExitChatRoom = false;
 ```
@@ -85,7 +85,7 @@ options.deleteMessagesAsExitChatRoom = false;
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.removeChatRoomMembers(roomId, members)
   .then(() => {
@@ -117,7 +117,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.blockChatRoomMembers(roomId, members)
   .then(() => {
@@ -134,7 +134,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.unblockChatRoomMembers(roomId, members)
   .then(() => {
@@ -151,7 +151,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.fetchChatRoomBlockList(roomId, pageNum, pageSize)
   .then((members) => {
@@ -174,7 +174,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.fetchChatRoomAllowListFromServer(roomId)
   .then((members) => {
@@ -191,7 +191,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.addMembersToChatRoomAllowList(roomId, members)
   .then((members) => {
@@ -208,7 +208,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.removeMembersFromChatRoomAllowList(roomId, members)
   .then((members) => {
@@ -223,7 +223,7 @@ ChatClient.getInstance()
 
 所有聊天室成员可以调用 `isMemberInChatRoomAllowList` 方法检查自己是否在白名单中，示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.isMemberInChatRoomAllowList(roomId)
   .then((members) => {
@@ -246,7 +246,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // duration：禁言时间。若传 -1，表示永久禁言。
 ChatClient.getInstance()
   .roomManager.muteChatRoomMembers(roomId, muteMembers, duration)
@@ -268,7 +268,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.unMuteChatRoomMembers(roomId, unMuteMembers)
   .then(() => {
@@ -285,7 +285,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.fetchChatRoomMuteList(roomId, pageNum, pageSize)
   .then((members) => {
@@ -308,7 +308,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.muteAllChatRoomMembers(roomId)
   .then((members) => {
@@ -325,7 +325,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.unMuteAllChatRoomMembers(roomId)
   .then((members) => {
@@ -344,7 +344,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.changeOwner(roomId, newOwner)
   .then(() => {
@@ -361,7 +361,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.addChatRoomAdmin(roomId, admin)
   .then(() => {
@@ -378,7 +378,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.removeChatRoomAdmin(roomId, admin)
   .then(() => {

@@ -89,7 +89,7 @@
 
 在 **TestCode.cs** 头部添加以下命名空间：
 
-```C#
+```csharp
 using AgoraChat;
 using AgoraChat.MessageBody;
 ```
@@ -98,7 +98,7 @@ using AgoraChat.MessageBody;
 
 在 `InitSDK` 方法中添加以下代码完成 SDK 初始化：
 
-```C#
+```csharp
 var options = new Options("appkey"); //将该参数设置为你的 App Key
 SDKClient.Instance.InitWithOptions(options);
 ```
@@ -107,7 +107,7 @@ SDKClient.Instance.InitWithOptions(options);
 
 在 `SignUpAction` 方法尾部添加以下代码，创建即时通讯系统的登录账户，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callback: new CallBack(
   onSuccess: () => {
     AddLogToLogText("sign up sdk succeed");
@@ -126,7 +126,7 @@ SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callbac
 
 在 `SignInAction` 方法尾部添加以下代码，使用账号登录即时通讯系统，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
   onSuccess: () => {
     AddLogToLogText("sign in sdk succeed");
@@ -155,7 +155,7 @@ SDKClient.Instance.LoginWithToken(username: Username.text, pwdOrToken: Password.
 
 在 `SignOutAction` 方法尾部添加以下代码，登出即时通讯系统，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.Logout(true, callback: new CallBack(
   onSuccess: () => {
     AddLogToLogText("sign out sdk succeed");
@@ -170,7 +170,7 @@ SDKClient.Instance.Logout(true, callback: new CallBack(
 
 在 `SendMessageAction` 方法尾部添加以下代码，创建和发送一条文本消息，示例代码如下：
 
-```C#
+```csharp
 Message msg = Message.CreateTextSendMessage(SignChatId.text, MessageContent.text);
 SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
   onSuccess: () => {
@@ -190,7 +190,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 在类声明的头部继承 `IChatManagerDelegate` 对象。
 
-```C#
+```csharp
 public class TestCode : MonoBehaviour, IChatManagerDelegate
 
 ```
@@ -199,7 +199,7 @@ public class TestCode : MonoBehaviour, IChatManagerDelegate
 
 由于这里只测试消息接收回调，所以其他回调暂时无需实现，保留空函数即可。
 
-```C#
+```csharp
 public void OnMessagesReceived(List<Message> messages)
 {
     foreach (Message msg in messages) {
@@ -290,13 +290,13 @@ public void OnMessagePinChanged(string messageId, string conversationId, bool is
 
 在 `AddChatDelegate` 方法中添加以下代码，将 `TestCode` 对象实例加入监听列表。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.AddChatManagerDelegate(this);
 ```
 
 在 `RemoveChatDelegate` 方法中添加以下代码，在对象释放时将其在监听列表中移除。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 ```
 

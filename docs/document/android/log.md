@@ -10,7 +10,7 @@
 
 SDK 默认输出调试信息（所有日志，包括调试信息、警告和错误），如果只需输出错误日志，需要关闭调试模式。
 
-```Java
+```java
 // 需要在 SDK 初始化后调用
 EMClient.getInstance().setDebugMode(false);
 ```

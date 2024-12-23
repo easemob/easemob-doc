@@ -52,7 +52,7 @@
 
 1. 调用 `getPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。示例代码如下：
 
-```Java
+```java
 EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, cursor);
 List<EMGroupInfo> groupsList = result.getData();
 String cursor = result.getCursor();
@@ -64,13 +64,13 @@ String cursor = result.getCursor();
 
    示例代码如下：
 
-   ```Java
+   ```java
    EMClient.getInstance().groupManager().joinGroup(groupId);
    ```
 
    - 调用 `applyJoinToGroup` 方法加入需要群主或管理员审批的公开群，即 `EMGroupStyle` 设置为 `EMGroupStylePublicJoinNeedApproval`。示例代码如下：
 
-   ```Java
+   ```java
    EMClient.getInstance().groupManager().applyJoinToGroup(groupId, "your reason");
    ```
 
@@ -82,7 +82,7 @@ String cursor = result.getCursor();
 
    示例代码如下：
 
-   ```Java
+   ```java
    EMClient.getInstance().groupManager().acceptApplication(username, groupId);
    ```
 
@@ -90,7 +90,7 @@ String cursor = result.getCursor();
 
    示例代码如下：
 
-   ```Java
+   ```java
    EMClient.getInstance().groupManager().declineApplication(username, groupId, "your reason");
    ```
 
@@ -104,7 +104,7 @@ String cursor = result.getCursor();
 
    - 群主或群管理员加人，需要调用 `addUsersToGroup` 方法：
 
-   ```Java
+   ```java
    EMClient.getInstance().groupManager().addUsersToGroup(groupId, newmembers);
    ```
 
@@ -112,7 +112,7 @@ String cursor = result.getCursor();
 
    对于私有群，`EMGroupStyle` 设置为 `EMGroupStylePrivateMemberCanInvite` 时，所有群成员均可以邀请人进群。
 
-   ```Java
+   ```java
    EMClient.getInstance().groupManager().inviteUser(groupId, newmembers, "your reason");
    ```
 
@@ -120,13 +120,13 @@ String cursor = result.getCursor();
 
    - 受邀用户同意加入群组，需要调用 `acceptInvitation` 方法。
 
-   ```Java
+   ```java
    EMClient.getInstance().groupManager().acceptInvitation(groupId, inviter);
    ```
 
    - 受邀人拒绝入群组，需要调用 `declineInvitation` 方法。
 
-   ```Java
+   ```java
    EMClient.getInstance().groupManager().declineInvitation(groupId, inviter, "your reason");
    ```
 
@@ -140,7 +140,7 @@ String cursor = result.getCursor();
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncLeaveGroup(String, EMCallBack)。
 EMClient.getInstance().groupManager().leaveGroup(groupId);
@@ -152,7 +152,7 @@ EMClient.getInstance().groupManager().leaveGroup(groupId);
 
 - 移出单个群成员，示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncRemoveUserFromGroup(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
@@ -160,7 +160,7 @@ EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
 
 - 批量移出群成员，示例代码如下：
 
-```Java
+```java
 // 异步方法。
 EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userList, new EMCallBack() {
             @Override
@@ -191,7 +191,7 @@ EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userL
 
 示例代码如下：
 
-```Java
+```java
     Map<String,String> attrMap=new HashMap();
     attrMap.put("key","value");
 
@@ -214,7 +214,7 @@ EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userL
 
 示例代码如下：
 
-```Java
+```java
     EMClient.getInstance().groupManager().asyncFetchGroupMemberAllAttributes(groupId, userId, new EMValueCallBack<Map<String, Map<String, String>>>() {
         @Override
         public void onSuccess(Map<String, Map<String, String>> value) {
@@ -238,7 +238,7 @@ EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userL
 
 示例代码如下：
 
-```Java
+```java
    // keyList：要获取自定义属性的 key 的数组。若 keyList 为空数组或不传则获取这些成员的所有自定义属性。
     EMClient.getInstance().groupManager().asyncFetchGroupMembersAttributes(groupId, userIds, keyList, new EMValueCallBack<Map<String, Map<String, String>>>() {
         @Override
@@ -261,7 +261,7 @@ EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userL
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncChangeOwner(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().changeOwner(groupId, newOwner);
@@ -275,7 +275,7 @@ EMClient.getInstance().groupManager().changeOwner(groupId, newOwner);
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncAddGroupAdmin(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().addGroupAdmin(groupId, admin);
@@ -289,7 +289,7 @@ EMClient.getInstance().groupManager().addGroupAdmin(groupId, admin);
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncRemoveGroupAdmin(String, String, EMValueCallBack)。
 EMClient.getInstance().groupManager().removeGroupAdmin(groupId, admin);
@@ -299,7 +299,7 @@ EMClient.getInstance().groupManager().removeGroupAdmin(groupId, admin);
 
 获取群管理员列表示例如下：
 
-```Java
+```java
 // 获取内存中管理员列表。
 List<String> adminList = group.getAdminList();
 ```
@@ -316,7 +316,7 @@ List<String> adminList = group.getAdminList();
 
 即使开启了群组全员禁言，群组白名单中的成员仍可以发送群组消息。不过，禁言列表上的用户即使加入了群白名单仍无法在群组中发送消息。
 
-```Java
+```java
 // 异步方法。
 public void addToGroupWhiteList(final String groupId, final List<String> members, final EMCallBack callBack);
 ```
@@ -327,7 +327,7 @@ public void addToGroupWhiteList(final String groupId, final List<String> members
 
 群成员被移除群白名单后，该群成员及其他未操作的群管理员和群主将会收到群组事件回调 `EMGroupChangeListener#onWhiteListRemoved`。
 
-```Java
+```java
 // 异步方法。
 public void removeFromGroupWhiteList(final String groupId, final List<String> members, final EMCallBack callBack);
 ```
@@ -336,7 +336,7 @@ public void removeFromGroupWhiteList(final String groupId, final List<String> me
 
 所有群成员可以调用 `checkIfInGroupWhiteList` 方法检查自己是否在群白名单中，示例代码如下：
 
-```Java
+```java
 // 异步方法。
 public void checkIfInGroupWhiteList(final String groupId, EMValueCallBack<Boolean> callBack)
 ```
@@ -345,7 +345,7 @@ public void checkIfInGroupWhiteList(final String groupId, EMValueCallBack<Boolea
 
 仅群主和群管理员可以调用 `fetchGroupWhiteList` 方法从服务器获取当前群组的白名单。
 
-```Java
+```java
 // 异步方法。
 public void fetchGroupWhiteList(final String groupId, final EMValueCallBack<List<String>> callBack);
 ```
@@ -358,7 +358,7 @@ public void fetchGroupWhiteList(final String groupId, final EMValueCallBack<List
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncBlockUser(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().blockUser(groupId, username);
@@ -370,7 +370,7 @@ EMClient.getInstance().groupManager().blockUser(groupId, username);
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncUnblockUser(String, String, EMCallBack)。
 EMClient.getInstance().groupManager().unblockUser(groupId, username);
@@ -382,7 +382,7 @@ EMClient.getInstance().groupManager().unblockUser(groupId, username);
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncGetBlockedUsers(String, EMValueCallBack)。
 EMClient.getInstance().groupManager().getBlockedUsers(groupId);
@@ -398,7 +398,7 @@ EMClient.getInstance().groupManager().getBlockedUsers(groupId);
 
 仅群主和群管理员可以调用 `muteGroupMembers` 方法将指定成员添加至群组禁言列表。群成员被群主或者群管理员加入禁言列表中后，被禁言成员和其他未操作的管理员或者群主将会收到群组事件回调 `EMGroupChangeListener#onMuteListAdded`。群成员被加入群禁言列表后，将不能够发言，即使其被加入群白名单也不能发言。
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncMuteGroupMembers(String, List, long, EMValueCallBack)。
 // `duration`：禁言时间。传 -1 表示永久禁言。
@@ -411,7 +411,7 @@ EMClient.getInstance().groupManager().muteGroupMembers(groupId, muteMembers, dur
 
 群成员被移出禁言列表后可以在群组中正常发送消息，被移出的群成员及其他未操作的管理员或者群主将会收到群组事件回调 `EMGroupChangeListener#onMuteListRemoved`。
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncUnMuteGroupMembers(String, List, EMValueCallBack)。
 EMClient.getInstance().groupManager().unMuteGroupMembers(String groupId, List<String> members);
@@ -423,7 +423,7 @@ EMClient.getInstance().groupManager().unMuteGroupMembers(String groupId, List<St
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchGroupMuteList(String, int, int, EMValueCallBack)。
 EMClient.getInstance().groupManager().fetchGroupMuteList(String groupId, int pageNum, int pageSize);
@@ -439,7 +439,7 @@ EMClient.getInstance().groupManager().fetchGroupMuteList(String groupId, int pag
  
 示例代码如下：
 
-```Java
+```java
 // 异步方法。
 public void muteAllMembers(final String groupId, final EMValueCallBack<EMGroup> callBack);
 ```
@@ -450,7 +450,7 @@ public void muteAllMembers(final String groupId, final EMValueCallBack<EMGroup> 
 
 示例代码如下：
 
-```Java
+```java
 // 异步方法。
 public void unmuteAllMembers(final String groupId, final EMValueCallBack<EMGroup> callBack);
 ```

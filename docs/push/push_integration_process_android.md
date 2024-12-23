@@ -49,7 +49,7 @@ implementation 'io.hyphenate:hyphenate-push:1.0.0'
 
 ### 初始化
 
-```Java
+```java
 EMPushClientOptions options = new EMPushClientOptions();
 //启用厂商推送，参考 IM 文档集成厂商推送。启用推送 API 如下：
 EMPushConfig.Builder builder = new EMPushConfig.Builder(context);
@@ -72,14 +72,14 @@ EMPushClient.getInstance().init(this, options);
 
 1. 注册用户。
 
-```Java
+```java
 //注册失败会抛出 HyphenateException。
 EMPushClient.getInstance().registerWithUsername(username, pwd);//同步方法，需在子线程里执行
 ```
 
 1. 注册连接状态监听。
 
-```Java
+```java
 EMPushClient.getInstance().addConnectionListener{
     @Override
     public void onConnected() {
@@ -95,13 +95,13 @@ EMPushClient.getInstance().addConnectionListener{
 
 1. 登录连接服务器
 
-```Java
+```java
 EMPushClient.getInstance().connectWithUsername(username, password, new EMCallBack(){});
 ```
 
 1. 注销登录
 
-```Java
+```java
 EMPushClient.getInstance().disconnect(true, new EMCallBack(){});
 ```
 
@@ -109,14 +109,14 @@ EMPushClient.getInstance().disconnect(true, new EMCallBack(){});
 
 厂商推送的点击事件上报，需要在 App 端调用 API 上报实现统计。
 
-```Java
+```java
 //taskId 与 provider 需从推送数据里获取，如果获取 taskId 失败则传空字符串
 EMPushClient.getInstance().reportPushAction(taskId, provider, action, new EMCallBack(){});
 ```
 
 以小米推送为例，在厂商的点击回调里去解析上报点击事件。
 
-```Java
+```java
 public void onNotificationMessageClicked(Context context, MiPushMessage message) {
 
     String content = message.getContent();

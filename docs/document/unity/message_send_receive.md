@@ -23,7 +23,7 @@
 
 示例代码：
 
-```C#
+```csharp
 //创建一条文本消息，`content` 为消息文字内容。
 // `conversationId` 为消息接收方，单聊为对端用户的 ID，群聊为群组 ID，聊天室时为聊天室 ID。
 Message msg = Message.CreateTextSendMessage(conversationId, content);
@@ -55,7 +55,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 对于聊天室消息，你可以通过消息的 `Message#Broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
-```C#
+```csharp
 //继承并实现 IChatManagerDelegate。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -90,7 +90,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 参考如下示例代码创建并发送语音消息：
 
-```C#
+```csharp
 // localPath 为语音文件的本地资源路径，`displayName` 为消息显示名称，语音消息可以设置为空 ""。
 // fileSize 为语音文件大小，duration 为语音时长（秒）。
 Message msg = Message.CreateVoiceSendMessage(toChatUsername, localPath, displayName, fileSize, duration);
@@ -119,7 +119,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 接收方收到语音消息后，参考如下示例代码获取语音消息的附件：
 
-```C#
+```csharp
 // 注意：这里的 "Message ID" 是消息发送成功以后（CallBack 中的 onSuccess 被触发以后），被发送消息的 ID。
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
 if (msg != null)
@@ -143,7 +143,7 @@ else {
 
 图片消息默认会被压缩后发出，可通过设置 `original` 参数为 `true` 发送原图。
 
-```C#
+```csharp
 //`localPath` 为图片本地资源路径。
 //`displayName` 为图片显示名称。
 //`fileSize` 为用户上传的图片文件大小，单位为字节。
@@ -179,7 +179,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 下载完成后，调用相应消息 `msg.Body` 的 `ThumbnailLocalPath` 获取缩略图路径。
 
-```C#
+```csharp
 //注意：这里的 "Message ID" 是消息发送成功以后（`CallBack` 中的 `onSuccess` 被触发以后），被发送消息的 ID。
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
 if (msg != null)
@@ -210,7 +210,7 @@ else {
 
 1. 创建并发送视频消息。
 
-```C#
+```csharp
 Message msg = Message.CreateVideoSendMessage(toChatUsername, localPath, displayName, thumbnailLocalPath, fileSize, duration, width, height);
 
 //发送消息。
@@ -232,7 +232,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 视频文件本身需要通过 `SDKClient.Instance.ChatManager.DownloadAttachment` 下载，下载完成后，使用相应消息 `Body` 的 `LocalPath` 成员获取视频文件路径。
 
-```C#
+```csharp
 // 接收到视频消息需先下载附件才能打开。
 SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
   onSuccess: () => {
@@ -266,7 +266,7 @@ SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
 
 1. 创建并发送文件消息。
 
-```C#
+```csharp
 // localPath 为文件本地路径，displayName 为消息显示名称，fileSize 为文件大小。
 Message msg = Message.CreateFileSendMessage(toChatUsername,localPath, displayName, fileSize);
 
@@ -316,7 +316,7 @@ else {
   
 发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。 
 
-```C#
+```csharp
 //`latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容，`buildingName` 为建筑名称。
 Message msg = Message.CreateLocationSendMessage(toChatUsername, latitude, longitude, locationAddress, buildingName);
 
@@ -347,7 +347,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 1. 创建和发送透传消息。
 
-```C#
+```csharp
 //`action` 可以自定义。
 string action = "actionXXX";
 Message msg = Message.CreateCmdSendMessage(toChatUsername, action);
@@ -363,7 +363,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 2. 接收方通过 `OnMessagesReceived` 和 `OnCmdMessagesReceived` 回调接收透传消息，方便用户进行不同的处理。
 
-```C#
+```csharp
 // 继承并实现 `IChatManagerDelegate`。
 public class ChatManagerDelegate : IChatManagerDelegate {
 
@@ -391,7 +391,7 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 1. 创建和发送自定义类型消息。
 
-```C#
+```csharp
 //`event` 为字符串类型的自定义事件，比如礼物消息，可以设置：
 string event = "gift";
 
@@ -442,7 +442,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 String title = "A和B的聊天记录";
 String summary = "A:这是A的消息内容\nB:这是B的消息内容";
 String compatibleText = "您当前的版本不支持该消息，请升级到最新版本";
@@ -471,7 +471,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 - 若附件已存在，该方法会直接解析附件并返回原始消息列表。
 - 若附件不存在，该方法首先下载附件，然后解析附件并返回原始消息列表。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.FetchCombineMessageDetail(msg, new ValueCallBack<List<Message>>(
     onSuccess: (list) => {
         // 处理并展示消息列表
@@ -503,7 +503,7 @@ SDKClient.Instance.ChatManager.FetchCombineMessageDetail(msg, new ValueCallBack<
 
 下面以文本消息为例介绍如何发送定向消息，示例代码如下：
 
-```C#
+```csharp
 // 创建一条文本消息。
 Message msg = Message.CreateTextSendMessage(groupId, content);
 // 会话类型：群组和聊天室聊天，分别为 `Group` 和 `Room`。
@@ -534,7 +534,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
 
-```C#
+```csharp
 Message msg = Message.CreateTextSendMessage(toChatUsername, content);
 
 // 增加自定义属性。
@@ -573,7 +573,7 @@ if (found) {
 
 对于聊天室消息，可设置消息优先级，包括高、普通和低优先级。示例代码如下：
 
-```C#
+```csharp
 //创建一条文本消息，`content` 为消息文字内容。
 // `conversationId` 为消息接收方，单聊为对端用户的 ID，群聊为群组 ID，聊天室时为聊天室 ID。
 Message msg = Message.CreateTextSendMessage(conversationId, content);

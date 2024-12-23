@@ -38,7 +38,7 @@
 
 示例代码如下：
 
-```Java
+```java
 // limit: 每页返回的会话数。取值范围为 [1,50]。
 // cursor: 开始获取数据的游标位置。若获取数据时传 `null` 或者空字符串（""），SDK 从最新活跃的会话开始获取。
 int limit = 10;
@@ -69,7 +69,7 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cu
 若使用该功能，需将 SDK 升级至 4.6.0。
 :::
 
-```Java
+```java
 EMClient.getInstance().chatManager().asyncFilterConversationsFromDB(new EMCustomConversationFilter() {
     @Override
     public boolean filter(EMConversation emConversation) {
@@ -106,7 +106,7 @@ EMClient.getInstance().chatManager().asyncFilterConversationsFromDB(new EMCustom
 
 示例代码如下：
 
-```Java
+```java
 List<EMConversation> conversations = EMClient.getInstance().chatManager().getAllConversationsBySort();
 ```
 
@@ -126,7 +126,7 @@ SDK 初始化时，你可以设置 `EMOptions#setAutoLoadAllConversations` 方�
 
 你可以调用 `cleanConversationsMemoryCache` 方法，清除本地内存中的所有会话，从而释放内存。
 
-```Java
+```java
 EMClient.getInstance().chatManager().cleanConversationsMemoryCache();
 ```
 
@@ -138,7 +138,7 @@ EMClient.getInstance().chatManager().cleanConversationsMemoryCache();
 2. 获取会话前清空内存中的会话：调用 `asyncFilterConversationsFromDB` 获取过滤的会话时，将 `cleanConversationsCache` 参数传 `true`。
 3. 监控到内存较高时（开发者自己实现）释放内存: 调用 `cleanConversationsMemoryCache` 方法清空内存中的会话，释放内存。
 
-```Java
+```java
 //step 1：SDK 初始化时，关闭自动加载会话开关。
 EMOptions options = initChatOptions(context);
 options.setAutoLoadAllConversations(false);

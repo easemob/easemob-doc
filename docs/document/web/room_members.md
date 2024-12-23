@@ -31,7 +31,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
 //pageNum：当前页码，从 1 开始。
 //pageSize：每页期望返回的成员数,最大值为 1,000。
 let option = {
@@ -50,7 +50,7 @@ conn.listChatRoomMembers(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     roomId: 'roomId'
 }
@@ -63,7 +63,7 @@ conn.leaveChatRoom(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId",
     username: "userId"
@@ -88,7 +88,7 @@ conn.removeChatRoomMember(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId",
 };
@@ -105,7 +105,7 @@ conn.getChatRoomBlocklist(option);
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: 'chatRoomId',
     usernames: ['user1', 'user2'] // 用户 ID 数组。
@@ -119,7 +119,7 @@ conn.blockChatRoomMembers(option).then(res => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId",
     usernames: ["user1", "user2"] // 用户 ID 数组。
@@ -139,7 +139,7 @@ conn.unblockChatRoomMembers(option).then(res => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId"
 }
@@ -156,7 +156,7 @@ conn.getChatRoomAllowlist(option).then(res => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId",
     userName: "user"
@@ -170,7 +170,7 @@ conn.isInChatRoomAllowlist(option);
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId",
     users: ["user1", "user2"] // 成员 ID 列表。
@@ -184,7 +184,7 @@ conn.addUsersToChatRoomAllowlist(option);
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId",
     userName: "userId"
@@ -202,7 +202,7 @@ conn.removeChatRoomAllowlistMember(option);
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId"
 };
@@ -219,7 +219,7 @@ conn.getChatRoomMuteList(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId", // 聊天室 ID。
     username: 'userId',     // 被禁言的聊天室成员的 ID。
@@ -238,7 +238,7 @@ conn.muteChatRoomMember(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId",
     username: 'username'
@@ -255,7 +255,7 @@ conn.unmuteChatRoomMember(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId"
 };
@@ -268,7 +268,7 @@ conn.disableSendChatRoomMsg(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId"
 };
@@ -285,7 +285,7 @@ conn.enableSendChatRoomMsg(option).then((res) => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: 'chatRoomId',
     username: 'userId'
@@ -299,7 +299,7 @@ conn.setChatRoomAdmin(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: 'chatRoomId',
     username: 'userId'

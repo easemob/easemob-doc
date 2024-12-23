@@ -29,7 +29,7 @@
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
 :::
 
-```Java
+```java
  EMClient.getInstance().chatManager().asyncDeleteAllMsgsAndConversations(true, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -56,7 +56,7 @@
 
 示例代码如下：
 
-```Java 
+```java 
 // 按时间删除消息
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
 conversation.removeMessagesFromServer(time, new EMCallBack() {
@@ -89,7 +89,7 @@ conversation.removeMessagesFromServer(time, new EMCallBack() {
 
 你可以删除本地指定会话的所有消息，示例代码如下：
 
-```Java
+```java
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 if(conversation != null) {
     conversation.clearAllMessages();
@@ -100,7 +100,7 @@ if(conversation != null) {
 
 你可以删除本地指定会话在一段时间内的本地消息，示例代码如下：
 
-```Java
+```java
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 if(conversation != null) {
     conversation.removeMessages(startTime, endTime);
@@ -111,7 +111,7 @@ if(conversation != null) {
 
 你可以删除本地单个会话的指定消息，示例代码如下：
 
-```Java
+```java
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 if(conversation != null) {
     conversation.removeMessage(messageId);

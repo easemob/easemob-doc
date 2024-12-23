@@ -22,7 +22,7 @@
 
 ## 使用示例
 
-```Kotlin
+```kotlin
 class ConversationListActivity: AppCompactActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class ConversationListActivity: AppCompactActivity() {
 
 `ChatUIKitConversationListFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置，目前提供的设置项如下：
 
-```Kotlin
+```kotlin
 ChatUIKitConversationListFragment.Builder()
     .useTitleBar(true)
     .setTitleBarTitle("title")
@@ -88,7 +88,7 @@ ChatUIKitConversationListFragment.Builder()
 
 1. 创建自定义适配器 `CustomConversationListAdapter`，继承自 `ChatUIKitConversationListAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
 
-```Kotlin
+```kotlin
 class CustomConversationListAdapter : ChatUIKitConversationListAdapter() {
     override fun getItemNotEmptyViewType(position: Int): Int {
         // 根据消息类型设置自定义 itemViewType。
@@ -106,7 +106,7 @@ class CustomConversationListAdapter : ChatUIKitConversationListAdapter() {
 
 2. 添加 `CustomConversationListAdapter` 到 `ChatUIKitConversationListFragment#Builder`。
 
-```Kotlin
+```kotlin
 builder.setCustomAdapter(customConversationListAdapter);
 ```
 
@@ -114,7 +114,7 @@ builder.setCustomAdapter(customConversationListAdapter);
 
 创建自定义 `CustomConversationListFragment`，继承自 `ChatUIKitConversationListFragment`，并设置到 `ChatUIKitConversationListFragment#Builder` 中。
 
-```Kotlin
+```kotlin
 builder.setCustomFragment(customConversationListFragment);
 ```
 
@@ -132,7 +132,7 @@ builder.setCustomFragment(customConversationListFragment);
 
 #### 设置是否启用标题栏
 
-```Kotlin
+```kotlin
 
 //是否使用默认的标题栏（ChatUIKitTitleBar）：true：是；(默认) false: 否。
 ChatUIKitConversationListFragment.Builder().useTitleBar()
@@ -141,7 +141,7 @@ ChatUIKitConversationListFragment.Builder().useTitleBar()
 
 #### 设置左侧头像
 
-```Kotlin
+```kotlin
 //使用 binding?.titleConversations 可以直接获取到 ChatUIKitTitleBar
 
 binding?.titleConversations?.let { titlebar->
@@ -163,7 +163,7 @@ binding?.titleConversations?.let { titlebar->
 
 #### 设置左侧头像及文本区域点击事件
 
-```Kotlin
+```kotlin
 // logo 图标区域点击事件 
 binding?.titleConversations?.setLogoClickListener {}
 // logo status 文本区域点击事件
@@ -173,7 +173,7 @@ binding?.titleConversations?.setTitleClickListener {}
 
 #### 设置中部标题
 
-```Kotlin
+```kotlin
 // 文本设置
 ChatUIKitConversationListFragment.Builder().setTitleBarTitle("title")
 // 图片设置
@@ -187,7 +187,7 @@ binding?.titleConversations?.setTitleEndDrawable(R.drawable.conversation_title)
 
 `ChatUIKitConversationListFragment` 中有默认实现一个 `defaultMenu()` 的方法 添加默认的 menu 菜单。若默认菜单不满足需求，可以替换为自己的 menu 菜单，重写 `defaultMenu()` 方法。   
 
-```Kotlin
+```kotlin
     // 添加 menu
     override fun defaultMenu() {
         // 自定义满足自身需求的 menu 文件
@@ -216,7 +216,7 @@ binding?.titleConversations?.setTitleEndDrawable(R.drawable.conversation_title)
 
 #### 设置返回按钮和事件监听
 
-```Kotlin
+```kotlin
 
 //设置是否支持显示返回按钮：true：是；(默认) false: 否。   
 ChatUIKitConversationListFragment.Builder().enableTitleBarPressBack()
@@ -229,7 +229,7 @@ ChatUIKitConversationListFragment.Builder().setTitleBarBackPressListener()
 
 设置标题栏的背景色：
 
-```Kotlin
+```kotlin
 
 binding?.titleConversations?.setBackgroundColor(ContextCompat.getColor(mContext,R.color.blue))
     
@@ -239,7 +239,7 @@ binding?.titleConversations?.setBackgroundColor(ContextCompat.getColor(mContext,
 
 #### 设置是否需要搜索功能
 
-```Kotlin
+```kotlin
 
 // 是否使用默认的搜索功能（跳转 ChatUIKitSearchActivity 搜索页面）。目前支持搜索用户、会话、消息、黑名单用户。
 // true：是；(默认) false: 否。 
@@ -251,7 +251,7 @@ ChatUIKitConversationListFragment.Builder().useSearchBar(true)
 
 如果默认的搜索无法满足用户需求，可以通过 `setCustomActivityRoute` 修改跳转路由，跳转自己的搜索页面。
 
-```Kotlin
+```kotlin
 ChatUIKitClient.setCustomActivityRoute(object : ChatUIKitCustomActivityRoute {
     override fun getActivityRoute(intent: Intent): Intent? {
         intent.component?.className?.let {
@@ -276,7 +276,7 @@ ChatUIKitClient.setCustomActivityRoute(object : ChatUIKitCustomActivityRoute {
 
 需要先获取到 `ChatUIKitConversationListLayout` 对象，该对象提供了更加细致的设置项：
 
-```Kotlin
+```kotlin
     binding?.listConversation?.let{
         it.setItemBackGround()      //设置条目的背景。
         it.setItemHeight()          //设置条目的高度。
@@ -341,7 +341,7 @@ ChatUIKitClient.setCustomActivityRoute(object : ChatUIKitCustomActivityRoute {
 
 `ChatUIKitConversationListFragment#Builder` 提供的如下监听：
 
-```Kotlin
+```kotlin
 ChatUIKitConversationListFragment.Builder()
     .setTitleBarBackPressListener()
     .setItemClickListener(onItemClickListener)

@@ -36,7 +36,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // pageSize: 每页期望获取的会话数量。取值范围为 [1,50]，默认为 `20`。
 // cursor：开始获取数据的游标位置。若传空字符串（''），SDK 从最新活跃的会话开始获取。
 connection.getServerConversations({pageSize:50, cursor: ''}).then((res)=>{

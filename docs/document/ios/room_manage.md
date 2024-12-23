@@ -42,7 +42,7 @@
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 EMError *error;
     EMChatroom *chatroom = [[EMClient sharedClient].roomManager createChatroomWithSubject:@"Subject" description:@"description" invitees:@[@"user1",@"user2"] message:@"message" maxMembersCount:100 error:&error];
 ```
@@ -56,7 +56,7 @@ EMError *error;
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
 // 异步方法
 [[EMClient sharedClient].roomManager getChatroomsFromServerWithPage:1 pageSize:50 completion:nil];
@@ -68,7 +68,7 @@ EMError *error;
 
 同时，你可以调用 `EMChatroomManager#joinChatroom:ext:leaveOtherRooms:completion:` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatroomManagerDelegate#userDidJoinChatroom:user:ext:` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 
-```Swift
+```swift
 // 加入聊天室时，传入 ext (以昵称为例)，同时退出其他聊天室
 EMClient.shared().roomManager?.joinChatroom("roomId", ext: "nickname=myNickname", leaveOtherRooms: true, completion: { room, err in
     
@@ -88,7 +88,7 @@ extension ViewController: EMChatroomManagerDelegate {
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 异步方法
 EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecificationFromServerWithId:@“chatroomId” completion:nil];
 ```
@@ -99,7 +99,7 @@ EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecifica
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 异步方法
 [[EMClient sharedClient].roomManager destroyChatroom:self.chatroom.chatroomId completion:nil];
 ```
@@ -110,7 +110,7 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 注册聊天室回调。
 [[EMClient sharedClient].roomManager addDelegate:self delegateQueue:nil];
 // 移除聊天室回调。
@@ -119,7 +119,7 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 
 具体事件如下：
 
-```Objective-C
+```objective-c
 // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
 - (void)userDidJoinChatroom:(EMChatroom *)aChatroom
       user:(NSString *)aUsername {
@@ -210,7 +210,7 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 
 2. 收到通知事件后，通过 `EMChatroom#occupantsCount` 获取聊天室当前人数。
 
-```Swift
+```swift
 extension ViewController: EMChatroomManagerDelegate {
     func userDidJoin(_ aChatroom: EMChatroom, user aUsername: String) {
         let memberCount = aChatroom.occupantsCount

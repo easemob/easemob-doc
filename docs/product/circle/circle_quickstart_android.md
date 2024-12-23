@@ -31,7 +31,7 @@
 
 你可以调用 `createServer` 方法创建一个社区：
 
-```Java
+```java
 EMCircleServerAttribute attribute = new EMCircleServerAttribute();
     attribute.setName(name);
     attribute.setDesc(desc);
@@ -53,7 +53,7 @@ EMClient.getInstance().chatCircleManager().createServer(attribute, new EMValueCa
 
 你可以调用 `joinServer` 方法加入一个现有社区：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().joinServer(serverId, new EMValueCallBack<EMCircleServer>() {
       @Override
       public void onSuccess(EMCircleServer value) {
@@ -72,7 +72,7 @@ EMClient.getInstance().chatCircleManager().joinServer(serverId, new EMValueCallB
 
 你可以调用 `fetchJoinedServers` 方法获取已加入的社区列表：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchJoinedServers(20, null, new EMValueCallBack<EMCursorResult<EMCircleServer>>() {
     @Override
     public void onSuccess(EMCursorResult<EMCircleServer> value) {
@@ -99,7 +99,7 @@ EMClient.getInstance().chatCircleManager().fetchJoinedServers(20, null, new EMVa
 
 你可以调用 `createChannel` 方法创建频道：
 
-```Java
+```java
 EMCircleChannelAttribute attribute = new EMCircleChannelAttribute();
     attribute.setName(name);
     attribute.setDesc(desc);
@@ -124,7 +124,7 @@ EMClient.getInstance().chatCircleManager().createChannel(serverId, categoryId, a
 
 你可以调用 `joinChannel` 方法加入一个频道：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().joinChannel(serverId, channelId, new EMValueCallBack<EMCircleChannel>() {
     @Override
     public void onSuccess(EMCircleChannel value) {
@@ -142,7 +142,7 @@ EMClient.getInstance().chatCircleManager().joinChannel(serverId, channelId, new 
 
 你可以调用 `fetchPublicChannelsInServer` 方法获取社区下的公开频道列表：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchPublicChannelsInServer(serverId, 20, null, new EMValueCallBack<EMCursorResult<EMCircleChannel>>() {
     @Override
     public void onSuccess(EMCursorResult<EMCircleChannel> value) {
@@ -160,7 +160,7 @@ EMClient.getInstance().chatCircleManager().fetchPublicChannelsInServer(serverId,
 
 你可以调用 `fetchVisiblePrivateChannelsInServer` 方法获取社区下所有私密频道的列表：
 
-```Java
+```java
 EMClient.getInstance().chatCircleManager().fetchVisiblePrivateChannelsInServer(serverId, 20, null, new EMValueCallBack<EMCursorResult<EMCircleChannel>>() {
     @Override
     public void onSuccess(EMCursorResult<EMCircleChannel> value) {
@@ -184,7 +184,7 @@ EMClient.getInstance().chatCircleManager().fetchVisiblePrivateChannelsInServer(s
 
 你可以调用 `sendMessage` 方法在指定频道中发送一条消息：
 
-```Java
+```java
 // 创建一条文本消息，`content` 为消息文字内容，`channelID` 为频道 ID
 EMMessage message = EMMessage.createTextSendMessage(content, channelID);
 // 设置消息类型，即设置 `Message` 类的 `ChatType` 为 `GroupChat`。
@@ -217,7 +217,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 你可以注册 `EMMessageListener` 监听器接收消息。
 
-```Java 
+```java 
 EMMessageListener msgListener = new EMMessageListener() {
 
    // 收到消息，遍历消息队列，解析和显示。

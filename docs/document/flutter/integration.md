@@ -35,7 +35,7 @@ android {
 
 3. 在 `quick_start/android/app/proguard-rules.pro` 中设置免混淆规则：
 
-```Java
+```java
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
 ```

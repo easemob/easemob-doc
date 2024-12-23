@@ -29,7 +29,7 @@
 
 调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessageRecalled` 事件。对于附件类型消息，包括图片、音频和视频和文件消息，撤回消息后，消息附件也相应删除。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.recallMessage(message, ext).then(()=> {
     // success logic
 })
@@ -42,7 +42,7 @@ ChatClient.getInstance().chatManager()?.recallMessage(message, ext).then(()=> {
 - 若用户在线接收了消息，消息撤回时，该事件中的 `RecallMessageInfo` 中的 `getRecallMessage` 为撤回的消息的内容，`getRecallMessageId` 为返回撤回的消息的 ID。
 - 若消息发送和撤回时接收方离线，该事件中的 `RecallMessageInfo` 中的 `getRecallMessage` 为空，`getRecallMessageId` 为返回撤回的消息的 ID。
 
-```TypeScript
+```typescript
 onMessageRecalled?: (messages: Array<RecallMessageInfo>) => void;
 ```
 

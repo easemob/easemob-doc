@@ -52,7 +52,7 @@
 
 1. 调用 `fetchPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.fetchPublicGroupsFromServer(pageSize, cursor).then((result)=> {
     let groupList = result.getResult();
     let cursor = result.getNextCursor();
@@ -65,7 +65,7 @@ ChatClient.getInstance().groupManager()?.fetchPublicGroupsFromServer(pageSize, c
 
    示例代码如下：
 
-   ```TypeScript
+   ```typescript
    ChatClient.getInstance().groupManager()?.joinGroup(groupId).then((group) => {
     // success logic
    });
@@ -73,7 +73,7 @@ ChatClient.getInstance().groupManager()?.fetchPublicGroupsFromServer(pageSize, c
 
    - 调用 `applyJoinToGroup` 方法加入需要群主或管理员审批的公开群，即 `GroupStyle` 设置为 `GroupStylePublicJoinNeedApproval`。示例代码如下：
 
-   ```TypeScript
+   ```typescript
    ChatClient.getInstance().groupManager()?.applyJoinToGroup(groupId, "your reason").then((group) => {
     // success logic
    });
@@ -87,7 +87,7 @@ ChatClient.getInstance().groupManager()?.fetchPublicGroupsFromServer(pageSize, c
 
    示例代码如下：
 
-   ```TypeScript
+   ```typescript
    ChatClient.getInstance().groupManager()?.acceptApplication(groupId, userId).then((group) => {
     // success logic
    });
@@ -97,7 +97,7 @@ ChatClient.getInstance().groupManager()?.fetchPublicGroupsFromServer(pageSize, c
 
    示例代码如下：
 
-   ```TypeScript
+   ```typescript
    ChatClient.getInstance().groupManager()?.declineApplication(groupId, userId, "your reason").then((group) => {
     // success logic
    });
@@ -113,7 +113,7 @@ ChatClient.getInstance().groupManager()?.fetchPublicGroupsFromServer(pageSize, c
 
    - 群主或群管理员加人，需要调用 `addUsersToGroup` 方法：
 
-   ```TypeScript
+   ```typescript
    ChatClient.getInstance().groupManager()?.addUsersToGroup(groupId, newMembers).then((group) => {
     // success logic
    });
@@ -123,7 +123,7 @@ ChatClient.getInstance().groupManager()?.fetchPublicGroupsFromServer(pageSize, c
 
    对于私有群，`GroupStyle` 设置为 `GroupStylePrivateMemberCanInvite` 时，所有群成员均可以邀请人进群。
 
-   ```TypeScript
+   ```typescript
    ChatClient.getInstance().groupManager()?.inviteUsers(groupId, newMembers, "your reason").then((group) => {
     // success logic
    });
@@ -133,7 +133,7 @@ ChatClient.getInstance().groupManager()?.fetchPublicGroupsFromServer(pageSize, c
 
    - 受邀用户同意加入群组，需要调用 `acceptInvitation` 方法。
 
-   ```TypeScript
+   ```typescript
    ChatClient.getInstance().groupManager()?.acceptInvitation(groupId).then((group) => {
     // success logic
    });
@@ -141,7 +141,7 @@ ChatClient.getInstance().groupManager()?.fetchPublicGroupsFromServer(pageSize, c
 
    - 受邀人拒绝入群组，需要调用 `declineInvitation` 方法。
 
-   ```TypeScript
+   ```typescript
    ChatClient.getInstance().groupManager()?.declineInvitation(groupId, "your reason").then(() => {
     // success logic
    });
@@ -157,7 +157,7 @@ ChatClient.getInstance().groupManager()?.fetchPublicGroupsFromServer(pageSize, c
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.leaveGroup(groupId).then(() => {
     // success logic
 });
@@ -169,7 +169,7 @@ ChatClient.getInstance().groupManager()?.leaveGroup(groupId).then(() => {
 
 - 移出群成员，示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.removeUsersFromGroup(groupId, members).then((group) => {
     // success logic
 });
@@ -191,7 +191,7 @@ ChatClient.getInstance().groupManager()?.removeUsersFromGroup(groupId, members).
 
 示例代码如下：
 
-```TypeScript
+```typescript
 let attributes = new Map<string, string>();
 attributes.set('key1', 'value1');
 attributes.set('key2', 'value2');
@@ -208,7 +208,7 @@ ChatClient.getInstance().groupManager()?.setMemberAttributes(groupId, member, at
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.fetchMemberAttributes(groupId, member).then(resultMap => {
   // success logic
 }).catch((e: ChatError) => {
@@ -226,7 +226,7 @@ ChatClient.getInstance().groupManager()?.fetchMemberAttributes(groupId, member).
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // keys：要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
 ChatClient.getInstance().groupManager()?.fetchMembersAttributes(groupId, members, keys).then(resultMap => {
   // success logic
@@ -243,7 +243,7 @@ ChatClient.getInstance().groupManager()?.fetchMembersAttributes(groupId, members
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.changeOwner(groupId, newOwner).then((group) => {
     // success logic
 });
@@ -257,7 +257,7 @@ ChatClient.getInstance().groupManager()?.changeOwner(groupId, newOwner).then((gr
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.addGroupAdmin(groupId, admin).then((group) => {
     // success logic
 });
@@ -271,7 +271,7 @@ ChatClient.getInstance().groupManager()?.addGroupAdmin(groupId, admin).then((gro
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.removeGroupAdmin(groupId, admin).then((group) => {
     // success logic
 });
@@ -281,7 +281,7 @@ ChatClient.getInstance().groupManager()?.removeGroupAdmin(groupId, admin).then((
 
 获取群管理员列表示例如下：
 
-```TypeScript
+```typescript
 // 获取内存中管理员列表。
 let adminList: Array<string> = group.adminList();
 ```
@@ -298,7 +298,7 @@ let adminList: Array<string> = group.adminList();
 
 即使开启了群组全员禁言，群组白名单中的成员仍可以发送群组消息。不过，禁言列表上的用户即使加入了群白名单仍无法在群组中发送消息。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.addToGroupWhitelist(groupId, members).then(() => {
     // success logic
 });
@@ -310,7 +310,7 @@ ChatClient.getInstance().groupManager()?.addToGroupWhitelist(groupId, members).t
 
 群成员被移除群白名单后，该群成员及其他未操作的群管理员和群主将会收到群组事件回调 `GroupChangeListener#onWhitelistRemoved`。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.removeFromGroupWhitelist(groupId, members).then(() => {
     // success logic
 });
@@ -320,7 +320,7 @@ ChatClient.getInstance().groupManager()?.removeFromGroupWhitelist(groupId, membe
 
 所有群成员可以调用 `checkIfInGroupWhitelist` 方法检查自己是否在群白名单中，示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.checkIfInGroupWhitelist(groupId).then((res) => {
     // success logic
 });
@@ -330,7 +330,7 @@ ChatClient.getInstance().groupManager()?.checkIfInGroupWhitelist(groupId).then((
 
 仅群主和群管理员可以调用 `fetchGroupWhitelist` 方法从服务器获取当前群组的白名单。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupWhitelist(groupId).then((whitelist) => {
     // success logic
 });
@@ -344,7 +344,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupWhitelist(groupId).then((whit
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.blockUsers(groupId, userIds).then((group) => {
     // success logic
 });
@@ -356,7 +356,7 @@ ChatClient.getInstance().groupManager()?.blockUsers(groupId, userIds).then((grou
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.unblockUsers(groupId, userIds).then((group) => {
     // success logic
 });
@@ -368,7 +368,7 @@ ChatClient.getInstance().groupManager()?.unblockUsers(groupId, userIds).then((gr
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupBlocklist(groupId, pageNum, pageSize).then((blocklist) => {
     // success logic
 });
@@ -384,7 +384,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupBlocklist(groupId, pageNum, p
 
 仅群主和群管理员可以调用 `muteGroupMembers` 方法将指定成员添加至群组禁言列表。群成员被群主或者群管理员加入禁言列表中后，被禁言成员和其他未操作的管理员或者群主将会收到群组事件回调 `GroupChangeListener#onMutelistAdded`。群成员被加入群禁言列表后，将不能够发言，即使其被加入群白名单也不能发言。
 
-```TypeScript
+```typescript
 // `duration`：禁言时间。传 -1 表示永久禁言。
 ChatClient.getInstance().groupManager()?.muteGroupMembers(groupId, muteMembers, duration).then((group) => {
     // success logic
@@ -397,7 +397,7 @@ ChatClient.getInstance().groupManager()?.muteGroupMembers(groupId, muteMembers, 
 
 群成员被移出禁言列表后可以在群组中正常发送消息，被移出的群成员及其他未操作的管理员或者群主将会收到群组事件回调 `GroupChangeListener#onMutelistRemoved`。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.unmuteGroupMembers(groupId, members).then((group) => {
     // success logic
 });
@@ -407,7 +407,7 @@ ChatClient.getInstance().groupManager()?.unmuteGroupMembers(groupId, members).th
 
 所有群成员可以调用 `checkIfInGroupMutelist` 方法检查自己是否在群禁言列表中，示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.checkIfInGroupMutelist(groupId).then((res) => {
     // success logic
 });
@@ -419,7 +419,7 @@ ChatClient.getInstance().groupManager()?.checkIfInGroupMutelist(groupId).then((r
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupMutelist(groupId, pageNum, pageSize).then((res) => {
     // success logic
 });
@@ -435,7 +435,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupMutelist(groupId, pageNum, pa
  
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.muteAllMembers(groupId).then((group) => {
     // success logic
 });
@@ -447,7 +447,7 @@ ChatClient.getInstance().groupManager()?.muteAllMembers(groupId).then((group) =>
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.unmuteAllMembers(groupId).then((group) => {
     // success logic
 });

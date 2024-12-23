@@ -27,7 +27,7 @@
 
 下面以发送文本消息为例进行说明：
 
-```TypeScript
+```typescript
 // 创建一条文本消息，`content` 为消息文字内容。
 // `conversationId` 为消息接收方，单聊时为对端用户 ID、群聊时为群组 ID。
 let message = ChatMessage.createTextSendMessage(conversationId, content);

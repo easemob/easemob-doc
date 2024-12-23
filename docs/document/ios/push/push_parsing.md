@@ -4,7 +4,7 @@
 
 - 若 app 中使用了 `SceneDelegate`，app 的启动流程通过场景系统进行管理。当你点击离线推送的消息打开 app 时，app 将首先启动场景，然后调用 `SceneDelegate` 中的相应方法处理场景的连接和配置。你需要在 `SceneDelegate` 的 `scene(_:willConnectTo:options:)` 方法中查看 `connectionOptions` 参数获取推送内容，示例代码如下：
 
-```Objective-C
+```objective-c
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     // 获取启动选项
     NSDictionary *launchOptions = connectionOptions.notificationResponse.notification.request.content.userInfo;
@@ -15,7 +15,7 @@
 
 - 若 app 中不使用 `SceneDelegate`，iOS 系统会通过 `application:didFinishLaunchingWithOptions:` 方法中的 `launchOptions` 将推送中的用户自定义信息传递给 app。你需要查看 `launchOptions` 参数获取推送内容。
 
-```Objective-C
+```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
       NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
   }

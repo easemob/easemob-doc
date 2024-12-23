@@ -147,7 +147,7 @@ buildscript {
 
 1. 初始化 react-native-chat-uikit：
 
-```TypeScript
+```typescript
 export const App = () => {
   return (
     <UikitContainer
@@ -170,7 +170,7 @@ export const App = () => {
 
 2. 添加聊天详情页面：
 
-```TypeScript
+```typescript
 export function ChatScreen({
   route,
 }: NativeStackScreenProps<typeof RootParamsList>): JSX.Element {

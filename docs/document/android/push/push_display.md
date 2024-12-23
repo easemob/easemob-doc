@@ -14,14 +14,14 @@
 
 你可以调用 `updatePushNickname` 方法设置推送通知中显示的昵称，如以下代码示例所示：
 
-```Java
+```java
 // 需要异步处理。
 EMClient.getInstance().pushManager().updatePushNickname("pushNickname");
 ```
 
 你也可以调用 `updatePushDisplayStyle` 设置推送通知的显示样式，如下代码示例所示：
 
-```Java
+```java
 // 设置为简单样式。
 EMPushManager.DisplayStyle displayStyle = EMPushManager.DisplayStyle.SimpleBanner;
 // 需要异步处理。
@@ -49,7 +49,7 @@ EMClient.getInstance().pushManager().updatePushDisplayStyle(displayStyle);
 
 你可以调用 `getPushConfigsFromServer` 获取推送通知中的显示属性，如以下代码示例所示：
 
-```Java
+```java
 EMPushConfigs pushConfigs = EMClient.getInstance().pushManager().getPushConfigsFromServer();
 // 获取推送显示昵称。
 String nickname = pushConfigs.getDisplayNickname();
@@ -96,7 +96,7 @@ EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
 
 这种情况下，创建消息时无需传入 `titleArgs` 和 `contentArgs` 参数。 
 
-```Java
+```java
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("消息内容");
@@ -152,7 +152,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ![img](/images/android/push/push_template_custom_example.png)
 
-```Java
+```java
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("消息内容");
@@ -193,7 +193,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 若发送方在发送消息时使用了推送模板，则推送通知栏中的显示内容以发送方的推送模板为准。
 :::
 
-```Java
+```java
 EMClient.getInstance().pushManager().setPushTemplate("Template Name", new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -211,7 +211,7 @@ EMClient.getInstance().pushManager().setPushTemplate("Template Name", new EMCall
 
 创建推送消息时，你可以设置消息扩展字段自定义要显示的推送标题 `em_push_title` 和推送内容 `em_push_content`。
 
-```Java
+```java
 // 这里以文本消息为例，附件等类型的消息设置方法相同。
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("message content");

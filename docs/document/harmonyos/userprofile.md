@@ -36,7 +36,7 @@
 
 参考如下示例代码，在你的项目中当前用户设置自己的所有属性或者仅设置某一项属性。
 
-```TypeScript
+```typescript
 // 设置所有用户属性。
 let userInfo: UserInfo = {
   nickname: "easemob",
@@ -85,7 +85,7 @@ ChatClient.getInstance().userInfoManager()?.updateUserInfo(userInfo).then(result
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 获取一个或多个用户的所有属性，一次调用用户 ID 数量不超过 100。
 let userIds = new Array<string>();
 userIds.push(this.userId);
@@ -100,7 +100,7 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds).then(resu
 
 用户可以从服务端获取指定用户的指定用户属性信息。
 
-```TypeScript
+```typescript
 let userIds = new Array<string>();
 userIds.push(this.userId);
 let userTypes = new Array<UserInfoType>();

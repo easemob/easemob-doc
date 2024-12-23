@@ -6,7 +6,7 @@
 
 设置强制推送后，用户发送消息时会忽略接收方的免打扰设置，不论是否处于免打扰时间段都会正常向接收方推送消息。
 
-```JavaScript
+```javascript
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 const sendTextMsg = () => {
   let option: AgoraChat.CreateTextMsgParameters = {
@@ -30,7 +30,7 @@ const sendTextMsg = () => {
 
 发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方在发送消息时设置，而免打扰模式为接收方设置在指定时间段内不接收推送通知。
 
-```JavaScript
+```javascript
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 const sendTextMsg = () => {
   let option: AgoraChat.CreateTextMsgParameters = {

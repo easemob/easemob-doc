@@ -50,7 +50,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().presenceManager()?.subscribePresences(userId, 1 * 24 * 3600).then(result => {
   // success logic
 }).catch((e: ChatError) => {
@@ -71,7 +71,7 @@ ChatClient.getInstance().presenceManager()?.subscribePresences(userId, 1 * 24 * 
 
 用户在线时，可调用 `PresenceManager#publishPresence` 方法发布自定义在线状态：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().presenceManager()?.publishPresence("自定义状态").then(() => {
   // success logic
 }).catch((e: ChatError) => {
@@ -87,7 +87,7 @@ ChatClient.getInstance().presenceManager()?.publishPresence("自定义状态").t
 
 示例代码如下：
 
-```TypeScript
+```typescript
 let presenceListener: PresenceListener = {
   onPresenceUpdated: (presences: Presence[]): void => {
     // presence logic
@@ -104,7 +104,7 @@ ChatClient.getInstance().presenceManager()?.addListener(presenceListener);
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().presenceManager()?.unsubscribePresences(userId).then(() => {
   // success logic
 }).catch((e: ChatError) => {
@@ -118,7 +118,7 @@ ChatClient.getInstance().presenceManager()?.unsubscribePresences(userId).then(()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().presenceManager()?.fetchSubscribedMembers(pageNumber, pageSize).then(result => {
   // success logic
 }).catch((e: ChatError) => {
@@ -132,7 +132,7 @@ ChatClient.getInstance().presenceManager()?.fetchSubscribedMembers(pageNumber, p
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // contacts：要查询状态的用户 ID，每次最多可传 100 个用户 ID。
 ChatClient.getInstance().presenceManager()?.fetchPresenceStatus(contacts).then(result => {
   // success logic

@@ -16,7 +16,7 @@
   - minSDKVersion 21。
   - release 时需要在 `xxx/android/app/proguard-rules.pro` 中设置免混淆规则：
 
-```Java
+```java
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
 ```

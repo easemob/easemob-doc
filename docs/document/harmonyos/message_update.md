@@ -25,13 +25,13 @@
 
 - 直接调用 `ChatManager#updateMessage` 方法更新 SDK 本地数据库中的消息。
 
-```TypeScript 
+```typescript 
 ChatClient.getInstance().chatManager()?.updateMessage(message);
 ```
 
 - 若正在使用 `Conversation` 类，可以先获取会话，再调用 `Conversation#updateMessage` 方法更新 SDK 本地数据库会话中的消息。
 
-```TypeScript
+```typescript
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 if (!conversation) {
     return;

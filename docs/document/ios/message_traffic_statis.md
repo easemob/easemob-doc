@@ -43,7 +43,7 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 EMChatMessageStatistics * msgStatistics = [[[EMClient sharedClient] statisticsManager] getMessageStatisticsById:@"msgId"];
 ```
 
@@ -51,7 +51,7 @@ EMChatMessageStatistics * msgStatistics = [[[EMClient sharedClient] statisticsMa
 
 你可以统计一定时间段内发送和/或接收的指定或全部类型的消息，示例代码如下：
 
-```Objective-C
+```objective-c
 NSInteger count = [EMClient.sharedClient.statisticsManager getMessageCountWithStart:startTime end:endTime direction:EMMessageStatisticsDirectionAll type:EMMessageStatisticsTypeText];
 ```
 
@@ -61,6 +61,6 @@ NSInteger count = [EMClient.sharedClient.statisticsManager getMessageCountWithSt
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 NSInteger bytes = [EMClient.sharedClient.statisticsManager getMessageStatisticsSizeWithStart:startTime end:endTime direction:EMMessageStatisticsDirectionAll type:EMMessageStatisticsTypeAll];
 ```

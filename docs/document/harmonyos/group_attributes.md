@@ -31,7 +31,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.changeGroupName(groupId, changedGroupName).then(res => console.log(res.groupName()));
 ```
 
@@ -41,7 +41,7 @@ ChatClient.getInstance().groupManager()?.changeGroupName(groupId, changedGroupNa
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.changeGroupDescription(groupId, description).then(res => console.log(res.description()));
 ```
 
@@ -51,7 +51,7 @@ ChatClient.getInstance().groupManager()?.changeGroupDescription(groupId, descrip
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.updateGroupAnnouncement(groupId, announcement).then(res => console.log(res.announcement()));
 ```
 
@@ -61,7 +61,7 @@ ChatClient.getInstance().groupManager()?.updateGroupAnnouncement(groupId, announ
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupAnnouncement(groupId).then(res => console.log(res.announcement()));
 ```
 
@@ -73,7 +73,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupAnnouncement(groupId).then(re
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.uploadGroupSharedFile(groupId, filePath, callBack).then((res: SharedFile)=> {
     // success logic
 });
@@ -83,7 +83,7 @@ ChatClient.getInstance().groupManager()?.uploadGroupSharedFile(groupId, filePath
 
 所有群成员均可调用 `downloadGroupSharedFile` 方法下载群组共享文件。
 
-```TypeScript
+```typescript
 let sharedFiles: Array<SharedFile> = await ChatClient.getInstance().groupManager()?.fetchGroupSharedFileList(groupId, pageNum, pageSize);
 // 获取需要的共享文件信息
 let sharedFile = sharedFiles[index];
@@ -103,7 +103,7 @@ ChatClient.getInstance().groupManager()?.downloadGroupSharedFile(groupId, shared
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.deleteGroupSharedFile(groupId, fileId).then(()=> console.log("delete success"));
 ```
 
@@ -111,7 +111,7 @@ ChatClient.getInstance().groupManager()?.deleteGroupSharedFile(groupId, fileId).
 
 所有群成员均可以调用 `fetchGroupSharedFileList` 方法从服务器获取群组的共享文件列表。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupSharedFileList(groupId, pageNum, pageSize).then((res)=> {
     // success logic
 });
@@ -123,7 +123,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupSharedFileList(groupId, pageN
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().groupManager()?.updateGroupExtension(groupId, extension).then(res => console.log(res.extension()));
 ```
 

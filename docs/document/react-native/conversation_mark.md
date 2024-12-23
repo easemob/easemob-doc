@@ -8,7 +8,7 @@
 
 你需要自行维护会话标记与具体业务含义（比如 `MARK_0` 为重要会话）之间的映射关系。例如：
 
-```TypeScript
+```typescript
 const mapping = new Map<ChatConversationMarkType, string>();
 mapping.set(ChatConversationMarkType.Type0, "important");
 mapping.set(ChatConversationMarkType.Type1, "normal");
@@ -45,7 +45,7 @@ mapping.set(ChatConversationMarkType.Type2, "unimportant");
 对会话添加标记，例如会话标星，并不影响会话的其他逻辑，例如会话的未读消息数。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.addRemoteAndLocalConversationsMark(
     convIds, // 会话 ID 集合
@@ -65,7 +65,7 @@ ChatClient.getInstance()
 
 调用该方法会同时移除本地和服务器端会话的标记。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.deleteRemoteAndLocalConversationsMark(
     convIds, // 会话 ID 集合
@@ -83,7 +83,7 @@ ChatClient.getInstance()
 
 你可以调用 `fetchConversationsByOptions` 方法根据会话标记从服务器分页获取会话列表。SDK 会按会话标记的时间的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 0）、会话标记以及最新一条消息。从服务端拉取会话列表后会更新本地会话列表。
 
-```TypeScript
+```typescript
 // 创建搜索条件对象
 const option = ChatConversationFetchOptions.withMark(
   ChatConversationMarkType.Type0
@@ -103,7 +103,7 @@ ChatClient.getInstance()
 
 对于本地会话，你可以调用 `getAllConversations` 方法获取本地所有会话后自己进行会话过滤。下面以查询标记了 `ChatConversationMarkType#Type0` 的所有本地会话为例。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.getAllConversations()
   .then((res) => {
@@ -122,7 +122,7 @@ ChatClient.getInstance()
 
 你可以调用 `ChatConversation#marks` 方法获取本地单个会话的所有标记，示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.getConversation(convId, convType)
   .then((res) => {

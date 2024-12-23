@@ -53,7 +53,7 @@
 
 示例代码如下：
 
-```Java
+```java
 EMConversationListener listener=new EMConversationListener() {
        // 收到会话已读的事件。该事件在以下场景中触发：
        // 1. 当消息接收方调用 `ackConversationRead()` 方法，SDK 会执行此回调，

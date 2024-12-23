@@ -10,7 +10,7 @@
 
 如果登录时没有传入 `name` 和 `avatar` 属性，可以在登录后，调用 `ChatUIKitClient.updateCurrentUser` 方法对当前用户的信息进行更新。
 
-```Kotlin
+```kotlin
 ChatUIKitClient.login(
     user = ChatUIKitProfile(
         id = "",
@@ -33,7 +33,7 @@ ChatUIKitClient.login(
 
 `ChatUIKitUserProfileProvider` 接口如下所示：
 
-```Kotlin
+```kotlin
 interface ChatUIKitUserProfileProvider {
     // 同步获取用户信息
     fun getUser(userId: String?): ChatUIKitProfile?
@@ -45,7 +45,7 @@ interface ChatUIKitUserProfileProvider {
 
 使用方法如下所示：
 
-```Kotlin
+```kotlin
 ChatUIKitClient.setUserProfileProvider(object : ChatUIKitUserProfileProvider {
     override fun getUser(userId: String?): ChatUIKitProfile? {
         return getLocalUserInfo(userId)
@@ -68,7 +68,7 @@ ChatUIKitClient.setUserProfileProvider(object : ChatUIKitUserProfileProvider {
 
 `ChatUIKitGroupProfileProvider` 接口如下所示：
 
-```Kotlin
+```kotlin
 interface ChatUIKitGroupProfileProvider {
     // 同步获取群组信息
     fun getGroup(id: String?): ChatUIKitGroupProfile?
@@ -80,7 +80,7 @@ interface ChatUIKitGroupProfileProvider {
 
 使用方法如下：
 
-```Kotlin
+```kotlin
 ChatUIKitClient.setGroupProfileProvider(object : ChatUIKitGroupProfileProvider {
     override fun getGroup(id: String?): ChatUIKitGroupProfile? {
         ChatClient.getInstance().groupManager().getGroup(id)?.let {
@@ -101,7 +101,7 @@ ChatUIKitClient.setGroupProfileProvider(object : ChatUIKitGroupProfileProvider {
 
 ## 设置会话头像和昵称
 
-```Kotlin
+```kotlin
 
  // 调用 setUserProfileProvider 设置单聊时的用户属性，包括用户头像和昵称。
  ChatUIKitClient.setUserProfileProvider(object : ChatUIKitUserProfileProvider {
@@ -153,7 +153,7 @@ ChatUIKitClient.setGroupProfileProvider(object : ChatUIKitGroupProfileProvider {
 
 因为单群聊 UIKit 会对信息进行缓存。如果用户的信息发生改变，可以通过 UIKit 提供的 `update` 方法对缓存信息进行更新。
 
-```Kotlin
+```kotlin
 // 更新当前用户信息
 ChatUIKitClient.updateCurrentUser(currentUserProfile)
 // 更新单聊用户/群成员信息

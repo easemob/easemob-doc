@@ -12,7 +12,7 @@
 
 ## 使用示例
 
-```Kotlin
+```kotlin
 class ContactListActivity: AppCompactActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +39,7 @@ class ContactListActivity: AppCompactActivity() {
 
 `ChatUIKitContactsListFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置。目前提供的设置项如下：
 
-```Kotlin
+```kotlin
 ChatUIKitContactsListFragment.Builder()
   .useTitleBar(true)
   .setTitleBarTitle("title")
@@ -95,7 +95,7 @@ ChatUIKitContactsListFragment.Builder()
 
 下面的示例代码展示如何设置数据项：
 
-```Kotlin
+```kotlin
      
      ChatUIKitContactsListFragment.Builder().setHeaderItemList(mutableListOf(
         ChatUIKitCustomHeaderItem(
@@ -114,7 +114,7 @@ ChatUIKitContactsListFragment.Builder()
 
 添加 Header List Item 点击事件：
 
-```Kotlin
+```kotlin
 
     ChatUIKitContactsListFragment.Builder().setOnHeaderItemClickListener(object : OnHeaderItemClickListener{
             override fun onHeaderItemClick(v: View, itemIndex: Int, itemId: Int?) {
@@ -130,7 +130,7 @@ ChatUIKitContactsListFragment.Builder()
 
 1. 创建自定义适配器 `CustomContactListAdapter`，继承自 `ChatUIKitContactListAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
 
-```Kotlin
+```kotlin
 class CustomContactListAdapter : ChatUIKitContactListAdapter() {
     override fun getItemNotEmptyViewType(position: Int): Int {
         // 根据消息类型设置自定义 itemViewType。
@@ -148,7 +148,7 @@ class CustomContactListAdapter : ChatUIKitContactListAdapter() {
 
 2. 添加 `CustomContactListAdapter` 到 `ChatUIKitContactsListFragment#Builder`。
 
-```Kotlin
+```kotlin
 builder.setCustomAdapter(CustomContactListAdapter)
 ```
 
@@ -160,7 +160,7 @@ builder.setCustomAdapter(CustomContactListAdapter)
 
 例如，创建群组时需添加多个用户，可点击联系人对应的复选框进行选择。
 
-```Kotlin
+```kotlin
 builder.setSearchType(ChatUIKitSearchType.SELECT_USER)  
 ```
 
@@ -170,7 +170,7 @@ builder.setSearchType(ChatUIKitSearchType.SELECT_USER)
 
 ### 设置联系人头像样式
 
-```Kotlin
+```kotlin
  // uikit_configures.xml style 文件 支持修改以下配置：
  <!-- Set default avatar shape type: NONE = 0, ROUND = 1, RECTANGLE = 2 -->
     <integer name="ease_avatar_shape_type">2</integer>
@@ -190,7 +190,7 @@ builder.setSearchType(ChatUIKitSearchType.SELECT_USER)
 
 ## 事件监听
 
-```Kotlin
+```kotlin
 ChatUIKitContactsListFragment.Builder()
   .setOnHeaderItemClickListener(OnHeaderItemClickListener)
   .setOnUserListItemClickListener(OnUserListItemClickListener)
@@ -213,7 +213,7 @@ ChatUIKitContactsListFragment.Builder()
 
 ### 获取好友请求未读数
 
-```Kotlin
+```kotlin
 val systemConversation = ChatUIKitNotificationMsgManager.getInstance().getConversation() 
 systemConversation.let { cv->
     newRequestCount = cv.unreadMsgCount

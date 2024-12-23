@@ -18,13 +18,13 @@
 
 - 对于 JavaScript SDK，导入代码如下：
 
-```JavaScript
+```javascript
 import EC from "easemob-websdk";
 ```
 
 - 对于 TypeScript SDK，导入代码如下, EasemobChat 是 SDK 类型的命名空间。
 
-```JavaScript
+```javascript
 import EC, { EasemobChat } from "easemob-websdk";
 ```
 
@@ -32,7 +32,7 @@ import EC, { EasemobChat } from "easemob-websdk";
 
 Nuxt 项目, 你可以在 mounted 生命周期动态导入 SDK：
 
-```JavaScript
+```javascript
 export default {
   mounted: () => {
     import("easemob-websdk").then((res) => {
@@ -70,7 +70,7 @@ export default function Home() {
 
 使用 SDK 前需要进行初始化，示例代码如下：
 
-```JavaScript
+```javascript
 const conn = new EC.connection({
   appKey: "your appKey",
 });
@@ -105,7 +105,7 @@ const conn = new EC.connection({
 
 若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
-```JavaScript
+```javascript
 conn
   .registerUser({
     /** 用户 ID。 */
@@ -137,7 +137,7 @@ SDK 不支持自动登录，只支持通过以下方式手动登录：
 
 1. **用户 ID +密码** 登录是传统的登录方式。用户 ID 和密码都是你的终端用户自行决定，密码需要符合密码规则要求。
 
-```JavaScript
+```javascript
 conn
   .open({
     user: "username",
@@ -157,7 +157,7 @@ conn
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 :::
 
-```JavaScript
+```javascript
 conn
   .open({
     user: "username",
@@ -178,7 +178,7 @@ conn
 
 ## 退出登录
 
-```TypeScript
+```typescript
 conn.close();
 ```
 
@@ -186,7 +186,7 @@ conn.close();
 
 你可以通过注册连接监听器确认连接状态。
 
-```JavaScript
+```javascript
 conn.addEventHandler("handlerId", {
   onConnected: () => {
     console.log("onConnected");
@@ -235,18 +235,18 @@ conn.addEventHandler("handlerId", {
 
 开启日志输出：
 
-```JavaScript
+```javascript
 logger.enableAll();
 ```
 - 设置日志不输出到控制台：
 
-```JavaScript
+```javascript
 logger.setConsoleLogVisibility(false)
 ```
 
 - 监听 SDK 日志事件：
 
-```JavaScript
+```javascript
 logger.onLog = (log)=>{
   console.log('im logger', log)
 }
@@ -254,20 +254,20 @@ logger.onLog = (log)=>{
 
 关闭日志输出：
 
-```JavaScript
+```javascript
 logger.disableAll();
 ```
 
 设置日志输出等级：
 
-```JavaScript
+```javascript
 // 0 - 5 或者 'TRACE'，'DEBUG'，'INFO'，'WARN'，'ERROR'，'SILENT';
 logger.setLevel(0);
 ```
 
 设置缓存日志：
 
-```JavaScript
+```javascript
 logger.setConfig({
   useCache: false, // 是否缓存
   maxCache: 3 * 1024 * 1024, // 最大缓存字节
@@ -278,7 +278,7 @@ logger.setLevel(0);
 
 下载日志：
 
-```JavaScript
+```javascript
 logger.download();
 ```
 

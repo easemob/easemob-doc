@@ -4,7 +4,7 @@
 
 ## 设置界面语言
 
-```JavaScript
+```javascript
 // 初始化 UIKit 时设置 local 参数
 <UIKitProvider
  local={{
@@ -17,7 +17,7 @@
 
 UIKit 中使用 `i18next` 做的国际化，可以按转 `i18next` 的设置增加新的语言包，设置 `resources` 增加新的语言包资源，设置 `lng` 为要使用的语言。
 
-```JavaScript
+```javascript
 // 引入语言包
 import en from './en.json';
 

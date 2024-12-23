@@ -30,7 +30,7 @@
 该功能也支持转发单条合并消息。
 :::
 
-```Java
+```java
 // messageId 为要转发的消息 ID。
 String messageId = "";
 EMMessage targetMessage = EMClient.getInstance().chatManager().getMessage(messageId);

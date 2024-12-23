@@ -60,7 +60,7 @@
 
 你可以调用 `PushManager#syncConversationsSilentModeFromServer` 方法从服务器同步所有会话的推送通知方式设置。同步后成功后的结果会存储到本地数据库，然后你可以通过`Conversation#pushRemindType` 查询当前会话的推送通知方式。
 
-```TypeScript
+```typescript
 // 从服务器同步会话的推送通知方式
 ChatClient.getInstance().pushManager()?.syncConversationsSilentModeFromServer().then(() => {
   // success logic
@@ -80,7 +80,7 @@ if (conversation) {
 
 在本地调用 `PushManager#setSilentModeForConversation` 设置会话的推送通知方式，在多设备事件 `MultiDevicesListener#onConversationEvent` 里会回调当前操作，此时参数 `event` 的值为 `MultiDevicesEvent#CONVERSATION_MUTE_INFO_CHANGED`。
 
-```TypeScript
+```typescript
 //对会话设置推送通知方式
 const remindType: PushRemindType = PushRemindType.ALL;
 ChatClient.getInstance().pushManager()?.setSilentModeForConversation(conversationId, conversationType, remindType).then(result => {
@@ -125,7 +125,7 @@ ChatClient.getInstance().addMultiDevicesListener(multiDevicesListener);
 
 你可以调用 `setSilentModeForAll` 设置 app 级别的推送通知，并通过指定 `SilentModeParam` 字段设置推送通知方式和免打扰模式，如下代码示例所示：
 
-```TypeScript
+```typescript
 // 设置推送通知方式为 `MENTION_ONLY`。
 const params: PushRemindType = PushRemindType.MENTION_ONLY;
 
@@ -147,7 +147,7 @@ ChatClient.getInstance().pushManager()?.setSilentModeForAll(params).then(result 
 
 你可以调用 `getSilentModeForAll` 获取 app 级别的推送通知设置，如以下代码示例所示：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().pushManager()?.getSilentModeForAll().then(result => {
   // success logic
   const remindType = result.getRemindType();
@@ -182,7 +182,7 @@ ChatClient.getInstance().pushManager()?.getSilentModeForAll().then(result => {
 
 你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知，并通过指定 `PushRemindType` 字段设置推送通知方式和免打扰模式，如以下代码示例所示：
 
-```TypeScript
+```typescript
 // 设置推送通知方式为 `MENTION_ONLY`。
 const remindType: PushRemindType = PushRemindType.MENTION_ONLY;
 
@@ -197,7 +197,7 @@ ChatClient.getInstance().pushManager()?.setSilentModeForConversation(conversatio
 
 你可以调用 `getSilentModeForConversation` 获取指定会话的推送通知设置，如以下代码示例所示：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().pushManager()?.getSilentModeForConversation(conversationId, conversationType).then(result => {
   // 获取会话是否设置了推送通知方式。
   const enable = result.isConversationRemindTypeEnabled();
@@ -218,7 +218,7 @@ ChatClient.getInstance().pushManager()?.getSilentModeForConversation(conversatio
 
 你可以调用 `getSilentModeForConversations` 获取多个会话的推送通知设置，如以下代码示例所示：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().pushManager()?.getSilentModeForConversations(conversations).then(result => {
   // success logic
 }).catch((e: ChatError) => {
@@ -232,7 +232,7 @@ ChatClient.getInstance().pushManager()?.getSilentModeForConversations(conversati
 
 以下代码示例显示了如何清除会话的推送通知方式：
 
-```TypeScript
+```typescript
 // 清除指定会话的推送通知方式设置。清除后，该会话会采用 app 的设置。
 ChatClient.getInstance().pushManager()?.clearRemindTypeForConversation(conversationId, conversationType).then(() => {
   // success logic

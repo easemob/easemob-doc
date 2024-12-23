@@ -31,7 +31,7 @@
 
 示例代码如下：
 
-```TypeScript 
+```typescript 
 // 按时间删除消息
 ChatClient.getInstance().chatManager()?.removeMessagesFromServer(conversationId, conversationType, beforeTimeStamp).then(()=> {
     // success logic
@@ -47,7 +47,7 @@ ChatClient.getInstance().chatManager()?.removeMessagesFromServer(conversationId,
 
 你可以删除本地指定会话的所有消息，示例代码如下：
 
-```TypeScript
+```typescript
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 if(conversation) {
     conversation.clearAllMessages();
@@ -58,7 +58,7 @@ if(conversation) {
 
 你可以删除本地单个会话的指定消息，示例代码如下：
 
-```TypeScript
+```typescript
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 if(conversation) {
     conversation.removeMessage(messageId);

@@ -39,7 +39,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // name: 要创建的子区的名称
 // msgId: 子区的父消息 ID
 // parentId: 子区的父节点，通常是群组 ID
@@ -65,7 +65,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // chatThreadID: 子区 ID
 ChatClient.getInstance()
   .chatManager.destroyChatThread(chatThreadID)
@@ -90,7 +90,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // chatThreadID: 子区 ID
 ChatClient.getInstance()
   .chatManager.joinChatThread(chatThreadID)
@@ -110,7 +110,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // chatThreadID: 子区 ID
 ChatClient.getInstance()
   .chatManager.leaveChatThread(chatThreadID)
@@ -130,7 +130,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // chatThreadID: 子区 ID
 // member: 子区成员的用户 ID
 ChatClient.getInstance()
@@ -151,7 +151,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // chatThreadID: 子区 ID
 // newChatThreadName: 修改的子区名称，长度不超过 64 个字符
 ChatClient.getInstance()
@@ -170,7 +170,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // chatThreadID: 子区 ID
 ChatClient.getInstance()
   .chatManager.fetchChatThreadFromServer(chatThreadID)
@@ -186,7 +186,7 @@ ChatClient.getInstance()
 
 子区所属群组的所有成员均可以调用 `fetchMembersWithChatThreadFromServer` 方法从服务器分页获取子区成员列表。
 
-```TypeScript
+```typescript
 // chatThreadId: 子区 ID
 // pageSize: 单次请求返回的成员数，取值范围为 [1, 50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -208,7 +208,7 @@ ChatClient.getInstance()
 
 1. 用户可以调用 `fetchJoinedChatThreadFromServer` 方法从服务器分页获取自己加入和创建的子区列表：
 
-```TypeScript
+```typescript
 // pageSize: 单次请求返回的子区数，取值范围为 [1, 50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 ChatClient.getInstance()
@@ -223,7 +223,7 @@ ChatClient.getInstance()
 
 2. 用户可以调用 `fetchJoinedChatThreadWithParentFromServer` 方法从服务器分页获取指定群组中自己加入和创建的子区列表：
 
-```TypeScript
+```typescript
 // parentId: 群组 ID
 // pageSize: 单次请求返回的子区数，取值范围为 [1, 50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -243,7 +243,7 @@ ChatClient.getInstance()
 
 3. 用户还可以调用 `fetchChatThreadWithParentFromServer` 方法从服务器分页获取指定群组的子区列表：
 
-```TypeScript
+```typescript
 // parentId: 群组 ID
 // pageSize: 单次请求返回的子区数，取值范围为 [1, 50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
@@ -263,7 +263,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // chatThreadIDs: 要查询的子区 ID 列表，每次最多可传入 20 个子区 ID
 ChatClient.getInstance()
   .chatManager.fetchLastMessageWithChatThread(chatThreadIDs)
@@ -281,7 +281,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 class ChatMessageEvent implements ChatMessageEventListener {
   onChatMessageThreadCreated(msgThread: ChatMessageThreadEvent): void {
     console.log(`onChatMessageThreadCreated: `, msgThread);

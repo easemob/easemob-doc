@@ -41,7 +41,7 @@ import Callkit from 'chat-callkit';
 
 调用 `init` 初始化 `CallKit`。
 
-```JavaScript
+```javascript
 /**
  * 初始化 CallKit
  *
@@ -60,7 +60,7 @@ CallKit.init(appId, agoraUid, connection);
 
 一对一通话时，主叫方向被叫方发送短信作为通话邀请。
 
-```JavaScript
+```javascript
 let options = {
   /** 通话类型：
    * 0：一对一音频通话
@@ -86,7 +86,7 @@ CallKit.startCall(options);
 
 在多人通话中，主叫方向群组或聊天室发送文本消息，同时向用户发送命令消息加入通话。
 
-```JavaScript
+```javascript
 let options = {
   /** 通话类型：
    * 0：一对一音频通话
@@ -120,7 +120,7 @@ CallKit.startCall(options);
 
 通话邀请发送后，如果被叫方在线且可以通话，将通过 `onInvite` 回调收到邀请。你可以弹出一个用户界面，让被叫方在该回调中接受或拒绝邀请。
 
-```JavaScript
+```javascript
 /**
  * 处理通话邀请。
  *
@@ -144,7 +144,7 @@ CallKit.answerCall(result, accessToken);
 
 在通话中，你还可以监听以下回调事件：
 
-```JavaScript
+```javascript
 function Call() {
   // 处理会话状态变更。
   const handleCallStateChange = (info) => {

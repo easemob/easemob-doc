@@ -47,7 +47,7 @@
 
 示例代码如下：
 
-```Kotlin
+```kotlin
 
 	 ChatUIKitClient.getConfig()?.chatConfig?.enableReplyMessage
 
@@ -75,7 +75,7 @@
 
 消息翻译特性在 `ChatUIKitConfig` 中默认关闭，即 `enableTranslationMessage` 的默认值为 `false`。要开启该特性，需将该参数设置为 `true`。示例代码如下：
 
-```Kotlin
+```kotlin
 
    ChatUIKitClient.getConfig()?.chatConfig?.enableTranslationMessage
 
@@ -89,7 +89,7 @@
 
 更多翻译目标语言，请参考 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
 
-```Kotlin
+```kotlin
 
    val builder = UIKitChatFragment.Builder
    builder.setTargetTranslation(ChatUIKitTranslationLanguageType.English)
@@ -120,7 +120,7 @@
 
 消息表情回复特性在 `ChatUIKitConfig` 中默认关闭，即 `enableMessageReaction` 的默认值为 `false`。要开启该特性，将该参数设置为 `true`。示例代码如下：
 
-```Kotlin
+```kotlin
 
     ChatUIKitClient.getConfig()?.chatConfig?.enableMessageReaction
 
@@ -142,7 +142,7 @@
 
 示例代码如下：
 
-```Kotlin
+```kotlin
 
     ChatUIKitClient.getConfig()?.chatConfig?.enableChatThreadMessage
 
@@ -152,7 +152,7 @@
 
 你可以通过继承 `ChatUIKitThreadActivity` 添加自己的逻辑，示例如下：
 
-```Kotlin
+```kotlin
 
 class ChatThreadActivity:ChatUIKitThreadActivity() {
     override fun setChildSettings(builder: UIKitChatFragment.Builder) {
@@ -180,7 +180,7 @@ class ChatThreadActivity:ChatUIKitThreadActivity() {
 
 示例代码如下：
 
-```Kotlin
+```kotlin
 
 	 ChatUIKitClient.getConfig()?.chatConfig?.enableSendCombineMessage
 
@@ -206,7 +206,7 @@ class ChatThreadActivity:ChatUIKitThreadActivity() {
 
 示例代码如下：
 
-```Kotlin
+```kotlin
 
      ChatUIKitClient.getConfig()?.chatConfig?.enableChatPingMessage 
 
@@ -282,7 +282,7 @@ class ChatThreadActivity:ChatUIKitThreadActivity() {
 
 示例代码如下：
 
-```Kotlin
+```kotlin
     
     ChatUIKitClient.getConfig()?.chatConfig?.enableChatTyping = true
 

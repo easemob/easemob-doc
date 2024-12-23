@@ -35,7 +35,7 @@
 
 若会话中存在多条未读消息，建议调用该方法，因为若调用发送消息已读回执方法 `sendMessageReadAck`，则需要调用多次。
 
-```Objective-C
+```objective-c
 [[EMClient sharedClient].chatManager ackConversationRead:conversationId completion:nil];
 ```
 
@@ -47,7 +47,7 @@
 对于群组聊天，会话已读回执只用于清空服务端的群组会话的未读数，消息发送方不会通过 `OnConversationRead` 回调收到会话已读回执。
 :::
 
-```Objective-C
+```objective-c
 // 继承并实现监听器。
 EMChatManagerDelegate
 

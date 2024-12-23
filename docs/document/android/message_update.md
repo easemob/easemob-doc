@@ -25,13 +25,13 @@
 
 - 直接调用 `EMChatManager#updateMessage` 方法更新 SDK 本地数据库中的消息。
 
-```Java 
+```java 
 EMClient.getInstance().chatManager().updateMessage(message);
 ```
 
 - 若正在使用 `EMConversation` 类，可以先获取会话，再调用 `EMConversation#updateMessage` 方法更新 SDK 本地数据库会话中的消息。
 
-```Java
+```java
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 conversation.updateMessage(message);
 ```

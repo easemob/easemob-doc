@@ -18,7 +18,7 @@ SDK 的 log 文件在 app 的安装目录中，可以通过 API 获取，获取�
 
 通过 API 获取 log 文件路径, 返回格式为 `xxxxx/xxxx/log.gz`
 
-```Java
+```java
 logPath = EMClient.getInstance().compressLogs();
 ```
 

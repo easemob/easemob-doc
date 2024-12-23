@@ -8,7 +8,7 @@
 
 你可以通过容器组件的 `renderHeader` 方法渲染自定义 header：
 
-```JavaScript
+```javascript
 import {Chatroom, Header} from 'easemob-chat-uikit'
 
 const ChatApp = () => {
@@ -99,7 +99,7 @@ UIKit 使用 React Context 管理全局数据，用户可以使用自定义 hook
 
 ### 使用示例
 
-```JavaScript
+```javascript
 import React from "react";
 import { useChatroomContext, Button } from "easemob-chat-uikit";
 

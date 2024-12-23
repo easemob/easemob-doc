@@ -43,7 +43,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
     name: 'chatRoomName', // 聊天室名称。
     description: 'description', // 聊天室描述。
@@ -67,7 +67,7 @@ conn.createChatRoom(options).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 // 获取聊天室列表，最多可获取 1000 个。
 let option = {
     pagenum: 1,
@@ -105,7 +105,7 @@ conn.addEventHandler("CHATROOM", {
 
 你可以调用 `getJoinedChatRooms` 方法获取当前用户加入的聊天室列表，示例代码如下：
 
-```JavaScript
+```javascript
 conn
   .getJoinedChatRooms({
     pageNum: 1,
@@ -122,7 +122,7 @@ conn
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: 'chatRoomId'
 }
@@ -135,7 +135,7 @@ conn.getChatRoomDetails(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: 'chatRoomId'
 }
@@ -148,7 +148,7 @@ conn.destroyChatRoom(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 conn.addEventHandler("eventName", {
     onChatroomEvent: function(msg){
         switch(msg.operation){
@@ -224,7 +224,7 @@ conn.addEventHandler("eventName", {
 
 2. 收到通知事件后，可以通过事件回调参数获取聊天室当前人数。
 
-```JavaScript
+```javascript
 conn.addEventHandler("CHATROOM", {
         onChatroomEvent: (e) => {
           switch (e.operation) {

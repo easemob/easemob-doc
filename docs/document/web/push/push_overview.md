@@ -35,7 +35,7 @@
 
 例如，对于华为推送，需配置**证书名称**和**推送密钥**，并调用客户端 Web SDK 提供的 `uploadPushToken` 方法向环信服务器上传 device token（Android 或 iOS 平台使用 Web SDK）。
 
-```JavaScript
+```javascript
 const params = {
         deviceId: WebIM.conn.clientResource, // 设备 ID，用于标识设备。
         deviceToken: 'deviceToken', // 推送 token，用于标识每台设备上的每个应用。

@@ -103,7 +103,7 @@ end
 
 在环信 IM SDK 初始化完成后，同时初始化 `EaseCallKit`，初始化的同时开启回调监听，设置常用配置项。代码如下：
 
-```Objective-C
+```objective-c
 EaseCallConfig* config = [[EaseCallConfig alloc] init];
 EaseCallUser* usr = [[EaseCallUser alloc] init];
 usr.nickName = @"自定义昵称";
@@ -115,7 +115,7 @@ config.agoraAppId=@"声网 AppID";
 
 可设置的配置项包括以下内容：
 
-```Objective-C
+```objective-c
 @interface EaseCallConfig : NSObject
 // 默认头像。  
 @property (nonatomic)  NSURL*  defaultHeadImage;
@@ -140,7 +140,7 @@ config.agoraAppId=@"声网 AppID";
 
 一对一通话分为语音通话与视频通话，发起过程如下：
 
-```Objective-C
+```objective-c
 // 发起一对一通话。
 // remoteUser   邀请对象的环信 ID。
 // type   通话类型。`EaseCallType1v1Audio` 表示语音通话，`EaseCallType1v1Video` 表示视频通话。 
@@ -154,7 +154,7 @@ config.agoraAppId=@"声网 AppID";
 
 你可以从群组成员列表或者好友列表中选择用户，发起多人音视频通话。具体实现可参考 Demo 中的 `ConfInviteUsersViewController`。
 
-```Objective-C
+```objective-c
 //邀请用户加入多人通话。 
 // aInviteUsers   受邀用户的环信 ID 数组。
 // ext   可设置扩展信息，如果从群组发起，可通过 `ext` 设置群组 ID，其他用户也可邀请该群组成员。
@@ -175,7 +175,7 @@ config.agoraAppId=@"声网 AppID";
 
 被叫振铃的同时，会触发以下回调：
 
-```Objective-C
+```objective-c
 - (void)callDidReceive:(EaseCallType)aType inviter:(NSString*_Nonnull)user ext:(NSDictionary*)aExt
   {
 
@@ -186,7 +186,7 @@ config.agoraAppId=@"声网 AppID";
 
 多人通话中，当前用户可以点击通话界面右上角的邀请按钮再次向其他用户发起邀请。这种情况下，会触发 `EaseCallKitListener` 中的 `multiCallDidInvitingWithCurVC` 回调：
 
-```Objective-C
+```objective-c
 // 多人音视频邀请按钮的回调。
 // vc     当前视图控制器。
 // users  通话中已存在的用户。
@@ -220,7 +220,7 @@ config.agoraAppId=@"声网 AppID";
 
 自 `EaseCallKit` 3.8.1 新增 `callDidJoinChannel` 方法，在用户加入通话后会收到回调：
 
-```Objective-C
+```objective-c
 - (void)callDidJoinChannel:(NSString*_Nonnull)aChannelName uid:(NSUInteger)aUid
   {
     //此时，可以获取当前频道中已有用户的声网 ID 与环信 ID 的映射表，并将映射表设置到 `EaseCallKit`，同时也可以更新用户的头像和昵称。
@@ -234,7 +234,7 @@ config.agoraAppId=@"声网 AppID";
 
 自 `EaseCallKit` 3.8.1 新增 `remoteUserDidJoinChannel` 方法，在对方用户加入通话后会收到回调。
 
-```Objective-C
+```objective-c
 -(void)remoteUserDidJoinChannel:( NSString*_Nonnull)aChannelName uid:(NSInteger)aUid username:(NSString*_Nullable)aUserName
 {
     // 此时，可以获取当前频道中已有用户的声网 RTC UID 与环信 ID 的映射表，并将映射表设置到 `EaseCallKit`，同时也可以更新用户的头像和昵称。
@@ -247,7 +247,7 @@ config.agoraAppId=@"声网 AppID";
 
 在一对一音视频通话中，若其中一方挂断，双方的通话会自动结束，而多人音视频通话中需要主动挂断才能结束通话。通话结束后，会触发 `callDidEnd` 回调：
 
-```Objective-C
+```objective-c
 // 通话结束回调。
 // aChannelName  通话使用的声网频道名称，用户可以根据频道名称，到声网 Console 的水晶球查询通话质量。
 // aTm    通话时长，单位为秒。
@@ -296,7 +296,7 @@ config.agoraAppId=@"声网 AppID";
 
 异常包括业务逻辑异常、音视频异常以及 Easemob IM 异常。
 
-```Objective-C
+```objective-c
 // 通话异常回调。
 // aError 为异常信息，包括了 Easemob IM 异常，RTC 异常，业务异常三种情况。
 - (void)callDidOccurError:(EaseCallError *)aError
@@ -307,7 +307,7 @@ config.agoraAppId=@"声网 AppID";
 
 `EaseCallError` 异常包括 IM 异常，RTC 异常以及业务逻辑异常。
 
-```Objective-C
+```objective-c
 @interface EaseCallError : NSObject
 // 异常类型，包括 Easemob IM 异常、RTC 异常和业务逻辑异常。   
 @property (nonatomic) EaseCallErrorType aErrorType;
@@ -321,7 +321,7 @@ config.agoraAppId=@"声网 AppID";
 
 `EaseCallKit` 库初始化之后，可调用该方法修改配置：
 
-```Objective-C
+```objective-c
 // 以下为修改铃声过程。 
 EaseCallConfig* config = [[EaseCallManager sharedManager] getEaseCallConfig];
 NSString* path = [[NSBundle mainBundle] pathForResource:@"huahai128" ofType:@"mp3"];
@@ -332,7 +332,7 @@ config.ringFileUrl = [NSURL fileURLWithPath:path];
 
 自 `EaseCallKit` 3.8.1 开始，新增了修改头像昵称的接口，用户加入频道后可修改自己和通话中其他人的头像昵称，修改方法如下：
 
-```Objective-C
+```objective-c
 EaseCallUser* user = [EaseCallUser userWithNickName:info.nickName image:[NSURL URLWithString:info.avatarUrl]];
 [[[EaseCallManager sharedManager] getEaseCallConfig] setUser:username info:user];
 ```
@@ -343,7 +343,7 @@ EaseCallUser* user = [EaseCallUser userWithNickName:info.nickName image:[NSURL U
 
 用户加入音视频通话时，如果需要进行声网 token 鉴权，需要先开启 token 验证开关，开启过程如下：
 
-```Objective-C
+```objective-c
 EaseCallUser* callUser = [[EaseCallUser alloc] init];
 config.enableRTCTokenValidate = YES;// 开启 RTC Token 验证，默认不开启。  
 [[EaseCallManager sharedManager] initWithConfig:config delegate:self];
@@ -351,7 +351,7 @@ config.enableRTCTokenValidate = YES;// 开启 RTC Token 验证，默认不开启
 
 获取 token 的过程由用户自己完成，开启后在通话时，会收到 `callDidRequestRTCTokenForAppId`回调，用户需要在回调中，实现从用户自己的 App Server 中获取 token（App Server 的实现参见 [生成声网 Token](https://docportal.shengwang.cn/cn/video-call-4.x/token_server_ios_ng)，然后调用 `setRTCToken:channelName:` 接口。
 
-```Objective-C
+```objective-c
 - (void)callDidRequestRTCTokenForAppId:(NSString * _Nonnull)aAppId
       channelName:(NSString * _Nonnull)aChannelName
           account:(NSString * _Nonnull)aUserAccount

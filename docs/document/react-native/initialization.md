@@ -16,7 +16,7 @@
 
 初始化示例代码：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .init(
     new ChatOptions({

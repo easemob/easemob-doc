@@ -45,7 +45,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 异步方法
 [[EMClient sharedClient].contactManager addContact:@"aUsername" message:@"Message" completion:^(NSString *aUsername, EMError *aError) {
 if (!aError) {
@@ -62,7 +62,7 @@ if (!aError) {
 
 设置好友监听示例代码如下：
 
-```Objective-C
+```objective-c
 // 注册好友回调。
 [[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
 // 移除好友回调。
@@ -76,7 +76,7 @@ if (!aError) {
 
 收到好友请求后，可以选择同意加好友申请或者拒绝加好友申请，示例代码如下：
 
-```Objective-C
+```objective-c
 // 同意好友申请。
 // 异步方法
 [[EMClient sharedClient].contactManager approveFriendRequestFromUser:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
@@ -102,7 +102,7 @@ if (!aError) {
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 对方同意了好友申请。
 - (void)friendRequestDidApproveByUser:(NSString *)aUsername
   { }
@@ -118,7 +118,7 @@ if (!aError) {
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 删除好友。
 // 异步方法
 [[EMClient sharedClient].contactManager deleteContact:@"aUsername" isDeleteConversation:aIsDeleteConversation completion:^(NSString *aUsername, EMError *aError) {
@@ -132,7 +132,7 @@ if (!aError) {
 
 调用 `deleteContact` 删除好友后，用户 A，B 都会收到 `friendshipDidRemoveByUser` 回调，示例代码如下：
 
-```Objective-C
+```objective-c
 // 好友已被删除。
 - (void)friendshipDidRemoveByUser:(NSString *)aUsername
   { }
@@ -144,7 +144,7 @@ if (!aError) {
 
 好友备注的长度不能超过 100 个字符。
 
-```Objective-C
+```objective-c
 [EMClient.sharedClient.contactManager setContactRemark:@"userId" remark:@"remark" completion:^(EMContact * _Nullable contact, EMError * _Nullable aError) {
             
     }];
@@ -158,7 +158,7 @@ if (!aError) {
 
 - 一次性获取服务端的好友列表。
 
-```Objective-C
+```objective-c
 [EMClient.sharedClient.contactManager getAllContactsFromServerWithCompletion:^(NSArray<EMContact *> * _Nullable aList, EMError * _Nullable aError) {
             
     }];
@@ -166,7 +166,7 @@ if (!aError) {
 
 - 分页获取服务端的好友列表。
 
-```Objective-C
+```objective-c
 //pageSize 的取值范围为 [1,50]
 [EMClient.sharedClient.contactManager getContactsFromServerWithCursor:@"" pageSize:50 completion:^(EMCursorResult<EMContact *> * _Nullable aResult, EMError * _Nullable aError) {
         
@@ -175,7 +175,7 @@ if (!aError) {
 
 此外，你也可以调用 `getContactsFromServerWithCompletion` 方法从服务器获取所有好友的列表。该列表只包含好友的用户 ID。
 
-```Objective-C
+```objective-c
 // 异步方法
 [[EMClient sharedClient].contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
     if (!aError) {
@@ -196,13 +196,13 @@ if (!aError) {
 
 - 获取本地单个好友。  
 
-```Objective-C
+```objective-c
 EMContact* contact = [EMClient.sharedClient.contactManager getContact:@"userId"];
 ```
 
 - 一次性获取本地好友列表。
 
-```Objective-C
+```objective-c
 NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllContacts];
 ```
 
@@ -210,7 +210,7 @@ NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllCont
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 ```
 
@@ -224,7 +224,7 @@ NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 
 从服务器获取黑名单列表之后，才能从本地数据库获取到黑名单列表。
 
-```Objective-C
+```objective-c
 // 从服务器获取黑名单列表。
 // 异步方法
 [[EMClient sharedClient].contactManager getBlackListFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
@@ -238,7 +238,7 @@ NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 
 2. 从本地数据库获取黑名单列表
 
-```Objective-C
+```objective-c
 // 同步方法
 NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 ```
@@ -251,7 +251,7 @@ NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 
 示例代码如下：
 
-```Objective-C
+```objective-c
 // 异步方法
 [[EMClient sharedClient].contactManager addUserToBlackList:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
     if (!aError) {
@@ -266,7 +266,7 @@ NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 
 你可以调用 `removeUserFromBlackList` 将用户从黑名单移除，用户发送消息等行为将恢复。
 
-```Objective-C
+```objective-c
 // 异步方法
 [[EMClient sharedClient].contactManager removeUserFromBlackList:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
     if (!aError) {

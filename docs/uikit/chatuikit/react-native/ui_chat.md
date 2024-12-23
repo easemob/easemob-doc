@@ -23,7 +23,7 @@
 | `onSendMessageEnd` | 否  | 消息发送完成时发生。   |
 | `onVoiceRecordEnd` | 否 | 语音消息录制完成时发生。   |
 
-```TypeScript
+```typescript
 import * as React from "react";
 import { ChatFragment, ScreenContainer } from "react-native-chat-uikit";
 export default function ChatScreen(): JSX.Element {
@@ -59,7 +59,7 @@ export default function ChatScreen(): JSX.Element {
 
 例如，你可以自行录制语音，然后调用 `sendVoiceMessage` 方法发送。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;
@@ -96,7 +96,7 @@ export default function ChatScreen(): JSX.Element {
 - `VoiceMessageItem`：自定义语音消息样式。
 - `FileMessageItem`：自定义文件消息样式。
 
-```TypeScript
+```typescript
 import type { MessageBubbleListProps } from "../fragments/MessageBubbleList";
 import MessageBubbleList from "../fragments/MessageBubbleList";
 export default function ChatScreen(): JSX.Element {
@@ -131,7 +131,7 @@ export default function ChatScreen(): JSX.Element {
 
 你可以设置 `MessageBubbleListPropsP` 中的 `backgroundColor` 自定义背景色。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;
@@ -160,7 +160,7 @@ export default function ChatScreen(): JSX.Element {
 
 你可以设置 `messageBubbleList` 中的 `showTimeLabel` 自定义时间标签显示和隐藏。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;
@@ -189,7 +189,7 @@ export default function ChatScreen(): JSX.Element {
 
 你可以设置 `ChatFragment` 中的 `onClickMessageBubble` 自定义点击消息气泡回调，例如：播放语音、预览图片等。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;
@@ -210,7 +210,7 @@ export default function ChatScreen(): JSX.Element {
 
 你可以设置 `ChatFragment` 中的 `onLongPressMessageBubble` 自定义长按消息气泡回调，例如，可以显示不同右键菜单。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;
@@ -235,7 +235,7 @@ export default function ChatScreen(): JSX.Element {
 
 你可以设置 `ChatFragment` 中的 `onSendMessage` 自定义发送消息前回调。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;
@@ -256,7 +256,7 @@ export default function ChatScreen(): JSX.Element {
 
 你可以设置 `ChatFragment` 中的 `onSendMessageEnd` 自定义发送消息完成，例如，更新消息发送状态。
 
-```TypeScript
+```typescript
 export default function ChatScreen(): JSX.Element {
   const chatId = "xxx";
   const chatType = 0;

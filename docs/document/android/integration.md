@@ -106,7 +106,7 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 - `path` 参数为空或者不调用该方法时，SDK 内部会使用 `system.loadLibrary` 从系统默认路径中搜索并加载 so 库。
 :::
 
-```Java
+```java
 //假设用户已经通过动态下发的方式，将环信 SDK 中的 libcipherdb.so 和 libhyphenate.so 两个 so 库，放到 app 的 /data/data/packagename/files 目录下。
 String filesPath = mContext.getFilesDir().getAbsolutePath();
 
@@ -157,7 +157,7 @@ EMClient.getInstance().init(mContext, options);
 
 在 `app/proguard-rules.pro` 文件中添加如下行，防止混淆 SDK 的代码：
 
-```Java
+```java
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
 ```

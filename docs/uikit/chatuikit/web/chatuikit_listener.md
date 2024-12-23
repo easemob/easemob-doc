@@ -6,7 +6,7 @@
 
 ## 使用示例
 
-```JavaScript
+```javascript
 import React, { useEffect } from "react";
 import { eventHandler } from "easemob-chat-uikit";
 

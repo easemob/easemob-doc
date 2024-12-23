@@ -27,7 +27,7 @@
 1. 在 Demo 中继承 `EaseChatUIKit` 中的 `EaseChatNavigationBar` 类创建自己的会话列表页面导航栏，例如 `CustomConversationNavigationBar`。
 2. 重载 `createNavigation()` 方法并返回你使用 `CustomConversationNavigationBar` 创建的对象。示例代码如下：
 
-```Swift
+```swift
     override func createNavigationBar() -> EaseChatNavigationBar {
         CustomConversationNavigationBar(showLeftItem: false,rightImages: [UIImage(named: "add", in: .chatBundle, with: nil,hiddenAvatar: false)])
     }
@@ -64,7 +64,7 @@
 
 你可以利用 `Appearance.conversation.listMoreActions = value` 设置点击会话列表右上角的 `+` 之后的 `ActionSheet` 的菜单项。你可以增加或删除菜单项，示例代码如下：
 
-```Swift
+```swift
      //新增菜单项
      Appearance.conversation.listMoreActions.append(ActionSheetItem(title: "new list item", type: .destructive, tag: "custom"))
      //删除菜单项
@@ -79,7 +79,7 @@
 
 对于导航点击事件的监听，你需要重载会话列表页面中的 `navigationClick` 方法，然后根据对应的点击区域做对应的处理，示例代码如下：
 
-```Swift
+```swift
     override func navigationClick(type: EaseChatNavigationBarClickEvent, indexPath: IndexPath?) {
         switch type {
         case .back: self.backAction()
@@ -97,7 +97,7 @@
 
 自定义会话列表 TableView，需要重载会话列表页面中的 `createList` 方法后，返回你继承 `EaseChatUIKit` 中 `ConversationList` 后的类对象。关于在导航栏中实现业务逻辑，详见 `ConversationList.swift` 类。示例代码如下：
 
-```Swift
+```swift
     override open func createList() -> ConversationList {
         CustomConversationList(frame: CGRect(x: 0, y: self.search.frame.maxY+5, width: self.view.frame.width, height: self.view.frame.height-NavigationHeight-BottomBarHeight-(self.tabBarController?.tabBar.frame.height ?? 49)), style: .plain)
     }
@@ -109,7 +109,7 @@
 
 1. 继承 `EaseChatUIKit` 中的 `ConversationCell` 类创建新的自定义类 `CustomConversationCell`，然后进行如下代码设置：
 
-```Swift
+```swift
     ComponentsRegister.shared.ConversationCell = CustomConversationCell.self
 ```
 
@@ -117,7 +117,7 @@
 
    如果需要复用已有逻辑再增加新逻辑，则只需重载对应方法后调用 `super.xxx`，例如：
 
-```Swift
+```swift
     override open func refresh(info: ConversationInfo) {
        super.refresh(info:info)
        //继续你的新逻辑即可
@@ -161,7 +161,7 @@
 
 默认情况下，左滑菜单项包括禁言、置顶会话和删除会话，右滑菜单包括会话已读和唤起更多菜单 `ActionSheet`。因为是枚举数组，只支持删减菜单项，不能新增。 
 
-```Swift
+```swift
      //Remove
      Appearance.conversation.swipeLeftActions.removeAll { $0 == .more }
 ```
@@ -174,7 +174,7 @@
 
 你可以利用 `Appearance.conversation.moreActions = value` 设置右滑会话后出现的 `...` 菜单项点击后的 `ActionSheet` 的菜单项。你可以添加或删减菜单项，示例代码如下：
 
-```Swift
+```swift
      //添加菜单项
      Appearance.conversation.moreActions.append(ActionSheetItem(title: "new list item", type: .destructive, tag: "custom"))
      //删减菜单项
@@ -183,7 +183,7 @@
 
 获取该数组中某一项的点击事件，示例代码如下：
 
-```Swift
+```swift
         if let item = Appearance.conversation.listMoreActions.first(where: { $0.tag == "xxx" }) {
             item.actionClosure = { [weak self] _ in
                 //do something

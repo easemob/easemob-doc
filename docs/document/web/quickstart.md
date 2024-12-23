@@ -117,7 +117,7 @@ Easemob_quickstart<br>
 
 `index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 `<Your app key>` 替换为你之前获取的 App Key。
 
-```Javascript
+```javascript
 import WebIM from 'easemob-websdk'
 const appKey = "<Your app key>"
 
@@ -215,7 +215,7 @@ window.onload = function () {
 ```
 :::tip
 对于 Typescript，通过以下代码引入类型声明：
-```JavaScript
+```javascript
 import WebIM, { EasemobChat } from 'easemob-websdk'
 ```
 :::
@@ -249,7 +249,7 @@ import WebIM, { EasemobChat } from 'easemob-websdk'
 
 2.在项目根目录中添加 `webpack.config.js` 文件，用于配置 webpack。文件内容如下：
 
-```Javascript
+```javascript
 const path = require('path');
 
 module.exports = {

@@ -31,7 +31,7 @@
 
     在 `/Gradle Scripts/build.gradle.kts(Project: <projectname>)` 文件内，检查是否有 **mavenCentral** 仓库。
 
-    ```Kotlin
+    ```kotlin
     buildscript {
        repositories {
            mavenCentral()
@@ -42,7 +42,7 @@
 
     在 `/Gradle Scripts/settings.gradle.kts(Project Settings)` 文件内，检查是否有 **mavenCentral** 仓库。
 
-    ```Kotlin
+    ```kotlin
     dependencyResolutionManagement {
         repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
         repositories {
@@ -56,7 +56,7 @@
 
 在 app 项目 build.gradle.kts 中添加以下依赖：
 
-```Kotlin
+```kotlin
 implementation("io.hyphenate:ease-chat-kit:4.11.1")
 ```
 
@@ -66,14 +66,14 @@ implementation("io.hyphenate:ease-chat-kit:4.11.1")
 
 - 在根目录 `settings.gradle.kts` 文件（/Gradle Scripts/settings.gradle.kts）中添加如下代码：
 
-```Kotlin
+```kotlin
 include(":ease-im-kit")
 project(":ease-im-kit").projectDir = File("../chatuikit-android/ease-im-kit")
 ```
 
 - 在 app 的 `build.gradle.kts` 文件（/Gradle Scripts/build.gradle）中添加如下代码：
 
-```Kotlin
+```kotlin
 //chatuikit-android
 implementation(project(mapOf("path" to ":ease-im-kit")))
 ```
@@ -178,7 +178,7 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 
 打开 `MainActivity` 文件，并替换为如下代码：
 
-```Kotlin
+```kotlin
 package com.easemob.quickstart
 
 import androidx.appcompat.app.AppCompatActivity

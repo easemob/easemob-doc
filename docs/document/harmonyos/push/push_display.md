@@ -9,7 +9,7 @@
 
 你可以调用 `updatePushNickname` 设置推送通知中显示的昵称，如以下代码示例所示：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().pushManager()?.updatePushNickname(pushNickname).then(() => {
   // success logic
 }).catch((e: ChatError) => {
@@ -19,7 +19,7 @@ ChatClient.getInstance().pushManager()?.updatePushNickname(pushNickname).then(()
 
 你也可以调用 `updatePushDisplayStyle` 设置推送通知的显示样式，如下代码示例所示：
 
-```TypeScript
+```typescript
 // 设置为简单样式。
 const displayStyle = PushDisplayStyle.SimpleBanner;
 ChatClient.getInstance().pushManager()?.updatePushDisplayStyle(displayStyle).then(() => {
@@ -80,7 +80,7 @@ ChatClient.getInstance().pushManager()?.updatePushDisplayStyle(displayStyle).the
 
 这种情况下，创建消息时无需传入 `title_args` 和 `content_args` 参数。 
 
-```TypeScript
+```typescript
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 const message = ChatMessage.createTextSendMessage(conversationId, "消息内容");
 if (message) {
@@ -127,7 +127,7 @@ if (message) {
 您收到了一条消息<br/>
 请及时查看
 
-```TypeScript
+```typescript
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 const message = ChatMessage.createTextSendMessage(conversationId, "消息内容");
 if (message) {
@@ -154,7 +154,7 @@ if (message) {
 若发送方在发送消息时使用了推送模板，则推送通知栏中的显示内容以发送方的推送模板为准。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance().pushManager()?.setPushTemplate("自定义模板名称").then(() => {
   // success logic
 }).catch((e: ChatError) => {

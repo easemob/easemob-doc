@@ -193,7 +193,7 @@
 
 通过 App Server 加入或离开语聊房的方法的示例代码如下：
 
-```Swift
+```swift
 // 加入语聊房
     func uploadStatus( status: Bool) {
         guard let roomId = self.roomInfo?.room?.room_id  else { return }
@@ -235,7 +235,7 @@
 
 调用 [`setAudioEffectPreset`](https://docportal.shengwang.cn/cn/voice-call-4.x/API%20Reference/ios_ng/v4.2.2/API/rtc_api_overview_ng.html#ariaid-title129) 方法，在不改变原声的性别特征的前提下，设置人声音效。设置音效后，频道内所有用户都能听到该效果。
 
-```Swift
+```swift
     rtcKit.setChannelProfile(.liveBroadcasting)
     rtcKit.setAudioProfile(.musicHighQuality)
     rtcKit.setAudioScenario(.gameStreaming)
@@ -247,7 +247,7 @@ AI 降噪插件使用声网人工智能噪声消除算法，能够让远程交�
 
 可以开启或关闭 AI 降噪以及设置中级降噪和高级降噪。示例代码如下：
 
-```Swift
+```swift
 public func setAINS(with level: AINS_STATE) {
         switch level {
         case .high:

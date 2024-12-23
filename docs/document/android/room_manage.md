@@ -41,7 +41,7 @@
 
 示例代码如下：
 
-```Java
+```java
 // 异步方法
 EMChatRoom  chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(subject, description, welcomMessage, maxUserCount, members);
 ```
@@ -55,7 +55,7 @@ EMChatRoom  chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(s
 
 示例代码如下：
 
-```Java
+```java
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
 // 同步方法，会阻塞当前线程。异步方法为 asyncFetchPublicChatRoomsFromServer(int, int, EMValueCallBack)。
 EMPageResult<EMChatRoom> chatRooms = EMClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(pageNumber, pageSize);
@@ -76,7 +76,7 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 
 同时，你可以调用 `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 
-```Java
+```java
 String ext= "your ext info";
 boolean leaveOtherRooms=true;
 EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomID,leaveOtherRooms,ext, new EMValueCallBack<com.hyphenate.chat.EMChatRoom>() {
@@ -109,7 +109,7 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChang
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchChatRoomFromServer(String, EMValueCallBack)。
 EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFromServer(chatRoomId);
@@ -121,7 +121,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFrom
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncDestroyChatRoom(String, EMCallBack)。
 EMClient.getInstance().chatroomManager().destroyChatRoom(chatRoomId);
@@ -134,7 +134,7 @@ EMClient.getInstance().chatroomManager().destroyChatRoom(chatRoomId);
 示例代码如下：
 
 
-```Java
+```java
 // 注册聊天室回调
 EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChangeListener);
 // 移除聊天室回调
@@ -144,7 +144,7 @@ EMClient.getInstance().chatroomManager().removeChatRoomListener(chatRoomChangeLi
 具体事件如下：
 
 
-```Java
+```java
 public interface EMChatRoomChangeListener {
     // 聊天室被解散。聊天室的所有成员会收到该事件。
     void onChatRoomDestroyed(final String roomId, final String roomName);
@@ -210,7 +210,7 @@ public interface EMChatRoomChangeListener {
 
 2. 收到通知事件后，调用 `EMChatRoomManager#getChatRoom` 方法获取本地聊天室详情，再通过`EMChatRoom#getMemberCount`获取聊天室当前人数。
 
-```Java
+```java
 EMClient.getInstance().chatroomManager().addChatRoomChangeListener(new EMChatRoomChangeListener() {
 
             @Override

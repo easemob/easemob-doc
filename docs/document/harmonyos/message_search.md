@@ -29,7 +29,7 @@
 
 你可以调用 `Conversation#loadMoreMessagesFromDB` 方法从指定消息 ID 开始分页加载数据库中的消息，示例代码如下：
 
-```TypeScript
+```typescript
 // conversationId：会话 ID。
 const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 // startMsgId: 查询的起始消息 ID。该参数设置后，SDK 从指定的消息 ID 开始按消息检索方向加载。如果传入消息的 ID 为空，SDK 忽略该参数。
@@ -42,7 +42,7 @@ const messages = conversation?.loadMoreMessagesFromDB(startMsgId, pageSize, dire
 
 你可以调用 `ChatManager#searchMessagesFromDB(keywords: string, timestamp: number, maxCount: number, from?: string, direction?: SearchDirection)` 方法根据关键字搜索本地数据库中指定用户发送的消息，示例代码如下：
 
-```TypeScript
+```typescript
 // keywords：搜索关键字；
 // timestamp：搜索的起始时间戳；
 // maxCount：每次获取的消息数量，取值范围为 [1,400]。
@@ -53,7 +53,7 @@ const messages = ChatClient.getInstance().chatManager()?.searchMessagesFromDB(ke
 
 你可以调用 `Conversation#searchMessagesByKeywords` 方法根据关键字搜索本地数据库中`单个会话`中指定用户发送的消息，示例代码如下：
 
-```TypeScript
+```typescript
 // conversationId：会话 ID。
 const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 // keywords：搜索关键字；
@@ -72,7 +72,7 @@ const messages = conversation?.searchMessagesByKeywords(keywords, timestamp, max
 使用设置多个消息类型搜索消息的功能，需将 SDK 升级至 V1.4.0 或以上版本。
 :::
 
-```TypeScript
+```typescript
 const types = [ContentType.TXT, ContentType.IMAGE];
 // timestamp：查询的起始消息 Unix 时间戳，单位为毫秒。该参数设置后，SDK 从指定时间戳的消息开始，按消息搜索方向获取。如果该参数设置为负数，SDK 从当前时间开始搜索。
 // maxCount：每次获取的消息数量，取值范围为 [1,400]。
@@ -83,7 +83,7 @@ const messages = ChatClient.getInstance().chatManager()?.searchMessagesFromDB(ty
 
 你可以调用 `Conversation#searchMessagesByType` 方法通过设置单个或多个消息类型搜索本地数据库中`指定会话`的消息，示例代码如下：
 
-```TypeScript
+```typescript
 // conversationId：会话 ID。
 const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 const types = [ContentType.TXT, ContentType.IMAGE];
@@ -98,7 +98,7 @@ const messages = conversation?.searchMessagesByType(types, timestamp, maxCount, 
 
 你可以调用 `Conversation#searchMessagesFromDB(timestamp: number, maxCount: number, direction?: SearchDirection)` 方法设置消息时间戳、消息数量和搜索方向等条件搜索当前会话中的消息。
 
-```TypeScript
+```typescript
 // conversationId：会话 ID。
 const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 // timestamp：查询的起始消息 Unix 时间戳，单位为毫秒。该参数设置后，SDK 从指定时间戳的消息开始，按消息搜索方向获取。如果该参数设置为负数，SDK 从当前时间开始搜索。
@@ -111,7 +111,7 @@ const messages = conversation?.searchMessagesFromDB(timestamp, maxCount, directi
 
 你可以调用 `Conversation#searchMessagesBetweenTime` 方法设置消息起始时间戳、结束时间戳和消息数量等条件搜索当前会话中的消息。
 
-```TypeScript
+```typescript
 // conversationId：会话 ID。
 const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 // startTimestamp: 搜索的起始时间戳。单位为毫秒。

@@ -10,7 +10,7 @@
 
 示例代码如下所示：
   
-```JavaScript
+```javascript
 conn.registerUser({
   username: "user1",
   password: "xxx",
@@ -29,7 +29,7 @@ conn.registerUser({
 
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
-```JavaScript
+```javascript
 conn
   .open({
     user: "username",
@@ -45,7 +45,7 @@ conn
 
 2. **用户 ID + 密码**登录是传统的登录方式。用户 ID 和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_system.html#开放注册单个用户)。
 
-```JavaScript
+```javascript
 conn
   .open({
     user: "username",
@@ -61,7 +61,7 @@ conn
 
 ## 退出登录
 
-```JavaScript
+```javascript
 conn.close();
 ```
 

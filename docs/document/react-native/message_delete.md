@@ -31,7 +31,7 @@
 若使用该功能，需将 SDK 升级至 V1.4.0 或以上版本。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.deleteAllMessageAndConversation(clearServerData)
   .then(() => {
@@ -54,7 +54,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 按消息 ID 删除
 ChatClient.getInstance()
   .chatManager.removeMessagesFromServerWithMsgIds(convId, convType, msgIds)
@@ -83,7 +83,7 @@ ChatClient.getInstance()
 
 你可以调用 `deleteAllMessages` 方法删除指定会话的所有消息。
 
-```TypeScript
+```typescript
 // convId：会话 ID
 // convType：会话类型
 ChatClient.getInstance()
@@ -100,7 +100,7 @@ ChatClient.getInstance()
 
 你可以调用 `deleteMessagesWithTimestamp` 方法删除指定时间段的本地消息。
 
-```TypeScript
+```typescript
 // startTs: 开始点的时间戳
 // endTs: 结束点的时间戳
 ChatClient.getInstance()
@@ -117,7 +117,7 @@ ChatClient.getInstance()
 
 你可以调用 `deleteMessage` 方法删除本地单个会话的指定消息。
 
-```TypeScript
+```typescript
 // convId：会话 ID
 // convType: 会话类型
 // msgId：消息 ID
@@ -135,7 +135,7 @@ ChatClient.getInstance()
 
 你可以调用 `ChatManager#removeMessagesWithTimestamp` 方法删除服务端的聊天室消息。删除后，该用户无法从服务端拉取到该消息，不过，聊天室会话中的其它用户的服务器消息不受影响，可以漫游获取。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.removeMessagesWithTimestamp({
     convId: "foo",

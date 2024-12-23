@@ -31,7 +31,7 @@
 
 对于单个会话来说，默认可置顶 20 条消息。你可以联系环信商务提升该上限，最大可调整至 100。
 
-```C#
+```csharp
 bool isPinned = true;
 SDKClient.Instance.ChatManager.PinMessage(msgId, isPinned, new CallBack(
     onSuccess: () =>
@@ -49,7 +49,7 @@ SDKClient.Instance.ChatManager.PinMessage(msgId, isPinned, new CallBack(
 
 群组或聊天室中的所有成员均可取消置顶消息，不论该消息由哪个成员置顶。取消置顶消息后，`Message#PinnedInfo` 获取到的信息中 `PinnedBy` 为空，`PinnedAt` 为`0`，该会话的置顶消息列表中也不再包含该消息。
 
-```C#
+```csharp
 bool isPinned = false;
 SDKClient.Instance.ChatManager.PinMessage(msgId, isPinned, new CallBack(
     onSuccess: () =>
@@ -70,7 +70,7 @@ SDKClient.Instance.ChatManager.PinMessage(msgId, isPinned, new CallBack(
 2. 若消息置顶后，用户撤回了该消息，则该消息从服务端移除，所有用户在从服务器拉取置顶消息列表时无法拉取到该消息。
 :::
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.GetPinnedMessagesFromServer(convId, new ValueCallBack<List<Message>>(
     onSuccess: (list) => {
         foreach (var it in list)
@@ -90,7 +90,7 @@ SDKClient.Instance.ChatManager.GetPinnedMessagesFromServer(convId, new ValueCall
 - 若消息为置顶状态，该类返回消息置顶的时间以及操作者的用户 ID。
 - 若消息为非置顶状态，则 `PinnedInfo` 中的 `PinnedBy` 为空，`PinnedAt` 为 `0`。
 
-```C#
+```csharp
 PinnedInfo pinnedInfo = msg.PinnedInfo;
 string operatorId = pinnedInfo.PinnedBy;
 long pinTime = pinnedInfo.PinnedAt;
@@ -105,7 +105,7 @@ if (operatorId.CompareTo("") != 0 && pinTime != 0)
 
 ## 监听消息置顶事件
 
-```C#
+```csharp
 public class ChatManagerDelegate : IChatManagerDelegate
 {
 	// 实现 IChatManagerDelegate 中的其它功能

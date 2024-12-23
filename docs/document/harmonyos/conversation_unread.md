@@ -26,7 +26,7 @@
 
 你可以调用 `getUnreadMsgCount` 获取本地指定会话的未读消息数，示例代码如下：
 
-```TypeScript
+```typescript
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 if (conversation) {
     let unreadMsgCount = conversation.getUnreadMsgCount();
@@ -37,7 +37,7 @@ if (conversation) {
 
 你可以调用 `markAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零，示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.markAllConversationsAsRead();
 ```
 
@@ -45,7 +45,7 @@ ChatClient.getInstance().chatManager()?.markAllConversationsAsRead();
 
 你可以调用 `markAllMessagesAsRead` 方法对指定会话的未读消息数清零，示例代码如下：
 
-```TypeScript
+```typescript
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 conversation?.markAllMessagesAsRead();
 ```
@@ -54,7 +54,7 @@ conversation?.markAllMessagesAsRead();
 
 你可以调用 `markMessageAsRead` 方法将指定会话的单条未读消息置为已读。
 
-```TypeScript
+```typescript
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 conversation?.markMessageAsRead(messageId);
 ```

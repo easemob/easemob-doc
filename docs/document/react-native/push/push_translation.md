@@ -6,7 +6,7 @@
 
 以下示例代码显示如何设置和获取推送通知的首选语言：
 
-```TypeScript
+```typescript
 // 设置推送通知的首选语言
 ChatClient.getInstance()
   .pushManager.setPreferredNotificationLanguage(languageCode)

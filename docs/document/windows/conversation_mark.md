@@ -8,7 +8,7 @@
 
 你需要自行维护会话标记与具体业务含义（比如 `MarkType0` 为重要会话）之间的映射关系。例如：
 
-```C#
+```csharp
 Dictionary<MarkType, string> dict = new Dictionary<string, string>();
 dict.Add(MarkType0, "important");
 dict.Add(MarkType1, "normal");
@@ -47,7 +47,7 @@ dict.Add(MarkType4, "girls");
 对会话添加标记，例如会话标星，并不影响会话的其他逻辑，例如会话的未读消息数。
 :::
 
-```C#
+```csharp
 List<string> list = new List<string>();
 list.Add("huanhuan");
 bool isMarked = true;
@@ -67,7 +67,7 @@ SDKClient.Instance.ChatManager.MarkConversations(list, isMarked, (MarkType)mark,
 
 调用该方法会同时移除本地和服务器端会话的标记。
 
-```C#
+```csharp
 List<string> list = new List<string>();
 list.Add("huanhuan");
 bool isMarked = false;
@@ -85,7 +85,7 @@ SDKClient.Instance.ChatManager.MarkConversations(list, isMarked, (MarkType)mark,
 
 你可以调用 `GetConversationsFromServerWithCursor` 方法根据会话标记从服务器分页获取会话列表。SDK 会按会话标记的时间的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 0）、会话标记以及最新一条消息。从服务端拉取会话列表后会更新本地会话列表。
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.GetConversationsFromServerWithCursor((MarkType)mark, cursor, limit, new ValueCallBack<CursorResult<Conversation>>(
    onSuccess: (result) =>
    {
@@ -104,7 +104,7 @@ SDKClient.Instance.ChatManager.GetConversationsFromServerWithCursor((MarkType)ma
 
 对于本地会话，你可以调用 `LoadAllConversations` 方法获取本地所有会话后自己进行会话过滤。下面以查询标记了 `EMConversation.EMMarkType.MARK_0` 的所有本地会话为例。
 
-```C#
+```csharp
 //最终的查询结果全部放入 result 中。
 List<Conversation> result = new List<Conversation>();
 List<Conversation> localConversations = SDKClient.Instance.ChatManager.LoadAllConversations();
@@ -125,7 +125,7 @@ foreach(var conv in localConversations)
 
 你可以调用 `Conversation#Marks` 方法获取本地单个会话的所有标记，示例代码如下：
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation("conversationId", conversationType);
 List<MarkType> Marks = conv.Marks();
 ```

@@ -14,7 +14,7 @@
 
 联系人详情页面中右上角按钮 `...` 点击后弹出 `ActionSheet` 菜单中的数据源可配项`Appearance.contact.moreActions`。你可以增加或删除菜单项，示例代码如下：
 
-```Swift
+```swift
      //增加菜单项
      Appearance.contact.moreActions.append(ActionSheetItem(title: "new list item", type: .destructive, tag: "contact_custom"))
      //删除菜单项
@@ -23,7 +23,7 @@
 
 获取该数组中某单个项的点击事件，示例如下：
 
-```Swift
+```swift
         if let item = Appearance.contact.moreActions.first(where: { $0.tag == "xxx" }) {
             item.actionClosure = { [weak self] _ in
                 //do something
@@ -40,7 +40,7 @@
 
 联系人详情页面 Header 中按钮 `CollectionView` 中数据源可配项 `Appearance.contact.detailExtensionActionItems`，主要功能包括聊天、音视频通话等。关于事件监听，详见[设置点击右侧图片显示的联系人操作](#设置点击右侧图片显示的联系人操作)。首先继承联系人详情页面，然后将继承后的群详情页面注册入 `EaseChatUIKit`，即 `ComponentsRegister.shared.ContactInfoController = MineContactDetailViewController.self`，增加可配项，示例如下所示： 
 
-```Swift
+```swift
 final class MineContactDetailViewController: ContactInfoViewController {
     
     override func createHeader() -> DetailInfoHeader {

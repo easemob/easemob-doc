@@ -116,7 +116,7 @@
 
 4. 在即时通讯 IM SDK 初始化的时候，配置启用小米推送。
 
-   ```Java
+   ```java
    EMOptions options = new EMOptions();
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);

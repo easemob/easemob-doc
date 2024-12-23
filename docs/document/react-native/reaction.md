@@ -37,7 +37,7 @@ Reaction 场景示例如下：
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // reaction: Reaction ID
 // msgId: 消息 ID
 // 在指定消息上添加 Reaction
@@ -57,7 +57,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // reaction: Reaction ID
 // msgId: 消息 ID
 ChatClient.getInstance()
@@ -78,7 +78,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // msgId: 消息 ID
 ChatClient.getInstance()
   .chatManager.getReactionList(msgId)
@@ -92,7 +92,7 @@ ChatClient.getInstance()
 
 消息的快捷访问方式。示例如下：
 
-```TypeScript
+```typescript
 // 通过消息快捷访问 Reaction 列表
 const msg = ChatMessage.createTextMessage(targetId, content);
 msg.reactionList
@@ -108,7 +108,7 @@ msg.reactionList
 
 调用 `fetchReactionDetail` 方法可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的全部用户列表。示例代码如下：
 
-```TypeScript
+```typescript
 // reaction: Reaction ID
 // msgId: 消息 ID
 // pageSize: 单次请求返回的成员数，取值范围为 [1, 50]
@@ -125,7 +125,7 @@ ChatClient.getInstance()
 
 ### 管理 Reaction 监听
 
-```TypeScript
+```typescript
 // 监听 Reaction 更新
 class ChatMessageEvent implements ChatMessageEventListener {
   onMessageReactionDidChange(_list: ChatMessageReactionEvent[]): void {

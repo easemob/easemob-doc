@@ -55,7 +55,7 @@ HarmonyOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息�
 
 你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().contactManager()?.getSelfIdsOnOtherPlatform().then(ids => {
   // 选择一个登录 ID 作为消息接收方。
   let toChatUsername = ids[0];
@@ -79,7 +79,7 @@ ChatClient.getInstance().contactManager()?.getSelfIdsOnOtherPlatform().then(ids 
 登录成功后才会将该设置发送到服务器。
 :::
 
-```TypeScript
+```typescript
 let options = new ChatOptions("您的AppKey");
 options.setLoginCustomExt("您要设置的自定义扩展信息");
 ChatClient.getInstance().init(this.context, options);
@@ -106,7 +106,7 @@ ChatClient.getInstance().addConnectionListener({
 
 你需要先实现 `MultiDeviceListener` 类监听其他设备上的操作，然后调用 `addMultiDeviceListener` 方法添加多设备监听。
 
-```TypeScript
+```typescript
 //实现 `MultiDeviceListener` 监听其他设备上的操作。
 let multiDeviceListener: MultiDevicesListener = {
   onContactEvent: (event: MultiDevicesEvent, target: string, ext: string): void => {
@@ -224,7 +224,7 @@ ChatClient.getInstance().removeMultiDevicesListener(multiDeviceListener);
 
 当 PC 端和移动端登录同一个账号时，在移动端可以通过调用方法获取到 PC 端的登录 ID。该登录 ID 相当于特殊的好友用户 ID，可以直接使用于聊天，使用方法与好友的用户 ID 类似。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().contactManager().getSelfIdsOnOtherPlatform().then(result => {
     // success logic
 });

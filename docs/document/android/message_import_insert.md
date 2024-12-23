@@ -30,7 +30,7 @@
 
 示例代码如下：
 
-```Java
+```java
 EMClient.getInstance().chatManager().importMessages(msgs);
 ```
 
@@ -44,7 +44,7 @@ EMClient.getInstance().chatManager().importMessages(msgs);
 
 示例代码如下：
 
-```Java
+```java
 // 将消息插入到指定会话中。
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
 conversation.insertMessage(message);

@@ -24,7 +24,7 @@
 
 找到下载的 **ChatroomUIKit** 模块添加为本地依赖。将 [ChatroomUIKit](https://github.com/easemob/UIKit_Chatroom_android/tree/dev/ChatroomUIKit) 和 [ChatroomService](https://github.com/easemob/UIKit_Chatroom_android/tree/dev/ChatroomService) 模块导入到项目中。
 
-```Kotlin
+```kotlin
 // settings.gradle
 include ':ChatroomUIKit'
 include ':ChatroomService'
@@ -43,7 +43,7 @@ dependencies {
 
 初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
 
-```Kotlin
+```kotlin
 // 初始化 ChatroomUIKit   
 class ChatroomApplication : Application() {
 
@@ -69,7 +69,7 @@ class ChatroomApplication : Application() {
 在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
 
 
-```Kotlin  
+```kotlin  
  ChatroomUIKitClient.getInstance().login("userId", "token")
 ```
 
@@ -81,7 +81,7 @@ class ChatroomApplication : Application() {
 
 2. 加载聊天室视图 `ComposeChatroom`，传入的参数包括聊天室 ID 和聊天室所有者的用户 ID。
 
-```Kotlin  
+```kotlin  
 class ChatroomActivity : ComponentActivity(){
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)

@@ -4,7 +4,7 @@
 
 - 修改 `UiOptions` 中的可配置项。例如，你可以修改 `UiOptions` 中的 `useGiftsInList` 配置消息列表上是否显示礼物。
 
-```Kotlin
+```kotlin
 val chatroomUIKitOptions = ChatroomUIKitOptions(
       uiOptions = UiOptions(
       targetLanguageList = listOf(GlobalConfig.targetLanguage.code),
@@ -15,7 +15,7 @@ val chatroomUIKitOptions = ChatroomUIKitOptions(
 
 - 修改 `ViewModel` 中的可配置项。例如，你可以修改 `MessageListViewModel` 中的可配项，配置是否显示时间和头像。
 
-```Kotlin
+```kotlin
 class MessageListViewModel(
   private val isDarkTheme: Boolean? = false,
   private val showDateSeparators: Boolean = true,

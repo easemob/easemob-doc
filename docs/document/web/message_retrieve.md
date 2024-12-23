@@ -31,7 +31,7 @@
 4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
 :::
 
-```JavaScript
+```javascript
 connection.getHistoryMessages({
   targetId: 'targetId', // 单聊为对端用户 ID，群组聊天为群组 ID。
   chatType: 'groupChat', // 会话类型：单聊、群组聊天和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
@@ -50,7 +50,7 @@ connection.getHistoryMessages({
 
 为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。
 
-```JavaScript
+```javascript
 let options = {
   // 对方的用户 ID 或者群组 ID 或聊天室 ID。
   targetId: "user1",

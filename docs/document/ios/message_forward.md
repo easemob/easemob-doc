@@ -30,7 +30,7 @@
 该功能也支持转发单条合并消息。
 :::
 
-```Swift
+```swift
 // message 为要转发的消息
 if let message = EMClient.shared().chatManager?.getMessageWithMessageId("messageId") {
     // 使用原消息的 body 和 ext 创建转发消息

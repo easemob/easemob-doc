@@ -128,7 +128,7 @@ plugins {
 
 3. 在环信即时通讯 IM SDK 中启用 FCM。
 
-```Java
+```java
 EMOptions options = new EMOptions();
 ...
 EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
@@ -165,7 +165,7 @@ EMPushHelper.getInstance().setPushListener(new PushListener() {
 
 在应用初始化时，FCM SDK 会为用户的设备上的客户端应用生成唯一的注册 token。由于 FCM 使用该 token 确定要将推送消息发送给哪个设备，因此，环信服务器需要获得客户端应用的注册 token 才能将通知请求发送给 FCM，然后 FCM 验证注册 token，将通知消息发送给 Android 设备。建议该段代码放在成功登录即时通讯 IM 后的主页面。
 
-```Java
+```java
 // 查看是否支持 FCM
 if(GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this) != ConnectionResult.SUCCESS) {
     return;
@@ -189,7 +189,7 @@ FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteL
 
 重写 `FirebaseMessagingService` 中的 `onNewToken` 方法，device token 更新后及时更新到环信即时通讯 IM SDK。
 
-```Java
+```java
 public class MyFCMMSGService extends FirebaseMessagingService {
     private static final String TAG = "EMFCMMSGService";
 

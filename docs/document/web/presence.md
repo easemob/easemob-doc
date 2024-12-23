@@ -48,7 +48,7 @@
 
 默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `subscribePresence` 方法订阅指定用户的在线状态，示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   usernames: ['Alice','Bob'],
   expiry: 7*24*3600 // 单位为秒
@@ -69,7 +69,7 @@ conn.subscribePresence(option).then(res => {console.log(res)})
 
 用户在线时，可调用 `publishPresence` 方法发布自定义在线状态，示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   description: 'custom presence'
 }
@@ -82,7 +82,7 @@ conn.publishPresence(option).then(res => {console.log(res)})
 
 参考如下代码，添加用户在线状态的监听器：
 
-```JavaScript
+```javascript
 WebIM.conn.addEventHandler('MESSAGES',{
    onPresenceStatusChange: => (msg) {
        // 这里可以处理订阅用户状态更新后的逻辑。
@@ -95,7 +95,7 @@ WebIM.conn.addEventHandler('MESSAGES',{
 
 若取消指定用户的在线状态订阅，可调用 `unsubscribePresence` 方法，示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   usernames: ['Alice','Bob']
 }
@@ -106,7 +106,7 @@ conn.unsubscribePresence(option).then(res => {console.log(res)})
 
 为方便用户管理订阅关系，SDK 提供 `getSubscribedPresencelist` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   pageNum: 0,
   pageSize: 50
@@ -118,7 +118,7 @@ conn.getSubscribedPresencelist(option).then(res => {console.log(res)})
 
 如果不关注用户的在线状态变更，你可以调用 `getPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
 //usernames：要查询状态的用户 ID，每次最多可传 100 个用户 ID。
   usernames: ['Alice','Bob']

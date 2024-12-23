@@ -30,7 +30,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager()?.importMessages(msgs);
 ```
 
@@ -44,7 +44,7 @@ ChatClient.getInstance().chatManager()?.importMessages(msgs);
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 将消息插入到指定会话中。
 let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
 if (!conversation) {

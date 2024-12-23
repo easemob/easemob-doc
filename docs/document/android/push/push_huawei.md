@@ -51,7 +51,7 @@
 
 打开应用，初始化环信 IM SDK 成功且成功登录后，获取一次华为推送 token，将 token 上传至环信服务器，与 IM 的登录账号绑定。
 
-```Java
+```java
 /**
      * 申请华为 Push Token：
      * 1. getToken 接口只有在 AppGallery Connect 平台开通服务后申请 token 才会返回成功。
@@ -113,7 +113,7 @@
 
 4. 在即时通讯 IM SDK 初始化时，配置启用华为推送。
 
-   ```Java
+   ```java
    EMOptions options = new EMOptions();
    ...
    EMPushConfig.Builder builder = new EMPushConfig.Builder(this);

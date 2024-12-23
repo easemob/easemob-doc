@@ -30,7 +30,7 @@
 
 对于单个会话来说，默认可置顶 20 条消息。你可以联系环信商务提升该上限，最大可调整至 100。
 
-```Swift
+```swift
 EMClient.shared().chatManager?.pinMessage("messageId", completion: { message, err in
     if err == nil {
         // 置顶成功
@@ -44,7 +44,7 @@ EMClient.shared().chatManager?.pinMessage("messageId", completion: { message, er
 
 单聊、群组或聊天室中的所有成员均可取消置顶消息，不论该消息是由哪个成员进行置顶的。取消置顶消息后，`EMMessagePinInfo` 中的信息为空，该会话的置顶消息列表中也不再包含该消息。
 
-```Swift
+```swift
 EMClient.shared().chatManager?.unpinMessage("messageId", completion: { message, err in
     if err == nil {
         // 取消置顶成功
@@ -61,7 +61,7 @@ EMClient.shared().chatManager?.unpinMessage("messageId", completion: { message, 
 2. 若消息置顶后，用户撤回了该消息，则该消息从服务端移除，所有用户在从服务器拉取置顶消息列表时无法拉取到该消息。
 :::
 
-```Swift
+```swift
 EMClient.shared().chatManager?.getPinnedMessages(fromServer: "conversationId", completion: { messages, err in
     if err == nil, let messages = messages {
         // 获取置顶消息列表成功

@@ -34,7 +34,7 @@
 
 示例代码如下：
 
-```C#
+```csharp
 //cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
 //pageSize：每页期望返回的成员数,最大值为 1,000。
 SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, callback: new ValueCallBack<CursorResult<string>>(
@@ -54,7 +54,7 @@ SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, callba
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.LeaveRoom(roomId, new CallBack(
     onSuccess: () => {
     },
@@ -67,7 +67,7 @@ SDKClient.Instance.RoomManager.LeaveRoom(roomId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 Options options = new Options();
 options. DeleteMessagesAsExitRoom = false;
 ```
@@ -85,7 +85,7 @@ options. DeleteMessagesAsExitRoom = false;
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
     },
@@ -111,7 +111,7 @@ SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.BlockRoomMembers(roomId, members, new CallBack(
     onSuccess: () =>
     {
@@ -128,7 +128,7 @@ SDKClient.Instance.RoomManager.BlockRoomMembers(roomId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.UnBlockRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
     },
@@ -143,7 +143,7 @@ SDKClient.Instance.RoomManager.UnBlockRoomMembers(roomId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.FetchRoomBlockList(roomId, pageNum, pageSize, callback: new ValueCallBack<List<string>>(
     // list 类型为 List<string>。
     onSuccess: (list) => {
@@ -165,7 +165,7 @@ SDKClient.Instance.RoomManager.FetchRoomBlockList(roomId, pageNum, pageSize, cal
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.FetchAllowListFromServer(roomId, new ValueCallBack<List<string>>(
       onSuccess: (list) => {
       //list是返回的白名单列表
@@ -179,7 +179,7 @@ SDKClient.Instance.RoomManager.FetchAllowListFromServer(roomId, new ValueCallBac
 
 所有聊天室成员可以调用 `CheckIfInRoomAllowList` 方法检查自己是否在白名单中，示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.CheckIfInRoomAllowList(roomId, new ValueCallBack<bool>(
       onSuccess: (b) => {
         //b是返回的布尔类型
@@ -195,7 +195,7 @@ SDKClient.Instance.RoomManager.CheckIfInRoomAllowList(roomId, new ValueCallBack<
 
 示例代码如下：
 
-```C#
+```csharp
 //list是添加的白名单列表
 SDKClient.Instance.RoomManager.AddAllowListMembers(roomId, list, new CallBack(
       onSuccess: () => {
@@ -211,7 +211,7 @@ SDKClient.Instance.RoomManager.AddAllowListMembers(roomId, list, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 //list是移除的白名单列表
 SDKClient.Instance.RoomManager.RemoveAllowListMembers(roomId, list, new CallBack(
       onSuccess: () => {
@@ -233,7 +233,7 @@ SDKClient.Instance.RoomManager.RemoveAllowListMembers(roomId, list, new CallBack
 
 示例代码如下：
 
-```C#
+```csharp
 // muteMilliseconds：禁言时间。若传 -1，表示永久禁言。
 SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
@@ -253,7 +253,7 @@ SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.UnMuteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
     },
@@ -268,7 +268,7 @@ SDKClient.Instance.RoomManager.UnMuteRoomMembers(roomId, members, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.FetchRoomMuteList(roomId, pageSize, pageNum, callback: new ValueCallBack<Dictionary<string, long>>(
   onSuccess: (dict) => {
   },
@@ -289,7 +289,7 @@ SDKClient.Instance.RoomManager.FetchRoomMuteList(roomId, pageSize, pageNum, call
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.MuteAllRoomMembers(roomId, new ValueCallBack<Room>(
     onSuccess: (room) => {
     },
@@ -304,7 +304,7 @@ SDKClient.Instance.RoomManager.MuteAllRoomMembers(roomId, new ValueCallBack<Room
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.UnMuteAllRoomMembers(roomId, new ValueCallBack<Room>(
       onSuccess: (room) => {
       },
@@ -321,7 +321,7 @@ SDKClient.Instance.RoomManager.UnMuteAllRoomMembers(roomId, new ValueCallBack<Ro
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.ChangeRoomOwner(roomId, newOwner, new CallBack(
   onSuccess: () => {
   },
@@ -336,7 +336,7 @@ SDKClient.Instance.RoomManager.ChangeRoomOwner(roomId, newOwner, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.AddRoomAdmin(roomId, adminId, new CallBack(
   onSuccess: () => {
   },
@@ -351,7 +351,7 @@ SDKClient.Instance.RoomManager.AddRoomAdmin(roomId, adminId, new CallBack(
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.RoomManager.RemoveRoomAdmin(roomId, adminId, new CallBack(
   onSuccess: () => {
   },

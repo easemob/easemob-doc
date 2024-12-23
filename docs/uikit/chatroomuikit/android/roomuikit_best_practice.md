@@ -8,7 +8,7 @@
 
 初始化 ChatroomUIKit 时，你可以传入 `option` 参数，设置各种选项。
 
-```Kotlin
+```kotlin
  		val chatroomUIKitOptions = ChatroomUIKitOptions(
             chatOptions = ChatSDKOptions(enableDebug = true),
             uiOptions = UiOptions(
@@ -22,7 +22,7 @@
 
 你可以通过使用工程中的用户对象并遵守 `UserInfoProtocol` 协议登录 ChatroomUIKit，示例代码如下：
 
-```Kotlin
+```kotlin
 class YourAppUser: UserInfoProtocol {
     var userId: String = "your application user id"
             
@@ -44,7 +44,7 @@ ChatroomUIKitClient.getInstance().login(YourAppUser, token, onSuccess = {}, onEr
 
 2. 加载聊天室视图 `ComposeChatroom`，传入的参数包括聊天室 ID、布局参数、聊天室所有者的用户 ID 及一些选项。
 
-```Kotlin  
+```kotlin  
 class ChatroomActivity : ComponentActivity(){
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -59,7 +59,7 @@ class ChatroomActivity : ComponentActivity(){
 
 你可以调用 `registerRoomResultListener` 方法添加监听器用于监听 ChatroomUIKit 事件和错误。
 
-```Kotlin
+```kotlin
 ChatroomUIKitClient.getInstance().registerRoomResultListener(this)
 ```
 

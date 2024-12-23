@@ -5,6 +5,6 @@
 
 如果开启日志调试模式，会通过控制台输出 SDK 日志。`debugModel` 设置为 `true`。
 
-```TypeScript
+```typescript
 chatlog.log(`${ChatClient.TAG}: login: `, userName, "******", isPassword);
 ```

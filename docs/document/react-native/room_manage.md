@@ -41,7 +41,7 @@
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 聊天室名称，不能超过 128 个字符
 const subject = "";
 // 聊天室描述， 不能超过 512 个字符
@@ -71,7 +71,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.joinChatRoomEx({
     roomId: "foo",
@@ -92,7 +92,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.fetchChatRoomInfoFromServer(roomId)
   .then((info) => {
@@ -107,7 +107,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.getChatRoomWithId(roomId)
   .then((info) => {
@@ -124,7 +124,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .roomManager.destroyChatRoom(roomId)
   .then(() => {
@@ -141,7 +141,7 @@ ChatClient.getInstance()
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 实现监听器以及定义监听器对象。
 const roomListener: ChatRoomEventListener = new (class
   implements ChatRoomEventListener
@@ -296,7 +296,7 @@ ChatClient.getInstance().roomManager.addRoomListener(roomListener);
 
 2. 收到通知事件后，调用 `fetchChatRoomInfoFromServer` 方法获取本地聊天室详情，其中包括聊天室当前人数。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.fetchChatRoomInfoFromServer(
     roomId // 房间ID

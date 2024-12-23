@@ -76,7 +76,7 @@ yarn add easemob-chat-uikit
 
 将 easemob-chat-uikit 库导入你的代码中：
 
-```JavaScript
+```javascript
 // App.js
 import React, { Component, useEffect } from "react";
 import {

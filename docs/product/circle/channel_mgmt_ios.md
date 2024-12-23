@@ -41,7 +41,7 @@
 
 示例代码如下：
 
-```Swift
+```swift
 let attribute = EMCircleChannelAttribute()
 attribute.name = self.nameTextField.text ?? ""
 attribute.type = self.publicSwitch.isOn ? .public : .private
@@ -70,7 +70,7 @@ EMClient.shared().circleManager?.createChannel(self.serverId, categoryId: self.c
 
 频道创建者调用 `inviteUserToChannel` 方法邀请用户加入频道。受邀用户收到 `EMCircleManagerChannelDelegate#onReceiveChannelInvitation` 事件。
 
-```Swift
+```swift
  EMClient.shared().circleManager?.inviteUserToChannel(serverId: serverId, channelId: channelId, userId: userId, welcome: welcome) { error in
  }
 ```
@@ -79,14 +79,14 @@ EMClient.shared().circleManager?.createChannel(self.serverId, categoryId: self.c
 
  - 用户调用 `acceptChannelInvitation` 方法同意加入频道，邀请人收到 `EMCircleManagerChannelDelegate#onReceiveChannelInvitation` 事件，频道所有成员（不包括该新加入的成员）收到 `EMCircleManagerChannelDelegate#onMemberJoinedChannel` 事件。示例代码如下：
 
-   ```Swift
+   ```swift
    EMClient.shared().circleManager?.acceptChannelInvitation(serverId, channelId: channelId, inviter: inviter) { channel, error in
    }
    ```
 
 - 用户调用 `declineChannelInvitation` 方法拒绝加入频道，邀请人收到 `EMCircleManagerChannelDelegate#onChannelInvitationBeDeclined` 事件。示例代码如下：
 
-   ```Swift
+   ```swift
    EMClient.shared().circleManager?.declineChannelInvitation(serverId, channelId: channelId, inviter: inviter) { error in
    }
    ```
@@ -101,7 +101,7 @@ EMClient.shared().circleManager?.createChannel(self.serverId, categoryId: self.c
 
 示例代码如下：
 
-```Swift
+```swift
 let channelAttr = EMCircleChannelAttribute()
 channelAttr.name = channelName
 channelAttr.desc = channelDesc
@@ -115,7 +115,7 @@ EMClient.shared().circleManager?.updateChannel(serverId, channelId: channelId, a
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.destroyChannel(serverId, channelId: channelId) { error in
 }
 ```
@@ -126,7 +126,7 @@ EMClient.shared().circleManager?.destroyChannel(serverId, channelId: channelId) 
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchChannelDetail(serverId, channelId: channelId) { channel, _ in
 }
 ```
@@ -137,7 +137,7 @@ EMClient.shared().circleManager?.fetchChannelDetail(serverId, channelId: channel
 
 社区成员可以调用 `fetchPublicChannelsInServer` 方法获取社区下的所有公开频道的列表，示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchPublicChannels(inServer: serverId, limit: 20, cursor: nil) { result, error in
 }
 ```
@@ -148,7 +148,7 @@ EMClient.shared().circleManager?.fetchPublicChannels(inServer: serverId, limit: 
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchPrivateChannels(inServer: serverId, limit: 20, cursor: nil) { result, error in
 }
 ```
@@ -157,7 +157,7 @@ EMClient.shared().circleManager?.fetchPrivateChannels(inServer: serverId, limit:
 
 社区成员可以调用 `fetchJoinedChannelIds` 方法获取社区下加入的频道列表。
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchJoinedChannelIds(inServer: serverId, limit: 20, cursor: cursor, completion: { result, error in
             
         })
@@ -167,7 +167,7 @@ EMClient.shared().circleManager?.fetchJoinedChannelIds(inServer: serverId, limit
 
 社区成员可以调用 `fetchPublicChannelsInCategory` 方法获取频道分组下所有公开频道的列表，示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchPublicChannels(inCategory: serverId, categoryId: categoryId, limit: 20, cursor: result?.publicResult?.cursor, completion: { result, error in
 }
 ```
@@ -176,7 +176,7 @@ EMClient.shared().circleManager?.fetchPublicChannels(inCategory: serverId, categ
 
 调用 `fetchPrivateChannelsInCategory` 方法获取频道分组下的所有私密频道的列表，示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchPrivateChannels(inCategory: self.serverId, categoryId: categoryId, limit: 20, cursor: result?.privateResult?.cursor, completion: { result, error in
 }
 ```
@@ -201,7 +201,7 @@ EMClient.shared().circleManager?.fetchPrivateChannels(inCategory: self.serverId,
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.joinChannel(serverId, channelId: channelId) { channel, error in
 }
 ```
@@ -220,7 +220,7 @@ EMClient.shared().circleManager?.joinChannel(serverId, channelId: channelId) { c
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.leaveChannel(serverId, channelId: channelId) { error in
 }
 ```
@@ -235,7 +235,7 @@ EMClient.shared().circleManager?.leaveChannel(serverId, channelId: channelId) { 
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.removeUser(fromServer: serverId, userId: userId) { error in
 }
 ```
@@ -246,7 +246,7 @@ EMClient.shared().circleManager?.removeUser(fromServer: serverId, userId: userId
 
 禁言列表中的成员无法在频道中发送消息，但可以接收频道中的消息。
 
-```Swift
+```swift
 EMClient.shared().circleManager?.muteUserInChannel(userId: userId, serverId: serverId, channelId: channelId, duration: 86400) { error in
 }
 ```
@@ -257,7 +257,7 @@ EMClient.shared().circleManager?.muteUserInChannel(userId: userId, serverId: ser
 
 示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.unmuteUserInChannel(userId: userId, serverId: serverId, channelId: channelId) { error in
 }
 ```
@@ -266,7 +266,7 @@ EMClient.shared().circleManager?.unmuteUserInChannel(userId: userId, serverId: s
 
 社区所有者和社区管理员可以调用 `fetchChannelMuteUsers` 方法获取频道下的禁言列表。
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchChannelMuteUsers(serverId, channelId: channelId) { map, error in
 }
 ```
@@ -279,7 +279,7 @@ EMClient.shared().circleManager?.fetchChannelMuteUsers(serverId, channelId: chan
 
 - 对于其他模式的频道创建时，创建者直接加入频道。因此，频道创建者算入频道成员数量，查询频道成员列表返回频道创建者。
 
-```Swift
+```swift
 EMClient.shared().circleManager?.fetchChannelMembers(serverId, channelId: channelId, limit: 20, cursor: cursor) { result, error in
 }
 ```
@@ -288,7 +288,7 @@ EMClient.shared().circleManager?.fetchChannelMembers(serverId, channelId: channe
 
 社区成员可调用 `checkSelfIsInChannel` 方法查询自己是否在指定频道中。示例代码如下：
 
-```Swift
+```swift
 EMClient.shared().circleManager?.checkSelfIsInChannel(serverId: serverId, channelId: channelId) { isJoined, error in
 }
 ```
@@ -299,14 +299,14 @@ EMClient.shared().circleManager?.checkSelfIsInChannel(serverId: serverId, channe
 
 `IEMCircleManager` 中提供频道事件的监听接口。开发者可以通过设置此监听，获取频道中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
-```Swift
+```swift
 //添加频道回调代理。
 EMClient.shared().circleManager?.add(channelDelegate: self, queue: nil)
 //移除频道回调代理。
 EMClient.shared().circleManager?.remove(channelDelegate: self)
 ```
 
-```Swift
+```swift
 //创建频道。参与创建的初始成员会收到该事件。
 func onChannelCreated(_ channel: EMCircleChannel, creator: String) {
         
@@ -351,7 +351,7 @@ func onMemberMuteChange(inChannel serverId: String, categoryId: String, channelI
 
 #### 多设备登录监听事件 
 
-```Swift
+```swift
 (void)multiDevicesCircleChannelEventDidReceive:(EMMultiDevicesEvent)aEvent
                                        channelId:(NSString * _Nonnull)channelId
                                            ext:(id _Nullable)aExt

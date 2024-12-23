@@ -30,7 +30,7 @@
 
 示例代码如下：
 
-```C#
+```csharp
 SDKClient.Instance.ChatManager.ImportMessages(messages, new CallBack(
    onSuccess: () => {
    },
@@ -46,7 +46,7 @@ SDKClient.Instance.ChatManager.ImportMessages(messages, new CallBack(
 
 消息会根据消息中的 Unix 时间戳插入本地数据库，SDK 会更新会话的 `latestMessage` 等属性。
 
-```C#
+```csharp
 // 将消息插入到指定会话中。
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 conv.InsertMessage(message);

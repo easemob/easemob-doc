@@ -128,7 +128,7 @@ implementation 'io.agora.rtc:full-sdk:3.8.0'
 
 在环信 IM SDK 初始化完成后，可以开始初始化 `EaseCallKit`，同时增加监听回调，设置常用配置项。代码如下：
 
-```Java
+```java
 //初始化 `EaseCallUIKit`。
 EaseCallKitConfig callKitConfig = new EaseCallKitConfig();
 //设置默认头像。
@@ -150,7 +150,7 @@ addCallkitListener();
 
 可设置的配置项包括以下内容：
 
-```Java
+```java
 /**
  * EaseCallKit 相关的用户配置选项。
  * defaultHeadImage  用户默认头像。该参数的值为本地文件绝对路径或者 URL。
@@ -178,7 +178,7 @@ public class EaseCallKitConfig {
 
 一对一通话可分为视频通话和语音通话，接口如下所示：
 
-```Java
+```java
 /**
  * 发起一对一通话。
  * @param type 通话类型。该参数只能设置为 `SIGNAL_VOICE_CALL` 或 `SIGNAL_VIDEO_CALL`。
@@ -192,7 +192,7 @@ public void startSingleCall(final EaseCallType type, final String user,final  St
 
 你可以从群组成员列表或者好友列表中选择，发起多人音视频邀请，具体实现可参考 demo 中的 `ConferenceInviteActivity`。
 
-```Java
+```java
 /**
  * 邀请用户加入多人通话。
  * @param users 用户 ID 列表，即环信 ID 列表。
@@ -211,7 +211,7 @@ public void startInviteMultipleCall(final String[] users,final String ext){}
 
 被叫收到邀请后会触发 `EaseCallKitListener` 中的 `onRevivedCall` 回调：
 
-```Java
+```java
 /**
  * 收到通话邀请回调。
  * @param callType  通话类型。
@@ -229,7 +229,7 @@ void onRevivedCall(EaseCallType callType, String userId,String ext){}
 
 多人通话中，当前用户可以点击通话界面右上角的邀请按钮再次向其他用户发起邀请。这种情况下，会触发 `EaseCallKitListener` 中的 `onInviteUsers` 回调：
 
-```Java
+```java
 /**
  * 邀请好友进行多人通话。
  * @param context  通话上下文。
@@ -244,7 +244,7 @@ public void onInviteUsers(Context context,String userId[],String ext) {
 
 用户加入通话后，当前用户以及其他与会者会收到 `EaseCallKitListener` 中的 `onRemoteUserJoinChannel` 回调。该接口自从 SDK 3.8.1 新增。
 
-```Java
+```java
 @Override
 public void onRemoteUserJoinChannel(String channelName, String userName, int uid, EaseGetUserAccountCallback callback){
     //此时，可以获取当前频道中已有用户的声网 ID 与环信 ID 的映射表，并将映射表设置到 `EaseCallKit`，同时也可以更新用户的头像和昵称。
@@ -256,7 +256,7 @@ public void onRemoteUserJoinChannel(String channelName, String userName, int uid
 
 在一对一音视频通话中，若其中一方挂断，双方的通话会自动结束，而多人音视频通话中需要主动挂断才能结束通话。通话结束后，会触发 `onEndCallWithReason` 回调：
 
-```Java
+```java
 /**
  * 通话结束回调。
  * @param callType    通话类型。
@@ -285,7 +285,7 @@ public enum EaseCallEndReason {
 
 通话过程中如果有异常或者错误发生，会触发 `EaseCallKitListener` 中的 `onCallError` 回调：
 
-```Java
+```java
 /**
  * 通话异常回调。
  * @param type            错误类型。
@@ -297,7 +297,7 @@ void onCallError(EaseCallKit.EaseCallError type, int errorCode, String descripti
 
 `EaseCallError` 异常包括业务逻辑异常、音视频异常以及 Easemob IM 异常。
 
-```Java
+```java
 /**
  * 通话错误类型。
  *
@@ -313,7 +313,7 @@ public enum EaseCallError{
 
 `EaseCallKit` 库初始化之后，可修改有关配置，接口和示例如下:
 
-```Java
+```java
 /**
  * 获取当前 `EaseCallKit` 的配置。
  *
@@ -332,7 +332,7 @@ if(config != null){
 
 自 `EaseCallKit` 3.8.1 开始，新增了修改头像昵称的接口，用户可以在加入频道后，修改自己和通话中其他人的头像昵称，修改方法如下：
 
-```Java
+```java
 @Override
 public void onRemoteUserJoinChannel(String channelName, String userName, int uid, EaseGetUserAccountCallback callback){
     if(userName == null || userName == ""){
@@ -359,7 +359,7 @@ CallKit 4.8.2 及更高版本支持私有化部署，包括初始化和初测监
 
 配置私有化 AgoraAppId。其他可配置的选项，详见本文档中的[初始化](https://doc.easemob.com/document/android/easecallkit.html#初始化)一节。
 
-```Kotlin
+```kotlin
 EaseCallKitConfig().apply {
     ……
     agoraAppId = "2d4f114e22304cee8d31ae909f3289d2"
@@ -372,7 +372,7 @@ EaseCallKitConfig().apply {
 
 监听 `com.hyphenate.easecallkit.base.EaseCallKitListener#onRtcEngineCreated` 事件，在 RTC 引擎创建的回调里进行私有化配置。详见 [API 参考](https://doc.shengwang.cn/api-ref/rtc/android/API/toc_network#api_irtcengine_setlocalaccesspoint)。
 
-```Kotlin
+```kotlin
 private val callKitListener by lazy { object :EaseCallKitListener {
         ……
 
@@ -401,7 +401,7 @@ EaseCallKit.getInstance().setCallKitListener(callKitListener)
 
 如果不需要鉴权，可以直接回调 token 为 `null`，或者在设置 `callKitConfig.setEnableRTCToken(false)` 的前提下不实现该回调, 具体接口和使用如下：
 
-```Java
+```java
 /**
  * 用户生成 token 回调。
  * @param userId       用户 ID，即用户的环信 ID。
@@ -429,7 +429,7 @@ public void onGenerateToken(String userId, String channelName, String agoraAppId
 
 自 EaseCallKit 3.8.1 版本开始，`EaseCallKitTokenCallback` 中的 `onSetToken` 方法添加了 `uid` 参数，你可以使用数字 uid 加入声网频道。
 
-```Java
+```java
 void onSetToken(String token, int uId);
 ```
 

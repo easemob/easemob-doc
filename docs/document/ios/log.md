@@ -16,7 +16,7 @@ SDK 的 `EMOptions#logLevel` 指定了日志输出级别，默认为 `EMLogLevel
 
 开发阶段若希望在 XCode console 上输出 SDK 日志，可在 SDK 初始化时打开开关。
 
-```Objective-C
+```objective-c
 EMOptions* option = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 // 日志输出到 XCode console
 option.enableConsoleLog = YES;

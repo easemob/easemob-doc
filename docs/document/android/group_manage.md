@@ -78,7 +78,7 @@
 
 用户加入群组后，将可以收到群消息。示例代码如下：
 
-```Java
+```java
 EMGroupOptions option = new EMGroupOptions();
 option.maxUsers = 100;
 option.style = EMGroupStyle.EMGroupStylePrivateMemberCanInvite;
@@ -97,7 +97,7 @@ EMClient.getInstance().groupManager().createGroup(groupName, desc, allMembers, r
 
 示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncDestroyGroup(String, EMCallBack)。
 EMClient.getInstance().groupManager().destroyGroup(groupId);
@@ -115,7 +115,7 @@ EMClient.getInstance().groupManager().destroyGroup(groupId);
 
 示例代码如下：
 
-```Java
+```java
 // 根据群组 ID 从本地获取群组详情。
 EMGroup group = EMClient.getInstance().groupManager().getGroup(groupId);
 
@@ -145,7 +145,7 @@ boolean isMsgBlocked = group.isMsgBlocked();
 
 - 当群成员少于 200 人时，你可以调用从服务器获取群组详情的方法 `getGroupFromServer` 获取获取群成员列表，包括群主、群管理员和普通群成员：
 
-```Java
+```java
 // 第二个参数传入 `true`，默认取 200 人的群成员列表。
 // 同步方法，会阻塞当前线程。
 EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
@@ -156,7 +156,7 @@ memberList.add(group.getOwner());//加上群主
 
 - 当群成员数量大于等于 200 时，你可以首先调用 `getGroupFromServer` 方法获取群主和群管理员，然后调用 `fetchGroupMembers` 方法获取普通群成员列表：
 
-```Java
+```java
 // 第二个参数传入 `true`，默认取 200 人的群成员列表。
 // 同步方法，会阻塞当前线程。
 EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
@@ -181,7 +181,7 @@ do {
 
 示例代码如下：
 
-```Java
+```java
 // 异步方法。同步方法为 getJoinedGroupsFromServer(int, int, boolean, boolean)。
 // pageIndex：当前页码，从 0 开始。
 // pageSize：每页期望返回的群组数。取值范围为[1,20]。
@@ -200,13 +200,13 @@ List<EMGroup> grouplist = EMClient.getInstance().groupManager().asyncGetJoinedGr
 
 - 用户可以调用 `getAllGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
 
-```Java
+```java
 List<EMGroup> grouplist = EMClient.getInstance().groupManager().getAllGroups();
 ```
 
 - 用户还可以分页获取公开群列表：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。异步方法为 asyncGetPublicGroupsFromServer(int, String, EMValueCallBack)。
 EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, cursor);
 List<EMGroupInfo> groupsList = result.getData();
@@ -217,7 +217,7 @@ String cursor = result.getCursor();
 
 自 4.2.1 版本开始，你可以调用 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
 
-```Java
+```java
 EMClient.getInstance().groupManager().asyncGetJoinedGroupsCountFromServer(new EMValueCallBack<Integer>() {
     @Override
     public void onSuccess(Integer value) {
@@ -239,7 +239,7 @@ EMClient.getInstance().groupManager().asyncGetJoinedGroupsCountFromServer(new EM
 
 群成员可以调用 `blockGroupMessage` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息，群主和群管理员不能进行此操作。示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncBlockGroupMessage(String, EMCallBack)。
 EMClient.getInstance().groupManager().blockGroupMessage(groupId);
@@ -249,7 +249,7 @@ EMClient.getInstance().groupManager().blockGroupMessage(groupId);
 
 群成员可以调用 `unblockGroupMessage` 方法解除屏蔽群消息。示例代码如下：
 
-```Java
+```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncUnblockGroupMessage(String, EMCallBack)。
 EMClient.getInstance().groupManager().unblockGroupMessage(groupId);
@@ -261,7 +261,7 @@ EMClient.getInstance().groupManager().unblockGroupMessage(groupId);
 
 示例代码如下：
 
-```Java
+```java
 // 1、获取群组详情
 EMClient.getInstance().groupManager().asyncGetGroupFromServer(groupId, new EMValueCallBack<EMGroup>() {
     @Override
@@ -282,7 +282,7 @@ EMClient.getInstance().groupManager().asyncGetGroupFromServer(groupId, new EMVal
 
 示例代码如下：
 
-```Java
+```java
 // 创建一个群组事件监听
 // 在该方法的举例中，用户 A 表示当前用户。
 EMGroupChangeListener groupListener = new EMGroupChangeListener() {

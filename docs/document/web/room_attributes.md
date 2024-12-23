@@ -37,7 +37,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   chatRoomId: "chatRoomId",
   chatRoomName: "chatRoomName", // 聊天室名称。
@@ -53,7 +53,7 @@ conn.modifyChatRoom(option).then((res) => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 var option = {
   roomId: "roomId",
 };
@@ -66,7 +66,7 @@ conn.fetchChatRoomAnnouncement(option).then((res) => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   roomId: "roomId",
   announcement: "hello everyone",
@@ -82,7 +82,7 @@ conn.updateChatRoomAnnouncement(option).then((res) => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
   chatRoomId: "chatRoomId", // 聊天室 ID
   attributeKeys: ["attributeKey1", "attributeKey2", "..."], // 聊天室属性 key（可选，若不设置则获取全部自定义属性）
@@ -94,7 +94,7 @@ conn.getChatRoomAttributes(option).then((res) => console.log(res));
 
 聊天室成员均可通过调用 `setChatRoomAttribute` 设置和更新单个自定义属性。设置后，其他聊天室成员收到 `onChatroomEvent` 回调，事件为 `updateChatRoomAttributes`。
 
-```JavaScript
+```javascript
 let option = {
   chatRoomId: "chatRoomId", // 聊天室 ID
   attributeKey: "attributeKey", // 聊天室属性 key
@@ -109,7 +109,7 @@ conn.setChatRoomAttribute(option).then((res) => console.log(res));
 
 聊天室成员均可以调用 `setChatRoomAttributes` 批量设置自定义属性。设置后，其他聊天室成员收到 `onChatroomEvent` 回调，事件为 `updateChatRoomAttributes`。
 
-```JavaScript
+```javascript
 let option = {
     chatRoomId: "chatRoomId",  // 聊天室 ID
     attributes: {  // 聊天室属性，为 key-value 格式，即 {"key":"value"}
@@ -127,7 +127,7 @@ conn.setChatRoomAttributes(option).then(res => console.log(res))
 
 聊天室所有成员可通过调用 `removeChatRoomAttribute` 移除单个自定义属性。移除成功后，其他成员收到 `onChatroomEvent` 回调，事件为 `removeChatRoomAttributes`。
 
-```JavaScript
+```javascript
 let option = {
   chatRoomId: "chatRoomId", // 聊天室 ID
   attributeKey: "attributeKey", // 聊天室属性 key
@@ -140,7 +140,7 @@ conn.removeChatRoomAttribute(option).then((res) => console.log(res));
 
 聊天室所有成员可调用 `removeChatRoomAttributes` 批量移除自定义属性。移除成功后，其他成员收到 `onChatroomEvent` 回调，事件为 `removeChatRoomAttributes`。
 
-```JavaScript
+```javascript
 let option = {
   chatRoomId: "chatRoomId", // 聊天室 ID
   attributeKeys: ["attributeKey1", "attributeKey2", "..."], // 聊天室属性 key

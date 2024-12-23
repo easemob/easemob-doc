@@ -34,7 +34,7 @@
 
 初始化示例代码：
 
-```Java
+```java
 EMOptions options = new EMOptions();
 options.setAppKey("Your appkey");
 ......// 其他 EMOptions 配置。
@@ -64,7 +64,7 @@ EMClient.getInstance().init(context, options);
 
 若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
-```Java
+```java
 // 注册失败会抛出 HyphenateException。
 EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 ```
@@ -90,7 +90,7 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 
 **用户 ID + 密码** 登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
-```Java
+```java
 EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
     // 登录成功回调
     @Override
@@ -113,7 +113,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 :::
 
-```Java
+```java
 EMClient.getInstance().loginWithToken(mAccount, mToken, new EMCallBack() {
     // 登录成功回调
     @Override
@@ -144,13 +144,13 @@ EMClient.getInstance().loginWithToken(mAccount, mToken, new EMCallBack() {
 
 同步方法：
 
-```Java
+```java
 EMClient.getInstance().logout(true);
 ```
 
 异步方法：
 
-```Java
+```java
 EMClient.getInstance().logout(true, new EMCallBack() {
 
     @Override
@@ -169,7 +169,7 @@ EMClient.getInstance().logout(true, new EMCallBack() {
 
 你可以通过注册连接监听确认连接状态。
 
-```Java
+```java
 EMConnectionListener connectionListener = new EMConnectionListener() {
     @Override
     public void onConnected() {
@@ -244,7 +244,7 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 
 SDK 默认输出调试信息（所有日志，包括调试信息、警告和错误），如果只需输出错误日志，需要关闭调试模式。
 
-```Java
+```java
 // 需要在 SDK 初始化后调用
 EMClient.getInstance().setDebugMode(false);
 ```

@@ -36,7 +36,7 @@
 2. 附件类型消息，包括图片、音频和视频和文件消息，撤回消息后，消息附件也相应删除。
 :::
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.recallMessage(msgId, { ext: "new added ext" })
   .then(() => {
@@ -54,7 +54,7 @@ ChatClient.getInstance()
 - 若用户在线接收了消息，消息撤回时，该事件中的 `ChatRecalledMessageInfo` 中的 `recallMessage` 为撤回的消息的内容，`recalledMessageId` 属性返回撤回的消息的 ID。
 - 若消息发送和撤回时接收方离线，该事件中的 `ChatRecalledMessageInfo` 中的 `recallMessage` 为空，`recalledMessageId` 属性返回撤回的消息的 ID。
 
-```TypeScript
+```typescript
 let listener = new (class implements ChatMessageEventListener {
   onMessagesRecalledInfo(info: Array<ChatRecalledMessageInfo>): void {
     // 消息撤回通知，messages 为撤销的消息

@@ -63,7 +63,7 @@
 
 你可以调用 `GetSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
-```C#
+```csharp
 SDKClient.Instance.ContactManager.GetSelfIdsOnOtherPlatform(new ValueCallBack<List<string>>(
   onSuccess: (list) =>
   {
@@ -96,7 +96,7 @@ SDKClient.Instance.ContactManager.GetSelfIdsOnOtherPlatform(new ValueCallBack<Li
 
 你可以调用 `GetLoggedInDevicesFromServer` 或 `GetLoggedInDevicesFromServerWithToken` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。
 
-```C#
+```csharp
 SDKClient.Instance.GetLoggedInDevicesFromServer(username, password,
 	callback: new ValueCallBack<List<DeviceInfo>>(
 
@@ -142,7 +142,7 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
 登录成功后才会将该设置发送到服务器。
 :::
 
-```C#
+```csharp
 // 设置设备名称并进行初始化
 Options options = new Options("YouAppKey");
 ooptions.CustomDeviceName = "MyDeviceName";
@@ -183,7 +183,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 登录成功后才会将该设置发送到服务器。
 :::
 
-```C#
+```csharp
 Options options = new Options("YouAppKey");
 options.CustomOSType = 1;
 SDKClient.Instance.InitWithOptions(options);
@@ -198,7 +198,7 @@ SDKClient.Instance.InitWithOptions(options);
 不登录也可以使用该接口。
 :::
 
-```C#
+```csharp
 // username：账户名称，password：账户密码。
 SDKClient.Instance.GetLoggedInDevicesFromServer(username, password,
 	callback: new ValueCallBack<List<DeviceInfo>>(
@@ -257,7 +257,7 @@ SDKClient.Instance.KickDeviceWithToken(username, token, resource,
 不登录也可以使用该接口。
 :::
 
-```C#
+```csharp
 SDKClient.Instance.KickAllDevices(username, password,
 	callback: new CallBack(
 
@@ -299,7 +299,7 @@ SDKClient.Instance.KickAllDevicesWithToken(username, token,
 多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
 :::
 
-```C#
+```csharp
 //继承并实现 IMultiDeviceDelegate。
 public class MultiDeviceDelegate : IMultiDeviceDelegate {
 	public void onContactMultiDevicesEvent(MultiDevicesOperation operation, string target, string ext) {

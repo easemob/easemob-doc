@@ -38,7 +38,7 @@
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverId',
   name: 'categoryName',
@@ -54,7 +54,7 @@ WebIM.conn.createCategory(options).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let options = {
   serverId: 'serverId',
   categoryId: 'categoryId',
@@ -71,7 +71,7 @@ WebIM.conn.updateCategory(options).then(res => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.deleteCategory({serverId: 'serverId', categoryId: 'categoryId',}).then(res => {
   console.log(res)
 })
@@ -83,7 +83,7 @@ WebIM.conn.deleteCategory({serverId: 'serverId', categoryId: 'categoryId',}).the
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.getCategorylist({serverId: 'serverId',pageSize:'20',cursor:''}).then(res => {
   console.log(res)
 })
@@ -99,7 +99,7 @@ WebIM.conn.getCategorylist({serverId: 'serverId',pageSize:'20',cursor:''}).then(
 
 示例代码如下：
 
-```JavaScript
+```javascript
 WebIM.conn.transferChannel({serverId: 'serverId',channelId: 'channelId',newCategoryId:'newCategoryId'}).then(res => {
   console.log(res)
 })
@@ -109,7 +109,7 @@ WebIM.conn.transferChannel({serverId: 'serverId',channelId: 'channelId',newCateg
 
 Circle 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通过设置此监听，获取频道分组中的事件。
 
-```JavaScript
+```javascript
 WebIM.conn.addEventHandler('CIRCLE',{
   onServerEvent:(msg) => {
 		switch (msg.operation){

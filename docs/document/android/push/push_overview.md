@@ -78,7 +78,7 @@ SDK 内部会按照以上顺序检测设备的推送支持情况。如果未设�
 
 你需要在 SDK 初始化时进行推送接口的配置。
 
-```Java
+```java
 EMOptions options = new EMOptions();
 ...
 EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
@@ -96,7 +96,7 @@ EMClient.getInstance().init(this, options);
 
 如果你在项目中开启了混淆，请将以下规则添加到你的混淆规则中：
 
-```Java
+```java
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
 ```

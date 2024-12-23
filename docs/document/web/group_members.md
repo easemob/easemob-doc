@@ -36,7 +36,7 @@
 1. 用户可获取 [公开群列表](group_manage.html#获取群组列表)。
 2. 调用 `joinGroup` 方法传入群组 ID，申请加入对应群组。示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     message: "I am Tom"
@@ -53,7 +53,7 @@ conn.joinGroup(option).then(res => console.log(res))
     
     示例代码如下：
     
-    ```JavaScript
+    ```javascript
     conn.acceptGroupJoinRequest({
         applicant: "userId",
         groupId: "groupId",
@@ -66,7 +66,7 @@ conn.joinGroup(option).then(res => console.log(res))
     
     示例代码如下：
 
-    ```JavaScript
+    ```javascript
     conn.rejectGroupJoinRequest({
       applicant: "userId",
       groupId: "groupId",
@@ -82,7 +82,7 @@ conn.joinGroup(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId"
 };
@@ -95,7 +95,7 @@ conn.leaveGroup(option).then(res => console.log(res))
 
 - 移出单个群成员，示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     username: "username"
@@ -105,7 +105,7 @@ conn.removeGroupMember(option).then(res => console.log(res))
 
 - 批量移出群成员，示例代码如下：
 
-```JavaScript
+```javascript
 connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 ```
 
@@ -125,7 +125,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 
 示例代码如下：
 
-```JavaScript
+```javascript
     let options = {
         groupId: 'groupId',
         userId: 'userId',
@@ -147,7 +147,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 
 示例代码如下：
 
-```JavaScript
+```javascript
     let options = {
         groupId: 'groupId',
         userId: 'userId'
@@ -170,7 +170,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 
 示例代码如下：
 
-```JavaScript
+```javascript
     let options = {
         groupId: 'groupId',
         userIds: ['userId'],
@@ -191,7 +191,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 
 仅群主可以调用 `changeGroupOwner` 方法将群所有权移交给指定群成员。成功移交后，原群主变为普通成员，新群主会收到 `changeOwner` 事件。
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     newOwner: "userId"
@@ -207,7 +207,7 @@ conn.changeGroupOwner(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     username: "userId"
@@ -223,7 +223,7 @@ conn.setGroupAdmin(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     username: "userId"
@@ -235,7 +235,7 @@ conn.removeGroupAdmin(option).then(res => console.log(res))
 
 所有群成员均可调用 `getGroupAdmin` 获取群组下所有管理员，示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId"
 };
@@ -258,7 +258,7 @@ conn.getGroupAdmin(option).then((res) => {
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     users: ["user1", "user2"]
@@ -272,7 +272,7 @@ conn.addUsersToGroupAllowlist(option).then(res => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     userName: "userId"
@@ -286,7 +286,7 @@ conn.removeGroupAllowlistMember(option).then(res => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     userName: "userId"
@@ -300,7 +300,7 @@ conn.isInGroupAllowlist(option).then(res => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId"
 }
@@ -315,7 +315,7 @@ conn.getGroupAllowlist(option).then(res => console.log(res));
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     usernames: ["user1", "user2"]
@@ -329,7 +329,7 @@ conn.blockGroupMembers(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     usernames: ["user1", "user2"]
@@ -343,7 +343,7 @@ conn.unblockGroupMembers(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
 };
@@ -362,7 +362,7 @@ conn.getGroupBlocklist(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     username: "user1" || ["user1", "user2"],
@@ -377,7 +377,7 @@ conn.muteGroupMember(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
     username: "user1" || ["user1", "user2"]
@@ -391,7 +391,7 @@ conn.unmuteGroupMember(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId"
 };
@@ -406,7 +406,7 @@ conn.getGroupMutelist(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
 };
@@ -419,7 +419,7 @@ conn.disableSendGroupMsg(option).then(res => console.log(res))
 
 示例代码如下：
 
-```JavaScript
+```javascript
 let option = {
     groupId: "groupId",
 };

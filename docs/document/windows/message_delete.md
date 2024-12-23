@@ -31,7 +31,7 @@
 若使用该功能，需将 SDK 升级至 V1.3.0 或以上版本。
 :::
 
-```C#
+```csharp
 bool clearServerData = false; // or true
 SDKClient.Instance.ChatManager.DeleteAllMessagesAndConversations(clearServerData, new CallBack(
     onSuccess: () =>
@@ -53,7 +53,7 @@ SDKClient.Instance.ChatManager.DeleteAllMessagesAndConversations(clearServerData
 若使用该功能，需将 SDK 升级至 V1.1.0 或以上版本。
 :::
 
-```C#
+```csharp
 // 按时间删除历史消息
 SDKClient.Instance.ChatManager.RemoveMessagesFromServer(convId, ctype, time, new CallBack(
     onSuccess: () =>
@@ -78,7 +78,7 @@ SDKClient.Instance.ChatManager.RemoveMessagesFromServer(convId, ctype, msgList, 
 
 你可以删除本地指定会话的所有消息，示例代码如下：
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversionId, conversationType);
 
 if (conv.DeleteAllMessages()){
@@ -93,7 +93,7 @@ else{
 
 你可以删除本地指定会话在一段时间内的本地消息，示例代码如下：
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversionId, conversationType);
 
 if (conv.DeleteMessages(startTime, endTime)) {
@@ -108,7 +108,7 @@ else {
 
 你可以删除本地单个会话的指定消息，示例代码如下：
 
-```C#
+```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversionId, conversationType);
 
 if (conv.DeleteMessage(msgid)){

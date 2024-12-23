@@ -25,7 +25,7 @@
 
 示例代码：
 
-```TypeScript
+```typescript
 // 设置发送的消息类型。详见 `ChatMessageType` 枚举类型。
 const messageType = ChatMessageType.TXT;
 // 设置消息接收对象。单聊时为对端用户 ID、群聊时为群组 ID，聊天室时为聊天室 ID。
@@ -66,7 +66,7 @@ ChatClient.getInstance()
 
 2. 通过 `ChatManager` 将该消息发出。发送消息时可以设置 `EMCallBack` 的实例，获取消息发送状态。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().chatManager.sendMessage(msg!, callback).then().catch();
 ```
 
@@ -76,7 +76,7 @@ ChatClient.getInstance().chatManager.sendMessage(msg!, callback).then().catch();
 
 对于聊天室消息，你可以通过消息的 `ChatMessage.isBroadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
-```TypeScript
+```typescript
 // 继承并实现 ChatMessageEventListener
 class ChatMessageEvent implements ChatMessageEventListener {
   onMessagesReceived(messages: ChatMessage[]): void {
@@ -113,7 +113,7 @@ ChatClient.getInstance().chatManager.removeAllMessageListener();
 1. 发送语音消息前，在应用层录制语音文件。
 2. 发送方调用 `createVoiceMessage` 方法传入语音文件的 URI、语音时长和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建语音消息，然后调用发送消息方法发送消息。SDK 会将语音文件上传至环信服务器。
 
-```TypeScript
+```typescript
 // 构建语音消息
 // 需传入本地语音文件地址、显示名称和播放时长（单位为秒）
 // 传入的语音文件的路径时，不需要添加 file://。
@@ -137,7 +137,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 1. 发送方调用 `createImageMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID （群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息，然后调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
 
-```TypeScript
+```typescript
 // 构建图片消息
 // 需要图片的本地地址，长宽，和界面用来显示的名称
 // 传入的图片路径时，不需要添加 file://。
@@ -155,7 +155,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 2. 接收方收到图片消息，自动下载图片缩略图。
 
-```TypeScript
+```typescript
 ChatClient.getInstance().init(
   new ChatOptions({
     appKey,
@@ -166,7 +166,7 @@ ChatClient.getInstance().init(
 
 如果设置为手动下载，则需要设置 `isAutoDownload` 为 `false`，并且调用方法 `downloadThumbnail`。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.downloadThumbnail(msg, callback)
   .then()
@@ -175,7 +175,7 @@ ChatClient.getInstance()
 
 3. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 下载原图。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.downloadAttachment(msg, callback)
   .then()
@@ -192,7 +192,7 @@ ChatClient.getInstance()
 
 2. 发送方调用 `createVideoMessage` 方法传入视频文件的本地资源标志符、缩略图的本地存储路径、视频时长以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID），然后调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoMessage` 方法。
 
-```TypeScript
+```typescript
 // 构建视频消息
 // 视频消息相当于包含 2 个附件的消息，主要由视频和视频缩略图组成。视频参数包括视频本地地址、视频长宽值，显示名称，播放时间长度；
 // 如果设置缩略图，需指定缩略图的本地地址。
@@ -217,7 +217,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，可以调用 `downloadAttachment` 方法下载视频原文件。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.downloadAttachment(msg, callback)
   .then()
@@ -232,7 +232,7 @@ ChatClient.getInstance()
 
 1. 发送方调用 `createFileMessage` 方法传入文件的本地资源标志符和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建文件消息，然后调用 `sendMessage` 方法发送文件消息。SDK 将文件上传至环信服务器。
 
-```TypeScript
+```typescript
 // 构建文件消息
 // 文件消息主要需要本地文件地址和文件在页面显示的名称。
 // 传入的文件路径时，不需要添加 file://。
@@ -246,7 +246,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 2. 接收方收到 `onMessagesReceived` 回调，调用 `downloadAttachment` 方法下载文件。
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.downloadAttachment(msg, callback)
   .then()
@@ -259,7 +259,7 @@ ChatClient.getInstance()
 
 当你要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
-```TypeScript
+```typescript
 // 构建位置消息
 // 位置消息可以传递经纬度和地名信息
 const latitude = "114.78";
@@ -286,7 +286,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 - 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
 :::
 
-```TypeScript
+```typescript
 // 构建透传消息
 // 根据透传消息可以执行具体的命令，命令的内容格式支持自定义
 const action = "writing";
@@ -296,7 +296,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
 
-```TypeScript
+```typescript
 let listener = new (class implements ChatMessageEventListener {
   onCmdMessagesReceived(messages: ChatMessage[]): void {
     // 这里接收透传消息数据
@@ -313,7 +313,7 @@ ChatClient.getInstance().chatManager.addMessageListener(listener);
 
 以下为创建和发送自定义类型消息的示例代码：
 
-```TypeScript
+```typescript
 // 构建自定义消息
 // 消息内容由消息事件和扩展字段两部分组成，扩展字段用户可以自行实现和使用。
 const event = "gift";
@@ -357,7 +357,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 示例代码如下：
 
-```TypeScript
+```typescript
 // 构造合并消息。
 const msg = ChatMessage.createCombineMessage(targetId, msgIdList, chatType, {
   title,
@@ -379,7 +379,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 - 若附件已存在，该方法会直接解析附件并返回原始消息列表。
 - 若附件不存在，该方法首先下载附件，然后解析附件并返回原始消息列表。
 
-```TypeScript
+```typescript
 // message: 合并消息对象
 // 通过异步返回原始消息列表。
 ChatClient.getInstance()
@@ -413,7 +413,7 @@ ChatClient.getInstance()
 
 下面以文本消息为例介绍如何发送定向消息，示例代码如下：
 
-```TypeScript
+```typescript
 const content = "This is text message";
 msg = ChatMessage.createTextMessage(targetId, content, chatType);
 msg.receiverList = ["001", "002"];
@@ -431,7 +431,7 @@ ChatClient.getInstance().chatManager.sendMessage(msg, {
 
 当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
 
-```TypeScript
+```typescript
 const msg = ChatMessage.createTextMessage(targetId, '文本消息', chatType);
 msg.attributes = {
   key: "value",
@@ -450,7 +450,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 对于聊天室消息，可设置消息优先级，包括高、普通和低优先级。示例代码如下：
 
-```TypeScript
+```typescript
 // 对于聊天室消息，还可以设置消息优先级。
 if (msg.chatType === ChatMessageChatType.ChatRoom) {
   msg.messagePriority = priority;
@@ -461,7 +461,7 @@ if (msg.chatType === ChatMessageChatType.ChatRoom) {
 
 发送附件类型消息时，可以在 `onProgress` 回调中获取附件上传的进度，以百分比表示，示例代码如下：
 
-```TypeScript
+```typescript
 ChatClient.getInstance()
   .chatManager.sendMessage(msg, {
     onProgress(localMsgId: string, progress: number): void {

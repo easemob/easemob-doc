@@ -8,7 +8,7 @@
 
 与[快速开始中的初始化](chatuikit_quickstart.html##第一步-初始化)相比，这里增加了 `ChatOptions` 的参数，包括 SDK 中是否打印日志、是否自动登录以及是否默认使用用户属性的开关配置。
 
-```Swift
+```swift
 let error = EaseChatUIKitClient.shared.setup(option: ChatOptions(appkey: appKey))
 ```
 
@@ -185,7 +185,7 @@ extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
 
 1. 创建会话列表页面
 
-```Swift
+```swift
     
         let vc = EaseChatUIKit.ComponentsRegister.shared.ConversationsController.init()
         vc.tabBarItem.tag = 0
@@ -193,7 +193,7 @@ extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
 
 2. 监听会话列表页面事件
 
-```Swift
+```swift
         
         vc.viewModel?.registerEventsListener(listener: self)
 ```
@@ -204,13 +204,13 @@ extension MainViewController: EaseProfileProvider,EaseGroupProfileProvider {
 
 继承单群聊 UIKit 提供的联系人列表页面类注册后的自定义类可以调用 ViewModel 的 `ContactViewController().viewModel.registerEventsListener` 方法监听相关事件。
 
-```Swift
+```swift
         let vc = EaseChatUIKit.ComponentsRegister.shared.ContactsController.init(headerStyle: .contact)
 ```
 
 2. 监听联系人列表页面事件
 
-```Swift
+```swift
         vc.viewModel?.registerEventsListener(listener: self)
 ```
 

@@ -27,7 +27,7 @@
 
 你可以调用 `loadMessagesWithKeyword` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
 
-```Objective-C
+```objective-c
 // 同步方法，异步方法见[EMConversation loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:completion]
 EMConversation* conversation = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
 NSArray<EMChatMessage *> *messages = [conversation loadMessagesWithKeyword:@"keyword" timestamp:0 count:50 fromUser:nil searchDirection:EMMessageSearchDirectionDown];
@@ -41,7 +41,7 @@ NSArray<EMChatMessage *> *messages = [conversation loadMessagesWithKeyword:@"key
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
 :::
 
-```Swift
+```swift
 EMClient.shared().chatManager?.loadMessages(withKeyword: "keyword", timestamp: 0, count: 50, fromUser: "", searchDirection: .down, scope: .content, completion: { messages, aError in
             
         })
@@ -55,7 +55,7 @@ EMClient.shared().chatManager?.loadMessages(withKeyword: "keyword", timestamp: 0
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
 :::
 
-```Swift
+```swift
 if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("conversationsId") {
     conversation.loadMessages(withKeyword: "keyword", timestamp: 0, count: 50, fromUser: "", searchDirection: .down, scope: .content, completion: { messages, aError in
                 
@@ -71,7 +71,7 @@ if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("
 若使用该功能，需将 SDK 升级至 V4.7.0 或以上版本。
 :::
 
-```Swift
+```swift
 // count：要查询的消息条数。取值范围为 [1,400]。
 // fromuser：会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 EMClient.shared().chatManager?.searchMessages (withTypes: [NSNumber (integerLiteral:
@@ -88,7 +88,7 @@ EMMessageBodyType.text.rawValue), NSNumber (integerLiteral: EMMessageBodyType.im
 若使用该功能，需将 SDK 升级至 V4.7.0 或以上版本。
 :::
 
-```Swift
+```swift
 // count：要查询的消息条数。取值范围为 [1,400]。
 // fromuser：当前会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 EMConversation().searchMessages(withTypes: [NSNumber(integerLiteral: EMMessageBodyType.text.rawValue),NSNumber(integerLiteral: EMMessageBodyType.image.rawValue)], timestamp: -1, count: 20, fromUser: "send message user id", searchDirection: .up) { messages, error in
