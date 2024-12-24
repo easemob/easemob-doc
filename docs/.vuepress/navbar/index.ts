@@ -3,6 +3,76 @@ import { navbar } from 'vuepress-theme-hope'
 export const zhNavbar = navbar([
   { text: '产品简介', link: '/product/introduction.html' },
   {
+    text: 'UIKit',
+    children: [
+      {
+        text: '单群聊 UIKit',
+        children: [
+          {
+            text: 'Android',
+            icon: '/icon-Android.svg',
+            link: '/uikit/chatuikit/android/chatuikit_overview.html'
+          },
+          {
+            text: 'iOS',
+            icon: '/icon-iOS.svg',
+            link: '/uikit/chatuikit/ios/chatuikit_overview.html'
+          },
+          {
+            text: 'Web',
+            icon: '/icon-web.svg',
+            link: '/uikit/chatuikit/web/chatuikit_overview.html'
+          },
+          {
+            text: 'Uniapp',
+            icon: '/icon-uni-app.svg',
+            link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
+          },
+          {
+            text: 'React Native',
+            icon: '/icon-ReactNative.svg',
+            link: '/uikit/chatuikit/react-native/chatuikit_overview.html'
+          },
+          {
+            text: 'Flutter',
+            icon: '/icon-flutter.svg',
+            link: '/uikit/chatuikit/flutter/chatuikit_overview.html'
+          }
+        ]
+      },
+      {
+        text: '聊天室 UIKit',
+        children: [
+          {
+            text: 'Android',
+            icon: '/icon-Android.svg',
+            link: '/uikit/chatroomuikit/android/roomuikit_overview.html'
+          },
+          {
+            text: 'iOS',
+            icon: '/icon-iOS.svg',
+            link: '/uikit/chatroomuikit/ios/roomuikit_overview.html'
+          },
+          {
+            text: 'Web',
+            icon: '/icon-web.svg',
+            link: '/uikit/chatroomuikit/web/roomuikit_overview.html'
+          },
+          {
+            text: 'React Native',
+            icon: '/icon-ReactNative.svg',
+            link: '/uikit/chatroomuikit/react-native/roomuikit_overview.html'
+          },
+          {
+            text: 'Flutter',
+            icon: '/icon-flutter.svg',
+            link: '/uikit/chatroomuikit/flutter/roomuikit_overview.html'
+          }
+        ]
+      }
+    ]
+  },
+  {
     text: 'SDK/REST 集成',
     children: [
       {
@@ -92,76 +162,6 @@ export const zhNavbar = navbar([
             text: 'PHP',
             icon: '/icon-platform.svg',
             link: '/document/server-side/php_server_sdk.html'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    text: 'UIKit',
-    children: [
-      {
-        text: '单群聊 UIKit',
-        children: [
-          {
-            text: 'Android',
-            icon: '/icon-Android.svg',
-            link: '/uikit/chatuikit/android/chatuikit_overview.html'
-          },
-          {
-            text: 'iOS',
-            icon: '/icon-iOS.svg',
-            link: '/uikit/chatuikit/ios/chatuikit_overview.html'
-          },
-          {
-            text: 'Web',
-            icon: '/icon-web.svg',
-            link: '/uikit/chatuikit/web/chatuikit_overview.html'
-          },
-          {
-            text: 'Uniapp',
-            icon: '/icon-uni-app.svg',
-            link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
-          },
-          {
-            text: 'React Native',
-            icon: '/icon-ReactNative.svg',
-            link: '/uikit/chatuikit/react-native/chatuikit_overview.html'
-          },
-          {
-            text: 'Flutter',
-            icon: '/icon-flutter.svg',
-            link: '/uikit/chatuikit/flutter/chatuikit_overview.html'
-          }
-        ]
-      },
-      {
-        text: '聊天室 UIKit',
-        children: [
-          {
-            text: 'Android',
-            icon: '/icon-Android.svg',
-            link: '/uikit/chatroomuikit/android/roomuikit_overview.html'
-          },
-          {
-            text: 'iOS',
-            icon: '/icon-iOS.svg',
-            link: '/uikit/chatroomuikit/ios/roomuikit_overview.html'
-          },
-          {
-            text: 'Web',
-            icon: '/icon-web.svg',
-            link: '/uikit/chatroomuikit/web/roomuikit_overview.html'
-          },
-          {
-            text: 'React Native',
-            icon: '/icon-ReactNative.svg',
-            link: '/uikit/chatroomuikit/react-native/roomuikit_overview.html'
-          },
-          {
-            text: 'Flutter',
-            icon: '/icon-flutter.svg',
-            link: '/uikit/chatroomuikit/flutter/roomuikit_overview.html'
           }
         ]
       }
