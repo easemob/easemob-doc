@@ -323,6 +323,7 @@ export const zhSidebar = sidebar({
       children: [
         { text: "群 @ 消息", link: "solution_common/group_@.html" },
         { text: "消息引用", link: "solution_common/message_quote.html" },
+        { text: "实现输入指示器", link: "solution_common/typing_indication.html" },
         { text: "迁移到环信", link: "solution_common/migrate_to_easemob.html" },
       ],
     },
