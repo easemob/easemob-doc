@@ -29,12 +29,11 @@ ChatClient.getInstance().pushManager()?.updatePushDisplayStyle(displayStyle).the
 })
 ```
 
-`PushDisplayStyle` 是枚举类型。
-
-| 参数             | 描述                    |
-| :--------------- | :---------------------- |
-| `SimpleBanner`   | 显示 “你有一条新消息”。 |
-| `MessageSummary` | 显示消息内容。          |
+| 参数设置      | 推送显示 | 图片    |
+| :--------- | :----- |:------------- |
+| <br/> - `PushDisplayStyle`：（默认）`SimpleBanner`<br/> - `nickname`：设置或不设置 | <br/> - 推送标题：**您有一条新消息**<br/> - 推送内容：**请点击查看**  | ![img](/images/android/push/push_displayattribute_1.png)|
+| <br/> - `PushDisplayStyle`：`MessageSummary`<br/> - `nickname`：设置具体值 | <br/> - 推送标题：**您有一条新消息**<br/> - 推送内容：**消息发送方的推送昵称：消息内容**  |![img](/images/android/push/push_displayattribute_2.png)  |
+| <br/> - `PushDisplayStyle`：`MessageSummary`<br/> - `nickname`：不设置    | <br/> - 推送标题：**您有一条新消息**<br/> - 推送内容：**消息发送方的 IM 用户 ID: 消息内容**  | ![img](/images/android/push/push_displayattribute_3.png)|
 
 ## 使用推送模板
 
