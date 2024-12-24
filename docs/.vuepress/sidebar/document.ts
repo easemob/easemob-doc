@@ -115,7 +115,7 @@ const documentSidebar = [
         children: [
           { text: '用户关系', link: 'user_relationship.html' },
           { text: '用户属性', link: 'userprofile.html' },
-          { text: '在线状态订阅', link: 'message_retrieve.html' },
+          { text: '在线状态订阅', link: 'presence.html' },
         ]
       },
       {
