@@ -363,6 +363,7 @@ const documentSidebar = [
       { text: '即时通讯 REST API 概览', link: 'overview.html' },
       { 
         text: '消息管理', 
+        collapsible: true,
         children: [
           { text: '发送单聊消息', link: 'message_single.html' },
           { text: '发送群聊消息', link: 'message_group.html' },
@@ -380,6 +381,7 @@ const documentSidebar = [
       },
       { 
         text: '群组',
+        collapsible: true,
         children: [
           { text: '管理群组', link: 'group_manage.html' },
           { text: '管理群组文件', link: 'group_file.html' },
@@ -400,6 +402,7 @@ const documentSidebar = [
       },
       { 
         text: '聊天室',
+        collapsible: true,
         children: [
           { text: '管理超级管理员', link: 'chatroom_superadmin.html' },
           { text: '管理聊天室', link: 'chatroom_manage.html' },
@@ -420,6 +423,7 @@ const documentSidebar = [
       },
       { 
         text: '用户相关',
+        collapsible: true,
         children: [
           { text: '用户体系管理', link: 'account_system.html' },
           { text: '用户属性', link: 'userprofile.html' },
@@ -431,6 +435,7 @@ const documentSidebar = [
       },
       { 
         text: '离线推送',
+        collapsible: true,
         children: [
           { text: '离线推送设置', link: 'push.html' },
           { text: '离线推送的消息扩展', link: 'push_extension.html' },
@@ -442,6 +447,7 @@ const documentSidebar = [
   },
   {
     text: 'Server SDK',
+    collapsible: true,
     children: [
       { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
       { text: 'Java Server SDK 1.0', link: 'java_server_sdk.html' },
@@ -458,6 +464,7 @@ const documentSidebar = [
   },
   {
     text: '设置回调',
+    collapsible: true,
     children: [
       { text: '回调概述', link: 'callback_overview.html' },
       { text: '发送前回调', link: 'callback_presending.html' },
