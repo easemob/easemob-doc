@@ -85,7 +85,7 @@ POST https://{host}/{org_name}/{app_name}/agent/v1/messages/summary
 | `data.videoUrls` | Array | 会话摘要涉及的视频的 URL。 |
 | `data.messageContentList` | Array | 会话摘要涉及的消息内容列表。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](#错误码)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考错误码了解可能的原因。
 
 #### 示例
 
@@ -143,7 +143,7 @@ curl -X POST http://XXXX/XXXX/XXXX/agent/v1/messages/summary  \
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 
-关于其他错误，你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+关于其他错误，你可以参考[响应状态码](/document/server-side/error.html)了解可能的原因。
 
 ## 获取会话摘要
 
@@ -200,7 +200,7 @@ GET https://{host}/{org_name}/{app_name}/agent/v1/messages/summaries?conversatio
 | `data.videoUrls` | Array | 会话摘要涉及的视频的 URL。 |
 | `data.messageContentList` | Array | 会话摘要涉及的消息内容列表。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](#错误码)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考错误码了解可能的原因。
 
 #### 示例
 
@@ -272,7 +272,7 @@ curl -X GET 'http://XXXX/XXXX/XXXX/agent/v1/messages/summaries?conversationId=26
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 
-关于其他错误，你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+关于其他错误，你可以参考[响应状态码](/document/server-side/error.html)了解可能的原因。
 
 ## 删除会话摘要
 
@@ -319,7 +319,7 @@ DELETE https://{host}/{org_name}/{app_name}/agent/v1/messages/summary/{summaryId
 | :----- | :---- | :------------------------- |
 | `code` | String | 请求是否成功。`200` 表示请求成功。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](#错误码)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考错误码了解可能的原因。
 
 #### 示例
 
@@ -349,7 +349,7 @@ curl -X DELETE 'http://XXXX/XXXX/XXXX/agent/v1/messages/summary/38c30ced8cc24fbd
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 
-关于其他错误，你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+关于其他错误，你可以参考[响应状态码](/document/server-side/error.html)了解可能的原因。
 
 
 
