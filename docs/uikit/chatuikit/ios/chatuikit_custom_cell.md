@@ -78,6 +78,10 @@ final class MineMessageEntity: MessageEntity {
         Appearance.chat.inputExtendActions.append(redPackage)
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/red_package_attachment.png" title="新增的附件消息类型" />
+</ImageGallery>
+
 ## 步骤四 处理新增的附件消息类型的点击事件
 
 继承 `MessageListController`，处理新增的附件消息类型的点击事件。
@@ -106,10 +110,6 @@ class CustomMessageListController: MessageListController {
 let redPackageIdentifier = "redPackage"
 
 ```
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/red_package_attachment.png" title="红包消息" />
-</ImageGallery>
 
 ## 步骤五 增加发送新类型附件消息的方法
 
