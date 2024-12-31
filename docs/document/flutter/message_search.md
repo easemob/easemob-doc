@@ -39,7 +39,7 @@ EMConversation? conv =
       sender: "tom",
       // 搜索开始的 Unix 时间戳，单位为毫秒。
       timestamp: 1653971593000,
-      // 搜索的最大消息数。
+      // 要获取的消息条数。
       count: 10,
       // 消息的搜索方向：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
       direction: EMSearchDirection.Up,
