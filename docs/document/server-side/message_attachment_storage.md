@@ -10,6 +10,21 @@
 
 **调用频率**：100 次/秒/App Key
 
+## 前提条件
+
+要调用环信即时通讯 REST API，请确保满足以下要求：
+
+- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+
+## 认证方式
+
+环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，必须在请求头部填入如下 `Authorization` 字段：
+
+`Authorization: Bearer YourAppToken`
+
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 仅支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+
 #### HTTP 请求
 
 ```http
@@ -18,11 +33,12 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/chatfiles/lifetime
 
 ##### 路径参数
 
-| 参数       | 类型   | 是否必需 | 描述         |
-| :--------- | :----- | :------- | :------------------------- |
+| 参数       | 类型   | 是否必需 | 描述        |
+| :--------- | :----- | :------- | :--------------- |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `username`     | String | 是       | 调用该接口的用户 ID。 | 
-
-其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 Header
 
