@@ -1,22 +1,22 @@
 # 会话摘要 RESTful API
 
-你可以使用 RESTful API 生成、获取和删除群组会话的聊天摘要。
+你可以使用 RESTful API 生成、获取和删除群组会话一段时间内的聊天内容的摘要。
 
 ## 前提条件
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html#创建应用)。
 - 已[开通会话摘要插件](conversation_summary_enable.html#开通功能)。
-- 了解环信 IM RESTful API 的调用频率限制，详见[接口频率限制](limitationapi.html)。
+- 了解环信 IM RESTful API 的调用频率限制，详见[接口频率限制](/product/limitationapi.html)。
 
 ## 公共请求参数
 
 | 参数          | 类型   | 是否必需 | 描述  |
 | :------------ | :----- | :------- | :---------------- |
-| `host`        | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name`    | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name`    | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`        | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `org_name`    | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name`    | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `group_id` | String | 是       | 群组 ID。  |
 
 ## 认证方式
@@ -25,7 +25,7 @@
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，环信使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](/document/server-side/easemob_app_token.html)。
 
 ## 生成会话摘要
 
