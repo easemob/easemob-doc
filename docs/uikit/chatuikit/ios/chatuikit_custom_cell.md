@@ -84,40 +84,7 @@ final class MineMessageEntity: MessageEntity {
 
 ```swift
 class CustomMessageListController: MessageListController {
-
-        //要实现微信样式（followInput），需要同时重载下面的方法以及仿系统 UIActionSheet 样式（ActionSheet）的方法
-    override func processFollowInputAttachmentAction() {
-        if Appearance.chat.messageAttachmentMenuStyle == .followInput {
-            if let fileItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "File" }) {
-                fileItem.action = { [weak self] item,object in
-                    self?.handleAttachmentAction(item: item)
-                }
-            }
-            if let photoItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Photo" }) {
-                photoItem.action = { [weak self] item,object in
-                    self?.handleAttachmentAction(item: item)
-                }
-            }
-            if let cameraItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Camera" }) {
-                cameraItem.action = { [weak self] item,object in
-                    self?.handleAttachmentAction(item: item)
-                }
-            }
-            if let contactItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Contact" }) {
-                contactItem.action = { [weak self] item,object in
-                    self?.handleAttachmentAction(item: item)
-                }
-            }
-            if let redPackageItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Red" }) {
-                redPackageItem.action = { [weak self] item,object in
-                    self?.handleAttachmentAction(item: item)
-                }
-            }
-            
-        }
-    }
     
-    //仿系统 UIActionSheet 样式（ActionSheet）只需要重载以下方法
     override func handleAttachmentAction(item: any ActionSheetItemProtocol) {
         switch item.tag {
         case "File": self.selectFile()
@@ -191,7 +158,8 @@ extension MessageListViewModel {
         ComponentsRegister.shared.MessageRenderEntity = MineMessageEntity.self
         ComponentsRegister.shared.Conversation = MineConversationInfo.self
         ComponentsRegister.shared.MessageViewController = CustomMessageListController.self
-        ComponentsRegister.shared.registerCustomizeCellClass(cellType: RedPackageCell.self)
+        //redPackageIdentifier 为Cell的唯一标识，也是环信自定义消息的时间类型
+        ComponentsRegister.shared.registerCustomCellClasses(cellType: RedPackageCell.self,identifier: redPackageIdentifier)
 ```
 
 这里的 `ComponentsRegister.shared.Conversation = MineConversationInfo.self` 用于在会话列表中展示收到的新类型的自定义消息内容。
