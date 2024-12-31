@@ -82,7 +82,7 @@ final class MineMessageEntity: MessageEntity {
 
 继承 `MessageListController`，处理新增的附件消息类型的点击事件。
 
-```Swift
+```swift
 class CustomMessageListController: MessageListController {
     
     override func handleAttachmentAction(item: any ActionSheetItemProtocol) {
