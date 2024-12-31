@@ -128,10 +128,10 @@ const pushOption = {
 }
 
 // 调用 IM SDK 方法，注册推送插件
-conn.usePlugin({
+conn.usePlugin(
   pushOption,
   'push' // 为固定值
-})
+)
 // #endif
 
 // 如果退出 IM 登录、多设备互踢时, 需要解绑 device token, 可以调用该方法
