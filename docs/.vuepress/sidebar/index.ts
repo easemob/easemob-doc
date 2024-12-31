@@ -17,6 +17,7 @@ export const zhSidebar = sidebar({
           children: 子菜单。请参考「子菜单示例」
       */
       text: "产品简介",
+      collapsible: true,
       children: [
         { text: "产品概述", link: "introduction.html" },
         { text: "特性介绍",
@@ -64,12 +65,14 @@ export const zhSidebar = sidebar({
     },
     {
       text: "Demo",
+      collapsible: true,
       children: [
         { text: "Demo 体验及源码地址", link: "demo_sourcecode_address.html" },
       ],
     },
     {
       text: "内容审核",
+      collapsible: true,
       children: [
         {
           text: "产品简介",
@@ -148,6 +151,7 @@ export const zhSidebar = sidebar({
     },
     {
       text: "场景方案",
+      collapsible: true,
       children: [
         {
           text: "环信 AIGC",
@@ -247,7 +251,7 @@ export const zhSidebar = sidebar({
             },
             {
               text: "API 参考",
-              collapsible: false,
+              collapsible: true,
               children: [
                 { text: "REST 社区管理", link: "circle/server_mgmt_rest.html" },
                 {
@@ -319,7 +323,21 @@ export const zhSidebar = sidebar({
       ],
     },
     {
+      text: 'AI 会话摘要助手',
+      collapsible: true,
+      children: [
+        { text: '效果展示及开通', link: 'plug-in/conversation_summary_enable.html' },
+        { text: '集成指南', 
+          collapsible: true,
+          children: [
+            { text: "RESTful API", link: "plug-in/conversation_summary_restful.html" },
+          ],  
+        },
+      ], 
+    },
+    {
       text: "常见方案",
+      collapsible: true,
       children: [
         { text: "群 @ 消息", link: "solution_common/group_@.html" },
         { text: "消息引用", link: "solution_common/message_quote.html" },
@@ -329,6 +347,7 @@ export const zhSidebar = sidebar({
     },
     {
       text: "FAQ",
+      collapsible: true,
       children: [
         { text: "FAQ 质量", link: "faq_quality_issues.html" },
         { text: "FAQ 集成", link: "faq_integration_issues.html" },
@@ -337,6 +356,7 @@ export const zhSidebar = sidebar({
     },
     {
       text: "安全",
+      collapsible: true,
       children: [
         { text: "安全最佳实践", link: "security_best_practices.html" },
         { text: "GDPR 安全合规", link: "GDPR.html" },
@@ -344,6 +364,7 @@ export const zhSidebar = sidebar({
     },
     {
       text: "Console 指南",
+      collapsible: true,
       children: [
         { text: "开通和配置服务", link: "enable_and_configure_IM.html" },
         { text: "消息量统计", link: "message_statistics.html" },

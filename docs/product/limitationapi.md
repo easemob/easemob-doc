@@ -272,3 +272,11 @@
 | 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{userId} | 
 
 以上两个接口的总调用频率（默认值）为 100 次/秒/App Key。
+
+## AI 会话摘要助手
+
+| RESTful API 接口        | 方法 | 接口 URL           | 接口最高调用频率（默认值） |
+| :----------- | :--- | :------------- | :----------- |
+| 生成会话摘要         | POST  | /{org_name}/{app_name}/agent/v1/messages/summary | 100 次/秒/App Key          |
+| 获取会话摘要         | GET  | /{org_name}/{app_name}/agent/v1/messages/summaries?conversationId={groupId}&username={username}&chatType={chatType} | 100 次/秒/App Key          |
+| 删除会话摘要         | DELETE  | /{org_name}/{app_name}/agent/v1/messages/summary/{summaryId}?conversationId={groupId}&username={username}&chatType={chatType} | 100 次/秒/App Key          |
