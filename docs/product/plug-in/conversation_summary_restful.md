@@ -79,13 +79,13 @@ POST https://{host}/{org_name}/{app_name}/agent/v1/messages/summary
 | `data.topicInfos.msgCount` | Int | 该话题涉及的消息数量。 |
 | `data.topicInfos.firstMsgId` | Long | 该话题涉及的首条消息的时间戳。 |
 | `data.topicInfos.lastMsgId`  | Long | 该话题涉及的最后一条消息的时间戳。 |
-| `data.generator` | String | 会话摘要的生成者。如果为 `null`，表示该会话摘要是利用 app token 调用 RESTful API 生成的且没有指定生成者（未传入查询参数 `username`）。 |
+| `data.generator` | String | 会话摘要的生成者。如果为 `null`，表示该会话摘要是利用 app token 调用 RESTful API 生成且没有指定生成者（未传入查询参数 `username`）。 |
 | `data.summaryTimestamp` | Long | 会话摘要生成的时间戳。 |
 | `data.imageUrls` | Array | 会话摘要涉及的图片的 URL。 |
 | `data.videoUrls` | Array | 会话摘要涉及的视频的 URL。 |
 | `data.messageContentList` | Array | 会话摘要涉及的消息内容列表。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](#错误码)了解可能的原因。
 
 #### 示例
 
@@ -200,7 +200,7 @@ GET https://{host}/{org_name}/{app_name}/agent/v1/messages/summaries?conversatio
 | `data.videoUrls` | Array | 会话摘要涉及的视频的 URL。 |
 | `data.messageContentList` | Array | 会话摘要涉及的消息内容列表。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](#错误码)了解可能的原因。
 
 #### 示例
 
@@ -319,7 +319,7 @@ DELETE https://{host}/{org_name}/{app_name}/agent/v1/messages/summary/{summaryId
 | :----- | :---- | :------------------------- |
 | `code` | String | 请求是否成功。`200` 表示请求成功。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](#错误码)了解可能的原因。
 
 #### 示例
 
