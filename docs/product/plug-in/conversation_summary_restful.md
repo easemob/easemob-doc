@@ -7,7 +7,7 @@
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html#创建应用)。
-- 已[开通会话摘要插件](conversation_summary_enable.html#开通功能)。
+- 已[开通会话摘要助手](conversation_summary_enable.html#开通功能)。
 - 了解环信 IM RESTful API 的调用频率限制，详见[接口频率限制](/product/limitationapi.html)。
 
 ## 公共请求参数
