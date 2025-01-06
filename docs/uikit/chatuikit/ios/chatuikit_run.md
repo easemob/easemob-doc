@@ -22,7 +22,7 @@
 
 ### 第二步 执行 pod 命令
 
-1. 点击打开 `chatuikit-ios` 文件夹。
+1. 点击打开 `easemob-uikit-ios` 文件夹。
 
 2. 将 `Example` 文件夹拖拽到终端。
 
