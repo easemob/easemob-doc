@@ -37,7 +37,7 @@
 
 ### 方法二：手动复制 SDK 文件
 
-打开 SDK 下载页面，获取最新版的环信即时通讯 IM SDK SDK，然后解压。
+打开 SDK 下载页面，获取最新版的环信即时通讯 IM SDK，然后解压。
 
 将 SDK 包内的 `HyphenateChat.xcframework` 拖入到你的工程中。
 
