@@ -66,7 +66,7 @@ const documentSidebar = [
           { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
           { text: '更新消息', link: 'message_update.html', except: ['web']},
           { text: '删除消息', link: 'message_delete.html' },    
-          { text: '置顶消息', link: 'message_pin.html', except: ['harmonyos']},         
+          { text: '置顶消息', link: 'message_pin.html'},         
           { text: '翻译消息', link: 'message_translation.html', except: ['harmonyos']},
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},
           { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
