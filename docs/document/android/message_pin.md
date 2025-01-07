@@ -23,7 +23,7 @@
 
 ## 置顶消息
 
-你可以调用 `EMChatManager#asyncPinMessage` 方法在会话中置顶消息。消息置顶状态变化后，会话中的其他成员会收到 `EMMessageListener#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMMessageListener#onMessagePinChanged` 事件。
+你可以调用 `EMChatManager#asyncPinMessage` 方法在会话中置顶消息。消息置顶状态变化后，会话中的其他用户会收到 `EMMessageListener#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMMessageListener#onMessagePinChanged` 事件。
 
 在会话中，支持多个用户置顶同一条消息，最新的消息置顶信息会覆盖较早的信息，即 `EMMessagePinInfo` 的置顶消息的操作者的用户 ID 和置顶时间为最新置顶操作的相关信息。
 
@@ -52,9 +52,9 @@ EMClient.getInstance().chatManager().asyncPinMessage(message.getMsgId(), new EMC
 
 ## 取消置顶消息
 
-你可以调用 `EMChatManager#asyncUnPinMessage` 方法在会话中取消置顶消息。与置顶消息相同，取消置顶消息后，会话中的其他成员会收到 `EMMessageListener#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMMessageListener#onMessagePinChanged` 事件。
+你可以调用 `EMChatManager#asyncUnPinMessage` 方法在会话中取消置顶消息。与置顶消息相同，取消置顶消息后，会话中的其他用户会收到 `EMMessageListener#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMMessageListener#onMessagePinChanged` 事件。
 
-单聊、群组或聊天室中的所有成员均可取消置顶消息，不论该消息由哪个成员置顶。取消置顶消息后，`EMMessage#pinnedInfo` 获取到的信息为空，该会话的置顶消息列表中也不再包含该消息。
+单聊、群组或聊天室中的所有用户均可取消置顶消息，不论该消息由哪个用户置顶。取消置顶消息后，`EMMessage#pinnedInfo` 获取到的信息为空，该会话的置顶消息列表中也不再包含该消息。
 
 ```java
  EMClient.getInstance().chatManager().asyncUnPinMessage(message.getMsgId(), new EMCallBack() {
