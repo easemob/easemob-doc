@@ -57,7 +57,7 @@
 
 ## 实现方法
 
-### 获取当前用户的其他已登录设备的登录 ID 列表，并向这些设备发送消息
+### 获取当前用户的其他已登录设备的登录 ID 列表
 
 你可以调用 `GetSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
@@ -135,7 +135,7 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
 
 即时通讯 IM 自 1.2.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
 
-初始化 SDK 时，你可以调用 `Options#CustomDeviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `IConnectionDelegate#OnLoggedOtherDevice` 回调会包含导致该设备被踢下线的自定义设备名称。
+初始化 SDK 时，你可以利用 `Options#CustomDeviceName` 设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `IConnectionDelegate#OnLoggedOtherDevice` 回调会包含导致该设备被踢下线的自定义设备名称。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
@@ -176,7 +176,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ![img](/images/common/multidevice_device_platform.png)
 
-2. 初始化 SDK 时，调用 `Options#CustomOSType` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
+1. 初始化 SDK 时，利用 `Options#CustomOSType` 自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
