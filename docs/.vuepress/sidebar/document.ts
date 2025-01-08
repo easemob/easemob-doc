@@ -358,9 +358,9 @@ const documentSidebar = [
     only: ['linux']
   },
   {
-    text: '服务端 REST API',
+    text: '服务端 RESTful API',
     children: [
-      { text: '即时通讯 REST API 概览', link: 'overview.html' },
+      { text: '即时通讯 RESTful API 概览', link: 'overview.html' },
       { 
         text: '消息管理', 
         collapsible: true,
@@ -373,7 +373,8 @@ const documentSidebar = [
           { text: '获取历史消息记录', link: 'message_historical.html' },
           { text: '设置指定消息附件的存储方式', link: 'message_attachment_storage.html' },
           { text: '消息表情回复', link: 'reaction.html' },
-          { text: '撤回消息和单向删除会话', link: 'message_recall.html' },
+          { text: '撤回消息', link: 'message_recall.html' },
+          { text: '单向删除会话', link: 'conversation_delete.html' },
           { text: '单向删除漫游消息', link: 'message_delete.html' },
           { text: '修改文本或自定义消息', link: 'message_modify_text_custom.html' },
           { text: '获取离线消息数据', link: 'message_offline.html' },

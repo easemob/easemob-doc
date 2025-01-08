@@ -42,7 +42,7 @@
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文涉及的所有消息管理 RESTful API 都需要使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
-### HTTP 请求
+## HTTP 请求
 
 ```http
 POST https://{host}/{org_name}/{app_name}/messages/chatrooms/broadcast
@@ -81,7 +81,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/broadcast
 - [发送透传消息](message_chatroom.html#发送透传消息)
 - [发送自定义消息](message_chatroom.html#发送自定义消息)
 
-### HTTP 响应
+## HTTP 响应
 
 #### 响应 body
 
@@ -97,7 +97,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/broadcast
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 示例
+## 示例
 
 #### 请求示例
 
@@ -305,7 +305,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 }
 ```
 
-### 错误码
+## 错误码
 
 | HTTP 状态码 | 错误类型   | 错误提示      | 可能原因    | 处理建议     |
 |:---------|:-------------------|:-----------------|:-----------|:----------|
