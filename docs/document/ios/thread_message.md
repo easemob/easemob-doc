@@ -8,6 +8,8 @@
 
 环信即时通讯 IM iOS SDK 提供 `EMManager`、`EMChatMessage` 和 `EMChatThreadInfo` 类，用于管理子区消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取子区消息。
 
+使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
+
 消息收发流程如下：
 
 客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
@@ -23,7 +25,7 @@
 - 完成 3.9.3 以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 联系商务开通子区功能。
+- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 ## 实现方法
 

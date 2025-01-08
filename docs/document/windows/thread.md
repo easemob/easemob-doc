@@ -4,6 +4,8 @@
 
 子区是群组成员的子集，是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
 
+使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
+
 如需查看消息相关内容，参见 [子区消息管理](thread_message.html)。
 
 ## 技术原理
@@ -27,7 +29,7 @@
 - 完成 `1.0.5 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 联系商务开通子区功能。
+- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 ## 实现方法
 

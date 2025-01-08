@@ -4,6 +4,8 @@
 
 子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍即时通讯 IM React Native SDK 如何发送、接收以及撤回子区消息。
 
+使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
+
 ## 技术原理
 
 即时通讯 IM React Native SDK 提供 `ChatManager`、`ChatMessage` 和 `ChatMessageThread` 类，用于管理子区消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取子区消息。
@@ -22,7 +24,7 @@
 
 - 已集成 `1.0.5 或以上版本` SDK 的基本功能，完成 SDK 初始化，详见 [初始化](initialization.html)文档。
 - 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 联系商务开通子区功能。
+- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 ## 实现方法
 

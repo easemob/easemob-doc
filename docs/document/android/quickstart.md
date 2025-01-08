@@ -12,7 +12,7 @@
 
 ## 前提条件
 
-- Android Studio 3.0 或以上版本；
+- Android Studio 3.6 或以上版本；
 - Android SDK API 等级 21 或以上；
 - Android 5.0 或以上版本的设备；
 - 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
@@ -25,39 +25,38 @@
 
 参考以下步骤创建一个 Android 项目。
 
-1. 打开 Android Studio，点击 **Start a new Android Studio project**。
-2. 在 **Select a Project Template** 界面，选择 **Phone and Tablet > Empty Activity**，然后点击 **Next**。
-3. 在 **Configure Your Project** 界面，依次填入以下内容：
+1. 打开 Android Studio，点击 **New Project**。
+2. 在 **New Project** 界面，选择 **Empty Views Activity**，然后点击 **Next**。
+3. 在 **Empty Views Activity** 界面，依次填入以下内容：
    - **Name**：你的 Android 项目名称，如 HelloWorld。
-   - **Package name**：你的项目包的名称，如 com.hyphenate.helloworld。
+   - **Package name**：你的项目包的名称，如 io.agora.helloworld。
    - **Save location**：项目的存储路径。
    - **Language**：项目的编程语言，如 Java。
-   - **Minimum API level**：项目的最低 API 等级。
+   - **Minimum API level**：项目的最低 API 等级，如 API 21。
 
 然后点击 **Finish**。根据屏幕提示，安装所需插件。
 
-上述步骤使用 **Android Studio 3.6.2** 示例。你也可以直接参考 Android Studio 官网文档 [创建首个应用](https://developer.android.com/training/basics/firstapp)。
+上述步骤使用 **Android Studio Ladybug | 2024.2.1 Patch 3** 示例。你也可以直接参考 Android Studio 官网文档 [创建应用](https://developer.android.com/studio/projects/create-project)。
 
 ### 2. 集成 SDK
 
-你可以使用 mavenCentral 自动集成。该方法仅适用于 v3.8.2 或以上版本。
+你可以使用 mavenCentral 自动集成。
 
-除此之外，你还可以通过手动复制 SDK 文件和动态加载 `.so` 库文件的方法集成 IM SDK，详见[集成文档](integration.html)。
 
-1. 在项目的 `build.gradle` 中添加 `mavenCentral()` 仓库。
+1. 在项目的 `settings.gradle` 中添加 `mavenCentral()` 仓库。
 
 ```gradle
-buildscript {
+pluginManagement {
     repositories {
-        ...
+        ……
         mavenCentral()
+        ……
     }
-    ...
 }
-
-allprojects {
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        ...
+        ……
         mavenCentral()
     }
 }
@@ -69,23 +68,13 @@ allprojects {
 ...
 dependencies {
     ...
-    // x.y.z 请填写具体版本号，如：4.5.0。
-    // 可通过 SDK 发版说明获得最新版本号。
-    implementation 'io.hyphenate:hyphenate-chat:x.x.x'
+    // x.y.z 请填写具体版本号，如：4.11.0。
+    implementation("io.hyphenate:hyphenate-chat:x.y.z")
 }
 ```
-
-:::tip
-如果使用 3.8.0 之前的版本，gradle 依赖需要按照下面格式添加：
-:::
-
-```gradle
-implementation 'io.hyphenate:hyphenate-sdk:3.7.5' // 完整版本，包含音视频功能
-
-implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含IM功能
-```
-
 若要查看最新版本号，请点击[这里](releasenote.html)。
+
+除此之外，你还可以通过手动复制 SDK 文件和动态加载 `.so` 库文件的方法集成 IM SDK，详见[集成文档](integration.html)。
 
 ### 3. 添加项目权限
 
@@ -144,7 +133,7 @@ com.android.builder.merge.DuplicateRelativeFileException: More than one file was
 
 可在 app 的 `build.gradle` 文件的 Android 节点中添加 `packagingOptions` 节点，指定在构建过程中优先选择第一个匹配的文件：
 
-```java
+```gradle
 android {
   // ...
   packagingOptions {
@@ -174,34 +163,24 @@ options.setAppKey("Your appkey");
 ......// 其他 EMOptions 配置。
 EMClient.getInstance().init(context, options);
 ```
-
 ### 2. 创建账号
 
-可以使用如下代码创建账户：
+1. 在[环信即时通讯控制台](https://console.easemob.com/user/login)首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
 
-```java
-try {
-        // 注册失败会抛出 HyphenateException。
-        // 同步方法，会阻塞当前线程。
-        EMClient.getInstance().createAccount(userName, pwd);
-        //成功
-        //callBack.onSuccess(createLiveData(userName));
-    } catch (HyphenateException e) {
-        //失败
-        //callBack.onError(e.getErrorCode(), e.getMessage());
-    }
-```
+2. 在环信即时通讯云的左侧导航栏中，选择**应用概览 > 用户认证**。
+   
+3. 在**用户认证**页面，点击**创建IM用户**按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
 
-:::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在[环信控制台](https://console.easemob.com/user/login)中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
-:::
+![img](/images/product/user_create_test.png)
+   
+创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
 
 ### 3. 登录账号
 
-使用如下代码实现用户登录：
+创建账号后，获取账号的用户 ID 和 Token。使用如下代码实现用户登录：
 
 ```java
-EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
+EMClient.getInstance().loginWithToken(mAccount, mPassword, new EMCallBack() {
     // 登录成功回调
     @Override
     public void onSuccess() {
@@ -214,18 +193,13 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 
     }
 
-    @Override
-    public void onProgress(int i, String s) {
-
-    }
-
 });
 ```
 
 :::tip
 1. 除了注册监听器，其他的 SDK 操作均需在登录之后进行。
 2. 登录成功后需要调用 `EMClient.getInstance().chatManager().loadAllConversations();` 和 `EMClient.getInstance().groupManager().loadAllGroups();`，确保进入主页面后本地会话和群组均加载完毕。
-3. 如果之前登录过，App 长期在后台运行后切换到前台运行可能会导致加载到内存的群组和会话为空。为了避免这种情况，可在主页面的 `oncreate` 里也添加这两种方法，不过，最好将这两种方法放在程序的开屏页。
+3. 如果之前登录过，App 长期在后台运行后切换到前台运行可能会导致加载到内存的群组和会话为空。为了避免这种情况，可在主页面的 `onCreate` 里也添加这两种方法，不过，最好将这两种方法放在程序的开屏页。
 :::
 
 ### 4. 发送一条单聊消息

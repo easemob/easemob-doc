@@ -96,6 +96,10 @@ SDKClient.Instance.ContactManager.GetSelfIdsOnOtherPlatform(new ValueCallBack<Li
 
 你可以调用 `GetLoggedInDevicesFromServer` 或 `GetLoggedInDevicesFromServerWithToken` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。
 
+调用该方法后，在 SDK 返回的信息中，`DeviceInfo` 中的 `DeviceName` 属性的含义如下：
+- 若指定账号自定义了设备名称，该属性表示自定义设备名称。
+- 若未自定义设备的名称，该属性默认为设备型号。
+
 ```csharp
 SDKClient.Instance.GetLoggedInDevicesFromServer(username, password,
 	callback: new ValueCallBack<List<DeviceInfo>>(
@@ -127,10 +131,6 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
   )
 );
 ```
-
-调用该方法后，在 SDK 返回的信息中，`DeviceInfo` 中的 `DeviceName` 属性的含义如下：
-- 若指定账号自定义了设备名称，该属性表示自定义设备名称。
-- 若未自定义设备的名称，该属性默认为设备型号。
 
 ### 设置登录设备的名称
 
