@@ -1,6 +1,6 @@
 # 子区管理
 
-环信即时通讯 IM 提供多个接口实现子区管理，包括子区的创建、获取、修改和删除等。
+环信即时通讯 IM 提供多个接口实现子区管理，包括子区的创建、获取、修改和删除等。使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
 
 单个 app 下的子区总数默认为 10 万，如需调整请联系商务。
 
@@ -11,6 +11,7 @@
 - 已在环信即时通讯 IM 管理后台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 - 子区相关的限制，详见 [使用限制](limitation.html#子区)。
+- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 ## 公共参数
 
