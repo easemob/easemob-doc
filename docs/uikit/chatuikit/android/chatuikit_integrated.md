@@ -27,17 +27,16 @@ implementation("io.hyphenate:ease-chat-kit:4.11.1")
 
 从 GitHub 获取[单群聊 UIKit](https://github.com/easemob/chatuikit-android) 源码，按照下面的方式集成：
 
-1. 在根目录 `settings.gradle.kts` 文件（/Gradle Scripts/settings.gradle.kts）中添加如下代码：
+1. 在Project根目录 `settings.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
 include(":ease-im-kit")
 project(":ease-im-kit").projectDir = File("../chatuikit-android/ease-im-kit")
 ```
 
-2. 在 app 的 `build.gradle.kts` 文件（/Gradle Scripts/build.gradle）中添加如下代码：
+2. 在 app 的 `build.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
-//chatuikit-android
 implementation(project(mapOf("path" to ":ease-im-kit")))
 ```
 
