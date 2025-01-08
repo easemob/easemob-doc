@@ -62,7 +62,7 @@ ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 I
 
 全局广播通常会使用明显的标识或格式以区别于普通聊天消息，确保用户能够快速识别全局广播。
 
-你也可以[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+你也可以[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
 
 在 UIKit 中，用户可以自定义全局广播的标识以及发送内容。全局广播消息的默认展示策略如下：
 
