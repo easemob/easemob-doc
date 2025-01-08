@@ -81,7 +81,7 @@
 
 ### 聊天室全局广播消息
 
-你可以[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。该功能默认关闭，如果需要，请联系环信商务开通。
+你可以[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。该功能默认关闭，如果需要，请联系环信商务开通。
 
 ### 置顶消息
 

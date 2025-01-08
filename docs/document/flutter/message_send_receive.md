@@ -82,7 +82,7 @@ EMClient.getInstance.chatManager.sendMessage(message).then((value) {
 
 若在初始化时打开了 `ChatOptions#messagesReceiveCallbackIncludeSend` 开关，则该回调中会返回发送成功的消息。
 
-对于聊天室消息，你可以通过消息的 `EMMessage#isBroadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+对于聊天室消息，你可以通过消息的 `EMMessage#isBroadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
 
 ```dart
 // 继承并实现 EMChatEventHandler

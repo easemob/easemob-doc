@@ -222,7 +222,7 @@ try {
 
 ### V1.0.9 2024-07-29
 
-1. 增加[发送聊天室全局广播消息](message_chatroom.html#发送聊天室全局广播消息)功能。
+1. 增加[发送聊天室全局广播消息](message_broadcast.html#发送聊天室全局广播消息)功能。
 2. 增加[导入好友列表](user_relationship.html#导入好友列表)功能。
 3. 增加[强制用户从单设备下线](account_system.html#强制用户从单设备下线)功能。
 4. [创建群组增加群组头像属性](group_manage.html#创建群组)。

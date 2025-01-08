@@ -29,7 +29,7 @@
   - `ChatManager#GetConversationsFromServerWithCursor`：根据会话标记从服务器分页查询会话列表。
   - `Conversation#Marks`：获取本地单个会话的所有标记。
   - `MultiDevicesOperation#CONVERSATION_MARK`：多设备场景下的会话标记事件。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
-- 新增 `Message#Broadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+- 新增 `Message#Broadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
 - 新增 `GroupManager#FetchMyGroupsCount` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。 
 - 新增错误码 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`，表示聊天室所有者不允许离开聊天室。若初始化时，`Options#IsRoomOwnerLeaveAllowed` 参数设置为 `false`，聊天室所有者调用 `LeaveRoom` 方法离开聊天室时会提示该错误。
 - 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
