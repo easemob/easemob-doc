@@ -22,7 +22,8 @@
 | 下载文件      |  GET     | /{org_name}/{app_name}/chatfiles/{file_uuid}       | 100 次/秒/App Key                                                 |
 | * 获取历史消息（聊天记录）文件   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 次/分钟/App Key                                               |
 | * 设置指定消息附件的存储方式   |  POST     | /{org_name}/{app_name}/users/{username}/chatfiles/lifetime          | 100 次/秒/App Key     |
-| * 服务端消息撤回    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
+| * 撤回单条消息    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key                                                 |
+| * 批量撤回消息    |    POST  | /{org_name}/{app_name}/messages/batch_recall        | 100 次/秒/App Key                                                 |
 | 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key                                              |
 | 修改文本或自定义消息 | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 次/秒/App Key  |
 | 根据消息 ID 单向删除单聊漫游消息  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}    | 100 次/秒/App Key   |
