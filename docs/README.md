@@ -747,7 +747,7 @@ projects:
                 link: /document/electron/conversation.html#删除会话
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_recall.html#单向删除会话        
+                link: /document/server-side/conversation_delete.html#单向删除会话        
       - title: 群组和聊天室
         icon: /feature/group.svg
         contexts:
