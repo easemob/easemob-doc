@@ -199,7 +199,7 @@ POST https://{host}/{org_name}/{app_name}/messages/batch_recall
 
 | 参数    | 类型   | 是否必需 | 描述        |
 | :---------- | :----- | :------- | :------------------ |
-| `msgs`    | JSONArray | 是       | 要撤回的消息的详情。单次请求最多可撤回 30 条消息。 |
+| `msgs`    | JSON Array | 是       | 要撤回的消息的详情。单次请求最多可撤回 30 条消息。 |
 | - `msg_id`    | String | 是       | 要撤回消息的消息 ID。|
 | - `to`        | String | 是       | 要撤回消息的接收方。<br/> - 单聊为接收方的用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。<br/> 若不传入该参数，请求失败。        |
 | - `from`      | String | 否       | 消息撤回方的用户 ID。若不传该参数，默认为 `admin`。    |
