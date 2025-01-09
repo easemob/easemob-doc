@@ -20,8 +20,6 @@
 
 2. `Appearance.alertStyle = value`：弹窗的圆角样式，即是大圆角还是小圆角。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/common/Appearance_alertContainerConstraintsSize.png)
-
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/common/alert_radius_large.png" title="大圆角" />
   <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/common/alert_radius_small.png" title="小圆角" />
