@@ -146,7 +146,7 @@
 首先在 `MessageListController` 的 `MessageListView` 中的 `MessageInputBar`中输入 `@` 字符后会告知 `ViewModel` 以及 `Controller` 用户输入了 `@` 字符，选择 @ 的用户后，输入框中会显示被 @ 的用户的名字或者昵称。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/ios/common/group_@.png" title="群组 @ 提及" />
+  <ImageItem src="/images/uikit/chatuikit/feature/common/ios/group_@.png" title="群组 @ 提及" />
 </ImageGallery>
 
 #### 如何使用

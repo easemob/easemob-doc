@@ -112,9 +112,7 @@ export default defineConfig({
 
 2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用环信即时通讯 IM 的 App Key 和用户信息初始化 UIKit。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/vue_initialization.png" title="创建 chat.jsx 文件" />
-</ImageGallery>
+<img src="/images/uikit/chatuikit/web/vue_initialization.png" width="500" >
 
 代码如下：
 

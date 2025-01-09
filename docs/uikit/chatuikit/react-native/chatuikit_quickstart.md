@@ -221,7 +221,7 @@ export default App;
 点击登录按钮，进入聊天页面，输入文本内容，点击发送。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_first.png" title="发送第一条消息" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_first.png" title="发送第一条消息" />
 </ImageGallery>
 
 ## 示例项目地址
