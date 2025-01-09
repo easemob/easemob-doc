@@ -111,8 +111,8 @@ export default defineConfig({
    ```
 
 2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用环信即时通讯 IM 的 App Key 和用户信息初始化 UIKit。
-   
-  ![img](/images/uikit/chatuikit/web/vue_initialization.png)
+
+<img src="/images/uikit/chatuikit/web/vue_initialization.png" width="500" >
 
 代码如下：
 
@@ -235,11 +235,15 @@ const switchTheme = () => {
 ```
 删除 `App.vue` 文件 `template` 中的无关代码，仅保留 RouterView，当访问 http://localhost:5173 时，界面如下：
 
-![img](/images/uikit/chatuikit/web/vue_initial_page.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/vue_initial_page.png" title="浅色主题" />
+</ImageGallery>
 
 点击右上角的 **Switch Theme** 切换主题：
 
-![img](/images/uikit/chatuikit/web/vue_switch_theme.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/vue_switch_theme.png" title="深色主题" />
+</ImageGallery>
 
 ## 相关参考
 

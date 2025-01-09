@@ -22,6 +22,11 @@
 
 ![img](/images/uikit/chatuikit/ios/configurationitem/common/Appearance_alertContainerConstraintsSize.png)
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/common/alert_radius_large.png" title="大圆角" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/common/alert_radius_small.png" title="小圆角" />
+</ImageGallery>
+
 ## 设置页面色调
 
 1. `Appearance.primaryHue = value`：主色调，用于按钮、输入框等控件的背景色。

@@ -17,20 +17,24 @@
 聊天是即时通讯的核心功能之一，它允许用户与其他用户进行实时文字交流。聊天通常以会话的形式进行，每个会话由两个或多个用户组成。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/uniapp/main_chat.png" title="聊天页面" />
 </ImageGallery>
 
 ## 创建会话
 
 创建会话是即时通讯的核心功能之一，它允许用户启动与一个或多个其他用户交流。
 
-![img](/images/uikit/chatuikit/uniapp/conversation_create.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/uniapp/conversation_create.png" title="创建会话" />
+</ImageGallery>
 
 ## 创建群组	
 
 群组是允许多个用户加入的聊天会话。
 
-![img](/images/uikit/chatuikit/uniapp/group_create.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/uniapp/group_create.png" title="创建群组" />
+</ImageGallery>
 
 ## 用户列表	
 
@@ -44,19 +48,25 @@
 
 已发送回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
 
-![img](/images/uikit/chatuikit/uniapp/message_receipt_delivery.png  =350x750) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/uniapp/message_receipt_delivery.png" title="已发送回执" />
+</ImageGallery>
 
 ## 已读回执
 
 已读回执用于告知消息发送者，接收者已经阅读了其发送的消息。
 
-![img](/images/uikit/chatuikit/uniapp/message_receipt_read.png  =350x750) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/uniapp/message_receipt_read.png" title="已读回执" />
+</ImageGallery>
 
 ## 语音消息
 
 语音消息指以语音形式发送和接收的消息，可替代文字交流。
 
-![img](/images/uikit/chatuikit/uniapp/message_audio.png =700x730) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/uniapp/message_audio.png" title="语音消息" />
+</ImageGallery>
 
 ## 消息审核
 
@@ -69,6 +79,10 @@
 ## 群组 @ 提及 
 
 群组 @ 提及功能使用户能在群聊中通过 @ 符号直接提及特定成员，被提及者将收到特别通知。该功能便于高效传递重要信息，确保关键消息得到及时关注和回应。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/common/android/group_@.png" title="群组 @ 提及" />
+</ImageGallery>
 
 #### 如何使用
 

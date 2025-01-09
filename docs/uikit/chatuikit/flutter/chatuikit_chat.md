@@ -15,7 +15,9 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-![img](/images/uikit/chatuikit/flutter/custom_chat.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/flutter/custom_chat.png" title="聊天页面" />
+</ImageGallery>
 
 ## 添加消息页面
 
