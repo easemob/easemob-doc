@@ -153,4 +153,7 @@ npm run start
 使用自定义 App Key 时，由于没有联系人，需先添加好友。
 :::
 
-![img](/images/uikit/chatuikit/web/message_first.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/message_first.png" title="发送第一条消息" />
+</ImageGallery>
+

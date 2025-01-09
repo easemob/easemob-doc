@@ -8,7 +8,9 @@
 
 对于单聊和群聊, 会话展示的名称为你设置的 Profile 中的昵称，若未获取到昵称，则展示 ID；会话头像为你设置的 Profile 中的头像，如果没有设置，则使用默认头像。
 
-![img](/images/uikit/chatuikit/flutter/custom_conversation_list.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/flutter/custom_conversation_list.png" title="会话列表" />
+</ImageGallery>
 
 ## 添加会话列表
 

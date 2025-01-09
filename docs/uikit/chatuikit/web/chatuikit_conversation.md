@@ -34,7 +34,9 @@ const Conversation = () => {
 };
 ```
 
-![img](/images/uikit/chatuikit/web/cvs-header1.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/cvs-header1.png" title="会话列表页面示例" />
+</ImageGallery>
 
 ## 自定义会话列表页面
 
@@ -69,7 +71,9 @@ const Conversation = () => {
 }
 ```
 
-![img](/images/uikit/chatuikit/web/cvs-bg.png =300x800)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/cvs-bg.png" title="自定义会话列表页面示例" />
+</ImageGallery>
 
 ## 自定义会话列表页面的 header
 
@@ -112,7 +116,6 @@ const Conversation = () => {
 </ImageGallery>
 
 ## 自定义会话列表项
-
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/web/custom_list_item.png" title="会话列表项" />
