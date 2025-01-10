@@ -66,7 +66,9 @@
 
 ```typescript
 // ChatOptions 需要传入 appkey 参数。
-let options = new ChatOptions("Your appKey");
+let options = new ChatOptions({
+  appKey: "你的 AppKey"
+});
 // 传入 AppGallery Connect 获取到的 ClientID。
 options.setAppIDForPush('Your ClientID');
 // 初始化即时通讯 IM SDK。

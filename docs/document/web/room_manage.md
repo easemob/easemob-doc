@@ -65,8 +65,6 @@ conn.createChatRoom(options).then(res => console.log(res))
 - 调用 `joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `onChatRoomEvent#memberPresence` 事件。
   该方法支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。若进行了设置，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 
-用户加入聊天室后，会收到聊天室当前人数（`memberCount`）、聊天室全员禁言状态 （`isAllMembersMuted`）、聊天室创建时间戳（`createTimestamp`）、当前用户是否在聊天室白名单中（`isInAllowlist`）和当前用户被禁言截止时间戳（`muteExpireTimestamp`）等信息。 
-
 示例代码如下：
 
 ```javascript

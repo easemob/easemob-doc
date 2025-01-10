@@ -61,7 +61,9 @@ ChatClient.getInstance().chatroomManager()?.leaveChatroom(chatRoomId).then(()=> 
 示例代码如下：
 
 ```typescript
-let options = new ChatOptions();
+let options = new ChatOptions({
+  appKey: "你的 AppKey"
+});
 options.setDeleteMessagesOnLeaveChatroom(false);
 ```
 
@@ -98,7 +100,7 @@ ChatClient.getInstance().chatroomManager()?.removeChatroomMembers(chatroomId, me
 
 仅聊天室所有者和管理员可调用 `ChatroomManager#blockChatroomMembers` 方法将指定成员添加至黑名单。
 
-被加入黑名单后，该成员收到 `ChatroomListener#onRemovedFromChatRoom` 回调，移出原因为 `EMAChatroomManagerListener#BE_KICKED`。其他成员收到 `ChatroomListener#onMemberExited` 回调。
+被加入黑名单后，该成员收到 `ChatroomListener#onRemovedFromChatRoom` 回调，移出原因为 `LEAVE_REASON#BE_KICK`。其他成员收到 `ChatroomListener#onMemberExited` 回调。
 
 被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室，黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单列表。
 
@@ -190,7 +192,7 @@ ChatClient.getInstance().chatroomManager()?.removeFromChatroomWhitelist(chatroom
 
 #### 添加成员至聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `ChatroomManager#muteChatroomMembers` 方法将指定成员添加至聊天室禁言列表，操作者外其他成员收到 `ChatroomListener#onMutelistAdded` 回调。
+仅聊天室所有者和管理员可以调用 `ChatroomManager#muteChatroomMembers` 方法将指定成员添加至聊天室禁言列表，操作者外其他成员收到 `ChatroomListener#onMuteMapAdded` 回调。
 
 :::tip
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
