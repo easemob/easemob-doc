@@ -54,6 +54,8 @@ EMError *error;
 1. 调用 `getChatroomsFromServerWithPage` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
 2. 调用 `joinChatroom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `userDidJoinChatroom` 回调。
 
+用户加入聊天室后，会收到聊天室当前人数（`EMChatRoom#occupantsCount`）、聊天室全体禁言状态 （`EMChatRoom#isMuteAllMembers`）、聊天室创建时间戳（`EMChatRoom#createTimestamp`）、当前用户是否在聊天室白名单中（`EMChatRoom#isInWhitelist`）和当前用户被禁言截止时间戳（`EMChatRoom#muteExpireTimestamp`）等信息。
+
 示例代码如下：
 
 ```objectivec
