@@ -41,6 +41,8 @@
 HarmonyOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送时识别设备，并将该 ID 发送到服务器。服务器会自动将新消息发送到用户登录的设备，可以自动监听到其他设备上进行的操作。即时通讯 IM HarmonyOS SDK 提供以下多设备场景功能：
 
 - 获取当前用户的其他已登录设备的登录 ID 列表；
+- 设置登录设备的名称；
+- 设置登录设备的平台；
 - 获取其他设备的好友或者群组操作；
 
 ## 前提条件
@@ -69,6 +71,65 @@ ChatClient.getInstance().contactManager()?.getSelfIdsOnOtherPlatform().then(ids 
 });
 ```
 
+### 设置登录设备的名称
+
+即时通讯 IM 自 1.5.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，被踢设备就能知道是被哪个设备挤下线的。
+
+初始化 SDK 时，你可以调用 `ChatOptions#setCustomDeviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `ConnectionListener#onLogout` 回调会包含导致该设备被踢下线的自定义设备名称。
+
+:::tip
+登录成功后才会将该设置发送到服务器。
+:::
+
+```typescript
+let options = new ChatOptions({
+  appKey: "您的AppKey"
+});
+options.setCustomDeviceName("您的自定义设备名称");
+ChatClient.getInstance().init(this.context, options);
+
+ChatClient.getInstance().addConnectionListener({
+  onConnected:() => {
+
+  },
+  onDisconnected: (errorCode: number) => {
+
+  },
+  onLogout: (errorCode: number, info: LoginExtInfo) => {
+    // 当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。
+    // errorCode 为 {@link ChatError#USER_LOGIN_ANOTHER_DEVICE}。
+    // info.deviceInfo 是将当前设备踢出/挤下线的自定义设备名称，若设备没有自定义设备名称时默认回调设备型号。
+    // 其他错误码场景下，info.deviceInfo为空。
+  }
+});
+```
+
+### 设置登录设备的平台
+
+即时通讯 IM 自 1.5.0 版本开始支持自定义设置登录设备的平台，例如将手机和平板电脑设置为两个单独的平台，方便用户精细化控制同一平台的登录设备数量及平台间互踢等行为。
+
+你可以按照以下步骤设置登录设备所属的平台：
+
+1. 在环信控制台的**功能配置** > **功能配置总览**页面，点击**基础功能**页签，然后点击**多端多设备在线**对应的**设置**。在弹出的对话框中点击 **新增自定义平台**，在**添加自定义平台**对话框中设置**设备平台**和**设备数量**。
+
+**设备平台**的取值范围为 [1,100]，**设备数量**的取值范围为 [0,4]。
+
+![img](/images/common/multidevice_device_platform.png)
+
+2. 初始化 SDK 时，调用 `ChatOptions#setCustomOSPlatform` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
+
+:::tip
+登录成功后才会将该设置发送到服务器。
+:::
+
+```typescript
+let options = new ChatOptions({
+  appKey: "您的AppKey"
+});
+options.setCustomOSPlatform(1); // 取值范围为 [1,100]
+ChatClient.getInstance().init(this.context, options);
+```
+
 ### 设置登录设备的扩展信息
 
 即时通讯 IM 自 1.4.0 版本开始支持设备的自定义扩展信息，这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
@@ -80,7 +141,9 @@ ChatClient.getInstance().contactManager()?.getSelfIdsOnOtherPlatform().then(ids 
 :::
 
 ```typescript
-let options = new ChatOptions("您的AppKey");
+let options = new ChatOptions({
+  appKey: "你的 AppKey"
+});
 options.setLoginCustomExt("您要设置的自定义扩展信息");
 ChatClient.getInstance().init(this.context, options);
 

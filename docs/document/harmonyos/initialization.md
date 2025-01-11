@@ -13,7 +13,9 @@
 初始化示例代码：
 
 ```typescript
-let options = new ChatOptions("Your appkey");
+let options = new ChatOptions({
+  appKey: "你的 AppKey"
+});
 ......// 其他 ChatOptions 配置。
 // 初始化时传入上下文以及 options
 ChatClient.getInstance().init(context, options);

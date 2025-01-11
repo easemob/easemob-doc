@@ -107,7 +107,7 @@ interface ChatroomListener{
      * 有成员被禁言。
      * 被添加的成员收到该事件。禁言期间成员不能发送发消息。
      */
-    onMutelistAdded?: (roomId: string, mutes: Array<string>, expireTime: number) => void;
+    onMuteMapAdded?: (roomId: string, mutes: Map<string, number>) => void;
     /**
      * 有成员从禁言列表中移除。
      * 被解除禁言的成员会收到该事件。

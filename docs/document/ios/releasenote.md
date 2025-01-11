@@ -2,6 +2,27 @@
 
 <Toc />
 
+## 版本 V4.12.0 Dev 2025-1-10（开发版）
+
+### 新增特性
+
+- [IM SDK] 用户加入聊天室后会收到如下信息，即调用 `joinChatroom` 方法后的成功回调中会包含如下信息：
+  1. 聊天室当前人数 `EMChatRoom#occupantsCount`。有用户加入或离开聊天室时，当前聊天室人数会更新。
+  2. 聊天室全体禁言状态 `EMChatRoom#isMuteAllMembers`。该属性的值在收到全体禁言状态变更时更新。
+  3. 聊天室创建时间戳 `EMChatRoom#createTimestamp`，新增属性。
+  4. 当前用户是否在聊天室白名单中 `EMChatRoom#isInWhitelist`。该属性为新增属性，成员收到白名单变更回调时更新。
+  5. 当前用户被禁言截止时间戳 `EMChatRoom#muteExpireTimestamp`。该属性为新增属性，成员收到禁言变更回调时更新。
+
+### 优化
+
+- [IM SDK] 优化部分数据库操作。
+
+### 修复
+
+- [IM SDK] 修复部分 API 请求的完成回调不在主线程执行的问题，包括以下 API：
+  - `EMUserInfoManager` 和 `EMPresenceManager` 下的全部 API。
+  - `EMChatManager` 下的 `fetchMessagesFromServer`、`fetchSupportedLanguages`、`translateMessage` 和 `getMessageCountWithCompletion` API。
+
 ## 版本 V4.11.0 Dev 2024-12-3（开发版）
 
 ### 新增特性

@@ -2,6 +2,27 @@
 
 <Toc />
 
+## 版本 V4.12.0 Dev 2025-1-10（开发版）
+
+### 新增特性
+
+- [IM SDK] 用户加入聊天室可获取如下信息：
+  1. 聊天室当前人数：通过  `EMChatRoom#getMemberCount` 方法获取。有用户加入或离开聊天室时，当前聊天室人数会更新。
+  2. 聊天室全体禁言状态：通过 `EMChatRoom#isAllMemberMuted` 方法获取。该状态值在收到全体禁言状态变更时会更新。
+  3. 聊天室创建时间戳：新增 `EMChatRoom#getCreateTimestamp` 方法获取。
+  4. 当前用户是否在聊天室白名单中：新增 `EMChatRoom#isInWhitelist` 方法获取。
+  5. 当前用户被禁言截止时间戳：`EMChatRoom#getMuteExpireTimestamp`。
+
+### 优化
+
+- [IM SDK] 移除 Android SDK 4.0.0 版本之前废弃的 API。
+- [IM SDK] 优化部分数据库操作。
+- [IM SDK] JNI 层添加对一些异常的消除机制及判空保护。
+  
+### 修复
+
+- [IM SDK] 修复退出登录时因为一些在 SDK 回调里嵌套调用 SDK 相关 API 导致的异常。
+
 ## 版本 V4.11.0 Dev 2024-12-3（开发版）
 
 ### 新增特性

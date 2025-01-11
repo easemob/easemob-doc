@@ -7,7 +7,9 @@
 SDK 默认指向公有云地址，在部署私有云后，需要将地址重新指向到新的地址，以下是地址修改方法：
 
 ```typescript
-let options = new ChatOptions();//实例化 EMOptions 对象
+let options = new ChatOptions({
+  appKey: "您的AppKey"
+});//实例化 ChatOptions 对象
 options.setRestServer("10.10.10.10:00");//设置私有云 REST 地址（ip/域名：port）
 options.setIMServer("10.10.10.10");//设置私有云 IM 地址
 options.setImPort(100);//设置私有云 IM 端口号
@@ -28,7 +30,9 @@ options.setRestServer("https://10.10.10.10:00");//设置私有云 REST 地址（
 2. 从服务器端动态获取地址
 
 ```typescript
-let options = new ChatOptions();
+let options = new ChatOptions({
+  appKey: "您的AppKey"
+});
 options.setDnsURL("url");//从服务器端动态获取地址
 ChatClient.getInstance().init(options);//初始化 SDK
 ```

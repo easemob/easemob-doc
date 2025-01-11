@@ -87,6 +87,7 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
 
 ```javascript
 //实例化 SDK 对象
+// url 和 apiUrl 属性仅在 4.11.0 及之前版本需手动传入。4.12.0 及之后版本，SDK 会自动获取。
 const WebIM = (wx.WebIM = SDK);
 WebIM.conn = new WebIM.connection({
   appKey: "your appKey",

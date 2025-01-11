@@ -2,6 +2,45 @@
 
 <Toc />
 
+## 版本 V1.5.0 Dev 2025-1-10（开发版）
+
+### 新增特性
+
+- 用户加入聊天室可获取如下信息：
+  1. 聊天室当前人数：新增  `Chatroom#memberCount` 方法获取。有用户加入或离开聊天室时，当前聊天室人数会更新。
+  2. 聊天室全体禁言状态：通过 `Chatroom#isAllMemberMuted` 方法获取。该状态值在收到全体禁言状态变更时会更新。
+  3. 聊天室创建时间戳：新增 `Chatroom#createTimestamp` 方法获取。
+  4. 当前用户是否在聊天室白名单中：新增 `Chatroom#isInWhitelist` 方法获取。
+  5. 当前用户被禁言截止时间戳：新增 `Chatroom#muteExpireTimestamp` 方法获取。
+
+- 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)：
+  - `ChatOptions#setCustomOSPlatform` 和 `ChatOptions#getCustomDeviceName`，用于设置和获取当前设备自定义平台代号；
+  - `ChatOptions#setCustomDeviceName` 和 `ChatOptions#getCustomDeviceName`，用于设置和获取当前设备自定义设备名称。
+- 新增 `ChatManager#getDBMsgsCount` 方法，用于获取数据库中的消息总数。
+- 新增[两个错误码](error.html)：
+  - `ChatError#GROUP_USER_IN_BLOCKLIST`（613）：该用户在群组黑名单中。群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。
+  - `ChatError#CHATROOM_USER_IN_BLOCKLIST`（707）：该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。
+- 聊天室成员禁言回调：
+  - 新增聊天室禁言回调 [ChatroomListener#onMuteMapAdded](room_manage.html#监听聊天室事件)，参数 Map 的 key 表示被禁言的用户 ID ，value 表示禁言到期时间戳；
+  - 废弃原来的回调 `ChatroomListener#onMutelistAdded`。
+- 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
+
+### 优化
+
+- 废弃 `ChatOptions` 传入字符串的构造函数，新增传入 [AppParam](initialization.html#初始化) 的构造方法。
+- [发送前回调](/document/server-side/callback_presending.html)时修改的[消息扩展字段](message_send_receive.html#使用消息扩展字段)，会同步到发送方。
+- 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及本地会话)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
+- 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
+- 优化部分数据库操作。
+
+### 修复
+
+- 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
+- 修复置顶的单聊消息被撤回后，该消息未能及时地从置顶消息缓存（`Conversation#getPinnedMessages`）中移除的问题。
+- 修复调用 [PushManager#getSilentModeForConversations](push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
+- 修复极端情况下因网络异常导致的 Crash。
+- 修复多次设置 `ChatMessage#setMessageStatusCallback` 时导致崩溃的问题。
+
 ## 版本 V1.4.2 Dev 2024-11-04（开发版）
 
 ### 优化
