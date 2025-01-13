@@ -178,9 +178,9 @@
     "operator": "@ppAdmin",
     "payload":  {
         "member":  [
-            "wzy",
-            "wzy2",
-            "wzy1"
+            "user1",
+            "user2",
+            "user3"
         ],
         "type": "DELETE"
     },
@@ -208,7 +208,9 @@
 | `timestamp`    | Long   | 操作完成的时间戳。                | 
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |
 
+## 其他说明
 
+**群组操作的事件以及子事件后续会有更多新增。若业务强依赖这些事件或者子事件，业务中需添加对`operation` 和 `payload.type` 的强判断。**
 
 
 
