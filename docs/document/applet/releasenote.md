@@ -6,7 +6,7 @@
 
 ### 新增特性
 
-- [IM SDK] `onModifiedMessage` 事件回调参数中增加消息 `ext` 字段。添加该字段后，修改发送成功的消息后，消息接收方会收到发送方发送修改后的消息时添加的扩展信息。
+- [IM SDK] 消息修改事件 `onModifiedMessage` 中增加消息 `ext` 字段。添加该字段后，修改发送成功的消息后，消息接收方会收到发送方发送修改后的消息时添加的扩展信息。
 -  加入聊天室 `joinChatRoom` 成功的回调新增 `info` 字段，包含如下信息，即用户加入聊天室后会收到如下信息：
    - 聊天室创建时间：`createTimestamp`。
    - 是否开启全员禁言：`isAllMembersMuted`。
