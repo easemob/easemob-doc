@@ -29,7 +29,7 @@
 
 - 废弃 `ChatOptions` 传入字符串的构造函数，新增传入 [AppParam](initialization.html#初始化) 的构造方法。
 - [发送前回调](/document/server-side/callback_presending.html)时修改的[消息扩展字段](message_send_receive.html#使用消息扩展字段)，会同步到发送方。
-- 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及本地会话)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
+- 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
 - 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
 - 优化部分数据库操作。
 
@@ -37,7 +37,7 @@
 
 - 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
 - 修复置顶的单聊消息被撤回后，该消息未能及时地从置顶消息缓存（`Conversation#getPinnedMessages`）中移除的问题。
-- 修复调用 [PushManager#getSilentModeForConversations](push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
+- 修复调用 [PushManager#getSilentModeForConversations](/document/harmonyos/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
 - 修复极端情况下因网络异常导致的 Crash。
 - 修复多次设置 `ChatMessage#setMessageStatusCallback` 时导致崩溃的问题。
 
