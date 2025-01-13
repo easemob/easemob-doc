@@ -75,5 +75,3 @@
 | `operator`     | String | 操作人。若 app 管理员创建了群组，该参数的值固定为 `@ppAdmin`。         |
 | `timestamp`    | Long   | 操作完成的时间戳。                                                       | 
 
-
-

@@ -366,7 +366,7 @@
     - 新增 `EMMessageListener#onMessageContentChanged` 回调。消息修改后，接收方会收到该回调。
 - [IM SDK] 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)：
     - 新增 `EMOptions#setCustomOSPlatform` 方法，设置自定义平台代号；
-    - 新增 `EMOptions#getCustomOSPlatform` 方法，设置当前设备的自定义设备平台；
+    - 新增 `EMOptions#getCustomOSPlatform` 方法，获取当前设备的自定义设备平台；
     - 新增 `EMOptions#setCustomDeviceName` 方法，设置当前设备自定义设备名称；
     - 新增 `EMOptions#getCustomDeviceName` 方法，获取当前设备自定义设备名称。
 - [IM SDK] 新增 `EMConnectionListener#onLogout(int, String)` 回调，其中包含将当前设备踢下线的设备名称。<br/>

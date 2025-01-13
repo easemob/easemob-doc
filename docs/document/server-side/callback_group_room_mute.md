@@ -108,41 +108,10 @@
 | `operator`     | String | 操作人。若 app 管理员将成员移出禁言列表，该参数的值固定为 `@ppAdmin`。                                      |
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
 
+## 其他说明
 
+**群组操作的事件以及子事件后续会有更多新增。若业务强依赖这些事件或者子事件，业务中需添加对`operation` 和 `payload.type` 的强判断。**
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-| 字段名称         | 类型   | 描述                                                         |
-| :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 |
-| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
-| `paylod`       | Object | 事件内容。                                                     |
-| `payload.mute` | JSON   | 将成员添加或移出禁言列表的事件：<br/> - `true`：添加 <br/> - `false` ：移出 |
-| `payload.type` | String | 成员添加或移出禁言列表的操作，值为 `MUTE`。 |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。                                |
-| `id`           | String | 群组/聊天室 ID。                                                |
-| `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室     |
-| `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 |
-| `operation`    | String | 操作。将成员添加或移出禁言列表的操作为 `UPDATE`。 |
-| `operator`     | String | 操作人。                                                       |
-| `timestamp`    | Long   | 操作完成的时间戳。                                                       |
 
 
 

@@ -156,3 +156,61 @@
 | `operation`    | String | 操作。将用户踢出群组/聊天室的操作为 `LEAVE`。 |
 | `operator`     | String | 操作人。                     | 
 | `timestamp`    | Long   | 操作完成的时间戳。                | 
+
+## 因解散群组/聊天室导致的用户退出
+
+### 回调时机 
+
+1. 通过客户端解散群组/聊天室时用户退出。
+2. 调用 RESTful API 解散群组/聊天室时用户退出。
+3. 在[环信控制台](https://console.easemob.com/user/login)解散群组/聊天室时用户退出。
+
+### 回调请求
+
+#### 请求示例
+
+```json
+{
+    "callId": "XXXX#XXX_7dc24fac-3451-421e-a8aa-70ba0587e69d",
+	"security": "9b30e4c2bXXXXcd51ef730836d427965",
+    "id": "267575861772289",
+    "operation": "LEAVE",
+    "operator": "@ppAdmin",
+    "payload":  {
+        "member":  [
+            "user1",
+            "user2",
+            "user3"
+        ],
+        "type": "DELETE"
+    },
+    "appkey": "XXXX#XXX_7dc24fac-3451-421e-a8aa-70ba0587e69d",
+	"event": "group_op_event",
+    "timestamp": 1734597600148,
+    "type": "GROUP"
+}
+```
+
+#### 请求字段说明
+
+| 字段名称         | 类型   | 描述                                                         |
+| :------------- | :----- | :----------------------------------------------------------- |
+| `callId`       | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
+| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。| 
+| `id`           | String | 群组/聊天室 ID。                                                 |
+| `operation`    | String | 操作。用户退出群组/聊天室的操作为 `LEAVE`。 |
+| `operator`     | String | 操作人。                     | 
+| `payload`       | Object | 事件内容。                                                     |
+| `payload.member` | JSON | 群组/聊天室被解散后离开的用户 ID。        | 
+| `payload.type` | Array  | 退群方式：`DELETE` 表示群组/聊天室被解散后，用户离开群组/聊天室。     |
+| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
+| `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
+| `timestamp`    | Long   | 操作完成的时间戳。                | 
+| `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |
+
+## 其他说明
+
+**群组操作的事件以及子事件后续会有更多新增。若业务强依赖这些事件或者子事件，业务中需添加对`operation` 和 `payload.type` 的强判断。**
+
+
+
