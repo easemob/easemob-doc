@@ -206,7 +206,7 @@ conn.removeChatRoomAllowlistMember(option);
 let option = {
     chatRoomId: "chatRoomId"
 };
-conn.getChatRoomMuteList(option).then(res => console.log(res))
+conn.getChatRoomMutelist(option).then(res => console.log(res))
 ```
 
 #### 将成员添加至聊天室禁言列表
