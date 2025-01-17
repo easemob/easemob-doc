@@ -2,6 +2,17 @@
 
 <Toc />
 
+## 版本 4.12.0 2025-1-17
+
+#### 新增特性
+
+用户加入聊天室后会收到如下信息，即调用 `joinChatroom` 方法后的成功回调中会包含如下信息：
+1. 聊天室当前人数 `EMChatRoom#memberCount`。
+2. 聊天室全体禁言状态 `EMChatRoom#isAllMemberMuted`。
+3. 聊天室创建时间戳 `EMChatRoom#createTimestamp`，新增属性。
+4. 当前用户是否在聊天室白名单中 `EMChatRoom#isInWhitelist`。该属性为新增属性，成员收到白名单变更回调时更新。
+5. 当前用户被禁言截止时间戳 `EMChatRoom#muteExpireTimestamp`。该属性为新增属性，成员收到禁言变更回调时更新。
+
 ## 版本 4.10.0 2024-12-05
 
 - 修复 [fetchSilentModeForConversations](/document/flutter/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。

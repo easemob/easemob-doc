@@ -90,6 +90,30 @@ SDKClient.Instance.RoomManager.JoinRoom(roomId, new ValueCallBack<Room>(
 ));
 ```
 
+同时，你可以调用 `RoomManager#JoinRoom(string roomId, string ext, bool leaveOtherRooms = false, ValueCallBack<Room> callback = null)` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `IRoomManagerDelegate#OnMemberJoinedFromRoom` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+
+```csharp
+SDKClient.Instance.RoomManager.JoinRoom(roomId, ext, leaveOtherRooms, new ValueCallBack<Room>(
+    onSuccess: (room) => {
+
+    },
+    onError: (code, desc) => {
+    }
+));
+
+public class RoomManagerDelegate : IRoomManagerDelegate {
+    //......
+    public void OnMemberJoinedFromRoom(string roomId, string participant, string ext)
+    {
+    }
+    //......
+}
+
+RoomManagerDelegate adelegate = new RoomManagerDelegate();
+SDKClient.Instance.RoomManager.AddRoomManagerDelegate(adelegate);
+
+```
+
 ### 获取聊天室详情
 
 聊天室成员均可调用 `FetchRoomInfoFromServer` 获取聊天室详情，包括聊天室 ID、聊天室名称，聊天室描述、聊天室公告、管理员列表、最大成员数、聊天室所有者、是否全员禁言以及聊天室权限类型。成员列表、黑名单列表、禁言列表需单独调用接口获取。
@@ -151,7 +175,7 @@ public interface IRoomManagerDelegate
     // 解散聊天室。聊天室所有成员会收到该事件。
     void OnDestroyedFromRoom(string roomId, string roomName);
     // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
-    void OnMemberJoinedFromRoom(string roomId, string participant);
+    void OnMemberJoinedFromRoom(string roomId, string participant, string ext);
     // 主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
     void OnMemberExitedFromRoom(string roomId, string roomName, string participant);
     // 有成员被移出聊天室。被踢出的成员会收到该事件。
@@ -194,7 +218,7 @@ public interface IRoomManagerDelegate
 ```csharp
 class RoomManagerDelegate : IRoomManagerDelegate
 {
-    public void OnMemberJoinedFromRoom(string roomId, string participant)
+    public void OnMemberJoinedFromRoom(string roomId, string participant, string ext)
     {
         int memberCount = SDKClient.Instance.RoomManager.GetChatRoom(roomId).MemberCount;
     }

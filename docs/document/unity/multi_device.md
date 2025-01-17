@@ -45,6 +45,7 @@
 - 获取指定账号的在线登录设备列表；
 - 设置登录设备的名称；
 - 设置登录设备的平台；
+- 设置登录设备的扩展信息；
 - 强制指定账号从单个设备下线；
 - 强制指定账号从所有设备下线；
 - 获取其他设备的操作。
@@ -130,7 +131,6 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
 - 若指定账号自定义了设备名称，该属性表示自定义设备名称。
 - 若未自定义设备的名称，该属性默认为设备型号。
 
-
 ### 设置登录设备的名称
 
 即时通讯 IM 自 1.2.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
@@ -144,7 +144,7 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
 ```csharp
 // 设置设备名称并进行初始化
 Options options = new Options("YouAppKey");
-ooptions.CustomDeviceName = "MyDeviceName";
+options.CustomDeviceName = "MyDeviceName";
 SDKClient.Instance.InitWithOptions(options);
 
 // 定义监听器
@@ -184,10 +184,45 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ```csharp
 Options options = new Options("YouAppKey");
-ooptions.CustomOSType = 1;
+options.CustomOSType = 1;
 SDKClient.Instance.InitWithOptions(options);
 ```
 
+### 设置登录设备的扩展信息
+
+即时通讯 IM 自 1.3.2 版本开始支持设备的自定义扩展信息，这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
+
+初始化 SDK 时，你可以调用 `EMOptions#setLoginCustomExt` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，`USER_LOGIN_ANOTHER_DEVICE`），被踢设备收到的 `EMConnectionListener#onLogout` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
+
+:::tip
+登录成功后才会将该设置发送到服务器。
+:::
+
+```java
+    EMOptions options =  new EMOptions();
+    options.setLoginCustomExt("你的自定义扩展信息json字符串");
+    EMClient.getInstance().init(context,options);
+
+    EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+        @Override
+        public void onConnected() {
+
+        }
+
+        @Override
+        public void onDisconnected(int errorCode) {
+
+        }
+
+        @Override
+        public void onLogout(int errorCode, EMLoginExtensionInfo info) {
+            //当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。
+            //errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}。
+            //info.deviceExt 是将当前设备挤下线的新登录设备的自定义扩展信息。
+            //其他错误码场景下 info.deviceExt 为空。
+        }
+    });
+```
 
 ### 强制指定账号从单个设备下线
 
