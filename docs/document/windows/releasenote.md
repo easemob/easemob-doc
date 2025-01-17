@@ -2,16 +2,16 @@
 
 <Toc />
 
-## 版本 V1.3.2 Dev 2025-1-17 （开发版）
+## 版本 V1.3.2 2025-1-17
 
 ### 新增特性
 
 - 新增 `Conversation#LoadMessagesWithMsgTypeList` 方法，[根据单个或多个消息类型，搜索本地数据库中当前会话的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
 - 新增 `RoomManager#JoinRoom`方法，支持[设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室](room_manage.html#加入聊天室)。
 - 新增 `Conversion#MessagesCount` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
-- 新增从服务器拉取离线消息的开始和结束的事件回调：`IConnectionDelegate#OnOfflineMessageSyncStart` 和 `IConnectionDelegate#OnOfflineMessageSyncFinish`。
+- 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html#监听连接状态)：`IConnectionDelegate#OnOfflineMessageSyncStart` 和 `IConnectionDelegate#OnOfflineMessageSyncFinish`。
 - 新增 `GroupManager#CheckIfInGroupMuteList` 接口，可以查看当前用户是否在群组禁言名单中。
-- 原消息置顶接口 `ChatManager#PinMessage` 增加对单聊会话中置顶消息的支持。接口参数无变化。
+- 原[消息置顶](message_pin.html)接口 `ChatManager#PinMessage` 增加对单聊会话中置顶消息的支持。接口参数无变化。
 - 新增 `RecallMessageInfo#ConversationId` 属性，在撤回消息的 `OnMessagesRecalled` 事件中返回被撤回的消息所属的会话 ID。
 - 新增 `ChatManager#GetMessageCount`: 方法，用于获取数据库中的消息总数。
 - [IM SDK] 新增两个[错误码](error.html)：
@@ -34,7 +34,7 @@
 - 设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)，[获取单个或多个用户属性](userprofile.html#获取用户属性)，超过调用频率限制时，会上报错误码 4 `EXCEED_SERVICE_LIMIT`。
 - 支持聊天室消息聚合功能。
 - 发送前回调时修改的消息扩展字段，会同步到发送方。
-- 调用删除服务端会话 API，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
+- 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
 - 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
 - 将 1.3.1 版本之前部分标为废弃的 API 删除。
 - 优化部分数据库操作。
