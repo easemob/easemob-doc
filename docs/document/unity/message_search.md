@@ -11,7 +11,7 @@
 - `ChatManager#LoadMessagesWithKeyword` 根据关键字搜索会话消息。
 - `ChatManager#SearchMsgFromDB(string, long, in, string, MessageSearchDirection, MessageSearchScope, ValueCallBack<List<Message>>)`：根据搜索范围搜索所有会话中的消息。
 - `Conversation#LoadMessagesWithScope(string, MessageSearchScope, long, int, string, MessageSearchDirection, ValueCallBack<List<Message>>)`：根据搜索范围搜索当前会话中的消息。
-- `Conversation#LoadMessagesWithMsgTypeList` ：根据单个或多个消息类型，搜索本地数据库中所有会话的消息。
+- `Conversation#LoadMessagesWithMsgTypeList` ：根据单个或多个消息类型，搜索本地数据库中当前会话的消息。
 
 ## 前提条件
 

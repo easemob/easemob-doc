@@ -72,7 +72,7 @@ callback: new ValueCallBack<Room>(
 示例代码如下：
 
 ```csharp
-// 获取公开聊天室列表，每次最多可获取 1,000 个。
+// 获取聊天室列表，每次最多可获取 1,000 个。
 SDKClient.Instance.RoomManager.FetchPublicRoomsFromServer(callback: new ValueCallBack<PageResult<Room>>(
     //result 为 PageResult<Room> 类型
     onSuccess: (result) => {

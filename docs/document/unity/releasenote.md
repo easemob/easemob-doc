@@ -2,7 +2,54 @@
 
 <Toc />
 
+## 版本 V1.3.2 Dev 2025-1-17 （开发版）
 
+### 新增特性
+
+- 新增 `Conversation#LoadMessagesWithMsgTypeList` 方法，[根据单个或多个消息类型，搜索本地数据库中当前会话的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
+- 新增 `RoomManager#JoinRoom`方法，支持[设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室](room_manage.html#加入聊天室)。
+- 新增 `Conversion#MessagesCount` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
+- 新增从服务器拉取离线消息的开始和结束的事件回调：`IConnectionDelegate#OnOfflineMessageSyncStart` 和 `IConnectionDelegate#OnOfflineMessageSyncFinish`。
+- 新增 `GroupManager#CheckIfInGroupMuteList` 接口，可以查看当前用户是否在群组禁言名单中。
+- 原消息置顶接口 `ChatManager#PinMessage` 增加对单聊会话中置顶消息的支持。接口参数无变化。
+- 新增 `RecallMessageInfo#ConversationId` 属性，在撤回消息的 `OnMessagesRecalled` 事件中返回被撤回的消息所属的会话 ID。
+- 新增 `ChatManager#GetMessageCount`: 方法，用于获取数据库中的消息总数。
+- [IM SDK] 新增两个[错误码](error.html)：
+  - `GROUP_USER_IN_BLOCKLIST` (613)：该用户在群组黑名单中。例如，群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。
+  - `CHATROOM_USER_IN_BLOCKLIST` (707)：该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。
+- 支持 AUT 协议，优化弱网环境下的服务连接成功率。
+- 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
+- 新增聊天室禁言回调 `IRoomManagerDelegate#OnMuteListAddedFromRoom(string roomId, Dictionary<string, long> mutes)`:，在回调中使用`Dictionary<string, long> mutes` 参数表示禁言到期时间戳。
+- 新增 Crash 上报能力：当 SDK 发生 Crash 时，会在下次启动后上报 Crash 信息。
+- 用户加入聊天室后会收到如下信息，即调用 `JoinRoom` 方法后的成功回调中 Room 对象可以获取到如下信息：
+  - 聊天室当前人数 `Room#MemberCount`。有用户加入或离开聊天室时，当前聊天室人数会更新。
+  - 聊天室全体禁言状态 `Room#IsAllMemberMuted`。该属性的值在收到全体禁言状态变更时更新。
+  - 聊天室创建时间戳 `Room#CreateTimeStamp`，新增属性。
+  - 当前用户是否在聊天室白名单中 `Room#IsInAllowList`。该属性为新增属性，成员收到白名单变更回调时更新。
+  - 当前用户被禁言截止时间戳 `Room#MuteUntilTimeStamp`。该属性为新增属性，成员收到禁言变更回调时更新。
+
+### 优化
+
+- 调整 `IRoomManagerDelegate#OnMemberJoinedFromRoom` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+- 设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)，[获取单个或多个用户属性](userprofile.html#获取用户属性)，超过调用频率限制时，会上报错误码 4 `EXCEED_SERVICE_LIMIT`。
+- 支持聊天室消息聚合功能。
+- 发送前回调时修改的消息扩展字段，会同步到发送方。
+- 调用删除服务端会话 API，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
+- 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
+- 将 1.3.1 版本之前部分标为废弃的 API 删除。
+- 优化部分数据库操作。
+
+### 修复
+
+- 从服务端拉取群组时，不再先清除本地群组，而是将拉取的群组与本地对比，将本地现有群组进行更新，将新增部分在本地插入。若要清除本地群组信息，可以调用 `GroupManager#CleanAllGroupsFromDB` 方法。
+- 修复拉黑联系人时缓存未及时更新的问题。
+- 修复多线程同时调用获取会话列表时，偶现会话未读数不正确的问题。
+- 修复调用 RESTful API 转让群主后，SDK 上原群主离开群失败的问题。
+- 修复开启多设备登录后，偶现的收到会话已读多设备同步事件，导致未读数不同步的问题。
+- 修复发送图片消息时指定缩略图尺寸未生效的问题。
+- 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
+- 修复置顶的单聊消息被撤回后，该消息未能及时地从置顶消息缓存（`Conversation#PinnedMessages`）中移除的问题。
+- 修复极端情况下因网络异常导致的 Crash。
 
 ## 版本 V1.3.1 Dev 2024-7-9 （开发版）
 

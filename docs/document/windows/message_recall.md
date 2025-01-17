@@ -52,10 +52,10 @@ SDKClient.Instance.ChatManager.RecallMessage("Message ID", "Please ignore the me
 
 ### 设置消息撤回监听
 
-你可以设置消息撤回监听，通过 `OnMessagesRecalled` 事件监听发送方对已接收的消息的撤回。
+你可以设置消息撤回监听，通过 `OnMessagesRecalled` 事件监听发送方对已接收的消息的撤回。该事件的 `RecallMessageInfo` 中的 `RecallBy` 为消息撤回者的用户 ID，`RecallMessageId` 为撤回的消息 ID，`Ext` 为扩展信息，`ConversationId` 为撤回的消息所属的会话 ID。
 
-- 若用户在线接收了消息，消息撤回时，该事件中的 `RecallMessageInfo` 中的 `RecallMessage` 为撤回的消息的内容，`RecallMessageId` 属性返回撤回的消息的 ID。
-- 若消息发送和撤回时接收方离线，该事件中的 `RecallMessageInfo` 中的 `RecallMessage` 为空，`RecallMessageId` 属性返回撤回的消息的 ID。
+- 若用户在线接收了消息，消息撤回时，该事件中的 `RecallMessageInfo` 中的 `RecallMessage` 为撤回的消息的内容。
+- 若消息发送和撤回时接收方离线，该事件中的 `RecallMessageInfo` 中的 `RecallMessage` 为空。
 
 ```csharp
 void OnMessagesRecalled(List<RecallMessageInfo> recallMessagesInfo);
