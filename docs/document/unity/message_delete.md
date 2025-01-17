@@ -50,7 +50,8 @@ SDKClient.Instance.ChatManager.DeleteAllMessagesAndConversations(clearServerData
 每次最多可删除 50 条消息。多设备情况下，登录该账号的其他设备会收到 `IMultiDeviceDelegate` 中的 `OnRoamDeleteMultiDevicesEvent` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V1.1.0 或以上版本。
+1. 要单向删除服务端单聊和群组聊天的历史消息，需将 SDK 升级至 V1.1.0 或以上版本。
+2. 要单向删除服务端聊天室的历史消息，需将 SDK 升级至 1.3.2 或以上版本。
 :::
 
 ```csharp

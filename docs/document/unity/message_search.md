@@ -11,6 +11,7 @@
 - `ChatManager#LoadMessagesWithKeyword` 根据关键字搜索会话消息。
 - `ChatManager#SearchMsgFromDB(string, long, in, string, MessageSearchDirection, MessageSearchScope, ValueCallBack<List<Message>>)`：根据搜索范围搜索所有会话中的消息。
 - `Conversation#LoadMessagesWithScope(string, MessageSearchScope, long, int, string, MessageSearchDirection, ValueCallBack<List<Message>>)`：根据搜索范围搜索当前会话中的消息。
+- `Conversation#LoadMessagesWithMsgTypeList` ：根据单个或多个消息类型，搜索本地数据库中当前会话的消息。
 
 ## 前提条件
 
@@ -92,3 +93,28 @@ conv.LoadMessagesWithScope("keywords", MessageSearchScope.CONTENT, -1, 10, "from
     }
 ));
 ```
+
+### 根据消息类型搜索当前会话中的消息
+
+你可以调用 `Conversation#LoadMessagesWithMsgTypeList` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中单个会话的消息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V1.3.2 或以上版本。
+:::
+
+```csharp
+List<MessageBodyType> tlist = new List<MessageBodyType>();
+tlist.Add(MessageBodyType.TXT);
+tlist.Add(MessageBodyType.IMAGE);
+
+Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, conversationType);
+conv.LoadMessagesWithMsgTypeList(tlist, sender, timestamp, count, direct, new ValueCallBack<List<Message>>(
+    onSuccess: (list) => {
+        foreach (var it in list)
+        {
+        }
+    },
+    onError: (code, desc) => {
+    }
+));
+```         

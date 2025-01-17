@@ -37,7 +37,7 @@ SDKClient.Instance.Login(username, passwd,
 | 1      | GENERAL_ERROR                         | SDK 或请求相关的默认错误，未区分具体错误类型：例如，SDK 内部未正确初始化，或者请求服务器时未识别出具体原因的错误。 |
 | 2      | NETWORK_ERROR                         | 网络错误：无网络服务时会回调此错误，表示 SDK 与服务器的连接已断开。      |
 | 3      | DATABASE_ERROR                        | 数据库操作失败：打开本地数据库失败。 |
-| 4      | EXCEED_SERVICE_LIMIT                  | 超过服务限制：超过当前服务版本的数量限制，例如，创建的用户 ID 数量超过购买服务的限制时提示该错误。 |
+| 4      | EXCEED_SERVICE_LIMIT                  | 超过服务限制：超过当前服务版本的数量限制，例如，创建的用户 ID 数量超过购买服务的限制时提示该错误；设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)和[获取单个或多个用户的用户属性](userprofile.html#获取用户属性)，超过调用频率限制时，会上报该错误。 |
 | 8      | APP_ACTIVE_NUMBER_REACH_LIMITATION    | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。    |
 | 100    | INVALID_APP_KEY                       | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看 App Key。  |
 | 101    | INVALID_USER_NAME                     | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。  |
@@ -103,6 +103,7 @@ SDKClient.Instance.Login(username, passwd,
 | 610    | GROUP_MEMBER_ATTRIBUTES_UPDATE_FAILED | 设置群成员自定义属性失败。  |
 | 611    | GROUP_MEMBER_ATTRIBUTES_KEY_REACH_LIMIT   | 设置的群成员自定义属性 key 长度（不能超过 16 字节）超限。                        |
 | 612    | GROUP_MEMBER_ATTRIBUTES_VALUE_REACH_LIMIT   | 设置的群成员自定义属性 value 长度（不能超过 512 字节）超限。  |
+| 613    | GROUP_USER_IN_BLOCKLIST   | 该用户在群组黑名单中。例如，群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。  |
 | 700    | CHATROOM_INVALID_ID                   | 聊天室 ID 无效：调用聊天室相关 API，传入的聊天室 ID 为空时提示该错误。 |
 | 701    | CHATROOM_ALREADY_JOINED               | 已在该聊天室中：调用加入聊天室的 API 时如果已经在该聊天室中则提示该错误。   |
 | 702    | CHATROOM_NOT_JOINED                   | 未加入该聊天室：用户在未加入的聊天室中发送消息或进行聊天室操作时提示该错误。 |
@@ -110,6 +111,7 @@ SDKClient.Instance.Login(username, passwd,
 | 704    | CHATROOM_MEMBERS_FULL                 | 聊天室已满：聊天室成员数量已达到创建聊天室时设置的最大人数。   |
 | 705    | CHATROOM_NOT_EXIST                    | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。  |
 | 706 | CHATROOM_OWNER_NOT_ALLOW_LEAVE | 聊天室所有者不允许离开聊天室。若初始化时，`Options#IsRoomOwnerLeaveAllowed` 参数设置为 `false`，聊天室所有者调用 `LeaveRoom` 方法离开聊天室时会提示该错误。|
+| 707 | CHATROOM_USER_IN_BLOCKLIST | 该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。|
 | 900    | USERINFO_USERCOUNT_EXCEED             | 获取用户属性的用户个数超过 100。 |
 | 901    | USERINFO_DATALENGTH_EXCEED            | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。  |
 | 1000   | CONTACT_ADD_FAILED                    | 添加联系人失败。   |

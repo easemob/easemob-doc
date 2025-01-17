@@ -17,6 +17,7 @@
 - `IChatManager.LoadMessage` 根据消息 ID 获取消息。
 - `Conversation.LoadMessagesWithMsgType` 获取本地单个会话中特定类型的消息。
 - `Conversation.LoadMessagesWithTime` 获取本地单个会话中一定时间段内的消息。
+- `Conversion#MessagesCount` 获取 SDK 本地数据库中会话某个时间段内的全部消息数。
 
 ## 前提条件
 
@@ -45,7 +46,8 @@
 :::tip
 1. 若使用该 API，需将 SDK 升级至 V1.2.0 或以上版本。
 2. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需升级至 1.3.0 版本，并联系环信商务。**
-3. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
+3. 拉取服务器漫游消息时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
+4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
 :::
 
 ```csharp
@@ -164,6 +166,19 @@ conv.LoadMessagesWithTime(startTime: startTime, endTime: endTime, count: 50, new
         foreach (var it in list)
         {
         }
+    },
+    onError: (code, desc) => {
+    }
+));
+```
+
+### 获取会话在一定时间内的消息数
+
+你可以调用 `GetMessageCount` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
+
+```csharp
+SDKClient.Instance.ChatManager.GetMessageCount(new ValueCallBack<int>(
+    onSuccess: (count) => {
     },
     onError: (code, desc) => {
     }

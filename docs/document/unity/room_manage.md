@@ -72,7 +72,7 @@ callback: new ValueCallBack<Room>(
 示例代码如下：
 
 ```csharp
-// 获取公开聊天室列表，每次最多可获取 1,000 个。
+// 获取聊天室列表，每次最多可获取 1,000 个。
 SDKClient.Instance.RoomManager.FetchPublicRoomsFromServer(callback: new ValueCallBack<PageResult<Room>>(
     //result 为 PageResult<Room> 类型
     onSuccess: (result) => {
@@ -88,6 +88,30 @@ SDKClient.Instance.RoomManager.JoinRoom(roomId, new ValueCallBack<Room>(
     onError: (code, desc) => {
     }
 ));
+```
+
+同时，你可以调用 `RoomManager#JoinRoom(string roomId, string ext, bool leaveOtherRooms = false, ValueCallBack<Room> callback = null)` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `IRoomManagerDelegate#OnMemberJoinedFromRoom` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+
+```csharp
+SDKClient.Instance.RoomManager.JoinRoom(roomId, ext, leaveOtherRooms, new ValueCallBack<Room>(
+    onSuccess: (room) => {
+
+    },
+    onError: (code, desc) => {
+    }
+));
+
+public class RoomManagerDelegate : IRoomManagerDelegate {
+    //......
+    public void OnMemberJoinedFromRoom(string roomId, string participant, string ext)
+    {
+    }
+    //......
+}
+
+RoomManagerDelegate adelegate = new RoomManagerDelegate();
+SDKClient.Instance.RoomManager.AddRoomManagerDelegate(adelegate);
+
 ```
 
 ### 获取聊天室详情
@@ -151,7 +175,7 @@ public interface IRoomManagerDelegate
     // 解散聊天室。聊天室所有成员会收到该事件。
     void OnDestroyedFromRoom(string roomId, string roomName);
     // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
-    void OnMemberJoinedFromRoom(string roomId, string participant);
+    void OnMemberJoinedFromRoom(string roomId, string participant, string ext);
     // 主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
     void OnMemberExitedFromRoom(string roomId, string roomName, string participant);
     // 有成员被移出聊天室。被踢出的成员会收到该事件。
@@ -194,7 +218,7 @@ public interface IRoomManagerDelegate
 ```csharp
 class RoomManagerDelegate : IRoomManagerDelegate
 {
-    public void OnMemberJoinedFromRoom(string roomId, string participant)
+    public void OnMemberJoinedFromRoom(string roomId, string participant, string ext)
     {
         int memberCount = SDKClient.Instance.RoomManager.GetChatRoom(roomId).MemberCount;
     }

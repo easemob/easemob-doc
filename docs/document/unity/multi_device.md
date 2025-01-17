@@ -130,7 +130,6 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
 - 若指定账号自定义了设备名称，该属性表示自定义设备名称。
 - 若未自定义设备的名称，该属性默认为设备型号。
 
-
 ### 设置登录设备的名称
 
 即时通讯 IM 自 1.2.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
@@ -144,7 +143,7 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
 ```csharp
 // 设置设备名称并进行初始化
 Options options = new Options("YouAppKey");
-ooptions.CustomDeviceName = "MyDeviceName";
+options.CustomDeviceName = "MyDeviceName";
 SDKClient.Instance.InitWithOptions(options);
 
 // 定义监听器
@@ -184,10 +183,9 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ```csharp
 Options options = new Options("YouAppKey");
-ooptions.CustomOSType = 1;
+options.CustomOSType = 1;
 SDKClient.Instance.InitWithOptions(options);
 ```
-
 
 ### 强制指定账号从单个设备下线
 
