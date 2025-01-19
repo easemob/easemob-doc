@@ -143,7 +143,7 @@ features.chat.message.reaction = false;
 该功能在 UIKit 里的 `TextMessage` 组件中。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_thread.png" title="消息话题" />
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_thread_web.png" title="消息话题" />
 </ImageGallery>
 
 #### 如何使用

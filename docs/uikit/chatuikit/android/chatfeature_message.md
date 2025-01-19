@@ -291,8 +291,8 @@ class ChatThreadActivity:ChatUIKitThreadActivity() {
   - 输入状态回调为 `onPeerTyping(action: String?)`，其中 `action` 代表状态 `ChatUIKitLayout.ACTION_TYPING_BEGI` ｜ `ChatUIKitLayout.ACTION_TYPING_END`。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/typing_indicator_enable_android.png" title="开启输入状态提示" />
-  <ImageItem src="/images/uikit/chatuikit/feature/common/typing_indicator_disable_android.png" title="关闭输入状态提示" />
+  <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_enable_android.png" title="开启输入状态提示" />
+  <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_disable_android.png" title="关闭输入状态提示" />
 </ImageGallery>
 
 #### 如何使用
