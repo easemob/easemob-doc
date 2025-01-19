@@ -10,19 +10,25 @@
 
 消息复制是指用户可以将一条消息复制到剪贴板。消息复制可以帮助用户将消息保存到其他地方，或将其粘贴到其他应用程序中。
 
-![img](/images/uikit/chatuikit/feature/message/message_copy.png =600x600) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_copy_ios.png" title="消息复制" />
+</ImageGallery>
 
 ## 消息删除	
 
 消息删除是指用户可以删除一条消息。消息删除可以帮助用户删除错误发送的消息，或删除不想保留的消息。
 
-![img](/images/uikit/chatuikit/feature/message/message_delete.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_delete_ios.png" title="消息删除" />
+</ImageGallery>
 
 ## 消息撤回
 
 消息撤回是指消息的发送方可以在规定时间内对发送的消息进行撤回的操作。消息撤回可以帮助用户撤回错误发送的消息，或撤回不想让其他用户看到的消息。
 
-![img](/images/uikit/chatuikit/feature/message/message_recall.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_recall_ios.png" title="消息撤回" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -42,7 +48,9 @@ ChatUIKitSettings.recallExpandTime = 120;
 
 消息编辑是指用户可以编辑一条已发送的消息。消息编辑可以帮助用户纠正错误，或添加新信息。无论单聊还是群组聊天，该特性只支持用户编辑自己发送的消息，不能编辑其他用户发送的消息。
 
-![img](/images/uikit/chatuikit/feature/message/message_edit.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_edit_ios.png" title="消息编辑" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -56,7 +64,9 @@ ChatUIKitSettings.enableMessageEdit = false;
 
 消息引用指用户可以引用一条已发送的消息。消息引用可以帮助用户回复特定的消息，或强调特定的信息。
 
-![img](/images/uikit/chatuikit/feature/message/message_reply.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_reply_ios.png" title="消息引用" />
+</ImageGallery>
 
 目前，单群聊 UIKit 支持引用消息进行回复。消息引用 UI 和逻辑结构如下：
 
@@ -81,7 +91,9 @@ ChatUIKitSettings.enableMessageReply = false;
 
 - 消息翻译的 UI 布局在 `ChatUIKitTextMessageWidget` 中。
 
-![img](/images/uikit/chatuikit/feature/message/message_translate.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_translate_ios.png" title="消息翻译" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -117,7 +129,9 @@ ChatUIKitSettings.translateTargetLanguage = 'zh-Hans';
 
 - Reaction 表情列表的弹窗 `ChatUIKitMessageReactionInfo`。
 
-![img](/images/uikit/chatuikit/feature/message/message_reactions.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_reactions_ios.png" title="表情回复" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -133,7 +147,9 @@ ChatUIKitSettings.enableMessageReaction = true;
 
 消息话题（即 `Thread`）指用户可以在群组聊天中根据一条消息创建话题进行深入探讨，讨论和追踪特定项目任务，而不影响其他聊天内容。
 
-![img](/images/uikit/chatuikit/feature/message/message_thread.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_thread_ios.png" title="消息话题" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -155,7 +171,9 @@ ChatUIKitSettings.enableMessageThread = true;
 
 - 选择转发消息接收人页面 `ForwardMessageSelectView`。
 
-![img](/images/uikit/chatuikit/feature/message/message_forward.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_forward_ios.png" title="消息合并转发" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -187,7 +205,9 @@ ChatUIKitSettings.enableMessageForward = false;
 
 消息置顶指用户将重要信息固定在会话顶部，有助于用户快速访问关键会话，避免遗漏重要内容。该特性尤其适用于处理紧急事务或持续跟进的项目，帮助高效管理重要会话。
 
-![img](/images/uikit/chatuikit/feature/message/message_pin.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_pin_ios.png" title="消息置顶" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -205,9 +225,10 @@ ChatUIKitSettings.enablePinMsg = false;
 
 本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/product/typing_indication.html)。
 
-| 开启输入状态提示            | 关闭输入状态提示   | 
-| :-------------- | :----- | 
-| <img src=/images/uikit/chatuikit/feature/flutter/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/flutter/typing_indicator_disable.png width="300"/>  | 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_enable_ios.png" title="开启输入状态提示" />
+  <ImageItem src="/images/uikit/chatuikit/feature/message//typing_indicator_disable_ios.png" title="关闭输入状态提示" />
+</ImageGallery>
 
 #### 如何使用
 
