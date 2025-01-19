@@ -8,13 +8,19 @@
 
 消息复制是指用户可以将一条消息复制到剪贴板。消息复制可以帮助用户将消息保存到其他地方，或将其粘贴到其他应用程序中。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_copy.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_copy_web.png" title="消息复制" />
+</ImageGallery>
 
 ## 消息删除
 
 消息删除是指用户可以删除一条消息。消息删除可以帮助用户删除错误发送的消息，或删除不想保留的消息。
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_delete_web.png" title="消息删除" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -24,15 +30,15 @@
 features.chat.message.delete = false;
 ```
 
-![img](/images/uikit/chatuikit/feature/web/message/message_delete.png)
-
 ## 消息撤回
 
 消息撤回是指用户可以撤回一条已发送的消息。消息撤回可以帮助用户撤回错误发送的消息，或撤回不想让其他用户看到的消息。
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage` 和 `FileMessage` 等。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_recall.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_recall_web.png" title="消息撤回" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -48,7 +54,9 @@ features.chat.message.recall = false;
 
 该功能在 UIKit 里的 `TextMessage` 组件中。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_edit.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_edit_web.png" title="消息编辑" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -64,7 +72,9 @@ features.chat.message.edit = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等
 
-![img](/images/uikit/chatuikit/feature/web/message/message_reply.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_reply_web.png" title="消息引用" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -80,7 +90,9 @@ features.chat.message.reply = false;
 
 该功能在 UIKit 里的 `TextMessage` 组件中。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_translate.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_translate_web.png" title="消息翻译" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -108,7 +120,9 @@ features.chat.message.translate = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_reactions.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_reactions_web.png" title="表情回复" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -128,7 +142,9 @@ features.chat.message.reaction = false;
 
 该功能在 UIKit 里的 `TextMessage` 组件中。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_thread.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_thread_web.png" title="消息话题" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -148,7 +164,9 @@ features.chat.message.thread = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-![img](/images/uikit/chatuikit/feature/web/message/messages_forward.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/messages_forward_web.png" title="消息合并转发" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -205,7 +223,9 @@ features.chat.message.select = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_forward.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_forward_single_web.png" title="消息单条转发" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -243,7 +263,9 @@ features.chat.message.forward = false;
 
 目前，单群聊 UIKit 支持消息置顶。该功能在 UIKit 的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等，置顶消息列表功能在 `PinnedMessage` 组件中。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_pin.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/message_pin_web.png" title="消息置顶" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -260,7 +282,9 @@ features.chat.message.pin = false;
 
 该功能在 UIKit 里的 `Typing` 组件中。
 
-![img](/images/uikit/chatuikit/feature/web/common/typing_indicator.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/typing_indicator_web.png" title="输入状态指示" />
+</ImageGallery>
 
 #### 如何使用
 

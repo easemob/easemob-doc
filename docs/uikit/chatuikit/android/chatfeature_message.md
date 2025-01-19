@@ -10,25 +10,33 @@
 
 消息复制是指用户可以将一条消息复制到剪贴板。消息复制可以帮助用户将消息保存到其他地方，或将其粘贴到其他应用程序中。
 
-![img](/images/uikit/chatuikit/feature/message/message_copy.png =600x600) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_copy_android.png" title="消息复制" />
+</ImageGallery>
 
 ## 消息删除	
 
 消息删除是指用户可以删除一条消息。消息删除可以帮助用户删除错误发送的消息，或删除不想保留的消息。
 
-![img](/images/uikit/chatuikit/feature/message/message_delete.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_delete_android.png" title="消息删除" />
+</ImageGallery>
 
 ## 消息撤回
 
 消息撤回是指用户可以撤回一条已发送的消息。消息撤回可以帮助用户撤回错误发送的消息，或撤回不想让其他用户看到的消息。
 
-![img](/images/uikit/chatuikit/feature/message/message_recall.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_recall_android.png" title="消息撤回" />
+</ImageGallery>
 
 ## 消息编辑
 
 消息编辑是指用户可以编辑一条已发送的消息。消息编辑可以帮助用户纠正错误，或添加新信息。无论单聊还是群组聊天，该特性只支持用户编辑自己发送的消息，不能编辑其他用户发送的消息。
 
-![img](/images/uikit/chatuikit/feature/message/message_edit.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_edit_android.png" title="消息编辑" />
+</ImageGallery>
 
 ## 消息引用	
 
@@ -39,7 +47,9 @@
 - `ChatUIKitExtendMessageReplyView`：底部输入框组件上方展示的引用消息自定义 View。
 - `ChatUIKitMessageReplyController`：控制引用功能的显示、隐藏、跳转等逻辑。
 
-![img](/images/uikit/chatuikit/feature/message/message_reply.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_reply_android.png" title="消息引用" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -65,7 +75,9 @@
 
 - 长按消息气泡弹出的显示和隐藏翻译菜单的逻辑在 `ChatUIKitMessageTranslationController` 中。
 
-![img](/images/uikit/chatuikit/feature/message/message_translate.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_translate_android.png" title="消息翻译" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -112,7 +124,9 @@
 
 - 消息气泡中添加 view 以及显示和隐藏 Reaction 布局的逻辑在 `ChatUIKitAddExtendFunctionViewController` 中的 `addReactionViewToMessage`方法。
 
-![img](/images/uikit/chatuikit/feature/message/message_reactions.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_reactions_android.png" title="表情回复" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -132,7 +146,9 @@
 
 单群聊 UIKit 中实现了 Thread 页面 `ChatUIKitThreadActivity`，开发者只需要调用 `ChatUIKitThreadActivity.actionStart` 启动该页面传入需要的参数即可。
 
-![img](/images/uikit/chatuikit/feature/message/message_thread.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_thread_android.png" title="消息话题" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -172,7 +188,9 @@ class ChatThreadActivity:ChatUIKitThreadActivity() {
 - `Forward ChatUIKitMessageMultipleSelectController`：处理 UI 布局变更(隐藏/显示 `ChatUIKitLayout` 中的 `ChatUIKitInputMenu` 输入菜单)以及转发和删除的逻辑。
 - `Forward ChatUIKitMessageMultiSelectHelper`：消息选择帮助类用于记录选中的消息信息并提供获取方法。
 
-![img](/images/uikit/chatuikit/feature/message/message_forward.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_forward_android.png" title="消息合并转发" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -198,7 +216,9 @@ class ChatThreadActivity:ChatUIKitThreadActivity() {
 - `ChatUIKitPinTextMessageViewHolder`：置顶消息文本类型展示样式。
 - `ChatUIKitPinImageMessageViewHolder`：置顶消息图片类型展示样式。
 
-![img](/images/uikit/chatuikit/feature/message/message_pin.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_pin_android.png" title="消息置顶" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -270,9 +290,10 @@ class ChatThreadActivity:ChatUIKitThreadActivity() {
   - 输入状态投递为透传消息，接收到透传消息后，通过 `UIKitChatFragment.Builder` 提供的 `setOnPeerTypingListener` 监听对方输入状态。
   - 输入状态回调为 `onPeerTyping(action: String?)`，其中 `action` 代表状态 `ChatUIKitLayout.ACTION_TYPING_BEGI` ｜ `ChatUIKitLayout.ACTION_TYPING_END`。
 
-| 开启输入状态提示            | 关闭输入状态提示   | 
-| :-------------- | :----- | 
-| <img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  width="300"/>  | 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_enable_android.png" title="开启输入状态提示" />
+  <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_disable_android.png" title="关闭输入状态提示" />
+</ImageGallery>
 
 #### 如何使用
 

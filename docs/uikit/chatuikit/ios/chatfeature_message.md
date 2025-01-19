@@ -42,31 +42,41 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 消息复制是指用户可以将一条消息复制到剪贴板。消息复制可以帮助用户将消息保存到其他地方，或将其粘贴到其他应用程序中。
 
-![img](/images/uikit/chatuikit/feature/message/message_copy.png =600x600) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_copy_ios.png" title="消息复制" />
+</ImageGallery>
 
 ## 消息删除	
 
 消息删除是指用户可以删除一条消息。消息删除可以帮助用户删除错误发送的消息，或删除不想保留的消息。
 
-![img](/images/uikit/chatuikit/feature/message/message_delete.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_delete_ios.png" title="消息删除" />
+</ImageGallery>
 
 ## 消息撤回
 
 消息撤回是指用户可以撤回一条已发送的消息。消息撤回可以帮助用户撤回错误发送的消息，或撤回不想让其他用户看到的消息。
 
-![img](/images/uikit/chatuikit/feature/message/message_recall.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_recall_ios.png" title="消息撤回" />
+</ImageGallery>
 
 ## 消息编辑
 
 消息编辑是指用户可以编辑一条已发送的消息。消息编辑可以帮助用户纠正错误，或添加新信息。无论单聊还是群组聊天，该特性只支持用户编辑自己发送的消息，不能编辑其他用户发送的消息。
 
-![img](/images/uikit/chatuikit/feature/message/message_edit.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_edit_ios.png" title="消息编辑" />
+</ImageGallery>
 
 ## 消息引用	
 
 消息引用是指用户可以引用一条已发送的消息。消息引用可以帮助用户回复特定的消息，或强调特定的信息。
 
-![img](/images/uikit/chatuikit/feature/message/message_reply.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_reply_ios.png" title="消息引用" />
+</ImageGallery>
 
 消息引用特性默认开启，若不需要可将其隐藏，示例代码如下：
 
@@ -84,7 +94,9 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 目前，单群聊 UIKit 支持翻译文本消息。消息翻译的 UI 和逻辑部分在 `Appearance.swift` 中。
 
-![img](/images/uikit/chatuikit/feature/message/message_translate.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_translate_ios.png" title="消息翻译" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -115,7 +127,9 @@ Appearance.chat.targetLanguage = .English
 
 目前，单群聊 UIKit 支持 Reaction，可在 `Appearance.swift` 中开启或关闭。
 
-![img](/images/uikit/chatuikit/feature/message/message_reactions.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_reactions_ios.png" title="表情回复" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -138,7 +152,9 @@ Appearance.chat.contentStyle.append(.withMessageReaction)
 
 单群聊 UIKit 中实现了 Thread，可在 `Appearance.swift` 中开启或关闭。
 
-![img](/images/uikit/chatuikit/feature/message/message_thread.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_thread_ios.png" title="消息话题" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -163,7 +179,9 @@ Appearance.chat.contentStyle.append(.withMessageThread)
 - `MessageListController.swift`：处理 UI 布局变更以及转发和删除的逻辑。
 - `MessageListController.swift`：消息选择帮助类用于记录选中的消息信息并提供获取方法。
 
-![img](/images/uikit/chatuikit/feature/message/message_forward.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_forward_ios.png" title="消息合并转发" />
+</ImageGallery>
 
 ## 消息置顶	
 
@@ -174,7 +192,9 @@ Appearance.chat.contentStyle.append(.withMessageThread)
 - `Appearance.chat.messageLongPressedActions`：包含消息长按菜单所有功能项，如果不需要置顶可删除对应项，默认带着置顶功能，但是在未开启上述开关的情况下会过滤此项。
 - `MessageListController#showPinnedMessages`：显示置顶消息列表。
 
-![img](/images/uikit/chatuikit/feature/message/message_pin.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/message_pin_ios.png" title="消息置顶" />
+</ImageGallery>
 
 #### 如何使用
 
@@ -197,9 +217,10 @@ Appearance.chat.messageLongPressedActions.removeAll { $0.tag == "Pin" }
   - 当单聊会话中的一个用户输入文字时，可以调用 `MessageListViewModel#notifyTypingState()` 方法告知对方。
   - 会话中的对方会收到 `MessageListViewModel#onOtherPartyTypingText` 回调，更新对方的输入状态。
 
-| 开启输入状态提示            | 关闭输入状态提示   | 
-| :-------------- | :----- | 
-| <img src=/images/uikit/chatuikit/feature/common/typing_indicator_enable.png width="300"/> |<img src=/images/uikit/chatuikit/feature/common/typing_indicator_disable.png  width="300"/>  | 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_enable_ios.png" title="开启输入状态提示" />
+  <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_disable_ios.png" title="关闭输入状态提示" />
+</ImageGallery>
 
 #### 如何使用
 

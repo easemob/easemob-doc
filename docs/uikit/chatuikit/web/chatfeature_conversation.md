@@ -10,7 +10,9 @@
 
 在单群聊 UIKit 中，用户可以点击会话列表项旁边的 `⋮`，选择标记为已读，指定会话将会被置为已读。
 
-![img](/images/uikit/chatuikit/feature/web/conversation/conversation_read.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/conversation/conversation_read.png" title="会话已读" />
+</ImageGallery> 
 
 ## 会话置顶
 
@@ -18,7 +20,9 @@
 
 在单群聊 UIKit 中，用户可以点击会话列表项旁边的 `⋮`，选择会话置顶选项，指定会话将会被放置在会话列表前排区域。
 
-![img](/images/uikit/chatuikit/feature/web/conversation/conversation_pin.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/conversation/conversation_pin.png" title="会话置顶" />
+</ImageGallery>
 
 ## 会话免打扰
 
@@ -26,7 +30,9 @@
 
 在单群聊 UIKit 中，用户可以点击会话列表项旁边的 `⋮`，选择会话免打扰选项，指定会话将不再接收通知。
 
-![img](/images/uikit/chatuikit/feature/web/conversation/conversation_dnd.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/conversation/conversation_dnd.png" title="会话免打扰" />
+</ImageGallery> 
 
 ## 会话删除	
 
@@ -34,4 +40,6 @@
 
 在单群聊 UIKit 中，用户可以点击会话列表项旁边的 `⋮`，选择会话删除选项，指定会话将会被删除。
 
-![img](/images/uikit/chatuikit/feature/web/conversation/conversation_delete.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/web/conversation/conversation_delete.png" title="会话删除" />
+</ImageGallery>
