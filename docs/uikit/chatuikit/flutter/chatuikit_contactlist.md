@@ -8,7 +8,9 @@
 
 `ContactsView` 可以直接使用，也可以通过[路由](chatuikit_advancedusage.html#路由的使用)使用。
 
-![img](/images/uikit/chatuikit/flutter/custom_contact_list.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/flutter/custom_contact_list.png" title="设置联系人列表页面" />
+</ImageGallery> 
 
 ## 添加联系人列表
 

@@ -4,7 +4,9 @@
 
 你可以配置联系人详情页面的 AppBar、页面中间的按钮和联系人详情自定义列表项等。
 
-![img](/images/uikit/chatuikit/flutter/custom_contact_details.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/flutter/custom_contact_details.png" title="设置联系人详情页面" />
+</ImageGallery> 
 
 联系人详情页提供三处自定义项：
 

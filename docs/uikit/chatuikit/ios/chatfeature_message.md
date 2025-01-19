@@ -219,7 +219,7 @@ Appearance.chat.messageLongPressedActions.removeAll { $0.tag == "Pin" }
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_enable_ios.png" title="开启输入状态提示" />
-  <ImageItem src="/images/uikit/chatuikit/feature/message//typing_indicator_disable_ios.png" title="关闭输入状态提示" />
+  <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_disable_ios.png" title="关闭输入状态提示" />
 </ImageGallery>
 
 #### 如何使用
