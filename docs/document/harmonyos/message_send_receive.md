@@ -498,6 +498,19 @@ let attr1 = exts.get("attribute1") as string;
 let attr2 = exts.get("attribute2") as boolean;
 ```
 
+:::tip
+1.3.0 版本增加了 `ChatMessage.setJsonAttribute` 方法，用于设置 JSON 结构的扩展信息。
+:::
+
+```typescript
+let jsonStr = JSON.stringify({
+  'key1':999,
+  'key2':"1",
+  'key3':true
+});
+message?.setJsonAttribute('json', jsonStr);
+```
+
 ## 更多
 
 ### 设置聊天室消息优先级

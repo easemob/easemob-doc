@@ -76,21 +76,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 }
 ```
 
-## 4.初始化聊天页面
-
-向工程中导入 Chat 文件。
-
-```objectivec
-// ConversationId 接收消息方的环信ID:@"user2"
-// type 聊天类型:EMConversationTypeChat    单聊类型
-// createIfNotExist 如果会话不存在是否创建会话：YES
- EMChatViewController *chatViewController = [[EMChatViewController alloc] initWithConversationId:@"user2" conversationType:EMConversationTypeChat];
-    [self.navigationController pushViewController:chatViewController animated:YES];
-```
-
-有导航的话，可以用 push 方式跳转到聊天页面发消息测试，也就是用登录的 user1 给 user2 发消息，没有导航的话，可以用 present 方式跳转到聊天页面。
-
-## 5.创建账号
+## 4.创建账号
 
 设置用户名和密码创建账号。
 
@@ -102,7 +88,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
                                    }];
 ```
 
-## 6. 登录账号
+## 5. 登录账号
 
 利用创建的用户名和密码登录环信 IM。
 
@@ -114,7 +100,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 }];
 ```
 
-## 7.发送消息
+## 6.发送消息
 
 利用创建的用户名和密码登录环信 IM，向对端用户发送消息。在下面示例中，向 user 2 发送文本消息。
 

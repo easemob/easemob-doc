@@ -2,6 +2,13 @@
 
 <Toc />
 
+## 版本 V1.5.1 Dev 2025-1-24（开发版）
+
+### 修复
+
+- 修复设置 `ChatOptions#setCustomOSPlatform` 不生效的问题。
+- 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
+
 ## 版本 V1.5.0 Dev 2025-1-10（开发版）
 
 ### 新增特性
@@ -35,7 +42,6 @@
 
 ### 修复
 
-- 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
 - 修复置顶的单聊消息被撤回后，该消息未能及时地从置顶消息缓存（`Conversation#getPinnedMessages`）中移除的问题。
 - 修复调用 [PushManager#getSilentModeForConversations](/document/harmonyos/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
 - 修复极端情况下因网络异常导致的 Crash。
