@@ -11,7 +11,7 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 ## 前提条件
 
 - Java 1.8
-- 有效的环信即时通讯 IM 开发者账号和 App Key、Client ID、ClientSecret、BasePath，登录 [环信管理后台](https://console.easemob.com/user/login) 到“应用列表” → 点击“查看”即可获取到 App Key、Client ID、ClientSecret，到"即时通讯" → 点击"服务概览"获取到 "Rest api" 的服务器域名。
+- 有效的环信即时通讯 IM 开发者账号和 App Key、Client ID、ClientSecret、BasePath (对应的 RESTful API 域名，详见环信控制台的**即时通讯 > 服务概览**页面下的**域名配置区域**)，登录 [环信管理后台](https://console.easemob.com/user/login) 到“应用列表” → 点击“查看”即可获取到 App Key、Client ID、ClientSecret，到"即时通讯" → 点击"服务概览"获取到 "Rest api" 的服务器域名。
 
 ## 实现方法
 
