@@ -98,7 +98,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 public class ChatManagerDelegate : IChatManagerDelegate {
 
     //实现 OnMessagesRecalled 回调。
-    public void OnMessagesRecalled(List<Message> messages)
+    public void OnMessagesRecalled(List<RecallMessageInfo> recallMessagesInfo)
     {
       //收到消息，遍历消息列表，解析和显示。
     }

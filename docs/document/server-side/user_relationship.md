@@ -434,7 +434,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRem
 
 ## 一次性获取好友列表
 
-一次性获取指定用户的好友列表。
+一次性获取指定用户的好友列表。使用该接口，一次最多获取用户的 3000 个好友。若用户的好友数量超过 3000，建议使用[分页获取好友列表的接口](#分页获取好友列表)。
 
 ### HTTP 请求
 
