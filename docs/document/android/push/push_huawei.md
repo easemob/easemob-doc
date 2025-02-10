@@ -25,7 +25,7 @@
 | `证书名称`     | String | 是     | 填写华为 Client ID。  |
 | `推送密钥`     | String | 是     | 填写华为 Client Secret。|
 | `应用包名`     | String | 是     | 填写华为 App package name。   |
-| `项目 ID`      | String | 是     | 填写项目 ID。                     |
+| `项目 ID`      | String | 否     | 填写项目 ID。                     |
 | `Category`     | String |  否    | 选择 category 类型。                       |
 | `Action`       | String |  否    | 选择点击通知后的动作。                     |
 | `ActivityClass`| String | 否     | 填写 ActivityClass。                      |
