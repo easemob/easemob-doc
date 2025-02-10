@@ -22,8 +22,6 @@
 
 ![img](/images/android/presence.png)
 
-![img](/images/android/presence.png)
-
 如上图所示，订阅用户在线状态的基本步骤如下：
 
 1、用户 A 订阅用户 B 的在线状态；
