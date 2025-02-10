@@ -4,7 +4,9 @@
 
 你可以配置群详情页面的 AppBar、页面中间的按钮和群详情自定义列表项等。
 
-![img](/images/uikit/chatuikit/flutter/custom_group_details.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/flutter/custom_group_details.png" title="设置群组详情页面" />
+</ImageGallery> 
 
 与联系人详情页面的自定义相似，群详情页提供三处自定义项：
 

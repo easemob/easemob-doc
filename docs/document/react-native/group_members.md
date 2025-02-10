@@ -38,17 +38,17 @@
 
 | 入群方式<div style="width: 240px;"></div> | 公开群                                                                                           | 私有群                                                                                           |
 | :---------------------------------------- | :----------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- |
-| 是否支持用户申请入群                      | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群样式 `EMGroupStyle` 的设置。 | 不支持 <br/>                                                                                     |
-| 是否支持群成员邀请用户入群                | 支持 <br/>只能由群主和管理员邀请。                                                               | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群样式 `EMGroupStyle` 的设置。 |
+| 是否支持用户申请入群                      | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群样式 `ChatGroupStyle` 的设置。 | 不支持 <br/>                                                                                     |
+| 是否支持群成员邀请用户入群                | 支持 <br/>只能由群主和管理员邀请。                                                               | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群样式 `ChatGroupStyle` 的设置。 |
 
 #### 用户申请入群
 
 只有公开群组支持用户以申请方式入群，私有群不支持。用户可获取公开群列表，选择相应的群组 ID，然后调用相应方法加入该群组。
 
-任何用户均可申请入群，是否需要群主和群管理员审批，取决于群样式（`EMGroupStyle`）的设置：
+任何用户均可申请入群，是否需要群主和群管理员审批，取决于群样式（`ChatGroupStyle`）的设置：
 
-- `EMGroupStyle` 为 `EMGroupStylePublicJoinNeedApproval` 时，群主和群管理员审批后，用户才能加入群组；
-- `EMGroupStyle` 为 `EMGroupStylePublicOpenJoin` 时，用户可直接加入群组，无需群主和群管理员审批。
+- `ChatGroupStyle` 为 `PublicJoinNeedApproval` 时，群主和群管理员审批后，用户才能加入群组；
+- `ChatGroupStyle` 为 `PublicOpenJoin` 时，用户可直接加入群组，无需群主和群管理员审批。
 
 若申请加入公开群，申请人需执行以下步骤：
 
@@ -248,7 +248,7 @@ ChatClient.getInstance()
 
 #### 设置群组成员自定义属性
 
-你可以调用 `setMemberAttribute` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。设置后，群内其他成员会收到 `ChatGroupEventListener.onMemberAttributesChanged` 事件。
+你可以调用 `setMemberAttribute` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。设置后，群内其他成员会收到 `ChatGroupEventListener#onMemberAttributesChanged` 事件。
 
 ```typescript
 // groupId：群组 ID。

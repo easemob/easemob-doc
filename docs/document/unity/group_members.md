@@ -53,17 +53,12 @@ SDKClient.Instance.GroupManager.AddGroupMembers(groupId, members, new CallBack(
 示例代码如下：
 
 ```csharp
-List<string> members = new List<string>();
-members.Add("member1");
-members.Add("member2");
-
-SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, members, callback: new CallBack(
-    onSuccess: () => {
-        Console.WriteLine($"DeleteGroupMembers success");
+SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, list, new CallBack (
+    onSuccess: () =>
+    {
     },
     onError: (code, desc) =>
     {
-        Console.WriteLine($"DeleteGroupMembers failed, code:{code}, desc:{desc}");
     }
 ));
 ```

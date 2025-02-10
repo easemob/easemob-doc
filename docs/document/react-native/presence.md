@@ -20,7 +20,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![img](/images/ios/presence.png)
+![img](/images/android/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
