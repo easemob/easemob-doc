@@ -50,6 +50,10 @@ ChatClient.getInstance().login(userId, pwd).then(() => {
 
 初始化时，你可以设置 `ChatOptions#setAutoLogin` 选项确定是否自动登录。如果设置为自动登录，则登录成功之后，后续初始化 SDK 时会自动登录。
 
+自动登录期限默认为 30 天，即设置自动登录后，用户 30 天内可自动登录。若调整改期限，可联系环信商务。
+
+不过，自动登录还取决于你设置的用户 token 或密码有效期，例如，用户 token 有效期为 24 小时，则用户在 24 小时后，需获取 token 重新登录。
+
 ## 获取当前登录的用户
 
 你可以调用 `ChatClient#getCurrentUser` 方法获取当前登录用户的用户 ID。
