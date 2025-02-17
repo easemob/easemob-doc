@@ -136,7 +136,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagesize=1000&pagenu
   "duration": 0,
   "organization": "XXXX",
   "applicationName": "testapp",
-  "count": 1
+  "count": 3
 }
 ```
 
