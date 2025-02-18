@@ -22,7 +22,7 @@
 | 名片消息 | ![img](/images/product/solution_common/message_reply/card_no_mobile.png) | ![img](/images/product/solution_common/message_reply/card_normal_mobile.png)|
 | 合并消息 | ![img](/images/product/solution_common/message_reply/combine_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/combine_no_mobile.png)| 
 
-1. Web 端各类型的消息引用的 UI 展示示例如下表所示：
+2. Web 端各类型的消息引用的 UI 展示示例如下表所示：
 
 | 消息类型  | 原消息存在 | 原消息不存在 |
 | :--------- | :----- | :------- |
