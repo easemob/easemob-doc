@@ -19,7 +19,7 @@
 | 语音消息 | ![img](/images/product/solution_common/message_reply/voice_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/voice_no_mobile.png)|
 | 视频消息 | ![img](/images/product/solution_common/message_reply/video_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/video_no_mobile.png)|
 | 文件消息 | ![img](/images/product/solution_common/message_reply/file_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/file_no_mobile.png)|
-| 名片消息 | ![img](/images/product/solution_common/message_reply/card_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/card_no_mobile.png)|
+| 名片消息 | ![img](/images/product/solution_common/message_reply/card_no_mobile.png) | ![img](/images/product/solution_common/message_reply/card_normal_mobile.png)|
 | 合并消息 | ![img](/images/product/solution_common/message_reply/combine_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/combine_no_mobile.png)| 
 
 2. Web 端各类型的消息引用的 UI 展示示例如下表所示：
