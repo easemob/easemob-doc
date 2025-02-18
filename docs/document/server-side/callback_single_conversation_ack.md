@@ -12,7 +12,7 @@
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。关于 `Secret`，详见 [环信即时通讯管理台配置回调规则的描述](/product/enable_and_configure_IM.html#配置回调规则)。 |
 | `payload`   | object   | 会话已读回执详情。 |
 | `payload.ack_message_id` | String     | 会话中消息的消息 ID。                  |
-| `payload.type` | 会话已读回执类型。       |                |
+| `payload.type` | String | 会话已读回执类型。       |                |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
 | `from` | String          | 发送已读回执的用户。|
