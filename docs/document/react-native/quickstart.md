@@ -494,4 +494,4 @@ demo 的界面:
 
 ## 更多操作
 
-为了保证安全性，我们推荐使用 `username + password + token` 方式创建用户，token 在你的 app server 生成供客户端获取，当 token 过期时你需要重新获取。详见 [获取 user token](/product/easemob_user_token)。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/server-side/easemob_app_token.html) 和[获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。

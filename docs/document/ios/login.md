@@ -26,6 +26,8 @@
 
 1. **用户 ID + token** 是更加安全的登录方式。
 
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/server-side/easemob_app_token.html) 和[获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
 ```swift
@@ -38,7 +40,7 @@ EMClient.shared().login(withUsername: "userId", token: "token") { userId, err in
 }
 ```
 
-2. **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
+1. **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
 ```objectivec
     //SDK 初始化 `EMOptions` 时可以传入 `loginExtensionInfo` 属性投递给被踢下线的设备。该属性需要开启多设备登录的情况下才能生效。

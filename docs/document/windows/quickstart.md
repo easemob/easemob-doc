@@ -99,7 +99,9 @@ SDKClient.Instance.CreateAccount(username, password, callback: new CallBack(
 ```
 
 :::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见：[注册单个用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册单个用户)。
+1. 该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用。
+2. 正式环境中，应使用服务器端调用 Restful API 注册，详见[注册用户](/server-side/account_system.html#注册用户)。若使用 Token 登录，你需要在你的应用服务器集成[获取 App Token API](/server-side/easemob_app_token.html) 和[获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+
 :::
 
 ### 5. 登录账号

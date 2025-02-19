@@ -175,6 +175,8 @@ EMClient.getInstance().init(context, options);
    
 创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
 
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/server-side/easemob_app_token.html) 和[获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+
 ### 3. 登录账号
 
 创建账号后，获取账号的用户 ID 和 Token。使用如下代码实现用户登录：

@@ -37,7 +37,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 205    | MESSAGE_PARAMETER_ERROR                     | 消息参数错误。如撤回消息时未传消息 ID 或者发送消息时未传消息接收方的用户 ID。|
 | 206    | WEBIM_CONNCTION_USER_LOGIN_ANOTHER_DEVICE      | 用户在其他设备登录：如果没有开启多设备登录，则在其他设备登录会将当前登录的设备踢下线，用户会收到此错误。若开启了多设备登录并配置了支持的设备数量，设备间的互踢策略与 `ConnectionParameters#isFixedDeviceId` 参数有关，详见[多设备文档](multi_device.html)。  |
 | 207    | WEBIM_CONNCTION_USER_REMOVED                   | 用户已经被注销：如果登录用户的 ID 被管理员从管理后台删除则会收到此错误。 |
-| 208    | WEBIM_USER_ALREADY_LOGIN                   | 用户已登录。单设备登录时，若调用 open 方法用户已经登录，会提示该错误。 |
+| 208    | WEBIM_USER_ALREADY_LOGIN                   | 用户注册失败：例如，注册用户之前未开启[开放注册功能](/server-side/account_system.html#开放注册单个用户)等原因。 |
 | 216    | WEBIM_CONNCTION_USER_KICKED_BY_CHANGE_PASSWORD | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 |
 | 217    | WEBIM_CONNCTION_USER_KICKED_BY_OTHER_DEVICE    | 用户被踢下线：开启多设备登录后，如果用户在其他设备上调用 API 或者通过管理后台踢出当前设备登录的 ID，SDK 会提示该错误。 |
 | 219    | USER_MUTED_BY_ADMIN                            | 用户被全局禁言：在管理后台禁言了此用户后，该用户发送消息时会提示该错误。                     |
