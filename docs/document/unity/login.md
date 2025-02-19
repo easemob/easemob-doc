@@ -35,6 +35,8 @@ SDKClient.Instance.CreateAccount(username, password,
 
 测试环境下，你在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建用户后，环信服务器会自动为这些用户分配用户 Token，详见[测试环境下创建用户的介绍](/product/enable_and_configure_IM.html#测试环境)。
 
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/server-side/easemob_app_token.html) 和[获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
 ```csharp
