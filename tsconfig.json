@@ -1,7 +1,7 @@
 {
   "include": ["**/*.ts", "**/*.vue"],
   "compilerOptions": {
-    // types
+    // types 
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
