@@ -6,10 +6,11 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 支持提供 `EMChatManager` 类支持在本地导入和插入消息，其中包含如下主要方法：
+环信即时通讯 IM Android SDK 支持提供 `EMChatManager` 类和 `EMConversation` 类支持在本地导入和插入消息，其中包含如下主要方法：
 
 - `EMChatManager#importMessages`：批量导入消息到数据库；
-- `EMChatManager#insertMessage`：在本地指定会话中插入一条消息。
+- `EMConversation#insertMessage`：在本地指定会话中插入一条消息。
+- `EMChatManager#saveMessage`：直接插入消息。若会话不存在，SDK 会自动创建会话。
 
 ## 前提条件
 
@@ -48,7 +49,7 @@ EMClient.getInstance().chatManager().importMessages(msgs);
 // 将消息插入到指定会话中。
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
 conversation.insertMessage(message);
-// 直接插入消息。
+// 直接插入消息。若会话不存在，SDK 会自动创建会话。
 EMClient.getInstance().chatManager().saveMessage(message);
 ```
 
