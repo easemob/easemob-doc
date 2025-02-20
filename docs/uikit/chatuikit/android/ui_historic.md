@@ -150,7 +150,7 @@ EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 
 
 EaseIMKit 提供了自定义的标题栏控件 ChatUIKitTitleBar。
 
-![img](/images/android/easeim-titlebar.png)
+![img](/images/android/easeim-titlebar.jpg)
 
 标题栏除了做为 View 所具有的属性功能外，还可以设置标题的位置等。
 
