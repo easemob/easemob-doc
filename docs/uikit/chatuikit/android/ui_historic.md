@@ -263,7 +263,7 @@ public boolean onMenuItemClick(MenuItem item, int position) {
 
 聊天窗口包括标题栏（不包含在 UIKitChatFragment 中），聊天区，输入区及扩展展示区，如下图所示:
 
-![img](/images/android/easeim4.jpeg)
+![img](/images/android/easeim4.png)
 
 标题区 ChatUIKitTitleBar 的具体布局及实现不在 EaseIMKit 库的聊天控件及 fragment 中，需要你自己去实现。
 开发者可以在 UIKitChatFragment 中获取到 ChatUIKitLayout 这个控件，然后通过这个控件进一步获取到获取其他控件，代码如下：
