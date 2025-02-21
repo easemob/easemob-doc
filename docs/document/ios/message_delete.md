@@ -92,7 +92,7 @@ if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("
 }
 ```
 
-### 删除本地单个会话的指定消息
+### 删除本地会话的指定消息
 
 你可以删除本地单个会话的指定消息，示例代码如下：
 
