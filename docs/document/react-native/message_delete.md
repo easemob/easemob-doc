@@ -104,7 +104,7 @@ ChatClient.getInstance()
 // startTs: 开始点的时间戳
 // endTs: 结束点的时间戳
 ChatClient.getInstance()
-  .chatManager.deleteMessagesWithTimestamp({ startTs, endTs })
+  .chatManager.deleteMessagesWithTimestamp({ convId, convType, startTs, endTs })
   .then(() => {
     console.log("delete message success");
   })
