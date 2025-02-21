@@ -10,9 +10,9 @@
 
 - `EMChatManager#deleteAllMessageAndConversation`：清空当前用户的聊天记录，包括单聊、群聊和聊天室的消息和会话，同时可以选择是否单向清除服务端的聊天记录。
 - `EMChatManager#deleteRemoteMessagesBefore`/`EMChatManager#deleteRemoteMessagesWithIds`：根据消息时间或消息 ID 单向删除服务端的历史消息。
-- `EMChatManager#deleteAllMessages`：删除本地指定会话的所有消息。
-- `EMChatManager#deleteMessagesWithTs`：删除指定时间段的本地消息。
-- `EMChatManager#deleteMessage`：删除本地单个会话的指定消息。
+- `EMConversation#deleteAllMessages`：删除本地指定会话的所有消息。
+- `EMConversation#deleteMessagesWithTs`：删除指定时间段的本地消息。
+- `EMConversation#deleteMessage`：删除本地单个会话的指定消息。
 
 ## 前提条件
 
