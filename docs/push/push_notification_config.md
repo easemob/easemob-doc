@@ -416,6 +416,8 @@ FCM 通道推送通知示例如下：
 | `callBackParameter`   | String | 回调参数。                                                   |
 | `showTtl`             | Int    | 限时展示(秒) 。                                              |
 | `notifyId`            | Int    | 通知显示时的唯一标识，实现新的消息覆盖上一条消息功能。       |
+| `category`            | String	    | 通道类别名。       |
+| `notifyLevel`            | String    | 通知栏消息提醒等级取值定义：<br/> - `1`：通知栏<br/> - `2`：通知栏+锁屏<br/> - `16`：通知栏+锁屏+横幅+震动+铃声<br/>使用 `notifyLevel` 参数时，`category` 参数必传。       |
 
 ### 魅族推送说明
 
