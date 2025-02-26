@@ -409,7 +409,8 @@ const documentSidebar = [
           { text: '管理超级管理员', link: 'chatroom_superadmin.html' },
           { text: '管理聊天室', link: 'chatroom_manage.html' },
           { text: '管理聊天室属性', link: 'chatroom_attribute.html' },
-          { text: '管理聊天室成员', 
+          { 
+            text: '管理聊天室成员', 
             collapsible: true,
             children: [
               { text: '获取成员列表', link: 'chatroom_member_obtain.html' },
@@ -421,8 +422,7 @@ const documentSidebar = [
                   { text: '多个或全体成员禁言',  link: 'chatroom_member_mutelist.html' },
                   { text: '标签禁言',  link: 'chatroom_label_mute.html' }
                 ]
-              }  
-              // { text: '管理用户标签及禁言', link: 'chatroom_label_mute.html' },
+              },  
               { text: '管理白名单', link: 'chatroom_member_allowlist.html' },
               { text: '管理黑名单', link: 'chatroom_member_blocklist.html' }
             ]  
