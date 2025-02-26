@@ -28,6 +28,7 @@ export default defineUserConfig({
   title: '环信 IM 文档',
   head: [['link', { rel: 'icon', href: '/logo.png' }]],
   description: '环信 IM 文档',
+  shouldPrefetch: false,
   bundler: viteBundler({
     viteOptions: {
       resolve: {
