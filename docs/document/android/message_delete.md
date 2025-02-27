@@ -6,7 +6,7 @@
 
 ## 技术原理
 
-使用环信即时通讯 IM Android SDK 可以通过 `EMConversation` 和 `EMChatManager` 类从服务器单向删除历史消息，主要方法如下：
+使用环信即时通讯 IM Android SDK 可以通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html)、[EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 和 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 类从服务器单向删除历史消息，主要方法如下：
 
 - `EMChatManager#asyncDeleteAllMsgsAndConversations`：清空当前用户的聊天记录，包括单聊、群聊和聊天室的消息和会话，同时可以选择是否单向清除服务端的聊天记录。
 - `EMConversation#removeMessagesFromServer`：按消息时间或消息 ID 单向删除服务端的历史消息。

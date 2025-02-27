@@ -10,6 +10,8 @@
 
 ## 技术原理
 
+环信即时通讯 IM 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 实现消息修改。
+
 消息内容修改流程如下：
 
 1. 用户调用 SDK 的 API 修改一条消息。

@@ -22,7 +22,7 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMStatisticsManager` 类支持获取本地消息的流量统计信息，包含如下主要方法：
+环信即时通讯 IM Android SDK 提供 [EMStatisticsManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_statistics_manager.html) 类支持获取本地消息的流量统计信息，包含如下主要方法：
 
 - `EMStatisticsManager#getMessageStatistics`：根据消息 ID 获取消息流量统计信息；
 - `EMStatisticsManager#getMessageCount`：获取一定时间段内发送和/或接收的指定或全部类型的消息条数；

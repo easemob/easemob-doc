@@ -12,7 +12,7 @@
 
 ## 技术原理
 
-使用环信即时通讯 IM Android SDK 可以实现消息的送达回执与已读回执。
+使用环信即时通讯 IM Android SDK 可以通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html)、[EMMessage](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message.html)、[EMOptions](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html) 和 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 类实现消息的送达回执与已读回执。
 
 - 单聊消息送达回执的逻辑如下：
 

@@ -18,9 +18,9 @@
 
 ## 技术原理
 
-SDK 支持你通过调用 API 在项目中实现如下功能：
+SDK 支持你通过调用 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMTextMessageBody](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_text_message_body.html) 类在项目中实现如下功能：
 
-- `fetchSupportLanguages` 获取支持的翻译语言；
+- `EMChatManager#fetchSupportLanguages` 获取支持的翻译语言；
 - 按需翻译：接收方在收到文本消息后调用 `translateMessage` 进行翻译；
 - 自动翻译：发送方发送消息之前设置 `MessageBody` 中的 `setTargetLanguages` 字段为目标语言，然后发送消息，接收方会收到消息原文和译文。
 

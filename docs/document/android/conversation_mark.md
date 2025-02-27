@@ -20,7 +20,7 @@ mapping.put(EMConversation.EMMarkType.MARK_4,"girls");
 
 ## 技术原理
 
-环信即时通讯 IM 支持会话标记功能，主要方法如下：
+环信即时通讯 IM 通过 [EMChatManager 类](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 类和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类支持会话标记功能，主要方法如下：
 
 - `EMChatManager#asyncAddConversationMark`：标记会话。
 - `EMChatManager#asyncRemoveConversationMark`：取消标记会话。
