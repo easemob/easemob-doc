@@ -814,7 +814,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 
 你可以使用推送模板设置推送标题和内容。你可以调用以下 REST API 配置默认推送模板 `default` 和自定义推送模板。除此之外，你也可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
 
-对于群组消息，你可以使用定向模板将离线通知只发送给特定用户，或向某些用户推送与其他用户不同的离线通知。
+对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。
 
 使用推送模板有以下优势：
 
