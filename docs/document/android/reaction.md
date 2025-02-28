@@ -11,7 +11,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM SDK 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 支持你通过调用 API 在项目中实现如下功能：
 
 - `asyncAddReaction` 在消息上添加 Reaction；
 - `asyncRemoveReaction` 删除消息的 Reaction；
@@ -29,7 +29,7 @@ Reaction 场景示例如下：
 
 开始前，请确保满足以下条件：
 
-1. 完成 `3.9.2.1 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+1. 完成 3.9.2.1 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 3. 已在[环信控制台](https://console.easemob.com/user/login)开通 Reaction 功能。
 

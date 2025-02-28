@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM SDK 提供 `EMChatRoomManager` 类和 `EMChatRoom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM SDK 提供 [EMChatRoomManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_room_manager.html) 类和 [EMChatRoom](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_room.html) 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
