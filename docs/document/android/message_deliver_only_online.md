@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM 通过 `EMMessage` 类支持只将消息投递给在线用户：
+环信即时通讯 IM 通过 [EMMessage](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message.html) 类支持只将消息投递给在线用户：
 
 - `deliverOnlineOnly`：设置消息是否只投递给在线用户。
 

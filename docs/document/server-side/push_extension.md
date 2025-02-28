@@ -57,6 +57,7 @@
 | `content`             | String | 自定义推送内容。                                 |
 | `custom`              | Object | 自定义推送扩展参数(t, f, m, g, e) 中 e 的内容。 |
 | `group_user_nickname` | String | 发送方群组昵称（用于推送显示替换发送方信息）。   |
+| `type` | String | 当前消息为 VOIP 推送通知。注意：仅 APNs 已支持 VOIP 推送通知时使用。   |
 
 `em_apns_ext` 结构如下：
 
@@ -66,6 +67,7 @@
 | `em_push_mutable_content`    | Boolean          | APNs 推送配置，`true` 为富文本推送通知，`false` 则为普通通知。             |
 | `em_push_sound`              | String           | APNs 推送配置，自定义铃声，`Library/Sounds/` 目录下的 `aiff`、`wav` 或 `caf` 文件，例如 `appsound.caf`。 |
 | `em_push_badge`              | Integer          | APNs 推送配置，自定义角标数。      |
+| `em_push_content_available`              | Integer          | 设置为 `1` 表示后台通知。详见[苹果官网的用户通知文档](https://developer.apple.com/documentation/usernotifications/pushing-background-updates-to-your-app?language=objc)。  |
 
 `em_android_push_ext` 结构如下：
 
@@ -151,7 +153,8 @@
             "em_push_category": "",
             "em_push_mutable_content": true,
             "em_push_sound": "appsound.mp3",
-            "em_push_badge": 1
+            "em_push_badge": 1,
+            "em_push_content_available": 1
         },
         "em_android_push_ext": {
             "fcm_options": {
@@ -251,7 +254,9 @@
     },
     "em_push_ext": {
         "title": "群组名",
-        "content": "张三:发来一条消息"
+        "content": "张三:发来一条消息",
+        "type": "call"
+
     }
 }
 ```

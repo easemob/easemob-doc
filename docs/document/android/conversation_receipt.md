@@ -10,6 +10,8 @@
 
 ## 技术原理
 
+环信即时通讯 IM 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html)、[EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 和 [EMOptions](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html) 类实现会话已读回执。
+
  单聊会话已读回执实现的流程如下：
 
   1. 设置 `EMOptions#setRequireAck` 为 `true` 开启已读回执功能。

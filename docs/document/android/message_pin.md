@@ -14,7 +14,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM 支持消息置顶，主要方法和类如下：
+环信即时通讯 IM 通过 [EMMessage](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message.html)、[EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html)、[EMMessagePinInfo](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message_pin_info.html) 和 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 类支持消息置顶，主要方法和类如下：
 
 - `EMChatManager#asyncPinMessage`：置顶消息。
 - `EMChatManager#asyncUnPinMessage`：取消置顶消息。

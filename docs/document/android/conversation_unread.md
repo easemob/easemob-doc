@@ -13,7 +13,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 通过 `EMChatManager` 和 `EMConversation` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
+环信即时通讯 IM Android SDK 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html)和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类实现对本地会话的未读消息数的管理，其中核心方法如下：
 
 - `EMChatManager#getUnreadMessageCount`：获取本地所有会话的未读消息数。
 - `EMConversation#getUnreadMsgCount`：获取本地指定会话的未读消息数。

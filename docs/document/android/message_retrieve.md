@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMChatManager` 和 `EMConversation` 类支持获取服务器和本地的消息，包含如下主要方法：
+环信即时通讯 IM Android SDK 提供 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类支持获取服务器和本地的消息，包含如下主要方法：
 
 - `EMChatManager#asyncFetchHistoryMessages`：根据 `EMFetchMessageOption` 类从服务端分页获取指定会话的历史消息；
 - `EMConversation#getAllMessages/loadMoreMsgFromDB`：读取本地指定会话的消息；
@@ -32,7 +32,7 @@
 
 你可以调用 `asyncFetchHistoryMessages` 方法基于 `EMFetchMessageOption` 类从服务端分页拉取单聊和群组聊天的历史消息。为确保数据可靠，我们建议你每次获取 20 条消息，最大不超过 50。分页查询时，若满足查询条件的消息总数大于 `pageSize` 的数量，则返回 `pageSize` 数量的消息，若小于 `pageSize` 的数量，返回实际条数。消息查询完毕时，返回的消息条数小于 `pageSize` 的数量。
 
-通过设置 `EMFetchMessageOption` 类，你可以根据以下条件拉取历史消息：
+通过设置 [EMFetchMessageOption](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_fetch_message_option.html) 类，你可以根据以下条件拉取历史消息：
 
 - 消息发送方；
 - 消息类型；

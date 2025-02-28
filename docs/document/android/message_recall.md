@@ -12,9 +12,9 @@
 
 ## 技术原理
 
-环信即时通讯 IM 通过 `EMChatManager` 和 `EMMessage` 类支持你撤回一条发送成功的消息：
+环信即时通讯 IM 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html)、[EMMessage](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message.html) 和 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 类支持你撤回一条发送成功的消息：
 
-- `recallMessage`：撤回一条发送成功的消息。
+- `EMChatManager#recallMessage`：撤回一条发送成功的消息。
 
 ## 前提条件
 

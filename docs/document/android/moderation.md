@@ -13,7 +13,9 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `reportMessage` 方法实现举报违规消息功能。
+环信即时通讯 IM Android SDK 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 类实现举报违规消息功能：
+
+- `EMChatManager#reportMessage`：举报违规消息。
 
 ## 前提条件
 

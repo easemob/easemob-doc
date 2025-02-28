@@ -39,6 +39,8 @@
 
 ## 技术原理  
 
+环信即时通讯通过 [EMClient](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_client.html)、[EMContactManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_contact_manager.html)、[EMOptions](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html) 和 [EMMultiDeviceListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_multi_device_listener.html) 类
+
 Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送时识别设备，并将该 ID 发送到服务器。服务器会自动将新消息发送到用户登录的设备，可以自动监听到其他设备上进行的操作。即时通讯 IM Android SDK 提供以下多设备场景功能：
 
 - 获取当前用户的其他已登录设备的登录 ID 列表；
