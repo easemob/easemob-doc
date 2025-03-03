@@ -134,3 +134,7 @@ public class MyVivoMsgReceiver extends EMVivoMsgReceiver {
 ## 解析荣耀/OPPO/魅族推送字段
 
 解析方式同华为，详见[解析华为推送字段](#解析华为推送字段)。
+
+## 获取消息的统一方案
+
+从上面的介绍可以看出，各厂商对于点击通知栏后获取消息的方式不尽相同。若对各厂商采取统一方案获取消息，详见[统一获取消息方案](push_parsing_unified.html)。

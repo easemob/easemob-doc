@@ -60,7 +60,39 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 添加完成后，项目会自动链接所需系统库。
 
-## 3.初始化 SDK
+### 集成问题
+
+由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现如下报错：
+
+```
+[!] The 'Pods-EaseChatDemo' target has frameworks with conflicting names: aosl.xcframework.
+```
+
+要修复该问题，需要修改 `Podfile` 文件，添加如下脚本：
+
+```ruby
+pre_install do |installer|
+  # 定义 AgoraRtcEngine_iOS framework 的路径
+  rtc_pod_path = File.join(installer.sandbox.root, 'AgoraRtcEngine_iOS')
+
+  # aosl.xcframework 的完整路径
+  aosl_xcframework_path = File.join(rtc_pod_path, 'aosl.xcframework')
+
+  # 检查文件是否存在，如果存在则删除
+  if File.exist?(aosl_xcframework_path)
+    puts "Deleting aosl.xcframework from #{aosl_xcframework_path}"
+    FileUtils.rm_rf(aosl_xcframework_path)
+  else
+    puts "aosl.xcframework not found, skipping deletion."
+  end
+end
+```
+
+然后重新执行 `pod install`。
+
+详情请点击[这里](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
+
+## 3. 初始化 SDK
 
 在工程的 AppDelegate 中的以下方法中，调用 SDK 对应方法。
 
@@ -76,7 +108,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 }
 ```
 
-## 4.创建账号
+## 4. 创建账号
 
 1. 在[环信即时通讯控制台](https://console.easemob.com/user/login)首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
 
