@@ -92,7 +92,7 @@ class MainActivity {
 
 ## 参考
 
-- [环信服务端接口说明](/document/server-side/push_extension.html#离线推送相关的扩展字段)
+- [环信服务端推送扩展字段说明](/document/server-side/push_extension.html#离线推送相关的扩展字段)
 - [Android 解析消息示例](/document/android/push/push_parsing.html)
 - [华为官方说明](https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/andorid-basic-clickaction-0000001087554076)
 - [小米官方说明](https://dev.mi.com/console/doc/detail?pId=68)
