@@ -6,7 +6,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMGroupManager` 类和 `EMGroup` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM Android SDK 提供 [EMGroupManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager.html)、[EMGroup](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html) 和 [EMGroupChangeListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_group_change_listener.html)用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 加入、退出群组
 - 管理群成员的自定义属性
@@ -36,14 +36,14 @@
 
 | 入群方式                   | 公开群       | 私有群          |
 | :------------------------- | :------------------ | :------------------------------------ |
-| 是否支持用户申请入群       | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 `EMGroupStyle` 的设置。 | 不支持                                                                                             |
-| 是否支持群成员邀请用户入群 | 支持 <br/>只能由群主和管理员邀请。    | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 `EMGroupStyle` 的设置。 |
+| 是否支持用户申请入群       | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 [EMGroupStyle](https://sdkdocs.easemob.com/apidoc/android/chat3.0/enumcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager_1_1_e_m_group_style.html) 的设置。 | 不支持                                                                                             |
+| 是否支持群成员邀请用户入群 | 支持 <br/>只能由群主和管理员邀请。    | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 [EMGroupStyle](https://sdkdocs.easemob.com/apidoc/android/chat3.0/enumcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager_1_1_e_m_group_style.html) 的设置。 |
 
 #### 用户申请入群
 
 只有公开群支持用户申请入群，私有群不支持。用户可获取公开群列表，选择相应的群组 ID，然后调用相应方法加入该群组。
 
-任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型（`EMGroupStyle`）的设置：
+任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 [EMGroupStyle](https://sdkdocs.easemob.com/apidoc/android/chat3.0/enumcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager_1_1_e_m_group_style.html) 的设置：
 
 - `EMGroupStyle` 为 `EMGroupStylePublicJoinNeedApproval` 时，群主和群管理员审批后，用户才能加入群组；
 - `EMGroupStyle` 为 `EMGroupStylePublicOpenJoin` 时，用户可直接加入群组，无需群主和群管理员审批。
