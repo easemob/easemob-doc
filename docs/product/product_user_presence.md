@@ -29,11 +29,11 @@
 
 ### 用户在线状态变更通知
 
-1. 用户的状态从“在线”变为“离线”时，客户端收到连接断开通知（例如，Android 为 `OnDisconnected`），从“离线”变为“在线”时，客户端收到已连接通知（例如，Android 为 `OnConnected`）。
+1. 若用户的状态从“在线”变为“离线”时，客户端收到连接断开通知（例如，Android 为 `OnDisconnected`），从“离线”变为“在线”时，客户端收到已连接通知（例如，Android 为 `OnConnected`）。订阅者会收到用户在线状态变更的回调，例如，Android 为 `EMPresenceListener#onPresenceUpdated` 回调。
 
 2. 用户发布自定义在线状态后，发布者和订阅者均会收到自定义在线状态变更的回调，例如，Android 为 `EMPresenceListener#onPresenceUpdated` 回调。
 
-3. 当 SDK 监测到当前账号从“自定义状态”变更为“离线”状态后，会自动清除自定义状态，并且触发状态变更通知，例如，Android 为 `OnConnected`。
+3. 当 SDK 监测到当前账号从“自定义状态”变更为“离线”状态后，会触发状态变更通知，例如，Android 为 `OnConnected`。订阅者会收到用户在线状态变更的回调，例如，Android 为 `EMPresenceListener#onPresenceUpdated` 回调。
 
 ### 用户状态回调事件
 
