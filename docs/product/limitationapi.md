@@ -74,7 +74,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 修改群组信息   |    PUT         | /{org_name}/{app_name}/chatgroups/{group_id}             | 100 次/秒/App Key   | 100 次/秒    | 
 | 解散群组 |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}                    | 100 次/秒/App Key   | 50 次/秒    | 
 | 获取群组公告     |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/announcement         | 100 次/秒/App Key     | 100 次/秒    | 
-| 修改群组公告  |    POST| /{org_name}/{app_name}/chatgroups/{group_id}/announcement          | 100 次/秒/App Key   |     | 
+| 修改群组公告  |    POST| /{org_name}/{app_name}/chatgroups/{group_id}/announcement          | 100 次/秒/App Key   | 100 次/秒    | 
 | 分页获取群组共享文件   |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/share_files?pagenum=1&pagesize=10        | 100 次/秒/App Key    | 100 次/秒    | 
 | 上传群组共享文件  |    POST  | /{org_name}/{app_name}/chatgroups/{group_id}/share_files       | 100 次/秒/App Key    |  100 次/秒   | 
 | 下载群组共享文件    |  GET   | /{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file_id}   | 100 次/秒/App Key    |  100 次/秒   | 
@@ -101,10 +101,10 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 添加单个用户至群组黑名单   |    POST      | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}    | 100 次/秒/App Key | 100 次/秒    | 
 | 批量添加用户至群组黑名单   |    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users       | 100 次/秒/App Key | 50 次/秒    | 
 | 从群组黑名单移除单个用户   |    DELETE  | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}    | 100 次/秒/App Key  | 50 次/秒    | 
-| 批量从群组黑名单移除用户  |    DELETE  | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}    | 100 次/秒/App Key   |     | 
+| 批量从群组黑名单移除用户  |    DELETE  | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}    | 100 次/秒/App Key   | 50 次/秒    | 
 | 查询群组白名单  |    GET | /{org_name}/{app_name}/chatgroups/{group_id}/white/users        | 100 次/秒/App Key         | 100 次/秒   | 
 | 添加单个用户至群组白名单 |    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/white/users/{username}    | 100 次/秒/App Key  | 100 次/秒    | 
-| 批量添加用户至群组白名单|    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users       | 100 次/秒/App Key  |     | 
+| 批量添加用户至群组白名单|    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users       | 100 次/秒/App Key  | 50 次/秒    | 
 | 将用户移除群组白名单 |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}/white/users/{username}    | 100 次/秒/App Key    | 100 次/秒    | 
 | 获取禁言列表 |    GET    | /{org_name}/{app_name}/chatgroups/{group_id}/mute              | 100 次/秒/App Key    | 100 次/秒    | 
 | 禁言单个群成员    |    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/mute               | 100 次/秒/App Key      | 100 次/秒    | 
@@ -141,7 +141,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 解散聊天室  |  DELETE  | /{org_name}/{app_name}/chatrooms/{chatroom_id}                   | 100 次/秒/App Key     | 50 次/秒    | 
 | 获取聊天室公告  |   GET  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement      | 100 次/秒/App Key                                                 | 100 次/秒    | 
 | 修改聊天室公告   |    POST | /{org_name}/{app_name}/chatrooms/{chatroom_id}/announcement      | 100 次/秒/App Key        | 100 次/秒    | 
-| 获取聊天室自定义属性 | POST  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id} | 100 次/秒/App Key       |     | 
+| 获取聊天室自定义属性 | POST  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id} | 100 次/秒/App Key       | 100 次/秒    | 
 | 设置聊天室自定义属性 | PUT  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username} | 100 次/秒/App Key       |  25 次/秒   | 
 | 强制设置聊天室自定义属性 | PUT | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username}/forced | 100 次/秒/App Key        | 25 次/秒    | 
 | 删除聊天室自定义属性 | DELETE  | /{org_name}/{app_name}/metadata/chatroom/{chatroom_id}/user/{username} | 100 次/秒/App Key             | 25 次/秒    | 
