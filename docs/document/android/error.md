@@ -4,7 +4,7 @@
 
 本文介绍环信即时通讯 Android SDK 中接口调用或者回调中的错误码。可以根据具体错误码判断具体错误原因。
 
-Android 中错误码的类为 `EMError`。
+Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html)。
 
 如：注册时用户返回已存在的错误可以这样检测：`EMError.USER_ALREADY_EXIST`。
 

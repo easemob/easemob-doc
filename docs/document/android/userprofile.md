@@ -16,7 +16,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供一个 `EMUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
+环信即时通讯 IM Android SDK 提供一个 [EMUserInfoManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_user_info_manager.html) 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
 - `updateOwnInfo` 设置和修改当前用户自己的属性信息；
 - `updateOwnInfoByAttribute` 设置和修改用户信息中的某个属性；

@@ -143,6 +143,7 @@ const documentSidebar = [
           { text: '获取或更新推送 token', link: 'push/push_get_device_token.html', only: ['react-native'] },
           { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
           { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
+          { text: '统一获取消息方案', link: 'push/push_parsing_unified.html', only: ['android'] },
           { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios', 'harmonyos', 'react-native', 'flutter'] },
           { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
           { text: '设置推送模板', link: 'push/push_template.html', only: ['web']},

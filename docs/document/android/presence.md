@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-环信 IM SDK 提供 `EMPresence`、`EMPresenceManager` 和 `EMPresenceListener` 类，用于管理在线状态订阅，包含如下核心方法：
+环信 IM SDK 提供 [EMPresence](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_presence.html)、[EMPresenceManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_presence_manager.html) 和 [EMPresenceListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_presence_listener.html) 类，用于管理在线状态订阅，包含如下核心方法：
 
 - `subscribePresences`：订阅用户的在线状态；
 - `publishPresence`：发布自定义在线状态；

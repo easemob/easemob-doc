@@ -11,13 +11,14 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。
+环信即时通讯 IM Android SDK 提供 [EMContactManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_contact_manager.html) 类实现好友的添加移除，黑名单的添加移除等功能。
 
-- 添加、删除好友。
-- 设置和获取好友备注。
-- 从服务器获取好友列表。
-- 将用户添加到或移除黑名单。
-- 从服务器获取黑名单列表。
+- `EMContactManager#addContact/deleteContact` ：添加、删除好友。
+- `EMContactManager#asyncSetContactRemark`：设置和获取好友备注。
+- `EMContactManager#asyncFetchAllContactsFromServer`：从服务器获取好友列表。
+- `EMContactManager#fetchContactFromLocal`：从本地获取好友列表
+- `EMContactManager#addUserToBlackList`：将用户添加到或移除黑名单。
+- `EMContactManager#getBlackListFromServer`：从服务器获取黑名单列表。
 
 ## 前提条件
 

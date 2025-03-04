@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMChatThreadManager`、`EMChatThread`、`EMChatThreadChangeListener` 和 `EMChatThreadEvent` 类，用于管理子区，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM Android SDK 提供 [EMChatThreadManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_thread_manager.html)、[EMChatThread](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_thread.html)、和 [EMChatThreadChangeListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_chat_thread_change_listener.html) 类，用于管理子区，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散子区
 - 加入、退出子区

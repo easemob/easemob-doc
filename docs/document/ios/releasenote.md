@@ -43,33 +43,7 @@
 
 ### 注意
 
-由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现如下报错：
-```
-[!] The 'Pods-EaseChatDemo' target has frameworks with conflicting names: aosl.xcframework.
-```
-
-要修复该问题，需要修改 `Podfile` 文件，添加如下脚本：
-
-```ruby
-pre_install do |installer|
-  # 定义 AgoraRtcEngine_iOS framework 的路径
-  rtc_pod_path = File.join(installer.sandbox.root, 'AgoraRtcEngine_iOS')
-
-  # aosl.xcframework 的完整路径
-  aosl_xcframework_path = File.join(rtc_pod_path, 'aosl.xcframework')
-
-  # 检查文件是否存在，如果存在则删除
-  if File.exist?(aosl_xcframework_path)
-    puts "Deleting aosl.xcframework from #{aosl_xcframework_path}"
-    FileUtils.rm_rf(aosl_xcframework_path)
-  else
-    puts "aosl.xcframework not found, skipping deletion."
-  end
-end
-```
-然后重新执行 `pod install`。
-
-详情请点击[这里](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
+由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现报错。详见 [iOS 快速开始中的集成问题说明](quickstart.html#集成问题)。
 
 
 ## 版本 V4.10.2 Dev 2024-11-22（开发版）
