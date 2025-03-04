@@ -184,30 +184,39 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ###  用户体系管理
 
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
+| * 获取 app/用户 token  | POST   | /{org_name}/{app_name}/token   | 300 次/秒/App Key          | 免费    | 
+
+以下两个表格中的用户体系 API 和离线推送相关 API 的接口总调用频率（默认值）为 100 次/秒/App Key，单个叠加包大小为 50 次/秒。
+
 | RESTful API 接口 |方法  | 接口 URL| 
 | :-------- | :----- | :---------------- | 
 | 注册单个用户  |  POST  | /{org_name}/{app_name}/users        | 
 | * 批量注册用户 |  POST   | /{org_name}/{app_name}/users       | 
+| 获取单个用户  |  GET | /{org_name}/{app_name}/users/{username}   |
+| * 批量获取用户 |  GET  | /{org_name}/{app_name}/users      | 
+| * 删除单个用户 |  DELETE  | /{org_name}/{app_name}/users/{username}         | 
+| * 批量删除用户 |  DELETE   | /{org_name}/{app_name}/users  | 30 次/秒/App Key   | 
+| * 修改用户密码  |  POST | /{org_name}/{app_name}/users/{username}/password   | 
+| * 获取用户在线状态  |  GET | /{org_name}/{app_name}/users/{username}/status   | 
+| * 批量获取用户在线状态  |  POST    | /{org_name}/{app_name}/users/batch/status  | 
+| * 获取离线消息数       |  GET     | /{org_name}/{app_name}/users/{owner_username}/offline_msg_count    |
+| * 获取离线消息的状态    |  GET   | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id}   | 
+| * 账号封禁   |  POST     | /{org_name}/{app_name}/users/{username}/deactivate          | 
+| * 账号解禁    |  POST                    | /{org_name}/{app_name}/users/{username}/activate         | 
+| * 强制用户下线         |  GET    | /{org_name}/{app_name}/users/{username}/disconnect    | 
+| * 强制用户从单设备下线 | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} | 
+| * 获取指定账号的在线登录设备列表    | GET  | /{org_name}/{app_name}/users/{username}/resources | 
 
-以上两个接口的总调用频率（默认值）为 100 次/秒/App Key，单个叠加包大小为 100 次/秒。
+| RESTful API 接口 |方法  | 接口 URL| 
+| :-------- | :----- | :---------------- |
+| 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/{userId}/push/binding | 
+| 查询当前用户的所有设备的推送绑定信息    | GET  | /{org_name}/{app_name}/users/{userId}/push/binding | 
+| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{userId} |
+| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{userId} |
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
-| :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
-| * 获取 app/用户 token  | POST   | /{org_name}/{app_name}/token   | 300 次/秒/App Key          | 免费    | 
-| 获取单个用户  |  GET | /{org_name}/{app_name}/users/{username}   | 100 次/秒/App Key   | 100 次/秒    | 
-| * 批量获取用户 |  GET  | /{org_name}/{app_name}/users      | 100 次/秒/App Key | 100 次/秒    | 
-| * 删除单个用户 |  DELETE  | /{org_name}/{app_name}/users/{username}         | 100 次/秒/App Key |     | 
-| * 批量删除用户 |  DELETE   | /{org_name}/{app_name}/users  | 30 次/秒/App Key   | 100 次/秒/App Key    | 
-| * 修改用户密码  |  POST | /{org_name}/{app_name}/users/{username}/password   | 100 次/秒/App Key   |100 次/秒  | 
-| * 获取用户在线状态  |  GET | /{org_name}/{app_name}/users/{username}/status   | 100 次/秒/App Key  | 100 次/秒   | 
-| * 批量获取用户在线状态  |  POST    | /{org_name}/{app_name}/users/batch/status  | 50 次/秒/App Key | 100 次/秒 | 
-| * 获取离线消息数       |  GET     | /{org_name}/{app_name}/users/{owner_username}/offline_msg_count    | 100 次/秒/App Key | 100 次/秒    | 
-| * 获取离线消息的状态    |  GET   | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id}   | 100 次/秒/App Key   | 100 次/秒    | 
-| * 账号封禁   |  POST     | /{org_name}/{app_name}/users/{username}/deactivate          | 100 次/秒/App Key     | 100 次/秒    | 
-| * 账号解禁    |  POST                    | /{org_name}/{app_name}/users/{username}/activate         | 100 次/秒/App Key      | 100 次/秒   | 
-| * 强制用户下线         |  GET    | /{org_name}/{app_name}/users/{username}/disconnect    | 100 次/秒/App Key   | 100 次/秒    | 
-| * 强制用户从单设备下线 | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} | 100 次/秒/App Key |  50 次/秒  | 
-| * 获取指定账号的在线登录设备列表    | GET  | /{org_name}/{app_name}/users/{username}/resources | 100 次/秒/App Key  |     | 
+
 
 ### 用户属性
 
@@ -265,8 +274,8 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
-| 设置离线推送         | PUT  | /{org}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key          |     | 
-| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key  |     | 
+| 设置离线推送         | PUT  | /{org}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key          | 与下行的 “查询离线推送设置” API 的叠加包大小之和为 100 次/秒    | 
+| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key  | 与上行的 “设置离线推送” API 的叠加包大小之和为 100 次/秒    | 
 | 批量设置离线推送时显示的昵称     | PUT | /{org_name}/{app_name}/push/nickname | 100 次/秒/App Key  |     | 
 | 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 次/秒/App Key          |     | 
 | 获取推送通知的首选语言 | GET  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 次/秒/App Key  |     | 
@@ -274,20 +283,6 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 查询离线推送模板          | GET  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |     | 
 | 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |     | 
 | 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template | 100 次/秒/App Key。 |     | 
-
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 
-| :-------- | :----- | :---------------- | :--------------------- |
-| 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/{userId}/push/binding | 
-| 查询当前用户的所有设备的推送绑定信息    | GET  | /{org_name}/{app_name}/users/{userId}/push/binding | 
-
-以上两个接口的总调用频率（默认值）为 100 次/秒/App Key，单个叠加包大小为 50 次/秒。
-
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 
-| :-------- | :----- | :---------------- | :--------------------- | 
-| 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{userId} |
-| 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{userId} |
-
-以上两个接口的总调用频率（默认值）为 100 次/秒/App Key，单个叠加包大小为 100 次/秒。
 
 ## 发送后回调
 
@@ -298,8 +293,8 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ## AI 会话摘要助手
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
-| :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
+| :-------- | :----- | :---------------- | :--------------------- | 
 | 生成会话摘要         | POST  | /{org_name}/{app_name}/agent/v1/messages/summary | 100 次/秒/App Key          |
 | 获取会话摘要         | GET  | /{org_name}/{app_name}/agent/v1/messages/summaries?conversationId={groupId}&username={username}&chatType={chatType} | 100 次/秒/App Key          |
 | 删除会话摘要         | DELETE  | /{org_name}/{app_name}/agent/v1/messages/summary/{summaryId}?conversationId={groupId}&username={username}&chatType={chatType} | 100 次/秒/App Key          |
