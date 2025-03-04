@@ -46,7 +46,7 @@
 
 ### 订阅指定用户的在线状态
 
-默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `com.hyphenate.chat.EMPresenceManager#subscribePresences` 方法订阅指定用户的在线状态，示例代码如下：
+默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `EMPresenceManager#subscribePresences` 方法订阅指定用户的在线状态，示例代码如下：
 
 ```java
 EMClient.getInstance().presenceManager().subscribePresences(contactsFromServer, 1 * 24 * 3600, new EMValueCallBack<List<EMPresence>>() {
@@ -64,7 +64,7 @@ EMClient.getInstance().presenceManager().subscribePresences(contactsFromServer, 
 
 成功订阅指定用户的在线状态后，SDK 通过 `onSuccess` 回调返回被订阅用户的在线状态。
 
-在线状态变更时，订阅者会收到 `com.hyphenate.EMPresenceListener#onPresenceUpdated` 回调。
+在线状态变更时，订阅者会收到 `EMPresenceListener#onPresenceUpdated` 回调。
 
 :::tip
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
@@ -75,7 +75,7 @@ EMClient.getInstance().presenceManager().subscribePresences(contactsFromServer, 
 
 ### 发布自定义在线状态
 
-用户在线时，可调用 `com.hyphenate.chat.EMPresenceManager#publishPresence` 方法发布自定义在线状态：
+用户在线时，可调用 `EMPresenceManager#publishPresence` 方法发布自定义在线状态：
 
 ```java
 EMClient.getInstance().presenceManager().publishPresence("自定义状态", new EMCallBack() {
@@ -91,7 +91,7 @@ EMClient.getInstance().presenceManager().publishPresence("自定义状态", new 
 });
 ```
 
-在线状态发布后，发布者和订阅者均会收到 `com.hyphenate.EMPresenceListener#onPresenceUpdated` 回调。
+在线状态发布后，发布者和订阅者均会收到 `EMPresenceListener#onPresenceUpdated` 回调。
 
 ### 添加在线状态监听器
 
@@ -111,7 +111,7 @@ public interface EMPresenceListener {
 
 ### 取消订阅指定用户的在线状态
 
-若取消指定用户的在线状态订阅，可调用 `com.hyphenate.chat.EMPresenceManager#unsubscribePresences` 方法，示例代码如下：
+若取消指定用户的在线状态订阅，可调用 `EMPresenceManager#unsubscribePresences` 方法，示例代码如下：
 
 ```java
 EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer, new EMCallBack() {
@@ -129,7 +129,7 @@ EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer
 
 ### 查询被订阅用户列表
 
-为方便用户管理订阅关系，SDK 提供 `com.hyphenate.chat.EMPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
+为方便用户管理订阅关系，SDK 提供 `EMPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
 ```java
 EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSize, new EMValueCallBack<List<String>>() {
@@ -147,7 +147,7 @@ EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSiz
 
 ### 获取用户的当前在线状态
 
-如果不关注用户的在线状态变更，你可以调用 `com.hyphenate.chat.EMPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
+如果不关注用户的在线状态变更，你可以调用 `EMPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
 ```java
 // contactsList：要查询状态的用户 ID，每次最多可传 100 个用户 ID。
