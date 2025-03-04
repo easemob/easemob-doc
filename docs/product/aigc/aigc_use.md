@@ -39,7 +39,7 @@
 | Top-p              | Int         | 是  | 控制生成环节采样范围，参数值越小，生成结果越稳定。关于该参数的更多详情，请参阅 [MiniMax 官方文档](https://platform.minimaxi.com/document/ChatCompletion%20Pro?key=66718f6ba427f0c8a57015ff)。|
 | Temperature        | Int         | 是  | 控制生成环境采样随机性，参数值越小，生成结果越稳定。关于该参数的更多详情，请参阅 [MiniMax 官方文档](https://platform.minimaxi.com/document/ChatCompletion%20Pro?key=66718f6ba427f0c8a57015ff)。 |
 
-1. 查看新创建的机器人。
+3. 查看新创建的机器人。
 
 ![img](/images/aigc/aichatbot_view.png)
 
