@@ -22,7 +22,7 @@
 
 | 参数       | 类型   | 是否必需 | 描述          |
 | :--------- | :----- | :------- | :-------------------------------------------- |
-| `username` | String | 是  | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 10 个数字 0-9；<br/>- “_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
+| `username` | String | 是  | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 10 个数字 0-9；<br/>- “_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 请勿使用大写英文字母 A-Z；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
 | `token` | String | 是 | token 可以通过调用 REST API 获取，即传入用户 ID （或用户 ID + 密码）和 token 有效期参数获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。<br/><Container type="notice" title="注意"><br/>- 你可以在调用 REST API 获取 token 时，传入 `ttl` 参数，设置 token 的有效期。此外，你也可以通过[环信即时通讯云控制台](https://console.easemob.com/user/login/)的**用户认证**页面设置 token 的有效期。该参数值以最新设置为准。<br/>- 环信服务器完全信赖用户 token，为避免业务受影响，你需要确保 token 的安全。</Container> |
 | `password` | String | 是 | 用户的登录密码，长度不可超过 64 个字符。|
 
