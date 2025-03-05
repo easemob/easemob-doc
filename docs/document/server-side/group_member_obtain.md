@@ -79,8 +79,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 | `entities`           | JSON   | 响应实体。  |
 | `data` | JSON Array | 群组成员信息。  |
 | `data.owner`  | String | 群主的用户 ID。例如：{“owner”: “user1”}。   |
-| `data.admin`  | String | 群组管理员的用户 ID。例如：{“admin”: “user2”}。   |
-| `data.member`  | String | 群组普通成员的用户 ID。例如：{“member”: “user3”}。   |
+| `data.member`  | String | 群组管理员和普通成员的用户 ID。例如：{“member”: “user3”}。   |
 | `data.joined_time` | String | 加入群组的时间。 |
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。   |
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长，单位为毫秒。     |
@@ -124,11 +123,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagesize=1000&pagenu
           "joined_time": 1732524850107
     },
     {
-          "admin": "user",
-          "joined_time": 173252433307
-    },
-    {
-          "member": "user3",
+          "member": "user2",
           "joined_time": 173252433456
     }
   ],
@@ -136,7 +131,7 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagesize=1000&pagenu
   "duration": 0,
   "organization": "XXXX",
   "applicationName": "testapp",
-  "count": 3
+  "count": 2
 }
 ```
 
