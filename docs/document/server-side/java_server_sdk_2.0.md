@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.11</version>
+    <version>V1.0.12</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:1.0.11'
+implementation 'com.easemob.im:im-sdk-core:V1.0.12'
 ```
 
 ### 使用
@@ -204,6 +204,13 @@ try {
 ```
 
 ## 更新日志
+
+### V1.0.12 2025-03-04
+
+1. 在 `EMCreateMessage` 中增加 `roamIgnoreUsers` 参数，用于发送消息时设置哪些用户拉漫游消息时拉不到该消息。
+2. 增加 "群组成员解除禁言" 功能。
+
+以上更新内容请到 EMCreateMessage、 GroupApi 中查看。
 
 ### V1.0.11 2024-11-20
 
