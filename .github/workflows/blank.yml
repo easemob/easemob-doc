@@ -48,17 +48,19 @@ jobs:
           TARGET: /data/apps/data/docs-im-beta/ # 服务器目标路径
 
       - name: CDN Refresh HTTPS
-        uses: visionwx/ali-cdn-refresh@main
+        uses: weirui88888/aliyun-cdn-sdk@v1.0.2
+        env:
+          ttl_config: '{"action": "RefreshObjectCaches", "ObjectPath": "https://doc.easemob.com/", "ObjectType": "Directory" }'
         with:
           accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
           accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
-          type: Directory
-          path: https://doc.easemob.com/
+          parameters: ${{env.ttl_config}}
 
       - name: CDN Refresh HTTP
-        uses: visionwx/ali-cdn-refresh@main
+        uses: weirui88888/aliyun-cdn-sdk@v1.0.2
+        env:
+          ttl_config: '{"action": "RefreshObjectCaches", "ObjectPath": "http://doc.easemob.com/", "ObjectType": "Directory" }'
         with:
           accessKeyId: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_ID }}
           accessKeySecret: ${{ secrets.ALIYUN_CDN_ACCESS_KEY_SECRET }}
-          type: Directory
-          path: http://doc.easemob.com/
+          parameters: ${{env.ttl_config}}
