@@ -61,6 +61,9 @@
 }
 
 ```
+:::tip
+从HarmonyOS NEXT Developer Beta2起，无需配置Client ID。可以直接看步骤四。
+:::
 
 ## 步骤四 在 SDK 初始化时配置应用的推送 Client ID
 
