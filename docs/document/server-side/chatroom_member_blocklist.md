@@ -57,7 +57,7 @@
 
 #### HTTP 请求
 
-```
+```http
 GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 ```
 
@@ -129,7 +129,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 #### HTTP 请求
 
-```
+```http
 POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{username}
 ```
 
@@ -204,7 +204,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 #### HTTP 请求
 
-```
+```http
 POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 ```
 
@@ -295,7 +295,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 #### HTTP 请求
 
-```
+```http
 DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{username}
 ```
 
