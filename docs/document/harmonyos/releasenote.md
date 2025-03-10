@@ -2,6 +2,20 @@
 
 <Toc />
 
+## 版本 V1.5.2 Dev 2025-3-10（开发版）
+
+### 新增特性
+
+- 新增 `ChatManager#deleteAllConversationsAndMessages` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- 新增 `ChatClient#isConnected` 方法，用于检查 SDK 是否连接到环信服务器。
+
+### 修复
+
+- 修复设置 `Conversation#searchMessagesByType` 传入 `ContentType#TXT` 时报错的问题。
+- 修复 `不是 TextMessageBody` 时获取消息修改信息崩溃的问题。
+- 修复 `UserInfoManager#updateUserInfo` 传入 `UserInfoType#GENDER` 时，返回类型有误的问题。
+- 修复自动登录时偶现崩溃的问题。
+
 ## 版本 V1.5.1 Dev 2025-1-24（开发版）
 
 ### 修复
