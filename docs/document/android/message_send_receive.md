@@ -98,7 +98,7 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 // `voiceUri` 为语音文件的本地资源标志符，`duration` 为语音时长（单位为秒）。
 EMMessage message = EMMessage.createVoiceSendMessage(voiceUri, duration, toChatUsername);
 // 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
-message.setChatType(ChatType.GroupChat);
+// message.setChatType(ChatType.GroupChat);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
@@ -124,9 +124,8 @@ Uri voiceLocalUri = voiceBody.getLocalUri();
 ```java
 // `imageUri` 为图片本地资源标志符，`false` 为不发送原图（默认超过 100 KB 的图片会压缩后发给对方），若需要发送原图传 `true`，即设置 `original` 参数为 `true`。
 EMMessage message = EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
-// 会话类型，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
-if (chatType == CHATTYPE_GROUP)
-    message.setChatType(ChatType.GroupChat);
+// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
+// message.setChatType(ChatType.GroupChat);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
@@ -192,9 +191,8 @@ Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 // 在应用层获取视频首帧
 String thumbPath = getThumbPath(videoUri);
 EMMessage message = EMMessage.createVideoSendMessage(videoUri, thumbPath, videoLength, toChatUsername);
-// 会话类型，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
-if (chatType == CHATTYPE_GROUP)
-    message.setChatType(ChatType.GroupChat);
+// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
+// message.setChatType(ChatType.GroupChat);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
@@ -248,9 +246,8 @@ Uri localThumbUri = ((EMVideoMessageBody) body).thumbnailLocalUri();
 ```java
 // `fileLocalUri` 为本地资源标志符。
 EMMessage message = EMMessage.createFileSendMessage(fileLocalUri, toChatUsername);
-// 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
-if (chatType == CHATTYPE_GROUP)    
-    message.setChatType(ChatType.GroupChat);
+// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。 
+// message.setChatType(ChatType.GroupChat);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
@@ -299,9 +296,8 @@ Uri fileLocalUri = fileMessageBody.getLocalUri();
 ```java
 // `latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容。
 EMMessage message = EMMessage.createLocationSendMessage(latitude, longitude, locationAddress, toChatUsername);
-// 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
-if (chatType == CHATTYPE_GROUP)    
-    message.setChatType(ChatType.GroupChat);
+// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。 
+//  message.setChatType(ChatType.GroupChat);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
@@ -325,9 +321,9 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ```java
 EMMessage cmdMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
-// 支持单聊、群聊和聊天室，默认为单聊。
+// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
 // 若为群聊，添加下行代码。
-cmdMsg.setChatType(EMMessage.ChatType.GroupChat);
+// cmdMsg.setChatType(EMMessage.ChatType.GroupChat);
 // 若为聊天室，添加下行代码。
 // cmdMsg.setChatType(EMMessage.ChatType.ChatRoom);
 
