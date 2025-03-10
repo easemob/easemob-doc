@@ -22,10 +22,6 @@
 | `org_name`    | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name`    | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `chatroom_id` | String | 是       | 聊天室 ID。  |
-| `username`    | String | 是       | 用户 ID。    |
-| `name`        | String | 是       | 聊天室名称，最大长度为 128 个字符。       |
-| `description` | String | 是       | 聊天室描述，最大长度为 512 个字符。    |
-| `maxusers`    | Int    | 否       | 聊天室成员数上限，创建聊天室时设置。该参数的默认最大值为 10,000，如需调整请联系商务。  |
 
 #### 响应参数
 
@@ -41,13 +37,7 @@
 | `id`                 | String | 聊天室 ID，聊天室唯一标识，由环信即时通讯 IM 服务器生成。    |
 | `entities`           | JSON   | 响应实体。  |
 | `data`               | JSON   | 数据详情。 |
-| `uuid`               | String | 系统内为用户或者应用生成的系统内唯一标识，开发者无需关心。   |
-| `created`            | String | 用户、群组或聊天室的创建时间，Unix 时间戳，单位为毫秒。    |
 | `username`           | String | 用户 ID。     |
-| `affiliations_count` | Int    | 聊天室现有成员总数。     |
-| `affiliations`       | Array  | 聊天室现有成员列表，数组类型，包含 `owner` 和 `member` 元素，即聊天室所有者和聊天室成员（包括聊天室管理员）。例如： “affiliations”:[{“owner”: “13800138001”},{“member”:”v3y0kf9arx”},{“member”:”xc6xrnbzci”}]。 |
-| `owner`              | String | 聊天室所有者的用户 ID。例如：{“owner”: “13800138001”}。     |
-| `member`             | String | 聊天室成员的用户 ID，包括聊天室管理员和普通成员的用户 ID。例如：{“member”:”xc6xrnbzci”}。    |
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。   |
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长，单位为毫秒。     |
 
@@ -59,135 +49,44 @@
 
 为提高项目的安全性，环信使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
-## 添加单个聊天室成员
+## 查询聊天室黑名单
 
-向聊天室添加一个成员。如果待添加的用户在 app 中不存在或已经在聊天室中，则请求失败并返回错误码 400。
+获取指定聊天室的黑名单。
+
+**调用频率**：100 次/秒/App Key
 
 #### HTTP 请求
 
-```http
-POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username}
+```
+GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
 ```
 
 ##### 路径参数
 
-| 参数          | 类型   | 是否必需 | 描述  |
-| :------------ | :----- | :------- | :---------------- |
-| `username`    | String | 是       | 要加入聊天室黑名单的用户 ID。    |
-
-其它参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述       |
-| :-------------- | :----- | :------- | :---------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。      |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数          | 类型   | 描述                                                        |
-| :------------ | :----- | :---------------------------------------------------------- |
-| `data.result` | Bool   | 是否添加成功：<br/> - `true`：是；<br/> - `false`：否。     |
-| `data.action` | String | 执行的操作，`add_member` 表示向聊天室添加成员。             |
-| `data.id`     | String | 聊天室 ID，聊天室唯一标识符，由环信即时通讯 IM 服务器生成。 |
-| `data.user`   | String | 添加到聊天室的用户。                                        |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "post",
-  "application": "8beXXXX02",
-  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1",
-  "entities": [],
-  "data": {
-    "result": true,
-    "action": "add_member",
-    "id": "66XXXX33",
-    "user": "user1"
-  },
-  "timestamp": 1542554038353,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | resource_not_found | grpID XX does not exist! | 聊天室 ID 不存在。 | 传入存在的合法的聊天室 ID。 |
-| 404     | resource_not_found | username XXX doesn't exist! | 要添加的用户 ID 不存在。 | 传入存在的用户 ID。 |
-| 403     | forbidden_op | can not join this group, reason:user XXX has joined too many chatrooms! | 要添加的用户已加入了太多的聊天室。 | 传入其他用户 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-## 批量添加聊天室成员
-
-向聊天室添加多位用户，一次性最多可添加 60 位用户。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
+具体参数及详细说明请参见[公共参数](#公共参数)。
 
 ##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                |
 | :-------------- | :----- | :------- | :----------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。|
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-##### 请求 body
-
-| 参数        | 类型  | 是否必需 | 描述                 |
-| :---------- | :---- | :------- | :------------------- |
-| `usernames` | Array | 是       | 添加的用户 ID 数组，每次最多可传 60 个用户 ID。 |
 
 #### HTTP 响应
 
 ##### 响应 body
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+如果返回的HTTP状态码为 `200`，表示请求成功，`data` 响应体中字段包含以下参数。
 
-| 参数              | 类型   | 描述                                                                  |
-| :---------------- | :----- | :-------------------------------------------------------------------- |
-| `data.newmembers` | Array  | 添加成功的用户 ID 数组。                                              |
-| `data.action`     | String | 执行的操作内容。在该响应中，该字段的值为 `add_member`，表示添加用户。 |
-| `data.id`         | String | 聊天室 ID。                                                           |
 
-其他字段及描述详见 [公共参数](#公共参数)。
+| 参数 | 类型   | 描述     |
+| :------ | :----- | :--------- |
+| `data`  | Array | 聊天组黑名单中的用户 ID。   |
+| `count` | Int | 聊天组黑名单中的用户数量。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
+其他字段及说明请参见[公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码不是 200，则表示请求失败，可能的原因请参见 [错误码](#错误码)。
 
 #### 示例
 
@@ -196,274 +95,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
-   "usernames": [
-     "user1","user2"
-   ]
- }' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "post",
-  "application": "8beXXXX02",
-  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users",
-  "entities": [],
-  "data": {
-    "newmembers": ["user1", "user2"],
-    "action": "add_member",
-    "id": "66XXXX33"
-  },
-  "timestamp": 1542554537237,
-  "duration": 9,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | invalid_parameter | addMembers: addMembers number more than maxSize : 60 | 批量添加数量达到限制（60）。 | 将添加的成员数量调整在限制（60）以下。 |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | resource_not_found | grpID XX does not exist! | 聊天室 ID 不存在。 | 传入存在的合法的聊天室 ID。 |
-| 404     | resource_not_found | username XXX doesn't exist! | 要添加的用户 ID 不存在。 | 传入存在的用户 ID。 |
-| 403     | forbidden_op | can not join this group, reason:user XXX has joined too many chatrooms! | 要添加的用户已加入了太多的聊天室。 | 传入其他用户 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-## 移除单个聊天室成员
-
-从聊天室移除一个成员。如果被移除用户不在聊天室中或聊天室不存在，将返回错误。
-
-#### HTTP 请求
-
-```http
-DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username}
-```
-
-##### 路径参数
-
-| 参数          | 类型   | 是否必需 | 描述  |
-| :------------ | :----- | :------- | :---------------- |
-| `username`    | String | 是       | 要移出聊天室黑名单的用户 ID。    |
-
-其它参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述       |
-| :-------------- | :----- | :------- | :----------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。      |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数          | 类型   | 描述                           |
-| :------------ | :----- | :------------------------------------- |
-| `data.result` | Bool   | 是否成功移出聊天室成员：<br/> - `true`：是；<br/> - `false`：否。          |
-| `data.action` | String | 执行的操作。在该响应中，该字段的值为 `remove_member`，表示移除聊天室成员。 |
-| `data.user`   | String | 用户 ID。                                                                  |
-| `data.id`     | String | 聊天室 ID。                                                                |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "delete",
-  "application": "8beXXXX02",
-  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1",
-  "entities": [],
-  "data": {
-    "result": true,
-    "action": "remove_member",
-    "user": "user1",
-    "id": "66XXXX33"
-  },
-  "timestamp": 1542555744726,
-  "duration": 1,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 400     | forbidden_op | users [XX] are not members of this group! | 用户不在聊天室中。 | 传入聊天室中成员的用户 ID。 |
-| 404     | resource_not_found | grpID XX does not exist! | 聊天室 ID 不存在。 | 传入存在的合法的聊天室 ID。 |
-| 404     | resource_not_found | username XXX doesn't exist! | 要删除的用户 ID 不存在。 | 传入聊天室中成员的用户 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-## 批量移除聊天室成员
-
-从聊天室移除多个成员，单次请求最多可移除 100 个成员。如果被移除用户不在聊天室中或聊天室不存在，将返回错误。
-
-#### HTTP 请求
-
-```http
-DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{usernames}
-```
-
-##### 路径参数
-
-| 参数       | 类型   | 是否必需 | 描述         |
-| :--------- | :----- | :------- | :------------------ |
-| `username` | String | 是 | 要移除的一个或多个用户 ID。每次最多可传 100 个用户 ID，用户 ID 之间用英文逗号（","）分隔，逗号在 URL 中转义为 "%2C"。|
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :-------------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。       |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数          | 类型   | 描述                                                                  |
-| :------------ | :----- | :--------------------------------------- |
-| `data` | JSON Array | 响应数据。|
-|  - `result` | Bool   | 是否成功批量移除聊天室成员：<br/> - `true`：是；<br/> - `false`：否。 |
-|  - `action` | String | 执行的操作。在该响应中，该字段的值为 `remove_member`，表示移除成员。  |
-|  - `reason` | String | 移除失败的原因。                                                      |
-|  - `user`   | String | 已删除成员的用户 ID 列表。                                            |
-|  - `id`     | String | 聊天室 ID。                                                           |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1%2Cuser2'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "delete",
-  "application": "8beXXXX02",
-  "uri": "https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users/user1%2Cuser2",
-  "entities": [],
-  "data": [
-    {
-      "result": false,
-      "action": "remove_member",
-      "reason": "user: user1 doesn't exist in group: 66XXXX33",
-      "user": "user1",
-      "id": "66XXXX33"
-    },
-    {
-      "result": true,
-      "action": "remove_member",
-      "user": "user2",
-      "id": "66XXXX33"
-    }
-  ],
-  "timestamp": 1542556177147,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | invalid_parameter | kickMember: kickMembers number more than maxSize : 60 | 批量删除数量达到限制（60）。 | 将传入的成员数量调整到限制（60）以下。 |
-| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 400     | forbidden_op | users [XX] are not members of this group! | 用户不在聊天室中。 | 传入聊天室中成员的用户 ID。 |
-| 404     | resource_not_found | grpID XX does not exist! | 聊天室 ID 不存在。 | 传入存在的合法的聊天室 ID。 |
-| 404     | resource_not_found | username XXX doesn't exist! | 要删除的用户 ID 不存在。 | 传入聊天室中成员的用户 ID。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-## 获取聊天室管理员列表
-
-获取聊天室管理员列表的接口。
-
-#### HTTP 请求
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/admin
-```
-
-##### 路径参数
-
-参数及描述详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述        |
-| :-------------- | :----- | :------- | :--------------------------- |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。          |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数   | 类型  | 描述                       |
-| :----- | :---- | :------------------------- |
-| `data` | Array | 聊天室管理员用户 ID 数组。 |
-
-其他字段及描述详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -X GET https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -H 'Authorization: Bearer <YourAppToken>'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users'
 ```
 
 ##### 响应示例
@@ -471,16 +103,348 @@ curl -X GET https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -H 'Authorization: B
 ```json
 {
   "action": "get",
-  "application": "52XXXXf0",
-  "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin",
+  "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
+  "uri": "http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users",
   "entities": [],
-  "data": ["user1"],
-  "timestamp": 1489073361210,
+  "data": [
+    "user2",
+    "user3"
+  ],
+  "timestamp": 1543466293681,
   "duration": 0,
   "organization": "XXXX",
-  "applicationName": "testapp",
-  "count": 1
+  "applicationName": "XXXX",
+  "count": 2
 }
+
+```
+
+## 将单个用户添加到聊天室黑名单
+
+将指定用户添加到聊天室黑名单。一旦添加到聊天室黑名单，用户将无法再加入聊天室，既不能在聊天室中发送消息，也不能接收消息。
+
+不能将聊天室所有者添加到聊天室黑名单。
+
+**调用频率**：100 次/秒/App Key
+
+#### HTTP 请求
+
+```
+POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{username}
+```
+
+##### 路径参数
+
+| 参数            | 类型   | 是否必需 | 描述                |
+| :-------------- | :----- | :------- | :----------------------- |
+| `username`  | String | 是       | 要添加到聊天室黑名单中的用户 ID。|
+
+其他字段及说明请参见[公共参数](#公共参数)。
+
+##### 请求 header
+
+| 参数            | 类型   | 是否必需 | 描述                |
+| :-------------- | :----- | :------- | :----------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。|
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的HTTP状态码为 `200`，表示请求成功，响应体中的 `data` 字段包含如下参数。
+
+| 参数 | 类型   | 描述     |
+| :------ | :----- | :--------- |
+| `result` | Bool | 用户是否成功添加至聊天室黑名单。<br/> - `true`：是 <br/> - `false`：否 |
+| `user`   | String   | 已添加到聊天室黑名单的用户名。                |
+
+具体参数及详细说明请参见[公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码不是`200`，则表示请求失败。您可以参考[错误码](#错误码)了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users/user1'
+```
+
+##### 响应示例
+
+```json
+{
+  "action": "post",
+  "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
+  "uri": "http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users/user1",
+  "entities": [],
+  "data": {
+    "result": true,
+    "action": "add_blocks",
+    "user": "user1",
+    "chatroomid": "XXXX"
+  },
+  "timestamp": 1542539577124,
+  "duration": 27,
+  "organization": "XXXX",
+  "applicationName": "XXXX"
+}
+
+```
+
+## 将多个用户添加到聊天室黑名单
+
+将多个用户添加到聊天室黑名单。一旦被添加到聊天室黑名单，用户将无法再加入聊天室，既不能在聊天室中发送消息，也不能接收消息。
+
+每次最多可添加 60 位用户到聊天室黑名单，但不可将聊天室所有者添加到聊天室黑名单。
+
+**调用频率**：100 次/秒/App Key
+
+#### HTTP 请求
+
+```
+POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users
+```
+
+##### 路径参数
+
+参数及详细说明请参见[公共参数](#公共参数)。
+
+##### 请求 header
+
+| 参数            | 类型   | 是否必需 | 描述                |
+| :-------------- | :----- | :------- | :----------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。|
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+##### 请求 body
+
+| 参数 | 类型   | 描述     |
+| :------ | :----- | :--------- |
+| `usernames` | Array | 要添加到聊天室黑名单的用户名数组。每次最多可以指定 60 个用户名，以逗号 (,) 分隔。 |
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的HTTP状态码为 `200`，表示请求成功，响应体中的 `data` 字段包含如下参数。
+
+| 参数 | 类型   | 描述     |
+| :------ | :----- | :--------- |
+| `result` | Boolean | 用户是否成功添加至聊天室黑名单。<br/> - `true`： 是<br/> - `false`：否 |
+| `reason` | String   | 用户无法加入聊天室黑名单的原因。    |
+| `user`   | String   | 成功添加到聊天室黑名单的用户 ID。    |
+
+具体参数及详细说明请参见[公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码不是`200`，则表示请求失败。您可以参考[错误码](#错误码)了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{  
+   "usernames": [  
+     "user3","user4"  
+   ]  
+ }' 'http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users'
+
+```
+
+##### 响应示例
+
+```json
+{
+  "action": "post",
+  "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
+  "uri": "http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users",
+  "entities": [],
+  "data": [
+    {
+      "result": false,
+      "action": "add_blocks",
+      "reason": "user: user3 doesn't exist in chatroom: XXXX",
+      "user": "user3",
+      "chatroomid": "XXXX"
+    },
+    {
+      "result": true,
+      "action": "add_blocks",
+      "user": "user4",
+      "chatroomid": "XXXX"
+    }
+  ],
+  "timestamp": 1542540095540,
+  "duration": 16,
+  "organization": "XXXX",
+  "applicationName": "XXXX"
+}
+
+```
+
+## 从聊天室黑名单移除单个用户
+
+从聊天室黑名单中删除指定用户。要将黑名单中的用户重新添加回聊天室，你需要先将该用户从黑名单中移除。
+
+**调用频率**：100 次/秒/App Key
+
+#### HTTP 请求
+
+```
+DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{username}
+```
+
+##### 路径参数
+
+具体参数及详细说明请参见[公共参数](#公共参数)。
+
+##### 请求 header
+
+| 参数            | 类型   | 是否必需 | 描述                |
+| :-------------- | :----- | :------- | :----------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。|
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的HTTP状态码为`200`，表示请求成功，响应体中的data字段包含如下参数。
+
+| 参数 | 类型   | 描述     |
+| :------ | :----- | :--------- |
+| `result` | Boolean | 用户是否成功从聊天室黑名单中删除。<br/> - `true`：是 <br/> - `false`：否 |
+| `user`   | String   | 该用户 ID 已从聊天室黑名单中删除。|
+
+具体参数及详细说明请参见[公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码不是`200`，则表示请求失败。你可以参考[错误码](#错误码)了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users/user1'
+
+```
+
+##### 响应示例
+
+```json
+{
+  "action": "delete",
+  "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
+  "uri": "http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users/user1",
+  "entities": [],
+  "data": {
+    "result": true,
+    "action": "remove_blocks",
+    "user": "user1",
+    "chatroomid": "XXXX"
+  },
+  "timestamp": 1542540470679,
+  "duration": 45,
+  "organization": "XXXX",
+  "applicationName": "XXXX"
+}
+
+```
+
+## 从聊天室黑名单移除多个用户
+
+从聊天室黑名单中移除多个指定用户。要将黑名单中的用户重新添加回聊天室，你需要先将这些用户从黑名单中移除。每次最多可以从聊天室黑名单中移除 60 个用户。
+
+**调用频率**：100 次/秒/App Key
+
+#### HTTP请求
+
+```http
+DELETE https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{usernames}
+
+```
+
+##### 路径参数
+
+参数及详细说明请参见[公共参数](#公共参数)。
+
+##### 请求 header
+
+| 参数            | 类型   | 是否必需 | 描述                |
+| :-------------- | :----- | :------- | :----------------------- |
+| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。|
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+##### 请求 header
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应体中的 `data` 字段包含如下参数。
+
+| 参数            | 类型   | 是否必需 | 描述             |
+| :-------------- | :----- | :------- | :--------------------------- |
+| `username` | String | 是   | 要从聊天室黑名单中删除的用户 ID。每次最多可以指定 60 个用户 ID，以逗号 (,) 分隔。 |
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的 HTTP 状态码为`200`，表示请求成功，响应体中的 `data` 字段包含如下参数。
+
+| 参数 | 类型   | 描述     |
+| :------ | :----- | :--------- |
+| `result` | Bool | 用户是否成功从聊天室黑名单中删除。<br/> - `true`： 是<br/> - `false`：否 |
+| `user`   | String   | 从聊天室黑名单中删除的用户 ID。   |
+
+具体参数及详细说明请参见[公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码不是`200`，则表示请求失败。你可以参考[错误码](#错误码)了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users/user1%2Cuser2'
+
+```
+
+##### 响应示例
+
+```json
+{
+  "action": "delete",
+  "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
+  "uri": "http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users/user1%2Cuser2",
+  "entities": [],
+  "data": [
+    {
+      "result": true,
+      "action": "remove_blocks",
+      "user": "user1",
+      "chatroomid": "XXXX" 
+    },
+    {
+      "result": true,
+      "action": "remove_blocks",
+      "user": "user2",
+      "chatroomid": "XXXX"
+    }
+  ],
+  "timestamp": 1542541014655,
+  "duration": 29,
+  "organization": "XXXX",
+  "applicationName": "XXXX"
+}
+
 ```
 
 #### 错误码
@@ -489,7 +453,9 @@ curl -X GET https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/admin -H 'Authorization: B
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
+| 400     | invalid_parameter | removeBlacklist: list size more than max limit : 60 | 批量删除超过上限 60。 | 调整要移除的数量在限制以下。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | resource_not_found | grpID XX does not exist! | 聊天室 ID 不存在。 | 传入存在的合法的聊天室 ID。 |
+| 403     | forbidden_op | users [XX] are not members of this group! | 要移除黑名单的用户 ID 不在聊天室中。 | 传入聊天室黑名单中的成员的用户 ID。 |
+| 404     | resource_not_found | grpID XX does not exist! | 聊天室不存在。 | 使用合法的聊天室 ID。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
