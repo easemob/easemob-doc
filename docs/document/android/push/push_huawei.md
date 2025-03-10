@@ -27,8 +27,8 @@
 | `应用包名`     | String | 是     | 填写华为 App package name。   |
 | `项目 ID`      | String | 否     | 填写项目 ID。                     |
 | `Category`     | String |  否    | 选择 category 类型。                       |
-| `Action`       | String |  否    | 选择点击通知后的动作。                     |
-| `ActivityClass`| String | 否     | 填写 ActivityClass。                      |
+| `Action`       | String |  否    | 选择点击通知后的动作。组件定义的 intent-filter action name。                     |
+| `ActivityClass`| String | 否     | 角标显示，应用入口类路径。示例：com.easemob.MainActivity。                    |
 
 ## **步骤三 集成华为推送 SDK**
 
