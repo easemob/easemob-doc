@@ -23,11 +23,10 @@
 
 - Xcode 12.4 或以上版本，包括命令行工具;
 - iOS 10 或以上版本;
-- Android SDK API 等级 21 或以上版本；
+- Android SDK API 等级 23 或以上版本；
 - Android Studio 4.0 或以上版本，包括 JDK 1.8 或以上版本;
 - CocoaPods 包管理工具;
-- Flutter 2.10 或以上版本;
-- Dart 2.16 或以上版本;
+- Flutter 3.3.0 或以上版本;
 
 配置开发或者运行环境如果遇到问题，请参考 [这里](https://docs.flutter.dev/get-started/install)。
 
@@ -50,7 +49,7 @@ flutter create quick_start
 ```gradle
 android {
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
     }
 }
 ```
@@ -72,9 +71,9 @@ android {
 
 ### 设置 iOS
 
-iOS 需要 iOS 10.0 以上版本，
+iOS 需要 iOS 11.0 以上版本，
 
-打开文件 `quick_start/ios/Runner.xcodeproj`，修改：`TARGETS -> General -> Deployment info`, 设置 iOS 版本为 10.0。
+打开文件 `quick_start/ios/Runner.xcodeproj`，修改：`TARGETS -> General -> Deployment info`, 设置 iOS 版本为 11.0。
 
 ### 集成 SDK
 
@@ -419,6 +418,13 @@ void _addChatListener() {
                 );
               }
               break;
+            case MessageType.COMBINE:
+              {
+                _addLogToConsole(
+                  "receive combine message, from: ${msg.from}",
+                );
+              }
+              break;  
             case MessageType.CMD:
               {
                 // 当前回调中不会有 CMD 类型消息，CMD 类型消息通过 `EMChatEventHandler#onCmdMessagesReceived` 回调接收
@@ -442,7 +448,7 @@ void dispose() {
   // 移除消息状态监听
   EMClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
   // 移除收消息监听
-  EMClient.getInstance.chatManager.removeEventHandle("UNIQUE_HANDLER_ID");
+  EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
   super.dispose();
 }
 ```
