@@ -246,6 +246,21 @@ let option = {
 conn.unmuteChatRoomMember(option).then(res => console.log(res))
 ```
 
+#### 检查自己是否在聊天室禁言列表
+
+聊天室成员可以调用 `isInChatRoomMutelist` 方法查看自己是否在聊天室禁言列表。
+
+```javascript
+conn
+    .isInChatRoomMutelist({ chatRoomId: 'chatRoomId' })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+```
+
 #### 开启全员禁言
 
 仅聊天室所有者和管理员可调用 `disableSendChatRoomMsg` 方法设置全员禁言。全员禁言开启后不会在一段时间内自动取消禁言，需要调用 `enableSendChatRoomMsg` 方法取消全员禁言。

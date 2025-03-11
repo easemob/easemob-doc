@@ -225,7 +225,7 @@ ChatClient.getInstance().chatroomManager()?.unmuteChatroomMembers(chatroomId, me
 
 #### 获取聊天室禁言列表
 
-仅聊天室所有者和管理员可调用 `fetchChatroomMutes` 获取聊天室禁言列表。
+仅聊天室所有者和管理员可调用 `fetchChatroomMutes` 方法获取聊天室禁言列表。
 
 示例代码如下：
 
@@ -234,6 +234,19 @@ ChatClient.getInstance().chatroomManager()?.fetchChatroomMutes(chatroomId, pageN
     // success logic
 });
 ```
+
+#### 检查自己是否在聊天室禁言列表
+
+聊天室成员可以调用 `checkIfInMutelist` 方法查看自己是否在聊天室禁言列表。
+
+```typescript
+ChatClient.getInstance().chatroomManager()?.checkIfInMutelist(this.roomId)
+  .then((result) => {
+    // success logic
+  }).catch((error: ChatError) => {
+    // failure logic
+  });
+ ``` 
 
 ### 开启和关闭聊天室全员禁言
 
