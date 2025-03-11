@@ -253,6 +253,29 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unMuteChatRoomMem
 Map<String, Long> memberMap =  EMClient.getInstance().chatroomManager().fetchChatRoomMuteList(chatRoomId, pageNum, pageSize);
 ```
 
+#### 检查自己是否在聊天室禁言列表
+
+聊天室成员可以调用 `asyncCheckIfInMuteList` 方法查看自己是否在聊天室禁言列表。
+
+```java
+EMClient.getInstance().chatroomManager().asyncCheckIfInMuteList(chatRoomId, new EMValueCallBack<Boolean>() {
+            @Override
+            public void onSuccess(Boolean inMuteList) {
+                if(inMuteList) {
+                    EMLog.d( TAG,"you are in the mutelist of chatroom");
+                }else{
+                    EMLog.d( TAG,"you are not in the mutelist of chatroom");
+                }
+
+            }
+
+            @Override
+            public void onError(int error, String errorMsg) {
+                EMLog.d( TAG,"asyncCheckIfInMuteList error:"+error+" errorMsg:"+errorMsg);
+            }
+        });
+```
+
 ### 开启和关闭聊天室全员禁言
 
 为了快捷管理聊天室发言，聊天室所有者和管理员可以开启和关闭聊天室全员禁言。全员禁言和单独的成员禁言不冲突，设置或者解除全员禁言，原禁言列表并不会变化。

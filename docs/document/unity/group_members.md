@@ -287,6 +287,21 @@ SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: ne
 ));
 ```
 
+#### 检查自己是否在群组禁言列表
+
+群成员可以调用 `CheckIfInGroupMuteList` 方法查看自己是否在群组禁言列表中。
+
+```csharp
+SDKClient.Instance.GroupManager.CheckIfInGroupMuteList(groupId, new ValueCallBack<bool>(
+   onSuccess: (ret) => {
+
+   },
+   onError: (code, desc) => {
+
+   }
+));
+```
+
 ### 开启和关闭群组全员禁言
 
 #### 开启群组全员禁言

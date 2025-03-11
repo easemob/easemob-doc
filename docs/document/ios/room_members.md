@@ -237,6 +237,20 @@ EMError *error = nil;
 NSArray<NSString *> * muteMembers = [[EMClient sharedClient].roomManager getChatroomMuteListFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
 ```
 
+#### 检查自己是否在聊天室禁言列表
+
+聊天室成员可以调用 `isMemberInMuteListFromServerWithChatroomId` 方法查看自己是否在聊天室禁言列表。
+
+```Objective-C
+[EMClient.sharedClient.roomManager isMemberInMuteListFromServerWithChatroomId:@"roomId" completion:^(BOOL inMuteList, EMError * _Nullable aError) {
+        if (aError == nil) {
+            if (inMuteList) {
+                NSLog(@"You are in the mute list of room");
+            }
+        }
+    }];
+```
+
 ### 开启和关闭聊天室全员禁言
 
 为了快捷管理聊天室发言，聊天室所有者和管理员可以开启和关闭聊天室全员禁言。全员禁言和单独的成员禁言不冲突，设置或者解除全员禁言，原禁言列表并不会变化。

@@ -429,6 +429,29 @@ EMClient.getInstance().groupManager().unMuteGroupMembers(String groupId, List<St
 EMClient.getInstance().groupManager().fetchGroupMuteList(String groupId, int pageNum, int pageSize);
 ```
 
+#### 检查自己是否在群组禁言列表
+
+群成员可以调用 `asyncCheckIfInMuteList` 方法查看自己是否在群组禁言列表中。
+
+```java
+EMClient.getInstance().groupManager().asyncCheckIfInMuteList(groupId, new EMValueCallBack<Boolean>() {
+            @Override
+            public void onSuccess(Boolean inMuteList) {
+                if(inMuteList) {
+                    EMLog.d( TAG,"you are in the mutelist of group");
+                }else{
+                    EMLog.d( TAG,"you are not in the mutelist of group");
+                }
+
+            }
+
+            @Override
+            public void onError(int error, String errorMsg) {
+                EMLog.d( TAG,"asyncCheckIfInMuteList error:"+error+" errorMsg:"+errorMsg);
+            }
+        });
+```
+
 #### 开启群组全员禁言
 
 仅群主和群管理员可以调用 `muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unmuteAllMembers` 方法解除全员禁言。

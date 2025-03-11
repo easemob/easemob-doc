@@ -421,6 +421,20 @@ do {
                        completion:nil];
 ```
 
+#### 检查自己是否在群组禁言列表
+
+群成员可以调用 `isMemberInMuteListFromServerWithGroupId` 方法查看自己是否在群组禁言列表中。
+
+```objectivec
+[EMClient.sharedClient.groupManager isMemberInMuteListFromServerWithGroupId:@"groupId" completion:^(BOOL inMuteList, EMError * _Nullable aError) {
+        if (aError == nil) {
+            if (inMuteList) {
+                NSLog(@"You are in the mute list of group");
+            }
+        }
+    }];
+```
+
 #### 开启群组全员禁言
 
 仅群主和群管理员可以调用 `muteAllMembersFromGroup` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unmuteAllMembersFromGroup` 方法解除全员禁言。

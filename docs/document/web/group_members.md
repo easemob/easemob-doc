@@ -385,6 +385,22 @@ let option = {
 conn.unmuteGroupMember(option).then(res => console.log(res))
 ```
 
+#### 检查自己是否在群组禁言列表
+
+群成员可以调用 `asyncCheckIfInMuteList` 方法查看自己是否在群组禁言列表中。
+
+```javascript
+conn
+    .isInGroupMutelist({ groupId: 'groupId' })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+```
+
 #### 获取群组禁言列表
 
 仅群主和群管理员可以调用 `getGroupMutelist` 方法获取群组的禁言列表。
