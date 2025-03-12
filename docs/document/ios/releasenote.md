@@ -2,6 +2,22 @@
 
 <Toc />
 
+## 版本 V4.13.0 Dev 2025-3-12（开发版）
+
+### 优化
+
+- [IM SDK] 发送后修改消息接口 [EMChatManager#asyncModifyMessage](message_modify.html) 支持修改各类消息：
+  - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
+  - 命令消息：不支持修改。
+- [IM SDK] 优化重连逻辑，默认切换重连的地址。
+- [IM SDK] 改进调用 `applicationWillEnterForeground` 的逻辑，通过发送 ping 消息触发重连。
+- [IM SDK] 禁用 `EMChatMessage`、`EMConversation`、`EMMessageBody` 的默认构造函数，防止空指针导致的 crash。
+- [EaseIM App (Demo)] 增加反诈提示 UI。
+
+### 修复
+- [IM SDK]修复调用 [EMChatManager#getConversationsFromServerWithCursor](conversation_list.html#从服务器分页获取会话列表) 方法拉取到的会话最新一条消息不包含reactions和翻译信息的问题。
+
 ## 版本 V4.12.0 Dev 2025-1-10（开发版）
 
 ### 新增特性
