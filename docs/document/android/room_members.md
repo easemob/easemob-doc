@@ -55,7 +55,7 @@ public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cur
 EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
 ```
 
-退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `com.hyphenate.chat.EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
+退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
 
 示例代码如下：
 

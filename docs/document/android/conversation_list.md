@@ -93,7 +93,7 @@ EMClient.getInstance().chatManager().asyncFilterConversationsFromDB(new EMCustom
 
  | 选项 | 描述    | 
  | :--------- | :----- |
- | `com.hyphenate.chat.EMOptions#setDeleteMessagesAsExitChatRoom`   | 通过该选项确定获取本地会话时是否返回聊天室会话。默认情况下，只包含单聊和群组聊天会话。<br/> - `true`：离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。<br/> - `false`：离开聊天室时保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。| 
+ | `EMOptions#setDeleteMessagesAsExitChatRoom`   | 通过该选项确定获取本地会话时是否返回聊天室会话。默认情况下，只包含单聊和群组聊天会话。<br/> - `true`：离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。<br/> - `false`：离开聊天室时保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。| 
  |`EMOptions#setLoadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `true`：返回空会话。<br/> - `false`：不包含空会话。| 
 
 ### 一次性获取本地所有会话

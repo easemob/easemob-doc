@@ -79,9 +79,9 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 ```java
 String ext= "your ext info";
 boolean leaveOtherRooms=true;
-EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomID,leaveOtherRooms,ext, new EMValueCallBack<com.hyphenate.chat.EMChatRoom>() {
+EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomID,leaveOtherRooms,ext, new EMValueCallBack<EMChatRoom>() {
     @Override
-    public void onSuccess(com.hyphenate.chat.EMChatRoom value) {
+    public void onSuccess(EMChatRoom value) {
         EMLog.i(TAG, "joinChatRoom onSuccess value:" + value);
     }
 

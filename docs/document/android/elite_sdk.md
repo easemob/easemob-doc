@@ -1,13 +1,32 @@
 # 精简版 SDK 
 
-精简版 SDK 4.2.0 支持 Android 和 iOS 平台，包含基础的单聊和聊天室功能，适用于 SDK 包体积尽量小、仅需基础收发消息功能、而无需离线推送通知等功能的情况。
+精简版 SDK 4.2.3-lite 支持 Android 和 iOS 平台，包含基础的单聊和聊天室功能，适用于 SDK 包体积尽量小、仅需基础收发消息功能、而无需离线推送通知等功能的情况。
 
 精简版 SDK 对应用的体积增量不大，android 为 1.11 MB，iOS 为 1.09 MB。
 
-要下载 Android 端精简版 SDK，点击[这里](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/SDK-mini/easemob-sdk-4.2.0-lite.zip)。
+- 本地依赖：
+
+点击[这里](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/SDK-mini/easemob-sdk-4.2.3-lite.zip)下载 Android 端精简版 SDK。
+
+解压后将 libs 文件夹下的相关 so 库及 jar 包拷贝到项目工程里集成即可。
+
+- 远端依赖：
+  
+Android 端的 `app/build.gradle.kts` 文件中添加如下依赖：
+
+```gradle
+dependencies {
+    ...
+    // version 请替换为具体版本号，如：4.2.3-lite 。
+    implementation("io.hyphenate:hyphenate-chat:version")
+}
+```
+
+若要查看最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/hyphenate-chat/versions)。后缀为 `-lite` 的版本即为精简版 SDK。
 
 :::tip
-精简版 SDK 无本地存储，可以升级为标准版 SDK，但标准版不能降级为精简版。
+1. 精简版 SDK 无本地存储，可以升级为标准版 SDK，但标准版不能降级为精简版。
+2. 精简版不支持 TLS。
 :::
 
 ## 功能列表
