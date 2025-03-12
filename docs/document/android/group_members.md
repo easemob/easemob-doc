@@ -187,7 +187,7 @@ EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userL
 
 你可以调用 `EMGroupManager#asyncSetGroupMemberAttributes` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。
 
-设置后，群内其他成员会收到 `com.hyphenate.EMGroupChangeListener#onGroupMemberAttributeChanged` 事件。
+设置后，群内其他成员会收到 `EMGroupChangeListener#onGroupMemberAttributeChanged` 事件。
 
 示例代码如下：
 
