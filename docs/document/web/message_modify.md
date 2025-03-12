@@ -41,7 +41,7 @@
 
 你可以调用 `modifyMessage` 方法修改已经发送成功的消息。除消息体和消息扩展属性 `ext` 外，该消息的其他信息（例如，消息 ID、消息发送方、接收方）均不会发生变化。
 
-SDK 4.13.0 及以后版本中修改消息成功后会返回 `modifiedInfo` 字段，不再返回 `message` 字段。你可以从`res.modifiedInfo` 中获取消息的最新修改时间（`operationTime`）、最新修改的操作者（`operatorId`）以及消息修改次数（`operationCount`）。
+SDK 4.13.0 及以后版本中修改消息成功后会返回 `modifiedInfo` 字段。你可以从`res.modifiedInfo` 中获取消息的最新修改时间（`operationTime`）、最新修改的操作者（`operatorId`）以及消息修改次数（`operationCount`）。
 
 消息修改后，消息的接收方会收到 `onModifiedMessage` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群组和聊天室会话，除了修改消息的用户，群组/聊天室内的其他成员均会收到该事件。
 

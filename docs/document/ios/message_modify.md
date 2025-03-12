@@ -12,7 +12,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 实现消息修改。
+环信即时通讯 IM 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_chat_manager-p.html#a1eed319dc3627aff8c44d65502d8c875) 和 [EMChatManagerDelegate](https://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_chat_manager_delegate-p.html) 实现消息修改。
 
 ### 消息修改流程
 
@@ -39,7 +39,7 @@
 
 ## 实现方法
 
-你可以调用 `EMChatManager#asyncModifyMessage` 方法修改已经发送成功的消息。该方法会同时更新服务器和本地的消息。对于修改后的消息，消息体中除了内容变化，还新增了修改者的用户 ID、修改时间和修改次数属性。除消息体和消息扩展属性 `ext` 外，该消息的其他信息（例如，消息 ID、消息发送方、接收方）均不会发生变化。
+你可以调用 `EMChatManager#modifyMessage` 方法修改已经发送成功的消息。该方法会同时更新服务器和本地的消息。对于修改后的消息，消息体中除了内容变化，还新增了修改者的用户 ID、修改时间和修改次数属性。除消息体和消息扩展属性 `ext` 外，该消息的其他信息（例如，消息 ID、消息发送方、接收方）均不会发生变化。
 
 **一条消息默认最多可修改 10 次。**
 
