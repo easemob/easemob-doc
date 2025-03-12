@@ -1,6 +1,6 @@
 # 修改消息
 
-消息修改后，声网服务器会按照[发送后回调规则](callback_postsending.html#发送后回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看修改后的消息，进行数据同步。
+消息修改后，环信服务器会按照[发送后回调规则](callback_postsending.html#发送后回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看修改后的消息，进行数据同步。
 
 :::tip
 1. 如果需要消息修改事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置发送后回调规则](callback_postsending.html#发送后回调规则)。
