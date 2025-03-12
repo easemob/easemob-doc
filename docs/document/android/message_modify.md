@@ -35,7 +35,7 @@
 
 **一条消息默认最多可修改 10 次。**
 
-```
+```java
     EMTextMessageBody newMessageBody=new EMTextMessageBody("new content");
 
     Map<String, Object> newExt = new HashMap<>();
@@ -64,7 +64,7 @@
 若通过 RESTful API 修改自定义消息，消息的接收方也通过 `EMMessageListener#onMessageContentChanged` 事件接收修改后的自定义消息。
 :::
 
-```
+```java
     EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
         @Override
         public void onMessageReceived(List<EMMessage> messages) {

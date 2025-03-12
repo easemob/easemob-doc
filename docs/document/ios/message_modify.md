@@ -35,7 +35,7 @@
 
 **一条消息默认最多可修改 10 次。**
 
-```
+```objectivec
     EMTextMessageBody* newMessageBody = [[EMTextMessageBody alloc] initWithText:@"new  content"];
     NSDictionary* newExt = @{@"newKey": @"newValue"};
     //如果不想修改消息内容(body)，newMessageBody参数可以传入nil
@@ -52,7 +52,7 @@
 若通过 RESTful API 修改自定义消息，消息的接收方也通过 `EMChatManagerDelegate#onMessageContentChanged` 事件接收修改后的自定义消息。
 :::
 
-```
+```objectivec
 // 添加监听
 [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 
@@ -60,7 +60,7 @@
 - (void)onMessageContentChanged:(EMChatMessage *)message operatorId:(NSString *)operatorId operationTime:(NSUInteger)operationTime {
     // 新的消息体
     EMMessageBody* newBody = message.body;
-    // 新的ext
+    // 新的 ext
     NSDictionary* newExt = message.ext;
     // 修改次数
     NSInteger operatorCount = message.body.operatorCount;
