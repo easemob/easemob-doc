@@ -7,10 +7,10 @@
 ### 新增特性
 
 - [IM SDK] 发送后修改消息接口 [modifyMessage](message_modify.html) 支持修改各类消息：
- - 文本消息：支持修改 `msg` 和 `ext` 字段。
- - 自定义消息：支持修改 `customEvent` 、`customExts` 和 `ext` 字段。
- - 图片/语音/视频/文件/位置/合并消息：仅支持修改 `ext` 字段。
- - 命令消息：不支持修改。
+  - 文本消息：支持修改 `msg` 和 `ext` 字段。
+  - 自定义消息：支持修改 `customEvent` 、`customExts` 和 `ext` 字段。
+  - 图片/语音/视频/文件/位置/合并消息：仅支持修改 `ext` 字段。
+  - 命令消息：不支持修改。
   
 - [IM Demo] 增加反诈提示 UI。
 

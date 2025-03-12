@@ -4,11 +4,11 @@
 
  动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.13.0 开发版发布   | **新增特性**：<br/> - 发送后修改消息接口支持修改各类消息：文本/自定义消息：支持修改消息内容（body）和扩展；文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段；命令消息：不支持修改。<br/> - 小程序 SDK 支持运行到微信小游戏平台。    | 2025-03-12     | <br/> - [Android 4.13.0 更新日志](/document/android/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版)<br/> - [iOS 4.13.0 更新日志](/document/ios/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版)<br/> - [Web 4.13.0 更新日志](/document/web/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版) <br/> - [小程序 4.13.0 更新日志](/document/applet/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版) |
+| SDK 4.13.0 开发版发布   | **新增特性**：<br/><br/> - 发送后修改消息接口支持修改各类消息：<br/>1. 文本/自定义消息：支持修改消息内容（body）和扩展；<br/>2. 文件/视频/音频/图片/位置/合并转发消息：<br/>3. 只支持修改消息扩展字段；<br/>4. 命令消息：不支持修改。<br/><br/> - 小程序 SDK 支持运行到微信小游戏平台。    | 2025-03-12     | <br/> - [Android 4.13.0 更新日志](/document/android/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版)<br/> - [iOS 4.13.0 更新日志](/document/ios/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版)<br/> - [Web 4.13.0 更新日志](/document/web/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版) <br/> - [小程序 4.13.0 更新日志](/document/applet/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版) |
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.5.2 开发版发布   | **新增特性**：<br/> - 客户端可[清空聊天记录](/document/harmonyos/message_delete.html#清空聊天记录)：单个用户包含本地或服务端记录。<br/> - 支持检查 SDK 是否连接到环信服务器。    | 2025-03-10     | [HarmonyOS 1.5.2 更新日志](/document/harmonyos/releasenote.html#版本-v1-5-2-dev-202 5-3-10-开发版)      |
+| HarmonyOS SDK 1.5.2 开发版发布   | **新增特性**：<br/> - 客户端可[清空聊天记录](/document/harmonyos/message_delete.html#清空聊天记录)：单个用户包含本地或服务端记录。<br/> - 支持检查 SDK 是否连接到环信服务器。    | 2025-03-10     | [HarmonyOS 1.5.2 更新日志](/document/harmonyos/releasenote.html#版本-v1-5-2-dev-2025-3-10-开发版)      |
 
 
 ## 2025-01
