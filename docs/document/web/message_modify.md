@@ -35,6 +35,7 @@
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [初始化](initialization.html)文档。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 联系环信商务开通消息修改功能。
 
 ## 实现方法
 
