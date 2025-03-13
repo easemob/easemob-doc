@@ -188,7 +188,7 @@ Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 2. 发送方调用 `createVideoSendMessage` 方法传入视频文件的本地资源标志符、缩略图的本地存储路径、视频时长以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID），然后调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoSendMessage` 方法。
 
 ```java
-// 在应用层获取视频首帧
+// 在应用层获取视频首帧，你需要自己实现 getThumbPath 方法。
 String thumbPath = getThumbPath(videoUri);
 EMMessage message = EMMessage.createVideoSendMessage(videoUri, thumbPath, videoLength, toChatUsername);
 // 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
@@ -331,7 +331,7 @@ String action="action1";
 // `action` 可以自定义。
 EMCmdMessageBody cmdBody = new EMCmdMessageBody(action);
 String toUsername = "test1";
-// 发送给特定用户。
+// 对于单聊，传入接收方的用户 ID，群聊传入群组 ID，聊天室传入聊天室 ID。
 cmdMsg.setTo(toUsername);
 cmdMsg.addBody(cmdBody);
 // 发送消息
@@ -367,9 +367,9 @@ EMCustomMessageBody customBody = new EMCustomMessageBody(event);
 // `params` 类型为 `Map<String, String>`。
 customBody.setParams(params);
 customMessage.addBody(customBody);
-// `to` 指另一方环信用户 ID（或者群组 ID，聊天室 ID）
+// `to` 指定接收方，单聊、群聊和聊天室分别为对端用户 ID、群组 ID 和聊天室 ID。
 customMessage.setTo(to);
-// 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
+// 对于单聊、群群聊或聊天室，`chatType` 分别为 `Chat`、`GroupChat` 和 `ChatRoom`，默认是单聊。
 customMessage.setChatType(chatType);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(customMessage);
@@ -415,6 +415,11 @@ EMClient.getInstance().chatManager().sendMessage(customMessage);
 String title = "A和B的聊天记录";
 String summary = "A:这是A的消息内容\nB:这是B的消息内容";
 String compatibleText = "您当前的版本不支持该消息，请升级到最新版本";
+// 添加原消息 ID。
+ArrayList<String> msgIdList = new ArrayList<>();
+msgIdList.add("1390191369179366180");
+msgIdList.add("1390191426268037924");
+msgIdList.add("1390186040483906340");
 EMMessage message = EMMessage.createCombinedSendMessage(title, summary, compatibleText, msgIdList, receiverId);
 message.setMessageStatusCallback(new EMCallBack() {
     @Override
