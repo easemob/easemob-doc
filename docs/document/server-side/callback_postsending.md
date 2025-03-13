@@ -15,7 +15,7 @@
 
 ## 实现步骤
 
-1. 开通发送后回调服务：在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开通回调服务](/product/enable_and_configure_IM.html#开通消息回调)。
+1. 开通回调服务：在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开通回调服务](/product/enable_and_configure_IM.html#开通消息回调)。
 2. 配置发送后回调规则：详见[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
 3. 发送消息或进行群组、聊天室或联系人相关操作后，环信服务器向你的应用服务器发送回调请求。
 
