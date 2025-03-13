@@ -71,7 +71,7 @@
 | `eventType`       | - `chat` 聊天消息；<br/> - `chat_offline` 离线消息。  |
 | `timestamp`       | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。  |
 | `chat_type`       | - `chat` 单聊回调；<br/> - `groupchat` 群聊回调包含了群组和聊天室的消息回调，默认全选。 |
-| `group_id`        | 回调消息所在的群组，群聊时才有此参数。       |
+| `group_id`        | 回调消息所在的群组，群聊时才有此参数，即 `chat_type` 为 `groupchat`。       |
 | `from`            | 消息的发送方。         |
 | `to`              | 消息的接收方。    |
 | `msg_id`          | 消息的 ID。         |
