@@ -2,7 +2,7 @@
 
 ## 概述
 
-环信服务器收到用户发送的上行单聊和群聊消息之后、将该消息下发给目标用户之前，环信服务器会通过 HTTP/HTTPS POST 请求通知给你的应用服务器。
+环信服务器收到用户发送的上行单聊、群组或聊天室消息之后、将该消息下发给目标用户之前，环信服务器会通过 HTTP/HTTPS POST 请求通知给你的应用服务器。
 
 **发送前回调只对客户端发送的消息有效，不包含通过 RESTful API 发送的消息。**
 
@@ -12,8 +12,8 @@
 
 ## 实现步骤
 
-1. 开通发送后回调服务：在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开通消息回调服务](/product/enable_and_configure_IM.html#开通消息回调)。
-2. 配置发送后回调规则：详见[环信即时通讯云控制台](https://console.easemob.com/user/login)[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
+1. 开通回调服务：在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开通消息回调服务](/product/enable_and_configure_IM.html#开通消息回调)。
+2. 配置发送前回调规则：详见[环信即时通讯云控制台](https://console.easemob.com/user/login)[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
 3. 环信服务器向你的应用服务器发送 HTTP/HTTPS POST 请求。
 
 ## 回调规则
@@ -67,7 +67,7 @@
 
 #### 请求示例
 
-```shell
+```json
 {
     "callId":"XXXX-XXXX#test_0990a64f-XXXX-XXXX-8696-cf3b48b20e7e",
     "timestamp":1600060847294,
@@ -76,7 +76,7 @@
     "from":"user1",
     "to":"user2",
     "msg_id":"8924312242322",
-    "payload":{
+    "payload": {
     // 具体的消息内容
     },
     "securityVersion":"1.0.0",
