@@ -1,5 +1,9 @@
 # iOS 单群聊 UIKit 更新日志
 
+## 版本 4.13.0
+
+移掉了使用的 `ChatMessage`、`Conversation` 默认构造方法，改为使用 Chat SDK 提供的构造方法。
+
 ## 版本 4.12.1 
 
 ### 新增特性
