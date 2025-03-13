@@ -508,7 +508,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[聊天室消息优先级](message_send_receive.html#设置聊天室消息优先级)。
+- [IM SDK] 新增[聊天室消息优先级](message_send_receive.html#聊天室消息优先级与消息丢弃逻辑)。
 - [IM SDK] 群组信息更新后的 `EMGroupChangeListener#onSpecificationChanged` 回调中添加更新后的群组信息。
 
 ### 优化
