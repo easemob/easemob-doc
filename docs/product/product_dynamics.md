@@ -8,8 +8,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.5.2 开发版发布   | **新增特性**：<br/> - 客户端可[清空聊天记录](/document/harmonyos/message_delete.html#清空聊天记录)：单个用户包含本地或服务端记录。<br/> - 支持检查 SDK 是否连接到环信服务器。    | 2025-03-10     | [HarmonyOS 1.5.2 更新日志](/document/harmonyos/releasenote.html#版本-v1-5-2-dev-2025-3-10-开发版)      |
-
+| HarmonyOS SDK 1.5.2 开发版发布   | **新增特性**：<br/> - 客户端可[清空聊天记录](/document/harmonyos/message_delete.html#清空聊天记录)：清除当前用户的单聊、群聊和聊天室的消息和会话记录，可选择是否清除服务端的聊天记录。<br/> - 支持检查 SDK 是否连接到环信服务器。    | 2025-03-10     | [HarmonyOS 1.5.2 更新日志](/document/harmonyos/releasenote.html#版本-v1-5-2-dev-2025-3-10-开发版)      |
 
 ## 2025-01
 
