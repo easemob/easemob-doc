@@ -35,6 +35,7 @@
 			"custom": "",
 			"description": "描述",
 			"mute": "false",
+			"avatar": "https://XXXX/XXXX/XXXX",
 			"title": "测试01",
 			"max_users": "200",
 			"invite_need_confirm": "true",
