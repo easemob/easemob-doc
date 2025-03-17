@@ -247,16 +247,18 @@
 <tr><td>海外代理服务</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td rowspan="2">特色功能</td><td>翻译</td><td>联系商务</td><td>联系商务</td><td>联系商务</td></tr>
 <tr><td>内容审核（支持文本、图片、语音、视频消息的智能审核）</td><td>联系商务</td><td>联系商务</td><td>联系商务</td></tr>
-<tr><td rowspan="12">SDK支持</td><td>Flutter 端</td><td>✓</td><td>✓</td><td>✓</td></tr>
-<tr><td>微信、支付宝、百度、字节、QQ 小程序</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td rowspan="14">SDK 支持</td><td>Android</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>iOS</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Web</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>小程序（微信、支付宝、百度、字节、QQ 小程序）</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>Uniapp（支持编译到 Android、iOS、各平台小程序）</td><td>✓</td><td>✓</td><td>✓</td></tr>
-<tr><td>Android 端</td><td>✓</td><td>✓</td><td>✓</td></tr>
-<tr><td>iOS 端</td><td>✓</td><td>✓</td><td>✓</td></tr>
-<tr><td>Web 端</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>HarmonyOS</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Flutter</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>React Native</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Unity</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Windows（支持 C#、Electron 版本）</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>APICloud 插件</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>Linux</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>MacOS（支持 Electron 版本）</td><td>✓</td><td>✓</td><td>✓</td></tr>
-<tr><td>Windows（支持 C#、Electron 版本）</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>Server SDK（Java 版本）</td><td>✓</td><td>✓</td><td>✓</td></tr> 
 </table>
