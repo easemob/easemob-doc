@@ -158,9 +158,24 @@ ChatClient.getInstance().contactManager()?.fetchAllContactsIDFromServer().then(r
 
 你可以调用 `getContactsFromLocal` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
+自 1.5.3 版本开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注。
+
 :::tip
 需要从服务器获取好友列表之后，才能从本地获取到好友列表。
 :::
+
+- 本地获取单个好友。
+
+```typescript
+ChatClient.getInstance().contactManager()?.getContact(this.contactId).then((contact) => {
+  if (contact) {
+    let remark = contact.remark();
+    let username = contact.userId();
+  }
+}).catch((e: ChatError) => {
+  // failure logic
+});
+```
 
 - 一次性获取本地好友列表。
 
