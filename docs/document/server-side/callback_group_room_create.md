@@ -35,6 +35,7 @@
 			"custom": "",
 			"description": "描述",
 			"mute": "false",
+			"mute_duration": -1,
 			"avatar": "https://XXXX/XXXX/XXXX",
 			"title": "测试01",
 			"max_users": "200",
