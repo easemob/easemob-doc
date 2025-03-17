@@ -2,6 +2,17 @@
 
 <Toc />
 
+## 版本 V1.5.3 Dev 2025-3-17（开发版）
+
+### 新增特性
+
+- 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个联系人的信息。
+
+### 优化
+
+- `PushListener#onError` 回调，增加回调 SDK 内部调用系统库 PushKit 获取 push token 失败的信息。
+- 底层长连接使用 poll 代替 select，解决文件描述符（fd）最大数量 1024 的限制问题。
+
 ## 版本 V1.5.2 Dev 2025-3-10（开发版）
 
 ### 新增特性
