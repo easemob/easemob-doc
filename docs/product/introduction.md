@@ -73,7 +73,7 @@
 
 环信即时通讯 IM 提供[单聊](conversations.html#单聊会话)、[群聊](conversations.html#群组会话)、[聊天室](conversations.html#聊天室会话)和[超级社区](conversations.html#超级社区)会话的消息功能、离线推送、用户管理、内容审核等功能。
 
-### 会话
+### 会话对比
 
 下表概述各类会话的定义和主要消息功能。关于四类会话的详情，请参见[主要功能文档](conversation.html)。
 
