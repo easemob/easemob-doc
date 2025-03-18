@@ -1,4 +1,4 @@
-# 计费策略
+# 计费说明
 
 <Toc />
 
@@ -102,11 +102,11 @@
 | 群聊消息已读回执   | 功能介绍详见[群聊消息已读回执](/document/android/message_receipt.html#群聊)。     | 预付费   | 1000 元/月     | — |
 | 全局禁言   | 功能介绍详见[全局禁言](/document/server-side/user_global_mute.html)。 | 预付费   | 500 元/月    | —    |
 | 回调   | 功能介绍详见[回调](/document/server-side/callback_overview.html)。    | 预付费   | 1000 元/月   | —     |
-| 回调异常缓存     | 功能介绍详见[补发回调存储信息接口描述](/document/server-side/callback_postsending.html#补发回调存储信息)。      | 预付费   | 2000 元/月  | 2000 元/月            |
 | 用户在线状态（Presence）订阅   | 功能介绍详见[用户在线状态订阅](/document/server-side/presence.html)。     | 预付费   | 1000 元/月     | —   |
 | 消息表情回复 Reaction   | 功能介绍详见[消息表情回复](/document/server-side/reaction.html)。    | 预付费   | 600 元/月     | —    |
 | 子区 Thread    | 功能介绍详见[管理子区](/document/server-side/group_thread.html#管理子区)。        | 预付费   | 600 元/月    | —     |
 | 消息举报       | 功能介绍详见[消息举报](/document/android/moderation.html)。       | 预付费   | 500 元/月     | —   |
+| 回调异常缓存     | 功能介绍详见[补发回调存储信息接口描述](/document/server-side/callback_postsending.html#补发回调存储信息)。      | 预付费   | 2000 元/月  | 2000 元/月            |
 | 消息人工审核     | 功能介绍详见[消息人工审核](https://docs-im.easemob.com/ccim/moderation/censor)。       | 预付费   |1000 元/月     | 1000 元/月            |
 | 质量监控  | 功能介绍详见[请求质量](request_quality_overview.html)。     | 预付费 | 2000 元/月  | 2000 元/月 |
 
@@ -115,9 +115,68 @@
 2. 内容审核功能的价格详见[内容审核计费说明](https://docs-im.easemob.com/ccim/moderation/price_domestic)。
 :::
 
-## 功能列表
+## 管理套餐包
 
-套餐包以及增值服务支持的功能和使用限制见下表。
+### 订阅套餐包
+
+使用即时通讯服务前，你可以在环信控制台订阅即时通讯套餐包。成功订阅的当天开始计费。
+
+你可以参考如下步骤订阅即时通讯套餐包：
+
+1. 登录[环信控制台](https://console.easemob.com/user/login)，在 **应用列表** 区域，选择你的应用，点击 **操作** 栏中的 **管理** 链接。
+2. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **版本开通**。
+3. 选择套餐包，点击 **立即开通**。
+4. 进入 **即时通讯IM 服务版本** 页面，查看套餐包的功能详情，选择 **我已阅读并同意《环信云服务购买协议》**，然后点击 **提交订单** 完成支付。
+
+### 订阅增值服务
+
+你可以通过以下两种方法订阅增值服务：
+
+**方法一**
+
+[订阅套餐包](#订阅套餐包)时，你可以在 **即时通讯IM 服务版本** 页面下的相应套餐标签页的 **可选增值服务** 区域选择所需增值服务进行订阅。
+
+**方法二**
+
+参考以下步骤订阅增值服务：
+
+1. 选择 **即时通讯** > **功能配置** > **功能配置总览**，选择要开通的服务，点击 **操作栏** 中的 **增值服务** 链接。
+
+2. 进入 **即时通讯IM 服务版本**页面下的 **单独购买增值服务** 标签页，选择增值服务对应的 **付费开通** 按钮或所需服务项目，确定购买时长，然后选择 **我已阅读并同意《环信云服务购买协议》**。
+
+3. 点击 **提交订单**，完成支付。
+
+### 升级套餐包
+
+你可以在环信控制台升级套餐包。升级成功后的当天开始按新版本计费，自动为你退还原套餐的剩余费用。
+
+你可以通过以下两种方式升级套餐包：
+
+**方法一**
+
+1. 登录[环信控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，点击 **服务版本** 区域的 **当前版本** 对应的 **升级版本**，进入**即时通讯IM 服务版本** 页面。
+
+2. 查看各套餐包的功能详情，根据业务需要选择套餐包，选择 **我已阅读并同意《环信云服务购买协议》**，点击 **提交订单**，完成支付。
+
+**方法二**
+
+1. 在[环信控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **功能配置** > **功能配置总览**。
+2. 点击对应功能的 **操作** 一栏的 **升级**，进入**即时通讯IM 服务版本** 页面。
+3. 查看各套餐包的功能详情，根据业务需要选择套餐包，选择 **我已阅读并同意《环信云服务购买协议》**，点击 **提交订单**，完成支付。
+
+:::tip
+1. 原版本下订阅的所有增值服务会同时取消订阅并退还剩余费用。若你仍需要增值服务，请重新订阅。
+2. 如果需降级或取消套餐包服务，请联系环信商务。
+3. 套餐包降级时，目标版本不包含的功能会关闭。某些功能，例如回调，在关闭后会导致数据清除，无法恢复。
+:::
+
+### 续费套餐包
+
+所有版本的即时通讯套餐包均默认自动续订。套餐包到期时，你也可以在环信控制台重新下单[订阅同版本或其他版本套餐](#订阅套餐包)。环信控制台暂不支持多笔订单订阅时长叠加。若你在套餐包未到期时创建了新订单，系统将自动为你关闭旧服务订单并退还剩余费用。
+
+## 套餐包功能详情
+
+各版本的套餐包支持的功能和使用限制见下表。
 
 :::tip
 1. `✓` 为各版本支持的功能。订阅了相应套餐包后，即可使用这些功能。
@@ -176,19 +235,30 @@
 <tr><td>聊天室禁言</td><td>—</td><td>✓</td><td>✓</td></tr>
 <tr><td>聊天室基本属性和自定义属性（KV）</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>聊天室新成员查看加入前消息</td><td>—</td><td>✓</td><td>✓</td></tr>
-<tr><td>翻译</td><td>消息翻译</td><td>联系商务</td><td>联系商务</td><td>联系商务</td></tr>
-<tr><td>全局禁言</td><td>支持单聊、群聊、聊天室全局范围禁言</td><td>—</td><td>*</td><td>✓</td></tr>
-<tr><td rowspan="2">回调</td><td>提供全量消息路由转发，支持消息、用户状态和多种事件类型</td><td>—</td><td>*</td><td>✓</td></tr>
+<tr><td rowspan="8">高级功能</td><td>全局禁言（支持单聊、群聊、聊天室全局范围禁言）</td><td>—</td><td>*</td><td>✓</td></tr>
+<tr><td>回调（提供全量消息路由转发，支持消息、用户状态和多种事件类型）</td><td>—</td><td>*</td><td>✓</td></tr>
 <tr><td>回调异常缓存（高保障回调）</td><td>—</td><td>*</td><td>*</td></tr>
-<tr><td>REST API 调用频率</td><td>接口调用频率</td><td>—</td><td>可调*</td><td>可调*</td></tr>
-<tr><td rowspan="3">场景方案</td><td>语聊房</td><td>—</td><td>✓</td><td>✓</td></tr>
-<tr><td>超级社区（类似 Discord 的超大群）</td><td>—</td><td>✓</td><td>✓</td></tr>
-<tr><td>环信 AIGC X IM（生成式人工智能一站式解决方案）</td><td>—</td><td>✓</td><td>✓</td></tr>
-<tr><td>AI 会话摘要助手</td><td>通过 AI 技术针对单个群组会话中一段时间内的消息内容生成会话摘要</td><td>—</td><td>✓</td><td>✓</td></tr>
-<tr><td rowspan="3">消息审核</td><td>实时消息人工审核</td><td>—</td><td>*</td><td>*</td></tr>
-<tr><td>内容审核（支持文本、图片、语音、视频消息的智能审核）</td><td>联系商务</td><td>联系商务</td><td>联系商务</td></tr>
+<tr><td>REST API 调用频率</td><td>—</td><td>可调*</td><td>可调*</td></tr>
+<tr><td>质量监控</td><td>—</td><td>*</td><td>*</td></tr>
+<tr><td>实时消息人工审核</td><td>—</td><td>*</td><td>*</td></tr>
 <tr><td>敏感词服务（基础词库）<br>说明：仅包含涉政词库，不支持配置自定义词</td><td>—</td><td>✓</td><td>✓</td></tr>
-<tr><td>质量监控</td><td>请求质量监控</td><td>—</td><td>*</td><td>*</td></tr>
+<tr><td>IM UIKit 和 CallKit（提供 IM 和 RTC UI 组件）</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td rowspan="2">网络</td><td>全球加速网络（SD-GMN，全球5大数据中心、200+ 边缘加速节点）</td><td>—</td><td>✓</td><td>✓</td></tr>
 <tr><td>海外代理服务</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td rowspan="2">特色功能</td><td>翻译</td><td>联系商务</td><td>联系商务</td><td>联系商务</td></tr>
+<tr><td>内容审核（支持文本、图片、语音、视频消息的智能审核）</td><td>联系商务</td><td>联系商务</td><td>联系商务</td></tr>
+<tr><td rowspan="14">SDK 支持</td><td>Android</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>iOS</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Web</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>小程序（微信、支付宝、百度、字节、QQ 小程序）</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Uniapp（支持编译到 Android、iOS、各平台小程序）</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>HarmonyOS</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Flutter</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>React Native</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Unity</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Windows（支持 C#、Electron 版本）</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>APICloud 插件</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Linux</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>MacOS（支持 Electron 版本）</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Server SDK（Java 版本）</td><td>✓</td><td>✓</td><td>✓</td></tr> 
 </table>

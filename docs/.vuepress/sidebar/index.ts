@@ -22,13 +22,7 @@ export const zhSidebar = sidebar({
         { text: "产品概述", link: "introduction.html" },
         { text: "应用场景", link: "application_scenario.html" },
         { text: "主要特性", link: "product_function.html" },
-        { text: "计费说明", 
-          collapsible: true,
-          children: [
-          { text: "计费策略", link: "pricing_policy.html" },
-          { text: "付费方式", link: "pricing_method.html" },
-          ],
-        },
+        { text: "计费说明", link: "pricing.html"},
         { text: "特性介绍",
           collapsible: true,
           children: [
