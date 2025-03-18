@@ -191,3 +191,4 @@
 <tr><td>质量监控</td><td>请求质量监控</td><td>—</td><td>*</td><td>*</td></tr>
 <tr><td rowspan="2">网络</td><td>全球加速网络（SD-GMN，全球5大数据中心、200+ 边缘加速节点）</td><td>—</td><td>✓</td><td>✓</td></tr>
 <tr><td>海外代理服务</td><td>✓</td><td>✓</td><td>✓</td></tr>
+</table>
