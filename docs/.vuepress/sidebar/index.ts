@@ -7,6 +7,13 @@ import { PUSH_SIDEBAR } from "./push";
 export const zhSidebar = sidebar({
   "/product/": [
     {
+      text: "产品动态",
+      collapsible: true,
+      children: [
+        { text: "产品动态", link: "product_dynamics.html" },
+      ],
+    },
+    {
       /*
         text: 分组标题
         children: 分组导航列表
@@ -21,55 +28,59 @@ export const zhSidebar = sidebar({
       children: [
         { text: "产品概述", link: "introduction.html" },
         { text: "应用场景", link: "application_scenario.html" },
-        { text: "主要特性", link: "product_function.html" },
-        { text: "计费说明", link: "pricing.html"},
-        { text: "特性介绍",
+        { text: "功能介绍", link: "product_function.html" },
+        { text: "账号系统", 
           collapsible: true,
           children: [
-            { text: "消息", 
-              collapsible: true,
-              children: [
-                { text: "消息概述", link: "product_message_overview.html" },
-                { text: "消息格式", link: "product_message_format.html" },
-              ],
-            },
-            { text: "用户账号", 
-              collapsible: true,
-              children: [
-                { text: "用户注册与登录", link: "product_user_registration_login.html" },
-                { text: "在线状态管理", link: "product_user_presence.html" },
-              ],
-            },
-            { text: "用户属性与用户关系", 
-              collapsible: true,
-              children: [
-                { text: "用户属性", link: "product_user_attribute.html" },
-                { text: "用户关系", link: "product_user_relationship.html" },
-              ],
-            },
-            { text: "群组", 
-              collapsible: true,
-              children: [
-                { text: "群组概述", link: "product_group_overview.html" },
-                { text: "子区", link: "product_thread_overview.html" },
-              ],
-            },
-            { text: "聊天室", link: "product_chatroom_overview.html" },
-            { text: "离线推送", link: "product_offline_push_overview.html" },
-          ], 
+            { text: "用户注册与登录", link: "product_user_registration_login.html" },
+            { text: "在线状态管理", link: "product_user_presence.html" },
+          ],
         },
-        { text: "数据中心", link: "data_center.html" },
-        { text: "产品动态", link: "product_dynamics.html" },
-        { text: "产品使用限制", 
+        { text: "用户资料与用户关系", 
+          collapsible: true,
+          children: [
+            { text: "用户资料", link: "product_user_attribute.html" },
+            { text: "用户关系", link: "product_user_relationship.html" },
+          ],
+        },
+        { text: "消息", 
+          collapsible: true,
+          children: [
+            { text: "消息概述", link: "product_message_overview.html" },
+            { text: "消息格式", link: "product_message_format.html" },
+          ],
+        },
+        { text: "离线推送", link: "product_offline_push_overview.html" },
+        { text: "群组", 
+          collapsible: true,
+          children: [
+            { text: "群组概述", link: "product_group_overview.html" },
+            { text: "子区", link: "product_thread_overview.html" },
+          ],
+        },
+        { text: "聊天室", link: "product_chatroom_overview.html" },
+        { text: "内容审核", link: "moderation/moderation_overview.html" },
+        { text: "使用限制", 
           collapsible: true,
           children: [
             { text: "功能限制", link: "limitation.html" },
             { text: "RESTful 接口频率限制", link: "limitationapi.html" },
           ],
         },
-        { text: "术语表", link: "glossary.html" },
+        { text: "数据中心", 
+          collapsible: true,
+          children: [
+            { text: "数据中心", link: "data_center.html" },
+          ], 
+        },
       ],
     },
+    { text: "计费说明", 
+      collapsible: true,
+      children: [
+        { text: "计费说明", link: "pricing.html"},
+      ],
+    }, 
     {
       text: "Demo",
       collapsible: true,
@@ -378,11 +389,14 @@ export const zhSidebar = sidebar({
         { text: "请求质量概览", link: "request_quality_overview.html" },
       ],
     },
-  ],
+    { text: "术语表", 
+      collapsible: true,
+      children: [
+        { text: "术语表", ink: "glossary.html" },
+      ],
+    },
   ...DOC_SIDEBAR,
   ...CHAT_UIKIT_SIDEBAR,
   ...CHATROOM_UIKIT_SIDEBAR,
-  "/private/im/": PRIVATE_IM_SIDEBAR,
-  "/private/media/": PRIVATE_MEDIA_SIDEBAR,
-  "/push": PUSH_SIDEBAR,
+]
 });
