@@ -392,11 +392,14 @@ export const zhSidebar = sidebar({
     { text: "术语表", 
       collapsible: true,
       children: [
-        { text: "术语表", ink: "glossary.html" },
+        { text: "术语表", link: "glossary.html" },
       ],
     },
+  ],  
   ...DOC_SIDEBAR,
   ...CHAT_UIKIT_SIDEBAR,
   ...CHATROOM_UIKIT_SIDEBAR,
-]
+  "/private/im/": PRIVATE_IM_SIDEBAR,
+  "/private/media/": PRIVATE_MEDIA_SIDEBAR,
+  "/push": PUSH_SIDEBAR,
 });
