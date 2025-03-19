@@ -18,7 +18,7 @@
 
 - MacOS 10.15.7 或以上版本
 - Xcode 12.4 或以上版本，包括命令行工具
-- React Native 0.63.4 或以上版本
+- React Native 0.66.5 或以上版本
 - NodeJs 16 或以上版本，包含 npm 包管理工具
 - CocoaPods 包管理工具
 - Yarn 编译运行工具
@@ -29,7 +29,7 @@
 
 - MacOS 10.15.7 或以上版本，Windows 10 或以上版本
 - Android Studio 4.0 或以上版本，包括 JDK 1.8 或以上版本
-- React Native 0.63.4 或以上版本
+- React Native 0.66.5 或以上版本
 - 如果用 Macos 系统开发，需要 CocoaPods 包管理工具
 - 如果用 Windows 开发，需要 Powershell 5.1 或以上版本
 - NodeJs 16 或以上版本，包含 npm 包管理工具
@@ -51,12 +51,20 @@
 2. 打开终端，进入需要创建项目的目录，输入命令创建 React Native 项目：
 
 ```sh
-npx react-native init simple_demo
-cd simple_demo
-yarn
+npx @react-native-community/cli@latest init --version 0.76 simple_demo
 ```
 
 创建好的项目名称是 `simple_demo`。
+
+初始化项目
+
+```sh
+cd simple_demo
+yarn set version 1.22.19
+yarn
+```
+
+_可以使用 npm 等其他工具，根据个人喜好_
 
 3. 在终端命令行，输入以下命令添加依赖：
 
@@ -64,15 +72,9 @@ yarn
 yarn add react-native-chat-sdk
 ```
 
-4. 在目标平台执行脚本
+4. native 部分初始化
 
-Android：
-
-```sh
-cd node_modules/react-native-chat-sdk/native_src/cpp && sh generate.sh --type rn && cd ../../../..
-```
-
-iOS：
+iOS 平台使用使用 `cocopods` 进行初始化。
 
 ```sh
 cd ios && pod install && cd ..
@@ -85,7 +87,8 @@ cd ios && pod install && cd ..
 建议使用 `visual studio code` 打开文件夹 `simple_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
 
 ```javascript
-// 导入依赖库
+
+// Import depend packages.
 import React, {useEffect} from 'react';
 import {
   SafeAreaView,
@@ -100,20 +103,27 @@ import {
   ChatOptions,
   ChatMessageChatType,
   ChatMessage,
+  ChatConnectEventListener,
 } from 'react-native-chat-sdk';
 
-// 创建 app
+// Defines the App object.
 const App = () => {
-  // 进行 app 设置
-  const title = 'ChatQuickstart';
-  const [appKey, setAppKey] = React.useState('easemob-demo#easeim');
-  const [username, setUsername] = React.useState('asterisk001');
-  const [password, setPassword] = React.useState('qwer');
-  const [userId, setUserId] = React.useState('');
+  // Defines the variable.
+  const title = 'AgoraChatQuickstart';
+  // Replaces <your appKey> with your app key.
+  const appKey = '<your appKey>';
+  // Replaces <your userId> with your user ID.
+  const [username, setUsername] = React.useState('<your userId>');
+  // Replaces <your agoraToken> with your Agora token.
+  const [chatToken, setChatToken] = React.useState('<your token>');
+  const [targetId, setTargetId] = React.useState('');
   const [content, setContent] = React.useState('');
   const [logText, setWarnText] = React.useState('Show log area');
+  const chatClient = ChatClient.getInstance();
+  const chatManager = chatClient.chatManager;
 
-  // 输出 console log 文件
+
+  // Outputs console logs.
   useEffect(() => {
     logText.split('\n').forEach((value, index, array) => {
       if (index === 0) {
@@ -122,7 +132,7 @@ const App = () => {
     });
   }, [logText]);
 
-  // 输出 UI log 文件
+  // Outputs UI logs.
   const rollLog = text => {
     setWarnText(preLogText => {
       let newLogText = text;
@@ -141,91 +151,73 @@ const App = () => {
     });
   };
 
-  // 设置消息监听器。
-  const setMessageListener = () => {
-    let msgListener = {
-      onMessagesReceived(messages) {
-        for (let index = 0; index < messages.length; index++) {
-          rollLog('received msgId: ' + messages[index].msgId);
-        }
-      },
-      onCmdMessagesReceived: messages => {},
-      onMessagesRead: messages => {},
-      onGroupMessageRead: groupMessageAcks => {},
-      onMessagesDelivered: messages => {},
-      onMessagesRecalledInfo: messages => {},
-      onConversationsUpdate: () => {},
-      onConversationRead: (from, to) => {},
+  useEffect(() => {
+    // Registers listeners for messaging.
+    const setMessageListener = () => {
+      let msgListener = {
+        onMessagesReceived(messages) {
+          for (let index = 0; index < messages.length; index++) {
+            rollLog('received msgId: ' + messages[index].msgId);
+          }
+        },
+        onCmdMessagesReceived: messages => {},
+        onMessagesRead: messages => {},
+        onGroupMessageRead: groupMessageAcks => {},
+        onMessagesDelivered: messages => {},
+        onMessagesRecalled: messages => {},
+        onConversationsUpdate: () => {},
+        onConversationRead: (from, to) => {},
+      };
+
+      chatManager.removeAllMessageListener();
+      chatManager.addMessageListener(msgListener);
     };
 
-    ChatClient.getInstance().chatManager.removeAllMessageListener();
-    ChatClient.getInstance().chatManager.addMessageListener(msgListener);
-  };
-
-  // SDK 初始化。
-  // 调用任何接口之前，请先进行初始化。
-  const init = () => {
-    let o = new ChatOptions({
-      autoLogin: false,
-      appKey: appKey,
-    });
-    ChatClient.getInstance().removeAllConnectionListener();
-    ChatClient.getInstance()
-      .init(o)
-      .then(() => {
-        rollLog('init success');
-        this.isInitialized = true;
-        let listener = {
-          onTokenWillExpire() {
-            rollLog('token expire.');
-          },
-          onTokenDidExpire() {
-            rollLog('token did expire');
-          },
-          onConnected() {
-            rollLog('login success.');
-            setMessageListener();
-          },
-          onDisconnected(errorCode) {
-            rollLog('login fail: ' + errorCode);
-          },
-        };
-        ChatClient.getInstance().addConnectionListener(listener);
-      })
-      .catch(error => {
-        rollLog(
-          'init fail: ' +
-            (error instanceof Object ? JSON.stringify(error) : error),
-        );
+    // Initializes the SDK.
+    // Initializes any interface before calling it.
+    const init = () => {
+      let o = ChatOptions.withAppKey({
+        autoLogin: false,
+        appKey: appKey,
       });
-  };
+      chatClient.removeAllConnectionListener();
+      chatClient
+        .init(o)
+        .then(() => {
+          rollLog('init success');
+          let listener = {
+            onTokenWillExpire() {
+              rollLog('token expire.');
+            },
+            onTokenDidExpire() {
+              rollLog('token did expire');
+            },
+            onConnected() {
+              rollLog('onConnected');
+              setMessageListener();
+            },
+            onDisconnected(errorCode) {
+              rollLog('onDisconnected:' + errorCode);
+            },
+          } as ChatConnectEventListener;
+          chatClient.addConnectionListener(listener);
+        })
+        .catch(error => {
+          rollLog(
+            'init fail: ' +
+              (error instanceof Object ? JSON.stringify(error) : error),
+          );
+        });
+    };
 
-  // 注册账号。
-  const registerAccount = () => {
-    if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
-      return;
-    }
-    rollLog('start register account ...');
-    ChatClient.getInstance()
-      .createAccount(username, password)
-      .then(response => {
-        rollLog(`register success: userName = ${username}, password = ******`);
-      })
-      .catch(error => {
-        rollLog('register fail: ' + JSON.stringify(error));
-      });
-  };
+    init();
+  }, [chatClient, chatManager, appKey]);
 
-  // 用环信即时通讯 IM 账号和密码登录。
-  const loginWithPassword = () => {
-    if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
-      return;
-    }
+  // Logs in with an account ID and a token.
+  const login = () => {
     rollLog('start login ...');
-    ChatClient.getInstance()
-      .login(username, password)
+    chatClient
+      .loginWithToken(username, chatToken)
       .then(() => {
         rollLog('login operation success.');
       })
@@ -234,14 +226,10 @@ const App = () => {
       });
   };
 
-  // 登出。
+  // Logs out from server.
   const logout = () => {
-    if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
-      return;
-    }
     rollLog('start logout ...');
-    ChatClient.getInstance()
+    chatClient
       .logout()
       .then(() => {
         rollLog('logout success.');
@@ -251,14 +239,10 @@ const App = () => {
       });
   };
 
-  // 发送一条文本消息。
+  // Sends a text message to somebody.
   const sendmsg = () => {
-    if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
-      return;
-    }
     let msg = ChatMessage.createTextMessage(
-      userId,
+      targetId,
       content,
       ChatMessageChatType.PeerChat,
     );
@@ -274,8 +258,8 @@ const App = () => {
       }
     })();
     rollLog('start send message ...');
-    ChatClient.getInstance()
-      .chatManager.sendMessage(msg, callback)
+    chatClient.chatManager
+      .sendMessage(msg, callback)
       .then(() => {
         rollLog('send message: ' + msg.localMsgId);
       })
@@ -284,7 +268,7 @@ const App = () => {
       });
   };
 
-  // UI 组件渲染。
+  // Renders the UI.
   return (
     <SafeAreaView>
       <View style={styles.titleContainer}>
@@ -295,39 +279,24 @@ const App = () => {
           <TextInput
             multiline
             style={styles.inputBox}
-            placeholder="Enter appkey"
-            onChangeText={text => setAppKey(text)}
-            value={appKey}
-          />
-        </View>
-        <View style={styles.buttonCon}>
-          <Text style={styles.btn2} onPress={init}>
-            INIT SDK
-          </Text>
-        </View>
-        <View style={styles.inputCon}>
-          <TextInput
-            multiline
-            style={styles.inputBox}
             placeholder="Enter username"
             onChangeText={text => setUsername(text)}
             value={username}
+            autoCapitalize={'none'}
           />
         </View>
         <View style={styles.inputCon}>
           <TextInput
             multiline
             style={styles.inputBox}
-            placeholder="Enter password"
-            onChangeText={text => setPassword(text)}
-            value={password}
+            placeholder="Enter chatToken"
+            onChangeText={text => setChatToken(text)}
+            value={chatToken}
+            autoCapitalize={'none'}
           />
         </View>
         <View style={styles.buttonCon}>
-          <Text style={styles.eachBtn} onPress={registerAccount}>
-            SIGN UP
-          </Text>
-          <Text style={styles.eachBtn} onPress={loginWithPassword}>
+          <Text style={styles.eachBtn} onPress={login}>
             SIGN IN
           </Text>
           <Text style={styles.eachBtn} onPress={logout}>
@@ -339,8 +308,9 @@ const App = () => {
             multiline
             style={styles.inputBox}
             placeholder="Enter the username you want to send"
-            onChangeText={text => setUserId(text)}
-            value={userId}
+            onChangeText={text => setTargetId(text)}
+            value={targetId}
+            autoCapitalize={'none'}
           />
         </View>
         <View style={styles.inputCon}>
@@ -350,6 +320,7 @@ const App = () => {
             placeholder="Enter content"
             onChangeText={text => setContent(text)}
             value={content}
+            autoCapitalize={'none'}
           />
         </View>
         <View style={styles.buttonCon}>
@@ -358,9 +329,7 @@ const App = () => {
           </Text>
         </View>
         <View>
-          <Text style={styles.logText} multiline={true}>
-            {logText}
-          </Text>
+          <Text style={styles.logText}>{logText}</Text>
         </View>
         <View>
           <Text style={styles.logText}>{}</Text>
@@ -373,7 +342,7 @@ const App = () => {
   );
 };
 
-// 设置 UI。
+// Sets UI styles.
 const styles = StyleSheet.create({
   titleContainer: {
     height: 60,
@@ -443,54 +412,43 @@ export default App;
 
 ## 编译和运行项目
 
-现在你可以开始在目标平台创建和运行项目。
+编译运行 ios 平台应用:
 
-编译并在 iOS 真机运行：
+```sh
+yarn run ios
+```
 
-1. 连接苹果手机，设置为开发者模式；
-2. 打开 `simple_demo/ios`，使用 `xcode` 打开 `simple_demo.xcworkspace`；
-3. 依次点击 **Targets** > **simple_demo** > **Signing & Capabilities** 在签名选项下设置应用签名；
-4. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
+编译运行 android 平台应用:
+
+```sh
+yarn run android
+```
+
+运行调试服务:
+
+```sh
+yarn run start
+```
+
+### 截图
+
+ios:
 
 ![img](/images/react-native/ios-1.png)
 
-编译并在 iOS 模拟器中运行：
-
-1. 打开 `simple_demo/ios`，使用 `xcode` 打开 `simple_demo.xcworkspace`；
-2. 在 `xcode` 中，选择模拟器 `iphone13`；
-3. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
-
-![img](/images/react-native/ios-2.png)
-
-编译并在 Android 真机运行：
-
-1. 在 Android Studio 中打开 `simple_demo/android`；
-2. 连接 Android 系统手机，设置为开发者模式，并且设置 USB 可调式；
-3. 设置数据转发：在终端命令行输入 `adb reverse tcp:8081 tcp:8081`；
-4. 启动服务：执行 `package.json` 里面的命令：`"start": "react-native start"`，在终端中运行命令 `yarn start`：
-
-```sh
-yarn start
-```
-
-5. 程序构建完成后，自动安装和运行，并显示应用界面。
+android:
 
 ![img](/images/react-native/android-1.png)
-
-demo 的界面:
-
-![img](/images/react-native/main.png)
 
 ## 测试你的 app
 
 参考以下代码测试注册账号，登录，发送和接收消息。
 
-1. 在真机或模拟器上输入用户名和密码，点击 **注册**。
-2. 点击 **登录**。
-3. 在另一台真机或模拟器上注册和登录一个新用户。
-4. 在第一台真机或模拟器上输入第二台上的用户名，编辑消息并点击 **发送**，在第二台机器上接收消息。
+1. 输入用户名和 token，点击 **登录**。
+2. 在另外设备可以登录另外一个用户。
+3. 第一个用户，编辑消息并点击 **发送**，第二个用户将接收消息。
 
-同时你可以在下方查看日志，检查注册，登录，发送消息是否成功。
+_同时你可以在下方查看日志，检查注册，登录，发送消息是否成功。_
 
 ## 更多操作
 
