@@ -64,9 +64,9 @@ yarn set version 1.22.19
 yarn
 ```
 
-同时，你也可以使用 npm 等其他工具。
+_同时，也可以使用 npm 等其他工具_
 
-3. 在终端命令行，输入以下命令添加依赖：
+3. 在终端命令行，输入以下命令添加依赖:
 
 ```sh
 yarn add react-native-chat-sdk
@@ -74,7 +74,7 @@ yarn add react-native-chat-sdk
 
 4. native 部分初始化
 
-iOS 平台使用使用 `cocopods` 进行初始化。
+iOS 平台需要使用 `cocoapods` 进行初始化。
 
 ```sh
 cd ios && pod install && cd ..
@@ -444,7 +444,7 @@ yarn run start
 2. 在另外设备可以登录另外一个用户。
 3. 第一个用户，编辑消息并点击 **发送**，第二个用户将接收消息。
 
-同时，你可以在下方查看日志，检查注册，登录，发送消息是否成功。
+_同时，你可以在下方查看日志，检查注册，登录，发送消息是否成功。_
 
 ## 更多操作
 
