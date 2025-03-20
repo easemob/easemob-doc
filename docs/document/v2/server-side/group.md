@@ -494,7 +494,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/users/{username}?pagesize={}&pagenum={}
+GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&pagenum={}
 ```
 
 ##### 路径参数
