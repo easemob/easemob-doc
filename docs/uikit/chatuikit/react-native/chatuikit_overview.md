@@ -106,7 +106,7 @@
 `ConversationList` 提供会话列表容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/conversation_slide.png" title="会话左滑/右滑" />
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_longpress.png" title="会话长按" />
   <ImageItem src="/images/uikit/chatuikit/ios/conversation_operation.png" title="会话操作" />
 </ImageGallery>
 
