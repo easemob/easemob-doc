@@ -164,7 +164,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 批量添加用户至聊天室黑名单  |    POST     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users   | 100 次/秒/App Key                                                 | 50 次/秒    | 
 | 从聊天室黑名单移除单个用户   |  DELETE     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{username}  | 100 次/秒/App Key                                                 |     | 
 | 批量从聊天室黑名单移除用户   |  DELETE     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{usernames}  | 100 次/秒/App Key                                                 |  50 次/秒   | 
-| 查询聊天室白名单   |   GET   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users`   | 100 次/秒/App Key                                                 | 100 次/秒    | 
+| 查询聊天室白名单   |   GET   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users   | 100 次/秒/App Key                                                 | 100 次/秒    | 
 | 添加单个用户至聊天室白名单  |    POST     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username}  | 100 次/秒/App Key                                                 | 100 次/秒    | 
 | 批量添加用户至聊天室白名单   |    POST    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users    | 100 次/秒/App Key                                                 | 50 次/秒   | 
 | 将用户移除聊天室白名单  |  DELETE       | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username}  | 100 次/秒/App Key                                                 |  100 次/秒   | 
