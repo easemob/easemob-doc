@@ -2,14 +2,30 @@
 
 ## 2025-03
 
- 动态名称   | 动态描述 | 发布时间       | 相关文档          |
-| :----- | :------- | :---------------- | :---------------- |
-| SDK 4.13.0 开发版发布   | **新增特性**：<br/><br/> - 发送后修改消息接口支持修改各类消息：<br/>1. 文本/自定义消息：支持修改消息内容（body）和扩展；<br/>2. 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段；<br/>4. 命令消息：不支持修改。<br/><br/> - 小程序 SDK 支持运行到微信小游戏平台。    | 2025-03-12     | <br/> - [Android 4.13.0 更新日志](/document/android/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版)<br/> - [iOS 4.13.0 更新日志](/document/ios/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版)<br/> - [Web 4.13.0 更新日志](/document/web/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版) <br/> - [小程序 4.13.0 更新日志](/document/applet/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版) |
+### SDK 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.5.2 开发版发布   | **新增特性**：<br/> - 支持[清空聊天记录](/document/harmonyos/message_delete.html#清空聊天记录)：清除当前用户的单聊、群聊和聊天室的消息和会话记录，可选择是否清除服务端的聊天记录。<br/> - 支持检查 SDK 是否连接到环信服务器：自动登录的场景下，登录状态变为已登录时，可能 SDK 未成功连接至服务端，这种情况下与服务器交互的操作会失败，比如发消息。此时，可调用 isConnected() 接口判断 SDK 与服务器的连接状态。    | 2025-03-10     | [HarmonyOS 1.5.2 更新日志](/document/harmonyos/releasenote.html#版本-v1-5-2-dev-2025-3-10-开发版)      |
-| HarmonyOS SDK 1.5.3 开发版发布   | **新增特性**：<br/> - 支持获取本地单个联系人的信息。    | 2025-03-17     | [HarmonyOS 1.5.3 更新日志](/document/harmonyos/releasenote.html#版本-v1-5-3-dev-2025-3-17-开发版)      |
+| SDK 4.13.0 开发版发布   | **新增特性**：<br/><br/> - [发送后修改消息接口支持修改各类消息](/document/android/message_modify.html)：<br/>1. 文本/自定义消息：支持修改消息内容（body）和扩展；<br/>2. 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段；<br/>4. 命令消息：不支持修改。<br/><br/> - 小程序 SDK 支持运行到微信小游戏平台。    | 2025-03-12     | <br/> - [Android 4.13.0 更新日志](/document/android/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版)<br/> - [iOS 4.13.0 更新日志](/document/ios/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版)<br/> - [Web 4.13.0 更新日志](/document/web/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版) <br/> - [小程序 4.13.0 更新日志](/document/applet/releasenote.html#版本-v4-13-0-dev-2025-3-12-开发版) |
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS SDK 1.5.2 开发版发布   | **新增特性**：<br/> - 支持 [清空聊天记录](/document/harmonyos/message_delete.html#清空聊天记录)：清除当前用户的单聊、群聊和聊天室的消息和会话记录，可选择是否清除服务端的聊天记录。<br/> - 支持检查 SDK 是否连接到环信服务器：自动登录的场景下，登录状态变为已登录时，可能 SDK 未成功连接至服务端，这种情况下与服务器交互的操作会失败，比如发消息。此时，可调用 `isConnected()` 接口判断 SDK 与服务器的连接状态。    | 2025-03-10     | [HarmonyOS 1.5.2 更新日志](/document/harmonyos/releasenote.html#版本-v1-5-2-dev-2025-3-10-开发版)      |
+| HarmonyOS SDK 1.5.3 开发版发布   | **新增特性**：<br/> - 支持[从本地获取单个好友的用户 ID 和好友备注](/document/harmonyos/user_relationship.html#从本地获取好友列表)。    | 2025-03-17     | [HarmonyOS 1.5.3 更新日志](/document/harmonyos/releasenote.html#版本-v1-5-3-dev-2025-3-17-开发版)      |
+
+### 其他优化
+
+1. 注册用户时用户 ID 建议统一使用小写字母
+
+为了更好地实现服务端与 SDK 的兼容，调用 [RESTful API](/document/server-side/account_system.html#注册用户)和客户端 API 以及 [在环信控制台创建用户](/product/enable_and_configure_IM.html#创建-im-用户)时，建议统一使用小写字母。目前用户 ID 支持以下字符集：
+
+- 26 个小写英文字母 a-z；
+- 10 个数字 0-9；
+- “_”, “-”, “.”。
+
+2. 新增发送后回调事件
+
+因解散群组或聊天室导致的用户退出，环信服务器向你的 App Server 发送的回调请求。详情请参见 [成员离开事件](/document/server-side/callback_group_room_leave.html#因解散群组-聊天室导致的用户退出) 。
 
 ## 2025-01
 
