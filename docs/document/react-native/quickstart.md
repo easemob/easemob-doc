@@ -37,7 +37,7 @@
 - Watchman 调试工具
 - 运行环境真机或模拟器 Android 6.0 或以上版本
 
-配置开发或者运行环境如果遇到问题，请参考 [RN 官网](https://reactnative.dev/)。
+配置开发或者运行环境如果遇到问题，请参考 [React Native 官网](https://reactnative.dev/)。
 
 ### 其他要求
 
@@ -45,7 +45,7 @@
 
 ## 项目设置
 
-创建一个 React Native 项目并将集成进去
+创建一个 React Native 项目，集成 IM SDK：
 
 1. 根据开发系统和目标平台准备开发环境；
 2. 打开终端，进入需要创建项目的目录，输入命令创建 React Native 项目：
@@ -64,7 +64,7 @@ yarn set version 1.22.19
 yarn
 ```
 
-_可以使用 npm 等其他工具，根据个人喜好_
+同时，你也可以使用 npm 等其他工具。
 
 3. 在终端命令行，输入以下命令添加依赖：
 
@@ -412,13 +412,13 @@ export default App;
 
 ## 编译和运行项目
 
-编译运行 ios 平台应用:
+编译运行 iOS 平台应用:
 
 ```sh
 yarn run ios
 ```
 
-编译运行 android 平台应用:
+编译运行 Android 平台应用:
 
 ```sh
 yarn run android
@@ -430,15 +430,11 @@ yarn run android
 yarn run start
 ```
 
-### 截图
+下图为 Android 和 iOS 平台的效果展示：
 
-ios:
-
-![img](/images/react-native/ios-1.png)
-
-android:
-
-![img](/images/react-native/android-1.png)
+| Android        | iOS   | 
+| :--------- | :----- |
+| <img src=/images/react-native/android-1.png  width="300" height="700"/>      |  <img src=/images/react-native/ios-1.png  width="300" height="700"/>  | 
 
 ## 测试你的 app
 
@@ -448,7 +444,7 @@ android:
 2. 在另外设备可以登录另外一个用户。
 3. 第一个用户，编辑消息并点击 **发送**，第二个用户将接收消息。
 
-_同时你可以在下方查看日志，检查注册，登录，发送消息是否成功。_
+同时，你可以在下方查看日志，检查注册，登录，发送消息是否成功。
 
 ## 更多操作
 

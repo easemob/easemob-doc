@@ -46,12 +46,12 @@
 
 
 
-## 用户列表	
+## 联系人列表	
 
-用户列表显示了用户的所有联系人，包括联系人列表，群成员列表和黑名单等。用户可以通过用户列表快速找到需要联系的人。
+联系人列表显示了用户的所有联系人。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/main_contact_list.png" title="用户列表" />
+  <ImageItem src="/images/uikit/chatuikit/ios/main_contact_list.png" title="联系人列表" />
 </ImageGallery>
 
 ## 文件共享	
