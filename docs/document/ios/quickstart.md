@@ -90,7 +90,7 @@ end
 
 然后重新执行 `pod install`。
 
-详情请点击[这里](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
+如欲了解详情，请参见 [声网官网文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
 
 ## 3. 初始化 SDK
 
