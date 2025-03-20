@@ -216,8 +216,6 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 设置推送消息显示昵称 | PUT  | /{org_name}/{app_name}/users/{userId} |
 | 设置推送消息展示方式 | PUT  | /{org_name}/{app_name}/users/{userId} |
 
-
-
 ### 用户属性
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
@@ -225,7 +223,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 设置用户属性      | PUT     | /{org_name}/{app_name}/metadata/user/{username}            | 100 次/秒/App Key | 100 次/秒    | 
 | 批量获取用户属性    | POST      | /{org_name}/{app_name}/metadata/user/get           | 100 次/秒/App Key    | 50 次/秒    | 
 | 删除用户属性   | DELETE     | /{org_name}/{app_name}/metadata/user/{username}      | 100 次/秒/App Key  | 100 次/秒    | 
-| 获取指定用户的所有用户属性/获取 app 下的用户属性总大小    | GET     | /{org_name}/{app_name}/metadata/user/{username}//{org_name}/{app_name}/metadata/user/capacity      | 100 次/秒/App Key | 100 次/秒    | 
+| 获取指定用户的所有用户属性/获取 app 下的用户属性总大小    | GET     | /{org_name}/{app_name}/metadata/user/{username}/{org_name}/{app_name}/metadata/user/capacity      | 100 次/秒/App Key | 100 次/秒    | 
 
 ### 用户在线状态订阅
 
@@ -243,7 +241,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | * 设置用户全局禁言  |  POST      | /{org_name}/{app_name}/mutes         | 100 次/秒/App Key  | 50 次/秒    | 
-| * 查询单个用户 ID 全局禁言 |   GET   | /{org_name}/{appName}/mutes/username  | 100 次/秒/App Key  |  100 次/秒   | 
+| * 查询单个用户 ID 全局禁言 |   GET   | /{org_name}/{appName}/mutes/{username}  | 100 次/秒/App Key  |  100 次/秒   | 
 | * 查询 app 下的所有全局禁言的用户  |   GET  | /{org_name}/{app_name}/mutes        | 100 次/秒/App Key  | 50 次/秒    | 
 
 ### 用户收藏
