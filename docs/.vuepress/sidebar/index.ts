@@ -95,7 +95,7 @@ export const zhSidebar = sidebar({
       text: "Demo",
       collapsible: true,
       children: [
-        { text: "Demo 体验及源码地址", link: "demo_sourcecode_address.html" },
+        { text: "体验 Demo", link: "demo_scancode.html" },
       ],
     },
     {
