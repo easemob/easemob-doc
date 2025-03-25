@@ -75,7 +75,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users/import
 | `body`          | JSON   | 是       | 消息内容。      |
 | `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。例如，请求中的 "key1": "value1"。  |
 | `is_ack_read`   | Bool   | 否       | 是否设置会话已读。<br/> - `true`：是；<br/> - `false`：否。<br/>调用该接口导入消息后会生成对应的会话，若该字段为 `true`，则会话为已读状态，为 `false` 表示会话为未读状态。 |
-| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。   |
+| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。<br/> - 若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。<br/> - 该参数不能传 `0`，也不能小于 1000 毫秒。  |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是。这种情况下，需确保附件地址可直接访问，没有访问权限的限制。<br/> - （默认）`false`：否。  |
 
 与发送单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [发送单聊消息](message_single.html)。
@@ -203,7 +203,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 | `body`          | JSON   | 是       | 消息内容。                  |
 | `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。例如，请求中的 "key1": "value1"。  |
 | `is_ack_read`   | Bool   | 否       | 是否设置会话已读。<br/> - `true`：是；<br/> - `false`：否。<br/>调用该接口导入消息后会生成对应的会话，若该字段为 `true`，则会话为已读状态，为 `false` 表示会话为未读状态。 |
-| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。 |
+| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。<br/> - 若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。<br/> - 该参数不能传 `0`，也不能小于 1000 毫秒。 |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是。这种情况下，需确保附件地址可直接访问，没有访问权限的限制。<br/> - （默认）`false`：否。     |
 
 :::tip

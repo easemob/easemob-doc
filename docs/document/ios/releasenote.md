@@ -39,7 +39,7 @@
   - `EMUserInfoManager` 和 `EMPresenceManager` 下的全部 API。
   - `EMChatManager` 下的 `fetchMessagesFromServer`、`fetchSupportedLanguages`、`translateMessage` 和 `getMessageCountWithCompletion` API。
 
-## 版本 V4.11.0 Dev 2024-12-3（开发版）
+## 版本 V4.11.0 2024-12-3
 
 ### 新增特性
 
@@ -119,7 +119,7 @@
 - [IM SDK] 修复调用 [REST API](/document/server-side/group_member.html#转让群组) 转让群主后，SDK 上原群主离开群失败的问题。
 - [IM SDK] 修复开启多设备登录后，偶现的收到会话已读多设备同步事件，导致未读数不同步的问题。
 
-## 版本 V4.8.1 Dev 2024-07-26
+## 版本 V4.8.1 2024-07-26
 
 ### 修复
 
