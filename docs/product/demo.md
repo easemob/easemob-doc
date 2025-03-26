@@ -11,7 +11,7 @@
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="https://main.qcloudimg.com/raw/b0211b0870806899009a17a4216ea65c.svg" title="Android" qrcode="/images/demo/android_ios.png" actionText="跑通 Android Demo"  actionLink="https://github.com/easemob/easemob-demo-android" />
+     <DemoCard icon="https://main.qcloudimg.com/raw/b0211b0870806899009a17a4216ea65c.svg" title="Android" qrcode="/images/demo/android_ios.png" actionText="跑通 Android Demo" actionLink="https://github.com/easemob/easemob-demo-android" />
     </el-col><el-col
       :span="12"
       :md="8"
@@ -28,7 +28,7 @@
    <DemoCard title="Web (Vue 3)" icon="/sdk/vue.svg"  actionText="跑通 Demo"   actionLink="https://github.com/easemob/webim-vue-demo/tree/demo-vue3" >
   <template #action>
     <button class="custom-button">
-    <a href="https://webim-vue3.easemob.com/login">体验 Demo</a>
+    <a href="https://webim-vue3.easemob.com/login">在线体验</a>
     </button>
   </template>
 </DemoCard>
@@ -42,11 +42,12 @@
     </el-col>
   </el-row>
 
-  :::tip
-  1. 对于 Android，4.6.0 及之后版本的 Demo 为上面展示的新 Demo，为 Kotlin 语言。4.5.0 及之前版本的 Demo，为 Java 语言，你可以查看 [Demo 源码地址](https://github.com/easemob/chat-android)，环信已不再维护该地址的 Demo 源码。
-  2. 对于 iOS，4.6.0 及之后版本的 Demo 为上面展示的新 Demo，为 Swift 语言。4.5.0 及之前版本的 Demo，为 Objective-C 语言，你可以查看 [Demo 源码地址](https://github.com/easemob/easemob-demo-ios/tree/OCDemo)，环信已不再维护该地址的 Demo 源码。
-  3. 对于 Web Vue 2 Demo，你可以查看 [Demo 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)，环信已不再维护该地址的 Demo 源码。
-  :::
+
+| 客户端           | 新 Demo   | 旧 Demo   | 
+| :------------- | :----- | :----- | 
+| Android | Kotlin Demo，v4.6.0 及以上 | <br/> - Java Demo，v4.5.0 及以上<br/> - 查看 [Demo 源码地址](https://github.com/easemob/chat-android)，环信不再维护该 Demo 源码 | 
+| iOS   | Swift Demo，v4.6.0 及以上   | <br/> - Objective-C Demo，4.5.0 及以下。<br/> - 查看 [Demo 源码地址](https://github.com/easemob/easemob-demo-ios/tree/OCDemo)，环信不再维护该 Demo 源码   | 
+| Web | Vue 3 Demo  | Vue 2 Demo<br/> -可查看 [Demo 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)，环信不再维护该 Demo 源码|
 
 ## Uni-app Demo
 
@@ -124,7 +125,7 @@
    <DemoCard title="React" icon="/sdk/react.svg"  actionText="跑通 Demo" actionLink="https://webim-h5.easemob.com/login">
   <template #action>
     <button class="custom-button">
-    <a href="https://webim-vue3.easemob.com/login">体验 Demo</a>
+    <a href="https://webim-vue3.easemob.com/login">在线体验</a>
     </button>
   </template>
 </DemoCard>

@@ -19,7 +19,10 @@
     <div v-else-if="qrcode" class="card-qrcode">
       <img :src="qrcode" alt="二维码" :no-view="true" />
     </div>
-    <div v-if="actionText" class="card-action">{{ actionText }}</div>
+    <div v-if="actionText" class="card-action">
+      <a v-if="actionLink" :href="actionLink">{{ actionText }}</a>
+      <span v-else>{{ actionText }}</span>
+    </div>
     <slot></slot>
   </div>
 </template>
@@ -45,6 +48,7 @@ interface Props {
   qrcode?: string;
   qrcodeSize?: number | string;
   actionText?: string;
+  actionLink?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -64,7 +68,8 @@ const props = withDefaults(defineProps<Props>(), {
   title: "",
   qrcode: "",
   qrcodeSize: 120,
-  actionText: ""
+  actionText: "",
+  actionLink: ""
 });
 
 const computedStyle = computed(() => {
@@ -168,6 +173,16 @@ const computedStyle = computed(() => {
 /* 为actionText添加hover效果 */
 .card-action:hover {
   text-decoration: underline; /* 鼠标悬停时显示下划线 */
+}
+
+/* 确保card-action中的链接样式与原来一致 */
+.card-action a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-action a:hover {
+  text-decoration: underline;
 }
 
 .card-action-slot {
