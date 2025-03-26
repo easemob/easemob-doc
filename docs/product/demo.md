@@ -12,8 +12,7 @@
       :lg="6"
     >
      <DemoCard icon="https://main.qcloudimg.com/raw/b0211b0870806899009a17a4216ea65c.svg" title="Android" qrcode="/images/demo/android_ios.png" actionText="跑通 Android Demo"  actionLink="https://github.com/easemob/easemob-demo-android" />
-    </el-col></el-col> 
-    <el-col
+    </el-col><el-col
       :span="12"
       :md="8"
       :xl="6"
@@ -26,7 +25,7 @@
       :xl="6"
       :lg="6"
     >
-   <DemoCard title="Web(Vue 3)" icon="/sdk/web.svg"  actionText="跑通 Demo"   actionLink="https://github.com/easemob/webim-vue-demo/tree/demo-vue3" >
+   <DemoCard title="Web (Vue 3)" icon="/sdk/web.svg"  actionText="跑通 Demo"   actionLink="https://github.com/easemob/webim-vue-demo/tree/demo-vue3" >
   <template #action>
     <button class="custom-button">
     <a href="https://webim-vue3.easemob.com/login">体验 Demo</a>
