@@ -6,7 +6,7 @@ Android 设备品牌丰富，各厂商对于点击通知栏后获取消息的方
 
 ## 方案详情
 
-环信建议采用 Activity 这种通用方式在点击通知栏后统一获取消息。
+如果 MainActivity 是启动页，环信建议采用 Activity 这种通用方式在点击通知栏后统一获取消息。如果 MainActivity 不是启动页，需要指定跳转到MainActivity 在点击通知栏后统一获取消息。
 
 客户端应用通过 `MainActivity` 中的 `onCreate` 方法接收数据。
 
