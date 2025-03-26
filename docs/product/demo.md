@@ -57,7 +57,7 @@
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="/sdk/android.svg" title="Uni-app (Android)" qrcode="/images/demo/uniapp_android.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/webim-uniapp-demo" />
+     <DemoCard icon="/sdk/android.svg" title="Android" qrcode="/images/demo/uniapp_android.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/webim-uniapp-demo" />
     </el-col>
   <el-col
       :span="12"
@@ -65,7 +65,7 @@
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="/sdk/iOS.svg" title="Uni-app (iOS)" qrcode="/images/demo/uniapp_ios.png" actionText="跑通 Demo"  actionLink="https://github.com/easemob/webim-uniapp-demo" />
+     <DemoCard icon="/sdk/iOS.svg" title="iOS" qrcode="/images/demo/uniapp_ios.png" actionText="跑通 Demo"  actionLink="https://github.com/easemob/webim-uniapp-demo" />
     </el-col>
   <el-col
       :span="12"
@@ -73,7 +73,7 @@
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="/sdk/applet.svg" title="Uni-app (H5)" qrcode="/images/demo/uniapp_h5.png" actionText="跑通 Demo"  actionLink="https://github.com/easemob/webim-uniapp-demo" />
+     <DemoCard icon="/sdk/applet.svg" title="H5" qrcode="/images/demo/uniapp_h5.png" actionText="跑通 Demo"  actionLink="https://github.com/easemob/webim-uniapp-demo" />
     </el-col>
 </el-row>
 
@@ -86,7 +86,7 @@
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="/sdk/android.svg" title="Flutter (Android)" qrcode="/images/demo/flutter_android.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/easemob-demo-flutter" />
+     <DemoCard icon="/sdk/android.svg" title="Android" qrcode="/images/demo/flutter_android.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/easemob-demo-flutter" />
     </el-col>
   <el-col
       :span="12"
@@ -94,7 +94,7 @@
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="/sdk/iOS.svg" title="Flutter (iOS)" qrcode="/images/demo/flutter_ios.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/easemob-demo-flutter" />
+     <DemoCard icon="/sdk/iOS.svg" title="iOS" qrcode="/images/demo/flutter_ios.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/easemob-demo-flutter" />
     </el-col> 
 </el-row>
 
@@ -107,21 +107,21 @@
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="/sdk/android.svg" title="React Native (Android)" qrcode="/images/demo/rn_android.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/easemob-uikit-reactnative" />
+     <DemoCard icon="/sdk/android.svg" title="Android" qrcode="/images/demo/rn_android.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/easemob-uikit-reactnative" />
     </el-col><el-col
       :span="12"
       :md="8"
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="/sdk/iOS.svg" title="React Native (iOS)" qrcode="/images/demo/rn_ios.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/easemob-uikit-reactnative" />
+     <DemoCard icon="/sdk/iOS.svg" title="iOS" qrcode="/images/demo/rn_ios.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/easemob-uikit-reactnative" />
     </el-col><el-col
       :span="12"
       :md="8"
       :xl="6"
       :lg="6"
     >
-   <DemoCard title="/sdk/react.svg" icon="/sdk/web.svg"  actionText="跑通 Demo" actionLink="https://webim-h5.easemob.com/login">
+   <DemoCard title="React" icon="/sdk/react.svg"  actionText="跑通 Demo" actionLink="https://webim-h5.easemob.com/login">
   <template #action>
     <button class="custom-button">
     <a href="https://webim-vue3.easemob.com/login">体验 Demo</a>
