@@ -58,7 +58,7 @@
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="/sdk/android.svg" title="Android" qrcode="/images/demo/uniapp_android.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/webim-uniapp-demo" />
+     <DemoCard icon="/sdk/android.svg" title="Android" qrcode="/images/demo/uniapp_android.png" actionText="跑通 Demo" actionLink="https://github.com/easemob/easemob-uikit-uniapp" />
     </el-col>
   <el-col
       :span="12"
@@ -66,7 +66,7 @@
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="/sdk/iOS.svg" title="iOS" qrcode="/images/demo/uniapp_ios.png" actionText="跑通 Demo"  actionLink="https://github.com/easemob/webim-uniapp-demo" />
+     <DemoCard icon="/sdk/iOS.svg" title="iOS" qrcode="/images/demo/uniapp_ios.png" actionText="跑通 Demo"  actionLink="https://github.com/easemob/easemob-uikit-uniapp" />
     </el-col>
   <el-col
       :span="12"
@@ -74,7 +74,7 @@
       :xl="6"
       :lg="6"
     >
-     <DemoCard icon="/sdk/applet.svg" title="H5" qrcode="/images/demo/uniapp_h5.png" actionText="跑通 Demo"  actionLink="https://github.com/easemob/webim-uniapp-demo" />
+     <DemoCard icon="/sdk/applet.svg" title="H5" qrcode="/images/demo/uniapp_h5.png" actionText="跑通 Demo"  actionLink="https://github.com/easemob/easemob-uikit-uniapp" />
     </el-col>
 </el-row>
 
