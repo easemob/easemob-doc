@@ -125,9 +125,9 @@
    <DemoCard title="Web (React)" icon="https://main.qcloudimg.com/raw/b0211b0870806899009a17a4216ea65c.svg"  actionText="跑通 Demo" actionLink="https://webim-h5.easemob.com/login">
   <template #action>
     <button class="custom-button">
-    <a href="https://www.easemob.com/download/demo">体验 Demo</a>
+    <a href="https://webim-vue3.easemob.com/login">体验 Demo</a>
     </button>
   </template>
 </DemoCard>
-    </el-col>
+  </el-col>
 </el-row>    
