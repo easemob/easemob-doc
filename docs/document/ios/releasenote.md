@@ -62,20 +62,20 @@
 由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现报错。详见 [iOS 快速开始中的集成问题说明](quickstart.html#集成问题)。
 
 
-## 版本 V4.10.2 Dev 2024-11-22（开发版）
+## 版本 V4.10.2 2024-11-22
 
 ### 修复
 
 修复调用 [EMPushManager#getSilentModeForConversations:completion:](/document/ios/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
 
-## 版本 V4.10.1 Dev 2024-10-28（开发版）
+## 版本 V4.10.1 2024-10-28
 
 ### 修复
 
 - 修复置顶的单聊消息被撤回后，该消息未能及时地从置顶消息缓存（`EMConversation#pinnedMessages`）中移除的问题。
 - 修复上传群共享文件时，如果文件名以中文开头，上传失败的问题。
 
-## 版本 V4.10.0 Dev 2024-09-30（开发版）
+## 版本 V4.10.0 2024-09-30
 
 ### 新增特性
 
