@@ -23,7 +23,7 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>V1.0.12</version>
+    <version>1.0.12</version>
 </dependency>
 ```
 
