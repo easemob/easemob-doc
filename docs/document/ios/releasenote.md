@@ -39,7 +39,7 @@
   - `EMUserInfoManager` 和 `EMPresenceManager` 下的全部 API。
   - `EMChatManager` 下的 `fetchMessagesFromServer`、`fetchSupportedLanguages`、`translateMessage` 和 `getMessageCountWithCompletion` API。
 
-## 版本 V4.11.0 2024-12-3
+## 版本 V4.11.0 Dev 2024-12-3（开发版）
 
 ### 新增特性
 
