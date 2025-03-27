@@ -6,7 +6,7 @@ tagline: false
 products:
   - link: "/product/introduction.html"
     text: 产品概述
-  - link: "/product/pricing_policy.html"
+  - link: "/product/pricing.html"
     text: 产品价格
   - link: "/product/product_dynamics.html"
     text: 产品动态
