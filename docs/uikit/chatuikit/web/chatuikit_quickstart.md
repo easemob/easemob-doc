@@ -108,17 +108,14 @@ const ChatApp = () => {
         });
   }, [client]);
 
-  return (
-    <div>
-      <div>
+  <div style={{ display: "flex", height: "100vh" }}>
+      <div style={{ width: "350px" }}>
         <ConversationList />
       </div>
-      <div>
+      <div style={{ flex: "1" }}>
         <Chat />
       </div>
     </div>
-  );
-};
 
 class App extends Component {
   render() {
