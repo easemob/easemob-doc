@@ -8,7 +8,7 @@
 
 开启单群聊 UIKit 服务前，需确保已经具备以下条件：
 
-- React 16.8.0 或以上版本；
+- React 16.8.0 或以上版本（暂不支持 React 19）；
 - React DOM 16.8.0 或以上版本；
 - 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 
@@ -95,7 +95,7 @@ const ChatApp = () => {
       client
         .open({
           user: "",
-          token: "",
+          accessToken: "",
         })
         .then((res) => {
           // 创建会话
@@ -108,7 +108,8 @@ const ChatApp = () => {
         });
   }, [client]);
 
-  <div style={{ display: "flex", height: "100vh" }}>
+  return (
+    <div style={{ display: "flex", height: "100vh" }}>
       <div style={{ width: "350px" }}>
         <ConversationList />
       </div>
@@ -116,6 +117,8 @@ const ChatApp = () => {
         <Chat />
       </div>
     </div>
+  );
+};
 
 class App extends Component {
   render() {
