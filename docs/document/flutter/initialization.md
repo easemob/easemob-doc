@@ -17,6 +17,21 @@
 初始化示例代码：
 
 ```dart
-final options = EMOptions(appKey: appKey);
-await EMClient.getInstance.init(options); 
+EMOptions options = EMOptions.withAppKey(appKey);
+await EMClient.getInstance.init(options);
+```
+
+对于 Flutter SDK 4.13.0 及以上版本，初始化时支持设置 `ExtSettings.kDisableIosEnterBackground` 参数，用于控制是否在 iOS 端应用进入和返回后台时调用 iOS SDK 的以下两种方法：
+
+- `applicationDidEnterBackground`：调用该方法会断开连接。
+- `applicationWillEnterForeground` ：调用该方法后会重新链接。
+
+该功能默认开启，若要关闭，可进行如下设置：
+
+```dart
+EMOptions options = EMOptions.withAppKey(
+    appKey,
+    extSettings: {ExtSettings.kDisableIosEnterBackground: false},
+);
+await EMClient.getInstance.init(options);
 ```

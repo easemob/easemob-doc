@@ -510,7 +510,8 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
 
 ## 设置离线推送
 
-你可以设置全局离线推送的通知方式和免打扰模式以及单个单聊或群聊会话的离线推送设置。
+
+你可以设置用户指定的单聊、群聊或全局的离线推送设置。
 
 ### HTTP 请求
 
@@ -521,13 +522,13 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 #### 路径参数
 
 | 参数       | 类型   | 描述              | 是否必需 |
-| :--------- | :----- | :----------------------- | :------- |
+| :--------- | :----- | :-------------- | :------- |
 | `userId` | String | 要设置哪个用户的离线推送设置。传入该用户的用户 ID。    | 是       | 
-| `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是       |
-| `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。                      | 是       |
+| `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是    |
+| `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。    | 是       |
 
 :::tip
-如需设置 app 全局离线推送，`chattype` 需传 `user`，`key` 为当前用户 ID。
+如需设置某个用户的全局离线推送，需将 `userId` 和`key` 设置为该用户的用户 ID，`chattype` 传入 `user`。
 :::
 
 其他参数及说明详见 [公共参数](#公共参数)。
@@ -537,7 +538,7 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 | 参数            | 类型   | 描述        | 是否必需 |
 | :-------------- | :----- | :------------------------------ | :------- |
 | `Content-Type`  | String | 内容类型。请填 `application/json`。     | 是       |
-| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是    |
+| `Authorization` | String | 用户 token，格式为 `Bearer YourUserToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的用户 token。 | 是    |
 
 #### 请求 body
 
@@ -571,8 +572,9 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 #### 请求示例
 
 ```bash
+// 你需要将 <YourUserToken> 替换为你的用户 Token
 curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
--H 'Authorization: Bearer <YourAppToken>' \
+-H 'Authorization: Bearer <YourUserToken>' \
 -H 'Content-Type: application/json' \
 -d '{
     "type":"NONE",
@@ -603,7 +605,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
 
 ## 查询离线推送设置
 
-查询指定单聊、指定群聊或全局的离线推送设置。
+查询用户指定的单聊、群聊或全局的离线推送设置。
 
 ### HTTP 请求
 
@@ -619,13 +621,17 @@ GET https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 | `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是       |
 | `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。                      | 是       |
 
+:::tip
+若要查询某个用户的全局离线推送设置，需要将 `userId` 和 `key` 设置为该用户的用户 ID，`chattype` 传入 `user`。
+:::
+
 其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
 | 参数            | 类型   | 描述              | 是否必需 |
 | :-------------- | :----- | :----------------------- | :------- |
-| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是  |
+| `Authorization` | String | 用户 Token，格式为 `Bearer YourUserToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的用户 token。 | 是  |
 
 ### HTTP 响应
 
@@ -647,8 +653,9 @@ GET https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 #### 请求示例
 
 ```bash
+// 请将 <YourUserToken> 替换为你的用户 Token
 curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
--H 'Authorization: Bearer <YourAppToken>'
+-H 'Authorization: Bearer <YourUserToken>'
 ```
 
 #### 响应示例
