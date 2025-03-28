@@ -8,99 +8,126 @@
 
 开始前，请确保你的开发环境满足以下条件：
 
-- Android Studio 4.0 及以上
-- Gradle 4.10.x 及以上
-- targetVersion 26 及以上
-- Android SDK API 21 及以上
-- JDK 11 及以上
+- Android Studio 4.0 或以上
+- Android SDK API 21 或以上
+- JDK 11 或以上
+- 有效的环信即时通讯 IM 开发者账号和 App key，详见 [环信控制台文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 
 ## 项目准备
 
 本节介绍将单群聊 UIKit 引入项目中的必要环境配置。
 
-1. 使用 **Android Studio** 创建一个[新项目](https://developer.android.com/studio/projects/create-project)。
-  - 在 **Phone and Tablet** 标签选择 **Empty Views Activity**。
-  - **Minimum SDK** 选择 **API 21: Android 5.0 (Lollipop)**。
-  - **Language** 选择 **Kotlin**。
-  
-  创建项目成功后，请确保项目同步完成。
+本示例使用 `Android Studio Ladybug Feature Drop | 2024.2.2`, `gradle version : 8.10`。你也可以直接参考 Android Studio 官网文档 [创建应用](https://developer.android.com/studio/projects/create-project)。
 
-2. 检查工程是否引入 **mavenCentral** 仓库。
+1. 打开 Android Studio，点击左上角菜单**File > New > New Project**。
+2. 在 **New Project** 界面，**Phone and Tablet** 标签下，选择 **Empty Views Activity**，然后点击 **Next**。
+3. 在 **Empty Views Activity** 界面，依次填入以下内容：
+    - **Name**：你的 Android 项目名称，如 Quickstart。
+    - **Package name**：你的项目包的名称，如 com.easemob.quickstart。
+    - **Save location**：项目的存储路径。
+    - **Language**：项目的编程语言，如 Kotlin。
+    - **Minimum SDK**：项目的最低 API 等级，如 API 21。
+    - **Build configuration language**：工程构建语言，如 Kotlin DSL(build.gradle.kts)。
+   
+然后点击 **Finish**。根据屏幕提示，安装所需插件。
 
-  - Gradle 7.0 之前 
+## 在项目中引入单群聊 UIKit
 
-    在 `/Gradle Scripts/build.gradle.kts(Project: <projectname>)` 文件内，检查是否有 **mavenCentral** 仓库。
+1. 添加 UIKit 依赖
 
-    ```kotlin
-    buildscript {
-       repositories {
-           mavenCentral()
-       }
-    }
-    ```
-  - Gradle 7.0 即之后
+**远程依赖**
 
-    在 `/Gradle Scripts/settings.gradle.kts(Project Settings)` 文件内，检查是否有 **mavenCentral** 仓库。
-
-    ```kotlin
-    dependencyResolutionManagement {
-        repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-        repositories {
-            mavenCentral()
-        }
-    }
-    ```
-3. 在项目中引入单群聊 UIKit。
-
-**Module 远程依赖**
-
-在 app 项目 build.gradle.kts 中添加以下依赖：
+- 在 Project 工程根目录下的 `settings.gradle.kts` 文件内，添加 `mavenCentral()` 仓库。
 
 ```kotlin
-implementation("io.hyphenate:ease-chat-kit:4.11.1")
+pluginManagement {
+   repositories {
+      ...
+      mavenCentral()
+   }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        ...
+        mavenCentral()
+    }
+}
+```
+
+- 在 app(module) 目录的 `build.gradle.kts` 文件中添加以下依赖：
+
+```kotlin
+dependencies {
+    ...
+    implementation("io.hyphenate:ease-chat-kit:4.13.0")
+}
 ```
 若要查看 UIKit 的最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
 
 **本地依赖**
 
-从 GitHub 获取[单群聊 UIKit](https://github.com/easemob/chatuikit-android) 源码，按照下面的方式集成：
+从 GitHub 获取 [单群聊 UIKit 源码](https://github.com/easemob/chatuikit-android)，按照下面的方式集成：
 
-- 在根目录 `settings.gradle.kts` 文件（/Gradle Scripts/settings.gradle.kts）中添加如下代码：
+- 在 Project 工程根目录下的 `settings.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
 include(":ease-im-kit")
 project(":ease-im-kit").projectDir = File("../chatuikit-android/ease-im-kit")
 ```
 
-- 在 app 的 `build.gradle.kts` 文件（/Gradle Scripts/build.gradle）中添加如下代码：
+- 在 app(module) 目录的 `build.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
-//chatuikit-android
-implementation(project(mapOf("path" to ":ease-im-kit")))
+dependencies {
+    ...
+    //chatuikit-android
+    implementation(project(mapOf("path" to ":ease-im-kit")))
+}
+```
+
+2. 配置 ViewBinding
+
+在 app 项目的 `build.gradle.kts` 文件中添加如下代码：
+
+```kotlin
+android {
+    ...
+    buildFeatures{
+        viewBinding = true
+    }
+}
+```
+3. Android Support 库向 AndroidX 转换配置
+
+在 `Project` 工程根目录下的 `gradle.properties` 文件中额外添加如下配置。
+
+```kotlin
+android.enableJetifier=true
 ```
 
 4. 防止代码混淆
 
-在 `/Gradle Scripts/proguard-rules.pro` 文件中添加如下代码：
+在 app 的 `proguard-rules.pro` 文件中添加如下代码：
 
-  ```
-  -keep class com.hyphenate.** {*;}
-    -dontwarn  com.hyphenate.**
-  ```
-  
+```
+-keep class com.hyphenate.** {*;}
+-dontwarn  com.hyphenate.**
+```
+
 ## 实现发送第一条单聊消息
 
 本节介绍如何通过单群聊 UIKit 实现发送第一条单聊消息。
 
 ### 第一步 创建快速开始页面 
 
-1. 打开 `app/res/values/strings.xml` 文件，并替换为如下内容：
+1. 打开 `app/src/main/res/values/strings.xml` 文件，并替换为如下内容：
 
 ```xml
 <resources>
-    <string name="app_name">quickstart</string>
+    <string name="app_name">Quickstart</string>
 
-    <string name="app_key">[你申请的 app key]</string>
+    <string name="app_key">[您申请的 app key]</string>
 </resources>
 
 ```
@@ -108,7 +135,7 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 你需要将 **app_key** 替换为你申请的 App Key。
 :::
 
-2. 打开 `app/res/layout/activity_main.xml` 文件，并替换为如下内容：
+2. 打开 `app/src/main/res/layout/activity_main.xml` 文件，并替换为如下内容：
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -116,7 +143,8 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="vertical" 
+    android:id="@+id/main"
     tools:context=".MainActivity">
 
     <EditText
@@ -177,7 +205,7 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 若你已集成了即时通讯 IM SDK，SDK 的所有用户 ID 均可用于登录单群聊 UIKit。
 :::
 
-你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，登录时传入用户 ID 和密码。
+你需要在环信控制台 [创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，登录时传入用户 ID 和密码。
 
 完整实现示例代码：
 
@@ -193,7 +221,6 @@ import com.easemob.quickstart.databinding.ActivityMainBinding
 import com.hyphenate.easeui.ChatUIKitClient
 import com.hyphenate.easeui.common.ChatLog
 import com.hyphenate.easeui.common.ChatOptions
-import com.hyphenate.easeui.common.extensions.showToast
 import com.hyphenate.easeui.feature.chat.enums.ChatUIKitType
 import com.hyphenate.easeui.feature.chat.activities.UIKitChatActivity
 import com.hyphenate.easeui.interfaces.ChatUIKitConnectionListener

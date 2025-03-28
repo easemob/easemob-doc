@@ -4,7 +4,7 @@
 
 环信单群聊 UIKit 是基于环信即时通讯云 IM SDK 开发的一款即时通讯 React UI 组件库。该组件库提供了聊天相关的组件，包括会话列表、聊天界面、联系人列表和群组设置等组件，组件内部集成了 IM SDK，可以帮助开发者不关心内部实现和数据管理就能根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
-若要访问源码，请点击[这里](https://github.com/easemob/Easemob-UIKit-web/tree/main)。
+你可以查看 [UIKit 源码](https://github.com/easemob/Easemob-UIKit-web/tree/main)。
 
 ## 技术原理
 

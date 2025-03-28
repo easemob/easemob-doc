@@ -12,9 +12,10 @@
 
 ## 前提条件
 
-- Android Studio 3.6 或以上版本；
+- Android Studio 4.0 或以上版本；
 - Android SDK API 等级 21 或以上；
 - Android 5.0 或以上版本的设备；
+- JDK 11 或以上
 - 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
 
 ## 准备开发环境
@@ -25,14 +26,15 @@
 
 参考以下步骤创建一个 Android 项目。
 
-1. 打开 Android Studio，点击 **New Project**。
-2. 在 **New Project** 界面，选择 **Empty Views Activity**，然后点击 **Next**。
+1. 打开 Android Studio，点击左上角菜单 **File > New > New Project**。
+2. 在 **New Project** 界面，**Phone and Tablet** 标签下，选择 **Empty Views Activity**，然后点击 **Next**。
 3. 在 **Empty Views Activity** 界面，依次填入以下内容：
    - **Name**：你的 Android 项目名称，如 HelloWorld。
-   - **Package name**：你的项目包的名称，如 io.agora.helloworld。
+   - **Package name**：你的项目包的名称，如 com.easemob.helloworld。
    - **Save location**：项目的存储路径。
    - **Language**：项目的编程语言，如 Java。
-   - **Minimum API level**：项目的最低 API 等级，如 API 21。
+   - **Minimum SDK**：项目的最低 API 等级，如 API 21。
+   - **Build configuration language**：工程构建语言，如Groovy DSL(build.gradle)。
 
 然后点击 **Finish**。根据屏幕提示，安装所需插件。
 
@@ -42,15 +44,13 @@
 
 你可以使用 mavenCentral 自动集成。
 
-
-1. 在项目的 `settings.gradle` 中添加 `mavenCentral()` 仓库。
+1. 在 Project 工程项目根目录的 `settings.gradle` 文件中添加 `mavenCentral()` 仓库。
 
 ```gradle
 pluginManagement {
     repositories {
         ……
         mavenCentral()
-        ……
     }
 }
 dependencyResolutionManagement {
@@ -62,19 +62,18 @@ dependencyResolutionManagement {
 }
 ```
 
-2. 在 `module` 的 `build.gradle` 中添加如下依赖：
+2. 在 app(module) 目录的 `build.gradle` 文件中添加如下依赖：
 
 ```gradle
-...
 dependencies {
     ...
-    // x.y.z 请填写具体版本号，如：4.11.0。
+    // x.y.z 请填写具体版本号，如：4.13.0。
     implementation("io.hyphenate:hyphenate-chat:x.y.z")
 }
 ```
-若要查看最新版本号，请点击[这里](releasenote.html)。
+若要了解最新版本号，请查看 [更新日志](releasenote.html)。
 
-除此之外，你还可以通过手动复制 SDK 文件和动态加载 `.so` 库文件的方法集成 IM SDK，详见[集成文档](integration.html)。
+除此之外，你还可以通过手动复制 SDK 文件和动态加载 `.so` 库文件的方法集成 IM SDK，详见 [集成文档](integration.html)。
 
 ### 3. 添加项目权限
 
@@ -112,7 +111,7 @@ dependencies {
 </manifest>
 ```
 
-关于 App Key 对应的 value 获取，在 [环信即时通讯 IM 管理后台](https://console.easemob.com/user/login) 创建应用后，申请 App Key 并进行相关配置。
+关于 App Key 对应的 value 获取，在 [环信控制台](https://console.easemob.com/user/login) 创建应用后，申请 App Key 并进行相关配置。
 
 ### 4. 防止代码混淆
 
@@ -135,7 +134,7 @@ com.android.builder.merge.DuplicateRelativeFileException: More than one file was
 
 ```gradle
 android {
-  // ...
+  ...
   packagingOptions {
     pickFirst 'lib/x86/libaosl.so'
     pickFirst 'lib/x86_64/libaosl.so'
@@ -147,7 +146,7 @@ android {
 
 然后 Gradle 文件同步，重新构建项目。
 
-如欲了解详情，请参见 [声网官网文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
+如欲了解详情，请参见 [声网官方文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
 
 ## 实现单聊
 
@@ -165,7 +164,7 @@ EMClient.getInstance().init(context, options);
 ```
 ### 2. 创建账号
 
-1. 在[环信即时通讯控制台](https://console.easemob.com/user/login)首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
+1. 在 [环信控制台](https://console.easemob.com/user/login) 首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
 
 2. 在环信即时通讯云的左侧导航栏中，选择**应用概览 > 用户认证**。
    
@@ -175,7 +174,7 @@ EMClient.getInstance().init(context, options);
    
 创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
 
-在生产环境中，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/server-side/easemob_app_token.html) 和[获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/server-side/easemob_app_token.html) 和 [获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ### 3. 登录账号
 

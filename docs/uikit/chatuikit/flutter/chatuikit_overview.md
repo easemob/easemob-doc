@@ -6,6 +6,8 @@
 
 若要访问源码，请点击[这里](https://github.com/easemob/chatuikit-flutter)。
 
+你可以查看 [UIKit 源码](https://github.com/easemob/chatuikit-flutter) 和 [Flutter Demo 源码](https://github.com/easemob/easemob-demo-flutter)。
+
 ## UIKit 基本项目结构
 
 ```bash
