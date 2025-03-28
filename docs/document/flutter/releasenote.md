@@ -6,12 +6,12 @@
 
 ### 新增特性
 
-- 发送后修改消息接口 [EMChatManager#modifyMessage](message_modify.html) 支持修改各类消息:
+- [支持修改各类发送成功后的消息](message_modify.html) ：
   - 文本/自定义消息：支持修改消息内容（body）和扩展 `attributes`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `attributes`。
   - 命令消息：不支持修改。
-- 新增 `ExtSettings.kDisableIosEnterBackground` 参数控制 iOS 后台的行为和使用方式，详见[初始化文档](initialization.html)。
-- 支持鸿蒙，详见[集成文档](integration.html#鸿蒙平台支持)。
+- 支持[控制 iOS 后台的行为和使用方式](initialization.html)。
+- 支持[鸿蒙平台](integration.html#鸿蒙平台支持)。
 
 #### 优化
 
