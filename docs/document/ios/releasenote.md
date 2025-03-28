@@ -6,7 +6,7 @@
 
 ### 优化
 
-- [IM SDK] 发送后修改消息接口 [EMChatManager#asyncModifyMessage](message_modify.html) 支持修改各类消息：
+- [IM SDK] 发送后修改消息接口 [EMChatManager#modifyMessage](message_modify.html) 支持修改各类消息：
   - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
   - 命令消息：不支持修改。
