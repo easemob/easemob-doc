@@ -4,8 +4,11 @@
 
 ## 开发环境要求
 
-- Flutter 2.0.0 或以上版本;
-- Dart 2.12 或以上版本;
+```yaml
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.3.0'
+```
 
 ### 使用命令创建项目
 
@@ -42,9 +45,9 @@ android {
 
 ### 设置 iOS
 
-iOS 需要 iOS 11.0 以上版本。
+iOS 需要 iOS 12.0 以上版本。
 
-打开文件 `quick_start/ios/Runner.xcodeproj`，选择 **TARGETS > General > Deployment info**, 设置 iOS 版本为 11.0。
+打开文件 `quick_start/ios/Runner.xcodeproj`，选择 **TARGETS > General > Deployment info**, 设置 iOS 版本为 12.0。
 
 ### 集成 SDK
 
@@ -53,3 +56,21 @@ cd quick_start
 flutter pub add im_flutter_sdk
 flutter pub get
 ```
+
+#### 鸿蒙平台支持
+
+自 SDK 4.13.0 开始支持鸿蒙。若要在鸿蒙平台使用，需进行以下配置：
+
+1. 使用支持鸿蒙的 Flutter，详情请参见[相关文档](https://gitee.com/harmonycommando_flutter/flutter)。
+
+2. 添加鸿蒙插件依赖。在项目 `pubspec.yaml` 文件中添加：
+
+```yaml
+im_flutter_sdk: ^4.13.0
+im_flutter_sdk_ohos:
+  git:
+    url: "https://github.com/easemob/im_flutter_sdk_oh.git"
+    ref: 1.5.3
+```
+
+3. 执行 `flutter pub get`。

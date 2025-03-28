@@ -21,11 +21,8 @@
 
 开始前，请确保你的开发环境满足如下要求：
 
-- Xcode 12.4 或以上版本，包括命令行工具;
-- iOS 10 或以上版本;
-- Android SDK API 等级 23 或以上版本；
-- Android Studio 4.0 或以上版本，包括 JDK 1.8 或以上版本;
-- CocoaPods 包管理工具;
+- iOS 12 或以上版本;
+- Android SDK API 等级 21 或以上版本；
 - Flutter 3.3.0 或以上版本;
 
 配置开发或者运行环境如果遇到问题，请参考 [这里](https://docs.flutter.dev/get-started/install)。
@@ -49,7 +46,7 @@ flutter create quick_start
 ```gradle
 android {
     defaultConfig {
-        minSdkVersion 23
+        minSdkVersion 21
     }
 }
 ```
@@ -71,9 +68,9 @@ android {
 
 ### 设置 iOS
 
-iOS 需要 iOS 11.0 以上版本，
+iOS 需要 iOS 12.0 以上版本，
 
-打开文件 `quick_start/ios/Runner.xcodeproj`，修改：`TARGETS -> General -> Deployment info`, 设置 iOS 版本为 11.0。
+打开文件 `quick_start/ios/Runner.xcodeproj`，修改：`TARGETS -> General -> Deployment info`, 设置 iOS 版本为 12.0。
 
 ### 集成 SDK
 
