@@ -511,7 +511,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
 ## 设置离线推送
 
 
-你可以设置用户指定单聊、指定群聊或全局的离线推送设置。
+你可以设置用户指定的单聊、群聊或全局的离线推送设置。
 
 ### HTTP 请求
 
@@ -605,7 +605,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
 
 ## 查询离线推送设置
 
-查询用户指定单聊、指定群聊或全局的离线推送设置。
+查询用户指定的单聊、群聊或全局的离线推送设置。
 
 ### HTTP 请求
 
