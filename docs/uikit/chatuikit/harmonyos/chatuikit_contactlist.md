@@ -29,11 +29,7 @@ this.pathStack.pushPath({ name: 'ContactListPage' });
 
 开发者可以通过添加联系人列表组件 `ContactListView` 将其嵌入到自己的页面中，以便进行更多的定制化开发。联系人列表组件不包含标题栏，需要开发者自己实现。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_contact_list.png" title="联系人列表页面" />
-</ImageGallery>
-
-`ContactListView` 组件已经封装了联系人列表的主要逻辑，开发者需要实现条目的点击事件以及点击搜索框的事件。示例如下：
+`ContactListView` 组件已经封装了联系人列表的主要逻辑，开发者需要实现列表项的点击事件以及点击搜索框的事件。示例如下：
 
 1. 编写包含 NavDestination 子组件的页面。
    
@@ -139,9 +135,9 @@ struct Index {
 
 ## 使用 ContactListView 定制化
 
-### 自定义条目点击事件
+### 自定义列表项点击事件
 
-开发者如果使用的是组件 `ContactListView`，需要实现条目的点击事件，示例如下：
+开发者如果使用的是组件 `ContactListView`，需要实现列表项的点击事件，示例如下：
 
 ```typescript
 @ComponentV2
@@ -234,7 +230,7 @@ export struct ContactsPage {
 
   @Event onMoreActionClick: KitCallback<number> = (index) => {
     if (index === 0) {
-      // 处理点击好友请求条目的逻辑
+      // 处理点击好友请求列表项的逻辑
     } else if (index === 1) {
       this.navPathStack?.pushPath({name: "GroupListPage"});
     }

@@ -31,7 +31,7 @@ await EMClient.getInstance.init(options);
 ```dart
 EMOptions options = EMOptions.withAppKey(
     appKey,
-    extSettings: {ExtSettings.kDisableIosEnterBackground: false},
+    extSettings: {ExtSettings.kDisableIosEnterBackground: true},
 );
 await EMClient.getInstance.init(options);
 ```

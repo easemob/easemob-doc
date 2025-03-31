@@ -38,11 +38,7 @@ this.pathStack.pushPath({ name: 'ConversationListPage' });
 
 开发者可以通过添加会话列表组件 `ConversationListView` 将其嵌入到自己的页面中，以便进行更多的定制化开发。会话列表组件不包含标题栏，需要开发者自己实现。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_conversation_list.png" title="会话列表" />
-</ImageGallery>
-
-`ConversationListView` 组件已经封装了会话列表的主要逻辑，开发者需要实现条目的点击事件以及点击搜索框的事件。示例如下：
+`ConversationListView` 组件已经封装了会话列表的主要逻辑，开发者需要实现列表项的点击事件以及点击搜索框的事件。示例如下：
 
 1. 编写包含 NavDestination 子组件的页面。
    
@@ -178,9 +174,9 @@ export struct ConversationsPage {
 }
 ```
 
-### 自定义会话条目点击事件
+### 自定义会话列表项点击事件
 
-开发者如果使用的是组件 `ConversationListView`，需要实现会话条目的点击事件，示例如下：
+开发者如果使用的是组件 `ConversationListView`，需要实现会话列表项的点击事件，示例如下：
 
 ```typescript
 @ComponentV2
@@ -307,9 +303,9 @@ export struct ConversationsPage {
 }
 ```
 
-### 自定义会话条目左滑菜单
+### 自定义会话列表项左滑菜单
 
-开发者可以增加或者修改会话条目左滑菜单项。示例如下：
+开发者可以增加或者修改会话列表项左滑菜单项。示例如下：
 
 ```typescript
 import { ChatKitConversation, ConversationListView, ConvMenuItem, KitConstants } from '@easemob/chatuikit';
@@ -354,9 +350,9 @@ export class MyConversationListViewModel extends ConvListViewModel {
 }
 ```
 
-### 增加自定义会话条目组件
+### 增加自定义会话列表项组件
 
-开发者可以根据自己的业务需要通过 `ConversationItemProvider` 提供自己的会话条目样式。示例代码如下：
+开发者可以根据自己的业务需要通过 `ConversationItemProvider` 提供自己的会话列表项样式。示例代码如下：
 
 1. 定义自定义构件函数
    
@@ -371,7 +367,7 @@ export function ConversationItemBuilder(item: ChatKitConversation) {
     })
     .textAlign(TextAlign.Start)
     .onClick(() => {
-      console.log('点击了自定义条目布局');
+      console.log('点击了自定义列表项布局');
     });
 }
 ```
