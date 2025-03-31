@@ -1,5 +1,11 @@
 # iOS 单群聊 UIKit 更新日志
 
+## 版本 4.13.1
+
+### 优化
+
+允许 `TextMessageCell` 中 `refresh` 方法重载。
+
 ## 版本 4.13.0
 
 移掉了使用的 `ChatMessage`、`Conversation` 默认构造方法，改为使用 Chat SDK 提供的构造方法。
