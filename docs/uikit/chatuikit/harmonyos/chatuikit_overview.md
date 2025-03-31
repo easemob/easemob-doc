@@ -45,7 +45,7 @@
 
 ## 功能介绍
 
-单群聊 UIKit 中业务相关的 UI 页面主要包含在以下三个 Page 中：ChatPage、ConversationListPage 和 ContactListPage。下图展示单群聊 UIKit 的主要功能：
+单群聊 UIKit 中业务相关的 UI 页面主要包含在以下三个 Page 中：`ChatPage`、`ConversationListPage` 和 `ContactListPage`。下图展示单群聊 UIKit 的主要功能：
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
@@ -56,7 +56,7 @@
 
 ### 聊天页面功能
 
-ChatPage 是提供所有聊天组件的容器。
+`ChatPage` 是提供所有聊天组件的容器。
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
@@ -69,7 +69,7 @@ ChatPage 是提供所有聊天组件的容器。
 
 ### 会话列表页面功能
 
-ConversationListPage 是提供会话列表组件的容器。
+`ConversationListPage` 是提供会话列表组件的容器。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/conversation_operation.png" title="会话操作" />
@@ -77,7 +77,7 @@ ConversationListPage 是提供会话列表组件的容器。
 
 ### 通讯录页面功能
 
-ContactListPage 是提供联系人列表的容器。
+`ContactListPage` 是提供联系人列表的容器。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="联系人列表" />

@@ -40,7 +40,7 @@ ohpm install @easemob/chatuikit
 }
 ```
 
-然后点击同步按钮，同步完成后，就可以在模块中使用 `chatuikit` 。
+然后点击同步按钮，同步完成后，就可以在模块中使用 `chatuikit`。
 
 ### 添加项目权限
 

@@ -48,7 +48,7 @@ ohpm install @easemob/chatuikit
 
 **源码依赖** 
 
-从 GitHub 获取 [单群聊 UIKit](https://github.com/easemob/easemob-uikit-harmonyos)  源码，按照下面的方式集成：
+从 GitHub 获取 [单群聊 UIKit](https://github.com/easemob/easemob-uikit-harmonyos) 源码，按照下面的方式集成：
 
 - 点击 **Import**，选择 **Import Module**，导入 `chatuikit` 模块。
 - 在项目 Module 中引入 `chatuikit` 模块。
@@ -63,7 +63,7 @@ ohpm install @easemob/chatuikit
 
 然后点击同步按钮，同步完成后，就可以在模块中使用 `chatuikit` 。
 
-6. 添加项目权限。
+1. 添加项目权限。
 
 在模块的 `module.json5` ，例如：`HelloWorld` 中 `entry` 模块的 `module.json5` 中，配置示例如下：
 
