@@ -4,7 +4,7 @@
 
 环信单群聊 UIKit 是基于环信即时通讯云 IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表及后续界面等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
-若要访问源码，请点击[这里](https://github.com/easemob/easemob-uikit-harmonyos)。
+你可以查看 [UIKit 源码](https://github.com/easemob/easemob-uikit-harmonyos)。
 
 在 UIKit 中主要使用状态管理 V2 版本，如果开发者项目中主要使用状态管理 V1 版本，使用时可参考[自定义组件混用场景指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-custom-component-mixed-scenarios)。
 

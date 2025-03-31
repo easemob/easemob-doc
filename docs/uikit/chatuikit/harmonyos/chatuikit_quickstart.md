@@ -11,7 +11,7 @@
 - DevEco Studio NEXT Release（5.0.3.900）及以上；
 - HarmonyOS SDK API 12 及以上；
 - HarmonyOS NEXT.0.0.71 或以上版本的模拟器或者真机；
-- 有效的环信即时通讯 IM 开发者账号和 App Key，请参见 [环信控制台文档](获取环信即时通讯-im-的信息)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，请参见 [环信控制台文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 
 ## 项目准备
 
