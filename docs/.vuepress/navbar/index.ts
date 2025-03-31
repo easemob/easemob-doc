@@ -24,6 +24,11 @@ export const zhNavbar = navbar([
             link: '/uikit/chatuikit/web/chatuikit_overview.html'
           },
           {
+            text: 'HarmonyOS',
+            icon: '/icon-harmonyos.svg',
+            link: '/uikit/chatuikit/harmonyos/chatuikit_overview.html'
+          },
+          {
             text: 'Uniapp',
             icon: '/icon-uni-app.svg',
             link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
