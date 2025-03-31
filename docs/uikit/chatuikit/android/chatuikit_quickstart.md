@@ -17,7 +17,7 @@
 
 本节介绍将单群聊 UIKit 引入项目中的必要环境配置。
 
-本示例使用 `Android Studio Ladybug Feature Drop | 2024.2.2`, `gradle version : 8.10`。你也可以直接参考 Android Studio 官网文档 [创建应用](https://developer.android.com/studio/projects/create-project)。
+本示例使用 `Android Studio Ladybug Feature Drop | 2024.2.2`, `gradle version : 8.10`。你也可以参考 Android Studio 官网文档 [创建应用](https://developer.android.com/studio/projects/create-project)。
 
 1. 打开 Android Studio，点击左上角菜单**File > New > New Project**。
 2. 在 **New Project** 界面，**Phone and Tablet** 标签下，选择 **Empty Views Activity**，然后点击 **Next**。
