@@ -29,21 +29,19 @@
 
 你可以在应用加载时或使用 EaseChatUIKit 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
+初始化时，需传入 App Key。你可以在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 的 **应用详情** 页面查看 App Key。
 
 ```
 import EaseChatUIKit
     
-@UIApplicationMain
-class AppDelegate: UIResponder，UIApplicationDelegate {
-
-     var window: UIWindow？
-
-
-     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-         let error = EaseChatUIKitClient.shared.setup(appkey: "Appkey")
-     }
-}
+// 在导入 EaseChatUIKit 库后在 appdelegate.swift 中 'func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool' 方法中添加如下代码：
+// UIKit 4.10.0 及以上版本      
+ let option = ChatOptions(appkey: ExampleRequiredConfig.appKey)
+        option.enableConsoleLog = true
+        option.isAutoLogin = false
+        _ = ChatUIKitClient.shared.setup(option: option)
+// UIKit 4.10.0 以下版本
+let error = EaseChatUIKitClient.shared.setup(appkey: "Appkey")
 ```
 
 ### 第三步 登录
@@ -54,9 +52,41 @@ class AppDelegate: UIResponder，UIApplicationDelegate {
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 EaseChatUIKit。
 :::
 
-为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
+为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用概览** > **用户认证** 页面创建用户并查看用户 token。**用户认证** 页面中的用户仅用于快速体验或调试目的。
 
-在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html)。
+在开发环境中，你需要在环信控制台 [创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见 [使用环信用户 token 鉴权](/product/easemob_user_token.html)。
+
+- 4.10.0 及以上版本：
+
+```
+public final class YourAppUser: NSObject, ChatUserProfileProtocol {
+
+            public func toJsonObject() -> Dictionary<String, Any>? {
+        ["ease_chat_uikit_user_info":["nickname":self.nickname,"avatarURL":self.avatarURL,"userId":self.id]]
+    }
+    
+    
+    public var id: String = ""
+        
+    public var nickname: String = ""
+        
+    public var selected: Bool = false
+    
+    public override func setValue(_ value: Any?, forUndefinedKey key: String) {
+        
+    }
+
+    public var avatarURL: String = "https://accktvpic.oss-cn-beijing.aliyuncs.com/pic/sample_avatar/sample_avatar_1.png"
+
+}
+// 使用当前用户对象符合 `ChatUserProfileProtocol` 协议的用户信息登录EaseChatUIKit。
+// Token 生成参见快速开始中登录步骤中链接。
+ ChatUIKitClient.shared.login(user: YourAppUser(), token: ExampleRequiredConfig.chatToken) { error in 
+ }
+
+```
+
+- 4.10.0 以下版本：
 
 ```
 public final class YourAppUser: NSObject, EaseProfileProtocol {
