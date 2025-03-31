@@ -15,7 +15,7 @@
 - 对于单聊，会话展示的名称为对端用户的昵称；若对端用户未设置昵称，则展示对方的用户 ID。会话头像是对方的头像，如果没有设置，则使用默认头像。
 - 对于群聊，会话名称为当前群组的名称，头像为默认头像。
 
-会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
+会话列表相关功能，详见 [功能介绍文档](chatfeature_conversation.html)。
  
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
@@ -387,9 +387,9 @@ ChatUIKitClient.setConversationItemProvider({
 
 ### 设置头像和昵称
 
-关于设置头像和昵称，详见[用户自定义信息文档中的介绍](chatuikit_userinfo.html#设置会话头像和昵称)。
+关于设置头像和昵称，详见 [用户自定义信息文档](chatuikit_userinfo.html)。
 
-## ConversationListView 中默认实现的功能
+## ConversationListView 默认实现的功能
 
 `ConversationListView` 中默认实现会话免打扰、会话置顶和会话删除功能。
 
