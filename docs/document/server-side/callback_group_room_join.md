@@ -58,7 +58,7 @@
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
 | `operation`    | String | 操作。用户加入群组/聊天室操作的为 `JOIN`。 |
-| `operator`     | String | <br/> - 操作人。<br/> - 主动加入聊天室的用户 ID。                     | 
+| `operator`     | String | <br/> - 将用户拉入群组/聊天室的操作人。<br/> - 主动加入聊天室的用户 ID。                     | 
 | `timestamp`    | Long   | 操作完成的时间戳。          | 
 
 ## 邀请用户入群 
