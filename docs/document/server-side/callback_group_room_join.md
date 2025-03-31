@@ -12,14 +12,15 @@
 
 ### 回调时机
 
-- 客户端创建群组或聊天室时直接将用户拉入群。
-- 调用 RESTful API 创建群组或聊天室时直接将用户拉入群。
+- 客户端创建群组或聊天室时直接将用户拉入。
+- 客户端加入聊天室。
+- 调用 RESTful API 创建群组或聊天室时直接将用户拉入。
 
 ### 回调请求
 
 #### 请求示例
 
-下面的请求示例为创建群组时拉人的事件，创建聊天室的字段与其相同。
+下面的请求示例为创建群组或聊天室时拉人或客户端加入聊天室的事件。
 
 ```json
 {
@@ -50,14 +51,14 @@
 | `callId`       | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
 | `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
-| `payload.member` | JSON | 被拉入进群/聊天室的用户 ID。        | 
-| `payload.type` | Array  | 入群方式：`DIRECT` 表示创建群组或聊天室时拉人进入。     |
+| `payload.member` | JSON | <br/> - 创建群组或聊天室时，被拉入进群/聊天室的用户 ID。 <br/> - 用户主动加入聊天室时，该用户的 ID。       | 
+| `payload.type` | Array  | 入群方式：`DIRECT` 表示创建群组或聊天室时拉人进入或用户主动加入聊天室。     |
 | `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
 | `operation`    | String | 操作。用户加入群组/聊天室操作的为 `JOIN`。 |
-| `operator`     | String | 操作人。                     | 
+| `operator`     | String | <br/> - 操作人。<br/> - 主动加入聊天室的用户 ID。                     | 
 | `timestamp`    | Long   | 操作完成的时间戳。          | 
 
 ## 邀请用户入群 
