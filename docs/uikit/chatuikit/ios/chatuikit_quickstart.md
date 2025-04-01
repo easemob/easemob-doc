@@ -36,12 +36,12 @@ import EaseChatUIKit
     
 // 在导入 EaseChatUIKit 库后在 appdelegate.swift 中 'func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool' 方法中添加如下代码：
 // UIKit 4.10.0 及以上版本      
- let option = ChatOptions(appkey: ExampleRequiredConfig.appKey)
-        option.enableConsoleLog = true
-        option.isAutoLogin = false
-        _ = ChatUIKitClient.shared.setup(option: option)
+ let option = ChatOptions(appkey: "ExampleRequiredConfig.appKey")
+ option.enableConsoleLog = true
+ option.isAutoLogin = false
+ _ = ChatUIKitClient.shared.setup(option: option)
 // UIKit 4.10.0 以下版本
-let error = EaseChatUIKitClient.shared.setup(appkey: "Appkey")
+let error = ChatUIKitClient.shared.setup(appkey: "Appkey")
 ```
 
 ### 第三步 登录
@@ -69,6 +69,8 @@ public final class YourAppUser: NSObject, ChatUserProfileProtocol {
     public var id: String = ""
         
     public var nickname: String = ""
+    
+    public var remark: String = ""
         
     public var selected: Bool = false
     
@@ -99,6 +101,8 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
     public var id: String = ""
         
     public var nickname: String = ""
+    
+    public var remark: String = ""
         
     public var selected: Bool = false
     
@@ -120,8 +124,9 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 2. 调用 `init` 方法将在控制台上创建的用户的用户 ID 传入 `conversationId` 参数，向该用户发送消息。
 
 ```swift
-let vc = ComponentsRegister.shared.MessageViewController.init(conversationId: <#创建用户的id#>, chatType: .chat)
+ let vc = ComponentsRegister.shared.MessageViewController.init(conversationId: <#创建用户的id#>, chatType: .chat)
 //或者 push 或者 present 都可
+ vc.modalPresentationStyle = .fullScreen
  ControllerStack.toDestination(vc: vc)
 ```
 
