@@ -16,8 +16,8 @@ const PLATFORM_ICON_MAP = {
     activeIcon: "/icon-web-hover.png",
   },
   harmonyos: {
-    icon : '/icon-harmonyos.svg',
-    activeIcon: '/icon-harmonyos-hover.svg',
+    icon : "/icon-harmonyos.svg",
+    activeIcon: "/icon-harmonyos-hover.svg",
   },
   windows: {
     icon: "/icon-windows.svg",
