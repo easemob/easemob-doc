@@ -9,7 +9,7 @@
 
 ## 集成到项目中
 
-打开终端，添加依赖到项目中
+打开终端，添加依赖到项目中：
 
 ```sh
 yarn add react-native-chat-sdk
@@ -25,9 +25,9 @@ npm i --save react-native-chat-sdk
 
 目前需要基本的网络通讯权限。
 
-对于 ios 平台：内置网络权限。
+对于 iOS 平台：内置网络权限。
 
-对于 android 平台：
+对于 Android 平台：
 
 更新 `AndroidManifest.xml` 文件内容，增加需要的权限。
 

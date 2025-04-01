@@ -11,7 +11,7 @@
 
 ## 集成 SDK
 
-1. 点击[这里](https://www.easemob.com/download/im) 下载 Windows SDK。下载的 NuGet 包一般存放在 `C:\Users\XXX\Downloads` (XXX 为本机用户名) 中。
+1. [下载 Windows SDK](https://www.easemob.com/download/im)。下载的 NuGet 包一般存放在 `C:\Users\XXX\Downloads` (XXX 为本机用户名) 中。
    
 2. 将下载的 NuGet 包拷贝到自己的工作目录下，例如 `D:\workspace\WinSDK`，下面的说明以此目录举例。
    

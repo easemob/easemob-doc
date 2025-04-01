@@ -17,8 +17,8 @@
 您可以通过以下两种方式获取到源代码：
 - 下载代码压缩包：[IM SDK 及 Demo 下载](https://www.easemob.com/download/im)
 - 下载源代码：[GitHub 源码地址](https://github.com/easemob/easemob-demo-android)
-  - 4.5.0 及之前版本的 Demo 为 Java 语言。点击[这里](https://github.com/easemob/chat-android)查看 Demo 源码地址。环信已不再维护该地址的 Demo 源码。
-  - 4.6.0 及之后版本的 Demo 为 Kotlin 语言。点击[这里](https://github.com/easemob/easemob-demo-android)查看 Demo 源码地址。
+  - 4.5.0 及之前版本的 Demo 为 Java 语言。你可以查看 [Demo 源码地址](https://github.com/easemob/chat-android)。环信已不再维护该地址的 Demo 源码。
+  - 4.6.0 及之后版本的 Demo 为 Kotlin 语言。你可以查看 [Demo 源码地址](https://github.com/easemob/easemob-demo-android)。
 
 ## 导入 EaseIM
 

@@ -59,11 +59,11 @@ Easemob_quickstart<br>
 
 ### 3. 创建账号
 
-1. 在[环信即时通讯控制台](https://console.easemob.com/user/login)首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
+1. 在[环信控制台](https://console.easemob.com/user/login)首页的 **应用列表** 中，在目标应用的 **操作** 栏中点击 **管理**。
 
-2. 在环信即时通讯云的左侧导航栏中，选择**应用概览 > 用户认证**。
+2. 在环信即时通讯云的左侧导航栏中，选择 **应用概览 > 用户认证**。
    
-3. 在**用户认证**页面，点击**创建IM用户**按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
+3. 在 **用户认证** 页面，点击 **创建IM用户** 按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
 
 ![img](/images/product/user_create_test.png)
    
@@ -238,7 +238,7 @@ import WebIM, { EasemobChat } from 'easemob-websdk'
 
 本文使用 webpack 对项目进行打包，并使用 `webpack-dev-server` 运行项目。
 
-1.在 `package.json` 的 `dependencies` 字段中添加 `webpack`、`webpack-cli` 和 `webpack-dev-server`，并且在 `scripts` 字段中添加 `build` 和 `start:dev` 命令。
+1. 在 `package.json` 的 `dependencies` 字段中添加 `webpack`、`webpack-cli` 和 `webpack-dev-server`，并且在 `scripts` 字段中添加 `build` 和 `start:dev` 命令。
 
 ```json
 {
@@ -261,7 +261,7 @@ import WebIM, { EasemobChat } from 'easemob-websdk'
 }
 ```
 
-2.在项目根目录中添加 `webpack.config.js` 文件，用于配置 webpack。文件内容如下：
+2. 在项目根目录中添加 `webpack.config.js` 文件，用于配置 webpack。文件内容如下：
 
 ```javascript
 const path = require('path');
@@ -289,13 +289,13 @@ Easemob_quickstart<br>
 ├─ package.json<br>
 └─webpack.config.js
 
-3.在项目根目录运行以下命令，安装依赖项。
+3. 在项目根目录运行以下命令，安装依赖项。
 
 ```bash
 $ npm install
 ```
 
-4.运行以下命令使用 `webpack` 构建并运行项目。
+4. 运行以下命令使用 `webpack` 构建并运行项目。
 
 ```bash
 # 使用 webpack 打包。
@@ -305,4 +305,4 @@ $ npm run build
 $ npm run start:dev
 ```
 
-项目启动后，在页面输入用户名和密码进行注册，然后利用该用户名和密码登录。登录成功后，输入对方的用户名和要发送的消息，点击**发送**按钮发送消息，可同时打开另一页面相互收发消息。
+项目启动后，在页面输入用户名和密码进行注册，然后利用该用户名和密码登录。登录成功后，输入对方的用户名和要发送的消息，点击 **发送** 按钮发送消息，可同时打开另一页面相互收发消息。

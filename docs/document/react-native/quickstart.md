@@ -41,7 +41,7 @@
 
 ### 其他要求
 
-有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+有效的环信即时通讯 IM 开发者账号和 App key，详见 [环信控制台文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 
 ## 项目设置
 
