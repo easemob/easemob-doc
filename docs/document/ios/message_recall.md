@@ -12,7 +12,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM 通过 `ChatManager` 类和 `EMChatMessage` 类支持你撤回一条发送成功的消息：
+环信即时通讯 IM 通过 `EMChatManager` 类和 `EMChatMessage` 类支持你撤回一条发送成功的消息：
 
 - `recallMessageWithMessageId`：撤回一条发送成功的消息。
 
