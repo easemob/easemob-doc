@@ -61,6 +61,10 @@ const options = [
         value: "web",
         label: "Web",
       },
+      {
+        value: "harmonyos",
+        label: "HarmonyOS",
+      },
     ],
   },
   {
