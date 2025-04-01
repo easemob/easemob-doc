@@ -1273,6 +1273,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatuikit_chat.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatuikit_chat.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatuikit_chat.html
@@ -1291,6 +1294,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatuikit_conversation.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatuikit_conversation.html 
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatuikit_conversation.html
@@ -1309,6 +1315,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatuikit_contactlist.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatuikit_contactlist.html 
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatuikit_contactlist.html
@@ -1327,6 +1336,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatuikit_theme.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatuikit_theme.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatuikit_theme.html
@@ -1345,6 +1357,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatfeature_message.html#消息引用
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatfeature_message.html#消息引用    
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_message.html#消息引用
@@ -1381,6 +1396,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatfeature_message.html#消息编辑
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatfeature_message.html#消息编辑    
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_message.html#消息编辑
@@ -1399,6 +1417,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatfeature_message.html#消息撤回
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatfeature_message.html#消息撤回  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_message.html#消息撤回
@@ -1450,6 +1471,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatfeature_common.html#语音消息
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatfeature_common.html#语音消息 
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_common.html#语音消息
@@ -1486,6 +1510,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatfeature_common.html#已读回执
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatfeature_common.html#已读回执  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_common.html#已读回执
@@ -1504,6 +1531,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatfeature_common.html#已发送回执
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatfeature_common.html#已发送回执  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_common.html#已发送回执
@@ -1522,6 +1552,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatfeature_common.html#文件共享
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatfeature_common.html#文件共享  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_common.html#文件共享
@@ -1573,9 +1606,12 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /uikit/chatuikit/ios/chatfeature_conversation.html#会话置顶
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatfeature_conversation.html#会话置顶 
               - icon: /sdk/web.svg
                 text: Web
-                link: /uikit/chatuikit/web/chatfeature_conversation.html#会话置顶
+                link: /uikit/chatuikit/web/chatfeature_conversation.html#会话置顶  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_conversation.html#会话置顶
@@ -1594,6 +1630,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatfeature_conversation.html#会话免打扰
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatfeature_conversation.html#会话免打扰   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_conversation.html#会话免打扰
@@ -1612,6 +1651,9 @@ projects:
               - icon: /sdk/web.svg
                 text: Web
                 link: /uikit/chatuikit/web/chatfeature_conversation.html#会话删除
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /uikit/chatuikit/harmonyos/chatfeature_conversation.html#会话删除    
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_conversation.html#会话删除
