@@ -6,7 +6,7 @@
 
 - 本地依赖：
 
-点击[这里](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/SDK-mini/easemob-sdk-4.2.3-lite.zip)下载 Android 端精简版 SDK。
+[下载 Android 端精简版 SDK](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/SDK-mini/easemob-sdk-4.2.3-lite.zip)。
 
 解压后将 libs 文件夹下的相关 so 库及 jar 包拷贝到项目工程里集成即可。
 

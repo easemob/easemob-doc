@@ -107,4 +107,4 @@ WebIM.conn = new WebIM.connection({
 });
 ```
 
-IM 基本功能和 Web 端一致，请参考 Web 端文档。
+小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/integration.html)。

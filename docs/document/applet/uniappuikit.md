@@ -2,11 +2,11 @@
 
 <Toc />
 
-此模版根据 uni-app 版本的小程序进行2次封装而来，组件可灵活抽离且可以快速集成在其他项目中。不用过分关注收发消息、发图片、发文件、消息上屏等逻辑。从而快速集成符合自身业务的功能
+此模版根据 uni-app 版本的小程序进行 2 次封装而来，组件可灵活抽离且可以快速集成在其他项目中。你无需过多关注收发消息、发图片、发文件、消息上屏等逻辑，从而快速集成符合自身业务的功能。
 
 ## 简介
 
-小程序模版源码地址 （`注意：分支为：versions2.0`)
+小程序模版源码地址 (`注意：分支为：versions2.0`)
 
 - [https://github.com/easemob/webim-uniapp-demo/tree/versions2.0](https://github.com/easemob/webim-uniapp-demo/tree/versions2.0)
 

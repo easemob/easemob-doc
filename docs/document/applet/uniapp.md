@@ -1,12 +1,12 @@
-# Uniapp 全平台方案简介
+# uni-app 全平台方案简介
 
 <Toc />
 
 环信小程序 SDK 为各端小程序开发提供一套完整的技术解决方案，在各端小程序的开发环境下，集成 IM 相关的功能更加便捷、高效。让您的小程序快速获得安全稳定的 IM 能力，集成简单，使用方便，帮助您快速拓展业务，赢得先机。
 
 :::tip
-- uniapp SDK 目前支持微信、支付宝、QQ、百度小程序、抖音（请使用低于 1.70.0 以下的版本基础库）、uni-app 编译的 原生 Android 以及 iOS。
-- uniapp SDK 4.11.0 及以上版本支持鸿蒙系统。
+- uni-app SDK 目前支持微信、支付宝、QQ、百度小程序、抖音（请使用低于 1.70.0 以下的版本基础库）、uni-app 编译的 原生 Android 以及 iOS。
+- uni-app SDK 4.11.0 及以上版本支持鸿蒙系统。
 :::
 
 ## 体验小程序
@@ -18,7 +18,7 @@
 :::tip
 
 - 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
-- Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
+- 你可以查看 [uni-app Demo GitHub 源码地址](https://github.com/easemob/easemob-uikit-uniapp) 。
   :::
   
 ## 功能说明
@@ -129,7 +129,7 @@ npm init -y
 ```bash 
 npm i easemob-websdk
 ```
-引入 uniApp SDK
+引入 uni-app SDK
 
 ```javascript
 import SDK from 'easemob-websdk/uniApp/Easemob-chat';

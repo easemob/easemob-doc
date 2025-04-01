@@ -148,7 +148,7 @@ SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, cal
   }
 ));
 
-// 说明：从 1.3.0 版本之后，建议使用 LoginWithToken 替代 Login。Password.text中的内容需要由输入密码改为输入token
+// 说明：自 1.3.0 版本之后，建议使用 LoginWithToken 替代 Login。Password.text 中的内容需要由输入密码改为输入token
 SDKClient.Instance.LoginWithToken(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
     onSuccess: () =>
     {
@@ -314,7 +314,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 
 ## 运行和测试项目
 
-在 Unity Editor 的左侧导航栏下方，点击 **Project** 页签，选择 **Assets** 下的 **Scenes** 目录，双击右侧的 **SampleScene** 场景，然后点击 Unity Editor 上方的 Play 按钮运行场景。
+在 Unity Editor 的左侧导航栏下方，点击 **Project** 页签，选择 **Assets** 下的 **Scenes** 目录，双击右侧的 **SampleScene** 场景，然后点击 Unity Editor 上方的 **Play** 按钮运行场景。
 
 ![图片](/images/unity/unity-running.png)
 

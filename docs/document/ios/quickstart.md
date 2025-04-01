@@ -13,9 +13,9 @@
 ## 前提条件
 
 - Xcode (推荐最新版本)。
-- 安装 iOS 10.0 或更高版本的 iOS 模拟器或 Apple 设备。
-- CocoaPods [1.10.1 或更高版本](https://cocoapods.org/)。
-- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+- 安装 iOS 10.0 或以上版本的 iOS 模拟器或 Apple 设备。
+- CocoaPods [1.10.1 或以上版本](https://cocoapods.org/)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 1. 准备开发环境
@@ -99,7 +99,7 @@ end
 ```objectivec
 (BOOL)application:(UIApplication *)applicationdidFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-    // appkey 替换成你在环信即时通讯 IM 管理后台注册应用中的 App Key
+    // appkey 替换成你在环信控制台注册应用中的 App Key
     EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
     // apnsCertName是证书名称，可以先传 nil，等后期配置 APNs 推送时在传入证书名称
     options.apnsCertName = nil;
@@ -110,17 +110,17 @@ end
 
 ## 4. 创建账号
 
-1. 在[环信即时通讯控制台](https://console.easemob.com/user/login)首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
+1. 在[环信控制台](https://console.easemob.com/user/login)首页的 **应用列表** 中，在目标应用的 **操作** 栏中点击 **管理**。
 
-2. 在环信即时通讯云的左侧导航栏中，选择**应用概览 > 用户认证**。
+2. 在环信即时通讯云的左侧导航栏中，选择 **应用概览 > 用户认证**。
    
-3. 在**用户认证**页面，点击**创建IM用户**按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
+3. 在 **用户认证** 页面，点击 **创建IM用户** 按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
 
 ![img](/images/product/user_create_test.png)
    
 创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
 
-在生产环境中，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/server-side/easemob_app_token.html) 和[获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/server-side/easemob_app_token.html) 和 [获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ```objectivec
 // 异步方法

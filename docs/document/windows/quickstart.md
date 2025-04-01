@@ -25,7 +25,7 @@
 - Visual Studio IDE 2019 或以上；
 - .Net Framework 4.5.2 或以上；
 - 目前 Windows SDK 仅支持 64 位运行模式；
-- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 
 ## 项目设置
 
@@ -44,13 +44,20 @@
 
 你可以参考以下步骤集成 SDK：
 
-1. 下载：点击 [Windows SDK](https://www.easemob.com/download/im) 进行下载，下载的 `NuGet` 包一般存放在 `C:\Users\XXX\Downloads` (`XXX` 为本机用户名)；
-2. 将下载的 `NuGet` 包拷贝到自己的工作目录，比如 `D:\workspace\WinSDK` 下，以下说明以此目录举例；
-3. 在 Visual Studio 开发环境里，右键点击 `windows-example` 项目，选择 **管理 NuGet 程序包 (N)...**；
-4. 在弹出的 `NuGet:windows-example` tab 页面里，点击右上角的小齿轮会弹出 NuGet 程序包源的设置窗体，点击窗体右上角的 **+** 按钮，在 **包源** 的文本框内会出现 **Package source** 这一栏，点击选中，并修改文本框下的 **名称** 和 **源**。例如 **名称** 可以设置为 `Local Package source`，**源** 则设置为第 2 步中的目录， `D:\workspace\WinSDK`，点击确定；
-5. 在 `NuGet:windows-example` tab 页面，在右上角的 “程序包源” 处点击下拉菜单，选中刚刚配置的包源名称 `Local Package source`；
-6. 在 `NuGet:windows-example` tab 页面上部，选中 **浏览**，在下面搜索框的右边，勾选 **包括预发行版**，此时下面的区域会出现 `agora_chat_sdk` (如果没有出现，点击搜索框右侧的刷新按)，选中这一栏，右边会出现一个向下的小箭头，点击进行安装，或者点击右侧栏最右边的 **安装** 按钮；
-7. 在弹出的 **预览更改** 窗体中，点击确定按钮；
+1. [下载 Windows SDK](https://www.easemob.com/download/im)。下载的 `NuGet` 包一般存放在 `C:\Users\XXX\Downloads` (`XXX` 为本机用户名)。
+   
+2. 将下载的 `NuGet` 包拷贝到自己的工作目录，比如 `D:\workspace\WinSDK` 下，以下说明以此目录举例。
+   
+3. 在 Visual Studio 开发环境里，右键点击 `windows-example` 项目，选择 **管理 NuGet 程序包 (N)...**。
+   
+4. 在弹出的 `NuGet:windows-example` tab 页面里，点击右上角的小齿轮会弹出 NuGet 程序包源的设置窗体，点击窗体右上角的 **+** 按钮，在 **包源** 的文本框内会出现 **Package source** 这一栏，点击选中，并修改文本框下的 **名称** 和 **源**。例如 **名称** 可以设置为 `Local Package source`，**源** 则设置为第 2 步中的目录， `D:\workspace\WinSDK`，点击确定。
+   
+5. 在 `NuGet:windows-example` tab 页面，在右上角的 “程序包源” 处点击下拉菜单，选中刚刚配置的包源名称 `Local Package source`。
+   
+6. 在 `NuGet:windows-example` tab 页面上部，选中 **浏览**，在下面搜索框的右边，勾选 **包括预发行版**，此时下面的区域会出现 `agora_chat_sdk` (如果没有出现，点击搜索框右侧的刷新按)，选中这一栏，右边会出现一个向下的小箭头，点击进行安装，或者点击右侧栏最右边的 **安装** 按钮。
+   
+7. 在弹出的 **预览更改** 窗体中，点击确定按钮。
+   
 8. 到此 Windows SDK 的 `NuGet` 包集成完毕。
 
 ## 实现发送和接收单聊消息
@@ -60,7 +67,6 @@
 ### 1. 打开代码文件开始编辑
 
 在 Visual Studio 的 `windows-example` 项目下，点击 `MainWindow.xaml` 左边的小三角，然后双击 `MainWindow.xaml.cs` 文件开始编辑。
-
 
 ### 2. 添加命名空间
 
@@ -302,9 +308,13 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 
 在 Visual Studio 窗体上部，点击 **启动** 按钮。
 
-1. 注册用户：在 `user id` 文本框中输入用户名，在 `password` 文本框中输入密码，点击 `Sign up` 进行用户注册。注册的结果会在下方的方形区域进行显示。这里可以创建两个用户，例如 `quickstart_sender`、`quickstart_receiver`，一个用来发送消息，一个用来接收消息。
-2. 用户登录：在 `user id` 文本框中输入用户名，例如输入 `quickstart_sender`，在 `password` 文本框中输入密码，点击 **Sign in** 进行登录。登录结果会在下方的方形区域进行显示。
-3. 发送消息：在 `single chat id` 文本框中输入消息接收方，例如输入 `quickstart_receiver`，在 `message content` 文本框中输入想要发送的文本内容，如 `how are you.`，点击 **Send** 进行消息发送，消息发送结果会在下方的方形区域进行显示。
+1. 注册用户：在 **user id** 文本框中输入用户名，在 **password** 文本框中输入密码，点击 **Sign up** 进行用户注册。注册的结果会在下方的方形区域进行显示。这里可以创建两个用户，例如 **quickstart_sender**、**quickstart_receiver**，一个用来发送消息，一个用来接收消息。
+   
+2. 用户登录：在 **user id** 文本框中输入用户名，例如输入 **quickstart_sender**，在 **password** 文本框中输入密码，点击 **Sign in** 进行登录。登录结果会在下方的方形区域进行显示。
+   
+3. 发送消息：在 **single chat id** 文本框中输入消息接收方，例如输入 **quickstart_receiver**，在 **message content** 文本框中输入想要发送的文本内容，如 **how are you.**，点击 **Send** 进行消息发送，消息发送结果会在下方的方形区域进行显示。
+   
 4. 用户退出登录：直接点击 **Sign out** 会让当前用户退出登录，退出结果会在下方的方形区域进行显示。
-5. 接收消息：在 `user id` 文本框中输入接收消息的用户名，例如 `quickstart_receiver`， 在 `password` 文本框输入密码，点击 `Sign in` 进行登录。登录成功后，下方的方形区域将会显示接收到的消息，例如第 3 步发送的 `how are you.`。
+   
+5. 接收消息：在 **user id** 文本框中输入接收消息的用户名，例如 **quickstart_receiver**， 在 **password** 文本框输入密码，点击 **Sign in** 进行登录。登录成功后，下方的方形区域将会显示接收到的消息，例如第 3 步发送的 **how are you.**。
 
