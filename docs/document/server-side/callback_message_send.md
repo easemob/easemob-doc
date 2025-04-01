@@ -149,6 +149,33 @@
 }
 ```
 
+### 文件消息
+
+| 参数          | 类型   | 描述         |
+| :------------ | :----- | :---------------- |
+| `ext`          | JSON   | 消息扩展字段。     |
+| `bodies`       | object | 该回调的主体内容，包含以下字段 `file_length`、`filename`、`secret`、`type` 和 `url`。 |
+| `file_length`  | Long   | 文件大小。单位为字节。   |
+| `filename`     | String | 文件名称，包含文件后缀名。     |
+| `secret`       | String | 文件访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。 |
+| `type`         | String | 消息类型。文件消息为 `file`。  |
+| `url`          | String | 文件的 URL 地址。你可以访问该 URL 下载历史消息文件。  |
+
+回调请求的包体示例：
+
+```json
+"payload":{
+    "ext":{},
+    "bodies":[{
+        "file_length":3279,
+        "filename":"record.md",
+        "secret":"2RNXCgeeEeeXXXX-XXXXbtZXJH4cgr2admVXn560He2PD3RX",
+        "type":"file",
+        "url":"https://XXXX/XXXX/XXXX/chatfiles/d9135700-XXXX-XXXX-b000-a7039876610f"
+    }]
+}
+```
+
 ### 位置消息
 
 | 字段   | 类型   | 描述             |
