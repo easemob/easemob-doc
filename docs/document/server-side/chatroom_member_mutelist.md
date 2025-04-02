@@ -161,7 +161,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :----------------- |
-| `mute_duration` | Long   | 是       | 禁言时长，从当前时间开始计算。单位为毫秒。`-1` 表示永久禁言。 |
+| `mute_duration` | Long   | 是       | 禁言时长，单位为毫秒。例如，传入 `1000`，则禁言在 1 秒后到期。<br/>`0` 表示取消禁言，`-1` 表示永久禁言。 |
 | `usernames`     | Array | 是       | 要被禁言的用户 ID，一次最多可传 60 个。                                           |
 
 #### HTTP 响应
@@ -194,7 +194,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
         "user1",
         "user2"
     ],
-    "mute_duration": 86400000
+    "mute_duration": 1000
 }'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute'
 ```
 

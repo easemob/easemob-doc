@@ -270,5 +270,5 @@ export const zhNavbar = navbar([
   //  ],
   // },
   { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
-  { text: '有奖调研', link: 'https://doc.easemob.com/form/wjx.html' }
+  // { text: '有奖调研', link: 'https://doc.easemob.com/form/wjx.html' }
 ])

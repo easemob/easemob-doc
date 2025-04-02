@@ -157,7 +157,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 
 | 参数            | 类型  | 是否必需 | 描述                                                       |
 | :-------------- | :---- | :------- | :--------------------------------------------------------- |
-| `mute_duration` | Long  | 是       | 禁言时长，单位为毫秒。                                     |
+| `mute_duration` | Long  | 是       | 禁言时长，单位为毫秒。例如，传入 `1000`，则禁言在 1 秒后到期。<br/>`0` 表示取消禁言，`-1` 表示永久禁言。      |
 | `usernames`     | Array | 是       | 要添加到禁言列表的用户 ID 列表，每次最多可添加 60 个。 |
 
 #### HTTP 响应
@@ -184,7 +184,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -d '{"usernames":["user1"], "mute_duration":86400000}' -H 'Authorization: Bearer <YourAppToken>'
+curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -d '{"usernames":["user1"], "mute_duration":1000}' -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
