@@ -10,41 +10,40 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 
 | 错误码<div style="width: 50px;"></div> |  错误信息     | 可能原因  |
 | :-----: | :----------------------------- | :--------------------------- |
-| 0      |           EM_NO_ERROR           | 操作成功。                        |
-| 1      |          GENERAL_ERROR          | SDK 或请求相关的默认错误，未区分具体错误类型：例如，SDK 内部未正确初始化，或者请求服务器时未识别出具体原因的错误。 |
-| 2      |          NETWORK_ERROR          | 网络错误：无网络服务时会回调此错误，表示 SDK 与服务器的连接已断开。 |
-| 3      |          DATABASE_ERROR         | 数据库操作失败：打开本地数据库失败。 |
-| 4      |      EXCEED_SERVICE_LIMIT       | 超过服务限制：超过当前服务版本的数量限制，例如，创建的用户 ID 数量超过购买服务的限制时提示该错误；设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)、[获取单个或多个用户的用户属性](userprofile.html#获取用户属性)和[获取指定用户的指定用户属性](userprofile.html#获取指定用户的指定用户属性)，超过调用频率限制时，会上报该错误。 |
-| 5      |       SERVICE_ARREARAGES        | 服务欠费，该错误码已废弃。  |
-| 8      |       APP_ACTIVE_NUMBER_REACH_LIMITATION    | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。                  |
-| 100    |         INVALID_APP_KEY         | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看 App Key。  |
-| 101    |        INVALID_USER_NAME        | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。 |
-| 102    |        INVALID_PASSWORD         | 用户密码不正确：登录时提供的密码为空或不正确。 |
-| 103    |           INVALID_URL           | URL 不正确：该错误码已废弃。                 |
-| 104    |          INVALID_TOKEN          | 用户 token 不正确：登录时提供的 token 为空或不正确。     |
-| 105    |       USER_NAME_TOO_LONG        | 用户 ID 过长：用户 ID 长度不能超过 64 字节。  |
-| 108    |          TOKEN_EXPIRED          | 用户 token 已过期：超出 token 有效期时间。        |
-| 109    |        TOKEN_WILL_EXPIRE        | 用户 token 即将过期：超出 token 有效期一半时间时会开始回调此错误码。 |
-| 110    |          INVALID_PARAM          | 参数无效。                          |
-| 200    |       USER_ALREADY_LOGIN        | 用户已登录：该用户 ID 已经登录。            |
-| 201    |         USER_NOT_LOGIN          | 用户未登录：例如，如果未登录成功时发送消息或者使用群组操作的 API，SDK 会提示该错误。 |
-| 202    |   USER_AUTHENTICATION_FAILED    | 用户鉴权失败：<br/> - 若使用用户 ID 和密码登录，用户 ID 或密码不正确时会上报改错误；<br/> - 若使用用户 ID 和用户 token 登录，一般为用户 token 无效或已过期。   |
-| 203    |       USER_ALREADY_EXIST        | 用户已经存在：注册用户时，传入的的用户 ID 已经存在会提示该错误。 |
-| 204    |         USER_NOT_FOUND          | 用户不存在：例如，登录或获取用户会话列表时，用户 ID 不存在。 |
-| 205    |      USER_ILLEGAL_ARGUMENT      | 用户参数不正确：例如，创建用户或更新用户属性时，用户 ID 为空或无效。 |
-| 206    |    USER_LOGIN_ANOTHER_DEVICE    | 用户在其他设备登录：如果未开启多设备登录，则在其他设备登录会将当前登录设备踢下线，用户会在当前设备收到该错误。 |
-| 207    |          USER_REMOVED           | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。 |
-| 208    |         USER_REG_FAILED         | 用户注册失败：例如，注册用户之前未开启[开放注册功能](/server-side/account_system.html#开放注册单个用户)等原因。 |
-| 209    |    USER_UPDATEINFO_FAILED       | 更新推送配置错误：例如，用户更新推送昵称或设置免打扰配置时失败。  |
-| 210    |     USER_PERMISSION_DENIED      | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。|
-| 211    |   USER_BINDDEVICETOKEN_FAILED   | 绑定设备 token 失败。  |
+| 0      |           EM_NO_ERROR           | 操作成功。   |  |
+| 1      |          GENERAL_ERROR          | SDK 或请求相关的默认错误，未区分具体错误类型：例如，SDK 内部未正确初始化，或者请求服务器时未识别出具体原因的错误。 | 需要结合日志和调用的 API 进行分析。 |
+| 2      |          NETWORK_ERROR          | 网络错误：无网络服务时会回调此错误，表示 SDK 与服务器的连接已断开。 | 群组/聊天室操作时，如果无网络，可能返回该错误，可以在网络恢复后，重复操作。 |
+| 3      |          DATABASE_ERROR         | 数据库操作失败：打开本地数据库失败。 | 需要根据调用的 API 结合日志分析，如果使用`EMConversation#updateMessage` 方法更新一条本地不存在的消息，可能返回该错误；在数据库未打开时，调用其他本地数据库操作，也可能返回该错误。| 
+| 4      |      EXCEED_SERVICE_LIMIT       | 超过服务限制：超过当前服务版本的数量限制，例如，创建的用户 ID 数量超过购买服务的限制时提示该错误；设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)、[获取单个或多个用户的用户属性](userprofile.html#获取用户属性)和[获取指定用户的指定用户属性](userprofile.html#获取指定用户的指定用户属性)，超过调用频率限制时，会上报该错误。 | 检查调用的 API，若传入 `limit` 参数，可将 `limit` 参数控制在限制内，如果是限流导致，可以在延后一段时间重新调用。 |
+| 8      |       APP_ACTIVE_NUMBER_REACH_LIMITATION    | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。  | 需在环信控制台对 IM 服务进行升级。 |
+| 100    |         INVALID_APP_KEY         | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看 App Key。  | 使用正确的 App Key 进行初始化。 |
+| 101    |        INVALID_USER_NAME        | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。 | 检查报错的 API 中传入的用户 ID 参数是否为空。|
+| 102    |        INVALID_PASSWORD         | 用户密码不正确：登录时提供的密码为空或不正确。 | 检查报错的 API 中传入的密码参数是否正确。 |
+| 103    |           INVALID_URL           | URL 不正确。                 | 检查调用 API 时传入的参数是否正确。   |
+| 104    |          INVALID_TOKEN          | 用户 token 不正确：登录时提供的 token 为空或不正确。 | 检查报错的 API 中传入的 token 参数是否正确。 |
+| 105    |       USER_NAME_TOO_LONG        | 用户 ID 过长：用户 ID 长度不能超过 64 字节。  | 检查报错的 API 中传入的用户 ID 长度是否超过限制。 |
+| 108    |          TOKEN_EXPIRED          | 用户 token 已过期：超出 token 有效期时间。 | 收到 token 已过期的回调后，需要开发者重新生成 token，并调用 login 方法重新登录。 |
+| 109    |        TOKEN_WILL_EXPIRE        | 用户 token 即将过期：超出 token 有效期一半时间时会开始回调此错误码。 | 收到 token 即将过期的回调后，需要开发者重新生成 token，并调用 `EMClient#renew` 方法。 |
+| 110    |          INVALID_PARAM          | 参数无效。     | 检查调用的 API 中传入的参数是否有效。 |
+| 200    |       USER_ALREADY_LOGIN        | 用户已登录：该用户 ID 已经登录。            | 检查 SDK 是否开启了自动登录或已调用了登录方法。如果已开启，在 IM 登录成功后，下次打开时，不需要再重新调用登录方法。 |
+| 201    |         USER_NOT_LOGIN          | 用户未登录：例如，如果未登录成功时发送消息或者使用群组操作的 API，SDK 会提示该错误。 | 检查调用 API 时，是否已完成 IM 登录。 |
+| 202    |   USER_AUTHENTICATION_FAILED    | 用户鉴权失败：<br/> - 若使用用户 ID 和密码登录，用户 ID 或密码不正确时会上报改错误；<br/> - 若使用用户 ID 和用户 token 登录，一般为用户 token 无效或已过期。   | 如果用户已退出登录，需要重新登录；若未退出登录，则重新生成 token，调用`EMClient#renewToken`。 |
+| 203    |       USER_ALREADY_EXIST        | 用户已经存在：注册用户时，传入的的用户 ID 已经存在会提示该错误。 | 该用户 ID 已存在，需要使用其他的用户 ID 注册。 |
+| 204    |         USER_NOT_FOUND          | 用户不存在：例如，登录或获取用户会话列表时，用户 ID 不存在。 | 检查调用的 API 中传入的用户 ID 参数是否正确。 |
+| 205    |      USER_ILLEGAL_ARGUMENT      | 用户参数不正确：例如，创建用户或更新用户属性时，用户 ID 为空或无效。 | 检查调用的 API 传入的参数是否正确。|
+| 206    |    USER_LOGIN_ANOTHER_DEVICE    | 用户在其他设备登录：如果未开启多设备登录，则在其他设备登录会将当前登录设备踢下线，用户会在当前设备收到该错误。 | 设备被踢时，会触发 `EMConnectionListener#onLogout` 事件。收到该事件时，需重新登录。 |
+| 207    |          USER_REMOVED           | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。 | 账号被注销时，会触发 `EMClientDelegate#userAccountDidRemoveFromServer`。收到该事件时，该账号已不可用，需要回到登录页面 // TODO：Android 中是哪个？|
+| 208    |         USER_REG_FAILED         | 用户注册失败：例如，注册用户之前未开启[开放注册功能](/server-side/account_system.html#开放注册单个用户)等原因。 | 不推荐使用 SDK 注册账号，建议开发者在业务服务器注册账号。 |
+| 209    |    USER_UPDATEINFO_FAILED       | 更新推送配置错误：例如，用户更新推送昵称或设置免打扰配置时失败。  | 检查报错的 API，延迟一段时间后，重新调用。 |
+| 210    |     USER_PERMISSION_DENIED      | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。| 检查报错的 API，确认用户是否有操作权限。 |
+| 211    |   USER_BINDDEVICETOKEN_FAILED   | 绑定设备 token 失败。  | 检查调用绑定设备推送 token 的接口中传入的 token 是否为空。 |
 | 212    | USER_UNBIND_DEVICETOKEN_FAILED  | 解绑设备 token 失败。  |
-| 213    |    USER_BIND_ANOTHER_DEVICE     | 用户已在其他设备登录：在单设备登录场景中，默认情况下，后登录的设备会踢掉当前设备的登录。若设置为先登录的设备优先，则后登录设备登录失败并提示该错误。 |
-| 214    |   USER_LOGIN_TOO_MANY_DEVICES   | 用户登录设备数超过限制：该错误在多设备自动登录场景中且打开不踢掉其他设备上的登录的开关时超过登录设备数量的限制才会出现。例如，用户最多可同时登录 4 台设备， A（开启了自动登录）、B、C 和 D。最初，用户在这四个设备上均为登录状态，但由于网络连接原因登出了设备 A，然后手动登录了设备 E。这种情况下，设备 A 的网络恢复正常时会自动登录，这时登录失败且提示该错误。 |
-| 215    |           USER_MUTED            | 用户在群组或聊天室中被禁言：用户被禁言后发送消息时提示该错误。 |
-| 216    | USER_KICKED_BY_CHANGE_PASSWORD  | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 |
-| 217    |   USER_KICKED_BY_OTHER_DEVICE   | 用户被踢下线：开启多设备服务后，如果用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录，SDK 会提示该错误。 |
-| 218    |   USER_ALREADY_LOGIN_ANOTHER    | 其他用户已登录：用户在同一台设备上退出登录前又使用另一账户登录。   |
+| 213    |    USER_BIND_ANOTHER_DEVICE     | 用户已在其他设备登录：在单设备登录场景中，默认情况下，后登录的设备会踢掉当前设备的登录。若设置为先登录的设备优先，则后登录设备登录失败并提示该错误。 | 可修改为多设备登录，或先使用 `EMClient#kickDeviceWithToken` 踢掉其他设备再登录。 |
+| 214    |   USER_LOGIN_TOO_MANY_DEVICES   | 用户登录设备数超过限制：该错误在多设备自动登录场景中且打开不踢掉其他设备上的登录的开关时超过登录设备数量的限制才会出现。例如，用户最多可同时登录 4 台设备， A（开启了自动登录）、B、C 和 D。最初，用户在这四个设备上均为登录状态，但由于网络连接原因登出了设备 A，然后手动登录了设备 E。这种情况下，设备 A 的网络恢复正常时会自动登录，这时登录失败且提示该错误。 | 可增加同时在线的设备数，或先使用 `EMClient#kickDeviceWithToken` 踢掉其他设备再登录。 |
+| 215    |           USER_MUTED            | 用户在群组或聊天室中被禁言：用户被禁言后发送消息时提示该错误。 | 用户在群组/聊天室内被禁言情况下，不能发送消息，可在UI 上限制。 |
+| 216    | USER_KICKED_BY_CHANGE_PASSWORD  | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 | 密码更新会收到回调`EMClientDelegate#userAccountDidForcedToLogout`，需要在收到该回调时，调用 `EMClient#logout` 方法，并回到登录页面。// TODO |
+| 217    |   USER_KICKED_BY_OTHER_DEVICE   | 用户被踢下线：开启多设备服务后，如果用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录，SDK 会提示该错误。 | 会收到回调 `EMClientDelegate#userAccountDidForcedToLogout`。收到该回调时，需调用`EMClient#logout` 方法，并回到登录页面。// TODO |
+| 218    |   USER_ALREADY_LOGIN_ANOTHER    | 其他用户已登录：用户在同一台设备上退出登录前又使用另一账户登录。   | 如果在已登录情况下，要登录另一个账号，需要先调用 `EMClient#logut` 退出账号。 | 
 | 219    |       USER_MUTED_BY_ADMIN       | 用户被禁言：用户被全局禁言后发送消息时提示该错误。 |
 | 220    |       USER_DEVICE_CHANGED       | 用户的登录设备与上次不一致。该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。 |
 | 221    |       USER_NOT_ON_ROSTER        | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 服务概览**页面的**设置**区域开启好友关系检查功能。|
@@ -64,8 +63,6 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 407    |      FILE_IS_EXPIRED      | 文件已过期：例如，用户下载过期的消息附件或群共享文件时提示该错误。消息附件和群共享文件默认可存储 7 天。要提升存储时间上限，请联系商务。 |
 | 500    |         MESSAGE_INVALID         | 消息异常：例如，发送消息时，若消息对象或消息 ID 为空或者消息的发送方 ID 与当前登录 ID 不同则会提示该错误。 |
 | 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。 |
-| 502    |   MESSAGE_SEND_TRAFFIC_LIMIT    | 消息限流：发送消息过快时提示该错误，建议降低发送频率或者减少消息内容的大小。 |
-| 503    |    MESSAGE_ENCRYPTION_ERROR     |                消息加密错误：该错误码已废弃。                |
 | 504    |    MESSAGE_RECALL_TIME_LIMIT    | 消息撤回超时错误：消息撤回超过时间限制时会提示该错误。 |
 | 505    |       SERVICE_NOT_ENABLED       | 服务未开启：尝试使用某些未开通的功能时提示该错误。 |
 | 506    |         MESSAGE_EXPIRED         | 消息已过期：发送群组消息的已读回执时若超过时间限制 (默认 3 天) 会提示该错误。 |
@@ -114,7 +111,6 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 1302   |  REACTION_OPERATION_IS_ILLEGAL  | 用户对该 Reaction 没有操作权限。例如，未添加过该 Reaction 的用户进行删除操作，或者既非单聊消息的发送方也不是非接收方的用户对消息添加 Reaction。 |
 | 1400   |        THREAD_NOT_EXIST         | 该子区不存在。                        |
 | 1401   |      THREAD_ALREADY_EXIST       | 该子区已存在，重复添加子区。                 |
-| 1402   |  THREAD_CREATE_MESSAGE_ILLEGAL  | 创建子区的消息无效：例如，创建子区时父消息被撤回了或者无法使用。 |
 | 1500   |        PUSH_NOT_SUPPORT         | 第三方推送不支持：如果用户配置的第三方推送在当前设备上不支持，会提示该错误。 |
 | 1501   |        PUSH_BIND_FAILED         | 绑定第三方推送 token 失败：如果将第三方推送 token 上传到服务器失败会返回该错误。 |
 | 1502   |       PUSH_UNBIND_FAILED        | 解绑第三方推送 token 失败：如果解绑第三方推送 token 失败会提示该错误。 |
