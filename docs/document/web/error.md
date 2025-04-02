@@ -14,16 +14,14 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | -1     | REQUEST_TIMEOUT                             | 请求服务超时。 | 尝试重试，或者提示请求超时。 |
 | -2     | REQUEST_UNKNOWN                                | 默认未区分类型的错误。| 提示请求失败。 |
 | -3     | REQUEST_PARAMETER_ERROR               | 参数错误。     | 检查参数是否正确。 |
-| -4     | REQUEST_ABORT               | 取消请求。| 提示请求已取消。 |
+| -4     | REQUEST_ABORT               | 取消请求。|
 | 1      | WEBIM_CONNCTION_OPEN_ERROR                    | 登录失败：获取 token 接口请求失败或 Token 无效。 | 根据 error message 判断是参数错误、已经登录、还是接⼝请求失败导致的登录失败，提示原因。 |
 | 2      | WEBIM_CONNCTION_AUTH_ERROR                     | 登录鉴权失败。     | 检查是否没有使⽤正确 App Key 初始化，或者没有登录，或者登录的 Token ⽆效。|
-| 12     | WEBIM_CONNCTION_GETROSTER_ERROR                | 获取 Chat token 失败：通过 Agora token 置换 Chat token 失败。 |  |
 | 16     | WEBIM_CONNCTION_DISCONNECTED                   | WebSocket 断开连接：由于断网等原因 WebSocket 已经断开。      | 提示连接已断开。 |
 | 17     | WEBIM_CONNCTION_AJAX_ERROR                     | 服务请求的通用错误：请求服务器未成功时的默认错误。 | 根据 error message 判断当前操作的错误原因提示失败原因。|
-| 27     | WEBIM_CONNCTION_APPKEY_NOT_ASSIGN_ERROR        | 未设置 App Key：设置的 App Key 错误，登录时会报此错误。 | 设置正确的 App Key。| 
+| 27     | WEBIM_CONNCTION_APPKEY_NOT_ASSIGN_ERROR        | 未设置 App Key：设置的 App Key 错误，登录时会报此错误。 | 设置正确的 App Key。|
 | 28     | WEBIM_CONNCTION_TOKEN_NOT_ASSIGN_ERROR         | 未传 token：调用 API 时没有携带 token，一般没登录时调用 API 会提示这个错误。 | 确保成功登录。 |
 | 31     | WEBIM_CONNCTION_CALLBACK_INNER_ERROR           | 消息发送回调函数内部错误：在接收消息的回调及后续处理的函数中有错误。 | 检查回调函数⾥是否有报错，如 `onTextMessage` 的回调⾥处理消息时有报错。 |
-| 32     | WEBIM_CONNCTION_CLIENT_OFFLINE                 | 当前用户未登录。  |  |
 | 39     | WEBIM_CONNECTION_CLOSED                        | 退出或未登录：未登录或掉线后发送消息。  | 重新登录。|
 | 40     | WEBIM_CONNECTION_ERROR                         | 用户鉴权失败。  | 提示连接已断开。 |
 | 50     | MAX_LIMIT                         | 达到上限，例如 Reaction 数量已达到限制、翻译用量达到上限、应用的日活跃用户数（DAU）超限、在线用户数量超限和月活跃用户数（MAU）。 | 根据 error message 确认哪项服务达到上限，限制相应数量。  |
@@ -33,7 +31,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 101    | WEBIM_UPLOADFILE_ERROR                         | 上传文件失败：如文件过大等。 | 发送附件消息上传时失败，显示发送失败。|
 | 102    | WEBIM_UPLOADFILE_NO_LOGIN                      | 上传文件的请求中未携带用户 token：如未登录就上传文件。| 确保已经登录。 |
 | 200    | WEBIM_DOWNLOADFILE_ERROR                       | 下载文件失败：如超时、网络错误。 | 提示重试。 |
-| 204    | USER_NOT_FOUND                     | 用户不存在，如创建群拉人时不存在的用户报错。  | 检查 userId是否正确。|
+| 204    | USER_NOT_FOUND                     | 用户不存在，如创建群拉人时不存在的用户报错。  | 检查 userId 是否正确。|
 | 205    | MESSAGE_PARAMETER_ERROR                     | 消息参数错误。如撤回消息时未传消息 ID 或者发送消息时未传消息接收方的用户 ID。|确保消息⾥包含消息 ID 和接收方用户 ID，即 `id` 和 `to`。 |
 | 206    | WEBIM_CONNCTION_USER_LOGIN_ANOTHER_DEVICE      | 用户在其他设备登录：如果没有开启多设备登录，则在其他设备登录会将当前登录的设备踢下线，用户会收到此错误。若开启了多设备登录并配置了支持的设备数量，设备间的互踢策略与 `ConnectionParameters#isFixedDeviceId` 参数有关，详见[多设备文档](multi_device.html)。  | 开启多设备功能，详见 [多设备⽂档](https://doc.easemob.com/document/web/multi_device.html)。 |
 | 207    | WEBIM_CONNCTION_USER_REMOVED                   | 用户已经被注销：如果登录用户的 ID 被管理员从管理后台删除则会收到此错误。 | 提示⽤户被注销。|
@@ -43,9 +41,9 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 219    | USER_MUTED_BY_ADMIN   | 用户被全局禁言：在管理后台禁言了此用户后，该用户发送消息时会提示该错误。   | 提示⽤户已被禁⾔。|
 | 221    | USER_NOT_FRIEND                                | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。该功能可在控制台开通。 | 提示⽤户⾮对⽅好友。|
 | 500    | SERVER_BUSY                                    | 服务器忙碌。 | 提示服务忙，请重试。|
-| 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT                | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。 | 提示消息发送失败，包含敏感词等⾮法内容。 | 
-| 502    | MESSAGE_EXTERNAL_LOGIC_BLOCKED                 | 消息被拦截：开通反垃圾服务后，消息被拦截报此错误。           | 提示消息发送失败。| 
-| 503    | SERVER_UNKNOWN_ERROR                           | 消息发送失败未知错误：服务端返回的错误信息超出 SDK 处理范围。 | 提示消息发送失败。
+| 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT                | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。 | 提示消息发送失败，包含敏感词等⾮法内容。 |
+| 502    | MESSAGE_EXTERNAL_LOGIC_BLOCKED                 | 消息被拦截：开通反垃圾服务后，消息被拦截报此错误。           | 提示消息发送失败。|
+| 503    | SERVER_UNKNOWN_ERROR                           | 消息发送失败未知错误：服务端返回的错误信息超出 SDK 处理范围。 | 提示消息发送失败。|
 | 504    | MESSAGE_RECALL_TIME_LIMIT                      | 撤回消息时超出限定时间。  | 提示已经超出可撤回的时间。 | 
 | 505    | SERVICE_NOT_ENABLED                            | 服务未开启：要使用的某些功能未开通。   | 根据 error message 开通相应的功能。 |
 | 506    | SERVICE_NOT_ALLOW_MESSAGING                    | 用户未在白名单中：群组或聊天室开启全员禁言时，若用户未在白名单中发送消息时提示该错误。 | 提示当前群组或聊天室已禁⾔。| 
@@ -68,8 +66,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 704    | CHATROOM_MEMBERS_FULL                          | 聊天室已满：聊天室已经达到人数上限。  | 提示聊天室⼈数已满。|
 | 705    | CHATROOM_NOT_EXIST                             | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。| 检查聊天室 ID 是否正确。 |
 | 800    | LOCAL_DB_OPERATION_FAILED       | 本地数据库操作失败。| ⽤ miniCore 使⽤本地会话列表时，提示会话列表操作失败。|
-| 999    | SDK_RUNTIME_ERROR                              | Websocket 发送消息错误。  | 提示登录失败，重新登录。
- |
+| 999    | SDK_RUNTIME_ERROR                              | Websocket 发送消息错误。  | 提示登录失败，重新登录。|
 | 1100   | PRESENCE_PARAM_EXCEED                          | 发布自定义在线状态时，参数长度超出限制。  | 设置⾃定义在线状态时不要超过1024 字节。|
 | 1101   | REACTION_ALREADY_ADDED                         | Reaction 重复添加。   | 确保同⼀个⽤户不要添加重复的 Reaction。|
 | 1102   | REACTION_CREATING                              | 创建 Reaction 时，其他人正在创建。| 提示其他⼈正在创建 Reaction。|
