@@ -32,18 +32,18 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 204    |         USER_NOT_FOUND          | 用户不存在：例如，登录或获取用户会话列表时，用户 ID 不存在。 | 检查调用的 API 中传入的用户 ID 参数是否正确。 |
 | 205    |      USER_ILLEGAL_ARGUMENT      | 用户参数不正确：例如，创建用户或更新用户属性时，用户 ID 为空或无效。 | 检查调用的 API 传入的参数是否正确。|
 | 206    |    USER_LOGIN_ANOTHER_DEVICE    | 用户在其他设备登录：如果未开启多设备登录，则在其他设备登录会将当前登录设备踢下线，用户会在当前设备收到该错误。 | 设备被踢时，会触发 `EMConnectionListener#onLogout` 事件。收到该事件时，需重新登录。 |
-| 207    |          USER_REMOVED           | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。 | 账号被注销时，会触发 `EMClientDelegate#userAccountDidRemoveFromServer`。收到该事件时，该账号已不可用，需要回到登录页面。 // TODO：Android 中是哪个？|
+| 207    |          USER_REMOVED           | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。 | 账号被注销时，会触发 `EMConnectionListener#onLogout`。收到该事件时，该账号已不可用，需要回到登录页面。|
 | 208    |         USER_REG_FAILED         | 用户注册失败：例如，注册用户之前未开启[开放注册功能](/server-side/account_system.html#开放注册单个用户)等原因。 | 不推荐使用 SDK 注册账号，建议开发者在业务服务器注册账号。 |
 | 209    |    USER_UPDATEINFO_FAILED       | 更新推送配置错误：例如，用户更新推送昵称或设置免打扰配置时失败。  | 检查报错的 API，延迟一段时间后，重新调用。 |
 | 210    |     USER_PERMISSION_DENIED      | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。| 检查用户是否有操作权限。 |
 | 211    |   USER_BINDDEVICETOKEN_FAILED   | 绑定设备 token 失败。  | 检查调用绑定设备推送 token 的接口中传入的 token 是否为空。 |
-| 212    | USER_UNBIND_DEVICETOKEN_FAILED  | 解绑设备 token 失败。  |// TODO：|
+| 212    | USER_UNBIND_DEVICETOKEN_FAILED  | 解绑设备 token 失败。  | 调用`EMClient#logout`时报错 `USER_UNBIND_DEVICETOKEN_FAILED`，可以再次尝试调用 `EMClient#logout`。如果为了保证退出操作，可以调用`EMClient#logout`，且参数设置为`false`（不解绑）。|
 | 213    |    USER_BIND_ANOTHER_DEVICE     | 用户已在其他设备登录：在单设备登录场景中，默认情况下，后登录的设备会踢掉当前设备的登录。若设置为先登录的设备优先，则后登录设备登录失败并提示该错误。 | 可修改为多设备登录，或先使用 `EMClient#kickDeviceWithToken` 踢掉其他设备再登录。 |
 | 214    |   USER_LOGIN_TOO_MANY_DEVICES   | 用户登录设备数超过限制：该错误在多设备自动登录场景中且打开不踢掉其他设备上的登录的开关时超过登录设备数量的限制才会出现。例如，用户最多可同时登录 4 台设备， A（开启了自动登录）、B、C 和 D。最初，用户在这四个设备上均为登录状态，但由于网络连接原因登出了设备 A，然后手动登录了设备 E。这种情况下，设备 A 的网络恢复正常时会自动登录，这时登录失败且提示该错误。 | 可增加同时在线的设备数量，或先使用 `EMClient#kickDeviceWithToken` 踢掉其他设备再登录。 |
 | 215    |           USER_MUTED            | 用户在群组或聊天室中被禁言：用户被禁言后发送消息时提示该错误。 | 用户在群组/聊天室内被禁言情况下，不能发送消息，可在 UI 上限制。 |
-| 216    | USER_KICKED_BY_CHANGE_PASSWORD  | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 | 密码更新会收到回调`EMClientDelegate#userAccountDidForcedToLogout`，需要在收到该回调时，调用 `EMClient#logout` 方法，并回到登录页面。// TODO |
-| 217    |   USER_KICKED_BY_OTHER_DEVICE   | 用户被踢下线：开启多设备服务后，如果用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录，SDK 会提示该错误。 | 被踢设备会收到回调 `EMClientDelegate#userAccountDidForcedToLogout`。收到该回调时，需调用`EMClient#logout` 方法，并回到登录页面。 // TODO |
-| 218    |   USER_ALREADY_LOGIN_ANOTHER    | 其他用户已登录：用户在同一台设备上退出登录前又使用另一账户登录。   | 如果在已登录情况下，要登录另一个账号，需要先调用 `EMClient#logut` 退出账号。 | 
+| 216    | USER_KICKED_BY_CHANGE_PASSWORD  | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 | 密码更新会收到回调 `EMConnectionListener#onLogout`，需要在收到该回调时，调用 `EMClient#logout` 方法，并回到登录页面。|
+| 217    |   USER_KICKED_BY_OTHER_DEVICE   | 用户被踢下线：开启多设备服务后，如果用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录，SDK 会提示该错误。 | 被踢设备会收到回调 `EMConnectionListener#onLogout`。收到该回调时，需调用 `EMClient#logout` 方法，并回到登录页面。|
+| 218    |   USER_ALREADY_LOGIN_ANOTHER    | 其他用户已登录：用户在同一台设备上退出登录前又使用另一账户登录。   | 如果在已登录情况下，要登录另一个账号，需要先调用 `EMClient#logout` 退出账号。 | 
 | 219    |       USER_MUTED_BY_ADMIN       | 用户被禁言：用户被全局禁言后发送消息时提示该错误。 | 在群组/聊天室开启全员禁言的情况下，不能发送消息，可在 UI 上限制。 |
 | 220    |       USER_DEVICE_CHANGED       | 用户的登录设备与上次不一致。该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。 |
 | 221    |       USER_NOT_ON_ROSTER        | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 服务概览**页面的**设置**区域开启好友关系检查功能。| 需要先调用 `EMContactManager#addContact` 方法添加好友。对方同意好友请求后，才能发送消息。 |
@@ -111,6 +111,6 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 1302   |  REACTION_OPERATION_IS_ILLEGAL  | 用户对该 Reaction 没有操作权限。例如，未添加过该 Reaction 的用户进行删除操作，或者既非单聊消息的发送方也不是非接收方的用户对消息添加 Reaction。 | 结合日志分析，检查调用的 API 中传入的参数是否正确。 |
 | 1400   |        THREAD_NOT_EXIST         | 该子区不存在。    | 结合日志，检查调用的 API 中传入的子区 ID 是否正确。 |
 | 1401   |      THREAD_ALREADY_EXIST       | 该子区已存在，重复添加子区。   | 该消息 ID 下子区已存在，重复添加子区。  | 检查调用 API 传入的消息下是否已经创建了子区。 |
-| 1500   |        PUSH_NOT_SUPPORT         | 第三方推送不支持：如果用户配置的第三方推送在当前设备上不支持，会提示该错误。  |   | 
-| 1501   |        PUSH_BIND_FAILED         | 绑定第三方推送 token 失败：如果将第三方推送 token 上传到服务器失败会返回该错误。 |   |
-| 1502   |       PUSH_UNBIND_FAILED        | 解绑第三方推送 token 失败：如果解绑第三方推送 token 失败会提示该错误。 ||
+| 1500   |        PUSH_NOT_SUPPORT         | 第三方推送不支持：如果用户配置的第三方推送在当前设备上不支持，会提示该错误。  | 查看[离线推送概述](/document/android/push/push_overview.html) 文档，检查遗漏配置设备厂商，如果是SDK不支持当前设备，请联系我们。  | 
+| 1501   |        PUSH_BIND_FAILED         | 绑定第三方推送 token 失败：如果将第三方推送 token 上传到服务器失败会返回该错误。 | 注册 EMPushHelper#setPushListener 后，绑定失败会收到回调 `PushListener#onError` 回调。检查网络是否正常，如果正常可以通过调用 `EMPushManager#bindDeviceToken` 再次绑定推送 token 。  |
+| 1502   |       PUSH_UNBIND_FAILED        | 解绑第三方推送 token 失败：如果解绑第三方推送 token 失败会提示该错误。 | 注册 EMPushHelper#setPushListener 后，绑定失败会收到回调 `PushListener#onError` 回调。可以再次尝试调用 `EMClient#logout`；如果为了保证退出操作，可以调用`EMClient#logout`，且参数设置为 `false`（不解绑）。 |
