@@ -41,7 +41,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 ```pod
 # platform :ios, '10.0'
 
- target 'EMChatQuickstart' do
+ target 'HyphenateChatQuickstart' do
      pod 'HyphenateChat'
  end
 ```
