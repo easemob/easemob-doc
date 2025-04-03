@@ -72,9 +72,6 @@ starter:
       - icon: /sdk/web.svg
         link: /uikit/chatuikit/web/chatuikit_integrated_react.html
         text: Web
-      - icon: /sdk/web.svg
-        link: /uikit/chatuikit/web/chatuikit_integrated_react.html
-        text: Web  
       - icon: '/sdk/harmonyos.svg'
         link: '/uikit/chatuikit/harmonyos/chatuikit_integrated.html' 
         text: 'HarmonyOS'  
