@@ -269,7 +269,6 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 | 400      | illegal_argument | from can't be empty  | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from` 。若不传该字段， 服务器会默认设置为 `admin`。   |
 | 400      | illegal_argument | ext must be JSONObject | 请求参数 `ext` 类型不正确。  | 输入正确的请求参数 `ext`（JSON 格式）。  |
 | 403      | forbidden_op | message broadcast service is unopened  | 未开通发送广播消息的功能配置。| 联系商务开通。 | 
-| 403      | message_send_error | online user broadcast limit exceeded | app 全局广播消息发送频率超出限制(默认每分钟限 1 次，每天限 50 次)。 | 限制消息发送频率，详见[文档说明](#向-app-在线用户发送广播消息)。 |
 
 此外，你可以参考[发送单聊消息](message_single.html#错误码)、[发送群聊消息](message_group.html#错误码)和[发送聊天室消息](message_chatroom.html#错误码)的错误码了解可能的原因。
 
@@ -550,6 +549,5 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 | 400      | illegal_argument | from can't be empty  | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from` 。若不传该字段， 服务器会默认设置为 `admin`。   |
 | 400      | illegal_argument | ext must be JSONObject | 请求参数 `ext` 类型不正确。  | 输入正确的请求参数 `ext`（JSON 格式）。  |
 | 403      | forbidden_op | message broadcast service is unopened  | 未开通发送聊天室广播消息的功能配置。| 联系商务开通。 |
-| 403      | message_send_error | chatroom broadcast limit exceeded | 聊天室全局广播消息发送频率超出限制(默认每分钟限发 10 次，每天限发 100 次广播消息)。 | 限制消息发送频率，详见[文档说明](#发送聊天室全局广播消息)。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
