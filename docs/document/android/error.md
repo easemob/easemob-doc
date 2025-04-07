@@ -45,7 +45,7 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 217    |   USER_KICKED_BY_OTHER_DEVICE   | 用户被踢下线：开启多设备服务后，如果用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录，SDK 会提示该错误。 | 被踢设备会收到回调 `EMConnectionListener#onLogout`。收到该回调时，需调用 `EMClient#logout` 方法，并回到登录页面。|
 | 218    |   USER_ALREADY_LOGIN_ANOTHER    | 其他用户已登录：用户在同一台设备上退出登录前又使用另一账户登录。   | 如果在已登录情况下，要登录另一个账号，需要先调用 `EMClient#logout` 退出账号。 | 
 | 219    |       USER_MUTED_BY_ADMIN       | 用户被禁言：用户被全局禁言后发送消息时提示该错误。 | 在群组/聊天室开启全员禁言的情况下，不能发送消息，可在 UI 上限制。 |
-| 220    |       USER_DEVICE_CHANGED       | 用户的登录设备与上次不一致。该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。 |
+| 220    |       USER_DEVICE_CHANGED       | 用户的登录设备与上次不一致。该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。 |登录失败的设备会收到 `EMConnectionListener#onLogout` 事件。收到该事件时，需调用 `EMClient#logout` 方法，并回到登录页面。 |
 | 221    |       USER_NOT_ON_ROSTER        | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 服务概览**页面的**设置**区域开启好友关系检查功能。| 需要先调用 `EMContactManager#addContact` 方法添加好友。对方同意好友请求后，才能发送消息。 |
 | 300    |      SERVER_NOT_REACHABLE       | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误。 | 调用登录 API 返回该错误码，可能是由于网络受限，或域名被封禁，可尝试切换设备网络。如果用户在沙特/菲律宾等地区，需要联系商务，开启 dnsconfig中 TLS 加密。其他操作返回该错误码，一般是网络问题，可在切换网络或延迟一段时间后重新调用。 |
 | 301    |         SERVER_TIMEOUT          | 请求服务超时：如果调用 API 在特定时间内服务器未响应则返回该错误，一般为 30 秒或 60 秒。 | 一般是网络问题，可在切换网络或延迟一段时间后重新调用 API。 |
@@ -79,12 +79,12 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 605    | GROUP_SHARED_FILE_INVALIDID  | 群组共享文件 ID 不合法。| 检查调用的下载和删除共享文件 API，确认传入的共享文件 ID 参数 `sharedFileId` 是否为空。|
 | 606    | GROUP_NOT_EXIST  | 群组不存在：尝试对不存在的群组进行操作时提示该错误。| 结合日志，检查调用的 API 中传入的群组 ID 是否正确，或为已解散的群组的 ID。 |
 | 607    | GROUP_DISABLED | 群组被禁用。 | 可在 UI 上进行提示，向管理员申请解禁群组。 |
-| 608    | GROUP_NAME_VIOLATION        | 群组名称无效。 | 检查调用的 API 中传入的群组名称参数是否包含敏感信息 |
+| 608    | GROUP_NAME_VIOLATION        | 群组名称无效。 | 检查调用的 API 中传入的群组名称参数是否包含敏感信息。 |
 | 609    |   GROUP_MEMBER_ATTRIBUTES_REACH_LIMIT   | 群组成员自定义属性的总长度达到上限。  | 单个群组成员的自定义属性总长度不能超过 4 KB。 |
 | 610    |   GROUP_MEMBER_ATTRIBUTES_UPDATE_FAILED   | 设置群成员自定义属性失败。  | 需要结合调用的 API 以及日志进一步分析。 |
 | 611    |   GROUP_MEMBER_ATTRIBUTES_KEY_REACH_LIMIT   | 设置的群成员自定义属性 key 长度（不能超过 16 字节）超限。 |检查调用的 API 查看设置的群成员属性的 key 是否超过限制。 |
 | 612    |   GROUP_MEMBER_ATTRIBUTES_VALUE_REACH_LIMIT   | 设置的群成员自定义属性 value 长度（不能超过 512 字节）超限。  | 检查调用的 API 查看设置的群成员属性的 value 是否超过限制。 |
-| 613   | GROUP_USER_IN_BLOCKLIST    | 该用户在群组黑名单中。群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。 | 可在 UI 上进行提示，或检查用户是否在群组黑名单中。 |
+| 613   | GROUP_USER_IN_BLOCKLIST    | 该用户在群组黑名单中。群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。 | 可在 UI 上进行提示，或在环信控制台上检查用户是否在群组黑名单中。 |
 | 700    |       CHATROOM_INVALID_ID       | 聊天室 ID 无效：调用聊天室相关 API，传入的聊天室 ID 为空时提示该错误。 | 检查调用的 API 中传入的聊天室 ID 是否为空。 |
 | 701    |     CHATROOM_ALREADY_JOINED     | 已在该聊天室中：调用加入聊天室的 API 时如果已经在该聊天室中则提示该错误。 | 可以按照加入聊天室成功的情况处理。 |
 | 702    |       CHATROOM_NOT_JOINED       | 未加入该聊天室：用户在未加入的聊天室中发送消息或进行聊天室操作时提示该错误。 | 结合日志，检查调用 API 时传入的聊天室 ID 是否正确，或传入了已解散或之前加入失败的聊天室 ID。 |
@@ -93,7 +93,7 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 705    |       CHATROOM_NOT_EXIST        | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。   | 检查调用的 API 中传入的聊天室 ID 是否正确，或传入了已解散或之前加入失败的聊天室 ID。 |
 | 706    |       CHATROOM_OWNER_NOT_ALLOW_LEAVE        | 聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#allowChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。   | 检查 SDK 初始化时 `EMOptions#allowChatroomOwnerLeave` 设置的值。 |
 | 707    |       CHATROOM_USER_IN_BLOCKLIST        | 该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。   | 在环信控制台上检查用户是否在聊天室的黑名单中。|
-| 900    |    USERINFO_USERCOUNT_EXCEED    | 获取用户属性的用户个数超过 100。   | 调用 API 获取用户属性时一次最多可获取 100个用户的属性，可分批获取。 |
+| 900    |    USERINFO_USERCOUNT_EXCEED    | 获取用户属性的用户个数超过 100。   | 调用 API 获取用户属性时一次最多可获取 100 个用户的属性，可分批获取。 |
 | 901    |   USERINFO_DATALENGTH_EXCEED    | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。 | 检查调用 API 设置的用户属性是否超过限制。 |
 | 1000   |       CONTACT_ADD_FAILED        | 添加联系人失败。  | 结合调用的 API 和错误描述分析联系人添加失败的原因。 |
 | 1001   |       CONTACT_REACH_LIMIT       | 邀请者的联系人数量已达到上限。  | 可以在 UI 上提示该错误，或联系商务提升最大联系人数量。 |
@@ -111,6 +111,6 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 1302   |  REACTION_OPERATION_IS_ILLEGAL  | 用户对该 Reaction 没有操作权限。例如，未添加过该 Reaction 的用户进行删除操作，或者既非单聊消息的发送方也不是非接收方的用户对消息添加 Reaction。 | 结合日志分析，检查调用的 API 中传入的参数是否正确。 |
 | 1400   |        THREAD_NOT_EXIST         | 该子区不存在。    | 结合日志，检查调用的 API 中传入的子区 ID 是否正确。 |
 | 1401   |      THREAD_ALREADY_EXIST       | 该子区已存在，重复添加子区。   | 该消息 ID 下子区已存在，重复添加子区。  | 检查调用 API 传入的消息下是否已经创建了子区。 |
-| 1500   |        PUSH_NOT_SUPPORT         | 第三方推送不支持：如果用户配置的第三方推送在当前设备上不支持，会提示该错误。  | 查看[离线推送概述](/document/android/push/push_overview.html) 文档，检查遗漏配置设备厂商，如果是SDK不支持当前设备，请联系我们。  | 
+| 1500   |        PUSH_NOT_SUPPORT         | 第三方推送不支持：如果用户配置的第三方推送在当前设备上不支持，会提示该错误。  | 查看[离线推送概述](/document/android/push/push_overview.html) 文档，检查遗漏配置设备厂商，如果是 SDK 不支持当前设备，请联系商务。  | 
 | 1501   |        PUSH_BIND_FAILED         | 绑定第三方推送 token 失败：如果将第三方推送 token 上传到服务器失败会返回该错误。 | 注册 EMPushHelper#setPushListener 后，绑定失败会收到回调 `PushListener#onError` 回调。检查网络是否正常，如果正常可以通过调用 `EMPushManager#bindDeviceToken` 再次绑定推送 token 。  |
 | 1502   |       PUSH_UNBIND_FAILED        | 解绑第三方推送 token 失败：如果解绑第三方推送 token 失败会提示该错误。 | 注册 EMPushHelper#setPushListener 后，绑定失败会收到回调 `PushListener#onError` 回调。可以再次尝试调用 `EMClient#logout`；如果为了保证退出操作，可以调用`EMClient#logout`，且参数设置为 `false`（不解绑）。 |

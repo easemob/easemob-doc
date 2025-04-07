@@ -25,13 +25,13 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 104    |          EMErrorInvalidToken        | 用户 token 不正确：登录时提供的 token 为空或不正确。                                |  检查调用的 API 中传入的 token 参数是否正确。 |
 | 105    |       EMErrorUsernameTooLong        | 用户 ID 过长：用户 ID 长度不能超过 64 字节。  | 检查 API 中传入的用户 ID 长度是否超过限制。 |
 | 108    |       EMErrorTokenExpire     | 用户 token 已过期：超出用户 token 有效期时间。        | 收到 token 已过期的回调后，需要开发者重新生成 token，并调用 `login` 方法重新登录。 |
-| 109    |       EMErrorTokeWillExpire      | 用户 token 即将过期：超出 token 有效期一半时间时会开始回调此错误码。 | 收到 token 即将过期的回调后，需重新生成 token，并调用 `EMClient#renew` 方法更新 token。 |
+| 109    |       EMErrorTokeWillExpire      | 用户 token 即将过期：超出 token 有效期一半时间时会开始回调此错误码。 | 收到 token 即将过期的回调后，需重新生成 token，并调用 `EMClient#renewToken` 方法更新 token。 |
 | 110    |       EMErrorInvalidParam        | 参数无效。  | 检查调用的 API 中传入的参数是否有效。 |
 | 200    |     EMErrorUserAlreadyLoginSame     | 当前用户已经登录：该用户 ID 已经登录。 | 检查 SDK 是否开启了自动登录或已调用了登录方法。如果已开启，在 IM 登录成功后，下次打开时，不需要再重新调用登录方法。 |
 | 201    |         EMErrorUserNotLogin         | 用户未登录：例如，如果未登录成功时调用发送消息或群组操作的 API 会提示该错误。 | 检查调用 API 时，是否已完成 IM 登录。 |
-| 202    |   EMErrorUserAuthenticationFailed   | 用户鉴权失败：<br/> - 若使用用户 ID 和密码登录，用户 ID 或密码不正确时会上报改错误；<br/> - 若使用用户 ID 和用户 token 登录，一般为用户 token 无效或已过期。 | 如果用户已退出登录，需要重新登录，未退出登录，则重新生成token，调用EMClient#renewToken |
+| 202    |   EMErrorUserAuthenticationFailed   | 用户鉴权失败：<br/> - 若使用用户 ID 和密码登录，用户 ID 或密码不正确时会上报改错误；<br/> - 若使用用户 ID 和用户 token 登录，一般为用户 token 无效或已过期。 | 如果用户已退出登录，需要重新登录，未退出登录，则重新生成 token，调用 `EMClient#renewToken` 更新 token。 |
 | 203    |       EMErrorUserAlreadyExist       | 用户已经存在：注册用户时，传入的的用户 ID 已经存在会提示该错误。 | 需要使用其他的用户 ID 注册，或者可认为已成功注册。 |
-| 204    |         EMErrorUserNotFound         | 用户不存在：例如，登录或获取用户会话列表时，用户 ID 不存在。| 检查调用的api，传入的userId参数是否正确 |
+| 204    |         EMErrorUserNotFound         | 用户不存在：例如，登录或获取用户会话列表时，用户 ID 不存在。| 检查调用的 API，传入的 userId 参数是否正确。 |
 | 205    |     EMErrorUserIllegalArgument      | 用户参数不正确：例如，创建用户或更新用户属性时，用户 ID 为空或无效。 | 检查调用的 API 传入的参数是否正确。 |
 | 206    |   EMErrorUserLoginOnAnotherDevice   | 用户在其他设备登录：如果未开启多设备登录，则在其他设备登录会将当前登录设备踢下线，用户会在当前设备收到该错误。 | 设备被踢时，会触发回调 `EMClientDelegate#userAccountDidLoginFromOtherDevice`。收到该回调时，需重新登录。 |
 | 207    |         EMErrorUserRemoved          | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。| 账号被注销时，会触发 `EMClientDelegate#userAccountDidRemoveFromServer` 事件,收到该事件时，该账号已不可用，需要回到登录页面。 |
@@ -42,10 +42,10 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 213    |    EMErrorUserBindAnotherDevice     |用户已在其他设备登录：在单设备登录场景中，默认情况下，后登录的设备会踢掉当前设备的登录。若设置为先登录的设备优先，则后登录设备登录失败并提示该错误。| 可修改为多设备登录，或先使用 `EMClient#kickDevice` 踢掉其他设备再登录。 |
 | 214    |   EMErrorUserLoginTooManyDevices    | 用户登录设备数超过限制：该错误在多设备自动登录场景中且打开不踢掉其他设备上的登录的开关时超过登录设备数量的限制才会出现。例如，用户最多可同时登录 4 台设备， A（开启了自动登录）、B、C 和 D。最初，用户在这四个设备上均为登录状态，但由于网络连接原因登出了设备 A，然后手动登录了设备 E。这种情况下，设备 A 的网络恢复正常时会自动登录，这时登录失败且提示该错误。 | 可增加同时在线的设备数量，或先使用 `EMClient#kickDevice` 踢掉其他设备再登录。 |
 | 215    |          EMErrorUserMuted           | 用户在群组聊天室中被禁言：用户被禁言后发送消息时提示该错误。 | 用户在群组/聊天室内被禁言情况下，不能发送消息，可在 UI 上限制。 |
-| 216    |  EMErrorUserKickedByChangePassword  | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 | 密码更新会收到回调`EMClientDelegate#userAccountDidForcedToLogout`，需要在收到该回调时，调用 `EMClient#logout` 方法，并回到登录页面。// TODO |
+| 216    |  EMErrorUserKickedByChangePassword  | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 | 密码更新会收到回调`EMClientDelegate#userAccountDidForcedToLogout`，需要在收到该回调时，调用 `EMClient#logout` 方法，并回到登录页面。|
 | 217    |   EMErrorUserKickedByOtherDevice    | 用户被踢下线：开启多设备服务后，如果用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录，SDK 会提示该错误。 | 被踢设备会收到回调`EMClientDelegate#userAccountDidForcedToLogout`。收到该回调时，需调用`EMClient#logout` 方法，并回到登录页面。 |
 | 218    |   EMErrorUserAlreadyLoginAnother    | 其他用户已登录：用户在同一台设备上退出登录前又使用另一账户登录。 | 如果在已登录情况下，要登录另一个账号，需要先调用`EMClient#logut` 退出账号。 |
-| 219    |       EMErrorUserMutedByAdmin       | 用户被禁言：用户被全局禁言后发送消息时提示该错误。  | 在群组/聊天室开启全员禁言的情况下，不能发送消息，可在 UI 上限制。 |
+| 219    |       EMErrorUserMutedByAdmin       | 用户被禁言：用户在群组/聊天室开启全员禁言时发送消息时提示该错误。  | 在群组/聊天室开启全员禁言的情况下，不能发送消息，可在 UI 上限制。 |
 | 220    |       EMErrorUserDeviceChanged       | 用户的登录设备与上次不一致。该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。  | 登录失败的设备会收到 EMClientDelegate#userAccountDidLoginFromOtherDevice 事件。收到该事件时，需调用 `EMClient#logout` 方法，并回到登录页面。 |
 | 221    |      EMErrorUserNotOnRoster   | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 服务概览**页面的**设置**区域开启好友关系检查功能。 | 需要先调用 `EMContactManager#addContact` 方法添加好友。对方同意好友请求后，才能发送消息。 |
 | 300    |      EMErrorServerNotReachable      | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误 | 调用登录 API 返回该错误码，可能是由于网络受限，或域名被封禁，可尝试切换设备网络。如果用户在沙特/菲律宾等地区，需要联系商务，开启 dnsconfig中 TLS 加密。其他操作返回该错误码，一般是网络问题，可在切换网络或延迟一段时间后重新调用。 |
