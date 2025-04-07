@@ -51,7 +51,7 @@
   <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
   <ImageItem src="/images/uikit/chatuikit/android/main_contact_list.png" title="通讯录" />
-  <ImageItem src="/images/uikit/chatuikit/android/main_chat_group.png" title="群聊" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/main_chat_group.png" title="群聊" />
 </ImageGallery>
 
 ### 聊天页面功能
@@ -61,7 +61,7 @@
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="发送多种类型的消息" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="消息长按操作" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/message_longpress.png" title="消息长按操作" />
   <ImageItem src="/images/uikit/chatuikit/android/message_reply.png" title="消息引用" />
   <ImageItem src="/images/uikit/chatuikit/android/message_deliveryreceipt.png" title="已发送回执" />
   <ImageItem src="/images/uikit/chatuikit/android/message_readreceipt.png" title="已读回执" />
@@ -72,7 +72,8 @@
 `ConversationListPage` 是提供会话列表组件的容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_operation.png" title="会话操作" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/conversation_slide.png" title="会话左滑操作" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/conversation_operation.png" title="会话操作" />
 </ImageGallery>
 
 ### 通讯录页面功能

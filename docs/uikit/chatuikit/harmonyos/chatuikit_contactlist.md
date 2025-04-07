@@ -29,7 +29,13 @@ this.pathStack.pushPath({ name: 'ContactListPage' });
 
 开发者可以通过添加联系人列表组件 `ContactListView` 将其嵌入到自己的页面中，以便进行更多的定制化开发。联系人列表组件不包含标题栏，需要开发者自己实现。
 
-`ContactListView` 组件已经封装了联系人列表的主要逻辑，开发者需要实现列表项的点击事件以及点击搜索框的事件。示例如下：
+`ContactListView` 组件已经封装了联系人列表的主要逻辑，开发者需要实现列表项的点击事件以及点击搜索框的事件。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/contact_list_view.png" title="使用 ContactListView" />
+</ImageGallery>
+
+示例如下：
 
 1. 编写包含 NavDestination 子组件的页面。
    
@@ -137,7 +143,13 @@ struct Index {
 
 ### 自定义列表项点击事件
 
-开发者如果使用的是组件 `ContactListView`，需要实现列表项的点击事件，示例如下：
+开发者如果使用的是组件 `ContactListView`，需要实现列表项的点击事件。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_contact_item_click.png" title="自定义列表项点击事件" />
+</ImageGallery>
+
+示例如下：
 
 ```typescript
 @ComponentV2
@@ -173,7 +185,14 @@ export struct ContactsPage {
  - 自定义搜索框点击事件；
  - 自定义搜索框布局。
 
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_contact_search_hide.png" title="隐藏搜索框" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_contact_search_click.png" title="点击搜索框" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_contact_search_layout.png" title="自定义搜索框布局" />
+</ImageGallery>
+
 示例如下：
+
 ```typescript
 @ComponentV2
 export struct ContactsPage {
@@ -221,7 +240,13 @@ export struct ContactsPage {
 
 ### 自定义联系人列表更多功能项
 
-开发者可以在联系人列表的头部增加自定义的功能布局，比如增加群组列表的入口，黑名单的入口等。示例代码如下：
+开发者可以在联系人列表的头部增加自定义的功能布局，比如增加群组列表的入口，黑名单的入口等。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_contact_entry.png" title="自定义联系人列表更多功能项" />
+</ImageGallery>
+
+示例代码如下：
 
 ```typescript
 @ComponentV2

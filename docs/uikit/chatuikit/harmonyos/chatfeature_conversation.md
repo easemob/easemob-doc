@@ -10,14 +10,26 @@
 
 在单群聊 UIKit 中，用户可以通过左滑会话的操作触发会话拓展功能菜单，选择会话置顶选项，指定会话将会被放置在会话列表前排区域。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/conversation/conversation_pin_harmonyos.png" title="会话置顶" />
+</ImageGallery>
+
 ## 会话免打扰
 
 会话免打扰是指用户暂时关闭特定会话的通知，避免被打扰。
 
 在单群聊 UIKit 中，用户可以通过左滑会话的操作触发会话拓展功能菜单，选择会话免打扰选项，指定会话将不再接收通知。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/conversation/conversation_dnd_harmonyos.png" title="会话免打扰" />
+</ImageGallery> 
+
 ## 会话删除	
 
 会话删除是指用户永久删除不再需要的会话，清理会话列表。
 
 在单群聊 UIKit 中，用户可以通过左滑会话的操作触发会话拓展功能菜单，选择会话删除选项，指定会话将会被删除。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/conversation/conversation_delete_harmonyos.png" title="会话删除" />
+</ImageGallery>
