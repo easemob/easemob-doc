@@ -29,11 +29,13 @@ this.pathStack.pushPath({ name: 'ContactListPage' });
 
 开发者可以通过添加联系人列表组件 `ContactListView` 将其嵌入到自己的页面中，以便进行更多的定制化开发。联系人列表组件不包含标题栏，需要开发者自己实现。
 
+`ContactListView` 组件已经封装了联系人列表的主要逻辑，开发者需要实现列表项的点击事件以及点击搜索框的事件。
+
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/harmonyos/contact_list_view.png" title="使用 ContactListView" />
 </ImageGallery>
 
-`ContactListView` 组件已经封装了联系人列表的主要逻辑，开发者需要实现列表项的点击事件以及点击搜索框的事件。示例如下：
+示例如下：
 
 1. 编写包含 NavDestination 子组件的页面。
    

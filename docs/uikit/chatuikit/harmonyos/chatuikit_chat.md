@@ -185,7 +185,7 @@ export struct MyChatPage {
 1. 自定义扩展功能点击事件。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_expansion.png" title="自定义聊天扩展功能" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_expansion.png" title="自定义聊天扩展点击事件" />
 </ImageGallery>
 
 开发者可以通过监听 `ChatView` 的 `onExtendMenuClick` 来处理扩展功能点击事件。示例代码如下：
@@ -218,7 +218,7 @@ export struct MyChatPage {
 }
 ```
 
-1. 增加自定义扩展功能。
+2. 增加自定义扩展功能。
 
 开发者也可以增加自定义的扩展功能。示例代码如下：
 
@@ -264,7 +264,7 @@ export struct MyChatPage {
 开发者可以根据需要对长按消息的菜单进行调整。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_long_press.png" title="自定义聊天扩展功能" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_long_press.png" title="自定义消息长按菜单" />
 </ImageGallery>
 
 示例代码如下：
