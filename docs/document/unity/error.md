@@ -40,7 +40,7 @@ SDKClient.Instance.Login(username, passwd,
 | 4      | EXCEED_SERVICE_LIMIT                  | 超过服务限制：超过当前服务版本的数量限制，例如，创建的用户 ID 数量超过购买服务的限制时提示该错误；设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)和[获取单个或多个用户的用户属性](userprofile.html#获取用户属性)，超过调用频率限制时，会上报该错误。 | 检查调用的 API，若传入 `limit` 参数，可将该参数控制在上限内，若是限流导致，可以在延后一段时间重新调用。 |
 | 8      | APP_ACTIVE_NUMBER_REACH_LIMITATION    | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。 | 需在[环信控制台](https://console.easemob.com/user/login)对 IM 服务进行升级。 |
 | 100    | INVALID_APP_KEY                       | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看 App Key。 | 使用正确的 App Key 进行初始化。 |
-| 101    | INVALID_USER_NAME                     | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。 | 检查报错API 中传入的用户 ID 参数是否为空。 |
+| 101    | INVALID_USER_NAME                     | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。 | 检查报错 API 中传入的用户 ID 参数是否为空。 |
 | 102    | INVALID_PASSWORD                      | 用户密码不正确：登录时提供的密码为空或不正确。 | 检查调用的 API 中传的密码参数是否正确。 |
 | 103    | INVALID_URL                           | URL 不正确。 | 检查调用 API 时传入的参数是否正确。 |
 | 104    | INVALID_TOKEN                         | 用户 token 不正确：登录时提供的 token 为空或不正确。 | 检查调用的 API 中传入的 token 参数是否正确。 |
@@ -64,7 +64,7 @@ SDKClient.Instance.Login(username, passwd,
 | 216    | USER_KICKED_BY_CHANGE_PASSWORD        | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 | 密码更新会收到回调`IConnectionDelegate#OnChangedIMPwd`，需要在收到该回调时，调用 `SDKClient#Logout` 方法，并回到登录页面。 |
 | 217    | USER_KICKED_BY_OTHER_DEVICE           | 用户被踢下线：开启多设备服务后，如果用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录，SDK 会提示该错误。 | 被踢设备会收到回调`IConnectionDelegate#OnKickedByOtherDevice`。收到该回调时，需调用`SDKClient#Logout` 方法，并回到登录页面。 |
 | 218    | USER_ALREADY_LOGIN_ANOTHER            | 其他用户已登录：用户在同一台设备上退出登录前又使用另一账户登录。 | 如果在已登录情况下，要登录另一个账号，需要先调用`SDKClient#Logout` 退出账号。 |
-| 219    | USER_MUTED_BY_ADMIN                   | 用户被禁言：用户被全局禁言后发送消息时提示该错误。 | 在群组/聊天室开启全员禁言的情况下，不能发送消息，可在 UI 上限制。 |
+| 219    | USER_MUTED_BY_ADMIN                   | 用户被禁言：用户在群组/聊天室开启全员禁言的情况下发送消息时提示该错误。 | 在群组/聊天室开启全员禁言的情况下，不能发送消息，可在 UI 上限制。 |
 | 220    | USER_DEVICE_CHANGED                   | 用户的登录设备与上次不一致。该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。 | 登录失败的设备会收到 `IConnectionDelegate#OnLoggedOtherDevice` 事件。收到该事件时，需调用 `Client#Logout` 方法，并回到登录页面。 |
 | 221    | USER_NOT_FRIEND                       | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 服务概览**页面的**设置**区域开启好友关系检查功能。 | 需要先调用 `ContactManager#AddContact` 方法添加好友。对方同意好友请求后，才能发送消息。 |
 | 300    | SERVER_NOT_REACHABLE                  | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误。 | 调用登录 API 返回该错误码，可能是由于网络受限，或域名被封禁，可尝试切换设备网络。如果用户在沙特/菲律宾等地区，需要联系商务，开启 dnsconfig中 TLS 加密。其他操作返回该错误码，一般是网络问题，可在切换网络或延迟一段时间后重新调用。 |
