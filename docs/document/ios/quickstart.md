@@ -94,6 +94,11 @@ end
 
 ## 3. 初始化 SDK
 
+导入SDK头文件
+```
+#import <HyphenateChat/HyphenateChat.h>
+```
+
 在工程的 AppDelegate 中的以下方法中，调用 SDK 对应方法。
 
 ```objectivec
