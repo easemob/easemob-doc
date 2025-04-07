@@ -120,7 +120,13 @@ this.navPathStack?.pushPath({name: "MyChatPage", param: {
 
 ### 自定义输入菜单
 
-开发者可以通过 `ChatPrimaryMenuModel` 控制输入菜单显示哪些菜单。示例如下：
+开发者可以通过 `ChatPrimaryMenuModel` 控制输入菜单显示哪些菜单。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_input_bar.png" title="自定义输入菜单" />
+</ImageGallery>
+
+示例如下：
 
 ```typescript
 @ComponentV2
@@ -178,6 +184,10 @@ export struct MyChatPage {
 
 1. 自定义扩展功能点击事件。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_expansion.png" title="自定义聊天扩展功能" />
+</ImageGallery>
+
 开发者可以通过监听 `ChatView` 的 `onExtendMenuClick` 来处理扩展功能点击事件。示例代码如下：
 
 ```typescript
@@ -208,7 +218,7 @@ export struct MyChatPage {
 }
 ```
 
-2. 增加自定义扩展功能。
+1. 增加自定义扩展功能。
 
 开发者也可以增加自定义的扩展功能。示例代码如下：
 
@@ -251,7 +261,13 @@ export struct MyChatPage {
 
 ### 自定义消息长按菜单
 
-开发者可以根据需要对长按消息的菜单进行调整。示例代码如下：
+开发者可以根据需要对长按消息的菜单进行调整。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_long_press.png" title="自定义聊天扩展功能" />
+</ImageGallery>
+
+示例代码如下：
 
 ```typescript
 @ComponentV2
@@ -301,7 +317,13 @@ export struct MyChatPage {
 
 ### 自定义消息发送失败事件 
 
-开发者可以通过监听 `ChatView` 提供的回调 `onErrorIconClick` 处理点击发送失败按钮的事件。示例代码如下：
+开发者可以通过监听 `ChatView` 提供的回调 `onErrorIconClick` 处理点击发送失败按钮的事件。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_send_failure.png" title="自定义消息发送失败事件" />
+</ImageGallery>
+
+示例代码如下：
 
 ```typescript
 @ComponentV2
@@ -323,7 +345,13 @@ export struct MyChatPage {
 
 ### 自定义点击消息事件
 
-开发者可以通过监听 `ChatView` 提供的回调 `onItemClick` 处理点击消息的事件。示例代码如下：
+开发者可以通过监听 `ChatView` 提供的回调 `onItemClick` 处理点击消息的事件。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_message_click.png" title="自定义点击消息事件" />
+</ImageGallery>
+
+示例代码如下：
 
 ```typescript
 @ComponentV2

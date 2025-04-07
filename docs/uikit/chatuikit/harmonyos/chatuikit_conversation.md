@@ -38,6 +38,10 @@ this.pathStack.pushPath({ name: 'ConversationListPage' });
 
 开发者可以通过添加会话列表组件 `ConversationListView` 将其嵌入到自己的页面中，以便进行更多的定制化开发。会话列表组件不包含标题栏，需要开发者自己实现。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/conversation_list_view.png" title="使用 ConversationListView" />
+</ImageGallery>
+
 `ConversationListView` 组件已经封装了会话列表的主要逻辑，开发者需要实现列表项的点击事件以及点击搜索框的事件。示例如下：
 
 1. 编写包含 NavDestination 子组件的页面。
@@ -176,7 +180,13 @@ export struct ConversationsPage {
 
 ### 自定义会话列表项点击事件
 
-开发者如果使用的是组件 `ConversationListView`，需要实现会话列表项的点击事件，示例如下：
+开发者如果使用的是组件 `ConversationListView`，需要实现会话列表项的点击事件。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_conversation_list_item_click.png" title="自定义会话列表项点击事件" />
+</ImageGallery>
+
+示例如下：
 
 ```typescript
 @ComponentV2
@@ -211,6 +221,12 @@ export struct ConversationsPage {
  - 是否显示搜索框；
  - 自定义搜索框点击事件；
  - 自定义搜索框布局。
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_conversation_search_hide.png" title="隐藏搜索框" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_conversation_search_click.png" title="点击搜索框" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_conversation_search_layout.png" title="自定义搜索框布局" />
+</ImageGallery>
 
 示例如下：
 
@@ -305,7 +321,13 @@ export struct ConversationsPage {
 
 ### 自定义会话列表项左滑菜单
 
-开发者可以增加或者修改会话列表项左滑菜单项。示例如下：
+开发者可以增加或者修改会话列表项左滑菜单项。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_conversation_slide_menu.png" title="自定义会话列表项点击事件" />
+</ImageGallery>
+
+示例如下：
 
 ```typescript
 import { ChatKitConversation, ConversationListView, ConvMenuItem, KitConstants } from '@easemob/chatuikit';
