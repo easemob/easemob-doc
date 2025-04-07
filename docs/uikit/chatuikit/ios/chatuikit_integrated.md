@@ -50,3 +50,7 @@ pod install --repo-update
 ## 常见问题
 
 若 Xcode 15 编译出现 **Sandbox: rsync.samba(47334) deny(1) file-write-create...** 报错，你可以在 **Build Setting** 中搜索 **ENABLE_USER_SCRIPT_SANDBOXING**，将 **User Script Sandboxing** 的设置修改为 **NO**。
+
+![img](/images/uikit/chatuikit/ios/integration_error_image_1.png)
+
+![img](/images/uikit/chatuikit/ios/integration_error_image_2.png)s

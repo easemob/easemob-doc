@@ -10,7 +10,7 @@
 
 - Xcode：推荐最新版本。
 - 安装 iOS 13.0 或以上版本的 iOS 模拟器或 Apple 设备。
-- CocoaPods 已经安装并且已跑通了集成。
+- CocoaPods 1.14.3 及以上版本已经安装并且已跑通了集成。
 - 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
