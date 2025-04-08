@@ -9,7 +9,7 @@
 与[快速开始中的初始化](chatuikit_quickstart.html##第一步-初始化)相比，这里增加了 `ChatOptions` 的参数，包括 SDK 中是否打印日志、是否自动登录以及是否默认使用用户属性的开关配置。
 
 ```swift
-let error = ChatUIKitClient.shared.setup(option: ChatOptions(appkey: appKey))
+let error = ChatUIKitClient.shared.setup(option: ChatOptions(appKey: appKey))
 ```
 
 ## 登录
