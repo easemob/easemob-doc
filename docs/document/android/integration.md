@@ -84,6 +84,18 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 | `x86` 文件夹           | `/app/src/main/jniLibs/` |
 | `x86_64` 文件夹        | `/app/src/main/jniLibs/` |
 
+最后在你的项目中 `module` 的 `build.gradle` 中添加如下依赖：
+
+```gradle
+...
+dependencies {
+    ...
+    // x.y.z 请填写具体版本号，必须为 3.8.2 或以上版本。
+    // 可通过 SDK 发版说明获得最新版本号。
+    implementation(files("libs/hyphenatechat_x.y.z.jar"))
+}
+```
+
 如果对生成的 `apk` 大小比较敏感，我们建议使用 `jar` 方式，并且手工拷贝 `so`，而不是使用 `Aar`，因为 `Aar` 方式会把各个平台的 `so` 文件都包含在其中。采用 `jar` 方式，可以仅保留一个 `ARCH` 目录，建议仅保留 `armeabi-v7a`，这样虽然在对应平台执行的速度会降低，但是能有效减小 `apk` 的大小。
 
 ### 方法三：动态加载 .so 库文件
