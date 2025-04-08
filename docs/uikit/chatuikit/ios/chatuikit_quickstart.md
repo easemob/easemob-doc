@@ -41,7 +41,7 @@ import EaseChatUIKit
  option.isAutoLogin = false
  _ = ChatUIKitClient.shared.setup(option: option)
 // UIKit 4.10.0 以下版本
-let error = ChatUIKitClient.shared.setup(appkey: "Appkey")
+let error = EaseChatUIKitClient.shared.setup(appKey: "Appkey")
 ```
 
 ### 第三步 登录
