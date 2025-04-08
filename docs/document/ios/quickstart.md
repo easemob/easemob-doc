@@ -60,38 +60,6 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 添加完成后，项目会自动链接所需系统库。
 
-### 集成问题
-
-由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现如下报错：
-
-```
-[!] The 'Pods-EaseChatDemo' target has frameworks with conflicting names: aosl.xcframework.
-```
-
-要修复该问题，需要修改 `Podfile` 文件，添加如下脚本：
-
-```ruby
-pre_install do |installer|
-  # 定义 AgoraRtcEngine_iOS framework 的路径
-  rtc_pod_path = File.join(installer.sandbox.root, 'AgoraRtcEngine_iOS')
-
-  # aosl.xcframework 的完整路径
-  aosl_xcframework_path = File.join(rtc_pod_path, 'aosl.xcframework')
-
-  # 检查文件是否存在，如果存在则删除
-  if File.exist?(aosl_xcframework_path)
-    puts "Deleting aosl.xcframework from #{aosl_xcframework_path}"
-    FileUtils.rm_rf(aosl_xcframework_path)
-  else
-    puts "aosl.xcframework not found, skipping deletion."
-  end
-end
-```
-
-然后重新执行 `pod install`。
-
-如欲了解详情，请参见 [声网官网文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
-
 ## 3. 初始化 SDK
 
 在工程的 AppDelegate 中的以下方法中，调用 SDK 对应方法。
@@ -157,3 +125,47 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"user2"
 // 发送消息
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {}];
 ```
+
+## 常见问题
+
+### 集成问题
+
+由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现如下报错：
+
+```
+[!] The 'Pods-EaseChatDemo' target has frameworks with conflicting names: aosl.xcframework.
+```
+
+要修复该问题，需要修改 `Podfile` 文件，添加如下脚本：
+
+```ruby
+pre_install do |installer|
+  # 定义 AgoraRtcEngine_iOS framework 的路径
+  rtc_pod_path = File.join(installer.sandbox.root, 'AgoraRtcEngine_iOS')
+
+  # aosl.xcframework 的完整路径
+  aosl_xcframework_path = File.join(rtc_pod_path, 'aosl.xcframework')
+
+  # 检查文件是否存在，如果存在则删除
+  if File.exist?(aosl_xcframework_path)
+    puts "Deleting aosl.xcframework from #{aosl_xcframework_path}"
+    FileUtils.rm_rf(aosl_xcframework_path)
+  else
+    puts "aosl.xcframework not found, skipping deletion."
+  end
+end
+```
+
+然后重新执行 `pod install`。
+
+如欲了解详情，请参见 [声网官网文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
+
+### 模拟器运行报错
+
+若在模拟器上运行，会提示以下错误。为避免该问题，你需要在 **Target > Build Settings** 中找到 **User Script Sandboxing** 选项，设置为 **NO**。
+
+![img](/images/ios/quickstart_emulator_error.png)
+
+
+![img](/images/ios/quickstart_error_solve.png)
+
