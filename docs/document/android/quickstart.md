@@ -157,9 +157,14 @@ android {
 在**主进程**中进行初始化：
 
 ```java
+// 导包
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
+
 EMOptions options = new EMOptions();
 options.setAppKey("Your appkey");
 ......// 其他 EMOptions 配置。
+// context 为上下文，在 Application 或者 Activity 中可以用 this 代替
 EMClient.getInstance().init(context, options);
 ```
 ### 2. 创建账号
@@ -181,17 +186,21 @@ EMClient.getInstance().init(context, options);
 创建账号后，获取账号的用户 ID 和 Token。使用如下代码实现用户登录：
 
 ```java
+// 导包
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+
 EMClient.getInstance().loginWithToken(mAccount, mPassword, new EMCallBack() {
     // 登录成功回调
     @Override
     public void onSuccess() {
-
+      // 回调位于异步线程，处理 UI 相关需切换到主线程
     }
 
     // 登录失败回调，包含错误信息
     @Override
     public void onError(final int code, final String error) {
-
+      // 回调位于异步线程，处理 UI 相关需切换到主线程
     }
 
 });
@@ -206,6 +215,11 @@ EMClient.getInstance().loginWithToken(mAccount, mPassword, new EMCallBack() {
 ### 4. 发送一条单聊消息
 
 ```java
+// 导包
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+
 // `content` 为要发送的文本内容，`toChatUsername` 为对方的账号。
 EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername);
 // 发送消息
