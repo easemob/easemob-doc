@@ -41,7 +41,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | * 撤回单条消息    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key   | 100 次/秒    | 
 | * 批量撤回消息    |    POST  | /{org_name}/{app_name}/messages/batch_recall        | 100 次/秒/App Key  | 100 次/秒    | 
 | 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key   | 100 次/秒    | 
-| 修改文本或自定义消息 | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 次/秒/App Key  | 50 条/秒    | 
+| 修改消息 | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 次/秒/App Key  | 50 条/秒    | 
 | 根据消息 ID 单向删除单聊漫游消息  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}    | 100 次/秒/App Key   | 50 次/秒    | 
 | 根据消息 ID 单向删除群聊漫游消息  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}   | 100 次/秒/App Key   |     | 
 | 单向清空指定用户的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{userId}/delete/all | 100 次/秒/App Key  | 100 次/秒    | 

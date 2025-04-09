@@ -342,7 +342,7 @@ projects:
                 link: /document/windows/message_modify.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_modify_text_custom.html 
+                link: /document/server-side/message_modify.html 
           - text: 转发消息
             desc: 转发消息即将会话中发送成功或收到的消息转发给别人，支持转发单条消息和多条消息（合并消息）。
             sdks:

@@ -96,7 +96,7 @@
 - 新增 `Options#IncludeSendMessageInMessageListener` 开关。开启后，在 `MessageListener#onMessageReceived` 回调里增加发送成功的消息。
 - 新增 `SDKClient#LoginWithToken` 方法，用于通过用户 ID 和用户 token 登录。
 - 新增 `SDKClient#RenewToken` 方法，用于更新用户 token。
-- 消息修改回调 `IChatManagerDelegate#OnMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify_text_custom.html)。
+- 消息修改回调 `IChatManagerDelegate#OnMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
 
 ### 优化
 
