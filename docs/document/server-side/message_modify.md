@@ -66,7 +66,7 @@ PUT https://{host}/{org_name}/{app_name}/messages/rewrite/{msg_id}
 | `new_msg.customEvent` | String | 否      | 用户自定义的事件类型。该参数的值必须满足正则表达式 `[a-zA-Z0-9-_/\.]{1,32}`，长度为 1-32 个字符。**该字段只对自定义消息生效。**  |
 | `new_msg.customExts`  | JSON   | 否       | 用户自定义的事件属性，类型必须是 `Map<String,String>`，最多可以包含 16 个元素。**该字段只对自定义消息生效。** |
 | `new_ext` | JSON | 否 | 修改后的消息扩展信息。该字段对文本、自定义、位置、图片、音频、视频和文件消息均有效。|
-| `is_combine_ext` | Boolean | 否 | 修改后的消息扩展信息与原有扩展信息是合并还是替换。<br/> - （默认）`true`：合并；<br/> - `false`：替换。|
+| `is_combine_ext` | Boolean | 否 | 修改后的消息扩展信息与原有扩展信息是合并还是替换。<br/> - （默认）`true`：合并<br/> - `false`：替换|
 
 ## HTTP 响应
 
@@ -93,8 +93,6 @@ PUT https://{host}/{org_name}/{app_name}/messages/rewrite/{msg_id}
 ### 请求示例
 
 - 修改发送成功的文本消息：支持修改 `msg` 和 `ext` 字段
-  
-  例如，修改单聊中发送后的文本消息：
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -118,8 +116,6 @@ curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
 ```
 
 - 修改发送成功的自定义消息：支持修改 `customEvent`、`customExts` 和 `ext` 字段
-  
-  例如，修改单聊中发送后的自定义消息：
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -147,7 +143,7 @@ curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
 
 - 修改发送成功的位置、图片、音频、视频和文件消息：支持修改 `ext` 字段
   
-  例如，修改单聊中发送后的图片消息（不同类型的消息只是 `type` 字段的值不同）：
+  例如，修改发送后的图片消息（不同类型的消息只是 `type` 字段的值不同）：
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
