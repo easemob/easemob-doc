@@ -49,7 +49,7 @@ export const zhSidebar = sidebar({
             { text: "用户关系", link: "product_user_relationship.html" },
           ],
         },
-        { text: "消息", 
+        { text: "消息管理", 
           collapsible: true,
           children: [
             { text: "单聊消息", link: "message_single_chat.html" },
@@ -60,7 +60,7 @@ export const zhSidebar = sidebar({
           ],
         },
         { text: "离线推送", link: "product_offline_push_overview.html" },
-        { text: "群组", 
+        { text: "群组管理", 
           collapsible: true,
           children: [
             { text: "群组概述", link: "product_group_overview.html" },
@@ -84,11 +84,12 @@ export const zhSidebar = sidebar({
         },
       ],
     },
-    { text: "计费说明", 
+    { text: "购买指南", 
       collapsible: true,
       children: [
         { text: "计费策略", link: "pricing_policy.html"},
-        { text: "付费方式", link: "pricing_method.html" },
+        { text: "套餐包功能对比", link: "pricing_package_feature.html"},
+        { text: "购买指引", link: "pricing_method.html" },
       ],
     }, 
     {
