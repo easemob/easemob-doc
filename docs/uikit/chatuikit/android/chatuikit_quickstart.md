@@ -214,9 +214,11 @@ android.enableJetifier=true
 ```kotlin
 package com.easemob.quickstart
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.easemob.quickstart.databinding.ActivityMainBinding
 import com.hyphenate.easeui.ChatUIKitClient
 import com.hyphenate.easeui.common.ChatLog
@@ -224,6 +226,9 @@ import com.hyphenate.easeui.common.ChatOptions
 import com.hyphenate.easeui.feature.chat.enums.ChatUIKitType
 import com.hyphenate.easeui.feature.chat.activities.UIKitChatActivity
 import com.hyphenate.easeui.interfaces.ChatUIKitConnectionListener
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -361,4 +366,4 @@ fun Context.showToast(msg: String) {
 
 3. 在另一台设备或者模拟器上登录另一个账号。
 
-4. 两台设别或者模拟器分别输入对方的账号，并点击 `Start Chat` 按钮，进入聊天页面。现在你可以在两个账号间进行聊天了。
+4. 两台设备或者模拟器分别输入对方的账号，并点击 `Start Chat` 按钮，进入聊天页面。现在你可以在两个账号间进行聊天了。
