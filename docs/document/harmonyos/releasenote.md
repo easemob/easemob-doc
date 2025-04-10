@@ -2,6 +2,18 @@
 
 <Toc />
 
+## 版本 V1.6.0 Dev 2025-4-9（开发版）
+
+### 优化
+
+- 发送后修改消息接口 [ContactManager#modifyMessage](message_modify.html) 支持修改各类消息：
+  - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
+  - 命令消息：不支持修改。
+- [ChatMessage.setExt](message_send_receive.html#使用消息扩展字段)支持 object 类型的扩展字段。
+- SDK 优化切换到前台后的重连逻辑。
+- 优化重连逻辑，默认切换重连的地址。
+
 ## 版本 V1.5.3 Dev 2025-3-17（开发版）
 
 ### 新增特性
