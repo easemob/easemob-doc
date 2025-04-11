@@ -1,6 +1,6 @@
 # 发送和接收消息
 
-环信即时通讯 IM HarmonyOS SDK 通过 `EMChatManager` 类和 `EMMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
+环信即时通讯 IM HarmonyOS SDK 通过 [`ChatManager`](https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/ChatManager.ChatManager.html) 类和 [`ChatMessage`](https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/message_ChatMessage.ChatMessage.html) 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
 
 - 对于单聊，环信即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。
 
@@ -484,30 +484,32 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 ```typescript
 let message = ChatMessage.createTxtSendMessage(toChatUsername, content);
+if (!message) {
+    return;
+}
 // 增加自定义属性。
 let attributes = new Map<string, MessageExtType>();
 attributes.set("attribute1", "value");
 attributes.set("attribute2", true);
+attributes.set("attribute3", 123);
+attributes.set("attribute4", {
+  nickname: 'Nickname',
+  avatarUrl: 'https://www.easemob.com/example.png',
+  gender: Gender.MALE
+} as UserInfo);
 message.setExt(attributes);
 ChatClient.getInstance().chatManager()?.sendMessage(message);
 // 获取自定义属性
 let exts = message.ext();
 let attr1 = exts.get("attribute1") as string;
 let attr2 = exts.get("attribute2") as boolean;
+let attr3 = exts.get("attribute3") as boolean;
+let attr4 = exts.get("attribute4") as UserInfo;
 ```
 
 :::tip
-1.3.0 版本增加了 `ChatMessage.setJsonAttribute` 方法，用于设置 JSON 结构的扩展信息。
+1.6.0 版本 `ChatMessage.setExt` 方法支持 object 数据类型，用于设置 JSON 结构的扩展信息。
 :::
-
-```typescript
-let jsonStr = JSON.stringify({
-  'key1':999,
-  'key2':"1",
-  'key3':true
-});
-message?.setJsonAttribute('json', jsonStr);
-```
 
 ## 更多
 
