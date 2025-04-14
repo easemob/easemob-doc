@@ -52,7 +52,7 @@
 <tr><td>群组禁言</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>群成员属性</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>子区 Thread</td><td>—</td><td>*</td><td>✓</td></tr>
-<tr><td rowspan="7">聊天室</td><td>聊天室总数上限（支持大型直播场景）</td><td>—</td><td>无限制</td><td>无限制</td></tr>
+<tr><td rowspan="8">聊天室</td><td>聊天室总数上限（支持大型直播场景）</td><td>—</td><td>无限制</td><td>无限制</td></tr>
 <tr><td>聊天室消息优先级</td><td>—</td><td>✓</td><td>✓</td></tr>
 <tr><td>聊天室管理（创建、解散、加入聊天室、获取聊天室详情、获取聊天室成员列表）</td><td>—</td><td>✓</td><td>✓</td></tr>
 <tr><td>聊天室白名单</td><td>—</td><td>✓</td><td>✓</td></tr>
