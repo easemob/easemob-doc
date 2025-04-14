@@ -44,26 +44,60 @@
 **一条消息默认最多可修改 10 次。**
 
 ```java
-    EMTextMessageBody newMessageBody=new EMTextMessageBody("new content");
+// 文本消息 - 可同时修改消息体和消息扩展属性
+EMTextMessageBody textBody = new EMTextMessageBody("new content");
+Map<String, Object> ext = new HashMap<>();
+ext.put("newkey", "new value");
 
-    Map<String, Object> newExt = new HashMap<>();
-    newExt.put("new key1", "new value1");
-    newExt.put("new key2", 1);
-    newExt.put("new key3", true);
-    //如果不想修改消息内容(body)，newMessageBody参数可以传入null
-    //如果不想修改原有消息的ext,newExt参数可以传null。如果想清除原有的ext,newExt参数可以传一个空的Map。
-    //newMessageBody和newExt不能同时都为null
-    EMClient.getInstance().chatManager().asyncModifyMessage(msgId, newMessageBody,newExt, new EMValueCallBack<EMMessage>() {
-        @Override
-        public void onSuccess(EMMessage messageModified) {
-            
-        }
-    
-        @Override
-        public void onError(int error, String errorMsg) {
-            
-        }
-    });
+// textBody 和 ext 不能同时不传或者同时为 null
+EMClient.getInstance().chatManager().asyncModifyMessage(this.messageId, textBody, ext, new EMValueCallBack<EMMessage>() {
+            @Override
+            public void onSuccess(EMMessage emMessage) {
+                // 修改成功
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                // 修改失败
+            }
+        });
+
+
+// 自定义消息 - 可同时修改消息体和消息扩展属性
+EMCustomMessageBody customBody = new EMCustomMessageBody("new action");
+Map<String, Object> newExt = new HashMap<>();
+newExt.put("newkey1", "newkey1");
+newExt.put("newkey2", 123);
+
+EMClient.getInstance().chatManager().asyncModifyMessage(this.messageId, customBody, newExt, new EMValueCallBack<EMMessage>() {
+            @Override
+            public void onSuccess(EMMessage emMessage) {
+                // 修改成功
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                // 修改失败
+            }
+        });
+        
+
+// 文件/视频/音频/图片/位置/合并转发消息 - 只能修改消息扩展属性
+Map<String, Object> newExt = new HashMap<>();
+newExt.put("newkey1", false);
+newExt.put("newkey2", "new value");
+
+EMClient.getInstance().chatManager().asyncModifyMessage(this.messageId, null, newExt, new EMValueCallBack<EMMessage>() {
+            @Override
+            public void onSuccess(EMMessage emMessage) {
+                // 修改成功
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                // 修改失败
+            }
+        });
 ```
 
 消息修改后，消息的接收方会收到 `EMMessageListener#onMessageContentChanged` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群组和聊天室会话，除了修改消息的用户，群组/聊天室内的其他成员均会收到该事件。
@@ -73,25 +107,25 @@
 :::
 
 ```java
-    EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
-        @Override
-        public void onMessageReceived(List<EMMessage> messages) {
+EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
+    @Override
+    public void onMessageReceived(List<EMMessage> messages) {
 
+    }
+    
+    @Override
+    public void onMessageContentChanged(EMMessage messageModified, String operatorId, long operationTime) {
+        int operationCount = messageModified.getBody().operationCount();
+        operatorId、operationTime也可通过以下方式来获取,数据与上述行参保持一致
+        String id = messageModified.getBody().operatorId();
+        long time = messageModified.getBody().operationTime();
+            //消息修改后的扩展字段，可通过以下方式获取
+        Map<String, Object> newExt = messageModified.ext();
+        for (Map.Entry<String, Object> entry : newExt.entrySet()) {
+            EMLog.e(TAG, "onMessageContentChanged onSuccess key:" + entry.getKey() + " value:" + entry.getValue());
         }
-        
-        @Override
-        public void onMessageContentChanged(EMMessage messageModified, String operatorId, long operationTime) {
-//                int operationCount = messageModified.getBody().operationCount();
-                   // operatorId、operationTime也可通过以下方式来获取,数据与上述行参保持一致
-//                String id = messageModified.getBody().operatorId();
-//                long time = messageModified.getBody().operationTime();
-                    //消息修改后的扩展字段，可通过以下方式获取
-//                Map<String, Object> newExt = messageModified.ext();
-//                for (Map.Entry<String, Object> entry : newExt.entrySet()) {
-//                    EMLog.e(TAG, "onMessageContentChanged onSuccess key:" + entry.getKey() + " value:" + entry.getValue());
-//                }
-        }
-    });
+    }
+});
 ```
 
 
