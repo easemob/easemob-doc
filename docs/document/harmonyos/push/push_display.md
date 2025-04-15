@@ -80,6 +80,16 @@ ChatClient.getInstance().pushManager()?.updatePushDisplayStyle(displayStyle).the
 这种情况下，创建消息时无需传入 `title_args` 和 `content_args` 参数。 
 
 ```typescript
+// 先定义一个推送模版类
+export class PushTemplate {
+  // 模版名称
+  name?: string;
+  // 标题自定设置部分
+  title_args?: string[];
+  // 内容自定设置部分
+  content_args?: string[];
+}
+
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 const message = ChatMessage.createTextSendMessage(conversationId, "消息内容");
 if (message) {
@@ -87,8 +97,10 @@ if (message) {
   // 若为默认模板 `default`，无需传入模板名称。
   // 若为自定义模板，需传入模板名称。
   let templateName = "自定义推送模板名称";
-  let pushTemplate = `{"name": "${templateName}"}`;
-  message?.setJsonAttribute("em_push_template", pushTemplate);
+  // 1.6.0版本之前版本需要先将 PushTemplate 转为 JSON，例如：let pushTemplateStr = JSON.stringify(pushTemplate);
+  message?.setJsonAttribute("em_push_template", {
+    name: templateName
+  } as PushTemplate);
   // 发送消息。
   ChatClient.getInstance().chatManager()?.sendMessage(message);
 }
@@ -127,19 +139,32 @@ if (message) {
 请及时查看
 
 ```typescript
+// 先定义一个推送模版类
+export class PushTemplate {
+  // 模版名称
+  name?: string;
+  // 标题自定设置部分
+  title_args?: string[];
+  // 内容自定设置部分
+  content_args?: string[];
+}
+
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 const message = ChatMessage.createTextSendMessage(conversationId, "消息内容");
 if (message) {
   // 设置推送模板名称。设置前需在环信即时通讯云管理后台或调用 REST 接口创建推送模板。
   // 设置填写模板标题的 value 数组。
-  let titleArgs = `["您","消息,"]`;
+  let titleArgs = ["您","消息,"];
   // 设置填写模板内容的 value 数组。
-  let contentArgs = `["请","查看"]`;
+  let contentArgs = ["请","查看"];
   let templateName = "push"; // 此处 `push` 为已在创建的推送模版名称。
   // 设置推送模板名称。若不指定，设置默认推送模板的信息。
-  let pushTemplate = `{"name":"${templateName}", "title_args": ${titleArgs}, "content_args": ${contentArgs}}`;
-  ChatLog.e(pushTemplate);
-  message?.setJsonAttribute("em_push_template", pushTemplate);
+  // 1.6.0版本之前版本需要先将 PushTemplate 转为 JSON，例如：let pushTemplateStr = JSON.stringify(pushTemplate);
+  message?.setJsonAttribute("em_push_template", {
+    name: templateName,
+    title_args: titleArgs,
+    content_args: contentArgs
+  } as PushTemplate);
   // 发送消息。
   ChatClient.getInstance().chatManager()?.sendMessage(message);
 }
