@@ -49,7 +49,7 @@ EMTextMessageBody textBody = new EMTextMessageBody("new content");
 Map<String, Object> ext = new HashMap<>();
 ext.put("newkey", "new value");
 
-// textBody 和 ext 不能同时不传或者同时为 null
+// textBody 和 ext 不能同时为 null
 EMClient.getInstance().chatManager().asyncModifyMessage(this.messageId, textBody, ext, new EMValueCallBack<EMMessage>() {
             @Override
             public void onSuccess(EMMessage emMessage) {
