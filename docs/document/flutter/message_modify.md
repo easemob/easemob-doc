@@ -41,13 +41,36 @@
 **一条消息默认最多可修改 10 次。**
 
 ```dart
-try {
-  // msgId: 需要修改消息的消息 ID。
-  EMMessage modified = await EMClient.getInstance.chatManager.modifyMessage(
-    messageId: msgId,
-    msgBody: body,
-  );
-} on EMError catch (e) {}
+    // 文本消息：可同时修改消息体和消息扩展属性
+    final txtBody = EMTextMessageBody(content: 'new content');
+    final attributes = {
+      'newKey': 'new value',
+    };
+    await EMClient.getInstance.chatManager.modifyMessage(
+      messageId: messageId,
+      msgBody: txtBody,
+      attributes: attributes,
+    );
+
+    // 自定义消息：可同时修改消息体和消息扩展属性
+    final customBody = EMCustomMessageBody(event: 'new event');
+    final attributes = {
+      'newKey': 'new value',
+    };
+    await EMClient.getInstance.chatManager.modifyMessage(
+      messageId: messageId,
+      msgBody: customBody,
+      attributes: attributes,
+    );
+
+    // 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
+    final attributes = {
+      'newKey': 'new value',
+    };
+    await EMClient.getInstance.chatManager.modifyMessage(
+      messageId: messageId,
+      attributes: attributes,
+    );
 
 ```
 消息修改后，消息的接收方会收到 `EMChatEventHandler#onMessageContentChanged` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群聊会话，除了修改消息的用户，群组内的其他成员均会收到该事件。

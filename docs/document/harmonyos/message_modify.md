@@ -46,7 +46,7 @@
 **一条消息默认最多可修改 10 次。**
 
 ```typescript
-// 文本消息 - 可同时修改消息体和消息扩展属性
+// 文本消息：可同时修改消息体和消息扩展属性
 let textBody = new TextMessageBody('new content');
 // 如果想完全替换 ext，可以 new 一个 Map 出来
 let ext: Map<string, MessageExtType> = message.ext();
@@ -64,7 +64,7 @@ ChatClient.getInstance().chatManager()?.modifyMessage(this.messageId, textBody, 
   });
 
 
-// 自定义消息 - 可同时修改消息体和消息扩展属性
+// 自定义消息：可同时修改消息体和消息扩展属性
 let customBody = new CustomMessageBody('new action');
 let newExt: Map<string, MessageExtType> = new Map();
 newExt.set('newkey1', 'newkey1');
@@ -78,7 +78,7 @@ ChatClient.getInstance().chatManager()?.modifyMessage(this.messageId, customBody
     // 修改失败
   });
 
-// 文件/视频/音频/图片/位置/合并转发消息 - 只能修改消息扩展属性
+// 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
 let newExt: Map<string, MessageExtType> = new Map();
 newExt.set('newkey1', false);
 newExt.set('newkey2', {

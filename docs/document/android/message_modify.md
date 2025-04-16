@@ -44,7 +44,7 @@
 **一条消息默认最多可修改 10 次。**
 
 ```java
-// 文本消息 - 可同时修改消息体和消息扩展属性
+// 文本消息：可同时修改消息体和消息扩展属性
 EMTextMessageBody textBody = new EMTextMessageBody("new content");
 Map<String, Object> ext = new HashMap<>();
 ext.put("newkey", "new value");
@@ -63,7 +63,7 @@ EMClient.getInstance().chatManager().asyncModifyMessage(this.messageId, textBody
         });
 
 
-// 自定义消息 - 可同时修改消息体和消息扩展属性
+// 自定义消息：可同时修改消息体和消息扩展属性
 EMCustomMessageBody customBody = new EMCustomMessageBody("new action");
 Map<String, Object> newExt = new HashMap<>();
 newExt.put("newkey1", "newkey1");
@@ -82,7 +82,7 @@ EMClient.getInstance().chatManager().asyncModifyMessage(this.messageId, customBo
         });
         
 
-// 文件/视频/音频/图片/位置/合并转发消息 - 只能修改消息扩展属性
+// 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
 Map<String, Object> newExt = new HashMap<>();
 newExt.put("newkey1", false);
 newExt.put("newkey2", "new value");
