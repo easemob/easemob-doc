@@ -44,12 +44,26 @@
 **一条消息默认最多可修改 10 次。**
 
 ```objectivec
+    // 文本消息：可同时修改消息体和消息扩展属性
     EMTextMessageBody* newMessageBody = [[EMTextMessageBody alloc] initWithText:@"new  content"];
     NSDictionary* newExt = @{@"newKey": @"newValue"};
-    //如果不想修改消息内容(body)，newMessageBody参数可以传入nil
-    //如果不想修改原有消息的ext,newExt参数可以传nil。如果想清除原有的ext,newExt参数可以传一个空的Dictionary。
-    //newMessageBody和newExt不能同时都为nil
-    [EMClient.sharedClient.chatManager modifyMessage:@"modifiedMessageId" body:newMessageBody ext:newExt completion:^(EMError * _Nullable error, EMChatMessage * _Nullable message) {
+    // textBody 和 ext 不能同时为 nil
+    [EMClient.sharedClient.chatManager modifyMessage:@"messageId" body:newMessageBody ext:newExt completion:^(EMError * _Nullable error, EMChatMessage * _Nullable message) {
+            
+    }];
+    
+    // 自定义消息：可同时修改消息体和消息扩展属性
+    EMCustomMessageBody* newCustomMessageBody = [[EMCustomMessageBody alloc] initWithEvent:@"event" params:@{@"key": @"value"}];
+    NSDictionary* newExt1 = @{@"newKey": @"newValue"};
+    // customBody 和 ext 不能同时为 nil
+    [EMClient.sharedClient.chatManager modifyMessage:@"messageId" body:newCustomMessageBody ext:newExt1 completion:^(EMError * _Nullable error, EMChatMessage * _Nullable message) {
+            
+    }];
+    
+    // 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
+    NSDictionary* newExt2 = @{@"newKey": @"newValue"};
+    // ext 不能为 nil，body 必须为 nil
+    [EMClient.sharedClient.chatManager modifyMessage:@"messageId" body:nil ext:newExt2 completion:^(EMError * _Nullable error, EMChatMessage * _Nullable message) {
             
     }];
 ```
