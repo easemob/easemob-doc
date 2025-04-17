@@ -51,11 +51,8 @@ starter:
   - title: "Demo" 
     platform:
       - icon: /sdk/demo_list.svg
-        link: "https://www.easemob.com/download/demo"
-        text: Demo 体验
-      - icon: /sdk/demo_sourcecode.svg
-        link: /product/demo_sourcecode_address.html
-        text: Demo 源码       
+        link: "https://doc.easemob.com/product/demo.html"
+        text: Demo 体验 
   - title: "服务端 API"
     platform:
       - icon: /sdk/rest.svg

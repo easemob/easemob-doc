@@ -122,10 +122,10 @@
       :xl="6"
       :lg="6"
     >
-   <DemoCard title="React" icon="/sdk/react.svg"  actionText="跑通 Demo" actionLink="https://webim-h5.easemob.com/login">
+   <DemoCard title="React" icon="/sdk/react.svg"  actionText="跑通 Demo" actionLink="https://github.com/easemob/easemob-demo-react/tree/dev_4.0">
   <template #action>
     <button class="custom-button">
-    <a href="https://webim-vue3.easemob.com/login">在线体验</a>
+    <a href="https://webim-h5.easemob.com/login">在线体验</a>
     </button>
   </template>
 </DemoCard>
