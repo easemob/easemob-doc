@@ -2,62 +2,81 @@
 
 环信提供一个开源的 ChatroomUIKit 示例项目，演示了如何使用该 UIKit 快速搭建聊天室页面，实现完整业务。
 
-## 开发环境要求
+## 环境要求
 
-- MacOS 12 或以上版本；
-- React-Native 0.66 或以上版本；
-- NodeJs 16.18 或以上版本；
-- iOS 应用：Xcode 13 或以上版本，以及它的相关依赖工具。
-- Android 应用：Android Studio 2021 或以上版本，以及它的相关依赖工具。
+- MacOS 12 或以上版本
+- React-Native 0.71 或以上版本
+- NodeJs 20.18 或以上版本
 
-## 操作步骤
+对于 iOS 平台
 
-### 第一步 在项目中安装 ChatroomUIKit
+- xcode 15 或以上版本
 
-```tsx
-npm install react-native-chat-room 
-// or     
-yarn add react-native-chat-room
-// or
-npx expo install react-native-chat-room
-```
+对于 Android 平台
 
-### 第二步 示例项目演示
+- Android Studio 2022.3 或以上版本
 
-`example` 文件夹中为示例项目，可以下载源码、进行编译，然后运行进行体验。
+## 下载项目
 
-下载源码仓库：
+克隆项目仓库：
 
 ```sh
-git clone https://github.com/agora/rncr/react-native-chat-room
+git clone https://github.com/easemob/easemob-uikit-reactnative.git
 ```
 
-或者，你可以下载源码压缩包：
+## 初始化项目
 
 ```sh
-curl -L -o file.zip  https://github.com/AsteriskZuo/react-native-chat-room/archive/refs/heads/main.zip
+cd easemob-uikit-reactnative
+yarn && yarn prepare
 ```
 
-### 第三步 项目初始化
+## 编译运行示例项目
 
-1. 进入项目根目录，运行 `yarn & yarn env` 命令完成初始化。
-
-2. 在生成的文件 `example/src/env.ts` 中，修改必要的配置项。
-
-- 对于 `iOS` 应用：
-
-  需要运行 `pod install` 命令进行初始化。
-
-- 对于 `Android` 应用：
-
-  需要执行 `gradle sync` 命令进行初始化。
-
-### 第四步 运行项目
-
-在 `react-native-chat-room/tree/main/example` 目录下运行以下命令：
+1. 进入示例项目目录：
 
 ```sh
+cd examples/room-example
+```
+
+2. 设置 appKey：
+
+修改 `examples/room-example/src/env.ts` 文件内容，填写 appKey 参数。
+
+您可以在[环信即时通讯云控制台](https://console.easemob.com/)创建应用并获取 appKey。
+
+3. 运行项目：
+
+### iOS 平台
+
+```sh
+# 安装依赖
+cd ios && pod install && cd ..
+
+# 编译运行
 yarn run ios
-// or
+```
+
+### Android 平台
+
+```sh
+# 直接编译运行
 yarn run android
 ```
+
+## 运行效果
+
+成功运行后，您将看到包含以下功能的即时通讯应用：
+
+- 用户登录
+- 聊天室列表
+- 聊天室
+
+## 常见问题
+
+如遇到编译或运行问题，请参考：
+
+1. 确保已安装所有必需的开发环境
+2. 检查 appKey 是否正确配置
+3. iOS 编译失败时，尝试清理项目：`cd ios && pod deintegrate && pod install`
+4. Android 编译失败时，检查 Android Studio 配置和 SDK 安装情况
