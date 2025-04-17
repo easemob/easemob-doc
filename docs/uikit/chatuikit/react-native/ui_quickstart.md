@@ -14,14 +14,8 @@
 - MacOS 12 或以上版本
 - React-Native 0.71 或以上版本
 - NodeJs 20.18 或以上版本
-
-对于 iOS 平台
-
-- xcode 15 或以上版本
-
-对于 Android 平台
-
-- Android Studio 2022.3 或以上版本
+- iOS 平台：Xcode 15 或以上版本
+- Android 平台：Android Studio 2022.3 或以上版本
 
 ## 发送消息示例
 
@@ -214,11 +208,11 @@ yarn run android
 
 ### 第八步 发送消息
 
-<img src="/images/uikit/chatrn/uikit_quick_start_login.png" alt="description" width="20%">
-<img src="/images/uikit/chatrn/uikit_quick_start_chat.png" alt="description" width="20%">
+<img src="/images/uikit/chatrn/uikit_quick_start_login.png" alt="description" width="50%">
+<img src="/images/uikit/chatrn/uikit_quick_start_chat.png" alt="description" width="50%">
 
 ## 常见问题
 
-1. 初始化项目之后找不到 node_modules
-   `yarn` 工具 `4.x.x` 需要设置使用本地配置 `yarn config set nodeLinker node-modules`。
-   `yarn` 工具 `1.x.x` 没有 这个问题。
+初始化项目之后找不到 node_modules，怎么办？
+- `yarn 4.x.x`： 需要设置使用本地配置 `yarn config set nodeLinker node-modules`。
+- `yarn 1.x.x`： 不存在该问题。
