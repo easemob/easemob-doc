@@ -9,14 +9,8 @@
 - MacOS 12 或以上版本
 - React-Native 0.71 或以上版本
 - NodeJs 20.18 或以上版本
-
-对于 iOS 平台
-
-- xcode 15 或以上版本
-
-对于 Android 平台
-
-- Android Studio 2022.3 或以上版本
+- iOS 平台：xcode 15 或以上版本
+- Android 平台：Android Studio 2022.3 或以上版本
 
 ## 下载项目
 
@@ -41,15 +35,15 @@ yarn && yarn prepare
 cd examples/uikit-example
 ```
 
-2. 设置 appKey：
+2. 设置 App Key：
 
-修改 `examples/uikit-example/src/env.ts` 文件内容，填写 appKey 参数。
+修改 `examples/uikit-example/src/env.ts` 文件内容，填写 `appKey` 参数。
 
-您可以在[环信即时通讯云控制台](https://console.easemob.com/)创建应用并获取 appKey。
+你可以在[环信控制台](https://console.easemob.com/)创建应用并获取 App Key。
 
 3. 运行项目：
 
-### iOS 平台
+- iOS 平台
 
 ```sh
 # 安装依赖
@@ -59,7 +53,7 @@ cd ios && pod install && cd ..
 yarn run ios
 ```
 
-### Android 平台
+- Android 平台
 
 ```sh
 # 直接编译运行
@@ -68,7 +62,7 @@ yarn run android
 
 ## 运行效果
 
-成功运行后，您将看到包含以下功能的即时通讯应用：
+成功运行后，你将看到包含以下功能的即时通讯应用：
 
 - 用户登录
 - 会话列表
@@ -78,9 +72,9 @@ yarn run android
 
 ## 常见问题
 
-如遇到编译或运行问题，请参考：
+如遇到编译或运行问题，可进行如下检查：
 
-1. 确保已安装所有必需的开发环境
-2. 检查 appKey 是否正确配置
-3. iOS 编译失败时，尝试清理项目：`cd ios && pod deintegrate && pod install`
-4. Android 编译失败时，检查 Android Studio 配置和 SDK 安装情况
+1. 确保已安装所有必需的开发环境。
+2. 检查 App Key 是否正确配置。
+3. iOS 编译失败时，尝试清理项目：`cd ios && pod deintegrate && pod install`。
+4. Android 编译失败时，检查 Android Studio 配置和 SDK 安装情况。
