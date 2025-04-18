@@ -490,6 +490,7 @@ const documentSidebar = [
           { text: '用户登入/登出', link: 'callback_login_logout.html' },
           { text: '发送消息', link: 'callback_message_send.html' },
           { text: '发送单聊消息已读回执', link: 'callback_single_read_ack.html' },
+          { text: '发送群聊消息已读回执', link: 'callback_group_read_ack.html' },
           { text: '发送会话已读回执', link: 'callback_single_conversation_ack.html' },
           { text: '修改消息', link: 'callback_message_modify.html' },
           { text: '撤回消息', link: 'callback_message_recall.html' },
