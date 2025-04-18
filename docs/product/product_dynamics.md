@@ -1,5 +1,11 @@
 # 产品动态
 
+## 2025-04
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| SDK 4.14.0 开发版发布   | <br/> - 支持 [GIF 图片消息](/document/android/message_send_receive.html#发送和接收-gif-图片消息) <br/> - 支持 [群组头像功能](/document/android/group_attributes.html#管理群头像) <br/> - 支持 [消息附件鉴权功能](/document/android/message_send_receive.html#发送和接收附件类型的消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，只[拉取指定的群成员发送的消息](/document/android/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/android/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - Android 端支持[获取群成员信息时包括成员加群时间](/document/android/group_members.html#获取群成员信息)。 | 2025-04-18       | <br/> - [Android 4.13.0 更新日志](/document/android/releasenote.html#版本-v4-14-0-dev-2025-4-18-开发版)<br/> - [iOS 4.13.0 更新日志](/document/ios/releasenote.html#版本-v4-14-0-dev-2025-4-18-开发版)<br/> - [Web 4.13.0 更新日志](/document/web/releasenote.html#版本-v4-14-0-dev-2025-4-18-开发版) <br/> - [小程序 4.13.0 更新日志](/document/applet/releasenote.html#版本-v4-14-0-dev-2025-4-18-开发版)         |
+
 ## 2025-03
 
 ### SDK 发版
