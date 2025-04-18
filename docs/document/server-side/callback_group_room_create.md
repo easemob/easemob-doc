@@ -1,4 +1,5 @@
 # 创建群组/聊天室事件 
+
 成功创建群组或聊天室后，环信服务器会按照[发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看创建的群组/聊天室的信息，进行数据同步。
 
 :::tip
