@@ -37,7 +37,7 @@ let option = {
 conn.modifyGroup(option).then(res => console.log(res))
 ```
 
-### 群组头像管理
+### 管理群头像
 
 自 Web SDK 4.14.0 开始，支持群组头像功能。
 
