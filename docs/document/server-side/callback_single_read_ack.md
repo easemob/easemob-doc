@@ -52,6 +52,6 @@
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
 | `from`      | String   | 发送已读回执用户 ID。                                        |
 | `to`        | String   | 接收已读回执用户 ID。                                        |
-| `eventType` | String   | `chat`：单聊。                                               |
+| `eventType`       | String | `chat`：表示上行消息。                      |
 | `timestamp` | long     | 环信 IM 服务器收到消息已读回执的 Unix 时间戳，单位为 ms。                  |
 | `msg_id`    | String   | 该回执消息的消息 ID。                                        |
