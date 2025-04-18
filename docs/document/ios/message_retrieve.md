@@ -13,6 +13,8 @@
 环信即时通讯 IM iOS SDK 提供 `IEMChatManager` 和 `EMConversation` 类支持获取服务器和本地的消息，包含如下主要方法：
 
 - `IEMChatManager#fetchMessagesFromServer`：根据 `EMFetchServerMessagesOption` 类从服务器分页获取指定会话的历史消息；
+- `IEMChatManager#fetchMessagesFromServerBy`：从服务器获取群组中指定成员发送的消息；
+- `EMConversation#loadMessagesWithKeyword`：从本地获取群组中指定成员发送的消息；
 - `EMConversation#loadMessagesStartFromId`：从数据库中读取指定会话的消息；
 - `IEMChatManager#getMessageWithMessageId`：根据消息 ID 获取本地消息；
 - `EMConversation#loadMessagesWithType`：获取本地存储的指定会话中特定类型的消息；
@@ -70,6 +72,34 @@ let option = EMFetchServerMessagesOption();
  [[EMClient sharedClient].chatManager asyncFetchHistoryMessagesFromServer:conversation.conversationId conversationType:conversation.type startMessageId:self.moreMsgId pageSize:10 completion:^(EMCursorResult *aResult, EMError *aError) {
              [self.conversation loadMessagesStartFromId:self.moreMsgId count:10 searchDirection:EMMessageSearchDirectionUp completion:block];
           }];
+```
+
+## 从服务器获取指定群成员发送的消息
+
+对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
+
+```objectivec
+EMFetchServerMessagesOption* option = [[EMFetchServerMessagesOption alloc] init];
+    option.fromIds = @[@"user1", @"user2"];
+    [EMClient.sharedClient.chatManager fetchMessagesFromServerBy:@"conversationId" conversationType:EMConversationTypeGroupChat cursor:@"" pageSize:20 option:option completion:^(EMCursorResult<EMChatMessage *> * _Nullable result, EMError * _Nullable aError) {
+    // 当拉取到最后一页时，nextCursor 为空字符串
+    NSString* nextCursor = result.cursor;        
+}];
+```
+
+## 从本地获取指定群成员发送的消息
+
+对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
+
+```objectivec
+EMConversation *conversation = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
+    if (conversation) {
+        [conversation loadMessagesWithKeyword:nil timestamp:-1 count:20 fromUsers:@[@"user1",@"user2"] searchDirection:EMMessageSearchDirectionUp scope:EMMessageSearchScopeAll completion:^(NSArray<EMChatMessage *> * _Nullable aMessages, EMError * _Nullable aError) {
+            if (aError == nil) {
+                // 加载成功
+            }
+        }];
+    }
 ```
 
 ### 从本地读取指定会话的消息

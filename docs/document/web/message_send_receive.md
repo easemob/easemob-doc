@@ -72,6 +72,8 @@ conn.addEventHandler("eventName", {
 
   接收方可以自行下载语音、图片、图片缩略图、视频和文件。
 
+环信即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户须调用 SDK 的 API `EC.utils.download` 下载消息附件，或者在附件的 URL 上拼接 `auth=${conn.token}`。
+
 对于消息附件，你也可以将附件上传到自己的服务器，而不是环信服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
 
 ```javascript

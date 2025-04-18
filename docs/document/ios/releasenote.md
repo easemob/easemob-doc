@@ -2,6 +2,26 @@
 
 <Toc />
 
+## 版本 V4.14.0 Dev 2025-4-18（开发版）
+
+### 新增特性
+
+- 支持 [GIF 图片消息](message_send_receive.html#发送和接收-gif-图片消息)。
+- 支持 [群组头像功能](group_attributes.html#管理群头像)。
+- 支持 [附件鉴权功能](message_send_receive.html#发送和接收附件类型的消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持拉取漫游消息时，只[拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
+- 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
+
+### 优化
+
+- 日志文件中增加设备时区偏移，方便排查问题。
+- 调用方法 `EMChatManager#fetchMessagesFromServerBy:conversationType:cursor:pageSize:option:completion:` 拉取漫游消息，拉取到最后一页时，返回的 `EMCursorResult#cursor` 由 `undefined` 改为空字符串。
+- 升级 SDK 使用的 BoringSSL 和 SQLCipher 库，避免安全风险。
+
+### 修复
+
+- 修复设备网络由 4G 切换为 Wi-Fi 时，短时间内 SDK 向服务器发送 REST 请求失败的问题。
+
 ## 版本 V4.13.0 Dev 2025-3-12（开发版）
 
 ### 优化

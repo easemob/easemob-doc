@@ -72,6 +72,8 @@ conn.addEventHandler("eventName", {
 2. 接收附件消息。
 
    接收方可以自行下载语音、图片、图片缩略图、视频和文件。
+
+环信即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户须调用 SDK 的 API `EC.utils.download` 下载消息附件，或者在附件的 URL 上拼接 `auth=${conn.token}`。
    
 对于消息附件，你也可以将附件上传到自己的服务器，而不是环信服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
 
@@ -260,6 +262,43 @@ function sendPrivateImg(res) {
 conn.addEventHandler("eventName", {
   onImageMessage: function (message) {},
 });
+```
+
+### 发送和接收 GIF 图片消息
+
+自小程序 SDK 4.14.0 开始，支持发送和接收 GIF 图片消息。
+
+GIF 图片消息是一种特殊的图片消息，在发送图片消息时可以指定是否是 GIF 图片。
+
+#### 发送 GIF 图片消息
+
+构造消息时，设置 `isGif` 为 `true`。
+
+```javascript
+sendGIFMsg(){
+    const file = EC.utils.getFileUrl(imgInput as HTMLInputElement);
+    let option = {
+      chatType: "singleChat",
+      type: "img",
+      to: "userId",
+      file: file,
+      isGif: file.data.type === "image/gif", // 设置是否是为 GIF 图片
+    };
+    let msg = EC.message.create(option);
+    conn.send(msg);
+}
+```
+
+#### 接收 GIF 图片消息
+
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onImageMessage` 回调方法。接收方收到消息后，读取消息体的 `isGif` 属性，若值是 `true`， 则为 GIF 图片消息。
+
+```javascript
+onImageMessage: (message) => {
+    if(message.isGif){
+        // 图片为GIF
+    }
+}
 ```
 
 ### 发送和接收视频消息

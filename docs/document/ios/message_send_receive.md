@@ -78,6 +78,8 @@ message.chatType = EMChatTypeChatRoom;
 2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
 3. 获取附件的服务器地址和本地路径。
 
+环信即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 API `downloadMessageAttachment` 下载消息附件。
+
 ### 发送和接收语音消息
 
 发送和接收语音消息的过程如下：
@@ -162,6 +164,57 @@ NSString *thumbnailLocalPath = imageBody.thumbnailLocalPath;
                 NSString *localPath = imageBody.localPath;
             }
         }];
+```
+
+### 发送和接收 GIF 图片消息
+
+自 iOS SDK 4.14.0 开始，支持发送和接收 GIF 图片消息。
+
+GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。
+
+图片缩略图的生成和下载与普通图片消息相同，详见 [发送和接收图片消息](#发送和接收图片消息)。
+
+#### 发送 GIF 图片消息
+
+你可以通过以下两种方式构造 GIF 图片消息：
+
+- 构造 `EMImageMessageBody` 后，设置 `isGif` 为 `true`。
+
+- 使用 `EMImageMessageBody#initWithGifFilePath:displayName` 方法构造图片消息体。
+
+```objectivec
+//使用 EMImageMessageBody
+// imageData 为图片本地资源，displayName 为附件的显示名称。
+EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithData:imageData displayName:displayName];
+body.isGif = YES;
+
+// 使用 initWithGifFilePath:displayName
+EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithGifFilePath:@"localGifFilePath" displayName:displayName];
+
+EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
+
+// 发送消息。
+[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+```
+
+#### 接收 GIF 图片消息
+
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `messagesDidReceive` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
+
+```objectivec
+- (void)messagesDidReceive:(NSArray<EMChatMessage*> *)aMessages
+{
+  // 收到消息，遍历消息列表。
+  for (EMChatMessage *message in aMessages) {
+    // 消息解析和展示。
+    if (message.body.type == EMMessageBodyTypeImage) {
+        EMImageMessageBody *body = (EMImageMessageBody *)message.body;
+        if (body.isGif) {
+            // 是 GIF 图片消息
+        }
+      }
+   }
+}
 ```
 
 ### 发送和接收视频消息

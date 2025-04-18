@@ -37,6 +37,63 @@ let option = {
 conn.modifyGroup(option).then(res => console.log(res))
 ```
 
+### 群组头像管理
+
+自 Web SDK 4.14.0 开始，支持群组头像功能。
+
+#### 设置群组头像
+
+- 创建群组时，可设置群组头像：
+
+```javascript
+conn.createGroupVNext({
+    groupName: 'groupname',
+    avatar: 'group avatar', // 群组头像 URL
+    members: ['user1', 'user2']
+})
+```
+
+- 创建群组后，若设置群组头像，可调用 [修改群组头像](#修改群组头像) API 设置头像。
+
+#### 修改群组头像
+
+创建群组完成后，群主或管理员可调用 `modifyGroup` 设置或修改群组头像：
+
+```javascript
+conn.modifyGroup({
+    groupId: 'groupId',
+    avatar: 'group avatar url'
+})
+```
+
+群头像被修改后，其他群成员会收到 `onGroupEvent#updateInfo` 回调：
+
+```javascript
+conn.addEventHandler("eventName", {
+    onGroupEvent: function (msg) {
+        switch (msg.operation) {
+            case 'updateInfo':
+                console.log(msg)
+                break;
+        }
+    }
+})  
+
+```
+
+#### 获取群组头像
+
+群成员可以通过获取群详情的方法，获取群组头像：
+
+```javascript
+conn.getGroupInfo({
+    groupId: 'groupId'
+})
+.then((res) => {
+    console.log(res)
+})
+```
+
 ### 管理群公告
 
 #### 获取群公告
