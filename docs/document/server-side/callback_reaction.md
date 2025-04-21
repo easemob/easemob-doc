@@ -35,7 +35,7 @@ Reaction 回调请求中的字段含义如下表所示：
 | `payload.data.reactions.op.userList`    | List | 操作表情的用户。 |
 | `payload.data.reactions.op.count`  | List | 表情操作人数。 |
 | `payload.data.reactions.op.reactionType`  | String | Reaction 当前操作类型。`create` 为添加 Reaction。 |
-| `payload.data.reactions.op.operator`    | String | Reaction 当前操作人。 ｜
+| `payload.data.reactions.op.operator`    | String | Reaction 当前操作人。 |
 
 ## 回调请求示例
 
