@@ -113,7 +113,7 @@ class _ChatMessagesPageState extends State<ChatMessagesPage> {
 }
 ```
 
-## 发送和接收附件类型的消息
+## 发送和接收附件消息
 
 附件消息的发送和接收过程如下：
 

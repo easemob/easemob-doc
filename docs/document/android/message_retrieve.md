@@ -116,6 +116,64 @@ EMClient.getInstance().chatManager().asyncFetchHistoryMessage(
 );
 ```
 
+### 从服务器获取指定群成员发送的消息
+
+对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
+
+```java
+String conversationId = " ";
+EMConversation.EMConversationType type = EMConversation.EMConversationType.Chat;
+EMFetchMessageOption option = new EMFetchMessageOption();
+//例如，设置获取的消息保存到数据库。
+//option.setIsSave(true);
+//例如，你可以获取群组中某2个用户ID的消息
+//List<String> fromIds = new ArrayList<String>();
+//fromIds.add("user1");
+//fromIds.add("user2");
+//option.setFromIds(fromIds);
+int pageSize = 40;
+String cursor = "";
+List<EMMessage> messages = new ArrayList<>();
+doAsyncFetchHistoryMessages(conversationId, type, pageSize, cursor, option, messages);
+
+private void doAsyncFetchHistoryMessages(String conversationId,
+        EMConversation.EMConversationType type,
+int pageSize,String cursor,
+        EMFetchMessageOption option,
+        List<EMMessage> messages){
+    EMClient.getInstance().chatManager().asyncFetchHistoryMessages(conversationId, type, pageSize, 
+                                cursor, option, new EMValueCallBack<EMCursorResult<EMMessage>>() {
+        @Override
+        public void onSuccess(EMCursorResult<EMMessage> value) {
+            if (value != null ) {
+                List<EMMessage> list = value.getData();
+                if (list != null && list.size() > 0) {
+                    messages.addAll(list);
+                }
+                String newCursor = value.getCursor();
+                if( !TextUtils.isEmpty(newCursor)) {
+                    doAsyncFetchHistoryMessages(conversationId, type, pageSize, newCursor, option, messages);
+                }
+            }
+        }
+
+        @Override
+        public void onError(int error, String errorMsg) {
+
+        }
+    });
+}
+
+```
+
+### 从本地获取指定群成员发送的消息
+
+对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
+
+```java
+asyncSearchMsgFromDB(String keywords, long timeStamp, int maxCount, List<String> senders, EMSearchDirection direction, EMMessageSearchScope searchScope, EMValueCallBack<List<EMMessage>> callback)
+```
+
 ### 从本地读取指定会话的消息
 
 你可以调用 `getAllMessages` 方法获取指定会话在内存中的所有消息。如果内存中为空，SDK 再从本地数据库中加载最近一条消息。

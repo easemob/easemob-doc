@@ -49,6 +49,52 @@ EMClient.getInstance().groupManager().changeGroupName(groupId,changedGroupName);
 EMClient.getInstance().groupManager().changeGroupDescription(groupId,description);
 ```
 
+### 管理群组头像
+
+自 Android SDK 4.14.0 开始，支持群组头像功能。
+
+#### 设置群组头像
+
+- 创建群组时，可设置群组头像：
+
+```java
+EMGroupOptions option = new EMGroupOptions();
+option.maxUsers = 100;
+option.style = EMGroupStyle.EMGroupStylePrivateMemberCanInvite;
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncCreateGroup(String, String, String, String[], String, EMGroupOptions, EMValueCallBack)。
+EMClient.getInstance().groupManager().createGroup(groupName, avatar,  desc, allMembers, reason, option);
+```
+
+- 创建群组后，若设置群组头像，可调用 [修改群组头像](#修改群组头像) API 设置头像。
+
+#### 修改群组头像
+
+创建群组完成后，群主或管理员可调用 `EMGroupManager#updateGroupAvatar` 设置或修改群组头像：
+
+```java
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncChangeGroupAvatar(String, String, EMCallBack)。
+EMClient.getInstance().groupManager().changeGroupAvatar(groupId,changedAvatar);
+```
+
+群组头像被修改后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调：
+
+```java
+EMGroupChangeListener#onSpecificationChanged(EMGroup group)
+```
+
+#### 获取群组头像
+
+群成员可以通过获取群详情的方法，获取群组头像：
+
+```java
+// 根据群组 ID 从服务器获取群组详情。
+// 同步方法，会阻塞当前线程。异步方法为 asyncGetGroupFromServer(String, EMValueCallBack)。
+EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId);
+String avatar = group.getGroupAvatar();
+```
+
 ### 更新群公告
 
 仅群主和群管理员可以调用 `updateGroupAnnouncement` 方法设置和更新群公告，群公告的长度限制为 512 个字符。群公告更新后，其他群成员收到 `EMGroupChangeListener#onAnnouncementChanged` 回调。

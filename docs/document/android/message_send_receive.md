@@ -77,7 +77,7 @@ EMClient.getInstance().chatManager().addMessageListener(msgListener);
 EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 ```
 
-## 发送和接收附件类型的消息
+## 发送和接收附件消息
 
 除文本消息外，SDK 还支持发送附件类型消息，包括语音、图片、视频和文件消息。
 
@@ -86,6 +86,8 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器。
 2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
 3. 获取附件的服务器地址和本地路径。
+
+环信即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
 
 ### 发送和接收语音消息
 
@@ -177,6 +179,47 @@ String thumbnailUrl = imgBody.getThumbnailUrl();
 Uri imgLocalUri = imgBody.getLocalUri();
 // 从本地获取图片缩略图。
 Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
+```
+
+### 发送和接收 GIF 图片消息
+
+自 Android SDK 4.14.0 开始，支持发送和接收 GIF 图片消息。
+
+GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。
+
+图片缩略图的生成和下载与普通图片消息相同，详见 [发送和接收图片消息](#发送和接收图片消息)。
+
+#### 发送 GIF 图片消息
+
+你可以通过以下方式构造 GIF 图片消息：
+
+- 使用 `EMMessage#createGifImageMessage` 方法构造Gif图片消息体。
+
+```java
+// `imageUri` 为图片本地资源标志符
+EMMessage message = EMMessage.createGifImageMessage(imageUri, toChatUsername);
+// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
+// message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
+```
+
+#### 接收 GIF 图片消息
+
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessageReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
+
+```java
+public void onMessageReceived(List<EMMessage> messages) {
+    for(EMMessage message : messages) {
+        if (message.getType() == Type.IMAGE && ) {
+            EMImageMessageBody body = (EMImageMessageBody) msg.getBody();
+            if(body.isGif()) {
+                // 根据业务情况处理gif message, 例如下载展示该消息
+            }
+        }
+    }
+    
+}
 ```
 
 ### 发送和接收视频消息

@@ -2,6 +2,20 @@
 
 <Toc />
 
+## 版本 V4.14.0 Dev 2025-4-21（开发版）
+
+### 新增特性
+
+- 支持 [GIF 图片消息](message_send_receive.html#发送和接收-gif-图片消息)。
+- 支持 [群组头像功能](group_attributes.html#管理群组头像)。
+- 支持 [消息附件鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持 [自定义设备平台](multi_device.html#设置登录设备的平台)。
+- Uni-app 离线推送安卓平台支持 [Google FCM](push/uniapp_push_fcm.html)。
+
+### 优化
+
+- 原创建群组方法 `createGroup` 方法废弃，使用 [createGroupVNext](group_manage.html#创建群组) 方法代替。
+
 ## 版本 V4.13.0 Dev 2025-3-12（开发版）
 
 ### 新增特性
