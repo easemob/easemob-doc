@@ -21,12 +21,6 @@
 
 插件内部会按照以上顺序检测设备的推送支持情况。如果未设置第三方推送或者不满足使用第三方推送的条件，环信 IM SDK 会通过一些保活手段尽可能的保持与环信服务器的长连接，以确保消息及时送达。
 
-
-:::tip
-- FCM 只能够通过 [离线打包方式](/push/uniapp_push_fcm.html) 构建。
-- FCM 需要在 Android 工程下添加 `google-services.json` 文件。
-:::
-
 ## 实现流程
 
 ### 步骤一 上传推送证书至环信即时通讯控制台
@@ -69,7 +63,11 @@
 
 ![img](/images/applet/push_tip3.png)
 
+
 4. 生成自定义基座。
+
+- FCM 只能够通过 [离线打包方式](/push/uniapp_push_fcm.html) 构建。
+- FCM 需要在 Android 工程下添加 `google-services.json` 文件。
    
 自定义基座是 uni-app 应用运行的底层原生环境。当应用程序使用了原生层插件（如推送插件等），这些插件需要在原生环境中执行，这时就必须打包自定义基座。
 
