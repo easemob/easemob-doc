@@ -60,9 +60,9 @@ SDK 自 4.14.0 开始支持自定义设置登录设备的平台，例如想要�
 
 **设备平台** 的取值范围为 [1,100]，**设备数量** 的取值范围为 [0,4]。
 
-[image](/images/common/multidevice_device_platform.png)
+![img](/images/common/multidevice_device_platform.png)
 
-2. 初始化 SDK 时，设置 `customOSPlatform` 参数，可选值为 [1,100]，确保该参数的值与环信控制台的 **添加自定义平台** 对话框中设置的设备平台的值相同。
+1. 初始化 SDK 时，设置 `customOSPlatform` 参数，可选值为 [1,100]，确保该参数的值与环信控制台的 **添加自定义平台** 对话框中设置的设备平台的值相同。
 
 ```javascript
 const conn = new EC.connection({

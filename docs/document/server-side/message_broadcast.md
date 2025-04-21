@@ -10,7 +10,9 @@
 - 广播消息不支持离线存储，即离线用户收不到这些消息。
 - 广播消息写入服务端会话列表，默认不支持漫游功能。**如果需要，请联系商务开通。**
 
-**发送频率**：每分钟限 1 次，每天限 50 次（可联系商务提升该上限）。
+**发送频率**：
+- 每分钟限 1 次，不支持上调，超过该限制上报 429 错误。
+- 每天限 50 次，支持上调，超过该限制，上报 403 错误。
 
 #### HTTP 请求
 
@@ -268,7 +270,9 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 | 400      | invalid_request_body    | Request body is invalid. Please check body is correct. | 请求体格式不正确。 | 检查请求体内容是否合法(字段类型是否正确)。  |
 | 400      | illegal_argument | from can't be empty  | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from` 。若不传该字段， 服务器会默认设置为 `admin`。   |
 | 400      | illegal_argument | ext must be JSONObject | 请求参数 `ext` 类型不正确。  | 输入正确的请求参数 `ext`（JSON 格式）。  |
-| 403      | forbidden_op | message broadcast service is unopened  | 未开通发送广播消息的功能配置。| 联系商务开通。 | 
+| 429     | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 每分钟向 app 在线用户发送广播消息的次数达到上限。 | 该限制不支持上调，请降低发送频率。   |
+| 403      | forbidden_op | online user broadcast limit exceeded |  每天向 app 在线用户发送广播消息达到上限。| 联系商务上调频率限制。 | 
+| 403      | forbidden_op | message broadcast service is unopened  | 未开通发送聊天室广播消息的功能配置。| 联系商务开通。 |
 
 此外，你可以参考[发送单聊消息](message_single.html#错误码)、[发送群聊消息](message_group.html#错误码)和[发送聊天室消息](message_chatroom.html#错误码)的错误码了解可能的原因。
 
@@ -276,7 +280,9 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 
 即时通讯 IM 支持向 app 下的所有活跃聊天室（聊天室至少存在一个成员，而且曾经至少发送过一条消息）发送广播消息，支持所有消息类型。
 
-**发送频率**：每分钟限发 10 次，每天限发 100 次广播消息。
+**发送频率**：
+- 每分钟限发 10 次，1 秒限发 1 次，不支持上调，超过二者之一即上报 429 错误。
+- 每天限发 100 次广播消息，支持上调，超过该限制，上报 403 错误。
 
 #### HTTP 请求
 
@@ -548,6 +554,8 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 | 400      | invalid_request_body    | Request body is invalid. Please check body is correct. | 请求体格式不正确。 | 检查请求体内容是否合法(字段类型是否正确)。  |
 | 400      | illegal_argument | from can't be empty  | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from` 。若不传该字段， 服务器会默认设置为 `admin`。   |
 | 400      | illegal_argument | ext must be JSONObject | 请求参数 `ext` 类型不正确。  | 输入正确的请求参数 `ext`（JSON 格式）。  |
+| 403      | forbidden_op | chatroom broadcast limit exceeded  | 每天发送聊天室广播消息达到上限。| 联系商务上调频率限制。 |
+| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 每分钟或每秒发送聊天室广播消息达到上限。 | 该限制不支持上调，请降低发送频率。   |
 | 403      | forbidden_op | message broadcast service is unopened  | 未开通发送聊天室广播消息的功能配置。| 联系商务开通。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

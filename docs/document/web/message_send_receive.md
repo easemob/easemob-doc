@@ -246,6 +246,45 @@ conn.addEventHandler("eventName", {
 
 ```
 
+### 发送和接收 GIF 图片消息
+
+自 Web SDK 4.14.0 开始，支持发送和接收 GIF 图片消息。
+
+GIF 图片消息是一种特殊的图片消息，在发送图片消息时可以指定是否是 GIF 图片。
+
+#### 发送 GIF 图片消息
+
+你可以通过以下两种方式构造 GIF 图片消息：
+
+- 构造消息时，设置 `isGif` 为 `true`。
+
+```javascript
+sendGIFMsg(){
+    const file = EC.utils.getFileUrl(imgInput as HTMLInputElement);
+    let option = {
+      chatType: "singleChat",
+      type: "img",
+      to: "userId",
+      file: file,
+      isGif: file.data.type === "image/gif", // 设置是否是为GIF图片
+    };
+    let msg = EC.message.create(option);
+    conn.send(msg);
+}
+```
+
+#### 接收 GIF 图片消息
+
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onImageMessage` 回调方法。接收方收到消息后，读取消息体的 `isGif` 属性，若值是 `true`， 则为 GIF 图片消息。
+
+```javascript
+onImageMessage: (message) => {
+    if(message.isGif){
+        // 图片为GIF
+    }
+}
+```
+
 ### 发送和接收视频消息
 
 在发送视频消息之前，应在 app 级别实现视频捕获，获得捕获的视频文件的时长，单位为秒。

@@ -8,7 +8,7 @@
 
 开启单群聊 UIKit 服务前，需确保已经具备以下条件：
 
-- React 16.8.0 或以上版本（暂不支持 React 19）；
+- React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
 - 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 
