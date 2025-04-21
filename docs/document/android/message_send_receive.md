@@ -77,7 +77,7 @@ EMClient.getInstance().chatManager().addMessageListener(msgListener);
 EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 ```
 
-## 发送和接收附件类型的消息
+## 发送和接收附件消息
 
 除文本消息外，SDK 还支持发送附件类型消息，包括语音、图片、视频和文件消息。
 
