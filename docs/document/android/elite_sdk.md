@@ -57,7 +57,7 @@ dependencies {
       <td>✅</td>
     </tr>
     <tr>
-      <td>发送和接收附件类型的消息</td>
+      <td>发送和接收附件消息</td>
       <td>✅</td>
       <td>✅</td>
     </tr>

@@ -2,7 +2,7 @@
 
 环信 uni-app 原生推送插件集成了第三方离线消息推送服务, 为开发者提供低延时、高送达、高并发、不侵犯用户个人数据的离线消息推送服务。当客户端断开连接或应用进程被关闭等原因导致用户离线时，即时通讯 IM 会通过第三方消息推送服务向该离线用户的设备推送消息通知。
 
-目前支持的手机厂商推送服务包括：FCM、华为、荣耀、小米、OPPO、vivo、魅族和 APNs。
+目前支持的手机厂商推送服务包括：华为、荣耀、小米、OPPO、vivo、魅族、APNs 和 FCM。
 
 ## 前提条件
 
@@ -14,9 +14,10 @@
     - 华为推送：在华为设备上可用；
     - 魅族推送：在魅族设备上可用；
     - OPPO 推送：在 OPPO 设备上可用；
-    - vivo 推送：在 vivo 设备上可用;
-    - 荣耀 推送：在荣耀设备上可用;
-    - APNS 推送：在苹果设备上可用。
+    - vivo 推送：在 vivo 设备上可用；
+    - 荣耀 推送：在荣耀设备上可用；
+    - APNS 推送：在苹果设备上可用；
+    - FCM 推送：在安装了 Google Play 服务的设备上可用。
 
 插件内部会按照以上顺序检测设备的推送支持情况。如果未设置第三方推送或者不满足使用第三方推送的条件，环信 IM SDK 会通过一些保活手段尽可能的保持与环信服务器的长连接，以确保消息及时送达。
 
@@ -34,7 +35,7 @@
 
 ### 步骤二 配置 uni-app 应用支持推送插件
 
-1. 新建 uni-app 工程，并引入[环信 uni-app 推送插件](https://downloadsdk.easemob.com/downloads/WEB_SDK/EMPushUniPlugin_V1.0.0.zip)。
+1. 新建 uni-app 工程，并引入[环信 uni-app 推送插件](https://downloadsdk.easemob.com/downloads/WEB_SDK/EMPushUniPlugin_V1.1.0.zip)。
    
 在你的 uni-app 应用根目录下新建 `nativeplugins` 文件夹，然后将下载的插件放置于 `nativeplugins` 文件夹下。如下图所示：
 
@@ -62,7 +63,11 @@
 
 ![img](/images/applet/push_tip3.png)
 
+
 4. 生成自定义基座。
+
+- FCM 只能够通过 [离线打包方式](/push/uniapp_push_fcm.html) 构建。
+- FCM 需要在 Android 工程下添加 `google-services.json` 文件。
    
 自定义基座是 uni-app 应用运行的底层原生环境。当应用程序使用了原生层插件（如推送插件等），这些插件需要在原生环境中执行，这时就必须打包自定义基座。
 
@@ -86,7 +91,7 @@
 ### 步骤三 集成 EMPushUniPlugin 插件
 
 :::tip
-SDK 4.9.1 及以上版本支持 uni-app 推送。
+SDK 4.14.0 及以上版本支持 uni-app 推送。
 :::
 
 1. 安装并引入环信 uni-app SDK。
@@ -124,6 +129,7 @@ const pushOption = {
 			HONORCertificateName: 'xxxxxx',// 荣耀推送证书名称
 			MEIZUCertificateName: 'xxxxxx', // 魅族推送证书名称
 			APNsCertificateName: 'xxxxxx', // APNs推送证书名称
+      FCMCertificateName: 'xxxxxx', // FCM推送证书名称
 		}
 }
 
@@ -147,6 +153,7 @@ onLaunch(() => {
 });
 
 ```
+
 
 ### 步骤四 测试离线推送
 
