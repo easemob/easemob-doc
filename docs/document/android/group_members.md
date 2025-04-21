@@ -185,7 +185,7 @@ EMGroupManager.getInstance().asyncFetchGroupMembersInfo( groupId, cursor,pageSiz
    @Override
    public void onSuccess(List<EMGroupMemberInfo> value) {
         for(EMGroupMemberInfo info:value){
-            //获取角色，加入时间等信息
+            //获取群成员的角色，加入时间等信息
             long ts = info.getJoinTime();            
         
         }

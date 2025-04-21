@@ -181,7 +181,7 @@ Uri imgLocalUri = imgBody.getLocalUri();
 Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```
 
-## 发送和接收 GIF 图片消息
+### 发送和接收 GIF 图片消息
 
 自 Android SDK 4.14.0 开始，支持发送和接收 GIF 图片消息。
 
@@ -189,7 +189,7 @@ GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，*
 
 图片缩略图的生成和下载与普通图片消息相同，详见 [发送和接收图片消息](#发送和接收图片消息)。
 
-### 发送 GIF 图片消息
+#### 发送 GIF 图片消息
 
 你可以通过以下方式构造 GIF 图片消息：
 
@@ -204,7 +204,7 @@ EMMessage message = EMMessage.createGifImageMessage(imageUri, toChatUsername);
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-### 接收 GIF 图片消息
+#### 接收 GIF 图片消息
 
 与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessageReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
 
