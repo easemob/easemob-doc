@@ -45,7 +45,7 @@
 
 | 客户端           | 新 Demo   | 旧 Demo   | 
 | :------------- | :----- | :----- | 
-| Android | Kotlin Demo，v4.6.0 及以上 | <br/> - Java Demo，v4.5.0 及以上<br/> - 查看 [Demo 源码地址](https://github.com/easemob/chat-android)，环信不再维护该 Demo 源码 | 
+| Android | Kotlin Demo，v4.6.0 及以上 | <br/> - Java Demo，v4.5.0 及以下<br/> - 查看 [Demo 源码地址](https://github.com/easemob/chat-android)，环信不再维护该 Demo 源码 | 
 | iOS   | Swift Demo，v4.6.0 及以上   | <br/> - Objective-C Demo，4.5.0 及以下。<br/> - 查看 [Demo 源码地址](https://github.com/easemob/easemob-demo-ios/tree/OCDemo)，环信不再维护该 Demo 源码   | 
 | Web | Vue 3 Demo  | Vue 2 Demo<br/> -可查看 [Demo 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)，环信不再维护该 Demo 源码|
 
