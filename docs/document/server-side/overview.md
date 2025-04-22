@@ -4,7 +4,7 @@
 
 环信即时通讯通过 REST 平台提供 REST API，你可以通过你的业务服务器向环信 REST 服务器发送 HTTP 请求，在服务端实现实时通信。
 
-另外环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，具体参见：[Java Server SDK](java_server_sdk.html) 和 [PHP Server SDK](php_server_sdk.html)。
+另外环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，具体参见：[Java Server SDK](java_server_sdk.html)。
 
 ## REST 平台架构
 
