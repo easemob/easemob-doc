@@ -12,7 +12,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.6.0 开发版发布   | <br/> - [支持修改各类型的消息](/document/harmonyos/message_modify.html)：<br/>1. 文本/自定义消息：支持修改消息内容（body）和扩展；<br/>2. 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段；<br/>4. 命令消息：不支持修改。    | 2025-04-22     | [HarmonyOS 1.6.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-6-0-dev-2025-4-9-开发版)      |
+| HarmonyOS SDK 1.6.0 开发版发布   | <br/> - [支持修改各类型的消息](/document/harmonyos/message_modify.html)：<br/>1. 文本/自定义消息：支持修改消息内容（body）和扩展；<br/>2. 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段；<br/>4. 命令消息：不支持修改。    | 2025-04-9     | [HarmonyOS 1.6.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-6-0-dev-2025-4-9-开发版)      |
 
 ## 2025-03
 

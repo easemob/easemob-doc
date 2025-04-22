@@ -51,17 +51,32 @@
 
 ## 添加单个群组成员
 
-每次添加一个群成员。若添加的用户已是群成员，则添加失败，返回错误。
+- 每次添加一个群成员。
+- 若添加的用户已是群成员，则添加失败，返回错误。
+- 添加单个群成员后，服务器默认向群内成员发送系统通知。你可以设置是否发送该通知。
+- 添加群成员会触发发送后回调，详见 [邀请用户入群事件](callback_group_room_join.html#邀请用户入群)。
+
+**调用频率上限**：100 次/秒/App Key  
 
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
+POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}?need_notify=false
 ```
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `username` | String | 是       | 要添加为群成员的用户 ID。             |
+
+其他参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `need_notify` | Bool   | 否       | 添加群成员后是否向群内成员发送系统通知。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 
 ##### 请求 header
 
@@ -94,7 +109,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user4'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user4?need_notify=false'
 ```
 
 ##### 响应示例
@@ -134,17 +149,28 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ## 批量添加群组成员
 
-一次为群组添加多个成员，每次最多可以添加 60 位成员。如果所有用户均已是群成员，添加失败，返回错误。
+- 一次为群组添加多个成员。
+- 每次最多可以添加 60 位成员。如果所有用户均已是群成员，添加失败，返回错误。
+- 添加群成员后，服务器默认向群内成员发送系统通知。你可以设置是否发送该通知。
+- 添加群成员会触发发送后回调，详见 [邀请用户入群事件](callback_group_room_join.html#邀请用户入群)。
+  
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
+POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?need_notify=false
 ```
 
 ##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `need_notify` | Bool   | 否       | 添加群成员后是否向群内成员发送系统通知。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 
 ##### 请求 header
 
@@ -187,7 +213,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
    "usernames": [
      "user4","user5"
    ]
- }' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users'
+ }' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users?need_notify=false'
 ```
 
 ##### 响应示例
@@ -227,17 +253,32 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ## 移除单个群组成员
 
-从群中移除指定成员。如果被移除用户不是群成员，将移除失败，并返回错误。移除后，该成员也会被移除其在该群组中加入的子区。
+- 从群中移除指定成员。
+- 如果被移除用户不是群成员，将移除失败，并返回错误。移除后，该成员也会被移除其在该群组中加入的子区。
+- 移除群成员后，服务器默认向群内成员发送系统通知。你可以设置是否发送该通知。
+- 移除群成员会触发发送后回调，详见 [将用户踢出群组事件](callback_group_room_leave.html#被踢)。
+
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
+DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}?need_notify=false
 ```
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `username` | String | 是       | 要被移除的群成员的用户 ID。             |
+
+其他参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `need_notify` | Bool   | 否       | 添加群成员后是否向群内成员发送系统通知。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 
 ##### 请求 header
 
@@ -270,7 +311,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user3'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user3?need_notify=false'
 ```
 
 ##### 响应示例
@@ -310,12 +351,17 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ## 批量移除群组成员
 
-一次移除多名群成员。如果所有被移除用户均不是群成员，将移除失败，并返回错误。移除后，这些成员也会被移除其在该群组中加入的子区。
+- 一次移除多名群成员。
+- 如果所有被移除用户均不是群成员，将移除失败，并返回错误。移除后，这些成员也会被移除其在该群组中加入的子区。
+- 移除群成员后，服务器默认向群内成员发送系统通知。你可以设置是否发送该通知。
+- 移除群成员会触发发送后回调，详见 [将用户踢出群组事件](callback_group_room_leave.html#被踢)。
+
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members}
+DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members}?need_notify=false
 ```
 
 ##### 路径参数
@@ -325,6 +371,12 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 | `members` | String | 是       | 要移除的群成员的用户 ID，用户 ID 之间用英文逗号（","）分隔。建议每次最多传 60 个用户 ID，并且 URL 的长度不超过 4 KB。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `need_notify` | Bool   | 否       | 移除群成员后是否向群内成员发送系统通知。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 
 ##### 请求 header
 
@@ -359,7 +411,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/ttXXXX81,user2,user3'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/ttXXXX81,user2,user3?need_notify=false'
 ```
 
 ##### 响应示例
