@@ -2,13 +2,21 @@
 
 ## 2025-04
 
+#### Android/iOS/Web/小程序 SDK 4.14.0 发版
+
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | SDK 4.14.0 开发版发布   | <br/> - 支持 [GIF 图片消息](/document/android/message_send_receive.html#发送和接收-gif-图片消息)。 <br/> - 支持 [群组头像功能](/document/android/group_attributes.html#管理群组头像)。 <br/> - 支持 [消息附件鉴权功能](/document/android/message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](/document/android/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/android/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - Android 端支持 [获取群成员信息时包括成员加群时间](/document/android/group_members.html#获取群成员信息)。<br/> - Web/小程序支持 [自定义设备平台](/document/web/multi_device.html#设置登录设备的平台)。<br/> - Uni-app 离线推送 Android 平台支持 [Google FCM](/document/applet/push/uniapp_push_fcm.html)。 | 2025-04-18       | <br/> - [Android 4.14.0 更新日志](/document/android/releasenote.html#版本-v4-14-0-dev-2025-4-21-开发版)<br/> - [iOS 4.14.0 更新日志](/document/ios/releasenote.html#版本-v4-14-0-dev-2025-4-21-开发版)<br/> - [Web 4.14.0 更新日志](/document/web/releasenote.html#版本-v4-14-0-dev-2025-4-21-开发版) <br/> - [小程序 4.14.0 更新日志](/document/applet/releasenote.html#版本-v4-14-0-dev-2025-4-21-开发版)         |
 
+#### HarmonyOS SDK 1.6.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS SDK 1.6.0 开发版发布   | <br/> - [支持修改各类型的消息](/document/harmonyos/message_modify.html)：<br/>1. 文本/自定义消息：支持修改消息内容（body）和扩展；<br/>2. 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段；<br/>4. 命令消息：不支持修改。    | 2025-04-22     | [HarmonyOS 1.6.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-6-0-dev-2025-4-9-开发版)      |
+
 ## 2025-03
 
-### SDK 发版
+#### SDK 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -19,7 +27,7 @@
 | HarmonyOS SDK 1.5.2 开发版发布   | **新增特性**：<br/> - 支持 [清空聊天记录](/document/harmonyos/message_delete.html#清空聊天记录)：清除当前用户的单聊、群聊和聊天室的消息和会话记录，可选择是否清除服务端的聊天记录。<br/> - 支持检查 SDK 是否连接到环信服务器：自动登录的场景下，登录状态变为已登录时，可能 SDK 未成功连接至服务端，这种情况下与服务器交互的操作会失败，比如发消息。此时，可调用 `isConnected()` 接口判断 SDK 与服务器的连接状态。    | 2025-03-10     | [HarmonyOS 1.5.2 更新日志](/document/harmonyos/releasenote.html#版本-v1-5-2-dev-2025-3-10-开发版)      |
 | HarmonyOS SDK 1.5.3 开发版发布   | **新增特性**：<br/> - 支持[从本地获取单个好友的用户 ID 和好友备注](/document/harmonyos/user_relationship.html#从本地获取好友列表)。    | 2025-03-17     | [HarmonyOS 1.5.3 更新日志](/document/harmonyos/releasenote.html#版本-v1-5-3-dev-2025-3-17-开发版)      |
 
-### 其他优化
+#### 其他优化
 
 1. 注册用户时用户 ID 建议统一使用小写字母
 
