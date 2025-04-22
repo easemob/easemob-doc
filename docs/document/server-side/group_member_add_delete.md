@@ -56,12 +56,22 @@
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
+POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}?need_notify=false
 ```
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `username` | String | 是       | 当前用户的用户 ID。             |
+
+其他参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `need_notify` | Bool   | 否       | 添加群成员后是否向群内成员发送系统通知。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 
 ##### 请求 header
 
@@ -94,7 +104,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user4'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user4?need_notify=false'
 ```
 
 ##### 响应示例
@@ -139,12 +149,18 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users
+POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?need_notify=false
 ```
 
 ##### 路径参数
 
 参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `need_notify` | Bool   | 否       | 添加群成员后是否向群内成员发送系统通知。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 
 ##### 请求 header
 
@@ -187,7 +203,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
    "usernames": [
      "user4","user5"
    ]
- }' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users'
+ }' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users?need_notify=false'
 ```
 
 ##### 响应示例
@@ -232,12 +248,22 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
+DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}?need_notify=false
 ```
 
 ##### 路径参数
 
-参数及描述详见 [公共参数](#公共参数)。
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `username` | String | 是       | 当前用户的用户 ID。             |
+
+其他参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `need_notify` | Bool   | 否       | 添加群成员后是否向群内成员发送系统通知。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 
 ##### 请求 header
 
@@ -270,7 +296,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user3'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user3?need_notify=false'
 ```
 
 ##### 响应示例
@@ -315,7 +341,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members}
+DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members}?need_notify=false
 ```
 
 ##### 路径参数
@@ -325,6 +351,12 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 | `members` | String | 是       | 要移除的群成员的用户 ID，用户 ID 之间用英文逗号（","）分隔。建议每次最多传 60 个用户 ID，并且 URL 的长度不超过 4 KB。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
+
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :------------ |
+| `need_notify` | Bool   | 否       | 移除群成员后是否向群内成员发送系统通知。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
 
 ##### 请求 header
 
@@ -359,7 +391,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{members
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/ttXXXX81,user2,user3'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/ttXXXX81,user2,user3?need_notify=false'
 ```
 
 ##### 响应示例
