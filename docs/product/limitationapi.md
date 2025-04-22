@@ -85,10 +85,10 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 分页获取群组成员  |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/users       | 100 次/秒/App Key     |  100 次/秒   | 
-| 添加单个群组成员     |    POST | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username}    | 100 次/秒/App Key      | 50 次/秒    | 
-| 批量添加群组成员    |    POST   | /{org_name}/{app_name}/chatgroups/{group_id}/users           | 100 次/秒/App Key     | 50 次/秒    | 
-| 移除单个群组成员     |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username}    | 100 次/秒/App Key    |     | 
-| 批量移除群组成员    |    DELETE     | /{org_name}/{app_name}/chatgroups/{group_id}/users/{usernames}    | 100 次/秒/App Key   | 50 次/秒    | 
+| 添加单个群组成员     |    POST | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username}?need_notify=false    | 100 次/秒/App Key      | 50 次/秒    | 
+| 批量添加群组成员    |    POST   | /{org_name}/{app_name}/chatgroups/{group_id}/users?need_notify=false           | 100 次/秒/App Key     | 50 次/秒    | 
+| 移除单个群组成员     |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username}?need_notify=false    | 100 次/秒/App Key    |     | 
+| 批量移除群组成员    |    DELETE     | /{org_name}/{app_name}/chatgroups/{group_id}/users/{usernames}?need_notify=false    | 100 次/秒/App Key   | 50 次/秒    | 
 | 设置群成员自定义属性    |  PUT       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}              | 100 次/秒/App Key   | 100 次/秒    | 
 | 批量设置群成员自定义属性    |  PUT       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/users/batch  | 100 次/秒/App Key  |     | 
 | 获取单个群成员的所有自定义属性    |  GET       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}            | 100 次/秒/App Key   | 100 次/秒    | 
