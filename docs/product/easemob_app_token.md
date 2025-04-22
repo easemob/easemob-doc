@@ -4,7 +4,7 @@
 
 环信提供的 REST API 需要 app token (管理员权限 token) 才能使用，即发送 HTTP 请求时需要携带 app token。本文介绍如何获取 app token。
 
-另外，环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，详见 [Java Server SDK](/document/server-side/java_server_sdk.html) 和 [PHP Server SDK](/document/server-side/php_server_sdk.html)。
+另外，环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，详见 [Java Server SDK](/document/server-side/java_server_sdk.html)。
 
 ## 获取管理员权限 Token
 

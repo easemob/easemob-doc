@@ -1955,8 +1955,6 @@ projects:
             link: https://easemob.github.io/easemob-im-server-sdk/
           - text: JAVA 2.0
             link: https://github.com/easemob/easemob-im-server-sdk/tree/master_java_2.0/src/test/java/com/easemob/im/api  
-          - text: PHP
-            link: https://easemob.github.io/im-php-server-sdk/annotated.html
       - title: 超级社区
         icon: /feature/api-circle.svg
         contexts:

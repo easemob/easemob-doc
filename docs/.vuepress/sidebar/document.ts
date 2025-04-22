@@ -466,7 +466,7 @@ const documentSidebar = [
     children: [
       { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
       { text: 'Java Server SDK 1.0', link: 'java_server_sdk.html' },
-      { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
+      // { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
     ],
     only: ['server-side']
   },
