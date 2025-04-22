@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.12</version>
+    <version>1.0.13</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:V1.0.12'
+implementation 'com.easemob.im:im-sdk-core:V1.0.13'
 ```
 
 ### 使用
@@ -204,6 +204,13 @@ try {
 ```
 
 ## 更新日志
+
+### V1.0.13 2025-04-22
+
+1. 增加 "向 app 在线用户发送广播消息" 功能。
+2. 兼容 TLS 1.0/1.1。
+
+以上更新内容请到 MessageApi 中查看。
 
 ### V1.0.12 2025-03-04
 
