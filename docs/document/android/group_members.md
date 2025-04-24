@@ -181,19 +181,23 @@ EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userL
 你可以调用 `asyncFetchGroupMembersInfo` 方法获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
 
 ```java
-EMGroupManager.getInstance().asyncFetchGroupMembersInfo( groupId, cursor,pageSize, new EMValueCallBack<List<EMGroupMemberInfo>>(){
-   @Override
-   public void onSuccess(List<EMGroupMemberInfo> value) {
-        for(EMGroupMemberInfo info:value){
-            //获取群成员的角色，加入时间等信息
-            long ts = info.getJoinTime();            
-        
-        }
-            
-   }
+EMClient.getInstance().groupManager().asyncFetchGroupMembersInfo(groupId, null, 50, new EMValueCallBack<EMCursorResult<EMGroupMemberInfo>>() {
+            @Override
+            public void onSuccess(EMCursorResult<EMGroupMemberInfo> value) {
+                List<EMGroupMemberInfo> list = value.getData();
+                for (EMGroupMemberInfo groupMemberInfo : list) {
+                    //获取群成员的用户 ID、加群时间和成员角色
+                    String id = groupMemberInfo.getMemberId();
+                    long joinTime = groupMemberInfo.getJoinTime();
+                    EMGroup.EMGroupPermissionType role = groupMemberInfo.getRole();
+                }
+            }
 
-});
+            @Override
+            public void onError(int error, String errorMsg) {
 
+            }
+        });
 ```
 
 ### 管理群成员的自定义属性
