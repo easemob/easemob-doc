@@ -76,7 +76,7 @@ let option = EMFetchServerMessagesOption();
 
 ### 从服务器获取指定群成员发送的消息
 
-对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
+自 iOS SDK 4.14.0 开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
 
 ```objectivec
 EMFetchServerMessagesOption* option = [[EMFetchServerMessagesOption alloc] init];
@@ -89,7 +89,7 @@ EMFetchServerMessagesOption* option = [[EMFetchServerMessagesOption alloc] init]
 
 ### 从本地获取指定群成员发送的消息
 
-对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
+自 iOS SDK 4.14.0 开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
 
 ```objectivec
 EMConversation *conversation = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];

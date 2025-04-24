@@ -178,7 +178,7 @@ EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userL
 
 ### 获取群组成员信息
 
-你可以调用 `asyncFetchGroupMembersInfo` 方法获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
+自 4.14.0 版本开始，你可以调用 `asyncFetchGroupMembersInfo` 方法获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
 
 ```java
 EMClient.getInstance().groupManager().asyncFetchGroupMembersInfo(groupId, null, 50, new EMValueCallBack<EMCursorResult<EMGroupMemberInfo>>() {
