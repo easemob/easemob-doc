@@ -118,7 +118,7 @@ EMClient.getInstance().chatManager().asyncFetchHistoryMessage(
 
 ### 从服务器获取指定群成员发送的消息
 
-对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
+自 4.14.0 版本开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
 
 ```java
 String conversationId = " ";
@@ -168,7 +168,7 @@ int pageSize,String cursor,
 
 ### 从本地获取指定群成员发送的消息
 
-对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
+自 4.14.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
 
 ```java
 asyncSearchMsgFromDB(String keywords, long timeStamp, int maxCount, List<String> senders, EMSearchDirection direction, EMMessageSearchScope searchScope, EMValueCallBack<List<EMMessage>> callback)
