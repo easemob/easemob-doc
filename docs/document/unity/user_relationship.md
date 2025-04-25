@@ -44,7 +44,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 ```csharp
 //继承并实现 IContactManagerDelegate。
 public class ContactManagerDelegate : IContactManagerDelegate {
-    // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 A 收到该事件，而用户 B 收到 `onContactAgreed` 事件。
+    // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 B 收到 `onContactAgreed` 事件，双方都收到该事件。
     public void OnContactAdded(string username)
     {
     }

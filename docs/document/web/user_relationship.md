@@ -44,7 +44,7 @@ conn.addEventHandler("contactEvent", {
     onContactInvited: function (msg) {},
     // 当前用户被其他用户从联系人列表上移除。用户 B 将用户 A 从联系人列表上删除，用户 A 收到该事件。
     onContactDeleted: function (msg) {},
-    // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 A 收到该事件，而用户 B 收到 `onContactAgreed` 事件。
+    // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 B 收到 `onContactAgreed` 事件，双方用户均收到 `onContactAgreed` 事件。
     onContactAdded: function (msg) {},
     // 当前用户发送的好友请求被拒绝。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
     onContactRefuse: function (msg) {},
@@ -61,7 +61,7 @@ conn.addContact("userId", "加个好友呗!");
 
 3. 对端用户通过 `onContactInvited` 监听事件收到好友请求，确认是否成为好友。
    
-    - 若接受好友请求，需调用 `acceptContactInvite` 方法。该用户收到 `onContactAdded` 事件，请求方收到 `onContactAgreed` 事件。
+    - 若接受好友请求，需调用 `acceptContactInvite` 方法。请求方收到 `onContactAgreed` 事件，双方用户收到 `onContactAdded` 事件。
 
     示例代码如下：
     
