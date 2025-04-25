@@ -140,7 +140,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | forbidden_op | can not join this group, reason:user: XX already in group: XX\n | 用户已经在群里。 | 不要重复加入。 |
+| 403     | exceeded limit | can not join this group, reason:user: XX already in group: XX\n | 用户已经在群里。 | 不要重复加入。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
 | 404     | resource_not_found | username XX doesn't exist! | 要添加的用户不存在 | 使用合法的用户，即 `username` 传入存在的用户 ID。|
 | 403     | exceed_limit | user XX has joined too many groups! | 用户可加入的群组数达到上限。 | 退出不用的群组或联系商务调整上限。 | 
