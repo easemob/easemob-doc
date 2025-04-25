@@ -81,7 +81,8 @@ ChatClient.getInstance()
 
 3. 对端用户通过 `onContactInvited` 监听收到好友请求，确认是否成为好友。
 
-   - 若接受好友请求，需调用 `acceptInvitation` 方法。该用户收到 `onContactAdded` 事件。请求方收到 `onFriendRequestAccepted` 事件。
+   - 若接受好友请求，需调用 `acceptInvitation` 方法。请求方收到 `onFriendRequestAccepted` 事件。
+，双方都收到 `onContactAdded` 事件。
 
 ```typescript
 // 用户 ID

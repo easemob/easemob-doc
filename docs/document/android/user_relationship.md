@@ -57,7 +57,7 @@ EMClient.getInstance().contactManager().setContactListener(new EMContactListener
     @Override
     public void onContactDeleted(String username) { }
 
-    // 联系人已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 A 收到该事件，而用户 B 收到 `onFriendRequestAccepted` 事件。
+    // 联系人已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 B 收到 `onFriendRequestAccepted` 事件，双方用户收到 `onContactAdded` 事件。
     @Override
     public void onContactAdded(String username) { }
 });
@@ -75,7 +75,7 @@ EMClient.getInstance().contactManager().addContact(toAddUsername, reason);
 
 3. 对端用户通过 `onContactInvited` 监听收到好友请求，确认是否成为好友。
    
-   - 若接受好友请求，需调用 `acceptInvitation` 方法。该用户收到 `onContactAdded` 事件。请求方收到 `onFriendRequestAccepted` 事件。
+   - 若接受好友请求，需调用 `acceptInvitation` 方法。请求方收到 `onFriendRequestAccepted` 事件，双方都收到 `onContactAdded` 事件。
  
 ```java
 // 同步方法，会阻塞当前线程。异步方法为 asyncAcceptInvitation(String, EMCallBack)。
