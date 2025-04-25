@@ -4,11 +4,11 @@
 
 用户登录后，可进行添加联系人、获取好友列表等操作。
 
-本文介绍如何通过环信即时通讯 IM SDK 管理好友关系，包括添加、同意、拒绝、删除、查询好友，以及管理黑名单，包括添加、移出、查询黑名单。
+本文介绍如何通过环信即时通讯 IM SDK 管理好友关系，包括添加、接受、拒绝、删除、查询好友，以及管理黑名单，包括添加、移出、查询黑名单。
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
-- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请、删除好友和设置好友备注等操作。
+- 好友列表管理：查询好友列表、请求添加好友、接受好友请求、拒绝好友请求、删除好友和设置好友备注等操作。
 - 黑名单管理：查询黑名单列表、将添加用户至黑名单以及从黑名单中移出用户等操作。
   
 此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。  
@@ -41,7 +41,25 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 添加好友部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
 
-1. 申请指定用户添加好友
+1. 添加监听。
+
+请监听好友请求相关事件的回调，这样当用户收到好友请求，可以调用接受请求的 API 添加好友。服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。
+
+设置好友监听示例代码如下：
+
+```objectivec
+// 注册好友回调。
+[[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
+// 移除好友回调。
+[[EMClient sharedClient].contactManager removeDelegate:self];
+
+// 收到好友请求。
+- (void)friendRequestDidReceiveFromUser:(NSString *)aUsername
+      message:(NSString *)aMessage
+  { }
+```
+
+2. 请求添加好友。
 
 示例代码如下：
 
@@ -56,28 +74,12 @@ if (!aError) {
 }];
 ```
 
-2. 监听与好友请求相关的回调
+2. 对端用户通过 `friendRequestDidReceiveFromUser` 事件监听收到好友请求，确认是否成为好友。 
 
-请监听好友请求相关事件的回调，这样当用户收到好友请求，可以调用接受请求的 RESTful API 添加好友。服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。
-
-设置好友监听示例代码如下：
+- 若接受好友请求，需调用 `approveFriendRequestFromUser` 方法。该用户收到 `friendshipDidAddByUser` 事件。请求方收到 `friendRequestDidApproveByUser` 事件。
 
 ```objectivec
-// 注册好友回调。
-[[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
-// 移除好友回调。
-[[EMClient sharedClient].contactManager removeDelegate:self];
-
-// 好友申请已收到。
-- (void)friendRequestDidReceiveFromUser:(NSString *)aUsername
-      message:(NSString *)aMessage
-  { }
-```
-
-收到好友请求后，可以选择同意加好友申请或者拒绝加好友申请，示例代码如下：
-
-```objectivec
-// 同意好友申请。
+// 接受好友请求。
 // 异步方法
 [[EMClient sharedClient].contactManager approveFriendRequestFromUser:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
 if (!aError) {
@@ -86,6 +88,17 @@ if (!aError) {
     NSLog(@"同意加好友申请失败的原因 --- %@", aError.errorDescription);
 }
 }];
+```
+
+```objectivec
+// 请求方收到的事件
+- (void)friendRequestDidApproveByUser:(NSString *)aUsername
+  { }
+```
+
+- 若拒绝好友请求，需调用 `declineFriendRequestFromUser`。请求方收到 `friendRequestDidDeclineByUser` 事件。
+
+```objectivec
 
 // 拒绝好友申请。
 // 异步方法
@@ -98,16 +111,8 @@ if (!aError) {
 }];
 ```
 
-当你同意或者拒绝后，对方会通过好友事件回调，收到 `friendRequestDidApproveByUser` 或者 `friendRequestDidDeclineByUser`。
-
-示例代码如下：
-
 ```objectivec
-// 对方同意了好友申请。
-- (void)friendRequestDidApproveByUser:(NSString *)aUsername
-  { }
-
-// 对方拒绝了好友申请。
+// 请求方收到的事件。
 - (void)friendRequestDidDeclineByUser:(NSString *)aUsername
   { }
 ```

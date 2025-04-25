@@ -6,7 +6,7 @@
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
-- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请、删除好友和设置好友备注等操作。
+- 好友列表管理：查询好友列表、请求添加好友、接受好友请求、拒绝好友请求、删除好友和设置好友备注等操作。
 - 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。
 
 此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
@@ -34,17 +34,9 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ### 添加好友
 
-添加好友部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
+添加好友部分主要功能是发送好友请求、接受好友请求、处理好友请求和好友请求处理结果回调等。
 
-1. 申请指定用户添加好友
-
-示例代码如下：
-
-```typescript
-ChatClient.getInstance().contactManager()?.addContact(toAddUsername, reason);
-```
-
-2. 添加监听
+1. 添加监听。
 
 请监听与好友请求相关事件的回调，这样当用户收到好友请求，可以调用接受请求的 RESTful API 添加好友。服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。设置监听示例代码如下：
 
@@ -69,20 +61,31 @@ let contactListener: ContactListener = {
 ChatClient.getInstance().contactManager()?.addContactListener(contactListener);
 ```
 
-3. 收到好友请求后，可以选择同意加好友申请或者拒绝加好友申请，示例代码如下：
+2. 请求添加好友。
+
+示例代码如下：
 
 ```typescript
-// 同意好友申请。
+ChatClient.getInstance().contactManager()?.addContact(toAddUsername, reason);
+```
+
+3. 对端用户通过 `onContactInvited` 监听收到好友请求，确认是否成为好友。 
+
+- 若接受好友请求，需调用 `acceptInvitation` 方法。该用户收到 `onContactAdded` 事件。请求方收到 `onFriendRequestAccepted` 事件。
+
+```typescript
 ChatClient.getInstance().contactManager()?.acceptInvitation(userId).then(()=>{
-    // success logic
-});
-// 拒绝好友申请。
-ChatClient.getInstance().contactManager()?.declineInvitation(userId).then(()=>{
     // success logic
 });
 ```
 
-当你同意或者拒绝后，对方会通过好友事件回调，收到 `onFriendRequestAccepted` 或者 `onFriendRequestDeclined`。
+- 若拒绝好友请求，需调用 `declineInvitation` 方法。请求方收到 `onFriendRequestDeclined` 事件。
+
+```typescript
+ChatClient.getInstance().contactManager()?.declineInvitation(userId).then(()=>{
+    // success logic
+});
+```
 
 ### 删除好友
 
