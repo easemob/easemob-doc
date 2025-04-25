@@ -6,19 +6,19 @@
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
-- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请和删除好友等操作。
-- 黑名单管理：查询黑名单列表、添加用户至黑名单以及从黑名单中移出用户等操作。
+- 好友列表管理：查询好友列表、请求添加好友、接受好友请求、拒绝好友请求、删除好友和设置好友备注等操作。
+- 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。
 
-此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
+此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在 [环信即时通讯云控制台](https://console.easemob.com/user/login) [开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
 
 ## 技术原理
 
 环信即时通讯 IM React Native SDK 提供 `ChatContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
 
-- `addContact` 申请添加好友。
+- `addContact` 请求添加好友。
 - `deleteContact` 删除好友。
-- `acceptInvitation` 同意好友申请。
-- `declineInvitation` 拒绝好友申请。
+- `acceptInvitation` 接受好友请求。
+- `declineInvitation` 拒绝好友请求。
 - `getAllContactsFromServer` 从服务器获取好友列表。
 - `getAllContactsFromDB` 从缓存获取好友列表。
 - `addUserToBlockList` 添加用户到黑名单。
@@ -36,7 +36,33 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ### 添加好友
 
-1. 用户添加指定用户为好友
+1. 添加监听。
+
+```typescript
+      const listener = {
+        onContactAdded: (userName: string) => {
+          // 联系人已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 A 收到该事件，而用户 B 收到 `onFriendRequestAccepted` 事件。
+        },
+        onContactDeleted: (userName: string) => {
+          // 联系人被删除。用户 B 将用户 A 从联系人列表上删除，用户 A 收到该事件。
+        },
+        onContactInvited: (userName: string, reason?: string) => {
+          // 接收到好友请求。用户 B 向用户 A 发送好友请求，用户 A 收到该事件。
+        },
+        onFriendRequestAccepted: (userName: string) => {
+          // 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。
+        },
+        onFriendRequestDeclined: (userName: string) => {
+          // 对方拒绝了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
+        },
+      } as ChatContactEventListener;
+      // 添加联系人监听器
+      ChatClient.getInstance().contactManager.removeContactListener(listener);
+      // 移除联系人监听器
+      ChatClient.getInstance().contactManager.addContactListener(listener);
+```
+
+2. 用户添加指定用户为好友。
 
 ```typescript
 // 用户 ID
@@ -53,9 +79,9 @@ ChatClient.getInstance()
   });
 ```
 
-2. 对方收到申请，同意成为好友，或者拒绝成为好友
+3. 对端用户通过 `onContactInvited` 监听收到好友请求，确认是否成为好友。
 
-同意成为好友：
+   - 若接受好友请求，需调用 `acceptInvitation` 方法。该用户收到 `onContactAdded` 事件。请求方收到 `onFriendRequestAccepted` 事件。
 
 ```typescript
 // 用户 ID
@@ -69,23 +95,6 @@ ChatClient.getInstance()
     console.log("accept request fail.", reason);
   });
 ```
-
-拒绝成为好友：
-
-```typescript
-// 用户 ID
-const userId = "bar";
-ChatClient.getInstance()
-  .contactManager.declineInvitation(userId)
-  .then(() => {
-    console.log("decline request success.");
-  })
-  .catch((reason) => {
-    console.log("decline request fail.", reason);
-  });
-```
-
-3. 接收方对于同意，申请方收到监听事件 `onContactInvited`
 
 ```typescript
 const contactEventListener = new (class implements ChatContactEventListener {
@@ -102,7 +111,20 @@ ChatClient.getInstance().contactManager.addContactListener(
 );
 ```
 
-4. 对方拒绝，收到监听事件 `onFriendRequestDeclined`
+- 若拒绝好友请求，需调用 `declineInvitation` 方法。请求方收到 `onFriendRequestDeclined` 事件。
+
+```typescript
+// 用户 ID
+const userId = "bar";
+ChatClient.getInstance()
+  .contactManager.declineInvitation(userId)
+  .then(() => {
+    console.log("decline request success.");
+  })
+  .catch((reason) => {
+    console.log("decline request fail.", reason);
+  });
+```
 
 ```typescript
 const contactEventListener = new (class implements ChatContactEventListener {
@@ -137,6 +159,8 @@ ChatClient.getInstance()
     console.log("remove fail.", reason);
   });
 ```
+
+调用 `deleteContact` 删除好友后，对方会收到 `onContactDeleted` 事件。
 
 #### 设置好友备注
 
