@@ -56,6 +56,7 @@
 
 ```swift
 let option = EMFetchServerMessagesOption();
+// 自 iOS SDK 4.14.0 版本开始，拉取到最后一页时，返回的 `cursor` 由 `undefined` 改为空字符串。
         EMClient.shared().chatManager?.fetchMessagesFromServer(by: "conversationId", conversationType: .chat, cursor: "", pageSize: 50, option: option, completion: { result, err in
             if let err = err {
                 // 获取失败
