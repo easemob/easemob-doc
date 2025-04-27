@@ -75,6 +75,7 @@ int pageSize,String cursor,
                 if (list != null && list.size() > 0) {
                     messages.addAll(list);
                 }
+                //自 Android SDK 4.14.0 版本开始，拉取到最后一页时，返回的 `newCursor` 由 `undefined` 改为空字符串。
                 String newCursor = value.getCursor();
                 if( !TextUtils.isEmpty(newCursor)) {
                     doAsyncFetchHistoryMessages(conversationId, type, pageSize, newCursor, option, messages);
