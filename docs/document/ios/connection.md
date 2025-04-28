@@ -30,11 +30,19 @@ extension ViewController: EMClientDelegate {
     func connectionStateDidChange(_ aConnectionState: EMConnectionState) {
         
     }
+    // 自 4.14.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知。
+    func tokenWillExpire(_ aErrorCode: EMErrorCode) {
+        // 通过 App Server 获取新的 token,然后调用 sdk 的 renewToken 方法更新 token
+        EMClient.shared().renewToken("newToken") { e in
+            
+    }
     
     // token 已过期
     func tokenDidExpire(_ aErrorCode: EMErrorCode) {
         
+        
     }
+    
 }
 
 ```

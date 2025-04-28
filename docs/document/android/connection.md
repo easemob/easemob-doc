@@ -25,6 +25,7 @@ EMConnectionListener connectionListener = new EMConnectionListener() {
     }
 
     @Override
+    // 自 4.14.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知。
     public void onTokenWillExpire() {
 
     }

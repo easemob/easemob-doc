@@ -27,19 +27,17 @@
 
 ### 获取聊天室成员列表
 
-聊天室所有成员均可调用 `listChatRoomMembers` 获取当前聊天室成员列表。
+自 SDK 4.15.0 开始，聊天室所有成员均可调用 `getChatRoomMembers`方法获取聊天室成员信息，包括用户 ID 和成员角色。
 
-示例代码如下：
+原方法 `listChatRoomMembers` 废弃。
 
 ```javascript
-//pageNum：当前页码，从 1 开始。
-//pageSize：每页期望返回的成员数,最大值为 1,000。
-let option = {
-    pageNum: 1,
-    pageSize: 10,
-    chatRoomId: 'chatRoomId'
-}
-conn.listChatRoomMembers(option).then(res => console.log(res))
+conn
+// limit：每页获取的
+  .getChatRoomMembers({ cursor: "", limit: 50, chatRoomId: "chatRoomId" })
+  .then((res) => {
+    console.log(res);
+  });
 ```
 
 ### 退出聊天室
