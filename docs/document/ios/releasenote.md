@@ -15,7 +15,7 @@
 ### 优化
 
 - 日志文件中增加设备时区偏移，方便排查问题。
-- 调用方法 `EMChatManager#fetchMessagesFromServerBy:conversationType:cursor:pageSize:option:completion:` 拉取漫游消息，拉取到最后一页时，返回的 `EMCursorResult#cursor` 由 `undefined` 改为空字符串。
+- 调用方法 [EMChatManager#fetchMessagesFromServerBy:conversationType:cursor:pageSize:option:completion:](message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `EMCursorResult#cursor` 由 `undefined` 改为空字符串。
 - 升级 SDK 使用的 BoringSSL 和 SQLCipher 库，避免安全风险。
 
 ### 修复

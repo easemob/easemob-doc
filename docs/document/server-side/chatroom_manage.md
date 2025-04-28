@@ -296,6 +296,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | `data.affiliations_count` | Int    | 现有聊天室成员总数。 |
 | `data.affiliations`       | Array  | 现有聊天室成员列表，包含聊天室所有者和成员（包括聊天室管理员）。例如：“affiliations”:[{“owner”: “user1”},{“member”:”user2”},{“member”:”user3”}]。  |
 | `data.public`             | Bool   | 预留字段，无需关注。 |
+| `data.mute`             | Bool   | 是否为全员禁言状态：<br/> - `true`：是<br/> - `false`：否。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -334,7 +335,8 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
         "owner": "user1"
       }
     ],
-    "public": true
+    "public": true,
+    "mute": false
   }
 }
 ```
