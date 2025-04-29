@@ -9,14 +9,14 @@
 - 支持获取[群组](group_manage.html#获取群成员列表)/[聊天室成员列表](room_members.html#获取聊天室成员列表)时，列明成员的用户 ID 和角色。
 - [撤回消息](message_recall.html)时，支持群组中群主/管理员撤回其他用户发送的消息。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
-  - [新增群成员进出事件](group_manage.html#监听群组事件) `membersPresence` 和 `membersAbsence`。原事件 `memberPresence` 和 `membersAbsence` 仍有效。 
+  - 新增群成员进出事件 [membersPresence](group_manage.html#监听群组事件) 和 [membersAbsence](group_manage.html#监听群组事件)。原事件 `memberPresence` 和 `membersAbsence` 仍有效。 
    
 ### 优化
 
 - 修改 Token 即将过期事件 `tokenWillExpire` 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
 - [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 的 Readme 文档](https://github.com/easemob/easemob-demo-react/tree/dev_4.0)。
-- 废弃获取群组成员列表的原方法 `listGroupMembers`。使用 [getGroupMembers](group_manage.html#获取群成员列表) 替换。
-- 废弃获取群组成员列表的原方法 `listChatRoomMembers`。使用 [getChatRoomMembers](room_members.html#获取聊天室成员列表) 替换。
+- 废弃获取群组成员列表的原方法 `listGroupMembers`。使用 [getGroupMembers](group_manage.html#获取群成员列表) 代替。
+- 废弃获取群组成员列表的原方法 `listChatRoomMembers`。使用 [getChatRoomMembers](room_members.html#获取聊天室成员列表) 代替。
 
 ## 版本 V4.14.0 Dev 2025-4-21（开发版）
 

@@ -8,7 +8,7 @@
 
 - [撤回消息](message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
-  - [新增群成员进出事件](group_manage.html#监听群组事件) `onMembersJoined` 和 `onMembersExited`。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
+  - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
   
 ### 优化
 
