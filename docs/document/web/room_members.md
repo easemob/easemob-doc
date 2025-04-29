@@ -33,7 +33,7 @@
 
 ```javascript
 conn
-// limit：每页获取的
+// limit：每页获取的成员数。取值范围为 [1,50]，默认为 50。
   .getChatRoomMembers({ cursor: "", limit: 50, chatRoomId: "chatRoomId" })
   .then((res) => {
     console.log(res);

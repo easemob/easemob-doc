@@ -14,10 +14,22 @@
 
 调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
 
+对于多人同时加群/退群，SDK 改为仅回调单条事件，事件中包含所有加入/退出的成员。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
+
+群组成员进出的事件支持一次通知多个成员进出群组通知。
+新增群成员进出事件 `onMembersJoined` 和 `onMembersExited`,
+
 ### 优化
 
 - 修改 Token 即将过期事件 `onTokenWillExpire` 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
 - [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 的 Readme 文档](https://github.com/easemob/easemob-demo-android)。
+- 废弃群成员进出事件 `onMemberJoined` 和 `onMemberExited`，使用新增事件 `onMembersJoined` 和 `onMembersExited` 替代。
+
+
+### 修复
+
+- 修复 `EMAThreadManagerListener#onLeaveThread` 事件中，回调出的 `EMAThreadInfo` 的 `getType` 值为 `null` 问题。
+- 修复获取会话免打扰开始及结束时间时在部分机型上产生的 crash。
 
 ## 版本 V4.14.0 Dev 2025-4-21（开发版）
 

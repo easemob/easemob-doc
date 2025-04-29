@@ -141,7 +141,7 @@ conn.getGroupInfo(option).then((res) => {
 
 ```javascript
 conn
-// limit：每页获取的群成员数量，取值范围为 [0,50]。
+// limit：每页获取的群成员数量，取值范围为 [1,50]，默认值为 50。
   .getGroupMembers({ cursor: "", limit: 50, groupId: "groupId" })
   .then((res) => {
     console.log(res);
