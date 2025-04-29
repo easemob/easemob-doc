@@ -85,10 +85,10 @@ conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 
    入群邀请是否需受邀用户确认取决于群组选项 `inviteNeedConfirm` 的设置：
 
-   - `inviteNeedConfirm` 设置为 `false` 时，受邀用户直接进群，无需确认，群组所有成员会收到 `memberPresence` 事件。
+   - `inviteNeedConfirm` 设置为 `false` 时，受邀用户直接进群，无需确认，群组所有成员会收到 `membersPresence` 事件。
    - `inviteNeedConfirm` 设置为 `true` 时，受邀用户需确认是否加入群组。
 
-     - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
+     - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `membersPresence` 事件。
 
      ```javascript
      conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
@@ -231,16 +231,16 @@ conn.addEventHandler("eventName", {
       // 群组所有者和管理员拉用户进群时，无需用户确认时会触发该回调。被拉进群的用户会收到该回调。
       case "directJoined":
         break;
-      // 单个群成员主动退出群组。除退群的成员之外，其他群成员会收到该回调。
+      // 群成员（单个）退群。除退群成员外，其他群成员会收到该回调。
       case "memberAbsence":
         break;
-      // 多个群成员主动退出群组。除退群的成员之外，其他群成员会收到该回调。
+      // 群成员（单个或多个）退群。除退群成员外，其他群成员会收到该回调。
       case "membersAbsence":
-        break;  
-      // 单个用户加入群组。除新成员之外，其他群成员会收到该回调。
+        break;
+      // 用户（单个）加群。除新成员外，其他群成员会收到该回调。
       case "memberPresence":
         break;
-      // 多个用户加入群组。除新成员之外，其他群成员会收到该回调。
+      // 用户（单个或多个）加群。除新成员外，其他群成员会收到该回调。
       case "membersPresence":
         break; 
       // 用户被移出群组。被踢出群组的成员会收到该回调。

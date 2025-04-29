@@ -45,11 +45,11 @@ conn.joinGroup(option).then(res => console.log(res))
 ```
 
 任何用户均可申请入群，是否需要群主和群管理员审批，取决于 `approval` 选项的设置：
-- `approval` 为 `false` 时，用户可直接加入群组，无需群主和群管理员审批。其他群成员会收到 `memberPresence` 事件。
+- `approval` 为 `false` 时，用户可直接加入群组，无需群主和群管理员审批。其他群成员会收到 `membersPresence` 事件。
 - `approval` 为 `true` 时，群主和群管理员审批后，用户才能加入群组。群主和群管理员会收到 `requestToJoin` 事件。
     - 若同意用户加入群组，群主或管理员需要调用 `acceptGroupJoinRequest` 方法。
     
-    申请人会收到 `acceptRequest` 事件且加入群组，其他成员会收到 `memberPresence` 事件。
+    申请人会收到 `acceptRequest` 事件且加入群组，其他成员会收到 `membersPresence` 事件。
     
     示例代码如下：
     
@@ -78,7 +78,7 @@ conn.joinGroup(option).then(res => console.log(res))
 
 #### 群成员主动退出群组
 
-所有群成员可调用 `leaveGroup` 方法退出群组。退出群组的成员不会再收到群消息。其他成员会收到 `memberAbsence` 事件。
+所有群成员可调用 `leaveGroup` 方法退出群组。退出群组的成员不会再收到群消息。其他成员会收到 `membersAbsence` 事件。
 
 示例代码如下：
 
@@ -91,7 +91,7 @@ conn.leaveGroup(option).then(res => console.log(res))
 
 #### 群成员被移出群组
 
-仅群主和群管理员可以调用 `removeGroupMember` 或 `removeGroupMembers` 方法将指定的单个成员或多个成员移出群组。被踢出群组后，被踢群成员会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 监听事件。被移出群组后，用户还可以再次加入群组。
+仅群主和群管理员可以调用 `removeGroupMember` 或 `removeGroupMembers` 方法将指定的单个成员或多个成员移出群组。被踢出群组后，被踢群成员会收到 `removeMember` 事件，其他成员会收到 `membersAbsence` 监听事件。被移出群组后，用户还可以再次加入群组。
 
 - 移出单个群成员，示例代码如下：
 
