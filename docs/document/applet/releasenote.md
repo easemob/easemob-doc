@@ -6,14 +6,10 @@
 
 ### 新增特性
 
-- 支持获取[群组](group_manage.html#获取群成员列表)/[聊天室成员列表](room_members.html#获取聊天室成员列表)时，列明成员的用户 ID 和角色。
-- [撤回消息](message_recall.html)时，支持群组中群主/管理员撤回其他用户发送的消息。
-- 当群组发生以下操作时，SDK 改为仅回调单条加群/退群事件，事件中包含所有加入/退出的成员：
-   - 创建群组时拉多人入群
-   - 批量成员加入或退出群组
-   - 因解散群组导致用户退出
-  
-   调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
+- 支持获取 [群组](group_manage.html#获取群成员列表)/[聊天室成员列表](room_members.html#获取聊天室成员列表) 时，列明成员的用户 ID 和角色。
+- [撤回消息](message_recall.html) 时，支持群组中群主/管理员撤回其他用户发送的消息。
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
+  - 新增群成员进出事件 [membersPresence](group_manage.html#监听群组事件) 和 [membersAbsence](group_manage.html#监听群组事件)。原事件 `memberPresence` 和 `membersAbsence` 仍有效。 
    
 ### 优化
 
