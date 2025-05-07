@@ -47,7 +47,7 @@ POST https://{host}/{org_name}/{app_name}/messages/broadcast
 | `msg.msg` | String | 是 | 消息内容。  |
 | `ext`           | JSON   | 否       | 广播消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。 |
 
-不同类型的消息的请求体只在 `msg` 字段有差别，其他参数相同。除了 `type` 字段，`msg` 字段中包含的参数与单聊、群聊和聊天室消息的请求体中的 `body` 字段含义相同，详见 [发送单聊消息](message_single.html)、[发送群聊消息](message_group.html)和 [发送聊天室消息](message_chatroom.html)中的消息 body 的参数说明。
+不同类型的消息的请求体只在 `msg` 字段有差别，其他参数相同。除了 `type` 字段，`msg` 字段中包含的参数与单聊、群聊和聊天室消息的请求体中的 `body` 字段含义相同，详见 [发送单聊消息](message_single.html)、[发送群聊消息](message_group.html) 或 [发送聊天室消息](message_chatroom.html)中的消息 body 的参数说明。
 
 #### HTTP 响应
 
@@ -304,8 +304,9 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 - 广播消息写入服务端会话列表，默认不支持漫游功能。**如果需要，请联系商务开通。**
 
 **发送频率**：
-- 每分钟限 1 次，不支持上调，超过该限制上报 429 错误。
-- 每天限 50 次，支持上调，超过该限制，上报 403 错误。
+
+- 每分钟限 1 次，不支持上调，超过该限制上报 429 错误，即 “This request has reached api limit”。
+- 每天限 50 次，支持上调，超过该限制上报 403 错误，即 “broadcast message limit exceeded”。
 
 #### HTTP 请求
 
@@ -336,7 +337,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users/broadcast
 | `msg.msg` | String | 是 | 消息内容。  |
 | `ext`           | JSON   | 否       | 广播消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。 | 
 
-不同类型的消息的请求体只在 `msg` 字段有差别，其他参数相同。除了 `type` 字段，`msg` 字段中包含的参数与单聊、群聊和聊天室消息的请求体中的 `body` 字段含义相同，详见[发送单聊消息](message_single.html)、[发送群聊消息](message_group.html)和[发送聊天室消息](message_chatroom.html)中的消息 body 的参数说明。
+不同类型的消息的请求体只在 `msg` 字段有差别，其他参数相同。除了 `type` 字段，`msg` 字段中包含的参数与单聊、群聊和聊天室消息的请求体中的 `body` 字段含义相同，详见[发送单聊消息](message_single.html)、[发送群聊消息](message_group.html) 或 [发送聊天室消息](message_chatroom.html)中的消息 body 的参数说明。
 
 #### HTTP 响应
 
@@ -574,8 +575,9 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 即时通讯 IM 支持向 app 下的所有活跃聊天室（聊天室至少存在一个成员，而且曾经至少发送过一条消息）发送广播消息，支持所有消息类型。
 
 **发送频率**：
-- 每分钟限发 10 次，1 秒限发 1 次，不支持上调，超过二者之一即上报 429 错误。
-- 每天限发 100 次广播消息，支持上调，超过该限制，上报 403 错误。
+
+- 每分钟限发 10 次，1 秒限发 1 次，不支持上调，超过二者之一即上报 429 错误，即 “This request has reached api limit”。
+- 每天限发 100 次广播消息，支持上调，超过该限制，上报 403 错误，即 “broadcast message limit exceeded”。
 
 #### HTTP 请求
 
