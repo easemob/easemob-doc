@@ -32,6 +32,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | * 发送群聊消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 20 条/秒/App Key   <br/> - 20 次/秒 <br/> -  3 个群/次   | 50 条/秒   | 
 | * 发送定向消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups/users           | 100 条/秒/App Key   | 100 次/秒    | 
 | * 发送聊天室消息               | POST   | /{org_name}/{app_name}/messages/chatrooms            | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 100 条/秒  <br/> - 100 次/秒   <br/> -  10 个聊天室/次   | 100 条/秒    | 
+| * 向 app 所有用户发送广播消息 | POST | /{org_name}/{app_name}/messages/broadcast | <br/> - 每 30 分钟限发 1 次，不支持上调。<br/> - 每天限发 3 次，支持联系商务上调。<br/> - 每秒最多可向 1000 个用户发消息，不支持上调。 |     | 
 | * 向 app 在线用户发送广播消息 | POST | /{org_name}/{app_name}/messages/users/broadcast | 每分钟限 1 次，每天限 50 次（可联系环信商务提升该上限）。 |     | 
 | * 发送聊天室全局广播消息 | POST | /{org_name}/{app_name}/messages/chatrooms/broadcast | 每分钟限发 10 次，每天限发 100 次广播消息。 | 100次/天    | 
 | 上传文件  |    POST  | /{org_name}/{app_name}/chatfiles       | 100 次/秒/App Key                                                 |  100 次/秒   | 
