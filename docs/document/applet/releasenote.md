@@ -13,7 +13,7 @@
    
 ### 优化
 
-- 修改 Token 即将过期事件 `tokenWillExpire` 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
+- 修改 Token 即将过期事件 `onTokenWillExpire` 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
 - [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 的 Readme 文档](https://github.com/easemob/easemob-demo-react/tree/dev_4.0)。
 - 获取群组成员列表的原方法 `listGroupMembers` 废弃。使用 [getGroupMembers](group_manage.html#获取群成员列表) 替换。
 - 获取群组成员列表的原方法 `listChatRoomMembers` 废弃。使用 [getChatRoomMembers](room_members.html#获取聊天室成员列表) 替换。
