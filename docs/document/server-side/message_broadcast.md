@@ -272,7 +272,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 | 400      | illegal_argument | ext must be JSONObject | 请求参数 `ext` 类型不正确。  | 输入正确的请求参数 `ext`（JSON 格式）。  |
 | 429     | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 每分钟向 app 在线用户发送广播消息的次数达到上限。 | 该限制不支持上调，请降低发送频率。   |
 | 403      | forbidden_op | online user broadcast limit exceeded |  每天向 app 在线用户发送广播消息达到上限。| 联系商务上调频率限制。 | 
-| 403      | forbidden_op | message broadcast service is unopened  | 未开通发送聊天室广播消息的功能配置。| 联系商务开通。 | 
+| 403      | forbidden_op | message broadcast service is unopened  | 未开通发送聊天室广播消息的功能配置。| 联系商务开通。 |
 
 此外，你可以参考[发送单聊消息](message_single.html#错误码)、[发送群聊消息](message_group.html#错误码)和[发送聊天室消息](message_chatroom.html#错误码)的错误码了解可能的原因。
 
