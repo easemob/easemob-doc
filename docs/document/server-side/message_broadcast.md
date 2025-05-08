@@ -1,6 +1,6 @@
 # 发送全局广播消息
 
-即时通讯 IM 支持向 app 所有在线用户发送全局广播消息以及发送聊天室全局广播消息。**该功能默认关闭，使用前需联系环信商务开通。**
+即时通讯 IM 支持向 app 所有用户或在线用户发送全局广播消息以及对 app 下所有的活跃聊天室发送全局广播消息。**该功能默认关闭，使用前需联系环信商务开通。**
 
 ## 向 app 所有用户发送广播消息
 
@@ -10,11 +10,13 @@
 - 广播消息支持离线存储，若用户离线，服务器会存储离线消息（默认 7 天），若你集成了离线推送，则服务器会发送离线通知。
 - 广播消息写入服务端会话列表，支持消息漫游。
 - 广播消息支持计入消息未读数。
+- 广播消息没有消息 ID，只有广播 ID。
+- 广播消息不触发[发送前回调](callback_presending.html)。
  
 **发送频率**：
 
-1. 每 30 分钟限发 1 次，不支持上调。超过该限制，上报 429 错误，即 “This request has reached api limit”。
-2. 每天限发 3 次，支持联系商务上调。超过该限制，上报 403 错误，即 “broadcast message limit exceeded”。
+1. 每 30 分钟限 1 次，不支持上调。超限上报 429 错误，即 “This request has reached api limit”。
+2. 每天限 3 次，支持联系商务上调。超限上报 403 错误，即 “broadcast message limit exceeded”。
 3. 每秒最多可向 1000 个用户发消息，不支持上调。
    
 #### HTTP 请求
@@ -291,7 +293,8 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 | 400      | illegal_argument | target_type can only be 'users'  | `target_type` 的值只能为 `users`。| `target_type` 的值只能为 `users`，不能传入其他值。 |
 | 400      | illegal_argument | target_type must be provided  | `target_type` 不能为空。| `target_type` 不能为空，只能传入 `users`。 |
 | 403      | forbidden_op | message broadcast service is unopened  | 未开通发送广播消息的功能配置。| 联系商务开通。 |
-| 403      | forbidden_op | broadcast message limit exceeded  | 每天调用数量达到上线。| 联系商务上调 API 调用频率上限。 |
+| 429      | - | This request has reached api limit  | 每 30 分钟限调接口 1 次。| 该限制不支持上调，请降低发送频率。 |
+| 403      | forbidden_op | broadcast message limit exceeded  | 每天接口调用次数超限（默认 3 次）。| 联系商务上调 API 调用频率上限。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -302,11 +305,13 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 - 广播消息只向 app 下的在线用户发送。
 - 广播消息不支持离线存储，即离线用户收不到这些消息。
 - 广播消息写入服务端会话列表，默认不支持漫游功能。**如果需要，请联系商务开通。**
+- 广播消息没有消息 ID，只有广播 ID。
+- 广播消息不触发[发送前回调](callback_presending.html)。
 
 **发送频率**：
 
-- 每分钟限 1 次，不支持上调，超过该限制上报 429 错误，即 “This request has reached api limit”。
-- 每天限 50 次，支持上调，超过该限制上报 403 错误，即 “broadcast message limit exceeded”。
+- 每分钟限 1 次，不支持上调，超限上报 429 错误，即 “This request has reached api limit”。
+- 每天限 50 次，支持上调，超限上报 403 错误，即 “online user broadcast limit exceeded”。
 
 #### HTTP 请求
 
@@ -564,8 +569,8 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 | 400      | invalid_request_body    | Request body is invalid. Please check body is correct. | 请求体格式不正确。 | 检查请求体内容是否合法(字段类型是否正确)。  |
 | 400      | illegal_argument | from can't be empty  | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from` 。若不传该字段， 服务器会默认设置为 `admin`。   |
 | 400      | illegal_argument | ext must be JSONObject | 请求参数 `ext` 类型不正确。  | 输入正确的请求参数 `ext`（JSON 格式）。  |
-| 429     | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 每分钟向 app 在线用户发送广播消息的次数达到上限。 | 该限制不支持上调，请降低发送频率。   |
-| 403      | forbidden_op | online user broadcast limit exceeded |  每天向 app 在线用户发送广播消息达到上限。| 联系商务上调频率限制。 | 
+| 429     | - | This request has reached api limit | 每分钟限调接口 1 次。 | 该限制不支持上调，请降低发送频率。   |
+| 403      | forbidden_op | online user broadcast limit exceeded |  每天接口调用次数超限（默认 50 次）。| 联系商务上调频率限制。 | 
 | 403      | forbidden_op | message broadcast service is unopened | 未开通发送广播消息的功能配置。| 联系商务开通。 |
 
 此外，你可以参考[发送单聊消息](message_single.html#错误码)、[发送群聊消息](message_group.html#错误码)和[发送聊天室消息](message_chatroom.html#错误码)的错误码了解可能的原因。
@@ -574,10 +579,15 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 
 即时通讯 IM 支持向 app 下的所有活跃聊天室（聊天室至少存在一个成员，而且曾经至少发送过一条消息）发送广播消息，支持所有消息类型。
 
+- 广播消息不支持离线存储，即离线用户收不到这些消息。
+- 广播消息写入服务端会话列表，默认不支持漫游功能。**如果需要，请联系商务开通。**
+- 广播消息没有消息 ID，只有广播 ID。
+- 广播消息不触发 [发送前回调](callback_presending.html)。
+
 **发送频率**：
 
-- 每分钟限发 10 次，1 秒限发 1 次，不支持上调，超过二者之一即上报 429 错误，即 “This request has reached api limit”。
-- 每天限发 100 次广播消息，支持上调，超过该限制，上报 403 错误，即 “broadcast message limit exceeded”。
+- 每分钟限 10 次，1 秒限 1 次，不支持上调，超过二者之一即上报 429 错误，即 “This request has reached api limit”。
+- 每天限 100 次，支持上调，超限上报 403 错误，即 “chatroom broadcast limit exceeded”。
 
 #### HTTP 请求
 
@@ -849,8 +859,8 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 | 400      | invalid_request_body    | Request body is invalid. Please check body is correct. | 请求体格式不正确。 | 检查请求体内容是否合法(字段类型是否正确)。  |
 | 400      | illegal_argument | from can't be empty  | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from` 。若不传该字段， 服务器会默认设置为 `admin`。   |
 | 400      | illegal_argument | ext must be JSONObject | 请求参数 `ext` 类型不正确。  | 输入正确的请求参数 `ext`（JSON 格式）。  |
-| 403      | forbidden_op | chatroom broadcast limit exceeded  | 每天发送聊天室广播消息达到上限。| 联系商务上调频率限制。 |
-| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 每分钟或每秒发送聊天室广播消息达到上限。 | 该限制不支持上调，请降低发送频率。   |
+| 403      | forbidden_op | chatroom broadcast limit exceeded  | 每天调用接口次数超限（默认 100 次）。| 联系商务上调频率限制。 |
+| 429     | - | This request has reached api limit | 每分钟限调接口 10 次，1 秒限调 1 次。 | 该限制不支持上调，请降低调用频率。   |
 | 403      | forbidden_op | message broadcast service is unopened  | 未开通发送聊天室广播消息的功能配置。| 联系商务开通。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
