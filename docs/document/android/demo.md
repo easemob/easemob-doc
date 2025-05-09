@@ -5,12 +5,10 @@
 ## 体验 Demo 
 
 1. [下载 Demo](https://www.easemob.com/download/demo)。
-
 2. 输入你的手机号，获取验证码，然后输入。
-
 3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
-![img](/images/demo/android_login.png)
+![img](/images/demo/android_login.png =350x750)
 
 下面为部分 UI 界面的展示：
 
@@ -33,20 +31,13 @@
 
 ### 跑通步骤
 
-1. [创建应用](/product/enable_and_configure_IM.html)。
-   
+1. [创建应用](/product/enable_and_configure_IM.html)。 
 2. [获取应用的 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
-
 3. [创建用户](/product/enable_and_configure_IM.html#创建-im-用户)。
-
 4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-android)。
-
 5. 下载完毕，打开 Android Studio，点击 **File > Open**，打开已下载到本地的 Demo (`easemob-demo-android`) 工程根目录即可。
-
 6. 将你的应用的 App Key 填入 Demo 工程根目录下的 `local.properties` 文件，格式为 `APPKEY = 你申请的appkey`。
-
 7. 编译运行项目。
-
 8. 使用注册的用户 ID 和密码登录。
 
 ### App Server
@@ -64,9 +55,7 @@ App Server 为 Demo 提供以下功能：
 你通过以下步骤部署 App Server：
 
 1. 部署 App Server。详见 [服务端源码](https://github.com/easemob/easemob-im-app-server/tree/dev-demo)。
-   
 2. 在 Demo 工程根目录下 `local.properties` 文件中，填写 App Server 的域名或 IP 地址，格式为 `APP_SERVER_DOMAIN = 服务器域名或ip地址`。
-
 3. 在 Demo 工程根目录下 `local.properties` 文件中，填入 `LOGIN_WITH_APPSERVER = true`，即通知 Demo 工程需要启用 App Server，体验完整功能。
 
 **服务端中的 App Key 要跟客户端的 App Key 保持一致。**
