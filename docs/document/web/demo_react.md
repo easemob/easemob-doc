@@ -20,6 +20,7 @@
   <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_contact_detail.png" title="会话列表+联系人设置" />
   <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_group.png" title="联系人列表+群组" />
   <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_contact.png" title="联系人列表+联系人" />
+</ImageGallery>  
 
 ## 快速跑通 Demo 源码
 
