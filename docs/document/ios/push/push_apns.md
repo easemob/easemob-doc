@@ -129,7 +129,8 @@
 | **key id**      | String  | 是 | 输入推送证书的 Key ID。该参数仅在使用 p8 证书时需要配置。  |
 | **team id**      | String  | 是 | 输入推送证书的 Team ID。该参数仅在使用 p8 证书时需要配置。  |
 | **集成环境**      | | 是 | 集成环境：<br/> - **Development**：开发环境；<br/> - **Production**：生产环境。 |
-| **Bundle ID**      | String  | 是 | 绑定 ID。[创建推送证书](#在苹果开发者平台创建推送证书)的[步骤二](#步骤二-创建-app-id)中创建 App ID 时设置的 Bundle ID。 |
+| **Bundle ID**      | String  | 是 | 绑定 ID。[创建推送证书](#在苹果开发者平台创建推送证书)的[步骤二](#步骤二-创建-app-id)中创建 App ID 时设置的 Bundle ID。<br/> - 上传 VoIP 服务证书时，Bundle ID 末尾需要加 .voip 后缀
+`nvyvtp.dabaoiian`，例如，**Bundle ID** 为 **com.example.demo**，上传对应 VoIP 证书时需要填写 **com.example.demo.voip**。|
 | **铃声**      | String  | 否 | 接收方收到推送通知时的铃声提醒。 |
 
 ## **在客户端集成 APNs**
