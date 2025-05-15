@@ -8,10 +8,11 @@
 
 环信即时通讯 IM HarmonyOS SDK 提供 `GroupManager` 类和 `Group` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
-- 修改群组名称及描述
-- 获取、更新群组公告
-- 管理群组共享文件
-- 更新群扩展字段
+- 修改群组名称及描述；
+- 设置、修改和获取群组头像；
+- 获取、更新群组公告；
+- 管理群组共享文件；
+- 更新群扩展字段。
 
 ## 前提条件
 
@@ -43,6 +44,67 @@ ChatClient.getInstance().groupManager()?.changeGroupName(groupId, changedGroupNa
 
 ```typescript
 ChatClient.getInstance().groupManager()?.changeGroupDescription(groupId, description).then(res => console.log(res.description()));
+```
+
+### 管理群组头像
+
+自 HarmonyOS SDK 1.7.0 开始，支持群组头像功能。
+
+#### 设置群组头像
+
+- 创建群组时，可设置群组头像：
+
+```typescript
+let params: GroupOptions = {
+  groupName: '群名称',
+  style: GroupStyle.GroupStylePrivateOnlyOwnerInvite,
+  maxUsers: 200,
+  avatar: 'https://downloadsdk.easemob.com/downloads/IMDemo/avatar/Image1.png'
+};
+ChatClient.getInstance().groupManager()?.createGroup(params).then((group) => {
+  // success logic
+}).catch((error: ChatError) => {
+  // failure logic
+});  
+```
+
+- 创建群组后，若设置群组头像，可调用 [修改群组头像](#修改群组头像) API 设置头像。
+
+#### 修改群组头像
+
+创建群组完成后，群主或管理员可调用 `changeGroupAvatar` 设置或修改群组头像：
+
+```typescript
+let groupAvatar = 'https://downloadsdk.easemob.com/downloads/IMDemo/avatar/Image3.png';
+ChatClient.getInstance().groupManager()?.changeGroupAvatar(this.groupId, groupAvatar).then((group) => {
+  // success logic
+}).catch((error: ChatError) => {
+  // failure logic
+});
+```
+
+群组头像被修改后，其他群成员会收到 `GroupListener#onSpecificationChanged` 回调：
+
+```typescript
+ChatClient.getInstance().groupManager()?.addListener({
+  onSpecificationChanged: (group: Group) => {
+    let changedGroupAvatar = group.groupAvatar();
+  }
+});
+```
+
+#### 获取群组头像
+
+群成员可以通过获取群详情的方法 `GroupManager#fetchGroupFromServer` 获取群组头像：
+
+```typescript
+ChatClient.getInstance().groupManager()?.fetchGroupFromServer(this.groupId)
+.then((group) => {
+  // group avatar  
+  let groupAvatar = group.groupAvatar();
+}).catch((error: ChatError) => {
+  // failure logic
+});
 ```
 
 ### 更新群公告
