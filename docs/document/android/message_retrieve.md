@@ -13,6 +13,8 @@
 环信即时通讯 IM Android SDK 提供 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类支持获取服务器和本地的消息，包含如下主要方法：
 
 - `EMChatManager#asyncFetchHistoryMessages`：根据 `EMFetchMessageOption` 类从服务端分页获取指定会话的历史消息；
+- `EMChatManager#doAsyncFetchHistoryMessages`：从服务器获取指定群成员发送的消息；
+- `EMConversation#asyncSearchMsgFromDB`：从本地读取指定会话的消息；
 - `EMConversation#getAllMessages/loadMoreMsgFromDB`：读取本地指定会话的消息；
 - `EMChatManager#getMessage`：根据消息 ID 获取本地消息；
 - `EMChatManager#searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)`：获取本地存储的指定会话中特定类型的消息；

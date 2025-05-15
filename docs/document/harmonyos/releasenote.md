@@ -2,6 +2,28 @@
 
 <Toc />
 
+## 版本 V1.7.0 Dev 2025-5-15（开发版）
+
+### 新增特性
+
+- 支持 [GIF 图片消息](message_send_receive.html#发送和接收-gif-图片消息)。
+- 支持 [群组头像功能](group_attributes.html#管理群组头像)。 
+- 支持 [消息附件鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
+- 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持 [根据搜索范围搜索所有会话中的消息](message_search.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](message_search.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+
+### 优化
+
+- 升级 SDK 使用的 BoringSSL 和 SQLCipher 库，避免安全风险。
+- 日志文件中增加设备时区偏移，方便排查问题。
+- 调用方法 [ChatManager#fetchHistoryMessages](message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `CursorResult#getNextCursor` 由字符串 `undefined` 改为空字符串。
+
+### 修复
+
+- 修复删除本地会话时缓存中的消息未删除的问题。
+- 修复消息扩展属性 `ext` 判断字符串为 JSON 类型时转换有误的问题。
+
 ## 版本 V1.6.0 Dev 2025-4-9（开发版）
 
 ### 优化
