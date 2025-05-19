@@ -60,7 +60,12 @@
 
 ## 添加超级管理员
 
-添加一个聊天室超级管理员。
+#### 功能说明
+
+- 添加一个聊天室超级管理员。
+- 添加聊天室超级管理员，会触发发送后回调，详见 [添加超级管理员事件](callback_room_superadmin.html#添加超级管理员)。
+
+**调用频率**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -147,7 +152,11 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/super_admin'  \
 
 ## 分页获取超级管理员列表
 
+#### 功能说明
+
 可以分页获取超级管理员列表的接口。
+
+**调用频率**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -239,7 +248,12 @@ curl -X GET https://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H
 
 ## 撤销超级管理员
 
-撤销超级管理员权限，用户将不能再创建聊天室。
+#### 功能说明
+
+- 撤销超级管理员权限，用户将不能再创建聊天室。
+- 撤销聊天室超级管理员，会触发发送后回调，详见 [移除超级管理员事件](callback_room_superadmin.html#移除超级管理员)。
+
+**调用频率**：100 次/秒/App Key
 
 #### HTTP 请求
 
