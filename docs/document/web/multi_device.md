@@ -173,7 +173,7 @@ conn.addEventHandler("handlerId", {
 });
 ```
 
-### 常见问题
+## 常见问题
 
 Q: 多端多设备场景下，如何将 Uniapp 移动端设置为单独一端？
 
@@ -183,7 +183,7 @@ A：对于使用 Uniapp 打包的移动端和小程序端，在环信侧多端�
 
 ![img](/images/web/multidevice_uniapp_mobile.png)
 
-示例代码如下：
+客户端示例代码如下：
 
 ```javascript
 const conn = new EC.connection({
