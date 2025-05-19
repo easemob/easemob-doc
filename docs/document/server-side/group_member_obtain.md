@@ -30,7 +30,11 @@
 
 ## 分页获取群成员列表
 
+### 功能说明
+
 可以分页获取群组成员列表。
+
+**调用频率上限**：100 次/秒/App Key   
 
 ### HTTP 请求
 
@@ -72,7 +76,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 | `action`          | String | 请求方法。                                                                     |
 | `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
 | `params`        | JSON | 查询参数。  |
-| - `joined_time` | Bool  | 是否需返回用户加入群组的时间：<br/> - `true`：返回 <br/> - `false`：不返回 |
+|  - `joined_time` | Bool  | 是否返回用户加入群组的时间：<br/> - `true`：返回 <br/> - `false`：不返回 |
 |  - `pagesize`        | Array | 每页期望显示的群组成员数量。  |
 |  - `pagenum`        | Array | 当前页码。  |
 | `uri`                | String | 请求 URL。   |

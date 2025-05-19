@@ -4,6 +4,8 @@
 
 ## 向 app 所有用户发送广播消息
 
+#### 功能说明
+
 可通过该接口向 app 下的所有用户发送广播消息，支持所有消息类型：
 
 - 广播消息向 app 下的所有用户发送。
@@ -11,7 +13,7 @@
 - 广播消息写入服务端会话列表，支持消息漫游。
 - 广播消息支持计入消息未读数。
 - 广播消息没有消息 ID，只有广播 ID。
-- 广播消息不触发[发送前回调](callback_presending.html)。
+- 广播消息不触发 [发送前回调](callback_presending.html)。
  
 **发送频率**：
 
@@ -300,6 +302,8 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 
 ## 向 app 在线用户发送广播消息
 
+#### 功能说明
+
 可通过该接口向 app 下的所有在线用户发送广播消息，支持所有消息类型。
 
 - 广播消息只向 app 下的在线用户发送。
@@ -576,6 +580,8 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 此外，你可以参考[发送单聊消息](message_single.html#错误码)、[发送群聊消息](message_group.html#错误码)和[发送聊天室消息](message_chatroom.html#错误码)的错误码了解可能的原因。
 
 ## 发送聊天室全局广播消息
+
+#### 功能说明
 
 即时通讯 IM 支持向 app 下的所有活跃聊天室（聊天室至少存在一个成员，而且曾经至少发送过一条消息）发送广播消息，支持所有消息类型。
 

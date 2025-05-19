@@ -42,6 +42,8 @@
 
 ## 绑定和解绑推送信息 
 
+#### 功能说明
+
 推送消息时，设备与推送信息会进行绑定，包括设备 ID、推送证书和 device token。
 
 - 设备 ID：SDK 为每个设备分配的唯一标识符。
@@ -53,6 +55,8 @@
 用户从第三方推送服务器获取 device token 和证书名称，然后向环信即时通讯服务器上传，服务器根据 device token 向用户推送消息。
 
 你可以调用该接口对设备与推送信息进行绑定或解绑。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 ### HTTP 请求
 
@@ -159,7 +163,11 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 
 ## 查询推送绑定信息
 
+#### 功能说明
+
 查询当前用户的所有设备的推送绑定信息。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 ### HTTP 请求
 
@@ -228,7 +236,11 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 
 ## 设置离线推送时显示的昵称
 
+#### 功能说明
+
 设置离线推送时显示的昵称。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 ### HTTP 请求
 
@@ -321,7 +333,10 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX  \
 
 ## 批量设置离线推送时显示的昵称
 
-批量设置用户离线推送时显示的昵称。
+#### 功能说明
+
+- 批量设置用户离线推送时显示的昵称。
+- 单次请求最多可对 50 个用户 ID 设置。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -416,7 +431,12 @@ curl -X PUT -H 'Content-Type: application/json'  \
 
 ## 设置离线推送通知的展示方式
 
-设置离线推送通知在客户端的展示方式，设置即时生效。服务端据此向用户推送离线消息。
+#### 功能说明
+
+- 设置离线推送通知在客户端的展示方式，设置即时生效。
+- 服务端根据设置的展示方式向用户推送离线消息。
+  
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 ### HTTP 请求
 
@@ -510,8 +530,11 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
 
 ## 设置离线推送
 
+### 功能说明
 
 你可以设置用户指定的单聊、群聊或全局的离线推送设置。
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -605,7 +628,11 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
 
 ## 查询离线推送设置
 
+### 功能说明
+
 查询用户指定的单聊、群聊或全局的离线推送设置。
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -680,7 +707,11 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
 
 ## 设置推送通知的首选语言
 
+### 功能说明
+
 设置离线推送消息的首选语言。
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -755,7 +786,11 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 
 ## 获取推送通知的首选语言
 
+### 功能说明
+
 获取推送通知的首选语言。
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -843,9 +878,13 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 
 ### 创建离线推送模板
 
+#### 功能说明
+
 创建离线推送消息模板，包括默认模板 `default` 和自定模板。你可以通过[环信即时通讯云控制台](https://console.easemob.com/user/login)创建推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
 
 若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
+
+**调用频率上限**：10 次/秒/App Key
 
 #### HTTP 请求
 
@@ -968,7 +1007,11 @@ curl -X POST 'https://XXXX/XXXX/XXXX/notification/template' \
 
 ### 查询离线推送模板
 
+#### 功能说明
+
 查询离线推送消息使用的模板。
+
+**调用频率上限**：10 次/秒/App Key
 
 #### HTTP 请求
 
@@ -1039,7 +1082,11 @@ curl -X GET 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 
 ### 接收方配置模板名称
 
+#### 功能说明
+
 接收方可以调用该 API 设置推送模板。
+
+**调用频率上限**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -1238,8 +1285,12 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'
 群聊会话中发送其他类型的消息的接口，请参见[发送群聊消息](message_group.html)接口描述。
 
 ### 删除离线推送模板
+
+#### 功能说明
  
 删除离线消息推送模板。
+
+**调用频率上限**：10 次/秒/App Key
 
 #### HTTP 请求
 
