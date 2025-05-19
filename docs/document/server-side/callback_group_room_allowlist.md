@@ -3,7 +3,7 @@
 将群组/聊天室成员加入或移出白名单后，环信服务器会按照[发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看添加或移出白名单的成员，进行数据同步。
 
 :::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见[增值服务说明](/product/pricing.html#增值服务费用)。
+1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见 [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
 2. 如果需要将群组/聊天室成员加入或移出白名单的事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
 3. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
 :::
