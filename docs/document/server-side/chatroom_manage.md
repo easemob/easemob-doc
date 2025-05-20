@@ -14,7 +14,7 @@
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](limitationapi.html)。
-- 了解不同套餐版本支持的聊天室总数，详见[套餐包功能详情](/product/pricing.html#套餐包功能详情)。
+- 了解不同套餐版本支持的聊天室总数，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
   
 ## 公共参数
 

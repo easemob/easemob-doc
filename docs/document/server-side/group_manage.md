@@ -80,7 +80,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | `avatar`           | String | 否       | 群组头像的 URL，最大长度为 1024 字符。|
 | `description`         | String | 否       | 群组描述，最大长度为 512 字符。|
 | `public`              | Bool   | 是       | 是否是公开群。公开群可以被搜索到，用户可以申请加入公开群；私有群无法被搜索到，因此需要群主或群管理员添加，用户才可以加入。<br/> - `true`：公开群；<br/> - `false`：私有群。   |
-| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。该参数的默认值为 `200`，若设置的值超过 `3000`，将不再支持离线推送。对于超过 3000 人的群组，若希望提供离线推送功能，你必须在创建群组之前联系商务开通，否则群组创建后无法再开通该功能。<br/>不同套餐的群组支持的最大人数的上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。|
+| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。该参数的默认值为 `200`，若设置的值超过 `3000`，将不再支持离线推送。对于超过 3000 人的群组，若希望提供离线推送功能，你必须在创建群组之前联系商务开通，否则群组创建后无法再开通该功能。<br/>不同套餐的群组支持的最大人数的上限不同，详见  [IM 套餐包功能对比](/product/product_package_feature.html)。|
 | `allowinvites`        | Bool   | 否       | 是否允许普通群成员邀请用户加入群组：<br/> - `true`：普通群成员可拉人入群;<br/> - （默认）`false`：只有群主和群管理员才能拉人入群。<br/><Container type="notice" title="提示"><br/>创建群组时，该参数仅对私有群有效，对公开群无效。也就是说，创建公有群（`public` 设置为 `true`）时，即使将 `allowinvites` 设置为 `true`，该设置也会自动修改为 `false`。如果要允许公开群的普通成员拉人入群，你在创建群后可调用[修改群组信息](#修改群组信息)接口将 `allowinvites` 的设置修改为 `true`。</Container> |
 | `membersonly`         | Bool   | 否       | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：需要； <br/> - （默认）`false`：不需要，用户直接进群。<br/>该参数仅对公开群生效，因为对于私有群，用户无法申请加入群组，只能通过群成员邀请加入群。     |
 | `invite_need_confirm` | Bool   | 否       | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
@@ -151,9 +151,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 400     | invalid_parameter | group must contain public field! | 创建群组必须设置 `public` 字段 | 设置 `public` 字段。 |
 | 400     | illegal_argument | group ID XX already exists! | groupId 重复。 | 使用新的群组 ID。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | exceed_limit | appKey:XX#XX has create too many groups! | appKey 的群组数量达到上限。 | 删除不用的群组或联系商务调整上限。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。 |
-| 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数量达到上限。 | 退出不用的群组或联系商务调整上限。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。 |
-| 403     | exceed_limit | members size is greater than max user size ! | 创建群时加入的人数超过最大限制。 | 调整创建群的加群人数。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。|
+| 403     | exceed_limit | appKey:XX#XX has create too many groups! | appKey 的群组数量达到上限。 | 删除不用的群组或联系商务调整上限。关于该上限，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。 |
+| 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数量达到上限。 | 退出不用的群组或联系商务调整上限。关于该上限，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。 |
+| 403     | exceed_limit | members size is greater than max user size ! | 创建群时加入的人数超过最大限制。 | 调整创建群的加群人数，即 `maxusers` 参数的值。|
 | 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
 | 404     |  resource_not_found  | username XXXX doesn't exist!       | 创建群组时添加的用户不存在。 |
 
@@ -342,7 +342,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `groupname`           | String | 否       | 群组名称，最大长度为 128 字符。 |
 | `avatar`              | String | 否       | 群组头像的 URL，最大长度为 1024 字符。|
 | `description`         | String | 否       | 群组描述，最大长度为 512 字符。 |
-| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。 |
+| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见  [IM 套餐包功能对比](/product/product_package_feature.html)。 |
 | `membersonly`         | Bool   | 否       | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。    |
 | `allowinvites`        | Bool   | 否       | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群；<br/> - `false`：只有群主或群管理员才可以邀请用户入群。 |
 | `invite_need_confirm` | Bool   | 否       | 受邀人加入群组前是否需接受入群邀请：<br/> - `true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
