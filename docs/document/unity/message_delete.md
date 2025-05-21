@@ -45,8 +45,12 @@ SDKClient.Instance.ChatManager.DeleteAllMessagesAndConversations(clearServerData
 
 ### 单向删除服务端的历史消息
 
-你可以调用 `RemoveMessagesFromServer` 方法删除你在服务器和本地的消息。删除后，该用户无法从服务端拉取到该消息，不过，与该用户的单聊、群聊和聊天室会话中的其它用户的服务器消息不受影响，可以漫游获取。
+你可以调用 `RemoveMessagesFromServer` 方法删除你在服务器和本地的消息。
 
+- 按时间删除：删除指定时间及之前的历史消息。
+- 按消息 ID 删除：每次最多可删除 50 条消息。
+
+删除后，该用户无法从服务端拉取到该消息，不过，与该用户的单聊、群聊和聊天室会话中的其它用户的服务器消息不受影响，可以漫游获取。
 每次最多可删除 50 条消息。多设备情况下，登录该账号的其他设备会收到 `IMultiDeviceDelegate` 中的 `OnRoamDeleteMultiDevicesEvent` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
