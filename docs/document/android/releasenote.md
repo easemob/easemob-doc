@@ -2,6 +2,24 @@
 
 <Toc />
 
+## 版本 V4.15.0 Dev 2025-4-28（开发版）
+
+### 新增特性
+
+- [撤回消息](message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
+  - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
+  
+### 优化
+
+- 修改 Token 即将过期事件 [onTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
+- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 的 Readme 文档](https://github.com/easemob/easemob-demo-android)。
+
+### 修复
+
+- 修复 [EMChatThreadChangeListener#onChatThreadUserRemoved](thread.html#子区成员被移出子区) 事件回调出的 `EMChatThreadEvent` 的 `TYPE` 为 `null` 问题。
+- 修复获取会话免打扰开始及结束时间时在部分机型上产生的 crash。
+
 ## 版本 V4.14.0 Dev 2025-4-21（开发版）
 
 ### 新增特性
@@ -16,7 +34,7 @@
 ### 优化
 
 - 日志文件中增加设备时区偏移，方便排查问题。
-- 调用方法 [EMMessage#asyncFetchHistoryMessages](message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `EMCursorResult#cursor` 由 `undefined` 改为空字符串。
+- 调用方法 [EMChatManager#asyncFetchHistoryMessages](message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `EMCursorResult#cursor` 由 `undefined` 改为空字符串。
 - 去除从 `FileProvider` 获取文件绝对路径的反射实现。
 - 升级 SDK 使用的 BoringSSL 和 SQLCipher 库，避免安全风险。
 

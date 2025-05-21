@@ -25,6 +25,7 @@ EMConnectionListener connectionListener = new EMConnectionListener() {
     }
 
     @Override
+    // 自 4.15.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知。
     public void onTokenWillExpire() {
 
     }
@@ -65,3 +66,4 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 - 用户在另一设备登录，将当前设备上登录的用户踢出，提示错误码 206。 
 - 用户登录设备数量超过限制，提示错误码 214。
 - 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限，提示错误码 8。
+- 开启多设备服务后，用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录（错误码 217）。

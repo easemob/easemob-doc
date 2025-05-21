@@ -23,7 +23,7 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 104    |          INVALID_TOKEN          | 用户 token 不正确：登录时提供的 token 为空或不正确。 | 检查调用的 API 中传入的 token 参数是否正确。 |
 | 105    |       USER_NAME_TOO_LONG        | 用户 ID 过长：用户 ID 长度不能超过 64 字节。  | 检查调用的 API 中传入的用户 ID 长度是否超过限制。 |
 | 108    |          TOKEN_EXPIRED          | 用户 token 已过期：超出 token 有效期时间。 | 收到 token 已过期的回调后，需要开发者重新生成 token，并调用 `loginWithToken` 方法重新登录。 |
-| 109    |        TOKEN_WILL_EXPIRE        | 用户 token 即将过期：超出 token 有效期一半时间时开始回调此错误码。 | 收到 token 即将过期的回调后，需重新生成 token，并调用 `EMClient#renewToken` 方法更新 token。 |
+| 109    |        TOKEN_WILL_EXPIRE        | 用户 token 即将过期：达到 token 有效期 80% （4.15.0 版本之前为 50%）时开始回调此错误码。 | 收到 token 即将过期的回调后，需重新生成 token，并调用 `EMClient#renewToken` 方法更新 token。 |
 | 110    |          INVALID_PARAM          | 参数无效。     | 检查调用的 API 中传入的参数是否有效。 |
 | 200    |       USER_ALREADY_LOGIN        | 用户已登录：该用户 ID 已经登录。            | 检查 SDK 是否开启了自动登录或已调用了登录方法。如果已开启，在 IM 登录成功后，下次打开 app 时，无需再调用登录方法。 |
 | 201    |         USER_NOT_LOGIN          | 用户未登录：例如，如果未登录成功时发送消息或者使用群组操作的 API，SDK 会提示该错误。 | 检查调用 API 时，是否已完成 IM 登录。 |

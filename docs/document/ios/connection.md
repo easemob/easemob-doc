@@ -30,11 +30,20 @@ extension ViewController: EMClientDelegate {
     func connectionStateDidChange(_ aConnectionState: EMConnectionState) {
         
     }
+    // 自 4.15.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知。
+    func tokenWillExpire(_ aErrorCode: EMErrorCode) {
+        // 通过 App Server 获取新的 token,然后调用 sdk 的 renewToken 方法更新 token
+        EMClient.shared().renewToken("newToken") { e in
+            
+        }
+    }
     
     // token 已过期
     func tokenDidExpire(_ aErrorCode: EMErrorCode) {
         
+        
     }
+    
 }
 
 ```
@@ -52,3 +61,4 @@ extension ViewController: EMClientDelegate {
 - 用户在另一设备登录，将当前设备上登录的用户踢出，提示错误码 206。 
 - 用户登录设备数量超过限制，提示错误码 214。
 - 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限，提示错误码 8。
+- 开启多设备服务后，用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录（错误码 217）。

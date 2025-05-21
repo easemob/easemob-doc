@@ -363,16 +363,32 @@ do {
   }
 
 // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
+// 已废弃。请使用 userDidJoinGroup:users: 替代。
 - (void)userDidJoinGroup:(EMGroup *)aGroup user:(NSString *)aUsername
   {
 
   }
 
-// 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
+// 有新成员（单个或多个）加入群组。除新成员外，其他群成员会收到该回调。
+- (void)userDidJoinGroup:(EMGroup *_Nonnull)group
+                   users:(NSArray<NSString*> *_Nonnull)userIds
+{
+    
+} 
+
+// 有成员退群。除退群成员外，其他群成员会收到该回调。
+// 已废弃。请使用 userDidLeaveGroup::users: 替代。
 - (void)userDidLeaveGroup:(EMGroup *)aGroup user:(NSString *)aUsername
   {
 
   }
+
+// 有成员（单个或多个）退群。除退群成员外，其他群成员会收到该回调。
+- (void)userDidLeaveGroup:(EMGroup *_Nonnull)group
+                    users:(NSArray<NSString *>* _Nonnull)userIds
+{
+    
+}  
 
 // 有成员被移出群组。被移出的成员收到该事件。
 - (void)didLeaveGroup:(EMGroup *_Nonnull)aGroup reason:(EMGroupLeaveReason)aReason

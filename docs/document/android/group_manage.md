@@ -60,14 +60,14 @@
 受邀用户直接进群，会收到如下回调：
 
 - 新成员会收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调；
-- 邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调；
-- 其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
+- 邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMembersJoined` 回调；
+- 其他群成员收到 `EMGroupChangeListener#onMembersJoined` 回调。
 
 2. 受邀用户需要确认才能进群。
 
 只有 `EMGroupOptions#inviteNeedConfirm` 设置为 `true` 和 `autoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `EMGroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
 
-- 用户同意入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调；
+- 用户同意入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMembersJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMembersJoined` 回调；
 - 用户拒绝入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationDeclined` 回调。
 
 邀请用户入群的流程如下图所示：
@@ -371,13 +371,25 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
     }
 
     // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
+    // 已废弃。请使用 onMembersJoined(String, List) 代替。
     @Override
     public void onMemberJoined(String groupId, String member) {
     }
 
-    // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
+    // 有新成员（单个或多个）加入群组。除了新成员，其他群成员会收到该回调。
+    @Override
+    public void onMembersJoined(final String groupId, final List<String> members) {
+    }
+
+    // 有成员退出群。除了退群的成员，其他群成员会收到该回调。
+   // 已废弃。请使用 onMembersExited(String, List) 代替。
     @Override
     public void onMemberExited(String groupId, String member) {
+    }
+
+    // 有成员（单个或多个）退出群（主动或被动）。除了退群的成员，其他群成员会收到该回调。
+    @Override
+    public void onMembersExited(final String groupId,  final List<String> members) {
     }
 
     // 群组公告更新。群组所有成员会收到该回调。

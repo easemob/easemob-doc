@@ -85,10 +85,10 @@ conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 
    入群邀请是否需受邀用户确认取决于群组选项 `inviteNeedConfirm` 的设置：
 
-   - `inviteNeedConfirm` 设置为 `false` 时，受邀用户直接进群，无需确认，群组所有成员会收到 `memberPresence` 事件。
+   - `inviteNeedConfirm` 设置为 `false` 时，受邀用户直接进群，无需确认，群组所有成员会收到 `membersPresence` 事件。
    - `inviteNeedConfirm` 设置为 `true` 时，受邀用户需确认是否加入群组。
 
-     - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
+     - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `membersPresence` 事件。
 
      ```javascript
      conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
@@ -137,19 +137,15 @@ conn.getGroupInfo(option).then((res) => {
 
 ### 获取群成员列表
 
-所有群成员均可调用 `listGroupMembers` 方法分页获取群成员列表，包括群主、群管理员和普通群成员。
-
-示例代码如下：
+自 SDK 4.15.0 开始，所有群成员均可调用 `getGroupMembers` 方法获取群成员信息，包括用户 ID 和用户角色。原方法 `listGroupMembers` 废弃。
 
 ```javascript
-let pageNum = 1,
-  pageSize = 100;
-let option = {
-  pageNum: pageNum,
-  pageSize: pageSize,
-  groupId: "groupId",
-};
-conn.listGroupMembers(option).then((res) => console.log(res));
+conn
+// limit：每页获取的群成员数量，取值范围为 [1,50]，默认值为 50。
+  .getGroupMembers({ cursor: "", limit: 50, groupId: "groupId" })
+  .then((res) => {
+    console.log(res);
+  });
 ```
 
 ### 获取群组列表
@@ -235,12 +231,18 @@ conn.addEventHandler("eventName", {
       // 群组所有者和管理员拉用户进群时，无需用户确认时会触发该回调。被拉进群的用户会收到该回调。
       case "directJoined":
         break;
-      // 群成员主动退出群组。除了退群的成员，其他群成员会收到该回调。
+      // 群成员（单个）退群。除退群成员外，其他群成员会收到该回调。
       case "memberAbsence":
         break;
-      // 有用户加入群组。除了新成员，其他群成员会收到该回调。
+      // 群成员（单个或多个）退群。除退群成员外，其他群成员会收到该回调。
+      case "membersAbsence":
+        break;
+      // 用户（单个）加群。除新成员外，其他群成员会收到该回调。
       case "memberPresence":
         break;
+      // 用户（单个或多个）加群。除新成员外，其他群成员会收到该回调。
+      case "membersPresence":
+        break; 
       // 用户被移出群组。被踢出群组的成员会收到该回调。
       case "removeMember":
         break;

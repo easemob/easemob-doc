@@ -61,7 +61,7 @@ String cursor = result.getCursor();
 
 2. 调用 `joinGroup` 或 `applyJoinToGroup` 方法传入群组 ID，申请加入对应群组。
 
-   - 调用 `joinGroup` 方法加入无需群主或管理员审批的公开群，即 `EMGroupStyle` 设置为 `EMGroupStylePublicOpenJoin`。申请人不会收到任何回调，其他群成员会收到 `EMGroupChangeListener#onMemberJoined` 回调。
+   - 调用 `joinGroup` 方法加入无需群主或管理员审批的公开群，即 `EMGroupStyle` 设置为 `EMGroupStylePublicOpenJoin`。申请人不会收到任何回调，其他群成员会收到 `EMGroupChangeListener#onMembersJoined` 回调。
 
    示例代码如下：
 
@@ -79,7 +79,7 @@ String cursor = result.getCursor();
 
    - 若同意加入群组，需要调用 `acceptApplication` 方法。
 
-   申请人会收到 `EMGroupChangeListener#onRequestToJoinAccepted` 回调，其他群成员会收到 `EMGroupChangeListener#onMemberJoined` 回调。
+   申请人会收到 `EMGroupChangeListener#onRequestToJoinAccepted` 回调，其他群成员会收到 `EMGroupChangeListener#onMembersJoined` 回调。
 
    示例代码如下：
 
@@ -135,7 +135,7 @@ String cursor = result.getCursor();
 
 #### 群成员主动退出群组
 
-群成员可以调用 `leaveGroup` 方法退出群组。其他成员收到 `EMGroupChangeListener#onMemberExited` 回调。
+群成员可以调用 `leaveGroup` 方法退出群组。其他成员收到 `EMGroupChangeListener#onMembersExited` 回调。
 
 退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 `DestroyGroup` 解散群组。
 
@@ -149,7 +149,7 @@ EMClient.getInstance().groupManager().leaveGroup(groupId);
 
 #### 群成员被移出群组
 
-仅群主和群管理员可以调用 `removeUserFromGroup` 或 `asyncRemoveUsersFromGroup` 方法将单个或多个成员移出群组。被踢出群组后，被踢成员将会收到群组事件回调 `EMGroupChangeListener#onUserRemoved`，其他成员将会收到回调 `EMGroupChangeListener#onMemberExited`。被移出群组后，用户还可以再次加入群组。
+仅群主和群管理员可以调用 `removeUserFromGroup` 或 `asyncRemoveUsersFromGroup` 方法将单个或多个成员移出群组。被踢出群组后，被踢成员将会收到群组事件回调 `EMGroupChangeListener#onUserRemoved`，其他成员将会收到回调 `EMGroupChangeListener#onMembersExited`。被移出群组后，用户还可以再次加入群组。
 
 - 移出单个群成员，示例代码如下：
 

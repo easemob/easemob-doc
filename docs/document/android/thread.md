@@ -133,7 +133,7 @@ EMClient.getInstance().chatThreadManager().leaveChatThread(chatThreadId, new EMC
 
 仅群主和群管理员可以调用 `removeMemberFromChatThread` 方法将指定成员 (群管理员或普通成员) 踢出子区，被踢出子区的成员将不再接收到子区消息。
 
-被踢出子区的成员会收到 `EMChatThreadChangeListener#onUserRemoved` 回调。多设备登录时，执行踢人操作的成员的其他设备会同时收到 `EMMultiDeviceListener#onChatThreadEvent` 回调，回调事件为 `THREAD_KICK`。
+被踢出子区的成员会收到 `EMChatThreadChangeListener#onChatThreadUserRemoved` 回调。多设备登录时，执行踢人操作的成员的其他设备会同时收到 `EMMultiDeviceListener#onChatThreadEvent` 回调，回调事件为 `THREAD_KICK`。
 
 示例代码如下：
 

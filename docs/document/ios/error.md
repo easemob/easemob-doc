@@ -25,7 +25,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 104    |          EMErrorInvalidToken        | 用户 token 不正确：登录时提供的 token 为空或不正确。                                |  检查调用的 API 中传入的 token 参数是否正确。 |
 | 105    |       EMErrorUsernameTooLong        | 用户 ID 过长：用户 ID 长度不能超过 64 字节。  | 检查 API 中传入的用户 ID 长度是否超过限制。 |
 | 108    |       EMErrorTokenExpire     | 用户 token 已过期：超出用户 token 有效期时间。        | 收到 token 已过期的回调后，需要开发者重新生成 token，并调用 `login` 方法重新登录。 |
-| 109    |       EMErrorTokeWillExpire      | 用户 token 即将过期：超出 token 有效期一半时间时会开始回调此错误码。 | 收到 token 即将过期的回调后，需重新生成 token，并调用 `EMClient#renewToken` 方法更新 token。 |
+| 109    |       EMErrorTokeWillExpire      | 用户 token 即将过期：达到 token 有效期的 80%（4.15.0 版本之前为 50%）时会开始回调此错误码。 | 收到 token 即将过期的回调后，需重新生成 token，并调用 `EMClient#renewToken` 方法更新 token。 |
 | 110    |       EMErrorInvalidParam        | 参数无效。  | 检查调用的 API 中传入的参数是否有效。 |
 | 200    |     EMErrorUserAlreadyLoginSame     | 当前用户已经登录：该用户 ID 已经登录。 | 检查 SDK 是否开启了自动登录或已调用了登录方法。如果已开启，在 IM 登录成功后，下次打开时，不需要再重新调用登录方法。 |
 | 201    |         EMErrorUserNotLogin         | 用户未登录：例如，如果未登录成功时调用发送消息或群组操作的 API 会提示该错误。 | 检查调用 API 时，是否已完成 IM 登录。 |
