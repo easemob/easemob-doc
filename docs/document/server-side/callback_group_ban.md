@@ -10,7 +10,7 @@
  
 ## 回调时机
 
-[调用 RESTful API 封禁](/document/server-side/group_manage.html#封禁群组)或[解禁群组](/document/server-side/group_manage.html#解禁群组)时触发该事件。
+[调用 RESTful API 封禁](/document/server-side/group_manage.html#封禁群组)或[解禁了群组](/document/server-side/group_manage.html#解禁群组)时触发该事件。
 
 ## 回调请求
 
