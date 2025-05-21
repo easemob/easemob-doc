@@ -25,7 +25,7 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 
 测试环境下，你在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建用户后，环信服务器会自动为这些用户分配用户 Token，详见[测试环境下创建用户的介绍](/product/enable_and_configure_IM.html#测试环境)。
 
-在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/server-side/easemob_app_token.html) 和 [获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。SDK 会在 Token 过期时或者其有效期达到 80%（4.15.0 之前为 50%）时分别回调 `onTokenExpired` 和 `onTokenWillExpire` 通知用户更新 Token。你可以采取各种机制更新 Token，例如，每次登录时更新 token。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。SDK 会在 Token 过期时或者其有效期达到 80%（4.15.0 之前为 50%）时分别回调 `onTokenExpired` 和 `onTokenWillExpire` 通知用户更新 Token。你可以采取各种机制更新 Token，例如，每次登录时更新 token。
 
 ```java
 EMClient.getInstance().loginWithToken(mAccount, mToken, new EMCallBack() {
