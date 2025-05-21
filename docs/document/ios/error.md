@@ -35,7 +35,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 205    |     EMErrorUserIllegalArgument      | 用户参数不正确：例如，创建用户或更新用户属性时，用户 ID 为空或无效。 | 检查调用的 API 传入的参数是否正确。 |
 | 206    |   EMErrorUserLoginOnAnotherDevice   | 用户在其他设备登录：如果未开启多设备登录，则在其他设备登录会将当前登录设备踢下线，用户会在当前设备收到该错误。 | 设备被踢时，会触发回调 `EMClientDelegate#userAccountDidLoginFromOtherDevice`。收到该回调时，需重新登录。 |
 | 207    |         EMErrorUserRemoved          | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。| 账号被注销时，会触发 `EMClientDelegate#userAccountDidRemoveFromServer` 事件,收到该事件时，该账号已不可用，需要回到登录页面。 |
-| 208    |      EMErrorUserRegisterFailed      | 用户注册失败：例如，注册用户之前未开启[开放注册功能](/server-side/account_system.html#开放注册单个用户)等原因。 | 不推荐使用 SDK 注册账号，建议开发者在业务服务器注册账号。 |
+| 208    |      EMErrorUserRegisterFailed      | 用户注册失败：例如，注册用户之前未开启[开放注册功能](/document/server-side/account_system.html#开放注册单个用户)等原因。 | 不推荐使用 SDK 注册账号，建议开发者在业务服务器注册账号。 |
 | 209    |   EMErrorUpdateApnsConfigsFailed    | 更新推送配置错误：例如，用户更新推送昵称或设置免打扰配置时失败。 | 检查报错的 API，延迟一段时间后，重新调用。 |
 | 210    |     EMErrorUserPermissionDenied     | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。 | 检查用户是否有操作权限。 |
 | 211    |  EMErrorUserBindDeviceTokenFailed   | 绑定设备 token 失败。      | 检查调用绑定设备推送 token 的接口中传入的 token 是否为空。 |

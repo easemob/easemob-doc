@@ -448,4 +448,4 @@ _同时，你可以在下方查看日志，检查注册，登录，发送消息�
 
 ## 更多操作
 
-在生产环境中，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/server-side/easemob_app_token.html) 和[获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/document/server-side/easemob_app_token.html) 和[获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。

@@ -131,7 +131,7 @@ SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callbac
 ```
 
 :::tip
-该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端[调用 Restful API 进行注册](/document/server-side/account_system.html#开放注册单个用户)。若需要使用 Token，需要在你的应用服务器集成[获取 App Token API](/server-side/easemob_app_token.html) 和[获取用户 Token API](/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端[调用 Restful API 进行注册](/document/server-side/account_system.html#开放注册单个用户)。若需要使用 Token，需要在你的应用服务器集成[获取 App Token API](/document/server-side/easemob_app_token.html) 和[获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 :::
 
 ### 5. 登录账号
