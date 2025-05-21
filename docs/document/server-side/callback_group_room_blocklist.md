@@ -14,9 +14,9 @@
 
 ### 回调时机
 
-1. 客户端将群组或聊天室成员加入黑名单。
-2. 调用 RESTful API 将群组或聊天室成员加入黑名单。
-3. 在[环信控制台](https://console.easemob.com/user/login)将群组或聊天室成员添加黑名单。
+1. 客户端将群组或聊天室成员加入了黑名单。
+2. 调用 RESTful API 将群组或聊天室成员加入了黑名单。
+3. 在[环信控制台](https://console.easemob.com/user/login)将群组或聊天室成员添加了黑名单。
 
 ### 回调请求
 

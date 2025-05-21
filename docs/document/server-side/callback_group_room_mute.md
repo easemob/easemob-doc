@@ -12,9 +12,9 @@
 
 ### 回调时机
 
-1. 客户端将群组或聊天室成员添加禁言列表。
-2. 调用 RESTful API 将群组或聊天室成员添加禁言列表。
-3. 在[环信控制台](https://console.easemob.com/user/login)将群组或聊天室成员添加禁言列表。
+1. 客户端将群组或聊天室成员加入了禁言列表。
+2. 调用 RESTful API 将群组或聊天室成员加入了禁言列表。
+3. 在[环信控制台](https://console.easemob.com/user/login)将群组或聊天室成员加入了禁言列表。
 
 ### 回调请求
 
@@ -63,9 +63,9 @@
 
 ### 回调时机
 
-1. 客户端将群组/聊天室成员移出禁言列表。
-2. 调用 RESTful API 将群组/聊天室成员移出禁言列表。
-3. 在[环信控制台](https://console.easemob.com/user/login)将群组/聊天室成员移出禁言列表。
+1. 客户端将群组/聊天室成员移出了禁言列表。
+2. 调用 RESTful API 将群组/聊天室成员移出了禁言列表。
+3. 在 [环信控制台](https://console.easemob.com/user/login) 将群组/聊天室成员移出了禁言列表。
 
 ### 回调请求
 
