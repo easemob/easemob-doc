@@ -53,9 +53,68 @@
 :::
 
 **发送频率**：对于单个 app，该 REST API 存在以下三个限制：
-- 100 次/秒/App Key。若超限，提示 429 错误。
-- 6000 条/分钟。若超限报 403 错误，即 "Forbidden for url: [XXXX/XXXX/messages/users]"
-- 600 人/次。例如，一次向 600 人发消息，视为 600 条消息。若超限，报 400 错误，即 "params to's size can't exceed limit"。
+
+
+<table>
+<tbody>
+<tr>
+<td width="110">
+<p><strong>限制</strong></p>
+</td>
+<td>
+<p><strong>描述</strong></p>
+</td>
+<td>
+<p><strong>超限报错</strong></p>
+</td>
+<td>
+<p><strong>是否可调</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>100 次/秒</p>
+</td>
+<td>
+<p>每秒限调 100 次</p>
+</td>
+<td>
+<p>若超限，报 429 错误 即 &ldquo;This request has reached api limit&rdquo;。</p>
+</td>
+<td rowspan="2">
+<p>两个限制均<strong>可调</strong>且相互关联，即上调其中一个，另一个自动等比例提升。</p>
+<p>例如，将 100 次/秒上调至 200 次/秒后，每分钟限发消息条数也会自动上调至 12000，即 12000 条/分钟。反之，若将 6000 条/分钟上调至 12000 条/分钟，每秒的调用次数上限也自动提升至 200，即 200 次/秒。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>6000 条/分钟</p>
+</td>
+<td>
+<p>每分钟限发 6000 条消息</p>
+</td>
+<td>
+<p>若超限，报 403 错误，即 " message send reach limit"。</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>600 人/次</p>
+</td>
+<td>
+<p>每次限发 600 人。</p>
+<p>例如，一次向 600 人发消息，视为 600 条消息。</p>
+</td>
+<td>
+<p>若超限，报 400 错误，即 "param to exceed limit"。</p>
+</td>
+<td>
+<p>不可调。</p>
+</td>
+</tr>
+</tbody>
+</table>
 
 ## 前提条件
 

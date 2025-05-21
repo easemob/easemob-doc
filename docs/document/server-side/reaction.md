@@ -32,11 +32,14 @@
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 仅支持使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
-## 创建/追加 Reaction
+## 添加 Reaction
 
-在单聊或群聊场景中对单条消息创建或追加 Reaction。
+### 功能说明
 
-创建 Reaction 指对消息添加第一条 Reaction，后续的 Reaction 添加称为追加。
+- 在单聊或群聊场景中对单条消息添加 Reaction。
+- 添加 Reaction 会触发发送后回调，详见 [发送后回调事件](callback_group_room_create.html)
+
+**调用频率上限**：100 次/秒/App Key   
 
 ### HTTP 请求
 
@@ -48,7 +51,7 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :-------------------------------------------------------- |
-| `userId` | String | 是       | 当前用户的用户 ID。 |
+| `userId` | String | 是       | 添加 Reaction 的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -74,15 +77,15 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 | 参数                | 类型    | 描述                                                                                              |
 | :------------------ | :------ | :------------------------------------------------------------------------------------------------ |
-| `requestStatusCode` | String  | 操作结果，`ok` 表示成功创建或追加 Reaction。                                                      |
+| `requestStatusCode` | String  | 操作结果，`ok` 表示成功添加 Reaction。                                                      |
 | `timestamp`         | Long    | 请求响应的时间，Unix 时间戳，单位为毫秒。                                                         |
 | `data`              | JSON    | 添加的 Reaction 的详情。                                                                          |
 | `data.id`           | String  | Reaction ID。                                                                                     |
 | `data.msgId`        | String  | 添加 Reaction 的消息 ID。                                                                         |
 | `data.msgType`      | String  | 消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊。                                 |
 | `data.groupId`      | String  | 群组 ID。该参数在单聊时为 null。                                                                  |
-| `data.reaction`     | String  | 表情 ID，与客户端一致，与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。 |
-| `data.createAt`     | Instant | Reaction 的创建时间。                                                                             |
+| `data.reaction`     | String  | 表情 ID，与客户端一致，与[添加 Reaction API](#添加-Reaction)的请求参数 `message` 相同。 |
+| `data.createAt`     | Instant | Reaction 的添加时间。                                                                            |
 | `data.updateAt`     | Instant | Reaction 的修改时间。                                                                             |
 
 其他字段及描述详见 [公共参数](#公共参数)。
@@ -133,7 +136,12 @@ curl -g -X POST 'https://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H
 
 ## 根据消息 ID 获取 Reaction
 
-该方法根据单聊或群聊中的消息 ID 获取单个或多个消息的 Reaction 信息，包括 Reaction ID、使用的表情 ID、以及使用该 Reaction 的用户 ID 及用户人数。获取的 Reaction 的用户列表只展示最早三个添加 Reaction 的用户。
+### 功能说明
+
+- 该方法根据单聊或群聊中的消息 ID 获取单个或多个消息的 Reaction 信息，包括 Reaction ID、使用的表情 ID、以及使用该 Reaction 的用户 ID 及用户人数。
+- 获取的 Reaction 的用户列表只展示最早三个添加 Reaction 的用户。
+
+**调用频率上限**：100 次/秒/App Key   
 
 ### HTTP 请求
 
@@ -177,7 +185,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgIdList={N,M}&
 | `data.msgId`                   | String     | Reaction 对应的消息 ID。                                                                                |
 | `data.reactionList`            | JSON Array | 单个消息的 Reaction 列表。                                                                              |
 | `data.reactionList.reactionId` | String     | Reaction ID。                                                                                           |
-| `data.reactionList.reaction`   | String     | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。 |
+| `data.reactionList.reaction`   | String     | 表情 ID，与客户端一致。该参数与[添加 Reaction API](#添加-reaction)的请求参数 `message` 相同。 |
 | `data.reactionList.count`      | Int        | 添加该 Reaction 的用户人数。                                                                            |
 | `data.reactionList.state`      | Bool       | 当前请求用户是否添加过该 Reaction： <br/> - `true`: 是； <br/> - `false`：否。                          |
 | `data.reactionList.userList`   | Array      | 添加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。                                 |
@@ -246,7 +254,11 @@ curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/{{userI
 
 ## 删除 Reaction
 
-删除当前用户追加的 Reaction。
+### 功能说明
+
+删除当前用户添加的单个 Reaction。
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -318,7 +330,11 @@ curl -g -X DELETE 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz?m
 
 ## 根据消息 ID 和表情 ID 获取 Reaction 信息
 
-该方法根据指定的消息的 ID 和表情 ID 获取对应的 Reaction 信息，包括使用了该 Reaction 的用户 ID 及用户人数。
+### 功能说明
+
+该 API 根据指定的消息的 ID 和表情 ID 获取对应的 Reaction 信息，包括使用了该 Reaction 的用户 ID 及用户人数。
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -367,7 +383,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={ms
 | `timestamp`         | Long   | 请求响应的时间，Unix 时间戳，单位为毫秒。                                                               |
 | `data`              | JSON   | 消息添加的 Reaction 的详情。                                                                            |
 | `data.reactionId`   | String | Reaction ID。                                                                                           |
-| `data.reaction`     | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。 |
+| `data.reaction`     | String | 表情 ID，与客户端一致。该参数与[添加 Reaction API](#添加-reaction)的请求参数 `message` 相同。 |
 | `data.count`        | Int    | 添加该 Reaction 的用户人数。                                                                            |
 | `data.state`        | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`：是；<br/> - `false`：否。                           |
 | `data.userList`     | Array  | 按 Reaction 添加时间正序返回的用户 ID 列表。                           |

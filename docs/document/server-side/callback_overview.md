@@ -14,7 +14,7 @@
 
   发送后回调包括发送消息、发送消息已读回执、进行群组或聊天室操作、好友关系操作和用户状态变化等事件，详见[发送后回调过滤规则设置](/product/enable_and_configure_IM.html#配置回调规则)。
 
-使用回调功能前，请查看你的产品套餐是否支持，详见[增值服务说明](/product/pricing.html#增值服务费用)。若不支持，你需首先在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开通该功能](/product/enable_and_configure_IM.html#开通消息回调)，然后[配置发送前回调规则发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
+使用回调功能前，请查看你的产品套餐是否支持，详见 [增值服务费用)](/product/pricing_policy.html#增值服务费用)。若不支持，你需首先在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开通该功能](/product/enable_and_configure_IM.html#开通消息回调)，然后[配置发送前回调规则发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
 
 :::tip
 若使用了一段时间回调功能后需要将其关闭，请联系环信商务。关闭该功能会导致回调所有相关配置删除，请谨慎操作。

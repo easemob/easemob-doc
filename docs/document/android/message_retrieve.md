@@ -13,6 +13,8 @@
 环信即时通讯 IM Android SDK 提供 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类支持获取服务器和本地的消息，包含如下主要方法：
 
 - `EMChatManager#asyncFetchHistoryMessages`：根据 `EMFetchMessageOption` 类从服务端分页获取指定会话的历史消息；
+- `EMChatManager#doAsyncFetchHistoryMessages`：从服务器获取指定群成员发送的消息；
+- `EMConversation#asyncSearchMsgFromDB`：从本地读取指定会话的消息；
 - `EMConversation#getAllMessages/loadMoreMsgFromDB`：读取本地指定会话的消息；
 - `EMChatManager#getMessage`：根据消息 ID 获取本地消息；
 - `EMChatManager#searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)`：获取本地存储的指定会话中特定类型的消息；
@@ -47,7 +49,7 @@
 1. 若使用该 API，需将 SDK 版本升级至 V4.0.2 版本或以上。
 2. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需升级至 4.5.0 版本，并联系环信商务。**
 3. 对于单聊消息，自 4.11.0 版本开始，从服务器拉取历史消息时会读取服务端的消息已读和送达状态。该功能默认关闭，如果需要，请联系环信商务开通。 
-4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
+4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
 :::
 
 ```java
