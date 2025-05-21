@@ -2,6 +2,12 @@
 
 ## 2025-05
 
+#### Android/iOS/Web/小程序 SDK 4.15.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| SDK 4.15.0 开发版发布  |<br/> - [撤回消息](/document/android/message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。<br/> - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。<br/> - 修改 Token [即将过期事件](/document/android/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。<br/> - 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](/document/android/demo.html#快速跑通-demo)。 <br/> - Web/小程序端支持获取 [群组](/document/web/group_manage.html#获取群成员列表)/[聊天室成员列表](/document/web/room_members.html#获取聊天室成员列表) 时，列明成员的用户 ID 和角色。| <br/> - [Android 4.15.0 更新日志](/document/android/releasenote.html#版本-v4-15-0-dev-2025-5-21-开发版)<br/> - [iOS 4.15.0 更新日志](/document/ios/releasenote.html#版本-v4-15-0-dev-2025-5-21-开发版)<br/> - [Web 4.15.0 更新日志](/document/web/releasenote.html#版本-v4-15-0-dev-2025-5-21-开发版) <br/> - [小程序 4.15.0 更新日志](/document/applet/releasenote.html#版本-v4-15-0-dev-2025-5-21-开发版)                  |                    |
+
 #### HarmonyOS SDK 1.7.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
