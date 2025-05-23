@@ -8,7 +8,7 @@
 :::
 
 <table><tr><th><b>模块</b></th><th><b>功能</b></th><th><b>免费版</b></th><th><b>专业版</b></th><th><b>旗舰版</b></th></tr>
-<tr><td rowspan="6">用户</td><td><b>免费日活跃用户数（DAU）</b></td><td>100</td><td>10000</td><td>10000</td></tr>
+<tr><td rowspan="6">用户</td><td>免费日活跃用户数（DAU）</td><td>100</td><td>10000</td><td>10000</td></tr>
 <tr><td>注册用户总数上限</td><td>100</td><td>无限制</td><td>无限制</td></tr>
 <tr><td>单个用户的好友数上限</td><td>100</td><td>3000</td><td>3000</td></tr>
 <tr><td>用户属性（提供用户头像、昵称、邮箱等数据存储服务）</td><td>✓</td><td>✓</td><td>✓</td></tr>
@@ -42,7 +42,7 @@
 <tr><td>置顶会话</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>会话标记</td><td>✓</td><td>✓</td><td>✓</td></tr>
 <tr><td>删除会话</td><td>✓</td><td>✓</td><td>✓</td></tr>
-<tr><td rowspan="10">群组</td><td><b>免费峰值群组和聊天室数</b></td><td>100个/月</td><td>100000个/月</td><td>100000个/月</td></tr>
+<tr><td rowspan="10">群组</td><td>免费峰值群组和聊天室数</td><td>100个/月</td><td>100000个/月</td><td>100000个/月</td></tr>
 <tr><td>群组总数上限（解散后不计数）</td><td>100</td><td>无限制</td><td>无限制</td></tr>
 <tr><td>单个群成员数上限</td><td>100人/群</td><td>300人/群（可调*）</td><td>3000人/群（可调*）</td></tr>
 <tr><td>单个用户可加入群组数上限</td><td>100个群/人</td><td>600个群/人（可调*）</td><td>3000个群/人（可调*）</td></tr>
