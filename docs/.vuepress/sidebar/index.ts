@@ -42,10 +42,10 @@ export const zhSidebar = sidebar({
             { text: "在线状态管理", link: "product_user_presence.html" },
           ],
         },
-        { text: "用户资料与用户关系", 
+        { text: "用户属性与用户关系", 
           collapsible: true,
           children: [
-            { text: "用户资料", link: "product_user_attribute.html" },
+            { text: "用户属性", link: "product_user_attribute.html" },
             { text: "用户关系", link: "product_user_relationship.html" },
           ],
         },

@@ -20,7 +20,7 @@
 ### 基础服务费用
 
 基础服务费用包含：**套餐包费用**和**套餐包外超量费用**。
-- **套餐包费用**：IM 套餐包分为免费版、专业版和旗舰版。创建应用后默认为免费版，你可以根据业务需求进行选择。各版本包含的功能与限制，详见[套餐包功能详情](#套餐包功能详情)。
+- **套餐包费用**：IM 套餐包分为免费版、专业版和旗舰版。创建应用后默认为免费版，你可以根据业务需求进行选择。各版本包含的功能与限制，详见 [套餐包功能详情](product_package_feature.html)。
 - **套餐包外超量费用**：超出套餐包免费额度以外的 DAU 和群组和聊天室总数上限所需支付的费用。
 
 :::tip
@@ -99,18 +99,18 @@
 | 消息云存储   | 包含历史消息记录文件和漫游消息       | 预付费    | 每延长 30 天，500 元/月 | 每延长 30 天，500元/月 |
 | 扩展单个群成员数上限  | 对单个 App Key 内的所有群组生效 | 预付费   | 3000 人/群，500 元/月  | 8000 人/群，500 元/月  |
 | 扩展单个用户可加入群组数上限 | 对单个 App Key 内的所有用户生效 | 预付费   | 2000 群/人：1000 元/月 | 5000 群/人：1000 元/月 |
-| 群聊消息已读回执   | 功能介绍详见[群聊消息已读回执](/document/android/message_receipt.html#群聊)。     | 预付费   | 1000 元/月     | — |
-| 全局禁言   | 功能介绍详见[全局禁言](/document/server-side/user_global_mute.html)。 | 预付费   | 500 元/月    | —    |
-| 回调   | 功能介绍详见[回调](/document/server-side/callback_overview.html)。    | 预付费   | 1000 元/月   | —     |
-| 回调异常缓存     | 功能介绍详见[补发回调存储信息接口描述](/document/server-side/callback_postsending.html#补发回调存储信息)。      | 预付费   | 2000 元/月  | 2000 元/月            |
-| 用户在线状态（Presence）订阅   | 功能介绍详见[用户在线状态订阅](/document/server-side/presence.html)。     | 预付费   | 1000 元/月     | —   |
-| 消息表情回复 Reaction   | 功能介绍详见[消息表情回复](/document/server-side/reaction.html)。    | 预付费   | 600 元/月     | —    |
-| 子区 Thread    | 功能介绍详见[管理子区](/document/server-side/group_thread.html#管理子区)。        | 预付费   | 600 元/月    | —     |
-| 消息举报       | 功能介绍详见[消息举报](/document/android/moderation.html)。       | 预付费   | 500 元/月     | —   |
-| 消息人工审核     | 功能介绍详见[消息人工审核](https://docs-im.easemob.com/ccim/moderation/censor)。       | 预付费   |1000 元/月     | 1000 元/月            |
-| 质量监控  | 功能介绍详见[请求质量](request_quality_overview.html)。     | 预付费 | 2000 元/月  | 2000 元/月 |
+| 群聊消息已读回执   | 功能介绍详见 [群聊消息已读回执](/document/android/message_receipt.html#群聊)。     | 预付费   | 1000 元/月     | — |
+| 全局禁言   | 功能介绍详见 [全局禁言](/document/server-side/user_global_mute.html)。 | 预付费   | 500 元/月    | —    |
+| 回调   | 功能介绍详见 [回调](/document/server-side/callback_overview.html)。    | 预付费   | 1000 元/月   | —     |
+| 回调异常缓存     | 功能介绍详见 [补发回调存储信息接口描述](/document/server-side/callback_postsending.html#补发回调存储信息)。      | 预付费   | 2000 元/月  | 2000 元/月            |
+| 用户在线状态（Presence）订阅   | 功能介绍详见 [用户在线状态订阅](/document/server-side/presence.html)。     | 预付费   | 1000 元/月     | —   |
+| 消息表情回复 Reaction   | 功能介绍详见 [消息表情回复](/document/server-side/reaction.html)。    | 预付费   | 600 元/月     | —    |
+| 子区 Thread    | 功能介绍详见 [管理子区](/document/server-side/group_thread.html#管理子区)。        | 预付费   | 600 元/月    | —     |
+| 消息举报       | 功能介绍详见 [消息举报](/document/android/moderation.html)。       | 预付费   | 500 元/月     | —   |
+| 消息人工审核     | 功能介绍详见 [消息人工审核](https://docs-im.easemob.com/ccim/moderation/censor)。       | 预付费   |1000 元/月     | 1000 元/月            |
+| 质量监控  | 功能介绍详见 [请求质量](request_quality_overview.html)。     | 预付费 | 2000 元/月  | 2000 元/月 |
 
 :::tip
 1. 翻译功能的价格请咨询环信商务。
-2. 内容审核功能的价格详见[内容审核计费说明](https://docs-im.easemob.com/ccim/moderation/price_domestic)。
+2. 内容审核功能的价格详见 [内容审核计费说明](/moderation/moderation_billing_domestic.html)。
 :::
