@@ -8,7 +8,7 @@
 
 SDK 导入：[Android SDK 导入](/document/android/quickstart.html#_2-集成-sdk)
 
-注册登录：[注册登录](/document/android/login.html#用户注册)
+注册登录：[注册登录](/document/android/login.html#用户注册) 
 
 **手机权限**
 
