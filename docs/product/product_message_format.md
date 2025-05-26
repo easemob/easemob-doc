@@ -294,6 +294,7 @@
 | `huawei_click_action`       | String  | 华为点击跳转 action，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **华为** 页面设置的 **Action** 参数的配置。 |
 | `huawei_channel_id`         | String  | 华为推送通道（最高优先级）。                                 |
 | `meizu_click_activity`      | String  | 魅族点击跳转 activity，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **魅族** 页面设置的 **Activity** 参数的配置。 |
+| `meizu_notice_type`      | Int  | 通道类型：<br/> - `0`：公信通道<br/> - `1`：私信通道 |
 | `oppo_channel_id`           | String  | OPPO 推送通道（最高优先级），优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **OPPO** 页面设置的 **Activity** 参数的配置。 |
 | `oppo_click_activity`       | String  | OPPO 点击跳转 activity，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **OPPO** 页面设置的 **Activity** 参数的配置。 |
 | `vivo_category`             | String  | vivo 二级分类配置，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **VIVO** 页面设置的 **Category** 参数的配置。 |
@@ -375,6 +376,7 @@
             "huawei_click_action": "",
             "huawei_channel_id": "",
             "meizu_click_activity": "",
+            "meizu_notice_type": 1,
             "xiaomi_channel_id": "",
             "oppo_channel_id": "",
             "oppo_click_activity": "",
