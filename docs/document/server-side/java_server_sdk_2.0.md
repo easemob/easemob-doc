@@ -35,9 +35,7 @@ implementation 'com.easemob.im:im-sdk-core:V1.0.13'
 
 ### 使用
 
-在使用 Java Server SDK 前，需要进行初始化：
-
-#### 1. 使用 Easemob App Credentials 的情况
+在使用 Java Server SDK 前，需要进行初始化。以下为使用 Easemob App Credentials 的情况：
 
 ```java
 SDK 初始化建议写到配置类中，示例如下：
@@ -107,23 +105,6 @@ public class UserService {
 ```
 
 各业务 API 的使用可以参考 [集成测试](https://github.com/easemob/easemob-im-server-sdk/tree/master_java_2.0/src/test/java/com/easemob/im/api)。
-
-#### 2.私有化配置，将你自己的私有化 REST 服务器地址设置给 `setBasePath` 即可。
-
-建议写到配置类中，示例如下：
-
-```java
-try {
-    Configuration.setDefaultApiClient(ApiClient.builder()
-            .setBasePath("https://Your privatized address name")
-            .setAppKey("Appkey")
-            .setClientId("Client ID")
-            .setClientSecret("Client Secret")
-            .build());
-} catch (ApiException e) {
-    throw new RuntimeException(e);
-}
-```
 
 ## 参考
 

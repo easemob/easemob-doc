@@ -443,6 +443,7 @@ FCM 通道推送通知示例如下：
 | `lights`              | Bool   | 通知方式：是否闪光。 <br/> - `true`：是；<br/> - `false`：否。          |
 | `sound`               | Bool   | 通知方式：是否有声音。<br/> - `true`：是；<br/> - `false`：否。        |
 | `notifyKey`           | String | 分组合并推送的 key，凡是带有此 key 的通知栏消息只会显示最后到达的一条。 |
+| `noticeType`      | Int  | 通道类型：<br/> - `0`：公信通道<br/> - `1`：私信通道 |
 | `callback`            | String | 回调 URL， 长度限制 128 字符。                               |
 | `callbackParam`       | String | 回调参数，长度限制 64 字符。                                 |
 | `callbackType`        | String | int(可选字段)，回执类型。<br/> - `1`：送达回执；<br/> - `2`：点击回执； <br/> - （默认）`3`：送达与点击回执。 |
