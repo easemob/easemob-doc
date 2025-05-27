@@ -131,7 +131,7 @@ try {
 /// Param [deleteWhenExit]                    当前成员退出聊天室时是否自动删除其设置的自定义属性。
 ///       - `true`：是；
 ///       - （默认）`false`：否。
-/// Param [forced]                            是否覆盖其他成员设置的 key 相同的属性。
+/// Param [overwrite]                            是否覆盖其他成员设置的 key 相同的属性。
 ///       - `true`：是；
 ///       - （默认）`false`：否。
 /// **Return** Map<String,int> failInfo       设置失败的 key 以及错误原因。
