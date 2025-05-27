@@ -15,14 +15,13 @@
           'hierarchy.lvl2:20',
           'hierarchy.lvl3:20',
           'hierarchy.lvl4:20',
-          'content:50'
+          'content:150'
         ]"
       />
       <div class="search-box-container">
         <div class="search-container">
           <ais-search-box
             placeholder="热门搜索: 登录、消息扩展"
-            autofocus
             show-loading-indicator
           />
           <div class="search-category">
@@ -32,8 +31,8 @@
             <template
               v-slot="{ state: { query }, results: { nbHits }, status }"
             >
-              <el-tabs v-model="activeCategoryType">
-                <el-tab-pane name="product">
+              <el-tabs class="search-tabs" :model-value="activeCategoryType">
+                <el-tab-pane name="product" lazy="true">
                   <template #label>
                     <ais-clear-refinements
                       :included-attributes="includeAttributes"
@@ -128,7 +127,7 @@
                           }"
                           @click="handleClick({ name: 'sdk', refine })"
                         >
-                          SDK 集成文档
+                          SDK & REST 集成
                         </div>
                       </template>
                     </ais-clear-refinements>
@@ -209,7 +208,7 @@
                           }"
                           @click="handleClick({ name: 'uikit', refine })"
                         >
-                          UIKit 集成文档
+                          UIKit 集成
                         </div>
                       </template>
                     </ais-clear-refinements>
@@ -326,8 +325,9 @@ const uikitCategoryMap = {
 
 const productCategoryMap = {
   产品介绍: "产品介绍",
-  即时推送: "即时推送",
   内容审核: "内容审核",
+  solution_common: "常见方案",
+  即时推送: "即时推送",
   "AI 集成": "AI 集成"
 };
 
@@ -338,7 +338,7 @@ const categoryMap = {
 };
 
 const productFilters =
-  "category:'产品介绍' OR category:'即时推送' OR category:'内容审核' OR category:'AI 集成'";
+  "category:'产品介绍' OR category:'即时推送' OR category:'内容审核' OR category:'AI 集成' OR category:'solution_common1'";
 
 const sdkFilters =
   "category:'Andorid 集成文档' OR category:'iOS 集成文档' OR category:'Web 集成文档' OR category:'HarmonyOS 集成文档' OR category:'小程序集成文档' OR category:'Flutter 集成文档' OR category:'React Native 集成文档' OR category:'Windows 集成文档' OR category:'Unity 集成文档' OR category:'REST API'";
@@ -380,7 +380,7 @@ export default {
       ),
       initialUiState: {
         ["im-beta-easemob"]: {
-          query: useRoute().query.query || "",
+          query: useRoute().query.query || "IM",
           refinementList: {
             type: ["content"],
             category: categoryMap[this.$route.query.s]
@@ -426,6 +426,9 @@ export default {
         return;
       }
       refine();
+      setTimeout(() => {
+        this.activeCategoryType = name;
+      }, 20);
     },
     getCategoryTypeByCategoryItem(categoryItem) {
       if (this.sdkCategories.includes(categoryItem)) {
@@ -527,6 +530,10 @@ body {
   font-size: 14px;
 }
 
+.ais-ClearRefinements {
+  height: 100%;
+}
+
 /* 分类项的基础样式 */
 .refinement-list-item {
   padding: 10px 15px;
@@ -560,11 +567,14 @@ body {
 .ais-RatingMenu-link {
   color: var(--theme-color) !important;
 }
-
 /* active状态的样式 */
 .refinement-list-item--selected {
   background-color: var(--theme-color); /* active状态的背景色 */
   color: #ffffff; /* active状态的文本颜色 */
+}
+
+.search-tabs .el-tabs__item {
+  pointer-events: none;
 }
 
 .no-results {
@@ -585,6 +595,9 @@ body {
 .ais-tab-item {
   color: #303133;
   font-size: 15px !important;
+  height: 100%;
+  line-height: 40px;
+  pointer-events: all;
 }
 
 .ais-tab-item--active {
