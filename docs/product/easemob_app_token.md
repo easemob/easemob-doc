@@ -4,13 +4,13 @@
 
 环信提供的 REST API 需要 app token (管理员权限 token) 才能使用，即发送 HTTP 请求时需要携带 app token。本文介绍如何获取 app token。
 
-另外，环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，详见 [Java Server SDK](/document/server-side/java_server_sdk.html) 和 [PHP Server SDK](/document/server-side/php_server_sdk.html)。
+另外，环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，详见 [Java Server SDK](/document/server-side/java_server_sdk.html)。
 
 ## 获取管理员权限 Token
 
 获取 token 时，服务器会返回 token 有效期，即响应中的 `expires_in` 字段的值。由于网络延迟等原因，系统不保证 token 在此值表示的有效期内绝对有效。如果发现 token 使用异常，如返回 HTTP 状态码 401，请重新获取新的 token。
 
-:::notice
+:::tip
 请不要频繁向服务器发送获取 token 的请求，同一账号发送此请求超过一定频率会被服务器封禁。
 :::
 
@@ -80,3 +80,15 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
   "application": "8be024f0-e978-11e8-b697-5d598d5f8402"
 }
 ```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型     | 错误提示         | 可能原因           | 处理建议       |
+| :---------- | :-------- | :-------------- | :------------ | :----|
+| 400         | illegal_argument    | client_id must be provided.        | 请求 body 中没有传 `client_id`。| 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **Client ID** 参数。 |
+| 400         | illegal_argument                   | client_secret must be provided    | 请求 body 中没有传 `client_secret`。 | 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **ClientSecret** 参数。 |
+| 400         | invalid_grant                      | client_id does not match   | app key 对应的 `client_id` 与请求 body 中传入的 `client_id` 不匹配。 | 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **Client ID** 参数，确保请求 body 中传入的与该参数一致。 |
+| 400         | invalid_grant                      | client_secret does not match     | app key 对应的 `client_secret` 与请求 body 中传入的 `client_secret` 不匹配。 | 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **ClientSecret** 参数，确保请求 body 中传入的与该参数一致。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |

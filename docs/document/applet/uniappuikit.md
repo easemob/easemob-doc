@@ -2,11 +2,11 @@
 
 <Toc />
 
-此模版根据 uni-app 版本的小程序进行2次封装而来，组件可灵活抽离且可以快速集成在其他项目中。不用过分关注收发消息、发图片、发文件、消息上屏等逻辑。从而快速集成符合自身业务的功能
+此模版根据 uni-app 版本的小程序进行 2 次封装而来，组件可灵活抽离且可以快速集成在其他项目中。你无需过多关注收发消息、发图片、发文件、消息上屏等逻辑，从而快速集成符合自身业务的功能。
 
 ## 简介
 
-小程序模版源码地址 （`注意：分支为：versions2.0`)
+小程序模版源码地址 (`注意：分支为：versions2.0`)
 
 - [https://github.com/easemob/webim-uniapp-demo/tree/versions2.0](https://github.com/easemob/webim-uniapp-demo/tree/versions2.0)
 
@@ -18,13 +18,13 @@ HBuilderx ⇒ 工具 ⇒ 插件安装 ⇒ 安装新插件 ⇒ 前往插件市场
 
 ### 集成说明
 
-:::notice
+:::tip
 小程序模版必须依赖环信 IM SDK，因而在使用小程序模版时必须同时添加环信 IM SDK 依赖。
 :::
 
 所有依赖配置项都在 utils 中：
 
-![img](@static/images/applet/utils.jpeg)
+![img](/images/applet/utils.jpeg)
 
 具体 SDK 集成，详见 [Uniapp 全平台](uniapp.html)
 
@@ -34,7 +34,7 @@ HBuilderx ⇒ 工具 ⇒ 插件安装 ⇒ 安装新插件 ⇒ 前往插件市场
 
 ## 组件介绍
 
-<img src="@static/images/applet/component.jpeg" width="400" />
+<img src="/images/applet/component.jpeg" width="400" />
 
 ## 组件使用
 
@@ -55,7 +55,7 @@ import chat from "@/components/chat/chat.vue";
    </chat>
 ```
 
-<img src="@static/images/applet/uniappuikit.jpeg" width="400" />
+<img src="/images/applet/uniappuikit.jpeg" width="400" />
 
 ### chat 组件详细介绍
 
@@ -68,7 +68,7 @@ import chat from "@/components/chat/chat.vue";
 
 - chat 组件依赖  utils  中的文件，因此使用 chat 组件时，务必保证 utils 中的文件一并存在
 
-<img src="@static/images/applet/utils1.jpeg" width="400" />
+<img src="/images/applet/utils1.jpeg" width="400" />
 
 #### chat 组件的消息存取
 
@@ -96,7 +96,7 @@ import longPressModal from "@/components/longPressModal/index";
    :popStyle="popStyle"/>     // 样式
 ```
 
-<img src="@static/images/applet/huadong.jpeg" width="400" />
+<img src="/images/applet/huadong.jpeg" width="400" />
 
 ### 长按组件详细介绍
 
@@ -111,7 +111,7 @@ import longPressModal from "@/components/longPressModal/index";
 - `hidePop` – Function，显隐框操作事件
 - `popStyle` – string，样式
 
-:::notice
+:::tip
 使用长按组件时候需要先获取当前窗口，再根据当前点击的位置来显示组件框：
 :::
 

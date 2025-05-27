@@ -21,13 +21,6 @@
 
 ## 3. 功能详情
 
-<html>
-<head>
-<meta charset="utf-8">
-<title>无标题文档</title>
-</head>
-
-<body>
 <table width="936" border="1">
   <tbody>
     <tr>
@@ -288,6 +281,3 @@
     </tr>
   </tbody>
 </table>
-<p>&nbsp;</p>
-</body>
-</html>

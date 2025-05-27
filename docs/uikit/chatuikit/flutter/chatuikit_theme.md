@@ -5,44 +5,43 @@
 单群聊 UIKit 内置浅色和深色主题，默认为浅色主题。
 
 ```dart
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      ...
-      builder: (context, child) {
-        // 设置单群聊 UIKit 主题
-        return ChatUIKitTheme(child: child!);
-      },
-    );
+  // 设置浅色主题
+  ChatUIKitTheme.instance.setColor(ChatUIKitColor.light());
+
+  // 设置深色主题
+  ChatUIKitTheme.instance.setColor(ChatUIKitColor.dark());
+
+  // 判断当前是使用深色还是浅色主题
+  if(ChatUIKitTheme.instance.color.isDark) {
+    // 深色主题
+  } else {
+    // 浅色主题
   }
+
 ```
 
 - 浅色主题
 
-![img](@static/images/uikit/chatuikit/android/light_mode.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/light_mode.png" title="浅色主题" />
+</ImageGallery>
 
 - 深色主题
 
-![img](@static/images/uikit/chatuikit/android/dark_mode.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/dark_mode.png" title="深色主题" />
+</ImageGallery>
 
 ## 切换主题
 
 若从当前的主题切换到单群聊 UIKit 内置的浅色或深色主题，可使用以下方法：
 
 ```dart
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      ...
-      builder: (context, child) {
-        return ChatUIKitTheme(
-          // 设置使用亮色主题，暗色为：ChatUIKitColor.dark()。
-          color: ChatUIKitColor.light(),
-          child: child!,
-        );
-      },
-    );
-  }
+  // 设置浅色主题
+  ChatUIKitTheme.instance.setColor(ChatUIKitColor.light());
+
+  // 设置深色主题
+  ChatUIKitTheme.instance.setColor(ChatUIKitColor.dark());
 ```
 
 ## 切换为自定义主题
@@ -62,31 +61,14 @@
 通过调整 HSLA 模型的色相值，你可以实现精确的色彩控制。
 
 ```dart
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      ...
-      builder: (context, child) {
-        return ChatUIKitTheme(
-            // 调整亮色模式下的色值，暗色为: 
-            //  ChatUIKitColor.dark(
-            //     primaryHue: 203,
-            //     secondaryHue: 155,
-            //     errorHue: 350,
-            //     neutralHue: 203,
-            //     neutralSpecialHue: 220,
-            //  ),
-          color: ChatUIKitColor.light(
-            primaryHue: 203,
-            secondaryHue: 155,
-            errorHue: 350,
-            neutralHue: 203,
-            neutralSpecialHue: 220,
-          ),
-          child: child!,
-        );
-      },
-    );
-  }
+ChatUIKitTheme.instance.setColor(
+  ChatUIKitColor.light(
+    primaryHue: 203,
+    secondaryHue: 155,
+    errorHue: 350,
+    neutralHue: 203,
+    neutralSpecialHue: 220,
+  ),
+);
 ```
 

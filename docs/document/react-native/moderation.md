@@ -19,7 +19,7 @@
 
 开始前，请确保满足以下条件：
 
-1. 完成 SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+1. 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 3. 已在 [环信即时通讯云控制台开通消息举报功能](/product/enable_and_configure_IM.html#消息举报)。
 
@@ -28,9 +28,6 @@
 举报违规消息的示例代码如下：
 
 ```typescript
-// msgId：要举报的消息 ID。
-// tag：非法消息的标签。你需要自定义标签，例如`涉政`或`广告`。该字段对应环信即时通讯云控制台的消息举报记录页面的`词条标记`字段。
-// reason：举报原因。你需要自行填写举报原因，最长不能超过 512 字节。该字段对应环信即时通讯云控制台的消息举报记录页面的`举报原因`字段。
 ChatClient.getInstance()
   .chatManager.reportMessage(msgId, tag, reason)
   .then((result) => {
@@ -40,3 +37,15 @@ ChatClient.getInstance()
     console.log("fail: ", error);
   });
 ```
+
+该方法传入的参数描述如下表所示：
+
+| 参数       | 类型   | 描述 | 
+| :--------- | :----- | :------- | 
+| `msgId`     | String | 要举报的消息 ID。 | 
+| `tag` | String | 非法消息的标签。你需要自定义标签，例如**涉政**或**广告**。该字段对应环信即时通讯云控制台的消息举报记录页面的**词条标记**字段。 | 
+| `reason` | String | 举报原因。你需要自行填写举报原因，最长不能超过 512 字节。该字段对应环信即时通讯云控制台的消息举报记录页面的**举报原因**字段。 |
+
+要在[环信即时通讯云控制台](https://console.easemob.com/user/login)上查询消息举报页面，需在首页选择应用，点击**操作**一栏中的**管理**，选择**即时通讯 > 内容审核 > 消息举报**。
+
+![img](/images/android/message_report.png)

@@ -12,7 +12,7 @@
 
 **1、进入 历史记录页**
 
-![img](@static/images/moderation/moderation_history_01.png)
+![img](/images/moderation/moderation_history_01.png)
 
 历史记录中的字段详细介绍如下：
 
@@ -30,7 +30,7 @@
 
 **2、查看审核结果**
 
-![img](@static/images/moderation/moderation_history_02.png)
+![img](/images/moderation/moderation_history_02.png)
 
 判断审核结果是否符合业务预期？
 
@@ -41,7 +41,7 @@
 
 **3、查看消息处置结果**
 
-![img](@static/images/moderation/moderation_history_03.png)
+![img](/images/moderation/moderation_history_03.png)
 
 判断消息处置结果是否符合业务预期？
 

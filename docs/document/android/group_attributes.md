@@ -6,7 +6,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMGroupManager` 类和 `EMGroup` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM Android SDK 提供 [EMGroupManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager.html) 类和 [EMGroup](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html) 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 修改群组名称及描述
 - 获取、更新群组公告
@@ -49,9 +49,55 @@ EMClient.getInstance().groupManager().changeGroupName(groupId,changedGroupName);
 EMClient.getInstance().groupManager().changeGroupDescription(groupId,description);
 ```
 
+### 管理群组头像
+
+自 Android SDK 4.14.0 开始，支持群组头像功能。
+
+#### 设置群组头像
+
+- 创建群组时，可设置群组头像：
+
+```java
+EMGroupOptions option = new EMGroupOptions();
+option.maxUsers = 100;
+option.style = EMGroupStyle.EMGroupStylePrivateMemberCanInvite;
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncCreateGroup(String, String, String, String[], String, EMGroupOptions, EMValueCallBack)。
+EMClient.getInstance().groupManager().createGroup(groupName, avatar,  desc, allMembers, reason, option);
+```
+
+- 创建群组后，若设置群组头像，可调用 [修改群组头像](#修改群组头像) API 设置头像。
+
+#### 修改群组头像
+
+创建群组完成后，群主或管理员可调用 `EMGroupManager#changeGroupAvatar` 设置或修改群组头像：
+
+```java
+// 同步方法，会阻塞当前线程。
+// 异步方法为 asyncChangeGroupAvatar(String, String, EMCallBack)。
+EMClient.getInstance().groupManager().changeGroupAvatar(groupId,changedAvatar);
+```
+
+群组头像被修改后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调：
+
+```java
+EMGroupChangeListener#onSpecificationChanged(EMGroup group)
+```
+
+#### 获取群组头像
+
+群成员可以通过获取群详情的方法 `EMGroupManager#getGroupFromServer`，获取群组头像：
+
+```java
+// 根据群组 ID 从服务器获取群组详情。
+// 同步方法，会阻塞当前线程。异步方法为 asyncGetGroupFromServer(String, EMValueCallBack)。
+EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId);
+String avatar = group.getGroupAvatar();
+```
+
 ### 更新群公告
 
-仅群主和群管理员可以调用 `updateGroupAnnouncement` 方法设置和更新群公告，群公告的长度限制为 512 个字符。群公告更新后，其他群成员收到 `EMGroupChangeListener#onAnnouncementChanged` 回调。
+仅群主和群管理员可以调用 `EMGroupManager#updateGroupAnnouncement` 方法设置和更新群公告，群公告的长度限制为 512 个字符。群公告更新后，其他群成员收到 `EMGroupChangeListener#onAnnouncementChanged` 回调。
 
 示例代码如下：
 
@@ -63,7 +109,7 @@ EMClient.getInstance().groupManager().updateGroupAnnouncement(groupId, announcem
 
 ### 获取群公告
 
-所有群成员均可以调用 `fetchGroupAnnouncement` 方法从服务器获取群公告。
+所有群成员均可以调用 `EMGroupManager#fetchGroupAnnouncement` 方法从服务器获取群公告。
 
 示例代码如下：
 
@@ -77,7 +123,7 @@ EMClient.getInstance().groupManager().fetchGroupAnnouncement(groupId);
 
 #### 上传共享文件
 
-所有群组成员均可以调用 `uploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `EMGroupChangeListener#OnSharedFileAddedFromGroup` 回调。
+所有群组成员均可以调用 `EMGroupManager#uploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `EMGroupChangeListener#OnSharedFileAddedFromGroup` 回调。
 
 示例代码如下：
 
@@ -89,7 +135,7 @@ EMClient.getInstance().groupManager().uploadGroupSharedFile(groupId, filePath, c
 
 #### 下载共享文件
 
-所有群成员均可调用 `asyncDownloadGroupSharedFile` 方法下载群组共享文件。
+所有群成员均可调用 `EMGroupManager#asyncDownloadGroupSharedFile` 方法下载群组共享文件。
 
 ```java
 // 同步方法，需要放到异步线程
@@ -111,7 +157,7 @@ EMClient.getInstance().groupManager().asyncDownloadGroupSharedFile(groupId, shar
 
 #### 删除共享文件
 
-所有群成员均可以调用 `DeleteGroupSharedFile` 方法删除群共享文件。删除共享文件后，其他群成员收到 `EMGroupChangeListener#OnSharedFileDeletedFromGroup` 回调。
+所有群成员均可以调用 `EMGroupManager#DeleteGroupSharedFile` 方法删除群共享文件。删除共享文件后，其他群成员收到 `EMGroupChangeListener#OnSharedFileDeletedFromGroup` 回调。
 
 群主和群管理员可删除全部的群共享文件，群成员只能删除自己上传的群文件。
 
@@ -125,7 +171,7 @@ EMClient.getInstance().groupManager().deleteGroupSharedFile(groupId, fileId);
 
 #### 从服务器获取共享文件
 
-所有群成员均可以调用 `fetchGroupSharedFileList` 方法从服务器获取群组的共享文件列表。
+所有群成员均可以调用 `EMGroupManager#fetchGroupSharedFileList` 方法从服务器获取群组的共享文件列表。
 
 ```java
 // 同步方法，会阻塞当前线程。
@@ -135,7 +181,7 @@ EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum,
 
 ### 更新群扩展字段
 
-仅群主和群管理员可以调用 `updateGroupExtension` 方法更新群组的扩展字段，群组扩展字段设置 JSON 格式的数据，用于自定义更多群组信息。群扩展字段的长度限制为 8 KB。
+仅群主和群管理员可以调用 `EMGroupManager#updateGroupExtension` 方法更新群组的扩展字段，群组扩展字段设置 JSON 格式的数据，用于自定义更多群组信息。群扩展字段的长度限制为 8 KB。
 
 示例代码如下：
 

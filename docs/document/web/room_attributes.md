@@ -12,8 +12,8 @@
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
-- 设置聊天室自定义属性；
-- 删除聊天室自定义属性。
+- 设置和更新/强制设置和更新聊天室自定义属性；
+- 删除/强制删除聊天室自定义属性。
 
 ## 前提条件
 
@@ -90,7 +90,7 @@ let option = {
 conn.getChatRoomAttributes(option).then((res) => console.log(res));
 ```
 
-#### 设置单个聊天室自定义属性
+#### 设置/更新单个聊天室自定义属性
 
 聊天室成员均可通过调用 `setChatRoomAttribute` 设置和更新单个自定义属性。设置后，其他聊天室成员收到 `onChatroomEvent` 回调，事件为 `updateChatRoomAttributes`。
 
@@ -105,7 +105,7 @@ let option = {
 conn.setChatRoomAttribute(option).then((res) => console.log(res));
 ```
 
-#### 设置多个聊天室自定义属性
+#### 设置/更新多个聊天室自定义属性
 
 聊天室成员均可以调用 `setChatRoomAttributes` 批量设置自定义属性。设置后，其他聊天室成员收到 `onChatroomEvent` 回调，事件为 `updateChatRoomAttributes`。
 

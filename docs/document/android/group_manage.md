@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMGroupManager` 类和 `EMGroup` 类用于管理群组，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM Android SDK 提供 [EMGroupManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager.html)、[EMGroup](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html) 和 [EMGroupChangeListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_group_change_listener.html)类用于管理群组，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散群组
 - 获取群组详情
@@ -33,11 +33,11 @@
 
 群组可分为私有群和公有群。私有群不可被搜索到，公开群可以通过群组 ID 搜索到。
 
-用户可以创建群组，设置群组的名称、描述、群组成员、创建群组的原因等属性，还可以设置 `EMGroupStyle` 参数指定群组的大小和类型。创建群组后，群组创建者自动成为群主。
+用户可以创建群组，设置群组的名称、描述、群组成员、创建群组的原因等属性，还可以设置 [EMGroupStyle](https://sdkdocs.easemob.com/apidoc/android/chat3.0/enumcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager_1_1_e_m_group_style.html) 参数指定群组的大小和类型。创建群组后，群组创建者自动成为群主。
 
-创建群组前，需设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`EMGroupOptions#inviteNeedConfirm`)。
+创建群组前，需设置群组类型[EMGroupStyle](https://sdkdocs.easemob.com/apidoc/android/chat3.0/enumcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager_1_1_e_m_group_style.html) 和进群邀请是否需要对方同意 (`EMGroupOptions#inviteNeedConfirm`)。
 
-- 设置群组类型（`EMGroupStyle`）以及入群是否需要群主和群管理员同意：
+- 设置群组类型 [EMGroupStyle](https://sdkdocs.easemob.com/apidoc/android/chat3.0/enumcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager_1_1_e_m_group_style.html) 以及入群是否需要群主和群管理员同意：
 
    - EMGroupStylePrivateOnlyOwnerInvite——私有群，只有群主和管理员可以邀请人进群；
    - EMGroupStylePrivateMemberCanInvite——私有群，所有群成员均可以邀请人进群；
@@ -60,19 +60,19 @@
 受邀用户直接进群，会收到如下回调：
 
 - 新成员会收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调；
-- 邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调；
-- 其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调。
+- 邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMembersJoined` 回调；
+- 其他群成员收到 `EMGroupChangeListener#onMembersJoined` 回调。
 
 2. 受邀用户需要确认才能进群。
 
 只有 `EMGroupOptions#inviteNeedConfirm` 设置为 `true` 和 `autoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `EMGroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
 
-- 用户同意入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMemberJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMemberJoined` 回调；
+- 用户同意入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationAccepted` 回调和 `EMGroupChangeListener#onMembersJoined` 回调，其他群成员收到 `EMGroupChangeListener#onMembersJoined` 回调；
 - 用户拒绝入群邀请后，邀请人收到 `EMGroupChangeListener#onInvitationDeclined` 回调。
 
 邀请用户入群的流程如下图所示：
 
-![img](@static/images/android/group-flow.png)
+![img](/images/android/group-flow.png)
 
 用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
@@ -91,7 +91,7 @@ EMClient.getInstance().groupManager().createGroup(groupName, desc, allMembers, r
 
 仅群主可以调用 `destroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `EMGroupChangeListener#onGroupDestroyed` 回调并被踢出群组。
 
-:::notice
+:::tip
 该操作是危险操作，解散群组后，将删除本地数据库及内存中的群相关信息及群会话。
 :::
 
@@ -215,7 +215,7 @@ String cursor = result.getCursor();
 
 ### 查询当前用户已加入的群组数量
 
-自 4.2.1 版本开始，你可以调用 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+自 4.2.1 版本开始，你可以调用 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [计费策略](/product/pricing_policy.html#增值服务费用)。
 
 ```java
 EMClient.getInstance().groupManager().asyncGetJoinedGroupsCountFromServer(new EMValueCallBack<Integer>() {
@@ -292,7 +292,7 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
     }
 
     // 群主或群管理员收到进群申请。群主和所有管理员收到该回调。
-    public void OnRequestToJoinReceivedFromGroup(string groupId, string groupName, string applicant, string reason){
+    public void onRequestToJoinReceived(String groupId, String groupName, String applicant, String reason){
     }
 
     // 群主或群管理员同意用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
@@ -365,19 +365,31 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
     public void onAdminRemoved(String groupId, String administrator) {
     }
 
-    // 群主转移权限。原群主和新群主会收到该回调。
+    // 群主转移权限。新群主会收到该回调。
     @Override
     public void onOwnerChanged(String groupId, String newOwner, String oldOwner) {
     }
 
     // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
+    // 已废弃。请使用 onMembersJoined(String, List) 代替。
     @Override
     public void onMemberJoined(String groupId, String member) {
     }
 
-    // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
+    // 有新成员（单个或多个）加入群组。除了新成员，其他群成员会收到该回调。
+    @Override
+    public void onMembersJoined(final String groupId, final List<String> members) {
+    }
+
+    // 有成员退出群。除了退群的成员，其他群成员会收到该回调。
+   // 已废弃。请使用 onMembersExited(String, List) 代替。
     @Override
     public void onMemberExited(String groupId, String member) {
+    }
+
+    // 有成员（单个或多个）退出群（主动或被动）。除了退群的成员，其他群成员会收到该回调。
+    @Override
+    public void onMembersExited(final String groupId,  final List<String> members) {
     }
 
     // 群组公告更新。群组所有成员会收到该回调。

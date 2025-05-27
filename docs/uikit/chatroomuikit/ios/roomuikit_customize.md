@@ -8,27 +8,27 @@
 
 - `GiftMessageCell`：礼物弹幕列表 Cell 类。
 
-![img](@static/images/uikit/chatroomios/GiftBarrageCell.png)
+![img](/images/uikit/chatroomios/GiftBarrageCell.png)
 
 - `GiftEntityCell`：礼物视图 Cell 类。
 
-![img](@static/images/uikit/chatroomios/GiftEntityCell.png)
+![img](/images/uikit/chatroomios/GiftEntityCell.png)
 
 - `MessageInputBar`：聊天输入框类。
 
-![img](@static/images/uikit/chatroomios/ChatInputBar.png)
+![img](/images/uikit/chatroomios/ChatInputBar.png)
 
 - `ReportOptionsController`：消息举报控制器类。
 
-![img](@static/images/uikit/chatroomios/ReportOptionsController.png)
+![img](/images/uikit/chatroomios/ReportOptionsController.png)
 
 - `ParticipantsController`：聊天室成员列表/黑名单列表控制器类。
 
-![img](@static/images/uikit/chatroomios/ParticipantsController.png)
+![img](/images/uikit/chatroomios/ParticipantsController.png)
 
 - `ChatroomParticipantsCell`：聊天室成员列表/黑名单列表 Cell 类。
 
-![img](@static/images/uikit/chatroomios/ChatroomParticipantsCell.png)
+![img](/images/uikit/chatroomios/ChatroomParticipantsCell.png)
 
 - `GiftsViewController`：礼物视图控制器类。
 
@@ -36,13 +36,13 @@
 
 你需要在确保你的服务器端的礼物业务处理完毕，再调用 ChatroomUIKit 提供的发送礼物消息 API。
 
-![img](@static/images/uikit/chatroomios/GiftsViewController.png)
+![img](/images/uikit/chatroomios/GiftsViewController.png)
 
 ## 自定义示例
 
 下面以如何自定义礼物弹幕视图 Cell 为例介绍如何自定义控件。首先，继承 `GiftMessageCell`，添加自己的逻辑，然后在 ChatroomUIKit 中注册新类替换原有的类。
 
-````Swift
+````swift
 class CustomGiftMessageViewCell: GiftMessageCell {
     lazy var redDot: UIView = {
         UIView().backgroundColor(.red).cornerRadius(.large)

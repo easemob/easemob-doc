@@ -9,8 +9,8 @@
 开始前，确保你的开发环境满足如下条件：
 
 - Xcode：推荐最新版本。
-- 安装 iOS 13.0 或以上版本的 iOS 模拟器或 Apple 设备。
-- CocoaPods 已经安装并且已跑通了集成。
+- 安装 iOS 14.0 或以上版本的 iOS 模拟器或 Apple 设备。
+- CocoaPods 1.14.3 及以上版本已经安装并且已跑通了集成。
 - 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
@@ -29,21 +29,19 @@
 
 你可以在应用加载时或使用 EaseChatUIKit 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
+初始化时，需传入 App Key。你可以在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 的 **应用详情** 页面查看 App Key。
 
 ```
 import EaseChatUIKit
     
-@UIApplicationMain
-class AppDelegate：UIResponder，UIApplicationDelegate {
-
-     var window：UIWindow？
-
-
-     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-         let error = EaseChatUIKitClient.shared.setup（appkey: "Appkey"）
-     }
-}
+// 在导入 EaseChatUIKit 库后在 appdelegate.swift 中 'func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool' 方法中添加如下代码：
+// UIKit 4.10.0 及以上版本      
+ let option = ChatOptions(appkey: "ExampleRequiredConfig.appKey")
+ option.enableConsoleLog = true
+ option.isAutoLogin = false
+ _ = ChatUIKitClient.shared.setup(option: option)
+// UIKit 4.10.0 以下版本
+let error = EaseChatUIKitClient.shared.setup(appKey: "Appkey")
 ```
 
 ### 第三步 登录
@@ -54,21 +52,57 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 EaseChatUIKit。
 :::
 
-为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
+为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用概览** > **用户认证** 页面创建用户并查看用户 token。**用户认证** 页面中的用户仅用于快速体验或调试目的。
 
-在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html)。
+在开发环境中，你需要在环信控制台 [创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见 [使用环信用户 token 鉴权](/product/easemob_user_token.html)。
+
+- 4.10.0 及以上版本：
 
 ```
-public final class YourAppUser: NSObject, EaseProfileProtocol {
+public final class YourAppUser: NSObject, ChatUserProfileProtocol {
 
             public func toJsonObject() -> Dictionary<String, Any>? {
-        ["ease_chat_uikit_info":["nickname":self.nickname,"avatarURL":self.avatarURL,"userId":self.id]]
+        ["ease_chat_uikit_user_info":["nickname":self.nickname,"avatarURL":self.avatarURL,"userId":self.id]]
     }
     
     
     public var id: String = ""
         
     public var nickname: String = ""
+    
+    public var remark: String = ""
+        
+    public var selected: Bool = false
+    
+    public override func setValue(_ value: Any?, forUndefinedKey key: String) {
+        
+    }
+
+    public var avatarURL: String = "https://accktvpic.oss-cn-beijing.aliyuncs.com/pic/sample_avatar/sample_avatar_1.png"
+
+}
+// 使用当前用户对象符合 `ChatUserProfileProtocol` 协议的用户信息登录EaseChatUIKit。
+// Token 生成参见快速开始中登录步骤中链接。
+ ChatUIKitClient.shared.login(user: YourAppUser(), token: ExampleRequiredConfig.chatToken) { error in 
+ }
+
+```
+
+- 4.10.0 以下版本：
+
+```
+public final class YourAppUser: NSObject, EaseProfileProtocol {
+
+            public func toJsonObject() -> Dictionary<String, Any>? {
+        ["ease_chat_uikit_user_info":["nickname":self.nickname,"avatarURL":self.avatarURL,"userId":self.id]]
+    }
+    
+    
+    public var id: String = ""
+        
+    public var nickname: String = ""
+    
+    public var remark: String = ""
         
     public var selected: Bool = false
     
@@ -89,9 +123,10 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 1. 在控制台[关闭好友关系检查功能](/product/enable_and_configure_IM.html#好友关系检查)，即无需添加好友即可聊天。
 2. 调用 `init` 方法将在控制台上创建的用户的用户 ID 传入 `conversationId` 参数，向该用户发送消息。
 
-```Swift
-let vc = ComponentsRegister.shared.MessageViewController.init(conversationId: <#创建用户的id#>, chatType: .chat)
+```swift
+ let vc = ComponentsRegister.shared.MessageViewController.init(conversationId: <#创建用户的id#>, chatType: .chat)
 //或者 push 或者 present 都可
+ vc.modalPresentationStyle = .fullScreen
  ControllerStack.toDestination(vc: vc)
 ```
 
@@ -99,5 +134,7 @@ let vc = ComponentsRegister.shared.MessageViewController.init(conversationId: <#
 
 在聊天页面下方输入消息，然后点击**发送**按钮发送消息。
 
-![img](@static/images/uikit/chatuikit/ios/message_first.png =350x750) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/message_first.png" title="发送第一条消息" />
+</ImageGallery>
 

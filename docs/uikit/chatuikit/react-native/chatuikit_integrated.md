@@ -30,16 +30,14 @@
 yarn add @react-native-async-storage/async-storage@^1.17.11 \
 @react-native-camera-roll/camera-roll@^5.6.0 \
 @react-native-clipboard/clipboard@^1.11.2 \
-@react-native-firebase/app@^18.0.0 \
-@react-native-firebase/messaging@^18.0.0 \
 date-fns@^2.30.0 \
 pinyin-pro@^3.18.3 \
 pure-uuid@^1.6.3 \
 react@18.2.0 \
 react-native@0.73.2 \
-react-native-agora@~4.2.6 \
-react-native-chat-uikit@~2.0.0 \
-react-native-chat-sdk@~1.3.1 \
+react-native-agora@^4.2.6 \
+react-native-chat-uikit@2.1.0 \
+react-native-chat-sdk@1.3.1 \
 react-native-audio-recorder-player@^3.5.3 \
 @easemob/react-native-create-thumbnail@^1.6.6 \
 react-native-device-info@^10.6.0 \
@@ -55,42 +53,25 @@ react-native-screens@^3.20.0 \
 react-native-video@^5.2.1 \
 react-native-web@~0.19.6 \
 react-native-webview@13.2.2 \
-twemoji@~14.0.2
+twemoji@>=14.0.2
 ```
 
 ### iOS 平台
 
-1. 更新 `Podfile` 文件：
+更新 iOS 文件夹下 `ProjectName/Info.plist` 文件内容：
 
-```ruby
-# ...
-target 'ProjectName' do
-  # ...
-
-  pod 'GoogleUtilities', :modular_headers => true
-  pod 'FirebaseCore', :modular_headers => true
-
-  permissions_path = File.join(File.dirname(`node --print "require.resolve('react-native-permissions/package.json')"`), "ios")
-  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
-  pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary"
-  pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone"
-  pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
-  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
-
-  # ...
-end
-```
-
-2. 更新 `Info.plist` 文件：
+在 dict 节点下，追加下面的权限。示例如下：
 
 ```xml
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
+  <!-- 追加部分开始 -->
+        <key>NSCameraUsageDescription</key>
+        <string></string>
+        <key>NSMicrophoneUsageDescription</key>
+        <string></string>
+        <key>NSPhotoLibraryUsageDescription</key>
+        <string></string>
+  <!-- 追加部分结束 -->
 </dict>
 ```
 
@@ -121,7 +102,7 @@ end
 ```tsx
 function App(): React.JSX.Element {
   return (
-    <Container options={{ appKey: 'appKey' }}>
+    <Container options={{ appKey: "appKey" }}>
       {/* 设置需要添加的组件。例如：会话列表。 */}
     </Container>
   );
@@ -137,7 +118,7 @@ function App(): React.JSX.Element {
   const palette = usePresetPalette();
   const light = useLightTheme(palette);
   return (
-    <Container options={{ appKey: 'appKey' }} palette={palette} theme={light}>
+    <Container options={{ appKey: "appKey" }} palette={palette} theme={light}>
       {/* 设置需要添加的组件。例如：会话列表。 */}
     </Container>
   );
@@ -151,7 +132,7 @@ function App(): React.JSX.Element {
 ```tsx
 function App(): React.JSX.Element {
   return (
-    <Container options={{ appKey: 'appKey' }} language={"zh-Hans"}>
+    <Container options={{ appKey: "appKey" }} language={"zh-Hans"}>
       {/* 设置需要添加的组件。例如：会话列表。 */}
     </Container>
   );
@@ -167,7 +148,7 @@ function App(): React.JSX.Element {
 ```tsx
 function App(): React.JSX.Element {
   return (
-    <Container options={{ appKey: 'appKey' }}>
+    <Container options={{ appKey: "appKey" }}>
       <NavigationContainer>
         <Root.Navigator initialRouteName={"Login"}>
           <Root.Screen name={"Login"} component={LoginScreen} />
@@ -203,9 +184,6 @@ export function ConversationListScreen(props: Props) {
       }}
     >
       <ConversationList
-        containerStyle={{
-          flexGrow: 1,
-        }}
         onClickedSearch={() => {
           // 跳转到搜索页面
           navigation.push("SearchConversation", {});
@@ -237,8 +215,9 @@ export function ConversationListScreen(props: Props) {
 联系人使用场景非常多。除了显示联系人列表，可以在创建群组、添加群成员等场景使用。
 
 例如：
+
 ```tsx
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function ContactListScreen(props: Props) {
@@ -251,19 +230,15 @@ export function ContactListScreen(props: Props) {
       }}
     >
       <ContactList
-        contactType={'contact-list'}
-        containerStyle={{
-          flexGrow: 1,
-          // backgroundColor: 'red',
-        }}
+        contactType={"contact-list"}
         onClickedSearch={() => {
-          navigation.navigate('SearchContact', {
-            params: { searchType: 'contact-list' },
+          navigation.navigate("SearchContact", {
+            params: { searchType: "contact-list" },
           });
         }}
         onClickedItem={(data) => {
           if (data?.userId) {
-            navigation.push('ContactInfo', { params: { userId: data.userId } });
+            navigation.push("ContactInfo", { params: { userId: data.userId } });
           }
         }}
       />
@@ -279,22 +254,37 @@ export function ContactListScreen(props: Props) {
 例如：
 
 ```tsx
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import type { RootParamsName, RootScreenParamsList } from "../routes";
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function ConversationDetailScreen(props: Props) {
-  const { navigation, route } = props;
+  const { route } = props;
+  const name = route.name as RootParamsName;
+
+  // 必须填写的参数
   const convId = ((route.params as any)?.params as any)?.convId;
   const convType = ((route.params as any)?.params as any)?.convType;
-  const convName = ((route.params as any)?.params as any)?.convName;
-  const operateType = ((route.params as any)?.params as any)?.operateType;
 
-  const selectedContacts = ((route.params as any)?.params as any)
-    ?.selectedContacts;
-  const listRef = React.useRef<MessageListRef>({} as any);
-  const inputRef = React.useRef<MessageInputRef>({} as any);
-  const { top, bottom } = useSafeAreaInsets();
-  const im = useChatContext();
+  // 搜索模式
+  const messageId = ((route.params as any)?.params as any)?.messageId;
+
+  // 是否是多选模式
+  const selectType = ((route.params as any)?.params as any)?.selectType;
+
+  // 话题模式的参数
+  const thread = ((route.params as any)?.params as any)?.thread;
+  const firstMessage = ((route.params as any)?.params as any)?.firstMessage;
+
+  // 组件模式
+  const comType = React.useRef<ConversationDetailModelType>(
+    name === "ConversationDetail"
+      ? "chat"
+      : name === "MessageThreadDetail"
+      ? "thread"
+      : name === "MessageHistory"
+      ? "search"
+      : "create_thread"
+  ).current;
 
   return (
     <SafeAreaView
@@ -303,144 +293,13 @@ export function ConversationDetailScreen(props: Props) {
       }}
     >
       <ConversationDetail
-        containerStyle={{
-          flexGrow: 1,
-          // backgroundColor: 'red',
-        }}
+        type={comType}
         convId={convId}
         convType={convType}
-        convName={convName}
-        input={{
-          ref: inputRef,
-          props: {
-            top,
-            bottom,
-            onClickedCardMenu: () => {
-              // 跳转到联系人列表选择后，发送名片消息
-              navigation.push('ShareContact', {
-                params: {
-                  convId,
-                  convType,
-                  convName,
-                  operateType: 'share_card',
-                },
-              });
-            },
-          },
-        }}
-        list={{
-          ref: listRef,
-          props: {
-            onClickedItem: (
-              id: string,
-              model: SystemMessageModel | TimeMessageModel | MessageModel
-            ) => {
-              // 点击消息气泡，处理对应事件。
-              console.log('onClickedItem', id, model);
-              if (model.modelType !== 'message') {
-                return;
-              }
-              const msgModel = model as MessageModel;
-              if (msgModel.msg.body.type === ChatMessageType.IMAGE) {
-                navigation.push('ImageMessagePreview', {
-                  params: {
-                    msgId: msgModel.msg.msgId,
-                    localMsgId: msgModel.msg.localMsgId,
-                  },
-                });
-              } else if (msgModel.msg.body.type === ChatMessageType.VIDEO) {
-                navigation.push('VideoMessagePreview', {
-                  params: {
-                    msgId: msgModel.msg.msgId,
-                    localMsgId: msgModel.msg.localMsgId,
-                  },
-                });
-              } else if (msgModel.msg.body.type === ChatMessageType.FILE) {
-                navigation.push('FileMessagePreview', {
-                  params: {
-                    msgId: msgModel.msg.msgId,
-                    localMsgId: msgModel.msg.localMsgId,
-                  },
-                });
-              } else if (msgModel.msg.body.type === ChatMessageType.CUSTOM) {
-                const body = msgModel.msg.body as ChatCustomMessageBody;
-                const event = body.event;
-                const params = body.params;
-                if (event === gCustomMessageCardEventType) {
-                  const cardParams = params as {
-                    userId: string;
-                    nickname: string;
-                    avatar: string;
-                  };
-                  navigation.push('ContactInfo', {
-                    params: {
-                      userId: cardParams.userId,
-                    },
-                  });
-                }
-              }
-            },
-            onClickedItemAvatar: (id, model) => {
-              // 点击消息气泡头像，查看详情。
-              console.log('onClickedItemAvatar', id, model);
-              if (model.modelType !== 'message') {
-                return;
-              }
-              const msgModel = model as MessageModel;
-              const userId = msgModel.msg.from;
-
-              const userType = msgModel.msg.chatType as number;
-              if (userType === ChatMessageChatType.PeerChat) {
-                navigation.navigate('ContactInfo', {
-                  params: { userId: userId },
-                });
-              } else if (userType === ChatMessageChatType.GroupChat) {
-                const groupId = msgModel.msg.conversationId;
-                const selfId = im.userId;
-                if (selfId === im.userId) {
-                  navigation.navigate('ContactInfo', {
-                    params: {
-                      userId: userId,
-                    },
-                  });
-                } else {
-                  navigation.navigate('GroupParticipantInfo', {
-                    params: {
-                      groupId: groupId,
-                      userId: userId,
-                    },
-                  });
-                }
-              }
-            },
-          },
-        }}
-        onBack={() => {
-          // 返回上一级页面
-          navigation.goBack();
-        }}
-        onClickedAvatar={(params: {
-          convId: string;
-          convType: ChatConversationType;
-          ownerId?: string | undefined;
-        }) => {
-          // 点击会话的头像，事件处理。
-          if (params.convType === ChatConversationType.PeerChat) {
-            navigation.navigate({
-              name: 'ContactInfo',
-              params: { params: { userId: params.convId } },
-              merge: true,
-            });
-          } else if (params.convType === ChatConversationType.GroupChat) {
-            navigation.navigate({
-              name: 'GroupInfo',
-              params: {
-                params: { groupId: params.convId, ownerId: params.ownerId },
-              },
-              merge: true,
-            });
-          }
-        }}
+        msgId={messageId}
+        thread={thread}
+        firstMessage={firstMessage}
+        selectType={selectType}
       />
     </SafeAreaView>
   );

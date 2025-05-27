@@ -19,8 +19,8 @@
 | isPinned     | 是否为置顶会话。       |
 | pinnedTime  | 会话置顶的 UNIX 时间戳，单位为毫秒。未置顶时值为 `0`。   |
 | setExt  | 获取会话扩展属性。    |
-| latestMessage  | 获取会话的最新一条消息。    |
-| lastReceivedMessage  | 获取最近收到的一条消息。    |
+| latestMessage  | 获取会话中的最新一条消息。该消息可能是当前用户发送的，也可能是对端用户发送。       |
+| lastReceivedMessage  | 获取会话中收到的最新一条消息，即当前用户收到的对端用户发送的最新消息。    |
 | unreadCount  | 获取会话的消息未读数。     |
 | markMessageAsRead  | 将消息标为已读。    |
 | markAllMessagesAsRead  | 将所有消息标为已读。    |

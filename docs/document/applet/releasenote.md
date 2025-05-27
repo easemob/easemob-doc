@@ -2,6 +2,172 @@
 
 <Toc />
 
+## 版本 V4.15.0 Dev 2025-5-21（开发版）
+
+### 新增特性
+
+- 支持获取 [群组](group_manage.html#获取群成员列表)/[聊天室成员列表](room_members.html#获取聊天室成员列表) 时，列明成员的用户 ID 和角色。
+- [撤回消息](message_recall.html) 时，支持群组中群主/管理员撤回其他用户发送的消息。
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
+  - 新增群成员进出事件 [membersPresence](group_manage.html#监听群组事件) 和 [membersAbsence](group_manage.html#监听群组事件)。原事件 `memberPresence` 和 `membersAbsence` 仍有效。 
+   
+### 优化
+
+- 修改 Token 即将过期事件 `onTokenWillExpire` 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
+- 获取群组成员列表的原方法 `listGroupMembers` 废弃。使用 [getGroupMembers](group_manage.html#获取群成员列表) 替换。
+- 获取群组成员列表的原方法 `listChatRoomMembers` 废弃。使用 [getChatRoomMembers](room_members.html#获取聊天室成员列表) 替换。
+
+## 版本 V4.14.0 Dev 2025-4-21（开发版）
+
+### 新增特性
+
+- 支持 [GIF 图片消息](message_send_receive.html#发送和接收-gif-图片消息)。
+- 支持 [群组头像功能](group_attributes.html#管理群组头像)。
+- 支持 [消息附件鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持 [自定义设备平台](multi_device.html#设置登录设备的平台)。
+- Uni-app 离线推送安卓平台支持 [Google FCM](push/uniapp_push_fcm.html)。
+
+### 优化
+
+- 原创建群组方法 `createGroup` 方法废弃，使用 [createGroupVNext](group_manage.html#创建群组) 方法代替。
+
+## 版本 V4.13.0 Dev 2025-3-12（开发版）
+
+### 新增特性
+
+- [IM SDK] 发送后修改消息接口 [modifyMessage](message_modify.html) 支持修改各类消息：
+  - 文本消息：支持修改 `msg` 和 `ext` 字段。
+  - 自定义消息：支持修改 `customEvent` 、`customExts` 和 `ext` 字段。
+  - 图片/语音/视频/文件/位置/合并消息：仅支持修改 `ext` 字段。
+  - 命令消息：不支持修改。
+
+- [IM SDK] 小程序 SDK 支持运行到微信小游戏平台。
+
+### 优化
+
+[IM SDK] SDK 内部捕获重试 DNS 失败的错误。
+
+## 版本 V4.12.0 2025-1-10
+
+### 新增特性
+
+- [IM SDK] 消息修改事件 `onModifiedMessage` 中增加消息 `ext` 字段。添加该字段后，修改发送成功的消息后，消息接收方会收到发送方发送修改后的消息时添加的扩展信息。
+-  加入聊天室 `joinChatRoom` 成功的回调新增 `info` 字段，包含如下信息，即用户加入聊天室后会收到如下信息：
+   - 聊天室创建时间：`createTimestamp`。
+   - 是否开启全员禁言：`isAllMembersMuted`。
+   - 是否在白名单中：`isInAllowlist`。
+   - 当前聊天室成员数：`memberCount`。
+   - 成员禁言到期时间：`muteExpireTimestamp`。
+  
+### 优化
+
+- [IM SDK] 小程序 SDK 支持 HTTPDNS, 默认开启, 用户无需手动传入 `url` 和 `apiUrl`，SDK 会自动获取。
+
+### 修复
+
+- [IM SDK] 格式化小程序 SDK API 请求失败错误码，与 Web 端统一。**请注意使用密码登录 IM 返回的错误码和旧版本不兼容**。
+- [IM SDK] 修复 Uniapp SDK 4.36 版本运行到鸿蒙平台，出现的重连问题。
+- [IM SDK] 修复偶现的无法拉取消息的问题。
+
+## 版本 V4.11.0 Dev 2024-12-3（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
+- [IM SDK] 聊天室禁言回调 `muteMember` 新增 `muteTimestamp` 参数，表示禁言过期时间。
+- [IM SDK] 群组/聊天室禁言事件 `muteMember` 新增 `userId` 字段，表示被禁言的成员。
+- [IM SDK] uniapp SDK 支持鸿蒙系统。
+
+### 优化
+
+[IM SDK] SDK 的 message 对象中新增 `parseDownloadResponse`、`download` 方法。目前，SDK 的 utils 对象和 message 对象中均包含 `parseDownloadResponse`、`download` 方法。
+
+### 修复
+
+[IM SDK] 修复消息置顶事件 `onMessagePinEvent` 中的 `conversationId` 参数值错误的问题。
+
+## 版本 V4.10.0 2024-10-11（开发版）
+
+### 新增特性
+
+- 聊天室公告修改事件中增加公告内容：`updateAnnouncement` 事件中增加 `announcement` 字段，表示更新的公告。
+- 新增两个[错误码](error.html)：
+  - `WEBIM_USER_ALREADY_LOGIN` 208：用户已登录。单设备登录时，若调用登录方法 `open` 时用户已经登录，会触发该错误。
+  - `MESSAGE_SEND_TIMEOUT` 512：发送消息超时。例如，发消息时连接断开，会提示该错误。
+- 新增 `onShow` 方法，小程序或 uniapp 在 `onShow` 生命周期中执行该方法，可优化重连速度。
+   
+### 优化
+
+调整了登录方法的 `open().then` 与连接成功事件 `onConnected` 的触发时机。优化后，调用登录方法 `open` 后，先触发连接成功与否的事件 `onConnected` 或 `onDisconnected`，然后再触发登录 `open().then` 或者 `open().catch`，以确保连接完全建立后再进行后续处理。之前版本为调用登录方法，先触发登录回调，然后触发连接事件，导致需要等待连接成功事件 `onConnected` 触发后才能发送消息。同时，优化后，鉴权失败等登录错误会在 `open.catch` 中抛出。
+
+## 版本 V4.9.2 2024-09-20（开发版）
+
+### 新增特性
+
+- [IM SDK] `removeHistoryMessages` 方法[支持单向删除服务端的聊天室消息](message_delete.html#单向删除服务端的历史消息)。
+
+## 版本 V4.9.1 Dev 2024-09-06（开发版）
+
+### 新增特性
+
+- [IM SDK] uni-app SDK 支持 [uni-app 推送插件](/document/applet/push/uniapp_push.html)。
+
+### 修复
+  
+- [IM SDK] 修复一些类型问题。
+
+## 版本 V4.8.1 Dev 2024-07-17（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[日志上报](initialization.html#日志上报)功能, 即将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
+
+## 版本 V4.8.0 Dev 2024-07-01（开发版）
+
+### 新增特性
+
+- [IM SDK] [`onDisconnected` 事件](initialization.html#连接状态相关)新增断开原因回调参数, 告知用户触发 `onDisconnected` 的原因。
+- [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)： 
+  - `setLoginInfoCustomExt`：设置登录设备的扩展信息。
+  - `onDisconnected`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
+- [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+  - `joinChatRoom` 方法新增 `ext` 和 `leaveOtherRooms` 参数，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
+  - `ChatroomEvent` 新增 `ext` 扩展字段，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+- [IM SDK] 新增 `ConnectionParameters#isFixedDeviceId` 初始化参数，默认为 `true`，[使用固定的设备 ID](multi_device.html)。之前，每个 SDK 实例连接时，SDK 默认均使用不同的随机字符串作为设备标识。
+- [IM SDK] `destroyChatRoom` 方法[支持聊天室所有者解散聊天室](room_manage.html#解散聊天室)。
+
+## 版本 V4.7.0 Dev 2024-04-30（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增 `getJoinedChatRooms` 方法，用于[获取当前用户加入的聊天室列表](room_manage.html#获取当前用户加入的聊天室列表)。
+- [IM SDK] [撤回消息](message_recall.html#实现方法)接口 `recallMessage` 中新增 `ext` 参数，支持传入自定义字符串，设置扩展信息。
+- [IM SDK] SDK logger 中新增 `setConsoleLogVisibility` 方法，用于[设置日志是否输出到控制台](initialization.html#输出信息到日志文件)。
+
+### 修复
+
+- [IM SDK] 修复消息 `allowGroupAck` 状态错误问题。
+
+## 版本 V4.6.0 Dev 2024-04-02（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[置顶消息功能](message_pin.html)。
+  - `pinMessage`: 置顶消息。
+  - `unpinMessage`: 取消置顶消息。
+  - `getServerPinnedMessages`：从服务器获取指定会话的置顶消息。
+  - `onMessagePinEvent`: 当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
+- [IM SDK] 消息修改回调 `onModifiedMessage` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
+- [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
+
+### 优化
+
+- [IM SDK] 优化 Token 登录时的错误提示信息，使错误提示更精细。
+
+### 修复
+
+- [IM SDK] 修复消息 `onlineState` 状态错误问题。
+
 ## 版本 V4.5.1 Dev 2024-02-22（开发版）
 
 ### 优化
@@ -16,10 +182,10 @@
 
 ### 新增特性
 
-- [IM SDK] 聊天室和群组成员进出事件增加成员人数 `memberCount` 字段。
+- [IM SDK] [聊天室和群组成员进出事件增加成员人数 `memberCount` 字段](room_manage.html#实时更新聊天室成员人数)。
 - [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#单向清空服务端的聊天记录) 方法, 用于清空当前用户的聊天记录，包括消息和会话。
 - [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-id-列表) 方法, 可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
-- [IM SDK] 新增 [useReplacedMessageContents](message_send_receive.html#发送文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
+- [IM SDK] 新增 [useReplacedMessageContents](message_send_receive.html#发送和接收文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
 
 ### 优化
 
@@ -51,7 +217,7 @@
 ### 新增特性
 
 - [IM SDK] 新增[好友备注功能](user_relationship.html#设置好友备注)。
-- [IM SDK] 消息结构新增 `broadcast` 字段, 用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+- [IM SDK] 消息结构新增 `broadcast` 字段, 用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
 
 ### 优化
 
@@ -71,9 +237,9 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送合并消息)。
+- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送和接收合并消息)。
 - [IM SDK] 新增[消息修改功能](message_modify.html)。
-- [IM SDK] 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
+- [IM SDK] 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送和接收定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
 
 ### 修复
 
@@ -125,9 +291,9 @@
 
 ### 新增特性
 
-- [IM SDK] [创建群组方法 `createGroup`](group_manage.html#创建群组) 和[修改群信息方法 `modifyGroup`](group_attributes.html#修改群组名称和描述) 新增 `ext` 字段支持群扩展信息。
+- [IM SDK] [创建群组方法 `createGroup`](group_manage.html#创建群组) 和[修改群信息方法 `modifyGroup`](group_attributes.html#修改群组信息) 新增 `ext` 字段支持群扩展信息。
 - [IM SDK] 群组通知事件增加[群组信息修改事件 `updateInfo`](group_manage.html#监听群组事件)。
-- [IM SDK] 新增[聊天室消息优先级](message_send_receive.html)。
+- [IM SDK] 新增[聊天室消息优先级](#聊天室消息优先级与消息丢弃逻辑)。
 - [IM SDK] 支持同时[对多个群组成员禁言和解除禁言](group_members.html#管理群组禁言)。
 
 ## 版本 V4.1.1 Dev 2022-9-26

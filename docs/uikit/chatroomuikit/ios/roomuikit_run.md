@@ -38,7 +38,7 @@
 
 2. 在键盘上按下 **cmd**+**B** 进行编译，编译结果会有如下报错。
 
-![img](@static/images/uikit/chatroomios/buildError.png)
+![img](/images/uikit/chatroomios/buildError.png)
 
    将获取的 App Key、用户 token 和用户 ID 分别填入上图中的 `appKey`、`chatToken` 和 `userId` 字段。
 

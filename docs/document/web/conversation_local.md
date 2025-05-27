@@ -1,30 +1,11 @@
 # 管理本地会话
 
-环信即时通讯 IM Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 `LocalCache` 模块对本地会话数据进行管理，支持现代浏览器，例如 Chrome、Firefox、Safari 以及使用这些引擎的其他浏览器（例如 Microsoft Edge），**不支持 Internet Explorer（IE）浏览器**。
+环信即时通讯 IM Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 `LocalCache` 模块对本地会话数据进行管理。
 
-使用环信即时通讯 IM Web SDK 时，要支持本地会话存储，需要集成本地存储插件。**该插件只支持通过按需导入的方式集成**。
-
-示例代码如下：
-
-```javascript
-import MiniCore from "easemob-websdk/miniCore/miniCore";
-import * as contactPlugin from "easemob-websdk/contact/contact";
-import * as localCachePlugin from "easemob-websdk/localCache/localCache";
-
-const miniCore = new MiniCore({
-  appKey: "your appKey",
-});
-// 使用联系人插件, "contact" 为固定值。
-miniCore.usePlugin(contactPlugin, "contact");
-// 使用本地存储插件, "localCache" 为固定值。
-miniCore.usePlugin(localCachePlugin, "localCache");
-
-// 登录即时通讯 IM。
-miniCore.open({
-  username: "userId",
-  password: "password",
-});
-```
+:::tip
+1. 若使用该特性，首先要[集成本地存储插件](#集成本地存储插件)。该插件只支持通过[按需导入 SDK](import_sdk_minicore.html)的方式集成。
+2. 该特性**支持现代浏览器**，例如 Chrome、Firefox、Safari 以及使用这些引擎的其他浏览器（例如 Microsoft Edge），**不支持 Internet Explorer（IE）浏览器**。
+:::
 
 ## 技术原理
 
@@ -41,9 +22,9 @@ miniCore.open({
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 4.2.1 或以上版本初始化，详见 [SDK 集成概述](overview.html#sdk-初始化)；
+- 完成 SDK 4.2.1 或以上版本初始化，详见 [初始化](initialization.html)文档；
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
-- 集成本地会话存储插件。
+- [按需导入 SDK](import_sdk_minicore.html)，[集成本地存储插件](#集成本地存储插件)。
 
 ## 实现方法
 
@@ -64,6 +45,30 @@ interface ConversationItem {
 	// 会话自定义字段。
 	customField?: Record<string, any>;
 }
+```
+
+### 集成本地存储插件
+
+若支持本地会话存储，需要集成本地存储插件。**该插件只支持通过[按需导入 SDK](import_sdk_minicore.html)的方式集成**。示例代码如下：
+
+```javascript
+import MiniCore from "easemob-websdk/miniCore/miniCore";
+import * as contactPlugin from "easemob-websdk/contact/contact";
+import * as localCachePlugin from "easemob-websdk/localCache/localCache";
+
+const miniCore = new MiniCore({
+  appKey: "your appKey",
+});
+// 使用联系人插件, "contact" 为固定值。
+miniCore.usePlugin(contactPlugin, "contact");
+// 使用本地存储插件, "localCache" 为固定值。
+miniCore.usePlugin(localCachePlugin, "localCache");
+
+// 登录即时通讯 IM。
+miniCore.open({
+  username: "userId",
+  password: "password",
+});
 ```
 
 ### 获取本地会话列表
@@ -140,7 +145,9 @@ miniCore.localCache.clearConversationUnreadCount(options).then(()=>{
 
 ### 删除单个本地会话
 
-你可以调用 `removeLocalConversation` 方法删除单个本地会话，示例代码如下：
+你可以调用 `removeLocalConversation` 方法删除单个本地会话。会话删除后，其他用户不受影响。
+
+示例代码如下：
 
 ```javascript
 const options = {

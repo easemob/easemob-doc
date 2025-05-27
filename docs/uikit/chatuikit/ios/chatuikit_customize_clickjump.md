@@ -38,7 +38,7 @@
 | `navigationClick`    | 导航栏所有点击方法     | 是     |
 | `viewDetail`   | 查看联系人或群组详情页面     | 是     |
 | `rightItemsAction`    | 导航右侧按钮点击方法     | 是     |
-| `pop`   | 是     | 页面返回上一级方法     |
+| `pop`   | 页面返回上一级方法     | 是     |
 | `messageWillSendFillExtensionInfo`    | 消息即将发送前可添加扩展信息方法     | 是     |
 | `filterMessageActions`    | 过滤长按后弹出菜单上菜单项的方法     | 是     |
 | `showMessageLongPressedDialog`   | 显示消息长按后的菜单     | 是     |
@@ -72,7 +72,7 @@
 | `rightItemsAction`    | 导航右侧按钮点击方法     | 是     |
 | `pop`   | 页面返回上一级方法     |   是   |
 | `setupTitle`    | 设置不同类型联系人页面导航标题     | 是     |
-| `receiveContactHeaderAction`    | 是     | 是     |
+| `receiveContactHeaderAction`    | 联系人列表 Header Cell 的点击事件 | 是     |
 | `searchAction`    | 点击搜索框     | 是     |
 | `addContact`    | 添加联系人弹窗     | 是     |
 | `confirmAction`    | 导航右侧文本按钮点击事件     | 是     |

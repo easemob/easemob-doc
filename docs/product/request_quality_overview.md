@@ -10,7 +10,7 @@
 
 ## 请求质量监控
 
-![img](@static/images/console/requestmonitor/terminalsum.png)
+![img](/images/console/requestmonitor/terminalsum.png)
 
 ### 终端数据
 
@@ -18,7 +18,7 @@
 
 #### 指标类型
 
-![img](@static/images/console/requestmonitor/terminalindextype.png)
+![img](/images/console/requestmonitor/terminalindextype.png)
 
 | 指标类型  | 描述  |
 | :----------- | :-------------------------------- |
@@ -27,12 +27,12 @@
 |发送消息 |客户端发送的消息的统计。|
 |好友管理 |客户端加好友、删除好友等好友相关操作。|
 |用户管理 |客户端创建用户、更新用户信息等用户管理操作。|
-|群组管理 |客户端创建群组、删除群组等群组管理操作。|
-|聊天室管理 |客户端创建聊天室、删除聊天室等群组管理操作。|
+|群组管理 |客户端创建群组、解散群组等群组管理操作。|
+|聊天室管理 |客户端创建聊天室、解散聊天室等群组管理操作。|
 
 #### 指标
 
-![](@static/images/console/requestmonitor/terminalindex.png)
+![](/images/console/requestmonitor/terminalindex.png)
 
 |指标|描述|
 | :----------- | :-------------------------------- |
@@ -63,10 +63,10 @@
 
 Server API 数据包含了一部分 SDK 对 RESTful API 接口的调用。例如，SDK 端的群组操作通过 RESTful API 调用，因此也统计在 Server API 数据中。
 
-![](@static/images/console/requestmonitor/serverapidata.png)
+![](/images/console/requestmonitor/serverapidata.png)
 
 #### 指标类型
-![](@static/images/console/requestmonitor/serverapiindexdata.png)
+![](/images/console/requestmonitor/serverapiindexdata.png)
 
 |指标类型|描述|
 | :----------- | :-------------------------------- |
@@ -80,7 +80,7 @@ Server API 数据包含了一部分 SDK 对 RESTful API 接口的调用。例如
 
 #### 指标
 
-![](@static/images/console/requestmonitor/serverapiindex.png)
+![](/images/console/requestmonitor/serverapiindex.png)
 
 |指标|说明|
 | :----------- | :-------------------------------- |

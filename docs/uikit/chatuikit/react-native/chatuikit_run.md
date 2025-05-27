@@ -4,81 +4,77 @@
 
 环信提供一个开源的聊天示例项目，演示了如何使用该 UIKit 快速搭建聊天页面，实现完整业务。
 
-本文展示如何编译并运行 React Native 平台的聊天 UIKit 示例项目。
+## 环境要求
 
-## 前提条件
+- MacOS 12 或以上版本
+- React-Native 0.71 或以上版本
+- NodeJs 20.18 或以上版本
+- iOS 平台：xcode 15 或以上版本
+- Android 平台：Android Studio 2022.3 或以上版本
 
-开始前，确保你的开发环境满足如下条件：
+## 下载项目
 
-- MacOS 12 或以上版本；
-- React Native 0.71 或以上版本；
-- NodeJs 16.18 或以上版本；
-- 对于 `iOS` 平台，需要 `Xcode` 工具，版本建议 14 或以上；
-- 对于 `Android` 平台，需要 `Android studio` 工具，版本建议 2022 或以上。
-
-## 操作步骤
-
-### 下载项目
-
-可以通过 [GitHub 地址](https://github.com/easemob/react-native-chat-library)下载项目。
-
-### 初始化项目
-
-下载完成之后，打开文件目录。运行以下命令初始化项目：
+克隆项目仓库：
 
 ```sh
-yarn && yarn uikit-prepack
+git clone https://github.com/easemob/easemob-uikit-reactnative.git
 ```
 
-- 对于 iOS 平台，运行 `pod install` 初始化原生部分的依赖配置。
+## 初始化项目
 
 ```sh
-cd example/ios && pod install
+cd easemob-uikit-reactnative
+yarn && yarn prepare
 ```
 
-- 对于 Android 平台，建议使用 Android studio sync 示例项目。
+## 编译运行示例项目
 
-使用 `Android studio` 应用打开 `example/android` 目录，同步项目。
-
-### 本地配置
-
-登录[环信即时通讯控制台](https://console.easemob.com/user/login)，获取 App Key。将 App Key、用户 ID 和用户 token 填入 `example` 的配置文件 `example/src/env.ts` 中。
-
-例如：
-
-```js
-export const test = false;
-export const isDevMode = true;
-export const appKey = "xxxx";
-export const accountType = "easemob";
-export const agoraAppId = "";
-export const demoType = 2; // 1: ui-dev; 2: dev; 3：prod
-export const account = [{ id: "aa", token: "bb" }];
-```
-
-手动设置区域，目前支持国内和海外。配置文件在 `packages/react-native-chat-uikit/src/config.local.ts`
-
-```js
-export const language = "zh-Hans"; // 'en' or 'zh-Hans'
-export const release_area = "china"; // 'china' or 'global'
-```
-
-### 编译和运行
-
-在 debug 模式下，运行本地服务，在调试过程中可以修改 JavaScript 文件，查看修改后的效果。
+1. 进入示例项目目录：
 
 ```sh
+cd examples/uikit-example
+```
+
+2. 设置 App Key：
+
+修改 `examples/uikit-example/src/env.ts` 文件内容，填写 `appKey` 参数。
+
+你可以在[环信控制台](https://console.easemob.com/)创建应用并获取 App Key。
+
+3. 运行项目：
+
+- iOS 平台
+
+```sh
+# 安装依赖
+cd ios && pod install && cd ..
+
+# 编译运行
 yarn run ios
 ```
 
-或者
+- Android 平台
 
 ```sh
+# 直接编译运行
 yarn run android
 ```
 
-## 可能出现的问题
+## 运行效果
 
-1. Q：Android 平台应用编译失败，可能的原因是什么？
+成功运行后，你将看到包含以下功能的即时通讯应用：
 
-A: 可能需要 Android Studio 工具的 `cmake 3.10.2` 插件。
+- 用户登录
+- 会话列表
+- 聊天界面
+- 通讯录
+- 个人设置
+
+## 常见问题
+
+如遇到编译或运行问题，可进行如下检查：
+
+1. 确保已安装所有必需的开发环境。
+2. 检查 App Key 是否正确配置。
+3. iOS 编译失败时，尝试清理项目：`cd ios && pod deintegrate && pod install`。
+4. Android 编译失败时，检查 Android Studio 配置和 SDK 安装情况。

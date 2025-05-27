@@ -30,35 +30,36 @@ _localization.displayLanguageWhenNotSupported = const Locale('en');
 
 ## 添加新语言
 
-可以通过 `ChatUIKitLocalizations.addLocales` 方法扩展国际化支持的语言，对应文字的常量定义在 `ChatUIKitLocal` 文件中。你可以添加自己的 `MapLocale` 对象传入到 `ChatUIKitLocalizations` 中实现国际化。
+可以通过 `ChatUIKitLocalizations.addLocales` 方法扩展国际化支持的语言，对应文字的常量定义在 `ChatUIKitLocal` 文件中。你可以添加自己的 `ChatLocal` 对象传入到 `ChatUIKitLocalizations` 中实现国际化。
 
 例如，你可以通过以下方式添加法语支持：
 
 ```dart
 
 class _MyAppState extends State<MyApp> {
-  final ChatUIKitLocalizations _chatUIKitLocalizations =
+  final ChatUIKitLocalizations _localization =
       ChatUIKitLocalizations();
 
   @override
   void initState() {
     super.initState();
-    _chatUIKitLocalizations.addLocales(locales: const [
-      MapLocale('fr', {
+    _localization.addLocales(locales: const [
+      ChatLocal('fr', {
         ChatUIKitLocal.conversationsViewSearchHint: 'Recherche',
         // 需要根据ChatUIKitLocal中的定义将文字补充完整。
         ...
-      }),
+      })
     ]);
+    // 添加语言后需要进行resetLocales操作
+    _localization.resetLocales();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: _chatUIKitLocalizations.localizationsDelegates,
-      supportedLocales: _chatUIKitLocalizations.supportedLocales,
-      localeResolutionCallback:
-          _chatUIKitLocalizations.localeResolutionCallback,
+      localizationsDelegates: _localization.localizationsDelegates,
+      supportedLocales: _localization.supportedLocales,
+      localeResolutionCallback:_localization.localeResolutionCallback,
       ...
     );
   }

@@ -7,15 +7,78 @@
 :::tip
 1. 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
 2. 聊天室中发消息时，不会同步给发送方。
+3. 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在[环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
+4. [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
 :::
 
-**发送频率**：对于单个应用来说，调用该 API 每次最多可向 10 个聊天室发送消息，而且该 API 存在以下两个限制：
+- **发送频率**
 
-- 每秒最多可发送 100 条消息：例如，你每次向 10 个聊天室发送消息，即发送了 10 条消息，你每秒最多可调用 10 次该接口。第 11 次调用时，则报 403 错误。
+<table>
+<tbody>
+<tr>
+<td width="110">
+<p><strong>限制</strong></p>
+</td>
+<td>
+<p><strong>描述</strong></p>
+</td>
+<td>
+<p><strong>超限报错</strong></p>
+</td>
+<td>
+<p><strong>是否可调</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>100 次/秒</p>
+</td>
+<td>
+<p>每秒限调 100 次。</p>
+</td>
+<td>
+<p>第 101 次调用时会报 429 错误 &ldquo;This request has reached api limit&rdquo;。</p>
+</td>
+<td rowspan="2">
+<p>两个限制均<strong>可调</strong>。若上调其中一个，另一个自动等比例提升。</p>
+<p>例如，将 100 次/秒上调至 200 次/秒后，每秒限发条数自动上调至 200，即 200 条/秒。反之，将 100 条/秒上调至 200 条/秒后，每秒限调次数自动上调至 200，即 200 次/秒。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>100 条/秒</p>
+</td>
+<td>
+<p>每秒限发100 条消息。</p>
+</td>
+<td>
+<p>例如，你每次向 10 个聊天室发送消息，即发送了 10 条消息，你每秒最多可调用 10 次该接口。第 11 次调用时，则报 403 错误，即 " message send reach limit"。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>10 个聊天室/次</p>
+</td>
+<td>
+例如，你每次向 10 个聊天室发送消息，即发送了 10 条消息。
+</td>
+<td>
+<p>若超限，报 400 错误，即 "param to exceed limit"。</p>
+</td>
+<td>
+<p>不可调</p>
+</td>
+</tr>
+</tbody>
+</table>
 
-- 每秒最大可调用 20 次：例如，你每次调用该 API 向单个聊天室发送消息，可调用 20 次，第 21 次调用时会报 429 错误。
+- **聊天室消息优先级**
+  
+对于聊天室消息，环信即时通讯提供消息分级功能，支持高、普通和低三种优先级，高优先级的消息会优先送达。你可以在创建消息时对指定消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式可以确保在聊天室内消息并发量较大或消息发送频率过高的情况下，服务器首先丢弃低优先级消息，将资源留给高优先级消息，确保重要消息（如打赏、公告等）优先送达，以此提升重要消息的可靠性。请注意，该功能并不保证高优先级消息必达。在聊天室内消息并发量过大的情况下，为保证用户实时互动的流畅性，即使是高优先级消息仍然会被丢弃。
 
-对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。 当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
+- **聊天室消息丢弃逻辑**
+
+对于单个聊天室，每秒发送的消息数量默认超过 20 条，则会触发消息丢弃逻辑，即首先丢弃低优先级的消息，优先保留高优先级的消息。若带有优先级的消息超过了 20 条/秒，则按照消息发送时间顺序处理，丢弃后发送的消息。
 
 ## 前提条件
 
@@ -79,18 +142,19 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 下表为发送各类消息的通用请求体，为 JSON 对象，是所有消息的外层结构。与单聊消息类似，不同类型的消息的请求体只是 `body` 字段内容存在差异。
 
-:::notice
+:::tip
 聊天室消息的通用请求体中的参数与[发送单聊消息](message_single.html)类似，唯一区别在于聊天室中的 `to` 字段表示消息接收方聊天室 ID 数组并增加了 `chatroom_msg_level` 参数用于设置消息优先级。<br/>
 :::
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :--------------- |
 | `from`          | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为 `admin`。<Container type="tip" title="提示">1. 服务器不校验传入的用户 ID 是否存在，因此，如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。<br/>2. 若传入字段但值为空字符串 (“”)，请求失败。</Container>   |
-| `to`            | Array   | 是       | 消息接收方聊天室 ID 数组。每次最多可向 10 个聊天室发送消息。<Container type="tip" title="提示">服务器不校验传入的聊天室 ID 是否存在，因此，如果你传入的聊天室 ID 不存在，服务器并不会提示，仍照常发送消息。</Container>  |
+| `to`            | Array   | 是       | 消息接收方聊天室 ID 数组。每次最多可向 10 个聊天室发送消息。<Container type="tip" title="提示">服务器不校验传入的聊天室 ID 是否存在，因此，如果你传入的聊天室 ID 不存在，服务器并不会提示，仍照常发送消息。</Container> |
 | `chatroom_msg_level` | String | 否       | 聊天室消息优先级：<br/> - `high`：高； <br/> - （默认）`normal`：普通；<br/> - `low`：低。 |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
-| `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
+| `roam_ignore_users`   | List   | 否 | 设置哪些用户拉漫游消息时拉不到该消息。每次最多可传入 20 个用户 ID。|
+| `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
 
 请求体中的 `body` 字段说明详见下表。
 
@@ -129,7 +193,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
   "type": "txt",
   "body": {
     "msg": "testmessages"
-  }
+  },
+  "roam_ignore_users": []
 }'
 ```
 
@@ -740,7 +805,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
   "to": ["185145305923585"],
   "type": "custom",
   "body": {
-    "customEvent": "custom_event"
+    "customEvent": "custom_event",
     "customExts":{
             "ext_key1":"ext_value1"
         }
@@ -769,6 +834,12 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
 ## 发送定向消息
 
 你可以向聊天室中指定的一个或多个成员发送消息，但单次仅支持指定一个聊天室。对于定向消息，只有作为接收方的指定成员才能看到消息，其他聊天室成员则看不到该消息。
+
+:::tip
+1. 定向消息不写入会话列表，不计入聊天室会话的未读消息数。
+2. 聊天室定向消息的漫游功能默认关闭，使用前需联系商务开通聊天室消息漫游和定向消息漫游功能。
+3. 聊天室中发送的定向消息均同步给发送方。
+:::
 
 **发送频率**：100 次/秒/App Key
 
@@ -803,7 +874,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/users
 | `chatroom_msg_level` | String | 否       | 聊天室消息优先级：<br/> - `high`：高； <br/> - （默认）`normal`：普通；<br/> - `low`：低。 |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
-| `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
+| `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
 | `users` | Array | 是       | 接收消息的聊天室成员的用户 ID 数组。每次最多可传 20 个用户 ID。 |
 
 请求体中的 `body` 字段说明详见下表。
@@ -868,271 +939,33 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 }
 ```
 
-## 发送聊天室全局广播消息
+## 错误码
 
-可通过该接口向 app 下的所有活跃聊天室（聊天室至少存在一个成员，而且曾经至少发送过一条消息）发送广播消息，支持所有消息类型。
+1. 调用发送聊天室消息的接口发送各类消息时，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
-**发送频率**：每分钟最多可发 10 次，而且每天最多可发 100 次广播消息。
+| HTTP 状态码 | 错误类型  | 错误提示      | 可能原因             | 处理建议    |
+|:---------|:-----------|:-----------------|:-----------------|:---------|
+| 400      | invalid_request_body  | Request body is invalid. Please check body is correct. | 请求体格式不正确。| 检查请求体内容是否合法(字段类型是否正确)。|
+| 400      | message_send_error | param from can't be empty  | 请求参数 `from` 是空字符串。| 输入正确的请求参数 `from`。 若不传该字段， 服务器会默认设置为 `admin`。 |
+| 400      | message_send_error | param to can't be empty  | 请求参数 `to` 是空数组。 | 输入正确的请求参数 `to`。|
+| 400      | message_send_error | param type can't be empty  | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。|
+| 400      | message_send_error | param body can't be empty  | 请求参数 `body` 是空 JSON。 | 输入正确的请求参数 `body`。|
+| 400      | message_send_error | param ext must be JSONObject   | 请求参数 `ext` 类型不正确。| 输入正确的请求参数 `ext`（JSON 格式）。 |
+| 400      | message_send_error | params to's size can't exceed limit 10 | 请求参数 `to` 数量超出最大限制 10 个聊天室 ID。 | 输入正确的请求参数 `to`（数量限制在 10 个聊天室 ID 以内）。 |
+| 400      | message_send_error | message is too large | 请求体内容中 `body` 和 `ext` 字段的内容过大。 | 限制 `body` 和 `ext` 字段的内容，不能超过 5 KB。 |
+| 403      | message_send_error | message send reach limit  | 请求 API 频率超出限制。 | 限制 API 请求频率，详见[文档描述](message_chatroom.html)。|
 
-### HTTP 请求
+2. 对于定向消息来说，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
-```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms/broadcast
-```
-
-#### 路径参数
-
-参数及说明详见 [公共参数](#公共参数)。
-
-#### 请求 header
-
-| 参数       | 类型   | 是否必需 | 描述          |
-| :-------------- | :----- | :------- | :-------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。       |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### 请求 body
-
-以下为发送文本类型的广播消息的请求 body。
-
-| 参数            | 类型   | 是否必需 | 描述       |
-| :-------------- | :----- | :------- | :--------------- |
-| `from`          | String | 否       | 广播消息发送方的用户 ID。若不传入该字段，服务器默认设置为管理员，即 “admin”；若传入字段但值为空字符串 (“”)，请求失败。  |
-| `chatroom_msg_level` | String | 否       | 聊天室消息优先级：<br/> - `high`：高； <br/> - （默认）`normal`：普通；<br/> - `low`：低。 |
-| `msg` | JSON | 是 | 消息体包含的信息。  |
-| `msg.type` | String | 是 | 广播消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
-| `msg.msg` | String | 是 | 消息内容。  |
-| `ext`           | JSON   | 否       | 广播消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
-
-不同类型的消息的请求体只在 `msg` 字段有差别，其他参数相同。除了 `type` 字段，`msg` 字段中包含的参数与发送聊天室消息的请求体中的 `body` 字段含义相同，详见各类消息的参数说明。
-- [发送图片消息](#发送图片消息)
-- [发送语音消息](#发送语音消息)
-- [发送视频消息](#发送视频消息)
-- [发送文件消息](#发送文件消息)
-- [发送位置消息](#发送位置消息)
-- [发送透传消息](#发送透传消息)
-- [发送自定义消息](#发送自定义消息)
-
-### HTTP 响应
-
-#### 响应 body
-
-对于各类型的广播消息来说，响应中包含的各字段相同。
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
-
-| 参数   | 类型 | 描述   |
-| :----- | :--- | :----------- |
-| `data.id` | JSON | 广播 ID。 |
-
-其他参数及说明详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-### 示例
-
-#### 请求示例
-
-- 发送文本广播消息
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-    "msg": {
-        "type": "txt",
-        "msg": "send broadcast to all chatroom"
-    },
-    "from": "admin",
-    "ext": {
-        "extKey": "extValue"
-    },
-    "chatroom_msg_level": "low"
-}'
-```
-
-- 发送图片广播消息
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-    "msg": {
-        "type": "img",
-        "filename":"testimg.jpg",
-        "secret":"VfXXXXNb_",
-        "url":"https://XXXX/XXXX/XXXX/chatfiles/55f12940-XXXX-XXXX-8a5b-ff2336f03252",
-        "size":{
-           "width":480,
-           "height":720
-        }
-    },
-    "from": "admin",
-    "ext": {
-        "extKey": "extValue"
-    },
-    "chatroom_msg_level": "low"
-}'
-```
-
-- 发送语音广播消息
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-    "msg": {
-        "type": "audio",
-        "url": "https://XXXX/XXXX/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42",
-        "filename": "testaudio.amr",
-        "length": 10,
-        "secret": "HfXXXXCjM"
-    },
-    "from": "admin",
-    "ext": {
-        "extKey": "extValue"
-    },
-    "chatroom_msg_level": "low"
-}'
-```
-
-- 发送视频广播消息
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-    "msg": {
-        "type": "video",
-        "thumb" : "https://XXXX/XXXX/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97",
-        "length" : 0,
-        "secret":"VfXXXXNb_",
-        "file_length" : 58103,
-        "thumb_secret" : "ZyXXXX2I",
-        "url" : "https://XXXX/XXXX/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"
-    },
-    "from": "admin",
-    "ext": {
-        "extKey": "extValue"
-    },
-    "chatroom_msg_level": "low"
-}'
-```
-
-- 发送文件广播消息
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-    "msg": {
-        "type": "file",
-        "filename":"test.txt",
-        "secret":"1-g0XXXXua",
-        "url":"https://XXXX/XXXX/XXXX/chatfiles/d7eXXXX7444"
-    },
-    "from": "admin",
-    "ext": {
-        "extKey": "extValue"
-    },
-    "chatroom_msg_level": "low"
-}'
-```
-
-- 发送位置广播消息
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-    "msg": {
-        "type": "loc",
-        "lat": "39.966",
-        "lng":"116.322",
-        "addr":"中国北京市海淀区中关村"
-    },
-    "from": "admin",
-    "ext": {
-        "extKey": "extValue"
-    },
-    "chatroom_msg_level": "low"
-}'
-```
-
-- 发送透传广播消息
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-    "msg": {
-        "type": "cmd",
-        "action":"action1"
-    },
-    "from": "admin",
-    "ext": {
-        "extKey": "extValue"
-    },
-    "chatroom_msg_level": "low"
-}'
-```
-
-- 发送自定义广播消息
-
-```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-    "msg": {
-        "type": "custom",
-        "customEvent": "custom_event"
-    },
-    "from": "admin",
-    "ext": {
-        "extKey": "extValue"
-    },
-    "chatroom_msg_level": "low"
-}'
-```
-
-#### 响应示例
-
-```json
-{
-  "path": "/messages/chatrooms/broadcast",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast",
-  "timestamp": 1699944653964,
-  "organization": "easemob-demo",
-  "application": "331d42e6-ad85-460f-b6b0-d1fb6fef9f12",
-  "action": "post",
-  "data": {
-    "id": 1173998498812376874
-   },
-  "duration": 1,
-  "applicationName": "wang"
-}
-```
+| HTTP 状态码 | 错误类型      | 错误提示          | 可能原因       | 处理建议       |
+|:---------|:-------------------|:-------------------|:-----------|:----------------------|
+| 400      | invalid_request_body     | Request body is invalid. Please check body is correct. | 请求体格式不正确。  | 检查请求体内容是否合法(字段类型是否正确)。 |
+| 400      | message_send_error | param from can't be empty      | 请求参数 `from` 是空字符串。 | 输入正确的请求参数 `from`。若不传该字段， 服务器会默认设置为 `admin`。 |
+| 400      | message_send_error | param to can't be empty   | 请求参数 `to` 是空数组。  | 输入正确的请求参数 `to`。  |
+| 400      | message_send_error | param type can't be empty | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。         |
+| 400      | message_send_error | param body can't be empty  | 请求参数 `body` 是空JSON。 | 输入正确的请求参数 `body`。         |
+| 400      | message_send_error | param ext must be JSONObject  | 请求参数 `ext` 类型不正确。 | 输入正确的请求参数 `ext`（JSON 格式）。  |
+| 400      | message_send_error | param users can't be empty    | 请求参数 `users` 是空数组。 | 输入正确的请求参数 `users`。 |
+| 400      | message_send_error | params to's size can't exceed limit 10 | 请求参数 `to` 数量超出最大限制 10。 | 输入正确的请求参数 `to`。每次最多能传入 10 个聊天室 ID。 |
+| 400      | message_send_error | message is too large | 请求体内容中 `body` 和 `ext` 字段的内容过大。 | 限制 `body` 和 `ext` 字段的内容。 |
+| 403      | message_send_error | message send reach limit  | 消息发送频率超出限制(默认 1 秒内只允许发送 100 条聊天室消息)。 | 限制消息发送频率，详见[文档说明](message_group.html#发送定向消息)。  |

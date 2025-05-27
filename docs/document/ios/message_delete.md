@@ -8,7 +8,7 @@
 
 使用环信即时通讯 IM iOS SDK 可以通过 `EMConversation` 类单向删除服务端和本地的历史消息，主要方法如下：
 
-- `EMChatManager#deleteAllMessagesAndConversations:completion:`：清空当前用户的聊天记录，包括消息和会话，同时可以选择是否单向清除服务端的聊天记录。
+- `EMChatManager#deleteAllMessagesAndConversations:completion:`：清空当前用户的聊天记录，包括单聊、群组聊天和聊天室的消息和会话，同时可以选择是否单向清除服务端的聊天记录。
 - `EMConversation#removeMessagesFromServerWithTimeStamp`/`removeMessagesFromServerMessageIds`：按消息时间或消息 ID 单向删除服务端的历史消息。
 - `EMConversation#deleteAllMessages`：删除本地指定会话的所有消息。
 - `EMConversation#removeMessagesStart`：删除本地单个会话在指定时间段的消息。
@@ -25,7 +25,7 @@
 
 ### 清空聊天记录
 
-你可以调用 `EMChatManager#deleteAllMessagesAndConversations:completion:` 方法清空当前用户的聊天记录，包括消息和会话。同时你也可以选择是否清除服务端的聊天记录。若你清除了服务端的聊天记录，当前用户无法从服务端拉取到该消息。其他用户不受该操作影响。
+你可以调用 `EMChatManager#deleteAllMessagesAndConversations:completion:` 方法清空当前用户的聊天记录，包括单聊、群组聊天和聊天室的消息和会话。同时你也可以选择是否清除服务端的聊天记录。若你清除了服务端的聊天记录，你无法从服务端拉取到会话和消息，而其他用户不受影响。
 
 :::tip
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
@@ -43,15 +43,22 @@
 
 ### 单向删除服务端的历史消息
 
-你可以调用 `removeMessagesFromServerWithTimeStamp` 或 `removeMessagesFromServerMessageIds` 方法按消息时间或消息 ID 单向删除服务端的历史消息。每次最多可删除 50 条消息。消息删除后，该用户无法从服务端拉取到该消息。其他用户不受该操作影响。登录该账号的其他设备会收到 `EMMultiDevicesDelegate` 中的 `multiDevicesMessageBeRemoved` 回调，已删除的消息自动从设备本地移除。
+你可以调用 `removeMessagesFromServerWithTimeStamp` 或 `removeMessagesFromServerMessageIds` 方法按消息时间或消息 ID 删除你在服务器和本地的消息。
+
+- 按时间删除：删除指定时间及之前的历史消息。
+- 按消息 ID 删除：每次最多可删除 50 条消息。
+
+删除后，该用户无法从服务端拉取到该消息，不过，与该用户的单聊、群聊和聊天室会话中的其它用户的服务器消息不受影响，可以漫游获取。
+多设备情况下，登录该账号的其他设备会收到 `EMMultiDevicesDelegate` 中的 `multiDevicesMessageBeRemoved` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V3.9.8 或以上版本并联系商务开通。
+1. 要单向删除服务端单聊和群组聊天的历史消息，需将 SDK 升级至 V3.9.8 或以上版本。
+2. 要单向删除服务端聊天室的历史消息，需将 SDK 升级至 4.7.0 或以上版本。
 :::
 
 示例代码如下：
 
-```Objectivec
+```objectivec
 // 按时间删除消息
 [self.conversation removeMessagesFromServerWithTimeStamp:message.timestamp completion:^(EMError * _Nullable aError) {
 
@@ -89,7 +96,7 @@ if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("
 }
 ```
 
-### 删除本地单个会话的指定消息
+### 删除本地会话的指定消息
 
 你可以删除本地单个会话的指定消息，示例代码如下：
 

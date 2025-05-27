@@ -108,7 +108,7 @@ const ChatroomApp = () => {
 
   useEffect(() => {
     client.addEventHandler("chatroom", {
-      onChatroomEvent: (event: EasemobChat.EventData) => {
+      onChatroomEvent: (event: ChatSDK.EventData) => {
         if (event.operation === "muteMember") {
           // console.log('你已被禁言')
         }

@@ -20,7 +20,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+- 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
 - 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 - 了解环信即时通讯 IM 聊天室相关限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
 
@@ -35,6 +35,8 @@
 示例代码如下：
 
 ```typescript
+//cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
+//pageSize：每页期望返回的成员数,最大值为 1,000。
 ChatClient.getInstance()
   .roomManager.fetchChatRoomMembers(roomId, cursor, pageSize)
   .then((members) => {
@@ -45,7 +47,37 @@ ChatClient.getInstance()
   });
 ```
 
-### 将成员移出聊天室
+### 退出聊天室
+
+#### 主动退出
+
+聊天室所有成员均可以调用 `leaveChatRoom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `ChatRoomEventListener#onMemberExited` 回调。
+
+示例代码如下：
+
+```typescript
+ChatClient.getInstance()
+  .roomManager.leaveChatRoom(roomId)
+  .then(() => {
+    console.log("join room success.");
+  })
+  .catch((reason) => {
+    console.log("join room fail.", reason);
+  });
+```
+
+退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `ChatOptions#deleteMessagesAsExitChatRoom` 设置为 `false`。
+
+示例代码如下：
+
+```typescript
+ChatOptions options = new ChatOptions();
+options.deleteMessagesAsExitChatRoom = false;
+```
+
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，离开后重新进入仍是该聊天室的所有者。若 `ChatOptions#isChatRoomOwnerLeaveAllowed` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706。
+
+#### 被移出
 
 仅聊天室所有者和管理员可调用 `removeChatRoomMembers` 方法将单个或多个成员移出聊天室。
 被移出后，该成员收到 `ChatRoomEventListener#onRemoved` 回调，其他成员收到 `ChatRoomEventListener#onMemberExited` 回调。
@@ -63,6 +95,15 @@ ChatClient.getInstance()
     console.log("remove members fail.", reason);
   });
 ```
+
+#### 离线后自动退出
+
+由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+
+以下两类成员即使离线也不会退出聊天室：
+
+- 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
+- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)时拉入的用户从未登录过。
 
 ### 管理聊天室黑名单
 
@@ -197,9 +238,9 @@ ChatClient.getInstance()
 
 #### 添加成员至聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `onMuteListAdded` 回调。
+仅聊天室所有者和管理员可以调用 `muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `onMuteListAddedV2` 回调。
 
-:::notice
+:::tip
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
 :::
 
@@ -221,7 +262,7 @@ ChatClient.getInstance()
 
 仅聊天室所有者和管理员可以调用 `unMuteChatRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `onMuteListRemoved` 回调。
 
-:::notice
+:::tip
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。
 :::
 
@@ -263,7 +304,7 @@ ChatClient.getInstance()
 
 仅聊天室所有者和管理员可以调用 `muteAllChatRoomMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unMuteAllChatRoomMembers` 方法解除全员禁言。
 
-全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `onAllChatRoomMemberMuteStateChanged` 回调。
+全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `ChatRoomEventListener#onAllChatRoomMemberMuteStateChanged` 回调。
 
 示例代码如下：
 

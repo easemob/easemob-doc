@@ -1,6 +1,6 @@
 ---
 {
-    pageUri: "/document/web/room_overview.html",
+    pageUri: "/product/product_chatroom_overview.html",
     title: "聊天室概述"
 }
 ---

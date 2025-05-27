@@ -5,6 +5,7 @@
 :::tip
 1. 若使用该功能，需将 SDK 升级至 1.2.0 或以上版本。
 2. 聊天室会话不支持消息修改功能。
+3. 若使用该功能，需联系环信商务开通。
 :::
 
 ## 技术原理
@@ -26,12 +27,12 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+- 完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)及[连接](connection.html)文档。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
-你可以调用 `modifyMessageBody` 方法修改已经发送成功的消息。一条消息默认最多可修改 10 次，若要提升修改次数，需联系商务。
+你可以调用 `modifyMessageBody` 方法修改已经发送成功的消息。一条消息默认最多可修改 10 次。
 
 示例代码如下：
 
@@ -48,6 +49,10 @@ ChatClient.getInstance()
 ```
 
 消息修改后，消息的接收方会收到 `onMessageContentChanged` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群聊会话，除了修改消息的用户，群组内的其他成员均会收到该事件。
+
+:::tip
+若通过 RESTful API 修改自定义消息，消息的接收方也通过 `ChatMessageEventListener#onMessageContentChanged` 事件接收修改后的自定义消息。
+:::
 
 ```typescript
 ChatClient.getInstance().chatManager.addMessageListener({

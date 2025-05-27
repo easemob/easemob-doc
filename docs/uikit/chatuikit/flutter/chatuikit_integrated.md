@@ -6,8 +6,8 @@
 
 ## 前提条件
 
-- Flutter 3.3.0 或以上版本;
-- iOS 11 或以上版本;
+- Flutter 3.22.0 或以上版本;
+- iOS 12 或以上版本;
 - Android 21 或以上版本。
 
 ## 操作步骤
@@ -46,20 +46,6 @@ import 'package:em_chat_uikit/chat_uikit.dart';
 ```
 
 ### 第四步 初始化单群聊 UIKit
-
-项目中用到的组件都需要在 `ChatUIKitTheme` 内部使用。使用单群聊 UIKit 时，首先要配置 `ChatUIKitTheme`。
-
-```dart
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      ...
-      builder: (context, child) {
-        return ChatUIKitTheme(child: child!);
-      },
-    );
-  }
-```
 
 在 App 启动时初始化即时通讯 SDK。
 

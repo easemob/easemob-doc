@@ -28,12 +28,12 @@
 | `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `username` | String | 是       | 用户 ID。                                                                                                                                       |
+| `username` | String | 是       | 用户 ID。     |
 
 ### 响应参数
 
-| 参数              | 类型   | 描述                                                                           |
-| :---------------- | :----- | :----------------------------------------------------------------------------- |
+| 参数              | 类型   | 描述      |
+| :---------------- | :----- | :------------------- |
 | `entities`        | Object | 响应实体。                                                                     |
 | `data`            | Object | 实际获取的数据详情。                                                           |
 | `uuid`            | String | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
@@ -55,7 +55,7 @@
 
 添加好友，好友必须是和当前用户在一个 App Key 下的用户。
 
-对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 1000，不同服务版本的 App Key 的该数量上限不同，具体可参考[版本功能介绍](https://www.easemob.com/pricing/im)。
+对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 100，不同服务版本的 App Key 的该数量上限不同，具体可参考[版本功能介绍](https://www.easemob.com/pricing/im)。
 
 ### HTTP 请求
 
@@ -67,17 +67,17 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 
 | 参数              | 类型   | 是否必需 | 描述                |
 | :---------------- | :----- | :------- | :------------------ |
-| `owner_username`  | String | 是       | 当前用户的用户 ID。 |
+| `owner_username`  | String | 是       | 为哪个用户添加好友。 |
 | `friend_username` | String | 是       | 要添加的用户 ID。   |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                 |
-| :-------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Content-Type`  | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
-| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                   |
+| :-------------- | :----- | :----------- | :------------------------------------------------------ |
+| `Content-Type`  | String | 是         | 内容类型。请填 `application/json`。               |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。           |
 | `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
@@ -99,7 +99,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -137,6 +137,18 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+| 403     | exceed_limit | user contact number exceed limit | 好友数量达到上限。对于免费版来说，单个用户的好友数上限为 100， 对于专业版和旗舰版 IM 来说，该上限为 3000。 | 检查添加的和被添的用户好友数量是否达到上限。 |
+| 404     | service_resource_not_found | Service resource not found | 要添加的好友或被添加好友的用户 ID 不存在。 | 检查添加和被添加的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 移除好友
 
 从用户的好友列表中移除一个用户。
@@ -151,15 +163,15 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 
 | 参数              | 类型   | 是否必需 | 描述                  |
 | :---------------- | :----- | :------- | :-------------------- |
-| `owner_username`  | String | 是       | 发起操作的用户 ID。   |
+| `owner_username`  | String | 是       | 移除哪个用户的好友。   |
 | `friend_username` | String | 是       | 被移除好友的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                 |
-| :-------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述      |
+| :-------------- | :----- | :--------------------------------------- | :------------------------- |
 | `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -170,7 +182,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 字段                 | 类型       | 描述                                                                               |
-| :------------------- | :--------- | :--------------------------------------------------------------------------------- |
+| :------------------- | :--------- | :------------------------------------------------ |
 | `entities`           | JSON Array | 被移除的好友的详情。                                                               |
 | `entities.uuid`      | String     | 系统内为好友生成的系统内唯一标识，开发者无需关心。                                 |
 | `entities.type`      | String     | 对象类型，值为 `user` 或 `group`。                                                 |
@@ -182,7 +194,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -220,11 +232,22 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+| 404     | service_resource_not_found | Service resource not found | 要移除或被移除好友的用户 ID 不存在。 | 检查要移除和被移除的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 设置好友备注
 
 你可以调用该接口设置你在当前 app 下的好友的备注，即你和要设置备注的好友需在同一个 App Key 下。
 
-对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 100，不同服务套餐包的 App Key 的该数量上限不同，详见[套餐包功能详情](/product/pricing.html#套餐包功能详情)。
+对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 100，不同服务套餐包的 App Key 的该数量上限不同，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
 
 ### HTTP 请求
 
@@ -236,7 +259,7 @@ PUT https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{f
 
 | 参数              | 类型   | 是否必需 | 描述           |
 | :---------------- | :----- | :------- |:-------------|
-| `owner_username`  | String | 是       | 当前用户的用户 ID。  |
+| `owner_username`  | String | 是       | 要设置哪个用户的好友备注。  |
 | `friend_username` | String | 是       | 要设置备注的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
@@ -270,7 +293,7 @@ PUT https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{f
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码)了解可能的原因。
 
 ### 示例
 
@@ -299,6 +322,18 @@ curl -X PUT 'https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 400     | illegal_argument | updateRemark they are not friends, please add as a friend first. | 要添加备注的两个用户不是好友关系。 | 先成为好友再设置好友备注。 |
+| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+| 404     | service_resource_not_found | Service resource not found | 要设置或被设置好友备注的用户 ID 不存在。 | 检查要设置和被设置好友备注的用户 ID 是否存在。|
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 分页获取好友列表
 
 分页获取指定用户的好友列表。 
@@ -313,7 +348,7 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 
 | 参数              | 类型   | 是否必需 | 描述           |
 | :---------------- | :----- | :------- |:-------------|
-| `username`  | String | 是       | 当前用户的用户 ID。  |
+| `username`  | String | 是       | 要获取哪个用户的好友列表。  |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -350,7 +385,7 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -358,7 +393,7 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl --location 'https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit=10&needReturnRemark=true' \
+curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRemark=true' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer  <YourAppToken>'
@@ -368,7 +403,7 @@ curl --location 'https://{host}/{org_name}/{app_name}/user/{username}/contacts?l
 
 ```json
 {
-  "uri": "http://{host}/{org_name}/{app_name}/users/{username}/rostersByPage",  
+  "uri": "http://XXXX/XXXX/XXXX/users/XXXX/rostersByPage",  
   "timestamp": 1706238297509,
   "entities": [],
   "count": 1,
@@ -385,9 +420,21 @@ curl --location 'https://{host}/{org_name}/{app_name}/user/{username}/contacts?l
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型 | 错误提示          | 可能原因                               | 处理建议                 |
+|:---------| :--- | :------------- |:-----------------------------------|:---------------------|
+| 401      | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。       |
+| 404      | service_resource_not_found | Service resource not found | 获取好友列表的用户 ID 不存在。   | 检查获取好友列表的用户 ID 是否存在。 |
+| 400      | illegal_argument | getContacts | page size more than max limit : 50 | 传入的每页好友数 `limit` 超过 50。 | 下调 `limit` 参数的值。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 一次性获取好友列表
 
-一次性获取指定用户的好友列表。
+一次性获取指定用户的好友列表。使用该接口，一次最多获取用户的 3000 个好友。若用户的好友数量超过 3000，建议使用[分页获取好友列表的接口](#分页获取好友列表)。
 
 ### HTTP 请求
 
@@ -407,7 +454,6 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -424,7 +470,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -434,6 +480,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X GET 'https://XXXX/XXXX/XXXX/users/user1/contacts/users' \
+-H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -450,6 +497,135 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/user1/contacts/users' \
   "count": 2
 }
 ```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+| 404     | service_resource_not_found | Service resource not found | 获取好友列表的用户 ID 不存在。 | 检查获取好友列表的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+## 导入好友列表
+
+你可以调用该接口导入好友列表。
+
+**调用频率上限**：100 次/秒/App Key
+
+### HTTP 请求
+
+```http
+POST https://{host}/{org_name}/{app_name}/users/{username}/contacts/import
+```
+
+#### 路径参数
+
+| 参数              | 类型   | 是否必需 | 描述           |
+| :---------------- | :----- | :------- |:-------------|
+| `username`  | String | 是  | 为哪个用户导入好友列表。  |
+
+其他参数及描述详见 [公共参数](#公共参数)。
+
+#### 请求参数
+
+| 参数      | 类型 | 是否必需 | 描述    |
+|:--------|:--------|:-----|:----------------------|
+| `isSendNotice` | Boolean | 否    | 好友导入后是否向 SDK 发送通知：<br/> - `true`：是；<br/> -（默认）`false`：否。 |
+
+#### 请求 body
+
+| 参数      | 类型    | 是否必需 | 描述                       |
+|:--------|:------|:-----|:-------------------------|
+| `usernames` | Array | 是    | 好友的用户 ID，一次最多可导入 10 个。 |
+
+#### 请求 header
+
+| 参数            | 类型   | 是否必需 | 描述   |
+| :-------------- | :----- | :------------ | :------------- |
+| `Content-Type`  | String | 是     | 内容类型。请填 `application/json`。    |
+| `Accept`        | String | 是     | 内容类型。请填 `application/json`。   |
+| `Authorization` | String | 是     | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段                       | 类型     | 描述                |
+|:-------------------------|:-------|:------------------|
+| `status`                 | String | 返回 `ok` 表示好友导入成功。       |
+| `timestamp`              | Long | 当前时间戳，单位为毫秒。             |
+| `action`                 | String | 请求方法。  |
+| `data`               | JSON   | 实际获取的数据详情。            |
+| `data.UnKnowFailed`      | Array | 因系统异常添加失败的好友的用户 ID。 |
+| `data.success`           | Array | 成功添加好友的用户 ID。     |
+| `data.NotExistFailed`    | Array | 不存在的好友的用户 ID。 |
+| `data.maxLimitFailed`    | Array | 因导入的好友已达上限而导入失败的好友的用户 ID。 |
+
+其他字段及描述详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。常见的异常类型如下表所示。
+
+| 异常类型 |  HTTP 状态码  | 错误信息     | 错误描述    |
+| :-------- | :----- | :------ |:----- |
+| `illegal_argument` | 400  | `request user over flow limit:10.`  | 请求 body 中传入的用户 ID 数量超过了 10。  |
+| `exceed_limit`  | 403   | `Inviter's contact max count.`  | 调用该接口的用户的好友数量已达上限。单个用户的好友数上限与你购买的套餐包相关，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。 |
+
+关于其他异常，你可以参考 [错误码](#错误码) 了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl --location 'https://{host}/{org_name}/{app_name}/users/{username}/contacts/import' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-H 'Content-Type: application/json' \
+-d '{
+    "usernames":[
+        "1",
+        "2",
+        "3"
+    ]
+}'
+```
+
+#### 响应示例
+
+```json
+{
+  "status": "ok",
+  "timestamp": 1712728623854,
+  "action": "post",
+  "data": {
+    "UnKnowFailed": [],
+    "success": [
+      "username1",
+      "username2",
+      "username3"
+    ],
+    "NotExistFailed": [],
+    "maxLimitFailed": []
+  },
+  "duration": 176
+}
+```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+| 404     | service_resource_not_found | Service resource not found | 导入好友列表的用户 ID 不存在。 | 检查导入好友列表的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 添加用户至黑名单
 
@@ -469,7 +645,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 | 参数             | 类型   | 是否必需 | 描述                |
 | :--------------- | :----- | :------- | :------------------ |
-| `owner_username` | String | 是       | 当前用户的用户 ID。 |
+| `owner_username` | String | 是       | 添加到哪个用户的黑名单。 |
 
 其他参数及描述详见[公共参数](#公共参数)。
 
@@ -499,7 +675,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -531,6 +707,17 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+| 404     | service_resource_not_found | Service resource not found | 要添加或被添加的用户 ID 不存在。 | 检查添加和被添加的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 获取黑名单列表
 
 获取加入黑名单的用户列表。
@@ -545,7 +732,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pag
 
 | 参数             | 类型   | 是否必需 | 描述                |
 | :--------------- | :----- | :------- | :------------------ |
-| `owner_username` | String | 是       | 当前用户的用户 ID。 |
+| `owner_username` | String | 是       | 获取哪个用户的黑名单。 |
 
 其他参数及描述详见[公共参数](#公共参数)。
 
@@ -562,8 +749,8 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pag
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                 |
-| :-------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数   | 类型   | 是否必需<div style="width: 80px;"></div> | 描述         |
+| :-------------- | :----- | :------------------ | :---------------------- |
 | `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -573,14 +760,14 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pag
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段    | 类型  | 描述                                        |
-| :------ | :---- | :------------------------------------------ |
+| 字段    | 类型  | 描述         |
+| :------ | :---- | :----------------------- |
 | `data`  | Array | 获取的黑名单列表，例如 ["user1", "user2"]。 |
-| `count` | Int   | 黑名单上用户的数量。                        |
+| `count` | Int   | 获取的黑名单上的用户数量。                        |
 
 其他字段及描述详见[公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -596,7 +783,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ```json
 {
-    "uri": "https://a1.easemob.com/easemob-demo/wang/users/tst/blocks/users",
+    "uri": "https://XXXX/XXXX/XXXX/users/XXXX/blocks/users",
     "timestamp": 1682064422108,
     "entities": [],
     "cursor": "MTA5OTAwMzMwNDUzNTA2ODY1NA==",
@@ -609,6 +796,17 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
     "duration": 52
 }
 ```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+| 404     | service_resource_not_found | Service resource not found | 要查询的用户 ID 不存在。 | 检查查询的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 从黑名单中移除用户
 
@@ -627,15 +825,15 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 | 参数               | 类型   | 是否必需 | 描述                    |
 | :----------------- | :----- | :------- | :---------------------- |
-| `owner_username`   | String | 是       | 当前用户的用户 ID。     |
+| `owner_username`   | String | 是       | 从哪个用户的黑名单中移除用户。     |
 | `blocked_username` | String | 是       | 要移出黑名单的用户 ID。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                 |
-| :-------------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述             |
+| :-------------- | :----- | :---------------------- | :------------------------------------ |
 | `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -645,8 +843,8 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 参数                 | 类型       | 描述                                                                                    |
-| :------------------- | :--------- | :-------------------------------------------------------------------------------------- |
+| 参数                 | 类型       | 描述             |
+| :------------------- | :--------- | :---------------------------------------- |
 | `entities`           | JSON Array | 从黑名单中移除的用户的详细信息。                                                        |
 | `entities.uuid`      | String     | 用户在系统内的唯一标识。系统自动生成，开发者无需关心。                                  |
 | `entities.type`      | String     | 对象类型，值为 `user`。                                                                 |
@@ -658,7 +856,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 
 其他字段及描述详见[公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -695,3 +893,14 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
   "applicationName": "testapp"
 }
 ```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码    | 错误类型 | 错误提示     | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+| 404     | service_resource_not_found | Service resource not found | 要移除或被移除的用户 ID 不存在。 | 检查要移除和被移除的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

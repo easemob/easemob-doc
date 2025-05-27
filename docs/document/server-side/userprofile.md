@@ -8,19 +8,9 @@
 
 环信 IM 提供 RESTful API 接口方便开发者管理服务端的用户属性信息。
 
-:::notice
-为保证用户信息安全，环信即时通讯 IM 仅支持用户本人或 app 管理员设置用户属性。
+:::tip
+为保证用户信息安全，环信即时通讯 IM 仅支持用户本人或 app 管理员设置用户属性。 
 :::
-
-可以调用以下 RESTful API 实现用户属性功能：
-
-| 功能                       | 描述                                         |
-| :------------------------- | :------------------------------------------- |
-| 设置用户属性               | 设置指定的用户属性。                         |
-| 获取指定用户的所有用户属性 | 获取指定用户的所有用户属性。                 |
-| 批量获取用户属性           | 根据指定的用户名列表和属性列表查询用户属性。 |
-| 删除用户属性               | 删除指定用户的所有属性。                     |
-| 获取 app 下用户属性总大小  | 获取该 app 下所有用户的属性总大小。          |
 
 ## 前提条件
 
@@ -31,16 +21,16 @@
 
 ## 公共参数
 
-### 请求参数
+#### 请求参数
 
 | 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
 | :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `username` | String | 是       | 用户 ID。                                                                                                                                       |
+| `username` | String | 是       | 用户 ID。         |
 
-### 响应参数
+#### 响应参数
 
 | 参数              | 类型   | 描述                                                                           |
 | :---------------- | :----- | :----------------------------------------------------------------------------- |
@@ -65,9 +55,14 @@
 
 ## 设置用户属性
 
-用户属性的内容为一个或多个纯文本键值对，默认单个用户的属性总长度不能超过 2 KB，默认单个 app 下所有用户的属性总长度不能超过 10 GB。利用该 API，每次只能设置一个用户的用户属性。
+### 功能说明
 
-请求示例中使用的键为 `avatarurl`、`ext`、`nickname`，你可以根据实际使用场景确定键值。
+- 设置单个用户的属性。
+- 用户属性的内容为一个或多个纯文本键值对。
+- 默认单个用户的属性总长度不能超过 2 KB，默认单个 app 下所有用户的属性总长度不能超过 10 GB。
+- 请求示例中使用的键为 `avatarurl`、`ext`、`nickname`，你可以根据实际使用场景确定键值。
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -77,7 +72,11 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数              | 类型   | 是否必需 | 描述                |
+| :---------------- | :----- | :------- | :------------------ |
+| `username`  | String | 是       | 设置该用户 ID 的属性。 |
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
@@ -88,25 +87,25 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 #### 请求 body
 
-请求 body 为 `x-www-form-urlencoded` 类型，长度不得超过 4 KB，包含以下字段：
+请求 body 为 `x-www-form-urlencoded` 类型，包含以下字段：
 
 | 字段    | 类型   | 描述     | 是否必需 |
 | :------ | :----- | :------- | :------- |
 | `Key`   | String | 属性名称 | 是       |
 | `Value` | String | 属性值   | 是       |
 
-调用该 RESTful 接口设置用户昵称、头像、联系方式、邮箱、性别、签名、生日和扩展字段时，若要确保在客户端能够获取设置，请求中必须传以下键名，根据实际使用场景确定键值：
+关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。调用该 RESTful 接口设置用户属性时，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定：
 
-| 字段        | 类型   | 描述                                                                                              |
-| :---------- | :----- | :------------------------------------------------------------------------------------------------ |
-| `nickname`  | String | 用户昵称。长度在 64 个字符内。                                                                    |
-| `avatarurl` | String | 用户头像 URL 地址。长度在 256 个字符内。                                                          |
-| `phone`     | String | 用户联系方式。长度在 32 个字符内。                                                                |
-| `mail`      | String | 用户邮箱。长度在 64 个字符内。                                                                    |
-| `gender`    | Int    | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
-| `sign`      | String | 用户签名。长度在 256 个字符内。                                                                   |
-| `birth`     | String | 用户生日。长度在 64 个字符内。                                                                    |
-| `ext`       | String | 扩展字段。                                                                                        |
+| 字段        | 描述             |
+| :---------- | :-------------------------------------- |
+| `nickname`  | 用户昵称。长度在 64 个字符内。                                                                    |
+| `avatarurl` | 用户头像 URL 地址。长度在 256 个字符内。                                                          |
+| `phone`     | 用户联系方式。长度在 32 个字符内。                                                                |
+| `mail`      | 用户邮箱。长度在 64 个字符内。                                                                    |
+| `gender`    | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - `0`：未知。 |
+| `sign`      | 用户签名。长度在 256 个字符内。                                                                   |
+| `birth`     | 用户生日。长度在 64 个字符内。                                                                    |
+| `ext`       | 扩展字段。                                                                                        |
 
 ### HTTP 响应
 
@@ -120,7 +119,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -146,11 +145,28 @@ curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorizati
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。    |
+| 403     | FORBIDDEN         | size of metadata for this single user exceeds the user defined limit, {}Bytes        | 单个用户的用户属性用量超过限制。默认单个用户的属性总长度不得超过 2 KB。 | 调整用量或联系商务提升用量上限。 |
+| 403     | FORBIDDEN         | size of metadata for this single user exceeds the current mysql column size, {}Bytes        | 单个用户的用户属性超过字段长度限制。关于用户属性字段（例如，用户昵称）的长度限制，详见[设置用户属性](/document/server-side/userprofile.html#设置用户属性)。  | 减少用户属性字段的长度。    |
+| 403     | FORBIDDEN          | total size of user metadata for this app exceeds the user defined limit, {}Bytes        | 整个应用的用户属性用量超过限制。默认单个 app 下所有用户的属性总长度不得超过 10 GB。   | 调整用量或联系商务提升用量上限。    |
+| 409 | CONFLICT | Failed to xxx. Concurrent xxx not allowed | 多个请求同时修改同一个资源的并发操作冲突。 | 减少并发请求操作。 |
+| 500     | INTERNAL_SERVER_ERROR          | update metadata failed        | 服务异常导致更新用户属性失败。  |     |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 获取用户属性
 
-获取单个用户的全部用户属性键值对。需要在请求中填写 {username}，指定获取用户属性的用户 ID。
+### 功能说明
 
-如果指定的用户或用户属性不存在，返回空数据 {}。
+获取单个用户的全部用户属性键值对。
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -160,13 +176,17 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 #### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数    | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :------- | :---------- |
+| `username`    | String   | 是 | 获取该用户 ID 的用户属性。如果指定的用户或用户属性不存在，返回空数据 {}。    |
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 #### 请求 header
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :------- | :---------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。    |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
@@ -181,7 +201,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -190,7 +210,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例
@@ -207,11 +227,27 @@ curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourA
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | metadata_error          | auth error        | 鉴权失败。例如，使用的 token 与路径参数 `username` 不匹配。   | 使用正确的 token。     |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow        | 用户属性功能未开通。  | 联系商务开通用户属性功能。 |
+| 500     | INTERNAL_SERVER_ERROR          |         | 服务未知异常。  | 
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 批量获取用户属性
 
-根据指定的用户 ID 列表和属性列表，查询用户属性。
+### 功能说明
 
-如果指定的用户 ID 或用户属性不存在，返回空数据 {}。 每次最多可获取 100 个用户的属性。
+- 根据指定的用户 ID 列表和属性列表，查询用户属性。
+- 每次最多可获取 100 个用户的属性。
+- 如果指定的用户 ID 或用户属性不存在，返回空数据 {}。 
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -228,6 +264,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 | 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述     |
 | :-------------- | :----- | :--------------------- | :--------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。    |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是         | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### 请求 body
@@ -249,7 +286,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -258,7 +295,10 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
+curl -X POST -H 'Content-Type: application/json' \
+-H 'Accept: application/json'  \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
   "properties": [
     "avatarurl",
     "ext",
@@ -298,9 +338,25 @@ curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer <Your
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 400     | BAD_REQUEST  | exceed allowed batch size %s   | 超过允许获取的用户数的用户属性。每次最多可获取 100 个用户的用户属性。  |  减少批量获取用户属性的用户数。   |
+| 401     | metadata_error  | auth error        | 鉴权失败。   |     |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。  |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 获取 app 下用户属性总大小
 
+### 功能说明
+
 获取该 app 下所有用户的属性数据大小，单位为字节。
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -314,8 +370,9 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述           |
+| :-------------- | :----- | :------- | :----------------------------------------- |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
@@ -330,7 +387,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -339,7 +396,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/capacity'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/capacity'
 ```
 
 #### 响应示例
@@ -352,9 +409,26 @@ curl -X GET -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/me
 }
 ```
 
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | unauthorized          | unauthorized        | 鉴权失败。   | 获取应用容量时需要使用 app 级别权限。    |
+| 401     | metadata_error          | auth error        | 鉴权失败。   | 使用正确的 token。     |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。   |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 删除用户属性
 
-删除单个用户的所有属性。如果指定的用户或用户属性不存在（可能已删除），也视为删除成功。
+### 功能说明
+
+- 删除单个用户的所有属性。
+- 如果指定的用户或用户属性不存在（可能已删除），也视为删除成功。
+
+**调用频率上限**：100 次/秒/App Key
 
 ### HTTP 请求
 
@@ -384,7 +458,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 示例
 
@@ -393,7 +467,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例
@@ -405,3 +479,14 @@ curl -X DELETE -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX
   "data": true
 }
 ```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401     | metadata_error          | auth error        | 鉴权失败。   |  使用正确的 token。    |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow        | 用户属性功能未开通。  | 联系商务开通用户属性功能。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

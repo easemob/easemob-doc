@@ -1,4 +1,4 @@
-# 主要页面回调事件监听
+# 主要页面的 ViewModel 中可重载的方法
 
 <Toc />
 
@@ -20,7 +20,6 @@
 | `delete`    | 会话列表左滑后点击删除按钮后触发回调。     | 是     |
 | `read`    | 会话列表左滑后点击已读按钮后触发回调。     | 是     |
 | `conversationDidSelected`    | 会话列表点击后回调。     | 是     |
-| `conversationLongPressed`    | 会话列表长按后回调。     | 是     |
 | `moreAction`   | 会话列表右滑后点击 `...` 回调。     | 是     |
 | `conversationLastMessageUpdate`   | 会话列表中会话最后一条消息更新时回调。     | 是     |
 | `playNewMessageSound`   | 收到新消息时播放音频方法。     | 是     |

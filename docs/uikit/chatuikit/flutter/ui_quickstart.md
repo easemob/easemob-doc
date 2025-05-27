@@ -2,8 +2,8 @@
 
 利用 em_chat_uikit 提供的 UI 组件，你可以轻松实现应用内的聊天。em_chat_uikit 支持单聊、群聊和聊天室会话。本文介绍如何实现在单聊会话中发送消息。
 
-<img src=@static/images/uikit/chatflutter/ChatConversationsView.png  title=“会话列表界面” width="300"/>&nbsp;&nbsp;
-<img src=@static/images/uikit/chatflutter/ChatMessagesView.png  title=聊天页面 width="300"/>
+<img src=/images/uikit/chatflutter/ChatConversationsView.png  title=“会话列表界面” width="300"/>&nbsp;&nbsp;
+<img src=/images/uikit/chatflutter/ChatMessagesView.png  title=聊天页面 width="300"/>
 
 ## 前提条件
 
@@ -97,7 +97,7 @@ dependencies:
 
 在 app 的 `main` 下调用 SDK 初始化方法。
 
-:::notice
+:::tip
 em_chat_uikit 不包含 IM SDK 的初始化和登录，使用时确保已完成 SDK 初始化和登录。
 :::
 
@@ -114,7 +114,7 @@ void main() async {
 
 #### 第三步 创建聊天界面
 
-em_chat_uikit 提供了 `ChatMessagesView`，添加到 `build` 中，传入必填参数 `conversation` 及所需的可选参数即可。详见[聊天界面参数描述](chatui_chat.html#创建聊天界面)。
+em_chat_uikit 提供了 `ChatMessagesView`，添加到 `build` 中，传入必填参数 `conversation` 及所需的可选参数即可。详见[聊天界面参数描述](ui_chat.html#创建聊天界面)。
 
 1. 通过 IM SDK 获取一个本地会话。
 
@@ -154,4 +154,4 @@ class _MessagesPageState extends State<MessagesPage> {
 }
 ```
 
-<img src=@static/images/uikit/chatflutter/MessagesPage.png  width="300" height="700"/>
+<img src=/images/uikit/chatflutter/MessagesPage.png  width="300" height="700"/>

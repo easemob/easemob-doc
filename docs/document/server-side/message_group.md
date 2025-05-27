@@ -4,16 +4,75 @@
 
 本文展示如何调用环信 IM RESTful API 在服务端实现群聊场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
 
-群组聊天场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异，发送方式与单聊类似，详见[发送单聊消息](message_single.html)。
+群组聊天场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异，发送方式与单聊类似，详见 [发送单聊消息](message_single.html)。
 
 :::tip
 1. 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
 2. 群组中发送的消息均同步给发送方。
+3. 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在 [环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
+4. [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
 :::
 
-**发送频率**：对于单个应用来说，调用该 API 每次最多向 3 个群组发送消息，而且该 API 存在以下两个限制：
-- 每秒最多可发送 20 条消息：例如，你每次向 3 个群组发送消息，即发送了 3 条消息，你每秒最多可调用 7 次。第 8 次调用时，则报 403 错误。
-- 每秒最大可调用 20 次：例如，你每次调用该 API 向单个群组发送消息，可调用 20 次。第 21 次调用时会报 429 错误。
+**发送频率**：对于单个 app，该 REST API 存在以下三个限制：
+
+<table>
+<tbody>
+<tr>
+<td width="100">
+<p><strong>限制</strong></p>
+</td>
+<td>
+<p><strong>描述</strong></p>
+</td>
+<td>
+<p><strong>超限报错</strong></p>
+</td>
+<td>
+<p><strong>是否可调</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>20 次/秒</p>
+</td>
+<td>
+<p>每秒限调 20 次。</p>
+</td>
+<td>
+<p>例如，你每次调用该 API 向单个或多个群组发送消息，可调用 20 次。第 21 次调用时会报 429 错误 &ldquo;This request has reached api limit&rdquo;。</p>
+</td>
+<td rowspan="2">
+<p>两个限制均<strong>可调</strong>。若上调其中一个，另一个自动等比例提升。</p>
+<p>例如，将 20 次/秒上调至 100 次/秒后，每秒限发条数也会自动上调至 100，即 100 条/秒。反之，将 20 条/秒上调至 100 条/秒后，每秒限调次数自动上调至 100，即 100 次/秒。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>20 条/秒</p>
+</td>
+<td>
+<p>每秒限发 20 条消息。</p>
+</td>
+<td>
+<p>例如，你每次向 3 个群组发送消息，即发送了 3 条消息，你每秒最多可调用 7 次。第 8 次调用时，则报 403 错误，即 " message send reach limit"。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>3 个群/次</p>
+</td>
+<td>
+<p>每次限发 3 个群。</p>
+</td>
+<td>
+<p>若超限，报 400 错误，即 "param to exceed limit"。</p>
+</td>
+<td>
+<p>不可调</p>
+</td>
+</tr>
+</tbody>
+</table>
 
 ## 前提条件
 
@@ -86,9 +145,11 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 | `from`          | String | 否       | 消息发送方的用户 ID。若不传入该字段，服务器默认设置为 `admin`。<Container type="tip" title="提示">1. 服务器不校验传入的用户 ID 是否存在，因此，如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。<br/>2. 若传入字段但值为空字符串 (“”)，请求失败。</Container>  |
 | `to`            | Array   | 是       | 消息接收方群组 ID 数组。每次最多可向 3 个群组发送消息。<Container type="tip" title="提示">服务器不校验传入的群组 ID 是否存在，因此，如果你传入的群组 ID 不存在，服务器并不会提示，仍照常发送消息。</Container> |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
+| `need_group_ack` | Bool | 否 | 该条消息发送后是否需要已读回执：<br/> - `true`：需要；<br/> -（默认）`false`：不需要。 |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
+| `roam_ignore_users`   | List   | 否 | 设置哪些用户拉漫游消息时拉不到该消息。每次最多可传入 20 个用户 ID。|
 | `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。  |
-| `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
+| `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
 | `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。| 
 
 请求体中的 `body` 字段说明详见下表。
@@ -128,9 +189,11 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' \
     "from": "user1",
     "to": ["184524748161025"],
     "type": "txt",
+    "need_group_ack": false,
     "body": {
         "msg": "testmessages"
     },
+    "roam_ignore_users": [],
     "ext": {
        "em_ignore_notification": true
     }
@@ -150,6 +213,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'
     "from": "user1",
     "to": ["184524748161025"],
     "type": "txt",
+    "need_group_ack": false,
     "body": {
         "msg": "testmessages"
     },
@@ -592,7 +656,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups"  \
+curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'  \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -678,15 +742,15 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups" \
- -H 'Content-Type: application/json' \
- -H 'Accept: application/json' \ 
- -H "Authorization:Bearer <YourAppToken>" \
- -d '{
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json'  \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-d '{
   "from": "user1",
   "to": ["184524748161025"],
   "type": "cmd",
-  "body":{
-    "action":"action1"
+  "body": {
+    "action": "action1"
   }
 }'
 ```
@@ -770,7 +834,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups" \
     "to": ["184524748161025"],
     "type": "custom",
     "body": {
-        "customEvent": "custom_event"
+        "customEvent": "custom_event",
         "customExts":{
           "ext_key1":"ext_value1"
       }
@@ -800,9 +864,9 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups" \
 
 你可以向群组中指定的一个或多个成员发送消息，但单次仅支持指定一个群组。对于定向消息，只有作为接收方的指定成员才能看到消息，其他群成员则看不到该消息。
 
-:::notice
+:::tip
 1. 定向消息不写入会话列表，不计入群组会话的未读消息数。
-2. 定向消息不支持消息漫游功能，因此从服务器拉取漫游消息时，不包含定向消息。
+2. 群组定向消息的漫游功能默认关闭，使用前需联系商务开通。
 3. 群组中发送的定向消息均同步给发送方。
 :::
 
@@ -838,7 +902,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups/users
 | `to`            | Array   | 是       | 消息接收方所属的群组 ID。每次只能传 1 个群组。 |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。    |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。       |
-| `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
+| `ext`           | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
 | `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。|
 | `users` | Array | 是       | 接收消息的群成员的用户 ID 数组。每次最多可传 20 个用户 ID。 |
 
@@ -907,4 +971,38 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups/users' \
   "applicationName": "XXXX"
 }
 ```
+
+## 错误码
+
+1. 调用发送群聊消息的接口发送各类消息时，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型      | 错误提示        | 可能原因      | 处理建议    |
+|:---------|:-------------------|:------------|:-----------|:---------|
+| 400      | invalid_request_body                   | Request body is invalid. Please check body is correct. | 请求体格式不正确。 | 检查请求体内容是否合法(字段类型是否正确)。 |
+| 400      | message_send_error | param from can't be empty   | 请求参数 `from` 是空字符串。| 输入正确的请求参数 `from`。若不传该字段， 服务器会默认设置为 `admin`。|
+| 400      | message_send_error | param to can't be empty   | 请求参数 `to` 是空数组。| 输入正确的请求参数 `to`。每次最多可向 3 个群组发送消息。   |
+| 400      | message_send_error | param type can't be empty | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。         |
+| 400      | message_send_error | param body can't be empty    | 请求参数 `body` 是空 JSON。 | 输入正确的请求参数 `body`。         |
+| 400      | message_send_error | param ext must be JSONObject  | 请求参数 `ext` 类型不正确。 | 输入正确的请求参数 `ext`（JSON 格式）。  |
+| 400      | message_send_error | params to's size can't exceed limit 3  | 请求参数 `to` 数量超出最大限制 3 个群组 ID。 | 输入正确的请求参数 `to`（数量限制在 3 个群组 ID 以内）。 |
+| 400      | message_send_error | message is too large    | 请求体内容中 `body` 和 `ext` 字段的内容过大。  | 限制 `body` 和 `ext` 字段的内容。   |
+| 403      | message_send_error | message send reach limit  | 消息发送频率超出限制(默认 1 秒内只允许发送 20 条群聊消息) | 限制消息发送频率，详见[文档说明](message_group.html)。|
+
+2. 对于定向消息来说，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型      | 错误提示          | 可能原因       | 处理建议       |
+|:---------|:-------------------|:-------------------|:-----------|:----------------------|
+| 400      | invalid_request_body     | Request body is invalid. Please check body is correct. | 请求体格式不正确。    | 检查请求体内容是否合法(字段类型是否正确)。 |
+| 400      | message_send_error | param from can't be empty | 请求参数 `from` 是空字符串。   | 输入正确的请求参数 `from`。若不传该字段， 服务器会默认设置为 `admin`。|
+| 400      | message_send_error | param to can't be empty  | 请求参数 `to` 是空数组。  | 输入正确的请求参数 `to`。  |
+| 400      | message_send_error | param type can't be empty | 请求参数 `type` 是空字符串。   | 输入正确的请求参数 `type`。         |
+| 400      | message_send_error | param body can't be empty  | 请求参数 `body` 是空 JSON。   | 输入正确的请求参数 `body`。         |
+| 400      | message_send_error | param ext must be JSONObject  | 请求参数 `ext` 类型不正确。  | 输入正确的请求参数 `ext`（JSON 格式）。  |
+| 400      | message_send_error | param users can't be empty  | 请求参数 `users` 是空数组。 | 输入正确的请求参数 `users`。每次最多可传 20 个用户 ID。 |
+| 400      | message_send_error | params to's size can't exceed limit 3   | 请求参数 `to` 数量超出最大限制 3。 | 输入正确的请求参数 `to`。每次最多能传入 3 个群组 ID。 |
+| 400      | message_send_error | message is too large   | 请求体内容中 `body` 和 `ext` 字段的内容过大。 | 限制 `body` 和 `ext` 字段的内容。         |
+| 403      | message_send_error | message send reach limit  | 消息发送频率超出限制(默认 1 秒内只允许发送 100 条定向消息) | 限制消息发送频率，详见[文档说明](message_group.html#发送定向消息)。  |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 

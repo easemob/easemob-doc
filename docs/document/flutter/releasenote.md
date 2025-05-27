@@ -2,37 +2,182 @@
 
 <Toc />
 
-## 4.2.0 2024-1-4
+## 版本 v4.13.0 2025-3-28
+
+### 新增特性
+
+- [支持修改各类发送成功后的消息](message_modify.html) ：
+  - 文本/自定义消息：支持修改消息内容（body）和扩展 `attributes`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `attributes`。
+  - 命令消息：不支持修改。
+- 支持[控制 iOS 后台的行为和使用方式](initialization.html#初始化)。
+- 支持[鸿蒙平台](integration.html#鸿蒙平台支持)。
+
+#### 优化
+
+- 优化重连逻辑，默认切换重连的地址。
+- 使用联合插件的形式重写 SDK。
+- 升级 iOS 依赖库为 4.13.0 版本。
+- 升级 Android 依赖库为 4.13.0 版本。
+
+### 问题修复
+
+- 修复 `EMChatManager#fetchConversation` 方法拉取到的会话最新一条消息不包含表情回复（Reaction）和翻译信息的问题。
+
+## 版本 v4.12.0 2025-1-17
 
 #### 新增特性
+
+用户加入聊天室后会收到如下信息，即调用 `joinChatroom` 方法后的成功回调中会包含如下信息：
+1. 聊天室当前人数 `EMChatRoom#memberCount`。
+2. 聊天室全体禁言状态 `EMChatRoom#isAllMemberMuted`。
+3. 聊天室创建时间戳 `EMChatRoom#createTimestamp`，新增属性。
+4. 当前用户是否在聊天室白名单中 `EMChatRoom#isInWhitelist`。该属性为新增属性，成员收到白名单变更回调时更新。
+5. 当前用户被禁言截止时间戳 `EMChatRoom#muteExpireTimestamp`。该属性为新增属性，成员收到禁言变更回调时更新。
+
+## 版本 4.10.0 2024-12-05
+
+- 修复 [fetchSilentModeForConversations](/document/flutter/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
+- 修复 iOS `applicationDidEnterBackground` 和 `applicationWillEnterForeground` 不执行的问题。
+
+## 版本 4.8.2+1
+
+- 修复 Android 端可能出现的消息格式转换失败。
+
+## 版本 V4.8.2 2024-11-18
+
+- 修复 ios `EMChatManager.searchMsgsByOptions` 和 `EMConversation.searchMsgsByOptions` 方法类型不准的问题。
+
+## 版本 V4.8.1 2024-10-15
+
+#### 新增特性
+
+- 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+  - 新增 `EMChatRoomManager.joinChatRoom(String roomId, {bool leaveOther = true,String? ext,})` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
+  - 新增 `EMChatRoomEventHandler.onMemberJoinedFromChatRoom(String roomId, String participant, String? ext)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+- 新增 `EMPushManager.syncConversationsSilentMode()` 方法，支持[从服务器获取所有会话的推送通知方式的设置](/document/flutter/push/push_notification_mode_dnd.html#推送通知方式)。
+- 新增 [EMPushManager.bindDeviceToken(String notifierName, String deviceToken) 方法](/document/flutter/push/push_easemob_console.html#绑定推送信息)。
+- 新增 `EMConversation.remindType()` 方法，用于本地存储会话的推送通知方式。
+- 新增 `EMConversation.getLocalMessageCount()` 方法，用于[获取 SDK 本地数据库中会话在某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
+- 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)：
+  - 新增 `LoginExtensionInfo` 类接收用户设备扩展信息。
+  - 新增 `EMOptions.loginExtension` 设置登录时携带的扩展信息。
+- [IM SDK] 新增根据多个消息类型搜索本地消息：
+  - `EMChatManager#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
+  - `EMConversation#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
+
+#### 优化
+
+- 支持 AUT 协议， 优化弱网环境下的服务连接成功率;
+- `updateHMSPushToken`、`updateFCMPushToken`、`updateAPNsDeviceToken` 方法过期，`EMOptions` 中的 `enableOppoPush`、`enableMiPush`、`enableMeiZuPush`、`enableFCM`、`enableVivoPush`、`enableHWPush`、`enableAPNs`、`enableHonorPush` 过期， 使用 `EMPushManager.bindDeviceToken` 代替；
+- 修改 `EMConnectionEventHandler.onUserDidLoginFromOtherDevice(String deviceName)` 方法为 `EMConnectionEventHandler.onUserDidLoginFromOtherDevice(LoginExtensionInfo info)`
+
+#### 修复
+
+- 修复 `fetchConversationsByOptions` 偶尔引起的崩溃；
+- 修复拉黑联系人时缓存未及时更新的问题；
+- 修复退出登录再登录后推送可能不工作的问题。
+
+## 版本 V4.6.1 2024-6-11
+
+### 新增特性
+
+- 撤回消息方法 `recallMessage` 中增加了 `ext` 参数（字符串类型），[支持消息撤回时携带自定义信息](message_recall.html#撤回消息)。
+- 新增消息撤回事件 `EMChatEventHandler#onMessagesRecalledInfo`, [支持离线期间撤回的消息通知给接收方](message_recall.html#设置消息撤回监听)。
+
+### 修复
+
+- 修复服务端获取好友列表（包含好友备注）时，在好友列表无变化时，第二次请求获取不到数据的问题。
+- 修复特殊情况下附件发送失败，消息仍然成功发送的问题。
+- 修复拉取漫游消息时 nextkey 错误的问题。
+- 修复安卓部分场景下，用户升级数据库后，在同一个进程下登录新的用户，构建数据库表失败的问题。
+
+## 版本 V4.5.0 2024-5-7
+
+### 新增特性
+
+- 新增 `EMChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
+  - `MessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+  - `EMChatManager#loadMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
+  - `EMConversation#loadMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。
+- 支持[会话标记](conversation_mark.html)功能。
+  - `ConversationFetchOptions` 从服务器获取会话的选项，可以用来回去置顶会话或者是标记后的会话。
+  - `EMChatManager#addRemoteAndLocalConversationsMark`：标记会话。
+  - `EMChatManager#deleteRemoteAndLocalConversationsMark`：取消标记会话。
+  - `EMChatManager#fetchConversationsByOptions`：根据 `ConversationFetchOptions` 选项从服务器分页查询会话列表。
+  - `EMConversation#marks`：获取本地单个会话的所有标记。
+  - `EMChatMultiDevicesEvent#CONVERSATION_UPDATE_MARK`：多设备场景下的会话标记事件。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+- 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
+- 新增 `EMChatOptions#useReplacedMessageContents` 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以收到替换后的内容。
+- 新增[置顶消息](message_pin.html)功能。
+  - 新增 `EMChatManager#pinMessage` 方法，用于置顶消息。
+  - 新增 `EMChatManager#unpinMessage` 方法，用于取消置顶消息。
+  - 新增 `EMChatManager#fetchPinnedMessages` 方法，从服务器获取指定会话的置顶消息。
+  - 新增 `EMConversation#loadPinnedMessages` 方法，返回会话下的所有置顶消息。
+  - 新增 `MessagePinInfo` 类，包含消息置顶的操作者以及置顶时间。
+  - 新增 `EMChatMessage#pinInfo` 方法，展示消息的置顶详情。
+  - 新增 `EMChatEventHandler#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
+- 新增 `EMOptions#messagesReceiveCallbackIncludeSend` 开关。开启后，在 `EMChatEventHandler#onMessagesReceived` 回调里增加发送成功的消息。
+- 消息修改回调 `EMChatEventHandler#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
+
+### 优化
+
+- `EMChatManager#fetchConversation` 和 `EMChatManager#fetchPinnedConversations` 方法废弃，使用 `EMChatManager#fetchConversationsByOptions` 方法替代。
+- 支持使用消息 body 完成[单条转发](message_forward.html)，无需重新上传附件。
+- 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。
+- 在[聊天室成员进出时更新聊天室成员人数](room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。   
+- 优化 token 登录时的错误提示信息，使错误提示更精细。   
+- 优化将所有会话置为已读的时间。    
+- 优化 SDK 内部随机取服务器地址的逻辑，提升请求成功率。   
+- 优化进出聊天室超时时间。   
+- 优化部分场景下连接失败后重连的逻辑。  
+- 优化附件类型消息发送时中的附件上传，支持分片上传。    
+- 优化发消息时重试的逻辑。
+- Android/iOS SDK 移除网络请求时对 `NetworkOnMainThreadException` 异常的捕获。
+- 数据库升级逻辑优化。  
+- 单个日志文件大小由 2 MB 提升到 5 MB。
+- iOS 平台增加了隐私协议 `PrivacyInfo.xcprivacy`。
+- Android 平台适配 Android 14 Beta：适配以 Android 14 为目标平台时动态注册广播接收者必须设置 `RECEIVER_EXPORTED` 或者 `RECEIVER_NOT_EXPORTED` 的规定。
+
+### 修复
+
+- 特殊场景下，SDK 退出后再登录会丢失聊天室监听事件问题。
+- 部分场景下群成员人数计算重复问题。
+- 修复数据上报模块偶现的崩溃问题。
+- 修复部分场景下调用 `EMChatManager#updateMessage` 方法更新消息时导致的崩溃问题。
+
+## 版本 V4.2.0 2024-1-4
+
+### 新增特性
 
 - 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
 - 新增 `EMContactManager#fetchContacts` 和 `EMContactManager#fetchAllContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。从服务器一次性获取好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromServer` 已废弃，由 `fetchAllContactIds` 替换。
 - 新增 `EMContactManager#getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
 - 新增 `EMContactManager#getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。一次性获取本地好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromDB` 已废弃，由 `getAllContactIds` 替换。
-- 新增 `EMMessage#isBroadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
-- 新增 `EMGroupManager#fetchJoinedGroupCount` 方法用于从服务器获取当前用户已加入的群组数量。
+- 新增 `EMMessage#isBroadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
+- 新增 `EMGroupManager#fetchJoinedGroupCount` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。
 - 新增[错误码 706](/document/android/error.html)，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#isChatRoomOwnerLeaveAllowed` 参数设置为 false，聊天室所有者调用 `EMChatRoomManager#leaveChatroom` 方法离开聊天室时会提示该错误。
 - 新增 `EMOptions#enableEmptyConversation` 属性用于在初始化时配置获取会话列表时是否允许返回空会话。
 - 申请入群被拒绝的回调 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 decliner 和 applicant 参数表示申请者和拒绝者的用户 ID。
 
-#### 优化
+### 优化
 
 - 统一 Agora Token 和 EaseMob Token 登录方式，原 `EMClient#login` 方法废弃，使用 `EMClient#loginWithToken` 和 `EMClient#loginWithPassword` 方法代替。此外，新增 EaseMob Token 即将过期及已过期的回调，即 EaseMob Token 已过期或有效期过半时也返回 `EMConnectionEventHandler#onTokenDidExpire` 和 `EMClientDelegate#onTokenWillExpire` 回调。
 
-#### 修复
+### 修复
 
 - 修复网络恢复时重连 2 次的问题。
 - 修复未登录时调用 leaveChatroom 方法返回的错误提示不准确。
 
-## 版本 4.1.3 2023-11-1
+## 版本 V4.1.3 2023-11-1
 
-#### 新增
+### 新增
 
 - 支持安卓 14;
 - 新增 `EMOptions#enableHonorPush` 方法用于开启荣耀推送。
 
-#### 修复
+### 修复
 
 - 修复调用 `EMChatManager#getThreadConversation` 报错；
 - 修复 `EMMessage#chatThread` 方法报错;
@@ -53,7 +198,7 @@
 - 新增[消息修改功能](message_modify.html)：
   - 新增 `EMChatManager#modifyMessage` 方法用户修改已发送的消息，目前只支持文本消息;
   - 新增 `EMChatEventHandler#onMessageContentChanged` 回调，用户监听消息修改实现；
-- 新增[会话置顶功能](conversation_pin.html#置顶会话)：
+- 新增[会话置顶功能](conversation_pin.html#置顶-取消置顶会话)：
   - 新增 `EMChatManager#pinConversation` 方法，实现在服务器会话列表中置顶/取消置顶会话；
   - 新增 `EMChatManager#fetchPinnedConversations` 方法，从服务器获取已置顶会话；
 - [以下方法新增支持用户 token](multi_device.html#获取指定账号的在线登录设备列表)：  
@@ -81,7 +226,7 @@
     - 新增 `GroupManager#setMemberAttributes` 方法，用于设置群成员属性；
     - 新增 `GroupManager#fetchMemberAttributes` 和 `GroupManager#fetchMembersAttributes` 方法用于用户获取群成员属性；
     - 新增 `GroupEventHandler#onAttributesChangedOfGroupMember` 群成员属性变更回调;
-- 新增 `ChatManager#fetchHistoryMessagesByOption` 方法，用于根据消息拉取参数配置类（`FetchMessageOptions`）从服务器分页获取指定会话的历史消息。`FetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数；
+- 新增 `ChatManager#fetchHistoryMessagesByOption` 方法，用于[根据消息拉取参数配置类（`FetchMessageOptions`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的消息)。`FetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数；
 - 新增 `Conversation#deleteMessagesWithTs` 方法，用于从本地数据库中删除指定时间段内的消息；
 - 新增 `Message#deliverOnlineOnly` 属性用于设置只向在线用户投递消息；
 

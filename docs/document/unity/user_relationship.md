@@ -2,21 +2,19 @@
 
 <Toc />
 
-用户完成登录后，就会进行添加联系人、获取好友列表等操作。
-
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
-- 好友列表管理：查询好友列表、请求添加好友、同意好友请求、拒绝好友请求和删除好友等操作。
+- 好友列表管理：查询好友列表、请求添加好友、接受好友请求、拒绝好友请求、删除好友和设置好友备注等操作。
 - 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。
 
-本文介绍如何通过环信即时通讯 IM SDK 管理好友关系。
+此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
 
 ## 技术原理
 
 环信即时通讯 IM Unity SDK 提供 `IContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
 
 - `AddContact` 请求添加好友。
-- `AcceptInvitation` 同意好友请求。
+- `AcceptInvitation` 接受好友请求。
 - `DeclineInvitation` 拒绝好友请求。
 - `DeleteContact` 删除好友。
 - `GetAllContactsFromServer` 从服务器获取好友列表。
@@ -39,32 +37,14 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 好友请求部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
 
-1. 请求添加好友
-
-调用 `AddContact` 添加指定用户为好友，示例代码如下：
-
-```csharp
-//username 为要添加的好友的用户名，reason 为添加原因
-SDKClient.Instance.ContactManager.AddContact(username, reason, callback: new CallBack(
-  onSuccess: () =>
-  {
-
-  },
-  onError: (code, desc) =>
-  {
-
-  }
-));
-```
-
-2. 监听与好友请求相关的回调
+1. 添加监听。
 
 请监听与好友请求相关事件的回调，这样当用户收到好友请求，可以调用接受请求的 RESTful API 添加好友。服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。设置监听示例代码如下：
 
 ```csharp
 //继承并实现 IContactManagerDelegate。
 public class ContactManagerDelegate : IContactManagerDelegate {
-    // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 A 收到该事件，而用户 B 收到 `onContactAgreed` 事件。
+    // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 B 收到 `onContactAgreed` 事件，双方都收到该事件。
     public void OnContactAdded(string username)
     {
     }
@@ -94,12 +74,29 @@ SDKClient.Instance.ContactManager.AddContactManagerDelegate(adelegate);
 SDKClient.Instance.ContactManager.RemoveContactManagerDelegate(adelegate);
 ```
 
-收到好友请求后，可以选择同意或拒绝加好友请求，示例代码如下：
+2. 请求添加好友。
 
-收到后 `OnContactInvited`，调用 `AcceptInvitation` 或 `DeclineInvitation` 接受或拒绝邀请。
+调用 `AddContact` 添加指定用户为好友，示例代码如下：
 
 ```csharp
-//同意好友请求。
+//username 为要添加的好友的用户名，reason 为添加原因
+SDKClient.Instance.ContactManager.AddContact(username, reason, callback: new CallBack(
+  onSuccess: () =>
+  {
+
+  },
+  onError: (code, desc) =>
+  {
+
+  }
+));
+```
+
+3. 对端用户通过 `OnContactInvited` 监听收到好友请求，确认是否成为好友。 
+
+- 若接受好友请求，需调用 `AcceptInvitation` 方法。该用户收到 `onContactAdded` 事件。请求方收到 `OnFriendRequestAccepted` 事件。
+
+```csharp
 SDKClient.Instance.ContactManager.AcceptInvitation(username, callback: new CallBack(
    onSuccess: () =>
    {
@@ -108,8 +105,11 @@ SDKClient.Instance.ContactManager.AcceptInvitation(username, callback: new CallB
    {
    }
 ));
+```
 
-//拒绝好友请求。
+- 若拒绝好友请求，需调用 `DeclineInvitation` 方法。请求方收到 `OnFriendRequestDeclined` 事件。
+
+```csharp
 SDKClient.Instance.ContactManager.DeclineInvitation(username, callback: new CallBack(
   onSuccess: () =>
   {
@@ -120,13 +120,11 @@ SDKClient.Instance.ContactManager.DeclineInvitation(username, callback: new Call
 ));
 ```
 
-当你同意或者拒绝后，对方会通过好友事件回调，收到 `OnFriendRequestAccepted` 或者 `OnFriendRequestDeclined` 回调。
-
 ### 删除好友
 
-调用 `DeleteContact` 删除指定联系人。被删除的用户收到 `OnContactDeleted` 回调。删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
+调用 `DeleteContact` 删除指定联系人。被删除的用户收到 `OnContactDeleted` 回调。
 
-删除好友后，对方会收到 `OnContactDeleted` 回调。
+删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
 ```csharp
 SDKClient.Instance.ContactManager.DeleteContact(username, callback: new CallBack(

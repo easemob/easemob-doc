@@ -6,15 +6,15 @@
 
 1. 登录环信后台，进入**即时通讯 > 功能配置 > 消息回调**。
 
-![img](@static/images/moderation/moderation_callback_01.png)
+![img](/images/moderation/moderation_callback_01.png)
 
 2. 点击添加回调地址，选择**发送后回调**。
 
-![img](@static/images/moderation/moderation_callback_02.png)
+![img](/images/moderation/moderation_callback_02.png)
 
-3. 勾选 **内容审核**，其他字段的设置详见[设置回调](/document/server-side/callback.html)。
+3. 勾选 **内容审核**，其他字段的设置详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
 
-![img](@static/images/moderation/moderation_callback_03.png)
+![img](/images/moderation/moderation_callback_03.png)
 
 
 ## 审核回调内容
@@ -48,8 +48,8 @@
 | 参数          | 类型   | 描述                                             |
 | :------------ | :----- | :----------------------------------------------- |
 | callId | String| 回调的标识。格式为 {appkey}_{uuid}，其中 UUID 为随机生成，作为每条回调的唯一标识。|
-| moderationResult  | String  | 消息处理结果：<br/> - `PASS`：通过；<br/> - `REJECT`：拒绝下发；<br/> - `EXCHANGE`：替换；<br/> - `RECALL`：撤回发送的音频和视频。 |
-| providerResult | String | 审核结果：<br/> - `PASS`：通过；<br/> - `REVIEWED`：需要审核；<br/> - `REJECT`：存在违规内容。|
+| moderationResult  | String  | 消息处理结果：<br/> - `PASS`：通过，直接下发消息；<br/> - `REJECT`：拒绝下发；<br/> - `EXCHANGE`：替换消息中的违规内容；<br/> - `RECALL`：撤回发送的音频和视频。 |
+| providerResult | String | 审核结果：<br/> - `PASS`：消息中不包含违规内容；<br/> - `REVIEWED`：消息中疑似包含违规内容；<br/> - `REJECT`：消息存在违规内容。|
 | security       | String | 签名，格式如下: MD5（callId+Secret+timestamp），其中 Secret 详见[环信 IM 管理后台](https://console.easemob.com/user/login)的回调规则。 |
 | messageType       | String | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `custom`：自定义消息。   |
 | messageId       | String  | 消息 ID。   |

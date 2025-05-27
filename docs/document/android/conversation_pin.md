@@ -16,14 +16,14 @@
 
 ## 技术原理
 
-环信即时通讯 IM 支持会话置顶，主要方法如下：
+环信即时通讯 IM 通过 [EMChatManager ](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html)类支持会话置顶，主要方法如下：
 
-- `asyncPinConversation`：置顶会话。
-- `asyncFetchPinnedConversationsFromServer`：获取服务端置顶会话列表。
+- `EMChatManager#asyncPinConversation`：置顶/取消置顶会话。
+- `EMChatManager#asyncFetchPinnedConversationsFromServer`：获取服务端置顶会话列表。
 
 ## 实现方法
 
-### 置顶会话
+### 置顶/取消置顶会话
 
 你可以调用 `asyncPinConversation` 方法设置是否置顶会话。置顶状态会存储在服务器上，多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他登录设备分别会收到 `CONVERSATION_PINNED` 和 `CONVERSATION_UNPINNED` 事件。
 
@@ -45,7 +45,7 @@ EMClient.getInstance().chatManager().asyncPinConversation(conversationId, isPinn
 });
 ```
 
-你可以通过 `EMConversation` 对象的 `isPinned` 字段检查会话是否为置顶状态，或者调用 `getPinnedTime` 方法获取会话置顶时间。
+你可以通过 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 对象的 `isPinned` 字段检查会话是否为置顶状态，或者调用 `getPinnedTime` 方法获取会话置顶时间。
 
 ### 获取服务端的置顶会话列表
 

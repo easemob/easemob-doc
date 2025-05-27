@@ -59,7 +59,7 @@ ChatClient.getInstance()
 
 ### 将所有会话的未读消息数清零
 
-你可以调用 `markAllConversationsAsRead` 方法将本地所有会话的未读消息数清零，示例代码如下：
+你可以调用 `markAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零，示例代码如下：
 
 ```typescript
 ChatClient.getInstance()

@@ -2,28 +2,21 @@
 
 <Toc />
 
-环信即时通讯 IM 支持同一账号在多个设备上登录，所有已登录的设备同步以下信息和操作：
+即时通讯 IM 支持同一账号在多个设备上登录，使用该服务前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)的 **即时通讯** > **功能配置** > **功能配置总览** > **基础功能** 页面上查找**多端多设备在线**，开启该功能。
+
+多端多设备登录场景下，所有已登录的设备同步以下信息和操作：
 
 - 消息：包括在线消息、离线消息、推送通知（若开启了第三方推送服务，离线设备收到）以及对应的回执和已读状态等；
 - 好友和群组相关操作；
 - 子区相关操作；
 - 会话相关操作。
 
-多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。
+多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置各端设备的数量：
 
-你可以在环信控制台的**功能配置** > **功能配置总览**页面的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置设置各端设备的数量：
-
-![img](@static/images/common/multidevice_device_count.png)
+![img](/images/common/multidevice_device_count.png)
 
 单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
 
-<html>
-<head>
-<meta charset="utf-8">
-<title>无标题文档</title>
-</head>
-
-<body>
 <table width="807" height="327" border="1">
   <tbody>
     <tr>
@@ -34,7 +27,7 @@
     <tr>
       <td height="52">单端登录</td>
       <td>新登录的设备会将当前在线设备踢下线。</td>
-      <td rowspan="2">设备支持自动登录时，若设备下线后自动重连时需要判断是否踢掉当前在线的最早登录设备，请联系环信商务。 </td>
+      <td rowspan="2">对于自动登录的设备，下线后设备会自动重连环信服务器。若重连成功，默认会踢掉当前登录设备（对于多设备登录，则踢掉最早的登录设备）。若要保留当前登录设备不被踢下线，请联系环信商务。该场景下，自动登录的设备登录失败，收到错误 214，提示当前登录的设备数量超过限制。 </td>
     </tr>
     <tr>
       <td height="156">多端登录</td>
@@ -43,8 +36,6 @@
     </tr>
   </tbody>
 </table>
-</body>
-</html>
 
 ## 技术原理
 
@@ -60,15 +51,13 @@
 
 ## 前提条件
 
-开始前，请确保满足完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+开始前，请确保满足完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)及[连接](connection.html)文档。
 
 ## 实现方法
 
 ### 获取当前用户的其他登录设备的登录 ID 列表
 
-你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表。
-
-选择目标登录 ID 作为消息接收方发出消息，则其他端均会收到该消息，实现不同设备之间的消息同步。
+你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
 ```typescript
 ChatClient.getInstance()
@@ -121,7 +110,7 @@ ChatClient.getInstance()
 
 即时通讯 IM 自 1.2.0 版本开始支持自定义设置登录设备的名称。这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。设备名称 `deviceName` 可以通过 `getLoggedInDevicesFromServer` 返回对象 `ChatDeviceInfo` 获取。如果没有设置则返回默认值，即设备型号。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -152,11 +141,11 @@ ChatClient.getInstance()
 
 **设备平台**的取值范围为 [1,100]，**设备数量**的取值范围为 [0,4]。
 
-![img](@static/images/common/multidevice_device_platform.png)
+![img](/images/common/multidevice_device_platform.png)
 
 2. 初始化 SDK。确保该方法中的 `customOSType` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -177,11 +166,58 @@ ChatClient.getInstance()
   });
 ```
 
+### 设置登录设备的扩展信息
+
+即时通讯 IM 自 1.6.0 版本开始支持设备的自定义扩展信息，这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
+
+初始化 SDK 时，你可以利用 `ChatOptions#loginExtraInfo` 属性设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，Android 为 `USER_LOGIN_ANOTHER_DEVICE`，iOS 为 `EMErrorUserLoginOnAnotherDevice`），被踢设备收到的 `ChatConnectEventListener#onUserDidLoginFromOtherDeviceWithInfo` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
+
+:::tip
+登录成功后才会将该设置发送到服务器。
+:::
+
+```typescript
+// 初始化设置登录额外信息
+ChatClient.getInstance()
+  .init(
+    new ChatOptions({
+      appKey: "foo",
+      loginExtraInfo: "test",
+    })
+  )
+  .then(() => {
+    console.log("success");
+  })
+  .catch((e) => {
+    console.warn("fail:", e);
+  });
+
+// 用户设备B关注通知
+ChatClient.getInstance().addConnectionListener({
+  onUserDidLoginFromOtherDeviceWithInfo: (params: {
+    deviceName?: string;
+    ext?: string;
+  }): void => {
+    console.log(params);
+  },
+});
+
+// 用户执行登录设备A，用户设备B收到被踢通知
+ChatClient.getInstance()
+  .login("userId", "userPass", true)
+  .then(() => {
+    console.log("success");
+  })
+  .catch((e) => {
+    console.log("fail:", e);
+  });
+```
+
 ### 强制指定账号从单个设备下线
 
 你可以调用 `kickDevice` 方法将指定账号从单个登录设备踢下线。调用该方法前，你需要首先通过 `ChatClient#getLoggedInDevicesFromServer` 方法获取设备 ID。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 
@@ -206,7 +242,7 @@ ChatClient.getInstance()
 
 你可以调用 `kickAllDevices` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备踢下线。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 
@@ -226,6 +262,10 @@ ChatClient.getInstance()
 账号 A 同时在设备 A 和设备 B 上登录，账号 A 在设备 A 上进行一些操作，设备 B 上会收到这些操作对应的通知。
 
 你需要先实现 `ChatMultiDeviceEventListener` 监听其他设备上的操作，再设置多设备监听器。
+
+:::tip
+多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
+:::
 
 ```typescript
 let listener: ChatMultiDeviceEventListener = new (class

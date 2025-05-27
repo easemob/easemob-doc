@@ -12,7 +12,7 @@
 
 以下为房间管理流程图。
 
-![img](@static/images/voiceroom/voiceroom_mgmt.png)
+![img](/images/voiceroom/voiceroom_mgmt.png)
 
 Demo 中创建或加入语聊房的流程如下：
 
@@ -48,7 +48,7 @@ Demo 中创建或加入语聊房的流程如下：
 
 麦位管理流程图如下所示：
 
-![img](@static/images/voiceroom/voiceroom_seatmgmt.png)
+![img](/images/voiceroom/voiceroom_seatmgmt.png)
 
 麦位相关操作如下表所示：
 
@@ -68,7 +68,7 @@ Demo 中创建或加入语聊房的流程如下：
 
 ### 发送单向消息
 
-![img](@static/images/voiceroom/voiceroom_oneway_msg.png)
+![img](/images/voiceroom/voiceroom_oneway_msg.png)
 
 邀请用户上麦的流程如下：
 
@@ -86,7 +86,7 @@ Demo 中创建或加入语聊房的流程如下：
 
 ### 发送礼物消息
 
-![img](@static/images/voiceroom/voiceroom_gift_msg.png)
+![img](/images/voiceroom/voiceroom_gift_msg.png)
 
 发送礼物消息的流程如下：
 

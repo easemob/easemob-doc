@@ -1,12 +1,14 @@
 # 最佳实践
 
+若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。
+
 ## 初始化 ChatroomUIKit
 
 初始化是使用 ChatroomUIKit 的必要步骤，需在所有接口方法调用前完成。
 
 初始化 ChatroomUIKit 时，你可以传入 `option` 参数，设置各种选项。
 
-```Swift
+```swift
 let option = ChatroomUIKitInitialOptions.ChatOptions()
 option.enableConsoleLog = true
 option.autoLogin = true
@@ -17,7 +19,7 @@ let error = ChatroomUIKitClient.shared.setup(appKey,option: option)
 
 你可以通过使用工程中的用户对象并遵守 `UserInfoProtocol` 协议登录 ChatroomUIKit，示例代码如下：
 
-```Swift
+```swift
 public final class YourAppUser: NSObject,UserInfoProtocol {
         
         public func toJsonObject() -> Dictionary<String, Any>? {
@@ -51,7 +53,7 @@ ChatroomUIKitClient.shared.login(user: YourAppUser(), token: "token", completion
 
 3. 添加视图。
 
-```Swift
+```swift
 let options  = ChatroomUIKitInitialOptions.UIOptions()
 options.bottomDataSource = self.bottomBarDatas()
 // 实现显示礼物消息区域。
@@ -68,10 +70,7 @@ addSubView(roomView)
 
 你可以调用 `registerRoomEventsListener` 方法添加监听器用于监听 ChatroomUIKit 事件和错误。
 
-```Swift
+```swift
 ChatroomUIKitClient.shared.registerRoomEventsListener(self)
 ```
 
-## 参考
-
-若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。

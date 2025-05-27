@@ -10,6 +10,7 @@
   }
 }
 
+
 div[class*=language-] {
   padding-top: 2px;
 } 
@@ -31,8 +32,20 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
   font-size: 1.0em
 }
 
+.el-popper__arrow {
+  display: none;
+}
+
 .el-anchor .el-anchor__list .el-anchor__item a {
   font-size: 14px; 
+}
+
+.el-anchor .el-anchor__list .el-anchor__link:first-child {
+  padding-top: 0;
+}
+
+.el-anchor .el-anchor__list .el-anchor__link {
+  padding: 7px 0;
 }
 
 .el-anchor > .el-anchor__list >.el-anchor__item  {
@@ -40,4 +53,52 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
       font-size:16px;
       color: #000;
     }
+}
+
+
+$sidebar-levels: 4; // 菜单的级数
+$base-color: #000000; // 初始字体颜色
+$fade-amount: 20; // 每级字体颜色变淡的递减值
+
+#sidebar {
+  background-color: rgb(245, 247, 250);
+  > .sidebar-links > li {
+    > a {
+      font-weight: 600;
+    }
+    > .sidebar-group {
+      > p span.title {
+        font-weight: 600;
+      }
+      > button.sidebar-heading {
+        font-weight: 600;
+      }
+      > .sidebar-links {
+        border-left: 1px solid #ccc;
+        margin-left: 12px;
+        > li > .sidebar-link {
+          padding-inline-start: 0.7rem;
+        }
+        > li > .sidebar-group {
+          padding-inline-start: 0.2rem;
+        }
+      }
+    }
+
+    @for $i from 1 through $sidebar-levels {
+      $color: lighten($base-color, $i * $fade-amount);
+      $selector: '';
+      @for $j from 1 through $i {
+        $selector: #{$selector} + '.sidebar-group > .sidebar-links ';
+      }
+      #{$selector} {
+        > li > a {
+          color: $color;
+        }
+        .title {
+          color: $color;
+        }
+      }
+    }
+  }
 }

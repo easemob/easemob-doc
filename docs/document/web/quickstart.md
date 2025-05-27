@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![](@static/images/web/sendandreceivemsg.png)
+![](/images/web/sendandreceivemsg.png)
 
 ## 前提条件
 
@@ -56,6 +56,20 @@ Easemob_quickstart<br>
     "license": "ISC"
 }
 ```
+
+### 3. 创建账号
+
+1. 在[环信控制台](https://console.easemob.com/user/login)首页的 **应用列表** 中，在目标应用的 **操作** 栏中点击 **管理**。
+
+2. 在环信即时通讯云的左侧导航栏中，选择 **应用概览 > 用户认证**。
+   
+3. 在 **用户认证** 页面，点击 **创建IM用户** 按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
+
+![img](/images/product/user_create_test.png)
+   
+创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
+
+在生产环境中，若使用 Token 登录，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/document/server-side/easemob_app_token.html) 和[获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ### 3. 实现用户界面
 
@@ -117,7 +131,7 @@ Easemob_quickstart<br>
 
 `index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 `<Your app key>` 替换为你之前获取的 App Key。
 
-```Javascript
+```javascript
 import WebIM from 'easemob-websdk'
 const appKey = "<Your app key>"
 
@@ -213,9 +227,9 @@ window.onload = function () {
     }
 }
 ```
-:::notice
+:::tip
 对于 Typescript，通过以下代码引入类型声明：
-```JavaScript
+```javascript
 import WebIM, { EasemobChat } from 'easemob-websdk'
 ```
 :::
@@ -224,7 +238,7 @@ import WebIM, { EasemobChat } from 'easemob-websdk'
 
 本文使用 webpack 对项目进行打包，并使用 `webpack-dev-server` 运行项目。
 
-1.在 `package.json` 的 `dependencies` 字段中添加 `webpack`、`webpack-cli` 和 `webpack-dev-server`，并且在 `scripts` 字段中添加 `build` 和 `start:dev` 命令。
+1. 在 `package.json` 的 `dependencies` 字段中添加 `webpack`、`webpack-cli` 和 `webpack-dev-server`，并且在 `scripts` 字段中添加 `build` 和 `start:dev` 命令。
 
 ```json
 {
@@ -247,9 +261,9 @@ import WebIM, { EasemobChat } from 'easemob-websdk'
 }
 ```
 
-2.在项目根目录中添加 `webpack.config.js` 文件，用于配置 webpack。文件内容如下：
+2. 在项目根目录中添加 `webpack.config.js` 文件，用于配置 webpack。文件内容如下：
 
-```Javascript
+```javascript
 const path = require('path');
 
 module.exports = {
@@ -275,13 +289,13 @@ Easemob_quickstart<br>
 ├─ package.json<br>
 └─webpack.config.js
 
-3.在项目根目录运行以下命令，安装依赖项。
+3. 在项目根目录运行以下命令，安装依赖项。
 
 ```bash
 $ npm install
 ```
 
-4.运行以下命令使用 `webpack` 构建并运行项目。
+4. 运行以下命令使用 `webpack` 构建并运行项目。
 
 ```bash
 # 使用 webpack 打包。
@@ -291,45 +305,4 @@ $ npm run build
 $ npm run start:dev
 ```
 
-项目启动后，在页面输入用户名和密码进行注册，然后利用该用户名和密码登录。登录成功后，输入对方的用户名和要发送的消息，点击**发送**按钮发送消息，可同时打开另一页面相互收发消息。
-
-### 6. 参考信息
-
-可通过以下两种方式集成 SDK：
-
-#### 方法一：通过 npm 安装并导入 SDK
-
-1. 在 `package.json` 中的 `dependencies` 字段中加入 `easemob-websdk` 及对应版本：
-
-```json
-{
-    "name": "web",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "dependencies": {
-    "easemob-websdk": "latest"
-    },
-    "author": "",
-    "license": "ISC"
-}
-```
-
-2. 在你的 `index.js` 文件中导入 `easemob-websdk` 模块：
-
-```JavaScript
-import WebIM from 'easemob-websdk'
-```
-
-#### 方法二：从官网获取并导入 SDK
-
-1. 下载 [Easemob Chat SDK for Web](https://www.easemob.com/download/im)。将 `demo/src/config` 中的 Easemob-chat 文件保存到你的项目下。
-
-2. 在 `index.html` 文件中，对 `index.js` 文件进行引用。
-
-```JavaScript
-<script src="path to the JS file"></script>
-```
+项目启动后，在页面输入用户名和密码进行注册，然后利用该用户名和密码登录。登录成功后，输入对方的用户名和要发送的消息，点击 **发送** 按钮发送消息，可同时打开另一页面相互收发消息。

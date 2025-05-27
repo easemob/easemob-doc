@@ -42,7 +42,7 @@ SDKClient.Instance.InitWithOptions(options);
 | `DeleteMessagesAsExitGroup` | 是否需要在离开群组时自动删除聊天历史消息。设置为 `true` 则在退出群组的时候，会删除聊天记录。  |
 | `DeleteMessagesAsExitRoom` | 是否需要在离开聊天室时自动删除聊天历史消息。设置为 `true` 则在退出聊天室的时候，会删除记录。 |
 | `IsRoomOwnerLeaveAllowed`  | 是否允许聊天室所有者离开聊天室。设置为 `true` 则允许。详见 [聊天室](room_overview.html) 章节。  |
-| `IsAutoDownload`  | 是否开启自动下载。设置为 `true` 则收到图片、视频、音频、语音消息会自动下载。详见 [消息](message_send_receive.html#接收消息) 章节。 |
+| `IsAutoDownload`  | 是否开启自动下载。设置为 `true` 则收到图片、视频、音频、语音消息会自动下载。详见 [消息](message_send_receive.html#发送和接收图片消息) 章节。 |
 
 ## 注册用户
 
@@ -78,7 +78,7 @@ SDKClient.Instance.CreateAccount(username, password,
 );
 ```
 
-:::notice
+:::tip
 该注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用。
 :::
 
@@ -92,6 +92,8 @@ SDK 不支持自动登录，只支持通过以下方式手动登录：
 登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
 
 调用登录接口后，收到 `OnConnected` 回调表明 SDK 与环信服务器连接成功。
+
+用户登录流程详见[用户注册与登录的产品说明文档](/product/product_user_registration_login.html)。
 
 1. **用户 ID + 密码** 登录是传统的登录方式。
 
@@ -121,7 +123,7 @@ SDKClient.Instance.Login(username, password,
 
 2. **用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
-:::notice
+:::tip
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 :::
 

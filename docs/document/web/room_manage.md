@@ -14,10 +14,12 @@
 
 - 创建聊天室；
 - 从服务器获取聊天室列表；
+- 获取当前用户加入的聊天室列表；
 - 加入聊天室；
 - 获取聊天室详情；
 - 解散聊天室；
-- 监听聊天室事件。
+- 监听聊天室事件；
+- 实时更新聊天室成员人数。
 
 ## 前提条件
 
@@ -26,7 +28,7 @@
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
 - 了解环信即时通讯 IM 的 API 使用限制，详见 [使用限制](/product/limitation)；
 - 了解环信即时通讯 IM 聊天室不同版本的数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)；
-- 仅 [超级管理员](/document/server-side/chatroom.html#管理超级管理员) 可以创建聊天室；
+- 仅 [超级管理员](/document/server-side/chatroom_superadmin.html) 可以创建聊天室；
 - 聊天室创建者和管理员的数量之和不能超过 100 ，即管理员最多可添加 99 个。
 
 ## 实现方法
@@ -35,7 +37,7 @@
 
 ### 创建聊天室
 
-仅 [超级管理员](/document/server-side/chatroom.html#管理超级管理员) 可以调用 `createChatRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
+仅 [超级管理员](/document/server-side/chatroom_superadmin.html) 可以调用 `createChatRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
 
 建议直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
 
@@ -53,14 +55,15 @@ conn.createChatRoom(options).then(res => console.log(res))
 
 ### 从服务器获取聊天室列表
 
-用户可调用 `getChatRooms` 方法从服务器获取指定数目的聊天室列表，能获取到的最大数量为 1,000。
+你可以调用 `getChatRooms` 方法从服务器获取指定数目的聊天室列表，能获取到的最大数量为 1,000。
 
 ### 加入聊天室
 
-用户申请加入聊天室的步骤如下：
+申请加入聊天室的步骤如下：
 
 - 调用 `getChatRooms` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-- 调用 `joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `memberPresence` 事件。
+- 调用 `joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `onChatRoomEvent#memberPresence` 事件。
+  该方法支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。若进行了设置，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 
 示例代码如下：
 
@@ -75,9 +78,42 @@ conn.getChatRooms(option).then(res => console.log(res))
 // 加入聊天室。聊天室所有成员均可调用该接口。
 let option = {
     roomId: 'roomId',
-    message: 'reason'
+    // 加入聊天室时携带的扩展信息
+    ext: 'custom ext',
+    // 加入聊天室时，是否退出已加入的聊天室
+    leaveOtherRooms: false
 }
 conn.joinChatRoom(option).then(res => console.log(res))
+
+// 监听聊天室事件
+conn.addEventHandler("CHATROOM", {
+        onChatroomEvent: (e) => {
+    switch (e.operation) {
+      // 用户加入聊天室事件
+      case "memberPresence":
+        // 用户加入聊天室时携带的扩展信息
+        console.log(e.ext);
+        break;
+      default:
+        break;
+    }
+  }
+});
+```
+
+### 获取当前用户加入的聊天室列表
+
+你可以调用 `getJoinedChatRooms` 方法获取当前用户加入的聊天室列表，示例代码如下：
+
+```javascript
+conn
+  .getJoinedChatRooms({
+    pageNum: 1,
+    pageSize: 20
+  })
+  .then((res) => {
+    console.log(res);
+  });
 ```
 
 ### 获取聊天室详情
@@ -178,4 +214,31 @@ conn.addEventHandler("eventName", {
         }
     }
 })
+```
+
+### 实时更新聊天室成员人数
+
+如果聊天室短时间内有成员频繁加入或退出时，实时更新聊天室成员人数的逻辑如下：
+
+1. 聊天室内有成员加入时，其他成员会收到 `onChatroomEvent` 的 `memberPresence` 事件。有成员主动或被动退出时，其他成员会收到 `onChatroomEvent` 的 `memberAbsence` 事件。
+
+2. 收到通知事件后，可以通过事件回调参数获取聊天室当前人数。
+
+```javascript
+conn.addEventHandler("CHATROOM", {
+        onChatroomEvent: (e) => {
+          switch (e.operation) {
+            case "memberPresence":
+              // 当前聊天室在线人数
+              console.log(e?.memberCount);
+              break;
+            case "memberAbsence":
+              // 当前聊天室在线人数
+              console.log(e?.memberCount);
+              break;
+            default:
+              break;
+          }
+        }
+      });
 ```

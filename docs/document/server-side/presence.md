@@ -4,7 +4,9 @@
 
 在线状态（Presence）表示用户的当前状态信息。除了环信 IM 内置的在线和离线状态，你还可以添加自定义在线状态，例如忙碌、马上回来、离开、接听电话、外出就餐等。本文展示如何调用环信即时通讯 RESTful API 实现用户在线状态（Presence）订阅，包括设置用户在线状态信息、批量订阅和获取在线状态、取消订阅以及查询订阅列表。
 
-:::notice
+关于用户的在线、离线和自定义状态的定义，详见[用户在线状态管理](/product/product_user_presence.html)。
+
+:::tip
 使用该特性前，你需要联系商务开通。
 :::
 
@@ -62,6 +64,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{
 | 参数            | 类型   | 是否必需 | 描述                       | 
 | :-------------- | :----- | :------------ | :------- |
 | `Content-Type`  | String | 是    | 内容类型：`application/json`。                               | 
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 
 
 #### 请求体 body
@@ -70,7 +73,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{
 
 | 参数  | 类型 | 是否必需  | 描述             | 
 | :---- | :----- | :---------------------- | :------- |
-| `ext` | String | 是 | 在线状态扩展信息。建议不超过 64 字节。 | 
+| `ext` | String | 是 | 在线状态扩展信息。建议不超过 1024 字节。 | 
 
 ### HTTP 响应
 
@@ -92,6 +95,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{
 curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/c1/presence/android/0' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
+-H 'Accept: application/json'
 -d '{"ext":"123"}'
 ```
 
@@ -100,6 +104,19 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/c1/presence/a
 ```json
 {"result":"ok"}
 ```
+
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 400   | illegal_argument | ext cannot be null | 在线状态扩展参数 `ext` 传了空值。 | 保证 `ext` 参数传非空值。 |
+| 400   | illegal_argument | ext is too big | 在线状态扩展信息超过了 1024 字节长度限制。 | 控制在线状态扩展信息的长度不要超过 1024 字节。 |
+| 400   | service open exception | the app not open presence | 没有开通在线状态 Presence 服务。 | 联系商务开通在线状态 Presence 服务。|
+| 401  | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+
+关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ## 批量订阅在线状态
 
@@ -125,6 +142,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{expiry}
 | 参数            | 类型  | 是否必需 | 描述                  | 
 | :-------------- | :----- | :------------------------- | :------- |
 | `Content-Type`  | String | 是   | 内容类型：`application/json`。                  |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是   | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。      |
 
 #### 请求 body
@@ -160,6 +178,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{expiry}
 curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/1000' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
+-H 'Accept: application/json'
 -d '{"usernames":["c2","c3"]}'
 ```
 
@@ -184,6 +203,20 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/
     }]
 }
 ```
+
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型     | 错误提示    | 可能原因   | 处理建议     |
+| :---------- | :--- | :----------- | :----- | :-------------- |
+| 400         | illegal_argument       | usernames is empty   | 被订阅用户的用户 ID 数组为空。           | 保证被订阅用户的用户 ID 数组非空值。  |
+| 400         | illegal_argument       | too many sub presence   | 被订阅用户的用户列表超过了 100 个用户 ID 限制。    | 控制被订阅用户的用户列表不要超过 100 个用户 ID 限制。 |
+| 400         | illegal_argument       | you can't sub yourself  | 被订阅用户的用户列表中包含了自己（被订阅用户列表中包含了请求 URL 路径中的 `username`）。 | 将自己从被订阅用户的用户列表中移除。  |
+| 400         | service open exception | the app not open presence  | 没有开通 Presence 服务。                 | 联系商务开通 Presence 服务。    |
+| 401         | unauthorized           | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。      | 使用新的 token 访问。           |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 批量获取在线状态信息
 
@@ -212,6 +245,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence
 | 参数            | 类型  | 是否必需 | 描述               |
 | :-------------- | :----- | :----------------- | :------- |
 | `Content-Type`  | String | 是  | 内容类型。请填 `application/json`。         |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是  | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 
 
 #### 请求 body
@@ -246,6 +280,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence
 curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
+-H 'Accept: application/json'
 -d '{"usernames":["c2","c3"]}'
 ```
 
@@ -270,9 +305,21 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence'
  }
 ```
 
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型               | 错误提示 | 可能原因                | 处理建议|
+| :---------- | :--- | :----------- | :-------- | :-------------- |
+| 400         | illegal_argument       | too many get presences        | 获取在线状态用户列表超过了 100 个用户 ID 限制。 | 控制获取在线状态用户列表不超过 100 个用户 ID。 |
+| 400         | service open exception | the app not open presence      | 没有开通 presence 服务。  | 联系商务开通 presence 服务。    |
+| 401         | unauthorized           | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。   | 使用新的 token 访问。  |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 查询单个群组的在线成员数量
 
-你可以查询单个群组的在线成员数量。如需使用该 API，需要联系环信商务开通。
+你可以查询单个群组的在线成员数量。**如需使用该 API，需要联系环信商务开通。**
 
 这里的在线状态指用户的 app 与服务器成功建立连接，不包括用户的自定义在线状态，如忙碌、马上回来等。
 
@@ -310,7 +357,7 @@ GET https://{host}/{org_name}/{app_name}/presence/online/{group_id}/type/{query_
 | :------- | :--- | :----------------- |
 | `result` | Int  | 群组内的在线成员数量。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[错误码](#错误码)了解可能的原因。
 
 ### 示例
 
@@ -329,6 +376,19 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型               | 错误提示                 | 可能原因  | 处理建议   |
+| :---------- | :--- | :--------- | :------------ | -------------- |
+| 400         | illegal_argument       | Id cannot be null.       | 群组 ID 为空。 | 保证群组 ID 为非空值。 |
+| 400         | illegal_argument       | Type cannot be null.     | 查询类型为空。    | 保证查询类型为非空值。 |
+| 400         | illegal_argument       | Type must be 0 or 1.     | 查询类型（`query_type`）不为 0 或 1。  | 若查询单个群组的在线成员数量，需保证查询类型为 `1`。若传 `0` 是获取超级社区中社区 server 在线成员数量，与群组不相关。 |
+| 400         | service open exception | this appkey not open rest group online service | 没有开通统计群组在线人数服务。 | 联系商务开通统计群组在线人数服务。 |
+| 401         | unauthorized           | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ##  取消订阅多个用户的在线状态
 
@@ -353,6 +413,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/presence
 | 参数            | 类型   | 是否必需 | 描述         | 
 | :-------------- | :----- | :-------------------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。                                   |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 ### 请求 body
 
@@ -380,6 +441,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/presence
 curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
+-H 'Accept: application/json'  \
 -d '["c1"]'
 ```
 
@@ -389,6 +451,19 @@ curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presenc
 {"result":"ok"}
 ```
 
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型               | 错误提示 | 可能原因| 处理建议      |
+| :---------- | :--- | :----------- | :-------------- | :-- |
+| 400         | illegal_argument       | usernames cannot be null       | 要取消订阅在线状态的用户 ID 数组为空。    | 保证要取消订阅在线状态的用户 ID 数组为非空值。  |
+| 400         | illegal_argument       | too many unsub presences      | 取消订阅在线状态的用户列表超过了 100 个用户 ID。 | 控制取消订阅在线状态的用户列表在 100 个用户 ID 以内。 |
+| 400         | service open exception | the app not open presence      | 没有开通 Presence 服务。        | 联系商务开通 Presence 服务。   |
+| 401         | unauthorized           | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。  | 使用新的 token 访问。  |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
 ## 查询订阅列表
 
 查询当前用户已订阅在线状态的用户列表。
@@ -396,7 +471,7 @@ curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presenc
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{username}/presence/sublist?pageNum=1&pageSize=100
+GET https://{host}/{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum={pagenumber}&pageSize={pagesize}
 ```
 
 #### 路径参数
@@ -412,13 +487,14 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/presence/sublist?pageN
 | 参数       | 类型 |  是否必需 | 描述                       |
 | :--------- | :--- | :--------------- | :------- |
 | `pageNum`  | Int  | 是       | 要查询的页码。该参数的值须大于等于 1。若不传，默认值为 `1`。          |
-| `pageSize` | Int  | 是       | 每页显示的订阅用户数量。取值范围为 [1,500]，若不传默认值为 `1`。| 
+| `pageSize` | Int  | 是       | 每页显示的订阅用户数量。取值范围为 [1,100]，若不传默认值为 `1`。| 
 
 #### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`  | String | 是     | 内容类型：`application/json`。                               |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是     | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
@@ -445,6 +521,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/presence/sublist?pageN
 curl -X GET 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/sublist?pageNum=1&pageSize=100' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json'
+-H 'Accept: application/json'
 ```
 
 #### 响应示例
@@ -464,3 +541,14 @@ curl -X GET 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/s
   }
 }
 ```
+
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型   | 错误提示 | 可能原因  | 处理建议      |
+| :---------- | :--- | :----------- | :------------ | :----- |
+| 400         | service open exception | the app not open presence   | 没有开通 presence 服务。  | 联系商务开通 presence 服务。 |
+| 401         | unauthorized           | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。|
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

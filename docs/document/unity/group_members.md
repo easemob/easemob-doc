@@ -53,17 +53,12 @@ SDKClient.Instance.GroupManager.AddGroupMembers(groupId, members, new CallBack(
 示例代码如下：
 
 ```csharp
-List<string> members = new List<string>();
-members.Add("member1");
-members.Add("member2");
-
-SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, members, callback: new CallBack(
-    onSuccess: () => {
-        Console.WriteLine($"DeleteGroupMembers success");
+SDKClient.Instance.GroupManager.DeleteGroupMembers(groupId, list, new CallBack (
+    onSuccess: () =>
+    {
     },
     onError: (code, desc) =>
     {
-        Console.WriteLine($"DeleteGroupMembers failed, code:{code}, desc:{desc}");
     }
 ));
 ```
@@ -104,7 +99,7 @@ SDKClient.Instance.GroupManager.SetMemberAttributes(groupId, userId, dict, new C
 
 你可调用 `GroupManager#FetchMemberAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
 
-:::notice
+:::tip
 每次最多可获取 10 个群成员的自定义属性。
 :::
 
@@ -135,7 +130,7 @@ SDKClient.Instance.GroupManager.FetchMemberAttributes(groupId, userList, keyList
 
 #### 变更群主
 
-仅群主可以调用 `ChangeGroupOwner` 方法将权限移交给群组中指定成员。成功移交后，原群主变为普通成员，其他群成员收到 `IGroupManagerDelegate#OnOwnerChangedFromGroup` 回调。
+仅群主可以调用 `ChangeGroupOwner` 方法将权限移交给群组中指定成员。成功移交后，原群主变为普通成员，新群主收到 `IGroupManagerDelegate#OnOwnerChangedFromGroup` 回调。
 
 示例代码如下：
 
@@ -289,6 +284,21 @@ SDKClient.Instance.GroupManager.GetGroupMuteListFromServer(groupId, callback: ne
     onError: (code, desc) =>
     {
     }
+));
+```
+
+#### 检查自己是否在群组禁言列表
+
+群成员可以调用 `CheckIfInGroupMuteList` 方法查看自己是否在群组禁言列表中。
+
+```csharp
+SDKClient.Instance.GroupManager.CheckIfInGroupMuteList(groupId, new ValueCallBack<bool>(
+   onSuccess: (ret) => {
+
+   },
+   onError: (code, desc) => {
+
+   }
 ));
 ```
 
