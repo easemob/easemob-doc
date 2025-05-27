@@ -97,8 +97,208 @@ export const zhSidebar = sidebar({
       collapsible: true,
       children: [
         { text: "体验 Demo", link: "demo.html" },
+        { text: "快速跑通", 
+          collapsible: true,
+          children: [
+            { text: "Android", link: "document/android/demo.html" },
+            { text: "ios", link: "document/ios/demo.html" },
+            { text: "Web React", link: "document/web/demo_react.html" },
+            { text: "Web Vue", link: "document/web/demo_vue.html" },
+          ],
+        },  
       ],
     },
+    {
+      text: "下载中心",
+      collapsible: true,
+      children: [
+        { text: "SDK & Demo 下载", link: "sdk_demo.html" },
+        { text: "更新日志", 
+          collapsible: true,
+          children: [
+            { text: "Android", link: "document/android/releasenote.html" },
+            { text: "iOS", link: "document/ios/releasenote.html" },
+            { text: "Web", link: "document/web/releasenote.html" },
+            { text: "HarmonyOS", link: "document/harmonyos/releasenote.html" },
+            { text: "小程序", link: "document/applet/releasenote.html" },
+            { text: "Flutter", link: "document/flutter/releasenote.html" },
+            { text: "React Native", link: "document/react-native/releasenote.html" },
+            { text: "Unity", link: "document/unity/releasenote.html" },
+            { text: "Windows", link: "document/windows/releasenote.html" },
+          ],
+        },  
+      ],
+    },
+    { text: "聊天集成（含 UI）", 
+          collapsible: true,
+          children: [
+            {
+              text: "了解界面库",
+              collapsible: true,
+              children: [
+                { text: "Android", link: "uikit/chatuikit/android/chatuikit_overview.html" },
+                { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_overview.html" },
+                { text: "Web", link: "uikit/chatuikit/web/chatuikit_overview.html" },
+                { text: "HarmonyOS", link: "uikit/chatuikit/harmonyos/chatuikit_overview.html" },
+                { text: "Uniapp", link: "uikit/chatuikit/uniapp/chatuikit_overview.html" },
+                { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_overview.html" },
+                { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_overview.html" },
+          ],
+        },
+            {
+              text: "特性介绍",
+              collapsible: true,
+              children: [
+                {
+              text: "通用",
+              collapsible: true,
+              children: [
+                { text: "Android", link: "uikit/chatuikit/android/chatfeature_common.html" },
+                { text: "iOS", link: "uikit/chatuikit/ios/chatfeature_common.html" },
+                { text: "Web", link: "uikit/chatuikit/web/chatfeature_common.html" },
+                { text: "HarmonyOS", link: "uikit/chatuikit/harmonyos/chatfeature_common.html" },
+                { text: "Uniapp", link: "uikit/chatuikit/uniapp/chatfeature_common.html" },
+                { text: "Flutter", link: "uikit/chatuikit/flutter/chatfeature_common.html" },
+                { text: "React Native", link: "uikit/chatuikit/react-native/chatfeature_common.html" },
+              ],
+            },
+             {
+              text: "会话",
+              collapsible: true,
+              children: [
+                { text: "Android", link: "uikit/chatuikit/android/chatfeature_conversation.html" },
+                { text: "iOS", link: "uikit/chatuikit/ios/chatfeature_conversation.html" },
+                { text: "Web", link: "uikit/chatuikit/web/chatfeature_conversation.html" },
+                { text: "HarmonyOS", link: "uikit/chatuikit/harmonyos/chatfeature_conversation.html" },
+                { text: "Uniapp", link: "uikit/chatuikit/uniapp/chatfeature_conversation.html" },
+                { text: "Flutter", link: "uikit/chatuikit/flutter/chatfeature_conversation.html" },
+                { text: "React Native", link: "uikit/chatuikit/react-native/chatfeature_conversation.html" },
+              ],
+             },
+            {
+              text: "消息",
+              collapsible: true,
+              children: [
+                { text: "Android", link: "uikit/chatuikit/android/chatfeature_message.html" },
+                { text: "iOS", link: "uikit/chatuikit/ios/chatfeature_message.html" },
+                { text: "Web", link: "uikit/chatuikit/web/chatfeature_message.html" },
+                { text: "HarmonyOS", link: "uikit/chatuikit/harmonyos/chatfeature_message.html" },
+                { text: "Uniapp", link: "uikit/chatuikit/uniapp/chatfeature_message.html" },
+                { text: "Flutter", link: "uikit/chatuikit/flutter/chatfeature_message.html" },
+                { text: "React Native", link: "uikit/chatuikit/react-native/chatfeature_message.html" },
+              ],
+            },
+          ],
+        },
+        {
+              text: "跑通示例项目",
+              collapsible: true,
+              children: [
+                { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_run.html" },
+                { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_run.html" },
+                { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_overview.html" },
+          ],
+        },
+        {
+              text: "快速开始",
+              collapsible: true,
+              children: [
+                { text: "Android", link: "uikit/chatuikit/android/chatuikit_quickstart.html" },
+                { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_quickstart.html" },
+                { text: "Web", link: "uikit/chatuikit/web/chatuikit_quickstart.html" },
+                { text: "HarmonyOS", link: "uikit/chatuikit/harmonyos/chatuikit_quickstart.html" },
+                { text: "Uniapp", link: "uikit/chatuikit/uniapp/chatuikit_quickstart.html" },
+                { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_quickstart.html" },
+                { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_quickstart.html" },
+          ],
+        },
+        {
+              text: "集成 UIKit",
+              collapsible: true,
+              children: [
+                { text: "Android", link: "uikit/chatuikit/android/chatuikit_integrated.html" },
+                { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_integrated.html" },
+                { text: "Web (React)", link: "uikit/chatuikit/web/chatuikit_integrated_react.html" },
+                { text: "Web (Vue)", link: "uikit/chatuikit/web/chatuikit_integrated_vue.html" },
+                { text: "HarmonyOS", link: "uikit/chatuikit/harmonyos/chatuikit_integrated.html" },
+                { text: "Uniapp", link: "uikit/chatuikit/uniapp/chatuikit_integrated.html" },
+                { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_integrated.html" },
+                { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_integrated.html" },
+          ],
+        },
+        
+        {
+              text: "修改界面主题",
+              collapsible: true,
+              children: [
+                { text: "Android", link: "uikit/chatuikit/android/chatuikit_theme.html" },
+                { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_theme.html" },
+                { text: "Web", link: "uikit/chatuikit/web/chatuikit_theme.html" },
+                { text: "HarmonyOS", link: "uikit/chatuikit/harmonyos/chatuikit_theme.html" },
+                { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_theme.html" },
+                { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_theme.html" },
+          ],
+        },
+        {
+              text: "设置界面风格",
+              collapsible: true,
+              children: [
+                {
+                   text: "会话列表",
+                   collapsible: true,
+                   children: [
+                  { text: "Android", link: "uikit/chatuikit/android/chatuikit_conversation.html" },
+                  { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_custom_conversation_list.html" },
+                  { text: "Web", link: "uikit/chatuikit/web/chatuikit_conversation.html" },
+                  { text: "HarmonyOS", link: "uikit/chatuikit/harmonyos/chatuikit_conversation.html" },
+                  { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_conversation.html" },
+                  { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_conversation.html" },
+                  ],
+                },
+                {
+                   text: "聊天界面",
+                   collapsible: true,
+                   children: [
+                  { text: "Android", link: "uikit/chatuikit/android/chatuikit_chat.html" },
+                  { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_custom_chat.html" },
+                  { text: "Web", link: "uikit/chatuikit/web/chatuikit_chat.html" },
+                  { text: "HarmonyOS", link: "uikit/chatuikit/harmonyos/chatuikit_chat.html" },
+                  { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_chat.html" },
+                  { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_chat.html" },
+                  ],
+                },
+                {
+                   text: "通讯录",
+                   collapsible: true,
+                   children: [
+                  { text: "Android", link: "" },
+                  ],
+                },
+                {
+                   text: "联系人详情",
+                   collapsible: true,
+                   children: [
+                  { text: "Android", link: "" },
+                  ],
+                },
+                {
+                   text: "群组详情",
+                   collapsible: true,
+                   children: [
+                  { text: "Android", link: "" },
+                  ],
+                },
+                {
+                   text: "全局",
+                   collapsible: true,
+                   children: [
+                  { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_config_item.html" },
+                  ],
+                },
+          ],
+        },
+        ],
+      },
     {
       text: "内容审核",
       collapsible: true,
