@@ -28,7 +28,7 @@
 </td>
 <td rowspan="2" width="279">
 <p>1.发送消息时，可选的 `from` 字段用于指定发送方。</p>
-<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://doc.easemob.com/document/ios/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">APNs 自定义显示</a>和 <a href="https://doc.easemob.com/document/android/push.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%BE%E7%A4%BA">Android 推送字段说明</a>。</p>
+<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://doc.easemob.com/document/ios/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">APNs 自定义显示</a>和 <a href="https://doc.easemob.com/document/android/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">Android 推送字段说明</a>。</p>
 </td>
 </tr>
 <tr>
@@ -36,7 +36,7 @@
 <p>图片/语音/视频/文件消息</p>
 </td>
 <td width="189">
-<p>1. 调用<a href="https://doc.easemob.com/document/server-side/message_download.html#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
+<p>1. 调用<a href="https://doc.easemob.com/document/server-side/message_download.html#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
 <p>2. 调用发送消息方法，在请求 body 中传入该 UUID。</p>
 </td>
 </tr>
@@ -46,11 +46,75 @@
 
 单聊场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异。
 
-:::notice
-接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
+:::tip
+1. 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
+2. 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在[环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
+3. [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
 :::
 
-**发送频率**：通过 RESTful API 单个应用每分钟最多可发送 6000 条消息，每次最多可向 600 人发送。例如，一次向 600 人发消息，视为 600 条消息。
+**发送频率**：对于单个 app，该 REST API 存在以下三个限制：
+
+
+<table>
+<tbody>
+<tr>
+<td width="110">
+<p><strong>限制</strong></p>
+</td>
+<td>
+<p><strong>描述</strong></p>
+</td>
+<td>
+<p><strong>超限报错</strong></p>
+</td>
+<td>
+<p><strong>是否可调</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>100 次/秒</p>
+</td>
+<td>
+<p>每秒限调 100 次</p>
+</td>
+<td>
+<p>若超限，报 429 错误 即 &ldquo;This request has reached api limit&rdquo;。</p>
+</td>
+<td rowspan="2">
+<p>两个限制均<strong>可调</strong>且相互关联，即上调其中一个，另一个自动等比例提升。</p>
+<p>例如，将 100 次/秒上调至 200 次/秒后，每分钟限发消息条数也会自动上调至 12000，即 12000 条/分钟。反之，若将 6000 条/分钟上调至 12000 条/分钟，每秒的调用次数上限也自动提升至 200，即 200 次/秒。</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>6000 条/分钟</p>
+</td>
+<td>
+<p>每分钟限发 6000 条消息</p>
+</td>
+<td>
+<p>若超限，报 403 错误，即 " message send reach limit"。</p>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>600 人/次</p>
+</td>
+<td>
+<p>每次限发 600 人。</p>
+<p>例如，一次向 600 人发消息，视为 600 条消息。</p>
+</td>
+<td>
+<p>若超限，报 400 错误，即 "param to exceed limit"。</p>
+</td>
+<td>
+<p>不可调。</p>
+</td>
+</tr>
+</tbody>
+</table>
 
 ## 前提条件
 
@@ -121,9 +185,10 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | `to`            | List   | 是       | 消息接收方的用户 ID 数组。每次最多可向 600 个用户发送消息。<Container type="tip" title="提示">服务器不校验传入的用户 ID 是否存在，因此，如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。</Container> |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。     |
-| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方。<br/> - `true`：是；<br/> - （默认）`false`：否。   |
+| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方的所有在线设备。<br/> - `true`：是；<br/> - （默认）`false`：否。   |
+| `roam_ignore_users`   | List   | 否 | 设置哪些用户拉漫游消息时拉不到该消息。|
 | `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。 |
-| `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push.html#自定义显示) 和 [Android 推送字段说明](/document/android/push.html#自定义显示)。 |
+| `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
 | `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。| 
 
 请求体中的 `body` 字段说明详见下表。
@@ -163,6 +228,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   "from": "user1",
   "to": ["user2"],
   "type": "txt",
+  "roam_ignore_users": [],
   "body": {
     "msg": "testmessages"
     },
@@ -184,6 +250,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   "from": "user1",
   "to": ["user2"],
   "type": "txt",
+  "roam_ignore_users": [],
   "body": {
     "msg": "testmessages"
     },
@@ -460,7 +527,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   "to": ["user2"],
   "type": "video",
   "body": {
-    "filename" : "test.avi"
+    "filename" : "test.avi",
     "thumb" : "https://XXXX/XXXX/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97",
     "length" : 0,
     "secret":"VfXXXXNb_",
@@ -807,7 +874,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
   "to": ["user2"],
   "type": "custom",
   "body": {
-    "customEvent": "custom_event"
+    "customEvent": "custom_event",
     "customExts":{
           "ext_key1":"ext_value1"
       }
@@ -832,5 +899,23 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
   "applicationName": "XXXX"
 }
 ```
+
+## 错误码
+
+调用发送单聊消息的接口发送各类消息时，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型  | 错误提示  | 可能原因     | 处理建议   |
+|:---------|:-----------|:----------|:----------|:--------|
+| 400      | invalid_request_body       | Request body is invalid. Please check body is correct. | 请求体格式不正确。  | 检查请求体内容是否合法(字段类型是否正确) 。  |
+| 400      | message_send_error | param from can't be empty   | 请求参数 `from` 是空字符串。  | 输入正确的请求参数 `from`。若不传该字段， 服务器会默认设置为 `admin`。 |
+| 400      | message_send_error | param to can't be empty    | 请求参数 `to` 是空数组。| 输入正确的请求参数 `to`。|
+| 400      | message_send_error | param type can't be empty   | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。 |
+| 400      | message_send_error | param body can't be empty | 请求参数 `body` 是空 JSON。 | 输入正确的请求参数 `body`。 |
+| 400      | message_send_error | param ext must be JSONObject | 请求参数 `ext` 类型不正确。 | 输入正确的请求参数 `ext`（JSON 格式）。    |
+| 400      | message_send_error | params to's size can't exceed limit 600    | 请求参数 `to` 数量超出最大限制 600。                | 输入正确的请求参数 `to`（数量限制在 600 以内），即每次最多可向 600 人发送消息。 |
+| 400      | message_send_error | message is too large                                   | 请求体内容中 `body` 和 `ext` 字段的内容过大。 | 限制 `body` 和 `ext` 字段的内容。请求体和扩展字段的总长度不能超过 5 KB。  |
+| 403      | message_send_error | message send reach limit                               | 消息发送频率超出限制(默认 60 秒内只允许发送 6000 条单聊消息)。 | 限制消息发送频率，详见[文档说明](message_single.html)。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 

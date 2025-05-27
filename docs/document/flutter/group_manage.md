@@ -78,7 +78,7 @@ try {
 
 仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `EMGroupEventHandler#onGroupDestroyed` 事件并被踢出群组。
 
-:::notice
+:::tip
 解散群组后，将删除本地数据库及内存中的群相关信息及群会话，谨慎操作。
 :::
 
@@ -99,17 +99,17 @@ try {
     - 群主或群管理员同意入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinAcceptedFromGroup` 事件，其他群成员收到`EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
     - 群主或群管理员拒绝入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 事件。
 
-:::notice
+:::tip
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
 :::
 
 用户申请加入群组的步骤如下：
 
 1. 调用 `EMGroupManager#fetchPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。
-2. 调用 `EMGroupManager#joinPublicGroup` 方法传入群组 ID，申请加入对应群组。
-
-示例代码如下：
-
+2. 根据加群是否需要验证，调用不同的方法：
+   
+  - 若无需验证，调用 `EMGroupManager#joinPublicGroup` 方法传入群组 ID，申请加入对应群组。
+  
 ```dart
 // 获取公开群组列表
 try {
@@ -123,6 +123,22 @@ try {
   await EMClient.getInstance.groupManager.joinPublicGroup(groupId);
 } on EMError catch (e) {
 }
+```
+
+若需要验证，调用 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
+
+```dart
+// 获取公开群组列表
+try {
+  EMCursorResult<EMGroupInfo> result =
+      await EMClient.getInstance.groupManager.fetchPublicGroupsFromServer();
+} on EMError catch (e) {
+}
+
+// 申请加入群组
+try {
+    await EMClient.getInstance.groupManager.requestToJoinPublicGroup('groupId');
+  } on EMError catch (e) {}
 ```
 
 ### 退出群组
@@ -213,7 +229,7 @@ try {
 
 ### 查询当前用户已加入的群组数量
 
-自 4.2.0 版本开始，你可以调用 `EMGroupManager#fetchJoinedGroupCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+自 4.2.0 版本开始，你可以调用 `EMGroupManager#fetchJoinedGroupCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
 
 ```dart
 void fetchJoinedGroupCount() async {
@@ -279,12 +295,89 @@ try {
 示例代码如下：
 
 ```dart
-// 注册群组监听
+// 添加群组监听
 EMClient.getInstance.groupManager.addEventHandler(
-  "UNIQUE_HANDLER_ID",
-  EMGroupEventHandler(),
+  'UNIQUE_HANDLER_ID',
+  EMGroupEventHandler(
+    // 成员设置为管理员的回调。群主、新管理员和其他管理员会收到该回调。
+    onAdminAddedFromGroup: (groupId, admin) {},
+
+    // 取消成员的管理员权限的回调。被取消管理员权限的成员、群主和群管理员（除操作者外）会收到该回调。
+    onAdminRemovedFromGroup: (groupId, admin) {},
+
+    // 全员禁言状态变化回调。群组所有成员（除操作者外）会收到该回调。
+    onAllGroupMemberMuteStateChanged: (groupId, isAllMuted) {},
+
+    // 成员加入群组白名单回调。被添加的成员及群主和群管理员（除操作者外）会收到该回调。
+    onAllowListAddedFromGroup: (groupId, members) {},
+
+    // 成员移出群组白名单回调。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
+    onAllowListRemovedFromGroup: (groupId, members) {},
+
+    // 群公告更新回调。群组所有成员会收到该回调。
+    onAnnouncementChangedFromGroup: (groupId, announcement) {},
+
+    // 群组成员自定义属性有变更。群内其他成员会收到该回调。
+    onAttributesChangedOfGroupMember: (groupId, userId, attributes, operatorId) {},
+
+    // 有用户自动同意加入群组。邀请人收到该回调。
+    onAutoAcceptInvitationFromGroup: (groupId, inviter, inviteMessage) {},
+
+    // 群组禁用状态变更。
+    onDisableChanged: (groupId, isDisable) {},
+
+    // 群组解散。群主解散群组时，所有群成员均会收到该回调。
+    onGroupDestroyed: (groupId, groupName) {},
+
+    // 用户同意进群邀请。邀请人收到该回调。
+    onInvitationAcceptedFromGroup: (groupId, invitee, reason) {},
+
+    // 用户拒绝进群邀请。邀请人收到该回调。
+    onInvitationDeclinedFromGroup: (groupId, invitee, reason) {},
+
+    // 当前用户收到了入群邀请。受邀用户会收到该回调。例如，用户 B 邀请用户 A 入群，则用户 A 会收到该回调。
+    onInvitationReceivedFromGroup: (groupId, groupName, inviter, reason) {},
+
+    // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
+    onMemberExitedFromGroup: (groupId, member) {},
+
+    // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
+    onMemberJoinedFromGroup: (groupId, member) {},
+
+    // 有成员被加入群组禁言列表。被禁言的成员及群主和群管理员（除操作者外）会收到该回调。
+    onMuteListAddedFromGroup: (groupId, mutes, muteExpire) {},
+
+    // 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
+    onMuteListRemovedFromGroup: (groupId, mutes) {},
+
+    // 群主转移权限。新群主会收到该回调。
+    onOwnerChangedFromGroup: (groupId, newOwner, oldOwner) {},
+
+    // 对端用户接受当前用户发送的群组申请的回调。当前用户收到该回调。
+    onRequestToJoinAcceptedFromGroup: (groupId, groupName, accepter) {},
+
+    // 对端用户拒绝群组申请的回调。当前用户收到该回调。
+    onRequestToJoinDeclinedFromGroup: (groupId, groupName, decliner, reason, applicant) {},
+
+    // 对端用户收到了群组申请的回调。当前用户收到该回调。
+    onRequestToJoinReceivedFromGroup: (groupId, groupName, applicant, reason) {},
+
+   // 上传了新的群组共享文件。群组所有成员会收到该回调。
+    onSharedFileAddedFromGroup: (groupId, sharedFile) {},
+
+    // 删除了群组共享文件。群组所有成员会收到该回调。
+    onSharedFileDeletedFromGroup: (groupId, fileId) {},
+
+    // 群详情变更回调。群组所有成员会收到该回调。
+    onSpecificationDidUpdate: (group) {},
+
+    // 有成员被移出群组。被踢出群组的成员会收到该回调。
+    onUserRemovedFromGroup: (groupId, groupName) {},
+  ),
 );
 
+// ...
+
 // 移除群组监听
-EMClient.getInstance.groupManager.removeEventHandler("UNIQUE_HANDLER_ID");
+EMClient.getInstance.groupManager.removeEventHandler('UNIQUE_HANDLER_ID');
 ```

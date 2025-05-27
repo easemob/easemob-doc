@@ -98,4 +98,4 @@ class ChatroomActivity : ComponentActivity(){
 
 在屏幕下方输入消息内容，点击 **发送** 按钮，发送消息。
 
-![img](@static/images/uikit/chatroomandroid/click_chat.png =500x500)
+![img](/images/uikit/chatroomandroid/click_chat.png =500x500)

@@ -96,7 +96,7 @@ ChatClient.getInstance()
   });
 ```
 
-:::notice
+:::tip
 该注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用。
 :::
 
@@ -110,6 +110,8 @@ ChatClient.getInstance()
 手动登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
 
 调用登录接口后，收到 `onConnected` 回调表明 SDK 与环信服务器连接成功。
+
+用户登录流程详见[用户注册与登录的产品说明文档](/product/product_user_registration_login.html)。
 
 ### 手动登录
 
@@ -128,7 +130,7 @@ ChatClient.getInstance()
 
 **用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取。 详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
-:::notice
+:::tip
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 :::
 
@@ -191,8 +193,11 @@ let listener = new (class s implements ChatConnectEventListener {
   onAppActiveNumberReachLimit?(): void {
     // todo: 达到日活上限，被服务器断开。
   }
-  onUserDidLoginFromOtherDevice?(deviceName?: string): void {
-    // todo: 用户在其它设备登录，本设备被服务器断开。
+  onUserDidLoginFromOtherDeviceWithInfo?(params: {
+    deviceName?: string;
+    ext?: string;
+  }): void {
+  // todo: 用户在其它设备登录，本设备被服务器断开。
   }
   onUserDidRemoveFromServer?(): void {
     // todo: 当前用户被移除，被服务器断开。
@@ -212,6 +217,14 @@ let listener = new (class s implements ChatConnectEventListener {
   onUserAuthenticationFailed?(): void {
     // todo: 用户权限问题，被服务器断开。
   }
+  onOfflineMessageSyncStart?(): void {
+    // todo: 连接成功，开始从服务器拉取离线消息时触发。
+    // 注意：如果本次登录服务器没有离线消息，不会触发该回调。
+  }
+  onOfflineMessageSyncFinish?(): void {
+    // todo: 离线用户上线后从服务器拉取离线消息结束时触发。
+   // 注意：如果再拉取离线过程中因网络或其他原因导致连接断开，不会触发该回调。
+  }
 })();
 ChatClient.getInstance().removeAllConnectionListener();
 ChatClient.getInstance().addConnectionListener(listener);
@@ -226,7 +239,7 @@ ChatClient.getInstance().addConnectionListener(listener);
 用户需要关心什么原因被服务器踢下线，需要关注对应事件，并且进行处理。
 
 - onAppActiveNumberReachLimit:
-- onUserDidLoginFromOtherDevice:
+- onUserDidLoginFromOtherDeviceWithInfo:
 - onUserDidRemoveFromServer:
 - onUserDidForbidByServer:
 - onUserDidChangePassword:

@@ -6,7 +6,7 @@
 
 使用 SDK 之前，你需先创建应用，获取应用的唯一标识 App Key，请参见[创建应用](/product/enable_and_configure_IM.html#创建应用)。
 
-环信推送分为在线推送和远程推送，远程推送时通过 APNS 下发，所以你需要配置应用对应的证书，请参见[APNS 推送配置](/document/ios/push.html#开启推送权限并上传推送证书)。
+环信推送分为在线推送和远程推送，远程推送时通过 APNS 下发，所以你需要配置应用对应的证书，请参见[APNS 推送配置](/document/ios/push/push_apns.html#上传推送证书)。
 
 ## 集成 SDK
 
@@ -47,17 +47,17 @@ pod install --repo-update
 
 demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工程中，并勾选截图中标注的三项。
 
-![img](@static/images/instantpush/push_iossdk_import.png)
+![img](/images/instantpush/push_iossdk_import.png)
 
 ### 设置工程属性
 
 在 Xcode 中，向 **General > Embedded Binaries** 中添加依赖库。
 
-:::notice
+:::tip
 将**Do Not Embed** 改成**Embed & Sign**。
 :::
 
-![img](@static/images/instantpush/push_ios_projectpropertysetting.png)
+![img](/images/instantpush/push_ios_projectpropertysetting.png)
 
 ## SDK 基础功能
 
@@ -69,7 +69,7 @@ demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工�
 
 第 2 步：在工程的 AppDelegate 中的以下方法中，调用 SDK 对应方法。
 
-```objectiveC
+```objectivec
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //AppKey：注册的 AppKey，详细见下面注释。
@@ -102,7 +102,7 @@ demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工�
 
 登录：调用 SDK 的登录接口进行的操作。建议使用异步登录方法，防止网络不好的情况下，出现卡 UI 主线程的情况出现。
 
-```objectiveC
+```objectivec
 [[EMClient sharedClient] loginWithUsername:@"8001" password:@"111111" completion:^(NSString *aUsername, EMError *aError) {
     if (!aError) {
         NSLog(@"登录成功");
@@ -118,7 +118,7 @@ demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工�
 
 ##### 1.注册开启推送通知
 
-```objectiveC
+```objectivec
 if (NSClassFromString(@"UNUserNotificationCenter")) {
         //注册推送，用于 iOS 10 及以上版本。
         [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert completionHandler:^(BOOL granted, NSError *error) {
@@ -150,11 +150,11 @@ if (NSClassFromString(@"UNUserNotificationCenter")) {
 
 ##### 2.将获得的 deviceToken 传到 SDK
 
-:::notice
+:::tip
 如果是 iOS 13 及以上的系统，请将 SDK 更新至 v3.6.4 或以上版本。
 :::
 
-```objectiveC
+```objectivec
 // 将获得的 deviceToken 传给 SDK。 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
@@ -166,7 +166,7 @@ if (NSClassFromString(@"UNUserNotificationCenter")) {
 
 3.开启环信推送处理
 
-```objectiveC
+```objectivec
 [[EMLocalNotificationManager sharedManager] launchWithDelegate:self];
 ```
 
@@ -178,7 +178,7 @@ if (NSClassFromString(@"UNUserNotificationCenter")) {
 
 实现以下两个代理，通过 completionHandler 您可以更改通知方式：
 
-```objectiveC
+```objectivec
 - (void)emuserNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
 {
     NSDictionary *userInfo = notification.request.content.userInfo;
@@ -206,7 +206,7 @@ if (NSClassFromString(@"UNUserNotificationCenter")) {
 
 通过下面代理获取推送相关信息：
 
-```objectiveC
+```objectivec
 //如果需要获取数据，只实现这一个代理方法即可。
 - (void)emGetNotificationMessage:(UNNotification *)notification state:(EMNotificationState)state
 {
@@ -229,7 +229,7 @@ if (NSClassFromString(@"UNUserNotificationCenter")) {
 
 推送通知透传消息获取
 
-```objectiveC
+```objectivec
 //当应用收到环信推送透传消息时，此方法会被调用。 
 - (void)emDidReceivePushSilentMessage:(NSDictionary *)messageDic
 {
@@ -241,7 +241,7 @@ if (NSClassFromString(@"UNUserNotificationCenter")) {
 
 iOS 的本地通知管理模块 `UNUserNotificationCenter` 是单例，一个 App 中只能有一个实例。如果在启用 SDK 在线推送后，App 又重写了 `[UNUserNotificationCenter currentNotificationCenter].delegate`，会将 SDK 中的 delegate 覆盖，此时，需要在 App 实现的 `UNUserNotificationCenterDelegate` 中调用 SDK 的相关处理，过程如下：
 
-```objectiveC
+```objectivec
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
 {
     [[EMLocalNotificationManager sharedManager] userNotificationCenter:center willPresentNotification:notification withCompletionHandler:completionHandler];

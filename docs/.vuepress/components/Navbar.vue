@@ -1,23 +1,25 @@
 <script setup>
-  import Sidebar from "vuepress-theme-hope/modules/navbar/components/Navbar.js";
-  import { useThemeLocaleData } from 'vuepress-theme-hope/composables/index'
+import Navbar from 'vuepress-theme-hope/modules/navbar/components/Navbar.js'
+import { useThemeLocaleData } from 'vuepress-theme-hope/composables/index'
 
-  const themeData = useThemeLocaleData()
-  const extraNavList = themeData.value.extra_nav || []
+const themeData = useThemeLocaleData()
+const extraNavList = themeData.value.extra_nav || []
 </script>
 
 <template>
-  <Sidebar>
+  <Navbar>
     <template #endBefore>
-      <el-link class="extra-link" :type="item.type" v-for="item in extraNavList" :key="item.text" :href="item.link">{{ item.text }}</el-link>
+      <Docsearch />
+      <el-link
+        class="extra-link"
+        :type="item.type"
+        v-for="item in extraNavList"
+        :key="item.text"
+        :href="item.link"
+        >{{ item.text }}
+      </el-link>
     </template>
-  </Sidebar>
+  </Navbar>
 </template>
 
-<style scope>
-
-</style>
-
-
-
-
+<style scope></style>

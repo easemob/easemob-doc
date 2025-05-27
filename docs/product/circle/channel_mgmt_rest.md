@@ -4,9 +4,9 @@
 
 频道（Channel）是一个社区下不同子话题的讨论分区，因此一个社区下可以有多个频道。社区创建时会自动创建默认频道，该频道中添加了所有社区成员，用于承载各种系统通知。从可见性角度看，频道社区分为公开和私密频道；从功能角度看，频道分为文字频道和语聊频道。用户可以根据自己需求创建频道。
 
-**超级社区中的频道基于即时通讯 IM 的群组或聊天室（频道 ID 为群组 ID 或聊天室 ID）创建，删除群组或聊天室时需注意以下几点：**
+**超级社区中的频道基于即时通讯 IM 的群组或聊天室（频道 ID 为群组 ID 或聊天室 ID）创建，解散群组或聊天室时需注意以下几点：**
 
-**1. 在环信控制台、调用 RESTful API 或者通过客户端删除群组或聊天室、群组或聊天室加人、踢人等操作时请谨慎操作，需确保操作的群组或者聊天室不是超级社区使用的。**
+**1. 在环信控制台、调用 RESTful API 或者通过客户端解散群组或聊天室、群组或聊天室加人、踢人等操作时请谨慎操作，需确保操作的群组或者聊天室不是超级社区使用的。**
 **2. 如果将超级社区使用的频道对应的群组或者聊天室删除，会出现数据不一致情况，导致用户加入不了社区、频道、在频道内发不了消息等情况发生。**
 **3. 在清理群组或者聊天室数据时，需先确认要删除的群组 ID 或聊天室 ID 与超级社区的频道 ID 是否一致。你可以调用[获取频道详情 API](#查询指定频道详情) 确认要删除的群组或聊天室是否为超级社区的频道。如果是，请不要进行删除。**
 **4. 如果需要清理超级社区数据，调用[删除社区](https://docs-im.easemob.com/ccim/circle/rest/serverapi#删除社区)和[删除频道](https://docs-im.easemob.com/ccim/circle/rest/channelapi#删除频道)等 API。**
@@ -98,7 +98,7 @@ POST https://{host}/{org_name}/{app_name}/circle/channel
 | `name`        | String | 是       | 频道名称，长度不能超过 50 个字符。                       |
 | `type`        | Int    | 否       | 频道类型：<br/> - （默认）`0`：公开频道；<br/> - `1`：私密频道。           |
 | `mode`        | Int    | 否       | 频道模式：<br/> - （默认）`0`：文字频道；<br/> - `1`：语聊频道。  |
-| `maxUsers`        | Long | 否       | 频道最大成员数量。<br/> - 对于语聊频道（即 `mode` 为 `1`），该参数的取值范围为 [1,20]，默认值为 `8`。<br/> - 对于文字频道，该参数的取值范围为 [1,2000]，默认值为 `2000`。如需要提高上限请联系商务。                      |
+| `max_users`        | Long | 否       | 频道最大成员数量。<br/> - 对于语聊频道（即 `mode` 为 `1`），该参数的取值范围为 [1,20]，默认值为 `8`。<br/> - 对于文字频道，该参数的取值范围为 [1,2000]，默认值为 `2000`。如需要提高上限请联系商务。                      |
 | `description` | String | 否       | 频道描述，长度不能超过 500 个字符。                      |
 | `custom`      | String | 否       | 频道扩展信息，例如可以给社区添加业务相关的标记，长度不能超过 500 个字符。 |
 | `rtc_name`      | String | 否       | RTC 频道名称，长度不能超过 50 个字符。该名称在加入 RTC 频道时使用，仅在创建语聊频道时返回。若使用声网 RTC，该名称还用于[生成 RTC Token](https://docportal.shengwang.cn/cn/voice-call-4.x/token_server_android_ng?platform=Android)。<br/>若创建语聊频道时未指定 `rtc_name`，服务器将使用频道 ID 作为该参数的值返回。|
@@ -236,7 +236,7 @@ PUT https://{host}/{org_name}/{app_name}/circle/channel/{channel_id}?serverId={s
 | ----------- | ------ | -------- | ------------------------------------------------------------ |
 | `name`        | String | 否       | 频道名称，长度不能超过 50 个字符。                           |
 | `type`        | Int    | 否       | 频道类型：<br/> - `0`：公开频道；<br/> - `1`：私密频道。 |
-| `maxUsers` | Long    | 否       | 频道最大成员数量。<br/> - 对于语聊房频道，该参数的取值范围为 [1,20]。<br/> - 对于其他模式的频道，该参数的取值范围为 [1,2000]，如需要提高上限请联系商务。    |
+| `max_users` | Long    | 否       | 频道最大成员数量。<br/> - 对于语聊房频道，该参数的取值范围为 [1,20]。<br/> - 对于其他模式的频道，该参数的取值范围为 [1,2000]，如需要提高上限请联系商务。    |
 | `description` | String | 否       | 频道描述，长度不能超过 500 个字符。                          |
 | `custom`      | String | 否       | 频道的扩展信息，例如可以给社区添加业务相关的标记，长度不能超过 500 个字符。 |
 | `rtc_name`      | String | 否       | 目前该名称用于使用声网 RTC 时，生成 Token 以及端上加入声网 RTC 频道时使用，长度不能超过 50 个字符。该字段目前仅在修改语聊房频道时才有效。若创建语聊房频道时未指定 `rtc_name`，服务器将使用频道 ID 作为 `rtc_name` 的值返回。|
@@ -340,7 +340,7 @@ GET https://{host}/{org_name}/{app_name}/circle/channel/{channel_id}?serverId={s
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXX/XXX/XXX/circle/channel?serverId=XXX'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXX/XXX/XXX/circle/channel/XXX?serverId=XXX'
 ```
 
 ##### 响应示例

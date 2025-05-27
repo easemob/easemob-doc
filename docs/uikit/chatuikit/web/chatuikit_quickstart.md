@@ -80,7 +80,7 @@ yarn add easemob-chat-uikit
 // App.js
 import React, { Component, useEffect } from "react";
 import {
-  Provider,
+  UIKitProvider,
   Chat,
   ConversationList,
   useClient,
@@ -88,14 +88,19 @@ import {
 } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
+// 注意：在使用 UIKit 前，请先设置好userId， accessToken 和 appKey。
+const userId = "userId";
+const accessToken = "accessToken";
+const appKey = "your app key";
+
 const ChatApp = () => {
   const client = useClient();
   useEffect(() => {
     client &&
       client
         .open({
-          user: "",
-          token: "",
+          user: userId,
+          accessToken: accessToken,
         })
         .then((res) => {
           // 创建会话
@@ -105,31 +110,33 @@ const ChatApp = () => {
             name: "用户1", // 单聊为对端用户昵称，群聊为群组名称。
             lastMessage: {},
           });
+        })
+        .catch((err) => {
+          console.log("登录失败", err);
         });
   }, [client]);
 
   return (
-    <div>
-      <div>
+    <div style={{ display: "flex", height: "100vh" }}>
+      <div style={{ width: "350px", borderRight: "1px solid #ddd" }}>
         <ConversationList />
       </div>
-      <div>
+      <div style={{ flex: "1" }}>
         <Chat />
       </div>
     </div>
   );
 };
-
 class App extends Component {
   render() {
     return (
-      <Provider
+      <UIKitProvider
         initConfig={{
-          appKey: "your app key",
+          appKey: appKey,
         }}
       >
         <ChatApp />
-      </Provider>
+      </UIKitProvider>
     );
   }
 }
@@ -153,4 +160,7 @@ npm run start
 使用自定义 App Key 时，由于没有联系人，需先添加好友。
 :::
 
-![img](@static/images/uikit/chatuikit/web/message_first.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/message_first.png" title="发送第一条消息" />
+</ImageGallery>
+

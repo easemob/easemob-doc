@@ -2,7 +2,7 @@
 
 <Toc />
 
-聊天 UIKit 的内部 state 据全部存储在 rootStore，rootStore 数据更新会驱动各个组件更新 UI。你可以使用 rootStore 上的数据，也可以调用 UIKit 提供的方法来更新数据。
+聊天 UIKit 的内部 state 数据全部存储在 rootStore，rootStore 数据更新会驱动各个组件更新 UI。你可以使用 rootStore 上的数据，也可以调用 UIKit 提供的方法来更新数据。
 
 rootStore 包含以下数据模块:
 
@@ -175,10 +175,10 @@ import React from "react";
 import { useChatContext, useSDK } from "easemob-chat-uikit";
 
 const ChatAPP = () => {
-  const { easemobChat } = useSDK(); // 获取即时通讯 IM SDK
+  const { chatSDK } = useSDK(); // 获取即时通讯 IM SDK
   const { messages, sendMessage } = useChatContext();
   const sendCustomMessage = () => {
-    const customMsg = easemobChat.message.create({
+    const customMsg = chatSDK.message.create({
       type: "custom",
       to: "targetId", // 单聊为对端用户 ID，群组聊天为当前群组 ID。
       chatType: "singleChat",
@@ -215,7 +215,7 @@ const ChatAPP = () => {
     </tr> 
     <tr>
         <td>repliedMessage</td>
-        <td style=font-size:15px>easemobChat.MessagesType</td>
+        <td style=font-size:15px>chatSDK.MessagesType</td>
         <td style=font-size:15px>正在回复的消息</td>
     </tr> 
     <tr>
@@ -225,7 +225,7 @@ const ChatAPP = () => {
     </tr> 
     <tr>
         <td style=color:blue>sendMessage</td>
-        <td style=font-size:15px>(message: easemobChat.MessageBody) => Promise&lt;void&gt;</td>
+        <td style=font-size:15px>(message: chatSDK.MessageBody) => Promise&lt;void&gt;</td>
         <td style=font-size:15px>发送消息。</td>
     </tr>
     <tr>
@@ -245,12 +245,12 @@ const ChatAPP = () => {
     </tr>
     <tr>
         <td style=color:blue>modifyMessage</td>
-        <td style=font-size:15px>(messageId: string, msg: easemobChat.TextMsgBody) => Promise&lt;void&gt;</td>
+        <td style=font-size:15px>(messageId: string, msg: chatSDK.TextMsgBody) => Promise&lt;void&gt;</td>
         <td style=font-size:15px>编辑服务器上的消息。编辑后，对端用户会显示修改后的消息。该方法仅对文本消息有效。</td>
     </tr>
     <tr>
         <td style=color:blue>modifyLocalMessage</td>
-        <td style=font-size:15px>(id: string, message: easemobChat.MessageBody | RecallMessage) => void</td>
+        <td style=font-size:15px>(id: string, message: chatSDK.MessageBody | RecallMessage) => void</td>
         <td style=font-size:15px>编辑本地消息。该方法对任何类型的消息均有效。</td>
     </tr>
     <tr>
@@ -265,7 +265,7 @@ const ChatAPP = () => {
     </tr>
     <tr>
         <td style=color:blue>setRepliedMessage</td>
-        <td style=font-size:15px>(message: easemobChat.MessageBody | null) => void</td>
+        <td style=font-size:15px>(message: chatSDK.MessageBody | null) => void</td>
         <td style=font-size:15px>设置回复的消息。</td>
     </tr>
     <tr>
@@ -324,7 +324,7 @@ const ChatAPP = () => {
     </tr>
     <tr>
         <td style=color:blue>setGroupMemberAttributes</td>
-        <td style=font-size:15px>(groupId: string, userId: string, attributes: easemobChat.MemberAttributes) => void</td>
+        <td style=font-size:15px>(groupId: string, userId: string, attributes: chatSDK.MemberAttributes) => void</td>
         <td style=font-size:15px>设置群成员属性。</td>
     </tr>
 </table>

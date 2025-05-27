@@ -12,8 +12,8 @@
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
-- 设置和强制设置聊天室自定义属性；
-- 删除和强制删除聊天室自定义属性。
+- 设置和更新/强制设置和更新聊天室自定义属性；
+- 删除/强制删除聊天室自定义属性。
 
 ## 前提条件
 
@@ -108,7 +108,7 @@ EMError *error = nil;
             }];
 ```
 
-#### 设置单个聊天室属性
+#### 设置/设置单个聊天室属性
 
 聊天室成员可以调用 `setChatroomAttributes` 方法设置和更新单个聊天室自定义属性。该方法只可添加新自定义属性字段和更新自己设置的现有属性。设置后，其他聊天室成员收到 `EMChatRoomManagerDelegate` 中的 `chatroomAttributesDidUpdated` 回调。
 
@@ -121,7 +121,7 @@ EMError *error = nil;
                 }];
 ```
 
-#### 强制设置单个聊天室属性
+#### 强制设置/更新单个聊天室属性
 
 如果除了设置自己的单个自定义属性还需覆盖其他聊天室成员设置的该属性，需调用 `setChatroomAttributesForced` 方法。设置成功后，其他聊天室成员收到 `EMChatRoomManagerDelegate` 中的 `chatroomAttributesDidUpdated` 回调。
 
@@ -134,7 +134,7 @@ EMError *error = nil;
                 }];
 ```
 
-#### 设置多个聊天室自定义属性
+#### 设置/更新多个聊天室自定义属性
 
 聊天室成员可以调用 `setChatroomAttributes` 方法设置多个聊天室自定义属性。该方法只能添加新属性字段以及更新当前用户已添加的属性字段。设置成功后，其他聊天室成员收到 `EMChatRoomManagerDelegate` 中的 `chatroomAttributesDidUpdated` 回调。
 
@@ -147,7 +147,7 @@ EMError *error = nil;
                 }];
 ```
 
-#### 强制设置多个聊天室属性
+#### 强制设置/更新多个聊天室属性
 
 如果除了设置自己的多个自定义属性还需覆盖其他聊天室成员设置的这些属性，需调用 `setChatroomAttributesForced` 方法。设置成功后，其他聊天室成员收到 `EMChatRoomManagerDelegate` 中的 `chatroomAttributesDidUpdated` 回调。
 

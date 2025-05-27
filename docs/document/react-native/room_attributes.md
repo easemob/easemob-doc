@@ -12,14 +12,14 @@
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
-- 设置聊天室自定义属性；
-- 删除聊天室自定义属性。
+- 设置和更新/强制设置和更新聊天室自定义属性；
+- 删除/强制删除聊天室自定义属性。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+- 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
 - 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 - 了解聊天室的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
@@ -116,9 +116,9 @@ ChatClient.getInstance()
   });
 ```
 
-#### 设置聊天室自定义属性
+#### 设置/更新聊天室自定义属性
 
-所有聊天室成员均可调用 `addAttributes` 方法设置一个或多个聊天室自定义属性。利用该方法可设置新属性，也可以修改自己或其他成员设置的现有属性。设置后，其他聊天室成员收到  `onAttributesUpdated` 回调。
+所有聊天室成员均可调用 `addAttributes` 方法设置或更新一个或多个聊天室自定义属性。利用该方法可设置新属性，也可以修改自己或其他成员设置的现有属性。设置后，其他聊天室成员收到  `onAttributesUpdated` 回调。
 
 ```typescript
 // 通过指定聊天室 ID、属性 key、属性值、deleteWhenLeft 和 overwrite 设置自定义属性。

@@ -4,26 +4,19 @@
 
 子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `IsThread` 标记。本文介绍环信即时通讯 IM windows SDK 如何发送、接收以及撤回子区消息。
 
+使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
+
 ## 技术原理
 
-环信即时通讯 IM windows SDK 提供 `IChatManager`、`Message` 和 `IChatThreadManager` 类，用于管理子区消息，支持你通过调用 API 在项目中实现如下功能：
-
-- 发送子区消息
-- 接收子区消息
-- 撤回子区消息
-- 获取子区消息
+环信即时通讯 IM windows SDK 提供 `IChatManager`、`Message` 和 `IChatThreadManager` 类，用于管理子区消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取子区消息。
 
 消息收发流程如下：
 
-1. 客户端从应用服务器获取 token。
-2. 客户端 A 和 B 登录即时通讯。
-3. 客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
-
-![img](@static/images/android/sendandreceivemsg.png)
+客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
 
 子区创建和查看如下图：
 
-![img](@static/images/android/threads.png)
+![img](/images/android/threads.png)
 
 ## 前提条件
 
@@ -31,7 +24,7 @@
 
 - 完成 1.0.6 以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 联系商务开通子区功能。
+- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 ## 实现方法
 
@@ -39,7 +32,7 @@
 
 ### 发送子区消息
 
-发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send_receive.html#发送文本消息)。唯一不同的是，发送子区消息需要指定标记 `IsThread` 为 `true`。
+发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send_receive.html#发送和接收文本消息)。唯一不同的是，发送子区消息需要指定标记 `IsThread` 为 `true`。
 
 示例代码如下：
 
@@ -66,7 +59,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 ### 接收子区消息
 
-接收消息的具体逻辑，请参考 [接收消息](message_send_receive.html#接收消息)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考 [接收消息](message_send_receive.html#发送和接收文本消息)，此处只介绍子区消息和其他消息的区别。
 
 子区有新增消息时，子区所属群组的所有成员收到 `IChatThreadManagerDelegate#OnUpdateMyThread` 回调，子区成员收到 `IChatManagerDelegate#OnMessagesReceived` 回调。
 
@@ -104,7 +97,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 public class ChatManagerDelegate : IChatManagerDelegate {
 
     //实现 OnMessagesRecalled 回调。
-    public void OnMessagesRecalled(List<Message> messages)
+    public void OnMessagesRecalled(List<RecallMessageInfo> recallMessagesInfo)
     {
       //收到消息，遍历消息列表，解析和显示。
     }

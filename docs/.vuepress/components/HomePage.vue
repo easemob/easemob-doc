@@ -1,186 +1,187 @@
 <template>
   <HopeHomePage>
     <template #center>
-      <ClientOnly>
-        <div class="main-container">
-          <HeroSection />
-          <main :ref="containerRef" class="main-content">
-            <div class="columns">
-              <div class="toc column">
-                <el-affix :offset="80">
-                  <el-anchor
-                    :container="containerRef"
-                    type="underline"
-                    :offset="60"
+      <div class="main-container">
+        <HeroSection />
+        <main :ref="containerRef" class="main-content">
+          <div class="toc">
+            <ClientOnly>
+              <el-affix :offset="80">
+                <el-anchor
+                  :container="containerRef"
+                  type="underline"
+                  :offset="60"
+                >
+                  <el-anchor-link
+                    v-for="anchorLink in anchorLinks"
+                    :key="anchorLink.text"
+                    :href="`#${anchorLink.text}`"
                   >
-                    <el-anchor-link
-                      v-for="anchorLink in anchorLinks"
-                      :key="anchorLink.text"
-                      :href="`#${anchorLink.text}`"
-                    >
-                      {{ anchorLink.text }}
-                      <template v-if="anchorLink.children" #sub-link>
-                        <el-anchor-link
-                          v-for="subLink in anchorLink.children"
-                          :key="subLink.text"
-                          :href="`#${subLink.text}`"
-                        >
-                          {{ subLink.text }}
-                        </el-anchor-link>
-                      </template>
-                    </el-anchor-link>
-                  </el-anchor>
-                </el-affix>
-              </div>
-              <div class="column">
-                <section class="product-section">
-                  <div class="product-links">
-                    <template
-                      v-for="(item, index) in products"
-                      :key="item.text"
-                    >
-                      <el-link
-                        :href="item.link"
-                        type="primary"
-                        class="product-link"
+                    {{ anchorLink.text }}
+                    <template v-if="anchorLink.children" #sub-link>
+                      <el-anchor-link
+                        v-for="subLink in anchorLink.children"
+                        :key="subLink.text"
+                        :href="`#${subLink.text}`"
                       >
-                        {{ item.text }}
-                      </el-link>
-                      <span v-if="index < products.length - 1">|</span>
+                        {{ subLink.text }}
+                      </el-anchor-link>
+                    </template>
+                  </el-anchor-link>
+                </el-anchor>
+              </el-affix>
+            </ClientOnly>
+          </div>
+
+          <div class="content">
+            <section class="product-section">
+              <div class="product-links">
+                <template v-for="(item, index) in products" :key="item.text">
+                  <el-link
+                    :href="item.link"
+                    type="primary"
+                    class="product-link"
+                  >
+                    {{ item.text }}
+                  </el-link>
+                  <span v-if="index < products.length - 1">|</span>
+                </template>
+              </div>
+              <div v-for="s in starter" :key="s.title" :id="s.title">
+                <h2 class="sdk-start-title">{{ s.title }}</h2>
+                <div class="sdk-start-list">
+                  <div
+                    class="sdk-start-item"
+                    v-for="item in s.platform"
+                    :key="item.text"
+                    @click="goTo(item.link)"
+                  >
+                    <div class="sdk-start-icon">
+                      <img
+                        :src="item.icon"
+                        alt="Platform Icon"
+                        class="platform-icon"
+                      />
+                      <span class="platform-name">{{ item.text }}</span>
+                    </div>
+                    <img
+                      src="/arrow_right.svg"
+                      alt="Arrow icon"
+                      class="arrow-icon"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div
+                :id="project.title"
+                v-for="project in projects"
+                :key="project.title"
+              >
+                <h2 class="sdk-features-title">{{ project.title }}</h2>
+                <div
+                  class="sdk-feature-item"
+                  v-for="feature in project.features"
+                  :key="feature.title"
+                  :id="feature.title || null"
+                >
+                  <div v-if="feature.title" class="sdk-feature-header">
+                    <img
+                      v-if="feature.icon"
+                      :src="feature.icon"
+                      class="feature-icon"
+                    />
+                    <h3 v-if="feature.title" class="feature-title">
+                      {{ feature.title }}
+                    </h3>
+                  </div>
+                  <div class="sdk-feature-links">
+                    <template
+                      v-for="context in feature.contexts"
+                      :key="context.text"
+                    >
+                      <a
+                        v-if="context.link"
+                        class="feature-link"
+                        type="primary"
+                        :href="context.link"
+                      >
+                        {{ context.text }}
+                      </a>
+                      <ClientOnly v-else>
+                        <el-popover placement="bottom-start" :width="436">
+                          <template #reference>
+                            <a class="feature-link" type="primary">
+                              {{ context.text }}
+                            </a>
+                          </template>
+                          <template #default>
+                            <CardMenu
+                              :title="context.text"
+                              :sdks="context.sdks"
+                              :desc="context.desc"
+                            />
+                          </template>
+                        </el-popover>
+                      </ClientOnly>
                     </template>
                   </div>
-                  <div id="SDK快速开始">
-                    <h2 class="sdk-start-title">{{ sdkStarter.title }}</h2>
-                    <div class="sdk-start-list">
-                      <div
-                        class="sdk-start-item"
-                        v-for="item in sdkStarter.platform"
-                        :key="item.text"
-                        @click="goTo(item.link)"
-                      >
-                        <div class="sdk-start-icon">
-                          <img
-                            :src="item.icon"
-                            width="28px"
-                            height="28px"
-                            alt="Platform Icon"
-                            class="platform-icon"
-                          />
-                          <span class="platform-name">{{ item.text }}</span>
-                        </div>
-                        <img
-                          src="/arrow_right.svg"
-                          alt="Arrow icon"
-                          class="arrow-icon"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    :id="project.title"
-                    v-for="project in projects"
-                    :key="project.title"
-                  >
-                    <h2 class="sdk-features-title">{{ project.title }}</h2>
-                    <div
-                      class="sdk-feature-item"
-                      v-for="feature in project.features"
-                      :key="feature.title"
-                      :id="feature.title || null"
-                    >
-                      <div v-if="feature.title" class="sdk-feature-header">
-                        <img
-                          v-if="feature.icon"
-                          :src="feature.icon"
-                          class="feature-icon"
-                        />
-                        <h3 class="feature-title">{{ feature.title }}</h3>
-                      </div>
-                      <div class="sdk-feature-links">
-                        <template
-                          v-for="context in feature.contexts"
-                          :key="context.text"
-                        >
-                          <a
-                            v-if="context.link"
-                            class="feature-link"
-                            type="primary"
-                          >
-                            {{ context.text }}
-                          </a>
-
-                          <el-popover
-                            v-else
-                            placement="bottom-start"
-                            :width="436"
-                          >
-                            <template #reference>
-                              <a class="feature-link" type="primary">
-                                {{ context.text }}
-                              </a>
-                            </template>
-                            <template #default>
-                              <CardMenu
-                                :title="context.text"
-                                :sdks="context.sdks"
-                                :desc="context.desc"
-                              />
-                            </template>
-                          </el-popover>
-                        </template>
-                      </div>
-                    </div>
-                  </div>
-                </section>
+                </div>
               </div>
-            </div>
-          </main>
-        </div>
-      </ClientOnly>
+            </section>
+          </div>
+        </main>
+      </div>
     </template>
   </HopeHomePage>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
-import HeroSection from "./CustomHero.vue";
-import CardMenu from "./CardMenu.vue";
-import { usePageFrontmatter } from "@vuepress/client";
-const frontmatter = usePageFrontmatter();
-const router = useRouter();
-const products = frontmatter.value.products || [];
-const sdkStarter = frontmatter.value.sdkStarter || [];
-const projects = frontmatter.value.projects || [];
-const containerRef = ref<HTMLElement | null>(null);
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import HopeHomePage from 'vuepress-theme-hope/components/HomePage.js'
+import HeroSection from './CustomHero.vue'
+import CardMenu from './CardMenu.vue'
+import { usePageFrontmatter } from '@vuepress/client'
+const frontmatter = usePageFrontmatter()
+const router = useRouter()
+const products = frontmatter.value.products || []
+const starter = frontmatter.value.starter || []
+const projects = frontmatter.value.projects || []
+const containerRef = ref<HTMLElement | null>(null)
 
 const goTo = (path: string) => {
-  router.push(path);
-};
+  if(path.indexOf('http')==0) {
+    window.open(path)
+  } else {
+    router.push(path)
+  }
+
+}
 
 interface AnchorLink {
-  text: string;
-  children?: AnchorLink[];
+  text: string
+  children?: AnchorLink[]
 }
 
 const buildAnchorLink = () => {
-  const values: AnchorLink[] = [];
-  values.push({ text: sdkStarter.title });
+  const values: AnchorLink[] = []
+  starter.forEach((s) => {
+    values.push({ text: s.title })
+  })
   projects.forEach((project) => {
-    const children = [];
+    const children = []
     project.features.forEach((feature) => {
       if (feature.title) {
-        children.push({ text: feature.title });
+        children.push({ text: feature.title })
       }
-    });
-    values.push({ text: project.title, children });
-  });
-  return values;
-};
+    })
+    values.push({ text: project.title, children })
+  })
+  return values
+}
 
-const anchorLinks = buildAnchorLink();
+const anchorLinks = buildAnchorLink()
 </script>
 
 <style scoped>
@@ -195,44 +196,31 @@ const anchorLinks = buildAnchorLink();
   align-self: center;
   margin-top: 16px;
   width: 100%;
-  max-width: 1006px;
+  max-width: 772px;
+  position: relative;
 }
 
 @media (max-width: 991px) {
   .main-content {
-    max-width: 100%;
+    max-width: 95%;
   }
 }
 
-.columns {
-  gap: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-@media (max-width: 991px) {
-  .columns {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-  }
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  line-height: normal;
-  width: 19%;
-  margin-left: 0;
+.content {
+  width: 100%;
 }
 
 .toc {
+  margin-top: 20px;
+  position: absolute;
+  top: 0;
+  left: -200px;
   visibility: visible;
   width: unset;
   height: unset;
 }
 
-@media (max-width: 1096px) {
+@media (max-width: 1200px) {
   .toc {
     visibility: hidden;
     width: 0;
@@ -240,10 +228,10 @@ const anchorLinks = buildAnchorLink();
   }
 }
 
-@media (max-width: 991px) {
-  .column {
-    width: 100%;
-  }
+.columns {
+  gap: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .sdk-features {

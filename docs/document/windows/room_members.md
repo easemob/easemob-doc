@@ -9,7 +9,7 @@
 环信即时通讯 IM SDK 提供 `Room`、`IRoomManager` 和 `IRoomManagerDelegate` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
 
 - 获取聊天室成员列表
-- 将成员移出聊天室
+- 退出聊天室
 - 管理聊天室黑名单
 - 管理聊天室白名单
 - 管理聊天室禁言列表
@@ -35,6 +35,8 @@
 示例代码如下：
 
 ```csharp
+//cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
+//pageSize：每页期望返回的成员数,最大值为 1,000。
 SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, callback: new ValueCallBack<CursorResult<string>>(
   // members 类型为 CursorResult<string>。
   onSuccess: (members) => {
@@ -44,7 +46,36 @@ SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, callba
 ));
 ```
 
-### 将成员移出聊天室
+### 退出聊天室
+
+#### 主动退出
+
+聊天室所有成员均可以调用 `LeaveRoom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `OnMemberExitedFromRoom` 回调。
+
+示例代码如下：
+
+```csharp
+SDKClient.Instance.RoomManager.LeaveRoom(roomId, new CallBack(
+    onSuccess: () => {
+    },
+    onError: (code, desc) => {
+    }
+));
+```
+
+退出聊天室时，SDK 默认删除该聊天室的所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `Options#DeleteMessagesAsExitRoom` 设置为 `false`。
+
+示例代码如下：
+
+```csharp
+Options options = new Options();
+options. DeleteMessagesAsExitRoom = false;
+```
+
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，离开后重新进入仍是该聊天室的所有者。若 `Options#IsRoomOwnerLeaveAllowed
+` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `LeaveRoom` 方法离开聊天室时会提示错误 706。
+
+#### 被移出
 
 仅聊天室所有者和管理员可调用 `DeleteRoomMembers` 方法将单个或多个成员移出聊天室。
 
@@ -62,6 +93,15 @@ SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
     }
 ));
 ```
+
+#### 离线后自动退出
+
+由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+
+以下两类成员即使离线也不会退出聊天室：
+
+- 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
+- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)时拉入的用户从未登录过。
 
 ### 管理聊天室黑名单
 
@@ -187,7 +227,7 @@ SDKClient.Instance.RoomManager.RemoveAllowListMembers(roomId, list, new CallBack
 
 仅聊天室所有者和管理员可以调用 `MuteRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `OnMuteListAddedFromRoom` 回调。
 
-:::notice
+:::tip
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
 :::
 
@@ -207,7 +247,7 @@ SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
 
 仅聊天室所有者和管理员可以调用 `UnMuteRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，其他成员收到 `OnMuteListRemovedFromRoom` 回调。
 
-:::notice
+:::tip
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。
 :::
 

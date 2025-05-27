@@ -17,7 +17,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+- 完成 SDK 初始化，详见 [初始化](initialization.html)和[快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 

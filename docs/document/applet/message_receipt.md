@@ -1,6 +1,6 @@
 ---
 {
     pageUri: "/document/web/message_receipt.html",
-    title: "实现消息回执"
+    title: "消息回执"
 }
 ---

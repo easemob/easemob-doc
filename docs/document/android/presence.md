@@ -6,9 +6,11 @@
 
 本文介绍如何在即时通讯应用中发布、订阅和查询用户的在线状态。
 
+关于用户的在线、离线和自定义状态的定义、变更以及用户的实时感知，详见[用户在线状态管理](/product/product_user_presence.html)。
+
 ## 技术原理
 
-环信 IM SDK 提供 `EMPresence`、`EMPresenceManager` 和 `EMPresenceListener` 类，用于管理在线状态订阅，包含如下核心方法：
+环信 IM SDK 提供 [EMPresence](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_presence.html)、[EMPresenceManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_presence_manager.html) 和 [EMPresenceListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_presence_listener.html) 类，用于管理在线状态订阅，包含如下核心方法：
 
 - `subscribePresences`：订阅用户的在线状态；
 - `publishPresence`：发布自定义在线状态；
@@ -18,7 +20,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![img](@static/images/android/presence.png)
+![img](/images/android/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -28,7 +30,7 @@
 
 效果如下图：
 
-![img](@static/images/android/status.png)
+![img](/images/android/status.png)
 
 ## 前提条件
 
@@ -36,7 +38,7 @@
 
 1. 完成 `3.9.1 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已联系商务开通在线状态订阅功能。
+3. 已在[环信控制台](https://console.easemob.com/user/login)开通在线状态订阅功能。
 
 ## 实现方法
 
@@ -44,7 +46,7 @@
 
 ### 订阅指定用户的在线状态
 
-默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `com.hyphenate.chat.EMPresenceManager#subscribePresences` 方法订阅指定用户的在线状态，示例代码如下：
+默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `EMPresenceManager#subscribePresences` 方法订阅指定用户的在线状态，示例代码如下：
 
 ```java
 EMClient.getInstance().presenceManager().subscribePresences(contactsFromServer, 1 * 24 * 3600, new EMValueCallBack<List<EMPresence>>() {
@@ -62,16 +64,18 @@ EMClient.getInstance().presenceManager().subscribePresences(contactsFromServer, 
 
 成功订阅指定用户的在线状态后，SDK 通过 `onSuccess` 回调返回被订阅用户的在线状态。
 
-在线状态变更时，订阅者会收到 `com.hyphenate.EMPresenceListener#onPresenceUpdated` 回调。
+在线状态变更时，订阅者会收到 `EMPresenceListener#onPresenceUpdated` 回调。
 
-:::notice
+:::tip
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
-- 每次调用接口最多只能订阅 100 个账号，若数量较大需多次调用。每个用户 ID 订阅的用户数不超过 3000。如果超过 3000，后续订阅也会成功，但默认会将订阅剩余时长较短的替代。
+- 每次调用接口最多只能订阅 100 个账号，若数量较大需多次调用。
+- 每个用户 ID 订阅的用户数不超过 3000。如果超过 3000，后续订阅也会成功，但默认会将订阅剩余时长较短的替代。
+- 每个用户最多可被 3000 个用户订阅。
 :::
 
 ### 发布自定义在线状态
 
-用户在线时，可调用 `com.hyphenate.chat.EMPresenceManager#publishPresence` 方法发布自定义在线状态：
+用户在线时，可调用 `EMPresenceManager#publishPresence` 方法发布自定义在线状态：
 
 ```java
 EMClient.getInstance().presenceManager().publishPresence("自定义状态", new EMCallBack() {
@@ -87,7 +91,7 @@ EMClient.getInstance().presenceManager().publishPresence("自定义状态", new 
 });
 ```
 
-在线状态发布后，发布者和订阅者均会收到 `com.hyphenate.EMPresenceListener#onPresenceUpdated` 回调。
+在线状态发布后，发布者和订阅者均会收到 `EMPresenceListener#onPresenceUpdated` 回调。
 
 ### 添加在线状态监听器
 
@@ -107,7 +111,7 @@ public interface EMPresenceListener {
 
 ### 取消订阅指定用户的在线状态
 
-若取消指定用户的在线状态订阅，可调用 `com.hyphenate.chat.EMPresenceManager#unsubscribePresences` 方法，示例代码如下：
+若取消指定用户的在线状态订阅，可调用 `EMPresenceManager#unsubscribePresences` 方法，示例代码如下：
 
 ```java
 EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer, new EMCallBack() {
@@ -125,7 +129,7 @@ EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer
 
 ### 查询被订阅用户列表
 
-为方便用户管理订阅关系，SDK 提供 `com.hyphenate.chat.EMPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
+为方便用户管理订阅关系，SDK 提供 `EMPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
 ```java
 EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSize, new EMValueCallBack<List<String>>() {
@@ -143,9 +147,10 @@ EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSiz
 
 ### 获取用户的当前在线状态
 
-如果不关注用户的在线状态变更，你可以调用 `com.hyphenate.chat.EMPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
+如果不关注用户的在线状态变更，你可以调用 `EMPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
 ```java
+// contactsList：要查询状态的用户 ID，每次最多可传 100 个用户 ID。
 EMClient.getInstance().presenceManager().fetchPresenceStatus(contactsList, new EMValueCallBack<List<EMPresence>>() {
     @Override
     public void onSuccess(List<EMPresence> presences) {

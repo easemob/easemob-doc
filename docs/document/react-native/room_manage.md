@@ -15,18 +15,18 @@
 - 创建聊天室
 - 加入聊天室
 - 获取聊天室详情
-- 退出聊天室
 - 解散聊天室
 - 监听聊天室事件
+- 实时更新聊天室成员人数
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+- 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
 - 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 - 了解环信即时通讯 IM 不同版本的聊天室相关数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
-- 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom.html#添加超级管理员)。
+- 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom_superadmin.html)。
 - 聊天室创建者和管理员的数量之和不能超过 100，即管理员最多可添加 99 个。
 
 ## 实现方法
@@ -35,7 +35,7 @@
 
 ### 创建聊天室
 
-仅 [超级管理员](/document/server-side/chatroom.html#管理超级管理员) 可以调用 `createChatRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
+仅 [超级管理员](/document/server-side/chatroom_superadmin.html) 可以调用 `createChatRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
 
 建议直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
 
@@ -67,28 +67,22 @@ ChatClient.getInstance()
 用户申请加入聊天室的步骤如下：
 
 1. 调用 `fetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-2. 调用 `joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `onMemberJoined` 回调。
+2. 调用 `joinChatRoomEx` 方法传入聊天室 ID，申请加入对应聊天室。该接口支持加入时设置扩展信息，决定是否退出所有聊天室。加入后，聊天室中的其他成员会收到 `ChatRoomEventListener#onMemberJoined` 事件。
 
 示例代码如下：
 
 ```typescript
-// 获取公开聊天室列表，每次最多可获取 1,000 个。
 ChatClient.getInstance()
-  .roomManager.fetchPublicChatRoomsFromServer(pageNum, pageSize)
-  .then((rooms) => {
-    console.log("get room success.", rooms);
+  .chatManager.joinChatRoomEx({
+    roomId: "foo",
+    exitOtherRoom: false,
+    ext: "test",
   })
-  .catch((reason) => {
-    console.log("get room fail.", reason);
-  });
-// 加入聊天室
-ChatClient.getInstance()
-  .roomManager.joinChatRoom(roomId)
   .then(() => {
-    console.log("join room success.");
+    console.log("success");
   })
-  .catch((reason) => {
-    console.log("join room fail.", reason);
+  .catch((e) => {
+    console.warn("fail:", e);
   });
 ```
 
@@ -123,34 +117,6 @@ ChatClient.getInstance()
     console.log("get room info fail.", reason);
   });
 ```
-
-### 退出聊天室
-
-聊天室所有成员均可以调用 `leaveChatRoom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `ChatRoomEventListener#onMemberExited` 回调。
-
-示例代码如下：
-
-```typescript
-ChatClient.getInstance()
-  .roomManager.leaveChatRoom(roomId)
-  .then(() => {
-    console.log("join room success.");
-  })
-  .catch((reason) => {
-    console.log("join room fail.", reason);
-  });
-```
-
-退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `ChatOptions#deleteMessagesAsExitChatRoom` 设置为 `false`。
-
-示例代码如下：
-
-```typescript
-ChatOptions options = new ChatOptions();
-options.deleteMessagesAsExitChatRoom = false;
-```
-
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，离开后重新进入仍是该聊天室的所有者。若 `ChatOptions.isChatRoomOwnerLeaveAllowed` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706。
 
 ### 解散聊天室
 
@@ -222,16 +188,14 @@ const roomListener: ChatRoomEventListener = new (class
     );
   }
   // 有成员被加入禁言列表。被添加的成员收到该事件。
-  onMuteListAdded(params: {
+  onMuteListAddedV2(params: {
     roomId: string;
-    mutes: string[];
-    expireTime?: string | undefined;
+    mutes: Record<string, number>;
   }): void {
     console.log(
-      `onMuteListAdded:`,
+      'onMuteListAddedV2:',
       params.roomId,
-      params.mutes,
-      params.expireTime
+      params.mutes
     );
   }
   // 有成员被移出禁言列表。被解除禁言的成员会收到该事件。
@@ -322,4 +286,25 @@ ChatClient.getInstance().roomManager.removeAllRoomListener();
 
 // 添加聊天室监听器。
 ChatClient.getInstance().roomManager.addRoomListener(roomListener);
+```
+
+### 实时更新聊天室成员人数
+
+如果聊天室短时间内有成员频繁加入或退出时，实时更新聊天室成员人数的逻辑如下：
+
+1. 聊天室内有成员加入时，其他成员会收到 `ChatRoomEventListener#onMemberJoined` 事件。有成员主动或被动退出时，其他成员会收到 `ChatRoomEventListener#onMemberExited` 事件。
+
+2. 收到通知事件后，调用 `fetchChatRoomInfoFromServer` 方法获取本地聊天室详情，其中包括聊天室当前人数。
+
+```typescript
+ChatClient.getInstance()
+  .chatManager.fetchChatRoomInfoFromServer(
+    roomId // 房间ID
+  )
+  .then((res) => {
+    // todo: 操作成功, 获取房间信息
+  })
+  .catch((error) => {
+    // todo: 发生错误
+  });
 ```

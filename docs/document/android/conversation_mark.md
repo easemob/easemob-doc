@@ -20,7 +20,7 @@ mapping.put(EMConversation.EMMarkType.MARK_4,"girls");
 
 ## 技术原理
 
-环信即时通讯 IM 支持会话标记功能，主要方法如下：
+环信即时通讯 IM 通过 [EMChatManager 类](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 类和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类支持会话标记功能，主要方法如下：
 
 - `EMChatManager#asyncAddConversationMark`：标记会话。
 - `EMChatManager#asyncRemoveConversationMark`：取消标记会话。
@@ -42,7 +42,7 @@ mapping.put(EMConversation.EMMarkType.MARK_4,"girls");
 
 你可以调用 `asyncAddConversationMark` 方法标记会话。每次最多可为 20 个会话添加标记。调用该方法会同时为本地和服务器端的会话添加标记。
 
-添加会话标记后，若调用 `asyncFetchConversationsFromServer` 接口从服务器分页获取会话列表，返回的会话对象中包含会话标记，你需要通过 `EMConversation#marks` 方法获取。若你已经达到了服务端会话列表长度限制（默认 100 个会话），服务端会根据会话的活跃度删除不活跃会话，这些会话的会话标记也随之删除。
+添加会话标记后，若调用 `asyncFetchConversationsFromServer` 接口从服务器分页获取会话列表，返回的会话对象中包含会话标记，你需要通过 `EMConversation#marks` 方法获取。若你已经达到了服务端会话列表长度限制（默认 100 个会话），服务端会根据会话的活跃度（最新一条消息的时间戳）删除不活跃会话，这些会话的会话标记也随之删除。
 
 :::tip
 对会话添加标记，例如会话标星，并不影响会话的其他逻辑，例如会话的未读消息数。

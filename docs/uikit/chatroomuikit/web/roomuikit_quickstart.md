@@ -163,4 +163,4 @@ npm run start
 
 输入消息内容，点击 **发送** 按钮，发送消息。
 
-![img](@static/images/uikit/chatroomweb/chatroom.png)
+![img](/images/uikit/chatroomweb/chatroom.png)

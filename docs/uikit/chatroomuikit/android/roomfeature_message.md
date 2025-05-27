@@ -10,7 +10,7 @@
 
 在 UIKit 中，默认通过长按单条消息，触发举报选项，实现消息举报。用户可以选择举报原因，如色情内容、恶意攻击、仇恨言论、垃圾广告等。你也可以根据业务需要，修改举报原因选项。
 
-![img](@static/images/uikit/chatroomfeature/msg_report.png =600x400)
+![img](/images/uikit/chatroomfeature/msg_report.png =600x400)
 
 ## 消息翻译
 
@@ -18,7 +18,7 @@
 
 在 UIKit 中，默认通过长按单条消息，触发翻译选项，实现消息翻译。默认翻译后的语言与用户设备的系统设置保持一致，例如，若你的手机系统语言为中文，则消息翻译的目标语言也是中文。翻译后的消息显示在原消息的位置，替换原消息。
 
-![img](@static/images/uikit/chatroomfeature/msg_translate.png =500x500)
+![img](/images/uikit/chatroomfeature/msg_translate.png =500x500)
 
 ## 消息撤回
 
@@ -28,7 +28,7 @@
 所有用户只能撤回自己发送的消息，即使聊天室所有者也不能撤回其他成员发送的消息。
 :::
 
-![img](@static/images/uikit/chatroomfeature/msg_recall.png =800x600)
+![img](/images/uikit/chatroomfeature/msg_recall.png =800x600)
 
 ## 禁言成员
 
@@ -38,4 +38,4 @@
 
 当成员被禁言后，将会被加入[已禁言列表](roomfeature_common#已禁言列表)。如果用户想要取消禁言成员，需要在已禁言列表中找到该成员，点击成员右端的管理功能按钮，触发解除禁言选项，实现取消禁言的操作。
 
-![img](@static/images/uikit/chatroomfeature/msg_mute.png =500x500)
+![img](/images/uikit/chatroomfeature/msg_mute.png =500x500)

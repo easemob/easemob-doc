@@ -10,8 +10,9 @@
 
 开始前，确保你的开发环境满足如下条件：
 
-- Xcode 14.0 或以上版本；
-- iOS 13.0 或以上版本；
+- Xcode 16 或以上版木；
+- iOs 14.0 或以上版木；
+- CocoaPods 1.14.3 及以上版本；
 - 项目中已设置有效的开发者签名。
 
 ## 操作步骤
@@ -22,7 +23,7 @@
 
 ### 第二步 执行 pod 命令
 
-1. 点击打开 `chatuikit-ios` 文件夹。
+1. 点击打开 `easemob-uikit-ios` 文件夹。
 
 2. 将 `Example` 文件夹拖拽到终端。
 
@@ -38,13 +39,15 @@ pod install --repo-update
 
 2. 在键盘上按 `cmd+B` 进行编译，编译结果会报错，如下图所示：
 
-![img](@static/images/uikit/chatuikit/ios/buildError.png) 
+![img](/images/uikit/chatuikit/ios/buildError.png) 
 
-3. 在[环信即时通讯控制台](https://console.easemob.com/user/login)创建有效的环信即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#创建应用)。然后，将 App Key 填入 `appKey` 字段。
-
-4. [创建有效的环信 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，将用户的 token 填入上图 `chatToken` 字段，用户 ID 填入 `userId`。
+1. 在[环信即时通讯控制台](https://console.easemob.com/user/login)创建有效的环信即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#创建应用)。然后，将 App Key 填入 `appKey` 字段，运行项目。
 
 在键盘上按 `cmd+B` 重新编译程序即可跑通项目。
+
+4. [创建有效的环信 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，将用户的 ID 和 token 分别填入下图的两个输入框，点击 **Login**。
+
+<img src="/images/uikit/chatuikit/ios/login.png" width="600" >
 
 ### 第四步 体验项目
 

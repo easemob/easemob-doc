@@ -1,6 +1,6 @@
 ---
 {
-    pageUri: "/document/android/group_overview.html",
+    pageUri: "/product/product_group_overview.html",
     title: "群组概述"
 }
 ---

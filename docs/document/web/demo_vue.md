@@ -4,15 +4,9 @@
 
 环信即时通讯 Web 端提供示例应用可供体验。你可以按以下步骤体验：
 
-1. 登录 Demo。
+1. 登录 [Vue 3 Demo](https://webim-vue3.easemob.com/login)
 
-- [Vue 2 Demo](https://webim-vue.easemob.com/login)
-
-![img](@static/images/demo/web_vue2_login.png)
-
-- [Vue 3 Demo](https://webim-vue3.easemob.com/login)
-
-![img](@static/images/demo/web_vue3_login.png)
+![img](/images/demo/web_vue3_login.png)
 
 2. 输入你的手机号，获取验证码，然后输入。
 
@@ -20,11 +14,9 @@
 
 ## 代码下载
 
-- Vue 2 下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)
-- Vue 3 下载源代码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/demo-vue3)
-- Vue 3（miniCore） 下载源码：[github 源码地址](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) **miniCore 版本提供 WebIM SDK 按需引入示例以及本地会话使用方式示例，后续新功能将在此版本添加**。
-
-欢迎大家提交 PR 改进和修复 Web IM 中的问题。
+- Vue 3 ：[GitHub 源码地址](https://github.com/easemob/webim-vue-demo/tree/demo-vue3)。
+- Vue 3（miniCore）：[GitHub 源码地址](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) **miniCore 版本提供 WebIM SDK 按需引入示例以及本地会话使用方式示例，后续新功能将在此版本添加**。
+- Vue 2：[GitHub 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)查看 Demo 源码地址。
 
 ## 运行 Web IM 项目
 
@@ -50,14 +42,8 @@ Demo 中的主要模块如下：
 | `store`      | 使用 Vuex 处理的数据。 |
 | `utils`      | SDK 配置。             |
 
-## 部分 UI 展示
+## 部分 Vue 3 Demo 界面展示
 
-### Vue 2 Demo 界面
+![img](/images/web/vue3_home.png)
 
-![img](@static/images/web/vue_demo.png)
-
-### Vue 3 Demo 界面
-
-![img](@static/images/web/vue3_home.png)
-
-![img](@static/images/web/vue3_chat.png)
+![img](/images/web/vue3_chat.png)

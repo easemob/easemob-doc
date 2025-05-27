@@ -1,6 +1,6 @@
 # 移动端单/群聊人机交互界面工具包设计指南
 
-![img](@static/images/uikit/chatuikit/design/CUIcover2.png)
+![img](/images/uikit/chatuikit/design/CUIcover2.png)
 
 ## 0.总的设计原则
 
@@ -33,7 +33,7 @@
 
 ##### 1.1.1.3.模型概览：
 
-![img](@static/images/uikit/chatroomdesign/cruk1113.png)
+![img](/images/uikit/chatroomdesign/cruk1113.png)
 
 #### 1.1.2.三种主题色（Theme Color）的色彩规范：
 
@@ -42,29 +42,29 @@
 用户可设定颜色类的可配项 Hue(0-360)为任意数值，修改后每类颜色的色相会发生变化，以贴合用户场景所需要的主题颜色。
 Hue 值(0-360)与色相的对应关系大致如以下图示所例：
 
-![img](@static/images/uikit/chatroomdesign/cruk11211.png)
+![img](/images/uikit/chatroomdesign/cruk11211.png)
 
 用户可依据自身产品的品牌色指定色相数值（Hue），从而确认主题色 Primary（主要用于 UI 组件中关键操作与重要文本展示，如推荐的 action、高亮显示的文本等），以及用于积极提示的 Secondary，和表示警示提示的 Error。
 
-![img](@static/images/uikit/chatroomdesign/cruk11212.png)
+![img](/images/uikit/chatroomdesign/cruk11212.png)
 
 ##### 1.1.2.2.关于饱和度（Saturation value）:
 
 饱和度(Saturation)不开放给用户设置，三种主题色 Primary、 Secondary、Error 默认饱和度为 100%，Neutral 默认为 8%，Neutral Special 默认为 36%
 
-![img](@static/images/uikit/chatroomdesign/cruk1122.png)
+![img](/images/uikit/chatroomdesign/cruk1122.png)
 
 ##### 1.1.2.3.关于亮度级别（Lightness level）:
 
 亮度(Lightness)百分比用户不可随意设置，每个颜色类提供：0(0%) / 1(10%) / 2(20%) / 3(30%) / 4(40%) / 5(50%) / 6(60%) / 7(70%) / 8(80%) / 9(90%) / 95(95%) / 98(98%) / 100(100%)十三个级别供用户可选；
 
-![img](@static/images/uikit/chatroomdesign/cruk1123.png)
+![img](/images/uikit/chatroomdesign/cruk1123.png)
 
 ##### 1.1.2.4.举个例子吧：
 
 如指定主题色 Primary 色相（Hue）为 203，成功色 Secondary 色相（Hue）为 155，警示色 Error 色相（Hue）为 350，则会生成如下 39 种主题色可供用户在指定 UI 件块（View）颜色时使用：
 
-![img](@static/images/uikit/chatroomdesign/cruk1124.png)
+![img](/images/uikit/chatroomdesign/cruk1124.png)
 
 其中，主题色 Primary 的 L5 为亮色模式下的基色（Key Color），L6 为暗色模式下的基色（Key Color）。所有的颜色体系都是依照基色生成。
 
@@ -72,13 +72,13 @@ Hue 值(0-360)与色相的对应关系大致如以下图示所例：
 
 渐变主题色是由 Primary 色派生出的渐变色，为线性渐变(Linear Gradient)，渐变方向依图示坐标系分为 8 类：
 
-![img](@static/images/uikit/chatroomdesign/cruk113.png)
+![img](/images/uikit/chatroomdesign/cruk113.png)
 
 ##### 1.1.3.1.关于渐变色的起始色(Start Color)：
 
 渐变色中 Start Color 规则和 Primary 类的色值保持一致;
 
-![img](@static/images/uikit/chatroomdesign/cruk1131.png)
+![img](/images/uikit/chatroomdesign/cruk1131.png)
 
 ##### 1.1.3.2.关于渐变色的结束色(End Color)：
 
@@ -86,11 +86,11 @@ End Color 用户可配置色相（Hue），亮度以 0(20%) / 1(30%) / 2(40%) / 
 
 以下以 Hue：233 为例，按照 End Color 颜色公式依旧得到 13 级颜色：
 
-![img](@static/images/uikit/chatroomdesign/cruk11321.png)
+![img](/images/uikit/chatroomdesign/cruk11321.png)
 
 起始色和结束色结合，得到相应的渐变结果
 
-![img](@static/images/uikit/chatroomdesign/cruk11322.png)
+![img](/images/uikit/chatroomdesign/cruk11322.png)
 
 ##### 1.1.3.3.关于渐变主题色可配项(End Color Hue Value)：
 
@@ -100,15 +100,15 @@ End Color 用户可配置色相（Hue），亮度以 0(20%) / 1(30%) / 2(40%) / 
 
 用户设置 End Color Hue = 233，选择渐变方向为“↓”，则可得到如下效果：
 
-![img](@static/images/uikit/chatroomdesign/cruk11341.png)
+![img](/images/uikit/chatroomdesign/cruk11341.png)
 
 如使用渐变主题色，那么它将替代掉所有应用于背景色的 Primary 色
 
-![img](@static/images/uikit/chatroomdesign/cruk11342.png)
+![img](/images/uikit/chatroomdesign/cruk11342.png)
 
 但一般不替代 UI 件块的前景色，因为没有什么意义，且有干扰文字阅读的可能性
 
-![img](@static/images/uikit/chatroomdesign/cruk11343.png)
+![img](/images/uikit/chatroomdesign/cruk11343.png)
 
 #### 1.1.4.关于透明色(Alpha)的规范：
 
@@ -116,7 +116,7 @@ End Color 用户可配置色相（Hue），亮度以 0(20%) / 1(30%) / 2(40%) / 
 
 在本案内带有透明度的组件仅有模态背景色、轻提示背景色，应用范围有限，单独定义两个特殊的颜色类用于以上四种组件：Alpha onlight(hsl0, 0%, 0%) 和 Alpha ondark(hsl0, 0%, 100%)，Alpha 值被指定为 0(0.0) / 1(0.1) / 2(0.2) / 3(0.3) / 4(0.4) / 5(0.5) / 6(0.6) / 7(0.7) / 8(0.8) / 9(0.9) / 95(0.95) / 98(0.98) / 100(1.0) 十三个梯度值，共 26 种颜色用例，以调整组件的背景色透明度。
 
-![img](@static/images/uikit/chatroomdesign/cruk1141.png)
+![img](/images/uikit/chatroomdesign/cruk1141.png)
 
 Alpha onlight 和 Alpha ondark 均为默认值，无任何可配置项。
 
@@ -126,7 +126,7 @@ Alpha onlight 和 Alpha ondark 均为默认值，无任何可配置项。
 
 中性色(Neutral)仅有一个可配项：色相（Hue），饱和度(Saturation)固定值为 8，亮度级别（Lightness level）也和主题色相同，分为 0(0%) / 1(10%) / 2(20%) / 3(30%) / 4(40%) / 5(50%) / 6(60%) / 7(70%) / 8(80%) / 9(90%) / 95(95%) / 98(98%) / 100(100%)十三个级别供用户可选；
 
-![img](@static/images/uikit/chatroomdesign/cruk1151.png)
+![img](/images/uikit/chatroomdesign/cruk1151.png)
 
 Neutral 和 Primary 的默认 Hue 值(色相)相同，也建议用户设置和主题色相同的 Hue 值已达成主题颜色和无彩色系的配套。但这仅仅是建议；
 
@@ -134,26 +134,26 @@ Neutral 和 Primary 的默认 Hue 值(色相)相同，也建议用户设置和�
 
 如指定主题色 Primary 色相（Hue）为 203，饱和度(Saturation)固定值为 100%，中性色（Neutral）则也指定色相（Hue）为 203，饱和度(Saturation)固定值为 8%，则得到以下色列可供用户选择使用：
 
-![img](@static/images/uikit/chatroomdesign/cruk11521.png)
+![img](/images/uikit/chatroomdesign/cruk11521.png)
 
 其中，L98 为亮色模式下背景色的主色，L1 为亮色模式下前景色的主色；L1 为暗色模式下背景色的主色，L98 为暗色模式下前景色的主色。
 
-![img](@static/images/uikit/chatroomdesign/cruk11522.png)
+![img](/images/uikit/chatroomdesign/cruk11522.png)
 
 ### 1.1.6.关于特殊中性色（Neutral Special）：
 
 特殊中性色 Neutral Special 主要用于级别低于 Primary 和 Secondary 的强调信息，如当前页面状态、消息发送者的昵称等。
 Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也建议用户设置和主题色近似的 Hue 值已达成主题色和无彩色系的配套。但这仅仅是建议；
 
-![img](@static/images/uikit/chatroomdesign/cruk116a.png)
+![img](/images/uikit/chatroomdesign/cruk116a.png)
 
-![img](@static/images/uikit/chatroomdesign/cruk116b.png)
+![img](/images/uikit/chatroomdesign/cruk116b.png)
 
 #### 1.1.6.1.举个例子吧：
 
 如指定主题色 Primary 色相（Hue）为 203，特殊中性色（Neutral）通过相似色原理（正负 30 度内）指定色相（Hue）为 220，饱和度(Saturation)固定值为 36%，则得到以下色列可供用户选择使用：
 
-![img](@static/images/uikit/chatroomdesign/cruk1161.png)
+![img](/images/uikit/chatroomdesign/cruk1161.png)
 
 ## 1.2.主题
 
@@ -163,13 +163,13 @@ Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也
 
 组件一般采用较大的圆角，柔和轻盈
 
-![image text](@static/images/uikit/chatuikit/design/1.2.1.png)
+![image text](/images/uikit/chatuikit/design/1.2.1.png)
 
 ### 1.2.2.硬朗主题
 
 组件一般避免比较大的圆角，硬朗实在
 
-![image text](@static/images/uikit/chatuikit/design/1.2.2.png)
+![image text](/images/uikit/chatuikit/design/1.2.2.png)
 
 以上两种主题可通过应用渐变主题色（Primary Gradient）得到两外两种渐变色主题。
 至于业务相关的主题，如“社交”、“游戏”、“教育”、“商务”等主题分类，因违反本案的最基本设计原则“在业务形态上尽量不替用户做决定”，所以不在本期考虑范围内。
@@ -180,14 +180,14 @@ Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也
 
 图标参照 Material Icon Font 的模板 ，以 24 为基本栅格，须在安全区域(20x20 的中心区域)内绘制，基本描边控制为 1.5 栅格。
 
-![img](@static/images/uikit/chatroomdesign/cruk131.png)
+![img](/images/uikit/chatroomdesign/cruk131.png)
 
 ### 1.3.2 图标命名（Name）
 
 为防止将图标语意固定，icon 命名需要尽力避免定义操作行为，而是以“看见什么就是什么“进行命名，方便相同图标在不同操作行为下的复用。
 如
 
-![img](@static/images/uikit/chatroomdesign/cruk132.png)
+![img](/images/uikit/chatroomdesign/cruk132.png)
 
 ## 1.4.字体（Typography）
 
@@ -243,11 +243,11 @@ Neutral Special 和 Primary 的默认 Hue 值(色相)类似，为近似色，也
 
 依照依照 4.1-4.5 规则，设定以下西文字体排版 token，
 
-<img src="@static/images/uikit/chatroomdesign/cruk146a.png" width="600" >
+<img src="/images/uikit/chatroomdesign/cruk146a.png" width="600" >
 
 简体中文字体 token 示意
 
-<img src="@static/images/uikit/chatroomdesign/cruk146b.png" width="600" >
+<img src="/images/uikit/chatroomdesign/cruk146b.png" width="600" >
 
 ## 1.5.效果（Effects）
 
@@ -289,7 +289,7 @@ box-shadow: x0 y4 blur4 color(Neutral3) Alpha0.15, x2 y0 blur8  color(Neutral1) 
 box-shadow: x0 y1 blur3 color(Neutral3) Alpha0.15, x1 y0 blur2  color(Neutral1) Alpha0.1
 ```
 
-![img](@static/images/uikit/chatroomdesign/cruk1522a.png)
+![img](/images/uikit/chatroomdesign/cruk1522a.png)
 
 **Shadow on Dark:**
 
@@ -304,7 +304,7 @@ box-shadow: x0 y4 blur4 color(Neutral4) Alpha0.15, x2 y0 blur8  color(Neutral1) 
 box-shadow: x0 y1 blur3 color(Neutral4) Alpha0.15, x1 y0 blur2  color(Neutral1) Alpha0.1
 ```
 
-![img](@static/images/uikit/chatroomdesign/cruk1522b.png)
+![img](/images/uikit/chatroomdesign/cruk1522b.png)
 
 ## 1.6.圆角（Radius）
 
@@ -313,7 +313,7 @@ box-shadow: x0 y1 blur3 color(Neutral4) Alpha0.15, x1 y0 blur2  color(Neutral1) 
 一般圆角分为 None（r=0）、Extra Small（r=4）、Small（r=8）、Medium（r=12）、Large（r=16）、Extra Large（r=½ Height）六个枚举值，
 一般情况下组件的四个圆角为同一值
 
-![img](@static/images/uikit/chatroomdesign/cruk161.png)
+![img](/images/uikit/chatroomdesign/cruk161.png)
 
 #### 1.6.1.1.Extra Small（r=4）
 
@@ -358,7 +358,7 @@ Message Bubble(Large Radius)
 特殊圆角应用于有背景色的 IM 聊天消息组件：
 Message Bubble(Large Radius)
 
-<img src="@static/images/uikit/chatroomdesign/cruk162.png" width="390" >
+<img src="/images/uikit/chatroomdesign/cruk162.png" width="390" >
 
 ## 2.小控件（Widgets）
 小控件为最基础的视觉交互模块。
@@ -374,44 +374,44 @@ Message Bubble(Large Radius)
 
 主要操作用于推荐行为，一般背景色为主题色(Primary5\Primary6)或者渐变主题色，被禁用时置灰显示，圆角可配，依据需要可增加左侧或右侧 icon
 
-![img](@static/images/uikit/chatroomdesign/cruk2111.png)
+![img](/images/uikit/chatroomdesign/cruk2111.png)
 
 #### 2.1.1.2.次要操作（Secondary）
 
 次要操作用于辅助主要操作，一般不单独出现，一般背景色为亮色(Neutral98)或者暗色(Neutral1)，同时有描边，被禁用时置灰显示，圆角可配
 依据需要可增加左侧或右侧 icon
 
-![img](@static/images/uikit/chatroomdesign/cruk2112.png)
+![img](/images/uikit/chatroomdesign/cruk2112.png)
 
 ### 2.1.2.文字按钮(Text)
 
 文字按钮仅有前景色，也分为主要操作和次要操作，一般用于更频繁的常规操作（如表单填写的下一步、取消，消息的显示、隐藏等）或者在页面有普通按钮（主要操作）时作为更次一级操作出现
 
-![img](@static/images/uikit/chatroomdesign/cruk212.png)
+![img](/images/uikit/chatroomdesign/cruk212.png)
 
 ### 2.1.3.图标按钮（Icon）
 
 图标按钮为组件位置局促又必须出现按钮时的补充形式，如输入条的键盘切换、顶部条的更多操作、表单填写时的推荐操作、输入框的清空和下拉操作等。
 
-![img](@static/images/uikit/chatroomdesign/cruk213.png)
+![img](/images/uikit/chatroomdesign/cruk213.png)
 
 需要注意的是，在 web 端，如非特殊说明，图标按钮必须搭配 Popover 使用，以交代清楚按钮的具体操作行为。如：
 
-![img](@static/images/uikit/chatroomdesign/cruk213b.png)
+![img](/images/uikit/chatroomdesign/cruk213b.png)
 
 ### 2.2.输入框(Input)
 
 输入框为需要输入较少文字时使用的组件。
 也按照所放组件的大小分为大中小三种尺寸可配项，样式上，背景色和描边颜色可开关，圆角可配，状态上分为失焦未填写、失焦填写、聚焦未填写、聚焦填写、禁用填写、禁用未填写六种。
 
-<img src="@static/images/uikit/chatroomdesign/cruk22.png" width="390" >
+<img src="/images/uikit/chatroomdesign/cruk22.png" width="390" >
 
 ### 2.3.输入区域(InputArea)
 
 输入框为需要输入较多文字时使用的组件。
 在用于输入器的文本输入，和表单中、发布内容时需要填写较多文本时使用，样式上，背景色和描边颜色可开关，圆角可配，可显示最大输入字符数分数。状态上分为失焦未填写、失焦填写、聚焦未填写、聚焦填写、禁用填写、禁用未填写六种。
 
-<img src="@static/images/uikit/chatroomdesign/cruk23.png" width="390" >
+<img src="/images/uikit/chatroomdesign/cruk23.png" width="390" >
 
 ### 2.4.单选器和多选器(Checkboxes n' Radios)
 单选器和多选器允许终端用户在列表中选择一项或者多项。分为选中、未选中、选中禁用、未选中禁用四种状态。
@@ -441,32 +441,32 @@ Message Bubble(Large Radius)
 
 能读取用户头像信息时展示图片头像。
 
-![img](@static/images/uikit/chatroomdesign/cruk241.png)
+![img](/images/uikit/chatroomdesign/cruk241.png)
 
 ### 2.8.2.字符头像
 
 用户未上传头像时显示字符头像，字符头像分为单字符和双字符两种
 
-![img](@static/images/uikit/chatroomdesign/cruk242.png)
+![img](/images/uikit/chatroomdesign/cruk242.png)
 
 ### 2.8.3.组合头像
 
 组合头像用于用户未上传数据时的群组聊天自动生成头像
 本案不涉及
 
-![img](@static/images/uikit/chatroomdesign/cruk243.png)
+![img](/images/uikit/chatroomdesign/cruk243.png)
 
 ### 2.8.4.图标头像
 
 图标头像用于获取不到用户头像信息的空状态以及表单单项有 icon 时的头像。
 
-![img](@static/images/uikit/chatroomdesign/cruk244.png)
+![img](/images/uikit/chatroomdesign/cruk244.png)
 
 ### 2.8.5.头像徽章
 
 头像可配置徽章（Badge）以体现用户的在离线等状态，徽章位置分两种：右下和右上
 
-<img src="@static/images/uikit/chatroomdesign/cruk245.png" width="440" >
+<img src="/images/uikit/chatroomdesign/cruk245.png" width="440" >
 
 ### 2.9.徽章(Badge)
 徽章用于导航项、列表项、头像处，用于显示状态、通知和计数。
@@ -479,12 +479,12 @@ Message Bubble(Large Radius)
 
 表情使用开源可免费商用的 Twemoji 作为基本表情，默认提供 52 个表情作为内置的表情，用户可根据自己的产品规划从 twemoji 提供的 3,245 个表情中进行替换增减；
 
-![img](@static/images/uikit/chatroomdesign/cruk291.png)
+![img](/images/uikit/chatroomdesign/cruk291.png)
 ### 2.10.2.表情模版(Emoji Template)
 
 如用户需替换 Twemoji，或者需要自己创作表情，需依照以下模板进行替换或绘制；
 
-![img](@static/images/uikit/chatroomdesign/cruk292.png)
+![img](/images/uikit/chatroomdesign/cruk292.png)
 
 ### 2.10.3.表情组件状态（State）
 
@@ -492,7 +492,7 @@ Message Bubble(Large Radius)
 启用 Enabled、悬停 Hovered（仅限 web 端）、按下 Pressed、聚焦 Focused（本案不涉及）
 悬停时，背景色递增一级；按下时，背景色递减一级；聚焦时，背景色转换为 Key Color。
 
-![img](@static/images/uikit/chatroomdesign/cruk293.png)
+![img](/images/uikit/chatroomdesign/cruk293.png)
 
 ### 2.11.轻提示(Toast)
 请提示为针对终端用户当前操作的简单反馈。
@@ -546,7 +546,7 @@ Message Bubble(Large Radius)
 
 表情键盘是发送 app 内自建表情的键盘，内容上支持表情个数的增减，底部发送和退格按钮支持修改圆角。同时应满足接入第三方表情/贴纸库。
 
-![img](@static/images/uikit/chatroomdesign/cruk34.png)
+![img](/images/uikit/chatroomdesign/cruk34.png)
 
 本键盘不同于系统自带的 emoji 输入键盘，通过此组件输入的 emoji 不会同步为系统的 emoji，而是在任何平台同一 app 内均显示 app 内自建的表情符号。为满足版权方面的法律要求，请勿使用非申明开源可免费商用的表情符号（不限资源图或者源码）在 App 中（如：集成苹果表情符号在自己的 app 内，这样或许会导致 App 无法上架苹果应用商店）
 
@@ -570,13 +570,13 @@ Message Bubble(Large Radius)
 内容上，description 可配、输入框可配、操作项支持最多三个。
 样式上，弹窗的圆角可配，需要注意的是，组件内部的输入框和操作按钮圆角需要同弹窗按钮的圆角适配，以达成风格的一致性。
 
-![img](@static/images/uikit/chatroomdesign/cruk27.png)
+![img](/images/uikit/chatroomdesign/cruk27.png)
 
 ### 3.7.操作面板(ActionSheet)
 操作表单是以模态形式展示的多操作项表单，单个操作项分为 Enabled、Pressed、Disabled、Destructive 四种状态，以及 Cancel 特殊类型。同时可配置是否显示 icon、是否有分割线(stroke)
 此组件仅限移动端
 
-<img src="@static/images/uikit/chatroomdesign/cruk25.png" width="390" >
+<img src="/images/uikit/chatroomdesign/cruk25.png" width="390" >
 
 
 ## 4.消息气泡(MessageBubble)

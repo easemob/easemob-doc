@@ -8,7 +8,7 @@
 
 本文介绍如何通过管理用户属性设置、更新、存储并获取实时消息用户的相关信息。
 
-:::notice
+:::tip
 为保证用户信息安全，SDK 仅支持 Chat 用户设置或更新自己的用户属性。
 :::
 
@@ -24,7 +24,7 @@
 
 设置用户属性前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+- 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
@@ -60,7 +60,7 @@ ChatClient.getInstance()
   });
 ```
 
-若[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
+关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
 
 | 字段        | 类型   | 描述                                                         |
 | :---------- | :----- | :----------------------------------------------------------- |
@@ -68,7 +68,7 @@ ChatClient.getInstance()
 | `avatarurl` | String | 用户头像 URL 地址。长度在 256 字符内。                       |
 | `phone`     | String | 用户联系方式。长度在 32 字符内。                             |
 | `mail`      | String | 用户邮箱。长度在 64 字符内。                                 |
-| `gender`    | Int | 用户性别：<br/> -  `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
+| `gender`    | Int | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
 | `sign`      | String | 用户签名。长度在 256 字符内。                                |
 | `birth`     | String | 用户生日。长度在 64 字符内。                                 |
 | `ext`       | String | 扩展字段。                                                   |

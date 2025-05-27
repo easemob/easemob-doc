@@ -2,28 +2,21 @@
 
 <Toc />
 
-环信即时通讯 IM 支持同一账号在多个设备上登录，所有已登录的设备同步以下信息和操作：
+即时通讯 IM 支持同一账号在多个设备上登录，使用该服务前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)的 **即时通讯** > **功能配置** > **功能配置总览** > **基础功能** 页面上查找**多端多设备在线**，开启该功能。
+
+多端多设备登录场景下，所有已登录的设备同步以下信息和操作：
 
 - 消息：包括在线消息、离线消息、推送通知（若开启了第三方推送服务，离线设备收到）以及对应的回执和已读状态等；
 - 好友和群组相关操作；
 - 子区相关操作；
 - 会话相关操作。
 
-多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。
+多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置各端设备的数量：
 
-你可以在环信控制台的**功能配置** > **功能配置总览**页面的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置设置各端设备的数量：
-
-![img](@static/images/common/multidevice_device_count.png)
+![img](/images/common/multidevice_device_count.png)
 
 单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
 
-<html>
-<head>
-<meta charset="utf-8">
-<title>无标题文档</title>
-</head>
-
-<body>
 <table width="807" height="327" border="1">
   <tbody>
     <tr>
@@ -34,7 +27,7 @@
     <tr>
       <td height="52">单端登录</td>
       <td>新登录的设备会将当前在线设备踢下线。</td>
-      <td rowspan="2">设备支持自动登录时，若设备下线后自动重连时需要判断是否踢掉当前在线的最早登录设备，请联系环信商务。 </td>
+      <td rowspan="2">对于自动登录的设备，下线后设备会自动重连环信服务器。若重连成功，默认会踢掉当前登录设备（对于多设备登录，则踢掉最早的登录设备）。若要保留当前登录设备不被踢下线，请联系环信商务。该场景下，自动登录的设备登录失败，收到错误 214，提示当前登录的设备数量超过限制。 </td>
     </tr>
     <tr>
       <td height="156">多端登录</td>
@@ -43,12 +36,12 @@
     </tr>
   </tbody>
 </table>
-</body>
-</html>
 
 ## 技术原理  
 
-Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送时识别设备，并将该 ID 发送到服务器。服务器会自动将新消息发送到用户登录的设备，可以自动监听到其他设备上进行的好友或群组操作。即时通讯 IM Android SDK 提供以下多设备场景功能：
+环信即时通讯通过 [EMClient](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_client.html)、[EMContactManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_contact_manager.html)、[EMOptions](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html) 和 [EMMultiDeviceListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_multi_device_listener.html) 类
+
+Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送时识别设备，并将该 ID 发送到服务器。服务器会自动将新消息发送到用户登录的设备，可以自动监听到其他设备上进行的操作。即时通讯 IM Android SDK 提供以下多设备场景功能：
 
 - 获取当前用户的其他已登录设备的登录 ID 列表；
 - 获取指定账号的在线登录设备列表；  
@@ -68,7 +61,7 @@ Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推�
 
 ### 获取当前用户的其他登录设备的登录 ID 列表  
 
-你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表。选择目标登录 ID 作为消息接收方发出消息，则这些设备上的同一登录账号可以收到消息，实现不同设备之间的消息同步。
+你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
 ```java
 // 同步方法，会阻塞当前线程。异步方法为 asyncGetSelfIdsOnOtherPlatform(EMValueCallBack)。
@@ -76,7 +69,7 @@ List<String> ids = EMClient.getInstance().contactManager().getSelfIdsOnOtherPlat
 // 选择一个登录 ID 作为消息接收方。
 String toChatUsername = ids.get(0);
 // 创建一条文本消息，content 为消息文字内容，toChatUsername 传入登录 ID 作为消息接收方。
-EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername); 
+EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername); 
 // 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message); 
 ```
@@ -101,11 +94,11 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ### 设置登录设备的名称
 
-即时通讯 IM 自 4.1.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
+即时通讯 IM 自 4.1.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，被踢设备就能知道是被哪个设备挤下线的。
 
 初始化 SDK 时，你可以调用 `EMOptions#setCustomDeviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `EMConnectionListener#onLogout` 回调会包含导致该设备被踢下线的自定义设备名称。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -126,8 +119,9 @@ EMClient.getInstance().chatManager().sendMessage(message);
             }
 
             @Override
-            public void onLogout(int errorCode, String info) {
-               // 当 errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}，info 表示将当前设备踢出/挤下线的自定义设备名称，若这种情况下设备未设置自定义名称，默认回调设备的型号。其他错误码场景下，info 为空。
+            public void onLogout(int errorCode, EMLoginExtensionInfo info) {
+                //自 4.7.0 开始，原有的 EMConnectionListener#onLogout(int, java.lang.String) 方法废弃，自定义设备信息包装在 EMLoginExtensionInfo 类中。
+               // 当 errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}，info.deviceInfo 表示将当前设备踢出/挤下线的自定义设备名称，若这种情况下设备未设置自定义名称，默认回调设备的型号。其他错误码场景下，info.deviceInfo为空。
             }
         });
 ```
@@ -142,11 +136,11 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 **设备平台**的取值范围为 [1,100]，**设备数量**的取值范围为 [0,4]。
 
-![img](@static/images/common/multidevice_device_platform.png)
+![img](/images/common/multidevice_device_platform.png)
 
 2. 初始化 SDK 时，调用 `EMOptions#setCustomOSPlatform` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -156,11 +150,47 @@ EMClient.getInstance().chatManager().sendMessage(message);
     EMClient.getInstance().init(context,options);
 ```
 
+### 设置登录设备的扩展信息
+
+即时通讯 IM 自 4.7.0 版本开始支持设备的自定义扩展信息，这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
+
+初始化 SDK 时，你可以调用 `EMOptions#setLoginCustomExt` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，`USER_LOGIN_ANOTHER_DEVICE`），被踢设备收到的 `EMConnectionListener#onLogout` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
+
+:::tip
+登录成功后才会将该设置发送到服务器。
+:::
+
+```java
+    EMOptions options =  new EMOptions();
+    options.setLoginCustomExt("你的自定义扩展信息json字符串");
+    EMClient.getInstance().init(context,options);
+
+    EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+        @Override
+        public void onConnected() {
+
+        }
+
+        @Override
+        public void onDisconnected(int errorCode) {
+
+        }
+
+        @Override
+        public void onLogout(int errorCode, EMLoginExtensionInfo info) {
+            //当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。
+            //errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}。
+            //info.deviceExt 是将当前设备挤下线的新登录设备的自定义扩展信息。
+            //其他错误码场景下 info.deviceExt 为空。
+        }
+    });
+```
+
 ### 强制指定账号从单个设备下线
 
 你可以调用 `kickDevice` 或 `kickDeviceWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。调用这两种方法前，你需要首先通过 `EMClient#getLoggedInDevicesFromServer` 和 `EMDeviceInfo#getResource` 方法获取设备 ID。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 
@@ -176,7 +206,7 @@ EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIn
 
 你可以调用 `kickAllDevices` 或 `kickAllDevicesWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备踢下线。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 
@@ -199,6 +229,10 @@ EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIn
 例如，账号 A 同时在设备 A 和 B 上登录，账号 A 在设备 A 上进行操作，设备 B 会收到这些操作对应的通知。
 
 你需要先实现 `EMMultiDeviceListener` 类监听其他设备上的操作，然后调用 `addMultiDeviceListener` 方法添加多设备监听。
+
+:::tip
+多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
+:::
 
 ```java
 //实现 `EMMultiDeviceListener` 监听其他设备上的操作。

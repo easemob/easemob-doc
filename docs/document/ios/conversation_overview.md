@@ -24,9 +24,9 @@
 | isPinned    | 是否为置顶会话。       |
 | pinnedTime    | 会话置顶的 UNIX 时间戳，单位为毫秒。未置顶时值为 `0`。    |
 | marks    | 会话标记。     |
-| lastReceivedMessage    | 收到的对方发送的最后一条消息。     |
-| insertMessage    | 插入一条消息在 SDK 本地数据库。消息的会话 ID 应与会话的 ID 保持一致。消息会根据消息里的时间戳被插入 SDK 本地数据库，SDK 会更新会话的 `latestMessage` 等属性。    |
-| appendMessage   | 插入一条消息到 SDK 本地数据库会话尾部。消息的会话 ID 应该和目标会话的 ID 一致。消息会被插入 SDK 本地数据库，并且更新会话的 `latestMessage` 等属性。     |
+| lastReceivedMessage    | 获取会话中收到的最新一条消息，即当前用户收到的对端用户发送的最新消息。     |
+| insertMessage    | 插入一条消息在 SDK 本地数据库。消息的会话 ID 应与会话的 ID 保持一致。消息会根据消息里的时间戳被插入 SDK 本地数据库，SDK 会更新会话的 `EMChatMessage#latestMessage` 等属性。    |
+| appendMessage   | 插入一条消息到 SDK 本地数据库会话尾部。消息的会话 ID 应该和目标会话的 ID 一致。消息会被插入 SDK 本地数据库，并且更新会话的 `EMChatMessage#latestMessage` 等属性。     |
 | deleteMessageWithId    | 从 SDK 本地数据库删除一条消息。     |
 | deleteAllMessages    | 清除内存和数据库中指定会话中的消息。     |
 | removeMessagesFromServerMessageIds    | 从会话中删除消息（包括本地存储和服务器存储）。     |
@@ -48,7 +48,7 @@
 
 示例代码如下：
 
-```Objective-C
+```objectivec
 // 收到会话已读的事件。该事件在以下场景中触发：
 // 1. 当消息接收方调用 `ackConversationRead()` 方法，SDK 会执行此回调，
 // 会将本地数据库中该会话中消息的 `isAcked` 属性置为 `true`。

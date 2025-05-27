@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收单聊文本消息的工作流程。
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 如上图所示，发送和接收单聊消息的步骤如下：
 
@@ -50,7 +50,7 @@
 
    如果正常打开，该流程结束。
 
-  :::notice
+  :::tip
    如果 Demo 项目与本地 Unity Editor 版本不一致，你需要进行以下操作：
 
    1. 在弹出的 **Editor version not installed** 提示框下方，选择 **Choose another Editor version**。
@@ -58,7 +58,7 @@
    2. 在弹出的 **Select Editor version and platform** 窗口中，选择本地安装的 Editor 版本，并根据后续提示打开项目。
    :::
  
-   :::notice
+   :::tip
    如果碰到'SpriteRenderer' does not contain a definition for 'IsUsingDeformableBuffer'这类异常，需要进行重置操作。
    在**Help**菜单下，点击**Reset Packages to defaults**将包恢复默认设置。
    :::
@@ -67,9 +67,21 @@
 
 你可以参考以下步骤集成 SDK：
 
-1. [下载 Unity SDK](https://downloadsdk.easemob.com/downloads/SDK/Unity/agora_chat_unity_sdk1.0.9.unitypackage)。
+1. [下载 Unity SDK](https://www.easemob.com/download/im)。
 2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 unitypackage 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
+
+### 集成问题
+
+由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
+
+```csharp
+Multiple plugins with the same name 'libaosl' (found at 'Assets/Plugins/Agora/Agora-RTC-Plugin/Agora-Unity-RTC-SDK/Plugins/x86_64/libaosl.dll' and 'Assets/Plugins/Agora/AgoraChat/Plugins/x64/libaosl.dll'). That means one or more plugins are set to be compatible with Editor. Only one plugin at the time can be used by Editor
+
+```
+要修复该问题，直接移除 `Assets/Plugins/Agora/AgoraChat/Plugins/x64` 下的 `libaosl.dll` 即可。
+
+如欲了解详情，请参见 [声网官网文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
 
 ## 实现发送和接收单聊消息
 
@@ -79,7 +91,7 @@
 
 在 Unity Editor 中左侧导航栏下方，选择 **Project** 页签，然后选择 **Assets** 目录下的 **Scripts** 目录，双击 **TestCode.cs** 文件打开 Visual Studio。
 
-:::notice
+:::tip
 如果双击 **TestCode.cs** 文件无法打开 Visual Studio 开发环境，需将 Visual Studio 配置为 Unity 的外部工具：点击左上角的 Unity 菜单（Windows 为 **Edit**，Mac 为 **Unity**），依次选择 **Preference > External Tools > External Script Editor**，将脚本编辑器设置为 Visual Studio。
 :::
 
@@ -118,8 +130,8 @@ SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callbac
 ));
 ```
 
-:::notice
-该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端调用 Restful API 进行注册，详见 [注册单个用户](/document/server-side/account_system.html#注册单个用户)。
+:::tip
+该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端[调用 Restful API 进行注册](/document/server-side/account_system.html#开放注册单个用户)。若需要使用 Token，需要在你的应用服务器集成[获取 App Token API](/document/server-side/easemob_app_token.html) 和[获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 :::
 
 ### 5. 登录账号
@@ -135,6 +147,20 @@ SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, cal
     AddLogToLogText($"sign in sdk failed, code: {code}, desc: {desc}");
   }
 ));
+
+// 说明：自 1.3.0 版本之后，建议使用 LoginWithToken 替代 Login。Password.text 中的内容需要由输入密码改为输入token
+SDKClient.Instance.LoginWithToken(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
+    onSuccess: () =>
+    {
+         AddLogToLogText("sign in sdk succeed");
+    },
+
+    onError: (code, desc) =>
+    {
+        AddLogToLogText($"sign in sdk failed, code: {code}, desc: {desc}");
+    }
+));
+
 ```
 
 ### 6. 登出账号
@@ -236,7 +262,7 @@ public void OnMessagesDelivered(List<Message> messages)
 
 }
 
-public void OnMessagesRecalled(List<Message> messages)
+public void OnMessagesRecalled(List<RecallMessageInfo> recallMessagesInfo)
 {
 
 }
@@ -264,6 +290,14 @@ public void OnConversationRead(string from, string to)
 public void MessageReactionDidChange(List<MessageReactionChange> list)
 {
 }
+
+public void OnMessageContentChanged(Message msg, string operatorId, long operationTime)
+{
+}
+// added in 1.3.0
+public void OnMessagePinChanged(string messageId, string conversationId, bool isPinned, string operatorId, long operationTime)
+{
+}
 ```
 
 在 `AddChatDelegate` 方法中添加以下代码，将 `TestCode` 对象实例加入监听列表。
@@ -280,11 +314,11 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 
 ## 运行和测试项目
 
-在 Unity Editor 的左侧导航栏下方，点击 **Project** 页签，选择 **Assets** 下的 **Scenes** 目录，双击右侧的 **SampleScene** 场景，然后点击 Unity Editor 上方的 Play 按钮运行场景。
+在 Unity Editor 的左侧导航栏下方，点击 **Project** 页签，选择 **Assets** 下的 **Scenes** 目录，双击右侧的 **SampleScene** 场景，然后点击 Unity Editor 上方的 **Play** 按钮运行场景。
 
-![图片](@static/images/unity/unity-running.png)
+![图片](/images/unity/unity-running.png)
 
-:::notice
+:::tip
 若未安装 iOS Build Support，运行项目前，将 `Assets/ChatSDK/Scripts/Editor` 路径下的 `iOSBuildSetting.cs` 文件移除项目文件夹。
 
 1. 注册用户：在 **user id** 文本框中输入用户 ID，在 **password** 文本框中输入密码，点击 **Sign up** 进行用户注册。注册结果会在下方显示。可创建两个用户，例如 **quickstart_sender** 和 **quickstart_receiver**，分别用于发送和接收消息。

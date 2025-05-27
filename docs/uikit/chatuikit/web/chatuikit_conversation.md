@@ -1,13 +1,11 @@
-# 会话列表
+# 会话列表页面
 
-<Toc />
+会话列表页面通过 `ConversationList` 组件实现，该组件用于展示当前用户的所有会话 (包含单聊和群聊, 但是不包括聊天室)，并且提供会话搜索、删除、置顶和免打扰功能。
 
-`ConversationList` 组件用于展示当前用户的所有会话 (包含单聊和群聊, 但是不包括聊天室)，并且提供会话搜索、删除、置顶和免打扰功能。
-
-- 点击搜索按钮，跳转到搜索页面，搜索会话。
-- 点击会话列表项，跳转到会话详情页面。
-- 点击导航栏的扩展按钮，选择新会话，创建新会话。
-- 长按会话列表项显示菜单，可进行删除会话、置顶会话、消息免打扰操作。
+- 在会话列表上方的搜索框中输入关键字，搜索会话名称。
+- 点击会话列表项，跳转到单聊或群聊页面。
+- 点击会话列表页面的 header 中的扩展按钮，选择新会话，创建新会话。
+- 点击会话列表项旁边的 `⋮` 可以进行删除会话、置顶会话和消息免打扰操作。
 
 单条会话展示会话名称、最后一条消息、最后一条消息的时间以及置顶和禁言状态等。
 
@@ -16,7 +14,9 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-![img](@static/images/uikit/chatuikit/web/page_conversation.png =400x930) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/conversation_list.png" title="会话列表页面" />
+</ImageGallery>
 
 ## 使用示例
 
@@ -34,15 +34,15 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-header1.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/cvs-header1.png" title="会话列表页面示例" />
+</ImageGallery>
 
-## 自定义会话列表
+## 自定义会话列表页面
 
 如果默认的会话列表页面不能满足需求，你可以使用 `ConversationList` 组件提供的属性进行自定义。
 
-### 自定义会话列表区域的样式
-
-你可以自定义会话列表区域的背景颜色、大小等样式。
+你可以自定义会话列表页面的背景颜色、大小等样式。
 
 1. 对组件添加 `className` 定义样式。
 
@@ -61,7 +61,7 @@ const Conversation = () => {
 };
 ```
 
-2. 在 index.css 中定义会话 UI 样式：
+2. 在 `index.css` 中定义会话 UI 样式：
 
 ```css
 .conversation {
@@ -71,9 +71,11 @@ const Conversation = () => {
 }
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-bg.png =300x800)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/cvs-bg.png" title="自定义会话列表页面示例" />
+</ImageGallery>
 
-### 自定义会话列表页面的 header
+## 自定义会话列表页面的 header
 
 你可以自定义 `ConversationList` 组件的 header 元素，例如，标题名称为 `custom header`。
 
@@ -90,7 +92,7 @@ const Conversation = () => {
           <Header
             avatar={<Avatar>D</Avatar>}
             content="custom header"
-            moreAction={{  
+            moreAction={{
               visible: true,
               actions: [
                 {
@@ -109,11 +111,19 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-header2.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/custom_conversation_list_header.png" title="自定义会话列表页面的 header" />
+</ImageGallery>
 
-### 设置用户的头像和昵称
+## 自定义会话列表项
 
-- 使用 `renderItem` 方法来渲染每个会话条目。
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/custom_list_item.png" title="会话列表项" />
+</ImageGallery>
+
+### 设置用户头像
+
+- 使用 `renderItem` 方法渲染每个会话条目。
 - 使用 `ConversationItem` 组件的属性自定义组件。
 
 ```jsx
@@ -137,8 +147,6 @@ const Conversation = () => {
             <ConversationItem
               avatar={
                 <Avatar
-                  size="normal"
-                  shape="square"
                   style={{ background: 'yellow', color: 'black' }}
                 >
                   {idToName[cvs.conversationId] || cvs.conversationId}
@@ -158,11 +166,86 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-nick.png =300x700)
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/web/conversation_list_avatar.png" title="会话列表带头像" />
+  <ImageItem src="/images/uikit/chatuikit/web/conversation_list_avatar_no.png" title="会话列表无头像" />
+  <ImageItem src="/images/uikit/chatuikit/web/conversation_list_avatar_color.png" title="会话列表自定义头像颜色" />
+</ImageGallery>
 
-### 添加和置顶会话
+### 设置日期和时间格式
 
-使用 `conversationStore` 提供的方法，例如:
+```jsx
+<ConversationList
+  itemProps={{
+    formatDateTime: (time: number) => {
+      // 将 time 时间戳格式化成你需要的格式
+      return new Date(time).toLocaleString();
+    },
+  }}
+/>
+```
+
+### 设置更多会话操作
+
+通过配置 `itemProps` 的 `moreAction` 属性控制显示哪些功能，或者添加自定义功能。
+
+```jsx
+<ConversationList
+  itemProps={{
+    moreAction: {
+      visible: true, // 是否显示更多操作
+      actions: [
+        {
+          content: 'DELETE', // 删除会话
+        },
+        {
+          content: 'PIN', // 置顶会话
+        },
+        {
+          content: 'SILENT', // 会话免打扰
+        },
+        {
+          content: '自定义功能',
+          onClick: () => {},
+          icon: <Icon type="STAR" />,
+        },
+      ],
+    },
+  }}
+/>
+```
+
+### 设置会话最新一条消息的内容
+
+通过设置 `itemProps` 中 `renderMessageContent` 方法返回自定义的最新一条消息的内容。
+
+```jsx
+<ConversationList
+  itemProps={{
+    renderMessageContent: message => {
+      return <div>自定义消息内容</div>;
+    },
+  }}
+/>
+```
+
+### 设置消息气泡颜色和头像
+
+通过设置 `itemProps` 属性控制 `ConversationItem` 样式，包括气泡颜色以及头像大小和形状。
+
+```jsx
+<ConversationList
+  itemProps={{
+    badgeColor: 'red', // 气泡颜色
+    avatarSize: 50, // 头像大小  
+    avatarShape: 'circle', // 头像形状
+  }}
+/>
+```
+
+### 自定义会话操作
+
+`conversationStore` 提供的方法，例如:
 
 - 使用 `topConversation` 方法置顶一个会话。
 - 使用 `addConversation` 方法添加一个会话。
@@ -222,7 +305,9 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/cvs-action.png =300x700)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/custom_conversation_list_action.png" title="自定义会话操作" />
+</ImageGallery>
 
 ### 修改会话列表相关的主题
 
@@ -308,7 +393,7 @@ $cvs-item-time-margin-bottom: 9px;
 	  <tr>
 		<td style=font-size:15px>onSearch</td>
         <td style=font-size:15px>(e: React.ChangeEvent&lt;HTMLInputElement&gt;) => boolean</td>
-		<td style=font-size:15px> 搜索输入框的 change 事件，当函数返回 false 时，会组织默认的搜索行为，你可以使用自己的搜索条件来搜索</td>
+		<td style=font-size:15px> 搜索输入框的 change 事件，当函数返回 false 时，会阻止默认的搜索行为，你可以使用自己的搜索条件来搜索</td>
 	  </tr> 
     </tr>
 </table>

@@ -8,7 +8,7 @@
 
 **利用 `EaseCallKit` 通话过程中，使用环信 ID 加入频道，方便音视频视图中显示用户名。如果用户不使用 `EaseCallKit` 而直接调用声网 API，也可以直接使用数字 UID 加入频道。**
 
-:::notice
+:::tip
 本 UI 库只和移动端 3.8.0 及以上版本 Demo 互通。3.8.1 的 UI 库使用声网数字 uid 加入频道，而 3.8.0 使用字符串加入频道，3.8.1 版本不与 3.8.0 互通，Demo 中 EaseCallKit 使用的 token 和 UID 均由你自己生成。若你需要使用声网对应的音视频服务，需单独在声网申请。
 :::
 
@@ -32,9 +32,9 @@ EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 De
 
 集成该库之前，你需要满足以下条件：
 
-- 分别创建 [环信应用](/product/enable_and_configure_IM.html) 及 [声网应用](https://docportal.shengwang.cn/cn/video-legacy/run_demo_video_call_ios?platform=iOS#1-创建声网项目)；
+- 分别创建 [环信应用](/product/enable_and_configure_IM.html) 及 [声网应用](https://doc.shengwang.cn/doc/rtc/android/get-started/enable-service#创建声网项目)；
 - 已完成环信 IM 的基本功能，包括登录、好友、群组以及会话等的集成；
-- 上线之前开通声网 Token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 Token。具体请参见 [创建 Token 服务及使用 App Server 生成 Token](https://docportal.shengwang.cn/cn/video-call-4.x/token_server_ios_ng)。
+- 上线之前开通声网 Token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 Token。具体请参见 [创建 Token 服务及使用 App Server 生成 Token](https://doc.shengwang.cn/doc/rtc/android/basic-features/token-authentication)。
 
 ## 快速集成
 
@@ -59,7 +59,7 @@ EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 De
 implementation 'io.hyphenate:ease-call-kit:3.8.9'
 ```
 
-:::notice
+:::tip
 `EaseCallKit` 必须依赖环信 IM SDK (即 hyphenate-chat) ，因而在使用 `EaseCallKit` 时必须同时添加环信 IM SDK 依赖。
 :::
 
@@ -80,6 +80,8 @@ implementation 'io.hyphenate:hyphenate-chat:3.8.0' (`hyphenate-chat` 只支持 3
 //声网 SDK
 implementation 'io.agora.rtc:full-sdk:3.8.0'
 ```
+
+使用 easecallkit 4.0.1 或以上版本 时，请使用声网音视频库 `io.agora.rtc:full-sdk:4.1.0`。
 
 ### 添加权限
 
@@ -201,7 +203,7 @@ public void startInviteMultipleCall(final String[] users,final String ext){}
 
 发起通话后的 UI 界面如下：
 
-![img](@static/images/android/sendcall.png)
+![img](/images/android/sendcall.png)
 
 ### 被叫收到通话邀请
 
@@ -221,7 +223,7 @@ void onRevivedCall(EaseCallType callType, String userId,String ext){}
 
 收到通话邀请后的界面如下:
 
-![img](@static/images/android/called.jpeg)
+![img](/images/android/called.jpeg)
 
 ### 多人通话中邀请
 
@@ -349,6 +351,48 @@ public void onRemoteUserJoinChannel(String channelName, String userName, int uid
 }
 ```
 
+### 私有化部署
+
+CallKit 4.8.2 及更高版本支持私有化部署，包括初始化和初测监听器。
+
+#### 初始化
+
+配置私有化 AgoraAppId。其他可配置的选项，详见本文档中的[初始化](https://doc.easemob.com/document/android/easecallkit.html#初始化)一节。
+
+```kotlin
+EaseCallKitConfig().apply {
+    ……
+    agoraAppId = "2d4f114e22304cee8d31ae909f3289d2"
+    ……
+    EaseCallKit.getInstance().init(context, this)
+}
+```
+
+#### 注册监听器
+
+监听 `com.hyphenate.easecallkit.base.EaseCallKitListener#onRtcEngineCreated` 事件，在 RTC 引擎创建的回调里进行私有化配置。详见 [API 参考](https://doc.shengwang.cn/api-ref/rtc/android/API/toc_network#api_irtcengine_setlocalaccesspoint)。
+
+```kotlin
+private val callKitListener by lazy { object :EaseCallKitListener {
+        ……
+
+        override fun onRtcEngineCreated(engine: RtcEngine?) {
+            var configuration= LocalAccessPointConfiguration().apply {
+                        //设置你的私有化地址
+                        ipList = arrayListOf<String>().apply { add("101.111.111.111" )}
+                        verifyDomainName = "ap.955011.agora.local"
+                        mode = LOCAL_RPOXY_LOCAL_ONLY
+                      }
+            engine?.setLocalAccessPoint(configuration)
+        }
+
+        ……
+
+    } }
+
+EaseCallKit.getInstance().setCallKitListener(callKitListener)
+```
+
 ## 参考
 
 ### 获取声网 token
@@ -391,9 +435,9 @@ void onSetToken(String token, int uId);
 
 ### 离线推送
 
-为保证被叫用户 App 在后台运行或离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [开启 Android Push](push.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。
+为保证被叫用户 App 在后台运行或离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [开启 Android Push](/document/android/push/push_notification_mode_dnd.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。
 
-关于离线推送场景方案，请参见 [安卓端设置推送](push.html)。
+关于离线推送场景方案，请参见 [安卓端设置推送](/document/android/push/push_overview.html)。
 
 ## API 列表
 

@@ -9,6 +9,7 @@
 环信即时通讯 IM iOS SDK 提供 `IEMGroupManager` 类和 `EMGroup` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 修改群组名称及描述
+- 创建、修改、获取群头像
 - 获取、更新群组公告
 - 管理群组共享文件
 - 更新群扩展字段
@@ -41,6 +42,64 @@
 [[EMClient sharedClient].groupManager changeDescription:@"desc"
                          forGroup:@"groupID"
                          error:nil];
+```
+
+### 管理群组头像
+
+自 iOS SDK 4.14.0 开始，支持群组头像功能。
+
+#### 设置群组头像
+
+- 创建群组时，可设置群组头像：
+
+```objectivec
+EMGroupOptions *options = [[EMGroupOptions alloc] init];
+    NSString *groupAvatar = @"group avatar";
+    [EMClient.sharedClient.groupManager createGroupWithSubject:@"group name" avatar:groupAvatar description:@"group description" invitees:@[@"user1", @"user2"] message:@"group message" setting:options completion:^(EMGroup * _Nullable group, EMError * _Nullable error) {
+    }];
+```
+
+- 创建群组后，若设置群组头像，可调用 [修改群组头像](#修改群组头像) API 设置头像。
+
+#### 修改群组头像
+
+创建群组完成后，群主或管理员可调用 `EMGroupManager#updateGroupAvatar` 设置或修改群组头像：
+
+```objectivec
+[EMClient.sharedClient.groupManager updateGroupAvatar:@"new group avatar" groupId:@"groupId" completion:^(EMGroup * _Nullable group, EMError * _Nullable error) {
+    if(error == nil) {
+        // 更新成功
+    } else {
+        // 更新失败
+    }
+}];
+```
+
+群头像被修改后，其他群成员会收到 `EMGroupManagerDelegate#groupSpecificationDidUpdate` 回调：
+
+```objectivec
+- (void)groupSpecificationDidUpdate:(EMGroup *)aGroup
+{
+    // 群组信息更新
+    NSString *groupId = aGroup.groupId;
+    // 群组头像
+    NSString *groupAvatar = aGroup.groupAvatar;
+}
+```
+
+#### 获取群组头像
+
+群成员可以通过获取群详情的方法，获取群组头像：
+
+```objectivec
+[EMClient.sharedClient.groupManager getGroupSpecificationFromServerWithId:@"groupId" completion:^(EMGroup * _Nullable aGroup, EMError * _Nullable aError) {
+    if (aError == nil) {
+        // 获取成功,群头像为
+        NSString *groupAvatar = aGroup.groupAvatar;
+    } else {
+        // 获取失败
+    }
+}];
 ```
 
 ### 更新群公告

@@ -4,7 +4,7 @@
 
 ### 注册环信账号
 
-开发者需要在环信管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
+开发者需要在环信管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 App Key，SDK 初始化时需要配置 App Key。
 
 ### 搭建百度小程序开发环境
 
@@ -24,6 +24,8 @@ request 合法域名：
 3. https://a3.easemob.com
 4. https://a4.easemob.com
 5. https://a5.easemob.com
+6. https://rs.chat.agora.io
+7. https://rs.easemob.com
 :::
 
 :::tip
@@ -31,22 +33,26 @@ socket 合法域名：
 wss://im-api-wechat.easemob.com（3.0 IM SDK）
 :::
 
-:::notice
+:::tip
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 :::
 
 环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
 
-| 数据中心    | REST API 请求地址 | WebSocket 访问域名           |
-| ----------- | ----------------- | ---------------------------- |
-| 国内 1 区   | a1.easemob.com    | im-api-wechat.easemob.com    |
-| 国内 2 区   | a31.easemob.com   | im-api-wechat-31.easemob.com |
-| 国内 VIP 区 | 请咨询商务经理    | 请咨询商务经理               |
-| 客服专用    | 请咨询商务经理    | 请咨询商务经理               |
+| 数据中心      | REST API 请求地址      | WebSocket 访问域名          |
+| ------------- | ------------------ | -------------------------------- |
+| 国内 1 区   | a1.easemob.com    | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com   |
+| 国内 2 区   | a31.easemob.com   | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com |
+| 国内 VIP 区 | 请咨询商务经理    | 请咨询商务经理     |
+| 客服专用    | 请咨询商务经理    | 请咨询商务经理   |
+| 新加坡 1 区   | a1-sgp.easemob.com 或 a1-sgp.easecdn.com | im-api-wechat-sgp.easemob.com  或 im-api-wechat-sgp.easecdn.com  |
+| 新加坡 2 区   | a61.easemob.com 或 a61.easecdn.com | im-api-wechat-61.easemob.com 或 im-api-wechat-61.easecdn.com |
+| 美东 1 区     | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
+| 德国 2 区 | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
 
-应用所在数据中心可以在环信用户管理后台>应用信息中查看：
+应用所在数据中心可以在环信用户管理后台 > **即时通讯** > **服务概览**中查看：
 
-![img](@static/images/applet/console.jpeg)
+![img](/images/applet/service_overview.png)
 
 ### 说明
 
@@ -80,10 +86,11 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
 
 #### 实例调用方式
 
-实例化 SDK，并挂载在全局对象下
+实例化 SDK，并挂载在全局对象下。
 
 ```javascript
 //实例化 SDK 对象
+// url 和 apiUrl 属性仅在 4.11.0 及之前版本需手动传入。4.12.0 及之后版本，SDK 会自动获取。
 const WebIM = (wx.WebIM = SDK);
 WebIM.conn = new WebIM.connection({
   appKey: "your appKey",
@@ -96,4 +103,4 @@ WebIM.conn = new WebIM.connection({
 });
 ```
 
-IM 基本功能和 Web 端一致，请参考 Web 端文档。
+小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/integration.html)。

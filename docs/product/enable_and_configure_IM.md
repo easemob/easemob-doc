@@ -14,23 +14,23 @@
 
 1. 登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，在首页的**应用列表**区域点击 **添加应用** 按钮，创建即时通讯 IM 应用。
 
-![img](@static/images/product/console.png)
+![img](/images/product/console.png)
 
 2. 在 **创建应用** 对话框中，输入新应用的相关信息，点击 **创建** 按钮创建应用。新建应用的服务版本默认为免费版。
 
-:::notice
+:::tip
 1. `appname`：你设置的应用名称，用于生成 App Key。该参数的值只能包含小写字母、数字和连字符，不能超过 32 个字符。
 2. `Appkey`：即时通讯服务分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成，生成后无法修改。
 3. `数据中心`：设置后无法修改。
 :::
 
-![img](@static/images/product/create-app.png)
+![img](/images/product/create-app.png)
 
 ## 购买服务
 
-1. 创建应用后，在 **应用列表** 中点击所创建应用的 **操作** 栏中的 **查看** 按钮，进入 **应用详情** 页面。
+1. 创建应用后，在 **应用列表** 中点击所创建应用的 **操作** 栏中的 **管理** 按钮，进入 **应用详情** 页面。
 
-![img](@static/images/product/app-setting.png)
+![img](/images/product/app-setting.png)
 
 2. 开通或升级版本。
 
@@ -38,11 +38,11 @@
 
 - 在页面左侧的导航栏，选择 **即时通讯** > **功能配置** > **版本开通**，查看各种套餐的详情，选择需要的版本，点击 **立即开通**。
 
-![img](@static/images/product/select-version.png)
+![img](/images/product/select-version.png)
 
 - 在页面左侧的导航栏，选择 **即时通讯** > **服务概览**，在 **服务版本** 区域中单击 **升级版本**，进入即时通讯 IM 服务版本购买页面。
 
-![img](@static/images/product/upgrade-version.png)
+![img](/images/product/upgrade-version.png)
 
 - 在页面左侧的导航栏，选择 **即时通讯** > **功能配置** > **功能配置总览**，点击各功能的 **操作** 一栏中的 **升级** 或 **增值服务**。
 
@@ -54,11 +54,11 @@
 | 请选择服务版本           | 服务版本的选择如下：<br/> - 当 App Key 为免费版时，可购买专业版或旗舰版，不可单独购买增值服务。<br/> - 当 App Key 为专业版时，可购买旗舰版或单独购买增值服务。|
 | 可选增值服务 | 请根据实际需求选择增值功能：<br/> - 单个群成员数上限和单个用户可加入群组数上限：不支持叠加购买；以单个群成员数上限举例说明，如果旗舰版购买了 8000 人/群的增值服务，则表示单个群成员上限配置提升至 8000 人/群。<br/> - 消息云存储时长和 REST API 接口调用频率上限：支持可叠加购买，即支持多倍购买；以消息云存储时长举例说明，如购买时选择了 10 份，则表示消息云存储时长延长 300 天（30 天*10）。 |
 
-:::notice
+:::tip
 服务购买页显示的预估费用仅用于做参考，预估费用仅包含基础费用，具体费用以每月账单为准。
 :::
 
-![img](@static/images/product/add-service.png)
+![img](/images/product/add-service.png)
 
 3. 勾选 **我已阅读并同意《环信云服务购买协议》**。
 
@@ -66,7 +66,7 @@
 
 购买成功后即刻生效，当天开始计费，每月 1 号自动扣除上月总消耗费用。
 
-![img](@static/images/product/success.png)
+![img](/images/product/success.png)
 
 ## 获取环信即时通讯 IM 的信息
 
@@ -84,14 +84,14 @@
 
 创建应用后，参照以下步骤在环信即时通讯云控制台上查看环信即时通讯 IM 服务的详情以及进行配置。
 
-在环信即时通讯云控制台的首页的 **应用列表** 中，点击目标应用的 **操作** 栏中的 **查看** 按钮，在左侧导航栏选择 **即时通讯** > **功能配置** > **功能配置总览**，您可以查看到当前 App Key 的服务配置并根据实际业务需求管理相关配置，具体操作说明如下：
+在环信即时通讯云控制台的首页的 **应用列表** 中，点击目标应用的 **操作** 栏中的 **管理** 按钮，在左侧导航栏选择 **即时通讯** > **功能配置** > **功能配置总览**，您可以查看到当前 App Key 的服务配置并根据实际业务需求管理相关配置，具体操作说明如下：
 
 1. **免费开通**：指该功能当前服务版本里已包含，可根据实际业务需求选择是否开通；点击 **免费开通**，则可立即开通该功能；
 2. **设置**：指该功能已开通且有需要设置的配置项，点击 **设置**，即可进入对应设置页配置；
 3. **升级**：功能如果当前服务版本中不包含、或需要提高功能状态中的参数值，则可点击 **升级**，购买升级至符合业务需求的服务版本即可；
 4. **增值服务**：点击**增值服务**，进入增值服务购买页面，根据实际需求选择购买。
 
-![img](@static/images/product/functional.png)
+![img](/images/product/functional.png)
 
 ## 设置消息撤回（REST & 客户端）
 
@@ -99,7 +99,23 @@
 2. 在弹出的 **消息撤回时间设置** 对话框中，设置消息可撤回时长。端消息撤回时长和 REST 消息撤回时长均不能超过 7 天。
 3. 单击 **确定** 保存配置。
 
-![img](@static/images/product/rest.png)
+![img](/images/product/rest.png)
+
+## 设置群消息已读回执
+
+群聊消息的已读回执使用前，需要开通该功能。
+
+在环信即时通讯云的左侧导航栏中，选择 **即时通讯** > **功能配置** > **功能配置总览**。在 **功能配置总览** 页面的 **基础功能** 页签下，搜索找到**消息已读回执（群聊）**开通功能。
+
+![img](/images/product/message/message_receipt.png)
+
+## 设置通过 RESTful API 发送的消息写入会话列表
+
+通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需要开通。
+
+在环信即时通讯云的左侧导航栏中，选择 **即时通讯** > **功能配置** > **功能配置总览**。在 **功能配置总览** 页面的 **基础功能** 页签下，搜索找到**rest发消息写会话列表**，然后点击**设置**。
+
+![img](/images/product/enable_and_configure/message_rest_conversation.png)
 
 ## 配置推送证书
 
@@ -107,21 +123,21 @@
 
 开启环信即时通讯 IM 服务后，按照以下步骤添加消息推送证书：
 
-1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中，点击 **查看**。
+1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中，点击 **管理**。
 
-![img](@static/images/product/push/push_app_list.png)
+![img](/images/product/push/push_app_list.png)
 
 2. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **消息推送** > **证书管理**，进入 **证书管理** 页面。
 
-![img](@static/images/product/push/push_settings.png)
+![img](/images/product/push/push_settings.png)
 
 3. 点击 **添加推送证书** 按钮，打开 **添加推送证书** 对话框。
 
-![img](@static/images/product/push/push_settings_window.png)
+![img](/images/product/push/push_settings_window.png)
 
 4. 在 **添加推送证书** 对话框中，填写各厂商平台的相关推送信息，点击 **保存** 按钮，完成证书配置。
 
-![img](@static/images/product/push/push_settings_form.png)
+![img](/images/product/push/push_settings_form.png)
 
 
 ## 配置推送模板
@@ -130,7 +146,7 @@
 
 开启后，你可以配置默认推送模板和自定义推送模板。
 
-![img](@static/images/product/push/enable_advanced_function.png)
+![img](/images/product/push/enable_advanced_function.png)
 
 ### 使用默认推送模板 
 
@@ -140,13 +156,13 @@
 
 按照以下步骤创建默认推送模板：
 
-1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中，点击 **查看**。
+1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中，点击 **管理**。
 
-![img](@static/images/product/push/push_app_list.png)
+![img](/images/product/push/push_app_list.png)
 
 2. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **消息推送** > **模板管理**，进入 **模板管理** 页面。
 
-![img](@static/images/product/push/push_template.png)
+![img](/images/product/push/push_template.png)
 
 3. 点击 **添加推送模板**，在弹出的窗口中配置**模板名称**、**标题**和**内容**。
 
@@ -185,7 +201,19 @@
   # content: {0} = "欢迎使用im-push" {1} = "加油"
   ```    
 
-  ![img](@static/images/product/push/push_template_add.png)
+  群昵称即群成员在群组中的昵称，群成员在发送群消息时通过扩展字段设置，JSON 结构如下：
+
+```json
+  {
+    "ext":{
+            "em_push_ext":{
+                "group_user_nickname":"Jane"
+            }
+        }
+  }      
+```   
+
+  ![img](/images/product/push/push_template_add.png)
 
 ### 使用自定义推送模板
 
@@ -201,21 +229,21 @@
 
 ### 开通消息回调
 
-1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **查看**。
+1. 在环信即时通讯云控制台首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
 
-![img](@static/images/product/app-view.png)
+![img](/images/product/push/push_app_list.png)
 
 2. 选择**即时通讯** > **功能配置** > **功能配置总览**，在**基础功能**页签的功能列表上，点击**回调**对应的 **增值服务**。
 
-![img](@static/images/callback/callback_activation.png)
+![img](/images/callback/callback_activation.png)
 
 3. 在弹出页面的**可选增值服务**区域，选择**回调**对应的**付费开通**，确定购买时长，选择 **我已阅读并同意《环信云服务购买协议》**，然后点击**提交订单**。
 
-![img](@static/images/callback/callback_purchase.png)
+![img](/images/callback/callback_purchase.png)
 
 4. 在支付页面，点击**立即支付**支付费用后即可使用。
 
-![img](@static/images/callback/callback_payment.png)
+![img](/images/callback/callback_payment.png)
 
 ### 配置回调规则
 
@@ -223,13 +251,13 @@
 
 1. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **消息回调**，进入 **消息回调** 页面。
 
-![img](@static/images/product/push-callback.png)
+![img](/images/product/callback_rule_list.png)
 
 2. 点击 **添加回调地址** 按钮，打开回调配置对话框，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置。
 
 - 配置发送前回调规则
 
-![img](@static/images/callback/pre_delivery_rule_add.png)
+![img](/images/callback/pre_delivery_rule_add.png)
 
 在**发送前回调**对话框中配置以下参数：
 
@@ -246,7 +274,7 @@
 
 - 配置发送后回调规则
 
-![img](@static/images/callback/post_delivery_rule_add.png)
+![img](/images/callback/post_delivery_rule_add.png)
 
 在**发送后回调**对话框中配置以下参数：
 
@@ -255,7 +283,7 @@
 | 规则名称 | 是 | 唯一的规则名称，只支持字母、数字和下划线，不支持中文字符，且长度不超过 32 字符。 |
 | 回调地址 | 是 |环信 IM 服务器会将消息推送到指定的 URL 地址，支持针对不同类型的消息配置不同的 HTTP 和 HTTPS 回调地址。   |
 | 启用状态 | 是 |是否启用该规则。|
-| 回调类型 | 是 |回调类型。你可以选择对各种类型的单聊、群聊、和聊天室消息以及各种事件进行回调，详见[回调事件](/document/server-side/callback_configurations.html)。<Container type="tip" title="提示">对于表情回复 Reaction 和子区 Thread，如要获取回调事件，无需单独配置，只需选择对应的消息类型即可。例如，如果需要单聊文本消息的 Reaction，你需要选中 **单聊消息 > 文本消息**，服务器发送回调事件时即会返回 Reaction 信息。</Container>|
+| 回调类型 | 是 |回调类型。你可以选择对各种类型的单聊、群聊、和聊天室消息以及各种事件进行回调，详见[回调事件](/document/server-side/callback_message_send.html)。<Container type="tip" title="提示">对于表情回复 Reaction 和子区 Thread，如要获取回调事件，无需单独配置，只需选择对应的消息类型即可。例如，如果需要单聊文本消息的 Reaction，你需要选中 **单聊消息 > 文本消息**，服务器发送回调事件时即会返回 Reaction 信息。</Container>|
 | 消息类型 | 是 |需要回调的类型：<br/> - **聊天消息**：发送成功的消息，包括通过客户端和 REST API 发送的消息。这些消息与通过 REST 导出的聊天记录查询到的消息一致。例如，用户 u1 向用户 u2 发送消息，则会产生一条聊天消息，与接收方是否在线无关。收到的消息中 `from` 为 u1，`to` 为 u2。用户 u1 在群组 g1 中发送消息，则会产生一条聊天消息，收到的消息中 `from` 为 u1，`to` 为 g1，且返回值包含 `group_id` 字段。<br/> - **离线消息**：消息发送时接收方为离线的消息。例如：单聊中发送消息，若对端用户不在线，则会产生一条离线消息；在群聊中发送消息，若有几个群成员不在线，则会产生几条离线消息，这些离线消息的 `to` 参数为接收消息用户的 ID，并不是群组 ID。App 可以通过推送服务对这些消息进行个性化推送。|
 | REST 消息是否需要回调 | 是 | 通过 REST API 发送的消息是否需要回调：<br/> - **是**：需要；<br/> - **否**：不需要。 |
 | From ID  | 否 |消息发送方或操作者的用户 ID。每行输入一个用户 ID，一次最多输入 50 条。设置该参数后，环信服务器只针对该用户发送的消息及执行的操作（例如好友、群组或聊天室相关操作）进行回调。若不指定该参数，规则对发送方或操作者不限制。 |
@@ -293,7 +321,7 @@
 消息举报功能与内容审核功能为两个独立的功能，没有任何关联，因此使用该功能无需提前开通内容审核功能。
 :::
 
-![img](@static/images/product/enable_and_configure/message_report_enable.png)
+![img](/images/product/enable_and_configure/message_report_enable.png)
 
 2. 查看消息举报记录。
 
@@ -305,7 +333,7 @@
 2. 在敏感词配置页面，单击 **服务设置** 旁边的 **编辑**，在弹出的 **敏感词服务** 对话框中，按需求选择对应设置。
 3. 单击 **确定** 保存配置。
 
-![img](@static/images/product/sensitive-words.png)
+![img](/images/product/sensitive-words.png)
 
 ## REST-IP 白名单设置
 
@@ -313,14 +341,14 @@
 
 1. 在环信即时通讯云的左侧导航栏中，选择 **即时通讯** > **功能配置** > **功能配置总览**。在 **功能配置总览** 页面的 **基础功能** 页签中搜索找到 **REST-IP 白名单**，单击右侧的 **设置**（已开通状态下），打开**安全配置**页面。
 2. 在 **安全配置** 页面，单击 **添加IP**，在弹出的 **添加 IP** 对话框中，输入 IP 地址。
-:::notice
+:::tip
 1. 每次只能输入 1 个 IP 地址，最多可添加 8 个。
 2. 添加 IP 地址成功后 10 分钟后生效。
 3. 若白名单列表为空，则所有 IP 地址均可发 REST 消息。
 :::
 3. 单击 **保存** 完成配置。
 
-![img](@static/images/product/ip-whitelist.png)
+![img](/images/product/ip-whitelist.png)
 
 ### 删除 IP 白名单
 
@@ -330,7 +358,7 @@
 
 2. 在 **IP白名单** 列表中，单击目标 IP 右侧的 **删除**。
 
-![img](@static/images/product/delete-ip-allow-list.png)
+![img](/images/product/delete-ip-allow-list.png)
 
 3. 单击 **确认**，则删除该 IP 地址。
 
@@ -345,17 +373,53 @@
 
 ## 创建 IM 用户
 
+### 正式环境
+
+在正式开发环境中，你可以采取以下步骤创建用户：
+
 1. 在环信即时通讯云的左侧导航栏中，选择 **即时通讯 > 运营服务 > 用户管理**。
 
 2. 在 **用户管理** 页面，点击 **创建IM用户** 按钮，在弹出的对话框中填写用户 ID、昵称和密码，然后点击 **保存**。
 
    各参数的设置要求，详见[注册用户 RESTful API](/document/server-side/account_system.html#开放注册单个用户)。
 
-![img](@static/images/product/user_create.png)
+![img](/images/product/user_create.png)
 
 创建用户后，你可以点击 **操作** 栏中的 **更多** 对该用户进行管理，包括修改用户信息和查看好友等。
 
-![img](@static/images/product/user_operation.png)
+![img](/images/product/user_operation.png)
+
+### 测试环境
+
+在测试环境中，例如实现快速开始，你可以采取以下步骤创建用户：
+
+1. 在环信即时通讯云的左侧导航栏中，选择 **应用概览 > 用户认证**。
+   
+2. 在**用户认证**页面，点击**创建IM用户**按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
+
+![img](/images/product/user_create_test.png)
+   
+创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
+
+注意：设置 token 有效时间对当前 App Key 下的 app 和用户 token 均生效，仅对修改后新生成的 token 生效，不影响修改之前已生成的 token。
+
+![img](/images/product/user_operation_test.png)
+
+## 创建群组
+
+1. 在环信即时通讯云的左侧导航栏中，选择 **即时通讯 > 运营服务 > 群组管理**。
+
+2. 在 **群组管理** 页面，点击 **创建群组**，在弹出的对话框中设置群组名称、描述、群主、最大人数、群组类型、申请入群方式、邀请方式和被邀请用户是否需要确认，然后点击 **创建**。
+
+   各参数的设置要求，详见[创建群组 RESTful API](/document/server-side/group_manage.html#创建群组)。
+
+创建群组后，你可以通过以下步骤管理群组信息和成员：
+
+- 点击 **操作** 栏中的 **更多** 进行群组管理，包括查看群组成员、查看群组黑名单、发送rest消息和删除群组等。
+
+- 要添加用户，选择 **查看群组成员**，在弹出的对话框中，输入用户 ID，点击 **添加成员**。成员添加后会显示在下方的成员列表中，你可以移除该成员。
+
+- 在群组列表上，你可以点击群组 ID，修改群组信息，包括群组名称、描述和公告，以及管理群成员，包括全员禁言、将成员添加/移除禁言列表和黑名单，添加和移除管理员。
 
 ## 创建聊天室
 
@@ -365,15 +429,19 @@
 
    各参数的设置要求，详见[创建聊天室 RESTful API](/document/server-side/chatroom.html#创建聊天室)。
 
-创建聊天室后，你可以点击 **操作** 栏中的 **更多** 对进行聊天室管理，包括修改修改聊天室信息、删除聊天室以及成员管理等。
+创建群组后，你可以通过以下步骤管理聊天室信息和成员：  
 
-要添加聊天室成员，选择 **查看聊天室成员**，在弹出的对话框中，输入用户 ID，点击 **添加成员**。成员添加后会显示在下方的成员列表中，你可以移除该成员。
+- 点击 **操作** 栏中的 **更多** 进行聊天室管理，包括修改聊天室信息、查看聊天室成员、查看聊天室管理员、查看聊天室黑名单、查看聊天室禁言名单和删除聊天室。
+
+- 要添加用户，选择 **查看聊天室成员**，在弹出的对话框中，输入用户 ID，点击 **添加成员**。成员添加后会显示在下方的成员列表中，你可以移除该成员。
+  
+- 在聊天室列表上，你可以点击聊天室 ID，修改聊天室信息，包括聊天室名称、描述和公告，以及管理聊天室成员，包括全员禁言、将成员添加/移除禁言列表和黑名单，添加和移除管理员。 
 
 ## IM 用户设备日志
 
 环信即时通讯云控制台支持查询用户设备端的日志，或将设备端的日志上传到环信日志服务器。目前，仅支持使用了高于 3.3.2 的 Android/iOS SDK 的设备。
 
-![img](@static/images/product/enable_and_configure/user_device_log.png)
+![img](/images/product/enable_and_configure/user_device_log.png)
 
 ### 上传设备日志到环信日志服务器
 
@@ -393,13 +461,13 @@
 
 登录环信即时通讯云控制台，选择 **费用中心** > **账户中心**，可查看你当前的账户余额和支出明细。
 
-![img](@static/images/product/account-bills.png)
+![img](/images/product/account-bills.png)
 
 ## 查看订单记录
 
 登录环信即时通讯云控制台，选择 **费用中心** > **订单中心**，可查看你当前的所有订单记录。
 
-![img](@static/images/product/order-records.png)
+![img](/images/product/order-records.png)
 
 **订单中心**页面上的订单状态说明如下：
 
@@ -407,14 +475,14 @@
 - **服务中**：表示当前订单中购买的服务在使用中。同一 App Key 同时仅能有 1 个服务版本的订单状态为**服务中**。
 - **已完结**：表示当前订单中购买的服务已关闭。当客户升级新服务后，原服务版本订单和相关增值服务订单均会自动关闭，变为**已完结**状态。
 
-![img](@static/images/product/order-status.png)
+![img](/images/product/order-status.png)
 
 点击 **操作** 栏中的 **详情**，可查看订单详情。
 
-![img](@static/images/product/order-detail.png)
+![img](/images/product/order-detail.png)
 
 ## 查看账单记录
 
 登录环信即时通讯云控制台，选择 **费用中心** > **消费账单**，可查看你当前的已生成的账单记录。
 
-![img](@static/images/product/bill-records.png)
+![img](/images/product/bill-records.png)

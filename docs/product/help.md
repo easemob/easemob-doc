@@ -18,13 +18,9 @@
 
 登录 IM Console，请进入您遇到问题的 APP，然后点击屏幕下方的技术咨询，提交工单。工单的响应时间是一个工作日内。
 
-![](@static/images/product/help-ticket1.jpeg)
+![](/images/product/help-ticket1.jpeg)
 
-![](@static/images/product/help-ticket2.jpeg)
-
-## FAQ 帮助中心
-
-[环信 FAQ 帮助中心](https://faq.easemob.com/)提供各客户端、RESTful API、环信控制台以及商务相关的常见问题，您在遇到问题时可以查看，快速找到答案。
+![](/images/product/help-ticket2.jpeg)
 
 ## IM Geek 社区
 

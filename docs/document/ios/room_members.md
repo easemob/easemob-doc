@@ -8,8 +8,8 @@
 
 环信即时通讯 IM iOS SDK 提供 `IEMChatroomManager` 类、 `EMChatroomManagerDelegate` 类 和 `EMChatroom` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
 
-- 将成员移出聊天室
 - 获取聊天室成员列表
+- 退出聊天室
 - 管理聊天室黑名单
 - 管理聊天室白名单
 - 管理聊天室禁言列表
@@ -36,11 +36,41 @@
 
 ```objectivec
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMemberListFromServerWithId:cursor:pageSize:completion]
+//cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
+//pageSize：每页期望返回的成员数,最大值为 1,000。
 EMError *error = nil;
 EMCursorResult<NSString*> * result = [[EMClient sharedClient].roomManager getChatroomMemberListFromServerWithId:@"chatroomId" cursor:1 pageSize:20 error:&error];
 ```
 
-### 将成员移出聊天室
+### 退出聊天室
+
+#### 主动退出
+
+聊天室所有成员均可以调用 `leaveChatroom` 方法退出指定聊天室。成员退出聊天室时，其他成员收到 `userDidLeaveChatroom` 回调。
+
+示例代码如下：
+
+```objectivec
+// 异步方法
+[[EMClient sharedClient].roomManager leaveChatroom:@"aChatroomId" completion:nil];
+```
+
+退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `isDeleteMessagesWhenExitChatRoom` 设置为 `NO`。
+
+```objectivec
+@property (nonatomic, assign) BOOL isDeleteMessagesWhenExitChatRoom;
+```
+
+示例代码如下：
+
+```objectivec
+EMOptions *retOpt = [EMOptions optionsWithAppkey:@"appkey"];
+retOpt.isDeleteMessagesWhenExitChatRoom = NO;
+```
+
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `EMOptions#canChatroomOwnerLeave` 参数在初始化时设置为 `YES` 时，聊天室所有者可以离开聊天室；若该参数设置为 `NO`，聊天室所有者调用 `leaveChatroom` 方法离开聊天室时会提示错误 706 `EMErrorChatroomOwnerNotAllowLeave`。
+
+#### 被移出
 
 仅聊天室所有者和管理员可调用 `removeMembers` 方法将单个或多个成员移出聊天室。
 
@@ -56,6 +86,15 @@ EMCursorResult<NSString*> * result = [[EMClient sharedClient].roomManager getCha
             
     }];
 ```
+
+#### 离线后自动退出
+
+由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+
+以下两类成员即使离线也不会退出聊天室：
+
+- 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
+- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)时拉入的用户从未登录过。
 
 ### 管理聊天室黑名单
 
@@ -155,9 +194,9 @@ EMError *error = nil;
 
 #### 添加成员至聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `muteMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，操作者外其他成员收到 `chatroomMuteListDidUpdate:addedMutedMembers` 回调。
+仅聊天室所有者和管理员可以调用 `muteMembers` 方法将指定成员添加至聊天室禁言列表。被禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `chatroomMuteListDidUpdate:addedMutedMembers` 回调。
 
-:::notice
+:::tip
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
 :::
 
@@ -172,9 +211,9 @@ EMError *error = nil;
 
 #### 将成员移出聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `unmuteMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，其他成员收到 `chatroomMuteListDidUpdate: removedMutedMembers` 回调。
+仅聊天室所有者和管理员可以调用 `unmuteMembers` 方法将成员移出聊天室禁言列表。被解除禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `chatroomMuteListDidUpdate: removedMutedMembers` 回调。
 
-:::notice
+:::tip
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。
 :::
 
@@ -196,6 +235,20 @@ EMError *error = nil;
 // 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMuteListFromServerWithId:pageNumber:pageSize:completion]
 EMError *error = nil;
 NSArray<NSString *> * muteMembers = [[EMClient sharedClient].roomManager getChatroomMuteListFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
+```
+
+#### 检查自己是否在聊天室禁言列表
+
+聊天室成员可以调用 `isMemberInMuteListFromServerWithChatroomId` 方法查看自己是否在聊天室禁言列表。
+
+```Objective-C
+[EMClient.sharedClient.roomManager isMemberInMuteListFromServerWithChatroomId:@"roomId" completion:^(BOOL inMuteList, EMError * _Nullable aError) {
+        if (aError == nil) {
+            if (inMuteList) {
+                NSLog(@"You are in the mute list of room");
+            }
+        }
+    }];
 ```
 
 ### 开启和关闭聊天室全员禁言

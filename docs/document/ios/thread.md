@@ -4,6 +4,8 @@
 
 子区是群组成员的子集，是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM iOS SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
 
+使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
+
 ## 技术原理
 
 环信即时通讯 IM iOS SDK 提供 `EMChatThreadManager`、`EMChatThread`、`EMChatThreadManagerDelegate` 和 `EMChatThreadEvent` 类，用于管理子区，支持你通过调用 API 在项目中实现如下功能：
@@ -24,8 +26,8 @@
 - 完成 3.9.3 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 联系商务开通子区功能。
-
+- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+  
 ## 实现方法
 
 本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
@@ -58,7 +60,7 @@
 
 单设备登录时，子区所属群组的所有成员均会收到 `EMChatThreadManagerDelegate#onChatThreadDestroyed` 回调；多设备登录时，其他设备会同时收到 `- (void)multiDevicesThreadEventDidReceive:(EMMultiDevicesEvent)aEvent threadId:(NSString *)aThreadId ext:(id)aExt;` 回调，回调事件为 `EMMultiDevicesEventThreadDestroy`。
 
-:::notice
+:::tip
 解散子区后，将删除本地数据库及内存中的群相关信息及群会话，谨慎操作。
 :::
 

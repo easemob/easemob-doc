@@ -15,6 +15,7 @@
 - 获取群组详情
 - 获取群成员列表
 - 获取群组列表
+- 查询当前用户已加入的群组数量
 - 屏蔽、解除屏蔽群消息
 - 监听群组事件
 
@@ -73,7 +74,7 @@ SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, ca
   - 群主和群管理员同意入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinAcceptedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
   - 群主和群管理员拒绝入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinDeclinedFromGroup` 回调。
 
-:::notice
+:::tip
 用户只能申请加入公开群组，私有群组不支持用户申请入群。
 :::
 
@@ -110,7 +111,7 @@ SDKClient.Instance.GroupManager.JoinPublicGroup(groupId, new CallBack(
 
 仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `OnDestroyedFromGroup` 回调并被踢出群组。
 
-:::notice
+:::tip
 该操作只有群主才能进行，是危险操作，解散群组后，将删除本地数据库及内存中的群相关信息及群会话。
 :::
 
@@ -220,6 +221,21 @@ SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(pageSize, cursor, ca
 ));
 ```
 
+### 查询当前用户已加入的群组数量
+
+自 1.3.0 版本开始，你可以调用 `FetchMyGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
+
+```csharp
+SDKClient.Instance.GroupManager.FetchMyGroupsCount(new ValueCallBack<int>(
+    onSuccess: (count) =>
+    {
+    },
+    onError: (code, desc) =>
+    {
+    }
+));
+```
+
 ### 屏蔽和解除屏蔽群消息
 
 #### 屏蔽群消息
@@ -296,7 +312,7 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     {
     }
     // 当前用户的入群申请被拒绝。申请人会收到该回调。例如，用户 B 拒绝用户 A 的入群申请后，用户 A 会收到该回调。
-    public void OnRequestToJoinDeclinedFromGroup(string groupId, string reason)
+    public void OnRequestToJoinDeclinedFromGroup(string groupId, string reason, string decliner, string applicant)
     {
     }
     // 当前用户的入群邀请被接受。邀请人会收到该回调。例如，用户 B 接受了用户 A 的入群邀请，则用户 A 会收到该回调。
@@ -335,7 +351,7 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     public void OnAdminRemovedFromGroup(string groupId, string administrator)
     {
     }
-    // 群主变更。原群主和新群主会收到该回调。
+    // 群主变更。新群主会收到该回调。
     public void OnOwnerChangedFromGroup(string groupId, string newOwner, string oldOwner)
     {
     }

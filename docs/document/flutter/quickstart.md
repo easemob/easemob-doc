@@ -8,7 +8,7 @@
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![img](@static/images/android/sendandreceivemsg.png)
+![img](/images/android/sendandreceivemsg.png)
 
 如上图所示，发送和接收单聊消息的步骤如下：
 
@@ -21,13 +21,9 @@
 
 开始前，请确保你的开发环境满足如下要求：
 
-- Xcode 12.4 或以上版本，包括命令行工具;
-- iOS 10 或以上版本;
+- iOS 12 或以上版本;
 - Android SDK API 等级 21 或以上版本；
-- Android Studio 4.0 或以上版本，包括 JDK 1.8 或以上版本;
-- CocoaPods 包管理工具;
-- Flutter 2.10 或以上版本;
-- Dart 2.16 或以上版本;
+- Flutter 3.3.0 或以上版本;
 
 配置开发或者运行环境如果遇到问题，请参考 [这里](https://docs.flutter.dev/get-started/install)。
 
@@ -72,9 +68,9 @@ android {
 
 ### 设置 iOS
 
-iOS 需要 iOS 10.0 以上版本，
+iOS 需要 iOS 12.0 以上版本，
 
-打开文件 `quick_start/ios/Runner.xcodeproj`，修改：`TARGETS -> General -> Deployment info`, 设置 iOS 版本为 10.0。
+打开文件 `quick_start/ios/Runner.xcodeproj`，修改：`TARGETS -> General -> Deployment info`, 设置 iOS 版本为 12.0。
 
 ### 集成 SDK
 
@@ -259,7 +255,7 @@ void _initSDK() async {
 
 ### 注册环信 IM 用户
 
-Demo 中使用 [开放注册](/server-side/account_system.html#开放注册单个用户)，此操作需要在环信后台开启 `开放注册`。在开放注册模式下，允许通过 App 客户端直接注册环信用户，正式环境中请使用 [授权注册](server-side/account_system.html#授权注册单个用户)。
+Demo 中使用 [开放注册](/document/server-side/account_system.html#开放注册单个用户)，此操作需要在环信后台开启 `开放注册`。在开放注册模式下，允许通过 App 客户端直接注册环信用户，正式环境中请使用 [授权注册](/document/server-side/account_system.html#授权注册单个用户)。
 
 在 `_signUp` 方法中添加注册代码：
 
@@ -419,6 +415,13 @@ void _addChatListener() {
                 );
               }
               break;
+            case MessageType.COMBINE:
+              {
+                _addLogToConsole(
+                  "receive combine message, from: ${msg.from}",
+                );
+              }
+              break;  
             case MessageType.CMD:
               {
                 // 当前回调中不会有 CMD 类型消息，CMD 类型消息通过 `EMChatEventHandler#onCmdMessagesReceived` 回调接收
@@ -442,7 +445,7 @@ void dispose() {
   // 移除消息状态监听
   EMClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
   // 移除收消息监听
-  EMClient.getInstance.chatManager.removeEventHandle("UNIQUE_HANDLER_ID");
+  EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
   super.dispose();
 }
 ```
@@ -457,18 +460,18 @@ flutter run
 
 运行结果如下：
 
-<img src="@static/images/flutter/simulator_screen_shot1.png" width="500" />
+<img src="/images/flutter/simulator_screen_shot1.png" width="500" />
 
 参考以下步骤发送和接收文本消息：
 
 1. 输入任意用户名（如 `flutter001` 和 `flutter002`）和密码 `1`，点击 `SIGN UP` 创建用户；
 2. 以 `flutter001` 身份登录 Demo，将 `Enter the username you want to send` 输如为 `flutter002`， 发送文本消息；
 
-<img src="@static/images/flutter/simulator_screen_shot2.png" width="500" />
+<img src="/images/flutter/simulator_screen_shot2.png" width="500" />
 
 3. 以 `flutter002` 身份登录 Demo，查看 Log 信息确认是否都到消息。
 
-<img src="@static/images/flutter/simulator_screen_shot3.png" width="500" />
+<img src="/images/flutter/simulator_screen_shot3.png" width="500" />
 
 ## 后续步骤
 

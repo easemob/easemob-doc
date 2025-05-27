@@ -13,16 +13,16 @@
 
 ## 技术原理
 
-环信即时通讯 IM 支持从服务器和本地删除单个会话及其历史消息，主要方法如下：
+环信即时通讯 IM 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类实现从服务器和本地删除单个会话及其历史消息，主要方法如下：
 
-- `deleteConversationFromServer`：单向删除服务端的单个会话及其历史消息。
-- `deleteConversation`：删除本地单个会话及其历史消息。
+- `EMChatManager#deleteConversationFromServer`：单向删除服务端的单个会话及删除本地会话，也可以设置是否删除服务端和本地的历史消息。
+- `EMChatManager#deleteConversation` + `EMConversation#removeMessage`：删除本地单个会话及其历史消息。
 
 ## 实现方法
 
-### 单向删除服务端会话及其历史消息
+### 单向删除服务端会话及本地会话
 
-你可以调用 `deleteConversationFromServer` 方法删除服务器端会话和历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息，对本地的会话无影响，但会删除本地消息，而其他用户不受影响。
+你可以调用 `deleteConversationFromServer` 方法单向删除服务器端和本地会话，并选择是否删除服务端和本地的历史消息。会话和消息删除后，当前用户无法从服务器获取该会话和消息。该接口不影响其他用户的会话和消息。
 
 调用该方法之前，需调用 `getConversation` 方法获取会话 ID。
 
@@ -30,9 +30,9 @@
 
 ```java
 //获取指定的会话 ID。
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
+EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 
-// 删除指定会话。如果需要保留历史消息，`isDeleteServerMessages` 传 `false`。
+// 删除指定会话。如果需要保留服务端和本地的历史消息，`isDeleteServerMessages` 传 `false`。
 EMClient.getInstance().chatManager().deleteConversationFromServer(conversationId, conversationType, isDeleteServerMessages, new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -52,11 +52,11 @@ EMClient.getInstance().chatManager().deleteConversationFromServer(conversationId
 
 ```java
 // 删除指定用户的会话，如果需要保留历史消息，传 `false`。
-EMClient.getInstance().chatManager().deleteConversation(username, true);
+EMClient.getInstance().chatManager().deleteConversation(conversationId, true);
 ```
 
 ```java
 // 删除指定会话中指定的一条历史消息。
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
+EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
 conversation.removeMessage(deleteMsg.msgId);
 ```

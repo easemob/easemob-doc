@@ -4,7 +4,9 @@
 
 你可以通过环信即时通讯控制台创建和管理标签，也可以通过 REST API 进行标签管理。用户与标签是多对多的关系，即一个用户可以对应多个标签，一个标签也可以对应多个用户。
 
-本文档主要介绍如何调用即时推送 REST API 实现创建及管理推送标签。调用以下方法前，请先参考 [接口频率限制](/document/server-side/error.html/product/limitation.html)了解即时通讯 RESTful API 的调用频率限制。
+本文档主要介绍如何调用即时推送 REST API 实现创建及管理推送标签。调用以下方法前，请先参考 [接口频率限制](/product/limitation.html)了解即时通讯 RESTful API 的调用频率限制。
+
+另外，环信提供服务端推送 SDK，你可以点击[这里](https://github.com/easemob/easemob-push-server-sdk)参考相关集成文档。
 
 ## 公共参数
 
@@ -75,7 +77,7 @@ POST https://{host}/{org_name}/{app_name}/push/label
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -146,7 +148,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html)了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#常见错误码)了解可能的原因。
 
 ### 示例
 
@@ -216,7 +218,7 @@ GET https://{host}/{org_name}/{app_name}/push/label
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -287,7 +289,7 @@ DELETE https://{host}/{org_name}/{app_name}/push/label/{labelname}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -354,7 +356,7 @@ POST https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -426,7 +428,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}/user/{username}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -498,7 +500,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -571,7 +573,7 @@ DELETE https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#常见错误码) 了解可能的原因。
 
 ### 示例
 
@@ -602,3 +604,16 @@ curl -L -X DELETE 'localhost/hx/hxdemo/push/label/post-90s/user' \
     "duration": 1
 }
 ```
+
+## 常见错误码
+
+调用推送标签管理相关的 REST API 时，若返回的 HTTP 状态码非 200，则请求失败，提示错误。本节列出这些接口的常见错误码。 
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 403 | ServiceNotOpenException | push service not open | 即时推送功能未开通 | 确认并开通即时推送功能。 |
+| 403 | LimitException | limit request | 因为数量或其他限制导致请求失败 | 根据返回信息的限制原因处理。 |
+| 400 | ResourceNotFoundException | push label not exists of XXX | 即时推送标签不存在 | 检查并修改，使用正确存在的标签名。 |
+| 404 | 请求路径不存在 | url is invalid | 请求路径错误 | 检查并修改，使用正确的请求路径。 |
+| 5xx | 服务器内部错误   | 任意      | 服务器在尝试处理请求时发生内部错误 | 联系环信技术支持。 |
+
+其他错误，你可以参考 [错误码](/document/server-side/error.html) 了解可能的原因。

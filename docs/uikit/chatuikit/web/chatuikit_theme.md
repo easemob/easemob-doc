@@ -6,11 +6,15 @@
 
 - 浅色主题
 
-![img](@static/images/uikit/chatuikit/web/light_mode.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/light_mode.png" title="浅色主题" />
+</ImageGallery>
 
 - 深色主题
 
-![img](@static/images/uikit/chatuikit/web/dark_mode.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/dark_mode.png" title="深色主题" />
+</ImageGallery>
 
 ## 切换内置主题
 
@@ -34,7 +38,7 @@ const App = () => {
 
 在单群聊 UIKit 中， 主题色要用于默认头像颜色，消息气泡颜色，按钮颜色等位置。默认的主题色如下图所示，你可以自定义为其他颜色。
 
-![img](@static/images/uikit/chatuikit/web/image.png)
+![img](/images/uikit/chatuikit/web/image.png)
 
 ```javascript
 import { UIKitProvider } from 'agora-chat-uikit';

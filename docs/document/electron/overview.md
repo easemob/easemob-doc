@@ -58,7 +58,7 @@ Windows SDK 目录结构如下。使用时将 SDK 拷贝到工程目录下。
 
 SDK 采用模块化设计，每一模块的功能相对独立和完善，用户可以根据自己的需求选择使用下面的模块：
 
-![img](@static/images/electron/sdk_design.png)
+![img](/images/electron/sdk_design.png)
 
 ### 模块化设计
 
@@ -76,7 +76,7 @@ SDK 的入口，主要完成登录、退出、注册、配置管理等功能，�
 
 - EMGroupManager
 
-负责群组的管理，创建、删除群组，管理群组成员等功能，管理群组监听模块 EMGroupManagerListener。
+负责群组的管理，创建、解散群组，管理群组成员等功能，管理群组监听模块 EMGroupManagerListener。
 
 - EMChatroomManager
 

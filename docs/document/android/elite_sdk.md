@@ -1,13 +1,32 @@
 # 精简版 SDK 
 
-精简版 SDK 4.2.0 支持 Android 和 iOS 平台，包含基础的单聊和聊天室功能，适用于 SDK 包体积尽量小、仅需基础收发消息功能、而无需离线推送通知等功能的情况。
+精简版 SDK 4.2.3-lite 支持 Android 和 iOS 平台，包含基础的单聊和聊天室功能，适用于 SDK 包体积尽量小、仅需基础收发消息功能、而无需离线推送通知等功能的情况。
 
 精简版 SDK 对应用的体积增量不大，android 为 1.11 MB，iOS 为 1.09 MB。
 
-要下载 Android 端精简版 SDK，点击[这里](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/SDK-mini/easemob-sdk-4.2.0-lite.zip)。
+- 本地依赖：
+
+[下载 Android 端精简版 SDK](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/SDK-mini/easemob-sdk-4.2.3-lite.zip)。
+
+解压后将 libs 文件夹下的相关 so 库及 jar 包拷贝到项目工程里集成即可。
+
+- 远端依赖：
+  
+Android 端的 `app/build.gradle.kts` 文件中添加如下依赖：
+
+```gradle
+dependencies {
+    ...
+    // version 请替换为具体版本号，如：4.2.3-lite 。
+    implementation("io.hyphenate:hyphenate-chat:version")
+}
+```
+
+若要查看最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/hyphenate-chat/versions)。后缀为 `-lite` 的版本即为精简版 SDK。
 
 :::tip
-精简版 SDK 无本地存储，可以升级为标准版 SDK，但标准版不能降级为精简版。
+1. 精简版 SDK 无本地存储，可以升级为标准版 SDK，但标准版不能降级为精简版。
+2. 精简版不支持 TLS。
 :::
 
 ## 功能列表
@@ -38,7 +57,7 @@
       <td>✅</td>
     </tr>
     <tr>
-      <td>发送和接收附件类型的消息</td>
+      <td>发送和接收附件消息</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -68,7 +87,7 @@
       <td>✅</td>
     </tr>
     <tr>
-      <td>使用消息的扩展字段</td>
+      <td>使用消息扩展字段</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -136,8 +155,8 @@
     <tr>
       <td rowspan="6">会话管理</td>
       <td rowspan="2">会话列表</td>
-      <td>获取本地所有会话 </td>
-      <td><a href="https://doc.easemob.com/document/android/conversation_list.html#获取本地所有会话">获取本地所有会话</a></td>
+      <td>获取本地会话 </td>
+      <td><a href="https://doc.easemob.com/document/android/conversation_list.html#获取本地会话">获取本地会话</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -164,8 +183,8 @@
     </tr>
     <tr>
       <td rowspan="2">删除会话</td>
-      <td>单向删除服务端会话及其历史消息</td>
-      <td><a href="https://doc.easemob.com/document/android/conversation_delete.html#单向删除服务端会话及其历史消息">单向删除服务端会话及其历史消息</a></td>
+      <td>单向删除服务端会话及本地会话</td>
+      <td><a href="https://doc.easemob.com/document/android/conversation_delete.html#单向删除服务端会话及本地会话">单向删除服务端会话和本地会话及其历史消息</a></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -315,7 +334,7 @@
       <td rowspan="7">进阶功能</td>
       <td>离线推送</td>
       <td>集成第三方消息推送服务</td>
-      <td><a href="https://doc.easemob.com/document/android/push.html">离线推送</a></td>
+      <td><a href="https://doc.easemob.com/document/android/push/push_overview.html">离线推送</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>

@@ -10,7 +10,7 @@
 
 本文介绍如何管理用户属性，包括设置、更新、存储并获取用户的相关信息。
 
-:::notice
+:::tip
 - 用户属性存储在环信服务器。如果你有安全方面的顾虑，环信建议你自行管理用户属性。
 - 为保证信息安全，app 用户只能修改自己的用户属性。只有 app 管理员可以修改其他用户的用户属性。
 :::
@@ -68,7 +68,7 @@ conn.updateUserInfo("nickname", "Your nickname").then((res) => {
 });
 ```
 
-若[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，请求中必须传以下字段各客户端才能获取到。
+关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
 
 | 字段        | 类型   | 备注                                                                                               |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------- |
@@ -135,7 +135,7 @@ conn
 
 1. 将消息类型设置为 `custom`。
 2. 将自定义消息中的 `customEvent` 设置为 `userCard`。
-3. 在用户属性中查询 `nickname`、`mail` 和 `avatarurl` 的值，然后使用 `customExts` 将其设置为自定义消息的扩展信息。
+3. 在用户属性中查询 `nickname`、`mail` 和 `avatarurl` 的值，然后使用 `customExts` 将其设置为自定义消息扩展信息。
 
 参考以下示例代码创建和发送名片消息：
 

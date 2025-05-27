@@ -12,7 +12,7 @@
 
 **`EaseCallKit` 在通话过程中，使用环信 ID 加入频道，方便音视频视图中显示用户名。如果用户不使用 `EaseCallKit` 而直接调用声网 API，也可以直接使用数字 UID 加入频道。**
 
-:::notice
+:::tip
 本 UI 库只和移动端 3.8.0 以上版本 Demo 互通。3.8.1 的 UI 库使用声网数字 UID 加入频道，而 3.8.0 使用字符串加入频道，3.8.1 版本不与 3.8.0 互通，Demo 中 EaseCallKit 使用的 token 和 UID 均由你自己生成。若你需要使用声网对应的音视频服务，需单独在声网申请。
 :::
 
@@ -40,9 +40,9 @@ pod install
 
 在集成该库前，你需要满足以下条件：
 
-- 分别创建 [环信应用](/product/enable_and_configure_IM.html) 及 [声网应用](https://docportal.shengwang.cn/cn/video-legacy/run_demo_video_call_ios?platform=iOS#1-创建声网项目)；
+- 分别创建 [环信应用](/product/enable_and_configure_IM.html) 及 [声网应用](https://doc.shengwang.cn/doc/rtc/ios/get-started/enable-service#创建声网项目)；
 - 已完成环信 IM 的基本功能，包括登录、好友、群组以及会话等的集成；
-- 上线之前开通声网 token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 token。利用 App Server 生成 token 的过程参见 [声网 token](https://docportal.shengwang.cn/cn/video-call-4.x/token_server_ios_ng?platform=iOS)。
+- 上线之前开通声网 token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 token。利用 App Server 生成 token 的过程参见 [声网 token](https://doc.shengwang.cn/doc/rtc/ios/basic-features/token-authentication)。
 
 ## 快速集成
 
@@ -76,6 +76,8 @@ target 'AppName' do
     pod 'EaseCallKit', '~> version'
 end
 ```
+
+使用 easecallkit 4.0.0 时，请使用声网音视频库 `AgoraRtcEngine_iOS/RtcBasic` 的 4.1.1 版本。
 
 - 在 Terminal 内运行 `pod update` 命令更新本地库版本。
 - 运行 `pod install` 命令安装 `EaseCallKit` UI 库。成功安装后，Terminal 中会显示 **Pod installation complete!**，此时项目文件夹下会生成一个 `xcworkspace` 文件。
@@ -163,13 +165,13 @@ config.agoraAppId=@"声网 AppID";
 
 发起通话后的 UI 界面如下：
 
-<img src="@static/images/ios/sendcall.png" width="400" />
+<img src="/images/ios/sendcall.png" width="400" />
 
 ### 收到邀请
 
 主叫方调用邀请接口后，如果被叫方在线且并未处于通话过程中，将弹出通话页面，被叫用户可选择接听或者拒绝。通话页面如下：
 
-<img src="@static/images/ios/recvcall.png" width="400" />
+<img src="/images/ios/recvcall.png" width="400" />
 
 被叫振铃的同时，会触发以下回调：
 
@@ -366,7 +368,7 @@ config.enableRTCTokenValidate = YES;// 开启 RTC Token 验证，默认不开启
 
 ### 离线推送
 
-为保证被叫用户 App 在后台运行或离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [iOS SDK 集成](push.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。 关于离线推送场景方案，请参见 [iOS 端设置推送](push.html)。
+为保证被叫用户 App 在后台运行或离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [iOS SDK 集成](/document/ios/push/push_apns.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。 关于离线推送场景方案，请参见 [iOS 端设置推送](/document/ios/push/push_overview.html)。
 
 ## API 列表
 

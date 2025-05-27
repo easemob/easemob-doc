@@ -28,4 +28,4 @@ npm start
 
 浏览器会显示以下页面：
 
-![img](@static/images/uikit/chatroomweb/chatroom_enter.png)
+![img](/images/uikit/chatroomweb/chatroom_enter.png)

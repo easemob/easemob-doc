@@ -8,9 +8,10 @@
 
 开始前，确保你的开发环境满足如下条件：
 
-- Xcode 14.0 或以上版本；
-- iOS 13.0 或以上版本；
-- 请确保你的项目已设置有效的开发者签名。
+- Xcode 16 或以上版木；
+- iOs 13.0 或以上版木；
+- CocoaPods 1.14.3 及以上版本；
+- 项目中已设置有效的开发者签名。
 
 ## 安装
 
@@ -34,6 +35,7 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
     end
   end
 end
@@ -45,4 +47,12 @@ end
 pod install --repo-update
 ```
 
-若 Xcode 15 编译出现 **Sandbox: rsync.samba(47334) deny(1) file-write-create...** 报错，你可以在 **Build Setting** 中搜索 **ENABLE_USER_SCRIPT_SANDBOXING**，将 **User Script Sandboxing** 的设置修改为 **NO**。
+## 常见问题
+
+### 沙盒选项问题
+
+当你使用 Xcode 15 创建新工程时，编译时若出现 **Sandbox: rsync.samba(47334) deny(1) file-write-create...** 报错，你需要在 **Target > Build Settings** 中查找 **User Script Sandboxing** 选项，设置为 **NO**。
+
+![img](/images/ios/quickstart_emulator_error.png)
+
+![img](/images/ios/quickstart_error_solve.png)

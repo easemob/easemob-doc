@@ -4,7 +4,12 @@
 
 `ContactList` 组件用于展示通讯录，包含联系人列表、群组列表和好友请求列表。昵称在中文或者英文的情况下可以实现按首字母分类。
 
-![img](@static/images/uikit/chatuikit/web/page_contact_list.png =400x880) 
+![img]() 
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/contact_list.png" title="通讯录" />
+</ImageGallery>
+
 
 ## 使用示例
 
@@ -13,7 +18,7 @@ import React, { useEffect, useState } from "react";
 import { ContactList } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
-const Conversation = () => {
+const ContactList = () => {
   return (
     <div style={{ width: "30%", height: "100%" }}>
       <ContactList />
@@ -33,7 +38,7 @@ import React, { useEffect, useState } from "react";
 import { ContactList } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
-const Conversation = () => {
+const ContactList = () => {
   return (
     <div style={{ width: "30%", height: "100%" }}>
       <ContactList header={<div>自定义 Header</div>} />
@@ -42,7 +47,9 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/contact-header.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/contact-header.png" title="自定义联系人列表 Header" />
+</ImageGallery>
 
 ### 在联系人列表中添加黑名单
 
@@ -53,7 +60,7 @@ import React, { useEffect, useState } from "react";
 import { ContactList } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
-const Conversation = () => {
+const ContactList = () => {
   return (
     <div style={{ width: "30%", height: "100%" }}>
       <ContactList
@@ -80,7 +87,9 @@ const Conversation = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/contact-block.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/contact-block.png" title="加入黑名单" />
+</ImageGallery>
 
 ### 设置成可选择的联系人列表
 
@@ -108,7 +117,9 @@ const ContactListContainer = () => {
 };
 ```
 
-![img](@static/images/uikit/chatuikit/web/contact-select.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/contact-select.png" title="可选择的联系人列表" />
+</ImageGallery>
 
 ## ContactList 属性总览
 

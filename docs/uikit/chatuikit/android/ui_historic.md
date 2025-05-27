@@ -45,7 +45,7 @@ implementation 'io.hyphenate:hyphenate-chat:xxx版本'
 
 **EaseIMKit 必须依赖环信 IM SDK，因而在使用 EaseIMKit 时必须同时添加环信 IM SDK 依赖。**
 
-:::notice
+:::tip
 
 1. IM SDK **3.8.0** 版本以后，远程依赖的 `artifactId` 修改为 `hyphenate-chat`，且该版本以后中不再包含音视频相关逻辑。
 2. IM SDK **3.8.0** 以下，远程依赖，包含音视频的 `artifactId` 为 `hyphenate-sdk`，不包含音视频的 `artifactId` 为 `hyphenate-sdk-lite`。如果想使用不包含音视频通话的 SDK，用 `implementation 'io.hyphenate:hyphenate-sdk-lite:xxx版本`'。
@@ -72,7 +72,7 @@ EaseIMKit 中位置消息使用的是百度地图定位 jar 包，为了防止�
 
 在 application 的 onCreate 下调用初始化 EaseIMKit 的方法。
 
-:::notice
+:::tip
 EaseIMKit 初始化里已包含 SDK 的初始化，不需要再去调用 SDK 的初始化。
 :::
 
@@ -100,9 +100,9 @@ EaseIMKit 封装了常用 IM 功能，提供了会话，聊天及联系人等基
 
 EaseIMKit 提供了 EaseConversationListFragment，需要将其或者其子类添加到 Activity 中。开发者需要对刷新事件（新消息，删除消息，删除会话等）进行处理。
 
-![img](@static/images/android/easeim.jpeg)
+![img](/images/android/easeim.jpeg)
 
-:::notice
+:::tip
 要实现自定义头像及昵称，请参考 [设置头像和昵称](/document/android/userprofile.html#设置当前用户的属性)。
 :::
 
@@ -136,13 +136,13 @@ public class ChatActivity extends BaseActivity {
 }
 ```
 
-![img](@static/images/android/easeim1.jpeg)
+![img](/images/android/easeim1.jpeg)
 
 ### 添加联系人界面
 
 EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 中。开发者需要对刷新事件（添加联系人，删除联系人等）进行处理。
 
-![img](@static/images/android/easeim2.jpeg)
+![img](/images/android/easeim2.jpeg)
 
 ## 设置样式
 
@@ -150,7 +150,7 @@ EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 
 
 EaseIMKit 提供了自定义的标题栏控件 EaseTitleBar。
 
-![img](@static/images/android/easeim-titlebar.jpeg)
+![img](/images/android/easeim-titlebar.jpeg)
 
 标题栏除了做为 View 所具有的属性功能外，还可以设置标题的位置等。
 
@@ -217,7 +217,7 @@ conversationListLayout.showUnreadDotPosition(EaseConversationSetStyle.UnreadDotP
 
 效果如下图：
 
-![img](@static/images/android/easeim3.jpeg)
+![img](/images/android/easeim3.jpeg)
 
 更多样式请参考 EaseContactListLayout 控件。
 
@@ -263,7 +263,7 @@ public boolean onMenuItemClick(MenuItem item, int position) {
 
 聊天窗口包括标题栏（不包含在 EaseChatFragment 中），聊天区，输入区及扩展展示区，如下图所示:
 
-![img](@static/images/android/easeim4.png)
+![img](/images/android/easeim4.png)
 
 标题区 EaseTitleBar 的具体布局及实现不在 EaseIMKit 库的聊天控件及 fragment 中，需要你自己去实现。
 开发者可以在 EaseChatFragment 中获取到 EaseChatLayout 这个控件，然后通过这个控件进一步获取到获取其他控件，代码如下：
@@ -296,7 +296,7 @@ messageListLayout.setBackground(new ColorDrawable(Color.parseColor("#DA5A4D")));
 
 效果如下图：
 
-![img](@static/images/android/easeim5.jpeg)
+![img](/images/android/easeim5.jpeg)
 
 #### 修改头像属性
 
@@ -313,7 +313,7 @@ messageListLayout.setAvatarShapeType(1);
 
 效果如下图：
 
-![img](@static/images/android/easeim6.jpeg)
+![img](/images/android/easeim6.jpeg)
 
 #### 修改聊天文本
 
@@ -330,7 +330,7 @@ messageListLayout.setItemTextColor(ContextCompat.getColor(mContext, R.color.red)
 
 效果如下图：
 
-![img](@static/images/android/easeim7.jpeg)
+![img](/images/android/easeim7.jpeg)
 
 #### 修改时间线样式
 
@@ -349,7 +349,7 @@ messageListLayout.setTimeTextColor(ContextCompat.getColor(mContext, R.color.blac
 
 效果如下图：
 
-![img](@static/images/android/easeim8.jpeg)
+![img](/images/android/easeim8.jpeg)
 
 #### 修改聊天列表展示样式
 
@@ -364,7 +364,7 @@ messageListLayout.setItemShowType(EaseChatMessageListLayout.ShowType.LEFT);
 
 效果如下图：
 
-![img](@static/images/android/easeim9.jpeg)
+![img](/images/android/easeim9.jpeg)
 
 #### 修改输入区样式
 
@@ -396,25 +396,25 @@ if(primaryMenu != null) {
 
 效果（EaseInputMenuStyle.DISABLE_VOICE）如下图：
 
-![img](@static/images/android/easeim10.jpeg)
+![img](/images/android/easeim10.jpeg)
 
 其他样式为：
 
 完整模式（EaseInputMenuStyle.All）：
 
-![img](@static/images/android/easeim11.jpeg)
+![img](/images/android/easeim11.jpeg)
 
 不可用表情模式（EaseInputMenuStyle.DISABLE_EMOJICON）：
 
-![img](@static/images/android/easeim12.jpeg)
+![img](/images/android/easeim12.jpeg)
 
 不可用语音和表情模式（EaseInputMenuStyle.DISABLE_VOICE_EMOJICON）：
 
-![img](@static/images/android/easeim13.jpeg)
+![img](/images/android/easeim13.jpeg)
 
 只有文本输入模式（EaseInputMenuStyle.ONLY_TEXT）：
 
-![img](@static/images/android/easeim14.jpeg)
+![img](/images/android/easeim14.jpeg)
 
 #### 增加自定义消息类型及其布局
 
@@ -769,7 +769,7 @@ contactList.setHeaderBackGround(ContextCompat.getDrawable(mContext, R.color.whit
 
 效果如图：
 
-![img](@static/images/android/easeim15.jpeg)
+![img](/images/android/easeim15.jpeg)
 
 设置简洁模式
 
@@ -780,7 +780,7 @@ contactLayout.showSimple();
 
 效果如图：
 
-![img](@static/images/android/easeim16.jpeg)
+![img](/images/android/easeim16.jpeg)
 
 #### 增加长按菜单项
 
@@ -886,7 +886,7 @@ EaseIM.getInstance().setUserProvider(new EaseUserProfileProvider() {
 
 EaseIMKit 中会话列表，聊天列表及联系人列表，内部已经添加 EaseUserProfileProvider 的判断，当展示数据时优先从 EaseUserProfileProvider 获取头像和昵称数据，如果有则展示，如果没有头像采用默认头像，昵称展示为环信 ID。
 
-:::notice 建议方案
+:::tip 建议方案
 开发者先将相关用户信息从服务器中获取并存储到数据库中，在 getUser(String username) 方法调用时，从数据库中根据 username（环信 ID）取出相应的用户数据，生成 EaseUser 对象 user，并给 user 赋值 nickname 及 avatar 属性，最后返回这个 user 即可。
 :::
 

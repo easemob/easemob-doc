@@ -94,13 +94,13 @@ NSArray *members = @{@"member1",@"member2"};
                          error:nil];
 ```
 
-:::notice
+:::tip
 如果 `options.IsInviteNeedConfirm` 设置为 `false`，即直接加被邀请人进群。在此情况下，被邀请人设置非自动进群是不起作用的。
 :::
 
 ### 解散群组
 
-:::notice
+:::tip
 该操作只能群主才能进行。该操作是危险操作，解散群组后，将删除本地数据库及内存中的群相关信息及群会话。
 :::
 
@@ -114,7 +114,7 @@ NSArray *members = @{@"member1",@"member2"};
 
 ### 获取群组详情
 
-:::notice
+:::tip
 从 3.7.4 版本开始支持是否获取群组成员参数 `fetchMembers`。
 对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
 :::
@@ -217,7 +217,7 @@ do {
 
 ### 查询当前用户已加入的群组数量
 
-自 4.2.0 版本开始，你可以调用 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于你订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+自 4.2.0 版本开始，你可以调用 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于你订阅的即时通讯的套餐包，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
 
 ```objectivec
 [EMClient.sharedClient.groupManager getJoinedGroupsCountFromServerWithCompletion:^(NSInteger groupCount, EMError * _Nullable aError) {
@@ -356,23 +356,39 @@ do {
 
   }
 
-// 群主变更。原群主和新群主会收到该回调。
+// 群主变更。新群主会收到该回调。
 - (void)groupOwnerDidUpdate:(EMGroup *)aGroup newOwner:(NSString *)aNewOwner oldOwner:(NSString *)aOldOwner
   {
 
   }
 
 // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
+// 已废弃。请使用 userDidJoinGroup:users: 替代。
 - (void)userDidJoinGroup:(EMGroup *)aGroup user:(NSString *)aUsername
   {
 
   }
 
-// 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
+// 有新成员（单个或多个）加入群组。除新成员外，其他群成员会收到该回调。
+- (void)userDidJoinGroup:(EMGroup *_Nonnull)group
+                   users:(NSArray<NSString*> *_Nonnull)userIds
+{
+    
+} 
+
+// 有成员退群。除退群成员外，其他群成员会收到该回调。
+// 已废弃。请使用 userDidLeaveGroup::users: 替代。
 - (void)userDidLeaveGroup:(EMGroup *)aGroup user:(NSString *)aUsername
   {
 
   }
+
+// 有成员（单个或多个）退群。除退群成员外，其他群成员会收到该回调。
+- (void)userDidLeaveGroup:(EMGroup *_Nonnull)group
+                    users:(NSArray<NSString *>* _Nonnull)userIds
+{
+    
+}  
 
 // 有成员被移出群组。被移出的成员收到该事件。
 - (void)didLeaveGroup:(EMGroup *_Nonnull)aGroup reason:(EMGroupLeaveReason)aReason

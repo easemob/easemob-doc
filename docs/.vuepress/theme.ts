@@ -1,6 +1,6 @@
-import { hopeTheme, ThemeOptions } from "vuepress-theme-hope";
-import { zhNavbar } from "./navbar/index.js";
-import { zhSidebar } from "./sidebar/index.js";
+import { hopeTheme, ThemeOptions } from 'vuepress-theme-hope'
+import { zhNavbar } from './navbar/index.js'
+import { zhSidebar } from './sidebar/index.js'
 
 interface CustomConfig {
   extra_nav?: any[];
@@ -19,6 +19,11 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   contributors: false,
   // navbar
   navbar: zhNavbar,
+  navbarLayout: {
+    start: ['Brand'],
+    center: ['Links'],
+    end: ['Language', 'Repo', 'Outlook']
+  },
   // sidebar
   sidebar: zhSidebar,
   footer: "环信 IM 文档 Version: 1.0.0 ©️环信",
@@ -39,12 +44,13 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   ],
   // page meta
   metaLocales: {
-    editLink: "在 GitHub 上编辑此页",
+    editLink: '在 GitHub 上编辑此页'
   },
   plugins: {
     mdEnhance: {
       container: true,
       imgSize: true,
-    },
-  },
-});
+      tabs: true
+    }
+  }
+})

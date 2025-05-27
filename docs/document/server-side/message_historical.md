@@ -5,8 +5,8 @@
 你可以从服务端获取用户发送的历史消息的记录。
 
 - 单次请求获取从指定起始时间开始一小时内的发送的历史消息记录。
-- 查询历史消息记录时存在一定延时，无法实时获取。
-- 过期的历史消息记录无法获取。对于不同的套餐版本，历史消息记录的默认存储时间不同，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
+- 你最多可以获取最近 3 天的历史消息记录。若要提升该限制，你需要联系环信商务。
+- 当平台消息分发量较大时，服务器生成历史消息记录需要一定时间，建议 24 小时后拉取这些记录。若对时效性有较高要求，推荐使用[发送后回调服务](callback_postsending.html)。
 
 ## 前提条件
 
@@ -46,30 +46,30 @@
 
 为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本篇涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
-### HTTP 请求
+## HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
+GET https://{host}/{org_name}/{app_name}/chatmessages/{time}
 ```
 
-#### 路径参数
+### 路径参数
 
 | 参数   | 类型   | 是否必需 | 描述         |
 | :----- | :----- | :------- | :------------- |
-| `time` | String | 是       | 历史消息记录查询的起始时间。UTC 时间，使用 ISO8601 标准，格式为 yyyyMMddHH。例如 `time` 为 `2018112717`，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。若海外集群为 UTC 时区，需要根据自己所在的时区进行时间转换。 |
+| `time` | String | 是       | 历史消息记录查询的起始时间。<br/> - 国内集群：采用北京时间，格式为 yyyyMMddHH。例如 `time` 为 `2018112717`，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。<br/> - 海外集群：采用 UTC 时间，格式为 yyyyMMddHH，你需要根据自己所在的时区进行时间转换。 |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :------------------ |
 | `Accept`        | String | 是       | 内容类型，请填 `application/json`。       |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+## HTTP 响应
 
-#### 响应 body
+### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -82,9 +82,9 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 示例
+## 示例
 
-#### 请求示例
+### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -92,7 +92,7 @@ GET https://{host}/{org_name}/{app_name}/chatmessages/${time}
 curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatmessages/2018112717'
 ```
 
-#### 响应示例
+### 响应示例
 
 ```json
 {
@@ -111,7 +111,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 历史消息记录的内容
+## 历史消息记录的内容
 
 查询历史消息记录成功后，你可以访问 URL 下载历史消息记录文件，查看历史消息记录的具体内容。
 
@@ -122,10 +122,12 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | `msg_id`    | String | 消息 ID。       |
 | `timestamp` | Long   | 消息发送完成的 UNIX 时间戳，单位为毫秒，UTC 时间。         |
 | `direction` | String | 消息方向，值为 `outgoing`，即当前用户发送的消息。 |
-| `from`      | String | 消息发送方的用户 ID。       |
-| `to`        | String | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。  |
+| `to` | String | 内部字段，开发者可忽略。 |
+| `from` | String | 内部字段，开发者可忽略。 |
 | `chat_type` | String | 会话类型：<br/> - `chat`: 单聊；<br/> - `groupchat`: 群聊；<br/> - `chatroom`: 聊天室。 |
 | `payload`   | JSON   | 消息的具体内容。例如，消息扩展信息等。   |
+| `payload.from`      | String | 消息发送方的用户 ID。       |
+| `payload.to`        | String | 消息接收方：<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。  |
 
 历史消息记录为 JSON 类型，示例如下：
 
@@ -146,13 +148,13 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
       "ext":
       {
         "key1": "value1",              ...        },
-        "from":"XXXX",
-        "to":"XXXX"
+      "from":"XXXX",
+      "to":"XXXX"
   }
 }
 ```
 
-#### 文本消息
+### 文本消息
 
 文本消息的 bodies 包含如下字段：
 
@@ -167,7 +169,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 "bodies": [{"msg":"welcome to easemob!", "type":"txt"}]
 ```
 
-#### 图片消息
+### 图片消息
 
 图片消息的 bodies 包含如下字段：
 
@@ -200,7 +202,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-#### 位置消息
+### 位置消息
 
 位置消息的 bodies 包含如下字段：
 
@@ -223,7 +225,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
     }]
 ```
 
-#### 语音消息
+### 语音消息
 
 语音消息的 bodies 包含如下字段：
 
@@ -252,7 +254,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
    ]
 ```
 
-#### 视频消息
+### 视频消息
 
 视频消息的 bodies 包含如下字段：
 
@@ -285,7 +287,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   "url": "https://XXXX/XXXX/chatdemoui/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"   }]
 ```
 
-#### 文件消息
+### 文件消息
 
 文件消息的 bodies 包含如下字段：
 
@@ -312,7 +314,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ]
 ```
 
-#### 透传消息
+### 透传消息
 
 透传消息的 bodies 包含如下字段：
 
@@ -333,30 +335,87 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ]
 ```
 
-#### 自定义消息
+### 自定义消息
 
 自定义消息的 bodies 包含如下字段：
 
 | 参数          | 类型   | 描述                                             |
 | :------------ | :----- | :----------------------------------------------- |
-| `customExts`  | JSON   | 自定义扩展属性。你可以自行设置扩展属性中的字段。 |
+| `customExts`/`v2:customExts`  | Array/JSON     | 用户自定义的事件属性。该参数为可选，不需要可以不传。<br/> - `customExts` 为旧版参数，数组类型，最多可包含 16 个元素。<br/> - `v2:customExts` 为新版参数，Map<String,String> 类型，最多可以包含 16 个元素。推荐使用该新版参数。 |
 | `customEvent` | String | 自定义事件类型。                                 |
 | `type`        | String | 消息类型。自定义消息为 `custom`。                |
 
 自定义类型消息格式示例如下：
 
 ```json
-"bodies":
+
+"bodies": 
 [
-  {
-  "customExts":
     {
-    "name":"flower",
-    "size":"16",
-    "price":"100"
-    },
-  "customEvent":"gift_1",
-  "type":"custom"
- }
+        "v2:customExts": {
+            "name": "flower",
+            "size": "16",
+            "price": "100"
+        },
+        "customExts": [
+            {
+                "name": "flower"
+            },
+            {
+                "size": "16"
+            },
+            {
+                "price": "100"
+            }
+        ],
+        "customEvent": "gift_1",
+        "type": "custom"
+    }
 ]
 ```
+
+### 合并消息
+
+合并消息的 bodies 包含如下字段：
+
+| 参数          | 类型   | 描述                                             |
+| :------------ | :----- | :----------------------------------------------- |
+| `combineLevel`  | Int   | 合并消息的嵌套层级数。 |
+| `file_length` | Int | 合并消息附件的大小，单位为字节。               |
+| `filename`        | String | 合并消息的附件名称。     |
+| `secret`        | String | 合并消息附件的访问密钥。如果[文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。  |
+| `subType`        | String | 表示消息类型为合并消息。                |
+| `summary`        | String | 合并消息的概要。                |
+| `title`        | String | 合并消息的标题。                |
+| `url`        | String | 合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。                |
+
+例如，下面示例为源消息包括文本、图片和文件消息的合并消息格式：
+
+```json
+"bodies": 
+[
+   {
+      "combineLevel": 1,
+      "file_length": 550,
+      "filename": "17289718748990036",
+      "secret": "a_OTmoq6Ee-CygH0PRzcUyFniZDmSsX1ur0j-9RtCj3tK6Gr",
+      "subType": "sub_combine",
+      "summary": ":yyuu\n:[图片]\n:[文件]\n",
+      "title": "聊天记录",
+      "url": "https://XXXX/XXXX/XXXX/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
+    }
+]
+```
+
+
+
+## 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型   | 错误提示      | 可能原因    | 处理建议   |
+|:---------|:-------------------|:--------------------|:---------|:--------------|
+| 400      | illegal_argument | illegal arguments: appkey: XXXX#XXXX, time: xxxxxx | 请求参数 `time` 格式不正确。  | 输入正确的请求参数 `time`:UTC 时间，使用 ISO8601 标准，格式为 yyyyMMddHH。例如 time 为 2018112717，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。若海外集群为 UTC 时区，需要根据自己所在的时区进行时间转换。 |
+| 400      | illegal_argument | illegal arguments: appkey: XXXX#XXXX, time: xxxxxx, maybe chat message history is expired or unstored" | `time` 对应时间段内的历史文件已过期或者暂未存储。消息的保留时间取决于产品套餐，详见[消息存储时长限制](limitation.html#消息存储时长限制)。 | 输入正确的请求参数 `time`。 |
+| 404      | storage_object_not_found | Failed to find chat message history download url for appkey: XXXX#XXXX, time: xxxxxx" | 对应 `time` 对应时间段内不存在历史文件。      | 如果确定设置的时间内有历史消息，请联系[环信技术支持](mailto:support@easemob.com)。 |
+

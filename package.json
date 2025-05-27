@@ -8,7 +8,8 @@
     "docs:build": "vuepress build docs",
     "docs:clean-dev": "vuepress dev docs --clean-cache",
     "docs:dev": "vuepress dev docs",
-    "docs:update-package": "pnpm dlx vp-update"
+    "docs:update-package": "pnpm dlx vp-update",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-beta.61",
@@ -16,6 +17,8 @@
     "@vuepress/plugin-docsearch": "2.0.0-beta.61",
     "markdown-it": "^13.0.1",
     "markdown-it-container": "^3.0.0",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
     "unplugin-auto-import": "^0.15.1",
     "unplugin-vue-components": "^0.24.1",
     "vue": "^3.2.47",
@@ -24,6 +27,10 @@
     "vuepress-theme-hope": "2.0.0-beta.189"
   },
   "dependencies": {
-    "element-plus": "^2.7.3"
+    "algoliasearch": "^5.2.5",
+    "artalk": "^2.8.7",
+    "element-plus": "^2.7.3",
+    "instantsearch.css": "^8.5.0",
+    "vue-instantsearch": "^4.19.3"
   }
 }

@@ -109,7 +109,7 @@ try {
 
 你可调用 `EMGroupManager#fetchMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
 
-:::notice
+:::tip
 每次最多可获取 10 个群成员的自定义属性。
 :::
 
@@ -134,7 +134,7 @@ try {
 
 #### 变更群主
 
-仅群主可以调用 `EMGroupManager#changeOwner` 方法将权限移交给群组中指定成员。成功移交后，原群主变为普通成员，其他群成员收到 `EMGroupEventHandler#onOwnerChangedFromGroup` 事件。
+仅群主可以调用 `EMGroupManager#changeOwner` 方法将权限移交给群组中指定成员。成功移交后，原群主变为普通成员，新群主收到 `EMGroupEventHandler#onOwnerChangedFromGroup` 事件。
 
 示例代码如下：
 
@@ -272,7 +272,9 @@ try {
 
 #### 开启全员禁言
 
-仅群主和群管理员可以调用 `EMGroupManager#muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `EMGroupManager#unMuteAllMembers` 方法解除禁言。
+仅群主和群管理员可以调用 `EMGroupManager#muteAllMembers` 方法开启全员禁言。群组中的所有成员都会收到 `EMGroupEventHandler#onAllGroupMemberMuteStateChanged` 事件。
+
+全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `EMGroupManager#unMuteAllMembers` 方法解除禁言。
 
 群组全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。
 

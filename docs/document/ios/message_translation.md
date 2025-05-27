@@ -8,7 +8,7 @@
 
 - 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
 
-:::notice
+:::tip
 翻译服务由 Microsoft Azure Translator API 提供支持。可以在 [Microsoft Azure Translator Language Support](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/language-support) 页面查看目前支持的语言。
 :::
 
@@ -23,7 +23,7 @@
 
 如下为按需翻译示例：
 
-![img](@static/images/ios/translation.png)
+![img](/images/ios/translation.png)
 
 ## 技术原理
 
@@ -101,4 +101,4 @@ EMMessage*message = [[EMMessage alloc] initWithConversationID:@"to" from:@"from"
 
 ### 设置和获取推送的目标语言
 
-设置推送的目标语言，设置后收到的离线推送为目标语言。如果目标语言在消息里不存在，只推送原文，详见[设置推送翻译](push.html#设置推送翻译)。
+设置推送的目标语言，设置后收到的离线推送为目标语言。如果目标语言在消息里不存在，只推送原文，详见[设置推送翻译](/document/ios/push/push_translation.html)。

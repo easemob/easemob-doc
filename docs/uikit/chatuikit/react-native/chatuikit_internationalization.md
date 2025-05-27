@@ -12,7 +12,7 @@ export function App() {
   const [language] = React.useState<LanguageCode>("zh-Hans");
 
   return (
-    <Container options={{ appKey: "appKey" }} language={language}>
+    <Container options={{ appKey: "appKey" }} translateLanguage={'zh-Hans'}>
       {/* 添加子组件。 */}
     </Container>
   );

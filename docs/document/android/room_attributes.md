@@ -8,12 +8,12 @@
 
 ## 技术原理
 
-环信即时通讯 IM SDK 提供 `EMChatRoomManager` 类和 `EMChatRoom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM SDK 提供 [EMChatRoomManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_room_manager.html) 类和 [EMChatRoom](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_room.html) 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
-- 设置和强制设置聊天室自定义属性；
-- 删除和强制删除聊天室自定义属性。
+- 设置和更新/强制设置和更新聊天室自定义属性；
+- 删除/强制删除聊天室自定义属性。
 
 ## 前提条件
 
@@ -139,9 +139,9 @@ EMClient.getInstance().chatroomManager().asyncFetchChatRoomAllAttributesFromServ
 });
 ```
 
-#### 设置单个聊天室属性
+#### 设置/更新单个聊天室属性
 
-聊天室成员可以调用 `asyncSetChatroomAttribute` 方法设置单个聊天室自定义属性。该方法只可添加新自定义属性字段和更新自己设置的现有属性。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
+聊天室成员可以调用 `asyncSetChatroomAttribute` 方法设置或更新单个聊天室自定义属性。该方法只可添加新自定义属性字段和更新自己设置的现有属性。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
 
 示例代码如下：
 
@@ -161,7 +161,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(
     attributeKey,
     attributeValue,
     autoDelete, 
-    new EMResultCallBack<Map<String, String>>() {
+    new EMCallBack() {
         @Override
         public void onSuccess() {
 
@@ -174,9 +174,9 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(
 });
 ```
 
-#### 强制设置单个聊天室属性
+#### 强制设置/更新单个聊天室属性
 
-如果除了设置自己的单个自定义属性还需覆盖其他聊天室成员设置的该属性，需调用 `asyncSetChatroomAttributeForced` 方法。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
+如果除了设置或更新自己的单个自定义属性还需覆盖其他聊天室成员设置的该属性，需调用 `asyncSetChatroomAttributeForced` 方法。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
 
 示例代码如下：
 
@@ -196,7 +196,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributeForced(
     attributeKey,
     attributeValue,
     autoDelete, 
-    new EMResultCallBack<Map<String, String>>() {
+    new EMCallBack() {
         @Override
         public void onSuccess() {
 
@@ -209,9 +209,9 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributeForced(
 });
 ```
 
-#### 设置多个聊天室自定义属性
+#### 设置/更新多个聊天室自定义属性
 
-聊天室成员可以调用 `asyncSetChatroomAttributes` 方法设置多个聊天室自定义属性。该方法只能添加新属性字段以及更新当前用户已添加的属性字段。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
+聊天室成员可以调用 `asyncSetChatroomAttributes` 方法设置或更新多个聊天室自定义属性。该方法只能添加新属性字段以及更新当前用户已添加的属性字段。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
 
 示例代码如下：
 
@@ -241,7 +241,7 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributes(
 });
 ```
 
-#### 强制设置多个聊天室属性
+#### 强制设置/更新多个聊天室属性
 
 如果除了设置自己的多个自定义属性还需覆盖其他聊天室成员设置的这些属性，需调用 `asyncSetChatroomAttributesForced` 方法。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
 

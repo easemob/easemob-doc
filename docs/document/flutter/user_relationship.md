@@ -6,19 +6,19 @@
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
-- 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请、删除好友和设置好友备注等操作。
+- 好友列表管理：查询好友列表、请求添加好友、接受好友请求、拒绝好友请求、删除好友和设置好友备注等操作。
 - 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。
-
-本文介绍如何通过环信即时通讯 IM Flutter SDK 管理用户关系。
+  
+此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
 
 ## 技术原理
 
 环信即时通讯 IM Flutter SDK 提供 `EMContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
 
-- `addContact` 申请添加好友；
+- `addContact` 请求添加好友；
 - `deleteContact` 删除好友；
-- `acceptInvitation` 同意好友申请；
-- `declineInvitation` 拒绝好友申请；
+- `acceptInvitation` 接受好友请求；
+- `declineInvitation` 拒绝好友请求；
 - `setContactRemark` 设置好友备注；
 - `fetchAllContacts`/`fetchContacts`：一次性/分页从服务器获取好友列表（每个好友对象包含好友的用户 ID 和好友备注）；
 - `fetchAllContactIds` 一次性从服务器获取好友列表(列表只包含好友的用户 ID)；
@@ -40,44 +40,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ### 添加好友
 
-1. 用户添加指定用户为好友
-
-```dart
-// 要添加为联系人的用户 ID
-String userId = "foo";
-// 申请加为好友的理由
-String reason = "Request to add a friend.";
-try{
-  await EMClient.getInstance.contactManager.addContact(userId, reason);
-} on EMError catch (e) {
-}
-```
-
-2. 对方收到申请，同意成为好友，或者拒绝成为好友
-
-同意成为好友示例代码如下：
-
-```dart
-// 用户 ID
-String userId = "bar";
-try{
-  await EMClient.getInstance.contactManager.acceptInvitation(userId);
-} on EMError catch (e) {
-}
-```
-
-拒绝成为好友示例代码如下：
-
-```dart
-// 用户 ID
-String userId = "bar";
-try{
-  await EMClient.getInstance.contactManager.declineInvitation(userId);
-} on EMError catch (e) {
-}
-```
-
-3. 接收方对于同意，申请方收到监听事件 `onContactInvited`。
+1. 添加监听。
 
 ```dart
 // 注册监听
@@ -92,19 +55,41 @@ try{
 EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
-4. 对方拒绝，收到监听事件 `onFriendRequestDeclined`。
+2. 请求添加好友。
 
 ```dart
-// 注册监听
-    EMClient.getInstance.contactManager.addEventHandler(
-      "UNIQUE_HANDLER_ID",
-      EMContactEventHandler(
-        onFriendRequestDeclined: (userId) {},
-      ),
-    );
+// 要添加为联系人的用户 ID
+String userId = "foo";
+// 请求加为好友的理由
+String reason = "Request to add a friend.";
+try{
+  await EMClient.getInstance.contactManager.addContact(userId, reason);
+} on EMError catch (e) {
+}
+```
 
-// 移除监听
-    EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
+3. 对端用户通过 `onContactInvited` 收到好友请求，确认是否成为好友。
+
+- 若接受好友请求，调用 `acceptInvitation` 方法。请求方收到 `onFriendRequestAccepted` 事件，双方都收到 `onContactAdded` 事件。
+
+```dart
+// 用户 ID
+String userId = "bar";
+try{
+  await EMClient.getInstance.contactManager.acceptInvitation(userId);
+} on EMError catch (e) {
+}
+```
+
+- 若拒绝好友请求，需调用 `declineInvitation` 方法。请求方收到 `onFriendRequestDeclined` 事件。
+
+```dart
+// 用户 ID
+String userId = "bar";
+try{
+  await EMClient.getInstance.contactManager.declineInvitation(userId);
+} on EMError catch (e) {
+}
 ```
 
 ### 删除好友
@@ -126,6 +111,8 @@ try {
 } on EMError catch (e) {
 }
 ```
+
+调用该方法后，对端用户收到 `onContactDeleted` 事件。
 
 ### 设置好友备注
 

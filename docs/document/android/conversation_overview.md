@@ -2,13 +2,13 @@
 
 <Toc />
 
-会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息、查看或清空历史消息等操作。
+**会话**：用户收发消息时，会创建对应的会话。会话分为 3 种：单聊、群聊、聊天室会话。单聊是指两个用户建立的会话，双方可以在会话中收发消息。群聊会话由群成员发送消息组成，群成员可以在群会话中收发消息。聊天室会话与群聊会话类似，区别是其中的成员无固定关系。除了收发消息，用户还可查看会话中的消息、清空历史消息等操作。
 
-环信即时通讯 IM SDK 提供 `EMChatManager` 和 `EMConversation` 类以会话为单位对消息数据进行管理，如获取会话列表、置顶会话、添加会话标记、删除会话和管理未读消息等。
+环信即时通讯 IM SDK 提供 [EMChatManager 类](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类以会话为单位对消息数据进行管理，如获取会话列表、置顶会话、添加会话标记、删除会话和管理未读消息等。
 
 ## 会话类
 
-环信即时通讯 IM 提供会话类 `EMConversation`。该类定义了以下内容：
+环信即时通讯 IM 提供会话类 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html)。该类定义了以下内容：
 
 | 类/方法  | 描述         |
 | :--------- | :------- | 
@@ -32,8 +32,8 @@
 | getMessage      | 根据消息 ID 获取已读的消息。       | 
 | getAllMessages      | 获取该会话当前内存中的所有消息。       | 
 | removeMessage      | 删除本地数据库中的一条指定消息。       |      
-| getLastMessage      | 获取会话中的最新一条消息。       | 
-| getLatestMessageFromOthers | 获取会话中收到的最新一条消息。       |      
+| getLastMessage      | 获取会话中的最新一条消息。该消息可能是当前用户发送的，也可能是对端用户发送。  | 
+| getLatestMessageFromOthers | 获取会话中收到的最新一条消息，即当前用户收到的对端用户发送的最新消息。 |      
 | clear      | 清除会话中的所有消息。只清除内存的，不清除本地数据库的消息。       | 
 | clearAllMessages      | 清除内存和数据库中指定会话中的消息。       |      
 | setExtField      | 设置会话的扩展字段。       | 

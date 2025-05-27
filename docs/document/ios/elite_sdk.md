@@ -38,7 +38,7 @@
       <td>✅</td>
     </tr>
     <tr>
-      <td>发送和接收附件类型的消息</td>
+      <td>发送和接收附件消息</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -68,7 +68,7 @@
       <td>✅</td>
     </tr>
     <tr>
-      <td>使用消息的扩展字段</td>
+      <td>使用消息扩展字段</td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -136,8 +136,8 @@
     <tr>
       <td rowspan="6">会话管理</td>
       <td rowspan="2">会话列表</td>
-      <td>获取本地所有会话 </td>
-      <td><a href="https://doc.easemob.com/document/ios/conversation_list.html#获取本地所有会话">获取本地所有会话</a></td>
+      <td>获取本地会话 </td>
+      <td><a href="https://doc.easemob.com/document/ios/conversation_list.html#获取本地会话">获取本地会话</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -164,8 +164,8 @@
     </tr>
     <tr>
       <td rowspan="2">删除会话</td>
-      <td>单向删除服务端会话及其历史消息</td>
-      <td><a href="https://doc.easemob.com/document/ios/conversation_delete.html#单向删除服务端会话及其历史消息">单向删除服务端会话及其历史消息</a></td>
+      <td>单向删除服务端会话及本地会话</td>
+      <td><a href="https://doc.easemob.com/document/ios/conversation_delete.html#单向删除服务端会话及本地会话">单向删除服务端会话和本地会话及其历史消息</a></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -315,7 +315,7 @@
       <td rowspan="7">进阶功能</td>
       <td>离线推送</td>
       <td>集成第三方消息推送服务</td>
-      <td><a href="https://doc.easemob.com/document/ios/push.html">离线推送</a></td>
+      <td><a href="https://doc.easemob.com/document/ios/push/push_overview.html">离线推送</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>

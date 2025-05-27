@@ -4,14 +4,14 @@
 
 环信即时通讯 IM 提供消息表情回复（下文统称 “Reaction”）功能。用户可以在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量来确认投票。
 
-:::notice
+:::tip
 
 目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
 :::
 
 ## 技术原理
 
-环信即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM SDK 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 支持你通过调用 API 在项目中实现如下功能：
 
 - `asyncAddReaction` 在消息上添加 Reaction；
 - `asyncRemoveReaction` 删除消息的 Reaction；
@@ -21,7 +21,7 @@
 
 Reaction 场景示例如下：
 
-![img](@static/images/android/reactions.png)
+![img](/images/android/reactions.png)
 
 分别展示如何添加 Reaction，群聊中 Reaction 的效果，以及查看 Reaction 列表。
 
@@ -29,9 +29,9 @@ Reaction 场景示例如下：
 
 开始前，请确保满足以下条件：
 
-1. 完成 `3.9.2.1 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+1. 完成 3.9.2.1 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已联系商务开通 Reaction 功能。
+3. 已在[环信控制台](https://console.easemob.com/user/login)开通 Reaction 功能。
 
 ## 实现方法
 

@@ -73,8 +73,9 @@ POST https://{host}/{org_name}/{app_name}/messages/users/import
 | `target`        | String | 是       | 消息接收方的用户 ID。          |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`          | JSON   | 是       | 消息内容。      |
-| `is_ack_read`   | Bool   | 否       | 是否设置消息为已读。<br/> - `true`：是；<br/> - `false`：否。  |
-| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。   |
+| `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。例如，请求中的 "key1": "value1"。  |
+| `is_ack_read`   | Bool   | 否       | 是否设置会话已读。<br/> - `true`：是；<br/> - `false`：否。<br/>调用该接口导入消息后会生成对应的会话，若该字段为 `true`，则会话为已读状态，为 `false` 表示会话为未读状态。 |
+| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。<br/> - 若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。<br/> - 该参数不能传 `0`，也不能小于 1000 毫秒。  |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是。这种情况下，需确保附件地址可直接访问，没有访问权限的限制。<br/> - （默认）`false`：否。  |
 
 与发送单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [发送单聊消息](message_single.html)。
@@ -107,6 +108,9 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
     "body": {
         "msg": "import message."
     },
+    "ext": {
+      "key1": "value1"
+    },
     "from": "username1",
     "is_ack_read": true,
     "msg_timestamp": 1656906628428
@@ -126,8 +130,11 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
         "size": {
             "width": 1080,
             "height": 1920
-        }
+        }   
     },
+    "ext": {
+        "key1": "value1"
+    }, 
     "from": "username1",
     "is_ack_read": true,
     "msg_timestamp": 1656906628428,
@@ -153,6 +160,18 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
   "applicationName": "XXXX"
 }
 ```
+
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型    | 错误提示       | 可能原因    | 处理建议       |
+|:---------|:-------------------|:--------------|:--------------|:----------------------|
+| 400      | invalid_request_body     | Request body is invalid. Please check body is correct.    | 请求体格式不正确。  | 检查请求体内容是否合法(字段类型是否正确)。 |
+| 400      | illegal_argument   | message body not allow empty  | 请求参数 `body` 是空。  | 输入正确的请求参数 `body`。         |
+| 400      | illegal_argument    | type not allow empty  | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。         |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 导入群聊消息
 
@@ -182,11 +201,12 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 | `target`        | String | 是       | 群组 ID。                |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`          | JSON   | 是       | 消息内容。                  |
-| `is_ack_read`   | Bool   | 否       | 是否设置消息为已读。<br/> - `true`：是；<br/> - `false`：否。    |
-| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。 |
+| `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。例如，请求中的 "key1": "value1"。  |
+| `is_ack_read`   | Bool   | 否       | 是否设置会话已读。<br/> - `true`：是；<br/> - `false`：否。<br/>调用该接口导入消息后会生成对应的会话，若该字段为 `true`，则会话为已读状态，为 `false` 表示会话为未读状态。 |
+| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。<br/> - 若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。<br/> - 该参数不能传 `0`，也不能小于 1000 毫秒。 |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是。这种情况下，需确保附件地址可直接访问，没有访问权限的限制。<br/> - （默认）`false`：否。     |
 
-:::notice
+:::tip
 与发送消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [发送群聊消息](message_group.html)。
 :::
 
@@ -218,6 +238,9 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/
     "body": {
         "msg": "import message."
     },
+    "ext": {
+        "key1": "value1"
+    }, 
     "from": "username1",
     "is_ack_read": true,
     "msg_timestamp": 1656906628428
@@ -239,6 +262,9 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/
             "height": 1920
         }
     },
+    "ext": {
+        "key1": "value1"
+    }, 
     "from": "username1",
     "is_ack_read": true,
     "msg_timestamp": 1656906628428,
@@ -265,3 +291,15 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/
   "applicationName": "XXXX"
 }
 ```
+
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型       | 错误提示   | 可能原因    | 处理建议                  |
+|:---------|:-------------------|:----------------|:--------------|:----------------------|
+| 400      | invalid_request_body | Request body is invalid. Please check body is correct.   | 请求体格式不正确。  | 检查请求体内容是否合法(字段类型是否正确)。 |
+| 400      | illegal_argument   | message body not allow empty    | 请求参数 `body` 是空。    | 输入正确的请求参数 `body`。  |
+| 400      | illegal_argument  | type not allow empty   | 请求参数 `type` 是空字符串。 | 输入正确的请求参数 `type`。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

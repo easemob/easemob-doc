@@ -15,7 +15,7 @@
 
 Reaction 场景示例如下：
 
-![img](@static/images/ios/reactions.png)
+![img](/images/ios/reactions.png)
 
 分别展示如何添加 Reaction，群聊中 Reaction 的效果，以及查看 Reaction 列表。
 
@@ -23,9 +23,9 @@ Reaction 场景示例如下：
 
 开始前，请确保满足以下条件：
 
-1. 完成 `1.0.5 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+1. 完成 `1.0.5 或以上版本` SDK 初始化，详见 [初始化](initialization.html)文档。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已联系商务开通 Reaction 功能。
+3. 已在[环信控制台](https://console.easemob.com/user/login)开通 Reaction 功能。
 
 ## 实现方法
 

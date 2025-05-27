@@ -1,6 +1,6 @@
 ---
 {
-    pageUri: "/document/android/message_overview.html",
+    pageUri: "/product/product_message_overview.html",
     title: "消息概述"
 }
 ---

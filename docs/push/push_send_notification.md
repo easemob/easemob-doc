@@ -83,6 +83,8 @@ POST https://{host}/{org_name}/{app_name}/push/sync/{target}
 | :---------------- | :----- | :----------------------------------------------------------- |
 | `data`            | Object | 推送结果。服务器根据推送结果判断推送状态。                   |
 | `data.pushStatus` | String | 推送状态：<br/> - `SUCCESS`：推送成功；<br/> - `FAIL`：推送失败，即非服务端导致的错误，例如 `bad device token`，表示移动端传给服务端的 device token 错误，对应推送厂商不接受。<br/> - `ERROR`：推送异常，即服务端导致错误，例如连接超时或读写超时。 |
+| `data.data`       | Object | 绑定推送信息对应平台返回的推送结果数据。                   |
+| `data.desc`       | String | 推送失败描述信息。                   |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -102,7 +104,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
     "pushMessage": {
         "title": "环信推送",
         "content": "你好，欢迎使用环信推送服务",
-        "sub_title": "环信",
+        "sub_title": "环信"
       }
 }'
 ```
@@ -134,7 +136,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
 }
 ```
 
-2. 因未绑定推送信息导致推送失败的响应示例：
+2. 走厂商通道时，因未绑定推送信息导致推送失败的响应示例如下：
 
 ```json
 {
@@ -149,7 +151,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
 }
 ```
 
-3. 因接收推送通知的用户 ID 不存在导致推送失败的响应示例：
+3. 走厂商通道时，因接收推送通知的用户 ID 不存在导致推送失败的响应示例如下：
 
 ```json
 {
@@ -161,6 +163,90 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
        }
    ],
     "duration": 0
+}
+```
+
+## 以异步方式向单个用户发送推送通知
+
+调用该接口以异步方式向单个用户发送推送通知。
+
+### HTTP 请求
+
+```http
+POST https://{host}/{org_name}/{app_name}/push/async/{target}
+```
+
+#### 路径参数
+
+| 字段      | 类型 | 描述           | 是否必需 |
+| :------------ | :--- | :------------------------ | :------- |
+| `target`     | String | 接收推送通知的用户 ID。      | 是       |
+
+其它参数及描述详见 [公共参数](#公共参数)。
+
+#### 请求 header
+
+| 参数     | 类型   | 描述       | 是否必需 |
+| :-------------- | :----- | :------------------ | :------- |
+| `Content-Type`  | String | 内容类型：`application/json`     | 是    |
+| `Authorization` | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是       |
+
+#### 请求 body
+
+| 字段      | 类型 | 描述           | 是否必需 |
+| :------------ | :--- | :------------------------ | :------- |
+| `strategy`    | Int  | 推送策略：<br/> -`0`：第三方厂商通道优先，失败时走环信通道。<br/> - `1`：只走环信通道：若用户在线，则直接推送；若用户离线，消息会保留一段时间（视购买的套餐包而定），等用户上线后向其推送消息。若用户在超过消息存储期限时仍为上线，则丢弃消息。<br/> -（默认）`2`：只走第三方厂商通道：若用户离线，消息保留时间视不同厂商而定。若推送失败，直接丢弃推送消息。<br/> - `3`：在线走环信通道，离线走第三方厂商通道。如果厂商推送失败，则等待用户上线后通过环信通道下发。<br/> - `4`：只走环信通道且只推在线用户。离线用户收不到推送通知。 | 否       |
+| `pushMessage` | JSON | 推送通知。关于通知内容，请查看 [配置推送通知](push_notification_config.html)。 | 是       |
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段         | 类型   | 描述                                     |
+| :----------- | :----- | :--------------------------------------- |
+| `data`       | Object | 异步推送的结果，即成功或失败。           |
+| `data.data`         | String | 推送通知的内容。               |
+| `data.pushStatus` | String | 推送状态：`ASYNC_SUCCESS` 表示推送成功。 |
+| `data.desc`       | String | 推送结果的相关描述。                     |
+
+其他参数及说明详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+```shell
+将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl -X POST 'http://XXXX/XXXX/XXXX/push/async/test1' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-H 'Content-Type: application/json' \
+-d '{
+    "strategy": 3,
+    "pushMessage": {
+        "title": "环信推送",
+        "content": "你好，欢迎使用环信推送服务",
+        "sub_title": "环信"
+     }
+}'
+```
+
+#### 响应示例
+
+```json
+{
+    "timestamp": 1723512536934,
+    "data": [
+       {
+            "pushStatus": "ASYNC_SUCCESS",
+            "data": "",
+            "desc": "success"
+       }
+   ],
+    "duration": 7
 }
 ```
 
@@ -252,7 +338,7 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/single' \
 
 ## 使用标签推送接口发送推送通知
 
-向单个标签内的所有用户推送通知。
+向单个标签内的所有用户推送通知或向多个标签下的交集用户推送通知。
 
 ### HTTP 请求
 
@@ -275,7 +361,8 @@ POST https://{host}/{org_name}/{app_name}/push/list/label
 
 | 字段          | 类型 | 描述                                                         | 是否必需 |
 | :------------ | :--- | :----------------------------------------------------------- | :------- |
-| `targets`     | List | 标签名称。只支持传入单个标签名称。                           | 是       |
+| `targets`     | List | 标签名称:<br/> - 若传入单个标签名称，则向该标签内的所有用户推送通知。<br/> - 若传入多个标签名称（最多可传 5 个），则向这些标签下的交集用户推送通知。   | 是       |
+| `startDate`     | String | 推送任务开始时间，格式: yyyy-MM-dd HH:mm:ss，例如 2024-01-01 12:00:00。<Container type="tip" title="提示">1. 定时时间只能是 1 小时之后，30 天之内。<br/>2. 定时时间时区判定为服务器所在时区。如果跨服务器时区调用请注意计算准确时间。</Container>   | 否       |
 | `strategy`    | Int  | 推送策略：<br/> -`0`：第三方厂商通道优先，失败时走环信通道。<br/> - `1`：只走环信通道：若用户在线，则直接推送；若用户离线，消息会保留一段时间（视购买的套餐包而定），等用户上线后向其推送消息。若用户在超过消息存储期限时仍为上线，则丢弃消息。<br/> -（默认）`2`：只走第三方厂商通道：若用户离线，消息保留时间视不同厂商而定。若推送失败，直接丢弃推送消息。<br/> - `3`：在线走环信通道，离线走第三方厂商通道。如果厂商推送失败，则等待用户上线后通过环信通道下发。<br/> - `4`：只走环信通道且只推在线用户。离线用户收不到推送通知。 | 否       |
 | `pushMessage` | JSON | 推送通知。关于通知的内容，请参考[配置推送通知](push_notification_config.html)。 | 是       |
 
@@ -353,6 +440,7 @@ POST https://{host}/{org_name}/{app_name}/push/task
 
 | 字段          | 是否必需 | 类型    | 备注           |
 | :------------ | :------- | :------ | :----------- |
+| `startDate`     | 否 | String  | 推送任务开始时间，格式: yyyy-MM-dd HH:mm:ss，例如 2024-01-01 12:00:00。<Container type="tip" title="提示">1. 设置的时间必须为当前时间的 1 小时之后，30 天之内。例如，如果当前时间为 2024-09-01 00:00:00，你设置的时间必须是 2024-09-01 01:00:00 及之后的时间，而且不能超过 2024-10-01 01:00:00。<br/>2. 设置的时间的时区默认为服务器所在时区。如果跨服务器时区调用，请注意计算准确时间。</Container>   |       
 | `strategy`    | 否  | integer | 推送策略：<br/> -`0`：第三方厂商通道优先，失败时走环信通道。<br/> - `1`：只走环信通道：若用户在线，则直接推送；若用户离线，消息会保留一段时间（视购买的套餐包而定），等用户上线后向其推送消息。若用户在超过消息存储期限时仍为上线，则丢弃消息。<br/> -（默认）`2`：只走第三方厂商通道：若用户离线，消息保留时间视不同厂商而定。若推送失败，直接丢弃推送消息。<br/> - `3`：在线走环信通道，离线走第三方厂商通道。如果厂商推送失败，则等待用户上线后通过环信通道下发。<br/> - `4`：只走环信通道且只推在线用户。离线用户收不到推送通知。|
 | `pushMessage` | 是     | JSON    | 推送通知。                                                   |
 
@@ -399,207 +487,17 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/task' \
 }
 ```
 
-## 通过接口组合发送全量推送通知
-
-通过接口组合发送全量推送，应按照如下流程：
-
-1. 创建推送通知；
-2. 创建全量推送任务或者创建列表推送任务。
-
-### 创建推送通知
-
-创建推送通知并记录返回结果中的推送通知 ID，创建推送任务需要携带推送通知 ID。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/{org_name}/{app_name}/push/message
-```
-
-##### 路径参数
-
-参数及说明详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 描述                                                         | 是否必需 |
-| :-------------- | :----- | :----------------------------------------------------------- | :------- |
-| `Content-Type`  | String | 内容类型：`application/json`                                 | 是       |
-| `Authorization` | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是       |
-
-##### 请求 body
-
-关于消息内容，请查看 [配置推送通知](push_notification_config.html)。
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数   | 类型 | 说明                                                         |
-| :----- | :--- | :----------------------------------------------------------- |
-| `data` | Long | 创建推送通知时后台生成的消息 ID，需要保存，创建推送任务是基于此 ID。 |
-
-其他参数及说明详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST 'http://localhost:8099/easemob-demo/testy/push/message'  \
--H 'Authorization: Bearer <YourAppToken>'  \
--H 'Content-Type: application/json' \
--d '{
-    "title": "Hello",
-    "subTitle": "Hello",
-    "content": "Hello",
-    "vivo": {}
-}'
-```
-
-#### 响应示例
-
-```json
-{
-    "timestamp": 1618817127903,
-    "data": 833724991672734897,
-    "duration": 0
-}
-```
-
-### 查询推送通知
-
-查询推送通知信息。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/{org_name}/{app_name}/push/message/{messageId}
-```
-
-##### 路径参数
-
-| 参数        | 类型   | 描述                              | 是否必需 |
-| :---------- | :----- | :-------------------------------- | :------- |
-| `messageId` | String | 推送通知 ID，创建推送通知时返回。 | 是       |
-
-其他参数及说明详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 描述                                                         | 是否必需 |
-| :-------------- | :----- | :----------------------------------------------------------- | :------- |
-| `Content-Type`  | String | 内容类型：`application/json`                                 | 是       |
-| `Authorization` | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是       |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数   | 类型   | 描述             |
-| :----- | :----- | :--------------- |
-| `data` | String | 推送通知的内容。 |
-
-其他参数及说明详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
-
-#### 示例
-
-#### 请求示例
-
-```shell
-将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X GET 'http://localhost:8099/easemob-demo/testy/push/message/832655326988867864'  \
--H 'Authorization: Bearer <YourAppToken>'
-```
-
-#### 响应示例
-
-```json
-{
-    "timestamp": 1618922805143,
-    "data": {
-        "appkey": "easemob-demo#testy",
-        "timestamp": 1618922805091,
-        "title": "Hello1234",
-        "subTitle": "Hello",
-        "content": "Hello",
-        "vivo": {}
-    },
-    "duration": 17
-}
-```
-
-### 创建全量推送任务
-
-创建推送通知，得到推送通知 ID，然后创建全量推送任务进行全量消息推送。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/{org_name}/{app_name}/push/task/broadcast
-```
-
-##### 路径参数
-
-参数及说明详见 [公共参数](#公共参数)。
-
-##### 请求 header
-
-| 参数            | 类型   | 描述                                                         | 是否必需 |
-| :-------------- | :----- | :----------------------------------------------------------- | :------- |
-| `Content-Type`  | String | 内容类型：`application/json`                                 | 是       |
-| `Authorization` | String | `Bearer ${YourAppToken}` Bearer 是固定字符，后面加英文空格，再加上获取到的 app token 的值。 | 是       |
-
-##### 请求 body
-
-| 字段        | 类型 | 描述                                                         | 是否必需 |
-| :---------- | :--- | :----------------------------------------------------------- | :------- |
-| `strategy`    | Int  | 推送策略：<br/> -`0`：第三方厂商通道优先，失败时走环信通道。<br/> - `1`：只走环信通道：若用户在线，则直接推送；若用户离线，消息会保留一段时间（视购买的套餐包而定），等用户上线后向其推送消息。若用户在超过消息存储期限时仍为上线，则丢弃消息。<br/> -（默认）`2`：只走第三方厂商通道：若用户离线，消息保留时间视不同厂商而定。若推送失败，直接丢弃推送消息。<br/> - `3`：在线走环信通道，离线走第三方厂商通道。如果厂商推送失败，则等待用户上线后通过环信通道下发。<br/> - `4`：只走环信通道且只推在线用户。离线用户收不到推送通知。 | 否       |
-| `pushMsgId` | Long | 推送通知 ID。                                                | 是       |
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段   | 类型   | 描述                                             |
-| :----- | :----- | :----------------------------------------------- |
-| `data` | String | 推送任务 ID（查询推送结果需要使用推送任务 ID）。 |
-
-其他参数及说明详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST 'http://localhost:8099/easemob-demo/testy/push/task/broadcast'  \
--H 'Content-Type: application/json' \
--H 'Authorization: Bearer <YourAppToken>' \
--d '{
-    "pushMsgId": 832253695868580464
-}'
-```
-
-##### 响应示例
-
-```json
-{
-    "timestamp": 1618817591755,
-    "data": 833726937301309957,
-    "duration": 1
-}
-```
+## 常见错误码
+
+调用发送推送通知相关的 REST API 时，若返回的 HTTP 状态码非 200，则请求失败，提示错误。本节列出这些接口的常见错误码。 
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 403 | ServiceNotOpenException | push service not open | 即时推送功能未开通 | 确认并开通即时推送功能。 |
+| 403 | LimitException | limit request | 因为数量或其他限制导致请求失败 | 根据返回信息的限制原因处理。 |
+| 400 | MessageException | bad_request | 推送消息配置错误 | 检查并修改，使用正确的推送消息体。 |
+| 400 | IllegalArgumentException | 任意 | 推送参数配置错误 | 检查并修改，使用正确的对应参数。 |
+| 404 | 请求路径不存在 | url is invalid | 请求路径错误 | 检查并修改，使用正确的请求路径。 |
+| 5xx | 服务器内部错误   | 任意      | 服务器在尝试处理请求时发生内部错误 | 联系环信技术支持。 |
+
+其他错误，你可以参考 [错误码](/document/server-side/error.html) 了解可能的原因。

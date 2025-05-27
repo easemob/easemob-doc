@@ -1,72 +1,96 @@
-# Demo（EaseIM App）介绍
+# 环信即时通讯 IM iOS Demo 
 
-<Toc />
+环信即时通讯 IM iOS Demo 提供用户登录、单聊、群组、聊天室、子区、消息(文字、表情、语音、视频、图片、文件等)发送及管理、会话管理、好友管理、用户属性、用户在线状态（Presence）以及实时音视频通话等功能。
+
+## 体验 Demo 
 
 环信即时通讯 IM iOS 端提供示例应用可供体验。
 
 1. [下载 Demo](https://www.easemob.com/download/demo)。
-
 2. 输入你的手机号，获取验证码，然后输入。
-
 3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
-![img](@static/images/demo/ios_login.png)
+![img](/images/demo/ios_login.png =350x650)
 
-## 代码下载
+下面为部分 UI 界面的展示：
 
-您可以通过以下两种方式获取到源代码：
+<ImageGallery :columns="2">
+  <ImageItem src="/images/uikit/chatuikit/ios/main_chat.png" title="单聊页面" />
+  <ImageItem src="/images/uikit/chatuikit/ios/main_chat_group.png" title="群聊页面" />
+  <ImageItem src="/images/uikit/chatuikit/ios/main_conversation_list.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/ios/main_contact_list.png" title="通讯录" />
+</ImageGallery>
 
-- 下载代码压缩包：[IM SDK 及 Demo 下载](https://www.easemob.com/download/im)
-- 下载源代码：[github 源码地址](https://github.com/easemob/chat-ios)
+## 快速跑通 Demo
 
-欢迎大家提交 PR 改进和修复 EaseIM 和 EaseIMKit 中的问题。
+### 开发环境要求
 
-## 运行 EaseIM 工程
+- XCode 16.0 及以上版本
+- Cocoapods 1.14.3及以上版本
+- 运行的iOS系统版本为14.0及以上
 
-从 [IM SDK 及 Demo 下载](https://www.easemob.com/download/im) 下载 iOS SDK 压缩包，然后解压。解压后在 `EaseIM` 文件夹下，即为 EaseIM 的工程目录。
+### 跑通步骤
 
-终端 cd 到 EaseIM 的 `podfile` 目录下，终端执行 `pod install` 命令，等待下载完所有的 pod 依赖库，即可打开 `EaseIM.xcworkspace`，运行 EaseIM demo 进行自定义再次开发。
+1. [创建应用](/product/enable_and_configure_IM.html)。 
+2. [获取应用的 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+3. [创建用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-ios)。
+5. 下载完毕，打开 `EaseChatDemo` 目录，运行 `pod install`。
+6. 打开 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件，修改文件中的占位符，`AppKey` 填入步骤 2 获取的 App Key，`ServerHost` 和 `CallKitAppId` 可以填入空字符串。
+7. 使用 XCode 打开 `EaseChatDemo.xcworkspace`，编译运行项目。
+8. 使用注册的用户 ID 和密码登录。
+
+### App Server
+
+为方便开发者快速体验即时通讯 IM 功能，跑通本工程 Demo 源码默认使用开发者注册的用户 ID 和密码直接登录，不需要依赖部署服务端 App Server。但是在此模式下，手机验证码、用户头像和 EaseCallKit 实时音视频等相关功能不可用，你可以通过部署 App Server 完整体验这些功能。
+
+App Server 为 Demo 提供以下功能：
+
+- 通过手机号获取验证码。
+- 通过手机号和验证码返回环信用户 ID 和环信用户 Token。
+- 上传头像并返回地址。
+- 根据用户的信息生成 [EaseCallKit](https://doc.easemob.com/document/ios/easecallkit.html) 登录所需的 Token。
+- 获取音视频通话时环信用户 ID 和 Agora UID 的映射关系。
+
+你通过以下步骤部署 App Server：
+
+1. 部署 App Server。详见 [服务端源码](https://github.com/easemob/easemob-im-app-server/tree/dev-demo)。  
+2. 在 Demo 工程目录下 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件中，填写 App Server 的域名或 IP 地址。
+3. 在 Demo 工程根目录下 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件中，填写声网AppId。
+
+**服务端中的 App Key 要跟客户端的 App Key 保持一致。**
 
 ## 使用到的 pod 库
 
-- 环信 SDK pod 'HyphenateChat', '3.8.0'
-- 环信 IM UI 库 pod 'EaseIMKit', '3.8.0.1'
-- 环信音视频 UI 库 pod 'EaseCallKit', '3.8.0.3'
-- 声网音视频 SDK pod 'AgoraRtcEngine_iOS', '3.3.1'
+- 环信IM SDK pod 'HyphenateChat'
+- 环信 IM UI 库 pod 'EaseChatUIKit'
+- 环信音视频 UI 库 pod 'EaseCallKit'
+- 声网音视频 SDK pod 'AgoraRtcEngine_iOS'
 
-三方库包含
+三方库包含：
 
 ```
-* pod 'MBProgressHUD'
-* pod 'Masonry'
-* pod 'MJRefresh'
-* pod 'SDWebImage'
+- Swift JSON 解析库 pod 'KakaJSON'
+- 封装FFDB的便捷化数据库 pod 'SwiftFFDBHotFix'
 ```
 
 ## 主要模块介绍
 
 Demo 中有几大 UI 功能模块，在集成时将对应的模块添加到工程中即可。
 
-- Helper——自定义库和页面，第三方库，全局通用模块
-- Chat——聊天模块
-- Conversation——会话列表模块
-- Communicate——实时音视频模块（包含 1v1 实时通话以及多人实时通话的功能
-- Contact——好友列表模块
-- Group——群组模块
-- Chatroom——聊天室模块
-
-在集成时，必须要先向自己的工程中导入 `Helper` 模块，然后再根据自己的需求导入其他模块。
+- Utils——工具类。
+- Main——主界面模块 包含 Provider 实现 以及 1v1 实时通话以及多人实时通话的功能。
+- LoginViewController——登录模块 EaseChatUIKit 在 Demo 中的登录应用。
+- AppDelegate&SceneDelegate——EaseChatUIKit 在 Demo 中初始化以及配置项、继承注册等应用。
+- CustomConstants——自定义常量模块，主要包含需要用户填入的 AppKey 以及 ServerHost。
+- IntegratedFromEaseChatUIKit——继承 EaseChatUIKit 中的类并进行二次自定义开发相关的类模块。
+- Me——个人信息以及 EaseChatUIKit 相关配置项及其如何生效示例。
 
 ## 主要类介绍
 
-- **EaseIMHelper**：环信（EaseIM）全局帮助类，Demo 的单例类，主要是全局监听接收消息，好友，群组，聊天室等相关事件的回调，从而进行对应的处理；
-- **EMConversationsViewController**：Demo 的会话列表功能页面，展示了扩展条目侧滑事件及条目点击事件实现等；
-- **EMChatViewController**：Demo 的聊天功能页面，展示了扩展条目长按事件，预置条目长按菜单及对重写部分长按事件功能，展示了如何重置及添加更多扩展功能，并展示了实现了头像点击事件及正在输入等事件的相应；
-- **EMContactsViewController**：Demo 展示的联系人页面，展示了添加条目长按侧滑及实现条目点击事件等；
-- **EMGroupInfoViewController**：实现了如下功能：添加群成员，修改群公告及群介绍，上传共享文件，进行群组管理，设置消息免打扰及解散或者退出群组等。
-
-## 部分 UI 展示
-
-![联系人列表](@static/images/android/app-demo-ui-2.jpeg)
-
-![聊天页面](@static/images/android/app-demo-ui-3.jpeg)
+- **MainViewController**：此页面中包含了包含 Provider 实现 以及 1v1 实时通话以及多人实时通话的功能的初始化与回调处理。
+- **MineMessageListViewController&MineContactDetailViewController&MineGroupDetailViewController**：中 `EaseCallManager.shared()` 是如何发起音视频通话的示例代码。
+- **DemoLanguage**：Demo 层语言偏好设置切换。
+- **MineMessageListViewController**：Demo 中聊天页面。
+- **EasemobBusinessRequest**：实现了 RESTful 的几种基本业务请求工具类，可以根据请求时需要返回参数类型来返回对应模型无需用户解析但是依赖第三方解析库 `Kakajson`，也有只返回 Dictionary 的请求方法，便于用户使用。
+- **Appdelegate&NotificationService**：推送相关设置。

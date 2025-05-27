@@ -9,6 +9,10 @@
 环信即时通讯 IM Flutter SDK 支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
 
 - `EMChatManager.searchMsgFromDB`：根据关键字搜索会话消息。
+- `EMChatManager#loadMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
+- `EMConversation#loadMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。
+- `EMChatManager#searchMsgsByOptions`：根据单个或多个消息类型，搜索本地数据库中所有会话的消息。
+- `EMConversation#searchMsgsByOptions` 根据单个或多个消息类型，搜索本地数据库中单个会话的消息。
 
 ## 前提条件
 
@@ -35,9 +39,111 @@ EMConversation? conv =
       sender: "tom",
       // 搜索开始的 Unix 时间戳，单位为毫秒。
       timestamp: 1653971593000,
-      // 搜索的最大消息数。
+      // 要获取的消息条数。
       count: 10,
       // 消息的搜索方向：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
       direction: EMSearchDirection.Up,
     );
 ```
+
+### 根据搜索范围搜索所有会话中的消息
+
+你可以调用 `EMChatManager#loadMessagesWithKeyword` 方法，除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索所有会话中的消息时，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.5.0 或以上版本。
+:::
+
+```dart
+try {
+  await EMClient.getInstance.chatManager.loadMessagesWithKeyword(
+    keywords,
+    sender: sender,
+    timestamp: timestamp,
+    count: 20,
+    direction: EMSearchDirection.Up,
+    searchScope: MessageSearchScope.All,
+  );
+} on EMError catch (e) {
+  debugPrint("loadMessagesWithKeyword error: ${e.code}, ${e.description}");
+}
+```
+
+### 根据搜索范围搜索当前会话中的消息
+
+你可以调用 `EMConversation#loadMessagesWithKeyword` 方法除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.5.0 或以上版本。
+:::
+
+```dart
+EMConversation? conversation = await EMClient.getInstance.chatManager.getConversation(userId);
+try {
+  await conversation?.loadMessagesWithKeyword(
+    keywords,
+    sender: sender,
+    timestamp: timestamp,
+    count: 20,
+    direction: EMSearchDirection.Up,
+    searchScope: MessageSearchScope.All,
+  );
+} on EMError catch (e) {
+  debugPrint("loadMessagesWithKeyword error: ${e.code}, ${e.description}");
+}
+
+```
+
+### 根据消息类型搜索所有会话中的消息
+
+你可以调用 `EMChatManager#searchMsgsByOptions` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中所有会话的消息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.8.1 或以上版本。
+:::
+
+```dart
+// from：会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
+// count：要查询的消息条数。取值范围为 [1,400]。
+try {
+  const searchOptions = MessageSearchOptions(
+    types: [MessageType.TXT, MessageType.IMAGE],
+    from: fromUser,
+    ts: startTime,
+    direction: EMSearchDirection.Up,
+    count: 50
+  );
+  List<EMMessage> msgs =
+      await EMClient.getInstance.chatManager.searchMsgsByOptions(
+    searchOptions,
+  );
+} on EMError catch (e) {
+  debugPrint("error code: ${e.code}, desc: ${e.description}");
+}
+```
+
+### 根据消息类型搜索当前会话中的消息
+
+你可以调用 `EMConversation#searchMsgsByOptions` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中单个会话的消息。
+
+:::tip
+若使用该功能，需将 SDK 升级至 V4.8.1 或以上版本。
+:::
+
+```dart
+// from：当前会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
+// count：要查询的消息条数。取值范围为 [1,400]。
+  try {
+    const searchOptions = MessageSearchOptions(
+        types: [MessageType.TXT, MessageType.IMAGE],
+        from: fromUser,
+        ts: startTime,
+        direction: EMSearchDirection.Up,
+        count: 50);
+    conversation.searchMsgsByOptions(
+      searchOptions,
+    );
+  } on EMError catch (e) {
+    debugPrint("error code: ${e.code}, desc: ${e.description}");
+  }
+```     

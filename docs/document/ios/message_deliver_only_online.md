@@ -27,7 +27,7 @@
 
 下面以发送文本消息为例进行说明：
 
-```objective-c
+```objectivec
 // 调用 initWithText 创建文本消息。`content` 为文本消息的内容。
 EMTextMessageBody *textMessageBody = [[EMTextMessageBody alloc] initWithText:content];
 // 消息接收方：单聊为对端用户的 ID，群聊为群组 ID。

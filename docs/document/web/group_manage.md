@@ -29,7 +29,7 @@
 
 ### 创建群组
 
-1、调用 `createGroup` 方法新建群组，设置群组参数。
+1、调用 `createGroupVNext` 方法新建群组，设置群组参数。
 
 群组分为私有群和公开群。私有群无法搜索到，公开群可通过群 ID 搜索到。
 
@@ -37,33 +37,36 @@
 
 | 参数                | 类型   | 描述          |
 | :------------- | :----- | :--------------------------------------------- |
-| `groupname`         | String | 群组名称。|
-| `desc`              | String | 群组描述。|
-| `members`           | Array  | 群成员的用户 ID 组成的数组，不包含群主的用户 ID。|
-| `public`            | Bool   | 是否为公开群：<br/> - `true`：是；<br/> - `false`：否。该群组为私有群。   |
-| `approval`          | Bool   | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `public` 设置为 `true` 时，对私有群无效。       |
-| `allowinvites`      | Bool   | 是否允许普通群成员邀请人入群：<br/> - `true`：允许；<br/> - `false`：不允许。只有群主和管理员才可以向群组添加用户。<br/>该参数仅对私有群有效，即 `public` 设置为 `false` 时， 因为公开群（public：`true`）仅支持群主和群管理员邀请人入群，不支持普通群成员邀请人入群。 |
-| `inviteNeedConfirm` | Bool   | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。  |
-| `maxusers`          | Int    | 群组最大成员数，默认为 `200`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。            |
-| `ext`          | String    | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。           |
+| `groupName` | String | 群组名称。 |
+| `avatar` | String | 群组头像。 |
+| `description` | String | 群组描述。 |
+| `members` | `Array<string>` | 群成员的用户 ID 组成的数组，不包含群主的用户 ID。 |
+| `isPublic` | Boolean | 是否为公开群：<br/> - `true`：是；<br/> - `false`：否。该群组为私有群。 |
+| `needApprovalToJoin` | Boolean | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `isPublic` 设置为 `true` 时，对私有群无效。 |
+| `allowMemberToInvite` | Boolean | 是否允许普通群成员邀请人入群：<br/> - `true`：允许；<br/> - `false`：不允许。只有群主和管理员才可以向群组添加用户。<br/>该参数仅对私有群有效，即 `isPublic` 设置为 `false` 时， 因为公开群（isPublic：`true`）仅支持群主和群管理员邀请人入群，不支持普通群成员邀请人入群。 |
+| `inviteNeedConfirm` | Boolean | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。 |
+| `maxMemberCount` | Int | 群组最大成员数，默认为 `200`。不同套餐支持的人数上限不同，详见  [IM 套餐包功能对比](/product/product_package_feature.html)。 |
+| `extension` | string | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。|
+
 
 创建群组的示例代码如下：
 
 ```javascript
-let option = {
-  data: {
-    groupname: "groupName",
-    desc: "A description of a group",
-    members: ["user1", "user2"],
-    public: true,
-    approval: true,
-    allowinvites: true,
-    inviteNeedConfirm: true,
-    maxusers: 500,
-    ext: "group detail extensions",
-  },
-};
-conn.createGroup(option).then((res) => console.log(res));
+conn.createGroupVNext({
+    groupName: 'groupname',
+    avatar: 'group avatar',
+    description: 'this is my group',
+    members: ['user1', 'user2'],
+    isPublic: true,
+    needApprovalToJoin: false,
+    allowMemberToInvite: true,
+    inviteNeedConfirm: false,
+    maxMemberCount: 200,
+    extension: JSON.stringify({info: 'group info'})
+})
+.then((res) => {
+    console.log(res)
+})
 ```
 
 2、邀请用户入群。
@@ -82,10 +85,10 @@ conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 
    入群邀请是否需受邀用户确认取决于群组选项 `inviteNeedConfirm` 的设置：
 
-   - `inviteNeedConfirm` 设置为 `false` 时，受邀用户直接进群，无需确认，群组所有成员会收到 `memberPresence` 事件。
+   - `inviteNeedConfirm` 设置为 `false` 时，受邀用户直接进群，无需确认，群组所有成员会收到 `membersPresence` 事件。
    - `inviteNeedConfirm` 设置为 `true` 时，受邀用户需确认是否加入群组。
 
-     - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
+     - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `membersPresence` 事件。
 
      ```javascript
      conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
@@ -134,19 +137,15 @@ conn.getGroupInfo(option).then((res) => {
 
 ### 获取群成员列表
 
-所有群成员均可调用 `listGroupMembers` 方法分页获取群成员列表，包括群主、群管理员和普通群成员。
-
-示例代码如下：
+自 SDK 4.15.0 开始，所有群成员均可调用 `getGroupMembers` 方法获取群成员信息，包括用户 ID 和用户角色。原方法 `listGroupMembers` 废弃。
 
 ```javascript
-let pageNum = 1,
-  pageSize = 100;
-let option = {
-  pageNum: pageNum,
-  pageSize: pageSize,
-  groupId: "groupId",
-};
-conn.listGroupMembers(option).then((res) => console.log(res));
+conn
+// limit：每页获取的群成员数量，取值范围为 [1,50]，默认值为 50。
+  .getGroupMembers({ cursor: "", limit: 50, groupId: "groupId" })
+  .then((res) => {
+    console.log(res);
+  });
 ```
 
 ### 获取群组列表
@@ -226,18 +225,24 @@ conn.addEventHandler("eventName", {
       // 设置管理员。群主、新管理员和其他管理员会收到该回调。
       case "setAdmin":
         break;
-      // 转让群组。原群主和新群主会收到该回调。
+      // 转让群组。新群主会收到该回调。
       case "changeOwner":
         break;
       // 群组所有者和管理员拉用户进群时，无需用户确认时会触发该回调。被拉进群的用户会收到该回调。
       case "directJoined":
         break;
-      // 群成员主动退出群组。除了退群的成员，其他群成员会收到该回调。
+      // 群成员（单个）退群。除退群成员外，其他群成员会收到该回调。
       case "memberAbsence":
         break;
-      // 有用户加入群组。除了新成员，其他群成员会收到该回调。
+      // 群成员（单个或多个）退群。除退群成员外，其他群成员会收到该回调。
+      case "membersAbsence":
+        break;
+      // 用户（单个）加群。除新成员外，其他群成员会收到该回调。
       case "memberPresence":
         break;
+      // 用户（单个或多个）加群。除新成员外，其他群成员会收到该回调。
+      case "membersPresence":
+        break; 
       // 用户被移出群组。被踢出群组的成员会收到该回调。
       case "removeMember":
         break;
