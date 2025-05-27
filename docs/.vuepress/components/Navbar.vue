@@ -13,7 +13,21 @@ const extraNavList = themeData.value.extra_nav || [];
       <div class="search-box" @click="handleSearch">
         <div class="search-input-wrapper">
           <div class="search-icon">
-            <i class="iconfont icon-search"></i>
+            <svg
+              width="20"
+              height="20"
+              class="DocSearch-Search-Icon"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
+                stroke="currentColor"
+                fill="none"
+                fill-rule="evenodd"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
           </div>
           <div class="search-input">搜索关键字</div>
         </div>
@@ -54,6 +68,7 @@ export default {
   border: 1px solid rgba(230, 249, 255, 0.15);
   cursor: pointer;
   transition: all 0.3s;
+  height: 36px;
 }
 
 .search-box:hover {
@@ -88,9 +103,10 @@ export default {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #cbd5e0; /* 图标颜色 */
+  color: #303d4e; /* 图标颜色 */
   font-size: 14px; /* 缩小图标大小 */
   transition: color 0.3s;
+  width: 18px;
 }
 
 .search-icon:hover {
