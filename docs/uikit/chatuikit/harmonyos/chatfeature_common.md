@@ -44,12 +44,12 @@
   <ImageItem src="/images/uikit/chatuikit/feature/common/android/file_share.png" title="文件共享" />
 </ImageGallery>
 
-## 已发送回执	
+## 送达回执	
 
-已发送回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
+送达回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/android/message_delivery_receipt.png" title="已发送回执	" />
+  <ImageItem src="/images/uikit/chatuikit/feature/common/android/message_delivery_receipt.png" title="送达回执	" />
 </ImageGallery>
 
 ## 已读回执
@@ -75,12 +75,6 @@
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/common/android/message_audio.png" title="语音消息" />
 </ImageGallery>
-
-## 本地搜索
-
-本地搜索功能允许用户快速根据类型搜索，包括搜索联系人和会话，支持关键词匹配。该功能帮助用户高效找到所需信息，提高工作效率和信息管理的便捷性。
-
-UIKit 提供封装的 `SearchConversationPage` 和 `SearchContactPage` 搜索页面。
 
 ## 群组 @ 提及
 

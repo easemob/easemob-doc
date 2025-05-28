@@ -44,12 +44,12 @@
   <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="联系人列表" />
 </ImageGallery>
 
-## 已发送回执	
+## 送达回执	
 
-已发送回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
+送达回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/uniapp/message_receipt_delivery.png" title="已发送回执" />
+  <ImageItem src="/images/uikit/chatuikit/uniapp/message_receipt_delivery.png" title="送达回执" />
 </ImageGallery>
 
 ## 已读回执

@@ -68,22 +68,6 @@
   <ImageItem src="/images/uikit/chatuikit/feature/web/common/message_unread_count.png" title="未读消息数" />
 </ImageGallery>
 
-## 已发送回执	
-
-已发送回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/web/common/message_delivery_receipt.png" title="已发送回执" />
-</ImageGallery>
-
-## 已读回执
-
-已读回执用于告知消息发送者，接收者已经阅读了其发送的消息。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/web/common/message_read_receipt.png" title="已读回执" />
-</ImageGallery>
-
 ## 联系人名片	
 
 联系人名片指包含联系人详细信息的电子卡片，通常包括头像和昵称等信息。通过联系人名片，用户可以快速添加联系人或开始会话。
@@ -107,21 +91,3 @@
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/web/common/message_report.png" title="消息审核" />
 </ImageGallery>
-
-## 群组 @ 提及
-
-群组 @ 提及功能使用户能在群聊中通过 @ 符号直接提及特定成员，被提及者将收到特别通知。该功能便于高效传递重要信息，确保关键消息得到及时关注和回应。
-
-该功能在 UIKit 里的 `MessageInput`、`TextMessage` 和 `ConversationItem` 组件中。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/web/common/group_@.png" title="消息审核" />
-</ImageGallery>
-
-#### 如何使用
-
-群组 @ 提及特性默认开启，若要在全局配置中关闭，可以进行如下设置：
-
-```jsx
-features.chat.messageInput.mention = false;
-```

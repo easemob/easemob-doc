@@ -68,22 +68,6 @@
   <ImageItem src="/images/uikit/chatuikit/feature/common/android/message_unread_count.png" title="未读消息数" />
 </ImageGallery>
 
-## 已发送回执	
-
-已发送回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/android/message_delivery_receipt.png" title="已发送回执	" />
-</ImageGallery>
-
-## 已读回执
-
-已读回执用于告知消息发送者，接收者已经阅读了其发送的消息。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/android/message_read_receipt.png" title="已读回执" />
-</ImageGallery>
-
 ## 联系人名片	
 
 联系人名片指包含联系人详细信息的电子卡片，通常包括头像和昵称等信息。通过联系人名片，用户可以快速添加联系人或开始会话。
@@ -107,66 +91,4 @@
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/uniapp/message_report.png" title="消息审核" />
 </ImageGallery>
-
-## 本地搜索
-
-本地搜索功能允许用户快速根据类型搜索，包括搜索联系人（带有或无选择框）、会话、历史消息和黑名单，支持关键词匹配。该功能帮助用户高效找到所需信息，提高工作效率和信息管理的便捷性。
-
-UIKit 提供封装的 `ChatUIKitSearchActivity` 搜索页面，用户根据 `ChatUIKitSearchType` 和输入关键词后，将根据 `ChatUIKitSearchType` 类型搜索数据展示搜索结果。
-
-同时，UIKit 也提供搜索基类 `ChatUIKitBaseSearchFragment`，用户可以更好地继承扩展实现。`ChatUIKitBaseSearchFragment` 中的 `initAdapter()` 抽象方法实现自己的 adapter，进行数据处理和展示。
-
-例如，以下为搜索消息的页面。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/android/message_search.png" title="本地消息搜索" />
-</ImageGallery>
-
-#### 如何使用
-
-跳转 `ChatUIKitSearchActivity` 页面，根据自己需要搜索的类型（`ChatUIKitSearchType：USER、SELECT_USER、CONVERSATION、MESSAGE、BLOCK_USER`）传入需要的参数，将匹配关键词并展示搜索结果。
-
-例如，搜索黑名单的示例代码如下 ：
-
-```kotlin
-    
-    private val returnSearchClickResult: ActivityResultLauncher<Intent> = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result -> onClickResult(result) }
-
-    returnSearchClickResult.launch(
-        ChatUIKitSearchActivity.createIntent(
-            context = mContext,
-            searchType = ChatUIKitSearchType.BLOCK_USER
-        )
-    )
-    private fun onClickResult(result: ActivityResult) {
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.getSerializableExtra("user")?.let {
-                if (it is ChatUIKitUser) {
-                    // it 为搜索结果 
-                }
-            }
-        }
-    }
-
-```
-
-## 群组 @ 提及
-
-群组 @ 提及功能使用户能在群聊中通过 @ 符号直接提及特定成员，被提及者将收到特别通知。该功能便于高效传递重要信息，确保关键消息得到及时关注和回应。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/android/group_@.png" title="群组 @ 提及" />
-</ImageGallery>
-
-#### 如何使用
-
-群组 @ 提及特性默认开启。要关闭该特性，则需将 `enableMention` 设置为 `false`。
-
-示例代码如下：
-
-```kotlin
-    ChatUIKitClient.getConfig()?.chatConfig?.enableMention == false
-```
 

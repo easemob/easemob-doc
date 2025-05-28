@@ -64,7 +64,7 @@ Chat Fragment 提供所有聊天视图的容器。
   <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="发送多种类型的消息" />
   <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="消息长按操作" />
   <ImageItem src="/images/uikit/chatuikit/android/message_reply.png" title="消息引用" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_deliveryreceipt.png" title="已发送回执" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_deliveryreceipt.png" title="送达回执" />
   <ImageItem src="/images/uikit/chatuikit/android/message_readreceipt.png" title="已读回执" />
 </ImageGallery>
 
