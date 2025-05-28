@@ -324,7 +324,7 @@ const uikitCategoryMap = {
 };
 
 const productCategoryMap = {
-  产品介绍: "产品介绍",
+  产品介绍: "产品功能",
   内容审核: "内容审核",
   solution_common: "常见方案",
   即时推送: "即时推送",
