@@ -20,10 +20,13 @@
       />
       <div class="search-box-container">
         <div class="search-container">
-          <ais-search-box
-            placeholder="热门搜索: 登录、消息扩展"
-            show-loading-indicator
-          />
+          <div class="search-box">
+            <ais-search-box
+              placeholder="热门搜索: 登录、消息扩展"
+              show-loading-indicator
+            />
+            <ais-powered-by class="powered-by" />
+          </div>
           <div class="search-category">
             <ais-refinement-list v-show="false" attribute="type" />
           </div>
@@ -456,6 +459,10 @@ body {
   color: var(--theme-color);
 }
 
+.ais-SearchBox {
+  width: 100%;
+}
+
 .ais-SearchBox-input {
   height: 40px;
 }
@@ -480,6 +487,17 @@ body {
 .ais-Snippet-highlighted {
   background-color: unset !important;
   color: var(--theme-color) !important;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+}
+
+.powered-by {
+  margin-left: 20px;
+  flex-shrink: 0;
 }
 
 .search-box-container {
