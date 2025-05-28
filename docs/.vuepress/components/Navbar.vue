@@ -57,7 +57,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .search-box {
   display: flex;
   align-items: center;
@@ -73,10 +73,12 @@ export default {
 
 .search-box:hover {
   border: 1px solid var(--theme-color);
-  .search-icon {
-    color: var(--theme-color);
-  }
 }
+
+.search-box:hover .search-icon {
+  color: var(--theme-color);
+}
+
 
 .search-input-wrapper {
   display: flex;
