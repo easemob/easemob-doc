@@ -24,24 +24,13 @@
 
 消息编辑是指用户可以编辑一条已发送的消息。消息编辑可以帮助用户纠正错误，或添加新信息。无论单聊还是群组聊天，该特性只支持用户编辑自己发送的消息，不能编辑其他用户发送的消息。
 
-## 消息引用	
+## 其他消息特性
 
-消息引用指用户可以引用一条已发送的消息。消息引用可以帮助用户回复特定的消息，或强调特定的信息。
+对于消息回执、引用和群组 @ 提及特性，你可以查看以下文档：
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/uniapp/message_reply.png" title="消息引用" />
-</ImageGallery>
-
-#### 如何使用
-
-消息引用特性在 `ChatUIKit` 中默认开启。要关闭该特性，则可以调用 `ChatUIKit.hideFeature`方法隐藏。
-
-示例代码如下：
-
-```javascript
-    ChatUIKit.hideFeature(['replyMessage'])
-```
-
+- [消息回执](chatuikit_feature_receipt.html)
+- [消息引用](chatuikit_feature_quote.html)
+- [群组 @ 提及](chatuikit_feature_@.html)
 
 
 

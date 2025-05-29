@@ -59,3 +59,16 @@ ChatUIKitSettings.recallExpandTime = 120;
 ```dart
 ChatUIKitSettings.enableMessageEdit = false;
 ```
+
+## 其他消息特性
+
+对于消息回执、引用、翻译、表情回复、话题、转发、置顶和群组 @ 提及特性，你可以查看以下文档：
+
+- [消息回执](chatuikit_feature_receipt.html)
+- [消息引用](chatuikit_feature_quote.html)
+- [消息翻译](chatuikit_feature_translation.html)
+- [表情回复](chatuikit_feature_reaction.html)
+- [消息话题](chatuikit_feature_thread.html)
+- [消息转发](chatuikit_feature_forward.html)
+- [消息置顶](chatuikit_feature_pin.html)
+- [群组 @ 提及](chatuikit_feature_@.html)

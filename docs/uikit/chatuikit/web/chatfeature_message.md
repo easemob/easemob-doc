@@ -75,7 +75,7 @@ features.chat.message.edit = false;
 - [消息翻译](chatuikit_feature_translation.html)
 - [表情回复](chatuikit_feature_reaction.html)
 - [消息话题](chatuikit_feature_thread.html)
-- [消息合并转发和单条消息转发](chatuikit_feature_forward.html)
+- [消息转发](chatuikit_feature_forward.html)
 - [消息置顶](chatuikit_feature_pin.html)
 
 
