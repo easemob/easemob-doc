@@ -390,7 +390,7 @@ export const zhSidebar = sidebar({
            { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_feature_typing.html" },
            { text: "Web", link: "uikit/chatuikit/web/chatuikit_feature_typing.html" },
            { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_feature_typing" },
-           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_typing" },
+           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_feature_typing" },
          ],
         },
         {
@@ -403,7 +403,7 @@ export const zhSidebar = sidebar({
            { text: "HarmonyOS", link: "uikit/chatuikit/harmonyos/chatuikit_feature_receipt.html" },
            { text: "Uniapp", link: "uikit/chatuikit/uniapp/chatuikit_receipt.html" },
            { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_feature_receipt.html" },
-           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_receipt.html" },
+           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_feature_receipt.html" },
          ],
         },
         {
@@ -414,7 +414,7 @@ export const zhSidebar = sidebar({
            { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_feature_reaction.html" },
            { text: "Web", link: "uikit/chatuikit/web/chatuikit_feature_reaction.html" },
            { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_feature_reaction.html" },
-           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_reaction.html" },
+           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_feature_reaction.html" },
          ],
         },
         {
@@ -437,7 +437,7 @@ export const zhSidebar = sidebar({
            { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_feature_translation.html" },
            { text: "Web", link: "uikit/chatuikit/web/chatuikit_feature_translation.html" },
            { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_feature_translation.html" },
-           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_translation.html" },
+           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_feature_translation.html" },
          ],
         },
         {
@@ -459,7 +459,7 @@ export const zhSidebar = sidebar({
            { text: "iOS", link: "uikit/chatuikit/ios/chatuikit_feature_forward.html" },
            { text: "Web", link: "uikit/chatuikit/web/chatuikit_feature_forward.html" },
            { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_feature_forward.html" },
-           { text: "React Native", link: "uikit/chatuikit/web/chatuikit_@.html" },
+           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_feature_forward.html" },
          ],
         },
         {
@@ -471,7 +471,7 @@ export const zhSidebar = sidebar({
            { text: "Web", link: "uikit/chatuikit/web/chatuikit_@.html" },
            { text: "Uniapp", link: "uikit/chatuikit/uniapp/chatuikit_@.html" },
            { text: "Flutter", link: "uikit/chatuikit/flutter/chatuikit_feature_pin.html" },
-           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_@.html" },
+           { text: "React Native", link: "uikit/chatuikit/react-native/chatuikit_feature_pin.html" },
          ],
         },
         {
