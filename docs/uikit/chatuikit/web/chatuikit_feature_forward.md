@@ -8,8 +8,11 @@
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/web/message/messages_forward_web.png" title="消息合并转发" />
+<ImageGallery :columns="1">
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/messages_forward_web_1.png" title="点击多选" />
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/messages_forward_web_2.png" title="选择消息" />
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/messages_forward_web_3.png" title="选择消息接收方" />
+  <ImageItem src="/images/uikit/chatuikit/feature/web/message/messages_forward_web_4.png" title="发送合并消息" />
 </ImageGallery>
 
 ### 如何使用
