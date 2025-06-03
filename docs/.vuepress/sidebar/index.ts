@@ -661,7 +661,7 @@ export const zhSidebar = sidebar({
           text: "产品简介",
           collapsible: true,
           children: [
-            { text: "产品概述", link: "moderation/moderation_overview.html" },
+            { text: "产品概述", link: "product/moderation/moderation_overview.html" },
           ],
         },
         {
@@ -670,11 +670,11 @@ export const zhSidebar = sidebar({
           children: [
             {
               text: "国内计费说明",
-              link: "moderation/moderation_billing_domestic.html",
+              link: "product/moderation/moderation_billing_domestic.html",
             },
             {
               text: "海外计费说明",
-              link: "moderation/moderation_billing_overseas.html",
+              link: "product/moderation/moderation_billing_overseas.html",
             },
           ],
         },
@@ -683,17 +683,17 @@ export const zhSidebar = sidebar({
           text: "快速开始",
           collapsible: true,
           children: [
-            { text: "开通审核服务", link: "moderation/moderation_enable.html" },
+            { text: "开通审核服务", link: "product/moderation/moderation_enable.html" },
             {
               text: "规则配置",
-              link: "moderation/moderation_rule_config.html",
+              link: "product/moderation/moderation_rule_config.html",
             },
-            { text: "规则测试", link: "moderation/moderation_rule_test.html" },
-            { text: "历史记录", link: "moderation/moderation_history.html" },
-            { text: "关键词审核", link: "moderation/keyword_review.html" },
+            { text: "规则测试", link: "product/moderation/moderation_rule_test.html" },
+            { text: "历史记录", link: "product/moderation/moderation_history.html" },
+            { text: "关键词审核", link: "product/moderation/keyword_review.html" },
             {
               text: "消息审核机制",
-              link: "moderation/moderation_mechanism.html",
+              link: "product/moderation/moderation_mechanism.html",
             },
           ],
         },
@@ -703,13 +703,13 @@ export const zhSidebar = sidebar({
           children: [
             {
               text: "审核记录回调",
-              link: "moderation/moderation_record_callback.html",
+              link: "product/moderation/moderation_record_callback.html",
             },
             {
               text: "消息人工审核",
-              link: "moderation/moderation_manual_review.html",
+              link: "product/moderation/moderation_manual_review.html",
             },
-            { text: "用户管理", link: "moderation/moderation_usermgmt.html" },
+            { text: "用户管理", link: "product/moderation/moderation_usermgmt.html" },
           ],
         },
         {
@@ -718,15 +718,15 @@ export const zhSidebar = sidebar({
           children: [
             {
               text: "如何开始使用内容审核服务？",
-              link: "moderation/moderation_use_console.html",
+              link: "product/moderation/moderation_use_console.html",
             },
             {
               text: "如何新增自定义词？",
-              link: "moderation/moderation_add_word.html",
+              link: "product/moderation/moderation_add_word.html",
             },
             {
               text: "为什么处置方式选择了替换***，但实际被拦截了没有发出来？",
-              link: "moderation/moderation_replace_refuse.html",
+              link: "product/moderation/moderation_replace_refuse.html",
             },
           ],
         },
@@ -740,22 +740,22 @@ export const zhSidebar = sidebar({
           text: "环信 AIGC",
           collapsible: true,
           children: [
-            { text: "方案介绍", link: "aigc/aigc_scenario_introduction.html" },
-            { text: "方案选择", link: "aigc/aigc_selection.html" },
+            { text: "方案介绍", link: "product/aigc/aigc_scenario_introduction.html" },
+            { text: "方案选择", link: "product/aigc/aigc_selection.html" },
             { 
               text: "方案一",
               collapsible: false,
               children: [
-                { text: "服务端配置", link: "aigc/aigc_run_through_demo_server.html" },
-                { text: "客户端配置", link: "aigc/aigc_run_through_demo_client.html" },
+                { text: "服务端配置", link: "product/aigc/aigc_run_through_demo_server.html" },
+                { text: "客户端配置", link: "product/aigc/aigc_run_through_demo_client.html" },
               ], 
             }, 
             { 
               text: "方案二",
               collapsible: false,
               children: [
-                { text: "使用 AI 智能功能", link: "aigc/aigc_use.html" },
-                { text: "REST API", link: "aigc/aigc_rest_api.html" },
+                { text: "使用 AI 智能功能", link: "product/aigc/aigc_use.html" },
+                { text: "REST API", link: "product/aigc/aigc_rest_api.html" },
                 ], 
             }, 
           ], 
@@ -764,22 +764,22 @@ export const zhSidebar = sidebar({
           text: "超级社区",
           collapsible: true,
           children: [
-            { text: "产品概述", link: "circle/circle_overview.html" },
+            { text: "产品概述", link: "product/circle/circle_overview.html" },
             {
               text: "快速开始",
               collapsible: false,
               children: [
                 {
                   text: "Android 快速开始",
-                  link: "circle/circle_quickstart_android.html",
+                  link: "product/circle/circle_quickstart_android.html",
                 },
                 {
                   text: "iOS 快速开始",
-                  link: "circle/circle_quickstart_ios.html",
+                  link: "product/circle/circle_quickstart_ios.html",
                 },
                 {
                   text: "Web 快速开始",
-                  link: "circle/circle_quickstart_web.html",
+                  link: "product/circle/circle_quickstart_web.html",
                 },
               ],
             },
@@ -789,27 +789,27 @@ export const zhSidebar = sidebar({
               children: [
                 {
                   text: "Android 社区管理",
-                  link: "circle/server_mgmt_android.html",
+                  link: "product/circle/server_mgmt_android.html",
                 },
                 {
                   text: "Android 频道管理",
-                  link: "circle/channel_mgmt_android.html",
+                  link: "product/circle/channel_mgmt_android.html",
                 },
                 {
                   text: "Android 频道分组管理",
-                  link: "circle/category_mgmt_android.html",
+                  link: "product/circle/category_mgmt_android.html",
                 },
-                { text: "iOS 社区管理", link: "circle/server_mgmt_ios.html" },
-                { text: "iOS 频道管理", link: "circle/channel_mgmt_ios.html" },
+                { text: "iOS 社区管理", link: "product/circle/server_mgmt_ios.html" },
+                { text: "iOS 频道管理", link: "product/circle/channel_mgmt_ios.html" },
                 {
                   text: "iOS 频道分组管理",
-                  link: "circle/category_mgmt_ios.html",
+                  link: "product/circle/category_mgmt_ios.html",
                 },
-                { text: "Web 社区管理", link: "circle/server_mgmt_web.html" },
-                { text: "Web 频道管理", link: "circle/channel_mgmt_web.html" },
+                { text: "Web 社区管理", link: "product/circle/server_mgmt_web.html" },
+                { text: "Web 频道管理", link: "product/circle/channel_mgmt_web.html" },
                 {
                   text: "Web 频道分组管理",
-                  link: "circle/category_mgmt_web.html",
+                  link: "product/circle/category_mgmt_web.html",
                 },
               ],
             },
@@ -819,15 +819,15 @@ export const zhSidebar = sidebar({
               children: [
                 {
                   text: "Android 错误码",
-                  link: "circle/circle_errorcode_android.html",
+                  link: "product/circle/circle_errorcode_android.html",
                 },
                 {
                   text: "iOS 错误码",
-                  link: "circle/circle_errorcode_ios.html",
+                  link: "product/circle/circle_errorcode_ios.html",
                 },
                 {
                   text: "Web 错误码",
-                  link: "circle/circle_errorcode_web.html",
+                  link: "product/circle/circle_errorcode_web.html",
                 },
               ],
             },
@@ -835,21 +835,21 @@ export const zhSidebar = sidebar({
               text: "API 参考",
               collapsible: true,
               children: [
-                { text: "REST 社区管理", link: "circle/server_mgmt_rest.html" },
+                { text: "REST 社区管理", link: "product/circle/server_mgmt_rest.html" },
                 {
                   text: "REST 频道管理",
-                  link: "circle/channel_mgmt_rest.html",
+                  link: "product/circle/channel_mgmt_rest.html",
                 },
                 {
                   text: "REST 频道分组管理",
-                  link: "circle/category_mgmt_rest.html",
+                  link: "product/circle/category_mgmt_rest.html",
                 },
                 {
                   text: "Android API 参考",
-                  link: "circle/api_reference_android.html",
+                  link: "product/circle/api_reference_android.html",
                 },
-                { text: "iOS API 参考", link: "circle/api_reference_ios.html" },
-                { text: "Web API 参考", link: "circle/api_reference_web.html" },
+                { text: "iOS API 参考", link: "product/circle/api_reference_ios.html" },
+                { text: "Web API 参考", link: "product/circle/api_reference_web.html" },
               ],
             },
           ],
@@ -864,11 +864,11 @@ export const zhSidebar = sidebar({
               children: [
                 {
                   text: "场景介绍",
-                  link: "voiceroom/demo_scenario_introduction.html",
+                  link: "product/voiceroom/demo_scenario_introduction.html",
                 },
                 {
                   text: "Demo 体验（Android/iOS）",
-                  link: "voiceroom/demo_experience.html",
+                  link: "product/voiceroom/demo_experience.html",
                 },
               ],
             },
@@ -878,11 +878,11 @@ export const zhSidebar = sidebar({
               children: [
                 {
                   text: "跑通示例项目（Android）",
-                  link: "voiceroom/run_through_demo_android.html",
+                  link: "product/voiceroom/run_through_demo_android.html",
                 },
                 {
                   text: "跑通示例项目（iOS）",
-                  link: "voiceroom/run_through_demo_ios.html",
+                  link: "product/voiceroom/run_through_demo_ios.html",
                 },
               ],
             },
@@ -892,11 +892,11 @@ export const zhSidebar = sidebar({
               children: [
                 {
                   text: "客户端实现（Android）",
-                  link: "voiceroom/client_implementation_android.html",
+                  link: "product/voiceroom/client_implementation_android.html",
                 },
                 {
                   text: "客户端实现（iOS）",
-                  link: "voiceroom/client_implementation_ios.html",
+                  link: "product/voiceroom/client_implementation_ios.html",
                 },
               ],
             },
@@ -1630,6 +1630,14 @@ export const zhSidebar = sidebar({
         { text: "REST 平台与请求", link: "document/server-side/overview.html" },
         { text: "REST API 调用频率限制", link: "product/limitationapi.html" },
         {
+          text: "Token 鉴权",
+          collapsible: true,
+          children: [
+        { text: "App Token 鉴权", link: "document/server-side/easemob_app_token.html" },
+        { text: "用户 Token 鉴权", link: "document/server-side/easemob_user_token.html" },
+         ],
+        },
+        {
           text: "消息管理",
           collapsible: true,
           children: [
@@ -1722,6 +1730,14 @@ export const zhSidebar = sidebar({
          },
         ],
       },
+      {
+      text: 'Server SDK',
+      collapsible: true,
+      children: [
+        { text: 'Java Server SDK 2.0', link: 'document/server-side/java_server_sdk_2.0.html' },
+        { text: 'Java Server SDK 1.0', link: 'document/server-side/java_server_sdk.html' },
+       ],
+      },  
       {
       text: '设置回调',
       collapsible: true,
