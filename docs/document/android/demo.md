@@ -60,7 +60,81 @@ App Server 为 Demo 提供以下功能：
 
 **服务端中的 App Key 要跟客户端的 App Key 保持一致。**
 
-## 使用的第三方库
+## Demo 项目结构
+
+### Demo 架构
+
+└── com
+    └── hyphenate
+        └── chatdemo
+            ├── DemoApplication.kt  //程序入口
+            ├── DemoHelper.kt   //app 帮助类
+            ├── MainActivity.kt //主页面
+            ├── base    //包含一些基类
+            │   ├── ActivityState.kt
+            │   ├── BaseDialogFragment.kt   //一些弹窗基类
+            │   ├── BaseInitActivity.kt //activity 基类
+            │   ├── ErrorCode.kt    //一些常用的错误码
+            │   └── UserActivityLifecycleCallbacks.kt
+            ├── bean    //一些序列化 bean 类
+            ├── callkit
+            │   ├── CallKitActivityLifecycleCallback.kt //callkit 中 activity 的生命周期监听回调类
+            │   ├── CallKitManager.kt   //callkit 管理类
+            │   ├── CallUserInfo.kt
+            │   ├── ConferenceInviteActivity.kt
+            │   ├── ConferenceInviteAdapter.kt
+            │   ├── ConferenceInviteFragment.kt
+            │   ├── ConferenceMemberSelectViewHolder.kt
+            │   ├── MultipleVideoActivity.kt    //多人音视频页面
+            │   ├── VideoCallActivity.kt    //单人音视频页面
+            │   ├── extensions  //callkit 一些扩展函数类
+            │   ├── viewholder  //单聊、群聊 call 消息提醒类型适配器，包含一些事件处理
+            │   └── views   //单聊、群聊 call 消息提醒类型布局
+            ├── common  //app 的一些的公共类
+            │  
+            ├── controller  
+            │   └── PresenceController.kt   //presence 相关的管理类
+            ├── interfaces  //包含一些接口标准类
+            ├── repository  // app 的数据仓库
+            ├── ui
+            │   ├── chat
+            │   │   ├── ChatActivity.kt //单群聊聊天页面 activity
+            │   │   ├── ChatFragment.kt //单群聊聊天页面 fragment
+            │   │   └── CustomMessagesAdapter.kt    //自定义消息适配器
+            │   ├── contact
+            │   │   ├── ChatContactCheckActivity.kt     //检查是否是联系人页面
+            │   │   ├── ChatContactDetailActivity.kt    //联系人详情页面
+            │   │   ├── ChatContactListFragment.kt      //联系人列表页面
+            │   │   ├── ChatContactRemarkActivity.kt    //联系人(好友)备注页面
+            │   │   └── ChatNewRequestActivity.kt       //联系人页面新请求 item
+            │   ├── conversation
+            │   │   └── ConversationListFragment.kt //会话列表页面
+            │   ├── group
+            │   │   ├── ChatCreateGroupActivity.kt  //创建群组页面
+            │   │   └── ChatGroupDetailActivity.kt  //群组详情页面
+            │   ├── login
+            │   │   ├── LoginActivity.kt    //登录页面 activity
+            │   │   ├── LoginFragment.kt    //登录页面 fragment
+            │   │   ├── ServerSetFragment.kt
+            │   │   └── SplashActivity.kt   //启动页
+            │   └── me //我的界面里相关按钮对应的页面
+            │       ├── AboutActivity.kt    
+            │       ├── AboutMeFragment.kt   //关于我页面
+            │       ├── CurrencyActivity.kt     //通用设置页面，设置暗黑模式、语言、样式等
+            │       ├── EditUserNicknameActivity.kt // 修改用户昵称页面
+            │       ├── FeaturesActivity.kt
+            │       ├── LanguageSettingActivity.kt
+            │       ├── NotifyActivity.kt
+            │       ├── StyleSettingActivity.kt
+            │       ├── UserInformationActivity.kt
+            │       ├── WebViewActivity.kt
+            │       └── controller
+            ├── uikit
+            │   └── UIKitManager.kt //UIKit 管理类
+            ├── utils   //工具类
+            └── viewmodel //包含一些 ViewModel 类
+
+### 使用的第三方库
 
 | 第三方库                | 描述     | 
 | :------------------- | :------------- |
@@ -84,7 +158,7 @@ App Server 为 Demo 提供以下功能：
 | `MiPush_SDK_Client_6_0_1-C_3rd.aar`      | 小米推送所需要的库。  |
 | `com.hihonor.mcs:push`      | 7.0.61.303 荣耀推送所需要的库。  |
 
-## 主要模块介绍
+### 主要模块介绍
 
 | 模块               | 描述   | 
 | :------------------- | :----- |
@@ -95,12 +169,12 @@ App Server 为 Demo 提供以下功能：
 | 设置模块  | 展示 IM SDK 对于新消息的设置及消息免打扰，群组等通用设置。   | 
 | 开发者模块  | 展示 IM SDK 提供的一些常规的开发者可以设置的功能。   | 
 
-## 主要类介绍
+### 主要类介绍
 
 | 模块               | 描述   | 
 | :------------------- | :----- |
-| DemoHelper               | 环信（EaseIM）全局帮助类，主要功能为初始化 IM SDK，初始化 EaseIMKit 相关及注册对话类型等。  | 
-| ConversationListFragment   | 继承自 EaseIMKit 中的 `ChatUIKitConversationListFragment`，展示扩展条目长按事件，在列表前端添加布局及条目点击事件实现等  | 
-| ChatActivity及ChatFragment  | ChatFragment 继承自 EaseIMKit 中的 UIKitChatFragment，展示了扩展条目长按事件，预置条目长按菜单及对重写部分长按事件功能，展示了如何重置及添加更多扩展功能，并展示了实现了头像点击事件及正在输入等事件的相应。  | 
-| ChatContactListFragment                | 继承自 EaseIMKit 中的 ChatUIKitContactsListFragment，展示了添加头布局，添加条目长按功能及实现条目点击事件等  |
-| ChatGroupDetailActivity  | 实现了如下功能：添加群成员，修改群公告及群介绍，上传共享文件，进行群组管理，设置消息免打扰及解散或者退出群组等。   | 
+| `DemoHelper`               | 环信（EaseIM）全局帮助类，主要功能为初始化 IM SDK，初始化 EaseIMKit 相关及注册对话类型等。  | 
+| `ConversationListFragment`   | 继承自 EaseIMKit 中的 `ChatUIKitConversationListFragment`，展示扩展条目长按事件，在列表前端添加布局及条目点击事件实现等  | 
+| `ChatActivity及ChatFragment`  | ChatFragment 继承自 EaseIMKit 中的 `UIKitChatFragment`，展示了扩展条目长按事件，预置条目长按菜单及对重写部分长按事件功能，展示了如何重置及添加更多扩展功能，并展示了实现了头像点击事件及正在输入等事件的相应。  | 
+| `ChatContactListFragment`                | 继承自 EaseIMKit 中的 `ChatUIKitContactsListFragment`，展示了添加头布局，添加条目长按功能及实现条目点击事件等  |
+| `ChatGroupDetailActivity`  | 实现了如下功能：添加群成员，修改群公告及群介绍，上传共享文件，进行群组管理，设置消息免打扰及解散或者退出群组等。   | 
