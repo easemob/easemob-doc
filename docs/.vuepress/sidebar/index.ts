@@ -1699,10 +1699,10 @@ export const zhSidebar = sidebar({
              children: [
               { text: "多个或全体成员禁言", link: "document/server-side/chatroom_member_mutelist.html" },
               { text: "标签禁言", link: "document/server-side/chatroom_label_mute.html" },
-           { text: "管理白名单", link: "document/server-side/chatroom_member_allowlist.html" },
-           { text: "管理黑名单", link: "document/server-side/chatroom_member_blocklist.html" },
              ],
            },
+           { text: "管理白名单", link: "document/server-side/chatroom_member_allowlist.html" },
+           { text: "管理黑名单", link: "document/server-side/chatroom_member_blocklist.html" },
           ],
          },
          ],
@@ -1841,6 +1841,15 @@ export const zhSidebar = sidebar({
       children: [
         { text: "FAQ 质量", link: "product/faq_quality_issues.html" },
         { text: "FAQ 集成", link: "product/faq_integration_issues.html" },
+        {
+         text: "小程序相关",
+         collapsible: true,
+         children: [
+          { text: "Uniapp 生成 Android/iOS 应用", link: "document/applet/uniappnativeapp.html" },
+          { text: "小程序模板使用指南", link: "document/applet/uniappuikit.html" },
+          { text: "如何配置服务器域名", link: "document/applet/serverconfig.html" },
+      ],
+    },
       ],
     },
     {
