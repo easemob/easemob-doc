@@ -278,6 +278,89 @@
                     </template>
                   </ais-hits>
                 </el-tab-pane>
+                <el-tab-pane name="api-reference">
+                  <template #label>
+                    <ais-clear-refinements
+                      :included-attributes="includeAttributes"
+                    >
+                      <template v-slot="{ canRefine, refine, createURL }">
+                        <div
+                          :class="{
+                            'ais-tab-item': true,
+                            'ais-tab-item--active':
+                              activeCategoryType === 'api-reference'
+                          }"
+                          @click="
+                            handleClick({ name: 'api-reference', refine })
+                          "
+                        >
+                          API参考
+                        </div>
+                      </template>
+                    </ais-clear-refinements>
+                  </template>
+                  <ais-refinement-list
+                    attribute="category"
+                    :limit="100"
+                    :transform-items="filterCategories"
+                  >
+                    <template v-slot:item="{ item, refine }">
+                      <div
+                        :class="{
+                          'refinement-list-item': true,
+                          'refinement-list-item--selected': item.isRefined
+                        }"
+                        @click="refine(item.value)"
+                      >
+                        {{ categoryMap[item.label] }}
+                      </div>
+                    </template>
+                  </ais-refinement-list>
+                  <ais-hits v-loading="status === 'stalled'">
+                    <template v-slot:item="{ item }">
+                      <p>
+                        <a :href="item.url" target="_blank">
+                          <ais-highlight
+                            attribute="hierarchy.lvl0"
+                            :hit="item"
+                          />
+                          <span v-if="item.hierarchy.lvl1"> > </span>
+                          <ais-highlight
+                            attribute="hierarchy.lvl1"
+                            :hit="item"
+                          />
+                          <span v-if="item.hierarchy.lvl2"> > </span>
+                          <ais-highlight
+                            attribute="hierarchy.lvl2"
+                            :hit="item"
+                          />
+                          <span v-if="item.hierarchy.lvl3"> > </span>
+                          <ais-highlight
+                            attribute="hierarchy.lvl3"
+                            :hit="item"
+                          />
+                          <span v-if="item.hierarchy.lvl4"> > </span>
+                          <ais-highlight
+                            attribute="hierarchy.lvl4"
+                            :hit="item"
+                          />
+                          <span v-if="item.hierarchy.lvl5"> > </span>
+                          <ais-highlight
+                            attribute="hierarchy.lvl5"
+                            :hit="item"
+                          />
+                        </a>
+                      </p>
+                      <div class="content-snippet">
+                        <ais-snippet
+                          style="font-size: 14px"
+                          attribute="content"
+                          :hit="item"
+                        />
+                      </div>
+                    </template>
+                  </ais-hits>
+                </el-tab-pane>
               </el-tabs>
 
               <div v-if="nbHits === 0">
@@ -334,10 +417,16 @@ const productCategoryMap = {
   "AI 集成": "AI 集成"
 };
 
+const apiReferenceCategoryMap = {
+  "Android API参考": "Android API参考",
+  "Web API参考": "Web API参考",
+};
+
 const categoryMap = {
   ...sdkCategoryMap,
   ...uikitCategoryMap,
-  ...productCategoryMap
+  ...productCategoryMap,
+  ...apiReferenceCategoryMap
 };
 
 const productFilters =
@@ -348,6 +437,8 @@ const sdkFilters =
 
 const uikitFilters =
   "category:'UIKit-Andorid 集成文档' OR category:'UIKit-iOS 集成文档' OR category:'UIKit-Web 集成文档' OR category:'UIKit-HarmonyOS 集成文档' OR category:'UIKit-Flutter 集成文档' OR category:'UIKit-React Native 集成文档' OR category:'UIKit-uniapp'";
+
+const apiReferenceFilters = "category:'Web API参考' OR category:'Android API参考'";
 
 export default {
   name: "InstanceSearchLayout",
@@ -360,6 +451,8 @@ export default {
         return productFilters;
       } else if (this.activeCategoryType === "uikit") {
         return uikitFilters;
+      } else if (this.activeCategoryType === "api-reference") {
+        return apiReferenceFilters;
       } else {
         return sdkFilters;
       }
@@ -369,6 +462,8 @@ export default {
         return this.productCategories;
       } else if (this.activeCategoryType === "uikit") {
         return this.uikitCategories;
+      } else if (this.activeCategoryType === "api-reference") {
+        return this.apiReferenceCategories;
       } else {
         return this.sdkCategories;
       }
@@ -397,6 +492,7 @@ export default {
       sdkCategories: Object.keys(sdkCategoryMap),
       uikitCategories: Object.keys(uikitCategoryMap),
       productCategories: Object.keys(productCategoryMap),
+      apiReferenceCategories: Object.keys(apiReferenceCategoryMap),
       snippet: [
         "hierarchy.lvl1:20",
         "hierarchy.lvl2:20",
@@ -438,6 +534,8 @@ export default {
         return "sdk";
       } else if (this.uikitCategories.includes(categoryItem)) {
         return "uikit";
+      } else if (this.apiReferenceCategories.includes(categoryItem)) {
+        return "api-reference";
       } else {
         return "product";
       }
