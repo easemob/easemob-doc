@@ -418,8 +418,8 @@ const productCategoryMap = {
 };
 
 const apiReferenceCategoryMap = {
-  "Android API参考": "Android API参考",
-  "Web API参考": "Web API参考",
+  "Android API参考": "Android",
+  "Web API参考": "Web",
 };
 
 const categoryMap = {
