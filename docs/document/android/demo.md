@@ -134,30 +134,6 @@ App Server 为 Demo 提供以下功能：
             ├── utils   //工具类
             └── viewmodel //包含一些 ViewModel 类
 
-### 使用的第三方库
-
-| 第三方库                | 描述     | 
-| :------------------- | :------------- |
-| `androidx.core:core-ktx:1.10.1`   |  Kotlin 库。 |
-| `org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3`  | Kotlin 协程库。  |   
-| `org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3`  | Kotlin 协程库。  |  
-| `androidx.appcompat:appcompat`       | `appcompat` 库，对应以前的 `appcompat-v7` 库。   |
-| `com.google.android.material:material：material`      | 对应以前的 design 库。如果用到 TabLayout、CardView 等 Material Design 控件时需要添加。  |
-| `androidx.constraintlayout:constraintlayout`      | constraintlayout 布局。   |
-| `androidx.lifecycle:lifecycle-runtime-ktx`      | lifecycle 库。  |
-| `androidx.lifecycle:lifecycle-viewmodel-ktx`  |  ViewModel 和 lifecycle 库。  |
-| `com.android.support:multidex`  | 工程总方法数超过 64 KB 时，需要用这个库做分包处理。  |
-| `play-services-base和firebase-messaging`      | 谷歌推送所需要的库，使用 FCM 推送时需要添加。  |
-| `com.scwang.smartrefresh:SmartRefreshLayout`      | 下拉刷新及上拉加载更多库。 |
-| `androidx.swiperefreshlayout:swiperefreshlayout`      | 下拉刷新库。|
-| `androidx.room`      | Android 数据库。   |
-| `com.huawei.hms:push`      |  华为推送所需要的库。  |
-| `com.meizu.flyme.internet:push-internal`      | 魅族推送所需要的库。   |
-| `vivo_push_v4.0.4.0_504.aar`       | vivo 推送所需要的库。  |
-| `oppo_push_3.5.2.aar`      | OPPO 推送所需要的库。   |
-| `MiPush_SDK_Client_6_0_1-C_3rd.aar`      | 小米推送所需要的库。  |
-| `com.hihonor.mcs:push`      | 7.0.61.303 荣耀推送所需要的库。  |
-
 ### 主要模块介绍
 
 | 模块               | 描述   | 
