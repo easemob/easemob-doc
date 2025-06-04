@@ -22,4 +22,14 @@ const extraNavList = themeData.value.extra_nav || []
   </Navbar>
 </template>
 
-<style scope></style>
+
+<style>
+.back-to-top {
+  bottom: 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+</style>
+
+
