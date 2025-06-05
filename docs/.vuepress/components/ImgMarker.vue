@@ -1,15 +1,13 @@
 <template>
   <div class="image-marker-container">
-    <Modal
-      :open="isVisible"
+    <ElDialog
+      v-model="isVisible"
       title="图片标记"
       width="1000px"
-      :footer="null"
-      @cancel="handleCancel"
-      @ok="handleOk"
-      @update:open="val => isVisible = val"
+      :show-close="false"
+      @close="handleCancel"
     >
-      <Spin :spinning="loading">
+      <div v-loading="loading" class="dialog-content">
         <div ref="editImgContainerRef" class="edit-img-container">
           <canvas
             ref="editImgRef"
@@ -25,7 +23,7 @@
           <div v-if="!imageLoaded && !loadError" class="loading-text">图片加载中...</div>
           <div v-if="loadError" class="error-text">图片加载失败，请重试</div>
         </div>
-      </Spin>
+      </div>
       <div class="marker-toolbar">
         <div
           class="mark-icon-wrapper"
@@ -71,13 +69,13 @@
           <ImageIcon type="ok" />
         </div>
       </div>
-    </Modal>
+    </ElDialog>
   </div>
 </template>
 
 <script setup>
 import { ref, watch, nextTick, computed } from 'vue'
-import { Modal, Spin } from 'ant-design-vue'
+import { ElDialog } from 'element-plus'
 import ImageIcon from './ImageIcon.vue'
 
 const props = defineProps({
@@ -553,6 +551,10 @@ function pushUndo() {
   max-width: 1000px;
   margin: 0 auto;
   /* 其它样式合并到这里 */
+}
+
+.dialog-content {
+  min-height: 300px;
 }
 
 .edit-img-container {

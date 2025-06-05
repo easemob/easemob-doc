@@ -7,27 +7,28 @@
     </div>
  
     <!-- 反馈表单 -->
-    <Modal
+    <ElDialog
       title="意见反馈"
-      v-model:open="isFormVisible"
+      v-model="isFormVisible"
       :closable="true"
-      :maskClosable="false"
-      :footer="null"
+      :close-on-click-modal="false"
+      :show-close="true"
       width="680px"
     >
       <div class="feedback-form">
-        <Checkbox.Group v-model:value="feedbackTypes">
-          <Row :gutter="[0, 12]">
-            <Col v-for="(label, idx) in FEEDBACK_OPTIONS" :key="idx" :span="8">
-              <Checkbox :value="idx">{{ label }}</Checkbox>
-            </Col>
-          </Row>
-        </Checkbox.Group>
+        <ElCheckboxGroup v-model="feedbackTypes">
+          <ElRow :gutter="12">
+            <ElCol v-for="(label, idx) in FEEDBACK_OPTIONS" :key="idx" :span="8">
+              <ElCheckbox :label="idx">{{ label }}</ElCheckbox>
+            </ElCol>
+          </ElRow>
+        </ElCheckboxGroup>
 
         <div class="form-item">
           <div class="label">其他问题？请描述你遇到的问题或意见</div>
-          <TextArea 
-            v-model:value="feedbackContent"
+          <ElInput 
+            v-model="feedbackContent"
+            type="textarea"
             placeholder="例如：您期待什么搜索结果？您对我们的搜索功能有什么建议？"
             :rows="3"
           />
@@ -35,45 +36,45 @@
 
         <div class="form-item" style="margin-top: 10px;">
           <div class="label">联系方式</div>
-          <Input 
-            v-model:value="contactInfo"
+          <ElInput 
+            v-model="contactInfo"
             placeholder="请填写您的称呼/电话/邮箱等，方便我们后续跟进处理"
           />
         </div>
 
-        <Checkbox v-model:checked="provideScreenshot" style="margin-top: 10px;">
+        <ElCheckbox v-model="provideScreenshot" style="margin-top: 10px;">
           提供截图
-        </Checkbox>
+        </ElCheckbox>
 
-        <Spin :spinning="screenshotLoading" tip="文章截图中">
-          <div 
-            class="screenshot-wrapper"
-            @click="openImageEditor"
-          >
-            <div class="screenshot-mask"></div>
-            <div class="screenshot-overlay">
-              <ImageIcon />
-              <span>点击标记内容</span>
-            </div>
-            <img 
-              v-if="screenshotData" 
-              :src="screenshotData" 
-              alt="截图预览"
-              class="screenshot-preview-img"
-            />
+        <div 
+          class="screenshot-wrapper"
+          @click="openImageEditor"
+          v-loading="screenshotLoading"
+          element-loading-text="文章截图中"
+        >
+          <div class="screenshot-mask"></div>
+          <div class="screenshot-overlay">
+            <ImageIcon />
+            <span>点击标记内容</span>
           </div>
-        </Spin>
+          <img 
+            v-if="screenshotData" 
+            :src="screenshotData" 
+            alt="截图预览"
+            class="screenshot-preview-img"
+          />
+        </div>
 
         <div class="form-footer">
           <div class="footer-actions" style="justify-content: center; width: 100%;">
-            <Button @click="closeForm">取消</Button>
-            <Button type="primary" :loading="submitLoading" @click="submitFeedback">
+            <ElButton @click="closeForm">取消</ElButton>
+            <ElButton type="primary" :loading="submitLoading" @click="submitFeedback">
               提交
-            </Button>
+            </ElButton>
           </div>
         </div>
       </div>
-    </Modal>
+    </ElDialog>
 
     <!-- 图片标记编辑器 -->
     <ImageMarker 
@@ -88,12 +89,11 @@
 
 <script setup>
 import { ref, nextTick } from 'vue'
-import { Modal, Checkbox, Row, Col, Input, Button, Spin, message } from 'ant-design-vue'
+import { ElDialog, ElCheckbox, ElCheckboxGroup, ElRow, ElCol, ElInput, ElButton, ElMessage } from 'element-plus'
 import html2canvas from 'html2canvas'
 import ImageMarker from './ImgMarker.vue'
 import ImageIcon from './ImageIcon.vue'
 
-const TextArea = Input.TextArea
 const ticketWebsite = 'https://ticket.example.com'
 
 const isFormVisible = ref(false)
@@ -221,16 +221,16 @@ const submitFeedback = async () => {
     } catch (e) {
       isFormVisible.value = false
       // 网络错误或其他异常
-      message.error('提交失败，请稍后再试')
+      ElMessage.error('提交失败，请稍后再试')
       throw e
     }
 
     if (!response.ok || !result.success) {
       // 根据HTTP状态码显示不同的错误提示
       if (response.status === 429) {
-        message.error('提交频率过快，请稍后再试')
+        ElMessage.error('提交频率过快，请稍后再试')
       } else {
-        message.error('提交失败，请稍后再试')
+        ElMessage.error('提交失败，请稍后再试')
       }
       throw new Error(result.message || '提交失败')
     }
@@ -238,7 +238,7 @@ const submitFeedback = async () => {
     // 提交成功后清理反馈内容
     clearFeedbackForm()
     isFormVisible.value = false
-    message.success('提交成功，感谢您的反馈')
+    ElMessage.success('提交成功，感谢您的反馈')
   } catch (e) {
     isFormVisible.value = false
     console.error(e)
