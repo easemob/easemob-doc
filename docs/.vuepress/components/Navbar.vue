@@ -125,4 +125,15 @@ export default {
     display: none;
   }
 }
+
+
+</style>
+
+<style>
+.back-to-top {
+  bottom: 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
 </style>
