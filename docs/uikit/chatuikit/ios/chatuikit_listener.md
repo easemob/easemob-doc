@@ -39,6 +39,8 @@
 | `messageStatusChanged`    | 收到消息状态发生变更回调。     | 是     |
 | `messageAttachmentStatusChanged`    | 收到消息附件状态变更回调。     | 是     |
 
+若在发送前需修改消息，你需要调用 `constructMessage` 方法重新构造自己的消息。
+
 UI 事件的回调，详见[自定义拦截主要页面点击事件](chatuikit_customize_clickjump.html) 。
 
 
