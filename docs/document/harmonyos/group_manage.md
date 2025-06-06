@@ -141,7 +141,7 @@ let isMsgBlocked: boolean = group.isMsgBlocked();
 
 ### 获取群成员列表
 
-- 获取群成员 ID 列表
+- 获取群成员 ID 列表。
   
 ```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupMembers(groupId, pageSize, cursor).then((res) => {
@@ -149,7 +149,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupMembers(groupId, pageSize, cu
 });
 ```
 
-- 获取群成员信息列表
+- 获取群成员信息列表，除了成员的用户 ID，还包括成员角色和加入群组的时间。
   
 ```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSize, cursor).then((data) => {
