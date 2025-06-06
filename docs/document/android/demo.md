@@ -64,7 +64,8 @@ App Server 为 Demo 提供以下功能：
 
 ### Demo 架构
 
-└── com
+```
+└── com 
     └── hyphenate
         └── chatdemo
             ├── DemoApplication.kt  //程序入口
@@ -133,6 +134,8 @@ App Server 为 Demo 提供以下功能：
             │   └── UIKitManager.kt //UIKit 管理类
             ├── utils   //工具类
             └── viewmodel //包含一些 ViewModel 类
+```
+
 
 ### 主要模块介绍
 
