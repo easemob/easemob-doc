@@ -1,5 +1,13 @@
 # 产品动态
 
+## 2025-06
+
+#### HarmonyOS SDK 1.7.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS SDK 1.8.0 开发版发布   | <br/> - [撤回消息](/document/harmonyos/message_recall.html) 时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。<br/> - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。 <br/> - 修改 Token [即将过期事件](/document/harmonyos/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。<br/> - 支持 [获取群成员信息列表](/document/harmonyos/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。 | 2025-6-6     | [HarmonyOS 1.8.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-8-0-dev-2025-6-6-开发版)      |
+
 ## 2025-05
 
 #### Android/iOS/Web/小程序 SDK 4.15.0 发版

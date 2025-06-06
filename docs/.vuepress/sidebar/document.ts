@@ -58,7 +58,7 @@ const documentSidebar = [
           { text: '发送和接收消息', link: 'message_send_receive.html' },
           { text: '获取历史消息', link: 'message_retrieve.html' },
           { text: '撤回消息', link: 'message_recall.html' },
-          { text: '搜索消息', link: 'message_search.html', except: ['web', 'harmonyos']},
+          { text: '搜索消息', link: 'message_search.html', except: ['web']},
           { text: '消息回执', link: 'message_receipt.html'},
           { text: '修改消息', link: 'message_modify.html'},
           { text: '消息表情回复', link: 'reaction.html' },

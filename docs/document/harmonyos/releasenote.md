@@ -2,6 +2,21 @@
 
 <Toc />
 
+## 版本 V1.8.0 Dev 2025-6-6（开发版）
+
+### 新增特性
+
+- [撤回消息](message_recall.html) 时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
+  - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
+- 支持 [获取群成员信息列表](group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。
+  
+### 优化
+
+- 修改 Token 即将过期事件 [onTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 在 Token 有效期达到 80% 左右时（之前版本为 50% ）回调即将过期通知。
+- 支持用户通过字面量的方式设置初始化时的条件。详见 [初始化文档](initialization.html)。
+- 对 `ChatManager` 和 `Conversation` 中 [本地搜索消息接口](message_search.html) 增加默认参数，方便用户调用。
+
 ## 版本 V1.7.0 Dev 2025-5-15（开发版）
 
 ### 新增特性

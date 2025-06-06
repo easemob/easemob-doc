@@ -23,7 +23,7 @@ let connectionListener: ConnectionListener = {
     // 使用 token 登录时，token 过期触发。
   },
   onTokenWillExpire: (): void => {
-    // 使用 token 登录时，token 将要过期时触发。
+    // 自 SDK 1.8.0 开始, SDK 会在 token 有效期达到 80% 时触发该回调，之前版本在 token 有效期达到 50% 时触发。
     // 注意：如果本次登录服务器没有离线消息，不会触发该回调。
   },
   onOfflineMessageSyncStart: () => {

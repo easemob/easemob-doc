@@ -20,3 +20,15 @@ let options = new ChatOptions({
 // 初始化时传入上下文以及 options
 ChatClient.getInstance().init(context, options);
 ```
+
+另外，支持通过字面量的方式设置初始化时的条件，示例代码如下：
+  
+```typescript
+ChatClient.getInstance().init(this.context, {
+  appKey: "您的AppKey",
+  appIDForPush: "您在 AppGallery Connect 获取到的 ClientID。",
+  // 关闭自动登录
+  isAutoLogin: false,
+  // 其他更多设置
+});
+```
