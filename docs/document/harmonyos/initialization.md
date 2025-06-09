@@ -21,7 +21,7 @@ let options = new ChatOptions({
 ChatClient.getInstance().init(context, options);
 ```
 
-另外，支持通过字面量的方式设置初始化时的条件，示例代码如下：
+自 SDK 1.8.0 开始，支持通过字面量的方式设置初始化时的条件，示例代码如下：
   
 ```typescript
 ChatClient.getInstance().init(this.context, {
