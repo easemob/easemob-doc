@@ -215,7 +215,7 @@ String cursor = result.getCursor();
 
 ### 查询当前用户已加入的群组数量
 
-自 4.2.1 版本开始，你可以调用 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [计费策略](/product/pricing_policy.html#增值服务费用)。
+自 4.2.1 版本开始，你可以调用 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
 
 ```java
 EMClient.getInstance().groupManager().asyncGetJoinedGroupsCountFromServer(new EMValueCallBack<Integer>() {

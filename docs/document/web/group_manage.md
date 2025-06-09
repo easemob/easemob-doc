@@ -11,10 +11,11 @@
 环信即时通讯 IM Web SDK 支持你通过调用 API 在项目中实现以下群组管理功能：
 
 - 创建、解散群组
-- 获取群组详情信息
+- 获取群组详情
 - 获取群成员列表
-- 获取已加入的群组列表
-- 获取公开群列表
+- 获取群组列表：获取加入和创建的群组列表和公开群列表
+- 查询当前用户已加入的群组数
+- 屏蔽群消息、解除屏蔽群消息和检查当前用户是否已屏蔽群消息
 - 监听群组事件
 
 ## 前提条件
@@ -169,6 +170,42 @@ let option = {
   cursor: cursor,
 };
 conn.getPublicGroups(option).then((res) => console.log(res));
+```
+
+### 查询当前用户已加入的群组数
+
+自 4.15.1 版本开始，你可以调用 `getJoinedGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
+
+```javascript
+conn.getJoinedGroupsCount().then((res) => {
+        console.log(res.data);
+});
+```
+
+### 屏蔽群消息
+
+自 4.15.1 版本开始，群成员可以调用 `blockGroupMessage` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息，群主和群管理员不能进行此操作。示例代码如下：
+
+```javascript
+conn.blockGroupMessage({ groupId: 'groupId' });
+```
+
+### 解除屏蔽群消息
+
+自 4.15.1 版本开始，群成员可以调用 `unblockGroupMessage` 方法解除屏蔽群消息。示例代码如下：
+
+```javascript
+conn.unblockGroupMessage({ groupId: 'groupId' });
+```
+
+### 检查当前用户是否已屏蔽群消息
+
+自 4.15.1 版本开始，群成员可以调用 `getGroupInfo` 方法检查自己是否屏蔽了该群的消息。示例代码如下：
+
+```javascript
+conn.getGroupInfo({ groupId: 'groupId' }).then((res) => {
+        console.log(res.data[0].shieldgroup);
+});
 ```
 
 ### 监听群组事件

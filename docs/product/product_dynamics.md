@@ -2,11 +2,17 @@
 
 ## 2025-06
 
+#### Web SDK 4.15.1 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web SDK 4.15.1 开发版发布   | <br/> - 支持 [查询当前用户已加入的群组数量](/document/web/group_manage.html#查询当前用户已加入的群组数)。<br/> - 支持 [屏蔽群消息](/document/web/group_manage.html#屏蔽群消息)、[解除屏蔽群消息](/document/web/group_manage.html#解除屏蔽群消息) 和 [检查当前用户是否已经屏蔽群消息](/document/web/group_manage.html#检查当前用户是否已屏蔽群消息)。 | 2025-6-9     | [Web SDK 4.15.1 更新日志](/document/web/releasenote.html#版本-v4-15-1-dev-2025-6-9-开发版)      |
+
 #### HarmonyOS SDK 1.7.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.8.0 开发版发布   | <br/> - [撤回消息](/document/harmonyos/message_recall.html) 时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。<br/> - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。 <br/> - 修改 Token [即将过期事件](/document/harmonyos/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。<br/> - 支持 [获取群成员信息列表](/document/harmonyos/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。 | 2025-6-6     | [HarmonyOS 1.8.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-8-0-dev-2025-6-6-开发版)      |
+| HarmonyOS SDK 1.8.0 开发版发布   | <br/> - [撤回消息](/document/harmonyos/message_recall.html) 时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。<br/> - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。 <br/> - 修改 Token [即将过期事件](/document/harmonyos/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。<br/> - 支持 [获取群成员列表](/document/harmonyos/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。 | 2025-6-6     | [HarmonyOS 1.8.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-8-0-dev-2025-6-6-开发版)      |
 
 ## 2025-05
 
