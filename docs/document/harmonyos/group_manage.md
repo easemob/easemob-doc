@@ -310,14 +310,14 @@ let groupListener: GroupListener = {
     // 废弃，使用 onMembersJoined 代替。
     // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
   },
-  onMembersJoined: (groupId: string, member: string): void => {
+  onMembersJoined: (groupId: string, member: string[]): void => {
     // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
   },
   onMemberExited: (groupId: string, member: string): void => {
     // 废弃，使用 onMembersExited 代替。
     // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
   },
-  onMembersExited: (groupId: string, member: string): void => {
+  onMembersExited: (groupId: string, member: string[]): void => {
     // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
   },
   onAnnouncementChanged: (groupId: string, announcement: string): void => {
