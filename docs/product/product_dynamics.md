@@ -2,6 +2,8 @@
 
 ## 2025-06
 
+#### Web SDK 4.15.1 发版
+
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | Web SDK 4.15.1 开发版发布   | <br/> - 支持 [查询当前用户已加入的群组数量](/document/web/group_manage.html#查询当前用户已加入的群组数量)。<br/> - 支持 [屏蔽群消息](/document/web/group_manage.html#屏蔽群消息)、[解除屏蔽群消息](/document/web/group_manage.html#解除屏蔽群消息) 和 [检查当前用户是否已经屏蔽群消息](/document/web/group_manage.html#检查当前用户是否已经屏蔽群消息)。 | 2025-6-9     | [Web SDK 4.15.1 更新日志](/document/web/releasenote.html#版本-v4-15-1-dev-2025-6-9-开发版)      |
