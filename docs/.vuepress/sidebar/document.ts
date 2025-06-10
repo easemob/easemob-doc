@@ -20,9 +20,9 @@ const documentSidebar = [
     */
     text: '快速开始',
     children: [
-      { text: 'React Demo（WebIM）体验', link: 'demo_react.html', only: ['web'] },
-      { text: 'Vue Demo（WebIM）体验', link: 'demo_vue.html', only: ['web'] },
-      { text: 'Demo（EaseIM App）体验', link: 'demo.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'server-side'] },
+      { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
+      { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
+      { text: 'Demo 体验', link: 'demo.html', except: ['web', 'windows', 'flutter', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
