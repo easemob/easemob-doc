@@ -67,6 +67,7 @@
 | `em_push_mutable_content`    | Boolean          | APNs 推送配置，`true` 为富文本推送通知，`false` 则为普通通知。             |
 | `em_push_sound`              | String           | APNs 推送配置，自定义铃声，`Library/Sounds/` 目录下的 `aiff`、`wav` 或 `caf` 文件，例如 `appsound.caf`。 |
 | `em_push_badge`              | Integer          | APNs 推送配置，自定义角标数。      |
+| `thread_id`         | String         | 通知分组标识符。|
 | `em_push_content_available`              | Integer          | 设置为 `1` 表示后台通知。详见[苹果官网的用户通知文档](https://developer.apple.com/documentation/usernotifications/pushing-background-updates-to-your-app?language=objc)。  |
 
 `em_android_push_ext` 结构如下：
@@ -155,6 +156,7 @@
             "em_push_mutable_content": true,
             "em_push_sound": "appsound.mp3",
             "em_push_badge": 1,
+            "thread_id": "abc",
             "em_push_content_available": 1
         },
         "em_android_push_ext": {
