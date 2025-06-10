@@ -156,7 +156,7 @@
             "em_push_mutable_content": true,
             "em_push_sound": "appsound.mp3",
             "em_push_badge": 1,
-            "thread_id": "",
+            "thread_id": "abc",
             "em_push_content_available": 1
         },
         "em_android_push_ext": {
