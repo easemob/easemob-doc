@@ -58,7 +58,7 @@ builder.enableHWPush();
 builder.enableMiPush(appId, appKey);
 builder.enableMeiZuPush(appId, appKey);
 builder.enableOppoPush(appKey, appSecret);
-builder.enableVivoPush();
+builder.enableVivoPush(isAgreeAgreement); // isAgreeAgreement：Boolean 类型变量，表示是否同意隐私声明
 options.setEMPushConfig(builder.build());
 
 EMPushClient.getInstance().init(this, options);

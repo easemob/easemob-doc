@@ -254,9 +254,8 @@ GIF 图片消息是一种特殊的图片消息，在发送图片消息时可以�
 
 #### 发送 GIF 图片消息
 
-你可以通过以下两种方式构造 GIF 图片消息：
-
-- 构造消息时，设置 `isGif` 为 `true`。
+1. 构造消息时，设置 `isGif` 为 `true`。
+2. 调用 `send` 方法发送消息。
 
 ```javascript
 sendGIFMsg(){
@@ -289,7 +288,7 @@ onImageMessage: (message) => {
 
 在发送视频消息之前，应在 app 级别实现视频捕获，获得捕获的视频文件的时长，单位为秒。
 
-1. 创建和发送视频消息。
+1. 创建和发送视频消息。服务器自动生成视频消息的缩略图，即视频的首帧。
 
 ```javascript
 function sendPrivateVideo() {
