@@ -210,7 +210,7 @@ const submitFeedback = async () => {
 
     let response, result
     try {
-      response = await fetch('http://localhost:3000/api/feedback', {
+      response = await fetch('http://dujiepeng.fun:9966/api/feedback', {
         method: 'POST',
         body: formData,
         headers: {
