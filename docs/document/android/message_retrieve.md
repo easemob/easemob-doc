@@ -14,7 +14,7 @@
 
 - `EMChatManager#asyncFetchHistoryMessages`：根据 `EMFetchMessageOption` 类从服务端分页获取指定会话的历史消息；
 - `EMChatManager#doAsyncFetchHistoryMessages`：从服务器获取指定群成员发送的消息；
-- `EMConversation#asyncSearchMsgFromDB`：从本地读取指定会话的消息；
+- `EMConversation#asyncSearchMsgFromDB`：从本地获取指定群成员发送的消息；
 - `EMConversation#getAllMessages/loadMoreMsgFromDB`：读取本地指定会话的消息；
 - `EMChatManager#getMessage`：根据消息 ID 获取本地消息；
 - `EMChatManager#searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)`：获取本地存储的指定会话中特定类型的消息；
