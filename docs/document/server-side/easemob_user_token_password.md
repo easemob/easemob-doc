@@ -2,7 +2,7 @@
 
 用户注册后，使用 “用户 ID” 和 “密码” 登录。登录成功后，你的 App Server 会为客户端提供一个用户 token。
 
-这种方式已被废弃，请 [通过用户 ID 获取用户 Token](easemob_user_token.html#通过用户-id-获取用户-token) 或 [使用动态用户 Token](easemob_user_token.html#生成动态的用户-token)，推荐前者。
+这种方式**已废弃**，请 [通过用户 ID 获取用户 Token](easemob_user_token.html#通过用户-id-获取用户-token) 或 [使用动态用户 Token](easemob_user_token.html#生成动态的用户-token)，推荐前者。
 
 ## 前提条件
 
