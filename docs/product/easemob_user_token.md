@@ -9,7 +9,7 @@
 在生产环境中，通常先实现应用自身账号体系的登录，成功后再使用自身应用服务器（App Server）返回的 userId 和 token 进行即时通讯 IM 登录。也就是说，你需要在 App Server 将 Token 分发给客户端。
 
 :::tip
-用户 ID 在应用内唯一，与其他用户通讯时必须传递 userId。因此，userId 可视为公开信息，建议不与应用自身账号相同，且不能是容易猜测（例如 1111）、按特定字符顺序排列（例如 12345 ）、或者具有明显特征（例如，姓名或生日）的字符串，以防止被恶意使用。用户 ID 的设置需求详见 [注册用户](/document/server-side/account_system.html#%E6%8E%88%E6%9D%83%E6%B3%A8%E5%86%8C%E5%8D%95%E4%B8%AA%E7%94%A8%E6%88%B7)
+用户 ID 在应用内唯一，与其他用户通讯时必须传递 userId。因此，userId 可视为公开信息，建议不与应用自身账号相同，且不能是容易猜测（例如 1111）、按特定字符顺序排列（例如 12345 ）、或者具有明显特征（例如，姓名或生日）的字符串，以防止被恶意使用。用户 ID 的设置需求详见 [注册用户](account_system.html#注册用户)。
 ::: 
 
 环信服务端支持以下两种方式获取用户 token：
@@ -24,7 +24,11 @@
 
 ![img](/images/server-side/token_generate_dynamic.png)
 
-## 前提条件
+## 通过用户 ID 获取用户 token
+
+你通过用户 ID 获取用户 token。若用户 ID 不存在，你可以确定是否自动创建用户。
+
+### 前提条件
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
@@ -32,17 +36,13 @@
 - 已从服务端获取 App Token，详见 [使用 App Token 鉴权](/product/easemob_app_token.html)。
 - 了解环信 IM API 的调用频率限制，详见 [接口频率限制](/product/limitationapi.html)。
 
-## 认证方式
+### 认证方式
 
 环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 Authorization：`Bearer YourAppToken`
 
 为提高项目的安全性，环信使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-
-## 通过用户 ID 获取用户 token
-
-你通过用户 ID 获取用户 token。若用户 ID 不存在，你可以确定是否自动创建用户。
 
 ### HTTP 请求
 
@@ -129,7 +129,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-## 错误码
+### 错误码
 
 调用获取用户 token 接口时，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
