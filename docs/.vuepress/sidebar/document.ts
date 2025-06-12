@@ -530,7 +530,14 @@ const documentSidebar = [
       }
     ],
     only: ['server-side']
-  }
+  },
+  {
+    text: '已废弃内容',
+    children: [
+      { text: '通过用户 ID 和密码获取用户 token', link: 'easemob_user_token_password.html' }
+    ],
+    only: ['server-side']
+  },
 ]
 
 function buildDocSidebar() {
