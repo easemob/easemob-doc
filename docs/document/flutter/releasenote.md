@@ -2,7 +2,7 @@
 
 <Toc />
 
-## 版本 v4.15.0 2025-6-12
+## 版本 v4.15.0 2025-6-13
 
 #### 新增特性
 
@@ -13,7 +13,7 @@
 - 支持 [消息附件鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
 - 支持加载本地会话消息时，只 [加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
-- 支持 [获取群成员信息](group_members.html#获取群组成员信息) 时包括成员角色和入群时间。
+- 支持 [获取群成员信息](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
   - 新增 `onMembersJoinedFromGroup` 和 `onMembersExitedFromGroup` 回调，`onMembersJoinedFromGroup` 和 `onMemberExitedFromGroup` 标记过期。
   - 新增 `EMGroupManager#updateGroupName` 和 `EMGroupManager#updateGroupDesc` 方法，标记 `EMGroupManager#changeGroupName` 和 `EMGroupManager#changeGroupDescription` 方法过期。

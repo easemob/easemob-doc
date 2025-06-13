@@ -14,11 +14,11 @@
 | :----- | :------- | :---------------- | :---------------- |
 | HarmonyOS SDK 1.8.0 开发版发布   | <br/> - [撤回消息](/document/harmonyos/message_recall.html) 时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。<br/> - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。 <br/> - 修改 Token [即将过期事件](/document/harmonyos/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。<br/> - 支持 [获取群成员信息](/document/harmonyos/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。 | 2025-6-6     | [HarmonyOS 1.8.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-8-0-dev-2025-6-6-开发版)      |
 
-#### Flutter SDK 4.15.1 发版
+#### Flutter SDK 4.15.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Flutter SDK 4.5.1 版本发布   | <br/> - 支持 [GIF 图片消息](/document/flutter/message_send_receive.html#发送和接收-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/flutter/group_attributes.html#管理群组头像)。<br/> - 支持 [消息附件鉴权功能](/document/flutter/message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/document/flutter/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/flutter/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [获取群成员信息](/document/flutter/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。  | 2025-05-15     | [HarmonyOS 1.7.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-7-0-dev-2025-5-15-开发版)      |
+| Flutter SDK 4.15.0 版本发布   | <br/> - 支持 [GIF 图片消息](/document/flutter/message_send_receive.html#发送和接收-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/flutter/group_attributes.html#管理群组头像)。<br/> - 支持 [消息附件鉴权功能](/document/flutter/message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/document/flutter/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/flutter/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [获取群成员列表](/document/flutter/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。  | 2025-06-13     | [Flutter 4.15.0 更新日志](/document/flutter/releasenote.html#版本-v4-15-0-dev-2025-6-13-开发版)      |
 
 ## 2025-05
 
