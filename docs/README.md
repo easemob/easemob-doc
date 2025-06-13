@@ -1935,19 +1935,19 @@ projects:
         icon: /feature/api-client.svg
         contexts:
           - text: Android
-            link: https://sdkdocs.easemob.com/apidoc/android/chat3.0/annotated.html
+            link: https://doc.easemob.com/apidoc/android/chat3.0/annotated.html
           - text: iOS
-            link: https://sdkdocs.easemob.com/apidoc/ios/chat3.0/annotated.html
+            link: https://doc.easemob.com/apidoc/ios/chat3.0/annotated.html
           - text: Web/小程序
             link: https://doc.easemob.com/jsdoc/index.html
           - text: HarmonyOS
-            link: https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html
+            link: https://doc.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html
           - text: Flutter
-            link: https://sdkdocs.easemob.com/apidoc/flutter/index.html
+            link: https://doc.easemob.com/apidoc/flutter/index.html
           - text: React Native
-            link: https://sdkdocs.easemob.com/apidoc/rn/modules.html
+            link: https://doc.easemob.com/apidoc/rn/modules.html
           - text: Unity/Windows
-            link: https://sdkdocs.easemob.com/apidoc/unity/annotated.html       
+            link: https://doc.easemob.com/apidoc/unity/annotated.html       
       - title: IM 服务端
         icon: /feature/api-server.svg
         contexts:

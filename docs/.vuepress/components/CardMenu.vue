@@ -19,7 +19,7 @@
             width="24px"
             :alt="sdk.text"
           />
-          <el-link :href="sdk.link" class="link-label">{{ sdk.text }}</el-link>
+          <a :href="sdk.link" class="link-label">{{ sdk.text }}</a>
         </div>
       </section>
     </div>
@@ -110,6 +110,7 @@ defineProps<{
 .link-label {
   font-family: 'SF Pro', sans-serif;
   margin: auto 0;
+  text-decoration: underline;
 }
 @media (max-width: 991px) {
   .links-section {

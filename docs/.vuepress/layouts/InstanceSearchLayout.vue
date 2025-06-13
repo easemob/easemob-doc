@@ -22,6 +22,7 @@
         <div class="search-container">
           <div class="search-box">
             <ais-search-box
+              autofocus
               placeholder="热门搜索: 登录、消息扩展"
               show-loading-indicator
             />
@@ -419,7 +420,12 @@ const productCategoryMap = {
 
 const apiReferenceCategoryMap = {
   "Android API参考": "Android",
+  "IOS API参考": "IOS",
   "Web API参考": "Web",
+  "Harmony API参考": "Harmony",
+  "Flutter API参考": "Flutter",
+  "React Native API参考": "React Native",
+  "Unity and Windows API参考": "Unity and Windows"
 };
 
 const categoryMap = {
@@ -438,7 +444,8 @@ const sdkFilters =
 const uikitFilters =
   "category:'UIKit-Andorid 集成文档' OR category:'UIKit-iOS 集成文档' OR category:'UIKit-Web 集成文档' OR category:'UIKit-HarmonyOS 集成文档' OR category:'UIKit-Flutter 集成文档' OR category:'UIKit-React Native 集成文档' OR category:'UIKit-uniapp'";
 
-const apiReferenceFilters = "category:'Web API参考' OR category:'Android API参考'";
+const apiReferenceFilters =
+  "category:'Android API参考' OR category:'IOS API参考' OR category:'Web API参考' OR category:'Harmony API参考' OR category:'Flutter API参考' OR category:'React Native API参考' OR category:'Unity and Windows API参考'";
 
 export default {
   name: "InstanceSearchLayout",
@@ -599,16 +606,14 @@ body {
 }
 
 .search-box-container {
-  display: flex;
   font-family: sans-serif;
   padding: 1em;
   max-width: 1080px;
   margin: 75px auto 20px;
-  padding: 2em;
+  padding: 1em;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  justify-content: center;
 }
 
 .search-category {
