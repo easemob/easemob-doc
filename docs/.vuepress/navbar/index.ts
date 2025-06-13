@@ -176,12 +176,12 @@ export const zhNavbar = navbar([
           {
             text: 'Android',
             icon: '/icon-Android.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/android/chat3.0/annotated.html'
+            link: 'https://doc.easemob.com/apidoc/android/chat3.0/annotated.html'
           },
           {
             text: 'iOS',
             icon: '/icon-iOS.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/ios/chat3.0/annotated.html'
+            link: 'https://doc.easemob.com/apidoc/ios/chat3.0/annotated.html'
           },
           {
             text: 'Web/小程序',
@@ -191,12 +191,12 @@ export const zhNavbar = navbar([
           {
             text: 'HarmonyOS',
             icon: '/icon-harmonyos.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html'
+            link: 'https://doc.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html'
           },
           {
             text: 'Windows',
             icon: '/icon-windows.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/unity/annotated.html'
+            link: 'https://doc.easemob.com/apidoc/unity/annotated.html'
           }
         ]
       },
@@ -206,17 +206,17 @@ export const zhNavbar = navbar([
           {
             text: 'React Native',
             icon: '/icon-ReactNative.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/rn/modules.html'
+            link: 'https://doc.easemob.com/apidoc/rn/modules.html'
           },
           {
             text: 'Flutter',
             icon: '/icon-flutter.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/flutter/index.html'
+            link: 'https://doc.easemob.com/apidoc/flutter/index.html'
           },
           {
             text: 'Unity',
             icon: '/icon-unity.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/unity/annotated.html'
+            link: 'https://doc.easemob.com/apidoc/unity/annotated.html'
           },
           {
             text: 'Electron',
