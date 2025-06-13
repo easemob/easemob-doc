@@ -12,10 +12,15 @@
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。
 - 支持 [消息附件鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
-- 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持加载本地会话消息时，只 [加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
 - 支持 [获取群成员信息](group_members.html#获取群组成员信息) 时包括成员角色和入群时间。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
   - 新增 `onMembersJoinedFromGroup` 和 `onMembersExitedFromGroup` 回调，`onMembersJoinedFromGroup` 和 `onMemberExitedFromGroup` 标记过期。
+  - 新增 `EMGroupManager#updateGroupName` 和 `EMGroupManager#updateGroupDesc` 方法，标记 `EMGroupManager#changeGroupName` 和 `EMGroupManager#changeGroupDescription` 方法过期。
+
+#### 优化
+
+- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](/document/flutter/demo.html)。
 
 #### 修复
 

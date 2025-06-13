@@ -13,6 +13,8 @@
 环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMConversation` 类实现对本地消息的管理，其中核心方法如下：
 
 - `EMChatManager#fetchHistoryMessages`：根据 `FetchMessageOptions` 类获取服务器保存的指定会话中的消息。
+- `EMChatManager#doAsyncFetchHistoryMessages`：从服务器获取指定群成员发送的消息；
+- `EMConversation#asyncSearchMsgFromDB`：从本地获取指定群成员发送的消息；
 - `EMChatManager.getConversation`：读取本地指定会话的消息。
 - `EMChatManager.loadMessage`：根据消息 ID 获取消息。
 - `EMConversation.loadMessagesWithMsgType`：获取本地存储的指定会话中特定类型的消息。
@@ -99,6 +101,30 @@ try {
   );
 } on EMError catch (e) {
 }
+```
+
+### 从服务器获取指定群成员发送的消息
+
+自 4.15.0 版本开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
+
+```dart
+  EMCursorResult<EMMessage> result =
+      await EMClient.getInstance.chatManager.fetchHistoryMessagesByOption(
+    'conversationId',
+    EMConversationType.GroupChat,
+    options: const FetchMessageOptions(senders: ['senderA', 'senderB']),
+  );
+```
+
+### 从本地获取指定群成员发送的消息
+
+自 4.15.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
+
+```dart
+List<EMMessage> list = conversation.loadMessagesWithKeyword(
+  keywords: keywords,
+  senders: ['senderA, senderB'],
+);
 ```
 
 ### 读取指定会话的消息

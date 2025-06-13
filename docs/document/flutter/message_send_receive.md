@@ -121,6 +121,8 @@ class _ChatMessagesPageState extends State<ChatMessagesPage> {
 2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
 3. 获取附件的服务器地址和本地路径。
 
+自 4.15.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
+
 ### 发送和接收语音消息
 
 发送和接收语音消息的过程如下：
@@ -205,6 +207,46 @@ body.thumbnailLocalPath;
 body.remotePath;
 // 服务器缩略图路径。
 body.thumbnailRemotePath;
+```
+
+### 发送和接收 GIF 图片消息
+
+自 Flutter SDK 4.15.0 开始，支持发送和接收 GIF 图片消息。
+
+GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。
+
+图片缩略图的生成和下载与普通图片消息相同，详见 [发送和接收图片消息](#发送和接收图片消息)。
+
+#### 发送 GIF 图片消息
+
+使用 `EMMessage#createImageSendMessage` 方法构造 GIF 图片消息体。
+
+```dart
+  final msg = EMMessage.createImageSendMessage(
+    targetId: 'targetId',
+    filePath: 'filePath',
+    isGif: true,
+  );
+
+  EMClient.getInstance.chatManager.sendMessage(msg);
+```
+
+#### 接收 GIF 图片消息
+
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessageReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
+
+```java
+public void onMessageReceived(List<EMMessage> messages) {
+    for(EMMessage message : messages) {
+        if (message.getType() == Type.IMAGE && ) {
+            EMImageMessageBody body = (EMImageMessageBody) msg.getBody();
+            if(body.isGif()) {
+                // 根据业务情况处理 gif message, 例如下载展示该消息
+            }
+        }
+    }
+    
+}
 ```
 
 ### 发送和接收视频消息

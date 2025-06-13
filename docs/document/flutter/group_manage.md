@@ -47,9 +47,9 @@
 2. 进群邀请是否需要对方同意 (`EMGroupOptions#inviteNeedConfirm`) 的具体设置如下：
     - 进群邀请需要用户确认 (`EMGroupOptions#inviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `EMOptions#autoAcceptGroupInvitation` 设置，处理逻辑如下：
         - 用户设置手动确认群组邀请 (`EMOptions#autoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `EMGroupEventHandler#onInvitationReceivedFromGroup` 事件，并选择同意或拒绝入群邀请：
-            - 用户同意入群邀请后，邀请人收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
+            - 用户同意入群邀请后，邀请人收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMembersJoinedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMembersJoinedFromGroup` 事件；
             - 用户拒绝入群邀请后，邀请人收到 `EMGroupEventHandler#onInvitationDeclinedFromGroup` 事件。
-    - 进群邀请无需用户确认 (`EMGroupOptions.inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无论用户的 `EMOptions#autoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到`EMGroupEventHandler#onAutoAcceptInvitationFromGroup` 事件，邀请人收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件。
+    - 进群邀请无需用户确认 (`EMGroupOptions.inviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无论用户的 `EMOptions#autoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到`EMGroupEventHandler#onAutoAcceptInvitationFromGroup` 事件，邀请人收到 `EMGroupEventHandler#onInvitationAcceptedFromGroup` 事件和 `EMGroupEventHandler#onMembersJoinedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMembersJoinedFromGroup` 事件。
 
 用户可以调用 `EMGroupManager#createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
@@ -64,9 +64,11 @@ EMGroupOptions groupOptions = EMGroupOptions(
 
 String groupName = "newGroup";
 String groupDesc = "group desc";
+String groupAvatarUrl = "url";
 try {
   await EMClient.getInstance.groupManager.createGroup(
     groupName: groupName,
+    avatarUrl: groupAvatarUrl,
     desc: groupDesc,
     options: groupOptions,
   );
@@ -94,9 +96,9 @@ try {
 
 根据 [创建群组](#创建群组) 时的群组类型 (`GroupStyle`) 设置，加入群组的处理逻辑差别如下：
 
-- 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主或群管理员同意，加入群组后，其他群成员收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
+- 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主或群管理员同意，加入群组后，其他群成员收到 `EMGroupEventHandler#onMembersJoinedFromGroup` 事件；
 - 当群组类型为 `PublicJoinNeedApproval` 时，用户可以申请进群，群主或群管理员收到 `EMGroupEventHandler#onRequestToJoinReceivedFromGroup` 事件，并选择同意或拒绝入群申请：
-    - 群主或群管理员同意入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinAcceptedFromGroup` 事件，其他群成员收到`EMGroupEventHandler#onMemberJoinedFromGroup` 事件；
+    - 群主或群管理员同意入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinAcceptedFromGroup` 事件，其他群成员收到`EMGroupEventHandler#onMembersJoinedFromGroup` 事件；
     - 群主或群管理员拒绝入群申请，申请人收到 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 事件。
 
 :::tip
@@ -143,7 +145,7 @@ try {
 
 ### 退出群组
 
-群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `EMGroupEventHandler#onMemberExitedFromGroup` 事件。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [`DestroyGroup`](#解散群组) 解散群组。
+群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `EMGroupEventHandler#onMembersJoinedFromGroup` 事件。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [`DestroyGroup`](#解散群组) 解散群组。
 
 示例代码如下：
 
@@ -190,6 +192,19 @@ try {
   );
 } on EMError catch (e) {
 }
+```
+
+- 自 4.15.0 版本开始，获取群成员列表时除了成员的用户 ID，还包括成员角色和加入群组的时间。
+  
+```dart
+try {
+  EMCursorResult<GroupMemberInfo> result =
+      await EMClient.getInstance.groupManager.fetchGroupMembersInfo(
+    groupId: groupId,
+    cursor: cursor,
+    limit: limit,
+  );
+} on EMError catch (e) {}
 ```
 
 ### 获取群组列表
@@ -339,10 +354,10 @@ EMClient.getInstance.groupManager.addEventHandler(
     onInvitationReceivedFromGroup: (groupId, groupName, inviter, reason) {},
 
     // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
-    onMemberExitedFromGroup: (groupId, member) {},
+    onMembersJoinedFromGroup: (groupId, userIds) {},
 
-    // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
-    onMemberJoinedFromGroup: (groupId, member) {},
+    // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
+    onMembersExitedFromGroup: (groupId, userIds) {},
 
     // 有成员被加入群组禁言列表。被禁言的成员及群主和群管理员（除操作者外）会收到该回调。
     onMuteListAddedFromGroup: (groupId, mutes, muteExpire) {},
