@@ -70,7 +70,7 @@
   <ImageItem src="/images/uikit/chatuikit/uniapp/message_types.png" title="发送多种类型的消息" />
   <ImageItem src="/images/uikit/chatuikit/uniapp/message_operation.png" title="消息操作" />
   <ImageItem src="/images/uikit/chatuikit/android/message_reply.png" title="消息引用" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_deliveryreceipt.png" title="已发送回执" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_deliveryreceipt.png" title="送达回执" />
   <ImageItem src="/images/uikit/chatuikit/android/message_readreceipt.png" title="已读回执" />
 </ImageGallery>
 

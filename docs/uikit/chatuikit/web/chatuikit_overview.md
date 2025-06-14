@@ -40,7 +40,7 @@
   <ImageItem src="/images/uikit/chatuikit/web/message_types.png" title="聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/web/message_operation.png" title="消息操作" />
   <ImageItem src="/images/uikit/chatuikit/web/message_reply.png" title="消息引用" />
-  <ImageItem src="/images/uikit/chatuikit/web/message_deliveryreceipt.png" title="已发送回执" />
+  <ImageItem src="/images/uikit/chatuikit/web/message_deliveryreceipt.png" title="送达回执" />
   <ImageItem src="/images/uikit/chatuikit/web/message_readreceipt.png" title="已读回执" />
 </ImageGallery>
 

@@ -1514,26 +1514,26 @@ projects:
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatfeature_common.html#已读回执
           - text: 送达回执
-            desc: 已发送回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
+            desc: 送达回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /uikit/chatuikit/android/chatfeature_common.html#已发送回执
+                link: /uikit/chatuikit/android/chatfeature_common.html#送达回执
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_common.html#已发送回执
+                link: /uikit/chatuikit/ios/chatfeature_common.html#送达回执
               - icon: /sdk/web.svg
                 text: Web
-                link: /uikit/chatuikit/web/chatfeature_common.html#已发送回执
+                link: /uikit/chatuikit/web/chatfeature_common.html#送达回执
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_common.html#已发送回执  
+                link: /uikit/chatuikit/harmonyos/chatfeature_common.html#送达回执  
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_common.html#已发送回执
+                link: /uikit/chatuikit/flutter/chatfeature_common.html#送达回执
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_common.html#已发送回执
+                link: /uikit/chatuikit/react-native/chatfeature_common.html#送达回执
           - text: 文件共享
             desc: 文件共享允许用户通过即时通讯应用发送和接收文件。文件共享可以用于分享文档、图片、视频等文件。
             sdks:

@@ -36,10 +36,11 @@
   <ImageItem src="/images/uikit/chatuikit/feature/message/message_edit_harmonyos.png" title="消息编辑" />
 </ImageGallery>
 
-## 消息引用	
+## 其他消息特性
 
-消息引用指用户可以引用一条已发送的消息。消息引用可以帮助用户回复特定的消息，或强调特定的信息。
+对于消息回执和引用，你可以查看以下文档：
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/message/message_reply_harmonyos.png" title="消息引用" />
-</ImageGallery>
+- [消息回执](chatuikit_feature_receipt.html)
+- [消息引用](chatuikit_feature_quote.html)
+
+

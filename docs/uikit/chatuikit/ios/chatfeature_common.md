@@ -44,8 +44,6 @@
   <ImageItem src="/images/uikit/chatuikit/feature/common/ios/group_admin.png" title="群组管理员" />
 </ImageGallery>
 
-
-
 ## 联系人列表	
 
 联系人列表显示了用户的所有联系人。
@@ -68,22 +66,6 @@
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/common/ios/message_unread_count.png" title="未读消息数" />
-</ImageGallery>
-
-## 已发送回执	
-
-已发送回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/ios/message_delivery_receipt.png" title="已发送回执	" />
-</ImageGallery>
-
-## 已读回执
-
-已读回执用于告知消息发送者，接收者已经阅读了其发送的消息。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/ios/message_read_receipt.png" title="已读回执" />
 </ImageGallery>
 
 ## 联系人名片	
@@ -109,61 +91,4 @@
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/common/ios/message_report.png" title="消息审核" />
 </ImageGallery>
-
-## 本地消息搜索
-
-本地消息搜索功能允许用户快速在会话内搜索历史消息内容，支持关键词匹配。该功能帮助用户高效找到所需信息，提高工作效率和信息管理的便捷性。
-
-本地消息搜索的 UI 和逻辑结构如下：
-
-- `SearchHistoryMessagesViewController` 为搜索历史消息的页面，用户输入关键词后，将在历史消息中匹配关键词并展示搜索结果。
-- `SearchResultMessagesController` 为搜索结果的页面，展示搜索结果的消息列表。
-- `SearchHistoryMessageCell`为搜索历史消息的 cell，展示搜索结果的消息列表。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/ios/message_search.png" title="本地消息搜索" />
-</ImageGallery>
-
-#### 如何使用
-
-跳转 `SearchHistoryMessagesViewController` 页面，入参为会话 ID，输入关键词后，将在历史消息中匹配关键词并展示搜索结果。
-
-本地消息搜索特性在联系人详情以及群详情中默认开启，`Appearance.contact.detailExtensionActionItems` 中包含 `ContactListHeaderItem(featureIdentify: "SearchMessages", featureName: "SearchMessages".chat.localize, featureIcon: UIImage(named: "search_history_messages", in: .chatBundle, with: nil))`。如果不想要搜索功能删除此项即可。
-
-示例代码如下：
-
-```swift
-    Appearance.contact.detailExtensionActionItems.removeAll { $0.featureIdentify ==  "SearchMessages" }
-
-```
-
-## 群组 @ 提及
-
-群组 @ 提及功能使用户能在群聊中通过 @ 符号直接提及特定成员，被提及者将收到特别通知。该功能便于高效传递重要信息，确保关键消息得到及时关注和回应。
-
-群组@提及功能的 UI 和逻辑结构如下：
-
-首先在 `MessageListController` 的 `MessageListView` 中的 `MessageInputBar`中输入 `@` 字符后会告知 `ViewModel` 以及 `Controller` 用户输入了 `@` 字符，选择 @ 的用户后，输入框中会显示被 @ 的用户的名字或者昵称。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/ios/group_@.png" title="群组 @ 提及" />
-</ImageGallery>
-
-#### 如何使用
-
-群组 @ 提及特性默认开启。要关闭该特性，则不需理会 `MessageListController#onInputBoxEventsOccur` 方法，即重载此方法后不需要处理 mention 事件即可。
-
-示例代码如下：
-
-```swift
-    public func onInputBoxEventsOccur(action type: MessageInputBarActionType, attributeText: NSAttributedString?) {
-        switch type {
-        case .audio: self.audioDialog()
-        case .mention:  self.mentionAction()
-        case .attachment: self.attachmentDialog()
-        default:
-            break
-        }
-  }
-```
 
