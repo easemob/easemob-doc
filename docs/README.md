@@ -58,7 +58,7 @@ starter:
       - icon: /sdk/rest.svg
         link: /document/server-side/overview.html
         text: REST
-  - title: "单群聊 UIKit 集成"
+  - title: "单群聊 UIKit"
     platform:
       - icon: /sdk/android.svg
         link: /uikit/chatuikit/android/chatuikit_integrated.html
@@ -78,7 +78,7 @@ starter:
       - icon: /sdk/react.svg
         link: /uikit/chatuikit/react-native/chatuikit_integrated.html
         text: React Native
-  - title: "聊天室 UIKit 集成"
+  - title: "聊天室 UIKit"
     platform:
       - icon: /sdk/android.svg
         link: /uikit/chatroomuikit/android/roomuikit_integrated.html
@@ -1182,50 +1182,10 @@ projects:
                 link: /push/push_integration_note_ios.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /push/push_by_tag.html   
-      - title: 其他
-        icon: /feature/others.svg
-        contexts:
-          - text: 回调
-            link: /document/server-side/callback_overview.html
-          - text: 错误码
-            desc: SDK 中的接口和 REST 接口调用或者回调中的错误码。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/error.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/error.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/error.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/error.html
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS 
-                link: /document/harmonyos/error.html  
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/error.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/error.html
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/error.html
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/error.html 
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /document/server-side/error.html
-          - text: 内容审核
-            link: /product/moderation/moderation_overview.html           
+                link: /push/push_by_tag.html           
   - title: UIKit 功能
     features:
-      - title: UIKit-单群聊
+      - title: 单群聊 UIKit
         icon: /feature/uikit.svg
         contexts:
           - text: 聊天界面
@@ -1627,7 +1587,7 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatfeature_conversation.html#会话删除
-      - title: UIKit-聊天室
+      - title: 聊天室 UIKit
         icon: /feature/uikit-chatroom.svg
         contexts:
           - text: 聊天室管理
