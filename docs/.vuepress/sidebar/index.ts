@@ -142,17 +142,6 @@ export const zhSidebar = sidebar({
           ],
         },
         {
-      text: "回调",
-      collapsible: true,
-      children: [
-        { text: "回调概述", link: "/document/server-side/callback_overview.html" },
-        { text: "发送前回调", link: "/document/server-side/callback_presending.html" },
-        { text: "发送后回调", link: "/document/server-side/callback_postsending.html" },
-        { text: "发送后回调事件", link: "/document/server-side/callback_login_logout.html" },
-         ],
-      }, 
-      { text: "请求质量", link: "/product/request_quality_overview.html" },
-        {
           text: "快速开始",
           collapsible: true,
           children: [
@@ -188,24 +177,17 @@ export const zhSidebar = sidebar({
       ],
     },
         {
-          text: "常见问题",
-          collapsible: true,
-          children: [
-            {
-              text: "如何开始使用内容审核服务？",
-              link: "moderation/moderation_use_console.html",
-            },
-            {
-              text: "如何新增自定义词？",
-              link: "moderation/moderation_add_word.html",
-            },
-            {
-              text: "为什么处置方式选择了替换***，但实际被拦截了没有发出来？",
-              link: "moderation/moderation_replace_refuse.html",
-            },
-          ],
-        },
-      ],
+         text: "回调",
+         collapsible: true,
+         children: [
+        { text: "回调概述", link: "/document/server-side/callback_overview.html" },
+        { text: "发送前回调", link: "/document/server-side/callback_presending.html" },
+        { text: "发送后回调", link: "/document/server-side/callback_postsending.html" },
+        { text: "发送后回调事件", link: "/document/server-side/callback_login_logout.html" },
+         ],
+      }, 
+      { text: "请求质量", link: "/product/request_quality_overview.html" },
+     ],
     },
     {
       text: "场景方案",
@@ -421,7 +403,7 @@ export const zhSidebar = sidebar({
         { text: "FAQ 集成", link: "faq_integration_issues.html" },
         ],
       },
-      { text: "帮助中心", link: "help.html" },
+      { text: "联系我们", link: "help.html" },
      ],
     },
     {
