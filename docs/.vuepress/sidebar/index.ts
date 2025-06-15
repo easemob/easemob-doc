@@ -410,13 +410,19 @@ export const zhSidebar = sidebar({
       ],
     },
     {
+      text: "帮助中心",
+      collapsible: true,
+      children: [
+      {
       text: "FAQ",
       collapsible: true,
       children: [
         { text: "FAQ 质量", link: "faq_quality_issues.html" },
         { text: "FAQ 集成", link: "faq_integration_issues.html" },
-        { text: "帮助中心", link: "help.html" },
-      ],
+        ],
+      },
+      { text: "帮助中心", link: "help.html" },
+     ],
     },
     {
       text: "安全",
