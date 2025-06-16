@@ -92,13 +92,13 @@ export const zhSidebar = sidebar({
         { text: "购买指引", link: "pricing_method.html" },
       ],
     }, 
-    {
-      text: "Demo",
-      collapsible: true,
-      children: [
-        { text: "体验 Demo", link: "demo.html" },
-      ],
-    },
+    // {
+    //   text: "Demo",
+    //   collapsible: true,
+    //   children: [
+    //     { text: "体验 Demo", link: "demo.html" },
+    //   ],
+    // },
     {
       text: "增值服务",
       collapsible: true,
@@ -363,6 +363,16 @@ export const zhSidebar = sidebar({
       ],
     },
     {
+      text: "常见方案",
+      collapsible: true,
+      children: [
+        { text: "群 @ 消息", link: "solution_common/group_@.html" },
+        { text: "消息引用", link: "solution_common/message_quote.html" },
+        { text: "实现输入指示器", link: "solution_common/typing_indication.html" },
+        { text: "迁移到环信", link: "solution_common/migrate_to_easemob.html" },
+      ],
+    },
+    {
       text: "插件",
       collapsible: true,
       children: [
@@ -380,16 +390,6 @@ export const zhSidebar = sidebar({
       ], 
     },
     ], 
-    },
-    {
-      text: "常见方案",
-      collapsible: true,
-      children: [
-        { text: "群 @ 消息", link: "solution_common/group_@.html" },
-        { text: "消息引用", link: "solution_common/message_quote.html" },
-        { text: "实现输入指示器", link: "solution_common/typing_indication.html" },
-        { text: "迁移到环信", link: "solution_common/migrate_to_easemob.html" },
-      ],
     },
     {
       text: "帮助中心",
