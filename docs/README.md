@@ -58,7 +58,7 @@ starter:
       - icon: /sdk/rest.svg
         link: /document/server-side/overview.html
         text: REST
-  - title: "单群聊 UIKit 集成"
+  - title: "单群聊 UIKit"
     platform:
       - icon: /sdk/android.svg
         link: /uikit/chatuikit/android/chatuikit_integrated.html
@@ -78,7 +78,7 @@ starter:
       - icon: /sdk/react.svg
         link: /uikit/chatuikit/react-native/chatuikit_integrated.html
         text: React Native
-  - title: "聊天室 UIKit 集成"
+  - title: "聊天室 UIKit"
     platform:
       - icon: /sdk/android.svg
         link: /uikit/chatroomuikit/android/roomuikit_integrated.html
@@ -493,33 +493,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_pin.html                   
-          - text: 消息翻译
-            desc: 在聊天过程中对文字消息进行翻译，支持发送或接收消息时对文本消息进行按需翻译或自动翻译。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/message_translation.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/message_translation.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/message_translation.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_translation.html
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/message_translation.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/message_translation.html
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/message_translation.html
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/message_translation.html
           - text: 消息审核（举报）
             desc: 你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在环信即时通讯云控制台展示。你可在环信即时通讯云控制台查看举报记录，并进行相应处理。
             sdks:
@@ -1209,50 +1182,10 @@ projects:
                 link: /push/push_integration_note_ios.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /push/push_by_tag.html   
-      - title: 其他
-        icon: /feature/others.svg
-        contexts:
-          - text: 回调
-            link: /document/server-side/callback_overview.html
-          - text: 错误码
-            desc: SDK 中的接口和 REST 接口调用或者回调中的错误码。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/error.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/error.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/error.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/error.html
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS 
-                link: /document/harmonyos/error.html  
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/error.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/error.html
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/error.html
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/error.html 
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /document/server-side/error.html
-          - text: 内容审核
-            link: /product/moderation/moderation_overview.html           
+                link: /push/push_by_tag.html           
   - title: UIKit 功能
     features:
-      - title: UIKit-单群聊
+      - title: 单群聊 UIKit
         icon: /feature/uikit.svg
         contexts:
           - text: 聊天界面
@@ -1654,7 +1587,7 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatfeature_conversation.html#会话删除
-      - title: UIKit-聊天室
+      - title: 聊天室 UIKit
         icon: /feature/uikit-chatroom.svg
         contexts:
           - text: 聊天室管理
@@ -1890,7 +1823,117 @@ projects:
                 link: /uikit/chatroomuikit/flutter/roomfeature_member.html#移除成员
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_member.html#移除成员        
+                link: /uikit/chatroomuikit/react-native/roomfeature_member.html#移除成员  
+  - title: 增值服务
+    features:
+      - title: 消息翻译
+        icon: /feature/uikit.svg
+        contexts:
+          - text: 自动翻译
+            desc: 发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_translation.html#设置自动翻译
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_translation.html#设置自动翻译
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_translation.html#设置自动翻译
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_translation.html#设置自动翻译
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_translation.html#设置自动翻译
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_translation.html#设置自动翻译
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_translation.html#设置自动翻译
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_translation.html#设置自动翻译
+          - text: 按需翻译
+            desc: 接收方在收到文本消息后，将消息内容翻译为目标语言。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_translation.html#按需翻译
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_translation.html#按需翻译
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_translation.html#按需翻译
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_translation.html#按需翻译
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_translation.html#按需翻译
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_translation.html#按需翻译
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_translation.html#按需翻译
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_translation.html#按需翻译
+          - text: 离线通知翻译
+            desc: 推送通知与翻译功能协同工作。如果用户启用 自动翻译 功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/push/push_translation.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/push/push_translation.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/push/push_translation.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/push/push_translation.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/push/push_translation.html
+      - title: 内容审核
+        icon: /feature/api-client.svg
+        contexts:
+          - text: 开通审核服务
+            link: /product/moderation/moderation_enable.html
+          - text: 配置审核规则
+            link: /product/moderation/moderation_rule_config.html
+          - text: 测试审核规则
+            link: /product/moderation/moderation_rule_test.html
+          - text: 查看历史记录
+            link: /product/moderation/moderation_history.html
+          - text: 关键词审核
+            link: /product/moderation/keyword_review.html
+          - text: 消息审核机制
+            link: /product/moderation/moderation_mechanism.html
+          - text: 审核记录回调
+            link: /product/moderation/moderation_record_callback.html
+          - text: 消息人工审核
+            link: /product/moderation/moderation_manual_review.html
+      - title: 回调
+        icon: /feature/api-server.svg
+        contexts:
+          - text: 发送前回调
+            link: /document/server-side/callback_presending.html
+          - text: 发送后回调
+            link: /document/server-side/callback_postsending.html
+          - text: 发送后回调事件
+            link: /document/server-side/callback_login_logout.html
+      - title: 质量监控
+        icon: /feature/api-server.svg
+        contexts:
+          - text: 请求质量
+            link: /product/request_quality_overview.html
   - title: 场景方案
     features:
       - contexts:
