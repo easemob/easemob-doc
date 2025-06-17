@@ -9,7 +9,6 @@
 环信即时通讯 IM Android SDK 提供 [EMGroupManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager.html)、[EMGroup](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html) 和 [EMGroupChangeListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_group_change_listener.html)用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 加入、退出群组
-- 获取群组成员信息
 - 管理群成员的自定义属性
 - 管理群主及群管理员
 - 管理群组白名单
@@ -171,30 +170,6 @@ EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userL
 
             @Override
             public void onError(int code, String error) {
-
-            }
-        });
-```
-
-### 获取群组成员信息
-
-自 4.14.0 版本开始，你可以调用 `asyncFetchGroupMembersInfo` 方法获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
-
-```java
-EMClient.getInstance().groupManager().asyncFetchGroupMembersInfo(groupId, null, 50, new EMValueCallBack<EMCursorResult<EMGroupMemberInfo>>() {
-            @Override
-            public void onSuccess(EMCursorResult<EMGroupMemberInfo> value) {
-                List<EMGroupMemberInfo> list = value.getData();
-                for (EMGroupMemberInfo groupMemberInfo : list) {
-                    //获取群成员的用户 ID、加群时间和成员角色
-                    String id = groupMemberInfo.getMemberId();
-                    long joinTime = groupMemberInfo.getJoinTime();
-                    EMGroup.EMGroupPermissionType role = groupMemberInfo.getRole();
-                }
-            }
-
-            @Override
-            public void onError(int error, String errorMsg) {
 
             }
         });

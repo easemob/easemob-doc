@@ -179,6 +179,8 @@ do {
 } while (result && result.list < pageSize);
 ```
 
+
+
 ### 获取群组列表
 
 用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。示例代码如下：

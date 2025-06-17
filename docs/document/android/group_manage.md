@@ -143,23 +143,35 @@ boolean isMsgBlocked = group.isMsgBlocked();
 
 ### 获取群成员列表
 
-- 当群成员少于 200 人时，你可以调用从服务器获取群组详情的方法 `getGroupFromServer` 获取获取群成员列表，包括群主、群管理员和普通群成员：
+- 自 4.14.0 版本开始，你可调用 `asyncFetchGroupMembersInfo` 方法获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
 
 ```java
-// 第二个参数传入 `true`，默认取 200 人的群成员列表。
-// 同步方法，会阻塞当前线程。
-EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
-List<String> memberList = group.getMembers();//普通成员
-memberList.addAll(group.getAdminList());//加上管理员
-memberList.add(group.getOwner());//加上群主
+EMClient.getInstance().groupManager().asyncFetchGroupMembersInfo(groupId, null, 50, new EMValueCallBack<EMCursorResult<EMGroupMemberInfo>>() {
+            @Override
+            public void onSuccess(EMCursorResult<EMGroupMemberInfo> value) {
+                List<EMGroupMemberInfo> list = value.getData();
+                for (EMGroupMemberInfo groupMemberInfo : list) {
+                    //获取群成员的用户 ID、加群时间和成员角色
+                    String id = groupMemberInfo.getMemberId();
+                    long joinTime = groupMemberInfo.getJoinTime();
+                    EMGroup.EMGroupPermissionType role = groupMemberInfo.getRole();
+                }
+            }
+
+            @Override
+            public void onError(int error, String errorMsg) {
+
+            }
+        });
 ```
 
-- 当群成员数量大于等于 200 时，你可以首先调用 `getGroupFromServer` 方法获取群主和群管理员，然后调用 `fetchGroupMembers` 方法获取普通群成员列表：
+
+- 你也可以首先调用 `getGroupFromServer` 方法获取群主和群管理员，然后调用 `fetchGroupMembers` 方法获取普通群成员列表（用户 ID 列表）。
 
 ```java
 // 第二个参数传入 `true`，默认取 200 人的群成员列表。
 // 同步方法，会阻塞当前线程。
-EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
+EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId);
 
 List<String> memberList = new ArrayList<>();
 EMCursorResult<String> result = null;
@@ -174,6 +186,7 @@ do {
  memberList.addAll(group.getAdminList());//加上管理员
  memberList.add(group.getOwner());//加上群主
 ```
+
 
 ### 获取群组列表
 
