@@ -141,7 +141,7 @@ EMClient.getInstance.chatManager.sendMessage(msg);
 ```
 3. 接收方收到语音消息时，自动下载语音文件。
 
-4. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#发送和接收文本消息)，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
+4. 接收方收到 [EMChatEventHandler#onMessagesReceived](#发送和接收文本消息) 回调，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
 
 ```dart
 if(msg.body.type == MessageType.VOICE) {

@@ -59,8 +59,6 @@ App Server 为 Demo 提供以下功能：
 
 ## Demo 项目结构
 
-### Demo 架构
-
 ```
 .
 ├── custom
