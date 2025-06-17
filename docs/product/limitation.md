@@ -128,7 +128,7 @@
 
 ### 群组/群成员数量
 
-- 群组总数、单个群的成员数和用户可加入的群组数取决于套餐版本，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
+- 群组总数、单个群的成员数和用户可加入的群组数取决于套餐版本，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 - 对于单个群组，群主加管理员数量不能超过 100，即管理员最多可添加 99 个。
 - 群组按照规模，可以分为普通群和大型群：
   - 普通群：群成员总数不超过 3000 人。
@@ -157,7 +157,7 @@
 
 ## 聊天室
 
-不同套餐版本支持的聊天室总数，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
+不同套餐版本支持的聊天室总数，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 
 ### 聊天室成员
 
@@ -208,7 +208,7 @@
 
 ### 用户关系
 
-- 单个 App Key 下的每个用户的好友数量上限与套餐包版本相关，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
+- 单个 App Key 下的每个用户的好友数量上限与套餐包版本相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 - 好友备注的长度不能超过 100 个字符。
 - 每个用户的黑名单最多可存 500 个用户。
 

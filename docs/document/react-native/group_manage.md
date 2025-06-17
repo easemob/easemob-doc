@@ -214,7 +214,7 @@ ChatClient.getInstance()
 
 ### 查询当前用户已加入的群组数量
 
-自 1.3.0 版本开始，你可以调用 `fetchJoinedGroupCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
+自 1.3.0 版本开始，你可以调用 `fetchJoinedGroupCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 
 ```typescript
 ChatClient.getInstance()

@@ -59,7 +59,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 604    | WEBIM_LOAD_MSG_ERROR                           | 消息回调函数内部错误。 | 消息解析失败，确保消息格式正确。| 
 | 605    | GROUP_NOT_EXIST                                | 群组不存在：发送消息时群组 ID 不正确。  | 检查群组或聊天室 ID 是否正确。| 
 | 606    | GROUP_MEMBERS_FULL                             | 群组已满：群组成员数量已达到创建群组时设置的最大人数。  | 提示群组⼈数已达上限。| 
-| 607    | GROUP_MEMBERS_LIMIT    | 创建群组时设置的群成员最大数量超过 IM 套餐包中的上限。各版本的即时通讯套餐包支持的群组成员最大数量，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。 | 按照套餐限制⼈数上限。 |
+| 607    | GROUP_MEMBERS_LIMIT    | 创建群组时设置的群成员最大数量超过 IM 套餐包中的上限。各版本的即时通讯套餐包支持的群组成员最大数量，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 | 按照套餐限制⼈数上限。 |
 | 609    | GROUP_MEMBER_ATTRIBUTES_SET_FAILED    | 群成员属性设置失败。 | 提示设置失败，请重试。|
 | 700    | REST_PARAMS_STATUS                             | 用户 token 或 App Key 不存在或不正确导致 API 调用失败。 | 正确设置 App Key。 |
 | 702    | CHATROOM_NOT_JOINED                             | 被操作的人员不在聊天室。  | 提示该⽤户不在当前聊天室。 |

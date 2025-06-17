@@ -51,7 +51,12 @@
 
 ## 添加单个聊天室成员
 
-向聊天室添加一个成员。如果待添加的用户在 app 中不存在或已经在聊天室中，则请求失败并返回错误码 400。
+#### 功能说明
+
+- 向聊天室添加一个成员。
+- 添加聊天室成员会触发发送后回调，详见 [聊天室加人事件](callback_group_room_join.html)。
+
+**调用频率上限**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -70,7 +75,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroomid}/users/{username
 ##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
-| :-------------- | :----- | :------- | :---------- |
+| :-------------- | :----- | :------- | :---------- | 
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。        |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。        |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
@@ -134,11 +139,14 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 404     | resource_not_found | username XXX doesn't exist! | 要添加的用户 ID 不存在。 | 传入存在的用户 ID。 |
 | 403     | exceeded_limit | can not join this group, reason:user XXX has joined too many chatrooms! | 要添加的用户已加入了太多的聊天室。 | 传入其他用户 ID。 |
 
+若要添加的用户已在聊天室中，会返回响应成功。
+
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 批量添加聊天室成员
 
-向聊天室添加多位用户，一次性最多可添加 60 位用户。
+- 向聊天室添加多位用户，一次性最多可添加 60 位用户。
+- 添加聊天室成员会触发发送后回调，详见 [聊天室加人事件](callback_group_room_join.html)。
 
 #### HTTP 请求
 
@@ -226,11 +234,19 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 404     | resource_not_found | username XXX doesn't exist! | 要添加的用户 ID 不存在。 | 传入存在的用户 ID。 |
 | 403     | exceeded_limit | can not join this group, reason:user XXX has joined too many chatrooms! | 要添加的用户已加入了太多的聊天室。 | 传入其他用户 ID。 |
 
+若要添加的一些用户已在聊天室中，则视为添加成功。
+
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 移除单个聊天室成员
 
-从聊天室移除一个成员。如果被移除用户不在聊天室中或聊天室不存在，将返回错误。
+#### 功能说明
+
+- 从聊天室移除一个成员。
+- 如果被移除用户不在聊天室中或聊天室不存在，将返回错误。
+- 移除聊天室成员会触发发送后回调，详见 [聊天室成员移除事件](callback_group_room_leave.html#被踢)。
+
+**调用频率上限**：100 次/秒/App Key 
 
 #### HTTP 请求
 
@@ -316,7 +332,13 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ## 批量移除聊天室成员
 
-从聊天室移除多个成员，单次请求最多可移除 100 个成员。如果被移除用户不在聊天室中或聊天室不存在，将返回错误。
+#### 功能说明
+
+- 从聊天室移除多个成员，单次请求最多可移除 100 个成员。
+- 如果被移除用户不在聊天室中或聊天室不存在，将返回错误。
+- 移除聊天室成员会触发发送后回调，详见 [聊天室成员移除事件](callback_group_room_leave.html#被踢)。
+
+**调用频率上限**：100 次/秒/App Key 
 
 #### HTTP 请求
 

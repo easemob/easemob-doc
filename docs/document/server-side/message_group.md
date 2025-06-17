@@ -2,18 +2,66 @@
 
 <Toc />
 
-本文展示如何调用环信 IM RESTful API 在服务端实现群聊场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
+ ## 功能说明
 
-群组聊天场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异，发送方式与单聊类似，详见 [发送单聊消息](message_single.html)。
+环信即时通讯 IM 支持在服务端实现群聊场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、文件消息、透传消息和自定义消息。
 
-:::tip
-1. 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
-2. 群组中发送的消息均同步给发送方。
-3. 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在 [环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
-4. [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
-:::
+### 发送方式
 
-**发送频率**：对于单个 app，该 REST API 存在以下三个限制：
+群组聊天场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异，发送方式与单聊类似。
+
+<table>
+<tbody>
+<tr>
+<td width="161">
+<p><strong>消息类型</strong></p>
+</td>
+<td width="189">
+<p><strong>发送方式</strong></p>
+</td>
+<td width="279">
+<p><strong>备注</strong></p>
+</td>
+</tr>
+<tr>
+<td width="161">
+<p>文本/透传消息</p>
+</td>
+<td width="189">
+<p>调用发送消息方法，在请求 body 中传入消息内容。</p>
+</td>
+<td rowspan="2" width="279">
+<p>1.发送消息时，可选的 `from` 字段用于指定发送方。</p>
+<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://doc.easemob.com/document/ios/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">APNs 自定义显示</a>和 <a href="https://doc.easemob.com/document/android/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">Android 推送字段说明</a>。</p>
+</td>
+</tr>
+<tr>
+<td width="161">
+<p>图片/语音/视频/文件消息</p>
+</td>
+<td width="189">
+<p>1. 调用<a href="https://doc.easemob.com/document/server-side/message_download.html#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
+<p>2. 调用发送消息方法，在请求 body 中传入该 UUID。</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+
+### 特别说明
+
+- 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
+- 该接口不校验传入的发送方用户 ID 和作为接收方的群组 ID。如果你传入的发送方用户 ID 和群组 ID 不存在，服务器并不会提示，仍照常发送消息。
+- 群组中发送的消息均同步给发送方。
+- 你可以只将消息发送给在线用户，若群组中的用户离线则无法收到消息（`routetype` 参数）。
+- 你可以设置哪些用户拉漫游消息时拉不到该消息（`roam_ignore_users` 参数）。
+- 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在 [环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
+- 调用该接口会触发发送后回调事件，请查看 [回调事件文档](callback_message_send.html#发送群组消息)。
+- [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
+
+### 调用频率上限
+
+对于单个 app，该 REST API 存在以下三个限制：
 
 <table>
 <tbody>
@@ -72,7 +120,7 @@
 </td>
 </tr>
 </tbody>
-</table>
+</table> 
 
 ## 前提条件
 
@@ -226,6 +274,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'
 
 #### 响应示例
 
+消息发送成功的响应示例如下所示：
+
 ```json
 {
   "path": "/messages/chatgroups",
@@ -239,6 +289,19 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'
   },
   "duration": 0,
   "applicationName": "XXXX"
+}
+```
+
+消息发送失败的响应示例如下所示：
+
+```json
+{
+    "error": "message_send_error",
+    "exception": "MessageSendException",
+    "timestamp": 1748575460150,
+    "duration": 0,
+    "error_code": 14007,
+    "error_description": "message is too large"
 }
 ```
 
@@ -862,12 +925,13 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatgroups" \
 
 ## 发送定向消息
 
-你可以向群组中指定的一个或多个成员发送消息，但单次仅支持指定一个群组。对于定向消息，只有作为接收方的指定成员才能看到消息，其他群成员则看不到该消息。
+你可以向群组中指定的一个或多个成员发送消息，单次只能向 **一个群组** 中的 **20 个用户** 发送定向消息。对于定向消息，只有作为接收方的指定成员才能看到消息，其他群成员则看不到该消息。
 
 :::tip
 1. 定向消息不写入会话列表，不计入群组会话的未读消息数。
 2. 群组定向消息的漫游功能默认关闭，使用前需联系商务开通。
 3. 群组中发送的定向消息均同步给发送方。
+4. 如果作为接收方的一些用户为离线状态，对于定向消息，可以收到离线推送通（若配置了离线推送服务），上线后可以收到离线消息（若未超过离线消息的存储时长）。
 :::
 
 **发送频率**：100 次/秒/App Key
@@ -1004,5 +1068,4 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups/users' \
 | 403      | message_send_error | message send reach limit  | 消息发送频率超出限制(默认 1 秒内只允许发送 100 条定向消息) | 限制消息发送频率，详见[文档说明](message_group.html#发送定向消息)。  |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
 

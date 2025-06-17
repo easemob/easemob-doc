@@ -58,7 +58,12 @@
 
 ## 转让群组
 
-修改群主为同一群组中的其他成员。
+#### 功能说明
+
+- 修改群主为同一群组中的其他成员。
+- 转让群组会触发发送后回调，详见 [变更群主事件](callback_group_room_owner.html)。
+
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
@@ -141,7 +146,11 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ## 获取群管理员列表
 
+#### 功能说明
+
 获取群组管理员列表。
+
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
@@ -213,7 +222,14 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -H 'Authorization: B
 
 ## 添加群管理员
 
-将一个普通群成员设为群管理员。群管理员有管理黑名单、禁言等权限。最多可以添加 99 个群管理员。
+#### 功能说明
+
+- 将一个普通群成员设为群管理员。
+- 群管理员有管理黑名单、禁言等权限。
+- 最多可以添加 99 个群管理员。
+- 添加管理员会触发发送后回调，详见 [添加群管理员事件](callback_group_room_admin.html#添加管理员)。
+
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
@@ -297,7 +313,12 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin -d '{"newadmin":"us
 
 ## 移除群管理员
 
-将用户的角色从群管理员降为群普通成员。
+#### 功能说明
+
+- 将群管理员降为群普通成员，即将群组管理员移出群组管理员列表。
+- 移除群组管理员会触发发送后回调，详见 [移除群管理员事件](callback_group_room_admin.html#删除管理员)。
+
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
@@ -370,9 +391,8 @@ curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin/user1 -H 'Authori
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | forbidden_op | user:XX is not admin of group:XX | 用户不是这个群的管理员。 | 传入在群组中管理员的用户 ID。 |
+| 403     | forbidden_op | user:XX is not admin of group:XX | 用户不是该群的管理员。 | 传入在群组中管理员的用户 ID。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
 

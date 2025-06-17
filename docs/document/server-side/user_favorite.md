@@ -46,6 +46,8 @@
 
 ## 分页获取用户收藏
 
+#### 功能说明
+
 调用该接口获取指定用户的收藏。
 
 **调用频率上限**：100 次/秒/App Key 
@@ -60,14 +62,14 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/collections
 
 | 参数            | 类型   | 是否必需 | 描述                 |
 | :-------------- | :----- | :------- | --------------------------------- |
-| `username`  | String | 是       | 要获取哪个用户的收藏。                         |
+| `username`  | String | 是       | 要获取该用户 ID 的收藏。                         |
 
 其它参数及说明详见 [公共参数](#公共参数)。
 
 ##### 查询参数
 
 用户收藏可通过两种方式查询，如下所示。除了 `type` 和 `limit` 字段的设置，这两种方式的设置如下：
-1. 按时间段：时间段字段和 `direction` 字段配合使用。这种方式下，你必须传入 `begin_time` 和 `end_time` 字段，`direction` 字段的默认值为 `desc`。
+1. 按时间段：时间段字段和 `direction` 字段配合使用。这种方式下，你必须传入 `begin_time` 和 `end_time` 字段，`direction` 字段的默认值为 `desc`（按照收藏时间的降序排列）。
 2. 从指定的收藏 ID 开始查询：`collection_id` 和 `direction` 字段配合使用。这种方式下，你必须传入 `collection_id`。
 
 **注意：第二种查询方式的优先级高于第一种方式。也就是说，若你传入了 `collection_id` 字段，则设置的 `begin_time` 和 `end_time` 字段无效。**
@@ -150,7 +152,9 @@ curl -X GET -H 'Accept: application/json' \
 
 ## 添加一条收藏
 
-调用该接口对指定用户添加一条收藏。
+#### 功能说明
+
+对单个用户添加一条收藏。
 
 **调用频率上限**：100 次/秒/App Key 
 
@@ -164,7 +168,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/collections
 
 | 参数            | 类型   | 是否必需 | 描述                 |
 | :-------------- | :----- | :------- | --------------------------------- |
-| `username`  | String | 是       | 要对哪个用户添加收藏。                         |
+| `username`  | String | 是       | 要对该用户 ID 添加收藏。                         |
 
 其它参数及说明详见 [公共参数](#公共参数)。
 
@@ -180,10 +184,10 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/collections
 
 | 参数            | 类型   | 是否必需 | 描述                 |
 | :-------------- | :----- | :------- | --------------------------------- |
-| `id`   | String | 否       | 收藏 ID，收藏的唯一标识。若不传，环信服务器会设置随机的 UUID。     |
-| `data` | String | 是       | 收藏内容。 |
+| `id`   | String | 否       | 收藏 ID，收藏的唯一标识。若不传，环信服务器会设置随机的 UUID。  |
+| `data` | String | 是       | 收藏内容，不能超过 20480 字符。 |
 | `type` | Int    | 是       | 收藏类型。 |
-| `ext`  | String | 否       | 收藏的扩展信息。默认为 `NULL`，即无扩展信息。 |
+| `ext`  | String | 否       | 收藏的扩展信息，不能超过 1024 字符。默认为 `NULL`，即无扩展信息。|
 
 #### HTTP 响应
 
@@ -249,7 +253,10 @@ curl -X POST https://XXX/XXX/XXX/users/{username}/collections
 
 ## 批量添加用户收藏
 
-调用该接口对指定用户添加多条收藏。
+#### 功能说明
+
+- 对单个用户添加多条收藏。
+- 一次最多可添加 20 个收藏。
 
 **调用频率上限**：100 次/秒/App Key 
 
@@ -276,12 +283,12 @@ POST https://{host}/{org_name}/{app_name}/collections
 | 参数            | 类型   | 是否必需 | 描述                 |
 | :-------------- | :----- | :------- | --------------------------------- |
 | `collections`  | Array | 是       | 要添加的收藏详情。最多可添加 20 个收藏。  |
-| - `id`  | String | 是       | 收藏 ID。                         |
-| - `data`   | String | 是       | 收藏内容。     |
+| - `id`  | String | 是       | 收藏 ID。                       |
+| - `data`   | String | 是       | 收藏内容。   |
 | - `type` | Int | 是       | 收藏类型。 |
 | - `ext` | String | 是       | 收藏的扩展信息。 |
 | - `createdAt` | Long | 是       | 收藏的添加时间。 |
-| `username`  | String | 是       | 为哪个用户添加收藏。  |
+| `username`  | String | 是       | 为该用户 ID 添加收藏。  |
 
 #### HTTP 响应
 
@@ -352,7 +359,9 @@ curl -X POST https://XXX/XXX/XXX/collections
 
 ## 修改用户收藏的扩展信息
 
-调用该接口修改指定用户的一条收藏的扩展信息。
+#### 功能说明
+
+修改单个用户的一条收藏的扩展信息。
 
 **调用频率上限**：100 次/秒/App Key 
 
@@ -366,7 +375,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/collections/{collectio
 
 | 参数            | 类型   | 是否必需 | 描述                 |
 | :-------------- | :----- | :------- | --------------------------------- |
-| `username`  | String | 是       | 要修改哪个用户的收藏。                         |
+| `username`  | String | 是       | 要修改该用户 ID 的收藏扩展信息。        |
 | `collectionId`  | String | 是       | 收藏 ID。                         |
 
 其它参数及说明详见 [公共参数](#公共参数)。
@@ -447,7 +456,10 @@ curl -X PUT https://XXX/XXX/XXX/users/{username}/collections/{collectionId} \
 
 ## 删除用户收藏
 
-调用该接口删除指定用户的收藏。
+#### 功能说明
+
+- 删除单个用户的收藏。
+- 一次最多可删除 20 个收藏。
 
 **调用频率上限**：100 次/秒/App Key 
 
@@ -461,7 +473,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/collections
 
 | 参数            | 类型   | 是否必需 | 描述                 |
 | :-------------- | :----- | :------- | --------------------------------- |
-| `username`  | String | 是       | 要删除哪个用户的收藏。                         |
+| `username`  | String | 是       | 要删除该用户 ID 的收藏。                         |
 
 其它参数及说明详见 [公共参数](#公共参数)。
 

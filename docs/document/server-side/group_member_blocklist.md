@@ -51,7 +51,12 @@
 
 ## 查询群组黑名单
 
-查询一个群组黑名单中的用户列表。黑名单中的用户无法查看该群组的信息，也无法收到该群组的消息。
+#### 功能说明
+
+- 查询一个群组黑名单中的用户列表。
+- 黑名单中的用户无法查看该群组的信息，也无法收到该群组的消息。
+
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
@@ -68,7 +73,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :------- | :--------------- |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。   |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
 
@@ -125,9 +130,15 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ## 添加单个用户至群组黑名单
 
-将单个用户添加至群组黑名单。群主无法被加入群组的黑名单。
+#### 功能说明
 
-用户进入群组黑名单后会收到加入黑名单的回调。之后，该用户无法查看该群组的信息，也收不到该群组的消息。
+- 将单个用户添加至群组黑名单。
+- 群主无法被加入群组的黑名单。
+- 用户进入群组黑名单后，会被移出群组，无法查看该群组的信息，无法再收发群消息。
+- 用户加入黑名单后，若要恢复在群组中正常收发消息，需要先手动将其移出黑名单，然后该用户重新加入群组。
+- 用户加入黑名单会触发发送后回调，详见 [成员加入群黑名单事件](callback_group_room_blocklist.html#将成员加入黑名单)。
+
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
@@ -204,15 +215,18 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 403     | forbidden_op | users [XX] are not members of this group! | 要添加黑名单的用户 ID 不在群组中。 | 使用群组成员的用户 ID。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-| 403    | forbidden_op   | forbidden operation on group owner!   | 无法将群主加入群组黑名单。  | 
+| 403    | forbidden_op   | forbidden operation on group owner!   | 无法将群主加入群组黑名单。  |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 批量添加用户至群组黑名单
 
-将多个用户添加至群组黑名单，一次最多可以添加 60 个用户。群主无法被加入群组的黑名单。
+- 将多个用户添加至群组黑名单，一次最多可以添加 60 个用户。
+- 群主无法被加入群组的黑名单。
+- 用户进入群组黑名单后，会被移出群组，无法查看该群组的信息，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
+- 用户加入黑名单会触发发送后回调，详见 [成员加入群黑名单事件](callback_group_room_blocklist.html#将成员加入黑名单)。
 
-用户进入群组黑名单后会收到加入黑名单的回调。黑名单上的用户无法查看该群组的信息，也收不到该群组的消息。
+**调用频率上限**：100 次/秒/App Key  
 
 #### HTTP 请求
 
@@ -316,7 +330,13 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ## 从群组黑名单移除单个用户
 
-将指定用户移出群组黑名单。对于群组黑名单中的用户，如果需要将其再次加入群组，需要先将其从群组黑名单中移除。
+#### 功能说明
+
+- 将单个用户移出群组黑名单。
+- 群组黑名单中的用户要想在群组中正常发送和接收消息，需要先将用户从黑名单中移除，然后该用户重新加入群组。
+- 用户被移出黑名单会触发发送后回调，详见 [将成员移出黑名单事件](callback_group_room_blocklist.html#将成员移出黑名单)。
+
+**调用频率上限**：100 次/秒/App Key  
 
 #### HTTP 请求
 
@@ -397,9 +417,14 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ## 从群组黑名单批量移除用户
 
-将多名指定用户从群组黑名单中移除。你一次最多可移除 60 个用户。
+#### 功能说明
 
-对于群组黑名单中的用户，如果要将其再次加入群组，需先将其从群组黑名单中移除。
+- 将多名用户从群组黑名单中移除。
+- 一次最多可移除 60 个用户。
+- 群组黑名单中的用户要想在群组中正常发送和接收消息，需要先将用户从黑名单中移除，然后该用户重新加入群组。
+- 用户被移出黑名单会触发发送后回调，详见 [将成员移出黑名单事件](callback_group_room_blocklist.html#将成员移出黑名单)。
+
+**调用频率上限**：100 次/秒/App Key  
 
 #### HTTP 请求
 

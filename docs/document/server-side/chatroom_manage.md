@@ -14,7 +14,7 @@
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](limitationapi.html)。
-- 了解不同套餐版本支持的聊天室总数，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
+- 了解不同套餐版本支持的聊天室总数，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
   
 ## 公共参数
 
@@ -65,7 +65,11 @@
 
 ## 获取 app 中的聊天室
 
-分页获取应用下的聊天室列表和信息。
+#### 功能说明
+
+分页获取应用下的聊天室列表和信息，包括聊天室 ID、聊天室名称、聊天室创建者的用户 ID 和聊天室现有成员总数（包含聊天室创建者）。
+
+**调用频率上限**：50 次/秒/App Key
 
 #### HTTP 请求
 
@@ -148,7 +152,11 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
 
 ## 获取用户加入的聊天室
 
+#### 功能说明
+
 根据用户 ID 分页获取该用户加入的聊天室。
+
+**调用频率上限**：50 次/秒/App Key
 
 #### HTTP 请求
 
@@ -253,7 +261,11 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ## 查询聊天室详情
 
+#### 功能说明
+
 查询一个或多个聊天室的详情。
+
+**调用频率上限**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -296,7 +308,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | `data.affiliations_count` | Int    | 现有聊天室成员总数。 |
 | `data.affiliations`       | Array  | 现有聊天室成员列表，包含聊天室所有者和成员（包括聊天室管理员）。例如：“affiliations”:[{“owner”: “user1”},{“member”:”user2”},{“member”:”user3”}]。  |
 | `data.public`             | Bool   | 预留字段，无需关注。 |
-| `data.mute`             | Bool   | 是否为全员禁言状态：<br/> - `true`：是<br/> - `false`：否。 |
+| `data.mute` | Bool | 是否为全员禁言状态：<br/> - `true`：是<br/> - `false`：否。 |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
@@ -354,7 +366,13 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ## 创建聊天室
 
-创建一个聊天室，需设置聊天室名称、聊天室描述、聊天室成员最大人数（包括管理员）、聊天室管理员和普通成员以及聊天室扩展信息。
+#### 功能说明
+
+- 创建一个聊天室。
+- 支持设置聊天室名称、聊天室描述、聊天室成员最大人数（包括管理员）、聊天室管理员和普通成员以及聊天室扩展信息。
+- 创建聊天室会触发发送后回调，详见 [创建聊天室的回调事件](callback_group_room_create.html)。
+
+**调用频率上限**：50 次/秒/App Key
 
 #### HTTP 请求
 
@@ -445,7 +463,13 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ## 修改聊天室信息
 
-修改指定聊天室的信息。仅支持修改聊天室名称、聊天室描述和聊天室最大成员数。
+#### 功能说明
+
+- 修改指定聊天室的信息。
+- 仅支持修改聊天室名称、聊天室描述和聊天室最大成员数。
+- 修改聊天室信息会触发发送后回调，详见 [修改聊天室信息的回调事件](callback_group_room_info.html)。
+
+**调用频率上限**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -534,7 +558,12 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ## 转让聊天室
 
-修改聊天室所有者为同一聊天室中的其他成员。
+#### 功能说明
+
+- 修改聊天室所有者为同一聊天室中的其他成员。
+- 转让聊天室会触发发送后回调，详见 [变更聊天室所有者事件](callback_group_room_owner.html)。
+
+**调用频率上限**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -625,7 +654,14 @@ curl -X PUT -H 'Content-Type: application/json' \
 
 ## 解散聊天室
 
-解散单个聊天室。如果要解散的聊天室不存在，会返回错误。
+#### 功能说明
+
+- 解散单个聊天室。
+- 如果要解散的聊天室不存在，会返回错误。
+- 解散聊天室后，会触发 [解散聊天室的回调事件](callback_group_room_delete.html)。
+- 聊天室解散后，服务端上存储的聊天室信息不存在，会话信息不存在，但消息仍存在。
+
+**调用频率上限**：100 次/秒/App Key
 
 #### HTTP 请求
 
