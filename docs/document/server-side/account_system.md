@@ -2,13 +2,13 @@
 
 <Toc />
 
-本文展示如何调用环信即时通讯 RESTful API 实现用户体系建立和管理，包括用户注册、获取、修改、删除、封禁、解禁、强制下线等。
+环信即时通讯 RESTful API 可实现用户体系建立和管理，包括用户注册、获取、修改、删除、封禁、解禁、强制下线等。
 
 ## 公共参数
 
 以下表格列举了环信 IM 的 RESTful 接口的公共请求参数和响应参数：
 
-### 请求参数
+#### 请求参数 
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
@@ -16,7 +16,7 @@
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 
-### 响应参数
+#### 响应参数
 
 | 参数                 | 类型   | 描述            |
 | :------------------- | :----- | :-------------------------------------------- |
@@ -58,7 +58,15 @@
 
 ### 开放注册单个用户
 
-开放注册指用户可以在登录客户端 SDK 后自行通过账号密码注册账号。一般在体验 Demo 和测试开发环境时使用，使用前需先在[环信即时通讯云控制后台](https://console.easemob.com/user/login)打开相应应用的开放注册开关，即在控制台首页的 **应用列表** 下点击目标应用的 **操作** 一栏中的 **管理**，然后选择 **即时通讯** > **服务概览**，在页面的 **设置** 区域中将 **用户注册模式** 设置为 **开放注册**。
+#### 功能说明
+
+- 开放注册指用户可以在登录客户端 SDK 后自行通过账号密码注册账号。
+- 一般在体验 Demo 和测试开发环境时使用。
+- 使用前需先在[环信即时通讯云控制后台](https://console.easemob.com/user/login)打开相应应用的开放注册开关，即在控制台首页的 **应用列表** 下点击目标应用的 **操作** 一栏中的 **管理**，然后选择 **即时通讯** > **服务概览**，在页面的 **设置** 区域中将 **用户注册模式** 设置为 **开放注册**。
+- 调用该 API 无需传入 token。
+- 注册用户时，需满足用户 ID 和密码的设置要求。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -145,13 +153,15 @@ curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users" -d '{"username":"user1",
 
 ### 授权注册单个用户
 
-授权注册模式指注册环信即时通讯 IM 账号时携带管理员身份认证信息，即 App Token。
+#### 功能说明
 
-要使用该注册方式，你需要在环信控制台进行如下配置：
-
+- 授权注册模式指注册环信即时通讯 IM 账号时携带管理员身份认证信息，即 App Token。
+- 要使用该注册方式，你需要在环信控制台进行如下配置：
 在控制台首页的 **应用列表** 下点击目标应用的 **操作** 一栏中的 **管理**，然后选择 **即时通讯** > **服务概览**，在页面的 **设置** 区域中将**用户注册模式**设置**授权注册**，然后单击**保存**。
+- 推荐使用该模式，因为该模式较为安全，可防止已获取了注册 URL 和了解注册流程的某些人恶意向服务器大量注册垃圾用户。
+- 注册用户时，需满足用户 ID 和密码的设置要求。
 
-推荐使用该模式，因为该模式较为安全，可防止已获取了注册 URL 和了解注册流程的某些人恶意向服务器大量注册垃圾用户。
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -253,7 +263,11 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ### 批量授权注册用户
 
-批量注册为授权注册方式，服务端需要校验有效的 token 权限才能进行操作。
+- 批量注册为授权注册方式，服务端需要校验有效的 App Token 权限才能进行操作。
+- 单次请求最多可注册 60 个用户 ID。
+- 注册用户时，需满足用户 ID 和密码的设置要求。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -273,10 +287,6 @@ POST https://{host}/{org_name}/{app_name}/users
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ##### 请求 body
-
-:::tip
-单次请求最多可注册 60 个用户 ID。
-:::
 
 | 参数       | 类型   | 是否必需 | 描述        |
 | :--------- | :----- | :------- | :----------------------------- |
@@ -417,7 +427,11 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 
 ### 获取单个用户的详情
 
-获取单个应用用户的详细信息。
+#### 功能说明
+
+获取单个应用用户的详细信息，包括用户 ID、用户的 UUID、用户注册时间、用户信息最近一次修改时间、用户的推送设置（例如，消息推送方式、是否开启免打扰、免打扰开始和结束时间、推送证书、是否屏蔽了群组消息的离线推送设置、推送证书、推送 token）等。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -427,7 +441,11 @@ GET https://{host}/{org_name}/{app_name}/users/{username}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数            | 类型   | 是否必需 | 描述       |
+| :-------------- | :----- | :------- | :-------------------------- |
+| `username`  | String  | 是 | 要获取哪个用户的详情。          |     
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
@@ -506,9 +524,13 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ### 批量获取用户详情
 
-该接口查询多个用户的信息列表，按照用户创建时间顺序返回。你可以指定要查询的用户数量。
+#### 功能说明
 
-若数据库中的用户数量大于你要查询的用户数量（`limit`），返回的信息中会携带游标 `cursor` 标示下次数据获取的开始位置。你可以分页获取多个用户的详情，直到返回的信息中不再包含 `cursor`，即已经达到最后一页。
+- 该接口查询多个用户的信息列表，按照用户创建时间顺序返回。
+- 你可以指定要查询的用户数量。
+- 若数据库中的用户数量大于你要查询的用户数量（`limit`），返回的信息中会携带游标 `cursor` 标示下次数据获取的开始位置。你可以分页获取多个用户的详情，直到返回的信息中不再包含 `cursor`，即已经达到最后一页。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -525,7 +547,7 @@ GET https://{host}/{org_name}/{app_name}/users?limit={N}&cursor={cursor}
 | 参数     | 类型   | 是否必需 | 描述  |
 | :------- | :----- | :------- | :--------------- |
 | `limit`  | Int    | 否       | 请求查询用户的数量。取值范围为 [1,100]，默认值为 10。若实际用户数量超过 100，返回 100 个用户。   |
-| `cursor` | String | 否       | 开始获取数据的游标位置，用于分页显示用户列表。第一次发起批量查询用户请求时若不设置 `cursor`，请求成功后会获得第一页用户列表。从响应 body 中获取 `cursor`，并在下一次请求的 URL 中传入该 `cursor`，直到响应 body 中不再有 `cursor` 字段，则表示已查询到 app 中所有用户。 |
+| `cursor` | String | 否       | 开始获取数据的游标位置，用于分页显示用户列表。第一次发起批量查询用户请求时若不设置 `cursor`，请求成功后会获得最早创建的用户。从响应 body 中获取 `cursor`，并在下一次请求的 URL 中传入该 `cursor`，直到响应 body 中不再有 `cursor` 字段，则表示已查询到 app 中所有用户。 | 
 
 ##### 请求 header
 
@@ -584,9 +606,6 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "params": {
-    "limit": ["2"]
-  },
   "path": "/users",
   "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
@@ -633,10 +652,6 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "params": {
-    "cursor": ["LTgzXXXX2tB"],
-    "limit": ["2"]
-  },
   "path": "/users",
   "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
@@ -651,6 +666,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
     }
   ],
   "timestamp": 1542559337702,
+  "cursor": "LTgzXXXX2tB",
   "duration": 2,
   "count": 1
 }
@@ -671,7 +687,14 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ### 删除单个用户
 
-删除单个用户。如果该用户是群主或者聊天室所有者，系统会同时删除对应的群组和聊天室。请在操作前进行确认。
+#### 功能说明
+
+- 删除单个用户。
+- 账号删除时，该用户的好友关系、用户属性、消息、会话等数据在服务端也会被删除。
+- 账号删除后，该用户的数据将无法恢复，**请谨慎使用该接口**。
+- 如果该用户是群主或者聊天室所有者，系统会同时删除对应的群组和聊天室。**请在操作前进行确认**。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -751,13 +774,14 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ### 批量删除用户
 
-删除某个 App 下指定数量的用户账号。建议一次删除的用户数量不要超过 100。
+#### 功能说明
 
-需要注意的是，这里只指定了要删除的用户数量，并未指定要删除的具体用户，你可以在响应中查看删除的用户。如果删除的多个用户中包含群主或聊天室所有者，对应的群组或聊天室会解散。
+- 该 API 用于**删除你在集成了即时通讯 IM 后上线前的测试阶段创建的用户**。
+- 建议一次删除的用户数量不要超过 100。
+- 该 API 只指定了要删除的用户数量，**并未指定要删除的具体用户**，你可以在响应中查看删除的用户。
+- 如果删除的多个用户中包含群主或聊天室所有者，**对应的群组或聊天室会解散**。
 
-:::tip
-该 API 用于删除你在集成了即时通讯 IM 后上线前的测试阶段创建的用户。
-:::
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -809,9 +833,6 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 {
   "action": "delete",
   "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
-  "params": {
-    "limit": ["2"]
-  },
   "path": "/users",
   "uri": "https://XXXX/XXXX/testapp/users",
   "entities": [
@@ -855,19 +876,29 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ## 修改用户密码
 
-可以通过服务端接口修改用户的登录密码，不需要提供原密码。
+#### 功能说明
 
-### HTTP 请求
+- 修改用户的登录密码，不需要提供原密码。
+- 设置的新密码的长度不可超过 64 个字符。
+- 若用户在线，修改密码后会导致用户被踢下线。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
+
+#### HTTP 请求
 
 ```http
 PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 ```
 
-#### 路径参数
+##### 路径参数
+
+| 参数            | 类型   | 是否必需 | 描述              |
+| :-------------- | :----- | :------- | :---------------------------------------------- |
+| `username`  | String | 是       | 修改该用户 ID 的登录密码。      |
 
 参数及说明详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述              |
 | :-------------- | :----- | :------- | :---------------------------------------------- |
@@ -875,7 +906,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。      |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 请求包体为 JSON Object 类型，包含以下字段：
 
@@ -885,9 +916,9 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -899,9 +930,9 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token，<YourPassword> 替换为你设置的新密码
@@ -909,7 +940,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{ "newpassword": "<YourPassword>" }' 'https://XXXX/XXXX/XXXX/users/user1/password'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -936,7 +967,16 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ### 账号封禁
 
-环信即时通讯 IM 提供了对用户的禁用以及解禁接口操作，用户若被禁用将立即下线并无法登录进入环信即时通讯 IM，直到被解禁后才能恢复登录。常用在对异常用户的即时处理场景使用。
+#### 功能说明
+
+- 封禁单个用户。封禁操作即刻生效。
+- 用户被封禁后，不会在一段时间后自动解禁，只能调用 [解禁账号 API](#账号解禁) 解禁。
+- 用户被封禁后，会立即下线并无法登录进入环信即时通讯 IM，直到被解禁后才能恢复登录。
+- 被封禁期间，其他用户可向被封禁用户发送消息，但被封禁用户无法接收消息，无法收到推送通知。解禁后，用户可正常连接并使用即时通讯服务，再次上线可以收到被封禁期间的离线消息。请注意，离线消息默认最长存储 7 天，如果 7 天内客户端都没有上线，服务端将丢弃过期的消息。
+- 该功能常用于对异常用户的即时处理场景。
+- 若用户在线，封禁后会导致用户被踢下线。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -945,6 +985,10 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 ```
 
 ##### 路径参数
+
+| 参数            | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :------- | :------------- |
+| username            | String   | 是 | 要封禁的用户 ID。      |
 
 参数及说明详见 [公共参数](#公共参数)。
 
@@ -1014,7 +1058,13 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 
 ### 账号解禁
 
-环信即时通讯 IM 提供了对用户的禁用以及解禁接口操作。对用户禁用后，用户将立即下线并无法登录进入环信即时通讯 IM，直到被解禁后才能恢复登录。该功能常于对异常用户的即时处理场景。
+#### 功能说明
+
+- 解禁单个用户。
+- 用户被封后，不会在一段时间后自动解禁，需调用该 API 解禁。
+- 解禁后，用户可正常连接并使用即时通讯服务，再次上线可以收到被封禁期间的离线消息。请注意，离线消息默认最长存储 7 天，如果 7 天内客户端都没有上线，服务端将丢弃过期的消息。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)
 
 #### HTTP 请求
 
@@ -1081,9 +1131,13 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 
 ### 强制用户下线
 
-强制用户即将用户状态改为离线，用户需要重新登录才能正常使用。
+#### 功能说明
 
-多设备登录情况下，调用该接口会强制将指定用户从所有登录的设备下线；若将用户从指定设备上下线，你可以调用[强制指定账号从单设备下线](#强制指定账号从单设备下线)接口。
+- 强制用户即将用户状态改为离线，用户需要重新登录才能正常使用。
+- 用户再次上线可以收到被封禁期间的离线消息。请注意，离线消息默认最长存储 7 天，如果 7 天内客户端都没有上线，服务端将丢弃过期的消息。
+- 多设备登录情况下，调用该接口会强制将指定用户从所有登录的设备下线；若将用户从指定设备下线，你可以调用[强制指定账号从单设备下线](#强制指定账号从单设备下线)接口。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -1155,7 +1209,12 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ### 强制用户从单设备下线
 
-如果用户在多个设备上登录，你可以调用该接口强制其在某一台设备上下线。若强制用户从所有设备下线，可以调用[强制用户下线](#强制用户下线)接口。
+#### 功能说明
+
+- 如果用户在多个设备上登录，你可以调用该接口强制其在某一台设备上下线。
+- 若强制用户从所有设备下线，可以调用[强制用户下线](#强制用户下线)接口。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -1246,7 +1305,12 @@ curl -X DELETE -H 'Accept: application/json'   \
 
 ### 获取单个用户在线状态
 
-查看单个用户是在线还是离线状态。
+#### 功能说明
+
+- 查看单个用户是在线还是离线状态。
+- 如果用户是多终端登录，则只要有一个终端的状态是 online ，用户就是 online。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -1273,7 +1337,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/status
 
 | 字段   | 类型 | 描述         |
 | :----- | :--- | :---------------------- |
-| `data` | JSON | 用户的在线状态数据。格式为："用户 ID": "当前在线状态"，例如，user1 的在线和离线状态分别为 "user1": "online" 和 "user1": "offline"。 |
+| `data` | JSON | 用户的在线状态数据。<br/> 格式为："用户 ID": "当前在线状态"，例如，user1 的在线和离线状态分别为 "user1": "online" 和 "user1": "offline"。 <br/> - `online`：客户端登录后和即时通讯 IM 服务器成功建立了长连接。<br/> - `offline`：iOS 和 Android 进程被杀或因网络问题断开连接，进入 `offline` 状态，此时可以接收消息的离线推送通知（前提是在环信控制台上传了推送证书，集成了离线推送服务）。 |
 
 其他字段及说明详见 [公共参数](#公共参数)。
 
@@ -1313,14 +1377,19 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | :----- | :----------- | :--| :-------------- | :---|
 | 401         | unauthorized     | Unable to authenticate (OAuth)       | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。   |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | service_resource_not_found | Service resource not found | App 用户不存在  | 提供已经创建的用户 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 批量获取用户在线状态
 
-批量查看用户是在线还是离线状态，单次请求最多可查看 100 个用户的在线状态。
+#### 功能说明
 
-该接口不对用户 ID 进行校验。若查询不存在的用户 ID 的状态，则返回的状态为 `offline`。
+- 批量查看用户是在线还是离线状态。
+- 单次请求最多可查看 100 个用户的在线状态。
+- 该接口不对用户 ID 进行校验。若查询不存在的用户 ID 的状态，则返回的状态为 `offline`。
+
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
 #### HTTP 请求
 
@@ -1354,7 +1423,7 @@ POST https://{host}/{org_name}/{app_name}/users/batch/status
 | 字段     | 类型      | 描述       |
 | :------- | :-------- | :-------------------------------------------------------------- |
 | `action` | String    | 执行的操作。在该响应中，该参数的值为 `get batch user status`，表示批量获取用户在线状态。                                                  |
-| `data`   | JSON Array | 查询的用户的在线状态，数据格式为："用户 ID": "当前在线状态"，例如，user1 的在线和离线状态分别为 "user1": "online" 和 "user1": "offline"。 |
+| `data`   | JSON Array | 查询的用户的在线状态。<br/> 数据格式为："用户 ID": "当前在线状态"，例如，user1 的在线和离线状态分别为 "user1": "online" 和 "user1": "offline"。<br/> - `online`：客户端登录后和即时通讯 IM 服务器成功建立了长连接。<br/> - `offline`：iOS 和 Android 进程被杀或因网络问题断开连接，进入 `offline` 状态，此时可以接收消息的离线推送通知。 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
@@ -1406,15 +1475,19 @@ curl -X POST https://XXXX/XXXX/chatdemoui/users/batch/status \
 
 ## 获取指定账号的在线登录设备列表
 
+### 功能描述
+
 多设备登录情况下，你可以调用该接口获取指定账号的在线登录设备列表。
 
-### HTTP 请求
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
+
+#### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/users/{username}/resources
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数   | 类型   | 是否必需 | 描述         |
 | :----- | :----- | :-----| :------------- |
@@ -1422,16 +1495,16 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/resources
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :------------------ |
 | `Accept`        | String | 是       | 内容类型，请填 `application/json`。       |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -1446,9 +1519,9 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/resources
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -1457,7 +1530,7 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/users/XXXX/resources' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {

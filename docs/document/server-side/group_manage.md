@@ -52,7 +52,14 @@
 
 ## 创建群组
 
-创建一个群组，并设置群组名称、群组描述、公开群/私有群属性、群成员最大人数（包括群主）、加入公开群是否需要批准、群主、群成员和群组扩展信息。
+#### 功能说明
+
+- 创建一个群组。
+- 支持设置群组名称、群组描述、公开群/私有群属性、群成员最大人数（包括群主）、加入公开群是否需要批准、群主、群成员和群组扩展信息。
+- 创建群组会触发发送后回调，详见 [创建群组的回调事件](callback_group_room_create.html)。
+- 关于 app 支持的群组数量、单个群的成员数和规模划分，详见 [群组限制文档](/product/limitation.html#群组-群成员数量)。
+
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
@@ -80,7 +87,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups
 | `avatar`           | String | 否       | 群组头像的 URL，最大长度为 1024 字符。|
 | `description`         | String | 否       | 群组描述，最大长度为 512 字符。|
 | `public`              | Bool   | 是       | 是否是公开群。公开群可以被搜索到，用户可以申请加入公开群；私有群无法被搜索到，因此需要群主或群管理员添加，用户才可以加入。<br/> - `true`：公开群；<br/> - `false`：私有群。   |
-| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。该参数的默认值为 `200`，若设置的值超过 `3000`，将不再支持离线推送。对于超过 3000 人的群组，若希望提供离线推送功能，你必须在创建群组之前联系商务开通，否则群组创建后无法再开通该功能。<br/>不同套餐的群组支持的最大人数的上限不同，详见  [IM 套餐包功能对比](/product/product_package_feature.html)。|
+| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。该参数的默认值为 `200`，若设置的值超过 `3000`，将不再支持离线推送。对于超过 3000 人的群组，若希望提供离线推送功能，你必须在创建群组之前联系商务开通，否则群组创建后无法再开通该功能。<br/>不同套餐的群组支持的最大人数的上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。|
 | `allowinvites`        | Bool   | 否       | 是否允许普通群成员邀请用户加入群组：<br/> - `true`：普通群成员可拉人入群;<br/> - （默认）`false`：只有群主和群管理员才能拉人入群。<br/><Container type="notice" title="提示"><br/>创建群组时，该参数仅对私有群有效，对公开群无效。也就是说，创建公有群（`public` 设置为 `true`）时，即使将 `allowinvites` 设置为 `true`，该设置也会自动修改为 `false`。如果要允许公开群的普通成员拉人入群，你在创建群后可调用[修改群组信息](#修改群组信息)接口将 `allowinvites` 的设置修改为 `true`。</Container> |
 | `membersonly`         | Bool   | 否       | 用户申请入群是否需要群主或者群管理员审批。 <br/> - `true`：需要； <br/> - （默认）`false`：不需要，用户直接进群。<br/>该参数仅对公开群生效，因为对于私有群，用户无法申请加入群组，只能通过群成员邀请加入群。     |
 | `invite_need_confirm` | Bool   | 否       | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）`true`：是；<br/> - `false`：否。   |
@@ -151,9 +158,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 400     | invalid_parameter | group must contain public field! | 创建群组必须设置 `public` 字段 | 设置 `public` 字段。 |
 | 400     | illegal_argument | group ID XX already exists! | groupId 重复。 | 使用新的群组 ID。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | exceed_limit | appKey:XX#XX has create too many groups! | appKey 的群组数量达到上限。 | 删除不用的群组或联系商务调整上限。关于该上限，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。 |
-| 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数量达到上限。 | 退出不用的群组或联系商务调整上限。关于该上限，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。 |
-| 403     | exceed_limit | members size is greater than max user size ! | 创建群时加入的人数超过最大限制。 | 调整创建群的加群人数，即 `maxusers` 参数的值。|
+| 403     | exceed_limit | appKey:XX#XX has create too many groups! | appKey 的群组数量达到上限。 | 删除不用的群组或联系商务调整上限。关于该上限，详见 [相关文档](/product/pricing.html#套餐包功能详情)。 |
+| 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数量达到上限。 | 退出不用的群组或联系商务调整上限。关于该上限，详见 [相关文档](/product/pricing.html#套餐包功能详情)。 |
+| 403     | exceed_limit | members size is greater than max user size ! | 创建群时加入的人数超过最大限制。 | 调整创建群的加群人数。关于该上限，详见 [相关文档](/product/pricing.html#套餐包功能详情)。|
 | 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
 | 404     |  resource_not_found  | username XXXX doesn't exist!       | 创建群组时添加的用户不存在。 |
 
@@ -161,9 +168,15 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ## 封禁群组
 
-封禁指定的群组。例如，群成员经常在群中发送违规消息，可以调用该 API 对该群进行封禁。群组被封禁后，群中任何成员均无法在群组以及该群组下的子区中发送和接收消息，也无法进行群组和子区管理操作。
+#### 功能说明
 
-群组封禁后，可调用[解禁群组](#解禁群组) API 对该群组解禁。
+- 封禁单个群组。
+- 例如，群成员经常在群中发送违规消息，可以调用该 API 对该群进行封禁。
+- 群组被封禁后，群中任何成员均无法在群组以及该群组下的子区中发送和接收消息，也无法进行群组和子区管理操作。
+- 封禁群组后会触发发送后回调，详见 [群组封禁/解禁事件](callback_group_ban.html)。
+- 群组封禁后，可调用 [解禁群组](#解禁群组) API 对该群组解禁。
+
+**调用频率上限**：100 次/秒/App Key  
 
 #### HTTP 请求
 
@@ -239,7 +252,13 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ## 解禁群组
 
-解除对指定群组的封禁。群组解禁后，群成员可以在该群组以及该群组下的子区中发送和接收消息并进行群组和子区管理相关操作。
+#### 功能说明
+
+- 解除对单个群组的封禁。
+- 群组解禁后，群成员可以在该群组以及该群组下的子区中发送和接收消息，并进行群组和子区管理相关操作。
+- 群组解禁后会触发发送后回调，详见 [群组封禁/解禁事件](callback_group_ban.html)。
+
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
@@ -315,7 +334,13 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ## 修改群组信息
 
-修改指定的群组信息，可修改 `groupname`、`avatar`、`description`、`maxusers`、`membersonly`、`allowinvites`、`invite_need_confirm`、`public` 和 `custom` 属性。如果传入其他字段，或传入的字段不存在，则不能修改的字段会抛出异常。
+#### 功能说明
+
+- 修改单个群组的信息。
+- 支持修改 `groupname`、`avatar`、`description`、`maxusers`、`membersonly`、`allowinvites`、`invite_need_confirm`、`public` 和 `custom` 属性。如果传入其他字段，或传入的字段不存在，会对不能修改的字段抛出异常。
+- 修改群组信息会触发发送后回调，详见 [修改群组信息的回调事件](callback_group_room_info.html)。
+
+**调用频率上限**：100 次/秒/App Key  
 
 #### HTTP 请求
 
@@ -342,7 +367,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `groupname`           | String | 否       | 群组名称，最大长度为 128 字符。 |
 | `avatar`              | String | 否       | 群组头像的 URL，最大长度为 1024 字符。|
 | `description`         | String | 否       | 群组描述，最大长度为 512 字符。 |
-| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见  [IM 套餐包功能对比](/product/product_package_feature.html)。 |
+| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。 |
 | `membersonly`         | Bool   | 否       | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。    |
 | `allowinvites`        | Bool   | 否       | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群；<br/> - `false`：只有群主或群管理员才可以邀请用户入群。 |
 | `invite_need_confirm` | Bool   | 否       | 受邀人加入群组前是否需接受入群邀请：<br/> - `true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
@@ -425,13 +450,18 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-| 400     | invalid_parameter                  | "some of [groupid] are not valid fields"  | 修改的群组信息时，传入的参数不支持，例如修改 `groupid`。| 
+| 400     | invalid_parameter                  | "some of [groupid] are not valid fields"  | 修改的群组信息时，传入的参数不支持，例如修改 `groupid`。|
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 获取 App 中的群组
 
-分页获取应用下的群组的信息。
+#### 功能说明
+
+- 分页获取应用下的群组的信息。
+- 关于单个 app 支持的群组数量，详见 [产品套餐包功能详情](/product/pricing.html#套餐包功能详情)。
+
+**调用频率上限**：100 次/秒/App Key  
 
 #### HTTP 请求
 
@@ -549,7 +579,12 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ## 获取单个用户加入的所有群组
 
-根据用户 ID 分页获取指定用户加入的所有群组。
+#### 功能说明
+
+- 根据用户 ID 分页获取单个用户加入的所有群组。
+- 关于单个用户可加入的群组数量，详见 [产品套餐包功能详情](/product/pricing.html#套餐包功能详情)。
+
+**调用频率上限**：50 次/秒/App Key
 
 #### HTTP 请求
 
@@ -653,7 +688,11 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
 
 ## 查看指定用户是否已加入群组
 
+#### 功能说明
+
 查看单个用户是否已加入了指定的群组。
+
+**调用频率上限**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -721,9 +760,14 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ## 获取群组详情
 
-可以获取一个或多个群组的详情，最多可获取 100 个群组的详情，每个群组最多可返回 10,000 个群成员（包括群主）。
+#### 功能说明
 
-当获取多个群组的详情时，返回所有存在的群组的详情；对于不存在的群组，返回 “group id doesn’t exist”。
+- 获取一个或多个群组的详情。
+- 每个群组最多可返回 10,000 个群成员（包括群主）。
+- 单次最多可获取 100 个群组的详情。
+- 当获取多个群组的详情时，返回所有存在的群组的详情；对于不存在的群组，返回 “group id doesn’t exist”。
+
+**调用频率上限**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -842,7 +886,15 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ## 解散群组
 
-解散指定的群组。解散群组时会同时删除群组下所有的子区（Thread）。
+#### 功能说明
+
+- 解散单个群组。
+- 解散群组时会同时删除群组下所有的子区（Thread）。
+- 解散群组后，会触发 [解散群组的回调事件](callback_group_room_delete.html)。
+- 群组解散后，群组中的文件，无法下载。
+- 群组解散后，服务端存储的群组信息不存在，群组会话不存在，但群消息仍然存在（与订阅的套餐包的消息存储时间有关）。客户端仍然能拉取到这个群组的漫游消息。
+
+**调用频率上限**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -869,8 +921,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 | 字段           | 类型   | 描述                                                                 |
 | :------------- | :----- | :---------------------- |
-| `data.success` | Bool   | 群组删除结果: <br/> - `true`：删除成功； <br/> - `false`：删除失败。 |
-| `data.groupid` | String | 删除的群组的 ID。                                                    |
+| `data.success` | Bool   | 群组解散结果: <br/> - `true`：成功； <br/> - `false`：失败。 |
+| `data.groupid` | String | 被解散的群组的 ID。                                                    |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 

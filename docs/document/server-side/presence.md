@@ -41,7 +41,11 @@
 
 ## 设置用户在线状态信息
 
-可以设置用户在指定设备的在线状态信息。
+### 功能说明
+
+设置用户在指定设备的在线状态信息。
+
+**调用频率上限**：100 次/秒/App Key 
 
 ### HTTP 请求
 
@@ -53,8 +57,8 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{
 
 | 参数       | 类型  | 是否必需 | 描述           | 
 | :--------- | :----- | :---------------------- | :------- |
-| `username`       | String  | 是 | 设置哪个用户的在线状态信息。           | 
-| `resource` | String | 是     | 要设置用户在哪个设备的在线状态信息，即传入服务器分配给每个设备资源的唯一标识符，格式为 `{device type}_{resource ID}`，其中设备类型 `device type` 可以是 `android`、`ios` 或 `web`，资源 ID `resource ID` 由 SDK 分配。例如，`android_123423453246`。 |
+| `username`       | String  | 是 | 设置该用户 ID 的在线状态信息。           | 
+| `resource` | String | 是     | 要设置用户在该设备的在线状态信息，即传入服务器分配给每个设备资源的唯一标识符，格式为 `{device type}_{resource ID}`，其中设备类型 `device type` 可以是 `android`、`ios` 或 `web`，资源 ID `resource ID` 由 SDK 分配。例如，`android_123423453246`。 |
 | `status`   | String | 是     | 用户的在线状态：<br> - `0`：离线；<br> - `1`：在线；<br> - 其它数字字符串：自定义在线状态。 | 
 
 其他参数及描述详见 [公共参数](#公共参数)。
@@ -120,7 +124,16 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/c1/presence/a
 
 ## 批量订阅在线状态
 
-一次可订阅多个用户的在线状态。
+### 功能说明
+
+- 一次订阅多个用户的在线状态。
+- 订阅用户状态后，若被订阅的用户的在线状态更新，订阅者会收到状态变更通知，例如，用户 A 订阅了用户 B 的在线状态，若用户 B 的状态变更，A 会收到状态变更通知。
+- 每次最多可订阅 100 个用户的在线状态。
+- 每个用户最多可订阅 3000 个用户的在线状态。
+- 每个用户最多可被 3000 个用户订阅。
+- 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
+
+**调用频率上限**：100 次/秒/App Key 
 
 ### HTTP 请求
 
@@ -220,11 +233,15 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/
 
 ## 批量获取在线状态信息
 
-你一次可获取多个用户的在线状态信息。
+### 功能说明
+
+一次最多可获取 100 个用户的在线状态信息。
 
 :::tip
 默认情况下，若用户在 1 秒内进行多次登录和登出，服务器以最后一次操作为准向客户端 SDK 发送状态变更通知。
 :::
+
+**调用频率上限**：100 次/秒/App Key 
 
 ### HTTP 请求
 
@@ -236,7 +253,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence
 
 | 参数     | 类型  | 是否必需 | 描述                                |
 | :------- | :----- | :---------------- | :------- |
-| `username` | String | 是 | 获取哪个用户订阅的在线状态。若传入的用户 ID 不存在或未订阅其他用户的在线状态，返回空列表。|
+| `username` | String | 是 | 获取该用户 ID 订阅的在线状态。若传入的用户 ID 不存在或未订阅其他用户的在线状态，返回空列表。|
 
 参数及描述详见 [公共参数](#公共参数)。
 
@@ -319,9 +336,12 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence'
 
 ## 查询单个群组的在线成员数量
 
-你可以查询单个群组的在线成员数量。**如需使用该 API，需要联系环信商务开通。**
+### 功能说明
 
-这里的在线状态指用户的 app 与服务器成功建立连接，不包括用户的自定义在线状态，如忙碌、马上回来等。
+- 查询单个群组的在线成员数量。**如需使用该 API，需要联系环信商务开通。**
+- 该 API 中的在线状态指用户的 app 与服务器成功建立连接，不包括用户的自定义在线状态，如忙碌、马上回来等。
+
+**调用频率上限**：100 次/秒/App Key 
 
 ### HTTP 请求
 
@@ -392,7 +412,11 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ##  取消订阅多个用户的在线状态
 
-取消订阅多个用户的在线状态。
+### 功能说明
+
+一次最多可取消订阅 100 个用户的在线状态。
+
+**调用频率上限**：100 次/秒/App Key 
 
 ### HTTP 请求
 
@@ -404,7 +428,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/presence
 
 | 参数     | 类型  | 是否必需 | 描述                                |
 | :------- | :----- | :---------------- | :------- |
-| `username` | String | 是 | 为哪个用户取消订阅的在线状态。|
+| `username` | String | 是 | 为该用户 ID 取消订阅的在线状态。|
 
 参数及描述详见 [公共参数](#公共参数)。
 
@@ -415,6 +439,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/presence
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。                                   |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
 ### 请求 body
 
 | 参数    | 类型  | 是否必需 | 描述                                                         | 
@@ -466,7 +491,11 @@ curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presenc
 
 ## 查询订阅列表
 
-查询当前用户已订阅在线状态的用户列表。
+### 功能说明
+
+分页查询当前用户已订阅在线状态的用户列表。
+
+**调用频率上限**：100 次/秒/App Key 
 
 ### HTTP 请求
 
@@ -478,7 +507,7 @@ GET https://{host}/{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum={p
 
 | 参数     | 类型  | 是否必需 | 描述                                |
 | :------- | :----- | :---------------- | :------- |
-| `username` | String | 是 | 查询哪个用户的订阅列表。若传入的用户 ID 不存在或未订阅其他用户的在线状态，返回空列表。|
+| `username` | String | 是 | 查询该用户 ID 的订阅列表。若传入的用户 ID 不存在或未订阅其他用户的在线状态，返回空列表。|
 
 参数及描述详见 [公共参数](#公共参数)。
 

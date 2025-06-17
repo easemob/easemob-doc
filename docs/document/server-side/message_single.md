@@ -1,10 +1,14 @@
  # 发送单聊消息
 
+ ## 功能说明
+
 <Toc />
 
-本文展示如何调用环信 IM RESTful API 在服务端实现单聊场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
+环信即时通讯 IM 支持在服务端实现单聊场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
 
-下表为各类型消息的发送说明：
+### 发送方式
+
+单聊场景下，发送各类型的消息调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异。
 
 <table>
 <tbody>
@@ -44,16 +48,22 @@
 </table>
 <p>&nbsp;</p>
 
-单聊场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异。
+### 特别说明
 
-:::tip
-1. 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
-2. 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在[环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
-3. [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
-:::
+- 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
+- 该接口默认不会检查发送方和接收方的好友关系。若你在环信控制台开启了 [好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)，该接口会检查发送方和接收方的好友关系。
+- 该接口不会检查接收方是否在黑名单上，同时不会检查发送方是否被禁言。
+- 该接口不校验传入的发送方和接收方的用户 ID。如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。
+- 你可以设置消息发送成功后，是否将消息同步到发送方的所有在线设备（`sync_device` 参数）。
+- 你可以设置哪些用户拉漫游消息时拉不到该消息（`roam_ignore_users` 参数）。
+- 你可以只将消息发送给在线用户，离线用户则无法收到消息（`routetype`）。
+- 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在 [环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
+- 调用该接口会触发发送后回调事件，请参见 [回调事件文档](callback_message_send.html#发送单聊消息)。
+- [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
 
-**发送频率**：对于单个 app，该 REST API 存在以下三个限制：
+### 调用频率上限
 
+对于单个 app，该 REST API 存在以下三个限制：
 
 <table>
 <tbody>
@@ -189,7 +199,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | `roam_ignore_users`   | List   | 否 | 设置哪些用户拉漫游消息时拉不到该消息。|
 | `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。 |
 | `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
-| `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。| 
+| `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。|
 
 请求体中的 `body` 字段说明详见下表。
 
@@ -280,6 +290,19 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 }
 ```
 
+消息发送失败的响应示例：
+
+```json
+{
+    "error": "message_send_error",
+    "exception": "MessageSendException",
+    "timestamp": 1748575460150,
+    "duration": 0,
+    "error_code": 14007,
+    "error_description": "message is too large"
+}
+```
+
 ## 发送图片消息
 
 ### HTTP 请求
@@ -311,7 +334,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | `filename` | String | 否       | 图片名称。建议传入该参数，否则客户端收到图片消息时无法显示图片名称。          |
 | `secret`   | String | 否       | 图片的访问密钥，即成功上传图片后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果图片文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `size`     | JSON   | 否       | 图片尺寸，单位为像素，包含以下字段：<br/> - `height`：图片高度；<br/> - `width`：图片宽度。   |
-| `url`      | String | 是       | 图片 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
+| `url`      | String | 是       | 图片 URL。格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为图片文件 ID，成功上传图片文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
 
 ### HTTP 响应
 
@@ -403,7 +426,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 | `filename` | String | 否       | 语音文件的名称。建议传入该参数，否则客户端收到语音消息时无法显示语音文件名称。    |
 | `secret`   | String | 否       | 语音文件访问密钥，即成功上传语音文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。 如果语音文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `Length`   | Int    | 否       | 语音时长，单位为秒。         |
-| `url`      | String | 是       | 语音文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为文件 ID，成功上传语音文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
+| `url`      | String | 是       | 语音文件 URL。格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为文件 ID，成功上传语音文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
 
 ### HTTP 响应
 
@@ -917,5 +940,4 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
 | 403      | message_send_error | message send reach limit                               | 消息发送频率超出限制(默认 60 秒内只允许发送 6000 条单聊消息)。 | 限制消息发送频率，详见[文档说明](message_single.html)。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
 

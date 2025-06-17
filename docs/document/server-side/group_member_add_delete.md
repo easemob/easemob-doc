@@ -51,12 +51,14 @@
 
 ## 添加单个群组成员
 
+#### 功能说明
+
 - 每次添加一个群成员。
-- 若添加的用户已是群成员，则添加失败，返回错误。
+- 若添加的用户已是群成员，则添加失败，返回错误 403。
 - 添加单个群成员后，服务器默认向群内成员发送系统通知。你可以设置是否发送该通知。
 - 添加群成员会触发发送后回调，详见 [邀请用户入群事件](callback_group_room_join.html#邀请用户入群)。
 
-**调用频率上限**：100 次/秒/App Key  
+**调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
 
@@ -143,17 +145,19 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 403     | forbidden_op | can not join this group, reason:user: XX already in group: XX\n | 用户已经在群里。 | 不要重复加入。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
 | 404     | resource_not_found | username XX doesn't exist! | 要添加的用户不存在 | 使用合法的用户，即 `username` 传入存在的用户 ID。|
-| 403     | exceed_limit | user XX has joined too many groups! | 用户可加入的群组数达到上限。 | 退出不用的群组或联系商务调整上限。 | 
+| 403     | exceed_limit | user XX has joined too many groups! | 用户可加入的群组数达到上限。 | 退出不用的群组或联系商务调整上限。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 批量添加群组成员
 
+#### 功能说明
+
 - 一次为群组添加多个成员。
-- 每次最多可以添加 60 位成员。如果所有用户均已是群成员，添加失败，返回错误。
+- 每次最多可以添加 60 位成员。如果所有用户均已是群成员，添加失败，返回错误 403。
 - 添加群成员后，服务器默认向群内成员发送系统通知。你可以设置是否发送该通知。
 - 添加群成员会触发发送后回调，详见 [邀请用户入群事件](callback_group_room_join.html#邀请用户入群)。
-  
+
 **调用频率上限**：100 次/秒/App Key   
 
 #### HTTP 请求
@@ -253,7 +257,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 ## 移除单个群组成员
 
-- 从群中移除指定成员。
+#### 功能说明
+
+- 从群中移除单个成员。
 - 如果被移除用户不是群成员，将移除失败，并返回错误。移除后，该成员也会被移除其在该群组中加入的子区。
 - 移除群成员后，服务器默认向群内成员发送系统通知。你可以设置是否发送该通知。
 - 移除群成员会触发发送后回调，详见 [将用户踢出群组事件](callback_group_room_leave.html#被踢)。
@@ -270,7 +276,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{usernam
 
 | 参数            | 类型   | 是否必需 | 描述       |
 | :-------------- | :----- | :------- | :------------ |
-| `username` | String | 是       | 要被移除的群成员的用户 ID。             |
+| `username` | String | 是       | 要被移除的群成员的用户 ID。            |
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
@@ -351,10 +357,13 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ## 批量移除群组成员
 
-- 一次移除多名群成员。
+#### 功能说明
+
+- 一次移除多名群成员，一次最多可移除 60 个。
 - 如果所有被移除用户均不是群成员，将移除失败，并返回错误。移除后，这些成员也会被移除其在该群组中加入的子区。
 - 移除群成员后，服务器默认向群内成员发送系统通知。你可以设置是否发送该通知。
 - 移除群成员会触发发送后回调，详见 [将用户踢出群组事件](callback_group_room_leave.html#被踢)。
+- 被移除的群组成员仍能从服务器拉取到被移除前在群组中发送和接收的消息。
 
 **调用频率上限**：100 次/秒/App Key   
 

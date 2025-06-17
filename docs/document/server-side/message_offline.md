@@ -44,7 +44,12 @@
 
 ## 获取用户离线消息数量
 
-获取环信 IM 用户的离线消息数量。
+#### 功能说明
+
+- 获取环信即时通讯 IM 用户的离线消息数量。
+- 离线消息的存储条数和天数，详见 [离线消息存储说明](/product/product_message_overview.html#离线消息存储)。
+
+**调用频率上限**：100 次/秒/App Key
 
 #### HTTP 请求
 
@@ -56,7 +61,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/offline_msg_coun
 
 | 参数             | 类型   | 是否必需 | 描述                          |
 | :--------------- | :----- | :------- | :---------------------------- |
-| `owner_username` | String | 是       | 要获取离线消息数量的用户 ID。 |
+| `owner_username` | String | 是       | 要获取该用户 ID 的离线消息数量。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
@@ -114,13 +119,21 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码 | 错误类型     | 错误提示     | 可能原因   | 处理建议   |
 | :------ | :--------- | :----------- | :--------- | :--------- |
 | 401         | unauthorized                       | Unable to authenticate (OAuth)  | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。   | 检查 `orgName` 和 `appName` 是否正确或 [创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ## 获取指定离线消息的投递状态
 
-获取用户的指定离线消息的投递状态，即查看该消息是否已投递。
+#### 功能说明
+
+- 获取用户的指定离线消息的投递状态，即查看该消息是否已投递。
+- “已投递”状态表示接收方用户上线时收到了该消息。
+- “未投递”状态表示接收方用户为离线状态，消息还未投递，等接收方上线后再投递。
+- 离线消息的存储条数和天数，详见 [离线消息存储说明](/product/product_message_overview.html#离线消息存储)。
+  
+
+**调用频率上限**：100 次/秒/App Key  
 
 #### HTTP 请求
 
@@ -132,8 +145,8 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/offline_msg_status/{ms
 
 | 参数       | 类型   | 是否必需 | 描述                          |
 | :--------- | :----- | :------- | :---------------------------- |
-| `username` | String | 是       | 要获取离线消息状态的用户 ID。 |
-| `msg_id`   | String | 是       | 要查看状态的离线消息 ID。     |
+| `username` | String | 是       | 要获取该用户 ID 的离线消息状态。 |
+| `msg_id`   | String | 是       | 要查看该离线消息 ID 的投递状态。     |
 
 其他参数及说明详见 [公共参数](#公共参数)。
 
