@@ -22,7 +22,7 @@ const documentSidebar = [
     children: [
       { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
       { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
-      { text: 'Demo 体验', link: 'demo.html', except: ['web', 'windows', 'flutter', 'unity', 'server-side'] },
+      { text: 'Demo 体验', link: 'demo.html', except: ['web', 'windows', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
@@ -530,7 +530,14 @@ const documentSidebar = [
       }
     ],
     only: ['server-side']
-  }
+  },
+  {
+    text: '已废弃内容',
+    children: [
+      { text: '通过用户 ID 和密码获取用户 token', link: 'easemob_user_token_password.html' }
+    ],
+    only: ['server-side']
+  },
 ]
 
 function buildDocSidebar() {

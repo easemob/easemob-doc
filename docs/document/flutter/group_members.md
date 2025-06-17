@@ -9,6 +9,7 @@
 环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupEventHandler` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 群组加人、踢人
+- 获取群组成员信息
 - 管理群成员的自定义属性
 - 管理群主及群管理员
 - 管理群组黑名单
@@ -45,7 +46,7 @@ try {
 ### 群组踢人
 
 1. 仅群主和群管理员可以调用 `EMGroupManager#removeMembers` 方法将单个或多个成员移出群组。
-2. 被移出群组后，该成员收到 `EMGroupEventHandler#onUserRemovedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMemberExitedFromGroup` 事件。
+2. 被移出群组后，该成员收到 `EMGroupEventHandler#onUserRemovedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMembersExitedFromGroup` 事件。
 3. 被移出群组后，该用户还可以再次加入群组。
 
 示例代码如下：

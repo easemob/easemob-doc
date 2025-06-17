@@ -2,9 +2,34 @@
 
 <Toc />
 
+## 版本 v4.15.0 2025-6-16
+
+#### 新增特性
+
+- Android 依赖 SDK 升级到 4.15.0。
+- iOS 依赖 SDK 升级到 4.15.0。
+- 支持 [GIF 图片消息](message_send_receive.html#发送和接收-gif-图片消息)。
+- 支持 [群组头像功能](group_attributes.html#管理群组头像)。
+- 支持 [消息附件鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
+- 支持加载本地会话消息时，只 [加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持 [获取群成员信息](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
+  - 新增 `onMembersJoinedFromGroup` 和 `onMembersExitedFromGroup` 回调，`onMembersJoinedFromGroup` 和 `onMemberExitedFromGroup` 标记过期。
+  - 新增 `EMGroupManager#updateGroupName` 和 `EMGroupManager#updateGroupDesc` 方法，标记 `EMGroupManager#changeGroupName` 和 `EMGroupManager#changeGroupDescription` 方法过期。
+
+#### 优化
+
+- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](/document/flutter/demo.html)。
+
+#### 修复
+
+- 修复 Android 获取自己的群成员属性时解释失败的问题。
+- 修复 `ChatRoomEventHandler#onRemovedFromChatRoom` 不执行。
+
 ## 版本 v4.13.0 2025-3-28
 
-### 新增特性
+#### 新增特性
 
 - [支持修改各类发送成功后的消息](message_modify.html) ：
   - 文本/自定义消息：支持修改消息内容（body）和扩展 `attributes`。
@@ -20,7 +45,7 @@
 - 升级 iOS 依赖库为 4.13.0 版本。
 - 升级 Android 依赖库为 4.13.0 版本。
 
-### 问题修复
+#### 问题修复
 
 - 修复 `EMChatManager#fetchConversation` 方法拉取到的会话最新一条消息不包含表情回复（Reaction）和翻译信息的问题。
 
@@ -53,7 +78,7 @@
 #### 新增特性
 
 - 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
-  - 新增 `EMChatRoomManager.joinChatRoom(String roomId, {bool leaveOther = true,String? ext,})` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
+  - 新增 `EMChatRoomManager.joinChatRoom(String roomId, {bool leaveOtherRooms = true,String? ext,})` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
   - 新增 `EMChatRoomEventHandler.onMemberJoinedFromChatRoom(String roomId, String participant, String? ext)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 - 新增 `EMPushManager.syncConversationsSilentMode()` 方法，支持[从服务器获取所有会话的推送通知方式的设置](/document/flutter/push/push_notification_mode_dnd.html#推送通知方式)。
 - 新增 [EMPushManager.bindDeviceToken(String notifierName, String deviceToken) 方法](/document/flutter/push/push_easemob_console.html#绑定推送信息)。

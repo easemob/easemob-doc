@@ -82,7 +82,7 @@ try {
 ```dart
 EMClient.getInstance.chatRoomManager.joinChatRoom(
   "roomId",
-  leaveOther: false,
+  leaveOtherRooms: false,
   ext: 'ext',
 );
 

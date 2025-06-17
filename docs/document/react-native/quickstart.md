@@ -196,7 +196,7 @@ const App = () => {
               rollLog('onConnected');
               setMessageListener();
             },
-            onDisconnected(errorCode) {
+            onDisconnected() {
               rollLog('onDisconnected:' + errorCode);
             },
           } as ChatConnectEventListener;
