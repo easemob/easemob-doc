@@ -8,7 +8,8 @@
 
 环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupEventHandler` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
-- 修改群组名称、描述和群头像
+- 修改群组名称、描述
+- 获取、设置和修改群头像
 - 获取、更新群组公告
 - 管理群组共享文件
 - 更新群扩展字段
