@@ -29,7 +29,7 @@ const extraNavList = themeData.value.extra_nav || [];
               ></path>
             </svg>
           </div>
-          <div class="search-input">搜索关键字</div>
+          <div class="search-input">Search</div>
         </div>
       </div>
 
@@ -91,7 +91,7 @@ export default {
   font-weight: 500;
   color: #999; /* 字体颜色 */
   font-size: 14px; /* 缩小字体大小 */
-  width: 100px; /* 缩小输入框宽度 */
+  width: 50px; /* 缩小输入框宽度 */
   margin-left: 0.4em; /* 缩小间距 */
   cursor: pointer;
 }
