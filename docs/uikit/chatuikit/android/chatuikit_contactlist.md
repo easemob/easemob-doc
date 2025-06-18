@@ -85,7 +85,7 @@ ChatUIKitContactsListFragment.Builder()
 
 ### 设置标题栏
 
-聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。如果聊天页面的标题栏不满足需求，建议自定义标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的标题栏](chatuikit_custom_conversation_list.html#设置标题栏)。
+聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。如果聊天页面的标题栏不满足需求，建议自定义标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见 [设置会话列表页面的标题栏](chatuikit_conversation.html#设置标题栏)。
 
 ### 自定义联系人列表 Header 
 
