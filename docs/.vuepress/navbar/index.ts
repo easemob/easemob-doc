@@ -149,14 +149,14 @@ export const zhNavbar = navbar([
   //     },
   //    ]
   // },
-  //{
-  //  text: '音视频',
- ///   link: '/private/media/common_introduction.html'
- // },
- // {
-//    text: '即时推送',
- //   link: '/push/push_overview.html'
- // },
+  {
+    text: '音视频',
+    link: '/private/media/common_introduction.html'
+  },
+  {
+    text: '即时推送',
+    link: '/push/push_overview.html'
+  },
   {
     text: '解决方案',
     link: '/private/im/uc_overview.html'
