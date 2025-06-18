@@ -1,8 +1,8 @@
-# 发送和接收消息
+# 发送消息
 
-环信即时通讯 IM Unity SDK 通过 `IChatManager` 和 `Message` 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
+环信即时通讯 IM Unity SDK 通过 `IChatManager` 和 `Message` 类实现文本、图片、音频、视频和文件等类型的消息的发送。
 
-- 对于单聊，环信即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。
+- 对于单聊，环信即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要 [开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。
 
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
 
@@ -15,9 +15,9 @@
 - 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 发送和接收文本消息
+## 发送文本消息
 
-1. 你可以利用 `Message` 类构造一个消息，然后通过 `IChatManager` 将该消息发出。
+你可以利用 `Message` 类构造一个消息，然后通过 `IChatManager` 将该消息发出。
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。 
 
@@ -49,44 +49,20 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-2. 你可以用注册监听 `IChatManagerDelegate` 接收消息。该 `IChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除该监听。如在析构 `IChatManagerDelegate` 的继承实例之前。
-
-在新消息到来时，你会收到 `OnMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `Options#IncludeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
-
-对于聊天室消息，你可以通过消息的 `Message#Broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
-
-```csharp
-//继承并实现 IChatManagerDelegate。
-public class ChatManagerDelegate : IChatManagerDelegate {
-
-    //实现 OnMessagesReceived 回调。
-    public void OnMessagesReceived(List<Message> messages)
-    {
-      //收到消息，遍历消息列表，解析和显示。
-    }
-}
-
-//申请并注册监听。
-ChatManagerDelegate adelegate = new ChatManagerDelegate();
-SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
-
-//移除监听。
-SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
-```
-
-## 发送和接收附件消息
+## 发送接收附件消息
 
 除文本消息外，SDK 还支持发送附件类型消息，包括语音、图片、视频和文件消息。
 
 附件消息的发送和接收过程如下：
 
-1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器。
-2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `DownloadAttachment` 方法。
-3. 获取附件的服务器地址和本地路径。
+1. 创建和发送附件类型消息。
+2. SDK 将附件上传到环信服务器。
 
-### 发送和接收语音消息
+### 发送语音消息
 
-发送语音消息时，应用层需完成语音文件录制的功能，提供语音文件的 URI 和语音时长。
+1. 发送语音消息前，在应用层录制语音文件。
+2. 发送方调用 `Message#CreateVoiceSendMessage` 方法传入语音文件的 URI、本地语音文件路径、语音时长和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建语音消息。
+3. 发送方调用 `ChatManager#SendMessage` 方法发送消息。SDK 会将语音文件上传至环信服务器。
 
 参考如下示例代码创建并发送语音消息：
 
@@ -115,33 +91,13 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-语音消息的接收与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
+### 发送图片消息
 
-接收方收到语音消息后，参考如下示例代码获取语音消息的附件：
-
-```csharp
-// 注意：这里的 "Message ID" 是消息发送成功以后（CallBack 中的 onSuccess 被触发以后），被发送消息的 ID。
-Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
-if (msg != null)
-{
-  ChatSDK.MessageBody.VoiceBody vb = (ChatSDK.MessageBody.VoiceBody)msg.Body;
-
-  //语音文件在服务器的路径。
-  string voiceRemoteUrl = vb.RemotePath;
-
-  //语音文件的本地路径。
-  string voiceLocalUri = vb.LocalPath;
-}
-else {
-  Debug.Log($"未找到消息");
-}
-```
-
-### 发送和接收图片消息
-
-1. 创建并发送图片消息。
+1. 发送方调用 `Message#CreateImageSendMessage` 方法传入图片的本地资源路径、设置是否发送原图以及接收方的用户 ID 等参数创建图片消息。
 
 图片消息默认会被压缩后发出，可通过设置 `original` 参数为 `true` 发送原图。
+
+2. 发送方调用 `ChatManager#SendMessage` 方法发送消息。SDK 会将图片文件上传至环信服务器。
 
 ```csharp
 //`localPath` 为图片本地资源路径。
@@ -170,45 +126,15 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-2. 图片消息的接收与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
+### 发送视频消息
 
-接收方收到图片消息后，参考如下示例代码获取图片消息的缩略图和附件。
-
-- 接收方如果设置了自动下载，即 `Options.IsAutoDownload` 为 `true`，SDK 接收到消息后会下载缩略图
-- 如果未设置自动下载，需主动调用 `SDKClient.Instance.ChatManager.DownloadThumbnail` 下载。
-
-下载完成后，调用相应消息 `msg.Body` 的 `ThumbnailLocalPath` 获取缩略图路径。
-
-```csharp
-//注意：这里的 "Message ID" 是消息发送成功以后（`CallBack` 中的 `onSuccess` 被触发以后），被发送消息的 ID。
-Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
-if (msg != null)
-{
-  ChatSDK.MessageBody.ImageBody ib = (ChatSDK.MessageBody.ImageBody)msg.Body;
-
-  //服务器端图片文件路径。
-  string imgRemoteUrl = ib.RemotePath;
-
-  //服务器端图片缩略图路径。
-  string thumbnailUrl = ib.ThumbnaiRemotePath;
-
-  //本地图片文件路径。
-  string imgLocalUri = ib.LocalPath;
-
-  //本地图片缩略图路径。
-  Uri thumbnailLocalUri = ib.ThumbnailLocalPath;
-
-}
-else {
-  Debug.Log($"未找到消息");
-}
-```
-
-### 发送和接收视频消息
+1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
 
 发送视频消息时，应用层需要完成视频文件的选取或者录制。视频消息支持给出视频的时长作为参数，发送给接收方。
 
-1. 创建并发送视频消息：
+2. 发送方调用 `Message#CreateVideoSendMessage` 方法传入视频文件的本地资源标志符、缩略图的本地存储路径、视频时长以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID） 创建视频消息。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `thumbnailLocalPath` 方法。
+   
+3. 发送方调用 `ChatManager#SendMessage` 方法发送视频消息。SDK 会将视频文件上传至消息服务器。
 
 ```csharp
 Message msg = Message.CreateVideoSendMessage(toChatUsername, localPath, displayName, thumbnailLocalPath, fileSize, duration, width, height);
@@ -228,43 +154,11 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-2. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见[设置图片缩略图自动下载](#发送和接收图片消息)。
+### 发送文件消息
 
-视频文件本身需要通过 `SDKClient.Instance.ChatManager.DownloadAttachment` 下载，下载完成后，使用相应消息 `Body` 的 `LocalPath` 成员获取视频文件路径。
-
-```csharp
-// 接收到视频消息需先下载附件才能打开。
-SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
-  onSuccess: () => {
-    Debug.Log($"下载附件成功");
-
-    Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
-    if (msg != null)
-    {
-      if (msg.Body.Type == ChatSDK.MessageBodyType.VIDEO) {
-        ChatSDK.MessageBody.VideoBody vb = (ChatSDK.MessageBody.VideoBody)msg.Body;
-        //从本地获取视频文件路径。
-        string videoLocalUri = vb.LocalPath;
-        //这里可以根据本地路径打开文件。
-      }
-    }
-    else {
-      Debug.Log($"未找到消息");
-    }
-
-  },
-  onProgress: (progress) => {
-    Debug.Log($"下载附件进度 {progress}");
-  },
-  onError: (code, desc) => {
-    Debug.Log($"附件下载失败，errCode={code}, errDesc={desc}");
-  }
-));
-```
-
-### 发送和接收文件消息
-
-1. 创建并发送文件消息。
+1. 发送方调用 `Message#CreateFileSendMessage` 方法传入文件的本地资源标志符和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）等参数创建文件消息。
+   
+2. 发送方调用 `ChatManager#SendMessage` 方法发送文件消息。SDK 将文件上传至环信服务器。
 
 ```csharp
 // localPath 为文件本地路径，displayName 为消息显示名称，fileSize 为文件大小。
@@ -287,34 +181,15 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
     Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
   }
 ));
-
-// 发送成功后，获取文件消息附件。
-// 注意：这里的 "Message ID" 是消息发送成功以后（CallBack 中的 onSuccess 被触发以后），被发送消息的 ID。
-Message msg = SDKClient.Instance.ChatManager.LoadMessage("Message ID");
-if (msg != null)
-{
-  ChatSDK.MessageBody.FileBody fb = (ChatSDK.MessageBody.FileBody)msg.Body;
-
-  //服务器文件路径。
-  string fileRemoteUrl = fb.RemotePath;
-
-  //本地文件路径。
-  string fileLocalUri = fb.LocalPath;
-
-}
-else {
-  Debug.Log($"未找到消息");
-}
-
 ```
 
-2. 文件消息的接收与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
+## 发送位置消息
 
-## 发送和接收位置消息
+1. 发送方调用 `Message#CreateLocationSendMessage` 方法创建位置消息。
+   
+2. 发送方调用 `ChatManager#SendMessage` 方法发送位置消息。
 
-1. 创建和发送位置消息。
-  
-发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。 
+发送位置时，需要集成第三方地图服务，获取到位置点的经纬度信息。
 
 ```csharp
 //`latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容，`buildingName` 为建筑名称。
@@ -330,11 +205,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-2. 接收位置消息与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
-   
- 接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
-
-## 发送和接收透传消息
+## 发送透传消息
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。
 
@@ -345,7 +216,11 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 - 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
 :::
 
-1. 创建和发送透传消息。
+发送透传消息的过程如下：
+
+1. 发送方调用 `Message#CreateCmdSendMessage` 方法创建透传消息。
+   
+2. 发送方调用 `ChatManager#SendMessage` 方法发送透传消息。
 
 ```csharp
 //`action` 可以自定义。
@@ -361,35 +236,13 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-2. 接收方通过 `OnMessagesReceived` 和 `OnCmdMessagesReceived` 回调接收透传消息，方便用户进行不同的处理。
-
-```csharp
-// 继承并实现 `IChatManagerDelegate`。
-public class ChatManagerDelegate : IChatManagerDelegate {
-
-    // 收到消息。
-    public void OnMessagesReceived(List<Message> messages)
-    {
-      // 收到消息，遍历消息列表，解析和显示。
-    }
-    // 收到透传消息。
-    void OnCmdMessagesReceived(List<Message> messages)
-    {
-      // 收到消息，遍历消息列表，解析和处理。
-    }
-}
-
-// 申请并注册监听。
-ChatManagerDelegate adelegate = new ChatManagerDelegate()
-SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
-
-```
-
-## 发送和接收自定义类型消息
+## 发送自定义类型消息
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
-1. 创建和发送自定义类型消息的示例代码：
+1. 发送方调用 `Message#CreateCustomSendMessage` 方法创建自定义消息。
+   
+2. 发送方调用 `ChatManager#SendMessage` 方法发送自定义消息。
 
 ```csharp
 //`event` 为字符串类型的自定义事件，比如礼物消息，可以设置：
@@ -410,17 +263,12 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-2. 接收自定义消息与其他类型消息一致，详见[接收文本消息](#发送和接收文本消息)。
-
-## 发送和接收合并消息
+## 发送合并消息
 
 为了方便消息互动，即时通讯 IM 自 1.2.0 版本开始支持将多个消息合并在一起进行转发。你可以采取以下步骤进行消息的合并转发：
 
 1. 利用原始消息列表创建一条合并消息。
 2. 发送合并消息。
-3. 对端收到合并消息后进行解析，获取原始消息列表。
-
-#### 创建和发送合并消息
 
 你可以调用 `CreateCombineSendMessage` 方法创建一条合并消息，然后调用 `SendMessage` 方法发送该条消息。
 
@@ -456,111 +304,6 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
         // 消息发送失败的处理逻辑
     }
 ));
-```
-
-#### 接收和解析合并消息
-
-接收合并消息与接收普通消息的操作相同，详见[接收消息](#发送和接收文本消息)。
-
-对于不支持合并转发消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText` 携带的内容，其他字段会被忽略。
-
-合并消息实际上是一种附件消息。收到合并消息后，你可以调用 `FetchCombineMessageDetail` 方法下载合并消息附件并解析出原始消息列表。
-
-对于一条合并消息，首次调用该方法会下载和解析合并消息附件，然后返回原始消息列表，而后续调用会存在以下情况：
-
-- 若附件已存在，该方法会直接解析附件并返回原始消息列表。
-- 若附件不存在，该方法首先下载附件，然后解析附件并返回原始消息列表。
-
-```csharp
-SDKClient.Instance.ChatManager.FetchCombineMessageDetail(msg, new ValueCallBack<List<Message>>(
-    onSuccess: (list) => {
-        // 处理并展示消息列表
-    },
-    onError: (code, desc) => {
-        // 处理出错信息
-    }
-));
-```
-
-## 发送和接收定向消息
-
-发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
-
-该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
-
-:::tip
-1. 仅 SDK 1.2.0 及以上版本支持。
-2. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息计数。
-3. 群组定向消息的漫游功能默认关闭，使用前需联系商务开通。
-4. 聊天室定向消息的漫游功能默认关闭，使用前需联系商务开通聊天室消息漫游和定向消息漫游功能。
-:::
-
-发送定向消息的流程与发送普通消息相似，唯一区别是需要设置消息的接收方，具体操作如下：
-
-1. 创建一条群组或聊天室消息。
-2. 设置消息的接收方。
-3. 发送定向消息。
-
-下面以文本消息为例介绍如何发送定向消息，示例代码如下：
-
-```csharp
-// 创建一条文本消息。
-Message msg = Message.CreateTextSendMessage(groupId, content);
-// 会话类型：群组和聊天室聊天，分别为 `Group` 和 `Room`。
-msg.MessageType = MessageType.Group;
-
-List<string> receives = new List<string>();
-receives.Add("userId1");
-receives.Add("userId2");
-
-// 设置消息接收方列表。最多可传 20 个接收方的用户 ID。若传入 `null`或者包含接收Id数目为0，则消息发送给群组或聊天室的所有成员。
-msg.ReceiverList = receives;
-
-SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
-    onSuccess: () => {
-
-    },
-    onError: (code, desc) => {
-
-    }
-));
-```
-
-接收群定向消息与接收普通消息的操作相同，详见[接收文本消息](#发送和接收文本消息)。
-
-## 使用消息扩展字段
-
-当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型，例如，消息中需要携带被回复的消息内容或者是图文消息等场景。
-
-```csharp
-Message msg = Message.CreateTextSendMessage(toChatUsername, content);
-
-// 增加自定义属性。
-AttributeValue attr1 = AttributeValue.Of("value", AttributeValueType.STRING);
-AttributeValue attr2 = AttributeValue.Of(true, AttributeValueType.BOOL);
-msg.Attributes.Add("attribute1", attr1);
-msg.Attributes.Add("attribute2", attr2);
-
-// 发送消息。
-SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
-  onSuccess: () => {
-    Debug.Log($"{msg.MsgId}发送成功");
-  },
-  onError:(code, desc) => {
-    Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
-  }
-));
-// 接收消息的时候获取扩展属性。
-bool found = false;
-string str = Message.GetAttributeValue<string>(msg.Attributes, "attribute1", out found);
-if (found) {
-  // 使用 str 变量。
-}
-found = false；
-bool b = Message.GetAttributeValue<bool>(msg.Attributes, "attribute2", out found);
-if (found) {
-  // 使用 b 变量。
-}
 ```
 
 ## 更多
