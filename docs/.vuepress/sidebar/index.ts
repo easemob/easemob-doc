@@ -92,15 +92,32 @@ export const zhSidebar = sidebar({
         { text: "购买指引", link: "pricing_method.html" },
       ],
     }, 
+    // {
+    //   text: "Demo",
+    //   collapsible: true,
+    //   children: [
+    //     { text: "体验 Demo", link: "demo.html" },
+    //   ],
+    // },
     {
-      text: "Demo",
+      text: "增值服务",
       collapsible: true,
       children: [
-        { text: "体验 Demo", link: "demo.html" },
+       {
+      text: "消息翻译",
+      collapsible: true,
+      children: [
+        { text: "Android", link: "/document/android/message_translation.html" },
+        { text: "iOS", link: "/document/ios/message_translation.html" },
+        { text: "Web", link: "/document/web/message_translation.html" },
+        { text: "小程序", link: "/document/applet/message_translation.html" },
+        { text: "Flutter", link: "/document/flutter/message_translation.html" },
+        { text: "React Native", link: "/document/react-native/message_translation.html" },
+        { text: "Unity", link: "/document/unity/message_translation.html" },
+        { text: "Windows", link: "/document/windows/message_translation.html" },
       ],
-    },
-    {
-      text: "内容审核",
+    }, 
+      { text: "内容审核",
       collapsible: true,
       children: [
         {
@@ -124,7 +141,6 @@ export const zhSidebar = sidebar({
             },
           ],
         },
-
         {
           text: "快速开始",
           collapsible: true,
@@ -158,25 +174,20 @@ export const zhSidebar = sidebar({
             { text: "用户管理", link: "moderation/moderation_usermgmt.html" },
           ],
         },
-        {
-          text: "常见问题",
-          collapsible: true,
-          children: [
-            {
-              text: "如何开始使用内容审核服务？",
-              link: "moderation/moderation_use_console.html",
-            },
-            {
-              text: "如何新增自定义词？",
-              link: "moderation/moderation_add_word.html",
-            },
-            {
-              text: "为什么处置方式选择了替换***，但实际被拦截了没有发出来？",
-              link: "moderation/moderation_replace_refuse.html",
-            },
-          ],
-        },
       ],
+    },
+        {
+         text: "回调",
+         collapsible: true,
+         children: [
+        { text: "回调概述", link: "/document/server-side/callback_overview.html" },
+        { text: "发送前回调", link: "/document/server-side/callback_presending.html" },
+        { text: "发送后回调", link: "/document/server-side/callback_postsending.html" },
+        { text: "发送后回调事件", link: "/document/server-side/callback_login_logout.html" },
+         ],
+      }, 
+      { text: "质量监控", link: "/product/request_quality_overview.html" },
+     ],
     },
     {
       text: "场景方案",
@@ -352,6 +363,20 @@ export const zhSidebar = sidebar({
       ],
     },
     {
+      text: "常见方案",
+      collapsible: true,
+      children: [
+        { text: "群 @ 消息", link: "solution_common/group_@.html" },
+        { text: "消息引用", link: "solution_common/message_quote.html" },
+        { text: "实现输入指示器", link: "solution_common/typing_indication.html" },
+        { text: "迁移到环信", link: "solution_common/migrate_to_easemob.html" },
+      ],
+    },
+    {
+      text: "插件",
+      collapsible: true,
+      children: [
+      {
       text: 'AI 会话摘要助手',
       collapsible: true,
       children: [
@@ -364,24 +389,22 @@ export const zhSidebar = sidebar({
         },
       ], 
     },
-    {
-      text: "常见方案",
-      collapsible: true,
-      children: [
-        { text: "群 @ 消息", link: "solution_common/group_@.html" },
-        { text: "消息引用", link: "solution_common/message_quote.html" },
-        { text: "实现输入指示器", link: "solution_common/typing_indication.html" },
-        { text: "迁移到环信", link: "solution_common/migrate_to_easemob.html" },
-      ],
+    ], 
     },
     {
+      text: "帮助中心",
+      collapsible: true,
+      children: [
+      {
       text: "FAQ",
       collapsible: true,
       children: [
         { text: "FAQ 质量", link: "faq_quality_issues.html" },
         { text: "FAQ 集成", link: "faq_integration_issues.html" },
-        { text: "帮助中心", link: "help.html" },
-      ],
+        ],
+      },
+      { text: "联系我们", link: "help.html" },
+     ],
     },
     {
       text: "安全",
