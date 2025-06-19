@@ -104,6 +104,7 @@
                         v-if="context.link"
                         class="feature-link"
                         type="primary"
+                        target="_blank"
                         :href="context.link"
                       >
                         {{ context.text }}
@@ -111,7 +112,7 @@
                       <ClientOnly v-else>
                         <el-popover placement="bottom-start" :width="436">
                           <template #reference>
-                            <a class="feature-link" type="primary">
+                            <a class="feature-link" type="primary"  :href="context.sdks[0].link" target="_blank">
                               {{ context.text }}
                             </a>
                           </template>

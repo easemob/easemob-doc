@@ -72,11 +72,16 @@ const onChange = (platform) => {
   let newPath = route.path.split('/')
   newPath[2] = platform
   const nextPathPath = newPath.join('/')
-
+  const quickstartPath = `/document/${platform}/quickstart.html`;
+  const overviewPath = `/document/${platform}/overview.html`;
   if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
-    router.push(nextPathPath)
+    router.push(nextPathPath);
+  } else if (nextPlatformDocRouters.indexOf(quickstartPath) > -1) {
+    router.push(quickstartPath);
+  } else if (nextPlatformDocRouters.indexOf(overviewPath) > -1) {
+    router.push(overviewPath);
   } else {
-    router.push('/document/'+platform+'/overview.html')
+    router.push(`/document/${platform}`);
   }
 }
 
