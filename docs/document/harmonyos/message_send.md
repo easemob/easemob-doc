@@ -82,8 +82,10 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 ### 发送图片消息
 
-1. 发送方调用 `createImageSendMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID （群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息。
+1. 发送方调用 `createImageSendMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息。
 2. 发送方调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+
+**目前，HarmonyOS SDK 尚不支持压缩原图后发给接收方。**
    
 ```typescript
 // `imageFilePathOrUri` 为图片本地路径或者Uri。
@@ -97,10 +99,9 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 ### 发送 GIF 图片消息
 
 - 自 HarmonyOS SDK 1.7.0 开始，支持发送 GIF 图片消息。
+- GIF 图片缩略图的生成和下载与普通图片消息相同，详见 [发送](#发送图片消息) 和 [接收图片消息](message_receive.html#接收图片消息)。
 
-- GIF 图片缩略图的生成和下载与普通图片消息相同，详见 [发送和接收图片消息](#发送和接收图片消息)。
-
-- GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。// TODO：这句话是 Android 的，合适吗？
+**目前，HarmonyOS SDK 尚不支持压缩原图后发给接收方。**
 
 发送 GIF 图片消息的过程如下：
 
