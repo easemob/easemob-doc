@@ -259,7 +259,8 @@
 环信即时通讯 HarmonyOS SDK 支持单聊、群组聊天和聊天室聊天场景，实现了以下特性：
 
 - 支持消息特性：
-  - [发送和接收消息](message_send_receive.html)；
+  - [发送消息](message_send.html)；
+  - [接收消息](message_receive.html)；
   - [获取历史消息](message_retrieve.html)；
   - [撤回消息](message_recall.html)；
   - [消息回执](message_receipt.html)；
