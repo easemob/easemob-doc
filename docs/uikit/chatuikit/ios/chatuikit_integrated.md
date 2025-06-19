@@ -9,7 +9,7 @@
 开始前，确保你的开发环境满足如下条件：
 
 - Xcode 16 或以上版木；
-- iOs 13.0 或以上版木；
+- iOs 14.0 或以上版木；
 - CocoaPods 1.14.3 及以上版本；
 - 项目中已设置有效的开发者签名。
 
@@ -23,7 +23,7 @@
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '13.0'
+platform :ios, '14.0'
 
 target 'YourTarget' do
   use_frameworks!
@@ -34,7 +34,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
       config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
     end
   end
