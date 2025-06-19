@@ -21,9 +21,9 @@
 
 ### 新增特性
 
-- 支持 [GIF 图片消息](message_send_receive.html#发送和接收-gif-图片消息)。
+- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。 
-- 支持 [消息附件下载鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持 [消息附件下载鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
 - 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
 - 支持 [根据搜索范围搜索所有会话中的消息](message_search.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](message_search.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
@@ -47,7 +47,7 @@
   - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
   - 命令消息：不支持修改。
-- [ChatMessage.setExt](message_send_receive.html#使用消息扩展字段)支持 object 类型的扩展字段。
+- [ChatMessage.setExt](message_extension.html)支持 object 类型的扩展字段。
 - SDK 优化切换到前台后的重连逻辑。
 - 优化重连逻辑，默认切换重连的地址。
 
@@ -109,7 +109,7 @@
 ### 优化
 
 - 废弃 `ChatOptions` 传入字符串的构造函数，新增传入 [AppParam](initialization.html#初始化) 的构造方法。
-- [发送前回调](/document/server-side/callback_presending.html)时修改的[消息扩展字段](message_send_receive.html#使用消息扩展字段)，会同步到发送方。
+- [发送前回调](/document/server-side/callback_presending.html)时修改的 [消息扩展字段](message_extension.html)，会同步到发送方。
 - 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
 - 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
 - 优化部分数据库操作。
@@ -243,8 +243,8 @@
 ### 新增特性
 
 - 新增[修改消息](message_modify.html)功能。
-- 新增[自定义消息](message_send_receive.html#发送自定义类型消息)功能。
-- 新增[合并转发消息](message_send_receive.html#发送和接收合并消息)功能。
+- 新增 [发送](message_send.html#发送自定义类型消息) 和 [接收自定义消息](message_receive.html#接收自定义类型消息)功能。
+- 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息](message_receive.html#接收合并消息) 功能。
 - 支持 [HarmonyOS 推送](/document/harmonyos/push/push_overview.html)能力。
 
 ### 优化

@@ -178,7 +178,7 @@ EMClient.getInstance().chatCircleManager().fetchVisiblePrivateChannelsInServer(s
 
 ### 发送和接收一条频道消息
 
-在频道中发送和接收消息，你可以参考 [发送和接收消息](/document/android/message_send_receive.html)。
+在频道中发送和接收消息，你可以参考 [发送](/document/android/message_send.html)和[接收消息](/document/android/message_receive.html)。
 
 #### 发送一条频道消息
 

@@ -35,7 +35,7 @@
 
 ### 发送子区消息
 
-发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send_receive.html)。唯一不同的是，发送子区消息需要指定标记 `isChatThread` 为 `true`。
+发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send.html)。唯一不同的是，发送子区消息需要指定标记 `isChatThread` 为 `true`。
 
 单设备登录时，子区所属群组的所有成员会收到 `onChatThreadChange` 回调。
 
@@ -67,7 +67,7 @@ function sendTextMessage() {
 
 ### 接收子区消息
 
-可以通过 `addEventHandler` 注册监听器接收各类消息的回调，详情参考 [接收消息](message_send_receive.html#发送和接收文本消息)。
+可以通过 `addEventHandler` 注册监听器接收各类消息的回调，详情参考 [接收消息](message_receive.html)。
 
 示例代码如下：
 

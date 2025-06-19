@@ -174,12 +174,12 @@
 
 - React-Native 从 0.66.5 升级到 0.71.11。
 - 依赖的原生 SDK（iOS 和 Android）升级到版本 4.1.1。添加原生 SDK 提供的新功能。
-- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法[从服务器分页获取会话列表](conversation_list.html#获取会话列表)。
+- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法 [从服务器分页获取会话列表](conversation_list.html#获取会话列表)。
 - 新增[置顶服务器会话的功能](conversation_list.html#获取服务端的置顶会话列表)：
   - 新增 `ChatManager.pinConversation` 方法，实现置顶或取消置顶服务器会话；
   - 新增 `ChatManager.fetchPinnedConversationsFromServerWithCursor` 从服务器分页获取置顶会话列表。
 - 新增 `ChatManager.modifyMessageBody` 方法，用于修改本地消息或服务器端消息。
-- 新增[消息合并转发功能](message_send_receive.html#发送和接收合并消息)：
+- 新增 [发送](message_send.html#发送合并消息) 和 [接收合并消息](message_receive.html#接收合并消息)：
   - 新增 `ChatMessage.createCombineMessage` 方法构建合并消息。
   - 新增 `ChatManager.fetchCombineMessageDetail` 方法获取合并消息的信息。
 - 新增[自定义登录设备的名称和平台的功能](multi_device.html#设置登录设备的名称)。  

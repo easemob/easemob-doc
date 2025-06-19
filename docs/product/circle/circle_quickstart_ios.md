@@ -143,7 +143,7 @@ EMClient.shared().circleManager?.fetchPrivateChannels(inServer: self.serverId, l
 
 ### 发送和接收一条频道消息
 
-在频道中发送和接收消息，你可以参考 [发送和接收消息](/document/ios/message_send_receive.html)。
+在频道中发送和接收消息，你可以参考 [发送](/document/ios/message_send.html) 和 [接收消息](/document/ios/message_receive.html)。
 
 #### 发送一条频道消息
 

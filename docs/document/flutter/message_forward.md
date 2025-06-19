@@ -9,7 +9,7 @@
 环信即时通讯 IM Flutter sdk 通过 `EMChatManager` 类和 `EMMessage` 类实现消息的转发。
 
 - 转发单条消息：创建一条与原消息完全相同的消息，调用 `EMChatManager#sendMessage` 方法转发消息。
-- 转发多条消息：通过[发送合并消息](message_send_receive.html#发送和接收合并消息)实现。
+- 转发多条消息：通过 [发送合并消息](message_send.html#发送合并消息) 实现。
 
 ## 前提条件
 
@@ -45,7 +45,7 @@ void forwardMessage(EMMessage message) async {
 
 ### 转发多条消息
 
-对于转发多条消息，环信即时通讯 IM 支持将多个消息合并在一起进行转发，详见[发送合并消息](message_send_receive.html#发送和接收合并消息)。
+对于转发多条消息，环信即时通讯 IM 支持将多个消息合并在一起进行转发，详见 [发送](message_send.html#发送合并消息) 和 [接收合并消息](message_receive.html#接收合并消息)。
 
 
 
