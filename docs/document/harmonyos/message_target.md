@@ -29,4 +29,4 @@ message.setReceiverList(receives);
 ChatClient.getInstance().chatManager()?.sendMessage(message);
 ```
 
-接收群定向消息与接收普通消息的操作相同，详见[接收消息](#发送和接收文本消息)。
+接收群定向消息与接收普通消息的操作相同，详见[接收消息](message_receive.html)。

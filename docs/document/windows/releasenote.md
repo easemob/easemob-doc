@@ -169,7 +169,7 @@
   - `FetchServerMessagesOption#StartTime`：消息查询的起始时间;
   - `FetchServerMessagesOption#EndTime`：消息查询的结束时间。
 - [IM SDK] 新增 `GetConversationsFromServerWithCursor` 方法从[服务端分页获取会话列表](conversation_list.html#从服务器分页获取会话列表)。  
-- [IM SDK] 新增[在群组或聊天室中发送定向消息功能](message_send_receive.html#发送和接收定向消息)：
+- [IM SDK] 新增[在群组或聊天室中发送定向消息功能](message_target.html)：
   - `Message#ReceiverList`：设置群组或聊天室消息接收列表。
 - [IM SDK] 新增删除本地数据库中指定时间段的消息：
   - `Conversation#DeleteMessages`：删除本地数据库中指定时间段的消息。
@@ -327,7 +327,7 @@
 
 - [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
 - [环信即时通讯 IM Windows 快速入门](quickstart.html)
-- [消息管理 Windows](message_send_receive.html)
+- [消息管理 Windows](message_send.html)
 - [群组 Windows](group_manage.html)
 - [聊天室 Windows](room_manage.html)
 - [Windows API Reference](apireference.html)

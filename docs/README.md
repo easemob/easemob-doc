@@ -112,42 +112,75 @@ projects:
       - title: 消息和会话
         icon: /feature/message.svg
         contexts:
-          - text: 发送/接收消息
-            desc: 在单聊、群聊和聊天室中发送和接收各种类型的消息，包括文本消息、图片、语音、视频、文件消息、位置消息、透传消息、自定义消息、合并消息和定向消息。
+          - text: 发送消息
+            desc: 在单聊、群聊和聊天室中发送各种类型的消息，包括文本消息、图片、语音、视频、文件消息、位置消息、透传消息、自定义消息、合并消息。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_send_receive.html
+                link: /document/android/message_send.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_send_receive.html
+                link: /document/ios/message_send.html
               - icon: /sdk/web.svg
                 text: Web
-                link: /document/web/message_send_receive.html
+                link: /document/web/message_send.html
               - icon: /sdk/applet.svg
                 text: 小程序
-                link: /document/applet/message_send_receive.html
+                link: /document/applet/message_send.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
-                link: /document/harmonyos/message_send_receive.html
+                link: /document/harmonyos/message_send.html
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /document/flutter/message_send_receive.html
+                link: /document/flutter/message_send.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /document/react-native/message_send_receive.html
+                link: /document/react-native/message_send.html
               - icon: /sdk/unity.svg
                 text: Unity
-                link: /document/unity/message_send_receive.html
+                link: /document/unity/message_send.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/message_send_receive.html
+                link: /document/windows/message_send.html
               - icon: /sdk/electron.svg
                 text: Electron
                 link: /document/electron/message.html#发送消息  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/message_single.html
+          - text: 接收消息
+            desc: 在单聊、群聊和聊天室中接收各种类型的消息，包括文本消息、图片、语音、视频、文件消息、位置消息、透传消息、自定义消息、合并消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_receive.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_receive.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_receive.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_receive.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /document/harmonyos/message_receive.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_receive.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_receive.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_receive.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_receive.html
+              - icon: /sdk/electron.svg
+                text: Electron
+                link: /document/electron/message.html#接收消息    
           - text: 获取消息
             desc: 从环信消息服务器获取漫游消息，或者从本地获取消息。
             sdks:
@@ -463,6 +496,66 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/message_delete.html
+          - text: 定向消息
+            desc: 发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_target.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_target.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_target.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_target.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_target.html  
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_target.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_target.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_target.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_target.html 
+          - text: 消息扩展
+            desc: 当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_extension.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_extension.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_extension.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_extension.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_extension.html  
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_extension.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_extension.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_extension.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_extension.html         
           - text: 置顶消息
             desc: 将会话中的消息固定在会话顶部，方便会话中的所有用户快速查看重要消息。
             sdks:

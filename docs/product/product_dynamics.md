@@ -18,7 +18,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Flutter SDK 4.15.0 版本发布   | <br/> - 支持 [GIF 图片消息](/document/flutter/message_send_receive.html#发送和接收-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/flutter/group_attributes.html#管理群组头像)。<br/> - 支持 [消息附件鉴权功能](/document/flutter/message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/document/flutter/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/flutter/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [获取群成员列表](/document/flutter/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。  | 2025-06-13     | [Flutter 4.15.0 更新日志](/document/flutter/releasenote.html#版本-v4-15-0-dev-2025-6-16-开发版)      |
+| Flutter SDK 4.15.0 版本发布   | <br/> - 支持 [GIF 图片消息](/document/flutter/message_send.html#发送-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/flutter/group_attributes.html#管理群组头像)。<br/> - 支持 [消息附件鉴权功能](/document/flutter/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/document/flutter/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/flutter/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [获取群成员列表](/document/flutter/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。  | 2025-06-13     | [Flutter 4.15.0 更新日志](/document/flutter/releasenote.html#版本-v4-15-0-dev-2025-6-16-开发版)      |
 
 ## 2025-05
 
@@ -32,7 +32,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.7.0 开发版发布   | <br/> - 支持 [GIF 图片消息](/document/harmonyos/message_send_receive.html#发送和接收-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/harmonyos/group_attributes.html#管理群组头像)。<br/> - 支持 [消息附件鉴权功能](/document/harmonyos/message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/document/harmonyos/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/harmonyos/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [根据搜索范围搜索所有会话中的消息](/document/harmonyos/message_search.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](/document/harmonyos/message_search.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。    | 2025-05-15     | [HarmonyOS 1.7.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-7-0-dev-2025-5-15-开发版)      |
+| HarmonyOS SDK 1.7.0 开发版发布   | <br/> - 支持 [发送](/document/harmonyos/message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](/document/harmonyos/message_send.html#接收-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/harmonyos/group_attributes.html#管理群组头像)。<br/> - 支持 [消息附件鉴权功能](/document/harmonyos/message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/document/harmonyos/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/harmonyos/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [根据搜索范围搜索所有会话中的消息](/document/harmonyos/message_search.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](/document/harmonyos/message_search.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。    | 2025-05-15     | [HarmonyOS 1.7.0 更新日志](/document/harmonyos/releasenote.html#版本-v1-7-0-dev-2025-5-15-开发版)      |
 
 ## 2025-04
 
