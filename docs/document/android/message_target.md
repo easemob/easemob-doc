@@ -31,4 +31,4 @@ EMMessage message = EMMessage.createTextSendMessage(content, groupId);
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-接收群定向消息与接收普通消息的操作相同，详见 [接收文本消息](#发送和接收文本消息)。
+接收群定向消息与接收普通消息的操作相同，详见 [接收文本消息](message_target.html#接收文本消息)。

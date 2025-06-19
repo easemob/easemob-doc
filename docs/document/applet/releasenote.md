@@ -21,9 +21,9 @@
 
 ### 新增特性
 
-- 支持 [GIF 图片消息](message_send_receive.html#发送和接收-gif-图片消息)。
+- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。
-- 支持 [消息附件鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持 [消息附件鉴权功能](message_receive.html)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持 [自定义设备平台](multi_device.html#设置登录设备的平台)。
 - Uni-app 离线推送安卓平台支持 [Google FCM](push/uniapp_push_fcm.html)。
 
@@ -185,7 +185,7 @@
 - [IM SDK] [聊天室和群组成员进出事件增加成员人数 `memberCount` 字段](room_manage.html#实时更新聊天室成员人数)。
 - [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#单向清空服务端的聊天记录) 方法, 用于清空当前用户的聊天记录，包括消息和会话。
 - [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-id-列表) 方法, 可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
-- [IM SDK] 新增 [useReplacedMessageContents](message_send_receive.html#发送和接收文本消息) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
+- [IM SDK] 新增 [useReplacedMessageContents](message_send.html#发送消息前的内容审核) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
 
 ### 优化
 
@@ -237,9 +237,9 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送和接收合并消息)。
+- [IM SDK] 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息](message_receive.html#接收合并消息) 功能。
 - [IM SDK] 新增[消息修改功能](message_modify.html)。
-- [IM SDK] 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送和接收定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
+- [IM SDK] 新增[在群组或聊天室会话中发送定向消息](message_target.html)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
 
 ### 修复
 

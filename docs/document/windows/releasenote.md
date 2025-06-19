@@ -135,7 +135,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送和接收合并消息)：
+- [IM SDK] 新增 [发送](message_send.html#发送合并消息) 和[接收合并转发消息](message_receive.html#接收合并消息) 功能：
   - `MessageBodyType#COMBINE`：合并消息类型；
   - `CombineBody`：消息体类 ；
   - `Message#CreateCombineSendMessage`：创建合并消息；

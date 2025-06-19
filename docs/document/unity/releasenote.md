@@ -135,7 +135,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送和接收合并消息)：
+- [IM SDK] 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息](message_receive.html#接收合并消息) 功能：
   - `MessageBodyType#COMBINE`：合并消息类型；
   - `CombineBody`：消息体类 ；
   - `Message#CreateCombineSendMessage`：创建合并消息；
@@ -168,7 +168,7 @@
   - `FetchServerMessagesOption#StartTime`：消息查询的起始时间;
   - `FetchServerMessagesOption#EndTime`：消息查询的结束时间。
 - [IM SDK] 新增 `GetConversationsFromServerWithCursor` 方法[从服务端分页获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
-- [IM SDK] 新增[在群组或聊天室中发送定向消息功能](message_send_receive.html#发送和接收定向消息)：
+- [IM SDK] 新增[在群组或聊天室中发送定向消息功能](message_target.html)：
   - `Message#ReceiverList`：设置群组或聊天室消息接收列表。
 - [IM SDK] 新增 `Conversation#DeleteMessages`方法删除本地数据库中指定时间段的消息。
 - [IM SDK] 新增[群组成员自定义属性管理功能](group_members.html#管理群成员的自定义属性)：
@@ -349,7 +349,7 @@
 
 - [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
 - [环信即时通讯 IM Unity 快速入门](quickstart.html)
-- [消息管理 Unity](message_send_receive.html)
+- [消息管理 Unity](message_send.html)
 - [群组 Unity](group_manage.html)
 - [聊天室 Unity](room_manage.html)
 - [在线状态订阅 Unity](presence.html)

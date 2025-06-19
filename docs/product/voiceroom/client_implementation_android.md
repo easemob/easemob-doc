@@ -107,7 +107,7 @@ Demo 中创建或加入语聊房的流程如下：
 
 | 产品                | SDK 下载                  | 集成文档                                                                    |
 | :------------------ | :------------------------ | :------------------------------------------------ |
-| 环信即时通讯 IM SDK | 环信即时通讯 IM SDK 3.9.8 | [发送和接收消息](/document/android/message_send_receive.html)           |
+| 环信即时通讯 IM SDK | 环信即时通讯 IM SDK 3.9.8 | [发送](/document/android/message_send.html) 和 [接收消息](/document/android/message_receive.html)           |
 | Agora RTC SDK       | Agora RTC SDK 4.0.1       | [实现音频通话](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_android_ng?platform=Android)|
 
 ## 基础 API 参考

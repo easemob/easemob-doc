@@ -102,7 +102,7 @@
 
 | 产品                | SDK 下载                           | 集成文档                                                     |
 | ------------------- | ---------------------------------- | ------------------------------------------------------------ |
-| 环信即时通讯 IM SDK | 环信即时通讯 IM SDK 3.9.8 或以上版本 | [发送、接收消息、聊天室属性 KV](/document/ios/message_send_receive.html) |
+| 环信即时通讯 IM SDK | 环信即时通讯 IM SDK 3.9.8 或以上版本 | [发送](/document/ios/message_send.html)、[接收消息](/document/ios/message_receive.html)、[聊天室属性 KV](/document/ios/room_attributes.html#管理聊天室自定义属性-key-value) |
 | Agora Audio SDK     | 声网 RTM SDK 4.0.1                 | [实现音频通话](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_ios_ng?platform=iOS) |
 
 ## 基本 API 参考

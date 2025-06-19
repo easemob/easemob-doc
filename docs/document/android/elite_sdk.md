@@ -47,7 +47,7 @@ dependencies {
       <td rowspan="17">消息管理</td>
       <td rowspan="9">发送和接收消息</td>
       <td>发送和接收消息</td>
-      <td rowspan="9"><p><a href="https://doc.easemob.com/document/android/message_send_receive.html">发送和接收消息</a></p></td>
+      <td rowspan="9"><p><a href="https://doc.easemob.com/document/android/message_send.html">发送和接收消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>

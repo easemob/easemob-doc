@@ -32,7 +32,7 @@
 
 ### 发送子区消息
 
-发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send_receive.html)。唯一不同的是，发送子区消息需要指定标记 `isChatThreadMessage` 为 `true`。
+发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send.html)。唯一不同的是，发送子区消息需要指定标记 `isChatThreadMessage` 为 `true`。
 
 示例代码如下：
 
@@ -52,7 +52,7 @@ EMClient.getInstance.chatManager.sendMessage(msg);
 
 ### 接收子区消息
 
-接收消息的具体逻辑，请参考 [接收消息](message_send_receive.html#发送和接收文本消息)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考 [接收消息](message_receive.html)，此处只介绍子区消息和其他消息的区别。
 
 子区有新增消息时，子区所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 事件，子区成员收到 `EMChatEventHandler#onMessagesReceived` 事件。
 

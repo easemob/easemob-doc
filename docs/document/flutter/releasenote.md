@@ -8,9 +8,9 @@
 
 - Android 依赖 SDK 升级到 4.15.0。
 - iOS 依赖 SDK 升级到 4.15.0。
-- 支持 [GIF 图片消息](message_send_receive.html#发送和接收-gif-图片消息)。
+- 支持 [发送](message_send.html#发送-gif-图片消息) 和[接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。
-- 支持 [消息附件鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
 - 支持加载本地会话消息时，只 [加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
 - 支持 [获取群成员信息](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
@@ -217,7 +217,7 @@
 
 - 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)；
   - 新增 `EMOptions#osType` 属性和 `EMOptions#deviceName` 属性，用户设置设备类型和设备名称。
-- 新增[合并转发消息功能](message_send_receive.html#发送和接收合并消息)：
+- 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息功能](message_receive.html#接收合并消息)：
   - 新增 `Combine` 消息类型，用于合并转发消息；
   - 新增 `EMChatManager#fetchCombineMessageDetail` 方法，获取合并消息中的原始消息列表;
 - 新增[消息修改功能](message_modify.html)：
@@ -231,7 +231,7 @@
   - 新增 `EMClient#kickDevice` 方法，可以使用 token 踢掉指定设备；
   - 新增 `EMClient#kickAllDevices` 方法，可以使用 token 踢掉所有已登录设备；
 - 新增 `EMChatManager#fetchConversation` 方法，[获取服务器会话列表](conversation_list.html#从服务器分页获取会话列表)，原方法 `EMChatManager#getConversationsFromServer` 作废；
-- 新增 `EMMessage#receiverList` 属性，用于在群组/聊天室中[发送定向消息](message_send_receive.html#发送和接收定向消息)；
+- 新增 `EMMessage#receiverList` 属性，用于在群组/聊天室中[发送定向消息](message_target.html)；
 
 ### 优化
 

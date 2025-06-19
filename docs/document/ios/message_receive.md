@@ -54,7 +54,7 @@
 
 1. 接收方收到语音消息时，自动下载语音文件。
 
-2. 接收方收到 [messagesDidReceive 回调](#发送和接收文本消息)，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
+2. 接收方收到 [messagesDidReceive](#接收文本消息) 回调，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
 
 ```objectivec
 EMVoiceMessageBody *voiceBody = (EMVoiceMessageBody *)message.body;
@@ -71,7 +71,7 @@ NSString *voiceLocalPath = voiceBody.localPath;
 - 默认情况下，SDK 自动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail;` 为 `YES`。
 - 若设置为手动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail(NO);`，需调用 `[[EMClient sharedClient].chatManager downloadMessageThumbnail:message progress:nil completion:nil];` 下载。
 
-2. 接收方收到 [messagesDidReceive 回调](#发送和接收文本消息)，调用 `downloadMessageAttachment` 下载原图。
+2. 接收方收到 [messagesDidReceive](#接收文本消息) 回调，调用 `downloadMessageAttachment` 下载原图。
 
 下载完成后，在回调里调用相应消息 `body` 的 `thumbnailLocalPath` 获取缩略图路径。
 
@@ -137,7 +137,7 @@ NSString *thumbnailLocalPath = body.thumbnailLocalPath;
 
 ### 接收文件消息
 
-1. 接收方收到 [messagesDidReceive 回调](#发送和接收文本消息)，调用 `downloadMessageAttachment` 方法下载文件。
+1. 接收方收到 [messagesDidReceive](#接收文本消息) 回调，调用 `downloadMessageAttachment` 方法下载文件。
 
 ```objectivec
 [[EMClient sharedClient].chatManager downloadMessageAttachment:message progress:nil completion:^(EMChatMessage *message, EMError *error) {

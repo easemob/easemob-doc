@@ -33,9 +33,9 @@
 
 ### 新增特性
 
-- 支持 [GIF 图片消息](message_send_receive.html#发送和接收-gif-图片消息)。
+- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。
-- 支持 [消息附件鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持 [自定义设备平台](multi_device.html#设置登录设备的平台)。
 
 ### 优化
@@ -207,7 +207,7 @@
 - [IM SDK] [聊天室和群组成员进出事件增加成员人数 `memberCount` 字段](room_manage.html#实时更新聊天室成员人数)。
 - [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#清空聊天记录) 方法，用于清空当前用户的聊天记录，包括消息和会话。
 - [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-id-列表) 方法，可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
-- [IM SDK] 新增 [useReplacedMessageContents](message_send_receive.html#发送消息前的内容审核) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
+- [IM SDK] 新增 [useReplacedMessageContents](message_send.html#发送消息前的内容审核) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
 
 ### 优化
 
@@ -243,7 +243,7 @@
 
 ### 新增特性
 
-- [IM SDK] [发送消息方法 `Send`](message_send_receive.html) 的成功回调参数 `SendMsgResult` 中新增 `message` 字段，用于返回成功发送的消息对象。
+- [IM SDK] [发送消息方法 `Send`](message_send.html) 的成功回调参数 `SendMsgResult` 中新增 `message` 字段，用于返回成功发送的消息对象。
 - [IM SDK] MiniCore SDK 增加 logger 实例。
 
 ### 优化
@@ -281,7 +281,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[合并转发消息功能](message_send_receive.html#发送和接收合并消息)。
+- [IM SDK] 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息功能](message_receive.html#接收合并消息)。
 - [IM SDK] 新增[消息修改功能](message_modify.html)。
 
 ### 修复
@@ -292,12 +292,12 @@
 
 ### 新增特性
 
-1. 新增 `pinConversation` 方法实现[会话置顶和取消置顶](conversation_pin.html#置顶-取消置顶会话)。
+1. 新增 `pinConversation` 方法实现 [会话置顶和取消置顶](conversation_pin.html#置顶-取消置顶会话)。
 2. 新增 `getServerPinnedConversations` 方法[分页获取服务器端的置顶会话列表](conversation_pin.html#获取服务端的置顶会话列表)。
-3. 新增 `getServerConversations` 方法[分页获取排序后的服务端会话列表](conversation_list.html#从服务器分页获取会话列表)。原接口 `getConversationlist` 已废弃。
-4. 新增[在群组或聊天室会话中发送定向消息](message_send_receive.html#发送和接收定向消息)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
+3. 新增 `getServerConversations` 方法 [分页获取排序后的服务端会话列表](conversation_list.html#从服务器分页获取会话列表)。原接口 `getConversationlist` 已废弃。
+4. 新增[在群组或聊天室会话中发送定向消息](message_target.html)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
 5. 在从服务器获取历史消息的方法 `getHistoryMessages` 的返回数据中新增 `isLast` 字段表示返回的是否为最后一页数据。
-6. 在构建图片消息的方法 `create` 中新增 [`thumbnailWidth` 和 `thumbnailHeight`](message_send_receive.html#发送和接收图片消息) 参数用于设置缩略图的宽度和高度。
+6. 在构建图片消息的方法 `create` 中新增 [`thumbnailWidth` 和 `thumbnailHeight`](message_send.html#发送图片消息) 参数用于设置缩略图的宽度和高度。
 7. 新增以下 SDK 登录失败原因，在控制台上提示：
  - [错误码 50，MAX_LIMIT](error.html)：新增应用的日活跃用户数（DAU）超限、在线用户数量超限和月活跃用户数（MAU）超限错误提示。
  - [错误码 2， WEBIM_CONNCTION_AUTH_ERROR](error.html) ：新增 Token 无效提示。
@@ -357,7 +357,7 @@
 
 - [IM SDK] [创建群组方法 `createGroup`](group_manage.html#创建群组) 和[修改群信息方法 `modifyGroup`](group_attributes.html#修改群组信息) 新增 `ext` 字段支持群扩展信息。
 - [IM SDK] 群组通知事件增加[群组信息修改事件 `updateInfo`](group_manage.html#监听群组事件)。
-- [IM SDK] 新增[聊天室消息优先级](message_send_receive.html#聊天室消息优先级与消息丢弃逻辑)。
+- [IM SDK] 新增[聊天室消息优先级](message_send.html#聊天室消息优先级与消息丢弃逻辑)。
 - [IM SDK] 支持同时[对多个群组成员禁言和解除禁言](group_members.html#管理群组禁言)。
 
 ### 优化
