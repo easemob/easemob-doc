@@ -60,7 +60,7 @@ App Server 为 Demo 提供以下功能：
 ## Demo 项目结构
 
 ```
-.
+
 ├── custom
 │   └── chat_route_filter.dart // chat-uikit 自定义拦截类，所有对 chat-uikit 的自定义通过该文件实现。
 ├── demo_config.dart           // Demo 运行的配置类，包含 appkey， agoraAppId， appServer 
