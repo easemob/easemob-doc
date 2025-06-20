@@ -64,7 +64,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 
 ## 自动登录
 
-初始化时，你可以设置 `EMOptions#setAutoLogin` 选项确定是否自动登录。如果设置为自动登录，则登录成功之后，后续初始化 SDK 时会自动登录。
+即时通讯 IM 默认自动登录，即 `EMOptions#setAutoLogin` 选项默认为 `true`。自动登录模式下，首次登录成功之后，后续初始化 SDK 时均会自动登录。
 
 自动登录期限默认为 30 天，即设置自动登录后，用户 30 天内可自动登录。若调整改期限，可联系环信商务。
 
