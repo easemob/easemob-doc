@@ -22,7 +22,7 @@
 
 ### 创建 Xcode 项目
 
-参考以下步骤在 Xcode 中创建一个 iOS 平台下的 Single View App，项目设置如下：
+参考以下步骤在 Xcode 中创建一个 iOS 平台下的 App，项目设置如下：
 
 - **Product Name** 设为 `HyphenateChatQuickstart`。
 - **Organization Identifier** 设为 `hyphenatechat`。
@@ -70,7 +70,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 在工程的 AppDelegate 中的以下方法中，调用 SDK 对应方法。
 
 ```objectivec
-(BOOL)application:(UIApplication *)applicationdidFinishLaunchingWithOptions:(NSDictionary*)launchOptions
+(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
     // appkey 替换成你在环信控制台注册应用中的 App Key
     EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
