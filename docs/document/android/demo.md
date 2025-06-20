@@ -5,7 +5,7 @@
 ## 体验 Demo 
 
 1. [下载 Demo](https://www.easemob.com/download/demo)。
-2. 输入你的手机号，获取验证码，然后输入。
+2. 输入你的手机号，获取验证码，然后输入。**获取验证码功能在模拟器上不支持，请使用真机。**
 3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
 
 ![img](/images/demo/android_login.png =350x750)
