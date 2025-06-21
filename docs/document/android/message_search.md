@@ -23,7 +23,7 @@
 
 ## 实现方法
 
-### 根据关键字搜索会话消息
+### 根据关键字搜索会话中的用户发送的消息
 
 你可以调用 `searchMsgFromDB(string keywords, long timeStamp, int maxCount, string from, EMSearchDirection direction)` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
 

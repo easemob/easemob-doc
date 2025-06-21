@@ -8,7 +8,7 @@
 
 环信即时通讯 IM Flutter SDK 支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
 
-- `EMChatManager.searchMsgFromDB`：根据关键字搜索会话消息。
+- `EMChatManager.searchMsgFromDB`：根据关键字搜索会话中的用户发送的消息。
 - `EMChatManager#loadMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
 - `EMConversation#loadMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。
 - `EMChatManager#searchMsgsByOptions`：根据单个或多个消息类型，搜索本地数据库中所有会话的消息。
@@ -23,7 +23,7 @@
 
 ## 实现方法
 
-### 根据关键字搜索会话消息
+### 根据关键字搜索会话中的用户发送的消息
 
 你可以调用 `loadMessagesWithKeyword` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
 
