@@ -8,7 +8,7 @@
 
 环信即时通讯 IM SDK 通过 `ChatManager` 和 `Conversation` 类支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
 
-- `ChatManager#LoadMessagesWithKeyword` 根据关键字搜索会话消息。
+- `ChatManager#LoadMessagesWithKeyword` 根据关键字搜索会话中的用户发送的消息。
 - `ChatManager#SearchMsgFromDB(string, long, in, string, MessageSearchDirection, MessageSearchScope, ValueCallBack<List<Message>>)`：根据搜索范围搜索所有会话中的消息。
 - `Conversation#LoadMessagesWithScope(string, MessageSearchScope, long, int, string, MessageSearchDirection, ValueCallBack<List<Message>>)`：根据搜索范围搜索当前会话中的消息。
 - `Conversation#LoadMessagesWithMsgTypeList` ：根据单个或多个消息类型，搜索本地数据库中当前会话的消息。
@@ -22,7 +22,7 @@
 
 ## 实现方法
 
-### 根据关键字搜索会话消息
+### 根据关键字搜索会话中的用户发送的消息
 
 你可以调用 `LoadMessagesWithKeyword` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
 

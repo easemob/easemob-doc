@@ -40,7 +40,7 @@ const conversation = ChatClient.getInstance().chatManager()?.getConversation(con
 const messages = conversation?.loadMoreMessagesFromDB(startMsgId, pageSize, direction);
 ```
 
-### 根据关键字搜索会话消息
+### 根据关键字搜索会话中的用户发送的消息
 
 你可以调用 `ChatManager#searchMessagesFromDB(keywords: string, timestamp: number, maxCount: number, from?: string, direction?: SearchDirection)` 方法根据关键字搜索本地数据库中指定用户发送的消息，示例代码如下：
 
