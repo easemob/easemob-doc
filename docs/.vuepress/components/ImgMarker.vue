@@ -3,23 +3,29 @@
     <ElDialog
       v-model="isVisible"
       title="图片标记"
-      width="1000px"
+      :width="dialogWidth"
       :show-close="false"
       @close="handleCancel"
+      class="img-marker-dialog"
     >
       <div v-loading="loading" class="dialog-content">
-        <div ref="editImgContainerRef" class="edit-img-container">
-          <canvas
-            ref="editImgRef"
-            class="edit-img"
-            :width="canvasWidth"
-            :height="canvasHeight"
-            v-show="imageLoaded"
-            @mousedown="onMouseDown"
-            @mousemove="onMouseMove"
-            @mouseup="onMouseUp"
-            @mouseleave="onMouseUp"
-          ></canvas>
+        <div ref="editImgContainerRef" class="edit-img-container" :class="{'scroll-mode': scrollMode}">
+          <div class="canvas-wrapper">
+            <canvas
+              ref="editImgRef"
+              class="edit-img"
+              :width="canvasWidth"
+              :height="canvasHeight"
+              v-show="imageLoaded"
+              @mousedown="onMouseDown"
+              @mousemove="onMouseMove"
+              @mouseup="onMouseUp"
+              @mouseleave="onMouseUp"
+              @touchstart="onTouchStart"
+              @touchmove="onTouchMove"
+              @touchend="onTouchEnd"
+            ></canvas>
+          </div>
           <div v-if="!imageLoaded && !loadError" class="loading-text">图片加载中...</div>
           <div v-if="loadError" class="error-text">图片加载失败，请重试</div>
         </div>
@@ -39,6 +45,19 @@
           @click="setMarkerMode('arrow')"
         >
           <ImageIcon type="arrow-marker" />
+        </div>
+        <div
+          v-if="isMobile"
+          class="tool-icon scroll-mode-icon"
+          :class="{ active: scrollMode }"
+          @click="toggleScrollMode"
+          title="滚动模式"
+        >
+          <i class="el-icon">
+            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-78e17ca8="">
+              <path fill="currentColor" d="M160 224a64 64 0 0 0-64 64v576a64 64 0 0 0 64 64h640a64 64 0 0 0 64-64V288a64 64 0 0 0-64-64H160zm0-64h640a128 128 0 0 1 128 128v576a128 128 0 0 1-128 128H160a128 128 0 0 1-128-128V288a128 128 0 0 1 128-128zm193 744h-73a32 32 0 0 1 0-64h73v-64c0-4.416 3.584-8 8-8h464a32 32 0 1 1 0 64h-400v72z"></path>
+            </svg>
+          </i>
         </div>
         <div
           class="tool-icon step-icon prev-step"
@@ -74,7 +93,7 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick, computed } from 'vue'
+import { ref, watch, nextTick, computed, onMounted, onUnmounted } from 'vue'
 import { ElDialog } from 'element-plus'
 import ImageIcon from './ImageIcon.vue'
 
@@ -89,6 +108,8 @@ const loading = ref(false)
 const imageLoaded = ref(false)
 const loadError = ref(false)
 const markerMode = ref('rect')
+const scrollMode = ref(false)
+const isMobile = ref(false)
 const editImgRef = ref(null)
 const editImgContainerRef = ref(null)
 const canvasWidth = ref(800)
@@ -107,6 +128,24 @@ const dragOffset = ref({ x: 0, y: 0 })
 const canUndo = computed(() => undoStack.value.length > 0)
 const canRedo = computed(() => redoStack.value.length > 0)
 
+const dialogWidth = ref('1000px')
+function updateDialogWidth() {
+  const windowWidth = window.innerWidth;
+  dialogWidth.value = windowWidth <= 720 ? '98vw' : '1000px'
+  isMobile.value = windowWidth <= 720;
+}
+onMounted(() => {
+  updateDialogWidth()
+  window.addEventListener('resize', updateDialogWidth)
+  
+  // 仅在移动端默认开启滚动模式
+  if (isMobile.value) {
+    scrollMode.value = true
+  }
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', updateDialogWidth)
+})
 
 if (props.visible && props.image) {
   nextTick(() => {
@@ -136,38 +175,49 @@ const loadImageAndInit = async () => {
     imageLoaded.value = false
     await nextTick()
     let containerWidth = editImgContainerRef.value ? editImgContainerRef.value.clientWidth : 800
-    if (!containerWidth || containerWidth < 10) {
-      console.warn('[ImgMarker] 容器宽度异常，已强制为800px')
-      containerWidth = 800
-    }
-    // 只限制容器最大高度，不缩放canvas，保证图片清晰
-    const MAX_CONTAINER_HEIGHT = 550
-    if (editImgContainerRef.value) {
-      editImgContainerRef.value.style.maxHeight = MAX_CONTAINER_HEIGHT + 'px'
-      editImgContainerRef.value.style.overflow = 'auto'
-    }
+    if (!containerWidth || containerWidth < 10) containerWidth = 800
+    if (window.innerWidth <= 720) containerWidth = Math.floor(window.innerWidth * 0.98)
+
     const img = await loadImage(props.image)
     imageObj.value = img
     const imgWidth = img.naturalWidth || img.width
     const imgHeight = img.naturalHeight || img.height
     const aspectRatio = imgWidth / imgHeight
-    canvasWidth.value = containerWidth
-    canvasHeight.value = Math.floor(containerWidth / aspectRatio)
+
+    // 画布像素宽高，宽度等于容器宽度，高度按比例
+    const drawWidth = containerWidth
+    const drawHeight = Math.round(containerWidth / aspectRatio)
+
+    canvasWidth.value = drawWidth
+    canvasHeight.value = drawHeight
+
     await nextTick()
     if (editImgRef.value) {
-      editImgRef.value.width = canvasWidth.value
-      editImgRef.value.height = canvasHeight.value
+      // 重置为简单明确的设置方式，避免多重缩放问题
+      
+      // 设置canvas的实际尺寸与其CSS尺寸相同
+      editImgRef.value.width = drawWidth
+      editImgRef.value.height = drawHeight
+      
+      // 设置canvas的CSS尺寸
+      editImgRef.value.style.width = `${drawWidth}px`
+      editImgRef.value.style.height = `${drawHeight}px`
+      
       const ctx = editImgRef.value.getContext('2d')
-      ctx.clearRect(0, 0, canvasWidth.value, canvasHeight.value)
-      if (canvasWidth.value > 0 && canvasHeight.value > 0 && imgWidth > 0 && imgHeight > 0) {
-        ctx.drawImage(img, 0, 0, canvasWidth.value, canvasHeight.value)
-        imageLoaded.value = true
-        loading.value = false
-      } else {
-        throw new Error('图片或容器尺寸异常')
-      }
-    } else {
-      console.error('[ImgMarker] editImgRef.value 不存在')
+      ctx.clearRect(0, 0, drawWidth, drawHeight)
+      ctx.drawImage(img, 0, 0, drawWidth, drawHeight)
+      imageLoaded.value = true
+      loading.value = false
+      
+      // 直接检查是否需要滚动
+      setTimeout(() => {
+        const canvasHeight = editImgRef.value.getBoundingClientRect().height
+        const containerHeight = editImgContainerRef.value.getBoundingClientRect().height
+        console.log('Canvas height:', canvasHeight, 'Container height:', containerHeight)
+        if (canvasHeight > containerHeight) {
+          console.log('Canvas is taller than container, should scroll')
+        }
+      }, 100)
     }
   } catch (e) {
     loading.value = false
@@ -188,8 +238,80 @@ function loadImage(src) {
 
 const setMarkerMode = (mode) => {
   markerMode.value = mode
+  // 选择标记模式时，自动关闭滚动模式
+  if (mode === 'rect' || mode === 'arrow') {
+    scrollMode.value = false
+  }
 }
 
+const toggleScrollMode = () => {
+  scrollMode.value = !scrollMode.value
+}
+
+// 触摸事件处理
+function onTouchStart(e) {
+  if (isMobile.value && scrollMode.value) return
+  e.preventDefault()
+  const touch = e.touches[0]
+  const { x, y } = getCanvasCoordinates(touch.clientX, touch.clientY)
+  handlePointerStart(x, y)
+}
+
+function onTouchMove(e) {
+  if (isMobile.value && scrollMode.value) return
+  e.preventDefault()
+  const touch = e.touches[0]
+  const { x, y } = getCanvasCoordinates(touch.clientX, touch.clientY)
+  handlePointerMove(x, y)
+}
+
+// 鼠标事件处理
+function onMouseDown(e) {
+  if (!imageLoaded.value || (isMobile.value && scrollMode.value)) return
+  const { x, y } = getCanvasCoordinates(e.clientX, e.clientY)
+  handlePointerStart(x, y)
+}
+
+function onMouseMove(e) {
+  if (!imageLoaded.value || (isMobile.value && scrollMode.value)) return
+  const { x, y } = getCanvasCoordinates(e.clientX, e.clientY)
+  handlePointerMove(x, y)
+}
+
+/**
+ * 准确地将客户端坐标转换为画布坐标
+ * @param {number} clientX - 客户端X坐标
+ * @param {number} clientY - 客户端Y坐标
+ * @returns {{x: number, y: number}} - 画布坐标
+ */
+function getCanvasCoordinates(clientX, clientY) {
+  // 获取canvas元素在页面中的位置
+  const rect = editImgRef.value.getBoundingClientRect()
+  
+  // 计算点击位置相对于canvas元素左上角的偏移
+  // 这里需要考虑canvas的CSS尺寸与实际尺寸的比例
+  const scaleX = editImgRef.value.width / rect.width
+  const scaleY = editImgRef.value.height / rect.height
+  
+  // 转换为canvas内部坐标
+  const x = (clientX - rect.left) * scaleX
+  const y = (clientY - rect.top) * scaleY
+  
+  return { x, y }
+}
+
+function onTouchEnd(e) {
+  if (isMobile.value && scrollMode.value) return
+  e.preventDefault()
+  handlePointerEnd()
+}
+
+function onMouseUp() {
+  if (isMobile.value && scrollMode.value) return
+  handlePointerEnd()
+}
+
+// 统一处理指针（鼠标/触摸）事件
 const RESIZE_HANDLE_SIZE = 12 // 拖动圆点的判定范围
 const resizeInfo = ref({ index: -1, type: '' }) // {index:点索引,type:'corner'|'mid'}
 
@@ -218,11 +340,8 @@ function getHandleAt(x, y, m) {
   return null
 }
 
-function onMouseDown(e) {
+function handlePointerStart(x, y) {
   if (!imageLoaded.value) return
-  const rect = editImgRef.value.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
 
   // 仅在 markerMode 为 rect 时允许移动/缩放已有矩形
   if (markerMode.value === 'rect') {
@@ -280,17 +399,12 @@ function onMouseDown(e) {
   pushUndo()
 }
 
-function onMouseMove(e) {
-  const rect = editImgRef.value.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
-
+function handlePointerMove(x, y) {
   // 拖动矩形resize圆点
   if (
     markerMode.value === 'rect' &&
     selectedMarkerIndex.value !== -1 &&
-    resizeInfo.value.index !== -1 &&
-    e.buttons
+    resizeInfo.value.index !== -1
   ) {
     const m = markers.value[selectedMarkerIndex.value]
     // 不记录pushUndo
@@ -329,8 +443,7 @@ function onMouseMove(e) {
     markerMode.value === 'rect' &&
     selectedMarkerIndex.value !== -1 &&
     !drawing.value &&
-    resizeInfo.value.index === -1 &&
-    e.buttons
+    resizeInfo.value.index === -1
   ) {
     const m = markers.value[selectedMarkerIndex.value]
     // 不记录pushUndo
@@ -353,7 +466,7 @@ function onMouseMove(e) {
   drawCurrent()
 }
 
-function onMouseUp() {
+function handlePointerEnd() {
   if (
     (selectedMarkerIndex.value !== -1 && !drawing.value) ||
     (resizeInfo.value.index !== -1)
@@ -423,8 +536,13 @@ function isInText(x, y, m) {
 function drawAll() {
   if (!editImgRef.value || !imageObj.value) return
   const ctx = editImgRef.value.getContext('2d')
-  ctx.clearRect(0, 0, canvasWidth.value, canvasHeight.value)
-  ctx.drawImage(imageObj.value, 0, 0, canvasWidth.value, canvasHeight.value)
+  
+  // 使用Canvas的实际尺寸进行绘制
+  const renderWidth = editImgRef.value.width
+  const renderHeight = editImgRef.value.height
+  
+  ctx.clearRect(0, 0, renderWidth, renderHeight)
+  ctx.drawImage(imageObj.value, 0, 0, renderWidth, renderHeight)
   markers.value.forEach(m => {
     if (m.type === 'rect') {
       drawRect(ctx, m.startX, m.startY, m.endX, m.endY)
@@ -553,26 +671,60 @@ function pushUndo() {
   /* 其它样式合并到这里 */
 }
 
+.img-marker-dialog {
+  :deep(.el-dialog__body) {
+    padding: 10px;
+    position: relative;
+  }
+}
+
 .dialog-content {
-  min-height: 300px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .edit-img-container {
   width: 100%;
-  max-height: 40vh;
-  overflow: auto;
-  overscroll-behavior: contain;
+  height: 60vh;
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   background: #f0f0f0;
   position: relative;
-  min-height: 300px;
+  min-height: 180px;
+  
+  &.scroll-mode {
+    touch-action: auto !important;
+    canvas {
+      touch-action: auto !important;
+    }
+  }
+  
+  &:not(.scroll-mode) {
+    // PC端允许使用滚轮滚动，移动端禁止默认触摸滚动
+    touch-action: pan-x pan-y;
+    
+    // 移动端模式下禁用触摸滚动
+    @media (max-width: 720px) {
+      touch-action: none;
+      canvas {
+        touch-action: none;
+      }
+    }
+  }
 }
+
+.canvas-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .edit-img {
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  max-height: 100%;
-  background-color: #fff;
   display: block;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
 }
 .loading-text, .error-text {
   position: absolute;
@@ -600,6 +752,15 @@ function pushUndo() {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 100;
 }
+
+.scroll-mode-icon {
+  background: #f7f7f7;
+  &.active {
+    background-color: #e6f7ff !important;
+    color: #1890ff !important;
+  }
+}
+
 .mark-icon-wrapper {
   border-radius: 4px;
   height: 32px;
@@ -691,4 +852,51 @@ function pushUndo() {
 .cancel-icon, .confirm-icon {
   margin-left: 8px;
 }
+
+  @media (max-width: 720px) {
+    .image-marker-container {
+      max-width: 98vw;
+      width: 98vw;
+      margin: 0 1vw;
+    }
+    
+    .edit-img-container {
+      height: 50vh;
+      max-height: 50vh;
+      min-height: 180px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .edit-img {
+      max-width: 90vw;
+    }
+    .marker-toolbar {
+      flex-wrap: wrap;
+      left: 50%;
+      bottom: -60px;
+      width: 96vw;
+      min-width: unset;
+      padding: 4px 0;
+      gap: 2px;
+    }
+    .tool-icon, .mark-icon-wrapper, .mark-arrow-icon-wrapper {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .scroll-mode-icon {
+      position: relative;
+      &.active::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        background-color: #1890ff;
+        border-radius: 50%;
+      }
+    }
+  }
 </style>

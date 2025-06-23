@@ -13,7 +13,7 @@
       :closable="true"
       :close-on-click-modal="false"
       :show-close="true"
-      width="680px"
+      class="feedback-dialog"
     >
       <div class="feedback-form">
         <ElCheckboxGroup v-model="feedbackTypes">
@@ -317,6 +317,9 @@ const closeForm = () => {
 
 .feedback-form {
   padding: 20px;
+  max-width: 680px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .form-item {
@@ -410,5 +413,34 @@ const closeForm = () => {
   width: 120px;
   height: 32px;
   font-size: 12px;
+}
+
+.feedback-dialog {
+  max-width: 680px !important;
+  width: 100% !important;
+}
+
+@media (max-width: 720px) {
+  .feedback-dialog {
+    max-width: 98vw !important;
+    width: 98vw !important;
+    min-width: unset !important;
+    margin-left: 8px !important;
+    margin-right: 8px !important;
+  }
+  .feedback-form {
+    max-width: 98vw;
+    padding: 10px 0;
+  }
+  /* FEEDBACK_OPTIONS 竖排展示 */
+  .feedback-form .el-row {
+    flex-direction: column !important;
+  }
+  .feedback-form .el-col {
+    max-width: 100%;
+    flex: 0 0 100%;
+    width: 100%;
+    margin-bottom: 0px;
+  }
 }
 </style>
