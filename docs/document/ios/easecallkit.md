@@ -18,7 +18,7 @@
 
 ## 跑通 Demo
 
-`EaseCallKit` 集成在环信提供的开源 IM Demo 中，你可以通过进入 [环信 IM Demo 下载页面](https://www.easemob.com/download/im)，选择 iOS 端 Demo 下载，或直接进入 [Github 开源网站](https://github.com/easemob/chat-ios) 下载。
+`EaseCallKit` 集成在环信提供的开源 IM Demo 中，你可以进入 [Github 开源网站](https://github.com/easemob/chat-ios) 下载。
 
 - 安装 SDK 与 `EaseCallKit`
 
@@ -34,7 +34,7 @@ pod install
 
 - 运行 demo
 
-安装完成 SDK 与 `EaseCallKit` 后，在 Xcode 打开工作空间 `EaseIM.xcworkspace`，连接手机，然后就可以运行了。
+安装完成 SDK 与 `EaseCallKit` 后，在 Xcode 打开工作空间 `EaseChatDemo.xcworkspace`，连接手机，然后就可以运行了。
 
 ## 准备条件
 
