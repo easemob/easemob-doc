@@ -6,7 +6,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 4.15.1 开发版发布   | <br/> - 支持 [根据关键字从本地数据库中获取单个会话的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。<br/> - [根据消息 ID 从本地数据库获取单个或多个消息](message_retrieve.html#根据消息-id-获取单个或多个本地消息)。 | 2025-6-23    | <br> - [Android SDK 4.15.1 更新日志](/document/android/releasenote.html#版本-v4-15-1-dev-2025-6-23-开发版)<br> - [iOS SDK 4.15.1 更新日志](/document/ios/releasenote.html#版本-v4-15-1-dev-2025-6-23-开发版)  |
+| Android/iOS SDK 4.15.1 开发版发布   | <br/> - 支持 [根据关键字从本地数据库中获取单个会话的消息](/document/android/message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。<br/> - [根据消息 ID 从本地数据库获取单个或多个消息](/document/ios/message_retrieve.html#根据消息-id-获取单个或多个本地消息)。 | 2025-6-23    | <br> - [Android SDK 4.15.1 更新日志](/document/android/releasenote.html#版本-v4-15-1-dev-2025-6-23-开发版)<br> - [iOS SDK 4.15.1 更新日志](/document/ios/releasenote.html#版本-v4-15-1-dev-2025-6-23-开发版)  |
 
 #### Web SDK 4.15.1 发版
 
