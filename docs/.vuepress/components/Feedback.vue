@@ -210,7 +210,7 @@ const submitFeedback = async () => {
 
     let response, result
     try {
-      response = await fetch('http://119.28.130.183:3000/api/feedback', {
+      response = await fetch('https://119.28.130.183:3000/api/feedback', {
         method: 'POST',
         body: formData,
         headers: {
