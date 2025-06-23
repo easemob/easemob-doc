@@ -14,19 +14,17 @@
 
 ## 代码下载
 
-- Vue 3 ：[GitHub 源码地址](https://github.com/easemob/webim-vue-demo/tree/demo-vue3)。
-- Vue 3（miniCore）：[GitHub 源码地址](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) **miniCore 版本提供 WebIM SDK 按需引入示例以及本地会话使用方式示例，后续新功能将在此版本添加**。
-- Vue 2：[GitHub 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)查看 Demo 源码地址。
+- Vue 3：[GitHub 源码地址](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore)
 
-## 运行 Web IM 项目
+## 运行 web-vue3-demo 项目
 
-从 [github 下载](https://github.com/easemob/webim-vue-demo/tree/dev-4.0) 下载项目代码压缩包，然后解压。解压后，`webim-vue-demo` 文件夹即为 Web IM 的项目目录。
-
-1. 安装 Demo 所需的依赖：在终端中运行 `cd demo` 和 `npm install` 命令。
+从 [github 下载](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) 下载项目代码压缩包，然后解压。解压后，`webim-vue-demo` 文件夹即为 Web IM 的项目目录。
+> 确保`node`运行环境为16或17版本。
+1. 安装 Demo 所需的依赖：在终端执行 `npm install`或 `yarn` 命令。
 
 2. 运行 Demo：
-   - 如果通过 HTTP 访问 Demo，在终端中运行 `cd demo` 和 `npm start` 命令。命令运行后会生成 Demo 的访问地址，例如 https://localhost:3001。通过 HTTP 访问的 Demo 中不包含音视频功能。
-   - 如果通过 HTTPS 访问 Demo，在终端中运行 `cd demo` 和 `HTTPS=true npm start` 命令。命令运行后会生成 Demo 的访问地址，例如 https://localhost:3001。通过 HTTPS 访问的 Demo 中包含音视频功能。
+   - 在终端中运行 `npm run dev`。
+   - 在浏览器中访问 `http://localhost:9001`，即可体验`webim-vue3-demo`。
 
 ## 主要模块介绍
 
@@ -36,11 +34,10 @@ Demo 中的主要模块如下：
 | :----------- | :--------------------- |
 | `assets`     | 资源文件。             |
 | `components` | 项目中定义的组件。     |
-| `config`     | 消息表情。             |
-| `pages`      | 登录和聊天页面。       |
+| `views`      | 登录和聊天等相关页面。       |
 | `router`     | 路由。                 |
 | `store`      | 使用 Vuex 处理的数据。 |
-| `utils`      | SDK 配置。             |
+| `utils`      | 工具方法。             |
 
 ## 部分 Vue 3 Demo 界面展示
 
