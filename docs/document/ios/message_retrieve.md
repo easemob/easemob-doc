@@ -14,9 +14,11 @@
 
 - `IEMChatManager#fetchMessagesFromServer`：根据 `EMFetchServerMessagesOption` 类从服务器分页获取指定会话的历史消息；
 - `IEMChatManager#fetchMessagesFromServerBy`：从服务器获取群组中指定成员发送的消息；
+- `IEMChatManager#loadConversationMessagesWithKeyword`：根据关键词获取本地会话中的单个或多个消息；
+- `IEMChatManager#getMessages`：根据消息 ID 获取单个或多个本地消息；
 - `EMConversation#loadMessagesWithKeyword`：从本地获取群组中指定成员发送的消息；
 - `EMConversation#loadMessagesStartFromId`：从数据库中读取指定会话的消息；
-- `IEMChatManager#getMessageWithMessageId`：根据消息 ID 获取本地消息；
+- `IEMChatManager#getMessageWithMessageId`：根据消息 ID 获取单个本地消息；
 - `EMConversation#loadMessagesWithType`：获取本地存储的指定会话中特定类型的消息；
 - `EMConversation#loadMessagesFrom:to:count:completion:` 获取指定时间段内本地指定会话中发送和接收的消息；
 - `EMConversation#getMessageCountStart:to:`：获取会话在一定时间内的消息数。
@@ -88,6 +90,37 @@ EMFetchServerMessagesOption* option = [[EMFetchServerMessagesOption alloc] init]
 }];
 ```
 
+### 根据关键字获取本地会话中的消息
+
+自 SDK 4.15.1 开始，你可以通过设置关键字获取单个会话中的某些消息。SDK 返回会话 ID 及消息 ID 列表，消息 ID 根据你设置的 `aDirection` 参数按照消息时间戳的正序或倒序列明。
+
+```objective-c
+[EMClient.sharedClient.chatManager loadConversationMessagesWithKeyword:@"keyword" timestamp:-1 fromUser:@"" searchDirection:EMMessageSearchDirectionUp scope:EMMessageSearchScopeAll completion:^(NSDictionary<NSString *,NSArray<NSString *> *> * _Nullable aConversationMessages, EMError * _Nullable aError) {
+        if (aError) {
+            NSLog(@"Error loading messages: %@", aError.errorDescription);
+        } else {
+            // aConversationMessages为查询到的消息
+        }
+    }];
+
+```
+
+
+### 根据消息 ID 获取单个或多个本地消息
+
+自 SDK 4.15.1 开始，你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
+
+```objective-c
+// messageIds：消息 ID 列表。每次最多可传入 20 个消息 ID。
+[EMClient.sharedClient.chatManager getMessages:@[@"messageId1", @"messageId2"] withConversationId:@"conversationId" completion:^(NSArray<EMChatMessage *> * _Nullable aMessages, EMError * _Nullable aError) {
+        if (aError) {
+            NSLog(@"Error getting messages: %@", aError.errorDescription);
+        } else {
+            // aMessages为查询到的消息
+        }
+    }];
+```
+
 ### 从本地获取指定群成员发送的消息
 
 自 iOS SDK 4.14.0 开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
@@ -115,7 +148,7 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 NSArray<EMChatMessage *> *messages = [conversation loadMessagesStartFromId:startMsgId count:count searchDirection:MessageSearchDirectionUp];
 ```
 
-### 根据消息 ID 获取本地消息
+### 根据消息 ID 获取单个本地消息
 
 你可以调用 `getMessageWithMessageId` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 

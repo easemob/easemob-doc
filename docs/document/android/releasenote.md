@@ -2,6 +2,19 @@
 
 <Toc />
 
+## 版本 V4.15.1 Dev 2025-6-23（开发版）
+
+### 新增特性 
+
+1. [根据关键字从本地数据库中获取单个会话的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
+2. [根据消息 ID 从本地数据库获取单个或多个消息](message_retrieve.html#根据消息-id-获取单个或多个本地消息)。
+
+### 修复
+
+1. 修复当修改文本和自定义消息之外的消息时，`EMMessageListener#onMessageContentChanged` 回调中不返回修改的信息的问题。
+2. 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息时（`EMFetchMessageOption#setIsSave` 设置为 `false`）时，也会生成新的本地会话的问题。   
+3. 修复部分场景下 [发送 GIF 图片消息](message_send.html#发送-gif-图片消息) 失败的问题。
+
 ## 版本 V4.15.0 Dev 2025-5-21（开发版）
 
 ### 新增特性
