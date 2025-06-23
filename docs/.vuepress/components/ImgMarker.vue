@@ -193,12 +193,16 @@ const loadImageAndInit = async () => {
 
     await nextTick()
     if (editImgRef.value) {
-      // 设置canvas的像素宽高
+      // 重置为简单明确的设置方式，避免多重缩放问题
+      
+      // 设置canvas的实际尺寸与其CSS尺寸相同
       editImgRef.value.width = drawWidth
       editImgRef.value.height = drawHeight
-      // 设置canvas的样式宽高
-      editImgRef.value.style.width = '100%'
-      editImgRef.value.style.height = 'auto'
+      
+      // 设置canvas的CSS尺寸
+      editImgRef.value.style.width = `${drawWidth}px`
+      editImgRef.value.style.height = `${drawHeight}px`
+      
       const ctx = editImgRef.value.getContext('2d')
       ctx.clearRect(0, 0, drawWidth, drawHeight)
       ctx.drawImage(img, 0, 0, drawWidth, drawHeight)
@@ -249,9 +253,7 @@ function onTouchStart(e) {
   if (isMobile.value && scrollMode.value) return
   e.preventDefault()
   const touch = e.touches[0]
-  const rect = editImgRef.value.getBoundingClientRect()
-  const x = touch.clientX - rect.left
-  const y = touch.clientY - rect.top
+  const { x, y } = getCanvasCoordinates(touch.clientX, touch.clientY)
   handlePointerStart(x, y)
 }
 
@@ -259,33 +261,49 @@ function onTouchMove(e) {
   if (isMobile.value && scrollMode.value) return
   e.preventDefault()
   const touch = e.touches[0]
-  const rect = editImgRef.value.getBoundingClientRect()
-  const x = touch.clientX - rect.left
-  const y = touch.clientY - rect.top
+  const { x, y } = getCanvasCoordinates(touch.clientX, touch.clientY)
   handlePointerMove(x, y)
+}
+
+// 鼠标事件处理
+function onMouseDown(e) {
+  if (!imageLoaded.value || (isMobile.value && scrollMode.value)) return
+  const { x, y } = getCanvasCoordinates(e.clientX, e.clientY)
+  handlePointerStart(x, y)
+}
+
+function onMouseMove(e) {
+  if (!imageLoaded.value || (isMobile.value && scrollMode.value)) return
+  const { x, y } = getCanvasCoordinates(e.clientX, e.clientY)
+  handlePointerMove(x, y)
+}
+
+/**
+ * 准确地将客户端坐标转换为画布坐标
+ * @param {number} clientX - 客户端X坐标
+ * @param {number} clientY - 客户端Y坐标
+ * @returns {{x: number, y: number}} - 画布坐标
+ */
+function getCanvasCoordinates(clientX, clientY) {
+  // 获取canvas元素在页面中的位置
+  const rect = editImgRef.value.getBoundingClientRect()
+  
+  // 计算点击位置相对于canvas元素左上角的偏移
+  // 这里需要考虑canvas的CSS尺寸与实际尺寸的比例
+  const scaleX = editImgRef.value.width / rect.width
+  const scaleY = editImgRef.value.height / rect.height
+  
+  // 转换为canvas内部坐标
+  const x = (clientX - rect.left) * scaleX
+  const y = (clientY - rect.top) * scaleY
+  
+  return { x, y }
 }
 
 function onTouchEnd(e) {
   if (isMobile.value && scrollMode.value) return
   e.preventDefault()
   handlePointerEnd()
-}
-
-// 鼠标事件处理
-function onMouseDown(e) {
-  if (!imageLoaded.value || (isMobile.value && scrollMode.value)) return
-  const rect = editImgRef.value.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
-  handlePointerStart(x, y)
-}
-
-function onMouseMove(e) {
-  if (!imageLoaded.value || (isMobile.value && scrollMode.value)) return
-  const rect = editImgRef.value.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
-  handlePointerMove(x, y)
 }
 
 function onMouseUp() {
@@ -518,8 +536,13 @@ function isInText(x, y, m) {
 function drawAll() {
   if (!editImgRef.value || !imageObj.value) return
   const ctx = editImgRef.value.getContext('2d')
-  ctx.clearRect(0, 0, canvasWidth.value, canvasHeight.value)
-  ctx.drawImage(imageObj.value, 0, 0, canvasWidth.value, canvasHeight.value)
+  
+  // 使用Canvas的实际尺寸进行绘制
+  const renderWidth = editImgRef.value.width
+  const renderHeight = editImgRef.value.height
+  
+  ctx.clearRect(0, 0, renderWidth, renderHeight)
+  ctx.drawImage(imageObj.value, 0, 0, renderWidth, renderHeight)
   markers.value.forEach(m => {
     if (m.type === 'rect') {
       drawRect(ctx, m.startX, m.startY, m.endX, m.endY)
