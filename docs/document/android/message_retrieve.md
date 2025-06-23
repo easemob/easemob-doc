@@ -14,9 +14,11 @@
 
 - `EMChatManager#asyncFetchHistoryMessages`：根据 `EMFetchMessageOption` 类从服务端分页获取指定会话的历史消息；
 - `EMChatManager#doAsyncFetchHistoryMessages`：从服务器获取指定群成员发送的消息；
+- `EMChatManager#asyncLoadConversationMessagesWithKeyword`：根据关键字获取本地会话中的消息；
+- `EMChatManager#asyncLoadMessages`：根据消息 ID 获取单个或多个本地消息；
 - `EMConversation#asyncSearchMsgFromDB`：从本地获取指定群成员发送的消息；
 - `EMConversation#getAllMessages/loadMoreMsgFromDB`：读取本地指定会话的消息；
-- `EMChatManager#getMessage`：根据消息 ID 获取本地消息；
+- `EMChatManager#getMessage`：根据消息 ID 获取单个本地消息；
 - `EMChatManager#searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)`：获取本地存储的指定会话中特定类型的消息；
 - `EMChatManager#searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)`：获取一定时间段内本地指定会话中发送和接收的消息；
 - `EMConversation#getAllMsgCount`：从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
@@ -169,6 +171,46 @@ int pageSize,String cursor,
 
 ```
 
+### 根据关键字获取本地会话中的消息
+
+你可以通过设置关键词获取单个会话中的某些消息。SDK 返回会话 ID 及消息 ID 列表，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
+
+```java
+String keyword="时间";
+EMClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(keyword, -1, null, EMConversation.EMSearchDirection.UP, EMConversation.EMMessageSearchScope.CONTENT, new EMValueCallBack<Map<String, List<String>>>() {
+    @Override
+    public void onSuccess(Map<String, List<String>> value) {
+        EMLog.e(TAG, "asyncLoadConversationMessagesWithKeyword onSuccess value:" + value);
+    }
+
+    @Override
+    public void onError(int error, String errorMsg) {
+        EMLog.e(TAG,"asyncLoadConversationMessagesWithKeyword onError error:" + error + " errorMsg:" + errorMsg);
+    }
+});
+
+```
+
+
+### 根据消息 ID 获取单个或多个本地消息
+
+你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
+
+```java
+// messageIds：消息 ID 列表。每次最多可传入 20 个消息 ID。
+EMClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversationId, new EMValueCallBack<List<EMMessage>>() {
+        @Override
+        public void onSuccess(List<EMMessage> value) {
+            EMLog.e(TAG, "asyncLoadMessages onSuccess value:" + value);
+        }
+
+        @Override
+        public void onError(int error, String errorMsg) {
+            EMLog.e(TAG, "asyncLoadMessages onError error:" + error + " errorMsg:" + errorMsg);
+        }
+    });
+```
+
 ### 从本地获取指定群成员发送的消息
 
 自 4.14.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
@@ -191,7 +233,7 @@ List<EMMessage> messages = conversation.getAllMessages();
 List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
 ```
 
-### 根据消息 ID 获取本地消息
+### 根据消息 ID 获取单个本地消息
 
 你可以调用 `getMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 

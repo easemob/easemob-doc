@@ -12,7 +12,7 @@
 
 环信即时通讯 IM React Native SDK 通过 `ChatManager` 和 `ChatConversation` 类实现对会话和消息的管理。
 
-- `getMessage`：根据消息 ID 获取本地消息；
+- `getMessage`：根据消息 ID 获取单个本地消息；
 - `getMsgsWithMsgType`：获取本地指定会话中特定类型的消息；
 - `getMsgWithTimestamp` ：获取本地指定会话中一定时间段内的消息；
 - `getMessageCountWithTimestamp`：获取本地会话指定时间段的消息数量。
@@ -90,7 +90,7 @@ ChatClient.getInstance()
   });
 ```
 
-### 根据消息 ID 获取本地消息
+### 根据消息 ID 获取单个本地消息
 
 你可以调用 `getMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 

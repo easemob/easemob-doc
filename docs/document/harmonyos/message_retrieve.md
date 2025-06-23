@@ -16,7 +16,7 @@
 - `ChatManager#fetchHistoryMessages`：根据 `searchOptions.from` 字段从服务器获取群组中指定成员（而非全部成员）发送的消息；
 - `Conversation#searchMessagesByKeywords`：从本地获取群组中指定成员（而非全部成员）发送的消息；
 - `Conversation#getAllMessages`：从本地读取指定会话的消息；
-- `ChatManager#getMessage`：根据消息 ID 获取本地消息；
+- `ChatManager#getMessage`：根据消息 ID 获取单个本地消息；
 - `Conversation#getMsgCountInRange`：获取本地数据库中单个会话在某个时间段内的全部消息数。
 
 ## 前提条件
@@ -108,7 +108,7 @@ List<EMMessage> messages = conversation.getAllMessages();
 List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
 ```
 
-### 根据消息 ID 获取本地消息
+### 根据消息 ID 获取单个本地消息
 
 你可以调用 `getMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 

@@ -121,9 +121,9 @@ conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>
 ));
 ```
 
-### 根据消息 ID 获取本地消息
+### 根据消息 ID 获取单个本地消息
 
-你可以调用 `LoadMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
+你可以调用 `LoadMessage` 方法根据消息 ID 获取本地单个消息。如果消息不存在会返回空值。
 
 ```csharp
 // msgId：要获取消息的消息 ID。

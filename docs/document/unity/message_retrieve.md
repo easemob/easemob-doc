@@ -14,7 +14,7 @@
 
 - `IChatManager.FetchHistoryMessagesFromServerBy` 根据 `FetchServerMessagesOption` 类分页获取服务器保存的指定会话中的消息。
 - `Conversation.LoadMessages` 读取本地指定会话的消息。
-- `IChatManager.LoadMessage` 根据消息 ID 获取消息。
+- `IChatManager.LoadMessage` 根据消息 ID 获取单个消息。
 - `Conversation.LoadMessagesWithMsgType` 获取本地单个会话中特定类型的消息。
 - `Conversation.LoadMessagesWithTime` 获取本地单个会话中一定时间段内的消息。
 - `Conversion#MessagesCount` 获取 SDK 本地数据库中会话某个时间段内的全部消息数。
@@ -119,7 +119,7 @@ conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>
 ));
 ```
 
-### 根据消息 ID 获取本地消息
+### 根据消息 ID 获取单个本地消息
 
 你可以调用 `LoadMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 
