@@ -173,7 +173,7 @@ int pageSize,String cursor,
 
 ### 根据关键字获取本地会话中的消息
 
-你可以通过设置关键词获取单个会话中的某些消息。SDK 返回会话 ID 及消息 ID 列表，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
+自 SDK 4.15.1 版本开始，你可以通过设置关键词获取单个会话中的某些消息。SDK 返回会话 ID 及消息 ID 列表，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
 
 ```java
 String keyword="时间";
@@ -194,7 +194,7 @@ EMClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(ke
 
 ### 根据消息 ID 获取单个或多个本地消息
 
-你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
+自 SDK 4.15.1 版本开始，你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
 
 ```java
 // messageIds：消息 ID 列表。每次最多可传入 20 个消息 ID。
