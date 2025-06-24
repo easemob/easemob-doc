@@ -84,7 +84,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | 字段            | 类型   | 描述                                               |
 | :-------------- | :----- | :---------------- |
 | `access_token`  | String | 有效的用户 token。                                     |
-| `expires_in`    | Long   | token 有效期，单位为秒。有效期内无需重复获取。<br/> 注意：VIP 5 集群该参数单位为毫秒。// TODO：第二句是什么意思？ |
+| `expires_in`    | Long   | token 有效期，单位为秒。有效期内无需重复获取。<br/> 注意：VIP 5 集群该参数单位为毫秒。|
 | `user`          | JSON   | 用户相关信息。                                             |
 | `user.uuid`    | String | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成用户 token。   |
 | `user.type`    | String | 对象类型，无需关注。       |
