@@ -25,7 +25,7 @@
 ### 优化
 
 - 修改 Token 即将过期事件 [tokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
-- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](demo.html#快速跑通-demo)。
+- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](demo.html#快速跑通-demo-源码)。
 
 ## 版本 V4.14.0 Dev 2025-4-21（开发版）
 

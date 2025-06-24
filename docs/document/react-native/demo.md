@@ -19,7 +19,7 @@
   <ImageItem src="/images/uikit/chatuikit/android/main_contact_list.png" title="通讯录" />
 </ImageGallery>
 
-## 快速跑通 Demo
+## 快速跑通 Demo 源码
 
 ### 开发环境要求
 
