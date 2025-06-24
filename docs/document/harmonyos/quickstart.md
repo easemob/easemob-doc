@@ -67,7 +67,7 @@
 
 打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
 
-将 SDK 文件，拷贝到 `Harmony` 工程，例如放至 `HelloWorld` 工程下 `entry` 模块下的 `libs` 目录。
+将 SDK 文件，拷贝到 `Harmony` 工程，例如放至 `HelloWorld` 工程下 `entry` 模块下新建的 `libs` 目录中。
 
 修改模块目录的 `oh-package.json5` 文件，在 `dependencies` 节点增加依赖声明。
 
@@ -122,26 +122,30 @@ ChatClient.getInstance().init(context, options);
 
 ### 2. 创建账号
 
-测试期间，可以使用如下代码创建账户：
+1. 在 [环信控制台](https://console.easemob.com/user/login) 首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
 
-```typescript
-ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
-    // success logic
-});
-```
+2. 在环信即时通讯云的左侧导航栏中，选择**应用概览 > 用户认证**。
+   
+3. 在**用户认证**页面，点击**创建IM用户**按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
 
-:::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在[环信控制台](https://console.easemob.com/user/login)中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
-:::
+![img](/images/product/user_create_test.png)
+   
+创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ### 3. 登录账号
 
 使用如下代码实现用户登录：
 
 ```typescript
-ChatClient.getInstance().login(userId, pwd).then(() => {
+import { ChatClient, ChatError } from '@easemob/chatsdk';
+
+ChatClient.getInstance().loginWithToken(userId, token).then(() => {
     // success logic        
-})
+}).catch((error: ChatError) => {
+    // failure logic
+});
 ```
 
 :::tip
@@ -151,6 +155,8 @@ ChatClient.getInstance().login(userId, pwd).then(() => {
 ### 4. 发送一条单聊消息
 
 ```typescript
+import { ChatClient, ChatMessage } from '@easemob/chatsdk';
+
 // `content` 为要发送的文本内容，`toChatUsername` 为对方的账号。
 let message = ChatMessage.createTextSendMessage(toChatUsername, content);
 if (!message) {
