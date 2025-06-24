@@ -10,12 +10,11 @@
   
 示例代码如下所示： 
   
-```objectivec
+```swift
 // 异步方法
-[[EMClient sharedClient] registerWithUsername:@"username"
-                                         password:@"your password"
-                                       completion:^(NSString *aUsername, EMError *aError) {
-                                   }];
+EMClient.shared.register(withUsername: "userId", password: "your password") { userId, e in
+            
+}
 ```
 
 - 授权注册：通过环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。要使用授权注册，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**即时通讯** > **服务概览**的**设置**区域，将**用户注册模式**设置为**授权注册**。相关的 REST API 介绍，详见[授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)的接口介绍。
@@ -40,17 +39,18 @@ EMClient.shared().login(withUsername: "userId", token: "token") { userId, err in
 
 1. **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
-```objectivec
+```swift
     //SDK 初始化 `EMOptions` 时可以传入 `loginExtensionInfo` 属性投递给被踢下线的设备。该属性需要开启多设备登录的情况下才能生效。
-    EMOptions *options = [EMOptions optionsWithAppkey:<#AppKey#>];
-    options.loginExtensionInfo = @"you was kicked out by other device";
-    [EMClient.sharedClient initializeSDKWithOptions:options];
-// 异步方法
-[[EMClient sharedClient] loginWithUsername:@"username"
-                                     password:@"your password"
-                                   completion:^(NSString *aUsername, EMError *aError) {
-
-}];
+    let options = EMOptions(appkey: <#Appkey#>)
+    options.loginExtensionInfo = "you was kicked out by other device"
+    EMClient.shared().initializeSDK(with: options)
+    EMClient.shared.login(withUsername: "userId", password: "your password") { userId, e in
+        if e == nil {
+             print("login success")
+        } else {
+            print("login error:\(e?.errorDescription ?? "")")
+        }
+    }
 ```
 
 ## 自动登录
