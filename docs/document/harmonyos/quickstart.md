@@ -112,6 +112,8 @@
 ### 1. SDK 初始化
 
 ```typescript
+import { ChatClient, ChatOptions } from '@easemob/chatsdk';
+
 let options = new ChatOptions({
   appKey: "你的 AppKey"
 });
