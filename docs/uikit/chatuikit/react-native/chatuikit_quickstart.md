@@ -1,93 +1,89 @@
-# 快速开始
+# 集成单群聊 UIKit
 
-<Toc />
+下面介绍如何集成单群聊 UIKit。
 
-利用环信单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
+## 开发环境需求
 
-## 前提条件
+- MacOS 12 或以上版本
+- React-Native 0.71 或以上版本
+- NodeJs 20.18 或以上版本
+- iOS 平台：Xcode 15 或以上版本
+- Android 平台：Android Studio 2022.3 或以上版本
 
-开始前，确保你的开发环境满足如下条件：
+## 开发者账号
 
-- MacOS 12 或以上版本；
-- React Native 0.71 或以上版本；
-- NodeJs 16.18 或以上版本；
-- 对于 `iOS` 平台，需要 `Xcode` 工具，版本建议 14 或以上；
-- 对于 `Android` 平台，需要 `Android studio` 工具，版本建议 2022 或以上。
+有效的环信即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 
-## 实现发送单聊消息
+## 操作步骤
 
-### 第一步 创建项目
+## 第一步 创建项目
 
-运行以下命令，创建项目。
+如果已经有项目，则跳过此步。
+
+1. 创建项目
 
 ```sh
-npx react-native --version 0.73.2 init ProjectName
+npx @react-native-community/cli@latest init --skip-install --version 0.76 simple_uikit_demo
 ```
 
-**可能提示安装 `react-native` 最新版本。**
+2. 初始化项目
 
-创建完成，默认会初始化项目，安装依赖到 `node_modules`，以及生成 `package-lock.json`文件。如果使用 `yarn` 初始化，将生成 `yarn.lock` 文件。
-
-### 第二步 添加依赖项
-
-`Chat UIKit SDK` 需要额外的依赖。在 `package.json` 文件中添加依赖。
-
-```json
-{
-  "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.17.11",
-    "@react-native-camera-roll/camera-roll": "^5.6.0",
-    "@react-native-clipboard/clipboard": "^1.13.2",
-    "date-fns": "^2.30.0",
-    "pinyin-pro": "^3.18.3",
-    "pure-uuid": "^1.6.3",
-    "react": "18.2.0",
-    "react-native": "0.73.2",
-    "react-native-agora": "^4.2.6",
-    "react-native-chat-uikit": "2.1.0",
-    "react-native-chat-sdk": "1.3.1",
-    "react-native-audio-recorder-player": "^3.5.3",
-    "@easemob/react-native-create-thumbnail": "^1.6.6",
-    "react-native-device-info": "^10.6.0",
-    "react-native-document-picker": "^9.0.1",
-    "react-native-fast-image": "^8.6.3",
-    "react-native-file-access": "^3.0.4",
-    "react-native-gesture-handler": "~2.9.0",
-    "react-native-get-random-values": "~1.8.0",
-    "react-native-image-picker": "^7.0.3",
-    "react-native-permissions": "^3.8.0",
-    "react-native-safe-area-context": "4.5.0",
-    "react-native-screens": "^3.20.0",
-    "react-native-video": "^5.2.1",
-    "react-native-web": "~0.19.6",
-    "react-native-webview": "13.2.2",
-    "twemoji": ">=14.0.2"
-  }
-}
+```sh
+yarn set version 4.9.1
+yarn config set nodeLinker node-modules
+yarn
 ```
 
-#### iOS 平台
+## 第二步 集成 UIKit
 
-更新 iOS 文件夹下 `ProjectName/Info.plist` 文件内容：
+```sh
+yarn add react-native-chat-uikit
+```
 
-在 dict 节点下，追加下面的权限。示例如下：
+## 第三步 第三方依赖
+
+添加 UIKit 必须的第三方依赖：
+
+```sh
+yarn add @react-native-async-storage/async-storage \
+@react-native-camera-roll/camera-roll \
+@react-native-clipboard/clipboard \
+react-native-audio-recorder-player \
+react-native-chat-sdk \
+react-native-create-thumbnail \
+react-native-device-info \
+@react-native-documents/picker \
+react-native-chat-uikit \
+react-native-fast-image \
+react-native-file-access \
+react-native-gesture-handler \
+react-native-image-picker \
+react-native-safe-area-context \
+react-native-video
+```
+
+## 第四步 添加权限
+
+添加必要的应用权限：
+
+- iOS
+
+更新 `Info.plist` 文件内容，增加需要的权限。
 
 ```xml
 <dict>
-  <!-- 追加部分开始 -->
-        <key>NSCameraUsageDescription</key>
-        <string></string>
-        <key>NSMicrophoneUsageDescription</key>
-        <string></string>
-        <key>NSPhotoLibraryUsageDescription</key>
-        <string></string>
-  <!-- 追加部分结束 -->
+	<key>NSCameraUsageDescription</key>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string></string>
 </dict>
 ```
 
-#### Android 平台
+- Android
 
-更新 `AndroidManifest.xml` 文件：
+更新 `AndroidManifest.xml` 文件内容，增加需要的权限。
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -99,11 +95,17 @@ npx react-native --version 0.73.2 init ProjectName
 </manifest>
 ```
 
-### 第三步 添加代码
-
-添加的主要代码包括登录、登出、发送消息。
+## 第五步 添加代码
 
 ```tsx
+/* eslint-disable react-native/no-inline-styles */
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
+
 import * as React from "react";
 import { Pressable, SafeAreaView, Text, View } from "react-native";
 import {
@@ -113,26 +115,28 @@ import {
   useChatContext,
 } from "react-native-chat-uikit";
 
-const appKey = "easemob#easeim";
-const userId = "du004";
-const userPs = "1";
-const peerId = "du005";
+const appKey = "<your app key>";
+const userId = "<current login id>";
+const userPassword = "<current login password or token>";
+const usePassword = true; // or false;
+const peerId = "<chat peer id>";
 
 function SendMessage() {
   const [page, setPage] = React.useState(0);
-  const [appkey, setAppkey] = React.useState(appKey);
+  const [_appKey, setAppKey] = React.useState(appKey);
   const [id, setId] = React.useState(userId);
-  const [ps, setPs] = React.useState(userPs);
+  const [ps, setPs] = React.useState(userPassword);
   const [peer, setPeer] = React.useState(peerId);
   const im = useChatContext();
 
   if (page === 0) {
     return (
+      // 登录页面
       <SafeAreaView style={{ flex: 1 }}>
         <TextInput
           placeholder="Please App Key."
-          value={appkey}
-          onChangeText={setAppkey}
+          value={_appKey}
+          onChangeText={setAppKey}
         />
         <TextInput
           placeholder="Please Login ID."
@@ -151,14 +155,12 @@ function SendMessage() {
         />
         <Pressable
           onPress={() => {
-            console.log("test:zuoyu:login", id, ps);
             im.login({
               userId: id,
               userToken: ps,
-              usePassword: true,
+              usePassword: usePassword,
               result: (res) => {
                 console.log("login result", res);
-                console.log("test:zuoyu:error", res);
                 if (res.isOk === true) {
                   setPage(1);
                 }
@@ -180,6 +182,7 @@ function SendMessage() {
       </SafeAreaView>
     );
   } else if (page === 1) {
+    // 聊天页面
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <ConversationDetail
@@ -200,30 +203,54 @@ function SendMessage() {
   }
 }
 
-function App(): React.JSX.Element {
+export default function App(): React.JSX.Element {
+  // 初始化 UIKit
   return (
     <Container options={{ appKey: appKey, autoLogin: false }}>
       <SendMessage />
     </Container>
   );
 }
-
-export default App;
 ```
 
-### 第四步 编译和运行
+## 第六步 设置配置选项
 
-- 对于 `iOS` 平台，运行 `yarn run ios`；
-- 对于 `Android` 平台，运行 `yarn run android`。
+通过 [环信控制台](https://console.easemob.com/) 获取 App Key。在 **用户管理** 页面中添加测试用户，获取用户 ID 和 token。
 
-### 第五步 发送第一条消息
+```tsx
+const appKey = "<your app key>";
+const userId = "<current login id>";
+const userPassword = "<current login password or token>";
+const usePassword = false; // or false;
+const peerId = "<chat peer id>";
+```
 
-点击登录按钮，进入聊天页面，输入文本内容，点击发送。
+## 第七步 编译运行
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/message_first.png" title="发送第一条消息" />
-</ImageGallery>
+#### iOS
 
-## 示例项目地址
+1. 安装 pod 依赖
 
-[仓库地址](https://github.com/easemob/easemob-uikit-reactnative)
+```sh
+cd ios && pod install && cd ..
+```
+
+2. 运行项目
+
+```sh
+yarn run ios
+```
+
+#### Android
+
+```sh
+yarn run android
+```
+
+## 第八步 发送消息
+
+输入文本消息，点击 **发送** 按钮，即可开始聊天。
+
+<img src="/images/uikit/chatuikit/chatuikit_quick_start_login.png" alt="description" width="50%">
+
+<img src="/images/uikit/chatuikit/chatuikit_quick_start_chat.png" alt="description" width="50%">
