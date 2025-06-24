@@ -9,20 +9,20 @@
 **利用 `EaseCallKit` 通话过程中，使用环信 ID 加入频道，方便音视频视图中显示用户名。如果用户不使用 `EaseCallKit` 而直接调用声网 API，也可以直接使用数字 UID 加入频道。**
 
 :::tip
-本 UI 库只和移动端 3.8.0 及以上版本 Demo 互通。3.8.1 的 UI 库使用声网数字 uid 加入频道，而 3.8.0 使用字符串加入频道，3.8.1 版本不与 3.8.0 互通，Demo 中 EaseCallKit 使用的 token 和 UID 均由你自己生成。若你需要使用声网对应的音视频服务，需单独在声网申请。
+Demo 中 EaseCallKit 使用的 token 和 UID 均由你自己生成。若你需要使用声网对应的音视频服务，需单独在声网申请。
 :::
 
 ## 跑通 Demo
 
-EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 Demo 及源码](https://www.easemob.com/download/im) 下载页面，选择 Android 端进行下载，直接下载: [Android IM 源码](https://github.com/easemob/chat-android)。
+EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 Demo](https://www.easemob.com/download/demo) 下载页面，选择 Android 端进行下载。或者直接下载: [Android IM 源码](https://github.com/easemob/easemob-demo-android)。
 
 环境准备：
 
-- Android Studio 3.5 及以上版本；
-- Gradle 4.6 及以上版本；
-- targetSdkVersion 29；
-- minSdkVersion 19；
-- Java JDK 1.8 及以上版本。
+- 推荐 Android Studio Meerkat | 2024.3.1 Patch 2及以上
+- 推荐 Gradle 8.0 及以上
+- targetVersion 33 及以上
+- Android SDK API 21 及以上
+- JDK 17 及以上
 
 运行 Demo：
 
@@ -53,10 +53,10 @@ EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 De
 
 #### Gradle 方式集成
 
-- 在 `build.gradle` 中添加以下代码，重新 build 你的项目即可。
+- 在 `build.gradle` 中添加以下代码，重新 build 你的项目即可。[点击查看最新版本号](https://central.sonatype.com/artifact/io.hyphenate/ease-call-kit/versions)
 
 ```gradle
-implementation 'io.hyphenate:ease-call-kit:3.8.9'
+implementation 'io.hyphenate:ease-call-kit:4.15.1'
 ```
 
 :::tip
@@ -76,12 +76,10 @@ implementation project(':ease-call-kit')
 
 ```gradle
 //环信 SDK
-implementation 'io.hyphenate:hyphenate-chat:3.8.0' (`hyphenate-chat` 只支持 3.8.0 及以上版本)
+implementation 'io.hyphenate:hyphenate-chat:4.15.1'
 //声网 SDK
-implementation 'io.agora.rtc:full-sdk:3.8.0'
+implementation 'io.agora.rtc:full-rtc-basic:4.1.0'
 ```
-
-使用 easecallkit 4.0.1 或以上版本 时，请使用声网音视频库 `io.agora.rtc:full-sdk:4.1.0`。
 
 ### 添加权限
 
@@ -109,7 +107,6 @@ implementation 'io.agora.rtc:full-sdk:3.8.0'
 在清单中增加 `EaseCallKit` 中的 `EaseVideoCallActivity` 和 `EaseMultipleVideoActivity`:
 
 ```xml
-//添加 Activity
 <activity
     android:name="com.hyphenate.easecallkit.ui.EaseVideoCallActivity"
     android:configChanges="orientation|keyboardHidden|screenSize"
@@ -140,7 +137,6 @@ callKitConfig.setRingFile(ringFile);
 //设置呼叫超时时间，单位为秒。
 callKitConfig.setCallTimeOut(30 * 1000);
 //设置声网的 appId。
-callKitConfig.setAgoraAppId("*****");
 Map<String, EaseCallUserInfo> userInfoMap = new HashMap<>();
 userInfoMap.put("***",new EaseCallUserInfo("****",null));
 callKitConfig.setUserInfoMap(userInfoMap);
