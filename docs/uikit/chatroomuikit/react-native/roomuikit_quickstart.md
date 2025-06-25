@@ -1,4 +1,4 @@
-# 快速开始
+# 集成单群聊 ChatroomUIKit
 
 利用 ChatroomUIKit，你可以轻松实现聊天室内的用户交互。本文介绍如何实现在聊天室中发送消息。
 
@@ -12,42 +12,78 @@
 
 ## 开发者账号
 
-- 有效的环信即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+有效的环信即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 
 ## 操作流程
 
-### 第一步 创建聊天室和用户
+### 第一步 创建项目
 
-在环信控制台[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)和[用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+如果已经有项目，则跳过此步。
 
-### 第二步 创建项目
-
-创建应用：
+1. 创建项目
 
 ```sh
-npx @react-native-community/cli@latest init --skip-install --version 0.76.7 sample_app
+npx @react-native-community/cli@latest init --skip-install --version 0.76 simple_roomkit_demo
 ```
 
-初始化项目：
+2. 初始化项目
 
 ```sh
-yarn set version 4.7.0
+yarn set version 4.9.1
 yarn config set nodeLinker node-modules
-yarn install
+yarn
 ```
 
-### 第三步 项目中安装 ChatroomUIKit 以及依赖项
+### 第二步 集成 ChatroomUIKit
 
-进入创建的项目，执行以下命令：
+```sh
+yarn add react-native-chat-room
+```
+
+### 第三步 添加第三方依赖
+
+添加 `ChatroomUIKit` 必须的第三方依赖：
 
 ```sh
 yarn add react-native-linear-gradient \
-react-native-chat-room \
 react-native-chat-sdk \
 react-native-safe-area-context
 ```
 
-### 第四步 编写代码实现集成聊天室
+### 第四步 添加权限
+
+添加必要的应用权限。
+
+- iOS 平台
+
+更新 `Info.plist` 文件内容，增加需要的权限。
+
+```xml
+<dict>
+	<key>NSCameraUsageDescription</key>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string></string>
+</dict>
+```
+
+- Android 平台
+
+更新 `AndroidManifest.xml` 文件内容，增加需要的权限。
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+</manifest>
+```
+
+### 第五步 添加代码
 
 ```typescript
 import * as React from "react";
@@ -181,7 +217,7 @@ function SendMessage() {
   }
 }
 
-export default function App(): React.JSX.Element {
+function App(): React.JSX.Element {
   // initialize the chat room
   return (
     <Container
@@ -208,24 +244,52 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
 });
+
+export default App;
 ```
 
-### 第五步 运行示例项目
+### 第六步 设置配置选项
+
+在 [环信控制台](https://console.easemob.com/) 获取 App Key 和用户 ID 和 token，然后填入配置选项：
+
+- 在 **应用详情** 页面 [获取 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 在 **用户认证** 页面 [添加测试用户](/product/enable_and_configure_IM.html#测试环境)，获取用户 ID 和 token。
+
+```tsx
+const appKey = "<your app key>";
+const userId = "<current login id>";
+const userName = "<current login name>";
+const userToken = "<current login token or password>";
+const userAvatar = "<current login avatar url>";
+const roomId = "<chat room ID>";
+```
+
+### 第七步 编译运行
+
+- iOS
+
+1. 安装 pod 依赖：
+
+```sh
+cd ios && pod install && cd ..
+```
+
+2. 运行项目：
 
 ```sh
 yarn run ios
-# or
+```
+
+- Android
+
+```sh
 yarn run android
 ```
 
-### 第六步 发送消息
+### 第八步 发送消息
 
-<img src="/images/uikit/chatrn/room_quick_start_login.png" alt="description" width="50%">
+点击 **Login** 按钮登录进入聊天页面，输入文本消息，然后发送，即可开始聊天。
 
-<img src="/images/uikit/chatrn/room_quick_start_chat.png" alt="description" width="50%">
-
-## 常见问题
-
-初始化项目之后找不到 node_modules，怎么办？
-- `yarn 4.x.x`： 需要设置使用本地配置 `yarn config set nodeLinker node-modules`。
-- `yarn 1.x.x`： 不存在该问题。
+| 登录            | 发送消息   | 
+| :--------------: | :-----: |
+| <img src="/images/uikit/chatrn/room_quick_start_login.png" alt="description">  | <img src="/images/uikit/chatrn/room_quick_start_chat.png" alt="description"> | 
