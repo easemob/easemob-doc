@@ -12,7 +12,7 @@
 
 ## 开发者账号
 
-有效的环信即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+有效的环信即时通讯 IM 开发者账号。
 
 ## 操作步骤
 
@@ -64,7 +64,7 @@ react-native-video
 
 ## 第四步 添加权限
 
-添加必要的应用权限：
+添加必要的应用权限。
 
 - iOS
 
@@ -215,7 +215,10 @@ export default function App(): React.JSX.Element {
 
 ## 第六步 设置配置选项
 
-通过 [环信控制台](https://console.easemob.com/) 获取 App Key。在 **用户管理** 页面中添加测试用户，获取用户 ID 和 token。
+在 [环信控制台](https://console.easemob.com/) 获取 App Key 和用户 ID 和 token，然后填入配置选项：
+
+- 在 **应用详情** 页面 [获取 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 在 **用户认证** 页面 [添加测试用户](/product/enable_and_configure_IM.html#测试环境)，获取用户 ID 和 token。
 
 ```tsx
 const appKey = "<your app key>";
@@ -227,21 +230,21 @@ const peerId = "<chat peer id>";
 
 ## 第七步 编译运行
 
-#### iOS
+- iOS
 
-1. 安装 pod 依赖
+1. 安装 pod 依赖：
 
 ```sh
 cd ios && pod install && cd ..
 ```
 
-2. 运行项目
+2. 运行项目：
 
 ```sh
 yarn run ios
 ```
 
-#### Android
+- Android
 
 ```sh
 yarn run android
@@ -249,8 +252,8 @@ yarn run android
 
 ## 第八步 发送消息
 
-输入文本消息，点击 **发送** 按钮，即可开始聊天。
+点击 **Login** 按钮登录进入聊天页面，输入文本消息，点击发送，即可开始聊天。
 
-<img src="/images/uikit/chatuikit/chatuikit_quick_start_login.png" alt="description" width="50%">
-
-<img src="/images/uikit/chatuikit/chatuikit_quick_start_chat.png" alt="description" width="50%">
+| 登录            | 发送消息   | 
+| :--------------: | :-----: |
+| <img src="/images/uikit/chatuikit/rn/chatuikit_quick_start_login.png" alt="description">  | <img src="/images/uikit/chatuikit/rn/chatuikit_quick_start_chat.png" alt="description"> | 
