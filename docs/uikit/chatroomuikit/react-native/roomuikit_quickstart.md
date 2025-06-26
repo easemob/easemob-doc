@@ -250,17 +250,18 @@ export default App;
 
 ### 第六步 设置配置选项
 
-在 [环信控制台](https://console.easemob.com/) 获取 App Key 和用户 ID 和 token，然后填入配置选项：
+在 [环信控制台](https://console.easemob.com/) 上获取以下信息，然后设置配置选项。
 
-- 在 **应用详情** 页面 [获取 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
-- 在 **用户认证** 页面 [添加测试用户](/product/enable_and_configure_IM.html#测试环境)，获取用户 ID 和 token。
+- 获取 App Key。详见 [查看应用详情文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息) 
+- 创建用户，获取用户 ID 和 token。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
+- 获取聊天室 ID。详见 [创建聊天室文档](/product/enable_and_configure_IM.html#创建聊天室)。
 
 ```tsx
 const appKey = "<your app key>";
 const userId = "<current login id>";
-const userName = "<current login name>";
+const userName = undefined;
 const userToken = "<current login token or password>";
-const userAvatar = "<current login avatar url>";
+const userAvatar  = undefined;
 const roomId = "<chat room ID>";
 ```
 

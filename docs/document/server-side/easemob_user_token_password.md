@@ -48,7 +48,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | `grant_type` | String | 是       | 授权方式。将值设为 `password`，通过用户 ID 和密码获取 token，需设置 `username` 和 `password` 参数。 |
 | `username`   | String | 是       | 用户 ID。                |
 | `password`   | String | 是       | 用户的登录密码。   |
-| `ttl`        | Long   | 否       | token 有效期，单位为秒。<br/> - 若传入该参数，token 有效期以传入的值为准。<br/> - 若不传该参数，以 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **用户认证** 页面的 token 有效期的设置为准。<br/> - 若设置为 `0`，则 token 永久有效。<br/>注意：VIP 5 集群该参数单位为毫秒。 |
+| `ttl`        | Long   | 否       | token 有效期，单位为秒。<br/> - 若传入该参数，token 有效期以传入的值为准。<br/> - 若不传该参数，以 [环信控制台](https://console.easemob.com/user/login/)的 **用户管理** 页面的 token 有效期的设置为准。<br/> - 若设置为 `0`，则 token 永久有效。<br/>注意：VIP 5 集群该参数单位为毫秒。 |
 
 ## HTTP 响应
 

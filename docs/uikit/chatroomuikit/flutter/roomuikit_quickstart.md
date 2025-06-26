@@ -48,15 +48,13 @@ void main() async {
 
 ### 第五步 登录 chatroom_uikit
 
-进入聊天室前，需首先通过用户 ID 和用户 Token 登录 `chatroom_uikit`
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 登录 `chatroom_uikit`。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
 
 :::tip
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 `chatroom_uikit`。
 :::
 
-为了方便快速体验，你可以在[环信控制台](https://console.easemob.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
-
-在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html)。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 登录服务, 可使用 `userId` 和 `password` 登录，也可以使用 `userId` 和 token 进行登录。
 

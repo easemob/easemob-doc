@@ -253,27 +253,11 @@ void _initSDK() async {
 }
 ```
 
-### 注册环信 IM 用户
+### 创建用户
 
-Demo 中使用 [开放注册](/document/server-side/account_system.html#开放注册单个用户)，此操作需要在环信后台开启 `开放注册`。在开放注册模式下，允许通过 App 客户端直接注册环信用户，正式环境中请使用 [授权注册](/document/server-side/account_system.html#授权注册单个用户)。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
 
-在 `_signUp` 方法中添加注册代码：
-
-```dart
-void _signUp() async {
-  if (_username.isEmpty || _password.isEmpty) {
-    _addLogToConsole("username or password is null");
-    return;
-  }
-
-  try {
-    await EMClient.getInstance.createAccount(_username, _password);
-    _addLogToConsole("sign up succeed, username: $_username");
-  } on EMError catch (e) {
-    _addLogToConsole("sign up failed, e: ${e.code} , ${e.description}");
-  }
-}
-```
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ### 添加登录
 

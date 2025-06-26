@@ -168,23 +168,15 @@ options.setAppKey("Your appkey");
 // context 为上下文，在 Application 或者 Activity 中可以用 this 代替
 EMClient.getInstance().init(context, options);
 ```
-### 2. 创建账号
+### 2. 创建用户
 
-1. 在 [环信控制台](https://console.easemob.com/user/login) 首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
-
-2. 在环信即时通讯云的左侧导航栏中，选择**应用概览 > 用户认证**。
-   
-3. 在**用户认证**页面，点击**创建IM用户**按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
-
-![img](/images/product/user_create_test.png)
-   
-创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 Token。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ### 3. 登录账号
 
-创建账号后，获取账号的用户 ID 和 Token。使用如下代码实现用户登录：
+获取账号的用户 ID 和 Token 后，使用如下代码实现用户登录：
 
 ```java
 // 导包

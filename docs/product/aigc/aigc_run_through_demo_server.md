@@ -65,7 +65,7 @@ easemob:
 
 #### 4. 创建机器人账号
 
-选择**应用概览** > **用户认证** 创建机器人账号，进行单聊或群组聊天。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
 
 示例项目中创建了 3 个智能体，因此建议设置 3 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系，见下方代码。
 
