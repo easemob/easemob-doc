@@ -80,9 +80,13 @@ iOS 平台需要使用 `cocoapods` 进行初始化。
 cd ios && pod install && cd ..
 ```
 
-## 实现发送和接收单聊消息
+## 创建用户
 
-发送单聊消息前，终端用户需要先注册 Chat 账号，登录。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 用于登录。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+
+## 实现发送和接收单聊消息
 
 建议使用 `visual studio code` 打开文件夹 `simple_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
 
