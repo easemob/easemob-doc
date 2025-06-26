@@ -65,11 +65,7 @@ easemob:
 
 #### 4. 创建机器人账号
 
-1. 在 [环信控制台](https://console.easemob.com/user/login) 首页的 **应用列表** 中，在目标应用的 **操作** 栏中点击 **管理**。
-
-2. 在环信即时通讯云的左侧导航栏中，选择 **即时通讯 > 运营服务 > 用户管理**。
-
-3. 在 **用户管理** 页面，点击 **创建IM用户** 按钮，在弹出的对话框中填写用户 ID、推送昵称和密码，然后点击 **保存**，创建机器人账号，进行单聊或群组聊天。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
 
 示例项目中创建了 3 个智能体，因此建议设置 3 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系，见下方代码。
 
