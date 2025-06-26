@@ -47,9 +47,18 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 ChatroomUIKit。
 :::
 
-为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
+1. 在 [环信控制台](https://console.easemob.com/user/login) 首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
 
-在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
+2. 在环信即时通讯云的左侧导航栏中，选择 **即时通讯 > 运营服务 > 用户管理**。
+
+3. 在 **用户管理** 页面，点击 **创建IM用户** 按钮，在弹出的对话框中填写用户 ID、推送昵称和密码，然后点击 **保存**。
+
+各参数的设置要求，详见 [注册用户 RESTful API](/document/server-side/account_system.html#开放注册单个用户)。
+
+创建用户后，你可以点击 **操作** 栏中的 **更多** 查看用户 token。
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+
 
 ```swift
 ChatroomUIKitClient.shared.login(userId: "user id", token: "token", completion: <#T##(ChatError?) -> Void#>)

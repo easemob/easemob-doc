@@ -117,22 +117,9 @@ SDKClient.Instance.InitWithOptions(options);
 
 ### 4. 创建账号
 
-在 `SignUpAction` 方法尾部添加以下代码，创建即时通讯系统的登录账户，示例代码如下：
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
 
-```csharp
-SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callback: new CallBack(
-  onSuccess: () => {
-    AddLogToLogText("sign up sdk succeed");
-  },
-  onError: (code, desc) => {
-    AddLogToLogText($"sign up sdk failed, code: {code}, desc: {desc}");
-  }
-));
-```
-
-:::tip
-该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端[调用 Restful API 进行注册](/document/server-side/account_system.html#开放注册单个用户)。若需要使用 Token，需要在你的应用服务器集成[获取 App Token API](/document/server-side/easemob_app_token.html) 和[获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
-:::
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ### 5. 登录账号
 
