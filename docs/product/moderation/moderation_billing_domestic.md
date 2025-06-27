@@ -169,4 +169,4 @@
 
 相关文档：
 
-[内容审核产品功能介绍官方文档](moderation_overview.html)。
+[内容审核产品功能介绍官方文档](/product/moderation/moderation_overview.html)。

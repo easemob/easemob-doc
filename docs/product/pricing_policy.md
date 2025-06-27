@@ -112,5 +112,5 @@
 
 :::tip
 1. 翻译功能的价格请咨询环信商务。
-2. 内容审核功能的价格详见 [内容审核计费说明](/moderation/moderation_billing_domestic.html)。
+2. 内容审核功能的价格详见 [内容审核计费说明](/product/moderation/moderation_billing_domestic.html)。
 :::
