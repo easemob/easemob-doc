@@ -180,10 +180,53 @@ export const zhSidebar = sidebar({
          text: "回调",
          collapsible: true,
          children: [
-        { text: "回调概述", link: "/document/server-side/callback_overview.html" },
-        { text: "发送前回调", link: "/document/server-side/callback_presending.html" },
-        { text: "发送后回调", link: "/document/server-side/callback_postsending.html" },
-        { text: "发送后回调事件", link: "/document/server-side/callback_login_logout.html" },
+        { text: "回调概述", link: "callback/callback_overview.html" },
+        { text: "发送前回调", link: "callback/callback_presending.html" },
+        { text: "发送后回调", link: "callback/callback_postsending.html" },
+        { text: '发送后回调事件',
+        collapsible: true,
+        children: [
+          { text: '用户登入/登出', link: 'callback/callback_login_logout.html' },
+          { text: '发送消息', link: 'callback/callback_message_send.html' },
+          { text: '发送单聊消息已读回执', link: 'callback/callback_single_read_ack.html' },
+          { text: '发送群聊消息已读回执', link: 'callback/callback_group_read_ack.html' },
+          { text: '发送会话已读回执', link: 'callback/callback_single_conversation_ack.html' },
+          { text: '修改消息', link: 'callback/callback_message_modify.html' },
+          { text: '撤回消息', link: 'callback/callback_message_recall.html' },
+          { text: '群组/聊天室操作（新）', 
+            collapsible: true,
+            children: [
+              { text: '创建群组/聊天室', link: 'callback/callback_group_room_create.html' },
+              { text: '更新群组/聊天室',
+                collapsible: true,
+                children: [
+                  { text: '更新群组_聊天室信息', link: 'callback/callback_group_room_info.html' },
+                  { text: '变更群主/聊天室所有者', link: 'callback/callback_group_room_owner.html' },
+                  { text: '设置/更新公告', link: 'callback/callback_group_room_announcement.html' },
+                  { text: '封禁/解禁群组', link: 'callback/callback_group_ban.html' },
+                  { text: '全员禁言', link: 'callback/callback_group_room_muteall.html' }
+                ]
+              },
+              { text: '删除群组/聊天室', link: 'callback/callback_group_room_delete.html' },
+              { text: '屏蔽/解除屏蔽群组', link: 'callback/callback_group_block.html' },
+              { text: '上传/删除群共享文件', link: 'callback/callback_group_shared_file.html' },
+              { text: '用户加入', link: 'callback/callback_group_room_join.html' },
+              { text: '成员离开', link: 'callback/callback_group_room_leave.html' },
+              { text: '添加/移除管理员', link: 'callback/callback_group_room_admin.html' },
+              { text: '加入/移出禁言列表', link: 'callback/callback_group_room_mute.html' },
+              { text: '添加/移出白名单', link: 'callback/callback_group_room_allowlist.html' },
+              { text: '加入/移出黑名单', link: 'callback/callback_group_room_blocklist.html' },
+              { text: '添加/移除聊天室超级管理员', link: 'callback/callback_room_superadmin.html' }
+            ]
+          },
+          { text: '群组/聊天室操作（旧）', link: 'callback/callback_group_room_old.html' },
+          { text: '用户关系操作', link: 'callback/callback_contact.html' },
+          { text: '离线推送', link: 'callback/callback_offline_push.html' },
+          { text: 'Reaction', link: 'callback/callback_reaction.html' },
+          { text: 'Thread', link: 'callback/callback_thread.html' },
+          { text: '敏感词监测', link: 'callback/callback_sensitive_word.html' }
+        ]
+      }
          ],
       }, 
       { text: "质量监控", link: "/product/request_quality_overview.html" },
