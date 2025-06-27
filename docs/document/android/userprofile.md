@@ -145,11 +145,10 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。
 
-可参考 [示例项目](https://www.easemob.com/download/im) 中的以下类：
+可参考 [示例项目](https://github.com/easemob/easemob-uikit-android) 中的以下类：
 
-- `ChatUserCardAdapterDelegate`
-- `ChatUserCardAdapterDelegate`
-- `ChatRowUserCard`
+- `EaseChatAttachmentController#selectContact`
+- `EaseChatRowUserCard`
 
 ### 常见问题
 
