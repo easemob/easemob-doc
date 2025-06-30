@@ -12,6 +12,7 @@ import 'instantsearch.css/themes/algolia-min.css'
 import InstantSearch from 'vue-instantsearch/vue3/es/index.js'
 import BiliBiliPlayer from './components/BiliBili.vue'
 import DemoCard from './components/DemoCard.vue'
+import FeedBack from './components/Feedback.vue'
 import { embedChatbot } from "./embed"
 
 export default defineClientConfig({
@@ -35,5 +36,7 @@ export default defineClientConfig({
     WjxLayout,
     InstanceSearchLayout
   },
-  rootComponents: []
+  rootComponents: [
+    FeedBack
+  ]
 })
