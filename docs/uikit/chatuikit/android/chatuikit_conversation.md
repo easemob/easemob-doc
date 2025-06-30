@@ -89,17 +89,71 @@ ChatUIKitConversationListFragment.Builder()
 1. 创建自定义适配器 `CustomConversationListAdapter`，继承自 `ChatUIKitConversationListAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
 
 ```kotlin
-class CustomConversationListAdapter : ChatUIKitConversationListAdapter() {
-    override fun getItemNotEmptyViewType(position: Int): Int {
-        // 根据消息类型设置自定义 itemViewType。
-        // 如果使用默认的 itemViewType，返回 super.getItemNotEmptyViewType(position) 即可。
-        return CUSTOM_YOUR_CONVERSATION_TYPE
+class CustomConversationListAdapter (
+    config: ChatUIKitConvItemConfig = ChatUIKitConvItemConfig()
+): ChatUIKitConversationListAdapter(config) {
+    companion object {
+        private const val typeSingleChat = 1
+        private const val typeGroupChat = 2
     }
 
-    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<ChatUIKitConversation> {
-        // 根据返回的 viewType 返回对应的 ViewHolder。
-        // 返回自定义的 ViewHolder 或者使用默认的 super.getViewHolder(parent, viewType)
-        return CUSTOM_YOUR_VIEW_HOLDER()
+    override fun getItemNotEmptyViewType(position: Int): Int {
+        //伪代码
+        //假设这里以不同的conversationType返回不同的viewType示例，你可以根据你自己的业务需求调整
+        val conversationType = getItem(position)?.conversationType
+        when (conversationType) {
+            ChatConversationType.Chat -> {
+                return typeSingleChat
+            }
+            ChatConversationType.GroupChat -> {
+                return typeGroupChat
+            }
+            else -> {
+                return typeSingleChat
+            }
+        }
+    }
+
+    override fun getViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder<ChatUIKitConversation> {
+        //伪代码
+        when (viewType) {
+            typeSingleChat -> {
+                return MySingleChatViewHolder(
+                    MySingleChatItemViewBinding
+                        .inflate(LayoutInflater.from(parent.context), parent, false), config
+                )
+            }
+            else -> {
+                return MyGroupChatViewHolder(
+                    MyGroupChatItemViewBinding
+                        .inflate(LayoutInflater.from(parent.context), parent, false), config
+                )
+            }
+        }
+    }
+}
+```
+```kotlin
+class MySingleChatViewHolder( private val viewBinding: MySingleChatItemViewBinding,
+                              var config: ChatUIKitConvItemConfig? = ChatUIKitConvItemConfig()
+) : ChatUIKitBaseRecyclerViewAdapter.ViewHolder<ChatUIKitConversation>(binding = viewBinding) {
+
+    init {
+        // 这里可以进行一些初始化操作
+        // 比如设置特定的样式或配置
+        config?.bindView(viewBinding)
+    }
+
+    override fun initView(itemView: View?) {
+        super.initView(itemView)
+        // 这里可以进行一些视图的初始化操作
+    }
+
+    override fun setData(item: ChatUIKitConversation?, position: Int) {
+        //根据你的UI来设置数据
     }
 }
 ```
@@ -107,7 +161,9 @@ class CustomConversationListAdapter : ChatUIKitConversationListAdapter() {
 2. 添加 `CustomConversationListAdapter` 到 `ChatUIKitConversationListFragment#Builder`。
 
 ```kotlin
-builder.setCustomAdapter(customConversationListAdapter);
+var mConversationListFragment = ChatUIKitConversationListFragment.Builder()
+    .setCustomAdapter(CustomConversationListAdapter())
+    .build()
 ```
 
 3. 通过继承 `ChatUIKitConversationListFragment` 进行自定义设置。
