@@ -22,8 +22,8 @@ SDK 目前支持微信、QQ、百度小程序、抖音、uni-app 编译的原生
 :::tip
 
 - 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**
-- 各小程序 Demo 源码可在官网 [下载页](https://www.easemob.com/download/im) 获取
-- Uni-app Demo Git 源码地址：[https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
+- 各小程序 SDK 可在官网 [下载](https://github.com/easemob/webim-weixin-xcx) 获取
+- Uni-app Demo Git 源码地址：[下载](https://github.com/easemob/webim-uniapp-demo)
   :::
 
 ## 功能说明

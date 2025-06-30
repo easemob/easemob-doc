@@ -14,9 +14,9 @@
 
 小程序在发布前，需要配置合法域名。
 
-登录抖音小程序 [开发者平台](https://microapp.bytedance.com/)，选择当前小程序（如果没有需要创建一个小程序），进入 **开发管理 > 开发设置** 页面配置以下服务器地址。
+登录抖音小程序 [开发者平台](https://microapp.bytedance.com/)，选择当前小程序（如果没有需要创建一个小程序），进入 **开发管理 > 开发设置** 页面配置 **私有化服务器域名**。
 
-:::tip
+<!-- :::tip
 request 合法域名：
 
 1. https://a1.easemob.com
@@ -53,7 +53,7 @@ wss://im-api-wechat.easemob.com（3.0 IM SDK）
 
 应用所在数据中心可以在环信用户管理后台 > **即时通讯** > **服务概览**中查看：
 
-![img](/images/applet/service_overview.png)
+![img](/images/applet/service_overview.png) -->
 
 ### 集成 SDK
 
@@ -61,7 +61,7 @@ wss://im-api-wechat.easemob.com（3.0 IM SDK）
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
+- 通过官网 [下载 SDK](https://github.com/easemob/webim-weixin-xcx)
 - 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
 
 #### 引入 SDK

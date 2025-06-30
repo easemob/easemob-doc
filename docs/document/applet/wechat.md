@@ -2,9 +2,9 @@
 
 <Toc />
 
-### Demo 体验
+<!-- ### Demo 体验
 
-你可以[体验微信小程序 Demo](/product/demo.html#各端原生开发-demo)，使用微信扫描二维码，并查看 Demo 源码。
+你可以[体验微信小程序 Demo](/product/demo.html#各端原生开发-demo)，使用微信扫描二维码，并查看 Demo 源码。 -->
 
 ### 注册环信账号
 
@@ -18,9 +18,9 @@
 
 小程序在发布前，需要配置合法域名。
 
-登录[微信公众平台](https://mp.weixin.qq.com/), 在开发设置页面配置以下服务器域名。
+登录[微信公众平台](https://mp.weixin.qq.com/), 在开发设置页面配置 **私有化服务器域名**。
 
-:::tip
+<!-- :::tip
 request 合法域名：
 
 1. https://a1.easemob.com
@@ -75,7 +75,7 @@ downloadFile 合法域名：
 
 应用所在数据中心可以在环信用户管理后台>应用信息中查看：
 
-![img](/images/applet/service_overview.png)
+![img](/images/applet/service_overview.png) -->
 
 ### 集成 SDK
 
@@ -83,7 +83,7 @@ downloadFile 合法域名：
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
+- 通过官网 [下载 SDK](https://github.com/easemob/webim-weixin-xcx)
 - 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
 
 #### 引入 SDK

@@ -1,6 +1,6 @@
 # 接收消息
 
-环信即时通讯 IM Unity SDK 通过 `IChatManagerDelegate` 类实现文本、图片、音频、视频和文件等类型的消息的接收。
+环信即时通讯 IM Windows SDK 通过 `IChatManagerDelegate` 类实现文本、图片、音频、视频和文件等类型的消息的接收。
 
 ## 前提条件
 

@@ -14,9 +14,9 @@
 
 小程序在发布前，需要配置合法域名。
 
-登录 [百度智能小程序官网](https://smartprogram.baidu.com/)，在开发设置页面配置以下服务器域名。
+登录 [百度智能小程序官网](https://smartprogram.baidu.com/)，在开发设置页面配置 **私有化服务器域名**。
 
-:::tip
+<!-- :::tip
 request 合法域名：
 
 1. https://a1.easemob.com
@@ -56,7 +56,7 @@ wss://im-api-wechat.easemob.com（3.0 IM SDK）
 
 ### 说明
 
-百度小程序注册主体不能为个人，必须为企业、媒体、政府等。
+百度小程序注册主体不能为个人，必须为企业、媒体、政府等。 -->
 
 ### 集成 SDK
 
@@ -64,7 +64,7 @@ wss://im-api-wechat.easemob.com（3.0 IM SDK）
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
+- 通过官网 [下载 SDK](https://github.com/easemob/webim-weixin-xcx)
 - 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
 
 #### 引入 SDK
