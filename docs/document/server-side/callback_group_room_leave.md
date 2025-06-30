@@ -19,7 +19,9 @@
 
 #### 请求示例
 
-以下以主动退出群组的事件为例进行介绍，聊天室的字段与其相同。
+以下以退出聊天室事件为例进行介绍。
+
+- 主动退出聊天室。退出群组事件不支持 `payload.action` 字段，其他字段的含义与聊天室相同。
 
 ```json
 {
@@ -29,16 +31,39 @@
 		"member": [
 			"tst"
 		],
+		"action": "user_quit",
 		"type": "QUIT"
 	},
 	"appkey": "XXXX#XXXX",
-	"id": "261958837272578",
-	"type": "GROUP",
+	"id": "26195XXXX272578",
+	"type": "CHATROOM",
 	"event": "group_op_event",
 	"operation": "LEAVE",
 	"operator": "tst",
 	"member_count": 4,
 	"timestamp": 1729497862844
+}
+```
+
+- 因离线退出聊天室。群组无此事件。
+
+```json
+{
+	"callId": "XXXX#XXXX_4dd8749a-c7da-4087-a6c4-8a78e83ca6b7",
+	"security": "bf37becbcXXXX65326fd430a26cf0bc6",
+	"payload": { 
+		"member": [ "p1" ], 
+		"action": "user_offline", 
+		"type": "QUIT" 
+	},
+	"appkey": "XXXX#XXXX",
+	"id": "2839XXXX3548801",
+	"member_count": 0,
+	"type": "CHATROOM",
+	"event": "group_op_event",
+	"operation": "LEAVE",
+	"operator": "@ppAdmin",
+	"timestamp": 1750302436036
 }
 ```
 
@@ -50,6 +75,7 @@
 | `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见 [配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON | 退出群组/聊天室的用户 ID。        | 
+| `payload.action` | JSON | 该字段只适用于退出聊天室事件，不适用于退出群组事件：<br/> - `user_quit`：退出聊天室的用户 ID。<br/> - `user_offline`：因离线退出聊天室。 | 
 | `payload.type` | Array  | 退出方式：`QUIT` 表示主动退出群组或聊天室或者因离线退出聊天室。     |
 | `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |

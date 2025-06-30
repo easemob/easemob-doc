@@ -3,7 +3,7 @@
 在群组或聊天室创建时拉人进入、邀请用户加入、或用户申请加入时，环信服务器会按照 [发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调进行数据同步。
 
 :::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见  [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
+1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见 [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
 2. 如果需要群组/聊天室加人的回调事件，你需要在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则，详见 [配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
 3. 发送后回调的相关介绍，详见 [回调说明](/document/server-side/callback_postsending.html)。
 :::
@@ -22,24 +22,29 @@
 
 下面的请求示例为创建群组或聊天室时拉人或客户端加入聊天室的事件。
 
+注意：`payload.options.ext` 字段只适用于加入聊天室事件，不适用于加群事件。
+
 ```json
 {
-	"callId": "XXXX#XXXX_34092a82-XXXX-XXXX-aa2e-aefeb0bb5a65",
-	"security": "0b787dc5dXXXXdeb1e9ffe8803d01eaa",
-	"payload": {
-		"member": [
-			"tst01"
-		],
-		"type": "DIRECT"
-	},
-	"appkey": "XXXX#XXXX",
-	"id": "262246968131585",
-	"type": "GROUP",
-	"event": "group_op_event",
-	"operation": "JOIN",
-	"operator": "@ppAdmin",
-	"member_count": 4,
-	"timestamp": 1729497286675
+    "callId": "XXXX#XXXX_34092a82-XXXX-XXXX-aa2e-aefeb0bb5a65",
+    "security": "0b787dc5dXXXXdeb1e9ffe8803d01eaa",
+    "payload": {
+        "member": [
+            "tst01"
+        ],
+        "options": {
+            "ext": "11111"
+        },
+        "type": "DIRECT"
+    },
+    "appkey": "XXXX#XXXX",
+    "id": "262246968131585",
+    "type": "GROUP",
+    "event": "group_op_event",
+    "operation": "JOIN",
+    "operator": "@ppAdmin",
+    "member_count": 4,
+    "timestamp": 1729497286675
 }
 ```
 
@@ -51,6 +56,7 @@
 | `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见 [配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON | <br/> - 创建群组或聊天室时，被拉入进群/聊天室的用户 ID。 <br/> - 用户主动加入聊天室时，该用户的 ID。       | 
+| `payload.options.ext` | JSON  | 扩展信息。该字段只适用于加入聊天室事件，不适用于加群事件。    |
 | `payload.type` | Array  | 加入方式：`DIRECT` 表示创建群组或聊天室时拉人进入或用户主动加入聊天室。     |
 | `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |
