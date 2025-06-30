@@ -44,7 +44,7 @@
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
+- 通过官网 [下载 SDK](https://github.com/easemob/webim-weixin-xcx)
 - Uni-app Demo 源码中获取 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
 
 #### 引入 SDK

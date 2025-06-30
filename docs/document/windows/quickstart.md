@@ -44,7 +44,7 @@
 
 你可以参考以下步骤集成 SDK：
 
-1. [下载 Windows SDK](https://www.easemob.com/download/im)。下载的 `NuGet` 包一般存放在 `C:\Users\XXX\Downloads` (`XXX` 为本机用户名)。
+1. [下载 Windows SDK](https://downloadsdk.easemob.com/downloads/SDK/WinSDK/chat_sdk.1.3.2.nupkg)。下载的 `NuGet` 包一般存放在 `C:\Users\XXX\Downloads` (`XXX` 为本机用户名)。
    
 2. 将下载的 `NuGet` 包拷贝到自己的工作目录，比如 `D:\workspace\WinSDK` 下，以下说明以此目录举例。
    

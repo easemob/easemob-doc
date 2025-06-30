@@ -1224,18 +1224,18 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/push.html      
-          - text: 即时推送
-            desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、VIVO 等主流手机厂商通道。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /push/push_integration_note_android.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /push/push_integration_note_ios.html
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /push/push_by_tag.html           
+          # - text: 即时推送
+          #   desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、VIVO 等主流手机厂商通道。
+          #   sdks:
+          #     - icon: /sdk/android.svg
+          #       text: Android
+          #       link: /push/push_integration_note_android.html
+          #     - icon: /sdk/iOS.svg
+          #       text: iOS
+          #       link: /push/push_integration_note_ios.html
+          #     - icon: /sdk/rest.svg
+          #       text: REST
+          #       link: /push/push_by_tag.html           
   - title: UIKit 功能
     features:
       - title: 单群聊 UIKit

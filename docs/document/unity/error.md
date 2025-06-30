@@ -38,9 +38,9 @@ SDKClient.Instance.Login(username, passwd,
 | 2      | NETWORK_ERROR                         | 网络错误：无网络服务时会回调此错误，表示 SDK 与服务器的连接已断开。 | 群组/聊天室操作时，如果无网络，可能返回该错误，可以在网络恢复后，重复操作。 |
 | 3      | DATABASE_ERROR                        | 数据库操作失败：打开本地数据库失败。 | 需要根据调用的 API 结合日志分析，如果使用 `Conversation#UpdateMessage` 方法更新一条本地不存在的消息，可能返回该错误；在数据库未打开时，调用其他本地数据库操作，也可能返回该错误。 |
 | 4      | EXCEED_SERVICE_LIMIT                  | 超过服务限制：超过当前服务版本的数量限制，例如，创建的用户 ID 数量超过购买服务的限制时提示该错误；设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)和[获取单个或多个用户的用户属性](userprofile.html#获取用户属性)，超过调用频率限制时，会上报该错误。 | 检查调用的 API，若传入 `limit` 参数，可将该参数控制在上限内，若是限流导致，可以在延后一段时间重新调用。 |
-| 8      | APP_ACTIVE_NUMBER_REACH_LIMITATION    | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。 | 需在[环信控制台](https://console.easemob.com/user/login)对 IM 服务进行升级。 |
-| 100    | INVALID_APP_KEY                       | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看 App Key。 | 使用正确的 App Key 进行初始化。 |
-| 101    | INVALID_USER_NAME                     | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。 | 检查报错 API 中传入的用户 ID 参数是否为空。 |
+| 8      | APP_ACTIVE_NUMBER_REACH_LIMITATION    | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。 | 需在**环信控制台**对 IM 服务进行升级。 |
+| 100    | INVALID_APP_KEY                       | App Key 不合法：用户的 App Key 格式不正确。可在**环信控制台** 的 **应用详情** 页面查看 App Key。 | 使用正确的 App Key 进行初始化。 |
+| 101    | INVALID_USER_NAME                     | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。 | 检查报错API 中传入的用户 ID 参数是否为空。 |
 | 102    | INVALID_PASSWORD                      | 用户密码不正确：登录时提供的密码为空或不正确。 | 检查调用的 API 中传的密码参数是否正确。 |
 | 103    | INVALID_URL                           | URL 不正确。 | 检查调用 API 时传入的参数是否正确。 |
 | 104    | INVALID_TOKEN                         | 用户 token 不正确：登录时提供的 token 为空或不正确。 | 检查调用的 API 中传入的 token 参数是否正确。 |
@@ -55,7 +55,7 @@ SDKClient.Instance.Login(username, passwd,
 | 204    | USER_NOT_FOUND                        | 用户不存在：例如，登录或获取用户会话列表时，用户 ID 不存在。 | 检查调用的 API，传入的用户 ID 参数是否正确。 |
 | 205    | USER_ILLEGAL_ARGUMENT                 | 用户参数不正确：例如，创建用户或更新用户属性时，用户 ID 为空或无效。 | 检查调用的 API 传入的参数是否正确。 |
 | 206    | USER_LOGIN_ANOTHER_DEVICE             | 用户在其他设备登录：如果未开启多设备登录，则在其他设备登录会将当前登录设备踢下线，用户会在当前设备收到该错误。 | 设备被踢时，会触发回调 `IConnectionDelegate#OnLoggedOtherDevice`。收到该回调时，需重新登录。 |
-| 207    | USER_REMOVED                          | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。 | 账号被注销时，会触发 `IConnectionDelegate#OnRemovedFromServer` 事件。收到该事件时，该账号已不可用，需要回到登录页面。 |
+| 207    | USER_REMOVED                          | 用户已被注销：当前的登录用户 ID 从**环信控制台** 删除会收到该错误。 | 账号被注销时，会触发 `IConnectionDelegate#OnRemovedFromServer` 事件。收到该事件时，该账号已不可用，需要回到登录页面。 |
 | 208    | USER_REG_FAILED                       | 用户注册失败：例如，注册用户之前未开启[开放注册功能](/document/server-side/account_system.html#开放注册单个用户)等原因。 | 不推荐使用 SDK 注册账号，建议开发者在业务服务器注册账号。 |
 | 210    | USER_PERMISSION_DENIED                | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。 | 检查用户是否有操作权限。 |
 | 213    | USER_BIND_ANOTHER_DEVICE              | 用户已在其他设备登录：在单设备登录场景中，默认情况下，后登录的设备会踢掉当前设备的登录。若设置为先登录的设备优先，则后登录设备登录失败并提示该错误。 | 可修改为多设备登录，或先使用 `SDKClient#KickDevice` 踢掉其他设备再登录。 |
@@ -64,9 +64,9 @@ SDKClient.Instance.Login(username, passwd,
 | 216    | USER_KICKED_BY_CHANGE_PASSWORD        | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 | 密码更新会收到回调`IConnectionDelegate#OnChangedIMPwd`，需要在收到该回调时，调用 `SDKClient#Logout` 方法，并回到登录页面。 |
 | 217    | USER_KICKED_BY_OTHER_DEVICE           | 用户被踢下线：开启多设备服务后，如果用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录，SDK 会提示该错误。 | 被踢设备会收到回调`IConnectionDelegate#OnKickedByOtherDevice`。收到该回调时，需调用`SDKClient#Logout` 方法，并回到登录页面。 |
 | 218    | USER_ALREADY_LOGIN_ANOTHER            | 其他用户已登录：用户在同一台设备上退出登录前又使用另一账户登录。 | 如果在已登录情况下，要登录另一个账号，需要先调用`SDKClient#Logout` 退出账号。 |
-| 219    | USER_MUTED_BY_ADMIN                   | 用户被禁言：用户在群组/聊天室开启全员禁言的情况下发送消息时提示该错误。 | 在群组/聊天室开启全员禁言的情况下，不能发送消息，可在 UI 上限制。 |
+| 219    | USER_MUTED_BY_ADMIN                   | 用户被禁言：用户被全局禁言后发送消息时提示该错误。 | 在群组/聊天室开启全员禁言的情况下，不能发送消息，可在 UI 上限制。 |
 | 220    | USER_DEVICE_CHANGED                   | 用户的登录设备与上次不一致。该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。 | 登录失败的设备会收到 `IConnectionDelegate#OnLoggedOtherDevice` 事件。收到该事件时，需调用 `Client#Logout` 方法，并回到登录页面。 |
-| 221    | USER_NOT_FRIEND                       | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 服务概览**页面的**设置**区域开启好友关系检查功能。 | 需要先调用 `ContactManager#AddContact` 方法添加好友。对方同意好友请求后，才能发送消息。 |
+| 221    | USER_NOT_FRIEND                       | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在**环信控制台** 的**即时通讯 > 应用概览>应用详情**页面的**应用设置**区域开启好友关系检查功能。 | 需要先调用 `ContactManager#AddContact` 方法添加好友。对方同意好友请求后，才能发送消息。 |
 | 300    | SERVER_NOT_REACHABLE                  | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误。 | 调用登录 API 返回该错误码，可能是由于网络受限，或域名被封禁，可尝试切换设备网络。如果用户在沙特/菲律宾等地区，需要联系商务，开启 dnsconfig中 TLS 加密。其他操作返回该错误码，一般是网络问题，可在切换网络或延迟一段时间后重新调用。 |
 | 301    | SERVER_TIMEOUT                        | 请求服务超时：如果调用 API 在特定时间内服务器未响应则返回该错误，一般为 30 秒或 60 秒。 | 一般是网络问题，可在切换网络或延迟一段时间后重新调用 API。 |
 | 302    | SERVER_BUSY                           | 服务器忙碌：服务器当前忙碌会返回该错误，建议稍后再尝试请求。 | 检查调用的 API 是否重复调用。如果在上次调用后，结果未返回时重复调用 API，可能返回该错误码。 |
@@ -121,11 +121,11 @@ SDKClient.Instance.Login(username, passwd,
 | 1100   | PRESENCE_PARAM_LENGTH_EXCEED          | 调用 Presence 相关方法时参数长度超出限制。  | 调用[发布自定义在线状态 API](presence.html#发布自定义在线状态) 时设置的在线状态详细信息的长度不能超过 64 字节。 |
 | 1101   | PRESENCE_CANNOT_SUBSCRIBE_YOURSELF    | 不能订阅你自己的状态。 | 检查调用 API 时传入的订阅用户 ID 是否是自己的用户 ID。 |
 | 1110   | TRANSLATE_PARAM_INVALID               | 翻译参数错误。 | 需结合 Debug 日志，分析翻译方法传入的参数错误原因。 |
-| 1111   | TRANSLATE_SERVICE_NOT_ENABLE          | 翻译服务未启用。使用翻译服务前，应在[环信控制台](https://console.easemob.com/user/login)开启该服务。 | 在[环信控制台](https://console.easemob.com/user/login)开启翻译服务。 |
+| 1111   | TRANSLATE_SERVICE_NOT_ENABLE          | 翻译服务未启用。使用翻译服务前，应在**环信控制台**开启该服务。 | 在**环信控制台**开启翻译服务。 |
 | 1112   | TRANSLATE_USAGE_LIMIT                 | 翻译用量达到上限。 | 联系商务，进行翻译用量续费。 |
 | 1113   | TRANSLATE_MESSAGE_FAIL                | 消息翻译失败。  | 需结合 Debug 日志分析翻译失败的原因。 |
-| 1200   | THIRD_MODERATION_FAILED               | 第三方内容审核服务的消息审核结果为“拒绝”。  | 可以从[环信控制台](https://console.easemob.com/user/login)上查看内容审核配置及记录，进行分析。 |
-| 1299   | THIRD_DEFAULT_FAILED                  | 除第三方内容审核服务的其他服务的消息审核结果为“拒绝”。  | 可以从[环信控制台](https://console.easemob.com/user/login)上查看内容审核配置及记录，进行分析。 |
+| 1200   | THIRD_MODERATION_FAILED               | 第三方内容审核服务的消息审核结果为“拒绝”。  | 可以从**环信控制台**上查看内容审核配置及记录，进行分析。 |
+| 1299   | THIRD_DEFAULT_FAILED                  | 除第三方内容审核服务的其他服务的消息审核结果为“拒绝”。  | 可以从**环信控制台**上查看内容审核配置及记录，进行分析。 |
 | 1300   | REACTION_REACH_LIMIT                  | 该消息的 Reaction 数量已达到限制。 | 可以在 UI 上进行提示，或联系商务增加消息支持的 Reaction 数量上线。 |
 | 1301   | REACTION_HAS_BEEN_OPERATED            | 用户已添加该 Reaction，不能重复添加。   | 可以按照添加 Reaction 成功的情况处理。 |
 | 1302   | REACTION_OPERATION_IS_ILLEGAL         | 用户对该 Reaction 没有操作权限。例如，未添加过该 Reaction 的用户进行删除操作，或者既非单聊消息的发送方也不是非接收方的用户对消息添加 Reaction。 | 结合日志分析，检查调用的 API 中传入的参数是否正确。 |

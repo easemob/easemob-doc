@@ -17,6 +17,6 @@
 
 ## 集成 SDK
 
-1. [下载 Unity SDK](https://www.easemob.com/download/im)。
+1. [下载 Unity SDK](https://downloadsdk.easemob.com/downloads/SDK/Unity/chat_unity_sdk1.3.2.unitypackage)。
 
 2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择下载的 Unity package。在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**，导入 Unity package。

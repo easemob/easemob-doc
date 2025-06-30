@@ -46,7 +46,7 @@
 
 ### 配置服务器域名（以微信为例）
 
-为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
+<!-- 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 
 环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
 
@@ -63,11 +63,11 @@
 
 应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console 中查看请求域名
 
-![img](/images/applet/service_overview.png)
+![img](/images/applet/service_overview.png) -->
 
-登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 **开发 > 开发设置** 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
+登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 **开发 > 开发设置** 页面，配置 **私有化服务器地址**（其他平台小程序配置与微信一致）：
 
-:::tip
+<!-- :::tip
 request 合法域名，uploadFile 合法域名，downloadFile 合法域名
 
 1. https://a1.easemob.com
@@ -91,7 +91,7 @@ socket 合法域名:
 2. wss://im-api-wechat-31.easemob.com
 3. wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）
 4. wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）
-:::
+::: -->
 
 ### 各端小程序 WebSocket 连接数量
 

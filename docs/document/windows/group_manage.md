@@ -25,7 +25,6 @@
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
-- 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
 
@@ -130,7 +129,7 @@ SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
 
 ### 退出群组
 
-群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [DestroyGroup](https://docs-im.easemob.com/ccim/unity/group2#解散群组) 方法解散群组。
+群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 `DestroyGroup`方法解散群组。
 
 示例代码如下：
 
@@ -223,7 +222,7 @@ SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(pageSize, cursor, ca
 
 ### 查询当前用户已加入的群组数量
 
-自 1.3.0 版本开始，你可以调用 `FetchMyGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+自 1.3.0 版本开始，你可以调用 `FetchMyGroupsCount` 方法从服务器获取当前用户已加入的群组数量。
 
 ```csharp
 SDKClient.Instance.GroupManager.FetchMyGroupsCount(new ValueCallBack<int>(

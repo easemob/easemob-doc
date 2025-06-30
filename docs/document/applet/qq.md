@@ -18,9 +18,9 @@
 
 小程序在发布前，需要配置合法域名。
 
-登录 QQ 小程序 [开发者平台](https://q.qq.com/)，进入 “开发 > 开发设置” 页面配置以下服务器地址。
+登录 QQ 小程序 [开发者平台](https://q.qq.com/)，进入 “开发 > 开发设置” 页面配置 **私有化服务器域名**。
 
-:::tip
+<!-- :::tip
 request 合法域名：
 
 1. https://a1.easemob.com
@@ -60,7 +60,7 @@ wss://im-api-wechat.easemob.com（3.0 IM SDK）
 
 ### 说明
 
-QQ、微信小程序： 1.7.0 及以上版本，最多可以同时存在 5 个 WebSocket 连接，需开发者控制好连接数量，超出此限制 SDK 将不能连接上服务器。
+QQ、微信小程序： 1.7.0 及以上版本，最多可以同时存在 5 个 WebSocket 连接，需开发者控制好连接数量，超出此限制 SDK 将不能连接上服务器。 -->
 
 ### 集成 SDK
 
@@ -68,7 +68,7 @@ QQ、微信小程序： 1.7.0 及以上版本，最多可以同时存在 5 个 W
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
+- 通过官网 [下载 SDK](https://github.com/easemob/webim-weixin-xcx)
 - 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
 
 #### 引入 SDK

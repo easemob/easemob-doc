@@ -25,13 +25,13 @@
 
 ![img](/images/applet/config5.png)
 
-7. 登陆环信后台获取 socket 域名，进入即时通讯-服务概览页，即可看到如图的域名展示。
+7. 配置私有部署提供的服务端信息。
 
 :::tip
 抖音小程序、QQ 小程序、百度小程序、uniapp 全平台等同微信小程序的域名一致，使用微信小程序栏的域名即可。
 :::
 
-![img](/images/applet/config6.png)
+<!-- ![img](/images/applet/config6.png) -->
 
 8. 填写完域名信息之后，点击下面 “保存并提及” 按钮即可设置完成。
 

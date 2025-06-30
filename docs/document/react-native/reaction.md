@@ -25,7 +25,7 @@ Reaction 场景示例如下：
 
 1. 完成 `1.0.5 或以上版本` SDK 初始化，详见 [初始化](initialization.html)文档。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已在[环信控制台](https://console.easemob.com/user/login)开通 Reaction 功能。
+
 
 ## 实现方法
 
