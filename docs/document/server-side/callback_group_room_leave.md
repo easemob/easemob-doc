@@ -21,7 +21,7 @@
 
 以下以退出聊天室事件为例进行介绍。
 
-- 主动退出聊天室。退出群组事件的字段描述与聊天室相同。
+- 主动退出聊天室。退出群组事件不支持 `payload.action` 字段，其他字段的含义与聊天室相同。
 
 ```json
 {
@@ -75,7 +75,7 @@
 | `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见 [配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON | 退出群组/聊天室的用户 ID。        | 
-| `payload.action` | JSON | <br/> - `user_quit`：退出群组/聊天室的用户 ID。<br/> - `user_offline`：因离线退出聊天室。 | 
+| `payload.action` | JSON | 该字段只适用于退出聊天室事件，不适用于退出群组事件：<br/> - `user_quit`：退出聊天室的用户 ID。<br/> - `user_offline`：因离线退出聊天室。 | 
 | `payload.type` | Array  | 退出方式：`QUIT` 表示主动退出群组或聊天室或者因离线退出聊天室。     |
 | `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |

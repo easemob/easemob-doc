@@ -22,6 +22,8 @@
 
 下面的请求示例为创建群组或聊天室时拉人或客户端加入聊天室的事件。
 
+注意：`payload.options.ext` 字段只适用于加入聊天室事件，不适用于加群事件。
+
 ```json
 {
     "callId": "XXXX#XXXX_34092a82-XXXX-XXXX-aa2e-aefeb0bb5a65",
@@ -54,7 +56,7 @@
 | `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见 [配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON | <br/> - 创建群组或聊天室时，被拉入进群/聊天室的用户 ID。 <br/> - 用户主动加入聊天室时，该用户的 ID。       | 
-| `payload.options.ext` | JSON  | 扩展信息。     |
+| `payload.options.ext` | JSON  | 扩展信息。该字段只适用于加入聊天室事件，不适用于加群事件。    |
 | `payload.type` | Array  | 加入方式：`DIRECT` 表示创建群组或聊天室时拉人进入或用户主动加入聊天室。     |
 | `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |
