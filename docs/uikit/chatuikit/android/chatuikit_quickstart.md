@@ -63,7 +63,7 @@ dependencies {
     implementation("io.hyphenate:ease-chat-kit:4.13.0")
 }
 ```
-若要查看 UIKit 的最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
+若要查看 UIKit 的最新版本号，请点击[这里](releasenote)。
 
 **本地依赖**
 

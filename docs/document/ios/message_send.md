@@ -4,9 +4,9 @@
 
 环信即时通讯 IM iOS SDK 通过 `ChatManager` 类和 `EMChatMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送。
 
-- 对于单聊，环信即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要 [开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。
+- 对于单聊，环信即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要 在[环信即时通讯云控制台](/product/enable_and_configure_IM.html#创建应用)的**应用概览** > **应用详情**的**应用设置**区域，开启好友关系检查。
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
-- 关于消息发送控制，详见 [单聊](/product/message_single_chat.html#单聊消息发送控制)、[群组聊天](/product/message_group.html#群组消息发送控制) 和 [聊天室](/product/message_chatroom.html#聊天室消息发送控制) 的相关文档。
+- 关于消息发送控制，详见 [单聊](/product/message_single_chat.html#单聊消息发送控制)、[群组聊天](/product/message_group.html#群组消息发送控制) 和 [聊天室](/product/message_chatroom.html#聊天室消息发送控制) 的 相关文档。
 
 ## 前提条件
 
@@ -65,7 +65,7 @@ message.chatType = EMChatTypeGroupChat;
 ### 发送图片消息
 
 1. 发送方调用 `initWithData` 和 `initWithConversationID` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息。
-2. 发送方调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+2. 发送方调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，如果私有部署提供oss环境，服务器自动生成图片缩略图。
 
 ```objectivec
 // `imageData` 为图片本地资源，`displayName` 为附件的显示名称。
@@ -122,7 +122,7 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUse
 
 1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
 2. 发送方调用 `initWithLocalPath` 方法传入视频文件的本地资源标志符、消息的显示名称和视频时长，构建视频消息体。然后，调用 `initWithConversationID` 方法传入会话 ID 和视频消息体，构建视频消息。最后，
-3. 发送方调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至环信消息服务器，自动将视频的首帧作为视频缩略图。
+3. 发送方调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至环信消息服务器，如果提供oss环境，自动将视频的首帧作为视频缩略图。
 
 ```objectivec
 // `localPath` 为本地资源路径，`displayName` 为视频的显示名称。
@@ -280,14 +280,3 @@ message.priority = EMChatRoomMessagePriorityHigh;
     // error 为发送结果，message 为发送的消息。
 }];
 ```
-
-### 发送消息前的内容审核
-
-- 内容审核关注消息 body
-
-[内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
-
-- 设置发送方收到内容审核替换后的内容
-
-若初始化时打开了 `EMOptions#useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。该属性只能在调用 `initializeSDKWithOptions` 时设置，而且 app 运行过程中不能修改该参数的设置。
-

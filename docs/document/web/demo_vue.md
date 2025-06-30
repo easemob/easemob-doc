@@ -6,11 +6,16 @@
 
 1. 登录 [Vue 3 Demo](https://webim-vue3.easemob.com/login)
 
-![img](/images/demo/web_vue3_login.png)
+2. 配置私有化服务器信息，点击 **保存配置**。
 
-2. 输入你的手机号，获取验证码，然后输入。
+![img](/images/privitization/web_vue3_setting.jpg)
 
-3. 点击 **登录** 登录 Demo。
+
+3. 输入用户账号和密码。<br/>
+
+![img](/images/privitization/web_vue3_login.jpg)
+
+4. 点击 **登录** 登录 Demo。
 
 ## 代码下载
 

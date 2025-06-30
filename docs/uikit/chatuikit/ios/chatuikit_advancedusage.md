@@ -16,7 +16,7 @@ let error = ChatUIKitClient.shared.setup(option: ChatOptions(appKey: appKey))
 
 使用当前用户对象符合 `ChatUserProfileProtocol` 协议的用户信息登录 EaseChatUIKit。
 
-[在环信控制台上创建用户](/product/enable_and_configure_IM.html#创建-im-用户)，将用户 ID 传入以下代码中的 `userId`。
+[在环信控制台上创建用户](/product/enable_and_configure_IM.html#用户管理)，将用户 ID 传入以下代码中的 `userId`。
 
 :::tip
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 EaseChatUIKit。

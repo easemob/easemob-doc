@@ -64,7 +64,7 @@
 | 401  | unauthorized          | "registration is not open, please contact the app admin" | 授权注册模式下，调用[授权注册单个用户](account_system.html#授权注册单个用户)和[批量授权注册用户](account_system.html#批量授权注册用户)的 RESTful 接口时，未传入 App Token 或传入了错误的 App Token 时提示该错误，例如 Token 已过期或格式不正确。 | 请传入有效 token。|
 | 401  | unauthorized          | "Unable to authenticate due to expired access token"     | 调用 RESTful 接口发送请求时使用的 App Token 过期或未传入 App Token。 该错误码针对除[授权注册单个用户](account_system.html#account_system.html#授权注册单个用户)之外的 RESTful 接口有效。 | 请传入有效 token。|
 | 401  | auth_bad_access_token | "Unable to authenticate due to corrupt access token"     | 调用 RESTful 接口发送请求时使用的 App Token 格式错误。 该错误码针对除[授权注册单个用户](account_system.html#授权注册单个用户)之外的 RESTful 接口有效。 | 请传入有效 token。|
-| 401  | auth_bad_access_token | "Unable to authenticate"                                 | 调用 RESTful 接口发送请求时使用的 App Token 无效。App Token 的格式正确，但不是由接收请求的服务器生成的，导致服务器无法识别该 Token。 该错误码针对除[授权注册单个用户](https://doc.easemob.com/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](account_system.html#授权注册单个用户)两个 RESTful 接口之外的接口有效。 | 请传入有效 token。|
+| 401  | auth_bad_access_token | "Unable to authenticate"                                 | 调用 RESTful 接口发送请求时使用的 App Token 无效。App Token 的格式正确，但不是由接收请求的服务器生成的，导致服务器无法识别该 Token。 该错误码针对除[授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](account_system.html#授权注册单个用户)两个 RESTful 接口之外的接口有效。 | 请传入有效 token。|
 
 ## 用户 ID 不存在错误码
 

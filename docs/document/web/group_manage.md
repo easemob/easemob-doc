@@ -24,7 +24,7 @@
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的接口调用频率限制，详见 [使用限制](/product/limitation.html)。
-- 了解群组和群成员数量限制，详见 [使用限制](/product/limitation.html)。
+
 
 ## 实现方法
 
@@ -174,7 +174,7 @@ conn.getPublicGroups(option).then((res) => console.log(res));
 
 ### 查询当前用户已加入的群组数
 
-自 4.15.1 版本开始，你可以调用 `getJoinedGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+自 4.15.1 版本开始，你可以调用 `getJoinedGroupsCount` 方法从服务器获取当前用户已加入的群组数量。
 
 ```javascript
 conn.getJoinedGroupsCount().then((res) => {

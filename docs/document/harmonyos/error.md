@@ -17,7 +17,7 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 4      |      EXCEED_SERVICE_LIMIT       | 超过服务限制：超过当前服务版本的数量限制，例如以下场景会提示该错误：<br/> - 创建的用户 ID 数量超过购买服务的限制时提示该错误。<br/> - 用户属性相关 API 超过调用频率限制，包括[设置当前用户的属性、获取单个或多个用户的用户属性和获取指定用户的指定用户属性的接口](userprofile.html)。 |
 | 7      |       PARTIAL_SUCCESS           | 服务请求返回成功，但有一些错误，例如，设置多个参数，有一些设置成功，另一些失败。                  |
 | 8      |       APP_ACTIVE_NUMBER_REACH_LIMITATION    | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。                  |
-| 100    |         INVALID_APP_KEY         | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看 App Key。  |
+| 100    |         INVALID_APP_KEY         | App Key 不合法：用户的 App Key 格式不正确。可在 **环信控制台** 的 **应用详情** 页面查看 App Key。  |
 | 101    |        INVALID_USER_NAME        | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。 |
 | 102    |        INVALID_PASSWORD         | 用户密码不正确：登录时提供的密码为空或不正确。 |
 | 104    |          INVALID_TOKEN          | 用户 token 不正确：登录时提供的 token 为空或不正确。     |
@@ -32,7 +32,7 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 204    |         USER_NOT_FOUND          | 用户不存在：例如，登录或获取用户会话列表时，用户 ID 不存在。 |
 | 205    |      USER_ILLEGAL_ARGUMENT      | 用户参数不正确：例如，创建用户或更新用户属性时，用户 ID 为空或无效。 |
 | 206    |    USER_LOGIN_ANOTHER_DEVICE    | 用户在其他设备登录：如果未开启多设备登录，则在其他设备登录会将当前登录设备踢下线，用户会在当前设备收到该错误。 |
-| 207    |          USER_REMOVED           | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。 |
+| 207    |          USER_REMOVED           | 用户已被注销：当前的登录用户 ID 从 **环信控制台** 删除会收到该错误。 |
 | 208    |         USER_REG_FAILED         | 用户注册失败：例如，注册用户之前未开启[开放注册功能](/document/server-side/account_system.html#开放注册单个用户)等原因。 |
 | 209    |    USER_UPDATEINFO_FAILED       | 更新推送配置错误：例如，用户更新推送昵称或设置免打扰配置时失败。  |
 | 210    |     USER_PERMISSION_DENIED      | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。|
@@ -44,7 +44,7 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 218    |   USER_ALREADY_LOGIN_ANOTHER    | 其他用户已登录：用户在同一台设备上退出登录前又使用另一账户登录。   |
 | 219    |       USER_MUTED_BY_ADMIN       | 用户被禁言：用户被全局禁言后发送消息时提示该错误。 |
 | 220    |       USER_DEVICE_CHANGED       | 用户的登录设备与上次不一致。该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。 |
-| 221    |       USER_NOT_ON_ROSTER        | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 服务概览**页面的**设置**区域开启好友关系检查功能。|
+| 221    |       USER_NOT_ON_ROSTER        | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在 **环信控制台** 的**应用概览 > 应用详情**页面的**应用设置**区域开启好友关系检查功能。|
 | 300    |      SERVER_NOT_REACHABLE       | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误。 |
 | 301    |         SERVER_TIMEOUT          | 请求服务超时：如果调用 API 在特定时间内服务器未响应则返回该错误，一般为 30 秒或 60 秒。 |
 | 302    |           SERVER_BUSY           | 服务器忙碌：服务器当前忙碌会返回该错误，建议稍后再尝试请求。 |
@@ -100,7 +100,7 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 1100   |  PRESENCE_PARAM_LENGTH_EXCEED   | 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 |
 | 1101   | PRESENCE_CANNOT_SUBSCRIBE_YOURSELF | 不能订阅你自己的状态。                    |
 | 1110   |     TRANSLATE_PARAM_INVALID     | 翻译参数错误。                        |
-| 1111   |  TRANSLATE_SERVICE_NOT_ENABLE   | 翻译服务未启用。使用翻译服务前，应在[环信控制台](https://console.easemob.com/user/login)开启该服务。 |
+| 1111   |  TRANSLATE_SERVICE_NOT_ENABLE   | 翻译服务未启用。使用翻译服务前，应在 **环信控制台** 开启该服务。 |
 | 1112   |      TRANSLATE_USAGE_LIMIT      | 翻译用量达到上限。     |
 | 1113   |     TRANSLATE_MESSAGE_FAIL      | 消息翻译失败。 |
 | 1200   |     MODERATION_FAILED           | 第三方内容审核服务的消息审核结果为“拒绝”。 |

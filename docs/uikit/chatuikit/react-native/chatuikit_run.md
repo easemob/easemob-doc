@@ -39,7 +39,7 @@ cd examples/uikit-example
 
 修改 `examples/uikit-example/src/env.ts` 文件内容，填写 `appKey` 参数。
 
-你可以在[环信控制台](https://console.easemob.com/)创建应用并获取 App Key。
+你可以在 **环信控制台** 创建应用并获取 App Key。
 
 3. 运行项目：
 

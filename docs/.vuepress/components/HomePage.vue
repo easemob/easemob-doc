@@ -2,7 +2,7 @@
   <HopeHomePage>
     <template #center>
       <div class="main-container">
-        <HeroSection />
+        <!-- <HeroSection /> -->
         <main :ref="containerRef" class="main-content">
           <div class="toc">
             <ClientOnly>

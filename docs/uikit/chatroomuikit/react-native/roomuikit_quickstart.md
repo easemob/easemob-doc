@@ -18,7 +18,7 @@
 
 ### 第一步 创建聊天室和用户
 
-在环信控制台[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)和[用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+在环信控制台[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)和[用户](/product/enable_and_configure_IM.html#用户管理)。
 
 ### 第二步 创建项目
 

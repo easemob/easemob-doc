@@ -27,7 +27,7 @@
 
 配置开发或者运行环境如果遇到问题，请参考 [这里](https://docs.flutter.dev/get-started/install)。
 
-- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](/product/enable_and_configure_IM)。
 
 ## 项目设置
 

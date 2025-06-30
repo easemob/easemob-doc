@@ -4,7 +4,7 @@
 
 子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍环信即时通讯 IM SDK 如何发送、接收以及撤回子区消息。
 
-使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
+
 
 ## 技术原理
 
@@ -27,7 +27,7 @@
 - 完成 4.0.7 及以上版本 SDK 初始化，详见 [快速开始](quickstart.html)；
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+
 
 ## 实现方法
 

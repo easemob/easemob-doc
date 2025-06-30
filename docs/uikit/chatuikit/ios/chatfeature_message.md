@@ -88,7 +88,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
         }
 ```
 
-## 消息翻译
+<!-- ## 消息翻译
 
 消息翻译是指用户可以将一条消息翻译成其他语言。消息翻译可以帮助使用不同语言的用户进行沟通。
 
@@ -100,7 +100,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
+使用该特性前，请确保在 **环信即时通信控制台** 上已申请试用该功能。
 
 1. 开启消息翻译特性。
 
@@ -119,7 +119,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 ```swift
 Appearance.chat.enableTranslation = true
 Appearance.chat.targetLanguage = .English
-```
+``` -->
 
 ## 表情回复
 
@@ -133,7 +133,7 @@ Appearance.chat.targetLanguage = .English
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在 **环信即时通信控制台** 上已开通该功能。
 
 消息表情回复特性在 `Appearance.swift` 中默认关闭，即 `Appearance.chat.contentStyle` 数组中默认不包含 `.withMessageReaction`。
 
@@ -158,7 +158,7 @@ Appearance.chat.contentStyle.append(.withMessageReaction)
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在 **环信即时通信控制台** 上已开通该功能。
 
 Thread 特性在 `Appearance.swift` 中默认关闭，即` Appearance.chat.contentStyle` 数组中默认不包含 `.withMessageThread`。
 

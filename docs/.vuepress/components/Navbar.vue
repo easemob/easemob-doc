@@ -10,7 +10,7 @@ const extraNavList = themeData.value.extra_nav || [];
   <Navbar>
     <template #endBefore>
       <!-- <Docsearch /> -->
-      <div class="search-box" @click="handleSearch">
+      <!-- <div class="search-box" @click="handleSearch">
         <div class="search-input-wrapper">
           <div class="search-icon">
             <svg
@@ -31,19 +31,20 @@ const extraNavList = themeData.value.extra_nav || [];
           </div>
           <div class="search-input">Search</div>
         </div>
-      </div>
+      </div> -->
 
-      <el-link
+      <!-- <el-link
         class="extra-link"
         :type="item.type"
         v-for="item in extraNavList"
         :key="item.text"
         :href="item.link"
         >{{ item.text }}
-      </el-link>
+      </el-link> -->
     </template>
   </Navbar>
 </template>
+
 
 <script>
 export default {

@@ -15,7 +15,7 @@
 - Xcode (推荐最新版本)。
 - 安装 iOS 10.0 或以上版本的 iOS 模拟器或 Apple 设备。
 - CocoaPods [1.10.1 或以上版本](https://cocoapods.org/)。
-- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台文档](/product/enable_and_configure_IM.html)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 1. 准备开发环境
@@ -53,7 +53,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 ### 方法二：手动导入 SDK v3.8.9.1 及以上版本
 
-1. 下载最新版的 [HyphenateChat iOS SDK](https://www.easemob.com/download/im) 并解压。
+1. 下载最新版的 [HyphenateChat iOS SDK](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/HyphenateChat4_15_0.zip) 并解压。
 2. 复制 SDK 包中的 `HyphenateChat.framework` 至项目路径下。
 3. 打开 Xcode，进入 **TARGETS > Project Name > General > Frameworks, Libraries, and Embedded Content**菜单。
 4. 点击 **+ > Add Other… > Add Files** 添加对应动态库，并确保添加的动态库 **Embed** 属性设置为 **Embed & Sign**。
@@ -83,7 +83,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 ## 4. 创建账号
 
-1. 在[环信控制台](https://console.easemob.com/user/login)首页的 **应用列表** 中，在目标应用的 **操作** 栏中点击 **管理**。
+1. 在 见 [环信即时通讯云控制台](/product/enable_and_configure_IM.html) 首页的 **应用列表** 中，在目标应用的 **操作** 栏中点击 **管理**。
 
 2. 在环信即时通讯云的左侧导航栏中，选择 **应用概览 > 用户认证**。
    

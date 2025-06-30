@@ -16,17 +16,12 @@
 
 API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:00:00，转换成北京时间为当日的 08:00:00 至次日的 08:00:00。
 
-### API 调用频率叠加包
-
-环信即时通讯 IM 专业版和旗舰版支持调整的服务端 API 及叠加包大小（免费版不支持），如下表所示。
-
-叠加包单价为国内 200 元/月，海外 400 元/月。
 
 ## 消息管理
 
 ### 消息管理相关 API
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | * 发送单聊消息                 | POST   | /{org_name}/{app_name}/messages/users                | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 100 次/秒/App Key <br/> - 6000 条/分钟  <br/> - 600 人/次。若一次向 600 人发消息，视为 600 条消息。  | 12000 条/分钟    | 
 | * 发送群聊消息                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 20 条/秒/App Key   <br/> - 20 次/秒 <br/> -  3 个群/次   | 50 条/秒   | 
@@ -52,7 +47,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 消息表情回复 Reaction
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 添加 Reaction         | POST   | /{org_name}/{app_name}/reaction/user/{userId}   | 100 次/秒/App Key | 50 次/秒    | 
 | 根据消息 ID 获取 Reaction     | GET    | /{org_name}/{app_name}/reaction/user/{userId}  | 100 次/秒/App Key  | 25 次/秒    | 
@@ -63,7 +58,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 群组管理
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 分页获取 app 中的群组  |  GET     | /{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}  | 100 次/秒/App Key   |  50 次/秒   | 
 | 获取一个用户加入的所有群组   |  GET         | /{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&pagenum={}        | 50 次/秒/App Key   | 50 次/秒    | 
@@ -83,7 +78,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 群成员管理
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 分页获取群组成员  |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/users       | 100 次/秒/App Key     |  100 次/秒   | 
 | 添加单个群组成员     |    POST | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username}?need_notify=false    | 100 次/秒/App Key      | 50 次/秒    | 
@@ -115,7 +110,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 子区管理
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 分页获取 app 中的子区  | GET  | /{org_name}/{app_name}/thread | 100 次/秒/App Key   |     | 
 | 分页获取单个用户加入的所有子区  | GET     | /{org_name}/{app_name}/threads/user/{username}    | 100 次/秒/App Key   |     | 
@@ -131,7 +126,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 聊天室管理
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 获取 app 中的聊天室  |    GET   | /{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}       | 50 次/秒/App Key          | 50 次/秒    | 
 | 获取用户加入的聊天室 |    GET       | /{org_name}/{app_name}/users/{username}/joined_chatrooms         | 50 次/秒/App Key             |  50 次/秒   | 
@@ -150,7 +145,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 聊天室成员管理
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 分页获取聊天室成员   |   GET   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users          | 100 次/秒/App Key                                                 |  50 次/秒   | 
 | 添加单个聊天室成员    |    POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{username}  | 100 次/秒/App Key                                                 | 100 次/秒    | 
@@ -185,7 +180,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ###  用户体系管理
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | * 获取 app/用户 token  | POST   | /{org_name}/{app_name}/token   | 300 次/秒/App Key          | 免费    | 
 
@@ -219,7 +214,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 用户属性
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 设置用户属性      | PUT     | /{org_name}/{app_name}/metadata/user/{username}            | 100 次/秒/App Key | 100 次/秒    | 
 | 批量获取用户属性    | POST      | /{org_name}/{app_name}/metadata/user/get           | 100 次/秒/App Key    | 50 次/秒    | 
@@ -228,7 +223,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 用户在线状态订阅
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 设置用户在线状态信息  |  POST     | /{org_name}/{app_name}/users/{uid}/presence/{resource}/{status} | 50 次/秒/App Key  | 100 次/秒    | 
 | 批量订阅在线状态    |  POST      | /{org_name}/{app_name}/users/{uid}/presence/{expiry}         | 50 次/秒/App Key   | 50 次/秒    | 
@@ -239,7 +234,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 全局禁言
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | * 设置用户全局禁言  |  POST      | /{org_name}/{app_name}/mutes         | 100 次/秒/App Key  | 50 次/秒    | 
 | * 查询单个用户 ID 全局禁言 |   GET   | /{org_name}/{appName}/mutes/{username}  | 100 次/秒/App Key  |  100 次/秒   | 
@@ -247,7 +242,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 用户收藏
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 分页获取用户收藏      | GET  | /{org_name}/{app_name}/users/{username}/collections   | 100 次/秒/App Key |     | 
 | 添加一条收藏      | POST  | /{org_name}/{app_name}/users/{username}/collections   | 100 次/秒/App Key |     | 
@@ -257,7 +252,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ### 用户关系管理
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 添加好友   | POST   | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key   | 100 次/秒    | 
 | 移除好友    | DELETE | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |  100 次/秒   | 
@@ -271,7 +266,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ## 离线推送
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 设置离线推送         | PUT  | /{org}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key          | 与下行的 “查询离线推送设置” API 的叠加包大小之和为 100 次/秒    | 
 | 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 次/秒/App Key  | 与上行的 “设置离线推送” API 的叠加包大小之和为 100 次/秒    | 
@@ -285,15 +280,8 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ## 发送后回调
 
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单次调整大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 查询回调储存详情         | GET  | /{org_name}/{app_name}/callbacks/storage/info | 100 次/秒/App Key          | 50 次/秒  |
 | 补发回调存储信息   | POST  | /{org_name}/{app_name}/callbacks/storage/retry | 100 次/秒/App Key  | 50 次/秒  |
 
-## AI 会话摘要助手
-
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
-| :-------- | :----- | :---------------- | :--------------------- | 
-| 生成会话摘要         | POST  | /{org_name}/{app_name}/agent/v1/messages/summary | 100 次/秒/App Key          |
-| 获取会话摘要         | GET  | /{org_name}/{app_name}/agent/v1/messages/summaries?conversationId={groupId}&username={username}&chatType={chatType} | 100 次/秒/App Key          |
-| 删除会话摘要         | DELETE  | /{org_name}/{app_name}/agent/v1/messages/summary/{summaryId}?conversationId={groupId}&username={username}&chatType={chatType} | 100 次/秒/App Key          |

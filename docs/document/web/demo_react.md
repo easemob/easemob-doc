@@ -6,11 +6,11 @@
 
 ## 体验 Demo 
 
-1. [登录 Demo](https://webim-h5.easemob.com/login)。
-2. 输入你的手机号，获取验证码，然后输入。
-3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
+1. [登录 Demo](https://webim-h5.easemob.com/dev)。
+2. 配置私有化服务器配置，点击 **保存** 。
+3. 输入用户ID和密码，点击 **登录** 登录 Demo。
    
-![img](/images/demo/web_react_login.png)
+![img](/images/privitization/web_react_login.jpg)
 
 下面为部分 UI 界面的展示：
 
@@ -28,7 +28,7 @@
 
 1. [创建应用](/product/enable_and_configure_IM.html)。 
 2. [获取应用的 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
-3. [创建用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+3. [创建用户](/product/enable_and_configure_IM.html#用户管理)。
 4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-react/tree/dev_4.0)。
 5. 下载完毕，在项目根目录打开终端，安装依赖。
    
@@ -54,7 +54,7 @@ App Server 为 Demo 提供以下功能：
 - 通过手机号获取验证码。
 - 通过手机号和验证码返回环信用户 ID 和环信用户 Token。
 - 上传头像并返回地址。
-- 根据用户的信息生成 [CallKit](https://doc.easemob.com/document/web/easecallkit.html) 登录所需的 Token。
+- 根据用户的信息生成 [CallKit](/document/web/easecallkit.html) 登录所需的 Token。
 - 获取音视频通话时环信用户 ID 和 Agora UID 的映射关系。
 
 你通过以下步骤部署 App Server：

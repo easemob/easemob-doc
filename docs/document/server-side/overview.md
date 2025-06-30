@@ -4,7 +4,7 @@
 
 环信即时通讯通过 REST 平台提供 REST API，你可以通过你的业务服务器向环信 REST 服务器发送 HTTP 请求，在服务端实现实时通信。
 
-另外环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，具体参见：[Java Server SDK](java_server_sdk.html)。
+另外环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，具体参见：[Java Server SDK](java_server_sdk_2.0.html)。
 
 ## REST 平台架构
 
@@ -41,9 +41,12 @@
 
 ## 请求域名
 
-环信不同数据中心的 REST API 请求域名 {host}：
+公有云和私有化REST API 请求域名 {host}不同：
 
-应用所在数据中心可以在环信用户管理后台 > 应用列表找到对应的 App Key 点击 **管理** > **即时通讯** > **服务概览** 中查看：
+- 公有云集成为 环信即时通讯控制台的 即时通讯->服务概览页面下的 域名配置- Rest Api。
+- 私有化集成为部署后 服务器地址:端口。
+
+<!-- 应用所在数据中心可以在环信用户管理后台 > 应用列表找到对应的 App Key 点击 **管理** > **即时通讯** > **服务概览** 中查看：
 
 ![img](/images/applet/service_overview.png)
 
@@ -51,7 +54,7 @@
 1. 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。请根据您所在数据中心选择请求域名。
 2. 国内 VIP 区、客服专区客户请联系商务经理获得 REST API 请求地址。
 3. 支持 HTTP 和 HTTPS。
-:::
+::: -->
 
 ### 通信协议
 
@@ -64,6 +67,6 @@
 
 所有的请求 URL 和请求包体内容都是区分大小写的。
 
-## REST API 概览
+<!-- ## REST API 概览
 
-关于各 REST API 的方法、接口 URL、简要介绍以及调用频率上限，详见 [Restful API 调用频率限制](/product/limitationapi.html)。
+关于各 REST API 的方法、接口 URL、简要介绍以及调用频率上限，详见 [Restful API 调用频率限制](/product/limitationapi.html)。 -->

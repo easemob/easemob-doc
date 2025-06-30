@@ -20,19 +20,20 @@ const documentSidebar = [
     */
     text: '快速开始',
     children: [
+      // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'unity'] },
+      { text: '私有云 SDK 集成配置', link: 'privatecloud.html', only: ['ios', 'android', 'web',  'flutter', 'harmonyos'] },
       { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
       { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
       { text: 'Demo 体验', link: 'demo.html', except: ['web', 'windows', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
-      // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
       { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
       /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
       { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
       { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
       { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
       { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
-      { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
+      // { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
     ],
     except: ['applet', 'electron','linux']
   },
@@ -70,9 +71,9 @@ const documentSidebar = [
           { text: '定向消息', link: 'message_target.html' },    
           { text: '消息扩展', link: 'message_extension.html' },    
           { text: '置顶消息', link: 'message_pin.html'},         
-          { text: '翻译消息', link: 'message_translation.html', except: ['harmonyos']},
+          // { text: '翻译消息', link: 'message_translation.html', except: ['harmonyos']},
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},
-          { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
+          // { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
           { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
         ]
       },
@@ -150,7 +151,7 @@ const documentSidebar = [
           { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios', 'harmonyos', 'react-native', 'flutter'] },
           { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
           { text: '设置推送模板', link: 'push/push_template.html', only: ['web']},
-          { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
+          // { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
           { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
           { text: '推送消息分类', link: 'push/push_message_classification.html', only: ['android'] },
           { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
@@ -239,9 +240,9 @@ const documentSidebar = [
           { text: '定向消息', link: 'message_target.html' }, 
           { text: '消息扩展', link: 'message_extension.html' },    
           { text: '置顶消息', link: 'message_pin.html' }, 
-          { text: '翻译消息', link: 'message_translation.html' },
+          // { text: '翻译消息', link: 'message_translation.html' },
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},  
-          { text: '消息审核（举报）', link: 'moderation.html'},      
+          // { text: '消息审核（举报）', link: 'moderation.html'},      
         ]
       },
       {
@@ -299,7 +300,7 @@ const documentSidebar = [
         { text: '离线推送概述', link: 'push/push_overview.html' }, 
         { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html' },
         { text: '设置推送模板', link: 'push/push_template.html' },
-        { text: '设置推送翻译', link: 'push/push_translation.html' },
+        // { text: '设置推送翻译', link: 'push/push_translation.html' },
         { text: '设置推送扩展功能', link: 'push/push_extension.html' },
         { text: 'uni-app 离线推送',
           collapsible: true, 
@@ -537,13 +538,13 @@ const documentSidebar = [
     ],
     only: ['server-side']
   },
-  {
-    text: '已废弃内容',
-    children: [
-      { text: '通过用户 ID 和密码获取用户 token', link: 'easemob_user_token_password.html' }
-    ],
-    only: ['server-side']
-  },
+  // {
+  //   text: '已废弃内容',
+  //   children: [
+  //     { text: '通过用户 ID 和密码获取用户 token', link: 'easemob_user_token_password.html' }
+  //   ],
+  //   only: ['server-side']
+  // },
 ]
 
 function buildDocSidebar() {

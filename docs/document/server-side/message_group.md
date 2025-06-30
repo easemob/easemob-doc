@@ -32,7 +32,7 @@
 </td>
 <td rowspan="2" width="279">
 <p>1.发送消息时，可选的 `from` 字段用于指定发送方。</p>
-<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://doc.easemob.com/document/ios/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">APNs 自定义显示</a>和 <a href="https://doc.easemob.com/document/android/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">Android 推送字段说明</a>。</p>
+<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="/document/ios/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">APNs 自定义显示</a>和 <a href="/document/android/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">Android 推送字段说明</a>。</p>
 </td>
 </tr>
 <tr>
@@ -40,7 +40,7 @@
 <p>图片/语音/视频/文件消息</p>
 </td>
 <td width="189">
-<p>1. 调用<a href="https://doc.easemob.com/document/server-side/message_download.html#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
+<p>1. 调用<a href="/document/server-side/message_download.html#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
 <p>2. 调用发送消息方法，在请求 body 中传入该 UUID。</p>
 </td>
 </tr>
@@ -57,9 +57,9 @@
 - 你可以设置哪些用户拉漫游消息时拉不到该消息（`roam_ignore_users` 参数）。
 - 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在 [环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
 - 调用该接口会触发发送后回调事件，请查看 [回调事件文档](callback_message_send.html#发送群组消息)。
-- [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
 
-### 调用频率上限
+
+<!-- ### 调用频率上限
 
 对于单个 app，该 REST API 存在以下三个限制：
 
@@ -120,14 +120,14 @@
 </td>
 </tr>
 </tbody>
-</table> 
+</table>  -->
 
 ## 前提条件
 
 要调用环信即时通讯 REST API，请确保满足以下要求：
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+<!-- - 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。 -->
 
 ## 公共参数 
 
@@ -135,9 +135,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述        |
 | :--------- | :----- | :------- | :----------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 访问 RESTful API 的域名或服务器信息。<br/>-公有云集成为 环信即时通讯控制台的 `即时通讯->服务概览`页面下的 `域名配置- Rest Api`。 <br/> -私有化集成为部署后 `服务器地址:端口`。  |
+| `org_name` | String | 是       | 每个公司（组织）分配的唯一标识。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Orgname`。  |
+| `app_name` | String | 是       | 创建应用时填入的应用名称。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Appname`。  |
 
 ### 响应参数
 

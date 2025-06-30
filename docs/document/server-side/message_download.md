@@ -9,7 +9,7 @@
 要调用环信即时通讯 REST API，请确保满足以下要求：
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+<!-- - 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。 -->
 
 ## 公共参数 
 
@@ -17,9 +17,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述        |
 | :--------- | :----- | :------- | :----------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 访问 RESTful API 的域名或服务器信息。<br/>-公有云集成为 环信即时通讯控制台的 `即时通讯->服务概览`页面下的 `域名配置- Rest Api`。 <br/> -私有化集成为部署后 `服务器地址:端口`。  |
+| `org_name` | String | 是       | 每个公司（组织）分配的唯一标识。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Orgname`。  |
+| `app_name` | String | 是       | 创建应用时填入的应用名称。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Appname`。  |
 
 ### 响应参数
 
@@ -87,8 +87,8 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | `Content-Type`    | String | 是       | 内容类型： `multipart/form-data`。 |
 | `Authorization`   | String | 否       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 | `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（`share-secret`）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。<br/><Container type="tip" title="提示">要使用文件访问限制功能，请联系商务开通。</Container>|
-| `thumbnail-height` | Int    | 否       | 缩略图的高度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，上传的图片即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的高度取决于该参数的设置。<br/> - 若不传该参数，缩略图的高度默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。 |
-| `thumbnail-width`  | Int    | 否       | 缩略图的宽度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，图片原图即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的宽度取决于该参数的设置。<br/> - 若不传该参数，缩略图的宽度默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。   |
+| `thumbnail-height` | Int    | 否       | 缩略图的高度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，上传的图片即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的高度取决于该参数的设置。<br/> - 若不传该参数，缩略图的高度默认为 170 像素。你也可以在 **环信即时通讯控制台** 的 `应用概览>应用详情` 页面的 `应用设置` 区域修改该默认值。 |
+| `thumbnail-width`  | Int    | 否       | 缩略图的宽度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，图片原图即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的宽度取决于该参数的设置。<br/> - 若不传该参数，缩略图的宽度默认为 170 像素。你也可以在**环信即时通讯控制台** 的 `应用概览>应用详情` 页面的 `应用设置` 区域修改该默认值。   |
 
 #### 请求 body
 
@@ -239,6 +239,9 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 
 ### 功能说明
 
+:::tip
+部署OSS服务，才可以使用缩略图功能，
+:::
 收到图片或视频消息，你可以先下载图片或视频的缩略图，需要时再下载图片或视频原文件。下载缩略图与下载原文件的唯一区别是前者在请求 header 中多了 `thumbnail: true`。当服务器收到包含该字段的请求 header 时，返回缩略图，否则返回原文件。
 
 **调用频率上限**：100 次/秒/App Key
@@ -299,7 +302,7 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 | HTTP 状态码 | 错误类型               | 错误提示                  | 可能原因    | 处理建议      |
 |:---------|:-------------------|:----------------------|:--------|:----------|
 | 404      | entity_not_found | file may not exists | 传入的 `file_uuid` 不存在。 | 输入正确的路径参数 `file_uuid`。 |
-| 404      | file_expired | file xxxxx is expired | 文件已过期。 | 默认情况下，消息附件，例如图片、音频、视频和其他文件可存储 7 天。若要提升该上限，请联系商务。|
+| 404      | file_expired | file xxxxx is expired | 文件已过期。 | 默认情况下，消息附件，例如图片、音频、视频和其他文件可存储 14 天。若要提升该上限，请联系商务。|
 
 若返回值 `401`，表示未授权，例如无 token、token 错误或 token 过期。
 

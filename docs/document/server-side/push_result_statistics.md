@@ -6,7 +6,7 @@
 
 你可以通过以下方式查询离线推送的结果：
 
-- 在[环信即时通讯控制台](https://console.easemob.com/user/login)上查看 IM 消息投递查询：
+- 在 **环信即时通讯控制台** 上查看 IM 消息投递查询：
   - 在 **应用列表** 中点击目标应用的 **操作** 栏中的 **管理** 按钮，进入 **应用详情** 页面。
   - 选择 **即时通讯 > 实时查询 > IM消息投递查询**，查看推送结果记录，如下图所示：
 
@@ -32,9 +32,9 @@ GET https://{host}/{org_name}/{app_name}/push/data/offline-push/begin/{startTime
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 访问 RESTful API 的域名或服务器信息。<br/>-公有云集成为 环信即时通讯控制台的 `即时通讯->服务概览`页面下的 `域名配置- Rest Api`。 <br/> -私有化集成为部署后 `服务器地址:端口`。  |
+| `org_name` | String | 是       | 每个公司（组织）分配的唯一标识。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Orgname`。  |
+| `app_name` | String | 是       | 创建应用时填入的应用名称。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Appname`。  |
 | `startTime` | String |  是       | 查询数据的开始时间，格式为 yyyy-MM-dd，例如，`2024-04-01`。 |
 | `endTime`   | String |  是       | 查询数据的结束时间，格式为 yyyy-MM-dd，例如，`2024-04-02`。 |
 

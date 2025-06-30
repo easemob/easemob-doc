@@ -27,7 +27,7 @@ export default defineClientConfig({
     app.component('DemoCard', DemoCard)
 
     if (typeof window !== "undefined") {
-      embedChatbot();
+      //embedChatbot();
     }
   },
   setup() {},

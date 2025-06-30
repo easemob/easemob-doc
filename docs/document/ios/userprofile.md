@@ -18,8 +18,8 @@
 
 环信即时通讯 IM iOS SDK 提供一个 `userInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
-- `updateOwnUserInfo` 设置和修改当前用户自己的属性信息；
-- `fetchUserInfoById` 获取指定用户的所有用户属性信息。
+- `updateOwnUserInfo` 设置和修改当前用户自己所有或指定属性信息；
+- `fetchUserInfoById` 获取指定用户的所有或指定用户属性信息。
 
 ## 前提条件
 
@@ -142,7 +142,7 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"convers
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。
 
-可参考 [示例项目](https://www.easemob.com/download/im) 中的以下类：
+可参考 [示例项目](https://github.com/easemob/easemob-demo-ios) 中的以下类：
 
 - `EMCustomMessageBody`
 - `EMChatMessage`

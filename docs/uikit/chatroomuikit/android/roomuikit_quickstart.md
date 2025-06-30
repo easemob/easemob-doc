@@ -11,7 +11,7 @@
 - 使用 Kotlin 语言开发，1.5.21 或以上版本；
 - JDK 1.8 或以上版本；
 - Gradle 7.0.0 或以上版本；
-- 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 已在**环信即时通讯云控制台** 创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 创建项目引入 ChatroomUIKit 模块
@@ -41,7 +41,7 @@ dependencies {
 
 你可以在应用加载时或使用 ChatroomUIKit 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
+初始化时，需传入 App Key。你可以在**环信即时通讯云控制台** 的**应用详情**页面查看 App Key。
 
 ```kotlin
 // 初始化 ChatroomUIKit   
@@ -64,7 +64,7 @@ class ChatroomApplication : Application() {
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 ChatroomUIKit。
 :::
 
-为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
+为了方便快速体验，你可以在**环信即时通讯云控制台**的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
 
 在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
 
@@ -92,7 +92,7 @@ class ChatroomActivity : ComponentActivity(){
 }
 ```
 
-3. [添加聊天室成员](https://doc.easemob.com/product/enable_and_configure_IM.html#创建聊天室)。
+3. [添加聊天室成员](/product/enable_and_configure_IM.html#创建聊天室)。
 
 ### 第四步 发送消息
 

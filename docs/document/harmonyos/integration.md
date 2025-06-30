@@ -31,7 +31,7 @@ ohpm install @easemob/chatsdk@x.y.z
 
 ### 本地依赖
 
-打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
+打开 [SDK 下载](https://downloadsdk.easemob.com/downloads/HarmonySDK/chatsdk-1.8.0.har)页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
 
 将 SDK 文件，拷贝到 `entry` 模块或者其他需要的模块下的 `libs` 目录。
 

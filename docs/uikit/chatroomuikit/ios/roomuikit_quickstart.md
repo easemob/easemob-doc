@@ -7,7 +7,7 @@
 - Xcode (推荐最新版本)。
 - 安装 iOS 13.0 或更高版本的 iOS 模拟器或 Apple 设备。
 - 已使用 CocoaPods 添加了 ChatroomUIKit 依赖项。
-- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](/product/enable_and_configure_IM.html)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 创建项目
@@ -25,7 +25,7 @@
 
 你可以在应用加载时或使用 ChatroomUIKit 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
+初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](/product/enable_and_configure_IM.html)的**应用详情**页面查看 App Key。
 
 ```swift    
 import ChatroomUIKit
@@ -47,9 +47,9 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 ChatroomUIKit。
 :::
 
-为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
+为了方便快速体验，你可以在[环信即时通讯云控制台](/product/enable_and_configure_IM.html)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
 
-在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
+在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#用户管理)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
 
 ```swift
 ChatroomUIKitClient.shared.login(userId: "user id", token: "token", completion: <#T##(ChatError?) -> Void#>)

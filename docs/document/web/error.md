@@ -33,7 +33,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 200    | WEBIM_DOWNLOADFILE_ERROR                       | 下载文件失败：如超时、网络错误。 | 提示重试。 |
 | 204    | USER_NOT_FOUND                     | 用户不存在，如创建群拉人时不存在的用户报错。  | 检查 userId 是否正确。|
 | 205    | MESSAGE_PARAMETER_ERROR                     | 消息参数错误。如撤回消息时未传消息 ID 或者发送消息时未传消息接收方的用户 ID。|确保消息⾥包含消息 ID 和接收方用户 ID，即 `id` 和 `to`。 |
-| 206    | WEBIM_CONNCTION_USER_LOGIN_ANOTHER_DEVICE      | 用户在其他设备登录：如果没有开启多设备登录，则在其他设备登录会将当前登录的设备踢下线，用户会收到此错误。若开启了多设备登录并配置了支持的设备数量，设备间的互踢策略与 `ConnectionParameters#isFixedDeviceId` 参数有关，详见[多设备文档](multi_device.html)。  | 开启多设备功能，详见 [多设备⽂档](https://doc.easemob.com/document/web/multi_device.html)。 |
+| 206    | WEBIM_CONNCTION_USER_LOGIN_ANOTHER_DEVICE      | 用户在其他设备登录：如果没有开启多设备登录，则在其他设备登录会将当前登录的设备踢下线，用户会收到此错误。若开启了多设备登录并配置了支持的设备数量，设备间的互踢策略与 `ConnectionParameters#isFixedDeviceId` 参数有关，详见[多设备文档](multi_device.html)。  | 开启多设备功能，详见 [多设备⽂档](/document/web/multi_device.html)。 |
 | 207    | WEBIM_CONNCTION_USER_REMOVED                   | 用户已经被注销：如果登录用户的 ID 被管理员从管理后台删除则会收到此错误。 | 提示⽤户被注销。|
 | 208    | WEBIM_USER_ALREADY_LOGIN | 已经登录，又重复登录。 | 不能重复登录。 |
 | 216    | WEBIM_CONNCTION_USER_KICKED_BY_CHANGE_PASSWORD | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 |提示密码已经修改，请重新登录。|
@@ -59,7 +59,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 604    | WEBIM_LOAD_MSG_ERROR                           | 消息回调函数内部错误。 | 消息解析失败，确保消息格式正确。| 
 | 605    | GROUP_NOT_EXIST                                | 群组不存在：发送消息时群组 ID 不正确。  | 检查群组或聊天室 ID 是否正确。| 
 | 606    | GROUP_MEMBERS_FULL                             | 群组已满：群组成员数量已达到创建群组时设置的最大人数。  | 提示群组⼈数已达上限。| 
-| 607    | GROUP_MEMBERS_LIMIT    | 创建群组时设置的群成员最大数量超过 IM 套餐包中的上限。各版本的即时通讯套餐包支持的群组成员最大数量，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 | 按照套餐限制⼈数上限。 |
+| 607    | GROUP_MEMBERS_LIMIT    | 创建群组时设置的群成员最大数量超过 IM 套餐包中的上限。各版本的即时通讯套餐包支持的群组成员最大数量。 | 按照套餐限制⼈数上限。 |
 | 609    | GROUP_MEMBER_ATTRIBUTES_SET_FAILED    | 群成员属性设置失败。 | 提示设置失败，请重试。|
 | 700    | REST_PARAMS_STATUS                             | 用户 token 或 App Key 不存在或不正确导致 API 调用失败。 | 正确设置 App Key。 |
 | 702    | CHATROOM_NOT_JOINED                             | 被操作的人员不在聊天室。  | 提示该⽤户不在当前聊天室。 |

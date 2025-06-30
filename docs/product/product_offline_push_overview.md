@@ -73,14 +73,14 @@
 
 ### 使用推送模板
 
-设置推送模板为推送的高级功能，使用前需要在[环信即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。
+设置推送模板为推送的高级功能，使用前需要在环信即时通讯控制台的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。
 
 推送模板主要用于服务器提供的默认配置不满足你的需求时，可使你设置全局范围的推送标题和推送内容。例如，服务器提供的默认设置为中文和英文的推送标题和内容，你若需要使用韩语或日语的推送标题和内容，则可以设置对应语言的推送模板。推送模板包括默认推送模板 `default` 和自定义推送模板。对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。
 
 你可以通过以下两种方式设置：
 
 - [调用 REST API 配置](/document/server-side/push.html#使用推送模板)。
-- 在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](/product/enable_and_configure_IM.html#配置推送模板)。
+- 在环信即时通讯云控制台设置推送模板。
 
 使用推送模板有以下优势：
 
@@ -102,13 +102,6 @@
 
 关于这些设置方式的使用和设置优先级，详见具体文档，例如，对于 Android，可参见[设置通知的显示内容](/document/android/push/push_display.html)。
 
-## 推送翻译
-
-推送通知与[翻译功能](/document/android/message_translation.html)协同工作。如果用户启用自动翻译功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
-
-作为接收方，你可以设置你在离线时希望接收的推送通知的首选语言。如果翻译消息的语言符合你的设置，则翻译消息显示在推送通知中；否则，将显示原始消息。翻译功能由 Microsoft Azure Translation API 提供，你可以点击[这里](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)了解支持的翻译语言。
-
-关于如何设置和获取推送通知的首选语言，详见相应文档，例如，对于 Android，可参见[设置推送翻译文档](/document/android/push/push_translation.html)。
 
 ## 推送扩展
 

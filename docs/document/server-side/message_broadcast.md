@@ -2,6 +2,45 @@
 
 即时通讯 IM 支持向 app 所有用户或在线用户发送全局广播消息以及对 app 下所有的活跃聊天室发送全局广播消息。**该功能默认关闭，使用前需联系环信商务开通。**
 
+
+## 前提条件
+
+要调用环信即时通讯 REST API，请确保满足以下要求：
+
+- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+<!-- - 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。 -->
+
+## 公共参数 
+
+### 请求参数
+
+| 参数       | 类型   | 是否必需 | 描述        |
+| :--------- | :----- | :------- | :----------------------- |
+| `host`     | String | 是       | 访问 RESTful API 的域名或服务器信息。<br/>-公有云集成为 环信即时通讯控制台的 `即时通讯->服务概览`页面下的 `域名配置- Rest Api`。 <br/> -私有化集成为部署后 `服务器地址:端口`。  |
+| `org_name` | String | 是       | 每个公司（组织）分配的唯一标识。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Orgname`。  |
+| `app_name` | String | 是       | 创建应用时填入的应用名称。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Appname`。  |
+
+### 响应参数
+
+| 参数              | 类型   | 描述          |
+| :---------------- | :----- | :------------------------------- |
+| `action`          | String | 请求方法。                                                                     |
+| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
+| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
+| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
+| `uri`             | String | 请求 URL。                                                                     |
+| `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
+| `timestamp`       | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                          |
+| `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。                                     |
+
+## 认证方式
+
+环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+
+`Authorization: Bearer YourAppToken`
+
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+
 ## 向 app 所有用户发送广播消息
 
 #### 功能说明
@@ -20,6 +59,8 @@
 1. 每 30 分钟限 1 次，不支持上调。超限上报 429 错误，即 “This request has reached api limit”。
 2. 每天限 3 次，支持联系商务上调。超限上报 403 错误，即 “broadcast message limit exceeded”。
 3. 每秒最多可向 1000 个用户发消息，不支持上调。
+
+
    
 #### HTTP 请求
 
