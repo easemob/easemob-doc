@@ -1,16 +1,18 @@
 # 环信即时通讯 IM iOS Demo 
 
-环信即时通讯 IM iOS Demo 提供用户登录、单聊、群组、子区、消息(文字、表情、语音、视频、图片、文件等)发送及管理、会话管理、好友管理、用户属性、用户在线状态（Presence）以及实时音视频通话等功能。
+环信即时通讯 IM iOS Demo 提供用户登录、单聊、群组、子区、消息(文字、表情、语音、视频、图片、文件等)发送及管理、会话管理、好友管理、用户属性、用户在线状态（Presence）等功能。
 
 ## 体验 Demo 
 
 环信即时通讯 IM iOS 端提供示例应用可供体验。
 
-1. [下载 Demo](https://www.easemob.com/download/demo)。
-2. 输入你的手机号，获取验证码，然后输入。
-3. 选择同意《环信服务条款》与《环信隐私协议》，然后点击 **登录** 登录 Demo。
+1. [下载 Demo](https://apps.apple.com/cn/app/%E7%8E%AF%E4%BF%A1/id1533573258)。
+2. 多次点击版本号，选择**开启开发者模式**，点击**服务器配置**，设置私有化服务器连接信息。
+3. 选择同意《环信服务条款》与《环信隐私协议》，填写用户名和密码，然后点击 **登录** 登录 Demo。
 
-![img](/images/demo/ios_login.png =350x650)
+![img](/images/privitization/deploy_mode.png =250x530)
+![img](/images//privitization/deploy_android_load.jpg =250x530)
+![img](/images/privitization/deploy_ios_custom_server.jpg =250x530)
 
 下面为部分 UI 界面的展示：
 
@@ -33,7 +35,7 @@
 
 1. [创建应用](/product/enable_and_configure_IM.html)。 
 2. [获取应用的 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
-3. [创建用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+3. [创建用户](/product/enable_and_configure_IM.html#用户管理)。
 4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-ios)。
 5. 下载完毕，打开 `EaseChatDemo` 目录，运行 `pod install`。
 6. 打开 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件，修改文件中的占位符，`AppKey` 填入步骤 2 获取的 App Key，`ServerHost` 和 `CallKitAppId` 可以填入空字符串。
@@ -49,7 +51,7 @@ App Server 为 Demo 提供以下功能：
 - 通过手机号获取验证码。
 - 通过手机号和验证码返回环信用户 ID 和环信用户 Token。
 - 上传头像并返回地址。
-- 根据用户的信息生成 [EaseCallKit](https://doc.easemob.com/document/ios/easecallkit.html) 登录所需的 Token。
+- 根据用户的信息生成 [EaseCallKit](/document/ios/easecallkit.html) 登录所需的 Token。
 - 获取音视频通话时环信用户 ID 和 Agora UID 的映射关系。
 
 你通过以下步骤部署 App Server：

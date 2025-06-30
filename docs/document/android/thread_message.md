@@ -4,8 +4,6 @@
 
 子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThreadMessage` 标记。本文介绍环信即时通讯 IM Android SDK 如何发送、接收以及撤回子区消息。
 
-使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
-
 ## 技术原理
 
 环信即时通讯 IM Android SDK 提供 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html)、[EMMessage](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message.html) 和 [EMChatThread](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_thread.html) 类，用于管理子区消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取子区消息。
@@ -25,7 +23,7 @@
 - 已集成环信 IM 3.9.3 或以上版本的基本功能，账户登录成功。
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+
 
 ## 实现方法
 

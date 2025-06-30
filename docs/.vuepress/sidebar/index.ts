@@ -28,13 +28,8 @@ export const zhSidebar = sidebar({
       children: [
         { text: "产品概述", link: "introduction.html" },
         { text: "应用场景", link: "application_scenario.html" },
-        { text: "功能介绍", 
-            collapsible: true,
-            children: [
-              { text: "功能列表", link: "product_function.html" },
-              { text: "功能详情", link: "conversation_function.html" },
-            ],
-          },
+        { text: "服务部署", link: "product_deploy.html" },
+        { text: "功能介绍",  link: "product_function.html" },
         { text: "账号系统", 
           collapsible: true,
           children: [
@@ -68,30 +63,29 @@ export const zhSidebar = sidebar({
           ],
         },
         { text: "聊天室", link: "product_chatroom_overview.html" },
-        { text: "内容审核", link: "moderation/moderation_overview.html" },
-        { text: "使用限制", 
-          collapsible: true,
-          children: [
-            { text: "功能限制", link: "limitation.html" },
-            { text: "RESTful 接口频率限制", link: "limitationapi.html" },
-          ],
-        },
-        { text: "数据中心", 
-          collapsible: true,
-          children: [
-            { text: "数据中心", link: "data_center.html" },
-          ], 
-        },
+        { text: "使用限制", link: "limitation.html" },
+        //   collapsible: true,
+        //   children: [
+        //     { text: "功能限制", link: "limitation.html" },
+        //     { text: "RESTful 接口频率限制", link: "limitationapi.html" },
+        //   ],
+        // },
+        // { text: "数据中心", 
+        //   collapsible: true,
+        //   children: [
+        //     { text: "数据中心", link: "data_center.html" },
+        //   ], 
+        // },
       ],
     },
-    { text: "购买指南", 
-      collapsible: true,
-      children: [
-        { text: "计费策略", link: "pricing_policy.html"},
-        { text: "套餐包功能对比", link: "product_package_feature.html"},
-        { text: "购买指引", link: "pricing_method.html" },
-      ],
-    }, 
+    // { text: "购买指南", 
+    //   collapsible: true,
+    //   children: [
+    //     { text: "计费策略", link: "pricing_policy.html"},
+    //     { text: "套餐包功能对比", link: "product_package_feature.html"},
+    //     { text: "购买指引", link: "pricing_method.html" },
+    //   ],
+    // }, 
     // {
     //   text: "Demo",
     //   collapsible: true,
@@ -103,79 +97,79 @@ export const zhSidebar = sidebar({
       text: "增值服务",
       collapsible: true,
       children: [
-       {
-      text: "消息翻译",
-      collapsible: true,
-      children: [
-        { text: "Android", link: "/document/android/message_translation.html" },
-        { text: "iOS", link: "/document/ios/message_translation.html" },
-        { text: "Web", link: "/document/web/message_translation.html" },
-        { text: "小程序", link: "/document/applet/message_translation.html" },
-        { text: "Flutter", link: "/document/flutter/message_translation.html" },
-        { text: "React Native", link: "/document/react-native/message_translation.html" },
-        { text: "Unity", link: "/document/unity/message_translation.html" },
-        { text: "Windows", link: "/document/windows/message_translation.html" },
-      ],
-    }, 
-      { text: "内容审核",
-      collapsible: true,
-      children: [
-        {
-          text: "产品简介",
-          collapsible: true,
-          children: [
-            { text: "产品概述", link: "moderation/moderation_overview.html" },
-          ],
-        },
-        {
-          text: "产品定价",
-          collapsible: true,
-          children: [
-            {
-              text: "国内计费说明",
-              link: "moderation/moderation_billing_domestic.html",
-            },
-            {
-              text: "海外计费说明",
-              link: "moderation/moderation_billing_overseas.html",
-            },
-          ],
-        },
-        {
-          text: "快速开始",
-          collapsible: true,
-          children: [
-            { text: "开通审核服务", link: "moderation/moderation_enable.html" },
-            {
-              text: "规则配置",
-              link: "moderation/moderation_rule_config.html",
-            },
-            { text: "规则测试", link: "moderation/moderation_rule_test.html" },
-            { text: "历史记录", link: "moderation/moderation_history.html" },
-            { text: "关键词审核", link: "moderation/keyword_review.html" },
-            {
-              text: "消息审核机制",
-              link: "moderation/moderation_mechanism.html",
-            },
-          ],
-        },
-        {
-          text: "进阶功能",
-          collapsible: true,
-          children: [
-            {
-              text: "审核记录回调",
-              link: "moderation/moderation_record_callback.html",
-            },
-            {
-              text: "消息人工审核",
-              link: "moderation/moderation_manual_review.html",
-            },
-            { text: "用户管理", link: "moderation/moderation_usermgmt.html" },
-          ],
-        },
-      ],
-    },
+    //    {
+    //   text: "消息翻译",
+    //   collapsible: true,
+    //   children: [
+    //     { text: "Android", link: "/document/android/message_translation.html" },
+    //     { text: "iOS", link: "/document/ios/message_translation.html" },
+    //     { text: "Web", link: "/document/web/message_translation.html" },
+    //     { text: "小程序", link: "/document/applet/message_translation.html" },
+    //     { text: "Flutter", link: "/document/flutter/message_translation.html" },
+    //     { text: "React Native", link: "/document/react-native/message_translation.html" },
+    //     { text: "Unity", link: "/document/unity/message_translation.html" },
+    //     { text: "Windows", link: "/document/windows/message_translation.html" },
+    //   ],
+    // }, 
+    //   { text: "内容审核",
+    //   collapsible: true,
+    //   children: [
+    //     {
+    //       text: "产品简介",
+    //       collapsible: true,
+    //       children: [
+    //         { text: "产品概述", link: "moderation/moderation_overview.html" },
+    //       ],
+    //     },
+    //     {
+    //       text: "产品定价",
+    //       collapsible: true,
+    //       children: [
+    //         {
+    //           text: "国内计费说明",
+    //           link: "moderation/moderation_billing_domestic.html",
+    //         },
+    //         {
+    //           text: "海外计费说明",
+    //           link: "moderation/moderation_billing_overseas.html",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       text: "快速开始",
+    //       collapsible: true,
+    //       children: [
+    //         { text: "开通审核服务", link: "moderation/moderation_enable.html" },
+    //         {
+    //           text: "规则配置",
+    //           link: "moderation/moderation_rule_config.html",
+    //         },
+    //         { text: "规则测试", link: "moderation/moderation_rule_test.html" },
+    //         { text: "历史记录", link: "moderation/moderation_history.html" },
+    //         { text: "关键词审核", link: "moderation/keyword_review.html" },
+    //         {
+    //           text: "消息审核机制",
+    //           link: "moderation/moderation_mechanism.html",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       text: "进阶功能",
+    //       collapsible: true,
+    //       children: [
+    //         {
+    //           text: "审核记录回调",
+    //           link: "moderation/moderation_record_callback.html",
+    //         },
+    //         {
+    //           text: "消息人工审核",
+    //           link: "moderation/moderation_manual_review.html",
+    //         },
+    //         { text: "用户管理", link: "moderation/moderation_usermgmt.html" },
+    //       ],
+    //     },
+    //   ],
+    // },
         {
          text: "回调",
          collapsible: true,
@@ -186,181 +180,8 @@ export const zhSidebar = sidebar({
         { text: "发送后回调事件", link: "/document/server-side/callback_login_logout.html" },
          ],
       }, 
-      { text: "质量监控", link: "/product/request_quality_overview.html" },
+      // { text: "质量监控", link: "/product/request_quality_overview.html" },
      ],
-    },
-    {
-      text: "场景方案",
-      collapsible: true,
-      children: [
-        {
-          text: "环信 AIGC",
-          collapsible: true,
-          children: [
-            { text: "方案介绍", link: "aigc/aigc_scenario_introduction.html" },
-            { text: "方案选择", link: "aigc/aigc_selection.html" },
-
-            { 
-              text: "方案一",
-              collapsible: false,
-              children: [
-                { text: "服务端配置", link: "aigc/aigc_run_through_demo_server.html" },
-                { text: "客户端配置", link: "aigc/aigc_run_through_demo_client.html" },
-              ], 
-            }, 
-            { 
-              text: "方案二",
-              collapsible: false,
-              children: [
-                { text: "使用 AI 智能功能", link: "aigc/aigc_use.html" },
-                { text: "REST API", link: "aigc/aigc_rest_api.html" },
-                ], 
-            }, 
-          ], 
-        },   
-        {
-          text: "超级社区",
-          collapsible: true,
-          children: [
-            { text: "产品概述", link: "circle/circle_overview.html" },
-            {
-              text: "快速开始",
-              collapsible: false,
-              children: [
-                {
-                  text: "Android 快速开始",
-                  link: "circle/circle_quickstart_android.html",
-                },
-                {
-                  text: "iOS 快速开始",
-                  link: "circle/circle_quickstart_ios.html",
-                },
-                {
-                  text: "Web 快速开始",
-                  link: "circle/circle_quickstart_web.html",
-                },
-              ],
-            },
-            {
-              text: "集成说明",
-              collapsible: false,
-              children: [
-                {
-                  text: "Android 社区管理",
-                  link: "circle/server_mgmt_android.html",
-                },
-                {
-                  text: "Android 频道管理",
-                  link: "circle/channel_mgmt_android.html",
-                },
-                {
-                  text: "Android 频道分组管理",
-                  link: "circle/category_mgmt_android.html",
-                },
-                { text: "iOS 社区管理", link: "circle/server_mgmt_ios.html" },
-                { text: "iOS 频道管理", link: "circle/channel_mgmt_ios.html" },
-                {
-                  text: "iOS 频道分组管理",
-                  link: "circle/category_mgmt_ios.html",
-                },
-                { text: "Web 社区管理", link: "circle/server_mgmt_web.html" },
-                { text: "Web 频道管理", link: "circle/channel_mgmt_web.html" },
-                {
-                  text: "Web 频道分组管理",
-                  link: "circle/category_mgmt_web.html",
-                },
-              ],
-            },
-            {
-              text: "错误码",
-              collapsible: false,
-              children: [
-                {
-                  text: "Android 错误码",
-                  link: "circle/circle_errorcode_android.html",
-                },
-                {
-                  text: "iOS 错误码",
-                  link: "circle/circle_errorcode_ios.html",
-                },
-                {
-                  text: "Web 错误码",
-                  link: "circle/circle_errorcode_web.html",
-                },
-              ],
-            },
-            {
-              text: "API 参考",
-              collapsible: true,
-              children: [
-                { text: "REST 社区管理", link: "circle/server_mgmt_rest.html" },
-                {
-                  text: "REST 频道管理",
-                  link: "circle/channel_mgmt_rest.html",
-                },
-                {
-                  text: "REST 频道分组管理",
-                  link: "circle/category_mgmt_rest.html",
-                },
-                {
-                  text: "Android API 参考",
-                  link: "circle/api_reference_android.html",
-                },
-                { text: "iOS API 参考", link: "circle/api_reference_ios.html" },
-                { text: "Web API 参考", link: "circle/api_reference_web.html" },
-              ],
-            },
-          ],
-        },
-        {
-          text: "语聊房",
-          collapsible: true,
-          children: [
-            {
-              text: "场景概览",
-              collapsible: false,
-              children: [
-                {
-                  text: "场景介绍",
-                  link: "voiceroom/demo_scenario_introduction.html",
-                },
-                {
-                  text: "Demo 体验（Android/iOS）",
-                  link: "voiceroom/demo_experience.html",
-                },
-              ],
-            },
-            {
-              text: "快速开始",
-              collapsible: false,
-              children: [
-                {
-                  text: "跑通示例项目（Android）",
-                  link: "voiceroom/run_through_demo_android.html",
-                },
-                {
-                  text: "跑通示例项目（iOS）",
-                  link: "voiceroom/run_through_demo_ios.html",
-                },
-              ],
-            },
-            {
-              text: "实现流程",
-              collapsible: false,
-              children: [
-                {
-                  text: "客户端实现（Android）",
-                  link: "voiceroom/client_implementation_android.html",
-                },
-                {
-                  text: "客户端实现（iOS）",
-                  link: "voiceroom/client_implementation_ios.html",
-                },
-              ],
-            },
-          ],
-        },
-      ],
     },
     {
       text: "常见方案",
@@ -373,46 +194,12 @@ export const zhSidebar = sidebar({
       ],
     },
     {
-      text: "插件",
-      collapsible: true,
-      children: [
-      {
-      text: 'AI 会话摘要助手',
-      collapsible: true,
-      children: [
-        { text: '效果展示及开通', link: 'plug-in/conversation_summary_enable.html' },
-        { text: '集成指南', 
-          collapsible: true,
-          children: [
-            { text: "RESTful API", link: "plug-in/conversation_summary_restful.html" },
-          ],  
-        },
-      ], 
-    },
-    ], 
-    },
-    {
       text: "帮助中心",
-      collapsible: true,
-      children: [
-      {
-      text: "FAQ",
       collapsible: true,
       children: [
         { text: "FAQ 质量", link: "faq_quality_issues.html" },
         { text: "FAQ 集成", link: "faq_integration_issues.html" },
         ],
-      },
-      { text: "联系我们", link: "help.html" },
-     ],
-    },
-    {
-      text: "安全",
-      collapsible: true,
-      children: [
-        { text: "安全最佳实践", link: "security_best_practices.html" },
-        { text: "GDPR 安全合规", link: "GDPR.html" },
-      ],
     },
     {
       text: "Console 指南",
@@ -420,7 +207,6 @@ export const zhSidebar = sidebar({
       children: [
         { text: "开通和配置服务", link: "enable_and_configure_IM.html" },
         { text: "消息量统计", link: "message_statistics.html" },
-        { text: "请求质量概览", link: "request_quality_overview.html" },
       ],
     },
     { text: "术语表", 

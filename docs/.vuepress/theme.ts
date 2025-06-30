@@ -11,7 +11,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   home: '/',
   iconAssets: 'iconfont',
   logo: '/logo.png',
-  repo: 'easemob/easemob-doc',
+  //repo: 'easemob/easemob-doc',
   docsBranch: 'doc-v2',
   docsDir: 'docs',
   darkmode: 'disable',

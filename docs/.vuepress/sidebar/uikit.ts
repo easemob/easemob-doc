@@ -198,34 +198,34 @@ const chatUikitSidebar = [
     children: [{ text: "更新日志", link: "releasenote.html" }],
     except: ["uniapp"],
   },
-  {
-    text: "历史文档",
-    collapsible: true,
-    children: [
-      { text: "历史文档", link: "ui_historic.html", only: ["android", "ios"] },
-      {
-        text: "UIKit 介绍",
-        link: "ui_overview.html",
-        except: ["android", "ios"],
-      },
-      {
-        text: "快速开始",
-        link: "ui_quickstart.html",
-        except: ["android", "ios"],
-      },
-      {
-        text: "集成聊天页面",
-        link: "ui_chat.html",
-        except: ["android", "ios"],
-      },
-      {
-        text: "集成会话列表页面",
-        link: "ui_conversation.html",
-        except: ["android", "ios"],
-      },
-    ],
-    only: ["android", "react-native", "flutter", "ios"],
-  },
+  // {
+  //   text: "历史文档",
+  //   collapsible: true,
+  //   children: [
+  //    { text: "历史文档", link: "ui_historic.html", only: ["android", "ios"] },
+  //     {
+  //       text: "UIKit 介绍",
+  //       link: "ui_overview.html",
+  //       except: ["android", "ios"],
+  //     },
+  //     {
+  //       text: "快速开始",
+  //       link: "ui_quickstart.html",
+  //       except: ["android", "ios"],
+  //     },
+  //     {
+  //       text: "集成聊天页面",
+  //       link: "ui_chat.html",
+  //       except: ["android", "ios"],
+  //     },
+  //     {
+  //       text: "集成会话列表页面",
+  //       link: "ui_conversation.html",
+  //       except: ["android", "ios"],
+  //     },
+  //   ],
+  //   only: ["android", "react-native", "flutter", "ios"],
+  // },
   {
     text: "产品介绍",
     collapsible: true,

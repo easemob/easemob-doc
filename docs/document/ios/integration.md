@@ -37,7 +37,7 @@
 
 ### 方法二：手动复制 SDK 文件
 
-打开 [SDK 下载页面](https://www.easemob.com/download/im)，获取最新版的环信即时通讯 IM SDK，然后解压。
+打开 [SDK 下载页面](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/HyphenateChat4_15_0.zip)，获取最新版的环信即时通讯 IM SDK，然后解压。
 
 将 SDK 包内的 `HyphenateChat.xcframework` 拖入到你的工程中。
 

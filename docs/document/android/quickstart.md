@@ -16,7 +16,7 @@
 - Android SDK API 等级 21 或以上；
 - Android 5.0 或以上版本的设备；
 - JDK 11 或以上
-- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](/product/enable_and_configure_IM.html)。
 
 ## 准备开发环境
 
@@ -111,7 +111,7 @@ dependencies {
 </manifest>
 ```
 
-关于 App Key 对应的 value 获取，在 [环信控制台](https://console.easemob.com/user/login) 创建应用后，申请 App Key 并进行相关配置。
+关于 App Key 对应的 value 获取，在 [环信即时通讯云控制台](/product/enable_and_configure_IM.html) 创建应用后，申请 App Key 并进行相关配置。
 
 ### 4. 防止代码混淆
 
@@ -169,7 +169,7 @@ EMClient.getInstance().init(context, options);
 ```
 ### 2. 创建账号
 
-1. 在 [环信控制台](https://console.easemob.com/user/login) 首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
+1. 在 见 [环信即时通讯云控制台](/product/enable_and_configure_IM.html) 首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
 
 2. 在环信即时通讯云的左侧导航栏中，选择**应用概览 > 用户认证**。
    

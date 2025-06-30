@@ -18,7 +18,7 @@
 
 环信即时通讯 IM Android SDK 提供一个 [EMUserInfoManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_user_info_manager.html) 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
-- `updateOwnInfo` 设置和修改当前用户自己的属性信息；
+- `updateOwnInfo` 设置和修改当前用户自己所有属性信息；
 - `updateOwnInfoByAttribute` 设置和修改用户信息中的某个属性；
 - `fetchUserInfoByUserId` 获取指定用户的所有用户属性信息；
 - `fetchUserInfoByAttribute` 获取指定环信用户 ID 和指定用户的用户属性。
@@ -145,7 +145,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。
 
-可参考 [示例项目](https://www.easemob.com/download/im) 中的以下类：
+可参考 [示例项目](https://github.com/easemob/easemob-demo-android) 中的以下类：
 
 - `ChatUserCardAdapterDelegate`
 - `ChatUserCardAdapterDelegate`

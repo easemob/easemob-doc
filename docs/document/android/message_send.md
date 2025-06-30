@@ -2,7 +2,7 @@
 
 环信即时通讯 IM Android SDK 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html)、[EMMessage](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_message.html) 和 [EMOptions](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html) 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
 
-- 对于单聊，环信即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要 [开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。
+- 对于单聊，环信即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要 在[环信即时通讯云控制台](/product/enable_and_configure_IM.html#创建应用)的**应用概览** > **应用详情**的**应用设置**区域，开启好友关系检查。
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
 - 关于消息发送控制，详见 [单聊](/product/message_single_chat.html#单聊消息发送控制)、[群组聊天](/product/message_group.html#群组消息发送控制) 和 [聊天室](/product/message_chatroom.html#聊天室消息发送控制) 的 相关文档。
 
@@ -100,7 +100,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 发送 GIF 图片消息的过程如下：
 
 1. 发送方调用 `EMMessage#createGifImageMessage` 方法构造 GIF 图片消息体。
-2. 发送方调用 `EMChatManager#sendMessage` 发送 GIF 图片消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+2. 发送方调用 `EMChatManager#sendMessage` 发送 GIF 图片消息。SDK 会将图片上传至环信服务器，如果私有部署提供oss环境，服务器自动生成图片缩略图。
 
 ```java
 // `imageUri` 为图片本地资源标志符
@@ -114,7 +114,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 ### 发送视频消息
 
 1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
-2. 发送方调用 `EMMessage#createVideoSendMessage` 方法传入视频文件的本地资源标志符、缩略图的本地存储路径、视频时长以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID） 创建视频消息。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `thumbPath` 方法。
+2. 发送方调用 `EMMessage#createVideoSendMessage` 方法传入视频文件的本地资源标志符、缩略图的本地存储路径、视频时长以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID） 创建视频消息。若需要视频缩略图，需要提供oss环境，且需自行获取视频首帧的路径，将该路径传入 `thumbPath` 方法。
 3. 发送方调用 `EMChatManager#sendMessage` 方法发送视频消息。SDK 会将视频文件上传至消息服务器。
 
 ```java
@@ -311,15 +311,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
  EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-### 发送消息前的内容审核
 
-- 内容审核关注消息 body
-
-[内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
-
-- 设置发送方收到内容审核替换后的内容
-
-若初始化时打开了 `EMOptions#setUseReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
 
 
 

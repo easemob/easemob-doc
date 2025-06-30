@@ -2,7 +2,7 @@
 
 <Toc />
 
-## 版本 V4.15.1 Dev 2025-6-23（开发版）
+<!-- ## 版本 V4.15.1 Dev 2025-6-23（开发版）
 
 ### 新增特性 
 
@@ -13,7 +13,7 @@
 
 1. 修复当修改文本和自定义消息之外的消息时，`EMMessageListener#onMessageContentChanged` 回调中不返回修改的信息的问题。
 2. 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息时（`EMFetchMessageOption#setIsSave` 设置为 `false`）时，也会生成新的本地会话的问题。   
-3. 修复部分场景下 [发送 GIF 图片消息](message_send.html#发送-gif-图片消息) 失败的问题。
+3. 修复部分场景下 [发送 GIF 图片消息](message_send.html#发送-gif-图片消息) 失败的问题。 -->
 
 ## 版本 V4.15.0 Dev 2025-5-21（开发版）
 
@@ -68,7 +68,7 @@
 
 ### 修复
 
-[IM SDK] 调用 [EMChatManager#asyncFetchConversationsFromServer](conversation_list.html#从服务器分页获取会话列表) 方法从服务端拉取的会话最后一条消息不包含翻译及消息回复 Reaction 的问题。
+[IM SDK] 调用 [EMChatManager#asyncFetchConversationsFromServer](conversation_list.html#从服务器分页获取会话列表) 方法从服务端拉取的会话最后一条消息不包含消息回复 Reaction 的问题。
 
 ## 版本 V4.12.0 Dev 2025-1-10（开发版）
 
@@ -241,7 +241,7 @@
 
 更改混淆规则。
 
-## 版本 V4.7.0 Dev 2024-06-05（开发版）
+## 版本 V4.7.0 Dev 2024-06-05
 
 ### 新增特性
 
@@ -342,7 +342,6 @@
 
 - [IM SDK] 新增 [EMChatManager#asyncDeleteAllMsgsAndConversations](message_delete.html#清空聊天记录)方法，用于清空当前用户的聊天记录，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
 - [IM SDK] 新增 [EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)](message_search.html#根据搜索范围搜索所有会话中的消息) 和 [EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)](message_search.html#根据搜索范围搜索当前会话中的消息)，可以在根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
-- [IM SDK] 新增 [EMOptions#setUseReplacedMessageContents](message_send.html#发送消息前的内容审核) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
 - [IM SDK] 新增 [EMOptions#setIncludeSendMessageInMessageListener](message_receive.html#接收文本消息) 开关。开启后，在 `EMMessageListener#onMessageReceived` 回调里增加发送成功的消息。
 - [IM SDK] 新增 [EMOptions#setRegardImportedMsgAsRead](message_retrieve.html#从服务器获取指定会话的消息) 开关。开启后，[利用服务端接口](/document/server-side/message_import.html)导入的消息，客户端上通过[漫游拉取](message_retrieve.html#从服务器获取指定会话的消息)到后，这些消息为已读状态，会话中未读取的消息数量，即 `EMConversation#getUnreadMsgCount` 的返回值不发生变化。若该开关为关闭状态，`EMConversation#getUnreadMsgCount` 的返回值会增加。
 
@@ -695,7 +694,7 @@
 ### 新增特性:
 
 - [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应；
-- [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核。
+
 
 ### 优化：
 
@@ -767,7 +766,6 @@
 
 ### 新增
 
-- [IM SDK] 增加翻译功能 API；
 - [IM SDK] 位置消息增加建筑物名称字段；
 - [IM SDK] 增加按照时间删除消息的 API；
 - [IM SDK] 增加获取会话中消息总数的 API；

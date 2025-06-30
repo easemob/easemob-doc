@@ -84,7 +84,7 @@ features.chat.message.edit = false;
 features.chat.message.reply = false;
 ```
 
-## 消息翻译
+<!-- ## 消息翻译
 
 消息翻译是指用户可以将一条消息翻译成其他语言。消息翻译可以帮助使用不同语言的用户进行沟通。
 
@@ -110,7 +110,7 @@ features.chat.message.translate = false;
 
 如果未设置翻译的目标语言，则默认使用中文。
 
-更多翻译目标语言，请参考 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
+更多翻译目标语言，请参考 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。 -->
 
 ## 表情回复
 
@@ -126,7 +126,7 @@ features.chat.message.translate = false;
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在 **环信即时通信控制台** 上已开通该功能。
 
 表情回复特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -148,7 +148,7 @@ features.chat.message.reaction = false;
 
 #### 如何使用
 
-1. 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+1. 使用该特性前，请确保在 **环信即时通信控制台** 上已开通该功能。
 
 消息话题特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 

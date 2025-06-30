@@ -21,7 +21,7 @@
 ```kotlin
 implementation("io.hyphenate:ease-chat-kit:4.11.1")
 ```
-若要查看最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
+若要查看最新版本号，请点击[这里](releasenote)。
 
 ### 本地依赖
 

@@ -9,7 +9,7 @@
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+
 
 ## 认证方式
 
@@ -25,9 +25,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
 | :--------- | :----- | :------- | :------------------------------------ |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 访问 RESTful API 的域名或服务器信息。<br/>-公有云集成为 环信即时通讯控制台的 `即时通讯->服务概览`页面下的 `域名配置- Rest Api`。 <br/> -私有化集成为部署后 `服务器地址:端口`。  |
+| `org_name` | String | 是       | 每个公司（组织）分配的唯一标识。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Orgname`。  |
+| `app_name` | String | 是       | 创建应用时填入的应用名称。详见 环信即时通讯控制台的 `应用概览->应用详情`页面下的 `应用信息-Appname`。  |
 | `username` | String | 是       | 用户 ID。     |
 
 ### 响应参数
@@ -57,7 +57,6 @@
 
 - 添加一个好友，好友必须是与当前用户在一个 App Key 下的用户。
 - 该接口为双向添加好友，即添加好友后，双方分别会出现在对方的好友列表上。
-- 对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 100，不同服务版本的 App Key 的该数量上限不同，具体可参考 [IM 套餐包功能详情](/product/product_package_feature.html)。
 - 调用该接口会触发添加好友的发送后回调事件，详见[回调事件文档](callback_contact.html#添加好友)。
 
 **调用频率上限**：100 次/秒/App Key
@@ -541,7 +540,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/user1/contacts/users' \
 ### 功能描述
 
 - 支持批量导入好友，一次最多可导入 10 个。
-- 请确保导入好友列表后，用户的好友数未超过数量上限。若导入好友的过程中已达上限，响应中会返回导入失败的好友的用户 ID。单个用户的好友数上限与你购买的套餐包相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+- 请确保导入好友列表后，用户的好友数未超过数量上限。若导入好友的过程中已达上限，响应中会返回导入失败的好友的用户 ID。单个用户的好友数上限与你购买的套餐包相关。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -603,7 +602,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/contacts/import
 | 异常类型 |  HTTP 状态码  | 错误信息     | 错误描述    |
 | :-------- | :----- | :------ |:----- |
 | `illegal_argument` | 400  | `request user over flow limit:10.`  | 请求 body 中传入的用户 ID 数量超过了 10。  |
-| `exceed_limit`  | 403   | `Inviter's contact max count.`  | 调用该接口的用户的好友数量已达上限。单个用户的好友数上限与你购买的套餐包相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 |
+| `exceed_limit`  | 403   | `Inviter's contact max count.`  | 调用该接口的用户的好友数量已达上限。单个用户的好友数上限与你购买的套餐包相关。 |
 
 关于其他异常，你可以参考 [错误码](#错误码) 了解可能的原因。
 

@@ -4,20 +4,12 @@ title: 导航页
 heroText: false
 tagline: false
 products:
-  - link: "/product/introduction.html"
-    text: 产品概述
-  - link: "/product/pricing_policy.html"
-    text: 产品价格
-  - link: "/product/product_dynamics.html"
-    text: 产品动态
-  - link: "/document/android/releasenote.html"
-    text: 最新发版
-  - link: "/product/limitation.html"
-    text: 使用限制
-  - link: "https://www.easemob.com/protocol"
-    text: 隐私协议
-  - link: "/product/security_best_practices.html"
-    text: 安全最佳实践
+  # - link: "/product/introduction.html"
+  #   text: 产品概述
+  # - link: "/product/product_dynamics.html"
+  #   text: 产品动态
+  # - link: "/product/limitation.html"
+  #   text: 使用限制
 starter:
   - title: "SDK 快速开始"
     platform:
@@ -48,11 +40,6 @@ starter:
       - icon: /sdk/windows.svg
         link: /document/windows/quickstart.html
         text: Windows
-  - title: "Demo" 
-    platform:
-      - icon: /sdk/demo_list.svg
-        link: "https://doc.easemob.com/product/demo.html"
-        text: Demo 体验 
   - title: "服务端 API"
     platform:
       - icon: /sdk/rest.svg
@@ -586,33 +573,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_pin.html                   
-          - text: 消息审核（举报）
-            desc: 你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在环信即时通讯云控制台展示。你可在环信即时通讯云控制台查看举报记录，并进行相应处理。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/moderation.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/moderation.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/moderation.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/moderation.html
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/moderation.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/moderation.html
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/moderation.html
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/moderation.html
           - text: 消息只投在线
             desc: 只将消息投递给在线用户。若接收方不在线，则无法收到消息。
             sdks:
@@ -1461,24 +1421,6 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatfeature_message.html#消息合并转发
-          - text: 消息翻译
-            desc: 指用户可以将一条消息翻译成其他语言。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_message.html#消息翻译
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_message.html#消息翻译
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_message.html#消息翻译
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_message.html#消息翻译
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_message.html#消息翻译
           - text: 语音消息
             desc: 语音消息指以语音形式发送和接收的消息，可替代文字交流。
             sdks:
@@ -1773,42 +1715,6 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_common.html#未读消息数               
-          - text: 消息举报
-            desc: 当用户发现其他人发布了可能违反聊天室规则或道德准则的消息时，可以举报该消息，促使聊天室所有者采取适当的行动。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomfeature_message.html#消息举报
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomfeature_message.html#消息举报
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomfeature_message.html#消息举报
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomfeature_message.html#消息举报 
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_message.html#消息举报
-          - text: 消息翻译
-            desc: 将聊天室中的单条消息从一种语言转换成另一种语言。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomfeature_message.html#消息翻译
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomfeature_message.html#消息翻译
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomfeature_message.html#消息翻译
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomfeature_message.html#消息翻译 
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_message.html#消息翻译
           - text: 消息撤回
             desc: 在聊天室中撤销已经发送的消息，使其他用户无法再看到该消息。
             sdks:
@@ -1919,100 +1825,6 @@ projects:
                 link: /uikit/chatroomuikit/react-native/roomfeature_member.html#移除成员  
   - title: 增值服务
     features:
-      - title: 消息翻译
-        icon: /feature/uikit.svg
-        contexts:
-          - text: 自动翻译
-            desc: 发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/message_translation.html#设置自动翻译
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/message_translation.html#设置自动翻译
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/message_translation.html#设置自动翻译
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_translation.html#设置自动翻译
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/message_translation.html#设置自动翻译
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/message_translation.html#设置自动翻译
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/message_translation.html#设置自动翻译
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/message_translation.html#设置自动翻译
-          - text: 按需翻译
-            desc: 接收方在收到文本消息后，将消息内容翻译为目标语言。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/message_translation.html#按需翻译
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/message_translation.html#按需翻译
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/message_translation.html#按需翻译
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_translation.html#按需翻译
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/message_translation.html#按需翻译
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/message_translation.html#按需翻译
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/message_translation.html#按需翻译
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/message_translation.html#按需翻译
-          - text: 离线通知翻译
-            desc: 推送通知与翻译功能协同工作。如果用户启用 自动翻译 功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/push/push_translation.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/push/push_translation.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/push/push_translation.html
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/push/push_translation.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/push/push_translation.html
-      - title: 内容审核
-        icon: /feature/api-client.svg
-        contexts:
-          - text: 开通审核服务
-            link: /product/moderation/moderation_enable.html
-          - text: 配置审核规则
-            link: /product/moderation/moderation_rule_config.html
-          - text: 测试审核规则
-            link: /product/moderation/moderation_rule_test.html
-          - text: 查看历史记录
-            link: /product/moderation/moderation_history.html
-          - text: 关键词审核
-            link: /product/moderation/keyword_review.html
-          - text: 消息审核机制
-            link: /product/moderation/moderation_mechanism.html
-          - text: 审核记录回调
-            link: /product/moderation/moderation_record_callback.html
-          - text: 消息人工审核
-            link: /product/moderation/moderation_manual_review.html
       - title: 回调
         icon: /feature/api-server.svg
         contexts:
@@ -2021,50 +1833,7 @@ projects:
           - text: 发送后回调
             link: /document/server-side/callback_postsending.html
           - text: 发送后回调事件
-            link: /document/server-side/callback_login_logout.html
-      - title: 质量监控
-        icon: /feature/api-server.svg
-        contexts:
-          - text: 请求质量
-            link: /product/request_quality_overview.html
-  - title: 场景方案
-    features:
-      - contexts:
-          - text: 环信 AIGC
-            desc: 环信 AIGC 决方案，充分发挥即时通讯的实时性和便利性，同时叠加 AI 的智能化能力，可快速搭建多类低延迟的 AI 实时互动场景，实现了更便捷的开发、更具沉浸感和个性化的用户体验。
-            sdks:
-              - text: 方案介绍
-                link: /product/aigc/aigc_scenario_introduction.html
-              - text: 方案选择
-                link: /product/aigc/aigc_selection.html
-              - text: 方案一
-                link: /product/aigc/aigc_run_through_demo_server.html
-              - text: 方案二
-                link: /product/aigc/aigc_use.html
-          - text: 超级社区
-            desc: 环信超级社区（Circle）是一款基于环信 IM 打造的类 Discord 实时社区应用场景方案，支持社区（Server）、频道（Channel） 和子区（Thread） 三层结构。一个 App 下可以有多个社区，同时支持陌生人/好友单聊。用户可创建和管理自己的社区，在社区中设置和管理频道将一个话题下的子话题进行分区，在频道中根据感兴趣的某条消息发起子区讨论，实现万人实时群聊，满足超大规模用户的顺畅沟通需求。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /product/circle/circle_quickstart_android.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /product/circle/circle_quickstart_ios.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /product/circle/circle_quickstart_web.html
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /product/circle/server_mgmt_rest.html
-          - text: 语聊房
-            desc: 环信语聊房（Easemob Chat Room）场景方案是环信打造的一款低门槛、高可用的语聊房场景方案。该场景方案融合了环信即时通讯云的聊天室和声网 RTC 的音频技术，提供市面主流的语聊房 App 的功能，其核心功能包括房间管理、麦位控制、聊天打赏和音频特效等，覆盖语音游戏、语音社交、相亲交友等场景，能够较为全面满足客户的语聊房开发需求。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /product/voiceroom/demo_scenario_introduction.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /product/voiceroom/demo_scenario_introduction.html          
+            link: /document/server-side/callback_login_logout.html   
   - title: API 参考
     features:
       - title: IM 客户端
@@ -2091,13 +1860,4 @@ projects:
             link: https://easemob.github.io/easemob-im-server-sdk/
           - text: JAVA 2.0
             link: https://github.com/easemob/easemob-im-server-sdk/tree/master_java_2.0/src/test/java/com/easemob/im/api  
-      - title: 超级社区
-        icon: /feature/api-circle.svg
-        contexts:
-          - text: Android
-            link: https://www.easemob.com/apidoc/Android/hyphenate-api-doc/html/annotated.html
-          - text: iOS
-            link: https://www.easemob.com/apidoc/iOS/html_ch/annotated.html
-          - text: Web
-            link: https://www.easemob.com/apidoc/Web/
 ---

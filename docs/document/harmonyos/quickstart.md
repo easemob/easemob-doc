@@ -15,7 +15,8 @@
 
 - DevEco Studio NEXT Release（5.0.3.900）及以上；
 - HarmonyOS SDK API 12 及以上；
-- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](/product/enable_and_configure_IM.html)。
+
 
 ## 准备开发环境
 
@@ -65,7 +66,7 @@
 
 ### 2. 集成 SDK
 
-打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
+打开 [SDK 下载](https://downloadsdk.easemob.com/downloads/HarmonySDK/chatsdk-1.8.0.har)页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
 
 将 SDK 文件，拷贝到 `Harmony` 工程，例如放至 `HelloWorld` 工程下 `entry` 模块下的 `libs` 目录。
 
@@ -131,7 +132,7 @@ ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
 ```
 
 :::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在[环信控制台](https://console.easemob.com/user/login)中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在**环信控制台** 中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
 :::
 
 ### 3. 登录账号

@@ -60,7 +60,7 @@ npm i easemob-websdk@4.11.0 pinyin-pro@3.26.0 mobx@6.13.4 --save
 
 在你的项目的 `App.vue` 文件中引入 `ChatUIKit` 组件，并进行初始化。
 
-要查看服务器域名配置，请点击[这里](https://doc.easemob.com/document/applet/wechat.html#配置服务器域名) 。
+要查看服务器域名配置，请查看私有化环境集成信息 。
 
 ```jsx
 <script lang="ts">
@@ -293,5 +293,5 @@ ChatUIKit.appUserStore.setUserInfo('userId', {
 
 ## 参考文档
 - [UIKit 源码](https://github.com/easemob/easemob-uikit-uniapp)
-- [小程序域名配置](https://doc.easemob.com/document/applet/wechat.html#配置服务器域名)
+- [小程序域名配置](/document/applet/wechat.html#配置服务器域名)
 

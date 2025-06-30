@@ -177,4 +177,4 @@ conn
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中添加更多字段。
 
-可参考 [示例项目](https://github.com/easemob/webim/tree/dev_3.0/demo) 中 src/components/contact/ 下 UserInfoModal 组件。
+<!-- 可参考 [示例项目](https://github.com/easemob/easemob-demo-react/tree/dev_4.0) 中 src/components/contact/ 下 UserInfoModal 组件。 -->

@@ -12,13 +12,13 @@
 
 ## 实现步骤
 
-1. 开通回调服务：在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开通消息回调服务](/product/enable_and_configure_IM.html#开通消息回调)。
-2. 配置发送前回调规则：详见[环信即时通讯云控制台](https://console.easemob.com/user/login)[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
+1. 开通回调服务：在 **环信即时通讯云控制台** [开通消息回调服务](/product/enable_and_configure_IM.html#配置回调规则)。
+2. 配置发送前回调规则：详见 **环信即时通讯云控制台** [规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
 3. 环信服务器向你的应用服务器发送 HTTP/HTTPS POST 请求。
 
 ## 回调规则
 
-要使用发送前回调，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)配置回调规则，详见[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
+要使用发送前回调，你需要在 **环信即时通讯云控制台** 配置回调规则，详见[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
 
 对同一 app，可针对不同消息类型配置不同的规则，也支持通过同一规则选择两种以上消息类型同时回调至一个指定服务器地址。接收到消息后，你可以根据消息类型进行分类处理。
 
@@ -67,7 +67,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `msg`： String 类型，表示消息内容。<br/> - `type`： String 类型，表示消息类型，文本消息为 `txt`。      |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 **环信即时通讯云控制台** [回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 
 ### 请求示例-位置消息
 
@@ -102,7 +102,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `addr`： String 类型，表示位置的地址描述。<br/> - `lat`：Long 类型，表示位置的纬度。 <br/> - `lng`：Long 类型，表示位置的经度。 <br/> - `type`： String 类型，表示消息类型，位置消息类型为 `loc`。      |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见  **环信即时通讯云控制台** [回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 
 ### 请求示例-图片消息
 
@@ -142,7 +142,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `file_length`： Long 类型，表示图片附件大小，单位为字节。<br/> - `filename`： String 类型，表示图片文件名称，包含文件后缀名。 <br/> - `secret`：String 类型，图片文件访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。<br/> - `size`：JSON 格式，表示图片的尺寸。单位为像素。`height` 表示图片高度， `width` 表示图片宽度。<br/> - `type`：String 类型，表示消息类型。图片消息为 `img`。<br/> - `url`：String 类型，表示图片 URL 地址。   |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见  **环信即时通讯云控制台** [回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 
 ### 请求示例-语音消息
 
@@ -179,7 +179,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `file_length`： Long 类型，表示语音附件大小，单位为字节。<br/> - `filename`： String 类型，表示语音文件名称，包含文件后缀名。 <br/> - `length`：Int 类型，表示语音时长。单位为秒。 <br/> - `secret`：String 类型，语音文件访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。 <br/> - `type`：String 类型，表示消息类型。语音消息为 `audio`。<br/> - `url`：String 类型，表示语音文件的 URL 地址。  |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见  **环信即时通讯云控制台** [回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 
 ### 请求示例-视频消息
 
@@ -219,7 +219,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `file_length`： Long 类型，表示视频附件大小。单位为字节。<br/> - `filename`： String 类型，表示视频文件名称，包含文件后缀名。 <br/> - `length`：Int 类型，表示视频时长。单位为秒。 <br/> - `secret`：String 类型，视频文件的访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。 <br/> - `size`：JSON 格式，表示视频缩略图尺寸。单位为像素。`height` 表示视频缩略图的高度，`width` 表示视频缩略图的宽度。<br/> - `thumb`：视频缩略图的 URL 地址，格式为 https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中，`file_uuid` 为视频缩略图上传后，环信服务器返回的缩略图的 UUID。 <br/> - `thumb_secret`：缩略图文件访问密钥。如果文件上传时设置了文件访问限制，则该字段存在。<br/> - `type`：String 类型，表示消息类型。视频消息为 `video`。<br/> - `url`：String 类型，表示视频文件的 URL 地址。  |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见  **环信即时通讯云控制台** [回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 
 ### 请求示例-文件消息
 
@@ -255,7 +255,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `file_length`： Long 类型，表示文件大小。单位为字节。<br/> - `filename`： String 类型，表示文件名称，包含文件后缀名。<br/> - `secret`：String 类型，文件的访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。<br/> - `type`：String 类型，表示消息类型。文件消息为 `file`。<br/> - `url`：String 类型，表示文件的 URL 地址。你可以访问该 URL 下载历史消息文件。 |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 **环信即时通讯云控制台** [回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 
 ### 请求示例-透传消息
 
@@ -288,7 +288,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `action`： String 类型，表示命令内容。<br/> - `type`： String 类型，表示消息类型，透传消息为 `cmd`。      |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 **环信即时通讯云控制台** [回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 
 ### 请求示例-自定义消息
 
@@ -337,7 +337,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `customExts`/`v2:customExts`： Array/JSON 类型，用户自定义的事件属性。该参数为可选，不需要可以不传。`customExts` 为旧版参数，数组类型，最多可包含 16 个元素。`v2:customExts` 为新版参数，Map<String,String> 类型，最多可以包含 16 个元素。推荐使用该新版参数。<br/> - `customEvent`：String 类型，自定义事件类型。<br/> - `type`： String 类型，表示消息类型，自定义消息为 `custom`。      |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见  **环信即时通讯云控制台** [回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 
 ### 请求示例-合并消息
 
@@ -376,7 +376,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `combineLevel`：Int 类型，合并消息的嵌套层级数。<br/> - `file_length`： Int 类型，表示合并消息附件的大小，单位为字节。<br/> - `filename`： String 类型，表示合并消息的附件名称。<br/> - `secret`：String 类型，文件的访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。<br/> - `subType`：String 类型，表示消息类型为合并消息。<br/> - `summary`：String 类型，合并消息的概要。<br/> - `title`：合并消息的标题。<br/> - `url`：String 类型，表示合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。  |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 **环信即时通讯云控制台** [回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 
 ### 响应示例
 

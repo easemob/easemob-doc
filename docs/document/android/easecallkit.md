@@ -14,7 +14,7 @@
 
 ## 跑通 Demo
 
-EaseCallKit 集成在环信开源 IM Demo 中，你可以通过进入 [环信 Demo 及源码](https://www.easemob.com/download/im) 下载页面，选择 Android 端进行下载，直接下载: [Android IM 源码](https://github.com/easemob/chat-android)。
+EaseCallKit 集成在环信开源 IM Demo 中，你可以通过 [Android IM 源码](https://github.com/easemob/easemob-demo-android)直接下载。
 
 环境准备：
 
@@ -203,7 +203,7 @@ public void startInviteMultipleCall(final String[] users,final String ext){}
 
 发起通话后的 UI 界面如下：
 
-![img](/images/android/sendcall.png)
+<img src="/images/android/sendcall.png" width="300px">
 
 ### 被叫收到通话邀请
 
@@ -223,7 +223,7 @@ void onRevivedCall(EaseCallType callType, String userId,String ext){}
 
 收到通话邀请后的界面如下:
 
-![img](/images/android/called.jpeg)
+<img src="/images/android/called.jpeg" width="300px">
 
 ### 多人通话中邀请
 
@@ -357,7 +357,7 @@ CallKit 4.8.2 及更高版本支持私有化部署，包括初始化和初测监
 
 #### 初始化
 
-配置私有化 AgoraAppId。其他可配置的选项，详见本文档中的[初始化](https://doc.easemob.com/document/android/easecallkit.html#初始化)一节。
+配置私有化 AgoraAppId。其他可配置的选项，详见本文档中的[初始化](/document/android/easecallkit.html#初始化)一节。
 
 ```kotlin
 EaseCallKitConfig().apply {
