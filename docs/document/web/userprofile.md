@@ -19,8 +19,8 @@
 
 环信即时通讯 IM Web SDK 支持你通过调用 API 实现如下功能：
 
-- 设置或修改用户属性。
-- 获取指定用户的用户属性。
+- `updateUserInfo` 设置和修改当前用户自己的所有属性或某个属性；
+- `fetchUserInfoById` 获取单个或多个用户的所有用户属性或单个/多个属性；
 
 ## 前提条件
 
@@ -33,13 +33,11 @@
 
 本节介绍如何在项目中设置及获取用户属性。
 
-实现过程中注意单个用户的所有属性的长度不超过 2 KB，单个 app 的所有用户属性的数据长度不超过 10 GB。
+单个用户的所有属性的长度不超过 2 KB，单个 app 的所有用户属性的数据长度不超过 10 GB。
 
-### 设置当前用户的属性
+### 设置当前用户的所有属性
 
-当前用户设置自己的所有属性或者仅设置一项指定属性。
-
-参考如下示例代码，设置所有用户属性：
+当前用户设置自己的所有属性：
 
 ```javascript
 let option = {
@@ -60,15 +58,7 @@ conn.updateUserInfo(option).then((res) => {
 });
 ```
 
-参考如下示例代码，设置指定用户属性，例如昵称：
-
-```javascript
-conn.updateUserInfo("nickname", "Your nickname").then((res) => {
-  console.log(res);
-});
-```
-
-关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
+关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性) 或 [删除用户属性](/document/server-side/userprofile.html#删除用户属性)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
 
 | 字段        | 类型   | 备注                                                                                               |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------- |
@@ -81,11 +71,19 @@ conn.updateUserInfo("nickname", "Your nickname").then((res) => {
 | `birth`     | String | 用户生日。长度在 64 字符内。                                                                       |
 | `ext`       | String | 扩展字段。                                                                                         |
 
-### 获取用户属性
+### 设置当前用户的单个属性
 
-你可以调用 `fetchUserInfoById` 方法查询指定用户的用户属性。每次调用最多可获取 100 个用户的用户属性。
+例如，修改当前用户的昵称：
 
-参考以下示例代码获取指定用户的所有属性：
+```javascript
+conn.updateUserInfo("nickname", "Your nickname").then((res) => {
+  console.log(res);
+});
+```
+
+### 获取用户的所有属性
+
+你可以调用 `fetchUserInfoById` 方法获取指定一个或多个用户的所有用户属性。每次调用最多可获取 100 个用户的用户属性。
 
 ```javascript
 /**
@@ -97,7 +95,9 @@ conn.fetchUserInfoById(users).then((res) => {
 });
 ```
 
-参考以下示例代码获取用户的指定属性。
+### 获取用户的指定属性
+
+用户可以获取单个或多个用户的单个或多个用户属性。
 
 ```javascript
 /**

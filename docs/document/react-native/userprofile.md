@@ -16,9 +16,9 @@
 
 环信即时通讯 IM React Native SDK 提供一个 `ChatUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
-- 设置当前用户的属性
-- 获取用户属性
-- 获取当前用户的属性
+- `updateOwnUserInfo` 设置当前用户的所有属性或某一项属性
+- `fetchOwnInfo` 获取当前用户的属性
+- `fetchUserInfoById` 获取指定一个或多个用户的全部用户属性
 
 ## 前提条件
 
@@ -73,6 +73,20 @@ ChatClient.getInstance()
 | `birth`     | String | 用户生日。长度在 64 字符内。                                 |
 | `ext`       | String | 扩展字段。                                                   |
 
+### 获取当前用户的属性
+
+```typescript
+// 执行获取操作
+ChatClient.getInstance()
+  .userManager.fetchOwnInfo()
+  .then((users) => {
+    console.log("get userInfo success.", users);
+  })
+  .catch((reason) => {
+    console.log("get userInfo fail.", reason);
+  });
+```
+
 ### 获取用户属性
 
 用户可以获取指定一个或多个用户的全部用户属性。
@@ -85,20 +99,6 @@ const userIds = ["tom", "json"];
 // 执行获取操作
 ChatClient.getInstance()
   .userManager.fetchUserInfoById(userIds)
-  .then((users) => {
-    console.log("get userInfo success.", users);
-  })
-  .catch((reason) => {
-    console.log("get userInfo fail.", reason);
-  });
-```
-
-### 获取当前用户的属性
-
-```typescript
-// 执行获取操作
-ChatClient.getInstance()
-  .userManager.fetchOwnInfo()
   .then((users) => {
     console.log("get userInfo success.", users);
   })

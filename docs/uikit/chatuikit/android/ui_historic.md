@@ -103,7 +103,7 @@ EaseIMKit 提供了 EaseConversationListFragment，需要将其或者其子类�
 ![img](/images/android/easeim.jpeg)
 
 :::tip
-要实现自定义头像及昵称，请参考 [设置头像和昵称](/document/android/userprofile.html#设置当前用户的属性)。
+要实现自定义头像及昵称，请参考 [设置头像和昵称](/document/android/userprofile.html#设置当前用户的所有属性)。
 :::
 
 ### 创建聊天界面

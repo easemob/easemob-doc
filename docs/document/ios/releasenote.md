@@ -187,7 +187,7 @@
 
 ### 优化
 
-- [IM SDK] 设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)、[获取单个或多个用户的用户属性](userprofile.html#获取用户属性)和[获取指定用户的指定用户属性](userprofile.html#获取指定用户的指定用户属性)，超过调用频率限制时，会上报错误码 4 `EMErrorExceedServiceLimit`。
+- [IM SDK] 设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的所有属性)、[获取单个或多个用户的用户属性](userprofile.html#获取用户的所有属性)和[获取指定用户的指定用户属性](userprofile.html#获取用户的指定属性)，超过调用频率限制时，会上报错误码 4 `EMErrorExceedServiceLimit`。
 
 ### 修复
 

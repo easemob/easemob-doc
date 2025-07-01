@@ -16,8 +16,8 @@
 
 环信即时通讯 IM HarmonyOS SDK 提供一个 `UserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
-- `updateUserInfo` 设置和修改当前用户自己的属性信息；
-- `fetchUserInfoById` 获取指定用户的属性信息。
+- `updateUserInfo` 设置当前用户的所有属性或单个属性
+- `fetchUserInfoById` 获取指定一个或多个用户的全部用户属性；获取单个用户的单个或多个用户属性。
 
 ## 前提条件
 
@@ -32,12 +32,11 @@
 
 实现过程中注意单个用户的所有属性最大不超过 2 KB，单个 app 所有用户属性数据最大不超过 10 GB。
 
-### 设置当前用户的属性
+### 设置当前用户的所有属性
 
-参考如下示例代码，在你的项目中当前用户设置自己的所有属性或者仅设置某一项属性。
+当前用户设置自己的所有属性：
 
 ```typescript
-// 设置所有用户属性。
 let userInfo: UserInfo = {
   nickname: "easemob",
   avatarUrl: "https://www.easemob.com",
@@ -48,17 +47,6 @@ let userInfo: UserInfo = {
   gender: Gender.MALE
 }
 
-ChatClient.getInstance().userInfoManager()?.updateUserInfo(userInfo).then(result => {
-  // success logic
-}).catch((e: ChatError) => {
-  // failure logic
-});
-
-
-// 以修改用户头像为例，演示如何修改指定用户属性。
-let userInfo: UserInfo = {
-  avatarUrl: "https://xxx/downloads/IMDemo/avatar/Image1.png"
-}
 ChatClient.getInstance().userInfoManager()?.updateUserInfo(userInfo).then(result => {
   // success logic
 }).catch((e: ChatError) => {
@@ -79,7 +67,24 @@ ChatClient.getInstance().userInfoManager()?.updateUserInfo(userInfo).then(result
 | `birth`     | String | 用户生日。长度在 64 字符内。     |
 | `ext`       | String | 扩展字段。   |
 
-### 获取用户属性
+### 设置当前用户的单个属性
+
+例如，修改当前用户的头像：
+
+```typescript
+let userInfo: UserInfo = {
+  avatarUrl: "https://xxx/downloads/IMDemo/avatar/Image1.png"
+}
+ChatClient.getInstance().userInfoManager()?.updateUserInfo(userInfo).then(result => {
+  // success logic
+}).catch((e: ChatError) => {
+  // failure logic
+});
+```
+
+
+
+### 获取用户的所有属性
 
 用户可以从服务端获取指定一个或多个用户的全部用户属性。
 
@@ -96,9 +101,9 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds).then(resu
 });
 ```
 
-### 获取指定用户的指定用户属性
+###  获取用户的指定属性
 
-用户可以从服务端获取指定用户的指定用户属性信息。
+用户可以获取单个用户的单个或多个用户属性。
 
 ```typescript
 let userIds = new Array<string>();
@@ -128,7 +133,7 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds, userTypes
 
 Q：我设置了用户昵称（`nickname`），但调用客户端或 RESTful API 获取用户属性时，未返回用户昵称，原因是什么？
 
-A：你可以调用[客户端](#设置当前用户的属性) 或[RESTful API](/document/server-side/userprofile.html#设置用户属性) 设置用户昵称，例如，调用 `updateUserInfo`，然后通过[客户端](#获取用户属性)或[RESTful API](/document/server-side/userprofile.html#获取用户属性) 获取用户属性，例如 SDK 为 `fetchUserInfoById`。
+A：你可以调用 [客户端](#设置当前用户的所有属性) 或 [RESTful API](/document/server-side/userprofile.html#设置用户属性) 设置用户昵称，例如，调用 `updateUserInfo`，然后通过 [客户端](#获取用户的所有属性) 或 [RESTful API](/document/server-side/userprofile.html#获取用户属性) 获取用户属性，例如 SDK 为 `fetchUserInfoById`。
 
 设置用户昵称时，请注意以下：
 
