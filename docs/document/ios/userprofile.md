@@ -151,7 +151,7 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"convers
 
 Q：我设置了用户昵称（`nickname`），但调用客户端或 RESTful API 获取用户属性时，未返回用户昵称，原因是什么？
 
-A：你可以调用[客户端](#设置当前用户的属性) 或[RESTful API](/document/server-side/userprofile.html#设置用户属性) 设置用户昵称，例如 iOS 为 `updateOwnUserInfo`，然后通过[客户端](#获取指定用户的属性)或[RESTful API](/document/server-side/userprofile.html#获取指定用户的属性) 获取用户属性，例如 iOS 为 `fetchUserInfoById`。
+A：你可以调用[客户端](#设置当前用户的所有属性) 或[RESTful API](/document/server-side/userprofile.html#设置用户属性) 设置用户昵称，例如 iOS 为 `updateOwnUserInfo`，然后通过[客户端](#获取用户的所有属性)或[RESTful API](/document/server-side/userprofile.html#获取用户属性) 获取用户属性，例如 iOS 为 `fetchUserInfoById`。
 
 设置用户昵称时，请注意以下两点：
 
