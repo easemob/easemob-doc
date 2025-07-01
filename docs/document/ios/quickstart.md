@@ -89,11 +89,11 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 ## 5. 登录账号
 
-利用创建的用户名和密码登录环信 IM。
+利用创建的用户名和token登录环信 IM。
 
 ```objectivec
 [[EMClient sharedClient] loginWithUsername:@"username"
-                                     password:@"your password"
+                                     token:@"your token"
                                    completion:^(NSString *aUsername, EMError *aError) {
 
 }];
