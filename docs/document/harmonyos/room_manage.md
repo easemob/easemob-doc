@@ -35,7 +35,7 @@
 
 ### 创建聊天室
 
-建议直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
+建议直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)。
 
 ### 加入聊天室
 
