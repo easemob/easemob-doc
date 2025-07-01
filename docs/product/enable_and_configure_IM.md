@@ -407,7 +407,7 @@
 
 2. 在 **聊天室管理** 页面，点击 **创建聊天室**，在弹出的对话框中设置聊天室名称、描述、超级管理员和普通管理员的用户 ID 以及最大成员数，然后点击 **保存**。
 
-   各参数的设置要求，详见[创建聊天室 RESTful API](/document/server-side/chatroom.html#创建聊天室)。
+   各参数的设置要求，详见[创建聊天室 RESTful API](/document/server-side/chatroom_manage.html#创建聊天室)。
 
 创建群组后，你可以通过以下步骤管理聊天室信息和成员：  
 
