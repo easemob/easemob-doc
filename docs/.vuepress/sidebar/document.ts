@@ -392,6 +392,7 @@ const documentSidebar = [
           { text: '修改消息', link: 'message_modify.html' },
           {
             text: '消息翻译',
+            collapsible: true,
             children: [
             { text: '翻译消息内容', link: 'message_translation_text.html' },
             { text: '获取翻译语言列表', link: 'message_translation_language_list.html' },
