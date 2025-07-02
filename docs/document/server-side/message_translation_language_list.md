@@ -62,7 +62,7 @@ POST https://{host}/{org_name}/{app_name}/translate/support/language
 ### 请求示例 
 
 ```shell
-curl -i -X POST "https://XXXX/XXXX/XXXX/translate/support/language"  \
+curl -X GET "https://XXXX/XXXX/XXXX/translate/support/language"  \
 -H "Authorization: Bearer <YourAppToken>" 
 ```
 
