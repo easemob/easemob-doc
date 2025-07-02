@@ -26,7 +26,7 @@
 ## HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/translate/support/language
+GET https://{host}/{org_name}/{app_name}/translate/support/language
 ```
 
 ### 路径参数
