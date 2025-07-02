@@ -26,7 +26,7 @@
 ## HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/translate/support/language
+GET https://{host}/{org_name}/{app_name}/translate/support/language
 ```
 
 ### 路径参数
@@ -50,19 +50,19 @@ POST https://{host}/{org_name}/{app_name}/translate/support/language
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 参数            | 类型   | 描述                 |
-| :-------------- | :----- | :------- | --------------------------------- |
+| :-------------- | :----- | :------- | 
 | `code`  | String | 语言代码。    |
 | `name`  | String | 语言名称。 |
 | `nativeName`  | String | 语言在其起源地的名称，例如，英语在英国称为 `English`。| 
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
 ## 示例 
 
 ### 请求示例 
 
 ```shell
-curl -i -X POST "https://XXXX/XXXX/XXXX/translate/support/language"  \
+curl -X GET "https://XXXX/XXXX/XXXX/translate/support/language"  \
 -H "Authorization: Bearer <YourAppToken>" 
 ```
 

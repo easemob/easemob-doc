@@ -1,5 +1,11 @@
 # 产品动态
 
+## 2025-07
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| 消息翻译 RESTful API   | 消息翻译支持以下三个 RESTful API：<br/> - 翻译消息内容 <br/> - 获取翻译语言列表 <br/> - 检测文本的源语言 | 2025-7-2       | <br/> - [翻译消息内容](/document/server-side/message_translation_text.html) <br/> - [获取翻译语言列表](/document/server-side/message_translation_language_list.html) <br/> - [检测文本的源语言](/document/server-side/message_translation_detect.html) |
+
 ## 2025-06
 
 #### Android/iOS SDK 4.15.1 发版

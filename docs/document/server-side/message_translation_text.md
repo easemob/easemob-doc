@@ -64,19 +64,19 @@ POST https://{host}/{org_name}/{app_name}/translate
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 参数            | 类型   | 描述                 |
-| :-------------- | :----- | :------- | --------------------------------- |
+| :-------------- | :----- | :------- | 
 | `translations`  | JSON Array | 翻译结果。    |
 | - `text`  | String | 翻译后的文本。 |
 | - `to`  | String | 翻译目标语言的代码。|
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
 ## 示例
 
 ### 请求示例
 
 ```shell
-curl -i -X POST "https://XXXX/XXXX/XXXX/translate"  \
+curl -X POST "https://XXXX/XXXX/XXXX/translate"  \
 -H 'Content-Type: application/json'   \
 -H "Authorization: Bearer <YourAppToken>"   \
 -d '{
