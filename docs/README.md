@@ -1949,6 +1949,9 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_translation.html#设置自动翻译
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/server-side/message_translation_text.html   
           - text: 按需翻译
             desc: 接收方在收到文本消息后，将消息内容翻译为目标语言。
             sdks:
