@@ -123,7 +123,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms?limit={N}&cursor={cursor}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L -X GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
+curl -X GET 'https://XXXX/XXXX/XXXX/chatrooms?limit=10' \
 --header 'Authorization: Bearer <YourAppToken>'
 ```
 

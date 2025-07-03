@@ -85,7 +85,7 @@ POST https://{host}/{org_name}/{app_name}/push/label
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X POST 'localhost/hx/hxdemo/push/label' \
+curl -X POST 'localhost/hx/hxdemo/push/label' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -d '{
@@ -156,7 +156,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X GET 'localhost/hx/hxdemo/push/label/90' \
+curl -X GET 'localhost/hx/hxdemo/push/label/90' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -226,7 +226,7 @@ GET https://{host}/{org_name}/{app_name}/push/label
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X GET 'localhost/hx/hxdemo/push/label' \
+curl -X GET 'localhost/hx/hxdemo/push/label' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -297,7 +297,7 @@ DELETE https://{host}/{org_name}/{app_name}/push/label/{labelname}
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X DELETE 'localhost/hx/hxdemo/push/label/post-90s' \
+curl -X DELETE 'localhost/hx/hxdemo/push/label/post-90s' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -364,7 +364,7 @@ POST https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X POST 'localhost/hx/hxdemo/push/label/post-90s/user' \
+curl -X POST 'localhost/hx/hxdemo/push/label/post-90s/user' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -d '{
@@ -436,7 +436,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}/user/{username}
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X GET 'localhost/hx/hxdemo/push/label/post-90s/user/hx1' \
+curl -X GET 'localhost/hx/hxdemo/push/label/post-90s/user/hx1' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -508,7 +508,7 @@ GET https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X GET 'localhost/hx/hxdemo/push/label/post-90s/user?limit=1' \
+curl -X GET 'localhost/hx/hxdemo/push/label/post-90s/user?limit=1' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -581,7 +581,7 @@ DELETE https://{host}/{org_name}/{app_name}/push/label/{labelname}/user
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X DELETE 'localhost/hx/hxdemo/push/label/post-90s/user' \
+curl -X DELETE 'localhost/hx/hxdemo/push/label/post-90s/user' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -d '{

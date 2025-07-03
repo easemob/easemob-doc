@@ -298,7 +298,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L -X DELETE 'https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX'
+curl -X DELETE 'https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX'
 --header 'Authorization: Bearer <YourAppToken>'
 ```
 

@@ -78,7 +78,7 @@ POST https://{host}/{org_name}/{app_name}/messages/broadcast
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -100,7 +100,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -128,7 +128,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -153,7 +153,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -181,7 +181,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -205,7 +205,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -229,7 +229,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -251,7 +251,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -373,7 +373,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users/broadcast
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -393,7 +393,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -419,7 +419,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -442,7 +442,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -467,7 +467,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -489,7 +489,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -511,7 +511,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -531,7 +531,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -659,7 +659,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/broadcast
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -680,7 +680,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -707,7 +707,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -731,7 +731,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -757,7 +757,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -780,7 +780,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -803,7 +803,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -824,7 +824,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{

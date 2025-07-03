@@ -108,7 +108,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 **绑定请求**
 
 ```shell
-curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
+curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{    
@@ -121,7 +121,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 **解除绑定**
 
 ```shell
-curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
+curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{    
@@ -208,7 +208,7 @@ GET https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 #### 请求示例
 
 ```shell
-curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
+curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -596,7 +596,7 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 
 ```bash
 // 你需要将 <YourUserToken> 替换为你的用户 Token
-curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
+curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
 -H 'Authorization: Bearer <YourUserToken>' \
 -H 'Content-Type: application/json' \
 -d '{
@@ -681,7 +681,7 @@ GET https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 
 ```bash
 // 请将 <YourUserToken> 替换为你的用户 Token
-curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
+curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
 -H 'Authorization: Bearer <YourUserToken>'
 ```
 
@@ -758,7 +758,7 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/language
 #### 请求示例
 
 ```bash
-curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
+curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -d '{
@@ -830,7 +830,7 @@ GET https://{host}/{org_name}/{app_name}/users/{userId}/notification/language
 #### 请求示例
 
 ```bash
-curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
+curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -1189,7 +1189,7 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/template' \
 关于推送标题和推送内容参数的填充，即 `title_pattern` 和 `content_pattern`，详见[创建离线推送模板](#创建离线推送模板)。
 
 ```shell
-curl -L -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
+curl -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{

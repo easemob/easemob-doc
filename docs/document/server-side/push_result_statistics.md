@@ -72,7 +72,7 @@ GET https://{host}/{org_name}/{app_name}/push/data/offline-push/begin/{startTime
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -g -X GET 'https://XXXX/XXXX/XXXX/push/data/offline-push/begin/2024-04-01/end/2024-04-02?platform=ALL' \
+curl -g -X GET 'https://XXXX/XXXX/XXXX/push/data/offline-push/begin/2024-04-01/end/2024-04-02?platform=ALL' \
 -H 'Authorization: Bearer <YourAppToken>
 ```
 
