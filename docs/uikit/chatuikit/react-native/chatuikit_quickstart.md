@@ -23,7 +23,7 @@
 1. 创建项目
 
 ```sh
-npx @react-native-community/cli@latest init --skip-install --version 0.76 simple_uikit_demo
+npx @react-native-community/cli@latest init --skip-install --version 0.76 simple_uikit_demo # 推荐创建稳定版本示例
 ```
 
 2. 初始化项目
@@ -54,7 +54,6 @@ react-native-create-thumbnail \
 react-native-device-info \
 @react-native-documents/picker \
 react-native-chat-uikit \
-react-native-fast-image \
 react-native-file-access \
 react-native-gesture-handler \
 react-native-image-picker \
@@ -257,3 +256,7 @@ yarn run android
 | 登录            | 发送消息   | 
 | :--------------: | :-----: |
 | <img src="/images/uikit/chatuikit/rn/chatuikit_quick_start_login.png" alt="description">  | <img src="/images/uikit/chatuikit/rn/chatuikit_quick_start_chat.png" alt="description"> | 
+
+## 常见问题
+
+// todo: 请看xx章节或者可以点击链接

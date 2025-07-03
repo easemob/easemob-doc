@@ -74,9 +74,4 @@ yarn run android
 
 ## 常见问题
 
-如遇到编译或运行问题，请参考：
-
-1. 确保已安装所有必需的开发环境
-2. 检查 appKey 是否正确配置
-3. iOS 编译失败时，尝试清理项目：`cd ios && pod deintegrate && pod install`
-4. Android 编译失败时，检查 Android Studio 配置和 SDK 安装情况
+// todo: 请看xx章节或者可以点击链接

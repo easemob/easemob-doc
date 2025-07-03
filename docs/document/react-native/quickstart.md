@@ -51,7 +51,7 @@
 2. 打开终端，进入需要创建项目的目录，输入命令创建 React Native 项目：
 
 ```sh
-npx @react-native-community/cli@latest init --version 0.76 simple_demo
+npx @react-native-community/cli@latest init --version 0.76 simple_demo # 推荐创建稳定版本示例
 ```
 
 创建好的项目名称是 `simple_demo`。
@@ -64,7 +64,7 @@ yarn set version 1.22.19
 yarn
 ```
 
-_同时，也可以使用 npm 等其他工具_
+_也可以使用 npm 等其他工具_
 
 3. 在终端命令行，输入以下命令添加依赖:
 

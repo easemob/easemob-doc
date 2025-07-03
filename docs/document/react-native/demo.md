@@ -39,7 +39,7 @@
 6. 更改配置文件(`examples/product-uikit-demo/src/env.ts`)内容, 设置 appKey 的值，其他字段有默认值。
 7. 设置推送配置文件。如果没有，可以使用模板文件保证编译运行没有问题。如果有，则使用自己的配置文件。详见 [Firebase 相关文档](https://rnfirebase.io/)。
    - Android 平台拷贝命令为 `cp -f templates/google-services.json.template examples/product-uikit-demo/android/app/google-services.json`。
-   - iOS 平台拷贝命令为 `cp -f templates/GoogleService-Info.plist.template examples/product-uikit-demo/android/app/GoogleService-Info.plist`。
+   - iOS 平台拷贝命令为 `cp templates/GoogleService-Info.plist.template examples/product-uikit-demo/ios/ChatUikitFullExample/GoogleService-Info.plist`。
 8. 进入目录 `examples/product-uikit-demo`， 运行 `yarn android` 或 `yarn ios` 运行 Demo。
 9. 启动本地服务 `yarn run start`，默认端口 8081。
 10. 在登录页面连续点击 5 次以上版本号，将切换为用户 ID 和密码登录页面（再次连续点击返回手机号和验证码登录页面）。
@@ -93,3 +93,7 @@ App Server 为 Demo 提供以下功能：
 | 联系人模块   | 展示如何依赖 UIKit 实现联系人列表的逻辑。                                     |
 | 聊天设置模块 | 展示 IM SDK 提供的对于群聊对成员及群组属性的操作。                            |
 | 设置模块     | 展示 IM SDK 对于新消息的设置及消息免打扰，群组等通用设置。                    |
+
+## 常见问题
+
+// todo: 请看xx章节或者可以点击链接
