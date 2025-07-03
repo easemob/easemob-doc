@@ -116,7 +116,7 @@ POST https://{host}/{org_name}/{app_name}/mutes
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L -X POST 'https://XXXX/XXXX/XXXX/mutes' \
+curl -X POST 'https://XXXX/XXXX/XXXX/mutes' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'  \
@@ -214,7 +214,7 @@ GET https://{host}/{org_name}/{app_name}/mutes/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
+curl -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'  \
@@ -313,7 +313,7 @@ GET https://{host}/{org_name}/{app_name}/mutes
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes?pageNum=1&pageSize=10' \
+curl -X GET 'https://XXXX/XXXX/XXXX/mutes?pageNum=1&pageSize=10' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'  \

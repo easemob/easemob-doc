@@ -387,7 +387,7 @@ POST https://{host}/{org_name}/{app_name}/push/list/label
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X POST 'http://a1.easemob.com/easemob/easeim/push/list/label' \
+curl -X POST 'http://a1.easemob.com/easemob/easeim/push/list/label' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -d '{
