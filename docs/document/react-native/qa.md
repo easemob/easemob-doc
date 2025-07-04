@@ -51,3 +51,9 @@ console.log("格式化后:", formattedPath); // file:///storage/emulated/0/Andro
 
 `yarn 4.x.x`： 需要设置使用本地配置 `yarn config set nodeLinker node-modules`。
 `yarn 1.x.x`： 不存在该问题。
+
+## 6. 页面提示：No script URL provided. Make sure the packager is running or you have embedded a JS bundle in your application bundle.
+
+需要确保本地调试服务已启动：yarn run start。
+如果使用模拟器，按照终端或服务提示信息操作即可。
+如果使用真机，需保证手机和开发电脑处于同一局域网内。
