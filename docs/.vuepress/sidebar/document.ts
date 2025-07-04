@@ -164,6 +164,7 @@ const documentSidebar = [
     children: [
       { text: '错误码', link: 'error.html' },
       { text: '日志', link: 'log.html', except: ['flutter'] },
+      { text: '常见问题', link: 'faq.html', only: ['react-native'] },
     ],
     except: ['applet', 'server-side','electron','linux']
   },

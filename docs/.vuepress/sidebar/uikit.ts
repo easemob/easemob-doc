@@ -199,6 +199,12 @@ const chatUikitSidebar = [
     except: ["uniapp"],
   },
   {
+    text: "常见问题",
+    collapsible: true,
+    children: [{ text: "常见问题", link: "faq.html" }],
+    only: ["react-native"],
+  },
+  {
     text: "历史文档",
     collapsible: true,
     children: [
@@ -292,6 +298,7 @@ const chatroomUikitSidebar = [
   { text: "自定义", link: "roomuikit_customize.html" },
   { text: "组件文档", link: "roomuikit_storybook.html", only: ["web"] },
   { text: "更新日志", link: "roomuikit_releasenote.html" },
+  { text: "常见问题", link: "faq.html", only: ["react-native"] },
   { text: "设计指南", link: "design_guide.html" },
 ];
 
