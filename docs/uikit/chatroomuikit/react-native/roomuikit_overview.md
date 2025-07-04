@@ -7,8 +7,8 @@
 - 你可以扫描以下 Android 和 iOS 平台的二维码体验环信聊天室 UIKit demo：
 
 | Android        | iOS   | 
-| :--------- | :----- |
-| <img src=/images/uikit/chatroomrn/rn_chatroom_android.png  width="300" height="700"/>      |  <img src=/images/uikit/chatroomrn/rn_chatroom_ios.png  width="300" height="700"/>  | 
+| :---------: | :-----: |
+| <img src=/images/uikit/chatroomrn/rn_chatroom_android.png  width="300" height="300"/>      |  <img src=/images/uikit/chatroomrn/rn_chatroom_ios.png  width="300" height="300"/>  | 
 
 ## 功能
 
