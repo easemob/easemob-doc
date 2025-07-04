@@ -89,23 +89,25 @@ const ChatroomApp = observer(() => {
     if (client.addEventHandler) {
       client.addEventHandler("chatroom", {
         onConnected: () => {
-          console.log("登录成功");
+          console.log("已建立连接");
         },
+        onDisconnected: () => {
+          console.log("连接已断开");
+        }
       });
     }
   }, [client]);
 
   const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
   const login = () => {
     client
       .open({
         user: userId,
-        pwd: password,
-        //accessToken: '',
+        accessToken: token,
       })
       .then((res) => {
-        console.log("获取token成功");
+        console.log("登录成功");
       });
   };
   return (
@@ -128,10 +130,10 @@ const ChatroomApp = observer(() => {
             ></input>
           </div>
           <div>
-            <label>password</label>
+            <label>token</label>
             <input
               onChange={(e) => {
-                setPassword(e.target.value);
+                setToken(e.target.value);
               }}
             ></input>
           </div>

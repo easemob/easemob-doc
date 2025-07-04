@@ -89,12 +89,11 @@ Easemob_quickstart<br>
                         <input type="text" placeholder="Username" id="userID">
                     </div>
                     <div class="input-field">
-                        <label>Password</label>
-                        <input type="password" placeholder="Password" id="password">
+                        <label>Token</label>
+                        <input type="text" placeholder="Token" id="token">
                     </div>
                     <div class="row">
                         <div>
-                            <button type="button" id="register">register</button>
                             <button type="button" id="login">login</button>
                             <button type="button" id="logout">logout</button>
                         </div>
@@ -127,7 +126,7 @@ Easemob_quickstart<br>
 import WebIM from 'easemob-websdk'
 const appKey = "<Your app key>"
 
-let username, password
+let username, accessToken
 
 // 初始化客户端。相关的参数配置，详见 API 参考中的 `Connection` 类。
 WebIM.conn = new WebIM.connection({
@@ -155,31 +154,12 @@ WebIM.conn.addEventHandler('connection&message', {
 
 // 按钮行为定义。
 window.onload = function () {
-    // 注册。
-    document.getElementById("register").onclick = function(){
-        username = document.getElementById("userID").value.toString()
-        password = document.getElementById("password").value.toString()
-        WebIM.conn
-            .registerUser({ username, password })
-            .then((res) => {
-                document
-                .getElementById("log")
-                .appendChild(document.createElement("div"))
-                .append(`register user ${username} success`);
-            })
-            .catch((e) => {
-                document
-                .getElementById("log")
-                .appendChild(document.createElement("div"))
-                .append(`${username} already exists`);
-            });
-    }
     // 登录。
     document.getElementById("login").onclick = function () {
         username = document.getElementById("userID").value.toString()
-        password = document.getElementById("password").value.toString()
+        accessToken = document.getElementById("token").value.toString()
         WebIM.conn
-            .open({ user: username, pwd: password })
+            .open({ user: username, accessToken })
             .then((res) => {
                 document
                 .getElementById("log")
