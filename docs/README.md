@@ -32,7 +32,7 @@ starter:
         text: Web
       - icon: /sdk/applet.svg
         link: /document/applet/wechat.html
-        text: 小程序
+        text: 小程序/Uniapp
       - icon: /sdk/harmonyos.svg
         link: /document/harmonyos/quickstart.html
         text: HarmonyOS 
