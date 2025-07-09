@@ -30,7 +30,7 @@
 
 ### 获取聊天室成员列表
 
-所有聊天室成员均可调用 `getChatroomMemberListFromServerWithId` 方法获取当前聊天室成员列表。
+所有聊天室成员均可调用 `getChatroomMemberListFromServerWithId` 方法获取当前聊天室成员列表。服务器不对成员进行排序，因此，返回的成员列表不保证有序。
 
 示例代码如下：
 
