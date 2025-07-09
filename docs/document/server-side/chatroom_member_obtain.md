@@ -79,7 +79,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?pagenum={
 |  - `pagenum`        | Array | 当前页码。  |
 | `uri`                | String | 请求 URL。   |
 | `entities`           | JSON   | 响应实体。  |
-| `data` | JSON Array | 聊天室成员信息。  |
+| `data` | JSON Array | 聊天室成员信息。服务器不对成员排序，因此，返回的成员列表不保证有序。  |
 |  - `owner`  | String | 聊天室所有者的用户 ID。例如：{“owner”: “user1”}。   |
 |  - `member` | String | 普通聊天室成员或聊天室管理员的用户 ID。例如：{“member”:“user2”}。 |
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。   |

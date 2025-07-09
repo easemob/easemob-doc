@@ -306,7 +306,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}
 | `data.created`            | Long   | 创建聊天室时间，Unix 时间戳，单位为毫秒。                                                                                                                       |
 | `data.custom`             | String | 聊天室扩展信息。 |
 | `data.affiliations_count` | Int    | 现有聊天室成员总数。 |
-| `data.affiliations`       | Array  | 现有聊天室成员列表，包含聊天室所有者和成员（包括聊天室管理员）。例如：“affiliations”:[{“owner”: “user1”},{“member”:”user2”},{“member”:”user3”}]。  |
+| `data.affiliations`       | Array  | 现有聊天室成员列表，包含聊天室所有者和成员（包括聊天室管理员）。例如：“affiliations”:[{“owner”: “user1”},{“member”:”user2”},{“member”:”user3”}]。服务器不对成员排序，因此，返回的成员列表不保证有序。|
 | `data.public`             | Bool   | 预留字段，无需关注。 |
 | `data.mute` | Bool | 是否为全员禁言状态：<br/> - `true`：是<br/> - `false`：否。 |
 
