@@ -124,7 +124,7 @@ export const zhSidebar = sidebar({
           text: "产品简介",
           collapsible: true,
           children: [
-            { text: "产品概述", link: "product/moderation/moderation_overview.html" },
+            { text: "产品概述", link: "moderation/moderation_overview.html" },
           ],
         },
         {
@@ -229,7 +229,7 @@ export const zhSidebar = sidebar({
       }
          ],
       }, 
-      { text: "质量监控", link: "/product/request_quality_overview.html" },
+      { text: "质量监控", link: "request_quality_overview.html" },
      ],
     },
     {
