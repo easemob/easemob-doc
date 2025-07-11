@@ -28,34 +28,27 @@
 
 ## 回调示例
 
-请求采用 POST 方式，支持 `HTTP/HTTPS`，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
+消息发送给接收方之前，环信服务器会向你的应用服务器发送 HTTP/HTTPS POST 请求，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
 
-### 请求 header
+### 请求示例
 
-| 字段名         | 值                                  |
-| :------------- | :---------------------------------- |
-| `Content-Type` | 内容类型，请填 `application/json`。 |
-
-### 请求示例-文本消息
+以下示例为在聊天室中发送消息：
 
 ```json
 {
     "callId":"XXXX-XXXX#test_0990a64f-XXXX-XXXX-8696-cf3b48b20e7e",
     "timestamp":1600060847294,
-    "chat_type":"groupchat",
+    "chat_type":"chatroom",
     "group_id":"16934809238921545",
     "from":"user1",
     "to":"user2",
     "msg_id":"8924312242322",
     "payload": {
-      "msg":"welcome to easemob!", 
-      "type":"txt"
+      // 具体的消息内容。
     },
     "security":"2ca02c394bef9e7abc83958bcc3156d3"
 }
 ```
-
-### 请求包字段说明-文本消息
 
 | 参数              | 类型    |
 | :---------------- | :--------------------------------------- |
@@ -66,317 +59,10 @@
 | `from`            | 消息的发送方。      |
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `msg`： String 类型，表示消息内容。<br/> - `type`： String 类型，表示消息类型，文本消息为 `txt`。      |
+| `payload`         | 消息内容，与通过 RESTful API 发送过来的一致，查看 [消息格式文档](message_historical.html#历史消息记录的内容)。     |
 | `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
 
-### 请求示例-位置消息
-
-```json
-{
-    "callId":"XXXX-XXXX#test_0990a64f-XXXX-XXXX-8696-cf3b48b20e7e",
-    "timestamp":1600060847294,
-    "chat_type":"groupchat",
-    "group_id":"16934809238921545",
-    "from":"user1",
-    "to":"user2",
-    "msg_id":"8924312242322",
-    "payload": {
-      "addr":"西城区西便门桥 ",
-      "lat":39.9053,
-      "lng":116.36302,
-      "type":"loc"
-    },
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
-}
-```
-
-### 请求包字段说明-位置消息
-
-| 参数              | 类型    |
-| :---------------- | :--------------------------------------- |
-| `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。  |
-| `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。       |
-| `chat_type`       | 聊天类型：`chat` 为单聊，`group` 为群组聊天，`chatroom` 为聊天室。|
-| `group_id`        | 回调消息所在的群组或聊天室。该参数仅对群组聊天或聊天室中的消息回调生效。        |
-| `from`            | 消息的发送方。      |
-| `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
-| `msg_id`          | 消息的 ID。   |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `addr`： String 类型，表示位置的地址描述。<br/> - `lat`：Long 类型，表示位置的纬度。 <br/> - `lng`：Long 类型，表示位置的经度。 <br/> - `type`： String 类型，表示消息类型，位置消息类型为 `loc`。      |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
-
-### 请求示例-图片消息
-
-```json
-{
-    "callId":"XXXX-XXXX#test_0990a64f-XXXX-XXXX-8696-cf3b48b20e7e",
-    "timestamp":1600060847294,
-    "chat_type":"groupchat",
-    "group_id":"16934809238921545",
-    "from":"user1",
-    "to":"user2",
-    "msg_id":"8924312242322",
-    "payload": {
-      "file_length": 128827,
-      "filename": "test1.jpg",
-      "secret": "DRGM8OZrEeO1vaXXXXXXXXHBeKlIhDp0GCnFu54xOF3M6KLr",
-      "size": {
-        "height": 1325,
-        "width": 746
-      },
-      "type": "img",
-      "url": "https://XXXX/XXXX/chatdemoui/chatfiles/65e54a4a-XXXX-XXXX-b821-ebde7b50cc4b"
-    },
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
-}
-```
-
-### 请求包字段说明-图片消息
-
-| 参数              | 类型    |
-| :---------------- | :--------------------------------------- |
-| `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。  |
-| `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。       |
-| `chat_type`       | 聊天类型：`chat` 为单聊，`group` 为群组聊天，`chatroom` 为聊天室。|
-| `group_id`        | 回调消息所在的群组或聊天室。该参数仅对群组聊天或聊天室中的消息回调生效。        |
-| `from`            | 消息的发送方。      |
-| `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
-| `msg_id`          | 消息的 ID。   |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `file_length`： Long 类型，表示图片附件大小，单位为字节。<br/> - `filename`： String 类型，表示图片文件名称，包含文件后缀名。 <br/> - `secret`：String 类型，图片文件访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。<br/> - `size`：JSON 格式，表示图片的尺寸。单位为像素。`height` 表示图片高度， `width` 表示图片宽度。<br/> - `type`：String 类型，表示消息类型。图片消息为 `img`。<br/> - `url`：String 类型，表示图片 URL 地址。   |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
-
-### 请求示例-语音消息
-
-```json
-{
-    "callId":"XXXX-XXXX#test_0990a64f-XXXX-XXXX-8696-cf3b48b20e7e",
-    "timestamp":1600060847294,
-    "chat_type":"groupchat",
-    "group_id":"16934809238921545",
-    "from":"user1",
-    "to":"user2",
-    "msg_id":"8924312242322",
-    "payload": {
-      "file_length":6630,
-      "filename":"test1.amr",
-      "length":10,
-      "secret":"DRGM8OZrEeO1vafuJSo2IjHBeKlIhDp0GCnFu54xOF3M6KLr",
-      "type":"audio",
-      "url":"https://XXXX/XXXX/chatdemoui/chatfiles/0637e55a-f606-XXXX-XXXX-51f25fd1215b"
-    },
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
-}
-```
-
-### 请求包字段说明-语音消息
-
-| 参数              | 类型    |
-| :---------------- | :--------------------------------------- |
-| `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。  |
-| `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。       |
-| `chat_type`       | 聊天类型：`chat` 为单聊，`group` 为群组聊天，`chatroom` 为聊天室。|
-| `group_id`        | 回调消息所在的群组或聊天室。该参数仅对群组聊天或聊天室中的消息回调生效。        |
-| `from`            | 消息的发送方。      |
-| `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
-| `msg_id`          | 消息的 ID。   |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `file_length`： Long 类型，表示语音附件大小，单位为字节。<br/> - `filename`： String 类型，表示语音文件名称，包含文件后缀名。 <br/> - `length`：Int 类型，表示语音时长。单位为秒。 <br/> - `secret`：String 类型，语音文件访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。 <br/> - `type`：String 类型，表示消息类型。语音消息为 `audio`。<br/> - `url`：String 类型，表示语音文件的 URL 地址。  |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
-
-### 请求示例-视频消息
-
-```json
-{
-    "callId":"XXXX-XXXX#test_0990a64f-XXXX-XXXX-8696-cf3b48b20e7e",
-    "timestamp":1600060847294,
-    "chat_type":"groupchat",
-    "group_id":"16934809238921545",
-    "from":"user1",
-    "to":"user2",
-    "msg_id":"8924312242322",
-    "payload": {
-      "file_length": 58103,
-      "filename": "14XXXX.mp4",
-      "length": 10,
-      "secret": "VfEpSmSvEeS7yU8dwa9rAQc-DIL2HhmpujTNfSTsrDt6eNb_",
-      "size":{"height":480,"width":360},
-      "thumb": "https://XXXX/XXXX/chatdemoui/chatfiles/67279b20-XXXX-XXXX-8eee-21d3334b3a97",
-      "thumb_secret": "ZyebKn9pEeSSfY03ROk7ND24zUf74s7HpPN1oMV-1JxN2O2I",
-      "type": "video",
-      "url": "https://XXXX/XXXX/chatdemoui/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"
-    },
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
-}
-```
-
-### 请求包字段说明-视频消息
-
-| 参数              | 类型    |
-| :---------------- | :--------------------------------------- |
-| `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。  |
-| `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。       |
-| `chat_type`       | 聊天类型：`chat` 为单聊，`group` 为群组聊天，`chatroom` 为聊天室。|
-| `group_id`        | 回调消息所在的群组或聊天室。该参数仅对群组聊天或聊天室中的消息回调生效。        |
-| `from`            | 消息的发送方。      |
-| `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
-| `msg_id`          | 消息的 ID。   |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `file_length`： Long 类型，表示视频附件大小。单位为字节。<br/> - `filename`： String 类型，表示视频文件名称，包含文件后缀名。 <br/> - `length`：Int 类型，表示视频时长。单位为秒。 <br/> - `secret`：String 类型，视频文件的访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。 <br/> - `size`：JSON 格式，表示视频缩略图尺寸。单位为像素。`height` 表示视频缩略图的高度，`width` 表示视频缩略图的宽度。<br/> - `thumb`：视频缩略图的 URL 地址，格式为 https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中，`file_uuid` 为视频缩略图上传后，环信服务器返回的缩略图的 UUID。 <br/> - `thumb_secret`：缩略图文件访问密钥。如果文件上传时设置了文件访问限制，则该字段存在。<br/> - `type`：String 类型，表示消息类型。视频消息为 `video`。<br/> - `url`：String 类型，表示视频文件的 URL 地址。  |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
-
-### 请求示例-文件消息
-
-```json
-{
-    "callId":"XXXX-XXXX#test_0990a64f-XXXX-XXXX-8696-cf3b48b20e7e",
-    "timestamp":1600060847294,
-    "chat_type":"groupchat",
-    "group_id":"16934809238921545",
-    "from":"user1",
-    "to":"user2",
-    "msg_id":"8924312242322",
-    "payload": {
-      "file_length":3279,
-      "filename":"record.md",
-      "secret":"2RNXCgeeEeeXXXX-XXXXbtZXJH4cgr2admVXn560He2PD3RX",
-      "type":"file",
-      "url":"https://XXXX/XXXX/XXXX/chatfiles/d9135700-XXXX-XXXX-b000-a7039876610f"
-    },
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
-}
-```
-
-### 请求包字段说明-文件消息
-
-| 参数              | 类型    |
-| :---------------- | :--------------------------------------- |
-| `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。  |
-| `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。       |
-| `chat_type`       | 聊天类型：`chat` 为单聊，`group` 为群组聊天，`chatroom` 为聊天室。|
-| `group_id`        | 回调消息所在的群组或聊天室。该参数仅对群组聊天或聊天室中的消息回调生效。        |
-| `from`            | 消息的发送方。      |
-| `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
-| `msg_id`          | 消息的 ID。   |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `file_length`： Long 类型，表示文件大小。单位为字节。<br/> - `filename`： String 类型，表示文件名称，包含文件后缀名。<br/> - `secret`：String 类型，文件的访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。<br/> - `type`：String 类型，表示消息类型。文件消息为 `file`。<br/> - `url`：String 类型，表示文件的 URL 地址。你可以访问该 URL 下载历史消息文件。 |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
-
-### 请求示例-透传消息
-
-```json
-{
-    "callId":"XXXX-XXXX#test_0990a64f-XXXX-XXXX-8696-cf3b48b20e7e",
-    "timestamp":1600060847294,
-    "chat_type":"groupchat",
-    "group_id":"16934809238921545",
-    "from":"user1",
-    "to":"user2",
-    "msg_id":"8924312242322",
-    "payload": {
-      "action":"run",
-      "type":"cmd"
-    },
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
-}
-```
-
-### 请求包字段说明-透传消息
-
-| 参数              | 类型    |
-| :---------------- | :--------------------------------------- |
-| `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。  |
-| `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。       |
-| `chat_type`       | 聊天类型：`chat` 为单聊，`group` 为群组聊天，`chatroom` 为聊天室。|
-| `group_id`        | 回调消息所在的群组或聊天室。该参数仅对群组聊天或聊天室中的消息回调生效。        |
-| `from`            | 消息的发送方。      |
-| `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
-| `msg_id`          | 消息的 ID。   |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `action`： String 类型，表示命令内容。<br/> - `type`： String 类型，表示消息类型，透传消息为 `cmd`。      |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
-
-### 请求示例-自定义消息
-
-```json
-{
-    "callId":"XXXX-XXXX#test_0990a64f-XXXX-XXXX-8696-cf3b48b20e7e",
-    "timestamp":1600060847294,
-    "chat_type":"groupchat",
-    "group_id":"16934809238921545",
-    "from":"user1",
-    "to":"user2",
-    "msg_id":"8924312242322",
-    "payload": {
-      "v2:customExts": {
-            "name": "flower",
-            "size": "16",
-            "price": "100"
-        },
-        "customExts": [
-            {
-                "name": "flower"
-            },
-            {
-                "size": "16"
-            },
-            {
-                "price": "100"
-            }
-        ],
-        "customEvent": "gift_1",
-        "type": "custom"
-    },
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
-}
-```
-
-### 请求包字段说明-自定义消息
-
-| 参数              | 类型    |
-| :---------------- | :--------------------------------------- |
-| `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。  |
-| `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。       |
-| `chat_type`       | 聊天类型：`chat` 为单聊，`group` 为群组聊天，`chatroom` 为聊天室。|
-| `group_id`        | 回调消息所在的群组或聊天室。该参数仅对群组聊天或聊天室中的消息回调生效。        |
-| `from`            | 消息的发送方。      |
-| `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
-| `msg_id`          | 消息的 ID。   |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `customExts`/`v2:customExts`： Array/JSON 类型，用户自定义的事件属性。该参数为可选，不需要可以不传。`customExts` 为旧版参数，数组类型，最多可包含 16 个元素。`v2:customExts` 为新版参数，Map<String,String> 类型，最多可以包含 16 个元素。推荐使用该新版参数。<br/> - `customEvent`：String 类型，自定义事件类型。<br/> - `type`： String 类型，表示消息类型，自定义消息为 `custom`。      |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
-
-### 请求示例-合并消息
-
-```json
-{
-    "callId":"XXXX-XXXX#test_0990a64f-XXXX-XXXX-8696-cf3b48b20e7e",
-    "timestamp":1600060847294,
-    "chat_type":"groupchat",
-    "group_id":"16934809238921545",
-    "from":"user1",
-    "to":"user2",
-    "msg_id":"8924312242322",
-    "payload": {
-      "combineLevel": 1,
-      "file_length": 550,
-      "filename": "17289718748990036",
-      "secret": "a_OTmoq6Ee-CygH0PRzcUyFniZDmSsX1ur0j-9RtCj3tK6Gr",
-      "subType": "sub_combine",
-      "summary": ":yyuu\n:[图片]\n:[文件]\n",
-      "title": "聊天记录",
-      "url": "https://XXXX/XXXX/XXXX/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
-    },
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
-}
-```
-
-### 请求包字段说明-合并消息
-
-| 参数              | 类型    |
-| :---------------- | :--------------------------------------- |
-| `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。  |
-| `timestamp`       | 环信 IM 服务器接收到此消息的时间戳。       |
-| `chat_type`       | 聊天类型：`chat` 为单聊，`group` 为群组聊天，`chatroom` 为聊天室。|
-| `group_id`        | 回调消息所在的群组或聊天室。该参数仅对群组聊天或聊天室中的消息回调生效。        |
-| `from`            | 消息的发送方。      |
-| `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
-| `msg_id`          | 消息的 ID。   |
-| `payload`         | 消息内容，与通过 REST API 发送过来的一致：<br/> - `combineLevel`：Int 类型，合并消息的嵌套层级数。<br/> - `file_length`： Int 类型，表示合并消息附件的大小，单位为字节。<br/> - `filename`： String 类型，表示合并消息的附件名称。<br/> - `secret`：String 类型，文件的访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。<br/> - `subType`：String 类型，表示消息类型为合并消息。<br/> - `summary`：String 类型，合并消息的概要。<br/> - `title`：合并消息的标题。<br/> - `url`：String 类型，表示合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。  |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+### 请求字段说明
 
 ### 响应示例
 
