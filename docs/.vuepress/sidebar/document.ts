@@ -461,7 +461,24 @@ const documentSidebar = [
           { text: '用户状态订阅', link: 'presence.html' },
           { text: '用户全局禁言', link: 'user_global_mute.html' },
           { text: '用户收藏', link: 'user_favorite.html'},
-          { text: '用户关系管理', link: 'user_relationship.html' }
+          { 
+            text: '用户关系管理',
+            collapsible: true,
+            children: [
+              { text: '添加好友', link: 'user_relationship_friend_add.html' },
+              { text: '校验好友', link: 'user_relationship_friend_check.html' },
+              { text: '删除单个好友', link: 'user_relationship_friend_remove.html' },
+              { text: '删除所有好友', link: 'user_relationship_friend_remove_all.html' },
+              { text: '设置好友备注', link: 'user_relationship_remark_set.html' },
+              { text: '分页获取好友列表', link: 'user_relationship_friend_list_paged.html' },
+              { text: '一次性获取好友列表', link: 'user_relationship_friend_list_obtain.html' },
+              { text: '导入好友列表', link: 'user_relationship_friend_import.html' },
+              { text: '添加用户至黑名单', link: 'user_relationship_blacklist_add.html' },
+              { text: '从黑名单中移除用户', link: 'user_relationship_blacklist_remove.html' },
+              { text: '获取黑名单列表', link: 'user_relationship_blacklist_obtain.html' },
+              { text: '批量校验黑名单', link: 'user_relationship_blacklist_check.html' }
+            ]
+          },
         ]
       },
       { 

@@ -38,8 +38,8 @@
 ### 获取联系人列表
 
 - 利用服务端 API：
-  - 可[调用推荐的方法分页获取联系人列表](/document/server-side/user_relationship.html#分页获取好友列表)，其中每个好友对象包含好友的用户 ID 和备注。不过，
-  - 你也可以[调用之前的方法一次性获取所有联系人的列表](/document/server-side/user_relationship.html#一次性获取好友列表)，该列表只包含联系人的用户 ID。
+  - 可[调用推荐的方法分页获取联系人列表](/document/server-side/user_relationship_friend_list_paged.html)，其中每个好友对象包含好友的用户 ID 和备注。
+  - 你也可以[调用之前的方法一次性获取所有联系人的列表](/document/server-side/user_relationship_friend_list_obtain.html)，该列表只包含联系人的用户 ID。
 - 利用客户端 API：
   - 可调用推荐的方法[从服务器一次性或分页获取联系人列表](/document/android/user_relationship.html#从服务端获取好友列表)，其中每个好友对象包含联系人的用户 ID 和备注。你也可以调用之前的方法一次性获取所有联系人的列表，该列表只包含联系人的用户 ID。 
   - 可一次性获取本地联系人列表或单个联系人的信息，包括联系人的用户 ID 和备注。
@@ -50,7 +50,7 @@
 
 ### 导入联系人列表
 
-你可以[调用 REST API](/document/server-side/user_relationship.html#导入好友列表) 一次性导入多个联系人。
+你可以[调用 REST API](/document/server-side/user_relationship_friend_import.html) 一次性导入多个联系人。
 
 ## 开启或关闭发送消息权限控制
 
