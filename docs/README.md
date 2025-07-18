@@ -1161,7 +1161,7 @@ projects:
                 link: /document/windows/user_relationship.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/user_relationship.html 
+                link: /document/server-side/user_relationship_friend_add.html 
           - text: 用户在线状态订阅
             desc: 订阅和查询用户的在线状态（即 Presence），包含用户的在线、离线以及自定义状态。
             sdks:

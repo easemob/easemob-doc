@@ -218,7 +218,7 @@ try {
 ### V1.0.9 2024-07-29
 
 1. 增加[发送聊天室全局广播消息](message_broadcast.html#发送聊天室全局广播消息)功能。
-2. 增加[导入好友列表](user_relationship.html#导入好友列表)功能。
+2. 增加[导入好友列表](user_relationship_friend_import.html)功能。
 3. 增加[强制用户从单设备下线](account_system.html#强制用户从单设备下线)功能。
 4. [创建群组增加群组头像属性](group_manage.html#创建群组)。
 5. [修改群组信息支持群组头像修改](group_manage.html#修改群组信息)。
@@ -243,7 +243,7 @@ try {
 
 1. 增加[批量移除群组成员](group_member.html#批量移除群组成员)功能。
 
-2. 增加[一次性获取好友列表](user_relationship.html#一次性获取好友列表)功能。
+2. 增加[一次性获取好友列表](user_relationship_friend_list_obtain.html)功能。
 
 3. [注册用户](account_system.html#开放注册单个用户)增加推送昵称参数。
 
