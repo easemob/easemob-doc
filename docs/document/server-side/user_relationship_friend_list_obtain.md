@@ -52,7 +52,11 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 | 字段    | 类型  | 描述                                    |
 | :------ | :---- | :-------------------------------------- |
+| `action`             | String | 请求方法。                                   |
+| `uri`                | String | 请求 URL。                |
+| `entities`           | Array | 响应实体。        |
 | `data`  | Array | 获取的好友列表，例如 "user1", "user2"。 |
+| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
 | `count` | Int   | 好友数量。                              |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。

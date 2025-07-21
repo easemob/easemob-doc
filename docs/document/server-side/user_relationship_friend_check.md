@@ -29,7 +29,12 @@ POST https://{host}/{org_name}/{app_name}/contacts/check
 
 ### 路径参数
 
-其他参数及描述详见 [公共参数](#公共参数)。
+| 参数             | 类型   | 是否必需 | 描述                |
+| :--------------- | :----- | :------- | :------------------ |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `owner_username` | String | 是       | 添加到哪个用户的黑名单。 |
 
 ### 请求 header
 
@@ -56,11 +61,17 @@ POST https://{host}/{org_name}/{app_name}/contacts/check
 
 | 字段                 | 类型       | 描述            |
 | :------------------- | :--------- | :----------------------------------------- |
+| `action`             | String | 请求方法。                                   |
+| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
+| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
+| `uri`                | String | 请求 URL。                |
 | `entities`           | JSON Array | 校验结果的详情。     |
 |  - `username`      | String     | 系统内为用户生成的系统内唯一标识。                      |
 |  - `relation`      | String     | 是否为好友：<br/> - `friend`：是<br/> - `not_friend`：否 | 
-
-其他字段及描述详见 [公共参数](#公共参数)。
+| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
+| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
+| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
+| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 

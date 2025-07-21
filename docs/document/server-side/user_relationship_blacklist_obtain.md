@@ -58,7 +58,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pag
 | :------ | :---- | :----------------------- |
 | `uri`                | String | 请求 URL。                |
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
-| `entities`        | Object | 响应实体。            |
+| `entities`        | Array | 响应实体。            |
 | `cursor`        | String | 下次开始获取数据的游标位置。            |
 | `count` | Int   | 获取的黑名单上的用户数量。                        |
 | `action`          | String | 请求方法。          |

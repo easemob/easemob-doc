@@ -54,9 +54,17 @@ POST https://{host}/{org_name}/{app_name}/blocks/check
 
 | 字段                 | 类型       | 描述              |
 | :------------------- | :--------- | :------------------ |
+| `action`             | String | 请求方法。                                   |
+| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
+| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
+| `uri`                | String | 请求 URL。                |
 | `entities`           | JSON Array | 校验结果的详情。     |
 |  - `username`      | String     | 校验的用户 ID。                      |
 |  - `relation`      | String     | 用户是否在黑名单中：<br/> - `blacklist`：是<br/> - `not_blacklist`：否 | 
+| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
+| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
+| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
+| `applicationName`    | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
