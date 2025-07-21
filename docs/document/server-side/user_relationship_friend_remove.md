@@ -57,12 +57,12 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 | `uri`                | String | 请求 URL。                |
 | `entities`           | JSON Array | 被删除的好友的详情。                                                               |
 | `entities.uuid`      | String     | 系统内为好友生成的系统内唯一标识，开发者无需关心。                                 |
-| `entities.type`      | String     | 对象类型，值为 `user` 或 `group`。                                                 |
-| `entities.created`   | Long       | 用户创建时间，Unix 时间戳，单位为毫秒。                                            |
-| `entities.modified`  | Long       | 好友的用户信息如密码或者昵称等最近一次修改时间，Unix 时间戳，单位为毫秒。          |
-| `entities.username`  | String     | 被删除好友的用户 ID。                                                              |
-| `entities.activated` | Bool       | 好友是否为正常状态：<ul><li>`true` 正常状态。</li><li>`false` 已被封禁。</li></ul> |
-| `entities.nickname`  | String     | 好友的用户昵称。                                                                   |
+|  - `type`      | String     | 对象类型，值为 `user` 或 `group`。                                                 |
+|  - `created`   | Long       | 用户创建时间，Unix 时间戳，单位为毫秒。                                            |
+|  - `modified`  | Long       | 好友的用户信息如密码或者昵称等最近一次修改时间，Unix 时间戳，单位为毫秒。          |
+|  - `username`  | String     | 被删除好友的用户 ID。                                                              |
+|  - `activated` | Bool       | 好友是否为正常状态：<ul><li>`true` 正常状态。</li><li>`false` 已被封禁。</li></ul> |
+|  - `nickname`  | String     | 好友的用户昵称。                                                                   |
 | `timestamp`          | Long   | Unix 时间戳，单位为毫秒。                                                      |
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
 | `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
