@@ -58,13 +58,13 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
 | `uri`                | String | 请求 URL。                |
 | `entities`           | JSON Array | 从黑名单中移除的用户的详细信息。                                                        |
-| `entities.uuid`      | String     | 用户在系统内的唯一标识。系统自动生成，开发者无需关心。                                  |
-| `entities.type`      | String     | 对象类型，值为 `user`。                                                                 |
-| `entities.created`   | Long       | 用户创建时间，Unix 时间戳，单位为毫秒。                                                 |
-| `entities.modified`  | Long       | 用户信息如密码或昵称等的最新修改时间，Unix 时间戳，单位为毫秒。                         |
-| `entities.username`  | String     | 被移出黑名单的用户 ID。                                                                 |
-| `entities.activated` | Bool       | 用户是否为正常状态：<br/> • `true` 该用户为正常状态。<br/> • `false` 该用户为封禁状态。 |
-| `entities.nickname`  | String     | 被移出黑名单的用户的昵称。                                                              |
+|  - `uuid`      | String     | 用户在系统内的唯一标识。系统自动生成，开发者无需关心。                                  |
+|  - `type`      | String     | 对象类型，值为 `user`。                                                                 |
+|  - `created`   | Long       | 用户创建时间，Unix 时间戳，单位为毫秒。                                                 |
+|  - `modified`  | Long       | 用户信息如密码或昵称等的最新修改时间，Unix 时间戳，单位为毫秒。                         |
+|  - `username`  | String     | 被移出黑名单的用户 ID。                                                                 |
+|  - `activated` | Bool       | 用户是否为正常状态：<br/> • `true` 该用户为正常状态。<br/> • `false` 该用户为封禁状态。 |
+|  - `nickname`  | String     | 被移出黑名单的用户的昵称。                                                              |
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
 | `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
