@@ -176,3 +176,4 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list' \
 | 400 | Bad Request | The textList already exists | 关键词名单名称已存在。 | 修改关键词名单名称。 |
 | 400 | Bad Request | moderation org data is empty | 你未开通审核服务。 | 开通审核服务。 |
 | 400 | Bad Request | the number of words exceeds the limit | 应用下面的关键词总数超过上限。 |  |
+| 400 | MODERATION_002 | "request param is empty | 若未设置必填参数，例如 `name` 或 `scope`，会提示该错误。 | 请必须设置必填参数。 |
