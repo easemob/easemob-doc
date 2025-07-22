@@ -490,6 +490,21 @@ const documentSidebar = [
           { text: '查询离线推送结果', link: 'push_result_statistics.html' }
         ]
       },
+      { 
+        text: '关键词名单',
+        collapsible: true,
+        children: [
+          { text: '创建关键词名单', link: 'keyword_list_create.html' },
+          { text: '修改关键词名单', link: 'keyword_list_modify.html' },
+          { text: '查询关键词名单', link: 'keyword_list_query.html' },
+          { text: '删除关键词名单', link: 'keyword_list_delete.html' },
+          { text: '添加关键词', link: 'keyword_add.html' },
+          { text: '修改关键词', link: 'keyword_modify.html' },
+          { text: '查询关键词', link: 'keyword_query.html' },
+          { text: '删除单个关键词', link: 'keyword_delete.html' },
+          { text: '批量删除关键词', link: 'keyword_delete_batch.html' }
+        ]
+      },
     ],
     only: ['server-side']
   },
