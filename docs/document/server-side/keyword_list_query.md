@@ -47,14 +47,14 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/search
 ### 请求 body
 
 - 若只传入 `name`，则返回指定名称的关键词名单。
-- 若只传入 `tagId`，则返回匹配指定用户标签的关键词名单。
+- 若只传入 `tagId`，则返回匹配指定标签的关键词名单。
 - 若你传入了 `size` 和 `page`，则返回指定页面的关键词名单。
 - 若你这四个参数都不传，默认返回第 `0` 页的 10 个关键词名单列表（若应用的关键词名单列表总数量小于 10，则返回所有的名单列表）。
 
 | 参数            | 类型   | 是否必需 | 描述         |
 | :-------------- | :----- | :------- | :----------------------- |
 | `name`        | String | 否       | 关键词名单的名称。 |
-| `tagId`        | String | 否       | 用户标签 ID。|
+| `tagId`        | String | 否       | 标签 ID。|
 | `size` | Int   | 否   | 每页返回的关键词数量，取值范围为 [1,200]，默认值为 `10`。| 
 | `page` | Int   | 否 | 当前页码，默认值为 `0`。|  
 
@@ -148,10 +148,10 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
     "status": "OK",
     "entities": [
         {
-            "id": "1r14aQrMz2vv3ob5wctsjB970y6",
+            "id": "1r14aXXXX2vv3ob5wctsjB970y6",
             "name": "14",
-            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
-            "appkey": "easemob-demo#support",
+            "moderationId": "159XXXXcL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "XXXX#XXXX",
             "category": "DEFAULT",
             "scope": "ALL",
             "tagId": null,
@@ -197,10 +197,10 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
     "status": "OK",
     "entities": [
         {
-            "id": "1r14X4e8f5zh3Tu9PMKIyu7AwED",
+            "id": "1r1XXXX8f5zh3Tu9PMKIyu7AwED",
             "name": "8",
-            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
-            "appkey": "easemob-demo#support",
+            "moderationId": "159XXXXL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "XXXX#XXXX",
             "category": "DEFAULT",
             "scope": "ALL",
             "tagId": null,
@@ -213,10 +213,10 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
             "updateDataTime": "2025-02-28T08:49:57.156+00:00"
         },
         {
-            "id": "1r14XxJUhZAQwknj7mJWUTlyFYP",
+            "id": "1r1XXXXUhZAQwknj7mJWUTlyFYP",
             "name": "9",
-            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
-            "appkey": "easemob-demo#support",
+            "moderationId": "159XXXXcL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "XXXX#XXXX",
             "category": "DEFAULT",
             "scope": "ALL",
             "tagId": null,
@@ -229,10 +229,10 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
             "updateDataTime": "2025-02-28T08:50:04.228+00:00"
         },
         {
-            "id": "1r14ZAqNDxBnH3oMuSzhroY1shB",
+            "id": "1r14XXXXDxBnH3oMuSzhroY1shB",
             "name": "12",
-            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
-            "appkey": "easemob-demo#support",
+            "moderationId": "159XXXXcL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "XXXX#XXXX",
             "category": "DEFAULT",
             "scope": "ALL",
             "tagId": null,
@@ -245,10 +245,10 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
             "updateDataTime": "2025-02-28T08:50:14.528+00:00"
         },
         {
-            "id": "1r14ZuhneuqtBfaHcvJaZuandVR",
+            "id": "1r14XXXXeuqtBfaHcvJaZuandVR",
             "name": "13",
-            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
-            "appkey": "easemob-demo#support",
+            "moderationId": "159XXXXcL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "XXXX#XXXX",
             "category": "DEFAULT",
             "scope": "ALL",
             "tagId": null,
@@ -261,10 +261,10 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
             "updateDataTime": "2025-02-28T08:50:20.616+00:00"
         },
         {
-            "id": "1xZuuHmhFTjU2LvOooO1IEGpeut",
+            "id": "1xXXXXmhFTjU2LvOooO1IEGpeut",
             "name": "111111",
-            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
-            "appkey": "easemob-demo#support",
+            "moderationId": "159XXXXcL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "XXXX#XXXX",
             "category": "DEFAULT",
             "scope": "ALL",
             "tagId": null,

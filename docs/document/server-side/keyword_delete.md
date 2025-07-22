@@ -1,8 +1,8 @@
-# 删除关键词
+# 删除单个关键词
 
 ## 功能说明
 
-删除关键词。
+删除单个关键词。
 
 **调用频率上限**：100 次/秒/App Key 
 
@@ -63,7 +63,7 @@ DELETE https://{host}/{org_name}/{app_name}/moderation/text/list/(list_id)/word?
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE 'https://XXXX/XXXX/XXXX/moderation/text/list/{list_id}/word?wordId={wordId}' \
+curl -X DELETE 'https://XXXX/XXXX/XXXX/moderation/text/list/{list_id}/word?wordId={word_id}' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 ```

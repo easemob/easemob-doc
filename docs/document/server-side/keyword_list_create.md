@@ -52,7 +52,7 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list
 | 参数            | 类型   | 是否必需 | 描述         |
 | :-------------- | :----- | :------- | :----------------------- |
 | `name`        | String | 是       | 关键词名单的名称，不能超过 32 个字符。 |
-| `scope` | String | 是       | 生效范围：<br/> - `ALL`：对所有会话均生效；<br/> - `CHAT`：仅对单聊会话生效；<br/> - `GROUP`：仅对群组会话生效；<br/> - `ROOM`：仅对聊天室会话生效； - `TAG`：仅对指定标签下的用户、群组或聊天室生效。|
+| `scope` | String | 是       | 关键词名单的生效范围：<br/> - `ALL`：对所有会话均生效；<br/> - `CHAT`：仅对单聊会话生效；<br/> - `GROUP`：仅对群组会话生效；<br/> - `ROOM`：仅对聊天室会话生效；<br/> - `TAG`：仅对指定标签下的用户、群组或聊天室生效。|
 | `tagId`        | String | 否       | 用户标签 ID。该参数仅在 `scope` 为 `TAG` 时必须设置。  |
 | `disposition`        | String | 是       | 对匹配关键词的消息内容的审核处理：<br/> - `PASS`：忽略，对匹配的关键词不处理。<br/> - `REJECT`：拦截，对内容匹配关键词的消息进行拦截，不下发给接收方。<br/> - `EXCHANGE`：替换为 `***`。|
 | `fullMatch`        | Boolean | 否       | 关键词与消息内容是否为精确匹配：<br/> - `true`：是  <br/> - `false`：否  |
@@ -76,7 +76,7 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list
 | - `category` | String | 值为 `DEFAULT`，表示关键词名单。 |
 | - `scope` | String | 关键词名单的生效范围。  |
 | - `tagId` | String | 标签 ID。 |
-| - `fullMatch` | Boolean | 关键词与消息内容是否为精确匹配。 |
+| - `fullMatch` | Boolean | 关键词与消息内容是否要精确匹配。 |
 | - `suggestion` | String | 对匹配关键词的消息内容的处理建议。该字段的值以及值的含义与 `disposition` 字段相同。  |
 | - `disposition` | String | 对匹配关键词的消息内容的处理。关于该字段的说明，详见 [请求 body](#请求-body) 中的 `disposition`。 |
 | - `quantity` | Int | 关键词数量。 |
@@ -172,9 +172,9 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list' \
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 400 | Bad Request | request param is empty | 生效范围、关键词名单的名称、对匹配关键词的消息内容的审核处理为空。 | 检查必填参数。 |
-| 400 | Bad Request | The textList count exceeds the maximum number | 关键词名单数量超过上限。每个应用最多可配置 10 个名单。 |  |
+| 400 | Bad Request | The textList count exceeds the maximum number | 关键词名单数量超过上限。每个应用最多可配置 10 个名单。 | 减少关键词名单数量。 |
 | 400 | Bad Request | The text count exceeds the maximum number | 关键词数量超过上限。 | 减少关键词数量。 |
 | 400 | Bad Request | The textList already exists | 关键词名单名称已存在。 | 修改关键词名单名称。 |
-| 400 | Bad Request | moderation org data is empty | 你未开通审核服务。 | 开通审核服务。 |
-| 400 | Bad Request | the number of words exceeds the limit | 应用下面的关键词总数超过上限。每个应用最多可配置 10 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 100,000 个词条。|  |
-| 400 | MODERATION_002 | "request param is empty | 若未设置必填参数，例如 `name` 或 `scope`，会提示该错误。 | 请必须设置必填参数。 |
+| 400 | Bad Request | moderation org data is empty | 你未开通内容审核服务。 | 开通内容审核服务。 |
+| 400 | Bad Request | the number of words exceeds the limit | 应用下面的关键词总数超过上限。每个应用最多可配置 10 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 100,000 个词条。| 减少关键词数量。 |
+| 400 | MODERATION_002 | "request param is empty | 若未设置必填参数，例如 `name` 或 `scope`，会提示该错误。 | 请传入必填参数。 |

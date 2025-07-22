@@ -55,9 +55,9 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/{list_id}/word
 | `page` | Int   | 否 | 当前页码，默认值为 `0`。|
 | `size` | Int   | 否   | 每页返回的关键词数量，取值范围为 [1,200]，默认值为 `10`。|
 
-#### HTTP 响应
+## HTTP 响应
 
-##### 响应 body
+### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -79,13 +79,11 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/{list_id}/word
 | `totalPages` | Int | 页面总数。 |
 | `totalElements` | Int | 与查询关键词匹配的词条总数量。 |
 
-其他字段及描述详见 [公共参数](#公共参数)。
-
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 
-#### 示例
+## 示例
 
-##### 请求示例
+### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -101,7 +99,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/{list_id}/word' \
     }' 
 ```
 
-##### 响应示例
+### 响应示例
 
 ```json
 {
@@ -155,15 +153,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/{list_id}/word' \
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 400 | Bad request | textList data is empty | id不正确 |  |
-| 400 | Bad request | appkey is not exist | App Key 是环信即时通讯 IM 分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成。上报该错误表示 `org_name` 或者 `app_name` 不正确。 |  |
-
-
-
-
-
-
-
-
+| 400 | Bad request | textList data is empty | 未传 `list_id`。 | 请传入有效的 `list_id`。 |
+| 400 | Bad request | appkey is not exist | App Key 是环信即时通讯 IM 分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成。上报该错误表示 `org_name` 或者 `app_name` 不正确。 | 请传入正确的 `org_name` 和 `app_name` 参数。|
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

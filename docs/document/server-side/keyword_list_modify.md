@@ -45,12 +45,12 @@ PUT https://{host}/{org_name}/{app_name}/moderation/text/list/{list_id}
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。    |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+### 请求 body
 
 | 参数            | 类型   | 是否必需 | 描述         |
 | :-------------- | :----- | :------- | :----------------------- |
 | `name`        | String | 是       | 关键词名单的名称，不能超过 32 个字符。 |
-| `scope` | String | 是       |生效范围：<br/> - `ALL`：对所有会话均生效；<br/> - `CHAT`：仅对单聊会话生效；<br/> - `GROUP`：仅对群组会话生效；<br/> - `ROOM`：仅对聊天室会话生效；<br/> - `TAG`：仅对指定标签下的用户、群组或聊天室生效。|
+| `scope` | String | 是       | 关键词名单的生效范围：<br/> - `ALL`：对所有会话均生效；<br/> - `CHAT`：仅对单聊会话生效；<br/> - `GROUP`：仅对群组会话生效；<br/> - `ROOM`：仅对聊天室会话生效；<br/> - `TAG`：仅对指定标签下的用户、群组或聊天室生效。|
 | `tagId`        | String | 否       | 标签 ID。该参数仅在 `scope` 为 `TAG` 时必须设置。   |
 | `disposition`        | String | 是       | 对匹配关键词的消息内容的审核处理：<br/> - `PASS`：忽略，对匹配的关键词不处理。<br/> - `REJECT`：拦截，对内容匹配关键词的消息进行拦截，不下发给接收方。<br/> - `EXCHANGE`：替换为 `***`。  |
 | `fullMatch`        | Boolean | 否       | 关键词与消息内容是否为精确匹配：<br/> - `true`：是  <br/> - (默认) `false`：否  |
@@ -135,6 +135,6 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/moderation/text/list/1xXXXXVlodF52URYQk7rZmd
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 400 | Bad request | textList data is empty | 请求中传入的关键词名单 ID 参数 `list_id` 不存在，App Key 与 `list_id `无法对应。 | 传输正确的 `list_id` 参数。 |
 | 400 | Bad request | The textList already exists | 请求中传入的关键词名单名称 `name` 重复。 | 修改 `name` 的值。 |
-| 400 | Bad request | textList id is empty | 请求中传入的关键词名单 ID 参数 `list_id` 为空。 |  |
+| 400 | Bad request | textList id is empty | 请求中传入的关键词名单 ID 参数 `list_id` 为空。 | 请传入正确的 `list_id`。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
