@@ -80,8 +80,8 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list
 | - `disposition` | String | 对匹配关键词的消息内容的处理。关于该字段的说明，详见 [请求 body](#请求-body) 中的 `disposition`。 |
 | - `quantity` | Int | 关键词数量。 |
 | - `status` | String | 关键词名单的状态：<br> - `ACTIVE`：开启<br> - `CLOSE`：关闭 |
-| - `createDateTime` | Long | 关键词名单的创建时间。|
-| - `updateDateTime` | Long | 关键词名单的修改时间。 |
+| - `createDataTime` | Long | 关键词名单的创建时间。|
+| - `updateDataTime` | Long | 关键词名单的修改时间。 |
 | - `textList` | Array | 关键词列表。<br> - `id`：String, 关键词 ID。 <br> - `appId`：应用 ID。 <br> - `word`：String, 关键词。  <br> - `userId`：String，添加关键词的用户 ID。 <br/> - `listId`：关键词名单 ID。 <br/> - `status`：关键词状态。开发者可忽略该参数。<br> - `createDateTime`：关键词添加时间。 <br> - `updateDateTime`：关键词更新时间。 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。

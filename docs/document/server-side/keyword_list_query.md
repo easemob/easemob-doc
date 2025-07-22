@@ -1,8 +1,8 @@
-# 查询关键词名单
+# 查询关键词名单列表
 
 ## 功能说明
 
-查询关键词名单。
+你可以查询单个关键词名单或分页查询关键词名单列表。
 
 **调用频率上限**：100 次/秒/App Key 
 
@@ -28,7 +28,7 @@
 POST https://{host}/{org_name}/{app_name}/moderation/text/list/search
 ```
 
-#### 路径参数
+### 路径参数
 
 | 参数          | 类型   | 是否必需 | 描述  |
 | :------------ | :----- | :------- | :---------------- |
@@ -36,14 +36,7 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/search
 | `org_name`    | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `app_name`    | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 
-#### 查询参数 --- 错误
-
-| 参数            | 类型   | 是否必需 | 描述         |
-| :-------------- | :----- | :------- | :----------------------- |
-| `size` | Int   | 否   | 每页返回的关键词数量，取值范围为 [1,200]，默认值为 `10`。| 
-| `page` | Int   | 否 | 当前页码，默认值为 `0`。|  
-
-#### 请求 header
+### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述         |
 | :-------------- | :----- | :------- | :----------------------- |
@@ -51,14 +44,19 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/search
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。    |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+### 请求 body
+
+- 若只传入 `name`，则返回指定名称的关键词名单。
+- 若只传入 `tagId`，则返回匹配指定用户标签的关键词名单。
+- 若你传入了 `size` 和 `page`，则返回指定页面的关键词名单。
+- 这四个参数虽然都是可选，但查询时若不传入任何参数，则返回 400 错误。请根据具体需求传如参数查询。
 
 | 参数            | 类型   | 是否必需 | 描述         |
 | :-------------- | :----- | :------- | :----------------------- |
-| `name`        | String | 是       | 关键词名单的名称。 |
+| `name`        | String | 否       | 关键词名单的名称。 |
 | `tagId`        | String | 否       | 用户标签 ID。|
-| page | Integer | 否 | 默认0 |
-| size | Integer | 否 | 默认10 |
+| `size` | Int   | 否   | 每页返回的关键词数量，取值范围为 [1,200]，默认值为 `10`。| 
+| `page` | Int   | 否 | 当前页码，默认值为 `0`。|  
 
 #### HTTP 响应
 
@@ -77,26 +75,28 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/search
 | - `category` | String | 值为 `DEFAULT`，表示关键词名单。 |
 | - `scope` | String | 关键词名单的生效范围。  |
 | - `tagId` | String | 标签 ID。 |
-| - `fullMatch` | Boolean | 关键词与消息内容是否为精确匹配。 |
+| - `fullMatch` | Boolean | 关键词与消息内容是否要精确匹配。 |
 | - `suggestion` | String | 对匹配关键词的消息内容的处理建议。该字段的值以及值的含义与 `disposition` 字段相同。  |
 | - `disposition` | String | 对匹配关键词的消息内容的处理。  |
 | - `quantity` | Int | 名单中关键词的总数量。 |
 | - `status` |  | 关键词名单的状态：<br> - `ACTIVE`：开启<br> - `CLOSE`：关闭 |
-| - `createDateTime` | Long | 关键词名单的创建时间。|
-| - `updateDateTime` | Long | 关键词名单的修改时间。|
+| - `createDataTime` | Long | 关键词名单的创建时间。|
+| - `updateDataTime` | Long | 关键词名单的修改时间。|
 | `first` | Boolean | 当前页面是否为首页：<br/> - `true`：是 <br/> - `false`：否|
 | `last` | Boolean | 当前页面是否为最后一页：<br/> - `true`：是 <br/> - `false`：否|
-| `size` | Int | 每页查询的关键词数量。// TODO：请确认描述是否正确。 |
-| `number` | Int | 当前页码。// TODO：请确认描述是否正确。 |
-| `numberOfElements` | Int | 当前页面中获取的关键词数量。// TODO：请确认描述是否正确。|
-| `totalPages` | Int | 页面总数。// TODO：请确认描述是否正确。|
-| `totalElements` | Int | 关键词名单包含的关键词总数量。// TODO：请确认描述是否正确。|
+| `size` | Int | 每页查询的关键词名单数量。 |
+| `number` | Int | 当前页码。 |
+| `numberOfElements` | Int | 当前页面中获取的关键词名单数量。|
+| `totalPages` | Int | 页面总数。|
+| `totalElements` | Int | 应用的关键词名单总数量。|
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ## 示例
 
 ### 请求示例
+
+- 查询指定名称的关键词名单：
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -106,33 +106,62 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
-      "name": "323",
+      "name": "14"
+    }' 
+```
+
+- 查询匹配指定用户标签的关键词名单：
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+      "tagId": "111"
+    }' 
+```
+
+- 查询指定页面的关键词名单，例如，查询第 `1` 页的关键词名单：
+  
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
       "page": 1,
-      "size": 10
+      "size": 5
     }' 
 ```
 
 ### 响应示例
+
+- 返回指定名称的关键词名单：
 
 ```json
 {
     "status": "OK",
     "entities": [
         {
-            "id": "1r14gXXXXgdrpF29EgTV7VhAjpP",
-            "name": "323",
-            "moderationId": "159XXXXcL0ylUvcBfVAZ0IRQNwW",
-            "appkey": "XXXX#XXXX",
+            "id": "1r14aQrMz2vv3ob5wctsjB970y6",
+            "name": "14",
+            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "easemob-demo#support",
             "category": "DEFAULT",
-            "scope": "GROUP",
+            "scope": "ALL",
             "tagId": null,
             "fullMatch": false,
             "suggestion": "PASS",
             "disposition": "PASS",
-            "quantity": 1,
+            "quantity": 0,
             "status": "ACTIVE",
-            "createDataTime": "2025-02-28T08:51:12.314+00:00",
-            "updateDataTime": "2025-02-28T08:51:12.314+00:00"
+            "createDataTime": "2025-02-28T08:50:24.888+00:00",
+            "updateDataTime": "2025-02-28T08:50:24.888+00:00"
         }
     ],
     "first": true,
@@ -144,6 +173,119 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
     "totalElements": 1
 }
 ```
+
+- 返回匹配指定用户标签的关键词名单，例如，以下响应示例表明没有匹配指定标签的关键词名单：
+
+```json
+{
+    "status": "OK",
+    "entities": [],
+    "first": true,
+    "last": true,
+    "size": 10,
+    "number": 0,
+    "numberOfElements": 0,
+    "totalPages": 0,
+    "totalElements": 0
+}
+```
+
+- 返回指定页面的关键词名单，例如，返回第 `1` 页的 5 个关键词名单：
+
+```json 
+{
+    "status": "OK",
+    "entities": [
+        {
+            "id": "1r14X4e8f5zh3Tu9PMKIyu7AwED",
+            "name": "8",
+            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "easemob-demo#support",
+            "category": "DEFAULT",
+            "scope": "ALL",
+            "tagId": null,
+            "fullMatch": false,
+            "suggestion": "PASS",
+            "disposition": "PASS",
+            "quantity": 0,
+            "status": "ACTIVE",
+            "createDataTime": "2025-02-28T08:49:57.156+00:00",
+            "updateDataTime": "2025-02-28T08:49:57.156+00:00"
+        },
+        {
+            "id": "1r14XxJUhZAQwknj7mJWUTlyFYP",
+            "name": "9",
+            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "easemob-demo#support",
+            "category": "DEFAULT",
+            "scope": "ALL",
+            "tagId": null,
+            "fullMatch": false,
+            "suggestion": "PASS",
+            "disposition": "PASS",
+            "quantity": 0,
+            "status": "ACTIVE",
+            "createDataTime": "2025-02-28T08:50:04.228+00:00",
+            "updateDataTime": "2025-02-28T08:50:04.228+00:00"
+        },
+        {
+            "id": "1r14ZAqNDxBnH3oMuSzhroY1shB",
+            "name": "12",
+            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "easemob-demo#support",
+            "category": "DEFAULT",
+            "scope": "ALL",
+            "tagId": null,
+            "fullMatch": false,
+            "suggestion": "PASS",
+            "disposition": "PASS",
+            "quantity": 0,
+            "status": "ACTIVE",
+            "createDataTime": "2025-02-28T08:50:14.528+00:00",
+            "updateDataTime": "2025-02-28T08:50:14.528+00:00"
+        },
+        {
+            "id": "1r14ZuhneuqtBfaHcvJaZuandVR",
+            "name": "13",
+            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "easemob-demo#support",
+            "category": "DEFAULT",
+            "scope": "ALL",
+            "tagId": null,
+            "fullMatch": false,
+            "suggestion": "PASS",
+            "disposition": "PASS",
+            "quantity": 0,
+            "status": "ACTIVE",
+            "createDataTime": "2025-02-28T08:50:20.616+00:00",
+            "updateDataTime": "2025-02-28T08:50:20.616+00:00"
+        },
+        {
+            "id": "1xZuuHmhFTjU2LvOooO1IEGpeut",
+            "name": "111111",
+            "moderationId": "159Rss4cL0ylUvcBfVAZ0IRQNwW",
+            "appkey": "easemob-demo#support",
+            "category": "DEFAULT",
+            "scope": "ALL",
+            "tagId": null,
+            "fullMatch": false,
+            "suggestion": "PASS",
+            "disposition": "PASS",
+            "quantity": 0,
+            "status": "ACTIVE",
+            "createDataTime": "2025-07-22T09:44:12.917+00:00",
+            "updateDataTime": "2025-07-22T09:44:12.917+00:00"
+        }
+    ],
+    "first": false,
+    "last": false,
+    "size": 5,
+    "number": 1,
+    "numberOfElements": 5,
+    "totalPages": 5,
+    "totalElements": 24  
+}   
+```    
 
 ## 错误码
 

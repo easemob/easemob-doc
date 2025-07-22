@@ -77,8 +77,8 @@ PUT https://{host}/{org_name}/{app_name}/moderation/text/list/{list_id}
 | - `disposition` | String | 对匹配关键词的消息内容的处理。  |
 | - `quantity` | Int | 关键词数量。 |
 | - `status` | String | 关键词名单的状态。<br> - `ACTIVE`：开启<br> - `CLOSE`：关闭。 |
-| - `createDateTime` | Long | 关键词名单的创建时间。 |
-| - `updateDateTime` | Long | 关键词名单的修改时间。 |
+| - `createDataTime` | Long | 关键词名单的创建时间。 |
+| - `updateDataTime` | Long | 关键词名单的修改时间。 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
