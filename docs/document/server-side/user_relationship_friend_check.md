@@ -1,8 +1,8 @@
-# 批量校验好友
+# 校验好友
 
 ## 功能说明
 
-- 批量校验是否在好友列表中。
+- 批量检查用户是否在好友列表中。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -50,8 +50,8 @@ POST https://{host}/{org_name}/{app_name}/contacts/check
 
 | 参数  | 类型 | 是否必需  | 描述             | 
 | :---- | :----- | :---------------------- | :------- |
-| `username` | String | 是 | 当前用户 ID。批量校验该用户 ID 的好友。 | 
-| `check_list` | JSON Array | 是 | 需要校验的好友的用户 ID，一次最多可校验 100 个用户 ID。 | 
+| `username` | String | 是 | 当前用户 ID。批量检查该用户 ID 的好友。 | 
+| `check_list` | JSON Array | 是 | 需要检查的好友的用户 ID，一次最多可校验 100 个用户 ID。 | 
 
 ## HTTP 响应
 
@@ -128,5 +128,5 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 400   | illegal_argument | username cannot be blank | 校验的用户 `username` 不能传空。 | 确认 `username` 参数是否正确填写。 |
 | 400   | illegal_argument | check_list size must be between 1 and 100 | 被校验的用户列表只能包含 1 到 100 个用户。 | 确认 `check_list` 参数是否正确填写。 |
 
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+关于其他错误，你可以参考 [错误码页面](error.html) 了解可能的原因。
 
