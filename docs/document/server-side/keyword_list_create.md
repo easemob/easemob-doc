@@ -53,9 +53,9 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list
 | :-------------- | :----- | :------- | :----------------------- |
 | `name`        | String | 是       | 关键词名单的名称，不能超过 32 个字符。 |
 | `scope` | String | 是       | 关键词名单的生效范围：<br/> - `ALL`：对所有会话均生效；<br/> - `CHAT`：仅对单聊会话生效；<br/> - `GROUP`：仅对群组会话生效；<br/> - `ROOM`：仅对聊天室会话生效；<br/> - `TAG`：仅对指定标签下的用户、群组或聊天室生效。|
-| `tagId`        | String | 否       | 用户标签 ID。该参数仅在 `scope` 为 `TAG` 时必须设置。  |
+| `tagId`        | String | 否       | 标签 ID。该参数仅在 `scope` 为 `TAG` 时必须设置。  |
 | `disposition`        | String | 是       | 对匹配关键词的消息内容的审核处理：<br/> - `PASS`：忽略，对匹配的关键词不处理。<br/> - `REJECT`：拦截，对内容匹配关键词的消息进行拦截，不下发给接收方。<br/> - `EXCHANGE`：替换为 `***`。|
-| `fullMatch`        | Boolean | 否       | 关键词与消息内容是否为精确匹配：<br/> - `true`：是  <br/> - `false`：否  |
+| `fullMatch`        | Boolean | 否       | 关键词与消息内容是否为精确匹配：<br/> - `true`：是  <br/> - (默认) `false`：否  |
 | `userId`        | String | 否       | 创建关键词名单的用户 ID。   |
 | `textContexts`        | Array | 是       | 关键词。每次最多可包含 200 个关键词，每个关键词的不能超过 128 个字符。  |
 
@@ -83,9 +83,9 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list
 | - `status` | String | 关键词名单的状态：<br> - `ACTIVE`：开启<br> - `CLOSE`：关闭 |
 | - `createDataTime` | Long | 关键词名单的创建时间。|
 | - `updateDataTime` | Long | 关键词名单的修改时间。 |
-| - `textList` | Array | 关键词列表。<br> - `id`：String, 关键词 ID。 <br> - `appId`：应用 ID。 <br> - `word`：String, 关键词。  <br> - `userId`：String，添加关键词的用户 ID。 <br/> - `listId`：关键词名单 ID。 <br/> - `status`：关键词状态。开发者可忽略该参数。<br> - `createDateTime`：关键词添加时间。 <br> - `updateDateTime`：关键词更新时间。 |
+| - `textList` | Array | 关键词列表。<br> - `id`：String, 关键词 ID。 <br> - `appId`：String，应用 ID。 <br> - `word`：String, 关键词。  <br> - `userId`：String，添加关键词的用户 ID。 <br/> - `listId`：String，关键词名单 ID。 <br/> - `status`：String，关键词状态。开发者可忽略该参数。<br> - `createDateTime`：Long，关键词添加时间。 <br> - `updateDateTime`：Long，关键词更新时间。 |
 
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ## 示例
 

@@ -76,7 +76,7 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/{list_id}/word/ba
 | - `status` | String | 关键词名单的状态。<br> - `ACTIVE`：开启<br> - `CLOSE`：关闭 |
 | - `createDataTime` | Long | 关键词名单创建时间。|
 | - `updateDataTime` | Long | 关键词名单修改时间。|
-| - `textList` | JSON Array | 关键词列表。对于每个关键词，详情如下：<br/> - `id`：关键词 ID <br/> - `appId`：App ID <br/> - `word`：关键词名称 <br/> - `userId`：添加关键词的用户 ID <br/> - `listId`：关键词名单 ID <br/> - `status`：关键词状态。开发者可忽略该参数。<br/> - `createDateTime`：关键词添加时间 <br/> - `updateDateTime`：关键词修改时间 |
+| - `textList` | JSON Array | 关键词列表。对于每个关键词，详情如下：<br/> - `id`：String，关键词 ID <br/> - `appId`：String，App ID <br/> - `word`：String，关键词名称 <br/> - `userId`：String，添加关键词的用户 ID <br/> - `listId`：String，关键词名单 ID <br/> - `status`：String，关键词状态。开发者可忽略该参数。<br/> - `createDateTime`：Long，关键词添加时间 <br/> - `updateDateTime`：Long，关键词修改时间 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](error.html) 了解可能的原因。
 

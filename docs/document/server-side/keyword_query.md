@@ -69,8 +69,8 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/{list_id}/word
 | - `word` | String  | 关键词名称。 |
 | - `userId` | String | 查询关键词的用户。 |
 | - `listId` | String | 关键词名单 ID。 |
-| - `createDateTime` |  | 关键词添加时间。 |
-| - `updateDateTime` |  | 关键词修改时间。|
+| - `createDateTime` | Long  | 关键词添加时间。 |
+| - `updateDateTime` | Long | 关键词修改时间。|
 | `first` | Boolean | 当前页面是否为首页：<br/> - `true`：是 <br/> - `false`：否  |
 | `last` | Boolean | 当前页面是否为最后一页：<br/> - `true`：是 <br/> - `false`：否 |
 | `size` | Int | 当前页面返回的与查询关键词模糊匹配的词条。|
