@@ -132,7 +132,7 @@ export type RoomOption = {
 
 | 参数         | 是否必需 | 描述     |
 | :----------- | :----- | :--------------------- |
-| `appKey` | 是  | 你在环信即时通讯云控制台创建应用时填入的应用名称。该参数是 App Key 的一部分。可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。   |
+| `appKey` | 是  | 你在环信即时通讯云控制台创建应用时填入的应用名称。该参数是 App Key 的一部分。可以在[环信即时通讯云控制台](/product/enable_and_configure_IM)的 **应用详情** 页面查看。   |
 | `isDevMode`  | 否 | 如果设置为 `true`，则激活日志打印等工具。  |
 | `language` | 否  | 设置当前的语言，若未设置，则获取系统当前的语言作为默认值。   |
 | `languageBuiltInFactory` | 否 | 若未设置则使用内置的语言资源。通常可以修改内置的 UI 内容。    |

@@ -66,7 +66,7 @@
 
 1. 通过客户端将用户踢出群组/聊天室。
 2. 调用 RESTful API 将用户踢出群组/聊天室。
-3. 在[环信控制台](https://console.easemob.com/user/login)将用户踢出群组/聊天室。
+3. 在[环信控制台](/product/enable_and_configure_IM)将用户踢出群组/聊天室。
 
 ### 回调请求
 
@@ -120,7 +120,7 @@
 
 1. 通过客户端将用户加入群组/聊天室黑名单时退出群组/聊天室。
 2. 调用 RESTful API 将用户加入群组/聊天室黑名单时退出群组/聊天室。
-3. 在[环信控制台](https://console.easemob.com/user/login)将用户加入群组/聊天室黑名单时退出群组/聊天室。
+3. 在[环信控制台](/product/enable_and_configure_IM)将用户加入群组/聊天室黑名单时退出群组/聊天室。
 
 ### 回调请求
 
@@ -173,7 +173,7 @@
 
 1. 通过客户端解散群组/聊天室时用户退出。
 2. 调用 RESTful API 解散群组/聊天室时用户退出。
-3. 在[环信控制台](https://console.easemob.com/user/login)解散群组/聊天室时用户退出。
+3. 在[环信控制台](/product/enable_and_configure_IM)解散群组/聊天室时用户退出。
 
 ### 回调请求
 

@@ -2,10 +2,10 @@
 
 <Toc />
 
-即时通讯 IM SDK 提供消息举报接口。你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在[环信即时通讯云控制台](https://console.easemob.com/user/login)展示。你可在环信即时通讯云控制台查看举报记录，并进行相应处理。
+即时通讯 IM SDK 提供消息举报接口。你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在[环信即时通讯云控制台](/product/enable_and_configure_IM)展示。你可在环信即时通讯云控制台查看举报记录，并进行相应处理。
 
 :::tip
-1. 使用前，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login) 开通该功能。
+1. 使用前，你需要在[环信即时通讯云控制台](/product/enable_and_configure_IM) 开通该功能。
 2. 消息举报功能与内容审核功能为两个独立的功能，没有任何关联，因此使用该功能无需提前开通内容审核功能。
 :::
 
@@ -48,6 +48,6 @@ SDKClient.Instance.ChatManager.ReportMessage(msgId, tag, reason, new CallBack(
 | `tag` | String | 非法消息的标签。你需要自定义标签，例如**涉政**或**广告**。该字段对应环信即时通讯云控制台的消息举报记录页面的**词条标记**字段。 | 
 | `reason` | String | 举报原因。你需要自行填写举报原因，最长不能超过 512 字节。该字段对应环信即时通讯云控制台的消息举报记录页面的**举报原因**字段。 |
 
-要在[环信即时通讯云控制台](https://console.easemob.com/user/login)上查询消息举报页面，需在首页选择应用，点击**操作**一栏中的**管理**，选择**即时通讯 > 内容审核 > 消息举报**。
+要在[环信即时通讯云控制台](/product/enable_and_configure_IM)上查询消息举报页面，需在首页选择应用，点击**操作**一栏中的**管理**，选择**即时通讯 > 内容审核 > 消息举报**。
 
 ![img](/images/android/message_report.png)

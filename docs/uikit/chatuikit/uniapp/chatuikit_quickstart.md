@@ -170,7 +170,7 @@ const logout = () => {
 
 2. 打开 `app.vue` 文件，并替换为如下内容。
 
-要查看服务器域名配置，请点击[这里](https://doc.easemob.com/document/applet/wechat.html#配置服务器域名) 。
+要查看服务器域名配置，请点击[这里](/document/applet/wechat.html#配置服务器域名) 。
 
 ```jsx
 <script lang="ts">

@@ -99,7 +99,7 @@ Demo 中创建或加入语聊房的流程如下：
 - Android Studio 3.0 或以上版本；
 - Android SDK API 等级 23 或以上；
 - Android 6.0 或以上版本的设备；
-- 有效的环信 IM 开发者账号和 App key，详见[环信即时通讯云控制台](https://console.easemob.com/user/login)；
+- 有效的环信 IM 开发者账号和 App key，详见[环信即时通讯云控制台](/product/enable_and_configure_IM)；
 - [有效的 Agora 项目，获取项目的 App ID 以及一个 RTC Token，实现语音通话](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_android_ng?platform=Android)；
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 

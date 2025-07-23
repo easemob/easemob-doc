@@ -96,7 +96,7 @@ features.chat.message.reply = false;
 
 #### 如何使用
 
-1. 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
+1. 使用该特性前，请确保在[环信即时通信控制台](/product/enable_and_configure_IM)上已申请试用该功能。
 
 消息翻译特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
