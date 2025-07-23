@@ -56,9 +56,9 @@ PUT https://{host}/{org_name}/{app_name}/moderation/text/list/{list_id}
 | `fullMatch`        | Boolean | 否       | 关键词与消息内容是否为精确匹配：<br/> - `true`：是  <br/> - (默认) `false`：否  |
 | `userId`        | String | 否       | 用户 ID。  |
 
-#### HTTP 响应
+## HTTP 响应
 
-##### 响应 body
+### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -137,4 +137,4 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/moderation/text/list/1xXXXXVlodF52URYQk7rZmd
 | 400 | Bad request | The textList already exists | 请求中传入的关键词名单名称 `name` 重复。 | 修改 `name` 的值。 |
 | 400 | Bad request | textList id is empty | 请求中传入的关键词名单 ID 参数 `list_id` 为空。 | 请传入正确的 `list_id`。 |
 
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+关于其他错误，你可以参考 [错误码页面](error.html) 了解可能的原因。

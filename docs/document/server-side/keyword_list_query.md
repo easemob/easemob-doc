@@ -58,9 +58,9 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/search
 | `size` | Int   | 否   | 每页返回的关键词数量，取值范围为 [1,200]，默认值为 `10`。| 
 | `page` | Int   | 否 | 当前页码，默认值为 `0`。|  
 
-#### HTTP 响应
+## HTTP 响应
 
-##### 响应 body
+### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -79,7 +79,7 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/search
 | - `suggestion` | String | 对匹配关键词的消息内容的处理建议。该字段的值以及值的含义与 `disposition` 字段相同。  |
 | - `disposition` | String | 对匹配关键词的消息内容的处理。  |
 | - `quantity` | Int | 名单中关键词的总数量。 |
-| - `status` |  | 关键词名单的状态：<br> - `ACTIVE`：开启<br> - `CLOSE`：关闭 |
+| - `status` | String | 关键词名单的状态：<br> - `ACTIVE`：开启<br> - `CLOSE`：关闭 |
 | - `createDataTime` | Long | 关键词名单的创建时间。|
 | - `updateDataTime` | Long | 关键词名单的修改时间。|
 | `first` | Boolean | 当前页面是否为首页：<br/> - `true`：是 <br/> - `false`：否|
@@ -294,3 +294,5 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
+
+关于其他错误，你可以参考 [错误码页面](error.html) 了解可能的原因。

@@ -178,3 +178,5 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list' \
 | 400 | Bad Request | moderation org data is empty | 你未开通内容审核服务。 | 开通内容审核服务。 |
 | 400 | Bad Request | the number of words exceeds the limit | 应用下面的关键词总数超过上限。每个应用最多可配置 10 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 100,000 个词条。| 减少关键词数量。 |
 | 400 | MODERATION_002 | "request param is empty | 若未设置必填参数，例如 `name` 或 `scope`，会提示该错误。 | 请传入必填参数。 |
+
+关于其他错误，你可以参考 [错误码页面](error.html) 了解可能的原因。

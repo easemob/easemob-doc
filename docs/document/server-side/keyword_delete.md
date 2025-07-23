@@ -86,4 +86,4 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/moderation/text/list/{list_id}/word?wordI
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 400 | Bad Request | request data is empty | 名单 ID 不存在 | 传输正确的名单 ID。 |
 
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+关于其他错误，你可以参考 [错误码页面](error.html) 了解可能的原因。
