@@ -169,4 +169,4 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/{list_id}/word/batch' 
 | 400 | Bad Request | textList data is empty | 不存在关键词名单。 | 先创建名单，再操作。 |
 | 400 | Bad Request | The textList already contains the text | 关键词重复。 | 去除重复关键词。 |
 
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+关于其他错误，你可以参考 [错误码页面](error.html) 了解可能的原因。

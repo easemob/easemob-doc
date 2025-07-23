@@ -79,4 +79,4 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/moderation/text/list/{list_id}' \
 | 400 | Bad request | textList data is empty | 名单不存在 | 检查传入的 `list_id` 参数是否正确。 |
 | 400 | Bad request | appkey is not exist | App Key 不存在。 | 请传入正确的 `org_name` 和 `app_name` 参数。  |
 
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+关于其他错误，你可以参考 [错误码页面](error.html) 了解可能的原因。
