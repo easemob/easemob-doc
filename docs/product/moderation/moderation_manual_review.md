@@ -4,7 +4,7 @@
 
 ## 前提条件
 
-- 有效的 [环信即时通讯 IM 开发者账号](https://console.easemob.com/index)；
+- 有效的 [环信即时通讯 IM 开发者账号](/product/enable_and_configure_IM/index)；
 - 在 Console 中开通内容审核服务：选择 **即时通讯** > 应用 **管理** > **功能配置总览**，进入 **试用功能** > **人工审核** 页面，点击 **申请开通**。如下图所示：
 
 ![img](/images/moderation/moderation_manual_review_01.png)

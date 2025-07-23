@@ -13,7 +13,7 @@
 
 ### 2.1 计费周期
 
-环信PUSH消息云每月5号出账单，对当月峰值DAU使用情况进行统计，根据消费情况从余额进行扣费，您可以前往 [费用中心](https://console.easemob.com/costMoneyCenter) 查看详细扣费信息。
+环信PUSH消息云每月5号出账单，对当月峰值DAU使用情况进行统计，根据消费情况从余额进行扣费，您可以前往 [费用中心](/product/enable_and_configure_IM/costMoneyCenter) 查看详细扣费信息。
 
 ### 2.2 欠费说明
 

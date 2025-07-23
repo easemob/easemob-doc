@@ -66,8 +66,7 @@
 - 调用该 API 无需传入 token。
 - 注册用户时，需满足用户 ID 和密码的设置要求。
 
-**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
-
+**调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key。
 #### HTTP 请求
 
 ```http
@@ -146,7 +145,7 @@ curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users" -d '{"username":"user1",
 | 400         | illegal_argument | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。   | 查看注册用户名[规范](#开放注册单个用户)。 |
 | 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | 注册用户名已经存在。 | 更换用户名重新注册。  |
 | 401         | unauthorized  | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。   | 使用新的 token 访问。       |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 | 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐包的限制。 | 联系商务开通付费版。   |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
@@ -256,7 +255,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 401         | unauthorized                       | token is illegal.    | token 不合法，生成 token 使用信息与请求携带的信息不匹配。 | 使用新的 token 访问。   |
 | 401         | unauthorized                       | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。  | 使用新的 token 访问。    |
 | 401         | unauthorized                       | Open registration doesn't allow, so register user need token| 授权注册模式，注册用户时需要 token。 | 请求时携带 token。 |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用) |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用) |
 | 429         | resource_limited                   | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐版本的限制。 | 联系商务开通付费版。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -517,7 +516,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 处理建议    |
 | :---------- | :---------- | :--------- | :----------- | :---------- |
 | 401         | unauthorized                       | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 | 404         | service_resource_not_found         | Service resource not found  | 用户不存在。  | 先注册用户或者检查用户名是否正确。  |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

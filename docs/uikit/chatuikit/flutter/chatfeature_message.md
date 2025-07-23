@@ -97,7 +97,7 @@ ChatUIKitSettings.enableMessageReply = false;
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
+使用该特性前，请确保在[环信即时通信控制台](/product/enable_and_configure_IM)上已申请试用该功能。
 
 1. 开启消息翻译特性。
 

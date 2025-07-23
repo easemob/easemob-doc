@@ -229,7 +229,7 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 ### **测试步骤**
 
 1. 在设备上登录应用，并确认 device token 绑定成功。
-   可以查看日志或调用[获取用户详情的 RESTful 接口](https://doc.easemob.com/document/server-side/account_system.html#获取单个用户的详情)确认 device token 是否绑定成功。成功后在 `entities` 字段下会有 `pushInfo` 字段，且 `pushInfo` 下会有 `device_Id`、`device_token`、`notifier_name` 等相关信息。
+   可以查看日志或调用[获取用户详情的 RESTful 接口](/document/server-side/account_system.html#获取单个用户的详情)确认 device token 是否绑定成功。成功后在 `entities` 字段下会有 `pushInfo` 字段，且 `pushInfo` 下会有 `device_Id`、`device_token`、`notifier_name` 等相关信息。
 2. 开启应用通知栏权限。
 3. 杀掉应用进程。
 4. 在 **环信即时通讯云控制台** 发送测试消息。

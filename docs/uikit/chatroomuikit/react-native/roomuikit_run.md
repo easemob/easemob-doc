@@ -43,7 +43,7 @@ cd examples/room-example
 
 修改 `examples/room-example/src/env.ts` 文件内容，填写 appKey 参数。
 
-您可以在[环信即时通讯云控制台](https://console.easemob.com/)创建应用并获取 appKey。
+您可以在[环信即时通讯云控制台](/product/enable_and_configure_IM/)创建应用并获取 appKey。
 
 3. 运行项目：
 

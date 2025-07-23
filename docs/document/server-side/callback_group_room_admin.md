@@ -66,7 +66,7 @@
 
 1. 客户端删除了群组/聊天室管理员。
 2. 调用 RESTful API 删除了群组/聊天室管理员。
-3. 在[环信控制台](https://console.easemob.com/user/login)上删除了群组/聊天室管理员。 
+3. 在[环信控制台](/product/enable_and_configure_IM)上删除了群组/聊天室管理员。 
 
 ### 回调请求
 

@@ -7,7 +7,7 @@
 
 ## 前提条件
 
-- 有效的 [环信即时通讯 IM 开发者账号](https://console.easemob.com/index)；
+- 有效的 [环信即时通讯 IM 开发者账号](/product/enable_and_configure_IM/index)；
 - 账户余额大于 288 元；
 - 消息举报功能需同时在客户端集成相应 API。
 
