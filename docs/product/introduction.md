@@ -51,7 +51,7 @@
 
 ### 账号鉴权
 
-即时通讯 IM 支持使用 App 自身账号快速集成即时通信 IM 服务，无需进行账号映射。集成 SDK 后，可以通过接口调用完成用户 ID 与 Token 的鉴权，详情可参见 [用户注册与登录](/product/product_user_registration_login.html) 文档。
+即时通讯 IM 支持使用 App 自身账号快速集成即时通讯 IM 服务，无需进行账号映射。集成 SDK 后，可以通过接口调用完成用户 ID 与 Token 的鉴权，详情可参见 [用户注册与登录](/product/product_user_registration_login.html) 文档。
 
 ## 管理与监控
 
