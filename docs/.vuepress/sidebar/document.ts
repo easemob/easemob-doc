@@ -329,6 +329,7 @@ const documentSidebar = [
       { text: 'Uniapp 生成原生 Android、iOS 应用', link: 'uniappnativeapp.html' },
       { text: '小程序模板使用指南', link: 'uniappuikit.html' },
       { text: '如何配置服务器域名', link: 'serverconfig.html' },
+      { text: 'Vue3 项目在 H5 平台发布的注意事项', link: 'vue3_project_h5.html' },
     ],
     only: ['applet']
   },
