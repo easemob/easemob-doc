@@ -881,6 +881,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 - 修改用户的登录密码，不需要提供原密码。
 - 设置的新密码的长度不可超过 64 个字符。
 - 若用户在线，修改密码后会导致用户被踢下线。
+- 修改密码后，该用户的所有在线设备会被踢下线，需使用新密码重新登录。若通过用户 Token 登录，原先的 Token 也失效，需重新获取用户 Token 进行登录。
 
 **调用频率上限**：该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
 
