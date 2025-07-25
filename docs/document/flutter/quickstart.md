@@ -51,7 +51,7 @@ android {
 }
 ```
 
-2. 打开文件 `quick_start/android/app/src/main/AndroidManifest.xml`，在 `</application>` 下添加：
+2. 打开文件 `quick_start/android/app/src/main/AndroidManifest.xml`，在 `</application>` 下方添加：
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
