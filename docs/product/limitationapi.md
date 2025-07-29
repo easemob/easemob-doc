@@ -261,10 +261,10 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 校验好友   | POST   | /{org_name}/{app_name}/contacts/check    | 100 次/秒/App Key   | 50 次/秒    | 
 | 删除单个好友    | DELETE | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |  100 次/秒   | 
 | 删除所有好友    | DELETE | /{org_name}/{app_name}/contacts/users/{username}    | 100 次/秒/App Key                                                 |  50 次/秒   | 
-| 设置好友备注 | PUT | /{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username} | 100 次/秒/App Key | 50 次/秒 |
+| 设置好友备注 | PUT | /{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username} | 100 次/秒/App Key | |
 | 分页获取好友列表    |  GET  | /{org_name}/{app_name}/user/{username}/contacts?limit={N}&cursor={cursor}&needReturnRemark={true/false}  | 100 次/秒/App Key   | 50 次/秒| 
 | 一次性获取好友列表    |  GET  | /{org_name}/{app_name}/users/{owner_username}/contacts/users   | 100 次/秒/App Key   | 100 次/秒    | 
-| * 导入好友列表    |  POST  | /{org_name}/{app_name}/users/{username}/contacts/import   | 100 次/秒/App Key   | 50 次/秒    | 
+| * 导入好友列表    |  POST  | /{org_name}/{app_name}/users/{username}/contacts/import   | 100 次/秒/App Key   |   | 
 | 获取黑名单列表     | GET   | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 50 次/秒/App Key                                                  | 100 次/秒    | 
 | 校验黑名单     | POST   | /{org_name}/{app_name}/blocks/check   | 100 次/秒/App Key                                                  | 50 次/秒    | 
 | 添加用户至黑名单    | POST  | /{org_name}/{app_name}/users/{owner_username}/blocks/users    | 50 次/秒/App Key                                                  | 100 次/秒    | 
