@@ -42,25 +42,20 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | * 撤回单条消息    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key   | 100 次/秒    | 
 | * 批量撤回消息    |    POST  | /{org_name}/{app_name}/messages/batch_recall        | 100 次/秒/App Key  | 100 次/秒    | 
 | 服务端单向删除会话   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App Key   | 100 次/秒    | 
+| 添加 Reaction         | POST   | /{org_name}/{app_name}/reaction/user/{userId}   | 100 次/秒/App Key | 50 次/秒    | 
+| 根据消息 ID 获取 Reaction     | GET    | /{org_name}/{app_name}/reaction/user/{userId}  | 100 次/秒/App Key  | 25 次/秒    | 
+| 删除 Reaction     | DELETE | /{org_name}/{app_name}/reaction/user/{userId} | 100 次/秒/App Key  | 50 次/秒    | 
+| 根据消息 ID 和表情 ID 获取 Reaction 信息 | GET    | /{org_name}/{app_name}/reaction/user/{userId}/detail | 100 次/秒/App Key  | 25 次/秒    | 
 | 修改消息 | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 次/秒/App Key  | 50 条/秒    | 
-| 翻译消息内容 | POST  | /{org_name}/{app_name}/translate | 100 次/秒/App Key  | 50 条/秒    | 
-| 获取翻译语言列表 | GET  | /{org_name}/{app_name}/translate/support/language | 100 次/秒/App Key  | 50 条/秒    | 
-| 检测文本的源语言 | POST  | /{org_name}/{app_name}/translate/detect | 100 次/秒/App Key  | 50 条/秒    | 
+| 翻译消息内容 | POST  | /{org_name}/{app_name}/translate | 100 次/秒/App Key  | 50 次/秒    | 
+| 获取翻译语言列表 | GET  | /{org_name}/{app_name}/translate/support/language | 100 次/秒/App Key  | 50 次/秒    | 
+| 检测文本的源语言 | POST  | /{org_name}/{app_name}/translate/detect | 100 次/秒/App Key  | 50 次/秒    | 
 | 根据消息 ID 单向删除单聊漫游消息  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}    | 100 次/秒/App Key   | 50 次/秒    | 
 | 根据消息 ID 单向删除群聊漫游消息  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}   | 100 次/秒/App Key   |     | 
 | 单向清空指定用户的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{userId}/delete/all | 100 次/秒/App Key  | 100 次/秒    | 
 | 单向清空单聊会话某个时间点及之前的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}/time?userId={userId}&delTime={delTime} | 100 次/秒/App Key  | 50 次/秒    | 
 | 单向清空群组或聊天室会话某个时间点及之前的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}/time?groupId={groupId}&delTime={delTime} | 100 次/秒/App Key  | 50 次/秒    | 
 | 导入单聊消息 | POST  | /{org_name}/{app_name}/messages/users/import | 100 条/秒/App Key    | 100 次/秒    | 
-
-### 消息表情回复 Reaction
-
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
-| :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
-| 添加 Reaction         | POST   | /{org_name}/{app_name}/reaction/user/{userId}   | 100 次/秒/App Key | 50 次/秒    | 
-| 根据消息 ID 获取 Reaction     | GET    | /{org_name}/{app_name}/reaction/user/{userId}  | 100 次/秒/App Key  | 25 次/秒    | 
-| 删除 Reaction     | DELETE | /{org_name}/{app_name}/reaction/user/{userId} | 100 次/秒/App Key  | 50 次/秒    | 
-| 根据消息 ID 和表情 ID 获取 Reaction 信息 | GET    | /{org_name}/{app_name}/reaction/user/{userId}/detail | 100 次/秒/App Key  | 25 次/秒    | 
 
 ## 群组
 
@@ -263,12 +258,15 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 添加好友   | POST   | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key   | 100 次/秒    | 
-| 移除好友    | DELETE | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |  100 次/秒   | 
-| 设置好友备注 | PUT | /{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username} | 100 次/秒/App Key |
+| 校验好友   | POST   | /{org_name}/{app_name}/contacts/check    | 100 次/秒/App Key   | 50 次/秒    | 
+| 删除单个好友    | DELETE | /{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}    | 100 次/秒/App Key                                                 |  100 次/秒   | 
+| 删除所有好友    | DELETE | /{org_name}/{app_name}/contacts/users/{username}    | 100 次/秒/App Key                                                 |  50 次/秒   | 
+| 设置好友备注 | PUT | /{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username} | 100 次/秒/App Key | |
 | 分页获取好友列表    |  GET  | /{org_name}/{app_name}/user/{username}/contacts?limit={N}&cursor={cursor}&needReturnRemark={true/false}  | 100 次/秒/App Key   | 50 次/秒| 
 | 一次性获取好友列表    |  GET  | /{org_name}/{app_name}/users/{owner_username}/contacts/users   | 100 次/秒/App Key   | 100 次/秒    | 
-| * 导入好友列表    |  POST  | /{org_name}/{app_name}/users/{username}/contacts/import   | 100 次/秒/App Key   |     | 
+| * 导入好友列表    |  POST  | /{org_name}/{app_name}/users/{username}/contacts/import   | 100 次/秒/App Key   |   | 
 | 获取黑名单列表     | GET   | /{org_name}/{app_name}/users/{owner_username}/blocks/users   | 50 次/秒/App Key                                                  | 100 次/秒    | 
+| 校验黑名单     | POST   | /{org_name}/{app_name}/blocks/check   | 100 次/秒/App Key                                                  | 50 次/秒    | 
 | 添加用户至黑名单    | POST  | /{org_name}/{app_name}/users/{owner_username}/blocks/users    | 50 次/秒/App Key                                                  | 100 次/秒    | 
 | 从黑名单移除用户 | DELETE  | /{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username}   | 50 次/秒/App Key                                                  | 100 次/秒    | 
 
@@ -285,6 +283,21 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 查询离线推送模板          | GET  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |     | 
 | 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |     | 
 | 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template | 100 次/秒/App Key。 |     | 
+
+## 关键词名单
+
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
+| 创建关键词名单 | POST | /{org_name}/{app_name}/moderation/text/list  | 100 次/秒/App Key | 50 次/秒  |
+| 修改关键词名单 | PUT | /{org_name}/{app_name}/moderation/text/list/{list_id} | 100 次/秒/App Key | 50 次/秒  |
+| 查询关键词名单列表 | POST | /{org_name}/{app_name}/moderation/text/list/search | 100 次/秒/App Key | 50 次/秒  |
+| 删除关键词名单 | DELETE | /{org_name}/{app_name}/moderation/text/list/{list_id} | 100 次/秒/App Key | 50 次/秒  |
+| 添加关键词  | POST | /{org_name}/{app_name}/moderation/text/list/{list_id}/word/batch | 100 次/秒/App Key | 50 次/秒  |
+| 修改关键词 | PUT | /{org_name}/{app_name}/moderation/text/list/{list_id}/word | 100 次/秒/App Key | 50 次/秒  |
+| 查询关键词 | POST | /{org_name}/{app_name}/moderation/text/list/{list_id}/word | 100 次/秒/App Key | 50 次/秒  |
+| 删除单个关键词 | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word?wordId={word_id} | 100 次/秒/App Key | 50 次/秒  |
+| 批量删除关键词 | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word/batch | 100 次/秒/App Key | 50 次/秒  |
+
 
 ## 发送后回调
 
