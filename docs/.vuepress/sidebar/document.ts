@@ -472,10 +472,10 @@ const documentSidebar = [
               { text: '分页获取好友列表', link: 'user_relationship_friend_list_paged.html' },
               { text: '一次性获取好友列表', link: 'user_relationship_friend_list_obtain.html' },
               { text: '导入好友列表', link: 'user_relationship_friend_import.html' },
-              { text: '添加用户至黑名单', link: 'user_relationship_blacklist_add.html' },
-              { text: '从黑名单中移除用户', link: 'user_relationship_blacklist_remove.html' },
-              { text: '获取黑名单列表', link: 'user_relationship_blacklist_obtain.html' },
-              { text: '校验黑名单', link: 'user_relationship_blacklist_check.html' }
+              { text: '添加用户至黑名单', link: 'user_relationship_blocklist_add.html' },
+              { text: '从黑名单中移除用户', link: 'user_relationship_blocklist_remove.html' },
+              { text: '获取黑名单列表', link: 'user_relationship_blocklist_obtain.html' },
+              { text: '校验黑名单', link: 'user_relationship_blocklist_check.html' }
             ]
           },
           { text: '用户全局禁言', link: 'user_global_mute.html' },
