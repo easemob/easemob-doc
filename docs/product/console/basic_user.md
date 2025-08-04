@@ -87,6 +87,8 @@
 
 ![img](/images/console/basic_user_multidevice.png)
 
+![img](/images/console/basic_user_multidevice_activate.png)
+
 ![img](/images/console/basic_user_multidevice_set.png)
 
 ![img](/images/console/basic_user_multidevice_set_device.png)
