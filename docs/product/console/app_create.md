@@ -1,17 +1,15 @@
 
 # 创建应用
 
-要接入即时通讯 IM 服务，你必须首先创建应用。每个账号最多可以创建 10 个应用。你可以在 [环信控制台](https://console.easemob.com/user/login) 上创建和管理应用。
-
-TODO：每个账号支持 10 个应用? 二期有限制 为 5 个
+要接入即时通讯 IM 服务，你必须首先在 [环信控制台](https://console.easemob.com/user/login) 创建应用。
 
 ## 前提条件
 
-创建应用前，你需要在 [环信控制台](https://console.easemob.com/user/login) 注册账号。
+创建应用前，你需要在 [环信控制台](https://console.easemob.com/user/login) [注册账号](account_register.html)。
 
 ## 操作步骤
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)，在首页的 **应用概览** 区域点击 **创建应用** 按钮，创建即时通讯 IM 应用。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)，在首页的 **应用概览** 区域点击 **创建应用**，创建即时通讯 IM 应用。
 
 ![img](/images/console/app_overview.png)
 
@@ -21,14 +19,14 @@ TODO：每个账号支持 10 个应用? 二期有限制 为 5 个
 
 | 参数            | 类型   | 是否必需 | 描述              |
 | :-------------- | :----- | :------- | :---------------------------------------------- |
-| `appname`  | String | 是       | 应用名称，用于生成 App Key。该参数的值只能包含小写字母、数字和连字符，不能超过 32 个字符。// TODO：长度限制 |
-| `Appkey`  | String | 是       | 即时通讯 IM 分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成，生成后无法修改。// TODO：对于个人用户来说，app key 中 # 前面的部分是随机生成的。对于企业用户来说，app key 中 # 前面的部分是 org_name? 再问一下永康 |
-| `所在地`  | String | 是       | 数据中心所在地：<br/> - **国内**：数据中心在中国。<br/> - **海外**：数据中心在中国以外地区。 |
-| `数据中心`  | String | 是       | 数据中心。<br/> - 若 **所在地** 为 **国内**，数据中心为 **国内1区**。<br/> - 若 **所在地** 为 **海外**，数据中心默认为 **新加坡1区**。你也可以选择 **美东2区**。<br/> - 若设置为其他数据中心，请联系环信商务。关于数据中心详情，请参见 [数据中心文档](data_center.html)。 |
-| `可用服务`  | String | 是       | <br/> - **IM**：环信即时通讯 IM 服务。 <br/> - **PUSH**：环信即时推送服务。|
-| `产品名称`  | String | 是       | 产品名称，不能超过 32 个字符。 |
-| `描述`  | String | 是       |  产品描述，不能超过 512 个字符。|
-| `注册模式`  | String | 是       | 用户注册模式：<br/> - **授权注册**：只有企业管理员或者应用管理员才能注册用户。相关的 REST API 介绍，详见[授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)<br/> - **开放注册**：使用客户端或 [REST API](/document/server-side/account_system.html#开放注册单个用户)开放注册用户。一般在体验 Demo 和测试环境时使用，正式环境中不推荐这种方式。 |
+| appname  | String | 是       | 应用名称，用于生成 App Key。该参数的值只能包含小写字母、数字和连字符，不能超过 32 个字符。 |
+| Appkey  | String | 是       | 即时通讯 IM 分配给每个应用的唯一标识，由 **orgname** 和 **appname** 参数的值组成，生成后无法修改。 |
+| 所在地  | String | 是       | 数据中心所在地：<br/> - **国内**：数据中心在中国。<br/> - **海外**：数据中心在中国以外地区。 |
+| 数据中心  | String | 是       | 数据中心。<br/> - 若 **所在地** 为 **国内**，数据中心为 **国内1区**。<br/> - 若 **所在地** 为 **海外**，数据中心默认为 **新加坡1区**。你也可以选择 **美东2区**。<br/> - 若设置为其他数据中心，请联系环信商务。关于数据中心详情，请参见 [数据中心文档](/product/data_center.html)。 |
+| 可用服务  | String | 是       | <br/> - **IM**：环信即时通讯 IM 服务。 <br/> - **PUSH**：环信即时推送服务。|
+| 产品名称  | String | 是       | 产品名称，不能超过 32 个字符。 |
+| 描述  | String | 是       |  产品描述，不能超过 512 个字符。|
+| 注册模式  | String | 是       | 用户注册模式：<br/> - **授权注册**：只有企业管理员或者应用管理员才能注册用户。相关的 REST API 介绍，详见[授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)<br/> - **开放注册**：使用客户端或 [REST API](/document/server-side/account_system.html#开放注册单个用户)开放注册用户。一般在体验 Demo 和测试环境时使用，正式环境中不推荐这种方式。 |
 
 
 

@@ -7,7 +7,7 @@
 1. 登录 [环信控制台](https://console.easemob.com/user/login)。
 2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
 3. 在左侧导航栏，选择 **功能配置** > **基础功能**。
-4. 在 **消息** 页面，开通用户相关配置。
+4. 在 **用户** 页面，开通用户相关配置。
 
 ![img](/images/console/basic_user.png)
 
@@ -24,8 +24,8 @@
 
 用户注册模式包括授权注册和开发注册。你可以点击 **编辑** 切换用户注册模式。
 
-- 授权注册：以应用管理员身份调用环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。该模式用于正式环境。相关的 REST API 介绍，详见 [授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户) 和 [批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)的接口介绍。
-- 开放注册：用户登录客户端 SDK 后自行通过账号密码注册账号。一般在体验 Demo 和测试环境中，不推荐在正式环境中使用。相关的 API 介绍，详见 [客户端](/document/android/login.html#用户注册) 和 [REST API](/document/server-side/account_system.html#开放注册单个用户) 文档。
+- 授权注册：以应用管理员身份调用环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。该方式用于正式环境。相关的 REST API 介绍，详见 [授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户) 和 [批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)的接口介绍。
+- 开放注册：用户登录客户端 SDK 后自行通过账号密码注册账号。该方式一般用于体验 Demo 和测试环境，不推荐在正式环境中使用。相关的 API 介绍，详见 [客户端](/document/android/login.html#用户注册) 和 [REST API](/document/server-side/account_system.html#开放注册单个用户) 文档。
 
 ![img](/images/console/basic_user_registration.png)
 
@@ -60,7 +60,7 @@
 你可以根据当前的套餐包版本开通该服务：
 
 - 免费版：点击 **立即升级** 升级至专业版或旗舰版。
-- 专业版：点击 **立即购买** 单独开通服务。
+- 专业版：点击 **立即购买** 单独购买和开通服务。
 - 旗舰版：点击 **免费开通** 开通服务。
 
 ![img](/images/console/basic_user_presence.png)
