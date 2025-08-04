@@ -140,6 +140,7 @@ callKitConfig.setRingFile(ringFile);
 //设置呼叫超时时间，单位为秒。
 callKitConfig.setCallTimeOut(30 * 1000);
 //设置声网的 appId。
+callKitConfig.setAgoraAppId("xxxxxxxxxxxxxxx");
 Map<String, EaseCallUserInfo> userInfoMap = new HashMap<>();
 userInfoMap.put("***",new EaseCallUserInfo("****",null));
 callKitConfig.setUserInfoMap(userInfoMap);
