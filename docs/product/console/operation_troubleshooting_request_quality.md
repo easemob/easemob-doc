@@ -8,7 +8,7 @@
 
 ## 请求质量监控
 
-![img](/images/console/requestmonitor/terminalsum.png)
+![img](/images/console/operation_troubleshooting_request_terminalsum.png)
 
 ### 终端数据
 
@@ -16,7 +16,7 @@
 
 #### 指标类型
 
-![img](/images/console/requestmonitor/terminalindextype.png)
+![img](/images/console/operation_troubleshooting_request_terminalindextype.png)
 
 | 指标类型  | 描述  |
 | :----------- | :-------------------------------- |
@@ -30,7 +30,7 @@
 
 #### 指标
 
-![](/images/console/requestmonitor/terminalindex.png)
+![](/images/console/operation_troubleshooting_request_terminalindex.png)
 
 |指标|描述|
 | :----------- | :-------------------------------- |
@@ -61,11 +61,11 @@
 
 Server API 数据包含了一部分 SDK 对 RESTful API 接口的调用。例如，SDK 端的群组操作通过 RESTful API 调用，因此也统计在 Server API 数据中。
 
-![](/images/console/requestmonitor/serverapidata.png)
+![](/images/console/operation_troubleshooting_request_serverapidata.png)
 
 #### 指标类型
 
-![](/images/console/requestmonitor/serverapiindexdata.png)
+![](/images/console/operation_troubleshooting_request_serverapiindextype.png)
 
 |指标类型|描述|
 | :----------- | :-------------------------------- |
@@ -79,7 +79,7 @@ Server API 数据包含了一部分 SDK 对 RESTful API 接口的调用。例如
 
 #### 指标
 
-![](/images/console/requestmonitor/serverapiindex.png)
+![](/images/console/operation_troubleshooting_request_serverapiindex.png)
 
 |指标|说明|
 | :----------- | :-------------------------------- |

@@ -1,6 +1,6 @@
 # 消息
 
-创建应用后，你可以在 [环信控制台](https://console.easemob.com/user/login) 开通消息相关配置，包括消息云存储时长、已读回执、消息撤回、消息推送和消息举报等配置。
+创建应用后，你可以在 [环信控制台](https://console.easemob.com/user/login) 开通消息相关配置，包括消息云存储时长、已读回执、消息撤回、消息推送等配置。
 
 你可以按以下步骤打开消息配置页面：
 
@@ -67,7 +67,7 @@
 
 离线推送的高级功能包括 [推送通知方式](/document/android/push/push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](/document/android/push/push_notification_mode_dnd.html#免打扰模式) 和 [推送模板](/document/android/push/push_display.html#使用推送模板)。
 
-使用前离线推送高级功能，需点击 **免费开通** 开通该功能。
+使用前离线推送高级功能，需点击 **免费开通** 开通该功能。功能开通后，你可以配置推送模板，详见 [推送模板配置文档](push_template.html)。 
 
 ![img](/images/console/basic_message_push_offline.png)
 
@@ -87,14 +87,6 @@
 - 旗舰版：点击 **免费开通** 开通该服务。
 
 ![img](/images/console/basic_message_reaction.png)
-
-## 消息举报
-
-若要使用消息举报，无论是专业版还是旗舰版套餐，你都需要联系环信商务开通该功能。// TODO 位置没变动
-
-![img](/images/console/basic_message_report_activate.png)
-
-![img](/images/console/basic_message_report_contact.png)
 
 
 
