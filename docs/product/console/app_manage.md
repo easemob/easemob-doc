@@ -18,7 +18,7 @@
 
 你可以在 **开发配置信息** 栏查看应用的 **App Key**、**Client ID** 和 **Client Secret**。
 
-- App Key：应用的唯一标识，由 **Org Name** 和 **App Name** 组成，生成后不允许修改。
+- App Key：应用的唯一标识，由 **Org Name** 和 **App Name** 组成，生成后不允许修改。创建应用时会生成应用的 App Key，详见 [创建应用文档](app_create.html#操作步骤)。
 - Client ID/Client Secret：可用于生成 [App Token](/document/server-side/easemob_app_token.html) 和 [用户 Token](/document/server-side/easemob_user_token.html)。
 
 ![img](/images/console/app_info_develop.png)
