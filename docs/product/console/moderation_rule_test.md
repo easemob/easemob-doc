@@ -12,7 +12,7 @@
 
 4. 选择 **内容审核 > 文本审核 > 规则测试**，打开 **规则测试** 页面。
 
-moderation_text_rule_test.png
+![img](/images/console/moderation_text_rule_test.png)
 
 5. 在 **内容审核** 栏中，输入规则名称和审核内容，点击 **立即审核**。
    
@@ -25,4 +25,4 @@ moderation_text_rule_test.png
 
 消息处理结果：表示消息的下发结果，根据规则里配置得出；存在通过/拦截/替换*** 三种情况。如果该结果不符合预期，可通过修改规则配置调整，详见 [规则配置](moderation_rule_config.html)。
 
-moderation_text_rule_test_result.png
+![img](/images/console/moderation_text_rule_test_result.png)

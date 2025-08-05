@@ -26,7 +26,7 @@
 | 可用服务  | String | 是       | <br/> - **IM**：环信即时通讯 IM 服务。 <br/> - **PUSH**：环信即时推送服务。|
 | 产品名称  | String | 是       | 产品名称，不能超过 32 个字符。 |
 | 描述  | String | 是       |  产品描述，不能超过 512 个字符。|
-| 注册模式  | String | 是       | 用户注册模式：<br/> - **授权注册**：只有企业管理员或者应用管理员才能注册用户。相关的 REST API 介绍，详见[授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)<br/> - **开放注册**：使用客户端或 [REST API](/document/server-side/account_system.html#开放注册单个用户)开放注册用户。一般在体验 Demo 和测试环境时使用，正式环境中不推荐这种方式。 |
+| 注册模式  | String | 是       | 用户注册模式：<br/> - **授权注册**：只有企业管理员或者应用管理员才能注册用户。相关的 REST API 介绍，详见 [授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)。<br/> - **开放注册**：使用客户端或 [REST API](/document/server-side/account_system.html#开放注册单个用户)开放注册用户。一般在体验 Demo 和测试环境时使用，正式环境中不推荐这种方式。 |
 
 
 

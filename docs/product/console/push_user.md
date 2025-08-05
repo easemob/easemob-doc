@@ -2,19 +2,23 @@
 
 你可以在 [环信控制台](https://console.easemob.com/user/login) 管理即时推送的目标用户，包括添加用户、搜索用户、查看用户绑定的推送证书和删除用户。
 
-你可以按以下步骤打开其他配置页面：
+你可以按以下步骤打开用户配置页面：
 
 1. 登录 [环信控制台](https://console.easemob.com/user/login)。
 2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
 3. 在左侧导航栏，选择 **功能配置** > **增值功能** > **即时推送**，打开 **用户管理** 页面。
 
+该页面的用户与 **运营管理** > **运营操作** > **用户管理** 页面的用户同步更新。
+
 ## 创建推送用户
 
-1. 在 **用户管理** 页面 单击 **创建PUSH用户**，添加推送用户。
+1. 在 **用户管理** 页面 单击 **创建PUSH用户**，添加推送的目标用户。
 
-![img](/images/console/online_push_user_add.png)
+![img](/images/console/push_user_list.png)
 
 2. 在弹出的对话框中，配置用户 ID 和密码，单击 **保存**。
+   
+![img](/images/console/push_user_add.png)
 
 | 参数       | 类型   | 是否必需 | 描述          |
 | :--------- | :----- | :------- | :-------------------------------------------- |
@@ -26,19 +30,19 @@
 
 在 **用户管理** 页面，单击指定用户的 **操作** 栏中的 **查看用户绑定推送证书** 查看该用户绑定的推送证书。
 
-![img](/images/console/online_push_view_certificate.png)
+![img](/images/console/push_view_certificate.png)
 
 ## 查询推送用户
 
 在 **用户管理** 页面，输入要查询的用户 ID。若查询的用户 ID 存在，则会在下方的用户列表中显示。
 
-![img](/images/console/online_push_user_search.png)
+![img](/images/console/push_user_search.png)
 
 ## 删除推送用户
 
 在 **用户管理** 页面，单击指定用户的 **操作** 栏中的 **删除用户** 删除该用户。
 
-![img](/images/console/online_push_user_delete.png)
+![img](/images/console/push_user_delete.png)
 
 
 

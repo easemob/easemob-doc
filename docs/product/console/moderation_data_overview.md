@@ -1,6 +1,6 @@
 # 内容审核数据总览
 
-你可以查看消息内容的总体审核统计数据，包括文本、图片、音频和视频消息的审核统计。
+[开通内容审核服务](purchase_value_added.html#内容审核) 后，你可以在 [环信控制台](https://console.easemob.com/user/login) 查看消息内容的总体审核统计数据，包括文本、图片、音频和视频消息的审核统计。
 
 ## 查看文本和图片审核数据
 
@@ -8,7 +8,7 @@
 
 下图以文本审核数据统计为例进行展示，图片审核的统计类似。 
 
-![img](/images/moderation/moderation_text_overview.png)
+![img](/images/console/moderation_text_overview.png)
 
 ## 查看音频和视频审核数据
 
@@ -16,7 +16,7 @@
 
 下图以音频审核数据统计为例进行展示，视频审核的统计类似。
 
-![img](/images/moderation/moderation_voice_overview.png)
+![img](/images/console/moderation_voice_overview.png)
 
 
 

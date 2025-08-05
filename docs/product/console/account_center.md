@@ -2,13 +2,15 @@
 
 ## 查看账户余额和充值
 
-登录环信控制台，选择 **账单中心** > **账户中心**。你可以查看当前的账户余额，点击 **立即充值** 对该账户充值。
+登录 [环信控制台](https://console.easemob.com/user/login)，选择 **账单中心** > **账户中心**。你可以查看当前的账户余额，点击 **立即充值** 对该账户充值。
 
-![img](/images/product/billing_account_center.png)
+![img](/images/console/billing_account_center.png)
 
 ## 查看订单记录
 
-选择 **账单中心** > **订单中心**，查看你当前的所有订单记录。
+1. 选择 **账单中心** > **订单中心**，查看你当前的所有订单记录。
+
+![img](/images/console/billing_order_list.png)
 
 订单状态说明如下：
 
@@ -18,19 +20,17 @@
 | 服务中             | 表示当前订单中购买的服务在使用中。同一 App Key 同时仅能有 1 个服务版本的订单状态为 **服务中**。                                   |
 | 已完结             | 表示当前订单中购买的服务已关闭。当客户升级新服务后，原服务版本订单和相关增值服务订单均会自动关闭，变为 **已完结**状态。 |
 
-![img](/images/product/billing_order_list.png)
+2. 点击订单的 **操作** 栏中的 **详情**，可查看订单详情。
 
-点击订单的 **操作** 栏中的 **详情**，可查看订单详情。
-
-![img](/images/product/billing_order_detail.png)
+![img](/images/console/billing_order_detail.png)
 
 ## 查看消费账单
 
-选择 **账单中心** > **消费账单**，点击 **IM扣费账单**，查看你当前的账单记录。
+1. 选择 **账单中心** > **消费账单**，点击 **IM扣费账单**，查看你当前的账单记录。
 
 ![img](/images/console/billing_billing_list.png)
 
-点击消费账单的 **操作** 栏中的 **账单详情**，查看账单详情。
+2. 点击消费账单的 **操作** 栏中的 **账单详情**，查看账单详情。
 
 ![img](/images/console/billing_bill_detail.png)
 
@@ -43,9 +43,11 @@
 - 已完成：充值订单已完成付费。
 - 未完成：充值订单未支付付费。
 
-在充值记录列表中，你可以单击充值订单的 **操作** 栏中的 **删除订单** 删除该充值订单。
-
 ![img](/images/console/billing_charge_record.png)
+
+在充值记录列表中，你可以单击充值订单的 **操作** 栏中的 **更多 > 删除订单** 删除该充值订单。
+
+
 
 
 

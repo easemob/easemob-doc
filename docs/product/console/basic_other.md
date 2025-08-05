@@ -75,5 +75,6 @@
 
 功能开通后，你可以对群组和聊天室中的消息和操作进行实时管理审核，详见 [群组审核管理](operation_group.html#群组审核管理) 和 [聊天室审核管理](opeartion_chatroom.html#聊天室审核管理) 文档。
 
-basic_other_message_moderation.png
+![img](/images/console/basic_other_message_moderation.png)
+
 
