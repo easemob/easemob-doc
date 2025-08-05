@@ -1,4 +1,4 @@
-﻿# 请求质量概览  // TODO：需要截图
+﻿# 请求质量概览 
 
 **请求质量概览** 页面提供质量数据的阶段性分析，帮助你掌握用量变化趋势、跟踪产品质量情况：
 
@@ -6,15 +6,13 @@
 
 - 支持查看终端 SDK API 和服务器端 RESTful API 调用的请求次数、请求成功率和平均时延等。
 
-## 请求质量监控
-
 ![img](/images/console/operation_troubleshooting_request_terminalsum.png)
 
-### 终端数据
+## 终端数据
 
 **终端数据** 页面展示终端 SDK API 的请求次数、请求成功率和平均时延数据。
 
-#### 指标类型
+### 指标类型
 
 ![img](/images/console/operation_troubleshooting_request_terminalindextype.png)
 
@@ -28,7 +26,7 @@
 |群组管理 |客户端创建群组、解散群组等群组管理操作。|
 |聊天室管理 |客户端创建聊天室、解散聊天室等群组管理操作。|
 
-#### 指标
+### 指标
 
 ![](/images/console/operation_troubleshooting_request_terminalindex.png)
 
@@ -55,7 +53,7 @@
 |1s/3s/5s 请求成功率|请求次数越高，该区域的颜色越深。 气泡直径越大，该区域的请求成功率越低。|折线图。| |
 |平均时延|请求次数越高，该区域的颜色越深。气泡直径越大，该区域的平均时延越高。|热力图，其中横坐标为时间，纵坐标为时延分桶。方块颜色越深，对应时间范围内的请求次数越高。|  |
 
-### Server API 数据
+## Server API 数据
 
 **Server API 数据** 页面以折线图展示服务器端 RESTful API 接口调用的请求次数、请求成功率和平均时延数据。
 
@@ -63,7 +61,7 @@ Server API 数据包含了一部分 SDK 对 RESTful API 接口的调用。例如
 
 ![](/images/console/operation_troubleshooting_request_serverapidata.png)
 
-#### 指标类型
+### 指标类型
 
 ![](/images/console/operation_troubleshooting_request_serverapiindextype.png)
 
@@ -77,7 +75,7 @@ Server API 数据包含了一部分 SDK 对 RESTful API 接口的调用。例如
 |聊天室管理|通过 RESTful API 实现聊天室创建、删除等管理功能。|
 |用户属性|通过 RESTful API 实现用户属性设置、删除等管理功能。|
 
-#### 指标
+### 指标
 
 ![](/images/console/operation_troubleshooting_request_serverapiindex.png)
 
