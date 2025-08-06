@@ -1,4 +1,4 @@
-﻿# 请求质量概览 
+﻿# 请求质量监控
 
 **请求质量概览** 页面提供质量数据的阶段性分析，帮助你掌握用量变化趋势、跟踪产品质量情况：
 
@@ -7,6 +7,12 @@
 - 支持查看终端 SDK API 和服务器端 RESTful API 调用的请求次数、请求成功率和平均时延等。
 
 ![img](/images/console/operation_troubleshooting_request_terminalsum.png)
+
+## 开通服务
+
+要使用请求质量监控功能，你需要联系环信商务开通。
+
+![img](/images/console/operation_troubleshooting_request_activation.png)
 
 ## 终端数据
 
