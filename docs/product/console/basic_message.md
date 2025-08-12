@@ -63,13 +63,15 @@
 
 ![img](/images/console/basic_message_thumbnail_edit.png)
 
-## 离线推送高级功能
+## 设置离线推送模板
 
 离线推送的高级功能包括 [推送通知方式](/document/android/push/push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](/document/android/push/push_notification_mode_dnd.html#免打扰模式) 和 [推送模板](/document/android/push/push_display.html#使用推送模板)。
 
-使用前离线推送高级功能，需点击 **免费开通** 开通该功能。功能开通后，你可以配置推送模板，详见 [推送模板配置文档](push_template.html)。 
+使用前离线推送高级功能，需点击 **免费开通** 开通该功能。功能开通后，你可以点击 **设置** 配置推送模板，详见 [推送模板配置文档](push_template.html)。 
 
 ![img](/images/console/basic_message_push_offline.png)
+
+![img](/images/console/basic_message_push_online_set.png)
 
 ## 推送证书配置
 

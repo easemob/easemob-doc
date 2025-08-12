@@ -552,7 +552,9 @@ export const zhSidebar = sidebar({
              children: [
              { text: "数据查询", link: "console/operation_data.html" },
              { text: "消息量统计", link: "console/operation_message_statistics.html" }, 
-             {
+             ],
+            },
+            {
              text: "问题排查",
              collapsible: true,
              children: [
@@ -561,8 +563,6 @@ export const zhSidebar = sidebar({
              { text: "用户连接状态查询", link: "console/operation_troubleshooting_user_connection.html" },
              { text: "用户设备日志", link: "console/operation_troubleshooting_device_log.html" },
              { text: "聊天室消息速率", link: "console/operation_troubleshooting_chatroom_rate.html" },
-             ],
-            },
              ],
             },
           ],
