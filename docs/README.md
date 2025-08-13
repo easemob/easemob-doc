@@ -2103,4 +2103,9 @@ projects:
             link: https://www.easemob.com/apidoc/iOS/html_ch/annotated.html
           - text: Web
             link: https://www.easemob.com/apidoc/Web/
+  - title: 控制台
+    features:
+      - contexts:
+          - text: 环信控制台指南
+            link: /product/console/account_register.html        
 ---
