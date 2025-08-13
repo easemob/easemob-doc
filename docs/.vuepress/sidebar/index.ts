@@ -459,6 +459,118 @@ export const zhSidebar = sidebar({
       ],
     },
     {
+      text: "Console 指南（新）",
+      collapsible: true,
+      children: [
+        { text: "注册账号", link: "console/account_register.html" },
+        { text: "应用管理", 
+            collapsible: true,
+            children: [
+            { text: "创建应用", link: "console/app_create.html" },
+            { text: "查看和配置应用", link: "console/app_manage.html" },
+          ],
+        },
+        { text: "服务开通", 
+            collapsible: true,
+            children: [
+            { text: "购买套餐包", link: "console/purchase_package.html" },
+            { text: "开通增值服务", link: "console/purchase_value_added.html" },
+          ],
+        },
+        { text: "功能配置", 
+            collapsible: true,
+            children: [
+            {
+             text: "配置基础功能",
+             collapsible: true,
+             children: [
+             { text: "用户", link: "console/basic_user.html" },
+             { text: "消息", link: "console/basic_message.html" },
+             { text: "会话/群组/聊天室", link: "console/basic_conversation_group_chatroom.html" },
+             { text: "消息回调", link: "console/basic_webhook.html" },
+             { text: "其他", link: "console/basic_other.html" },
+             ],
+            },
+            {
+             text: "配置增值功能",
+             collapsible: true,
+             children: [
+             {
+             text: "内容审核",
+             collapsible: true,
+             children: [
+             { text: "数据总览", link: "console/moderation_data_overview.html" },
+             { text: "规则配置", link: "console/moderation_rule_config.html" },
+             { text: "规则测试", link: "console/moderation_rule_test.html" },
+             { text: "历史记录", link: "console/moderation_history.html" },
+             { text: "关键词名单", link: "console/moderation_keyword.html" },
+             { text: "审核记录导出", link: "console/moderation_history_export.html" },
+             { text: "消息举报", link: "console/moderation_message_report.html" },
+             { text: "标签管理", link: "console/moderation_user_tag.html" },
+             ],
+            },
+             {
+             text: "即时推送",
+             collapsible: true,
+             children: [
+             { text: "用户管理", link: "console/push_user.html" },
+             { text: "证书管理", link: "console/push_certificate_config.html" },
+             { text: "模板管理", link: "console/push_template.html" },
+             { text: "创建推送", link: "console/push_task_create.html" },
+             { text: "推送任务", link: "console/push_task.html" },
+             { text: "标签管理", link: "console/push_tag_mgmt.html" },
+             { text: "推送统计", link: "console/push_statistics.html" },
+             ],
+            },
+             ],
+            },
+          ],
+        },
+        { text: "账号管理", 
+            collapsible: true,
+            children: [
+            { text: "修改账户信息", link: "console/account_modify.html" },
+            { text: "创建子账号", link: "console/account_sub_create.html" },
+          ],
+        },
+        { text: "账单中心", link: "console/account_center.html" },
+        { text: "运营管理", 
+            collapsible: true,
+            children: [
+            {
+             text: "运营操作",
+             collapsible: true,
+             children: [
+             { text: "用户管理", link: "console/operation_user.html" },
+             { text: "群组管理", link: "console/operation_group.html" },
+             { text: "聊天室管理", link: "console/operation_chatroom.html" },
+             ],
+            },
+            {
+             text: "运营数据",
+             collapsible: true,
+             children: [
+             { text: "数据查询", link: "console/operation_data.html" },
+             { text: "消息量统计", link: "console/operation_message_statistics.html" }, 
+             ],
+            },
+            {
+             text: "问题排查",
+             collapsible: true,
+             children: [
+             { text: "请求质量监控", link: "console/operation_troubleshooting_request_quality.html" },
+             { text: "消息投递查询", link: "console/operation_troubleshooting_message_delivery.html" },
+             { text: "用户连接状态查询", link: "console/operation_troubleshooting_user_connection.html" },
+             { text: "用户设备日志", link: "console/operation_troubleshooting_device_log.html" },
+             { text: "聊天室消息速率", link: "console/operation_troubleshooting_chatroom_rate.html" },
+             ],
+            },
+          ],
+        },
+        
+      ],
+    },
+    {
       text: "Console 指南",
       collapsible: true,
       children: [

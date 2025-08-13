@@ -35,6 +35,7 @@
 | `title_args`   | `List<String>` | 推送模板标题参数，内置参数：发送方昵称 `{$fromNickname}`。      |
 | `content_args` | `List<String>` | 推送模板内容参数，内置参数：消息内容 `{$msg}`，如果开通了翻译，消息内容会跟随翻译结果显示。 |
 | `directed_template` | Object        | 定向推送模板。此类模板适用于群组消息的离线推送，即群组中某个或某些用户需要接收接收的离线推送通知与其他用户不同的场景。其中的字段如下表所示。    |
+| `disable_at_content` | Boolean        | 是否禁用默认 @ 内容：<br/> - `true`：禁用<br/> - （默认）`false`：不禁用  |
 
 定向模板中的字段：
 
