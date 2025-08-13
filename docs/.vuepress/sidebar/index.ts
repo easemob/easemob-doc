@@ -571,7 +571,7 @@ export const zhSidebar = sidebar({
       ],
     },
     {
-      text: "Console 指南",
+      text: "Console 指南（旧）",
       collapsible: true,
       children: [
         { text: "开通和配置服务", link: "enable_and_configure_IM.html" },
