@@ -9,7 +9,7 @@
 1. 打开 [环信控制台](https://console.easemob.com/user/register) 登录页面。
 2. 输入你的手机号码，然后单击 **获取验证码**，将下方的滑块拖动到最右边。
 3. 填入短信验证码后，阅读并勾选同意通讯云服务条款和通讯云隐私政策。
-4. 单击 **注册** 。
+4. 单击 **注册**。
    
    ![img](/images/console/account_registration_phone_code.png)
 
