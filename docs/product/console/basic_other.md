@@ -73,7 +73,7 @@
 - 免费版：点击 **立即升级** 升级至专业版或旗舰版。
 - 专业版/旗舰版：点击 **立即购买** 单独开通服务。
 
-功能开通后，你可以对群组和聊天室中的消息和操作进行实时管理审核，详见 [群组审核管理](operation_group.html#群组审核管理) 和 [聊天室审核管理](opeartion_chatroom.html#聊天室审核管理) 文档。
+功能开通后，你可以对群组和聊天室中的消息和操作进行实时管理审核，详见 [群组审核管理](operation_group.html#群组审核管理) 和 [聊天室审核管理](operation_chatroom.html#聊天室审核管理) 文档。
 
 ![img](/images/console/basic_other_message_moderation.png)
 
