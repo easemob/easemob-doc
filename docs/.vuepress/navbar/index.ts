@@ -78,6 +78,26 @@ export const zhNavbar = navbar([
     ]
   },
   {
+    text: 'CallKit',
+    children: [
+      {
+        text: 'Android',
+        icon: '/icon-Android.svg',
+        link: '/callkit/android/product_overview.html'
+      },
+      {
+        text: 'iOS',
+        icon: '/icon-iOS.svg',
+        link: '/callkit/ios/product_overview.html'
+      },
+      {
+        text: 'Web',
+        icon: '/icon-web.svg',
+        link: '/callkit/web/product_overview.html'
+      },
+    ]
+  },
+  {
     text: 'SDK/REST 集成',
     children: [
       {
