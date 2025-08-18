@@ -5,16 +5,14 @@ const getSubDirectories = (dir) =>
   fs
     .readdirSync(dir)
     .filter((item) => fs.statSync(path.join(dir, item)).isDirectory());
-const CHAT_DOC_PATH = path.resolve(__dirname, "../../callkit");
-const CHATROOM_DOC_PATH = path.resolve(__dirname, "../../callkit");
-const chatPlatformList = getSubDirectories(CHAT_DOC_PATH);
-const chatroomPlatformList = getSubDirectories(CHATROOM_DOC_PATH);
+const CALL_DOC_PATH = path.resolve(__dirname, "../../callkit");
+const callKitPlatformList = getSubDirectories(CALL_DOC_PATH);
 
-const chatUikitSidebar = [
+const callKitSidebar = [
   {
     /*
       text: 分组标题
-      children: 分组导航列表
+      children: 分组导航列表  
         text: 显示的文本
         link: 链接地址
         show: 不存在或者值为 true 时，菜单显示；存在并且值为 false 时，菜单不显示
@@ -28,16 +26,16 @@ const chatUikitSidebar = [
     children: [
       { text: "概述", link: "product_overview.html" },
       { text: "开通服务", link: "product_activation.html" },
-      { text: "购买指南", link: "product_purchase.html" },
-    ],
+      { text: "购买指南", link: "product_purchase.html" }
+    ]
   },
   {
     text: "快速开始",
     collapsible: true,
     children: [
       { text: "跑通示例项目", link: "sample_runthrough.html" },
-      { text: "快速开始", link: "quickstart.html" },
-    ],
+      { text: "快速开始", link: "quickstart.html" }
+    ]
   },
   {
     text: "集成文档",
@@ -45,55 +43,44 @@ const chatUikitSidebar = [
     children: [
       { text: "集成 CallKit", link: "integration.html" },
       { text: "通话信令", link: "signaling.html" },
-      { text: "LiveCommunicationKit", link: "livecommunicationkit.html", only: ["ios"] },
+      {
+        text: "LiveCommunicationKit",
+        link: "livecommunicationkit.html",
+        only: ["ios"]
+      },
       { text: "画中画", link: "picture_in_picture.html", only: ["ios"] },
       { text: "悬浮窗", link: "", only: ["android"] },
       { text: "自定义", link: "customization.html" },
       { text: "API 概览", link: "api_overview.html" },
       {
-       text: "问题排查",
-       collapsible: true,
-       children: [
-        { text: "常见问题", link: "common_issue.html" }
-        { text: "问题处理", link: "issue_handling.html" }
-      ],
-      },
-    ],
+        text: "问题排查",
+        collapsible: true,
+        children: [
+          { text: "常见问题", link: "common_issue.html" },
+          { text: "问题处理", link: "issue_handling.html" }
+        ]
+      }
+    ]
   },
   {
     text: "设计文档",
     collapsible: true,
-    children: [{ text: "设计指南", link: "design_guide.html" }],
+    children: [{ text: "设计指南", link: "design_guide.html" }]
   },
   {
     text: "历史文档",
     collapsible: true,
-    children: [
-      { text: "历史文档", link: "easecallkit.html" },
-    ],
-  },  
+    children: [{ text: "历史文档", link: "easecallkit.html" }]
+  }
 ];
 
-function buildChatUikitSidebar() {
+function buildCallKitSidebar() {
   const result = {};
-  chatPlatformList.forEach((platform) => {
-    const key = `/uikit/chatuikit/${platform}/`;
-    result[key] = chatUikitSidebar
+  callKitPlatformList.forEach((platform) => {
+    const key = `/callkit/${platform}/`;
+    result[key] = callKitSidebar
       .map((sidebar) =>
-        handleSidebarItem(platform, sidebar, CHAT_DOC_PATH, "chatuikit")
-      )
-      .filter((s) => s);
-  });
-  return result;
-}
-
-function buildChatroomUikitSidebar() {
-  const result = {};
-  chatroomPlatformList.forEach((platform) => {
-    const key = `/uikit/chatroomuikit/${platform}/`;
-    result[key] = chatroomUikitSidebar
-      .map((sidebar) =>
-        handleSidebarItem(platform, sidebar, CHATROOM_DOC_PATH, "chatroomuikit")
+        handleSidebarItem(platform, sidebar, CALL_DOC_PATH, "callkit")
       )
       .filter((s) => s);
   });
@@ -138,11 +125,10 @@ function handleSidebarItem(platform, sidebar, docPath, kitType) {
     }
   } else {
     if (linkExists(platform, sidebar.link, docPath)) {
-      const newLink = `/uikit/${kitType}/${platform}/${sidebar.link}`;
+      const newLink = `/${kitType}/${platform}/${sidebar.link}`;
       return { ...sidebar, link: newLink };
     }
   }
 }
 
-export const CHAT_UIKIT_SIDEBAR = buildChatUikitSidebar();
-export const CHATROOM_UIKIT_SIDEBAR = buildChatroomUikitSidebar();
+export const CALL_KIT_SIDEBAR = buildCallKitSidebar();
