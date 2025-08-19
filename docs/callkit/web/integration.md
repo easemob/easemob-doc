@@ -23,12 +23,18 @@ CallKit 是环信提供的一站式音视频通话解决方案，提供以下核
 
 ## 前提条件  
 
-在 [环信控制台](https://console.easemob.com/user/login) 进行如下操作：
-1. [注册环信账号](/product/console/account_register.html#注册账号)。
-2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
-3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
-4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
-5. [开通音视频服务](product_activation.html)。
+在集成 CallKit 之前，你需要完成以下准备工作：
+
+1. 在 [环信控制台](https://console.easemob.com/user/login) 进行如下操作：
+  - [注册环信账号](/product/console/account_register.html#注册账号)。
+  - [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
+  - [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
+  - [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
+  - [开通音视频服务](product_activation.html)。
+
+2. 集成环信即时通讯 IM SDK。
+   
+确保已集成环信 IM SDK 并完成登录。
 
 ## 快速集成
 
@@ -75,11 +81,15 @@ import type { CallKitRef } from 'easemob-chat-uikit';
 
 ## 步骤 4 发起通话 
 
-你可以使用 `startSingleCall` 方法发起一对一通话，`callType` 设置为 `video` 为视频通话，`audio` 为音频通话。
+- **发起一对一通话**
+  
+  你可以使用 `startSingleCall` 方法发起一对一通话，`callType` 设置为 `video` 为视频通话，`audio` 为音频通话。
 
-为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。
+- **发起群组通话**
+  
+  要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [即时通讯 IM Android SDK 文档](/document/android/group_manage.html#创建群组) 或 [环信控制台文档](/product/console/operation_group.html#创建群组)。
 
-你可以使用 `startGroupCall` 发起群组通话，指定群组 ID，callType 设置为 `video` 为视频通话，`audio` 为音频通话，并设置邀请消息 `msg`。CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。
+  你可以使用 `startGroupCall` 发起群组通话，指定群组 ID，`callType` 设置为 `video` 为视频通话，`audio` 为音频通话，并设置邀请消息 `msg`。CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。
 
 // TODO：调整代码
 

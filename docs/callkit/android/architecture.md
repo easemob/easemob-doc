@@ -2,7 +2,7 @@
 
 ## 技术栈
 
-Android CallKit 基于现代化的 Android 开发技术栈构建。项目采用 Kotlin 作为主要开发语言，使用 MVVM 架构模式来分离业务逻辑和UI展示。通过 Kotlin Flow（StateFlow/SharedFlow）进行响应式状态管理，确保 UI 能够及时响应数据变化。异步操作统一使用 Kotlin Coroutines 处理，提供流畅的用户体验。音视频功能基于声网 RTC SDK 实现，支持高质量的实时通信。
+Android CallKit 基于即时通讯 IM SDK 和声网 RTC SDK 开发的实时音视频通话框架。项目采用 Kotlin 作为开发语言，使用 MVVM 架构模式来分离业务逻辑和UI展示。通过 Kotlin Flow（StateFlow/SharedFlow）进行响应式状态管理，确保 UI 能够及时响应数据变化。异步操作统一使用 Kotlin Coroutines 处理，提供流畅的用户体验。音视频功能基于声网 RTC SDK 实现，支持高质量的实时通信。
 
 ## 模块介绍
 
@@ -32,4 +32,5 @@ Telecom 模块提供系统来电功能：
   - `IncomingCallService`：`TelecomManager.addNewIncomingCall(...)` 触发系统来电界面
   - `VoipConnectionService`：`ConnectionService` 实现；把系统接听/拒绝动作桥接到 `SignalingManager`
   - `PhoneAccountHelper`：`PhoneAccount` 注册/启用检测/设置引导
-    
+
+// TODO：成谱提供 架构图  

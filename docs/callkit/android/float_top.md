@@ -1,4 +1,4 @@
- # 悬浮窗与来电顶部条
+ # 悬浮窗 
 
 - **来电展示分支**（`SignalingManager` 在收到有效来电确认后）：
   - 若设备处于锁屏，或 App 在后台且无悬浮窗权限 → 走系统来电界面（`TelecomHelper.startCallImmediately(...)`）

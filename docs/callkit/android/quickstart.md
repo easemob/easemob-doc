@@ -1,4 +1,4 @@
-# 实现首次通话
+# 快速开始
 
 利用环信 CallKit，你可以轻松实现一对一通话和群组通话功能。本文介绍如何快速实现发起音视频通话。
 
@@ -34,8 +34,8 @@
    - **Package name**：你的项目包的名称，如 com.hyphenate.callkit.quickstart。
    - **Save location**：项目的存储路径。
    - **Language**：项目的编程语言，如 Kotlin。
-   - **Minimum SDK**：项目的最低 API 等级，如 API 21。
-   - **Build configuration language**：工程构建语言，如 Groovy DSL(build.gradle)。
+   - **Minimum SDK**：项目的最低 API 等级，如 API 24。
+   - **Build configuration language**：工程构建语言，如 Kotlin DSL(build.gradle.kts)。
 4. 点击 **Finish**。根据屏幕提示，安装所需插件。
 
 ### 步骤 2  引入 CallKit
@@ -105,7 +105,7 @@ android {
 }
 ```
 
-###  步骤 3 Android Support 库向 AndroidX 转换配置
+#### Android Support 库向 AndroidX 转换配置
 
 在 `Project` 工程根目录下的 `gradle.properties` 文件中额外添加如下配置：
 
@@ -113,7 +113,7 @@ android {
 android.enableJetifier=true
 ```
 
-### 步骤 4 防止代码混淆
+#### 防止代码混淆
 
 在 app 的 `proguard-rules.pro` 文件中添加如下代码：
 
@@ -124,7 +124,7 @@ android.enableJetifier=true
 -dontwarn  io.agora.**
 ```
 
-### 步骤 5 创建快速开始页面
+### 步骤 3 创建快速开始页面
 
 1. 打开 `app/src/main/res/values/strings.xml` 文件，替换为如下内容。
 
@@ -280,9 +280,7 @@ android.enableJetifier=true
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-### 步骤 6 实现代码逻辑
-
-// TODO：各端是否都要贴一下代码逻辑？Web 端和 iOS 端目前没有。
+### 步骤 4 实现代码逻辑
 
 1. 初始化 CallKit。
 2. 实现登录和退出逻辑。
@@ -659,7 +657,7 @@ class MainActivity : AppCompatActivity() {
 
 点击 Android Studio 菜单栏中的 `Sync Project with Gradle Files` 同步工程。现在可以发起首次通话。
 
-### 步骤 7 发起首次通话
+### 步骤 5 发起首次通话
 
 1. 登录：
    - 输入用户 ID 和密码，点击 **登录**。
@@ -675,24 +673,16 @@ class MainActivity : AppCompatActivity() {
 
 ![img](/images/callkit/android/quickstart_run.png)
 
-## 测试应用  
+## 运行应用  
 
-// TODO：测试步骤与上面的发起首次通话有何区别
+运行应用前，你需要授权摄像头、麦克风、悬浮窗等权限。
 
-测试前，你需要了解以下几方面：
-- 首次使用时需要授权摄像头、麦克风、悬浮窗等权限。
-- 确保设备网络连接正常。
-- 测试群组通话时，需要先创建群组并获取群组 ID。
-- 建议在真机上测试音视频功能以获得最佳体验。
-
-按照以下步骤进行测试：
 1. 在 Android Studio 中，点击 **Run 'app'**，将应用运行到你的设备或者模拟器上。
 2. 输入用户 ID 和密码，点击 **登录** 进行登录，登录成功或者失败有 `Toast` 提示。
-3. 在另一台设备或者模拟器上登录另一个账号。
-4. 两台设备分别输入对方的账号，点击对应的通话按钮，即可发起音视频通话。
+3. 在另一台设备上登录另一个用户 ID。
+4. 在主叫设备上输入被叫方的用户 ID，点击对应的通话按钮，即可发起音视频通话。
 
-测试过程中的常见问题排查如下：
+运行应用过程中的常见问题排查如下：
 - 连接失败：检查 App Key 是否正确配置。
 - 通话无声音：检查麦克风权限是否已授权。
 - 视频无画面：检查摄像头权限是否已授权。
-- 群组通话失败：确认群组 ID 是否正确且用户已加入该群组。 

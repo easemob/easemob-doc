@@ -5,7 +5,7 @@
 环信 CallKit 是一套基于环信即时通讯 IM 和声网 RTC 结合开发的音视频 UI 库，提供以下核心功能：
 
 - **一对一语音/视频通话**：支持高质量的一对一音视频通话。
-- **群组语音/视频通话**：支持群组内多人同时参与的音视频会议。 // TODO：会议改为通话？
+- **群组语音/视频通话**：支持群组内多人同时参与的音视频通话。
 - **完整的通话流程**：包括邀请、接听、挂断、拒绝等完整的通话体验。
 - **锁屏显示**：支持在锁屏状态下显示来电界面。
 - **悬浮窗功能**：通话时可最小化为悬浮窗，不影响其他应用使用。
@@ -28,20 +28,20 @@
   - [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
   - [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
   - [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
+  - [开通音视频服务](product_activation.html)。
 
-2. 集成环信即时通讯 IM SDK 
+2. 集成环信即时通讯 IM SDK。 
    
+确保已集成环信 IM SDK 并完成登录。
 
-确保已集成环信 IM SDK 的基本功能，例如，登录、好友、群组等。
-
-## 快速集成
+## 集成步骤
 
 使用 CallKit 库完成音视频通话的基本流程如下：
 
 1. 初始化 CallKit 库，设置 CallKit 监听。
 2. 主叫方调用发起通话邀请接口，进入通话界面。
 3. 被叫方收到邀请自动弹出通话邀请界面，在通话邀请界面选择接通或者拒绝。
-4. 主叫或者被叫挂断通话。
+4. 主叫方或者被叫方挂断通话。
 
 ### 步骤 1 添加依赖
 
@@ -76,9 +76,7 @@ dependencies {
 
 #### 方式二：本地源码集成
 
-// TODO：替换 Callkit 源码链接。
-
-从 GitHub 获取音视频 [CallKit 源码](https://www.xxxxx.com)，克隆到本地。按照以下步骤集成：
+从 GitHub 获取音视频 [CallKit 源码](https://github.com/easemob/easemob-callkit-android)，克隆到本地。按照以下步骤集成：
 
 1. 在 Project 工程根目录下的 `settings.gradle.kts` 文件中添加如下代码：
 
@@ -100,7 +98,7 @@ dependencies {
 
 ### 步骤 2 初始化 CallKit
 
-在应用启动时（通常在 `Application` 或主 `Activity` 中）初始化 CallKit。CallKit 初始化包括如下步骤：
+在应用启动时（通常在 `Application` 或主 `Activity` 中）初始化 CallKit：
 
 1. 初始化 IM SDK。CallKit 基于即时通讯 IM 作为信令通道，因此需先初始化 IM SDK。
    - 填入你的应用的 App Key。
@@ -145,9 +143,7 @@ class MainActivity : AppCompatActivity() {
 
 ### 步骤 3 （可选）配置监听器
 
-环信 CallKit 提供 CallKitListener 监听通话过程。你可以在应用初始化时设置监听器用于处理通话相关的回调：
-
-// TODO：上面这句话是否合适。
+环信 CallKit 提供 `CallKitListener` 监听通话过程。你可以在应用初始化时设置监听器用于处理通话相关的回调：
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -231,9 +227,6 @@ class MainActivity : AppCompatActivity() {
 
 #### 发起一对一通话
 
-// TODO：在一对一通话过程中是否可以再邀请其他用户加入通话。一旦邀请成功，通话类型自动转为群组通话？
-// TODO：一对一通话/群组通话中，音视频通话是否能互相切换？
-
 你可以使用 `startSingleCall` 方法发起一对一通话，`CallType` 设置为 `SINGLE_VIDEO_CALL` 为视频通话，`SINGLE_VOICE_CALL` 为音频通话。
 
 ##### 一对一视频通话
@@ -277,13 +270,11 @@ private fun startVoiceCall() {
 
 #### 发起群组通话
 
-为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。若选择的成员数量超过 16 人时，系统会自动提示 “人数超出最大限制16人” 并阻止发起通话。// TODO：音频和视频通话都是 16 人？
+要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [即时通讯 IM Android SDK 文档](/document/android/group_manage.html#创建群组) 或 [环信控制台文档](/product/console/operation_group.html#创建群组)。
 
-发起群组通话需要指定群组 ID，CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。
+发起群组通话指定群组 ID 后，CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。若选择的成员数量超过 16 人时，系统会自动提示 “人数超出最大限制16人” 并阻止发起通话。
 
 `ext` 会在 `CallKitListener#onReceivedCall` 中回调给接收方。
-
-// TODO：这里没有看到CallType 参数传入音频通话和视频通话值。
 
 ```kotlin
 private fun startGroupCall() {
@@ -317,15 +308,12 @@ private fun startGroupCall() {
 - **接听**：接受通话邀请，进入通话界面。
 - **拒绝**：拒绝通话邀请。
 - **挂断**：通话过程中点击挂断按钮。
-  
-
-// TODO：用户在通话中可以选择接听或拒绝其他来电。// TODO：是否需要加上
 
 //添加截图
 
 ### 步骤 6 结束通话
 
-正常情况下，用户通过 UI 界面挂断后由 CallKit 内部处理即可。开发者也可以通过如下接口主动挂断进行风控处理。
+正常情况下，用户通过 UI 界面挂断后由 CallKit 内部处理即可。
 
 ```kotlin
 // 主动结束通话
@@ -339,3 +327,104 @@ CallKitClient.exitCall()
 关于离线推送场景方案，请参见 [Android 端离线推送文档](/document/android/push/push_overview.html)。
 
 // TODO：添加截图
+
+## 进阶功能
+
+### 用户信息提供者
+
+默认情况下，音视频通话时，对于用户信息，CallKit 会显示默认图像和用户 ID；对于群信息，CallKit 会根据群组 ID 从 SDK 中拉取群信息来对应显示群组名称和群图像。
+
+如果要在一对一通话界面显示自定义用户头像和昵称，群聊通话显示自定义群图像和群名称，你可以通过 `CallInfoProvider` 实现自定义用户信息。
+
+```kotlin
+class MyCallInfoProvider : CallInfoProvider {
+    
+    override fun asyncFetchUsers(
+        userIds: List<String>,
+        onValueSuccess: OnValueSuccess<List<CallKitUserInfo>>
+    ) {
+        // 异步获取用户信息
+        GlobalScope.launch {
+            val userInfos = mutableListOf<CallKitUserInfo>()
+            
+            userIds.forEach { userId ->
+                // 从你的用户系统获取用户信息
+                val userInfo = getUserFromApi(userId)
+                userInfos.add(
+                    CallKitUserInfo().apply {
+                        this.userId = userId
+                        this.nickName = userInfo.nickname
+                        this.avatar = userInfo.avatar
+                    }
+                )
+            }
+            
+            // 回调用户信息
+            onValueSuccess.onSuccess(userInfos)
+        }
+    }
+    
+    override fun asyncFetchGroupInfo(
+        groupId: String,
+        onValueSuccess: OnValueSuccess<CallKitGroupInfo>
+    ) {
+        // 异步获取群组信息
+        GlobalScope.launch {
+            val groupInfo = getGroupFromApi(groupId)
+            val callKitGroupInfo = CallKitGroupInfo().apply {
+                this.groupID = groupId
+                this.groupName = groupInfo.name
+                this.groupAvatar = groupInfo.avatar
+            }
+            
+            onValueSuccess.onSuccess(callKitGroupInfo)
+        }
+    }
+    
+    private suspend fun getUserFromApi(userId: String): UserInfo {
+        // 实现你的用户信息获取逻辑
+        return UserInfo(userId, "昵称", "头像URL")
+    }
+    
+    private suspend fun getGroupFromApi(groupId: String): GroupInfo {
+        // 实现你的群组信息获取逻辑
+        return GroupInfo(groupId, "群组名称", "群组头像URL")
+    }
+}
+
+// 设置用户信息提供者
+CallKitClient.callInfoProvider = MyCallInfoProvider()
+```
+
+### 通话超时设置
+
+用户呼出通话和接听通话超时时间的设置，超时后退出通话。
+
+```kotlin
+val config = CallKitConfig().apply {
+    // 设置通话超时时间（毫秒）
+    callTimeout = 30000L  // 30秒
+}
+```
+
+### 私有化部署
+
+如果使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置：
+
+```kotlin
+private val callKitListener = object : CallKitListener {
+    
+    override fun onRtcEngineCreated(engine: RtcEngine) {
+        // 私有化部署配置
+        val configuration = LocalAccessPointConfiguration().apply {
+            // 设置你的私有化地址
+            ipList = arrayListOf("111.111.111.111")
+            verifyDomainName = "ap.xxx.agora.local"
+            mode = LOCAL_RPOXY_LOCAL_ONLY
+        }
+        engine.setLocalAccessPoint(configuration)
+    }
+    
+    // ... 其他回调
+}
+```
