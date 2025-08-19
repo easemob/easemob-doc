@@ -41,13 +41,15 @@ const callKitSidebar = [
     text: "集成文档",
     collapsible: true,
     children: [
+      { text: "CallKit 架构", link: "architecture.html" },
       { text: "集成 CallKit", link: "integration.html" },
       { text: "通话信令", link: "signaling.html" },
       {
         text: "LiveCommunicationKit", link: "livecommunicationkit.html", only: ["ios"]
       },
       { text: "画中画", link: "picture_in_picture.html", only: ["ios"] },
-      { text: "悬浮窗", link: "", only: ["android"] },
+      { text: "Telecom", link: "telecom.html", only: ["android"] },
+      { text: "悬浮窗", link: "float_top.html", only: ["android"] },
       { text: "自定义", link: "customization.html" },
       { text: "API 概览", link: "api_overview.html" },
       {
