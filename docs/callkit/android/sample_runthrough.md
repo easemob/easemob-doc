@@ -17,14 +17,11 @@
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
 3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
 4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
+5. [开通音视频服务](product_activation.html)。
 
 ## 操作步骤
 
-### 步骤 1 开通音视频服务
-
-使用环信提供的音视频服务前，你需要首先在环信控制台为应用 [开通音视频服务](service_activation.html)。// TODO：最终替换
-
-### 步骤 2 项目配置  // TODO：第二步和第三步可以合在一起？
+### 步骤 1 配置项目 
 
 1. 克隆或下载项目。
 
@@ -38,9 +35,7 @@ git clone [项目地址]
 
 3. 等待 Gradle 同步完成。
 
-### 步骤 3 修改配置
-
-在 `MainActivity.kt` 中进行如下修改：
+4. 在 `MainActivity.kt` 中进行如下修改：
 
 ```kotlin
 private val selfUserID = "your_user_id"        // 你的用户 ID
@@ -49,12 +44,12 @@ private val groupID = "your_group_id"          // 群组 ID
 private val imAppkey = "your_org#your_app"     // 你的 App Key
 ```
 
-### 步骤 4 运行应用
+### 步骤 2 运行应用
 
 1. 连接 Android 设备或启动模拟器。
 2. 点击 **Run ‘app’** 运行应用。
 
-### 步骤 5 测试通话
+### 步骤 3 测试通话
 
 1. 点击 **登录**。
 2. 等待连接：观察连接状态指示器变绿。
@@ -209,15 +204,24 @@ val config = CallKitConfig().apply {
 
 ## 常见问题
 
+1. 登录失败：
+   - 检查 App Key：App Key 的格式为 `orgname#appname`，需确保格式正确。、
+   - 检查网络：确保设备可访问网络。
+   - 用户不存在：确保已在环信控制台创建用户。
+  
+2. 通话无法建立
+   - 权限问题：确保已授权摄像头、麦克风权限。
+   - 对方离线：确保接听方在线且已登录。
+   - 网络问题：检查网络连接状况。
 
-| 错误类型           | 描述   |
-| :-------------- | :----- |
-| 登录失败      |  - **检查 App Key**：App Key 的格式为 `orgname#appname`，需确保格式正确。<br/> - **检查网络**：确保设备可访问网络。 <br/> - **用户不存在**：确保已在环信控制台创建用户。| 
-| 通话无法建立  |  - **权限问题**：确保已授权摄像头、麦克风权限。<br/> - **对方离线**：确保接听方在线且已登录。 <br/> - **网络问题**：检查网络连接状况。  | 
-| 音视频问题 |  - **无声音**：检查麦克风权限和音频设备。<br/> - **无画面**：检查摄像头权限。 <br/> - **画面卡顿**：检查网络带宽。   | 
-| 编译错误      | **依赖冲突**：清理项目后重新构建，详见表格下方代码。| 
-
-清理项目后重新构建的代码如下：
+3. 音视频问题
+   - 无声音：检查麦克风权限和音频设备。
+   - 无画面：检查摄像头权限。
+   - 画面卡顿：检查网络带宽。 
+  
+4. 编译错误
+  
+   依赖冲突：清理项目后重新构建，代码如下：
 
 ```bash
 ./gradlew clean

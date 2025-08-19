@@ -10,22 +10,18 @@
 - JDK: 17
 - Gradle version: 8.13
 
-## 前提条件  // TODO：统一后同步到 Android 和 Web 中
-// TODO：现在注册账号后，Console 会自动创建一个应用吗？
+## 前提条件
 
 在 [环信控制台](https://console.easemob.com/user/login) 进行如下操作：
 1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
 3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
 4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
+5. [开通音视频服务](product_activation.html)。
    
 ## 快速开始
 
-### 步骤 1 开通音视频服务
-
-使用环信提供的音视频服务前，你需要首先在环信控制台为应用 [开通音视频服务](service_activation.html)。// TODO：最终替换
-
-### 步骤 2 创建项目
+### 步骤 1 创建项目
 
 本节介绍将环信 CallKit 引入项目中的必要环境配置。
 
@@ -42,7 +38,7 @@
    - **Build configuration language**：工程构建语言，如 Groovy DSL(build.gradle)。
 4. 点击 **Finish**。根据屏幕提示，安装所需插件。
 
-### 步骤 3  引入 CallKit
+### 步骤 2  引入 CallKit
 
 #### 添加依赖
 
@@ -77,7 +73,7 @@ dependencies {
 
 **本地依赖**
 
-从 GitHub 获取音视频 [CallKit 源码](https://www.xxxxx.com)，克隆到本地。按照下面的方式集成：  // TODO：添加 CallKit 源码链接。
+从 GitHub 获取音视频 [CallKit 源码](https://github.com/easemob/easemob-callkit-android)，克隆到本地。按照下面的方式集成：
 
 - 在 Project 工程根目录下的 `settings.gradle.kts` 文件中添加如下代码：
 
@@ -109,7 +105,7 @@ android {
 }
 ```
 
-###  步骤 4 Android Support 库向 AndroidX 转换配置
+###  步骤 3 Android Support 库向 AndroidX 转换配置
 
 在 `Project` 工程根目录下的 `gradle.properties` 文件中额外添加如下配置：
 
@@ -117,7 +113,7 @@ android {
 android.enableJetifier=true
 ```
 
-### 步骤 5 防止代码混淆
+### 步骤 4 防止代码混淆
 
 在 app 的 `proguard-rules.pro` 文件中添加如下代码：
 
@@ -128,7 +124,7 @@ android.enableJetifier=true
 -dontwarn  io.agora.**
 ```
 
-### 步骤 6 创建快速开始页面
+### 步骤 5 创建快速开始页面
 
 1. 打开 `app/src/main/res/values/strings.xml` 文件，替换为如下内容。
 
@@ -284,7 +280,7 @@ android.enableJetifier=true
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-### 步骤 7 实现代码逻辑
+### 步骤 6 实现代码逻辑
 
 // TODO：各端是否都要贴一下代码逻辑？Web 端和 iOS 端目前没有。
 
@@ -663,7 +659,7 @@ class MainActivity : AppCompatActivity() {
 
 点击 Android Studio 菜单栏中的 `Sync Project with Gradle Files` 同步工程。现在可以发起首次通话。
 
-### 步骤 8 发起首次通话
+### 步骤 7 发起首次通话
 
 1. 登录：
    - 输入用户 ID 和密码，点击 **登录**。
@@ -672,16 +668,16 @@ class MainActivity : AppCompatActivity() {
    - 一对一视频通话：输入对方用户 ID，点击 **发起一对一视频通话**。
    - 一对一音频通话：输入对方用户 ID，点击 **发起一对一音频通话**。
    - 群组通话：输入群组 ID，点击 **发起群组音视频通话**。
-
-// TODO：是否要添加以下两部分
-1. 授权权限：在弹出的权限请求中，允许访问摄像头和麦克风。
-2.  对通话进行控制：
+3. 授权权限：在弹出的权限请求中，允许访问摄像头和麦克风等权限。
+4.  对通话进行控制：
    - 在通话中可以控制静音、摄像头、扬声器等。
    - 点击挂断按钮结束通话。
 
 ![img](/images/callkit/android/quickstart_run.png)
 
-## 测试应用  // TODO：能称为测试应用吗？测试通话？
+## 测试应用  
+
+// TODO：测试步骤与上面的发起首次通话有何区别
 
 测试前，你需要了解以下几方面：
 - 首次使用时需要授权摄像头、麦克风、悬浮窗等权限。
