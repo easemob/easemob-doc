@@ -49,7 +49,7 @@ const callKitSidebar = [
       },
       { text: "画中画", link: "picture_in_picture.html", only: ["ios"] },
       { text: "Telecom", link: "telecom.html", only: ["android"] },
-      { text: "悬浮窗", link: "float_top.html", only: ["android"] },
+      { text: "悬浮窗与来电顶部条", link: "float_top.html", only: ["android"] },
       { text: "自定义", link: "customization.html" },
       { text: "API 概览", link: "api_overview.html" },
       {
