@@ -49,7 +49,7 @@ private val imAppkey = "your_org#your_app"     // 你的 App Key
 1. 连接 Android 设备或启动模拟器。
 2. 点击 **Run ‘app’** 运行应用。
 
-### 步骤 3 测试通话
+### 步骤 3 开始通话
 
 1. 点击 **登录**。
 2. 等待连接：观察连接状态指示器变绿。
