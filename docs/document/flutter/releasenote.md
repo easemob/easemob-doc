@@ -2,6 +2,12 @@
 
 <Toc />
 
+## 版本 v4.15.1 2025-8-19
+
+- 修复 `updatePushNickname` 在未登录和参数异常时导致的崩溃问题。
+- 修复 `fetchChatroomInfoFromServer` 在取消 `fetchMembers` 参数后导致的崩溃问题。
+- 修复 `modifyMessage` 在传入消息体为空时导致的崩溃问题。
+
 ## 版本 v4.15.0 2025-6-16
 
 #### 新增特性
