@@ -238,7 +238,7 @@ android.enableJetifier=true
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="发起单人视频通话"
+        android:text="发起一对一视频通话"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPeerId" />
@@ -248,34 +248,10 @@ android.enableJetifier=true
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="发起单人音频通话"
+        android:text="发起一对一音频通话"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSingleVideo" />
-
-    <EditText
-        android:id="@+id/etGroupId"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:hint="群组ID"
-        android:singleLine="true"
-        android:maxLines="1"
-        android:imeOptions="actionDone"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSingleAudio" />
-
-    <Button
-        android:id="@+id/btnMultipleVideo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="发起多人音视频通话"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etGroupId" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
@@ -432,7 +408,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        // 初始化环信 IM SDK
+        // 初始化环信IM SDK
         val options = ChatOptions().apply {
             this.appKey = appkey
             autoLogin = false
@@ -440,7 +416,7 @@ class MainActivity : AppCompatActivity() {
         ChatClient.getInstance().init(this, options)
         ChatClient.getInstance().setDebugMode(true)
 
-        // 初始化 CallKit
+        // 初始化CallKit
         val config = CallKitConfig()
 
         CallKitClient.init(this, config)
@@ -480,11 +456,10 @@ class MainActivity : AppCompatActivity() {
         binding.btnLogout.setOnClickListener { logout() }
         binding.btnSingleVideo.setOnClickListener { startSingleVideoCall() }
         binding.btnSingleAudio.setOnClickListener { startSingleAudioCall() }
-        binding.btnMultipleVideo.setOnClickListener { startMultipleVideoCall() }
     }
 
     private fun setupKeyboardListeners() {
-        // 为用户 ID 输入框添加键盘监听
+        // 为用户ID输入框添加键盘监听
         binding.etUserId.setOnEditorActionListener { _, actionId, event ->
             if (actionId == android.view.inputmethod.EditorInfo.IME_ACTION_DONE ||
                 actionId == android.view.inputmethod.EditorInfo.IME_ACTION_NEXT ||
@@ -508,20 +483,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // 为对方用户 ID 输入框添加键盘监听
+        // 为对方用户ID输入框添加键盘监听
         binding.etPeerId.setOnEditorActionListener { _, actionId, event ->
-            if (actionId == android.view.inputmethod.EditorInfo.IME_ACTION_DONE ||
-                actionId == android.view.inputmethod.EditorInfo.IME_ACTION_NEXT ||
-                (event?.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
-                hideKeyboard()
-                true
-            } else {
-                false
-            }
-        }
-
-        // 为群组 ID 输入框添加键盘监听
-        binding.etGroupId.setOnEditorActionListener { _, actionId, event ->
             if (actionId == android.view.inputmethod.EditorInfo.IME_ACTION_DONE ||
                 actionId == android.view.inputmethod.EditorInfo.IME_ACTION_NEXT ||
                 (event?.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
@@ -576,7 +539,7 @@ class MainActivity : AppCompatActivity() {
                     updateConnectionStatus(false, "连接状态: 已登出")
                     isLoggedIn = false
                     updateButtonStates()
-                    CallKitClient.exitCall()
+                    CallKitClient.endCall()
                     showToast("登出成功")
                 }
             }
@@ -619,27 +582,12 @@ class MainActivity : AppCompatActivity() {
         CallKitClient.startSingleCall(CallType.SINGLE_VOICE_CALL, remoteUserID, null)
     }
 
-    private fun startMultipleVideoCall() {
-        if (!isLoggedIn) {
-            showToast("请先登录")
-            return
-        }
-
-        val groupID = binding.etGroupId.text.toString().trim()
-        if (groupID.isEmpty()) {
-            showToast("群组ID不能为空")
-            return
-        }
-
-        CallKitClient.startInviteMultipleCall(groupID, null)
-    }
 
     private fun updateButtonStates() {
         binding.btnLogin.isEnabled = !isLoggedIn
         binding.btnLogout.isEnabled = isLoggedIn
         binding.btnSingleVideo.isEnabled = isLoggedIn
         binding.btnSingleAudio.isEnabled = isLoggedIn
-        binding.btnMultipleVideo.isEnabled = isLoggedIn
     }
 
     override fun onDestroy() {

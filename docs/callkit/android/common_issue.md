@@ -96,3 +96,4 @@ CallKit 会自动处理音频路由切换，支持扬声器、听筒、蓝牙耳
 - 参考 DEMO 工程的 [MainActivity#checkPhoneAccount](https://github.com/easemob/easemob-demo-android/blob/main/app/src/main/kotlin/com/hyphenate/chatdemo/MainActivity.kt)函数实现，创建并启用 `PhoneAccount`。
 - 通过 `PhoneAccountHelper.getPhoneAccountStatus()` 检查 `PhoneAccount` 的状态。
 
+

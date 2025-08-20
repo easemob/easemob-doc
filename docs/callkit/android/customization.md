@@ -17,38 +17,26 @@ CallKit 支持发起呼叫时的声音、接收呼叫时的声音以及被挂断
 ```kotlin
 val config = CallKitConfig().apply {
     // 支持三种来源：assets、res/raw、绝对路径
+    // 方式 1：使用 assets 文件夹中的文件
     incomingRingFile = "assets://incoming_ring.mp3"
     outgoingRingFile = "assets://outgoing_ring.mp3"
     dingRingFile     = "assets://ding.mp3"
-    // 呼叫超时（毫秒）
-    callTimeout = 30000L
-}
-CallKitClient.init(context, config)
-```
 
-
-// TODO：成谱 Check
-CallKit 支持多种铃声配置方式：
-
-```kotlin
-val config = CallKitConfig().apply {
-    // 方式 1：使用 assets 文件夹中的文件
-    incomingRingFile = "assets://custom_incoming.mp3"
-    outgoingRingFile = "assets://custom_outgoing.mp3"
-    dingRingFile = "assets://custom_ding.mp3"
-    
     // 方式 2 ：使用 res/raw 文件夹中的文件
     // incomingRingFile = "raw://incoming_ring"
     
     // 方式 3 ：使用绝对路径
     // incomingRingFile = "/storage/emulated/0/Download/ringtone.mp3"
 }
+CallKitClient.init(context, config)
 ```
+
 
 
 //todo Android 工程师插入截图
 
-## 布局/样式替换
+## 布局/样式
+- 开发者可以通过修改布局文件源码的方式或者在应用层添加一个同名的文件来实现自定义布局。注意修改后或者新的布局文件需要包含原有布局文件里的所有资源，否则运行时会报空指针异常。允许开发者添加新的资源控件、调整控件位置、背景等。
   
   - 布局：`ease-call-kit/src/main/res/layout/`
   - layout/
@@ -69,23 +57,7 @@ val config = CallKitConfig().apply {
   - `callkit_view_base_loading.xml`：加载弹窗内容视图。// TODO：是样式吗？
   
 ## 图标与图形资源（`res/drawable*`）
-
-### Shape 样式资源
-
-| 资源                | 描述   | 
-| :------------------- | :----- | 
-| `callkit_float_window_background_8.xml` / `callkit_float_window_background_12.xml`  | 悬浮窗背景（8dp/12dp圆角）。 | 
-| `shape_rectangle_bg_*.xml` | 矩形背景，支持不同颜色与圆角（如 `2f3437_conner_12`、`80000000_conner_6/8/12`）。 | 
-| `shape_circle_bg_80000000.xml`   | 圆形半透明背景。 | 
-| `shape_rectangle_conner_12.xml`          | 通用 12 dp 圆角矩形。 | 
-  
-### 状态选择器资源
-
-| 资源                | 描述   | 
-| :------------------- | :----- | 
-| `callkit_checkbox_bg_selector_style.xml`  | 复选框背景状态选择器（选中/未选中/不可用）。 | 
-| `callkit_selector_add.xml`               | 添加按钮颜色状态选择器。  | 
-| `callkit_view_default_touch_shadow_bg.xml` | 通用触摸阴影背景。  | 
+- 开发者可直接在源码中使用同名文件替换，或者在应用层对应的`res/drawable*`添加一个同名文件,即可实现资源文件的替换。
   
 ### 功能图标（drawable-xxhdpi/）
 
@@ -140,7 +112,7 @@ val config = CallKitConfig().apply {
 | `callkit_empty_layout.png` | 空状态占位图。  | 
 
 ## 文案资源（`res/values/callkit_strings.xml`）
-
+- 开发者可直接修改`callkit_strings.xml`内资源的定义源码，或者在应用层的`res/values/strings.xml`文件中添加相同资源ID的文案资源实现文案的替换
 ### 基础状态
 
 | 资源                | 描述   | 

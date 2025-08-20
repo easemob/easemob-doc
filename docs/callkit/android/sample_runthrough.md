@@ -19,6 +19,8 @@
 4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
 5. [开通音视频服务](product_activation.html)。
 
+//todo 将以上链接替换成绝对路径，因为本文件要拷贝到callkit源码工程里作为readme使用
+
 ## 操作步骤
 
 ### 步骤 1 配置项目 

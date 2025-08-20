@@ -7,7 +7,7 @@
 | `init(context, config)` | 初始化 CallKit |- `context`: 上下文<br/> - `config`: 配置对象 |
 | `startSingleCall(type, userId, ext)` | 发起一对一通话 | - `type`: 通话类型<br/> - `userId`: 对方用户 ID<br/> - `ext`: 扩展信息 |
 | `startInviteMultipleCall(groupId, ext)` | 发起群组通话 | - `groupId`: 群组 ID<br/> - `ext`: 扩展信息 |
-| `exitCall()` | 结束通话 | 无 |
+| `endCall()` | 结束通话 | 无 |
 | `getCache()` | 获取缓存管理器 | 无 |
 | `cleanUp()` | 清理资源 | 无 |
 
@@ -46,5 +46,3 @@
 | `onRemoteUserJoined(userId, callType, channelName)` | 远端用户加入 | - `userId`: 用户 ID<br> - `callType`: 通话类型<br> - `channelName`: 频道名称 |
 | `onRemoteUserLeft(userId, callType, channelName)` | 远端用户离开 | - `userId`: 用户ID<br> - `callType`: 通话类型<br> - `channelName`: 频道名称 |
 | `onRtcEngineCreated(engine)` | RTC 引擎创建 | `engine`: RTC 引擎实例 |
-
-// TODO：有这几种回调吗？用户忙线回调、通话接通回调、用户被踢下线的回调。

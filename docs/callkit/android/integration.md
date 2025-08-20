@@ -313,11 +313,11 @@ private fun startGroupCall() {
 
 ### 步骤 6 结束通话
 
-正常情况下，用户通过 UI 界面挂断后由 CallKit 内部处理即可。
+正常情况下，用户通过 UI 界面挂断后由 CallKit 内部处理即可。部分场景下：例如用户正在使用callKit进行通话，此时系统电话来电，开发者希望以系统电话为主，此时可调用以下接口先主动结束callkit通话,然后接听系统电话。
 
 ```kotlin
 // 主动结束通话
-CallKitClient.exitCall()
+CallKitClient.endCall()
 ```
 
 ### 步骤 7 离线推送
