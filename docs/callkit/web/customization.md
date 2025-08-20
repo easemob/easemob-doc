@@ -1,5 +1,7 @@
 
-# 自定义
+# 自定义资源
+
+// TODO：按照 Android 的大致架构调整一下：
 
 ## 修改 UI 配置项
 
@@ -128,29 +130,4 @@ const customIcons = {
 <CallKit customIcons={customIcons} />;
 ```
 
-## 用户信息
-
-- 默认情况下，音视频通话中显示用户 ID 和默认头像，你可以通过 `userInfoProvider` 设置用户昵称和头像。
-- 默认情况下，群组音视频通话中显示群组 ID 和默认群组头像，你可以通过 `groupInfoProvider` 设置群组名称和群组头像。
-
-```tsx
-// 实现用户信息提供者
-const userInfoProvider = async (userIds: string[]) => {
-  // 从你的服务器或本地缓存获取用户信息
-  return userIds.map(userId => ({
-    userId,
-    nickname: `用户 ${userId}`,
-    avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userId}`,
-  }));
-};
-// 实现群组信息提供者
-const groupInfoProvider = async (groupIds: string[]) => {
-  // 从你的服务器或本地缓存获取群组信息
-  return groupIds.map(groupId => ({
-    groupId,
-    groupName: `群组 ${groupId}`,
-    groupAvatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=group-${groupId}`,
-  }));
-};
-```
 

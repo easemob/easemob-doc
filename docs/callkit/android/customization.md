@@ -1,4 +1,6 @@
-# 自定义  
+# 自定义 
+
+// TODO：在每个二级或三级标题下添加描述。
 
 ## 铃声替换（`CallKitConfig`）
 
@@ -191,9 +193,11 @@ val config = CallKitConfig().apply {
   
  ### 多设备处理
 
-    - `The_other_is_recived` / `callkit_handle_on_other_device`：其他设备已接听
-    - `The_other_is_refused` / `callkit_refused_on_other_device`：其他设备已拒绝/结束通话
-  - `The_other_is_busy`：对方忙线中
+| 资源                | 描述   | 
+| :------------------- | :----- | 
+| `The_other_is_recived` / `callkit_handle_on_other_device` | 其他设备已接听。    | 
+| `The_other_is_refused` / `callkit_refused_on_other_device`             | 其他设备已拒绝/结束通话。   | 
+| `The_other_is_busy`             | 对方忙线中。   | 
   
 ### 多语言支持（`res/values-zh/callkit_strings.xml`）
 

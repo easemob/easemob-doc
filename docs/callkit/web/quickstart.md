@@ -166,7 +166,7 @@ const App: React.FC = () => {
     }
 
     try {
-      // 登录 IM
+      // 登录环信 IM
       await rootStore.client.open({
         user: userId.trim(),
         pwd: password.trim(),
@@ -640,8 +640,6 @@ npm run dev
 ## 运行应用 
 
 运行应用前，你需要授权摄像头、麦克风、悬浮窗等权限。
-
-按照以下步骤进行测试：
 
 1. 在浏览器中访问 `http://localhost:5173`。
 2. 输入 App Key、用户 ID 和密码，点击 **登录** 进行登录，登录成功后状态指示器会变绿。

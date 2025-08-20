@@ -1,6 +1,6 @@
 # 跑通 Web 示例项目
 
-本文档基于 call-demo.tsx 示例，帮助你快速集成和运行环信 Web CallKit，实现一对一音视频通话和群组音视频通话功能。
+本文档基于 `call-demo.tsx` 示例，帮助你快速集成和运行环信 Web CallKit，实现一对一音视频通话和群组音视频通话功能。
 
 ## 推荐环境
 
@@ -46,9 +46,11 @@ npm run dev
 yarn dev
 ```
 
-4. 打开浏览器访问 `http://localhost:5173/demo/callkit/call-demo.html`，确认项目正常运行。
+### 步骤 2 运行项目
 
-### 步骤 2 开始通话
+打开浏览器访问 `http://localhost:5173/demo/callkit/call-demo.html`，确认项目正常运行。
+
+### 步骤 3 开始通话
 
 1. 登录：填写 App Key、用户 ID 和密码，点击 **登录**，等待登录成功提示。
 2. 完成配置：输入被叫用户 ID（一对一通话）或群组 ID（群组通话），点击 **完成配置**。

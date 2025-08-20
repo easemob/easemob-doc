@@ -36,7 +36,16 @@ CallKit 是环信提供的一站式音视频通话解决方案，提供以下核
    
 确保已集成环信 IM SDK 并完成登录。
 
-## 快速集成
+## 集成步骤
+
+// TODO：请 Check 这些：
+
+使用 CallKit 库完成音视频通话的基本流程如下：
+
+1. 初始化 CallKit 库，设置 CallKit 监听。
+2. 主叫方调用发起通话邀请接口，进入通话界面。
+3. 被叫方收到邀请自动弹出通话邀请界面，在通话邀请界面选择接通或者拒绝。
+4. 主叫方或者被叫方挂断通话。
 
 ## 步骤 1 安装与引入 CallKit
 
@@ -147,7 +156,7 @@ const startGroupCall = () => {
 
 ## 最佳实践
 
-### 1. 错误处理  
+### 错误处理  
 
 // TODO：添加错误类型和描述。
 
@@ -169,7 +178,33 @@ const startGroupCall = () => {
 />
 ```
 
-### 2. 用户信息缓存
+### 用户信息
+
+- 默认情况下，音视频通话中显示用户 ID 和默认头像，你可以通过 `userInfoProvider` 设置用户昵称和头像。
+- 默认情况下，群组音视频通话中显示群组 ID 和默认群组头像，你可以通过 `groupInfoProvider` 设置群组名称和群组头像。
+
+```tsx
+// 实现用户信息提供者
+const userInfoProvider = async (userIds: string[]) => {
+  // 从你的服务器或本地缓存获取用户信息
+  return userIds.map(userId => ({
+    userId,
+    nickname: `用户 ${userId}`,
+    avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userId}`,
+  }));
+};
+// 实现群组信息提供者
+const groupInfoProvider = async (groupIds: string[]) => {
+  // 从你的服务器或本地缓存获取群组信息
+  return groupIds.map(groupId => ({
+    groupId,
+    groupName: `群组 ${groupId}`,
+    groupAvatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=group-${groupId}`,
+  }));
+};
+```
+
+### 用户信息缓存
 
 通话过程中，优先使用缓存中的用户信息。若缓存中没有用户信息，你可以去服务器获取。
 
@@ -191,7 +226,7 @@ const userInfoProvider = async (userIds: string[]) => {
 };
 ```
 
-### 3. 组件卸载时清理缓存数据
+### 组件卸载时清理缓存数据
 
 CallKit 组件卸载时需要清理缓存数据。
 
