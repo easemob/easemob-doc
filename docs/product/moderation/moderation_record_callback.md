@@ -36,6 +36,7 @@
     "source": {
        
     },
+    "riskType": "广告",
     "eventType": "moderation", 
     "from": "qa2",
     "to": "qa1",
@@ -55,6 +56,7 @@
 | messageId       | String  | 消息 ID。   |
 | targetType       | String | 会话类型。<br/> - `chat`：单聊；<br/> - `groupchat`：群聊；<br/> - `chatroom`：聊天室。  |
 | appkey       | String | 你的 App Key。   |
+| riskType       | String |  风险类型，例如，`无风险`、`涉政`、`仇恨言论`、`色情`、`成人内容`、`暴恐`、`违禁`、`广告`、`二维码` 和 `未知`。   |
 | eventType       | String | 事件类型，审核服务为 `moderation`。|
 | from      | String | 消息发送方。   |
 | to      | String | 消息接收方：<br/> - 单聊为对端用户 ID；<br/> - 群聊时为群组 ID；<br/> - 聊天室聊天为聊天室 ID。  |
