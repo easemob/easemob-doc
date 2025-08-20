@@ -49,12 +49,19 @@
 ![image](/images/android/push/fcm_certificate_v1.png)
 
 1. 点击 **添加推送证书**。在默认打开的 **谷歌** 页签中，配置 FCM 推送：
-- **证书类型** 选择 **V1**。
-- 点击 **上传证书** 上传获取的 FCM V1 版本证书文件（.json 文件）。
-- **证书名称** 设置为 FCM 的发送者 ID。你需要在[Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置** > **云消息传递** 页面中，在 **Firebase Cloud Messaging API（V1）** 区域中获取发送者 ID，如下图所示。
-- 设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
 
 ![image](/images/android/push/fcm_v1.png)
+
+| 参数             | 类型 | 是否必需 | 描述               |
+| :-------------- | :----- | :------- | :---------------------------- |
+| 证书类型     |  文件    | 是    | 选择使用 V1 或旧版证书。<br/> - **V1**：推荐使用。你需要点击 **上传证书** 上传FCM V1 版本证书文件，并且设置 **证书名称**。<br/> -**旧版**：已弃用，不推荐使用。你需要配置 **证书名称** 和 **推送密钥**。 |
+| 上传文件        | 文件 | 是   | 点击 **上传证书** 上传获取的 FCM V1 版本证书文件（.json 文件）。此项仅对 V1 证书有效。 |
+| 证书名称       | String | 是   | FCM 的发送者 ID。<br/> - v1 证书：在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn) 的 **项目设置** > **云消息传递** 页面的 **Firebase Cloud Messaging API（V1）** 区域中获取发送者 ID，如下图所示。<br/> - 旧版证书：在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面的 **Cloud Messaging API（旧版）** 区域中获取发送者 ID。 |
+| 推送密钥     | String | 是   | FCM 服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/) 的 **项目设置** > **云消息传递**页面的 **云消息传递 API（旧版）** 区域中获取服务器密钥。此参数仅对旧版证书有效。|
+| 通道 ID         | String | 否     | FCM 通道 ID。该参数仅对离线推送有效。       |
+| 推送优先级设置  |      | 否    | 消息传递优先级。请参见 [设置消息优先级](https://firebase.google.cn/docs/cloud-messaging/concept-options#setting-the-priority-of-a-message)。<br/> 该参数仅对离线推送有效。|
+| 推送消息类型 |      | 否    | 通过 FCM 发送给客户端的消息类型：<br/> - **数据**：数据消息，由客户端应用程序处理。<br/> - **通知**：通知消息，由 FCM SDK 自动处理。**数据+通知**：通知消息和数据消息都可以通过 FCM 客户端发送。 <br/>请参见 FCM 的 [消息类型介绍](https://firebase.google.com/docs/cloud-messaging/concept-options#notifications_and_data_messages)。<br/> 该参数仅对离线推送有效。|
+| APNs跨平台推送支持 | String | 否 | 是否开启 APNs 跨平台推送支持。非跨平台应用建议不要启用。该参数仅对离线推送有效。|
 
 #### **旧版证书无缝切换至 V1 证书**
 
