@@ -38,15 +38,6 @@ CallKit 是环信提供的一站式音视频通话解决方案，提供以下核
 
 ## 集成步骤
 
-// TODO：请 Check 这些：
-
-使用 CallKit 库完成音视频通话的基本流程如下：
-
-1. 初始化 CallKit 库，设置 CallKit 监听。
-2. 主叫方调用发起通话邀请接口，进入通话界面。
-3. 被叫方收到邀请自动弹出通话邀请界面，在通话邀请界面选择接通或者拒绝。
-4. 主叫方或者被叫方挂断通话。
-
 ## 步骤 1 安装与引入 CallKit
 
 ### 1. 安装依赖
@@ -96,7 +87,7 @@ import type { CallKitRef } from 'easemob-chat-uikit';
 
 - **发起群组通话**
   
-  要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [即时通讯 IM Android SDK 文档](/document/android/group_manage.html#创建群组) 或 [环信控制台文档](/product/console/operation_group.html#创建群组)。
+  要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [环信控制台文档](/product/console/operation_group.html#创建群组)。
 
   你可以使用 `startGroupCall` 发起群组通话，指定群组 ID，`callType` 设置为 `video` 为视频通话，`audio` 为音频通话，并设置邀请消息 `msg`。CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。
 
@@ -154,11 +145,12 @@ const startGroupCall = () => {
 
 ```
 
-## 最佳实践
+## 高阶功能
 
 ### 错误处理  
 
-// TODO：添加错误类型和描述。
+// TODO：添加错误类型和描述。 
+// TODO：下面的代码有问题吗？
 
 ```tsx
 <CallKit

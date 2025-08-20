@@ -3,8 +3,6 @@
 
 // TODO：按照 Android 的大致架构调整一下：
 
-## 修改 UI 配置项
-
 ### 布局配置
 
 ```tsx
@@ -15,8 +13,6 @@
   gap={8}
   // 最大显示视频数量
   maxVideos={12}
-  // 背景图片
-  backgroundImage="https://example.com/background.jpg"
 />
 ```
 
@@ -74,7 +70,14 @@ const backgroundOptions = [
   invitationCustomContent={<CustomInvitationComponent />}
   // 邀请界面显示配置
   showInvitationAvatar={true}
-  autoRejectTime={30} // 30秒自动拒绝
+/>
+```
+
+### 呼叫超时时间
+
+```tsx
+<CallKit
+  autoRejectTime={30} // 默认 30 秒未响应，自动取消呼叫
 />
 ```
 

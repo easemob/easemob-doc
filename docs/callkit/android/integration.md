@@ -36,13 +36,6 @@
 
 ## 集成步骤
 
-使用 CallKit 库完成音视频通话的基本流程如下：
-
-1. 初始化 CallKit 库，设置 CallKit 监听。
-2. 主叫方调用发起通话邀请接口，进入通话界面。
-3. 被叫方收到邀请自动弹出通话邀请界面，在通话邀请界面选择接通或者拒绝。
-4. 主叫方或者被叫方挂断通话。
-
 ### 步骤 1 添加依赖
 
 #### 方式一：（推荐）Gradle 远程依赖
@@ -394,17 +387,6 @@ class MyCallInfoProvider : CallInfoProvider {
 
 // 设置用户信息提供者
 CallKitClient.callInfoProvider = MyCallInfoProvider()
-```
-
-### 通话超时设置
-
-用户呼出通话和接听通话超时时间的设置，超时后退出通话。
-
-```kotlin
-val config = CallKitConfig().apply {
-    // 设置通话超时时间（毫秒）
-    callTimeout = 30000L  // 30秒
-}
 ```
 
 ### 私有化部署

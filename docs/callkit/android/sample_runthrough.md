@@ -28,7 +28,7 @@
 1. 克隆或下载项目。
 
 ```bash
-git clone [项目地址]
+git clone https://github.com/easemob/easemob-callkit-android 
 ```
 
 2. 在 Android Studio 中打开项目。

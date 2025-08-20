@@ -2,7 +2,7 @@
 
 // TODO：在每个二级或三级标题下添加描述。
 
-## 铃声替换（`CallKitConfig`）
+## 铃声
 
 CallKit 支持发起呼叫时的声音、接收呼叫时的声音以及被挂断时的声音。铃声文件支持 MP3、WAV 等格式，建议铃声时长为 1-20 秒，文件大小不超过 1 MB。
 
@@ -36,30 +36,37 @@ CallKitClient.init(context, config)
 //todo Android 工程师插入截图
 
 ## 布局/样式
-- 开发者可以通过修改布局文件源码的方式或者在应用层添加一个同名的文件来实现自定义布局。注意修改后或者新的布局文件需要包含原有布局文件里的所有资源，否则运行时会报空指针异常。允许开发者添加新的资源控件、调整控件位置、背景等。
+
+开发者可以通过修改布局文件源码(`ease-cal1-kit/src/main/res/layout/`) 的方式或者在应用层添加一个同名的文件来实现自定义布局。注意修改后或者新的布局文件需要包含原有布局文件里的所有资源，否则运行时会报空指针异常。允许开发者添加新的资源控件、调整控件位置、背景等。
+
+| 资源 | 描述 |
+|------|------|
+| `activity_single_call.xml` | 一对一通话根布局容器，承载不同状态子视图（incoming/outgoing/connected）。 |
+| `activity_multi_video_call.xml` | 多人通话根布局容器，含成员网格/工具栏等。 |
+| `activity_invite_group_members.xml` | 群成员邀请页面。 |
+| `callkit_titlebar_view.xml` | 通话页通用标题栏组件（返回、标题、右侧操作）。 |
+| `view_incoming_video_single.xml` / `view_incoming_voice_single.xml` | 来电界面（视频/语音）。 |
+| `view_outgoing_video_single.xml` / `view_outgoing_voice_single.xml` | 外呼界面（等待对方接听）。 |
+| `view_connected_video_single.xml` / `view_connected_voice_single.xml` | 通话中界面（视频/语音）。 |
+| `view_incoming_multiple.xml` / `view_connected_multiple.xml` | 多人通话来电/通话中视图。 |
+| `view_call_member.xml` / `view_multi_video_call_member.xml` | 成员头像、昵称、音量/状态指示项。 |
+| `callkit_float_window_video.xml` / `callkit_float_window_voice.xml` | 后台悬浮窗视图（视频小窗/语音小窗）。 |
+| `callkit_incomimg_call_top_window.xml` | 顶部来电条（可滑动收起/接听/挂断）。 |
+| `callkit_fragment_base_list.xml` | 通用列表容器（内含RecyclerView/刷新容器）。 |
+| `callkit_layout_default_no_data.xml` / `callkit_layout_no_data_show_nothing.xml` | 无数据/空占位视图。 |
+| `callkit_layout_group_member_select_item.xml` | 群成员选择单元项（头像/昵称/选中态）。 |
+
+## 通话超时设置
+
+| 资源                | 描述   | 
+| :------------------- | :----- | 
+| `callTimeout` | 通话超时时间，单位为秒，默认为 30 秒。  | 
+
+## 图标与图形资源
+
+- 开发者可直接在源码中使用同名文件替换，或者在应用层对应的 `res/drawable*` 添加一个同名文件,即可实现资源文件的替换。
   
-  - 布局：`ease-call-kit/src/main/res/layout/`
-  - layout/
-    - `activity_single_call.xml`：一对一 通话根布局容器，承载不同状态子视图（incoming/outgoing/connected）。
-    - `activity_multi_video_call.xml`：多人通话根布局容器，含成员网格/工具栏等。
-    - `activity_invite_group_members.xml`：群成员邀请页面。
-    - `callkit_titlebar_view.xml`：通话页通用标题栏组件（返回、标题、右侧操作）。
-    - `view_incoming_video_single.xml` / `view_incoming_voice_single.xml`：来电界面（视频/语音）。
-    - `view_outgoing_video_single.xml` / `view_outgoing_voice_single.xml`：外呼界面（等待对方接听）。
-    - `view_connected_video_single.xml` / `view_connected_voice_single.xml`：通话中界面（视频/语音）。
-    - `view_incoming_multiple.xml` / `view_connected_multiple.xml`：多人通话来电/通话中视图。
-    - `view_call_member.xml` / `view_multi_video_call_member.xml`：成员头像、昵称、音量/状态指示项。
-    - `callkit_float_window_video.xml` / `callkit_float_window_voice.xml`：后台悬浮窗视图（视频小窗/语音小窗）。
-    - `callkit_incomimg_call_top_window.xml`：顶部来电条（可滑动收起/接听/挂断）。
-    - `callkit_fragment_base_list.xml`：通用列表容器（内含 RecyclerView/刷新容器）。
-    - `callkit_layout_default_no_data.xml` / `callkit_layout_no_data_show_nothing.xml`：无数据/空占位视图。
-    - `callkit_layout_group_member_select_item.xml`：群成员选择单元项（头像/昵称/选中态）。
-  - `callkit_view_base_loading.xml`：加载弹窗内容视图。// TODO：是样式吗？
-  
-## 图标与图形资源（`res/drawable*`）
-- 开发者可直接在源码中使用同名文件替换，或者在应用层对应的`res/drawable*`添加一个同名文件,即可实现资源文件的替换。
-  
-### 功能图标（drawable-xxhdpi/）
+### 功能图标
 
 #### 通话控制
 
