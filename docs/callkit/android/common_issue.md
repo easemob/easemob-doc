@@ -86,14 +86,14 @@ CallKit 会自动处理音频路由切换，支持扬声器、听筒、蓝牙耳
 
 若锁屏状态下无法显示系统来电界面：
 - 检查是否已申请 `MANAGE_OWN_CALLS` 等 Telecom 权限。
-- 检查 PhoneAccount 是否已注册和启用。
+- 检查 VoIP 账户是否已注册和启用。
 - 路径：以小米手机为例，点击电话拨号图标，点击右上角设置图标，选择 **高级设置 > 通话账户设置**，启用对应的 VoIP 账户。
 
-## 14. PhoneAccount 未启用
+## 14.  VoIP 账户未启用
 
 若提示 `PhoneAccount` 未注册或未启用：
-- CallKit 在使用 Telecom 框架时会检查 `PhoneAccount` 账户状态。
-- 参考 DEMO 工程的 [MainActivity#checkPhoneAccount](https://github.com/easemob/easemob-demo-android/blob/main/app/src/main/kotlin/com/hyphenate/chatdemo/MainActivity.kt)函数实现，创建并启用 `PhoneAccount`。
-- 通过 `PhoneAccountHelper.getPhoneAccountStatus()` 检查 `PhoneAccount` 的状态。
+- CallKit 在使用 Telecom 框架时会检查 VoIP 账户状态。
+- 参考 DEMO 工程的 [MainActivity#checkPhoneAccount](https://github.com/easemob/easemob-demo-android/blob/main/app/src/main/kotlin/com/hyphenate/chatdemo/MainActivity.kt)函数实现，创建并启用 VoIP 账户。
+- 通过 `PhoneAccountHelper.getPhoneAccountStatus()` 检查 VoIP 账户的状态。
 
 
