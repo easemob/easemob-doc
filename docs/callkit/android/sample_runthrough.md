@@ -13,19 +13,17 @@
 ## 前提条件
 
 在 [环信控制台](https://console.easemob.com/user/login) 进行如下操作：
-1. [注册环信账号](/product/console/account_register.html#注册账号)。
-2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
-3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
-4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
-5. [开通音视频服务](product_activation.html)。
-
-//todo 将以上链接替换成绝对路径，因为本文件要拷贝到callkit源码工程里作为readme使用
+1. [注册环信账号](https://doc.easemob.com/product/console/account_register.html#注册账号)。
+2. [创建应用](https://doc.easemob.com/product/console/app_create.html)，[获取应用的 App Key](https://doc.easemob.com/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
+3. [创建用户](https://doc.easemob.com/product/console/operation_user.html#创建用户)，获取用户 ID。
+4. [创建群组](https://doc.easemob.com/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
+5. [开通音视频服务](https://doc.easemob.com/product_activation.html)。
 
 ## 操作步骤
 
 ### 步骤 1 配置项目 
 
-1. 克隆或下载项目。
+1. 在 [Github](https://github.com/easemob/easemob-callkit-android) 中克隆或下载代码。
 
 ```bash
 git clone https://github.com/easemob/easemob-callkit-android 
@@ -45,7 +43,6 @@ private val remoteUserID = "target_user_id"    // 对方用户 ID，用于一对
 private val groupID = "your_group_id"          // 群组 ID
 private val imAppkey = "your_org#your_app"     // 你的 App Key
 ```
-
 ### 步骤 2 运行应用
 
 1. 连接 Android 设备或启动模拟器。
@@ -53,13 +50,13 @@ private val imAppkey = "your_org#your_app"     // 你的 App Key
 
 ### 步骤 3 开始通话
 
-1. 点击 **登录**。
-2. 等待连接：观察连接状态指示器变绿。
-3. 发起通话：
+1. 点击 **登录**。等待连接，观察连接状态指示器变绿。
+2. 发起通话：
    - 一对一视频通话：点击 **发起一对一视频通话**。
    - 一对一音频通话：点击 **发起一对一音频通话**。
    - 群组通话：点击 **发起群组音视频通话**。
-4. 在弹出的页面中授权必要权限（摄像头、麦克风、悬浮窗等）。
-5. 点击 **登出** 退出登录。
+3. 在弹出的页面中授权必要权限（摄像头、麦克风、悬浮窗等）。
+4. 点击 **登出** 退出登录。
 
-![img](/images/callkit/android/project_runthrough.png)
+![img](https://github.com/easemob/easemob-doc/tree/doc-v2/docs/.vuepress/public/images/callkit/android/project_runthrough.png)
+

@@ -14,7 +14,7 @@
 | 多重唤醒系统 | - Android/iOS 平台支持多样唤醒方式 <br/> - 离线推送、LiveCommunicationKit/Telecom   | 
 | 卓越通话品质    | - 声网全球网络：超过 99.99% 服务可用性 <br/> - 超低延时：低于 76ms 的端到端延迟 <br/> - 抗丢包技术：80% 丢包仍可流畅通话 | 
 
-## 主要功能
+## 功能
 
 | 基本功能           | 高级功能   | 功能优势 |
 | :-------------- | :----- | :------- |
@@ -32,5 +32,5 @@
 
 ## 使用限制
 
-- 多人音视频规格默认最多支持 16 人，超过此上限可能影响通话效果。
+- 群组音视频通话默认最多支持 16 人。
 - 关于声网 RTC 的使用限制，详见 [声网 RTC 关键性能指标](https://doc.shengwang.cn/doc/rtc/android/overview/product-overview#%E5%85%B3%E9%94%AE%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87) 和 [配额限制](https://doc.shengwang.cn/doc/rtc/android/overview/product-overview#%E9%85%8D%E9%A2%9D%E9%99%90%E5%88%B6)。

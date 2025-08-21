@@ -40,7 +40,7 @@ CallKitClient.init(context, config)
 开发者可以通过修改布局文件源码(`ease-cal1-kit/src/main/res/layout/`) 的方式或者在应用层添加一个同名的文件来实现自定义布局。注意修改后或者新的布局文件需要包含原有布局文件里的所有资源，否则运行时会报空指针异常。允许开发者添加新的资源控件、调整控件位置、背景等。
 
 | 资源 | 描述 |
-|------|------|
+| :------------------- | :----- | 
 | `activity_single_call.xml` | 一对一通话根布局容器，承载不同状态子视图（incoming/outgoing/connected）。 |
 | `activity_multi_video_call.xml` | 多人通话根布局容器，含成员网格/工具栏等。 |
 | `activity_invite_group_members.xml` | 群成员邀请页面。 |

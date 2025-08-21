@@ -1,15 +1,39 @@
- # 悬浮窗 
-- CallKit内部包含顶部来电悬浮窗和通话状态时展示在屏幕右上角的小悬浮窗。顶部来电悬浮窗主要包括接听和拒绝按钮。屏幕右上角的小悬浮窗在视频通话时，展示的是对方的视频画面或者图像，在音频通话时展示的是计时器。悬浮窗的展示需要用户授予悬浮窗权限。
-- **来电展示**（`SignalingManager` 在收到有效来电确认后）：
-  - 若设备处于锁屏，或 App 在后台且无悬浮窗权限 → 走系统来电界面（`TelecomHelper.startCallImmediately(...)`）
-  - 否则：
-    - 播放来电铃声：`AudioController.playRing(INCOMING)`
-    - 有悬浮窗权限 → 显示顶部来电悬浮窗：`IncomingCallTopWindow.showIncomingCallTopWindow()`
-    - 无悬浮窗权限 → 直接启动通话 Activity,弹出来电界面
+# 悬浮窗 
 
-- **回到后台/前台/点击悬浮窗按钮**
-  - 会根据权限申请结果决定是否展示小悬浮
+CallKit 提供顶部来电悬浮窗和通话状态时展示在屏幕右上角的小悬浮窗。要展示悬浮窗，需要用户授予悬浮窗权限（`android.permission.SYSTEM_ALERT_WINDOW`）。
+- 来电通知栏:主要包括接听和拒绝按钮。
+- 小悬浮窗：位于屏幕右上角。在视频通话时，小悬浮窗展示对方的视频画面或者图像，音频通话时展示计时器。
 
-- **悬浮窗相关 API**
-  - 小窗：`showFloatWindow()` / `hideFloatWindow()` / `isFloatWindowShowing()`
-  - 顶部来电条：`showIncomingCallTopWindow()` / `hideIncomingCallTopWindow()`
+## 来电通知栏
+
+来电时（`SignalingManager` 收到有效来电确认后），CallKit 首先播放来电铃声，然后按以下方式展示通话界面：
+
+- 若应用处于前台或处于后台且有悬浮窗权限，显示来电通知栏 `IncomingCallTopWindow.showIncomingCallTopWindow()`。
+- 若设备处于锁屏（无论有或无悬浮窗权限），或者 App 在后台且无悬浮窗权限，使用系统来电界面 `TelecomHelper.startCallImmediately(...)`。
+- 若应用处于前台且无悬浮窗权限，直接启动通话 Activity，使用 CallKit 默认 UI 界面。
+
+## 小悬浮窗
+
+若申请了悬浮窗权限，在以下场景会展示小悬浮窗。
+
+- 应用在前台进入后台。
+- 应用在前台点击悬浮窗按钮。
+
+应用后台回到前台，隐藏小悬浮窗。
+
+## 相关 API
+
+- 来电通知栏
+
+| API | 描述  |
+| :------------------- | :----- | 
+| `showIncomingCallTopWindow()`  | 展示来电通知栏。 |
+| `hideIncomingCallTopWindow()` | 隐藏来电通知栏。 |
+
+- 小悬浮窗
+  
+| API | 描述  |
+| :------------------- | :----- | 
+| `showFloatWindow()` | 展示小悬浮窗。   |
+| `hideFloatWindow()` | 隐藏小悬浮窗。  |
+|`isFloatWindowShowing()` | 悬浮窗否在展示。  |
