@@ -102,3 +102,13 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
     }
   }
 }
+
+.hint-container.details {
+  padding: 12px;
+  background: var(--bg-color-back);
+  border: 1px solid var(--border-color-dark);
+}
+
+.hint-container.details summary::before {
+  display: none;
+}
