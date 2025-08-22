@@ -62,7 +62,7 @@
 `CallErrorType` 类中提供三类通话错误类型：
 
 | 通话错误类型 | 描述 |
-| :------------------- | :----- |
+|------|------|
 | `BUSINESS_ERROR`  | 业务逻辑异常。 |
 | `RTC_ERROR`  | 音视频异常，详见 [声网 RTC 错误码](https://doc.shengwang.cn/doc/rtc/android/error-code)。 |
 | `IM_ERROR`  | 即时通讯 IM 异常，详见 [环信即时通讯 IM 错误码](/document/android/error.html)  |
@@ -72,8 +72,8 @@
 `CALL_BUSINESS_ERROR` 类中提供三类业务错误类型：
 
 | 业务错误类型 | 描述 |
-| :------------------- | :----- |
-| `CALL_STATE_BUSY_ERROR` | 通话状态错误：<br/> - "A call is already in progress"：当前已有通话在进行中。<br/> - "MultiCallParticipantsController is already presented"：多人通话邀请界面已展示，表示重复调用群组通话 API。<br/> - "Call already in progress with different group ID"：当前已有通话在进行中且群组 ID 不同，表示点击多人通话页面右上角时，呼叫的群组 ID 有误或者中途被其它地方改变。  |
+|------|------|
+| `CALL_STATE_BUSY_ERROR` | 通话状态错误: 调用呼叫 API 时，当前设备不处于空闲状态。|
 | `CALL_PARAM_ERROR`  | 参数错误：主要为呼叫 API 调用参数错误为空等。 |
 | `CALL_SIGNALING_ERROR` | 信令错误：大多为信令回复的方法中某些参数错误，例如，对方发的信令里缺少某种参数。  |
 
