@@ -17,7 +17,7 @@ let connectionListener: ConnectionListener = {
     // 长连接断开
   },
   onLogout: (errorCode: number, info: LoginExtInfo): void => {
-    // 触发退出，需要主动调用 ChatClient#logout 方法
+    // 该监听触发后，需要主动调用 ChatClient#logout 方法
   },
   onTokenExpired: (): void => {
     // 使用 token 登录时，token 过期触发。
