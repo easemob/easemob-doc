@@ -4,7 +4,11 @@
 
 `LiveCommunicationManager` 是一个用于管理 iOS VoIP 通话的单例管理器类。它集成了 Apple 的 PushKit 和 LiveCommunicationKit 框架，提供完整的 VoIP 通话解决方案，包括来电推送、通话管理和音频会话控制。
 
+// TODO：本篇没有添加 app 在后台、前台、锁屏时的推送通知显示？
+
 ## 证书设置
+
+// TODO：移到 PushKit 集成？
 
 ```Swift
     private func setupCallKit() {
@@ -24,6 +28,8 @@
         CallKitManager.shared.setup(config)
     }
 ```
+
+// TODO：关于添加证书的步骤，详见 IM 中的 APNs 证书添加步骤吧。
 
 ![证书管理](/images/callkit/ios/certificate_create.png)
 
@@ -52,6 +58,8 @@
 3. 铃声文件: 确保 `notes_of_the_optimistic` 音频文件存在。
 4. 线程安全: PushKit 回调在主线程执行。  
 5. 内存管理: 通话结束后正确清理 `ConversationManager`。 
+
+// TODO：分散到各个章节
 
 ## 主要功能
 

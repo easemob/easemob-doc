@@ -242,7 +242,9 @@ export default App;
 
 ## 步骤 4 设置监听
 
-Callkit 组件可以设置回调事件，实现监听 Callkit 内部状态，和错误事件。
+CallKit 组件可以设置回调事件，实现监听 Callkit 内部状态，和错误事件。
+
+// TODO：需要添加这么多代码？
 
 ```tsx
 <CallKit
