@@ -6,7 +6,7 @@
 |------|------|------|
 | `init(context, config)` | 初始化 CallKit |- `context`: 上下文<br/> - `config`: 配置对象 |
 | `startSingleCall(type, userId, ext)` | 发起一对一通话 | - `type`: 通话类型<br/> - `userId`: 对方用户 ID<br/> - `ext`: 扩展信息 |
-| `startInviteMultipleCall(groupId, ext)` | 发起群组通话 | - `groupId`: 群组 ID<br/> - `ext`: 扩展信息 |
+| `startGroupCall(groupId, ext)` | 发起群组通话 | - `groupId`: 群组 ID<br/> - `ext`: 扩展信息 |
 | `endCall()` | 结束通话 | 无 |
 | `getCache()` | 获取缓存管理器 | 无 |
 | `cleanUp()` | 清理资源 | 无 |

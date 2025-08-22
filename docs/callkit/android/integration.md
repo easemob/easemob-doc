@@ -125,8 +125,8 @@ class MainActivity : AppCompatActivity() {
             outgoingRingFile = "assets://outgoing_ring.mp3"
             dingRingFile = "assets://ding.mp3"
             
-            // （可选）配置通话超时时间（毫秒）
-            callTimeout = 30000L  // 30秒
+            // （可选）配置通话超时时间（秒）
+            callTimeout = 30  // 30秒
         }
         
         CallKitClient.init(this, config)
@@ -216,7 +216,26 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-### 步骤 4 发起通话
+### 步骤 4 登录
+
+```kotlin
+ChatClient.getInstance().loginWithToken(username, token, object : ChatCallback {
+        override fun onSuccess() {
+            runOnUiThread {
+                showToast("登录成功")
+            }
+        }
+
+        override fun onError(code: Int, error: String?) {
+            runOnUiThread {
+                showToast("登录失败: $error")
+            }
+        }
+    })
+
+```
+
+### 步骤 5 发起通话
 
 #### 发起一对一通话
 
@@ -278,7 +297,7 @@ private fun startGroupCall() {
         put("meetingTitle", "项目讨论会")
     }
     // ext 可传 null
-    CallKitClient.startInviteMultipleCall(groupId, ext) 
+    CallKitClient.startGroupCall(groupId, ext) 
 }
 ```
 

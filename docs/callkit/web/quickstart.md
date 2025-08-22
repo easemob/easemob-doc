@@ -14,6 +14,7 @@
 ## 前提条件
 
 在 [环信控制台](https://console.easemob.com/user/login) 进行如下操作：
+
 1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
 3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
@@ -62,31 +63,35 @@ yarn add easemob-chat-uikit
 1. 替换 `src/App.tsx` 文件内容：
 
 ```tsx
-import React, { useState, useRef, useEffect } from 'react';
-import { Provider, CallKit, CallError, CallInfo, rootStore } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
-import './App.css';
+import React, { useState, useRef, useEffect } from "react";
+import {
+  Provider,
+  CallKit,
+  CallError,
+  CallInfo,
+  rootStore,
+} from "easemob-chat-uikit";
+import "easemob-chat-uikit/style.css";
+import "./App.css";
 
 interface ConnectionStatus {
   isConnected: boolean;
   status: string;
 }
-
+const appKey = "org#app"; // 修改成你自己的 App Key
 const App: React.FC = () => {
   // 登录相关状态
-  const [appKey, setAppKey] = useState('org#app'); // 默认 App Key
-  const [appKeyInput, setAppKeyInput] = useState(''); // 临时输入的App Key
-  const [userId, setUserId] = useState('');
-  const [password, setPassword] = useState('');
+  const [userId, setUserId] = useState("");
+  const [accessToken, setAccessToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>({
     isConnected: false,
-    status: '连接状态: 未连接',
+    status: "连接状态: 未连接",
   });
 
   // 通话相关状态
-  const [targetUserId, setTargetUserId] = useState('');
-  const [groupId, setGroupId] = useState('');
+  const [targetUserId, setTargetUserId] = useState("");
+  const [groupId, setGroupId] = useState("");
 
   // CallKit 引用
   const callKitRef = useRef<CallKit>(null);
@@ -94,74 +99,44 @@ const App: React.FC = () => {
   // 处理 URL 参数快速登录
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const appKeyFromUrl = urlParams.get('appKey');
-    if (appKeyFromUrl) {
-      setAppKeyInput(appKeyFromUrl);
-      setAppKey(appKeyFromUrl);
-    }
-
-    const userIdFromUrl = urlParams.get('userId');
+    const userIdFromUrl = urlParams.get("userId");
     if (userIdFromUrl) setUserId(userIdFromUrl);
 
-    const passwordFromUrl = urlParams.get('password');
-    if (passwordFromUrl) setPassword(passwordFromUrl);
+    const accessTokenFromUrl = urlParams.get("accessToken");
+    if (accessTokenFromUrl) setAccessToken(accessTokenFromUrl);
   }, []);
-
-  // 设置 App Key
-  const handleSetAppKey = () => {
-    if (!appKeyInput.trim()) {
-      alert('AppKey不能为空!');
-      return;
-    }
-    setAppKey(appKeyInput.trim());
-    alert('AppKey设置成功!');
-  };
 
   // 监听连接状态
   useEffect(() => {
-    const handleConnectionChange = () => {
-      if (rootStore.client?.isOpened()) {
-        setConnectionStatus({
-          isConnected: true,
-          status: '连接状态: 已连接',
-        });
-      } else {
-        setConnectionStatus({
-          isConnected: false,
-          status: '连接状态: 已断开',
-        });
-      }
-    };
-
     // 监听连接状态变化
     if (rootStore.client) {
-      rootStore.client.addEventHandler('CONNECTION_LISTENER', {
+      rootStore.client.addEventHandler("CONNECTION_LISTENER", {
         onConnected: () => {
-          console.log('连接成功');
-          handleConnectionChange();
+          setConnectionStatus({
+            isConnected: true,
+            status: "连接状态: 已连接",
+          });
         },
         onDisconnected: () => {
-          console.log('连接断开');
-          handleConnectionChange();
+          setConnectionStatus({
+            isConnected: false,
+            status: "连接状态: 已断开",
+          });
         },
       });
     }
 
     return () => {
       if (rootStore.client) {
-        rootStore.client.removeEventHandler('CONNECTION_LISTENER');
+        rootStore.client.removeEventHandler("CONNECTION_LISTENER");
       }
     };
   }, [isLoggedIn]);
 
   // 登录处理
   const handleLogin = async () => {
-    if (!appKey.trim()) {
-      alert('请先设置AppKey!');
-      return;
-    }
-    if (!userId.trim() || !password.trim()) {
-      alert('用户ID和密码不能为空!');
+    if (!userId.trim() || !accessToken.trim()) {
+      alert("用户ID和 accessToken 不能为空!");
       return;
     }
 
@@ -169,15 +144,15 @@ const App: React.FC = () => {
       // 登录环信 IM
       await rootStore.client.open({
         user: userId.trim(),
-        pwd: password.trim(),
+        accessToken: accessToken.trim(),
       });
 
       setIsLoggedIn(true);
       setConnectionStatus({
         isConnected: true,
-        status: '连接状态: 已连接',
+        status: "连接状态: 已连接",
       });
-      alert('登录成功!');
+      alert("登录成功!");
     } catch (error: any) {
       alert(`登录失败: ${error.message || error}`);
     }
@@ -190,11 +165,11 @@ const App: React.FC = () => {
       setIsLoggedIn(false);
       setConnectionStatus({
         isConnected: false,
-        status: '连接状态: 已登出',
+        status: "连接状态: 已登出",
       });
       // 结束所有通话
-      callKitRef.current?.hangupCall();
-      alert('登出成功!');
+      callKitRef.current?.exitCall();
+      alert("登出成功!");
     } catch (error: any) {
       alert(`登出失败: ${error.message || error}`);
     }
@@ -203,15 +178,15 @@ const App: React.FC = () => {
   // 发起一对一视频通话
   const handleStartVideoCall = async () => {
     if (!targetUserId.trim()) {
-      alert('对方用户ID不能为空!');
+      alert("对方用户ID不能为空!");
       return;
     }
 
     try {
       await callKitRef.current?.startSingleCall({
         to: targetUserId.trim(),
-        callType: 'video',
-        msg: '邀请你进行视频通话',
+        callType: "video",
+        msg: "邀请你进行视频通话",
       });
     } catch (error: any) {
       alert(`发起视频通话失败: ${error.message || error}`);
@@ -221,15 +196,15 @@ const App: React.FC = () => {
   // 发起一对一音频通话
   const handleStartAudioCall = async () => {
     if (!targetUserId.trim()) {
-      alert('对方用户ID不能为空!');
+      alert("对方用户ID不能为空!");
       return;
     }
 
     try {
       await callKitRef.current?.startSingleCall({
         to: targetUserId.trim(),
-        callType: 'audio',
-        msg: '邀请你进行语音通话',
+        callType: "audio",
+        msg: "邀请你进行语音通话",
       });
     } catch (error: any) {
       alert(`发起语音通话失败: ${error.message || error}`);
@@ -239,15 +214,15 @@ const App: React.FC = () => {
   // 发起群组通话
   const handleStartGroupCall = async () => {
     if (!groupId.trim()) {
-      alert('群组ID不能为空!');
+      alert("群组ID不能为空!");
       return;
     }
 
     try {
       await callKitRef.current?.startGroupCall({
         groupId: groupId.trim(),
-        callType: 'video',
-        msg: '邀请加入群组视频通话',
+        callType: "video",
+        msg: "邀请加入群组视频通话",
       });
     } catch (error: any) {
       alert(`发起群组通话失败: ${error.message || error}`);
@@ -256,7 +231,7 @@ const App: React.FC = () => {
 
   // 用户信息提供者
   const userInfoProvider = async (userIds: string[]) => {
-    return userIds.map(userId => ({
+    return userIds.map((userId) => ({
       userId,
       nickname: `用户 ${userId}`,
       avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userId}`,
@@ -265,7 +240,7 @@ const App: React.FC = () => {
 
   // 群组信息提供者
   const groupInfoProvider = async (groupIds: string[]) => {
-    return groupIds.map(groupId => ({
+    return groupIds.map((groupId) => ({
       groupId,
       groupName: `群组 ${groupId}`,
       groupAvatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${groupId}`,
@@ -282,30 +257,10 @@ const App: React.FC = () => {
           <div className="status-section">
             <div
               className={`status-indicator ${
-                connectionStatus.isConnected ? 'connected' : 'disconnected'
+                connectionStatus.isConnected ? "connected" : "disconnected"
               }`}
             />
             <span className="status-text">{connectionStatus.status}</span>
-          </div>
-
-          {/* App Key 配置区域 */}
-          <div className="appkey-section">
-            <h3>AppKey 配置</h3>
-            <div className="input-group">
-              <input
-                type="text"
-                placeholder="App Key (格式: orgname#appname)"
-                value={appKeyInput}
-                onChange={e => setAppKeyInput(e.target.value)}
-                disabled={isLoggedIn}
-              />
-            </div>
-            <div className="button-group">
-              <button onClick={handleSetAppKey} disabled={isLoggedIn} className="appkey-btn">
-                设置 AppKey
-              </button>
-              {appKey && <span className="appkey-status">✓ 已设置: {appKey}</span>}
-            </div>
           </div>
 
           {/* 登录区域 */}
@@ -316,24 +271,32 @@ const App: React.FC = () => {
                 type="text"
                 placeholder="用户ID"
                 value={userId}
-                onChange={e => setUserId(e.target.value)}
+                onChange={(e) => setUserId(e.target.value)}
                 disabled={isLoggedIn}
               />
             </div>
             <div className="input-group">
               <input
-                type="password"
-                placeholder="密码"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
+                type="text"
+                placeholder="accessToken"
+                value={accessToken}
+                onChange={(e) => setAccessToken(e.target.value)}
                 disabled={isLoggedIn}
               />
             </div>
             <div className="button-group">
-              <button onClick={handleLogin} disabled={isLoggedIn} className="login-btn">
+              <button
+                onClick={handleLogin}
+                disabled={isLoggedIn}
+                className="login-btn"
+              >
                 登录
               </button>
-              <button onClick={handleLogout} disabled={!isLoggedIn} className="logout-btn">
+              <button
+                onClick={handleLogout}
+                disabled={!isLoggedIn}
+                className="logout-btn"
+              >
                 登出
               </button>
             </div>
@@ -347,7 +310,7 @@ const App: React.FC = () => {
                 type="text"
                 placeholder="对方用户ID"
                 value={targetUserId}
-                onChange={e => setTargetUserId(e.target.value)}
+                onChange={(e) => setTargetUserId(e.target.value)}
                 disabled={!isLoggedIn}
               />
             </div>
@@ -357,14 +320,14 @@ const App: React.FC = () => {
                 disabled={!isLoggedIn}
                 className="call-btn video-btn"
               >
-                发起视频通话
+                发起一对一视频通话
               </button>
               <button
                 onClick={handleStartAudioCall}
                 disabled={!isLoggedIn}
                 className="call-btn audio-btn"
               >
-                发起语音通话
+                发起一对一语音通话
               </button>
             </div>
 
@@ -373,7 +336,7 @@ const App: React.FC = () => {
                 type="text"
                 placeholder="群组ID"
                 value={groupId}
-                onChange={e => setGroupId(e.target.value)}
+                onChange={(e) => setGroupId(e.target.value)}
                 disabled={!isLoggedIn}
               />
             </div>
@@ -397,11 +360,11 @@ const App: React.FC = () => {
             userInfoProvider={userInfoProvider}
             groupInfoProvider={groupInfoProvider}
             onCallError={(error: CallError) => {
-              console.error('通话错误:', error);
+              console.error("通话错误:", error);
               alert(`通话错误: ${error.message}`);
             }}
             onEndCallWithReason={(reason: string, callInfo: CallInfo) => {
-              console.log('通话结束:', reason, callInfo);
+              console.log("通话结束:", reason, callInfo);
             }}
           />
         )}
@@ -420,7 +383,7 @@ export default App;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .main-content {
@@ -605,7 +568,11 @@ h3 {
 }
 ```
 
-### 步骤 4 发起首次通话
+### 步骤 4 配置 App Key
+
+将代码中的 "org#app" 替换成你的应用的 App Key。 // TODO：上一步骤中添加说明就行？
+
+### 步骤 5 发起首次通话
 
 1. 启动应用：
 
@@ -614,41 +581,44 @@ npm run dev
 ```
 
 2. 登录：
-   - 方式一：填写你的 App Key、用户 ID 和密码，点击 **登录**。等待状态指示器变绿，显示 **已连接**。
+
+   - 方式一：填写你的 App Key、用户 ID 和 accessToken，点击 **登录**。等待状态指示器变绿，显示 **已连接**。
    - 方式二：为了方便测试，应用支持通过 URL 参数快速登录：
 
    ```
-   http://localhost:5173?appKey=your_org%23your_app&userId=your_user_id&password=your_password
+   http://localhost:5173?userId=your_user_id&accessToken=your_accessToken
    ```
 
    该 URL 中的参数说明如下：
-   - `appKey`: 应用的 App Key。需要 URL 编码，`#` 替换为 `%23`。
+
    - `userId`: 用户 ID。
-   - `password`: 用户密码。
+   - `accessToken`: 用户 token。
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 获取 App Token API 和 获取用户 Token API 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 3. 发起通话：
-   - 一对一视频通话：输入对方用户 ID，点击 **发起视频通话**。//  TODO：改为 发起一对一视频通话
-   - 一对一音频通话：输入对方用户 ID，点击 **发起语音通话**。//  TODO：发起一对一语音通话
+   - 一对一视频通话：输入对方用户 ID，点击 **发起一对一视频通话**。
+   - 一对一音频通话：输入对方用户 ID，点击 **发起一对一语音通话**。
    - 群组通话：输入群组 ID，点击 **发起群组通话**。
 4. 授权权限：在浏览器弹出的权限请求中，允许访问摄像头和麦克风。
 5. 对通话进行控制：
    - 在通话中可以控制静音、摄像头、扬声器等。
    - 点击挂断按钮结束通话。
-  
+
 ![img](/images/callkit/web/quickstart_run.png)
 
-## 运行应用 
+## 运行应用
 
 运行应用前，你需要授权摄像头、麦克风、悬浮窗等权限。
 
 1. 在浏览器中访问 `http://localhost:5173`。
-2. 输入 App Key、用户 ID 和密码，点击 **登录** 进行登录，登录成功后状态指示器会变绿。
+2. 输入 App Key、用户 ID 和 accessToken，点击 **登录** 进行登录，登录成功后状态指示器会变绿。// TODO：要提 access token？
 3. 在另一个浏览器标签页或设备上打开同样的页面，使用另一个账号登录。
 4. 在主叫浏览器或设备上输入被叫方的用户 ID，点击对应的通话按钮，即可发起音视频通话。
 
 运行应用过程中的常见问题排查如下：
+
 - 连接失败：检查 App Key 是否正确配置。
 - 通话无声音：检查麦克风权限是否已授权。
 - 视频无画面：检查摄像头权限是否已授权。
 - HTTPS 问题：生产环境部署时确保使用 HTTPS 协议。
-

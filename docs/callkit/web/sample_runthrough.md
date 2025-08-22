@@ -13,6 +13,7 @@
 ## 前提条件
 
 在 [环信控制台](https://console.easemob.com/user/login) 进行如下操作：
+
 1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
 3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
@@ -26,7 +27,7 @@
 1. 克隆或下载项目。
 
 ```bash
-git clone https://github.com/easemob/easemob-uikit-react
+git clone https://github.com/easemob/easemob-uikit-react.git
 cd easemob-uikit-react
 ```
 
@@ -64,4 +65,3 @@ yarn dev
 
 // TODO：截图
 sample_project_runthrough.png
-

@@ -15,7 +15,7 @@
 在 [环信控制台](https://console.easemob.com/user/login) 进行如下操作：
 1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
-3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
+3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和 Token。
 4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
 5. [开通音视频服务](product_activation.html)。
    
@@ -67,7 +67,7 @@ dependencyResolutionManagement {
 ```kotlin
 dependencies {
     ...
-    implementation("io.hyphenate:call-kit:4.16.0")
+    implementation("io.hyphenate:call-kit:4.17.0")
 }
 ```
 
@@ -128,12 +128,14 @@ android.enableJetifier=true
 
 1. 打开 `app/src/main/res/values/strings.xml` 文件，替换为如下内容。
 
-你需要将 **app_key** 替换为你申请的环信 App Key。
+你需要将 **app_key** 替换为你申请的环信 App Key,**user_name** 替换为你的用户名,**token** 替换为你用户名对应的token。
 
 ```xml
 <resources>
     <string name="app_name">CallKitQuickstart</string>
     <string name="app_key">app_key</string>
+    <string name="user_name">your userId</string>
+    <string name="token">your token</string>
 </resources>
 ```
 
@@ -171,34 +173,6 @@ android.enableJetifier=true
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/statusIndicator" />
 
-    <EditText
-        android:id="@+id/etUserId"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:hint="用户ID"
-        android:singleLine="true"
-        android:maxLines="1"
-        android:imeOptions="actionNext"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvConnectionStatus" />
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:hint="密码"
-        android:singleLine="true"
-        android:maxLines="1"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUserId" />
-
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
@@ -207,7 +181,7 @@ android.enableJetifier=true
         android:text="登录"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/tvConnectionStatus" />
 
     <Button
         android:id="@+id/btnLogout"
@@ -267,6 +241,7 @@ android.enableJetifier=true
 ```kotlin
 package com.hyphenate.callkit.quickstart
 
+import android.R.attr.password
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -444,13 +419,13 @@ class MainActivity : AppCompatActivity() {
         setupKeyboardListeners()
         
         binding.btnLogin.setOnClickListener {
-            val username = binding.etUserId.text.toString().trim()
-            val password = binding.etPassword.text.toString().trim()
-            if (username.isEmpty() || password.isEmpty()) {
-                showToast("用户名或密码不能为空!")
+            val username =  getString(R.string.user_name)
+            val token = getString(R.string.token)
+            if (username.isEmpty() || token.isEmpty()) {
+                showToast("用户名或token不能为空!")
                 return@setOnClickListener
             }
-            login(username, password)
+            login(username, token)
         }
 
         binding.btnLogout.setOnClickListener { logout() }
@@ -459,29 +434,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupKeyboardListeners() {
-        // 为用户ID输入框添加键盘监听
-        binding.etUserId.setOnEditorActionListener { _, actionId, event ->
-            if (actionId == android.view.inputmethod.EditorInfo.IME_ACTION_DONE ||
-                actionId == android.view.inputmethod.EditorInfo.IME_ACTION_NEXT ||
-                (event?.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
-                hideKeyboard()
-                true
-            } else {
-                false
-            }
-        }
-
-        // 为密码输入框添加键盘监听
-        binding.etPassword.setOnEditorActionListener { _, actionId, event ->
-            if (actionId == android.view.inputmethod.EditorInfo.IME_ACTION_DONE ||
-                actionId == android.view.inputmethod.EditorInfo.IME_ACTION_NEXT ||
-                (event?.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
-                hideKeyboard()
-                true
-            } else {
-                false
-            }
-        }
 
         // 为对方用户ID输入框添加键盘监听
         binding.etPeerId.setOnEditorActionListener { _, actionId, event ->
@@ -504,13 +456,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun login(username: String, password: String) {
+    private fun login(username: String, token: String) {
         if (isLoggedIn) {
             showToast("已经登录")
             return
         }
 
-        ChatClient.getInstance().login(username, password, object : ChatCallback {
+        ChatClient.getInstance().loginWithToken(username, token, object : ChatCallback {
             override fun onSuccess() {
                 runOnUiThread {
                     isLoggedIn = true
@@ -608,12 +560,11 @@ class MainActivity : AppCompatActivity() {
 ### 步骤 5 发起首次通话
 
 1. 登录：
-   - 输入用户 ID 和密码，点击 **登录**。
+   - 点击 **登录**。
    - 等待连接状态指示器变绿，显示 **已连接**。
 2. 发起通话：
    - 一对一视频通话：输入对方用户 ID，点击 **发起一对一视频通话**。
    - 一对一音频通话：输入对方用户 ID，点击 **发起一对一音频通话**。
-   - 群组通话：输入群组 ID，点击 **发起群组音视频通话**。
 3. 授权权限：在弹出的权限请求中，允许访问摄像头和麦克风等权限。
 4.  对通话进行控制：
    - 在通话中可以控制静音、摄像头、扬声器等。
@@ -626,11 +577,11 @@ class MainActivity : AppCompatActivity() {
 运行应用前，你需要授权摄像头、麦克风、悬浮窗等权限。
 
 1. 在 Android Studio 中，点击 **Run 'app'**，将应用运行到你的设备或者模拟器上。
-2. 输入用户 ID 和密码，点击 **登录** 进行登录，登录成功或者失败有 `Toast` 提示。
-3. 在另一台设备上登录另一个用户 ID。
+2. 点击 **登录** 进行登录，登录成功或者失败有 `Toast` 提示。
+3. 更改用户 ID 和 Token后，在另一台设备上运行并点击登录。
 4. 在主叫设备上输入被叫方的用户 ID，点击对应的通话按钮，即可发起音视频通话。
 
 运行应用过程中的常见问题排查如下：
-- 连接失败：检查 App Key 是否正确配置。
+- 连接失败：检查 App Key、用户名、Token 是否正确配置。
 - 通话无声音：检查麦克风权限是否已授权。
 - 视频无画面：检查摄像头权限是否已授权。

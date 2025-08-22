@@ -1,4 +1,3 @@
-
 # 自定义资源
 
 // TODO：按照 Android 的大致架构调整一下：
@@ -26,19 +25,19 @@
   minHeight={300}
   maxWidth={1200}
   maxHeight={800}
-  onResize={(width, height) => console.log('窗口尺寸:', width, height)}
+  onResize={(width, height) => console.log("窗口尺寸:", width, height)}
   // 可拖拽
   draggable={true}
-  onDragStart={() => console.log('开始拖拽')}
-  onDrag={position => console.log('拖拽位置:', position)}
-  onDragEnd={() => console.log('拖拽结束')}
+  onDragStart={() => console.log("开始拖拽")}
+  onDrag={(position) => console.log("拖拽位置:", position)}
+  onDragEnd={() => console.log("拖拽结束")}
   // 内置位置管理
   managedPosition={true}
   initialPosition={{ left: 100, top: 100 }}
   initialSize={{ width: 800, height: 600 }}
   // 最小化
   minimizedSize={{ width: 120, height: 80 }} // 群组通话最小化的尺寸
-  onMinimizedChange={minimized => console.log('最小化状态:', minimized)}
+  onMinimizedChange={(minimized) => console.log("最小化状态:", minimized)}
 />
 ```
 
@@ -49,8 +48,8 @@
 const backgroundOptions = [
   {
     id: 0,
-    name: '默认背景',
-    url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4',
+    name: "默认背景",
+    url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
   },
   // 更多背景选项...
 ];
@@ -112,25 +111,23 @@ const backgroundOptions = [
 ```tsx
 const customIcons = {
   controls: {
-    micOn: <CustomMicOnIcon />,
-    micOff: <CustomMicOffIcon />,
-    cameraOn: <CustomCameraOnIcon />,
-    cameraOff: <CustomCameraOffIcon />,
-    speakerOn: <CustomSpeakerOnIcon />,
-    speakerOff: <CustomSpeakerOffIcon />,
-    hangup: <CustomHangupIcon />,
-    accept: <CustomAcceptIcon />,
-    reject: <CustomRejectIcon />,
+    micOn: <CustomMicOnIcon />, // 麦克风打开时的 icon
+    micOff: <CustomMicOffIcon />, // 麦克风关闭时的 icon
+    cameraOn: <CustomCameraOnIcon />, // 摄像头打开时的 icon
+    cameraOff: <CustomCameraOffIcon />, // 摄像头关闭时的 icon
+    speakerOn: <CustomSpeakerOnIcon />, // 扬声器打开时的 icon
+    speakerOff: <CustomSpeakerOffIcon />, // 扬声器关闭时的 icon
+    hangup: <CustomHangupIcon />, // 挂断按钮的 icon
+    accept: <CustomAcceptIcon />, // 接听按钮的 icon
+    reject: <CustomRejectIcon />, // 拒接按钮的 icon
   },
   header: {
-    minimize: <CustomMinimizeIcon />,
-    fullscreen: <CustomFullscreenIcon />,
-    exitFullscreen: <CustomExitFullscreenIcon />,
-    addParticipant: <CustomAddIcon />,
+    minimize: <CustomMinimizeIcon />, // 最小化按钮的 icon
+    fullscreen: <CustomFullscreenIcon />, // 全屏按钮的 icon
+    exitFullscreen: <CustomExitFullscreenIcon />, // 退出全屏按钮的 icon
+    addParticipant: <CustomAddIcon />, // 群通话邀请人按钮的 icon
   },
 };
 
 <CallKit customIcons={customIcons} />;
 ```
-
-
