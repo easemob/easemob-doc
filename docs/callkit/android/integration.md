@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-### 步骤 3 配置监听器
+### 步骤 3 （可选）配置监听器
 
 环信 CallKit 提供 `CallKitListener` 监听通话过程。你可以在应用初始化时设置监听器用于处理通话相关的回调：
 

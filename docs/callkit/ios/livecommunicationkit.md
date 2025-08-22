@@ -2,7 +2,7 @@
 
 ## 概述
 
-`LiveCommunicationManager` 是一个用于管理 iOS VoIP 通话的单例管理器类。它集成了 Apple 的 PushKit 和 LiveCommunicationKit 框架，提供完整的 VoIP 通话解决方案，包括来电推送、通话管理和音频会话控制。
+`LiveCommunicationManager` 是一个用于管理 iOS VoIP 通话的单例管理器类，集成了 Apple 的 PushKit 和 LiveCommunicationKit 框架，提供完整的 VoIP 通话解决方案，包括来电推送、通话管理和音频会话控制。
 
 ## 推荐环境
 
@@ -27,7 +27,6 @@
 - `PKPushRegistryDelegate`: 响应推送事件。
 
 关于如何创建 VoIP 推送证书以及上传至 [环信控制台](https://console.easemob.com/user/login)，详见 IM 的 [APNs 离线推送文档](/document/ios/push/push_apns.html)。
-
 
 ```Swift
     private func setupCallKit() {

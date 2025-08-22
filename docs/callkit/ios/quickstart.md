@@ -60,13 +60,13 @@ post_install do |installer|
 end
 ```
 
-2. 运行 cd 命令到终端下 `podfile` 所在文件夹目录执行以下命令：
+2. 在终端使用 cd 命令到 `podfile` 所在文件夹目录执行以下命令：
 
 ```
 pod install
 ```
 
-### 步骤 23 初始化 CallKit
+### 步骤 3 初始化 CallKit
 
 你可以在应用程序加载时或使用前初始化 CallKit：
 1. 初始化 IM SDK。CallKit 基于即时通讯 IM 作为信令通道，因此需先初始化 IM SDK。

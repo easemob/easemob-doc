@@ -1,7 +1,9 @@
 
 # API 参考 
 
-## CallKitManager 主要方法
+## 主要方法
+
+`CallKitManager` 中的主要方法如下表所示：
 
 | 方法 | 说明 | 参数 |
 |------|------|------|
@@ -17,7 +19,9 @@
 | `CallKitManager.shared.profileProvider = self` | 信息提供代理 | 无 |
 | `CallKitManager.shared.addListener(self)` | 监听器 | - listener: `CallServiceListener` 实现了 `CallServiceListener` 的对象|
 
-## CallType 通话类型
+## 通话类型
+
+通话类型 `CallType` 如下表所示：
 
 | 类型 | 说明 |
 |------|------|
@@ -25,7 +29,9 @@
 | `singleVideo` | 一对一视频通话 |
 | `group` | 群组通话 |
 
-## CallEndReason 通话结束原因
+## 通话结束原因
+
+通话结束原因 `CallEndReason` 如下表所示： 
 
 | 原因 | 说明 |
 |------|------|
@@ -41,6 +47,8 @@
 | `CallEndReasonRemoteDrop` | 通话中断 |
 
 ## CallKitListener 监听方法
+
+环信 CallKit 提供 `CallKitListener` 监听通话过程。你可以设置监听器用于处理通话相关的回调：
 
 **所有回调方法都不在主线程执行，需要使用 `runOnUiThread` 来更新 UI。**
 

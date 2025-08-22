@@ -20,12 +20,13 @@
 
 ## 操作步骤
 
-// TODO：添加下载示例项目？有 
-按照 Android 的来
+### 步骤 1 配置项目 
 
-打开 Git 项目链接，下载 ZIP 包。
+在 [Github](https://github.com/easemob/easemob-callkit-iOS) 中克隆或下载代码。
 
-https://github.com/easemob/easemob-callkit-iOS
+```bash
+git clone https://github.com/easemob/easemob-callkit-iOS 
+```
 
 ### 步骤 2 设置 App Key
 

@@ -56,18 +56,17 @@ pod install
 
 CallKit 的初始化包括如下步骤：
 
-// 移掉
 1. 初始化 IM SDK。CallKit 基于即时通讯 IM 作为信令通道，因此需先初始化 IM SDK。
    - 填入你的应用的 App Key。
-   - 设置即时通讯 IM SDK 中的一些选项（`EMOptions` 类），例如，对 SDK 中是否打印日志、是否自动登录和是否默认使用用户属性等。
+   - 设置即时通讯 IM SDK 中的一些选项（`EMOptions`/`ChatSDKOptions` 类）。
 2. 初始化 CallKit。
-3. 开启 VoIP 和画中画功能。// TODO：放在进阶功能中
-   - 开启 VoIP 功能后会自动开启 LiveCommunicationKit。关于上传 VoIP 服务证书，详见 [APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。 
-   - 若开启画中画功能，同时需要开启应用后台摄像头采集权限。详见 [视频通话画中画文档](picture_in_picture.html)。
+   （可选）开启 VoIP 和画中画功能。// TODO：放在进阶功能中
+     - 开启 VoIP 功能后会自动开启 LiveCommunicationKit。关于上传 VoIP 服务证书，详见 [APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。 
+     - 若开启画中画功能，同时需要开启应用后台摄像头采集权限。详见 [视频通话画中画文档](picture_in_picture.html)。
 
 在整个应用生命周期中，初始化一次即可。
 
-- 已经集成了环信 IM SDK，集成 CallKit。 
+- 已经集成了环信即时通讯 IM SDK，初始化 CallKit 的代码示例如下： 
   
 ```Swift
     //已经集成了环信IMSDK 即已经import HyphenateChat
@@ -88,7 +87,7 @@ CallKit 的初始化包括如下步骤：
         CallKitManager.shared.setup(config)
     }
 ```  
-- 未集成 环信 IM SDK。
+- 未集成环信环信即时通讯 IM SDK，初始化 CallKit 的代码示例如下：
 
 ```Swift
     //没有集成环信 IM SDK，只想使用 CallKit
@@ -218,8 +217,6 @@ extension MainViewController: CallServiceListener {
     
 }
 ```
-
-// TODO：各端讨论统一。
 
 ### 步骤 5 发起通话
 
@@ -388,5 +385,3 @@ extension ViewController: CallUserProfileProvider {
 ![img](/images/ios/quickstart_error_solve.png)
 
 2. 如果 `pod install` 失败报错 RuntimeError **`PBXGroup` attempted to initialize an object with unknown ISA `PBXFileSystemSynchronizedRootGroup` from attributes: `{"isa"=>"PBXFileSystemSynchronizedRootGroup"`**，请尝试将 pod 版本升级为 1.14.3。Xcode 16 及其以下版本打开会报错 **Adjust the project format using a compatible version of Xcode to allow it to be opened by this version of Xcode.**。
-
-3. // TODO：添加 RTC/IM SDK Error Code 的链接，各端均加。添加到常见问题一篇

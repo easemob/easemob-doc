@@ -21,7 +21,7 @@
 - 对于VoIP 应用，在 **Background Modes** 中勾选 **Voice over IP (VoIP)**，支持 LiveCommunicationKit。若不勾选，采用厂商默认系统推送。
 - 若应用需要后台采集视频流，需要申请多任务相机访问权限（Multitasking Camera Access Entitlement）。iOS 系统版本对多任务相机访问权限的支持详见 [苹果官方文档](https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.avfoundation.multitasking-camera-access)。
 
-![](./DocumentationImages/backgroundCameraAccess.png) 
+![img](/images/callkit/ios/backgroundCameraAccess.png)
 
 ## 一对一视频通话 PiP
 

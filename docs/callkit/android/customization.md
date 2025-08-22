@@ -4,10 +4,9 @@
 
 ## 铃声
 
-CallKit 支持发起呼叫时的声音、接收呼叫时的声音以及被挂断时的声音。铃声文件支持 MP3、WAV 等格式，建议铃声时长为 1-20 秒，文件大小不超过 1 MB。
+CallKit 支持发起呼叫时的声音、接收呼叫时的声音以及被挂断时的声音。建议铃声文件格式为 MP3、WAV 等，铃声时长为 1-20 秒，文件大小不超过 1 MB。
 
 默认铃声策略（未设置时）如下：
-  - 外呼/来电：若未设置铃声或播放失败，回退到系统默认铃声（`RingtoneManager.TYPE_RINGTONE`）。
   - 结束提示音（DING）：如未设置，则不播放提示音（保持静音）。
   - 异常降级：自定义铃声解码/播放异常时，非 DING 铃声会自动降级为系统铃声；DING 不降级。
   - 循环规则：非 DING 铃声循环播放，DING 只播放一次。
@@ -26,7 +25,7 @@ val config = CallKitConfig().apply {
     // incomingRingFile = "raw://incoming_ring"
     
     // 方式 3 ：使用绝对路径
-    // incomingRingFile = "/storage/emulated/0/Download/ringtone.mp3"
+    // incomingRingFile = "/storage/emulated/0/Download/incoming_ring.mp3"
 }
 CallKitClient.init(context, config)
 ```
@@ -34,6 +33,17 @@ CallKitClient.init(context, config)
 
 
 //todo Android 工程师插入截图
+
+## 通话超时设置
+Callkit内部呼出/呼入超时时间默认30秒，开发者可以通过以下代码实现自定义超时时间。
+```
+val config = CallKitConfig().apply {
+    //（可选）配置通话超时时间（秒）
+    callTimeout = 30  // 30秒
+}
+CallKitClient.init(context, config)
+```
+
 
 ## 布局/样式
 
@@ -56,11 +66,6 @@ CallKitClient.init(context, config)
 | `callkit_layout_default_no_data.xml` / `callkit_layout_no_data_show_nothing.xml` | 无数据/空占位视图。 |
 | `callkit_layout_group_member_select_item.xml` | 群成员选择单元项（头像/昵称/选中态）。 |
 
-## 通话超时设置
-
-| 资源                | 描述   | 
-| :------------------- | :----- | 
-| `callTimeout` | 通话超时时间，单位为秒，默认为 30 秒。  | 
 
 ## 图标与图形资源
 
