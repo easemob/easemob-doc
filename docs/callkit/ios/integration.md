@@ -2,7 +2,7 @@
 
 以下是进阶用法的部分示例。会话列表页面、消息列表页、联系人列表均可分开使用。// TODO: 替换为下面的?
 
-使用环信 CallKit 之前，你需要将其集成到你的应用中。
+使用环信 CallKit（基于环信即时通讯 IM SDK V4.16.0 及其以上）之前，你需要将其集成到你的应用中。
 
 ## 推荐环境
 
@@ -12,15 +12,49 @@
 - CocoaPods v1.14.3 及以上版本
 
 ## 前提条件  
-// TODO：现在注册账号后，Console 会自动创建一个应用吗？
 
 在 [环信控制台](https://console.easemob.com/user/login) 进行如下操作：
 1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
-3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
-4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
+3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和 [用户 Token](/product/console/operation_user.html#查看用户-token)。
+4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID，将用户加入群组。
+5. [开通音视频服务](product_activation.html)。
 
-## 1.初始化 EaseCallUIKit
+## 集成步骤
+
+### 步骤 1 安装 CallKit // TODO：还需要吗？快速开始和跑通示例项目需要这个吗？
+
+你可以使用 CocoaPods 安装环信 CallKit 作为 Xcode 项目的依赖项。
+
+1. 在 `podfile` 中添加如下依赖：
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '14.0'
+
+target 'YourTarget' do
+  use_frameworks!
+
+  pod 'EaseCallUIKit'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
+  end
+end
+```
+
+2. cd 到终端下 `podfile` 所在文件夹目录执行以下命令：
+
+```
+pod install
+```
+
+### 步骤 2 初始化 CallKit
 
 CallKit 的初始化包括如下步骤：
 
@@ -28,21 +62,45 @@ CallKit 的初始化包括如下步骤：
    - 填入你的应用的 App Key。
    - 设置即时通讯 IM SDK 中的一些选项（`EMOptions` 类），例如，对 SDK 中是否打印日志、是否自动登录和是否默认使用用户属性等。
 2. 初始化 CallKit。
-3. 开启 VoIP 和画中画功能。
+3. 开启 VoIP 和画中画功能。// TODO：需要在前面加 “可选” 吗？
+   - 开启 VoIP 功能后会自动开启 LiveCommunicationKit。关于上传 VoIP 服务证书，详见 [APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。 
+   - 若开启画中画功能，同时需要开启应用后台摄像头采集权限。详见 [视频通话画中画文档](picture_in_picture.html)。
 
 在整个应用生命周期中，初始化一次即可。
 
+// TODO：没有集成环信IMSDK，只想使用CallKit 也行？其他端是否加上这段代码
+// TODO：代码段要分成两段展示吧？
+
 ```Swift
+    //已经集成了环信IMSDK 即已经import HyphenateChat
     private func setupCallKit() {
         let options = EMOptions(appkey: appKey)
         #if DEBUG
-        options.apnsCertName = "EaseIM_APNS_Developer"
-        options.pushKitCertName = "EasemobVoipDev"
+        options.apnsCertName = "Your_APNS_Developer"
+        options.pushKitCertName = "YourVoipDev"
         #else
-        options.apnsCertName = "EaseIM_APNS_Product"
-        options.pushKitCertName = "EasemobVoipPro"
+        options.apnsCertName = "Your_APNS_Product"
+        options.pushKitCertName = "YourVoipPro"
         #endif
         EMClient.shared().initializeSDK(with: options)
+        //初始化环信CallKit
+        let config = EaseCallUIKit.CallKitConfig()
+        config.enableVOIP = true//开启voip功能后会自动开启LiveCommunicationKit，需要在develop.apple.com申请证书时勾选。
+        config.enablePIPOn1V1VideoScene = true//开启画中画，同时需要开启应用后台摄像头采集权限。。
+        CallKitManager.shared.setup(config)
+    }
+
+    //没有集成环信 IM SDK，只想使用 CallKit
+    private func setupCallKit() {
+        let options = ChatSDKOptions(appkey: appKey)
+        #if DEBUG
+        options.apnsCertName = "Your_APNS_Developer"
+        options.pushKitCertName = "YourVoipDev"
+        #else
+        options.apnsCertName = "Your_APNS_Product"
+        options.pushKitCertName = "YourVoipPro"
+        #endif
+        ChatClient.shared().initializeSDK(with: options)
         //初始化环信 CallKit
         let config = EaseCallUIKit.CallKitConfig()
         config.enableVOIP = true//开启voip功能后会自动开启LiveCommunicationKit，需要在develop.apple.com申请证书时勾选
@@ -51,7 +109,11 @@ CallKit 的初始化包括如下步骤：
     }
 ```
 
-## 2.登录
+### 步骤 3 登录
+
+调用即时通讯 IM SDK 的 `login` 方法传入用户 ID 和 Token 登录 IM。
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ```Swift
             ChatClient.shared().login(withUsername: userId, token: token) { [weak self] userId,error  in
@@ -71,157 +133,21 @@ CallKit 的初始化包括如下步骤：
                 self?.loginButton.isHidden = true 
             }
         }
-// token生成参见快速开始中登录步骤中链接。
-// 需要从您的应用服务器获取token。 您也可以使用控制台生成的临时Token登录。
-// 在控制台生成用户和临时用户 token，请参见
-// https://docs-im-beta.easemob.com/product/enable_and_configure_IM.html#%E5%88%9B%E5%BB%BA-im-%E7%94%A8%E6%88%B7。
 ```
 
-## 3.EaseCallUIKit中的Provider
+### 步骤 4 配置监听器
 
-- 注: 仅用于会话列表以及联系人列表,在只是用快速开始进入聊天页面时不需要实现Provider
+你可以调用下面方法来监听 CallKit 中用户相关状态变更的事件和错误。
 
-Provider是一个数据提供者，当会话列表展示并且滑动减速时候，EaseCallUIKit会向你请求一些当前屏幕上要显示会话的展示信息例如头像昵称等。下面是Provider的具体示例以及用法。
-
-```Swift
-        CallKitManager.shared.profileProvider = self//Swift
-        //CallKitManager.shared.profileProviderOC = self//OC 与上面profileProvider二者只能设置一个
-        CallKitManager.shared.addListener(self)//添加监听，均为可选方法
-
-//MARK: - CallUserProfileProvider 
-//For example using conversations controller,as follows.
-extension MainViewController: CallUserProfileProvider {
-    func fetchGroupProfiles(profileIds: [String]) async -> [any EaseCallUIKit.CallProfileProtocol] {
-        consoleLogInfo("fetchGroupProfiles", type: .error)
-        return await withTaskGroup(of: [EaseCallUIKit.CallProfileProtocol].self, returning: [EaseCallUIKit.CallProfileProtocol].self) { group in
-            var resultProfiles: [EaseCallUIKit.CallProfileProtocol] = []
-            group.addTask {
-                var resultProfiles: [EaseCallUIKit.CallProfileProtocol] = []
-                let result = await self.requestGroupsInfo(groupIds: profileIds)
-                if let infos = result {
-                    for groupInfo in infos {
-                        let profile = EaseCallUIKit.CallUserProfile()
-                        profile.id = groupInfo.id
-                        profile.nickname = groupInfo.nickname
-                        profile.avatarURL = groupInfo.avatarURL
-                        resultProfiles.append(profile)
-                    }
-                }
-                return resultProfiles
-            }
-            //Await all task were executed.Return values.
-            for await result in group {
-                resultProfiles.append(contentsOf: result)
-            }
-            return resultProfiles
-        }
-    }
-    
-    func fetchUserProfiles(profileIds: [String]) async -> [any EaseCallUIKit.CallProfileProtocol] {
-        return await withTaskGroup(of: [EaseCallUIKit.CallProfileProtocol].self, returning: [EaseCallUIKit.CallProfileProtocol].self) { group in
-            var resultProfiles: [EaseCallUIKit.CallProfileProtocol] = []
-            group.addTask {
-                var resultProfiles: [EaseCallUIKit.CallProfileProtocol] = []
-                let result = await self.requestUserInfos(profileIds: profileIds) ?? []
-                for userInfo in result {
-                    let profile = EaseCallUIKit.CallUserProfile()
-                    profile.id = userInfo.id
-                    profile.nickname = userInfo.nickname
-                    profile.avatarURL = userInfo.avatarURL
-                    resultProfiles.append(profile)
-                }
-                return resultProfiles
-            }
-            //Await all task were executed.Return values.
-            for await result in group {
-                resultProfiles.append(contentsOf: result)
-            }
-            return resultProfiles
-        }
-    }
-    
-    private func requestUserInfos(profileIds: [String]) async -> [ChatUserProfileProtocol]? {
-        var unknownIds = [String]()
-        var resultProfiles = [ChatUserProfileProtocol]()
-        for profileId in profileIds {
-            if let profile = ChatUIKitContext.shared?.userCache?[profileId] {
-                if profile.nickname.isEmpty {
-                    unknownIds.append(profile.id)
-                } else {
-                    resultProfiles.append(profile)
-                }
-            } else {
-                unknownIds.append(profileId)
-            }
-        }
-        if unknownIds.isEmpty {
-            return resultProfiles
-        }
-        let result = await ChatClient.shared().userInfoManager?.fetchUserInfo(byId: unknownIds)
-        if result?.1 == nil,let infoMap = result?.0 {
-            for (userId,info) in infoMap {
-                let profile = ChatUserProfile()
-                let nickname = info.nickname ?? ""
-                profile.id = userId
-                profile.nickname = nickname
-                if let remark = ChatClient.shared().contactManager?.getContact(userId)?.remark {
-                    profile.remark = remark
-                }
-                profile.avatarURL = info.avatarUrl ?? ""
-                resultProfiles.append(profile)
-                if (ChatUIKitContext.shared?.userCache?[userId]) != nil {
-                    profile.updateFFDB()
-                } else {
-                    profile.insert()
-                }
-                ChatUIKitContext.shared?.userCache?[userId] = profile
-            }
-            return resultProfiles
-        }
-        return []
-    }
-    
-    private func requestGroupsInfo(groupIds: [String]) async -> [ChatUserProfileProtocol]? {
-        var resultProfiles = [ChatUserProfileProtocol]()
-        let groups = ChatClient.shared().groupManager?.getJoinedGroups() ?? []
-        for groupId in groupIds {
-            if let group = groups.first(where: { $0.groupId == groupId }) {
-                let profile = ChatUserProfile()
-                profile.id = groupId
-                profile.nickname = group.groupName
-                profile.avatarURL = group.settings.ext
-                resultProfiles.append(profile)
-                ChatUIKitContext.shared?.groupCache?[groupId] = profile
-            }
-
-        }
-        return resultProfiles
-    }
-}
-```
-
-## 4.创建呼叫页面并调用呼叫Api
-
-- 页面随用户自行创建即可，可以给AI说明我需要一个呼叫页面名字叫XXX，然后页面中有一个输入框输入呼叫人userId，一个segment选择器选择呼叫类型，一个按钮点击后进行呼叫。待AI给出代码后复制粘贴即可
-
-```Swift 
-        //在需要呼叫的页面中调用下面方法即可
-        CallKitManager.shared.call(with: input, type: type)//type为CallType枚举类型，详见CallMessageService.swift
-        //如果是群组通话则调用下面方法
-        CallKitManager.shared.groupCall(groupId: input)
-```
-
-## 5.监听EaseCallUIKit事件和错误
-
-您可以调用下面方法来监听 EaseCallUIKit中用户相关状态变更的事件和错误。
-
-```Swift        
+```swift
         CallKitManager.shared.addListener(self)//添加监听，均为可选方法
 ```
-下面是监听事件的示例代码。
-```Swift 
+
+以下是监听事件的示例代码：
+
+```swift
 extension MainViewController: CallServiceListener {
-    
+    // 通话错误
     func didOccurError(error: CallError) {
         DispatchQueue.main.async {
             self.showToast(toast: "Occur error:\(error.errorMessage) on module:\(error.module.rawValue)")
@@ -269,22 +195,169 @@ extension MainViewController: CallServiceListener {
 //            break
 //        }
     }
-        
+   // 通话结束     // TODO：这里未列明通话结束原因     
     func didUpdateCallEndReason(reason: CallEndReason, info: CallInfo) {
         print("didUpdateCallEndReason: \(String(describing: info.inviteMessage?.ext))")
-        if let message = info.inviteMessage {
-            NotificationCenter.default.post(name: Notification.Name("didUpdateCallEndReason"), object: message)
+        if let messageId = info.inviteMessageId {
+            NotificationCenter.default.post(name: Notification.Name("didUpdateCallEndReason"), object: messageId)
         }
         
     }
-    
+    // 远端用户加入
     func remoteUserDidJoined(userId: String, uid: UInt, channelName: String, type: CallType) {
         
     }
-    
+    // 远端用户离开
     func remoteUserDidLeft(userId: String, uid: UInt, channelName: String, type: CallType) {
+        
+    }
+    // RTC 引擎创建（可用于私有化部署配置）// TODO：是这样吗？
+    func onRtcEngineCreated(engine: AgoraRtcEngineKit?) {
         
     }
     
 }
 ```
+
+### 步骤 5 创建呼叫页面并调用呼叫 API 
+// TODO：集成文档中需要介绍 发起通话、接听通话和结束通话以及离线推送。
+
+
+### 步骤 7 离线推送
+
+为保证被叫用户 App 在离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [开启 APNs 推送](/document/ios/push/push_notification_mode_dnd.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。
+
+关于离线推送场景方案，请参见 [离线推送文档](/document/ios/push/push_overview.html)。
+
+## 进阶用法
+
+### 用户信息
+
+- 注: 仅用于会话列表以及联系人列表,在只是用快速开始进入聊天页面时不需要实现Provider
+
+Provider是一个数据提供者，当会话列表展示并且滑动减速时候，EaseCallUIKit会向你请求一些当前屏幕上要显示会话的展示信息例如头像昵称等。下面是Provider的具体示例以及用法。
+
+// TODO：删除上面的，用下面的？
+
+默认情况下，音视频通话时，对于用户信息，CallKit 会显示默认图像和用户 ID；对于群信息，CallKit 会根据群组 ID 从 SDK 中拉取群信息来对应显示群组名称和群图像。
+
+如果要在一对一通话界面显示自定义用户头像和昵称，群聊通话显示自定义群图像和群名称，你可以通过 `profileProvider` 实现自定义用户信息。
+
+```Swift
+        CallKitManager.shared.profileProvider = self//Swift
+        //CallKitManager.shared.profileProviderOC = self//OC 与上面profileProvider二者只能设置一个
+        CallKitManager.shared.addListener(self)//添加监听，均为可选方法
+
+//MARK: - CallUserProfileProvider 
+//For example using conversations controller,as follows.
+extension ViewController: CallUserProfileProvider {
+    func fetchUserProfiles(profileIds: [String]) async -> [any CallProfileProtocol] {
+        return await withTaskGroup(of: [EaseCallUIKit.CallProfileProtocol].self, returning: [EaseCallUIKit.CallProfileProtocol].self) { group in
+            var resultProfiles: [EaseCallUIKit.CallProfileProtocol] = []
+            group.addTask {
+                var resultProfiles: [EaseCallUIKit.CallProfileProtocol] = []
+                let result = await self.requestUserInfos(profileIds: profileIds)
+                if let infos = result {
+                    resultProfiles.append(contentsOf: infos)
+                }
+                return resultProfiles
+            }
+            //Await all task were executed.Return values.
+            for await result in group {
+                resultProfiles.append(contentsOf: result)
+            }
+            return resultProfiles
+        }
+    }
+    
+    func fetchGroupProfiles(profileIds: [String]) async -> [any CallProfileProtocol] {
+        return await withTaskGroup(of: [EaseCallUIKit.CallProfileProtocol].self, returning: [EaseCallUIKit.CallProfileProtocol].self) { group in
+            var resultProfiles: [EaseCallUIKit.CallProfileProtocol] = []
+            group.addTask {
+                var resultProfiles: [EaseCallUIKit.CallProfileProtocol] = []
+                let result = await self.requestGroupsInfo(groupIds: profileIds)
+                if let infos = result {
+                    resultProfiles.append(contentsOf: infos)
+                }
+                return resultProfiles
+            }
+            //Await all task were executed.Return values.
+            for await result in group {
+                resultProfiles.append(contentsOf: result)
+            }
+            return resultProfiles
+        }
+    }
+    
+    private func requestUserInfos(profileIds: [String]) async -> [CallProfileProtocol]? {
+        var unknownIds = [String]()
+        var resultProfiles = [CallProfileProtocol]()
+        for profileId in profileIds {
+            if let profile = CallKitManager.shared.usersCache[profileId] {
+                resultProfiles.append(profile)
+            } else {
+                unknownIds.append(profileId)
+            }
+        }
+        if unknownIds.isEmpty {
+            return resultProfiles
+        }
+        let result = await ChatClient.shared().userInfoManager?.fetchUserInfo(byId: unknownIds)
+        if result?.1 == nil,let infoMap = result?.0 {
+            for (userId,info) in infoMap {
+                let profile = CallUserProfile()
+                let nickname = info.nickname ?? ""
+                profile.id = userId
+                profile.nickname = nickname
+                profile.avatarURL = info.avatarUrl ?? ""
+
+            }
+            return resultProfiles
+        }
+        return []
+    }
+    
+    private func requestGroupsInfo(groupIds: [String]) async -> [CallProfileProtocol]? {
+        var resultProfiles = [CallProfileProtocol]()
+        let groups = ChatClient.shared().groupManager?.getJoinedGroups() ?? []
+        for groupId in groupIds {
+            if let group = groups.first(where: { $0.groupId == groupId }) {
+                let profile = CallUserProfile()
+                profile.id = groupId
+                profile.nickname = group.groupName
+                profile.avatarURL = group.settings.ext
+                resultProfiles.append(profile)
+            }
+
+        }
+        return resultProfiles
+    }
+
+    
+}
+```
+
+### 声网 RTC 私有化部署
+
+如果使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置：// TODO：拷贝的 Android 的，是否可以？
+
+```Swift
+//添加 CallKitListener 监听后实现下面方法，填写自己的ip地址以及域名
+    func onRtcEngineCreated(engine: AgoraRtcEngineKit?) {
+        let config = AgoraLocalAccessPointConfiguration()
+        config.ipList = ["123.456.789.0"]
+        config.verifyDomainName = "ap.xxx.agora.local"
+        config.mode = .localOnly
+        engine?.setLocalAccessPoint(withConfig: config)
+    }
+```
+
+## 常见问题
+
+1. 当你使用 Xcode 15 创建新工程时，编译时若出现 **Sandbox: rsync.samba(47334) deny(1) file-write-create...** 报错，你需要在 **Target > Build Settings** 中查找 **User Script Sandboxing** 选项，设置为 **NO**。
+
+![img](/images/ios/quickstart_emulator_error.png)
+
+![img](/images/ios/quickstart_error_solve.png)
+
+2. 如果 `pod install` 失败报错 RuntimeError **`PBXGroup` attempted to initialize an object with unknown ISA `PBXFileSystemSynchronizedRootGroup` from attributes: `{"isa"=>"PBXFileSystemSynchronizedRootGroup"`**，请尝试将 pod 版本升级为 1.14.3。Xcode 16 及其以下版本打开会报错 **Adjust the project format using a compatible version of Xcode to allow it to be opened by this version of Xcode.**。

@@ -1,6 +1,8 @@
 # 自定义
 
-你可以修改我们提供的 Callkit 源代码，对 CallKit 用户界面进行调整。
+你可以修改我们提供的 CallKit 源代码，对 CallKit 用户界面进行调整。
+
+// TODO：添加文件路径
 
 ## 修改 UI 配置项
 
@@ -13,42 +15,48 @@
         CallAppearance.avatarRadius = .extraSmall
         // 改变头像占位图
         CallAppearance.avatarPlaceHolder = UIImage(named: "avatar_placeholder")
-        //整体替换资源 bundle
+        //整体替换资源bundle
         CallAppearance.resourceBundle = Bundle.main
-        //替换聊天背景图  // TODO：通话背景？
+        //替换呼叫背景图
         CallAppearance.backgroundImage = UIImage(named: "chat_background")
 ```
 
 ## 修改原有资源
 
-// TODO：添加描述，图片主要包含哪些图片，举一些例子。音频，我添加了呼叫声音，除了这些还有吗？
-// TODO：国际化文件：也描述一下吧。
-// TODO：可以替换文案吗？
+- 图片资源
 
-主要包含有
+|内容描述 | 详细说明 |
+|---------|---------|
+| 导航资源 | back、boxes等导航相关图标。// TODO：back 是返回，boxes 是啥？|
+| 背景图片 | 聊天背景图等。 |
+| 被叫弹窗 | phone_hang_mini.png、phone_pick_mini.png。 |
+| 呼叫页面图标 | phone_hang、phone_pick、speaker_on、speaker_off、camera_on、camera_off、mic_on、mic_off。 |
+| 其他资源 | person_add、network相关、语音音量相关图标等。// todo：network 直接说网络吧。 |
 
-- 图片  // TODO：图标和图片：例如，呼叫接听和挂断图标、扬声器、麦克风和摄像头图标等。
+- 音频和国际化文件
+  
+| 资源类型 | 内容描述 | 详细说明 |
+|---------|---------|---------|
+| 音频资源 | 音频文件 | dialing.mp3（拨号音）、ringing.mp3（响铃音）、busy.mp3（忙音） |
+| 国际化文件 | 语言支持 | en（英文）、zh-Hans（简体中文） |
+
+// TODO：铃声文件
 - 音频：例如，铃声文件。CallKit 支持发起呼叫时的声音、接收呼叫时的声音以及被挂断时的声音。铃声文件支持 MP3、WAV 等格式，建议铃声时长为 1-20 秒，文件大小不超过 1 MB。
-- 国际化文件
 
-![资源图](./DocumentationImages/resource_replace.png)
-
-![资源图1](./DocumentationImages/resource_replace1.png)
-
+![img](/images/callkit/ios/call_resource_bundle.png)
 
 ## 3.修改业务可配置项
 
 你可以开启 VoIP 通话和画中画功能以及设置呼叫超时时间（默认 30 秒）等。
 
-- 开启 VoIP 通话：开启voip功能后会自动开启LiveCommunicationKit，需要在develop.apple.com申请证书时勾选
-- 开启画中画：
-
-如需进一步修改业务逻辑，请源码集成后修改。
+- 开启 VoIP 功能后会自动开启 LiveCommunicationKit。关于上传 VoIP 服务证书，详见 [APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。 
+- 若开启画中画功能，同时需要开启应用后台摄像头采集权限。详见 [视频通话画中画文档](picture_in_picture.html)。
+- 呼叫超时时间：单位为秒，默认为 30 秒。
 
 ```Swift
         let config = EaseCallUIKit.CallKitConfig()
         config.enableVOIP = true //开启voip功能后会自动开启LiveCommunicationKit，需要在develop.apple.com申请证书时勾选
-        config.enablePIPOn1V1VideoScene = true //开启画中画，同时需要开启应用后台摄像头采集权限，详见[PictureInPicture.md](./PictureInPicture.md)。
+        config.enablePIPOn1V1VideoScene = true //开启画中画，同时需要开启应用后台摄像头采集权限。
         config.ringTimeOut = 30//默认呼叫超时时间
         CallKitManager.shared.setup(config)
 ```

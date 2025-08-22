@@ -10,30 +10,30 @@
     private func setupCallKit() {
         let options = EMOptions(appkey: appKey)
         #if DEBUG
-        options.apnsCertName = "EaseIM_APNS_Developer"
-        options.pushKitCertName = "EasemobVoipDev"
+        options.apnsCertName = "your_APNS_Developer"
+        options.pushKitCertName = "yourVoipDev"
         #else
-        options.apnsCertName = "EaseIM_APNS_Product"
-        options.pushKitCertName = "EasemobVoipPro"
+        options.apnsCertName = "your_APNS_Product"
+        options.pushKitCertName = "yourVoipPro"
         #endif
         EMClient.shared().initializeSDK(with: options)
-        //初始化环信CallKit
+        //初始化环信 CallKit
         let config = EaseCallUIKit.CallKitConfig()
-        config.enableVOIP = true//开启voip功能后会自动开启LiveCommunicationKit，需要在develop.apple.com申请证书时勾选
+        config.enableVOIP = true//开启 VoIP 功能后会自动开启 LiveCommunicationKit，需要在 develop.apple.com 申请证书时勾选
         config.enablePIPOn1V1VideoScene = true//开启画中画，同时需要开启应用后台摄像头采集权限，详见[PictureInPicture.md](./PictureInPicture.md)。
         CallKitManager.shared.setup(config)
     }
 ```
-// TODO：图片打包给我
-![证书管理](./DocumentationImages/createCertification.png)
 
-![添加证书](./DocumentationImages/addCertification.png)
+![证书管理](/images/callkit/ios/certificate_create.png)
 
-![开启VOIP](./DocumentationImages/VoIPCertification.png)
+![添加证书](/images/callkit/ios/certificate_add.png)
 
-![导出证书](./DocumentationImages/requestCertification.png)
+![开启VOIP](/images/callkit/ios/certificate_voip.png)
 
-![console设置证书](./DocumentationImages/setVoipCer.png)
+![导出证书](/images/callkit/ios/certificate_request.png)
+
+![console设置证书](/images/callkit/ios/certificate_voip_set.png)
 
 ## 系统要求
 
