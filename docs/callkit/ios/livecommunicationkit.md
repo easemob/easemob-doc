@@ -86,6 +86,10 @@
 }
 ```
 
+![img](/images/callkit/ios/incoming_call_flowchart.png)
+
+![img](/images/callkit/ios/incoming_call_flow.png)
+
 ### 2. 接听流程
 
 1. 用户点击接听
