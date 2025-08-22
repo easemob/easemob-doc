@@ -79,8 +79,8 @@ dependencies {
 
 ```kotlin
 include(":ease-call-kit")
-// "../chatcallkit-android"要替换成你clone下来的实际工程路径，后边要拼接"/ease-call-kit"
-project(":ease-call-kit").projectDir = File("../chatcallkit-android/ease-call-kit")
+// "../easemob-callkit-android"要替换成你clone下来的实际工程路径，后边要拼接"/ease-call-kit"
+project(":ease-call-kit").projectDir = File("../easemob-callkit-android/ease-call-kit")
 ```
 
 - 在 app(module) 目录的 `build.gradle.kts` 文件中添加如下代码：

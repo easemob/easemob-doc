@@ -31,7 +31,7 @@ git clone https://github.com/easemob/easemob-callkit-android
 
 2. 在 Android Studio 中打开项目。
 
-选择 **File** > **New** > **Import Project**，导入下载或克隆的项目 `chatcallkit-android`。
+选择 **File** > **New** > **Import Project**，导入下载或克隆的项目 `easemob-callkit-android`。
 
 3. 等待 Gradle 同步完成。
 
