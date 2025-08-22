@@ -1,6 +1,6 @@
 # CallKit 架构
 
-## 技术栈
+## 概述
 
 环信 Android CallKit 基于环信即时通讯 IM SDK 和声网 RTC SDK 开发的实时音视频通话框架。项目采用 Kotlin 作为开发语言，使用 MVVM 架构模式来分离业务逻辑和 UI 展示。通过 Kotlin Flow（StateFlow/SharedFlow）进行响应式状态管理，确保 UI 能够及时响应数据变化。异步操作统一使用 Kotlin Coroutines 处理，提供流畅的用户体验。
 

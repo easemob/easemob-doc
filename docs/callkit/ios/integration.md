@@ -1,13 +1,13 @@
 # CallKit 集成指南
 
-使用环信 CallKit（基于环信即时通讯 IM SDK V4.16.0 及其以上）之前，你需要将其集成到你的应用中。
+使用环信 CallKit（基于环信即时通讯 IM SDK V4.16.0 或以上版本）之前，你需要将其集成到你的应用中。
 
 ## 推荐环境
 
-- Xcode 16.0 及以上版本 
+- Xcode 16.0 或以上版本 
 - 最低支持系统版本：iOS 15.0
 - 已为你的项目设置有效的开发者签名
-- CocoaPods v1.14.3 及以上版本
+- CocoaPods v1.14.3 或以上版本
 
 ## 前提条件  
 
@@ -54,11 +54,11 @@ pod install
 
 ### 步骤 2 初始化 CallKit
 
-CallKit 的初始化包括如下步骤：
+CallKit 初始化包括如下步骤：
 
 1. 初始化 IM SDK。CallKit 基于即时通讯 IM 作为信令通道，因此需先初始化 IM SDK。
    - 填入你的应用的 App Key。
-   - 设置即时通讯 IM SDK 中的一些选项（`EMOptions`/`ChatSDKOptions` 类）。
+   - 设置即时通讯 IM SDK 的 `EMOptions`/`ChatSDKOptions` 类中的一些选项。
 2. 初始化 CallKit。
    （可选）开启 VoIP 和画中画功能。// TODO：放在进阶功能中
      - 开启 VoIP 功能后会自动开启 LiveCommunicationKit。关于上传 VoIP 服务证书，详见 [APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。 
@@ -69,7 +69,7 @@ CallKit 的初始化包括如下步骤：
 - 已经集成了环信即时通讯 IM SDK，初始化 CallKit 的代码示例如下： 
   
 ```Swift
-    //已经集成了环信IMSDK 即已经import HyphenateChat
+    //已经集成了环信 IM SDK 即已经 import HyphenateChat
     private func setupCallKit() {
         let options = EMOptions(appkey: appKey)
         #if DEBUG
@@ -87,6 +87,7 @@ CallKit 的初始化包括如下步骤：
         CallKitManager.shared.setup(config)
     }
 ```  
+
 - 未集成环信环信即时通讯 IM SDK，初始化 CallKit 的代码示例如下：
 
 ```Swift
@@ -217,6 +218,21 @@ extension MainViewController: CallServiceListener {
     
 }
 ```
+
+通话结束原因 `CallEndReason` 如下表所示： 
+
+| 原因 | 说明 |
+| :--------- | :----- |
+| `CallEndReasonHangup` | 正常挂断 |
+| `CallEndReasonCancel` | 本地用户取消通话 |
+| `CallEndReasonRemoteCancel` | 对方取消通话 |
+| `CallEndReasonRefuse` | 本地用户拒绝接听 |
+| `CallEndReasonRemoteRefuse` | 对方拒绝接听 |
+| `CallEndReasonBusy` | 忙线中 |
+| `CallEndReasonNoResponse` | 本地用户无响应 |
+| `CallEndReasonRemoteNoResponse` | 对方无响应 |
+| `CallEndReasonHandleOnOtherDevice` | 在其他设备接听 |
+| `CallEndReasonRemoteDrop` | 通话中断 |
 
 ### 步骤 5 发起通话
 

@@ -66,7 +66,6 @@ CallKitClient.init(context, config)
 | `callkit_layout_default_no_data.xml` / `callkit_layout_no_data_show_nothing.xml` | 无数据/空占位视图。 |
 | `callkit_layout_group_member_select_item.xml` | 群成员选择单元项（头像/昵称/选中态）。 |
 
-
 ## 图标与图形资源
 
 - 开发者可直接在源码中使用同名文件替换，或者在应用层对应的 `res/drawable*` 添加一个同名文件,即可实现资源文件的替换。

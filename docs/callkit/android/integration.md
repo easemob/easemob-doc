@@ -69,7 +69,7 @@ dependencies {
 
 #### 方式二：本地源码集成
 
-从 GitHub 获取音视频 [CallKit 源码](https://github.com/easemob/easemob-callkit-android)，克隆到本地。按照以下步骤集成：
+从 GitHub 获取音视频 [CallKit 源码](https://github.com/easemob/easemob-callkit-android.git)，克隆到本地。按照以下步骤集成：
 
 1. 在 Project 工程根目录下的 `settings.gradle.kts` 文件中添加如下代码：
 

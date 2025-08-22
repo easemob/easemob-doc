@@ -1,6 +1,6 @@
 # 跑通示例项目
 
-本文档基于 MainActivity 示例，帮助你快速集成和运行环信 CallKit，实现一对一音视频通话和群组音视频通话功能。
+本文档基于 MainActivity 示例，帮助你快速集成和运行环信 CallKit（基于 IM 4.16.0 及以上），实现一对一音视频通话和群组音视频通话功能。
 
 ## 推荐环境
 
@@ -23,10 +23,10 @@
 
 ### 步骤 1 配置项目 
 
-1. 在 [Github](https://github.com/easemob/easemob-callkit-android) 中克隆或下载代码。
+1. 在 [Github](https://github.com/easemob/easemob-callkit-android.git) 中克隆或下载代码。
 
 ```bash
-git clone https://github.com/easemob/easemob-callkit-android 
+git clone https://github.com/easemob/easemob-callkit-android.git 
 ```
 
 2. 在 Android Studio 中打开项目。

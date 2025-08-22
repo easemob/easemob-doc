@@ -1,13 +1,13 @@
 # 运行示例项目
 
-本文帮助你快速集成和运行环信 CallKit（基于环信即时通讯 IM SDK V4.16.0 及其以上），实现一对一音视频通话和群组音视频通话功能。
+本文帮助你快速集成和运行环信 CallKit（基于环信即时通讯 IM SDK V4.16.0 或以上版本），实现一对一音视频通话和群组音视频通话功能。
 
 ## 开发环境要求
 
-- Xcode 16.0 及以上版本 
+- Xcode 16.0 或以上版本 
 - 最低支持系统版本：iOS 15.0
 - 已为你的项目设置有效的开发者签名
-- CocoaPods v1.14.3 及以上版本
+- CocoaPods v1.14.3 或以上版本
 
 ## 前提条件
 
@@ -15,7 +15,7 @@
 1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
 3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和 [用户 Token](/product/console/operation_user.html#查看用户-token)。
-4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
+4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID，将用户加入群组。
 5. [开通音视频服务](product_activation.html)。
 
 ## 操作步骤

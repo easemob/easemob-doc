@@ -1,6 +1,6 @@
 # 快速开始
 
-利用环信 CallKit，你可以轻松实现一对一通话和群组通话功能。本文介绍如何快速实现发起音视频通话。
+利用环信 CallKit（基于 IM 4.16.0 及以上），你可以轻松实现一对一通话和群组通话功能。本文介绍如何快速实现发起音视频通话。
 
 ## 推荐环境
 
@@ -73,7 +73,7 @@ dependencies {
 
 **本地依赖**
 
-从 GitHub 获取音视频 [CallKit 源码](https://github.com/easemob/easemob-callkit-android)，克隆到本地。按照下面的方式集成：
+从 GitHub 获取音视频 [CallKit 源码](https://github.com/easemob/easemob-callkit-android.git)，克隆到本地。按照下面的方式集成：
 
 - 在 Project 工程根目录下的 `settings.gradle.kts` 文件中添加如下代码：
 
