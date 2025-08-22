@@ -58,5 +58,5 @@ private val imAppkey = "your_org#your_app"     // 你的 App Key
 3. 在弹出的页面中授权必要权限（摄像头、麦克风、悬浮窗等）。
 4. 点击 **登出** 退出登录。
 
-![img](https://github.com/easemob/easemob-doc/tree/doc-v2/docs/.vuepress/public/images/callkit/android/project_runthrough.png)
+![img](/images/callkit/android/project_runthrough.png)
 

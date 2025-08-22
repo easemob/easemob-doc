@@ -21,8 +21,8 @@
 
 | 类型 | 说明 |
 |------|------|
-| `singleAudio` | 一对一视频通话 |
-| `singleVideo` | 一对一语音通话 |
+| `singleAudio` | 一对一语音通话 |
+| `singleVideo` | 一对一视频通话 |
 | `group` | 群组通话 |
 
 ## CallEndReason 通话结束原因
@@ -51,5 +51,5 @@
 | `@objc optional func onReceivedCall(callType: CallType, userId: String, extensionInfo: [String:Any]?)` | 收到通话邀请 | - `userId`: 邀请方的用户 ID<br> - `callType`: 通话类型<br> - `extensionInfo`: 扩展信息 |
 | `@objc optional func remoteUserDidJoined(userId: String, channelName: String, type: CallType)` | 远端用户加入 | - `userId`: 用户 ID<br> - `callType`: 通话类型<br> - `channelName`: 频道名称 |
 | `@objc optional func remoteUserDidLeft(userId: String, channelName: String, type: CallType)` | 远端用户离开 | - `userId`: 用户ID<br> - `callType`: 通话类型<br> - `channelName`: 频道名称 |
-| `@objc optional func onRtcEngineCreated(engine: AgoraRtcEngineKit?)` | RTC 引擎创建 | `engine`: RTC 引擎实例 |
+| `@objc optional func onRtcEngineCreated(engine: AgoraRtcEngineKit)` | RTC 引擎创建 | `engine`: RTC 引擎实例 |
 

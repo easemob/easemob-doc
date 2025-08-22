@@ -65,14 +65,10 @@ CallKit 的初始化包括如下步骤：
    - 开启 VoIP 功能后会自动开启 LiveCommunicationKit。关于上传 VoIP 服务证书，详见 [APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。 
    - 若开启画中画功能，同时需要开启应用后台摄像头采集权限。详见 [视频通话画中画文档](picture_in_picture.html)。
 
-- 已经集成了环信 IM SDK，集成 CallKit 
-- 未集成 环信 IM SDK。
-
 在整个应用生命周期中，初始化一次即可。
 
-// TODO：没有集成环信IMSDK，只想使用CallKit 也行？其他端是否加上这段代码
-// TODO：代码段要分成两段展示吧？
-
+- 已经集成了环信 IM SDK，集成 CallKit。 
+  
 ```Swift
     //已经集成了环信IMSDK 即已经import HyphenateChat
     private func setupCallKit() {
@@ -91,7 +87,10 @@ CallKit 的初始化包括如下步骤：
         config.enablePIPOn1V1VideoScene = true//开启画中画，同时需要开启应用后台摄像头采集权限。。
         CallKitManager.shared.setup(config)
     }
+```  
+- 未集成 环信 IM SDK。
 
+```Swift
     //没有集成环信 IM SDK，只想使用 CallKit
     private func setupCallKit() {
         let options = ChatSDKOptions(appkey: appKey)
@@ -199,7 +198,6 @@ extension MainViewController: CallServiceListener {
     }
    // 通话结束     // TODO：这里未列明通话结束原因     
     func didUpdateCallEndReason(reason: CallEndReason, info: CallInfo) {
-        print("didUpdateCallEndReason: \(String(describing: info.inviteMessage?.ext))")
         if let messageId = info.inviteMessageId {
             NotificationCenter.default.post(name: Notification.Name("didUpdateCallEndReason"), object: messageId)
         }
@@ -242,7 +240,7 @@ extension MainViewController: CallServiceListener {
 
 #### 发起群组通话
 
-要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [即时通讯 IM Android SDK 文档](/document/android/group_manage.html#创建群组) 或 [环信控制台文档](/product/console/operation_group.html#创建群组)。
+要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [环信控制台文档](/product/console/operation_group.html#创建群组)。
 
 发起群组通话指定群组 ID 后，CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。若选择的成员数量超过 16 人时，系统会自动提示 “人数超出最大限制16人” 并阻止发起通话。
 
@@ -260,7 +258,7 @@ extension MainViewController: CallServiceListener {
 
 ### 步骤 7 离线推送
 
-为保证被叫用户 App 在离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [开启 APNs 推送](/document/ios/push/push_notification_mode_dnd.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。
+为保证被叫用户 App 在离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [开启 APNs 推送](/document/ios/push/push_notification_mode_dnd.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃弹窗。
 
 关于离线推送场景方案，请参见 [离线推送文档](/document/ios/push/push_overview.html)。
 
@@ -268,15 +266,9 @@ extension MainViewController: CallServiceListener {
 
 ### 用户信息
 
-- 注: 仅用于会话列表以及联系人列表,在只是用快速开始进入聊天页面时不需要实现Provider
+默认情况下，音视频通话时，对于用户信息，CallKit 会显示默认头像和用户 ID；对于群信息，CallKit 会根据群组 ID 从 SDK 中拉取群信息来对应显示群组名称和群头像。
 
-Provider是一个数据提供者，当会话列表展示并且滑动减速时候，EaseCallUIKit会向你请求一些当前屏幕上要显示会话的展示信息例如头像昵称等。下面是Provider的具体示例以及用法。
-
-// TODO：删除上面的，用下面的？
-
-默认情况下，音视频通话时，对于用户信息，CallKit 会显示默认图像和用户 ID；对于群信息，CallKit 会根据群组 ID 从 SDK 中拉取群信息来对应显示群组名称和群图像。
-
-如果要在一对一通话界面显示自定义用户头像和昵称，群聊通话显示自定义群图像和群名称，你可以通过 `profileProvider` 实现自定义用户信息。
+如果要在一对一通话界面显示自定义用户头像和昵称，群聊通话显示自定义群头像和群名称，你可以通过 `profileProvider` 实现自定义用户信息。
 
 ```Swift
         CallKitManager.shared.profileProvider = self//Swift
@@ -397,4 +389,4 @@ extension ViewController: CallUserProfileProvider {
 
 2. 如果 `pod install` 失败报错 RuntimeError **`PBXGroup` attempted to initialize an object with unknown ISA `PBXFileSystemSynchronizedRootGroup` from attributes: `{"isa"=>"PBXFileSystemSynchronizedRootGroup"`**，请尝试将 pod 版本升级为 1.14.3。Xcode 16 及其以下版本打开会报错 **Adjust the project format using a compatible version of Xcode to allow it to be opened by this version of Xcode.**。
 
-3. // TODO：添加 RTC/IM SDK Error Code 的链接，各端均加。
+3. // TODO：添加 RTC/IM SDK Error Code 的链接，各端均加。添加到常见问题一篇

@@ -20,7 +20,22 @@
    
 ## 快速开始
 
-### 步骤 1 安装 CallKit
+### 步骤 1 创建项目
+
+参考以下步骤在 Xcode 中创建一个 iOS 平台下的 App，项目设置如下：
+
+- **Product Name** 设置为 **EaseCallUIKitQuickStart**。
+- **Organization Identifier** 设置为你的 **identifier**。
+- **User Interface** 选择 **Storyboard**。
+- **Language** 选择你的常用开发语言，推荐 `Swift` 和 `Main.storyboard`。
+- 添加权限：在项目 `info.plist` 中添加权限：
+
+``` 
+Privacy - Microphone Usage Description //麦克风权限
+Privacy - Camera Usage Description //相机权限
+```
+
+### 步骤 2 安装 CallKit
 
 你可以使用 CocoaPods 安装环信 CallKit 作为 Xcode 项目的依赖项。
 
@@ -28,7 +43,7 @@
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '14.0'
+platform :ios, '15.0'
 
 target 'YourTarget' do
   use_frameworks!
@@ -39,8 +54,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
-      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
     end
   end
 end
@@ -52,28 +66,12 @@ end
 pod install
 ```
 
-### 步骤 2 创建项目
-
-参考以下步骤在 Xcode 中创建一个 iOS 平台下的 App，项目设置如下：
-
-- **Product Name** 设置为 **EaseCallUIKitQuickStart**。
-- **Organization Identifier** 设置为你的 **identifier**。
-- **User Interface** 选择 **Storyboard**。
-- **Language** 选择你的常用开发语言，推荐 `Swift` 和 `Main.storyboard`。
-- 添加权限：在项目 `info.plist` 中添加权限：
-
-```
-Privacy - Photo Library Usage Description //相册权限  
-Privacy - Microphone Usage Description //麦克风权限
-Privacy - Camera Usage Description //相机权限
-```
-
-### 步骤 2 初始化 CallKit
+### 步骤 23 初始化 CallKit
 
 你可以在应用程序加载时或使用前初始化 CallKit：
 1. 初始化 IM SDK。CallKit 基于即时通讯 IM 作为信令通道，因此需先初始化 IM SDK。
    - 填入你的应用的 App Key。
-   - 设置即时通讯 IM SDK 中的一些选项（`EMOptions` 类），例如，开启 Console 日志和是否自动登录。建议在正式环境中开启自动登录，可参考 [IM Demo 源码](https://github.com/easemob/easemob-demo-ios)。  
+   - 设置即时通讯 IM SDK 中的一些选项（`ChatSDKOptions` 类），例如，开启 Console 日志和是否自动登录。建议在正式环境中开启自动登录，可参考 [IM Demo 源码](https://github.com/easemob/easemob-demo-ios)。  
 2. 初始化 CallKit。
 
 在整个应用生命周期中，初始化一次即可。
@@ -115,7 +113,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 
 ### 步骤 4 创建快速开始页面
 
-在项目的 `Main.storyboard` 中 `ViewController.swift` 中替换代码，然后点击运行按钮。
+在项目的 `Main.storyboard` 和 `ViewController.swift` 中替换代码，然后运行。
 
 1. 右键点击项目中的 `Main.storyboard`，选择 **Open As** > **Source Code**，替换为如下代码：
    

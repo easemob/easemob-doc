@@ -6,7 +6,7 @@
 
 ## 挂断无反应
 
-若通话一方挂断二而一方没有反应，请联系技术支持获取日志检查是否有 `rtcEngine didOfflineOfUid:`。
+若通话一方挂断而其他方没有反应，请联系技术支持获取日志检查是否有 `rtcEngine didOfflineOfUid:`。
 
 ## 通话无声音/无画面
 

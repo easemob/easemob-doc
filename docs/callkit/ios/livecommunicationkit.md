@@ -1,14 +1,33 @@
-# LiveCommunicationManager
+# LiveCommunicationKit
 
 ## 概述
 
 `LiveCommunicationManager` 是一个用于管理 iOS VoIP 通话的单例管理器类。它集成了 Apple 的 PushKit 和 LiveCommunicationKit 框架，提供完整的 VoIP 通话解决方案，包括来电推送、通话管理和音频会话控制。
 
-// TODO：本篇没有添加 app 在后台、前台、锁屏时的推送通知显示？
+## 推荐环境
 
-## 证书设置
+- iOS 17.4 及更高版本
+- Swift 5.0 及更高版本
+- 必需框架:
+  - Foundation
+  - PushKit
+  - AVFAudio
+  - LiveCommunicationKit
+  
+## 前提条件
 
-// TODO：移到 PushKit 集成？
+1. VoIP 权限: 确保应用已获得 VoIP 推送权限。 
+2. 后台模式: 需要启用 VoIP 后台模式。 
+
+## PushKit 集成
+
+调用 IM SDK 的接口绑定 VoIP 推送证书和推送 Token。`EMClient` 初始化时需绑定推送证书。
+
+- `PKPushRegistry`: 处理 VoIP 推送注册。
+- `PKPushRegistryDelegate`: 响应推送事件。
+
+关于如何创建 VoIP 推送证书以及上传至 [环信控制台](https://console.easemob.com/user/login)，详见 IM 的 [APNs 离线推送文档](/document/ios/push/push_apns.html)。
+
 
 ```Swift
     private func setupCallKit() {
@@ -29,56 +48,7 @@
     }
 ```
 
-// TODO：关于添加证书的步骤，详见 IM 中的 APNs 证书添加步骤吧。
-
-![证书管理](/images/callkit/ios/certificate_create.png)
-
-![添加证书](/images/callkit/ios/certificate_add.png)
-
-![开启VOIP](/images/callkit/ios/certificate_voip.png)
-
-![导出证书](/images/callkit/ios/certificate_request.png)
-
-![console设置证书](/images/callkit/ios/certificate_voip_set.png)
-
-## 系统要求
-
-- iOS 17.4 及更高版本
-- Swift 5.0 及更高版本
-- 必需框架:
-  - Foundation
-  - PushKit
-  - AVFAudio
-  - LiveCommunicationKit
-  
-## 注意事项
-
-1. VoIP 权限: 确保应用已获得 VoIP 推送权限。 
-2. 后台模式: 需要启用 Voice over IP 后台模式。 
-3. 铃声文件: 确保 `notes_of_the_optimistic` 音频文件存在。
-4. 线程安全: PushKit 回调在主线程执行。  
-5. 内存管理: 通话结束后正确清理 `ConversationManager`。 
-
-// TODO：分散到各个章节
-
-## 主要功能
-
-你确保整个应用程序中只有一个实例管理所有通话相关功能。
-
-```swift
-static let shared = LiveCommunicationManager()
-```
-
-### PushKit 集成
-
-调用 IM SDK 的接口绑定 VoIP 推送证书和推送 Token。`EMClient` 初始化时需绑定推送证书。
-
-- `PKPushRegistry`: 处理 VoIP 推送注册。
-- `PKPushRegistryDelegate`: 响应推送事件。
-
-关于如何创建 VoIP 推送证书以及上传至 [环信控制台](https://console.easemob.com/user/login)，详见 IM 的 [APNs 离线推送文档](/document/ios/push/push_apns.html)。
-
-### 通话管理
+## 通话管理
 
 创建 `ConversationManager`，进行如下配置：
 - **铃声**: `notes_of_the_optimistic`。
@@ -145,35 +115,6 @@ static let shared = LiveCommunicationManager()
 | 通话信息缺失           | 日志记录错误，拒绝接听呼叫。  |
 | 状态不匹配             | 验证通话状态后再执行操作。  |
 | 超时处理               | 无论主叫或被叫超时，通话都自动取消。 |
-
-## API 使用指南
-
-1. 初始化 PushKit。
-
-```swift
-LiveCommunicationManager.shared.setupPushKit()
-```
-
-2. 创建会话管理器 `ConversationManager`。
-
-```swift
-LiveCommunicationManager.shared.createConversationManager()
-```
-
-3. 上报来电。
-
-```swift
-LiveCommunicationManager.shared.reportIncomingCall(
-    uuid: UUID(),
-    callerName: "来电者名称"
-)
-```
-
-4. 结束通话。
-
-```swift
-LiveCommunicationManager.shared.endCall()
-```
 
 
 
