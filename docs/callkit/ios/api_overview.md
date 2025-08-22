@@ -48,7 +48,7 @@
 
 ## CallKitListener 监听方法
 
-环信 CallKit 提供 `CallKitListener` 监听通话过程。你可以设置监听器用于处理通话相关的回调：
+环信 CallKit 提供 `CallKitListener` 监听通话过程。你可以设置监听器用于处理通话相关的回调。
 
 **所有回调方法都不在主线程执行，需要使用 `runOnUiThread` 来更新 UI。**
 
