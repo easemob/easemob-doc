@@ -1,7 +1,5 @@
 # CallKit 集成指南
 
-以下是进阶用法的部分示例。会话列表页面、消息列表页、联系人列表均可分开使用。// TODO: 替换为下面的?
-
 使用环信 CallKit（基于环信即时通讯 IM SDK V4.16.0 及其以上）之前，你需要将其集成到你的应用中。
 
 ## 推荐环境
@@ -22,7 +20,7 @@
 
 ## 集成步骤
 
-### 步骤 1 安装 CallKit // TODO：还需要吗？快速开始和跑通示例项目需要这个吗？
+### 步骤 1 安装 CallKit 
 
 你可以使用 CocoaPods 安装环信 CallKit 作为 Xcode 项目的依赖项。
 
@@ -48,7 +46,7 @@ post_install do |installer|
 end
 ```
 
-2. cd 到终端下 `podfile` 所在文件夹目录执行以下命令：
+2. 运行 cd 命令到终端下 `podfile` 所在文件夹目录执行以下命令：
 
 ```
 pod install
@@ -58,13 +56,17 @@ pod install
 
 CallKit 的初始化包括如下步骤：
 
+// 移掉
 1. 初始化 IM SDK。CallKit 基于即时通讯 IM 作为信令通道，因此需先初始化 IM SDK。
    - 填入你的应用的 App Key。
    - 设置即时通讯 IM SDK 中的一些选项（`EMOptions` 类），例如，对 SDK 中是否打印日志、是否自动登录和是否默认使用用户属性等。
 2. 初始化 CallKit。
-3. 开启 VoIP 和画中画功能。// TODO：需要在前面加 “可选” 吗？
+3. 开启 VoIP 和画中画功能。// TODO：放在进阶功能中
    - 开启 VoIP 功能后会自动开启 LiveCommunicationKit。关于上传 VoIP 服务证书，详见 [APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。 
    - 若开启画中画功能，同时需要开启应用后台摄像头采集权限。详见 [视频通话画中画文档](picture_in_picture.html)。
+
+- 已经集成了环信 IM SDK，集成 CallKit 
+- 未集成 环信 IM SDK。
 
 在整个应用生命周期中，初始化一次即可。
 
@@ -219,8 +221,41 @@ extension MainViewController: CallServiceListener {
 }
 ```
 
-### 步骤 5 创建呼叫页面并调用呼叫 API 
-// TODO：集成文档中需要介绍 发起通话、接听通话和结束通话以及离线推送。
+// TODO：各端讨论统一。
+
+### 步骤 5 发起通话
+
+#### 发起一对一通话
+
+你可以使用 `call` 方法发起一对一通话，`callType` 设置为 `singleVideo` 为视频通话，`singleAudio` 为音频通话。
+
+```Swift
+@IBAction func callAction(_ sender: Any) {
+        self.view.endEditing(true)
+        guard let input = inputField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !input.isEmpty else {
+            self.showCallToast(toast: "Please enter a valid username or group id")
+            return
+        }
+            CallKitManager.shared.call(with: input, type: self.callType)
+    }
+```    
+
+#### 发起群组通话
+
+要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [即时通讯 IM Android SDK 文档](/document/android/group_manage.html#创建群组) 或 [环信控制台文档](/product/console/operation_group.html#创建群组)。
+
+发起群组通话指定群组 ID 后，CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。若选择的成员数量超过 16 人时，系统会自动提示 “人数超出最大限制16人” 并阻止发起通话。
+
+```Swift
+@IBAction func callAction(_ sender: Any) {
+        self.view.endEditing(true)
+        guard let input = inputField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !input.isEmpty else {
+            self.showCallToast(toast: "Please enter a valid username or group id")
+            return
+        }
+            CallKitManager.shared.groupCall(groupId: input)
+    }
+```    
 
 
 ### 步骤 7 离线推送
@@ -339,7 +374,7 @@ extension ViewController: CallUserProfileProvider {
 
 ### 声网 RTC 私有化部署
 
-如果使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置：// TODO：拷贝的 Android 的，是否可以？
+如果使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置：
 
 ```Swift
 //添加 CallKitListener 监听后实现下面方法，填写自己的ip地址以及域名
@@ -361,3 +396,5 @@ extension ViewController: CallUserProfileProvider {
 ![img](/images/ios/quickstart_error_solve.png)
 
 2. 如果 `pod install` 失败报错 RuntimeError **`PBXGroup` attempted to initialize an object with unknown ISA `PBXFileSystemSynchronizedRootGroup` from attributes: `{"isa"=>"PBXFileSystemSynchronizedRootGroup"`**，请尝试将 pod 版本升级为 1.14.3。Xcode 16 及其以下版本打开会报错 **Adjust the project format using a compatible version of Xcode to allow it to be opened by this version of Xcode.**。
+
+3. // TODO：添加 RTC/IM SDK Error Code 的链接，各端均加。

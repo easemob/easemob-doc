@@ -20,9 +20,11 @@
 
 ## 操作步骤
 
-// TODO：添加下载示例项目？
+// TODO：添加下载示例项目？有
 
+打开 Git 项目链接，下载 ZIP 包。
 
+https://github.com/easemob/easemob-callkit-iOS
 
 ### 步骤 2 设置 App Key
 
@@ -32,9 +34,9 @@
 let AppKey: String = <#AppKey#>
 ```
 
-### 步骤 3
+### 步骤 3 安装本地依赖
 
-在终端 cd 到 `podfile` 所在的文件目录，复制代理到终端，执行 `pod install` 命令，等待成功后点击运行即可。// TODO：这里的运行是个按钮？
+在终端使用 cd 命令到 `podfile` 所在的文件目录下，执行 `pod install` 命令，等待成功后点击 **运行**。
 
 ```
 pod install
@@ -44,13 +46,10 @@ pod install
 
 1. 登录：在登录界面输入用户 ID 和 [用户 Token](/product/console/operation_user.html#查看用户-token)，然后点击 **Login**。  
 2. 发起通话：
-   - 选择呼叫类型，输入呼叫用户的用户 ID，点击呼叫。
    - 一对一语音通话：选择 **audio**，输入呼叫用户的用户 ID，点击 **call**。
    - 一对一视频通话：选择 **video**，输入呼叫用户的用户 ID，点击 **call**。
    - 群组通话：选择 **group**，输入群组 ID，点击 **call**。
 
-// TODO：下面这两个是否需要？
-3. 在弹出的页面中授权必要权限（摄像头、麦克风、悬浮窗等）。
-4. 点击 **log** 退出登录。
+你可以点击 **log** 查看 CallKit 相关日志，搜索 `EaseCallUIKit` 过滤 CallKit 日志。
 
 ![img](/images/callkit/ios/example.png)

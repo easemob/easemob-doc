@@ -20,14 +20,46 @@
    
 ## 快速开始
 
-### 步骤 1 创建项目
+### 步骤 1 安装 CallKit
+
+你可以使用 CocoaPods 安装环信 CallKit 作为 Xcode 项目的依赖项。
+
+1. 在 `podfile` 中添加如下依赖：
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '14.0'
+
+target 'YourTarget' do
+  use_frameworks!
+
+  pod 'EaseCallUIKit'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
+  end
+end
+```
+
+2. 运行 cd 命令到终端下 `podfile` 所在文件夹目录执行以下命令：
+
+```
+pod install
+```
+
+### 步骤 2 创建项目
 
 参考以下步骤在 Xcode 中创建一个 iOS 平台下的 App，项目设置如下：
 
 - **Product Name** 设置为 **EaseCallUIKitQuickStart**。
 - **Organization Identifier** 设置为你的 **identifier**。
 - **User Interface** 选择 **Storyboard**。
-- **Language** 选择你的常用开发语言，推荐 `Swift&Main.storyboard`。 // TODO：是这样吗？
+- **Language** 选择你的常用开发语言，推荐 `Swift` 和 `Main.storyboard`。
 - 添加权限：在项目 `info.plist` 中添加权限：
 
 ```
@@ -41,8 +73,8 @@ Privacy - Camera Usage Description //相机权限
 你可以在应用程序加载时或使用前初始化 CallKit：
 1. 初始化 IM SDK。CallKit 基于即时通讯 IM 作为信令通道，因此需先初始化 IM SDK。
    - 填入你的应用的 App Key。
-   - 设置即时通讯 IM SDK 中的一些选项（`EMOptions` 类），例如，开启 Console 日志和是否自动登录。建议在正式环境中开启自动登录，可参考 [IM Demo 源码](https://github.com/easemob/easemob-demo-ios)。  // TODO：路径是否是这个？
-2. 初始化 CallKit。你可以自定义铃声和通话超时时间。 // TODO：是这样吗？
+   - 设置即时通讯 IM SDK 中的一些选项（`EMOptions` 类），例如，开启 Console 日志和是否自动登录。建议在正式环境中开启自动登录，可参考 [IM Demo 源码](https://github.com/easemob/easemob-demo-ios)。  
+2. 初始化 CallKit。
 
 在整个应用生命周期中，初始化一次即可。
 
@@ -81,9 +113,9 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
         }        
 ```
 
-### 步骤 4 粘贴代码后运行   // TODO：创建快速开始页面，还是实现代码逻辑？
+### 步骤 4 创建快速开始页面
 
-在项目的 `Main.storyboard` 中 `ViewController.swift` 中替换代码，然后点击 **运行** 。// TODO：运行是个按钮？
+在项目的 `Main.storyboard` 中 `ViewController.swift` 中替换代码，然后点击运行按钮。
 
 1. 右键点击项目中的 `Main.storyboard`，选择 **Open As** > **Source Code**，替换为如下代码：
    
@@ -333,12 +365,16 @@ extension ViewController: QLPreviewControllerDataSource {
 }
 ```
 
-### 步骤 5 发起首次通话  // TODO：没有这一步？
+### 发起通话
 
-在呼叫页面添加呼叫按钮和输入框：
-- 一对一音视频通话：输入对方用户 ID，点击呼叫按钮。
-- 群组通话：输入群组 ID，点击呼叫按钮。
+1. 登录：在登录界面输入用户 ID 和 [用户 Token](/product/console/operation_user.html#查看用户-token)，然后点击 **Login**。  
+2. 发起通话：
+   - 一对一语音通话：选择 **audio**，输入呼叫用户的用户 ID，点击 **call**。
+   - 一对一视频通话：选择 **video**，输入呼叫用户的用户 ID，点击 **call**。
+   - 群组通话：选择 **group**，输入群组 ID，点击 **call**。
 
-// TODO：截图
+你可以点击 **log** 查看 CallKit 相关日志，搜索 `EaseCallUIKit` 过滤 CallKit 日志。
+
+![img](/images/callkit/ios/example.png)
 
 

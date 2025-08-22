@@ -8,6 +8,6 @@
 
 若通话一方挂断二而一方没有反应，请联系技术支持获取日志检查是否有 `rtcEngine didOfflineOfUid:`。
 
-## 通话无声音/无画面 // TODO：或者关系？
+## 通话无声音/无画面
 
 如果通话无声音或无画面，请检查权限问题。iOS 15 及以上系统需要在 `Info.plist` 中添加`NSMicrophoneUsageDescription` 和 `NSCameraUsageDescription` 描述。若排除权限问题，请联系技术支持查询应用的音视频流状态。
