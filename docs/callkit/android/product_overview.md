@@ -12,7 +12,7 @@
 | :-------------- | :----- | 
 | 三位一体技术整合  | - 环信即时通讯 IM + 声网实时音视频 RTC + UI 组件深度整合 <br/> - 双平台服务一键开通，免除多系统对接成本  | 
 | 多重唤醒系统 | - Android/iOS 平台支持多样唤醒方式 <br/> - 离线推送、LiveCommunicationKit/Telecom   | 
-| 卓越通话品质    | - 声网全球网络：超过 99.99% 服务可用性 <br/> - 超低延时：低于 76ms 的端到端延迟 <br/> - 抗丢包技术：80% 丢包仍可流畅通话 | 
+| 高质量通话品质    | - 声网全球网络：超过 99.99% 服务可用性 <br/> - 超低延时：低于 76ms 的端到端延迟 <br/> - 抗丢包技术：80% 丢包仍可流畅通话 | 
 
 ## 功能
 
@@ -27,7 +27,8 @@
   <ImageItem src="/images/callkit/android/1v1_video_callee_invitation.png" title="被叫收到通话邀请" />
   <ImageItem src="/images/callkit/android/1v1_video_ongoing.png" title="通话中" />
   <ImageItem src="/images/callkit/android/1v1_video_float.png" title="悬浮窗" />
-  <ImageItem src="/images/callkit/android/1v1_video_notification.png" title="来电通知" />
+  <ImageItem src="/images/callkit/android/1v1_video_notification_inapp.png" title="应用内来电通知" />
+  <ImageItem src="/images/callkit/android/notification_system.png" title="系统级来电通知" />
 </ImageGallery>
 
 ### 一对一音频通话
@@ -37,7 +38,8 @@
   <ImageItem src="/images/callkit/android/1v1_voice_callee_invitation.png" title="被叫收到通话邀请" />
   <ImageItem src="/images/callkit/android/1v1_voice_ongoing.png" title="通话中" />
   <ImageItem src="/images/callkit/android/1v1_voice_float.png" title="悬浮窗" />
-  <ImageItem src="/images/callkit/android/1v1_voice_notification.png" title="来电通知" />
+  <ImageItem src="/images/callkit/android/1v1_voice_notification_inapp.png" title="应用内来电通知" />
+  <ImageItem src="/images/callkit/android/notification_system.png" title="系统级来电通知" />
 </ImageGallery>
 
 ### 群组通话
@@ -48,7 +50,7 @@
   <ImageItem src="/images/callkit/android/group_call_ongoing.png" title="通话中" />
   <ImageItem src="/images/callkit/android/group_call_float.png" title="悬浮窗" />
   <ImageItem src="/images/callkit/android/group_call_notification_inapp.png" title="应用内来电通知" />
-  <ImageItem src="/images/callkit/android/group_call_notification_system.png" title="系统来电通知" />
+  <ImageItem src="/images/callkit/android/notification_system.png" title="系统级来电通知" />
 </ImageGallery>
 
 ## 使用限制
