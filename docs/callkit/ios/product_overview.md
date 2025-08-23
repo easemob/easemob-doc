@@ -38,7 +38,7 @@
   <ImageItem src="/images/callkit/ios/1v1_voice_callee_invitation.png" title="被叫收到通话邀请" />
   <ImageItem src="/images/callkit/ios/1v1_voice_ongoing.png" title="通话中" />
   <ImageItem src="/images/callkit/ios/1v1_voice_float.png" title="悬浮窗" />
-  <ImageItem src="/images/callkit/ios/1v1_voice_notification_inapp.png" title="来电通知" />
+  <ImageItem src="/images/callkit/ios/1v1_voice_notification_inapp.png" title="应用内来电通知" />
   <ImageItem src="/images/callkit/ios/notification_system.png" title="系统级来电通知" />
 </ImageGallery>
 
