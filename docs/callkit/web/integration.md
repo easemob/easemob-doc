@@ -19,6 +19,7 @@ CallKit 是环信提供的一站式音视频通话解决方案，提供以下核
 - React: 18.0 及以上
 - TypeScript: 4.9 及以上
 - Vite: 4.0 及以上
+- IM SDK 4.16.0 及以上或 UIKit 2.0.0 及以上
 - 现代浏览器: Chrome/Firefox/Safari/Edge 最新版本
 
 ## 前提条件
@@ -242,129 +243,14 @@ export default App;
 
 ## 步骤 4 设置监听
 
-CallKit 组件可以设置回调事件，实现监听 Callkit 内部状态，和错误事件。
-
-// TODO：需要添加这么多代码？
+Callkit 组件可以设置回调事件，实现监听 Callkit 内部状态，和错误事件。
 
 ```tsx
 <CallKit
   ref={callKitRef} // CallKit 组件引用，用于调用组件方法
-  // === 基础配置 ===
-  className="custom-callkit" // 自定义 CSS 类名
-  style={{ zIndex: 9999 }} // 自定义样式
-  prefix="custom" // CSS 类名前缀
-  // === 通话核心配置 ===
-  chatClient={rootStore.client} // 环信 IM 客户端实例，必须传入
-  enableRealCall={true} // 是否启用真实通话功能，默认 true
-  // === 用户信息提供者 ===
-  userInfoProvider={userInfoProvider} // 用户信息提供者函数
-  groupInfoProvider={groupInfoProvider} // 群组信息提供者函数
-  // === 布局相关配置 ===
-  layoutMode={LayoutMode.MULTI_PARTY} // 布局模式：PREVIEW | ONE_TO_ONE | MULTI_PARTY
-  maxVideos={16} // 最大显示视频数量，默认无限制
-  aspectRatio={16 / 9} // 视频窗口宽高比，默认 1
-  gap={8} // 视频窗口间隙，默认 6px
-  backgroundImage="/path/to/bg.jpg" // 多人通话背景图片
-  // === 控制按钮配置 ===
-  showControls={true} // 是否显示控制按钮，默认 true
-  muted={false} // 初始静音状态，默认 false
-  cameraEnabled={true} // 初始摄像头状态，默认 true
-  speakerEnabled={true} // 初始扬声器状态，默认 true
-  screenSharing={false} // 初始屏幕共享状态，默认 false
-  // === 铃声配置 ===
-  enableRingtone={true} // 是否启用铃声，默认 true
-  outgoingRingtoneSrc="/sounds/outgoing.mp3" // 拨打电话铃声
-  incomingRingtoneSrc="/sounds/incoming.mp3" // 接听电话铃声
-  ringtoneVolume={0.8} // 铃声音量，范围 0-1，默认 0.8
-  ringtoneLoop={true} // 是否循环播放铃声，默认 true
-  // === 窗口大小和位置 ===
-  resizable={true} // 是否允许调整大小，默认 false
-  minWidth={400} // 最小宽度，默认 400px
-  minHeight={300} // 最小高度，默认 300px
-  maxWidth={1200} // 最大宽度，默认无限制
-  maxHeight={800} // 最大高度，默认无限制
-  draggable={true} // 是否允许拖拽，默认 false
-  dragHandle=".callkit-header" // 拖拽手柄 CSS 选择器
-  managedPosition={true} // 是否使用内置位置管理，默认 true
-  initialPosition={{ left: 100, top: 100 }} // 初始位置
-  initialSize={{ width: 748, height: 523 }} // 初始大小
-  // === 最小化配置 ===
-  isMinimized={false} // 初始最小化状态
-  minimizedSize={{ width: 80, height: 64 }} // 最小化时的尺寸
-  // === 邀请界面配置 ===
-  showInvitationAvatar={true} // 是否显示邀请者头像，默认 true
-  showInvitationTimer={true} // 是否显示倒计时，默认 true
-  autoRejectTime={30} // 自动拒绝时间（秒），默认 30
-  acceptText="接听" // 接听按钮文本
-  rejectText="拒绝" // 拒绝按钮文本
-  invitationCustomContent={<CustomInviteContent />} // 自定义邀请内容
-  // === 群组通话配置 ===
-  userSelectTitle="选择参与者" // 用户选择弹窗标题
-  groupMembers={groupMemberList} // 群组成员列表（可选）
-  webimGroupId="group123" // WebIM 群组 ID（可选）
-  // === 音量和网络 ===
-  speakingVolumeThreshold={60} // 说话指示器音量阈值，范围 1-100
-  // === 自定义图标 ===
-  customIcons={{
-    controls: {
-      micOn: <CustomMicOnIcon />,
-      micOff: <CustomMicOffIcon />,
-      cameraOn: <CustomCameraOnIcon />,
-      cameraOff: <CustomCameraOffIcon />,
-      hangup: <CustomHangupIcon />,
-    },
-    header: {
-      minimize: <CustomMinimizeIcon />,
-      addParticipant: <CustomAddIcon />,
-    },
-  }}
   // === 事件回调 ===
-  // 错误处理
-  onCallError={(error) => {
-    switch (error.errorType) {
-      case "callkit":
-        console.log("CallKit 组件错误", error);
-        break;
-      case "rtc":
-        console.log("RTC SDK 错误", error);
-        break;
-      case "chat":
-      default:
-        console.log("IM SDK 错误", error.message);
-    }
-  }}
-  // 通话状态回调
-  onReceivedCall={(callType, userId, ext) => {
-    console.log(`收到来自 ${userId} 的${callType}通话邀请`, ext);
-  }}
-  onCallStart={(videos) => {
-    console.log("通话开始", videos);
-  }}
-  onEndCallWithReason={(reason, callInfo) => {
-    console.log("通话结束", reason, callInfo);
-  }}
-  // 用户状态回调
-  onRemoteUserJoined={(userId, callType) => {
-    console.log(`用户 ${userId} 加入通话`);
-  }}
-  onRemoteUserLeft={(userId, callType) => {
-    console.log(`用户 ${userId} 离开通话`);
-  }}
-  // 界面操作回调
-  onMinimizedChange={(minimized) => {
-    console.log(`窗口${minimized ? "最小化" : "恢复"}`);
-  }}
-  onResize={(width, height) => {
-    console.log(`窗口大小调整: ${width}x${height}`);
-  }}
-  onDragEnd={(position) => {
-    console.log("拖拽结束", position);
-  }}
-  // RTC 引擎回调
-  onRtcEngineCreated={(rtc) => {
-    console.log("RTC 引擎创建成功", rtc);
-    // 可以在这里对 RTC 引擎进行自定义配置
-  }}
+  onCallError={(error) => {}}
+  onEndCallWithReason={(reason) => {}}
 />
 ```
 

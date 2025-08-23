@@ -10,6 +10,7 @@
 - TypeScript: 4.9 及以上
 - Vite: 4.0 及以上
 - 现代浏览器: Chrome/Firefox/Safari/Edge 最新版本
+- IM SDK 4.16.0 及以上或 UIKit 2.0.0 及以上
 
 ## 前提条件
 
@@ -78,7 +79,7 @@ interface ConnectionStatus {
   isConnected: boolean;
   status: string;
 }
-const appKey = "org#app"; // 修改成你自己的 App Key
+const appKey = "org#app"; // 修改成你自己的 appKey
 const App: React.FC = () => {
   // 登录相关状态
   const [userId, setUserId] = useState("");
@@ -570,7 +571,7 @@ h3 {
 
 ### 步骤 4 配置 App Key
 
-将代码中的 "org#app" 替换成你的应用的 App Key。 // TODO：上一步骤中添加说明就行？
+将代码中的 `org#app` 替换成你自己的 App Key。
 
 ### 步骤 5 发起首次通话
 
@@ -612,7 +613,7 @@ npm run dev
 运行应用前，你需要授权摄像头、麦克风、悬浮窗等权限。
 
 1. 在浏览器中访问 `http://localhost:5173`。
-2. 输入 App Key、用户 ID 和 accessToken，点击 **登录** 进行登录，登录成功后状态指示器会变绿。// TODO：要提 access token？
+2. 输入 App Key、用户 ID 和 accessToken，点击 **登录** 进行登录，登录成功后状态指示器会变绿。
 3. 在另一个浏览器标签页或设备上打开同样的页面，使用另一个账号登录。
 4. 在主叫浏览器或设备上输入被叫方的用户 ID，点击对应的通话按钮，即可发起音视频通话。
 
