@@ -8,7 +8,7 @@
 - Android Studio: 推荐最新版本
 - Kotlin: 2.0.21
 - JDK: 17
-- Gradle version: 8.13
+- Gradle 版本: 8.13
 
 ## 前提条件
 

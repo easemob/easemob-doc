@@ -1,12 +1,10 @@
 # 自定义 
 
-// TODO：在每个二级或三级标题下添加描述。
-
 ## 铃声
 
 CallKit 支持发起呼叫时的声音、接收呼叫时的声音以及被挂断时的声音。建议铃声文件格式为 MP3、WAV 等，铃声时长为 1-20 秒，文件大小不超过 1 MB。
 
-默认铃声策略（未设置时）如下：
+默认铃声策略如下：
   - 结束提示音（DING）：如未设置，则不播放提示音（保持静音）。
   - 异常降级：自定义铃声解码/播放异常时，非 DING 铃声会自动降级为系统铃声；DING 不降级。
   - 循环规则：非 DING 铃声循环播放，DING 只播放一次。
@@ -30,12 +28,11 @@ val config = CallKitConfig().apply {
 CallKitClient.init(context, config)
 ```
 
-
-
 //todo Android 工程师插入截图
 
 ## 通话超时设置
-Callkit内部呼出/呼入超时时间默认30秒，开发者可以通过以下代码实现自定义超时时间。
+
+CallKit 内部呼出/呼入超时时间默认 30 秒，开发者可以通过以下代码实现自定义超时时间。
 ```
 val config = CallKitConfig().apply {
     //（可选）配置通话超时时间（秒）
@@ -44,10 +41,9 @@ val config = CallKitConfig().apply {
 CallKitClient.init(context, config)
 ```
 
-
 ## 布局/样式
 
-开发者可以通过修改布局文件源码(`ease-cal1-kit/src/main/res/layout/`) 的方式或者在应用层添加一个同名的文件来实现自定义布局。注意修改后或者新的布局文件需要包含原有布局文件里的所有资源，否则运行时会报空指针异常。允许开发者添加新的资源控件、调整控件位置、背景等。
+开发者可以通过修改布局文件源码(`ease-call-kit/src/main/res/layout/`) 的方式或者在应用层添加一个同名的文件来实现自定义布局。注意修改后或者新的布局文件需要包含原有布局文件里的所有资源，否则运行时会报空指针异常。允许开发者添加新的资源控件、调整控件位置、背景等。
 
 | 资源 | 描述 |
 | :------------------- | :----- | 
@@ -58,17 +54,17 @@ CallKitClient.init(context, config)
 | `view_incoming_video_single.xml` / `view_incoming_voice_single.xml` | 来电界面（视频/语音）。 |
 | `view_outgoing_video_single.xml` / `view_outgoing_voice_single.xml` | 外呼界面（等待对方接听）。 |
 | `view_connected_video_single.xml` / `view_connected_voice_single.xml` | 通话中界面（视频/语音）。 |
-| `view_incoming_multiple.xml` / `view_connected_multiple.xml` | 多人通话来电/通话中视图。 |
+| `view_incoming_multiple.xml` / `view_connected_multiple.xml` | 群组通话来电/通话中视图。 |
 | `view_call_member.xml` / `view_multi_video_call_member.xml` | 成员头像、昵称、音量/状态指示项。 |
 | `callkit_float_window_video.xml` / `callkit_float_window_voice.xml` | 后台悬浮窗视图（视频小窗/语音小窗）。 |
 | `callkit_incomimg_call_top_window.xml` | 顶部来电条（可滑动收起/接听/挂断）。 |
-| `callkit_fragment_base_list.xml` | 通用列表容器（内含RecyclerView/刷新容器）。 |
+| `callkit_fragment_base_list.xml` | 通用列表容器（内含 RecyclerView/刷新容器）。 |
 | `callkit_layout_default_no_data.xml` / `callkit_layout_no_data_show_nothing.xml` | 无数据/空占位视图。 |
 | `callkit_layout_group_member_select_item.xml` | 群成员选择单元项（头像/昵称/选中态）。 |
 
 ## 图标与图形资源
 
-- 开发者可直接在源码中使用同名文件替换，或者在应用层对应的 `res/drawable*` 添加一个同名文件,即可实现资源文件的替换。
+开发者可直接在源码中使用同名文件替换，或者在应用层对应的 `res/drawable*` 添加一个同名文件,即可实现资源文件的替换。
   
 ### 功能图标
 
@@ -113,17 +109,21 @@ CallKitClient.init(context, config)
 
 | 资源                | 描述   | 
 | :------------------- | :----- | 
-| `callkit_checkbox_select.png` / `callkit_checkbox_unselect.png` / `callkit_checkbox_available.png`  | 选中/未选中/可选择状态   | 
+| `callkit_checkbox_select.png` / `callkit_checkbox_unselect.png` / `callkit_checkbox_available.png`  | 选中/未选中/可选择状态。   | 
 
-### 背景资源（drawable-xxxhdpi/）
+### 背景资源
+
+背景资源存放在 `drawable-xxxhdpi` 中。
 
 | 资源                | 描述   | 
 | :------------------- | :----- | 
 | `callkit_view_background.webp` | 通话界面背景。  | 
 | `callkit_empty_layout.png` | 空状态占位图。  | 
 
-## 文案资源（`res/values/callkit_strings.xml`）
-- 开发者可直接修改`callkit_strings.xml`内资源的定义源码，或者在应用层的`res/values/strings.xml`文件中添加相同资源ID的文案资源实现文案的替换
+## 文案资源
+
+开发者可直接修改 `res/values/callkit_strings.xml` 内资源的定义源码，或者在应用层的 `res/values/strings.xml` 文件中添加相同资源 ID 的文案资源实现文案的替换。
+
 ### 基础状态
 
 | 资源                | 描述   | 
@@ -136,7 +136,7 @@ CallKitClient.init(context, config)
   
 | 资源                | 描述   | 
 | :------------------- | :----- | 
-|`alert_request_video` / `alert_request_voice` / `alert_request_multiple_video`  | 视频/语音/群组视频通话邀请提示（支持用户名参数 %1$s）。 // TODO：前两个是一对一？ | 
+|`alert_request_video` / `alert_request_voice` / `alert_request_multiple_video`  | 一对一视频/一对一语音/群组视频通话邀请提示（支持用户名参数 %1$s）。| 
 
 ### 通话操作
 
@@ -145,7 +145,7 @@ CallKitClient.init(context, config)
 | `callkit_accept` / `callkit_decline` | 接听/挂断。  | 
 | `callkit_end` | 结束通话。  | 
   
-### 功能控制（支持换行显示）
+### 功能控制
 
 | 资源                | 描述   | 
 | :------------------- | :----- | 
@@ -178,16 +178,19 @@ CallKitClient.init(context, config)
 
 | 资源                | 描述   | 
 | :------------------- | :----- | 
-| `The_other_is_recived` / `callkit_handle_on_other_device` | 其他设备已接听。    | 
+| `The_other_is_received` / `callkit_handle_on_other_device` | 其他设备已接听。    | 
 | `The_other_is_refused` / `callkit_refused_on_other_device`             | 其他设备已拒绝/结束通话。   | 
 | `The_other_is_busy`             | 对方忙线中。   | 
   
-### 多语言支持（`res/values-zh/callkit_strings.xml`）
+### 多语言支持
 
-    - 完整的中文本地化支持，所有英文文案均有对应的中文翻译
-    - 主要差异：
-      - 英文：`Mike\non` → 中文：`麦克风\n已开`
-      - 英文：`Speaker\noff` → 中文：`扬声器\n已关`
-      - 英文：`Remote Refused` → 中文：`对方拒绝接听`
-      - 英文：`Call Duration %1$s` → 中文：`通话时长 %1$s`
-  - 支持参数化文案，保持与英文版本相同的 `%1$s`、`%1$d` 占位符格式 
+CallKit 提供完整的中文本地化支持，所有英文文案均有对应的中文翻译。
+
+中文和英文文案路径为 `res/values-zh/callkit_strings.xml`，主要差异如下：
+
+| 英文                | 中文   | 
+| :------------------- | :----- | 
+| `Mike on`    | `麦克风已开`   | 
+| `Speaker off`   | `扬声器已关`   | 
+| `Remote Refused` | `对方拒绝接听`   | 
+| `Call Duration %1$s`  | `通话时长 %1$s`   | 

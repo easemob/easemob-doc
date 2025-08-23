@@ -9,13 +9,11 @@
 | 配置项 | 描述 |
 | :------------------- | :----- | 
 | `avatarRadius` | 修改头像圆角。 |
-| `avatarRadius` | 修改头像占位图。 |
+| `avatarPlaceHolder` | 修改头像占位图。 |
 | `resourceBundle` | 整体替换资源 bundle。 |
 | `backgroundImage` | 替换呼叫背景图。  |
 
 ## 修改原有资源
-
-// TODO：图放在这里合适？
 
 CallKit 的资源均放在 `CallResource.bundle` 文件中。
 
@@ -26,10 +24,10 @@ CallKit 的资源均放在 `CallResource.bundle` 文件中。
 | 资源 | 描述 |
 | :------------------- | :----- |
 | 导航资源 | 导航相关图标，例如 back 和 boxes。|
-| 背景图片 | 通话背景图等。 |
-| 被叫弹窗 | phone_hang_mini.png、phone_pick_mini.png。 |
-| 呼叫页面图标 | phone_hang、phone_pick、speaker_on、speaker_off、camera_on、camera_off、mic_on、mic_off。 |
-| 其他资源 | person_add、network相关、语音音量相关图标等。 |
+| 背景图片 | 通话背景图 bg.png 等。 |
+| 被叫弹窗 | 例如，phone_hang_mini.png、phone_pick_mini.png。 |
+| 呼叫页面图标 | 例如，phone_hang、phone_pick、speaker_on、speaker_off、camera_on、camera_off、mic_on、mic_off、flip_front、flip_back 等。 |
+| 其他资源 | 例如，person_add.png、网络相关 network_xxx.png、speaking.png 讲话中相关图标等。 |
 
 - 音频资源
   
@@ -43,8 +41,7 @@ CallKit 的资源均放在 `CallResource.bundle` 文件中。
 | :------------------- | :----- |
 | 国际化语言 | en：英文；zh-Hans：简体中文 |
 
-
-## 3.修改业务可配置项
+## 修改业务可配置项
 
 你可以修改以下业务可配项：
 
@@ -54,9 +51,9 @@ CallKit 的资源均放在 `CallResource.bundle` 文件中。
 
 ```Swift
         let config = EaseCallUIKit.CallKitConfig()
-        config.enableVOIP = true //开启voip功能后会自动开启LiveCommunicationKit，需要在develop.apple.com申请证书时勾选
+        config.enableVOIP = true //开启 VoIP 功能后会自动开启 LiveCommunicationKit，需要在 develop.apple.com 申请证书时勾选。
         config.enablePIPOn1V1VideoScene = true //开启画中画，同时需要开启应用后台摄像头采集权限。
-        config.ringTimeOut = 30//默认呼叫超时时间
+        config.ringTimeOut = 30//默认呼叫超时时间。
         CallKitManager.shared.setup(config)
 ```
 

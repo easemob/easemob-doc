@@ -6,8 +6,8 @@
 
 ## 推荐环境
 
-- iOS 17.4 及更高版本
-- Swift 5.0 及更高版本
+- iOS 17.4 或以上版本
+- Swift 5.0 或以上版本
 - 必需框架:
   - Foundation
   - PushKit
@@ -60,17 +60,15 @@
  - 通话超时处理。 
 
 ## 通话流程
-// TODO：三级标题需要作图
+
 ### 1. 来电流程
 
-// TODO:流程图+界面图
-
-1. 接收 VoIP 推送通知
-2. 解析推送载荷提取通话信息
-3. 创建 ConversationManager（如不存在）
-4. 生成或使用现有呼叫 UUID
-5. 报告新的来电会话
-6. 更新 CallKitManager 状态
+1. 接收 VoIP 推送通知。
+2. 解析推送载荷提取通话信息。
+3. 创建 `ConversationManager`（如不存在）。
+4. 生成或使用现有呼叫 UUID。
+5. 报告新的来电会话。
+6. 更新 `CallKitManager` 状态。
 
 推送通知载荷应包含以下字段：
 
@@ -86,29 +84,35 @@
 }
 ```
 
+来电流程如下图所示：
+
 ![img](/images/callkit/ios/incoming_call_flowchart.png)
 
-![img](/images/callkit/ios/incoming_call_flow.png)
+来电界面如下图所示：
+
+<ImageGallery>
+  <ImageItem src="/images/callkit/ios/incoming_call_flow.png" title="来电流程" />
+</ImageGallery>
 
 ### 2. 接听流程
 
-1. 用户点击接听
-2. 执行 `JoinConversationAction`
-3. 调用 CallKitManager.accept()
-4. 显示连接中提示
+1. 用户点击接听。
+2. 执行 `JoinConversationAction`。
+3. 调用 `CallKitManager.accept()`。
+4. 显示连接中提示。
 
 ### 3. 挂断流程
 
-1. 用户点击挂断
-2. 执行 `EndConversationAction`
-3. 调用 CallKitManager.hangup()
-4. 清理会话资源
+1. 用户点击挂断。
+2. 执行 `EndConversationAction`。
+3. 调用 `CallKitManager.hangup()`。
+4. 清理会话资源。
 
 ### 4. 静音操作
 
-1. 用户切换静音状态
-2. 执行 `MuteConversationAction`
-3. 更新本地音频状态
+1. 用户切换静音状态。
+2. 执行 `MuteConversationAction`。
+3. 更新本地音频状态。
 
 ## 错误处理
 

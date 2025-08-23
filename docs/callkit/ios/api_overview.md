@@ -8,16 +8,16 @@
 | 方法 | 说明 | 参数 |
 | :--------- | :----- | :---------- |
 | `setup(_ config)` | 初始化 CallKit | - `config`: 配置对象 |
-| `call(userId, type, extensionInfo)` | 发起一对一通话 | - `type`: 通话类型<br/> - `userId`: 对方用户 ID<br/> - `extensionInfo`: 扩展信息(可选) |
-| `groupCall(groupId, extensionInfo)` | 发起群组通话 | - `groupId`: 群组 ID<br/> - `extensionInfo`: 扩展信息（可选） |
+| `call(userId, type, extensionInfo)` | 发起一对一通话 | - `type`: 通话类型<br/> - `userId`: 对方用户 ID<br/> - （可选）`extensionInfo`: 扩展信息 |
+| `groupCall(groupId, extensionInfo)` | 发起群组通话 | - `groupId`: 群组 ID<br/> - （可选）`extensionInfo`: 扩展信息 |
 | `hangup()` | 结束通话 | 用户调用即可内部会自行根据状态判断 |
 | `CallKitManager.shared.usersCache` | 缓存属性可读可写 | 无 |
-| `cleanUserDefaults()` | 清理持久化资源token、rtc uid等 | 无 |
-| `tearDown()` | 销毁CallKit释放所有资源 | 无 |
+| `cleanUserDefaults()` | 清理持久化资源，例如 Token 和 RTC UID 等 | 无 |
+| `tearDown()` | 销毁 CallKit 释放所有资源 | 无 |
 | `CallKitManager.shared.currentUserInfo` | 当前用户信息、可读写 | 无 |
 | `CallKitManager.shared.callInfo` | 当前通话信息、可读写 | 无 |
 | `CallKitManager.shared.profileProvider = self` | 信息提供代理 | 无 |
-| `CallKitManager.shared.addListener(self)` | 监听器 | - listener: `CallServiceListener` 实现了 `CallServiceListener` 的对象|
+| `CallKitManager.shared.addListener(self)` | 监听器 | `listener`: `CallServiceListener` 实现了 `CallServiceListener` 的对象|
 
 ## 通话类型
 
@@ -65,15 +65,14 @@
 
 ### 通话错误类型
 
-// TODO：这是 Android 的，替换为 iOS 的：
-
-`CallErrorType` 类中提供三类通话错误类型：
+`CallErrorModule` 类中提供三类通话错误类型：
 
 | 通话错误类型 | 描述 |
 | :--------- | :----- |
-| `BUSINESS_ERROR`  | 业务逻辑异常。 |
-| `RTC_ERROR`  | 音视频异常，详见 [声网 RTC 错误码](https://doc.shengwang.cn/doc/rtc/ios/error-code)。 |
-| `IM_ERROR`  | 即时通讯 IM 异常，详见 [环信即时通讯 IM 错误码](/document/ios/error.html)  |
+| `business`  | 业务逻辑异常。 |
+| `rtc`  | 音视频异常，详见 [声网 RTC 错误码](https://doc.shengwang.cn/doc/rtc/ios/error-code)。 |
+| `im`  | 即时通讯 IM 异常，详见 [环信即时通讯 IM 错误码](/document/ios/error.html)  |
+| `unknown`  | 未知错误。 |
 
 ### 业务错误类型
 

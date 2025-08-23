@@ -117,7 +117,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 
 1. 右键点击项目中的 `Main.storyboard`，选择 **Open As** > **Source Code**，替换为如下代码：
    
-```xml
+``` XML
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
@@ -131,7 +131,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="EaseCallUIKitQuickStart" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="EaseCallUIKitQuickStart"customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -161,27 +161,8 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
                                     <action selector="callAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="21A-e9-7bB"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="login user id" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hM6-uK-yyP">
-                                <rect key="frame" x="139" y="316" width="97" height="34"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="L6Z-yu-oNG"/>
-                                    <constraint firstAttribute="width" constant="97" id="mfC-xf-iFf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="token" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9QV-P8-MOd">
-                                <rect key="frame" x="155.5" y="377" width="64" height="34"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="bLn-UW-UNZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1TW-7c-QOv">
-                                <rect key="frame" x="154.5" y="438" width="66" height="35"/>
+                                <rect key="frame" x="154" y="316" width="66" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="X5z-2c-9KQ"/>
                                 </constraints>
@@ -189,18 +170,6 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
                                 <buttonConfiguration key="configuration" style="filled" title="Login"/>
                                 <connections>
                                     <action selector="loginAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="D5E-pO-2Jw"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Qd-2k-2aV">
-                                <rect key="frame" x="161" y="497" width="53" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="fuc-9c-KcU"/>
-                                    <constraint firstAttribute="width" constant="53" id="u4m-wu-cwy"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Log"/>
-                                <connections>
-                                    <action selector="logAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="QkB-ye-mNH"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="KgU-kb-zgq">
@@ -219,6 +188,18 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
                                     <action selector="chooseCallType:" destination="vXZ-lx-hvc" eventType="valueChanged" id="faD-YP-JKc"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Qd-2k-2aV">
+                                <rect key="frame" x="161" y="370" width="53" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="fuc-9c-KcU"/>
+                                    <constraint firstAttribute="width" constant="53" id="u4m-wu-cwy"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Log"/>
+                                <connections>
+                                    <action selector="logAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="QkB-ye-mNH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -226,16 +207,12 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
                             <constraint firstItem="zid-qi-Z7H" firstAttribute="top" secondItem="laE-OW-CWK" secondAttribute="bottom" constant="23" id="3d9-xN-rVV"/>
                             <constraint firstItem="KgU-kb-zgq" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="109" id="3iR-bE-dsH"/>
                             <constraint firstItem="1TW-7c-QOv" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="7qi-nX-Ep7"/>
-                            <constraint firstItem="hM6-uK-yyP" firstAttribute="top" secondItem="zid-qi-Z7H" secondAttribute="bottom" constant="27" id="Fbk-dr-XJy"/>
-                            <constraint firstItem="9QV-P8-MOd" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="NLK-X7-nmU"/>
                             <constraint firstItem="KgU-kb-zgq" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="PaT-sj-EOF"/>
                             <constraint firstItem="0Qd-2k-2aV" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Ptx-cV-DpW"/>
-                            <constraint firstItem="1TW-7c-QOv" firstAttribute="top" secondItem="9QV-P8-MOd" secondAttribute="bottom" constant="27" id="Vde-Gf-T6Q"/>
                             <constraint firstItem="laE-OW-CWK" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ZDm-c5-ZIK"/>
-                            <constraint firstItem="9QV-P8-MOd" firstAttribute="top" secondItem="hM6-uK-yyP" secondAttribute="bottom" constant="27" id="hag-4S-Gef"/>
-                            <constraint firstItem="0Qd-2k-2aV" firstAttribute="top" secondItem="1TW-7c-QOv" secondAttribute="bottom" constant="24" id="r8t-en-w10"/>
+                            <constraint firstItem="1TW-7c-QOv" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="a05-e3-vQV"/>
+                            <constraint firstItem="0Qd-2k-2aV" firstAttribute="top" secondItem="1TW-7c-QOv" secondAttribute="bottom" constant="19" id="r8t-en-w10"/>
                             <constraint firstItem="laE-OW-CWK" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="171" id="vBn-aQ-3Q3"/>
-                            <constraint firstItem="hM6-uK-yyP" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ztk-Cf-e76"/>
                         </constraints>
                     </view>
                     <connections>
@@ -244,8 +221,6 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
                         <outlet property="inputField" destination="laE-OW-CWK" id="jPc-mR-gs4"/>
                         <outlet property="logButton" destination="0Qd-2k-2aV" id="7P1-p7-nd8"/>
                         <outlet property="loginButton" destination="1TW-7c-QOv" id="xVW-DO-dD2"/>
-                        <outlet property="tokenField" destination="9QV-P8-MOd" id="rAN-5C-qu0"/>
-                        <outlet property="userIdField" destination="hM6-uK-yyP" id="zV0-uW-JWD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -255,13 +230,14 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
     </scenes>
     <resources>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
+
 ```
 
 2. 在项目中的 `ViewController.swift`，替换为如下代码：
@@ -278,9 +254,6 @@ class ViewController: UIViewController {
     @IBOutlet var inputField: UITextField!
         
     @IBOutlet var callButton: UIButton!
-    
-    @IBOutlet weak var userIdField: UITextField!
-    @IBOutlet weak var tokenField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var callTypeSegment: UISegmentedControl!
     @IBOutlet weak var logButton: UIButton!
@@ -289,11 +262,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-//        CallKitManager.shared.currentUserInfo = CallUserProfile()
         self.callTypeSegment.selectedSegmentIndex = 0
         self.callTypeSegment.selectedSegmentTintColor = .systemBlue
-        CallKitManager.shared.profileProvider = self
-        CallKitManager.shared.addListener(self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -311,19 +281,19 @@ class ViewController: UIViewController {
     
     @IBAction func loginAction(_ sender: Any) {
         self.view.endEditing(true)
-        guard let userId = userIdField.text, !userId.isEmpty,
-              let token = tokenField.text, !token.isEmpty else {
-            self.showCallToast(toast: "Please enter a valid username and token")
-            return
-        }
         
         ChatClient.shared().login(withUsername: userId, token: token) { [weak self] userId,error  in
             if let error = error {
                 self?.showCallToast(toast: "Login failed: \(error.errorDescription ?? "")")
             } else {
                 self?.showCallToast(toast: "Login successful")
-                self?.userIdField.isHidden = true
-                self?.tokenField.isHidden = true
+                if !userId.isEmpty {
+                    let profile = CallUserProfile()
+                    profile.id = userId
+                    profile.avatarURL = "https://xxxxx"
+                    profile.nickname = "\(userId)昵称"
+                    CallKitManager.shared.currentUserInfo = profile
+                }
                 self?.loginButton.isHidden = true 
             }
         }

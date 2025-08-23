@@ -8,7 +8,7 @@
 - Android Studio: 推荐最新版本
 - Kotlin: 2.0.21
 - JDK: 17
-- Gradle：gradle-8.9-bin.zip
+- Gradle 版本：8.9
 
 ## 前提条件
 

@@ -18,7 +18,7 @@
 2. 摄像头后台权限。
    
 - 默认不允许后台访问摄像头。
-- 对于VoIP 应用，在 **Background Modes** 中勾选 **Voice over IP (VoIP)**，支持 LiveCommunicationKit。若不勾选，采用厂商默认系统推送。
+- 对于 VoIP 应用，在 **Background Modes** 中勾选 **Voice over IP (VoIP)**，支持 LiveCommunicationKit。若不勾选，采用厂商默认系统推送。
 - 若应用需要后台采集视频流，需要申请多任务相机访问权限（Multitasking Camera Access Entitlement）。iOS 系统版本对多任务相机访问权限的支持详见 [苹果官方文档](https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.avfoundation.multitasking-camera-access)。
 
 ![img](/images/callkit/ios/backgroundCameraAccess.png)
@@ -27,15 +27,18 @@
 
 对于一对一视频通话 PiP，进入 PiP 时，切换到悬浮窗；退出 PiP 时，恢复通话页面全屏 UI，重新加载视频流，恢复交互控件。
 
-// TODO：流程图+UI示意图
-
 核心架构如下图所示：
 
-```
-通话界面 → PiP 触发 → 视频流迁移 → 悬浮窗显示
-    ↓         ↓           ↓            ↓
-全屏模式   用户操作   保持 RTC 连接   最小化 UI
-```
+<ImageGallery>
+  <ImageItem src="/images/callkit/ios/1v1_call_pip_flow.png" title="PiP 交互示例图" />
+</ImageGallery>
+
+UI 示意图如下所示：
+
+<ImageGallery>
+  <ImageItem src="/images/callkit/ios/1v1_video_call.png" title="视频通话" />
+  <ImageItem src="/images/callkit/ios/1v1_call_pip.png" title="视频通话悬浮窗" />
+</ImageGallery>
 
 ## 群组视频通话 PiP 实现方案
 
@@ -60,18 +63,11 @@ N 个参与者   主讲人模式  悬浮显示   焦点管理
 
 ### PiP 交互
 
-// TODO：流程图+UI示意图
+下图为群组通话中的 PiP 交互示例。在该例中，PiP 窗口中显示主讲人、主讲人画面、群组通话人数以及相关操作按钮。你可以根据自己的业务决定 PiP 窗口采用主讲人模式或者多人模式。
 
-```
-PiP 窗口控制：
-┌─────────────────────┐
-│  [静音] [视频] [切换]│  <- 悬浮控制栏
-│                     │
-│   主讲人视频画面     │  <- 智能选择显示
-│                     │
-│  参与者：12人 🔊张三 │  <- 状态指示器
-└─────────────────────┘
-```
+<ImageGallery>
+  <ImageItem src="/images/callkit/ios/group_call_pip_interaction.png" title="PiP 交互示例图" />
+</ImageGallery>
 
 ### 显示模式
 
@@ -117,8 +113,6 @@ func setupGridLayout(streams: [VideoStream]) {
 
 ### 视频渲染优化
 
-// TODO：这样描述对吗？
-
 对于群组通话 PiP 视频渲染，需在 `PixelBufferRenderView.swift` 中查找以下两个回调：
 
 - `onCapture`：获取本地设备采集到的视频数据。
@@ -133,7 +127,7 @@ func setupGridLayout(streams: [VideoStream]) {
 
 ### 群组成员状态同步
 
-若从 [视频渲染优化](#视频渲染优化) 一节中的 `onCaptureVideoFrame` 和 `onRenderVideoFrame:uid:channelId:` 回调中判断 `callInfo` 中的 `type` 为群组，可结合音频回调 `reportAudioVolumeIndicationOfSpeakers` 进行主讲人渲染。
+若从 [视频渲染优化](#视频渲染优化) 一节中的 `onCapture` 和 `onRenderVideoFrame:uid:channelId:` 回调中判断 `callInfo` 中的 `type` 为群组，可结合音频回调 `reportAudioVolumeIndicationOfSpeakers` 进行主讲人渲染。
 
 ### PiP 性能优化
 
