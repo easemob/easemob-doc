@@ -1,6 +1,6 @@
 # 产品介绍
 
-环信音视频通话 CallKit 是基于环信即时通讯 IM 和声网实时音视频 RTC 深度整合开发的实时音视频通话框架，实现了一对一及群组音视频通话功能。开发者只需简单集成，即可快速获得稳定流畅的高品质音视频通话能力。
+环信音视频通话 CallKit 是基于环信即时通讯 IM 和声网实时音视频 RTC 深度整合开发的实时音视频通话框架，实现了一对一及群组音视频通话功能。开发者只需简单集成，即可快速获得稳定流畅的高品质音视频通话能力。环信音视频通话 CallKit 可用于在线互动课堂、视频客服中心、远程会诊系统或视频相亲等场景。
 
 ## 基础架构
 
@@ -20,13 +20,36 @@
 | :-------------- | :----- | :------- |
 | - 一对一语音/视频通话 <br/>- 群组语音/视频通话（16 人及以下）：通话中邀请他人 <br/> - 自定义铃声：支持主叫、被叫、挂断、超时铃声 <br/> - 自定义 UI 界面 | - 高画质/高音质音视频  <br/> - 离线推送<br/> - 通话质量检测<br/> - 全球互通<br/> - 弱网卡顿优化<br/> - 视频降噪| - 高质量音视频通话 <br/> - 完善的 UI 交互 <br/> - 支持多平台互联互通<br/> - 离线推送稳定且多样化   |
 
-## 应用场景
+### 一对一视频通话
 
-- 娱乐社交：语聊房/视频相亲
-- 在线会议：跨地域会议系统
-- 在线教育：在线互动课堂
-- 在线客服：视频客服中心
-- 智慧医疗：远程会诊系统
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/1v1_video_caller_invitation.png" title="主叫发起通话邀请" />
+  <ImageItem src="/images/callkit/android/1v1_video_callee_invitation.png" title="被叫收到通话邀请" />
+  <ImageItem src="/images/callkit/android/1v1_video_ongoing.png" title="通话中" />
+  <ImageItem src="/images/callkit/android/1v1_video_float.png" title="悬浮窗" />
+  <ImageItem src="/images/callkit/android/1v1_video_notification.png" title="来电通知" />
+</ImageGallery>
+
+### 一对一音频通话
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/1v1_voice_caller_invitation.png" title="主叫发起通话邀请" />
+  <ImageItem src="/images/callkit/android/1v1_voice_callee_invitation.png" title="被叫收到通话邀请" />
+  <ImageItem src="/images/callkit/android/1v1_voice_ongoing.png" title="通话中" />
+  <ImageItem src="/images/callkit/android/1v1_voice_float.png" title="悬浮窗" />
+  <ImageItem src="/images/callkit/android/1v1_voice_notification.png" title="来电通知" />
+</ImageGallery>
+
+### 群组通话
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/group_call_caller_user_selection.png" title="主叫选择用户进入通话" />
+  <ImageItem src="/images/callkit/android/group_call_callee_invitation.png" title="被叫收到通话邀请" />
+  <ImageItem src="/images/callkit/android/group_call_ongoing.png" title="通话中" />
+  <ImageItem src="/images/callkit/android/group_call_float.png" title="悬浮窗" />
+  <ImageItem src="/images/callkit/android/group_call_notification_inapp.png" title="应用内来电通知" />
+  <ImageItem src="/images/callkit/android/group_call_notification_system.png" title="系统来电通知" />
+</ImageGallery>
 
 ## 使用限制
 
