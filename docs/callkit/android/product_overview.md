@@ -4,7 +4,7 @@
 
 ## 基础架构
 
- // 赵老师提供
+![img](/images/callkit/android/callkit_architecture.png)
 
 ## CallKit 优势
 
@@ -20,7 +20,11 @@
 | :-------------- | :----- | :------- |
 | - 一对一语音/视频通话 <br/>- 群组语音/视频通话（16 人及以下）：通话中邀请他人 <br/> - 自定义铃声：支持主叫、被叫、挂断、超时铃声 <br/> - 自定义 UI 界面 | - 高画质/高音质音视频  <br/> - 离线推送<br/> - 通话质量检测<br/> - 全球互通<br/> - 弱网卡顿优化<br/> - 视频降噪| - 高质量音视频通话 <br/> - 完善的 UI 交互 <br/> - 支持多平台互联互通<br/> - 离线推送稳定且多样化   |
 
+## 界面效果展示
+
 ### 一对一视频通话
+
+// TODO：图的顺序是否合适？
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/callkit/android/1v1_video_caller_invitation.png" title="主叫发起通话邀请" />

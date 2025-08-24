@@ -51,15 +51,15 @@ CallKitClient.init(context, config)
 | `activity_multi_video_call.xml` | 多人通话根布局容器，含成员网格/工具栏等。 |
 | `activity_invite_group_members.xml` | 群成员邀请页面。 |
 | `callkit_titlebar_view.xml` | 通话页通用标题栏组件（返回、标题、右侧操作）。 |
-| `view_incoming_video_single.xml` / `view_incoming_voice_single.xml` | 来电界面（视频/语音）。 |
-| `view_outgoing_video_single.xml` / `view_outgoing_voice_single.xml` | 外呼界面（等待对方接听）。 |
-| `view_connected_video_single.xml` / `view_connected_voice_single.xml` | 通话中界面（视频/语音）。 |
-| `view_incoming_multiple.xml` / `view_connected_multiple.xml` | 群组通话来电/通话中视图。 |
-| `view_call_member.xml` / `view_multi_video_call_member.xml` | 成员头像、昵称、音量/状态指示项。 |
-| `callkit_float_window_video.xml` / `callkit_float_window_voice.xml` | 后台悬浮窗视图（视频小窗/语音小窗）。 |
+| `view_incoming_video_single.xml` <br/> `view_incoming_voice_single.xml` | 来电界面（视频/语音）。 |
+| `view_outgoing_video_single.xml` <br/>`view_outgoing_voice_single.xml` | 外呼界面（等待对方接听）。 |
+| `view_connected_video_single.xml` <br/> `view_connected_voice_single.xml` | 通话中界面（视频/语音）。 |
+| `view_incoming_multiple.xml` <br/> `view_connected_multiple.xml` | 群组通话来电/通话中视图。 |
+| `view_call_member.xml` <br/> `view_multi_video_call_member.xml` | 成员头像、昵称、音量/状态指示项。 |
+| `callkit_float_window_video.xml` <br/> `callkit_float_window_voice.xml` | 后台悬浮窗视图（视频小窗/语音小窗）。 |
 | `callkit_incomimg_call_top_window.xml` | 顶部来电条（可滑动收起/接听/挂断）。 |
 | `callkit_fragment_base_list.xml` | 通用列表容器（内含 RecyclerView/刷新容器）。 |
-| `callkit_layout_default_no_data.xml` / `callkit_layout_no_data_show_nothing.xml` | 无数据/空占位视图。 |
+| `callkit_layout_default_no_data.xml` <br/> `callkit_layout_no_data_show_nothing.xml` | 无数据/空占位视图。 |
 | `callkit_layout_group_member_select_item.xml` | 群成员选择单元项（头像/昵称/选中态）。 |
 
 ## 图标与图形资源
@@ -73,7 +73,7 @@ CallKitClient.init(context, config)
 | 资源                | 描述   | 
 | :------------------- | :----- | 
 | `callkit_end.png` | 挂断按钮。  | 
-| `callkit_accept_tel.png` / `callkit_accept_video_camera.png` | 接听按钮（语音/视频）。 | 
+| `callkit_accept_tel.png`<br/>`callkit_accept_video_camera.png` | 接听按钮（语音/视频）。 | 
 | `callkit_decline.png`             | 拒绝按钮。   | 
 | `callkit_phone_pick.png`             | 电话接听图标。  | 
 
@@ -81,18 +81,18 @@ CallKitClient.init(context, config)
 
 | 资源                | 描述   | 
 | :------------------- | :----- | 
-| `callkit_mic_on.png` / `callkit_mic_off.png` | 麦克风开启/关闭。  | 
+| `callkit_mic_on.png`<br/>`callkit_mic_off.png` | 麦克风开启/关闭。  | 
 | `callkit_mic_off_small.png`              | 小尺寸麦克风关闭图标。   | 
-| `callkit_speaker_on.png` / `callkit_speaker_off.png` | 扬声器开启/关闭。   | 
+| `callkit_speaker_on.png`<br/>`callkit_speaker_off.png` | 扬声器开启/关闭。   | 
 | `callkit_speaker_wave.png`              | 扬声器音波图标。   | 
-| `callkit_video_camera_on.png` / `callkit_video_camera_off.png`              | 摄像头开启/关闭。   | 
-| `callkit_camera_front.png` / `callkit_camera_back.png`              | 前置/后置摄像头切换。   | 
+| `callkit_video_camera_on.png` <br/>`callkit_video_camera_off.png`              | 摄像头开启/关闭。   | 
+| `callkit_camera_front.png`<br/>`callkit_camera_back.png`              | 前置/后置摄像头切换。   | 
 
 #### 网络质量指示
 
 | 资源                | 描述   | 
 | :------------------- | :----- | 
-| `callkit_network_good.png` / `callkit_network_poor.png` / `callkit_network_worse.png` / `callkit_network_none.png`    | 网络质量指示器（优秀/一般/差/无网络）。  | 
+| `callkit_network_good.png`<br/>`callkit_network_poor.png`<br/>`callkit_network_worse.png`<br/>`callkit_network_none.png`    | 网络质量指示器（优秀/一般/差/无网络）。  | 
 
 #### 界面元素
 
@@ -109,7 +109,7 @@ CallKitClient.init(context, config)
 
 | 资源                | 描述   | 
 | :------------------- | :----- | 
-| `callkit_checkbox_select.png` / `callkit_checkbox_unselect.png` / `callkit_checkbox_available.png`  | 选中/未选中/可选择状态。   | 
+| `callkit_checkbox_select.png`<br/>`callkit_checkbox_unselect.png`<br/>`callkit_checkbox_available.png`  | 选中/未选中/可选择状态。   | 
 
 ### 背景资源
 
@@ -130,19 +130,19 @@ CallKitClient.init(context, config)
 | :------------------- | :----- | 
 | `callkit_loading`  | 加载中...  | 
 | `callkit_connecting` | 连接中/等待对方接受邀请...  | 
-| `callkit_waiting` / `callkit_calling` | 待接听/呼叫中。  | 
+| `callkit_waiting`<br/>`callkit_calling` | 待接听/呼叫中。  | 
   
 ### 通话邀请提示
   
 | 资源                | 描述   | 
 | :------------------- | :----- | 
-|`alert_request_video` / `alert_request_voice` / `alert_request_multiple_video`  | 一对一视频/一对一语音/群组视频通话邀请提示（支持用户名参数 %1$s）。| 
+|`alert_request_video`<br/>`alert_request_voice`<br/>`alert_request_multiple_video`  | 一对一视频/一对一语音/群组视频通话邀请提示（支持用户名参数 %1$s）。| 
 
 ### 通话操作
 
 | 资源                | 描述   | 
 | :------------------- | :----- | 
-| `callkit_accept` / `callkit_decline` | 接听/挂断。  | 
+| `callkit_accept`<br/>`callkit_decline` | 接听/挂断。  | 
 | `callkit_end` | 结束通话。  | 
   
 ### 功能控制
@@ -150,15 +150,15 @@ CallKitClient.init(context, config)
 | 资源                | 描述   | 
 | :------------------- | :----- | 
 | `callkit_flip` | 摄像头翻转。  | 
-| `callkit_mike_on` / `callkit_mike_off` | 麦克风已开/已关。  | 
-| `callkit_speaker_on` / `callkit_speaker_off`  | 扬声器已开/已关。   | 
-| `callkit_camera_on` / `callkit_camera_off` | 摄像头已开/已关。   | 
+| `callkit_mike_on`<br/>`callkit_mike_off` | 麦克风已开/已关。  | 
+| `callkit_speaker_on`<br/>`callkit_speaker_off`  | 扬声器已开/已关。   | 
+| `callkit_camera_on`<br/>`callkit_camera_off` | 摄像头已开/已关。   | 
   
 ### 通话类型与群组
 
 | 资源                | 描述   | 
 | :------------------- | :----- | 
-| `callkit_inviting_you_to_a_group_call` / `callkit_inviting_you_to_a_video_call` / `callkit_inviting_you_to_a_voice_call` | 群通话/视频/语音邀请文案。  | 
+| `callkit_inviting_you_to_a_group_call`<br/>`callkit_inviting_you_to_a_video_call`<br/>`callkit_inviting_you_to_a_voice_call` | 群通话/视频/语音邀请文案。  | 
 | `callkit_group_call`  | 群组通话。  | 
 | `callkit_add` | 添加成员（支持数量参数 %1$d）。  | 
 | `callkit_over_max_members` | 超过最大人数限制提示（支持数量参数 %1$d）。  | 
@@ -168,9 +168,9 @@ CallKitClient.init(context, config)
 | 资源                | 描述   | 
 | :------------------- | :----- | 
 | `callkit_call_duration`  | 通话时长显示（支持时间参数 %1$s）。 | 
-| `callkit_self_cancel` / `callkit_remote_cancel`  | 自己取消/对方取消。  | 
-| `callkit_self_refused` / `callkit_remote_refused`  | 自己拒绝/对方拒绝。 | 
-| `callkit_self_no_response` / `callkit_remote_no_response`  | 自己未接听/对方无响应。  | 
+| `callkit_self_cancel`<br/>`callkit_remote_cancel`  | 自己取消/对方取消。  | 
+| `callkit_self_refused`<br/>`callkit_remote_refused`  | 自己拒绝/对方拒绝。 | 
+| `callkit_self_no_response`<br/>`callkit_remote_no_response`  | 自己未接听/对方无响应。  | 
 | `callkit_remote_busy`  | 对方忙线中。 | 
 | `callkit_remote_drop`  | 通话中断。 | 
   
@@ -178,8 +178,8 @@ CallKitClient.init(context, config)
 
 | 资源                | 描述   | 
 | :------------------- | :----- | 
-| `The_other_is_received` / `callkit_handle_on_other_device` | 其他设备已接听。    | 
-| `The_other_is_refused` / `callkit_refused_on_other_device`             | 其他设备已拒绝/结束通话。   | 
+| `The_other_is_received`<br/>`callkit_handle_on_other_device` | 其他设备已接听。    | 
+| `The_other_is_refused`<br/>`callkit_refused_on_other_device`             | 其他设备已拒绝/结束通话。   | 
 | `The_other_is_busy`             | 对方忙线中。   | 
   
 ### 多语言支持

@@ -11,6 +11,12 @@
 - **悬浮窗功能**：通话时可最小化为悬浮窗，不影响其他应用使用。
 - **丰富的配置选项**：支持自定义铃声、超时时间等。
 
+<ImageGallery>
+  <ImageItem src="/images/callkit/android/1v1_video_caller_invitation.png" title="一对一通话邀请" />
+  <ImageItem src="/images/callkit/android/group_call_ongoing.png" title="群组通话" />
+</ImageGallery>
+
+
 ## 推荐开发环境
 
 - Android SDK: API Level 24 及以上
@@ -134,7 +140,7 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-### 步骤 3 （可选）配置监听器
+### 步骤 3 配置监听器
 
 环信 CallKit 提供 `CallKitListener` 监听通话过程。你可以在应用初始化时设置监听器用于处理通话相关的回调：
 
@@ -241,7 +247,12 @@ ChatClient.getInstance().loginWithToken(username, token, object : ChatCallback {
 
 你可以使用 `startSingleCall` 方法发起一对一通话，`CallType` 设置为 `SINGLE_VIDEO_CALL` 为视频通话，`SINGLE_VOICE_CALL` 为音频通话。
 
-##### 一对一视频通话
+<ImageGallery>
+  <ImageItem src="/images/callkit/android/1v1_video_caller_invitation.png" title="视频通话" />
+  <ImageItem src="/images/callkit/android/1v1_voice_caller_invitation.png" title="音频通话" />
+</ImageGallery>
+
+- 发起一对一视频通话
 
 ```kotlin
 private fun startVideoCall() {
@@ -263,9 +274,8 @@ private fun startVideoCall() {
     )
 }
 ```
-// TODO：添加截图
 
-##### 一对一语音通话
+- 发起一对一语音通话
 
 ```kotlin
 private fun startVoiceCall() {
@@ -278,7 +288,6 @@ private fun startVoiceCall() {
     )
 }
 ```
-// TODO：添加截图
 
 #### 发起群组通话
 
@@ -301,7 +310,9 @@ private fun startGroupCall() {
 }
 ```
 
-// TODO：添加截图
+<ImageGallery>
+  <ImageItem src="/images/callkit/android/group_call_caller_user_selection.png" title="主叫选择用户进入通话" />
+</ImageGallery>
 
 #### 群组通话中邀请
 
@@ -321,16 +332,27 @@ private fun startGroupCall() {
 - **拒绝**：拒绝通话邀请。
 - **挂断**：通话过程中点击挂断按钮。
 
-//添加截图
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/1v1_video_callee_invitation.png" title="一对一视频通话" />
+  <ImageItem src="/images/callkit/android/1v1_voice_callee_invitation.png" title="一对一音频通话" />
+  <ImageItem src="/images/callkit/android/group_call_callee_invitation.png" title="群组通话" />
+</ImageGallery>
 
 ### 步骤 6 结束通话
 
-正常情况下，用户通过 UI 界面挂断后由 CallKit 内部处理即可。部分场景下：例如用户正在使用callKit进行通话，此时系统电话来电，开发者希望以系统电话为主，此时可调用以下接口先主动结束callkit通话,然后接听系统电话。
+正常情况下，用户通过 UI 界面挂断后由 CallKit 内部处理即可。在某些场景下，例如，用户正在使用 CallKit 进行通话，此时系统电话来电，开发者若希望以系统电话为主，可调用以下接口先主动结束 CallKit 通话，然后接听系统电话。
 
 ```kotlin
 // 主动结束通话
 CallKitClient.endCall()
 ```
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/1v1_video_ongoing.png" title="一对一视频通话" />
+  <ImageItem src="/images/callkit/android/1v1_voice_ongoing.png" title="一对一音频通话" />
+  <ImageItem src="/images/callkit/android/group_call_ongoing.png" title="群组通话" />
+</ImageGallery>
+
 
 ### 步骤 7 离线推送
 
@@ -338,7 +360,10 @@ CallKitClient.endCall()
 
 关于离线推送场景方案，请参见 [Android 端离线推送文档](/document/android/push/push_overview.html)。
 
-// TODO：添加截图
+<ImageGallery>
+  <ImageItem src="/images/callkit/android/notification_system.png" title="系统级来电通知" />
+</ImageGallery>
+
 
 ## 进阶功能
 
@@ -408,7 +433,7 @@ class MyCallInfoProvider : CallInfoProvider {
 CallKitClient.callInfoProvider = MyCallInfoProvider()
 ```
 
-### 私有化部署
+### 声网 RTC 私有化部署
 
 如果使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置：
 

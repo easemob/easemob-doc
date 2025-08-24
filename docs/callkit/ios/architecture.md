@@ -19,7 +19,7 @@ Classes
 ├─ CoreService // 核心协议层以及定义。
 │ ├─ Provider //CallKit 用户信息获取缓存等。
 │ ├─ Service // 业务协议。
-│ │ ├─ `CallMessageService` // 呼叫 API 和部分回调，以及常量枚举定义。
+│ │ ├─ CallMessageService // 呼叫 API 和部分回调，以及常量枚举定义。
 │ └─ Implements // 上面对应协议的实现组件。核心`CallKitManager`实现，分别为扩展处理`CallKitManager+Signaling.swift`、`CallKitManager+RTC.swift`等。
 ├─ Resource // 图像或本地化文件。
 ├─ Commons

@@ -12,28 +12,39 @@ CallKit 提供顶部来电悬浮窗和通话状态时展示在屏幕右上角的
 - 若设备处于锁屏（无论有或无悬浮窗权限），或者 App 在后台且无悬浮窗权限，使用系统来电界面 `TelecomHelper.startCallImmediately(...)`。
 - 若应用处于前台且无悬浮窗权限，直接启动通话 Activity，使用 CallKit 默认 UI 界面。
 
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/1v1_video_notification_inapp.png" title="一对一视频通话来电通知" />
+  <ImageItem src="/images/callkit/android/1v1_voice_notification_inapp.png" title="一对一语音通话来电通知" />
+  <ImageItem src="/images/callkit/android/group_call_notification_inapp.png" title="群组通话来电通知" />
+</ImageGallery>
+
 ## 小悬浮窗
 
-若申请了悬浮窗权限，在以下场景会展示小悬浮窗。
+若申请了悬浮窗权限，小悬浮窗的展示如下：
 
-- 应用在前台进入后台。
-- 应用在前台点击悬浮窗按钮。
+- 应用在前台进入后台，展示小悬浮窗。
+- 应用在前台点击悬浮窗按钮，展示小悬浮窗。
+- 应用后台回到前台，隐藏小悬浮窗。
 
-应用后台回到前台，隐藏小悬浮窗。
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/1v1_video_float.png" title="一对一视频通话悬浮窗" />
+  <ImageItem src="/images/callkit/android/1v1_voice_float.png" title="一对一音频通话悬浮窗" />
+  <ImageItem src="/images/callkit/android/group_call_float.png" title="群组通话悬浮窗" />
+</ImageGallery>
 
 ## 相关 API
 
 - 来电通知栏
+  
+  `showIncomingCallTopWindow()`：展示来电通知栏。
 
-| API | 描述  |
-| :------------------- | :----- | 
-| `showIncomingCallTopWindow()`  | 展示来电通知栏。 |
-| `hideIncomingCallTopWindow()` | 隐藏来电通知栏。 |
+  `hideIncomingCallTopWindow()`：隐藏来电通知栏。
 
 - 小悬浮窗
+
+  `showFloatWindow()`：展示小悬浮窗。
+
+  `hideFloatWindow()`：隐藏小悬浮窗。
+   
+  `isFloatWindowShowing()`：悬浮窗否在展示。
   
-| API | 描述  |
-| :------------------- | :----- | 
-| `showFloatWindow()` | 展示小悬浮窗。   |
-| `hideFloatWindow()` | 隐藏小悬浮窗。  |
-|`isFloatWindowShowing()` | 悬浮窗否在展示。  |

@@ -1,37 +1,42 @@
 # 视频通话画中画（PiP）
 
+// TODO：在其他地方无需说应用内小窗？
+https://doc.yunxin.163.com/nertccallkit/guide/TE3Mjk2NzU?platform=iOS
+
 ## 功能概述
 
 画中画（Picture-in-Picture，PiP）功能允许用户在视频通话时，将通话界面最小化为悬浮窗口，同时使用其他应用。该功能对于多任务处理场景尤其重要。
 
 对于 PiP，注意 iOS 系统存在如下限制：
-- iOS 15 及更高版本支持自定义 PiP。
+- iOS 15 及以上版本支持自定义 PiP。
 - 需要用户手动触发 PiP，无法自动进入。
 - 音频路由切换需要特殊处理：例如，如果其中群组一个用户关闭了摄像头，开发者需要特殊处理。
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/ios/1v1_video_float.png" title="一对一视频通话 - PiP" />
+  <ImageItem src="/images/callkit/ios/1v1_voice_float.png" title="一对一音频通话 - PiP" />
+  <ImageItem src="/images/callkit/ios/group_call_float.png" title="群组通话 - PiP" />
+</ImageGallery>
 
 ## 基础 PiP 配置
 
 1. 开启画中画功能。
    
-在 **Capabilities** 中启用 **Background Modes**，勾选 **Audio**, **AirPlay**, 和 **Picture in Picture**。
+   在 **Capabilities** 中启用 **Background Modes**，勾选 **Audio**, **AirPlay**, 和 **Picture in Picture**。
 
 2. 摄像头后台权限。
    
-- 默认不允许后台访问摄像头。
-- 对于 VoIP 应用，在 **Background Modes** 中勾选 **Voice over IP (VoIP)**，支持 LiveCommunicationKit。若不勾选，采用厂商默认系统推送。
-- 若应用需要后台采集视频流，需要申请多任务相机访问权限（Multitasking Camera Access Entitlement）。iOS 系统版本对多任务相机访问权限的支持详见 [苹果官方文档](https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.avfoundation.multitasking-camera-access)。
+    - 默认不允许后台访问摄像头。
+    - 对于 VoIP 应用，在 **Background Modes** 中勾选 **Voice over IP (VoIP)**，支持 LiveCommunicationKit。若不勾选，采用厂商默认系统推送。
+    - 若应用需要后台采集视频流，需要申请多任务相机访问权限（Multitasking Camera Access Entitlement）。iOS 系统版本对多任务相机访问权限的支持详见 [苹果官方文档](https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.avfoundation.multitasking-camera-access)。
 
 ![img](/images/callkit/ios/backgroundCameraAccess.png)
 
 ## 一对一视频通话 PiP
 
-对于一对一视频通话 PiP，进入 PiP 时，切换到悬浮窗；退出 PiP 时，恢复通话页面全屏 UI，重新加载视频流，恢复交互控件。
+对于一对一视频通话 PiP，进入 PiP 时，切换到悬浮窗；退出 PiP 时，恢复通话页面全屏 UI，重新加载视频流，恢复交互控件。核心架构如下图所示：
 
-核心架构如下图所示：
-
-<ImageGallery>
-  <ImageItem src="/images/callkit/ios/1v1_call_pip_flow.png" title="PiP 交互示例图" />
-</ImageGallery>
+![img](/images/callkit/ios/1v1_call_pip_flow.png)
 
 UI 示意图如下所示：
 
@@ -45,7 +50,7 @@ UI 示意图如下所示：
 CallKit 未实现群组视频通话 PiP，你可以按照本节的推荐方案自行实现。与一对一通话相比，群组视频通话 PiP 的实现更为复杂，需要注意以下几方面：
 - 多流管理：需要智能选择显示内容。避免频繁切换视频流，合理设置切换阈值：例如，3 秒内不反复切换主讲人。
 - 性能优化：降低资源消耗。你可以提供用户手动固定选项：例如，固定主讲人。
-- 用户体验：保持交互简洁直观。
+- 用户体验：保持交互简洁直观。// TODO：还需要吗？
 
 推荐采用 **主讲人模式** 作为默认方案，这样可在保证体验的同时，有效控制资源消耗。对于高端设备，可考虑支持宫格模式，但需要严格的性能监控。
 
@@ -134,7 +139,7 @@ func setupGridLayout(streams: [VideoStream]) {
 目前，群组视频通话页面出现时，不同用户数下使用 `AgoraRtcVideoCanvas` 渲染群组画面，每增加 2 个用户会降低本地渲染一个画质级别，被放大的用户本地渲染画质会变为高质量。
 
 | 优化项 | 全屏模式 | PiP 模式 |
-|-------|---------|---------|
+| :------------------- | :----- | :------------ |
 | 视频分辨率 | 720p/1080p | 360p |
 | 帧率 | 30 fps | 15 fps |
 | 显示人数 | 全部 | 最多 4 人或只显示主讲人|

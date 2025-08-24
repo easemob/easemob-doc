@@ -1,6 +1,7 @@
 # 权限与业务逻辑
 
 // TODO：请添加描述
+// TODO：是否需要添加申请权限的界面图
 
 ## 权限声明
 
@@ -61,9 +62,9 @@
 
 ## 动态权限
 
-动态权限也称为运行时权限。一些权限需要动态申请，申请逻辑位于 `BaseCallActivity#initPermissions` 函数中。
+动态权限也称为运行时权限。一些权限需要动态申请，申请逻辑位于 `BaseCallActivity#initPermissions` 函数。
 
-以下是动态权限的一些例子：
+例如，以下为动态权限：
 
 - 录音：`RECORD_AUDIO`
 - 摄像头：`CAMERA`
@@ -76,7 +77,7 @@
 
 ## 悬浮窗
 
-当用户点击悬浮窗按钮或者在通话状态时 app 回到后台,会触发悬浮窗权限检查：
+当用户点击悬浮窗按钮或者在通话状态时 app 回到后台，会触发悬浮窗权限检查：
 - 悬浮窗权限：`SYSTEM_ALERT_WINDOW`
 - 检查悬浮窗权限：`PermissionHelper.hasFloatWindowPermission(...)`
 - 引导开启悬浮窗权限：`requestFloatWindowPermission(...)`
@@ -92,7 +93,9 @@
 
 ## 电池优化
 
-环信 Callkit 内部提供了可引导将 app 加入电池优化白名单的函数：`PermissionHelperrequestIgnoreBatteryOptimizations(...)`，提升后台存活与呼叫达率。
+环信 CallKit 提供了以下函数引导将 app 加入电池优化白名单的，提升后台存活与呼叫达率：
+
+`PermissionHelperrequestIgnoreBatteryOptimizations(...)`
   
 ## 最佳实践
 
@@ -136,5 +139,11 @@
             }
         )
 ```
+// TODO：悬浮窗权限申请放在这里，还是悬浮窗的标题下？
 
-  //todo android 工程师插入截图1、动态权限申请截图 2、悬浮窗权限申请截图
+申请悬浮窗权限的界面展示如下：
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/float_permission_apply_1.png" title="需要悬浮窗权限" />
+  <ImageItem src="/images/callkit/android/float_permission_apply_2.png" title="设置应用展示在其他应用上层" />
+</ImageGallery>

@@ -2,6 +2,17 @@
 
 Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，包括传统的基于 SIM 卡的电话和 VoIP 通话。当有来电时，Telecom 框架会处理来电显示、接听、挂断等功能，并通知相关的应用程序。
 
+// TODO：截图是否合适？有第一个图吗？是否要与livecommunicationkit的来电流程保持一致
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/1v1_video_caller_invitation.png" title="主叫发起通话邀请" />
+  <ImageItem src="/images/callkit/android/1v1_video_callee_invitation.png" title="被叫收到通话邀请" />
+  <ImageItem src="/images/callkit/android/1v1_video_ongoing.png" title="通话中" />
+  <ImageItem src="/images/callkit/android/1v1_video_notification_inapp.png" title="应用内来电通知" />
+  <ImageItem src="/images/callkit/android/notification_system.png" title="系统级来电通知" />
+  <ImageItem src="/images/callkit/android/1v1_video_float.png" title="悬浮窗" />
+</ImageGallery>
+
 ## 应用场景
 
 - 客户端已集成 FCM 推送且后台无 app 进程存活，当客户端收到推送时，会唤醒 app 进程。如果客户端已设置了自动登录，会拉取离线消息，触发 Telecom 系统原生通话界面的唤起，确保系统级来电体验。
@@ -20,7 +31,7 @@ Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，
 
 | 组件 | 说明 |
 | :--- | :--- |
-| `IncomingCallService` | 用于接收 CallKit 来电请求，并将其转发给你自己的 `ConnectionService` 进行处理。在该服务中，通过 `TelecomManager.addNewIncomingCall(handle, extras)` 触发系统来电。失败或账号未启用时，通过 `CallKitClient.signalingManager.startSendEvent()` 跳转到默认来电 UI 兜底。 |
+| `IncomingCallService` | 用于接收 CallKit 来电请求，并将其转发给你自己的 `ConnectionService` 进行处理。在该服务中，通过 `TelecomManager.addNewIncomingCall(handle, extras)` 触发系统来电。失败或账号未启用时，通过 `CallKitClient.signalingManager.startSendEvent()` 跳转到默认来电 UI 兜底。  // TODO：兜底再换个词 |
 | `VoipConnectionService`（`ConnectionService`） | 充当你的 VoIP 应用与 Android 系统原生通话 UI 和逻辑之间的桥梁，唤起来电界面。系统接听/拒绝，分别调用 `signalingManager.answerCall()` / `signalingManager.refuseCall()` 并启动 CallKit 通话界面。 |  
 | `PhoneAccountHelper` | VoIP 账户的注册、启用检测和设置引导。 |
 
@@ -53,7 +64,12 @@ PhoneAccountHelper.registerPhoneAccount(context)
   PhoneAccountHelper.showPhoneAccountEnableGuide(context) 
 ```
 
-3. 启用 Telecom 前，CallKit 内部会检查 VoIP 账户的状态：
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/voip_call_enable.png" title="启用 VoIP 通话" />
+  <ImageItem src="/images/callkit/android/voip_account_enable.png" title="启用 VoIP 账户" />
+</ImageGallery>
+
+1. 启用 Telecom 前，CallKit 内部会检查 VoIP 账户的状态：
    - `status.isSupported`：设备是否支持 VoIP 功能。
    - `isRegistered`：是否已注册。
    - `isEnabled`：是否已开启。

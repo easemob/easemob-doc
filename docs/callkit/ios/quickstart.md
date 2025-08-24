@@ -333,7 +333,7 @@ extension ViewController: QLPreviewControllerDataSource {
 }
 ```
 
-### 发起通话
+### 步骤 5 发起通话
 
 1. 登录：在登录界面输入用户 ID 和 [用户 Token](/product/console/operation_user.html#查看用户-token)，然后点击 **Login**。  
 2. 发起通话：
@@ -343,6 +343,6 @@ extension ViewController: QLPreviewControllerDataSource {
 
 你可以点击 **log** 查看 CallKit 相关日志，搜索 `EaseCallUIKit` 过滤 CallKit 日志。
 
-![img](/images/callkit/ios/example.png)
+<img src="/images/callkit/ios/example.png" width="400">
 
 

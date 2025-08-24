@@ -54,4 +54,6 @@ pod install
 
 你可以点击 **log** 查看 CallKit 相关日志，搜索 `EaseCallUIKit` 过滤 CallKit 日志。
 
-![img](/images/callkit/ios/example.png)
+// TODO：作图
+
+<img src="/images/callkit/ios/example.png" width="400">

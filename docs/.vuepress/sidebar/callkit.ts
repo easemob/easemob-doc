@@ -43,6 +43,7 @@ const callKitSidebar = [
     children: [
       { text: "CallKit 架构", link: "architecture.html" },
       { text: "集成 CallKit", link: "integration.html" },
+      { text: "权限", link: "permission.html", only: ["android"] },
       {
         text: "LiveCommunicationKit", link: "livecommunicationkit.html", only: ["ios"]
       },
@@ -53,11 +54,10 @@ const callKitSidebar = [
       { text: "通话信令", link: "signaling.html" },
       { text: "API 概览", link: "api_overview.html" },
       {
-        text: "问题排查",
+        text: "常见问题",
         collapsible: true,
         children: [
           { text: "常见问题", link: "common_issue.html" },
-          { text: "问题处理", link: "issue_handling.html" }
         ]
       }
     ]

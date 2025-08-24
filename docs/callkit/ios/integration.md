@@ -2,7 +2,12 @@
 
 使用环信 CallKit（基于环信即时通讯 IM SDK V4.16.0 或以上版本）之前，你需要将其集成到你的应用中。
 
-## 推荐环境
+<ImageGallery>
+  <ImageItem src="/images/callkit/ios/1v1_video_caller_invitation.png" title="一对一通话邀请" />
+  <ImageItem src="/images/callkit/ios/group_call_ongoing.png" title="群组通话" />
+</ImageGallery>
+
+## 开发环境要求
 
 - Xcode 16.0 或以上版本 
 - 最低支持系统版本：iOS 15.0
@@ -56,7 +61,7 @@ pod install
 
 CallKit 初始化包括如下步骤：
 
-1. 初始化 IM SDK。CallKit 基于即时通讯 IM 作为信令通道，因此需先初始化 IM SDK。
+1. 初始化环信环信即时通讯 IM SDK。CallKit 基于即时通讯 IM 作为信令通道，因此需先初始化 IM SDK。
    - 填入你的应用的 App Key。
    - 设置即时通讯 IM SDK 的 `EMOptions`/`ChatSDKOptions` 类中的一些选项。
 2. 初始化 CallKit。
@@ -66,7 +71,7 @@ CallKit 初始化包括如下步骤：
 
 在整个应用生命周期中，初始化一次即可。
 
-- 已经集成了环信即时通讯 IM SDK，初始化 CallKit 的代码示例如下： 
+- 已集成 IM SDK，初始化 CallKit 的代码示例如下： 
   
 ```Swift
     //已经集成了环信 IM SDK 即已经 import HyphenateChat
@@ -88,7 +93,7 @@ CallKit 初始化包括如下步骤：
     }
 ```  
 
-- 未集成环信环信即时通讯 IM SDK，初始化 CallKit 的代码示例如下：
+- 未集成 IM SDK，初始化 CallKit 的代码示例如下：
 
 ```Swift
     //没有集成环信 IM SDK，只想使用 CallKit
@@ -240,6 +245,8 @@ extension MainViewController: CallServiceListener {
 
 你可以使用 `call` 方法发起一对一通话，`callType` 设置为 `singleVideo` 为视频通话，`singleAudio` 为音频通话。
 
+// TODO：Please enter a valid username or group id，删掉 group id?
+
 ```Swift
 @IBAction func callAction(_ sender: Any) {
         self.view.endEditing(true)
@@ -251,7 +258,14 @@ extension MainViewController: CallServiceListener {
     }
 ```    
 
+<ImageGallery>
+  <ImageItem src="/images/callkit/ios/1v1_video_caller_invitation.png" title="视频通话" />
+  <ImageItem src="/images/callkit/ios/1v1_voice_caller_invitation.png" title="音频通话" />
+</ImageGallery>
+
 #### 发起群组通话
+
+// TODO：没有群组通话中邀请？
 
 要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [环信控制台文档](/product/console/operation_group.html#创建群组)。
 
@@ -268,12 +282,20 @@ extension MainViewController: CallServiceListener {
     }
 ```    
 
+<ImageGallery>
+  <ImageItem src="/images/callkit/ios/group_call_caller_user_selection.png" title="主叫选择用户进入通话" />
+</ImageGallery>
 
-### 步骤 7 离线推送
+
+### 步骤 6 离线推送
 
 为保证被叫用户 App 在离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [开启 APNs 推送](/document/ios/push/push_notification_mode_dnd.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃弹窗。
 
 关于离线推送场景方案，请参见 [离线推送文档](/document/ios/push/push_overview.html)。
+
+<ImageGallery>
+  <ImageItem src="/images/callkit/ios/notification_system.png" title="系统级来电通知" />
+</ImageGallery>
 
 ## 进阶用法
 

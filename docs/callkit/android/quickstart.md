@@ -570,7 +570,7 @@ class MainActivity : AppCompatActivity() {
    - 在通话中可以控制静音、摄像头、扬声器等。
    - 点击挂断按钮结束通话。
 
-![img](/images/callkit/android/quickstart_run.png)
+<img src="/images/callkit/android/quickstart_run.png" width="400">
 
 ## 运行应用  
 
