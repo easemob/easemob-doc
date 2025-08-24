@@ -12,6 +12,11 @@ CallKit 是环信提供的一站式音视频通话解决方案，提供以下核
 - **灵活的布局管理**：多种布局模式、可拖拽、可调整大小。
 - **完善的用户体验**：来电通知、铃声、网络质量指示等。
 
+<ImageGallery>
+  <ImageItem src="/images/callkit/web/1v1_video_caller_invitation.png" title="一对一通话邀请" />
+  <ImageItem src="/images/callkit/web/group_call_ongoing.png" title="群组通话" />
+</ImageGallery>
+
 ## 推荐环境
 
 - Node.js: 18.0 及以上
@@ -40,9 +45,9 @@ CallKit 是环信提供的一站式音视频通话解决方案，提供以下核
 
 ## 集成步骤
 
-## 步骤 1 安装与引入 CallKit
+### 步骤 1 安装与引入 CallKit
 
-### 1. 安装依赖
+#### 1. 安装依赖
 
 ```bash
 npm install easemob-chat-uikit
@@ -50,13 +55,13 @@ npm install easemob-chat-uikit
 yarn add easemob-chat-uikit
 ```
 
-### 2. 导入样式
+#### 2. 导入样式
 
 ```tsx
 import "easemob-chat-uikit/style.css";
 ```
 
-### 3. 引入 CallKit
+#### 3. 引入 CallKit
 
 ```tsx
 import { CallKit, Provider, rootStore } from "easemob-chat-uikit";
@@ -118,21 +123,22 @@ const App = () => {
 export default App;
 ```
 
-### 重要说明
+CallKit 组件或重要配置的说明如下：
 
-1. **Provider 组件**：负责初始化环信 IM SDK 连接，必须包裹在应用的最外层。
-2. **initConfig 配置**：包含应用的 App Key、用户 ID 和登录凭证（token）。
-3. **CallKit 组件**：音视频通话组件，会自动处理内部的初始化逻辑。
-4. **chatClient 属性**：传入 `rootStore.client`，这是 Provider 创建的 IM 连接实例。
-5. **信息提供者**：`userInfoProvider` 和 `groupInfoProvider` 用于获取用户和群组的显示信息。
+| 组件/属性           | 说明   |
+| :-------------- | :----- |
+| Provider 组件            | - 负责初始化环信 IM SDK 连接，必须包裹在应用的最外层。<br/> - 该组件会自动处理 IM SDK 的初始化和登录。|
+| initConfig 配置            | 包含应用的 App Key、用户 ID 和登录凭证（Token）。  |
+| CallKit 组件            | - 音视频通话组件，会自动处理内部的初始化逻辑。<br/> - 该组件会在内部自动初始化音视频服务，无需手动调用初始化方法。  |
+| chatClient 属性            | 传入 `rootStore.client`，即 Provider 创建的 IM 连接实例。  |
+| 信息提供者            | `userInfoProvider` 和 `groupInfoProvider` 用于获取用户和群组的显示信息。   |
 
-Provider 组件会自动处理 IM SDK 的初始化和登录，CallKit 组件会在内部自动初始化音视频服务，无需手动调用初始化方法。
 
-## 步骤 3 登录 IM
+### 步骤 3 登录 IM
 
-Callkit 内部依赖 IM SDK 进行信令交互，所以在使用 Callkit 之前需要先登录 IM。登录 IM 有两种方式可以选择：
+CallKit 内部依赖 IM SDK 进行信令交互，所以在使用 CallKit 之前需要先登录 IM。登录 IM 有两种方式可以选择：
 
-1. 使用 UIKit，UIKit Provider 组件内部集成了 IM SDK，提供 userId 和 token 属性，内部会自动登录。
+1. 使用 UIKit：UIKit Provider 组件内集成了 IM SDK，提供 `userId` 和 `token` 属性，内部会自动登录。
 
 ```tsx
 import React, { useRef } from "react";
@@ -164,7 +170,7 @@ const App = () => {
 export default App;
 ```
 
-如果想要手动登录，可以从 rootStore 获取 IM SDK 实例，调用 SDK open 方法去登录。
+若手动登录，可以从 `rootStore` 获取 IM SDK 实例，调用 SDK 的 `open` 方法登录。
 
 ```tsx
 import React, { useRef, useEffect } from "react";
@@ -203,7 +209,7 @@ const App = () => {
 export default App;
 ```
 
-2. 如果不使用 UIKit provider, 只使用 Callkit 组件，可以自己集成 IM SDK 并处理登录。
+2. 如果不使用 UIKit Provider, 只使用 CallKit 组件，可自行集成 IM SDK 并处理登录。
 
 ```tsx
 import React, { useRef } from "react";
@@ -241,9 +247,9 @@ const App = () => {
 export default App;
 ```
 
-## 步骤 4 设置监听
+### 步骤 4 配置监听器
 
-Callkit 组件可以设置回调事件，实现监听 Callkit 内部状态，和错误事件。
+CallKit 组件可以设置回调事件，实现监听 CallKit 内部状态和错误事件。
 
 ```tsx
 <CallKit
@@ -254,7 +260,7 @@ Callkit 组件可以设置回调事件，实现监听 Callkit 内部状态，和
 />
 ```
 
-### 回调事件说明
+回调事件说明如下表所示：
 
 | 回调事件              | 参数                                            | 描述                                             |
 | --------------------- | ----------------------------------------------- | ------------------------------------------------ |
@@ -275,7 +281,7 @@ Callkit 组件可以设置回调事件，实现监听 Callkit 内部状态，和
 | `onRtcEngineCreated`  | `(rtc: any)`                                    | RTC 引擎创建完成时触发，可用于自定义配置         |
 | `onAddParticipant`    | `()`                                            | 用户点击添加参与者按钮时触发                     |
 
-## 步骤 5 发起通话
+### 步骤 5 发起通话
 
 - **发起一对一通话**
 
@@ -315,6 +321,11 @@ const App = () => {
 };
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/callkit/web/1v1_video_caller_invitation.png" title="视频通话" />
+  <ImageItem src="/images/callkit/web/1v1_voice_caller_invitation.png" title="音频通话" />
+</ImageGallery>
+
 - **发起群组通话**
 
   要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [环信控制台文档](/product/console/operation_group.html#创建群组)。
@@ -331,6 +342,8 @@ const startGroupCall = () => {
   });
 };
 ```
+
+// TODO：没有接听和结束通话？
 
 ## 高阶功能
 
