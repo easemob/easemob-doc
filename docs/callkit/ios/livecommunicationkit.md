@@ -2,11 +2,7 @@
 
 ## 概述
 
-// TODO：是否需要添加
-`LiveCommunicationKit` 是苹果为iOS 系统新增的一项优化，用于改善语音或视频通话的接听体验，核心功能是让用户在锁屏状态下也能快速接听或挂断电话。
-
-// TODO `LiveCommunicationManager` 是 CallKit 的一个类？
-`LiveCommunicationManager` 是一个用于管理 iOS VoIP 通话的单例管理器类，集成了 Apple 的 PushKit 和 LiveCommunicationKit 框架，提供完整的 VoIP 通话解决方案，包括来电推送、通话管理和音频会话控制。
+环信 CallKit 中的 `LiveCommunicationManager` 是一个用于管理 iOS VoIP 通话的单例管理器类，集成了 Apple 的 PushKit 和 LiveCommunicationKit 框架，提供完整的 VoIP 通话解决方案，包括来电推送、通话管理和音频会话控制。
 
 <ImageGallery :columns="5">
   <ImageItem src="/images/callkit/ios/1v1_video_caller_invitation.png" title="主叫发起通话邀请" />
@@ -29,36 +25,7 @@
 
 ## PushKit 集成
 
-// TODO：添加后台和锁屏的截图
-
-// TODO：是否需要这样改？https://doc.yunxin.163.com/nertccallkit/guide/TAzMjg5NjE?platform=iOS
-
-主叫方发起呼叫时，环信服务器将呼叫信息通过 PushKit 推送给接听方，接听方选择接听或挂断后，将信息传递给 CallKit 呼叫组件，整体实现流程如下。
-
-### 实现 PushKit 推送
-
-1. 在系统中注册 PushKit。
-
-- `PKPushRegistry`: 处理 VoIP 推送注册。
-- `PKPushRegistryDelegate`: 响应推送事件。
-
-2. 在环信即时通讯 IM 配置 PushKit 证书。
-   调用 IM SDK 的接口绑定 VoIP 推送证书和推送 Token。`EMClient` 初始化时需绑定推送证书。
-   关于如何创建 VoIP 推送证书以及上传至 [环信控制台](https://console.easemob.com/user/login)，详见 IM 的 [APNs 离线推送文档](/document/ios/push/push_apns.html)。
-
-3. 将 PushKit token 传给环信 IM。
-
-### 解析并弹出接听提示 UI
-
-App 层接受 PushKit 消息后将消息传给 NERtcCallKit，由呼叫组件解析字段，并弹出相应的 UI。
-
-
-// TODO：这是原来的
-
-调用 IM SDK 的接口绑定 VoIP 推送证书和推送 Token。`EMClient` 初始化时需绑定推送证书。
-
-- `PKPushRegistry`: 处理 VoIP 推送注册。
-- `PKPushRegistryDelegate`: 响应推送事件。
+环信 CallKit 集成了 PushKit，你只需要在 IM SDK 初始化时设置 VoIP 推送证书，CallKit 初始化时启用 VoIP 功能。
 
 关于如何创建 VoIP 推送证书以及上传至 [环信控制台](https://console.easemob.com/user/login)，详见 IM 的 [APNs 离线推送文档](/document/ios/push/push_apns.html)。
 

@@ -65,7 +65,7 @@ CallKit 初始化包括如下步骤：
    - 填入你的应用的 App Key。
    - 设置即时通讯 IM SDK 的 `EMOptions`/`ChatSDKOptions` 类中的一些选项。
 2. 初始化 CallKit。
-   （可选）开启 VoIP 和画中画功能。// TODO：放在进阶功能中
+   （可选）开启 VoIP 和画中画功能。
      - 开启 VoIP 功能后会自动开启 LiveCommunicationKit。关于上传 VoIP 服务证书，详见 [APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。 
      - 若开启画中画功能，同时需要开启应用后台摄像头采集权限。详见 [视频通话画中画文档](picture_in_picture.html)。
 
@@ -201,7 +201,7 @@ extension MainViewController: CallServiceListener {
 //            break
 //        }
     }
-   // 通话结束     // TODO：这里未列明通话结束原因     
+   // 通话结束    
     func didUpdateCallEndReason(reason: CallEndReason, info: CallInfo) {
         if let messageId = info.inviteMessageId {
             NotificationCenter.default.post(name: Notification.Name("didUpdateCallEndReason"), object: messageId)
@@ -216,7 +216,7 @@ extension MainViewController: CallServiceListener {
     func remoteUserDidLeft(userId: String, uid: UInt, channelName: String, type: CallType) {
         
     }
-    // RTC 引擎创建（可用于私有化部署配置）// TODO：是这样吗？
+    // RTC 引擎创建（可用于私有化部署配置）
     func onRtcEngineCreated(engine: AgoraRtcEngineKit?) {
         
     }
@@ -245,13 +245,10 @@ extension MainViewController: CallServiceListener {
 
 你可以使用 `call` 方法发起一对一通话，`callType` 设置为 `singleVideo` 为视频通话，`singleAudio` 为音频通话。
 
-// TODO：Please enter a valid username or group id，删掉 group id?
-
 ```Swift
 @IBAction func callAction(_ sender: Any) {
         self.view.endEditing(true)
         guard let input = inputField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !input.isEmpty else {
-            self.showCallToast(toast: "Please enter a valid username or group id")
             return
         }
             CallKitManager.shared.call(with: input, type: self.callType)
@@ -393,9 +390,7 @@ extension ViewController: CallUserProfileProvider {
 
         }
         return resultProfiles
-    }
-
-    
+    }    
 }
 ```
 
