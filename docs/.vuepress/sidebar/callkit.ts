@@ -24,7 +24,7 @@ const callKitSidebar = [
     text: "产品介绍",
     collapsible: true,
     children: [
-      { text: "概述", link: "product_overview.html" },
+      { text: "产品概述", link: "product_overview.html" },
       { text: "开通服务", link: "product_activation.html" },
       { text: "购买指南", link: "product_purchase.html" }
     ]
