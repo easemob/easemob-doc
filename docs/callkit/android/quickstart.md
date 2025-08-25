@@ -16,8 +16,7 @@
 1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
 3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和 Token。
-4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
-5. [开通音视频服务](product_activation.html)。
+4. [开通音视频服务](product_activation.html)。
    
 ## 快速开始
 
@@ -559,16 +558,10 @@ class MainActivity : AppCompatActivity() {
 
 ### 步骤 5 发起首次通话
 
-1. 登录：
-   - 点击 **登录**。
-   - 等待连接状态指示器变绿，显示 **已连接**。
-2. 发起通话：
-   - 一对一视频通话：输入对方用户 ID，点击 **发起一对一视频通话**。
-   - 一对一音频通话：输入对方用户 ID，点击 **发起一对一音频通话**。
+1. 登录：点击 **登录**。等待连接状态指示器变绿，显示 **已连接**。
+2. 发起通话：输入对方用户 ID，点击 **发起一对一视频通话** 或 **发起一对一音频通话**。
 3. 授权权限：在弹出的权限请求中，允许访问摄像头和麦克风等权限。
-4.  对通话进行控制：
-   - 在通话中可以控制静音、摄像头、扬声器等。
-   - 点击挂断按钮结束通话。
+4. 通话控制：在通话中可以控制静音、摄像头、扬声器等，或者点击挂断按钮结束通话。
 
 <img src="/images/callkit/android/quickstart_run.png" width="400">
 

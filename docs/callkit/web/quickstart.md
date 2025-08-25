@@ -19,8 +19,7 @@
 1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
 3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID。
-4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
-5. [开通音视频服务](product_activation.html)。
+4. [开通音视频服务](product_activation.html)。
 
 ## 快速开始
 
@@ -581,32 +580,21 @@ h3 {
 npm run dev
 ```
 
-2. 登录：
-
-   - 方式一：填写你的 App Key、用户 ID 和 accessToken，点击 **登录**。等待状态指示器变绿，显示 **已连接**。
-   - 方式二：为了方便测试，应用支持通过 URL 参数快速登录：
+2. 登录：输入用户 ID 和 accessToken，点击 **登录**。等待状态指示器变绿，显示 **已连接**。
+   
+   为了方便测试，应用支持通过将用户 ID 和 accessToken 拼接到 URL 中快速登录：
 
    ```
    http://localhost:5173?userId=your_user_id&accessToken=your_accessToken
    ```
 
-   该 URL 中的参数说明如下：
-
-   - `userId`: 用户 ID。
-   - `accessToken`: 用户 token。
-
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 获取 App Token API 和 获取用户 Token API 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
-3. 发起通话：
-   - 一对一视频通话：输入对方用户 ID，点击 **发起一对一视频通话**。
-   - 一对一音频通话：输入对方用户 ID，点击 **发起一对一语音通话**。
-   - 群组通话：输入群组 ID，点击 **发起群组通话**。
+3. 发起通话：输入对方用户 ID，点击 **发起一对一视频通话** 或 **发起一对一语音通话**。
 4. 授权权限：在浏览器弹出的权限请求中，允许访问摄像头和麦克风。
-5. 对通话进行控制：
-   - 在通话中可以控制静音、摄像头、扬声器等。
-   - 点击挂断按钮结束通话。
+5. 通话控制：在通话中可以控制静音、摄像头、扬声器等，或者点击挂断按钮结束通话。
 
-![img](/images/callkit/web/quickstart_run.png)
+<img src="/images/callkit/web/quickstart_run.png" width="500">
 
 ## 运行应用
 

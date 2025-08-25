@@ -15,8 +15,7 @@
 1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
 3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和 [用户 Token](/product/console/operation_user.html#查看用户-token)。
-4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID，将用户加入群组。
-5. [开通音视频服务](product_activation.html)。
+4. [开通音视频服务](product_activation.html)。
    
 ## 快速开始
 
@@ -339,8 +338,7 @@ extension ViewController: QLPreviewControllerDataSource {
 2. 发起通话：
    - 一对一语音通话：选择 **audio**，输入呼叫用户的用户 ID，点击 **call**。
    - 一对一视频通话：选择 **video**，输入呼叫用户的用户 ID，点击 **call**。
-   - 群组通话：选择 **group**，输入群组 ID，点击 **call**。
-
+  
 你可以点击 **log** 查看 CallKit 相关日志，搜索 `EaseCallUIKit` 过滤 CallKit 日志。
 
 <img src="/images/callkit/ios/example.png" width="400">

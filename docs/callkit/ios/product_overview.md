@@ -1,8 +1,10 @@
 # 产品介绍
 
+## CallKit 介绍
+
 环信音视频通话 CallKit 是基于环信即时通讯 IM 和声网实时音视频 RTC 深度整合开发的实时音视频通话框架，实现了一对一及群组音视频通话功能。开发者只需简单集成，即可快速获得稳定流畅的高品质音视频通话能力。环信音视频通话 CallKit 可用于在线互动课堂、视频客服中心、远程会诊系统或视频相亲等场景。
 
-## 基础架构
+环信 CallKit 的基础架构如下图所示：
 
 ![img](/images/callkit/android/callkit_architecture.png)
 
@@ -14,7 +16,7 @@
 | 多重唤醒系统 | - Android/iOS 平台支持多样唤醒方式 <br/> - 离线推送、LiveCommunicationKit/Telecom   | 
 | 高质量通话品质    | - 声网全球网络：超过 99.99% 服务可用性 <br/> - 超低延时：低于 76ms 的端到端延迟 <br/> - 抗丢包技术：80% 丢包仍可流畅通话 | 
 
-## 功能
+## 主要功能
 
 | 基本功能           | 高级功能   | 功能优势 |
 | :-------------- | :----- | :------- |
@@ -24,35 +26,39 @@
 
 ### 一对一视频通话
 
-<ImageGallery :columns="3">
+<ImageGallery :columns="4">
   <ImageItem src="/images/callkit/ios/1v1_video_caller_invitation.png" title="主叫发起通话邀请" />
   <ImageItem src="/images/callkit/ios/1v1_video_callee_invitation.png" title="被叫收到通话邀请" />
   <ImageItem src="/images/callkit/ios/1v1_video_ongoing.png" title="通话中" />
   <ImageItem src="/images/callkit/ios/1v1_video_float.png" title="画中画" />
-  <ImageItem src="/images/callkit/ios/1v1_video_notification_inapp.png" title="应用内来电通知" />
-  <ImageItem src="/images/callkit/ios/notification_system.png" title="系统级来电通知" />
 </ImageGallery>
 
 ### 一对一音频通话
 
-<ImageGallery :columns="3">
+<ImageGallery :columns="4">
   <ImageItem src="/images/callkit/ios/1v1_voice_caller_invitation.png" title="主叫发起通话邀请" />
   <ImageItem src="/images/callkit/ios/1v1_voice_callee_invitation.png" title="被叫收到通话邀请" />
   <ImageItem src="/images/callkit/ios/1v1_voice_ongoing.png" title="通话中" />
   <ImageItem src="/images/callkit/ios/1v1_voice_float.png" title="画中画" />
-  <ImageItem src="/images/callkit/ios/1v1_voice_notification_inapp.png" title="应用内来电通知" />
-  <ImageItem src="/images/callkit/ios/notification_system.png" title="系统级来电通知" />
 </ImageGallery>
 
 ### 群组通话
 
-<ImageGallery :columns="3">
+<ImageGallery :columns="4">
   <ImageItem src="/images/callkit/ios/group_call_caller_user_selection.png" title="主叫选择用户进入通话" />
   <ImageItem src="/images/callkit/ios/group_call_callee_invitation.png" title="被叫收到通话邀请" />
   <ImageItem src="/images/callkit/ios/group_call_ongoing.png" title="通话中" />
   <ImageItem src="/images/callkit/ios/group_call_float.png" title="画中画" />
-  <ImageItem src="/images/callkit/ios/group_call_notification_inapp.png" title="应用内来电通知" />
-  <ImageItem src="/images/callkit/ios/notification_system.png" title="系统级来电通知" />
+</ImageGallery>
+
+### 来电通知
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/ios/1v1_video_notification_inapp.png" title="一对一视频通话-应用内来电通知" />
+  <ImageItem src="/images/callkit/ios/1v1_voice_notification_inapp.png" title="一对一语音通话-应用内来电通知" />
+  <ImageItem src="/images/callkit/ios/group_call_notification_inapp.png" title="群组通话-应用内来电通知" />
+  <ImageItem src="/images/callkit/ios/notification_system.png" title="APNs 来电通知" />
+  <ImageItem src="/images/callkit/ios/notification_lock.png" title="VoIP 通话来电通知" />
 </ImageGallery>
 
 ## 使用限制
