@@ -11,8 +11,6 @@
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/callkit/ios/1v1_video_float.png" title="一对一视频通话 - PiP" />
-  <ImageItem src="/images/callkit/ios/1v1_voice_float.png" title="一对一音频通话 - PiP" />
-  <ImageItem src="/images/callkit/ios/group_call_float.png" title="群组通话 - PiP" />
 </ImageGallery>
 
 ## 基础 PiP 配置
