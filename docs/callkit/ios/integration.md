@@ -67,7 +67,7 @@ CallKit 初始化包括如下步骤：
 2. 初始化 CallKit。
    （可选）开启 VoIP 和画中画功能。
      - 开启 VoIP 功能后会自动开启 LiveCommunicationKit。关于上传 VoIP 服务证书，详见 [APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。 
-     - 若开启画中画功能，同时需要开启应用后台摄像头采集权限。详见 [视频通话画中画文档](picture_in_picture.html)。
+     - 若开启画中画功能，同时需要开启应用后台摄像头采集权限。详见 [视频通话画中画文档](picture_in_picture.html)。若不开启画中画功能，enablePIPOn1V1VideoScene 设置为 false，点击视频通话左上角的缩小按钮，会变成音频悬浮窗。
 
 在整个应用生命周期中，初始化一次即可。
 
