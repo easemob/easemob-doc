@@ -26,7 +26,7 @@
 
 ## 设置推送证书
 
-环信 CallKit 支持 APNs 推送和 VoIP 推送。
+环信 CallKit 支持 APNs 推送和 VoIP 推送。若配置了 VoIP 功能，则优先使用 VoIP 推送。
 
 - APNs 推送：详见 IM 的 [APNs 离线推送文档](/document/ios/push/push_apns.html)。
 - VoIP 推送：环信 CallKit 集成了 PushKit，你只需要在 IM SDK 初始化时设置 VoIP 推送证书，在 CallKit 初始化时启用 VoIP 功能。关于如何创建 VoIP 推送证书以及上传至 [环信控制台](https://console.easemob.com/user/login)，详见 IM 的 [APNs 离线推送文档](/document/ios/push/push_apns.html)。
@@ -49,6 +49,12 @@
         CallKitManager.shared.setup(config)
     }
 ```
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/ios/1v1_video_notification_inapp.png" title="应用内来电通知" />
+  <ImageItem src="/images/callkit/ios/notification_system.png" title="APNs 来电通知" />
+  <ImageItem src="/images/callkit/ios/notification_lock.png" title="VoIP 通话来电通知" />
+</ImageGallery>
 
 ## 通话管理
 
