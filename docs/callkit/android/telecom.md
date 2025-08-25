@@ -22,7 +22,7 @@ Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，
 
 | 组件 | 说明 |
 | :--- | :--- |
-| `IncomingCallService` | 用于接收 CallKit 来电请求，并将其转发给你自己的 `ConnectionService` 进行处理。在该服务中，通过 `TelecomManager.addNewIncomingCall(handle, extras)` 触发系统来电。失败或账号未启用时，通过 `CallKitClient.signalingManager.startSendEvent()` 跳转到默认来电 UI 兜底。  // TODO：兜底再换个词 |
+| `IncomingCallService` | 用于接收 CallKit 来电请求，并将其转发给你自己的 `ConnectionService` 进行处理。在该服务中，通过 `TelecomManager.addNewIncomingCall(handle, extras)` 触发系统来电。失败或账号未启用时，通过 `CallKitClient.signalingManager.startSendEvent()` 跳转到默认来电 UI 界面。 |
 | `VoipConnectionService`（`ConnectionService`） | 充当你的 VoIP 应用与 Android 系统原生通话 UI 和逻辑之间的桥梁，唤起来电界面。系统接听/拒绝，分别调用 `signalingManager.answerCall()` / `signalingManager.refuseCall()` 并启动 CallKit 通话界面。 |  
 | `PhoneAccountHelper` | VoIP 账户的注册、启用检测和设置引导。 |
 
