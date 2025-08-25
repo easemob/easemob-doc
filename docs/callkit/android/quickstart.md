@@ -140,6 +140,8 @@ android.enableJetifier=true
 
 2. 打开 `app/src/main/res/layout/activity_main.xml` 文件，替换为如下内容：
 
+::: details app/src/main/res/layout/activity_main.xml  文件中的替换代码
+
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -229,6 +231,8 @@ android.enableJetifier=true
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
+:::
+
 ### 步骤 4 实现代码逻辑
 
 1. 初始化 CallKit。
@@ -237,6 +241,7 @@ android.enableJetifier=true
 
 打开 `MainActivity` 文件，替换为如下代码：
 
+::: details MainActivity 文件中的替换代码
 ```kotlin
 package com.hyphenate.callkit.quickstart
 
@@ -553,6 +558,7 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
+:::
 
 点击 Android Studio 菜单栏中的 `Sync Project with Gradle Files` 同步工程。现在可以发起首次通话。
 

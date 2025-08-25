@@ -115,7 +115,9 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 在项目的 `Main.storyboard` 和 `ViewController.swift` 中替换代码，然后运行。
 
 1. 右键点击项目中的 `Main.storyboard`，选择 **Open As** > **Source Code**，替换为如下代码：
-   
+
+::: details `Main.storyboard` 中的替换代码
+
 ``` XML
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
@@ -238,7 +240,11 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 
 ```
 
+:::
+
 2. 在项目中的 `ViewController.swift`，替换为如下代码：
+
+::: details ViewController.swift 文件中的替换代码：
 
 ```xml
 import UIKit
@@ -326,6 +332,8 @@ extension ViewController: QLPreviewControllerDataSource {
     
 }
 ```
+
+:::
 
 ### 步骤 5 发起通话
 

@@ -54,14 +54,23 @@ yarn dev
 ### 步骤 3 开始通话
 
 1. 登录：填写 App Key、用户 ID 和密码，点击 **登录**，等待登录成功提示。
+   
+   <img src="/images/callkit/web/project_runthrough1.png" >
+
 2. 完成配置：输入被叫用户 ID（一对一通话）或群组 ID（群组通话），点击 **完成配置**。
+   
+   <img src="/images/callkit/web/project_runthrough2.png" >
+
 3. （可选）选择通话背景：点击 **选择背景** 在背景选择面板中选择喜欢的通话背景图片。
+   
+   <img src="/images/callkit/web/project_runthrough3.png" >
+
 4. 发起通话：
-   - 一对一视频通话：输入对方用户 ID，点击 **发起一对一视频通话**。
-   - 一对一音频通话：输入对方用户 ID，点击 **发起一对一语音通话**。
-   - 群组通话：点击 **发起群组通话**，选择要邀请的成员。
+ 
+   - 点击 **发起视频通话** 或 **发起语音通话** 发起一对一通话。 
+   - 点击 **发起群组视频通话**，选择要邀请的成员，发起群组视频通话。
+  
+  <img src="/images/callkit/web/project_runthrough4.png" >
+
 5. 授权权限：在浏览器弹出的权限请求中，允许访问摄像头和麦克风。
 6. 通话控制：在通话中可以控制静音、摄像头、扬声器等，点击 **结束通话** 挂断。
-
-// TODO：截图
-sample_project_runthrough.png

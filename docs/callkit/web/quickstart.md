@@ -62,6 +62,8 @@ yarn add easemob-chat-uikit
 
 1. 替换 `src/App.tsx` 文件内容：
 
+::: details src/App.tsx 文件中的替换代码
+
 ```tsx
 import React, { useState, useRef, useEffect } from "react";
 import {
@@ -375,8 +377,11 @@ const App: React.FC = () => {
 
 export default App;
 ```
+:::
 
 2. 替换 `src/App.css` 文件内容：
+
+::: details src/App.css 文件中的替换代码
 
 ```css
 .app-container {
@@ -567,6 +572,7 @@ h3 {
   }
 }
 ```
+:::
 
 ### 步骤 4 配置 App Key
 
