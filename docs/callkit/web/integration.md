@@ -283,9 +283,9 @@ CallKit 组件可以设置回调事件，实现监听 CallKit 内部状态和错
 
 ### 步骤 5 发起通话
 
-- **发起一对一通话**
+#### 发起一对一通话
 
-  你可以使用 `startSingleCall` 方法发起一对一通话，`callType` 设置为 `video` 为视频通话，`audio` 为音频通话。
+你可以使用 `startSingleCall` 方法发起一对一通话，`callType` 设置为 `video` 为视频通话，`audio` 为音频通话。
 
 ```tsx
 const App = () => {
@@ -326,11 +326,11 @@ const App = () => {
   <ImageItem src="/images/callkit/web/1v1_voice_caller_invitation.png" title="音频通话" />
 </ImageGallery>
 
-- **发起群组通话**
+#### 发起群组通话
 
-  要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [环信控制台文档](/product/console/operation_group.html#创建群组)。
-
-  你可以使用 `startGroupCall` 发起群组通话，指定群组 ID，`callType` 设置为 `video` 为视频通话，`audio` 为音频通话，并设置邀请消息 `msg`。CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。
+- **创建群组**：要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [环信控制台文档](/product/console/operation_group.html#创建群组)。
+- **发起群组通话**：你可以使用 `startGroupCall` 发起群组通话，指定群组 ID，`callType` 设置为 `video` 为视频通话，`audio` 为音频通话，并设置邀请消息 `msg`。CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。
+- **通话中邀请他人**：群组通话中，当前用户可以点击通话界面右上角的邀请按钮向其他用户发起邀请。
 
 ```tsx
 // 群组通话
@@ -343,7 +343,14 @@ const startGroupCall = () => {
 };
 ```
 
-// TODO：没有接听和结束通话？
+### 步骤 6 接听通话
+
+当接收到通话邀请时，CallKit 会自动触发 `onReceivedCall` 回调：
+1. 弹出通话邀请界面。
+2. 播放来电铃声。
+3. 显示通话邀请通知。
+
+被叫用户可选择接听、拒绝或挂断通话。
 
 ## 高阶功能
 

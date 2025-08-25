@@ -3,7 +3,7 @@
 ## 功能概述
 
 环信 CallKit 是一套基于环信即时通讯 IM（基于 IM 4.16.0 及以上）和声网 RTC 结合开发的音视频 UI 库，提供以下核心功能：
-
+// TODO：是否要保留？
 - **一对一语音/视频通话**：支持高质量的一对一音视频通话。
 - **群组语音/视频通话**：支持群组内多人同时参与的音视频通话。
 - **完整的通话流程**：包括邀请、接听、挂断、拒绝等完整的通话体验。
@@ -15,7 +15,6 @@
   <ImageItem src="/images/callkit/android/1v1_video_caller_invitation.png" title="一对一通话邀请" />
   <ImageItem src="/images/callkit/android/group_call_ongoing.png" title="群组通话" />
 </ImageGallery>
-
 
 ## 推荐开发环境
 
@@ -291,11 +290,10 @@ private fun startVoiceCall() {
 
 #### 发起群组通话
 
-要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [即时通讯 IM Android SDK 文档](/document/android/group_manage.html#创建群组) 或 [环信控制台文档](/product/console/operation_group.html#创建群组)。
-
-发起群组通话指定群组 ID 后，CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。若选择的成员数量超过 16 人时，系统会自动提示 “人数超出最大限制16人” 并阻止发起通话。
-
-`ext` 会在 `CallKitListener#onReceivedCall` 中回调给接收方。
+- **创建群组**：要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [即时通讯 IM Android SDK 文档](/document/android/group_manage.html#创建群组) 或 [环信控制台文档](/product/console/operation_group.html#创建群组)。
+- **发起群组通话**：指定群组 ID 后，CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。若选择的成员数量超过 16 人时，系统会自动提示 “人数超出最大限制16人” 并阻止发起通话。
+- **通话扩展信息**：`ext` 会在 `CallKitListener#onReceivedCall` 中回调给接收方。
+- **通话中邀请他人**：群组通话中，当前用户可以点击通话界面右上角的邀请按钮向其他用户发起邀请。
 
 ```kotlin
 private fun startGroupCall() {
@@ -314,45 +312,14 @@ private fun startGroupCall() {
   <ImageItem src="/images/callkit/android/group_call_caller_user_selection.png" title="主叫选择用户进入通话" />
 </ImageGallery>
 
-#### 群组通话中邀请
-
-群组通话中，当前用户可以点击通话界面右上角的邀请按钮向其他用户发起邀请。
-
-// TODO：添加截图
-
 ### 步骤 5 接听通话
 
-当接收到通话邀请时，`CallKit` 会自动触发 `onReceivedCall` 回调：
+当接收到通话邀请时，CallKit 会自动触发 `onReceivedCall` 回调：
 1. 弹出通话邀请界面。
 2. 播放来电铃声。
 3. 显示通话邀请通知（当 App 在后台时）。
 
-被叫用户可以在通话邀请界面进行以下操作：
-- **接听**：接受通话邀请，进入通话界面。
-- **拒绝**：拒绝通话邀请。
-- **挂断**：通话过程中点击挂断按钮。
-
-<ImageGallery :columns="3">
-  <ImageItem src="/images/callkit/android/1v1_video_callee_invitation.png" title="一对一视频通话" />
-  <ImageItem src="/images/callkit/android/1v1_voice_callee_invitation.png" title="一对一音频通话" />
-  <ImageItem src="/images/callkit/android/group_call_callee_invitation.png" title="群组通话" />
-</ImageGallery>
-
-### 步骤 6 结束通话
-
-正常情况下，用户通过 UI 界面挂断后由 CallKit 内部处理即可。在某些场景下，例如，用户正在使用 CallKit 进行通话，此时系统电话来电，开发者若希望以系统电话为主，可调用以下接口先主动结束 CallKit 通话，然后接听系统电话。
-
-```kotlin
-// 主动结束通话
-CallKitClient.endCall()
-```
-
-<ImageGallery :columns="3">
-  <ImageItem src="/images/callkit/android/1v1_video_ongoing.png" title="一对一视频通话" />
-  <ImageItem src="/images/callkit/android/1v1_voice_ongoing.png" title="一对一音频通话" />
-  <ImageItem src="/images/callkit/android/group_call_ongoing.png" title="群组通话" />
-</ImageGallery>
-
+被叫用户可选择接听、拒绝或挂断通话。
 
 ### 步骤 7 离线推送
 

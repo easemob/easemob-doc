@@ -139,7 +139,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="call user or group with id" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="laE-OW-CWK">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="call user with id" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="laE-OW-CWK">
                                 <rect key="frame" x="75" y="191" width="225" height="40"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
@@ -180,7 +180,6 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
                                 <segments>
                                     <segment title="audio"/>
                                     <segment title="video"/>
-                                    <segment title="group"/>
                                 </segments>
                                 <color key="tintColor" systemColor="systemBlueColor"/>
                                 <connections>
@@ -307,14 +306,10 @@ class ViewController: UIViewController {
     @IBAction func callAction(_ sender: Any) {
         self.view.endEditing(true)
         guard let input = inputField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !input.isEmpty else {
-            self.showCallToast(toast: "Please enter a valid username or group id")
+            self.showCallToast(toast: "Please enter a valid username id")
             return
         }
-        if self.callType != .groupCall {
-            CallKitManager.shared.call(with: input, type: self.callType)
-        } else {
-            CallKitManager.shared.groupCall(groupId: input)
-        }
+        CallKitManager.shared.call(with: input, type: self.callType)
     }
 }
 
@@ -334,11 +329,11 @@ extension ViewController: QLPreviewControllerDataSource {
 
 ### 步骤 5 发起通话
 
-1. 登录：在登录界面输入用户 ID 和 [用户 Token](/product/console/operation_user.html#查看用户-token)，然后点击 **Login**。  
-2. 发起通话：选择 **audio** 或 选择 **video**，输入呼叫用户的用户 ID，点击 **call**，发起一对一音频或视频通话。
+1. 登录：在登录界面输入用户 ID，然后点击 **Login**。  
+2. 发起通话：选择 **audio** 或 选择 **video**，输入呼叫用户的用户 ID，点击 **Call**，发起一对一音频或视频通话。
 
 你可以点击 **log** 查看 CallKit 相关日志，搜索 `EaseCallUIKit` 过滤 CallKit 日志。
 
-<img src="/images/callkit/ios/example.png" width="400">
+<img src="/images/callkit/ios/quickstart_run.png" width="400">
 
 

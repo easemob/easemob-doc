@@ -262,11 +262,9 @@ extension MainViewController: CallServiceListener {
 
 #### 发起群组通话
 
-// TODO：没有群组通话中邀请？
-
-要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [环信控制台文档](/product/console/operation_group.html#创建群组)。
-
-发起群组通话指定群组 ID 后，CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。若选择的成员数量超过 16 人时，系统会自动提示 “人数超出最大限制16人” 并阻止发起通话。
+- **创建群组**：要发起群组通话，你需要首先创建群组，在群组中添加用户，详见 [环信控制台文档](/product/console/operation_group.html#创建群组)。
+- **发起群组通话**：指定群组 ID 后，CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。若选择的成员数量超过 16 人时，系统会自动提示 “人数超出最大限制16人” 并阻止发起通话。
+- **通话中邀请他人**：群组通话中，当前用户可以点击通话界面右上角的邀请按钮向其他用户发起邀请。
 
 ```Swift
 @IBAction func callAction(_ sender: Any) {
@@ -283,8 +281,16 @@ extension MainViewController: CallServiceListener {
   <ImageItem src="/images/callkit/ios/group_call_caller_user_selection.png" title="主叫选择用户进入通话" />
 </ImageGallery>
 
+### 步骤 6 接听通话
 
-### 步骤 6 离线推送
+当接收到通话邀请时，CallKit 会自动触发 `onReceivedCall` 回调：
+1. 弹出通话邀请界面。
+2. 播放来电铃声。
+3. 显示通话邀请通知（当 App 在后台时）。
+
+被叫用户可选择接听、拒绝或挂断通话。
+
+### 步骤 7 离线推送
 
 为保证被叫用户 App 在离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [开启 APNs 推送](/document/ios/push/push_notification_mode_dnd.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃弹窗。
 

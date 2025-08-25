@@ -2,16 +2,7 @@
 
 Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，包括传统的基于 SIM 卡的电话和 VoIP 通话。当有来电时，Telecom 框架会处理来电显示、接听、挂断等功能，并通知相关的应用程序。
 
-// TODO：截图是否合适？有第一个图吗？是否要与livecommunicationkit的来电流程保持一致
-
-<ImageGallery :columns="3">
-  <ImageItem src="/images/callkit/android/1v1_video_caller_invitation.png" title="主叫发起通话邀请" />
-  <ImageItem src="/images/callkit/android/1v1_video_callee_invitation.png" title="被叫收到通话邀请" />
-  <ImageItem src="/images/callkit/android/1v1_video_ongoing.png" title="通话中" />
-  <ImageItem src="/images/callkit/android/1v1_video_notification_inapp.png" title="应用内来电通知" />
-  <ImageItem src="/images/callkit/android/notification_system.png" title="系统级来电通知" />
-  <ImageItem src="/images/callkit/android/1v1_video_float.png" title="悬浮窗" />
-</ImageGallery>
+// TODO：添加截图
 
 ## 应用场景
 
@@ -69,7 +60,7 @@ PhoneAccountHelper.registerPhoneAccount(context)
   <ImageItem src="/images/callkit/android/voip_account_enable.png" title="启用 VoIP 账户" />
 </ImageGallery>
 
-1. 启用 Telecom 前，CallKit 内部会检查 VoIP 账户的状态：
+3. 启用 Telecom 前，CallKit 内部会检查 VoIP 账户的状态：
    - `status.isSupported`：设备是否支持 VoIP 功能。
    - `isRegistered`：是否已注册。
    - `isEnabled`：是否已开启。

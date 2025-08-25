@@ -46,12 +46,6 @@
     }
 ```
 
-<ImageGallery :columns="3">
-  <ImageItem src="/images/callkit/ios/1v1_video_notification_inapp.png" title="应用内来电通知" />
-  <ImageItem src="/images/callkit/ios/notification_system.png" title="APNs 来电通知" />
-  <ImageItem src="/images/callkit/ios/notification_lock.png" title="VoIP 通话来电通知" />
-</ImageGallery>
-
 ## 通话管理
 
 环信 CallKit 通过 `ConversationManager` 进行通话管理，包括上报来电通知、管理通话生命周期，例如，接听、挂断、静音等，以及通话超时处理。 
@@ -89,12 +83,6 @@
 来电流程如下图所示：
 
 ![img](/images/callkit/ios/incoming_call_flowchart.png)
-
-来电界面如下图所示：
-
-<ImageGallery>
-  <ImageItem src="/images/callkit/ios/incoming_call_flow.png" title="来电流程" />
-</ImageGallery>
 
 ### 2. 接听流程
 
