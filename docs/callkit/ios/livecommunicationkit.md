@@ -67,6 +67,10 @@
 5. 上报新的来电会话。
 6. 更新 `CallKitManager` 状态。
 
+来电流程如下图所示：
+
+![img](/images/callkit/ios/incoming_call_flowchart.png)
+
 推送通知载荷应包含以下字段：
 
 ```json
@@ -81,29 +85,18 @@
 }
 ```
 
-来电流程如下图所示：
-
-![img](/images/callkit/ios/incoming_call_flowchart.png)
-
 ### 2. 接听流程
 
-1. 用户点击接听。
-2. 执行 `JoinConversationAction`。
-3. 调用 `CallKitManager.accept()`。
-4. 显示连接中提示。
+
+![img](/images/callkit/ios/call_answer_flowchart.png)
 
 ### 3. 挂断流程
 
-1. 用户点击挂断。
-2. 执行 `EndConversationAction`。
-3. 调用 `CallKitManager.hangup()`。
-4. 清理会话资源。
+![img](/images/callkit/ios/call_hangup_flowchart.png)
 
 ### 4. 静音操作
 
-1. 用户切换静音状态。
-2. 执行 `MuteConversationAction`。
-3. 更新本地音频状态。
+![img](/images/callkit/ios/call_mute_flowchart.png)
 
 ## 错误处理
 
