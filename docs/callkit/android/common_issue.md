@@ -89,11 +89,15 @@ CallKit 会自动处理音频路由切换，支持扬声器、听筒、蓝牙耳
 - 检查 VoIP 账户是否已注册和启用。
 - 路径：以小米手机为例，点击电话拨号图标，点击右上角设置图标，选择 **高级设置 > 通话账户设置**，启用对应的 VoIP 账户。
 
-## 14.  VoIP 账户未启用
+## 14. VoIP 账户未启用
 
 若提示 `PhoneAccount` 未注册或未启用：
 - CallKit 在使用 Telecom 框架时会检查 VoIP 账户状态。
 - 参考 DEMO 工程的 [MainActivity#checkPhoneAccount](https://github.com/easemob/easemob-demo-android/blob/main/app/src/main/kotlin/com/hyphenate/chatdemo/MainActivity.kt)函数实现，创建并启用 VoIP 账户。
 - 通过 `PhoneAccountHelper.getPhoneAccountStatus()` 检查 VoIP 账户的状态。
+
+## 15. 好友检查
+
+默认情况下，环信 CallKit 支持陌生人之间进行通话，即无需添加好友即可通话。若在即时通讯 IM 控制台 [开启了好友检查](/product/console/basic_user.html#好友关系检查)，会导致非好友不能通过 CallKit 进行一对一通话，群组音视频通话信令也会受影响（邀请使用群定向消息，其他信令均为单聊消息）。建议不开启好友检查，后续 SDK 迭代会优化。
 
 

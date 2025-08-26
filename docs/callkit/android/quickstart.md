@@ -16,7 +16,7 @@
 1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
 3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和 Token。
-4. [开通音视频服务](product_activation.html)。
+4. [开通音视频服务](product_activation.html)。为了保障流畅的用户体验，开通服务后，你需等待 15 分钟才能实现发起音视频通话。
    
 ## 快速开始
 
