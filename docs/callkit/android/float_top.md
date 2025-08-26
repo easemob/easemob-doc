@@ -46,5 +46,5 @@
 
   `hideFloatWindow()`：隐藏悬浮窗。
    
-  `isFloatWindowShowing()`：悬浮窗否在展示。
+  `isFloatWindowShowing()`：悬浮窗是否在展示。
   

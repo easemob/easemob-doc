@@ -28,8 +28,6 @@ val config = CallKitConfig().apply {
 CallKitClient.init(context, config)
 ```
 
-//todo Android 工程师插入截图
-
 ## 通话超时设置
 
 CallKit 内部呼出/呼入超时时间默认 30 秒，开发者可以通过以下代码实现自定义超时时间。
@@ -57,7 +55,7 @@ CallKitClient.init(context, config)
 | `view_incoming_multiple.xml` <br/> `view_connected_multiple.xml` | 群组通话来电/通话中视图。 |
 | `view_call_member.xml` <br/> `view_multi_video_call_member.xml` | 成员头像、昵称、音量/状态指示项。 |
 | `callkit_float_window_video.xml` <br/> `callkit_float_window_voice.xml` | 后台悬浮窗视图（视频小窗/语音小窗）。 |
-| `callkit_incomimg_call_top_window.xml` | 顶部来电条（可滑动收起/接听/挂断）。 |
+| `callkit_incoming_call_top_window.xml` | 顶部来电条（可滑动收起/接听/挂断）。 |
 | `callkit_fragment_base_list.xml` | 通用列表容器（内含 RecyclerView/刷新容器）。 |
 | `callkit_layout_default_no_data.xml` <br/> `callkit_layout_no_data_show_nothing.xml` | 无数据/空占位视图。 |
 | `callkit_layout_group_member_select_item.xml` | 群成员选择单元项（头像/昵称/选中态）。 |
@@ -186,7 +184,7 @@ CallKitClient.init(context, config)
 
 CallKit 提供完整的中文本地化支持，所有英文文案均有对应的中文翻译。
 
-中文和英文文案路径为 `res/values-zh/callkit_strings.xml`，主要差异如下：
+英文文案默认路径应为 `res/values/callkit_strings.xml`，中文文案路径为 `res/values-zh/callkit_strings.xml`。文案的主要差异如下：
 
 | 英文                | 中文   | 
 | :------------------- | :----- | 
