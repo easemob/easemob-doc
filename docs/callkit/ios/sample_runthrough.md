@@ -48,10 +48,8 @@ pod install
 
 1. 登录：在登录界面输入用户 ID 和 [用户 Token](/product/console/operation_user.html#查看用户-token)，然后点击 **Login**。  
 2. 发起通话：
-   - 一对一语音通话：选择 **audio**，输入呼叫用户的用户 ID，点击 **Call**。
-   - 一对一视频通话：选择 **video**，输入呼叫用户的用户 ID，点击 **Call**。
+   - 一对一通话：选择 **audio** 或 **video**，输入呼叫用户的用户 ID，点击 **Call**。
    - 群组通话：选择 **group**，输入群组 ID，点击 **Call**。
-
 你可以点击 **log** 查看 CallKit 相关日志，搜索 `EaseCallUIKit` 过滤 CallKit 日志。
 
 <img src="/images/callkit/ios/project_runthrough.png" width="400">

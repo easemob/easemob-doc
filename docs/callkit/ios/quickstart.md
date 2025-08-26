@@ -340,7 +340,7 @@ extension ViewController: QLPreviewControllerDataSource {
 
 :::
 
-### 步骤 5 发起通话
+### 步骤 5 发起首次通话
 
 1. 登录：在登录界面输入用户 ID，然后点击 **Login**。  
 2. 发起通话：选择 **audio** 或 选择 **video**，输入呼叫用户的用户 ID，点击 **Call**，发起一对一音频或视频通话。

@@ -17,7 +17,7 @@
 | 组件 | 说明 |
 | :--- | :--- |
 | `RtcManager` | - 管理声网 RTC 引擎：加入/离开频道、前后台质量、参与者、摄像头/麦克风、切换等。<br/> - [查看更多功能实现](https://doc.shengwang.cn/doc/rtc/android/get-started/quick-start#%E5%AE%9E%E7%8E%B0%E5%B8%B8%E7%94%A8%E5%9B%9E%E8%B0%83)。 |
-| `SignalingManager` | 负责信令交互（邀请、Alert/仲裁、接听/拒绝/取消、超时控制），触发 UI（Activity/悬浮窗/Telecom）和 RTC 引擎执行对应的动作。[点击查看具体信令](www.xxxxxx.com)。 |
+| `SignalingManager` | 负责信令交互（邀请、Alert/仲裁、接听/拒绝/取消、超时控制），触发 UI（Activity/悬浮窗/Telecom）和 RTC 引擎执行对应的动作。[点击查看具体信令](signaling.html)。 |
 | `AudioController` | 负责铃声播放（外呼、来电、结束 ding），支持 assets/raw/绝对文件路径。 |
 | `FloatWindow` | 悬浮窗的显示。 |
 | `IncomingCallTopWindow` | 来电通知栏的显示。 |

@@ -4,10 +4,10 @@
 
 ## 推荐环境
 
-- Node.js: 16.0 及以上
+- Node.js: 16.0 或以上版本
 - npm/yarn: 推荐最新版本
-- React: 18.0 及以上
-- TypeScript: 4.9 及以上
+- React: 18.0 或以上版本
+- TypeScript: 4.9 或以上版本
 - 现代浏览器: Chrome/Firefox/Safari/Edge 最新版本
 
 ## 前提条件

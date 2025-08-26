@@ -1,6 +1,6 @@
 # CallKit 集成指南
 
-使用环信 CallKit（基于环信即时通讯 IM SDK V4.16.0 或以上版本）之前，你需要将其集成到你的应用中。
+环信 CallKit 是一套基于环信即时通讯 IM（基于 IM 4.16.0 及以上）和声网 RTC 结合开发的音视频 UI 库。使用环信 CallKit 之前，你需要将其集成到你的应用中。
 
 <ImageGallery>
   <ImageItem src="/images/callkit/ios/1v1_video_caller_invitation.png" title="一对一通话邀请" />

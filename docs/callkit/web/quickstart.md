@@ -4,13 +4,13 @@
 
 ## 推荐环境
 
-- Node.js: 18.0 及以上
-- npm: 9.0 及以上 或 yarn: 1.22 及以上
-- React: 18.0 及以上
-- TypeScript: 4.9 及以上
-- Vite: 4.0 及以上
+- Node.js: 18.0 或以上版本
+- npm: 9.0 或以上 或 yarn: 1.22 或以上版本
+- React: 18.0 或以上版本
+- TypeScript: 4.9 或以上版本
+- Vite: 4.0 或以上版本
 - 现代浏览器: Chrome/Firefox/Safari/Edge 最新版本
-- IM SDK 4.16.0 及以上或 UIKit 2.0.0 及以上
+- IM SDK 4.16.0 或以上/UIKit 2.0.0 或以上版本
 
 ## 前提条件
 
