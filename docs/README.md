@@ -18,6 +18,9 @@ products:
     text: 隐私协议
   - link: "/product/security_best_practices.html"
     text: 安全最佳实践
+  - link: "https://rte-src.vulbox.com/"
+    text: 安全响应中心  
+    target: '_blank'
 starter:
   - title: "SDK 快速开始"
     platform:
