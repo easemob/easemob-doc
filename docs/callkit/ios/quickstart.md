@@ -76,20 +76,19 @@ pod install
 在整个应用生命周期中，初始化一次即可。
 
 ```Swift
+import UIKit
 import EaseCallUIKit
-
-@UIApplicationMain
-class AppDelegate：UIResponder，UIApplicationDelegate {
-
-     var window: UIWindow？
-
-     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let option = ChatSDKOptions(appkey: "your app key")//首先需要初始化 IM SDK
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+        let option = ChatSDKOptions(appkey: "easemob#easeim")//首先需要初始化 IM SDK
         option.enableConsoleLog = true//开启日志
         option.isAutoLogin = false//此处只是示例项目，真实使用时参考环信Demo源码，自动登录更方便
         ChatClient.shared().initializeSDK(with: option)//初始化SDK
         CallKitManager.shared.setup()//初始化EaseCallUIKit
-     }
+        return true
+    }
 }
 ```
 
@@ -120,11 +119,11 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 
 ``` XML
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22181" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22182"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -132,51 +131,52 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="EaseCallUIKitQuickStart"customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="EaseCallUIKitQuickStart" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="call user with id" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="laE-OW-CWK">
-                                <rect key="frame" x="75" y="191" width="225" height="40"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="call user or group with id" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="laE-OW-CWK">
+                                <rect key="frame" x="94.5" y="171" width="225" height="40"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kOp-K7-HeC"/>
+                                    <constraint firstAttribute="width" constant="225" id="width-laE-OW-CWK"/>
                                 </constraints>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zid-qi-Z7H">
-                                <rect key="frame" x="161.5" y="254" width="52.5" height="35"/>
+                                <rect key="frame" x="180.5" y="234" width="53" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Qdf-ZL-nrv"/>
+                                    <constraint firstAttribute="width" constant="53" id="width-zid-qi-Z7H"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Call"/>
                                 <connections>
                                     <action selector="callAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="21A-e9-7bB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1TW-7c-QOv">
-                                <rect key="frame" x="154" y="316" width="66" height="35"/>
+                                <rect key="frame" x="174" y="284" width="66" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="X5z-2c-9KQ"/>
+                                    <constraint firstAttribute="width" constant="66" id="width-1TW-7c-QOv"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Login"/>
                                 <connections>
                                     <action selector="loginAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="D5E-pO-2Jw"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="KgU-kb-zgq">
-                                <rect key="frame" x="89" y="129" width="197" height="32"/>
+                                <rect key="frame" x="108.5" y="109" width="197" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="49T-gN-YNX"/>
+                                    <constraint firstAttribute="height" constant="32" id="49T-gN-YNX"/>
                                     <constraint firstAttribute="width" constant="197" id="64h-61-hN9"/>
                                 </constraints>
                                 <segments>
@@ -189,19 +189,18 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Qd-2k-2aV">
-                                <rect key="frame" x="161" y="370" width="53" height="35"/>
+                                <rect key="frame" x="180.5" y="334" width="53" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="fuc-9c-KcU"/>
                                     <constraint firstAttribute="width" constant="53" id="u4m-wu-cwy"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Log"/>
                                 <connections>
                                     <action selector="logAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="QkB-ye-mNH"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="zid-qi-Z7H" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="3PV-gJ-xUs"/>
                             <constraint firstItem="zid-qi-Z7H" firstAttribute="top" secondItem="laE-OW-CWK" secondAttribute="bottom" constant="23" id="3d9-xN-rVV"/>
@@ -211,7 +210,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
                             <constraint firstItem="0Qd-2k-2aV" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Ptx-cV-DpW"/>
                             <constraint firstItem="laE-OW-CWK" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ZDm-c5-ZIK"/>
                             <constraint firstItem="1TW-7c-QOv" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="a05-e3-vQV"/>
-                            <constraint firstItem="0Qd-2k-2aV" firstAttribute="top" secondItem="1TW-7c-QOv" secondAttribute="bottom" constant="19" id="r8t-en-w10"/>
+                            <constraint firstItem="0Qd-2k-2aV" firstAttribute="top" secondItem="1TW-7c-QOv" secondAttribute="bottom" constant="15" id="r8t-en-w10"/>
                             <constraint firstItem="laE-OW-CWK" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="171" id="vBn-aQ-3Q3"/>
                         </constraints>
                     </view>
@@ -229,11 +228,17 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
         </scene>
     </scenes>
     <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="labelColor">
+            <color white="0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
@@ -246,7 +251,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 
 ::: details ViewController.swift 文件中的替换代码：
 
-```xml
+``` Swift
 import UIKit
 import EaseCallUIKit
 import QuickLook
@@ -312,7 +317,7 @@ class ViewController: UIViewController {
     @IBAction func callAction(_ sender: Any) {
         self.view.endEditing(true)
         guard let input = inputField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !input.isEmpty else {
-            self.showCallToast(toast: "Please enter a valid username id")
+            self.showCallToast(toast: "Please enter a valid username or group id")
             return
         }
         CallKitManager.shared.call(with: input, type: self.callType)
