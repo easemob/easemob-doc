@@ -45,7 +45,14 @@
   <ImageItem src="/images/callkit/web/group_call_callee_invitation.png" title="被叫收到通话邀请" />
   <ImageItem src="/images/callkit/web/group_call_ongoing.png" title="通话中" />
   <ImageItem src="/images/callkit/web/group_call_ongoing_add.png" title="通话中添加他人" />
+</ImageGallery>
+<ImageGallery :columns="2">
   <ImageItem src="/images/callkit/web/group_call_float.png" title="悬浮窗" />
+</ImageGallery>
+
+### 来电通知
+
+<ImageGallery>
   <ImageItem src="/images/callkit/web/group_call_notification_inapp.png" title="应用内来电通知" />
 </ImageGallery>
 
