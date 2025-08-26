@@ -47,6 +47,7 @@
 <ImageGallery :columns="4">
   <ImageItem src="/images/callkit/android/group_call_caller_user_selection.png" title="主叫选择用户进入通话" />
   <ImageItem src="/images/callkit/android/group_call_callee_invitation.png" title="被叫收到通话邀请" />
+  <ImageItem src="/images/callkit/android/group_call_ongoing_add.png" title="通话中添加他人" />
   <ImageItem src="/images/callkit/android/group_call_ongoing.png" title="通话中" />
   <ImageItem src="/images/callkit/android/group_call_float.png" title="悬浮窗" />
 </ImageGallery>
