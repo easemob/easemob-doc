@@ -13,7 +13,7 @@
   <ImageItem src="/images/callkit/ios/1v1_video_float.png" title="一对一视频通话 - PiP" />
 </ImageGallery>
 
-## 基础 PiP 配置
+## PiP 基本配置
 
 1. 开启画中画功能。
    

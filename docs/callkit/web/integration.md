@@ -2,16 +2,6 @@
 
 本文档详细介绍如何在你的 React 项目中集成和使用环信 CallKit，实现完整的音视频通话功能。
 
-## 功能概述
-
-CallKit 是环信提供的一站式音视频通话解决方案，提供以下核心功能：
-
-- **一对一语音/视频通话**：支持视频通话和语音通话。
-- **群组语音/视频通话**：支持多人视频通话和语音通话。
-- **丰富的控制功能**：静音、摄像头控制、扬声器控制等。
-- **灵活的布局管理**：多种布局模式、可拖拽、可调整大小。
-- **完善的用户体验**：来电通知、铃声、网络质量指示等。
-
 <ImageGallery>
   <ImageItem src="/images/callkit/web/1v1_video_caller_invitation.png" title="一对一通话邀请" />
   <ImageItem src="/images/callkit/web/group_call_ongoing.png" title="群组通话" />

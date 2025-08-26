@@ -27,7 +27,7 @@
   <ImageItem src="/images/callkit/web/1v1_video_caller_invitation.png" title="主叫发起通话邀请" />
   <ImageItem src="/images/callkit/web/1v1_video_callee_invitation.png" title="被叫收到通话邀请" />
   <ImageItem src="/images/callkit/web/1v1_video_ongoing.png" title="通话中" />
-  <ImageItem src="/images/callkit/web/1v1_video_float.png" title="悬浮窗" />
+  <ImageItem src="/images/callkit/web/1v1_video_float.png" title="最小化" />
 </ImageGallery>
 
 ### 一对一音频通话
@@ -36,7 +36,7 @@
   <ImageItem src="/images/callkit/web/1v1_voice_caller_invitation.png" title="主叫发起通话邀请" />
   <ImageItem src="/images/callkit/web/1v1_voice_callee_invitation.png" title="被叫收到通话邀请" />
   <ImageItem src="/images/callkit/web/1v1_voice_ongoing.png" title="通话中" />
-  <ImageItem src="/images/callkit/web/1v1_voice_float.png" title="悬浮窗" />
+  <ImageItem src="/images/callkit/web/1v1_voice_float.png" title="最小化" />
 </ImageGallery>
 
 ### 群组通话
@@ -47,7 +47,7 @@
   <ImageItem src="/images/callkit/web/group_call_ongoing_add.png" title="通话中添加他人" />
 </ImageGallery>
 <ImageGallery :columns="2">
-  <ImageItem src="/images/callkit/web/group_call_float.png" title="悬浮窗" />
+  <ImageItem src="/images/callkit/web/group_call_float.png" title="最小化" />
 </ImageGallery>
 
 ### 来电通知
