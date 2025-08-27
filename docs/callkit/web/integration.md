@@ -333,6 +333,10 @@ const startGroupCall = () => {
 };
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/callkit/web/group_call_caller_user_selection.png" title="主叫选择用户进入通话" />
+</ImageGallery>
+
 ### 步骤 6 接听通话
 
 当接收到通话邀请时，CallKit 会自动触发 `onReceivedCall` 回调：
@@ -341,6 +345,12 @@ const startGroupCall = () => {
 3. 显示通话邀请通知。
 
 被叫用户可选择接听、拒绝或挂断通话。
+
+<ImageGallery :columns="2">
+  <ImageItem src="/images/callkit/web/1v1_video_callee_invitation.png" title="一对一视频通话" />
+  <ImageItem src="/images/callkit/web/1v1_voice_callee_invitation.png" title="一对一音频通话" />
+  <ImageItem src="/images/callkit/web/group_call_callee_invitation.png" title="群组通话" />
+</ImageGallery>
 
 ## 高阶功能
 

@@ -314,6 +314,12 @@ private fun startGroupCall() {
 
 被叫用户可选择接听、拒绝或挂断通话。
 
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/1v1_video_callee_invitation.png" title="一对一视频通话" />
+  <ImageItem src="/images/callkit/android/1v1_voice_callee_invitation.png" title="一对一音频通话" />
+  <ImageItem src="/images/callkit/android/group_call_callee_invitation.png" title="群组通话" />
+</ImageGallery>
+
 ### 步骤 7 离线推送
 
 为保证被叫用户 App 在离线时也能收到通话请求，用户需开启离线推送。关于如何开启离线推送，请参见 [开启 Android Push](/document/android/push/push_notification_mode_dnd.html)。开启离线推送后，用户在离线情况下收到呼叫请求时，其手机通知页面会弹出一条通知消息，用户点击该消息可唤醒 App 并进入振铃页面。
