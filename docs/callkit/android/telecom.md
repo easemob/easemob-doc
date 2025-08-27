@@ -2,6 +2,13 @@
 
 Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，包括传统的基于 SIM 卡的通话和 VoIP 通话。当有来电时，Telecom 框架会处理来电显示、接听、挂断等功能，并通知相关的应用程序。
 
+<ImageGallery :columns="4">
+  <ImageItem src="/images/callkit/android/notification_lock.png" title="锁屏来电" />
+  <ImageItem src="/images/callkit/android/1v1_video_ongoing.png" title="一对一视频-通话中" />
+  <ImageItem src="/images/callkit/android/1v1_voice_ongoing.png" title="一对一语音-通话中" />
+  <ImageItem src="/images/callkit/android/group_call_ongoing.png" title="群组通话中" />
+</ImageGallery>
+
 // TODO：添加截图
 
 ## 应用场景

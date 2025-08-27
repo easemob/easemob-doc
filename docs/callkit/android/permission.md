@@ -1,8 +1,5 @@
 # 权限与业务逻辑
 
-// TODO：请添加描述
-// TODO：是否需要添加申请权限的界面图
-
 ## 权限声明
 
 环信 CallKit 所需权限已在 `Manifest.xml` 文件中声明。若不需要某项功能，可根据实际情况修改。
@@ -84,24 +81,25 @@
 - 开启悬浮窗权限被拒：CallKit 在 `SingleCallViewModel.handleRequestFloatWindowPermissionCancel()` 会按当前 `CallState` 执行取消/拒绝/挂断的兜底。
 - 悬浮窗显示时，为保证通话正常进行（即摄像头、麦克风正常采集数据流），需要开启媒体类型前台服务。
   前台服务权限为 `FOREGROUND_SERVICE`，媒体类型为 `camera` `microphone` 和 `mediaPlayback`。
+
+申请悬浮窗权限的界面展示如下：
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/float_permission_apply_1.png" title="需要悬浮窗权限" />
+  <ImageItem src="/images/callkit/android/float_permission_apply_2.png" title="设置应用展示在其他应用上层" />
+</ImageGallery>  
   
-## 锁屏/唤醒 
+## 锁屏唤醒 
 
-锁屏/唤醒权限：`USE_FULL_SCREEN_INTENT`、`WAKE_LOCK`、`DISABLE_KEYGUARD`。
-
-若来电时 app 处于后台，接通后会启动 app 在锁屏界面上显示。// TODO：这里是接通后？接通是被叫接听了。这里是指被叫振铃吧。
-
-## 电池优化
-
-环信 CallKit 提供了以下函数引导将 app 加入电池优化白名单的，提升后台存活与呼叫达率：
-
-`PermissionHelperrequestIgnoreBatteryOptimizations(...)`
+锁屏唤醒权限：`USE_FULL_SCREEN_INTENT`、`WAKE_LOCK`、`DISABLE_KEYGUARD`。
   
+若 App 在后台运行，收到来电时，app 会被唤醒，显示来电通知。
+
 ## 最佳实践
 
 为了确保流畅的用户通话体验，需在启动 app 后就提前申请以下权限：
 
-```xml // TODO：是 xml 吗？
+```Kotlin
   1. 动态权限申请
     ActivityCompat.requestPermissions(this,getRequiredPermissions(),Constant.PERMISSION_REQ_ID)
 
@@ -139,11 +137,3 @@
             }
         )
 ```
-// TODO：悬浮窗权限申请放在这里，还是悬浮窗的标题下？
-
-申请悬浮窗权限的界面展示如下：
-
-<ImageGallery :columns="3">
-  <ImageItem src="/images/callkit/android/float_permission_apply_1.png" title="需要悬浮窗权限" />
-  <ImageItem src="/images/callkit/android/float_permission_apply_2.png" title="设置应用展示在其他应用上层" />
-</ImageGallery>
