@@ -15,6 +15,7 @@
 | 应答信令 | `CALL_ANSWER` | 被叫 | 主叫 | 通知主叫是否接听，包含 `callResult` 参数： `accept`：接听`refuse` 拒绝`busy`：忙碌 |  使用 CMD 消息，设置 `deliverOnlineOnly = true`，表示仅在线用户能收到，不存储。  |
 | 确认被叫信令 | `CALL_CONFIRM_CALLEE` | 主叫 | 被叫 | 确认被叫设备和状态，包含：<br/> - `calleeDeviceId`：被叫设备标识<br/> -  `callResult`：通知主叫是否接听，详见应答信令中的描述。| 使用 CMD 消息。 |
 | 取消呼叫信令 | `CALL_CANCEL` | 主叫 | 被叫 | 主叫取消呼叫。 |  使用 CMD 消息，设置 `deliverOnlineOnly = false`，便于久不上线的用户收到离线消息做判断。  |
+| 退出通话信令 | `CALL_END` | 任意一方 | 通话双方 | 退出通话。 |  使用 CMD 消息，设置 `deliverOnlineOnly = true`。  |
 
 ### 信令特点
 

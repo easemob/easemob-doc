@@ -13,7 +13,7 @@
 ## 前提条件
 
 在 [环信控制台](https://console.easemob.com/user/login) 进行如下操作：
-1. [注册环信账号](/console/account_register.html#注册账号)。
+1. [注册环信账号](/product/console/account_register.html#注册账号)。
 2. [创建应用](/product/console/app_create.html)，[获取应用的 App Key](https://doc.easemob.com/product/console/app_manage.html#获取应用凭证)，格式为 `orgname#appname`。
 3. [创建用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和 IM token。
 4. [创建群组](/product/console/operation_group.html#创建群组)，获取群组 ID。将用户加入群组。
