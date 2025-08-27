@@ -82,7 +82,7 @@ import EaseCallUIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let option = ChatSDKOptions(appkey: "easemob#easeim")//首先需要初始化 IM SDK
+        let option = ChatSDKOptions(appkey: "XXXX#XXX")//首先需要初始化 IM SDK，替换你的 app key
         option.enableConsoleLog = true//开启日志
         option.isAutoLogin = false//此处只是示例项目，真实使用时参考环信Demo源码，自动登录更方便
         ChatClient.shared().initializeSDK(with: option)//初始化SDK
@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
-### 步骤 3 登录 IM SDK
+### 步骤 4 登录 IM SDK
 
 调用即时通讯 IM SDK 的 `login` 方法传入用户 ID 和 Token 登录 IM。
 
@@ -109,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }        
 ```
 
-### 步骤 4 创建快速开始页面
+### 步骤 5 创建快速开始页面
 
 在项目的 `Main.storyboard` 和 `ViewController.swift` 中替换代码，然后运行。
 
@@ -291,7 +291,7 @@ class ViewController: UIViewController {
     @IBAction func loginAction(_ sender: Any) {
         self.view.endEditing(true)
         
-        ChatClient.shared().login(withUsername: userId, token: token) { [weak self] userId,error  in
+        ChatClient.shared().login(withUsername: "userId", token: "token") { [weak self] userId,error  in
             if let error = error {
                 self?.showCallToast(toast: "Login failed: \(error.errorDescription ?? "")")
             } else {
@@ -340,7 +340,7 @@ extension ViewController: QLPreviewControllerDataSource {
 
 :::
 
-### 步骤 5 发起首次通话
+### 步骤 6 发起首次通话
 
 1. 登录：在登录界面输入用户 ID，然后点击 **Login**。  
 2. 发起通话：选择 **audio** 或 选择 **video**，输入呼叫用户的用户 ID，点击 **Call**，发起一对一音频或视频通话。
