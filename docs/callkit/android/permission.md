@@ -72,6 +72,15 @@
     - 主叫：发送取消信令 `SignalingManager.cancelCall(...)` ，取消通话。
     - 被叫：发送拒绝信令 `SignalingManager.refuseCall()`，拒绝接听。
 
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/notification_audio.png" title="录音权限" />
+  <ImageItem src="/images/callkit/android/notification_photo_video.png" title="摄像头权限" />
+  <ImageItem src="/images/callkit/android/notification_easemob.png" title="发送通知" />
+  <ImageItem src="/images/callkit/android/notification_phone.png" title="拨打电话和通话管理" />
+  <ImageItem src="/images/callkit/android/notification_device_info.png" title="获取设备信息" />
+  <ImageItem src="/images/callkit/android/notification_device_info_near.png" title="获取附近设备信息" />
+</ImageGallery>
+
 ## 悬浮窗
 
 当用户点击悬浮窗按钮或者在通话状态时 app 回到后台，会触发悬浮窗权限检查：

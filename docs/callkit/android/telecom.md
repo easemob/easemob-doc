@@ -1,15 +1,15 @@
 # Telecom
 
-Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，包括传统的基于 SIM 卡的通话和 VoIP 通话。当有来电时，Telecom 框架会处理来电显示、接听、挂断等功能，并通知相关的应用程序。
+Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，包括传统的基于 SIM 卡的通话和 VoIP 通话。当有来电时，Telecom 框架会处理来电显示、接听、挂断等功能，并通知相关的应用程序。 
 
-<ImageGallery :columns="4">
-  <ImageItem src="/images/callkit/android/notification_lock.png" title="锁屏来电" />
+<ImageGallery :columns="3">
+  <ImageItem src="/images/callkit/android/notification_lock.png" title="锁屏来电通知" />
+  <ImageItem src="/images/callkit/android/notification_background.png" title="App 后台运行时来电通知" />
+  <ImageItem src="/images/callkit/android/1v1_video_notification_inapp.png" title="应用内来电通知" />
   <ImageItem src="/images/callkit/android/1v1_video_ongoing.png" title="一对一视频-通话中" />
   <ImageItem src="/images/callkit/android/1v1_voice_ongoing.png" title="一对一语音-通话中" />
   <ImageItem src="/images/callkit/android/group_call_ongoing.png" title="群组通话中" />
 </ImageGallery>
-
-// TODO：添加截图
 
 ## 应用场景
 
@@ -18,9 +18,9 @@ Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，
    
 | 场景 | 界面显示 |
 | :------------------- | :----- | 
-| 锁屏 + 有悬浮窗权限 | 使用 Telecom 系统原生通话界面。 |
-| 锁屏 + 无悬浮窗权限 | 使用 Telecom 系统原生通话界面。 |
-| 后台 + 无悬浮窗权限 | 使用 Telecom 系统原生通话界面。 |
+| 锁屏 + 有悬浮窗权限 | 使用 Telecom 系统原生来电界面。 |
+| 锁屏 + 无悬浮窗权限 | 使用 Telecom 系统原生来电界面。 |
+| 后台 + 无悬浮窗权限 | 使用 Telecom 系统原生来电界面。 |
 | 后台 + 有悬浮窗权限 | 使用 CallKit 顶部悬浮窗。 |
 | 前台 + 有悬浮窗权限 | 使用 CallKit 顶部悬浮窗。 |
 | 前台 + 无悬浮窗权限 | 使用 CallKit 默认 UI 界面。 |
