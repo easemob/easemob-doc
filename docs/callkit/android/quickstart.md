@@ -239,7 +239,7 @@ android.enableJetifier=true
 2. 实现登录和退出逻辑。
 3. 实现通话功能。
 
-打开 `MainActivity` 文件，替换为如下代码：
+打开 `MainActivity` 文件，替换为如下代码(以包名 com.hyphenate.callkit.quickstart 为例)：
 
 ::: details MainActivity 文件中的替换代码
 ```kotlin
