@@ -48,9 +48,9 @@ const callKitSidebar = [
         text: "LiveCommunicationKit", link: "livecommunicationkit.html", only: ["ios"]
       },
       { text: "画中画", link: "picture_in_picture.html", only: ["ios"] },
-      { text: "自定义资源", link: "customization.html" },
       { text: "使用 Telecom", link: "telecom.html", only: ["android"] },
       { text: "来电通知和悬浮窗", link: "float_top.html", only: ["android"] },
+      { text: "自定义资源", link: "customization.html" },
       { text: "通话信令", link: "signaling.html" },
       { text: "API 概览", link: "api_overview.html" },
       {
