@@ -6,7 +6,7 @@
 
 环信 CallKit 的基础架构如下图所示：
 
-![img](/images/callkit/android/callkit_architecture.png)
+![img](/images/callkit/android/callkit_poster.png)
 
 ## CallKit 优势
 
