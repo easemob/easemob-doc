@@ -41,6 +41,7 @@
                     :href="item.link"
                     type="primary"
                     class="product-link"
+                    :target="item.target || '_self'"
                   >
                     {{ item.text }}
                   </el-link>
