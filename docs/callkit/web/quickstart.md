@@ -66,13 +66,8 @@ yarn add easemob-chat-uikit
 
 ```tsx
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Provider,
-  CallKit,
-  CallError,
-  CallInfo,
-  rootStore,
-} from "easemob-chat-uikit";
+import { Provider, CallKit, rootStore } from "easemob-chat-uikit";
+import type { CallError, CallInfo } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 import "./App.css";
 
@@ -377,6 +372,7 @@ const App: React.FC = () => {
 
 export default App;
 ```
+
 :::
 
 2. 替换 `src/App.css` 文件内容：
@@ -572,11 +568,12 @@ h3 {
   }
 }
 ```
+
 :::
 
 ### 步骤 4 配置 App Key
 
-将代码中的 `org#app` 替换成你自己的 App Key。
+将 `App.jsx` 代码中的 `org#app` 替换成你自己的 App Key。
 
 ### 步骤 5 发起首次通话
 
@@ -587,7 +584,7 @@ npm run dev
 ```
 
 2. 输入用户 ID 和 accessToken，点击 **登录**。等待状态指示器变绿，显示 **已连接**。
-   
+
    此外，为了方便测试，应用支持通过将用户 ID 和 accessToken 拼接到 URL 中快速登录：
 
    ```
