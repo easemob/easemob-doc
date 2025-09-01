@@ -419,7 +419,7 @@ private val callKitListener = object : CallKitListener {
 
 ### 声网 RTC 私有化部署
 
-如果使用私有化的声网服务，同样也可以在声网 RTC 引擎创建时进行配置：
+若使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置：
 
 ```kotlin
 private val callKitListener = object : CallKitListener {
@@ -427,8 +427,9 @@ private val callKitListener = object : CallKitListener {
     override fun onRtcEngineCreated(engine: RtcEngine) {
         // 私有化部署配置
         val configuration = LocalAccessPointConfiguration().apply {
-            // 设置你的私有化地址
+            // 将 `111.111.111.111` 替换为你的私有化地址
             ipList = arrayListOf("111.111.111.111")
+            // 将 `ap.xxx.agora.local` 替换为你的域名
             verifyDomainName = "ap.xxx.agora.local"
             mode = LOCAL_RPOXY_LOCAL_ONLY
         }
