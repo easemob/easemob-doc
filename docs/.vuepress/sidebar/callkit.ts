@@ -45,7 +45,7 @@ const callKitSidebar = [
       { text: "集成 CallKit", link: "integration.html" },
       { text: "权限", link: "permission.html", only: ["android"] },
       {
-        text: "LiveCommunicationKit", link: "livecommunicationkit.html", only: ["ios"]
+        text: "使用 LiveCommunicationKit", link: "livecommunicationkit.html", only: ["ios"]
       },
       { text: "画中画", link: "picture_in_picture.html", only: ["ios"] },
       { text: "使用 Telecom", link: "telecom.html", only: ["android"] },
