@@ -85,7 +85,7 @@
 }
 ```
 
-### 2. 接听流程
+### 2. 其他流程
 
 <ImageGallery :columns="4">
   <ImageItem src="/images/callkit/ios/call_answer_flowchart.png" title="接听流程" />
@@ -93,15 +93,6 @@
   <ImageItem src="/images/callkit/ios/call_mute_flowchart.png" title="静音流程" />
 </ImageGallery>
 
-<img src="/images/callkit/ios/call_answer_flowchart.png" width="400" >
-
-### 3. 挂断流程
-
-![img](/images/callkit/ios/call_hangup_flowchart.png)
-
-### 4. 静音操作
-
-![img](/images/callkit/ios/call_mute_flowchart.png)
 
 ## 错误处理
 
