@@ -69,6 +69,8 @@
 | ------------------------- | ---------------- | ------ | ------------------------------ |
 | `speakingVolumeThreshold` | `number`         | `60`   | 说话指示器音量阈值，范围 1-100。 |
 | `customIcons`             | `CallKitIconMap` | -      | 自定义图标映射。                 |
+| `encoderConfig`           | `VideoEncoderConfigurationPreset` | -      | 自定义预设的视频编码配置。                 |~~~~
+
 
 ## 组件方法
 
