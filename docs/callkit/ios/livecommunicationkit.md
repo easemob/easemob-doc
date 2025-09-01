@@ -87,8 +87,13 @@
 
 ### 2. 接听流程
 
+<ImageGallery :columns="4">
+  <ImageItem src="/images/callkit/ios/call_answer_flowchart.png" title="接听流程" />
+  <ImageItem src="/images/callkit/ios/call_hangup_flowchart.png" title="挂断流程" />
+  <ImageItem src="/images/callkit/ios/call_mute_flowchart.png" title="静音流程" />
+</ImageGallery>
 
-![img](/images/callkit/ios/call_answer_flowchart.png)
+<img src="/images/callkit/ios/call_answer_flowchart.png" width="400" >
 
 ### 3. 挂断流程
 
