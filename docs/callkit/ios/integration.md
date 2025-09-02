@@ -1,6 +1,6 @@
 # CallKit 集成指南
 
-环信 CallKit 是一套基于环信即时通讯 IM（基于 IM 4.16.0 及以上）和声网 RTC 结合开发的音视频 UI 库。使用环信 CallKit 之前，你需要将其集成到你的应用中。
+环信 CallKit 是一套基于环信即时通讯 IM（基于 IM 4.16.0 及以上）和声网 RTC 结合开发的音视频 UI 库。使用环信 CallKit 之前，你需要将其集成到你的应用中。如果用户要使用系统的 LiveCommunicationKit，建议设置环信即时通讯 IM 为自动登录。
 
 <ImageGallery>
   <ImageItem src="/images/callkit/ios/1v1_video_caller_invitation.png" title="一对一通话邀请" />
@@ -68,6 +68,7 @@ CallKit 初始化包括如下步骤：
 1. 初始化环信环信即时通讯 IM SDK。CallKit 基于即时通讯 IM 作为信令通道，因此需先初始化 IM SDK。
    - 填入你的应用的 App Key。
    - 设置即时通讯 IM SDK 的 `EMOptions`/`ChatSDKOptions` 类中的一些选项。
+   - 如果用户要使用系统的 LiveCommunicationKit，建议设置环信即时通讯 IM 为自动登录 `isAutoLogin` 为 `true`。
 2. 初始化 CallKit。
    （可选）开启 VoIP 和画中画功能。
      - 开启 VoIP 功能后会自动开启 LiveCommunicationKit。关于上传 VoIP 服务证书，详见 [APNs 推送文档](/document/ios/push/push_apns.html#上传推送证书)。 
@@ -409,6 +410,22 @@ extension ViewController: CallUserProfileProvider {
     }    
 }
 ```
+
+### 自定义视频分辨率
+
+若要修改远端视频在本地显示的分辨率，可以在创建声网 RTC 引擎时在 `onRtcEngineCreated` 中进行配置：
+
+```Swift
+func onRtcEngineCreated(engine: AgoraRtcEngineKit?) {
+        let configuration = AgoraVideoEncoderConfiguration()
+        configuration.orientationMode = .fixedPortrait
+        configuration.dimensions = CGSize(width: 1280, height: 720)
+        configuration.frameRate = .fps30
+        engine?.setVideoEncoderConfiguration(configuration)
+    }
+```
+
+更多其他配置可以参考 [声网 RTC 文档](https://doc.shengwang.cn/doc/rtc/ios/basic-features/video-profile#视频参数推荐值)。
 
 ### 声网 RTC 私有化部署
 

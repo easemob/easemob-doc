@@ -2,7 +2,7 @@
 
 ## 概述
 
-环信 CallKit 中的 `LiveCommunicationManager` 是一个用于管理 iOS VoIP 通话的单例管理器类，集成了 Apple 的 PushKit 和 LiveCommunicationKit 框架，提供完整的 VoIP 通话解决方案，包括来电推送、通话管理和音频会话控制。
+环信 CallKit 中的 `LiveCommunicationManager` 是一个用于管理 iOS VoIP 通话的单例管理器类，集成了 Apple 的 PushKit 和 LiveCommunicationKit 框架，提供完整的 VoIP 通话解决方案，包括来电推送、通话管理和音频会话控制。如果用户要使用系统的 LiveCommunicationKit，建议设置环信即时通讯 IM 为自动登录。
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/callkit/ios/notification_lock.png" title="VoIP 通话来电通知" />

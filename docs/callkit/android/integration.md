@@ -407,15 +407,16 @@ CallKitClient.callInfoProvider = MyCallInfoProvider()
 private val callKitListener = object : CallKitListener {
     
     override fun onRtcEngineCreated(engine: RtcEngine) {
-        //设置默认订阅的视频流类型
-        rtcEngine?.setRemoteDefaultVideoStreamType(Constants.VideoStreamType.VIDEO_STREAM_LOW)
+         val configuration=  VideoEncoderConfiguration()
+         //例如，修改分辨率为 1280x720 
+         configuration.dimensions= VD_1280x720  
+         rtcEngine?.setVideoEncoderConfiguration(configuration)
     }
     
     // ... 其他回调
 }
 ```
-更多其他配置可以参考 [声网 RTC 文档](https://doc.shengwang.cn/api-ref/rtc/android/API/toc_publishnsubscribe)。
-
+更多其他配置可以参考 [声网 RTC 文档](https://doc.shengwang.cn/doc/rtc/android/basic-features/video-profile#视频参数推荐值)。
 
 ### 声网 RTC 私有化部署
 
