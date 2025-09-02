@@ -11,7 +11,6 @@
 | `startGroupCall(groupId, ext)` | 发起群组通话 | - `groupId`: 群组 ID<br/> - `ext`: 扩展信息 |
 | `endCall()` | 结束通话 | 无 |
 | `getCache()` | 获取缓存管理器 | 无 |
-| `cleanUp()` | 清理资源 | 无 |
 
 ## 通话类型
 
