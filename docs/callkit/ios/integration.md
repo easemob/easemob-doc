@@ -413,6 +413,8 @@ extension ViewController: CallUserProfileProvider {
 
 ### 自定义视频分辨率
 
+环信 CallKit 中默认设置的分辨率为 1280x720。网络连接不稳定时，声网 RTC SDK 会主动降低分辨率或帧率。
+
 若要修改远端视频在本地显示的分辨率，可以在创建声网 RTC 引擎时在 `onRtcEngineCreated` 中进行配置：
 
 ```Swift

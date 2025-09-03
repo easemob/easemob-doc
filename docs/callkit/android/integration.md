@@ -401,7 +401,9 @@ CallKitClient.callInfoProvider = MyCallInfoProvider()
 
 ### 自定义视频分辨率
 
-若要修改本地摄像头视频采集的分辨率，可以在创建声网 RTC 引擎时进行配置：
+环信 CallKit 中默认设置的分辨率为 1280x720。网络连接不稳定时，声网 RTC SDK 会主动降低分辨率或帧率。
+
+若要修改本地摄像头视频采集的分辨率，可以在创建声网 RTC 引擎时进行配置。
 
 ```kotlin
 private val callKitListener = object : CallKitListener {

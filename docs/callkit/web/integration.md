@@ -382,7 +382,7 @@ const groupInfoProvider = async (groupIds: string[]) => {
 
 ### 自定义视频分辨率
 
-若要修改远端视频在本地显示的分辨率，可以设置 `encoderConfig` 参数。详见 [声网 RTC 文档](https://doc.shengwang.cn/api-ref/rtc/javascript/globals.html#videoencoderconfigurationpreset)：
+环信 CallKit 中默认设置的分辨率为 720p。若要修改远端视频在本地显示的分辨率，可以设置 `encoderConfig` 参数。详见 [声网 RTC 文档](https://doc.shengwang.cn/api-ref/rtc/javascript/globals.html#videoencoderconfigurationpreset)。
 
 ```tsx
 <CallKit encoderConfig="480p_1"/>
