@@ -186,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             TextButton(
               onPressed: () {
-                if (ChatUIKit.instance.isLogged()) {
+                if (ChatUIKit.instance.isLoginBefore()) {
                   ChatUIKit.instance.logout().then((value) => setState(() {}));
                 } else {
                   ChatUIKit.instance
@@ -195,11 +195,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       .then((value) => setState(() {}));
                 }
               },
-              child: ChatUIKit.instance.isLogged()
+              child: ChatUIKit.instance.isLoginBefore()
                   ? const Text('Logout')
                   : const Text('Login'),
             ),
-            if (ChatUIKit.instance.isLogged())
+            if (ChatUIKit.instance.isLoginBefore())
               const Expanded(child: ChatPage()),
           ],
         ),
