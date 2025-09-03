@@ -401,7 +401,7 @@ CallKitClient.callInfoProvider = MyCallInfoProvider()
 
 ### 自定义视频分辨率
 
-若要修改远端视频在本地显示的分辨率，可以在创建声网 RTC 引擎时进行配置：
+若要修改本地摄像头视频采集的分辨率，可以在创建声网 RTC 引擎时进行配置：
 
 ```kotlin
 private val callKitListener = object : CallKitListener {
@@ -420,7 +420,9 @@ private val callKitListener = object : CallKitListener {
 
 ### 声网 RTC 私有化部署
 
-若使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置：
+若使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置。
+
+详情可以参考 [声网 RTC 文档](https://doc.shengwang.cn/api-ref/rtc/android/API/class_Localaccesspointconfiguration#LocalAccessPointConfiguration)。
 
 ```kotlin
 private val callKitListener = object : CallKitListener {
