@@ -120,33 +120,7 @@ CallKit 初始化包括如下步骤：
     }
 ```
 
-### 步骤 3 登录
-
-调用即时通讯 IM SDK 的 `login` 方法传入用户 ID 和 Token 登录 IM。
-
-在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
-
-```Swift
-            ChatClient.shared().login(withUsername: userId, token: token) { [weak self] userId,error  in
-            if let error = error {
-                self?.showCallToast(toast: "Login failed: \(error.errorDescription ?? "")")
-            } else {
-                self?.showCallToast(toast: "Login successful")
-//if !userId.isEmpty { //如有需要透传头像昵称请打开
-//    let profile = CallUserProfile()
-//    profile.id = userId
-//    profile.avatarURL = "https://xxxxx"
-//    profile.nickname = "\(userId)昵称"
-//    CallKitManager.shared.currentUserInfo = profile
-//}
-                self?.userIdField.isHidden = true
-                self?.tokenField.isHidden = true
-                self?.loginButton.isHidden = true 
-            }
-        }
-```
-
-### 步骤 4 配置监听器
+### 步骤 3 配置监听器
 
 你可以调用下面方法来监听 CallKit 中用户相关状态变更的事件和错误。
 
@@ -243,6 +217,32 @@ extension MainViewController: CallServiceListener {
 | `CallEndReasonRemoteNoResponse` | 对方无响应 |
 | `CallEndReasonHandleOnOtherDevice` | 在其他设备接听 |
 | `CallEndReasonRemoteDrop` | 通话中断 |
+
+### 步骤 4 登录 IM
+
+调用即时通讯 IM SDK 的 `login` 方法传入用户 ID 和 Token 登录 IM。
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+
+```Swift
+            ChatClient.shared().login(withUsername: userId, token: token) { [weak self] userId,error  in
+            if let error = error {
+                self?.showCallToast(toast: "Login failed: \(error.errorDescription ?? "")")
+            } else {
+                self?.showCallToast(toast: "Login successful")
+//if !userId.isEmpty { //如有需要透传头像昵称请打开
+//    let profile = CallUserProfile()
+//    profile.id = userId
+//    profile.avatarURL = "https://xxxxx"
+//    profile.nickname = "\(userId)昵称"
+//    CallKitManager.shared.currentUserInfo = profile
+//}
+                self?.userIdField.isHidden = true
+                self?.tokenField.isHidden = true
+                self?.loginButton.isHidden = true 
+            }
+        }
+```
 
 ### 步骤 5 发起通话
 

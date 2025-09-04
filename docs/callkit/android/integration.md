@@ -214,7 +214,7 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-### 步骤 4 登录
+### 步骤 4 登录 IM
 
 ```kotlin
 ChatClient.getInstance().loginWithToken(username, token, object : ChatCallback {
@@ -305,7 +305,7 @@ private fun startGroupCall() {
   <ImageItem src="/images/callkit/android/group_call_caller_user_selection.png" title="主叫选择用户进入通话" />
 </ImageGallery>
 
-### 步骤 5 接听通话
+### 步骤 6 接听通话
 
 当接收到通话邀请时，CallKit 会自动触发 `onReceivedCall` 回调：
 1. 弹出通话邀请界面。
