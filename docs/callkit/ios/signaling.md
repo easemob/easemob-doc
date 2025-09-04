@@ -11,9 +11,9 @@
 | :---------------- | :----- | :----- | :----- | :----- | :----- |
 | 通话邀请信令 | `CALL_INVITE` | 主叫 | 被叫 | 发起通话邀请，包含：<br/> - `callId`: 通话唯一标识。 <br/> - `channelName`：声网 RTC 频道名称。 <br/> - `callType`：`CallTypeAudio` 为音频通话，`CallTypeVideo` 为视频通话，`CallTypeGroup`为群组通话。<br/> - `callerDevId`：主叫设备 ID。<br/>对于群聊通话，该信令还包含以下参数：<br/> - `groupId`：群组 ID。 <br/> - `receiverList`：接收通话邀请的目标用户。|   一对一通话：使用普通文本消息，支持离线推送。 <br/> 群组通话：使用定向文本消息，设置 `chatType = .groupChat`，`receiverList` 指定接收者，支持离线推送   |
 | 响应信令 | `CALL_ALERT` | 被叫 | 主叫 | 通知主叫已收到邀请，包含：<br/> - `callId`：对应的通话 ID。<br/> - `calleeDevId`：被叫设备 ID。 |  使用 CMD 消息，设置 `deliverOnlineOnly = true`，表示仅在线用户能收到，不存储。  |
-| 确认振铃信令 | `CALL_CONFIRM_RING` | 主叫 | 被叫 | 确认被叫可以开始振铃，包含呼叫状态 `callStatus`：<br/> - `1` 为呼叫有效<br/> - `0` 为呼叫无效 |  使用 CMD 消息。   |
+| 确认振铃信令 | `CALL_CONFIRM_RING` | 主叫 | 被叫 | 确认被叫可以开始振铃，包含呼叫状态 `callStatus`：<br/> - `1` 为呼叫有效<br/> - `0` 为呼叫无效 |  使用 CMD 消息，设置 `deliverOnlineOnly = false`。   |
 | 应答信令 | `CALL_ANSWER` | 被叫 | 主叫 | 通知主叫是否接听，包含 `callResult` 参数： `accept`：接听`refuse` 拒绝`busy`：忙碌 |  使用 CMD 消息，设置 `deliverOnlineOnly = true`，表示仅在线用户能收到，不存储。  |
-| 确认被叫信令 | `CALL_CONFIRM_CALLEE` | 主叫 | 被叫 | 确认被叫设备和状态，包含：<br/> - `calleeDeviceId`：被叫设备标识<br/> -  `callResult`：通知主叫是否接听，详见应答信令中的描述。| 使用 CMD 消息。 |
+| 确认被叫信令 | `CALL_CONFIRM_CALLEE` | 主叫 | 被叫 | 确认被叫设备和状态，包含：<br/> - `calleeDeviceId`：被叫设备标识<br/> -  `callResult`：通知主叫是否接听，详见应答信令中的描述。| 使用 CMD 消息，设置 `deliverOnlineOnly = false`。 |
 | 取消呼叫信令 | `CALL_CANCEL` | 主叫 | 被叫 | 主叫取消呼叫。 |  使用 CMD 消息，设置 `deliverOnlineOnly = false`，便于久不上线的用户收到离线消息做判断。  |
 | 退出通话信令 | `CALL_END` | 任意一方 | 通话双方 | 退出通话。 |  使用 CMD 消息，设置 `deliverOnlineOnly = true`。  |
 
