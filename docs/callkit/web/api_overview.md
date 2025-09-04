@@ -166,7 +166,7 @@ interface GroupInfo {
 
 | 通话错误类型 | 描述 |
 | :--------- | :----- |
-| `rtc`  | 音视频异常，详见 [声网 RTC 错误码](https://doc.shengwang.cn/doc/rtc/web/error-code)。 |
+| `rtc`  | 音视频异常，详见 [声网 RTC 错误码](https://doc.shengwang.cn/doc/rtc/javascript/error-code)。 |
 | `chat`  | 即时通讯 IM 异常，详见 [环信即时通讯 IM 错误码](/document/web/error.html)。  |
 | `callkit`  | `CallErrorCode` 类中包含三种错误类型：<br/> - `CALL_STATE_ERROR`：通话状态错误<br/> - `CALL_PARAM_ERROR`：通话参数错误<br/> - `CALL_SIGNALING_ERROR`：信令错误 |
 
