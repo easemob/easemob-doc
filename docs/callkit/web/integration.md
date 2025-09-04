@@ -123,8 +123,41 @@ CallKit 组件或重要配置的说明如下：
 | chatClient 属性            | 传入 `rootStore.client`，即 Provider 创建的 IM 连接实例。  |
 | 信息提供者            | `userInfoProvider` 和 `groupInfoProvider` 用于获取用户和群组的显示信息。   |
 
+### 步骤 3 配置监听器
 
-### 步骤 3 登录 IM
+CallKit 组件可以设置回调事件，实现监听 CallKit 内部状态和错误事件。
+
+```tsx
+<CallKit
+  ref={callKitRef} // CallKit 组件引用，用于调用组件方法
+  // === 事件回调 ===
+  onCallError={(error) => {}}
+  onEndCallWithReason={(reason) => {}}
+/>
+```
+
+回调事件说明如下表所示：
+
+| 回调事件              | 参数                                            | 描述                                             |
+| --------------------- | ----------------------------------------------- | ------------------------------------------------ |
+| `onCallError`         | `(error: CallError)`                            | 通话过程中发生错误时触发，包含错误类型和详细信息 |
+| `onReceivedCall`      | `(callType, userId, ext)`                       | 收到通话邀请时触发                               |
+| `onCallStart`         | `(videos: VideoWindowProps[])`                  | 通话开始时触发                                   |
+| `onEndCallWithReason` | `(reason: string, callInfo: CallInfo)`          | 通话结束原因回调                                 |
+| `onRemoteUserJoined`  | `(userId: string, callType)`                    | 远程用户加入通话时触发                           |
+| `onRemoteUserLeft`    | `(userId: string, callType)`                    | 远程用户离开通话时触发                           |
+| `onInvitationAccept`  | `(invitation: InvitationInfo)`                  | 用户接受邀请时触发                               |
+| `onInvitationReject`  | `(invitation: InvitationInfo)`                  | 用户拒绝邀请时触发                               |
+| `onLayoutModeChange`  | `(layoutMode: string)`                          | 布局模式变化时触发                               |
+| `onMinimizedChange`   | `(minimized: boolean)`                          | 最小化状态变化时触发                             |
+| `onResize`            | `(width, height, deltaX?, deltaY?, direction?)` | 窗口大小调整时触发                               |
+| `onDragStart`         | `(startPosition: {x, y})`                       | 开始拖拽时触发                                   |
+| `onDrag`              | `(newPosition: {x, y}, delta: {x, y})`          | 拖拽过程中触发                                   |
+| `onDragEnd`           | `(finalPosition: {x, y})`                       | 拖拽结束时触发                                   |
+| `onRtcEngineCreated`  | `(rtc: any)`                                    | RTC 引擎创建完成时触发，可用于自定义配置         |
+| `onAddParticipant`    | `()`                                            | 用户点击添加参与者按钮时触发                     |
+
+### 步骤 4 登录 IM
 
 CallKit 内部依赖 IM SDK 进行信令交互，所以在使用 CallKit 之前需要先登录 IM。登录 IM 有两种方式可以选择：
 
@@ -236,40 +269,6 @@ const App = () => {
 
 export default App;
 ```
-
-### 步骤 4 配置监听器
-
-CallKit 组件可以设置回调事件，实现监听 CallKit 内部状态和错误事件。
-
-```tsx
-<CallKit
-  ref={callKitRef} // CallKit 组件引用，用于调用组件方法
-  // === 事件回调 ===
-  onCallError={(error) => {}}
-  onEndCallWithReason={(reason) => {}}
-/>
-```
-
-回调事件说明如下表所示：
-
-| 回调事件              | 参数                                            | 描述                                             |
-| --------------------- | ----------------------------------------------- | ------------------------------------------------ |
-| `onCallError`         | `(error: CallError)`                            | 通话过程中发生错误时触发，包含错误类型和详细信息 |
-| `onReceivedCall`      | `(callType, userId, ext)`                       | 收到通话邀请时触发                               |
-| `onCallStart`         | `(videos: VideoWindowProps[])`                  | 通话开始时触发                                   |
-| `onEndCallWithReason` | `(reason: string, callInfo: CallInfo)`          | 通话结束原因回调                                 |
-| `onRemoteUserJoined`  | `(userId: string, callType)`                    | 远程用户加入通话时触发                           |
-| `onRemoteUserLeft`    | `(userId: string, callType)`                    | 远程用户离开通话时触发                           |
-| `onInvitationAccept`  | `(invitation: InvitationInfo)`                  | 用户接受邀请时触发                               |
-| `onInvitationReject`  | `(invitation: InvitationInfo)`                  | 用户拒绝邀请时触发                               |
-| `onLayoutModeChange`  | `(layoutMode: string)`                          | 布局模式变化时触发                               |
-| `onMinimizedChange`   | `(minimized: boolean)`                          | 最小化状态变化时触发                             |
-| `onResize`            | `(width, height, deltaX?, deltaY?, direction?)` | 窗口大小调整时触发                               |
-| `onDragStart`         | `(startPosition: {x, y})`                       | 开始拖拽时触发                                   |
-| `onDrag`              | `(newPosition: {x, y}, delta: {x, y})`          | 拖拽过程中触发                                   |
-| `onDragEnd`           | `(finalPosition: {x, y})`                       | 拖拽结束时触发                                   |
-| `onRtcEngineCreated`  | `(rtc: any)`                                    | RTC 引擎创建完成时触发，可用于自定义配置         |
-| `onAddParticipant`    | `()`                                            | 用户点击添加参与者按钮时触发                     |
 
 ### 步骤 5 发起通话
 
