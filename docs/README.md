@@ -101,13 +101,13 @@ starter:
   - title: "CallKit" 
     platform:
       - icon: /sdk/android.svg
-        link: /document/android/easecallkit.html
+        link: /callkit/android/product_overview.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /document/ios/easecallkit.html
+        link: /callkit/ios/product_overview.html
         text: iOS  
       - icon: /sdk/web.svg
-        link: /document/web/easecallkit.html
+        link: /callkit/web/product_overview.html
         text: Web  
 projects:
   - title: SDK/服务端功能

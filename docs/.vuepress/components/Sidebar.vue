@@ -3,6 +3,7 @@
   import PlatformSwitch from './PlatformSwitch.vue'
   import PrivateSwitch from './PrivateSwitch.vue'
   import UIKitSwitch from './UIKitSwitch.vue'
+  import CallKitSwitch from './CallKitSwitch.vue'
   import { usePageData } from '@vuepress/client'
   import { ref, watch } from 'vue'
 
@@ -10,11 +11,13 @@
   const showPlatformSwitch = ref(false)
   const showPrivateSwitch = ref(false)
   const showUIKitSwitch = ref(false)
+  const showCallKitSwitch = ref(false)
   watch(pageData, ()=> {
     const pagePath = pageData.value.path
     showPrivateSwitch.value = pagePath.indexOf('/private/') == 0
     showPlatformSwitch.value = pagePath.indexOf('/document/') == 0
     showUIKitSwitch.value = pagePath.indexOf('/uikit/') == 0
+    showCallKitSwitch.value = pagePath.indexOf('/callkit/') == 0
   }, {immediate:true})
 
 
@@ -35,6 +38,11 @@
       <div v-show="showUIKitSwitch" class="platform-switch">
         <ClientOnly>
           <UIKitSwitch />
+        </ClientOnly>
+      </div>
+      <div v-show="showCallKitSwitch" class="platform-switch">
+        <ClientOnly>
+          <CallKitSwitch />
         </ClientOnly>
       </div>
     </template>

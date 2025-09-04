@@ -45,3 +45,17 @@
 点击右侧的 **详情** 可查看各类型消息的统计情况。
 
 ![img](/images/console/operation_data_hot_statistics.png)
+
+## 实时音视频服务
+
+成功开通音视频服务后，你可以查看应用的音视频服务用量。
+
+- 选择统计时间范围，查看当前项目在指定时间段内的音视频服务总用量。
+
+![img](/images/console/operation_data_rtc_usage_all.png)
+
+- 选择统计时间范围，查看当前项目的各类产品在指定时间段内的音视频服务用量。
+
+![img](/images/console/operation_data_rtc_usage_specific.png)
+
+- 点击 **导出数据** 导出实时音视频服务的用量统计。
