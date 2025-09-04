@@ -4,7 +4,7 @@ Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/callkit/android/notification_lock.png" title="锁屏来电通知" />
-  <ImageItem src="/images/callkit/android/notification_background.png" title="App 后台运行时来电通知" />
+  <ImageItem src="/images/callkit/android/notification_background.png" title="应用后台运行时来电通知" />
   <ImageItem src="/images/callkit/android/1v1_video_notification_inapp.png" title="应用内来电通知" />
   <ImageItem src="/images/callkit/android/1v1_video_ongoing.png" title="一对一视频-通话中" />
   <ImageItem src="/images/callkit/android/1v1_voice_ongoing.png" title="一对一语音-通话中" />
