@@ -61,7 +61,7 @@ dependencyResolutionManagement {
 ```kotlin
 dependencies {
     ...
-    implementation("io.hyphenate:chat-call-kit:1.0.0")
+    implementation("io.hyphenate:chat-call-kit:4.16.0")
 }
 ```
 
