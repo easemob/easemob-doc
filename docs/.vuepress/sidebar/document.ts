@@ -169,15 +169,6 @@ const documentSidebar = [
     except: ['applet', 'server-side','electron','linux']
   },
   {
-    text: 'CallKit 使用指南',
-    children: [
-      { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', only: ['android', 'ios'] },
-      { text: 'CallKit 使用指南', link: 'easecallkit.html', only: ['web'] },
-    ],
-    except: ['applet', 'server-side','electron','linux']
-
-  },
-  {
     text: '苹果隐私策略',
     children: [
       { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
