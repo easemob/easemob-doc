@@ -37,7 +37,9 @@
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
 
 ## 前提条件
-
+:::tip
+使用该特性前，你需要联系商务开通。
+:::
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
 - 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
