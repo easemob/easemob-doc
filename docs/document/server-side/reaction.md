@@ -2,7 +2,10 @@
 
 <Toc />
 
-消息表情回复（“Reaction”）指用户在单聊和群聊场景中对单条消息回复表情，可丰富用户聊天时的互动方式。对于单个消息，一个消息表情即为一个 Reaction，若不同用户重复添加同一消息表情，Reaction 数量计为 1。每条消息默认可添加 20 个 Reaction，**若需提升该上限，需联系环信商务**。
+- 消息表情回复（“Reaction”）指用户在单聊和群聊场景中对单条消息回复表情，可丰富用户聊天时的互动方式。
+- 要使用 Reaction 功能，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通。详见 [环信控制台文档](/product/console/basic_message.html#消息表情回复)。
+- 目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+- 对于单个消息，一个消息表情即为一个 Reaction，若不同用户重复添加同一消息表情，Reaction 数量计为 1。每条消息默认可添加 20 个 Reaction，**若需提升该上限，需联系环信商务**。
 
 本页介绍如何使用即时通讯 IM RESTful API 实现 Reaction 功能。
 
@@ -13,7 +16,7 @@
 - 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 - 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
-- 对于专业版，需要在环信控制台单独购买并开通服务；对于旗舰版，需要在环信控制台免费开通该服务。详见 [环信控制台文档](/product/console/basic_message.html#消息表情回复)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 开通 Reaction 功能。
 
 ## 公共参数
 
