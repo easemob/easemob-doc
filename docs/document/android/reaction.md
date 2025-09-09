@@ -6,7 +6,8 @@
 
 :::tip
 
-目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+1. 要使用 Reaction 功能，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通。详见 [环信控制台文档](/product/console/basic_message.html#消息表情回复)。
+2. 目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
 :::
 
 ## 技术原理
@@ -31,7 +32,7 @@ Reaction 场景示例如下：
 
 1. 完成 3.9.2.1 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已在[环信控制台](https://console.easemob.com/user/login)开通 Reaction 功能。
+3. 已在 [环信控制台](https://console.easemob.com/user/login) 开通 Reaction 功能。
 
 ## 实现方法
 
