@@ -14,6 +14,7 @@
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 联系环信商务开通消息翻译功能。
 
 ## 认证方式
 

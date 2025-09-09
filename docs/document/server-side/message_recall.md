@@ -24,6 +24,7 @@
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 使用该功能前，你需要提前在环信控制台免费开通。详见 [环信控制台文档](/product/console/basic_message.html#消息撤回)。
 
 ## 公共参数
 

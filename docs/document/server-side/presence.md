@@ -7,7 +7,7 @@
 关于用户的在线、离线和自定义状态的定义，详见[用户在线状态管理](/product/product_user_presence.html)。
 
 :::tip
-使用该特性前，你需要联系商务开通。
+使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户离在线状态实时同步)。
 :::
 
 ## 前提条件
@@ -17,6 +17,8 @@
 - 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 - 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户离在线状态实时同步)。
+
 
 ## 公共参数
 
@@ -43,7 +45,7 @@
 
 ### 功能说明
 
-设置用户在指定设备的在线状态信息。
+- 设置用户在指定设备的在线状态信息。
 
 **调用频率上限**：100 次/秒/App Key 
 

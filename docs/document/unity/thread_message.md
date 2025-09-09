@@ -2,9 +2,9 @@
 
 <Toc />
 
-子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `IsThread` 标记。本文介绍环信即时通讯 IM Unity SDK 如何发送、接收以及撤回子区消息。
+子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `IsThread` 标记。使用子区消息功能前，你需要在 [环信控制台](https://console.easemob.com/user/login)开通。详见 [环信控制台文档](/product/console/basic_conversation_group_chatroom.html#消息话题)。
 
-使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
+本文介绍环信即时通讯 IM Unity SDK 如何发送、接收以及撤回子区消息。
 
 ## 技术原理
 
@@ -25,7 +25,7 @@
 - 已集成环信 IM `(1.0.5 或以上版本)` 的基本功能，账户登录成功。
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 已在 [环信即时通讯控制台](https://console.easemob.com/user/login) 开通子区功能。详见 [环信控制台文档](/product/console/basic_conversation_group_chatroom.html#消息话题)。
 
 ## 实现方法
 

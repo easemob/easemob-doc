@@ -2,7 +2,7 @@
 
 <Toc />
 
-子区是群组成员的子集，是支持多人沟通的即时通讯系统，子区让用户能够在群组中的特定消息上创建单独的会话，以保持主聊天界面整洁。使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
+子区是群组成员的子集，是支持多人沟通的即时通讯系统，子区让用户能够在群组中的特定消息上创建单独的会话，以保持主聊天界面整洁。使用子区功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通。详见 [环信控制台文档](/product/console/basic_conversation_group_chatroom.html#消息话题)。
 
 本文介绍如何使用环信即时通讯 IM Flutter SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
 

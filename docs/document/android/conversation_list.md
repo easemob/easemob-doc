@@ -31,7 +31,7 @@
 对于每个终端用户，服务器默认存储 100 条会话。超过该限制后，新会话会覆盖旧会话。若会话中的历史消息均过期，会话变成空会话。从服务端拉取会话列表时默认不包含这些空会话，若要包含，需在 SDK 初始化时将 `EMOptions#isLoadEmptyConversations` 设置为 `true`。这种情况下，空会话都会占用会话拉取名额，不管拉取时是否需要。如果拉取会话时不需要空会话且不希望其占用会话列表名额，需要联系商务开通。
 
 :::tip
-1. **若使用该功能，需在环信控制台开通，并将 SDK 升级至 4.0.3。而且，只有开通该功能，你才能使用置顶会话和会话标记功能。** 
+1. **若使用该功能，需 [在环信控制台开通](/product/console/basic_conversation_group_chatroom.html#服务端会话列表)，并将 SDK 升级至 4.0.3。而且，只有开通该功能，你才能使用置顶会话和会话标记功能。** 
 2. 建议你在首次下载、卸载后重装应用等本地数据库无数据情况下拉取服务端会话列表。其他情况下，调用 `asyncFilterConversationsFromDB`、`getAllConversationsBySort` 或 `getAllConversations` 方法获取本地所有会话即可。
 3. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需在[环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
 :::

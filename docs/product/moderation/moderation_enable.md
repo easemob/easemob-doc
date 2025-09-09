@@ -5,7 +5,7 @@
 ## 前提条件
 
 - 有效的 [环信即时通讯 IM 开发者账号](https://console.easemob.com/index)；
-- 账户余额大于 288 元。
+- 账户余额大于 288 元。首次开通，免费使用 7 天。
 
 **1、登录 [环信管理后台](https://console.easemob.com/index)**
 
