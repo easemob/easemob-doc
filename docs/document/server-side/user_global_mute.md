@@ -43,6 +43,7 @@
 - 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 - 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 对于专业版，需要在环信控制台单独购买并开通服务；对于旗舰版，需要在环信控制台免费开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#全局禁言)。
 
 ## 认证方式
 

@@ -59,6 +59,7 @@
 
 - 分页获取应用下的子区列表。
 - 单个 app 下的子区总数默认为 10 万，如需调整请联系商务。
+- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -149,7 +150,8 @@ curl -X GET https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToke
 
 #### 功能说明
 
-根据用户 ID 获取该用户加入的所有子区。
+- 根据用户 ID 获取该用户加入的所有子区。
+- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -250,7 +252,8 @@ curl -X GET https://XXXX/XXXX/XXXX/threads/user/test4 -H 'Authorization: Bearer 
 
 #### 功能说明
 
-根据用户 ID 获取该用户在指定群组中加入的所有子区。
+- 根据用户 ID 获取该用户在指定群组中加入的所有子区。
+- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -355,6 +358,7 @@ curl -X GET https://XXXX/XXXX/XXXX/threads/chatgroups/XXXX/user/XXXX -H 'Authori
 
 - 群成员基于群组中的一条消息创建子区。该消息为子区的父消息。
 - 子区创建者即子区所有者。
+- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 #### HTTP 请求
 
@@ -453,7 +457,8 @@ curl -X POST https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppTok
 
 #### 功能说明
 
-修改指定子区的名称。
+- 修改指定子区的名称。
+- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -540,7 +545,8 @@ curl -X PUT https://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <Your
 
 #### 功能说明
 
-删除单个子区。
+- 删除单个子区。
+- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -624,7 +630,8 @@ curl -X DELETE https://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <Y
 
 #### 功能说明
 
-获取指定子区的成员列表。
+- 获取指定子区的成员列表。
+- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 #### HTTP 请求
 
@@ -710,6 +717,7 @@ curl -X GET https://XXXX/XXXX/XXXX/thread/1XXXX7/users -H 'Authorization: Bearer
 
 - 用户批量加入指定的子区。
 - 每次最多支持 10 个用户加入子区。
+- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 #### HTTP 请求
 
@@ -802,6 +810,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread/1XXXX7/users -d '{
 
 - 批量踢出子区成员。
 - 每次最多可踢出 10 个子区成员。
+- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
 
 #### HTTP 请求
 

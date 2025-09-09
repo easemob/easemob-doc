@@ -33,6 +33,7 @@
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 需联系环信商务开通该功能。
 
 ## 认证方式
 

@@ -8,6 +8,7 @@
 - 每个用户的黑名单人数上限为 500。
 - 好友被加入黑名单后仍在好友列表上显示。
 - 调用该接口会触发拉黑好友的发送后回调事件，详见 [回调事件文档](callback_contact.html#拉黑好友)。
+- 使用该接口前，你需要在环信控制台免费开通黑名单功能。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -17,6 +18,7 @@
 
 - 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在环信控制台免费开通黑名单功能。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
 
 ## 认证方式
 
