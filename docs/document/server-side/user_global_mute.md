@@ -155,6 +155,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/mutes' \
 | :----- | :---------- | :-------- | :------------------| :------------------------|
 | 400         | required_property_not_found        | Entity user requires a property named username    | 用户不存在。  | 先注册用户或者检查用户名是否正确。 |
 | 401         | unauthorized                       | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。              |
+| 403 | forbidden_op | user_mute is not used for this app | 未开通全局禁言功能。 | 需要在环信控制台开通该功能。详见 [环信控制台文档](/product/console/basic_user.html#全局禁言)。 |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
