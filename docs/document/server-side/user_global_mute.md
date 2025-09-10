@@ -8,7 +8,7 @@
 
 该功能可广泛用于实时互动 app 中，例如发现某用户频繁向多个聊天室发送违规广告，则可以对该用户开启全局聊天室禁言 15 天；发现某用户发表触犯红线的政治言论，则可以全局永久禁言，用户申诉通过后可以解禁。
 
-使用该功能前，你需先查看你的 IM 套餐版本是否开通了该功能。该功能与 IM 套餐包版本之间的开通关系，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+使用该功能前，你需在环信控制台开通。详见 [环信控制台文档](/product/console/basic_user.html#全局禁言)。
 
 ## 公共参数
 
@@ -43,7 +43,7 @@
 - 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
 - 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 - 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
-- 对于专业版，需要在环信控制台单独购买并开通服务；对于旗舰版，需要在环信控制台免费开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#全局禁言)。
+- 已在环信控制台开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#全局禁言)。
 
 ## 认证方式
 
