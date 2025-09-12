@@ -17,7 +17,15 @@ conn.addEventHandler("connectionListener", {
   },
   onReconnecting: () => {
     console.log("重连中");
-  };
+  },
+  // 连接成功，开始从服务器拉取离线消息时触发。
+  onOfflineMessageSyncStart: () => {
+    console.log("开始从服务器拉取离线消息");
+  },
+  // 从服务器拉取离线消息结束时触发。
+  onOfflineMessageSyncFinish: () => {
+    console.log("从服务器拉取离线消息结束");
+  },
 });
 ```
 
