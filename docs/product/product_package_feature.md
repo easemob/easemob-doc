@@ -68,7 +68,6 @@
 <tr><td rowspan="3">场景方案</td><td>语聊房</td><td>—</td><td>✓</td><td>✓</td></tr>
 <tr><td>超级社区（类似 Discord 的超大群）</td><td>—</td><td>✓</td><td>✓</td></tr>
 <tr><td>环信 AIGC X IM（生成式人工智能一站式解决方案）</td><td>—</td><td>✓</td><td>✓</td></tr>
-<tr><td>AI 会话摘要助手</td><td>通过 AI 技术针对单个群组会话中一段时间内的消息内容生成会话摘要</td><td>—</td><td>✓</td><td>✓</td></tr>
 <tr><td rowspan="3">消息审核</td><td>实时消息人工审核</td><td>—</td><td>*</td><td>*</td></tr>
 <tr><td>内容审核（支持文本、图片、语音、视频消息的智能审核）</td><td>联系商务</td><td>联系商务</td><td>联系商务</td></tr>
 <tr><td>敏感词服务（基础词库）<br>说明：仅包含涉政词库，不支持配置自定义词</td><td>—</td><td>✓</td><td>✓</td></tr>
