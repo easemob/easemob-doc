@@ -305,11 +305,3 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 查询回调储存详情         | GET  | /{org_name}/{app_name}/callbacks/storage/info | 100 次/秒/App Key          | 50 次/秒  |
 | 补发回调存储信息   | POST  | /{org_name}/{app_name}/callbacks/storage/retry | 100 次/秒/App Key  | 50 次/秒  |
-
-## AI 会话摘要助手
-
-| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
-| :-------- | :----- | :---------------- | :--------------------- | 
-| 生成会话摘要         | POST  | /{org_name}/{app_name}/agent/v1/messages/summary | 100 次/秒/App Key          |
-| 获取会话摘要         | GET  | /{org_name}/{app_name}/agent/v1/messages/summaries?conversationId={groupId}&username={username}&chatType={chatType} | 100 次/秒/App Key          |
-| 删除会话摘要         | DELETE  | /{org_name}/{app_name}/agent/v1/messages/summary/{summaryId}?conversationId={groupId}&username={username}&chatType={chatType} | 100 次/秒/App Key          |

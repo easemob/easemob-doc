@@ -7,13 +7,7 @@ import { PUSH_SIDEBAR } from "./push";
 
 export const zhSidebar = sidebar({
   "/product/": [
-    {
-      text: "产品动态",
-      collapsible: true,
-      children: [
-        { text: "产品动态", link: "product_dynamics.html" },
-      ],
-    },
+    { text: "产品动态", link: "product_dynamics.html" },
     {
       /*
         text: 分组标题
@@ -177,64 +171,166 @@ export const zhSidebar = sidebar({
         },
       ],
     },
-        {
-         text: "回调",
-         collapsible: true,
-         children: [
-        { text: "回调概述", link: "callback/callback_overview.html" },
-        { text: "发送前回调", link: "callback/callback_presending.html" },
-        { text: "发送后回调", link: "callback/callback_postsending.html" },
-        { text: '发送后回调事件',
-        collapsible: true,
-        children: [
-          { text: '用户登入/登出', link: 'callback/callback_login_logout.html' },
-          { text: '发送消息', link: 'callback/callback_message_send.html' },
-          { text: '发送单聊消息已读回执', link: 'callback/callback_single_read_ack.html' },
-          { text: '发送群聊消息已读回执', link: 'callback/callback_group_read_ack.html' },
-          { text: '发送会话已读回执', link: 'callback/callback_single_conversation_ack.html' },
-          { text: '修改消息', link: 'callback/callback_message_modify.html' },
-          { text: '撤回消息', link: 'callback/callback_message_recall.html' },
-          { text: '群组/聊天室操作（新）', 
-            collapsible: true,
-            children: [
-              { text: '创建群组/聊天室', link: 'callback/callback_group_room_create.html' },
-              { text: '更新群组/聊天室',
-                collapsible: true,
-                children: [
-                  { text: '更新群组_聊天室信息', link: 'callback/callback_group_room_info.html' },
-                  { text: '变更群主/聊天室所有者', link: 'callback/callback_group_room_owner.html' },
-                  { text: '设置/更新公告', link: 'callback/callback_group_room_announcement.html' },
-                  { text: '封禁/解禁群组', link: 'callback/callback_group_ban.html' },
-                  { text: '全员禁言', link: 'callback/callback_group_room_muteall.html' }
-                ]
-              },
-              { text: '删除群组/聊天室', link: 'callback/callback_group_room_delete.html' },
-              { text: '屏蔽/解除屏蔽群组', link: 'callback/callback_group_block.html' },
-              { text: '上传/删除群共享文件', link: 'callback/callback_group_shared_file.html' },
-              { text: '用户加入', link: 'callback/callback_group_room_join.html' },
-              { text: '成员离开', link: 'callback/callback_group_room_leave.html' },
-              { text: '添加/移除管理员', link: 'callback/callback_group_room_admin.html' },
-              { text: '加入/移出禁言列表', link: 'callback/callback_group_room_mute.html' },
-              { text: '添加/移出白名单', link: 'callback/callback_group_room_allowlist.html' },
-              { text: '加入/移出黑名单', link: 'callback/callback_group_room_blocklist.html' },
-              { text: '添加/移除聊天室超级管理员', link: 'callback/callback_room_superadmin.html' }
-            ]
-          },
-          { text: '群组/聊天室操作（旧）', link: 'callback/callback_group_room_old.html' },
-          { text: '用户关系操作', link: 'callback/callback_contact.html' },
-          { text: '离线推送', link: 'callback/callback_offline_push.html' },
-          { text: 'Reaction', link: 'callback/callback_reaction.html' },
-          { text: 'Thread', link: 'callback/callback_thread.html' },
-          { text: '敏感词监测', link: 'callback/callback_sensitive_word.html' }
-        ]
-      }
-         ],
-      }, 
-      { text: "质量监控", link: "request_quality_overview.html" },
      ],
     },
     {
-      text: "场景方案",
+      text: "常见方案",
+      collapsible: true,
+      children: [
+        { text: "群 @ 消息", link: "solution_common/group_@.html" },
+        { text: "消息引用", link: "solution_common/message_quote.html" },
+        { text: "实现输入指示器", link: "solution_common/typing_indication.html" },
+        { text: "迁移到环信", link: "solution_common/migrate_to_easemob.html" },
+      ],
+    },
+    {
+      text: "帮助中心",
+      collapsible: true,
+      children: [
+      {
+      text: "FAQ",
+      collapsible: true,
+      children: [
+        { text: "FAQ 质量", link: "faq_quality_issues.html" },
+        { text: "FAQ 集成", link: "faq_integration_issues.html" },
+        ],
+      },
+      { text: "联系我们", link: "help.html" },
+     ],
+    },
+    {
+      text: "安全",
+      collapsible: true,
+      children: [
+        { text: "安全最佳实践", link: "security_best_practices.html" },
+        { text: "GDPR 安全合规", link: "GDPR.html" },
+        {text: "SDK合规使用说明", link:"https://www.easemob.com/news/privacy"}
+      ],
+    },
+    {
+      text: "Console 指南（新）",
+      collapsible: true,
+      children: [
+        { text: "注册账号", link: "console/account_register.html" },
+        { text: "应用管理", 
+            collapsible: true,
+            children: [
+            { text: "创建应用", link: "console/app_create.html" },
+            { text: "查看和配置应用", link: "console/app_manage.html" },
+          ],
+        },
+        { text: "服务开通", 
+            collapsible: true,
+            children: [
+            { text: "购买套餐包", link: "console/purchase_package.html" },
+            { text: "开通增值服务", link: "console/purchase_value_added.html" },
+          ],
+        },
+        { text: "功能配置", 
+            collapsible: true,
+            children: [
+            {
+             text: "配置基础功能",
+             collapsible: true,
+             children: [
+             { text: "用户", link: "console/basic_user.html" },
+             { text: "消息", link: "console/basic_message.html" },
+             { text: "会话/群组/聊天室", link: "console/basic_conversation_group_chatroom.html" },
+             { text: "消息回调", link: "console/basic_webhook.html" },
+             { text: "其他", link: "console/basic_other.html" },
+             ],
+            },
+            {
+             text: "配置增值功能",
+             collapsible: true,
+             children: [
+             {
+             text: "内容审核",
+             collapsible: true,
+             children: [
+             { text: "数据总览", link: "console/moderation_data_overview.html" },
+             { text: "规则配置", link: "console/moderation_rule_config.html" },
+             { text: "规则测试", link: "console/moderation_rule_test.html" },
+             { text: "历史记录", link: "console/moderation_history.html" },
+             { text: "关键词名单", link: "console/moderation_keyword.html" },
+             { text: "审核记录导出", link: "console/moderation_history_export.html" },
+             { text: "消息举报", link: "console/moderation_message_report.html" },
+             { text: "标签管理", link: "console/moderation_user_tag.html" },
+             ],
+            },
+             {
+             text: "即时推送",
+             collapsible: true,
+             children: [
+             { text: "用户管理", link: "console/push_user.html" },
+             { text: "证书管理", link: "console/push_certificate_config.html" },
+             { text: "模板管理", link: "console/push_template.html" },
+             { text: "创建推送", link: "console/push_task_create.html" },
+             { text: "推送任务", link: "console/push_task.html" },
+             { text: "标签管理", link: "console/push_tag_mgmt.html" },
+             { text: "推送统计", link: "console/push_statistics.html" },
+             ],
+            },
+             ],
+            },
+          ],
+        },
+        { text: "账号管理", 
+            collapsible: true,
+            children: [
+            { text: "修改账户信息", link: "console/account_modify.html" },
+            { text: "创建子账号", link: "console/account_sub_create.html" },
+          ],
+        },
+        { text: "账单中心", link: "console/account_center.html" },
+        { text: "运营管理", 
+            collapsible: true,
+            children: [
+            {
+             text: "运营操作",
+             collapsible: true,
+             children: [
+             { text: "用户管理", link: "console/operation_user.html" },
+             { text: "群组管理", link: "console/operation_group.html" },
+             { text: "聊天室管理", link: "console/operation_chatroom.html" },
+             ],
+            },
+            {
+             text: "运营数据",
+             collapsible: true,
+             children: [
+             { text: "数据查询", link: "console/operation_data.html" },
+             { text: "消息量统计", link: "console/operation_message_statistics.html" }, 
+             ],
+            },
+            {
+             text: "问题排查",
+             collapsible: true,
+             children: [
+             { text: "请求质量监控", link: "console/operation_troubleshooting_request_quality.html" },
+             { text: "消息投递查询", link: "console/operation_troubleshooting_message_delivery.html" },
+             { text: "用户连接状态查询", link: "console/operation_troubleshooting_user_connection.html" },
+             { text: "用户设备日志", link: "console/operation_troubleshooting_device_log.html" },
+             { text: "聊天室消息速率", link: "console/operation_troubleshooting_chatroom_rate.html" },
+             ],
+            },
+          ],
+        },
+        
+      ],
+    },
+    {
+      text: "Console 指南（旧）",
+      collapsible: true,
+      children: [
+        { text: "开通和配置服务", link: "enable_and_configure_IM.html" },
+        { text: "消息量统计", link: "message_statistics.html" },
+        { text: "请求质量概览", link: "request_quality_overview.html" },
+      ],
+    },
+    { text: "术语表", link: "glossary.html" },
+    {
+      text: "已废弃内容",
       collapsible: true,
       children: [
         {
@@ -404,186 +500,6 @@ export const zhSidebar = sidebar({
             },
           ],
         },
-      ],
-    },
-    {
-      text: "常见方案",
-      collapsible: true,
-      children: [
-        { text: "群 @ 消息", link: "solution_common/group_@.html" },
-        { text: "消息引用", link: "solution_common/message_quote.html" },
-        { text: "实现输入指示器", link: "solution_common/typing_indication.html" },
-        { text: "迁移到环信", link: "solution_common/migrate_to_easemob.html" },
-      ],
-    },
-    {
-      text: "插件",
-      collapsible: true,
-      children: [
-      {
-      text: 'AI 会话摘要助手',
-      collapsible: true,
-      children: [
-        { text: '效果展示及开通', link: 'plug-in/conversation_summary_enable.html' },
-        { text: '集成指南', 
-          collapsible: true,
-          children: [
-            { text: "RESTful API", link: "plug-in/conversation_summary_restful.html" },
-          ],  
-        },
-      ], 
-    },
-    ], 
-    },
-    {
-      text: "帮助中心",
-      collapsible: true,
-      children: [
-      {
-      text: "FAQ",
-      collapsible: true,
-      children: [
-        { text: "FAQ 质量", link: "faq_quality_issues.html" },
-        { text: "FAQ 集成", link: "faq_integration_issues.html" },
-        ],
-      },
-      { text: "联系我们", link: "help.html" },
-     ],
-    },
-    {
-      text: "安全",
-      collapsible: true,
-      children: [
-        { text: "安全最佳实践", link: "security_best_practices.html" },
-        { text: "GDPR 安全合规", link: "GDPR.html" },
-        {text: "SDK合规使用说明", link:"https://www.easemob.com/news/privacy"}
-      ],
-    },
-    {
-      text: "Console 指南（新）",
-      collapsible: true,
-      children: [
-        { text: "注册账号", link: "console/account_register.html" },
-        { text: "应用管理", 
-            collapsible: true,
-            children: [
-            { text: "创建应用", link: "console/app_create.html" },
-            { text: "查看和配置应用", link: "console/app_manage.html" },
-          ],
-        },
-        { text: "服务开通", 
-            collapsible: true,
-            children: [
-            { text: "购买套餐包", link: "console/purchase_package.html" },
-            { text: "开通增值服务", link: "console/purchase_value_added.html" },
-          ],
-        },
-        { text: "功能配置", 
-            collapsible: true,
-            children: [
-            {
-             text: "配置基础功能",
-             collapsible: true,
-             children: [
-             { text: "用户", link: "console/basic_user.html" },
-             { text: "消息", link: "console/basic_message.html" },
-             { text: "会话/群组/聊天室", link: "console/basic_conversation_group_chatroom.html" },
-             { text: "消息回调", link: "console/basic_webhook.html" },
-             { text: "其他", link: "console/basic_other.html" },
-             ],
-            },
-            {
-             text: "配置增值功能",
-             collapsible: true,
-             children: [
-             {
-             text: "内容审核",
-             collapsible: true,
-             children: [
-             { text: "数据总览", link: "console/moderation_data_overview.html" },
-             { text: "规则配置", link: "console/moderation_rule_config.html" },
-             { text: "规则测试", link: "console/moderation_rule_test.html" },
-             { text: "历史记录", link: "console/moderation_history.html" },
-             { text: "关键词名单", link: "console/moderation_keyword.html" },
-             { text: "审核记录导出", link: "console/moderation_history_export.html" },
-             { text: "消息举报", link: "console/moderation_message_report.html" },
-             { text: "标签管理", link: "console/moderation_user_tag.html" },
-             ],
-            },
-             {
-             text: "即时推送",
-             collapsible: true,
-             children: [
-             { text: "用户管理", link: "console/push_user.html" },
-             { text: "证书管理", link: "console/push_certificate_config.html" },
-             { text: "模板管理", link: "console/push_template.html" },
-             { text: "创建推送", link: "console/push_task_create.html" },
-             { text: "推送任务", link: "console/push_task.html" },
-             { text: "标签管理", link: "console/push_tag_mgmt.html" },
-             { text: "推送统计", link: "console/push_statistics.html" },
-             ],
-            },
-             ],
-            },
-          ],
-        },
-        { text: "账号管理", 
-            collapsible: true,
-            children: [
-            { text: "修改账户信息", link: "console/account_modify.html" },
-            { text: "创建子账号", link: "console/account_sub_create.html" },
-          ],
-        },
-        { text: "账单中心", link: "console/account_center.html" },
-        { text: "运营管理", 
-            collapsible: true,
-            children: [
-            {
-             text: "运营操作",
-             collapsible: true,
-             children: [
-             { text: "用户管理", link: "console/operation_user.html" },
-             { text: "群组管理", link: "console/operation_group.html" },
-             { text: "聊天室管理", link: "console/operation_chatroom.html" },
-             ],
-            },
-            {
-             text: "运营数据",
-             collapsible: true,
-             children: [
-             { text: "数据查询", link: "console/operation_data.html" },
-             { text: "消息量统计", link: "console/operation_message_statistics.html" }, 
-             ],
-            },
-            {
-             text: "问题排查",
-             collapsible: true,
-             children: [
-             { text: "请求质量监控", link: "console/operation_troubleshooting_request_quality.html" },
-             { text: "消息投递查询", link: "console/operation_troubleshooting_message_delivery.html" },
-             { text: "用户连接状态查询", link: "console/operation_troubleshooting_user_connection.html" },
-             { text: "用户设备日志", link: "console/operation_troubleshooting_device_log.html" },
-             { text: "聊天室消息速率", link: "console/operation_troubleshooting_chatroom_rate.html" },
-             ],
-            },
-          ],
-        },
-        
-      ],
-    },
-    {
-      text: "Console 指南（旧）",
-      collapsible: true,
-      children: [
-        { text: "开通和配置服务", link: "enable_and_configure_IM.html" },
-        { text: "消息量统计", link: "message_statistics.html" },
-        { text: "请求质量概览", link: "request_quality_overview.html" },
-      ],
-    },
-    { text: "术语表", 
-      collapsible: true,
-      children: [
-        { text: "术语表", link: "glossary.html" },
       ],
     },
   ],  
