@@ -168,20 +168,8 @@ const documentSidebar = [
     ],
     except: ['applet', 'server-side','electron','linux']
   },
-  {
-    text: '苹果隐私策略',
-    children: [
-      { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
-    ],
-    except: ['applet', 'server-side','electron','linux']
-  },
-  {
-    text: '精简版 SDK',
-    children: [
-      { text: '精简版 SDK 使用说明', link: 'elite_sdk.html' },
-    ],
-    only: ['android', 'ios']
-  },
+  { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
+  { text: '精简版 SDK 使用说明', link: 'elite_sdk.html', only: ['android', 'ios']},
   {
     text: '产品介绍',
     children: [
@@ -510,13 +498,7 @@ const documentSidebar = [
     ],
     only: ['server-side']
   },
-  {
-    text: '错误码',
-    children: [
-      { text: '错误码', link: 'error.html' }
-    ],
-    only: ['server-side']
-  },
+  { text: '错误码', link: 'error.html', only: ['server-side']},
   {
     text: '设置回调',
     collapsible: true,
