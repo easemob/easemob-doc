@@ -53,25 +53,11 @@ const callKitSidebar = [
       { text: "自定义资源", link: "customization.html" },
       { text: "通话信令", link: "signaling.html" },
       { text: "API 概览", link: "api_overview.html" },
-      {
-        text: "常见问题",
-        collapsible: true,
-        children: [
-          { text: "常见问题", link: "common_issue.html" },
-        ]
-      }
+      { text: "常见问题", link: "common_issue.html" },
     ]
   },
-  {
-    text: "设计文档",
-    collapsible: true,
-    children: [{ text: "设计指南", link: "design_guide.html" }]
-  },
-  {
-    text: "历史文档",
-    collapsible: true,
-    children: [{ text: "历史文档", link: "easecallkit.html" }]
-  }
+  { text: "设计指南", link: "design_guide.html" },
+  { text: "历史文档", link: "easecallkit.html" }
 ];
 
 function buildCallKitSidebar() {
