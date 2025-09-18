@@ -11,13 +11,6 @@ const documentSidebar = [
   { text: 'Demo 体验', link: 'demo.html', only: ['android', 'ios', 'react-native', 'flutter'] },
   { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
   { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
-  // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
-  /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
-  { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side', 'applet'] },
-  { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
-  { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
-  { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
-  { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
   { text: '集成 SDK', link: 'integration.html', except: ['server-side', 'applet']},
   { text: '初始化', link: 'initialization.html', except: ['server-side', 'applet']},
   {
@@ -291,153 +284,145 @@ const documentSidebar = [
     ],
     only: ['applet']
   },
-  {
-    text: '服务端 RESTful API',
-    children: [
-      { text: '即时通讯 RESTful API 概览', link: 'overview.html' },
-      { 
-        text: '消息管理', 
-        collapsible: true,
-        children: [
-          { text: '发送单聊消息', link: 'message_single.html' },
-          { text: '发送群聊消息', link: 'message_group.html' },
-          { text: '发送聊天室消息', link: 'message_chatroom.html' },
-          { text: '发送全局广播消息', link: 'message_broadcast.html' },
-          { text: '上传和下载文件', link: 'message_download.html' },
-          { text: '获取历史消息记录', link: 'message_historical.html' },
-          { text: '设置指定消息附件的存储方式', link: 'message_attachment_storage.html' },
-          { text: '消息表情回复', link: 'reaction.html' },
-          { text: '撤回消息', link: 'message_recall.html' },
-          { text: '单向删除会话', link: 'conversation_delete.html' },
-          { text: '单向删除漫游消息', link: 'message_delete.html' },
-          { text: '修改消息', link: 'message_modify.html' },
-          {
-            text: '消息翻译',
-            collapsible: true,
-            children: [
-            { text: '翻译消息内容', link: 'message_translation_text.html' },
-            { text: '获取翻译语言列表', link: 'message_translation_language_list.html' },
-            { text: '检测文本的源语言', link: 'message_translation_detect.html' },
-            ],
-          },
-          { text: '获取离线消息数据', link: 'message_offline.html' },
-          { text: '导入消息', link: 'message_import.html' }
-        ]
-      },
-      { 
-        text: '群组',
-        collapsible: true,
-        children: [
-          { text: '管理群组', link: 'group_manage.html' },
-          { text: '管理群组文件', link: 'group_file.html' },
-          { text: '管理群组成员', 
-            collapsible: true,
-            children: [
-              { text: '获取成员列表', link: 'group_member_obtain.html' },
-              { text: '添加/移除成员', link: 'group_member_add_delete.html' },
-              { text: '管理群成员自定义属性', link: 'group_member_attribute.html' },
-              { text: '管理群主/管理员', link: 'group_member_admin.html' },
-              { text: '管理禁言', link: 'group_member_mutelist.html' },
-              { text: '管理白名单', link: 'group_member_allowlist.html' },
-              { text: '管理黑名单', link: 'group_member_blocklist.html' }
-            ]  
-          },
-          { text: '管理子区', link: 'group_thread.html' }
-        ]
-      },
-      { 
-        text: '聊天室',
-        collapsible: true,
-        children: [
-          { text: '管理超级管理员', link: 'chatroom_superadmin.html' },
-          { text: '管理聊天室', link: 'chatroom_manage.html' },
-          { text: '管理聊天室属性', link: 'chatroom_attribute.html' },
-          { 
-            text: '管理聊天室成员', 
-            collapsible: true,
-            children: [
-              { text: '获取成员列表', link: 'chatroom_member_obtain.html' },
-              { text: '添加/移除成员', link: 'chatroom_member_add_delete.html' },
-              { text: '管理聊天室所有者/管理员', link: 'chatroom_member_admin.html' },
-              { text: '管理禁言', 
-                collapsible: true,
-                children: [
-                  { text: '多个或全体成员禁言',  link: 'chatroom_member_mutelist.html' },
-                  { text: '标签禁言',  link: 'chatroom_label_mute.html' }
-                ]
-              },  
-              { text: '管理白名单', link: 'chatroom_member_allowlist.html' },
-              { text: '管理黑名单', link: 'chatroom_member_blocklist.html' }
-            ]  
-          }
-        ]
-      },
-      { 
-        text: '用户相关',
-        collapsible: true,
-        children: [
-          { text: '用户体系管理', link: 'account_system.html' },
-          { text: '用户属性', link: 'userprofile.html' },
-          { text: '用户状态订阅', link: 'presence.html' },
-          { 
-            text: '用户关系',
-            collapsible: true,
-            children: [
-              { text: '添加好友', link: 'user_relationship_friend_add.html' },
-              { text: '校验好友', link: 'user_relationship_friend_check.html' },
-              { text: '删除单个好友', link: 'user_relationship_friend_remove.html' },
-              { text: '删除所有好友', link: 'user_relationship_friend_remove_all.html' },
-              { text: '设置好友备注', link: 'user_relationship_remark_set.html' },
-              { text: '分页获取好友列表', link: 'user_relationship_friend_list_paged.html' },
-              { text: '一次性获取好友列表', link: 'user_relationship_friend_list_obtain.html' },
-              { text: '导入好友列表', link: 'user_relationship_friend_import.html' },
-              { text: '添加用户至黑名单', link: 'user_relationship_blocklist_add.html' },
-              { text: '从黑名单中移除用户', link: 'user_relationship_blocklist_remove.html' },
-              { text: '获取黑名单列表', link: 'user_relationship_blocklist_obtain.html' },
-              { text: '校验黑名单', link: 'user_relationship_blocklist_check.html' }
-            ]
-          },
-          { text: '用户全局禁言', link: 'user_global_mute.html' },
-          { text: '用户收藏', link: 'user_favorite.html'}
-        ]
-      },
-      { 
-        text: '离线推送',
-        collapsible: true,
-        children: [
-          { text: '离线推送设置', link: 'push.html' },
-          { text: '离线推送的消息扩展', link: 'push_extension.html' },
-          { text: '查询离线推送结果', link: 'push_result_statistics.html' }
-        ]
-      },
-      { 
-        text: '关键词名单',
-        collapsible: true,
-        children: [
-          { text: '创建关键词名单', link: 'keyword_list_create.html' },
-          { text: '修改关键词名单', link: 'keyword_list_modify.html' },
-          { text: '查询关键词名单', link: 'keyword_list_query.html' },
-          { text: '删除关键词名单', link: 'keyword_list_delete.html' },
-          { text: '添加关键词', link: 'keyword_add.html' },
-          { text: '修改关键词', link: 'keyword_modify.html' },
-          { text: '查询关键词', link: 'keyword_query.html' },
-          { text: '删除单个关键词', link: 'keyword_delete.html' },
-          { text: '批量删除关键词', link: 'keyword_delete_batch.html' }
-        ]
-      },
-    ],
-    only: ['server-side']
-  },
-  {
-    text: 'Server SDK',
+  { text: 'REST API 概览', link: 'overview.html', only: ['server-side'] },
+  { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
+  { text: '环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
+  { text: '环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
+  { 
+    text: '消息管理', 
     collapsible: true,
     children: [
-      { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
-      { text: 'Java Server SDK 1.0', link: 'java_server_sdk.html' },
-      // { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
+      { text: '发送单聊消息', link: 'message_single.html' },
+      { text: '发送群聊消息', link: 'message_group.html' },
+      { text: '发送聊天室消息', link: 'message_chatroom.html' },
+      { text: '发送全局广播消息', link: 'message_broadcast.html' },
+      { text: '上传和下载文件', link: 'message_download.html' },
+      { text: '获取历史消息记录', link: 'message_historical.html' },
+      { text: '设置指定消息附件的存储方式', link: 'message_attachment_storage.html' },
+      { text: '消息表情回复', link: 'reaction.html' },
+      { text: '撤回消息', link: 'message_recall.html' },
+      { text: '单向删除会话', link: 'conversation_delete.html' },
+      { text: '单向删除漫游消息', link: 'message_delete.html' },
+      { text: '修改消息', link: 'message_modify.html' },
+      {
+        text: '消息翻译',
+        collapsible: true,
+        children: [
+        { text: '翻译消息内容', link: 'message_translation_text.html' },
+        { text: '获取翻译语言列表', link: 'message_translation_language_list.html' },
+        { text: '检测文本的源语言', link: 'message_translation_detect.html' },
+        ],
+      },
+      { text: '获取离线消息数据', link: 'message_offline.html' },
+      { text: '导入消息', link: 'message_import.html' }
     ],
     only: ['server-side']
   },
+  { 
+    text: '群组',
+    collapsible: true,
+    children: [
+      { text: '管理群组', link: 'group_manage.html' },
+      { text: '管理群组文件', link: 'group_file.html' },
+      { text: '管理群组成员', 
+        collapsible: true,
+        children: [
+          { text: '获取成员列表', link: 'group_member_obtain.html' },
+          { text: '添加/移除成员', link: 'group_member_add_delete.html' },
+          { text: '管理群成员自定义属性', link: 'group_member_attribute.html' },
+          { text: '管理群主/管理员', link: 'group_member_admin.html' },
+          { text: '管理禁言', link: 'group_member_mutelist.html' },
+          { text: '管理白名单', link: 'group_member_allowlist.html' },
+          { text: '管理黑名单', link: 'group_member_blocklist.html' }
+        ]  
+      },
+      { text: '管理子区', link: 'group_thread.html' }
+    ],
+    only: ['server-side']
+  },
+  { 
+    text: '聊天室',
+    collapsible: true,
+    children: [
+      { text: '管理超级管理员', link: 'chatroom_superadmin.html' },
+      { text: '管理聊天室', link: 'chatroom_manage.html' },
+      { text: '管理聊天室属性', link: 'chatroom_attribute.html' },
+      { 
+        text: '管理聊天室成员', 
+        collapsible: true,
+        children: [
+          { text: '获取成员列表', link: 'chatroom_member_obtain.html' },
+          { text: '添加/移除成员', link: 'chatroom_member_add_delete.html' },
+          { text: '管理聊天室所有者/管理员', link: 'chatroom_member_admin.html' },
+          { text: '管理禁言', 
+            collapsible: true,
+            children: [
+              { text: '多个或全体成员禁言',  link: 'chatroom_member_mutelist.html' },
+              { text: '标签禁言',  link: 'chatroom_label_mute.html' }
+            ]
+          },  
+          { text: '管理白名单', link: 'chatroom_member_allowlist.html' },
+          { text: '管理黑名单', link: 'chatroom_member_blocklist.html' }
+        ]  
+      }
+    ],
+    only: ['server-side']
+  },
+  { 
+    text: '用户相关',
+    collapsible: true,
+    children: [
+      { text: '用户体系管理', link: 'account_system.html' },
+      { text: '用户属性', link: 'userprofile.html' },
+      { text: '用户状态订阅', link: 'presence.html' },
+      { 
+        text: '用户关系',
+        collapsible: true,
+        children: [
+          { text: '添加好友', link: 'user_relationship_friend_add.html' },
+          { text: '校验好友', link: 'user_relationship_friend_check.html' },
+          { text: '删除单个好友', link: 'user_relationship_friend_remove.html' },
+          { text: '删除所有好友', link: 'user_relationship_friend_remove_all.html' },
+          { text: '设置好友备注', link: 'user_relationship_remark_set.html' },
+          { text: '分页获取好友列表', link: 'user_relationship_friend_list_paged.html' },
+          { text: '一次性获取好友列表', link: 'user_relationship_friend_list_obtain.html' },
+          { text: '导入好友列表', link: 'user_relationship_friend_import.html' },
+          { text: '添加用户至黑名单', link: 'user_relationship_blocklist_add.html' },
+          { text: '从黑名单中移除用户', link: 'user_relationship_blocklist_remove.html' },
+          { text: '获取黑名单列表', link: 'user_relationship_blocklist_obtain.html' },
+          { text: '校验黑名单', link: 'user_relationship_blocklist_check.html' }
+         ]
+        },
+        { text: '用户全局禁言', link: 'user_global_mute.html' },
+        { text: '用户收藏', link: 'user_favorite.html'}
+      ],
+      only: ['server-side']
+  },
+  { 
+    text: '离线推送',
+    collapsible: true,
+    children: [
+      { text: '离线推送设置', link: 'push.html' },
+      { text: '离线推送的消息扩展', link: 'push_extension.html' },
+      { text: '查询离线推送结果', link: 'push_result_statistics.html' }
+    ],
+    only: ['server-side']
+  },
+  { 
+    text: '关键词名单',
+    collapsible: true,
+    children: [
+      { text: '创建关键词名单', link: 'keyword_list_create.html' },
+      { text: '修改关键词名单', link: 'keyword_list_modify.html' },
+      { text: '查询关键词名单', link: 'keyword_list_query.html' },
+      { text: '删除关键词名单', link: 'keyword_list_delete.html' },
+      { text: '添加关键词', link: 'keyword_add.html' },
+      { text: '修改关键词', link: 'keyword_modify.html' },
+      { text: '查询关键词', link: 'keyword_query.html' },
+      { text: '删除单个关键词', link: 'keyword_delete.html' },
+      { text: '批量删除关键词', link: 'keyword_delete_batch.html' }
+    ]
+  }, 
   { text: '错误码', link: 'error.html', only: ['server-side']},
   {
     text: '设置回调',
@@ -490,6 +475,26 @@ const documentSidebar = [
           { text: '敏感词监测', link: 'callback_sensitive_word.html' }
         ]
       }
+    ],
+    only: ['server-side']
+  },
+  {
+    text: 'Server SDK',
+    collapsible: true,
+    children: [
+      { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
+      { text: 'Java Server SDK 1.0', link: 'java_server_sdk.html' },
+      // { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
+    ],
+    only: ['server-side']
+  },
+  {
+    text: 'API Reference',
+    collapsible: true,
+    children: [
+      { text: 'Java Server SDK 2.0', link: 'apireference_java_2.0.html' },
+      { text: 'Java Server SDK 1.0', link: 'apireference_java_1.0.html' },
+      // { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
     ],
     only: ['server-side']
   },
