@@ -34,7 +34,7 @@ const documentSidebar = [
       { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
       { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
     ],
-    except: ['applet', 'electron','linux']
+    except: ['applet']
   },
   {
     text: '用户指南',
@@ -157,7 +157,7 @@ const documentSidebar = [
         ]
       },
     ],
-    except: ['applet','server-side','electron','linux']
+    except: ['applet','server-side']
   },
   {
     text: '错误排查',
@@ -166,7 +166,7 @@ const documentSidebar = [
       { text: '日志', link: 'log.html', except: ['flutter'] },
       { text: '常见问题', link: 'faq.html', only: ['react-native'] },
     ],
-    except: ['applet', 'server-side','electron','linux']
+    except: ['applet', 'server-side']
   },
   { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
   { text: '精简版 SDK 使用说明', link: 'elite_sdk.html', only: ['android', 'ios']},
@@ -311,45 +311,6 @@ const documentSidebar = [
       { text: 'Vue3 项目在 H5 平台发布的注意事项', link: 'vue3_project_h5.html' },
     ],
     only: ['applet']
-  },
-  {
-    text: 'SDK 集成介绍',
-    children: [
-      { text: '集成说明', link: 'overview.html' },
-      { text: 'SDK 基础功能', link: 'sdk_basic_function.html' },
-      { text: 'Demo 下载体验', link: 'demo_download.html' },
-      { text: '桌面 SDK API 文档', link: 'sdk_api.html' },
-    ],
-    only: ['electron']
-  },
-  {
-    text: 'IM 基本功能',
-    children: [
-      { text: '消息', link: 'message.html' },
-      { text: '会话管理', link: 'conversation.html' },
-      { text: '用户关系管理', link: 'contact.html' },
-      { text: '群组', link: 'group.html' },
-      { text: '聊天室', link: 'chatroom.html' },
-      { text: '多设备监听', link: 'multi_device.html' },
-      { text: '附录', link: 'annex.html' },
-    ],
-    only: ['electron']
-  },
-  {
-    text: '更新日志',
-    children: [
-      { text: 'SDK 更新日志', link: 'releasenote.html' },
-    ],
-    only: ['electron']
-  },
-  {
-    text: 'Linux SDK 集成介绍',
-    children: [
-      { text: 'Linux SDK 集成说明', link: 'overview.html' },
-      { text: '技术参数', link: 'technical_parameter.html' },
-      { text: 'Linux SDK 更新日志', link: 'releasenote.html' },
-    ],
-    only: ['linux']
   },
   {
     text: '服务端 RESTful API',

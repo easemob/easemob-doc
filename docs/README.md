@@ -1240,7 +1240,7 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/multi_device.html                
-      - title: 推送
+      - title: 离线推送
         icon: /feature/push.svg
         contexts:
           - text: 离线推送
@@ -1266,19 +1266,16 @@ projects:
                 link: /document/react-native/push/push_overview.html  
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/push.html      
-          - text: 即时推送
-            desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、VIVO 等主流手机厂商通道。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /push/push_integration_note_android.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /push/push_integration_note_ios.html
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /push/push_by_tag.html           
+                link: /document/server-side/push.html 
+      - title: 回调
+        icon: /feature/api-server.svg
+        contexts:
+          - text: 发送前回调
+            link: /document/server-side/callback_presending.html
+          - text: 发送后回调
+            link: /document/server-side/callback_postsending.html
+          - text: 发送后回调事件
+            link: /document/server-side/callback_login_logout.html                                         
   - title: UIKit 功能
     features:
       - title: 单群聊 UIKit
@@ -1922,6 +1919,21 @@ projects:
                 link: /uikit/chatroomuikit/react-native/roomfeature_member.html#移除成员  
   - title: 增值服务
     features:
+      - title: 实时音视频服务
+        icon: /feature/api-server.svg
+        contexts:  
+          - text: 实时音视频服务
+            desc: 开通音视频服务后，你可以继承环信音视频通话 CallKit，实现了一对一及群组音视频通话功能。。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /callkit/android/product_overview.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /callkit/ios/product_overview.html
+              - icon: /sdk/rest.svg
+                text: Web
+                link: /callkit/web/product_overview.html 
       - title: 消息翻译
         icon: /feature/uikit.svg
         contexts:
@@ -2019,58 +2031,21 @@ projects:
             link: /product/moderation/moderation_record_callback.html
           - text: 消息人工审核
             link: /product/moderation/moderation_manual_review.html
-      - title: 回调
+      - title: 即时推送
         icon: /feature/api-server.svg
-        contexts:
-          - text: 发送前回调
-            link: /document/server-side/callback_presending.html
-          - text: 发送后回调
-            link: /document/server-side/callback_postsending.html
-          - text: 发送后回调事件
-            link: /document/server-side/callback_login_logout.html
-      - title: 质量监控
-        icon: /feature/api-server.svg
-        contexts:
-          - text: 请求质量
-            link: /product/request_quality_overview.html
-  - title: 场景方案
-    features:
-      - contexts:
-          - text: 环信 AIGC
-            desc: 环信 AIGC 决方案，充分发挥即时通讯的实时性和便利性，同时叠加 AI 的智能化能力，可快速搭建多类低延迟的 AI 实时互动场景，实现了更便捷的开发、更具沉浸感和个性化的用户体验。
-            sdks:
-              - text: 方案介绍
-                link: /product/aigc/aigc_scenario_introduction.html
-              - text: 方案选择
-                link: /product/aigc/aigc_selection.html
-              - text: 方案一
-                link: /product/aigc/aigc_run_through_demo_server.html
-              - text: 方案二
-                link: /product/aigc/aigc_use.html
-          - text: 超级社区
-            desc: 环信超级社区（Circle）是一款基于环信 IM 打造的类 Discord 实时社区应用场景方案，支持社区（Server）、频道（Channel） 和子区（Thread） 三层结构。一个 App 下可以有多个社区，同时支持陌生人/好友单聊。用户可创建和管理自己的社区，在社区中设置和管理频道将一个话题下的子话题进行分区，在频道中根据感兴趣的某条消息发起子区讨论，实现万人实时群聊，满足超大规模用户的顺畅沟通需求。
+        contexts:  
+          - text: 即时推送
+            desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、VIVO 等主流手机厂商通道。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /product/circle/circle_quickstart_android.html
+                link: /push/push_integration_note_android.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /product/circle/circle_quickstart_ios.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /product/circle/circle_quickstart_web.html
+                link: /push/push_integration_note_ios.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /product/circle/server_mgmt_rest.html
-          - text: 语聊房
-            desc: 环信语聊房（Easemob Chat Room）场景方案是环信打造的一款低门槛、高可用的语聊房场景方案。该场景方案融合了环信即时通讯云的聊天室和声网 RTC 的音频技术，提供市面主流的语聊房 App 的功能，其核心功能包括房间管理、麦位控制、聊天打赏和音频特效等，覆盖语音游戏、语音社交、相亲交友等场景，能够较为全面满足客户的语聊房开发需求。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /product/voiceroom/demo_scenario_introduction.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /product/voiceroom/demo_scenario_introduction.html          
+                link: /push/push_by_tag.html      
   - title: API 参考
     features:
       - title: IM 客户端
@@ -2097,15 +2072,6 @@ projects:
             link: https://easemob.github.io/easemob-im-server-sdk/
           - text: JAVA 2.0
             link: https://github.com/easemob/easemob-im-server-sdk/tree/master_java_2.0/src/test/java/com/easemob/im/api  
-      - title: 超级社区
-        icon: /feature/api-circle.svg
-        contexts:
-          - text: Android
-            link: https://www.easemob.com/apidoc/Android/hyphenate-api-doc/html/annotated.html
-          - text: iOS
-            link: https://www.easemob.com/apidoc/iOS/html_ch/annotated.html
-          - text: Web
-            link: https://www.easemob.com/apidoc/Web/
   - title: 控制台
     features:
       - contexts:
