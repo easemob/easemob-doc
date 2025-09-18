@@ -1,5 +1,4 @@
-# SDK API Doc
+# API 参考
 
-<Toc />
+如需了解 HarmonyOS SDK 中的 API 详情，请参见 [API 参考文档](https://doc.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html)。
 
-[环信 HarmonyOS SDK 1.X API Doc](https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html)

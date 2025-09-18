@@ -6,170 +6,149 @@ const DOC_PATH = path.resolve(__dirname, '../../document')
 const platformList = getSubDirectories(DOC_PATH)
 
 const documentSidebar = [
+  { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
+  { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
+  { text: 'Demo 体验', link: 'demo.html', only: ['android', 'ios', 'react-native', 'flutter'] },
+  { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
+  { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
+  // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
+  /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
+  { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side', 'applet'] },
+  { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
+  { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
+  { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
+  { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
+  { text: '集成 SDK', link: 'integration.html', except: ['server-side', 'applet']},
+  { text: '初始化', link: 'initialization.html', except: ['server-side', 'applet']},
   {
-    /*
-      text: 分组标题
-      children: 分组导航列表
-        text: 显示的文本
-        link: 链接地址
-        show: 不存在或者值为 true 时，菜单显示；存在并且值为 false 时，菜单不显示
-        only: 数组形式，只有在数组中的平台下显示
-        except: 数组形式，除了数组中指定的平台外都显示
-        collapsible: 子菜单是否允许展开/收起，true: 允许; false: 不允许。请参考「子菜单示例」
-        children: 子菜单。请参考「子菜单示例」
-    */
-    text: '快速开始',
+    text: '登录',
+    collapsible: true,
     children: [
-      { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
-      { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
-      { text: 'Demo 体验', link: 'demo.html', except: ['web', 'windows', 'unity', 'server-side'] },
-      { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
-      { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
-      // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
-      { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
-      /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
-      { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
-      { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
-      { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
-      { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
-      { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
+      { text: '登录介绍', link: 'login.html' },
+      { text: '连接', link: 'connection.html' },
+      { text: '多设备登录', link: 'multi_device.html' },
     ],
-    except: ['applet']
+    except: ['server-side', 'applet']
   },
   {
-    text: '用户指南',
+    text: '消息管理',
+    collapsible: true,
     children: [
-      { text: '集成 SDK', link: 'integration.html' },
-      { text: '初始化', link: 'initialization.html' },
-      {
-        text: '登录',
-        collapsible: true,
-        children: [
-          { text: '登录介绍', link: 'login.html' },
-          { text: '连接', link: 'connection.html' },
-          { text: '多设备登录', link: 'multi_device.html' },
-        ]
+      { text: '消息概述', link: 'message_overview.html' },
+      { text: '发送消息', link: 'message_send.html' },
+      { text: '接收消息', link: 'message_receive.html' },
+      { text: '获取历史消息', link: 'message_retrieve.html' },
+      { text: '撤回消息', link: 'message_recall.html' },
+      { text: '搜索消息', link: 'message_search.html', except: ['web']},
+      { text: '消息回执', link: 'message_receipt.html'},
+      { text: '修改消息', link: 'message_modify.html'},
+      { text: '消息表情回复', link: 'reaction.html' },
+      { text: '转发消息', link: 'message_forward.html', except: ['web']},
+      { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
+      { text: '更新消息', link: 'message_update.html', except: ['web']},
+      { text: '删除消息', link: 'message_delete.html' },    
+      { text: '定向消息', link: 'message_target.html' },    
+      { text: '消息扩展', link: 'message_extension.html' },    
+      { text: '置顶消息', link: 'message_pin.html'},         
+      { text: '翻译消息', link: 'message_translation.html', except: ['harmonyos']},
+      { text: '只投在线用户', link: 'message_deliver_only_online.html'},
+      { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
+      { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
+        ],
+    except: ['server-side', 'applet']
       },
-      {
-        text: '消息管理',
-        collapsible: true,
-        children: [
-          { text: '消息概述', link: 'message_overview.html' },
-          { text: '发送消息', link: 'message_send.html' },
-          { text: '接收消息', link: 'message_receive.html' },
-          { text: '获取历史消息', link: 'message_retrieve.html' },
-          { text: '撤回消息', link: 'message_recall.html' },
-          { text: '搜索消息', link: 'message_search.html', except: ['web']},
-          { text: '消息回执', link: 'message_receipt.html'},
-          { text: '修改消息', link: 'message_modify.html'},
-          { text: '消息表情回复', link: 'reaction.html' },
-          { text: '转发消息', link: 'message_forward.html', except: ['web']},
-          { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
-          { text: '更新消息', link: 'message_update.html', except: ['web']},
-          { text: '删除消息', link: 'message_delete.html' },    
-          { text: '定向消息', link: 'message_target.html' },    
-          { text: '消息扩展', link: 'message_extension.html' },    
-          { text: '置顶消息', link: 'message_pin.html'},         
-          { text: '翻译消息', link: 'message_translation.html', except: ['harmonyos']},
-          { text: '只投在线用户', link: 'message_deliver_only_online.html'},
-          { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
-          { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
-        ]
-      },
-      {
-        text: '会话管理',
-        collapsible: true,
-        children: [
-          { text: '会话介绍', link: 'conversation_overview.html' },
-          { text: '会话列表', link: 'conversation_list.html' },
-          { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
-          { text: '会话已读回执', link: 'conversation_receipt.html' },
-          { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
-          { text: '置顶会话', link: 'conversation_pin.html' },
-          { text: '会话标记', link: 'conversation_mark.html' },
-          { text: '删除会话', link: 'conversation_delete.html' },
-        ]
-      },
-      {
-        text: '群组管理',
-        collapsible: true,
-        children: [
-          { text: '群组概述', link: 'group_overview.html' },
-          { text: '创建和管理群组', link: 'group_manage.html' },
-          { text: '管理群组成员', link: 'group_members.html' },
-          { text: '管理群组属性', link: 'group_attributes.html' },
-          { text: '管理子区', link: 'thread.html', except: ['harmonyos'] },
-          { text: '管理子区消息', link: 'thread_message.html', except: ['harmonyos'] }
-        ]
-      },
-      {
-        text: '聊天室管理',
-        collapsible: true,
-        children: [
-          { text: '聊天室概述', link: 'room_overview.html' },
-          { text: '创建和管理聊天室', link: 'room_manage.html' },
-          { text: '管理聊天室成员', link: 'room_members.html' },
-          { text: '管理聊天室属性', link: 'room_attributes.html' },
-        ]
-      },
-      {
-        text: '用户相关',
-        collapsible: true,
-        children: [
-          { text: '用户关系', link: 'user_relationship.html' },
-          { text: '用户属性', link: 'userprofile.html' },
-          { text: '在线状态订阅', link: 'presence.html' },
-        ]
-      },
-      {
-        text: '离线推送', 
-        collapsible: true,
-        children: [
-          { text: '离线推送概述', link: 'push/push_overview.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter'] },
-          { 
-            text: '集成第三方推送', 
-            collapsible: true,
-            children: [
-            { text: 'FCM 推送', link: 'push/push_fcm.html', only: ['android'] }, 
-            { text: '华为推送', link: 'push/push_huawei.html', only: ['android'] }, 
-            { text: '荣耀推送', link: 'push/push_honor.html', only: ['android'] }, 
-            { text: 'OPPO 推送', link: 'push/push_oppo.html', only: ['android'] }, 
-            { text: 'vivo 推送', link: 'push/push_vivo.html', only: ['android'] }, 
-            { text: '小米推送', link: 'push/push_xiaomi.html', only: ['android'] }, 
-            { text: '魅族推送', link: 'push/push_meizu.html', only: ['android'] }, 
-            { text: 'APNs 推送', link: 'push/push_apns.html', only: ['ios'] }, 
-            { text: 'HarmonyOS 推送', link: 'push/push_harmony.html', only: ['harmonyos'] }
-           ]
-          }, 
-          { text: '上传推送证书', link: 'push/push_easemob_console.html', only: ['react-native'] },
-          { text: '上传推送证书及绑定推送信息', link: 'push/push_easemob_console.html', only: ['flutter'] },
-          { text: '获取或更新推送 token', link: 'push/push_get_device_token.html', only: ['react-native'] },
-          { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
-          { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
-          { text: '统一获取消息方案', link: 'push/push_parsing_unified.html', only: ['android'] },
-          { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios', 'harmonyos', 'react-native', 'flutter'] },
-          { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
-          { text: '设置推送模板', link: 'push/push_template.html', only: ['web']},
-          { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
-          { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
-          { text: '推送消息分类', link: 'push/push_message_classification.html', only: ['android'] },
-          { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
-        ]
-      },
+  {
+    text: '会话管理',
+    collapsible: true,
+    children: [
+      { text: '会话介绍', link: 'conversation_overview.html' },
+      { text: '会话列表', link: 'conversation_list.html' },
+      { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
+      { text: '会话已读回执', link: 'conversation_receipt.html' },
+      { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
+      { text: '置顶会话', link: 'conversation_pin.html' },
+      { text: '会话标记', link: 'conversation_mark.html' },
+      { text: '删除会话', link: 'conversation_delete.html' },
     ],
-    except: ['applet','server-side']
+    except: ['server-side', 'applet']
+  },  
+  {
+    text: '群组管理',
+    collapsible: true,
+    children: [
+      { text: '群组概述', link: 'group_overview.html' },
+      { text: '创建和管理群组', link: 'group_manage.html' },
+      { text: '管理群组成员', link: 'group_members.html' },
+      { text: '管理群组属性', link: 'group_attributes.html' },
+      { text: '管理子区', link: 'thread.html', except: ['harmonyos'] },
+      { text: '管理子区消息', link: 'thread_message.html', except: ['harmonyos'] }
+    ],
+    except: ['server-side', 'applet']
   },
   {
-    text: '错误排查',
+    text: '聊天室管理',
+    collapsible: true,
     children: [
-      { text: '错误码', link: 'error.html' },
-      { text: '日志', link: 'log.html', except: ['flutter'] },
-      { text: '常见问题', link: 'faq.html', only: ['react-native'] },
+      { text: '聊天室概述', link: 'room_overview.html' },
+      { text: '创建和管理聊天室', link: 'room_manage.html' },
+      { text: '管理聊天室成员', link: 'room_members.html' },
+      { text: '管理聊天室属性', link: 'room_attributes.html' },
     ],
-    except: ['applet', 'server-side']
+    except: ['server-side', 'applet']
   },
+  {
+    text: '用户相关',
+    collapsible: true,
+    children: [
+      { text: '用户关系', link: 'user_relationship.html' },
+      { text: '用户属性', link: 'userprofile.html' },
+      { text: '在线状态订阅', link: 'presence.html' },
+    ],
+    except: ['server-side', 'applet']
+  },
+  {
+    text: '离线推送', 
+    collapsible: true,
+    children: [
+      { text: '离线推送概述', link: 'push/push_overview.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter'] },
+      { 
+        text: '集成第三方推送', 
+        collapsible: true,
+        children: [
+          { text: 'FCM 推送', link: 'push/push_fcm.html', only: ['android'] }, 
+          { text: '华为推送', link: 'push/push_huawei.html', only: ['android'] }, 
+          { text: '荣耀推送', link: 'push/push_honor.html', only: ['android'] }, 
+          { text: 'OPPO 推送', link: 'push/push_oppo.html', only: ['android'] }, 
+          { text: 'vivo 推送', link: 'push/push_vivo.html', only: ['android'] }, 
+          { text: '小米推送', link: 'push/push_xiaomi.html', only: ['android'] }, 
+          { text: '魅族推送', link: 'push/push_meizu.html', only: ['android'] }, 
+          { text: 'APNs 推送', link: 'push/push_apns.html', only: ['ios'] }, 
+          { text: 'HarmonyOS 推送', link: 'push/push_harmony.html', only: ['harmonyos'] }
+          ]
+        }, 
+        { text: '上传推送证书', link: 'push/push_easemob_console.html', only: ['react-native'] },
+        { text: '上传推送证书及绑定推送信息', link: 'push/push_easemob_console.html', only: ['flutter'] },
+        { text: '获取或更新推送 token', link: 'push/push_get_device_token.html', only: ['react-native'] },
+        { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
+        { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
+        { text: '统一获取消息方案', link: 'push/push_parsing_unified.html', only: ['android'] },
+        { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios', 'harmonyos', 'react-native', 'flutter'] },
+        { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
+        { text: '设置推送模板', link: 'push/push_template.html', only: ['web']},
+        { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
+        { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
+        { text: '推送消息分类', link: 'push/push_message_classification.html', only: ['android'] },
+        { text: '常见问题', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
+      ],
+      except: ['applet','server-side']
+  },
+  { text: '错误码', link: 'error.html', except: ['server-side', 'applet']},
+  { text: 'API 参考', link: 'apireference.html', except: ['server-side', 'applet']},
+  { text: '发版说明', link: 'releasenote.html', except: ['server-side', 'applet']},
+  { text: '获取 SDK 日志', link: 'log.html', except: ['flutter', 'server-side', 'applet'] },
+  { text: '常见问题', link: 'faq.html', only: ['react-native'] },
   { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
-  { text: '精简版 SDK 使用说明', link: 'elite_sdk.html', only: ['android', 'ios']},
+  { text: '精简版 SDK', link: 'elite_sdk.html', only: ['android', 'ios']},
   {
     text: '产品介绍',
     children: [
