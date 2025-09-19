@@ -138,6 +138,15 @@ const documentSidebar = [
   { text: '错误码', link: 'error.html', except: ['server-side', 'applet']},
   { text: 'API 参考', link: 'apireference.html', except: ['server-side', 'applet']},
   { text: '发版说明', link: 'releasenote.html', except: ['server-side', 'applet']},
+  {
+    text: '常见方案',
+    collapsible: true,
+    children: [
+      { text: '群 @ 消息', link: 'group_@.html', only: ['android', 'ios', 'web'] },
+      { text: '消息引用', link: 'message_quote.html', only: ['android', 'ios', 'web'] },
+      { text: '实现输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
+    ],
+  },
   { text: '获取 SDK 日志', link: 'log.html', except: ['flutter', 'server-side', 'applet'] },
   { text: '常见问题', link: 'faq.html', only: ['react-native'] },
   { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
@@ -284,10 +293,17 @@ const documentSidebar = [
     ],
     only: ['applet']
   },
-  { text: 'REST API 概览', link: 'overview.html', only: ['server-side'] },
-  { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
-  { text: '环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
-  { text: '环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
+  { text: 'REST API 概述', link: 'overview.html', only: ['server-side'] },
+  { text: 'API 频率限制', link: 'limitationapi.html', only: ['server-side'] },
+  { 
+    text: 'Token 鉴权',
+    collapsible: true,
+    children: [
+      { text: 'App Token 鉴权', link: 'easemob_app_token.html' },
+      { text: 'User Token 鉴权', link: 'easemob_user_token.html' },
+    ],
+    only: ['server-side']
+  },
   { 
     text: '消息管理', 
     collapsible: true,
@@ -319,29 +335,127 @@ const documentSidebar = [
     only: ['server-side']
   },
   { 
-    text: '群组',
+    text: '群组管理',
     collapsible: true,
     children: [
-      { text: '管理群组', link: 'group_manage.html' },
-      { text: '管理群组文件', link: 'group_file.html' },
-      { text: '管理群组成员', 
+      { text: '创建群组', link: 'group_create.html' },
+      { 
+        text: '获取群组', 
+         collapsible: true,
+         children: [
+          {text: '获取 App 中的群组', link: 'group_create.html' }, 
+          {text: '获取用户加入的群组', link: 'group_create.html' }, 
+          {text: '获取群组详情', link: 'group_create.html' }, 
+         ], 
+      },
+      { 
+        text: '管理群组', 
+         collapsible: true,
+         children: [
+          {text: '修改群组详情', link: 'group_create.html' }, 
+          {text: '封禁群组', link: 'group_create.html' }, 
+          {text: '解禁群组', link: 'group_create.html' }, 
+          {text: '解散群组', link: 'group_create.html' }, 
+         ], 
+      },
+      { 
+        text: '管理群组公告', 
+         collapsible: true,
+         children: [
+          {text: '获取群组公告', link: 'group_create.html' }, 
+          {text: '修改群组公告', link: 'group_create.html' }, 
+         ], 
+      },
+      { text: '管理群组共享文件', 
         collapsible: true,
         children: [
-          { text: '获取成员列表', link: 'group_member_obtain.html' },
-          { text: '添加/移除成员', link: 'group_member_add_delete.html' },
-          { text: '管理群成员自定义属性', link: 'group_member_attribute.html' },
-          { text: '管理群主/管理员', link: 'group_member_admin.html' },
-          { text: '管理禁言', link: 'group_member_mutelist.html' },
-          { text: '管理白名单', link: 'group_member_allowlist.html' },
-          { text: '管理黑名单', link: 'group_member_blocklist.html' }
+          { text: '获取群组共享文件', link: 'group_create.html' },
+          { text: '上传群组共享文件', link: 'group_create.html' },
+          { text: '下载群组共享文件', link: 'group_create.html' },
+          { text: '删除群组共享文件', link: 'group_create.html' },
         ]  
       },
-      { text: '管理子区', link: 'group_thread.html' }
+      { text: '拉人入群', link: 'group_create.html' },
+      { text: '踢人出群', link: 'group_create.html' },
+      { text: '管理群成员', 
+        collapsible: true,
+        children: [
+          { text: '获取群成员列表', link: 'group_create.html' },
+          { 
+            text: '管理群主和管理员', 
+            collapsible: true,
+            children: [
+              { text: '转让群主', link: 'group_create.html' },
+              { text: '添加管理员', link: 'group_create.html' },
+              { text: '获取管理员列表', link: 'group_create.html' },
+              { text: '删除管理员', link: 'group_create.html' },
+            ]  
+          },
+          { 
+            text: '管理禁言', 
+            collapsible: true,
+            children: [
+              { text: '禁言指定成员', link: 'group_create.html' },
+              { text: '禁言全员', link: 'group_create.html' },
+              { text: '解除成员禁言', link: 'group_create.html' },
+              { text: '解除全员禁言', link: 'group_create.html' },
+              { text: '获取禁言列表', link: 'group_create.html' },
+            ]  
+          },
+          { 
+            text: '管理白名单', 
+            collapsible: true,
+            children: [
+              { text: '添加单个用户至白名单', link: 'group_create.html' },
+              { text: '批量添加白名单', link: 'group_create.html' },
+              { text: '删除白名单', link: 'group_create.html' },
+              { text: '获取白名单列表', link: 'group_create.html' },
+            ]  
+          },
+          { 
+            text: '管理黑名单', 
+            collapsible: true,
+            children: [
+              { text: '添加单个用户至黑名单', link: 'group_create.html' },
+              { text: '批量添加黑名单', link: 'group_create.html' },
+              { text: '删除单个黑名单用户', link: 'group_create.html' },
+              { text: '批量删除黑名单用户', link: 'group_create.html' },
+              { text: '获取黑名单列表', link: 'group_create.html' },
+            ]  
+          },
+          { text: '查看用户是否加入群组', link: 'group_create.html' },
+          { 
+            text: '管理群成员自定义属性', 
+            collapsible: true,
+            children: [
+              { text: '设置群成员自定义属性', link: 'group_create.html' },
+              { text: '批量设置群成员自定义属性', link: 'group_create.html' },
+              { text: '获取单个群成员自定义属性', link: 'group_create.html' },
+              { text: '根据属性 key 获取群成员自定义属性', link: 'group_create.html' },
+            ]  
+          },
+        ]  
+      },
+      { 
+            text: '管理子区', 
+            collapsible: true,
+            children: [
+              { text: '创建子区', link: 'group_create.html' },
+              { text: '修改子区', link: 'group_create.html' },
+              { text: '删除子区', link: 'group_create.html' },
+              { text: '获取 app 中的子区', link: 'group_create.html' },
+              { text: '获取用户加入的所有子区', link: 'group_create.html' },
+              { text: '获取用户在群组中加入的子区', link: 'group_create.html' },
+              { text: '获取子区成员列表', link: 'group_create.html' },
+              { text: '批量加入子区', link: 'group_create.html' },
+              { text: '批量踢出子区', link: 'group_create.html' },
+            ]  
+          },
     ],
     only: ['server-side']
   },
   { 
-    text: '聊天室',
+    text: '聊天室管理',
     collapsible: true,
     children: [
       { text: '管理超级管理员', link: 'chatroom_superadmin.html' },
@@ -500,6 +614,7 @@ const documentSidebar = [
   },
   {
     text: '已废弃内容',
+    collapsible: true,
     children: [
       { text: '通过用户 ID 和密码获取用户 token', link: 'easemob_user_token_password.html' }
     ],

@@ -31,27 +31,13 @@
 
 ## 请求结构
 
-### 认证方式
+即时通讯 RESTful API 请求结构主要由三部分组成，如下表所示：
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
-
-`Authorization: Bearer YourAppToken`
-
-为提高项目的安全性，环信即时通讯使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。
-
-## 请求域名
-
-环信不同数据中心的 REST API 请求域名 {host}：
-
-应用所在数据中心可以在环信用户管理后台 > 应用列表找到对应的 App Key 点击 **管理** > **即时通讯** > **服务概览** 中查看：
-
-![img](/images/applet/service_overview.png)
-
-:::tip
-1. 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。请根据您所在数据中心选择请求域名。
-2. 国内 VIP 区、客服专区客户请联系商务经理获得 REST API 请求地址。
-3. 支持 HTTP 和 HTTPS。
-:::
+| 请求组成部分     | 说明   |
+| :-------------- | :----- |
+| 请求 URL  | 具体的业务请求，例如，创建群组为 `https://{host}/{org_name}/{app_name}/chatgroups`。<br/> - `host` 为 String 类型，必填，表示环信即时通讯 IM 分配的用于访问 RESTful API 的域名。为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。你需要根据您所在数据中心选择请求域名。**国内 VIP 区、客服专区客户请联系商务经理获得 REST API 请求地址。** 详见 [查看应用信息](/product/console/app_manage.html#查看应用信息)。 <br/> - `org_name` 为 String 类型，必填，表示环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [查看应用信息](/product/console/app_manage.html#查看应用信息)。<br/> - `app_name` 为 String 类型，必填，表示你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [查看应用信息](/product/console/app_manage.html#查看应用信息)。|
+| 请求 Header     | 请求头，主要包括以下部分：<br/> - `Content-Type`：内容类型，String 类型，填写 `application/json`。<br/> - `Accept`：内容类型，String 类型，填写 `application/json`。<br/> - `Authorization`：App 管理员的鉴权 token，String 类型，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。为提高项目的安全性，环信即时通讯使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。 |
+| 请求 body     | 请求体，包含的参数详见各 REST API 的 **请求 body 参数** 部分。  |
 
 ### 通信协议
 
