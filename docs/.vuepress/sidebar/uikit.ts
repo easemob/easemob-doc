@@ -11,23 +11,8 @@ const chatPlatformList = getSubDirectories(CHAT_DOC_PATH);
 const chatroomPlatformList = getSubDirectories(CHATROOM_DOC_PATH);
 
 const chatUikitSidebar = [
+  { text: "产品概述", link: "chatuikit_overview.html", only: ["ios"] },
   {
-    /*
-      text: 分组标题
-      children: 分组导航列表
-        text: 显示的文本
-        link: 链接地址
-        show: 不存在或者值为 true 时，菜单显示；存在并且值为 false 时，菜单不显示
-        only: 数组形式，只有在数组中的平台下显示
-        except: 数组形式，除了数组中指定的平台外都显示
-        collapsible: 子菜单是否允许展开/收起，true: 允许; false: 不允许。请参考「子菜单示例」
-        children: 子菜单。请参考「子菜单示例」
-    */
-    text: "产品介绍",
-    collapsible: true,
-    children: [
-      { text: "概述", link: "chatuikit_overview.html" },
-      {
         text: "特性",
         collapsible: true,
         children: [
@@ -35,27 +20,14 @@ const chatUikitSidebar = [
           { text: "会话", link: "chatfeature_conversation.html" },
           { text: "消息", link: "chatfeature_message.html" },
         ],
+    only: ["ios"],
       },
-    ],
-    only: ["ios"],
-  },
+  { text: "跑通示例项目", link: "chatuikit_run.html", only: ["ios"] },
+  { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["ios"] },  
+  { text: "快速开始", link: "chatuikit_quickstart.html", only: ["ios"] }, 
+  { text: "主题", link: "chatuikit_theme.html", only: ["ios"]},
+  { text: "会话列表", link: "chatuikit_custom_conversation_list.html", only: ["ios"]},
   {
-    text: "快速开始",
-    collapsible: true,
-    children: [
-      { text: "跑通示例项目", link: "chatuikit_run.html" },
-      { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html" },
-      { text: "快速开始", link: "chatuikit_quickstart.html" },
-    ],
-    only: ["ios"],
-  },
-  {
-    text: "集成文档",
-    collapsible: true,
-    children: [
-      { text: "主题", link: "chatuikit_theme.html" },
-      { text: "会话列表", link: "chatuikit_custom_conversation_list.html" },
-      {
         text: "消息",
         collapsible: true,
         children: [
@@ -64,22 +36,17 @@ const chatUikitSidebar = [
             text: "实现新类型自定义消息 Cell",
             link: "chatuikit_custom_cell.html",
           },
-        ],
-      },
-      { text: "通讯录", link: "chatuikit_custom_contact_list.html" },
-      { text: "联系人详情", link: "chatuikit_custom_contact_details.html" },
-      { text: "群详情", link: "chatuikit_custom_group_details.html" },
-      { text: "通用可配项", link: "chatuikit_config_item.html" },
-      { text: "进阶用法", link: "chatuikit_advancedusage.html" },
-      { text: "国际化", link: "chatuikit_internationalization.html" },
-      { text: "页面 ViewModel 中可重载方法", link: "chatuikit_listener.html" },
-      {
-        text: "拦截主要页面点击跳转事件",
-        link: "chatuikit_customize_clickjump.html",
-      },
-    ],
-    only: ["ios"],
+        ], 
+      only: ["ios"]
   },
+  { text: "通讯录", link: "chatuikit_custom_contact_list.html", only: ["ios"]},
+  { text: "联系人详情", link: "chatuikit_custom_contact_details.html", only: ["ios"]},
+  { text: "群详情", link: "chatuikit_custom_group_details.html", only: ["ios"]},
+  { text: "通用可配项", link: "chatuikit_config_item.html", only: ["ios"]},
+  { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["ios"]},
+  { text: "国际化", link: "chatuikit_internationalization.html", only: ["ios"]},
+  { text: "页面 ViewModel 中可重载方法", link: "chatuikit_listener.html", only: ["ios"]},
+  { text: "拦截主要页面点击跳转事件", link: "chatuikit_customize_clickjump.html", only: ["ios"]},
   { text: "设计指南", link: "chatuikit_design_guide.html", only: ["ios"]},
   {
     text: "产品介绍",

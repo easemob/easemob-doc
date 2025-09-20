@@ -343,9 +343,9 @@ const documentSidebar = [
         text: '获取群组', 
          collapsible: true,
          children: [
-          {text: '获取 App 中的群组', link: 'group_create.html' }, 
-          {text: '获取用户加入的群组', link: 'group_create.html' }, 
-          {text: '获取群组详情', link: 'group_create.html' }, 
+          {text: '获取 App 中的群组', link: 'group_member_add_delete.html' }, 
+          {text: '获取用户加入的群组', link: 'group_member_admin.html' }, 
+          {text: '获取群组详情', link: 'group_member_obtain.html' }, 
          ], 
       },
       { 
@@ -375,8 +375,8 @@ const documentSidebar = [
           { text: '删除群组共享文件', link: 'group_create.html' },
         ]  
       },
-      { text: '拉人入群', link: 'group_create.html' },
-      { text: '踢人出群', link: 'group_create.html' },
+      { text: '拉人入群', link: 'group_member_allowlist.html' },
+      { text: '踢人出群', link: 'group_member_mutelist.html' },
       { text: '管理群成员', 
         collapsible: true,
         children: [
