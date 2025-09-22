@@ -162,21 +162,7 @@ export const zhNavbar = navbar([
       },
     ]
   },
-  {
-    text: '服务端 API',
-      children: [
-        {
-          text: 'REST API',
-          icon: '/icon-platform.svg',
-          link: '/document/server-side/overview.html'
-        },
-        {
-          text: 'Java',
-          icon: '/icon-platform.svg',
-          link: '/document/server-side/java_server_sdk_2.0.html'
-        }
-      ]
-  },
+  { text: '服务端 API', link: '/document/server-side/overview.html'},
 
  /* {
     text: 'API 参考',
