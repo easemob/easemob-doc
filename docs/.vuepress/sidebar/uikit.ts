@@ -26,27 +26,40 @@ const chatUikitSidebar = [
   { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["ios"] },  
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["ios"] }, 
   { text: "主题", link: "chatuikit_theme.html", only: ["ios"]},
-  { text: "会话列表", link: "chatuikit_custom_conversation_list.html", only: ["ios"]},
+  {
+        text: "会话列表",
+        collapsible: true,
+        children: [
+          { text: "自定义会话列表页面", link: "chatuikit_custom_conversation_list.html" },
+          { text: "拦截事件与可重载的方法", link: "chatuikit_conversation_intercept_event_overload_method.html" },
+        ], 
+      only: ["ios"]
+  },
   {
         text: "消息",
         collapsible: true,
         children: [
           { text: "自定义聊天页面", link: "chatuikit_custom_chat.html" },
-          {
-            text: "实现新类型自定义消息 Cell",
-            link: "chatuikit_custom_cell.html",
-          },
+          { text: "实现新类型自定义消息 Cell", link: "chatuikit_custom_cell.html" },
+          { text: "拦截事件与可重载的方法", link: "chatuikit_chat_intercept_event_overload_method.html" },
         ], 
       only: ["ios"]
   },
-  { text: "通讯录", link: "chatuikit_custom_contact_list.html", only: ["ios"]},
+  {
+        text: "通讯录",
+        collapsible: true,
+        children: [
+          { text: "自定义通讯录页面", link: "chatuikit_custom_contact_list.html" },
+          { text: "拦截事件与可重载的方法", link: "chatuikit_contact_intercept_event_overload_method.html" },
+        ], 
+      only: ["ios"]
+  },
   { text: "联系人详情", link: "chatuikit_custom_contact_details.html", only: ["ios"]},
   { text: "群详情", link: "chatuikit_custom_group_details.html", only: ["ios"]},
-  { text: "通用可配项", link: "chatuikit_config_item.html", only: ["ios"]},
-  { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["ios"]},
+  { text: "用户信息提供", link: "chatuikit_custom_group_details.html", only: ["ios"]},
   { text: "国际化", link: "chatuikit_internationalization.html", only: ["ios"]},
-  { text: "页面 ViewModel 中可重载方法", link: "chatuikit_listener.html", only: ["ios"]},
-  { text: "拦截主要页面点击跳转事件", link: "chatuikit_customize_clickjump.html", only: ["ios"]},
+  { text: "全局配置", link: "chatuikit_config_item.html", only: ["ios"]},
+  { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["ios"]},
   { text: "设计指南", link: "chatuikit_design_guide.html", only: ["ios"]},
   {
     text: "产品介绍",
