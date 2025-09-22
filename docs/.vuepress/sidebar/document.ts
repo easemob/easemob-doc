@@ -137,7 +137,7 @@ const documentSidebar = [
   },
   { text: '错误码', link: 'error.html', except: ['server-side', 'applet']},
   { text: 'API 参考', link: 'apireference.html', except: ['server-side', 'applet']},
-  { text: '发版说明', link: 'releasenote.html', except: ['server-side', 'applet']},
+  { text: '更新日志', link: 'releasenote.html', except: ['server-side', 'applet']},
   {
     text: '常见方案',
     collapsible: true,
