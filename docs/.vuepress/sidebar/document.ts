@@ -293,7 +293,7 @@ const documentSidebar = [
     ],
     only: ['applet']
   },
-  { text: 'API 概述', link: 'overview.html', only: ['server-side'] },
+  { text: '服务端 API 概述', link: 'overview.html', only: ['server-side'] },
   { text: 'API 调用频率限制', link: 'limitationapi.html', only: ['server-side'] },
   { 
     text: 'Token 鉴权',
