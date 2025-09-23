@@ -139,12 +139,12 @@ const documentSidebar = [
   { text: 'API 参考', link: 'apireference.html', except: ['server-side', 'applet']},
   { text: '更新日志', link: 'releasenote.html', except: ['server-side', 'applet']},
   {
-    text: '常见方案',
+    text: '常见问题',
     collapsible: true,
     children: [
       { text: '群 @ 消息', link: 'group_@.html', only: ['android', 'ios', 'web'] },
       { text: '消息引用', link: 'message_quote.html', only: ['android', 'ios', 'web'] },
-      { text: '实现输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
+      { text: '输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
     ],
   },
   { text: '获取 SDK 日志', link: 'log.html', except: ['flutter', 'server-side', 'applet'] },
