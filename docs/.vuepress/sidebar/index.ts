@@ -212,6 +212,7 @@ export const zhSidebar = sidebar({
       collapsible: true,
       children: [
         { text: "注册账号", link: "console/account_register.html" },
+        { text: "实名认证", link: "console/real_name_authentication.html" },
         { text: "应用管理", 
             collapsible: true,
             children: [
