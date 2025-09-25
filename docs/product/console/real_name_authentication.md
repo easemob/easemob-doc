@@ -95,7 +95,7 @@
 
 8. 认证成功：如果你在 3 个工作日内转账成功且转账信息与你提交的认证信息一致，环信会通过你的企业认证申请，并将认证状态更新为 **您已完成企业认证**，企业可享受完整的服务功能。
 
-![img](/images/console/real_name_enterprise_success.png.png)
+![img](/images/console/real_name_enterprise_success.png)
 
 // TODO：企业账户必须有余额吗？
 :::tip
