@@ -353,7 +353,7 @@ EMClient.getInstance.groupManager.addEventHandler(
     // 当前用户收到了入群邀请。受邀用户会收到该回调。例如，用户 B 邀请用户 A 入群，则用户 A 会收到该回调。
     onInvitationReceivedFromGroup: (groupId, groupName, inviter, reason) {},
 
-    // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
+    // 有新成员加入了群。除了新成员，其他群成员会收到该回调。
     onMembersJoinedFromGroup: (groupId, userIds) {},
 
     // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
