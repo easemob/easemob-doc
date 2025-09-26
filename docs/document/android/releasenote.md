@@ -2,6 +2,27 @@
 
 <Toc />
 
+## 版本 V4.17.0 Dev 2025-9-25（开发版）
+
+### 新增特性 
+
+1. 长连接支持 WebSocket 协议。 
+2. `EMOptions` 新增 API 支持 WebSocket 私有部署:
+   - `EMOptions#setWebSocketServer`：设置 WebSocket 服务器地址。
+   - `EMOptions#getWebSocketServer`：获取设置的 WebSocket 服务器地址。
+   - `EMOptions#setWebSocketPort`：设置 WebSocket 服务器端口号。
+   - `EMOptions#getWebSocketPort`：获取设置的 WebSocket 服务器端口号。
+3. 主动退出账号时添加 logout 协议。
+
+### 优化
+
+- 支持 Google Play SDK Index 上检索到 SDK。
+- 更新 AOSL 库版本为 1.3.0。
+
+### 修复
+
+修复更新群组属性时影响群组头像问题。
+
 ## 版本 V4.16.0 Dev 2025-8-19（开发版）
 
 ### 修复
