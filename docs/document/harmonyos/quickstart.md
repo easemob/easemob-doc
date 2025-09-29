@@ -15,7 +15,7 @@
 
 - DevEco Studio NEXT Release（5.0.3.900）及以上；
 - HarmonyOS SDK API 12 及以上；
-- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信控制台](https://console.easemob.com/user/login)。
 
 ## 准备开发环境
 

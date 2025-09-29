@@ -17,7 +17,7 @@
 - targetVersion 33 及以上
 - Android SDK API 21 及以上
 - JDK 17 及以上
-- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信控制台](https://console.easemob.com/user/login)。
 
 ## 准备开发环境
 

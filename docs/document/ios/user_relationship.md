@@ -12,7 +12,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 - 黑名单管理：查询黑名单列表、将添加用户至黑名单以及从黑名单中移出用户等操作。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
 
   
-此外，环信即时通讯 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/console/basic_user.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。  
+此外，环信即时通讯 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/console/basic_user.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。  
 
 ## 技术原理
 

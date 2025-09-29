@@ -10,7 +10,7 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#查看应用信息)。
+- 已在[环信控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#查看应用信息)。
 
 ## 支持的浏览器
 

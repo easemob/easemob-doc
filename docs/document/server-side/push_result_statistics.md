@@ -6,7 +6,7 @@
 
 你可以通过以下方式查询离线推送的结果：
 
-- 在[环信即时通讯控制台](https://console.easemob.com/user/login)上查看 IM 消息投递查询：
+- 在[环信控制台](https://console.easemob.com/user/login)上查看 IM 消息投递查询：
   - 在 **应用列表** 中点击目标应用的 **操作** 栏中的 **管理** 按钮，进入 **应用详情** 页面。
   - 选择 **即时通讯 > 实时查询 > IM消息投递查询**，查看推送结果记录，如下图所示：
 
@@ -34,7 +34,7 @@ GET https://{host}/{org_name}/{app_name}/push/data/offline-push/begin/{startTime
 | :--------- | :----- | :------- | :------------------------- |
 | `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 | `startTime` | String |  是       | 查询数据的开始时间，格式为 yyyy-MM-dd，例如，`2024-04-01`。 |
 | `endTime`   | String |  是       | 查询数据的结束时间，格式为 yyyy-MM-dd，例如，`2024-04-02`。 |
 

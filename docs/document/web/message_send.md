@@ -130,7 +130,7 @@ function sendPrivateAudio() {
 
 ### 发送图片消息
 
-对于图片消息，服务器会根据用户设置的 `thumbnailHeight` 和 `thumbnailWidth` 参数自动生成图片的缩略图。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。
+对于图片消息，服务器会根据用户设置的 `thumbnailHeight` 和 `thumbnailWidth` 参数自动生成图片的缩略图。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。你也可以在 [环信控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。
 
 创建和发送图片消息，示例代码如下所示：
 

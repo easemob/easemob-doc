@@ -34,7 +34,7 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 | :---------------- | :----- | :------- |:-------------|
 | `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 | `username`  | String | 是       | 要获取哪个用户的好友列表。  |
 
 ### 查询参数

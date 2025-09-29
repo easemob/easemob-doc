@@ -7,7 +7,7 @@
 - Xcode (推荐最新版本)。
 - 安装 iOS 13.0 或更高版本的 iOS 模拟器或 Apple 设备。
 - 已使用 CocoaPods 添加了 ChatroomUIKit 依赖项。
-- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台](https://console.easemob.com/user/login)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 创建项目
@@ -25,7 +25,7 @@
 
 你可以在应用加载时或使用 ChatroomUIKit 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
+初始化时，需传入 App Key。你可以在[环信控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
 
 ```swift    
 import ChatroomUIKit

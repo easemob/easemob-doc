@@ -290,22 +290,22 @@
 | ------------------------- | ------- | ------------------------------------------------------------ |
 | `fcm_options`               | Object  | FCM SDK 功能选项。                                           |
 | `fcm_channel_id`            | String  | FCM 推送通道（最高优先级）。                                 |
-| `honor_click_action`        | String  | 荣耀点击跳转，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **荣耀** 页面设置的 **Action** 参数的配置。 |
+| `honor_click_action`        | String  | 荣耀点击跳转，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **荣耀** 页面设置的 **Action** 参数的配置。 |
 | `honor_importance`          | String  | 荣耀推送优先级：<br/> - `LOW`：低优先级；<br/> - （默认）`NORMAL`：普通优先级。 |
 | `honor_target_user_type`  | Integer | 推送用户类型：<br/> - `0`：普通 <br/> - `1`：测试             |
 | `huawei_target_user_type` | Integer | 推送用户类型：<br/> - `0`：普通 <br/> - `1`：测试              |
-| `huawei_category`   | String  | 完成[自分类权益申请](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/message-classification-0000001149358835#section893184112272)后，用于标识消息类型，确定[消息提醒方式](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/message-classification-0000001149358835#ZH-CN_TOPIC_0000001149358835__p3850133955718)，对特定类型消息加快发送，取值如下：[华为官方文档中category字段的解释](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-References/https-send-api-0000001050986197#section13271045101216)。该参数的设置优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **华为** 页面设置的 **Category** 参数的配置。 |
+| `huawei_category`   | String  | 完成[自分类权益申请](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/message-classification-0000001149358835#section893184112272)后，用于标识消息类型，确定[消息提醒方式](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/message-classification-0000001149358835#ZH-CN_TOPIC_0000001149358835__p3850133955718)，对特定类型消息加快发送，取值如下：[华为官方文档中category字段的解释](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-References/https-send-api-0000001050986197#section13271045101216)。该参数的设置优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **华为** 页面设置的 **Category** 参数的配置。 |
 | `huawei_receipt_id`       | String  | 华为回执地址 ID。                           |
-| `huawei_click_action`       | String  | 华为点击跳转 action，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **华为** 页面设置的 **Action** 参数的配置。 |
+| `huawei_click_action`       | String  | 华为点击跳转 action，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **华为** 页面设置的 **Action** 参数的配置。 |
 | `huawei_channel_id`         | String  | 华为推送通道（最高优先级）。                                 |
-| `meizu_click_activity`      | String  | 魅族点击跳转 activity，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **魅族** 页面设置的 **Activity** 参数的配置。 |
+| `meizu_click_activity`      | String  | 魅族点击跳转 activity，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **魅族** 页面设置的 **Activity** 参数的配置。 |
 | `meizu_notice_type`      | Int  | 通道类型：<br/> - `0`：公信通道<br/> - `1`：私信通道 |
-| `oppo_channel_id`           | String  | OPPO 推送通道（最高优先级），优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **OPPO** 页面设置的 **Activity** 参数的配置。 |
-| `oppo_click_activity`       | String  | OPPO 点击跳转 activity，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **OPPO** 页面设置的 **Activity** 参数的配置。 |
-| `vivo_category`             | String  | vivo 二级分类配置，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **VIVO** 页面设置的 **Category** 参数的配置。 |
-| `vivo_click_activity`       | String  | vivo 点击跳转 activity，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **VIVO** 页面设置的 **Activity** 参数的配置。 |
-| `xiaomi_channel_id` | String  | 小米通道 ID，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **小米** 页面设置的 **Channel ID** 参数的配置。 |
-| `xiaomi_click_action`       | String  | 小米点击跳转 action，优先级高于在环信即时通讯控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **小米** 页面设置的 **Action** 参数的配置。 |
+| `oppo_channel_id`           | String  | OPPO 推送通道（最高优先级），优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **OPPO** 页面设置的 **Activity** 参数的配置。 |
+| `oppo_click_activity`       | String  | OPPO 点击跳转 activity，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **OPPO** 页面设置的 **Activity** 参数的配置。 |
+| `vivo_category`             | String  | vivo 二级分类配置，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **VIVO** 页面设置的 **Category** 参数的配置。 |
+| `vivo_click_activity`       | String  | vivo 点击跳转 activity，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **VIVO** 页面设置的 **Activity** 参数的配置。 |
+| `xiaomi_channel_id` | String  | 小米通道 ID，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **小米** 页面设置的 **Channel ID** 参数的配置。 |
+| `xiaomi_click_action`       | String  | 小米点击跳转 action，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **小米** 页面设置的 **Action** 参数的配置。 |
 
 `em_harmony_push_ext` 结构如下：
 

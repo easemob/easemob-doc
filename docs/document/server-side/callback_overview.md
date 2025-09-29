@@ -42,7 +42,7 @@
 
    - 回调 ID：回调请求体中的 `callId` 参数。
 
-   - 环信服务器为回调规则生成的 secret：你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**消息回调**页面的回调规则列表中查看。
+   - 环信服务器为回调规则生成的 secret：你可以在[环信控制台](https://console.easemob.com/user/login)的**消息回调**页面的回调规则列表中查看。
 
     ![img](/images/product/callback_secret.png)
 

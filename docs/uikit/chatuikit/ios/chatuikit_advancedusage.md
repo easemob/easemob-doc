@@ -216,7 +216,7 @@ extension MainViewController: ChatProfileProvider,ChatGroupProfileProvider {
 聊天页面中大部分消息处理以及页面处理逻辑均可覆盖（override），包括 `ViewModel`。
 
 ```
-// 在环信即时通讯云控制台中创建一个新用户，将用户 ID 传入下面构造方法参数中，跳转到聊天页面即可。
+// 在环信控制台中创建一个新用户，将用户 ID 传入下面构造方法参数中，跳转到聊天页面即可。
 let vc = ComponentsRegister.shared.MessageViewController.init(conversationId: <#刚创建用户的id#>, chatType: .chat)
 // 继承注册后的自定义类还可以调用 ViewModel 的 registerEventsListener 方法监听聊天消息相关事件，例如消息接收、长按、点击等。 
 //或者 push 或者 present 都可

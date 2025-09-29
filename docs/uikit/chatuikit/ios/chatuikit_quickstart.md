@@ -11,7 +11,7 @@
 - Xcode：推荐最新版本。
 - 安装 iOS 14.0 或以上版本的 iOS 模拟器或 Apple 设备。
 - CocoaPods 1.14.3 及以上版本已经安装并且已跑通了集成。
-- 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#查看应用信息)。
+- 已在[环信控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#查看应用信息)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 实现发送第一条单聊消息
@@ -29,7 +29,7 @@
 
 你可以在应用加载时或使用 EaseChatUIKit 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 的 **应用详情** 页面查看 App Key。
+初始化时，需传入 App Key。你可以在 [环信控制台](https://console.easemob.com/user/login) 的 **应用详情** 页面查看 App Key。
 
 ```
 import EaseChatUIKit

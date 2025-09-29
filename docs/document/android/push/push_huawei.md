@@ -8,11 +8,11 @@
 
 详见华为官方介绍：[华为 HMS 消息推送服务集成](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section19884105518498)。
 
-## **步骤二 在环信即时通讯云控制台上传推送证书**
+## **步骤二 在环信控制台上传推送证书**
 
-在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传华为推送证书。
+在[环信控制台](https://console.easemob.com/user/login)上传华为推送证书。
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
+1. 在[环信控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
    
 2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
    

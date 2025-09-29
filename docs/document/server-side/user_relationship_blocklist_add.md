@@ -40,7 +40,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 | :--------------- | :----- | :------- | :------------------ |
 | `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 | `owner_username` | String | 是       | 添加到哪个用户的黑名单。 |
 
 ### 请求 header
@@ -71,7 +71,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
 | `timestamp`       | Long   | Unix 时间戳，单位为毫秒。                                                      |
 | `duration`        | String | 请求响应时间，单位为毫秒。                                                     |
 | `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
+| `applicationName` | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 

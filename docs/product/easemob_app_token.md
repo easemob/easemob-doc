@@ -26,7 +26,7 @@ POST https://{host}/{org_name}/{app_name}/token
 | :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 
 #### 请求 header
 
@@ -40,9 +40,9 @@ POST https://{host}/{org_name}/{app_name}/token
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                                                                                                             |
 | :-------------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `grant_type`    | String | 是       | 授权方式。该参数设置为固定字符串 `client_credentials`，即客户端凭证模式。                                                                                                                                        |
-| `client_id`     | String | 是       | App 的 `client_id`，用于生成 app token 调用 REST API。详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的`应用详情`页面。                                                                     |
-| `client_secret` | String | 是       | App 的 `client_secret`，用于生成 app token 调用 REST API。详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的`应用详情`页面。                                                                 |
-| `ttl`           | Long   | 否       | token 有效期，单位为秒。<br/> - 若传入该参数，token 有效期以传入的值为准。<br/> - 若不传该参数，以 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **用户管理** 页面的 token 有效期的设置为准。<br/> - 若设置为 `0`，则 token 永久有效。 <br/>注意：VIP 5 集群该参数单位为毫秒。|
+| `client_id`     | String | 是       | App 的 `client_id`，用于生成 app token 调用 REST API。详见 [环信控制台](https://console.easemob.com/user/login/)的`应用详情`页面。                                                                     |
+| `client_secret` | String | 是       | App 的 `client_secret`，用于生成 app token 调用 REST API。详见 [环信控制台](https://console.easemob.com/user/login/)的`应用详情`页面。                                                                 |
+| `ttl`           | Long   | 否       | token 有效期，单位为秒。<br/> - 若传入该参数，token 有效期以传入的值为准。<br/> - 若不传该参数，以 [环信控制台](https://console.easemob.com/user/login/)的 **用户管理** 页面的 token 有效期的设置为准。<br/> - 若设置为 `0`，则 token 永久有效。 <br/>注意：VIP 5 集群该参数单位为毫秒。|
 
 ### HTTP 响应
 
@@ -87,8 +87,8 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 | HTTP 状态码 | 错误类型     | 错误提示         | 可能原因           | 处理建议       |
 | :---------- | :-------- | :-------------- | :------------ | :----|
-| 400         | illegal_argument    | client_id must be provided.        | 请求 body 中没有传 `client_id`。| 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **Client ID** 参数。 |
-| 400         | illegal_argument                   | client_secret must be provided    | 请求 body 中没有传 `client_secret`。 | 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **ClientSecret** 参数。 |
-| 400         | invalid_grant                      | client_id does not match   | app key 对应的 `client_id` 与请求 body 中传入的 `client_id` 不匹配。 | 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **Client ID** 参数，确保请求 body 中传入的与该参数一致。 |
-| 400         | invalid_grant                      | client_secret does not match     | app key 对应的 `client_secret` 与请求 body 中传入的 `client_secret` 不匹配。 | 详见 [环信即时通讯云控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **ClientSecret** 参数，确保请求 body 中传入的与该参数一致。 |
+| 400         | illegal_argument    | client_id must be provided.        | 请求 body 中没有传 `client_id`。| 详见 [环信控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **Client ID** 参数。 |
+| 400         | illegal_argument                   | client_secret must be provided    | 请求 body 中没有传 `client_secret`。 | 详见 [环信控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **ClientSecret** 参数。 |
+| 400         | invalid_grant                      | client_id does not match   | app key 对应的 `client_id` 与请求 body 中传入的 `client_id` 不匹配。 | 详见 [环信控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **Client ID** 参数，确保请求 body 中传入的与该参数一致。 |
+| 400         | invalid_grant                      | client_secret does not match     | app key 对应的 `client_secret` 与请求 body 中传入的 `client_secret` 不匹配。 | 详见 [环信控制台](https://console.easemob.com/user/login/)的 **应用详情** 页面中 app key 对应的 **ClientSecret** 参数，确保请求 body 中传入的与该参数一致。 |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |

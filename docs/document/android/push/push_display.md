@@ -64,7 +64,7 @@ EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
 你可以通过以下两种方式设置：
 
 - [调用 REST API 配置](/document/server-side/push.html#使用推送模板)。
-- 在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](/product/console/push_template.html)。
+- 在[环信控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](/product/console/push_template.html)。
 
 使用推送模板有以下优势：
 

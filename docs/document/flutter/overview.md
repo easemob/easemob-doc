@@ -45,7 +45,7 @@ await EMClient.getInstance.startCallback();
 
 ### SDK 注册
 
-若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
+若支持 SDK 注册，需登录[环信控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
 ```dart
 try {

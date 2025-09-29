@@ -37,7 +37,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/chatfiles/lifetime
 | :--------- | :----- | :------- | :--------------- |
 | `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
 | `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 | `username`     | String | 是       | 调用该接口的用户 ID。 | 
 
 #### 请求 Header
@@ -71,7 +71,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/chatfiles/lifetime
 | `action`             | String | 请求方法。                                   |
 | `data`               | JSON   | 是否成功设置消息附件的存储：<br/> - `success`：成功；<br/> - `failed`：失败。 |
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
-| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
+| `applicationName`    | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
 
 响应字段及说明详见 [公共参数](#公共参数)。
 

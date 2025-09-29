@@ -590,7 +590,7 @@ projects:
                 text: Windows
                 link: /document/windows/message_pin.html                   
           - text: 消息审核（举报）
-            desc: 你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在环信即时通讯云控制台展示。你可在环信即时通讯云控制台查看举报记录，并进行相应处理。
+            desc: 你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在环信控制台展示。你可在环信控制台查看举报记录，并进行相应处理。
             sdks:
               - icon: /sdk/android.svg
                 text: Android

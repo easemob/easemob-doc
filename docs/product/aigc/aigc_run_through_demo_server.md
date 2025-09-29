@@ -35,7 +35,7 @@ src/main/resources/application.yml
 
 #### 1. 创建应用
 
-登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，点击**添加应用**，填写应用相关信息。
+登录[环信控制台](https://console.easemob.com/user/login)，点击**添加应用**，填写应用相关信息。
 
 ![img](/images/aigc/app_create.png)
  
@@ -50,9 +50,9 @@ logging:
 server:
   port: 80             #修改启动端口，只能为数字(请确保该端口没有被占用)
 easemob:
-  appkey: {appkey}     # 创建应用获取到的 App Key，可通过环信即时通讯云控制台的 “应用详情” 页面上的 “APPKEY” 字段获取。
-  clientId:{clientId}  #  App 的 client_id，可通过环信即时通讯云控制台的 “应用详情” 页面上的 “Client ID” 字段获取。
-  clientSecret:{clientSecret}  #  App 的 client_secret，可通过环信即时通讯云控制台的 “应用详情” 页面上的 “ClientSecret” 字段获取。
+  appkey: {appkey}     # 创建应用获取到的 App Key，可通过环信控制台的 “应用详情” 页面上的 “APPKEY” 字段获取。
+  clientId:{clientId}  #  App 的 client_id，可通过环信控制台的 “应用详情” 页面上的 “Client ID” 字段获取。
+  clientSecret:{clientSecret}  #  App 的 client_secret，可通过环信控制台的 “应用详情” 页面上的 “ClientSecret” 字段获取。
 ```
 
 ![img](/images/aigc/app_detail.png)

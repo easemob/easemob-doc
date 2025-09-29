@@ -10,9 +10,9 @@
 
 ## **步骤二 上传推送证书**
 
-在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书：
+在[环信控制台](https://console.easemob.com/user/login)上传推送证书：
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
+1. 在[环信控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
    
 2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
    

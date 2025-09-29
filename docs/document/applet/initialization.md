@@ -4,7 +4,7 @@
 
 ## 前提条件
 
-有效的环信即时通讯 IM 开发者账号和 App key，详见[环信即时通讯云控制台的相关文档](/product/console/app_create.html)。
+有效的环信即时通讯 IM 开发者账号和 App key，详见[环信控制台的相关文档](/product/console/app_create.html)。
 
 ## SDK 初始化
 
@@ -22,7 +22,7 @@ const conn = new EC.connection({
 
 | 参数       | 类型   | 是否必需 | 描述                               |
 | :--------- | :----- | :------- | :--------------------------------- |
-| `appKey`    | String     | 是      | 环信即时通讯云控制台为你的应用生成的唯一标识，由应用名称（`Appname`）和组织名称（`Orgname`）组成。                  |
+| `appKey`    | String     | 是      | 环信控制台为你的应用生成的唯一标识，由应用名称（`Appname`）和组织名称（`Orgname`）组成。                  |
 | `isHttpDNS`  | Bool  | 否 | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。        |
 | `delivery`         | Bool  | 否    | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。      |
 | `enableReportLogs`         | Bool  | 否    | 小程序平台是否允许上传日志：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。      |
