@@ -3,7 +3,7 @@
 ## 功能说明
 
 - 创建关键词名单。
-- 关键词名单为增值服务，在 [文本审核规则](/product/moderation/moderation_rule_config.html#设置审核规则) 中应用。使用前，你需要开通 [文本审核服务](/product/moderation/moderation_enable.html), 配置 [文本审核规则](/product/moderation/moderation_rule_config.html#设置审核规则)，并开通 [关键词名单服务](/product/moderation/keyword_review.html#使用关键词审核)。
+- 关键词名单为增值服务，在 [文本审核规则](/product/moderation/moderation_rule_config.html#设置审核规则) 中应用。使用前，你需要开通 [文本审核服务](/product/moderation/moderation_enable.html), 配置 [文本审核规则](/product/moderation/moderation_rule_config.html#设置审核规则)，并开通 [关键词名单服务](/product/moderation/moderation_keyword#使用关键词审核)。
 - 创建的名单会在环信控制台的 **关键词名单** 列表（**即时通讯** > **内容审核** > **文本审核** > **关键词名单**）中展示。你可以在环信控制台编辑、删除名单或进行添加/删除关键词等操作。
 - 每个应用最多可配置 100 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 100,000 个词条。
 

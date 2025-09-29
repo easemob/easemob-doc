@@ -1602,7 +1602,7 @@ var zhSidebar = sidebar({
                 },
                 { text: "\u89C4\u5219\u6D4B\u8BD5", link: "moderation/moderation_rule_test.html" },
                 { text: "\u5386\u53F2\u8BB0\u5F55", link: "moderation/moderation_history.html" },
-                { text: "\u5173\u952E\u8BCD\u5BA1\u6838", link: "moderation/keyword_review.html" },
+                { text: "\u5173\u952E\u8BCD\u5BA1\u6838", link: "moderation/moderation_keyword" },
                 {
                   text: "\u6D88\u606F\u5BA1\u6838\u673A\u5236",
                   link: "moderation/moderation_mechanism.html"

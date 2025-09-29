@@ -2024,7 +2024,7 @@ projects:
           - text: 查看历史记录
             link: /product/moderation/moderation_history.html
           - text: 关键词审核
-            link: /product/moderation/keyword_review.html
+            link: /product/moderation/moderation_keyword.html
           - text: 消息审核机制
             link: /product/moderation/moderation_mechanism.html
           - text: 审核记录回调
