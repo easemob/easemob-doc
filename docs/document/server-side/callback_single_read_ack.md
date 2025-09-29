@@ -1,10 +1,10 @@
 # 发送单聊消息已读回执
 
-成功发送单聊消息已读回执后，环信服务器会按照 [发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调已读回执信息，进行数据同步。
+成功发送单聊消息已读回执后，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调已读回执信息，进行数据同步。
 
 :::tip
 1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见  [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
-2. 如果需要发送单聊消息已读回执的回调事件，你需要在 [环信控制台](https://console.easemob.com/user/login) 配置发送后回调规则，详见 [配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
+2. 如果需要发送单聊消息已读回执的回调事件，你需要在 [环信控制台](https://console.easemob.com/user/login) 配置发送后回调规则，详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 3. 发送后回调的相关介绍，详见 [回调说明](/document/server-side/callback_postsending.html)。
 :::
 
@@ -46,7 +46,7 @@
 | `chat_type` | String   | `read_ack` 已读回执。                                        |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_回执消息的消息 ID”。 | 
 | `channel_channel` | String   | 单聊消息的已读回执，格式为 `App Key_接收已读回执用户 ID@conference.easemob.com`，例如，示例中的 `easemob-demo#wang_277721224642561@conference.easemob.com`。|
-| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 [Console 后台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。 |
 | `payload`   | object   | 包括：<br/> - `ext`：消息扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `bodies`：消息体内容。 |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |

@@ -20,11 +20,13 @@
 
 ## 离线推送高级功能
 
-如果需要离线推送的高级功能，需在[环信即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活。高级功能包括[推送通知方式](push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](push_notification_mode_dnd.html#免打扰模式)和[推送模板](push_display.html#使用推送模板)。**如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。**
+离线推送的高级功能包括[推送通知方式](push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](push_notification_mode_dnd.html#免打扰模式)和[推送模板](push_display.html#使用推送模板)。
+
+如果需要离线推送的高级功能，需在[环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活。**如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。**
 
 ## 多设备离线推送策略
 
-多设备登录时，可在[环信即时通讯控制台](https://console.easemob.com/user/login)的**证书管理**页面配置推送策略，该策略配置对所有推送通道生效：
+多设备登录时，可在[环信控制台](https://console.easemob.com/user/login)的 **证书管理** 页面配置推送策略，该策略配置对所有推送通道生效：
 
 - 所有设备离线时，才发送推送消息；
 - 任一设备离线时，都发送推送消息。
@@ -56,9 +58,9 @@
 
 ## 前提条件
 
-1. 已开启环信即时通讯服务，详见 [开启和配置即时通讯服务](/product/enable_and_configure_IM.html)。
+1. 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
 2. 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-3. 若使用[推送高级功能](#离线推送高级功能)，需在[环信即时通讯控制台](https://console.easemob.com/user/login)上激活。
+3. 若使用[推送高级功能](#离线推送高级功能)，需在[环信控制台](https://console.easemob.com/user/login)上激活。
 4. 各推送使用的条件：
   - Google FCM：设备启用了 Google Play 服务且可连接至 Google 服务器；
   - 小米推送：在小米设备上可用；

@@ -10,7 +10,7 @@
 | `eventType`  |  String |  事件类型，用于标识为敏感词检测还是其他类型的事件。 | 
 | `sensitiveWords`  | List   | 敏感词内容。  | 
 | `contentOwner`  |  String | 内容发送方的用户 ID。  | 
-| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。`secret` 详见 [Console 后台的回调规则配置](enable_and_configure_IM.html#配置回调规则)。  | 
+| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。`secret` 详见 [环信控制台的回调规则配置](/product/console/basic_webhook.html#配置消息回调规则)。  | 
 | `contentUri`  |  String | 消息唯一标识，格式为 msync:msgId。 | 
 | `host`  | String  | 服务器名称。  | 
 | `appkey`  | String  | 即时通讯服务分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成。  |  

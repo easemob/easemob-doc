@@ -12,7 +12,7 @@
 
 - **发送后回调**：旨在让 app 后台实现必要的数据同步，环信服务器忽略回调返回码。
 
-  发送后回调包括发送消息、发送消息已读回执、进行群组或聊天室操作、好友关系操作和用户状态变化等事件，详见[发送后回调过滤规则设置](/product/enable_and_configure_IM.html#配置回调规则)。
+  发送后回调包括发送消息、发送消息已读回执、进行群组或聊天室操作、好友关系操作和用户状态变化等事件，详见[发送后回调过滤规则设置](/product/console/basic_webhook.html#配置消息回调规则)。
 
 使用回调功能前，请查看你的产品套餐是否支持，详见 [增值服务费用](/product/pricing_policy.html#增值服务费用)。若不支持，你需首先在 [环信控制台](https://console.easemob.com/user/login)[开通该功能](/product/console/basic_webhook.html#消息回调-1)，然后 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 

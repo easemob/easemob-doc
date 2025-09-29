@@ -9,7 +9,7 @@
 2. 消息举报功能与内容审核功能为两个独立的功能，没有任何关联，因此使用该功能无需提前开通内容审核功能。
 :::
 
-关于如何开通消息举报和查看举报记录，详见[环信即时通讯云控制台文档说明](/product/enable_and_configure_IM.html#消息举报)。
+关于如何开通消息举报和查看举报记录，详见[环信即时通讯云控制台文档说明](/product/console/moderation_message_report.html)。
 
 ## 技术原理
 
@@ -20,7 +20,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 已在 [环信即时通讯云控制台开通消息举报功能](/product/enable_and_configure_IM.html#消息举报)。
+- 已在 [环信即时通讯云控制台开通消息举报功能](/product/console/moderation_message_report.html#开通服务)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法

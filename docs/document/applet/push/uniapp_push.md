@@ -6,7 +6,7 @@
 
 ## 前提条件
 
-1. 已开启环信即时通讯服务，详见 [开启和配置即时通讯服务](/product/enable_and_configure_IM.html)。
+1. 在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
 2. 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 3. 你已在 [环信即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。高级功能激活后，你可以设置推送通知方式、免打扰模式和自定义推送模板。**如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。**
 4. 各推送使用的条件：

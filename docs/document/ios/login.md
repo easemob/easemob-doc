@@ -12,7 +12,7 @@
   
 2. 通过 [环信控制台](https://console.easemob.com/user/login) 创建用户：
 
-可以在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 创建用户，详见 [创建用户相关介绍](/product/enable_and_configure_IM.html#创建-im-用户)。
+可以在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 创建用户，详见 [创建用户相关介绍](/product/console/operation_user.html#创建用户)。
 
 ## 主动登录
 

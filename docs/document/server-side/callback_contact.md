@@ -39,7 +39,7 @@
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为回调请求的唯一标识，格式为 “App Key_添加好友事件的消息 ID”。 | 
 | `chat_type`       | String | `roster` 表示好友事件。 |
-| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.reason`    | object   | /                 |
 | `payload.operation` | String   | `add`：添加好友。 |
@@ -80,7 +80,7 @@
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为回调请求的唯一标识，格式为 “App Key_删除好友事件的消息 ID”。 | 
 | `chat_type`       | String | `roster` 表示好友事件。 |
-| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.roster_ver`    | String   | 好友列表的版本号。  |
 | `payload.operation` | String   | `remove`：删除好友。 |
@@ -121,7 +121,7 @@
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为回调请求的唯一标识，格式为 “App Key_同意好友申请事件的消息 ID”。 | 
 | `chat_type`       | String | `roster` 表示好友事件。 |
-| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.roster_ver`    | String   | 好友列表的版本号。  |
 | `payload.operation` | String   | `accept`：同意好友申请。 |
@@ -164,7 +164,7 @@
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为回调请求的唯一标识，格式为 “App Key_拒绝好友申请事件的消息 ID”。 | 
 | `chat_type`       | String | `roster` 表示好友事件。 |
-| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.roster_ver`    | String   | 好友列表的版本号。  |
 | `payload.operation` | String   | `decline`：拒绝好友申请。 |
@@ -207,7 +207,7 @@
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为回调请求的唯一标识，格式为 “App Key_拉黑好友事件的消息 ID”。 | 
 | `chat_type`       | String | `roster` 表示好友事件。 |
-| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.operation` | String   | `ban`：拉黑好友。 |
 | `payload.status`    | object   | 包含 `error_code`。  |
@@ -252,7 +252,7 @@
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为回调请求的唯一标识，格式为 “App Key_解除拉黑好友事件的消息 ID”。 | 
 | `chat_type`       | String | `roster` 表示好友事件。 |
-| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.operation` | String   | `allow`：解除拉黑好友。 |
 | `payload.status`    | object   | 包含 `error_code`。  |

@@ -11,7 +11,7 @@
 - Android Studio 4.0 或以上
 - Android SDK API 21 或以上
 - JDK 11 或以上
-- 有效的环信即时通讯 IM 开发者账号和 App key，详见 [环信控制台文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 有效的环信即时通讯 IM 开发者账号和 App key，详见 [环信控制台文档](/product/console/app_manage.html#查看应用信息)。
 
 ## 项目准备
 
@@ -205,7 +205,7 @@ android.enableJetifier=true
 若你已集成了即时通讯 IM SDK，SDK 的所有用户 ID 均可用于登录单群聊 UIKit。
 :::
 
-你需要在环信控制台 [创建用户](/product/enable_and_configure_IM.html#创建-im-用户)，登录时传入用户 ID 和密码。
+你需要在环信控制台 [创建用户](/product/console/operation_user.html#创建用户)，登录时传入用户 ID 和密码。
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 

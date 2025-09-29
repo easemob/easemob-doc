@@ -37,7 +37,7 @@ await EMClient.getInstance.startCallback();
 
 ### 控制台注册
 
-通过控制台注册用户，详见[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+通过控制台注册用户，详见[创建 IM 用户](/product/console/operation_user.html#创建用户)。
 
 ### REST API 注册
 

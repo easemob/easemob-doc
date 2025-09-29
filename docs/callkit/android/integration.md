@@ -56,7 +56,7 @@ dependencyResolutionManagement {
 }
 ```
 
-2. 在 app(module) 目录的 `build.gradle.kts` 文件中添加以下依赖：
+2. 在 app(module) 目录的 `build.gradle.kts` 文件中添加以下依赖。关于 CallKit 的最新版本，详见 [Maven 仓库](https://central.sonatype.com/artifact/io.hyphenate/chat-call-kit/overview)。
 
 ```kotlin
 dependencies {

@@ -65,7 +65,7 @@ easemob:
 
 #### 4. 创建机器人账号
 
-在 [环信控制台](https://console.easemob.com/user/login) 创建用户。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 示例项目中创建了 3 个智能体，因此建议设置 3 个机器人账号与智能体一 一绑定，即 `com.easemob.chattyai.chat.util.BotSettingUtil` 中的 `botBean0.setAccount`（机器人用户 ID）与 `botBean0.setName`（智能体名称）为一 一对应关系，见下方代码。
 
@@ -90,9 +90,9 @@ bots.put("boy0",botBean0);
 
 #### 5. 配置发送前回调规则
 
-若使用消息发送前回调功能，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通该功能，详见[回调配置相关文档](/product/enable_and_configure_IM.html#配置消息回调)。该功能为增值服务，费用详见 [增值服务费用](/product/pricing_policy.html#增值服务费用)。
+若使用消息发送前回调功能，你需要在[环信控制台](https://console.easemob.com/user/login)开通该功能，详见[回调配置相关文档](/product/console/basic_webhook.html#发送前回调)。该功能为增值服务，费用详见 [增值服务费用](/product/pricing_policy.html#增值服务费用)。
 
-回调功能开通后，选择**即时通讯** > **功能配置** > **消息回调**，点击**添加回调地址**，配置发送前回调规则。其中，**会话类型**选择**单聊**和**群聊**，**消息类型**选择**文本**，**启用状态**选择**启用**，**回调地址**需确保设置为环信即时通讯 IM 可以通过外网访问到回调地址，格式为 `http(s)://ip:端口/chatty/callback.json`。其他参数的含义详见[配置回调规则相关文档](/product/enable_and_configure_IM.html#配置回调规则)。
+回调功能开通后，选择**即时通讯** > **功能配置** > **消息回调**，点击**添加回调地址**，配置发送前回调规则。其中，**会话类型**选择**单聊**和**群聊**，**消息类型**选择**文本**，**启用状态**选择**启用**，**回调地址**需确保设置为环信即时通讯 IM 可以通过外网访问到回调地址，格式为 `http(s)://ip:端口/chatty/callback.json`。其他参数的含义详见[配置回调规则相关文档](/product/console/basic_webhook.html#配置消息回调规则)。
 
 ![img](/images/aigc/callback_address.png)
 

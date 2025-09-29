@@ -34,7 +34,7 @@
 :::tip
 1. 若使用该方法，需 [在环信控制台开通](/product/console/basic_conversation_group_chatroom.html#服务端会话列表)，并将 SDK 升级至 1.2.0 或以上版本。
 2. 建议你在首次下载、卸载后重装应用等本地数据库无数据情况下拉取服务端会话列表。其他情况下，调用 `LoadAllConversations` 方法获取本地所有会话即可。
-3. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需在[环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
+3. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需在[环信即时通讯控制台开通](/product/console/basic_conversation_group_chatroom.html#rest-发消息写会话列表)。
 :::
 
 ```csharp

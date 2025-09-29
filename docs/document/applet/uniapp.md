@@ -33,7 +33,7 @@
 
 ### 集成前准备
 
-[注册并创建应用](/product/enable_and_configure_IM.html#创建应用)
+[注册并创建应用](/product/console/app_create.html)
 
 ### 搭建开发环境
 

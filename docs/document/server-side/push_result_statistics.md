@@ -12,7 +12,7 @@
 
 ![img](/images/server-side/message_delivery_query.png)
 
-- 推送结果回调：[创建发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)，对于**回调类型**参数选择**离线推送事件**，然后选择**推送成功**、**推送失败**或**推送异常**，即可接收到推送结果消息回调内容。关于离线推送事件，详见[发送后回调事件](/document/server-side/callback_login_logout.html)。
+- 推送结果回调：[创建发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则)，对于**回调类型**参数选择**离线推送事件**，然后选择**推送成功**、**推送失败**或**推送异常**，即可接收到推送结果消息回调内容。关于离线推送事件，详见[发送后回调事件](/document/server-side/callback_login_logout.html)。
 
 ![img](/images/server-side/post_callback_push.png)
 
@@ -32,9 +32,9 @@ GET https://{host}/{org_name}/{app_name}/push/data/offline-push/begin/{startTime
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 | `startTime` | String |  是       | 查询数据的开始时间，格式为 yyyy-MM-dd，例如，`2024-04-01`。 |
 | `endTime`   | String |  是       | 查询数据的结束时间，格式为 yyyy-MM-dd，例如，`2024-04-02`。 |
 

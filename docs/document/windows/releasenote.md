@@ -325,7 +325,7 @@
 
 具体集成请参考以下文档：
 
-- [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
+- 在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
 - [环信即时通讯 IM Windows 快速入门](quickstart.html)
 - [消息管理 Windows](message_send.html)
 - [群组 Windows](group_manage.html)

@@ -11,7 +11,7 @@
 - 使用 Kotlin 语言开发，1.5.21 或以上版本；
 - JDK 1.8 或以上版本；
 - Gradle 7.0.0 或以上版本；
-- 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#查看应用信息)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 创建项目引入 ChatroomUIKit 模块
@@ -58,7 +58,7 @@ class ChatroomApplication : Application() {
 
 ### 第二步 登录 ChatroomUIKit
 
-在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 登录 ChatroomUIKit。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 登录 ChatroomUIKit。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 :::tip
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 ChatroomUIKit。
@@ -74,7 +74,7 @@ class ChatroomApplication : Application() {
 
 创建聊天室视图的步骤如下：
 
-1. 获取聊天室列表，加入指定的聊天室。除此之外，你还可以在环信即时通讯云控制台上[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)，获取聊天室 ID。
+1. 获取聊天室列表，加入指定的聊天室。除此之外，你还可以在环信控制台上 [创建聊天室](/product/console/operation_chatroom.html#创建聊天室)，获取聊天室 ID。
 
 2. 加载聊天室视图 `ComposeChatroom`，传入的参数包括聊天室 ID 和聊天室所有者的用户 ID。
 
@@ -89,7 +89,7 @@ class ChatroomActivity : ComponentActivity(){
 }
 ```
 
-3. [添加聊天室成员](https://doc.easemob.com/product/enable_and_configure_IM.html#创建聊天室)。
+3. [添加聊天室成员](/product/console/operation_chatroom.html#创建聊天室)。
 
 ### 第四步 发送消息
 

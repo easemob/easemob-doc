@@ -8,13 +8,13 @@
 
 - 即时通讯 SDK 3.0.0（包含）-4.0.0；
 - Flutter 3.3.0 或以上版本；
-- 有效的环信即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 有效的环信即时通讯 IM 开发者账号和 [App Key](/product/console/app_manage.html#查看应用信息)。
 
 ## 操作流程
 
 ### 第一步 创建聊天室和用户
 
-在环信控制台[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)和[用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+在环信控制台 [创建聊天室](/product/console/operation_chatroom.html#创建聊天室)和 [用户](/product/console/operation_user.html#创建用户)。
 
 ### 第二步 创建项目
 
@@ -48,7 +48,7 @@ void main() async {
 
 ### 第五步 登录 chatroom_uikit
 
-在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 登录 `chatroom_uikit`。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 登录 `chatroom_uikit`。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 :::tip
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 `chatroom_uikit`。

@@ -4,7 +4,7 @@
 
 **单聊会话支持消息送达回执和消息已读回执**，发送方发送消息后可及时了解接收方是否及时收到并阅读了消息。
 
-**群聊会话只支持消息已读回执，不支持送达回执**。群成员在发送消息时，可以设置该消息是否需要已读回执。要使用该功能，你需要 [在环信控制台上开通该功能](/product/console/basic_message.html#群聊消息已读回执)，具体费用详见 [计费策略](/product/pricing_policy.html#增值服务费用)。
+**群聊会话只支持消息已读回执，不支持送达回执**。群成员在发送消息时，可以设置该消息是否需要已读回执。要使用该功能，你需要 [在环信控制台开通该功能](/product/console/basic_message.html#群聊消息已读回执)，具体费用详见 [计费策略](/product/pricing_policy.html#增值服务费用)。
 
 消息送达回执和已读回执的效果示例，如下图所示：
 
@@ -38,7 +38,7 @@
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 要使用群消息已读回执功能，需在 [环信控制台](https://console.easemob.com/user/login) 开通，具体费用详见 [计费策略](/product/pricing_policy.html#增值服务费用)。
+- 要使用群消息已读回执功能，需在 [环信控制台开通](/product/console/basic_message.html#群聊消息已读回执) ，具体费用详见 [计费策略](/product/pricing_policy.html#增值服务费用)。
 
 ## 实现方法
 
