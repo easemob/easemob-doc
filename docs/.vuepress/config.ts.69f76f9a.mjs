@@ -1415,7 +1415,7 @@ var PUSH_SIDEBAR = [
     text: "\u5FEB\u901F\u5165\u95E8",
     children: [
       { text: "\u521B\u5EFA\u4EA7\u54C1\u53CA\u5E94\u7528", link: "push_createproduct_app.html" },
-      { text: "\u521B\u5EFA\u63A8\u9001", link: "push_createnotification.html" },
+      { text: "\u521B\u5EFA\u63A8\u9001", link: "push_task_create.html" },
       { text: "\u63A8\u9001\u4EFB\u52A1", link: "push_task.html" },
       { text: "\u6807\u7B7E\u7BA1\u7406", link: "push_tag_mgmt.html" },
       { text: "\u8BC1\u4E66\u914D\u7F6E", link: "push_certificate_config.html" },
