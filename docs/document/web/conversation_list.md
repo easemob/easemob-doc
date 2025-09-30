@@ -30,8 +30,9 @@
 :::tip
 1. **若使用该功能，需 [在环信控制台开通](/product/console/basic_conversation_group_chatroom.html#服务端会话列表)，并将 SDK 升级至 4.1.7 或以上版本。而且，只有开通该功能，你才能使用置顶会话和会话标记功能。**
 2. 登录用户的 ID 大小写混用会导致拉取会话列表时提示会话列表为空，因此建议用户 ID 使用小写字母。
-3. 服务端会话列表的更新存在延时，建议你仅在登录时调用该方法。
-4. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需在[环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
+3. 从 4.17.0 版本起，你可以选择是否拉取空会话。
+4. 服务端会话列表的更新存在延时，建议你仅在登录时调用该方法。
+5. 通过 RESTful 接口发送的消息默认不创建或写入会话。若会话中的最新一条消息通过 RESTful 接口发送，获取会话列表时，该会话中的最新一条消息显示为通过非 RESTful 接口发送的最新消息。若要开通 RESTful 接口发送的消息写入会话列表的功能，需在[环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
 :::
 
 示例代码如下：
@@ -39,7 +40,11 @@
 ```javascript
 // pageSize: 每页期望获取的会话数量。取值范围为 [1,50]，默认为 `20`。
 // cursor：开始获取数据的游标位置。若传空字符串（''），SDK 从最新活跃的会话开始获取。
-connection.getServerConversations({pageSize:50, cursor: ''}).then((res)=>{
+connection.getServerConversations({
+    pageSize: 50,
+    cursor: '',
+    includeEmptyConversations: true // 是否获取空会话
+}).then((res)=>{
     console.log(res)
 })
 ```
