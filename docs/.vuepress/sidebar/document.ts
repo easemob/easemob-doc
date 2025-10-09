@@ -147,9 +147,16 @@ const documentSidebar = [
           { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
           { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
           { text: '统一获取消息方案', link: 'push/push_parsing_unified.html', only: ['android'] },
-          { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios', 'harmonyos', 'react-native', 'flutter'] },
+          { text: '设置通知的显示内容', 
+            children: [
+              { text: '概述', link: 'push/push_display_overview.html', except: ['harmonyos']},
+              { text: '设置推送通知的显示属性', link: 'push/push_display_attribute.html' },
+              { text: '使用消息扩展字段', link: 'push/push_display_field.html', except: ['harmonyos']},
+            ],
+             only: ['android', 'ios', 'harmonyos', 'react-native', 'flutter'] 
+          },
           { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
-          { text: '设置推送模板', link: 'push/push_template.html', only: ['web']},
+          { text: '设置推送模板', link: 'push/push_template.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
           { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
           { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
           { text: '推送消息分类', link: 'push/push_message_classification.html', only: ['android'] },
