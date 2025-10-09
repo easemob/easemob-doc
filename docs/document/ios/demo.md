@@ -36,7 +36,7 @@
 3. [创建用户](/product/enable_and_configure_IM.html#创建-im-用户)。
 4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-ios)。
 5. 下载完毕，打开 `EaseChatDemo` 目录，运行 `pod install`。
-6. 打开 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件，修改文件中的占位符，`AppKey` 填入步骤 2 获取的 App Key，`ServerHost` 和 `CallKitAppId` 可以填入空字符串。
+6. 打开 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件，修改文件中的占位符，`AppKey` 填入步骤 2 获取的 App Key，`ServerHost`可以填入空字符串。
 7. 使用 XCode 打开 `EaseChatDemo.xcworkspace`，编译运行项目。
 8. 使用注册的用户 ID 和密码登录。
 
