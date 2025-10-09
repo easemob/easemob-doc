@@ -2,7 +2,7 @@
 
 你可以利用扩展字段实现自定义推送设置，本文以强制推送和发送静默消息为例介绍如何实现推送扩展功能。
 
-对于推送扩展字段，详见[离线推送扩展字段文档](/document/server-side/push_extension.html)。
+对于推送扩展字段，详见 [离线推送扩展字段文档](/document/server-side/push_extension.html)。
 
 ## 设置自定义推送字段
 

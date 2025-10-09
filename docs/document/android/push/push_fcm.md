@@ -14,15 +14,15 @@
 
 ![image](/images/android/push/fcmproject.png)
 
-1. 选择该项目下的应用。
+2. 选择该项目下的应用。
 
 ![image](/images/android/push/appsetting.png)
 
-1. 选择**服务账号**页签，点击**生成新的私钥**。
+3. 选择**服务账号**页签，点击**生成新的私钥**。
 
 ![image](/images/android/push/v1json.png)
 
-1. 下载证书，保存备用。
+4. 下载证书，保存备用。
 
 下载证书文件，例如 `myapplication-72d8c-firebase-adminsdk-yqa7z-4766fefcaf.json`。
 
@@ -44,47 +44,40 @@
 
 ### **步骤三 上传推送证书**
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书管理**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)，选择你的应用 > **功能配置** > **增值功能** > **即时推送**。
 
-![image](/images/android/push/fcm_certificate_v1.png)
+2. 在 **证书管理** 页面，点击 **添加推送证书**。在 **添加推送证书** 对话框打开后，默认显示 **谷歌** 页签。你可以在该页面配置谷歌 FCM 推送证书。
 
-1. 点击 **添加推送证书**。在默认打开的 **谷歌** 页签中，配置 FCM 推送：
-
-![image](/images/android/push/fcm_v1.png)
+![img](/images/console/push_certificate_fcm.png)
 
 | 参数             | 类型 | 是否必需 | 描述               |
 | :-------------- | :----- | :------- | :---------------------------- |
 | 证书类型     |  文件    | 是    | 选择使用 V1 或旧版证书。<br/> - **V1**：推荐使用。你需要点击 **上传证书** 上传FCM V1 版本证书文件，并且设置 **证书名称**。<br/> -**旧版**：已弃用，不推荐使用。你需要配置 **证书名称** 和 **推送密钥**。 |
 | 上传文件        | 文件 | 是   | 点击 **上传证书** 上传获取的 FCM V1 版本证书文件（.json 文件）。此项仅对 V1 证书有效。 |
-| 证书名称       | String | 是   | FCM 的发送者 ID。<br/> - v1 证书：在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn) 的 **项目设置** > **云消息传递** 页面的 **Firebase Cloud Messaging API（V1）** 区域中获取发送者 ID，如下图所示。<br/> - 旧版证书：在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面的 **Cloud Messaging API（旧版）** 区域中获取发送者 ID。 |
-| 推送密钥     | String | 是   | FCM 服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/) 的 **项目设置** > **云消息传递**页面的 **云消息传递 API（旧版）** 区域中获取服务器密钥。此参数仅对旧版证书有效。|
+| 证书名称       | String | 是   | FCM 的发送者 ID。<br/> - v1 证书：在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn) 的 **项目设置** > **云消息传递** 页面的 **Firebase Cloud Messaging API（V1）** 区域中获取发送者 ID，如下图所示。<br/> - 旧版证书：在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面的 **Cloud Messaging API（旧版）** 区域中获取发送者 ID，如下图所示。 |
+| 推送密钥     | String | 是   | FCM 服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/) 的 **项目设置** > **云消息传递**页面的 **云消息传递 API（旧版）** 区域中获取服务器密钥，如下图所示。此参数仅对旧版证书有效。|
 | 通道 ID         | String | 否     | FCM 通道 ID。该参数仅对离线推送有效。       |
 | 推送优先级设置  |      | 否    | 消息传递优先级。请参见 [设置消息优先级](https://firebase.google.cn/docs/cloud-messaging/concept-options#setting-the-priority-of-a-message)。<br/> 该参数仅对离线推送有效。|
 | 推送消息类型 |      | 否    | 通过 FCM 发送给客户端的消息类型：<br/> - **数据**：数据消息，由客户端应用程序处理。<br/> - **通知**：通知消息，由 FCM SDK 自动处理。**数据+通知**：通知消息和数据消息都可以通过 FCM 客户端发送。 <br/>请参见 FCM 的 [消息类型介绍](https://firebase.google.com/docs/cloud-messaging/concept-options#notifications_and_data_messages)。<br/> 该参数仅对离线推送有效。|
 | APNs跨平台推送支持 | String | 否 | 是否开启 APNs 跨平台推送支持。非跨平台应用建议不要启用。该参数仅对离线推送有效。|
 
-#### **旧版证书无缝切换至 V1 证书**
+- 获取 V1 版证书名称
 
-若你仍使用旧版证书，即 **证书类型** 选择 **旧版**，你需要将 **证书名称** 设置为 FCM 的发送者 ID，**推送密钥** 设置为 FCM 的服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面中，在 **Cloud Messaging API（旧版）** 区域中获取发送者 ID 和服务器密钥，如下图所示。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
+![image](/images/android/push/fcm_v1.png)
+
+- 获取旧版证书名称和推送密钥
 
 ![image](/images/android/push/fcm_old_version.png)
 
-**旧版 HTTP 或 XMPP API 于 2024 年 6 月 20 日停用，请尽快迁移到最新的 FCM API（HTTP v1）版本证书。详见 [FCM 控制台](https://console.firebase.google.com)。请确保 V1 证书可用，因为执行转换证书后，旧证书会被删除，若此时新证书不可用，会导致推送失败。**
+#### **旧版证书无缝切换至 V1 证书**
 
-你可以参考以下步骤从旧版证书无缝切换到 V1 新证书：
+旧版 HTTP 或 XMPP API 已在 2024 年 6 月 20 日停用，请尽快迁移到最新的 FCM API（HTTP v1）版本证书，详见 [FCM 控制台](https://console.firebase.google.com)。请确保 V1 证书可用，因为执行转换证书后，旧证书会被删除，若 V1 证书不可用会导致推送失败。
+
+你可以参考以下步骤从旧版证书无缝切换到 V1 新证书： 
 
 1. 在 **证书管理** 页面的旧版证书的 **操作** 栏中点击 **编辑**。
-
-![image](/images/android/push/hxconsoleedit.png)
-
-1. 在**编辑推送证书** 窗口的 **谷歌** 页签，将**证书类型**切换为 **V1**。
-
-![fcmapp](/images/android/push/old2V1.png)
-
+2. 在**编辑推送证书** 窗口的 **谷歌** 页签，将**证书类型**切换为 **V1**。
 3. 点击 **上传证书** 上传本地保存的 V1 证书文件（.json）。
-
-![fcmapp](/images/android/push/v1Chosefile.png)
-
 4. 点击 **保存** 完成切换。
 
 ### **步骤四 FCM 推送集成**
