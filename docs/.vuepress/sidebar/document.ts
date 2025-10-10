@@ -148,6 +148,7 @@ const documentSidebar = [
           { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
           { text: '统一获取消息方案', link: 'push/push_parsing_unified.html', only: ['android'] },
           { text: '设置通知的显示内容', 
+            collapsible: true,
             children: [
               { text: '概述', link: 'push/push_display_overview.html', except: ['harmonyos']},
               { text: '设置推送通知的显示属性', link: 'push/push_display_attribute.html' },
