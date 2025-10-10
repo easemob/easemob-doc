@@ -22,7 +22,7 @@ export const PUSH_SIDEBAR = [
       text: '快速入门',
       children: [
         { text: '创建产品及应用', link: 'push_createproduct_app.html' },
-        { text: '创建推送', link: 'push_createnotification.html' },
+        { text: '创建推送', link: 'push_task_create.html' },
         { text: '推送任务', link: 'push_task.html' },
         { text: '标签管理', link: 'push_tag_mgmt.html' },
         { text: '证书配置', link: 'push_certificate_config.html' },

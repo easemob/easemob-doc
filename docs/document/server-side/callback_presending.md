@@ -12,13 +12,13 @@
 
 ## 实现步骤
 
-1. 开通回调服务：在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开通消息回调服务](/product/enable_and_configure_IM.html#开通消息回调)。
-2. 配置发送前回调规则：详见[环信即时通讯云控制台](https://console.easemob.com/user/login)[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
+1. 开通回调服务：在[环信控制台](https://console.easemob.com/user/login)[开通消息回调服务](/product/console/basic_webhook.html#开通服务)。
+2. 配置发送前回调规则：详见[环信控制台](https://console.easemob.com/user/login)[规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。
 3. 环信服务器向你的应用服务器发送 HTTP/HTTPS POST 请求。
 
 ## 回调规则
 
-要使用发送前回调，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)配置回调规则，详见[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
+要使用发送前回调，你需要在[环信控制台](https://console.easemob.com/user/login)配置回调规则，详见[规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。
 
 对同一 app，可针对不同消息类型配置不同的规则，也支持通过同一规则选择两种以上消息类型同时回调至一个指定服务器地址。接收到消息后，你可以根据消息类型进行分类处理。
 
@@ -60,7 +60,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 RESTful API 发送过来的一致，查看 [消息格式文档](message_historical.html#历史消息记录的内容)。     |
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信即时通讯云控制台](https://console.easemob.com/user/login)[回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信控制台](https://console.easemob.com/user/login)[回调规则](/product/console/basic_webhook.html#配置消息回调规则)。 |
 
 ### 请求字段说明
 

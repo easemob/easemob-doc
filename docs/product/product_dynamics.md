@@ -77,7 +77,7 @@
 
 1. 注册用户时用户 ID 建议统一使用小写字母
 
-为了更好地实现服务端与 SDK 的兼容，调用 [RESTful API](/document/server-side/account_system.html#注册用户)和客户端 API 以及 [在环信控制台创建用户](/product/enable_and_configure_IM.html#创建-im-用户)时，建议统一使用小写字母。目前用户 ID 支持以下字符集：
+为了更好地实现服务端与 SDK 的兼容，调用 [RESTful API](/document/server-side/account_system.html#注册用户)和客户端 API 以及 [在环信控制台创建用户](/product/console/operation_user.html#创建用户)时，建议统一使用小写字母。目前用户 ID 支持以下字符集：
 
 - 26 个小写英文字母 a-z；
 - 10 个数字 0-9；

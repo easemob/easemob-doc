@@ -12,9 +12,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 
 #### 响应参数
 
@@ -23,7 +23,7 @@
 | `action`             | String | 请求方法。                                   |
 | `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
 | `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
-| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
+| `applicationName`    | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
 | `uri`                | String | 请求 URL。                |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
 | `entities`           | JSON Array | 响应实体。          |
@@ -42,7 +42,7 @@
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
 - 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 - 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
@@ -146,7 +146,7 @@ curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users" -d '{"username":"user1",
 | 400         | illegal_argument | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。   | 查看注册用户名[规范](#开放注册单个用户)。 |
 | 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | 注册用户名已经存在。 | 更换用户名重新注册。  |
 | 401         | unauthorized  | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。   | 使用新的 token 访问。       |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/console/app_create.html)。 |
 | 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐包的限制。 | 联系商务开通付费版。   |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
@@ -256,7 +256,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 401         | unauthorized                       | token is illegal.    | token 不合法，生成 token 使用信息与请求携带的信息不匹配。 | 使用新的 token 访问。   |
 | 401         | unauthorized                       | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。  | 使用新的 token 访问。    |
 | 401         | unauthorized                       | Open registration doesn't allow, so register user need token| 授权注册模式，注册用户时需要 token。 | 请求时携带 token。 |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用) |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/console/app_create.html) |
 | 429         | resource_limited                   | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐版本的限制。 | 联系商务开通付费版。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -418,7 +418,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 | 401         | unauthorized                       | token is illegal.     | token 不合法，生成 token 使用信息与请求携带的信息不匹配。  | 使用新的 token 访问。 |
 | 401         | unauthorized                       | Unable to authenticate (OAuth)     | token 不合法，可能过期或 token 错误。  | 使用新的 token 访问。  |
 | 401         | unauthorized                       | Open registration doesn't allow, so register user need token, | 授权注册模式，注册用户时需要 token。  | 请求时携带 token。 |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 | 429         | resource_limited                   | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐版本的限制。 | 联系商务开通付费版。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -517,7 +517,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 处理建议    |
 | :---------- | :---------- | :--------- | :----------- | :---------- |
 | 401         | unauthorized                       | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/console/app_create.html)。 |
 | 404         | service_resource_not_found         | Service resource not found  | 用户不存在。  | 先注册用户或者检查用户名是否正确。  |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -679,7 +679,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码 | 错误类型  | 错误提示     | 可能原因     | 处理建议   |
 | :---------- | :---------- | :-------------- | :------------- | :--------------- |
 | 401         | unauthorized       | Unable to authenticate (OAuth)     | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。|
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。|
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。|
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -767,7 +767,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | :---------- | :---------- | :-------------- | :------------- | :--------------- |
 | 400         | management     | User with id null does not exist in app XXX      | 用户不存在。  | 先注册用户或者检查用户名是否正确。  |
 | 401         | unauthorized   | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 | 404         | service_resource_not_found         | Service resource not found   | 用户不存在。    | 先注册用户或者检查用户名是否正确。  |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -870,7 +870,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | HTTP 状态码 | 错误类型 | 错误提示     | 可能原因         | 处理建议   |
 | :---------- | :----------- | :------------ | :---------- | :---------------- |
 | 401         | unauthorized   | Unable to authenticate (OAuth)  | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -960,7 +960,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 | HTTP 状态码 | 错误类型     | 错误提示   | 可能原因    | 处理建议     |
 | :---------- | :--------------- | :------------- | :------------ | :-----|
 | 401         | unauthorized    | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 | 404         | entity_not_found  | User null not found    | 用户不存在。  | 先注册用户或者检查用户名是否正确。    |
 | 400              | illegal_argument                   | "newpassword is required"   | 修改用户密码的请求体未提供 `newpassword` 属性。|
 
@@ -1054,7 +1054,7 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 | HTTP 状态码 | 错误类型      | 错误提示     | 可能原因       | 处理建议      |
 | :---------- | :------------------| :-------------------| :------------------| :-------------|
 | 401         | unauthorized     | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 | 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#开放注册单个用户)或者检查用户名是否正确。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -1127,7 +1127,7 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 | HTTP 状态码 | 错误类型     | 错误提示      | 可能原因       | 处理建议    |
 | :---------- | :---------| :---------------------| :----------| :--------|
 | 401         | unauthorized                       | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 | 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#开放注册单个用户)或者检查用户名是否正确。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -1206,7 +1206,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码 | 错误类型    | 错误提示    | 可能原因    | 处理建议     |
 | :---------- | :-------| :------| :---------| :------------------|
 | 401   | unauthorized     | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
-| 404   | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404   | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1300,7 +1300,7 @@ curl -X DELETE -H 'Accept: application/json'   \
 | HTTP 状态码 | 错误类型  | 错误提示    | 可能原因     | 处理建议   |
 | :---------- | :-------| :------| :---------| :------------------|
 | 401  | unauthorized    | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
-| 404  | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404  | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
@@ -1379,7 +1379,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码 | 错误类型   | 错误提示         | 可能原因      | 处理建议    |
 | :----- | :----------- | :--| :-------------- | :---|
 | 401         | unauthorized     | Unable to authenticate (OAuth)       | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。   |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 | 404         | service_resource_not_found | Service resource not found | App 用户不存在  | 提供已经创建的用户 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
@@ -1472,7 +1472,7 @@ curl -X POST https://XXXX/XXXX/chatdemoui/users/batch/status \
 | :-- | :------------ | :--------- | :--------- | :---------- |
 | 400   | illegal_argument      | request body exceeds maximum limit, maximum limit is 100     | 请求 body 中 `usernames` 的用户数量超过 100 个。 | 请调整`usernames` 中传入的用户 ID 数量。 |
 | 401 | unauthorized  | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
-| 404  | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 |  检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404  | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 |  检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
@@ -1563,6 +1563,6 @@ curl -X GET 'http://XXXX/XXXX/XXXX/users/XXXX/resources' \
 | HTTP 状态码 | 错误类型     | 错误提示          | 可能原因      | 处理建议        |
 | :----- | :--------- | :--------------- | :---------- | :------------- |
 | 401         | unauthorized    | Unable to authenticate (OAuth)     | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。

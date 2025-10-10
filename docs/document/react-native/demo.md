@@ -31,9 +31,9 @@
 
 ### 跑通步骤
 
-1. [创建应用](/product/enable_and_configure_IM.html)。
-2. [获取应用的 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
-3. [创建用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+1. [创建应用](/product/console/app_create.html)。
+2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
+3. [创建用户](/product/console/operation_user.html#创建用户)。
 4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-uikit-reactnative)。
 5. 进入工程根目录，执行 `yarn && yarn prepare` 安装依赖和创建本地配置文件。
 6. 更改配置文件(`examples/product-uikit-demo/src/env.ts`)内容, 设置 appKey 的值，其他字段有默认值。

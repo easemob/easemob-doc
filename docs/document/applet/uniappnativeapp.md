@@ -24,7 +24,7 @@
 
 ## 开发者集成
 
-[注册并创建应用](/product/enable_and_configure_IM.html#创建应用)
+[注册并创建应用](/product/console/app_create.html)
 
 ### 搭建 app 开发环境
 

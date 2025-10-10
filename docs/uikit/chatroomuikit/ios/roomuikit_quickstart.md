@@ -7,7 +7,7 @@
 - Xcode (推荐最新版本)。
 - 安装 iOS 13.0 或更高版本的 iOS 模拟器或 Apple 设备。
 - 已使用 CocoaPods 添加了 ChatroomUIKit 依赖项。
-- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台](https://console.easemob.com/user/login)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 创建项目
@@ -25,7 +25,7 @@
 
 你可以在应用加载时或使用 ChatroomUIKit 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
+初始化时，需传入 App Key。你可以在[环信控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
 
 ```swift    
 import ChatroomUIKit
@@ -41,7 +41,7 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 
 ### 第二步 登录 ChatroomUIKit
 
-在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 登录 ChatroomUIKit。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 登录 ChatroomUIKit。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 :::tip
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 ChatroomUIKit。
@@ -57,7 +57,7 @@ ChatroomUIKitClient.shared.login(userId: "user id", token: "token", completion: 
 
 创建聊天室视图的步骤如下：
 
-1. 获取聊天室列表，加入指定的聊天室。除此之外，你还可以在环信控制台上[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)，获取聊天室 ID。
+1. 获取聊天室列表，加入指定的聊天室。除此之外，你还可以在环信控制台上 [创建聊天室](/product/console/operation_chatroom.html#创建聊天室)，获取聊天室 ID。
 
 2. 创建聊天室视图 `ChatroomView`，传入的参数包括聊天室 ID、布局参数和聊天室所有者的用户 ID。
 
@@ -76,7 +76,7 @@ let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: "Chat room ID",
 
 ![img](/images/uikit/chatroomios/hierarchy.png =800x550)
 
-4. [添加聊天室成员](https://doc.easemob.com/product/enable_and_configure_IM.html#创建聊天室)。
+4. [添加聊天室成员](/product/console/operation_chatroom.html#聊天室审核管理)。
 
 ### 第四步 发送第一条消息
 
@@ -84,4 +84,4 @@ let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: "Chat room ID",
 
 ![img](/images/uikit/chatroomios/click_chat.png =500x500)
 
-上图为聊天室 Demo 显示的内容，如果要实现类似的样式，可以点击[这里](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。 
+上图为聊天室 Demo 显示的内容，如果要实现类似的样式，可以点击 [GitHub 链接](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。 

@@ -6,7 +6,7 @@
 
 开始前，确保你的开发环境满足如下条件：
 - 已安装 [Node.js](https://nodejs.org/)。
-- [即时通讯 IM 应用和 App Key](/product/enable_and_configure_IM.html#创建应用)。
+- [即时通讯 IM 应用和 App Key](/product/console/app_create.html)。
 
 ## 操作步骤
 

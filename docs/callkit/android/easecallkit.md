@@ -35,7 +35,7 @@ EaseCallKit 集成在环信开源 IM Demo 中，你可以通过以下两种方�
 
 集成该库之前，你需要满足以下条件：
 
-- 分别创建 [环信应用](/product/enable_and_configure_IM.html) 及 [声网应用](https://doc.shengwang.cn/doc/rtc/android/get-started/enable-service#创建声网项目)；
+- 分别创建 [环信应用](/product/console/app_create.html) 及 [声网应用](https://doc.shengwang.cn/doc/rtc/android/get-started/enable-service#创建声网项目)；
 - 已完成环信 IM 的基本功能，包括登录、好友、群组以及会话等的集成；
 - 上线之前开通声网 Token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 Token。具体请参见 [创建 Token 服务及使用 App Server 生成 Token](https://doc.shengwang.cn/doc/rtc/android/basic-features/token-authentication)。
 

@@ -27,7 +27,7 @@
 - 完成 `1.0.5 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 已在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 ## 实现方法
 

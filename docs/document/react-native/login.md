@@ -12,11 +12,11 @@
   
 2. 通过 [环信控制台](https://console.easemob.com/user/login) 创建用户：
 
-可以在 [环信控制台](https://console.easemob.com/user/login) 创建正式环境下和测试环境下的用户，详见[创建用户相关介绍](/product/enable_and_configure_IM.html#创建-im-用户)。
+可以在 [环信控制台](https://console.easemob.com/user/login) 创建正式环境下和测试环境下的用户，详见[创建用户相关介绍](/product/console/operation_user.html#创建用户)。
 
 ## 主动登录
 
-测试环境下，你在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建用户后，环信服务器会自动为这些用户分配用户 Token，详见[测试环境下创建用户的介绍](/product/enable_and_configure_IM.html#测试环境)。
+测试环境下，你在[环信控制台](https://console.easemob.com/user/login)创建用户后，环信服务器会自动为这些用户分配用户 Token，详见[查看用户 Token](/product/console/operation_user.html#查看用户-token)。
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/document/server-side/easemob_app_token.html) 和[获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
@@ -87,4 +87,4 @@ ChatClient.getInstance()
 
 ### 登录被封禁账号的提示
 
-在环信即时通讯控制台或调用 REST API 封禁用户账号后，若仍使用该账号登录，SDK 会返回 "service is disabled"（305 错误）, 可以根据用户这个返回值来进行相应的提示或者处理。
+在环信控制台或调用 REST API 封禁用户账号后，若仍使用该账号登录，SDK 会返回 "service is disabled"（305 错误）, 可以根据用户这个返回值来进行相应的提示或者处理。

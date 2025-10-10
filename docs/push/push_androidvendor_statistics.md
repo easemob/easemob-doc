@@ -83,7 +83,7 @@
 
 根据所在集群设置回调地址（配置 https，注意：华为只支持https地址配置）
 格式为：`https://域名/orgname/appname/push/report/huawei`
-您可以在环信后台，**即时通讯** > **服务概览** 中查看当前 Appkey 的 Rest API 域名地址，仅支持填写 `easemob.com` 类型。 
+您可以在环信控制台的 **应用概览** 页面中查看当前 Appkey 的 Rest API 域名地址，仅支持填写 `easemob.com` 类型。 
 
 ![img](/images/instantpush/push_domain_name.png)
 

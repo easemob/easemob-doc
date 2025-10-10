@@ -80,12 +80,12 @@
 
 | HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 
 | :---------- | :---------- | :--------- | :----------- |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信即时通讯控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
 | 403      | forbidden_op | message broadcast service is unopened  | 未开通发送聊天室广播消息的功能配置。| 联系商务开通。 |
 | 400      | service open exception  | this appKey not open message roaming   | 消息漫游服务未开通。  | 联系商务开通。  |
 | 400         | service open exception | the app not open presence   | 没有开通 presence 服务。  | 联系商务开通 presence 服务。 |
 | 403      | message_rewrite_error   | The rewrite message feature is not open.   | 消息修改功能未开通。  |  联系商务开通消息修改功能。  |
-| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction 功能未开通。 | 请在环信即时通讯控制台开通 Reaction 服务。 |
+| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction 功能未开通。 | 请在环信控制台开通 Reaction 服务。 |
 | 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。    |
 
     

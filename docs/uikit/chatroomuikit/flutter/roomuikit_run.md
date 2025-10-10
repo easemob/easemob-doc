@@ -8,7 +8,7 @@
 
 - 即时通讯 SDK 3.0.0（包含）-4.0.0；
 - Flutter 3.3.0 或以上版本；
-- 有效的环信即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)；
+- 有效的环信即时通讯 IM 开发者账号和 [App Key](/product/console/app_manage.html#查看应用信息)；
 - `iOS` 应用：
   - Xcode 13 或以上;
   - ios 11 或以上;

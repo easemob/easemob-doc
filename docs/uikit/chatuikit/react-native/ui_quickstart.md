@@ -7,7 +7,7 @@
 在集成之前，需要满足以下条件：
 
 1. 有效的环信即时通讯 IM 开发者账号，创建应用并获取 App Key。
-2. 在[环信控制台](https://console.easemob.com/index)[创建两个用户用于聊天](/product/enable_and_configure_IM.html#创建-im-用户)。
+2. 在[环信控制台](https://console.easemob.com/index)[创建两个用户用于聊天](/product/console/operation_user.html#创建用户)。
 
 ## 开发环境需求
 

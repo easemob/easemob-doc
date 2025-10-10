@@ -15,7 +15,7 @@
 
 集成该库之前，你需要满足以下条件：
 
-- 创建 [环信应用](/product/enable_and_configure_IM.html)及[声网应用](https://doc.shengwang.cn/doc/rtc/javascript/get-started/enable-service#创建声网项目)；
+- 创建 [环信应用](/product/console/app_create.html)及[声网应用](https://doc.shengwang.cn/doc/rtc/javascript/get-started/enable-service#创建声网项目)；
 - 实现环信 IM 的基本功能，包括登录、好友、群组以及会话等的集成；
 - 上线前开通声网 Token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 Token。详见[创建 Token 服务及使用 App Server 生成 Token](https://doc.shengwang.cn/doc/rtc/javascript/basic-features/token-authentication)。
 

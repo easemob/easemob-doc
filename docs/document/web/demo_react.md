@@ -26,9 +26,9 @@
 
 ### 跑通步骤
 
-1. [创建应用](/product/enable_and_configure_IM.html)。 
-2. [获取应用的 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
-3. [创建用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+1. [创建应用](/product/console/app_create.html)。 
+2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
+3. [创建用户](/product/console/operation_user.html#创建用户)。
 4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-react/tree/dev_4.0)。
 5. 下载完毕，在项目根目录打开终端，安装依赖。
    

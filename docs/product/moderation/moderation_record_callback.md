@@ -4,18 +4,19 @@
 
 审核记录支持回调，具体操作步骤如下：
 
-1. 登录环信后台，进入**即时通讯 > 功能配置 > 消息回调**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)。 
+2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
+   
+   ![img](/images/console/app_mgmt_list.png)
 
-![img](/images/moderation/moderation_callback_01.png)
+3. 在左侧导航栏，选择 **功能配置** > **基础功能**。   
+4. 在 **消息回调** 页面，点击 **添加回调规则**。
+   
+   ![img](/images/console/moderation_callback_add.png)
 
-2. 点击添加回调地址，选择**发送后回调**。
+5. 点击 **发送后回调**，在 **回调类型** 选择框中勾选 **内容审核**，选择 **审核通过**、**审核疑似** 和 **审核拦截**。
 
-![img](/images/moderation/moderation_callback_02.png)
-
-3. 勾选 **内容审核**，其他字段的设置详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
-
-![img](/images/moderation/moderation_callback_03.png)
-
+![img](/images/console/moderation_callback.png)
 
 ## 审核回调内容
 

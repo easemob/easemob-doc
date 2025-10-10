@@ -1415,7 +1415,7 @@ var PUSH_SIDEBAR = [
     text: "\u5FEB\u901F\u5165\u95E8",
     children: [
       { text: "\u521B\u5EFA\u4EA7\u54C1\u53CA\u5E94\u7528", link: "push_createproduct_app.html" },
-      { text: "\u521B\u5EFA\u63A8\u9001", link: "push_createnotification.html" },
+      { text: "\u521B\u5EFA\u63A8\u9001", link: "push_task_create.html" },
       { text: "\u63A8\u9001\u4EFB\u52A1", link: "push_task.html" },
       { text: "\u6807\u7B7E\u7BA1\u7406", link: "push_tag_mgmt.html" },
       { text: "\u8BC1\u4E66\u914D\u7F6E", link: "push_certificate_config.html" },
@@ -1602,7 +1602,7 @@ var zhSidebar = sidebar({
                 },
                 { text: "\u89C4\u5219\u6D4B\u8BD5", link: "moderation/moderation_rule_test.html" },
                 { text: "\u5386\u53F2\u8BB0\u5F55", link: "moderation/moderation_history.html" },
-                { text: "\u5173\u952E\u8BCD\u5BA1\u6838", link: "moderation/keyword_review.html" },
+                { text: "\u5173\u952E\u8BCD\u5BA1\u6838", link: "moderation/moderation_keyword" },
                 {
                   text: "\u6D88\u606F\u5BA1\u6838\u673A\u5236",
                   link: "moderation/moderation_mechanism.html"

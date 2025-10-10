@@ -94,7 +94,7 @@
 - Xcode 13.0 或以上版本。
 - CocoaPods。你可以参考 [CocoaPods 安装指南](https://guides.cocoapods.org/using/getting-started.html#getting-started) 安装。
 - iOS 13.0 或以上版本的设备。部分模拟机可能无法支持本项目的全部功能，所以推荐使用真机。
-- 有效的环信 IM 开发者账号和 App key，详见[环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信 IM 开发者账号和 App key，详见[环信控制台](https://console.easemob.com/user/login)。
 - [有效的 Agora 项目，获取项目的 App ID 以及一个 RTC Token，实现语音通话](https://docportal.shengwang.cn/cn/voice-call-4.x/start_call_audio_ios_ng?platform=iOS)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 

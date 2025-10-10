@@ -16,9 +16,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------------------ |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 
 ### 响应参数
 
@@ -29,7 +29,7 @@
 | `application`     | String | 环信即时通讯服务分配给每个 app 的唯一内部标识，开发者无需关注。                |
 | `uri`             | String | 请求 URL。                                                                     |
 | `timestamp`       | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                          |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
+| `applicationName` | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。                                     |
 
 ## 认证方式
@@ -854,7 +854,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 
 ## 使用推送模板
 
-你可以使用推送模板设置推送标题和内容。你可以调用以下 REST API 配置默认推送模板 `default` 和自定义推送模板。除此之外，你也可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+你可以使用推送模板设置推送标题和内容。你可以调用以下 REST API 配置默认推送模板 `default` 和自定义推送模板。除此之外，你也可以在[环信控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
 
 对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。
 
@@ -880,7 +880,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 
 #### 功能说明
 
-创建离线推送消息模板，包括默认模板 `default` 和自定模板。你可以通过[环信即时通讯云控制台](https://console.easemob.com/user/login)创建推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+创建离线推送消息模板，包括默认模板 `default` 和自定模板。你可以通过[环信控制台](https://console.easemob.com/user/login)创建推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
 
 若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
 

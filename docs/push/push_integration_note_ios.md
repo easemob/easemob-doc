@@ -4,7 +4,7 @@
 
 ## iOS SDK 使用须知
 
-使用 SDK 之前，你需先创建应用，获取应用的唯一标识 App Key，请参见[创建应用](/product/enable_and_configure_IM.html#创建应用)。
+使用 SDK 之前，你需先创建应用，获取应用的唯一标识 App Key，请参见[创建应用](/product/console/app_create.html)。
 
 环信推送分为在线推送和远程推送，远程推送时通过 APNS 下发，所以你需要配置应用对应的证书，请参见[APNS 推送配置](/document/ios/push/push_apns.html#上传推送证书)。
 

@@ -13,6 +13,8 @@
 
 使用前，你需要开通文本审核和关键词审核服务。详见 [服务开通文档](purchase_value_added.html#内容审核)。
 
+**开通关键词审核需确保账户余额大于 1000 元。**
+
 ## 配置关键词名单
 
 1. 登录 [环信控制台](https://console.easemob.com/user/login)。 

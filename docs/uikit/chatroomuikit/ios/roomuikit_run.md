@@ -32,7 +32,7 @@
 
 ### 第三步 编译
 
-编译时，需要传入 App Key、用户 ID 和用户 token。因此，编译前，你需要在[环信控制台](https://console.easemob.com/user/login)上创建有效的环信即时通讯 IM 开发者账号，并获取 App Key，[创建环信 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)。此外，还需[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)。
+编译时，需要传入 App Key、用户 ID 和用户 token。因此，编译前，你需要在 [环信控制台](https://console.easemob.com/user/login) 创建有效的环信即时通讯 IM 开发者账号，并获取 App Key，[创建环信 IM 用户](/product/console/operation_user.html#创建用户)。此外，还需 [创建聊天室](/product/console/operation_chatroom.html#创建聊天室)。
 
 1. 使用 Xcode 打开 .xcworkspace 工程文件。
 
