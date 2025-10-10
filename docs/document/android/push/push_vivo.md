@@ -10,25 +10,23 @@
 
 ## **步骤二 上传推送证书**
 
-在[环信控制台](https://console.easemob.com/user/login)上传推送证书：
+在 [环信控制台](https://console.easemob.com/user/login) 上传推送证书：
 
-1. 在[环信控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)，选择你的应用 > **功能配置** > **增值功能** > **即时推送**。
    
-2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
-   
-3. 在**添加推送证书**对话框中选择 **VIVO** 页签，配置 VIVO 推送参数。参数相关信息，详见你在 [VIVO 开发者后台](https://vpush.vivo.com.cn/#/appdetail)创建的应用的 `APP ID`，`APP KEY` 和 `APP SECRET` 以及程序的 `包名`。
+2. 在 **证书管理** 页面，点击 **添加推送证书**。在 **添加推送证书** 对话框中选择 **VIVO** 页签，配置 VIVO 推送参数。参数相关信息，详见你在 [VIVO 开发者后台](https://vpush.vivo.com.cn/#/appdetail) 创建的应用的 `APP ID`，`APP KEY` 和 `APP SECRET` 以及程序的 `包名`。
 
-![image](/images/android/push/add_vivo_push_certificate.png)
+![img](/images/console/push_certificate_vivo.png)
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :---------------- |
-| `证书名称`     | String | 是     | 填写 VIVO App ID。  |
-| `证书标识`     | String | 是     | 填写 VIVO App Key。|
-| `推送密钥`     | String | 是     | 填写 VIVO App Secret。|
-| `Category`     | String |  否    | 选择 category 类型。                       |
-| `应用包名`     | String | 是     | 填写 VIVO App package name。   |
-| `Activity`| String | 否     | 选择点击通知后的动作。  |
-| `推送类型`     | String |  否    |<br/> - **运营消息**<br/> - **系统消息**  |
+| 证书名称     | String | 是     | VIVO App ID。  |
+| 证书标识     | String | 是     | VIVO App Key。|
+| 推送密钥     | String | 是     | VIVO App Secret。|
+| Category     | String |  否    | Category 类型。关于该参数，详见 [VIVO 推送文档](https://dev.vivo.com.cn/documentCenter/doc/359#w2-67805227)。该参数仅对离线推送有效。                      |
+| 应用包名     | String | 是     | VIVO App package name。该参数仅对离线推送有效。   |
+| Activity| String | 否     | 点击通知后的动作。 该参数仅对离线推送有效。 |
+| 推送类型     | String |  否    |可选择 **运营消息** 或 **系统消息**。该参数仅对离线推送有效。 |
 
 ## **步骤三 集成 VIVO 推送 SDK**
 

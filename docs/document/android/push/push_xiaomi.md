@@ -10,21 +10,19 @@
 
 在[环信控制台](https://console.easemob.com/user/login)上传推送证书：
 
-1. 在[环信控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)，选择你的应用 > **功能配置** > **增值功能** > **即时推送**。
    
-2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
-   
-3. 在**添加推送证书**对话框中选择**小米**页签，配置小米推送参数。参数相关信息，详见你在 [小米开放平台](https://dev.mi.com/platform) 创建的应用信息中的 App ID 和 Secret Key 以及程序的包名。
-   
-![image](/images/android/push/add_xiaomi_push_certificate.png) 
+2. 在 **证书管理** 页面，点击 **添加推送证书**。在 **添加推送证书** 对话框中选择 **小米** 页签，配置小米推送参数。参数相关信息，详见你在 [小米开放平台](https://dev.mi.com/platform) 创建的应用信息中的 App ID 和 Secret Key 以及程序的包名。
+
+![img](/images/console/push_certificate_xiaomi.png)
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :---------------- |
-| `证书名称`     | String | 是     | 填写小米 App ID。  |
-| `推送密钥`     | String | 是     | 填写小米 App Secret。|
-| `应用包名`     | String | 是     | 填写小米 App package name。   |
-| `Channel ID`  | String | 是     | 填写 Channel ID。             |
-| `Action`      | String | 否     | 选择点击通知后的动作。            |
+| 证书名称     | String | 是     | 小米 App ID。  |
+| 推送密钥     | String | 是     | 小米 App Secret。|
+| 应用包名     | String | 是     | 小米 App package name。   |
+| Channel ID  | String | 是     |  Channel ID。该参数仅对离线推送有效。            |
+| Action      | String | 否     | 点击通知后的动作。该参数仅对离线推送有效。           |
 
 ## **步骤三 集成小米推送 SDK**
 

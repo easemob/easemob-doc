@@ -8,27 +8,25 @@
 
 详见华为官方介绍：[华为 HMS 消息推送服务集成](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section19884105518498)。
 
-## **步骤二 在环信控制台上传推送证书**
+## **步骤二 上传推送证书**
 
 在[环信控制台](https://console.easemob.com/user/login)上传华为推送证书。
 
-1. 在[环信控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)，选择你的应用 > **功能配置** > **增值功能** > **即时推送**。
    
-2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
-   
-3. 在**添加推送证书**对话框中选择**华为**页签，配置华为推送参数。参数相关信息，详见你在华为开发者后台创建的[应用信息中的 App ID 和 SecretKey 以及程序的包名](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section125831926193110)。
+2. 在 **证书管理** 页面，点击 **添加推送证书**。在 **添加推送证书** 对话框中选择 **华为** 页签，配置华为推送参数。参数相关信息，详见你在华为开发者后台创建的 [应用信息中的 App ID 和 SecretKey 以及程序的包名](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section125831926193110)。
 
 ![image](/images/android/push/add_huawei_push_certificate.png)
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :---------------- |
-| `证书名称`     | String | 是     | 填写华为 Client ID。  |
-| `推送密钥`     | String | 是     | 填写华为 Client Secret。|
-| `应用包名`     | String | 是     | 填写华为 App package name。   |
-| `项目 ID`      | String | 否     | 填写项目 ID。                     |
-| `Category`     | String |  否    | 选择 category 类型。                       |
-| `Action`       | String |  否    | 选择点击通知后的动作。组件定义的 intent-filter action name。                     |
-| `ActivityClass`| String | 否     | 角标显示，应用入口类路径。示例：com.easemob.MainActivity。                    |
+| 证书名称     | String | 是     | 华为 Client ID。  |
+| 推送密钥    | String | 是     | 华为 Client Secret。|
+| 应用包名     | String | 是     | 华为 App package name。   |
+| 项目 ID      | String | 否     | 项目 ID。                     |
+| Category    | String |  否    | 自动分类权益申请 Category。该参数仅对离线推送有效。       |
+| Action       | String |  否    | 点击通知后的动作。组件定义的 intent-filter action name。该参数仅对离线推送有效。   |
+| ActivityClass | String | 否     | 角标显示，应用入口类路径。示例：com.easemob.MainActivity。该参数仅对离线推送有效。 |
 
 ## **步骤三 集成华为推送 SDK**
 

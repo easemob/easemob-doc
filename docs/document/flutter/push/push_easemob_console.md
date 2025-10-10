@@ -1,16 +1,16 @@
 # 上传推送证书及绑定推送信息
 
-1. 除了满足用户离线条件外，要使用第三方离线推送，你还需在[环信控制台](https://console.easemob.com/user/login)配置推送证书信息，例如，对于 FCM 推送，需配置**证书类型**和**证书名称**，上传证书，并调用客户端 SDK 提供的 API 向环信服务器上传 device token。
+1. 除了满足用户离线条件外，要使用第三方离线推送，你还需在[环信控制台](https://console.easemob.com/user/login)配置推送证书信息，例如，对于 FCM 推送，需配置 **证书类型** 和 **证书名称**，上传证书，并调用客户端 SDK 提供的 API 向环信服务器上传 device token。
 
 2. 从第三方服务获取推送 token 后，将你的用户 ID 与推送证书和推送 token `deviceToken` 进行绑定。
 
 ## 上传推送证书
 
-在第三方推送服务后台注册应用，获取应用信息，开启推送服务后，你需要在[环信控制台](https://console.easemob.com/user/login)上传推送证书，实现第三方推送服务与环信即时通讯 IM 的通信。
+在第三方推送服务后台注册应用，获取应用信息，开启推送服务后，你需要在 [环信控制台](https://console.easemob.com/user/login) 上传推送证书，实现第三方推送服务与环信即时通讯 IM 的通信。
 
 ![img](/images/react-native/push/push_add_certificate.png)
 
-关于各推送证书相关信息以及[环信控制台](https://console.easemob.com/user/login)上的推送证书参数描述，详见下表中 [iOS 离线推送文档](/document/ios/push/push_overview.html)和 [Android 离线推送文档](/document/android/push/push_overview.html)中的相关链接。
+关于各推送证书相关信息以及 [环信控制台](https://console.easemob.com/user/login)上的推送证书参数描述，详见下表中 [iOS 离线推送文档](/document/ios/push/push_overview.html)和 [Android 离线推送文档](/document/android/push/push_overview.html)中的相关链接。
 
 | 推送服务类型      | 在推送厂商后台获取推送证书信息   | 在环信控制台上传推送证书 |
 | :--------- | :----- | :------- | 

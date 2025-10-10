@@ -12,22 +12,7 @@
    
 2. 应用在后台运行或手机锁屏等情况，若客户端未断开与服务器的连接，则即时通讯 IM 不会收到离线推送通知。
 
-## 离线推送高级功能
-
-如果需要离线推送的高级功能，需在[环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活。高级功能包括[推送通知方式](push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](push_notification_mode_dnd.html#免打扰模式)和[推送模板](push_display.html#使用推送模板)。**如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。**
-
-## 多设备离线推送策略
-
-多设备登录时，可在[环信控制台](https://console.easemob.com/user/login)的**证书管理**页面配置推送策略，该策略配置对所有推送通道生效：
-
-- 所有设备离线时，才发送推送消息；
-- 任一设备离线时，都发送推送消息。
-
-**注意**：多端登录时若有设备被踢下线，即使接入了 IM 离线推送，也收不到离线推送消息。
-
-![image](/images/android/push/push_multidevice_policy.png)
-
-## 技术原理
+## 推送原理
 
 ### Android 平台离线推送
 
@@ -65,11 +50,28 @@
 7. 环信服务器将消息发送给 APNs 推送服务器。
 8. APNs 推送服务器将消息发送给用户 B。
 
+## 推送模板
+
+推送模板是离线推送的高级功能。使用前，你需要在 [环信控制台](https://console.easemob.com/user/login)的 **功能配置 > 基础功能 > 消息** 页面激活。**激活后，如需关闭推送模板功能，必须联系商务，因为该操作会删除推送模板相关的所有配置。**
+
+推送模板的配置和使用，详见 [相关文档介绍](push_template.html)。
+
+## 多设备离线推送策略
+
+多设备登录时，可在 [环信控制台](https://console.easemob.com/user/login)的 **证书管理** 页面配置推送策略，该策略配置对所有推送通道生效：
+
+- 所有设备离线时，才发送推送消息；
+- 任一设备离线时，都发送推送消息。
+
+**多端登录时若有设备被踢下线，即使接入了 IM 离线推送，也收不到离线推送消息。**
+
+![image](/images/android/push/push_multidevice_policy.png)
+
 ## 前提条件 
 
-1. 已开启即时通讯 IM ，详见[开启和配置即时通讯服务](/product/enable_and_configure_IM.html)。
-2. 了解即时通讯 IM 套餐包中的 API 调用频率限制，详见[使用限制](/product/limitation.html)。
-3. 若使用[推送高级功能](#离线推送高级功能)，需在[环信控制台](https://console.easemob.com/user/login)上激活。
+1. 已开启即时通讯 IM ，详见 [开启和配置即时通讯服务](/product/enable_and_configure_IM.html)。
+2. 了解即时通讯 IM 套餐包中的 API 调用频率限制，详见 [使用限制](/product/limitation.html)。
+3. 若使用[推送模板](#推送模板)，需在 [环信控制台](https://console.easemob.com/user/login)上激活。
 4. 各推送使用的条件：
   - APNs：在苹果设备上可用；
   - Google FCM：设备启用了 Google Play 服务且可连接至 Google 服务器；
