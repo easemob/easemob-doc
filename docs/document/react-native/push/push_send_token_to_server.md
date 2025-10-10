@@ -16,7 +16,7 @@ yarn add react-native-chat-sdk
 
 从[环信控制台](https://console.easemob.com/user/login)获取推送证书信息，配置应用的 App Key（`appKey`）和推送证书名称（`pushId`）信息。
 
-- `appKey`：在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。
+- `appKey`：在[环信控制台](https://console.easemob.com/user/login)的 **应用概览** 页面查看。
 - `pushId`：推送证书名称。不同厂商的推送证书名称也不同。
 
 ![img](/images/react-native/push/push_get_appkey.png)
@@ -27,7 +27,7 @@ yarn add react-native-chat-sdk
 import { getPlatform, getDeviceType } from "react-native-push-collection";
 import { ChatClient, ChatOptions, ChatPushConfig } from "react-native-chat-sdk";
 
-// 从环信控制台获取推送 ID、pushId
+// 从环信即时通讯云控制台获取推送 ID、pushId
 const pushId = "<your push id from easemob console>";
 
 // 设置推送类型
