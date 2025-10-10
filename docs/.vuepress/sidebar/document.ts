@@ -28,7 +28,7 @@ const documentSidebar = [
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
       { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
       /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
-      { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
+      { text: '创建应用', link: '/product/console/app_create.html', only: ['server-side'] },
       { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
       { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
       { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },

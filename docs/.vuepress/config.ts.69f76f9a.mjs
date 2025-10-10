@@ -340,7 +340,7 @@ var documentSidebar = [
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
       { text: "SDK \u66F4\u65B0\u65E5\u5FD7", link: "releasenote.html", except: ["server-side"] },
       /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
-      { text: "\u5F00\u901A\u548C\u914D\u7F6E\u670D\u52A1 console", link: "enable_and_configure_IM.html", only: ["server-side"] },
+      { text: "\u5F00\u901A\u548C\u914D\u7F6E\u670D\u52A1 console", link: "/product/console/app_create.html", only: ["server-side"] },
       { text: "\u4F7F\u7528\u73AF\u4FE1 App Token \u9274\u6743", link: "easemob_app_token.html", only: ["server-side"] },
       { text: "\u4F7F\u7528\u73AF\u4FE1 User Token \u9274\u6743", link: "easemob_user_token.html", only: ["server-side"] },
       { text: "IM \u4EA7\u54C1\u4F7F\u7528\u9650\u5236", link: "limitation.html", only: ["server-side"] },
