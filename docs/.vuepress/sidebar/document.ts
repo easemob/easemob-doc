@@ -28,7 +28,7 @@ const documentSidebar = [
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
       { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
       /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
-      { text: '开通和配置服务 console', link: 'enable_and_configure_IM.html', only: ['server-side'] },
+      { text: '创建应用', link: '/product/console/app_create.html', only: ['server-side'] },
       { text: '使用环信 App Token 鉴权', link: 'easemob_app_token.html', only: ['server-side'] },
       { text: '使用环信 User Token 鉴权', link: 'easemob_user_token.html', only: ['server-side'] },
       { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
@@ -148,6 +148,7 @@ const documentSidebar = [
           { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
           { text: '统一获取消息方案', link: 'push/push_parsing_unified.html', only: ['android'] },
           { text: '设置通知的显示内容', 
+            collapsible: true,
             children: [
               { text: '概述', link: 'push/push_display_overview.html', except: ['harmonyos']},
               { text: '设置推送通知的显示属性', link: 'push/push_display_attribute.html' },

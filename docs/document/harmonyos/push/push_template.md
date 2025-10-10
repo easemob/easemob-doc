@@ -45,8 +45,8 @@
 
 离线推送模板开通后，**模板管理** 页面默认添加两个模板，`default` 和 `detail`。若未配置自定义推送模板，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
 
- - `default`：默认情况下，推送标题为 **您有一条新消息**，推送内容为 **请点击查看**。
- - `detail`：默认情况下，推送标题为 **您有一条新消息**，推送内容为为消息发送方的推送昵称和消息内容。
+- `default`：默认情况下，推送标题为 **您有一条新消息**，推送内容为 **请点击查看**。若调用了 `updatePushDisplayStyle` 方法将 `PushDisplayStyle` 设置为 `SimpleBanner`，则默认推送模板为 `default`。
+ - `detail`：默认情况下，推送标题为 **您有一条新消息**，推送内容为消息内容。若调用了 `updatePushDisplayStyle` 方法将 `PushDisplayStyle` 设置为 `MessageSummary`，则默认推送模板为 `detail`。
   
 ![img](/images/console/push_template_default.png)
 
@@ -110,10 +110,11 @@
 
 ## 发送消息时使用推送模板
 
-你可以在发送消息时选择推送模板。
+你可以在发送消息时选择推送模板，可通过三种方式设置推送模板。
 
 :::tip
-若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
+1. 若使用默认模板 **default** 或 **detail**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
+2. 使用自定义模板时，**推送标题** 和 **推送内容** 参数无论通过哪种方式设置，创建消息时均需通过扩展字段传入。
 :::
 
 ### 使用固定内容的推送模板
@@ -123,7 +124,7 @@
 这种情况下，创建消息时无需传入 `title_args` 和 `content_args` 参数。 
 
 ```typescript
-// 先定义一个推送模版类
+// 先定义一个推送模板类
 export class PushTemplate {
   // 模版名称
   name?: string;
@@ -137,7 +138,7 @@ export class PushTemplate {
 const message = ChatMessage.createTextSendMessage(conversationId, "消息内容");
 if (message) {
   // 设置推送模板名称。设置前需在环信即时通讯云管理后台或调用 REST 接口创建推送模板。
-  // 若为默认模板 `default`，无需传入模板名称。
+  // 若为默认模板，无需传入模板名称。
   // 若为自定义模板，需传入模板名称。
   let templateName = "自定义推送模板名称";
   // 1.6.0版本之前版本需要先将 PushTemplate 转为 JSON，例如：let pushTemplateStr = JSON.stringify(pushTemplate);
@@ -186,9 +187,9 @@ if (message) {
 请及时查看
 
 ```typescript
-// 先定义一个推送模版类
+// 先定义一个推送模板类
 export class PushTemplate {
-  // 模版名称
+  // 模板名称
   name?: string;
   // 标题自定设置部分
   title_args?: string[];
@@ -204,7 +205,7 @@ if (message) {
   let titleArgs = ["您","消息,"];
   // 设置填写模板内容的 value 数组。
   let contentArgs = ["请","查看"];
-  let templateName = "push"; // 此处 `push` 为已在创建的推送模版名称。
+  let templateName = "push"; // 此处 `push` 为已在创建的推送模板名称。
   // 设置推送模板名称。若不指定，设置默认推送模板的信息。
   // 1.6.0版本之前版本需要先将 PushTemplate 转为 JSON，例如：let pushTemplateStr = JSON.stringify(pushTemplate);
   message?.setJsonAttribute("em_push_template", {

@@ -854,9 +854,9 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 
 ## 使用推送模板
 
-你可以使用推送模板设置推送标题和内容。你可以调用以下 REST API 配置默认推送模板 `default` 和自定义推送模板。除此之外，你也可以在[环信控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+你可以使用推送模板设置推送标题和内容，即调用以下 REST API 配置默认推送模板 `default` 和自定义推送模板。除此之外，你也可以在[环信控制台](https://console.easemob.com/user/login)设置推送模板，详见 [推送模板配置文档](/document/android/push/push_template.html)。
 
-对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。
+**对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。**
 
 使用推送模板有以下优势：
 
@@ -880,7 +880,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 
 #### 功能说明
 
-创建离线推送消息模板，包括默认模板 `default` 和自定模板。你可以通过[环信控制台](https://console.easemob.com/user/login)创建推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+创建离线推送消息模板，包括默认模板 `default` 和自定模板。你可以通过 [环信控制台](https://console.easemob.com/user/login) 创建推送模板，详见 [推送模板配置文档](/document/android/push/push_template.html#开通服务)。
 
 若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
 

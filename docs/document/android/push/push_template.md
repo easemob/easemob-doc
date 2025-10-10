@@ -4,16 +4,14 @@
 
 推送模板主要用于服务器提供的默认离线推送配置不满足你的需求时，设置全局范围的推送标题和推送内容。例如，服务器提供的默认设置为中文和英文的推送标题和内容，你若需要使用韩语或日语的推送标题和内容，则可以设置对应语言的推送模板。
 
-推送模板包括默认推送模板 `default`、`detail` 和自定义推送模板。对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。
+推送模板包括默认推送模板 `default`、`detail` 和自定义推送模板。
 
-使用推送模板有以下优势：
-
-1. 自定义修改环信服务端默认推送内容。   
-
-2. 接收方可以决定使用哪个模板。 
-
-3. 按优先级选择模板使用方式：
-   
+推送模板的特点如下：
+1. 推送模板的优先级高于 [调用 API 设置通知栏的推送内容](push_display_attribute.html)。
+2. 实现自定义修改环信服务端默认推送内容。   
+3. 对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。
+4. 接收方可以决定使用哪个模板。 
+5. 按优先级选择模板使用方式： 
    - 使用自定义推送模板的优先级高于默认推送模板。
    - 若发送方发消息时设置了推送模板，接收方即使设置了推送模板，收到推送通知后也按照发送方设置的推送模板显示。
 
@@ -48,8 +46,8 @@
 
 离线推送模板开通后，**模板管理** 页面默认添加两个模板，`default` 和 `detail`。若未配置自定义推送模板，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
 
- - `default`：默认情况下，推送标题为 **您有一条新消息**，推送内容为 **请点击查看**。
- - `detail`：默认情况下，推送标题为 **您有一条新消息**，推送内容为为消息发送方的推送昵称和消息内容。
+ - `default`：默认情况下，推送标题为 **您有一条新消息**，推送内容为 **请点击查看**。若调用了 `updatePushDisplayStyle` 方法将 `DisplayStyle` 设置为 `SimpleBanner`，则默认推送模板为 `default`。
+ - `detail`：默认情况下，推送标题为 **您有一条新消息**，推送内容为为消息发送方的推送昵称和消息内容。若调用了 `updatePushDisplayStyle` 方法将 `DisplayStyle` 设置为 `MessageSummary`，则默认推送模板为 `detail`。
 
 ![img](/images/console/push_template_default.png)
 
@@ -113,10 +111,11 @@
 
 ## 发消息时使用推送模板
 
-你可以在发送消息时选择推送模板。
+你可以在发送消息时选择推送模板，可通过三种方式设置推送模板。
 
 :::tip
-若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
+1. 若使用默认模板 **default** 或 **detail**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
+2. 使用自定义模板时，**推送标题** 和 **推送内容** 参数无论通过哪种方式设置，创建消息时均需通过扩展字段传入。
 :::
 
 ### 使用固定内容的推送模板
@@ -134,7 +133,7 @@ message.setTo("6006");
 JSONObject pushObject = new JSONObject();
 try {
     // 设置推送模板名称。设置前需在环信控制台或调用 REST 接口创建推送模板。
-   //若为默认模板 `default`，无需传入模板名称。
+   //若为默认模板 `default` 或 `detail`，无需传入模板名称。
    //若为自定义模板，需传入模板名称。
     pushObject.put("name", "test7");
 
@@ -190,7 +189,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("消息内容");
 message.setTo("6006");
-// 设置推送模板。设置前需在环信即时通讯云管理后台或调用 REST 接口创建推送模板。
+// 设置推送模板。设置前需在环信控制台或调用 REST 接口创建推送模板。
 JSONObject pushObject = new JSONObject();
 JSONArray titleArgs = new JSONArray();
 JSONArray contentArgs = new JSONArray();
