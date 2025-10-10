@@ -247,19 +247,6 @@ export const zhSidebar = sidebar({
              collapsible: true,
              children: [
              { text: "内容审核", link: "console/value_added_config_moderation.html" },
-             {
-             text: "即时推送",
-             collapsible: true,
-             children: [
-             { text: "用户管理", link: "console/push_user.html" },
-             { text: "证书管理", link: "console/push_certificate_config.html" },
-             { text: "模板管理", link: "console/push_template.html" },
-             { text: "创建推送", link: "console/push_task_create.html" },
-             { text: "推送任务", link: "console/push_task.html" },
-             { text: "标签管理", link: "console/push_tag_mgmt.html" },
-             { text: "推送统计", link: "console/push_statistics.html" },
-             ],
-            },
             { text: "即时推送", link: "console/value_added_config_push.html" },
             { text: "实时音视频", link: "console/value_added_config_rtc.html" },
              ],
