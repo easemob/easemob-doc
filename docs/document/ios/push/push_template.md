@@ -128,7 +128,7 @@
 //下面以文本消息为例，其他类型的消息设置方法相同。
 EMTextMessageBody *body = [[EMTextMessageBody alloc]initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc]initWithConversationID:@"conversationId" from:@"currentUsername" to:@"conversationId" body:body ext:nil];
-//设置推送模板。设置前需在环信即时通讯云管理后台或调用 REST 接口创建推送模板。
+//设置推送模板。设置前需在环信控制台或调用 REST 接口创建推送模板。
 NSDictionary *pushObject = @{
    //设置推送模板名称。
    //若为默认模板 `default` 或 `detail`，无需传入模板名称。若为自定义模板，需传入模板名称。
@@ -183,7 +183,7 @@ EMChatMessage *message = [[EMChatMessage alloc]initWithConversationID:@"conversa
 //设置推送模板。设置前需在环信控制台上创建推送模板。
 NSDictionary *pushObject = @{
     //设置推送模板名称。若不指定，设置默认推送模板的信息。
-    //设置前需在环信即时通讯云管理后台或调用 REST 接口创建推送模板。
+    //设置前需在环信控制台或调用 REST 接口创建推送模板。
     @"name":@"templateName",
     @"title_args":@[@"您",@"消息"],//设置填写模板标题的 value 数组。
     @"content_args":@[@"请",@"查看"]//设置填写模板内容的 value 数组。

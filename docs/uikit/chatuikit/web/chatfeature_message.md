@@ -96,7 +96,7 @@ features.chat.message.reply = false;
 
 #### 如何使用
 
-1. 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
+1. 使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
 消息翻译特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -126,7 +126,7 @@ features.chat.message.translate = false;
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
 表情回复特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -148,7 +148,7 @@ features.chat.message.reaction = false;
 
 #### 如何使用
 
-1. 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+1. 使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
 消息话题特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 

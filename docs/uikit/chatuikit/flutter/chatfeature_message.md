@@ -97,7 +97,7 @@ ChatUIKitSettings.enableMessageReply = false;
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
 1. 开启消息翻译特性。
 
@@ -135,7 +135,7 @@ ChatUIKitSettings.translateTargetLanguage = 'zh-Hans';
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
 单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了 `enableMessageReaction` 属性用于设置是否开启 `Reaction` 功能, 默认值为 `false`。要开启该功能，将该参数设置为 `true`。示例代码如下：
 
@@ -153,7 +153,7 @@ ChatUIKitSettings.enableMessageReaction = true;
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
 消息话题特性在 `ChatUIKitSettings.enableChatThreadMessage` 中提供开关，默认值为 `false`。要开启该特性，需将该参数设置为 `true`。
 

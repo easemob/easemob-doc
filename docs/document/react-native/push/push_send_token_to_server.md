@@ -27,7 +27,7 @@ yarn add react-native-chat-sdk
 import { getPlatform, getDeviceType } from "react-native-push-collection";
 import { ChatClient, ChatOptions, ChatPushConfig } from "react-native-chat-sdk";
 
-// 从环信即时通讯云控制台获取推送 ID、pushId
+// 从环信控制台获取推送 ID、pushId
 const pushId = "<your push id from easemob console>";
 
 // 设置推送类型

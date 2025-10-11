@@ -27,7 +27,7 @@
 
 ![img](/images/product/data_center_selection.png)
 
-应用所在数据中心可以在环信控制台的 **即时通讯>服务概览** 页面中查看：
+应用所在数据中心可以在环信控制台的 **应用概览** 页面中查看：
 
 ![img](/images/product/data_center.png)
 
