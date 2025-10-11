@@ -6,7 +6,7 @@
 
 本文展示如何编译并运行 Android 平台的聊天室 UIKit 示例项目。
 
-## 前提条件
+## 推荐环境
 
 开始前，确保你的开发环境满足如下条件：
 
@@ -14,42 +14,35 @@
 - Android API 级别 21 或以上；
 - 使用 Kotlin 语言开发，1.5.21 或以上版本；
 - JDK 1.8 或以上版本；
-- Gradle 7.0.0 或以上版本。
+- Gradle 8.0 或以上版本。
 
 ## 操作步骤
 
-### 第一步 下载 ChatroomUIKit 示例代码
-
+1. 下载 ChatroomUIKit 示例代码
 点击 [github源码](https://github.com/easemob/UIKit_Chatroom_android)，将示例代码下载到本地设备。
 
-### 第二步 添加 ChatroomUIKit 模块依赖
-
-1. 在 Android Studio 中打开你的项目。
-
-2. 选择 **File** > **import Module**。
-
-3. 添加模块本地依赖。
-
-找到下载的 **ChatroomUIKit** 模块添加为本地依赖。将 [ChatroomUIKit](https://github.com/easemob/UIKit_Chatroom_android/tree/dev/ChatroomUIKit) 和 [ChatroomService](https://github.com/easemob/UIKit_Chatroom_android/tree/dev/ChatroomService) 模块导入到项目中。
-
-```kotlin
-// settings.gradle
-include ':ChatroomUIKit'
-include ':ChatroomService'
-project(':ChatroomUIKit').projectDir = new File('../ChatroomUIKit/ChatroomUIKit')
-project(':ChatroomService').projectDir = new File('../ChatroomUIKit/ChatroomService')
-
-// app/build.gradle
-dependencies {
-  implementation(project(mapOf("path" to ":ChatroomUIKit")))
-}
+```bash
+git clone https://github.com/easemob/UIKit_Chatroom_android.git
 ```
 
-### 第三步 编译
+2. 在 Android Studio 中打开项目。
 
-编译时，需要传入 App Key、用户 ID 和用户 token。因此，编译前，你需要在[环信控制台](https://console.easemob.com/user/login)上创建有效的环信即时通讯 IM 开发者账号，并获取 App Key，[创建环信 IM 用户](/product/console/operation_user.html#创建用户)。此外，还需 [创建聊天室](/product/console/operation_chatroom.html#创建聊天室)。
+选择 **File** > **New** > **Import Project**，导入下载或克隆的项目 `UIKit_Chatroom_android`。
 
-1. 初始化 ChatroomUIKit。
+3. 点击 `Sync Project with Gradle Files` 同步工程。
+
+:::tip
+注意：
+1. 项目中编译使用的 Gradle 版本默认为 8.0，推荐Gradle JDK 版本为 19 及以下。以Mac 版 Android Studio 为例，可以在左上角 **Android Studio** > **Settings** > **Build, Execution, Deployment** > **Build Tools** > **Gradle** > **Gradle JDK**,选择版本为 19 及以下的 JDK，然后点击OK。如果没有合适的 JDK 版本，可以点击 **Download JDK** 下载。
+2. 开发者也可调整 Gradle 及对应的 Gradle JDK 版本。配置地址为  **项目工程根目录** > **gradle** > **gradle-wrapper.properties** > **调整`distributionUrl`值**。
+
+:::
+
+4. 运行项目
+
+运行时，需要传入 App Key、用户 ID 和用户 token。因此，你需要在[环信控制台](https://console.easemob.com/user/login)上创建有效的环信即时通讯 IM 开发者账号，并获取 App Key，[创建环信 IM 用户](/product/console/operation_user.html#创建用户)。此外，还需 [创建聊天室](/product/console/operation_chatroom.html#创建聊天室)。
+
+4.1 初始化 ChatroomUIKit。
 
 ```kotlin
 class ChatroomApplication : Application() {
@@ -63,13 +56,13 @@ class ChatroomApplication : Application() {
 }
 ```
 
-2. 登录 ChatroomUIKit。
+4.2 登录 ChatroomUIKit。
 
 ```kotlin  
  ChatroomUIKitClient.getInstance().login("userId", "token")
 ```
 
-3. 加载 ComposeChatroom 视图，传入 `roomId` 和聊天室所有者的 `UserEntity` 对象。
+4.3 加载 ComposeChatroom 视图，传入 `roomId` 和聊天室所有者的 `UserEntity` 对象。
 
 ```kotlin  
 class ChatroomActivity : ComponentActivity(){
@@ -82,9 +75,9 @@ class ChatroomActivity : ComponentActivity(){
 }
 ```
 
-### 第四步 体验项目
+5. 体验项目
 
-运行并体验该项目。
+在 Android Studio 中，点击 `Run ‘app’` 按钮，将应用运行到你的设备或者模拟器上。
 
 ## 注意事项  
 
