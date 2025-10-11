@@ -38,7 +38,7 @@
 5. 进入工程根目录，执行 `yarn && yarn prepare` 安装依赖和创建本地配置文件。
 6. 更改配置文件(`examples/product-uikit-demo/src/env.ts`)内容, 设置 appKey 的值，其他字段有默认值。
 7. 设置推送配置文件。如果没有，可以使用模板文件保证编译运行没有问题。如果有，则使用自己的配置文件。详见 [Firebase 相关文档](https://rnfirebase.io/)。
-   - Android 平台拷贝命令为 `cp -f templates/google-services.json.template examples/product-uikit-demo/android/app/google-services.json`。
+   - Android 平台拷贝命令为 `cp -f templates/google-services.json.template examples/product-uikit-demo/android/app/google-services.json && cp -f templates/debug.keystore.template examples/product-uikit-demo/android/app/debug.keystore`。
    - iOS 平台拷贝命令为 `cp templates/GoogleService-Info.plist.template examples/product-uikit-demo/ios/ChatUikitFullExample/GoogleService-Info.plist`。
 8. 进入目录 `examples/product-uikit-demo`， 运行 `yarn android` 或 `yarn ios` 运行 Demo。
 9. 启动本地服务 `yarn run start`，默认端口 8081。
@@ -59,8 +59,7 @@ App Server 为 Demo 提供以下功能：
 你可通过以下步骤部署 App Server：
 
 1. 部署 App Server。详见 [服务端源码](https://github.com/easemob/easemob-im-app-server/tree/dev-demo)。
-2. 在 Demo 工程根目录下 `local.properties` 文件中，填写 App Server 的域名或 IP 地址，格式为 `APP_SERVER_DOMAIN = 服务器域名或ip地址`。
-3. 在 Demo 工程根目录下 `local.properties` 文件中，填入 `LOGIN_WITH_APPSERVER = true`，即通知 Demo 工程需要启用 App Server，体验完整功能。
+2. 修改 文件 `examples/product-uikit-demo/src/env.ts` 中的内容 `useAppServerDomain = true` 。
 
 **服务端中的 App Key 要跟客户端的 App Key 保持一致。**
 
