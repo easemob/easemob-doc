@@ -2,7 +2,7 @@
 
 <Toc />
 
-利用环信单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
+利用环信单群聊 UIKit，你可以轻松实现单聊和群聊。本文介绍如何快速实现在单聊会话中发送消息。
 
 ## 前提条件
 
@@ -103,7 +103,7 @@ const ChatApp = () => {
           accessToken: accessToken,
         })
         .then((res) => {
-          // 创建会话
+          // 创建一个用于测试的单聊会话，如果创建群聊会话，请确保是真实群 ID。
           rootStore.conversationStore.addConversation({
             chatType: "singleChat", // 单聊和群聊分别为 'singleChat' 和 'groupChat'。
             conversationId: "userId", // 单聊为对端用户 ID，群聊为群组 ID。
