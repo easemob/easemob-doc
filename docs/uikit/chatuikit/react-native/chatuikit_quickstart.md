@@ -61,6 +61,8 @@ react-native-safe-area-context \
 react-native-video
 ```
 
+*react-native-audio-recorder-player 这个三方库已经过期，但是它推荐的三方库目前问题较多，所以，建议继续使用该三方库，版本小于 3.6.14*
+
 ## 第四步 添加权限
 
 添加必要的应用权限。
