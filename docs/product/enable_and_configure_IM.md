@@ -28,7 +28,7 @@
 
 ## 购买服务
 
-1. 创建应用后，在 **应用列表** 中点击所创建应用的 **操作** 栏中的 **管理** 按钮，进入 **应用详情** 页面。
+1. 创建应用后，在 **应用列表** 中点击所创建应用的 **操作** 栏中的 **管理** 按钮，进入 **应用概览** 页面。
 
 ![img](/images/product/app-setting.png)
 
@@ -74,9 +74,9 @@
 
 | 应用信息       | 描述   | 如何查看 | 
 | :--------- | :----- | :------- | 
-| `Orgname`     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。该参数是 `APPKEY` 的一部分。 | 在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
-| `Appname` | 你在[环信控制台](https://console.easemob.com/user/login)创建应用时填入的应用名称。该参数是 `AppKey` 的一部分。| 在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
-| `APPKEY` | 应用的唯一标识，由 `Orgname` 和 `Appname` 组成，生成后不允许修改。     | 在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
+| `Orgname`     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。该参数是 `APPKEY` 的一部分。 | 在[环信控制台](https://console.easemob.com/user/login)的 **应用概览** 页面查看。 |
+| `Appname` | 你在[环信控制台](https://console.easemob.com/user/login)创建应用时填入的应用名称。该参数是 `AppKey` 的一部分。| 在[环信控制台](https://console.easemob.com/user/login)的 **应用概览** 页面查看。 |
+| `APPKEY` | 应用的唯一标识，由 `Orgname` 和 `Appname` 组成，生成后不允许修改。     | 在[环信控制台](https://console.easemob.com/user/login)的 **应用概览** 页面查看。 |
 | 服务器域名（`host`） | RESTful API 请求域名。环信为应用提供的 REST API 和 WebSocket 的请求域名。 | 在[环信控制台](https://console.easemob.com/user/login)的 **服务概览** 页面查看。              |
 | 数据中心 | 环信 IM 提供的分布在全球的多个数据中心：<br/> - 国内数据中心：北京 1 区和北京 Vip6 区 <br/> - 海外数据中心：新加坡 1 区、 法兰克福（法国）和弗吉尼亚（美国） | 在[环信控制台](https://console.easemob.com/user/login)的 **服务概览** 页面查看。         |
 

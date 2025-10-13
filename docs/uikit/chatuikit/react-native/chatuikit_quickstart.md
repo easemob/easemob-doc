@@ -216,7 +216,7 @@ export default function App(): React.JSX.Element {
 
 在 [环信控制台](https://console.easemob.com/) 获取 App Key 和用户 ID 和 token，然后填入配置选项：
 
-- 在 **应用详情** 页面 [获取 App Key](/product/console/app_manage.html#查看应用信息)。
+- 在 **应用概览** 页面 [获取 App Key](/product/console/app_manage.html#查看应用信息)。
 - 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 ```tsx

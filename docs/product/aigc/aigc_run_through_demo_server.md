@@ -41,7 +41,7 @@ src/main/resources/application.yml
  
 #### 2. 获取 app 信息
 
-选中创建的应用，点击**管理**，进入**应用详情**页面，获取 **App Key**、**ClientID** 及**ClientSecret**。
+选中创建的应用，点击**管理**，进入**应用概览**页面，获取 **App Key**、**ClientID** 及**ClientSecret**。
 
 ```yaml
 logging:
@@ -50,9 +50,9 @@ logging:
 server:
   port: 80             #修改启动端口，只能为数字(请确保该端口没有被占用)
 easemob:
-  appkey: {appkey}     # 创建应用获取到的 App Key，可通过环信控制台的 “应用详情” 页面上的 “APPKEY” 字段获取。
-  clientId:{clientId}  #  App 的 client_id，可通过环信控制台的 “应用详情” 页面上的 “Client ID” 字段获取。
-  clientSecret:{clientSecret}  #  App 的 client_secret，可通过环信控制台的 “应用详情” 页面上的 “ClientSecret” 字段获取。
+  appkey: {appkey}     # 创建应用获取到的 App Key，可通过环信控制台的 “应用概览” 页面上的 “APPKEY” 字段获取。
+  clientId:{clientId}  #  App 的 client_id，可通过环信控制台的 “应用概览” 页面上的 “Client ID” 字段获取。
+  clientSecret:{clientSecret}  #  App 的 client_secret，可通过环信控制台的 “应用概览” 页面上的 “ClientSecret” 字段获取。
 ```
 
 ![img](/images/aigc/app_detail.png)

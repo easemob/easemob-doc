@@ -18,7 +18,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 3      |   EMErrorDatabaseOperationFailed    | 数据库操作失败：打开本地数据库失败。    | 需要根据调用的 API 结合日志分析，如果使用 `EMConversation#updateMessage` 方法更新一条本地不存在的消息，可能返回该错误；在数据库未打开时，调用其他本地数据库操作，也可能返回该错误。 |
 | 4      |      EMErrorExceedServiceLimit      | 超过服务限制：超过当前服务版本的数量限制，例如，创建的用户 ID 数量超过购买服务的限制时提示该错误；设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的所有属性)、[获取单个或多个用户的用户属性](userprofile.html#获取用户的所有属性)和[获取指定用户的指定用户属性](userprofile.html#获取用户的指定属性)，超过调用频率限制时，会上报该错误。| 检查调用的 API，若传入 `limit` 参数，可将该参数控制在上限内，若是限流导致，可以在延后一段时间重新调用。 |
 | 8      |      EMAppActiveNumbersReachLimitation       | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。  | 需在[环信控制台](https://console.easemob.com/user/login)对 IM 服务进行升级。 |
-| 100    |        EMErrorInvalidAppkey         | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看 App Key。   | 使用正确的 App Key 进行初始化。 |
+| 100    |        EMErrorInvalidAppkey         | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用概览** 页面查看 App Key。   | 使用正确的 App Key 进行初始化。 |
 | 101    |       EMErrorInvalidUsername        | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。 | 检查报错API 中传入的用户 ID 参数是否为空。 |
 | 102    |       EMErrorInvalidPassword        | 用户密码不正确：登录时提供的密码为空或不正确。 | 检查调用的 API 中传的密码参数是否正确。 |
 | 103    |          EMErrorInvalidURL          | URL 不正确。   | 检查调用 API 时传入的参数是否正确。    |

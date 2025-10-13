@@ -17,4 +17,4 @@
 3. 合并信令，由原来三个地方合并为一处。解决了 Activity 被回收导致信令不通问题。
 4. 在应用集成了 FCM 推送的设备上，当应用进程被杀死时，支持 [使用 Telecom](telecom.html) 唤起设备，实现系统级丝滑呼叫体验。
 5. [群组通话的邀请界面](integration.html#步骤-5-发起通话) 改为 CallKit 内部实现，不再需要开发者自己实现。
-6. 移除 App Server 的依赖，直接由 CallKit 内部从 SDK 中获取 rtc appid、rtcToken、uid和userID映射关系等。
+6. 移除 App Server 的依赖，直接由 CallKit 内部从 SDK 中获取 RTC App ID、rtcToken、UID 和 userID 映射关系等。
