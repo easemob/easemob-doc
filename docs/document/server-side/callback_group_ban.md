@@ -43,7 +43,7 @@
 | `paylod`       | Object | 事件内容。                                                     |
 |  - `disabled`| Boolean | <br/> - `true`：封禁  <br/> - `false`：解禁 |
 |  - `type`   | String | `DISABLE`：封禁或解禁操作。  |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。  |
 | `id`       | String | 群组 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件。由于聊天室无封禁或解禁事件，本次事件仅对群组有效，因此值只能为 `GROUP`。   |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 

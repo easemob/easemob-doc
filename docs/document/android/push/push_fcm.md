@@ -232,7 +232,7 @@ public class MyFCMMSGService extends FirebaseMessagingService {
    可以查看日志或调用[获取用户详情的 RESTful 接口](https://doc.easemob.com/document/server-side/account_system.html#获取单个用户的详情)确认 device token 是否绑定成功。成功后在 `entities` 字段下会有 `pushInfo` 字段，且 `pushInfo` 下会有 `device_Id`、`device_token`、`notifier_name` 等相关信息。
 2. 开启应用通知栏权限。
 3. 杀掉应用进程。
-4. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)发送测试消息。
+4. 在[环信控制台](https://console.easemob.com/user/login)发送测试消息。
    在左侧导航栏中选择 **即时通讯** > **运营服务** > **用户管理**。在**用户管理**页面中，在对应用户 ID 的**操作**栏中点击**更多**，然后选择**发送rest消息**。在弹出的对话框中选择消息类型，输入消息内容，然后点击**发送**。
 5. 查看设备是否收到推送通知。
 

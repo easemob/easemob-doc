@@ -1,6 +1,6 @@
 # AI 智能
 
-环信即时通讯云提供 REST API 获取 app 下的机器人列表。**如果需要该功能相关的其他 REST API，请联系环信商务。**
+环信即时通讯 IM 提供 REST API 获取 app 下的机器人列表。**如果需要该功能相关的其他 REST API，请联系环信商务。**
 
 ## 前提条件
 
@@ -63,7 +63,7 @@ GET https://{host}/{org_name}/{app_name}/robot/rule?&page={page}&size={size}
 | `entities` | JSONArray | app 下的机器人详情。  |
 |  - `id`   | String  | 机器人 ID。   |
 |  - `name` | String  | 机器人名称。  |
-|  - `appkey`  | String  | 应用的唯一标识，由 `Orgname` 和 `Appname` 组成，生成后不允许修改。在[环信控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。 |
+|  - `appkey`  | String  | 应用的唯一标识，由 `Orgname` 和 `Appname` 组成，生成后不允许修改。在[环信控制台](https://console.easemob.com/user/login)的 **应用概览** 页面查看。 |
 |  - `robotId` | String | robot ID。   |
 |  - `robotAppId`   | String       | robot ID 对应的 robot app ID。   |  
 |  - `msgType` | String  | 消息类型，目前固定值为 `txt`，即文本消息。 |

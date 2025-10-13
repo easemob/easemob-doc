@@ -55,7 +55,7 @@
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 [Console 后台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。 |  
 | `payload`   | object   | 包括：<br/> - `ext`：消息扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `msg_config.allow_group_ack`：是否需要群消息已读回执 <br/> - `type`：`read_ack` 表示消息已读回执。|
 | `host`      | String   | 服务器名称。                                                 |
-| `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`    | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`      | String   | 发送已读回执的用户 ID。                                        |
 | `to`        | String   | 群组 ID。  |
 | `msg_id`    | String   | 该回执消息的消息 ID。                                        |

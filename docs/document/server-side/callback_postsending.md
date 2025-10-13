@@ -130,11 +130,11 @@ GET https://{host}/{org_name}/{app_name}/callbacks/storage/info
 | `path`            | string | 请求路径。              |
 | `uri`             | string | 请求路径的 URI。                                                               |
 | `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
-| `organization`    | string | 你在环信 IM 管理后台注册的组织唯一标识。                                       |
-| `application`     | string | 你在环信 IM 管理后台注册的 App 唯一标识。                                      |
+| `organization`    | string | 你在环信控制台注册的组织唯一标识。                                       |
+| `application`     | string | 你在环信控制台注册的 App 唯一标识。                                      |
 | `action`          | string | 请求方法。   |
 | `duration`        | long   | 请求耗时，单位为毫秒。                                                         |
-| `applicationName` | string | 你在环信 IM 管理后台注册的 App 名称。                                          |
+| `applicationName` | string | 你在环信控制台注册的 App 名称。                                          |
 | `data`            | object | 响应数据内容。包括以下三个参数：`date`、`size` 和 `retry`。                    |
 | - `date`            | String | 当前的 date key，即每 10 分钟内的消息和事件。key 为 10 分钟的起点。              |
 | - `size`            | Int    | 该 date key 内的消息数量。                                                               |
@@ -222,7 +222,7 @@ POST https://{host}/{org_name}/{app_name}/callbacks/storage/retry
 | `uri`          | String | 请求路径的 URI。                                                               |
 | `timestamp`    | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
 | `organization` | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`  | String | 你在环信 IM 管理后台注册的 app 唯一标识。                                      |
+| `application`  | String | 你在环信控制台注册的 app 唯一标识。                                      |
 | `action`       | String | 请求方法。                                                                     |
 | `data`         | Bool   | - `success`：成功；<br/> - `failure`：失败。                                   |
 | `duration`     | long   | 请求耗时，单位为毫秒。                                                         |

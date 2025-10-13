@@ -34,11 +34,11 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 204    | USER_NOT_FOUND                     | 用户不存在，如创建群拉人时不存在的用户报错。  | 检查 userId 是否正确。|
 | 205    | MESSAGE_PARAMETER_ERROR                     | 消息参数错误。如撤回消息时未传消息 ID 或者发送消息时未传消息接收方的用户 ID。|确保消息⾥包含消息 ID 和接收方用户 ID，即 `id` 和 `to`。 |
 | 206    | WEBIM_CONNCTION_USER_LOGIN_ANOTHER_DEVICE      | 用户在其他设备登录：如果没有开启多设备登录，则在其他设备登录会将当前登录的设备踢下线，用户会收到此错误。若开启了多设备登录并配置了支持的设备数量，设备间的互踢策略与 `ConnectionParameters#isFixedDeviceId` 参数有关，详见[多设备文档](multi_device.html)。  | 开启多设备功能，详见 [多设备⽂档](https://doc.easemob.com/document/web/multi_device.html)。 |
-| 207    | WEBIM_CONNCTION_USER_REMOVED                   | 用户已经被注销：如果登录用户的 ID 被管理员从管理后台删除则会收到此错误。 | 提示⽤户被注销。|
+| 207    | WEBIM_CONNCTION_USER_REMOVED                   | 用户已经被注销：如果登录用户的 ID 被管理员从环信控制台删除则会收到此错误。 | 提示⽤户被注销。|
 | 208    | WEBIM_USER_ALREADY_LOGIN | 已经登录，又重复登录。 | 不能重复登录。 |
 | 216    | WEBIM_CONNCTION_USER_KICKED_BY_CHANGE_PASSWORD | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 |提示密码已经修改，请重新登录。|
-| 217    | WEBIM_CONNCTION_USER_KICKED_BY_OTHER_DEVICE    | 用户被踢下线：开启多设备登录后，如果用户在其他设备上调用 API 或者通过管理后台踢出当前设备登录的 ID，SDK 会提示该错误。 | 提示被踢下线。|
-| 219    | USER_MUTED_BY_ADMIN   | 用户被全局禁言：在管理后台禁言了此用户后，该用户发送消息时会提示该错误。   | 提示⽤户已被禁⾔。|
+| 217    | WEBIM_CONNCTION_USER_KICKED_BY_OTHER_DEVICE    | 用户被踢下线：开启多设备登录后，如果用户在其他设备上调用 API 或者通过环信控制台踢出当前设备登录的 ID，SDK 会提示该错误。 | 提示被踢下线。|
+| 219    | USER_MUTED_BY_ADMIN   | 用户被全局禁言：在环信控制台禁言了此用户后，该用户发送消息时会提示该错误。   | 提示⽤户已被禁⾔。|
 | 221    | USER_NOT_FRIEND                                | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。该功能可在控制台开通。 | 提示⽤户⾮对⽅好友。|
 | 500    | SERVER_BUSY                                    | 服务器忙碌。 | 提示服务忙，请重试。|
 | 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT                | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。 | 提示消息发送失败，包含敏感词等⾮法内容。 |

@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信聊天 UIKit 是基于环信即时通讯云 IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表及后续界面等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
+环信聊天 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表及后续界面等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
 你可以查看 [UIKit 源码](https://github.com/easemob/chatuikit-ios) 和 [iOS Demo 源码](https://doc.easemob.com/product/demo.html)。
 

@@ -31,7 +31,7 @@
 
 ```dart
     try {
-    // notifierName: 对应平台在环信后台的推送证书名称
+    // notifierName: 对应平台在环信控制台的推送证书名称
     // deviceToken: 推送token
     EMClient.getInstance.pushManager.bindDeviceToken(
         notifierName: notifierName,

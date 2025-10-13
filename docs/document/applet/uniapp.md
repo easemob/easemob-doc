@@ -61,7 +61,7 @@
 | 美东 1 区     | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
 | 德国 2 区 | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
 
-应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console 中查看请求域名
+应用所在数据中心可以在环信控制台的 **应用概览** 页面中查看：
 
 ![img](/images/applet/service_overview.png)
 

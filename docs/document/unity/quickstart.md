@@ -32,7 +32,7 @@
 | macOS        | macOS 10.0 或以上  |  Xcode 9.0 或以上，Visual Studio for Mac 2019 或以上   |
 | Windows              | Windows 10 或以上 | Microsoft Visual Studio 2019 或以上            |
 
-- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信控制台](https://console.easemob.com/user/login)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 项目设置

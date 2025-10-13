@@ -14,7 +14,7 @@
 | `payload.ack_message_id` | String     | 会话中消息的消息 ID。                  |
 | `payload.type` | String | 会话已读回执类型。       |                |
 | `host`      | String   | 服务器名称。                                                 |
-| `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`    | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from` | String          | 发送已读回执的用户。|
 | `to` | String    |  接收已读回执的用户。                 |
 | `msg_id` | String      | 已读回执的消息 ID。 |

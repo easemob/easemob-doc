@@ -25,7 +25,7 @@
 
 ![img](/images/instantpush/push_flyme_callbackaddr.png)
 
-您可以在环信后台，**即时通讯** → **服务概览** 中查看当前 Appkey 的 Rest API 域名地址，仅支持填写 `easemob.com` 类型。
+您可以在环信控制台的 **应用概览** 页面中查看当前 App Key 的 Rest API 域名地址，仅支持填写 `easemob.com` 类型。
 
 ![img](/images/instantpush/push_domain_name.png)
 

@@ -3,7 +3,7 @@
 ## 功能说明
 
 - 添加关键词。
-- 每个应用最多可配置 100 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 100,000 个词条。
+- 每个应用最多可配置 100 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 1,000,000 个词条。
 
 **调用频率上限**：100 次/秒/App Key 
 
@@ -164,7 +164,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/{list_id}/word/batch' 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 400 | Bad Request | The text count exceeds the maximum number | 关键词数量超限。 | 减少关键词数量。每个名单最多可添加 10,000 个关键词，每个应用最多可配置 100,000 个词条。|
+| 400 | Bad Request | The text count exceeds the maximum number | 关键词数量超限。 | 减少关键词数量。每个名单最多可添加 10,000 个关键词，每个应用最多可配置 1,000,000 个词条。|
 | 400 | Bad Request | request data is empty | 新增名单为空。 | 添加关键词名单。 |
 | 400 | Bad Request | textList data is empty | 不存在关键词名单。 | 先创建名单，再操作。 |
 | 400 | Bad Request | The textList already contains the text | 关键词重复。 | 去除重复关键词。 |
