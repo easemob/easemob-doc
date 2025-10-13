@@ -5,7 +5,7 @@
 - 创建关键词名单。
 - 关键词名单为增值服务，在 [文本审核规则](/product/moderation/moderation_rule_config.html#设置审核规则) 中应用。使用前，你需要开通 [文本审核服务](/product/moderation/moderation_enable.html), 配置 [文本审核规则](/product/moderation/moderation_rule_config.html#设置审核规则)，并开通 [关键词名单服务](/product/moderation/moderation_keyword#使用关键词审核)。
 - 创建的名单会在环信控制台的 **关键词名单** 列表（**即时通讯** > **内容审核** > **文本审核** > **关键词名单**）中展示。你可以在环信控制台编辑、删除名单或进行添加/删除关键词等操作。
-- 每个应用最多可配置 100 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 100,000 个词条。
+- 每个应用最多可配置 100 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 1,000,000 个词条。
 
 **调用频率上限**：100 次/秒/App Key 
 
@@ -176,7 +176,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list' \
 | 400 | Bad Request | The text count exceeds the maximum number | 关键词数量超过上限。 | 减少关键词数量。 |
 | 400 | Bad Request | The textList already exists | 关键词名单名称已存在。 | 修改关键词名单名称。 |
 | 400 | Bad Request | moderation org data is empty | 你未开通内容审核服务。 | 开通内容审核服务。 |
-| 400 | Bad Request | the number of words exceeds the limit | 应用下面的关键词总数超过上限。每个应用最多可配置 100 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 100,000 个词条。| 减少关键词数量。 |
+| 400 | Bad Request | the number of words exceeds the limit | 应用下面的关键词总数超过上限。每个应用最多可配置 100 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 1,000,000 个词条。| 减少关键词数量。 |
 | 400 | MODERATION_002 | "request param is empty | 若未设置必填参数，例如 `name` 或 `scope`，会提示该错误。 | 请传入必填参数。 |
 
 关于其他错误，你可以参考 [错误码页面](error.html) 了解可能的原因。
