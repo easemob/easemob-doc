@@ -4,7 +4,7 @@
 
 ## 概述
 
-环信即时通讯云支持回调功能，即会在事件发生之前或之后，环信 IM 服务器会以 HTTP POST 请求的形式向你的应用服务器发送通知。根据是否干预消息投递，回调分为两类：
+环信即时通讯 IM 支持回调功能，即会在事件发生之前或之后，环信 IM 服务器会以 HTTP POST 请求的形式向你的应用服务器发送通知。根据是否干预消息投递，回调分为两类：
 
 - **发送前回调**：旨在让 app 后台干预该事件的处理逻辑，环信服务器会根据响应中的返回值确定后续处理流程。**该类回调仅适用于从你的客户端应用发送的消息。**
 
@@ -12,7 +12,7 @@
 
 - **发送后回调**：旨在让 app 后台实现必要的数据同步，环信服务器忽略回调返回码。
 
-  发送后回调包括发送消息、发送消息已读回执、进行群组或聊天室操作、好友关系操作和用户状态变化等事件，详见[发送后回调过滤规则设置](/product/enable_and_configure_IM.html#配置回调规则)。
+  发送后回调包括发送消息、发送消息已读回执、进行群组或聊天室操作、好友关系操作和用户状态变化等事件，详见[发送后回调过滤规则设置](/product/console/basic_webhook.html#配置消息回调规则)。
 
 使用回调功能前，请查看你的产品套餐是否支持，详见 [增值服务费用](/product/pricing_policy.html#增值服务费用)。若不支持，你需首先在 [环信控制台](https://console.easemob.com/user/login)[开通该功能](/product/console/basic_webhook.html#消息回调-1)，然后 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 
@@ -42,7 +42,7 @@
 
    - 回调 ID：回调请求体中的 `callId` 参数。
 
-   - 环信服务器为回调规则生成的 secret：你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**消息回调**页面的回调规则列表中查看。
+   - 环信服务器为回调规则生成的 secret：你可以在[环信控制台](https://console.easemob.com/user/login)的**消息回调**页面的回调规则列表中查看。
 
     ![img](/images/product/callback_secret.png)
 

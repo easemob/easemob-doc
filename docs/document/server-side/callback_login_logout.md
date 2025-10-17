@@ -29,11 +29,11 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | :---------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 |
 | `reason`    | object   | `login`，用户登录。                                          |
-| `security`  | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`  | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [Console 后台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。 |
 | `os`        | String   | 设备类型。                                                   |
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
-| `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`    | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。 |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 登录请求到环信 IM 服务器的 Unix 时间戳，单位为 ms。          |
@@ -65,11 +65,11 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | :---------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
 | `reason`    | object   | 值为 `logout`，表示用户登出。                                    |
-| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 [Console 后台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。 |
 | `os`        | String   | 设备类型。                                                   |
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
-| `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`    | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。             |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 请求到环信 IM 服务器的 Unix 时间戳，单位为 ms。              |
@@ -101,11 +101,11 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | :---------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 |
 | `reason`    | object   | `replaced`，该用户登出，原因是被其他设备登录踢掉。           |
-| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见 [Console 后台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。 |
 | `os`        | String   | 设备类型。                                                   |
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
-| `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`    | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。  |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 请求到环信 IM 服务器的 Unix 时间戳，单位为毫秒 。              |

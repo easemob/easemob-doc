@@ -4,10 +4,6 @@
 
 本文展示如何调用环信即时通讯 RESTful API 实现离线推送，包括设置离线推送通知显示的昵称、推送通知方式及免打扰模式。调用以下方法前，请先参考 [接口频率限制](limitationapi.html) 了解即时通讯 RESTful API 的调用频率限制。
 
-:::tip
-若要使用离线推送的高级功能，即设置推送通知模式、免打扰模式和自定义推送模板，你需要在[环信即时通讯云控制后台](https://console.easemob.com/user/login)中点击你的应用后选择 **即时通讯** > **功能配置** > **功能配置总览** 开通离线推送高级功能。
-:::
-
 ## 公共参数
 
 以下表格列举了即时通讯 RESTful API 的公共请求参数和响应参数：
@@ -16,9 +12,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------------------ |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 
 ### 响应参数
 
@@ -29,7 +25,7 @@
 | `application`     | String | 环信即时通讯服务分配给每个 app 的唯一内部标识，开发者无需关注。                |
 | `uri`             | String | 请求 URL。                                                                     |
 | `timestamp`       | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                          |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
+| `applicationName` | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。                                     |
 
 ## 认证方式
@@ -854,24 +850,23 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 
 ## 使用推送模板
 
-你可以使用推送模板设置推送标题和内容。你可以调用以下 REST API 配置默认推送模板 `default` 和自定义推送模板。除此之外，你也可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+你可以使用推送模板设置推送标题和内容，即调用以下 REST API 配置默认推送模板 **default**、**detail** 和自定义推送模板。除此之外，你也可以在 [环信控制台](https://console.easemob.com/user/login)设置推送模板，详见 [推送模板配置文档](/document/android/push/push_template.html)。
 
-对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。
-
-使用推送模板有以下优势：
-
-1. 自定义修改环信服务端默认推送内容。   
-
-2. 接收方可以决定使用哪个模板。 
-
-3. 按优先级选择模板使用方式。
+推送模板的特点如下：
+1. 推送模板的优先级高于 [调用 API 设置通知栏的推送内容](push_display_attribute.html)。
+2. 实现自定义修改环信服务端默认推送内容。   
+3. 对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。
+4. 接收方可以决定使用哪个模板。 
+5. 按优先级选择模板使用方式： 
+   - 使用自定义推送模板的优先级高于默认推送模板。
+   - 若发送方发消息时设置了推送模板，接收方即使设置了推送模板，收到推送通知后也按照发送方设置的推送模板显示。
 
 **推送通知栏内容设置的使用优先级**
 
 通知栏中显示的推送标题和内容可通过以下方式设置，优先级为由低到高：
 
 1. 发送消息时使用默认的推送标题和内容：设置推送通知的展示方式 `notification_display_style`。推送标题为“您有一条新消息”，推送内容为“请点击查看”。  
-2. 发送消息时使用默认模板：若有默认模板 `default`，发消息时无需指定。
+2. 发送消息时使用默认模板：若有默认模板 **default** 和 **detail**，发消息时无需指定。
 3. 发送消息时使用扩展字段自定义要显示的推送标题和推送内容，即 `em_push_title` 和 `em_push_content`。
 4. 接收方设置了推送模板。
 5. 发送消息时通过消息扩展字段指定模板名称。
@@ -880,9 +875,9 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 
 #### 功能说明
 
-创建离线推送消息模板，包括默认模板 `default` 和自定模板。你可以通过[环信即时通讯云控制台](https://console.easemob.com/user/login)创建推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+创建离线推送消息模板，包括默认模板 **default**、**detail** 和自定义模板。你可以通过 [环信控制台](https://console.easemob.com/user/login) 创建推送模板，详见 [推送模板配置文档](/document/android/push/push_template.html#开通服务)。
 
-若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
+若使用默认模板 **default** 和 **detail**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
 
 **调用频率上限**：10 次/秒/App Key
 

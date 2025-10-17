@@ -251,7 +251,7 @@ const ChatContainer = () => {
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/chat_input_bar.png" title="会话列表页面" />
+  <ImageItem src="/images/uikit/chatuikit/web/chat_input_bar.png" title="消息输入框" />
 </ImageGallery>
 
 ### 实现发送自定义消息

@@ -12,8 +12,8 @@
 
 ## 前提条件
 
-- 有效的环信即时通讯 IM 开发者账号；
-- [创建环信即时通讯 IM 项目并获取 App Key](/product/enable_and_configure_IM.html)；
+- 有效的 [环信即时通讯 IM 开发者账号](/product/console/account_register.html#注册账号)；
+- 在环信控制台[创建应用](/product/console/app_create.html) 并 [获取 App Key](/product/console/app_manage.html#查看应用信息)；
 - [npm](https://www.npmjs.com/get-npm)；
 - SDK 支持 IE 9+、Firefox 10+、Chrome 54+ 和 Safari 6+。
 
@@ -59,7 +59,7 @@ Easemob_quickstart<br>
 
 ### 3. 创建用户
 
-在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 

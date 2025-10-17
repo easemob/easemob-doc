@@ -97,7 +97,7 @@ ChatUIKitSettings.enableMessageReply = false;
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
 1. 开启消息翻译特性。
 
@@ -135,7 +135,7 @@ ChatUIKitSettings.translateTargetLanguage = 'zh-Hans';
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
 单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了 `enableMessageReaction` 属性用于设置是否开启 `Reaction` 功能, 默认值为 `false`。要开启该功能，将该参数设置为 `true`。示例代码如下：
 
@@ -153,7 +153,7 @@ ChatUIKitSettings.enableMessageReaction = true;
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
 消息话题特性在 `ChatUIKitSettings.enableChatThreadMessage` 中提供开关，默认值为 `false`。要开启该特性，需将该参数设置为 `true`。
 
@@ -223,7 +223,7 @@ ChatUIKitSettings.enablePinMsg = false;
 
 输入状态指示功能指在单聊会话中实时显示会话的一方正在输入的状态，增强通讯互动的实时性。此功能有助于用户了解对方是否正在回复，从而优化沟通体验，提升对话流畅度。
 
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/product/typing_indication.html)。
+本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/product/solution_common/typing_indication.html)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_enable_ios.png" title="开启输入状态提示" />

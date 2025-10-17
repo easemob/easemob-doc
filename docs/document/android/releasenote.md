@@ -2,6 +2,27 @@
 
 <Toc />
 
+## 版本 V4.17.0 Dev 2025-9-25（开发版）
+
+### 新增特性 
+
+1. 长连接支持 WebSocket 协议。 
+2. `EMOptions` 新增 API 支持 WebSocket 私有部署:
+   - `EMOptions#setWebSocketServer`：设置 WebSocket 服务器地址。
+   - `EMOptions#getWebSocketServer`：获取设置的 WebSocket 服务器地址。
+   - `EMOptions#setWebSocketPort`：设置 WebSocket 服务器端口号。
+   - `EMOptions#getWebSocketPort`：获取设置的 WebSocket 服务器端口号。
+3. 主动退出账号时添加 logout 协议。
+
+### 优化
+
+- 支持 Google Play SDK Index 上检索到 SDK。
+- 更新 AOSL 库版本为 1.3.0。
+
+### 修复
+
+修复更新群组属性时影响群组头像问题。
+
 ## 版本 V4.16.0 Dev 2025-8-19（开发版）
 
 ### 修复
@@ -605,7 +626,7 @@
 - [IM SDK] 修改 OPPO 推送导致 SDK 偶现 ANR 异常的问题。
 - [IM CallKit] 修复发起语音通话时，若在对方接听前返回桌面，对方无法点击接听或挂断的问题。
 - [IM UIKit] 修复部分机型拍照后的图片旋转问题。
-- [IM SDK] 适配 Android 12，修复依赖环信即时通讯云 SDK 的 APK 在 Android 12 版本的部分手机上第一次安装后打开时出现异常弹框的问题。
+- [IM SDK] 适配 Android 12，修复依赖环信即时通讯 IM SDK 的 APK 在 Android 12 版本的部分手机上第一次安装后打开时出现异常弹框的问题。
 - [IM SDK] 修复某些场景下调用 `updateMessage` 方法导致的内存与数据库消息不一致问题。
 
 ## 版本 V3.9.7 Dev 2022-9-30

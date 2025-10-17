@@ -8,7 +8,7 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- 有效的 Easemob IM 开发者账号，并[获取 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 有效的 Easemob IM 开发者账号，并[获取 App Key](/product/console/app_manage.html#查看应用信息)。
 
 ## 创建项目
 

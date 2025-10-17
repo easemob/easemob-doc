@@ -1,6 +1,6 @@
 # 子区管理
 
-环信即时通讯 IM 提供多个接口实现子区管理，包括子区的创建、获取、修改和删除等。使用子区功能前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。
+环信即时通讯 IM 提供多个接口实现子区管理，包括子区的创建、获取、修改和删除等。使用子区功能前，你需要在[环信控制台](https://console.easemob.com/user/login)开通。
 
 单个 app 下的子区总数默认为 10 万，如需调整请联系商务。
 
@@ -8,10 +8,10 @@
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯 IM 管理后台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
 - 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 - 子区相关的限制，详见 [使用限制](limitation.html#子区)。
-- 已在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 已在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 ## 公共参数
 
@@ -19,9 +19,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述        |
 | :--------- | :----- | :------- | :--------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 | `group_id` | String | 是       | 群组 ID。    |
 | `username` | String | 是       | 用户 ID。             |
 
@@ -32,7 +32,7 @@
 | `action`          | String | 请求方法。                                                                     |
 | `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
 | `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
+| `applicationName` | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | String | 请求 URL。                                                                     |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
 | `entities`        | JSON   | 响应实体。                                                                     |
@@ -59,7 +59,7 @@
 
 - 分页获取应用下的子区列表。
 - 单个 app 下的子区总数默认为 10 万，如需调整请联系商务。
-- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 使用该接口前，你需要在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -142,7 +142,7 @@ curl -X GET https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToke
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | query param reaches limit. | 分页参数 `limit` 的值过大。   | 检查查询参数 `limit` 是否在取值范围（[1,50]）内。   |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信即时通讯控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -151,7 +151,7 @@ curl -X GET https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppToke
 #### 功能说明
 
 - 根据用户 ID 获取该用户加入的所有子区。
-- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 使用该接口前，你需要在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -244,7 +244,7 @@ curl -X GET https://XXXX/XXXX/XXXX/threads/user/test4 -H 'Authorization: Bearer 
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | query param reaches limit. | 分页参数 `limit` 的值过大。   | 检查查询参数 `limit` 是否在取值范围（[1,50]）内。   |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信即时通讯控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -253,7 +253,7 @@ curl -X GET https://XXXX/XXXX/XXXX/threads/user/test4 -H 'Authorization: Bearer 
 #### 功能说明
 
 - 根据用户 ID 获取该用户在指定群组中加入的所有子区。
-- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 使用该接口前，你需要在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -348,7 +348,7 @@ curl -X GET https://XXXX/XXXX/XXXX/threads/chatgroups/XXXX/user/XXXX -H 'Authori
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | query param reaches limit. | 分页参数 `limit` 的值过大。 | 检查查询参数 `limit` 是否在取值范围（[1,50]）内。  |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信即时通讯控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -358,7 +358,7 @@ curl -X GET https://XXXX/XXXX/XXXX/threads/chatgroups/XXXX/user/XXXX -H 'Authori
 
 - 群成员基于群组中的一条消息创建子区。该消息为子区的父消息。
 - 子区创建者即子区所有者。
-- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 使用该接口前，你需要在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 #### HTTP 请求
 
@@ -446,7 +446,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppTok
 | 403     | group_error | thread number has reached limit. | appKey 创建子区达到上限。 | 删除废弃的子区或者联系商务调整上限。单个 app 下的子区总数默认为 10 万。 |
 | 403     | group_error | user join thread reach limit. | 用户加入的子区达到上限。 | 退出不用的子区或者联系商务调整上限。单个用户默认最多可以加入 100,000 个子区。 |
 | 403     | group_error | msg already create thread.not allow to create. | 消息上已经创建子区。 | 传入其他消息 ID 或者查询该子区后加入。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信即时通讯控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
 | 404     | group_error | user not in group. | 子区所有者不在群里面。 | 输入已加入群的用户 ID。 |
 | 404     | group_error | msg not exist. | 消息不存在。 | 输入存在的消息 ID。 |
 | 404     | group_error | group not found. | 群组不存在。   | 检查创建子区的群组是否存在。 |
@@ -458,7 +458,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread -H 'Authorization: Bearer <YourAppTok
 #### 功能说明
 
 - 修改指定子区的名称。
-- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 使用该接口前，你需要在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -536,7 +536,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <Your
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | thread name limit reached. | 子区名称过长。 | 请提供长度范围内的子区名称。子区名称长度不能超过 64 个字符。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信即时通讯控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
 | 404     | group_error | thread not found. | 子区不存在。 | 输入正确的子区 ID。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -546,7 +546,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <Your
 #### 功能说明
 
 - 删除单个子区。
-- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 使用该接口前，你需要在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 **调用频率上限**：100 次/秒/App Key
 
@@ -617,7 +617,7 @@ curl -X DELETE https://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <Y
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信即时通讯控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
 | 404     | group_error | thread not found. | 子区不存在。 | 输入正确的子区 ID。|
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -631,7 +631,7 @@ curl -X DELETE https://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <Y
 #### 功能说明
 
 - 获取指定子区的成员列表。
-- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 使用该接口前，你需要在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 #### HTTP 请求
 
@@ -706,7 +706,7 @@ curl -X GET https://XXXX/XXXX/XXXX/thread/1XXXX7/users -H 'Authorization: Bearer
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | query param reaches limit. | 分页参数 `limit` 的值过大。 | 检查查询参数 `limit` 是否在取值范围内。  |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. |  子区功能未开通。 | 请在环信即时通讯控制台开通子区服务。 |
+| 403     | group_error | thread not open. |  子区功能未开通。 | 请在环信控制台开通子区服务。 |
 | 404     | group_error | thread not found. | 子区不存在。 | 输入正确的子区 ID。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -717,7 +717,7 @@ curl -X GET https://XXXX/XXXX/XXXX/thread/1XXXX7/users -H 'Authorization: Bearer
 
 - 用户批量加入指定的子区。
 - 每次最多支持 10 个用户加入子区。
-- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 使用该接口前，你需要在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 #### HTTP 请求
 
@@ -798,7 +798,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread/1XXXX7/users -d '{
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | request body reaches limit. | 请求 body 中的 `usernames` 参数的值已超过上限。 | 请检查请求 body 中的 `usernames` 参数的值是否超过了 10。每次最多支持 10 个用户加入子区。  |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信即时通讯控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
 | 403     | group_error | user join thread reach limit. | 用户加入的子区达到上限。 | 退出不用的子区或者联系商务调整上限。 |
 | 404     | group_error | thread not found. | 子区不存在 | 输入正确的子区 ID。 |
 
@@ -810,7 +810,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread/1XXXX7/users -d '{
 
 - 批量踢出子区成员。
 - 每次最多可踢出 10 个子区成员。
-- 使用该接口前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)开通子区功能。
+- 使用该接口前，你需要在[环信控制台](https://console.easemob.com/user/login)开通子区功能。
 
 #### HTTP 请求
 
@@ -896,6 +896,6 @@ curl -X DELETE https://XXXX/XXXX/XXXX/thread/1XXXX7/users -H 'Authorization: Bea
 | 400     | group_error | request body reaches limit. | 请求 body 中的 `usernames` 参数的值已超过上限。 | 请检查请求 body 中的 `usernames` 参数的值是否超过了 10。每次最多可踢出 10 个子区成员。   |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | group_error | thread not found. | 子区不存在 | 输入正确的子区 ID。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信即时通讯控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

@@ -2,7 +2,7 @@
 
 <Toc />
 
-利用环信单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
+利用环信单群聊 UIKit，你可以轻松实现单聊和群聊。本文介绍如何快速实现在单聊会话中发送消息。
 
 ## 前提条件
 
@@ -10,7 +10,7 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 已在[环信控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#查看应用信息)。
 
 ## 支持的浏览器
 
@@ -70,7 +70,7 @@ yarn add easemob-chat-uikit
 
 #### 使用 easemob-chat-uikit 组件构建应用
 
-在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
@@ -103,7 +103,7 @@ const ChatApp = () => {
           accessToken: accessToken,
         })
         .then((res) => {
-          // 创建会话
+          // 创建一个用于测试的单聊会话，如果创建群聊会话，请确保是真实群 ID。
           rootStore.conversationStore.addConversation({
             chatType: "singleChat", // 单聊和群聊分别为 'singleChat' 和 'groupChat'。
             conversationId: "userId", // 单聊为对端用户 ID，群聊为群组 ID。

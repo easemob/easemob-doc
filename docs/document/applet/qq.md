@@ -6,7 +6,7 @@
 
 ### 注册环信账号
 
-开发者需要在环信管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
+开发者需要在环信控制台 [注册并创建应用](/product/console/app_create.html)，来获取唯一 appKey，SDK 初始化时需要配置 appKey。
 
 ## 实现步骤
 
@@ -54,7 +54,7 @@ wss://im-api-wechat.easemob.com（3.0 IM SDK）
 | 美东 1 区     | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
 | 德国 2 区 | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
 
-应用所在数据中心可以在环信用户管理后台 > **即时通讯** > **服务概览**中查看：
+应用所在数据中心可以在环信控制台的 **应用概览** 页面中查看：
 
 ![img](/images/applet/service_overview.png)
 

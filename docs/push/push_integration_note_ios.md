@@ -4,7 +4,7 @@
 
 ## iOS SDK 使用须知
 
-使用 SDK 之前，你需先创建应用，获取应用的唯一标识 App Key，请参见[创建应用](/product/enable_and_configure_IM.html#创建应用)。
+使用 SDK 之前，你需先创建应用，获取应用的唯一标识 App Key，请参见[创建应用](/product/console/app_create.html)。
 
 环信推送分为在线推送和远程推送，远程推送时通过 APNS 下发，所以你需要配置应用对应的证书，请参见[APNS 推送配置](/document/ios/push/push_apns.html#上传推送证书)。
 
@@ -95,8 +95,8 @@ demo 中的 SDK 文件夹为 **Hyphenate SDK**，将 SDK 文件夹拖入到工�
 ```
 
 调用的 SDK 接口参数解释如下：
-- App Key: 区别 APP 的标识，请参考[开发者注册及管理后台](https://docs-im.easemob.com/im/quickstart/guide/experience#注册并创建应用)。
-- apnsCertName: iOS 中推送证书名称，请参考[制作与上传推送证书](https://docs-im.easemob.com/im/ios/apns/deploy)。
+- App Key: 区别 APP 的标识，请参考 [环信控制台文档](/product/console/app_manage.html#获取应用凭证)。
+- apnsCertName: iOS 中推送证书名称，请参考 [创建推送证书](/document/ios/push/push_apns.html#创建推送证书) 和 [上传推送证书](/document/ios/push/push_apns.html#上传推送证书)。
 
 ### SDK 登录流程
 

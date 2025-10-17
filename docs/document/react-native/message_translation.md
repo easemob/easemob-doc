@@ -13,7 +13,7 @@
 
 1. 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 开通翻译功能。
+3. 已在 [环信控制台](https://console.easemob.com/user/login) 开通翻译功能。
 4. 该功能由 Microsoft Azure Translation API 提供，因此开始前请确保你了解该功能支持的目标语言。详见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
 
 ## 技术原理

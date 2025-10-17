@@ -185,6 +185,7 @@ export const zhSidebar = sidebar({
       collapsible: true,
       children: [
         { text: "注册账号", link: "console/account_register.html" },
+        { text: "实名认证", link: "console/real_name_authentication.html" },
         { text: "应用管理", 
             collapsible: true,
             children: [
@@ -217,33 +218,9 @@ export const zhSidebar = sidebar({
              text: "配置增值功能",
              collapsible: true,
              children: [
-             {
-             text: "内容审核",
-             collapsible: true,
-             children: [
-             { text: "数据总览", link: "console/moderation_data_overview.html" },
-             { text: "规则配置", link: "console/moderation_rule_config.html" },
-             { text: "规则测试", link: "console/moderation_rule_test.html" },
-             { text: "历史记录", link: "console/moderation_history.html" },
-             { text: "关键词名单", link: "console/moderation_keyword.html" },
-             { text: "审核记录导出", link: "console/moderation_history_export.html" },
-             { text: "消息举报", link: "console/moderation_message_report.html" },
-             { text: "标签管理", link: "console/moderation_user_tag.html" },
-             ],
-            },
-             {
-             text: "即时推送",
-             collapsible: true,
-             children: [
-             { text: "用户管理", link: "console/push_user.html" },
-             { text: "证书管理", link: "console/push_certificate_config.html" },
-             { text: "模板管理", link: "console/push_template.html" },
-             { text: "创建推送", link: "console/push_task_create.html" },
-             { text: "推送任务", link: "console/push_task.html" },
-             { text: "标签管理", link: "console/push_tag_mgmt.html" },
-             { text: "推送统计", link: "console/push_statistics.html" },
-             ],
-            },
+             { text: "内容审核", link: "console/value_added_config_moderation.html" },
+            { text: "即时推送", link: "console/value_added_config_push.html" },
+            { text: "实时音视频", link: "console/value_added_config_rtc.html" },
              ],
             },
           ],

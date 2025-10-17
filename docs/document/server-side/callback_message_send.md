@@ -15,7 +15,7 @@
 | `payload`         | object | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。      |
 | `securityVersion` | String | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。                   |
 | `security`        | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 Console 后台回调规则。     |
-| `appkey`          | String | 你在环信管理后台注册的应用唯一标识。        |
+| `appkey`          | String | 你在环信控制台注册的应用唯一标识。        |
 | `host`            | String | 服务器名称。              |
 | `content_type`            | String | 消息类型：<br/> - `chat:user:*`：单聊消息  <br/> - `chat:group:*`：群组消息   <br/> - `chat:room:*`：聊天室消息  <br/>  文本、图片、音视频等消息对应的参数值，详见[发送单聊消息](#发送单聊消息)、[发送群组消息](#发送群组消息)和[发送聊天室消息](#发送聊天室消息)章节。   |
 

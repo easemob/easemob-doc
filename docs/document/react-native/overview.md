@@ -6,7 +6,7 @@
 
 ## 前提条件
 
-开始前，请注册有效的环信即时通讯 IM 开发者账号和取得 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+开始前，请注册有效的环信即时通讯 IM 开发者账号和取得 App key，见 [环信控制台](https://console.easemob.com/user/login)。
 
 ## 集成环境
 
@@ -75,7 +75,7 @@ ChatClient.getInstance()
 
 ### 控制台注册
 
-通过控制台注册用户，详见[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+通过控制台注册用户，详见[创建 IM 用户](/product/console/operation_user.html#创建用户)。
 
 ### REST API 注册
 
@@ -83,7 +83,7 @@ ChatClient.getInstance()
 
 ### SDK 注册
 
-若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
+若支持 SDK 注册，需登录[环信控制台](https://console.easemob.com/user/login)，选择 **功能配置 > 基础功能** > **用户**，将 **用户注册模式** 设置为 **开放注册**。
 
 ```typescript
 ChatClient.getInstance()

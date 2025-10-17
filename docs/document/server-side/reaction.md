@@ -13,7 +13,7 @@
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
 - 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 - 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 - 已在 [环信控制台](https://console.easemob.com/user/login) 开通 Reaction 功能。
@@ -24,9 +24,9 @@
 
 | 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
 | :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 
 ## 认证方式
 
@@ -131,7 +131,7 @@ curl -g -X POST 'https://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H
 
 | HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 处理建议        |
 |:---------|:--------------------|:-----------|:----------|:------------|
-| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction 功能未开通。 | 请在环信即时通讯控制台开通 Reaction 服务。 |
+| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction 功能未开通。 | 请在环信控制台开通 Reaction 服务。 |
 | 400      | Bad Request         | The quantity has exceeded the limit!  | 一条消息上的 Reaction 数量达到上限。| 每条消息默认可添加 20 个 Reaction。若需提升该上限，需联系环信商务。|
 | 400      | Bad Request                | the user operation is illegal!                      | 不是会话双方。 | 只有会话双方才能操作 Reaction。       |
 | 400      | Bad Request                | the user is already operation this message                      | 同一个用户重复添加相同的 Reaction。 | 同一用户不能重复添加相同的 Reaction。      |
@@ -328,7 +328,7 @@ curl -g -X DELETE 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz?m
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因                     | 处理建议        |
 | :----------- | :--- | :------------- |:-------------------------|:------------|
 | 400     | Bad Request   | the user operation is illegal!        | 传入的用户 ID 没有操作过该 Reaction。 | 传入正确的用户 ID。 |
-| 400      | Bad Request  | this appKey is not open reaction service!   | Reaction 服务未开通。 | 请在环信即时通讯控制台开通 Reaction 服务。 |
+| 400      | Bad Request  | this appKey is not open reaction service!   | Reaction 服务未开通。 | 请在环信控制台开通 Reaction 服务。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 

@@ -59,7 +59,7 @@ post_install do |installer|
 end
 ```
 
-2. 在终端使用 cd 命令到 `podfile` 所在文件夹目录执行以下命令：
+2. 在终端使用 cd 命令到 `Example` 目录，执行以下命令：
 
 ```
 pod install

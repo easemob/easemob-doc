@@ -68,7 +68,7 @@
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
 1. 开启消息翻译特性。
 
@@ -98,7 +98,7 @@
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
 单群聊 UiKit 的 `ContainerProps` 对象中提供了 `enableReaction` 属性用于设置是否开启 `Reaction` 功能, 默认值为 `false`。要开启该功能，将该参数设置为 `true`。
 
@@ -112,7 +112,7 @@
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
 消息话题特性在 `ContainerProps.enableThread` 中提供开关，默认值为 `false`。要开启该特性，需将该参数设置为 `true`。
 
@@ -205,7 +205,7 @@ export function App() {
 
 #### 自定义输入状态指示 UI
 
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/product/typing_indication.html)。
+本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/product/solution_common/typing_indication.html)。
 
 如果需要自定义正在输入组件样式，需要自定义聊天页面组件的导航栏组件，可以参考 `ConversationDetailNavigationBar` 组件。
 

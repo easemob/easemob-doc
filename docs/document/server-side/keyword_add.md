@@ -3,7 +3,7 @@
 ## 功能说明
 
 - 添加关键词。
-- 每个应用最多可配置 10 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 100,000 个词条。
+- 每个应用最多可配置 100 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 1,000,000 个词条。
 
 **调用频率上限**：100 次/秒/App Key 
 
@@ -11,7 +11,7 @@
 
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
 - 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 - 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
@@ -33,9 +33,9 @@ POST https://{host}/{org_name}/{app_name}/moderation/text/list/{list_id}/word/ba
 
 | 参数          | 类型   | 是否必需 | 描述  |
 | :------------ | :----- | :------- | :---------------- |
-| `host`        | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name`    | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name`    | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`        | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
+| `org_name`    | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+| `app_name`    | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 | `list_id`    | String | 是       | 关键词名单 ID。将关键词添加到该名单中。  |
 
 ### 请求 header
@@ -164,7 +164,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/{list_id}/word/batch' 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 400 | Bad Request | The text count exceeds the maximum number | 关键词数量超限。 | 减少关键词数量。每个名单最多可添加 10,000 个关键词，每个应用最多可配置 100,000 个词条。|
+| 400 | Bad Request | The text count exceeds the maximum number | 关键词数量超限。 | 减少关键词数量。每个名单最多可添加 10,000 个关键词，每个应用最多可配置 1,000,000 个词条。|
 | 400 | Bad Request | request data is empty | 新增名单为空。 | 添加关键词名单。 |
 | 400 | Bad Request | textList data is empty | 不存在关键词名单。 | 先创建名单，再操作。 |
 | 400 | Bad Request | The textList already contains the text | 关键词重复。 | 去除重复关键词。 |

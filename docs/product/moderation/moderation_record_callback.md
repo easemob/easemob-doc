@@ -4,18 +4,19 @@
 
 审核记录支持回调，具体操作步骤如下：
 
-1. 登录环信后台，进入**即时通讯 > 功能配置 > 消息回调**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)。 
+2. 选择 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
+   
+   ![img](/images/console/app_mgmt_list.png)
 
-![img](/images/moderation/moderation_callback_01.png)
+3. 在左侧导航栏，选择 **功能配置** > **基础功能**。   
+4. 在 **消息回调** 页面，点击 **添加回调规则**。
+   
+   ![img](/images/console/moderation_callback_add.png)
 
-2. 点击添加回调地址，选择**发送后回调**。
+5. 点击 **发送后回调**，在 **回调类型** 选择框中勾选 **内容审核**，选择 **审核通过**、**审核疑似** 和 **审核拦截**。
 
-![img](/images/moderation/moderation_callback_02.png)
-
-3. 勾选 **内容审核**，其他字段的设置详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
-
-![img](/images/moderation/moderation_callback_03.png)
-
+![img](/images/console/moderation_callback.png)
 
 ## 审核回调内容
 
@@ -51,7 +52,7 @@
 | callId | String| 回调的标识。格式为 {appkey}_{uuid}，其中 UUID 为随机生成，作为每条回调的唯一标识。|
 | moderationResult  | String  | 消息处理结果：<br/> - `PASS`：通过，直接下发消息；<br/> - `REJECT`：拒绝下发；<br/> - `EXCHANGE`：替换消息中的违规内容；<br/> - `RECALL`：撤回发送的音频和视频。 |
 | providerResult | String | 审核结果：<br/> - `PASS`：消息中不包含违规内容；<br/> - `REVIEWED`：消息中疑似包含违规内容；<br/> - `REJECT`：消息存在违规内容。|
-| security       | String | 签名，格式如下: MD5（callId+Secret+timestamp），其中 Secret 详见[环信 IM 管理后台](https://console.easemob.com/user/login)的回调规则。 |
+| security       | String | 签名，格式如下: MD5（callId+Secret+timestamp），其中 Secret 详见[环信控制台](https://console.easemob.com/user/login)的回调规则。 |
 | messageType       | String | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `custom`：自定义消息。   |
 | messageId       | String  | 消息 ID。   |
 | targetType       | String | 会话类型。<br/> - `chat`：单聊；<br/> - `groupchat`：群聊；<br/> - `chatroom`：聊天室。  |

@@ -2,6 +2,52 @@
 
 <Toc />
 
+## 版本 1.11.5 2025-10-09
+
+适配 Android 15 的 16 KB 页面大小。
+
+## 版本 1.11.4 2025-9-15
+
+- 修复文件之间循环引用问题。
+
+## 版本 1.11.3 2025-7-15
+
+- 修复缺失的功能：是否在聊天的禁言列表。
+
+## 版本 1.11.2 2025-6-15
+
+- 修复 Android 平台搜索历史消息的数据转换问题。
+
+## 版本 1.11.1 2025-5-10
+
+- 修复 iOS 平台 会话类型的数据转换问题。
+
+## 版本 1.11.0 2025-4-15
+
+- 依赖的原生 SDK 升级到版本（`iOS` 4.15.1 和 `Android` 4.15.2）。
+- 更新修改消息：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以修改消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持修改扩展信息。
+- 图片消息新增对 `gif` 格式图片的支持。详见 `ChatImageMessageBody` 类型。
+- 更新创建群组接口：作废 `createGroup`, 新增 `createGroupEx` 接口替换，新接口支持自定义群头像。
+- 附件类型消息支持鉴权，默认不开启，如果开启，需要调用下载相关接口下载附件。详见 `_ChatFileMessageBody.secret`。
+- 支持拉取漫游消息时，只拉取指定的群成员发送的消息。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。
+- 支持加载本地会话消息时，只加载指定群成员发送的消息。详见 `getMsgsWithMsgType` 接口。
+- 新增群组接口，`fetchMemberInfoListFromServer`, 获取群成员列表时包括成员角色和入群时间。
+- 新增群组接口，`updateGroupAvatar`，更新群组头像。
+- 更新登录 token 过期提醒机制，由原来有效期时间的 50% 的时候提示，修改为 80% 的时候提示。
+- 修改撤销消息，支持群组管理员、创建者、聊天室创建者撤回用其他用户消息。
+- 修改群组成员通知事件，由原来每个成员进入退出都需要通知，修改为一次性通知。详见 `ChatGroupEventListener` 类型 `onMembersJoined` 和 `onMembersExited` 方法，原来 `onMemberJoined` 和 `onMemberExited` 作废。
+- 新增搜索消息接口 `getConvsMsgsWithKeyword`, 通过关键字在本地 搜索指定会话列表的消息 ID 列表。
+- 新增搜索消息接口 `getMessagesWithIds`, 消息 ID 列表在本地搜索消息。
+- 更新搜索消息接口 `getConvMsgsWithKeyword`, 作废 `sender` 参数、新增 `senders` 参数。
+
+## 版本 1.8.2 2025-3-15
+
+- 修复使用 react-native 0.77、0.78、0.79 和 0.80 版本的应用集成 Chat SDK 无法编译通过的问题。
+
+## 版本 1.8.1 2025-2-15
+
+- 使用接口 `fetchGroupInfoWithoutMembersFromServer` 替换 `fetchGroupInfoFromServer`。
+
 ## 版本 V1.8.0 2025-1-17
 
 ### 新增特性
@@ -284,7 +330,7 @@
 
 - 修复极端情况下 SDK 崩溃的问题。
 - 修复某些场景下调用 `updateMessage` 方法导致的内存与数据库中的消息不一致问题。
-- 适配 Android 12，修复依赖环信即时通讯云 SDK 的 APK 在 Android 12 版本的部分手机上第一次安装后打开时出现异常弹框的问题。
+- 适配 Android 12，修复依赖环信即时通讯 IM SDK 的 APK 在 Android 12 版本的部分手机上第一次安装后打开时出现异常弹框的问题。
 
 ## 版本 V1.0.10 Dev 2022-10-13
 
@@ -404,7 +450,7 @@
 
 具体集成请参考以下文档：
 
-- [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
+- [创建应用](/product/console/app_create.html)
 - [环信即时通讯 IM React-Native 快速开始](quickstart.html)
 - [消息管理 React Native](message_overview.html)
 - [群组](group_overview.html)

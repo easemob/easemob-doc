@@ -61,6 +61,8 @@ react-native-safe-area-context \
 react-native-video
 ```
 
+*react-native-audio-recorder-player 这个三方库已经过期，但是它推荐的三方库目前问题较多，所以，建议继续使用该三方库，版本小于 3.6.14*
+
 ## 第四步 添加权限
 
 添加必要的应用权限。
@@ -216,8 +218,8 @@ export default function App(): React.JSX.Element {
 
 在 [环信控制台](https://console.easemob.com/) 获取 App Key 和用户 ID 和 token，然后填入配置选项：
 
-- 在 **应用详情** 页面 [获取 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
-- 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/enable_and_configure_IM.html#创建-im-用户)。
+- 在 **应用概览** 页面 [获取 App Key](/product/console/app_manage.html#查看应用信息)。
+- 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 ```tsx
 const appKey = "<your app key>";
