@@ -249,6 +249,7 @@ export const zhNavbar = navbar([
     text: '即时推送',
     link: '/push/push_overview.html'
   },
+  */
   {
     text: '增值扩展',
       children: [
@@ -258,7 +259,6 @@ export const zhNavbar = navbar([
         { text: '即时推送', link: '/push/push_overview.html'}
       ]
   },
-  */
   // {
   //   text: "私有部署",
   //   children: [
