@@ -162,7 +162,7 @@ export const zhSidebar = sidebar({
       children: [
         { text: "安全最佳实践", link: "security_best_practices.html" },
         { text: "GDPR 安全合规", link: "GDPR.html" },
-        {text: "SDK合规使用说明", link:"https://www.easemob.com/news/privacy"}
+        {text: "SDK合规使用说明", link:"https://www.easemob.com/news/privacy"},
       ],
     },
     // {
@@ -265,8 +265,7 @@ export const zhSidebar = sidebar({
              ],
             },
           ],
-        },
-        
+        }, 
       ],
     },
     // {
