@@ -17,7 +17,6 @@ export const zhSidebar = sidebar({
         { text: "购买指引", link: "pricing_method.html" },
       ],
     }, 
-    { text: "应用场景", link: "application_scenario.html" },
     { text: "功能介绍", 
       collapsible: true,
       children: [

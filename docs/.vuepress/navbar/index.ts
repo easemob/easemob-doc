@@ -241,7 +241,7 @@ export const zhNavbar = navbar([
     ]
   },
   */
- {
+ /*{
     text: '内容审核',
     link: '/product/moderation_overview.html'
   },
@@ -258,6 +258,7 @@ export const zhNavbar = navbar([
         { text: '即时推送', link: '/push/push_overview.html'}
       ]
   },
+  */
   // {
   //   text: "私有部署",
   //   children: [

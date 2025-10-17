@@ -116,7 +116,7 @@ const documentSidebar = [
           { text: '小米推送', link: 'push/push_xiaomi.html', only: ['android'] }, 
           { text: '魅族推送', link: 'push/push_meizu.html', only: ['android'] }, 
           { text: 'APNs 推送', link: 'push/push_apns.html', only: ['ios'] }, 
-          { text: 'HarmonyOS 推送', link: 'push/push_harmony.html', only: ['harmonyos'] }
+          { text: 'HarmonyOS 推送', link: 'push/push_harmony.html', only: ['harmonyos'] },
           ]
         }, 
         { text: '上传推送证书', link: 'push/push_easemob_console.html', only: ['react-native'] },
@@ -160,10 +160,8 @@ const documentSidebar = [
           { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
           { text: '推送消息分类', link: 'push/push_message_classification.html', only: ['android'] },
           { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
-        ]
-      },
-    ],
-    except: ['applet','server-side']
+        ],
+        except: ['applet','server-side']
   },
   { text: '错误码', link: 'error.html', except: ['server-side', 'applet']},
   { text: 'API 参考', link: 'apireference.html', except: ['server-side', 'applet']},
