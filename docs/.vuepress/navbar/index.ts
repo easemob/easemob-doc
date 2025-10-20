@@ -251,7 +251,7 @@ export const zhNavbar = navbar([
   },
   */
   {
-    text: '增值扩展',
+    text: '增值服务',
       children: [
         { text: '内容审核', link: '/value-added/moderation/moderation_overview.html'},
         { text: '实时音视频', link: '/callkit/android/product_activation.html'},
