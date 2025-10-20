@@ -255,7 +255,7 @@ export const zhNavbar = navbar([
       children: [
         { text: '内容审核', link: '/value-added/moderation/moderation_overview.html'},
         { text: '实时音视频', link: '/callkit/android/product_activation.html'},
-        { text: '消息翻译', link: '/value-added/translation/message_translation_android.html'},
+        { text: '消息翻译', link: '/document/android/message_translation.html'},
         { text: '即时推送', link: '/value-added/push/push_overview.html'}
       ]
   },
