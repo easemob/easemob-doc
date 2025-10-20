@@ -41,7 +41,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups'  \
  }' 
 ```
 
-### 请求 body 参数
+## 请求 body 参数
 
 - 关于请求 Header 的说明，详见 [请求结构介绍](overview.html#请求结构)。
 - 请求 body 中的参数说明如下表所示：
@@ -78,7 +78,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups'  \
 }
 ```
 
-### 响应 body 字段
+## 响应 body 字段
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功。响应体中的 `data` 参数说明如下表所示：
 

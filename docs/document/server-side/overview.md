@@ -1,10 +1,10 @@
-# 环信即时通讯 REST API 概览
+# 服务端 API 概览
 
 <Toc />
 
-环信即时通讯通过 REST 平台提供 REST API，你可以通过你的业务服务器向环信 REST 服务器发送 HTTP 请求，在服务端实现实时通信。
+环信即时通讯通过 REST 平台提供服务端 API，你可以通过你的业务服务器向环信 REST 服务器发送 HTTP 请求，在服务端实现实时通信。
 
-另外环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，具体参见：[Java Server SDK](java_server_sdk.html)。
+另外环信 Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理能力，具体参见 [Java Server SDK](java_server_sdk.html)。
 
 ## REST 平台架构
 
@@ -22,13 +22,6 @@
 
 ![img](/images/server-side/prepare_to_use_api.png)
 
-## 前提条件
-
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
-
-- 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
-- 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-
 ## 请求结构
 
 ### 认证方式
@@ -39,7 +32,7 @@
 
 为提高项目的安全性，环信即时通讯使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。
 
-## 请求域名
+### 请求域名
 
 环信不同数据中心的 REST API 请求域名 {host}：
 
@@ -64,6 +57,13 @@
 
 所有的请求 URL 和请求包体内容都是区分大小写的。
 
-## REST API 概览
+## 服务端 API 列表
 
 关于各 REST API 的方法、接口 URL、简要介绍以及调用频率上限，详见 [Restful API 调用频率限制](/product/limitationapi.html)。
+
+## API 调用前提
+
+要调用环信即时通讯 RESTful API，请确保满足以下要求：
+
+- 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
+- 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
