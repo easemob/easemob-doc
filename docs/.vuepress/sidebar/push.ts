@@ -1,15 +1,14 @@
 export const PUSH_SIDEBAR = [
     {
       text: '产品介绍',
+      collapsible: true,
       children: [
         { text: '产品概述', link: 'push_overview.html' },
         { text: '产品动态', collapsible: true, children: [
           { text: '产品功能动态', link: 'push_dynamics.html' },
-          { text: 'Android SDK 发布动态', link: 'push_dynamics_android.html' },
-          { text: 'iOS SDK 发布动态', link: 'push_dynamics_ios.html' },
+          { text: 'Android/iOS SDK 发布动态', link: 'push_dynamics_sdk.html' },
         ]},
         { text: '全球化部署', link: 'push_global_deployment.html' },
-        { text: '接口频率限制', link: 'push_api_call_limitation.html' },
       ]
     },
     { text: '产品定价', link: 'push_billing.html' },
@@ -49,6 +48,7 @@ export const PUSH_SIDEBAR = [
       text: '服务端 REST',
       collapsible: true,
       children: [
+        { text: '服务端 API 概览', link: 'push_api_call_limitation.html' },
         { text: '推送标签管理', link: 'push_by_tag.html' },
         { text: '发送推送通知', link: 'push_send_notification.html' },
         { text: '配置推送通知', link: 'push_notification_config.html' },
