@@ -21,7 +21,7 @@ export const MODERATION_SIDEBAR = [
         { text: "历史记录", link: "/value-added/moderation/moderation_history.html" },
         { text: "消息举报", link: "/value-added/moderation/moderation_message_report.html" },
         { text: "关键词审核", link: "/value-added/moderation/moderation_keyword.html" },
-        { text: "标签管理", link: "/value-added/moderation_user_tag.html" },
+        { text: "标签管理", link: "/value-added/moderation/moderation_user_tag.html" },
         { text: "消息审核机制", link: "/value-added/moderation/moderation_mechanism.html"},
         {
           text: "进阶功能",
@@ -32,7 +32,7 @@ export const MODERATION_SIDEBAR = [
               link: "/value-added/moderation/moderation_record_callback.html",
             },
             {
-              text: "消息人工审核",
+              text: "群组/聊天室人工审核",
               link: "/value-added/moderation/moderation_manual_review.html",
             },
             { text: "用户管理", link: "/value-added/moderation/moderation_usermgmt.html" },
