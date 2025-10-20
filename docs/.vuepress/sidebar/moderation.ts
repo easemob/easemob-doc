@@ -19,10 +19,10 @@ export const MODERATION_SIDEBAR = [
         { text: "规则测试", link: "/value-added/moderation/moderation_rule_test.html" },
         { text: "数据总览", link: "/value-added/moderation/moderation_data_overview.html" },
         { text: "历史记录", link: "/value-added/moderation/moderation_history.html" },
+        { text: "消息审核机制", link: "/value-added/moderation/moderation_mechanism.html"},
         { text: "消息举报", link: "/value-added/moderation/moderation_message_report.html" },
         { text: "关键词审核", link: "/value-added/moderation/moderation_keyword.html" },
         { text: "标签管理", link: "/value-added/moderation/moderation_user_tag.html" },
-        { text: "消息审核机制", link: "/value-added/moderation/moderation_mechanism.html"},
         {
           text: "进阶功能",
           collapsible: true,
