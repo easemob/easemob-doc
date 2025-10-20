@@ -27,6 +27,7 @@ export const PUSH_SIDEBAR = [
     },
     {
       text: 'Android 接入',
+      collapsible: true,
       children: [
         { text: '推送集成说明', link: 'push_integration_note_android' },
         { text: '推送集成过程', link: 'push_integration_process_android' },
@@ -37,6 +38,7 @@ export const PUSH_SIDEBAR = [
     },
     {
       text: 'iOS 接入',
+      collapsible: true,
       children: [
         { text: '推送集成说明', link: 'push_integration_note_ios' },
         { text: '推送集成过程', link: 'push_integration_process_ios' },
@@ -45,6 +47,7 @@ export const PUSH_SIDEBAR = [
     },
     {
       text: '服务端 REST',
+      collapsible: true,
       children: [
         { text: '推送标签管理', link: 'push_by_tag.html' },
         { text: '发送推送通知', link: 'push_send_notification.html' },
