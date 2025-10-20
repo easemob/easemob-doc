@@ -1,3 +1,5 @@
+import { TreeOptionsEnum } from "element-plus/lib/components/tree-v2/src/virtual-tree.js";
+
 export const TRANSLATION_SIDEBAR = [
 { text: 'Android', link: '/value-added/translation/message_translation_android.html' },
 { text: 'iOS', link: '/value-added/translation/message_translation_ios.html' },
@@ -7,10 +9,9 @@ export const TRANSLATION_SIDEBAR = [
 { text: 'React Native', link: '/value-added/translation/message_translation_react-native.html' },
 { text: 'Unity', link: '/value-added/translation/message_translation_unity.html' },
 { text: 'Windows', link: '/value-added/translation/message_translation_windows.html' },
-{ text: '服务端', link: '/value-added/translation/message_translation_android.html' },
 {
               text: "服务端",
-              collapsible: false,
+              collapsible: true,
               children: [
                 {
                   text: "翻译消息内容",

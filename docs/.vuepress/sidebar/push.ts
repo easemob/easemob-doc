@@ -12,14 +12,10 @@ export const PUSH_SIDEBAR = [
         { text: '接口频率限制', link: 'push_api_call_limitation.html' },
       ]
     },
-    {
-      text: '产品定价',
-      children: [
-        { text: '计费说明', link: 'push_billing.html' },
-      ]
-    },
+    { text: '产品定价', link: 'push_billing.html' },
     {
       text: '快速入门',
+      collapsible: true,
       children: [
         { text: '创建产品及应用', link: 'push_createproduct_app.html' },
         { text: '创建推送', link: 'push_task_create.html' },
