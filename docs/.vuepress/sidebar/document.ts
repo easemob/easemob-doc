@@ -390,17 +390,17 @@ const documentSidebar = [
         text: '管理群组公告', 
          collapsible: true,
          children: [
-          {text: '获取群组公告', link: 'group_create.html' }, 
-          {text: '修改群组公告', link: 'group_create.html' }, 
+          {text: '获取群组公告', link: 'group_announcement_obtain.html' }, 
+          {text: '修改群组公告', link: 'group_announcement_modify.html' }, 
          ], 
       },
       { text: '管理群组共享文件', 
         collapsible: true,
         children: [
-          { text: '获取群组共享文件', link: 'group_create.html' },
-          { text: '上传群组共享文件', link: 'group_create.html' },
-          { text: '下载群组共享文件', link: 'group_create.html' },
-          { text: '删除群组共享文件', link: 'group_create.html' },
+          { text: '获取群组共享文件', link: 'group_shared_file_obtain.html' },
+          { text: '上传群组共享文件', link: 'group_shared_file_upload.html' },
+          { text: '下载群组共享文件', link: 'group_shared_file_download.html' },
+          { text: '删除群组共享文件', link: 'group_shared_file_delete.html' },
         ]  
       },
       { text: '拉人入群', link: 'group_member_allowlist.html' },

@@ -44,7 +44,7 @@ POST https://{host}/{org_name}/{app_name}/users
 
 ![img](/images/server-side/app_info.png)
 
-### 请求 Header
+### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :----------------- | :-------------------- |
