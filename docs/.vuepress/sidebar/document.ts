@@ -371,19 +371,19 @@ const documentSidebar = [
         text: '获取群组', 
          collapsible: true,
          children: [
-          {text: '获取 App 中的群组', link: 'group_member_add_delete.html' }, 
-          {text: '获取用户加入的群组', link: 'group_member_admin.html' }, 
-          {text: '获取群组详情', link: 'group_member_obtain.html' }, 
+          {text: '获取 App 中的群组', link: 'group_obtain_total.html' }, 
+          {text: '获取用户加入的群组', link: 'group_obtain_joined.html' }, 
+          {text: '获取群组详情', link: 'group_obtain_detail.html' }, 
          ], 
       },
       { 
         text: '管理群组', 
          collapsible: true,
          children: [
-          {text: '修改群组详情', link: 'group_create.html' }, 
-          {text: '封禁群组', link: 'group_create.html' }, 
-          {text: '解禁群组', link: 'group_create.html' }, 
-          {text: '解散群组', link: 'group_create.html' }, 
+          {text: '修改群组详情', link: 'group_modify.html' }, 
+          {text: '封禁群组', link: 'group_ban.html' }, 
+          {text: '解禁群组', link: 'group_unban.html' }, 
+          {text: '解散群组', link: 'group_delete.html' }, 
          ], 
       },
       { 
@@ -451,7 +451,7 @@ const documentSidebar = [
               { text: '获取黑名单列表', link: 'group_create.html' },
             ]  
           },
-          { text: '查看用户是否加入群组', link: 'group_create.html' },
+          { text: '查看用户是否加入群组', link: 'group_check_joined.html' },
           { 
             text: '管理群成员自定义属性', 
             collapsible: true,

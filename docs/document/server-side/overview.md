@@ -24,27 +24,37 @@
 
 ## 请求结构
 
-### 认证方式
+### 请求 URL
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+例如，注册用户的请求 URL 如下所示：
 
-`Authorization: Bearer YourAppToken`
+```http
+POST https://{host}/{org_name}/{app_name}/users
+```
 
-为提高项目的安全性，环信即时通讯使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。
+每个请求 URL 均包括 `host`、`org_name` 和 `app_name` 参数。
 
-### 请求域名
+| 参数       | 类型   | 是否必需 | 描述         |
+| :--------- | :----- | :------- | :------------------------- |
+| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。<br/> - 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。请根据您所在数据中心选择请求域名。<br/> - 国内 VIP 区、客服专区客户请联系商务经理获得 REST API 请求地址。<br/> -  支持 HTTP 和 HTTPS。|
+| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。 |
+| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。|
 
-环信不同数据中心的 REST API 请求域名 {host}：
+你可以在环信控制台的 **应用概览** 页面查看应用的域名 `host`、组织名称 `org_name` 和 应用名称 `app_name`。
 
-应用所在数据中心可以在环信控制台的应用列表找到对应的 App Key，点击 **管理**，在 **应用概览** 中查看：
+![img](/images/server-side/app_info.png)
 
-![img](/images/applet/service_overview.png)
+### 请求 Header
 
-:::tip
-1. 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。请根据您所在数据中心选择请求域名。
-2. 国内 VIP 区、客服专区客户请联系商务经理获得 REST API 请求地址。
-3. 支持 HTTP 和 HTTPS。
-:::
+| 参数            | 类型   | 是否必需 | 描述     |
+| :-------------- | :----- | :----------------- | :-------------------- |
+| `Content-Type`  | String | 是                                       | 内容类型。请填 `application/json`。    |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。    |
+| `Authorization` | String | 是                                       | App 管理权限的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。<br/>环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入该字段。关于如何获取动态密钥 app token，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。 |
+
+### 请求 body
+
+请求的 body 取决于具体的请求。
 
 ### 通信协议
 
