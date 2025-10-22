@@ -25,7 +25,13 @@
    
    ![img](/images/console/account_security_login_protection_enable.png)
 
-5. 在弹出的对话框中点击 **确定**，完成开启登录保护。
+5. 若开启了 [操作保护](account_security_protection_operation.html#开启操作保护)，需进行身份验证。
+   
+   例如，输入 MFA 验证码。若开启了 MFA 验证，该验证优先级最高。
+
+   ![img](/images/console/account_security_operation_protection_auth.png)   
+
+6. 在弹出的对话框中点击 **确定**，完成开启登录保护。
    
    ![img](/images/console/account_security_login_protection_confirm.png)
 
@@ -37,7 +43,16 @@
 4. 在右侧的 **安全设置** 页面中，在 **账号保护** 一栏中关闭登录保护。
    
    ![img](/images/console/account_security_login_protection_disable.png)
+
+5. 若开启了 [操作保护](account_security_protection_operation.html#开启操作保护)，需进行身份验证。
    
+   例如，输入 MFA 验证码。若开启了 MFA 验证，该验证优先级最高。
+
+   ![img](/images/console/account_security_operation_protection_auth.png)    
+
+6. 在弹出的对话框中点击 **确定**，完成关闭登录保护。 
+
+   ![img](/images/console/account_security_login_protection_disable_confirm.png)
 
    
 

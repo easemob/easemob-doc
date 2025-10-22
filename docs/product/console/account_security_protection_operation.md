@@ -42,6 +42,7 @@
    ![img](/images/console/account_security_operation_protection_disable.png)
 
 5. 进行身份验证。
+   
    例如，输入 MFA 验证码。若开启了 MFA 验证，该验证优先级最高。
 
    ![img](/images/console/account_security_operation_protection_auth.png)
