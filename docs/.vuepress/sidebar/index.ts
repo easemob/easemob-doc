@@ -256,7 +256,7 @@ export const zhSidebar = sidebar({
         { text: "账号管理", 
             collapsible: true,
             children: [
-            { text: "查看账户信息", link: "console/account_modify.html" },
+            { text: "管理账户信息", link: "console/account_modify.html" },
             {
              text: "安全设置",
              collapsible: true,
