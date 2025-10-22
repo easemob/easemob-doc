@@ -28,7 +28,7 @@
 
 2. 点击 **通过邮箱**，输入邮箱地址，点击 **申请找回密码**。
    
-   页面上方提示前往邮箱查看。
+   页面上方提示前往邮箱查看密码重置邮件。
 
    ![img](/images/console/account_security_password_retrieve_email.png)
 
@@ -42,7 +42,7 @@
 
    ![img](/images/console/account_security_password_retrieve_reset_2.png)
 
-5. 页面上方弹出密码重置成功的提示。你可以利用新密码登录控制台。 
+5. 页面上方弹出密码重置成功的提示。登录环信控制台时需输入新密码。 
 
    ![img](/images/console/account_security_password_retrieve_login.png)
    
