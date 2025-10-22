@@ -6,10 +6,11 @@
 
 开启操作保护后，你在进行如下敏感操作时，需要首先进行身份认证：
 - [修改账号密码](account_security_password_change.html)
-- [修改账号绑定的手机号和邮箱](account_security_mobile_email.html)
 - [开启和关闭登录保护](account_security_protection_login.html)
 - [添加、激活和移除子账号](account_sub_create.html)
 - [关闭操作保护](#关闭操作保护)
+  
+对于 [修改账号绑定的手机号和邮箱](account_security_mobile_email.html)，无论是否开启操作保护，均需要进行身份认证。
 
 ## 操作保护类型
 
