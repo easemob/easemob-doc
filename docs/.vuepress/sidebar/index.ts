@@ -276,7 +276,7 @@ export const zhSidebar = sidebar({
              ],
             },
             { text: "找回账户密码", link: "console/account_password_retrieve.html" },
-            { text: "创建子账号", link: "console/account_sub_create.html" },
+            { text: "管理子账号", link: "console/account_sub_create.html" },
           ],
         },
         { text: "账单中心", link: "console/account_center.html" },
