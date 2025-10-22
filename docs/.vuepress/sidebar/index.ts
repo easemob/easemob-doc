@@ -256,7 +256,20 @@ export const zhSidebar = sidebar({
         { text: "账号管理", 
             collapsible: true,
             children: [
-            { text: "修改账户信息", link: "console/account_modify.html" },
+            { text: "查看账户信息", link: "console/account_modify.html" },
+            {
+             text: "安全设置",
+             collapsible: true,
+             children: [
+             { text: "绑定 MFA 设备", link: "console/account_security_mfa_bind.html" },
+            { text: "解绑 MFA 设备", link: "console/account_security_mfa_unbind.html" },
+            { text: "登录保护", link: "console/account_security_protection_login.html" },
+            { text: "操作保护", link: "console/account_security_protection_operation.html" },
+            { text: "修改账户密码", link: "console/account_security_password_change.html" },
+            { text: "修改手机号和邮箱", link: "console/account_security_mobile_email.html" },
+             ],
+            },
+            { text: "找回账户密码", link: "console/account_password_retrieve.html" },
             { text: "创建子账号", link: "console/account_sub_create.html" },
           ],
         },
