@@ -2,7 +2,7 @@
 
 ## 概述
 
-若你不再需要 MFA 验证或更换 MFA 设备，可以解绑 MFA 设备。对于更换 MFA 设备，你在解绑 MFA 设备后，可以重新绑定新的 MFA 设备，详见 [绑定 MFA 设备](account_security_MFA_bind.html)。
+若你不再需要 MFA 验证或更换 MFA 设备，可以解绑 MFA 设备。对于更换 MFA 设备，你在解绑 MFA 设备后，可以重新绑定新的 MFA 设备，详见 [绑定 MFA 设备](account_security_mfa_bind.html)。
 
 :::tip
 解绑 MFA 设备后，将自动关闭该账号在环信控制台的登录和操作保护中的 MFA 验证。

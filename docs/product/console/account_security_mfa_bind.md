@@ -8,7 +8,7 @@ MFA（Multi-Factor Authentication）即多重身份验证，是一种通过要�
 
 :::tip
 1. 如用户绑定了多种认证方式，优先级从高到低分别为：MFA 验证、手机+验证码、邮箱+验证码。
-2. 如果您需要换 MFA 设备，请参见 [解绑 MFA 设备](account_security_MFA_unbind.html) 进行解绑后，再根据以下步骤绑定新的 MFA 设备。
+2. 如果您需要换 MFA 设备，请参见 [解绑 MFA 设备](account_security_mfa_unbind.html) 进行解绑后，再根据以下步骤绑定新的 MFA 设备。
 :::
 
 ## MFA 验证前提

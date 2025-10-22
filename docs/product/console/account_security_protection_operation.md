@@ -8,7 +8,7 @@
 - [修改账号密码](account_security_password_change.html)
 - [修改账号绑定的手机号和邮箱](account_security_mobile_email.html)
 - [开启和关闭登录保护](account_security_protection_login.html)
-- [添加、激活和移除成员]()
+- [添加、激活和移除成员](account_sub_create.html)
 - [关闭操作保护](account_security_protection_operation.html)
 
 ## 操作保护类型
