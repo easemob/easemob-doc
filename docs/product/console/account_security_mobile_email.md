@@ -13,7 +13,9 @@
    
    ![img](/images/console/account_security_mobile_change.png)
    
-5. 若开启了 [操作保护](account_security_operation_protection.html)，首先进行身份认证，例如，进行 MFA 验证。
+5. 进行身份认证。
+   
+   例如，进行 MFA 验证。
 
     ![img](/images/console/account_security_password_auth.png)  
 
@@ -33,7 +35,9 @@
    
    ![img](/images/console/account_security_email_change.png)
 
-5. 若开启了 [操作保护](account_security_operation_protection.html)，首先进行身份认证，例如，进行 MFA 验证。
+5. 进行身份认证。
+   
+   例如，进行 MFA 验证。
 
     ![img](/images/console/account_security_password_auth.png) 
 
