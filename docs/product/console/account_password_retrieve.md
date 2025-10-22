@@ -16,7 +16,7 @@
 
    ![img](/images/console/account_security_password_reset.png)
 
-4. 页面上方弹出重置成功的提示。你可以利用新密码登录控制台。 
+4. 页面上方弹出密码重置成功的提示。你可以利用新密码登录控制台。 
 
    ![img](/images/console/account_security_password_retrieve_login.png)
 
@@ -42,7 +42,7 @@
 
    ![img](/images/console/account_security_password_retrieve_reset_2.png)
 
-5. 页面上方弹出重置成功的提示。你可以利用新密码登录控制台。 
+5. 页面上方弹出密码重置成功的提示。你可以利用新密码登录控制台。 
 
    ![img](/images/console/account_security_password_retrieve_login.png)
    
