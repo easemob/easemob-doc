@@ -64,12 +64,14 @@ import type { CallKitRef } from "easemob-chat-uikit";
 
 ```tsx
 import React, { useRef } from "react";
-import { Provider, CallKit, rootStore } from "easemob-chat-uikit";
+import { Provider, CallKit, rootStore, useClient } from "easemob-chat-uikit";
 import type { CallKitRef } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
-const App = () => {
-  const callKitRef = useRef<CallKitRef>(null);
+const CallKitMount: React.FC<{ callKitRef: React.RefObject<CallKitRef> }> = ({
+  callKitRef,
+}) => {
+  const client = useClient(); // 获取 IM SDK 实例
 
   // 用户信息提供者
   const userInfoProvider = async (userIds: string[]) => {
@@ -90,6 +92,22 @@ const App = () => {
   };
 
   return (
+    <CallKit
+      ref={callKitRef}
+      chatClient={client}
+      userInfoProvider={userInfoProvider}
+      groupInfoProvider={groupInfoProvider}
+      enableRingtone={true}
+      resizable={true}
+      draggable={true}
+    />
+  );
+};
+
+const App = () => {
+  const callKitRef = useRef<CallKitRef | null>(null);
+
+  return (
     <Provider
       initConfig={{
         appKey: "your_app_key", // 你的应用 App Key
@@ -97,15 +115,7 @@ const App = () => {
         token: "user_token", // 用户 token，或使用 password 进行密码登录
       }}
     >
-      <CallKit
-        ref={callKitRef}
-        chatClient={rootStore.client} // 环信 IM 客户端实例
-        userInfoProvider={userInfoProvider} // 用户信息提供者
-        groupInfoProvider={groupInfoProvider} // 群组信息提供者
-        enableRingtone={true} // 启用铃声
-        resizable={true} // 允许调整大小
-        draggable={true} // 允许拖拽
-      />
+      <CallKitMount callKitRef={callKitRef as React.RefObject<CallKitRef>} />
     </Provider>
   );
 };
@@ -164,13 +174,19 @@ CallKit 内部依赖 IM SDK 进行信令交互，所以在使用 CallKit 之前�
 1. 使用 UIKit：UIKit Provider 组件内集成了 IM SDK，提供 `userId` 和 `token` 属性，内部会自动登录。
 
 ```tsx
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Provider, CallKit, rootStore } from "easemob-chat-uikit";
 import type { CallKitRef } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
 const App = () => {
   const callKitRef = useRef<CallKitRef>(null);
+  const [client, setClient] = useState<any>(null);
+
+  useEffect(() => {
+    setClient(rootStore.client) // 由于示例代码是在Provider组件外部使用rootStore，初始时没有值，需要更新client，如果是在CallKitMount组件中，则只需要使用 useClient 获取 IM SDK 实例。
+  }, [rootStore.client])
+
   return (
     <Provider
       initConfig={{
@@ -181,7 +197,7 @@ const App = () => {
     >
       <CallKit
         ref={callKitRef}
-        chatClient={rootStore.client} // 环信 IM 客户端实例
+        chatClient={client} // 环信 IM SDK 实例
         enableRingtone={true} // 启用铃声
         resizable={true} // 允许调整大小
         draggable={true} // 允许拖拽
@@ -193,16 +209,21 @@ const App = () => {
 export default App;
 ```
 
-若手动登录，可以从 `rootStore` 获取 IM SDK 实例，调用 SDK 的 `open` 方法登录。
+2. 若手动登录，可以从 `rootStore` 获取 IM SDK 实例，调用 SDK 的 `open` 方法登录。
 
 ```tsx
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Provider, CallKit, rootStore } from "easemob-chat-uikit";
 import type { CallKitRef } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
 const App = () => {
   const callKitRef = useRef<CallKitRef>(null);
+  const [client, setClient] = useState<any>(null);
+
+  useEffect(() => {
+    setClient(rootStore.client)
+  }, [rootStore.client])
 
   useEffect(() => {
     // 手动登录
@@ -220,7 +241,7 @@ const App = () => {
     >
       <CallKit
         ref={callKitRef}
-        chatClient={rootStore.client} // 环信 IM 客户端实例
+        chatClient={client} // 环信 IM SDK 实例
         enableRingtone={true} // 启用铃声
         resizable={true} // 允许调整大小
         draggable={true} // 允许拖拽
@@ -232,43 +253,6 @@ const App = () => {
 export default App;
 ```
 
-2. 如果不使用 UIKit Provider, 只使用 CallKit 组件，可自行集成 IM SDK 并处理登录。
-
-```tsx
-import React, { useRef } from "react";
-import { CallKit } from "easemob-chat-uikit";
-import type { CallKitRef } from "easemob-chat-uikit";
-import ChatSDK from "easemob-websdk";
-import "easemob-chat-uikit/style.css";
-
-const App = () => {
-  const callKitRef = useRef<CallKitRef>(null);
-  const [chatClient, setChatClient] = useState(null);
-
-  useEffect(() => {
-    const chat = new ChatSDK.connection({
-      appKey: "your appKey",
-    });
-
-    chat.open({
-      user: "userId",
-      accessToken: "accessToken",
-    });
-    setChatClient(chat);
-  }, []);
-  return (
-    <CallKit
-      ref={callKitRef}
-      chatClient={chatClient} // 环信 IM 客户端实例
-      enableRingtone={true} // 启用铃声
-      resizable={true} // 允许调整大小
-      draggable={true} // 允许拖拽
-    />
-  );
-};
-
-export default App;
-```
 
 ### 步骤 5 发起通话
 
@@ -304,7 +288,7 @@ const App = () => {
         token: "token",
       }}
     >
-      <CallKit ref={callKitRef} chatClient={rootStore.client} />
+      <CallKitMount ref={callKitRef}/>
     </Provider>
   );
 };
