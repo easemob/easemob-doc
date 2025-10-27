@@ -852,7 +852,7 @@ projects:
                 link: /document/electron/group.html#群组管理 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group_manage.html#创建和管理群组    
+                link: /document/server-side/group_create.html   
           - text: 管理群成员
             desc: 支持加入、退出群组、群组白名单、黑名单、禁言和设置群成员的自定义属性。
             sdks:
@@ -888,7 +888,7 @@ projects:
                 link: /document/electron/group.html#群成员管理 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group_member_obtain.html#管理群组成员   
+                link: /document/server-side/group_member_add_single.html   
           - text: 管理群组属性
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:
@@ -924,7 +924,7 @@ projects:
                 link: /document/electron/group.html#修改群组信息 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group_file.html#修改群组信息     
+                link: /document/server-side/group_modify.html     
           - text: 创建和管理聊天室
             desc: 支持创建和加入聊天室、获取聊天室详情、退出和解散聊天室、更新聊天室成员人数以及监听聊天室事件。
             sdks:

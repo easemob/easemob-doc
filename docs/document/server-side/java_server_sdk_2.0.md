@@ -228,10 +228,10 @@ try {
 1. 增加[发送聊天室全局广播消息](message_broadcast.html#发送聊天室全局广播消息)功能。
 2. 增加[导入好友列表](user_relationship_friend_import.html)功能。
 3. 增加[强制用户从单设备下线](account_system.html#强制用户从单设备下线)功能。
-4. [创建群组增加群组头像属性](group_manage.html#创建群组)。
-5. [修改群组信息支持群组头像修改](group_manage.html#修改群组信息)。
-6. [获取群组详情增加群组头像属性](group_manage.html#获取群组详情)。
-7. [获取用户已加入的群组列表](group_manage.html#获取单个用户加入的所有群组)中增加群组头像属性。
+4. [创建群组增加群组头像属性](group_create.html)。
+5. [修改群组信息支持群组头像修改](group_modify.html)。
+6. [获取群组详情增加群组头像属性](group_obtain_detail.html)。
+7. [获取用户已加入的群组列表](group_obtain_joined)中增加群组头像属性。
 
 以上更新内容请到 MessageApi、ContactApi、UserApi、GroupApi 中查看。
 
@@ -249,7 +249,7 @@ try {
 
 ### V1.0.6 2024-06-07
 
-1. 增加[批量移除群组成员](group_member.html#批量移除群组成员)功能。
+1. 增加 [批量移除群组成员](group_members_remove_batch.html) 功能。
 
 2. 增加[一次性获取好友列表](user_relationship_friend_list_obtain.html)功能。
 

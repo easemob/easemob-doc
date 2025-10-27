@@ -403,52 +403,66 @@ const documentSidebar = [
           { text: '删除群组共享文件', link: 'group_shared_file_delete.html' },
         ]  
       },
-      { text: '拉人入群', link: 'group_member_allowlist.html' },
-      { text: '踢人出群', link: 'group_member_mutelist.html' },
+      { 
+            text: '拉人入群', 
+            collapsible: true,
+            children: [
+              { text: '拉单人入群', link: 'group_member_add_single.html' },
+              { text: '批量拉入群', link: 'group_members_add_batch.html' },
+            ]  
+      },
+      { 
+            text: '踢人出群', 
+            collapsible: true,
+            children: [
+              { text: '踢单人出群', link: 'group_member_remove_single.html' },
+              { text: '批量踢出群', link: 'group_members_remove_batch.html' },
+            ]  
+      },
       { text: '管理群成员', 
         collapsible: true,
         children: [
-          { text: '获取群成员列表', link: 'group_create.html' },
+          { text: '获取群成员列表', link: 'group_member_list_obtain.html' },
           { 
             text: '管理群主和管理员', 
             collapsible: true,
             children: [
-              { text: '转让群主', link: 'group_create.html' },
-              { text: '添加管理员', link: 'group_create.html' },
-              { text: '获取管理员列表', link: 'group_create.html' },
-              { text: '删除管理员', link: 'group_create.html' },
+              { text: '转让群主', link: 'group_owner_transfer.html' },
+              { text: '添加管理员', link: 'group_admin_add.html' },
+              { text: '获取管理员列表', link: 'group_admin_list_get.html' },
+              { text: '删除管理员', link: 'group_admin_remove.html' },
             ]  
           },
           { 
             text: '管理禁言', 
             collapsible: true,
             children: [
-              { text: '禁言指定成员', link: 'group_create.html' },
-              { text: '禁言全员', link: 'group_create.html' },
-              { text: '解除成员禁言', link: 'group_create.html' },
-              { text: '解除全员禁言', link: 'group_create.html' },
-              { text: '获取禁言列表', link: 'group_create.html' },
+              { text: '禁言指定成员', link: 'group_member_mute.html' },
+              { text: '禁言全员', link: 'group_member_mute_all.html' },
+              { text: '解除成员禁言', link: 'group_member_unmute.html' },
+              { text: '解除全员禁言', link: 'group_member_unmute_all.html' },
+              { text: '获取禁言列表', link: 'group_member_mutelist_obtain.html' },
             ]  
           },
           { 
             text: '管理白名单', 
             collapsible: true,
             children: [
-              { text: '添加单个用户至白名单', link: 'group_create.html' },
-              { text: '批量添加白名单', link: 'group_create.html' },
-              { text: '删除白名单', link: 'group_create.html' },
-              { text: '获取白名单列表', link: 'group_create.html' },
+              { text: '添加单个用户至白名单', link: 'group_allowlist_add_single.html' },
+              { text: '批量添加白名单', link: 'group_allowlist_add_batch.html' },
+              { text: '删除白名单', link: 'group_allowlist_remove.html' },
+              { text: '获取白名单列表', link: 'group_allowlist_query.html' },
             ]  
           },
           { 
             text: '管理黑名单', 
             collapsible: true,
             children: [
-              { text: '添加单个用户至黑名单', link: 'group_create.html' },
-              { text: '批量添加黑名单', link: 'group_create.html' },
-              { text: '删除单个黑名单用户', link: 'group_create.html' },
-              { text: '批量删除黑名单用户', link: 'group_create.html' },
-              { text: '获取黑名单列表', link: 'group_create.html' },
+              { text: '添加单个用户至黑名单', link: 'group_member_blocklist_add_single.html' },
+              { text: '批量添加黑名单', link: 'group_member_blocklist_add_batch.html' },
+              { text: '删除单个黑名单用户', link: 'group_member_blocklist_remove_single.html' },
+              { text: '批量删除黑名单用户', link: 'group_member_blocklist_remove_batch.html' },
+              { text: '获取黑名单列表', link: 'group_member_blocklist_obtain.html' },
             ]  
           },
           { text: '查看用户是否加入群组', link: 'group_check_joined.html' },
@@ -456,10 +470,10 @@ const documentSidebar = [
             text: '管理群成员自定义属性', 
             collapsible: true,
             children: [
-              { text: '设置群成员自定义属性', link: 'group_create.html' },
-              { text: '批量设置群成员自定义属性', link: 'group_create.html' },
-              { text: '获取单个群成员自定义属性', link: 'group_create.html' },
-              { text: '根据属性 key 获取群成员自定义属性', link: 'group_create.html' },
+              { text: '设置群成员自定义属性', link: 'group_member_attribute_set.html' },
+              { text: '批量设置群成员自定义属性', link: 'group_member_attribute_set_batch.html' },
+              { text: '获取单个群成员自定义属性', link: 'group_member_attribute_get.html' },
+              { text: '根据属性 key 获取群成员自定义属性', link: 'group_member_attribute_get_by_key.html' },
             ]  
           },
         ]  
@@ -468,15 +482,15 @@ const documentSidebar = [
             text: '管理子区', 
             collapsible: true,
             children: [
-              { text: '创建子区', link: 'group_create.html' },
-              { text: '修改子区', link: 'group_create.html' },
-              { text: '删除子区', link: 'group_create.html' },
-              { text: '获取 app 中的子区', link: 'group_create.html' },
-              { text: '获取用户加入的所有子区', link: 'group_create.html' },
-              { text: '获取用户在群组中加入的子区', link: 'group_create.html' },
-              { text: '获取子区成员列表', link: 'group_create.html' },
-              { text: '批量加入子区', link: 'group_create.html' },
-              { text: '批量踢出子区', link: 'group_create.html' },
+              { text: '创建子区', link: 'group_thread_create.html' },
+              { text: '修改子区', link: 'group_thread_modify.html' },
+              { text: '删除子区', link: 'group_thread_delete.html' },
+              { text: '获取 app 中的子区', link: 'group_thread_obtain.html' },
+              { text: '获取用户加入的所有子区', link: 'group_thread_joined.html' },
+              { text: '获取用户在群组中加入的子区', link: 'group_threads_in_group.html' },
+              { text: '获取子区成员列表', link: 'group_thread_member_get.html' },
+              { text: '批量加入子区', link: 'group_thread_member_add.html' },
+              { text: '批量踢出子区', link: 'group_thread_member_remove.html' },
             ]  
           },
     ],

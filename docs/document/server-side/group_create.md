@@ -17,7 +17,7 @@
 POST https://{host}/{org_name}/{app_name}/chatgroups
 ```
 
-关于请求 URL 中的参数说明，详见 [请求结构介绍](overview.html#请求结构)。
+关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
 ## 请求示例
 
@@ -41,10 +41,11 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups'  \
  }' 
 ```
 
-## 请求 body 参数
+## 请求 header
 
-- 关于请求 Header 的说明，详见 [请求结构介绍](overview.html#请求结构)。
-- 请求 body 中的参数说明如下表所示：
+关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
+
+## 请求 body 参数
 
 | 参数                  | 类型   | 是否必需 | 描述          |
 | :------------ | :----- | :------- | :------------------------------------------- |
@@ -85,7 +86,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups'  \
 | 参数              | 类型   | 描述                                                                           |
 | :---------------- | :----- | :----------------------------------------------------------------------------- |
 | `data`            | JSON   | 实际获取的数据详情。                                                           |
-| `data.groupid` | String | 群组 ID。 |
+| - `groupid` | String | 群组 ID。 |
 
 响应体中的其他参数说明如下表所示：
 

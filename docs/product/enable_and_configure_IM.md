@@ -391,7 +391,7 @@
 
 2. 在 **群组管理** 页面，点击 **创建群组**，在弹出的对话框中设置群组名称、描述、群主、最大人数、群组类型、申请入群方式、邀请方式和被邀请用户是否需要确认，然后点击 **创建**。
 
-   各参数的设置要求，详见[创建群组 RESTful API](/document/server-side/group_manage.html#创建群组)。
+   各参数的设置要求，详见[创建群组 RESTful API](/document/server-side/group_create.html#创建群组)。
 
 创建群组后，你可以通过以下步骤管理群组信息和成员：
 
