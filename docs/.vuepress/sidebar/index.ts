@@ -82,7 +82,7 @@ export const zhSidebar = sidebar({
             { text: "产品概述", link: "circle/circle_overview.html" },
             {
               text: "快速开始",
-              collapsible: false,
+              collapsible: true,
               children: [
                 {
                   text: "Android 快速开始",
@@ -100,7 +100,7 @@ export const zhSidebar = sidebar({
             },
             {
               text: "集成说明",
-              collapsible: false,
+              collapsible: true,
               children: [
                 {
                   text: "Android 社区管理",
@@ -130,7 +130,7 @@ export const zhSidebar = sidebar({
             },
             {
               text: "错误码",
-              collapsible: false,
+              collapsible: true,
               children: [
                 {
                   text: "Android 错误码",
@@ -175,7 +175,7 @@ export const zhSidebar = sidebar({
           children: [
             {
               text: "场景概览",
-              collapsible: false,
+              collapsible: true,
               children: [
                 {
                   text: "场景介绍",
@@ -189,7 +189,7 @@ export const zhSidebar = sidebar({
             },
             {
               text: "快速开始",
-              collapsible: false,
+              collapsible: true,
               children: [
                 {
                   text: "跑通示例项目（Android）",
@@ -203,7 +203,7 @@ export const zhSidebar = sidebar({
             },
             {
               text: "实现流程",
-              collapsible: false,
+              collapsible: true,
               children: [
                 {
                   text: "客户端实现（Android）",
