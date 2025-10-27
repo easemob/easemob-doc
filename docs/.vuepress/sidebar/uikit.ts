@@ -138,8 +138,8 @@ const chatUikitSidebar = [
   },
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["uniapp"]},
   { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["uniapp"]},
-  { text: "设计指南", link: "chatuikit_design_guide.html", only: ["uniapp"]},
-  { text: "更新日志", link: "releasenote.html", only: ["uniapp"]}
+  { text: "更新日志", link: "releasenote.html", only: ["uniapp"]},
+  { text: "设计指南", link: "chatuikit_design_guide.html", only: ["uniapp"]}
 ];
 const chatroomUikitSidebar = [
   { text: "概述", link: "roomuikit_overview.html" },
