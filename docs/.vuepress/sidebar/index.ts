@@ -70,9 +70,9 @@ export const zhSidebar = sidebar({
           collapsible: true,
           children: [
             { text: "方案介绍", link: "aigc_solution/aigc_introduction.html" },
-            { text: "方案架构", link: "aigc_solution/aigc_architecture.html" },
-            { text: "跑通服务端示例项目", link: "aigc_solution/aigc_run_through_demo_server.html" },
-            { text: "跑通客户端示例项目", link: "aigc_solution/aigc_run_through_demo_client.html" },
+            { text: "架构与示例项目", link: "aigc_solution/aigc_architecture.html" },
+            { text: "服务端配置", link: "aigc_solution/aigc_run_through_demo_server.html" },
+            { text: "客户端配置", link: "aigc_solution/aigc_run_through_demo_client.html" },
           ], 
         },   
         {
