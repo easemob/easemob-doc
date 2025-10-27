@@ -192,11 +192,11 @@ export const zhSidebar = sidebar({
               collapsible: true,
               children: [
                 {
-                  text: "跑通示例项目（Android）",
+                  text: "跑通 Android 示例项目",
                   link: "voiceroom/run_through_demo_android.html",
                 },
                 {
-                  text: "跑通示例项目（iOS）",
+                  text: "跑通 iOS 示例项目",
                   link: "voiceroom/run_through_demo_ios.html",
                 },
               ],
@@ -206,11 +206,11 @@ export const zhSidebar = sidebar({
               collapsible: true,
               children: [
                 {
-                  text: "客户端实现（Android）",
+                  text: "Android 客户端实现",
                   link: "voiceroom/client_implementation_android.html",
                 },
                 {
-                  text: "客户端实现（iOS）",
+                  text: "iOS 客户端实现",
                   link: "voiceroom/client_implementation_ios.html",
                 },
               ],
@@ -369,15 +369,15 @@ export const zhSidebar = sidebar({
         }, 
       ],
     },
-    // {
-    //   text: "Console 指南（旧）",
-    //   collapsible: true,
-    //   children: [
-    //     { text: "开通和配置服务", link: "enable_and_configure_IM.html" },
-    //     { text: "消息量统计", link: "message_statistics.html" },
-    //     { text: "请求质量概览", link: "request_quality_overview.html" },
-    //   ],
-    // },
+    {
+      text: "Console 指南（旧）",
+      collapsible: true,
+      children: [
+        { text: "开通和配置服务", link: "enable_and_configure_IM.html" },
+        { text: "消息量统计", link: "message_statistics.html" },
+        { text: "请求质量概览", link: "request_quality_overview.html" },
+      ],
+    },
     { text: "术语表", link: "glossary.html" },
     { text: "帮助中心", link: "help.html" },
     {
