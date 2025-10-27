@@ -60,7 +60,7 @@ const chatUikitSidebar = [
   { text: "主题", link: "chatuikit_theme.html", only: ["ios"]},
   { text: "全局配置", link: "chatuikit_config_item.html", only: ["ios"]},
   { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["ios"]},
-  { text: "设计指南", link: "chatuikit_design_guide.html", only: ["ios"]},
+  // { text: "设计指南", link: "chatuikit_design_guide.html", only: ["ios"]},
   { text: "产品概述", link: "chatuikit_overview.html", only: ["web"]},
   {
     text: "特性",
@@ -86,7 +86,7 @@ const chatUikitSidebar = [
   { text: "国际化", link: "chatuikit_internationalization.html", only: ["web"]},
   { text: "主题", link: "chatuikit_theme.html", only: ["web"]},
   { text: "组件文档", link: "chatuikit_storybook.html", only: ["web"]},
-  { text: "设计指南", link: "chatuikit_design_guide.html", only: ["web"] },
+  // { text: "设计指南", link: "chatuikit_design_guide.html", only: ["web"] },
   { text: "产品概述", link: "chatuikit_overview.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   {
       text: "特性",
@@ -111,20 +111,20 @@ const chatUikitSidebar = [
   { text: "主题", link: "chatuikit_theme.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["android", "react-native", "flutter"] },
   { text: "常见问题", link: "faq.html", only: ["react-native"]},
-  { text: "更新日志", link: "releasenote.html",  except: ["uniapp"]},
-  { text: "设计指南", link: "chatuikit_design_guide.html", only: ["android", "harmonyos", "react-native", "flutter"]},
-  { text: "历史文档", link: "ui_historic.html.html", only: ["android", "ios"]},
-  {
-    text: "历史文档",
-    collapsible: true,
-    children: [
-      { text: "UIKit 介绍", link: "ui_overview.html" },
-      { text: "快速开始", link: "ui_quickstart.html" },
-      { text: "集成聊天页面", link: "ui_chat.html" },
-      { text: "集成会话列表页面", link: "ui_conversation.html" },
-    ],
-    only: ["react-native", "flutter"],
-  },
+  // { text: "更新日志", link: "releasenote.html",  except: ["uniapp"]},
+  // { text: "设计指南", link: "chatuikit_design_guide.html", only: ["android", "harmonyos", "react-native", "flutter"]},
+  // { text: "历史文档", link: "ui_historic.html.html", only: ["android", "ios"]},
+  // {
+  //   text: "历史文档",
+  //   collapsible: true,
+  //   children: [
+  //     { text: "UIKit 介绍", link: "ui_overview.html" },
+  //     { text: "快速开始", link: "ui_quickstart.html" },
+  //     { text: "集成聊天页面", link: "ui_chat.html" },
+  //     { text: "集成会话列表页面", link: "ui_conversation.html" },
+  //   ],
+  //   only: ["react-native", "flutter"],
+  // },
   { text: "产品概述", link: "chatuikit_overview.html", only: ["uniapp"]},
   {
     text: "特性",
@@ -138,8 +138,20 @@ const chatUikitSidebar = [
   },
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["uniapp"]},
   { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["uniapp"]},
-  { text: "更新日志", link: "releasenote.html", only: ["uniapp"]},
-  { text: "设计指南", link: "chatuikit_design_guide.html", only: ["uniapp"]}
+  { text: "更新日志", link: "releasenote.html"},
+  { text: "设计指南", link: "chatuikit_design_guide.html"},
+  { text: "历史文档", link: "ui_historic.html", only: ["android", "ios"]},
+  {
+    text: "历史文档",
+    collapsible: true,
+    children: [
+      { text: "UIKit 介绍", link: "ui_overview.html" },
+      { text: "快速开始", link: "ui_quickstart.html" },
+      { text: "集成聊天页面", link: "ui_chat.html" },
+      { text: "集成会话列表页面", link: "ui_conversation.html" },
+    ],
+    only: ["react-native", "flutter"],
+  },
 ];
 const chatroomUikitSidebar = [
   { text: "产品概述", link: "roomuikit_overview.html" },
