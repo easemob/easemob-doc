@@ -142,7 +142,7 @@ const chatUikitSidebar = [
   { text: "设计指南", link: "chatuikit_design_guide.html", only: ["uniapp"]}
 ];
 const chatroomUikitSidebar = [
-  { text: "概述", link: "roomuikit_overview.html" },
+  { text: "产品概述", link: "roomuikit_overview.html" },
   {
     text: "特性",
     collapsible: true,
