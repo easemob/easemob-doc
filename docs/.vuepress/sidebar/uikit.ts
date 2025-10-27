@@ -103,7 +103,7 @@ const chatUikitSidebar = [
   },
   { text: "组件文档", link: "chatuikit_storybook.html", only: ["web"]},
   { text: "设计指南", link: "chatuikit_design_guide.html", only: ["web"] },
-  { text: "概述", link: "chatuikit_overview.html", only: ["android", "harmonyos", "react-native", "flutter"]},
+  { text: "产品概述", link: "chatuikit_overview.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   {
       text: "特性",
       collapsible: true,
