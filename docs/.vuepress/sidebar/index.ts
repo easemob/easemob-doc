@@ -61,6 +61,164 @@ export const zhSidebar = sidebar({
       },
     { text: "使用限制", link: "limitation.html" },
     { text: "数据中心", link: "data_center.html" },
+    {
+      text: "常见方案",
+      collapsible: true,
+      children: [
+        {
+          text: "环信 AIGC",
+          collapsible: true,
+          children: [
+            { text: "方案介绍", link: "aigc_solution/aigc_introduction.html" },
+            { text: "方案架构", link: "aigc_solution/aigc_architecture.html" },
+            { text: "跑通服务端示例项目", link: "aigc_solution/aigc_run_through_demo_server.html" },
+            { text: "跑通客户端示例项目", link: "aigc_solution/aigc_run_through_demo_client.html" },
+          ], 
+        },   
+        {
+          text: "超级社区",
+          collapsible: true,
+          children: [
+            { text: "产品概述", link: "circle/circle_overview.html" },
+            {
+              text: "快速开始",
+              collapsible: false,
+              children: [
+                {
+                  text: "Android 快速开始",
+                  link: "circle/circle_quickstart_android.html",
+                },
+                {
+                  text: "iOS 快速开始",
+                  link: "circle/circle_quickstart_ios.html",
+                },
+                {
+                  text: "Web 快速开始",
+                  link: "circle/circle_quickstart_web.html",
+                },
+              ],
+            },
+            {
+              text: "集成说明",
+              collapsible: false,
+              children: [
+                {
+                  text: "Android 社区管理",
+                  link: "circle/server_mgmt_android.html",
+                },
+                {
+                  text: "Android 频道管理",
+                  link: "circle/channel_mgmt_android.html",
+                },
+                {
+                  text: "Android 频道分组管理",
+                  link: "circle/category_mgmt_android.html",
+                },
+                { text: "iOS 社区管理", link: "circle/server_mgmt_ios.html" },
+                { text: "iOS 频道管理", link: "circle/channel_mgmt_ios.html" },
+                {
+                  text: "iOS 频道分组管理",
+                  link: "circle/category_mgmt_ios.html",
+                },
+                { text: "Web 社区管理", link: "circle/server_mgmt_web.html" },
+                { text: "Web 频道管理", link: "circle/channel_mgmt_web.html" },
+                {
+                  text: "Web 频道分组管理",
+                  link: "circle/category_mgmt_web.html",
+                },
+              ],
+            },
+            {
+              text: "错误码",
+              collapsible: false,
+              children: [
+                {
+                  text: "Android 错误码",
+                  link: "circle/circle_errorcode_android.html",
+                },
+                {
+                  text: "iOS 错误码",
+                  link: "circle/circle_errorcode_ios.html",
+                },
+                {
+                  text: "Web 错误码",
+                  link: "circle/circle_errorcode_web.html",
+                },
+              ],
+            },
+            {
+              text: "API 参考",
+              collapsible: true,
+              children: [
+                { text: "REST 社区管理", link: "circle/server_mgmt_rest.html" },
+                {
+                  text: "REST 频道管理",
+                  link: "circle/channel_mgmt_rest.html",
+                },
+                {
+                  text: "REST 频道分组管理",
+                  link: "circle/category_mgmt_rest.html",
+                },
+                {
+                  text: "Android API 参考",
+                  link: "circle/api_reference_android.html",
+                },
+                { text: "iOS API 参考", link: "circle/api_reference_ios.html" },
+                { text: "Web API 参考", link: "circle/api_reference_web.html" },
+              ],
+            },
+          ],
+        },
+        {
+          text: "语聊房",
+          collapsible: true,
+          children: [
+            {
+              text: "场景概览",
+              collapsible: false,
+              children: [
+                {
+                  text: "场景介绍",
+                  link: "voiceroom/demo_scenario_introduction.html",
+                },
+                {
+                  text: "Demo 体验（Android/iOS）",
+                  link: "voiceroom/demo_experience.html",
+                },
+              ],
+            },
+            {
+              text: "快速开始",
+              collapsible: false,
+              children: [
+                {
+                  text: "跑通示例项目（Android）",
+                  link: "voiceroom/run_through_demo_android.html",
+                },
+                {
+                  text: "跑通示例项目（iOS）",
+                  link: "voiceroom/run_through_demo_ios.html",
+                },
+              ],
+            },
+            {
+              text: "实现流程",
+              collapsible: false,
+              children: [
+                {
+                  text: "客户端实现（Android）",
+                  link: "voiceroom/client_implementation_android.html",
+                },
+                {
+                  text: "客户端实现（iOS）",
+                  link: "voiceroom/client_implementation_ios.html",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     // {
     //   text: "Demo",
     //   collapsible: true,
@@ -230,172 +388,14 @@ export const zhSidebar = sidebar({
           text: "环信 AIGC",
           collapsible: true,
           children: [
-            { text: "方案介绍", link: "aigc/aigc_scenario_introduction.html" },
-            { text: "方案选择", link: "aigc/aigc_selection.html" },
-
-            { 
-              text: "方案一",
-              collapsible: false,
-              children: [
-                { text: "服务端配置", link: "aigc/aigc_run_through_demo_server.html" },
-                { text: "客户端配置", link: "aigc/aigc_run_through_demo_client.html" },
-              ], 
-            }, 
-            { 
-              text: "方案二",
-              collapsible: false,
-              children: [
-                { text: "使用 AI 智能功能", link: "aigc/aigc_use.html" },
-                { text: "REST API", link: "aigc/aigc_rest_api.html" },
-                ], 
-            }, 
+            { text: "方案介绍", link: "aigc_api/aigc_introduction.html" },
+            { text: "使用 AI 智能功能", link: "aigc_api/aigc_use.html" },
+            { text: "REST API", link: "aigc_api/aigc_rest_api.html" },
           ], 
-        },   
-        {
-          text: "超级社区",
-          collapsible: true,
-          children: [
-            { text: "产品概述", link: "circle/circle_overview.html" },
-            {
-              text: "快速开始",
-              collapsible: false,
-              children: [
-                {
-                  text: "Android 快速开始",
-                  link: "circle/circle_quickstart_android.html",
-                },
-                {
-                  text: "iOS 快速开始",
-                  link: "circle/circle_quickstart_ios.html",
-                },
-                {
-                  text: "Web 快速开始",
-                  link: "circle/circle_quickstart_web.html",
-                },
-              ],
-            },
-            {
-              text: "集成说明",
-              collapsible: false,
-              children: [
-                {
-                  text: "Android 社区管理",
-                  link: "circle/server_mgmt_android.html",
-                },
-                {
-                  text: "Android 频道管理",
-                  link: "circle/channel_mgmt_android.html",
-                },
-                {
-                  text: "Android 频道分组管理",
-                  link: "circle/category_mgmt_android.html",
-                },
-                { text: "iOS 社区管理", link: "circle/server_mgmt_ios.html" },
-                { text: "iOS 频道管理", link: "circle/channel_mgmt_ios.html" },
-                {
-                  text: "iOS 频道分组管理",
-                  link: "circle/category_mgmt_ios.html",
-                },
-                { text: "Web 社区管理", link: "circle/server_mgmt_web.html" },
-                { text: "Web 频道管理", link: "circle/channel_mgmt_web.html" },
-                {
-                  text: "Web 频道分组管理",
-                  link: "circle/category_mgmt_web.html",
-                },
-              ],
-            },
-            {
-              text: "错误码",
-              collapsible: false,
-              children: [
-                {
-                  text: "Android 错误码",
-                  link: "circle/circle_errorcode_android.html",
-                },
-                {
-                  text: "iOS 错误码",
-                  link: "circle/circle_errorcode_ios.html",
-                },
-                {
-                  text: "Web 错误码",
-                  link: "circle/circle_errorcode_web.html",
-                },
-              ],
-            },
-            {
-              text: "API 参考",
-              collapsible: true,
-              children: [
-                { text: "REST 社区管理", link: "circle/server_mgmt_rest.html" },
-                {
-                  text: "REST 频道管理",
-                  link: "circle/channel_mgmt_rest.html",
-                },
-                {
-                  text: "REST 频道分组管理",
-                  link: "circle/category_mgmt_rest.html",
-                },
-                {
-                  text: "Android API 参考",
-                  link: "circle/api_reference_android.html",
-                },
-                { text: "iOS API 参考", link: "circle/api_reference_ios.html" },
-                { text: "Web API 参考", link: "circle/api_reference_web.html" },
-              ],
-            },
-          ],
-        },
-        {
-          text: "语聊房",
-          collapsible: true,
-          children: [
-            {
-              text: "场景概览",
-              collapsible: false,
-              children: [
-                {
-                  text: "场景介绍",
-                  link: "voiceroom/demo_scenario_introduction.html",
-                },
-                {
-                  text: "Demo 体验（Android/iOS）",
-                  link: "voiceroom/demo_experience.html",
-                },
-              ],
-            },
-            {
-              text: "快速开始",
-              collapsible: false,
-              children: [
-                {
-                  text: "跑通示例项目（Android）",
-                  link: "voiceroom/run_through_demo_android.html",
-                },
-                {
-                  text: "跑通示例项目（iOS）",
-                  link: "voiceroom/run_through_demo_ios.html",
-                },
-              ],
-            },
-            {
-              text: "实现流程",
-              collapsible: false,
-              children: [
-                {
-                  text: "客户端实现（Android）",
-                  link: "voiceroom/client_implementation_android.html",
-                },
-                {
-                  text: "客户端实现（iOS）",
-                  link: "voiceroom/client_implementation_ios.html",
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],  
+        }, 
+      ], 
+    },   
+  ],
   ...DOC_SIDEBAR,
   ...CHAT_UIKIT_SIDEBAR,
   ...CHATROOM_UIKIT_SIDEBAR,
