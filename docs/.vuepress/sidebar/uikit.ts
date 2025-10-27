@@ -110,8 +110,8 @@ const chatUikitSidebar = [
   { text: "国际化", link: "chatuikit_internationalization.html", only: ["android", "react-native", "flutter"] },
   { text: "主题", link: "chatuikit_theme.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["android", "react-native", "flutter"] },
-  { text: "更新日志", link: "releasenote.html",  except: ["uniapp"]},
   { text: "常见问题", link: "faq.html", only: ["react-native"]},
+  { text: "更新日志", link: "releasenote.html",  except: ["uniapp"]},
   { text: "设计指南", link: "chatuikit_design_guide.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "历史文档", link: "ui_historic.html.html", only: ["android", "ios"]},
   {
