@@ -1,6 +1,22 @@
-#  创建聊天页面
+#  聊天页面
 
-- 使用 `ChatPage`
+## 概述
+
+环信单群聊 ChatUIKit 提供 `ChatPage` 和 `ChatView` 两种方式方便用户快速集成聊天页面和自定义聊天页面。该页面提供如下功能：
+
+- 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
+- 对消息进行复制、引用、撤回、删除、编辑和重新发送。
+- 清除本地消息。
+
+消息相关功能，详见 [功能介绍文档](chatfeature_message.html)。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/custom_chat_detail.png" title="聊天页面" />
+</ImageGallery>
+
+## 创建聊天页面
+
+### 使用 ChatPage
 
 单群聊 UIKit 提供 `ChatPage` 页面，应用程序可以采用组件导航（Navigation）跳转到 `ChatPage`，示例代码如下：
 
@@ -14,11 +30,11 @@ this.navPathStack?.pushPath({name: "ChatPage", param: {
 });
 ```
 
-- 使用 `ChatView`
+### 使用 ChatView
 
 开发者也可以使用单群聊 UIKit 提供的 `ChatView` 创建聊天页面，示例代码如下：
 
-1. 编写包含 NavDestination 子组件的页面。
+**步骤一**：编写包含 NavDestination 子组件的页面。
    
 ```typescript
 import { ChatPageParams, ChatType, ChatView, ComposeTitleBar } from '@easemob/chatuikit';
@@ -66,7 +82,7 @@ export function MyChatPageBuilder() {
 }
 ```
 
-2. 将页面配置到系统配置文件 `route_map.json` 中（参考 [系统路由表](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-navigation-navigation#%E7%B3%BB%E7%BB%9F%E8%B7%AF%E7%94%B1%E8%A1%A8)）。
+**步骤二**：将页面配置到系统配置文件 `route_map.json` 中（参考 [系统路由表](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-navigation-navigation#%E7%B3%BB%E7%BB%9F%E8%B7%AF%E7%94%B1%E8%A1%A8)）。
 
 ```json
 // 1. 工程配置文件 module.json5 中配置 {"routerMap": "$profile:route_map"}
@@ -85,7 +101,7 @@ export function MyChatPageBuilder() {
 }
 ```
 
-3. 跳转到 MyChatPage 页面。
+**步骤三**：跳转到 MyChatPage 页面。
   
 ```typescript
 this.navPathStack?.pushPath({name: "MyChatPage", param: {
