@@ -1,8 +1,7 @@
 
+# 自定义联系人列表
 
-## 自定义联系人列表
-
-### 自定义联系人列表 Header
+## 自定义联系人列表 Header
 
 例如，将通讯录页面默认标题名称**联系人列表**修改为**自定义 Header**，示例代码如下。
 
@@ -24,7 +23,7 @@ const ContactList = () => {
   <ImageItem src="/images/uikit/chatuikit/web/contact-header.png" title="自定义联系人列表 Header" />
 </ImageGallery>
 
-### 在联系人列表中添加黑名单
+## 在联系人列表中添加黑名单
 
 在联系人列表中添加联系人黑名单，示例代码如下：
 
@@ -64,7 +63,7 @@ const ContactList = () => {
   <ImageItem src="/images/uikit/chatuikit/web/contact-block.png" title="加入黑名单" />
 </ImageGallery>
 
-### 设置成可选择的联系人列表
+## 设置成可选择的联系人列表
 
 例如，创建群组时需添加多个用户，可点击联系人对应的复选框进行选择。
 

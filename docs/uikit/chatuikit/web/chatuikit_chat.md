@@ -1,8 +1,6 @@
 # 自定义聊天页面
 
-## 自定义组件
-
-### 修改消息气泡样式
+## 修改消息气泡样式
 
 以文本消息为例，你可以按如下方式修改消息气泡样式：
 
@@ -49,7 +47,7 @@ const ChatContainer = () => {
 </ImageGallery>
 
 
-### 设置消息日期和时间格式
+## 设置消息日期和时间格式
 
 通过消息组件的 `formatDateTime` 方法设置显示的消息日期和时间的格式。
 
@@ -66,7 +64,7 @@ const ChatContainer = () => {
 />
 ```
 
-### 设置显示消息操作
+## 设置显示消息操作
 
 利用 `messageProps` 的 `customAction` 属性设置点击消息列表项旁边的 `⋮` 后要显示的消息操作按钮。
 
@@ -125,7 +123,7 @@ const ChatContainer = () => {
 />
 ```
 
-### 配置输入框功能
+## 配置输入框功能
 
 你可以配置消息输入框的功能，包括是否显示发送语音按钮、是否显示消息输入框、是否显示消息表情按钮和更多操作按钮、是否启用正在输入功能、是否显示发送按钮等。
 
@@ -178,7 +176,7 @@ const ChatContainer = () => {
 };
 ```
 
-### 消息输入框中添加图标
+## 消息输入框中添加图标
 
 在消息输入框中添加一个自定义图标，实现指定的功能:
 
@@ -220,7 +218,7 @@ const ChatContainer = () => {
   <ImageItem src="/images/uikit/chatuikit/web/chat_input_bar.png" title="消息输入框" />
 </ImageGallery>
 
-### 实现发送自定义消息
+## 实现发送自定义消息
 
 1. 使用 `messageStore` 中提供的 `sendMessage` 方法发送自定义消息。
 2. 使用 `renderMessage` 渲染自定义消息。
@@ -303,7 +301,7 @@ const ChatContainer = () => {
   <ImageItem src="/images/uikit/chatuikit/web/custom_message.png" title="自定义消息" />
 </ImageGallery>
 
-### 修改聊天相关的主题
+## 修改聊天相关的主题
 
 `Chat` 组件提供了聊天页面主题相关的变量支持自定义，如下所示。关于如何修改主题，请点击[这里](chatuikit_theme.html)。
 
