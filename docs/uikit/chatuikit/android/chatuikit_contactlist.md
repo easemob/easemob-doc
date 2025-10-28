@@ -1,41 +1,12 @@
-# 通讯录
+# 自定义通讯录页面
 
-<Toc />
-
-`ChatUIKitContactsListFragment` 用于展示通讯录列表，包括联系人搜索，添加联系人，好友申请列表入口，群组列表入口，联系人列表。
-
-昵称在中文或者英文的情况下可以实现按首字母分类。
+你可以设置通讯录页面标题栏、联系人列表 Header 和联系人列表条目。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/page_contact_list.png" title="通讯录" />
+  <ImageItem src="/images/uikit/chatuikit/android/custom_contact_list.png" title="通讯录页面" />
 </ImageGallery>
 
-## 使用示例
-
-```kotlin
-class ContactListActivity: AppCompactActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_list)
-
-        ChatUIKitContactsListFragment.Builder()
-                        .build()?.let { fragment ->
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.fl_fragment, fragment).commit()
-                        }
-    }
-}
-```
-
-## 自定义联系人列表页面
-
-你可以设置联系人页面标题栏、联系人列表 Header 和联系人列表条目。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_contact_list.png" title="联系人列表页面" />
-</ImageGallery>
-
-### 通过 ChatUIKitContactsListFragment.Builder 自定义
+## 通过 ChatUIKitContactsListFragment.Builder 自定义
 
 `ChatUIKitContactsListFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置。目前提供的设置项如下：
 
@@ -83,11 +54,11 @@ ChatUIKitContactsListFragment.Builder()
 | setCustomAdapter()               | 设置自定义的适配器，默认为 `ChatUIKitContactListAdapter`。                                                    |
 | setCustomFragment()              | 设置自定义聊天 Fragment，需要继承自 `ChatUIKitContactsListFragment`。                                          |
 
-### 设置标题栏
+## 设置标题栏
 
 聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。如果聊天页面的标题栏不满足需求，建议自定义标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见 [设置会话列表页面的标题栏](chatuikit_conversation.html#设置标题栏)。
 
-### 自定义联系人列表 Header 
+## 自定义联系人列表 Header 
 
 本节中的自定义联系人列表 header 基于使用 `ChatUIKitContactsListFragment`。
 
@@ -124,7 +95,7 @@ ChatUIKitContactsListFragment.Builder()
 
 ```
 
-### 添加自定义联系人布局
+## 添加自定义联系人布局
 
 开发者可以继承 `ChatUIKitContactListAdapter` 实现自己的 `CustomContactListAdapter`，然后将 `CustomContactListAdapter` 设置到 `ChatUIKitContactsListFragment#Builder#setCustomAdapter` 中。
 
@@ -156,7 +127,7 @@ builder.setCustomAdapter(CustomContactListAdapter)
   <ImageItem src="/images/uikit/chatuikit/android/contactlist_configurable.png" title="可选择的联系人列表" />
 </ImageGallery>
 
-### 设置成可选择的联系人列表
+## 设置成可选择的联系人列表
 
 例如，创建群组时需添加多个用户，可点击联系人对应的复选框进行选择。
 
@@ -168,7 +139,7 @@ builder.setSearchType(ChatUIKitSearchType.SELECT_USER)
   <ImageItem src="/images/uikit/chatuikit/android/contactlist_configurable.png" title="设置成可选择的联系人列表" />
 </ImageGallery>
 
-### 设置联系人头像样式
+## 设置联系人头像样式
 
 ```kotlin
  // uikit_configures.xml style 文件 支持修改以下配置：
