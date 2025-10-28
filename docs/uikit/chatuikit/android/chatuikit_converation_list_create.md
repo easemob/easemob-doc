@@ -20,25 +20,6 @@
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
 </ImageGallery>
 
-## 使用示例
-
-```kotlin
-class ConversationListActivity: AppCompactActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_conversation_list)
-
-        ChatUIKitConversationListFragment.Builder()
-                        .build()?.let { fragment ->
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.fl_fragment, fragment).commit()
-                        }
-    }
-}
-```
-
-
-
 ## 创建会话列表页面
 
 单群聊 UIKit 提供 `ChatUIKitConversationListFragment`，添加到 Activity 中即可使用。
