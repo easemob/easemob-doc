@@ -12,7 +12,7 @@
   <ImageItem src="/images/uikit/chatuikit/flutter/custom_contact_list.png" title="设置联系人列表页面" />
 </ImageGallery> 
 
-## 创建创建通讯录页面
+## 创建通讯录页面
 
 添加会话列表时，只需要将 `ContactsView` 添加到页面上即可。
 
