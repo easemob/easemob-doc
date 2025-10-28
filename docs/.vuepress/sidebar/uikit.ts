@@ -79,9 +79,33 @@ const chatUikitSidebar = [
   { text: "全局上下文", link: "chatuikit_context.html", only: ["web"]},
   { text: "登录", link: "chatuikit_login.html", only: ["web"]},
   { text: "事件监听器", link: "chatuikit_listener.html", only: ["web"]},
-  { text: "会话列表", link: "chatuikit_conversation.html", only: ["web"]},
-  { text: "消息", link: "chatuikit_chat.html", only: ["web"]},
-  { text: "通讯录", link: "chatuikit_contactlist.html", only: ["web"]},
+  {
+      text: "会话列表",
+      collapsible: true,
+      children: [
+        { text: "页面介绍", link: "chatuikit_conversationlist_intro.html" },
+        { text: "自定义页面", link: "chatuikit_conversation.html" },
+      ],
+    only: ["web"],
+  },
+  {
+      text: "消息",
+      collapsible: true,
+      children: [
+        { text: "页面介绍", link: "chatuikit_chat_intro.html" },
+        { text: "自定义页面", link: "chatuikit_chat.html" },
+      ],
+    only: ["web"],
+  },
+  {
+      text: "通讯录",
+      collapsible: true,
+      children: [
+        { text: "页面介绍", link: "chatuikit_contactlist_intro.html" },
+        { text: "自定义页面", link: "chatuikit_contactlist.html" },
+      ],
+    only: ["web"],
+  },
   { text: "音视频通话", link: "chatuikit_video.html", only: ["web"]},
   { text: "国际化", link: "chatuikit_internationalization.html", only: ["web"]},
   { text: "主题", link: "chatuikit_theme.html", only: ["web"]},
