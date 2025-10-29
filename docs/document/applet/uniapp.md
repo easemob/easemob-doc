@@ -11,15 +11,16 @@
 
 ## 体验小程序
 
-扫描下方小程序二维码，或者微信搜索 **环信 IM Uniapp** 即可快速体验环信小程序 Demo 在线版本
+点击链接，扫描二维码，即可快速体验环信 Uniapp 编译生成的移动端原生应用：
 
-![img](/images/applet/applet-demo.png)
+- 安卓： [https://www.pgyer.com/h4XF](https://www.pgyer.com/h4XF)
+- iOS： [https://www.pgyer.com/9ISC](https://www.pgyer.com/9ISC)
 
 :::tip
 
 - 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
 - 你可以查看 [uni-app Demo GitHub 源码地址](https://github.com/easemob/easemob-uikit-uniapp) 。
-  :::
+:::
   
 ## 功能说明
 
@@ -67,31 +68,10 @@
 
 登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 **开发 > 开发设置** 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
 
-:::tip
-request 合法域名，uploadFile 合法域名，downloadFile 合法域名
-
-1. https://a1.easemob.com
-2. https://a2.easemob.com
-3. https://a3.easemob.com
-4. https://a4.easemob.com
-5. https://a5.easemob.com
-6. https://a31.easemob.com
-7. https://a1-sgp.easemob.com
-8. https://a41.easemob.com
-9. https://a51.easemob.com
-10. https://a1-chatfile.easemob.com
-11. https://rs.chat.agora.io
-12. https://rs.easemob.com
-:::
-
-:::tip
-socket 合法域名:
-
-1. wss://im-api-wechat.easemob.com（3.0 IM SDK）
-2. wss://im-api-wechat-31.easemob.com
-3. wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）
-4. wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）
-:::
+| 域名类型 | 具体域名   | 
+| :------ | :----- |
+| request 合法域名<br/>uploadFile 合法域名<br/>downloadFile 合法域名  | https://a1.easemob.com<br/>https://a2.easemob.com<br/>https://a3.easemob.com<br/>https://a4.easemob.com<br/>https://a5.easemob.com<br/>https://a31.easemob.com<br/>https://a1-sgp.easemob.com<br/>https://a41.easemob.com<br/>https://a51.easemob.com<br/>https://a1-chatfile.easemob.com<br/>https://rs.chat.agora.io<br/>https://rs.easemob.com   | 
+| WebSocket 合法域名 | wss://im-api-wechat.easemob.com（3.0 IM SDK）<br/> wss://im-api-wechat-31.easemob.com<br/>wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）<br/>wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）   | 
 
 ### 各端小程序 WebSocket 连接数量
 

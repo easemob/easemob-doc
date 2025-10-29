@@ -42,10 +42,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
       type: 'primary'
     }
   ],
-  // page meta
-  // metaLocales: {
-  //   editLink: '在 GitHub 上编辑此页'
-  // },
+  editLink:false,
   plugins: {
     mdEnhance: {
       container: true,
