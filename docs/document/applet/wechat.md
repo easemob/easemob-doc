@@ -23,7 +23,7 @@
 | 域名类型 | 具体域名   | 
 | :------ | :----- |
 | request 合法域名 | https://a1.easemob.com<br/>https://a2.easemob.com<br/>https://a3.easemob.com<br/>https://a4.easemob.com<br/>https://a5.easemob.com<br/>https://a1-chatfile.easemob.com<br/>https://rs.chat.agora.io<br/>https://rs.easemob.com   | 
-| socket 合法域名 | wss://im-api-wechat.easemob.com（3.0 IM SDK）   | 
+| socket 合法域名 | wss://im-api-wechat.easemob.com   | 
 | uploadFile 合法域名 | https://a1.easemob.com    | 
 | downloadFile 合法域名 | https://a1-v2.easemob.com<br/>https://a4.easemob.com<br/>https://a1.easemob.com<br/>https://a4-v2.easemob.com<br/>https://a3-v2.easemob.com<br/>https://a5-v2.easemob.com<br/>https://a2-v2.easemob.com<br/>https://a1-chatfile.easemob.com   | 
 
