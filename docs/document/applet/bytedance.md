@@ -19,20 +19,20 @@
 | 域名类型 | 具体域名   | 
 | :------ | :----- |
 | request 合法域名 | https://a1.easemob.com<br/>https://a2.easemob.com<br/>https://a3.easemob.com<br/>https://a4.easemob.com<br/>https://a5.easemob.com<br/>https://rs.chat.agora.io<br/>https://rs.easemob.com   | 
-| WebsSocket 合法域名 | wss://im-api-wechat.easemob.com（3.0 IM SDK）   | 
+| socket 合法域名 | wss://im-api-wechat.easemob.com（3.0 IM SDK）   | 
 
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 
 | 数据中心      | REST API 请求地址      | WebSocket 访问域名          |
 | ------------- | ------------------ | -------------------------------- |
-| 国内 1 区   | a1.easemob.com    | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com   |
-| 国内 2 区   | a31.easemob.com   | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com |
+| 国内 1 区   | https://a1.easemob.com    | wss://im-api-wechat.easemob.com 或 wss://im-api-wechat.easecdn.com   |
+| 国内 2 区   | https://a31.easemob.com   | wss://im-api-wechat-31.easemob.com 或 wss://im-api-wechat-31.easecdn.com |
 | 国内 VIP 区 | 请咨询商务经理    | 请咨询商务经理     |
 | 客服专用    | 请咨询商务经理    | 请咨询商务经理   |
-| 新加坡 1 区   | a1-sgp.easemob.com 或 a1-sgp.easecdn.com | im-api-wechat-sgp.easemob.com  或 im-api-wechat-sgp.easecdn.com  |
-| 新加坡 2 区   | a61.easemob.com 或 a61.easecdn.com | im-api-wechat-61.easemob.com 或 im-api-wechat-61.easecdn.com |
-| 美东 1 区     | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
-| 德国 2 区 | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
+| 新加坡 1 区   | https://a1-sgp.easemob.com 或 https://a1-sgp.easecdn.com | wss://im-api-wechat-sgp.easemob.com  或 wss://im-api-wechat-sgp.easecdn.com  |
+| 新加坡 2 区   | https://a61.easemob.com 或 https://a61.easecdn.com | wss://im-api-wechat-61.easemob.com 或 wss://im-api-wechat-61.easecdn.com |
+| 美东 1 区     | https://a41.easemob.com 或 https://a41.easecdn.com       | wss://im-api-wechat-41.easemob.com 或 wss://im-api-wechat-41.easecdn.com   |
+| 德国 2 区 | https://a71.easemob.com 或 https://a71.easecdn.com       | wss://im-api-wechat-71.easemob.com 或 wss://im-api-wechat-71.easecdn.com   |
 
 应用所在数据中心可以在环信控制台的 **应用概览** 页面中查看：
 
