@@ -19,7 +19,7 @@
 | 域名类型 | 具体域名   | 
 | :------ | :----- |
 | request 合法域名 | https://a1.easemob.com<br/>https://a2.easemob.com<br/>https://a3.easemob.com<br/>https://a4.easemob.com<br/>https://a5.easemob.com<br/>https://rs.chat.agora.io<br/>https://rs.easemob.com   | 
-| WebsSocket 合法域名 | wss://im-api-wechat.easemob.com（3.0 IM SDK）   | 
+| socket 合法域名 | wss://im-api-wechat.easemob.com（3.0 IM SDK）   | 
 
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 
