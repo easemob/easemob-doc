@@ -55,7 +55,7 @@
 
 - 开始一个全新的项目
   1. 将下载的 SDK（src/sdk/）导入到自己的项目中。
-  2. 引入 SDK：`import IMSDK from "../sdk/Easemob-chat-miniProgram";`
+  2. 引入 SDK：`import EasemobChat from "../sdk/Easemob-chat-4.x.x.js";`
 - 基于 Demo 二次开发
 
 将下载的代码导入开发者工具即可运行起来。
@@ -64,8 +64,7 @@
 
 ```javascript
 //使用示例
-import SDK from "../sdk/connection"; // 2.0 SDK
-import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
+import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本sdk
 ```
 
 #### 实例调用方式
@@ -73,18 +72,12 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
 实例化 SDK，并挂载在全局对象下。
 
 ```javascript
-//实例化 SDK 对象
-// url 和 apiUrl 属性仅在 4.11.0 及之前版本需手动传入。4.12.0 及之后版本，SDK 会自动获取。
-const WebIM = (wx.WebIM = SDK);
+const WebIM = (wx.WebIM = EasemobChat);
 WebIM.conn = new WebIM.connection({
   appKey: "your appKey",
-  https: true, //是否使用 HTTPS
   url: "wss://im-api-wechat.easemob.com/websocket", // socket server (3.0 SDK)
   apiUrl: "https://a1.easemob.com", // rest server
-  heartBeatWait: 30000, //心跳间隔
-  autoReconnectNumMax: 5, //自动重连次数
-  useOwnUploadFun: false, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
+  useOwnUploadFun: false, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传url）
 });
-```
 
 小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/integration.html)。
