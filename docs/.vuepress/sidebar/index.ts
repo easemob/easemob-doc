@@ -19,6 +19,9 @@ export const zhSidebar = sidebar({
         { text: "购买指引", link: "pricing_method.html" },
       ],
     }, 
+
+    "",
+    
     { text: "功能介绍", 
       collapsible: true,
       children: [

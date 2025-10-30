@@ -64,14 +64,14 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
   background-color: rgb(245, 247, 250);
   > .sidebar-links > li {
     > a {
-      font-weight: 600;
+      font-weight: 500;
     }
     > .sidebar-group {
       > p span.title {
-        font-weight: 600;
+        font-weight: 500;
       }
       > button.sidebar-heading {
-        font-weight: 600;
+        font-weight: 500;
       }
       > .sidebar-links {
         border-left: 1px solid #ccc;
