@@ -29,7 +29,7 @@
 
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 
-| 数据中心      | REST API 请求地址      | Socket 访问域名          |
+| 数据中心      | REST API 请求地址      | WebSocket 访问域名          |
 | ------------- | ------------------ | -------------------------------- |
 | 国内 1 区   | https://a1.easemob.com    | wss://im-api-wechat.easemob.com 或 wss://im-api-wechat.easecdn.com   |
 | 国内 2 区   | https://a31.easemob.com   | wss://im-api-wechat-31.easemob.com 或 wss://im-api-wechat-31.easecdn.com |
