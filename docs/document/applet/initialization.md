@@ -15,7 +15,7 @@ const conn = new EC.connection({
   appKey: "your appKey",
   url: "wss://im-api-wechat.easemob.com/websocket",
   apiUrl: "https://a1.easemob.com",
-  isHttpDNS: false, // 在小程序上续设置为false
+  isHttpDNS: false, // 在小程序上需设置为false
 });
 ```
 
