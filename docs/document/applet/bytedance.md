@@ -75,6 +75,7 @@ WebIM.conn = new WebIM.connection({
   url: "wss://im-api-wechat.easemob.com/websocket", // socket server (3.0 SDK)
   apiUrl: "https://a1.easemob.com", // rest server
   useOwnUploadFun: false, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传url）
+  isHttpDNS: false, // 在小程序上需设置为false
 });
 
 
