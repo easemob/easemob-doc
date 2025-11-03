@@ -72,7 +72,7 @@
 
 ### 集成问题
 
-由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
+若在 Windows 平台上由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
 
 ```csharp
 Multiple plugins with the same name 'libaosl' (found at 'Assets/Plugins/Agora/Agora-RTC-Plugin/Agora-Unity-RTC-SDK/Plugins/x86_64/libaosl.dll' and 'Assets/Plugins/Agora/AgoraChat/Plugins/x64/libaosl.dll'). That means one or more plugins are set to be compatible with Editor. Only one plugin at the time can be used by Editor
@@ -110,7 +110,7 @@ using AgoraChat.MessageBody;
 在 `InitSDK` 方法中添加以下代码完成 SDK 初始化：
 
 ```csharp
-var options = new Options("appkey"); //将该参数设置为你的 App Key
+Options options = Options.InitOptionsWithAppKey("appkey"); //将该参数设置为你的 App Key
 SDKClient.Instance.InitWithOptions(options);
 ```
 
