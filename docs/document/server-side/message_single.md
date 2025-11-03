@@ -190,7 +190,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 
 关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
 
-#### 请求 body
+#### 请求 body 参数
 
 下表为发送各类消息的通用请求体，为 JSON 对象，是所有消息的外层结构。不同类型的消息只是 `body` 字段内容存在差异。
 
@@ -301,6 +301,10 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 }'
 ```
 
+#### 请求 header 参数
+
+关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
+
 #### 请求 body 参数
 
 关于通用请求体，详见[发送文本消息](#发送文本消息)。
@@ -334,7 +338,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 
 #### 响应 body 字段
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含的 `data` 字段说明如下：
 
 | 参数   | 类型 | 描述     |
 | :----- | :--- | :----------------- |
@@ -362,6 +366,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 ```http
 POST https://{host}/{org_name}/{app_name}/messages/users
 ```
+
+关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
 #### 请求示例
 
@@ -422,7 +428,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 
 #### 响应 body 字段
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 中的 `data` 字段说明如下：
 
 | 参数   | 类型 | 描述     |
 | :----- | :--- | :----------------- |
@@ -477,6 +483,10 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   }
 }'
 ```
+
+#### 请求 header 参数
+
+关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
 
 #### 请求 body 参数
 
@@ -602,7 +612,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 
 #### 响应 body 字段
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 中的 `data` 字段说明如下：
 
 | 参数   | 类型 | 描述     |
 | :----- | :--- | :----------------- |
@@ -690,7 +700,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users"  \
 
 #### 响应 body 字段
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 中的 `data` 字段说明如下：
 
 | 参数   | 类型 | 描述     |
 | :----- | :--- | :----------------- |
@@ -774,7 +784,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
 
 #### 响应 body 字段
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 中的 `data` 字段说明如下：
 
 | 参数   | 类型 | 描述     |
 | :----- | :--- | :----------------- |
@@ -830,7 +840,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
 #### 请求 header 参数
 
 关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
- 
+
 #### 请求 body 参数
 
 关于通用请求体，详见[发送文本消息](#发送文本消息)。
@@ -862,7 +872,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
 
 #### 响应 body 字段
 
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 中的 `data` 字段说明如下：
 
 | 参数   | 类型 | 描述     |
 | :----- | :--- | :----------------- |

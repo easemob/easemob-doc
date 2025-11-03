@@ -5,76 +5,24 @@
 - 分页获取指定用户的好友列表。服务器按照添加好友时间的倒序返回，先返回最近添加的好友。
 - 获取好友列表时，你可以选择是否需要返回好友备注。
 
-**调用频率上限**：100 次/秒/App Key
+## 调用频率上限
 
-## 前提条件
+100 次/秒/App Key
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
-
-- 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
-
-## 认证方式
-
-环信即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
-
-`Authorization: Bearer YourAppToken`
-
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-
-## HTTP 请求
+## 请求 URL
 
 ```http
 GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&cursor={cursor}&needReturnRemark={true/false}
 ```
 
-### 路径参数
-
-| 参数              | 类型   | 是否必需 | 描述           |
-| :---------------- | :----- | :------- |:-------------|
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
-| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
-| `username`  | String | 是       | 要获取哪个用户的好友列表。  |
-
-### 查询参数
-
 | 参数      | 类型      | 是否必需 | 描述                                               |
 |:--------|:--------|:-----|:-------------------------------------------------|
+| `username`  | String | 是       | 要获取哪个用户的好友列表。  |
 | `limit` | Int     | 否    | 每次期望返回的好友的数量。取值范围为 [1,50]。该参数仅在分页获取时为必需，默认为 `10`。 |
 | `cursor` | String  | 否    | 数据查询的起始位置。该参数仅在分页获取时为必需。第一次调用该接口不传 `cursor`，获取 `limit` 指定的好友数量。| 
 | `needReturnRemark` | Boolean | 否    | 是否需要返回好友备注：<br/> - `true`：返回；<br/> - （默认）`false`：不返回。|
 
-### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述          |
-| :-------------- | :----- | :------- | :-------------------- |
-| `Content-Type`  | String | 是  | 内容类型。请填 `application/json`。     |
-| `Accept`        | String | 是  | 内容类型。请填 `application/json`。     |
-| `Authorization` | String | 是  | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`。 |
-
-## HTTP 响应
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 字段                       | 类型     | 描述             |
-|:-------------------------|:-------|:---------------|
-| `uri`             | String | 请求 URL。              |
-| `timestamp`       | Long   | Unix 时间戳，单位为毫秒。     |
-| `entities`           | Array | 响应实体。        |
-| `count`                  | Int    | 当前页的好友数量。     | 
-| `action`             | String | 请求方法。                                   |
-| `data`                   | Object | 返回的好友列表对象。     |
-| `data.contacts`          | Array  | 返回的好友列表数据。      |
-| `data.contacts.remark`   | String | 好友备注。           |
-| `data.contacts.username` | String | 好友的用户 ID。 |
-| `duration`        | String | 请求响应时间，单位为毫秒。      |
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-## 示例
-
-### 请求示例
+## 请求示例
 
 ```shell
 curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRemark=true' \
@@ -83,7 +31,11 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRem
 -H 'Authorization: Bearer  <YourAppToken>'
 ```
 
-### 响应示例
+## 请求 header 参数
+
+关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
+
+## 响应示例
 
 ```json
 {
@@ -103,6 +55,30 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRem
   "duration": 27
 }
 ```
+
+## HTTP 响应
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中 `data` 字段的说明如下：
+
+| 字段                       | 类型     | 描述             |
+|:-------------------------|:-------|:---------------|
+| `data`                   | Object | 返回的好友列表对象。     |
+| `data.contacts`          | Array  | 返回的好友列表数据。      |
+| `data.contacts.remark`   | String | 好友备注。           |
+| `data.contacts.username` | String | 好友的用户 ID。 |
+
+其他字段的说明如下：
+
+| 字段                       | 类型     | 描述             |
+|:-------------------------|:-------|:---------------|
+| `uri`             | String | 请求 URL。              |
+| `timestamp`       | Long   | Unix 时间戳，单位为毫秒。     |
+| `entities`           | Array | 响应实体。        |
+| `count`                  | Int    | 当前页的好友数量。     | 
+| `action`             | String | 请求方法。                                   |
+| `duration`        | String | 请求响应时间，单位为毫秒。      |
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ## 错误码
 

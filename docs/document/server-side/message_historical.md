@@ -2,7 +2,9 @@
 
 <Toc />
 
-## 功能说明
+## 获取历史消息记录 API
+
+### 功能说明
 
 你可以从服务端获取用户发送的历史消息的记录。
 
@@ -11,91 +13,35 @@
 - 当平台消息分发量较大时，服务器生成历史消息记录需要一定时间，建议 24 小时后拉取这些记录。若对时效性有较高要求，推荐使用 [发送后回调服务](callback_postsending.html)。
 - 若调用了 REST API [单向删除会话](conversation_delete.html) 或 [单向删除漫游消息](message_delete.html)，不影响通过该接口的获取的历史消息记录。
 
-**调用频率上限**：10 次/分钟/App Key
+### 调用频率上限
 
-## 前提条件
+10 次/分钟/App Key
 
-要调用环信即时通讯 REST API，请确保满足以下要求：
-
-- 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
-
-## 公共参数
-
-### 请求参数
-
-| 参数       | 类型   | 是否必需 | 描述      |
-| :--------- | :----- | :------- | :------------- |
-| `host`  | String | 是  | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
-| `org_name` | String | 是   | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
-| `app_name` | String | 是   | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。|
-
-### 响应参数
-
-| 参数              | 类型   | 描述                                                                           |
-| :---------------- | :----- | :----------------------------------------------------------------------------- |
-| `action`          | String | 请求方法。                                                                     |
-| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
-| `applicationName` | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
-| `uri`             | String | 请求 URL。                                                                     |
-| `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
-| `timestamp`       | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                          |
-| `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。                                     |
-
-## 认证方式
-
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
-
-`Authorization: Bearer YourAppToken`
-
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本篇涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-
-## HTTP 请求
+### 请求 URL
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatmessages/{time}
 ```
 
-### 路径参数
-
 | 参数   | 类型   | 是否必需 | 描述         |
 | :----- | :----- | :------- | :------------- |
 | `time` | String | 是       | 历史消息记录查询的起始时间。<br/> - 国内集群：采用北京时间，格式为 yyyyMMddHH。例如 `time` 为 `2018112717`，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。<br/> - 海外集群：采用 UTC 时间，格式为 yyyyMMddHH，你需要根据自己所在的时区进行时间转换。 |
 
-其他参数及描述详见 [公共参数](#公共参数)。
-
-### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述       |
-| :-------------- | :----- | :------- | :------------------ |
-| `Accept`        | String | 是       | 内容类型，请填 `application/json`。       |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-## HTTP 响应
-
-### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数       | 类型   | 描述     |
-| :--------- | :----- | :------------------ |
-| `data`  | JSON   | 实际获取的数据详情。  |
-| `data.url` | String | 历史消息记录的下载地址。该 URL 由历史消息记录的存储地址、到期 Unix 时间戳（`Expires`，单位为秒）、第三方云存储访问密钥（`OSSAccessKeyId`）和第三方云存储验证签名（`Signature`）组成。URL 仅在一定时间内有效，请及时通过 URL 下载聊天记录文件，URL 过期后会下载失败，需要重新调用该接口获取新的 URL。 |
-
-其他参数及说明详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-## 示例
+关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
 ### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatmessages/2018112717'
+curl -X GET 'https://XXXX/XXXX/XXXX/chatmessages/2018112717'    \
+-H 'Accept: application/json'    \
+-H 'Authorization: Bearer <YourAppToken>' 
 ```
+
+### 请求 header 参数
+
+关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
 
 ### 响应示例
 
@@ -115,6 +61,39 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   "applicationName": "testapp"
 }
 ```
+
+### 响应 body 字段
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中 `data` 字段的说明如下：
+
+| 参数       | 类型   | 描述     |
+| :--------- | :----- | :------------------ |
+| `data`  | JSON   | 实际获取的数据详情。  |
+| - `url` | String | 历史消息记录的下载地址。该 URL 由历史消息记录的存储地址、到期 Unix 时间戳（`Expires`，单位为秒）、第三方云存储访问密钥（`OSSAccessKeyId`）和第三方云存储验证签名（`Signature`）组成。URL 仅在一定时间内有效，请及时通过 URL 下载聊天记录文件，URL 过期后会下载失败，需要重新调用该接口获取新的 URL。 |
+
+其他字段的说明如下：
+
+| 参数              | 类型   | 描述                                                                           |
+| :---------------- | :----- | :----------------------------------------------------------------------------- |
+| `action`          | String | 请求方法。                                                                     |
+| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
+| `uri`             | String | 请求 URL。                                                                     |
+| `timestamp`       | Long   | Unix 时间戳，单位为毫秒。                                                      |
+| `duration`        | Int    | 从发送请求到响应的时长，单位为毫秒。                                           |
+| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
+| `applicationName` | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型   | 错误提示      | 可能原因    | 处理建议   |
+|:---------|:-------------------|:--------------------|:---------|:--------------|
+| 400      | illegal_argument | illegal arguments: appkey: XXXX#XXXX, time: xxxxxx | 请求参数 `time` 格式不正确。  | 输入正确的请求参数 `time`:UTC 时间，使用 ISO8601 标准，格式为 yyyyMMddHH。例如 time 为 2018112717，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。若海外集群为 UTC 时区，需要根据自己所在的时区进行时间转换。 |
+| 400      | illegal_argument | illegal arguments: appkey: XXXX#XXXX, time: xxxxxx, maybe chat message history is expired or unstored" | `time` 对应时间段内的历史文件已过期或者暂未存储。消息的云存储时间取决于产品套餐，详见 [消息存储时长限制](/product/limitation.html)。 | 输入正确的请求参数 `time`。 |
+| 404      | storage_object_not_found | Failed to find chat message history download url for appkey: XXXX#XXXX, time: xxxxxx" | 对应 `time` 对应时间段内不存在历史文件。      | 如果确定设置的时间内有历史消息，请联系 [环信技术支持](mailto:support@easemob.com)。 |
 
 ## 历史消息记录的内容
 
@@ -411,16 +390,4 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
     }
 ]
 ```
-
-
-
-## 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码 | 错误类型   | 错误提示      | 可能原因    | 处理建议   |
-|:---------|:-------------------|:--------------------|:---------|:--------------|
-| 400      | illegal_argument | illegal arguments: appkey: XXXX#XXXX, time: xxxxxx | 请求参数 `time` 格式不正确。  | 输入正确的请求参数 `time`:UTC 时间，使用 ISO8601 标准，格式为 yyyyMMddHH。例如 time 为 2018112717，则表示查询 2018 年 11 月 27 日 17 时至 2018 年 11 月 27 日 18 时期间的历史消息。若海外集群为 UTC 时区，需要根据自己所在的时区进行时间转换。 |
-| 400      | illegal_argument | illegal arguments: appkey: XXXX#XXXX, time: xxxxxx, maybe chat message history is expired or unstored" | `time` 对应时间段内的历史文件已过期或者暂未存储。消息的云存储时间取决于产品套餐，详见 [消息存储时长限制](/product/limitation.html)。 | 输入正确的请求参数 `time`。 |
-| 404      | storage_object_not_found | Failed to find chat message history download url for appkey: XXXX#XXXX, time: xxxxxx" | 对应 `time` 对应时间段内不存在历史文件。      | 如果确定设置的时间内有历史消息，请联系 [环信技术支持](mailto:support@easemob.com)。 |
 

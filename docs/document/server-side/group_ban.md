@@ -32,7 +32,6 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/disable'
 ```
 
-
 ## 请求 header 参数
 
 关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
