@@ -125,7 +125,7 @@ const conn = new WebIM.connection({
     appKey: 'your appKey', //注意这里的 "K" 需大写
     url: 'wss://im-api-wechat.easemob.com/websocket', // websocket 连接地址
     apiUrl: 'https://a1.easemob.com',// REST API 连接地址
-    useOwnUploadFun: true // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
+    useOwnUploadFun: true, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
     isHttpDNS: false, // 在小程序上需设置为false, 其他平台设置为true
 });
 ```
