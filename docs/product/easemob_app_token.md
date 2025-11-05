@@ -14,39 +14,52 @@
 请不要频繁向服务器发送获取 token 的请求，同一账号发送此请求超过一定频率会被服务器封禁。
 :::
 
-### HTTP 请求
+### 请求 URL
 
 ```http
 POST https://{host}/{org_name}/{app_name}/token
 ```
 
-#### 路径参数
+关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
-| 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
-| :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
-| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
+### 请求示例
 
-#### 请求 header
+```shell
+curl -X POST 'http://a1.easemob.com/easemob-demo/testapp/token'    \
+-H 'Content-Type: application/json'    \
+-H 'Accept: application/json'     \
+-d '{
+   "grant_type": "client_credentials",
+   "client_id": "YXA6i-Ak8Ol4Eei2l11ZjV-EAg",
+   "client_secret": "YXA6VunqiNxoB7IwXHInk1cGiXOOJfc",
+   "ttl": 1024000
+ }' 
+```
 
-| 参数           | 类型   | 是否必需 | 描述                                |
-| :------------- | :----- | :------- | :---------------------------------- |
-| `Content-Type` | String | 是       | 内容类型。请填 `application/json`。 |
-| `Accept`       | String | 是       | 内容类型。请填 `application/json`。 |
+### 请求 header 参数
 
-#### 请求 body
+关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                                                                                                             |
-| :-------------- | :----- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `grant_type`    | String | 是       | 授权方式。该参数设置为固定字符串 `client_credentials`，即客户端凭证模式。                                                                                                                                        |
-| `client_id`     | String | 是       | App 的 `client_id`，用于生成 app token 调用 REST API。详见 [环信控制台](https://console.easemob.com/user/login/)的 **应用概览** 页面。                                                                     |
-| `client_secret` | String | 是       | App 的 `client_secret`，用于生成 app token 调用 REST API。详见 [环信控制台](https://console.easemob.com/user/login/)的 **应用概览** 页面。                                                                 |
+### 请求 body 参数
+
+| 参数            | 类型   | 是否必需 | 描述          |
+| :-------------- | :----- | :------- | :---------------------------- |
+| `grant_type`    | String | 是       | 授权方式。该参数设置为固定字符串 `client_credentials`，即客户端凭证模式。        |
+| `client_id`     | String | 是       | App 的 `client_id`，用于生成 app token 调用 REST API。详见 [环信控制台](https://console.easemob.com/user/login/)的 **应用概览** 页面。   |
+| `client_secret` | String | 是       | App 的 `client_secret`，用于生成 app token 调用 REST API。详见 [环信控制台](https://console.easemob.com/user/login/)的 **应用概览** 页面。     |
 | `ttl`           | Long   | 否       | token 有效期，单位为秒。<br/> - 若传入该参数，token 有效期以传入的值为准。<br/> - 若不传该参数，以 [环信控制台](https://console.easemob.com/user/login/)的 **用户管理** 页面的 token 有效期的设置为准。<br/> - 若设置为 `0`，则 token 永久有效。 <br/>注意：VIP 5 集群该参数单位为毫秒。|
 
-### HTTP 响应
+### 响应示例
 
-#### 响应 body
+```json
+{
+  "access_token": "YWMte3bGuOukEeiTkNP4grL7iwAAAAAAAAAAAAAAAAAAAAGL4CTw6XgR6LaXXVmNX4QCAgXXXXXXXXX-ZgBPGgBFTrLhhyK8woMEI005emtrLJFJV6aoxsZSioSIZkr5kw",
+  "expires_in": 1024000,
+  "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402"
+}
+```
+
+### 响应 body 字段
 
 如果返回的 HTTP 状态码为 `200`，表示成功返回 token。响应 body 包含如下字段：
 
@@ -58,30 +71,7 @@ POST https://{host}/{org_name}/{app_name}/token
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html) 了解可能的原因。
 
-### 示例
-
-#### 请求示例
-
-```shell
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{
-   "grant_type": "client_credentials",
-   "client_id": "YXA6i-Ak8Ol4Eei2l11ZjV-EAg",
-   "client_secret": "YXA6VunqiNxoB7IwXHInk1cGiXOOJfc",
-   "ttl": 1024000
- }' 'http://a1.easemob.com/easemob-demo/testapp/token'
-```
-
-#### 响应示例
-
-```json
-{
-  "access_token": "YWMte3bGuOukEeiTkNP4grL7iwAAAAAAAAAAAAAAAAAAAAGL4CTw6XgR6LaXXVmNX4QCAgMAAAFnKdc-ZgBPGgBFTrLhhyK8woMEI005emtrLJFJV6aoxsZSioSIZkr5kw",
-  "expires_in": 1024000,
-  "application": "8be024f0-e978-11e8-b697-5d598d5f8402"
-}
-```
-
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
