@@ -500,9 +500,47 @@ const documentSidebar = [
     text: '聊天室管理',
     collapsible: true,
     children: [
-      { text: '管理超级管理员', link: 'chatroom_superadmin.html' },
-      { text: '管理聊天室', link: 'chatroom_manage.html' },
-      { text: '管理聊天室属性', link: 'chatroom_attribute.html' },
+      { 
+        text: '管理超级管理员', 
+         collapsible: true,
+         children: [
+          {text: '添加超级管理员', link: 'chatroom_superadmin_add.html' }, 
+          {text: '获取超级管理员', link: 'chatroom_superadmin_list_obtain.html' }, 
+          {text: '删除超级管理员', link: 'chatroom_superadmin_delete.html' }, 
+         ], 
+      },
+      { text: '创建聊天室', link: 'chatroom_create.html' },
+      { 
+        text: '获取聊天室', 
+         collapsible: true,
+         children: [
+          {text: '获取所有聊天室', link: 'chatroom_obtain_total.html' }, 
+          {text: '获取用户加入的聊天室', link: 'chatroom_obtain_joined.html' }, 
+          {text: '获取聊天室详情', link: 'chatroom_obtain_detail.html' }, 
+         ], 
+      },
+      { 
+        text: '管理聊天室', 
+         collapsible: true,
+         children: [
+          {text: '修改聊天室信息', link: 'chatroom_modify.html' }, 
+          {text: '转让聊天室', link: 'chatroom_owner_transfer.html' }, 
+          {text: '解散聊天室', link: 'chatroom_delete.html' }, 
+         ], 
+      },
+      { 
+        text: '管理聊天室属性', 
+         collapsible: true,
+         children: [
+          {text: '获取聊天室公告', link: 'chatroom_announcement_get.html' }, 
+          {text: '修改聊天室公告', link: 'chatroom_announcement_update.html' }, 
+          {text: '设置聊天室自定义属性', link: 'chatroom_custom_attribute_set.html' }, 
+          {text: '强制设置聊天室自定义属性', link: 'chatroom_custom_attribute_set_force.html' }, 
+          {text: '获取聊天室自定义属性', link: 'chatroom_custom_attribute_set.html' }, 
+          {text: '删除聊天室自定义属性', link: 'chatroom_custom_attribute_delete.html' }, 
+          {text: '强制删除聊天室自定义属性', link: 'chatroom_custom_attribute_delete_force.html' }, 
+         ], 
+      },
       { 
         text: '管理聊天室成员', 
         collapsible: true,
