@@ -56,7 +56,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRem
 }
 ```
 
-## HTTP 响应
+## 响应 body 字段
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中 `data` 字段的说明如下：
 
