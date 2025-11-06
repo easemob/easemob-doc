@@ -353,16 +353,30 @@ const documentSidebar = [
         collapsible: true,
         children: [
         { text: '上传文件', link: 'message_upload_file.html' },
-        { text: '删除群聊漫游消息', link: 'message_delete_roam_group_room_msgid.html' },
-        { text: '清空用户漫游消息', link: 'message_delete_roam_user.html' },
-        { text: '清空单聊一段时间漫游消息', link: 'message_delete_roam_single_time.html' },
-        { text: '清空群聊一段时间漫游消息', link: 'message_delete_roam_group_room_time.html' },
+        { text: '下载文件', link: 'message_download_file.html' },
+        { text: '下载文件缩略图', link: 'message_download_thumbnail.html' },
         ],
       },
       { text: '获取历史消息记录', link: 'message_historical.html' },
-      { text: '设置指定消息附件的存储方式', link: 'message_attachment_storage.html' },
-      { text: '消息表情回复', link: 'reaction.html' },
-      { text: '撤回消息', link: 'message_recall.html' },
+      { text: '设置消息附件存储方式', link: 'message_attachment_storage.html' },
+      {
+        text: '消息表情回复',
+        collapsible: true,
+        children: [
+        { text: '添加 Reaction', link: 'reaction_add.html' },
+        { text: '删除 Reaction', link: 'reaction_delete.html' },
+        { text: '获取消息的 Reaction', link: 'reaction_get_by_msg_id.html' },
+        { text: '获取 Reaction 详情', link: 'reaction_get_by_msg_id_emoji_id.html' },
+        ],
+      },
+      {
+        text: '撤回消息',
+        collapsible: true,
+        children: [
+        { text: '撤回单条消息', link: 'message_recall_single.html' },
+        { text: '批量撤回消息', link: 'message_recall_batch.html' },
+        ],
+      },
       { text: '单向删除会话', link: 'conversation_delete.html' },
       {
         text: '单向删除漫游消息',
@@ -385,8 +399,22 @@ const documentSidebar = [
         { text: '检测文本的源语言', link: 'message_translation_detect.html' },
         ],
       },
-      { text: '获取离线消息数据', link: 'message_offline.html' },
-      { text: '导入消息', link: 'message_import.html' }
+      {
+        text: '获取离线消息数据',
+        collapsible: true,
+        children: [
+        { text: '获取用户离线消息数量', link: 'offline_msg_count_get.html' },
+        { text: '获取离线消息的投递状态', link: 'offline_msg_status_get.html' },
+        ],
+      },
+      {
+        text: '导入消息',
+        collapsible: true,
+        children: [
+        { text: '导入单聊消息', link: 'message_import__single.html' },
+        { text: '导入群聊消息', link: 'message_import_group.html' },
+        ],
+      },
     ],
     only: ['server-side']
   },
@@ -708,18 +736,18 @@ const documentSidebar = [
         text: '用户关系',
         collapsible: true,
         children: [
-          { text: '添加好友', link: 'user_relationship_friend_add.html' },
-          { text: '校验好友', link: 'user_relationship_friend_check.html' },
-          { text: '删除单个好友', link: 'user_relationship_friend_remove.html' },
-          { text: '删除所有好友', link: 'user_relationship_friend_remove_all.html' },
-          { text: '设置好友备注', link: 'user_relationship_remark_set.html' },
-          { text: '分页获取好友列表', link: 'user_relationship_friend_list_paged.html' },
-          { text: '一次性获取好友列表', link: 'user_relationship_friend_list_obtain.html' },
-          { text: '导入好友列表', link: 'user_relationship_friend_import.html' },
-          { text: '添加用户至黑名单', link: 'user_relationship_blocklist_add.html' },
-          { text: '从黑名单中移除用户', link: 'user_relationship_blocklist_remove.html' },
-          { text: '获取黑名单列表', link: 'user_relationship_blocklist_obtain.html' },
-          { text: '校验黑名单', link: 'user_relationship_blocklist_check.html' }
+          { text: '添加好友', link: 'user_friend_add.html' },
+          { text: '校验好友', link: 'user_friend_check.html' },
+          { text: '删除单个好友', link: 'user_friend_remove.html' },
+          { text: '删除所有好友', link: 'user_friend_remove_all.html' },
+          { text: '设置好友备注', link: 'user_friend_remark_set.html' },
+          { text: '分页获取好友列表', link: 'user_friend_list_paged.html' },
+          { text: '一次性获取好友列表', link: 'user_friend_list_obtain.html' },
+          { text: '导入好友列表', link: 'user_friend_import.html' },
+          { text: '添加用户至黑名单', link: 'user_friend_blocklist_add.html' },
+          { text: '从黑名单中移除用户', link: 'user_friend_blocklist_remove.html' },
+          { text: '获取黑名单列表', link: 'user_friend_blocklist_obtain.html' },
+          { text: '校验黑名单', link: 'user_friend_blocklist_check.html' }
          ]
         },
         { 
@@ -733,16 +761,16 @@ const documentSidebar = [
          ]
         },
         { 
-        text: '用户收藏',
-        collapsible: true,
-        children: [
-          { text: '添加一条收藏', link: 'user_collection_add_single.html' },
-          { text: '批量添加收藏', link: 'user_collection_add_batch.html' },
-          { text: '修改收藏扩展信息', link: 'user_collection_ext_modify.html' },
-          { text: '删除收藏', link: 'user_collection_delete.html' }
-          { text: '获取收藏', link: 'user_collection_get.html' }
-         ]
-      },
+          text: '用户收藏',
+          collapsible: true,
+          children: [
+            { text: '添加一条收藏', link: 'user_collection_add_single.html' },
+            { text: '批量添加收藏', link: 'user_collection_add_batch.html' },
+            { text: '修改收藏扩展信息', link: 'user_collection_ext_modify.html' },
+            { text: '删除收藏', link: 'user_collection_delete.html' },
+            { text: '获取收藏', link: 'user_collection_get.html' },
+          ]
+        },
       ],
       only: ['server-side']
   },
@@ -750,7 +778,34 @@ const documentSidebar = [
     text: '离线推送',
     collapsible: true,
     children: [
-      { text: '离线推送设置', link: 'push.html' },
+      { 
+        text: '设置离线推送',
+        collapsible: true,
+        children: [
+          { text: '绑定和解绑推送信息', link: 'push_information_bind_unbind.html' },
+          { text: '查询推送绑定信息', link: 'push_information_bind_query.html' },
+          { text: '设置单用户的推送昵称', link: 'push_nickname_set_single.html' },
+          { text: '批量设置推送昵称', link: 'push_nickname_set_batch.html' },
+          { text: '设置通知展示方式', link: 'push_display_mode_set.html' },
+          { text: '设置免打扰和通知方式', link: 'push_settings_set.html' },
+          { text: '查询免打扰和通知方式设置', link: 'push_settings_query.html' },
+          { text: '设置通知首选语言', link: 'push_preferred_language_set.html' },
+          { text: '获取通知首选语言', link: 'push_preferred_language_obtain.html' },
+          { 
+          text: '使用推送模板',
+          collapsible: true,
+          children: [
+            { text: '概述', link: 'push_template_overview.html' },
+            { text: '创建推送模板', link: 'push_template_create.html' },
+            { text: '删除推送模板', link: 'push_template_delete.html' },
+            { text: '查询推送模板', link: 'push_settings_query.html' },
+            { text: '发消息时配置模板', link: 'push_template_send_message.html' },
+            { text: '接收方配置模板', link: 'push_template_receiver.html' },
+          ]
+        },
+        { text: '常见错误码', link: 'push_error.html' },
+    ]
+  }, 
       { text: '离线推送的消息扩展', link: 'push_extension.html' },
       { text: '查询离线推送结果', link: 'push_result_statistics.html' }
     ],
