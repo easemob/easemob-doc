@@ -24,8 +24,8 @@
 
 用户注册模式包括授权注册和开发注册。你可以点击 **编辑** 切换用户注册模式。
 
-- 授权注册：以应用管理员身份调用环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。该方式用于正式环境。相关的 REST API 介绍，详见 [授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户) 和 [批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)的接口介绍。
-- 开放注册：用户登录客户端 SDK 后自行通过账号密码注册账号。该方式一般用于体验 Demo 和测试环境，不推荐在正式环境中使用。相关的 API 介绍，详见 [客户端](/document/android/login.html#用户注册) 和 [REST API](/document/server-side/account_system.html#开放注册单个用户) 文档。
+- 授权注册：以应用管理员身份调用环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。该方式用于正式环境。相关的 REST API 介绍，详见 [授权注册单个用户](/document/server-side/account_register_authorized_single.html) 和 [批量授权注册用户](/document/server-side/account_register_authorized_batch.html)的接口介绍。
+- 开放注册：用户登录客户端 SDK 后自行通过账号密码注册账号。该方式一般用于体验 Demo 和测试环境，不推荐在正式环境中使用。相关的 API 介绍，详见 [客户端](/document/android/login.html#用户注册) 和 [REST API](/document/server-side/account_register_open.html) 文档。
 
 ![img](/images/console/basic_user_registration.png)
 

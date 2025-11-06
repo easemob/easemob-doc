@@ -194,7 +194,7 @@
 
 | 功能           | 描述                                                         |
 | :------------- | :----------------------------------------------------------- |
-| 创建聊天室     | 只有被赋予 [超级管理员](/document/server-side/chatroom_superadmin.html) 权限的用户有权限创建聊天室。建议 [调用 REST 接口创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)。 |
+| 创建聊天室     | 只有被赋予 [超级管理员](/document/server-side/chatroom_superadmin_add.html) 权限的用户有权限创建聊天室。建议 [调用 REST 接口创建聊天室](/document/server-side/chatroom_create.html)。 |
 | 加入聊天室     | 没有被加入黑名单的所有 app 用户可自由加入聊天室。                                   |
 | 离开聊天室     | 主动退出聊天室或被移出聊天室。  |
 | 解散聊天室     | 聊天室所有者可解散聊天室。                                       |

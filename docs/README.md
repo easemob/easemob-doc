@@ -255,7 +255,7 @@ projects:
                 link: /document/electron/message.html#撤回消息  
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_recall.html
+                link: /document/server-side/message_recall_single.html
           - text: 搜索消息
             desc: 支持搜索本地数据库中除命令消息之外的所有类型的消息。
             sdks:
@@ -342,7 +342,7 @@ projects:
                 link: /document/windows/reaction.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/reaction.html  
+                link: /document/server-side/reaction_add.html  
           - text: 修改消息
             desc: 修改单聊或群组聊天会话中已经发送成功的文本消息。
             sdks:
@@ -435,7 +435,7 @@ projects:
                 link: /document/electron/conversation.html#插入消息
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_import.html
+                link: /document/server-side/message_import__single.html
           - text: 更新消息
             desc: 更新本地数据库中的消息。
             sdks:
@@ -498,7 +498,7 @@ projects:
                 link: /document/electron/conversation.html  
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_delete.html
+                link: /document/server-side/message_delete_roam_single_msgid.html
           - text: 定向消息
             desc: 发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
             sdks:
@@ -960,9 +960,9 @@ projects:
                 link: /document/electron/chatroom.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/chatroom_manage.html#管理聊天室    
+                link: /document/server-side/chatroom_create.html#管理聊天室    
           - text: 管理聊天室成员
-            desc: 支持创建、加入和退出聊天室、聊天室白名单、黑名单、禁言、以及监听聊天室事件等功能。
+            desc: 支持加入和退出聊天室、聊天室白名单、黑名单、禁言、以及监听聊天室事件等功能。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -996,7 +996,7 @@ projects:
                 link: /document/electron/chatroom.html#加入聊天室
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/chatroom_member_obtain.html#管理聊天室成员
+                link: /document/server-side/chatroom_member_add_single.html
           - text: 管理聊天室属性
             desc: 管理聊天室基本属性，包括聊天室名称、描述和公告，以及自定义属性。
             sdks:
@@ -1032,7 +1032,7 @@ projects:
                 link: /document/electron/chatroom.html#修改聊天室信息
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/chatroom_attribute.html#设置聊天室自定义属性
+                link: /document/server-side/chatroom_announcement_get.html
           - text: 子区管理
             desc: 支持创建、解散、加入、退出子区，修改子区名称、获取子区详情和子区成员列表和子区列表，获取子区中最新一条消息以及监听子区事件。
             sdks:
@@ -1062,7 +1062,7 @@ projects:
                 link: /document/windows/thread.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group_thread.html#管理子区 
+                link: /document/server-side/group_thread_create.html
           - text: 子区消息管理
             desc: 支持发送和接收子区消息、撤回子区消息和获取子区消息。
             sdks:
@@ -1131,7 +1131,7 @@ projects:
                 link: /document/windows/userprofile.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/userprofile.html  
+                link: /document/server-side/user_attribute_set.html  
           - text: 用户关系
             desc: 添加和删除好友、设置好友备注、获取好友列表以及好友黑名单管理功能。
             sdks:
@@ -1164,7 +1164,7 @@ projects:
                 link: /document/windows/user_relationship.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/user_relationship_friend_add.html 
+                link: /document/server-side/user_friend_add.html 
           - text: 用户在线状态订阅
             desc: 订阅和查询用户的在线状态（即 Presence），包含用户的在线、离线以及自定义状态。
             sdks:
@@ -1197,19 +1197,19 @@ projects:
                 link: /document/windows/presence.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/presence.html
+                link: /document/server-side/presence_set.html
           - text: 用户全局禁言
             desc: 设置单个用户 ID 的单聊、群组或聊天室消息的全局禁言。设置成功后，该用户将无法在对应的单聊、群组或聊天室中发送消息。
             sdks:
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/user_global_mute.html 
+                link: /document/server-side/user_global_mute_overview.html 
           - text: 用户收藏
             desc: 支持收藏聊天过程中发送成功的各类消息或你的其他自定义内容。这些收藏的内容永久保存，你可以随时查看。
             sdks:
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/user_favorite.html                 
+                link: /document/server-side/user_collection_add_single.html                 
           - text: 多设备登录
             desc: 同一账号在多个设备上登录，所有已登录的设备之间可以同步消息、好友和群组相关操作、子区操作以及会话操作。
             sdks:
@@ -1266,7 +1266,7 @@ projects:
                 link: /document/react-native/push/push_overview.html  
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/push.html 
+                link: /document/server-side/push_information_bind_unbind.html 
       - title: 回调
         icon: /feature/api-server.svg
         contexts:

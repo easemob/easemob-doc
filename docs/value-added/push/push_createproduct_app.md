@@ -46,6 +46,6 @@
 
 未使用环信即时通讯 IM 的用户，需要单独创建用户并进行用户体系集成。
 在环信即时通讯 IM 的左侧导航栏中，选择 **功能配置 > 增值功能 > 即时推送**，在 **用户管理** 页面，点击 **创建PUSH用户** 可以在页面中添加用户，也可使用 REST API进行用户配置。
-用户体系集成介绍参考文档：[用户体系集成](/document/server-side/account_system.html) 
+用户体系集成介绍参考文档：[用户体系集成](/document/server-side/account_register_open.html) 
 
 ![img](/images/instantpush/push_bind_user.png)

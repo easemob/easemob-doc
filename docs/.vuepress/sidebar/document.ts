@@ -616,7 +616,7 @@ const documentSidebar = [
         text: '管理聊天室成员', 
         collapsible: true,
         children: [
-          { text: '获取成员列表', link: 'chatroom_member_obtain.html' },
+          { text: '获取成员列表', link: 'chatroom_member_list_obtain.html' },
           { 
             text: '管理聊天室所有者和管理员', 
             collapsible: true,

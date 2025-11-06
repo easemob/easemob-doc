@@ -9,7 +9,7 @@
 在生产环境中，通常先实现应用自身账号体系的登录，成功后再使用自身应用服务器（App Server）返回的 userId 和 token 进行即时通讯 IM 登录。也就是说，你需要在 App Server 将 Token 分发给客户端。
 
 :::tip
-用户 ID 在应用内唯一，与其他用户通讯时必须传递 userId。因此，userId 可视为公开信息，建议不与应用自身账号相同，且不能是容易猜测（例如 1111）、按特定字符顺序排列（例如 12345 ）、或者具有明显特征（例如，姓名或生日）的字符串，以防止被恶意使用。用户 ID 的设置需求详见 [注册用户](account_system.html#注册用户)。
+用户 ID 在应用内唯一，与其他用户通讯时必须传递 userId。因此，userId 可视为公开信息，建议不与应用自身账号相同，且不能是容易猜测（例如 1111）、按特定字符顺序排列（例如 12345 ）、或者具有明显特征（例如，姓名或生日）的字符串，以防止被恶意使用。用户 ID 的设置需求详见 [注册用户](/document/server-side/account_register_open.html)。
 ::: 
 
 环信服务端支持以下两种方式获取用户 token：
@@ -99,7 +99,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/token'  \
 | `user.created`  | Long  | 注册用户的 Unix 时间戳，单位为毫秒。            |
 | `user.modified`  | Long  | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。          |
 | `user.username`  | String | 用户 ID。                                                       |
-| `user.activated` | Bool  | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户，你需要调用 [解禁用户的 API](/document/server-side/account_system.html#账号解禁)对用户解除封禁。 |
+| `user.activated` | Bool  | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户，你需要调用 [解禁用户的 API](/document/server-side/account_unban.html)对用户解除封禁。 |
 
 如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [响应状态码](/document/server-side/error.html)了解可能的原因。
 

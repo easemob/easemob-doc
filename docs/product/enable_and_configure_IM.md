@@ -377,7 +377,7 @@
 
 2. 在 **用户管理** 页面，点击 **创建IM用户** 按钮，在弹出的对话框中填写用户 ID、推送昵称和密码，然后点击 **保存**。
 
-   各参数的设置要求，详见[注册用户 RESTful API](/document/server-side/account_system.html#开放注册单个用户)。
+   各参数的设置要求，详见[注册用户 RESTful API](/document/server-side/account_register_open.html)。
 
 ![img](/images/product/user_create.png)
 
@@ -407,7 +407,7 @@
 
 2. 在 **聊天室管理** 页面，点击 **创建聊天室**，在弹出的对话框中设置聊天室名称、描述、超级管理员和普通管理员的用户 ID 以及最大成员数，然后点击 **保存**。
 
-   各参数的设置要求，详见[创建聊天室 RESTful API](/document/server-side/chatroom_manage.html#创建聊天室)。
+   各参数的设置要求，详见[创建聊天室 RESTful API](/document/server-side/chatroom_create.html)。
 
 创建群组后，你可以通过以下步骤管理聊天室信息和成员：  
 

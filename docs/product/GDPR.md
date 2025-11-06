@@ -21,19 +21,19 @@
 
 #### 删除用户账号
 
-[删除 App 下指定的用户](/document/server-side/account_system.html#删除单个用户)，删除的用户数据主要包括用户的会话列表、用户属性和好友关系。
+[删除 App 下指定的用户](/document/server-side/account_delete_single.html)，删除的用户数据主要包括用户的会话列表、用户属性和好友关系。
 
 #### 删除用户属性
 
-[删除 App 下指定用户的用户属性](/document/server-side/userprofile.html#删除用户属性)。
+[删除 App 下指定用户的用户属性](/document/server-side/user_attribute_delete.html)。
 
 #### 解散群组
 
-[删除 App 下指定群 ID 的群组](/document/server-side/group_member.html#解散群组)。
+[删除 App 下指定群 ID 的群组](/document/server-side/group_delete.html)。
 
 #### 解散聊天室
 
-[删除 App 下指定 ID 的聊天室](/document/server-side/chatroom_manage.html#解散聊天室)。
+[删除 App 下指定 ID 的聊天室](/document/server-side/chatroom_delete.html)。
 
 ## 数据导出
 
@@ -49,8 +49,8 @@
 
 | REST API                                                     | 描述                                |
 | :----------------------------------------------------------- | :---------------------------------- |
-| [获取单个用户信息](/document/server-side/account_system.html#获取单个用户的详情)<br>[批量获取用户信息](/document/server-side/account_system.html#批量获取用户详情) | 获取 App 下指定用户 ID 的用户信息。 |
-| [获取用户属性](/document/server-side/userprofile.html#获取用户属性) | 获取 App 下指定用户 ID 的用户属性。 |
+| [获取单个用户信息](/document/server-side/account_detail_obtain_single.html)<br>[批量获取用户信息](/document/server-side/account_detail_obtain_batch.html) | 获取 App 下指定用户 ID 的用户信息。 |
+| [获取用户属性](/document/server-side/user_attribute_obtain_single.html) | 获取 App 下指定用户 ID 的用户属性。 |
 
 #### 导出群组数据
 
@@ -69,12 +69,12 @@
 
 | REST API                                                     | 描述                                          |
 | :----------------------------------------------------------- | :-------------------------------------------- |
-| [获取聊天室详情](/document/server-side/chatroom.html#查询聊天室详情) | 获取 App 下指定聊天室 ID 的聊天室详情。       |
-| [App 下所有的聊天室](/document/server-side/chatroom.html#获取-app-中所有的聊天室) | 获取 App 下所有的聊天室列表。                 |
-| [用户加入的聊天室](/document/server-side/chatroom.html#获取用户加入的聊天室) | 获取 App 下指定用户 ID 加入的聊天室列表。     |
-| [聊天室管理员列表](/document/server-side/chatroom.html#获取聊天室管理员列表) | 获取 App 下指定聊天室 ID 的聊天室管理员列表。 |
-| [聊天室成员列表](/document/server-side/chatroom.html#分页获取聊天室成员) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
-| [聊天室禁言列表](/document/server-side/chatroom.html#获取禁言列表) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
+| [获取聊天室详情](/document/server-side/chatroom_obtain_detail.html) | 获取 App 下指定聊天室 ID 的聊天室详情。       |
+| [App 下所有的聊天室](/document/server-side/chatroom_obtain_total.html) | 获取 App 下所有的聊天室列表。                 |
+| [用户加入的聊天室](/document/server-side/chatroom_obtain_joined.html) | 获取 App 下指定用户 ID 加入的聊天室列表。     |
+| [聊天室管理员列表](/document/server-side/chatroom_admin_list_get.html) | 获取 App 下指定聊天室 ID 的聊天室管理员列表。 |
+| [聊天室成员列表](/document/server-side/chatroom_member_list_obtain.html) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
+| [聊天室禁言列表](/document/server-side/chatroom_member_mutelist_obtain.html) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
 
 #### 获取历史消息记录
 
@@ -90,4 +90,4 @@
 
 | REST API                                                     | 描述                          |
 | :----------------------------------------------------------- | :---------------------------- |
-| [下载附件](/document/server-side/message_download.html#下载文件) | 下载 App 下指定 UUID 的附件。 |
+| [下载附件](/document/server-side/message_download_file.html) | 下载 App 下指定 UUID 的附件。 |

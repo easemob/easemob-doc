@@ -57,7 +57,7 @@ SDKClient.Instance.InitWithOptions(options);
 
 ### REST API 注册
 
-请参考 [注册用户](/document/server-side/account_system.html#注册用户)。
+请参考 [注册用户](/document/server-side/account_register_open.html)。
 
 ### SDK 注册
 
@@ -89,7 +89,7 @@ SDK 不支持自动登录，只支持通过以下方式手动登录：
 - 用户 ID + 密码
 - 用户 ID + token
 
-登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
+登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_register_open.html)。
 
 调用登录接口后，收到 `OnConnected` 回调表明 SDK 与环信服务器连接成功。
 
