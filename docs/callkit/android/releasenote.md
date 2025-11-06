@@ -1,5 +1,9 @@
 # Android CallKit 更新日志
 
+## 版本 V4.18.0 2025-11-06
+
+修复用户 RTC 相关状态未重置问题。
+
 ## 版本 4.16.0 2025-08-29
 
 从该版本开始，Android CallKit 源码使用 Kotlin 语言开发，代码迁移至 [新 repo](https://github.com/easemob/easemob-callkit-android)，老版本不再维护。
