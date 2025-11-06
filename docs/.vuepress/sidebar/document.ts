@@ -339,14 +339,42 @@ const documentSidebar = [
       { text: '发送单聊消息', link: 'message_single.html' },
       { text: '发送群聊消息', link: 'message_group.html' },
       { text: '发送聊天室消息', link: 'message_chatroom.html' },
-      { text: '发送全局广播消息', link: 'message_broadcast.html' },
-      { text: '上传和下载文件', link: 'message_download.html' },
+      {
+        text: '发送全局广播消息',
+        collapsible: true,
+        children: [
+        { text: '向所有用户发送广播消息', link: 'broadcast_to_all_users.html' },
+        { text: '向在线用户发送广播消息', link: 'broadcast_to_online_users.html' },
+        { text: '发送聊天室广播消息', link: 'broadcast_to_chatrooms.html' },
+        ],
+      },
+      {
+        text: '上传和下载文件',
+        collapsible: true,
+        children: [
+        { text: '上传文件', link: 'message_upload_file.html' },
+        { text: '删除群聊漫游消息', link: 'message_delete_roam_group_room_msgid.html' },
+        { text: '清空用户漫游消息', link: 'message_delete_roam_user.html' },
+        { text: '清空单聊一段时间漫游消息', link: 'message_delete_roam_single_time.html' },
+        { text: '清空群聊一段时间漫游消息', link: 'message_delete_roam_group_room_time.html' },
+        ],
+      },
       { text: '获取历史消息记录', link: 'message_historical.html' },
       { text: '设置指定消息附件的存储方式', link: 'message_attachment_storage.html' },
       { text: '消息表情回复', link: 'reaction.html' },
       { text: '撤回消息', link: 'message_recall.html' },
       { text: '单向删除会话', link: 'conversation_delete.html' },
-      { text: '单向删除漫游消息', link: 'message_delete.html' },
+      {
+        text: '单向删除漫游消息',
+        collapsible: true,
+        children: [
+        { text: '删除单聊漫游消息', link: 'message_delete_roam_single_msgid.html' },
+        { text: '删除群聊漫游消息', link: 'message_delete_roam_group_room_msgid.html' },
+        { text: '清空用户漫游消息', link: 'message_delete_roam_user.html' },
+        { text: '清空单聊一段时间漫游消息', link: 'message_delete_roam_single_time.html' },
+        { text: '清空群聊一段时间漫游消息', link: 'message_delete_roam_group_room_time.html' },
+        ],
+      },
       { text: '修改消息', link: 'message_modify.html' },
       {
         text: '消息翻译',
@@ -544,16 +572,16 @@ const documentSidebar = [
             text: '拉人入聊天室', 
             collapsible: true,
             children: [
-              { text: '拉单人加入', link: 'group_member_add_single.html' },
-              { text: '批量拉入', link: 'group_members_add_batch.html' },
+              { text: '拉单人加入', link: 'chatroom_member_add_single.html' },
+              { text: '批量拉入', link: 'chatroom_member_add_batch.html' },
             ]  
       },
       { 
             text: '踢人出聊天室', 
             collapsible: true,
             children: [
-              { text: '踢单人', link: 'group_member_remove_single.html' },
-              { text: '批量踢出', link: 'group_members_remove_batch.html' },
+              { text: '踢单人', link: 'chatroom_member_remove_single.html' },
+              { text: '批量踢出', link: 'chatroom_member_remove_batch.html' },
             ]  
       },
       { 
@@ -561,7 +589,7 @@ const documentSidebar = [
         collapsible: true,
         children: [
           { text: '获取成员列表', link: 'chatroom_member_obtain.html' },
-           { 
+          { 
             text: '管理聊天室所有者和管理员', 
             collapsible: true,
             children: [
@@ -574,12 +602,36 @@ const documentSidebar = [
           { text: '管理禁言', 
             collapsible: true,
             children: [
-              { text: '多个或全体成员禁言',  link: 'chatroom_member_mutelist.html' },
-              { text: '标签禁言',  link: 'chatroom_label_mute.html' }
+              { text: '禁言成员',  link: 'chatroom_member_mute.html' },
+              { text: '禁言全员',  link: 'chatroom_member_mute_all.html' },
+              { text: '解除成员禁言',  link: 'chatroom_member_unmute.html' },
+              { text: '解除全员禁言',  link: 'chatroom_member_unmute_all.html' },
+              { text: '获取禁言列表',  link: 'chatroom_member_mutelist_obtain.html' },
+              { text: '按用户标签禁言',  link: 'chatroom_user_tag_mute.html' },
+              { text: '添加用户标签',  link: 'chatroom_user_tag_set.html' },
+              { text: '获取用户标签',  link: 'chatroom_user_tag_get.html' }
             ]
           },  
-          { text: '管理白名单', link: 'chatroom_member_allowlist.html' },
-          { text: '管理黑名单', link: 'chatroom_member_blocklist.html' }
+          { text: '管理白名单', 
+            collapsible: true,
+            children: [
+              { text: '概述',  link: 'chatroom_allowlist_overview.html' },
+              { text: '添加单个白名单成员',  link: 'chatroom_allowlist_add_single.html' },
+              { text: '批量添加白名单成员',  link: 'chatroom_allowlist_add_batch.html' },
+              { text: '移出白名单',  link: 'chatroom_allowlist_remove.html' },
+              { text: '获取白名单列表',  link: 'chatroom_allowlist_obtain.html' }
+            ]
+          },  
+          { text: '管理黑名单', 
+            collapsible: true,
+            children: [
+              { text: '添加单个黑名单成员',  link: 'chatroom_member_blocklist_add_single.html' },
+              { text: '批量添加黑名单成员',  link: 'chatroom_member_blocklist_add_batch.html' },
+              { text: '移出单个黑名单成员',  link: 'chatroom_member_blocklist_remove_single.html' },
+              { text: '批量移出黑名单',  link: 'chatroom_member_blocklist_remove_batch.html' },
+              { text: '获取黑名单列表',  link: 'chatroom_member_blocklist_obtain.html' }
+            ]
+          },  
         ]  
       }
     ],
@@ -589,9 +641,69 @@ const documentSidebar = [
     text: '用户相关',
     collapsible: true,
     children: [
-      { text: '用户体系管理', link: 'account_system.html' },
-      { text: '用户属性', link: 'userprofile.html' },
-      { text: '用户状态订阅', link: 'presence.html' },
+    { text: '用户体系管理', 
+        collapsible: true,
+        children: [
+          { text: '注册用户', 
+            collapsible: true,
+            children: [
+              { text: '开放注册单用户',  link: 'account_register_open.html' },
+              { text: '授权注册单用户',  link: 'account_register_authorized_single.html' },
+              { text: '批量授权注册用户',  link: 'account_register_authorized_batch.html' }
+            ]
+          },  
+          { text: '修改用户密码',  link: 'account_password_change.html' },
+          { text: '获取用户详情', 
+            collapsible: true,
+            children: [
+              { text: '获取单用户详情',  link: 'account_detail_obtain_single.html' },
+              { text: '批量获取用户详情',  link: 'account_detail_obtain_batch.html' }
+            ]
+          }, 
+          { text: '删除用户', 
+            collapsible: true,
+            children: [
+              { text: '删除单用户',  link: 'account_delete_single.html' },
+              { text: '批量删除用户',  link: 'account_delete_batch.html' }
+            ]
+          }, 
+          { text: '封禁用户',  link: 'account_ban.html' },
+          { text: '解禁用户',  link: 'account_unban.html' },
+          { text: '强制用户下线',  link: 'account_offline_forced.html' },
+          { text: '强制用户从单设备下线',  link: 'account_offline_device_single.html' },
+          { text: '获取用户在线状态', 
+            collapsible: true,
+            children: [
+              { text: '获取单个用户在线状态',  link: 'account_presence_obtain_single.html' },
+              { text: '批量获取用户在线状态',  link: 'account_presence_obtain_batch.html' }
+            ]
+          }, 
+          { text: '获取用户在线设备列表',  link: 'account_online_device_obtain.html' },
+        ]
+      }, 
+      { 
+        text: '用户属性',
+        collapsible: true,
+        children: [
+          { text: '设置用户属性', link: 'user_attribute_set.html' },
+          { text: '删除用户属性', link: 'user_attribute_delete.html' },
+          { text: '获取单用户的属性', link: 'user_attribute_obtain_single.html' },
+          { text: '批量获取用户属性', link: 'user_attribute_obtain_batch.html' },
+          { text: '获取总用户属性大小', link: 'user_attribute_capacity_get.html' }
+         ]
+      },
+      { 
+        text: '用户状态订阅',
+        collapsible: true,
+        children: [
+          { text: '设置用户在线状态', link: 'presence_set.html' },
+          { text: '订阅用户在线状态', link: 'presence_subscribe.html' },
+          { text: '取消订阅用户在线状态', link: 'presence_unsubscribe.html' },
+          { text: '获取订阅列表', link: 'presence_subscription_list_obtain.html' },
+          { text: '获取用户在线状态', link: 'presence_get.html' },
+          { text: '获取群组在线成员数量', link: 'presence_group_online_count_obtain.html' }
+         ]
+      },
       { 
         text: '用户关系',
         collapsible: true,
@@ -610,8 +722,27 @@ const documentSidebar = [
           { text: '校验黑名单', link: 'user_relationship_blocklist_check.html' }
          ]
         },
-        { text: '用户全局禁言', link: 'user_global_mute.html' },
-        { text: '用户收藏', link: 'user_favorite.html'}
+        { 
+        text: '用户全局禁言',
+        collapsible: true,
+        children: [
+          { text: '概述', link: 'user_global_mute_overview.html' },
+          { text: '设置用户全局禁言', link: 'user_global_mute_set.html' },
+          { text: '查询单用户全局禁言', link: 'user_global_mute_query_single.html' },
+          { text: '查询所有用户的全局禁言', link: 'user_global_mute_query_all.html' }
+         ]
+        },
+        { 
+        text: '用户收藏',
+        collapsible: true,
+        children: [
+          { text: '添加一条收藏', link: 'user_collection_add_single.html' },
+          { text: '批量添加收藏', link: 'user_collection_add_batch.html' },
+          { text: '修改收藏扩展信息', link: 'user_collection_ext_modify.html' },
+          { text: '删除收藏', link: 'user_collection_delete.html' }
+          { text: '获取收藏', link: 'user_collection_get.html' }
+         ]
+      },
       ],
       only: ['server-side']
   },
