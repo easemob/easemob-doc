@@ -524,7 +524,6 @@ const documentSidebar = [
          collapsible: true,
          children: [
           {text: '修改聊天室信息', link: 'chatroom_modify.html' }, 
-          {text: '转让聊天室', link: 'chatroom_owner_transfer.html' }, 
           {text: '解散聊天室', link: 'chatroom_delete.html' }, 
          ], 
       },
@@ -542,12 +541,36 @@ const documentSidebar = [
          ], 
       },
       { 
+            text: '拉人入聊天室', 
+            collapsible: true,
+            children: [
+              { text: '拉单人加入', link: 'group_member_add_single.html' },
+              { text: '批量拉入', link: 'group_members_add_batch.html' },
+            ]  
+      },
+      { 
+            text: '踢人出聊天室', 
+            collapsible: true,
+            children: [
+              { text: '踢单人', link: 'group_member_remove_single.html' },
+              { text: '批量踢出', link: 'group_members_remove_batch.html' },
+            ]  
+      },
+      { 
         text: '管理聊天室成员', 
         collapsible: true,
         children: [
           { text: '获取成员列表', link: 'chatroom_member_obtain.html' },
-          { text: '添加/移除成员', link: 'chatroom_member_add_delete.html' },
-          { text: '管理聊天室所有者/管理员', link: 'chatroom_member_admin.html' },
+           { 
+            text: '管理聊天室所有者和管理员', 
+            collapsible: true,
+            children: [
+              { text: '变更聊天室所有者', link: 'chatroom_owner_transfer.html' }, 
+              { text: '添加管理员', link: 'chatroom_admin_add.html' },
+              { text: '获取管理员列表', link: 'chatroom_admin_list_get.html' },
+              { text: '删除管理员', link: 'chatroom_admin_remove.html' },
+            ]  
+          },
           { text: '管理禁言', 
             collapsible: true,
             children: [
