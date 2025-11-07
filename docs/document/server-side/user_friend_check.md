@@ -8,13 +8,13 @@
 
 100 次/秒/App Key
 
-## HTTP 请求
+## 请求 URL
 
 ```http
 POST https://{host}/{org_name}/{app_name}/contacts/check
 ```
 
-关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
+关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
 ## 请求示例
 

@@ -8,7 +8,7 @@
 
 100 次/秒/App Key 
 
-## HTTP 请求
+## 请求 URL
 
 ```http
 DELETE https://{host}/{org_name}/{app_name}/moderation/text/list/(list_id)/word/batch
