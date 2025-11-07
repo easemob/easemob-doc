@@ -100,7 +100,7 @@
 | 扩展单个群成员数上限  | 对单个 App Key 内的所有群组生效 | 预付费   | 3000 人/群，500 元/月  | 8000 人/群，500 元/月  |
 | 扩展单个用户可加入群组数上限 | 对单个 App Key 内的所有用户生效 | 预付费   | 2000 群/人：1000 元/月 | 5000 群/人：1000 元/月 |
 | 群聊消息已读回执   | 功能介绍详见[群聊消息已读回执](/document/android/message_receipt.html#群聊)。     | 预付费   | 1000 元/月     | — |
-| 全局禁言   | 功能介绍详见[全局禁言](/document/server-side/user_global_mute.html)。 | 预付费   | 500 元/月    | —    |
+| 全局禁言   | 功能介绍详见[全局禁言](/document/server-side/user_global_mute_overview.html)。 | 预付费   | 500 元/月    | —    |
 | 回调   | 功能介绍详见[回调](/document/server-side/callback_overview.html)。    | 预付费   | 1000 元/月   | —     |
 | 用户在线状态（Presence）订阅   | 功能介绍详见[用户在线状态订阅](/document/server-side/presence_set.html)。     | 预付费   | 1000 元/月     | —   |
 | 消息表情回复 Reaction   | 功能介绍详见[消息表情回复](/document/server-side/reaction_add.html)。    | 预付费   | 600 元/月     | —    |
