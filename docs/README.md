@@ -2016,21 +2016,21 @@ projects:
         icon: /feature/api-client.svg
         contexts:
           - text: 开通审核服务
-            link: /product/moderation/moderation_enable.html
+            link: /value-added/moderation/moderation_enable.html
           - text: 配置审核规则
-            link: /product/moderation/moderation_rule_config.html
+            link: /value-added/moderation/moderation_rule_config.html
           - text: 测试审核规则
-            link: /product/moderation/moderation_rule_test.html
+            link: /value-added/moderation/moderation_rule_test.html
           - text: 查看历史记录
-            link: /product/moderation/moderation_history.html
+            link: /value-added/moderation/moderation_history.html
           - text: 关键词审核
-            link: /product/moderation/moderation_keyword.html
+            link: /value-added/moderation/moderation_keyword.html
           - text: 消息审核机制
-            link: /product/moderation/moderation_mechanism.html
+            link: /value-added/moderation/moderation_mechanism.html
           - text: 审核记录回调
-            link: /product/moderation/moderation_record_callback.html
+            link: /value-added/moderation/moderation_record_callback.html
           - text: 消息人工审核
-            link: /product/moderation/moderation_manual_review.html
+            link: /value-added/moderation/moderation_manual_review.html
       - title: 即时推送
         icon: /feature/api-server.svg
         contexts:  
@@ -2039,13 +2039,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /push/push_integration_note_android.html
+                link: /value-added/push/push_integration_note_android.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /push/push_integration_note_ios.html
+                link: /value-added/push/push_integration_note_ios.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /push/push_by_tag.html      
+                link: /value-added/push/push_api_call_limitation.html   
   - title: API 参考
     features:
       - title: IM 客户端

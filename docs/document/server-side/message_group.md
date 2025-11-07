@@ -55,7 +55,7 @@
 - 你可以设置哪些用户拉漫游消息时拉不到该消息（`roam_ignore_users` 参数）。
 - 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在 [环信控制台开通](/product/console/basic_conversation_group_chatroom.html#rest-发消息写会话列表)。
 - 调用该接口会触发发送后回调事件，请查看 [回调事件文档](callback_message_send.html#发送群组消息)。
-- [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
+- [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/value-added/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
 
 ## 调用频率上限
 
