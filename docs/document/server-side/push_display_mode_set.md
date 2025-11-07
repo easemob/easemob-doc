@@ -80,7 +80,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX   \
 |  - `created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。            |
 |  - `modified`                         | Long    | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。      |
 |  - `username`                         | String  | 用户 ID。用户登录的唯一账号。      |
-|  - `activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
+|  - `activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_unban.html)解除封禁。</li></ul> |
 |  - `notification_display_style`       | Int     | 离线推送通知的展示方式。      |
 |  - `nickname`                         | String  | 离线推送通知收到时显示的昵称。    |
 |  - `notifier_name`                    | String  | 推送证书名称。   |

@@ -97,7 +97,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
 | `entities`       | JSON Array | 响应数据。                          |
 |  - `uuid`         | String | 文件 ID，即时通讯服务分配给该文件的唯一标识符。该参数在发送消息时需用到。  |
 |  - `type` | String | 文件类型，为固定值 `chatfile`。   |
-|  - `share-secret` | String | 文件访问密钥。你需要自行保存 `share-secret`，以便 [下载文件](#下载文件)时使用。 |
+|  - `share-secret` | String | 文件访问密钥。你需要自行保存 `share-secret`，以便 [下载文件](message_download_file.html)时使用。 |
 
 响应体中的其他参数说明如下表所示：
 
