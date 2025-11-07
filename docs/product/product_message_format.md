@@ -261,7 +261,7 @@
 | `directed_template` | Object        | 定向推送模板。此类模板适用于群组消息的离线推送，即群组中某个或某些用户需要接收接收的离线推送通知与其他用户不同的场景。其中的字段如下表所示。    |
 | `disable_at_content` | Boolean        | 是否禁用默认 @ 内容：<br/> - `true`：禁用<br/> - （默认）`false`：不禁用  |
 
-关于 `title_args` 和 `content_args` 字段的设置，详见[推送模板文档](/document/server-side/push_template_overview)。
+关于 `title_args` 和 `content_args` 字段的设置，详见[推送模板文档](/document/server-side/push_template_overview.html)。
 
 `em_push_ext` 结构如下：
 

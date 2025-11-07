@@ -813,7 +813,7 @@ projects:
                 link: /document/electron/conversation.html#删除会话
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/conversation_delete.html#单向删除会话        
+                link: /document/server-side/conversation_delete.html
       - title: 群组和聊天室
         icon: /feature/group.svg
         contexts:
@@ -960,7 +960,7 @@ projects:
                 link: /document/electron/chatroom.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/chatroom_create.html#管理聊天室    
+                link: /document/server-side/chatroom_create.html    
           - text: 管理聊天室成员
             desc: 支持加入和退出聊天室、聊天室白名单、黑名单、禁言、以及监听聊天室事件等功能。
             sdks:
