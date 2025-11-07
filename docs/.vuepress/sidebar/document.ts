@@ -179,18 +179,8 @@ const documentSidebar = [
   { text: '常见问题', link: 'faq.html', only: ['react-native'] },
   { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
   { text: '精简版 SDK', link: 'elite_sdk.html', only: ['android', 'ios']},
+  { text: '环信小程序全平台解决方案', link: 'overview.html', only: ['applet'] },
   {
-    text: '产品介绍',
-    children: [
-      { text: '环信小程序全平台解决方案', link: 'overview.html' },
-      { text: '小程序 SDK 更新日志', link: 'releasenote.html' },
-    ],
-    only: ['applet']
-  },
-  {
-    text: '用户指南',
-    children: [
-      {
         text: '集成介绍',
         collapsible: true,
         children: [
@@ -201,18 +191,20 @@ const documentSidebar = [
           { text: '支付宝小程序', link: 'alipay.html' },
           { text: 'Uniapp 全平台', link: 'uniapp.html' },
         ],
-      },
-      { text: '初始化', link: 'initialization.html' },
-      {
+        only: ['applet']
+  },
+  { text: '初始化', link: 'initialization.html', only: ['applet'] },
+  {
         text: '登录',
         collapsible: true,
         children: [
           { text: '登录介绍', link: 'login.html' },
           { text: '连接', link: 'connection.html' },
           { text: '多设备登录', link: 'multi_device.html' },
-        ],  
+        ], 
+        only: ['applet'] 
       },
-      {
+  {
         text: '消息管理',
         collapsible: true,
         children: [
@@ -231,9 +223,10 @@ const documentSidebar = [
           { text: '翻译消息', link: 'message_translation.html' },
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},  
           { text: '消息审核（举报）', link: 'moderation.html'},      
-        ]
-      },
-      {
+        ],
+        only: ['applet']
+  },
+  {
         text: '会话管理',
         collapsible: true,
         children: [
@@ -243,9 +236,10 @@ const documentSidebar = [
           { text: '置顶会话', link: 'conversation_pin.html' },
           { text: '会话标记', link: 'conversation_mark.html'},
           { text: '删除会话', link: 'conversation_delete.html'},
-        ]
-      },
-      {
+        ],
+        only: ['applet']
+  },
+  {
         text: '群组管理',
         collapsible: true,
         children: [
@@ -261,9 +255,10 @@ const documentSidebar = [
               { text: '管理子区消息', link: 'thread_message.html' }
             ]
           },
-        ]
-      },
-      {
+        ],
+        only: ['applet']
+  },
+  {
         text: '聊天室管理',
         collapsible: true,
         children: [
@@ -271,18 +266,20 @@ const documentSidebar = [
           { text: '创建和管理聊天室', link: 'room_manage.html' },
           { text: '管理聊天室成员', link: 'room_members.html' },
           { text: '管理聊天室属性', link: 'room_attributes.html' },
-        ]
-      },
-      {
+        ],
+        only: ['applet']
+  },
+  {
         text: '用户相关',
         collapsible: true,
         children: [
           { text: '用户关系', link: 'user_relationship.html' },
           { text: '用户属性', link: 'userprofile.html' },
           { text: '在线状态订阅', link: 'presence.html' },
-        ]
-      },    
-      { text: '离线推送', 
+        ],
+        only: ['applet']
+  },    
+  { text: '离线推送', 
         collapsible: true,
         children: [
         { text: '离线推送概述', link: 'push/push_overview.html' }, 
@@ -297,21 +294,23 @@ const documentSidebar = [
             { text: '集成 FCM', link: 'push/uniapp_push_fcm.html' },
           ],
         }
-        ]
-      }, 
-    ],
-    only: ['applet']
-  },
+        ],
+        only: ['applet']
+  }, 
+  { text: 'API 参考', link: 'apireference.html', only: ['applet']},
   {
     text: '错误排查',
+    collapsible: true,
     children: [
       { text: '错误码', link: 'error.html' },
       { text: '日志', link: 'log.html' },
     ],
     only: ['applet']
   },
+  { text: '更新日志', link: 'releasenote.html', only: ['applet']},
   {
     text: '其他帮助',
+    collapsible: true,
     children: [
       { text: '小程序 API 文档', link: 'apidoc.html' },
       { text: 'Uniapp 生成原生 Android、iOS 应用', link: 'uniappnativeapp.html' },
