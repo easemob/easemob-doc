@@ -76,7 +76,7 @@ curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users"  \
 | - `created`       | Long       | 注册用户的 Unix 时间戳，单位为毫秒。                         |
 | - `modified`      | Long       | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。             |
 | - `username`      | String     | 用户 ID。                                                    |
-| - `activated`     | Bool       | 用户是否为正常状态： - `true`：用户为正常状态。 - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](http://localhost:8080/document/server-side/user_account_unban.html)方法解除封禁。 |
+| - `activated`     | Bool       | 用户是否为正常状态： - `true`：用户为正常状态。 - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](user_account_unban.html)方法解除封禁。 |
 
 响应体中的其他参数说明如下表所示：
 
