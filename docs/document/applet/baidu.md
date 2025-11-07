@@ -1,16 +1,16 @@
 # 百度小程序集成介绍
 
-<Toc />
+百度小程序 SDK 集成步骤如下：
 
-### 注册环信账号
+## 步骤一 注册环信账号
 
-开发者需要在环信控制台 [注册并创建应用](/product/console/app_create.html)，来获取唯一 App Key，SDK 初始化时需要配置 App Key。
+开发者需要在环信控制台 [注册并创建应用](/product/console/app_create.html)，获取唯一 App Key，SDK 初始化时需要配置 App Key。
 
-### 搭建百度小程序开发环境
+## 步骤二 搭建百度小程序开发环境
 
 首先需要下载并安装 [开发者工具](https://smartprogram.baidu.com/docs/introduction/tool/)，然后按照百度小程序的 [接入流程](https://smartprogram.baidu.com/docs/develop/tutorial/startdevelop/) 一步步创建一个小程序。
 
-### 配置服务器域名
+## 步骤三 配置服务器域名
 
 小程序在发布前，需要配置合法域名。
 
@@ -38,20 +38,18 @@
 
 ![img](/images/applet/service_overview.png)
 
-### 说明
-
+:::tip
 百度小程序注册主体不能为个人，必须为企业、媒体、政府等。
+:::
 
-### 集成 SDK
-
-#### 下载 SDK
+## 步骤四 下载 SDK
 
 可以通过以下两种方式获取 SDK：
 
 - 通过官网 [下载 SDK](https://www.easemob.com/download/im)
 - 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
 
-#### 引入 SDK
+## 步骤五 引入 SDK
 
 - 开始一个全新的项目
   1. 将下载的 SDK（src/sdk/）导入到自己的项目中。
@@ -60,14 +58,14 @@
 
 将下载的代码导入开发者工具即可运行起来。
 
-#### 调用示例
+调用示例如下所示：
 
 ```javascript
 //使用示例
 import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本sdk
 ```
 
-#### 实例调用方式
+## 步骤六 实例化 SDK
 
 实例化 SDK，并挂载在全局对象下。
 
@@ -80,5 +78,6 @@ WebIM.conn = new WebIM.connection({
   useOwnUploadFun: false, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传url）
   isHttpDNS: false, // 在小程序上需设置为false
 });
+```
 
 小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/integration.html)。
