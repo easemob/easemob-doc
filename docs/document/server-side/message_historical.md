@@ -11,7 +11,7 @@
 - 单次请求获取从指定起始时间开始一小时内的发送的历史消息记录。
 - 你最多可以获取最近 3 天的历史消息记录。若要提升该限制，你需要联系环信商务。
 - 当平台消息分发量较大时，服务器生成历史消息记录需要一定时间，建议 24 小时后拉取这些记录。若对时效性有较高要求，推荐使用 [发送后回调服务](callback_postsending.html)。
-- 若调用了 REST API [单向删除会话](conversation_delete.html) 或 [单向删除漫游消息](message_delete.html)，不影响通过该接口的获取的历史消息记录。
+- 若调用了 REST API [单向删除会话](conversation_delete.html) 或 [单向删除漫游消息](message_delete_roam_single_msgid.html)，不影响通过该接口的获取的历史消息记录。
 
 ### 调用频率上限
 
@@ -161,7 +161,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/chatmessages/2018112717'    \
 | :------------ | :----- | :-------------------------------------------------------------------------------- |
 | `file_length` | Long   | 图片附件大小，单位为字节。                                                        |
 | `filename`    | String | 图片文件名称，包含文件后缀名。                                                    |
-| `secret`      | String | 图片文件访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。 |
+| `secret`      | String | 图片文件访问密钥。如果 [文件上传](message_upload_file.html) 时设置了文件访问限制，则该字段存在。 |
 | `size`        | JSON   | 图片的尺寸。单位为像素。<br/> - `height`：图片高度。<br/> - `width`：图片宽度。   |
 | `type`        | String | 消息类型。图片消息为 `img`。                                                      |
 | `url`         | String | 图片 URL 地址。                                                                   |
@@ -217,7 +217,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/chatmessages/2018112717'    \
 | :------------ | :----- | :------------------------------------------ |
 | `file_length` | Long   | 语音附件大小。单位为字节。                                                        |
 | `filename`    | String | 语音文件名称，包含文件后缀名。                                                    |
-| `secret`      | String | 语音文件访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。 |
+| `secret`      | String | 语音文件访问密钥。如果 [文件上传](message_upload_file.html) 时设置了文件访问限制，则该字段存在。 |
 | `length`      | Int    | 语音时长。单位为秒。                                                              |
 | `type`        | String | 消息类型。语音消息为 `audio`。                                                    |
 | `url`         | String | 语音文件的 URL 地址。                                                             |
@@ -246,7 +246,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/chatmessages/2018112717'    \
 | :------------- | :----- | :--------------------------------- |
 | `file_length`  | Long   | 视频附件大小。单位为字节。           |
 | `filename`     | String | 视频文件名称，包含文件后缀名。             |
-| `secret`       | String | 视频文件的访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。     |
+| `secret`       | String | 视频文件的访问密钥。如果 [文件上传](message_upload_file.html) 时设置了文件访问限制，则该字段存在。     |
 | `length`       | Int    | 视频时长。单位为秒。                          |
 | `size`         | JSON   | 视频缩略图尺寸。单位为像素。<br/> - `width`：视频缩略图的宽度；<br/> - `height`：视频缩略图的高度。    |
 | `thumb`        | String | 视频缩略图的 URL 地址，格式为 https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中，`file_uuid` 为视频缩略图上传后，环信服务器返回的缩略图的 UUID。 |
@@ -279,7 +279,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/chatmessages/2018112717'    \
 | :------------ | :----- | :---------------------------------------------------------------------------- |
 | `file_length` | Long   | 文件大小。单位为字节。                                                        |
 | `filename`    | String | 文件名称，包含文件后缀名。                                                    |
-| `secret`      | String | 文件访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。 |
+| `secret`      | String | 文件访问密钥。如果 [文件上传](message_upload_file.html) 时设置了文件访问限制，则该字段存在。 |
 | `type`        | String | 消息类型。文件消息为 `file`。                                                 |
 | `url`         | String | 文件的 URL 地址。你可以访问该 URL 下载历史消息文件。                          |
 
@@ -367,7 +367,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/chatmessages/2018112717'    \
 | `combineLevel`  | Int   | 合并消息的嵌套层级数。 |
 | `file_length` | Int | 合并消息附件的大小，单位为字节。               |
 | `filename`        | String | 合并消息的附件名称。     |
-| `secret`        | String | 合并消息附件的访问密钥。如果[文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。  |
+| `secret`        | String | 合并消息附件的访问密钥。如果[文件上传](message_upload_file.html) 时设置了文件访问限制，则该字段存在。  |
 | `subType`        | String | 表示消息类型为合并消息。                |
 | `summary`        | String | 合并消息的概要。                |
 | `title`        | String | 合并消息的标题。                |

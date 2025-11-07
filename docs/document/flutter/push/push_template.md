@@ -35,7 +35,7 @@
 
 你可以通过以下两种方式设置离线推送模板：
 
-- [调用 REST API 配置](/document/server-side/push.html#使用推送模板)。
+- [调用 REST API 配置](/document/server-side/push_template_overview)。
 - 在 [环信控制台](https://console.easemob.com/user/login) 设置推送模板。
 
 推送模板相关的数据结构，详见[推送扩展字段](/document/server-side/push_extension.html)。
@@ -96,7 +96,7 @@
 
 ### 添加自定义推送模板
 
-即时通讯 IM 支持添加自定义推送模板。除了 [调用 RESTful 接口](/document/server-side/push.html#创建离线推送模板) 创建自定义推送模板，你还可以在 [环信控制台](https://console.easemob.com/user/login) 添加自定义推送模板。**自定义推送模板的级别比默认模板高。**
+即时通讯 IM 支持添加自定义推送模板。除了 [调用 RESTful 接口](/document/server-side/push_template_create.html) 创建自定义推送模板，你还可以在 [环信控制台](https://console.easemob.com/user/login) 添加自定义推送模板。**自定义推送模板的级别比默认模板高。**
 
 在 **模板管理** 页面，点击 **添加推送模板** 创建自定义推送模板。
 

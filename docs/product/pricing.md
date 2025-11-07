@@ -102,7 +102,7 @@
 | 群聊消息已读回执   | 功能介绍详见[群聊消息已读回执](/document/android/message_receipt.html#群聊)。     | 预付费   | 1000 元/月     | — |
 | 全局禁言   | 功能介绍详见[全局禁言](/document/server-side/user_global_mute.html)。 | 预付费   | 500 元/月    | —    |
 | 回调   | 功能介绍详见[回调](/document/server-side/callback_overview.html)。    | 预付费   | 1000 元/月   | —     |
-| 用户在线状态（Presence）订阅   | 功能介绍详见[用户在线状态订阅](/document/server-side/presence.html)。     | 预付费   | 1000 元/月     | —   |
+| 用户在线状态（Presence）订阅   | 功能介绍详见[用户在线状态订阅](/document/server-side/presence_set.html)。     | 预付费   | 1000 元/月     | —   |
 | 消息表情回复 Reaction   | 功能介绍详见[消息表情回复](/document/server-side/reaction_add.html)。    | 预付费   | 600 元/月     | —    |
 | 子区 Thread    | 功能介绍详见[管理子区](/document/server-side/group_thread_create.html)。        | 预付费   | 600 元/月    | —     |
 | 消息举报       | 功能介绍详见[消息举报](/document/android/moderation.html)。       | 预付费   | 500 元/月     | —   |

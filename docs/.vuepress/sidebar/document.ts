@@ -411,7 +411,7 @@ const documentSidebar = [
         text: '导入消息',
         collapsible: true,
         children: [
-        { text: '导入单聊消息', link: 'message_import__single.html' },
+        { text: '导入单聊消息', link: 'message_import_single.html' },
         { text: '导入群聊消息', link: 'message_import_group.html' },
         ],
       },

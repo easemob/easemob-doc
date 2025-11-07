@@ -73,15 +73,15 @@
 
 对于图片消息，通过 REST API 发消息时建议传入 `filename` 参数，否则客户端收到图片消息时无法显示文件名称，而且需保证通过 `url` 参数能下载到对应图片。
 
-若上传图片时，设置了文件访问限制（`restrict-access`），则图片上传后，从[文件上传](/document/server-side/message_download.html#上传文件)的响应 body 中获取的 `share-secret`，发送图片消息时传入该参数。上传原图，环信服务器会自动为图片生成缩略图。
+若上传图片时，设置了文件访问限制（`restrict-access`），则图片上传后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`，发送图片消息时传入该参数。上传原图，环信服务器会自动为图片生成缩略图。
 
 图片消息的 body 包含如下字段：
 
 | 参数          | 类型   | 描述        |
 | :------------ | :----- | :------------------------ |
 | `filename`    | String | 图片文件名称，包含文件后缀名。     |
-| `secret`      | String | 图片的访问密钥，即成功上传图片后，从[文件上传](/document/server-side/message_download.html#上传文件)的响应 body 中获取的 `share-secret`。如果图片文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。 |
-| `url`         | String | 图片 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从[文件上传](/document/server-side/message_download.html#上传文件)的响应 body 中获取。  |
+| `secret`      | String | 图片的访问密钥，即成功上传图片后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`。如果图片文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。 |
+| `url`         | String | 图片 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取。  |
 | `size`        | JSON   | 图片的尺寸。单位为像素。<br/> - `height`：图片高度。<br/> - `width`：图片宽度。   |
 
 示例如下：
@@ -102,16 +102,16 @@
 
 对于语音消息，通过 REST API 发消息时建议传入 `filename` 参数，否则客户端收到语音消息时无法显示文件名称，而且需保证通过 `url` 参数能下载到对应语音。
 
-若上传语音文件时，设置了文件访问限制（`restrict-access`），则文件上传后，从[文件上传](/document/server-side/message_download.html#上传文件)的响应 body 中获取的 `share-secret`，发送语音消息时传入该参数。 
+若上传语音文件时，设置了文件访问限制（`restrict-access`），则文件上传后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`，发送语音消息时传入该参数。 
 
 语音消息的 body 包含如下字段：
 
 | 参数          | 类型   | 描述                                                                              |
 | :------------ | :----- | :------------------------------------------ |
-| `url`         | String | 语音文件的 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传语音文件后，从[文件上传](/document/server-side/message_download.html#上传文件)的响应 body 中获取。 |
+| `url`         | String | 语音文件的 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传语音文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取。 |
 | `filename`    | String | 语音文件名称，包含文件后缀名。    |
 | `length`      | Int    | 语音时长。单位为秒。    |
-| `secret`      | String | 语音文件的访问密钥，即成功上传语音文件后，从[文件上传](/document/server-side/message_download.html#上传文件)的响应 body 中获取的 `share-secret`。如果语音文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。 |
+| `secret`      | String | 语音文件的访问密钥，即成功上传语音文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`。如果语音文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。 |
 
 示例如下：
 
@@ -128,7 +128,7 @@
 
 对于视频消息，通过 REST API 发消息时建议传入 `filename` 参数，否则客户端收到视频消息时无法显示文件名称，而且需保证通过 `url` 参数能下载到对应视频。
 
-若上传视频文件时，设置了文件访问限制（`restrict-access`），则文件上传后，从[文件上传](/document/server-side/message_download.html#上传文件)的响应 body 中获取的 `share-secret`，发送视频消息时传入该参数。环信服务器不会自动为视频文件生成缩略图。若需要视频缩略图，需先调用[文件上传](/document/server-side/message_download.html#上传文件)接口上传缩略图。然后，再次调用文件上传接口上传视频源文件。
+若上传视频文件时，设置了文件访问限制（`restrict-access`），则文件上传后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`，发送视频消息时传入该参数。环信服务器不会自动为视频文件生成缩略图。若需要视频缩略图，需先调用[文件上传](/document/server-side/message_upload_file.html)接口上传缩略图。然后，再次调用文件上传接口上传视频源文件。
 
 视频消息的 body 包含如下字段：
 
@@ -137,10 +137,10 @@
 | `filename`     | String | 视频文件名称，包含文件后缀名。  |
 | `thumb`        | String | 视频缩略图的 URL 地址，格式为 https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中，`file_uuid` 为视频缩略图上传后，环信服务器返回的缩略图的 UUID。 |
 | `length`       | Int    | 视频时长。单位为秒。   |
-| `secret`       | String | 视频文件的访问密钥，即成功上传视频文件后，从[文件上传](/document/server-side/message_download.html#上传文件)的响应 body 中获取的 `share-secret`。如果视频文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。  |
+| `secret`       | String | 视频文件的访问密钥，即成功上传视频文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`。如果视频文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。  |
 | `file_length`  | Long   | 否      | 视频文件大小，单位为字节。  |
 | `thumb_secret` | String | 缩略图文件访问密钥。如果文件上传时设置了文件访问限制，则该字段存在。 |
-| `url`          | String | 视频文件的 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从[文件上传](/document/server-side/message_download.html#上传文件)的响应 body 中获取。 |
+| `url`          | String | 视频文件的 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取。 |
 
 示例如下：
 
@@ -160,15 +160,15 @@
 
 对于文件消息，通过 REST API 发消息时建议传入 `filename` 参数，否则客户端收到文件消息时无法显示文件名称，而且需保证通过 `url` 参数能下载到对应文件。
 
-若上传文件时，设置了文件访问限制（`restrict-access`），则文件上传后，从[文件上传](/document/server-side/message_download.html#上传文件)的响应 body 中获取的 `share-secret`，发送文件消息时传入该参数。 
+若上传文件时，设置了文件访问限制（`restrict-access`），则文件上传后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`，发送文件消息时传入该参数。 
 
 文件消息的 body 包含如下字段：
 
 | 参数       | 类型   | 是否必需 | 描述     |
 | :--------- | :----- | :------- | :------------ |
 | `filename` | String | 否       | 文件名称。建议传入该参数，否则客户端收到文件消息时无法显示文件名称。   |
-| `secret`   | String | 否       | 文件访问密钥，即成功上传文件后，从 [文件上传](/document/message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。      |
-| `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](/document/message_download.html#上传文件) 的响应 body 中获取。 |
+| `secret`   | String | 否       | 文件访问密钥，即成功上传文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。如果文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。      |
+| `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取。 |
 
 示例如下：
 
@@ -261,7 +261,7 @@
 | `directed_template` | Object        | 定向推送模板。此类模板适用于群组消息的离线推送，即群组中某个或某些用户需要接收接收的离线推送通知与其他用户不同的场景。其中的字段如下表所示。    |
 | `disable_at_content` | Boolean        | 是否禁用默认 @ 内容：<br/> - `true`：禁用<br/> - （默认）`false`：不禁用  |
 
-关于 `title_args` 和 `content_args` 字段的设置，详见[推送模板文档](/document/server-side/push.html#使用推送模板)。
+关于 `title_args` 和 `content_args` 字段的设置，详见[推送模板文档](/document/server-side/push_template_overview)。
 
 `em_push_ext` 结构如下：
 

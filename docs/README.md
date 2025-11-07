@@ -435,7 +435,7 @@ projects:
                 link: /document/electron/conversation.html#插入消息
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_import__single.html
+                link: /document/server-side/message_import_single.html
           - text: 更新消息
             desc: 更新本地数据库中的消息。
             sdks:
