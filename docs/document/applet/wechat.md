@@ -1,20 +1,18 @@
-# 微信小程序集成介绍
+# 微信小程序集成
 
 <Toc />
 
-### Demo 体验
+微信小程序 SDK 集成步骤如下：
 
-你可以[体验微信小程序 Demo](/product/demo.html#各端原生开发-demo)，使用微信扫描二维码，并查看 Demo 源码。
+## 步骤一 注册环信账号
 
-### 注册环信账号
+开发者需要在环信控制台 [注册并创建应用](/product/console/app_create.html)，获取唯一 App Key，SDK 初始化时需要配置 App Key。
 
-开发者需要在环信控制台 [注册并创建应用](/product/console/app_create.html)，来获取唯一 App Key，SDK 初始化时需要配置 App Key。
-
-### 搭建微信小程序开发环境
+## 步骤二 搭建微信小程序开发环境
 
 首先需要下载并安装 [开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，然后按照微信小程序的 [接入流程](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/getstart.html#%E7%94%B3%E8%AF%B7%E5%B8%90%E5%8F%B7)一步步创建一个小程序。
 
-### 配置服务器域名
+## 步骤三 配置服务器域名
 
 小程序在发布前，需要配置合法域名。
 
@@ -44,32 +42,28 @@
 
 ![img](/images/applet/service_overview.png)
 
-### 集成 SDK
-
-#### 下载 SDK
+## 步骤四 下载 SDK
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
-- 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
+- 通过官网 [下载 SDK](https://www.easemob.com/download/im#applets)
+- 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件。
 
-#### 引入 SDK
+## 步骤五 引入 SDK
 
 - 开始一个全新的项目
   1. 将下载的 SDK（src/sdk/）导入到自己的项目中。
   2. 引入 SDK：`import EasemobChat from "../sdk/Easemob-chat.js";`
 - 基于 Demo 二次开发
 
-将下载的代码导入开发者工具即可运行起来。
-
-#### 调用示例
+将下载的代码导入开发者工具即可运行起来。调用示例如下：
 
 ```javascript
 //使用示例
 import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本sdk
 ```
 
-#### 实例调用方式
+## 步骤六 实例化 SDK
 
 实例化 SDK，并挂载在全局对象下。
 
