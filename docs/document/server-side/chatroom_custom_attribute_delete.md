@@ -78,7 +78,7 @@ curl -X DELETE POST 'https://XXXX/XXXX/XXXX/metadata/chatroom/662XXXX13/user/use
 | `uri`             | String | 请求 URL。                                                                     |
 | `status`          | String | 请求状态。若请求成功，返回 `ok`。 |
 | `timestamp`       | Long   | Unix 时间戳，单位为毫秒。                                                      |
-| `action`          | String | 执行的操作。在该响应中，该字段的值为 `delete`，表示删除聊天室自定义属性。 |
+| `action`          | String | 请求方法。 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 

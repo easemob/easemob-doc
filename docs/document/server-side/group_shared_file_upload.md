@@ -24,10 +24,14 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' -F file=@/Users/test/image/IMG_3.JPG
+curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66021836783617/share_files'   \
+-H 'Accept: application/json'  \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-H 'Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'  \
+-F file=@/Users/test/image/IMG_3.JPG
 ```
 
-## 请求 header
+## 请求 header 参数
 
 | 参数              | 类型   | 是否必需 | 描述            |
 | :---------------- | :----- | :------- | :----------------------------- |

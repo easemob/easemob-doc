@@ -25,12 +25,14 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST https://XXXX/XXXX/XXXX/thread/1XXXX7/users -d '{
+curl -X POST https://XXXX/XXXX/XXXX/thread/1XXXX7/users   \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-d '{
 "usernames": [
 "test2",
 "test3"
 ]
-}' -H 'Authorization: Bearer <YourAppToken>'
+}' 
 ```
 
 ## 请求 header 参数

@@ -93,7 +93,7 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/users?limit=2'  \
 
 | 参数              | 类型   | 描述                                                                           |
 | :---------------- | :----- | :----------------------------------------------------------------------------- |
-| `action`          | String | 请求方法。                                                                     |
+| `action`          | String | 执行的操作。 `delete` 表示删除用户操。                                                                  |
 | `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
 | `uri`             | String | 请求 URL。                                                                     |

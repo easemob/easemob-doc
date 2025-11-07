@@ -21,7 +21,11 @@ POST https://{host}/{org_name}/{app_name}/contacts/check
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/contacts/check' -d '{
+curl -X POST 'https://XXXX/XXXX/XXXX/contacts/check'  \
+-H 'Content-Type: application/json'   \
+-H 'Accept: application/json'   \
+-H 'Authorization: Bearer <YourAppToken>'    \
+-d '{
     "username": "user1", 
     "check_list": [ 
     "user2",
