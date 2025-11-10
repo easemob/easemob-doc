@@ -26,7 +26,7 @@
 
    ![img](/images/console/account_registration_mail_auth.png)
    
-8. 在 **账号信息** 页面点击 **认证邮箱**。
+8. 在 **安全设置** 页面点击 **认证邮箱**。
    
     ![img](/images/console/account_info.png)
 
