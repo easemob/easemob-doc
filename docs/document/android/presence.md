@@ -132,6 +132,8 @@ EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer
 为方便用户管理订阅关系，SDK 提供 `EMPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
 ```java
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页的订阅用户的数量。
 EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSize, new EMValueCallBack<List<String>>() {
     @Override
     public void onSuccess(List<String> subscribedMembers) {

@@ -426,6 +426,8 @@ EMClient.getInstance().groupManager().unMuteGroupMembers(String groupId, List<St
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchGroupMuteList(String, int, int, EMValueCallBack)。
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页返回的禁言成员数。
 EMClient.getInstance().groupManager().fetchGroupMuteList(String groupId, int pageNum, int pageSize);
 ```
 
