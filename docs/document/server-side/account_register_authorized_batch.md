@@ -75,7 +75,13 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XXXX/users" -d '[{"username":"user1", "password":"123"}, {"username":"user2", "password":"456"}, {"username":"user3", "password":"789"}]'
+curl -X POST -i  "https://XXXX/XXXX/XXXX/users"  \
+-H "Authorization: Bearer <YourAppToken>"  \
+-d '[
+      {"username":"user1", "password":"123"}, 
+      {"username":"user2", "password":"456"}, 
+      {"username":"user3", "password":"789"}
+  ]'
 ```
 
 ## 响应示例二
@@ -132,6 +138,8 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中的 `entities` 字段如下：
 
+| 参数              | 类型   | 描述                                                                           |
+| :---------------- | :----- | :----------------------------------------------------------------------------- |
 | `entities`        | JSON Array | 响应实体。                                                   |
 | - `uuid`          | String     | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。 |
 | - `type`          | String     | 对象类型，无需关注。                                         |

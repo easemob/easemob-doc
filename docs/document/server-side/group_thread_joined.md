@@ -29,7 +29,8 @@ GET https://{host}/{org_name}/{app_name}/threads/user/{username}?limit={limit}&c
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET https://XXXX/XXXX/XXXX/threads/user/test4 -H 'Authorization: Bearer <YourAppToken>'
+curl -X GET https://XXXX/XXXX/XXXX/threads/user/test4   \
+-H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ## 请求 header 参数

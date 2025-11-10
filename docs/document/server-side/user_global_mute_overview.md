@@ -16,6 +16,6 @@
 
 ## API 列表
 
-- 设置用户全局禁言
-- 查询单个用户 ID 全局禁言
-- 查询 app 下的所有全局禁言的用户
+- [设置用户全局禁言](user_global_mute_set.html)
+- [查询单个用户 ID 全局禁言](user_global_mute_query_single.html)
+- [查询 app 下的所有全局禁言的用户](user_global_mute_query_all.html)

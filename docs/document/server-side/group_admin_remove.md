@@ -27,7 +27,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin/{usernam
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin/user1 -H 'Authorization: Bearer <YourAppToken>'
+curl -X DELETE HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin/user1    \
+-H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ## 请求 header 参数

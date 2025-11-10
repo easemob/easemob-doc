@@ -29,14 +29,14 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{use
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/{groupid}/white/users/{username}'
+curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/{groupid}/white/users/{username}'  \
+-H 'Accept: application/json'  \
+-H 'Authorization: Bearer <YourAppToken>' 
 ```
 
 ## 请求 header 参数
 
 关于 `Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
-
-## 请求 body 参数
 
 ## 响应示例
 

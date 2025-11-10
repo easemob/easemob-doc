@@ -29,7 +29,10 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/disable'
+curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/disable'   \
+-H 'Content-Type: application/json'   \
+-H 'Accept: application/json'   \
+-H 'Authorization: Bearer <YourAppToken>' 
 ```
 
 ## 请求 header 参数

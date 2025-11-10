@@ -27,7 +27,10 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7' -d '{
+curl -X PUT 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7'   \
+-H 'Accept: application/json'  \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
     "groupname": "test groupname",
     "avatar": "https://www.XXXX.com/XXX/image",
     "description": "updategroupinfo12311",

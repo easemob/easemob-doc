@@ -26,7 +26,8 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE https://XXXX/XXXX/XXXX/thread/1XXXX7 -H 'Authorization: Bearer <YourAppToken>'
+curl -X DELETE https://XXXX/XXXX/XXXX/thread/1XXXX7   \
+-H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ## 请求 header 参数

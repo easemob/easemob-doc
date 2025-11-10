@@ -25,10 +25,10 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/get
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/get'\
--H'Content-Type: application/json'\
--H'Accept: application/json'\
--H'Authorization: Bearer <YourAppToken>'\
+curl -X POST 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/get' \
+-H 'Content-Type: application/json'\
+-H 'Accept: application/json'\
+-H 'Authorization: Bearer <YourAppToken>'\
 -d '{
     "targets":["test1","test2"],
     "properties":["key1","key2"]

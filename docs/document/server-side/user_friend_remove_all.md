@@ -76,6 +76,8 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/contacts/users/XXXX' \
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
 | 401  | unauthorized | Unable to authenticate (OAuth) | Token 不合法，可能过期或 Token 错误。 | 使用新的 Token 访问。 |
 | 429 | reach_limit | This request has reached api limit. | 接口调用超过频率限制。 | 联系商务调整限流或者控制调用速率。 |
 | 403   | forbidden_service_operation | Service operation not allowed | app 或用户被封禁。 | 先解禁 app 或用户后再调用该接口。 |

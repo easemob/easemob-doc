@@ -35,7 +35,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups?limit=2'
+curl -X GET 'https://XXXX/XXXX/XXXX/chatgroups?limit=2'   \
+-H 'Accept: application/json'   \
+-H 'Authorization: Bearer <YourAppToken>' 
 ```
 
 第二页
@@ -43,7 +45,9 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups?limit=2&cursor=ZGNXXXX6Mg'
+curl -X GET 'https://XXXX/XXXX/XXXX/chatgroups?limit=2&cursor=ZGNXXXX6Mg'  \
+-H 'Accept: application/json'  \ 
+-H 'Authorization: Bearer <YourAppToken>' 
 ```
 
 ## 响应示例

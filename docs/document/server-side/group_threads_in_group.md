@@ -30,7 +30,8 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET https://XXXX/XXXX/XXXX/threads/chatgroups/XXXX/user/XXXX -H 'Authorization: Bearer <YourAppToken>'
+curl -X GET https://XXXX/XXXX/XXXX/threads/chatgroups/XXXX/user/XXXX   \
+-H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ## 请求 header 参数
