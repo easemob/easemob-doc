@@ -28,11 +28,15 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/blocks/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
+curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users'   \
+-H 'Content-Type: application/json'    \
+-H 'Accept: application/json'    \
+-H 'Authorization: Bearer <YourAppToken>'    \
+-d '{
    "usernames": [
      "user3","user4"
    ]
- }' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users'
+ }' 
 ```
 
 ## 请求 header 参数

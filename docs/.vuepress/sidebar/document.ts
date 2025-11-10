@@ -589,7 +589,7 @@ const documentSidebar = [
           {text: '修改聊天室公告', link: 'chatroom_announcement_update.html' }, 
           {text: '设置聊天室自定义属性', link: 'chatroom_custom_attribute_set.html' }, 
           {text: '强制设置聊天室自定义属性', link: 'chatroom_custom_attribute_set_force.html' }, 
-          {text: '获取聊天室自定义属性', link: 'chatroom_custom_attribute_set.html' }, 
+          {text: '获取聊天室自定义属性', link: 'chatroom_custom_attribute_get.html' }, 
           {text: '删除聊天室自定义属性', link: 'chatroom_custom_attribute_delete.html' }, 
           {text: '强制删除聊天室自定义属性', link: 'chatroom_custom_attribute_delete_force.html' }, 
          ], 
@@ -796,7 +796,7 @@ const documentSidebar = [
             { text: '概述', link: 'push_template_overview.html' },
             { text: '创建推送模板', link: 'push_template_create.html' },
             { text: '删除推送模板', link: 'push_template_delete.html' },
-            { text: '查询推送模板', link: 'push_settings_query.html' },
+            { text: '查询推送模板', link: 'push_template_query.html' },
             { text: '发消息时配置模板', link: 'push_template_send_message.html' },
             { text: '接收方配置模板', link: 'push_template_receiver.html' },
           ]

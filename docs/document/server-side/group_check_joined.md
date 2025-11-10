@@ -30,7 +30,9 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/i
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/user/XXXX/is_joined'
+curl -X GET 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/user/XXXX/is_joined'   \
+-H 'Accept: application/json'  \
+-H 'Authorization: Bearer <YourAppToken>' 
 ```
 
 ## 响应示例

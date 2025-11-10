@@ -29,7 +29,9 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://a1.Agora.com/XXXX/testapp/chatgroups/6XXXX7'
+curl -X DELETE 'https://a1.Agora.com/XXXX/testapp/chatgroups/6XXXX7'   \
+-H 'Accept: application/json'   \
+-H 'Authorization: Bearer <YourAppToken>' 
 ```
 
 ## 请求 header 参数

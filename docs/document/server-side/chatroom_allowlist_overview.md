@@ -16,7 +16,7 @@
 
 聊天室白名单管理包含如下 API：
 
-- [查询聊天室白名单](chatroom_allowlist_query.html)
+- [查询聊天室白名单](chatroom_allowlist_obtain.html)
 - [批量添加用户至聊天室白名单](chatroom_allowlist_add_batch.html)
 - [添加单个用户至聊天室白名单](chatroom_allowlist_add_single.html)
 - [将用户移出聊天室白名单](chatroom_allowlist_remove.html)

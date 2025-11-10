@@ -30,7 +30,10 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user4?need_notify=false'
+curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/users/user4?need_notify=false'  \
+-H 'Content-Type: application/json'  \
+-H 'Accept: application/json'   \
+-H 'Authorization: Bearer <YourAppToken>' 
 ```
 
 ## 请求 header 参数

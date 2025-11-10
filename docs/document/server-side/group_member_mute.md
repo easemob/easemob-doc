@@ -33,7 +33,9 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/mute
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute -d '{"usernames":["user1"], "mute_duration":1000}' -H 'Authorization: Bearer <YourAppToken>'
+curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute   \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-d '{"usernames":["user1"], "mute_duration":1000}' 
 ```
 
 ## 请求 header 参数

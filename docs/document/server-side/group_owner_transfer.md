@@ -26,7 +26,11 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{ "newowner": "user2" }' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85'
+curl -X PUT 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85'  \
+-H 'Content-Type: application/json'   \
+-H 'Accept: application/json'   \
+-H 'Authorization: Bearer <YourAppToken>'   \
+-d '{ "newowner": "user2" }' 
 ```
 
 ## 请求 header 参数
