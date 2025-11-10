@@ -7,7 +7,7 @@
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
 - 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
-- 已从服务端获取 app token，详见 [使用 App Token 鉴权](/product/easemob_app_token.html)。
+- 已从服务端获取 app token，详见 [使用 App Token 鉴权](/document/server-side/easemob_app_token.html)。
 - 了解环信 IM API 的调用频率限制，详见 [接口频率限制](/product/limitationapi.html)。
 
 ## 认证方式
@@ -16,7 +16,7 @@
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文介绍的即时通讯所有 REST API 均需使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](/product/easemob_app_token.html)。
+为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文介绍的即时通讯所有 REST API 均需使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](/document/server-side/easemob_app_token.html)。
 
 ## 获取 app 下的机器人列表
 

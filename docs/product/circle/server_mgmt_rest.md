@@ -62,7 +62,7 @@
 
 Authorization：`Bearer ${YourAppToken}`
 
-为提高项目的安全性，环信使用 App Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 需使用 App Token 的鉴权方式，详见 [使用环信 App Token 鉴权](http://doc.easemob.com/product/easemob_app_token.html)。
+为提高项目的安全性，环信使用 App Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 需使用 App Token 的鉴权方式，详见 [使用环信 App Token 鉴权](/document/server-side/easemob_app_token.html)。
 
 ### 查询环信超级社区用户是否存在
 
