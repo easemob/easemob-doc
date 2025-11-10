@@ -45,8 +45,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/user1/status'   \
     "user1": "offline"
   },
   "timestamp": 1542601284531,
-  "duration": 4,
-  "count": 0
+  "duration": 4
 }
 ```
 

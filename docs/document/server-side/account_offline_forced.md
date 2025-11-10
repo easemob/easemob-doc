@@ -47,8 +47,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/user1/disconnect'   \
     "result": true
   },
   "timestamp": 1542602601332,
-  "duration": 6,
-  "count": 0
+  "duration": 6
 }
 ```
 
