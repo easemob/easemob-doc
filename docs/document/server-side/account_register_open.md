@@ -1,0 +1,107 @@
+# 开放注册单个用户
+
+## 功能说明
+
+- 开放注册指用户可以在登录客户端 SDK 后自行通过账号密码注册账号。
+- 一般在体验 Demo 和测试开发环境时使用。
+- 调用该 API 无需传入 token。
+- 注册用户时，需满足用户 ID 和密码的设置要求。
+
+## 设置开放注册
+
+使用该 API 前，你需要先在[环信控制台](https://console.easemob.com/user/login)打开相应应用的开放注册开关，即在控制台的 **应用管理** 页面点击目标应用的 **操作** 一栏中的 **管理**，然后选择 **功能配置 > 基础功能** > **用户**，将 **用户注册模式** 设置为 **开放注册**。
+
+## 调用频率上限
+
+该 API、用户账户管理的其他接口、以及离线推送的相关接口的总调用频率上限为 100 次/秒/App Key，详见 [接口频率限制文档](limitationapi.html#用户体系管理)。
+
+## 请求 URL
+
+```http
+POST https://{host}/{org_name}/{app_name}/users
+```
+
+关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
+
+## 请求示例
+
+```shell
+## 无需传入 token
+curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users"  \
+-d '{"username":"user1","password":"123","nickname":"testuser"}'
+```
+
+## 请求 body 参数
+
+| 参数       | 类型   | 是否必需 | 描述          |
+| :--------- | :----- | :------- | :-------------------------------------------- |
+| `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 10 个数字 0-9；<br/>- "\_", "-", "."。 <br/><Container type="notice" title="注意"><br/>- 请勿使用大写英文字母 A-Z。若你同时使用了大写字母和小写字母，响应中返回的用户 ID 只包含小写字母。<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
+| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。  |
+| `nickname` | String | 否       | 离线推送时在接收方的客户端推送通知栏中显示的发送方的昵称。你可以自定义该昵称，长度不能超过 100 个字符。<br/>支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。<Container type="tip" title="提示">1. 若不设置昵称，推送时会显示发送方的用户 ID，而非昵称。<br/>2. 该昵称可与用户属性中的昵称设置不同，不过我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。更新用户属性中的昵称的方法，详见 [设置用户属性](user_attribute_set.html)。</Container> |
+
+## 响应示例
+
+```json
+{
+  "action": "post",
+  "application": "8be024f0-e978-XXXX-XXXX-5d598d5f8402",
+  "path": "/users",
+  "uri": "https://XXXX.com/XXXX-demo/XXXX/users",
+  "entities": [
+    {
+      "uuid": "0ffe2d80-XXXX-XXXX-8d66-279e3e1c214b",
+      "type": "user",
+      "created": 1542795196504,
+      "modified": 1542795196504,
+      "username": "user1",
+      "activated": true
+    }
+  ],
+  "timestamp": 1542795196515,
+  "duration": 0,
+  "organization": "XXXX-demo",
+  "applicationName": "XXXX"
+}
+```
+
+## 响应 body 字段
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中的 `data` 字段如下：
+
+| 字段       | 类型   | 描述        |
+| :------------ | :----- | :------------ |
+| `entities`        | JSON Array | 响应实体。                                                   |
+| - `uuid`          | String     | 用户的 UUID。即时通讯服务为该请求中的 app 或用户生成的唯一内部标识，用于生成 User Token。 |
+| - `type`          | String     | 对象类型，无需关注。                                         |
+| - `created`       | Long       | 注册用户的 Unix 时间戳，单位为毫秒。                         |
+| - `modified`      | Long       | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。             |
+| - `username`      | String     | 用户 ID。                                                    |
+| - `activated`     | Bool       | 用户是否为正常状态： - `true`：用户为正常状态。 - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](user_account_unban.html)方法解除封禁。 |
+
+响应体中的其他参数说明如下表所示：
+
+| 参数              | 类型   | 描述                                                                           |
+| :---------------- | :----- | :----------------------------------------------------------------------------- |
+| `action`          | String | 请求方法。                                                                     |
+| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
+| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
+| `uri`             | String | 请求 URL。                                                                     |
+| `timestamp`       | Long   | Unix 时间戳，单位为毫秒。                                                      |
+| `duration`        | Int    | 从发送请求到响应的时长，单位为毫秒。                                           |
+| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
+| `applicationName` | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
+
+## 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 400         | illegal_argument  | username XXX is not legal   | 用户名不合法。  | 查看注册用户名[规范](account_register_open.html)。 |
+| 400         | illegal_argument | USERNAME_TOO_LONG  | 用户长度超过限制。  | 查看注册用户名 [规范](account_register_open.html)。 |
+| 400         | illegal_argument  | password or pin must provided    | 注册用户请求 body 中没有提供 `password` 参数。 | 注册用户请求 body 中提供 `password`。   |
+| 400         | illegal_argument | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。   | 查看注册用户名 [规范](account_register_open.html)。 |
+| 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | 注册用户名已经存在。 | 更换用户名重新注册。  |
+| 401         | unauthorized  | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。   | 使用新的 token 访问。       |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
+| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐包的限制。 | 联系商务开通付费版。   |

@@ -20,55 +20,25 @@
 
 ## 调用 RESTful API 查询离线推送结果统计数据
 
-**接口调用频率上限**：10 次/10 秒/App Key
+### 调用频率上限
 
-### HTTP 请求
+10 次/10 秒/App Key
+
+### 请求 URL
 
 ```shell
-GET https://{host}/{org_name}/{app_name}/push/data/offline-push/begin/{startTime}/end/{endTime}
+GET https://{host}/{org_name}/{app_name}/push/data/offline-push/begin/{startTime}/end/{endTime}?platform={ALL}
 ```
-
-#### 路径参数
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
-| `app_name` | String | 是       | 你在环信控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](/product/console/app_manage.html#查看应用信息)。  |
 | `startTime` | String |  是       | 查询数据的开始时间，格式为 yyyy-MM-dd，例如，`2024-04-01`。 |
 | `endTime`   | String |  是       | 查询数据的结束时间，格式为 yyyy-MM-dd，例如，`2024-04-02`。 |
+| `platform` | enum |  是      | 查询的平台，取值如下：<br/> - （默认）`ALL`：查询所有推送平台的推送统计结果。<br/> - `APNS`：APNs 推送；<br/> - `ANDROID`：FCM 推送；<br/> - `XIAOMIPUSH`：小米推送；<br/> - `HUAWEIPUSH`：华为推送<br/> - `MEIZUPUSH`：魅族推送；<br/> - `OPPOPUSH`：OPPO 推送；<br/> - `VIVOPUSH`：vivo 推送；<br/> - `HONOR`：荣耀推送。|
 
-#### 查询参数
+关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
-| 参数       | 类型 | 描述                                                         | 是否必需 |
-| :--------- | :--- | :----------------------------------------------------------- | :------- |
-| `platform` | enum | 查询的平台，取值如下：<br/> - （默认）`ALL`：查询所有推送平台的推送统计结果。<br/> - `APNS`：APNs 推送；<br/> - `ANDROID`：FCM 推送；<br/> - `XIAOMIPUSH`：小米推送；<br/> - `HUAWEIPUSH`：华为推送<br/> - `MEIZUPUSH`：魅族推送；<br/> - `OPPOPUSH`：OPPO 推送；<br/> - `VIVOPUSH`：vivo 推送；<br/> - `HONOR`：荣耀推送。| 是       |
-
-#### 请求 header
-
-| 参数            | 类型   | 描述        | 是否必需 |
-| :-------------- | :----- | :------------------- | :------- |
-| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
-
-### HTTP 响应
-
-#### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数        | 类型   | 描述                                                         |
-| :---------- | :----- | :----------------------------------------------------------- |
-| `status`  | String | 请求状态。若请求成功，返回 `OK`。 |
-| `data`  | JSON | 离线推送结果。 |
-| `data.successCount`  | Int | 成功发送的离线推送通知数量。 |
-| `data.failCount`  | Int | 发送失败的离线推送通知数量。 |
-| `data.arriveCount`  | Int | 送达到接收方的离线推送通知的数量。 |
-
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-### 示例
-
-#### 请求示例
+### 请求示例
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -76,7 +46,13 @@ curl -g -X GET 'https://XXXX/XXXX/XXXX/push/data/offline-push/begin/2024-04-01/e
 -H 'Authorization: Bearer <YourAppToken>
 ```
 
-#### 响应示例
+### 请求 header 参数
+
+| 参数            | 类型   | 描述        | 是否必需 |
+| :-------------- | :----- | :------------------- | :------- |
+| `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
+
+### 响应示例
 
 ```json
 {
@@ -129,6 +105,20 @@ curl -g -X GET 'https://XXXX/XXXX/XXXX/push/data/offline-push/begin/2024-04-01/e
     }
 }
 ```
+
+### 响应 body 字段
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 参数        | 类型   | 描述                                                         |
+| :---------- | :----- | :----------------------------------------------------------- |
+| `status`  | String | 请求状态。若请求成功，返回 `OK`。 |
+| `data`  | JSON | 离线推送结果。 |
+| `data.successCount`  | Int | 成功发送的离线推送通知数量。 |
+| `data.failCount`  | Int | 发送失败的离线推送通知数量。 |
+| `data.arriveCount`  | Int | 送达到接收方的离线推送通知的数量。 |
+
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 错误码
 

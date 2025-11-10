@@ -191,11 +191,11 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 
 1. 在设备上登录应用，并确认 device token 绑定成功。
    
-  可以查看日志或调用 [获取用户详情的 RESTful 接口](/document/server-side/account_system.html#获取单个用户的详情)确认 device token 是否绑定成功。
+  可以查看日志或调用 [获取用户详情的 RESTful 接口](/document/server-side/account_detail_obtain_single.html)确认 device token 是否绑定成功。
 
-2. 杀掉应用进程。
+1. 杀掉应用进程。
    
-3. 在[环信控制台](https://console.easemob.com/user/login)发送测试消息。
+2. 在[环信控制台](https://console.easemob.com/user/login)发送测试消息。
    
   在左侧导航栏中选择 **运营管理** > **运营操作** > **用户管理**。在 **用户管理** 页面中，在对应用户 ID 的 **操作** 栏中点击 **更多**，然后选择 **发送rest消息**。在弹出的对话框中选择消息类型，输入消息内容，然后点击**发送**。
 

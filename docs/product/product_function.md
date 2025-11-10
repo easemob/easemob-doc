@@ -207,7 +207,7 @@
 
 ## 内容审核
 
-支持使用 IM [内容审核服务](/product/moderation/moderation_overview.html)对消息内容进行多样化场景检测，帮助你对应用消息内容进行管控，规避内容违规风险。
+支持使用 IM [内容审核服务](/value-added/moderation/moderation_overview.html)对消息内容进行多样化场景检测，帮助你对应用消息内容进行管控，规避内容违规风险。
 
 | 功能 | 描述 |
 | :------------- | :---------------------- |

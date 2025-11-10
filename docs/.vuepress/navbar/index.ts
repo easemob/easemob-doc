@@ -1,7 +1,7 @@
 import { navbar } from 'vuepress-theme-hope'
 
 export const zhNavbar = navbar([
-  { text: '产品简介', link: '/product/introduction.html' },
+  { text: '产品介绍', link: '/product/introduction.html' },
   {
     text: 'UIKit',
     children: [
@@ -98,7 +98,7 @@ export const zhNavbar = navbar([
     ]
   },
   {
-    text: 'SDK/REST 集成',
+    text: 'SDK',
     children: [
       {
         text: '平台',
@@ -160,24 +160,11 @@ export const zhNavbar = navbar([
           },
         ]
       },
-      {
-        text: '服务端',
-        children: [
-          {
-            text: 'REST API',
-            icon: '/icon-platform.svg',
-            link: '/document/server-side/overview.html'
-          },
-          {
-            text: 'Java',
-            icon: '/icon-platform.svg',
-            link: '/document/server-side/java_server_sdk_2.0.html'
-          }
-        ]
-      }
     ]
   },
-  {
+  { text: '服务端 API', link: '/document/server-side/overview.html'},
+
+ /* {
     text: 'API 参考',
     children: [
       {
@@ -210,6 +197,7 @@ export const zhNavbar = navbar([
           }
         ]
       },
+      
       {
         text: '框架',
         children: [
@@ -252,9 +240,24 @@ export const zhNavbar = navbar([
       }
     ]
   },
+  */
+ /*{
+    text: '内容审核',
+    link: '/product/moderation_overview.html'
+  },
   {
     text: '即时推送',
     link: '/push/push_overview.html'
+  },
+  */
+  {
+    text: '增值服务',
+      children: [
+        { text: '内容审核', link: '/value-added/moderation/moderation_overview.html'},
+        { text: '实时音视频', link: '/callkit/android/product_activation.html'},
+        { text: '消息翻译', link: '/value-added/translation/message_translation_android.html'},
+        { text: '即时推送', link: '/value-added/push/push_overview.html'}
+      ]
   },
   // {
   //   text: "私有部署",
@@ -269,6 +272,6 @@ export const zhNavbar = navbar([
   //    },
   //  ],
   // },
-  { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
+   { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
   // { text: '有奖调研', link: 'https://doc.easemob.com/form/wjx.html' }
 ])

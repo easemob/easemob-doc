@@ -157,7 +157,7 @@
 | `bodies`       | object | 该回调的主体内容，包含以下字段 `file_length`、`filename`、`secret`、`type` 和 `url`。 |
 | `file_length`  | Long   | 文件大小。单位为字节。   |
 | `filename`     | String | 文件名称，包含文件后缀名。     |
-| `secret`       | String | 文件访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。 |
+| `secret`       | String | 文件访问密钥。如果 [文件上传](message_upload_file.html) 时设置了文件访问限制，则该字段存在。 |
 | `type`         | String | 消息类型。文件消息为 `file`。  |
 | `url`          | String | 文件的 URL 地址。你可以访问该 URL 下载历史消息文件。  |
 
@@ -230,7 +230,7 @@
 | `file_length` | Int | 合并消息附件的大小，单位为字节。               |
 | `filename`        | String | 合并消息的附件名称。     |
 | `msg`        | String | 合并消息的兼容文本。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。      |
-| `secret`        | String | 合并消息附件的访问密钥。如果[文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。  |
+| `secret`        | String | 合并消息附件的访问密钥。如果[文件上传](message_upload_file.html) 时设置了文件访问限制，则该字段存在。  |
 | `subType`        | String | 消息类型。合并消息为 `sub_combine`。       |
 | `summary`        | String | 合并消息的概要。                |
 | `title`        | String | 合并消息的标题。                |

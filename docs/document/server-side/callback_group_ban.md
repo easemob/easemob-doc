@@ -1,16 +1,16 @@
  # 群组封禁/解禁事件
 
-成功封禁或解禁群组后，环信服务器会按照[发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看群组封禁或解禁相关信息，进行数据同步。
+成功封禁或解禁群组后，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看群组封禁或解禁相关信息，进行数据同步。
 
 :::tip
 1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见 [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
-2. 如果需要群组封禁或解禁的回调事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
-3. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
+2. 如果需要群组封禁或解禁的回调事件，你需要在 [环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
+3. 发送后回调的相关介绍，详见 [回调说明](/document/server-side/callback_postsending.html)。
 :::
  
 ## 回调时机
 
-[调用 RESTful API 封禁](/document/server-side/group_manage.html#封禁群组)或[解禁了群组](/document/server-side/group_manage.html#解禁群组)时触发该事件。
+[调用 RESTful API 封禁](/document/server-side/group_ban.html)或 [解禁了群组](/document/server-side/group_unban.html) 时触发该事件。
 
 ## 回调请求
 

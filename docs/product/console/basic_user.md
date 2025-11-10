@@ -24,8 +24,8 @@
 
 用户注册模式包括授权注册和开发注册。你可以点击 **编辑** 切换用户注册模式。
 
-- 授权注册：以应用管理员身份调用环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。该方式用于正式环境。相关的 REST API 介绍，详见 [授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户) 和 [批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)的接口介绍。
-- 开放注册：用户登录客户端 SDK 后自行通过账号密码注册账号。该方式一般用于体验 Demo 和测试环境，不推荐在正式环境中使用。相关的 API 介绍，详见 [客户端](/document/android/login.html#用户注册) 和 [REST API](/document/server-side/account_system.html#开放注册单个用户) 文档。
+- 授权注册：以应用管理员身份调用环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。该方式用于正式环境。相关的 REST API 介绍，详见 [授权注册单个用户](/document/server-side/account_register_authorized_single.html) 和 [批量授权注册用户](/document/server-side/account_register_authorized_batch.html)的接口介绍。
+- 开放注册：用户登录客户端 SDK 后自行通过账号密码注册账号。该方式一般用于体验 Demo 和测试环境，不推荐在正式环境中使用。相关的 API 介绍，详见 [客户端](/document/android/login.html#用户注册) 和 [REST API](/document/server-side/account_register_open.html) 文档。
 
 ![img](/images/console/basic_user_registration.png)
 
@@ -47,7 +47,7 @@
 
 ## 用户黑名单
 
-若需屏蔽某个用户的消息，可将其拉入黑名单。用户可将任何其他用户加入黑名单，不论该用户是否在好友列表上。用户被加入黑名单后，无法向对方发送消息或好友申请。关于该功能的详情，请参见 [黑名单文档](/document/server-side/user_relationship_blacklist_add.html)。
+若需屏蔽某个用户的消息，可将其拉入黑名单。用户可将任何其他用户加入黑名单，不论该用户是否在好友列表上。用户被加入黑名单后，无法向对方发送消息或好友申请。关于该功能的详情，请参见 [黑名单文档](/document/server-side/user_friend_blocklist_add.html)。
 
 对于各版本套餐包，该功能默认关闭，使用前需点击 **免费开通**，然后开启。
 
@@ -55,7 +55,7 @@
 
 ## 用户离在线状态实时同步
 
-用户在线状态（Presence）包含用户的在线、离线和自定义状态。用户可设置自己的在线状态，订阅和查询其他用户的状态。关于该功能的详情，请参见 [在线状态订阅文档](/document/server-side/presence.html)。
+用户在线状态（Presence）包含用户的在线、离线和自定义状态。用户可设置自己的在线状态，订阅和查询其他用户的状态。关于该功能的详情，请参见 [在线状态订阅文档](/document/server-side/presence_set.html)。
 
 你可以根据当前的套餐包版本开通该服务：
 
@@ -67,7 +67,7 @@
 
 ## 全局禁言
 
-全局禁言指对单个用户设置单聊、群组或聊天室消息全局禁言。禁言后，该用户无法调用客户端 API 或 REST API 在单聊、群组或聊天室中发送消息。禁言到期后，服务器会自动解除禁言，恢复该用户发送消息的权限。关于该功能的详情，请参见 [全局禁言文档](/document/server-side/user_global_mute.html)。
+全局禁言指对单个用户设置单聊、群组或聊天室消息全局禁言。禁言后，该用户无法调用客户端 API 或 REST API 在单聊、群组或聊天室中发送消息。禁言到期后，服务器会自动解除禁言，恢复该用户发送消息的权限。关于该功能的详情，请参见 [全局禁言文档](/document/server-side/user_global_mute_overview.html)。
 
 你可以根据套餐版本开通该服务：
 

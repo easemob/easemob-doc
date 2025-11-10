@@ -29,33 +29,19 @@ const callKitSidebar = [
       { text: "购买指南", link: "product_purchase.html" }
     ]
   },
-  {
-    text: "快速开始",
-    collapsible: true,
-    children: [
-      { text: "跑通示例项目", link: "sample_runthrough.html" },
-      { text: "快速开始", link: "quickstart.html" }
-    ]
-  },
-  {
-    text: "集成文档",
-    collapsible: true,
-    children: [
-      { text: "CallKit 架构", link: "architecture.html" },
-      { text: "集成 CallKit", link: "integration.html" },
-      { text: "权限", link: "permission.html", only: ["android"] },
-      {
-        text: "使用 LiveCommunicationKit", link: "livecommunicationkit.html", only: ["ios"]
-      },
-      { text: "画中画", link: "picture_in_picture.html", only: ["ios"] },
-      { text: "使用 Telecom", link: "telecom.html", only: ["android"] },
-      { text: "来电通知和悬浮窗", link: "float_top.html", only: ["android"] },
-      { text: "自定义资源", link: "customization.html" },
-      { text: "通话信令", link: "signaling.html" },
-      { text: "API 概览", link: "api_overview.html" },
-      { text: "常见问题", link: "common_issue.html" },
-    ]
-  },
+  { text: "跑通示例项目", link: "sample_runthrough.html" },
+  { text: "快速开始", link: "quickstart.html" },
+  { text: "CallKit 架构", link: "architecture.html" },
+  { text: "集成 CallKit", link: "integration.html" },
+  { text: "权限", link: "permission.html", only: ["android"] },
+  { text: "使用 LiveCommunicationKit", link: "livecommunicationkit.html", only: ["ios"]},
+  { text: "画中画", link: "picture_in_picture.html", only: ["ios"] },
+  { text: "使用 Telecom", link: "telecom.html", only: ["android"] },
+  { text: "来电通知和悬浮窗", link: "float_top.html", only: ["android"] },
+  { text: "自定义资源", link: "customization.html" },
+  { text: "通话信令", link: "signaling.html" },
+  { text: "API 概览", link: "api_overview.html" },
+  { text: "常见问题", link: "common_issue.html" },
   { text: "更新日志", link: "releasenote.html" },
   { text: "设计指南", link: "design_guide.html" },
   { text: "历史文档", link: "easecallkit.html" }

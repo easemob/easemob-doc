@@ -48,7 +48,7 @@
 
 关于如何使用定向模板，详见[使用示例](#使用定向模板)。
 
-关于 `title_args` 和 `content_args` 字段的设置，详见[推送模板文档](push.html#使用推送模板)。
+关于 `title_args` 和 `content_args` 字段的设置，详见[推送模板文档](push_template_overview.html)。
 
 `em_push_ext` 结构如下：
 

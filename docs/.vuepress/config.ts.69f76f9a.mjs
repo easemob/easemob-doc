@@ -685,7 +685,7 @@ var documentSidebar = [
         text: "\u804A\u5929\u5BA4",
         collapsible: true,
         children: [
-          { text: "\u7BA1\u7406\u8D85\u7EA7\u7BA1\u7406\u5458", link: "chatroom_superadmin.html" },
+          { text: "\u7BA1\u7406\u8D85\u7EA7\u7BA1\u7406\u5458", link: "chatroom_superadmin_add.html" },
           { text: "\u7BA1\u7406\u804A\u5929\u5BA4", link: "chatroom_manage.html" },
           { text: "\u7BA1\u7406\u804A\u5929\u5BA4\u5C5E\u6027", link: "chatroom_attribute.html" },
           {

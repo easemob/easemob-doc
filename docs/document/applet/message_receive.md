@@ -15,7 +15,7 @@
 
 - 你可以通过 `addEventHandler` 注册监听器监听消息事件。你可以添加多个事件。当不再监听事件时，请确保删除监听器。
 - 当消息到达时，接收方会收到 `onTextMessage` 回调。每个回调包含一条或多条消息。你可以遍历消息列表，并可以解析和展示回调中的消息。
-- 对于聊天室消息，你可以通过消息的 `broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
+- 对于聊天室消息，你可以通过消息的 `broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 
 ```javascript
 // 使用 `addEventHandler` 监听回调事件
