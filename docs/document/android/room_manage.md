@@ -58,6 +58,8 @@ EMChatRoom  chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(s
 ```java
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
 // 同步方法，会阻塞当前线程。异步方法为 asyncFetchPublicChatRoomsFromServer(int, int, EMValueCallBack)。
+// pageNum：当前页码，从 1 开始。
+// pageSize：每页期望返回的记录数。取值范围为 [1,50]。
 EMPageResult<EMChatRoom> chatRooms = EMClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(pageNumber, pageSize);
 
 // 加入聊天室

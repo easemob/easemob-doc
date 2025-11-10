@@ -132,6 +132,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unblockChatRoomMe
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchChatRoomBlackList(String, int, int, EMValueCallBack)。
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页期望获取的黑名单中的成员数。取值范围为 [1,50]。
 EMChatRoom chatroom = EMClient.getInstance().chatroomManager().fetchChatRoomBlackList(chatRoomId, pageNum, pageSize);
 ```
 
@@ -252,6 +254,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unMuteChatRoomMem
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchChatRoomMuteList(String, int, int, EMValueCallBack)。
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页期望返回的禁言成员数。取值范围为 [1,50]。
 Map<String, Long> memberMap =  EMClient.getInstance().chatroomManager().fetchChatRoomMuteList(chatRoomId, pageNum, pageSize);
 ```
 
