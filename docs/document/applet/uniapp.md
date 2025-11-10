@@ -32,11 +32,11 @@
 
 ## 开发者集成
 
-### 集成前准备
+### 步骤一 注册环信账号
 
-[注册并创建应用](/product/console/app_create.html)
+开发者需要在环信控制台 [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)，获取唯一 App Key，SDK 初始化时需要配置 App Key。
 
-### 搭建开发环境
+### 步骤二 搭建开发环境
 
 1. 下载 HBuilderx 编辑器 [https://www.dcloud.io/hbuilderx.html](https://www.dcloud.io/hbuilderx.html)。
 2. DCloud 开发者中心注册 [https://dev.dcloud.net.cn/](https://dev.dcloud.net.cn/)。
@@ -45,11 +45,11 @@
 
 即将开发的平台配置服务
 
-### 配置服务器域名（以微信为例）
+### 步骤三 配置服务器域名
 
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、Socket 访问域名不同。请根据您所在数据中心进行配置。
 
-环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
+本节以微信为例介绍环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
 
 | 数据中心      | REST API 请求地址      | WebSocket 访问域名          |
 | ------------- | ------------------ | -------------------------------- |
@@ -73,49 +73,45 @@
 | request 合法域名<br/>uploadFile 合法域名<br/>downloadFile 合法域名  | https://a1.easemob.com<br/>https://a2.easemob.com<br/>https://a3.easemob.com<br/>https://a4.easemob.com<br/>https://a5.easemob.com<br/>https://a31.easemob.com<br/>https://a1-sgp.easemob.com<br/>https://a41.easemob.com<br/>https://a51.easemob.com<br/>https://a1-chatfile.easemob.com<br/>https://rs.chat.agora.io<br/>https://rs.easemob.com   | 
 | WebSocket 合法域名 | wss://im-api-wechat.easemob.com（3.0 IM SDK）<br/> wss://im-api-wechat-31.easemob.com<br/>wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）<br/>wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）   | 
 
-### 各端小程序 WebSocket 连接数量
+#### 各端小程序 WebSocket 连接数量
 
 - QQ、微信小程序： `**1.7.0**` 及以上版本，最多可以同时存在 **5** 个 WebSocket 连接
 - 字节小程序： `**1.0.0**` 及以上版本 （在当前小程序页面已经有一个 WebSocket 连接的情况下，如果再创建一个 WebSocket 连接，会重新创建一个 WebSocket 连接，但是之前创建的 WebSocket 连接并不会自动关闭。）
 - 百度小程序：`**1.9.4**` 及以上版本，支持存在多个 WebSokcet 连接，每次成功调用会返回一个新的 SocketTask
 - 支付宝小程序：支付宝小程序在一段时间内只能保留一个 WebSocket 连接，如果当前已存在 WebSocket 连接，那么会自动关闭该连接，并重新创建一个新的 WebSocket 连接。
 
-### 将 SDK 添加到自己的小程序
-
-#### 下载 SDK
+### 步骤四 下载 SDK
 
 可以通过以下方式获取 SDK：
 
 - 从 npm [easemob-websdk](https://www.npmjs.com/package/easemob-websdk/) 中获取。
 
-#### 引入 SDK
+### 步骤五 引入 SDK
 
 - 开始一个全新的项目：
   1. 安装 `easemob-websdk` npm 包。
   2. 直接使用 `import/require` 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
 - 基于 Demo 二次开发。
 
-拉取代码，HBuilder 运行。
+拉取代码，HBuilder 运行。调用示例如下所示
 
-#### 调用示例
-
-若项目之前未使用 npm 管理依赖（项目根目录下无 package.json 文件），先在项目根目录执行命令初始化 npm 工程：
+1. 若项目之前未使用 npm 管理依赖（项目根目录下无 package.json 文件），先在项目根目录执行命令初始化 npm 工程：
 
 ```bash 
 npm init -y
 ```
-在项目根目录执行命令安装 npm 包：
+2. 在项目根目录执行命令安装 npm 包：
 
 ```bash 
 npm i easemob-websdk
 ```
-引入 uni-app SDK
+3. 引入 uni-app SDK
 
 ```javascript
 import SDK from 'easemob-websdk/uniApp/Easemob-chat';
 ```
 
-#### 实例调用方式
+### 步骤六 实例化 SDK
 
 实例化 SDK，并挂载在全局对象下。
 

@@ -6,7 +6,7 @@ QQ 小程序 SDK 集成步骤如下：
 
 ## 步骤一 注册环信账号
 
-开发者需要在环信控制台 [注册并创建应用](/product/console/app_create.html) 获取唯一 appKey，SDK 初始化时需要配置 appKey。
+开发者需要在环信控制台 [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)，获取唯一 App Key，SDK 初始化时需要配置 App Key。
 
 ## 步骤二 搭建 QQ 小程序开发环境
 
