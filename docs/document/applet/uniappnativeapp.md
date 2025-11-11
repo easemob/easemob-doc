@@ -44,8 +44,8 @@
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
-- 从 [GitHub](https://github.com/easemob/webim-uniapp-demo) 或 [Gitee 的 Uni-app Demo 源码](https://gitee.com/easemob-code/webim-uniapp-demo) 中获取
+- 通过官网 [下载 SDK](https://www.easemob.com/download/im#uni-app)。
+- 从 [GitHub](https://github.com/easemob/webim-uniapp-demo) 或 [Gitee 的 Uni-app Demo 源码](https://gitee.com/easemob-code/webim-uniapp-demo) 中获取。
 
 #### 引入 SDK
 

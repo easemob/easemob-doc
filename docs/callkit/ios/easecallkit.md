@@ -18,7 +18,7 @@
 
 ## 跑通 Demo
 
-`EaseCallKit` 集成在环信提供的开源 IM Demo 中，你可以进入 [Github 开源网站](https://github.com/easemob/chat-ios) 下载。
+`EaseCallKit` 集成在环信提供的开源 IM Demo 中，你可以进入 [GitHub 开源网站](https://github.com/easemob/chat-ios) 下载。
 
 - 安装 SDK 与 `EaseCallKit`
 
@@ -42,7 +42,7 @@ pod install
 
 - 分别创建 [环信应用](/product/console/app_create.html) 及 [声网应用](https://doc.shengwang.cn/doc/rtc/ios/get-started/enable-service#创建声网项目)；
 - 已完成环信 IM 的基本功能，包括登录、好友、群组以及会话等的集成；
-- 上线之前开通声网 token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 token。利用 App Server 生成 token 的过程参见 [声网 token](https://doc.shengwang.cn/doc/rtc/ios/basic-features/token-authentication)。
+- 上线前开通声网 Token 验证时，用户需要实现自己的 App Server，用于生成 Token。详见 [GitHub](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-demo-appserver/tree/master/agora-app-server)。利用 App Server 生成 token 的过程参见 [创建 Token 服务及使用 App Server 生成 Token 文档](https://doc.shengwang.cn/doc/rtc/ios/basic-features/token-authentication)。
 
 ## 快速集成
 
