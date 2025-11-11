@@ -10,7 +10,7 @@ SDK 目前支持微信、QQ、百度小程序、抖音、uni-app 编译的原生
 
 ## 体验小程序
 
-各小程序 Demo 源码可在 [GitHub 地址](https://github.com/easemob/webim-weixin-xcx) 获取。
+各小程序 Demo 源码可在 [GitHub](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 或 [Gitee 仓库](https://gitee.com/easemob-code/webim-weixin-xcx/tree/master/src/sdk) 中获取。
 
 ## 功能说明
 

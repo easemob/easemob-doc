@@ -29,7 +29,7 @@
 1. [创建应用](/product/console/app_create.html)。 
 2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
 3. [创建用户](/product/console/operation_user.html#创建用户)。
-4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-react/tree/dev_4.0)。
+4. 下载即时通讯 IM Demo 项目源码。详见 [GitHub](https://github.com/easemob/easemob-demo-react/tree/dev_4.0) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-react/tree/dev_4.0) 上的示例项目。
 5. 下载完毕，在项目根目录打开终端，安装依赖。
    
 ```
@@ -59,7 +59,7 @@ App Server 为 Demo 提供以下功能：
 
 你通过以下步骤部署 App Server：
 
-1. 部署 App Server。详见 [服务端源码](https://github.com/easemob/easemob-im-app-server/tree/dev-demo)。  
+1. 部署 App Server。部署 App Server。关于服务器源码，详见 [GitHub](https://github.com/easemob/easemob-demo-appserver/tree/dev-demo) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-demo-appserver/tree/dev-demo)。  
 2. 在 Demo 工程根目录下，将 src/service 里面用到的服务替换成你自己的服务，然后把 src/config 里面的 appKey 和 appId 替换成和 appServer 里一样的。
 
 **服务端中的 App Key 要跟客户端的 App Key 保持一致。**

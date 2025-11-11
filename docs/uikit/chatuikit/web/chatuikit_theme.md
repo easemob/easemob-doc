@@ -76,7 +76,7 @@ const App = () => {
 
 单群聊 UIKit 内部使用 SCSS，并定义了一些全局变量。如果你的项目也使用 SCSS，可以通过覆盖这些全局变量修改主题，不过，这种用法并不推荐。
 
-你可以点击[这里](https://github.com/easemob/Easemob-UIKit-web/blob/dev/common/style/themes/default.scss)查看定义的变量。
+你可以从 [GitHub](https://github.com/easemob/easemob-uikit-react/blob/dev/common/style/themes/default.scss) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-react/blob/dev/common/style/themes/default.scss) 中查看定义的变量。
 
 下文介绍如何修改这些变量。
 

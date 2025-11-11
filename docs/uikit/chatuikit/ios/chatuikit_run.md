@@ -19,7 +19,7 @@
 
 ### 第一步 下载示例代码
 
-前往 [GitHub 源码](https://github.com/easemob/chatuikit-ios)下载示例代码到本机。
+前往 [GitHub](https://github.com/easemob/easemob-uikit-ios) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios) 下载示例代码到本机。
 
 ### 第二步 执行 pod 命令
 

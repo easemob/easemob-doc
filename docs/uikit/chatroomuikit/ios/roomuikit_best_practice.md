@@ -1,6 +1,6 @@
 # 最佳实践
 
-若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。
+若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo) 或 [Gitee 地址](https://gitee.com/easemob-code/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。
 
 ## 初始化 ChatroomUIKit
 

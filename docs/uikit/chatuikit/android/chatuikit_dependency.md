@@ -19,11 +19,11 @@
 ```kotlin
 implementation("io.hyphenate:ease-chat-kit:4.11.1")
 ```
-若要查看最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
+若要查看最新版本号，请查看 [Maven 中央仓库](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
 
 ## 本地依赖
 
-从 GitHub 获取[单群聊 UIKit](https://github.com/easemob/chatuikit-android) 源码，按照下面的方式集成：
+从 [GitHub](https://github.com/easemob/easemob-uikit-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-android) 获取单群聊 UIKit 源码，按照下面的方式集成：
 
 1. 在 Project 根目录 `settings.gradle.kts` 文件中添加如下代码：
 

@@ -19,7 +19,7 @@
 :::tip
 
 - 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
-- 你可以查看 [uni-app Demo GitHub 源码地址](https://github.com/easemob/easemob-uikit-uniapp) 。
+- 你可以查看 uni-app Demo [GitHub](https://github.com/easemob/easemob-uikit-uniapp) 或 [Gitee 源码地址](https://gitee.com/easemob-code/easemob-uikit-uniapp) 。
 :::
   
 ## 功能说明

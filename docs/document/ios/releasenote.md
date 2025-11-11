@@ -289,7 +289,7 @@
 
 从 V4.6.0 版本开始会启用 Swift 语言编写的新的 `EaseChatUIKit` 与 `EaseChatDemo`，老版本 Demo 和 UIKit 逐渐不再维护，请参考：
 - [UIKit 文档](https://doc.easemob.com/uikit/chatuikit/ios/chatuikit_overview.html)
-- [Demo 源码](https://github.com/easemob/chat-ios/tree/SwiftDemo)
+- [GitHub](https://github.com/easemob/chat-ios/tree/SwiftDemo) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-ios/tree/SwiftDemo) 上的 Demo 源码
 
 ## 版本 V4.5.0 Dev 2024-04-03
 

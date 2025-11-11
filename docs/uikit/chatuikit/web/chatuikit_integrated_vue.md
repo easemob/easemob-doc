@@ -51,7 +51,7 @@ npm run dev
 
 ### 第二步 安装和配置 Veaury
 
-[Veaury ](https://github.com/gloriasoft/veaury#readme)是基于 React 和 Vue 的工具库，主要用于 React 和 Vue 在一个项目中公共使用的场景。Veaury 适用于 Vue 3 和 Vue 2。
+[Veaury](https://github.com/gloriasoft/veaury#readme) 是基于 React 和 Vue 的工具库，主要用于 React 和 Vue 在一个项目中公共使用的场景。Veaury 适用于 Vue 3 和 Vue 2。
 
 1. 可以使用以下命令从 npm 安装 Veaury 库：
 
@@ -247,7 +247,7 @@ const switchTheme = () => {
 
 ## 相关参考
 
-- [示例项目源码](https://github.com/easemob/webim-vue-demo/tree/chat-uikit-vue-demo)
-- [组件库源码](https://github.com/easemob/Easemob-UIKit-web)
-- [其他示例 demo](https://github.com/easemob/easemob-uikit-react/tree/main/demo)
+- 示例项目源码：可访问 [GitHub](https://github.com/easemob/webim-vue-demo/tree/chat-uikit-vue-demo) 或 [Gitee](https://gitee.com/easemob-code/webim-vue-demo/tree/chat-uikit-vue-demo) 地址。
+- 组件库源码：可访问 [GitHub](https://github.com/easemob/easemob-uikit-react) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-react) 地址。
+- 其他示例 demo：可访问 [GitHub](https://github.com/easemob/easemob-uikit-react/tree/main/demo) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-react/tree/main/demo) 地址。
 - [`UIKitProvider` 文档](https://doc.easemob.com/uikit/chatuikit/web/chatuikit_provider.html)

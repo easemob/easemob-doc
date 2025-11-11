@@ -1,6 +1,8 @@
 # 可配置项
 
-[Appearance.swift](https://github.com/zjc19891106/ChatroomUIKit/blob/main/Sources/ChatroomUIKit/Classes/UI/Core/UIKit/Utils/Appearance.swift) 是容纳了所有可配置项的类，你需要在初始化 ChatroomView 之前修改其中的属性。
+`Appearance.swift` 是容纳了所有可配置项的类，你需要在初始化 ChatroomView 之前修改其中的属性。
+
+你可以在 [GitHub](https://github.com/easemob/UIKit_Chatroom_ios/blob/main/Sources/ChatroomUIKit/Classes/UI/Core/UIKit/Utils/Appearance.swift) 或 [Gitee](https://gitee.com/easemob-code/UIKit_Chatroom_ios/blob/main/Sources/ChatroomUIKit/Classes/UI/Core/UIKit/Utils/Appearance.swift) 仓库中查看 `Appearance.swift` 详情。
 
 ## 消息视图
 

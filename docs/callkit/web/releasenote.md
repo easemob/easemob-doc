@@ -18,7 +18,7 @@
 
 ## 版本 2.0.1 2025-08-29
 
-从该版本开始，CallKit 移到 `easemob-chat-uikit` 中，为 UIKit 的中的一个组件，代码迁移至 [新 repo](https://github.com/easemob/easemob-uikit-react)，老版本不再维护。
+从该版本开始，CallKit 移到 `easemob-chat-uikit` 中，为 UIKit 的中的一个组件，代码迁移至 [GitHub 新 repo](https://github.com/easemob/easemob-uikit-react) 和 [Gitee 地址](https://gitee.com/easemob-code/easemob-uikit-react)，老版本不再维护。
 
 该版本的 CallKit 主要变更如下：
 

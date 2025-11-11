@@ -103,6 +103,6 @@ ChatUIKitClient.shared.unregisterUserStateListener(self)
 
 ## 更多
 
-更多进阶用法，请参考 [Demo 中源码](https://github.com/easemob/easemob-demo-ios)。
+更多进阶用法，请参考 [GitHub](https://github.com/easemob/easemob-demo-ios) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-ios) 中的 Demo 源码。
 
 

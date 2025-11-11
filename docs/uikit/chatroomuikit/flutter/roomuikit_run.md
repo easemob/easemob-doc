@@ -26,7 +26,7 @@
 git clone git@github.com:easemob/UIKit_Chatroom_flutter.git
 ```
 
-或者点击[这里](https://codeload.github.com/easemob/UIKit_Chatroom_flutter/zip/refs/heads/main)直接下载。
+或者点击 [GitHub URL](https://codeload.github.com/easemob/UIKit_Chatroom_flutter/zip/refs/heads/main)直接下载。。
 
 ### 第二步 项目初始化
 

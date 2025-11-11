@@ -21,7 +21,9 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
         translationTargetLanguage: 'zh-Hans', // 翻译功能的目标语言
         useUserInfo: true, // 是否使用用户属性功能展示头像昵称（UIKit 内部会获取用户属性，需要用户自己设置）
       }}
-      // 查看所有 UI 文本: https://github.com/easemob/Easemob-UIKit-web/tree/dev/local
+      // 可在 GitHub 或 Gitee 中查看所有 UI 文本: 
+      // GitHub：https://github.com/easemob/easemob-uikit-react/tree/dev/local
+      // Gitee：https://gitee.com/easemob-code/easemob-uikit-react/tree/dev/local
       local={{
         fallbackLng: 'en',
         lng: 'en',

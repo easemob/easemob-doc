@@ -16,8 +16,8 @@ Demo 中 EaseCallKit 使用的 token 和 UID 均由你自己生成。若你需�
 
 EaseCallKit 集成在环信开源 IM Demo 中，你可以通过以下两种方式下载 Demo：
 
-- 你可以通过进入 [环信 Demo 下载页面](https://www.easemob.com/download/demo) ，选择 Android 端下载 Demo。
-- 你可以下载 [Android IM 源码](https://github.com/easemob/easemob-demo-android) 跑通 Demo。
+- 你可以通过进入 [环信 Demo 下载页面](https://www.easemob.com/download/demo)，选择 Android 端下载 Demo。
+- 你可以从 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 中下载 Android IM 源码跑通 Demo。
 
 1. 环境准备
 
@@ -37,7 +37,7 @@ EaseCallKit 集成在环信开源 IM Demo 中，你可以通过以下两种方�
 
 - 分别创建 [环信应用](/product/console/app_create.html) 及 [声网应用](https://doc.shengwang.cn/doc/rtc/android/get-started/enable-service#创建声网项目)；
 - 已完成环信 IM 的基本功能，包括登录、好友、群组以及会话等的集成；
-- 上线之前开通声网 Token 验证时，用户需要实现自己的 [App Server](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server)，用于生成 Token。具体请参见 [创建 Token 服务及使用 App Server 生成 Token](https://doc.shengwang.cn/doc/rtc/android/basic-features/token-authentication)。
+- 上线之前开通声网 Token 验证时，用户需要实现自己的 App Server，用于生成 Token。详见 [GitHub](https://github.com/easemob/easemob-im-app-server/tree/master/agora-app-server) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-demo-appserver/tree/master/agora-app-server) 和 [创建 Token 服务及使用 App Server 生成 Token](https://doc.shengwang.cn/doc/rtc/android/basic-features/token-authentication)。
 
 ## 快速集成
 

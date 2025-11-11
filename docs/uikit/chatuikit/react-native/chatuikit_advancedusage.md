@@ -56,7 +56,7 @@
 | userId            | get      | 获取当前登录用户 ID。                                      |
 | updateDataList | function | 主动更新指定数据的头像和昵称。将触发已加载的 UI 组件刷新。 |
 
-`ChatService` 提供的方法非常多，详见[对应定义](https://github.com/easemob/react-native-chat-library)。
+`ChatService` 提供的方法非常多，详见 [GitHub](https://github.com/easemob/react-native-chat-library) 或 [Gitee](https://gitee.com/easemob-code/react-native-chat-library) 上的对应定义。
 
 ### 监听器
 

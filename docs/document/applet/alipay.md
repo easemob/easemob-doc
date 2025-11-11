@@ -4,15 +4,15 @@
 
 支付宝小程序 SDK 集成步骤如下：
 
-## 步骤一 注册环信账号
+## 步骤 1 注册环信账号
 
 开发者需要在环信控制台 [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)，获取唯一 App Key，SDK 初始化时需要配置 App Key。
 
-## 步骤二 搭建支付宝小程序开发环境
+## 步骤 2 搭建支付宝小程序开发环境
 
 首先需要下载并安装 [开发者工具](https://opendocs.alipay.com/mini/ide/download)，然后按照支付宝小程序的 [接入流程](https://opendocs.alipay.com/mini/006kyi) 一步步创建一个小程序。
 
-## 步骤三 配置服务器域名
+## 步骤 3 配置服务器域名
 
 小程序在发布前，需要配置合法域名。
 
@@ -44,14 +44,14 @@
 支付宝小程序：支付宝小程序在一段时间内只能保留一个 WebSocket 连接，如果当前已存在 WebSocket 连接，那么会自动关闭该连接，并重新创建一个新的 WebSocket 连接。
 :::
 
-## 步骤四 下载 SDK
+## 步骤 4 下载 SDK
 
 可以通过以下两种方式获取 SDK：
 
 - 通过官网 [下载 SDK](https://www.easemob.com/download/im#applets)。
-- 从环信的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件。
+- 从环信的 [GitHub](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 或 [Gitee 仓库](https://gitee.com/easemob-code/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件。
 
-## 步骤五 引入 SDK
+## 步骤 5 引入 SDK
 
 - 开始一个全新的项目
   1. 将下载的 SDK（src/sdk/）导入到自己的项目中。
@@ -65,7 +65,7 @@
 import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本sdk
 ```
 
-## 步骤六 实例化 SDK
+## 步骤 6 实例化 SDK
 
 实例化 SDK，并挂载在全局对象下。
 

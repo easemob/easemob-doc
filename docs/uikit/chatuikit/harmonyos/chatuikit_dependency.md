@@ -25,7 +25,7 @@ ohpm install @easemob/chatuikit
 
 ## 本地依赖
 
-从 GitHub 获取 [UIKit 源码](https://github.com/easemob/easemob-uikit-harmonyos)，按照下面的方式集成：
+从 [GitHub](https://github.com/easemob/easemob-uikit-harmonyos) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-harmonyos) 获取 UIKit 源码，按照下面的方式集成：
 
 - 点击 **Import**，选择 **Import Module**，导入 `chatuikit` 模块。
 - 在项目 Module 中引入 `chatuikit` 模块。

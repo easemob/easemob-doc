@@ -45,7 +45,9 @@ dependencies {
 
 ### 方式二：本地源码集成
 
-从 GitHub 获取音视频 [ChatroomUIKit](https://github.com/easemob/UIKit_Chatroom_android/tree/dev)，克隆到本地。按照以下步骤集成：
+从 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/Android/ChatroomDemo) 或 [Gitee 地址](https://gitee.com/easemob-code/ChatroomDemo/tree/dev/Android/ChatroomDemo) 获取音视频，克隆到本地。
+
+按照以下步骤集成：
 
 1. 在 Project 工程根目录下的 `settings.gradle.kts` 文件中添加如下代码：
 
@@ -65,5 +67,5 @@ dependencies {
 ```
 
 ## 跑通项目
-详见[快速开始](./roomuikit_quickstart.md#跑通项目)。
+详见 [快速开始](roomuikit_quickstart.md#跑通项目)。
 

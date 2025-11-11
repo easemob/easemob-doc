@@ -14,17 +14,17 @@
 
 ## 代码下载
 
-- Vue 3：[GitHub 源码地址](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore)
+- Vue 3：[GitHub ](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) 或 [Gitee 源码地址](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore)。
 
 ## 运行 web-vue3-demo 项目
 
-从 [github 下载](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) 下载项目代码压缩包，然后解压。解压后，`webim-vue-demo` 文件夹即为 Web IM 的项目目录。
+从 [GitHub ](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) 或 [Gitee](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) 下载项目代码压缩包，然后解压。解压后，`webim-vue-demo` 文件夹即为 Web IM 的项目目录。
 > 确保`node`运行环境为16或17版本。
 1. 安装 Demo 所需的依赖：在终端执行 `npm install`或 `yarn` 命令。
 
 2. 运行 Demo：
    - 在终端中运行 `npm run dev`。
-   - 在浏览器中访问 `http://localhost:9001`，即可体验`webim-vue3-demo`。
+   - 在浏览器中访问 `http://localhost:9001`，即可体验 `webim-vue3-demo`。
 
 ## 主要模块介绍
 

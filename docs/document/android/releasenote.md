@@ -210,9 +210,11 @@
 - 修复部分手机在拨号时，切换到悬浮窗口后再返回时，通话状态显示错误的问题。
 - 修复切换悬浮窗时，悬浮窗闪烁一次的问题.
 
-### [EaseIM App (Demo)](https://github.com/easemob/easemob-demo-android)
+### EaseIM App (Demo)
 
 - 增加隐私协议时间声明。
+
+说明：你可以参考 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 上的源码。
 
 ## 版本 V4.9.0 2024-08-30
 
@@ -352,7 +354,7 @@
 
 从 V4.6.0 版本开始会启用 Kotlin 语言编写的新的 EaseIM App 项目与 EaseIMKIt 项目，老版本的项目将逐渐不再维护，请参考：
 - [EaseIMKIt 文档](/uikit/chatuikit/android/chatuikit_overview.html) 
-- [EaseIM App 项目](https://github.com/easemob/chat-android-kotlin)。
+- EaseIM App 项目：[GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android)。
 
 ## 版本 V4.5.0 Dev 2024-04-03
 

@@ -8,7 +8,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [MessageListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift)。
+你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift) 上的 `MessageListController.swift`。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_chat.png" title="聊天页面" />

@@ -56,7 +56,7 @@ Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，
 
 ## 接入指引
 
-若使应用具备 VoIP 功能，你需要在启动 app 后创建并启用 VoIP 账户。可参考 Demo 工程的 [MainActivity#checkPhoneAccount](https://github.com/easemob/easemob-demo-android/blob/main/app/src/main/kotlin/com/hyphenate/chatdemo/MainActivity.kt) 函数实现。
+若使应用具备 VoIP 功能，你需要在启动 app 后创建并启用 VoIP 账户。可参考 [GitHub](https://github.com/easemob/easemob-demo-android/blob/main/app/src/main/kotlin/com/hyphenate/chatdemo/MainActivity.kt) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android/blob/main/app/src/main/kotlin/com/hyphenate/chatdemo/MainActivity.kt) 上的 Demo 工程的 `MainActivity#checkPhoneAccount` 函数实现。
 
 1. 注册 VoIP 账户：
   

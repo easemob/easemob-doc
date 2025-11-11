@@ -34,7 +34,7 @@
 1. [创建应用](/product/console/app_create.html)。 
 2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
 3. [创建用户](/product/console/operation_user.html#创建用户)。
-4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-android)。
+4. 从 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 下载即时通讯 IM Demo 项目源码。
 5. 下载完毕，打开 Android Studio，点击 **File > Open**，打开已下载到本地的 Demo (`easemob-demo-android`) 工程根目录即可。
 6. 将你的应用的 App Key 填入 Demo 工程根目录下的 `local.properties` 文件，格式为 `APPKEY = 你申请的appkey`。
 7. 编译运行项目。
@@ -54,14 +54,14 @@ App Server 为 Demo 提供以下功能：
 
 你通过以下步骤部署 App Server：
 
-1. 部署 App Server。详见 [服务端源码](https://github.com/easemob/easemob-im-app-server/tree/dev-demo)。
+1. 部署 App Server。详见 [GitHub](https://github.com/easemob/easemob-demo-appserver/tree/dev-demo) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-appserver/tree/dev-demo) 上的服务端源码。
 2. 在 Demo 工程根目录下 `local.properties` 文件中，开发者在这里应该根据自己部署的 App Server 替换填写以下配置属性：
  
 ```gradle
 # App Server 服务器域名或 IP 地址
 APP_SERVER_DOMAIN=xxx.xxx.com
 
-# App Server 用户管理 URL 路径
+# App Server 用户管理 URL 路径 
 APP_BASE_USER=/inside/app/user
 
 # App Server 群组管理 URL 路径
