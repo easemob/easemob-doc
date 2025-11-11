@@ -227,6 +227,4 @@ Map<String, List<String>> result =
       );
 ```
 
-:::tip
-调用上述 API 获取到的会话 ID 是从消息中获取到的，因此并不能证明该会话是存在的。若在这种情况下，若会话已删除，你在调用 `EMChatManager#getConversation` 时传入了获取的会话 ID，则需将 `createIfNeed` 参数设置为 `false`（默认为 `true`），避免创建会话错误。例如，调用 `loadConversationMessagesWithKeyword` 获取了群组会话 ID（即群组 ID），将该群组 ID 传入了 `EMChatManager#getConversation`，该 API 中的 `createIfNeed` 设置为 `true`，`type` 设置为 `Chat`，则 SDK 会创建单聊会话。
-:::
+调用上述 API 获取到会话 ID 和对应的消息列表后，如果需要使用获取的会话 ID 调用`EMChatManager#getConversation` 进一步操作，则需将 `createIfNeed` 参数设置为 `false`（默认为 `true`）。 原因是上述 API 获取到的会话 ID 从消息中得到的，因此并不能证明该会话是存在的 (有可能已被删除)。所以，你在调用 `EMChatManager#getConversation` 时传入了获取的会话 ID，则需将 `createIfNeed` 参数设置为 `false`（默认为 `true`），同时还需对 `getConversation` 进行是否为空的判断，避免创建会话错误。例如: 调用 `loadConversationMessagesWithKeyword` 获取了群组会话 ID（即群组 ID）且该会话已删除，将该群组 ID 传入了 `EMChatManager#getConversation`，该 API 中的 `createIfNeed` 设置为 `true`，`type` 设置为 `Chat`，则 SDK 会创建单聊会话。
