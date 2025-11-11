@@ -6,8 +6,8 @@
 
 你可以查看 UIKit 源码和 Flutter Demo 源码：
 
-- UIKit 源码：点击 [GitHub](https://github.com/easemob/easemob-uikit-flutter) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-flutter) 地址访问。
-- Flutter Demo：点击 [GitHub](https://github.com/easemob/easemob-demo-flutter) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-flutter) 地址访问。
+- UIKit 源码：可查看 [GitHub](https://github.com/easemob/easemob-uikit-flutter) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-flutter) 源码地址。
+- Flutter Demo：可查看 [GitHub](https://github.com/easemob/easemob-demo-flutter) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-flutter) 源码地址。
 
 ## UIKit 基本项目结构
 

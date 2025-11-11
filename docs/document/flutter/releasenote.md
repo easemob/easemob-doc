@@ -2,6 +2,19 @@
 
 <Toc />
 
+## 版本 v4.15.1 2025-11-7
+
+#### 新增特性
+
+- 新增 `getCurrentDeviceId` 方法获取你当前设备的设备 ID。
+- 支持 [根据关键字获取单个会话中的消息](message_retrieve.html#根据关键字获取会话中的消息)。
+
+#### 修复
+
+- 修复被登出时，返回 220 的错误码无法触发回调的问题。
+- 修复 `fetchReactionDetail` 获取不存在的 Reaction 时崩溃的问题。
+- 修复 Android 上频繁调用 `EMConversation` 中的 API 时, 导致的 ANR 问题。
+
 ## 版本 v4.15.1 2025-8-19
 
 - 修复 `updatePushNickname` 在未登录和参数异常时导致的崩溃问题。
