@@ -6,8 +6,8 @@
 
 你可以查看 UIKit 源码和 Android Demo 源码：
 
-- UIKit 源码：点击 [GitHub](https://github.com/easemob/easemob-uikit-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-android) 地址访问。
-- Android Demo：点击 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 地址访问。
+- UIKit 源码：可查看 [GitHub](https://github.com/easemob/easemob-uikit-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-android) 源码地址。
+- Android Demo：可查看 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 源码地址。
 
 ## UIKit 基本项目结构
 

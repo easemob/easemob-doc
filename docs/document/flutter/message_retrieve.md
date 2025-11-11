@@ -18,7 +18,8 @@
 - `EMChatManager.getConversation`：读取本地指定会话的消息。
 - `EMChatManager.loadMessage`：根据消息 ID 获取消息。
 - `EMConversation.loadMessagesWithMsgType`：获取本地存储的指定会话中特定类型的消息。
-- `EMConversation.loadMessagesFromTime`：获取一定时间段内本地指定会话中发送和接收的消息
+- `EMConversation.loadMessagesFromTime`：获取一定时间段内本地指定会话中发送和接收的消息。
+- `EMChatManager.loadConversationMessagesWithKeyword`：根据关键字获取指定会话中的消息。
 
 ## 前提条件
 
@@ -210,3 +211,20 @@ if (conversation != null) {
     );
 }
 ```
+
+### 根据关键字获取会话中的消息
+
+自 SDK 4.15.2 开始，你可以通过设置关键字获取单个会话中的某些消息。SDK 返回会话 ID 及消息 ID 列表的 Map，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列出。
+
+```dart
+Map<String, List<String>> result = 
+          await EMClient.getInstance.chatManager.loadConversationMessagesWithKeyword(
+        keyword: "hello",  // 搜索包含 "hello" 的消息
+        timestamp: -1,
+        sender: null,
+        direction: EMSearchDirection.Up,
+        scope: MessageSearchScope.All,
+      );
+```
+
+调用上述 API 获取到会话 ID 和对应的消息列表后，如果需要使用获取的会话 ID 调用`EMChatManager#getConversation` 进一步操作，则需将 `createIfNeed` 参数设置为 `false`（默认为 `true`）。 原因是上述 API 获取到的会话 ID 从消息中得到的，因此并不能证明该会话是存在的 (有可能已被删除)。所以，你在调用 `EMChatManager#getConversation` 时传入了获取的会话 ID，则需将 `createIfNeed` 参数设置为 `false`（默认为 `true`），同时还需对 `getConversation` 进行是否为空的判断，避免创建会话错误。例如: 调用 `loadConversationMessagesWithKeyword` 获取了群组会话 ID（即群组 ID）且该会话已删除，将该群组 ID 传入了 `EMChatManager#getConversation`，该 API 中的 `createIfNeed` 设置为 `true`，`type` 设置为 `Chat`，则 SDK 会创建单聊会话。
