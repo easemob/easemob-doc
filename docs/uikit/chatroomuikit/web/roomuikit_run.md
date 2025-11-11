@@ -2,14 +2,22 @@
 
 <Toc />
 
-环信提供一个[开源的 ChatroomUIKit 示例项目](https://github.com/easemob/ChatroomDemo/tree/dev/WEB/ChatroomDemo)，演示了如何使用该 UIKit 快速搭建聊天室页面，实现完整业务。
+环信在 [GitHub](https://github.com/easemob/ChatroomDemo/tree/dev/WEB/ChatroomDemo) 和 [Gitee](https://gitee.com/easemob-code/ChatroomDemo/tree/dev/WEB/ChatroomDemo) 上提供了开源的 ChatroomUIKit 示例项目，演示了如何使用该 UIKit 快速搭建聊天室页面，实现完整业务。
 
 本文展示如何运行 Web 平台的聊天室 UIKit 示例项目。
 
 ## 下载项目
 
+- Github 项目
+
 ```sh
-git clone git@github.com:easemob/ChatroomDemo.git
+git clone https://github.com/easemob/ChatroomDemo/tree/dev/WEB/ChatroomDemo.git
+```
+
+- Gitee 项目
+
+```sh
+git clone https://gitee.com/easemob-code/ChatroomDemo/tree/dev/WEB/ChatroomDemo.git
 ```
 
 ## 安装依赖

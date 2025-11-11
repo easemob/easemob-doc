@@ -6,7 +6,7 @@
 
 - 若要访问源码，请点击[这里](https://github.com/easemob/UIKit_Chatroom_flutter)。
 
-- 你可以体验环信 [Android](http://www.pgyer.com/YZUCrW) 和 [iOS](https://testflight.apple.com/join/NzmtvJ6n) 聊天室 UIKit demo：
+- 你可以体验环信 [Android](http://www.pgyer.com/YZUCrW) 和 [iOS](https://testflight.apple.com/join/NzmtvJ6n) 聊天室 UIKit demo。
 
 ## 功能
 

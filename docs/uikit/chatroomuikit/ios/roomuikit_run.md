@@ -16,7 +16,7 @@
 
 ### 第一步 下载 ChatroomUIKit 示例代码
 
-点击 [github源码](https://github.com/easemob/UIKit_Chatroom_ios)下载示例代码到本机。
+访问 [Github](https://github.com/easemob/UIKit_Chatroom_ios) 或 [Gitee](https://gitee.com/easemob-code/UIKit_Chatroom_ios) 地址下载示例代码到本机。
 
 ### 第二步 执行 pod 命令
 

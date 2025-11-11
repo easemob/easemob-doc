@@ -20,13 +20,25 @@
 
 ### 第一步 下载源码仓库
 
+- GitHub 项目
+
 运行以下命令：
 
 ```sh
-git clone git@github.com:easemob/UIKit_Chatroom_flutter.git
+git clone git@github.com:easemob/ChatroomDemo/tree/dev/flutter/chatroom_uikit_demo.git
 ```
 
 或者点击[这里](https://codeload.github.com/easemob/UIKit_Chatroom_flutter/zip/refs/heads/main)直接下载。
+
+- Gitee 项目
+
+运行以下命令：
+
+```sh
+git clone git@gitee.com:easemob-code/ChatroomDemo/tree/dev/flutter/chatroom_uikit_demo.git
+```
+
+或者点击[这里](https://codeload.gitee.com/easemob-code/UIKit_Chatroom_flutter/zip/refs/heads/main)直接下载。
 
 ### 第二步 项目初始化
 

@@ -18,11 +18,20 @@
 
 ## 操作步骤
 
-1. 下载 ChatroomUIKit 示例代码
-点击 [github源码](https://github.com/easemob/UIKit_Chatroom_android)，将示例代码下载到本地设备。
+1. 下载 ChatroomUIKit 示例代码。
+   
+访问 [GitHub](https://github.com/easemob/UIKit_Chatroom_android) 或 [Gitee 源码](https://gitee.com/easemob-code/UIKit_Chatroom_android)，将示例代码下载到本地设备。
 
+- GitHub 项目
+  
 ```bash
 git clone https://github.com/easemob/UIKit_Chatroom_android.git
+```
+
+- Gitee 项目
+  
+```bash
+git clone https://gitee.com/easemob-code/UIKit_Chatroom_android.git
 ```
 
 2. 在 Android Studio 中打开项目。

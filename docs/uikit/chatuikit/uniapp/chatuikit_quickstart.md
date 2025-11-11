@@ -26,9 +26,23 @@
 UIKit 中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中，存在访问频率限制，建议你将静态资源放置在你的业务服务器上，然后修改 `ChatUIKit/const/index.ts` 文件中的 `ASSETS_URL` 为你的资源服务器地址。
 :::
 
+- GitHub 项目
+
  ```bash
    # 克隆 UIKit
    git clone https://github.com/easemob/easemob-uikit-uniapp.git
+ ```
+
+- Gitee 项目
+
+ ```bash
+   # 克隆 UIKit
+   git clone https://gitee.com/easemob-code/easemob-uikit-uniapp.git
+ ```
+
+克隆项目后，执行以下代码：
+
+ ```bash
    # 在你的 uni-app 项目根目录下执行以下命令，拷贝组件文件
    mkdir -p ./ChatUIKit
    # macOS

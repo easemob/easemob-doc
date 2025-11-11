@@ -4,7 +4,10 @@
 
 环信单群聊 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表及后续界面等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
-你可以查看 [UIKit 源码](https://github.com/easemob/chatuikit-android) 和 [Android Demo 源码](https://github.com/easemob/easemob-demo-android)。
+你可以查看 UIKit 源码和 Android Demo 源码：
+
+- UIKit 源码：点击 [GitHub](https://github.com/easemob/easemob-uikit-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-android) 地址访问。
+- Android Demo：点击 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 地址访问。
 
 ## UIKit 基本项目结构
 

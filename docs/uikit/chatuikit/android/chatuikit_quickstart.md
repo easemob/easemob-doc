@@ -67,7 +67,7 @@ dependencies {
 
 **本地依赖**
 
-从 GitHub 获取 [单群聊 UIKit 源码](https://github.com/easemob/chatuikit-android)，按照下面的方式集成：
+从 [GitHub](https://github.com/easemob/easemob-uikit-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-android) 获取单群聊 UIKit 源码，按照下面的方式集成：
 
 - 在 Project 工程根目录下的 `settings.gradle.kts` 文件中添加如下代码：
 
@@ -86,7 +86,7 @@ dependencies {
 }
 ```
 
-2. 配置 ViewBinding
+1. 配置 ViewBinding
 
 在 app 项目的 `build.gradle.kts` 文件中添加如下代码：
 

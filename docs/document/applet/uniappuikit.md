@@ -6,9 +6,7 @@
 
 ## 简介
 
-小程序模版源码地址 (`注意：分支为：versions2.0`)
-
-- [https://github.com/easemob/webim-uniapp-demo/tree/versions2.0](https://github.com/easemob/webim-uniapp-demo/tree/versions2.0)
+你可以从 [GitHub](https://github.com/easemob/webim-uniapp-demo/tree/versions2.0) 或 [Gitee](https://gitee.com/easemob-code/webim-uniapp-demo/tree/versions2.0) 获取小程序模板源码 (`注意：分支为：versions2.0`)。
 
 ### 安装scss/sass依赖
 

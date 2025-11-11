@@ -34,7 +34,7 @@
 1. [创建应用](/product/console/app_create.html)。
 2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
 3. [创建用户](/product/console/operation_user.html#创建用户)。
-4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-uikit-reactnative)。
+4. 从 [GitHub](https://github.com/easemob/easemob-uikit-reactnative) 或 [Gitee](https://gitee.com/easemob-code/react-native-chat-library) 中下载即时通讯 IM Demo 项目源码。
 5. 进入工程根目录，执行 `yarn && yarn prepare` 安装依赖和创建本地配置文件。
 6. 更改配置文件(`examples/product-uikit-demo/src/env.ts`)内容, 设置 appKey 的值，其他字段有默认值。
 7. 设置推送配置文件。如果没有，可以使用模板文件保证编译运行没有问题。如果有，则使用自己的配置文件。详见 [Firebase 相关文档](https://rnfirebase.io/)。
@@ -58,7 +58,7 @@ App Server 为 Demo 提供以下功能：
 
 你可通过以下步骤部署 App Server：
 
-1. 部署 App Server。详见 [服务端源码](https://github.com/easemob/easemob-im-app-server/tree/dev-demo)。
+1. 部署 App Server。关于服务器源码，详见 [GitHub](https://github.com/easemob/easemob-demo-appserver/tree/dev-demo) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-appserver/tree/dev-demo)。
 2. 修改 文件 `examples/product-uikit-demo/src/env.ts` 中的内容 `useAppServerDomain = true` 。
 
 **服务端中的 App Key 要跟客户端的 App Key 保持一致。**

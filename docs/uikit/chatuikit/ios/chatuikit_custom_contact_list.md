@@ -2,7 +2,7 @@
 
 通讯录页面提供联系人搜索，添加联系人，好友申请列表入口，群组列表入口，联系人列表。
 
-你可以自定义联系人列表页面的导航栏、联系人列表 Header、联系人列表和联系人列表项。详见[ContactViewController](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller)。
+你可以自定义联系人列表页面的导航栏、联系人列表 Header、联系人列表和联系人列表项。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller) 上的 `ContactViewController`。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_list.png" title="通讯录" />

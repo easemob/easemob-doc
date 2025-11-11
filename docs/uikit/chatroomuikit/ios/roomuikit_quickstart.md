@@ -84,4 +84,4 @@ let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: "Chat room ID",
 
 ![img](/images/uikit/chatroomios/click_chat.png =500x500)
 
-上图为聊天室 Demo 显示的内容，如果要实现类似的样式，可以点击 [GitHub 链接](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。 
+上图为聊天室 Demo 显示的内容，如果要实现类似的样式，可以访问 [GitHub](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo) 或 [Gitee 地址](https://gitee.com/easemob-code/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。 

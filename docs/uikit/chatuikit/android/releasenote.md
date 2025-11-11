@@ -28,7 +28,7 @@
 
 ### 重大变更
 
-为规范 UIKit 各平台的命名，UIKit 内部将工程下所有以 `ease` 开头的类文件、layout 布局文件、资源文件及内部使用的部分字符串修改为以 `chatuikit` 开头，老用户升级时应注意变更相关引用。具体变更规则，请点击[这里](https://github.com/easemob/easemob-uikit-android/blob/main/script/rename_file_and_update_content.py)参考提供的脚本内部实现。脚本可以协助用户将应用层代码实现同步更名。
+为规范 UIKit 各平台的命名，UIKit 内部将工程下所有以 `ease` 开头的类文件、layout 布局文件、资源文件及内部使用的部分字符串修改为以 `chatuikit` 开头，老用户升级时应注意变更相关引用。具体变更规则，请访问 [GitHub](https://github.com/easemob/easemob-uikit-android/blob/main/script/rename_file_and_update_content.py) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-android/blob/main/script/rename_file_and_update_content.py) 地址参考提供的脚本内部实现。脚本可以协助用户将应用层代码实现同步更名。
 
 调用方式如下：
 

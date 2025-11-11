@@ -16,8 +16,16 @@
 
 克隆项目仓库：
 
+- GitHub 项目
+  
 ```sh
-git clone https://github.com/easemob/easemob-uikit-reactnative.git
+git clone git@github.com:easemob/easemob-uikit-reactnative.git
+```
+
+- Gitee 项目
+
+```sh
+git clone git@gitee.com:easemob-code/react-native-chat-library.git
 ```
 
 ## 初始化项目

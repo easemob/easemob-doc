@@ -4,9 +4,9 @@
 
 环信 ChatroomUIKit 提供 UIKit 的各种组件帮助开发者根据实际业务需求快速搭建聊天室应用。通过该 UIKit，聊天室中的用户可实时交互，发送普通弹幕消息、打赏消息和全局广播等功能。
 
-- 若要访问源码，请点击[这里](https://github.com/easemob/Easemob-UIKit-web)。
+- 若要获取源码，请访问 [GitHub](https://github.com/easemob/Easemob-UIKit-web) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-uikit-react)。
 
-- 要体验环信聊天室 UIKit demo，请点击[这里](https://webim-live.easemob.com/login)。
+- 你也可以体验 [环信聊天室 UIKit demo](https://webim-live.easemob.com/login)。
 
 ## 功能
 

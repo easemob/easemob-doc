@@ -16,8 +16,8 @@ Demo 中 EaseCallKit 使用的 token 和 UID 均由你自己生成。若你需�
 
 EaseCallKit 集成在环信开源 IM Demo 中，你可以通过以下两种方式下载 Demo：
 
-- 你可以通过进入 [环信 Demo 下载页面](https://www.easemob.com/download/demo) ，选择 Android 端下载 Demo。
-- 你可以下载 [Android IM 源码](https://github.com/easemob/easemob-demo-android) 跑通 Demo。
+- 你可以通过进入 [环信 Demo 下载页面](https://www.easemob.com/download/demo)，选择 Android 端下载 Demo。
+- 你可以从 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 中下载 Android IM 源码跑通 Demo。
 
 1. 环境准备
 

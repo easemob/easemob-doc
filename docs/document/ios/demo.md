@@ -34,7 +34,7 @@
 1. [创建应用](/product/console/app_create.html)。 
 2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
 3. [创建用户](/product/console/operation_user.html#创建用户)。
-4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-ios)。
+4. 从 [GitHub](https://github.com/easemob/easemob-demo-ios) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-ios) 下载即时通讯 IM Demo 项目源码。
 5. 下载完毕，打开 `EaseChatDemo` 目录，运行 `pod install`。
 6. 打开 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件，修改文件中的占位符，`AppKey` 填入步骤 2 获取的 App Key，`ServerHost`可以填入空字符串。
 7. 使用 XCode 打开 `EaseChatDemo.xcworkspace`，编译运行项目。
@@ -54,7 +54,7 @@ App Server 为 Demo 提供以下功能：
 
 你通过以下步骤部署 App Server：
 
-1. 部署 App Server。详见 [服务端源码](https://github.com/easemob/easemob-im-app-server/tree/dev-demo)。  
+1. 部署 App Server。详见 [GitHub](https://github.com/easemob/easemob-im-app-server/tree/dev-demo) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-appserver/tree/dev-demo) 的服务端源码。  
 2. 在 Demo 工程目录下 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件中，填写 App Server 的域名或 IP 地址。
 3. 在 Demo 工程根目录下 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件中，填写声网AppId。
 

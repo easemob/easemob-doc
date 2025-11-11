@@ -2,7 +2,7 @@
 
 ## 版本 4.16.0 2025-08-29
 
-从该版本开始，iOS CallKit 源码使用 Swift 语言开发，并且支持 iOS 15.0 及以上版本，代码迁移至 [新 repo](https://github.com/easemob/easemob-callkit-iOS)。老版本不再维护。
+从该版本开始，iOS CallKit 源码使用 Swift 语言开发，并且支持 iOS 15.0 及以上版本，代码迁移至 [GitHub 新 repo](https://github.com/easemob/easemob-callkit-iOS) 和 [Gitee 地址](https://github.com/easemob/easemob-callkit-iOS)。老版本不再维护。
 
 该版本的 CallKit 主要变更如下：
 1. 优化了 [单群聊音视频通话的 UI 界面](product_overview.html#界面效果)。

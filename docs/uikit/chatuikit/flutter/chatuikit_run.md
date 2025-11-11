@@ -18,7 +18,8 @@ environment:
 
 ## 操作步骤
 
-1. 示例项目在 `Example` 目录中，如果需要运行示例，需要先将项目 [下载](https://github.com/easemob/chatuikit-flutter) 到本地，进入到 `Example` 目录。
+1. 示例项目在 `Example` 目录中，如果需要运行示例，需要先将项目从 [GitHub](https://github.com/easemob/easemob-uikit-flutter) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-flutter
+) 下载到本地，进入到 `Example` 目录。
 
 2. 执行 `flutter pub get` 更新依赖库，执行 `flutter run` 运行该示例项目。
 
