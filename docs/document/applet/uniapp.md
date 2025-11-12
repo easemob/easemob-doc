@@ -54,7 +54,6 @@
 | 数据中心      | REST API 请求地址      | WebSocket 访问域名          |
 | ------------- | ------------------ | -------------------------------- |
 | 国内 1 区   | a1.easemob.com    | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com   |
-| 国内 2 区   | a31.easemob.com   | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com |
 | 国内 VIP 区 | 请咨询商务经理    | 请咨询商务经理     |
 | 客服专用    | 请咨询商务经理    | 请咨询商务经理   |
 | 新加坡 1 区   | a1-sgp.easemob.com 或 a1-sgp.easecdn.com | im-api-wechat-sgp.easemob.com  或 im-api-wechat-sgp.easecdn.com  |
@@ -70,8 +69,8 @@
 
 | 域名类型 | 具体域名   | 
 | :------ | :----- |
-| request 合法域名<br/>uploadFile 合法域名<br/>downloadFile 合法域名  | https://a1.easemob.com<br/>https://a2.easemob.com<br/>https://a3.easemob.com<br/>https://a4.easemob.com<br/>https://a5.easemob.com<br/>https://a31.easemob.com<br/>https://a1-sgp.easemob.com<br/>https://a41.easemob.com<br/>https://a51.easemob.com<br/>https://a1-chatfile.easemob.com<br/>https://rs.chat.agora.io<br/>https://rs.easemob.com   | 
-| WebSocket 合法域名 | wss://im-api-wechat.easemob.com（3.0 IM SDK）<br/> wss://im-api-wechat-31.easemob.com<br/>wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）<br/>wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）   | 
+| request 合法域名<br/>uploadFile 合法域名<br/>downloadFile 合法域名  | <br/> - https://a1.easemob.com（国内 1 区）<br/> - https://a1-v2.easemob.com（国内 1 区）<br/> - https://a1-sgp.easemob.com （新加披1 区）<br/> - https://a61.easemob.com （新加坡 2 区）<br/> - https://a41.easemob.com （美东1 区）<br/> - https://a71.easemob.com （德国 2 区）<br/> - https://a1-chatfile.easemob.com （downloadFile）   | 
+| WebSocket 合法域名 | <br/> - wss://im-api-wechat.easemob.com（国内 1 区）<br/> - wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）<br/> - wss://im-api-wechat-sgp.easemob.com （新加披1 区）<br/> - wss://im-api-wechat-61.easemob.com（新加披2 区）<br/> - wss://im-api-wechat-41.easemob.com （美东1 区）<br/> - wss://im-api-wechat-71.easemob.com （德国 2 区） | 
 
 #### 各端小程序 WebSocket 连接数量
 
