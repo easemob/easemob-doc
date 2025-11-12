@@ -4,7 +4,7 @@
 
 ## 版本 V1.3.2 2025-1-17
 
-### 新增特性
+#### 新增特性
 
 - 新增 `Conversation#LoadMessagesWithMsgTypeList` 方法，[根据单个或多个消息类型，搜索本地数据库中当前会话的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
 - 新增 `RoomManager#JoinRoom`方法，支持[设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室](room_manage.html#加入聊天室)。
@@ -28,7 +28,7 @@
   - 当前用户是否在聊天室白名单中 `Room#IsInAllowList`。该属性为新增属性，成员收到白名单变更回调时更新。
   - 当前用户被禁言截止时间戳 `Room#MuteUntilTimeStamp`。该属性为新增属性，成员收到禁言变更回调时更新。
 
-### 优化
+#### 优化
 
 - 调整 `IRoomManagerDelegate#OnMemberJoinedFromRoom` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 - 设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的属性)，[获取单个或多个用户属性](userprofile.html#获取用户属性)，超过调用频率限制时，会上报错误码 4 `EXCEED_SERVICE_LIMIT`。
@@ -39,7 +39,7 @@
 - 将 1.3.1 版本之前部分标为废弃的 API 删除。
 - 优化部分数据库操作。
 
-### 修复
+#### 修复
 
 - 从服务端拉取群组时，不再先清除本地群组，而是将拉取的群组与本地对比，将本地现有群组进行更新，将新增部分在本地插入。若要清除本地群组信息，可以调用 `GroupManager#CleanAllGroupsFromDB` 方法。
 - 修复拉黑联系人时缓存未及时更新的问题。
@@ -53,12 +53,12 @@
 
 ## 版本 V1.3.1 Dev 2024-7-9 （开发版）
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 撤回消息的方法 `RecallMessage` 中新增 `ext` 参数（字符串类型），[支持消息撤回时携带自定义信息](message_recall.html#实现方法)。
 - [IM SDK] [消息撤回事件](message_recall.html#设置消息撤回监听)  `OnMessagesRecalled` 的返回参数由 `List<Message>` 变更为 `List<RecallMessageInfo>`。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复服务端获取好友列表（包含好友备注）时，在好友列表无变化时，第二次请求获取不到数据的问题。
 - [IM SDK] 修复特殊情况下附件发送失败，消息仍然成功发送的问题。
@@ -66,7 +66,7 @@
 
 ## 版本 V1.3.0 Dev 2024-5-7 （开发版）
 
-### 新增特性
+#### 新增特性
 
 - 新增 `ChatManager#DeleteAllMessagesAndConversations` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
 - 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
@@ -98,7 +98,7 @@
 - 新增 `SDKClient#RenewToken` 方法，用于更新用户 token。
 - 消息修改回调 `IChatManagerDelegate#OnMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
 
-### 优化
+#### 优化
 
 - 废弃 `SDKClient#LoginWithAgoraToken` 和 `SDKClient#Login` 方法，使用 `LoginWithToken` 方法替代。
 - 废弃 `SDKClient#RenewAgoraToken` 方法，使用 `RenewToken` 替代。
@@ -120,7 +120,7 @@
 - 单个日志文件大小由 2 MB 提升到 5 MB。 
 - iOS 平台增加了隐私协议 `PrivacyInfo.xcprivacy`。
 
-### 修复
+#### 修复
 
 - 数据库名称加密，但数据库中的内容仍为明文。
 - 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
@@ -133,7 +133,7 @@
 
 ## 版本 V1.2.0 Dev 2023-8-30（开发版）
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增 [发送](message_send.html#发送合并消息) 和[接收合并转发消息](message_receive.html#接收合并消息) 功能：
   - `MessageBodyType#COMBINE`：合并消息类型；
@@ -196,7 +196,7 @@
   - `Options#MyUUID`：设置自定义设备 UUID；
   - `Options#EnableEmptyConversation`：从数据库加载会话时，是否允许加载空会话。
 
-### 优化
+#### 优化
 
 - [IM SDK] `kickAllDevice` 重命名为 `KickAllDevice`。
 - [IM SDK] 修改 `MessageReaction` 中拼写错误：`Rection` 修改为 `Reaction`。
@@ -204,23 +204,23 @@
   - `ThumbnaiRemotePath` 修改为 `ThumbnailRemotePath`；
   - `ThumbnaiSecret` 修改为 `ThumbnailSecret`；
   - `ThumbnaiDownStatus` 修改为 `ThumbnailDownStatus`。
-### 修复
+#### 修复
 
 - [IM SDK] 修复 SDK 回调时找不到回调句柄的问题；
 - [IM SDK] 修复 SDK 不同字符集转码问题。
 
 ## 版本 v1.1.0 Dev 2023-2-25
 
-### 新增特性
+#### 新增特性
 
 - 新增 `ChatManager#GetConversationsFromServerWithPage` 方法实现从服务器分页获取会话列表。
 - 新增 `Message#Priority` 属性实现聊天室消息优先级功能，确保高优先级消息优先处理。
 
-### 优化
+#### 优化
 
 调整 `SDKClient#InitWithOptions` 方法，增加返回结果，检查 App Key 格式。
 
-### 修复
+#### 修复
 
 - 修复登录时的部分 bug。
 - 修复发送的消息的已读标识为 `false` 的问题。修复后，发送消息时将已读标识设置为 `true`。
@@ -228,7 +228,7 @@
 
 ## 版本 V1.0.9 Dev 2022-12-30（开发版）
 
-### 新增特性
+#### 新增特性
 
 1. `SDKClient` 类中新增以下方法:      
   - `GetLoggedInDevicesFromServer`：获取通过指定账号登录的在线设备列表。
@@ -259,7 +259,7 @@
   - `Ext`：自定义群组扩展信息。
   - `IsDisabled`：群组是否禁用。         
               
-### 优化
+#### 优化
 
 1. 命名空间由 ChatSDK 修改为 AgoraChat。
 2. 各方法中的 `handle` 参数重命名为 `callback`。
@@ -289,16 +289,17 @@
 
 ## 版本 V1.0.8 Dev 2022-9-30（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 新增聊天室自定义属性功能。
 - `ChatGroup` 中增加 `isDisabled` 属性显示群组禁用状态，需要开发者在服务端设置。该属性在调用 `IGroupManager` 中的 `GetGroupSpecificationFromServer` 方法获取群组详情时返回。
-### 优化
+  
+#### 优化
 
 - 移除 SDK 一部分冗余日志；
 - 将命名空间由 ChatSDK 改为 AgoraChat。
         
-### 修复
+#### 修复
 
   1. 修复极少数场景下，从服务器获取较大数量的消息时失败的问题。
   2. 修复数据统计不正确的问题。       
@@ -307,7 +308,7 @@
 
 ## 版本 V1.0.5 2022-08-05
 
-### 新增特性
+#### 新增特性
 
 - [在线状态订阅](presence.html)
 - [消息表情回复](reaction.html)

@@ -4,32 +4,32 @@
 
 ## 版本 V4.17.0 Dev 2025-9-30（开发版）
 
-### 新增特性
+#### 新增特性
 
 1. [获取服务端会话列表时可获取空会话](conversation_list.html#从服务器分页获取会话列表)。
 2. [获取服务端的置顶会话列表时可获取空会话](conversation_pin.html#获取服务端的置顶会话列表)。
 
 ## 版本 V4.15.1 Dev 2025-6-9（开发版）
 
-### 新增特性
+#### 新增特性
 
 1. 支持 [查询当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数)。
 2. 支持 [屏蔽群消息](group_manage.html#屏蔽群消息)、[解除屏蔽群消息](group_manage.html#解除屏蔽群消息)和 [检查当前用户是否已屏蔽群消息](group_manage.html#检查当前用户是否已屏蔽群消息)。
 
-### 修复
+#### 修复
 
 修复撤回消息时报错。
 
 ## 版本 V4.15.0 Dev 2025-5-21（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 支持获取 [群组](group_manage.html#获取群成员列表)/[聊天室成员列表](room_members.html#获取聊天室成员列表) 时，列明成员的用户 ID 和角色。
 - [撤回消息](message_recall.html) 时，支持群组中群主/管理员撤回其他用户发送的消息。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
   - 新增群成员进出事件 [membersPresence](group_manage.html#监听群组事件) 和 [membersAbsence](group_manage.html#监听群组事件)。原事件 `memberPresence` 和 `membersAbsence` 仍有效。 
    
-### 优化
+#### 优化
 
 - 修改 Token 即将过期事件 `onTokenWillExpire` 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
 - [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](demo_react.html#快速跑通-demo-源码)。
@@ -38,20 +38,20 @@
 
 ## 版本 V4.14.0 Dev 2025-4-21（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。
 - 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持 [自定义设备平台](multi_device.html#设置登录设备的平台)。
 
-### 优化
+#### 优化
 
 - 原创建群组方法 `createGroup` 方法废弃，使用 [createGroupVNext](group_manage.html#创建群组) 方法代替。
 
 ## 版本 V4.13.0 Dev 2025-3-12（开发版）
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 发送后修改消息接口 [modifyMessage](message_modify.html) 支持修改各类消息：
   - 文本消息：支持修改 `msg` 和 `ext` 字段。
@@ -61,13 +61,13 @@
   
 - [IM Demo] 增加反诈提示 UI。
 
-### 优化
+#### 优化
 
 [IM SDK] SDK 内部捕获重试 DNS 失败的错误。
 
 ## 版本 V4.12.0 2025-1-10
 
-### 新增特性
+#### 新增特性
 
 - 消息修改事件 `onModifiedMessage` 中增加消息 `ext` 字段。添加该字段后，修改消息后，接收方会收到发送方修改的扩展信息。
 -  加入聊天室 `joinChatRoom` 成功的回调新增 `info` 字段，包含如下信息，即用户加入聊天室后会收到如下信息：
@@ -77,54 +77,54 @@
    - 当前聊天室成员数：`memberCount`。
    - 用户禁言到期时间：`muteExpireTimestamp`。 
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复偶现无法拉取消息的问题。
 
 ## 版本 V4.11.0 Dev 2024-12-3（开发版）
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
 - [IM SDK] 聊天室禁言回调 `muteMember` 新增 `muteTimestamp` 参数，表示禁言过期时间。
 - [IM SDK] 群组/聊天室禁言事件 `muteMember` 新增 `userId` 字段，表示被禁言的成员。
 
-### 优化
+#### 优化
 
 [IM SDK] SDK 的 message 对象中新增 `parseDownloadResponse`、`download` 方法。目前，SDK 的 utils 对象和 message 对象中均包含 `parseDownloadResponse`、`download` 方法。
 
-### 修复
+#### 修复
 
 [IM SDK] 修复消息置顶事件 `onMessagePinEvent` 中的 `conversationId` 参数值错误的问题。
 
 ## 版本 V4.10.0 2024-10-11（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 聊天室公告修改事件中增加公告内容：`updateAnnouncement` 事件中增加 `announcement` 字段，表示更新的公告。
 - 新增两个[错误码](error.html)：
   - `WEBIM_USER_ALREADY_LOGIN` 208：用户已登录。单设备登录时，若调用 open 方法用户已经登录，会提示该错误。
   - `MESSAGE_SEND_TIMEOUT` 512：发送消息超时。例如，发消息时连接断开，会提示该错误。
    
-### 优化
+#### 优化
 
 调整了登录方法的 `open().then` 与连接成功事件 `onConnected` 的触发时机。优化后，调用登录方法 `open` 后，先触发连接成功与否的事件 `onConnected` 或 `onDisconnected`，然后再触发登录 `open().then` 或者 `open().catch`，以确保连接完全建立后再进行后续处理。之前版本为调用登录方法，先触发登录回调，然后触发连接事件，导致需要等待连接成功事件 `onConnected` 触发后才能发送消息。同时，优化后，鉴权失败等登录错误会在 `open.catch` 中抛出。
 
 ## 版本 V4.9.2 2024-09-20（开发版）
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] `removeHistoryMessages` 方法[支持单向删除服务端的聊天室消息](message_delete.html#单向删除服务端的历史消息)。
 
 ## 版本 V4.9.1 Dev 2024-09-06（开发版）
 
-### 修复
+#### 修复
   
 - [IM SDK] 修复一些类型问题。
 
 ## 版本 V4.9.0 2024-08-30（开发版）
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增 `getSilentModeRemindTypeConversations` 方法，用于分页获取所有设置了推送通知方式的会话。
 - [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html#监听连接状态): `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish`。
@@ -134,25 +134,25 @@
   - `removeSilentModeForConversation`：若你调用了 `clearRemindTypeForConversation` API [清除指定会话的推送通知方式的设置](/document/web/push/push_notification_mode_dnd.html#清除单个会话的推送通知方式的设置)，其他设备会收到该事件。
 - [IM SDK] SDK `message` 对象中新增 `getFileUrl` 方法。目前，SDK 的 `utils` 对象和 `message` 对象中均包含 `getFileUrl` 方法。 
 
-### 优化
+#### 优化
 
 - [IM SDK] IM 重连逻辑优化。
 - [IM SDK] 增加请求 DNS 失败的回调。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复一些类型问题。
 - [IM SDK] 加群事件 `requestToJoin`（群组和群管理员收到）新增申请原因字段 `reason`。 
 
 ## 版本 V4.8.1 Dev 2024-07-17
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增[日志上报](log.html#日志上报)功能, 即将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
 
 ## 版本 V4.8.0 Dev 2024-07-01
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] [`onDisconnected` 事件](connection.html)新增断开原因回调参数, 告知用户触发 `onDisconnected` 的原因。
 - [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)： 
@@ -164,26 +164,26 @@
 - [IM SDK] 新增 `ConnectionParameters#isFixedDeviceId` 初始化参数，默认为 `true`，[使用固定的设备 ID](multi_device.html)。之前，每个 SDK 实例连接时，SDK 默认均使用不同的随机字符串作为设备标识。
 - [IM SDK] `destroyChatRoom` 方法[支持聊天室所有者解散聊天室](room_manage.html#解散聊天室)。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复 SDK 在 uniapp Vue3 平台无法自动重连的问题。
 - [IM SDK] 将[数据库操作失败错误码](error.html) `LOCAL_DB_OPERATION_FAILED` 为 从 `55` 修改为 `800`。
 
 ## 版本 V4.7.0 Dev 2024-04-30
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增 `getJoinedChatRooms` 方法，用于[获取当前用户加入的聊天室列表](room_manage.html#获取当前用户加入的聊天室列表)。
 - [IM SDK] [撤回消息](message_recall.html#实现方法)接口 `recallMessage` 中新增 `ext` 参数，支持传入自定义字符串，设置扩展信息。
 - [IM SDK] SDK logger 中新增 `setConsoleLogVisibility` 方法，用于[设置日志是否输出到控制台](log.html#输出信息到日志文件)。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复消息 `allowGroupAck` 状态错误问题。
 
 ## 版本 V4.6.0 Dev 2024-04-02
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增[置顶消息功能](message_pin.html)。
   - `pinMessage`: 置顶消息。
@@ -193,36 +193,36 @@
 - [IM SDK] 消息修改回调 `onModifiedMessage` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
 - [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
 
-### 优化
+#### 优化
 
 - [IM SDK] 优化 Token 登录时的错误提示信息，使错误提示更精细。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复消息 `onlineState` 状态错误问题。
 
 ## 版本 V4.5.1 Dev 2024-02-22
 
-### 优化
+#### 优化
 
 - [IM SDK] 统一消息附件的 URL 格式。
 
 ## 版本 V4.5.0 Dev 2024-01-30
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] [聊天室和群组成员进出事件增加成员人数 `memberCount` 字段](room_manage.html#实时更新聊天室成员人数)。
 - [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#清空聊天记录) 方法，用于清空当前用户的聊天记录，包括消息和会话。
 - [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-id-列表) 方法，可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
 - [IM SDK] 新增 [useReplacedMessageContents](message_send.html#发送消息前的内容审核) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
 
-### 优化
+#### 优化
 
 - [IM SDK] Web 本地数据库移除非必要唯一字段。
 - [IM SDK] 格式化会话列表中最近一条自定义消息的 `customExts` 字段。
 - [IM SDK] 重复拉消息问题。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复 `onMessage` 回调消息顺序异常问题。
 - [IM SDK] 修复 vite electron 引入 MiniCore 插件报错。
@@ -230,7 +230,7 @@
 
 ## 版本 V4.4.0 Dev 2023-12-22
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增[会话标记功能](conversation_mark.html)。
   - `addConversationMark`：[标记会话](conversation_mark.html#标记会话)。
@@ -240,7 +240,7 @@
 - [IM SDK] 增加 `onMessage` 回调。在收到文本、图片、视频、语音、地理位置和文件等消息时，批量将消息回调给应用。
 - [IM SDK] 视频类型消息增加视频首帧缩略图, 通过 `videoMessage.thumb` 访问。
 
-### 修复
+#### 修复
 
 - [IM SDK] SDK 类型修正。
 - [IM SDK] vite 引入 MiniCore SDK 报错。
@@ -248,56 +248,56 @@
 
 ## 版本 V4.3.1 Dev 2023-12-13
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] [发送消息方法 `Send`](message_send.html) 的成功回调参数 `SendMsgResult` 中新增 `message` 字段，用于返回成功发送的消息对象。
 - [IM SDK] MiniCore SDK 增加 logger 实例。
 
-### 优化
+#### 优化
 
 - [IM SDK] 优化部分机型断网后 SDK 重连慢的问题。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复 `isInGroupMutelist` API 调用时出现 404 的问题。
 
 ## 版本 V4.3.0 Dev 2023-11-17
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
 - [IM SDK] 新增 `getAllContacts` 和 `getContactsWithCursor` 方法分别用于[从服务器一次性和分页获取好友列表](user_relationship.html#获取好友列表)，其中每个好友对象包含好友的用户 ID 和好友备注。
 - [IM SDK] 消息结构新增 `broadcast` 字段, 用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 
-### 优化
+#### 优化
 
 - [IM SDK] Token 登录增加即将过期及已过期的回调，即 Token 已过期或有效期过半时也触发 `onTokenExpired` 和 `onTokenWillExpire` 回调。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复会话列表最后一条消息中获取不到 `reaction` 的问题。
 
 ## 版本 V4.2.1 Dev 2023-09-27
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增 `LocalCache` 模块[实现本地会话数据管理](conversation_local.html)。
 - [IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
 
 ## 版本 V4.2.0 Dev 2023-07-27
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息功能](message_receive.html#接收合并消息)。
 - [IM SDK] 新增[消息修改功能](message_modify.html)。
 
-### 修复
+#### 修复
 
 修复发送不必要的消息送达回执的问题。
 
 ## 版本 V4.1.7 Dev 2023-06-08
 
-### 新增特性
+#### 新增特性
 
 1. 新增 `pinConversation` 方法实现 [会话置顶和取消置顶](conversation_pin.html#置顶-取消置顶会话)。
 2. 新增 `getServerPinnedConversations` 方法[分页获取服务器端的置顶会话列表](conversation_pin.html#获取服务端的置顶会话列表)。
@@ -318,24 +318,24 @@
 
 ## 版本 V4.1.6 Dev 2023-04-17
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增 `searchOptions` 参数对象（包含 `from`、`msgTypes`、`startTime` 和 `endTime` 参数），允许用户调用 `getHistoryMessages` 方法时[按消息发送方、消息类型或时间段从服务端拉取历史消息](message_retrieve.html#从服务器获取指定会话的消息)。
 - [IM SDK] 新增错误码 511，即 MESSAGE_SIZE_LIMIT，若[消息体大小超过限制](message_overview.html#消息类型)时提示用户。
 
 ## 版本 V4.1.4 Dev 2023-03-16
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增 [群成员自定义属性功能](group_members.html#管理群成员自定义属性)并增加[自定义属性更新事件](group_manage.html#监听群组事件)实现群成员设置和获取在群组中的昵称和头像等属性。
 - [IM SDK] 在消息创建参数中新增 `deliverOnlineOnly` 字段实现发消息只投递给在线用户。若开启了该功能，用户离线时消息不投递。
 - [IM Demo] 新增群成员昵称修改与展示功能。 
 
-### 优化
+#### 优化
 
 [IM SDK] 优化聊天室进入和退出实现，提升性能。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复 TypeScript 代码的一些类型错误。
 - [IM SDK] 修复 `getHistoryMessages` 方法无法捕获错误的问题。
@@ -360,47 +360,47 @@
 
 ## 版本 V4.1.2 Dev 2022-11-08
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] [创建群组方法 `createGroup`](group_manage.html#创建群组) 和[修改群信息方法 `modifyGroup`](group_attributes.html#修改群组信息) 新增 `ext` 字段支持群扩展信息。
 - [IM SDK] 群组通知事件增加[群组信息修改事件 `updateInfo`](group_manage.html#监听群组事件)。
 - [IM SDK] 新增[聊天室消息优先级](message_send.html#聊天室消息优先级与消息丢弃逻辑)。
 - [IM SDK] 支持同时[对多个群组成员禁言和解除禁言](group_members.html#管理群组禁言)。
 
-### 优化
+#### 优化
 
 [IM SDK] 优化断网导致的消息发送失败时调用的回调。
 
-### 修复
+#### 修复
 
 [IM SDK] 修复调用 `create` 方法创建附件消息时 `file_length` 参数不生效的问题。
 
 ## 版本 V4.1.1 Dev 2022-9-26
 
-### 优化
+#### 优化
 
 - [IM SDK] [miniCore](import_sdk_minicore.html) 支持配置私有化配置。
 - 优化重连逻辑。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复聊天室自定义属性功能中的问题；
 - [IM SDK] 修复 `miniCore` 中的 `uploadFile` 方法中的问题。
 
 ## 版本 V4.1.0 Dev 2022-9-16
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增[聊天室自定义属性功能](room_attributes.html)。
 - [IM SDK] 新增 `onLog` 方法，实现用户日志回调。
 - [IM SDK] `getJoinedGroups` 方法中新增 `needAffiliations` 和 `needRole` 参数支持获取群组成员数和用户自己的角色。
 
-### 优化
+#### 优化
 
 - [IM SDK] SDK 模块化拆分。
 - [IM SDK] 移除废弃的方法 (`subscribe`、`subscribed`、`unsubscribed`、`removeRoster`、`getRoster`、`callback: onRoster`、`onMutedMessage`、`onCreateGroup` 和 `onBlacklistUpdate`)。
 
-### 修复
+#### 修复
 
 - [IM SDK] 修复上传文件失败没有触发回调的问题。
 - [IM SDK] 修复 IE 浏览器的兼容性问题。
@@ -408,25 +408,25 @@
 
 ## 版本 V4.0.9 2022-7-29
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 增加灾备策略。
 - [IM SDK] SDK 内部在群组聊天室部分 API 请求时增加 `resourceId`，增加操作的多设备通知提醒。
 
-### 优化
+#### 优化
 
 - [IM SDK] 优化协议，减少数据量。
 - [IM SDK] 修复某些情况下消息延迟。
 
 ## 版本 V4.0.8 2022-6-17
 
-### 新增特性
+#### 新增特性
 
 - [IM SDK] 新增群组事件回调 [onGroupEvent](https://doc.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://doc.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
 - [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](error.html)
 - [IM SDK] 邀请加入群聊回调 onGroupChange 返回中新增 群名称 参数值。
 
-### 优化
+#### 优化
 
 - [IM SDK] 支持批量查询群组详情 [getGroupInfo](group_manage.html#获取群组详情信息)。
 - [IM SDK] 优化黑名单和白名单相关的方法名。
@@ -435,31 +435,31 @@
 
 ## 版本 V4.0.7 2022-5-25
 
-### 新增特性:
+#### 新增特性:
 
 - [IM SDK] 新增消息子区（message thread）功能；
 - [IM SDK] 新增 [getConversationlist](conversation_list.html#从服务器分页获取会话列表) 方法解析会话中的最新一条消息；
 
-### 优化：
+#### 优化：
 
 - [IM SDK] 消息事件监听器中新增 onlineState 字段标记消息的在线状态。
 
 ## 版本 V4.0.5 2022-5-16
 
-### 新增特性:
+#### 新增特性:
 
 - [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应；
 - [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核；
 - [IM SDK] 新增推送设置 API，支持不同的推送配置；
 - [IM SDK] 增加数据上报功能；
 
-### 优化：
+#### 优化：
 
 - [IM SDK] 获取加入的群组更新为支持分页的 API；
 - [IM SDK] 创建群组时，支持设置群组人数；
 - [IM SDK] 接收到的图片消息增加缩略图 URL；
 
-### 修复：
+#### 修复：
 
 - [IM SDK] 解决切换账号群组消息有缓存的 BUG。
 
@@ -469,16 +469,16 @@
 仅 V4.0.4 及以下版本支持私有化部署。
 :::
 
-### 新增特性:
+#### 新增特性:
 
 - [IM SDK] 增加 [用户在线状态(Presence)](presence.html) 订阅功能。
 - [IM SDK] [翻译功能](message_translation.html)：增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
 
-### 优化：
+#### 优化：
 
 - [IM SDK] 小程序不需要 isHttpDNS 参数。
 
-### 修复：
+#### 修复：
 
 - [IM SDK] 修复 Uni_SDK 无法运行到浏览器问题。
 - [IM SDK] 修复创建群组时无法修改群简介问题。
@@ -693,7 +693,7 @@
 
 ## 版本：v3.0.4 2019-07-25
 
-### Bug 修复：
+#### Bug 修复：
 
 - [sdk] 扩展消息 bug
 - [sdk] 群组类消息撤回 bug
@@ -702,18 +702,18 @@
 
 ## 版本：v3.0.2 2019-07-09
 
-### 新功能：
+#### 新功能：
 
 - [sdk] dns 下上传文件走 dns
 
-### Bug 修复：
+#### Bug 修复：
 
 - [sdk] 无法拉取历史消息
 - [sdk] loc/cmd 消息 messageId bug
 
 ## 版本：v3.0.0 2019-06-29
 
-### 新功能：
+#### 新功能：
 
 - [sdk] 基于私有协议重写
 - [sdk] 增加拉取历史消息接口
@@ -722,7 +722,7 @@
 - [demo] 增加接受群邀请功能
 - [demo] 增加和调整一些群操作通知
 
-### Bug 修复：
+#### Bug 修复：
 
 - [demo] 修复音视频通话时显示名称不对
 - [demo] 加入群组群组列表不实时更新
@@ -730,7 +730,7 @@
 
 ## 版本：v1.11.1 2019-03-18
 
-### 新功能：
+#### 新功能：
 
 - [sdk] 通过设置 isHttpDNS 为 true，从服务端获取 DNS 配置文件，SDK 中改进自动重连的功能
 - [demo] 配置文件文件增加配置 isHttpDNS
@@ -739,11 +739,11 @@
 
 ## 版本：v1.10.0 2018-09-17
 
-### 新功能：
+#### 新功能：
 
 - [demo] 多人音视频
 
-### Bug 修复：
+#### Bug 修复：
 
 - [demo] 在视频界面中，切到其他界面，视频界面不在了。但是视频还在继续中
 - [demo] 火狐 邀请 chrome， 进入多人会议，都收不到视频通知
@@ -754,23 +754,23 @@
 
 ## 版本：v1.6.0 2018-01-29
 
-### 新功能：
+#### 新功能：
 
 - [demo] 多人音视频
 - [sdk] 多人音视频
 
-### Bug 修复：
+#### Bug 修复：
 
 - [demo] 无法发送表情
 
 ## 版本：v1.5.0 2017-11-17
 
-### 新功能：
+#### 新功能：
 
 - [demo] 添加 Rest Interface 的 Test case
 - [demo] sdk/demo 上传功能兼容 ie8
 
-### Bug 修复：
+#### Bug 修复：
 
 - [demo] 多设备登录异常
 - [demo] 新建需要审批的公有群，加入必须有审批流程
@@ -783,11 +783,11 @@
 
 ## 版本：v1.4.13 2017-09-12
 
-### 新功能：
+#### 新功能：
 
 - [sdk] 新增 jsdoc
 
-### Bug 修复：
+#### Bug 修复：
 
 - [sdk] ios(8.1)webview 已读和已送到回执异常
 - [sdk] 多设备登录异常
@@ -795,7 +795,7 @@
 
 ## 版本：v1.4.12 2017-07-17
 
-### 新功能：
+#### 新功能：
 
 - [sdk] 修改 delivery ack 和 read ack 的格式
 - [sdk] 用户在离线状态下发送消息，会自动重连并将未成功发送的消息发送出去
@@ -804,7 +804,7 @@
 - [demo] 添加 Rest Interface 的 Test case
 - [demo] sdk/demo 上传功能兼容 ie8
 
-### Bug 修复：
+#### Bug 修复：
 
 - [sdk] 提升 ie8 的兼容性
 - [sdk] 自己发送的消息的已读 ack，不再发送给自己
@@ -818,7 +818,7 @@
 
 ## 版本：v1.4.11 2017-06-14
 
-### 新功能：
+#### 新功能：
 
 - [sdk] debug.js 融合到 sdk 当中，优化日志内容输出
 - [sdk] 通过 Rest 屏蔽群组
@@ -851,7 +851,7 @@
 - [demo] 群主可同意、拒绝加群申请
 - [demo] 在群主的群成员列表中新增添加/移除管理员、禁言/解禁群成员按钮
 
-### Bug 修复：
+#### Bug 修复：
 
 - [sdk] 添加好友会产生多余的订阅消息
 - [sdk] 频繁的发送消息会导致消息 id 重复的问题
@@ -861,7 +861,7 @@
 
 ## 版本：v1.4.10 2017-02-16
 
-### 新功能：
+#### 新功能：
 
 - [sdk] webrtc 新增语音呼叫
 
@@ -874,31 +874,31 @@
 
 ## 版本：v1.4.9 2017-01-20
 
-### Bug 修复：
+#### Bug 修复：
 
 - [sdk] 成功/失败的回调函数如果没有定义会报错
 
 ## 版本：V1.4.8 2017-01-03
 
-### 新功能：
+#### 新功能：
 
 - [demo] 增加 webrtc 视频聊天的声音开关
 - [demo] 动态创建 chatWindow，提高网页性能
 - [demo] 切换 leftbar 时会给 chatWindow 添加遮罩，返回之前的 leftbar 时会直接跳到之前选中的 cate 和 chatWindow
 - [demo] 登录成功后，刷新页面不会再回到登录页
 
-### Bug 修复：
+#### Bug 修复：
 
 - [sdk] 移除 sdk 中所有 log 方法
 - [sdk] 退出 muc group room 时，追加发送一条 unavailable 的 presence stanza
 
 ## 版本：V1.4.7 2016-12-21
 
-### 新功能：
+#### 新功能：
 
 - [demo] 在 demo.html 中新增视频聊天及发送视频文件的功能
 
-### Bug 修复：
+#### Bug 修复：
 
 - [sdk] 解决在手机浏览器在后台运行时无法断线重连的问题
 - [demo] WebIM 建群，等待后台建群成功后再拉取群信息并更新 UI 中的群列表
@@ -907,11 +907,11 @@
 
 ## 版本：V1.4.6 2016-12-20
 
-### 新功能：
+#### 新功能：
 
 - [sdk] 新增 demo.html, 演示如何调用 sdk 的各种接口
 
-### Bug 修复：
+#### Bug 修复：
 
 - [demo] 创建群组成功之后，立即刷新群组列表，不再等 1 秒
 - [sdk] sdk 与上层 Demo 解耦，删除 Demo 相关代码
@@ -919,7 +919,7 @@
 
 ## 版本：V1.4.5 2016-12-01
 
-### 新功能：
+#### 新功能：
 
 - GNU 风格的版本号命名格式: 主版本号.子版本号.修正版本号 (新版本规则的 1.4.5 = 旧版本规则的 1.1.4.5)
 - [demo] 好友之间可以通过 webrtc 进行视频聊(仅支持 https + Webkit 浏览器)
@@ -929,14 +929,14 @@
   - 添加 `<script>` 标签，并通过 WebIM 命名空间访问 websdk
   - NPM（websdk 已经发布到 NPM），先 require，再访问 WebIM
 
-### Bug 修复：
+#### Bug 修复：
 
 - [sdk] 解散群组不更新 UI
 - [sdk] 修复了发送 cmd 消息成功后无法调用回调函数的 bug
 
 ## 版本：V1.1.3 2016-11-01
 
-### 功能改进：
+#### 功能改进：
 
 - [demo] 支持 Windows SDK。可在 [环信官网下载 Web SDK](https://www.easemob.com/download/im#Web)。
 - [demo] 新增黑名单功能。
@@ -945,7 +945,7 @@
 - [sdk] strophe 从 v1.2.2 升级到 v1.2.8，在生产模式使用 strophe-1.2.8.min.js， 在开发模式使用 strophe.js。
 - [sdk] 支持自动重连: 在 webim.config.js 文件中新增相关参数 `autoReconnectNumMax` 和 `autoReconnectInterval`。
 
-### Bug fixes:
+#### Bug fixes:
 
 - [demo] 增加 `babel-core/browser-polyfill.js`文件，修复了 IE 不支持 HTML5 elements 的 bug。
 - [demo] 修复了有未读消息时点击联系人不生效的 bug。
@@ -955,7 +955,7 @@
 
 ## 版本：V1.1.2 2016-8-12
 
-### 功能改进：
+#### 功能改进：
 
 - 新版 demo
 - 添加 isAutoLogoin 参数，默认 setPresence
@@ -963,7 +963,7 @@
 - 增加 try catch，尽量减少因为外部的错误导致的连接断开
 - 修改错误码，不再返回错误提示消息，在文档体现
 
-### Bug fix：
+#### Bug fix：
 
 - 无法传 file_length
 - 特殊字符无法显示
@@ -972,7 +972,7 @@
 
 ## 版本：V1.1.1 2016-6-27
 
-### 功能改进：
+#### 功能改进：
 
 - 增加聊天室加入成功、失败回调
 - 增加网络监测回调 onOnline、onOffline
@@ -980,7 +980,7 @@
 - demo 新增发送文件功能
 - 收到 AMR 自动转 MP3
 
-### Bug fix：
+#### Bug fix：
 
 - 修复心跳会创建多个 timer
 - 联系人名称过长导致的样式问题
@@ -989,7 +989,7 @@
 
 ## 版本：V1.1.0 2016-4-6
 
-### 功能改进：
+#### 功能改进：
 
 - 将表情包移除 sdk，可导入自定义表情。
 - 增加 XMPP 连接多 resource 支持的参数。
@@ -1001,7 +1001,7 @@
 
 ## 版本：V1.0.7 2015-8-25
 
-### 功能改进：
+#### 功能改进：
 
 - 增加连接心跳支持，保持客户端连接不间断。
 - 增加 XMPP 连接多 resource 支持。
@@ -1015,7 +1015,7 @@
 
 ## 版本：V1.0.5 2015-3-11
 
-### 新功能：
+#### 新功能：
 
 - 优化底层连接，减少系统登录耗时。
 - 添加透传消息支持（注册 onCmdMessage 事件，以监听服务器端推送的透传消息）。
@@ -1024,25 +1024,25 @@
 
 ## 版本：V1.0.4.1 2015-1-15
 
-### 新功能：
+#### 新功能：
 
 - 收到文件消息通知，暂不支持下载。
 - 收到视频消息通知，暂不支持下载。
 
-### Bug Fix：
+#### Bug Fix：
 
 - 修复 bug。修复不点击‘退出’按钮直接关闭浏览器下次登录消息丢失的 bug。
 
 ## 版本：V1.0.4 2014-12-17
 
-### Bug Fix：
+#### Bug Fix：
 
 - 修复 bug。群聊位置消息作为单聊消息处理。
 - 修改 bug。好友列表为空时陌生人消息不显示。
 
 ## 版本：V1.0.3 2014-12-11
 
-### 新功能：
+#### 新功能：
 
 - 增加陌生人聊天功能。
 - 添加新用户注册功能。
@@ -1052,7 +1052,7 @@
 - 消息体支持自定义扩展,添加 ext 属性。
 - Demo 示例支持未读消息提醒。
 
-### 功能改进：
+#### 功能改进：
 
 - 修复 bug。demo 联系人过多时的样式问题。
 - 修复 bug。conn = new Easemob.im.Connection();变量名不为 conn 或者 conn 不是全局变量时接收不到消息。

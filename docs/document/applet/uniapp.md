@@ -32,11 +32,11 @@
 
 ## 开发者集成
 
-### 步骤一 注册环信账号
+### 步骤 1 注册环信账号
 
 开发者需要在环信控制台 [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)，获取唯一 App Key，SDK 初始化时需要配置 App Key。
 
-### 步骤二 搭建开发环境
+### 步骤 2 搭建开发环境
 
 1. 下载 HBuilderx 编辑器 [https://www.dcloud.io/hbuilderx.html](https://www.dcloud.io/hbuilderx.html)。
 2. DCloud 开发者中心注册 [https://dev.dcloud.net.cn/](https://dev.dcloud.net.cn/)。
@@ -45,7 +45,7 @@
 
 即将开发的平台配置服务
 
-### 步骤三 配置服务器域名
+### 步骤 3 配置服务器域名
 
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、Socket 访问域名不同。请根据您所在数据中心进行配置。
 
@@ -80,13 +80,13 @@
 - 百度小程序：`**1.9.4**` 及以上版本，支持存在多个 WebSokcet 连接，每次成功调用会返回一个新的 SocketTask
 - 支付宝小程序：支付宝小程序在一段时间内只能保留一个 WebSocket 连接，如果当前已存在 WebSocket 连接，那么会自动关闭该连接，并重新创建一个新的 WebSocket 连接。
 
-### 步骤四 下载 SDK
+### 步骤 4 下载 SDK
 
 可以通过以下方式获取 SDK：
 
 - 从 npm [easemob-websdk](https://www.npmjs.com/package/easemob-websdk/) 中获取。
 
-### 步骤五 引入 SDK
+### 步骤 5 引入 SDK
 
 - 开始一个全新的项目：
   1. 安装 `easemob-websdk` npm 包。
@@ -111,7 +111,7 @@ npm i easemob-websdk
 import SDK from 'easemob-websdk/uniApp/Easemob-chat';
 ```
 
-### 步骤六 实例化 SDK
+### 步骤 6 实例化 SDK
 
 实例化 SDK，并挂载在全局对象下。
 
