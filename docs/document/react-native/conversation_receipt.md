@@ -13,7 +13,7 @@
 单聊会话已读回执实现的流程如下：
 
 1. 设置 `ChatOptions#requireAck` 为 `true` 开启已读回执功能。
-2. 消息接收方进入会话页面，阅读消息后，调用 `markAllMessagesAsRead` 方法发送会话已读回执。
+2. 消息接收方进入会话页面，阅读消息后，调用 `sendConversationReadAck` 方法发送会话已读回执。
 3. 消息发送方通过监听 `onConversationHasRead` 回调接收会话已读回执。
 
 ## 前提条件
@@ -69,4 +69,4 @@ ChatClient.getInstance().chatManager.addMessageListener({
 
 ## 会话已读回执和消息未读数
 
-消息接收方调用 `markAllMessagesAsRead` 方法发送会话已读回执，开发者可调用 `ChatConversation#markAllMessagesAsRead` 方法将所有未读消息设置为已读，即将该会话的未读消息数清零。
+消息接收方调用 `sendConversationReadAck` 方法发送会话已读回执，开发者可调用 `ChatConversation#markAllMessagesAsRead` 方法将所有未读消息设置为已读，即将该会话的未读消息数清零。
