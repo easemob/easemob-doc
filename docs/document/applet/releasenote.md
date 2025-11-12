@@ -9,7 +9,7 @@
 1. [获取服务端会话列表时可获取空会话](conversation_list.html#从服务器分页获取会话列表)。
 2. [获取服务端的置顶会话列表时可获取空会话](conversation_pin.html#获取服务端的置顶会话列表)。
 
-## 版本 V4.15.1 Dev 2025-6-9（开发版）
+## 版本 V4.15.1 Dev 2025-6-9
 
 #### 新增特性
 
@@ -20,7 +20,7 @@
 
 修复撤回消息时报错。
 
-## 版本 V4.15.0 Dev 2025-5-21（开发版）
+## 版本 V4.15.0 Dev 2025-5-21
 
 #### 新增特性
 
@@ -35,7 +35,7 @@
 - 获取群组成员列表的原方法 `listGroupMembers` 废弃。使用 [getGroupMembers](group_manage.html#获取群成员列表) 替换。
 - 获取群组成员列表的原方法 `listChatRoomMembers` 废弃。使用 [getChatRoomMembers](room_members.html#获取聊天室成员列表) 替换。
 
-## 版本 V4.14.0 Dev 2025-4-21（开发版）
+## 版本 V4.14.0 Dev 2025-4-21
 
 #### 新增特性
 
@@ -49,7 +49,7 @@
 
 - 原创建群组方法 `createGroup` 方法废弃，使用 [createGroupVNext](group_manage.html#创建群组) 方法代替。
 
-## 版本 V4.13.0 Dev 2025-3-12（开发版）
+## 版本 V4.13.0 Dev 2025-3-12
 
 #### 新增特性
 
