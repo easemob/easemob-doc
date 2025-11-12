@@ -50,7 +50,7 @@
 
 ## 版本 V1.8.0 2025-1-17
 
-### 新增特性
+#### 新增特性
 
 用户加入聊天室后会收到如下信息，即调用 `joinChatRoomEx` 方法后的成功回调中会包含如下信息：
 1. 聊天室当前人数 `ChatRoom#memberCount`。
@@ -61,26 +61,26 @@
 
 ## 版本 V1.7.0 2024-12-5
 
-### 新增特性
+#### 新增特性
 
 - 依赖的原生 SDK 升级到版本：iOS 4.11.0 和 Android 4.11.0。
 - 更新服务器连接状态监听器 `ChatConnectEventListener`，新增 `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish` 事件，表示[从服务器拉取离线消息的开始和结束](connection.html)。
 - 新增 `ChatManager#getMessageCount` 方法，用于获取数据库中的消息总数。
   
-### 优化
+#### 优化
 
 - 更新聊天室监听器 `ChatRoomEventListener`, 作废 `onMuteListAdded`，替换为 `onMuteListAddedV2`。
 - 更新消息监听器 `ChatMessageEventListener`, 移除作废的接口 `onMessagesRecalled`。
 
 ## 版本 V1.6.1 2024-9-12
 
-### 修复
+#### 修复
 
 - 修复 Android 平台下编译报错找不到 `CMakeLists.txt` 的问题。
 
 ## 版本 V1.6.0 2024-8-30
 
-### 新增特性
+#### 新增特性
 
 - 依赖的原生 SDK 升级到版本：iOS 4.8.1 和 Android 4.8.2。
 - 新增 `ChatManager.searchMessages` 方法，支持[一次搜索所有会话的多种类型的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
@@ -91,14 +91,14 @@
 - 新增 `ChatOptions.loginExtraInfo` 选项，支持[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)。被踢设备收到 `ChatConnectEventListener#onUserDidLoginFromOtherDeviceWithInfo` 事件中会携带新设备的扩展信息。
 - 原生平台新增[错误码 407](/document/android/error.html)。
 
-### 优化
+#### 优化
 
 - 原生平台优化弱网服务器连接成功率。
 - 作废 `ChatConnectEventListener` 中的 `onUserDidLoginFromOtherDevice` 事件，由 [onUserDidLoginFromOtherDeviceWithInfo](connection.html) 替代。
 - 作废 `fetchHistoryMessages` 接口，由 [fetchHistoryMessagesByOptions](message_retrieve.html#从服务器获取指定会话的消息) 替代。
 - 作废 `joinChatRoom` 接口，由 [joinChatRoomEx](room_manage.html#加入聊天室) 替代。
 
-### 修复
+#### 修复
 
 原生平台进行了如下修复：
  
@@ -110,7 +110,7 @@
 
 ## 版本 V1.5.1 2024-7-2
 
-### 修复
+#### 修复
 
 修复原生平台以下问题：
   - Android：修复部分场景下，用户升级数据库后，在同一个进程下登录新的用户，构建数据库表失败的问题。
@@ -118,12 +118,12 @@
 
 ## 版本 V1.5.0 2024-6-2
 
-### 新增特性
+#### 新增特性
 
 - 撤回消息的方法 `recallMessage` 中新增扩展参数，[支持消息撤回时携带自定义信息](message_recall.html#实现方法)。
 - 添加[消息撤回事件](message_recall.html#设置消息撤回监听)  `onMessagesRecalledInfo`，作废原来的事件 `onMessagesRecalled`。
 
-### 修复
+#### 修复
 
 原生平台修复以下问题：
 - 服务端获取好友列表（包含好友备注）时，在好友列表无变化时，第二次请求获取不到数据的问题。
@@ -132,7 +132,7 @@
 
 ## 版本 V1.4.0 2024-5-7
 
-### 新增特性
+#### 新增特性
 
 - 新增 `ChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
 - 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `ChatMessageSearchScope` 中的搜索范围。
@@ -160,7 +160,7 @@
 - 新增 `ChatOptions#messagesReceiveCallbackIncludeSend` 开关。开启后，在 `ChatMessageEventListener#onMessagesReceived` 回调里增加发送成功的消息。
 - 消息修改回调 `ChatMessageEventListener#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
 
-### 优化
+#### 优化
 
 - 支持使用消息 body 完成[单条转发](message_forward.html)，无需重新上传附件。
 - 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。
@@ -185,7 +185,7 @@
   - `getMessagesWithMsgType`: `getConvMsgsWithMsgType`替换该接口。
   - `searchMsgFromDB`: `getMsgsWithMsgType`替换该接口。
 
-### 修复
+#### 修复
 
 - 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
 - 特殊场景下，SDK 退出后再登录会丢失聊天室监听事件问题。
@@ -197,7 +197,7 @@
 
 ## 版本 V1.3.0 2024-1-4
 
-### 新增特性
+#### 新增特性
 
 - 依赖的原生 SDK 升级到版本（`iOS` 4.2.0 和`Android` 4.2.1）。添加原生 SDK 提供的新功能。
 - 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
@@ -210,13 +210,13 @@
 
 ## 版本 V1.2.1 2023-8-16
 
-### 修复
+#### 修复
 
 - 移除创建消息对象的参数 `secret`。该参数由服务器生成，在发送消息成功之后会获取到。
 
 ## 版本 V1.2.0 2023-8-16
 
-### 新增特性
+#### 新增特性
 
 - React-Native 从 0.66.5 升级到 0.71.11。
 - 依赖的原生 SDK（iOS 和 Android）升级到版本 4.1.1。添加原生 SDK 提供的新功能。
@@ -252,7 +252,7 @@
 - 添加数据对象：
 `ChatMessage.ChatCombineMessageBody`：添加组合消息正文对象。
 
-### 优化
+#### 优化
 
 - 优化断线通知，分离出服务器主动断线的通知，用户可以具体处理服务器主动断线的原因。
 - 使用 commitlint 优化 git 提交规范，确保提交的代码符合规范。
@@ -264,7 +264,7 @@
 - 在 `ChatEvents.ChatGroupEventListener` 对象中，`onGroupDestroyed` 重命名为 `onDestroyed`。
 - 弃用 `ChatManager.fetchAllConversations`，改用 `ChatManager.fetchConversationsFromServerWithCursor`。
 
-### 修复
+#### 修复
 
 修复 Android 平台下由于添加表情响应导致应用程序崩溃的问题。
 
