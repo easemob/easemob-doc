@@ -142,7 +142,7 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"convers
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。
 
-可参考 [示例项目](https://www.easemob.com/download/im) 中的以下类：
+可参考 [GitHub](https://github.com/easemob/easemob-uikit-ios) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios) 中示例项目中的以下类：
 
 - `EMCustomMessageBody`
 - `EMChatMessage`

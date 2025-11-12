@@ -938,7 +938,7 @@
 
 ### 功能改进：
 
-- [demo] 支持 Windows SDK。[https://www.easemob.com/download/im](https://www.easemob.com/download/im)
+- [demo] 支持 Windows SDK。可在 [环信官网下载 Web SDK](https://www.easemob.com/download/im#Web)。
 - [demo] 新增黑名单功能。
 - [demo] 获取聊天室列表: 支持分页、下拉刷新，新增以下 2 个参数：pagenum 和 pagesize。
 - [demo] 群组增加以下功能：创建群组、修改群组名称、修改群组简介、群组成员管理、加入公开群。

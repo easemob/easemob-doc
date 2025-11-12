@@ -66,7 +66,7 @@
 
 你可以参考以下步骤集成 SDK：
 
-1. [下载 Unity SDK](https://www.easemob.com/download/im)。
+1. [下载 Unity SDK](https://www.easemob.com/download/im#Unity)。
 2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 unitypackage 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
 

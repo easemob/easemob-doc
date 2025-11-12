@@ -161,7 +161,7 @@ import EC, { EasemobChat } from "easemob-websdk";
 
 ### 从官网获取并导入 SDK
 
-1. [下载 Web SDK](https://www.easemob.com/download/im)。将 Web SDK 中的 `Easemob-chat.js` 文件保存到你的项目下。
+1. [下载 Web SDK](https://www.easemob.com/download/im#Web)。将 Web SDK 中的 `Easemob-chat.js` 文件保存到你的项目下。
 
 2. 在 `index.html` 文件中，对 `index.js` 文件进行引用。
 
