@@ -2,7 +2,22 @@
 
 <Toc />
 
+## 版本 V4.18.1 Dev 2025-11-12（开发版）
+
+#### 优化
+
+私有化部署底层链路支持 TCP 和 WebSocket 之间切换。
+
+#### 修复
+
+1. 修复 4.17.0 引入的特定 WebSocket 服务器配置下无法登录的问题。
+2. 修复获取聊天室属性方法 `EMChatManager#fetchChatroomAttributes` 和`EMChatManager#fetchChatroomAllAttributes` 参数异常时完成回调不执行的问题。
+
 ## 版本 V4.18.0 Dev 2025-10-31（开发版）
+
+:::tip
+推荐使用 v4.18.1 版本。
+:::
 
 #### 新增特性
 
@@ -11,10 +26,27 @@
 
 #### 修复
 
-1. 修复 WebSocket 使用时出现的文件描述符（FD） 溢出的问题。
+1. 修复 WebSocket 使用时出现的文件描述符（FD）溢出的问题。
 2. 修复使用 WebSocket 时偶现的网络异常断开连接时的崩溃。
 
+## 版本 V4.17.1 Dev 2025-11-12（开发版）
+
+#### 优化
+
+私有化部署底层链路支持 TCP 和 WebSocket 之间切换。
+
+#### 修复
+
+1. 修复 4.17.0 引入的特定 WebSocket 服务器配置下无法登录的问题。
+2. 修复 WebSocket 使用时出现的文件描述符（FD）溢出的问题。
+3. 修复使用 WebSocket 时偶现的网络异常断开连接时的崩溃。
+4. 修复获取聊天室属性方法 `EMChatManager#fetchChatroomAttributes` 和`EMChatManager#fetchChatroomAllAttributes` 参数异常时完成回调不执行的问题。
+
 ## 版本 V4.17.0 Dev 2025-9-28（开发版）
+
+:::tip
+推荐使用 v4.17.1 版本。
+:::
 
 #### 新增特性 
 
@@ -27,6 +59,21 @@
 #### 修复
 
 修复更新群组属性时影响群组头像问题。
+
+## 版本 V4.16.2 2025-11-12（开发版）
+
+#### 新增特性
+
+支持私有部署时设置 IPv6 格式的 REST 地址。
+
+#### 优化
+
+更新 AOSL 库版本为 1.3.0。
+
+#### 修复
+
+1. 修复更新群组属性时影响群组头像问题。
+2. 修复获取聊天室属性方法 `EMChatManager#fetchChatroomAttributes` 和`EMChatManager#fetchChatroomAllAttributes` 参数异常时完成回调不执行的问题。
 
 ## 版本 V4.16.1 Dev 2025-9-5（开发版）
 
