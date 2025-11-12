@@ -92,7 +92,7 @@
 
 - 修复设备网络由 4G 切换为 Wi-Fi 时，短时间内 SDK 向服务器发送 REST 请求失败的问题。
 
-## 版本 V4.13.0 Dev 2025-3-12（开发版）
+## 版本 V4.13.0 Dev 2025-3-12
 
 #### 优化
 
@@ -108,7 +108,7 @@
 #### 修复
 - [IM SDK]修复调用 [EMChatManager#getConversationsFromServerWithCursor](conversation_list.html#从服务器分页获取会话列表) 方法拉取到的会话最新一条消息不包含reactions和翻译信息的问题。
 
-## 版本 V4.12.0 Dev 2025-1-10（开发版）
+## 版本 V4.12.0 Dev 2025-1-10
 
 #### 新增特性
 
@@ -129,7 +129,7 @@
   - `EMUserInfoManager` 和 `EMPresenceManager` 下的全部 API。
   - `EMChatManager` 下的 `fetchMessagesFromServer`、`fetchSupportedLanguages`、`translateMessage` 和 `getMessageCountWithCompletion` API。
 
-## 版本 V4.11.0 Dev 2024-12-3（开发版）
+## 版本 V4.11.0 Dev 2024-12-3
 
 #### 新增特性
 
