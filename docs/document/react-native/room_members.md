@@ -298,6 +298,21 @@ ChatClient.getInstance()
   });
 ```
 
+#### 查看当前用户是否在聊天室禁言列表
+
+聊天室所有成员可查看自己是否在聊天室禁言列表中。示例代码如下：
+
+```ts
+    ChatClient.getInstance()
+      .roomManager.isMemberInChatRoomMuteList('roomId123')
+      .then((v) => {
+        console.log('自己是否在聊天室禁言列表中:', v);
+      })
+      .catch((error) => {
+        console.log('检查自己是否在聊天室禁言列表中失败:', error);
+      });
+```
+
 ### 开启和关闭聊天室全员禁言
 
 为了快捷管理聊天室发言，聊天室所有者和管理员可以开启和关闭聊天室全员禁言。全员禁言和单独的成员禁言不冲突，设置或者解除全员禁言，原禁言列表并不会变化。
