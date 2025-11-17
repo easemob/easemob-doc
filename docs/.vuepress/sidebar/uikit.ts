@@ -55,7 +55,7 @@ const chatUikitSidebar = [
   },
   { text: "联系人详情", link: "chatuikit_custom_contact_details.html", only: ["ios"]},
   { text: "群详情", link: "chatuikit_custom_group_details.html", only: ["ios"]},
-  { text: "用户信息提供", link: "chatuikit_custom_group_details.html", only: ["ios"]},
+  { text: "用户信息提供", link: "chatuikit_userinfo.html", only: ["ios"]},
   { text: "国际化", link: "chatuikit_internationalization.html", only: ["ios"]},
   { text: "主题", link: "chatuikit_theme.html", only: ["ios"]},
   { text: "全局配置", link: "chatuikit_config_item.html", only: ["ios"]},
