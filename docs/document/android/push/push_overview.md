@@ -40,7 +40,7 @@
    
 **推送 token（device token）**：推送 token 是第三方推送服务提供的推送 token。以 FCM 推送为例，初次启动你的应用时，FCM SDK 为客户端应用实例生成的注册令牌 (registration token)。该 token 用于标识每台设备上的每个应用，FCM 通过该 token 明确消息是发送给哪个设备的，然后将消息转发给设备，设备再通知应用程序。你可以调用 `FirebaseMessaging.getInstance().getToken()` 方法获得 token。另外，如果退出即时通讯 IM 登录时不解绑 device token（调用 `logout` 方法时对 `unbindToken` 参数传 `false` 时不解绑 device token，传 `true` 表示解绑 token），用户在推送证书有效期和 token 有效期内仍会接收到离线推送通知。
 
-关于如何获取推送 Token 并上传至环信服务器，详见各推送服务的集成文档，例如 对于 FCM 推送，请参阅 [FCM 推送集成文档](/push/push_fcm.html#步骤四-fcm-推送集成)。
+关于如何获取推送 Token 并上传至环信服务器，详见各推送服务的集成文档，例如 对于 FCM 推送，请参阅 [FCM 推送集成文档](/document/android/push/push_fcm.html#步骤四-fcm-推送集成)。
 
 ## 推送模板
 
