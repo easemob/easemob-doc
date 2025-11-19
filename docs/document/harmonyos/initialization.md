@@ -32,3 +32,5 @@ ChatClient.getInstance().init(this.context, {
   // 其他更多设置
 });
 ```
+
+关于私有云 SDK 的 IP 地址/域名配置，详见 [配置文档](private_ip_domain.html)。
