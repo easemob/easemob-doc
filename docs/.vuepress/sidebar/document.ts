@@ -179,6 +179,7 @@ const documentSidebar = [
   { text: '常见问题', link: 'faq.html', only: ['react-native'] },
   { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
   { text: '精简版 SDK', link: 'elite_sdk.html', only: ['android', 'ios']},
+  { text: '私有云 SDK IP 地址/域名配置', link: 'private_ip_domain.html', only: ['android', 'ios']},
   { text: '概述', link: 'overview.html', only: ['applet'] },
   {
         text: '集成介绍',
