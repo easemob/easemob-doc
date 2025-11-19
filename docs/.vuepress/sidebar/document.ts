@@ -320,7 +320,6 @@ const documentSidebar = [
     ],
     only: ['applet']
   },
-  { text: '私有云 SDK IP 地址/域名配置', link: 'private_ip_domain.html', only: ['applet']},
   { text: '服务端 API 概述', link: 'overview.html', only: ['server-side'] },
   { text: 'API 调用频率限制', link: 'limitationapi.html', only: ['server-side'] },
   { 
