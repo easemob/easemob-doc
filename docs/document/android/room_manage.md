@@ -196,10 +196,10 @@ public interface EMChatRoomChangeListener {
     void onAnnouncementChanged(String chatRoomId, String announcement);
 
     // 聊天室自定义属性有更新。聊天室所有成员会收到该事件。
-    default void onChatroomAttributesDidChanged(String chatRoomId, Map<String,String> attributeMap , String from){}
+    default void onAttributesUpdate(String chatRoomId, Map<String, String> attributeMap, String from) {}
 
     // 有聊天室自定义属性被移除。聊天室所有成员会收到该事件。
-    default void onChatroomAttributesDidRemoved(String chatRoomId, Map<String,String> attributeMap , String from){}
+    default void onAttributesRemoved(String chatRoomId, List<String> keyList , String from){}
 
 }
 ```
