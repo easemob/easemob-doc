@@ -17,3 +17,5 @@ let options = EMOptions(appkey: "Your appkey")
 ......// 其他 EMOptions 配置。
 EMClient.shared().initializeSDK(with: options)
 ```
+
+关于私有云 SDK 的 IP 地址/域名配置，详见 [配置文档](private_ip_domain.html)。
