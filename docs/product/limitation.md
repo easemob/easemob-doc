@@ -246,5 +246,5 @@
 
 ## 调用频率限制
 
-关于 RESTf API 的调用频率限制，详见 [Rest API 调用频率限制](limitationapi.html)。
+关于 RESTf API 的调用频率限制，详见 [Rest API 调用频率限制](/document/server-side/limitationapi.html)。
 
