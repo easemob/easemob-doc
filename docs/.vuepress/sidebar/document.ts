@@ -139,7 +139,6 @@ const documentSidebar = [
             { text: 'HarmonyOS 推送', link: 'push/push_harmony.html', only: ['harmonyos'] }
            ]
           },
-          { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
           { text: '设置通知的显示内容', 
             collapsible: true,
             children: [
