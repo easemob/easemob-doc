@@ -8,7 +8,7 @@
 
 - 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
 - 已从服务端获取 app token，详见 [使用 App Token 鉴权](/document/server-side/easemob_app_token.html)。
-- 了解环信 IM API 的调用频率限制，详见 [接口频率限制](/product/limitationapi.html)。
+- 了解环信 IM API 的调用频率限制，详见 [接口频率限制](/document/server-side/limitationapi.html)。
 
 ## 认证方式
 

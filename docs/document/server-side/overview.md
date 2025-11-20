@@ -69,7 +69,7 @@ POST https://{host}/{org_name}/{app_name}/users
 
 ## 服务端 API 列表
 
-关于各 REST API 的方法、接口 URL、简要介绍以及调用频率上限，详见 [Restful API 调用频率限制](/product/limitationapi.html)。
+关于各 REST API 的方法、接口 URL、简要介绍以及调用频率上限，详见 [Restful API 调用频率限制](/document/server-side/limitationapi.html)。
 
 ## API 调用前提
 

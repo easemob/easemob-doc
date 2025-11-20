@@ -16,7 +16,7 @@
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
 - 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
-- 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](http://doc.easemob.com/product/limitationapi.html)。
+- 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](/document/server-side/limitationapi.html)。
 
 ## 公共参数
 
