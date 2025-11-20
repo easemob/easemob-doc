@@ -19,7 +19,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 
 | 参数     | 类型   | 是否必需 | 描述                                                        |
 | :------- | :----- | :------- | :---------------------------------------------------------- |
-| `group_id`  | Int    |  是       | 要封禁的群组 ID。 |
+| `group_id`  | Int    |  是       | 群组 ID。获取该群组的详情。 |
 
 关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
