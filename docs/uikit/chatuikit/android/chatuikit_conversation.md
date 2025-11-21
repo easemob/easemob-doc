@@ -6,7 +6,7 @@
   <ImageItem src="/images/uikit/chatuikit/android/custom_conversation_list.png" title="会话列表" />
 </ImageGallery>
 
-## 通过 ChatUIKitConversationListFragment.Builder 自定义设置
+## 自定义设置概览
 
 `ChatUIKitConversationListFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置，目前提供的设置项如下：
 
@@ -156,7 +156,7 @@ ChatUIKitConversationListFragment.Builder().useTitleBar()
     
 ```
 
-## 设置左侧头像
+### 设置左侧头像
 
 ```kotlin
 //使用 binding?.titleConversations 可以直接获取到 ChatUIKitTitleBar
