@@ -24,6 +24,16 @@ const documentSidebar = [
     except: ['server-side', 'applet']
   },
   {
+    text: '用户相关',
+    collapsible: true,
+    children: [
+      { text: '用户关系', link: 'user_relationship.html' },
+      { text: '用户属性', link: 'userprofile.html' },
+      { text: '在线状态订阅', link: 'presence.html' },
+    ],
+    except: ['server-side', 'applet']
+  },
+  {
     text: '消息管理',
     collapsible: true,
     children: [
@@ -90,16 +100,6 @@ const documentSidebar = [
     except: ['server-side', 'applet']
   },
   {
-    text: '用户相关',
-    collapsible: true,
-    children: [
-      { text: '用户关系', link: 'user_relationship.html' },
-      { text: '用户属性', link: 'userprofile.html' },
-      { text: '在线状态订阅', link: 'presence.html' },
-    ],
-    except: ['server-side', 'applet']
-  },
-  {
     text: '离线推送', 
     collapsible: true,
     children: [
@@ -160,6 +160,7 @@ const documentSidebar = [
   { text: '错误码', link: 'error.html', except: ['server-side', 'applet']},
   { text: 'API 参考', link: 'apireference.html', except: ['server-side', 'applet']},
   { text: '更新日志', link: 'releasenote.html', except: ['server-side', 'applet']},
+  { text: '特性限制', link: 'limitation.html', except: ['server-side', 'applet']},
   {
     text: '常见问题',
     collapsible: true,
@@ -198,7 +199,17 @@ const documentSidebar = [
           { text: '多设备登录', link: 'multi_device.html' },
         ], 
         only: ['applet'] 
-      },
+  },
+  {
+        text: '用户相关',
+        collapsible: true,
+        children: [
+          { text: '用户关系', link: 'user_relationship.html' },
+          { text: '用户属性', link: 'userprofile.html' },
+          { text: '在线状态订阅', link: 'presence.html' },
+        ],
+        only: ['applet']
+  },        
   {
         text: '消息管理',
         collapsible: true,
@@ -264,16 +275,6 @@ const documentSidebar = [
         ],
         only: ['applet']
   },
-  {
-        text: '用户相关',
-        collapsible: true,
-        children: [
-          { text: '用户关系', link: 'user_relationship.html' },
-          { text: '用户属性', link: 'userprofile.html' },
-          { text: '在线状态订阅', link: 'presence.html' },
-        ],
-        only: ['applet']
-  },    
   { text: '离线推送', 
         collapsible: true,
         children: [
@@ -303,6 +304,7 @@ const documentSidebar = [
     only: ['applet']
   },
   { text: '更新日志', link: 'releasenote.html', only: ['applet']},
+  { text: '特性限制', link: 'limitation.html', only: ['applet']},
   {
     text: '其他帮助',
     collapsible: true,
@@ -894,6 +896,7 @@ const documentSidebar = [
     ],
     only: ['server-side']
   },
+  { text: '特性限制', link: 'limitation.html', only: ['server-side']},
   {
     text: '已废弃内容',
     collapsible: true,
