@@ -157,7 +157,7 @@ const chatUikitSidebar = [
   { text: "用户信息提供", link: "chatuikit_userinfo.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "联系人详情", link: "chatuikit_custom_contact_details.html", only: ["android", "react-native", "flutter"]},
   { text: "群详情", link: "chatuikit_custom_group_details.html", only: ["android", "react-native", "flutter"] },
-  { text: "国际化", link: "chatuikit_internationalization.html", only: ["android", "react-native", "flutter"] },
+  { text: "国际化", link: "chatuikit_internationalization.html", only: ["android", "react-native"] },
   { text: "主题", link: "chatuikit_theme.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["android", "react-native", "flutter"] },
   { text: "常见问题", link: "faq.html", only: ["react-native"]},
