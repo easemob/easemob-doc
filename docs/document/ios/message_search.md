@@ -106,7 +106,7 @@ EMConversation().searchMessages(withTypes: [NSNumber(integerLiteral: EMMessageBo
 
 ### 只搜索消息内容
 
-|消息类型 | `keywords` 对应的内容 | 关键字搜索内容示例 |
+|消息类型 | 关键字匹配的消息内容 | 关键字搜索内容示例 |
 | :-------------- | :----- |:----- |
 |文本消息  |  `EMTextMessageBody#text`   | 文本消息的实际内容“你好世界”。|
 |图片消息  | `EMImageMessageBody#displayName`       | 图片文件名“photo.jpg”。|
