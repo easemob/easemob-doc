@@ -1,5 +1,22 @@
 // place your custom styles here
 
+.navbar {
+  .navbar-start {
+    .brand {
+      display: flex;
+      align-items: center;
+      img {
+        width: 50px;
+        height: 22px;
+      }
+      .site-name {
+        color: #009dff;
+        font: 500 22px PingFang SC;
+      }
+    }
+  }
+}
+
 .nav-dropdown {
   .dropdown-subitem-wrapper {
     .dropdown-subitem {
@@ -10,16 +27,15 @@
   }
 }
 
-
-div[class*=language-] {
+div[class*="language-"] {
   padding-top: 2px;
-} 
+}
 
-div[class*=language-]::before {
+div[class*="language-"]::before {
   right: 5em;
 }
 
-div[class*=language-] > button.copy-code-button:not(.fancy) {
+div[class*="language-"] > button.copy-code-button:not(.fancy) {
   right: 1em;
 }
 
@@ -29,7 +45,7 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
 }
 
 .sidebar-group .sidebar-group .sidebar-heading {
-  font-size: 1.0em
+  font-size: 1em;
 }
 
 .el-popper__arrow {
@@ -37,7 +53,7 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
 }
 
 .el-anchor .el-anchor__list .el-anchor__item a {
-  font-size: 14px; 
+  font-size: 14px;
 }
 
 .el-anchor .el-anchor__list .el-anchor__link:first-child {
@@ -48,19 +64,41 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
   padding: 7px 0;
 }
 
-.el-anchor > .el-anchor__list >.el-anchor__item  {
-    > .el-anchor__link {
-      font-size:16px;
-      color: #000;
-    }
+.el-anchor > .el-anchor__list > .el-anchor__item {
+  > .el-anchor__link {
+    font-size: 16px;
+    color: #000;
+  }
 }
 
+.nav-links {
+  padding-left: 16px;
+  > .nav-item {
+    padding: 0 20px;
+  }
+  > .nav-item:first-child {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color, #dce2e6);
+    background: var(--fill-color-blank, #fff);
+    > .dropdown-wrapper {
+      > .dropdown-title {
+        > .title {
+          margin-right: 24px;
+        }
+      }
+    }
+  }
+}
 
 $sidebar-levels: 4; // 菜单的级数
 $base-color: #000000; // 初始字体颜色
 $fade-amount: 20; // 每级字体颜色变淡的递减值
 
 #sidebar {
+  padding-inline-start: 0;
   background-color: rgb(245, 247, 250);
   > .sidebar-links > li {
     > a {
@@ -87,9 +125,9 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
 
     @for $i from 1 through $sidebar-levels {
       $color: lighten($base-color, $i * $fade-amount);
-      $selector: '';
+      $selector: "";
       @for $j from 1 through $i {
-        $selector: #{$selector} + '.sidebar-group > .sidebar-links ';
+        $selector: #{$selector} + ".sidebar-group > .sidebar-links ";
       }
       #{$selector} {
         > li > a {
@@ -114,5 +152,17 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
 }
 button {
   /* 强制按钮等表单元素继承父级容器（最终是 body）的字体设置 */
-  font-family: inherit; 
+  font-family: inherit;
+}
+
+.footer-wrapper {
+  padding: 12px 0;
+  padding-inline-start: 0;
+  border-top: 0;
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 8px 24px;
+  }
 }

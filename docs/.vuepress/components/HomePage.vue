@@ -4,52 +4,12 @@
       <div class="main-container">
         <HeroSection />
         <main :ref="containerRef" class="main-content">
-          <div class="toc">
-            <ClientOnly>
-              <el-affix :offset="80">
-                <el-anchor
-                  :container="containerRef"
-                  type="underline"
-                  :offset="60"
-                >
-                  <el-anchor-link
-                    v-for="anchorLink in anchorLinks"
-                    :key="anchorLink.text"
-                    :href="`#${anchorLink.text}`"
-                  >
-                    {{ anchorLink.text }}
-                    <template v-if="anchorLink.children" #sub-link>
-                      <el-anchor-link
-                        v-for="subLink in anchorLink.children"
-                        :key="subLink.text"
-                        :href="`#${subLink.text}`"
-                      >
-                        {{ subLink.text }}
-                      </el-anchor-link>
-                    </template>
-                  </el-anchor-link>
-                </el-anchor>
-              </el-affix>
-            </ClientOnly>
-          </div>
-
           <div class="content">
+            <div class="content-title">用户指南</div>
             <section class="product-section">
-              <div class="product-links">
-                <template v-for="(item, index) in products" :key="item.text">
-                  <el-link
-                    :href="item.link"
-                    type="primary"
-                    class="product-link"
-                    :target="item.target || '_self'"
-                  >
-                    {{ item.text }}
-                  </el-link>
-                  <span v-if="index < products.length - 1">|</span>
-                </template>
-              </div>
               <div v-for="s in starter" :key="s.title" :id="s.title">
                 <h2 class="sdk-start-title">{{ s.title }}</h2>
+                <div class="sdk-start-desc">{{ s.desc }}</div>
                 <div class="sdk-start-list">
                   <div
                     class="sdk-start-item"
@@ -68,12 +28,17 @@
                     <img
                       src="/arrow_right.svg"
                       alt="Arrow icon"
-                      class="arrow-icon"
+                      class="arrow-icon normal"
+                    />
+                    <img
+                      src="/arrow_right_h.svg"
+                      alt="Arrow icon"
+                      class="arrow-icon high"
                     />
                   </div>
                 </div>
               </div>
-
+              <div class="content-title">功能</div>
               <div
                 :id="project.title"
                 v-for="project in projects"
@@ -113,7 +78,12 @@
                       <ClientOnly v-else>
                         <el-popover placement="bottom-start" :width="436">
                           <template #reference>
-                            <a class="feature-link" type="primary"  :href="context.sdks[0].link" target="_blank">
+                            <a
+                              class="feature-link"
+                              type="primary"
+                              :href="context.sdks[0].link"
+                              target="_blank"
+                            >
                               {{ context.text }}
                             </a>
                           </template>
@@ -139,51 +109,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import HopeHomePage from 'vuepress-theme-hope/components/HomePage.js'
-import HeroSection from './CustomHero.vue'
-import CardMenu from './CardMenu.vue'
-import { usePageFrontmatter } from '@vuepress/client'
-const frontmatter = usePageFrontmatter()
-const router = useRouter()
-const products = frontmatter.value.products || []
-const starter = frontmatter.value.starter || []
-const projects = frontmatter.value.projects || []
-const containerRef = ref<HTMLElement | null>(null)
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
+import HeroSection from "./CustomHero.vue";
+import CardMenu from "./CardMenu.vue";
+import { usePageFrontmatter } from "@vuepress/client";
+const frontmatter = usePageFrontmatter();
+const router = useRouter();
+const starter = frontmatter.value.starter || [];
+const projects = frontmatter.value.projects || [];
+const containerRef = ref<HTMLElement | null>(null);
 
 const goTo = (path: string) => {
-  if(path.indexOf('http')==0) {
-    window.open(path)
+  if (path.indexOf("http") == 0) {
+    window.open(path);
   } else {
-    router.push(path)
+    router.push(path);
   }
-
-}
+};
 
 interface AnchorLink {
-  text: string
-  children?: AnchorLink[]
+  text: string;
+  children?: AnchorLink[];
 }
 
 const buildAnchorLink = () => {
-  const values: AnchorLink[] = []
+  const values: AnchorLink[] = [];
   starter.forEach((s) => {
-    values.push({ text: s.title })
-  })
+    values.push({ text: s.title });
+  });
   projects.forEach((project) => {
-    const children = []
+    const children = [];
     project.features.forEach((feature) => {
       if (feature.title) {
-        children.push({ text: feature.title })
+        children.push({ text: feature.title });
       }
-    })
-    values.push({ text: project.title, children })
-  })
-  return values
-}
-
-const anchorLinks = buildAnchorLink()
+    });
+    values.push({ text: project.title, children });
+  });
+  return values;
+};
 </script>
 
 <style scoped>
@@ -198,7 +164,7 @@ const anchorLinks = buildAnchorLink()
   align-self: center;
   margin-top: 16px;
   width: 100%;
-  max-width: 772px;
+  max-width: 1200px;
   position: relative;
 }
 
@@ -212,22 +178,15 @@ const anchorLinks = buildAnchorLink()
   width: 100%;
 }
 
-.toc {
-  margin-top: 20px;
-  position: absolute;
-  top: 0;
-  left: -200px;
-  visibility: visible;
-  width: unset;
-  height: unset;
-}
-
-@media (max-width: 1200px) {
-  .toc {
-    visibility: hidden;
-    width: 0;
-    height: 0;
-  }
+.content-title {
+  margin-top: 32px;
+  color: #000;
+  text-align: justify;
+  font-family: "PingFang SC";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px;
 }
 
 .columns {
@@ -323,37 +282,14 @@ const anchorLinks = buildAnchorLink()
   }
 }
 
-.product-links {
-  justify-content: space-between;
-  display: flex;
-  gap: 20px;
-  font-size: 14px;
-  color: #096dd9;
-  font-weight: 400;
-  white-space: nowrap;
-  padding: 8px;
-}
-
-@media (max-width: 991px) {
-  .product-links {
-    max-width: 100%;
-    flex-wrap: wrap;
-    white-space: initial;
-  }
-}
-
-.product-link {
-  font-family: PingFang SC, sans-serif;
-}
-
 .sdk-start-title {
-  border-bottom: 1px solid rgba(230, 230, 230, 1);
-  margin-top: 20px;
-  color: #1a1a1a;
+  margin: 20px 0 0 0;
+  color: #242f3d;
   white-space: nowrap;
   justify-content: center;
-  padding: 8px 0;
-  font: 600 20px PingFang SC, sans-serif;
+  padding: 0;
+  font: 600 24px PingFang SC, sans-serif;
+  border-bottom: 0;
 }
 
 @media (max-width: 991px) {
@@ -363,11 +299,17 @@ const anchorLinks = buildAnchorLink()
   }
 }
 
+.sdk-start-desc {
+  margin: 8px 0;
+  color: #505e72;
+  font: 400 16px PingFang SC, sans-serif;
+}
+
 .sdk-start-list {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 16px;
-  gap: 12px;
+  margin: 24px 0;
+  gap: 24px;
   font-size: 14px;
   color: #000;
   font-weight: 500;
@@ -382,20 +324,19 @@ const anchorLinks = buildAnchorLink()
 }
 
 .sdk-start-item {
-  border-radius: 25px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(230, 230, 230, 1);
+  border-radius: 12px;
+  border: 1px solid #ebf0f9;
   background-color: #fff;
   display: flex;
   gap: 20px;
   justify-content: space-between;
-  padding: 6px 12px;
-  width: 157px;
+  padding: 15px 12px;
+  width: 256px;
 }
 
 .sdk-start-item:hover {
   cursor: pointer;
-  background: #e1f3d8;
+  border-color: #009dff;
 }
 
 @media (max-width: 991px) {
@@ -422,7 +363,8 @@ const anchorLinks = buildAnchorLink()
 }
 
 .platform-name {
-  font-family: PingFang SC, sans-serif;
+  color: #303233;
+  font: 500 18px PingFang SC, sans-serif;
   margin: auto 0;
 }
 
@@ -431,16 +373,29 @@ const anchorLinks = buildAnchorLink()
   object-fit: contain;
   width: 16px;
   margin: auto 0;
+  color: #dce2e6;
+}
+
+.arrow-icon.high {
+  display: none;
+}
+
+.sdk-start-item:hover .arrow-icon.normal {
+  display: none;
+}
+
+.sdk-start-item:hover .arrow-icon.high {
+  display: block;
 }
 
 .sdk-features-title {
   border-bottom: 1px solid rgba(230, 230, 230, 1);
   margin-top: 36px;
-  color: #1a1a1a;
+  color: #242f3d;
   white-space: nowrap;
   justify-content: center;
   padding: 8px 0;
-  font: 600 20px PingFang SC, sans-serif;
+  font: 600 24px PingFang SC, sans-serif;
 }
 
 @media (max-width: 991px) {
@@ -451,13 +406,8 @@ const anchorLinks = buildAnchorLink()
 }
 
 .sdk-feature-item {
-  justify-content: center;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(230, 230, 230, 1);
   display: flex;
   margin-top: 16px;
-  flex-direction: column;
   font-size: 14px;
   color: #096dd9;
   font-weight: 400;
@@ -473,11 +423,13 @@ const anchorLinks = buildAnchorLink()
 }
 
 .sdk-feature-header {
-  align-self: start;
   display: flex;
+  align-self: start;
+  flex-shrink: 0;
+  width: 200px;
   gap: 2px;
   font-size: 16px;
-  color: #1a1a1a;
+  color: #303233;
   font-weight: 600;
 }
 
@@ -488,6 +440,7 @@ const anchorLinks = buildAnchorLink()
 }
 
 .feature-icon {
+  display: none;
   aspect-ratio: 1;
   object-fit: contain;
   width: 20px;
@@ -502,9 +455,7 @@ const anchorLinks = buildAnchorLink()
   align-content: flex-start;
   flex-wrap: wrap;
   display: flex;
-  margin-top: 16px;
-  gap: 20px;
-  padding: 8px 0;
+  gap: 24px 100px;
 }
 
 @media (max-width: 991px) {
@@ -515,7 +466,8 @@ const anchorLinks = buildAnchorLink()
 }
 
 .feature-link {
-  font-family: PingFang SC, sans-serif;
+  color: #505e72;
+  font: 400 14px PingFang SC, sans-serif;
   text-decoration: underline;
   min-width: 120px;
   cursor: pointer;
