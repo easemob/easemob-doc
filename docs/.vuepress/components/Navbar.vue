@@ -136,6 +136,9 @@ export default {
 
 /* 小屏幕隐藏输入框 */
 @media (max-width: 900px) {
+  .search-box {
+    width: 20px;
+  }
   .search-input {
     display: none;
   }

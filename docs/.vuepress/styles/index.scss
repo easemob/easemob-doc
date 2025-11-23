@@ -1,5 +1,97 @@
 // place your custom styles here
 
+/* 字体大小全局样式 */
+@for $i from 1 through 4 {
+  h#{$i} {
+    font-size: calc(30px - (#{$i} - 1) * 4px) !important;
+  }
+}
+$theme-color: #303233;
+
+.theme-container {
+  color: var(--text-color);
+  font-size: var(--text-size);
+
+  .page {
+    width: calc(100% - 288px);
+    padding-inline-start: 288px;
+
+    .breadcrumb {
+      padding: 20px;
+    }
+
+    .page-title,
+    .theme-hope-content {
+      width: calc(100% - 248px);
+      padding: 24px;
+      margin: 0;
+
+      .hint-container.info,
+      .hint-container.note,
+      .hint-container.tip,
+      .hint-container.warning,
+      .hint-container.danger {
+        color: #253858;
+        font: 500 13px PingFang SC, sans-serif;
+        border-inline-start: unset;
+        border: 1px solid var(--tip-border-color);
+        border-radius: 6px;
+
+        > .hint-container-title {
+          color: #253858;
+          font: 600 14px PingFang SC, sans-serif;
+        }
+        > .hint-container-title::before {
+          background-image: url(../icon-tip.svg);
+        }
+      }
+
+      table {
+        width: fit-content;
+        color: var(--table-text-color);
+        font: 400 14px PingFang SC, sans-serif;
+
+        th,
+        td {
+          border-color: var(--border-color);
+        }
+
+        td {
+          padding: 16px;
+        }
+
+        th,
+        tr:first-child {
+          background-color: #f0f3f5;
+        }
+
+        thead + tbody {
+          tr:first-child {
+            background-color: #fff;
+          }
+        }
+
+        tr:nth-child(2n) {
+          background: #fff;
+        }
+      }
+
+      code {
+        color: var(--text-color);
+        font: 400 13px PingFang SC, sans-serif;
+        border-radius: 4px;
+      }
+    }
+
+    #toc {
+      left: unset;
+      right: 0;
+      width: 200px;
+      font-size: var(--text-size);
+    }
+  }
+}
+
 .navbar {
   .navbar-start {
     .brand {
@@ -11,7 +103,7 @@
       }
       .site-name {
         color: #009dff;
-        font: 500 22px PingFang SC;
+        font: 500 22px PingFang SC, sans-serif;
       }
     }
   }
@@ -29,6 +121,9 @@
 
 div[class*="language-"] {
   padding-top: 2px;
+  border: 1px solid var(--codes-border-color);
+  background: var(--codes-bg-color);
+  box-shadow: 0 -1px 0 0 #ebeef5 inset;
 }
 
 div[class*="language-"]::before {
@@ -100,6 +195,8 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
 #sidebar {
   padding-inline-start: 0;
   background-color: rgb(245, 247, 250);
+  font-size: var(--text-size);
+  border-right: 1px solid #d4dade;
   > .sidebar-links > li {
     > a {
       font-weight: 500;
@@ -157,7 +254,7 @@ button {
 
 .footer-wrapper {
   padding: 12px 0;
-  padding-inline-start: 0;
+  padding-inline-start: 0 !important;
   border-top: 0;
   .footer {
     display: flex;
