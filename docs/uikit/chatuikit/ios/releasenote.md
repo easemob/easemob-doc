@@ -1,5 +1,9 @@
 # iOS 单群聊 UIKit 更新日志
 
+## 版本 4.15.1
+
+修复联系人页面对应的内存被回收后重新打开会崩溃问题。
+
 ## 版本 4.14.0
 
 ### 新增特性
@@ -84,7 +88,7 @@
 | 版本号变量名  | `EaseChatUIKit_VERSION` -> `ChatUIKit_VERSION`  | 
 | option 类名 | `EaseChatUIKitOptions` -> `ChatUIKitOptions`       | 
 | 初始化类名 | `EaseChatUIKitClient` -> `ChatUIKitClient `       | 
-| 缓存类名   | `EaseChatUIKitContext` -> `ChatUIKitContext`       | 
+| 缓存类名   | `ChatUIKitContext` -> `ChatUIKitContext`       | 
 | 用户个人信息协议名 | `EaseProfileProtocol` -> `ChatUserProfileProtocol` | 
 | 用户信息提供协议名 | 1. `EaseProfileProvider` -> `ChatUserProfileProvider` <br/> 2. `EaseProfileProviderOC` -> `ChatUserProfileProviderOC`      | 
 | 群组信息提供协议名   | 1. `EaseGroupProfileProvider` -> `ChatGroupProfileProvider` <br/> 2. `EaseGroupProfileProviderOC` -> `ChatGroupProfileProviderOC`      | 

@@ -24,7 +24,7 @@ starter:
         text: Web
       - icon: /sdk/applet.svg
         link: /document/applet/wechat.html
-        text: 小程序
+        text: 小程序/Uniapp
       - icon: /sdk/harmonyos.svg
         link: /document/harmonyos/quickstart.html
         text: HarmonyOS 
@@ -83,6 +83,17 @@ starter:
         link: /uikit/chatroomuikit/react-native/roomuikit_integrated.html
         text: React Native
   - title: "CallKit" 
+    # platform:
+    #   - icon: /sdk/android.svg
+    #     link: /callkit/android/product_overview.html
+    #     text: Android
+    #   - icon: /sdk/iOS.svg
+    #     link: /callkit/ios/product_overview.html
+    #     text: iOS  
+    #   - icon: /sdk/web.svg
+    #     link: /callkit/web/product_overview.html
+    #     text: Web  
+    #       - title: "CallKit" 
     platform:
       - icon: /sdk/android.svg
         link: /document/android/easecallkit.html
@@ -1223,19 +1234,16 @@ projects:
                 link: /document/react-native/push/push_overview.html  
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/push.html      
-          # - text: 即时推送
-          #   desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、VIVO 等主流手机厂商通道。
-          #   sdks:
-          #     - icon: /sdk/android.svg
-          #       text: Android
-          #       link: /push/push_integration_note_android.html
-          #     - icon: /sdk/iOS.svg
-          #       text: iOS
-          #       link: /push/push_integration_note_ios.html
-          #     - icon: /sdk/rest.svg
-          #       text: REST
-          #       link: /push/push_by_tag.html           
+                link: /document/server-side/push_information_bind_unbind.html 
+      - title: 回调
+        icon: /feature/api-server.svg
+        contexts:
+          - text: 发送前回调
+            link: /document/server-side/callback_presending.html
+          - text: 发送后回调
+            link: /document/server-side/callback_postsending.html
+          - text: 发送后回调事件
+            link: /document/server-side/callback_login_logout.html  
   - title: UIKit 功能
     features:
       - title: 单群聊 UIKit
@@ -1823,17 +1831,24 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_member.html#移除成员  
-  - title: 增值服务
-    features:
-      - title: 回调
-        icon: /feature/api-server.svg
-        contexts:
-          - text: 发送前回调
-            link: /document/server-side/callback_presending.html
-          - text: 发送后回调
-            link: /document/server-side/callback_postsending.html
-          - text: 发送后回调事件
-            link: /document/server-side/callback_login_logout.html   
+  # - title: 增值服务
+  #   features:
+  #     - title: 实时音视频服务
+  #       icon: /feature/api-server.svg
+  #       contexts:  
+  #         - text: 实时音视频服务
+  #           desc: 开通音视频服务后，你可以继承环信音视频通话 CallKit，实现了一对一及群组音视频通话功能。。
+  #           sdks:
+  #             - icon: /sdk/android.svg
+  #               text: Android
+  #               link: /callkit/android/product_overview.html
+  #             - icon: /sdk/iOS.svg
+  #               text: iOS
+  #               link: /callkit/ios/product_overview.html
+  #             - icon: /sdk/rest.svg
+  #               text: Web
+  #               link: /callkit/web/product_overview.html 
+
   - title: API 参考
     features:
       - title: IM 客户端

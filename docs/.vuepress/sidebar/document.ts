@@ -35,7 +35,7 @@ const documentSidebar = [
       { text: 'IM 产品使用限制', link: 'limitation.html', only: ['server-side'] },
       // { text: '接口频率限制', link: 'limitationapi.html', only: ['server-side'] },
     ],
-    except: ['applet', 'electron','linux']
+    except: ['applet']
   },
   {
     text: '用户指南',
@@ -158,7 +158,7 @@ const documentSidebar = [
         ]
       },
     ],
-    except: ['applet','server-side','electron','linux']
+    except: ['applet','server-side']
   },
   {
     text: '错误排查',
@@ -166,7 +166,7 @@ const documentSidebar = [
       { text: '错误码', link: 'error.html' },
       { text: '日志', link: 'log.html', except: ['flutter'] },
     ],
-    except: ['applet', 'server-side','electron','linux']
+    except: ['applet', 'server-side']
   },
   {
     text: 'CallKit 使用指南',
@@ -174,7 +174,7 @@ const documentSidebar = [
       { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', only: ['android', 'ios'] },
       { text: 'CallKit 使用指南', link: 'easecallkit.html', only: ['web'] },
     ],
-    except: ['applet', 'server-side','electron','linux']
+    except: ['applet', 'server-side']
 
   },
   {
@@ -182,7 +182,7 @@ const documentSidebar = [
     children: [
       { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
     ],
-    except: ['applet', 'server-side','electron','linux']
+    except: ['applet', 'server-side']
   },
   {
     text: '精简版 SDK',
@@ -329,10 +329,11 @@ const documentSidebar = [
       { text: 'Uniapp 生成原生 Android、iOS 应用', link: 'uniappnativeapp.html' },
       { text: '小程序模板使用指南', link: 'uniappuikit.html' },
       { text: '如何配置服务器域名', link: 'serverconfig.html' },
+ { text: 'Vue3 项目在 H5 平台发布的注意事项', link: 'vue3_project_h5.html' },
     ],
     only: ['applet']
   },
-  {
+  /**{
     text: 'SDK 集成介绍',
     children: [
       { text: '集成说明', link: 'overview.html' },
@@ -370,7 +371,7 @@ const documentSidebar = [
       { text: 'Linux SDK 更新日志', link: 'releasenote.html' },
     ],
     only: ['linux']
-  },
+  },**/
   {
     text: '服务端 RESTful API',
     children: [

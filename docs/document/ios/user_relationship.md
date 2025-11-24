@@ -2,6 +2,10 @@
 
 <Toc />
 
+用户登录后，可进行添加联系人、获取好友列表等操作。
+
+本文介绍如何通过环信即时通讯 IM SDK 管理好友关系，包括添加、接受、拒绝、删除、查询好友，以及管理黑名单，包括添加、移出、查询黑名单。
+
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
 - 好友列表管理：查询好友列表、请求添加好友、接受好友请求、拒绝好友请求、删除好友和设置好友备注等操作。
@@ -16,11 +20,10 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 - 添加、删除好友。
 - 设置好友备注。
-- 从服务端获取好友列表。
-- 从本地获取好友列表。
+- 获取好友列表。
 - 添加黑名单。
 - 删除黑名单。
-- 查看当前用户黑名单列表。
+- 从服务器获取黑名单列表。
 
 ## 前提条件
 
@@ -191,12 +194,12 @@ if (!aError) {
 
 ### 从本地获取好友列表
 
-
-
-自 4.2.0 版本开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 :::tip
 需要从服务器获取好友列表之后，才能从本地获取到好友列表。
 :::
+
+自 4.2.0 版本开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+
 - 获取本地单个好友。  
 
 ```objectivec
@@ -217,6 +220,34 @@ NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllCont
 NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 ```
 
+### 查看当前用户黑名单列表
+
+黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。
+
+黑名单功能包括加入黑名单，从黑名单移出用户和获取黑名单列表。对于获取黑名单，你可从服务器获取黑名单列表，也可从本地数据库获取已保存的黑名单列表。
+
+1. 通过服务器获取黑名单列表
+
+从服务器获取黑名单列表之后，才能从本地数据库获取到黑名单列表。
+
+```objectivec
+// 从服务器获取黑名单列表。
+// 异步方法
+[[EMClient sharedClient].contactManager getBlackListFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
+    if (!aError) {
+        NSLog(@"获取黑名单列表成功 %@",aList);
+    } else {
+        NSLog(@"获取黑名单列表失败的原因 %@", aError.errorDescription);
+    }
+}];
+```
+
+2. 从本地数据库获取黑名单列表
+
+```objectivec
+// 同步方法
+NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
+```
 
 ### 将用户加入黑名单
 
@@ -250,33 +281,4 @@ NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
         NSLog(@"将用户移出黑名单失败的原因 %@", aError.errorDescription);
     }
 }];
-```
-
-### 查看当前用户黑名单列表
-
-黑名单是与好友无任何关系的独立体系。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。
-
-黑名单功能包括加入黑名单，从黑名单移出用户和获取黑名单列表。对于获取黑名单，你可从服务器获取黑名单列表，也可从本地数据库获取已保存的黑名单列表。
-
-1. 通过服务器获取黑名单列表
-
-从服务器获取黑名单列表之后，才能从本地数据库获取到黑名单列表。
-
-```objectivec
-// 从服务器获取黑名单列表。
-// 异步方法
-[[EMClient sharedClient].contactManager getBlackListFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
-    if (!aError) {
-        NSLog(@"获取黑名单列表成功 %@",aList);
-    } else {
-        NSLog(@"获取黑名单列表失败的原因 %@", aError.errorDescription);
-    }
-}];
-```
-
-2. 从本地数据库获取黑名单列表
-
-```objectivec
-// 同步方法
-NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 ```

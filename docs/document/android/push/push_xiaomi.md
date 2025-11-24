@@ -20,11 +20,11 @@
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :---------------- |
-| `证书名称`     | String | 是     | 填写小米 App ID。  |
-| `推送密钥`     | String | 是     | 填写小米 App Secret。|
-| `应用包名`     | String | 是     | 填写小米 App package name。   |
-| `Channel ID`  | String | 是     | 填写 Channel ID。             |
-| `Action`      | String | 否     | 选择点击通知后的动作。            |
+| 证书名称     | String | 是     | 小米 App ID。  |
+| 推送密钥     | String | 是     | 小米 App Secret。|
+| 应用包名     | String | 是     | 小米 App package name。   |
+| Channel ID  | String | 是     |  Channel ID。该参数仅对离线推送有效。            |
+| Action      | String | 否     | 点击通知后的动作。该参数仅对离线推送有效。           |
 
 ## **步骤三 集成小米推送 SDK**
 

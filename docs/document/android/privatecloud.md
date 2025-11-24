@@ -6,13 +6,28 @@
 
 SDK 默认指向公有云地址，在部署私有云后，需要将地址重新指向到新的地址，以下是地址修改方法：
 
+### 方式一：TCP连接
+
 ```java
 EMOptions emOptions = new EMOptions();//实例化 EMOptions 对象
 emOptions.setRestServer("10.10.10.10:00");//设置私有云 REST 地址（ip/域名：port）
 emOptions.setIMServer("10.10.10.10");//设置私有云 IM 地址
 emOptions.setImPort(00);//设置私有云 IM 端口号
-emOptions.enableDNSConfig(false);//默认是 true，在私有云下，需要关闭（设置成 false）
+emOptions.setEnableTLSConnection(true);//设置是否开启加密，tcp连接为tls加密
 
+emOptions.enableDNSConfig(false);//默认是 true，在私有云下，需要关闭（设置成 false）
+EMClient.getInstance().init(context,emOptions);//最后初始化 SDK
+```
+
+### 方式二：Websocket连接
+```java
+EMOptions emOptions = new EMOptions();//实例化 EMOptions 对象
+emOptions.setRestServer("https://restaddress");//设置私有云 REST 地址（ip/域名：port）
+emOptions.setWebSocketServer("im-api-wechat.easemob.com");//设置 WebSocket 服务器地址
+emOptions.setWebSocketPort(443);//设置 WebSocket 服务器端口号
+emOptions.setEnableTLSConnection(true);//设置是否开启加密，websocket为wss协议
+
+emOptions.enableDNSConfig(false);//默认是 true，在私有云下，需要关闭（设置成 false）
 EMClient.getInstance().init(context,emOptions);//最后初始化 SDK
 ```
 :::tip

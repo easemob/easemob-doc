@@ -4,23 +4,16 @@
 
 ## 用户注册
 
-用户注册模式分为以下两种：
-
-- 开放注册：一般在体验 Demo 和测试环境时使用，正式环境中不推荐使用该方式注册环信账号。要使用开放注册，需要在[环信即时通讯云控制台](/product/enable_and_configure_IM.html#创建应用)的**应用概览** > **应用详情**的**应用设置**区域，将**用户注册模式**设置为**开放注册**。只有打开该开关，才能使用客户端或 [REST API](/document/server-side/account_system.html#开放注册单个用户)开放注册用户。
-  
-示例代码如下所示： 
-  
-```objectivec
-// 异步方法
-[[EMClient sharedClient] registerWithUsername:@"username"
-                                         password:@"your password"
-                                       completion:^(NSString *aUsername, EMError *aError) {
-                                   }];
-```
+1. 可通过以下两种方式调用接口创建用户：
 
 - 授权注册：通过环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。要使用授权注册，你需要在[环信即时通讯云控制台](/product/enable_and_configure_IM.html#创建应用)的**应用概览** > **应用详情**的**应用设置**区域，将**用户注册模式**设置为**授权注册**。相关的 REST API 介绍，详见[授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)的接口介绍。
 
-除此以外，可以在[环信即时通讯云控制台](/product/enable_and_configure_IM.html#用户管理)创建IM用户。
+- 开放注册：一般在体验 Demo 和测试环境时使用，正式环境中不推荐使用该方式注册环信账号。要使用开放注册，需要在[环信即时通讯云控制台](/product/enable_and_configure_IM.html#创建应用)的**应用概览** > **应用详情**的**应用设置**区域，将**用户注册模式**设置为**开放注册**。只有打开该开关，才能使用客户端或 [REST API](/document/server-side/account_system.html#开放注册单个用户)开放注册用户。
+  
+2. 通过 [环信控制台](/product/enable_and_configure_IM.html#用户管理) 创建用户：
+
+
+可以在[环信控制台](/product/enable_and_configure_IM.html#用户管理)创建IM用户。
 
 ## 主动登录
 
@@ -38,19 +31,20 @@ EMClient.shared().login(withUsername: "userId", token: "token") { userId, err in
 }
 ```
 
-1. **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_system.html#开放注册单个用户)。
+1. **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
-```objectivec
+```swift
     //SDK 初始化 `EMOptions` 时可以传入 `loginExtensionInfo` 属性投递给被踢下线的设备。该属性需要开启多设备登录的情况下才能生效。
-    EMOptions *options = [EMOptions optionsWithAppkey:<#AppKey#>];
-    options.loginExtensionInfo = @"you was kicked out by other device";
-    [EMClient.sharedClient initializeSDKWithOptions:options];
-// 异步方法
-[[EMClient sharedClient] loginWithUsername:@"username"
-                                     password:@"your password"
-                                   completion:^(NSString *aUsername, EMError *aError) {
-
-}];
+    let options = EMOptions(appkey: <#Appkey#>)
+    options.loginExtensionInfo = "you was kicked out by other device"
+    EMClient.shared().initializeSDK(with: options)
+    EMClient.shared.login(withUsername: "userId", password: "your password") { userId, e in
+        if e == nil {
+             print("login success")
+        } else {
+            print("login error:\(e?.errorDescription ?? "")")
+        }
+    }
 ```
 
 ## 自动登录
@@ -116,4 +110,4 @@ EMClient.shared().logout(true) { aError in
 
 ### 登录被封禁账号的提示
 
-在环信即时通讯控制台或调用 REST API 封禁用户账号后，若仍使用该账号登录，SDK会返回 "service is disabled"（305 错误）, 可以根据用户这个返回值来进行相应的提示或者处理。
+在环信控制台或调用 REST API 封禁用户账号后，若仍使用该账号登录，SDK会返回 "service is disabled"（305 错误）, 可以根据用户这个返回值来进行相应的提示或者处理。

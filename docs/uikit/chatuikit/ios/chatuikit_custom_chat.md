@@ -166,14 +166,14 @@
 ### 设置收到新消息时播放音频文件的路径
 
 你可以通过 `Appearance.chat.newMessageSoundPath = value` 设置聊天页面收到新消息时的播放音频文件的路径。
-
+<!--
 ### 设置消息翻译
 
 - `Appearance.chat.enableTranslation = value`：是否开启文本消息长按翻译功能，默认为 `false`，即该功能默认关闭。如需开启该特性，需设置为 `true`。
 - `Appearance.chat.targetLanguage= .Chinese` 翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[环信即时通讯云控制台](/product/enable_and_configure_IM)申请试用翻译功能，然后将 `Appearance.chat.enableTranslation` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
 - `Appearance.chat.receiveTranslationColor = value`：消息接收方翻译文本颜色。
 - `Appearance.chat.sendTranslationColor = value`：消息发送方翻译文本颜色。
-
+-->
 ### 设置消息长按后显示的操作
 
 你可以通过 `Appearance.chat.messageLongPressedActions = value` 设置聊天页面长按消息后的 `ActionSheet` 菜单项。你可以继承 `MessageListController`，重载页面中的方法，移除或添加长按消息后的动作（action）。
@@ -244,7 +244,7 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_input_bar.png" title="聊天页面输入框配置" />
 </ImageGallery>
-
+<!--
 ## 设置消息举报功能
 
 你可以通过 `Appearance.chat.reportSelectionTags` 和 `Appearance.chat.reportSelectionReasons` 设置消息举报功能的举报标签数组以及对应的原因数组，key-value 格式，二者一 一对应。
@@ -252,7 +252,7 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/message_report.png" title="消息举报" />
 </ImageGallery>
-
+-->
 ## 设置跳转事件
 
 对于自定义跳转事件，可以查看聊天页面中的标记为 open 的可重载方法，进行对应的重载，即可跳转自己的业务页面。下表为重载常用的 API：

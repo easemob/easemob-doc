@@ -265,7 +265,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/mutes
+GET https://{host}/{org_name}/{app_name}/mutes?pageNum={N}&pageSize={N}
 ```
 
 ##### 路径参数

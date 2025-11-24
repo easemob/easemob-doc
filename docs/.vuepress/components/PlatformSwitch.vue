@@ -109,10 +109,10 @@ const options = [
         value: 'windows',
         label: 'Windows',
       },
-      {
+      /**{
         value: 'linux',
         label: 'Linux',
-      },
+      },**/
     ],
   },
   {
@@ -134,10 +134,10 @@ const options = [
         value: 'applet',
         label: '小程序',
       },
-      {
+      /**{
         value: 'electron',
         label: 'Electron',
-      },
+      },**/
     ],
   },
   {

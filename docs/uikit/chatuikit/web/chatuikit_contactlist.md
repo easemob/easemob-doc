@@ -1,33 +1,7 @@
-# 通讯录
 
-<Toc />
+# 自定义联系人列表
 
-`ContactList` 组件用于展示通讯录，包含联系人列表、群组列表和好友请求列表。昵称在中文或者英文的情况下可以实现按首字母分类。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/contact_list.png" title="通讯录" />
-</ImageGallery>
-
-
-## 使用示例
-
-```jsx
-import React, { useEffect, useState } from "react";
-import { ContactList } from "easemob-chat-uikit";
-import "easemob-chat-uikit/style.css";
-
-const ContactList = () => {
-  return (
-    <div style={{ width: "30%", height: "100%" }}>
-      <ContactList />
-    </div>
-  );
-};
-```
-
-## 自定义联系人列表
-
-### 自定义联系人列表 Header
+## 自定义联系人列表 Header
 
 例如，将通讯录页面默认标题名称**联系人列表**修改为**自定义 Header**，示例代码如下。
 
@@ -49,7 +23,7 @@ const ContactList = () => {
   <ImageItem src="/images/uikit/chatuikit/web/contact-header.png" title="自定义联系人列表 Header" />
 </ImageGallery>
 
-### 在联系人列表中添加黑名单
+## 在联系人列表中添加黑名单
 
 在联系人列表中添加联系人黑名单，示例代码如下：
 
@@ -89,7 +63,7 @@ const ContactList = () => {
   <ImageItem src="/images/uikit/chatuikit/web/contact-block.png" title="加入黑名单" />
 </ImageGallery>
 
-### 设置成可选择的联系人列表
+## 设置成可选择的联系人列表
 
 例如，创建群组时需添加多个用户，可点击联系人对应的复选框进行选择。
 

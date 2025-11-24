@@ -23,7 +23,6 @@
 
 - Unity Editor 2019.4.28 或以上版本
 - Unity SDK 1.0.5 或以上
-- 目前 Unity SDK 仅支持 x86 指令集及 Intel 芯片。
 - 操作系统与编译器要求：
 
 | 开发平台                | 操作系统版本    | 编译器版本                                                         |
@@ -73,7 +72,7 @@
 
 ### 集成问题
 
-由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
+若在 Windows 平台上由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
 
 ```csharp
 Multiple plugins with the same name 'libaosl' (found at 'Assets/Plugins/Agora/Agora-RTC-Plugin/Agora-Unity-RTC-SDK/Plugins/x86_64/libaosl.dll' and 'Assets/Plugins/Agora/AgoraChat/Plugins/x64/libaosl.dll'). That means one or more plugins are set to be compatible with Editor. Only one plugin at the time can be used by Editor
@@ -111,28 +110,19 @@ using AgoraChat.MessageBody;
 在 `InitSDK` 方法中添加以下代码完成 SDK 初始化：
 
 ```csharp
-var options = new Options("appkey"); //将该参数设置为你的 App Key
+Options options = Options.InitOptionsWithAppKey("appkey"); //将该参数设置为你的 App Key
 SDKClient.Instance.InitWithOptions(options);
 ```
 
 ### 4. 创建账号
 
-在 `SignUpAction` 方法尾部添加以下代码，创建即时通讯系统的登录账户，示例代码如下：
+在 环信控制台 创建用户，获取用户 ID 和用户 token。
 
-```csharp
-SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callback: new CallBack(
-  onSuccess: () => {
-    AddLogToLogText("sign up sdk succeed");
-  },
-  onError: (code, desc) => {
-    AddLogToLogText($"sign up sdk failed, code: {code}, desc: {desc}");
-  }
-));
-```
 
-:::tip
-该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端[调用 Restful API 进行注册](/document/server-side/account_system.html#开放注册单个用户)。若需要使用 Token，需要在你的应用服务器集成[获取 App Token API](/document/server-side/easemob_app_token.html) 和[获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
-:::
+
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成[调用 Restful API 进行注册](/document/server-side/account_system.html#开放注册单个用户)。若需要使用 Token，需要在你的应用服务器集成[获取 App Token API](/document/server-side/easemob_app_token.html) 和[获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+
 
 ### 5. 登录账号
 

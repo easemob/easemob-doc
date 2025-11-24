@@ -120,7 +120,7 @@ option.customDeviceName = @"XXX的iPad";
 
 ![img](/images/common/multidevice_device_platform.png)
 
-2. 初始化 SDK 时，调用 `initializeSDKWithOptions` 方法设置 `EMOptions#customOSType` 属性添加自定义平台。确保该属性的值与环信控制台的**新增自定义平台**对话框中设置的**设备平台**的值相同。
+2. 初始化 SDK 时，调用 `initializeSDKWithOptions` 方法设置 `EMOptions#customOSType` 属性添加自定义平台。确保该属性的值与环信控制台的 **新增自定义平台** 对话框中设置的 **设备平台** 的值相同。
 
 :::tip
 登录成功后才会将该设置发送到服务器。

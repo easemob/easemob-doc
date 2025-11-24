@@ -153,7 +153,130 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-## 移除好友
+## 校验好友
+
+### 功能说明
+
+批量检查用户是否在好友列表中。
+
+**调用频率上限**：100 次/秒/App Key
+
+### HTTP 请求
+
+```http
+POST https://{host}/{org_name}/{app_name}/contacts/check
+```
+
+#### 请求 header
+
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                   |
+| :-------------- | :----- | :----------- | :------------------------------------------------------ |
+| `Content-Type`  | String | 是         | 内容类型。请填 `application/json`。               |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。           |
+| `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+#### 请求body
+
+请求包体为 JSON Object 类型，包含以下字段：
+
+| 参数  | 类型 | 是否必需  | 描述             | 
+| :---- | :----- | :---------------------- | :------- |
+| `username` | String | 是 | 当前用户 ID。批量检查该用户 ID 的好友。 | 
+| `check_list` | JSON Array | 是 | 需要检查的好友的用户 ID，一次最多可校验 100 个用户 ID。 | 
+
+其他参数及描述详见 [公共参数](#公共参数)。
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 字段                 | 类型       | 描述            |
+| :------------------- | :--------- | :----------------------------------------- |
+| `entities`           | JSON Array | 校验结果的详情。     |
+|  - `username`      | String     | 系统内为用户生成的系统内唯一标识。                      |
+|  - `relation`      | String     | 是否为好友：<br/> - `friend`：是<br/> - `not_friend`：否 | 
+
+其他字段的说明如下：
+
+| 字段                 | 类型       | 描述            |
+| :------------------- | :--------- | :----------------------------------------- |
+| `action`             | String | 请求方法。                                   |
+| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
+| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
+| `uri`                | String | 请求 URL。                |
+| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
+| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
+| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
+| `applicationName`    | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
+
+其他字段及描述详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST 'https://XXXX/XXXX/XXXX/contacts/check'  \
+-H 'Content-Type: application/json'   \
+-H 'Accept: application/json'   \
+-H 'Authorization: Bearer <YourAppToken>'    \
+-d '{
+    "username": "user1", 
+    "check_list": [ 
+    "user2",
+    "user3"
+    ]
+  }'
+```
+
+#### 响应示例
+
+
+```json
+{
+  "action": "post",
+  "application": "8bXXXX402",
+  "path": "/contacts/check",
+  "uri": "https://XXXX/XXXX/XXXX/contacts/check",
+  "entities": [
+    {
+        "username":"user2",
+        "relation":"friend"
+    },
+    {
+        "username":"user3",
+        "relation":"not_friend"
+    }
+  ],
+  "timestamp": 1542598913819,
+  "duration": 63,
+  "organization": "XXXX",
+  "applicationName": "testapp"
+}
+```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401   | unauthorized | Unable to authenticate (OAuth) | Token 不合法，可能过期或 Token 错误。 | 使用新的 Token 访问。 |
+| 429   | reach_limit | This request has reached api limit. | 接口调用超过频率限制。 | 联系商务调整限流或者控制调用速率。 |
+| 403   | forbidden_service_operation | Service operation not allowed | app 或用户被封禁。 | 先解禁 app 或用户后再调用该接口。 |
+| 400   | illegal_argument | username cannot be blank | 校验的用户 `username` 不能传空。 | 确认 `username` 参数是否正确填写。 |
+| 400   | illegal_argument | check_list size must be between 1 and 100 | 被校验的用户列表只能包含 1 到 100 个用户。 | 确认 `check_list` 参数是否正确填写。 |
+
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+## 移除单个好友
 
 ### 功能说明
 
@@ -249,6 +372,101 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | service_resource_not_found | Service resource not found | 要移除或被移除好友的用户 ID 不存在。 | 检查要移除和被移除的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+
+## 移除所有好友
+
+### 功能说明
+
+- 删除用户的所有好友。
+- 该接口为双向删除好友，即该接口调用后，该当前用户以及被删除的好友在彼此的好友列表中都会删除。
+- 若当前用户为好友设置了好友备注，调用该接口后，好友备注会从服务端删除。
+- 该接口不影响黑名单。若有些用户被当前用户加入了黑名单，调用该接口后，这些用户仍在黑名单中。
+
+**调用频率上限**：100 次/秒/App Key
+
+### HTTP 请求
+
+```http
+DELETE https://{host}/{org_name}/{app_name}/contacts/users/{username}
+```
+
+#### 路径参数
+
+| 参数             | 类型   | 是否必需 | 描述                |
+| :--------------- | :----- | :------- | :------------------ |
+| `username`  | String | 是         | 用户 ID。要删除该用户 ID 的所有好友。               |
+
+其他参数及描述详见 [公共参数](#公共参数)。
+
+#### 请求 header
+
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述      |
+| :-------------- | :----- | :--------------------------------------- | :------------------------- |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
+| `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 参数                 | 类型   | 描述            |
+| :------------------- | :----- | :-------------------------------------------- |
+| `action`             | String | 响应操作， `delete` 表示删除好友。                                   |
+| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
+| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
+| `uri`                | String | 请求 URL。                |
+| `entities`           | Array  | 响应实体。     |
+| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
+| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
+| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
+| `applicationName`    | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
+
+其他字段及描述详见 [公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X DELETE 'https://XXXX/XXXX/XXXX/contacts/users/XXXX' \
+-H 'Content-Type: application/json'  \
+-H 'Accept: application/json'   \
+-H 'Authorization: Bearer <YourAppToken>' 
+```
+
+#### 响应示例
+
+```json
+{
+  "action": "delete",
+  "application": "8bXXXX402",
+  "path": "/contacts/users/XXXX",
+  "uri": "https://XXXX/XXXX/XXXX/contacts/users/XXXX",
+  "entities": [],
+  "timestamp": 1542598913819,
+  "duration": 63,
+  "organization": "XXXX",
+  "applicationName": "testapp"
+}
+```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401  | unauthorized | Unable to authenticate (OAuth) | Token 不合法，可能过期或 Token 错误。 | 使用新的 Token 访问。 |
+| 429 | reach_limit | This request has reached api limit. | 接口调用超过频率限制。 | 联系商务调整限流或者控制调用速率。 |
+| 403   | forbidden_service_operation | Service operation not allowed | app 或用户被封禁。 | 先解禁 app 或用户后再调用该接口。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -940,5 +1158,120 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | service_resource_not_found | Service resource not found | 要移除或被移除的用户 ID 不存在。 | 检查要移除和被移除的用户 ID 是否存在。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+
+
+## 校验黑名单
+
+- 批量校验是否在用户的黑名单中。
+
+**调用频率上限**：100 次/秒/App Key   
+
+### HTTP 请求
+
+```http
+POST https://{host}/{org_name}/{app_name}/blocks/check
+```
+
+
+#### 请求 header
+
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述             |
+| :-------------- | :----- | :---------------------- | :------------------------------------ |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
+| `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+#### 请求 body参数
+
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                   |
+| :-------------- | :----- | :----------- | :------------------------------------------------------ |
+| `username`  | String | 是         | 要校验该用户 ID 的黑名单。         |
+| `check_list`  | JSON Array | 是         | 要校验的黑名单中用户 ID 列表，每次请求最多可传 100 个用户 ID。 |
+
+
+### HTTP 响应
+
+#### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 参数                 | 类型       | 描述             |
+| :------------------- | :--------- | :---------------------------------------- |
+| `entities`           | JSON Array | 校验结果的详情。     |
+|  - `username`      | String     | 校验的用户 ID。                      |
+|  - `relation`      | String     | 用户是否在黑名单中：<br/> - `blacklist`：是<br/> - `not_blacklist`：否 | 
+| `action`             | String | 请求方法。                                   |
+| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
+| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
+| `uri`                | String | 请求 URL。                |
+| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
+| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
+| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
+| `applicationName`    | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
+
+其他字段及描述详见[公共参数](#公共参数)。
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
+
+### 示例
+
+#### 请求示例
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST 'https://XXXX/XXXX/XXXX/blocks/check'   \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
+    "username": "user1", 
+    "check_list": [ 
+    "user2",
+    "user3"
+    ]
+  }'
+```
+
+#### 响应示例
+
+```json
+{
+  "action": "post",
+  "application": "8bXXXX402",
+  "path": "/contacts/check",
+  "uri": "https://XXXX/XXXX/XXXX/blocks/check",
+  "entities": [
+    {
+        "username":"user2",
+        "relation":"blacklist"
+    },
+    {
+        "username":"user3",
+        "relation":"not_blacklist"
+    }
+  ],
+  "timestamp": 1542598913819,
+  "duration": 63,
+  "organization": "XXXX",
+  "applicationName": "testapp"
+}
+```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
+| :----------- | :--- | :------------- | :----------- | :----------- |
+| 401 | unauthorized | Unable to authenticate (OAuth) | Token 不合法，可能过期或 Token 错误。 | 使用新的 Token 访问。 |
+| 429   | reach_limit | This request has reached api limit. | 接口调用超过频率限制。 | 联系商务调整限流或者控制调用速率。 |
+| 403   | forbidden_service_operation | Service operation not allowed | app 或用户被封禁。 | 先解禁 app 或用户后再调用该接口。 |
+| 400   | illegal_argument | username cannot be blank | 校验的用户 `username` 不能传空。 | 确认参数 `username` 是否正确填写。 |
+| 400   | illegal_argument | check_list size must be between 1 and 100 | 被校验的用户列表只能包含 1 到 100 个用户。 | 确认 `check_list` 参数是否正确填写。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

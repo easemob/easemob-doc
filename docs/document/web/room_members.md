@@ -27,7 +27,7 @@
 
 ### 获取聊天室成员列表
 
-自 SDK 4.15.0 开始，聊天室所有成员均可调用 `getChatRoomMembers`方法获取聊天室成员信息，包括用户 ID 和成员角色。
+自 SDK 4.15.0 开始，聊天室所有成员均可调用 `getChatRoomMembers`方法获取聊天室成员信息，包括用户 ID 和成员角色。服务器不对成员进行排序，因此，返回的成员列表不保证有序。
 
 原方法 `listChatRoomMembers` 废弃。
 
@@ -77,6 +77,7 @@ conn.removeChatRoomMember(option).then(res => console.log(res))
 
 - 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
 - [调用 RESTful API 创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)时拉入的用户从未登录过。
+若开启了聊天室多端多设备功能，聊天室白名单中的成员在一台设备上离线重连后，无法收到聊天室的消息。若使该设备收到收到聊天室的消息，需要登录后手动调用 API 加入聊天室。
 
 ### 管理聊天室黑名单
 

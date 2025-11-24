@@ -2,6 +2,13 @@
 
 <Toc />
 
+## 版本 V4.17.0 Dev 2025-9-30（开发版）
+
+### 新增特性
+
+1. [获取服务端会话列表时可获取空会话](conversation_list.html#从服务器分页获取会话列表)。
+2. [获取服务端的置顶会话列表时可获取空会话](conversation_pin.html#获取服务端的置顶会话列表)。
+
 ## 版本 V4.15.1 Dev 2025-6-9（开发版）
 
 ### 新增特性
@@ -120,7 +127,7 @@
 ### 新增特性
 
 - [IM SDK] 新增 `getSilentModeRemindTypeConversations` 方法，用于分页获取所有设置了推送通知方式的会话。
-- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html): `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish`。
+- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html#监听连接状态): `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish`。
 - [IM SDK] 原消息置顶接口 `pinMessage` 和 `unpinMessage` [增加对单聊会话中置顶消息的支持](message_pin.html)。接口无变化。
 - [IM SDK] `onMultiDeviceEvent` 新增以下两个离线推送相关的多设备通知事件： 
   - `setSilentModeForConversation`：若你调用了 `setSilentModeForConversation` API [设置指定会话的推送通知方式或免打扰时间](/document/web/push/push_notification_mode_dnd.html#设置单个会话的推送通知)，其他设备会收到该事件。

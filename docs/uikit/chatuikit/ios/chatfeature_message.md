@@ -235,7 +235,7 @@ Appearance.chat.messageLongPressedActions.removeAll { $0.tag == "Pin" }
 
 #### 自定义输入状态指示 UI
 
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/product/typing_indication.html)。
+本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/product/solution_common/typing_indication.html)。
 
 用户需要监听透传消息回调处理导航相关 UI 显示效果。
 

@@ -41,7 +41,7 @@
 
 ## 回调示例
 
-消息发送或相关操作发送时，环信服务器会向你的应用服务器发送 HTTP/HTTPS POST 请求，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
+消息发送或相关操作发生后，环信服务器会向你的应用服务器发送 HTTP/HTTPS POST 请求，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
 
 回调时，环信服务器会对发送的正文进行 MD5 签名，使用的 MD5 为 `org.apache.commons.codec.digest.DigestUtils#md5Hex`。
 
@@ -94,15 +94,7 @@
 - 异常存储过期时间默认 3 天，若有存储需及时补发。
 - 补发重试次数建议控制在 10 次以内。
 
-### 认证方式
-
-环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
-
-`Authorization：Bearer YourAppToken`
-
-为提高项目的安全性，使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-
-### HTTP 请求
+### 请求 URL
 
 ```http
 GET https://{host}/{org_name}/{app_name}/callbacks/storage/info    
@@ -147,7 +139,7 @@ GET https://{host}/{org_name}/{app_name}/callbacks/storage/info
 #### 请求示例
 
 ```shell
-curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
+curl -X GET 'https://XXXX/XXXX/XXXX/callbacks/storage/info' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 

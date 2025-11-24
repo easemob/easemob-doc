@@ -408,7 +408,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-##  取消订阅多个用户的在线状态
+##  批量取消订阅用户的在线状态
 
 ### 功能说明
 

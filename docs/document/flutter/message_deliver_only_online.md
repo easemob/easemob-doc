@@ -35,9 +35,10 @@ final msg = EMMessage.createTxtSendMessage(
   // `content` 为消息文字内容。
   content: 'hello',
   // 会话类型：单聊为 `Chat`，群聊为 `GroupChat`，默认为单聊。
-  chatType: ChatType.Chat,
-  deliverOnlineOnly: true,
+  chatType: ChatType.Chat
 );
+
+msg.deliverOnlineOnly = true;
 
 // 发送消息。
 EMClient.getInstance.chatManager.sendMessage(msg);

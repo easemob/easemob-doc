@@ -437,6 +437,11 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/share_files/{file
 
 ##### 路径参数
 
+| 参数            | 类型   | 是否必需 | 描述      |
+| :-------------- | :----- | :------- | :------------------ |
+| `group_id`           | String   | 是 | 群组 ID。      |
+| `file_id`           | String   | 是 | 要下载的群组共享文件的 ID。      |
+
 参数及描述详见 [公共参数](#公共参数)。
 
 ##### 请求 header

@@ -2,7 +2,7 @@
 
 <Toc />
 
-利用环信单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
+利用环信单群聊 UIKit，你可以轻松实现单聊和群聊。本文介绍如何快速实现在单聊会话中发送消息。
 
 ## 前提条件
 
@@ -72,7 +72,7 @@ yarn add easemob-chat-uikit
 
 为了方便快速体验，你可以在 **环信即时通讯云控制台** 的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
 
-在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#用户管理)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 将 easemob-chat-uikit 库导入你的代码中：
 
@@ -103,7 +103,7 @@ const ChatApp = () => {
           accessToken: accessToken,
         })
         .then((res) => {
-          // 创建会话
+          // 创建一个用于测试的单聊会话，如果创建群聊会话，请确保是真实群 ID。
           rootStore.conversationStore.addConversation({
             chatType: "singleChat", // 单聊和群聊分别为 'singleChat' 和 'groupChat'。
             conversationId: "userId", // 单聊为对端用户 ID，群聊为群组 ID。

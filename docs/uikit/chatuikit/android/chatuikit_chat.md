@@ -1,51 +1,8 @@
-# 聊天消息
-
-<Toc />
-
-环信单群聊 UIKit 提供 `UIKitChatActivity` 和 `UIKitChatFragment` 两种方式方便用户快速集成聊天页面和自定义聊天页面。该页面提供如下功能：
-
-- 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
-- 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。
-- 清除本地消息。
-
-消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_chat_detail.png" title="聊天页面" />
-</ImageGallery>
-
-
-## 使用示例
-
-`UIKitChatActivity` 页面主要进行了权限的请求，比如相机权限，语音权限等。
-
-```kotlin
-// conversationId: 单聊为对端用户的用户 ID，群聊为群组 ID。
-// chatType：单聊和群聊分别为 ChatUIKitType#SINGLE_CHAT 和 ChatUIKitType#GROUP_CHAT。
-UIKitChatActivity.actionStart(mContext, conversationId, chatType)
-```
-
-```kotlin
-class ChatActivity: AppCompactActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chat)
-        // conversationId: 单聊为对端用户的用户 ID，群聊为群组 ID。
-        // chatType：单聊和群聊分别为 ChatUIKitType#SINGLE_CHAT 和 ChatUIKitType#GROUP_CHAT。
-        UIKitChatFragment.Builder(conversationId, chatType)
-                        .build()?.let { fragment ->
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.fl_fragment, fragment).commit()
-                        }
-    }
-}
-```
-
-## 自定义聊天页面概览
+# 自定义聊天页面
 
 你可以配置聊天页面的标题栏、消息列表项和输入菜单等。
 
-### 通过 UIKitChatFragment.Builder 自定义设置
+## 通过 UIKitChatFragment.Builder 自定义设置
 
 `UIKitChatFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置，目前提供的设置项如下：
 
@@ -117,7 +74,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | setCustomAdapter()                     | 设置自定义的适配器，默认为 `EaseMessageAdapter`。   |
 | setCustomFragment()                    | 设置自定义聊天 Fragment，需要继承自 `UIKitChatFragment`。  |
 
-### 添加自定义消息布局
+## 添加自定义消息布局
 
 开发者可以继承 `EaseMessageAdapter`、`ChatUIKitRowViewHolder` 和 `ChatUIKitRow`，实现自己的 `CustomMessageAdapter`、`CustomChatTypeViewViewHolder` 和 `CustomTypeChatRow`，然后将 `CustomMessageAdapter` 设置到 `UIKitChatFragment#Builder#setCustomAdapter` 中。
 
@@ -229,7 +186,7 @@ builder.setCustomAdapter(CustomMessageAdapter())
   <ImageItem src="/images/uikit/chatuikit/android/custom_message_type.png" title="自定义消息类型" />
 </ImageGallery>
 
-### 列表控件相关功能设置
+## 列表控件相关功能设置
 
 ```kotlin
 val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.chatMessageListLayout
@@ -262,7 +219,7 @@ val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.cha
 | setOnChatErrorListener()    | 设置发送消息时的错误回调，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
 
 
-### 扩展功能设置
+## 扩展功能设置
 
 ```kotlin
 val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatExtendMenu
@@ -283,7 +240,7 @@ val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatE
   <ImageItem src="/images/uikit/chatuikit/android/custom msg_type_list.png" title="消息类型扩展" />
 </ImageGallery>
 
-### 监听扩展条目点击事件
+## 监听扩展条目点击事件
 
 开发者可以利用 `UIKitChatFragment#Builder#setOnChatExtendMenuItemClickListener` 进行监听，也可以在自定义的 `Fragment` 中重写 `onChatExtendMenuItemClick` 方法。
 
@@ -298,7 +255,7 @@ override fun onChatExtendMenuItemClick(view: View?, itemId: Int): Boolean {
 }
 ```
 
-### 设置消息长按后的菜单项
+## 设置消息长按后的菜单项
 
 **风格样式**
 
@@ -365,7 +322,7 @@ override fun onDismiss() {
 }
 ```
 
-### 设置发送附件消息弹窗样式
+## 设置发送附件消息弹窗样式
 
 1. 若实现发送附件消息时弹出类似微信样式的弹窗，可进行如下设置：
    
@@ -384,7 +341,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxExtendStyle = false
   <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="类似微信样式" />
 </ImageGallery>
 
-### 设置输入菜单相关属性
+## 设置输入菜单相关属性
 
 - 获取 `ChatUIKitInputMenu` 对象：
 

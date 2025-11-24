@@ -1,42 +1,6 @@
-# 聊天页面
+# 自定义聊天页面
 
-聊天页面通过 `Chat` 组件实现，该组件提供以下功能:
-
-- 发送和接收消息, 包括文本、表情、图片、语音、视频、文件、名片和合并类型的消息。
-- 对消息进行复制、表情回复、引用、撤回、删除、置顶、翻译和编辑、重新发送和审核操作。
-- 清除本地消息。
-- 删除会话。
-- 从服务器拉取漫游消息。
-
-消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/chat.png" title="聊天页面" />
-</ImageGallery>
-
-## 使用示例
-
-```jsx
-import React from "react";
-import { Chat } from "easemob-chat-uikit";
-import "easemob-chat-uikit/style.css";
-
-const ChatContainer = () => {
-  return (
-    <div style={{ width: "70%", height: "100%" }}>
-      <Chat />
-    </div>
-  );
-};
-```
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/chat_default.png" title="聊天页面" />
-</ImageGallery>
-
-## 自定义组件
-
-### 修改消息气泡样式
+## 修改消息气泡样式
 
 以文本消息为例，你可以按如下方式修改消息气泡样式：
 
@@ -83,7 +47,7 @@ const ChatContainer = () => {
 </ImageGallery>
 
 
-### 设置消息日期和时间格式
+## 设置消息日期和时间格式
 
 通过消息组件的 `formatDateTime` 方法设置显示的消息日期和时间的格式。
 
@@ -100,7 +64,7 @@ const ChatContainer = () => {
 />
 ```
 
-### 设置显示消息操作
+## 设置显示消息操作
 
 利用 `messageProps` 的 `customAction` 属性设置点击消息列表项旁边的 `⋮` 后要显示的消息操作按钮。
 
@@ -159,7 +123,7 @@ const ChatContainer = () => {
 />
 ```
 
-### 配置输入框功能
+## 配置输入框功能
 
 你可以配置消息输入框的功能，包括是否显示发送语音按钮、是否显示消息输入框、是否显示消息表情按钮和更多操作按钮、是否启用正在输入功能、是否显示发送按钮等。
 
@@ -212,7 +176,7 @@ const ChatContainer = () => {
 };
 ```
 
-### 消息输入框中添加图标
+## 消息输入框中添加图标
 
 在消息输入框中添加一个自定义图标，实现指定的功能:
 
@@ -251,10 +215,10 @@ const ChatContainer = () => {
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/chat_input_bar.png" title="会话列表页面" />
+  <ImageItem src="/images/uikit/chatuikit/web/chat_input_bar.png" title="消息输入框" />
 </ImageGallery>
 
-### 实现发送自定义消息
+## 实现发送自定义消息
 
 1. 使用 `messageStore` 中提供的 `sendMessage` 方法发送自定义消息。
 2. 使用 `renderMessage` 渲染自定义消息。
@@ -337,7 +301,7 @@ const ChatContainer = () => {
   <ImageItem src="/images/uikit/chatuikit/web/custom_message.png" title="自定义消息" />
 </ImageGallery>
 
-### 修改聊天相关的主题
+## 修改聊天相关的主题
 
 `Chat` 组件提供了聊天页面主题相关的变量支持自定义，如下所示。关于如何修改主题，请点击[这里](chatuikit_theme.html)。
 
