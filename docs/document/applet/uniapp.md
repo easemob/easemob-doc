@@ -115,38 +115,62 @@ socket 合法域名:
   2. 直接使用 `import/require` 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
 - 基于 Demo 二次开发。
 
-拉取代码，HBuilder 运行。
+拉取代码，HBuilder 运行。调用示例如下所示
 
-#### 调用示例
-
-若项目之前未使用 npm 管理依赖（项目根目录下无 package.json 文件），先在项目根目录执行命令初始化 npm 工程：
+1. 若项目之前未使用 npm 管理依赖（项目根目录下无 package.json 文件），先在项目根目录执行命令初始化 npm 工程：
 
 ```bash 
 npm init -y
 ```
-在项目根目录执行命令安装 npm 包：
+2. 在项目根目录执行命令安装 npm 包：
 
 ```bash 
 npm i easemob-websdk
 ```
-引入 uni-app SDK
+3. 引入 uni-app SDK
 
 ```javascript
 import SDK from 'easemob-websdk/uniApp/Easemob-chat';
 ```
 
-#### 实例调用方式
+#### 实例化 SDK
 
 实例化 SDK，并挂载在全局对象下。
 
 ```javascript
-// 实例化 SDK 对象
-// url 和 apiUrl 属性仅在 4.11.0 及之前版本需手动传入。4.12.0 及之后版本，SDK 会自动获取。
 const WebIM = wx.WebIM = SDK;
 const conn = new WebIM.connection({
     appKey: 'your appKey', //注意这里的 "K" 需大写
     url: 'wss://im-api-wechat.easemob.com/websocket', // websocket 连接地址
     apiUrl: 'https://a1.easemob.com',// REST API 连接地址
-    useOwnUploadFun: true // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
+    useOwnUploadFun: true, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
+    isHttpDNS: false, // 在小程序上需设置为false, 其他平台设置为true
 });
+```
+
+## 注意事项
+
+uni-app 在 **Vue3 模式** 下，HBuilderX 会默认开启 [**摇树优化（tree-shaking）**](https://uniapp.dcloud.net.cn/collocation/manifest.html#treeshaking)。  
+
+该优化会在点击发行至 `网站-PC Web或手机H5` 后出现误删除环信 SDK 中未被显式引用的模块，导致发行后出现登录失败等异常情况。为了避免这些异常情况，你可以采用以下两种解决方案：
+
+**（推荐）方案一：手动关闭摇树优化**  
+
+1. 在 HBuilderX 顶部菜单打开 `manifest.json` > **Web 配置**（H5 配置）。  
+2. 找到 **发行时启用摇树优化（自动裁剪没有使用的组件和 API 库）**。  
+3. 先 **勾选**，再 **取消勾选**，然后点击 **重新发行**。  
+   该操作会强制 HBuilderX 重新生成编译缓存，关闭摇树优化。
+   
+**方案二：手动配置关闭摇树优化**  
+
+在 `manifest.json` > 源码视图 > H5 节点下增加以下配置，然后重新编译即可：
+
+```json
+"h5": {
+  "optimization": {
+    "treeShaking": {
+      "enable": false
+    }
+  }
+}
 ```

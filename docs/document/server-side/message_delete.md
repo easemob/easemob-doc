@@ -314,7 +314,7 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/rest/message/roaming/user/XXXX/delete/al
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}/time?userId={userId}&delTime={delTime}&isNotify={isNotify}
+DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}/time?userId={peer_userId}&delTime={delTime}&isNotify={isNotify}
 ```
 
 #### 路径参数
@@ -329,7 +329,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 
 | 参数      | 类型     | 是否必需 | 描述                                    |
 |:--------|:-------|:-----|:----------------------|
-| `userId` | String | 是       | 单聊会话中的对端用户，即要清空和哪个用户之间的漫游消息。需传入该用户 ID。  |
+| `peer_userId` | String | 是       | 单聊会话中的对端用户，即要清空和哪个用户之间的漫游消息。需传入该用户 ID。  |
 | `delTime`  | Long | 是       | 要清空哪个时间点及之前的单聊漫游消息。该时间为 Unix 时间戳，单位为毫秒。 |
 | `isNotify` | Boolean | 否       | 消息删除后，是否同步到消息所属用户的所有在线设备。<br/> - （默认）`true`：是<br/> -  `false`：否 |
 

@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ScrollController scrollController = ScrollController();
   String _username = "";
-  String _password = "";
+  String _token = "";
   String _messageContent = "";
   String _chatId = "";
   final List<String> _logText = [];
@@ -127,8 +127,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (username) => _username = username,
             ),
             TextField(
-              decoration: const InputDecoration(hintText: "Enter password"),
-              onChanged: (password) => _password = password,
+              decoration: const InputDecoration(hintText: "Enter token"),
+              onChanged: (token) => _token = token,
             ),
             const SizedBox(height: 10),
             Row(
@@ -151,18 +151,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: TextButton(
                     onPressed: _signOut,
                     child: const Text("SIGN OUT"),
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.lightBlue),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: TextButton(
-                    onPressed: _signUp,
-                    child: const Text("SIGN UP"),
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all(Colors.white),
                       backgroundColor:
@@ -218,9 +206,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void _signOut() async {
   }
 
-  void _signUp() async {
-  }
-
   void _sendMessage() async {
   }
 
@@ -243,9 +228,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ```dart
 void _initSDK() async {
-    EMOptions options = EMOptions(
-        appKey: "<#Your AppKey#>",
-        autoLogin: false,
+    EMOptions options = EMOptions.withAppKey(
+      "<#Your AppKey#>",
+      autoLogin: false,
     );
     await EMClient.getInstance.init(options);
     // 通知 SDK UI 已准备好。该方法执行后才会收到 `EMChatRoomEventHandler`、`EMContactEventHandler` 和 `EMGroupEventHandler` 回调。
@@ -253,26 +238,11 @@ void _initSDK() async {
 }
 ```
 
-### 注册环信 IM 用户
+### 创建用户
 
 Demo 中使用 [开放注册](/document/server-side/account_system.html#开放注册单个用户)，此操作需要在环信后台开启 `开放注册`。在开放注册模式下，允许通过 App 客户端直接注册环信用户，正式环境中请使用 [授权注册](/document/server-side/account_system.html#授权注册单个用户)。
 
-在 `_signUp` 方法中添加注册代码：
 
-```dart
-void _signUp() async {
-  if (_username.isEmpty || _password.isEmpty) {
-    _addLogToConsole("username or password is null");
-    return;
-  }
-
-  try {
-    await EMClient.getInstance.createAccount(_username, _password);
-    _addLogToConsole("sign up succeed, username: $_username");
-  } on EMError catch (e) {
-    _addLogToConsole("sign up failed, e: ${e.code} , ${e.description}");
-  }
-}
 ```
 
 ### 添加登录
@@ -281,13 +251,13 @@ void _signUp() async {
 
 ```dart
 void _signIn() async {
-    if (_username.isEmpty || _password.isEmpty) {
-        _addLogToConsole("username or password is null");
+    if (_username.isEmpty || _token.isEmpty) {
+        _addLogToConsole("username or token is null");
         return;
     }
 
     try {
-        await EMClient.getInstance.login(_username, _password);
+        await EMClient.getInstance.loginWithToken(_username, _token);
         _addLogToConsole("sign in succeed, username: $_username");
     } on EMError catch (e) {
         _addLogToConsole("sign in failed, e: ${e.code} , ${e.description}");
@@ -461,18 +431,3 @@ flutter run
 运行结果如下：
 
 <img src="/images/flutter/simulator_screen_shot1.png" width="500" />
-
-参考以下步骤发送和接收文本消息：
-
-1. 输入任意用户名（如 `flutter001` 和 `flutter002`）和密码 `1`，点击 `SIGN UP` 创建用户；
-2. 以 `flutter001` 身份登录 Demo，将 `Enter the username you want to send` 输如为 `flutter002`， 发送文本消息；
-
-<img src="/images/flutter/simulator_screen_shot2.png" width="500" />
-
-3. 以 `flutter002` 身份登录 Demo，查看 Log 信息确认是否都到消息。
-
-<img src="/images/flutter/simulator_screen_shot3.png" width="500" />
-
-## 后续步骤
-
-为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见[使用 App Token 鉴权](/product/easemob_app_token.html)。

@@ -6,14 +6,26 @@
 
 SDK 默认指向公有云地址，在部署私有云后，需要将地址重新指向到新的地址，以下是地址修改方法：
 
+### 方式一：TCP连接
+
 ```objectivec
 EMOptions *options = [EMOptions optionsWithAppkey:appkey];
 options.enableDnsConfig = NO;
 options.chatPort = 8080;//设置端口号
-options.chatServer = "xxx.xxx.xxx.xxx";//设置 IP 地址
-options.restServer = "xxx.xxx.xxx.xxx:8080";//设置ip:port
-options.rtcUrlDomain= "wss://mprtc.easemob.com";//设置多人音视频的服务器域名，此为线上地址
+options.chatServer = @"xxx.xxx.xxx.xxx";//设置 IP 地址
+options.restServer = @"xxx.xxx.xxx.xxx:8080";//设置ip:port
+options.enableTLSConnection = YES;// 是否使用加密连接。tcp连接为tls加密
 [[EMClient sharedClient] initializeSDKWithOptions:options];
+```
+### 方式二：Webscoket连接
+
+```objectivec
+EMOptions* options = [EMOptions optionsWithAppkey:@"Your appkey"];
+options.enableDnsConfig = NO;
+options.restServer = @"https://restaddress";
+options.webSocketServer = @"im-api-wechat.easemob.com";
+options.webSocketPort = 443;
+options.enableTLSConnection = YES;// 是否使用加密连接。websocket为wss协议
 ```
 
 :::tip

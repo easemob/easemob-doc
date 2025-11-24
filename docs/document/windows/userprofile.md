@@ -16,8 +16,8 @@
 
 环信即时通讯 IM Windows SDK 提供一个 `IUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
-- `UpdateOwnInfo` 设置和修改当前用户自己的属性信息；
-- `FetchUserInfoByUserId` 获取指定用户的所有用户属性信息；
+- `UpdateOwnInfo` 设置和修改当前用户自己的属性；
+- `FetchUserInfoByUserId` 获取指定一个或多个用户的全部用户属性。
 
 ## 前提条件
 
@@ -76,7 +76,7 @@ SDKClient.Instance.UserInfoManager.UpdateOwnInfo(userInfo, new CallBack(
 示例代码如下：
 
 ```csharp
-//获取一个或多个用户的所有属性，一次调用用户 ID 数量不超过 100。
+//一次调用用户 ID 数量不超过 100。
 List<string> idList = new List<string>();
 idList.Add("username");
 SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId

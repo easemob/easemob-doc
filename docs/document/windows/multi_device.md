@@ -177,7 +177,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ![img](/images/common/multidevice_device_platform.png)
 
-2. 初始化 SDK 时，调用 `Options#CustomOSType` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
+2. 初始化 SDK 时，调用 `Options#CustomOSType` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的 **添加自定义平台** 对话框中设置的 **设备平台** 的值相同。
 
 :::tip
 登录成功后才会将该设置发送到服务器。

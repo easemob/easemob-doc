@@ -17,7 +17,15 @@ conn.addEventHandler("connectionListener", {
   },
   onReconnecting: () => {
     console.log("重连中");
-  };
+  },
+  // 连接成功，开始从服务器拉取离线消息时触发。
+  onOfflineMessageSyncStart: () => {
+    console.log("开始从服务器拉取离线消息");
+  },
+  // 从服务器拉取离线消息结束时触发。
+  onOfflineMessageSyncFinish: () => {
+    console.log("从服务器拉取离线消息结束");
+  },
 });
 ```
 
@@ -40,5 +48,5 @@ conn.addEventHandler("connectionListener", {
 - 用户在另一设备登录，将当前设备上登录的用户踢出，提示错误码 206。 
 - 用户登录设备数量超过限制，提示错误码 214。
 - 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限，提示错误码 8。
-- 开启多设备服务后，用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录（错误码 217）。
+- 开启多设备服务后，用户在其他设备上通过调用 API 或者环信控制台将当前设备登录的 ID 强制退出登录（错误码 217）。
 

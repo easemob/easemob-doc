@@ -22,13 +22,13 @@
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :---------------- |
-| `证书名称`     | String | 是     | 填写 VIVO App ID。  |
-| `证书标识`     | String | 是     | 填写 VIVO App Key。|
-| `推送密钥`     | String | 是     | 填写 VIVO App Secret。|
-| `Category`     | String |  否    | 选择 category 类型。                       |
-| `应用包名`     | String | 是     | 填写 VIVO App package name。   |
-| `Activity`| String | 否     | 选择点击通知后的动作。  |
-| `推送类型`     | String |  否    |<br/> - **运营消息**<br/> - **系统消息**  |
+| 证书名称     | String | 是     | VIVO App ID。  |
+| 证书标识     | String | 是     | VIVO App Key。|
+| 推送密钥     | String | 是     | VIVO App Secret。|
+| Category     | String |  否    | Category 类型。关于该参数，详见 [VIVO 推送文档](https://dev.vivo.com.cn/documentCenter/doc/359#w2-67805227)。该参数仅对离线推送有效。                      |
+| 应用包名     | String | 是     | VIVO App package name。该参数仅对离线推送有效。   |
+| Activity| String | 否     | 点击通知后的动作。 该参数仅对离线推送有效。 |
+| 推送类型     | String |  否    |可选择 **运营消息** 或 **系统消息**。该参数仅对离线推送有效。 |
 
 ## **步骤三 集成 VIVO 推送 SDK**
 

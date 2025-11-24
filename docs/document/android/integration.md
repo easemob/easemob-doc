@@ -4,9 +4,11 @@
 
 ## 开发环境要求
 
-- Android Studio 3.0 或以上版本；
-- Android SDK API 等级 21 或以上；
-- Android 5.0 或以上版本的设备。
+- 推荐 Android Studio Meerkat | 2024.3.1 Patch 2及以上
+- 推荐 Gradle 8.0 及以上
+- targetVersion 33 及以上
+- Android SDK API 21 及以上
+- JDK 17 及以上
 
 ## 集成 SDK
 
@@ -20,12 +22,6 @@
 :::
 
 ### 方法一：使用 mavenCentral 自动集成
-
-:::tip
-
-该方法仅适用于 v3.8.2 或以上版本。
-
-:::
 
 1. 在项目的 `build.gradle` 中添加 `mavenCentral()` 仓库。
 
@@ -52,20 +48,10 @@ allprojects {
 ...
 dependencies {
     ...
-    // x.y.z 请填写具体版本号，必须为 3.8.2 或以上版本。
+    // x.y.z 请填写具体版本号
     // 可通过 SDK 发版说明获得最新版本号。
     implementation 'io.hyphenate:hyphenate-chat:x.x.x'
 }
-```
-
-:::tip
-如果使用 3.8.0 之前的版本，gradle 依赖需要按照下面格式添加：
-:::
-
-```gradle
-implementation 'io.hyphenate:hyphenate-sdk:3.7.5' // 完整版本，包含音视频功能
-
-implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含IM功能
 ```
 
 ### 方法二：手动复制 SDK 文件
@@ -90,7 +76,7 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 ...
 dependencies {
     ...
-    // x.y.z 请填写具体版本号，必须为 3.8.2 或以上版本。
+    // x.y.z 请填写具体版本号
     // 可通过 SDK 发版说明获得最新版本号。
     implementation(files("libs/hyphenatechat_x.y.z.jar"))
 }

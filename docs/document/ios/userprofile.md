@@ -18,8 +18,8 @@
 
 环信即时通讯 IM iOS SDK 提供一个 `userInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
-- `updateOwnUserInfo` 设置和修改当前用户自己所有或指定属性信息；
-- `fetchUserInfoById` 获取指定用户的所有或指定用户属性信息。
+- `updateOwnUserInfo` 设置和修改当前用户自己的属性信息；
+- `fetchUserInfoById` 获取指定用户的所有用户属性信息。
 
 ## 前提条件
 
@@ -32,16 +32,13 @@
 
 本节介绍如何在项目中设置及获取用户属性。
 
-实现过程中注意单个用户的所有属性最大不超过 2 KB，单个 app 所有用户属性数据最大不超过 10 GB。
+单个用户的所有属性最大不超过 2 KB，单个 app 所有用户属性数据最大不超过 10 GB。
 
-### 设置当前用户的属性
+### 设置当前用户的所有属性
 
-环信即时通讯 IM 自 V3.8.1 开始支持设置当前用户的属性。
-
-参考如下示例代码，在你的项目中当前用户设置自己的所有属性或者仅设置某一项属性。
+当前用户设置自己的所有属性：
 
 ```objectivec
-// 设置用户所有属性。
 EMUserInfo *userInfo = [[EMUserInfo alloc] init];
 userInfo.userId = EMClient.sharedClient.currentUsername;
 userInfo.nickName = @"EM";
@@ -57,16 +54,7 @@ userInfo.gender = 1;
 }];
 ```
 
-```objectivec
-// 以修改用户头像为例，演示如何修改指定用户属性。
-NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMDemo/avatar/Image1.png";
 
-[[EMClient sharedClient].userInfoManager updateOwnUserInfo:url withType:EMUserInfoTypeAvatarURL completion:^(EMUserInfo *aUserInfo, EMError *aError) {
-    if (aUserInfo && completion) {
-        completion(aUserInfo);
-    }
-}];
-```
 
 关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
 
@@ -81,20 +69,34 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 | `birth`     | String | 用户生日。长度在 64 字符内。                                                                      |
 | `ext`       | String | 扩展字段。                                                                                        |
 
-### 获取用户属性
+### 设置当前用户的单个属性
 
-环信即时通讯 IM 自 V3.8.1 开始支持设置获取用户的属性。
-
-用户可以获取指定一个或多个用户的全部用户属性。
-
-示例代码如下：
+例如，修改当前用户的头像：
 
 ```objectivec
-// 获取用户所有属性，一次调用用户 ID 数量不能超过 100。
+NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMDemo/avatar/Image1.png";
+
+[[EMClient sharedClient].userInfoManager updateOwnUserInfo:url withType:EMUserInfoTypeAvatarURL completion:^(EMUserInfo *aUserInfo, EMError *aError) {
+    if (aUserInfo && completion) {
+        completion(aUserInfo);
+    }
+}];
+```
+
+### 获取用户的所有属性
+
+用户可以获取指定一个或多个用户的所有用户属性：
+
+```objectivec
+// 每次传入的用户 ID 数量不能超过 100。
 // 异步方法
 [[EMClient sharedClient].userInfoManager fetchUserInfoById:@[EMClient.sharedClient.currentUsername] 		completion:^(NSDictionary *aUserDatas, EMError *aError) {
 }];
 ```
+
+### 获取用户的指定属性
+
+用户可以获取单个或多个用户的单个或多个用户属性。
 
 ```objectivec
 // 获取指定用户的指定用户属性。

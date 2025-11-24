@@ -12,10 +12,12 @@
 
 ## 前提条件
 
-- Android Studio 4.0 或以上版本；
-- Android SDK API 等级 21 或以上；
-- Android 5.0 或以上版本的设备；
-- JDK 11 或以上
+- 推荐 Android Studio Meerkat | 2024.3.1 Patch 2及以上
+- 推荐 Gradle 8.0 及以上
+- targetVersion 33 及以上
+- Android SDK API 21 及以上
+
+- JDK 17 及以上
 - 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](/product/enable_and_configure_IM.html)。
 
 ## 准备开发环境
@@ -183,7 +185,7 @@ EMClient.getInstance().init(context, options);
 
 ### 3. 登录账号
 
-创建账号后，获取账号的用户 ID 和 Token。使用如下代码实现用户登录：
+获取账号的用户 ID 和 Token 后，使用如下代码实现用户登录：
 
 ```java
 // 导包

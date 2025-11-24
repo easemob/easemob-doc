@@ -51,12 +51,12 @@
 2. 打开终端，进入需要创建项目的目录，输入命令创建 React Native 项目：
 
 ```sh
-npx @react-native-community/cli@latest init --version 0.76 simple_demo
+npx @react-native-community/cli@latest init --version 0.76 simple_demo # 推荐创建稳定版本示例
 ```
 
 创建好的项目名称是 `simple_demo`。
 
-初始化项目
+初始化项目如下：
 
 ```sh
 cd simple_demo
@@ -64,7 +64,7 @@ yarn set version 1.22.19
 yarn
 ```
 
-_同时，也可以使用 npm 等其他工具_
+也可以使用 npm 等其他工具。
 
 3. 在终端命令行，输入以下命令添加依赖:
 
@@ -80,9 +80,13 @@ iOS 平台需要使用 `cocoapods` 进行初始化。
 cd ios && pod install && cd ..
 ```
 
-## 实现发送和接收单聊消息
+## 创建用户
 
-发送单聊消息前，终端用户需要先注册 Chat 账号，登录。
+在 环信控制台 创建用户，获取用户 ID 和用户 token 用于登录。
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+
+## 实现发送和接收单聊消息
 
 建议使用 `visual studio code` 打开文件夹 `simple_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
 

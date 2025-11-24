@@ -48,7 +48,7 @@
 
 ![image](/images/ios/push/push_ios_10_register_confirm_appid.jpeg)
 
-### **步骤三 创建 app 的 APS 证书**
+### **步骤三 创建 app 的 APNs 证书**
 
 1. 返回到 App IDs 选择你需要推送的 app。
 
@@ -122,16 +122,15 @@
 
 | 参数       | 类型   | 是否必需 | 描述        |
 | :--------- | :----- | :------- | :----------------------- |
-| **证书类型**      |  | 是 | 消息推送证书类型，目前支持 **p8** 和 **p12**。        |
-| **证书名称**      | String  | 是 | 消息推送证书名称。[创建推送证书](#在苹果开发者平台创建推送证书)的[步骤四](#步骤四-生成推送证书)中创建的消息推送证书名称。 |
-| **推送密钥**      | String  | 是 | 消息推送证书密钥。填写在[创建推送证书](#在苹果开发者平台创建推送证书)的[步骤四](#步骤四-生成推送证书)中导出消息推送证书文件时设置的证书密钥。该参数仅在使用 p12 证书时需要配置。  |
-| **上传文件**      | File  | 是 | 点击 **上传证书** 上传[创建推送证书](#在苹果开发者平台创建推送证书)的[步骤四](#步骤四-生成推送证书)中获取的消息推送证书文件。  |
-| **key id**      | String  | 是 | 输入推送证书的 Key ID。该参数仅在使用 p8 证书时需要配置。  |
-| **team id**      | String  | 是 | 输入推送证书的 Team ID。该参数仅在使用 p8 证书时需要配置。  |
-| **集成环境**      | | 是 | 集成环境：<br/> - **Development**：开发环境；<br/> - **Production**：生产环境。 |
-| **Bundle ID**      | String  | 是 | 绑定 ID。[创建推送证书](#在苹果开发者平台创建推送证书)的[步骤二](#步骤二-创建-app-id)中创建 App ID 时设置的 Bundle ID。<br/> - 上传 VoIP 服务证书时，Bundle ID 末尾需要加 .voip 后缀
-`nvyvtp.dabaoiian`，例如，**Bundle ID** 为 **com.example.demo**，上传对应 VoIP 证书时需要填写 **com.example.demo.voip**。|
-| **铃声**      | String  | 否 | 接收方收到推送通知时的铃声提醒。 |
+| 证书类型    |  | 是 | 消息推送证书类型，目前支持 **p8** 和 **p12**。        |
+| 证书名称     | String  | 是 | 消息推送证书名称。详见 APNs 集成文档中 [创建推送证书](/document/ios/push/push_apns.html#创建推送证书) 的 [步骤四](/document/ios/push/push_apns.html#步骤四-生成推送证书)  中创建的消息推送证书名称。 |
+| 推送密钥      | String  | 否 | 消息推送证书密钥。填写在 [创建推送证书](/document/ios/push/push_apns.html#创建推送证书)的 [步骤四](/document/ios/push/push_apns.html#步骤四-生成推送证书) 中导出消息推送证书文件时设置的证书密钥。该参数仅在使用 p12 证书时需要配置。  |
+| 上传文件     | File  | 是 | 点击 **上传证书** 上传推送证书文件。详见 APNs 集成文档中 [创建推送证书](/document/ios/push/push_apns.html#创建推送证书)的 [步骤四](/document/ios/push/push_apns.html#步骤四-生成推送证书) 中获取的消息推送证书文件。  |
+| key id     | String  | 是 | 输入推送证书的 Key ID。该参数仅对 p8 证书有效。  |
+| team id     | String  | 是 | 输入推送证书的 Team ID。该参数仅对 p8 证书有效。  |
+| 集成环境      | | 是 | 集成环境，包括开发环境和生产环境。 |
+| Bundle ID     | String  | 是 | 绑定 ID。详见 APNs 集成文档中 [创建推送证书](/document/ios/push/push_apns.html#创建推送证书)的 [步骤二](/document/ios/push/push_apns.html#步骤二-创建-app-id) 中创建 App ID 时设置的 Bundle ID。<br/> - 上传 VoIP 服务证书时，Bundle ID 末尾需要加 .voip 后缀 `nvyvtp.dabaoiian`，例如，**Bundle ID** 为 **com.example.demo**，上传对应 VoIP 证书时需要填写 **com.example.demo.voip**。|
+| 铃声    | String  | 否 | 接收方收到推送通知时的铃声提醒，该参数仅对离线推送有效：<br/> - 设置的铃声最多为 30 秒。若超过该时间，系统会启用默认铃声 default。<br/> - 铃声文件只支持 aiff、wav 和 caf 格式，例如铃声命名 test.caf。<br/> - 铃声文件必须放在 app 的 /Library/Sounds 目录中。<br/> - 如果铃声文件未找到，或不填，响铃为系统默认铃声。 |
 
 ## **在客户端集成 APNs**
 

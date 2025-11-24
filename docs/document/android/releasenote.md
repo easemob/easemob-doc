@@ -2,7 +2,58 @@
 
 <Toc />
 
-<!-- ## 版本 V4.15.1 Dev 2025-6-23（开发版）
+## 版本 V4.18.0 Dev 2025-10-31（开发版）
+
+### 新增特性 
+
+1. 底层支持安全 DNS 解析 DoH，提高连通性。
+2. 支持私有部署时设置 IPv6 格式的 REST 地址。
+
+### 修复
+
+1. 修复消息带 JSONString 类型扩展时导致的偶现崩溃。
+2. 修复底层 WebSocket 使用时出现的文件描述符（FD）溢出问题。
+3. 修复使用 WebSocket 时偶现的网络异常断开连接时的崩溃。
+
+## 版本 V4.17.0 Dev 2025-9-25（开发版）
+
+### 新增特性 
+
+1. 长连接支持 WebSocket 协议。 
+2. `EMOptions` 新增 API 支持 WebSocket 私有部署:
+   - `EMOptions#setWebSocketServer`：设置 WebSocket 服务器地址。
+   - `EMOptions#getWebSocketServer`：获取设置的 WebSocket 服务器地址。
+   - `EMOptions#setWebSocketPort`：设置 WebSocket 服务器端口号。
+   - `EMOptions#getWebSocketPort`：获取设置的 WebSocket 服务器端口号。
+3. 主动退出账号时添加 logout 协议。
+
+### 优化
+
+- 支持 Google Play SDK Index 上检索到 SDK。
+- 更新 AOSL 库版本为 1.3.0。
+
+### 修复
+
+修复更新群组属性时影响群组头像问题。
+
+## 版本 V4.16.0 Dev 2025-8-19（开发版）
+
+### 修复
+
+1. IM SDK 进行如下修复：
+  - 修复群组或聊天室解散后，成员收到回调后，仍然会从服务器获取群组或聊天室详情的问题。
+  - 修复数据库遇到 `SQLITE_BUSY` 后导致数据库重建的问题。
+2. IM Demo 增加反诈提示：
+  - 聊天页面增加反诈背景。
+  - 发送和接收消息都会插入一个反诈提示消息。
+
+## 版本 V4.15.2 Dev 2025-7-22（开发版）
+
+### 优化
+
+- 优化最新一条消息为附件消息的本地会话列表的加载性能，减少不必要的获取文件长度的操作。
+
+## 版本 V4.15.1 Dev 2025-6-23（开发版）
 
 ### 新增特性 
 
@@ -13,7 +64,7 @@
 
 1. 修复当修改文本和自定义消息之外的消息时，`EMMessageListener#onMessageContentChanged` 回调中不返回修改的信息的问题。
 2. 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息时（`EMFetchMessageOption#setIsSave` 设置为 `false`）时，也会生成新的本地会话的问题。   
-3. 修复部分场景下 [发送 GIF 图片消息](message_send.html#发送-gif-图片消息) 失败的问题。 -->
+3. 修复部分场景下 [发送 GIF 图片消息](message_send.html#发送-gif-图片消息) 失败的问题。
 
 ## 版本 V4.15.0 Dev 2025-5-21（开发版）
 
@@ -26,7 +77,7 @@
 ### 优化
 
 - 修改 Token 即将过期事件 [onTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
-- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](/document/android/demo.html#快速跑通-demo)。
+- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](/document/android/demo.html#快速跑通-demo-源码)。
 
 ### 修复
 

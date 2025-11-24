@@ -39,8 +39,8 @@ const sendTextMsg = () => {
     to: targetUserId,
     msg: msgContent,
     ext: {
-      // 设置是否发送静默消息。该字段为内置内置字段，取值如下：`YES`：发送静默消息；（默认）`NO`：推送该消息。 
-      em_ignore_notification: "NO"
+      // 设置是否发送静默消息。该字段为内置字段，取值如下：`true`：发送静默消息；（默认）`false`：推送该消息。 
+      em_ignore_notification: false
     },
   };
   let msg = AC.message.create(option);

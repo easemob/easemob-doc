@@ -41,7 +41,7 @@ EMClient.getInstance().loginWithToken(mAccount, mToken, new EMCallBack() {
 });
 ```
 
-1. **用户 ID + 密码**登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_system.html#开放注册单个用户)。
+1. **用户 ID + 密码**登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_register_open.html)。
 
 ```java
 EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
@@ -64,7 +64,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 
 即时通讯 IM 默认自动登录，即 `EMOptions#setAutoLogin` 选项默认为 `true`。自动登录模式下，首次登录成功之后，后续初始化 SDK 时均会自动登录。
 
-自动登录期限默认为 30 天，即设置自动登录后，用户 30 天内可自动登录。
+自动登录期限默认为 30 天，即设置自动登录后，用户 30 天内可自动登录。若调整改期限，可联系环信商务。
 
 不过，自动登录还取决于你设置的用户 token 或密码有效期，例如，用户 token 有效期为 24 小时，则用户在 24 小时后，需获取 token 重新登录。
 

@@ -96,7 +96,7 @@ ChatUIKit.instance.loginWithPassword(userId: userId, password: password);
 
 为了方便快速体验，你可以在[环信即时通讯云控制台](/product/enable_and_configure_IM)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
 
-在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ```dart
 ChatUIKit.instance.loginWithToken(userId: userId, token: token);
@@ -186,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             TextButton(
               onPressed: () {
-                if (ChatUIKit.instance.isLogged()) {
+                if (ChatUIKit.instance.isLoginBefore()) {
                   ChatUIKit.instance.logout().then((value) => setState(() {}));
                 } else {
                   ChatUIKit.instance
@@ -195,11 +195,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       .then((value) => setState(() {}));
                 }
               },
-              child: ChatUIKit.instance.isLogged()
+              child: ChatUIKit.instance.isLoginBefore()
                   ? const Text('Logout')
                   : const Text('Login'),
             ),
-            if (ChatUIKit.instance.isLogged())
+            if (ChatUIKit.instance.isLoginBefore())
               const Expanded(child: ChatPage()),
           ],
         ),

@@ -69,10 +69,6 @@
 - 用户同意入群邀请后，邀请人收到 `EMGroupManagerDelegate#groupInvitationDidAccept` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调；其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
 - 用户拒绝入群邀请后，邀请人收到 `EMGroupManagerDelegate#groupInvitationDidDecline` 回调。
 
-邀请用户入群的流程如下图所示：
-
-![img](/images/android/group-flow.png)
-
 用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
 用户加入群组后，将可以收到群消息。

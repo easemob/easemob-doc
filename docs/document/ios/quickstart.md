@@ -95,21 +95,13 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
-```objectivec
-// 异步方法
-[[EMClient sharedClient] registerWithUsername:@"username"
-                                         password:@"your password"
-                                       completion:^(NSString *aUsername, EMError *aError) {
-                                   }];
-```
-
 ## 5. 登录账号
 
-利用创建的用户名和密码登录环信 IM。
+利用创建的用户名和token登录环信 IM。
 
 ```objectivec
 [[EMClient sharedClient] loginWithUsername:@"username"
-                                     password:@"your password"
+                                     token:@"your token"
                                    completion:^(NSString *aUsername, EMError *aError) {
 
 }];

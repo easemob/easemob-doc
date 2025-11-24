@@ -28,7 +28,7 @@
 
 4. 点击 **Finish**。根据屏幕提示，安装所需插件。
 
-上述步骤使用 **DevEco Studio 5.0.1 Release（5.0.5.315）** 示例。
+上述步骤使用 **DevEco Studio 5.1.0 Release（5.1.0.828）** 示例。
 
 5. 在项目中引入 SDK。
 
@@ -111,7 +111,6 @@ ohpm install @easemob/chatuikit
 
 ```typescript
 import { ChatPageParams, ChatUIKitClient, ChatClient, ChatError, ChatOptions, ConversationType } from '@easemob/chatuikit';
-import { promptAction } from '@kit.ArkUI';
 
 @Entry
 @Component
@@ -119,7 +118,7 @@ struct Index {
   pathStack: NavPathStack = new NavPathStack();
   private appKey: string = [项目的AppKey]; // 将[项目的AppKey]替换为项目的 App Key 字符串
   private userId: string = '';
-  private password: string = '';
+  private token: string = '';
   private peerId: string = '';
 
   private initSDK() {
@@ -128,34 +127,34 @@ struct Index {
     });
     options.setAutoLogin(false);
     let client = ChatClient.getInstance();
-    client.init(getContext(), options);
+    client.init(this.getUIContext().getHostContext(), options);
     ChatUIKitClient.init(client);
   }
 
   private login() {
-    if (!this.userId || !this.password) {
-      promptAction.showToast({message: "UserId or password cannot be empty!"});
+    if (!this.userId || !this.token) {
+      this.getUIContext().getPromptAction().showToast({message: "UserId or token cannot be empty!"});
       return;
     }
-    ChatUIKitClient.loginWithPassword(this.userId, this.password)
+    ChatUIKitClient.login(this.userId, this.token)
       .then(() => {
-        promptAction.showToast({message: "Login successful!"});
+        this.getUIContext().getPromptAction().showToast({message: "Login successful!"});
       })
       .catch((e: ChatError) => {
-        promptAction.showToast({message: "Login failed: "+e.description});
+        this.getUIContext().getPromptAction().showToast({message: "Login failed: "+e.description});
       })
   }
 
   private logout() {
     ChatUIKitClient.logout(false)
       .then(() => {
-        promptAction.showToast({message: "Logout successful!"});
+        this.getUIContext().getPromptAction().showToast({message: "Logout successful!"});
       })
   }
 
   private startChat() {
     if (!this.peerId) {
-      promptAction.showToast({message: "Peer id cannot be empty!"});
+      this.getUIContext().getPromptAction().showToast({message: "Peer id cannot be empty!"});
       return;
     }
     this.pathStack.pushPath({name: 'ChatPage', param: {
@@ -175,10 +174,9 @@ struct Index {
           .commonStyle()
           .onChange(value => this.userId = value)
 
-        TextInput({ placeholder: 'Password' })
+        TextInput({ placeholder: 'Token', text: this.token })
           .commonStyle()
-          .type(InputType.Password)
-          .onChange(value => this.password = value)
+          .onChange(value => this.token = value)
 
         Button('Login')
           .commonStyle()
@@ -235,4 +233,4 @@ struct Index {
 
 3. 在另一台设备或者模拟器上登录另一个账号。
 
-4. 两台设别或者模拟器分别输入对方的账号，并点击 `Start Chat` 按钮，进入聊天页面。现在你可以在两个账号间进行聊天。
+4. 两台设备或者模拟器分别输入对方的账号，并点击 `Start Chat` 按钮，进入聊天页面。现在你可以在两个账号间进行聊天。

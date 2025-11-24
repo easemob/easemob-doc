@@ -298,7 +298,7 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
 ```dart
     ChatUIKitSettings.enableMessageThread = true;
 ```
-
+<!--
 ### 设置是否开启消息翻译
 
 消息翻译是指用户可以将一条消息翻译成其他语言。消息翻译可以帮助使用不同语言的用户进行沟通。
@@ -325,6 +325,7 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
 
 更多翻译目标语言，请参考[翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
 
+-->
 ### 设置是否开启表情回复
 
 表情回复（即 `Reaction`）指用户可以使用表情符号回复消息。表情回复可以帮助用户表达情绪、态度、进行调查或投票。在单群聊 UIKit 中，用户可以长按单条消息触发消息拓展功能菜单，选择表情回复。
@@ -366,7 +367,7 @@ ChatUIKitSettings.recallExpandTime = 120;
 ```dart
 ChatUIKitSettings.enableMessageEdit = false;
 ```
-
+<!--
 ### 设置是否开启消息举报
 
 消息举报，即对发送或者收到的消息进行举报，该功能默认为 `true`, 如果不需要，可以将参数设置为 `false`。 示例代码如下：
@@ -392,7 +393,7 @@ ChatUIKitSettings.enableMessageReport = false;
     'tag9',
   ];
 ```
-
+-->
 ### 设置是否开启消息合并转发
 
 合并转发，即同时选择多条消息进行转发，该功能默认为 `true`。如果不需要，可以将参数设置为 `false`。 示例代码如下：

@@ -205,7 +205,7 @@ export function App() {
 
 #### 自定义输入状态指示 UI
 
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/product/typing_indication.html)。
+本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/product/solution_common/typing_indication.html)。
 
 如果需要自定义正在输入组件样式，需要自定义聊天页面组件的导航栏组件，可以参考 `ConversationDetailNavigationBar` 组件。
 

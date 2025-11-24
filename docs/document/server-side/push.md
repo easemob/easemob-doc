@@ -528,7 +528,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
 }
 ```
 
-## 设置离线推送
+## 设置离线推送免打扰和通知方式
 
 ### 功能说明
 
@@ -626,7 +626,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
 }
 ```
 
-## 查询离线推送设置
+## 查询离线推送免打扰和通知方式
 
 ### 功能说明
 

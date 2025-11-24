@@ -22,13 +22,13 @@
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :---------------- |
-| `证书名称`     | String | 是     | 填写华为 Client ID。  |
-| `推送密钥`     | String | 是     | 填写华为 Client Secret。|
-| `应用包名`     | String | 是     | 填写华为 App package name。   |
-| `项目 ID`      | String | 否     | 填写项目 ID。                     |
-| `Category`     | String |  否    | 选择 category 类型。                       |
-| `Action`       | String |  否    | 选择点击通知后的动作。组件定义的 intent-filter action name。                     |
-| `ActivityClass`| String | 否     | 角标显示，应用入口类路径。示例：com.easemob.MainActivity。                    |
+| 证书名称     | String | 是     | 华为 Client ID。  |
+| 推送密钥    | String | 是     | 华为 Client Secret。|
+| 应用包名     | String | 是     | 华为 App package name。   |
+| 项目 ID      | String | 否     | 项目 ID。                     |
+| Category    | String |  否    | 自动分类权益申请 Category。该参数仅对离线推送有效。       |
+| Action       | String |  否    | 点击通知后的动作。组件定义的 intent-filter action name。该参数仅对离线推送有效。   |
+| ActivityClass | String | 否     | 角标显示，应用入口类路径。示例：com.easemob.MainActivity。该参数仅对离线推送有效。 |
 
 ## **步骤三 集成华为推送 SDK**
 
