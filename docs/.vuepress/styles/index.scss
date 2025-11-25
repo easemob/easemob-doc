@@ -26,23 +26,54 @@ $theme-color: #303233;
       padding: 24px;
       margin: 0;
 
-      .hint-container.info,
-      .hint-container.note,
-      .hint-container.tip,
-      .hint-container.warning,
-      .hint-container.danger {
-        color: #253858;
+      .hint-container {
         font: 500 13px PingFang SC, sans-serif;
         border-inline-start: unset;
-        border: 1px solid var(--tip-border-color);
         border-radius: 6px;
 
-        > .hint-container-title {
-          color: #253858;
+        .hint-container-title {
           font: 600 14px PingFang SC, sans-serif;
+
+          &::before {
+            width: 20px;
+            height: 20px;
+          }
         }
-        > .hint-container-title::before {
-          background-image: url(../icon-tip.svg);
+
+        &.tip {
+          color: #253858;
+          background-color: #d9f0ff;
+          border: 1px solid var(--tip-border-color);
+          .hint-container-title {
+            color: #253858;
+            &::before {
+              background-image: url("/icon-tip.svg");
+            }
+          }
+        }
+
+        &.note {
+          color: #303233;
+          background-color: #e9e9eb;
+          border: 1px solid var(--note-border-color);
+          .hint-container-title {
+            color: #303233;
+            &::before {
+              background-image: url("/icon-note.svg");
+            }
+          }
+        }
+
+        &.danger {
+          color: #4c1a1a;
+          background-color: #fde2e2;
+          border: 1px solid var(--danger-border-color);
+          .hint-container-title {
+            color: #4c1a1a;
+            &::before {
+              background-image: url("/icon-danger.svg");
+            }
+          }
         }
       }
 
@@ -87,7 +118,23 @@ $theme-color: #303233;
       left: unset;
       right: 0;
       width: 200px;
-      font-size: var(--text-size);
+      color: #909599;
+      font: 500 12px PingFang SC, sans-serif;
+
+      .toc-header {
+        color: #606466;
+        font: 500 13px PingFang SC, sans-serif;
+      }
+
+      .toc-link {
+        line-height: 20px;
+        &:hover {
+          color: var(--theme-color);
+        }
+        &.level3 {
+          font-weight: 400;
+        }
+      }
     }
   }
 }
@@ -121,9 +168,17 @@ $theme-color: #303233;
 
 div[class*="language-"] {
   padding-top: 2px;
-  border: 1px solid var(--codes-border-color);
-  background: var(--codes-bg-color);
+  border: 1px solid var(--codes-border-color-dark);
+  background: var(--codes-bg-color-dark);
   box-shadow: 0 -1px 0 0 #ebeef5 inset;
+
+  code {
+    color: #fff !important;
+
+    .token.punctuation {
+      color: #fff;
+    }
+  }
 }
 
 div[class*="language-"]::before {
@@ -194,44 +249,42 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
 
 #sidebar {
   padding-inline-start: 0;
-  background-color: rgb(245, 247, 250);
+  background-color: #fff;
   font-size: var(--text-size);
+  font-family: PingFang SC, sans-serif;
   border-right: 1px solid #d4dade;
-  > .sidebar-links > li {
+  > .sidebar-links li {
     > a {
       font-weight: 500;
+      font-size: var(--text-size);
+
+      &.active,
+      &:hover {
+        color: var(--theme-color);
+        background: #fff;
+      }
     }
     > .sidebar-group {
-      > p span.title {
-        font-weight: 500;
-      }
       > button.sidebar-heading {
         font-weight: 500;
+
+        &.active,
+        &:hover {
+          color: var(--theme-color);
+          background: #fff;
+        }
       }
       > .sidebar-links {
         border-left: 1px solid #ccc;
         margin-left: 12px;
-        > li > .sidebar-link {
-          padding-inline-start: 0.7rem;
-        }
-        > li > .sidebar-group {
-          padding-inline-start: 0.2rem;
-        }
-      }
-    }
-
-    @for $i from 1 through $sidebar-levels {
-      $color: lighten($base-color, $i * $fade-amount);
-      $selector: "";
-      @for $j from 1 through $i {
-        $selector: #{$selector} + ".sidebar-group > .sidebar-links ";
-      }
-      #{$selector} {
-        > li > a {
-          color: $color;
-        }
-        .title {
-          color: $color;
+        > li {
+          > .sidebar-link {
+            font-weight: 400;
+            padding-inline-start: 0.7rem;
+          }
+          > .sidebar-group {
+            padding-inline-start: 0.2rem;
+          }
         }
       }
     }
