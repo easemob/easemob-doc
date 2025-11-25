@@ -28,6 +28,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 51     | MESSAGE_NOT_FOUND                         | 没查到消息，如：没有查询到要举报的消息。   | 提示未找到原消息。 |
 | 52     | NO_PERMISSION                          | 用户对当前操作没有权限。  | 提示没有权限进⾏相应的操作。 |
 | 53     | OPERATION_UNSUPPORTED                         | 不支持的操作。    | 提示不⽀持这个操作。|
+| 56     | WEBIM_TOKEN_EXPIRED                         | Token 过期。    | 提示 Token 过期。|
 | 101    | WEBIM_UPLOADFILE_ERROR                         | 上传文件失败：如文件过大等。 | 发送附件消息上传时失败，显示发送失败。|
 | 102    | WEBIM_UPLOADFILE_NO_LOGIN                      | 上传文件的请求中未携带用户 token：如未登录就上传文件。| 确保已经登录。 |
 | 200    | WEBIM_DOWNLOADFILE_ERROR                       | 下载文件失败：如超时、网络错误。 | 提示重试。 |

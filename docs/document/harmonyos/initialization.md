@@ -10,7 +10,7 @@
 
 ## 初始化
 
-初始化示例代码：
+1. 初始化示例代码如下：
 
 ```typescript
 let options = new ChatOptions({
@@ -34,3 +34,23 @@ ChatClient.getInstance().init(this.context, {
 ```
 
 关于私有云 SDK 的 IP 地址/域名配置，详见 [配置文档](private_ip_domain.html)。
+
+2. 初始化后，你可以设置所需的监听，例如，连接监听和接收消息的监听，及时知晓长连接的建立和消息的收发。
+
+```typescript
+    // 设置连接状态监听器。
+    ChatClient.getInstance().addConnectionListener({
+      onConnected: (): void => {
+        // 成功连接到 IM 服务器时触发。
+      },
+      onDisconnected: (errorCode: number): void => {
+        // SDK 与 IM 服务器断开连接时触发。
+      }
+    });
+    // 设置消息监听器。
+    ChatClient.getInstance().chatManager()?.addMessageListener({
+      onMessageReceived: (messages: ChatMessage[]): void => {
+        // 处理接收到的消息
+      }
+    });
+```

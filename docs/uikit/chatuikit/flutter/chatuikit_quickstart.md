@@ -23,9 +23,9 @@ environment:
 - iOS: 在 `<project root>/ios/Runner/Info.plist` 中添加以下权限。
 
 ```xml
-NSPhotoLibraryUsageDescription
-NSCameraUsageDescription
-NSMicrophoneUsageDescription
+  <key>NSPhotoLibraryUsageDescription</key>
+  <key>NSCameraUsageDescription</key>
+  <key>NSMicrophoneUsageDescription</key>
 ```
 
 - Android: `em_chat_uikit` 已经在 `AndroidManifest.xml` 中添加以下权限, 你不需要再重复添加。
@@ -53,7 +53,7 @@ flutter create chat_uikit_demo --platforms=android,ios
 
 ```bash
 cd chat_uikit_demo
-flutter pub add em_chat_uikit
+flutter pub add em_chat_uikit:2.3.0-dev.1
 flutter pub get
 ```
 
@@ -67,10 +67,9 @@ flutter pub get
 // 导入头文件
 import 'package:em_chat_uikit/chat_uikit.dart';
 ...
-
 void main() {
   ChatUIKit.instance
-      .init(options: Options(appKey: appkey, autoLogin: false))
+      .init(options: Options.withAppKey(appkey, autoLogin: false))
       .then((value) {
     runApp(const MyApp());
   });
@@ -131,21 +130,29 @@ ChatUIKit.instance.loginWithToken(userId: userId, token: token);
 ```dart
 import 'package:em_chat_uikit/chat_uikit.dart';
 import 'package:flutter/material.dart';
-
+//必须填写 appkey、currentUserId、currentUserPwd 和 chatterId 常量 
 const appkey = '';
 const currentUserId = '';
 const currentUserPwd = '';
 const chatterId = '';
 void main() {
   ChatUIKit.instance
-      .init(options: Options(appKey: appkey, autoLogin: false))
+      .init(options: Options.withAppKey(appkey, autoLogin: false))
       .then((value) {
     runApp(const MyApp());
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // 创建本地化实例
+  final ChatUIKitLocalizations _localization = ChatUIKitLocalizations();
 
   @override
   Widget build(BuildContext context) {
@@ -155,9 +162,15 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      // 添加本地化支持
+      supportedLocales: _localization.supportedLocales,
+      localizationsDelegates: _localization.localizationsDelegates,
+      localeResolutionCallback: _localization.localeResolutionCallback,
+      locale: _localization.currentLocale,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       onGenerateRoute: (settings) {
-        return null;
+        // 使用 ChatUIKitRoute 来处理路由
+        return ChatUIKitRoute().generateRoute(settings);
       },
     );
   }
@@ -181,44 +194,53 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextButton(
-              onPressed: () {
-                if (ChatUIKit.instance.isLoginBefore()) {
-                  ChatUIKit.instance.logout().then((value) => setState(() {}));
-                } else {
-                  ChatUIKit.instance
-                      .loginWithPassword(
-                          userId: currentUserId, password: currentUserPwd)
-                      .then((value) => setState(() {}));
-                }
-              },
-              child: ChatUIKit.instance.isLoginBefore()
-                  ? const Text('Logout')
-                  : const Text('Login'),
-            ),
-            if (ChatUIKit.instance.isLoginBefore())
-              const Expanded(child: ChatPage()),
-          ],
+        child: FutureBuilder<bool>(
+          future: ChatUIKit.instance.isLoginBefore(),
+          builder: (context, snapshot) {
+            // 数据未就绪时，返回空内容
+            if (!snapshot.hasData) {
+              return const SizedBox.shrink();
+            }
+
+            // 数据就绪后，获取登录状态
+            final isLoggedIn = snapshot.data!;
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () async {
+                    if (await ChatUIKit.instance.isLoginBefore()) {
+                      await ChatUIKit.instance.logout();
+                      setState(() {});
+                    } else {
+                      await ChatUIKit.instance.loginWithPassword(
+                        userId: currentUserId,
+                        password: currentUserPwd,
+                      );
+                      setState(() {});
+                      // 登录成功后自动跳转到聊天页面
+                      if (mounted) {
+                        ChatUIKitRoute.pushOrPushNamed(
+                          context,
+                          ChatUIKitRouteNames.messagesView,
+                          MessagesViewArguments(
+                            profile: ChatUIKitProfile.contact(id: chatterId),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: isLoggedIn
+                      ? const Text('Logout')
+                      : const Text('Login'),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
-  }
-}
-
-class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
-
-  @override
-  State<ChatPage> createState() => _ChatPageState();
-}
-
-class _ChatPageState extends State<ChatPage> {
-  @override
-  Widget build(BuildContext context) {
-    return MessagesView(profile: ChatUIKitProfile.contact(id: chatterId));
   }
 }
 ```
