@@ -78,13 +78,19 @@ $theme-color: #303233;
       }
 
       table {
-        width: fit-content;
+        display: table;
+        width: 100%;
+        table-layout: auto !important;
+        border-collapse: collapse;
         color: var(--table-text-color);
         font: 400 14px PingFang SC, sans-serif;
 
         th,
         td {
+          min-width: 0;
+          width: auto;
           border-color: var(--border-color);
+          background-color: #fafdff;
         }
 
         td {
@@ -112,6 +118,17 @@ $theme-color: #303233;
         font: 400 13px PingFang SC, sans-serif;
         border-radius: 4px;
       }
+
+      h2,
+      h3 {
+        width: fit-content;
+
+        .header-anchor {
+          float: right;
+          margin-inline-start: 0;
+          margin-inline-end: -1em;
+        }
+      }
     }
 
     #toc {
@@ -134,6 +151,20 @@ $theme-color: #303233;
         &.level3 {
           font-weight: 400;
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .theme-container {
+    .page {
+      padding-inline-start: 0;
+      width: 100%;
+
+      .page-title,
+      .theme-hope-content {
+        width: calc(100% - 48px);
       }
     }
   }
@@ -253,6 +284,7 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
   font-size: var(--text-size);
   font-family: PingFang SC, sans-serif;
   border-right: 1px solid #d4dade;
+  scrollbar-color: #ebeef5 #ffffff;
   > .sidebar-links li {
     > a {
       font-weight: 500;
@@ -315,4 +347,11 @@ button {
     width: 100%;
     margin: 8px 24px;
   }
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #ebeef5;
+}
+*::-webkit-scrollbar-track {
+  background: #fff;
 }
