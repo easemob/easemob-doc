@@ -10,7 +10,7 @@
 
 ## 初始化
 
-1. 初始化示例代码如下：
+初始化示例代码如下：
 
 ```typescript
 let options = new ChatOptions({
@@ -35,7 +35,9 @@ ChatClient.getInstance().init(this.context, {
 
 关于私有云 SDK 的 IP 地址/域名配置，详见 [配置文档](private_ip_domain.html)。
 
-2. 初始化后，你可以设置所需的监听，例如，连接监听和接收消息的监听，及时知晓长连接的建立和消息的收发。
+## 初始化后设置监听
+
+初始化后，你可以设置所需的监听，例如，连接监听和接收消息的监听，及时知晓长连接的建立和消息的收发。
 
 ```typescript
     // 设置连接状态监听器。
