@@ -22,7 +22,7 @@ $theme-color: #303233;
 
     .page-title,
     .theme-hope-content {
-      width: calc(100% - 248px);
+      width: calc(100% - 48px);
       padding: 24px;
       margin: 0;
 
@@ -90,21 +90,25 @@ $theme-color: #303233;
           min-width: 0;
           width: auto;
           border-color: var(--border-color);
-          background-color: #fafdff;
+          background-color: #f0f3f5;
         }
 
         td {
           padding: 16px;
+          background-color: #fafdff;
         }
 
-        th,
         tr:first-child {
-          background-color: #f0f3f5;
+          td {
+            background-color: #f0f3f5;
+          }
         }
 
         thead + tbody {
           tr:first-child {
-            background-color: #fff;
+            td {
+              background-color: #fff;
+            }
           }
         }
 
@@ -122,12 +126,19 @@ $theme-color: #303233;
       h2,
       h3 {
         width: fit-content;
+        border-bottom: 0;
 
         .header-anchor {
           float: right;
           margin-inline-start: 0;
           margin-inline-end: -1em;
         }
+      }
+
+      ul:has(+ h2),
+      p:has(+ h2) {
+        padding-bottom: 36px;
+        border-bottom: 1px solid var(--border-color);
       }
     }
 
@@ -156,15 +167,21 @@ $theme-color: #303233;
   }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 719px) {
   .theme-container {
     .page {
       padding-inline-start: 0;
       width: 100%;
+    }
+  }
+}
 
+@media (min-width: 1440px) {
+  .theme-container {
+    .page {
       .page-title,
       .theme-hope-content {
-        width: calc(100% - 48px);
+        width: calc(100% - 248px);
       }
     }
   }
@@ -199,15 +216,27 @@ $theme-color: #303233;
 
 div[class*="language-"] {
   padding-top: 2px;
-  border: 1px solid var(--codes-border-color-dark);
-  background: var(--codes-bg-color-dark);
-  box-shadow: 0 -1px 0 0 #ebeef5 inset;
 
-  code {
-    color: #fff !important;
+  &.line-numbers-mode {
+    pre {
+      margin-left: 0;
+      padding: 1rem 1.5rem;
+      code {
+        color: #fff !important;
 
-    .token.punctuation {
-      color: #fff;
+        .token.punctuation {
+          color: #fff;
+        }
+      }
+    }
+
+    .line-numbers {
+      display: none;
+    }
+
+    &::after {
+      width: 0;
+      border: 0;
     }
   }
 }
@@ -299,6 +328,9 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
     > .sidebar-group {
       > button.sidebar-heading {
         font-weight: 500;
+        .title {
+          font-size: var(--text-size);
+        }
 
         &.active,
         &:hover {
@@ -315,11 +347,31 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
             padding-inline-start: 0.7rem;
           }
           > .sidebar-group {
+            font-weight: 400;
             padding-inline-start: 0.2rem;
+            > button.sidebar-heading {
+              font-weight: 400;
+            }
           }
         }
       }
     }
+  }
+
+  p.sidebar-heading {
+    color: var(--text-color-light);
+    font: 400 12px PingFang SC, sans-serif;
+
+    &:hover {
+      background-color: #fff;
+    }
+  }
+
+  p.sidebar-separator {
+    padding: 0;
+    margin: 0 16px;
+    width: calc(100% - 32px);
+    border-bottom: 1px solid var(--border-color);
   }
 }
 

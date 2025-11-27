@@ -115,6 +115,7 @@ import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
 import HeroSection from "./CustomHero.vue";
 import CardMenu from "./CardMenu.vue";
 import { usePageFrontmatter } from "@vuepress/client";
+import { ElMessage } from "element-plus";
 const frontmatter = usePageFrontmatter();
 const router = useRouter();
 const starter = frontmatter.value.starter || [];
@@ -150,6 +151,21 @@ const buildAnchorLink = () => {
   });
   return values;
 };
+
+window.addEventListener("click", (e: any) => {
+  if (e.target.className === "header-anchor") {
+    setTimeout(() => {
+      navigator.clipboard.writeText(window.document.location.href);
+    }, 300);
+    ElMessage.warning("已复制链接");
+  } else if (
+    e.target.tagName === "CODE" &&
+    e.target.parentElement.tagName != "PRE"
+  ) {
+    navigator.clipboard.writeText(e.target.innerHTML);
+    ElMessage.warning("已复制");
+  }
+});
 </script>
 
 <style scoped>
