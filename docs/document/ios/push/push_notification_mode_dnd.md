@@ -200,22 +200,17 @@ EMConversationType conversationType = EMConversationTypeGroupChat;
 你可以调用 `getSilentModeForAllWithCompletion` 获取指定会话的推送通知设置，如以下代码示例所示：
 
 ```objectivec
-// 异步方法
-[[EMClient sharedClient].pushManager getSilentModeForAllWithCompletion:^(EMSilentModeResult *aResult, EMError *aError) {
-    if (!aError) {
-        //获取会话的推送通知方式。
-        if(aResult.isSetConversationRemindType){
-            EMPushRemindType remindType = aResult.remindType;
-        }
-        //获取会话的离线推送免打扰过期 Unix 时间戳。
-        NSTimeInterval ex = aResult.expireTimestamp;
-        //获取会话的离线推送免打扰时段的开始时间。
-        EMSilentModeTime *startTime = aResult.silentModeStartTime;
-        EMSilentModeTime *endTime = aResult.silentModeEndTime;
-    }else{
-        NSLog(@"getSilentModeForAll error---%@",aError.errorDescription);
-    }s
-}];
+    [EMClient.sharedClient.pushManager getSilentModeForConversation:@"conversationId" conversationType:EMConversationTypeGroupChat completion:^(EMSilentModeResult * _Nullable aResult, EMError * _Nullable aError) {
+            if (aError == nil) {
+                //获取会话的推送通知方式。
+                EMPushRemindType remindType = aResult.remindType;
+                //获取会话的离线推送免打扰过期 Unix 时间戳。
+                NSTimeInterval ex = aResult.expireTimestamp;
+                //获取会话的离线推送免打扰时段的开始时间。
+                EMSilentModeTime *startTime = aResult.silentModeStartTime;
+                EMSilentModeTime *endTime = aResult.silentModeEndTime;
+            }
+    }];
 ```
 
 ## 获取多个会话的推送通知设置
