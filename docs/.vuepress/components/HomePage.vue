@@ -179,15 +179,9 @@ window.addEventListener("click", (e: any) => {
 .main-content {
   align-self: center;
   margin-top: 16px;
-  width: 100%;
+  width: 95%;
   max-width: 1200px;
   position: relative;
-}
-
-@media (max-width: 991px) {
-  .main-content {
-    max-width: 95%;
-  }
 }
 
 .content {

@@ -51,6 +51,9 @@ export default defineUserConfig({
     headers: {
       level: [2, 3],
     },
+    code:{
+      lineNumbers:false
+    }
   },
   extendsMarkdown: (md) => {
     containerPlugin(md);

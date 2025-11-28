@@ -50,5 +50,9 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
       imgSize: true,
       tabs: true,
     },
+    prismjs: {
+      light: "vsc-dark-plus", // 使用 VS Code Dark+ 主题(暗色背景,适合技术文档)
+      dark: "vsc-dark-plus", // 暗色模式下使用相同主题
+    },
   },
 });

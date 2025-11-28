@@ -135,7 +135,7 @@ export default {
 }
 
 /* 小屏幕隐藏输入框 */
-@media (max-width: 900px) {
+@media (max-width: 1600px) {
   .search-box {
     width: 20px;
   }

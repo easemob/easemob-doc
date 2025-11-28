@@ -217,26 +217,13 @@ $theme-color: #303233;
 div[class*="language-"] {
   padding-top: 2px;
 
-  &.line-numbers-mode {
-    pre {
-      margin-left: 0;
-      padding: 1rem 1.5rem;
-      code {
-        color: #fff !important;
+  pre {
+    code {
+      color: #fff !important;
 
-        .token.punctuation {
-          color: #fff;
-        }
+      .token.punctuation {
+        color: #fff;
       }
-    }
-
-    .line-numbers {
-      display: none;
-    }
-
-    &::after {
-      width: 0;
-      border: 0;
     }
   }
 }
@@ -300,6 +287,21 @@ div[class*="language-"] > button.copy-code-button:not(.fancy) {
         }
       }
     }
+  }
+}
+
+@media (max-width: 1000px) {
+  .navbar .nav-links  {
+      display: none;
+  }
+}
+
+@media (max-width: 1360px) {
+  .hide-in-pad.site-name {
+    display: none;
+  }
+  .nav-links > .nav-item {
+      padding: 0;
   }
 }
 
