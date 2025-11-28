@@ -4,7 +4,7 @@
 
 `Chat UIKit SDK` UI 组件库提供主题、国际化、常用 UI 组件等。除提供默认使用方式外，该组件库支持自定义组件样式和行为。
 
-## 入口组件 Container
+## 入口组件
 
 `Container` 组件提供全局配置和初始化。如果没有使用该组件，则可能导致其它 UI 组件无法正常使用。
 
@@ -39,9 +39,11 @@
 | enablePresence     | boolean                | 否       | 是否启用状态订阅功能。如果启用，还需要后台开启。  |
 | enableAVMeeting    | boolean                | 否       | 是否启用音视频通话功能。如果启用，还需要后台开启。 默认开启。    |
 
-## Chat SDK 组件 ChatService
+## IM SDK 组件
 
 `ChatService` 组件是对 `Chat SDK` 的封装，可以简化调用逻辑、返回标准化的结果、触发 UI 变化的事件等。
+
+
 
 常用接口包括：登录、登出、添加和删除事件监听、添加和删除 `Chat SDK` 事件监听等。
 
@@ -81,7 +83,7 @@
 
 以下介绍常见的 hooks。
 
-### useColors
+### 修改颜色
 
 通常配合 `usePaletteContext` 使用，自定义颜色对象，改变组件颜色。
 
@@ -106,9 +108,9 @@ export function SomeView() {
 }
 ```
 
-### useDelayExecTask
+### 延迟执行任务
 
-延迟执行任务。如果在超时发生之前再次调用，则继续延迟，直到超时发生在执行任务。
+如果在超时发生之前再次调用，则继续延迟，直到超时发生在执行任务。
 
 例如：
 
@@ -134,7 +136,7 @@ export function SomeView() {
 }
 ```
 
-### useForceUpdate
+### 强制刷新 UI
 
 `useForceUpdate` 提供强制更新。如果组件没有状态，或者需要手动更新，可以使用该 hook。
 
@@ -160,7 +162,7 @@ export function SomeView() {
 }
 ```
 
-### useGetStyleProps
+### 获取组件样式属性
 
 `useGetStyleProps` 提供获取组件样式属性。通常和 `getStyleSize` 配合使用。
 
@@ -179,7 +181,7 @@ export function SomeView(props) {
 }
 ```
 
-### useKeyboardHeight
+### 获取键盘高度
 
 `useKeyboardHeight` 获取用户的键盘高度。
 
@@ -187,7 +189,7 @@ export function SomeView(props) {
 至少需要弹出一次键盘才能获取高度。
 :::
 
-### usePermissions
+### 获取用户权限
 
 `usePermissions` 请求 UI 组件库需要的权限。
 
@@ -213,20 +215,217 @@ export function SomeView() {
 
 1. SDK 事件通知：`Chat SDK` 转发的事件，侧重于数据变化。
 
-- ConnectServiceListener：监听 SDK 和服务器的连接变化的通知。
-- MessageServiceListener：监听消息相关的通知。
-- ConversationListener：监听会话相关的通知。
-- GroupServiceListener：监听群组相关的通知。
-- ContactServiceListener：监听联系人相关的通知。
-- PresenceServiceListener：监听用户状态订阅的通知。
-- CustomServiceListener：监听自定义的通知。
-- MultiDeviceStateListener：监听多设备相关的通知。
-- EventServiceListener：监听事件通知，例如，添加好友之前的通知、添加好友成功的通知和添加好友失败的通知。
+- `ConnectServiceListener`：监听 SDK 和服务器的连接变化的通知。
+- `MessageServiceListener`：监听消息相关的通知。
+- `ConversationListener`：监听会话相关的通知。
+- `GroupServiceListener`：监听群组相关的通知。
+- `ContactServiceListener`：监听联系人相关的通知。
+- `PresenceServiceListener`：监听用户状态订阅的通知。
+- `CustomServiceListener`：监听自定义的通知。
+- `MultiDeviceStateListener`：监听多设备相关的通知。
+- `EventServiceListener`：监听事件通知，例如，添加好友之前的通知、添加好友成功的通知和添加好友失败的通知。
 
 2. UI 事件通知：应用主动行为触发可能导致列表 item 增加、删除和变更、列表刷新和列表重载。例如，在群详情页面修改了群名称，会话列表组件的页面也会更新。很多情况下，单个界面行可能会导致多个 UI 组件发生的变化。详见 [UIListener](#监听器)。
 
-- UIConversationListListener：监听会话列表的变更的通知。
-- UIContactListListener：监听联系人列表的变更的通知。
-- UIGroupListListener：监听群组列表的变更的通知。
-- UIGroupParticipantListListener：监听群成员列表的变更的通知。
-- UINewRequestListListener：监听好友请求列表的变更的通知。
+- `UIConversationListListener`：监听会话列表的变更的通知。
+- `UIContactListListener`：监听联系人列表的变更的通知。
+- `UIGroupListListener`：监听群组列表的变更的通知。
+- `UIGroupParticipantListListener`：监听群成员列表的变更的通知。
+- `UINewRequestListListener`：监听好友请求列表的变更的通知。
+
+## 自定义 SDK 数据模型
+
+`ChatServiceImpl` 类即 SDK 数据模型，对 IM SDK 进行封装。用户可以继承 `ChatServiceImpl` 对 IM SDK 中的方法进行自定义，例如，UIKit 示例应用通过自定义 `ChatServiceImpl` 类，实现了重载添加好友的方法，支持通过搜索手机号获取用户信息。
+
+```tsx
+class ChatServiceDemo extends ChatServiceImpl {
+  constructor() {
+    super();
+  }
+// 自定义添加好友方法：实现调用 REST API
+  override addNewContact(params: {
+    userId: string;
+    reason?: string;
+    onResult?: ResultCallback<void>;
+  }): void {
+    const processAsync = async () => {
+      const chatUserName = await this.client.getCurrentUsername();
+      const userToken = await this.client.getAccessToken();
+
+      // 先请求 app server API，通过手机号获取用户 ID
+      RestApi.requestGetUserByPhone({
+        phone: params.userId,
+        chatUserName: chatUserName ?? '',
+        userToken: userToken ?? '',
+      })
+        .then((result) => {
+          if (result.isOk || result.value?.code === 200) {
+            // 通过调用 IM SDK API 添加好友
+            super.addNewContact(
+              params && ({ userId: result.value?.chatUserName } as any)
+            );
+          } else {
+            params.onResult?.({ isOk: false, error: result.error });
+          }
+        })
+        .catch((error) => {
+          params.onResult?.({ isOk: false, error });
+        });
+    };
+    processAsync();
+  }
+}
+```
+
+## 自定义图片消息预览组件
+
+如果内部提供的图片预览组件样式不能满足需求，UIKit 支持自定义该组件。
+
+```tsx
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function ImageMessagePreviewScreen(props: Props) {
+  // ImagePreviewDemo 为自定义的图片预览组件
+  return <ImageMessagePreview imagePreviewComponent={ImagePreviewDemo} />;
+}
+```
+
+自定义组件 `ImagePreviewDemo` 的示例如下：
+
+
+```tsx
+import React from 'react';
+import { Dimensions, StyleSheet } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
+
+import type { ImagePreviewProps } from 'react-native-chat-uikit';
+
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+
+export const ImagePreviewDemo: React.FC<ImagePreviewProps> = ({
+  source,
+  onClicked,
+  onDupClicked,
+  onLongPress,
+}) => {
+  const composedGesture = {}; // 自定义手势处理
+  const animatedStyle = {}; // 自定义动画样式
+  return (
+    <GestureDetector gesture={composedGesture}>
+      <Animated.View style={[styles.container]}>
+        <Animated.Image
+          source={source}
+          style={[styles.image, animatedStyle]}
+          resizeMode="contain"
+        />
+      </Animated.View>
+    </GestureDetector>
+  );
+};
+
+// 自定义组件样式
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
+  },
+  image: {
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+  },
+});
+```
+
+## 自定义视频消息预览组件
+
+如果内部提供的图片预览组件样式不能满足需求，UIKit 支持自定义该组件。
+
+```tsx
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function VideoMessagePreviewScreen(props: Props) {
+  // VideoPreviewDemo 为自定义的短视频预览组件
+  return <VideoMessagePreview videoPreviewComponent={VideoPreviewDemo} />;
+}
+```
+
+自定义组件 `VideoPreviewDemo` 的示例如下：
+
+```tsx
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { Image, ImageStyle, Pressable, ViewStyle } from 'react-native';
+import Video, { VideoRef } from 'react-native-video';
+
+export interface VideoPreviewProps {
+  source: { uri: string } | number;
+  thumbnailUrl?: string;
+  videoStyle?: ViewStyle;
+  thumbnailStyle?: ImageStyle;
+  onClicked?: () => void;
+  onLongPress?: () => void;
+  onError?: (error: any) => void;
+}
+
+export interface VideoPreviewRef {
+  seek: (time: number, tolerance?: number) => void;
+  resume: () => void;
+  pause: () => void;
+  presentFullscreenPlayer?: () => void;
+}
+
+export const VideoPreviewDemo = forwardRef<VideoPreviewRef, VideoPreviewProps>(
+  (props, ref) => {
+    const {
+      source,
+      videoStyle,
+      thumbnailStyle,
+      thumbnailUrl,
+      onClicked,
+      onLongPress,
+      onError,
+    } = props;
+    const videoRef = useRef<VideoRef>(null);
+    useImperativeHandle(
+      ref, // 自定义视频控制器
+      () => ({
+        seek: (time: number, tolerance?: number) => {
+          videoRef.current?.seek(time, tolerance);
+        },
+        resume: () => {
+          videoRef.current?.resume();
+        },
+        pause: () => {
+          videoRef.current?.pause();
+        },
+        presentFullscreenPlayer: () => {
+          videoRef.current?.presentFullscreenPlayer?.();
+        },
+      }),
+      []
+    );
+    return (
+      <Pressable onPress={onClicked} onLongPress={onLongPress}>
+        <Video
+          ref={videoRef}
+          source={source as any}
+          resizeMode={'contain'}
+          style={videoStyle}
+          onError={onError}
+        />
+        {/* 自定义视频缩略图 */}
+        {thumbnailUrl ? (
+          <Image
+            source={{ uri: thumbnailUrl }}
+            style={[{ position: 'absolute' }, thumbnailStyle]}
+          />
+        ) : null}
+      </Pressable>
+    );
+  }
+);
+```
