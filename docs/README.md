@@ -19,8 +19,8 @@ products:
   - link: "/product/security_best_practices.html"
     text: 安全最佳实践
   - link: "https://rte-src.vulbox.com/"
-    text: 安全响应中心
-    target: "_blank"
+    text: 安全响应中心  
+    target: '_blank'
 starter:
   - title: "SDK 快速开始"
     desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
@@ -30,7 +30,7 @@ starter:
         text: Android
       - icon: /sdk/iOS.svg
         link: /document/ios/quickstart.html
-        text: iOS
+        text: iOS 
       - icon: /sdk/web.svg
         link: /document/web/quickstart.html
         text: Web
@@ -39,7 +39,7 @@ starter:
         text: 小程序/Uniapp
       - icon: /sdk/harmonyos.svg
         link: /document/harmonyos/quickstart.html
-        text: HarmonyOS
+        text: HarmonyOS 
       - icon: /sdk/flutter.svg
         link: /document/flutter/quickstart.html
         text: Flutter
@@ -52,12 +52,12 @@ starter:
       - icon: /sdk/windows.svg
         link: /document/windows/quickstart.html
         text: Windows
-  - title: "Demo 体验"
+  - title: "Demo 体验" 
     desc: "从下面的 IM Demo 构建即时通讯应用，点击“立即体验”按钮将引导你立即体验环信 IM 即时通讯功能，并以此快速搭建自己自己的即时通讯消息收发。"
     platform:
       - icon: /sdk/demo_list.svg
         link: "https://doc.easemob.com/product/demo.html"
-        text: Demo 体验
+        text: Demo 体验 
   - title: "服务端 API"
     desc: "从下面的 Restful API 构建即时通讯应用，点击“快速开始”按钮将引导你在30分钟内实现即时通讯消息收发。"
     platform:
@@ -72,13 +72,13 @@ starter:
         text: Android
       - icon: /sdk/iOS.svg
         link: /uikit/chatuikit/ios/chatuikit_integrated.html
-        text: iOS
+        text: iOS 
       - icon: /sdk/web.svg
         link: /uikit/chatuikit/web/chatuikit_integrated_react.html
         text: Web
-      - icon: "/sdk/harmonyos.svg"
-        link: "/uikit/chatuikit/harmonyos/chatuikit_integrated.html"
-        text: "HarmonyOS"
+      - icon: '/sdk/harmonyos.svg'
+        link: '/uikit/chatuikit/harmonyos/chatuikit_integrated.html' 
+        text: 'HarmonyOS'  
       - icon: /sdk/uniapp.svg
         link: /uikit/chatuikit/uniapp/chatuikit_integrated.html
         text: Uniapp
@@ -93,7 +93,7 @@ starter:
         text: Android
       - icon: /sdk/iOS.svg
         link: /uikit/chatroomuikit/ios/roomuikit_integrated.html
-        text: iOS
+        text: iOS 
       - icon: /sdk/web.svg
         link: /uikit/chatroomuikit/web/roomuikit_integrated.html
         text: Web
@@ -103,7 +103,7 @@ starter:
       - icon: /sdk/react.svg
         link: /uikit/chatroomuikit/react-native/roomuikit_integrated.html
         text: React Native
-  - title: "CallKit"
+  - title: "CallKit" 
     desc: "从下面的列表中选择合适你的 CallKit 构建音视频功能，点击“CallKit 概述”按钮了解CallKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
@@ -111,11 +111,11 @@ starter:
         text: Android
       - icon: /sdk/iOS.svg
         link: /callkit/ios/product_overview.html
-        text: iOS
+        text: iOS  
       - icon: /sdk/web.svg
         link: /callkit/web/product_overview.html
         text: Web
-  - title: "增值服务"
+  - title: "增值服务" 
     desc: "从下面的列表中选择合适你的增值服务构建内容审核、实时音视频、消息翻译、即时推送等功能，点击对应按钮了解主要功能介绍。"
     platform:
       - icon: /sdk/check_texts.svg
@@ -129,7 +129,7 @@ starter:
         text: 消息翻译
       - icon: /sdk/instant.svg
         link: /value-added/push/push_overview.html
-        text: 即时推送
+        text: 即时推送  
 projects:
   - title: SDK/服务端功能
     features:
@@ -168,7 +168,7 @@ projects:
                 link: /document/windows/message_send.html
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/message.html#发送消息
+                link: /document/electron/message.html#发送消息  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/message_single.html
@@ -204,7 +204,7 @@ projects:
                 link: /document/windows/message_receive.html
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/message.html#接收消息
+                link: /document/electron/message.html#接收消息    
           - text: 获取消息
             desc: 从环信消息服务器获取漫游消息，或者从本地获取消息。
             sdks:
@@ -237,7 +237,7 @@ projects:
                 link: /document/windows/message_retrieve.html
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/conversation.html
+                link: /document/electron/conversation.html  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/message_historical.html
@@ -257,8 +257,8 @@ projects:
                 text: 小程序
                 link: /document/applet/message_recall.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/message_recall.html
+                text: HarmonyOS 
+                link: /document/harmonyos/message_recall.html 
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_recall.html
@@ -273,7 +273,7 @@ projects:
                 link: /document/windows/message_recall.html
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/message.html#撤回消息
+                link: /document/electron/message.html#撤回消息  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/message_recall_single.html
@@ -293,8 +293,8 @@ projects:
                 text: 小程序
                 link: /document/applet/message_modify.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/message_modify.html
+                text: HarmonyOS 
+                link: /document/harmonyos/message_modify.html    
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_modify.html
@@ -309,7 +309,7 @@ projects:
                 link: /document/windows/message_modify.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_modify.html
+                link: /document/server-side/message_modify.html 
           - text: 消息回执
             desc: 单聊会话支持消息送达回执、会话已读回执和消息已读回执。群聊会话只支持消息已读回执。
             sdks:
@@ -326,8 +326,8 @@ projects:
                 text: 小程序
                 link: /document/applet/message_receipt.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/message_receipt.html
+                text: HarmonyOS 
+                link: /document/harmonyos/message_receipt.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_receipt.html
@@ -374,8 +374,8 @@ projects:
                 text: 小程序
                 link: /document/applet/conversation_list.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/conversation_list.html
+                text: HarmonyOS 
+                link: /document/harmonyos/conversation_list.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/conversation_list.html
@@ -398,8 +398,8 @@ projects:
                 text: iOS
                 link: /document/ios/conversation_unread.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/conversation_unread.html
+                text: HarmonyOS 
+                link: /document/harmonyos/conversation_unread.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/conversation_unread.html
@@ -414,7 +414,7 @@ projects:
                 link: /document/windows/conversation_unread.html
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/conversation.html#获取会话中的未读消息计数
+                link: /document/electron/conversation.html#获取会话中的未读消息计数   
           - text: 置顶会话
             desc: 将单聊或群聊会话固定在会话列表的顶部，方便用户查找。支持置顶、取消置顶会话和从服务端获取置顶会话列表。
             sdks:
@@ -431,8 +431,8 @@ projects:
                 text: 小程序
                 link: /document/applet/conversation_pin.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/conversation_pin.html
+                text: HarmonyOS 
+                link: /document/harmonyos/conversation_pin.html    
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/conversation_pin.html
@@ -461,8 +461,8 @@ projects:
                 text: 小程序
                 link: /document/applet/conversation_mark.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/conversation_mark.html
+                text: HarmonyOS 
+                link: /document/harmonyos/conversation_mark.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/conversation_mark.html
@@ -491,8 +491,8 @@ projects:
                 text: 小程序
                 link: /document/applet/conversation_delete.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/conversation_delete.html
+                text: HarmonyOS 
+                link: /document/harmonyos/conversation_delete.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/conversation_delete.html
@@ -504,7 +504,7 @@ projects:
                 link: /document/unity/conversation_delete.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/conversation_delete.html
+                link: /document/windows/conversation_delete.html  
               - icon: /sdk/electron.svg
                 text: Electron
                 link: /document/electron/conversation.html#删除会话
@@ -530,8 +530,8 @@ projects:
                 text: 小程序
                 link: /document/applet/group_manage.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/group_manage.html
+                text: HarmonyOS 
+                link: /document/harmonyos/group_manage.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/group_manage.html
@@ -543,13 +543,13 @@ projects:
                 link: /document/unity/group_manage.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/group_manage.html
+                link: /document/windows/group_manage.html  
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/group.html#群组管理
+                link: /document/electron/group.html#群组管理 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group_create.html
+                link: /document/server-side/group_create.html   
           - text: 群成员管理
             desc: 支持加入、退出群组、群组白名单、黑名单、禁言和设置群成员的自定义属性。
             sdks:
@@ -566,8 +566,8 @@ projects:
                 text: 小程序
                 link: /document/applet/group_members.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/group_members.html
+                text: HarmonyOS 
+                link: /document/harmonyos/group_members.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/group_members.html
@@ -579,13 +579,13 @@ projects:
                 link: /document/unity/group_members.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/group_members.html
+                link: /document/windows/group_members.html  
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/group.html#群成员管理
+                link: /document/electron/group.html#群成员管理 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group_member_add_single.html
+                link: /document/server-side/group_member_add_single.html   
           - text: 群组属性管理
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:
@@ -602,8 +602,8 @@ projects:
                 text: 小程序
                 link: /document/applet/group_attributes.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/group_attributes.html
+                text: HarmonyOS 
+                link: /document/harmonyos/group_attributes.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/group_attributes.html
@@ -615,13 +615,13 @@ projects:
                 link: /document/unity/group_attributes.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/group_attributes.html
+                link: /document/windows/group_attributes.html  
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/group.html#修改群组信息
+                link: /document/electron/group.html#修改群组信息 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group_modify.html
+                link: /document/server-side/group_modify.html     
           - text: 聊天室管理
             desc: 支持创建和加入聊天室、获取聊天室详情、退出和解散聊天室、更新聊天室成员人数以及监听聊天室事件。
             sdks:
@@ -638,8 +638,8 @@ projects:
                 text: 小程序
                 link: /document/applet/room_manage.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/room_manage.html
+                text: HarmonyOS 
+                link: /document/harmonyos/room_manage.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/room_manage.html
@@ -651,13 +651,13 @@ projects:
                 link: /document/unity/room_manage.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/room_manage.html
+                link: /document/windows/room_manage.html  
               - icon: /sdk/electron.svg
                 text: Electron
                 link: /document/electron/chatroom.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/chatroom_create.html
+                link: /document/server-side/chatroom_create.html    
           - text: 聊天室成员管理
             desc: 支持加入和退出聊天室、聊天室白名单、黑名单、禁言、以及监听聊天室事件等功能。
             sdks:
@@ -674,8 +674,8 @@ projects:
                 text: 小程序
                 link: /document/applet/room_members.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/room_members.html
+                text: HarmonyOS 
+                link: /document/harmonyos/room_members.html    
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/room_members.html
@@ -687,7 +687,7 @@ projects:
                 link: /document/unity/room_members.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/room_members.html
+                link: /document/windows/room_members.html 
               - icon: /sdk/electron.svg
                 text: Electron
                 link: /document/electron/chatroom.html#加入聊天室
@@ -710,8 +710,8 @@ projects:
                 text: 小程序
                 link: /document/applet/room_attributes.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/room_attributes.html
+                text: HarmonyOS 
+                link: /document/harmonyos/room_attributes.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/room_attributes.html
@@ -723,7 +723,7 @@ projects:
                 link: /document/unity/room_attributes.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/room_attributes.html
+                link: /document/windows/room_attributes.html 
               - icon: /sdk/electron.svg
                 text: Electron
                 link: /document/electron/chatroom.html#修改聊天室信息
@@ -756,7 +756,7 @@ projects:
                 link: /document/unity/thread.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/thread.html
+                link: /document/windows/thread.html 
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/group_thread_create.html
@@ -786,7 +786,7 @@ projects:
                 link: /document/unity/thread_message.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/thread_message.html
+                link: /document/windows/thread_message.html                        
       - title: 用户
         icon: /feature/user.svg
         contexts:
@@ -809,8 +809,8 @@ projects:
                 text: Web
                 link: /document/web/userprofile.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/userprofile.html
+                text: HarmonyOS 
+                link: /document/harmonyos/userprofile.html     
               - icon: /sdk/applet.svg
                 text: 小程序
                 link: /document/applet/userprofile.html
@@ -825,10 +825,10 @@ projects:
                 link: /document/unity/userprofile.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/userprofile.html
+                link: /document/windows/userprofile.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/user_attribute_set.html
+                link: /document/server-side/user_attribute_set.html  
           - text: 用户关系
             desc: 添加和删除好友、设置好友备注、获取好友列表以及好友黑名单管理功能。
             sdks:
@@ -845,8 +845,8 @@ projects:
                 text: 小程序
                 link: /document/applet/user_relationship.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/user_relationship.html
+                text: HarmonyOS 
+                link: /document/harmonyos/user_relationship.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/user_relationship.html
@@ -858,10 +858,10 @@ projects:
                 link: /document/unity/user_relationship.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/user_relationship.html
+                link: /document/windows/user_relationship.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/user_friend_add.html
+                link: /document/server-side/user_friend_add.html 
           - text: 用户在线状态订阅
             desc: 订阅和查询用户的在线状态（即 Presence），包含用户的在线、离线以及自定义状态。
             sdks:
@@ -878,8 +878,8 @@ projects:
                 text: 小程序
                 link: /document/applet/presence.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /document/harmonyos/presence.html
+                text: HarmonyOS 
+                link: /document/harmonyos/presence.html  
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/presence.html
@@ -891,10 +891,10 @@ projects:
                 link: /document/unity/presence.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/presence.html
+                link: /document/windows/presence.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/presence_set.html
+                link: /document/server-side/presence_set.html               
       - title: 推送
         icon: /feature/push.svg
         contexts:
@@ -914,14 +914,14 @@ projects:
                 text: uni-app
                 link: /document/applet/push/uniapp_push.html
               - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
+                text: HarmonyOS 
                 link: /document/harmonyos/push/push_overview.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /document/react-native/push/push_overview.html
+                link: /document/react-native/push/push_overview.html  
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/push_information_bind_unbind.html
+                link: /document/server-side/push_information_bind_unbind.html 
           - text: 即时推送
             desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、VIVO 等主流手机厂商通道。
             sdks:
@@ -930,7 +930,7 @@ projects:
                 link: /value-added/push/push_integration_note_android.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /value-added/push/push_integration_note_ios.html
+                link: /value-added/push/push_integration_note_ios.html 
               - icon: /sdk/rest.svg
                 text: REST
                 link: /value-added/push/push_api_call_limitation.html
@@ -944,7 +944,7 @@ projects:
           - text: 多设备管理
             link: /document/server-side/callback_login_logout.html
           - text: 内容审核
-            link: /document/server-side/callback_login_logout.html
+            link: /document/server-side/callback_postsending.html                                      
   - title: UIKit
     features:
       - title: 单/群聊
@@ -964,7 +964,7 @@ projects:
                 link: /uikit/chatuikit/web/chatuikit_conversation.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatuikit_conversation.html
+                link: /uikit/chatuikit/harmonyos/chatuikit_conversation.html 
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatuikit_conversation.html
@@ -985,7 +985,7 @@ projects:
                 link: /uikit/chatuikit/web/chatfeature_message.html#消息引用
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_message.html#消息引用
+                link: /uikit/chatuikit/harmonyos/chatfeature_message.html#消息引用    
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatfeature_message.html#消息引用
@@ -1006,7 +1006,7 @@ projects:
                 link: /uikit/chatuikit/web/chatuikit_contactlist.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatuikit_contactlist.html
+                link: /uikit/chatuikit/harmonyos/chatuikit_contactlist.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatuikit_contactlist.html
@@ -1069,10 +1069,10 @@ projects:
                 link: /uikit/chatroomuikit/web/roomfeature_common.html#发送弹幕
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomfeature_common.html#发送弹幕
+                link: /uikit/chatroomuikit/flutter/roomfeature_common.html#发送弹幕   
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_common.html#发送弹幕
+                link: /uikit/chatroomuikit/react-native/roomfeature_common.html#发送弹幕  
           - text: 禁言
             desc: 聊天室所有者可以在聊天室中对某个特定的成员禁言，通常是对违反聊天室规则、发表不当言论或不断干扰聊天室秩序的成员所采取的一种惩罚。
             sdks:
@@ -1126,7 +1126,7 @@ projects:
                 link: /uikit/chatroomuikit/flutter/roomfeature_common.html#未读消息数
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_common.html#未读消息数
+                link: /uikit/chatroomuikit/react-native/roomfeature_common.html#未读消息数               
           - text: 成员管理
             desc: 聊天室成员列表显示了该聊天室中的当前在线用户。
             sdks:
@@ -1144,5 +1144,5 @@ projects:
                 link: /uikit/chatroomuikit/flutter/roomfeature_member.html#查看成员列表
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_member.html#查看成员列表
+                link: /uikit/chatroomuikit/react-native/roomfeature_member.html#查看成员列表        
 ---

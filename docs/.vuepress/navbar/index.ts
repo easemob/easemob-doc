@@ -1,187 +1,178 @@
-import { navbar } from "vuepress-theme-hope";
+import { navbar } from 'vuepress-theme-hope'
 
 export const zhNavbar = navbar([
   {
-    text: "V5.0.0",
-    children: [
-      {
-        text: "V4.0.0",
-        link: "https://doc.easemob.com/product/introduction.html",
-      },
-      {
-        text: "V3.0.0",
-        link: "https://docs-im.easemob.com/ccim/intro",
-      },
-      {
-        text: "V2.0.0",
-        link: "https://docs-im.easemob.com/start/start",
-      },
-    ],
+    text: 'V5.0.0',
+      children: [
+        { text: 'V4.0.0', link: 'https://doc.easemob.com/product/introduction.html'},
+        { text: 'V3.0.0', link: 'https://docs-im.easemob.com/ccim/intro'},
+        { text: 'V2.0.0', link: 'https://docs-im.easemob.com/start/start'}
+      ]
   },
-  { text: "产品介绍", link: "/product/introduction.html" },
+  { text: '产品介绍', link: '/product/introduction.html' },
   {
-    text: "UIKit",
+    text: 'UIKit',
     children: [
       {
-        text: "单群聊 UIKit",
+        text: '单群聊 UIKit',
         children: [
           {
-            text: "Android",
-            icon: "/icon-Android.svg",
-            link: "/uikit/chatuikit/android/chatuikit_overview.html",
+            text: 'Android',
+            icon: '/icon-Android.svg',
+            link: '/uikit/chatuikit/android/chatuikit_overview.html'
           },
           {
-            text: "iOS",
-            icon: "/icon-iOS.svg",
-            link: "/uikit/chatuikit/ios/chatuikit_overview.html",
+            text: 'iOS',
+            icon: '/icon-iOS.svg',
+            link: '/uikit/chatuikit/ios/chatuikit_overview.html'
           },
           {
-            text: "Web",
-            icon: "/icon-web.svg",
-            link: "/uikit/chatuikit/web/chatuikit_overview.html",
+            text: 'Web',
+            icon: '/icon-web.svg',
+            link: '/uikit/chatuikit/web/chatuikit_overview.html'
           },
           {
-            text: "HarmonyOS",
-            icon: "/icon-harmonyos.svg",
-            link: "/uikit/chatuikit/harmonyos/chatuikit_overview.html",
+            text: 'HarmonyOS',
+            icon: '/icon-harmonyos.svg',
+            link: '/uikit/chatuikit/harmonyos/chatuikit_overview.html'
           },
           {
-            text: "Uniapp",
-            icon: "/icon-uni-app.svg",
-            link: "/uikit/chatuikit/uniapp/chatuikit_overview.html",
+            text: 'Uniapp',
+            icon: '/icon-uni-app.svg',
+            link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
           },
           {
-            text: "React Native",
-            icon: "/icon-ReactNative.svg",
-            link: "/uikit/chatuikit/react-native/chatuikit_overview.html",
+            text: 'React Native',
+            icon: '/icon-ReactNative.svg',
+            link: '/uikit/chatuikit/react-native/chatuikit_overview.html'
           },
           {
-            text: "Flutter",
-            icon: "/icon-flutter.svg",
-            link: "/uikit/chatuikit/flutter/chatuikit_overview.html",
-          },
-        ],
+            text: 'Flutter',
+            icon: '/icon-flutter.svg',
+            link: '/uikit/chatuikit/flutter/chatuikit_overview.html'
+          }
+        ]
       },
       {
-        text: "聊天室 UIKit",
+        text: '聊天室 UIKit',
         children: [
           {
-            text: "Android",
-            icon: "/icon-Android.svg",
-            link: "/uikit/chatroomuikit/android/roomuikit_overview.html",
+            text: 'Android',
+            icon: '/icon-Android.svg',
+            link: '/uikit/chatroomuikit/android/roomuikit_overview.html'
           },
           {
-            text: "iOS",
-            icon: "/icon-iOS.svg",
-            link: "/uikit/chatroomuikit/ios/roomuikit_overview.html",
+            text: 'iOS',
+            icon: '/icon-iOS.svg',
+            link: '/uikit/chatroomuikit/ios/roomuikit_overview.html'
           },
           {
-            text: "Web",
-            icon: "/icon-web.svg",
-            link: "/uikit/chatroomuikit/web/roomuikit_overview.html",
+            text: 'Web',
+            icon: '/icon-web.svg',
+            link: '/uikit/chatroomuikit/web/roomuikit_overview.html'
           },
           {
-            text: "React Native",
-            icon: "/icon-ReactNative.svg",
-            link: "/uikit/chatroomuikit/react-native/roomuikit_overview.html",
+            text: 'React Native',
+            icon: '/icon-ReactNative.svg',
+            link: '/uikit/chatroomuikit/react-native/roomuikit_overview.html'
           },
           {
-            text: "Flutter",
-            icon: "/icon-flutter.svg",
-            link: "/uikit/chatroomuikit/flutter/roomuikit_overview.html",
-          },
-        ],
-      },
-    ],
+            text: 'Flutter',
+            icon: '/icon-flutter.svg',
+            link: '/uikit/chatroomuikit/flutter/roomuikit_overview.html'
+          }
+        ]
+      }
+    ]
   },
   {
-    text: "CallKit",
+    text: 'CallKit',
     children: [
       {
-        text: "Android",
-        icon: "/icon-Android.svg",
-        link: "/callkit/android/product_overview.html",
+        text: 'Android',
+        icon: '/icon-Android.svg',
+        link: '/callkit/android/product_overview.html'
       },
       {
-        text: "iOS",
-        icon: "/icon-iOS.svg",
-        link: "/callkit/ios/product_overview.html",
+        text: 'iOS',
+        icon: '/icon-iOS.svg',
+        link: '/callkit/ios/product_overview.html'
       },
       {
-        text: "Web",
-        icon: "/icon-web.svg",
-        link: "/callkit/web/product_overview.html",
+        text: 'Web',
+        icon: '/icon-web.svg',
+        link: '/callkit/web/product_overview.html'
       },
-    ],
+    ]
   },
   {
-    text: "SDK",
+    text: 'SDK',
     children: [
       {
-        text: "平台",
+        text: '平台',
         children: [
           {
-            text: "Android",
-            icon: "/icon-Android.svg",
-            link: "/document/android/quickstart.html",
+            text: 'Android',
+            icon: '/icon-Android.svg',
+            link: '/document/android/quickstart.html'
           },
           {
-            text: "iOS",
-            icon: "/icon-iOS.svg",
-            link: "/document/ios/quickstart.html",
+            text: 'iOS',
+            icon: '/icon-iOS.svg',
+            link: '/document/ios/quickstart.html'
           },
           {
-            text: "Web",
-            icon: "/icon-web.svg",
-            link: "/document/web/quickstart.html",
+            text: 'Web',
+            icon: '/icon-web.svg',
+            link: '/document/web/quickstart.html'
           },
           {
-            text: "HarmonyOS",
-            icon: "/icon-harmonyos.svg",
-            link: "/document/harmonyos/quickstart.html",
+            text: 'HarmonyOS',
+            icon: '/icon-harmonyos.svg',
+            link: '/document/harmonyos/quickstart.html'
           },
           {
-            text: "Windows",
-            icon: "/icon-windows.svg",
-            link: "/document/windows/quickstart.html",
+            text: 'Windows',
+            icon: '/icon-windows.svg',
+            link: '/document/windows/quickstart.html'
           },
-        ],
+        ]
       },
       {
-        text: "框架",
+        text: '框架',
         children: [
           {
-            text: "React Native",
-            icon: "/icon-ReactNative.svg",
-            link: "/document/react-native/quickstart.html",
+            text: 'React Native',
+            icon: '/icon-ReactNative.svg',
+            link: '/document/react-native/quickstart.html'
           },
           {
-            text: "Flutter",
-            icon: "/icon-flutter.svg",
-            link: "/document/flutter/quickstart.html",
+            text: 'Flutter',
+            icon: '/icon-flutter.svg',
+            link: '/document/flutter/quickstart.html'
           },
           {
-            text: "Unity",
-            icon: "/icon-unity.svg",
-            link: "/document/unity/quickstart.html",
+            text: 'Unity',
+            icon: '/icon-unity.svg',
+            link: '/document/unity/quickstart.html'
           },
           {
-            text: "小程序",
-            icon: "/icon-mini-program.svg",
-            link: "/document/applet/overview.html",
+            text: '小程序',
+            icon: '/icon-mini-program.svg',
+            link: '/document/applet/overview.html'
           },
           {
-            text: "uni-app",
-            icon: "/icon-uni-app.svg",
-            link: "/document/applet/uniapp.html",
+            text: 'uni-app',
+            icon: '/icon-uni-app.svg',
+            link: '/document/applet/uniapp.html'
           },
-        ],
+        ]
       },
-    ],
+    ]
   },
-  { text: "服务端 API", link: "/document/server-side/overview.html" },
+  { text: '服务端 API', link: '/document/server-side/overview.html'},
 
-  /* {
+ /* {
     text: 'API 参考',
     children: [
       {
@@ -258,7 +249,7 @@ export const zhNavbar = navbar([
     ]
   },
   */
-  /*{
+ /*{
     text: '内容审核',
     link: '/product/moderation_overview.html'
   },
@@ -268,19 +259,13 @@ export const zhNavbar = navbar([
   },
   */
   {
-    text: "增值服务",
-    children: [
-      {
-        text: "内容审核",
-        link: "/value-added/moderation/moderation_overview.html",
-      },
-      { text: "实时音视频", link: "/callkit/android/product_activation.html" },
-      {
-        text: "消息翻译",
-        link: "/value-added/translation/message_translation_android.html",
-      },
-      { text: "即时推送", link: "/value-added/push/push_overview.html" },
-    ],
+    text: '增值服务',
+      children: [
+        { text: '内容审核', link: '/value-added/moderation/moderation_overview.html'},
+        { text: '实时音视频', link: '/callkit/android/product_activation.html'},
+        { text: '消息翻译', link: '/value-added/translation/message_translation_android.html'},
+        { text: '即时推送', link: '/value-added/push/push_overview.html'}
+      ]
   },
   // {
   //   text: "私有部署",
@@ -295,6 +280,6 @@ export const zhNavbar = navbar([
   //    },
   //  ],
   // },
-  // { text: "历史版本", link: "https://docs-im.easemob.com/ccim/intro" },
+   { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
   // { text: '有奖调研', link: 'https://doc.easemob.com/form/wjx.html' }
-]);
+])

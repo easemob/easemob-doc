@@ -49,13 +49,6 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
       container: true,
       imgSize: true,
       tabs: true,
-      code: {
-        lineNumbers: false, // 禁用行号（全局生效）没有作用，继续用样式实现
-      },
-    },
-    prismjs: {
-      light: "vsc-dark-plus", // 使用 VS Code Dark+ 主题(暗色背景,适合技术文档)
-      dark: "vsc-dark-plus", // 暗色模式下使用相同主题
     },
   },
 });
