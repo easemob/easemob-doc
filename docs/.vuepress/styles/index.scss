@@ -18,6 +18,22 @@ $theme-color: #303233;
 
     .breadcrumb {
       padding: 20px;
+
+      a {
+        span {
+          color: var(--text-color-light);
+
+          &:hover{
+            color: var(--theme-color);
+          }
+        }
+
+        &.router-link-active {
+          span {
+            color: var(--text-color);
+          }
+        }
+      }
     }
 
     .page-title,
