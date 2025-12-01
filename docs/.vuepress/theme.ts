@@ -26,7 +26,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   },
   // sidebar
   sidebar: zhSidebar,
-  footer: '环信 IM 文档 Version: 1.0.0 ©️环信',
+  footer: '<div class="footer-left">环信 IM 文档 V 1.0.0</div><div class="footer-right">©️环信 2026</div>',
   displayFooter: true,
   headerDepth: 2,
   extra_nav: [
