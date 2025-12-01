@@ -2,6 +2,12 @@
 
 <Toc />
 
+## 版本 1.12 2025-11-19
+
+依赖的原生 SDK 升级：
+- iOS 升级至 4.16.2
+- Android 升级至 4.16.1
+
 ## 版本 1.11.5 2025-10-09
 
 适配 Android 15 的 16 KB 页面大小。
@@ -24,6 +30,8 @@
 
 ## 版本 1.11.0 2025-4-15
 
+#### 新增特性
+
 - 依赖的原生 SDK 升级到版本（`iOS` 4.15.1 和 `Android` 4.15.2）。
 - 更新修改消息：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以修改消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持修改扩展信息。
 - 图片消息新增对 `gif` 格式图片的支持。详见 `ChatImageMessageBody` 类型。
@@ -33,12 +41,12 @@
 - 支持加载本地会话消息时，只加载指定群成员发送的消息。详见 `getMsgsWithMsgType` 接口。
 - 新增群组接口，`fetchMemberInfoListFromServer`, 获取群成员列表时包括成员角色和入群时间。
 - 新增群组接口，`updateGroupAvatar`，更新群组头像。
-- 更新登录 token 过期提醒机制，由原来有效期时间的 50% 的时候提示，修改为 80% 的时候提示。
-- 修改撤销消息，支持群组管理员、创建者、聊天室创建者撤回用其他用户消息。
-- 修改群组成员通知事件，由原来每个成员进入退出都需要通知，修改为一次性通知。详见 `ChatGroupEventListener` 类型 `onMembersJoined` 和 `onMembersExited` 方法，原来 `onMemberJoined` 和 `onMemberExited` 作废。
 - 新增搜索消息接口 `getConvsMsgsWithKeyword`, 通过关键字在本地 搜索指定会话列表的消息 ID 列表。
 - 新增搜索消息接口 `getMessagesWithIds`, 消息 ID 列表在本地搜索消息。
 - 更新搜索消息接口 `getConvMsgsWithKeyword`, 作废 `sender` 参数、新增 `senders` 参数。
+- 更新登录 token 过期提醒机制，由原来有效期时间的 50% 的时候提示，修改为 80% 的时候提示。
+- 修改撤销消息，支持群组管理员、创建者、聊天室创建者撤回用其他用户消息。
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。详见 `ChatGroupEventListener` 类型 `onMembersJoined` 和 `onMembersExited` 方法，原来 `onMemberJoined` 和 `onMemberExited` 作废。
 
 ## 版本 1.8.2 2025-3-15
 
