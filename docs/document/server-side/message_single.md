@@ -908,7 +908,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
 | 400      | message_send_error | params to's size can't exceed limit 600    | 请求参数 `to` 数量超出最大限制 600。                | 输入正确的请求参数 `to`（数量限制在 600 以内），即每次最多可向 600 人发送消息。 |
 | 400      | message_send_error | message is too large                                   | 请求体内容中 `body` 和 `ext` 字段的内容过大。 | 限制 `body` 和 `ext` 字段的内容。请求体和扩展字段的总长度不能超过 5 KB。  |
 | 403      | message_send_error | message send reach limit                               | 消息发送频率超出限制(默认 60 秒内只允许发送 6000 条单聊消息)。 | 限制消息发送频率，详见[文档说明](message_single.html)。 |
-| 405       |  |   |（请求方式错误）请按照环信 REST 接口说明，正确的使用接口 GET，POST 等请求方式。|
+| 405       |  |   | 请求方法错误。| 该 REST API 的请求方法为 POST，请勿使用 GET、PUT 或 DELETE 等方法。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 

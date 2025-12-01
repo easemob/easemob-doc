@@ -988,7 +988,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 | 400      | message_send_error | params to's size can't exceed limit 10 | 请求参数 `to` 数量超出最大限制 10 个聊天室 ID。 | 输入正确的请求参数 `to`（数量限制在 10 个聊天室 ID 以内）。 |
 | 400      | message_send_error | message is too large | 请求体内容中 `body` 和 `ext` 字段的内容过大。 | 限制 `body` 和 `ext` 字段的内容，不能超过 5 KB。 |
 | 403      | message_send_error | message send reach limit  | 请求 API 频率超出限制。 | 限制 API 请求频率，详见[文档描述](message_chatroom.html)。|
-| 405       |  |   |（请求方式错误）请按照环信 REST 接口说明，正确的使用接口 GET，POST 等请求方式。|
+| 405       |  |   | 请求方法错误。| 该 REST API 的请求方法为 POST，请勿使用 GET、PUT 或 DELETE 等方法。 |
 
 2. 对于定向消息来说，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
