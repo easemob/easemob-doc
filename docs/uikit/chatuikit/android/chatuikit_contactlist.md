@@ -6,7 +6,7 @@
   <ImageItem src="/images/uikit/chatuikit/android/custom_contact_list.png" title="通讯录页面" />
 </ImageGallery>
 
-## 通过 ChatUIKitContactsListFragment.Builder 自定义
+## ## 自定义设置概览
 
 `ChatUIKitContactsListFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置。目前提供的设置项如下：
 
@@ -62,7 +62,7 @@ ChatUIKitContactsListFragment.Builder()
 
 本节中的自定义联系人列表 header 基于使用 `ChatUIKitContactsListFragment`。
 
-你可以通过 `ChatUIKitContactsListFragment#Builder中的setHeaderItemList` 设置联系人列表 Header List 数据源。
+你可以通过 `ChatUIKitContactsListFragment#Builder` 中的 `setHeaderItemList` 设置联系人列表 Header List 数据源。
 
 下面的示例代码展示如何设置数据项：
 
