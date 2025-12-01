@@ -13,11 +13,7 @@ $theme-color: #303233;
   font-size: var(--text-size);
 
   .page {
-    width: calc(100% - 288px);
-    padding-inline-start: 288px;
-
     .breadcrumb {
-      padding: 20px;
 
       a {
         span {
@@ -38,10 +34,6 @@ $theme-color: #303233;
 
     .page-title,
     .theme-hope-content {
-      width: calc(100% - 48px);
-      padding: 24px;
-      margin: 0;
-
       .hint-container {
         font: 500 13px PingFang SC, sans-serif;
         border-inline-start: unset;
@@ -159,9 +151,6 @@ $theme-color: #303233;
     }
 
     #toc {
-      left: unset;
-      right: 0;
-      width: 200px;
       color: #909599;
       font: 500 12px PingFang SC, sans-serif;
 
@@ -170,34 +159,23 @@ $theme-color: #303233;
         font: 500 13px PingFang SC, sans-serif;
       }
 
-      .toc-link {
-        line-height: 20px;
-        &:hover {
-          color: var(--theme-color);
-        }
-        &.level3 {
-          font-weight: 400;
-        }
-      }
-    }
-  }
-}
+      .toc-item {
+        display: flex;
+        align-items: center;
+        min-height: 1.7rem;
+        height: fit-content;
+      
+        .toc-link {
+          white-space: normal;
+          text-overflow:unset;
 
-@media (max-width: 719px) {
-  .theme-container {
-    .page {
-      padding-inline-start: 0;
-      width: 100%;
-    }
-  }
-}
-
-@media (min-width: 1440px) {
-  .theme-container {
-    .page {
-      .page-title,
-      .theme-hope-content {
-        width: calc(100% - 248px);
+          &:hover {
+            color: var(--theme-color);
+          }
+          &.level3 {
+            font-weight: 400;
+          }
+        }
       }
     }
   }
