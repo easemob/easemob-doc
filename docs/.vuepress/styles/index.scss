@@ -125,12 +125,6 @@ $theme-color: #303233;
         }
       }
 
-      code {
-        color: var(--text-color);
-        font: 400 13px PingFang SC, sans-serif;
-        border-radius: 4px;
-      }
-
       h2,
       h3 {
         width: fit-content;
@@ -210,16 +204,6 @@ $theme-color: #303233;
 
 div[class*="language-"] {
   padding-top: 2px;
-
-  pre {
-    code {
-      color: #fff !important;
-
-      .token.punctuation {
-        color: #fff;
-      }
-    }
-  }
 }
 
 div[class*="language-"]::before {
