@@ -24,6 +24,8 @@
 3. 选择 **增值服务 > 消息推送 > 离线推送**。
 4. 点击 **免费开通**。
 
+开通后，你可以 [设置推送模板](#设置推送模板)。
+
 ![image](/images/android/push/push_advanced_feature_enable.png)
 
 ## 设置推送模板
