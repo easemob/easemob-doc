@@ -58,9 +58,45 @@
 关于获取和发送推送 token（device token），详见[获取或更新推送 token](push_get_device_token.html)和[发送推送 token 到服务器端](push_send_token_to_server.html)。 
 :::
 
-## 推送模板
+## 推送高级功能
 
-推送模板是离线推送的高级功能。使用前，你需要在 [环信控制台](https://console.easemob.com/user/login)的 **功能配置 > 基础功能 > 消息** 页面激活。**激活后，如需关闭推送模板功能，必须联系商务，因为该操作会删除推送模板相关的所有配置。**
+### 开通功能
+
+[推送通知方式](push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](push_notification_mode_dnd.html#免打扰模式) 和 [推送模板](push_template.html) 是推送的高级功能。使用前，你需要在 [环信控制台](https://console.easemob.com/user/login) 免费开通。**激活后，如需关闭推高级功能，必须联系商务，因为该操作会删除高级功能相关的所有配置。**
+
+1. 登录 [环信控制台](https://console.easemob.com/user/login)。
+2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
+3. 选择 **增值服务 > 消息推送 > 离线推送**。
+4. 点击 **免费开通**。
+
+![image](/images/android/push/push_advanced_feature_enable.png)
+
+### 推送通知方式
+
+推送通知方式包含以下三种类型：
+
+- 接收所有离线消息的推送通知。
+- 仅接收提及某些用户的消息的推送通知。
+- 不接收离线消息的推送通知。
+
+你可以设置 App 或单聊/群聊会话级别的推送通知方式。会话级别的设置优先于 app 级别设置。
+
+更多详情，请参见 [推送通知方式介绍](push_notification_mode_dnd.html#推送通知方式)。
+
+### 免打扰模式
+
+完成 SDK 初始化和成功登录 app 后，你可以对 app 以及各类型的会话设置免打扰模式，即关闭离线推送。
+
+- 支持设置免打扰时间段（例如，8:0-10:0）和免打扰时长（例如，30 分钟）。
+- 支持设置 app 级别和单聊/群聊的免打扰模式。
+- 开启全天免打扰和关闭免打扰模式。
+- 若在免打扰模式下需要对指定用户推送消息，需设置强制推送。
+
+更多详情，请参见 [免打扰模式介绍](push_notification_mode_dnd.html#免打扰模式)。
+
+### 推送模板
+
+推送模板主要用于服务器提供的默认离线推送配置不满足你的需求时，设置全局范围的推送标题和推送内容。推送模板包括默认推送模板 `default`、`detail` 和自定义推送模板。你可以在 [环信控制台](https://console.easemob.com/user/login) 配置推送模板。
 
 推送模板的配置和使用，详见 [相关文档介绍](push_template.html)。
 
