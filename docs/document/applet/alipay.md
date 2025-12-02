@@ -10,7 +10,7 @@
 
 ## 步骤 2 搭建支付宝小程序开发环境
 
-首先需要下载并安装 [开发者工具](https://opendocs.alipay.com/mini/ide/download)，然后按照支付宝小程序的 [接入流程](https://opendocs.alipay.com/mini/006kyi) 一步步创建一个小程序。
+首先需要下载并安装 [开发者工具](https://opendocs.alipay.com/mini/ide/download)，然后按照支付宝小程序的 [接入流程](https://opendocs.alipay.com/mini/006kyi) 创建一个小程序。
 
 ## 步骤 3 配置服务器域名
 

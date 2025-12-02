@@ -10,7 +10,7 @@
 
 ## 步骤 2 搭建抖音小程序开发环境
 
-首先需要下载并安装 [开发者工具](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/developer-instrument/developer-instrument-update-and-download/)，然后按照抖音小程序的 [接入流程](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/guide/start/kick-off) 一步步创建一个小程序。
+首先需要下载并安装 [开发者工具](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/developer-instrument/developer-instrument-update-and-download/)，然后按照抖音小程序的 [接入流程](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/guide/start/kick-off) 创建一个小程序。
 
 ## 步骤 3 配置服务器域名
 
