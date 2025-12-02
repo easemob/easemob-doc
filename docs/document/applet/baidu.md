@@ -1,6 +1,6 @@
 # 百度小程序集成介绍
 
-百度小程序 SDK 集成步骤如下：
+本文介绍如何将环信即时通讯 IM SDK 快速集成到百度小程序中。集成步骤如下：
 
 ## 步骤 1 注册环信账号
 
@@ -61,7 +61,7 @@
 
 ```javascript
 //使用示例
-import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本sdk
+import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本 SDK
 ```
 
 ## 步骤 6 实例化 SDK

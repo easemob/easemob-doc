@@ -173,6 +173,7 @@ const documentSidebar = [
           { text: '百度小程序', link: 'baidu.html' },
           { text: '抖音小程序', link: 'bytedance.html' },
           { text: '支付宝小程序', link: 'alipay.html' },
+          { text: '淘宝小程序', link: 'taobao.html' },
           { text: 'Uniapp 全平台', link: 'uniapp.html' },
         ],
         only: ['applet']
