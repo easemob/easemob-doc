@@ -10,7 +10,7 @@
 
 ## 步骤 2 搭建 QQ 小程序开发环境
 
-首先需要下载并安装 [开发者工具](https://q.qq.com/wiki/tools/devtool/)，然后按照 QQ 小程序的 [接入流程](https://q.qq.com/wiki/#_2-注册开发者平台) 一步步创建一个小程序
+首先需要下载并安装 [开发者工具](https://q.qq.com/wiki/tools/devtool/)，然后按照 QQ 小程序的 [接入流程](https://q.qq.com/wiki/#_2-注册开发者平台) 创建一个小程序
 
 ## 步骤 3 配置服务器域名
 

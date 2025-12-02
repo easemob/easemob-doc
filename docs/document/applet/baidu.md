@@ -8,7 +8,7 @@
 
 ## 步骤 2 搭建百度小程序开发环境
 
-首先需要下载并安装 [开发者工具](https://smartprogram.baidu.com/docs/introduction/tool/)，然后按照百度小程序的 [接入流程](https://smartprogram.baidu.com/docs/develop/tutorial/startdevelop/) 一步步创建一个小程序。
+首先需要下载并安装 [开发者工具](https://smartprogram.baidu.com/docs/introduction/tool/)，然后按照百度小程序的 [接入流程](https://smartprogram.baidu.com/docs/develop/tutorial/startdevelop/) 创建一个小程序。
 
 ## 步骤 3 配置服务器域名
 
