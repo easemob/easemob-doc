@@ -6,7 +6,7 @@
 
 ## 支持的请求方法
 
-淘宝小程序仅支持 GET 与 POST 两种请求方法。其中，进行 POST 请求时，仅支持 `application/json` 格式；若使用其他格式，云端将默认为 `application/octet-stream`，从而导致调用失败。
+淘宝小程序仅支持 GET 与 POST 两种请求方法，详见 [阿里巴巴的云应用调用文档](https://miniapp.open.taobao.com/docV3.htm?spm=a219a.7386797.0.0.629c669aB4NWuX&source=search&docId=118538&docType=1#ss2)。其中，进行 POST 请求时，仅支持 `application/json` 格式；若使用其他格式，云端将默认为 `application/octet-stream`，从而导致调用失败。
 
 目前，淘宝小程序不支持 DELETE 和 PUT 方法。若使用 DELETE 或 PUT 请求，环信服务器将返回错误码 400。如需使用这两种请求方式，建议通过服务端代理的方式实现，具体替代接口可参见 [环信 REST API 文档](/document/server-side/overview.html)。
 
