@@ -9,8 +9,11 @@ import { TRANSLATION_SIDEBAR } from "./translation";
 
 export const zhSidebar = sidebar({
   "/product/": [
+    { type: "heading", text: "副标题" },
     { text: "产品动态", link: "product_dynamics.html" },
     { text: "产品简介", link: "introduction.html" },
+    { type: "separator" },
+    { type: "heading", text: "副标题" },
     { text: "购买指南", 
       collapsible: true,
       children: [
@@ -400,6 +403,8 @@ export const zhSidebar = sidebar({
     },
     { text: "术语表", link: "glossary.html" },
     { text: "帮助中心", link: "help.html" },
+    { type: "separator" },
+    { type: "heading", text: "副标题" },
     {
       text: "已废弃内容",
       collapsible: true,

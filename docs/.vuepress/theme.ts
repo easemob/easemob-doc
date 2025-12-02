@@ -10,7 +10,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   hostname: 'https://doc.easemob.com/',
   home: '/',
   iconAssets: 'iconfont',
-  logo: '/logo.png',
+  logo: '/logo_name.png',
   repo: 'easemob/easemob-doc',
   docsBranch: 'doc-v2',
   docsDir: 'docs',
@@ -20,13 +20,13 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   // navbar
   navbar: zhNavbar,
   navbarLayout: {
-    start: ['Brand'],
-    center: ['Links'],
+    start: ['Brand','Links'],
+    center: [],
     end: ['Language', 'Repo', 'Outlook']
   },
   // sidebar
   sidebar: zhSidebar,
-  footer: '环信 IM 文档 Version: 1.0.0 ©️环信',
+  footer: '<div class="footer-left">环信 IM 文档 V 1.0.0</div><div class="footer-right">©️环信 2026</div>',
   displayFooter: true,
   headerDepth: 2,
   extra_nav: [
@@ -48,6 +48,10 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
       container: true,
       imgSize: true,
       tabs: true
-    }
+    },
+    prismjs: {
+      light: "vsc-dark-plus", // 使用 VS Code Dark+ 主题(暗色背景,适合技术文档)
+      dark: "vsc-dark-plus", // 暗色模式下使用相同主题
+    },
   }
 })

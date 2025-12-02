@@ -1,8 +1,17 @@
 // you can change colors here
-$theme-color: #096dd9;
+$theme-color: #009dff;
+$text-color: #303233;
+$text-color-light: #909599;
+$table-text-color: #000;
+$border-color: #d4dade;
+$text-size: 14px;
 $content-width: 885px;
 
 :root {
   --docsearch-modal-width: 860px !important;
   --docsearch-modal-height: 600px !important;
+  --tip-bg-color: #d9f0ff;
+  --tip-border-color: #c6e2ff;
+  --note-border-color: #c0c7cc;
+  --danger-border-color: #f89898;
 }

@@ -1,7 +1,7 @@
 async function embedChatbot() {
   const t = {
     token: "JC4nAgS92AgNJuTk",
-    baseUrl: "https://dify.easemob.com"
+    baseUrl: "https://dify.easemob.com",
   };
   if (t && t.token) {
     var e = !!t.isDev;
@@ -40,8 +40,8 @@ async function embedChatbot() {
     if (!document.getElementById("dify-chatbot-bubble-button")) {
       e = document.createElement("div");
       (e.id = "dify-chatbot-bubble-button"),
-      (e.style.cssText =
-        "position: fixed; bottom: 5rem; right: 1rem; width: 50px; height: 50px; border-radius: 25px; background-color: #155EEF; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px 0px; cursor: pointer; z-index: 2147483647; transition: all 0.2s ease-in-out 0s; left: unset; transform: scale(1); :hover {transform: scale(1.1);}");
+        (e.style.cssText =
+          "position: fixed; bottom: 7rem; right: 1rem; width: 50px; height: 50px; border-radius: 25px; background-color: #155EEF; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px 0px; cursor: pointer; z-index: 2147483647; transition: all 0.2s ease-in-out 0s; left: unset; transform: scale(1); :hover {transform: scale(1.1);}");
       const d = document.createElement("div");
       (d.style.cssText =
         "display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; z-index: 2147483647;"),

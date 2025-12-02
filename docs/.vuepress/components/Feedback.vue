@@ -276,7 +276,7 @@ const closeForm = () => {
   border-radius: 25px;
   position: fixed;
   right: 1rem;
-  bottom: 9rem;
+  bottom: 11rem;
   width: 50px;
   left: unset;
   z-index: 1000;

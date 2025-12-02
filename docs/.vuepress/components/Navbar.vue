@@ -29,7 +29,7 @@ const extraNavList = themeData.value.extra_nav || [];
               ></path>
             </svg>
           </div>
-          <div class="search-input">Search</div>
+          <div class="search-input">搜索关键词</div>
         </div>
       </div>
 
@@ -52,8 +52,8 @@ export default {
       const s = document.getElementById("meta-category")?.innerText;
       const url = s ? "/form/search.html?s=" + s : "/form/search.html";
       window.open(url, "_blank");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -61,14 +61,15 @@ export default {
 .search-box {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: #f8f8f8; /* 背景色 */
-  border-radius: 20px; /* 圆角 */
+  border-radius: 6px; /* 圆角 */
   padding: 0 0.8em; /* 缩小内边距 */
   border: 1px solid rgba(230, 249, 255, 0.15);
   cursor: pointer;
   transition: all 0.3s;
-  height: 36px;
+  width: 260px;
+  height: 32px;
 }
 
 .search-box:hover {
@@ -78,7 +79,6 @@ export default {
 .search-box:hover .search-icon {
   color: var(--theme-color);
 }
-
 
 .search-input-wrapper {
   display: flex;
@@ -119,19 +119,35 @@ export default {
   font-size: 14px; /* 缩小图标大小 */
 }
 
+.extra-link {
+  width: 60px;
+  height: 32px;
+}
+
+.extra-link.is-underline:hover:after {
+  border-bottom: 0;
+}
+
+.extra-link.el-link--primary {
+  border-radius: 6px;
+  border: 1px solid #009dff;
+  background: #ecf8ff;
+}
+
 /* 小屏幕隐藏输入框 */
-@media (max-width: 900px) {
+@media (max-width: 1600px) {
+  .search-box {
+    width: 20px;
+  }
   .search-input {
     display: none;
   }
 }
-
-
 </style>
 
 <style>
 .back-to-top {
-  bottom: 1rem;
+  bottom: 3rem;
   width: 50px;
   height: 50px;
   border-radius: 25px;
