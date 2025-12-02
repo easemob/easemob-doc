@@ -63,20 +63,6 @@
 
 ![img](/images/console/basic_message_thumbnail_edit.png)
 
-## 设置离线推送模板
-
-离线推送模板为离线推送的高级功能，需点击 **免费开通** 开通该功能。功能开通后，你可以点击 **设置** 配置推送模板，详见 [推送模板配置文档](push_template.html)。 
-
-![img](/images/console/basic_message_push_offline.png)
-
-![img](/images/console/basic_message_push_online_set.png)
-
-## 推送证书配置
-
-使用推送服务前，点击 **设置** 配置推送证书。
-
-![img](/images/console/basic_message_push_online.png)
-
 ## 消息表情回复
 
 消息表情可以直观地表达情绪，利用消息表情回复（Reaction）可以提升用户的使用体验。
