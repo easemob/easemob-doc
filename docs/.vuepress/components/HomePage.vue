@@ -109,7 +109,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
 import HeroSection from "./CustomHero.vue";
@@ -152,20 +152,23 @@ const buildAnchorLink = () => {
   return values;
 };
 
-window.addEventListener("click", (e: any) => {
-  if (e.target.className === "header-anchor") {
-    setTimeout(() => {
-      navigator.clipboard.writeText(window.document.location.href);
-    }, 300);
-    ElMessage.warning("已复制链接");
-  } else if (
-    e.target.tagName === "CODE" &&
-    e.target.parentElement.tagName != "PRE"
-  ) {
-    navigator.clipboard.writeText(e.target.innerHTML);
-    ElMessage.warning("已复制");
-  }
-});
+
+onMounted(() => {
+  window.addEventListener("click", (e: any) => {
+    if (e.target.className === "header-anchor") {
+      setTimeout(() => {
+        navigator.clipboard.writeText(window.document.location.href);
+      }, 300);
+      ElMessage.success("已复制链接");
+    } else if (
+      e.target.tagName === "CODE" &&
+      e.target.parentElement.tagName != "PRE"
+    ) {
+      navigator.clipboard.writeText(e.target.innerHTML);
+      ElMessage.success("已复制");
+    }
+  });
+})
 </script>
 
 <style scoped>
