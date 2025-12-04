@@ -24,7 +24,6 @@ const props = defineProps({
 })
 
 const imageEl = ref(null)
-
 // 智能判断坐标类型并转换
 const computedHotspots = computed(() => {
     if (!props.hotspots.length) return []
