@@ -13,9 +13,8 @@
 环信即时通讯 IM HarmonyOS SDK 提供 `ChatManager` 和 `Conversation` 类支持获取服务器和本地的消息，包含如下主要方法：
 
 - `ChatManager#fetchHistoryMessages`：根据 `FetchMessageOption` 类从服务端分页获取指定会话的历史消息；
-- `ChatManager#fetchHistoryMessages`：根据 `searchOptions.from` 字段从服务器获取群组中指定成员（而非全部成员）发送的消息；
 - `Conversation#searchMessagesByKeywords`：从本地获取群组中指定成员（而非全部成员）发送的消息；
-- `Conversation#getAllMessages`：从本地读取指定会话的消息；
+- `loadMoreMessagesFromDB`：从本地数据库加载消息；
 - `ChatManager#getMessage`：根据消息 ID 获取单个本地消息；
 - `Conversation#getMsgCountInRange`：获取本地数据库中单个会话在某个时间段内的全部消息数。
 
@@ -57,25 +56,6 @@ ChatClient.getInstance().chatManager()?.fetchHistoryMessages(conversationId, con
   }
 })
 ```
- 
-### 从服务器获取指定群成员发送的消息
-
-自 1.7.0 版本开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
-
-```typescript
-ChatClient.getInstance().chatManager()?.fetchHistoryMessages({
-  conversationId: this.conversationId,
-  conversationType: this.conversationType,
-  pageSize: 50,
-  searchOptions: {
-    searchDirection: SearchDirection.DOWN,
-    isSave: true,
-    from: [this.groupMember1, this.groupMember2]
-  }
-}).then((result) => {
-  // success logic
-});
-```
 
 ### 从本地获取指定群成员发送的消息
 
@@ -94,18 +74,15 @@ if (conversation) {
 }
 ```
 
-### 从本地读取指定会话的消息
+### 从本地加载消息
 
-你可以调用 `getAllMessages` 方法获取指定会话在内存中的所有消息。如果内存中为空，SDK 再从本地数据库中加载最近一条消息。
-
-你也可以调用 `loadMoreMsgFromDB` 方法从本地数据库中分页加载消息，加载的消息会基于消息中的时间戳放入当前会话的内存中。
+你可以调用 `loadMoreMessagesFromDB` 方法从本地数据库中分页加载消息。
 
 ```typescript
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
-List<EMMessage> messages = conversation.getAllMessages();
-// startMsgId：查询的起始消息 ID。SDK 从该消息 ID 开始按消息时间戳的逆序加载。如果传入消息的 ID 为空，SDK 从最新消息开始按消息时间戳的逆序获取。
-// pageSize：每页期望加载的消息数。取值范围为 [1,400]。
-List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
+let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
+// startMsgId - 查询的起始消息 ID。该参数设置后，SDK 从指定的消息 ID 开始按消息检索方向加载。默认值为空字符串。
+// pageSize - 每页要加载的消息数。取值范围为 [1,400]。默认值为 20。
+let messages: ChatMessage[] | undefined = await conversation?.loadMoreMessagesFromDB(startMsgId, pageSize);
 ```
 
 ### 根据消息 ID 获取单个本地消息
