@@ -44,13 +44,25 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 1. 添加监听。
 
 ```dart
+
 // 注册监听
+
     EMClient.getInstance.contactManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
       EMContactEventHandler(
-    onFriendRequestAccepted: (userId, reason) {},
+        // 联系人已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 B 收到 `onFriendRequestAccepted` 事件，双方用户收到 `onContactAdded` 事件。
+        onContactAdded: (userId) {},
+        // 联系人被删除。用户 B 将用户 A 从联系人列表上删除，用户 A 收到该事件。
+        onContactDeleted: (userId) {},
+        // 接收到好友请求。用户 B 向用户 A 发送好友请求，用户 A 收到该事件。
+        onContactInvited: (userId, reason) {},
+        // 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。
+        onFriendRequestAccepted: (userId) {},
+        // 对方拒绝了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
+        onFriendRequestDeclined: (userId) {},
       ),
     );
+
 
 // 移除监听
 EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");

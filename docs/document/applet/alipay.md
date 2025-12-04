@@ -2,7 +2,7 @@
 
 <Toc />
 
-支付宝小程序 SDK 集成步骤如下：
+本文介绍如何将环信即时通讯 IM SDK 快速集成到支付宝小程序中。集成步骤如下：
 
 ## 步骤 1 注册环信账号
 
@@ -10,7 +10,7 @@
 
 ## 步骤 2 搭建支付宝小程序开发环境
 
-首先需要下载并安装 [开发者工具](https://opendocs.alipay.com/mini/ide/download)，然后按照支付宝小程序的 [接入流程](https://opendocs.alipay.com/mini/006kyi) 一步步创建一个小程序。
+首先需要下载并安装 [开发者工具](https://opendocs.alipay.com/mini/ide/download)，然后按照支付宝小程序的 [接入流程](https://opendocs.alipay.com/mini/006kyi) 创建一个小程序。
 
 ## 步骤 3 配置服务器域名
 
@@ -61,7 +61,7 @@
 
 ```javascript
 //使用示例
-import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本sdk
+import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本 SDK
 ```
 
 ## 步骤 6 实例化 SDK
@@ -75,8 +75,8 @@ WebIM.conn = new WebIM.connection({
   url: "wss://im-api-alipay.easemob.com/websocket", // socket server (3.0 SDK)
   apiUrl: "https://a1.easemob.com", // rest server
   useOwnUploadFun: false, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
-  isHttpDNS: false, // 在小程序上需设置为false
+  isHttpDNS: false, // 在小程序上需设置为 false
 });
 ```
 
-小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/integration.html)。
+小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/user_relationship.html)。

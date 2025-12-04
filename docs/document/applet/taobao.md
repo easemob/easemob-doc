@@ -1,25 +1,37 @@
-# 百度小程序集成介绍
+# 淘宝小程序集成介绍
 
-本文介绍如何将环信即时通讯 IM SDK 快速集成到百度小程序中。集成步骤如下：
+<Toc />
 
-## 步骤 1 注册环信账号
+本文介绍如何将环信即时通讯 IM SDK 快速集成到淘宝小程序中。
 
-开发者需要在环信控制台 [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)，获取唯一 App Key，SDK 初始化时需要配置 App Key。
+## 支持的请求方法
 
-## 步骤 2 搭建百度小程序开发环境
+淘宝小程序仅支持 GET 与 POST 两种请求方法，详见 [阿里巴巴的云应用调用文档](https://miniapp.open.taobao.com/docV3.htm?spm=a219a.7386797.0.0.629c669aB4NWuX&source=search&docId=118538&docType=1#ss2)。其中，进行 POST 请求时，仅支持 `application/json` 格式；若使用其他格式，云端将默认为 `application/octet-stream`，从而导致调用失败。
 
-首先需要下载并安装 [开发者工具](https://smartprogram.baidu.com/docs/introduction/tool/)，然后按照百度小程序的 [接入流程](https://smartprogram.baidu.com/docs/develop/tutorial/startdevelop/) 创建一个小程序。
+目前，淘宝小程序不支持 DELETE 和 PUT 方法。若使用 DELETE 或 PUT 请求，环信服务器将返回错误码 400。如需使用这两种请求方式，建议通过服务端代理的方式实现，具体替代接口可参见 [环信 REST API 文档](/document/server-side/overview.html)。
 
-## 步骤 3 配置服务器域名
+## 集成步骤
+
+### 步骤 1 注册环信账号
+
+你需要在环信控制台 [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)，获取唯一 App Key 用于在 SDK 初始化时需要配置。
+
+### 步骤 2 搭建淘宝小程序开发环境
+
+1. 下载并安装 [开发者工具](https://developer.taobao.com/?spm=a219a.15212435.0.0.2943669aNQIHWx)。
+
+2. 按照淘宝小程序的 [接入流程](https://miniapp.open.taobao.com/docV3.htm?docId=119114&docType=1) 创建一个小程序。
+
+### 步骤 3 配置服务器域名
 
 小程序在发布前，需要配置合法域名。
 
-登录 [百度智能小程序官网](https://smartprogram.baidu.com/)，在开发设置页面配置以下服务器域名。
+登录 [淘宝开放平台](https://miniapp.open.taobao.com/docV3.htm?spm=a219a.7386797.0.0.2eee669anK1c76&source=search&docId=120305&docType=1), 申请配置以下服务器域名。
 
 | 域名类型 | 具体域名   | 
 | :------ | :----- |
 | request 合法域名<br/>uploadFile 合法域名<br/>downloadFile 合法域名  | <br/> - https://a1.easemob.com（国内 1 区）<br/> - https://a1-v2.easemob.com（国内 1 区）<br/> - https://a1-sgp.easemob.com （新加披1 区）<br/> - https://a61.easemob.com （新加坡 2 区）<br/> - https://a41.easemob.com （美东1 区）<br/> - https://a71.easemob.com （德国 2 区）<br/> - https://a1-chatfile.easemob.com （downloadFile）   | 
-| WebSocket 合法域名 | <br/> - wss://im-api-wechat.easemob.com（国内 1 区）<br/> - wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）<br/> - wss://im-api-wechat-sgp.easemob.com （新加披1 区）<br/> - wss://im-api-wechat-61.easemob.com（新加披2 区）<br/> - wss://im-api-wechat-41.easemob.com （美东1 区）<br/> - wss://im-api-wechat-71.easemob.com （德国 2 区） | 
+| WebSocket 合法域名 | <br/> - wss://im-api-wechat.easemob.com（国内 1 区）<br/> - wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）<br/> - wss://im-api-wechat-sgp.easemob.com （新加披1 区）<br/> - wss://im-api-wechat-61.easemob.com（新加披2 区）<br/> - wss://im-api-wechat-41.easemob.com （美东1 区）<br/> - wss://im-api-wechat-71.easemob.com （德国 2 区） |  
 
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 
@@ -37,34 +49,28 @@
 
 ![img](/images/applet/service_overview.png)
 
-:::tip
-百度小程序注册主体不能为个人，必须为企业、媒体、政府等。
-:::
-
-## 步骤 4 下载 SDK
+### 步骤 4 下载 SDK
 
 可以通过以下两种方式获取 SDK：
 
 - 通过官网 [下载 SDK](https://www.easemob.com/download/im#applets)。
 - 从环信的 [GitHub](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 或 [Gitee 仓库](https://gitee.com/easemob-code/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件。
 
-## 步骤 5 引入 SDK
+### 步骤 5 引入 SDK
 
 - 开始一个全新的项目
   1. 将下载的 SDK（src/sdk/）导入到自己的项目中。
-  2. 引入 SDK：`import EasemobChat from "../sdk/Easemob-chat-4.x.x.js";`
+  2. 引入 SDK：`import EasemobChat from "../sdk/Easemob-chat.js";`
 - 基于 Demo 二次开发
 
-将下载的代码导入开发者工具即可运行起来。
-
-调用示例如下所示：
+将下载的代码导入开发者工具即可运行起来。调用示例如下：
 
 ```javascript
 //使用示例
 import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本 SDK
 ```
 
-## 步骤 6 实例化 SDK
+### 步骤 6 实例化 SDK
 
 实例化 SDK，并挂载在全局对象下。
 

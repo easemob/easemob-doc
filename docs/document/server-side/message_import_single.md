@@ -2,7 +2,8 @@
 
 ## 功能说明
 
-你可以在数据迁移时导入单聊消息。每次调用该接口只能导入一条消息。
+- 你可以在数据迁移时导入单聊消息。每次调用该接口只能导入一条消息。
+- 导入消息后，服务器不会自动生成对应的单聊会话。例如，若用户 A 与用户 B 之间此前不存在单聊会话（即双方未曾发送过消息），则即使导入了这两个用户之间的单聊消息，服务器也不会为其创建单聊会话。
 
 ## 调用频率上限
 
@@ -34,7 +35,6 @@ curl -X POST "https://XXXX/XXXX/XXXX/messages/users/import"   \
       "key1": "value1"
     },
     "from": "username1",
-    "is_ack_read": true,
     "msg_timestamp": 1656906628428
 }'
 ```
@@ -60,7 +60,6 @@ curl -X POST "https://XXXX/XXXX/XXXX/messages/users/import"   \
         "key1": "value1"
     }, 
     "from": "username1",
-    "is_ack_read": true,
     "msg_timestamp": 1656906628428,
     "need_download": true
 }'
@@ -79,7 +78,6 @@ curl -X POST "https://XXXX/XXXX/XXXX/messages/users/import"   \
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`          | JSON   | 是       | 消息内容。      |
 | `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。例如，请求中的 "key1": "value1"。  |
-| `is_ack_read`   | Bool   | 否       | 是否设置会话已读。<br/> - `true`：是；<br/> - `false`：否。<br/>调用该接口导入消息后会生成对应的会话，若该字段为 `true`，则会话为已读状态，为 `false` 表示会话为未读状态。 |
 | `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。<br/> - 若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。<br/> - 该参数不能传 `0`，也不能小于 1000 毫秒。  |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是。这种情况下，需确保附件地址可直接访问，没有访问权限的限制。<br/> - （默认）`false`：否。  |
 

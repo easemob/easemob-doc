@@ -40,7 +40,7 @@ git clone https://gitee.com/easemob-code/easemob-callkit-iOS.git
 
 在 `PublicDefines.swift` 中填写你的应用的 App Key：
 
-```Swift
+```swift
 let AppKey: String = <#AppKey#>
 ```
 

@@ -75,7 +75,7 @@ pod install
 
 在整个应用生命周期中，初始化一次即可。
 
-```Swift
+```swift
 import UIKit
 import EaseCallUIKit
 @main
