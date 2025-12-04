@@ -2,7 +2,7 @@
 
 <Toc />
 
-抖音小程序 SDK 集成步骤如下：
+本文介绍如何将环信即时通讯 IM SDK 快速集成到抖音小程序中。集成步骤如下：
 
 ## 步骤 1 注册环信账号
 
@@ -10,7 +10,7 @@
 
 ## 步骤 2 搭建抖音小程序开发环境
 
-首先需要下载并安装 [开发者工具](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/developer-instrument/developer-instrument-update-and-download/)，然后按照抖音小程序的 [接入流程](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/guide/start/kick-off) 一步步创建一个小程序。
+首先需要下载并安装 [开发者工具](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/developer-instrument/developer-instrument-update-and-download/)，然后按照抖音小程序的 [接入流程](https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/guide/start/kick-off) 创建一个小程序。
 
 ## 步骤 3 配置服务器域名
 
@@ -57,7 +57,7 @@
 
 ```javascript
 //使用示例
-import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本sdk
+import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本 SDK
 ```
 
 ## 步骤 6 实例调用方式
@@ -75,4 +75,4 @@ WebIM.conn = new WebIM.connection({
 });
 ```
 
-小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/integration.html)。
+小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/user_relationship.html)。

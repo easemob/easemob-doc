@@ -49,7 +49,7 @@ CallKit 的资源均放在 `CallResource.bundle` 文件中。
 - 若开启画中画功能，同时需要开启应用后台摄像头采集权限。详见 [视频通话画中画文档](picture_in_picture.html)。
 - 呼叫超时时间：单位为秒，默认为 30 秒。
 
-```Swift
+```swift
         let config = EaseCallUIKit.CallKitConfig()
         config.enableVOIP = true //开启 VoIP 功能后会自动开启 LiveCommunicationKit，需要在 develop.apple.com 申请证书时勾选。
         config.enablePIPOn1V1VideoScene = true //开启画中画，同时需要开启应用后台摄像头采集权限。

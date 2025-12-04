@@ -95,7 +95,7 @@
   <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/contact/contact_cell_height.png" title="设置联系人列表 Cell 的高度" />
 </ImageGallery>
 
-### 设置联系人头像
+### 设置联系人头像样式
 
 你可以通过 `Appearance.avatarRadius = value` 设置联系人头像圆角，分为极小、小、中、大等四个等级。
 

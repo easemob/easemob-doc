@@ -2,7 +2,7 @@
 
 <Toc />
 
-QQ 小程序 SDK 集成步骤如下：
+本文介绍如何将环信即时通讯 IM SDK 快速集成到 QQ 小程序中。集成步骤如下：
 
 ## 步骤 1 注册环信账号
 
@@ -10,7 +10,7 @@ QQ 小程序 SDK 集成步骤如下：
 
 ## 步骤 2 搭建 QQ 小程序开发环境
 
-首先需要下载并安装 [开发者工具](https://q.qq.com/wiki/tools/devtool/)，然后按照 QQ 小程序的 [接入流程](https://q.qq.com/wiki/#_2-注册开发者平台) 一步步创建一个小程序
+首先需要下载并安装 [开发者工具](https://q.qq.com/wiki/tools/devtool/)，然后按照 QQ 小程序的 [接入流程](https://q.qq.com/wiki/#_2-注册开发者平台) 创建一个小程序
 
 ## 步骤 3 配置服务器域名
 
@@ -61,7 +61,7 @@ QQ、微信小程序： 1.7.0 及以上版本，最多可以同时存在 5 个 W
 
 ```javascript
 //使用示例
-import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本sdk
+import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本 SDK
 ```
 
 ## 步骤 6 实例化 SDK
@@ -79,4 +79,4 @@ WebIM.conn = new WebIM.connection({
 });
 ```
 
-小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/integration.html)。
+小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/user_relationship.html)。

@@ -41,12 +41,12 @@ flutter create quick_start
 
 ### 设置 Android
 
-1. 打开文件 `quick_start/android/app/build.gradle` 在文件最后添加：
+1. 打开文件 `quick_start/android/app/build.gradle.kts` 在文件最后添加：
 
 ```gradle
 android {
     defaultConfig {
-        minSdkVersion 21
+        minSdk = 24
     }
 }
 ```
@@ -59,7 +59,9 @@ android {
 <uses-permission android:name="android.permission.WAKE_LOCK"/>
 ```
 
-3. 在 `quick_start/android/app/proguard-rules.pro` 中设置免混淆规则：
+3. 在 `quick_start/android/app/proguard-rules.pro` 中设置免混淆规则。
+
+如果 `proguard-rules.pro` 文件不存在，需自行创建。
 
 ```dart
 -keep class com.hyphenate.** {*;}

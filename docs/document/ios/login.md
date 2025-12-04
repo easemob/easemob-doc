@@ -4,7 +4,9 @@
 
 ## 用户注册
 
-1. 可通过以下两种方式调用接口创建用户：
+你可以调用 REST API 接口创建用户，也可以在 [环信控制台](https://console.easemob.com/user/login) 创建用户。
+
+1. 调用 REST 接口创建用户：
 
 - 授权注册：通过环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。要使用授权注册，你需要在[环信控制台](https://console.easemob.com/user/login)的**功能配置 > 基础功能** > **用户** 页面，将 **用户注册模式** 设置为 **授权注册**。相关的 REST API 介绍，详见[授权注册单个用户](/document/server-side/account_register_authorized_single.html)和[批量授权注册用户](/document/server-side/account_register_authorized_batch.html)的接口介绍。
 

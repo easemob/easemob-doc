@@ -1,6 +1,6 @@
 # 消息
 
-创建应用后，你可以在 [环信控制台](https://console.easemob.com/user/login) 开通消息相关配置，包括消息云存储时长、已读回执、消息撤回、消息推送等配置。
+创建应用后，你可以在 [环信控制台](https://console.easemob.com/user/login) 开通消息相关配置，包括消息云存储时长、已读回执和消息撤回等配置。
 
 你可以按以下步骤打开消息配置页面：
 
@@ -62,20 +62,6 @@
 ![img](/images/console/basic_message_thumbnail.png)
 
 ![img](/images/console/basic_message_thumbnail_edit.png)
-
-## 设置离线推送模板
-
-离线推送模板为离线推送的高级功能，需点击 **免费开通** 开通该功能。功能开通后，你可以点击 **设置** 配置推送模板，详见 [推送模板配置文档](push_template.html)。 
-
-![img](/images/console/basic_message_push_offline.png)
-
-![img](/images/console/basic_message_push_online_set.png)
-
-## 推送证书配置
-
-使用推送服务前，点击 **设置** 配置推送证书。
-
-![img](/images/console/basic_message_push_online.png)
 
 ## 消息表情回复
 

@@ -1,8 +1,8 @@
-# 微信小程序集成
+# 微信小程序集成介绍
 
 <Toc />
 
-微信小程序 SDK 集成步骤如下：
+本文介绍如何将环信即时通讯 IM SDK 快速集成到微信小程序中。集成步骤如下：
 
 ## 步骤 1 注册环信账号
 
@@ -10,13 +10,13 @@
 
 ## 步骤 2 搭建微信小程序开发环境
 
-首先需要下载并安装 [开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，然后按照微信小程序的 [接入流程](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/getstart.html#%E7%94%B3%E8%AF%B7%E5%B8%90%E5%8F%B7)一步步创建一个小程序。
+首先需要下载并安装 [开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)，然后按照微信小程序的 [接入流程](https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/getstart.html#%E7%94%B3%E8%AF%B7%E5%B8%90%E5%8F%B7)创建一个小程序。
 
 ## 步骤 3 配置服务器域名
 
 小程序在发布前，需要配置合法域名。
 
-登录[微信公众平台](https://mp.weixin.qq.com/), 在开发设置页面配置以下服务器域名。
+登录 [微信公众平台](https://mp.weixin.qq.com/), 在开发设置页面配置以下服务器域名。
 
 | 域名类型 | 具体域名   | 
 | :------ | :----- |
@@ -57,7 +57,7 @@
 
 ```javascript
 //使用示例
-import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本sdk
+import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本 SDK
 ```
 
 ## 步骤 6 实例化 SDK
@@ -75,4 +75,4 @@ WebIM.conn = new WebIM.connection({
 });
 ```
 
-小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/integration.html)。
+小程序端的基本功能和 Web 端一致，请参考 [Web 端文档](/document/web/user_relationship.html)。

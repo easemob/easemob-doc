@@ -282,5 +282,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 | 429     | - | This request has reached api limit | 每分钟限调接口 1 次。 | 该限制不支持上调，请降低发送频率。   |
 | 403      | forbidden_op | online user broadcast limit exceeded |  每天接口调用次数超限（默认 50 次）。| 联系商务上调频率限制。 | 
 | 403      | forbidden_op | message broadcast service is unopened | 未开通发送广播消息的功能配置。| 联系商务开通。 |
+| 405       |  |   | 请求方法错误。| 该 REST API 的请求方法为 POST，请勿使用 GET、PUT 或 DELETE 等方法。 |
 
-此外，你可以参考[发送单聊消息](message_single.html#错误码)、[发送群聊消息](message_group.html#错误码)和[发送聊天室消息](message_chatroom.html#错误码)的错误码了解可能的原因。
+此外，你可以参考[发送单聊消息](message_single.html#错误码)、[发送群聊消息](message_group.html#错误码)、[发送聊天室消息](message_chatroom.html#错误码) 或 [响应状态码](error.html#错误状态码概述) 了解可能的原因。
