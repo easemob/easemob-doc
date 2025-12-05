@@ -65,12 +65,13 @@
     display: flex;
     align-items: center;
     margin-bottom: -2rem;
-    padding: 1rem;
+    padding: 1.25rem;
 
     .sidebar-title {
-      margin-right: 16px;
+      margin-right: 1rem;
       color:var(--text-color);
-      font: 500 22px PingFang SC, sans-serif;
+      font-weight: 500;
+      font-size: 1.375rem;
     }
 
     .platform-switch {

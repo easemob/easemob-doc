@@ -11,9 +11,9 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   home: '/',
   iconAssets: 'iconfont',
   logo: '/logo_name.png',
-  repo: 'easemob/easemob-doc',
-  docsBranch: 'doc-v2',
-  docsDir: 'docs',
+  // repo: 'easemob/easemob-doc',
+  // docsBranch: 'doc-v2',
+  // docsDir: 'docs',
   darkmode: 'disable',
   pure: true,
   contributors: false,
@@ -22,24 +22,17 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   navbarLayout: {
     start: ['Brand','Links'],
     center: [],
-    end: ['Language', 'Repo', 'Outlook']
+    end: ['Language', 'Outlook']
   },
   // sidebar
   sidebar: zhSidebar,
-  footer: '<div class="footer-left">环信 IM 文档 V 1.0.0</div><div class="footer-right">©️环信 2026</div>',
+  footer: '<div class="footer-left">环信 IM 文档 V 1.0.0</div><div class="footer-right">&copy; 环信 2025</div>',
   displayFooter: true,
   headerDepth: 2,
   extra_nav: [
-    // { text: '提交工单', link: 'https://console.easemob.com/ticket', type: 'info' },
     {
-      text: '登录',
+      text: '控制台',
       link: 'https://console.easemob.com/user/login',
-      type: 'success'
-    },
-    {
-      text: '注册',
-      link: 'https://console.easemob.com/user/register',
-      type: 'primary'
     }
   ],
   editLink:false,

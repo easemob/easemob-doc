@@ -1,16 +1,9 @@
 // place your custom styles here
 
-/* 字体大小全局样式 */
-@for $i from 1 through 4 {
-  h#{$i} {
-    font-size: calc(30px - (#{$i} - 1) * 4px) !important;
-  }
-}
 $theme-color: #303233;
 
 .theme-container {
   color: var(--text-color);
-  font-size: var(--text-size);
 
   .page {
     .breadcrumb {
@@ -19,7 +12,7 @@ $theme-color: #303233;
         span {
           color: var(--text-color-light);
 
-          &:hover{
+          &:hover {
             color: var(--theme-color);
           }
         }
@@ -35,12 +28,14 @@ $theme-color: #303233;
     .page-title,
     .theme-hope-content {
       .hint-container {
-        font: 500 13px PingFang SC, sans-serif;
+        font-weight: 500;
+        font-family: PingFang SC, sans-serif;
         border-inline-start: unset;
         border-radius: 6px;
 
         .hint-container-title {
-          font: 600 14px PingFang SC, sans-serif;
+          font-weight: 600;
+          font-family: PingFang SC, sans-serif;
 
           &::before {
             width: 20px;
@@ -52,8 +47,10 @@ $theme-color: #303233;
           color: #253858;
           background-color: #d9f0ff;
           border: 1px solid var(--tip-border-color);
+
           .hint-container-title {
             color: #253858;
+
             &::before {
               background-image: url("/icon-tip.svg");
             }
@@ -64,8 +61,10 @@ $theme-color: #303233;
           color: #303233;
           background-color: #e9e9eb;
           border: 1px solid var(--note-border-color);
+
           .hint-container-title {
             color: #303233;
+
             &::before {
               background-image: url("/icon-note.svg");
             }
@@ -76,8 +75,10 @@ $theme-color: #303233;
           color: #4c1a1a;
           background-color: #fde2e2;
           border: 1px solid var(--danger-border-color);
+
           .hint-container-title {
             color: #4c1a1a;
+
             &::before {
               background-image: url("/icon-danger.svg");
             }
@@ -91,37 +92,42 @@ $theme-color: #303233;
         table-layout: auto !important;
         border-collapse: collapse;
         color: var(--table-text-color);
-        font: 400 14px PingFang SC, sans-serif;
+        font-weight: 400;
+        font-family: PingFang SC, sans-serif;
 
         th,
         td {
           min-width: 0;
           width: auto;
-          border-color: var(--border-color);
+          padding: 16px;
+          border: 1px solid var(--border-color);
           background-color: #f0f3f5;
         }
 
         td {
-          padding: 16px;
           background-color: #fafdff;
         }
-
-        tr:first-child {
-          td {
-            background-color: #f0f3f5;
-          }
-        }
-
-        thead + tbody {
-          tr:first-child {
-            td {
-              background-color: #fff;
-            }
-          }
-        }
-
+        
         tr:nth-child(2n) {
           background: #fff;
+        }
+      }
+
+      /* 移动端表格专属优化 */
+      @media (max-width: 768px) {
+        table {
+          table-layout: fixed !important;  // 固定布局，列宽均分
+          width: 100%;
+          max-width: 100%;
+          
+          th,
+          td {
+            font-size: 13px;
+            padding: 10px 8px;
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+          }
         }
       }
 
@@ -146,11 +152,13 @@ $theme-color: #303233;
 
     #toc {
       color: #909599;
-      font: 500 12px PingFang SC, sans-serif;
+      font-weight: 500;
+      font-family: PingFang SC, sans-serif;
 
       .toc-header {
         color: #606466;
-        font: 500 13px PingFang SC, sans-serif;
+        font-weight: 500;
+        font-family: PingFang SC, sans-serif;
       }
 
       .toc-item {
@@ -158,14 +166,15 @@ $theme-color: #303233;
         align-items: center;
         min-height: 1.7rem;
         height: fit-content;
-      
+
         .toc-link {
           white-space: normal;
-          text-overflow:unset;
+          text-overflow: unset;
 
           &:hover {
             color: var(--theme-color);
           }
+
           &.level3 {
             font-weight: 400;
           }
@@ -180,13 +189,16 @@ $theme-color: #303233;
     .brand {
       display: flex;
       align-items: center;
+
       img {
         width: 50px;
         height: 22px;
       }
+
       .site-name {
         color: #009dff;
-        font: 500 22px PingFang SC, sans-serif;
+        font-weight: 500;
+        font-family: PingFang SC, sans-serif;
       }
     }
   }
@@ -210,7 +222,7 @@ div[class*="language-"]::before {
   right: 5em;
 }
 
-div[class*="language-"] > button.copy-code-button:not(.fancy) {
+div[class*="language-"]>button.copy-code-button:not(.fancy) {
   right: 1em;
 }
 
@@ -227,10 +239,6 @@ div[class*="language-"] > button.copy-code-button:not(.fancy) {
   display: none;
 }
 
-.el-anchor .el-anchor__list .el-anchor__item a {
-  font-size: 14px;
-}
-
 .el-anchor .el-anchor__list .el-anchor__link:first-child {
   padding-top: 0;
 }
@@ -239,48 +247,24 @@ div[class*="language-"] > button.copy-code-button:not(.fancy) {
   padding: 7px 0;
 }
 
-.el-anchor > .el-anchor__list > .el-anchor__item {
-  > .el-anchor__link {
-    font-size: 16px;
+.el-anchor>.el-anchor__list>.el-anchor__item {
+  >.el-anchor__link {
     color: #000;
   }
 }
 
+.navbar .nav-item {
+  margin: 0 1.25rem !important;
+}
+
 .nav-links {
-  padding-left: 16px;
-  > .nav-item {
-    padding: 0 20px;
-  }
-  > .nav-item:first-child {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 12px;
-    border-radius: 6px;
-    border: 1px solid var(--border-color, #dce2e6);
-    background: var(--fill-color-blank, #fff);
-    > .dropdown-wrapper {
-      > .dropdown-title {
-        > .title {
-          margin-right: 24px;
-        }
-      }
-    }
-  }
+  margin: 0 1rem !important;
 }
 
-@media (max-width: 1000px) {
-  .navbar .nav-links  {
-      display: none;
-  }
-}
-
-@media (max-width: 1360px) {
-  .hide-in-pad.site-name {
-    display: none;
-  }
-  .nav-links > .nav-item {
-      padding: 0;
-  }
+.sidebar-heading,
+.sidebar-link {
+  margin-inline-start: 1rem;
+  margin-inline-end: 0;
 }
 
 $sidebar-levels: 4; // 菜单的级数
@@ -290,14 +274,12 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
 #sidebar {
   padding-inline-start: 0;
   background-color: #fff;
-  font-size: var(--text-size);
   font-family: PingFang SC, sans-serif;
   border-right: 1px solid #d4dade;
-  scrollbar-color: #ebeef5 #ffffff;
-  > .sidebar-links li {
-    > a {
+
+  >.sidebar-links li {
+    >a {
       font-weight: 500;
-      font-size: var(--text-size);
 
       &.active,
       &:hover {
@@ -305,12 +287,10 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
         background: #fff;
       }
     }
-    > .sidebar-group {
-      > button.sidebar-heading {
+
+    >.sidebar-group {
+      >button.sidebar-heading {
         font-weight: 500;
-        .title {
-          font-size: var(--text-size);
-        }
 
         &.active,
         &:hover {
@@ -318,18 +298,22 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
           background: #fff;
         }
       }
-      > .sidebar-links {
+
+      >.sidebar-links {
         border-left: 1px solid #ccc;
         margin-left: 12px;
-        > li {
-          > .sidebar-link {
+
+        >li {
+          >.sidebar-link {
             font-weight: 400;
             padding-inline-start: 0.7rem;
           }
-          > .sidebar-group {
+
+          >.sidebar-group {
             font-weight: 400;
             padding-inline-start: 0.2rem;
-            > button.sidebar-heading {
+
+            >button.sidebar-heading {
               font-weight: 400;
             }
           }
@@ -340,7 +324,8 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
 
   p.sidebar-heading {
     color: var(--text-color-light);
-    font: 400 12px PingFang SC, sans-serif;
+    font-weight: 400;
+    font-family: PingFang SC, sans-serif;
 
     &:hover {
       background-color: #fff;
@@ -364,26 +349,47 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
 .hint-container.details summary::before {
   display: none;
 }
+
 button {
   /* 强制按钮等表单元素继承父级容器（最终是 body）的字体设置 */
   font-family: inherit;
 }
 
+.navbar .nav-link {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  >.nav-item:first-child {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color, #dce2e6);
+    background: var(--fill-color-blank, #fff);
+
+    >.dropdown-wrapper {
+      >.dropdown-title {
+        >.title {
+          margin-right: 24px;
+        }
+      }
+    }
+  }
+}
+
 .footer-wrapper {
-  padding: 12px 0;
+  padding: 1.25rem 0;
   padding-inline-start: 0 !important;
   border-top: 0;
+
   .footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin: 8px 24px;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    margin: 0;
   }
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #ebeef5;
-}
-*::-webkit-scrollbar-track {
-  background: #fff;
 }

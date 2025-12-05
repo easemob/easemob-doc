@@ -32,7 +32,7 @@ const extraNavList = themeData.value.extra_nav || [];
           <div class="search-input">搜索关键词</div>
         </div>
       </div>
-
+      
       <el-link
         class="extra-link"
         :type="item.type"
@@ -46,6 +46,8 @@ const extraNavList = themeData.value.extra_nav || [];
 </template>
 
 <script>
+import { ElMessage } from "element-plus";
+
 export default {
   methods: {
     handleSearch() {
@@ -53,7 +55,27 @@ export default {
       const url = s ? "/form/search.html?s=" + s : "/form/search.html";
       window.open(url, "_blank");
     },
+    handleCopyClick(e) {
+      if (e.target.className === "header-anchor") {
+        setTimeout(() => {
+          navigator.clipboard.writeText(window.document.location.href);
+        }, 300);
+        ElMessage.success("已复制链接");
+      } else if (
+        e.target.tagName === "CODE" &&
+        e.target.parentElement.tagName != "PRE"
+      ) {
+        navigator.clipboard.writeText(e.target.innerHTML);
+        ElMessage.success("已复制");
+      }
+    }
   },
+  mounted() {
+    window.addEventListener("click", this.handleCopyClick);
+  },
+  unmounted() {
+    window.removeEventListener("click", this.handleCopyClick);
+  }
 };
 </script>
 
@@ -62,18 +84,17 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  background-color: #f8f8f8; /* 背景色 */
-  border-radius: 6px; /* 圆角 */
-  padding: 0 0.8em; /* 缩小内边距 */
-  border: 1px solid rgba(230, 249, 255, 0.15);
+  border-radius: 6px;
+  padding: 0 0.8em;
+  border: 1px solid var(--border-color, rgba(230, 249, 255, 0.15));
   cursor: pointer;
-  transition: all 0.3s;
-  width: 260px;
+  transition: all 0.3s ease;
+  width: 16.25rem;
   height: 32px;
 }
 
 .search-box:hover {
-  border: 1px solid var(--theme-color);
+  border-color: var(--theme-color);
 }
 
 .search-box:hover .search-icon {
@@ -89,15 +110,16 @@ export default {
   user-select: none;
   background-color: transparent;
   font-weight: 500;
-  color: #999; /* 字体颜色 */
-  font-size: 14px; /* 缩小字体大小 */
-  width: 50px; /* 缩小输入框宽度 */
-  margin-left: 0.4em; /* 缩小间距 */
+  color: var(--text-color-light, #999);
+  font-size: 14px;
+  width: 50px;
+  margin-left: 0.4em;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .search-input::placeholder {
-  color: #a0aec0; /* 占位符颜色 */
+  color: #a0aec0;
 }
 
 .search-icon {
@@ -105,42 +127,101 @@ export default {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #303d4e; /* 图标颜色 */
-  font-size: 14px; /* 缩小图标大小 */
+  color: var(--text-color, #303d4e);
+  font-size: 14px;
   transition: color 0.3s;
   width: 18px;
+  flex-shrink: 0;
 }
 
 .search-icon:hover {
-  color: var(--theme-color); /* 悬停时的图标颜色 */
+  color: var(--theme-color);
 }
 
 .iconfont {
-  font-size: 14px; /* 缩小图标大小 */
+  font-size: 14px;
 }
 
 .extra-link {
-  width: 60px;
+  width: 4.625rem;
   height: 32px;
+  color: var(--theme-color);
+  flex-shrink: 0;
 }
 
 .extra-link.is-underline:hover:after {
   border-bottom: 0;
 }
 
-.extra-link.el-link--primary {
-  border-radius: 6px;
-  border: 1px solid #009dff;
-  background: #ecf8ff;
+/* VuePress Theme Hope 官方移动端断点 - 平板端 (≤1024px) */
+@media (max-width: 1024px) {
+  .search-box {
+    width: 10rem;
+  }
+  
+  .search-input {
+    font-size: 13px;
+    width: auto;
+  }
+  
+  .extra-link {
+    width: auto;
+    padding: 0 0.6rem;
+  }
 }
 
-/* 小屏幕隐藏输入框 */
-@media (max-width: 1600px) {
+/* VuePress Theme Hope 官方移动端断点 - 手机端 (≤768px) */
+@media (max-width: 768px) {
   .search-box {
-    width: 20px;
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    padding: 0;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
   }
+  
   .search-input {
     display: none;
+  }
+  
+  .search-input-wrapper {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .search-icon {
+    width: 18px;
+    font-size: 14px;
+  }
+  
+  .extra-link {
+    width: auto;
+    min-width: auto;
+    padding: 0 0.5rem;
+    font-size: 13px;
+  }
+}
+
+/* VuePress Theme Hope 官方移动端断点 - 小屏手机 (≤419px) */
+@media (max-width: 419px) {
+  .search-box {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    border: none;
+    background-color: transparent;
+  }
+  
+  .search-icon {
+    width: 16px;
+    font-size: 13px;
+  }
+  
+  .extra-link {
+    padding: 0 0.4rem;
+    font-size: 12px;
   }
 }
 </style>
