@@ -26,7 +26,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   },
   // sidebar
   sidebar: zhSidebar,
-  footer: '<div class="footer-left">环信 IM 文档 V 1.0.0</div><div class="footer-right">&copy; 环信 2025</div>',
+  footer: '<div class="footer-left">环信 IM 文档</div><div class="footer-right">&copy; 环信 2025</div>',
   displayFooter: true,
   headerDepth: 2,
   extra_nav: [
@@ -35,7 +35,9 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
       link: 'https://console.easemob.com/user/login',
     }
   ],
-  editLink:false,
+  editLink: false,
+  prevLink: false,
+  nextLink: false,
   plugins: {
     mdEnhance: {
       container: true,

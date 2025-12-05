@@ -4,7 +4,6 @@ $theme-color: #303233;
 
 .theme-container {
   color: var(--text-color);
-
   .page {
     .breadcrumb {
 
@@ -196,6 +195,17 @@ $theme-color: #303233;
   }
 }
 
+h2,h3 {
+  width: fit-content;
+  border-bottom: 0;
+
+  .header-anchor {
+    float: right;
+    margin-inline-start: 0;
+    margin-inline-end: -1em;
+  }
+}
+
 div[class*="language-"] {
   padding-top: 2px;
 }
@@ -258,7 +268,7 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
   background-color: #fff;
   font-family: PingFang SC, sans-serif;
   border-right: 1px solid #d4dade;
-
+  scrollbar-color: #EBEEF5 #fff;
   >.sidebar-links li {
     >a {
       font-weight: 500;
@@ -374,4 +384,8 @@ button {
     box-sizing: border-box;
     margin: 0;
   }
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #EBEEF5;
 }
