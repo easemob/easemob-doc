@@ -83,7 +83,7 @@ if (conversation) {
 }
 ```
 
-### 本地设置推送通知方式
+### 设置推送通知方式
 
 在本地调用 `PushManager#setSilentModeForConversation` 设置会话的推送通知方式，在多设备事件 `MultiDevicesListener#onConversationEvent` 里会回调当前操作，此时参数 `event` 的值为 `MultiDevicesEvent#CONVERSATION_MUTE_INFO_CHANGED`。
 

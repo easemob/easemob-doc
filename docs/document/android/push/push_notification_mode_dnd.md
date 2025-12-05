@@ -90,7 +90,7 @@ if(conversation!=null) {
 }
 ```
 
-### 本地设置推送通知方式
+### 设置推送通知方式
 
 在本机上调用 `EMPushManager#setSilentModeForConversation` 设置会话的推送通知方式，在多设备事件 `EMMultiDeviceListener#onConversationEvent` 里会回调当前操作,此时参数 `event` 的值为 `EMMultiDeviceListener#CONVERSATION_MUTE_INFO_CHANGED`。
 
