@@ -99,7 +99,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 1000   |       EMErrorContactAddFailed       | 添加联系人失败。                                             | 结合调用的 API 和 `EMError#errorDescription` 分析联系人添加失败的原因。 |
 | 1001   |      EMErrorContactReachLimit       | 邀请者的联系人数量已达到上限。       | 可以在 UI 上提示该错误，或联系商务提升最大联系人数量。 |
 | 1002   |    EMErrorContactReachLimitPeer     | 受邀请者的联系人数量已达到上限。   | 可以在 UI 上提示该错误，或联系商提升最大联系人数量。 |
-| 1100   |     EMErrorPresenceParamExceed      | <br/>用户在线状态订阅功能 Presence 未开通。<br/> - 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 | <br/>使用 Presence 功能前需要在环信控制台开通。 <br/> - 调用[发布自定义在线状态 API](presence.html#发布自定义在线状态) 时设置的在线状态详细信息的长度不能超过 64 字节。 |
+| 1100   |     EMErrorPresenceParamExceed      | - 用户在线状态订阅功能 Presence 未开通。<br/> - 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 | <br/>使用 Presence 功能前需要在环信控制台开通。 <br/> - 调用[发布自定义在线状态 API](presence.html#发布自定义在线状态) 时设置的在线状态详细信息的长度不能超过 64 字节。 |
 | 1101   | EMErrorPresenceCannotSubscribeSelf  | 不能订阅你自己的状态。 | 检查调用 API 时传入的订阅用户 ID 是否是自己的用户 ID。 |
 | 1110   |     EMErrorTranslateParamError      | 翻译参数错误。               | 需结合 Debug 日志，分析翻译方法传入的参数错误原因。 |
 | 1111   |  EMErrorTranslateServiceNotEnabled  | 翻译服务未启用。使用翻译服务前，应在[环信控制台](https://console.easemob.com/user/login)开启该服务。  | 在[环信控制台](https://console.easemob.com/user/login)开启翻译服务。 |
