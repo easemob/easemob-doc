@@ -23,7 +23,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 28     | WEBIM_CONNCTION_TOKEN_NOT_ASSIGN_ERROR         | 未传 token：调用 API 时没有携带 token，一般没登录时调用 API 会提示这个错误。 | 确保成功登录。 |
 | 31     | WEBIM_CONNCTION_CALLBACK_INNER_ERROR           | 消息发送回调函数内部错误：在接收消息的回调及后续处理的函数中有错误。 | 检查回调函数⾥是否有报错，如 `onTextMessage` 的回调⾥处理消息时有报错。 |
 | 39     | WEBIM_CONNECTION_CLOSED                        | 退出或未登录：未登录或掉线后发送消息。  | 重新登录。|
-| 40     | WEBIM_CONNECTION_ERROR                         | 用户鉴权失败。  | 提示连接已断开。 |
+| 40     | WEBIM_CONNECTION_ERROR                         | 连接错误，即 WebSocket 请求错误，一般为平台 onError 回调触发。  | 提示连接已断开。 |
 | 50     | MAX_LIMIT                         | 达到上限，例如 Reaction 数量已达到限制、翻译用量达到上限、应用的日活跃用户数（DAU）超限、在线用户数量超限和月活跃用户数（MAU）。 | 根据 error message 确认哪项服务达到上限，限制相应数量。  |
 | 51     | MESSAGE_NOT_FOUND                         | 没查到消息，如：没有查询到要举报的消息。   | 提示未找到原消息。 |
 | 52     | NO_PERMISSION                          | 用户对当前操作没有权限。  | 提示没有权限进⾏相应的操作。 |
