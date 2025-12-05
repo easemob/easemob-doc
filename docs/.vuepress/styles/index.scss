@@ -130,24 +130,6 @@ $theme-color: #303233;
           }
         }
       }
-
-      h2,
-      h3 {
-        width: fit-content;
-        border-bottom: 0;
-
-        .header-anchor {
-          float: right;
-          margin-inline-start: 0;
-          margin-inline-end: -1em;
-        }
-      }
-
-      ul:has(+ h2),
-      p:has(+ h2) {
-        padding-bottom: 36px;
-        border-bottom: 1px solid var(--border-color);
-      }
     }
 
     #toc {
