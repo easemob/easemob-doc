@@ -68,7 +68,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 705    | CHATROOM_NOT_EXIST                             | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。| 检查聊天室 ID 是否正确。 |
 | 800    | LOCAL_DB_OPERATION_FAILED       | 本地数据库操作失败。| ⽤ miniCore 使⽤本地会话列表时，提示会话列表操作失败。|
 | 999    | SDK_RUNTIME_ERROR                              | Websocket 发送消息错误。  | 提示登录失败，重新登录。|
-| 1100   | PRESENCE_PARAM_EXCEED                          | 发布自定义在线状态时，参数长度超出限制。  | 设置⾃定义在线状态时不要超过1024 字节。|
+| 1100   | PRESENCE_PARAM_EXCEED                          | <br/>用户在线状态订阅功能 Presence 未开通。<br/> - 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 | <br/>使用 Presence 功能前需要在环信控制台开通。 <br/> - 调用[发布自定义在线状态 API](presence.html#发布自定义在线状态) 时设置的在线状态详细信息的长度不能超过 64 字节。|
 | 1101   | REACTION_ALREADY_ADDED                         | Reaction 重复添加。   | 确保同⼀个⽤户不要添加重复的 Reaction。|
 | 1102   | REACTION_CREATING                              | 创建 Reaction 时，其他人正在创建。| 提示其他⼈正在创建 Reaction。|
 | 1103   | REACTION_OPERATION_IS_ILLEGAL                  | 用户对该 Reaction 没有操作权限：没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接收者进行添加 Reaction 操作。 | 确保⽤户正确操作 Reaction。 |
