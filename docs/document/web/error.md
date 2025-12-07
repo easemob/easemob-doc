@@ -45,7 +45,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT                | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。 | 提示消息发送失败，包含敏感词等⾮法内容。 |
 | 502    | MESSAGE_EXTERNAL_LOGIC_BLOCKED                 | 消息被拦截：开通反垃圾服务后，消息被拦截报此错误。           | 提示消息发送失败。|
 | 503    | SERVER_UNKNOWN_ERROR                           | 消息发送失败未知错误：服务端返回的错误信息超出 SDK 处理范围。 | 提示消息发送失败。|
-| 504    | MESSAGE_RECALL_TIME_LIMIT                      | 撤回消息时超出限定时间。  | 提示已经超出可撤回的时间。 | 
+| 504    | MESSAGE_RECALL_TIME_LIMIT                      | 撤回消息时超出限定时间。  | 提示已经超出可撤回的时间，或者在 [环信控制台延长消息可撤回时间](/product/console/basic_message.html#消息撤回)，最多可设置为 7 天。 | 
 | 505    | SERVICE_NOT_ENABLED                            | 服务未开启：要使用的某些功能未开通。   | 根据 error message 开通相应的功能。 |
 | 506    | SERVICE_NOT_ALLOW_MESSAGING                    | 用户未在白名单中：群组或聊天室开启全员禁言时，若用户未在白名单中发送消息时提示该错误。 | 提示当前群组或聊天室已禁⾔。| 
 | 507    | SERVICE_NOT_ALLOW_MESSAGING_MUTE               | 当前用户被禁言：在群组或者聊天室中被禁言后发消息报此错误。  | 提示⽤户已被禁⾔。|
