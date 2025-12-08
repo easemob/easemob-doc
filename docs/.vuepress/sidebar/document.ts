@@ -796,20 +796,28 @@ const documentSidebar = [
     only: ['server-side']
   },
   { 
-    text: '关键词名单',
+    text: '内容审核',
     collapsible: true,
     children: [
-      { text: '创建关键词名单', link: 'keyword_list_create.html' },
-      { text: '修改关键词名单', link: 'keyword_list_modify.html' },
-      { text: '查询关键词名单', link: 'keyword_list_query.html' },
-      { text: '删除关键词名单', link: 'keyword_list_delete.html' },
-      { text: '添加关键词', link: 'keyword_add.html' },
-      { text: '修改关键词', link: 'keyword_modify.html' },
-      { text: '查询关键词', link: 'keyword_query.html' },
-      { text: '删除单个关键词', link: 'keyword_delete.html' },
-      { text: '批量删除关键词', link: 'keyword_delete_batch.html' }
-    ]
-  }, 
+      { text: '主动文本审核', link: 'moderation_text_active.html' },
+      { 
+        text: '关键词名单',
+        collapsible: true,
+        children: [
+          { text: '创建关键词名单', link: 'keyword_list_create.html' },
+          { text: '修改关键词名单', link: 'keyword_list_modify.html' },
+          { text: '查询关键词名单', link: 'keyword_list_query.html' },
+          { text: '删除关键词名单', link: 'keyword_list_delete.html' },
+          { text: '添加关键词', link: 'keyword_add.html' },
+          { text: '修改关键词', link: 'keyword_modify.html' },
+          { text: '查询关键词', link: 'keyword_query.html' },
+          { text: '删除单个关键词', link: 'keyword_delete.html' },
+          { text: '批量删除关键词', link: 'keyword_delete_batch.html' }
+        ]
+      }
+    ],
+    only: ['server-side']
+  },
   { text: '错误码', link: 'error.html', only: ['server-side']},
   {
     text: '设置回调',
