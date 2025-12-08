@@ -142,7 +142,7 @@ connection.getSilentModeRemindTypeConversations({pageSize: 10})
 
 ## 设置单个会话的推送通知
 
-你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知设置，即推送通知方式或免打扰时间（时长或时间段）示例代码如下。
+你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知设置，即推送通知方式或免打扰时长，示例代码如下。
 
 调用该接口后，你的其他设备会收到 `onMultiDeviceEvent#setSilentModeForConversation` 事件。
 
@@ -165,28 +165,12 @@ connection.getSilentModeRemindTypeConversations({pageSize: 10})
       duration: 7200000 // 免打扰时长，单位为毫秒。
     }
   }
-  
-  const params = {
-    conversationId: '121231233',
-    type: 'chatRoom',
-    options: {
-      paramType: 2, // 免打扰时间段。
-      startTime: {
-        hours: 8, // 免打扰时间段的开始时间中的小时数。
-        minutes: 0 // 免打扰时间段的开始时间中的分钟数。
-      }，
-      endTime: {
-        hours: 12, // 免打扰时间段的结束时间中的小时数。
-        minutes: 0 // 免打扰时间段的结束时间中的分钟数。
-      }
-    }
-  }
 */
 const params = {
   conversationId: '12345',
   type: 'groupChat',
   options: {
-    paramType: 0,
+    paramType: 0, // 会话暂不支持设置免打扰时间段，只能设置APP级别的免打扰时间段。
     remindType: 'ALL'
   }
 }
