@@ -83,7 +83,7 @@ EMClient.shared().pushManager?.syncSilentModeConversations(fromServerCompletion:
 
 ```
 
-### 本地设置推送通知方式
+### 设置推送通知方式
 
 在本机上调用 `EMPushManager#setSilentModeForConversation:conversationType:params:completion` 设置会话的推送通知方式，在多设备事件 `EMMultiDevicesDelegate#onConversationEvent:conversationId:conversationType` 里会回调当前操作，此时参数 `event` 的值为 `EMMultiDevicesEventConversationMuteInfoChanged`。
 
