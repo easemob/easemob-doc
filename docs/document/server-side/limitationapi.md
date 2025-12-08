@@ -284,7 +284,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 ## 内容审核
 
-## 主动文本审核
+### 主动文本审核
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
@@ -303,7 +303,6 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 查询关键词 | POST | /{org_name}/{app_name}/moderation/text/list/{list_id}/word | 100 次/秒/App Key | 50 次/秒  |
 | 删除单个关键词 | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word?wordId={word_id} | 100 次/秒/App Key | 50 次/秒  |
 | 批量删除关键词 | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word/batch | 100 次/秒/App Key | 50 次/秒  |
-
 
 ## 发送后回调
 
