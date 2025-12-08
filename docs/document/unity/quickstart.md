@@ -32,7 +32,7 @@
 | macOS        | macOS 10.0 或以上  |  Xcode 9.0 或以上，Visual Studio for Mac 2019 或以上   |
 | Windows              | Windows 10 或以上 | Microsoft Visual Studio 2019 或以上            |
 
-- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信控制台](https://console.easemob.com/user/login)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 项目设置
@@ -43,7 +43,7 @@
 
 参考以下步骤：
 
-1. 克隆 [chat_unity_demo](https://github.com/easemob/chat_unity_demo) 至本地。
+1. 克隆 `chat_unity_demo` 至本地。详见 [GitHub](https://github.com/easemob/chat_unity_demo) 或 [Gitee](https://gitee.com/easemob-code/chat_unity_demo) 上的示例项目。
 2. 打开 Unity Hub，选择 **Projects** 页签，点击 **Open** 右边的下拉菜单，选择 **Add project from disk**，然后选择步骤 1 中本地路径下的 `chat_unity_quickstart`。这时，**Projects** 列表中显示 **chat_unity_quickstart** 项目。
 3. 单击 **chat_unity_quickstart** 打开项目。
 
@@ -66,13 +66,13 @@
 
 你可以参考以下步骤集成 SDK：
 
-1. [下载 Unity SDK](https://www.easemob.com/download/im)。
+1. [下载 Unity SDK](https://www.easemob.com/download/im#Unity)。
 2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 unitypackage 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
 
 ### 集成问题
 
-由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
+若在 Windows 平台上由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
 
 ```csharp
 Multiple plugins with the same name 'libaosl' (found at 'Assets/Plugins/Agora/Agora-RTC-Plugin/Agora-Unity-RTC-SDK/Plugins/x86_64/libaosl.dll' and 'Assets/Plugins/Agora/AgoraChat/Plugins/x64/libaosl.dll'). That means one or more plugins are set to be compatible with Editor. Only one plugin at the time can be used by Editor
@@ -110,7 +110,7 @@ using AgoraChat.MessageBody;
 在 `InitSDK` 方法中添加以下代码完成 SDK 初始化：
 
 ```csharp
-var options = new Options("appkey"); //将该参数设置为你的 App Key
+Options options = Options.InitOptionsWithAppKey("appkey"); //将该参数设置为你的 App Key
 SDKClient.Instance.InitWithOptions(options);
 ```
 

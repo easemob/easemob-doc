@@ -33,7 +33,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `os`        | String   | 设备类型。                                                   |
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
-| `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`    | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。 |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 登录请求到环信 IM 服务器的 Unix 时间戳，单位为 ms。          |
@@ -69,7 +69,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `os`        | String   | 设备类型。                                                   |
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
-| `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`    | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。             |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 请求到环信 IM 服务器的 Unix 时间戳，单位为 ms。              |
@@ -105,7 +105,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `os`        | String   | 设备类型。                                                   |
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
-| `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`    | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。  |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 请求到环信 IM 服务器的 Unix 时间戳，单位为毫秒 。              |

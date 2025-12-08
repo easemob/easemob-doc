@@ -15,6 +15,7 @@ const conn = new EC.connection({
   appKey: "your appKey",
   url: "wss://im-api-wechat.easemob.com/websocket",
   apiUrl: "https://a1.easemob.com",
+  isHttpDNS: false, // 在小程序上需设置为false
 });
 ```
 
@@ -25,12 +26,9 @@ const conn = new EC.connection({
 | `appKey`    | String     | 是      | 环信控制台为你的应用生成的唯一标识，由应用名称（`Appname`）和组织名称（`Orgname`）组成。                  |
 | `isHttpDNS`  | Bool  | 否 | 是否开启 DNS，防止 DNS 劫持。<br/> -（默认）`true`：开启 DNS；<br/> - `false`：关闭 DNS。        |
 | `delivery`         | Bool  | 否    | 是否开启送达回执：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。      |
-| `enableReportLogs`         | Bool  | 否    | 小程序平台是否允许上传日志：<br/> - `true`：开启；<br/> -（默认）`false`：关闭。      |
-| `https`      | Bool  | 否  | 是否支持通过 HTTPS 访问即时通讯 IM：<br/> - （默认）`true`：支持 HTTPS 和 HTTP；<br/> -`false`：浏览器根据使用的域名自行判断。     |
-| `heartBeatWait`      | Int  | 否 | 心跳间隔，单位为毫秒，默认为 30000。       |
 | `deviceId`           | String  | 否  | 设备 ID，为默认随机值。               |
 | `useOwnUploadFun`   | Bool  | 否   | 是否支持通过自己的路径将图片、文件上传到自己的服务器。<br/> -`true`：支持，需要指定路径；<br/> -（默认）`false`：关闭，通过消息服务器上传下载文件。 |
 | `autoReconnectNumMax` | Int  | 否 | 最大重连次数。      |
-| `apiUrl`              | String | 是       | 指定的 REST 服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。要获取该服务器地址，需在环信控制台的**即时通讯 > 服务概览**页面，查看**域名配置**表格中的 **Rest Api** 设置。|
-| `url`                 | String | 是       | 指定的消息服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。 要获取该服务器地址，需在环信控制台的**即时通讯 > 服务概览**页面，查看**域名配置**表格中的**微信小程序**或**支付宝小程序**设置。  |
+| `apiUrl`              | String | 是       | 指定的 REST 服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。要获取该服务器地址，需在环信控制台的 **应用概览**页面的 **开发配置信息** 区域看域名配置。|
+| `url`                 | String | 是       | 指定的消息服务器。在未开启 DNS 的情况下使用，一般适用于开发者要实现数据隔离、特别注重数据安全的场景。要获取该服务器地址，需在环信控制台的 **应用概览**页面的 **开发配置信息** 区域看域名配置。  |
 

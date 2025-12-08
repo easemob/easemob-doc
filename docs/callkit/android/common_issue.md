@@ -93,7 +93,7 @@ CallKit 会自动处理音频路由切换，支持扬声器、听筒、蓝牙耳
 
 若提示 `PhoneAccount` 未注册或未启用：
 - CallKit 在使用 Telecom 框架时会检查 VoIP 账户状态。
-- 参考 DEMO 工程的 [MainActivity#checkPhoneAccount](https://github.com/easemob/easemob-demo-android/blob/main/app/src/main/kotlin/com/hyphenate/chatdemo/MainActivity.kt)函数实现，创建并启用 VoIP 账户。
+- 参考 [GitHub](https://github.com/easemob/easemob-demo-android/blob/main/app/src/main/kotlin/com/hyphenate/chatdemo/MainActivity.kt) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android/blob/main/app/src/main/kotlin/com/hyphenate/chatdemo/MainActivity.kt) 上的 Demo 工程的 `MainActivity#checkPhoneAccount` 函数实现，创建并启用 VoIP 账户。
 - 通过 `PhoneAccountHelper.getPhoneAccountStatus()` 检查 VoIP 账户的状态。
 
 ## 15. 好友检查

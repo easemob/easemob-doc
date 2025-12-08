@@ -31,9 +31,23 @@
 UIKit 中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中，存在访问频率限制，建议你将静态资源放置在你的业务服务器上，然后修改 `ChatUIKit/const/index.ts` 文件中的 `ASSETS_URL` 为你的资源服务器地址。
 :::
 
+- GitHub 项目
+
  ```bash
    # 克隆 UIKit
    git clone https://github.com/easemob/easemob-uikit-uniapp.git
+ ```
+
+- Gitee 项目
+
+ ```bash
+   # 克隆 UIKit
+   git clone https://gitee.com/easemob-code/easemob-uikit-uniapp.git
+ ```
+
+克隆项目后，执行以下代码：
+
+ ```bash
    # 在你的 uni-app 项目根目录下执行以下命令，拷贝组件文件
    mkdir -p ./ChatUIKit
    # macOS
@@ -303,6 +317,6 @@ Vue3 在 H5 平台发行时，为了优化包体积大小，会默认启动 Tree
 
 ## 参考文档
 
-- [UIKit 源码](https://github.com/easemob/easemob-uikit-uniapp)
+- UIKit 源码：可查看 [GitHub](https://github.com/easemob/easemob-uikit-uniapp) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-uniapp) 地址
 - [小程序域名配置](https://doc.easemob.com/document/applet/wechat.html#配置服务器域名)
 

@@ -27,7 +27,7 @@ yarn add react-native-chat-sdk
 import { getPlatform, getDeviceType } from "react-native-push-collection";
 import { ChatClient, ChatOptions, ChatPushConfig } from "react-native-chat-sdk";
 
-// 从环信即时通讯云控制台获取推送 ID、pushId
+// 从环信控制台获取推送 ID、pushId
 const pushId = "<your push id from easemob console>";
 
 // 设置推送类型
@@ -117,7 +117,7 @@ ChatClient.getInstance()
 
 ## 运行示例项目
 
-查看完整示例项目，请点击[这里](https://github.com/AsteriskZuo/RNTestPushExample/tree/chat)。启动项目后，界面如下图所示。
+启动项目后，界面如下图所示。
 
 <ImageGallery>
 <ImageItem src="/images/react-native/push/push_example_ui.png" title="运行示例项目后的界面" />

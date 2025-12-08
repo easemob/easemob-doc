@@ -2,6 +2,17 @@
 
 环信即时通讯 IM 3.9.2 及以上版本对离线消息推送进行了优化。你可以在 app 和会话层面提供了推送通知方式和免打扰模式的细粒度选项。
 
+## 开通功能
+
+[推送通知方式](push_notification_mode_dnd.html#推送通知方式) 和 [免打扰模式](push_notification_mode_dnd.html#免打扰模式) 是推送的高级功能。使用前，你需要在 [环信控制台](https://console.easemob.com/user/login) 免费开通。**激活后，如需关闭推高级功能，必须联系商务，因为该操作会删除高级功能相关的所有配置。**
+
+1. 登录 [环信控制台](https://console.easemob.com/user/login)。
+2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
+3. 选择 **增值服务 > 消息推送 > 离线推送**。
+4. 点击 **免费开通**。
+
+![image](/images/android/push/push_advanced_feature_enable.png)
+
 ## 推送通知方式
 
 推送通知方式 `pushRemindType` 包含三种类型，如下表所示。其中，会话级别的 `pushRemindType` 设置优先于 app 级别的设置，未设置推送通知方式的会话默认采用 app 的设置。例如，假设 app 的推送方式设置为 `MENTION_ONLY`，而指定会话的推送方式设置为 `ALL`。你会收到来自该会话的所有推送通知，而对于其他会话来说，你只会收到提及你的消息的推送通知。
@@ -79,7 +90,7 @@ if(conversation!=null) {
 }
 ```
 
-### 本地设置推送通知方式
+### 设置推送通知方式
 
 在本机上调用 `EMPushManager#setSilentModeForConversation` 设置会话的推送通知方式，在多设备事件 `EMMultiDeviceListener#onConversationEvent` 里会回调当前操作,此时参数 `event` 的值为 `EMMultiDeviceListener#CONVERSATION_MUTE_INFO_CHANGED`。
 

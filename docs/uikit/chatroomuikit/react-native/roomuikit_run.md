@@ -24,6 +24,12 @@
 git clone https://github.com/easemob/easemob-uikit-reactnative.git
 ```
 
+或
+
+```sh
+git clone https://gitee.com/easemob-code/react-native-chat-library.git
+```
+
 ## 初始化项目
 
 ```sh

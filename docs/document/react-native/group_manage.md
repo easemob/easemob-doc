@@ -174,7 +174,7 @@ ChatClient.getInstance()
 // pageSize：每页期望返回的群组数量，取值范围为[1,20]。
 const pageSize = 10;
 // 当前页码
-const pageNum = 1;
+const pageNum = 0;
 ChatClient.getInstance()
   .groupManager.fetchJoinedGroupsFromServer(pageSize, pageNum)
   .then((groups) => {

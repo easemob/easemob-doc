@@ -8,7 +8,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [MessageListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift)。
+你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift) 上的 `MessageListController.swift`。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_chat.png" title="聊天页面" />
@@ -22,7 +22,9 @@
   <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_navigation.png" title="导航栏配置" />
 </ImageGallery>
 
-## 自定义消息列表项
+## 设置消息列表项
+
+### 自定义消息列表项
 
 要自定义消息表中列表项的内容，即各种消息类型的 Cell，你需要执行以下步骤：
 
@@ -32,7 +34,7 @@
    
 每个对应的消息类型 Cell 中都有初始化方法、气泡中内容 `createContent` 和 `refresh` 方法可重载，以及其他各种小模块的 UI 创建重载方法等。 
 
-如果需要复用已有逻辑再增加新逻辑，则只需重载对应方法后调用 `super.xxx`，例如：
+- 如果需要复用已有逻辑再增加新逻辑，则只需重载对应方法后调用 `super.xxx`，例如：
 
 ```swift
     override open func refresh(entity: MessageEntity) {
@@ -41,7 +43,7 @@
     }
 ```
 
-如果需要修改之前的逻辑，则需复制之前的 `refresh ` 方法中的代码进行修改，无需调用 `super.xxxx`。
+- 如果需要修改之前的逻辑，则需复制之前的 `refresh ` 方法中的代码进行修改，无需调用 `super.xxxx`。
 
 | 消息 Cell 类     | 描述      | 注册重载对应属性 |
 | --------------------- | ------------------ | ------------------------------------------------------------ |

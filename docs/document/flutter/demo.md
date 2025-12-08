@@ -32,7 +32,7 @@
 1. [创建应用](/product/console/app_create.html)。 
 2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
 3. [创建用户](/product/console/operation_user.html#创建用户)。
-4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-flutter)。
+4. 从 [GitHub](https://github.com/easemob/easemob-demo-flutter) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-flutter) 下载即时通讯 IM Demo 项目源码。
 5. 下载完毕，打开项目。
 6. 将你的应用的 App Key 填入 Demo 工程根目录下的 `main.dart` 文件。
 7. 编译运行项目。
@@ -51,7 +51,7 @@ App Server 为 Demo 提供以下功能：
 
 你通过以下步骤部署 App Server：
 
-1. 部署 App Server。详见 [服务端源码](https://github.com/easemob/easemob-im-app-server/tree/dev-demo)。
+1. 部署 App Server。部署 App Server。关于服务器源码，详见 [GitHub](https://github.com/easemob/easemob-demo-appserver/tree/dev-demo) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-appserver/tree/dev-demo)。
 2. 在 Demo 工程根目录下 `main.dart` 文件中，填入 `serverUrl` 的域名或 IP 地址。
 3. 在 Demo 工程根目录下 `main.dart` 文件中，填入 `rtcAppId`，即通知 Demo 工程需要启用 App Server，体验完整功能。
 

@@ -11,7 +11,7 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 ## 前提条件
 
 - Java 1.8
-- 有效的环信即时通讯 IM 开发者账号和 App Key、Client ID、ClientSecret、BasePath (对应的 RESTful API 域名，详见环信控制台的**即时通讯 > 服务概览**页面下的**域名配置区域**)，登录 [环信管理后台](https://console.easemob.com/user/login) 到“应用列表” → 点击“查看”即可获取到 App Key、Client ID、ClientSecret，到"即时通讯" → 点击"服务概览"获取到 "Rest api" 的服务器域名。
+- 有效的环信即时通讯 IM 开发者账号和 App Key、Client ID、ClientSecret、BasePath (对应的 RESTful API 域名，详见环信控制台的 **应用概览**页面下的 **开发配置信息** 区域)。
 
 ## 实现方法
 
@@ -216,8 +216,8 @@ try {
 
 ### V1.0.10 2024-09-21
 
-1. 增加[根据消息 ID 单向删除单聊漫游消息](message_delete.html#根据消息-id-单向删除单聊漫游消息)功能。
-2. 增加[根据消息 ID 单向删除群聊漫游消息](message_delete.html#根据消息-id-单向删除群聊漫游消息)功能。
+1. 增加[根据消息 ID 单向删除单聊漫游消息](message_delete_roam_single_msgid.html)功能。
+2. 增加[根据消息 ID 单向删除群聊漫游消息](message_delete_roam_group_room_msgid.html)功能。
 3. 增加根据指定 ID 创建聊天室的功能。
 4. 增加根据指定 ID 创建群组的功能。
 
@@ -225,13 +225,13 @@ try {
 
 ### V1.0.9 2024-07-29
 
-1. 增加[发送聊天室全局广播消息](message_broadcast.html#发送聊天室全局广播消息)功能。
-2. 增加[导入好友列表](user_relationship_friend_import.html)功能。
-3. 增加[强制用户从单设备下线](account_system.html#强制用户从单设备下线)功能。
-4. [创建群组增加群组头像属性](group_manage.html#创建群组)。
-5. [修改群组信息支持群组头像修改](group_manage.html#修改群组信息)。
-6. [获取群组详情增加群组头像属性](group_manage.html#获取群组详情)。
-7. [获取用户已加入的群组列表](group_manage.html#获取单个用户加入的所有群组)中增加群组头像属性。
+1. 增加[发送聊天室全局广播消息](broadcast_to_chatrooms.html)功能。
+2. 增加[导入好友列表](user_friend_import.html)功能。
+3. 增加[强制用户从单设备下线](account_offline_device_single.html)功能。
+4. [创建群组增加群组头像属性](group_create.html)。
+5. [修改群组信息支持群组头像修改](group_modify.html)。
+6. [获取群组详情增加群组头像属性](group_obtain_detail.html)。
+7. [获取用户已加入的群组列表](group_obtain_joined)中增加群组头像属性。
 
 以上更新内容请到 MessageApi、ContactApi、UserApi、GroupApi 中查看。
 
@@ -241,7 +241,7 @@ try {
 
 ### V1.0.7 2024-06-28
 
-1. 增加[批量修改用户推送昵称](push.html#批量设置离线推送时显示的昵称)功能。
+1. 增加[批量修改用户推送昵称](push_nickname_set_batch.html)功能。
 
 2. 增加发送图片、语音、视频、文件、透传、扩展、自定义消息示例功能。
 
@@ -249,11 +249,11 @@ try {
 
 ### V1.0.6 2024-06-07
 
-1. 增加[批量移除群组成员](group_member.html#批量移除群组成员)功能。
+1. 增加 [批量移除群组成员](group_members_remove_batch.html) 功能。
 
-2. 增加[一次性获取好友列表](user_relationship_friend_list_obtain.html)功能。
+2. 增加[一次性获取好友列表](user_friend_list_obtain.html)功能。
 
-3. [注册用户](account_system.html#开放注册单个用户)增加推送昵称参数。
+3. [注册用户](account_register_open.html)增加推送昵称参数。
 
 以上更新内容请到 GroupApi、ContactApi、UserApi 中查看。
 

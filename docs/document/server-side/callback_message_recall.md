@@ -20,7 +20,7 @@
 | `payload`         | object   | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。 |
 | `securityVersion` | String   | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [Console 后台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。 |
-| `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `host`            | String   | 服务器名称。                                                 |
 
 payload 中字段含义：

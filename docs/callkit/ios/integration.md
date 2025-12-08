@@ -78,7 +78,7 @@ CallKit 初始化包括如下步骤：
 
 - 已集成 IM SDK，初始化 CallKit 的代码示例如下： 
   
-```Swift
+```swift
     //已经集成了环信 IM SDK 即已经 import HyphenateChat
     private func setupCallKit() {
         let options = EMOptions(appkey: appKey)
@@ -100,7 +100,7 @@ CallKit 初始化包括如下步骤：
 
 - 未集成 IM SDK，初始化 CallKit 的代码示例如下：
 
-```Swift
+```swift
     //没有集成环信 IM SDK，只想使用 CallKit
     private func setupCallKit() {
         let options = ChatSDKOptions(appkey: appKey)
@@ -224,7 +224,7 @@ extension MainViewController: CallServiceListener {
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
-```Swift
+```swift
             ChatClient.shared().login(withUsername: userId, token: token) { [weak self] userId,error  in
             if let error = error {
                 self?.showCallToast(toast: "Login failed: \(error.errorDescription ?? "")")
@@ -250,7 +250,7 @@ extension MainViewController: CallServiceListener {
 
 你可以使用 `call` 方法发起一对一通话，`callType` 设置为 `singleVideo` 为视频通话，`singleAudio` 为音频通话。
 
-```Swift
+```swift
 @IBAction func callAction(_ sender: Any) {
         self.view.endEditing(true)
         guard let input = inputField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !input.isEmpty else {
@@ -271,7 +271,7 @@ extension MainViewController: CallServiceListener {
 - **发起群组通话**：指定群组 ID 后，CallKit 会自动拉起群成员选择界面，界面显示群组中的所有成员（群主、管理员、普通成员），用户可以选择要邀请的成员，选中人数会实时显示。为了保证通话质量和性能，CallKit 限制群组通话最多支持 **16 人** 同时参与（包括发起者）。若选择的成员数量超过 16 人时，系统会自动提示 “人数超出最大限制16人” 并阻止发起通话。
 - **通话中邀请他人**：群组通话中，当前用户可以点击通话界面右上角的邀请按钮向其他用户发起邀请。
 
-```Swift
+```swift
 @IBAction func callAction(_ sender: Any) {
         self.view.endEditing(true)
         guard let input = inputField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !input.isEmpty else {
@@ -319,7 +319,7 @@ extension MainViewController: CallServiceListener {
 
 如果要在一对一通话界面显示自定义用户头像和昵称，群聊通话显示自定义群头像和群名称，你可以通过 `profileProvider` 实现自定义用户信息。
 
-```Swift
+```swift
         CallKitManager.shared.profileProvider = self//Swift
         //CallKitManager.shared.profileProviderOC = self//OC 与上面profileProvider二者只能设置一个
         CallKitManager.shared.addListener(self)//添加监听，均为可选方法
@@ -417,7 +417,7 @@ extension ViewController: CallUserProfileProvider {
 
 若要修改远端视频在本地显示的分辨率，可以在创建声网 RTC 引擎时在 `onRtcEngineCreated` 中进行配置：
 
-```Swift
+```swift
 func onRtcEngineCreated(engine: AgoraRtcEngineKit?) {
         let configuration = AgoraVideoEncoderConfiguration()
         configuration.orientationMode = .fixedPortrait
@@ -428,21 +428,6 @@ func onRtcEngineCreated(engine: AgoraRtcEngineKit?) {
 ```
 
 更多其他配置可以参考 [声网 RTC 文档](https://doc.shengwang.cn/doc/rtc/ios/basic-features/video-profile#视频参数推荐值)。
-
-### 声网 RTC 私有化部署
-
-如果使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置：
-
-```Swift
-//添加 CallKitListener 监听后实现下面方法，填写自己的ip地址以及域名
-    func onRtcEngineCreated(engine: AgoraRtcEngineKit?) {
-        let config = AgoraLocalAccessPointConfiguration()
-        config.ipList = ["123.456.789.0"]
-        config.verifyDomainName = "ap.xxx.agora.local"
-        config.mode = .localOnly
-        engine?.setLocalAccessPoint(withConfig: config)
-    }
-```
 
 ## 常见问题
 

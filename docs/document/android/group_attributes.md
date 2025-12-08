@@ -139,6 +139,8 @@ EMClient.getInstance().groupManager().uploadGroupSharedFile(groupId, filePath, c
 
 ```java
 // 同步方法，需要放到异步线程
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页返回的共享文件数。
 List<EMMucSharedFile> sharedFiles = EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum, pageSize);
 // 获取需要的共享文件信息
 EMMucSharedFile sharedFile = sharedFiles.get(index);
@@ -175,6 +177,8 @@ EMClient.getInstance().groupManager().deleteGroupSharedFile(groupId, fileId);
 
 ```java
 // 同步方法，会阻塞当前线程。
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页返回的共享文件数。
 // 异步方法为 asyncFetchGroupSharedFileList(String, int, int, EMValueCallBack)。
 EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum, pageSize);
 ```

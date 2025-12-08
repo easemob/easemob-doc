@@ -2,7 +2,7 @@
 
 环信 ChatroomUIKit 提供 UIKit 的各种组件帮助开发者根据实际业务需求快速搭建聊天室应用。通过该 UIKit，聊天室中的用户可实时交互，发送普通弹幕消息、打赏消息和全局广播等功能。
 
-- 若要访问源码，请点击[这里](https://github.com/easemob/UIKit_Chatroom_ios)。
+- 若要获取源码，请访问 [GitHub](https://github.com/easemob/UIKit_Chatroom_ios) 或 [Gitee 地址](https://gitee.com/easemob-code/UIKit_Chatroom_ios)。
 
 - 你可以扫描以下二维码体验环信聊天室 UIKit demo：
 
@@ -13,8 +13,8 @@
 ChatroomUIKit 提供以下功能：
 
 - **通用特性**
-  - 创建聊天室：ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的接口创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)。
-  - [解散聊天室](roomfeature_common.html#解散聊天室)：ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 IM SDK 的接口解散聊天室](/document/server-side/chatroom_manage.html#解散聊天室)。
+  - 创建聊天室：ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的接口创建聊天室](/document/server-side/chatroom_create.html)。
+  - [解散聊天室](roomfeature_common.html#解散聊天室)：ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 IM SDK 的接口解散聊天室](/document/server-side/chatroom_delete.html)。
   - 离开聊天室：聊天室中的成员可自行离开聊天室，聊天室所有者也可以将成员移出聊天室。
   - 发送弹幕：用户在聊天室中向其他参与者发送文字和表情的消息。
   - 打赏：用户通过赠送虚拟礼物，向聊天室中的主播或其他用户表达赞赏或者支持

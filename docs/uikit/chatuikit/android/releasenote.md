@@ -1,10 +1,17 @@
 # Android 单群聊 UIKit 更新日志
 
-## 版本 4.15.1
+## 版本 4.18.0 2025-10-31
+
+### 修复
+
+1. 修复离线时撤回消息,上线后本地没有插入问题。
+2. 修复会话列表页面中列表项背景设置未生效问题。
+
+## 版本 4.15.1 2025-6-23
 
 修复联系人页面对应的内存被回收后重新打开会崩溃问题。
 
-## 版本 V4.11.1
+## 版本 V4.11.1 2024-12-3
 
 ### 新增特性
 
@@ -21,7 +28,7 @@
 
 ### 重大变更
 
-为规范 UIKit 各平台的命名，UIKit 内部将工程下所有以 `ease` 开头的类文件、layout 布局文件、资源文件及内部使用的部分字符串修改为以 `chatuikit` 开头，老用户升级时应注意变更相关引用。具体变更规则，请点击[这里](https://github.com/easemob/easemob-uikit-android/blob/main/script/rename_file_and_update_content.py)参考提供的脚本内部实现。脚本可以协助用户将应用层代码实现同步更名。
+为规范 UIKit 各平台的命名，UIKit 内部将工程下所有以 `ease` 开头的类文件、layout 布局文件、资源文件及内部使用的部分字符串修改为以 `chatuikit` 开头，老用户升级时应注意变更相关引用。具体变更规则，请访问 [GitHub](https://github.com/easemob/easemob-uikit-android/blob/main/script/rename_file_and_update_content.py) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-android/blob/main/script/rename_file_and_update_content.py) 地址参考提供的脚本内部实现。脚本可以协助用户将应用层代码实现同步更名。
 
 调用方式如下：
 
@@ -34,7 +41,7 @@ python3 rename_file_and_update_content.py target_folder --rename-files --replace
 
 注意：如果存在应用层目标名称（比如类名）与原 UIkit 修改规则中重名的情况，脚本扫描时可能会造成误更改用户应用层重名文件的情况，所以用户在调用脚本前应该做好代码 git 管理及备份，出现部分异常情况需要用户根据实际情况手动更改。
 
-## 版本 V4.8.2
+## 版本 V4.8.2 2024-7-26
 
 ### 新增特性
 

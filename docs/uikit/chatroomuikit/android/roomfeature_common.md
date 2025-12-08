@@ -4,7 +4,7 @@
 
 ## 创建聊天室  
 
-ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的 REST API 创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)。
+ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的 REST API 创建聊天室](/document/server-side/chatroom_create.html)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatroomfeature/chatroom_create.png" title="聊天室创建" />
@@ -26,7 +26,7 @@ ChatroomUIKit 提供离开聊天室功能。聊天室中的成员可自行离开
 
 ## 解散聊天室
 
-ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 IM SDK 的 REST API 解散聊天室](/document/server-side/chatroom_manage.html#解散聊天室)。
+ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 IM SDK 的 REST API 解散聊天室](/document/server-side/chatroom_delete.html)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatroomfeature/chatroom_destroy.png" title="解散聊天室" />
@@ -62,7 +62,7 @@ ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 I
 
 全局广播通常会使用明显的标识或格式以区别于普通聊天消息，确保用户能够快速识别全局广播。
 
-你也可以[调用 REST API 发送聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
+你也可以[调用 REST API 发送聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 
 在 UIKit 中，用户可以自定义全局广播的标识以及发送内容。全局广播消息的默认展示策略如下：
 

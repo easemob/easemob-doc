@@ -573,7 +573,7 @@ h3 {
 
 ### 步骤 4 配置 App Key
 
-将 `App.jsx` 代码中的 `org#app` 替换成你自己的 App Key。
+将 `App.tsx` 代码中的 `org#app` 替换成你自己的 App Key。
 
 ### 步骤 5 发起首次通话
 

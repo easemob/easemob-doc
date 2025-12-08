@@ -44,7 +44,7 @@
 | `payload.reason`    | object   | /                 |
 | `payload.operation` | String   | `add`：添加好友。 |
 | `host`            | String   | 服务器名称。          |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。                                |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
 | `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
 | `to`       | String | 接收方用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。                   |
@@ -85,7 +85,7 @@
 | `payload.roster_ver`    | String   | 好友列表的版本号。  |
 | `payload.operation` | String   | `remove`：删除好友。 |
 | `host`            | String   | 服务器名称。          |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。                                |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
 | `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
 | `to`       | String | 接收方用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。        |
@@ -126,7 +126,7 @@
 | `payload.roster_ver`    | String   | 好友列表的版本号。  |
 | `payload.operation` | String   | `accept`：同意好友申请。 |
 | `host`            | String   | 服务器名称。          |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。                                |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
 | `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
 | `to`       | String | 接收方用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
@@ -169,7 +169,7 @@
 | `payload.roster_ver`    | String   | 好友列表的版本号。  |
 | `payload.operation` | String   | `decline`：拒绝好友申请。 |
 | `host`            | String   | 服务器名称。          |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。                                |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
 | `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
 | `to`       | String | 接收方用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
@@ -213,7 +213,7 @@
 | `payload.status`    | object   | 包含 `error_code`。  |
 | `payload.status.error_code`    | String   | 操作失败对应的错误码。 |
 | `host`            | String   | 服务器名称。          |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。                                |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
 | `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
 | `to`       | String | 接收方用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
@@ -258,7 +258,7 @@
 | `payload.status`    | object   | 包含 `error_code`。  |
 | `payload.status.error_code`    | String   | 操作失败对应的错误码。 |
 | `host`            | String   | 服务器名称。          |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。                                |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
 | `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
 | `to`       | String | 接收方用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |

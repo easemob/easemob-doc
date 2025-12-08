@@ -38,8 +38,8 @@
 ### 获取联系人列表
 
 - 利用服务端 API：
-  - 可[调用推荐的方法分页获取联系人列表](/document/server-side/user_relationship_friend_list_paged.html)，其中每个好友对象包含好友的用户 ID 和备注。
-  - 你也可以[调用之前的方法一次性获取所有联系人的列表](/document/server-side/user_relationship_friend_list_obtain.html)，该列表只包含联系人的用户 ID。
+  - 可[调用推荐的方法分页获取联系人列表](/document/server-side/user_friend_list_paged.html)，其中每个好友对象包含好友的用户 ID 和备注。
+  - 你也可以[调用之前的方法一次性获取所有联系人的列表](/document/server-side/user_friend_list_obtain.html)，该列表只包含联系人的用户 ID。
 - 利用客户端 API：
   - 可调用推荐的方法[从服务器一次性或分页获取联系人列表](/document/android/user_relationship.html#从服务端获取好友列表)，其中每个好友对象包含联系人的用户 ID 和备注。你也可以调用之前的方法一次性获取所有联系人的列表，该列表只包含联系人的用户 ID。 
   - 可一次性获取本地联系人列表或单个联系人的信息，包括联系人的用户 ID 和备注。
@@ -50,7 +50,7 @@
 
 ### 导入联系人列表
 
-你可以[调用 REST API](/document/server-side/user_relationship_friend_import.html) 一次性导入多个联系人。
+你可以[调用 REST API](/document/server-side/user_friend_import.html) 一次性导入多个联系人。
 
 ## 开启或关闭发送消息权限控制
 
@@ -58,8 +58,8 @@
 
 环信即时通讯 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要按以下步骤开启好友关系检查。
 
-1. 在环信即时通讯云的左侧导航栏中，选择 **即时通讯** > **服务概览**。
-2. 在 **设置** 区域，点击 **好友关系检查**对应的 **打开**，则该功能的状态为**已开启**。若关闭该功能，点击 **关闭**。
+1. 在环信控制台左侧导航栏中，选择 **功能配置 > 基础功能** > **用户**。
+2. 点击 **好友关系检查** 对应的开启按钮。
    该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
 
 ## 黑名单

@@ -77,7 +77,7 @@
 | `payload.member` | JSON | 退出群组/聊天室的用户 ID。        | 
 | `payload.action` | JSON | 该字段只适用于退出聊天室事件，不适用于退出群组事件：<br/> - `user_quit`：退出聊天室的用户 ID。<br/> - `user_offline`：因离线退出聊天室。 | 
 | `payload.type` | Array  | 退出方式：`QUIT` 表示主动退出群组或聊天室或者因离线退出聊天室。     |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
@@ -130,7 +130,7 @@
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON | 被踢出群组/聊天室的用户 ID。        | 
 | `payload.type` | Array  | 退群方式：`KICK` 表示将用户踢出群组/聊天室。     |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
@@ -184,7 +184,7 @@
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON | 被加入群组/聊天室黑名单后离开的用户 ID。        | 
 | `payload.type` | Array  | 退群方式：`BLOCK` 表示加入群组/聊天室黑名单后离开群组/聊天室。     |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
@@ -239,7 +239,7 @@
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON | 群组/聊天室被解散后离开的用户 ID。        | 
 | `payload.type` | Array  | 退群方式：`DELETE` 表示群组/聊天室被解散后，用户离开群组/聊天室。     |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。  |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                | 
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |

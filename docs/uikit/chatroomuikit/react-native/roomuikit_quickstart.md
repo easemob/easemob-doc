@@ -252,7 +252,7 @@ export default App;
 
 在 [环信控制台](https://console.easemob.com/) 上获取以下信息，然后设置配置选项。
 
-- 获取 App Key。详见 [查看应用详情文档](/product/console/app_manage.html#查看应用信息) 
+- 获取 App Key。详见 [查看应用概览文档](/product/console/app_manage.html#查看应用信息) 
 - 创建用户，获取用户 ID 和 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 - 获取聊天室 ID。详见 [创建聊天室文档](/product/console/operation_chatroom.html#创建聊天室)。
 

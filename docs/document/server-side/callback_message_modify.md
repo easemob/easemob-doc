@@ -74,7 +74,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
-| `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
@@ -144,7 +144,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
-| `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。         |
 | `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
@@ -223,7 +223,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
-| `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
@@ -235,7 +235,7 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `filename`：String，图片名称。<br/> - `size`，JSON，图片尺寸，单位为像素，包含以下字段：`height` 为图片高度；`width` 为图片宽度。 <br/> - `file_length`：String，图片文件大小。<br/> - `secret`：String，图片的访问密钥，即成功上传图片后，从 [文件上传](/document/server-side/message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。 <br/> - `thumbFilename`：String，缩略图大小。<br/> - `type`：文件类型，`img` 表示图片消息。 <br/> - `url`: String，图片 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
+| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `filename`：String，图片名称。<br/> - `size`，JSON，图片尺寸，单位为像素，包含以下字段：`height` 为图片高度；`width` 为图片宽度。 <br/> - `file_length`：String，图片文件大小。<br/> - `secret`：String，图片的访问密钥，即成功上传图片后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `thumbFilename`：String，缩略图大小。<br/> - `type`：文件类型，`img` 表示图片消息。 <br/> - `url`: String，图片 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
 | `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
 | `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
@@ -297,7 +297,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
-| `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
@@ -309,7 +309,7 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `filename`：String，图片名称。<br/> - `size`，JSON，图片尺寸，单位为像素，包含以下字段：`height` 为图片高度；`width` 为图片宽度。 <br/> - `file_length`：String，图片文件大小。<br/> - `secret`：String，图片的访问密钥，即成功上传图片后，从 [文件上传](/document/server-side/message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。 <br/> - `thumbFilename`：String，缩略图大小。<br/> - `type`：文件类型，`img` 表示图片消息。 <br/> - `url`: String，图片 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
+| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `filename`：String，图片名称。<br/> - `size`，JSON，图片尺寸，单位为像素，包含以下字段：`height` 为图片高度；`width` 为图片宽度。 <br/> - `file_length`：String，图片文件大小。<br/> - `secret`：String，图片的访问密钥，即成功上传图片后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `thumbFilename`：String，缩略图大小。<br/> - `type`：文件类型，`img` 表示图片消息。 <br/> - `url`: String，图片 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
 | `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
 | `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
@@ -373,7 +373,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
-| `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
@@ -385,7 +385,7 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `thumb_secret`：视频缩略图访问密钥，即成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果缩略图文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。<br/> - `filename`：String，视频文件名称。<br/> - `thumb`：String，缩略图 URL。<br/> - `length`：视频时长，单位为秒。<br/> - `secret`：String，视频文件的访问密钥，即成功上传视频后，从 [文件上传](/document/server-side/message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。 <br/> - `type`：文件类型，`video` 表示视频消息。 <br/> - `url`: String，视频 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
+| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `thumb_secret`：视频缩略图访问密钥，即成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取的 `share-secret`。如果缩略图文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。<br/> - `filename`：String，视频文件名称。<br/> - `thumb`：String，缩略图 URL。<br/> - `length`：视频时长，单位为秒。<br/> - `secret`：String，视频文件的访问密钥，即成功上传视频后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `type`：文件类型，`video` 表示视频消息。 <br/> - `url`: String，视频 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
 | `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
 | `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
@@ -445,7 +445,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
-| `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
@@ -457,7 +457,7 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `filename`：String，文件名称。<br/> - `secret`：String，文件的访问密钥，即成功上传文件后，从 [文件上传](/document/server-side/message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。 <br/> - `type`：文件类型，`file` 表示文件消息。 <br/> - `url`: String，文件 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
+| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `filename`：String，文件名称。<br/> - `secret`：String，文件的访问密钥，即成功上传文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `type`：文件类型，`file` 表示文件消息。 <br/> - `url`: String，文件 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
 | `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
 | `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
@@ -522,7 +522,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
-| `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
@@ -534,7 +534,7 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `combineLevel`：Int，合并消息的嵌套层级数。<br/> - `msg`：String，合并消息的兼容文本。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。<br/> - `summary`：String，合并消息的概要。<br/> - `filename`：String，文件名称。<br/> -  `subType`：String，消息类型。合并消息为 `sub_combine`。<br/> - `file_length`：Int，合并消息附件的大小，单位为字节。<br/> - `secret`：String，文件的访问密钥，即成功上传文件后，从 [文件上传](/document/server-side/message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。 <br/> - `title`：String，合并消息的标题。<br/> - `type`：消息附件类型，`txt` 表示文本文件。 <br/> - `url`: String，合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。 |
+| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `combineLevel`：Int，合并消息的嵌套层级数。<br/> - `msg`：String，合并消息的兼容文本。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。<br/> - `summary`：String，合并消息的概要。<br/> - `filename`：String，文件名称。<br/> -  `subType`：String，消息类型。合并消息为 `sub_combine`。<br/> - `file_length`：Int，合并消息附件的大小，单位为字节。<br/> - `secret`：String，文件的访问密钥，即成功上传文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `title`：String，合并消息的标题。<br/> - `type`：消息附件类型，`txt` 表示文本文件。 <br/> - `url`: String，合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。 |
 | `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
 | `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
@@ -600,7 +600,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
-| `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |

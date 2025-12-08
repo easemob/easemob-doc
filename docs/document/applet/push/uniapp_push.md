@@ -8,7 +8,7 @@
 
 1. 在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
 2. 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-3. 你已在 [环信控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。高级功能激活后，你可以设置推送通知方式、免打扰模式和自定义推送模板。**如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。**
+3. 若使用推送模板，你需要在 [环信控制台](https://console.easemob.com/user/login)的 **功能配置 > 基础功能 > 消息** 页面激活。**激活后，如需关闭推送模板功能，必须联系商务，因为该操作会删除推送模板相关的所有配置。**
 4. 各推送使用的条件：
     - 小米推送：在小米设备上可用；
     - 华为推送：在华为设备上可用；
@@ -169,7 +169,7 @@ onLaunch(() => {
 
 2. 即时通讯 IM 是否支持多设备离线推送？
 
-你可在[环信控制台](https://console.easemob.com/user/login)的**证书管理**页面配置多设备推送策略。该策略配置对所有推送通道生效：
+你可在 [环信控制台](https://console.easemob.com/user/login) 的 **证书管理** 页面配置多设备推送策略。该策略配置对所有推送通道生效：
 
 - 所有设备离线时，才发送推送消息；
 - 任一设备离线时，都发送推送消息。

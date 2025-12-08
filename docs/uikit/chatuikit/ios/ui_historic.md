@@ -16,7 +16,7 @@ EaseIMKit 源码地址
 
 使用 EaseIMKit 环信 IM App 地址：
 
-- [环信 IM](https://github.com/easemob/chat-ios)
+- 环信 IM 的 [GitHub](https://github.com/easemob/easemob-demo-ios) 和 [Gitee](https://gitee.com/easemob-code/easemob-demo-ios) 示例项目。
 
 ## 导入
 

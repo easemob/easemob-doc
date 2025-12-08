@@ -14,7 +14,7 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-你可以配置会话列表页面的导航栏、会话列表项。详见 [ConversationListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Conversation/Controllers/ConversationListController.swift)。
+你可以配置会话列表页面的导航栏、会话列表项。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Conversation/Controllers/ConversationListController.swift) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Conversation/Controllers/ConversationListController.swift) 上的 `ConversationListController.swift`。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_conversation_list.png" title="会话列表" />

@@ -34,7 +34,7 @@ flutter pub get add chatroom_uikit
 
 你可以在应用加载时或使用 `chatroom_uikit` 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在[环信控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
+初始化时，需传入 App Key。你可以在[环信控制台](https://console.easemob.com/user/login)的**应用概览**页面查看 App Key。
 
 ```dart
 void main() async {

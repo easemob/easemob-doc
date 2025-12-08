@@ -45,7 +45,7 @@ import "easemob-chat-uikit/style.css";
 
 若要实现自动登录，初始化时需传入 `userId`、`password` 或 `token`。 
 
-你需要在环信控制台[创建 IM 用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和密码。如果使用 token，你需要从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
+你需要在环信控制台[创建 IM 用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和密码。如果使用 token，你需要从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/document/server-side/easemob_user_token.html) 。
 
 ```jsx
 import React from 'react';
@@ -101,5 +101,5 @@ const App = () => {
 
 ## 相关参考
 
-- [组件库源码](https://github.com/easemob/Easemob-UIKit-web)
-- [其他示例 demo](https://github.com/easemob/Easemob-UIKit-web/tree/main/demo)
+- 组件库源码：可访问 [GitHub](https://github.com/easemob/easemob-uikit-react) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-uikit-react)
+- 其他示例 demo：可访问 [GitHub](https://github.com/easemob-uikit-react/tree/main/demo) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-uikit-react/tree/main/demo)

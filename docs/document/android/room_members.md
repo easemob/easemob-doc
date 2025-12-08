@@ -89,7 +89,7 @@ EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, membe
 以下两类成员即使离线也不会退出聊天室：
 
 - 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
-- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)时拉入的用户从未登录过。
+- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_create.html)时拉入的用户从未登录过。
 
 若开启了聊天室多端多设备功能，聊天室白名单中的成员在一台设备上离线重连后，无法收到聊天室的消息。若使该设备收到收到聊天室的消息，需要登录后手动调用 API 加入聊天室。
 
@@ -132,6 +132,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unblockChatRoomMe
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchChatRoomBlackList(String, int, int, EMValueCallBack)。
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页期望获取的黑名单中的成员数。取值范围为 [1,50]。
 EMChatRoom chatroom = EMClient.getInstance().chatroomManager().fetchChatRoomBlackList(chatRoomId, pageNum, pageSize);
 ```
 
@@ -252,6 +254,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unMuteChatRoomMem
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchChatRoomMuteList(String, int, int, EMValueCallBack)。
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页期望返回的禁言成员数。取值范围为 [1,50]。
 Map<String, Long> memberMap =  EMClient.getInstance().chatroomManager().fetchChatRoomMuteList(chatRoomId, pageNum, pageSize);
 ```
 

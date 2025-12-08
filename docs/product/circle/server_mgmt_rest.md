@@ -16,7 +16,7 @@
 要调用环信即时通讯 RESTful API，请确保满足以下要求：
 
 - 已在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
-- 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](http://doc.easemob.com/product/limitationapi.html)。
+- 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](http://doc.easemob.com/document/server-side/limitationapi.html)。
 
 ## 公共参数
 
@@ -62,7 +62,7 @@
 
 Authorization：`Bearer ${YourAppToken}`
 
-为提高项目的安全性，环信使用 App Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 需使用 App Token 的鉴权方式，详见 [使用环信 App Token 鉴权](http://doc.easemob.com/product/easemob_app_token.html)。
+为提高项目的安全性，环信使用 App Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 需使用 App Token 的鉴权方式，详见 [使用环信 App Token 鉴权](/document/server-side/easemob_app_token.html)。
 
 ### 查询环信超级社区用户是否存在
 

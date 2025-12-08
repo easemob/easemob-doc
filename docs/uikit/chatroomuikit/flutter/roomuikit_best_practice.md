@@ -146,4 +146,4 @@ class _ChatroomViewState extends State<ChatroomView>
 
 ## 参考
 
-若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/flutter/chatroom_uikit_demo)。
+若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/flutter/chatroom_uikit_demo) 或 [Gitee 地址](https://gitee.com/easemob-code/ChatroomDemo/tree/dev/flutter/chatroom_uikit_demo)。
