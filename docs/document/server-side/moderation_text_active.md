@@ -46,7 +46,7 @@ curl -X POST 'http://XXXX/XXX/XXX/moderation/txt/check' \
 
 关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
 
-### 请求 body
+### 请求 body 参数
 
 | 参数    | 类型   | 是否必需 | 描述           |
 | :------ | :----- | :------- | :------------- |
