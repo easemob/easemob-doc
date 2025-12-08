@@ -217,9 +217,6 @@ EMConversationType conversationType = EMConversationTypeGroupChat;
                 EMPushRemindType remindType = aResult.remindType;
                 //获取会话的离线推送免打扰过期 Unix 时间戳。
                 NSTimeInterval ex = aResult.expireTimestamp;
-                //获取会话的离线推送免打扰时段的开始时间。
-                EMSilentModeTime *startTime = aResult.silentModeStartTime;
-                EMSilentModeTime *endTime = aResult.silentModeEndTime;
             }
     }];
 ```
