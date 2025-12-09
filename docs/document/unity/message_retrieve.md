@@ -103,12 +103,13 @@ SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(conversationId, ty
 
 ### 从本地读取指定会话的消息
 
-你可以从本地数据库中读取指定会话的消息，示例代码如下：
+你可以从本地数据库中读取指定会话的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
 ```csharp
 // 获取本地会话。
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 // 该方法获取 `startMsgId` 之前的 `pagesize` 条消息。
+// pagesize：每次获取的消息数量，取值范围为 [1,400]。
 conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>>(
   onSuccess: (list) => {
      Debug.Log($"获取到{list.Count}条消息");

@@ -141,11 +141,6 @@ const option = ChatSilentModeParam.constructorWithNotification(
 );
 // 将免打扰时长设置为 10 分钟。
 const option = ChatSilentModeParam.constructorWithDuration(10);
-// 将免打扰时间段设置为 10:10-11:00。
-const option = ChatSilentModeParam.constructorWithPeriod({
-  startTime: new ChatSilentModeTime({ hour: 10, minute: 10 }),
-  endTime: new ChatSilentModeTime({ hour: 11, minute: 10 }),
-});
 // 设置指定会话的推送通知。
 ChatClient.getInstance()
   .pushManager.setSilentModeForConversation({
