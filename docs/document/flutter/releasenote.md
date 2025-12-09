@@ -4,6 +4,10 @@
 
 ## 版本 v4.15.2 2025-11-7
 
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.15.1
+- - `Android` 升级至 4.15.1
+
 #### 新增特性
 
 - 新增 `getCurrentDeviceId` 方法获取你当前设备的设备 ID。
@@ -17,11 +21,19 @@
 
 ## 版本 v4.15.1 2025-8-19
 
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.15.0
+- - `Android` 升级至 4.15.0
+
 - 修复 `updatePushNickname` 在未登录和参数异常时导致的崩溃问题。
 - 修复 `fetchChatroomInfoFromServer` 在取消 `fetchMembers` 参数后导致的崩溃问题。
 - 修复 `modifyMessage` 在传入消息体为空时导致的崩溃问题。
 
 ## 版本 v4.15.0 2025-6-16
+
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.15.0
+- - `Android` 升级至 4.15.0
 
 #### 新增特性
 
@@ -48,6 +60,10 @@
 
 ## 版本 v4.13.0 2025-3-28
 
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.13.0
+- - `Android` 升级至 4.13.0
+
 #### 新增特性
 
 - [支持修改各类发送成功后的消息](message_modify.html) ：
@@ -70,6 +86,10 @@
 
 ## 版本 v4.12.0 2025-1-17
 
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.12.0
+- - `Android` 升级至 4.12.0
+
 #### 新增特性
 
 用户加入聊天室后会收到如下信息，即调用 `joinChatroom` 方法后的成功回调中会包含如下信息：
@@ -81,18 +101,34 @@
 
 ## 版本 4.10.0 2024-12-05
 
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.10.2
+- - `Android` 升级至 4.10.3
+
 - 修复 [fetchSilentModeForConversations](/document/flutter/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
 - 修复 iOS `applicationDidEnterBackground` 和 `applicationWillEnterForeground` 不执行的问题。
 
 ## 版本 4.8.2+1
 
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.8.1
+- - `Android` 升级至 4.8.2
+
 - 修复 Android 端可能出现的消息格式转换失败。
 
 ## 版本 V4.8.2 2024-11-18
 
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.8.1
+- - `Android` 升级至 4.8.2
+
 - 修复 ios `EMChatManager.searchMsgsByOptions` 和 `EMConversation.searchMsgsByOptions` 方法类型不准的问题。
 
 ## 版本 V4.8.1 2024-10-15
+
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.8.1
+- - `Android` 升级至 4.8.2
 
 #### 新增特性
 
@@ -124,6 +160,10 @@
 
 ## 版本 V4.6.1 2024-6-11
 
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.7.0
+- - `Android` 升级至 4.7.0
+
 #### 新增特性
 
 - 撤回消息方法 `recallMessage` 中增加了 `ext` 参数（字符串类型），[支持消息撤回时携带自定义信息](message_recall.html#撤回消息)。
@@ -137,6 +177,10 @@
 - 修复安卓部分场景下，用户升级数据库后，在同一个进程下登录新的用户，构建数据库表失败的问题。
 
 ## 版本 V4.5.0 2024-5-7
+
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.5.0
+- - `Android` 升级至 4.5.0
 
 #### 新增特性
 
@@ -192,6 +236,10 @@
 - 修复部分场景下调用 `EMChatManager#updateMessage` 方法更新消息时导致的崩溃问题。
 
 ## 版本 V4.2.0 2024-1-4
+
+- 依赖的原生 `SDK` 升级:
+- - `iOS` 升级至 4.2.0
+- - `Android` 升级至 4.2.1
 
 #### 新增特性
 
