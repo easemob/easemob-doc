@@ -99,7 +99,7 @@ react-native-chat-sdk 版本要求 1.8.0 或以上
 
 react-native-chat-sdk 版本要求 1.3.1 或以上
 
-### 新增特性
+#### 新增特性
 
 - 新增消息 URL 预览功能。
 - 新增聊天消息置顶功能。

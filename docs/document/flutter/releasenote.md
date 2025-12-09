@@ -5,8 +5,8 @@
 ## 版本 v4.15.2 2025-11-7
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.15.1
-- - `Android` 升级至 4.15.1
+  - `iOS` 升级至 4.15.1
+  - `Android` 升级至 4.15.1
 
 #### 新增特性
 
@@ -22,8 +22,8 @@
 ## 版本 v4.15.1 2025-8-19
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.15.0
-- - `Android` 升级至 4.15.0
+  - `iOS` 升级至 4.15.0
+  - `Android` 升级至 4.15.0
 
 - 修复 `updatePushNickname` 在未登录和参数异常时导致的崩溃问题。
 - 修复 `fetchChatroomInfoFromServer` 在取消 `fetchMembers` 参数后导致的崩溃问题。
@@ -32,8 +32,8 @@
 ## 版本 v4.15.0 2025-6-16
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.15.0
-- - `Android` 升级至 4.15.0
+  - `iOS` 升级至 4.15.0
+  - `Android` 升级至 4.15.0
 
 #### 新增特性
 
@@ -61,8 +61,8 @@
 ## 版本 v4.13.0 2025-3-28
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.13.0
-- - `Android` 升级至 4.13.0
+  - `iOS` 升级至 4.13.0
+  - `Android` 升级至 4.13.0
 
 #### 新增特性
 
@@ -87,8 +87,8 @@
 ## 版本 v4.12.0 2025-1-17
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.12.0
-- - `Android` 升级至 4.12.0
+  - `iOS` 升级至 4.12.0
+  - `Android` 升级至 4.12.0
 
 #### 新增特性
 
@@ -102,8 +102,8 @@
 ## 版本 4.10.0 2024-12-05
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.10.2
-- - `Android` 升级至 4.10.3
+  - `iOS` 升级至 4.10.2
+  - `Android` 升级至 4.10.3
 
 - 修复 [fetchSilentModeForConversations](/document/flutter/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
 - 修复 iOS `applicationDidEnterBackground` 和 `applicationWillEnterForeground` 不执行的问题。
@@ -111,24 +111,24 @@
 ## 版本 4.8.2+1
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.8.1
-- - `Android` 升级至 4.8.2
+  - `iOS` 升级至 4.8.1
+  - `Android` 升级至 4.8.2
 
 - 修复 Android 端可能出现的消息格式转换失败。
 
 ## 版本 V4.8.2 2024-11-18
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.8.1
-- - `Android` 升级至 4.8.2
+  - `iOS` 升级至 4.8.1
+  - `Android` 升级至 4.8.2
 
 - 修复 ios `EMChatManager.searchMsgsByOptions` 和 `EMConversation.searchMsgsByOptions` 方法类型不准的问题。
 
 ## 版本 V4.8.1 2024-10-15
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.8.1
-- - `Android` 升级至 4.8.2
+  - `iOS` 升级至 4.8.1
+  - `Android` 升级至 4.8.2
 
 #### 新增特性
 
@@ -161,8 +161,8 @@
 ## 版本 V4.6.1 2024-6-11
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.7.0
-- - `Android` 升级至 4.7.0
+  - `iOS` 升级至 4.7.0
+  - `Android` 升级至 4.7.0
 
 #### 新增特性
 
@@ -179,8 +179,8 @@
 ## 版本 V4.5.0 2024-5-7
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.5.0
-- - `Android` 升级至 4.5.0
+  - `iOS` 升级至 4.5.0
+  - `Android` 升级至 4.5.0
 
 #### 新增特性
 
@@ -238,8 +238,8 @@
 ## 版本 V4.2.0 2024-1-4
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.2.0
-- - `Android` 升级至 4.2.1
+  - `iOS` 升级至 4.2.0
+  - `Android` 升级至 4.2.1
 
 #### 新增特性
 
@@ -361,7 +361,7 @@
 
 - 安卓 `onRemovedFromChatRoom` 不回调。
 
-## 4.0.0+2
+## 版本 4.0.0+2
 
 #### 修复
 
@@ -390,7 +390,7 @@
 
 1. 修复 ios 群已读回执不执行；
 
-## 新增特性
+#### 新增特性
 
 1. 增加会话根据时间删除服务器漫游消息 api `EMConversation#removeServerMessageBeforeTimeStamp(timestamp)`。
 
@@ -598,7 +598,7 @@
 - 修复安卓下 resendMessage 方法发送失败时不回调 onError；
 - 修复 fetchChatRoomMembers 返回类型错误；
 
-## 3.8.3+2
+## 版本 3.8.3+2
 
 - 增加群组已读回执；
 - 不在提供 EMContact 类，直接返回 String 类型 username;
