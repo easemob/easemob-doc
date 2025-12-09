@@ -4,7 +4,9 @@
 
 ## 版本 1.12.0 2025-11-19
 
-- 依赖的原生 SDK 升级到版本（`iOS` 4.16.2 和 `Android` 4.16.1）。
+- 依赖的原生 SDK 升级：
+  - `iOS` 升级至 4.16.2
+  - `Android` 升级至 4.16.1
 
 ## 版本 1.11.5 2025-10-09
 
@@ -69,7 +71,9 @@
 
 #### 新增特性
 
-- 依赖的原生 SDK 升级到版本：iOS 4.11.0 和 Android 4.11.0。
+- 依赖的原生 SDK 升级到版本：
+  - iOS 升级至 4.11.0
+  - Android 升级至 4.11.0
 - 更新服务器连接状态监听器 `ChatConnectEventListener`，新增 `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish` 事件，表示[从服务器拉取离线消息的开始和结束](connection.html)。
 - 新增 `ChatManager#getMessageCount` 方法，用于获取数据库中的消息总数。
   
@@ -88,7 +92,9 @@
 
 #### 新增特性
 
-- 依赖的原生 SDK 升级到版本：iOS 4.8.1 和 Android 4.8.2。
+- 依赖的原生 SDK 升级到版本：
+  - iOS 升级至 4.8.1
+  - Android 升级至 4.8.2
 - 新增 `ChatManager.searchMessages` 方法，支持[一次搜索所有会话的多种类型的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
 - 新增 `ChatManager.searchMessagesInConversation` 方法，支持[一次搜索指定会话的多种类型的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
 - 新增 `ChatManager.removeMessagesWithTimestamp` 方法，支持[只删除服务器端的聊天室消息](message_delete.html#单向删除服务器端的聊天室消息)。
@@ -205,7 +211,9 @@
 
 #### 新增特性
 
-- 依赖的原生 SDK 升级到版本（`iOS` 4.2.0 和`Android` 4.2.1）。添加原生 SDK 提供的新功能。
+- 依赖的原生 SDK 升级到版本，添加原生 SDK 提供的新功能。
+  - `iOS` 升级至 4.2.0
+  - `Android` 升级至 4.2.1
 - 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
 - 新增 `ChatContactManager.fetchAllContacts` 和 `ChatContactManager.fetchContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
 - 新增 `ChatContactManager.getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
