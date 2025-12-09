@@ -278,7 +278,9 @@
 
 #### 新增特性
 
-- 原生平台 Android 和 iOS 的 SDK 升级到 v4.0.2。
+- 依赖的原生 SDK 升级：
+  - iOS 升级至 4.16.2
+  - Android 升级至 4.16.1
 - 新增 `ChatClient.version` 属性用于获取当前 SDK 的版本号。
 - 新增 `ChatGroupManager.setMemberAttribute` 方法用于[设置单个群组成员的属性](group_members.html#设置群组成员自定义属性)。
 - 新增 `ChatGroupManager.fetchMemberAttributes` 方法用于[从服务器获取单个群成员的所有自定义属性](group_members.html#获取单个群成员的所有自定义属性)以及[根据属性 key 获取多个群成员的自定义属性](group_members.html#根据属性-key-获取多个群成员的自定义属性)。
