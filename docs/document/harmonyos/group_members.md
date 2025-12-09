@@ -340,9 +340,9 @@ ChatClient.getInstance().groupManager()?.fetchGroupWhitelist(groupId).then((whit
 
 #### 将成员加入群组黑名单
 
-仅群主和群管理员可以调用 `blockUsers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `GroupChangeListener#OnUserRemoved` 回调。其他群成员会收到该成员退出群组的回调，如需该回调，请联系商务开通。黑名单中的成员会被移出群组，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
+仅群主和群管理员可以调用 `blockUsers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `GroupChangeListener#OnUserRemoved` 回调。默认情况下，其他群成员不会收到事件通知。如需该事件，请联系商务开通。
 
-示例代码如下：
+黑名单中的成员会被移出群组，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
 
 ```typescript
 ChatClient.getInstance().groupManager()?.blockUsers(groupId, userIds).then((group) => {

@@ -115,9 +115,9 @@ SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
 
 #### 将成员加入聊天室黑名单
 
-仅聊天室所有者和管理员可调用 `BlockRoomMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `OnRemovedFromRoom` 回调，其他成员收到 `OnMemberExitedFromRoom` 回调。被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室，黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单列表。
+仅聊天室所有者和管理员可调用 `BlockRoomMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `OnRemovedFromRoom` 回调。默认情况下，其他成员不会收到事件通知。如需该事件，请联系商务开通。
 
-示例代码如下：
+被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室，黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单列表。
 
 ```csharp
 SDKClient.Instance.RoomManager.BlockRoomMembers(roomId, members, new CallBack(
