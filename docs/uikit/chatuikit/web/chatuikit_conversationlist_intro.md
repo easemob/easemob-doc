@@ -20,16 +20,26 @@
   <ImageItem src="/images/uikit/chatuikit/web/conversation_list.png" title="会话列表页面" />
 </ImageGallery>
 
+<!-- <ImageHotspot
+  src="/images/uikit/chatuikit/web/conversation_list.png"
+  alt="会话列表页面"
+    :designSize="{ width: 406, height: 354 }"
+  :hotspots="[
+    { x: 307, y: 20, w: 71, h: 24, link: '#设置更多会话操作', label: 'AppBar' },
+    { x: 307, y: 130, w: 52, h: 24, link: '#自定义会话列表项', label: '按钮' },
+  ]"
+/> -->
+
 ## 使用示例
 
 ```jsx
-import React, { useEffect, useState } from 'react';
-import { ConversationList } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
+import React, { useEffect, useState } from "react";
+import { ConversationList } from "easemob-chat-uikit";
+import "easemob-chat-uikit/style.css";
 
 const Conversation = () => {
   return (
-    <div style={{ width: '30%', height: '100%' }}>
+    <div style={{ width: "30%", height: "100%" }}>
       <ConversationList />
     </div>
   );
