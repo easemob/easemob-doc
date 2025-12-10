@@ -2,6 +2,28 @@
 
 <Toc />
 
+## 版本 v4.16.0 2025-12-10
+
+#### 新增特性
+
+- 依赖的原生 `SDK` 升级:
+  - `iOS` 升级至 4.16.2
+  - `Android` 升级至 4.16.1
+- 支持 [按消息 ID 获取本地单个会话的单条或多条消息](message.retrieve.html#根据消息-id-获取单个或多个本地消息)。
+- 支持私有部署时设置 IPv6 格式的 REST 地址。
+
+#### 优化
+
+更新 AOSL 库版本为 1.3.0。
+
+#### 修复
+
+- 修复 Thread 子区会加入到会话列表的问题。
+- 修复当 [修改文本和自定义消息之外的消息](message_modify.html) 时，`EEMChatEventHandler#onMessageContentChanged` 回调中不返回修改的信息的问题。
+- 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息 `FetchMessageOptions#needSave` 设置为 `false`，也会生成新的本地会话的问题。
+- 修复群组或聊天室解散后，成员收到 [事件](group_manage.html#解散群组) 后，仍然会从服务器获取群组或聊天室详情的问题。
+- 修复更新 [群组属性](group_attributes.html) 时影响群组头像问题。
+
 ## 版本 v4.15.2 2025-11-7
 
 - 依赖的原生 `SDK` 升级:
