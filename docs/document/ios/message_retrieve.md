@@ -15,10 +15,10 @@
 - `IEMChatManager#fetchMessagesFromServer`：根据 `EMFetchServerMessagesOption` 类从服务器分页获取指定会话的历史消息；
 - `IEMChatManager#fetchMessagesFromServerBy`：从服务器获取群组中指定成员发送的消息；
 - `IEMChatManager#loadConversationMessagesWithKeyword`：根据关键词获取本地会话中的单个或多个消息；
-- `IEMChatManager#getMessages`：根据消息 ID 获取单个或多个本地消息；
+- `IEMChatManager#getMessages`：根据消息 ID 获取单个会话的多条本地消息；
 - `EMConversation#loadMessagesWithKeyword`：从本地获取群组中指定成员发送的消息；
 - `EMConversation#loadMessagesStartFromId`：从数据库中读取指定会话的消息；
-- `IEMChatManager#getMessageWithMessageId`：根据消息 ID 获取单个本地消息；
+- `IEMChatManager#getMessageWithMessageId`：根据消息 ID 获取单条本地消息；
 - `EMConversation#loadMessagesWithType`：获取本地存储的指定会话中特定类型的消息；
 - `EMConversation#loadMessagesFrom:to:count:completion:` 获取指定时间段内本地指定会话中发送和接收的消息；
 - `EMConversation#getMessageCountStart:to:`：获取会话在一定时间内的消息数。
@@ -106,7 +106,7 @@ EMFetchServerMessagesOption* option = [[EMFetchServerMessagesOption alloc] init]
 ```
 
 
-### 根据消息 ID 获取单个或多个本地消息
+### 根据消息 ID 获取单条或多条本地消息
 
 自 SDK 4.15.1 开始，你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
 

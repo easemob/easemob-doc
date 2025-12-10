@@ -190,7 +190,7 @@ do {
 
 ### 获取群组列表
 
-用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。
+用户可以调用 `asyncGetJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。
 
 示例代码如下：
 
@@ -198,9 +198,9 @@ do {
 // 异步方法。同步方法为 getJoinedGroupsFromServer(int, int, boolean, boolean)。
 // pageIndex：当前页码，从 0 开始。
 // pageSize：每页期望返回的群组数。取值范围为[1,20]。
-List<EMGroup> grouplist = EMClient.getInstance().groupManager().asyncGetJoinedGroupsFromServer(pageIndex, pageSize, needMemberCount, needRole, new EMValueCallBack<List<EMGroup>>() {
+EMClient.getInstance().groupManager().asyncGetJoinedGroupsFromServer(pageIndex, pageSize, needMemberCount, needRole, new EMValueCallBack<List<EMGroup>>() {
                         @Override
-                        public void onSuccess(List<EMGroup> value) {
+                        public void onSuccess(List<EMGroup> groups) {
 
                         }
 
