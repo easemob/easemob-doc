@@ -20,6 +20,7 @@
 
 - 默认 100 次/秒/App Key。
 - 支持上调该上限，单个叠加包 50 次/秒。
+- 其他 API 的调用频率上限，详见 [REST API 调用频率限制说明](limitationapi.html)。
 
 ## 请求 URL
 
