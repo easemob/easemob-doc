@@ -61,6 +61,12 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups'  \
 | `members`             | Array  | 否       | 群成员的用户 ID 数组，不包含群主的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。        |
 | `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。     |
 
+:::tip
+该 API 支持基于自定义群组 ID 创建群组，即调用该 API 时传入 `groupid` 参数。
+1. 使用该功能前，你需 **联系环信商务**。功能开通后，你也可以 [基于自定义聊天室 ID 创建聊天室](chatroom_create.html#请求-body-参数)。
+2. `groupid` 参数最多支持 64 个字符，可包含小写英文字母 a-z 和数字 0-9。**注意不要使用大写英文字母 A-Z 。**
+:::
+
 ## 响应示例
 
 ```json
