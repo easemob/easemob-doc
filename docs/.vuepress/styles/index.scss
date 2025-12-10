@@ -2,6 +2,10 @@
 
 $theme-color: #303233;
 
+body {
+  background-color: #FAFDFF;
+}
+
 .theme-container {
   color: var(--text-color);
   .page {
@@ -372,15 +376,16 @@ button {
 }
 
 .footer-wrapper {
-  padding: 1.25rem 0;
-  padding-inline-start: 0 !important;
+  margin-top: 64px;
+  padding: 1.25rem;
+  padding-inline-start: 1.25rem !important;
   border-top: 0;
+  background-color: #FAFDFF;
 
   .footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 0 1rem;
     box-sizing: border-box;
     margin: 0;
   }
@@ -388,4 +393,8 @@ button {
 
 ::-webkit-scrollbar-thumb{
   background-color: #EBEEF5;
+}
+
+.no-sidebar .theme-hope-content {
+  display: none;
 }
