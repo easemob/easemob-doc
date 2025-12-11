@@ -4,6 +4,8 @@
 
 精简版 SDK 对应用的体积增量不大，android 为 1.11 MB，iOS 为 1.09 MB。
 
+## 添加依赖
+
 - 本地依赖：
 
 [下载 Android 端精简版 SDK](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/SDK-mini/easemob-sdk-4.2.3-lite.zip)。

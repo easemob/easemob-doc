@@ -2,9 +2,9 @@
 
 精简版 SDK 4.2.0 支持 Android 和 iOS 平台，包含基础的单聊和聊天室功能，适用于 SDK 包体积尽量小、仅需基础收发消息功能、而无需离线推送通知等功能的情况。
 
-精简版 SDK 对应用的体积增量不大，android 为 1.11 MB，iOS 为 1.09 MB。
+精简版 SDK 对应用的体积增量不大，Android 为 1.11 MB，iOS 为 1.09 MB。
 
-要下载 iOS 端精简版 SDK，点击[这里](https://downloadsdk.easemob.com/downloads/SDK-mini/iOS_IMLite_SDK_4.2.0_1116.zip)。
+你可以从环信官网 [下载 iOS 端精简版 SDK](https://downloadsdk.easemob.com/downloads/SDK-mini/iOS_IMLite_SDK_4.2.0_1116.zip)。
 
 :::tip
 精简版 SDK 无本地存储，可以升级为标准版 SDK，但标准版不能降级为精简版。
