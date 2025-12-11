@@ -34,10 +34,10 @@
 
 - 依赖的原生 SDK 升级到版本（`iOS` 4.15.1 和 `Android` 4.15.2）。
 - 更新修改消息：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以修改消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持修改扩展信息。
-- 图片消息新增对 `gif` 格式图片的支持。详见 `ChatImageMessageBody` 类型。
-- 更新创建群组接口：作废 `createGroup`, 新增 `createGroupEx` 接口替换，新接口支持自定义群头像。
-- 附件类型消息支持鉴权，默认不开启，如果开启，需要调用下载相关接口下载附件。详见 `_ChatFileMessageBody.secret`。
-- 支持拉取漫游消息时，只拉取指定的群成员发送的消息。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。
+- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
+- 支持 [群组头像功能](group_attributes.html#管理群组头像)。新增创建群组接口 `createGroupEx` 支持创建群组时设置群组头像，作废原群组创建接口 `createGroup`。
+- 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。
 - 支持加载本地会话消息时，只加载指定群成员发送的消息。详见 `getMsgsWithMsgType` 接口。
 - 新增群组接口，`fetchMemberInfoListFromServer`, 获取群成员列表时包括成员角色和入群时间。
 - 新增群组接口，`updateGroupAvatar`，更新群组头像。

@@ -65,7 +65,7 @@
     - 用户同意入群邀请后，邀请人收到 `ChatGroupEventListener#onInvitationAccepted` 回调和 `ChatGroupEventListener#onMemberJoined` 回调，其他群成员收到 `ChatGroupEventListener#onMemberJoined` 回调；
     - 用户拒绝入群邀请后，邀请人收到 `ChatGroupEventListener#onInvitationDeclined` 回调。
     
-你可以调用 `createGroup` 方法创建群组，并通过 `ChatGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
+你可以调用 `createGroupEx` 方法创建群组，并通过 `ChatGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
 
 示例代码如下：
 
@@ -80,7 +80,7 @@ const desc = "this is study group";
 const allMembers = ["Tom", "Jason"];
 // 执行操作
 ChatClient.getInstance()
-  .groupManager.createGroup(option, groupName, desc, allMembers, reason)
+  .groupManager.createGroupEx(option, groupName, desc, allMembers, reason)
   .then(() => {
     console.log("create group success.");
   })
