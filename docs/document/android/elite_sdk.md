@@ -4,6 +4,8 @@
 
 精简版 SDK 对应用的体积增量不大，android 为 1.11 MB，iOS 为 1.09 MB。
 
+## 添加依赖
+
 - 本地依赖：
 
 [下载 Android 端精简版 SDK](https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/SDK-mini/easemob-sdk-4.2.3-lite.zip)。
@@ -44,15 +46,10 @@ dependencies {
       <td width="132">标准版 SDK</td>
     </tr>
     <tr>
-      <td rowspan="17">消息管理</td>
-      <td rowspan="9">发送和接收消息</td>
-      <td>发送和接收消息</td>
-      <td rowspan="9"><p><a href="https://doc.easemob.com/document/android/message_send.html">发送和接收消息</a></p></td>
-      <td>✅</td>
-      <td>✅</td>
-    </tr>
-    <tr>
-      <td>接收消息</td>
+      <td rowspan="16">消息管理</td>
+      <td rowspan="8">发送和接收消息</td>
+      <td>发送和接收文本消息</td>
+      <td rowspan="8"><p><a href="https://doc.easemob.com/document/android/message_send.html">发送和接收消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -127,7 +124,7 @@ dependencies {
       <td>撤回消息</td>
       <td><p>撤回消息</p>
       <p>设置消息撤回监听</p></td>
-      <td>&nbsp;</td>
+      <td><p><a href="https://doc.easemob.com/document/android/message_recall.html">撤回消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -142,8 +139,8 @@ dependencies {
       <td height="71">获取消息流量统计</td>
       <td>获取消息流量统计</td>
       <td><a href="https://doc.easemob.com/document/android/message_traffic_statis.html">获取消息流量统计</a></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td>❌</td>
+      <td>✅</td>
     </tr>
     <tr>
       <td height="71">翻译</td>
