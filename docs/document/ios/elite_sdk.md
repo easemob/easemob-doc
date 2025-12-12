@@ -25,15 +25,10 @@
       <td width="132">标准版 SDK</td>
     </tr>
     <tr>
-      <td rowspan="17">消息管理</td>
-      <td rowspan="9">发送和接收消息</td>
-      <td>发送和接收消息</td>
-      <td rowspan="9"><p><a href="https://doc.easemob.com/document/android/message_send.html">发送和接收消息</a></p></td>
-      <td>✅</td>
-      <td>✅</td>
-    </tr>
-    <tr>
-      <td>接收消息</td>
+      <td rowspan="16">消息管理</td>
+      <td rowspan="8">发送和接收消息</td>
+      <td>发送和接收文本消息</td>
+      <td rowspan="8"><p><a href="https://doc.easemob.com/document/android/message_send.html">发送和接收消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -108,7 +103,7 @@
       <td>撤回消息</td>
       <td><p>撤回消息</p>
       <p>设置消息撤回监听</p></td>
-      <td>&nbsp;</td>
+      <td><p><a href="https://doc.easemob.com/document/android/message_recall.html">撤回消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -123,8 +118,8 @@
       <td height="71">获取消息流量统计</td>
       <td>获取消息流量统计</td>
       <td><a href="https://doc.easemob.com/document/ios/message_traffic_statis.html">获取消息流量统计</a></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td>❌</td>
+      <td>✅</td>
     </tr>
     <tr>
       <td height="71">翻译</td>
