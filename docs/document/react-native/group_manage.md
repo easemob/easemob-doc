@@ -55,14 +55,14 @@
     受邀用户直接进群，会收到如下回调：
     
     - 新成员会收到 `ChatGroupEventListener#onAutoAcceptInvitation` 回调；
-    - 邀请人会收到 `ChatGroupEventListener#onInvitationAccepted` 和 `ChatGroupEventListener#onMemberJoined` 回调;
-    - 其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
+    - 邀请人会收到 `ChatGroupEventListener#onInvitationAccepted` 和 `ChatGroupEventListener#onMembersJoined` 回调;
+    - 其他群成员会收到 `ChatGroupEventListener#onMembersJoined` 回调。
     
     2. 受邀用户需要确认才能进群。
     
     只有 `ChatGroupOptions#inviteNeedConfirm` 设置为 `true` 和 `autoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `ChatGroupEventListener#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
     
-    - 用户同意入群邀请后，邀请人收到 `ChatGroupEventListener#onInvitationAccepted` 回调和 `ChatGroupEventListener#onMemberJoined` 回调，其他群成员收到 `ChatGroupEventListener#onMemberJoined` 回调；
+    - 用户同意入群邀请后，邀请人收到 `ChatGroupEventListener#onInvitationAccepted` 回调和 `ChatGroupEventListener#onMembersJoined` 回调，其他群成员收到 `ChatGroupEventListener#onMembersJoined` 回调；
     - 用户拒绝入群邀请后，邀请人收到 `ChatGroupEventListener#onInvitationDeclined` 回调。
     
 你可以调用 `createGroupEx` 方法创建群组，并通过 `ChatGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
@@ -114,7 +114,7 @@ ChatClient.getInstance()
 
 ### 退出群组
 
-群成员可调用 `leaveGroup` 方法退出群组，其他成员收到 `ChatGroupEventListener#onMemberExited` 回调。退出群组后，该成员将不再收到群消息。
+群成员可调用 `leaveGroup` 方法退出群组，其他成员收到 `ChatGroupEventListener#onMembersExited` 回调。退出群组后，该成员将不再收到群消息。
 群主不能调用该接口退出群组，只能调用 `destroyGroup` 方法解散群组。
 
 示例代码如下：
@@ -433,12 +433,12 @@ const groupListener: ChatGroupEventListener = new (class
     );
   }
   // 有新成员加入群组，所有群成员收到该回调
-  onMemberJoined(params: { groupId: string; member: string }): void {
-    console.log(`onMemberJoined:`, params.groupId, params.member);
+  onMembersJoined(params: { groupId: string; member: string }): void {
+    console.log(`onMembersJoined:`, params.groupId, params.member);
   }
   // 有群成员主动退出群，所有群成员收到该回调
-  onMemberExited(params: { groupId: string; member: string }): void {
-    console.log(`onMemberExited:`, params.groupId, params.member);
+  onMembersExited(params: { groupId: string; member: string }): void {
+    console.log(`onMembersExited:`, params.groupId, params.member);
   }
   // 群组公告更新，所有群成员收到该回调
   onAnnouncementChanged(params: {

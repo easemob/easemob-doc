@@ -32,21 +32,31 @@
 
 #### 新增特性
 
-- 依赖的原生 SDK 升级到版本（`iOS` 4.15.1 和 `Android` 4.15.2）。
-- 更新修改消息：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以修改消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持修改扩展信息。
+依赖的原生 SDK 升级到版本（`iOS` 4.15.1 和 `Android` 4.15.2）。
+
+**消息相关**
+
+- 更新 [修改消息](message_modify.html)：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以修改消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持修改扩展信息。
 - 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
-- 支持 [群组头像功能](group_attributes.html#管理群组头像)。新增创建群组接口 `createGroupEx` 支持创建群组时设置群组头像，作废原群组创建接口 `createGroup`。
 - 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。
-- 支持加载本地会话消息时，只加载指定群成员发送的消息。详见 `getMsgsWithMsgType` 接口。
-- 新增群组接口，`fetchMemberInfoListFromServer`, 获取群成员列表时包括成员角色和入群时间。
-- 新增群组接口，`updateGroupAvatar`，更新群组头像。
-- 新增搜索消息接口 `getConvsMsgsWithKeyword`, 通过关键字在本地 搜索指定会话列表的消息 ID 列表。
-- 新增搜索消息接口 `getMessagesWithIds`, 消息 ID 列表在本地搜索消息。
-- 更新搜索消息接口 `getConvMsgsWithKeyword`, 作废 `sender` 参数、新增 `senders` 参数。
-- 更新登录 token 过期提醒机制，由原来有效期时间的 50% 的时候提示，修改为 80% 的时候提示。
-- 修改撤销消息，支持群组管理员、创建者、聊天室创建者撤回用其他用户消息。
-- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。详见 `ChatGroupEventListener` 类型 `onMembersJoined` 和 `onMembersExited` 方法，原来 `onMemberJoined` 和 `onMemberExited` 作废。
+- 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持 [根据关键字从本地数据库中获取单个会话的消息 ID 列表](message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。
+- 支持 [根据消息 ID 获取单个会话的单条或多条本地消息](message_retrieve.html#根据消息-id-获取单条或多条本地消息)。
+- 更新 [根据搜索范围搜索当前会话中的消息](message_search.html#根据搜索范围搜索当前会话中的消息) 接口 `getConvMsgsWithKeyword`, 新增 `senders` 参数，替换原来的 `sender` 参数。
+- [撤回消息](message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
+
+**群组相关**
+
+- 支持 [创建群组时设置群头像](group_attributes.html#管理群组头像)。新增创建群组接口 `createGroupEx`，作废原接口 `createGroup`。
+- 支持 [修改群组头像](group_attributes.html#修改群头像)。
+- 支持 [获取群成员列表](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
+  - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
+
+#### 优化
+
+修改 Token 即将过期事件 [ChatConnectEventListener#onTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
 
 ## 版本 1.8.2 2025-3-15
 

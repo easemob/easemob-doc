@@ -151,6 +151,31 @@ ChatClient.getInstance()
   });
 ```
 
+### 从本地获取指定群成员发送的消息
+
+从 SDK 1.11.0 开始，你可以调用 `getMsgsWithMsgType` 加载本地会话中指定成员发送的消息。
+
+```typescript
+
+
+```
+
+### 根据关键字获取本地会话的消息 ID
+
+自 SDK 1.11.0 版本开始，你可以调用 `getConvsMsgsWithKeyword` 通过设置关键词获取单个会话中的消息 ID 列表。消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
+
+```typescript
+
+```
+
+### 根据消息 ID 获取单条或多条本地消息
+
+自 SDK 1.11.0 版本开始，你可以调用 `getMessagesWithIds`, 传入单个或多个消息 ID 获取单个本地会话中的消息。
+
+```typescript
+
+```
+
 ### 获取一定时间内本地会话的消息
 
 你可以调用 `getMsgWithTimestamp` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
