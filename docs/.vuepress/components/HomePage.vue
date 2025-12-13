@@ -76,7 +76,7 @@
                         {{ context.text }}
                       </a>
                       <ClientOnly v-else>
-                        <el-popover placement="bottom-start" :width="436">
+                        <el-popover placement="bottom-start" :width="436" :offset="0" :show-arrow="false">
                           <template #reference>
                             <a
                               class="feature-link"
@@ -176,7 +176,6 @@ const buildAnchorLink = () => {
   margin-bottom: 24px;
   color: #000;
   text-align: justify;
-  font-family: "PingFang SC";
   font-size: 36px;
   font-style: normal;
   font-weight: 600;
@@ -210,7 +209,6 @@ const buildAnchorLink = () => {
 }
 
 .feature-title {
-  font-family: PingFang SC, sans-serif;
   flex-grow: 1;
   font-size: 16px;
   flex-basis: auto;
@@ -232,7 +230,6 @@ const buildAnchorLink = () => {
 }
 
 .sdk-item {
-  font-family: PingFang SC, sans-serif;
   align-items: start;
   border-left: 2px solid rgba(204, 204, 204, 1);
   background-color: #fff;
@@ -286,9 +283,11 @@ const buildAnchorLink = () => {
   white-space: nowrap;
   justify-content: center;
   padding: 0;
-  font: 600 24px PingFang SC, sans-serif;
-  border-bottom: 0;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
   line-height: normal;
+  border-bottom: 0;
 }
 
 @media (max-width: 991px) {
@@ -301,7 +300,10 @@ const buildAnchorLink = () => {
 .sdk-start-desc {
   margin-top: 8px;
   color: #505e72;
-  font: 400 16px PingFang SC, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .sdk-start-list {
@@ -365,7 +367,10 @@ const buildAnchorLink = () => {
 
 .platform-name {
   color: #303233;
-  font: 500 18px PingFang SC, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   margin: 0 8px;
   width: calc(100% - 40px);
 }
@@ -398,7 +403,10 @@ const buildAnchorLink = () => {
   white-space: nowrap;
   justify-content: center;
   padding: 12px 0;
-  font: 600 24px PingFang SC, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 @media (max-width: 991px) {
@@ -452,7 +460,9 @@ const buildAnchorLink = () => {
 .feature-title {
   padding: 8px 0;
   font-weight: 600;
-  font-family: PingFang SC, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  line-height: normal;
   margin: 0;
 }
 
@@ -473,10 +483,19 @@ const buildAnchorLink = () => {
 .feature-link {
   padding: 8px 8px 8px 0;
   color: #505e72;
-  font: 400 14px PingFang SC, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   text-decoration: underline;
+  text-underline-offset: 4px;
   min-width: 120px;
   cursor: pointer;
+
+  &:hover {
+    font-weight: 500;
+    color: #00A0FA;
+  }
 }
 
 .feature-link-group {
@@ -490,4 +509,5 @@ const buildAnchorLink = () => {
     white-space: initial;
   }
 }
+
 </style>

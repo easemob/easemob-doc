@@ -67,14 +67,12 @@ export default defineComponent({
 .hero-title {
   margin-top: 24px;
   color: #000;
-  font: 500 52px PingFang SC, sans-serif;
   line-height: normal;
 }
 
 .hero-desc {
   margin-top: 16px;
   color: #505e72;
-  font: 400 16px PingFang SC, sans-serif;
   line-height: 24px;
 
   &:last-child {
@@ -86,6 +84,7 @@ export default defineComponent({
   flex-shrink: 0;
   width: 400px;
   height: 300px;
+  margin-right: 33px;
 }
 
 @media (max-width: 991px) {

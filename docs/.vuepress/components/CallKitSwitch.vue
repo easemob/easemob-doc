@@ -13,7 +13,7 @@ const PLATFORM_ICON_MAP = {
   },
   web: {
     icon: "/icon-web.svg",
-    activeIcon: "/icon-web-hover.png"
+    activeIcon: "/icon-web-hover.svg"
   },
   harmonyos: {
     icon: "/icon-harmonyos.svg",
@@ -109,7 +109,7 @@ const onChange = (platform) => {
 </script>
 
 <template>
-  <el-select v-model="platform" @change="onChange" placeholder="请选择">
+  <el-select v-model="platform" @change="onChange" placeholder="请选择" placement="bottom-end" popper-class="platform-select-dropdown">
     <template #prefix>
       <img width="20" height="20" :src="platformIcon" />
     </template>
@@ -161,5 +161,67 @@ const onChange = (platform) => {
 .label-icon {
   vertical-align: sub;
   padding-right: 5px;
+}
+
+.platform-select-dropdown {
+  width: 16rem;
+
+  .el-select-group__wrap {
+    position: relative;
+    padding-bottom: .5rem;
+    margin-bottom: .5rem;
+
+    .el-select-group__title {
+      display: flex;
+      align-items: center;
+      height: 2rem;
+      padding-left: 1.25rem;
+      align-self: stretch;
+      color: var(--text-color-light);
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.25rem;
+    }
+
+    .el-select-group {
+      .el-select-dropdown__item {
+        height: 2rem;
+        padding-left: .75rem;
+        color: var(--text-color);
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+
+        .label-icon {
+            padding-right: .62rem;
+        }
+
+        &:hover,
+        &.is-selected {
+          color: var(--theme-color);
+        }
+      }
+    }
+
+    &::after {
+      content: '';        
+      position: absolute; 
+      bottom: 0;          
+      left: 1.5rem;
+      width: calc(100% - 3rem);        
+      height: 1px;       
+      background-color: var(--border-color); 
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
 }
 </style>

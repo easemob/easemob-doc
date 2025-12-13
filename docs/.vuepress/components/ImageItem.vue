@@ -40,7 +40,10 @@ export default {
   color: #253646;
   white-space: nowrap;
   text-align: center;
-  font: 500 14px PingFang SC, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .header {
