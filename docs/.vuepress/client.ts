@@ -13,6 +13,7 @@ import InstantSearch from "vue-instantsearch/vue3/es/index.js";
 import BiliBiliPlayer from "./components/BiliBili.vue";
 import ImageHotspot from "./components/ImageHotspot.vue";
 import DemoCard from "./components/DemoCard.vue";
+import Step from "./components/Step.vue";
 import FeedBack from "./components/Feedback.vue";
 import { embedChatbot } from "./embed";
 
@@ -28,7 +29,8 @@ export default defineClientConfig({
     app.component("BiliBiliPlayer", BiliBiliPlayer);
     app.use(InstantSearch);
     app.component("DemoCard", DemoCard);
-
+    app.component("Step", Step);
+    
     if (typeof window !== "undefined") {
       embedChatbot();
     }
