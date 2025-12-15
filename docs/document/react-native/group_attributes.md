@@ -28,7 +28,7 @@
 
 ### 修改群组名称
 
-仅群主和群管理员可以调用 `changeGroupName` 方法设置和修改群组名称，群名称的长度限制为 128 个字符。
+仅群主和群管理员可以调用 `changeGroupName` 方法设置和修改群组名称，群名称的长度限制为 128 个字符。其他群成员会收到 `ChatGroupEventListener#onDetailChanged` 事件。
 
 示例代码如下：
 
@@ -46,7 +46,7 @@ ChatClient.getInstance()
 
 ### 修改群组描述
 
-仅群主和群管理员可以调用 `changeGroupDescription` 方法设置和修改群组描述，群描述的长度限制为 512 个字符。
+仅群主和群管理员可以调用 `changeGroupDescription` 方法设置和修改群组描述，群描述的长度限制为 512 个字符。其他群成员会收到 `ChatGroupEventListener#onDetailChanged` 事件。
 
 示例代码如下：
 
@@ -63,16 +63,25 @@ ChatClient.getInstance()
 
 ### 修改群头像
 
-自 SDK 1.11.0 版本开始，创建群组后，群主或管理员可调用 `GroupManager#updateGroupAvatar` 设置或修改群组头像：
+自 SDK 1.11.0 版本开始，创建群组后，群主或管理员可调用 `GroupManager#updateGroupAvatar` 设置或修改群组头像。
 
 ```typescript
-
+const groupId = '';
+const avatar = '';
+ChatClient.getInstance()
+  .groupManager.updateGroupAvatar(groupId, avatar)
+  .then(() => console.log('update group avatar success'))
+  .catch((e) => console.log('update group avatar failed', e));
 ```
 
-群组头像被修改后，其他群成员会收到 `   ` 回调：
+群组头像被修改后，其他群成员会收到 `ChatGroupEventListener#onDetailChanged` 事件。
 
 ```typescript
-
+ChatClient.getInstance().groupManager.addGroupListener({
+  onDetailChanged(group) {
+    console.log('group detail changed: ', group);
+  },
+});
 ```
 
 ### 管理群公告

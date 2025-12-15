@@ -79,14 +79,13 @@ const desc = "this is study group";
 // 成员列表
 const allMembers = ["Tom", "Jason"];
 // 执行操作
-ChatClient.getInstance()
-  .groupManager.createGroupEx(option, groupName, desc, allMembers, reason)
-  .then(() => {
-    console.log("create group success.");
-  })
-  .catch((reason) => {
-    console.log("create group fail.", reason);
-  });
+ChatClient.getInstance().groupManager.createGroupEx({
+      options: new ChatGroupOptions({}),
+      groupName: '<GROUP_NAME>',
+      desc: '<GROUP_DESC>',
+      inviteMembers: ['<USER_ID_1>', '<USER_ID_2>'],
+      inviteReason: '<INVITE_REASON>',
+    });
 ```
 
 ### 解散群组

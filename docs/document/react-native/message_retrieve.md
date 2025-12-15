@@ -96,7 +96,29 @@ ChatClient.getInstance()
 自 1.11.0 版本开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
 
 ```typescript
-
+const conversationId = '<YOUR_CONVERSATION_ID>';
+const conversationType = ChatConversationType.GroupChat;
+const cursor = ''; // cursor 查询的起始消息 ID。若该参数设置为空字符串，从群成员发送的最新消息开始。
+const pageSize = 20;
+const options: ChatFetchMessageOptions = {
+  senders: ['user1', 'user2'],
+  direction: ChatSearchDirection.UP,
+  startTs: 0,
+  endTs: Date.now(),
+  needSave: false,
+};
+ChatClient.getInstance()
+  .chatManager.fetchHistoryMessagesByOptions(
+    conversationId,
+    conversationType,
+    { cursor, pageSize, options }
+  )
+  .then((result) => {
+    console.log('Fetched messages:', result.list);
+  })
+  .catch((error) => {
+    console.error('Error fetching messages:', error);
+  });
 ```
 
 ### 根据消息 ID 获取单个本地消息
@@ -165,7 +187,21 @@ ChatClient.getInstance()
 自 SDK 1.11.0 版本开始，你可以调用 `getConvsMsgsWithKeyword` 通过设置关键词获取单个会话中的消息 ID 列表。消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
 
 ```typescript
-
+const keywords = 'hello';
+const timestamp = -1;
+const from = '<MESSAGE_SENDER_ID>';
+const direction = ChatSearchDirection.UP;
+const searchScope = ChatMessageSearchScope.All;
+ChatClient.getInstance()
+  .chatManager.getConvsMsgsWithKeyword({
+    keywords,
+    timestamp,
+    from,
+    direction,
+    searchScope,
+  })
+  .then((messages) => console.log('Messages:', messages))
+  .catch((error) => console.error('Error:', error));
 ```
 
 ### 根据消息 ID 获取单条或多条本地消息
@@ -173,7 +209,21 @@ ChatClient.getInstance()
 自 SDK 1.11.0 版本开始，你可以调用 `getMessagesWithIds`, 传入单个或多个消息 ID 获取单个本地会话中的消息。
 
 ```typescript
-
+const conversationId = '<YOUR_CONVERSATION_ID>';
+const conversationType = ChatConversationType.GroupChat;
+const msgIds = ['<MSG_ID_1>', '<MSG_ID_2>', '<MSG_ID_3>'];
+ChatClient.getInstance()
+  .chatManager.getMessagesWithIds({
+    convId: conversationId,
+    convType: conversationType,
+    msgIds: msgIds,
+  })
+  .then((messages) => {
+    console.log('Messages:', messages);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 ```
 
 ### 获取一定时间内本地会话的消息

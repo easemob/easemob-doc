@@ -19,6 +19,8 @@ ChatClient.getInstance().addConnectionListener({
   onDisconnected(): void {
     console.log("onDisconnected");
   },
+  // Token 即将过期的回调。
+  // 自 1.11.0 版本，SDK 会在 Token 有效期达到 80% 时触发该回调。
   onTokenWillExpire(): void {
     console.log("onTokenWillExpire");
   },

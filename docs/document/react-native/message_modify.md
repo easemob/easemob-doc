@@ -36,14 +36,14 @@
 
 ## 实现方法
 
-你可以调用 `modifyMessageBody` 方法修改已经发送成功的消息。一条消息默认最多可修改 10 次。
+你可以调用 `modifyMsgBody` 方法修改已经发送成功的消息。一条消息默认最多可修改 10 次。
 
 示例代码如下：
 
 ```typescript
 // body 必须是文本消息体。可以从创建或者接收消息中获取。
 ChatClient.getInstance()
-  .chatManager.modifyMessageBody(msgId, body)
+  .chatManager.modifyMsgBody(msgId, body)
   .then((message) => {
     console.log("modify success:", message);
   })

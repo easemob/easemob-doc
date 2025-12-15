@@ -75,7 +75,7 @@ ChatClient.getInstance()
   .catch();
 ```
 
-2. 接收方收到 [onMessageReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载原图。
+1. 接收方收到 [onMessagesReceived](#接收文本消息) 事件，调用 `downloadAttachment` 下载原图。
 
 ```typescript
 ChatClient.getInstance()
@@ -92,17 +92,32 @@ ChatClient.getInstance()
 
 图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
 
-与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessageReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessagesReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
 
 ```typescript
-
+ChatClient.getInstance().chatManager.addMessageListener({
+  // 重写 onMessagesReceived
+  onMessagesReceived(messages) {
+    for (let index = 0; index < messages.length; index++) {
+      const element = messages[index];
+      if (element?.body.type === ChatMessageType.IMAGE) {
+        const body = element.body as ChatImageMessageBody;
+        // 查看图片是否为 GIF 图片
+        if (body.isGif === true) {
+          // 下载附件
+          ChatClient.getInstance().chatManager.downloadAttachment(element);
+        }
+      }
+    }
+  },
+});
 ```
 
 ### 接收视频消息
 
 1. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见[设置图片缩略图自动下载](#接收图片消息)。
 
-2. 接收方收到 [onMessageReceived 回调](#接收文本消息)，可以调用 `downloadAttachment` 方法下载视频原文件。
+2. 接收方收到 [onMessagesReceived](#接收文本消息) 事件，可以调用 `downloadAttachment` 方法下载视频原文件。
 
 ```typescript
 ChatClient.getInstance()
