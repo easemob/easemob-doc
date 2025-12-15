@@ -4,7 +4,7 @@
 
 | 类型         | 名称                                            |
 | :--------- | :----- |
-| 国内数据中心 | 国内 1 区、国内 2 区、NGI-国内二区、国内 VIP 区          |
+| 国内数据中心 | 国内 1 区、国内 2 区、国内 VIP 区          |
 | 海外数据中心 | 新加坡 1 区、新加坡 2 区、美东 1 区、德国 2 区 |
 
 目前支持的海外加速节点：
@@ -17,7 +17,7 @@
 
 | 名称                 | 用途                                        |
 | :--------- | :----- |
-| 国内 1 区、国内 2 区、NGI-国内二区     | 环信 IM 社区版、企业版、旗舰版、免费版和专业版客户所在集群    |
+| 国内 1 区、国内 2 区     | 环信 IM 社区版、企业版、旗舰版、免费版和专业版客户所在集群    |
 | 国内 VIP 区            | 尊享版客户、单独购买 VIP 集群服务客户所在集群 |
 | 新加坡 1 区、新加坡 2 区 | 环信海外客户所在集群                        |
 | 美东 1 区              | 环信海外客户所在集群                        |
@@ -44,8 +44,7 @@
 | 数据中心名称 | socket3.0 地址          | socket2.0(老版本)地址   |
 | :--------- | :----- | :----- |
 | 国内 1 区      | im-api-v2.easemob.com 或 im-api-v2.easecdn.com       | im-api.easemob.com 或 im-api.easecdn.com       |
-| 国内 2 区      | im-api-v2-31.easemob.com 或 im-api-v2-31.easecdn.com | im-api-31.easemob.com 或 im-api-31.easecdn.com |
-| NGI-国内二区     | ngi-im-api-wechat.easemob.com | 无 |
+| 国内 2 区     | ngi-im-api-wechat.easemob.com | 无 |
 | 国内 VIP 区    | 请咨询你的商务经理                                   |                                                |
 
 不同数据中心 RESTful 接口调用不同，具体地址如下：
@@ -53,8 +52,7 @@
 | 数据中心名称 | RESTful API 请求地址                   |
 | :--------- | :----- |
 | 国内 1 区      | a1.easemob.com 或 a1.easecdn.com   |
-| 国内 2 区      | a31.easemob.com 或 a31.easecdn.com |
-| NGI-国内二区      | ngi-a1.easemob.com |
+| 国内 2 区      | ngi-a1.easemob.com |
 | 国内 VIP 区    | 请咨询你的商务经理                 |
 
 不同数据中心微信小程序、支付宝小程序的具体地址如下：
@@ -62,8 +60,7 @@
 | 数据中心名称 | 微信小程序      | 支付宝小程序           |
 | :--------- | :----- | :----- |
 | 国内 1 区      | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com       | im-api-alipay.easemob.com 或 im-api-alipay.easecdn.com   |
-| 国内 2 区      | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com | im-api-alipay-31.easemob.com 或 im-api-alipay-31.easecdn.com |
-| NGI-国内二区      | ngi-im-api-wechat.easemob.com | ngi-im-api-wechat.easemob.com |
+| 国内 2 区      | ngi-im-api-wechat.easemob.com | ngi-im-api-wechat.easemob.com |
 | 国内 VIP 区    | 请咨询你的商务经理   | 请咨询你的商务经理                                                          |
 
 ### 国内集群迁移到海外
