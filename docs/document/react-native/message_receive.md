@@ -92,7 +92,7 @@ ChatClient.getInstance()
 
 图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
 
-与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessagesReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessagesReceived` 事件。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
 
 ```typescript
 ChatClient.getInstance().chatManager.addMessageListener({
