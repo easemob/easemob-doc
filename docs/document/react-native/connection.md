@@ -10,21 +10,21 @@
 
 ```typescript
 ChatClient.getInstance().addConnectionListener({
-  // SDK 成功连接到 IM 服务器时触发的回调。
+  // SDK 成功连接到 IM 服务器的通知。
   onConnected(): void {
     console.log("onConnected");
   },
-  // SDK 和 IM 服务器断开连接时触发的回调。
+  // SDK 和 IM 服务器断开连接的通知。
   // 断开连接时底层不一定会登出。
   onDisconnected(): void {
     console.log("onDisconnected");
   },
-  // Token 即将过期的回调。
+  // Token 即将过期的通知。
   // 自 1.11.0 版本，SDK 会在 Token 有效期达到 80% 时触发该回调。
   onTokenWillExpire(): void {
     console.log("onTokenWillExpire");
   },
-  // 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时回调。
+  // 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时通知。
   // 服务器主动断开连接。
   onAppActiveNumberReachLimit(): void {
     console.log("onAppActiveNumberReachLimit");
