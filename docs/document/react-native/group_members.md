@@ -583,9 +583,25 @@ ChatClient.getInstance()
   });
 ```
 
-### 获取群组成员
+### 获取群成员列表
 
-#### 通过服务器分页获取群组成员
+- 自 1.11.0 版本开始，你可调用 `fetchMemberInfoListFromServer` 方法从服务器获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
+
+```typescript
+const groupId = '<YOUR_GROUP_ID>';
+const cursor = ''; // 开始分页的位置，第一页为空，后续页面请使用第一页返回的结果
+const limit = 200;
+ChatClient.getInstance()
+  .groupManager.fetchMemberInfoListFromServer(groupId, cursor, limit)
+  .then((result) => {
+    console.log('Fetch member info list result:', result);
+  })
+  .catch((error) => {
+    console.error('Error fetching member info list:', error);
+  });
+```
+
+- 你也可以首先调用 `fetchMemberListFromServer` 方法获取群成员的用户 ID 列表。
 
 ```typescript
 // groupId：群组 ID

@@ -24,7 +24,7 @@ dependencies {
 }
 ```
 
-若要查看最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/hyphenate-chat/versions)。后缀为 `-lite` 的版本即为精简版 SDK。
+若要获取最新版本号，请查看 [Maven 中央仓库](https://central.sonatype.com/artifact/io.hyphenate/hyphenate-chat/versions)。后缀为 `-lite` 的版本即为精简版 SDK。
 
 :::tip
 1. 精简版 SDK 无本地存储，可以升级为标准版 SDK，但标准版不能降级为精简版。

@@ -118,6 +118,39 @@ const msg = ChatMessage.createImageMessage(targetId, filePath, chatType, {
 EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 ```
 
+### 发送 GIF 图片消息
+
+- 自 React Native SDK 1.11.0 开始，支持发送 GIF 图片消息。
+- GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。
+
+发送 GIF 图片消息的过程如下：
+
+1. 发送方调用 `ChatMessage#createImageMessage` 方法构造 GIF 图片消息体。
+2. 发送方调用 `ChatManager#sendMessage` 发送 GIF 图片消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+
+```typescript
+const displayName = '<GIF_FILE_DISPLAY_NAME>';
+const filePath = '<GIF_FILE_PATH>'; // GIF 文件的本地路径
+const targetId = '<TARGET_ID>';
+const chatType = ChatMessageChatType.PeerChat;
+const message = ChatMessage.createImageMessage(
+  targetId,
+  filePath,
+  chatType,
+  { isGif: true, displayName: displayName, width: 100, height: 100 }
+);
+ChatClient.getInstance().chatManager.sendMessage(message, {
+  onError(localMsgId, error) {
+    console.log('Send message failed:', localMsgId, error);
+  },
+  onSuccess() {
+    console.log('Send message succeeded');
+  },
+  onProgress(progress) {
+    console.log('Send message progress:', progress);
+  },
+});
+```
 
 ### 发送视频消息
 
