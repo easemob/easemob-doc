@@ -432,12 +432,12 @@ const groupListener: ChatGroupEventListener = new (class
     );
   }
   // 有新成员加入群组，所有群成员收到该回调
-  onMembersJoined(params: { groupId: string; member: string }): void {
-    console.log(`onMembersJoined:`, params.groupId, params.member);
+   onMembersJoined(params: { groupId: string; members: string[] }): void {
+        console.log('onMembersJoined', params);
   }
   // 有群成员主动退出群，所有群成员收到该回调
-  onMembersExited(params: { groupId: string; member: string }): void {
-    console.log(`onMembersExited:`, params.groupId, params.member);
+  onMembersExited(params: { groupId: string; members: string[] }): void {
+        console.log('onMembersExited', params);
   }
   // 群组公告更新，所有群成员收到该回调
   onAnnouncementChanged(params: {
