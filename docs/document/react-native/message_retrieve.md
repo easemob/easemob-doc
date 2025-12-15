@@ -175,11 +175,21 @@ ChatClient.getInstance()
 
 ### 从本地获取指定群成员发送的消息
 
-从 SDK 1.11.0 开始，你可以调用 `getMsgsWithMsgType` 加载本地会话中指定成员发送的消息。
+从 SDK 1.11.0 开始，你可以调用 `getConvMsgsWithKeyword` 加载本地会话中指定成员发送的消息。
 
 ```typescript
-
-
+const conversationId = '<YOUR_CONVERSATION_ID>';
+const conversationType = ChatConversationType.GroupChat;
+const senders = ['user1', 'user2'];
+ChatClient.getInstance()
+  .chatManager.getConvMsgsWithKeyword({
+    convId: conversationId,
+    convType: conversationType,
+    senders: senders,
+    keywords: '',
+  })
+  .then((messages) => console.log('Messages:', messages))
+  .catch((error) => console.error('Error:', error));
 ```
 
 ### 根据关键字获取本地会话的消息 ID

@@ -59,18 +59,49 @@ ChatClient.getInstance()
 :::
 
 ```typescript
-ChatClient.getInstance().chatManager.addMessageListener({
-  onMessageContentChanged: (
-    message: ChatMessage,
-    lastModifyOperatorId: string,
-    lastModifyTime: number
-  ): void => {
-    console.log(
-      `${QuickTestScreenChat.TAG}: onMessageContentChanged: `,
-      JSON.stringify(message),
-      lastModifyOperatorId,
-      lastModifyTime
-    );
-  },
-} as ChatMessageEventListener);
+ // 文本消息：可同时修改消息体和消息扩展属性
+    const msgId = '<YOUR_MESSAGE_ID>';
+    const body = new ChatTextMessageBody({
+      content: 'Updated message content',
+    });
+    const ext = {
+      customKey: 'customValue',
+    };
+    ChatClient.getInstance()
+      .chatManager.modifyMsgBody({ msgId, body, ext })
+      .then(() => {
+        console.log('Message body updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating message body:', error);
+      });
+
+    // 自定义消息：可同时修改消息体和消息扩展属性
+    const msgId = '<YOUR_MESSAGE_ID>';
+    const customBody = new ChatCustomMessageBody({
+      event: '<CUSTOM_EVENT>',
+      params: { key1: 'value1', key2: 'value2' },
+    });
+    ChatClient.getInstance()
+      .chatManager.modifyMsgBody({ msgId, body: customBody })
+      .then(() => {
+        console.log('Message body updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating message body:', error);
+      });
+
+    // 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
+    const msgId = '<YOUR_MESSAGE_ID>';
+    const ext = {
+      customKey: 'customValue',
+    };
+    ChatClient.getInstance()
+      .chatManager.modifyMsgBody({ msgId, ext })
+      .then(() => {
+        console.log('Message body updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating message body:', error);
+      });
 ```
