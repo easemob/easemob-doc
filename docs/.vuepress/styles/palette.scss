@@ -5,6 +5,7 @@ $text-color-light: #909599;
 $table-text-color: #000;
 $border-color: #d4dade;
 $text-size: 14px;
+$home-page-width: 1200px;
 
 :root {
   --docsearch-modal-width: 860px !important;
@@ -13,5 +14,9 @@ $text-size: 14px;
   --tip-border-color: #c6e2ff;
   --note-border-color: #c0c7cc;
   --danger-border-color: #f89898;
-  --navbar-horizontal-padding: 1rem;
+  --navbar-bg-color: #fff;
+  --navbar-height: 4rem;
+  --navbar-horizontal-padding: 1.25rem;
+  --navbar-vertical-padding: 0.8125rem;
+  --font-family: PingFang SC, sans-serif;
 }

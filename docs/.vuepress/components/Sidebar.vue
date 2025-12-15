@@ -5,7 +5,7 @@
   import UIKitSwitch from './UIKitSwitch.vue'
   import CallKitSwitch from './CallKitSwitch.vue'
   import { usePageData } from '@vuepress/client'
-  import { ref, watch } from 'vue'
+  import { ref, watch, onMounted} from 'vue'
 
   const pageData = usePageData()
   const showPlatformSwitch = ref(false)
@@ -28,7 +28,20 @@
     else if(pagePath.indexOf('/value-added/') == 0) title.value = '增值服务'
   }, {immediate:true})
 
-
+  onMounted(() => {
+    const separatorLis = document.querySelectorAll('li:has(.sidebar-separator)');
+    const lastSeparatorLi = separatorLis[separatorLis.length - 1];
+    if (lastSeparatorLi) {
+      // 选所有后面的兄弟li
+      const allNextLis = [];
+      let current = lastSeparatorLi.nextElementSibling;
+      while (current) {
+        allNextLis.push(current);
+        current = current.nextElementSibling;
+      }
+      allNextLis.forEach(li => li.classList.add('subheading'));
+    }
+  })
 </script>
 <template>
   <Sidebar>
@@ -62,10 +75,14 @@
 
 <style scope>
   .sidebar-header {
+    position: sticky;
+    top: 0;
     display: flex;
     align-items: center;
     margin-bottom: -2rem;
     padding: 1.25rem;
+    background-color: #fff;
+    z-index: 100;
 
     .sidebar-title {
       margin-right: 1rem;

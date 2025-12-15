@@ -37,15 +37,15 @@ export default defineComponent({
 .hero-section {
   position: relative;
   display: flex;
-  min-height: 220px;
+  height: 420px;
   align-items: center;
   justify-content: center;
 
   background-image: linear-gradient(
       to bottom,
       transparent 0%,
-      white 50%,
-      white 100%
+      #FAFDFF 50%,
+      #FAFDFF 100%
     ),
     linear-gradient(to right, #dfcaff 0%, #cae5ff 100%);
 }
@@ -53,32 +53,41 @@ export default defineComponent({
 .hero-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  padding: 70px 24px 20px 24px;
+  width: 95%;
+  max-width: var(--home-page-width);
+  padding: 70px 0 50px 0;
 }
 
 .hero-info {
   display: flex;
   flex-direction: column;
+  max-width: 660px;
 }
 
 .hero-title {
-  margin: 16px 0;
   color: #000;
-  font: 500 52px PingFang SC, sans-serif;
+  font-size: 3.25rem;
+  font-style: normal;
+  font-weight: 500;
+  margin-top: 24px;
+  line-height: normal;
 }
 
 .hero-desc {
   margin-top: 16px;
   color: #505e72;
-  font: 400 16px PingFang SC, sans-serif;
+  line-height: 24px;
+
+  &:last-child {
+    margin-top: 22px;
+  }
 }
 
 .hero-img {
+  flex-shrink: 0;
   width: 400px;
   height: 300px;
-  margin-left: 100px;
+  margin-right: 33px;
 }
 
 @media (max-width: 991px) {

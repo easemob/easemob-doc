@@ -9,11 +9,8 @@ import { TRANSLATION_SIDEBAR } from "./translation";
 
 export const zhSidebar = sidebar({
   "/product/": [
-    { type: "heading", text: "副标题" },
     { text: "产品动态", link: "product_dynamics.html" },
     { text: "产品简介", link: "introduction.html" },
-    { type: "separator" },
-    { type: "heading", text: "副标题" },
     { text: "购买指南", 
       collapsible: true,
       children: [
@@ -22,7 +19,7 @@ export const zhSidebar = sidebar({
         { text: "购买指引", link: "pricing_method.html" },
       ],
     }, 
-    
+    { type: "separator" } as any,
     { text: "功能介绍", 
       collapsible: true,
       children: [
@@ -403,19 +400,21 @@ export const zhSidebar = sidebar({
     },
     { text: "术语表", link: "glossary.html" },
     { text: "帮助中心", link: "help.html" },
-    { type: "separator" },
-    { type: "heading", text: "副标题" },
+    { type: "separator" } as any,
     {
       text: "已废弃内容",
       collapsible: true,
+      // 添加自定义class以便应用样式
+      className: "deprecated-content",
       children: [
         {
           text: "环信 AIGC",
           collapsible: true,
+          className: "deprecated-content",
           children: [
-            { text: "方案介绍", link: "aigc_api/aigc_introduction.html" },
-            { text: "使用 AI 智能功能", link: "aigc_api/aigc_use.html" },
-            { text: "REST API", link: "aigc_api/aigc_rest_api.html" },
+            { text: "方案介绍", link: "aigc_api/aigc_introduction.html", className: "deprecated-content" },
+            { text: "使用 AI 智能功能", link: "aigc_api/aigc_use.html", className: "deprecated-content" },
+            { text: "REST API", link: "aigc_api/aigc_rest_api.html", className: "deprecated-content" },
           ], 
         }, 
       ], 

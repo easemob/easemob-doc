@@ -38,7 +38,7 @@
                   </div>
                 </div>
               </div>
-              <div class="content-title">功能</div>
+              <div class="content-title fun">功能</div>
               <div
                 :id="project.title"
                 v-for="project in projects"
@@ -155,14 +155,14 @@ const buildAnchorLink = () => {
 <style scoped>
 .main-container {
   border-radius: 4px;
-  background-color: #fff;
+  background-color: #FAFDFF;
   display: flex;
   flex-direction: column;
 }
 
 .main-content {
   align-self: center;
-  margin-top: 16px;
+  margin-top: 20px;
   width: 95%;
   max-width: 1200px;
   position: relative;
@@ -173,14 +173,17 @@ const buildAnchorLink = () => {
 }
 
 .content-title {
-  margin-top: 32px;
+  margin-bottom: 24px;
   color: #000;
   text-align: justify;
-  font-family: "PingFang SC";
   font-size: 36px;
   font-style: normal;
   font-weight: 600;
   line-height: 40px;
+
+  &.fun {
+    margin: 8px 0 0 0;
+  }
 }
 
 .columns {
@@ -206,7 +209,6 @@ const buildAnchorLink = () => {
 }
 
 .feature-title {
-  font-family: PingFang SC, sans-serif;
   flex-grow: 1;
   font-size: 16px;
   flex-basis: auto;
@@ -228,7 +230,6 @@ const buildAnchorLink = () => {
 }
 
 .sdk-item {
-  font-family: PingFang SC, sans-serif;
   align-items: start;
   border-left: 2px solid rgba(204, 204, 204, 1);
   background-color: #fff;
@@ -277,12 +278,15 @@ const buildAnchorLink = () => {
 }
 
 .sdk-start-title {
-  margin: 20px 0 0 0;
+  margin: 0;
   color: #242f3d;
   white-space: nowrap;
   justify-content: center;
   padding: 0;
-  font: 600 24px PingFang SC, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
   border-bottom: 0;
 }
 
@@ -294,15 +298,18 @@ const buildAnchorLink = () => {
 }
 
 .sdk-start-desc {
-  margin: 8px 0;
+  margin-top: 8px;
   color: #505e72;
-  font: 400 16px PingFang SC, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .sdk-start-list {
   display: flex;
   flex-wrap: wrap;
-  margin: 24px 0;
+  margin: 24px 0 48px 0;
   gap: 24px;
   font-size: 14px;
   color: #000;
@@ -318,14 +325,14 @@ const buildAnchorLink = () => {
 }
 
 .sdk-start-item {
+  display: flex;
+  align-items: center;
   border-radius: 12px;
   border: 1px solid #ebf0f9;
   background-color: #fff;
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
-  padding: 15px 12px;
-  width: 256px;
+  padding: 16px 24px;
+  width: calc((100% - 272px) / 4);
+  min-width: 180px;
 }
 
 .sdk-start-item:hover {
@@ -341,7 +348,8 @@ const buildAnchorLink = () => {
 
 .sdk-start-icon {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  width: calc(100% - 20px);
 }
 
 @media (max-width: 991px) {
@@ -353,19 +361,24 @@ const buildAnchorLink = () => {
 .platform-icon {
   aspect-ratio: 1;
   object-fit: contain;
-  width: 28px;
+  width: 24px;
+  height: 24px;
 }
 
 .platform-name {
   color: #303233;
-  font: 500 18px PingFang SC, sans-serif;
-  margin: auto 0;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0 8px;
+  width: calc(100% - 40px);
 }
 
 .arrow-icon {
   aspect-ratio: 1;
   object-fit: contain;
-  width: 16px;
+  width: 20px;
   margin: auto 0;
   color: #dce2e6;
 }
@@ -383,13 +396,17 @@ const buildAnchorLink = () => {
 }
 
 .sdk-features-title {
+  width: 100%;
   border-bottom: 1px solid rgba(230, 230, 230, 1);
-  margin-top: 36px;
+  margin: 36px 0;
   color: #242f3d;
   white-space: nowrap;
   justify-content: center;
-  padding: 8px 0;
-  font: 600 24px PingFang SC, sans-serif;
+  padding: 12px 0;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 @media (max-width: 991px) {
@@ -401,12 +418,11 @@ const buildAnchorLink = () => {
 
 .sdk-feature-item {
   display: flex;
-  margin-top: 16px;
+  margin-top: 28px;
   font-size: 14px;
   color: #096dd9;
   font-weight: 400;
   white-space: nowrap;
-  padding: 16px;
 }
 
 @media (max-width: 991px) {
@@ -420,7 +436,8 @@ const buildAnchorLink = () => {
   display: flex;
   align-self: start;
   flex-shrink: 0;
-  width: 200px;
+  min-width: 142px;
+  margin-right: 60px;
   gap: 2px;
   font-size: 16px;
   color: #303233;
@@ -441,7 +458,11 @@ const buildAnchorLink = () => {
 }
 
 .feature-title {
-  font-family: PingFang SC, sans-serif;
+  padding: 8px 0;
+  font-weight: 600;
+  font-size: 16px;
+  font-style: normal;
+  line-height: normal;
   margin: 0;
 }
 
@@ -449,7 +470,7 @@ const buildAnchorLink = () => {
   align-content: flex-start;
   flex-wrap: wrap;
   display: flex;
-  gap: 24px 100px;
+  gap: 8px 100px;
 }
 
 @media (max-width: 991px) {
@@ -460,11 +481,21 @@ const buildAnchorLink = () => {
 }
 
 .feature-link {
+  padding: 8px 8px 8px 0;
   color: #505e72;
-  font: 400 14px PingFang SC, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   text-decoration: underline;
+  text-underline-offset: 4px;
   min-width: 120px;
   cursor: pointer;
+
+  &:hover {
+    font-weight: 500;
+    color: #00A0FA;
+  }
 }
 
 .feature-link-group {
@@ -478,4 +509,5 @@ const buildAnchorLink = () => {
     white-space: initial;
   }
 }
+
 </style>

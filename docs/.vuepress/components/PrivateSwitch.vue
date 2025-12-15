@@ -36,7 +36,7 @@ const options = [
 
 
 <template>
-  <el-select v-model="platform" @change="onChange" placeholder="请选择">
+  <el-select v-model="platform" @change="onChange" placeholder="请选择" placement="bottom-end" popper-class="platform-select-dropdown">
     <el-option
       v-for="item in options"
       :key="item.value"
