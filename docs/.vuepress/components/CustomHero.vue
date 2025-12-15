@@ -65,8 +65,11 @@ export default defineComponent({
 }
 
 .hero-title {
-  margin-top: 24px;
   color: #000;
+  font-size: 3.25rem;
+  font-style: normal;
+  font-weight: 500;
+  margin-top: 24px;
   line-height: normal;
 }
 

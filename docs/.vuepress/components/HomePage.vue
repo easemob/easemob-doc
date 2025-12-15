@@ -76,7 +76,7 @@
                         {{ context.text }}
                       </a>
                       <ClientOnly v-else>
-                        <el-popover placement="bottom-start" :width="436" :offset="0" :show-arrow="false">
+                        <el-popover placement="bottom-start" :width="436">
                           <template #reference>
                             <a
                               class="feature-link"
