@@ -404,17 +404,14 @@ export const zhSidebar = sidebar({
     {
       text: "已废弃内容",
       collapsible: true,
-      // 添加自定义class以便应用样式
-      className: "deprecated-content",
       children: [
         {
           text: "环信 AIGC",
           collapsible: true,
-          className: "deprecated-content",
           children: [
-            { text: "方案介绍", link: "aigc_api/aigc_introduction.html", className: "deprecated-content" },
-            { text: "使用 AI 智能功能", link: "aigc_api/aigc_use.html", className: "deprecated-content" },
-            { text: "REST API", link: "aigc_api/aigc_rest_api.html", className: "deprecated-content" },
+            { text: "方案介绍", link: "aigc_api/aigc_introduction.html" },
+            { text: "使用 AI 智能功能", link: "aigc_api/aigc_use.html" },
+            { text: "REST API", link: "aigc_api/aigc_rest_api.html" },
           ], 
         }, 
       ], 
