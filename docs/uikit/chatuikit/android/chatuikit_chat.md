@@ -465,7 +465,7 @@ binding?.let {
 ChatUIKitClient.getConfig()?.chatConfig?.enableWxExtendStyle = true
 ```
 
-2. 若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
+2. 若实现发送附件消息时弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
 
 ```kotlin
 ChatUIKitClient.getConfig()?.chatConfig?.enableWxExtendStyle = false
