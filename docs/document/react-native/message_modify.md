@@ -41,24 +41,6 @@
 示例代码如下：
 
 ```typescript
-// body 必须是文本消息体。可以从创建或者接收消息中获取。
-ChatClient.getInstance()
-  .chatManager.modifyMsgBody(msgId, body)
-  .then((message) => {
-    console.log("modify success:", message);
-  })
-  .catch((error) => {
-    console.warn(error);
-  });
-```
-
-消息修改后，消息的接收方会收到 `onMessageContentChanged` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群聊会话，除了修改消息的用户，群组内的其他成员均会收到该事件。
-
-:::tip
-若通过 RESTful API 修改自定义消息，消息的接收方也通过 `ChatMessageEventListener#onMessageContentChanged` 事件接收修改后的自定义消息。
-:::
-
-```typescript
  // 文本消息：可同时修改消息体和消息扩展属性
     const msgId = '<YOUR_MESSAGE_ID>';
     const body = new ChatTextMessageBody({
@@ -105,3 +87,28 @@ ChatClient.getInstance()
         console.error('Error updating message body:', error);
       });
 ```
+
+
+消息修改后，消息的接收方会收到 `onMessageContentChanged` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群聊会话，除了修改消息的用户，群组内的其他成员均会收到该事件。
+
+:::tip
+若通过 RESTful API 修改自定义消息，消息的接收方也通过 `ChatMessageEventListener#onMessageContentChanged` 事件接收修改后的自定义消息。
+:::
+
+```typescript
+ChatClient.getInstance().chatManager.addMessageListener({
+  onMessageContentChanged: (
+    message: ChatMessage,
+    lastModifyOperatorId: string,
+    lastModifyTime: number
+  ): void => {
+    console.log(
+      `${QuickTestScreenChat.TAG}: onMessageContentChanged: `,
+      JSON.stringify(message),
+      lastModifyOperatorId,
+      lastModifyTime
+    );
+  },
+} as ChatMessageEventListener);
+```
+
