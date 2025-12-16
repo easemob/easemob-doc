@@ -12,24 +12,7 @@ const extraNavList = themeData.value.extra_nav || [];
       <!-- <Docsearch /> -->
       <div class="search-box" @click="handleSearch">
         <div class="search-input-wrapper">
-          <div class="search-icon">
-            <svg
-              width="14"
-              height="14"
-              class="DocSearch-Search-Icon"
-              viewBox="0 0 14 14"
-            >
-              <path
-                d="M6.65869 1.08154C8.1351 1.05413 9.46173 1.56016 10.6372 2.59912C11.758 3.68352 12.3612 4.96398 12.4478 6.43994C12.5343 7.91594 12.0816 9.26005 11.0884 10.4722H11.0874L12.7964 12.1812C12.8783 12.2724 12.9194 12.3751 12.9194 12.4888C12.9194 12.6024 12.8761 12.7027 12.7896 12.7896C12.703 12.8764 12.6027 12.9196 12.4888 12.9194C12.3748 12.9191 12.2721 12.878 12.1812 12.7964L10.4722 11.0884C9.26034 12.0813 7.9162 12.5343 6.43994 12.4478C4.96353 12.3611 3.68332 11.7571 2.59912 10.6362C1.56019 9.46083 1.05413 8.135 1.08154 6.65869C1.10899 5.18242 1.66508 3.8794 2.74951 2.74951C3.8794 1.66515 5.18243 1.10904 6.65869 1.08154ZM6.76807 1.95654C5.40116 1.99306 4.26661 2.46262 3.36475 3.36475C2.46286 4.26691 1.99331 5.40143 1.95654 6.76807C1.99299 8.13498 2.46263 9.26951 3.36475 10.1714C4.2669 11.0732 5.40146 11.5428 6.76807 11.5796C8.13513 11.5431 9.27042 11.0736 10.1724 10.1714C11.0741 9.26924 11.5429 8.13462 11.5796 6.76807C11.5431 5.40121 11.0745 4.26659 10.1724 3.36475C9.27013 2.46284 8.13483 1.99328 6.76807 1.95654Z"
-                stroke="currentColor"
-                fill="none"
-                fill-rule="evenodd"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="0.2"
-              ></path>
-            </svg>
-          </div>
+          <div class="search-icon"></div>
           <div class="search-input">搜索关键词</div>
         </div>
       </div>
@@ -96,14 +79,6 @@ export default {
 
 .search-box:hover {
   border-color: var(--theme-color);
-
-  .search-input {
-    color: var(--theme-color);
-  }
-}
-
-.search-box:hover .search-icon {
-  color: var(--theme-color);
 }
 
 .search-input-wrapper {
@@ -114,9 +89,11 @@ export default {
 .search-input {
   user-select: none;
   background-color: transparent;
-  font-weight: 500;
   color: #A8ABB2;
-  font-size: 14px;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.375rem;
   width: fit-content;
   margin-left: 6px;
   cursor: pointer;
@@ -127,20 +104,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  color: var(--text-color, #303d4e);
-  font-size: 14px;
-  transition: color 0.3s;
-  width: 18px;
   flex-shrink: 0;
-
-  &:hover {
-    color: var(--theme-color);
-  }
-}
-
-.iconfont {
-  font-size: 14px;
+  width: 0.875rem;
+  height: 0.875rem;
+  background-image: url(/icon-search.svg);
+  cursor: pointer;
 }
 
 .extra-link {

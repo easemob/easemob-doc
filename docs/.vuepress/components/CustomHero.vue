@@ -87,7 +87,6 @@ export default defineComponent({
   flex-shrink: 0;
   width: 400px;
   height: 300px;
-  margin-right: 33px;
 }
 
 @media (max-width: 991px) {

@@ -37,7 +37,7 @@ const PLATFORM_ICON_MAP = {
   },
   uniapp: {
     icon: "/icon-uni-app.svg",
-    activeIcon: "/icon-uni-app.svg"
+    activeIcon: "/icon-uni-app-hover.svg"
   },
   applet: {
     icon: "/icon-mini-program.svg",
@@ -198,8 +198,10 @@ const onChange = (platform) => {
         }
 
         &:hover,
-        &.is-selected {
+        &.is-selected,
+        &.is-hovering {
           color: var(--theme-color);
+          background-color: transparent;
         }
       }
     }

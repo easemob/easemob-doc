@@ -397,16 +397,15 @@ const buildAnchorLink = () => {
 
 .sdk-features-title {
   width: 100%;
-  border-bottom: 1px solid rgba(230, 230, 230, 1);
-  margin: 36px 0;
+  padding: 0.75rem 0;
+  margin: 2.25rem 0;
   color: #242f3d;
   white-space: nowrap;
-  justify-content: center;
-  padding: 12px 0;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  border-bottom: 1px solid rgba(230, 230, 230, 1);
 }
 
 @media (max-width: 991px) {
