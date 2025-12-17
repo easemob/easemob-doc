@@ -1,4 +1,4 @@
-# 集成 SDK
+# 导入 SDK
 
 本文介绍如何将环信即时通讯 IM SDK 集成到你的 HarmonyOS 项目。
 
@@ -8,7 +8,7 @@
 - HarmonyOS SDK API 12 及以上；
 - HarmonyOS NEXT.0.0.71 或以上版本的设备。
 
-## 集成 SDK
+## 导入 SDK
 
 ### 远程依赖
 
@@ -66,7 +66,7 @@ ohpm install @easemob/chatsdk@x.y.z
 }
 ```
 
-### 在工程 `build-profile.json5` 中设置支持字节码 HAR 包。
+### 设置支持字节码 HAR 包
 
 修改工程级 `build-profile.json5` 文件，在 `products` 节点下设置 `useNormalizedOHMUrl` 为 `true`。
 

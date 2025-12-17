@@ -11,7 +11,8 @@ const documentSidebar = [
   { text: 'Demo 体验', link: 'demo.html', only: ['android', 'ios', 'react-native', 'flutter'] },
   { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
   { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
-  { text: '集成 SDK', link: 'integration.html', except: ['server-side', 'applet']},
+  { text: '导入 SDK', link: 'integration.html', only: ['android', 'ios', 'web', 'harmonyos', 'unity', 'windows']},
+  { text: '添加依赖', link: 'integration.html', only: ['flutter', 'react-native']},
   { text: '初始化', link: 'initialization.html', except: ['server-side', 'applet']},
   {
     text: '登录',
