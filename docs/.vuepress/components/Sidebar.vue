@@ -5,7 +5,7 @@
   import UIKitSwitch from './UIKitSwitch.vue'
   import CallKitSwitch from './CallKitSwitch.vue'
   import { usePageData } from '@vuepress/client'
-  import { nextTick, ref, watch} from 'vue'
+  import { nextTick, ref, watch, onMounted} from 'vue'
 
   const pageData = usePageData()
   const showPlatformSwitch = ref(false)
@@ -51,9 +51,11 @@
     else if(pagePath.indexOf('/document/server-side/') == 0) title.value = '服务端 API'
     else if(pagePath.indexOf('/document/') == 0) title.value = 'SDK'
     else if(pagePath.indexOf('/value-added/') == 0) title.value = '增值服务'
+  }, { immediate: true })
 
-    initSubheading();
-  }, {immediate:true})
+  onMounted(() => {
+    initSubheading()
+  })
 </script>
 <template>
   <Sidebar>
