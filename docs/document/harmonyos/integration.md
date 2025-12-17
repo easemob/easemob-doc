@@ -66,7 +66,7 @@ ohpm install @easemob/chatsdk@x.y.z
 }
 ```
 
-### 在工程 `build-profile.json5` 中设置支持字节码 HAR 包。
+### 设置支持字节码 HAR 包
 
 修改工程级 `build-profile.json5` 文件，在 `products` 节点下设置 `useNormalizedOHMUrl` 为 `true`。
 
