@@ -6,7 +6,7 @@
 
 ## 初始化
 
-与[快速开始中的初始化](chatuikit_quickstart.html##第一步-初始化)相比，这里增加了 `ChatOptions` 的参数，包括 SDK 中是否打印日志、是否自动登录以及是否默认使用用户属性的开关配置。
+与 [快速开始中的初始化](chatuikit_quickstart.html##第一步-初始化) 相比，本节增加了 `ChatOptions` 的参数，包括 SDK 中是否打印日志、是否自动登录以及是否默认使用用户属性的开关配置，详见 [Demo 文档](https://github.com/easemob/easemob-demo-ios/blob/main/EaseChatDemo/EaseChatDemo/AppDelegate.swift)。
 
 ```swift
 let error = ChatUIKitClient.shared.setup(option: ChatOptions(appKey: appKey))
@@ -14,7 +14,7 @@ let error = ChatUIKitClient.shared.setup(option: ChatOptions(appKey: appKey))
 
 ## 登录
 
-使用当前用户对象符合 `ChatUserProfileProtocol` 协议的用户信息登录 EaseChatUIKit。
+使用当前用户对象符合 `ChatUserProfileProtocol` 协议的用户信息登录 `EaseChatUIKit`。
 
 [在环信控制台上创建用户](/product/console/operation_user.html#创建用户)，将用户 ID 传入以下代码中的 `userId`。
 
@@ -44,6 +44,10 @@ public final class YourAppUser: NSObject, ChatUserProfileProtocol {
 
 ## 会话列表页面
 
+若完全基于 [GitHub](https://github.com/easemob/easemob-uikit-ios) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios) 单群聊 UIKit 示例项目进行开发，则无需额外创建页面或配置页面跳转。
+
+若仅需在自己的业务模块中使用部分功能模块，例如，只使用会话列表页面与聊天页面，不需要通讯录页面，则创建会话列表页面，完成跳转。
+
 1. 创建会话列表页面
 
 ```swift
@@ -59,11 +63,15 @@ public final class YourAppUser: NSObject, ChatUserProfileProtocol {
         vc.viewModel?.registerEventsListener(listener: self)
 ```
 
-## 联系人列表页面
+## 通讯录页面
 
-1. 创建联系人列表页面
+若完全基于 [GitHub](https://github.com/easemob/easemob-uikit-ios) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios) 单群聊 UIKit 示例项目进行开发，则无需额外创建页面或配置页面跳转。
 
-继承单群聊 UIKit 提供的联系人列表页面类注册后的自定义类可以调用 ViewModel 的 `ContactViewController().viewModel.registerEventsListener` 方法监听相关事件。
+若仅需在自己的业务模块中使用部分功能模块，例如，只使用通讯录页面与聊天页面，不需要会话列表页面，则创建通讯录页面，完成跳转。
+
+1. 创建通讯录页面
+
+继承单群聊 UIKit 提供的通讯录页面类注册后的自定义类可以调用 ViewModel 的 `ContactViewController().viewModel.registerEventsListener` 方法监听相关事件。
 
 ```swift
         let vc = EaseChatUIKit.ComponentsRegister.shared.ContactsController.init(headerStyle: .contact)
