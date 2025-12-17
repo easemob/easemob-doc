@@ -28,8 +28,8 @@
 
 ![image](/images/android/push/huawei_push_notification_test.png)
 
-1. 查看是否超过了厂商通道限制。
+5. 查看是否超过了厂商通道限制。
 
 详见[推送消息分类](push_message_classification.html)。
 
-1. 若以上均已排查后问题仍存在，请联系环信技术支持进一步排查问题原因。
+6. 若以上均已排查后问题仍存在，请联系环信技术支持进一步排查问题原因。
