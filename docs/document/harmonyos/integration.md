@@ -1,4 +1,4 @@
-# 集成 SDK
+# 导入 SDK
 
 本文介绍如何将环信即时通讯 IM SDK 集成到你的 HarmonyOS 项目。
 
@@ -8,7 +8,7 @@
 - HarmonyOS SDK API 12 及以上；
 - HarmonyOS NEXT.0.0.71 或以上版本的设备。
 
-## 集成 SDK
+## 导入 SDK
 
 ### 远程依赖
 
