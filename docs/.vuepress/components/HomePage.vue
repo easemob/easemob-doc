@@ -309,9 +309,8 @@ const buildAnchorLink = () => {
 .sdk-start-list {
   display: flex;
   flex-wrap: wrap;
-  margin: 24px 0 48px 0;
-  gap: 24px;
-  font-size: 14px;
+  margin: 1.5rem 0 3rem 0;
+  gap: 1.5rem;
   color: #000;
   font-weight: 500;
   white-space: nowrap;
@@ -327,12 +326,13 @@ const buildAnchorLink = () => {
 .sdk-start-item {
   display: flex;
   align-items: center;
-  border-radius: 12px;
+  border-radius: 0.75rem;
   border: 1px solid #ebf0f9;
   background-color: #fff;
-  padding: 16px 24px;
-  width: calc((100% - 272px) / 4);
-  min-width: 180px;
+  padding: 0.8125rem 1.5rem;
+  width: 14.4rem;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .sdk-start-item:hover {
@@ -397,16 +397,15 @@ const buildAnchorLink = () => {
 
 .sdk-features-title {
   width: 100%;
-  border-bottom: 1px solid rgba(230, 230, 230, 1);
-  margin: 36px 0;
+  padding: 0.75rem 0;
+  margin: 2.25rem 0;
   color: #242f3d;
   white-space: nowrap;
-  justify-content: center;
-  padding: 12px 0;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  border-bottom: 1px solid rgba(230, 230, 230, 1);
 }
 
 @media (max-width: 991px) {

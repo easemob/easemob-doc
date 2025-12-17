@@ -5,7 +5,7 @@
   import UIKitSwitch from './UIKitSwitch.vue'
   import CallKitSwitch from './CallKitSwitch.vue'
   import { usePageData } from '@vuepress/client'
-  import { ref, watch, onMounted} from 'vue'
+  import { nextTick, ref, watch} from 'vue'
 
   const pageData = usePageData()
   const showPlatformSwitch = ref(false)
@@ -13,6 +13,31 @@
   const showUIKitSwitch = ref(false)
   const showCallKitSwitch = ref(false)
   let title = ref('')
+
+  const initSubheading = ()=>{
+    nextTick(()=>{
+      const subheadingLis = document.querySelectorAll('li.subheading');
+      subheadingLis.forEach(li => {
+        if (li.classList.contains('subheading')) {
+          li.classList.remove('subheading');
+        }
+      });
+
+      const separatorLis = document.querySelectorAll('li:has(.sidebar-separator)');
+      const lastSeparatorLi = separatorLis[separatorLis.length - 1];
+      if (lastSeparatorLi) {
+        // 选所有后面的兄弟li
+        const allNextLis = [];
+        let current = lastSeparatorLi.nextElementSibling;
+        while (current) {
+          allNextLis.push(current);
+          current = current.nextElementSibling;
+        }
+        allNextLis.forEach(li => li.classList.add('subheading'));
+      }
+    })
+  }
+
   watch(pageData, ()=> {
     const pagePath = pageData.value.path
     showPrivateSwitch.value = pagePath.indexOf('/private/') == 0
@@ -26,22 +51,9 @@
     else if(pagePath.indexOf('/document/server-side/') == 0) title.value = '服务端 API'
     else if(pagePath.indexOf('/document/') == 0) title.value = 'SDK'
     else if(pagePath.indexOf('/value-added/') == 0) title.value = '增值服务'
-  }, {immediate:true})
 
-  onMounted(() => {
-    const separatorLis = document.querySelectorAll('li:has(.sidebar-separator)');
-    const lastSeparatorLi = separatorLis[separatorLis.length - 1];
-    if (lastSeparatorLi) {
-      // 选所有后面的兄弟li
-      const allNextLis = [];
-      let current = lastSeparatorLi.nextElementSibling;
-      while (current) {
-        allNextLis.push(current);
-        current = current.nextElementSibling;
-      }
-      allNextLis.forEach(li => li.classList.add('subheading'));
-    }
-  })
+    initSubheading();
+  }, {immediate:true})
 </script>
 <template>
   <Sidebar>

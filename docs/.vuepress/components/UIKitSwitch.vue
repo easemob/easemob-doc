@@ -232,8 +232,10 @@ const onChange = (platform) => {
         }
 
         &:hover,
-        &.is-selected {
+        &.is-selected,
+        &.is-hovering {
           color: var(--theme-color);
+          background-color: transparent;
         }
       }
     }
