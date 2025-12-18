@@ -108,14 +108,36 @@ export default {
   width: 0.875rem;
   height: 0.875rem;
   background-image: url(/icon-search.svg);
+  background-repeat: no-repeat;
   cursor: pointer;
 }
 
 .extra-link {
-  width: 4.625rem;
-  height: 32px;
+  padding: 0.3125rem 1rem;
+  margin: 0 !important;
+  color: #606466;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.375rem;
+}
+
+.extra-link {
+  padding: 0.3125rem 1rem;
+  margin: 0 !important;
+  color: #606466;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.375rem;
+}
+
+.extra-link:last-of-type {
+  padding: 0.25rem 0.9375rem;
   color: var(--theme-color);
-  flex-shrink: 0;
+  border-radius: 0.375rem;
+  border: 1px solid var(--theme-color);
+  background: #ECF8FF;
 }
 
 .extra-link.is-underline:hover:after {

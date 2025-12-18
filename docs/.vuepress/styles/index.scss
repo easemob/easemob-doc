@@ -161,6 +161,10 @@ h2,h3 {
               background: #fff;
               box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.12);
 
+              .dropdown-subitem-wrapper {
+                width: 100%;
+              }
+
               .dropdown-item {
                 position: relative;
                 display: flex;
@@ -169,6 +173,10 @@ h2,h3 {
                 justify-content: center;
                 padding-left: .75rem;
                 min-height: 2rem;
+
+                .nav-link {
+                  width: 100%;
+                }
 
                 .dropdown-subtitle {
                   position: relative;
@@ -213,10 +221,78 @@ h2,h3 {
                   height: 2rem;
                   align-self: stretch;
 
-                  .icon {
-                    width: 1.25rem;
-                    height: 1.25rem;
-                    margin-inline-end: 0.63em;
+                  .nav-link{
+                    .icon {
+                      width: 1.25rem;
+                      height: 1.25rem;
+                      margin-inline-end: 0.63em;
+                      vertical-align: text-bottom;
+                    }
+                  }
+                  
+                  &:hover {
+                    .nav-link {
+                      color: var(--theme-color);
+                    }
+
+                    .icon {
+                      // Android icon
+                      &[src$="/icon-Android.svg"] {
+                        content: url("/icon-Android-hover.svg");
+                      }
+                      // iOS icon
+                      &[src$="/icon-iOS.svg"] {
+                        content: url("/icon-iOS-hover.svg");
+                      }
+                      // Web icon
+                      &[src$="/icon-web.svg"] {
+                        content: url("/icon-web-hover.svg");
+                      }
+                      // HarmonyOS icon
+                      &[src$="/icon-harmonyos.svg"] {
+                        content: url("/icon-harmonyos-hover.svg");
+                      }
+                      // React Native icon
+                      &[src$="/icon-ReactNative.svg"] {
+                        content: url("/icon-ReactNative-hover.svg");
+                      }
+                      // Flutter icon
+                      &[src$="/icon-flutter.svg"] {
+                        content: url("/icon-flutter-hover.svg");
+                      }
+                      // Electron icon
+                      &[src$="/icon-Electron.svg"] {
+                        content: url("/icon-Electron-hover.svg");
+                      }
+                      // Windows icon
+                      &[src$="/icon-windows.svg"] {
+                        content: url("/icon-windows-hover.svg");
+                      }
+                      // Linux icon
+                      &[src$="/icon-linux.svg"] {
+                        content: url("/icon-linux-hover.svg");
+                      }
+                      // macOS icon
+                      &[src$="/icon-macOS.svg"] {
+                        content: url("/icon-macOS-hover.svg");
+                      }
+                      // Mini Program icon
+                      &[src$="/icon-mini-program.svg"] {
+                        content: url("/icon-mini-program-hover.svg");
+                      }
+                      // Unity icon
+                      &[src$="/icon-unity.svg"] {
+                        content: url("/icon-unity-hover.svg");
+                      }
+                      // Platform icon
+                      &[src$="/icon-platform.svg"] {
+                        content: url("/icon-platform-hover.svg");
+                      }
+                      // Platform icon
+                      &[src$="/icon-uni-app.svg"] {
+                        content: url("/icon-uni-app-hover.svg");
+                      }
+                    }
                   }
                 }
 
@@ -285,6 +361,17 @@ h2,h3 {
       }
     }
   }
+
+  .navbar-end {
+    .nav-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+      height: 2rem;
+      margin: 0  0 0 0.75rem !important;
+    }
+  }
 }
 
 @media (min-width: 1680px) {
@@ -318,82 +405,6 @@ h2,h3 {
     .has-toc #toc {
         display: none;
     }
-}
-
-.nav-dropdown {
-  .dropdown-subitem-wrapper {
-    width: 100%;
-    .dropdown-subitem {
-      .icon {
-        vertical-align: text-bottom;
-      }
-      
-      &:hover {
-        .nav-link {
-          color: var(--theme-color);
-        }
-
-        .icon {
-          // Android icon
-          &[src$="/icon-Android.svg"] {
-            content: url("/icon-Android-hover.svg");
-          }
-          // iOS icon
-          &[src$="/icon-iOS.svg"] {
-            content: url("/icon-iOS-hover.svg");
-          }
-          // Web icon
-          &[src$="/icon-web.svg"] {
-            content: url("/icon-web-hover.svg");
-          }
-          // HarmonyOS icon
-          &[src$="/icon-harmonyos.svg"] {
-            content: url("/icon-harmonyos-hover.svg");
-          }
-          // React Native icon
-          &[src$="/icon-ReactNative.svg"] {
-            content: url("/icon-ReactNative-hover.svg");
-          }
-          // Flutter icon
-          &[src$="/icon-flutter.svg"] {
-            content: url("/icon-flutter-hover.svg");
-          }
-          // Electron icon
-          &[src$="/icon-Electron.svg"] {
-            content: url("/icon-Electron-hover.svg");
-          }
-          // Windows icon
-          &[src$="/icon-windows.svg"] {
-            content: url("/icon-windows-hover.svg");
-          }
-          // Linux icon
-          &[src$="/icon-linux.svg"] {
-            content: url("/icon-linux-hover.svg");
-          }
-          // macOS icon
-          &[src$="/icon-macOS.svg"] {
-            content: url("/icon-macOS-hover.svg");
-          }
-          // Mini Program icon
-          &[src$="/icon-mini-program.svg"] {
-            content: url("/icon-mini-program-hover.svg");
-          }
-          // Unity icon
-          &[src$="/icon-unity.svg"] {
-            content: url("/icon-unity-hover.svg");
-          }
-          // Platform icon
-          &[src$="/icon-platform.svg"] {
-            content: url("/icon-platform-hover.svg");
-          }
-          // Platform icon
-          &[src$="/icon-uni-app.svg"] {
-            content: url("/icon-uni-app-hover.svg");
-          }
-        }
-      }
-    }
-  }
 }
 
 .theme-container {
@@ -498,7 +509,7 @@ h2,h3 {
           }
         }
 
-        &.danger {
+        &.warning {
           color: #4c1a1a;
           background-color: #fde2e2;
           border: 1px solid var(--danger-border-color);
@@ -523,12 +534,14 @@ h2,h3 {
 
         th,
         td {
-          min-width: 0;
+          min-width: 32px;
           width: auto;
           line-height: 24px;
           padding: 9px 16px;
           border: 1px solid var(--border-color);
           background-color: #f0f3f5;
+          word-break: break-all;
+          white-space: normal;
         }
 
         tr,td {
@@ -594,6 +607,14 @@ div[class*="language-"] {
 
 div[class*="language-"]::before {
   right: 5em;
+}
+
+div[class*=language-] pre::-webkit-scrollbar-thumb {
+  background: #EBEEF5;
+  transition: background 0.2s ease;
+}
+div[class*=language-] pre::-webkit-scrollbar-thumb:hover {
+  background: #939599;
 }
 
 div[class*="language-"]>button.copy-code-button:not(.fancy) {

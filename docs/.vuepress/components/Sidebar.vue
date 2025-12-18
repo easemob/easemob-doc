@@ -5,7 +5,7 @@
   import UIKitSwitch from './UIKitSwitch.vue'
   import CallKitSwitch from './CallKitSwitch.vue'
   import { usePageData } from '@vuepress/client'
-  import { nextTick, ref, watch} from 'vue'
+  import { nextTick, ref, onMounted, watch} from 'vue'
 
   const pageData = usePageData()
   const showPlatformSwitch = ref(false)
@@ -13,6 +13,8 @@
   const showUIKitSwitch = ref(false)
   const showCallKitSwitch = ref(false)
   let title = ref('')
+  let isNull = ref(false)
+  const isMounted = ref(false)
 
   const initSubheading = ()=>{
     nextTick(()=>{
@@ -35,30 +37,37 @@
         }
         allNextLis.forEach(li => li.classList.add('subheading'));
       }
+      isMounted.value = true
     })
   }
+
+  onMounted(() => {
+    initSubheading()
+  })
 
   watch(pageData, ()=> {
     const pagePath = pageData.value.path
     showPrivateSwitch.value = pagePath.indexOf('/private/') == 0
-    showPlatformSwitch.value = pagePath.indexOf('/document/') == 0
+    showPlatformSwitch.value = pagePath.indexOf('/document/') == 0 && pagePath.indexOf('/server-side/') < 0
     showUIKitSwitch.value = pagePath.indexOf('/uikit/') == 0
     showCallKitSwitch.value = pagePath.indexOf('/callkit/') == 0
 
-    if(pagePath.indexOf('/product/') == 0) title.value = '产品介绍'
+    if(pagePath.indexOf('/product/') == 0) title.value = ''
     else if(pagePath.indexOf('/uikit/') == 0) title.value = 'UIKit'
     else if(pagePath.indexOf('/callkit/') == 0) title.value = 'CallKit'
-    else if(pagePath.indexOf('/document/server-side/') == 0) title.value = '服务端 API'
+    else if(pagePath.indexOf('/document/server-side/') == 0) title.value = ''
     else if(pagePath.indexOf('/document/') == 0) title.value = 'SDK'
-    else if(pagePath.indexOf('/value-added/') == 0) title.value = '增值服务'
+    else if(pagePath.indexOf('/value-added/') == 0) title.value = ''
+    isNull.value = title.value ? false : true
 
-    initSubheading();
+    if (typeof window !== 'undefined' && isMounted.value) initSubheading();
+    
   }, {immediate:true})
 </script>
 <template>
   <Sidebar>
     <template #top>
-      <div class="sidebar-header">
+      <div class="sidebar-header" :class="{'pt20':isNull}">
         <span class="sidebar-title">{{title}}</span>
         <div v-show="showPlatformSwitch" class="platform-switch">
           <ClientOnly>
@@ -105,6 +114,10 @@
 
     .platform-switch {
       flex-grow: 1;
+    }
+
+    &.pt20 {
+      padding: .625rem 1.25rem;
     }
   }
 </style>
