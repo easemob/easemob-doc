@@ -18,7 +18,7 @@
   <ImageItem src="/images/uikit/chatuikit/flutter/custom_chat.png" title="聊天页面" />
 </ImageGallery>
 
-## 创建消息页面
+## 创建聊天页面
 
 添加聊天页面时，可以直接添加到你需要展示的位置并传入 `ChatUIKitProfile` 信息。`ChatUIKitProfile` 为用户信息包装类，详见[用户信息展示](chatuikit_userinfo.html)。
 
