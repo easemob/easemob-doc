@@ -132,6 +132,10 @@ export default {
   line-height: 1.375rem;
 }
 
+.extra-link:not(:last-of-type):hover {
+  color: var(--theme-color);
+}
+
 .extra-link:last-of-type {
   padding: 0.25rem 0.9375rem;
   color: var(--theme-color);
@@ -140,12 +144,17 @@ export default {
   background: #ECF8FF;
 }
 
+.extra-link:last-of-type:hover {
+  color: #fff;
+  background: var(--theme-color);
+}
+
 .extra-link.is-underline:hover:after {
   border-bottom: 0;
 }
 
 /* VuePress Theme Hope 官方移动端断点 - 平板端 (≤1024px) */
-@media (max-width: 1240px) {
+@media (max-width: 1380px) {
   .search-box {
     width: 10rem;
   }
@@ -162,7 +171,7 @@ export default {
 }
 
 /* VuePress Theme Hope 官方移动端断点 - 手机端 (≤768px) */
-@media (max-width: 1160px) {
+@media (max-width: 1300px) {
   .search-box {
     width: 36px;
     min-width: 36px;
