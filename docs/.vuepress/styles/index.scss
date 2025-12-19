@@ -301,6 +301,12 @@ h2,h3 {
                     color: var(--theme-color);
                   }
                 }
+
+                &:hover {
+                  >.nav-link{
+                    color: var(--theme-color);
+                  }
+                }
               }
             }
 
@@ -569,7 +575,6 @@ h2,h3 {
     }
 
     #toc {
-      left: calc(100% - 1rem);
       max-width: 18rem;
       color: #909599;
       font-weight: 500;
