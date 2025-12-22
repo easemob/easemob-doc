@@ -11,15 +11,15 @@
 <table>
 <tbody>
 <tr>
-<td width="161">
+<th width="161">
 <p><strong>消息类型</strong></p>
-</td>
-<td width="189">
+</th>
+<th width="189">
 <p><strong>发送方式</strong></p>
-</td>
-<td width="279">
+</th>
+<th width="279">
 <p><strong>备注</strong></p>
-</td>
+</th>
 </tr>
 <tr>
 <td width="161">

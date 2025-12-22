@@ -11,9 +11,9 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   home: '/',
   iconAssets: 'iconfont',
   logo: '/logo_name.png',
-  // repo: 'easemob/easemob-doc',
-  // docsBranch: 'doc-v2',
-  // docsDir: 'docs',
+  repo: 'easemob/easemob-doc',
+  docsBranch: 'doc-v2',
+  docsDir: 'docs',
   darkmode: 'disable',
   pure: true,
   contributors: false,
@@ -22,7 +22,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   navbarLayout: {
     start: ['Brand','Links'],
     center: [],
-    end: ['Language', 'Outlook']
+    end: ['Language', 'Repo', 'Outlook']
   },
   // sidebar
   sidebar: zhSidebar,
@@ -31,8 +31,14 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   headerDepth: 2,
   extra_nav: [
     {
-      text: '控制台',
+      text: '登录',
       link: 'https://console.easemob.com/user/login',
+      type: 'success'
+    },
+    {
+      text: '注册',
+      link: 'https://console.easemob.com/user/register',
+      type: 'primary'
     }
   ],
   editLink: false,
