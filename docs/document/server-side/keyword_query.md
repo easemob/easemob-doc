@@ -128,6 +128,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/{list_id}/word' \
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 400 | Bad request | textList data is empty | 未传 `list_id`。 | 请传入有效的 `list_id`。 |
-| 400 | Bad request | appkey is not exist | App Key 是环信即时通讯 IM 分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成。上报该错误表示 `org_name` 或者 `app_name` 不正确。 | 请传入正确的 `org_name` 和 `app_name` 参数。|
+| 400 | Bad request | appkey is not exist | App Key 是环信即时通讯 IM 分配给每个应用的唯一标识，由 `org_name` 和 `app_name` 参数的值组成。上报该错误表示 `org_name` 或者 `app_name` 不正确。 | 请传入正确的 `org_name` 和 `app_name` 参数。|
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

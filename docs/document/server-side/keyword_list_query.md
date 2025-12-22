@@ -32,7 +32,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
     }' 
 ```
 
-- 查询匹配指定用户标签的关键词名单：
+- 查询匹配指定群组/聊天室标签的关键词名单：
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -75,7 +75,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
 | 参数            | 类型   | 是否必需 | 描述         |
 | :-------------- | :----- | :------- | :----------------------- |
 | `name`        | String | 否       | 关键词名单的名称。 |
-| `tagId`        | String | 否       | 标签 ID。|
+| `tagId`        | String | 否       | 群组/聊天室标签的 ID。|
 | `size` | Int   | 否   | 每页返回的关键词数量，取值范围为 [1,200]，默认值为 `10`。| 
 | `page` | Int   | 否 | 当前页码，默认值为 `0`。|  
 
@@ -114,7 +114,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
 }
 ```
 
-- 返回匹配指定用户标签的关键词名单，例如，以下响应示例表明没有匹配指定标签的关键词名单：
+- 返回匹配指定群组/聊天室标签的关键词名单，例如，以下响应示例表明没有匹配指定标签的关键词名单：
 
 ```json
 {
@@ -217,7 +217,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
             "updateDataTime": "2025-07-22T09:44:12.917+00:00"
         }
     ],
-    "first": false,
+    "first": true,
     "last": false,
     "size": 5,
     "number": 1,
