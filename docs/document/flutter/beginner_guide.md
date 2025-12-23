@@ -4,6 +4,7 @@
 
 ## 集成流程
 
+<img src=/images/flutter/beginner_guide.png  width="400" height="550"/>
 
 ## 集成步骤
 

@@ -4,7 +4,7 @@
 
 ## 集成流程
 
-![img](/images/callkit/web/beginner_guide.png)
+<img src=/images/callkit/web/beginner_guide.png/>
 
 ## 集成步骤
 

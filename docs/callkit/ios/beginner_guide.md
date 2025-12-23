@@ -4,7 +4,7 @@
 
 ## 集成流程
 
-![img](/images/callkit/ios/beginner_guide.png)
+<img src=/images/callkit/ios/beginner_guide.png  width="400" height="600"/>
 
 ## 集成步骤
 

@@ -165,7 +165,6 @@ const documentSidebar = [
   { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
   { text: '精简版 SDK', link: 'elite_sdk.html', only: ['android', 'ios']},
   { text: '私有云 SDK IP 地址/域名配置', link: 'private_ip_domain.html', only: ['android', 'ios', 'web', 'harmonyos']},
-  { text: '新手入门', link: 'beginner_guide.html', only: ['applet'] },
   { text: '概述', link: 'overview.html', only: ['applet'] },
   {
         text: '集成介绍',
