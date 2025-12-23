@@ -53,6 +53,7 @@ export default defineComponent({
 .hero-content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 95%;
   max-width: var(--home-page-width);
   padding: 70px 0 50px 0;
@@ -62,6 +63,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   max-width: 660px;
+  justify-content: center;
 }
 
 .hero-title {
@@ -69,7 +71,6 @@ export default defineComponent({
   font-size: 3.25rem;
   font-style: normal;
   font-weight: 500;
-  margin-top: 24px;
   line-height: normal;
 }
 
