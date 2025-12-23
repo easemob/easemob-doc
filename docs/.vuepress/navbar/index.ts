@@ -11,37 +11,37 @@ export const zhNavbar = navbar([
           {
             text: 'Android',
             icon: '/icon-Android.svg',
-            link: '/uikit/chatuikit/android/chatuikit_overview.html'
+            link: '/uikit/chatuikit/android/beginner_guide.html'
           },
           {
             text: 'iOS',
             icon: '/icon-iOS.svg',
-            link: '/uikit/chatuikit/ios/chatuikit_overview.html'
+            link: '/uikit/chatuikit/ios/beginner_guide.html'
           },
           {
             text: 'Web',
             icon: '/icon-web.svg',
-            link: '/uikit/chatuikit/web/chatuikit_overview.html'
+            link: '/uikit/chatuikit/web/beginner_guide.html'
           },
           {
             text: 'HarmonyOS',
             icon: '/icon-harmonyos.svg',
-            link: '/uikit/chatuikit/harmonyos/chatuikit_overview.html'
+            link: '/uikit/chatuikit/harmonyos/beginner_guide.html'
           },
           {
             text: 'Uniapp',
             icon: '/icon-uni-app.svg',
-            link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
+            link: '/uikit/chatuikit/uniapp/beginner_guide.html'
           },
           {
             text: 'React Native',
             icon: '/icon-ReactNative.svg',
-            link: '/uikit/chatuikit/react-native/chatuikit_overview.html'
+            link: '/uikit/chatuikit/react-native/beginner_guide.html'
           },
           {
             text: 'Flutter',
             icon: '/icon-flutter.svg',
-            link: '/uikit/chatuikit/flutter/chatuikit_overview.html'
+            link: '/uikit/chatuikit/flutter/beginner_guide.html'
           }
         ]
       },
@@ -83,17 +83,17 @@ export const zhNavbar = navbar([
       {
         text: 'Android',
         icon: '/icon-Android.svg',
-        link: '/callkit/android/product_overview.html'
+        link: '/callkit/android/beginner_guide.html'
       },
       {
         text: 'iOS',
         icon: '/icon-iOS.svg',
-        link: '/callkit/ios/product_overview.html'
+        link: '/callkit/ios/beginner_guide.html'
       },
       {
         text: 'Web',
         icon: '/icon-web.svg',
-        link: '/callkit/web/product_overview.html'
+        link: '/callkit/web/beginner_guide.html'
       },
     ]
   },
@@ -106,27 +106,27 @@ export const zhNavbar = navbar([
           {
             text: 'Android',
             icon: '/icon-Android.svg',
-            link: '/document/android/quickstart.html'
+            link: '/document/android/beginner_guide.html'
           },
           {
             text: 'iOS',
             icon: '/icon-iOS.svg',
-            link: '/document/ios/quickstart.html'
+            link: '/document/ios/beginner_guide.html'
           },
           {
             text: 'Web',
             icon: '/icon-web.svg',
-            link: '/document/web/quickstart.html'
+            link: '/document/web/beginner_guide.html'
           },
           {
             text: 'HarmonyOS',
             icon: '/icon-harmonyos.svg',
-            link: '/document/harmonyos/quickstart.html'
+            link: '/document/harmonyos/beginner_guide.html'
           },
           {
             text: 'Windows',
             icon: '/icon-windows.svg',
-            link: '/document/windows/quickstart.html'
+            link: '/document/windows/beginner_guide.html'
           },
         ]
       },
@@ -136,22 +136,22 @@ export const zhNavbar = navbar([
           {
             text: 'React Native',
             icon: '/icon-ReactNative.svg',
-            link: '/document/react-native/quickstart.html'
+            link: '/document/react-native/beginner_guide.html'
           },
           {
             text: 'Flutter',
             icon: '/icon-flutter.svg',
-            link: '/document/flutter/quickstart.html'
+            link: '/document/flutter/beginner_guide.html'
           },
           {
             text: 'Unity',
             icon: '/icon-unity.svg',
-            link: '/document/unity/quickstart.html'
+            link: '/document/unity/beginner_guide.html'
           },
           {
             text: '小程序',
             icon: '/icon-mini-program.svg',
-            link: '/document/applet/overview.html'
+            link: '/document/applet/beginner_guide.html'
           },
           {
             text: 'uni-app',

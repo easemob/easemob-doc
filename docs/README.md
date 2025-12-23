@@ -64,22 +64,22 @@ starter:
   - title: "单群聊 UIKit"
     platform:
       - icon: /sdk/android.svg
-        link: /uikit/chatuikit/android/chatuikit_integrated.html
+        link: /uikit/chatuikit/android/beginner_guide.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /uikit/chatuikit/ios/chatuikit_integrated.html
+        link: /uikit/chatuikit/ios/beginner_guide.html
         text: iOS 
       - icon: /sdk/web.svg
-        link: /uikit/chatuikit/web/chatuikit_integrated_react.html
+        link: /uikit/chatuikit/web/beginner_guide.html
         text: Web
       - icon: '/sdk/harmonyos.svg'
-        link: '/uikit/chatuikit/harmonyos/chatuikit_integrated.html' 
+        link: '/uikit/chatuikit/harmonyos/beginner_guide.html' 
         text: 'HarmonyOS'  
       - icon: /sdk/uniapp.svg
-        link: /uikit/chatuikit/uniapp/chatuikit_integrated.html
+        link: /uikit/chatuikit/uniapp/beginner_guide.html
         text: Uniapp
       - icon: /sdk/react.svg
-        link: /uikit/chatuikit/react-native/chatuikit_integrated.html
+        link: /uikit/chatuikit/react-native/beginner_guide.html
         text: React Native
   - title: "聊天室 UIKit"
     platform:
@@ -101,13 +101,13 @@ starter:
   - title: "CallKit" 
     platform:
       - icon: /sdk/android.svg
-        link: /callkit/android/product_overview.html
+        link: /callkit/android/beginner_guide.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /callkit/ios/product_overview.html
+        link: /callkit/ios/beginner_guide.html
         text: iOS  
       - icon: /sdk/web.svg
-        link: /callkit/web/product_overview.html
+        link: /callkit/web/beginner_guide.html
         text: Web  
 projects:
   - title: SDK/服务端功能
