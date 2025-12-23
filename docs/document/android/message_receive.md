@@ -116,7 +116,7 @@ Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```java
 public void onMessageReceived(List<EMMessage> messages) {
     for(EMMessage message : messages) {
-        if (message.getType() == Type.IMAGE && ) {
+        if (message.getType() == Type.IMAGE) {
             EMImageMessageBody body = (EMImageMessageBody) msg.getBody();
             if(body.isGif()) {
                 // 根据业务情况处理gif message, 例如下载展示该消息
