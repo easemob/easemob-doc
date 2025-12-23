@@ -11,6 +11,7 @@ const chatPlatformList = getSubDirectories(CHAT_DOC_PATH);
 const chatroomPlatformList = getSubDirectories(CHATROOM_DOC_PATH);
 
 const chatUikitSidebar = [
+  { text: "接入入门", link: "beginner_guide.html" },
   { text: "产品概述", link: "chatuikit_overview.html", only: ["ios"] },
   {
         text: "特性",

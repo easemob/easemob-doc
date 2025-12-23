@@ -6,6 +6,7 @@ const DOC_PATH = path.resolve(__dirname, '../../document')
 const platformList = getSubDirectories(DOC_PATH)
 
 const documentSidebar = [
+  { text: "接入入门", link: "beginner_guide.html" },
   { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
   { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
   { text: 'Demo 体验', link: 'demo.html', only: ['android', 'ios', 'react-native', 'flutter'] },
@@ -164,6 +165,7 @@ const documentSidebar = [
   { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
   { text: '精简版 SDK', link: 'elite_sdk.html', only: ['android', 'ios']},
   { text: '私有云 SDK IP 地址/域名配置', link: 'private_ip_domain.html', only: ['android', 'ios', 'web', 'harmonyos']},
+  { text: '新手入门', link: 'beginner_guide.html', only: ['applet'] },
   { text: '概述', link: 'overview.html', only: ['applet'] },
   {
         text: '集成介绍',
