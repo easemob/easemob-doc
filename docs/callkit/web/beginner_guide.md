@@ -4,7 +4,7 @@
 
 ## 集成流程
 
-<img src=/images/callkit/web/beginner_guide.png/>
+<img src=/images/callkit/web/beginner_guide.png   width="350"/>
 
 ## 集成步骤
 

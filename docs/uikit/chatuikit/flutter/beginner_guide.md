@@ -4,7 +4,7 @@
 
 ## 集成流程
 
-<img src="/images/uikit/chatuikit/flutter/beginner_guide.html">
+<img src="/images/uikit/chatuikit/flutter/beginner_guide.png" width="350"/>
 
 ## 集成步骤
 

@@ -4,7 +4,7 @@
 
 ## 集成流程
 
-![img](/images/harmonyos/beginner_guide.png)
+<img src="/images/uikit/chatuikit/rn/beginner_guide.png" width="350"/>
 
 ## 集成步骤
 
