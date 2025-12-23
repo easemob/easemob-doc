@@ -4,7 +4,9 @@
 
 ## 集成流程
 
-<img src=/images/android/beginner_guide.png  width="400" height="550"/>
+<div style="text-align: center">
+  <img src=/images/android/beginner_guide.png  width="400"/>
+</div>
 
 ## 集成步骤
 

@@ -4,7 +4,9 @@
 
 ## 集成流程
 
-<img src="/images/uikit/chatuikit/rn/beginner_guide.png" width="350"/>
+<div style="text-align: center">
+  <img src="/images/uikit/chatuikit/rn/beginner_guide.png" width="350"/>
+</div>
 
 ## 集成步骤
 
