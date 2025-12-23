@@ -5,7 +5,7 @@
 ## 集成流程
 
 <div style="text-align: center">
-  <img src=/images/web/beginner_guide.png  width="400"/>
+  <img src=/images/android/beginner_guide.png  width="400"/>
 </div>
 
 ## 集成步骤
