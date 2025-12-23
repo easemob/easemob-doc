@@ -2,7 +2,7 @@
 
 环信音视频通话 CallKit 是基于环信即时通讯 IM 和声网实时音视频 RTC 深度整合开发的实时音视频通话框架，实现了一对一及群组音视频通话功能。本文提供从零开始接入音视频通话 CallKit 的完整指南。
 
-## 基本集成流程
+## 集成流程
 
 ![img](/images/callkit/ios/beginner_guide.png)
 
