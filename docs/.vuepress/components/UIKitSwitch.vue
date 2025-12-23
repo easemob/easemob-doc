@@ -93,7 +93,7 @@ const options = [
 const platform = ref("android");
 const kitType = ref("chatuikit");
 const platformIcon = computed(
-  () => PLATFORM_ICON_MAP[platform.value]?.activeIcon
+  () => PLATFORM_ICON_MAP[platform.value]?.icon
 );
 const route = useRoute();
 const router = useRouter();
@@ -197,6 +197,25 @@ const onChange = (platform) => {
   padding-right: 5px;
 }
 
+.el-select {
+  .el-select__wrapper {
+    .el-select__icon {
+      width: 0.88rem;
+      height: 0.88rem;
+      background: url(/icon-arrow-down.svg) no-repeat center center;
+      svg {
+        display: none;
+      }
+    }
+
+    &.is-focused {
+      .el-select__icon {
+        background-image: url(/icon-arrow-down-hover.svg);
+      }
+    }
+  }
+}
+
 .platform-select-dropdown {
   width: 16rem;
 
@@ -236,6 +255,9 @@ const onChange = (platform) => {
         &.is-hovering {
           color: var(--theme-color);
           background-color: transparent;
+        }
+        &:hover {
+          background-color: var(--theme-color-light);
         }
       }
     }

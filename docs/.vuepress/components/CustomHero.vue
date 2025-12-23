@@ -85,8 +85,8 @@ export default defineComponent({
 
 .hero-img {
   flex-shrink: 0;
-  width: 25rem;
-  height: 18.75rem;
+  width: 31.25rem;
+  height: 23.4325rem;
   object-fit: contain;
 }
 
