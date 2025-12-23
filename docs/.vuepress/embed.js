@@ -1,6 +1,6 @@
 async function embedChatbot() {
   const t = {
-    token: "JC4nAgS92AgNJuTk",
+    token: "v4dc5EWgNi5yroC3",
     baseUrl: "https://dify.easemob.com"
   };
   if (t && t.token) {
@@ -60,7 +60,7 @@ async function embedChatbot() {
               (e.id = "dify-chatbot-bubble-window"),
               (e.src = o + "/chatbot/" + t.token),
               (e.style.cssText =
-                "border: none; position: fixed; flex-direction: column; justify-content: space-between; box-shadow: rgba(150, 150, 150, 0.2) 0px 10px 30px 0px, rgba(150, 150, 150, 0.2) 0px 0px 0px 1px; bottom: 9rem; right: 1rem; width: 24rem; max-width: calc(100vw - 2rem); height: 40rem; max-height: calc(100vh - 6rem);border-radius: 0.75rem; display: flex; z-index: 2147483647; overflow: hidden; left: unset; background-color: #F3F4F6;"),
+                "border: none; position: fixed; flex-direction: column; justify-content: space-between; box-shadow: rgba(150, 150, 150, 0.2) 0px 10px 30px 0px, rgba(150, 150, 150, 0.2) 0px 0px 0px 1px; bottom: 9rem; right: 1rem; width: 24rem; max-width: calc(100vw - 2rem); height: 35rem; max-height: calc(100vh - 6rem);border-radius: 0.75rem; display: flex; z-index: 2147483647; overflow: hidden; left: unset; background-color: #F3F4F6;"),
               document.body.appendChild(e),
               (d.innerHTML = i));
         });
