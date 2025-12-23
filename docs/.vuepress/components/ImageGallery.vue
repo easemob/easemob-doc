@@ -49,7 +49,7 @@ export default {
 
   .image-item {
     flex: 1 1 calc(50% - 15px); /* 每行两个图片，减去间距 */
-    background-color: #fafdff; /* 行的背景颜色 */
+    background-color: #F3F6F9; /* 行的背景颜色 */
     box-sizing: border-box;
     text-align: center; /* 标题居中 */
     display: flex;
@@ -75,6 +75,7 @@ export default {
     margin-top: 20px;
     margin-bottom: 40px;
     max-width: 97%;
+    object-fit: contain;
   }
 }
 </style>
