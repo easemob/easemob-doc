@@ -1,6 +1,6 @@
 # 离线推送的消息扩展说明
 
-环信即时通讯 IM 支持 APNs 推送和 Android 厂商离线推送，包括华为、荣耀、FCM、小米、魅族、OPPO 和 vivo。使用离线推送时，你可以通过消息扩展字段实现推送相应功能，例如，设置推送模板中的推送标题和内容，或者设置群组中针对某些用户的个性化推送通知等。
+环信即时通讯 IM 支持 APNs 推送和 Android 厂商离线推送，包括华为、鸿蒙、荣耀、FCM、小米、魅族、OPPO 和 vivo。使用离线推送时，你可以通过消息扩展字段实现推送相应功能，例如，设置推送模板中的推送标题和内容，或者设置群组中针对某些用户的个性化推送通知等。
 
 ## 推送扩展字段
 
@@ -14,7 +14,7 @@
 | `em_ignore_notification` | Boolean      | 静默消息开关，`true` 表示不推送。  |
 | `em_force_notification`  | Boolean      | 强制推送开关，`true` 则不检查用户是否开启免打扰。  |
 | `em_apns_ext`            | Object       | APNs 配置。 |
-| `em_android_push_ext`    | Object       | Android 配置。 |
+| `em_android_push_ext`    | Object       | Android 端推送配置。 |
 | `em_harmony_push_ext`    | Object       | 鸿蒙推送扩展配置。 |
 | `em_push_ext`            | Object       | 通用的配置。 |
 
@@ -34,7 +34,7 @@
 | `name`         | String       | 推送模板名称。                                                 |
 | `title_args`   | `List<String>` | 推送模板标题参数，内置参数：发送方昵称 `{$fromNickname}`。      |
 | `content_args` | `List<String>` | 推送模板内容参数，内置参数：消息内容 `{$msg}`，如果开通了翻译，消息内容会跟随翻译结果显示。 |
-| `directed_template` | Object        | 定向推送模板。此类模板适用于群组消息的离线推送，即群组中某个或某些用户需要接收接收的离线推送通知与其他用户不同的场景。其中的字段如下表所示。    |
+| `directed_template` | Object        | 定向推送模板。此类模板适用于群组消息的离线推送，即群组中某个或某些用户需要接收的离线推送通知与其他用户不同的场景。其中的字段如下表所示。    |
 | `disable_at_content` | Boolean        | 是否禁用默认 @ 内容：<br/> - `true`：禁用<br/> - （默认）`false`：不禁用  |
 
 定向模板中的字段：
@@ -151,8 +151,6 @@
         "em_ignore_notification": false,
         "em_force_notification": true,
         "em_apns_ext": {
-            "em_push_title": "您有一条新消息",
-            "em_push_content": "您有一条新消息",
             "em_push_category": "",
             "em_push_mutable_content": true,
             "em_push_sound": "appsound.mp3",

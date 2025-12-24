@@ -6,6 +6,7 @@ const DOC_PATH = path.resolve(__dirname, '../../document')
 const platformList = getSubDirectories(DOC_PATH)
 
 const documentSidebar = [
+  { text: "入门指引", link: "beginner_guide.html" },
   { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
   { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
   { text: 'Demo 体验', link: 'demo.html', only: ['android', 'ios', 'react-native', 'flutter'] },
