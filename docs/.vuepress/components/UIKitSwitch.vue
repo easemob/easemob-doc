@@ -199,6 +199,7 @@ const onChange = (platform) => {
 
 .el-select {
   .el-select__wrapper {
+    min-height: 2.125rem;
     .el-select__icon {
       width: 0.88rem;
       height: 0.88rem;
