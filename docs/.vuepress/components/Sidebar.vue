@@ -100,9 +100,10 @@
     top: 0;
     display: flex;
     align-items: center;
+    margin-bottom: -2rem;
     padding: 1.25rem;
     background-color: #fff;
-    z-index: 100;
+    z-index: -1;
 
     .sidebar-title {
       margin-right: 1rem;

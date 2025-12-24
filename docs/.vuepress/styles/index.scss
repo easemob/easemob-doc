@@ -410,7 +410,7 @@ button {
 }
 /* aside */
 #sidebar {
-  padding: 0;
+  padding-inline-start: 0;
   background-color: #fff;
   border-right: 1px solid #d4dade;
   scrollbar-color: #EBEEF5 #fff;
@@ -422,7 +422,6 @@ button {
   }
 
   .sidebar-links {
-    padding: 0;
     li {
       margin: 0;
 
