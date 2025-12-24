@@ -166,7 +166,7 @@ export default EaseChat;
 3. 定义 `theme` 变量，传递给 EaseChat 组件，用于切换 UIKit 的主题。
 4. 添加一些样式，美化界面。
 
-```javascript
+```vue
 <script setup>
 import { ref } from "vue";
 import { applyPureReactInVue } from "veaury";
