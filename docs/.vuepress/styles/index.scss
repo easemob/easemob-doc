@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
-h2,h3 {
+h2,h3,h4 {
   width: fit-content;
   border-bottom: 0;
 
@@ -30,6 +30,10 @@ h2,h3 {
     font-weight: 600;
     border-radius: .375rem;
   }
+}
+
+code {
+  word-break: break-all;
 }
 /* 强制按钮等表单元素继承父级容器（最终是 body）的字体设置 */
 button {
