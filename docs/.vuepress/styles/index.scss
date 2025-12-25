@@ -749,12 +749,13 @@ button {
 }
 /* footer */
 .footer-wrapper {
-  margin-left: 18.8125rem;
+  margin-left: var(--sidebar-width);
   margin-top: 4rem;
   padding: 1.25rem;
   padding-inline-start: 1.25rem !important;
   border-top: 0;
   background-color: #FAFDFF;
+  z-index: 0;
 
   .footer {
     display: flex;
@@ -767,6 +768,12 @@ button {
 
 .home.project.pure + .footer-wrapper {
   margin-left: 0;
+}
+
+@media (max-width: 719px) {
+  .footer-wrapper {
+    margin-left: 0;
+  }
 }
 
 /* 滚动条样式调整 */
