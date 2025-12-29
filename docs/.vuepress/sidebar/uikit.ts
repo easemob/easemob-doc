@@ -62,7 +62,6 @@ const chatUikitSidebar = [
   { text: "主题", link: "chatuikit_theme.html", only: ["ios"]},
   { text: "全局配置", link: "chatuikit_config_item.html", only: ["ios"]},
   { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["ios"]},
-  { type: "separator", only: ["ios"]} as any,
   // { text: "设计指南", link: "chatuikit_design_guide.html", only: ["ios"]},
   { text: "产品概述", link: "chatuikit_overview.html", only: ["web"]},
   {
