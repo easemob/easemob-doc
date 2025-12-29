@@ -150,9 +150,9 @@ const documentSidebar = [
   },
   { text: '错误码', link: 'error.html', except: ['server-side', 'applet']},
   { text: 'API 参考', link: 'apireference.html', except: ['server-side', 'applet']},
+  { type: "separator", except: ['server-side', 'applet']} as any,
   { text: '更新日志', link: 'releasenote.html', except: ['server-side', 'applet']},
   { text: '特性限制', link: 'limitation.html', except: ['server-side', 'applet']},
-  { type: "separator", except: ['server-side', 'applet']} as any,
   {
     text: '常见问题',
     collapsible: true,
@@ -287,7 +287,6 @@ const documentSidebar = [
         ],
         only: ['applet']
   }, 
-  { text: 'API 参考', link: 'apidoc.html', only: ['applet']},
   {
     text: '错误排查',
     collapsible: true,
@@ -297,9 +296,10 @@ const documentSidebar = [
     ],
     only: ['applet']
   },
+  { text: 'API 参考', link: 'apidoc.html', only: ['applet']},
+  { type: "separator", only: ['applet']} as any,
   { text: '更新日志', link: 'releasenote.html', only: ['applet']},
   { text: '特性限制', link: 'limitation.html', only: ['applet']},
-  { type: "separator", only: ['applet']} as any,
   {
     text: '其他帮助',
     collapsible: true,
