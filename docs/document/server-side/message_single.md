@@ -647,7 +647,6 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
 curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users"  \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
