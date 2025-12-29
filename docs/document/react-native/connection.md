@@ -10,55 +10,68 @@
 
 ```typescript
 ChatClient.getInstance().addConnectionListener({
+  // SDK 成功连接到 IM 服务器的通知。
   onConnected(): void {
     console.log("onConnected");
   },
+  // SDK 和 IM 服务器断开连接的通知。
+  // 断开连接时底层不一定会登出。
   onDisconnected(): void {
     console.log("onDisconnected");
   },
+  // Token 即将过期的通知。
+  // 自 1.11.0 版本，SDK 会在 Token 有效期达到 80% 时触发该回调。
+  onTokenWillExpire(): void {
+    console.log("onTokenWillExpire");
+  },
+  // 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时通知。
+  // 服务器主动断开连接。
   onAppActiveNumberReachLimit(): void {
     console.log("onAppActiveNumberReachLimit");
   },
-
+  // 其他设备登录通知。
+  // 服务器主动断开连接。
   onUserDidLoginFromOtherDevice(deviceName?: string): void {
     console.log("onUserDidLoginFromOtherDevice", deviceName);
   },
-
+  // 用户在其它设备登录。
+  // 当前用户被服务器断开。
   onUserDidLoginFromOtherDeviceWithInfo(params: {
     deviceName?: string;
     ext?: string;
   }): void {
     console.log("onUserDidLoginFromOtherDeviceWithInfo", params);
   },
-
+   // 登录设备数量超限通知。服务器主动断开连接。
   onUserDidRemoveFromServer(): void {
     console.log("onUserDidRemoveFromServer");
   },
-
+  // 被服务器禁止连接通知。服务器主动断开连接。
   onUserDidForbidByServer(): void {
     console.log("onUserDidForbidByServer");
   },
-
+  // 用户密码变更通知。服务器主动断开连接
   onUserDidChangePassword(): void {
     console.log("onUserDidChangePassword");
   },
-
+  // 登录设备数量超限通知。服务器主动断开连接。
   onUserDidLoginTooManyDevice(): void {
     console.log("onUserDidLoginTooManyDevice");
   },
-
+  // 被其他设备踢掉通知。服务器主动断开连接。
   onUserKickedByOtherDevice(): void {
     console.log("onUserKickedByOtherDevice");
   },
-
+  // 鉴权失败通知。典型触发通知场景：token 过期、token 验证失败。
+  // 服务器主动断开连接。
   onUserAuthenticationFailed(): void {
     console.log("onUserAuthenticationFailed");
   },
-
+  // 结束接收离线消息的时候触发。
   onOfflineMessageSyncFinish(): void {
     console.log("onOfflineMessageSyncFinish");
   },
-
+  // 开始接收离线消息的时候触发。
   onOfflineMessageSyncStart(): void {
     console.log("onOfflineMessageSyncStart");
   },

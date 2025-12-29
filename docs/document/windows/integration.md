@@ -1,4 +1,4 @@
-# 集成 SDK
+# 导入 SDK
 
 本文介绍如何将环信即时通讯 IM SDK 集成到你的 Windows 项目。
 
@@ -9,7 +9,7 @@
 - .Net Framework 4.5.2 或以上；
 - 目前 Windows SDK 仅支持 64 位运行模式；
 
-## 集成 SDK
+## 导入 SDK
 
 1. [下载 Windows SDK](https://www.easemob.com/download/im#Windows)。下载的 NuGet 包一般存放在 `C:\Users\XXX\Downloads` (XXX 为本机用户名) 中。
    

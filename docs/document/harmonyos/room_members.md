@@ -102,7 +102,7 @@ ChatClient.getInstance().chatroomManager()?.removeChatroomMembers(chatroomId, me
 
 仅聊天室所有者和管理员可调用 `ChatroomManager#blockChatroomMembers` 方法将指定成员添加至黑名单。
 
-被加入黑名单后，该成员收到 `ChatroomListener#onRemovedFromChatRoom` 回调，移出原因为 `LEAVE_REASON#BE_KICK`。其他成员收到 `ChatroomListener#onMemberExited` 回调。
+被加入黑名单后，该成员收到 `ChatroomListener#onRemovedFromChatRoom` 回调，移出原因为 `LEAVE_REASON#BE_KICK`。默认情况下，其他成员不会收到事件通知。如需该事件，请联系商务开通。
 
 被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室，黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单列表。
 

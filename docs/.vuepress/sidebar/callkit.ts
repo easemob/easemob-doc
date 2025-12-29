@@ -9,6 +9,7 @@ const CALL_DOC_PATH = path.resolve(__dirname, "../../callkit");
 const callKitPlatformList = getSubDirectories(CALL_DOC_PATH);
 
 const callKitSidebar = [
+  { text: "入门指引", link: "beginner_guide.html" },
   {
     /*
       text: 分组标题

@@ -2,7 +2,7 @@
 
 ## 版本 4.18.0 2025-10-31
 
-### 修复
+#### 修复
 
 1. 修复离线时撤回消息,上线后本地没有插入问题。
 2. 修复会话列表页面中列表项背景设置未生效问题。
@@ -13,20 +13,20 @@
 
 ## 版本 V4.11.1 2024-12-3
 
-### 新增特性
+#### 新增特性
 
 - [消息长按菜单样式新增微信风格样式](chatuikit_chat.html#设置消息长按后的菜单项)。
 - [发送附件消息菜单新增微信风格样式](chatuikit_chat.html#设置发送附件消息弹窗样式)。
 
-### 优化
+#### 优化
 
 权限申请时顶部增加权限申请说明。
 
-### 修复
+#### 修复
 
 修复消息置顶特性在部分场景下未更新的一些问题。
 
-### 重大变更
+#### 重大变更
 
 为规范 UIKit 各平台的命名，UIKit 内部将工程下所有以 `ease` 开头的类文件、layout 布局文件、资源文件及内部使用的部分字符串修改为以 `chatuikit` 开头，老用户升级时应注意变更相关引用。具体变更规则，请访问 [GitHub](https://github.com/easemob/easemob-uikit-android/blob/main/script/rename_file_and_update_content.py) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-android/blob/main/script/rename_file_and_update_content.py) 地址参考提供的脚本内部实现。脚本可以协助用户将应用层代码实现同步更名。
 
@@ -43,13 +43,13 @@ python3 rename_file_and_update_content.py target_folder --rename-files --replace
 
 ## 版本 V4.8.2 2024-7-26
 
-### 新增特性
+#### 新增特性
 
 - 新增聊天中正在输入状态功能。
 - 新增好友黑名单功能。
 - Callkit 增加私有配置设置。
 
-### 修复
+#### 修复
 
 - 修复发送图片/HEIF类型图片缩略图错乱问题。
 - 修复单群聊 UIKit 内存泄漏问题。

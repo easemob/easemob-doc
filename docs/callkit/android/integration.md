@@ -419,28 +419,3 @@ private val callKitListener = object : CallKitListener {
 }
 ```
 更多其他配置可以参考 [声网 RTC 文档](https://doc.shengwang.cn/doc/rtc/android/basic-features/video-profile#视频参数推荐值)。
-
-### 声网 RTC 私有化部署
-
-若使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置。
-
-详情可以参考 [声网 RTC 文档](https://doc.shengwang.cn/api-ref/rtc/android/API/class_Localaccesspointconfiguration#LocalAccessPointConfiguration)。
-
-```kotlin
-private val callKitListener = object : CallKitListener {
-    
-    override fun onRtcEngineCreated(engine: RtcEngine) {
-        // 私有化部署配置
-        val configuration = LocalAccessPointConfiguration().apply {
-            // 将 `111.111.111.111` 替换为你的私有化地址
-            ipList = arrayListOf("111.111.111.111")
-            // 将 `ap.xxx.agora.local` 替换为你的域名
-            verifyDomainName = "ap.xxx.agora.local"
-            mode = LOCAL_RPOXY_LOCAL_ONLY
-        }
-        engine.setLocalAccessPoint(configuration)
-    }
-    
-    // ... 其他回调
-}
-```

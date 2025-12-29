@@ -429,21 +429,6 @@ func onRtcEngineCreated(engine: AgoraRtcEngineKit?) {
 
 更多其他配置可以参考 [声网 RTC 文档](https://doc.shengwang.cn/doc/rtc/ios/basic-features/video-profile#视频参数推荐值)。
 
-### 声网 RTC 私有化部署
-
-如果使用私有化的声网服务，可以在声网 RTC 引擎创建时进行配置：
-
-```swift
-//添加 CallKitListener 监听后实现下面方法，填写自己的ip地址以及域名
-    func onRtcEngineCreated(engine: AgoraRtcEngineKit?) {
-        let config = AgoraLocalAccessPointConfiguration()
-        config.ipList = ["123.456.789.0"]
-        config.verifyDomainName = "ap.xxx.agora.local"
-        config.mode = .localOnly
-        engine?.setLocalAccessPoint(withConfig: config)
-    }
-```
-
 ## 常见问题
 
 1. 当你使用 Xcode 15 创建新工程时，编译时若出现 **Sandbox: rsync.samba(47334) deny(1) file-write-create...** 报错，你需要在 **Target > Build Settings** 中查找 **User Script Sandboxing** 选项，设置为 **NO**。

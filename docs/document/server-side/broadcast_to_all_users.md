@@ -48,7 +48,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
         "msg": "send broadcast to all users"
     },
     "from": "admin",
-    "appkey": "XXXX",
     "ext": {
         "extKey": "extValue"
     }
@@ -76,7 +75,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
         }
     },
     "from": "admin",
-    "appkey": "XXXX",
     "ext": {
         "extKey": "extValue"
     }
@@ -101,7 +99,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
         "secret": "HfXXXXCjM"
     },
     "from": "admin",
-    "appkey": "XXXX",
     "ext": {
         "extKey": "extValue"
     }
@@ -129,7 +126,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
         "url" : "https://XXXX/XXXX/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"
     },
     "from": "admin",
-    "appkey": "XXXX",
     "ext": {
         "extKey": "extValue"
     }
@@ -153,7 +149,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
         "url":"https://XXXX/XXXX/XXXX/chatfiles/d7eXXXX7444"
     },
     "from": "admin",
-    "appkey": "XXXX",
     "ext": {
         "extKey": "extValue"
     }
@@ -177,7 +172,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
         "addr":"中国北京市海淀区中关村"
     },
     "from": "admin",
-    "appkey": "XXXX",
     "ext": {
         "extKey": "extValue"
     }
@@ -199,7 +193,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
         "action":"action1"
     },
     "from": "admin",
-    "appkey": "XXXX",
     "ext": {
         "extKey": "extValue"
     }
@@ -221,7 +214,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
         "customEvent": "custom_event",
     },
     "from": "admin",
-    "appkey": "XXXX",
     "ext": {
         "extKey": "extValue"
     }

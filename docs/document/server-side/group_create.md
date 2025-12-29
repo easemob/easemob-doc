@@ -61,6 +61,12 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups'  \
 | `members`             | Array  | 否       | 群成员的用户 ID 数组，不包含群主的用户 ID。该数组可包含的元素数量不超过 `maxusers` 的值。        |
 | `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。     |
 
+:::tip
+该 API 支持基于自定义群组 ID 创建群组，即调用该 API 时传入 `groupid` 参数。
+1. 使用该功能前，你需**联系环信商务**。功能开通后，你也可以 [基于自定义聊天室 ID 创建聊天室](chatroom_create.html#请求-body-参数)。
+2. `groupid` 参数最多可传入 64 个字符，只支持小写英文字母 a-z 和数字 0-9。**注意不要使用大写英文字母 A-Z 。**
+:::
+
 ## 响应示例
 
 ```json
@@ -115,7 +121,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups'  \
 | 400     | illegal_argument | group ID XX already exists! | groupId 重复。 | 使用新的群组 ID。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 403     | exceed_limit | appKey:XX#XX has create too many groups! | appKey 的群组数量达到上限。 | 删除不用的群组或联系商务调整上限。关于该上限，详见 详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 |
-| 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数量达到上限。 | 退出不用的群组或联系商务调整上限。关于该上限，详见 详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 |
+| 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数量达到上限。 | 退出不用的群组或在 [环信控制台上调用户可加入群组数上限](/product/console/basic_conversation_group_chatroom.html#单个用户可加入群组数上限)。关于该上限，详见 详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 |
 | 403     | exceed_limit | members size is greater than max user size ! | 创建群时加入的人数超过最大限制。 | 调整创建群的加群人数。关于该上限，详见 详见 [IM 套餐包功能详情](/product/product_package_feature.html)。|
 | 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
 | 404     |  resource_not_found  | username XXXX doesn't exist!       | 创建群组时添加的用户不存在。 |

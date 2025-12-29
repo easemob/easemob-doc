@@ -2,61 +2,71 @@
 
 <Toc />
 
-## 版本 1.12.0 2025-11-19
+## v1.12.0 2025-11-19
 
-依赖的原生 SDK 升级：
-- iOS 升级至 4.16.2
-- Android 升级至 4.16.1
+- 依赖的原生 SDK 升级：
+  - `iOS` 升级至 4.16.2
+  - `Android` 升级至 4.16.1
 
-## 版本 1.11.5 2025-10-09
+## v1.11.5 2025-10-09
 
 适配 Android 15 的 16 KB 页面大小。
 
-## 版本 1.11.4 2025-9-15
+## v1.11.4 2025-9-15
 
 - 修复文件之间循环引用问题。
 
-## 版本 1.11.3 2025-7-15
+## v1.11.3 2025-7-15
 
 [支持用户查看自己是否在聊天室禁言列表上](room_members.html#查看当前用户是否在聊天室禁言列表)。
 
-## 版本 1.11.2 2025-6-15
+## v1.11.2 2025-6-15
 
 修复 Android 平台搜索历史消息的数据转换问题。
 
-## 版本 1.11.1 2025-5-10
+## v1.11.1 2025-5-10
 
 修复 iOS 平台 会话类型的数据转换问题。
 
-## 版本 1.11.0 2025-4-15
+## v1.11.0 2025-4-15
 
 #### 新增特性
 
-- 依赖的原生 SDK 升级到版本（`iOS` 4.15.1 和 `Android` 4.15.2）。
-- 更新修改消息：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以修改消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持修改扩展信息。
-- 图片消息新增对 `gif` 格式图片的支持。详见 `ChatImageMessageBody` 类型。
-- 更新创建群组接口：作废 `createGroup`, 新增 `createGroupEx` 接口替换，新接口支持自定义群头像。
-- 附件类型消息支持鉴权，默认不开启，如果开启，需要调用下载相关接口下载附件。详见 `_ChatFileMessageBody.secret`。
-- 支持拉取漫游消息时，只拉取指定的群成员发送的消息。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。
-- 支持加载本地会话消息时，只加载指定群成员发送的消息。详见 `getMsgsWithMsgType` 接口。
-- 新增群组接口，`fetchMemberInfoListFromServer`, 获取群成员列表时包括成员角色和入群时间。
-- 新增群组接口，`updateGroupAvatar`，更新群组头像。
-- 新增搜索消息接口 `getConvsMsgsWithKeyword`, 通过关键字在本地 搜索指定会话列表的消息 ID 列表。
-- 新增搜索消息接口 `getMessagesWithIds`, 消息 ID 列表在本地搜索消息。
-- 更新搜索消息接口 `getConvMsgsWithKeyword`, 作废 `sender` 参数、新增 `senders` 参数。
-- 更新登录 token 过期提醒机制，由原来有效期时间的 50% 的时候提示，修改为 80% 的时候提示。
-- 修改撤销消息，支持群组管理员、创建者、聊天室创建者撤回用其他用户消息。
-- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。详见 `ChatGroupEventListener` 类型 `onMembersJoined` 和 `onMembersExited` 方法，原来 `onMemberJoined` 和 `onMemberExited` 作废。
+依赖的原生 SDK 升级到版本（`iOS` 4.15.1 和 `Android` 4.15.2）。
 
-## 版本 1.8.2 2025-3-15
+**消息相关**
+
+- 更新 [修改消息](message_modify.html)：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以修改消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持修改扩展信息。
+- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
+- 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。
+- 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持 [根据关键字从本地数据库中获取单个会话的消息 ID 列表](message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。
+- 支持 [根据消息 ID 获取单个会话的单条或多条本地消息](message_retrieve.html#根据消息-id-获取单条或多条本地消息)。
+- 更新 [根据搜索范围搜索当前会话中的消息](message_search.html#根据搜索范围搜索当前会话中的消息) 接口 `getConvMsgsWithKeyword`, 新增 `senders` 参数，替换原来的 `sender` 参数。
+- [撤回消息](message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
+
+**群组相关**
+
+- 支持 [创建群组时设置群头像](group_attributes.html#管理群组头像)。新增创建群组接口 `createGroupEx`，作废原接口 `createGroup`。
+- 支持 [修改群组头像](group_attributes.html#修改群头像)。
+- 支持 [获取群成员列表](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
+  - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
+
+#### 优化
+
+修改 Token 即将过期事件 [ChatConnectEventListener#onTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
+
+## v1.8.2 2025-3-15
 
 - 修复使用 react-native 0.77、0.78、0.79 和 0.80 版本的应用集成 Chat SDK 无法编译通过的问题。
 
-## 版本 1.8.1 2025-2-15
+## v1.8.1 2025-2-15
 
 - 使用接口 `fetchGroupInfoWithoutMembersFromServer` 替换 `fetchGroupInfoFromServer`。
 
-## 版本 V1.8.0 2025-1-17
+## v1.8.0 2025-1-17
 
 #### 新增特性
 
@@ -67,11 +77,13 @@
 4. 当前用户是否在聊天室白名单中 `ChatRoom#isInWhitelist`。该属性为新增属性，成员收到白名单变更回调时更新。
 5. 当前用户被禁言截止时间戳 `ChatRoom#muteExpireTimestamp`。该属性为新增属性，成员收到禁言变更回调时更新。
 
-## 版本 V1.7.0 2024-12-5
+## v1.7.0 2024-12-5
 
 #### 新增特性
 
-- 依赖的原生 SDK 升级到版本：iOS 4.11.0 和 Android 4.11.0。
+- 依赖的原生 SDK 升级到版本：
+  - iOS 升级至 4.11.0
+  - Android 升级至 4.11.0
 - 更新服务器连接状态监听器 `ChatConnectEventListener`，新增 `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish` 事件，表示[从服务器拉取离线消息的开始和结束](connection.html)。
 - 新增 `ChatManager#getMessageCount` 方法，用于获取数据库中的消息总数。
   
@@ -80,17 +92,19 @@
 - 更新聊天室监听器 `ChatRoomEventListener`, 作废 `onMuteListAdded`，替换为 `onMuteListAddedV2`。
 - 更新消息监听器 `ChatMessageEventListener`, 移除作废的接口 `onMessagesRecalled`。
 
-## 版本 V1.6.1 2024-9-12
+## v1.6.1 2024-9-12
 
 #### 修复
 
 - 修复 Android 平台下编译报错找不到 `CMakeLists.txt` 的问题。
 
-## 版本 V1.6.0 2024-8-30
+## v1.6.0 2024-8-30
 
 #### 新增特性
 
-- 依赖的原生 SDK 升级到版本：iOS 4.8.1 和 Android 4.8.2。
+- 依赖的原生 SDK 升级到版本：
+  - iOS 升级至 4.8.1
+  - Android 升级至 4.8.2
 - 新增 `ChatManager.searchMessages` 方法，支持[一次搜索所有会话的多种类型的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
 - 新增 `ChatManager.searchMessagesInConversation` 方法，支持[一次搜索指定会话的多种类型的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
 - 新增 `ChatManager.removeMessagesWithTimestamp` 方法，支持[只删除服务器端的聊天室消息](message_delete.html#单向删除服务器端的聊天室消息)。
@@ -116,7 +130,7 @@
 - 修复拉黑联系人时缓存未及时更新的问题。
 - 修复退出登录再登录后推送可能不工作的问题。
 
-## 版本 V1.5.1 2024-7-2
+## v1.5.1 2024-7-2
 
 #### 修复
 
@@ -124,7 +138,7 @@
   - Android：修复部分场景下，用户升级数据库后，在同一个进程下登录新的用户，构建数据库表失败的问题。
   - iOS：从服务端拉取群组时，不再先清除本地群组，而是将拉取的群组与本地对比，将本地现有群组进行更新，将新增部分在本地插入。若要清除本地群组信息，可以调用 `IEMGroupManager#cleanAllGroupsFromDB` 方法。
 
-## 版本 V1.5.0 2024-6-2
+## v1.5.0 2024-6-2
 
 #### 新增特性
 
@@ -138,7 +152,7 @@
 - 特殊情况下附件发送失败，消息仍然成功发送的问题。
 - 拉取漫游消息时 `nextkey` 错误的问题。
 
-## 版本 V1.4.0 2024-5-7
+## v1.4.0 2024-5-7
 
 #### 新增特性
 
@@ -203,11 +217,13 @@
 - 修复数据上报模块偶现的崩溃问题。
 - 修复部分场景下调用 `ChatManager#updateMessage` 方法更新消息时导致的崩溃问题。
 
-## 版本 V1.3.0 2024-1-4
+## v1.3.0 2024-1-4
 
 #### 新增特性
 
-- 依赖的原生 SDK 升级到版本（`iOS` 4.2.0 和`Android` 4.2.1）。添加原生 SDK 提供的新功能。
+- 依赖的原生 SDK 升级到版本，添加原生 SDK 提供的新功能。
+  - `iOS` 升级至 4.2.0
+  - `Android` 升级至 4.2.1
 - 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
 - 新增 `ChatContactManager.fetchAllContacts` 和 `ChatContactManager.fetchContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
 - 新增 `ChatContactManager.getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
@@ -216,13 +232,13 @@
 - 新增 `ChatGroupManager.fetchJoinedGroupCount` 方法用于从服务器获取当前用户已加入的群组数量。
 - [申请入群被拒绝的回调](group_manage.html#监听群组事件) `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。
 
-## 版本 V1.2.1 2023-8-16
+## v1.2.1 2023-8-16
 
 #### 修复
 
 - 移除创建消息对象的参数 `secret`。该参数由服务器生成，在发送消息成功之后会获取到。
 
-## 版本 V1.2.0 2023-8-16
+## v1.2.0 2023-8-16
 
 #### 新增特性
 
@@ -276,11 +292,13 @@
 
 修复 Android 平台下由于添加表情响应导致应用程序崩溃的问题。
 
-## 版本 V1.1.2 2023-6-28
+## v1.1.2 2023-6-28
 
 #### 新增特性
 
-- 原生平台 Android 和 iOS 的 SDK 升级到 v4.0.2。
+- 依赖的原生 SDK 升级：
+  - iOS 升级至 4.16.2
+  - Android 升级至 4.16.1
 - 新增 `ChatClient.version` 属性用于获取当前 SDK 的版本号。
 - 新增 `ChatGroupManager.setMemberAttribute` 方法用于[设置单个群组成员的属性](group_members.html#设置群组成员自定义属性)。
 - 新增 `ChatGroupManager.fetchMemberAttributes` 方法用于[从服务器获取单个群成员的所有自定义属性](group_members.html#获取单个群成员的所有自定义属性)以及[根据属性 key 获取多个群成员的自定义属性](group_members.html#根据属性-key-获取多个群成员的自定义属性)。
@@ -301,13 +319,13 @@
 - 修复更新 token 方法 `renewAgoraToken` 中的问题。
 - 修复 Android 平台发送视频消息失败的问题。
 
-## 版本 V1.1.1 2023-3-8
+## v1.1.1 2023-3-8
 
 #### 修复
 
 修复调用 `ChatGroupManager#fetchJoinedGroupsFromServer` 方法时获取加入的公开群的扩展属性为空的问题。
 
-## 版本 V1.1.0 2023-2-24
+## v1.1.0 2023-2-24
 
 #### 新增特性
 
@@ -328,7 +346,7 @@
 - 修复获取会话可能失败的问题。
 - 修复回调方法可能多次进入主线程导致死锁的问题。该问题只可能发生在 iOS 平台。
 
-## 版本 V1.0.11 Dev 2022-12-12
+## v1.0.11 Dev 2022-12-12
 
 #### 优化
 
@@ -340,13 +358,13 @@
 - 修复某些场景下调用 `updateMessage` 方法导致的内存与数据库中的消息不一致问题。
 - 适配 Android 12，修复依赖环信即时通讯 IM SDK 的 APK 在 Android 12 版本的部分手机上第一次安装后打开时出现异常弹框的问题。
 
-## 版本 V1.0.10 Dev 2022-10-13
+## v1.0.10 Dev 2022-10-13
 
 #### 修复
 
 修复 Android 平台进行 JSON 转换可能出现的超限问题。该问题影响返回数组类型数据的接口，若此类接口返回的数据元素超过 50 个，则可能抛出异常。
 
-## 版本 V1.0.9 Dev 2022-10-08
+## v1.0.9 Dev 2022-10-08
 
 #### 新增特性
 
@@ -358,7 +376,7 @@
 
 修复聊天室自定义属性问题。
 
-## 版本 V1.0.8 Dev 2022-09-30
+## v1.0.8 Dev 2022-09-30
 
 #### 新增特性
 
@@ -373,7 +391,7 @@
 - 修复极少数场景下打印日志导致的崩溃。
 
 
-## 版本 V1.0.7 2022-09-07
+## v1.0.7 2022-09-07
 
 #### 兼容性变更
 
@@ -402,7 +420,7 @@
 
 修复相关方法中的 `type` 字段的 JSON 解析错误。
 
-## 版本 V1.0.6 2022-7-22
+## v1.0.6 2022-7-22
 
 #### 兼容性变更
 
@@ -443,7 +461,7 @@
 
 类型声明切入点不正确。
 
-## 版本 V1.0.5 2022-6-21
+## v1.0.5 2022-6-21
 
 这是 React Native SDK 第一个正式发布的版本，包含以下功能：
 

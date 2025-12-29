@@ -13,13 +13,14 @@
 环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMConversation` 类实现对本地消息的管理，其中核心方法如下：
 
 - `EMChatManager#fetchHistoryMessages`：根据 `FetchMessageOptions` 类获取服务器保存的指定会话中的消息。
-- `EMChatManager#doAsyncFetchHistoryMessages`：从服务器获取指定群成员发送的消息；
-- `EMConversation#asyncSearchMsgFromDB`：从本地获取指定群成员发送的消息；
-- `EMChatManager.getConversation`：读取本地指定会话的消息。
-- `EMChatManager.loadMessage`：根据消息 ID 获取消息。
-- `EMConversation.loadMessagesWithMsgType`：获取本地存储的指定会话中特定类型的消息。
-- `EMConversation.loadMessagesFromTime`：获取一定时间段内本地指定会话中发送和接收的消息。
-- `EMChatManager.loadConversationMessagesWithKeyword`：根据关键字获取指定会话中的消息。
+- `EMChatManager#doAsyncFetchHistoryMessages`：从服务器获取指定群成员发送的消息。
+- `EMConversation#asyncSearchMsgFromDB`：从本地获取指定群成员发送的消息。
+- `EMChatManager#getConversation`：读取本地指定会话的消息。
+- `EMChatManager#loadMessagesWithIds`：根据消息 ID 获取单个本地会话的单条或多条消息。
+- `EMChatManager#loadMessage`：根据消息 ID 获取消息。
+- `EMConversation#loadMessagesWithMsgType`：获取本地存储的指定会话中特定类型的消息。
+- `EMConversation#loadMessagesFromTime`：获取一定时间段内本地指定会话中发送和接收的消息。
+- `EMChatManager#loadConversationMessagesWithKeyword`：根据关键字获取指定会话中的消息。
 
 ## 前提条件
 
@@ -148,6 +149,17 @@ EMConversation? conversation =
   true,
 );
 List<EMMessage>? list = await conversation?.loadMessages();
+```
+
+### 根据消息 ID 获取单条或多条本地消息
+
+自 SDK 4.16.0 版本开始，你可以调用 `loadMessagesWithIds` 方法传入单个或多个消息 ID 获取单个本地会话中的消息。
+
+每次最多可获取单个会话的 20 条消息。
+
+```dart
+// messageIdList：消息 ID 列表。每次最多可传入 20 个消息 ID。
+List<EMMessage> messages = await EMClient.getInstance.chatManager.loadMessagesWithIds(messageIdList, conversationId);
 ```
 
 ### 根据消息 ID 获取消息

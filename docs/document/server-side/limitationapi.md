@@ -20,6 +20,8 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 环信即时通讯 IM 专业版和旗舰版支持调整的服务端 API 及叠加包大小（免费版不支持），如下表所示。
 
+单个叠加包大小为单次调整频率值，例如，上传文件 API 的默认调用频率上限为 100 次/秒/App Key，单个叠加包为 100 次/秒，购买单个叠加包后，你的该接口的 API 调用频率上限提升至 200 次/秒/App Key。
+
 叠加包单价为国内 200 元/月，海外 400 元/月。
 
 ## 消息管理
@@ -282,7 +284,15 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |     | 
 | 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template | 100 次/秒/App Key。 |     | 
 
-## 关键词名单
+## 内容审核
+
+### 主动文本审核
+
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
+| 主动文本审核 | POST | /{org_name}/{app_name}/moderation/txt/check  | 100 次/秒/App Key | 50 次/秒  |
+
+### 关键词名单
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
@@ -295,7 +305,6 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 查询关键词 | POST | /{org_name}/{app_name}/moderation/text/list/{list_id}/word | 100 次/秒/App Key | 50 次/秒  |
 | 删除单个关键词 | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word?wordId={word_id} | 100 次/秒/App Key | 50 次/秒  |
 | 批量删除关键词 | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word/batch | 100 次/秒/App Key | 50 次/秒  |
-
 
 ## 发送后回调
 

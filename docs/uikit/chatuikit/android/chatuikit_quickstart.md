@@ -86,7 +86,7 @@ dependencies {
 }
 ```
 
-1. 配置 ViewBinding
+2. 配置 ViewBinding
 
 在 app 项目的 `build.gradle.kts` 文件中添加如下代码：
 

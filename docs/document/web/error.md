@@ -23,7 +23,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 28     | WEBIM_CONNCTION_TOKEN_NOT_ASSIGN_ERROR         | 未传 token：调用 API 时没有携带 token，一般没登录时调用 API 会提示这个错误。 | 确保成功登录。 |
 | 31     | WEBIM_CONNCTION_CALLBACK_INNER_ERROR           | 消息发送回调函数内部错误：在接收消息的回调及后续处理的函数中有错误。 | 检查回调函数⾥是否有报错，如 `onTextMessage` 的回调⾥处理消息时有报错。 |
 | 39     | WEBIM_CONNECTION_CLOSED                        | 退出或未登录：未登录或掉线后发送消息。  | 重新登录。|
-| 40     | WEBIM_CONNECTION_ERROR                         | 用户鉴权失败。  | 提示连接已断开。 |
+| 40     | WEBIM_CONNECTION_ERROR                         | 连接错误，即 WebSocket 请求错误，一般为平台 onError 回调触发。  | 提示连接已断开。 |
 | 50     | MAX_LIMIT                         | 达到上限，例如 Reaction 数量已达到限制、翻译用量达到上限、应用的日活跃用户数（DAU）超限、在线用户数量超限和月活跃用户数（MAU）。 | 根据 error message 确认哪项服务达到上限，限制相应数量。  |
 | 51     | MESSAGE_NOT_FOUND                         | 没查到消息，如：没有查询到要举报的消息。   | 提示未找到原消息。 |
 | 52     | NO_PERMISSION                          | 用户对当前操作没有权限。  | 提示没有权限进⾏相应的操作。 |
@@ -45,7 +45,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT                | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。 | 提示消息发送失败，包含敏感词等⾮法内容。 |
 | 502    | MESSAGE_EXTERNAL_LOGIC_BLOCKED                 | 消息被拦截：开通反垃圾服务后，消息被拦截报此错误。           | 提示消息发送失败。|
 | 503    | SERVER_UNKNOWN_ERROR                           | 消息发送失败未知错误：服务端返回的错误信息超出 SDK 处理范围。 | 提示消息发送失败。|
-| 504    | MESSAGE_RECALL_TIME_LIMIT                      | 撤回消息时超出限定时间。  | 提示已经超出可撤回的时间。 | 
+| 504    | MESSAGE_RECALL_TIME_LIMIT                      | 撤回消息时超出限定时间。  | 提示已经超出可撤回的时间，或者在 [环信控制台延长消息可撤回时间](/product/console/basic_message.html#消息撤回)，最多可设置为 7 天。 | 
 | 505    | SERVICE_NOT_ENABLED                            | 服务未开启：要使用的某些功能未开通。   | 根据 error message 开通相应的功能。 |
 | 506    | SERVICE_NOT_ALLOW_MESSAGING                    | 用户未在白名单中：群组或聊天室开启全员禁言时，若用户未在白名单中发送消息时提示该错误。 | 提示当前群组或聊天室已禁⾔。| 
 | 507    | SERVICE_NOT_ALLOW_MESSAGING_MUTE               | 当前用户被禁言：在群组或者聊天室中被禁言后发消息报此错误。  | 提示⽤户已被禁⾔。|
@@ -68,7 +68,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 705    | CHATROOM_NOT_EXIST                             | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。| 检查聊天室 ID 是否正确。 |
 | 800    | LOCAL_DB_OPERATION_FAILED       | 本地数据库操作失败。| ⽤ miniCore 使⽤本地会话列表时，提示会话列表操作失败。|
 | 999    | SDK_RUNTIME_ERROR                              | Websocket 发送消息错误。  | 提示登录失败，重新登录。|
-| 1100   | PRESENCE_PARAM_EXCEED                          | 发布自定义在线状态时，参数长度超出限制。  | 设置⾃定义在线状态时不要超过1024 字节。|
+| 1100   | PRESENCE_PARAM_EXCEED                          | - 用户在线状态订阅功能 Presence 未开通。<br/> - 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 | <br/>使用 Presence 功能前需要在环信控制台开通。 <br/> - 调用[发布自定义在线状态 API](presence.html#发布自定义在线状态) 时设置的在线状态详细信息的长度不能超过 64 字节。|
 | 1101   | REACTION_ALREADY_ADDED                         | Reaction 重复添加。   | 确保同⼀个⽤户不要添加重复的 Reaction。|
 | 1102   | REACTION_CREATING                              | 创建 Reaction 时，其他人正在创建。| 提示其他⼈正在创建 Reaction。|
 | 1103   | REACTION_OPERATION_IS_ILLEGAL                  | 用户对该 Reaction 没有操作权限：没有添加过该 Reaction 的用户进行删除操作，或者单聊消息非发送者和非接收者进行添加 Reaction 操作。 | 确保⽤户正确操作 Reaction。 |

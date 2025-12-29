@@ -182,4 +182,4 @@ curl -X POST -i  "https://XXXX/XXXX/XXXX/users"  \
 | 401         | unauthorized                       | Unable to authenticate (OAuth)     | token 不合法，可能过期或 token 错误。  | 使用新的 token 访问。  |
 | 401         | unauthorized                       | Open registration doesn't allow, so register user need token, | 授权注册模式，注册用户时需要 token。  | 请求时携带 token。 |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或 [创建应用](/product/console/app_create.html)。 |
-| 429         | resource_limited                   | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐版本的限制。 | 联系商务开通付费版。 |
+| 429         | resource_limited                   | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐版本的限制。 | 免费套餐包最多支持 100 个注册用户。你可以 [升级至付费套餐包](product/pricing_method.html#升级套餐包)。专业版和旗舰版对注册用户数量无限制。 |

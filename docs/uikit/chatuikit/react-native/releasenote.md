@@ -2,6 +2,8 @@
 
 ## 2.5.0 2025-11-17
 
+react-native-chat-sdk 版本要求 1.8.0 或以上
+
 #### 新增特性
 
 - 支持 [自定义数据层](chatuikit_advancedusage.html#自定义-sdk-数据模型)，实现灵活业务处理。例如，App 内根据手机号搜索好友功能已使用该接口。
@@ -94,6 +96,8 @@
 - 支持 eas 云构建。
 
 ## 版本 V2.3
+
+react-native-chat-sdk 版本要求 1.3.1 或以上
 
 #### 新增特性
 

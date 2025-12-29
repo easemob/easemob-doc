@@ -1,10 +1,10 @@
 # 精简版 SDK 
 
-精简版 SDK 4.2.0 支持 Android 和 iOS 平台，包含基础的单聊和聊天室功能，适用于 SDK 包体积尽量小、仅需基础收发消息功能、而无需离线推送通知等功能的情况。
+精简版 SDK 4.2.0 是专为 iOS 平台设计的轻量级即时通讯解决方案，包体积约 1.09 MB。与标准版 SDK 相比，精简版保留了核心的单聊与聊天室功能，移除了好友关系等高级能力，专注于满足对包体积有严格要求、仅需核心收发消息功能的开发场景，助力开发者构建更轻量的 iOS 应用。
 
-精简版 SDK 对应用的体积增量不大，android 为 1.11 MB，iOS 为 1.09 MB。
+## 下载精简版 SDK
 
-要下载 iOS 端精简版 SDK，点击[这里](https://downloadsdk.easemob.com/downloads/SDK-mini/iOS_IMLite_SDK_4.2.0_1116.zip)。
+你可以从环信官网 [下载 iOS 端精简版 SDK](https://downloadsdk.easemob.com/downloads/SDK-mini/iOS_IMLite_SDK_4.2.0_1116.zip)。
 
 :::tip
 精简版 SDK 无本地存储，可以升级为标准版 SDK，但标准版不能降级为精简版。
@@ -25,15 +25,10 @@
       <td width="132">标准版 SDK</td>
     </tr>
     <tr>
-      <td rowspan="17">消息管理</td>
-      <td rowspan="9">发送和接收消息</td>
-      <td>发送和接收消息</td>
-      <td rowspan="9"><p><a href="https://doc.easemob.com/document/android/message_send.html">发送和接收消息</a></p></td>
-      <td>✅</td>
-      <td>✅</td>
-    </tr>
-    <tr>
-      <td>接收消息</td>
+      <td rowspan="16">消息管理</td>
+      <td rowspan="8">发送和接收消息</td>
+      <td>发送和接收文本消息</td>
+      <td rowspan="8"><p><a href="https://doc.easemob.com/document/android/message_send.html">发送和接收消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -108,7 +103,7 @@
       <td>撤回消息</td>
       <td><p>撤回消息</p>
       <p>设置消息撤回监听</p></td>
-      <td>&nbsp;</td>
+      <td><p><a href="https://doc.easemob.com/document/android/message_recall.html">撤回消息</a></p></td>
       <td>✅</td>
       <td>✅</td>
     </tr>
@@ -123,8 +118,8 @@
       <td height="71">获取消息流量统计</td>
       <td>获取消息流量统计</td>
       <td><a href="https://doc.easemob.com/document/ios/message_traffic_statis.html">获取消息流量统计</a></td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
+      <td>❌</td>
+      <td>✅</td>
     </tr>
     <tr>
       <td height="71">翻译</td>

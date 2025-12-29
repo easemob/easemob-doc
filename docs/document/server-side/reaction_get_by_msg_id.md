@@ -4,7 +4,7 @@
 
 ## 功能说明
 
-- 该方法根据单聊或群聊中的消息 ID 获取单个或多个消息的 Reaction 信息，包括 Reaction ID、使用的表情 ID、以及使用该 Reaction 的用户 ID 及用户人数。
+- 该方法根据单聊或群聊中的消息 ID 获取单条或多条消息的 Reaction 信息，包括 Reaction ID、使用的表情 ID、以及使用该 Reaction 的用户 ID 及用户人数。
 - 获取的 Reaction 的用户列表只展示最早三个添加 Reaction 的用户。
 
 ## 功能开通
@@ -32,8 +32,17 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgIdList={N,M}&
 
 ## 请求示例
 
+- 获取单条消息的 Reaction：
+
 ```shell
-curl -g -X GET 'https://XXXX/XXXX/XXXX/reaction/user/{{userId}}?msgIdList=msgId1&msgType=chat'    \
+curl -g -X GET 'https://XXXX/XXXX/XXXX/reaction/user/XXXX?msgIdList=msgId1&msgType=chat'    \
+-H 'Authorization: Bearer <YourAppToken>'
+```
+
+- 获取多条消息的 Reaction：
+
+```shell
+curl -g -X GET 'https://XXXX/XXXX/XXXX/reaction/user/XXXX?msgIdList=msgId1,msgId2&msgType=chat'    \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -42,6 +51,8 @@ curl -g -X GET 'https://XXXX/XXXX/XXXX/reaction/user/{{userId}}?msgIdList=msgId1
 关于 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
 
 ## 响应示例
+
+以下示例为获取两条消息的 Reaction 信息：
 
 ```json
 {
@@ -90,9 +101,9 @@ curl -g -X GET 'https://XXXX/XXXX/XXXX/reaction/user/{{userId}}?msgIdList=msgId1
 | :----------------------------- | :--------- | :------------------------------------------------------------------------------------------------------ |
 | `requestStatusCode`            | String     | 接口相应 code 状态。`OK` 表示操作成功。                                                                 |
 | `timestamp`                    | Long       | 请求响应的时间，Unix 时间戳，单位为毫秒。                                                               |
-| `data`                         | JSON Array | 单个消息添加的 Reaction 的详情。                                                                        |
+| `data`                         | JSON Array | 单条消息添加的 Reaction 的详情。                                                                        |
 | `data.msgId`                   | String     | Reaction 对应的消息 ID。                                                                                |
-| `data.reactionList`            | JSON Array | 单个消息的 Reaction 列表。                                                                              |
+| `data.reactionList`            | JSON Array | 单条消息的 Reaction 列表。                                                                              |
 | `data.reactionList.reactionId` | String     | Reaction ID。                                                                                           |
 | `data.reactionList.reaction`   | String     | 表情 ID，与客户端一致。该参数与[添加 Reaction API](message_reaction_add.html)的请求参数 `message` 相同。 |
 | `data.reactionList.count`      | Int        | 添加该 Reaction 的用户人数。                                                                            |

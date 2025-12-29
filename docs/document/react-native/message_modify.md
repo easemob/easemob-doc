@@ -1,12 +1,16 @@
 # 修改消息
 
-对于单聊或群组聊天会话中已经发送成功的文本消息，SDK 支持对这些消息的内容进行修改。
+对于单聊或群组会话中已经发送成功的文本消息，SDK 支持对这些消息的内容进行修改。
 
-:::tip
-1. 若使用该功能，需将 SDK 升级至 1.2.0 或以上版本。
-2. 聊天室会话不支持消息修改功能。
-3. 若使用该功能，需联系环信商务开通。
-:::
+## 功能开通和内容修改
+
+对于单聊、群组和聊天室聊天会话中已经发送成功的消息，SDK 支持对这些消息的内容进行修改。若使用该功能，**需联系环信商务开通**。
+
+- SDK 1.11.0 之前的版本仅支持对单聊和群组会话中发送后的文本消息进行修改。
+- SDK 1.11.0 及之后版本支持对单聊、群组和聊天室会话中各类消息进行修改：
+  - 文本/自定义消息：支持修改消息内容（body）和扩展字段 `attributes`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段 `attributes`。
+  - 命令消息：不支持修改。
 
 ## 技术原理
 
@@ -32,21 +36,58 @@
 
 ## 实现方法
 
-你可以调用 `modifyMessageBody` 方法修改已经发送成功的消息。一条消息默认最多可修改 10 次。
+你可以调用 `modifyMsgBody` 方法修改已经发送成功的消息。一条消息默认最多可修改 10 次。
 
 示例代码如下：
 
 ```typescript
-// body 必须是文本消息体。可以从创建或者接收消息中获取。
-ChatClient.getInstance()
-  .chatManager.modifyMessageBody(msgId, body)
-  .then((message) => {
-    console.log("modify success:", message);
-  })
-  .catch((error) => {
-    console.warn(error);
-  });
+ // 文本消息：可同时修改消息体和消息扩展属性
+    const msgId = '<YOUR_MESSAGE_ID>';
+    const body = new ChatTextMessageBody({
+      content: 'Updated message content',
+    });
+    const ext = {
+      customKey: 'customValue',
+    };
+    ChatClient.getInstance()
+      .chatManager.modifyMsgBody({ msgId, body, ext })
+      .then(() => {
+        console.log('Message body updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating message body:', error);
+      });
+
+    // 自定义消息：可同时修改消息体和消息扩展属性
+    const msgId = '<YOUR_MESSAGE_ID>';
+    const customBody = new ChatCustomMessageBody({
+      event: '<CUSTOM_EVENT>',
+      params: { key1: 'value1', key2: 'value2' },
+    });
+    ChatClient.getInstance()
+      .chatManager.modifyMsgBody({ msgId, body: customBody })
+      .then(() => {
+        console.log('Message body updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating message body:', error);
+      });
+
+    // 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
+    const msgId = '<YOUR_MESSAGE_ID>';
+    const ext = {
+      customKey: 'customValue',
+    };
+    ChatClient.getInstance()
+      .chatManager.modifyMsgBody({ msgId, ext })
+      .then(() => {
+        console.log('Message body updated successfully');
+      })
+      .catch((error) => {
+        console.error('Error updating message body:', error);
+      });
 ```
+
 
 消息修改后，消息的接收方会收到 `onMessageContentChanged` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群聊会话，除了修改消息的用户，群组内的其他成员均会收到该事件。
 
@@ -70,3 +111,4 @@ ChatClient.getInstance().chatManager.addMessageListener({
   },
 } as ChatMessageEventListener);
 ```
+

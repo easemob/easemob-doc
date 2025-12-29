@@ -210,7 +210,7 @@ const submitFeedback = async () => {
 
     let response, result
     try {
-      response = await fetch('https://h2.a1.easemob.com/api/feedback', {
+      response = await fetch('https://doc-feedback.easemob.com/api/feedback', {
         method: 'POST',
         body: formData,
         headers: {

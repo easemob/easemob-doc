@@ -83,7 +83,7 @@ EMClient.shared().pushManager?.syncSilentModeConversations(fromServerCompletion:
 
 ```
 
-### 本地设置推送通知方式
+### 设置推送通知方式
 
 在本机上调用 `EMPushManager#setSilentModeForConversation:conversationType:params:completion` 设置会话的推送通知方式，在多设备事件 `EMMultiDevicesDelegate#onConversationEvent:conversationId:conversationType` 里会回调当前操作，此时参数 `event` 的值为 `EMMultiDevicesEventConversationMuteInfoChanged`。
 
@@ -217,9 +217,6 @@ EMConversationType conversationType = EMConversationTypeGroupChat;
                 EMPushRemindType remindType = aResult.remindType;
                 //获取会话的离线推送免打扰过期 Unix 时间戳。
                 NSTimeInterval ex = aResult.expireTimestamp;
-                //获取会话的离线推送免打扰时段的开始时间。
-                EMSilentModeTime *startTime = aResult.silentModeStartTime;
-                EMSilentModeTime *endTime = aResult.silentModeEndTime;
             }
     }];
 ```

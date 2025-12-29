@@ -36,6 +36,10 @@ export const MODERATION_SIDEBAR = [
               link: "/value-added/moderation/moderation_manual_review.html",
             },
             { text: "用户管理", link: "/value-added/moderation/moderation_usermgmt.html" },
+            {
+              text: "主动文本审核",
+              link: "/value-added/moderation/moderation_text_active.html",
+            },
           ],
         }
     ]    

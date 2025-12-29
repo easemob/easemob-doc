@@ -6,13 +6,15 @@ const DOC_PATH = path.resolve(__dirname, '../../document')
 const platformList = getSubDirectories(DOC_PATH)
 
 const documentSidebar = [
+  { text: "入门指引", link: "beginner_guide.html" },
   { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
   { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
   { text: 'Demo 体验', link: 'demo.html', only: ['android', 'ios', 'react-native', 'flutter'] },
   { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
   { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
   { type: "separator", except: ['server-side', 'applet'] } as any,
-  { text: '集成 SDK', link: 'integration.html', except: ['server-side', 'applet']},
+  { text: '导入 SDK', link: 'integration.html', only: ['android', 'ios', 'web', 'harmonyos', 'unity', 'windows']},
+  { text: '添加依赖', link: 'integration.html', only: ['flutter', 'react-native']},
   { text: '初始化', link: 'initialization.html', except: ['server-side', 'applet']},
   {
     text: '登录',
@@ -309,6 +311,7 @@ const documentSidebar = [
     ],
     only: ['applet']
   },
+  { text: '精简版 SDK', link: 'elite_sdk.html', only: ['applet']},
   { text: '服务端 API 概述', link: 'overview.html', only: ['server-side'] },
   { text: 'API 调用频率限制', link: 'limitationapi.html', only: ['server-side'] },
   { type: "separator", only: ['server-side']} as any,
@@ -801,20 +804,28 @@ const documentSidebar = [
     only: ['server-side']
   },
   { 
-    text: '关键词名单',
+    text: '内容审核',
     collapsible: true,
     children: [
-      { text: '创建关键词名单', link: 'keyword_list_create.html' },
-      { text: '修改关键词名单', link: 'keyword_list_modify.html' },
-      { text: '查询关键词名单', link: 'keyword_list_query.html' },
-      { text: '删除关键词名单', link: 'keyword_list_delete.html' },
-      { text: '添加关键词', link: 'keyword_add.html' },
-      { text: '修改关键词', link: 'keyword_modify.html' },
-      { text: '查询关键词', link: 'keyword_query.html' },
-      { text: '删除单个关键词', link: 'keyword_delete.html' },
-      { text: '批量删除关键词', link: 'keyword_delete_batch.html' }
-    ]
-  }, 
+      { text: '主动文本审核', link: 'moderation_text_active.html' },
+      { 
+        text: '关键词名单',
+        collapsible: true,
+        children: [
+          { text: '创建关键词名单', link: 'keyword_list_create.html' },
+          { text: '修改关键词名单', link: 'keyword_list_modify.html' },
+          { text: '查询关键词名单', link: 'keyword_list_query.html' },
+          { text: '删除关键词名单', link: 'keyword_list_delete.html' },
+          { text: '添加关键词', link: 'keyword_add.html' },
+          { text: '修改关键词', link: 'keyword_modify.html' },
+          { text: '查询关键词', link: 'keyword_query.html' },
+          { text: '删除单个关键词', link: 'keyword_delete.html' },
+          { text: '批量删除关键词', link: 'keyword_delete_batch.html' }
+        ]
+      }
+    ],
+    only: ['server-side']
+  },
   { text: '错误码', link: 'error.html', only: ['server-side']},
   {
     text: '设置回调',

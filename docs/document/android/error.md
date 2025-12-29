@@ -63,7 +63,7 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 407    |      FILE_IS_EXPIRED      | 文件已过期：例如，用户下载过期的消息附件或群共享文件时提示该错误。消息附件和群共享文件默认可存储 7 天。要提升存储时间上限，请联系商务。 | 要提升文件存储时间上限，请联系商务。|
 | 500    |         MESSAGE_INVALID         | 消息异常：例如，发送消息时，若消息对象或消息 ID 为空或者消息的发送方 ID 与当前登录 ID 不同则会提示该错误。 | 需要开发者检查消息的构造过程，消息 ID、发送方和消息 body 的设置是否符合要求。 |
 | 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。 | 发送消息被敏感词拦截系统或反垃圾系统拦截，可在环信控制台上查看拦截记录。 |
-| 504    |    MESSAGE_RECALL_TIME_LIMIT    | 消息撤回超时错误：消息撤回超过时间限制时会提示该错误。 | 可在 UI 上进行错误提示，或者联系商务延长消息可撤回时间。 |
+| 504    |    MESSAGE_RECALL_TIME_LIMIT    | 消息撤回超时错误：消息撤回超过时间限制时会提示该错误。 | 可在 UI 上进行错误提示，或者在 [环信控制台延长消息可撤回时间](/product/console/basic_message.html#消息撤回)，最多可设置为 7 天。 |
 | 505    |       SERVICE_NOT_ENABLED       | 服务未开启：尝试使用某些未开通的功能时提示该错误。 | 需要结合使用的 API 和日志分析，在环信控制台开通相应功能。|
 | 506    |         MESSAGE_EXPIRED         | 消息已过期：发送群组消息的已读回执时若超过时间限制 (默认 3 天) 会提示该错误。 | 可在 UI 上进行错误提示，或者联系商务延长发送群组回执的有效时间。 |
 | 507    |    MESSAGE_ILLEGAL_WHITELIST    | 用户未在白名单中：如果群组聊天室开启全员禁言，且用户未在白名单中发送消息时提示该错误。 | 可在 UI 上进行错误提示，或者检查是否已开启群组全员禁言。 |
@@ -96,9 +96,9 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 900    |    USERINFO_USERCOUNT_EXCEED    | 获取用户属性的用户个数超过 100。   | 调用 API 获取用户属性时一次最多可获取 100 个用户的属性，可分批获取。 |
 | 901    |   USERINFO_DATALENGTH_EXCEED    | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。 | 检查调用 API 设置的用户属性是否超过限制。 |
 | 1000   |       CONTACT_ADD_FAILED        | 添加联系人失败。  | 结合调用的 API 和错误描述分析联系人添加失败的原因。 |
-| 1001   |       CONTACT_REACH_LIMIT       | 邀请者的联系人数量已达到上限。  | 可以在 UI 上提示该错误，或联系商务提升最大联系人数量。 |
-| 1002   |    CONTACT_REACH_LIMIT_PEER     | 受邀者的联系人数量已达到上限。   | 可以在 UI 上提示该错误，或联系商提升最大联系人数量。 |
-| 1100   |  PRESENCE_PARAM_LENGTH_EXCEED   | 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 | 调用[发布自定义在线状态 API](presence.html#发布自定义在线状态) 时设置的在线状态详细信息的长度不能超过 64 字节。 |
+| 1001   |       CONTACT_REACH_LIMIT       | 邀请者的联系人数量已达到上限。  | 可以在 UI 上提示该错误，或在 [环信控制台提升用户的好友数上限](/product/console/basic_user.html#单个用户好友数上限)。 |
+| 1002   |    CONTACT_REACH_LIMIT_PEER     | 受邀者的联系人数量已达到上限。   | 可以在 UI 上提示该错误，或在 [环信控制台提升用户的好友数上限](/product/console/basic_user.html#单个用户好友数上限)。 |
+| 1100   |  PRESENCE_PARAM_LENGTH_EXCEED   | - 用户在线状态订阅功能 Presence 未开通。<br/> - 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 | <br/>使用 Presence 功能前需要在环信控制台开通。 <br/> - 调用[发布自定义在线状态 API](presence.html#发布自定义在线状态) 时设置的在线状态详细信息的长度不能超过 64 字节。 |
 | 1101   | PRESENCE_CANNOT_SUBSCRIBE_YOURSELF | 不能订阅你自己的状态。   | 检查调用 API 时传入的订阅用户 ID 是否是自己的用户 ID。 |
 | 1110   |     TRANSLATE_PARAM_INVALID     | 翻译参数错误。   | 需结合 Debug 日志，分析翻译方法传入的参数错误原因。 |
 | 1111   |  TRANSLATE_SERVICE_NOT_ENABLE   | 翻译服务未启用。使用翻译服务前，应在[环信控制台](https://console.easemob.com/user/login)开启该服务。 | 在[环信控制台](https://console.easemob.com/user/login)开启翻译服务。 |
