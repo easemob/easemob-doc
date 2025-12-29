@@ -14,6 +14,12 @@
 PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 ```
 
+| 参数       | 类型   | 描述          | 是否必需 |
+| :--------- | :----- | :--------------------------------- | :------- |
+| `userId` | String | 要设置哪个用户的离线推送设置。传入该用户的用户 ID。    | 是       | 
+| `chattype` | String | 对象类型，即会话类型：<br/> - `user`：用户，表示单聊；<br/> - `chatgroup`：群组，表示群聊。 | 是       |
+| `key`      | String | 对象名称：<br/> - 单聊时为对端用户的用户 ID；<br/> - 群聊时为群组 ID。                      | 是       |
+
 关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
 ## 请求示例
