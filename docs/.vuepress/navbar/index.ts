@@ -2,7 +2,7 @@ import { navbar } from 'vuepress-theme-hope'
 
 export const zhNavbar = navbar([
   {
-    text: 'V5.0.0',
+    text: 'V4.0.0',
       children: [
         { text: 'V4.0.0', link: 'https://doc.easemob.com/product/introduction.html'},
         { text: 'V3.0.0', link: 'https://docs-im.easemob.com/ccim/intro'},
