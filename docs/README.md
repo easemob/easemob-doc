@@ -23,7 +23,7 @@ products:
     target: '_blank'
 starter:
   - title: "SDK 快速开始"
-    desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
+    desc: "选择合适的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
     platform:
       - icon: /sdk/android.svg
         link: /document/android/quickstart.html
@@ -53,19 +53,19 @@ starter:
         link: /document/windows/quickstart.html
         text: Windows
   - title: "Demo 体验" 
-    desc: "从下面的 IM Demo 构建即时通讯应用，点击“立即体验”按钮将引导你立即体验环信 IM 即时通讯功能，并以此快速搭建自己自己的即时通讯消息收发。"
+    desc: "从下面的 IM Demo 构建即时通讯应用，点击“Demo 体验”按钮将引导你立即体验环信 IM 即时通讯功能。"
     platform:
       - icon: /sdk/demo_list.svg
         link: "https://doc.easemob.com/product/demo.html"
         text: Demo 体验 
   - title: "服务端 API"
-    desc: "从下面的 Restful API 构建即时通讯应用，点击“快速开始”按钮将引导你在30分钟内实现即时通讯消息收发。"
+    desc: "从下面的 RESTful API 构建即时通讯应用，点击“REST”按钮将引导你在30分钟内实现即时通讯消息收发。"
     platform:
       - icon: /sdk/rest.svg
         link: /document/server-side/overview.html
         text: REST
   - title: "单/群聊 UIKit"
-    desc: "从下面的列表中选择合适你的 UIKit 构建即时通讯应用，点击“UIKit 概述”按钮了解单群聊 UIKit 主要功能介绍。"
+    desc: "选择合适你的 UIKit 构建即时通讯应用，点击各客户端按钮了解单群聊 UIKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
         link: /uikit/chatuikit/android/beginner_guide.html
@@ -86,7 +86,7 @@ starter:
         link: /uikit/chatuikit/react-native/beginner_guide.html
         text: React Native
   - title: "聊天室 UIKit"
-    desc: "从下面的列表中选择合适你的 UIKit 构建即时通讯应用，点击“UIKit 概述”按钮了解聊天室 UIKit 主要功能介绍。"
+    desc: "从下面的列表中选择合适你的 UIKit 构建即时通讯应用，点击各客户端按钮了解聊天室 UIKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
         link: /uikit/chatroomuikit/android/roomuikit_integrated.html
@@ -104,7 +104,7 @@ starter:
         link: /uikit/chatroomuikit/react-native/roomuikit_integrated.html
         text: React Native
   - title: "CallKit" 
-    desc: "从下面的列表中选择合适你的 CallKit 构建音视频功能，点击“CallKit 概述”按钮了解CallKit 主要功能介绍。"
+    desc: "选择 CallKit 构建音视频功能，点击各客户端按钮了解 CallKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
         link: /callkit/android/beginner_guide.html
@@ -116,7 +116,7 @@ starter:
         link: /callkit/web/product_overview.html
         text: Web
   - title: "增值服务" 
-    desc: "从下面的列表中选择合适你的增值服务构建内容审核、实时音视频、消息翻译、即时推送等功能，点击对应按钮了解主要功能介绍。"
+    desc: "选择合适的增值服务构建内容审核、实时音视频、消息翻译、即时推送等功能，点击对应按钮了解主要功能介绍。"
     platform:
       - icon: /sdk/check_texts.svg
         link: /value-added/moderation/moderation_overview.html
@@ -899,7 +899,7 @@ projects:
         icon: /feature/push.svg
         contexts:
           - text: 离线推送
-            desc: 支持集成第三方消息推送服务，包括 FCM、APNs、华为、荣耀、小米、OPPO、VIVO 和魅族。
+            desc: 支持集成第三方消息推送服务，包括 FCM、APNs、华为、荣耀、小米、OPPO、vivo 和魅族。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -923,7 +923,7 @@ projects:
                 text: REST
                 link: /document/server-side/push_information_bind_unbind.html 
           - text: 即时推送
-            desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、VIVO 等主流手机厂商通道。
+            desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、vivo 等主流手机厂商通道。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
