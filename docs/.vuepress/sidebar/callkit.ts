@@ -29,6 +29,7 @@ const callKitSidebar = [
       { text: "购买指南", link: "product_purchase.html" }
     ]
   },
+  { type: "separator" } as any,
   { text: "跑通示例项目", link: "sample_runthrough.html" },
   { text: "快速开始", link: "quickstart.html" },
   { text: "CallKit 架构", link: "architecture.html" },
@@ -43,6 +44,7 @@ const callKitSidebar = [
   { text: "API 概览", link: "api_overview.html" },
   { text: "常见问题", link: "common_issue.html" },
   { text: "更新日志", link: "releasenote.html" },
+  { type: "separator" } as any,
   { text: "设计指南", link: "design_guide.html" },
   { text: "历史文档", link: "easecallkit.html" }
 ];
@@ -88,7 +90,9 @@ function handleSidebarItem(platform, sidebar, docPath, kitType) {
   if (!needThisPlatform) {
     return null;
   }
-
+  if(sidebar.type === 'separator') {
+    return { ...sidebar, type: 'separator' };
+  }
   if (hasChildren) {
     let newchildren = sidebar.children
       .map((s) => handleSidebarItem(platform, s, docPath, kitType))
