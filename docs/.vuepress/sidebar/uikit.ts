@@ -22,7 +22,8 @@ const chatUikitSidebar = [
           { text: "消息", link: "chatfeature_message.html" },
         ],
     only: ["ios"],
-      },
+  },
+  { type: "separator", only: ['ios']} as any,
   { text: "跑通示例项目", link: "chatuikit_run.html", only: ["ios"] },
   { text: "添加依赖", link: "chatuikit_integrated.html", only: ["ios"] },  
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["ios"] }, 
@@ -73,6 +74,7 @@ const chatUikitSidebar = [
     ],
     only: ["web"],
   },
+  { type: "separator", only: ['web']} as any,
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["web"]},
   { text: "React 集成单群聊 UIKit", link: "chatuikit_integrated_react.html", only: ["web"]},
   { text: "Vue 集成单群聊 UIKit", link: "chatuikit_integrated_vue.html", only: ["web"]},
@@ -123,6 +125,7 @@ const chatUikitSidebar = [
       ],
     only: ["android", "harmonyos", "react-native", "flutter"],
   },
+  { type: "separator", only: ["android", "harmonyos", "react-native", "flutter"]} as any,
   { text: "跑通示例项目", link: "chatuikit_run.html", only: ["react-native", "flutter"] },
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "添加依赖", link: "chatuikit_dependency.html", only: ["android", "harmonyos"] },
@@ -189,6 +192,7 @@ const chatUikitSidebar = [
   },
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["uniapp"]},
   { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["uniapp"]},
+  { type: "separator"} as any,
   { text: "更新日志", link: "releasenote.html"},
   { text: "设计指南", link: "chatuikit_design_guide.html"},
   { text: "历史文档", link: "ui_historic.html", only: ["android", "ios"]},
@@ -282,7 +286,9 @@ function handleSidebarItem(platform, sidebar, docPath, kitType) {
   if (!needThisPlatform) {
     return null;
   }
-
+  if(sidebar.type === 'separator') {
+    return { ...sidebar, type: 'separator' };
+  }
   if (hasChildren) {
     let newchildren = sidebar.children
       .map((s) => handleSidebarItem(platform, s, docPath, kitType))
