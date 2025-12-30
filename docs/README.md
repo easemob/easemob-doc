@@ -1,6 +1,6 @@
 ---
 home: true
-title: 导航页
+title: 首页
 heroText: false
 tagline: false
 products:
@@ -22,7 +22,20 @@ products:
     text: 安全响应中心  
     target: '_blank'
 starter:
+  - title: "入门指引"
+    desc: "了解接入环信即时通讯 IM SDK、单群聊 UIKit 和 CallKit 的整个流程。"
+    platform:
+      - icon: /guide/sdk.svg
+        link: /document/android/beginner_guide.html
+        text: SDK
+      - icon: /guide/uikit.svg
+        link: /uikit/chatuikit/android/beginner_guide.html
+        text: UIKit 
+      - icon: /guide/callkit.svg
+        link: /callkit/android/beginner_guide.html
+        text: CallKit
   - title: "SDK 快速开始"
+    desc: "选择合适的 SDK 构建即时通讯应用，点击快速开始按钮快速实现即时通讯消息收发。"
     platform:
       - icon: /sdk/android.svg
         link: /document/android/quickstart.html
@@ -51,64 +64,87 @@ starter:
       - icon: /sdk/windows.svg
         link: /document/windows/quickstart.html
         text: Windows
-  - title: "Demo" 
+  - title: "Demo 体验" 
+    desc: "点击“Demo 体验”按钮立即体验环信 IM 即时通讯功能。"
     platform:
       - icon: /sdk/demo_list.svg
         link: "https://doc.easemob.com/product/demo.html"
         text: Demo 体验 
   - title: "服务端 API"
+    desc: "可通过 RESTful API 构建即时通讯应用，点击“REST”按钮快速实现即时通讯消息收发等功能。"
     platform:
       - icon: /sdk/rest.svg
         link: /document/server-side/overview.html
         text: REST
-  - title: "单群聊 UIKit"
+  - title: "单/群聊 UIKit"
+    desc: "选择合适的 UIKit 构建即时通讯应用，点击各客户端按钮了解单群聊 UIKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
-        link: /uikit/chatuikit/android/beginner_guide.html
+        link: /uikit/chatuikit/android/chatuikit_overview.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /uikit/chatuikit/ios/beginner_guide.html
+        link: /uikit/chatuikit/ios/chatuikit_overview.html
         text: iOS 
       - icon: /sdk/web.svg
-        link: /uikit/chatuikit/web/beginner_guide.html
+        link: /uikit/chatuikit/web/chatuikit_overview.html
         text: Web
       - icon: '/sdk/harmonyos.svg'
-        link: '/uikit/chatuikit/harmonyos/beginner_guide.html' 
+        link: /uikit/chatuikit/harmonyos/chatuikit_overview.html
         text: 'HarmonyOS'  
       - icon: /sdk/uniapp.svg
-        link: /uikit/chatuikit/uniapp/beginner_guide.html
+        link: /uikit/chatuikit/uniapp/chatuikit_overview.html
         text: Uniapp
+      - icon: /sdk/flutter.svg
+        link: /uikit/chatuikit/flutter/chatuikit_overview.html
+        text: Flutter  
       - icon: /sdk/react.svg
-        link: /uikit/chatuikit/react-native/beginner_guide.html
+        link: /uikit/chatuikit/react-native/chatuikit_overview.html
         text: React Native
   - title: "聊天室 UIKit"
+    desc: "选择合适你的 UIKit 构建即时通讯应用，点击各客户端按钮了解聊天室 UIKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
-        link: /uikit/chatroomuikit/android/roomuikit_integrated.html
+        link: /uikit/chatroomuikit/android/roomuikit_overview.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /uikit/chatroomuikit/ios/roomuikit_integrated.html
+        link: /uikit/chatroomuikit/ios/roomuikit_overview.html
         text: iOS 
       - icon: /sdk/web.svg
         link: /uikit/chatroomuikit/web/roomuikit_integrated.html
         text: Web
       - icon: /sdk/flutter.svg
-        link: /uikit/chatroomuikit/flutter/roomuikit_integrated.html
+        link: /uikit/chatroomuikit/web/roomuikit_overview.html
         text: Flutter
       - icon: /sdk/react.svg
-        link: /uikit/chatroomuikit/react-native/roomuikit_integrated.html
+        link: /uikit/chatroomuikit/flutter/roomuikit_overview.html
         text: React Native
   - title: "CallKit" 
+    desc: "选择 CallKit 构建音视频功能，点击各客户端按钮了解 CallKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
-        link: /callkit/android/beginner_guide.html
+        link: /callkit/android/product_overview.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /callkit/ios/beginner_guide.html
+        link: /callkit/ios/product_overview.html
         text: iOS  
       - icon: /sdk/web.svg
-        link: /callkit/web/beginner_guide.html
-        text: Web  
+        link: /callkit/web/product_overview.html
+        text: Web
+  - title: "增值服务" 
+    desc: "选择合适的增值服务构建内容审核、实时音视频、消息翻译、即时推送等功能，点击对应按钮了解主要功能介绍。"
+    platform:
+      - icon: /sdk/check_texts.svg
+        link: /value-added/moderation/moderation_overview.html
+        text: 内容审核
+      - icon: /sdk/video.svg
+        link: /callkit/android/product_overview.html
+        text: 实时音视频
+      - icon: /sdk/translation.svg
+        link: /uikit/chatuikit/web/chatfeature_message.html#消息翻译
+        text: 消息翻译
+      - icon: /sdk/instant.svg
+        link: /value-added/push/push_overview.html
+        text: 即时推送  
 projects:
   - title: SDK/服务端功能
     features:
@@ -256,93 +292,6 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/message_recall_single.html
-          - text: 搜索消息
-            desc: 支持搜索本地数据库中除命令消息之外的所有类型的消息。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/message_search.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/message_search.html
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS 
-                link: /document/harmonyos/message_search.html   
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/message_search.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/message_search.html
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/message_search.html
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/message_search.html
-          - text: 消息回执
-            desc: 单聊会话支持消息送达回执、会话已读回执和消息已读回执。群聊会话只支持消息已读回执。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/message_receipt.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/message_receipt.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/message_receipt.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_receipt.html
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS 
-                link: /document/harmonyos/message_receipt.html  
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/message_receipt.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/message_receipt.html
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/message_receipt.html
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/message_receipt.html
-          - text: 表情回复
-            desc: 消息表情回复（“Reaction”）功能，即用户可以在单聊和群聊中对消息添加、删除表情。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/reaction.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/reaction.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/reaction.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/reaction.html
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS 
-                link: /document/harmonyos/reaction.html 
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/reaction.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/reaction.html
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/reaction.html
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/reaction.html
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /document/server-side/reaction_add.html  
           - text: 修改消息
             desc: 修改单聊或群组聊天会话中已经发送成功的文本消息。
             sdks:
@@ -375,7 +324,94 @@ projects:
                 link: /document/windows/message_modify.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_modify.html 
+                link: /document/server-side/message_modify.html       
+          - text: 消息回执
+            desc: 单聊会话支持消息送达回执、会话已读回执和消息已读回执。群聊会话只支持消息已读回执。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_receipt.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_receipt.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_receipt.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_receipt.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_receipt.html   
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_receipt.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_receipt.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_receipt.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_receipt.html
+          - text: 搜索消息
+            desc: 支持搜索本地数据库中除命令消息之外的所有类型的消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_search.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_search.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_search.html   
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_search.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_search.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_search.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_search.html
+          - text: 表情回复
+            desc: 消息表情回复（“Reaction”）功能，即用户可以在单聊和群聊中对消息添加、删除表情。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/reaction.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/reaction.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/reaction.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/reaction.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/reaction.html 
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/reaction.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/reaction.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/reaction.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/reaction.html
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/server-side/reaction_add.html 
           - text: 转发消息
             desc: 转发消息即将会话中发送成功或收到的消息转发给别人，支持转发单条消息和多条消息（合并消息）。
             sdks:
@@ -588,7 +624,7 @@ projects:
                 link: /document/unity/message_pin.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/message_pin.html                   
+                link: /document/windows/message_pin.html 
           - text: 消息审核（举报）
             desc: 你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在环信控制台展示。你可在环信控制台查看举报记录，并进行相应处理。
             sdks:
@@ -645,16 +681,7 @@ projects:
                 link: /document/unity/message_deliver_only_online.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/message_deliver_only_online.html
-          - text: 消息流量统计
-            desc: 本地消息的流量统计功能。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/message_traffic_statis.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/message_traffic_statis.html    
+                link: /document/windows/message_deliver_only_online.html      
           - text: 会话列表
             desc: 支持从服务端和本地获取会话列表。
             sdks:
@@ -717,8 +744,8 @@ projects:
             sdks:
               - icon: /sdk/web.svg
                 text: Web
-                link: /document/web/conversation_local.html  
-          - text: 会话置顶
+                link: /document/web/conversation_local.html        
+          - text: 置顶会话
             desc: 将单聊或群聊会话固定在会话列表的顶部，方便用户查找。支持置顶、取消置顶会话和从服务端获取置顶会话列表。
             sdks:
               - icon: /sdk/android.svg
@@ -817,7 +844,7 @@ projects:
       - title: 群组和聊天室
         icon: /feature/group.svg
         contexts:
-          - text: 创建和管理群组
+          - text: 群组创建和管理
             desc: 支持创建和解散群组、获取群组详情、获取群成员列表和群组列表、查询用户加入的群组数量、屏蔽和解除屏蔽群消息以及监听群组事件。
             sdks:
               - icon: /sdk/android.svg
@@ -847,13 +874,10 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/group_manage.html  
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/group.html#群组管理 
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/group_create.html   
-          - text: 管理群成员
+          - text: 群成员管理
             desc: 支持加入、退出群组、群组白名单、黑名单、禁言和设置群成员的自定义属性。
             sdks:
               - icon: /sdk/android.svg
@@ -889,7 +913,7 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/group_member_add_single.html   
-          - text: 管理群组属性
+          - text: 群组属性管理
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:
               - icon: /sdk/android.svg
@@ -925,7 +949,7 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/group_modify.html     
-          - text: 创建和管理聊天室
+          - text: 聊天室创建和管理
             desc: 支持创建和加入聊天室、获取聊天室详情、退出和解散聊天室、更新聊天室成员人数以及监听聊天室事件。
             sdks:
               - icon: /sdk/android.svg
@@ -961,7 +985,7 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/chatroom_create.html    
-          - text: 管理聊天室成员
+          - text: 聊天室成员管理
             desc: 支持加入和退出聊天室、聊天室白名单、黑名单、禁言、以及监听聊天室事件等功能。
             sdks:
               - icon: /sdk/android.svg
@@ -997,7 +1021,7 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/chatroom_member_add_single.html
-          - text: 管理聊天室属性
+          - text: 聊天室属性管理
             desc: 管理聊天室基本属性，包括聊天室名称、描述和公告，以及自定义属性。
             sdks:
               - icon: /sdk/android.svg
@@ -1093,7 +1117,7 @@ projects:
       - title: 用户
         icon: /feature/user.svg
         contexts:
-          - text: 用户体系
+          - text: 用户体系(REST 端)
             desc: 支持注册、删除用户、获取用户详情、修改用户密码、获取用户在线状态和获取指定账号的在线登录设备列表。
             sdks:
               - icon: /sdk/rest.svg
@@ -1197,54 +1221,12 @@ projects:
                 link: /document/windows/presence.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/presence_set.html
-          - text: 用户全局禁言
-            desc: 设置单个用户 ID 的单聊、群组或聊天室消息的全局禁言。设置成功后，该用户将无法在对应的单聊、群组或聊天室中发送消息。
-            sdks:
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /document/server-side/user_global_mute_overview.html 
-          - text: 用户收藏
-            desc: 支持收藏聊天过程中发送成功的各类消息或你的其他自定义内容。这些收藏的内容永久保存，你可以随时查看。
-            sdks:
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /document/server-side/user_collection_add_single.html                 
-          - text: 多设备登录
-            desc: 同一账号在多个设备上登录，所有已登录的设备之间可以同步消息、好友和群组相关操作、子区操作以及会话操作。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/multi_device.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/multi_device.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/multi_device.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/multi_device.html
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS 
-                link: /document/harmonyos/multi_device.html  
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/multi_device.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/multi_device.html
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/multi_device.html
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/multi_device.html                
-      - title: 离线推送
+                link: /document/server-side/presence_set.html               
+      - title: 推送
         icon: /feature/push.svg
         contexts:
           - text: 离线推送
-            desc: 支持集成第三方消息推送服务，包括 FCM、APNs、华为、荣耀、小米、OPPO、VIVO 和魅族。
+            desc: 支持集成第三方消息推送服务，包括 FCM、APNs、华为、荣耀、小米、OPPO、vivo 和魅族。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1267,42 +1249,35 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/push_information_bind_unbind.html 
-      - title: 回调
-        icon: /feature/api-server.svg
-        contexts:
-          - text: 发送前回调
-            link: /document/server-side/callback_presending.html
-          - text: 发送后回调
-            link: /document/server-side/callback_postsending.html
-          - text: 发送后回调事件
-            link: /document/server-side/callback_login_logout.html                                         
-  - title: UIKit 功能
-    features:
-      - title: 单群聊 UIKit
-        icon: /feature/uikit.svg
-        contexts:
-          - text: 聊天界面
-            desc: 提供发送和接收消息等功能，支持自定义消息列表区域、消息气泡和消息输入框、以及监听聊天消息相关事件等。
+          - text: 即时推送
+            desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、vivo 等主流手机厂商通道。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /uikit/chatuikit/android/chatuikit_chat.html
+                link: /value-added/push/push_integration_note_android.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /uikit/chatuikit/ios/chatuikit_advancedusage.html#初始化聊天页面
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatuikit_chat.html
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatuikit_chat.html  
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatuikit_chat.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatuikit_chat.html
-          - text: 会话列表界面
+                link: /value-added/push/push_integration_note_ios.html 
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /value-added/push/push_api_call_limitation.html
+      - title: 其他
+        icon: /feature/api-server.svg
+        contexts:
+          - text: Token 鉴权
+            link: /document/server-side/easemob_app_token.html
+          - text: 回调
+            link: /document/server-side/callback_presending.html
+          - text: 多设备管理
+            link: /document/server-side/callback_login_logout.html 
+          - text: 用户全局禁言
+            link: /document/server-side/user_global_mute_overview.html                                      
+  - title: UIKit
+    features:
+      - title: 单/群聊
+        icon: /feature/uikit.svg
+        contexts:
+          - text: 会话
             desc: 展示当前用户的所有会话并且提供会话相关功能，支持自定义标题栏、自定义会话布局等。
             sdks:
               - icon: /sdk/android.svg
@@ -1323,49 +1298,7 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatuikit_conversation.html
-          - text: 通讯录界面
-            desc: 展示通讯录列表，包括添加联系人，好友申请列表入口，联系人列表等。支持自定义联系人列表和联系人事件监听。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatuikit_contactlist.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatuikit_advancedusage.html#联系人列表页面
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatuikit_contactlist.html
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatuikit_contactlist.html 
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatuikit_contactlist.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatuikit_contactlist.html 
-          - text: 界面主题
-            desc: 内置浅色和深色主题，默认为浅色主题。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatuikit_theme.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatuikit_theme.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatuikit_theme.html
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatuikit_theme.html  
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatuikit_theme.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatuikit_theme.html
-          - text: 消息引用
+          - text: 消息
             desc: 指用户可以引用一条已发送的消息。
             sdks:
               - icon: /sdk/android.svg
@@ -1386,301 +1319,49 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatfeature_message.html#消息引用
-          - text: 表情回复
-            desc: 指用户可以使用表情符号回复消息。在单群聊 UIKit 中，用户可以长按单条消息触发消息拓展功能菜单，选择表情回复。
+          - text: 群组
+            desc: 展示通讯录列表，包括添加联系人，好友申请列表入口，联系人列表等。支持自定义联系人列表和联系人事件监听。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /uikit/chatuikit/android/chatfeature_message.html#表情回复
+                link: /uikit/chatuikit/android/chatuikit_contactlist.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_message.html#表情回复
+                link: /uikit/chatuikit/ios/chatuikit_advancedusage.html#联系人列表页面
               - icon: /sdk/web.svg
                 text: Web
-                link: /uikit/chatuikit/web/chatfeature_message.html#表情回复
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_message.html#表情回复
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_message.html#表情回复
-          - text: 消息编辑
-            desc: 指用户可以编辑一条已发送的消息。消息编辑可以帮助用户纠正错误，或添加新信息。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_message.html#消息编辑
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_message.html#消息编辑
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_message.html#消息编辑
+                link: /uikit/chatuikit/web/chatuikit_contactlist.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_message.html#消息编辑    
+                link: /uikit/chatuikit/harmonyos/chatuikit_contactlist.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_message.html#消息编辑
+                link: /uikit/chatuikit/flutter/chatuikit_contactlist.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_message.html#消息编辑
-          - text: 消息撤回
-            desc: 指用户可以撤回一条已发送的消息。消息撤回可以帮助用户撤回错误发送的消息，或撤回不想让其他用户看到的消息。
+                link: /uikit/chatuikit/react-native/chatuikit_contactlist.html
+          - text: 联系人
+            desc: 展示通讯录列表，包括添加联系人，好友申请列表入口，联系人列表等。支持自定义联系人列表和联系人事件监听。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /uikit/chatuikit/android/chatfeature_message.html#消息撤回
+                link: /uikit/chatuikit/android/chatuikit_contactlist.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_message.html#消息撤回
+                link: /uikit/chatuikit/ios/chatuikit_advancedusage.html#联系人列表页面
               - icon: /sdk/web.svg
                 text: Web
-                link: /uikit/chatuikit/web/chatfeature_message.html#消息撤回
+                link: /uikit/chatuikit/web/chatuikit_contactlist.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_message.html#消息撤回  
+                link: /uikit/chatuikit/harmonyos/chatuikit_contactlist.html
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_message.html#消息撤回
+                link: /uikit/chatuikit/flutter/chatuikit_contactlist.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_message.html#消息撤回
-          - text: 消息转发
-            desc: 指用户可以将消息转发给其他用户。你可以转发单条消息，也可以选择多条消息进行合并转发。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_message.html#消息合并转发
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_message.html#消息合并转发
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_message.html#消息合并转发
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_message.html#消息合并转发
-          - text: 消息翻译
-            desc: 指用户可以将一条消息翻译成其他语言。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_message.html#消息翻译
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_message.html#消息翻译
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_message.html#消息翻译
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_message.html#消息翻译
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_message.html#消息翻译
-          - text: 语音消息
-            desc: 语音消息指以语音形式发送和接收的消息，可替代文字交流。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_common.html#语音消息
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_common.html#语音消息
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_common.html#语音消息
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_common.html#语音消息 
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_common.html#语音消息
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_common.html#语音消息
-          - text: 未读消息数
-            desc: 未读消息数是指用户收到的但尚未查看的消息数量。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_common.html#未读消息数
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_common.html#未读消息数
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_common.html#未读消息数
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_common.html#未读消息数
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_common.html#未读消息数
-          - text: 已读回执
-            desc: 已读回执用于告知消息发送者，接收者已经阅读了其发送的消息。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_common.html#已读回执
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_common.html#已读回执
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_common.html#已读回执
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_common.html#已读回执  
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_common.html#已读回执
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_common.html#已读回执
-          - text: 送达回执
-            desc: 送达回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_common.html#送达回执
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_common.html#送达回执
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_common.html#送达回执
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_common.html#送达回执  
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_common.html#送达回执
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_common.html#送达回执
-          - text: 文件共享
-            desc: 文件共享允许用户通过即时通讯应用发送和接收文件。文件共享可以用于分享文档、图片、视频等文件。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_common.html#文件共享
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_common.html#文件共享
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_common.html#文件共享
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_common.html#文件共享  
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_common.html#文件共享
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_common.html#文件共享
-          - text: 消息话题
-            desc: 消息话题（即 Thread）指用户可以在群组聊天中根据一条消息创建话题进行深入探讨，讨论和追踪特定项目任务，而不影响其他聊天内容。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_message.html#消息话题
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_message.html#消息话题
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_message.html#消息话题
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_message.html#消息话题
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_message.html#消息话题
-          - text: 会话已读
-            desc: 会话已读是指显示用户是否已阅读过含有未读消息的特定会话。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_conversation.html#会话已读
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_conversation.html#会话已读
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_conversation.html#会话已读
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_conversation.html#会话已读
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_conversation.html#会话已读
-          - text: 会话置顶
-            desc: 会话置顶是指用户将重要的会话固定在聊天列表顶部，方便快速访问常用或优先级别的会话。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_conversation.html#会话置顶
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_conversation.html#会话置顶
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_conversation.html#会话置顶 
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_conversation.html#会话置顶  
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_conversation.html#会话置顶
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_conversation.html#会话置顶
-          - text: 会话免打扰
-            desc: 会话免打扰是指用户暂时关闭特定会话的通知，避免被打扰。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_conversation.html#会话免打扰
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_conversation.html#会话免打扰
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_conversation.html#会话免打扰
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_conversation.html#会话免打扰   
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_conversation.html#会话免打扰
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_conversation.html#会话免打扰
-          - text: 会话删除
-            desc: 会话删除是指用户永久删除不再需要的会话，清理会话列表。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatuikit/android/chatfeature_conversation.html#会话删除
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_conversation.html#会话删除
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_conversation.html#会话删除
-              - icon: /sdk/harmonyos.svg
-                text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatfeature_conversation.html#会话删除    
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_conversation.html#会话删除
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_conversation.html#会话删除
-      - title: 聊天室 UIKit
+                link: /uikit/chatuikit/react-native/chatuikit_contactlist.html
+      - title: 聊天室
         icon: /feature/uikit-chatroom.svg
         contexts:
           - text: 聊天室管理
@@ -1701,24 +1382,6 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_common.html#创建聊天室
-          - text: 界面主题管理
-            desc: 聊天室 UIKit 内置浅色和深色主题，默认为浅色主题。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomuikit_theme.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomuikit_theme.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomuikit_theme.html
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomuikit_theme.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomuikit_theme.html        
           - text: 弹幕和打赏
             desc: 用户可在聊天室中向其他成员发送文字和表情的消息，也可以通过赠送虚拟礼物，向聊天室中的主播或其他用户表达赞赏或者支持。
             sdks:
@@ -1737,6 +1400,24 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_common.html#发送弹幕  
+          - text: 禁言
+            desc: 聊天室所有者可以在聊天室中对某个特定的成员禁言，通常是对违反聊天室规则、发表不当言论或不断干扰聊天室秩序的成员所采取的一种惩罚。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /uikit/chatroomuikit/android/roomfeature_member.html#禁言成员
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /uikit/chatroomuikit/ios/roomfeature_member.html#禁言成员
+              - icon: /sdk/web.svg
+                text: Web
+                link: /uikit/chatroomuikit/web/roomfeature_member.html#禁言成员
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /uikit/chatroomuikit/flutter/roomfeature_member.html#禁言成员
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /uikit/chatroomuikit/react-native/roomfeature_member.html#禁言成员
           - text: 全局广播
             desc: 向 App 内所有聊天室中的所有用户发送消息或通知，可用于传达重要信息、公告、提醒或紧急通知等。
             sdks:
@@ -1755,7 +1436,7 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_common.html#全局广播
-          - text: 未读消息数
+          - text: 消息管理
             desc: 聊天室未读消息数指在一个聊天室中用户尚未读取的消息数量。
             sdks:
               - icon: /sdk/android.svg
@@ -1773,61 +1454,7 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_common.html#未读消息数               
-          - text: 消息举报
-            desc: 当用户发现其他人发布了可能违反聊天室规则或道德准则的消息时，可以举报该消息，促使聊天室所有者采取适当的行动。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomfeature_message.html#消息举报
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomfeature_message.html#消息举报
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomfeature_message.html#消息举报
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomfeature_message.html#消息举报 
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_message.html#消息举报
-          - text: 消息翻译
-            desc: 将聊天室中的单条消息从一种语言转换成另一种语言。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomfeature_message.html#消息翻译
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomfeature_message.html#消息翻译
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomfeature_message.html#消息翻译
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomfeature_message.html#消息翻译 
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_message.html#消息翻译
-          - text: 消息撤回
-            desc: 在聊天室中撤销已经发送的消息，使其他用户无法再看到该消息。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomfeature_message.html#消息撤回
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomfeature_message.html#消息撤回
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomfeature_message.html#消息撤回
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomfeature_message.html#消息撤回 
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_message.html#消息撤回  
-          - text: 查看成员列表
+          - text: 成员管理
             desc: 聊天室成员列表显示了该聊天室中的当前在线用户。
             sdks:
               - icon: /sdk/android.svg
@@ -1844,237 +1471,5 @@ projects:
                 link: /uikit/chatroomuikit/flutter/roomfeature_member.html#查看成员列表
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_member.html#查看成员列表
-          - text: 搜索成员
-            desc: 在聊天室中查找指定成员的功能，支持本地搜索和模糊匹配。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomfeature_member.html#搜索成员
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomfeature_member.html#搜索成员
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomfeature_member.html#搜索成员
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomfeature_member.html#搜索成员
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_member.html#搜索成员
-          - text: 禁言成员
-            desc: 聊天室所有者可以在聊天室中对某个特定的成员禁言，通常是对违反聊天室规则、发表不当言论或不断干扰聊天室秩序的成员所采取的一种惩罚。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomfeature_member.html#禁言成员
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomfeature_member.html#禁言成员
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomfeature_member.html#禁言成员
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomfeature_member.html#禁言成员
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_member.html#禁言成员
-          - text: 已禁言列表
-            desc: 记录被禁止发言用户的列表。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomfeature_common.html#已禁言列表
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomfeature_common.html#已禁言列表
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomfeature_common.html#已禁言列表
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomfeature_common.html#已禁言列表
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_common.html#已禁言列表   
-          - text: 移除成员
-            desc: 从聊天室中将某个成员踢出的行为。通常，当某成员违反了聊天室规则或发表了不当言论，聊天室所有者会对该成员进行移除。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /uikit/chatroomuikit/android/roomfeature_member.html#移除成员
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /uikit/chatroomuikit/ios/roomfeature_member.html#移除成员
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatroomuikit/web/roomfeature_member.html#移除成员
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /uikit/chatroomuikit/flutter/roomfeature_member.html#移除成员
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /uikit/chatroomuikit/react-native/roomfeature_member.html#移除成员  
-  - title: 增值服务
-    features:
-      - title: 实时音视频服务
-        icon: /feature/api-server.svg
-        contexts:  
-          - text: 实时音视频服务
-            desc: 开通音视频服务后，你可以继承环信音视频通话 CallKit，实现了一对一及群组音视频通话功能。。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /callkit/android/product_overview.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /callkit/ios/product_overview.html
-              - icon: /sdk/rest.svg
-                text: Web
-                link: /callkit/web/product_overview.html 
-      - title: 消息翻译
-        icon: /feature/uikit.svg
-        contexts:
-          - text: 自动翻译
-            desc: 发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/message_translation.html#设置自动翻译
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/message_translation.html#设置自动翻译
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/message_translation.html#设置自动翻译
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_translation.html#设置自动翻译
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/message_translation.html#设置自动翻译
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/message_translation.html#设置自动翻译
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/message_translation.html#设置自动翻译
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/message_translation.html#设置自动翻译
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /document/server-side/message_translation_text.html   
-          - text: 按需翻译
-            desc: 接收方在收到文本消息后，将消息内容翻译为目标语言。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/message_translation.html#按需翻译
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/message_translation.html#按需翻译
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/message_translation.html#按需翻译
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_translation.html#按需翻译
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/message_translation.html#按需翻译
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/message_translation.html#按需翻译
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/message_translation.html#按需翻译
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/message_translation.html#按需翻译
-          - text: 离线通知翻译
-            desc: 推送通知与翻译功能协同工作。如果用户启用 自动翻译 功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/push/push_translation.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/push/push_translation.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/push/push_translation.html
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/push/push_translation.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/push/push_translation.html
-      - title: 内容审核
-        icon: /feature/api-client.svg
-        contexts:
-          - text: 开通审核服务
-            link: /value-added/moderation/moderation_enable.html
-          - text: 配置审核规则
-            link: /value-added/moderation/moderation_rule_config.html
-          - text: 测试审核规则
-            link: /value-added/moderation/moderation_rule_test.html
-          - text: 查看历史记录
-            link: /value-added/moderation/moderation_history.html
-          - text: 关键词审核
-            link: /value-added/moderation/moderation_keyword.html
-          - text: 消息审核机制
-            link: /value-added/moderation/moderation_mechanism.html
-          - text: 审核记录回调
-            link: /value-added/moderation/moderation_record_callback.html
-          - text: 消息人工审核
-            link: /value-added/moderation/moderation_manual_review.html
-      - title: 即时推送
-        icon: /feature/api-server.svg
-        contexts:  
-          - text: 即时推送
-            desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、VIVO 等主流手机厂商通道。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /value-added/push/push_integration_note_android.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /value-added/push/push_integration_note_ios.html
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /value-added/push/push_api_call_limitation.html   
-  - title: API 参考
-    features:
-      - title: IM 客户端
-        icon: /feature/api-client.svg
-        contexts:
-          - text: Android
-            link: https://doc.easemob.com/apidoc/android/chat3.0/annotated.html
-          - text: iOS
-            link: https://doc.easemob.com/apidoc/ios/chat3.0/annotated.html
-          - text: Web/小程序
-            link: https://doc.easemob.com/jsdoc/index.html
-          - text: HarmonyOS
-            link: https://doc.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html
-          - text: Flutter
-            link: https://doc.easemob.com/apidoc/flutter/index.html
-          - text: React Native
-            link: https://doc.easemob.com/apidoc/rn/modules.html
-          - text: Unity/Windows
-            link: https://doc.easemob.com/apidoc/unity/annotated.html       
-      - title: IM 服务端
-        icon: /feature/api-server.svg
-        contexts:
-          - text: JAVA 1.0
-            link: https://easemob.github.io/easemob-im-server-sdk/
-          - text: JAVA 2.0
-            link: https://github.com/easemob/easemob-im-server-sdk/tree/master_java_2.0/src/test/java/com/easemob/im/api  
-  - title: 控制台
-    features:
-      - contexts:
-          - text: 环信控制台指南
-            link: /product/console/account_register.html        
+                link: /uikit/chatroomuikit/react-native/roomfeature_member.html#查看成员列表        
 ---

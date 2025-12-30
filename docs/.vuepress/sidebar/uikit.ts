@@ -22,8 +22,9 @@ const chatUikitSidebar = [
           { text: "消息", link: "chatfeature_message.html" },
         ],
     only: ["ios"],
-      },
+  },
   { text: "跑通示例项目", link: "chatuikit_run.html", only: ["ios"] },
+  { type: "separator", only: ['ios']} as any,
   { text: "添加依赖", link: "chatuikit_integrated.html", only: ["ios"] },  
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["ios"] }, 
   {
@@ -74,6 +75,7 @@ const chatUikitSidebar = [
     only: ["web"],
   },
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["web"]},
+  { type: "separator", only: ['web']} as any,
   { text: "React 集成单群聊 UIKit", link: "chatuikit_integrated_react.html", only: ["web"]},
   { text: "Vue 集成单群聊 UIKit", link: "chatuikit_integrated_vue.html", only: ["web"]},
   { text: "用户信息提供", link: "chatuikit_provider.html", only: ["web"]},
@@ -125,6 +127,7 @@ const chatUikitSidebar = [
   },
   { text: "跑通示例项目", link: "chatuikit_run.html", only: ["react-native", "flutter"] },
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["android", "harmonyos", "react-native", "flutter"]},
+   { type: "separator", only: ["android", "harmonyos", "react-native", "flutter"]} as any,
   { text: "添加依赖", link: "chatuikit_dependency.html", only: ["android", "harmonyos"] },
   { text: "初始化", link: "chatuikit_initialization.html", only: ["android", "harmonyos"] },
   { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["react-native", "flutter"] },
@@ -161,7 +164,6 @@ const chatUikitSidebar = [
   { text: "国际化", link: "chatuikit_internationalization.html", only: ["android", "react-native"] },
   { text: "主题", link: "chatuikit_theme.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["android", "react-native", "flutter"] },
-  { text: "常见问题", link: "faq.html", only: ["react-native"]},
   // { text: "更新日志", link: "releasenote.html",  except: ["uniapp"]},
   // { text: "设计指南", link: "chatuikit_design_guide.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   // { text: "历史文档", link: "ui_historic.html.html", only: ["android", "ios"]},
@@ -189,7 +191,9 @@ const chatUikitSidebar = [
   },
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["uniapp"]},
   { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["uniapp"]},
+  { type: "separator"} as any,
   { text: "更新日志", link: "releasenote.html"},
+  { text: "常见问题", link: "faq.html", only: ["react-native"]},
   { text: "设计指南", link: "chatuikit_design_guide.html"},
   { text: "历史文档", link: "ui_historic.html", only: ["android", "ios"]},
   {
@@ -215,6 +219,7 @@ const chatroomUikitSidebar = [
       { text: "成员管理", link: "roomfeature_member.html" },
     ],
   },
+  { type: "separator"} as any,
   { text: "跑通示例项目", link: "roomuikit_run.html" },
   { text: "集成 ChatroomUIKit", link: "roomuikit_integrated.html" },
   { text: "快速开始", link: "roomuikit_quickstart.html" },
@@ -223,6 +228,7 @@ const chatroomUikitSidebar = [
   { text: "主题", link: "roomuikit_theme.html" },
   { text: "自定义", link: "roomuikit_customize.html" },
   { text: "组件文档", link: "roomuikit_storybook.html", only: ["web"] },
+  { type: "separator"} as any,
   { text: "更新日志", link: "roomuikit_releasenote.html" },
   { text: "常见问题", link: "faq.html", only: ["react-native"] },
   { text: "设计指南", link: "design_guide.html" },
@@ -282,7 +288,9 @@ function handleSidebarItem(platform, sidebar, docPath, kitType) {
   if (!needThisPlatform) {
     return null;
   }
-
+  if(sidebar.type === 'separator') {
+    return { ...sidebar, type: 'separator' };
+  }
   if (hasChildren) {
     let newchildren = sidebar.children
       .map((s) => handleSidebarItem(platform, s, docPath, kitType))

@@ -1,8 +1,25 @@
 // you can change colors here
-$theme-color: #096dd9;
-$content-width: 885px;
+$theme-color: #009dff;
+$switch-hover-bg-color: #ECF8FF;
+$text-color: #303233;
+$text-color-light: #909599;
+$table-text-color: #000;
+$border-color: #d4dade;
+$text-size: 14px;
+$home-page-width: 1200px;
 
 :root {
   --docsearch-modal-width: 860px !important;
   --docsearch-modal-height: 600px !important;
+  --tip-bg-color: #d9f0ff;
+  --tip-border-color: #c6e2ff;
+  --note-border-color: #c0c7cc;
+  --danger-border-color: #f89898;
+  --navbar-bg-color: #fff;
+  --navbar-height: 4rem;
+  --navbar-horizontal-padding: 1.25rem;
+  --navbar-vertical-padding: 0.8125rem;
+  --font-family: PingFang SC, sans-serif;
+  --el-border-radius-base: 6px !important;
+  --sidebar-width: 18.75rem;
 }

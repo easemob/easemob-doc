@@ -10,25 +10,25 @@
 
 <script>
 export default {
-  name: 'ImageGallery',
+  name: "ImageGallery",
   props: {
     columns: {
       type: Number,
-      default: 2
-    }
+      default: 2,
+    },
   },
   computed: {
     imageRows() {
-      const rows = []
-      const slotsContent = this.$slots.default()
-      const imagesPerRow = this.columns
+      const rows = [];
+      const slotsContent = this.$slots.default();
+      const imagesPerRow = this.columns;
       for (let i = 0; i < slotsContent.length; i += imagesPerRow) {
-        rows.push(slotsContent.slice(i, i + imagesPerRow))
+        rows.push(slotsContent.slice(i, i + imagesPerRow));
       }
-      return rows
-    }
-  }
-}
+      return rows;
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -49,7 +49,7 @@ export default {
 
   .image-item {
     flex: 1 1 calc(50% - 15px); /* 每行两个图片，减去间距 */
-    background-color: #f3f6f9; /* 行的背景颜色 */
+    background-color: #F3F6F9; /* 行的背景颜色 */
     box-sizing: border-box;
     text-align: center; /* 标题居中 */
     display: flex;
@@ -59,12 +59,14 @@ export default {
   }
 
   .image-item .image-title {
-    width: 100%;
-    font-size: 14px;
-    font-weight: 600;
-    background-color: #ebeff5;
-    padding: 12px 0;
-    border-radius: 8px;
+    width: calc(100% - 32px);
+    line-height: 24px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    background-color: #f0f3f5;
+    border-radius: 8px 8px 0 0;
   }
 
   .image-item img {
@@ -73,6 +75,7 @@ export default {
     margin-top: 20px;
     margin-bottom: 40px;
     max-width: 97%;
+    object-fit: contain;
   }
 }
 </style>

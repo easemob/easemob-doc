@@ -11,6 +11,7 @@ export const zhSidebar = sidebar({
   "/product/": [
     { text: "产品动态", link: "product_dynamics.html" },
     { text: "产品简介", link: "introduction.html" },
+    { type: "separator" } as any,
     { text: "购买指南", 
       collapsible: true,
       children: [
@@ -19,7 +20,6 @@ export const zhSidebar = sidebar({
         { text: "购买指引", link: "pricing_method.html" },
       ],
     }, 
-    
     { text: "功能介绍", 
       collapsible: true,
       children: [
@@ -399,6 +399,7 @@ export const zhSidebar = sidebar({
       ],
     },
     { text: "术语表", link: "glossary.html" },
+    { type: "separator" } as any,
     { text: "帮助中心", link: "help.html" },
     {
       text: "已废弃内容",

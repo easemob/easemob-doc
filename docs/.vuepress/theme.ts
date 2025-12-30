@@ -10,7 +10,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   hostname: 'https://doc.easemob.com/',
   home: '/',
   iconAssets: 'iconfont',
-  logo: '/logo.png',
+  logo: '/logo_name.png',
   repo: 'easemob/easemob-doc',
   docsBranch: 'doc-v2',
   docsDir: 'docs',
@@ -20,17 +20,16 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   // navbar
   navbar: zhNavbar,
   navbarLayout: {
-    start: ['Brand'],
-    center: ['Links'],
+    start: ['Brand','Links'],
+    center: [],
     end: ['Language', 'Repo', 'Outlook']
   },
   // sidebar
   sidebar: zhSidebar,
-  footer: '环信 IM 文档 Version: 1.0.0 ©️环信',
+  footer: `<div class="footer-left">环信 IM 文档</div><div class="footer-right">&copy; 环信 ${new Date().getFullYear()}</div>`,
   displayFooter: true,
   headerDepth: 2,
   extra_nav: [
-    // { text: '提交工单', link: 'https://console.easemob.com/ticket', type: 'info' },
     {
       text: '登录',
       link: 'https://console.easemob.com/user/login',
@@ -42,12 +41,18 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
       type: 'primary'
     }
   ],
-  editLink:false,
+  editLink: false,
+  prevLink: false,
+  nextLink: false,
   plugins: {
     mdEnhance: {
       container: true,
       imgSize: true,
       tabs: true
-    }
+    },
+    prismjs: {
+      light: "coldark-dark",
+      dark: "coldark-dark",
+    },
   }
 })

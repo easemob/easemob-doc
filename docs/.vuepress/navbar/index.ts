@@ -1,6 +1,14 @@
 import { navbar } from 'vuepress-theme-hope'
 
 export const zhNavbar = navbar([
+  {
+    text: 'V4.0.0',
+      children: [
+        { text: 'V4.0.0', link: 'https://doc.easemob.com/product/introduction.html'},
+        { text: 'V3.0.0', link: 'https://docs-im.easemob.com/ccim/intro'},
+        { text: 'V2.0.0', link: 'https://docs-im.easemob.com/start/start'}
+      ]
+  },
   { text: '产品介绍', link: '/product/introduction.html' },
   {
     text: 'UIKit',
@@ -254,7 +262,7 @@ export const zhNavbar = navbar([
     text: '增值服务',
       children: [
         { text: '内容审核', link: '/value-added/moderation/moderation_overview.html'},
-        { text: '实时音视频', link: '/callkit/android/product_activation.html'},
+        { text: '实时音视频', link: '/callkit/android/beginner_guide.html'},
         { text: '消息翻译', link: '/value-added/translation/message_translation_android.html'},
         { text: '即时推送', link: '/value-added/push/push_overview.html'}
       ]
@@ -272,6 +280,6 @@ export const zhNavbar = navbar([
   //    },
   //  ],
   // },
-   { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
+  //  { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
   // { text: '有奖调研', link: 'https://doc.easemob.com/form/wjx.html' }
 ])
