@@ -324,7 +324,7 @@ projects:
                 link: /document/windows/message_modify.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_modify.html 
+                link: /document/server-side/message_modify.html       
           - text: 消息回执
             desc: 单聊会话支持消息送达回执、会话已读回执和消息已读回执。群聊会话只支持消息已读回执。
             sdks:
@@ -355,24 +355,333 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_receipt.html
-          - text: 消息翻译
-            desc: 指用户可以将一条消息翻译成其他语言。
+          - text: 搜索消息
+            desc: 支持搜索本地数据库中除命令消息之外的所有类型的消息。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /uikit/chatuikit/android/chatfeature_message.html#消息翻译
+                link: /document/android/message_search.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /uikit/chatuikit/ios/chatfeature_message.html#消息翻译
-              - icon: /sdk/web.svg
-                text: Web
-                link: /uikit/chatuikit/web/chatfeature_message.html#消息翻译
+                link: /document/ios/message_search.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_search.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /uikit/chatuikit/flutter/chatfeature_message.html#消息翻译
+                link: /document/flutter/message_search.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatuikit/react-native/chatfeature_message.html#消息翻译
+                link: /document/react-native/message_search.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_search.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_search.html
+          - text: 表情回复
+            desc: 消息表情回复（“Reaction”）功能，即用户可以在单聊和群聊中对消息添加、删除表情。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/reaction.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/reaction.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/reaction.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/reaction.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/reaction.html 
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/reaction.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/reaction.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/reaction.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/reaction.html
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/server-side/reaction_add.html 
+          - text: 转发消息
+            desc: 转发消息即将会话中发送成功或收到的消息转发给别人，支持转发单条消息和多条消息（合并消息）。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_forward.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_forward.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_send.html#发送合并消息
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_send.html#发送合并消息
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_forward.html   
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_forward.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_forward.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_forward.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_forward.html
+          - text: 导入/插入消息
+            desc: 批量导入消息到数据库或在本地会话中插入一条消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_import_insert.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_import_insert.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_import_insert.html   
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_import_insert.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_import_insert.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_import_insert.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_import_insert.html
+              - icon: /sdk/electron.svg
+                text: Electron
+                link: /document/electron/conversation.html#插入消息
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/server-side/message_import_single.html
+          - text: 更新消息
+            desc: 更新本地数据库中的消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_update.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_update.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_update.html  
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_update.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_update.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_update.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_update.html
+              - icon: /sdk/electron.svg
+                text: Electron
+                link: /document/electron/conversation.html  
+          - text: 删除消息
+            desc: 单向删除服务端以及本地的历史消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_delete.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_delete.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_delete.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_delete.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_delete.html  
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_delete.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_delete.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_delete.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_delete.html
+              - icon: /sdk/electron.svg
+                text: Electron
+                link: /document/electron/conversation.html  
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/server-side/message_delete_roam_single_msgid.html
+          - text: 定向消息
+            desc: 发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_target.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_target.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_target.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_target.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_target.html  
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_target.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_target.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_target.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_target.html 
+          - text: 消息扩展
+            desc: 当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_extension.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_extension.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_extension.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_extension.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_extension.html  
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_extension.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_extension.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_extension.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_extension.html         
+          - text: 置顶消息
+            desc: 将会话中的消息固定在会话顶部，方便会话中的所有用户快速查看重要消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_pin.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_pin.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_pin.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_pin.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_pin.html   
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_pin.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_pin.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_pin.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_pin.html 
+          - text: 消息审核（举报）
+            desc: 你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在环信控制台展示。你可在环信控制台查看举报记录，并进行相应处理。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/moderation.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/moderation.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/moderation.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/moderation.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/moderation.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/moderation.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/moderation.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/moderation.html
+          - text: 消息只投在线
+            desc: 只将消息投递给在线用户。若接收方不在线，则无法收到消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_deliver_only_online.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_deliver_only_online.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_deliver_only_online.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_deliver_only_online.html
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/message_deliver_only_online.html  
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_deliver_only_online.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_deliver_only_online.html
+              - icon: /sdk/unity.svg
+                text: Unity
+                link: /document/unity/message_deliver_only_online.html
+              - icon: /sdk/windows.svg
+                text: Windows
+                link: /document/windows/message_deliver_only_online.html      
           - text: 会话列表
             desc: 支持从服务端和本地获取会话列表。
             sdks:
@@ -430,6 +739,12 @@ projects:
               - icon: /sdk/electron.svg
                 text: Electron
                 link: /document/electron/conversation.html#获取会话中的未读消息计数   
+          - text: 本地会话
+            desc: Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 LocalCache 模块对本地会话数据进行管理。
+            sdks:
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/conversation_local.html        
           - text: 置顶会话
             desc: 将单聊或群聊会话固定在会话列表的顶部，方便用户查找。支持置顶、取消置顶会话和从服务端获取置顶会话列表。
             sdks:
@@ -529,7 +844,7 @@ projects:
       - title: 群组和聊天室
         icon: /feature/group.svg
         contexts:
-          - text: 群组管理
+          - text: 群组创建和管理
             desc: 支持创建和解散群组、获取群组详情、获取群成员列表和群组列表、查询用户加入的群组数量、屏蔽和解除屏蔽群消息以及监听群组事件。
             sdks:
               - icon: /sdk/android.svg
@@ -559,9 +874,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/group_manage.html  
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/group.html#群组管理 
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/group_create.html   
@@ -637,7 +949,7 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/group_modify.html     
-          - text: 聊天室管理
+          - text: 聊天室创建和管理
             desc: 支持创建和加入聊天室、获取聊天室详情、退出和解散聊天室、更新聊天室成员人数以及监听聊天室事件。
             sdks:
               - icon: /sdk/android.svg
@@ -952,12 +1264,14 @@ projects:
       - title: 其他
         icon: /feature/api-server.svg
         contexts:
+          - text: Token 鉴权
+            link: /document/server-side/easemob_app_token.html
           - text: 回调
             link: /document/server-side/callback_presending.html
-          - text: 错误码
-            link: /document/server-side/callback_postsending.html
           - text: 多设备管理
-            link: /document/server-side/callback_login_logout.html                                    
+            link: /document/server-side/callback_login_logout.html 
+          - text: 用户全局禁言
+            link: /document/server-side/user_global_mute_overview.html                                      
   - title: UIKit
     features:
       - title: 单/群聊
