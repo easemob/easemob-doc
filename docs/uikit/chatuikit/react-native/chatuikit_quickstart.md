@@ -61,7 +61,7 @@ react-native-safe-area-context \
 react-native-video
 ```
 
-*react-native-audio-recorder-player 这个三方库已经过期，但是它推荐的三方库目前问题较多，所以，建议继续使用该三方库，版本小于 3.6.14*
+_react-native-audio-recorder-player 这个三方库已经过期，但是它推荐的三方库目前问题较多，所以，建议继续使用该三方库，版本小于 3.6.14_
 
 ## 第四步 添加权限
 
@@ -109,6 +109,7 @@ react-native-video
 
 import * as React from "react";
 import { Pressable, SafeAreaView, Text, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   Container,
   ConversationDetail,
@@ -207,9 +208,11 @@ function SendMessage() {
 export default function App(): React.JSX.Element {
   // 初始化 UIKit
   return (
-    <Container options={{ appKey: appKey, autoLogin: false }}>
-      <SendMessage />
-    </Container>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Container options={{ appKey: appKey, autoLogin: false }}>
+        <SendMessage />
+      </Container>
+    </GestureHandlerRootView>
   );
 }
 ```
@@ -255,9 +258,9 @@ yarn run android
 
 点击 **Login** 按钮登录进入聊天页面，输入文本消息，然后发送，即可开始聊天。
 
-| 登录            | 发送消息   | 
-| :--------------: | :-----: |
-| <img src="/images/uikit/chatuikit/rn/chatuikit_quick_start_login.png" alt="description">  | <img src="/images/uikit/chatuikit/rn/chatuikit_quick_start_chat.png" alt="description"> | 
+|                                           登录                                           |                                        发送消息                                         |
+| :--------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: |
+| <img src="/images/uikit/chatuikit/rn/chatuikit_quick_start_login.png" alt="description"> | <img src="/images/uikit/chatuikit/rn/chatuikit_quick_start_chat.png" alt="description"> |
 
 ## 常见问题
 
