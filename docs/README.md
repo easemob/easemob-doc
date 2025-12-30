@@ -1,6 +1,6 @@
 ---
 home: true
-title: 导航页
+title: 首页
 heroText: false
 tagline: false
 products:

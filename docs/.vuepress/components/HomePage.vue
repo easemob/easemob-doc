@@ -333,11 +333,38 @@ const buildAnchorLink = () => {
   width: 14.4rem;
   transform: translateZ(0);
   backface-visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.sdk-start-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 157, 255, 0.02) 0%, rgba(0, 160, 250, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .sdk-start-item:hover {
   cursor: pointer;
   border-color: #009dff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 157, 255, 0.15);
+}
+
+.sdk-start-item:hover::before {
+  opacity: 1;
+}
+
+.sdk-start-item:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 157, 255, 0.1);
 }
 
 @media (max-width: 991px) {
@@ -365,6 +392,7 @@ const buildAnchorLink = () => {
   height: 24px;
 }
 
+
 .platform-name {
   color: #303233;
   font-size: 18px;
@@ -373,6 +401,13 @@ const buildAnchorLink = () => {
   line-height: normal;
   margin: 0 8px;
   width: calc(100% - 40px);
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.sdk-start-item:hover .platform-name {
+  color: #009dff;
 }
 
 .arrow-icon {
@@ -381,6 +416,9 @@ const buildAnchorLink = () => {
   width: 20px;
   margin: auto 0;
   color: #dce2e6;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .arrow-icon.high {
@@ -393,6 +431,7 @@ const buildAnchorLink = () => {
 
 .sdk-start-item:hover .arrow-icon.high {
   display: block;
+  transform: translateX(2px);
 }
 
 .sdk-features-title {
@@ -490,11 +529,6 @@ const buildAnchorLink = () => {
   text-underline-offset: 4px;
   min-width: 120px;
   cursor: pointer;
-
-  &:hover {
-    font-weight: 500;
-    color: #00A0FA;
-  }
 }
 
 .feature-link-group {
