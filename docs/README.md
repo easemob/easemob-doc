@@ -22,20 +22,20 @@ products:
     text: 安全响应中心  
     target: '_blank'
 starter:
-  - title: "新手指引"
-    desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
+  - title: "入门指引"
+    desc: "了解接入环信即时通讯 IM SDK、单群聊 UIKit 和 CallKit 的整个流程。"
     platform:
       - icon: /guide/sdk.svg
-        link: /document/android/quickstart.html
+        link: /document/android/beginner_guide.html
         text: SDK
       - icon: /guide/uikit.svg
-        link: /document/ios/quickstart.html
+        link: /uikit/chatuikit/android/beginner_guide.html
         text: UIKit 
       - icon: /guide/callkit.svg
-        link: /document/web/quickstart.html
+        link: /callkit/android/beginner_guide.html
         text: CallKit
   - title: "SDK 快速开始"
-    desc: "选择合适的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
+    desc: "选择合适的 SDK 构建即时通讯应用，点击快速开始按钮快速实现即时通讯消息收发。"
     platform:
       - icon: /sdk/android.svg
         link: /document/android/quickstart.html
@@ -65,64 +65,67 @@ starter:
         link: /document/windows/quickstart.html
         text: Windows
   - title: "Demo 体验" 
-    desc: "从下面的 IM Demo 构建即时通讯应用，点击“Demo 体验”按钮将引导你立即体验环信 IM 即时通讯功能。"
+    desc: "点击“Demo 体验”按钮立即体验环信 IM 即时通讯功能。"
     platform:
       - icon: /sdk/demo_list.svg
         link: "https://doc.easemob.com/product/demo.html"
         text: Demo 体验 
   - title: "服务端 API"
-    desc: "从下面的 RESTful API 构建即时通讯应用，点击“REST”按钮将引导你在30分钟内实现即时通讯消息收发。"
+    desc: "可通过 RESTful API 构建即时通讯应用，点击“REST”按钮快速实现即时通讯消息收发等功能。"
     platform:
       - icon: /sdk/rest.svg
         link: /document/server-side/overview.html
         text: REST
   - title: "单/群聊 UIKit"
-    desc: "选择合适你的 UIKit 构建即时通讯应用，点击各客户端按钮了解单群聊 UIKit 主要功能介绍。"
+    desc: "选择合适的 UIKit 构建即时通讯应用，点击各客户端按钮了解单群聊 UIKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
-        link: /uikit/chatuikit/android/beginner_guide.html
+        link: /uikit/chatuikit/android/chatuikit_overview.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /uikit/chatuikit/ios/beginner_guide.html
+        link: /uikit/chatuikit/ios/chatuikit_overview.html
         text: iOS 
       - icon: /sdk/web.svg
-        link: /uikit/chatuikit/web/beginner_guide.html
+        link: /uikit/chatuikit/web/chatuikit_overview.html
         text: Web
       - icon: '/sdk/harmonyos.svg'
-        link: '/uikit/chatuikit/harmonyos/beginner_guide.html' 
+        link: /uikit/chatuikit/harmonyos/chatuikit_overview.html
         text: 'HarmonyOS'  
       - icon: /sdk/uniapp.svg
-        link: /uikit/chatuikit/uniapp/beginner_guide.html
+        link: /uikit/chatuikit/uniapp/chatuikit_overview.html
         text: Uniapp
+      - icon: /sdk/flutter.svg
+        link: /uikit/chatuikit/flutter/chatuikit_overview.html
+        text: Flutter  
       - icon: /sdk/react.svg
-        link: /uikit/chatuikit/react-native/beginner_guide.html
+        link: /uikit/chatuikit/react-native/chatuikit_overview.html
         text: React Native
   - title: "聊天室 UIKit"
-    desc: "从下面的列表中选择合适你的 UIKit 构建即时通讯应用，点击各客户端按钮了解聊天室 UIKit 主要功能介绍。"
+    desc: "选择合适你的 UIKit 构建即时通讯应用，点击各客户端按钮了解聊天室 UIKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
-        link: /uikit/chatroomuikit/android/roomuikit_integrated.html
+        link: /uikit/chatroomuikit/android/roomuikit_overview.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /uikit/chatroomuikit/ios/roomuikit_integrated.html
+        link: /uikit/chatroomuikit/ios/roomuikit_overview.html
         text: iOS 
       - icon: /sdk/web.svg
         link: /uikit/chatroomuikit/web/roomuikit_integrated.html
         text: Web
       - icon: /sdk/flutter.svg
-        link: /uikit/chatroomuikit/flutter/roomuikit_integrated.html
+        link: /uikit/chatroomuikit/web/roomuikit_overview.html
         text: Flutter
       - icon: /sdk/react.svg
-        link: /uikit/chatroomuikit/react-native/roomuikit_integrated.html
+        link: /uikit/chatroomuikit/flutter/roomuikit_overview.html
         text: React Native
   - title: "CallKit" 
     desc: "选择 CallKit 构建音视频功能，点击各客户端按钮了解 CallKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
-        link: /callkit/android/beginner_guide.html
+        link: /callkit/android/product_overview.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /callkit/ios/beginner_guide.html
+        link: /callkit/ios/product_overview.html
         text: iOS  
       - icon: /sdk/web.svg
         link: /callkit/web/product_overview.html
