@@ -258,7 +258,7 @@ const onChange = (platform) => {
           background-color: transparent;
         }
         &:hover {
-          background-color: var(--theme-color-light);
+          background-color: var(--switch-hover-bg-color);
         }
       }
     }

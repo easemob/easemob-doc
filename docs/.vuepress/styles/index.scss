@@ -338,7 +338,7 @@ button {
               min-height: 2rem;
               .nav-link {
                 &:hover {
-                  background-color: var(--theme-color-light);
+                  background-color: var(--switch-hover-bg-color);
                 }
               }
             }
