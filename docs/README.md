@@ -22,6 +22,18 @@ products:
     text: 安全响应中心  
     target: '_blank'
 starter:
+  - title: "新手指引"
+    desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
+    platform:
+      - icon: /guide/sdk.svg
+        link: /document/android/quickstart.html
+        text: SDK
+      - icon: /guide/uikit.svg
+        link: /document/ios/quickstart.html
+        text: UIKit 
+      - icon: /guide/callkit.svg
+        link: /document/web/quickstart.html
+        text: CallKit
   - title: "SDK 快速开始"
     desc: "选择合适的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
     platform:
