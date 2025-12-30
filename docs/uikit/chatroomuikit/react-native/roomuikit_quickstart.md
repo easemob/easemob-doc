@@ -1,4 +1,4 @@
-# 集成单群聊 ChatroomUIKit
+# 集成聊天室 ChatroomUIKit
 
 利用 ChatroomUIKit，你可以轻松实现聊天室内的用户交互。本文介绍如何实现在聊天室中发送消息。
 
@@ -47,7 +47,8 @@ yarn add react-native-chat-room
 ```sh
 yarn add react-native-linear-gradient \
 react-native-chat-sdk \
-react-native-safe-area-context
+react-native-safe-area-context \
+react-native-gesture-handler
 ```
 
 ### 第四步 添加权限
@@ -96,6 +97,7 @@ import {
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   Chatroom,
   Container,
@@ -220,11 +222,13 @@ function SendMessage() {
 function App(): React.JSX.Element {
   // initialize the chat room
   return (
-    <Container
-      opt={{ appKey: appKey, autoLogin: false, debugModel: true } as any}
-    >
-      <SendMessage />
-    </Container>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Container
+        opt={{ appKey: appKey, autoLogin: false, debugModel: true } as any}
+      >
+        <SendMessage />
+      </Container>
+    </GestureHandlerRootView>
   );
 }
 
@@ -252,7 +256,7 @@ export default App;
 
 在 [环信控制台](https://console.easemob.com/) 上获取以下信息，然后设置配置选项。
 
-- 获取 App Key。详见 [查看应用概览文档](/product/console/app_manage.html#查看应用信息) 
+- 获取 App Key。详见 [查看应用概览文档](/product/console/app_manage.html#查看应用信息)
 - 创建用户，获取用户 ID 和 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 - 获取聊天室 ID。详见 [创建聊天室文档](/product/console/operation_chatroom.html#创建聊天室)。
 
@@ -261,7 +265,7 @@ const appKey = "<your app key>";
 const userId = "<current login id>";
 const userName = undefined;
 const userToken = "<current login token or password>";
-const userAvatar  = undefined;
+const userAvatar = undefined;
 const roomId = "<chat room ID>";
 ```
 
@@ -291,9 +295,9 @@ yarn run android
 
 点击 **Login** 按钮登录进入聊天页面，输入文本消息，然后发送，即可开始聊天。
 
-| 登录            | 发送消息   | 
-| :--------------: | :-----: |
-| <img src="/images/uikit/chatrn/room_quick_start_login.png" alt="description">  | <img src="/images/uikit/chatrn/room_quick_start_chat.png" alt="description"> | 
+|                                     登录                                      |                                   发送消息                                   |
+| :---------------------------------------------------------------------------: | :--------------------------------------------------------------------------: |
+| <img src="/images/uikit/chatrn/room_quick_start_login.png" alt="description"> | <img src="/images/uikit/chatrn/room_quick_start_chat.png" alt="description"> |
 
 ## 常见问题
 
