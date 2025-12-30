@@ -957,9 +957,7 @@ projects:
           - text: 错误码
             link: /document/server-side/callback_postsending.html
           - text: 多设备管理
-            link: /document/server-side/callback_login_logout.html
-          - text: 内容审核
-            link: /document/server-side/callback_postsending.html                                      
+            link: /document/server-side/callback_login_logout.html                                    
   - title: UIKit
     features:
       - title: 单/群聊
