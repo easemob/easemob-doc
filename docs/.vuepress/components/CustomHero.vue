@@ -4,10 +4,10 @@
       <div class="hero-info">
         <div class="hero-title">环信 IM 开发文档</div>
         <div class="hero-desc">
-          提供完整API参考、多端 SDK 示例与最佳实践，快速集成消息、群组、聊天室、音视频等核心功能，助您轻松构建稳定可靠的 IM 应用。
+          提供完整 API 参考、多端 SDK 示例与最佳实践，快速集成消息、群组、聊天室、音视频等核心功能，助您轻松构建稳定可靠的 IM 应用。
         </div>
         <div class="hero-desc">
-          
+        探索下面的综合文档，立即释放 IM 即时通讯的力量。
         </div>
       </div>
       <img src="/hero_chat.png" alt="Documentation icon" class="hero-img" />
