@@ -170,7 +170,7 @@ export const zhNavbar = navbar([
       },
     ]
   },
-  { text: '服务端 API', link: '/document/server-side/overview.html'},
+  { text: '服务端', link: '/document/server-side/overview.html'},
 
  /* {
     text: 'API 参考',
