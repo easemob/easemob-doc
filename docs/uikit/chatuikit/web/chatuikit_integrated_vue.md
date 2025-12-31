@@ -47,7 +47,7 @@ npm run dev
 
 运行成功后打开 "http://localhost:5173/" ，可以看到下图所示界面：
 
-![img](/images/uikit/chatuikit/web/vue_project_create.png)
+![Vue 项目创建成功](/images/uikit/chatuikit/web/vue_project_create.png)
 
 ### 第二步 安装和配置 Veaury
 
@@ -65,7 +65,7 @@ npm i veaury
 npm i @vitejs/plugin-react
 ```
 
-3. 为了使 Vue 应用能够导入和呈现 React 组件，需要更新项目中的 `vite.config.js` 文件以使用 Veaury 插件。
+3. 为了使 Vue 应用能够导入和呈现 UIKit 组件，需要更新项目中的 `vite.config.js` 文件以使用 Veaury 插件。
 
 [Veaury 配置参考](https://github.com/gloriasoft/veaury/blob/master/README_zhcn.md#vite)
 
@@ -98,23 +98,47 @@ export default defineConfig({
 });
 ```
 
-4. 可将任何 React 组件添加到 `react_app` 目录中，然后将这些 React 组件导入到 `.vue` 文件，并在标准 Vue 组件中呈现。
+4. 在 `main.js` 中配置 VeauryOptions，以适配 React 19：
+
+```js
+import "./assets/main.css";
+import { createApp } from "vue";
+import { createRoot } from "react-dom/client";
+import { setVeauryOptions } from "veaury";
+import App from "./App.vue";
+import router from "./router";
+
+setVeauryOptions({
+  react: {
+    createRoot,
+  },
+});
+
+const app = createApp(App);
+
+app.use(router);
+
+app.mount("#app");
+
+
+```
+5. 可将任何 React 组件添加到 `react_app` 目录中，然后将这些 React 组件导入到 `.vue` 文件，并在标准 Vue 组件中呈现。
 
 ### 第三步 在 Vue 项目中集成 React 组件
 
 首先，你需要在 `react_app` 中创建一个新的 React 组件。该组件负责导入、配置和渲染 UIKit。
 
-1. 安装 UIKit。
+1. 安装 UIKit：
 
    ```bash
-   npm i easemob-chat-uikit --save;
+   npm i easemob-chat-uikit --save
    ```
 
 2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用环信即时通讯 IM 的 App Key 和用户信息初始化 UIKit。
 
 <img src="/images/uikit/chatuikit/web/vue_initialization.png" width="500" >
 
-代码如下：
+代码如下，请将示例中的 `appKey`、`userId` 和 `password` 替换为您的实际值：
 
 ```jsx
 // 导入 UIKit 到 react_app/chat.jsx 文件
@@ -183,20 +207,20 @@ const switchTheme = () => {
 </script>
 
 <template>
-  <header>
-    <div class="header">
-      <img class="logo" :src="Logo" alt="logo" />
-      <span class="theme" @click="switchTheme">Switch Theme: {{ theme }}</span>
-    </div>
-  </header>
   <main>
+    <header>
+      <div class="header">
+        <img class="logo" :src="Logo" alt="logo" />
+        <span class="theme" @click="switchTheme">Switch Theme: {{ theme }}</span>
+      </div>
+    </header>
     <Chat :theme="theme" />
   </main>
 </template>
 
 <style>
 .chat-wrap {
-  width: 100%;
+  width: 100vh;
   height: calc(100vh - 50px);
   display: flex;
   box-sizing: border-box;
@@ -233,7 +257,15 @@ const switchTheme = () => {
 </style>
 
 ```
-删除 `App.vue` 文件 `template` 中的无关代码，仅保留 RouterView，当访问 http://localhost:5173 时，界面如下：
+5. 删除 `App.vue` 文件 `template` 中的无关代码，仅保留 `RouterView`：
+
+```vue
+<template>
+  <RouterView />
+</template>
+```
+
+当访问 http://localhost:5173 时，界面如下：
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/web/vue_initial_page.png" title="浅色主题" />
