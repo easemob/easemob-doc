@@ -26,7 +26,7 @@ npm i easemob-chat-uikit --save;
 
 将单群聊 UIKit 组件导入到你的 React 项目中。
 
-```jsx
+```tsx
 // 导入组件
 import {
   UIKitProvider,
@@ -47,7 +47,7 @@ import "easemob-chat-uikit/style.css";
 
 你需要在环信控制台[创建 IM 用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和密码。如果使用 token，你需要从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/document/server-side/easemob_user_token.html) 。
 
-```jsx
+```tsx
 import React from 'react';
 import { UIKitProvider } from 'easemob-chat-uikit';
 import 'easemob-chat-uikit/style.css';
