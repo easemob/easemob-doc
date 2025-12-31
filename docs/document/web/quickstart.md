@@ -63,7 +63,7 @@ Easemob_quickstart<br>
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
-### 3. 实现用户界面
+### 4. 实现用户界面
 
 `index.html` 的内容如下。
 
@@ -118,7 +118,7 @@ Easemob_quickstart<br>
 </html>
 ```
 
-### 4. 实现消息发送与接收
+### 5. 实现消息发送与接收
 
 `index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 `<Your app key>` 替换为你之前获取的 App Key。
 
@@ -206,7 +206,7 @@ import WebIM, { EasemobChat } from 'easemob-websdk'
 ```
 :::
 
-### 5. 运行项目
+### 6. 运行项目
 
 本文使用 webpack 对项目进行打包，并使用 `webpack-dev-server` 运行项目。
 
