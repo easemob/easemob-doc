@@ -2,11 +2,11 @@ import { navbar } from 'vuepress-theme-hope'
 
 export const zhNavbar = navbar([
   {
-    text: 'V4.0.0',
+    text: 'V4.x',
       children: [
-        { text: 'V4.0.0', link: 'https://doc.easemob.com/product/introduction.html'},
-        { text: 'V3.0.0', link: 'https://docs-im.easemob.com/ccim/intro'},
-        { text: 'V2.0.0', link: 'https://docs-im.easemob.com/start/start'}
+        { text: 'V4.x', link: 'https://doc.easemob.com/product/introduction.html'},
+        { text: 'V3.x', link: 'https://docs-im.easemob.com/ccim/intro'},
+        { text: 'V2.x', link: 'https://docs-im.easemob.com/start/start'}
       ]
   },
   { text: '产品介绍', link: '/product/introduction.html' },
