@@ -4,13 +4,10 @@
       <div class="hero-info">
         <div class="hero-title">环信 IM 开发文档</div>
         <div class="hero-desc">
-          基于即时通讯 (Instant Messaging, IM)
-          的高可靠性、低延时、强扩展性及高并发特性，可轻松切入即时通讯领域，为产品带来卓越沟通体验，快速增强用户粘性和市场竞争力。即时通讯
-          IM
-          解决方案支持丰富的消息类型、群组功能和跨平台体验，轻松构建满足不同场景需求的高效沟通平台，助力用户享受流畅便捷的交流方式。
+          提供完整API参考、多端 SDK 示例与最佳实践，快速集成消息、群组、聊天室、音视频等核心功能，助您轻松构建稳定可靠的 IM 应用。
         </div>
         <div class="hero-desc">
-          探索下面的综合文档，立即释放 IM 即时通讯的力量。
+          
         </div>
       </div>
       <img src="/hero_chat.png" alt="Documentation icon" class="hero-img" />
