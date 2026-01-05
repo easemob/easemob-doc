@@ -360,12 +360,15 @@ button {
           }
 
           .dropdown-wrapper {
+            width: 100%;
             .dropdown-title {
               display: flex;
               align-items: center;
+              width: 100%;
 
               .title {
-                margin-right: 3.2rem;
+                flex: 1;
+                text-align: left;
                 color: var(--text-color);
               }
 
