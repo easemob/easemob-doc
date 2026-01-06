@@ -120,6 +120,8 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 
 ### 第四步 创建聊天页面
 
+登录成功后，你可以按以下步骤创建聊天页面：
+
 1. 在控制台[关闭好友关系检查功能](/product/console/basic_user.html#好友关系检查)，即无需添加好友即可聊天。
 2. 调用 `init` 方法将在控制台上创建的用户的用户 ID 传入 `conversationId` 参数，向该用户发送消息。
 
