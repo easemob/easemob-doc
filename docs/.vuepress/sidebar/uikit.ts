@@ -136,7 +136,17 @@ const chatUikitSidebar = [
       collapsible: true,
       children: [
         { text: "页面介绍", link: "chatuikit_conversationlist_intro.html" },
-        { text: "自定义页面", link: "chatuikit_conversation.html" },
+        { text: "自定义页面", link: "chatuikit_conversation.html", except: ["android"]},
+        {
+          text: "自定义页面",
+          collapsible: true,
+          children: [
+            { text: "自定义标题栏", link: "chatuikit_conversation_titlebar.html" },
+            { text: "自定义搜索栏", link: "chatuikit_conversation_searchbar.html" },
+            { text: "自定义会话列表", link: "chatuikit_conversation_list.html" },
+          ],
+        only: ["android"],
+  },
       ],
     only: ["android", "harmonyos", "react-native", "flutter"],
   },
@@ -145,7 +155,17 @@ const chatUikitSidebar = [
       collapsible: true,
       children: [
         { text: "页面介绍", link: "chatuikit_chat_intro.html" },
-        { text: "自定义页面", link: "chatuikit_chat.html" },
+        { text: "自定义页面", link: "chatuikit_chat.html", except: ["android"]},
+        {
+          text: "自定义页面",
+          collapsible: true,
+          children: [
+            { text: "自定义标题栏", link: "chatuikit_chat_titlebar.html" },
+            { text: "自定义消息列表", link: "chatuikit_chat_list.html" },
+            { text: "自定义底部输入框", link: "chatuikit_chat_ inputmenu.html" },
+          ],
+        only: ["android"],
+  },
       ],
     only: ["android", "harmonyos", "react-native", "flutter"],
   },
