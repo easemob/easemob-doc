@@ -96,6 +96,9 @@ dependencies {
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- 相机权限，用于图片消息时拍摄图片，不使用拍照可以移除 -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <!-- 获取运营商信息，用于获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <!-- 获取读存储权限，用于附件等的获取 -->
