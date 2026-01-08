@@ -26,14 +26,12 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 你可以获取 `ChatUIKitInputMenu` 对象，对输入菜单进行如下操作：
 
-- **自定义菜单布局**
-  支持替换或扩展输入菜单中的功能模块。
-- **管理表情与扩展功能**
-  可动态设置、显示或隐藏自定义表情面板及扩展功能菜单。
-- **定制顶部区域**
-  支持设置自定义的菜单顶部布局，包括引用回复条与多选消息工具条。
-- **界面区域控制**
-  可选择仅显示菜单顶部区域，隐藏底部输入与扩展面板部分。
+| 自定义配置 | 描述 |
+|---------|------|
+| 自定义菜单布局 | 支持替换或扩展输入菜单中的功能模块。 |
+| 管理表情与扩展功能 | 可动态设置、显示或隐藏自定义表情面板及扩展功能菜单。 |
+| 定制顶部区域 | 支持设置自定义的菜单顶部布局，包括引用回复条与多选消息工具条。 |
+| 界面区域控制 | 可选择仅显示菜单顶部区域，隐藏底部输入与扩展面板部分。 |
 
   // TODO：添加顶部区域截图
   // TODO：顶部扩展区域还是顶部区域？
@@ -108,7 +106,7 @@ val primaryMenu: IChatPrimaryMenu? = binding?.layoutChat?.chatInputMenu?.chatPri
 
 #### 设置输入框默认文本
 
-可通过` UIKitChatFragment.Builder` 设置输入框占位文本：
+可通过 `UIKitChatFragment.Builder` 设置输入框占位文本：
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
@@ -276,8 +274,6 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
     .build()
 ```
 
-
-
 **方式二：在自定义 Fragment 中重写点击方法**
 
 ```kotlin
@@ -337,7 +333,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | EmojiMenu（表情面板）                                      | - `uikit_chat_emoji_item_bg_selector`：表情 item 背景 <br/> - `uikit_chat_emoji_delete_button_bg`：删除/退格按钮背景 <br/> - `uikit_chat_emoji_pager_send_btn_selector`：发送按钮背景 <br/> - `uikit_dot_emojicon_selected` / `uikit_dot_emojicon_unselected`：分页圆点 <br/> - `uikit_chat_emoji_send`：表情面板发送图标 <br/> - `uikit_chat_emoji_backspace`：表情面板退格图标 <br/> - `uikit_icon_arrow_left_thick`：当前默认的退格箭头图标 |
 | TopExtendMenu（菜单顶部扩展区域：引用回复条 / 多选工具条） | - `uikit_widget_chat_message_reply_background`：引用条整体背景 <br/> - `uikit_chat_quote_default_image`：引用图片默认占位 <br/> - `uikit_chat_quote_icon_cancel`：取消引用 <br/> - `uikit_chat_quote_icon_image` / `uikit_chat_quote_icon_video` / `uikit_chat_quote_icon_voice` <br/> - `uikit_chat_quote_icon_file` / `uikit_chat_quote_icon_user_card` / `uikit_chat_quote_icon_combine` <br/> - `uikit_video_play_btn_small_nor`：引用视频播放按钮 |
 
-### 可同名覆盖的 layout
+### 可同名覆盖的布局
 
 如果需要移除控件、重排布局、插入新控件等结构性调整，可在 App 工程中同名覆盖以下布局（或按需选择覆盖）：
 
@@ -350,9 +346,9 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | TopExtendMenu（菜单顶部扩展区域） | - `layout/uikit_widget_chat_message_reply.xml`：引用回复条<br/> -  `layout/uikit_layout_chat_messages_multi_select_menu.xml`：多选工具条 |
 
 
-### 可同名覆盖的值
+### 可同名覆盖的设置
 
-可同名覆盖的值指对文字、开关和样式的调整：
+可同名覆盖的设置指对文字、开关和样式的调整：
 
 | 类别                            | 资源与配置说明                                                |
 | :------------------------------ | :----------------------------------------------------------- |
