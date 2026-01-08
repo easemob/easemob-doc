@@ -23,14 +23,18 @@ ChatUIKitConversationListFragment.Builder().useSearchBar(true)
 
 `ChatUIKitSearchView` 支持通过 XML 属性或 style item 自定义以下样式（对应 `declare-styleable name="ChatUIKitSearchView"`）：
 
-- **搜索图标**：`app:search_drawable_icon`（或 style item：`search_drawable_icon`）
-- **搜索图标 tint**：`app:search_drawable_icon_tint`（或 style item：`search_drawable_icon_tint`）
-- **图标与文字间距**：`app:search_drawable_padding`（或 style item：`search_drawable_padding`）
-- **Hint 文案**：`app:search_text_hint`（或 style item：`search_text_hint`）
-- **文本颜色**：`app:search_text_color`（或 style item：`search_text_color`）
-- **文本大小**：`app:search_text_size`（或 style item：`search_text_size`）
-- **默认文本内容**：`app:search_text`（或 style item：`search_text`）// TODO：这个跟 Hint 文案有什么差别？下面两种方式种没看到这个。
-- **整体对齐方式**：`app:search_gravity`（或 style item：`search_gravity`，可选：`center / start / end / top / bottom / center_vertical / center_horizontal`）
+| 属性描述       | XML 属性                        | Style Item                  |
+| :------------- | :------------------------------ | :-------------------------- |
+| 搜索图标       | `app:search_drawable_icon`      | `search_drawable_icon`      |
+| 搜索图标 tint  | `app:search_drawable_icon_tint` | `search_drawable_icon_tint` |
+| 图标与文字间距 | `app:search_drawable_padding`   | `search_drawable_padding`   |
+| Hint 文案      | `app:search_text_hint`          | `search_text_hint`          |
+| 文本颜色       | `app:search_text_color`         | `search_text_color`         |
+| 文本大小       | `app:search_text_size`          | `search_text_size`          |
+| 默认文本内容   | `app:search_text`               | `search_text`               |
+| 整体对齐方式   | `app:search_gravity`            | `search_gravity`，可选：`center / start / end / top / bottom / center_vertical / center_horizontal`          |
+
+// TODO：这个跟 Hint 文案有什么差别？下面两种方式种没看到这个。
 
 你可以通过以下方式配置以上样式：
 
@@ -84,8 +88,10 @@ ChatUIKitConversationListFragment.Builder().useSearchBar(true)
 
 你可以用以下任一方式自定义：
 
-- **覆盖背景 drawable（最简单）**：在 App 工程里提供同名资源 `drawable/uikit_search_bg`（会覆盖 SDK 内置）。
-- **覆盖根布局 style**：在 App 工程里提供同名 style `ease_widget_search_view_root`，并修改其 `android:background`：
+- （推荐）**覆盖背景 drawable**
+  在 App 项目中添加同名资源文件 `drawable/uikit_search_bg`，该资源将自动覆盖 SDK 内置的默认背景。
+- **自定义根布局样式**
+  在 App 项目中定义同名样式 `ease_widget_search_view_root`，并通过修改 `android:background` 属性来自定义背景样式。
 
 ```xml
 <!-- res/values/styles.xml：同名覆盖 -->
@@ -129,10 +135,12 @@ searchBar.setOnClickListener {
 
 对于以下默认资源，你可按需覆盖：
 
-- **搜索栏整体 style**：`@style/ease_widget_search_view`
-- **搜索栏根布局背景 style**：`@style/ease_widget_search_view_root`（默认 `@drawable/uikit_search_bg`）
-- **默认搜索图标**：`@style/ease_search_view_drawable`（默认 `@drawable/search`）
-- **默认搜索文字样式**：`@style/ease_search_view_tv_text`
+| 描述                   | Style 引用                            | 默认值/说明                 |
+| :--------------------- | :------------------------------------ | :-------------------------- |
+| 搜索栏整体 style       | `@style/ease_widget_search_view`      |                             |
+| 搜索栏根布局背景 style | `@style/ease_widget_search_view_root` | `@drawable/uikit_search_bg` |
+| 默认搜索图标           | `@style/ease_search_view_drawable`    | `@drawable/search`          |
+| 默认搜索文字样式       | `@style/ease_search_view_tv_text`     |                             |
 
 ## 自定义跳转路由
 

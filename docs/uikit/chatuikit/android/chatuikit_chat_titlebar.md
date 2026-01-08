@@ -645,15 +645,15 @@ UIKit 提供了三个 Fragment Builder 类，用于快速配置包含标题栏�
 | `setTitleBarBackPressListener(OnClickListener?)` | 设置返回按钮监听 | `listener`: 点击监听器 | 全部 |
 
 
-### Builder 配置 vs 直接修改代码的区别 
+### Builder 配置 与 直接修改代码的区别 
 
 | 特性 | Builder 配置 | 直接操作 TitleBar |
 |-----|-------------|------------------|
-| **使用场景** | Fragment 初始化时 | Activity 或 Fragment 中动态修改 |
-| **配置时机** | 创建 Fragment 时 | 运行时任意时刻 |
-| **灵活性** | 基础配置，参数有限 | 完全控制，所有 API 可用 |
-| **代码位置** | Fragment Builder 调用链 | `onCreate`/`onViewCreated` 等生命周期方法 |
-| **推荐场景** | 快速搭建页面框架 | 需要动态更新标题栏内容 |
+| 使用场景 | Fragment 初始化时 | Activity 或 Fragment 中动态修改 |
+| 配置时机 | 创建 Fragment 时 | 运行时任意时刻 |
+| 灵活性 | 基础配置，参数有限 | 完全控制，所有 API 可用 |
+| 代码位置 | Fragment Builder 调用链 | `onCreate`/`onViewCreated` 等生命周期方法 |
+| 推荐场景 | 快速搭建页面框架 | 需要动态更新标题栏内容 |
 
 ### 混合使用示例
 
@@ -702,36 +702,36 @@ class MyChatFragment : UIKitChatFragment() {
 
 ## 常见问题
 
-### Q1: 为什么设置了 Title 但显示不出来？
+### 设置了 Title 但显示不出来？
 
-**A:** 检查是否设置了 Logo 且未调整布局。Logo 和 Title 共享空间，如果 Logo 太大可能遮挡标题。
+检查是否设置了 Logo 且未调整布局。Logo 和 Title 共享空间，如果 Logo 太大可能遮挡标题。
 
 ```kotlin
 // 确保 Logo 大小合适
 titleBar.setLogoSize(40.dpToPx(context))
 ```
 
-### Q2: 菜单图标颜色不生效？
+### 菜单图标颜色不生效？
 
-**A:** 确保在 `inflateMenu()` 之后调用颜色设置方法：
+确保在 `inflateMenu()` 之后调用颜色设置方法：
 
 ```kotlin
 titleBar.inflateMenu(R.menu.chat_menu)
 titleBar.setMenuIconTint(Color.WHITE) // 必须在 inflateMenu 之后
 ```
 
-### Q3: 状态图标如何显示？
+### 状态图标如何显示？
 
-**A:** 状态图标默认隐藏，需要手动设置：
+状态图标默认隐藏，需要手动设置：
 
 ```kotlin
 titleBar.setLogoStatus(R.drawable.ic_online)
 titleBar.getStatusView().visibility = View.VISIBLE
 ```
 
-### Q4: 使用 Builder 配置后如何修改标题栏？
+### 使用 Builder 配置后如何修改标题栏？
 
-**A:** Builder 只负责初始化配置，后续可以在 Fragment 中获取 TitleBar 对象进行修改：
+Builder 只负责初始化配置，后续可以在 Fragment 中获取 TitleBar 对象进行修改：
 
 ```kotlin
 // 在自定义的 Fragment 中
@@ -746,9 +746,9 @@ override fun initView(savedInstanceState: Bundle?) {
 }
 ```
 
-### Q5: Builder 的 `useTitleBarToReplaceActionBar` 什么时候使用？
+### Builder 的 `useTitleBarToReplaceActionBar` 何时使用？
 
-**A:** 通常不需要使用此选项（默认 `false`）。只有在需要将 TitleBar 作为 Activity 的 ActionBar，并通过 `onOptionsItemSelected(android.R.id.home)` 处理返回事件时才设置为 true。
+通常不需要使用此选项（默认 `false`）。只有在需要将 TitleBar 作为 Activity 的 ActionBar，并通过 `onOptionsItemSelected(android.R.id.home)` 处理返回事件时才设置为 true。
 
 ```kotlin
 //（推荐）一般情况
