@@ -8,7 +8,9 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversat
 message.ext = @{@"em_apns_ext":@{
     @"em_push_title": @"customTitle",
     @"em_alert_subTitle": @"customSubTitle",
-    @"em_push_content": @"customContent"
+    @"em_push_content": @"customContent",
+    @"em_push_badge": 1,
+    @"em_push_sound": @"a.caf"
 }};
 
 message.chatType = EMChatTypeChat;
@@ -25,6 +27,8 @@ message.chatType = EMChatTypeChat;
 | `em_push_title`          | 推送通知的自定义标题。 |
 | `em_alert_subTitle`        | 推送通知的自定义副标题。 |
 | `em_push_content`          | 推送通知展示的自定义内容。 |
+| `em_push_badge`          | 推送通知的自定义角标数。 |
+| `em_push_sound`          | 推送通知的自定义铃声文件，如"a.caf"，铃声文件要放到app的主bundle下。 |
 
 **解析的内容**
 
