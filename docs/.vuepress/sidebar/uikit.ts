@@ -166,8 +166,8 @@ const chatUikitSidebar = [
               text: "自定义消息列表",
               collapsible: true,
               children: [
-               { text: "基础自定义", link: "chatuikit_chat_list_basic.html" },
-               { text: "高级自定义", link: "chatuikit_chat_list_advanced.html" },
+               { text: "常见定制", link: "chatuikit_chat_list.html" },
+               { text: "资源配置", link: "chatuikit_chat_list_resource.html" },
              ],
             only: ["android"],
           },

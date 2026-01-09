@@ -31,13 +31,11 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 对于消息列表Item `ChatUlKitRow`，你可以进行自定义设置，例如：
 - 添加自定义消息列表Item
-- 设置默认的头像和昵称以及样式
+- 设置默认的头像和昵称及其样式
 - 设置消息气泡
 - 设置消息时间
-- 设置消息撤回时间
 - 设置长按消息菜单
-- 设置消息翻译
-- 设置消息已送达和已读图标
+- 设置消息状态图标
 - 设置消息事件监听
 
 ### 添加自定义消息列表Item 
@@ -142,7 +140,7 @@ builder.setCustomAdapter(CustomMessageAdapter())
 | 接收方头像显示/隐藏 | `hideChatReceiveAvatar()`  | `hideReceiverAvatar()`    | - `true`：隐藏<br/> -（默认）`false`：显示 |
 | 昵称显示/隐藏       | `showNickname()`           | `showNickname()`          | - `true`：显示<br/> -（默认）`false`：隐藏 |
 
-- 通过 `ChatUIKitMessageListLayout` 设置：
+- （推荐）方式一：通过 `ChatUIKitMessageListLayout` 设置：
 
 ```kotlin
 // 获取 ChatUIKitMessageListLayout 对象
@@ -160,7 +158,7 @@ chatMessageListLayout?.let { layout ->
 }
 ```
 
-- 通过 `UIKitChatFragment#Builder` 设置：
+- 方式二：通过 `UIKitChatFragment#Builder` 设置：
 
 ```kotlin
 //com.hyphenate.easeui.feature.chat.activities.UIKitChatActivity
@@ -190,7 +188,7 @@ fragment?.let { fragment ->
 | 文本消息的字体颜色       | `setItemTextColor`          | 不支持      | 
 | 是否发送原图       | 不支持    |  `sendMessageByOriginalImage`     | - `true`：是 <br/> - (默认) `false`: 否     | 
 
-- 通过 `chatMessageListLayout` 进行消息气泡的如下配置：
+- （推荐）方式一：通过 `chatMessageListLayout` 设置：
 
 ```kotlin
 // 获取 ChatUIKitMessageListLayout 对象
@@ -204,7 +202,7 @@ chatMessageListLayout?.let{
 } 
 ```
 
-- 通过 `UIKitChatFragment#Builder` 进行消息气泡的如下配置：
+- 方式二：通过 `UIKitChatFragment#Builder` 设置：
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
@@ -254,7 +252,7 @@ fragment?.let { fragment ->
 
 #### 设置日期样式
 
-- `ChatUIKitMessageListLayout` 提供了如下方法设置消息时间的样式：
+- （推荐）方式一：通过 `ChatUIKitMessageListLayout` 设置：
 
 | 方法                | 描述                                                                               |
 | ------------------- | ---------------------------------------------------------------------------------- |
@@ -273,7 +271,7 @@ chatMessageListLayout?.let{
 } 
 ```
 
-- `UIKitChatFragment#Builder` 中也提供了一些消息列表相关配置项：
+- 方式二：通过 `UIKitChatFragment#Builder` 设置：
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
@@ -291,24 +289,6 @@ fragment?.let { fragment ->
 :::tip
 Builder 不支持设置时间背景。若设置时间背景，需使用 `ChatUIKitMessageListLayout#setTimeBackground(Drawable?)` 或 设置 XML 属性 `ease_chat_item_time_background`。
 :::
-
-## 设置消息撤回时间
-
-你可以通过 `ChatUIKitClient.getConfig()?.chatConfig?.timePeriodCanRecallMessage` 设置聊天页面消息撤回的有效时间，默认为 120 秒。
-
-## 设置消息翻译
-
-- 开启翻译功能：
-
-你可以设置 `ChatUIKitClient.getConfig()?.chatConfig?.enableTranslationMessage` 为 `true` 开启文本消息长按翻译功能。默认为 `false`，即该功能默认关闭。
-
-- 设置目标翻译语言：
-
-你可以通过 `ChatUIKitClient.getConfig()?.chatConfig?.targetTranslationLanguage = "zh"`：翻译目标语言，默认为中文。文本消息长按后出现 **翻译** 菜单，点击 **翻译** 后设置翻译的目标语言。使用前，你需在 [环信控制台](https://console.easemob.com/user/login) [开启翻译功能](/product/console/purchase_value_added.html#消息翻译)，然后将 `ChatUIKitClient.getConfig()?.chatConfig?.enableTranslationMessage` 设置为 `true`，才会出现文本消息长按的翻译功能。若该功能未开启，前端无法成功调用 API 进行翻译。
-
-- 设置翻译文本样式：
-  - `<style name="ease_chat_message_received_translation_content_style">`：消息接收方翻译文本样式 可以自行修改文本任意属性。
-  - `<style name="ease_chat_message_sent_translation_content_style">`：消息发送方翻译文本样式 可以自行修改文本任意属性。
 
 ## 设置消息状态图标
 
@@ -354,17 +334,17 @@ ChatUIKitClient.init(context, options)
 
 在消息列表中长按任意消息，即可弹出操作菜单，支持复制、回复、转发、置顶、多选、翻译、创建话题等丰富功能。
 
-### 设置菜单样式
+### 设置菜单风格
 
-UIKit 提供两种风格的消息长按菜单样式，你可以灵活选择实现：
+UIKit 提供两种风格的消息长按菜单，你可以灵活选择实现：
 
-- 启用类似微信样式菜单：
+- 启用类似微信风格菜单：
 
 ```kotlin
 ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = true
 ```
 
-- 启用仿系统 `UIActionSheet` 样式菜单：
+- 启用仿系统 `UIActionSheet` 风格菜单：
 
 ```kotlin
 ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
@@ -467,7 +447,7 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 
 - 设置菜单项的文字颜色和大小
 
-1. `ChatUIKitMenuItem` 支持通过 `titleColor` 设置 **文字颜色**（同时会作为 icon tint 颜色）：
+1. `ChatUIKitMenuItem` 支持通过 `titleColor` 设置 **文字颜色**（同时会作为图标 tint 颜色）：
 
 ```kotlin
 override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) {
@@ -477,9 +457,9 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 
 2. 根据菜单样式的不同，文字大小的调整方式有所区别：
 
-| 菜单样式                        | 调整方式                                                     |
+| 菜单风格                        | 调整方式                                                     |
 | :------------------------------ | :----------------------------------------------------------- |
-| 微信样式（PopupWindow）    | 在 App 工程中**同名覆盖** `layout/uikit_item_select_text_pop.xml`，修改 `tv_pop_func` 的 `android:textSize` 属性。 |
+| 微信风格（PopupWindow）    | 在 App 工程中**同名覆盖** `layout/uikit_item_select_text_pop.xml`，修改 `tv_pop_func` 的 `android:textSize` 属性。 |
 | 底部弹窗样式（BottomSheet） | 在 App 工程中**同名覆盖**以下样式之一： <br/> - `ease_chat_extend_menu_item_title` <br/> - `ease_chat_extend_menu_horizontal_item_title` <br/>调整其中的 `textAppearance` 或 `textSize` 属性。（对应布局文件：`uikit_chat_menu_item.xml` / `uikit_chat_menu_item_horizontal.xml`） |
 
 - 设置菜单背景色
@@ -488,8 +468,8 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 
 | 菜单样式                        | 背景调整方式                                                 |
 | :------------------------------ | :----------------------------------------------------------- |
-| 微信样式（PopupWindow）     | 覆盖 `drawable/uikit_shape_popup_radius_8` 资源，可修改背景色、圆角、描边等样式。 |
-| 底部弹窗样式（BottomSheet） | 菜单列表的布局文件位于 `res/layout/uikit_dialog_menu.xml` 中。若需自定义背景，可在您的 App 工程中覆盖以下样式：<br>  - `ease_item_menu_top_layout_style`<br>  - `ease_conv_item_menu_list`<br>  - `ease_conv_item_menu_divider`<br>  - `ease_conv_item_menu_cancel` |
+| 微信风格（PopupWindow）     | 覆盖 `drawable/uikit_shape_popup_radius_8` 资源，可修改背景色、圆角、描边等样式。 |
+| 底部弹窗风格（BottomSheet） | 菜单列表的布局文件位于 `res/layout/uikit_dialog_menu.xml` 中。若需自定义背景，可在您的 App 工程中覆盖以下样式：<br>  - `ease_item_menu_top_layout_style`<br>  - `ease_conv_item_menu_list`<br>  - `ease_conv_item_menu_divider`<br>  - `ease_conv_item_menu_cancel` |
 
 ## 设置事件监听
 
