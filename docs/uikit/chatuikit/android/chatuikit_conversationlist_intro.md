@@ -1,25 +1,6 @@
 # 会话列表页面介绍
 
-## 创建会话列表页面
-
-单群聊 UIKit 提供 `ChatUIKitConversationListFragment`，添加到 Activity 中即可使用。
-
-示例如下：
-
-```kotlin
-class ConversationListActivity: AppCompactActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_conversation_list)
-
-        ChatUIKitConversationListFragment.Builder()
-                        .build()?.let { fragment ->
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.fl_fragment, fragment).commit()
-                        }
-    }
-}
-```
+`ChatUIKitConversationListFragment` 用于展示当前用户的所有会话，包含单聊和群组聊天（不包括聊天室），并且提供会话搜索、删除、置顶和免打扰功能。
 
 ## 页面组件
 
@@ -56,6 +37,27 @@ class ConversationListActivity: AppCompactActivity() {
 
 - **会话名称和头像**：对于单聊, 会话名称为对端用户的昵称，若对端用户未设置昵称则展示对方用户 ID；会话头像是对方头像，若未设置则使用默认头像。对于群聊，会话名称为当前群组的名称或者群组 ID，头像为默认头像。
 - **点击会话**：点击单个会话列表 Item，跳转到会话详情页面。
-- **长按回话**：长按单个会话列表 Item 显示会话操作弹窗，默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作。
+- **长按会话**：长按单个会话列表 Item 显示会话操作弹窗，默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作。
 
 关于自定义，详见 [设置会话列表Item](chatuikit_conversation_item.html)。
+
+## 创建会话列表页面
+
+单群聊 UIKit 提供 `ChatUIKitConversationListFragment`，添加到 Activity 中即可使用。
+
+示例如下：
+
+```kotlin
+class ConversationListActivity: AppCompactActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_conversation_list)
+
+        ChatUIKitConversationListFragment.Builder()
+                        .build()?.let { fragment ->
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.fl_fragment, fragment).commit()
+                        }
+    }
+}
+```
