@@ -162,6 +162,15 @@ const chatUikitSidebar = [
           children: [
             { text: "自定义标题栏", link: "chatuikit_chat_titlebar.html" },
             { text: "自定义消息列表", link: "chatuikit_chat_list.html" },
+            {
+              text: "自定义消息列表",
+              collapsible: true,
+              children: [
+               { text: "基础自定义", link: "chatuikit_chat_list_basic.html" },
+               { text: "高级自定义", link: "chatuikit_chat_list_advanced.html" },
+             ],
+            only: ["android"],
+          },
             { text: "自定义底部输入框", link: "chatuikit_chat_ inputmenu.html" },
           ],
         only: ["android"],
