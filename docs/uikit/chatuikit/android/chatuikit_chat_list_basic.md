@@ -1,8 +1,83 @@
-# 设置消息列表
+# 消息列表的基本定制
 
-消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何设置和自定义消息列表和消息列表 Item。
+消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何通过 `UIKitChatFragment.Builder` 实现消息列表和消息列表 Item 的基本定制。
 
-// TODO：添加图片，列明消息气泡等
+如需通过 `ChatUIKitMessageListLayout` 进行高级定制，详见 [高级定制说明](chatuikit_chat_list_advanced.html)。
+
+// TODO：添加图片，列明消息气泡、消息列表项、头像和昵称消息时间等
+
+## 概述
+
+`UIKitChatFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置，目前提供的设置项如下：
+
+```kotlin
+// conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
+// easeChatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
+UIKitChatFragment.Builder(conversationID, easeChatType)
+        .useTitleBar(true)
+        .setTitleBarTitle("title")
+        .setTitleBarSubTitle("subtitle")
+        .enableTitleBarPressBack(true)
+        .setTitleBarBackPressListener(onBackPressListener)
+        .getHistoryMessageFromServerOrLocal(false)
+        .setOnChatExtendMenuItemClickListener(onChatExtendMenuItemClickListener)
+        .setOnChatInputChangeListener(onChatInputChangeListener)
+        .setOnMessageItemClickListener(onMessageItemClickListener)
+        .setOnMessageSendCallBack(onMessageSendCallBack)
+        .setOnWillSendMessageListener(willSendMessageListener)
+        .setOnChatRecordTouchListener(onChatRecordTouchListener)
+        .setOnModifyMessageListener(onModifyMessageListener)
+        .setOnReportMessageListener(onReportMessageListener)
+        .setMsgTimeTextColor(msgTimeTextColor)
+        .setMsgTimeTextSize(msgTimeTextSize)
+        .setReceivedMsgBubbleBackground(receivedMsgBubbleBackground)
+        .setSentBubbleBackground(sentBubbleBackground)
+        .showNickname(false)
+        .hideReceiverAvatar(false)
+        .hideSenderAvatar(true)
+        .setChatBackground(chatBackground)
+        .setChatInputMenuBackground(inputMenuBackground)
+        .setChatInputMenuHint(inputMenuHint)
+        .sendMessageByOriginalImage(true)
+        .setEmptyLayout(R.layout.layout_chat_empty)
+        .setCustomAdapter(customAdapter)
+        .setCustomFragment(myChatFragment)
+        .build()
+
+```
+
+`UIKitChatFragment#Builder` 提供的方法如下表所示：
+
+| 方法                                                         | 描述                           |
+| :----------------------------------------------------------- | :--------------------------------- |
+| `useTitleBar(true)`                                         | 是否使用默认的标题栏（`ChatUIKitTitleBar`）。 <br/> - `true`：是。 <br/> - (默认) `false`: 否。<br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。     |
+| `setTitleBarTitle("title")`                                 | 设置标题栏的主标题。 <br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。      |
+| `setTitleBarSubTitle("subtitle")`                           | 设置标题栏的副标题。 <br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。                  |
+| `enableTitleBarPressBack(true)`                             | 设置是否支持显示返回按钮，默认为不显示。<br/> - `true`：显示。<br/> - (默认) `false`: 不显示。<br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。  |
+| `setTitleBarBackPressListener(onBackPressListener)`         | 设置标题栏返回按钮点击监听器。       |
+| `getHistoryMessageFromServerOrLocal(false)`                 | 设置是否从服务器或本地获取历史消息。 |
+| `setOnChatExtendMenuItemClickListener(onChatExtendMenuItemClickListener)` | 设置聊天扩展菜单项点击监听器。       |
+| `setOnChatInputChangeListener(onChatInputChangeListener)`   | 设置聊天输入变化监听器。             |
+| `setOnMessageItemClickListener(onMessageItemClickListener)` | 设置消息项点击监听器。              |
+| `setOnMessageSendCallBack(onMessageSendCallBack)`           | 设置消息发送回调。                   |
+| `setOnWillSendMessageListener(willSendMessageListener)`     | 设置即将发送消息的监听器。          |
+| `setOnChatRecordTouchListener(onChatRecordTouchListener)`   | 设置聊天记录触摸监听器。             |
+| `setOnModifyMessageListener(onModifyMessageListener)`       | 设置修改消息监听器。                 |
+| `setOnReportMessageListener(onReportMessageListener)`       | 设置举报消息监听器。                 |
+| `setMsgTimeTextColor(msgTimeTextColor)`                     | 设置消息时间文本颜色。               |
+| `setMsgTimeTextSize(msgTimeTextSize)`                       | 设置消息时间文本大小。               |
+| `setReceivedMsgBubbleBackground(receivedMsgBubbleBackground)` | 设置接收消息的气泡背景。             |
+| `setSentBubbleBackground(sentBubbleBackground)`             | 设置发送消息的气泡背景。             |
+| `showNickname(false)`                                       | 设置是否显示昵称。                       |
+| `.hideReceiverAvatar(false)`                                 | 设置是否隐藏接收者头像。                 |
+| `.hideSenderAvatar(true)`                                    | 设置是否隐藏发送者头像。                 |
+| `setChatBackground(chatBackground)`                         | 设置聊天界面背景。                   |
+| `setChatInputMenuBackground(inputMenuBackground)`           | 设置聊天输入菜单背景。               |
+| `setChatInputMenuHint(inputMenuHint)`                       | 设置聊天输入菜单提示文本。           |
+| `sendMessageByOriginalImage(true)`                          | 是否发送原图。<br/> - `true`：是；<br/> - (默认) `false`: 否。                       |
+| `setEmptyLayout(R.layout.layout_chat_empty)`                | 设置空布局。                         |
+| `setCustomAdapter(customAdapter)`                           | 设置自定义适配器。                   |
+| `setCustomFragment(myChatFragment)`                         | 设置自定义Fragment。                 |
 
 ## 设置消息列表背景
 
@@ -32,11 +107,10 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 对于消息列表Item `ChatUlKitRow`，你可以进行自定义设置，例如：
 - 添加自定义消息列表Item
-- 设置默认的头像和昵称以及样式
+- 设置默认的头像和昵称及其样式
 - 设置消息气泡
-- 设置消息时间
+- 设置消息日期
 - 设置长按消息菜单
-- 设置消息状态图标
 - 设置消息事件监听
 
 ### 添加自定义消息列表Item 
@@ -156,6 +230,8 @@ fragment?.let { fragment ->
 
 你可以通过 `UIKitChatFragment#Builder` 设置消息气泡。
 
+// TODO：添加消息气泡的截图
+
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
 // easeChatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
@@ -176,6 +252,8 @@ fragment?.let { fragment ->
 
 ### 设置消息日期
 
+// TODO：准确地说是消息时间
+
 你可以设置消息的发送和接收日期的格式和样式。
 
 <ImageGallery>
@@ -183,6 +261,8 @@ fragment?.let { fragment ->
 </ImageGallery>
 
 #### 设置日期格式
+
+// TODO：设置日期格式是放基础还是高阶？
 
 `ChatUIKitDateFormatConfig` 支持设置消息日期的格式：
 
@@ -226,51 +306,9 @@ fragment?.let { fragment ->
 Builder 不支持设置时间背景。若设置时间背景，需使用 `ChatUIKitMessageListLayout#setTimeBackground(Drawable?)` 或 设置 XML 属性 `ease_chat_item_time_background`，详见 [高级自定义文档](chatuikit_chat_list_build.html#设置消息日期样式)。
 :::
 
-### 设置消息状态图标
-
-#### 替换图标资源
-
-如需自定义消息状态图标，你可在 App 工程中同名覆盖以下 Drawable 资源：
-
-| 状态     | Drawable 资源名             |
-| :------- | :-------------------------- |
-| 已发送 | `uikit_msg_status_sent`     |
-| 已送达 | `uikit_msg_status_received` |
-| 已读   | `uikit_msg_status_read`     |
-
-#### 状态显示规则
-
-消息已送达和已读图标的显示行为与 SDK 初始化的 `ChatOptions` 配置有关：
-
-- 当 `requireDeliveryAck = true` 且消息收到送达回执时，显示 **已送达** 图标；
-- 当 `requireAck = true` 且消息收到已读回执时，显示消 **已读** 图标。
-
-```kotlin
-// SDK 初始化时设置（示例：参考 DemoHelper#initChatOptions）
-val options = ChatOptions().apply {
-    // 是否需要已读回执
-    requireAck = true
-    // 是否需要送达回执
-    requireDeliveryAck = true
-}
-ChatUIKitClient.init(context, options)
-```
-
-#### 隐藏状态图标
-
-- 方式 1：仅隐藏“已读/已送达”
-
-将 `requireAck` 或 `requireDeliveryAck` 设为 `false`，则对应状态图标不会显示，但发送成功后仍会显示已发送图标。
-
-- 方式 2：完全隐藏所有发送状态图标（含已发送）
-
-需要自定义发送消息的 Row 布局/Row（例如，在 App 工程中同名覆盖各类 `uikit_row_sent_*.xml` 并移除 `tv_delivered`/`tv_ack`），或提供自定义 Row/ViewHolder 实现。
-
 ## 设置长按消息菜单
 
 在消息列表中长按任意消息，即可弹出操作菜单，支持复制、回复、转发、置顶、多选、翻译、创建话题等丰富功能。
-
-### 设置菜单风格
 
 UIKit 提供两种风格的消息长按菜单样式，你可以灵活选择实现：
 
@@ -291,65 +329,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
   <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="类似微信样式" />
 </ImageGallery>
 
-### 设置菜单项
-
-`ChatUIKitLayout` 提供完整的长按菜单项管理能力，如下表所示：
-
-| 方法                         | 描述                                                             |
-| ---------------------------- | ---------------------------------------------------------------- |
-| `addItemMenu()`             | 添加新菜单项。                                                 |
-| `clearMenu()`                | 清除菜单项。                                                     |
-| `findItemVisible()`          | 设置 `itemId` 显示或隐藏指定菜单项。                           |
-| `setOnMenuChangeListener() ` | 设置菜单项的点击事件监听，`UIKitChatFragment` 中已经设置该监听。 |
-
-- 添加新菜单项：
-
-```kotlin
-binding?.let {
-    it.layoutChat.addItemMenu(menuId, menuOrder, menuTile)
-}
-```
-
-- 清除所有菜单项：
-
-```kotlin
-binding?.let {
-    it.layoutChat.clearMenu()
-}
-```
-
-- 显示或隐藏指定菜单项：
-  
-  通过指定 `itemId` 设置菜单项的可见性。  
-
-```kotlin
-binding?.let {
-    it.layoutChat.findItemVisible(itemId: Int, visible: Boolean)
-}
-```
-
-- 处理菜单事件
-
-`UIKitChatFragment` 已预设菜单点击监听。 自定义 `Fragment` 继承 `UIKitChatFragment` 后，可重写以下方法实现监听：
-
-```kotlin
-override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) {
-    // 菜单展示前的回调事件，可以通过 helper 对象设置菜单项是否展示。
-}
-
-override fun onMenuItemClick(item: ChatUIKitMenuItem?, message: ChatMessage?): Boolean {
-    // 菜单项点击事件，设置返回 true 表示拦截该事件。
-    return false
-}
-
-override fun onDismiss() {
-    // 处理快捷菜单的隐藏事件。
-}
-```
-
-- 设置菜单样式
-
-关于消息长按菜单的样式的设置，包括菜单背景和菜单项的图标、文字颜色和大小，详见 [高级定制文档](chatuikit_chat_list_avanced.html#设置菜单样式)。
+关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [高级定制文档](chatuikit_chat_list_avanced.html#设置长按消息菜单)。
 
 ## 设置事件监听
 
@@ -387,10 +367,6 @@ fragment?.let { fragment ->
         .commit()
 }        
 ```
-
-## 相关资源
-
-在 App 工程中，可通过放置同名资源（`drawable`/`layout`/`values`）来覆盖 UIKit 默认实现，从而自定义界面与功能。详见 [高级自定义说明](chatuikit_chat_list_advanced.html)。
 
 ## 可重写方法标记
 

@@ -130,6 +130,7 @@ const chatUikitSidebar = [
    { type: "separator", only: ["android", "harmonyos", "react-native", "flutter"]} as any,
   { text: "添加依赖", link: "chatuikit_dependency.html", only: ["android", "harmonyos"] },
   { text: "初始化", link: "chatuikit_initialization.html", only: ["android", "harmonyos"] },
+  { text: "页面标题栏", link: "chatuikit_titlebar.html", only: ["android"] },
   { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["react-native", "flutter"] },
   {
       text: "会话列表",
@@ -141,9 +142,16 @@ const chatUikitSidebar = [
           text: "自定义页面",
           collapsible: true,
           children: [
-            { text: "自定义标题栏", link: "chatuikit_conversation_titlebar.html" },
             { text: "自定义搜索栏", link: "chatuikit_conversation_searchbar.html" },
-            { text: "自定义会话列表", link: "chatuikit_conversation_list.html" },
+            {
+              text: "自定义会话列表",
+              collapsible: true,
+              children: [
+               { text: "基础定制", link: "chatuikit_conversation_list_basic.html" },
+               { text: "高级定制", link: "chatuikit_conversation_list_advanced.html" },
+             ],
+            only: ["android"],
+          },
           ],
         only: ["android"],
   },
@@ -160,14 +168,12 @@ const chatUikitSidebar = [
           text: "自定义页面",
           collapsible: true,
           children: [
-            { text: "自定义标题栏", link: "chatuikit_chat_titlebar.html" },
-            { text: "自定义消息列表", link: "chatuikit_chat_list.html" },
             {
               text: "自定义消息列表",
               collapsible: true,
               children: [
-               { text: "常见定制", link: "chatuikit_chat_list.html" },
-               { text: "资源配置", link: "chatuikit_chat_list_resource.html" },
+               { text: "基础定制", link: "chatuikit_chat_list_basic.html" },
+               { text: "高级定制", link: "chatuikit_chat_list_advanced.html" },
              ],
             only: ["android"],
           },

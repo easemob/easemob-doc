@@ -1,8 +1,57 @@
-# 设置消息列表
+# 消息列表项的高级定制
 
-消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何设置和自定义消息列表和消息列表 Item。
+消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何通过 `ChatUIKitMessageListLayout` 实现消息列表项的高级定制。
 
 // TODO：添加图片，列明消息气泡等
+
+## 概述
+
+你可以通过 `ChatUIKitMessageListLayout` 设置消息列表项：
+
+```kotlin
+val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.chatMessageListLayout
+```
+
+`ChatUIKitMessageListLayout` 提供如下方法：
+
+| 方法                        | 描述                                                         |
+| --------------------------- | ------------------------------------------------------------ |
+| `setViewModel()`              | UIKit 中提供了默认的实现 `ChatUIKitMessageListViewModel`，开发者可以继承 `IChatMessageListRequest` 添加自己的数据逻辑。 |
+| `setMessagesAdapter()`        | 设置消息列表的适配器，需要是 `ChatUIKitMessagesAdapter` 的子类。 |
+| `getMessagesAdapter()`        | 返回消息列表的适配器。                                       |
+| `addHeaderAdapter()`          | 添加消息列表的头布局的适配器。                               |
+| `addFooterAdapter()`          | 添加消息列表的尾布局的适配器。                               |
+| `removeAdapter()`             | 移除指定适配器。                                             |
+| `addItemDecoration()`         | 添加消息列表的装饰器。                                       |
+| `removeItemDecoration()`      | 移除消息列表的装饰器。                                       |
+| `setAvatarDefaultSrc()`       | 设置条目的默认头像。                                         |
+| `setAvatarShapeType()`        | 设置头像的样式，分为默认样式，圆形和矩形三种样式。           |
+| `showNickname()`              | 是否展示条目的昵称，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+| `setItemSenderBackground()`   | 设置发送方的背景，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+| `etItemReceiverBackground()` | 设置接收方的背景，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+| `setItemTextSize()`           | 设置文本消息的字体大小。                                     |
+| `setItemTextColor()`          | 设置文本消息的字体颜色。                                     |
+| `setTimeTextSize()`           | 设置时间线文本的字体大小，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+| `setTimeTextColor()`          | 设置时间线文本的颜色，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+| `setTimeBackground()`         | 设置时间线的背景。                                           |
+| `hideChatReceiveAvatar()`     | 不展示接收方头像，默认为展示，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+| `hideChatSendAvatar()`        | 不展示发送方头像，默认为展示，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+| `setOnChatErrorListener()`    | 设置发送消息时的错误回调，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+
+
+```kotlin
+// 获取 ChatUIKitMessageListLayout 对象
+val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.chatMessageListLayout
+chatMessageListLayout?.let{
+    it.setTimeBackground()      //设置时间线的背景。 
+    it.setItemTextSize()        //设置文本消息的字体大小。
+    it.setItemTextColor()       //设置文本消息的字体颜色。
+    it.setAvatarDefaultSrc()    //设置条目的默认头像。
+    it.setAvatarShapeType()     //设置头像的样式，分为默认样式，圆形和矩形三种样式。
+    ...
+} 
+
+```
 
 ## 设置头像和昵称
 
@@ -63,6 +112,8 @@ chatMessageListLayout?.let{
 
 ## 设置消息日期样式
 
+ // TODO：还需要补齐`UIKitChatFragment.Builder` 的那些设置吗？ 
+
 `ChatUIKitMessageListLayout` 提供了如下方法设置消息时间的样式：
 
 | 方法                | 描述                                                                               |
@@ -86,24 +137,127 @@ chatMessageListLayout?.let{
 
 关于设置消息日期的格式以及通过 `UIKitChatFragment.Builder` 设置消息时间样式，详见 [基础自定义文档](chatuikit_chat_list_basic.html#设置消息日期)。
 
-## 设置长按消息菜单样式
+## 设置消息状态图标
+
+#### 替换图标资源
+
+如需自定义消息状态图标，你可在 App 工程中同名覆盖以下 Drawable 资源：
+
+| 状态     | Drawable 资源名             |
+| :------- | :-------------------------- |
+| 已发送 | `uikit_msg_status_sent`     |
+| 已送达 | `uikit_msg_status_received` |
+| 已读   | `uikit_msg_status_read`     |
+
+#### 状态显示规则
+
+消息已送达和已读图标的显示行为与 SDK 初始化的 `ChatOptions` 配置有关：
+
+- 当 `requireDeliveryAck = true` 且消息收到送达回执时，显示 **已送达** 图标；
+- 当 `requireAck = true` 且消息收到已读回执时，显示消 **已读** 图标。
+
+```kotlin
+// SDK 初始化时设置（示例：参考 DemoHelper#initChatOptions）
+val options = ChatOptions().apply {
+    // 是否需要已读回执
+    requireAck = true
+    // 是否需要送达回执
+    requireDeliveryAck = true
+}
+ChatUIKitClient.init(context, options)
+```
+
+#### 隐藏状态图标
+
+- 方式 1：仅隐藏“已读/已送达”
+
+将 `requireAck` 或 `requireDeliveryAck` 设为 `false`，则对应状态图标不会显示，但发送成功后仍会显示已发送图标。
+
+- 方式 2：完全隐藏所有发送状态图标（含已发送）
+
+需要自定义发送消息的 Row 布局/Row（例如，在 App 工程中同名覆盖各类 `uikit_row_sent_*.xml` 并移除 `tv_delivered`/`tv_ack`），或提供自定义 Row/ViewHolder 实现。
+
+## 设置长按消息菜单
 
 在消息列表中长按任意消息，即可弹出操作菜单，支持复制、回复、转发、置顶、多选、翻译、创建话题等丰富功能。
 
 UIKit 支持设置消息长按菜单的样式，包括菜单背景和菜单项的图标、文字颜色和大小。
 
-关于选择微信样式菜单或仿系统 `UIActionSheet` 样式菜单、添加、移除、显示/隐藏菜单项以及事件设置，详见 [消息列表基础自定义文档](#chatuikit_chat_list_basic.html)。
+关于选择微信样式菜单或仿系统 `UIActionSheet` 样式，详见 [消息列表基础自定义文档](#chatuikit_chat_list_basic.html)。
 
-### 设置菜单背景色
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_1.png" title="UIActionSheet" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="类似微信样式" />
+</ImageGallery>
+
+#### 设置菜单背景色
 
 菜单背景颜色同样通过资源覆盖的方式进行自定义：
 
 | 菜单样式                        | 背景调整方式                                                 |
 | :------------------------------ | :----------------------------------------------------------- |
-| 微信样式（PopupWindow）     | 覆盖 `drawable/uikit_shape_popup_radius_8` 资源，可修改背景色、圆角、描边等样式。 |
-| 底部弹窗样式（BottomSheet） | 菜单列表的布局文件位于 `res/layout/uikit_dialog_menu.xml` 中。若需自定义背景，可在您的 App 工程中覆盖以下样式：<br>  - `ease_item_menu_top_layout_style`<br>  - `ease_conv_item_menu_list`<br>  - `ease_conv_item_menu_divider`<br>  - `ease_conv_item_menu_cancel` |
+| 微信风格（PopupWindow）     | 覆盖 `drawable/uikit_shape_popup_radius_8` 资源，可修改背景色、圆角、描边等样式。 |
+| 底部弹窗风格（BottomSheet） | 菜单列表的布局文件位于 `res/layout/uikit_dialog_menu.xml` 中。若需自定义背景，可在您的 App 工程中覆盖以下样式：<br>  - `ease_item_menu_top_layout_style`<br>  - `ease_conv_item_menu_list`<br>  - `ease_conv_item_menu_divider`<br>  - `ease_conv_item_menu_cancel` |
 
-### 设置菜单项图标
+#### 管理菜单项
+
+`ChatUIKitLayout` 提供完整的长按菜单项管理能力，如下表所示：
+
+| 方法                         | 描述                                                             |
+| ---------------------------- | ---------------------------------------------------------------- |
+| `addItemMenu()`             | 添加新菜单项。                                                 |
+| `clearMenu()`                | 清除菜单项。                                                     |
+| `findItemVisible()`          | 设置 `itemId` 显示或隐藏指定菜单项。                           |
+| `setOnMenuChangeListener() ` | 设置菜单项的点击事件监听，`UIKitChatFragment` 中已经设置该监听。 |
+
+- 添加新菜单项：
+
+```kotlin
+binding?.let {
+    it.layoutChat.addItemMenu(menuId, menuOrder, menuTile)
+}
+```
+
+- 清除所有菜单项：
+
+```kotlin
+binding?.let {
+    it.layoutChat.clearMenu()
+}
+```
+
+- 显示或隐藏指定菜单项：
+  
+  通过指定 `itemId` 设置菜单项的可见性。  
+
+```kotlin
+binding?.let {
+    it.layoutChat.findItemVisible(itemId: Int, visible: Boolean)
+}
+```
+
+- 处理菜单事件
+
+// TODO：这个是基本还是高级
+
+`UIKitChatFragment` 已预设菜单点击监听。自定义 `Fragment` 继承 `UIKitChatFragment` 后，可重写以下方法实现监听：
+
+```kotlin
+override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) {
+    // 菜单展示前的回调事件，可以通过 helper 对象设置菜单项是否展示。
+}
+
+override fun onMenuItemClick(item: ChatUIKitMenuItem?, message: ChatMessage?): Boolean {
+    // 菜单项点击事件，设置返回 true 表示拦截该事件。
+    return false
+}
+
+override fun onDismiss() {
+    // 处理快捷菜单的隐藏事件。
+}
+```
+
+#### 设置菜单项图标
 
 你可以在 `onPreMenu()` 中通过 `ChatUIKitChatMenuHelper` 动态控制菜单项的图标：
 
@@ -137,7 +291,7 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 }
 ```
 
-### 设置菜单项文字颜色和大小
+#### 设置菜单项文字颜色和大小
 
 1. `ChatUIKitMenuItem` 支持通过 `titleColor` 设置 **文字颜色**（同时会作为 icon tint 颜色）：
 
@@ -147,12 +301,12 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 }
 ```
 
-2. 根据菜单样式的不同，文字大小的调整方式有所区别：
+2. 根据菜单风格的不同，文字大小的调整方式有所区别：
 
-| 菜单样式                        | 调整方式                                                     |
+| 菜单风格                        | 调整方式                                                     |
 | :------------------------------ | :----------------------------------------------------------- |
-| 微信样式（PopupWindow）    | 在 App 工程中**同名覆盖** `layout/uikit_item_select_text_pop.xml`，修改 `tv_pop_func` 的 `android:textSize` 属性。 |
-| 底部弹窗样式（BottomSheet） | 在 App 工程中**同名覆盖**以下样式之一： <br/> - `ease_chat_extend_menu_item_title` <br/> - `ease_chat_extend_menu_horizontal_item_title` <br/>调整其中的 `textAppearance` 或 `textSize` 属性。（对应布局文件：`uikit_chat_menu_item.xml` / `uikit_chat_menu_item_horizontal.xml`） |
+| 微信风格（PopupWindow）    | 在 App 工程中**同名覆盖** `layout/uikit_item_select_text_pop.xml`，修改 `tv_pop_func` 的 `android:textSize` 属性。 |
+| 底部弹窗风格（BottomSheet） | 在 App 工程中**同名覆盖**以下样式之一： <br/> - `ease_chat_extend_menu_item_title` <br/> - `ease_chat_extend_menu_horizontal_item_title` <br/>调整其中的 `textAppearance` 或 `textSize` 属性。（对应布局文件：`uikit_chat_menu_item.xml` / `uikit_chat_menu_item_horizontal.xml`） |
 
 ## 相关资源
 
