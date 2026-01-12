@@ -128,7 +128,7 @@
 | team id     | String  | 是 | 输入推送证书的 Team ID。该参数仅对 p8 证书有效。  |
 | 集成环境      | | 是 | 集成环境，包括开发环境和生产环境。 |
 | Bundle ID     | String  | 是 | 绑定 ID。详见 APNs 集成文档中 [创建推送证书](/document/ios/push/push_apns.html#创建推送证书)的 [步骤二](/document/ios/push/push_apns.html#步骤二-创建-app-id) 中创建 App ID 时设置的 Bundle ID。<br/> - 上传 VoIP 服务证书时，Bundle ID 末尾需要加 .voip 后缀 `nvyvtp.dabaoiian`，例如，**Bundle ID** 为 **com.example.demo**，上传对应 VoIP 证书时需要填写 **com.example.demo.voip**。|
-| 铃声    | String  | 否 | 接收方收到推送通知时的铃声提醒，该参数仅对离线推送有效：<br/> - 设置的铃声最多为 30 秒。若超过该时间，系统会启用默认铃声 default。<br/> - 铃声文件只支持 aiff、wav 和 caf 格式，例如铃声命名 test.caf。<br/> - 铃声文件必须放在 app 的 /Library/Sounds 目录中。<br/> - 如果铃声文件未找到，或不填，响铃为系统默认铃声。 |
+| 铃声    | String  | 否 | 接收方收到推送通知时的铃声提醒，该参数仅对离线推送有效：<br/> - 设置的铃声最多为 30 秒。若超过该时间，系统会启用默认铃声 default。<br/> - 铃声文件只支持 aiff、wav 和 caf 格式，例如铃声命名 test.caf。<br/> - 如果铃声文件未找到，或不填，响铃为系统默认铃声。 |
 
 ## **在客户端集成 APNs**
 
