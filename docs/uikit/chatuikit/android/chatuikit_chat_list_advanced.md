@@ -1,12 +1,12 @@
-# 消息列表项的高级定制
+# 消息列表的高级设置
 
-消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何通过 `ChatUIKitMessageListLayout` 实现消息列表项的高级定制。
+消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何通过 `ChatUIKitMessageListLayout` 实现消息列表的高级设置。
 
 // TODO：添加图片，列明消息气泡等
 
 ## 概述
 
-你可以通过 `ChatUIKitMessageListLayout` 设置消息列表项：
+你可以通过 `ChatUIKitMessageListLayout` 设置消息列表：
 
 ```kotlin
 val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.chatMessageListLayout
@@ -24,9 +24,9 @@ val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.cha
 | `removeAdapter()`             | 移除指定适配器。                                             |
 | `addItemDecoration()`         | 添加消息列表的装饰器。                                       |
 | `removeItemDecoration()`      | 移除消息列表的装饰器。                                       |
-| `setAvatarDefaultSrc()`       | 设置条目的默认头像。                                         |
+| `setAvatarDefaultSrc()`       | 设置消息条目的默认头像。                                         |
 | `setAvatarShapeType()`        | 设置头像的样式，分为默认样式，圆形和矩形三种样式。           |
-| `showNickname()`              | 是否展示条目的昵称，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+| `showNickname()`              | 是否展示消息条目的昵称，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
 | `setItemSenderBackground()`   | 设置发送方的背景，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
 | `etItemReceiverBackground()` | 设置接收方的背景，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
 | `setItemTextSize()`           | 设置文本消息的字体大小。                                     |
@@ -46,7 +46,7 @@ chatMessageListLayout?.let{
     it.setTimeBackground()      //设置时间线的背景。 
     it.setItemTextSize()        //设置文本消息的字体大小。
     it.setItemTextColor()       //设置文本消息的字体颜色。
-    it.setAvatarDefaultSrc()    //设置条目的默认头像。
+    it.setAvatarDefaultSrc()    //设置消息条目的默认头像。
     it.setAvatarShapeType()     //设置头像的样式，分为默认样式，圆形和矩形三种样式。
     ...
 } 
@@ -65,8 +65,8 @@ chatMessageListLayout?.let{
 // easeChatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
 val fragment = UIKitChatFragment.Builder(conversationID, easeChatType)
     .showNickname(true)                 // 是否显示昵称：true：是；(默认) false: 否。
-    .hideReceiverAvatar(false)          // 是否隐藏接收方头像：true 隐藏；false 显示（默认显示）。
-    .hideSenderAvatar(false)            // 是否隐藏发送方头像：true 隐藏；false 显示（默认显示）。
+    .hideReceiverAvatar(false)          // 是否隐藏接收方头像：true 隐藏；（默认）false 显示。
+    .hideSenderAvatar(false)            // 是否隐藏发送方头像：true 隐藏；（默认）false 显示。
     .build()
 
 fragment?.let { fragment ->
@@ -100,7 +100,7 @@ chatMessageListLayout?.let{
 } 
 ```
 
-除了 `chatMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置消息气泡，详见 [基础自定义文档](chatuikit_chat_list_basic.html#设置消息气泡)。两种方式的区别如下表所示：
+除了 `chatMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置消息气泡，详见 [基础设置说明](chatuikit_chat_list_basic.html#设置消息气泡)。两种方式的区别如下表所示：
 
 | 项         | ChatUIKitMessageListLayout | UIKitChatFragment.Builder | 说明                  |
 | :------------- | :------------------------- | :------------------------ | :-------------------- |
@@ -110,17 +110,15 @@ chatMessageListLayout?.let{
 | 文本消息的字体颜色       | `setItemTextColor`          | 不支持      | 
 | 是否发送原图       | 不支持    |  `sendMessageByOriginalImage`     | - `true`：是 <br/> - (默认) `false`: 否     | 
 
-## 设置消息日期样式
-
- // TODO：还需要补齐`UIKitChatFragment.Builder` 的那些设置吗？ 
+## 设置消息时间样式
 
 `ChatUIKitMessageListLayout` 提供了如下方法设置消息时间的样式：
 
 | 方法                | 描述                                                                               |
 | ------------------- | ---------------------------------------------------------------------------------- |
-| `setTimeTextSize()`   | 设置消息日期文本的字体大小，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
-| `setTimeTextColor()`  | 设置消息日期文本的颜色，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。     |
-| `setTimeBackground()` | 设置消息日期的背景。                                                               |
+| `setTimeTextSize()`   | 设置消息时间文本的字体大小，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+| `setTimeTextColor()`  | 设置消息时间文本的颜色，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。     |
+| `setTimeBackground()` | 设置消息时间的背景。          |
 
 示例代码如下：
 
@@ -128,14 +126,14 @@ chatMessageListLayout?.let{
 // 获取 ChatUIKitMessageListLayout 对象
 val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.chatMessageListLayout
 chatMessageListLayout?.let{
-    it.setTimeTextSize(12)  // 设置消息日期文本的字体大小（单位：px ）
-    it.setTimeTextColor(Color.GRAY) // 设置消息日期文本的颜色
-    it.setTimeBackground(ContextCompat.getDrawable(it.context, R.drawable.your_time_bg)) // 设置消息日期的背景
+    it.setTimeTextSize(12)  // 设置消息时间文本的字体大小（单位：px ）
+    it.setTimeTextColor(Color.GRAY) // 设置消息时间文本的颜色
+    it.setTimeBackground(ContextCompat.getDrawable(it.context, R.drawable.your_time_bg)) // 设置消息时间的背景
     ...
 } 
 ```
 
-关于设置消息日期的格式以及通过 `UIKitChatFragment.Builder` 设置消息时间样式，详见 [基础自定义文档](chatuikit_chat_list_basic.html#设置消息日期)。
+关于设置消息时间的格式以及通过 `UIKitChatFragment.Builder` 设置消息时间样式，详见 [基本设置说明](chatuikit_chat_list_basic.html#设置消息时间)。
 
 ## 设置消息状态图标
 
@@ -169,11 +167,11 @@ ChatUIKitClient.init(context, options)
 
 #### 隐藏状态图标
 
-- 方式 1：仅隐藏“已读/已送达”
+- 方式一：仅隐藏“已读/已送达”
 
 将 `requireAck` 或 `requireDeliveryAck` 设为 `false`，则对应状态图标不会显示，但发送成功后仍会显示已发送图标。
 
-- 方式 2：完全隐藏所有发送状态图标（含已发送）
+- 方式二：完全隐藏所有发送状态图标（含已发送）
 
 需要自定义发送消息的 Row 布局/Row（例如，在 App 工程中同名覆盖各类 `uikit_row_sent_*.xml` 并移除 `tv_delivered`/`tv_ack`），或提供自定义 Row/ViewHolder 实现。
 
@@ -183,7 +181,7 @@ ChatUIKitClient.init(context, options)
 
 UIKit 支持设置消息长按菜单的样式，包括菜单背景和菜单项的图标、文字颜色和大小。
 
-关于选择微信样式菜单或仿系统 `UIActionSheet` 样式，详见 [消息列表基础自定义文档](#chatuikit_chat_list_basic.html)。
+关于选择微信样式菜单或仿系统 `UIActionSheet` 样式，详见 [消息列表基本设置说明](#chatuikit_chat_list_basic.html)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/message_longpress_1.png" title="UIActionSheet" />
@@ -237,8 +235,6 @@ binding?.let {
 ```
 
 - 处理菜单事件
-
-// TODO：这个是基本还是高级
 
 `UIKitChatFragment` 已预设菜单点击监听。自定义 `Fragment` 继承 `UIKitChatFragment` 后，可重写以下方法实现监听：
 
@@ -647,7 +643,7 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 <p>uikit_chat_item_multi_selector</p>
 </td>
 <td>
-<p>多选态item背景</p>
+<p>多选态条目背景</p>
 </td>
 </tr>
 <tr>

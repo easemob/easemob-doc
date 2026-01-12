@@ -12,7 +12,7 @@
 
 ### 标题栏
 
-会话列表页面与聊天页面、联系人列表页面、群详情页面、联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。详见 [设置标题栏](chatuikit_conversation_titlebar.html)。
+会话列表页面与聊天页面、联系人列表页面、群详情页面、联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。详见 [设置标题栏](chatuikit_titlebar.html)。
 
 ### 会话搜索栏
 
@@ -29,17 +29,13 @@
 
 在会话列表中，置顶的会话排在列表最上方。
 
-关于自定义，详见 [自定义会话列表](chatuikit_conversation_list.html)。
-
-### 会话列表 Item
-
-会话列表 Item 组件 `UikitItemConversationListBinding` 实现单条会话展示，包括会话名称、最新一条消息、最新一条消息的时间以及置顶和免打扰状态等。
+会话条目组件 `UikitItemConversationListBinding` 实现单条会话展示，包括会话名称、最新一条消息、最新一条消息的时间以及置顶和免打扰状态等。
 
 - **会话名称和头像**：对于单聊, 会话名称为对端用户的昵称，若对端用户未设置昵称则展示对方用户 ID；会话头像是对方头像，若未设置则使用默认头像。对于群聊，会话名称为当前群组的名称或者群组 ID，头像为默认头像。
-- **点击会话**：点击单个会话列表 Item，跳转到会话详情页面。
-- **长按会话**：长按单个会话列表 Item 显示会话操作弹窗，默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作。
+- **点击会话**：点击单个会话条目，跳转到会话详情页面。
+- **长按会话**：长按单个会话条目显示会话操作弹窗，默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作。
 
-关于自定义，详见 [设置会话列表Item](chatuikit_conversation_item.html)。
+关于会话条目的自定义，详见 [会话列表的基础自定义](chatuikit_conversation_list_basic.html) 和 [高级自定义](chatuikit_conversation_list_advanced.html) 说明。
 
 ## 创建会话列表页面
 

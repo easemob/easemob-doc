@@ -1,10 +1,10 @@
-# 消息列表的基本定制
+# 消息列表的基本设置
 
-消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何通过 `UIKitChatFragment.Builder` 实现消息列表和消息列表 Item 的基本定制。
+消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何通过 `UIKitChatFragment.Builder` 实现消息列表和消息条目的基本设置。
 
-如需通过 `ChatUIKitMessageListLayout` 进行高级定制，详见 [高级定制说明](chatuikit_chat_list_advanced.html)。
+如需通过 `ChatUIKitMessageListLayout` 进行高级设置，详见 [高级定制说明](chatuikit_chat_list_advanced.html)。
 
-// TODO：添加图片，列明消息气泡、消息列表项、头像和昵称消息时间等
+// TODO：添加图片，列明消息气泡、消息条目、头像和昵称消息时间等
 
 ## 概述
 
@@ -103,19 +103,19 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 // TODO：添加图片
 
-## 设置消息列表Item
+## 设置消息条目
 
-对于消息列表Item `ChatUlKitRow`，你可以进行自定义设置，例如：
-- 添加自定义消息列表Item
+对于消息条目 `ChatUlKitRow`，你可以进行自定义设置，例如：
+- 添加自定义消息条目
 - 设置默认的头像和昵称及其样式
 - 设置消息气泡
 - 设置消息日期
 - 设置长按消息菜单
 - 设置消息事件监听
 
-### 添加自定义消息列表Item 
+### 添加自定义消息条目
 
-你可以自定义消息表中列表项的内容，即各种消息类型的自定义消息布局。
+你可以自定义消息条目的内容，即各种消息类型的自定义消息布局。
 
 开发者可以继承 `ChatUIKitRow`、`ChatUIKitRowViewHolder` 和 `ChatUIKitMessagesAdapter` 实现自己的 `CustomTypeChatRow`、`CustomChatTypeViewViewHolder` 和 `CustomMessageAdapter`，然后将 `CustomMessageAdapter` 设置到 `UIKitChatFragment#Builder#setCustomAdapter` 中。
 
@@ -224,7 +224,7 @@ fragment?.let { fragment ->
 
 ```
 
-除了 `UIKitChatFragment.Builder`，你还可以通过 `ChatUIKitMessageListLayout` 设置头像和昵称，详见 [高级自定义文档](chatuikit_chat_list_advanced.html#设置头像和昵称)。
+除了 `UIKitChatFragment.Builder`，你还可以通过 `ChatUIKitMessageListLayout` 设置头像和昵称，详见 [高级设置说明](chatuikit_chat_list_advanced.html#设置头像和昵称)。
 
 ### 设置消息气泡
 
@@ -248,43 +248,39 @@ fragment?.let { fragment ->
 }
 ```
 
-除了 `UIKitChatFragment.Builder`，你可以通过 `chatMessageListLayout` 设置消息气泡，详见 [高级自定义文档](chatuikit_chat_list_build.html#设置消息气泡)。
+除了 `UIKitChatFragment.Builder`，你可以通过 `chatMessageListLayout` 设置消息气泡，详见 [高级设置说明](chatuikit_chat_list_advanced.html#设置消息气泡)。
 
-### 设置消息日期
+### 设置消息时间
 
-// TODO：准确地说是消息时间
-
-你可以设置消息的发送和接收日期的格式和样式。
+你可以设置消息的发送和接收时间的格式和样式。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_message_date.png" title="设置消息日期" />
+  <ImageItem src="/images/uikit/chatuikit/android/custom_message_date.png" title="设置消息时间" />
 </ImageGallery>
 
-#### 设置日期格式
+#### 设置消息时间格式
 
-// TODO：设置日期格式是放基础还是高阶？
-
-`ChatUIKitDateFormatConfig` 支持设置消息日期的格式：
+`ChatUIKitDateFormatConfig` 支持设置消息时间格式：
 
 | 属性                  | 描述                                                                |
 | --------------------- | ------------------------------------------------------------------- |
-| `chatTodayFormat`    | 消息列表当天日期格式，英文环境默认为："HH:mm"。                     |
+| `chatTodayFormat`    | 消息列表当天的时间格式，英文环境默认为："HH:mm"。                     |
 | `chatOtherDayFormat`  | 消息列表其他日期的格式，英文环境默认为： "MMM dd, HH:mm"。          |
-| `chatOtherYearFormat` | 消息列表其他年份的日期格式，英文环境默认为： "MMM dd, yyyy HH:mm"。 |
+| `chatOtherYearFormat` | 消息列表其他年份的时间格式，英文环境默认为： "MMM dd, yyyy HH:mm"。 |
 
 ```kotlin
     // 日期语言区域切换（基于手机区域语言设置）默认值为 false 采用 ENGLISH。 
     // 举例：chatOtherDayFormat = "MMM dd, yyyy"  a.false: Sep 25, 2024  b.true(本地语言中文): 9月 25, 2024
     ChatUIKitClient.getConfig()?.dateFormatConfig?.useDefaultLocale = true  
-    // 消息中当天的日期格式
+    // 消息中当天的时间格式
     ChatUIKitClient.getConfig()?.dateFormatConfig?.chatTodayFormat = "HH:mm"
-    // 消息中其他日期的日期格式
+    // 消息中其他日期的时间格式
     ChatUIKitClient.getConfig()?.dateFormatConfig?.chatOtherDayFormat = "MMM dd, yyyy"
-    // 消息中其他年份的日期格式
+    // 消息中其他年份的时间格式
     ChatUIKitClient.getConfig()?.dateFormatConfig?.chatOtherYearFormat = "MMM dd, yyyy HH:mm"
 ```
 
-#### 设置日期样式
+#### 设置消息时间样式
 
 `UIKitChatFragment#Builder` 支持设置消息时间样式：
 
@@ -303,7 +299,7 @@ fragment?.let { fragment ->
 ```
 
 :::tip
-Builder 不支持设置时间背景。若设置时间背景，需使用 `ChatUIKitMessageListLayout#setTimeBackground(Drawable?)` 或 设置 XML 属性 `ease_chat_item_time_background`，详见 [高级自定义文档](chatuikit_chat_list_build.html#设置消息日期样式)。
+Builder 不支持设置时间背景。若设置时间背景，需使用 `ChatUIKitMessageListLayout#setTimeBackground(Drawable?)` 或 设置 XML 属性 `ease_chat_item_time_background`，详见 [高级设置说明](chatuikit_chat_list_advanced.html#设置消息时间样式)。
 :::
 
 ## 设置长按消息菜单
@@ -329,11 +325,11 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
   <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="类似微信样式" />
 </ImageGallery>
 
-关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [高级定制文档](chatuikit_chat_list_avanced.html#设置长按消息菜单)。
+关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [高级设置文档](chatuikit_chat_list_avanced.html#设置长按消息菜单)。
 
 ## 设置事件监听
 
-通过 `UIKitChatFragment#Builder` 可设置消息列表Item 的各类交互事件监听，包括气泡区域及头像的点击与长按事件。
+通过 `UIKitChatFragment#Builder` 可设置消息条目的各类交互事件监听，包括气泡区域及头像的点击与长按事件。
 
 ```kotlin
     builder.setOnMessageItemClickListener(object : OnMessageItemClickListener{

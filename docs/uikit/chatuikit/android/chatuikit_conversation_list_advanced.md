@@ -1,23 +1,23 @@
-# 会话列表的高级定制
+# 会话列表的高级设置
 
-本文介绍如何通过 `ChatUIKitConversationListLayout` 实现会话列表 Item 的高级自定义配置，包括会话列表 Item 的样式、头像、长按菜单以及图标等。
+本文介绍如何通过 `ChatUIKitConversationListLayout` 实现会话列表的高级设置，包括会话条目的样式、头像、长按菜单以及图标等。
 
 // TODO：添加截图
 
 ## 概述
 
-要设置会话列表中列表项的内容，你需要先获取到 `ChatUIKitConversationListLayout` 对象，进行如下配置：
+要设置会话条目的内容，你需要先获取 `ChatUIKitConversationListLayout` 对象，进行如下配置：
 
 ```kotlin
     binding?.listConversation?.let{
-        it.setItemBackGround()      //设置条目的背景。
-        it.setItemHeight()          //设置条目的高度。
-        it.setAvatarDefaultSrc()    //设置条目的默认头像。
-        it.setAvatarSize()          //设置条目头像的大小。
-        it.setAvatarShapeType()     //设置条目头像的样式，分为默认 ImageView 样式，圆形和矩形三种样式。
-        it.setAvatarRadius()        //设置条目头像的圆角半径，样式设置为矩形时有效。
-        it.setAvatarBorderWidth()   //设置条目头像边框的宽度。 
-        it.setAvatarBorderColor()   //设置条目头像边框的颜色。
+        it.setItemBackGround()      //设置会话条目的背景。
+        it.setItemHeight()          //设置会话条目的高度。
+        it.setAvatarDefaultSrc()    //设置会话条目的默认头像。
+        it.setAvatarSize()          //设置会话条目头像的大小。
+        it.setAvatarShapeType()     //设置会话条目头像的样式，分为默认 ImageView 样式，圆形和矩形三种样式。
+        it.setAvatarRadius()        //设置会话条目头像的圆角半径，样式设置为矩形时有效。
+        it.setAvatarBorderWidth()   //设置会话条目头像边框的宽度。 
+        it.setAvatarBorderColor()   //设置会话条目头像边框的颜色。
         it.setNameTextSize()        //设置会话条目标题的文字大小。
         it.setNameTextColor()       //设置会话条目标题的文字颜色。 
         it.setMessageTextSize()     //设置会话条目内容的文字大小。
@@ -37,7 +37,7 @@
     }
 ```
 
-## 设置会话列表 Item 背景
+## 设置会话条目背景
 
 ```kotlin
     binding?.listConversation?.let{
@@ -45,7 +45,7 @@
     }
 ```
 
-## 设置会话列表 Item 高度
+## 设置会话条目高度
 
 ```kotlin
     binding?.listConversation?.let{
@@ -53,9 +53,9 @@
     }
 ```
 
-## 设置会话列表 Item 标题
+## 设置会话条目标题
 
-会话列表项标题通常显示会话名称，具体规则如下：
+会话条目的标题通常显示会话名称，规则如下：
 - 单聊会话：优先显示 `UserProfileProvider` 提供的好友备注/昵称（`remark/name`），否则显示对端 `userId`。
 - 群聊会话：优先显示 `GroupProfileProvider` 提供的群名称（`name`），其次查找本地群组信息，若存在则显示群名称，否则显示群组 ID。
 
@@ -77,9 +77,9 @@ binding?.listConversation?.let {
 }
 ```
 
-## 设置会话列表Item内容
+## 设置会话条目内容
 
-默认情况下，会话列表 Item 内容区域显示 **最新一条消息摘要**，例如，文字、图片、语音等会转换为对应的摘要文本。
+默认情况下，会话条目的内容区域显示 **最新一条消息摘要**，例如，文字、图片、语音等会转换为对应的摘要文本。
 
 你可以通过以下方法调整内容样式：
 - `setMessageTextSize(textSizePx: Int)`：设置内容文字大小，单位为 px。
@@ -95,13 +95,13 @@ binding?.listConversation?.let {
 }
 ```
 
-## 设置会话列表Item日期
+## 设置会话条目时间
 
-默认情况下，会话列表 Item 日期区域显示 **最新消息时间**（格式化后的时间字符串）。
+默认情况下，会话条目的时间区域显示 **最新消息时间**（格式化后的时间字符串）。
 
-你可以通过以下方法调整日期样式：
-- `setDateTextSize(textSizePx: Int)`：设置日期文字大小，单位为 px。
-- `setDateTextColor(@ColorInt textColor: Int)`：设置日期文字颜色。
+你可以通过以下方法调整时间样式：
+- `setDateTextSize(textSizePx: Int)`：设置时间的文字大小，单位为 px。
+- `setDateTextColor(@ColorInt textColor: Int)`：设置时间的文字颜色。
 
 ```kotlin
 val timeSizePx = resources.getDimensionPixelSize(R.dimen.ease_text_size_12)
@@ -113,11 +113,11 @@ binding?.listConversation?.let {
 }
 ```
 
-## 设置会话列表 Item 头像
+## 设置会话条目头像
 
 #### 设置默认头像
 
-会话列表 Item 的默认头像设置位于 `com.hyphenate.easeui.feature.conversation.viewholders.ChatUIKitConversationViewHolder#setData` 函数，会根据会话类型指向特定 ID 资源。如需修改默认头像，可通过以下两种方式实现：
+会话条目的默认头像设置位于 `com.hyphenate.easeui.feature.conversation.viewholders.ChatUIKitConversationViewHolder#setData` 函数，会根据会话类型指向特定 ID 资源。如需修改默认头像，可通过以下两种方式实现：
 - App 工程 `res/drawable/` 中同名覆盖以下资源：
   - `uikit_default_avatar`：单聊默认头像。
   - `uikit_default_group_avatar`：群聊默认头像。
@@ -134,21 +134,21 @@ binding?.listConversation?.let {
 ```kotlin
     binding?.listConversation?.let{
       
-        it.setAvatarSize()          //设置会话列表Item的头像大小。
-        it.setAvatarShapeType()     //设置会话列表Item的头像样式，分为默认 ImageView 样式，圆形和矩形三种样式。
-        it.setAvatarRadius()        //设置会话列表Item的头像圆角半径，样式设置为矩形时有效。
-        it.setAvatarBorderWidth()   //设置会话列表Item的头像边框宽度。 
-        it.setAvatarBorderColor()   //设置会话列表Item的头像边框颜色。
+        it.setAvatarSize()          //设置会话条目的头像大小。
+        it.setAvatarShapeType()     //设置会话条目的头像样式，分为默认 ImageView 样式，圆形和矩形三种样式。
+        it.setAvatarRadius()        //设置会话条目的头像圆角半径，样式设置为矩形时有效。
+        it.setAvatarBorderWidth()   //设置会话条目的头像边框宽度。 
+        it.setAvatarBorderColor()   //设置会话条目的头像边框颜色。
     }
 ```
 
-#### 隐藏会话列表 Item 头像
+#### 隐藏会话条目头像
 
-UIKit 暂未提供直接隐藏会话列表头像的开关选项。头像组件位于 `res/layout/uikit_item_conversation_list.xml` 中的 `@+id/avatar`（`ChatUIKitImageView`），并通过 `ChatUIKitConversationViewHolder` 进行头像图片的绑定。你可以通过以下三种方式实现头像隐藏：
+UIKit 暂未提供直接隐藏会话条目头像的开关选项。头像组件位于 `res/layout/uikit_item_conversation_list.xml` 中的 `@+id/avatar`（`ChatUIKitImageView`），并通过 `ChatUIKitConversationViewHolder` 进行头像图片的绑定。你可以通过以下三种方式实现头像隐藏：
 
 -（推荐）方式一：覆盖样式，将头像 View 设为 `gone`：
 
-在会话列表 Item 布局中，头像使用了 `style="@style/ease_conv_item_avatar"`，你可以在 App 工程同名覆盖该 style，实现全局头像隐藏：
+在会话条目布局中，头像使用 `style="@style/ease_conv_item_avatar"`，你可以在 App 工程同名覆盖该样式，实现全局头像隐藏：
 
 ```xml
 <!-- App 工程：res/values/uikit_conversation_styles.xml（文件名随意，style 名字一致即可生效） -->
@@ -183,7 +183,7 @@ UIKit 暂未提供直接隐藏会话列表头像的开关选项。头像组件�
 
 - 方式三：自定义 Adapter/ViewHolder（支持“只隐藏部分会话”的头像）
 
-如需根据会话类型或业务逻辑选择性隐藏头像，建议自定义 `CustomConversationListAdapter`/ViewHolder：
+如需根据会话类型或业务逻辑选择性隐藏头像，建议自定义 `CustomConversationListAdapter`/`ViewHolder`：
 
 ```kotlin
 override fun setData(item: ChatUIKitConversation?, position: Int) {
@@ -193,9 +193,9 @@ override fun setData(item: ChatUIKitConversation?, position: Int) {
 }
 ```
 
-## 设置会话列表Item长按菜单
+## 设置会话条目长按菜单
 
-长按会话列表Item会显示会话操作菜单。会话列表页面使用 `ChatUIKitConversationListViewModel` 中提供的方法默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作，详见 [基础定制说明](chatuikit_conversation_list_basic.html#默认会话操作)。
+长按会话条目会显示会话操作菜单。会话列表页面使用 `ChatUIKitConversationListViewModel` 中提供的方法默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作，详见 [基础定制说明](chatuikit_conversation_list_basic.html#默认会话操作)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
@@ -251,7 +251,7 @@ binding?.listConversation?.setOnMenuPreShowListener { menuHelper, _ ->
 
 ## 设置会话免打扰图标
 
-会话免打扰图标对应会话 item 中的 `ImageView(msg_mute)`，当 `conversation.isSilent()` 返回 `true` 时显示。
+会话免打扰图标对应会话条目中的 `ImageView(msg_mute)`，当 `conversation.isSilent()` 返回 `true` 时显示。
 
 - **默认图标**：`@drawable/uikit_conversation_muted`（定义于 `uikit_item_conversation_list.xml` 中 `msg_mute` 使用的样式 `ease_conv_item_mute`）。
 - **替换图标**：在你的 App 工程里提供同名 drawable 资源 `uikit_conversation_muted` 即可覆盖默认图标。
@@ -315,7 +315,7 @@ binding?.listConversation?.apply {
 
 ## 设置事件监听
 
-`ChatUIKitConversationListFragment.Builder` 提供了针对会话列表Item及长按菜单的事件监听配置。建议通过 Builder 进行统一设置。
+`ChatUIKitConversationListFragment.Builder` 提供了针对会话条目及长按菜单的事件监听配置。建议通过 Builder 进行统一设置。
 
 ```kotlin
 ChatUIKitConversationListFragment.Builder()
@@ -328,9 +328,9 @@ ChatUIKitConversationListFragment.Builder()
 
 | 方法                             | 描述                                                         |
 | -------------------------------- | ------------------------------------------------------------|
-| `setItemClickListener()`          | 设置会话列表Item点击事件监听器。                                        |
-| `setOnItemLongClickListener()`    | 设置会话列表Item长按事件监听器。                                        |
-| `setOnMenuItemClickListener()`    | 设置会话列表Item长按后弹出的菜单项的点击事件监听器。                                    |
+| `setItemClickListener()`          | 设置会话条目点击事件监听器。                                        |
+| `setOnItemLongClickListener()`    | 设置会话条目长按事件监听器。                                        |
+| `setOnMenuItemClickListener()`    | 设置会话列条目长按后弹出的菜单项的点击事件监听器。                                    |
 | `setConversationChangeListener()` | 设置会话变更的监听器，例如会话被删除时触发。                    |
 
 此外，如果你直接操作 `ChatUIKitConversationListLayout`（`binding.listConversation`），还可以额外配置以下两个常用监听器：
@@ -400,13 +400,13 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 </tr>
 <tr>
 <td rowspan="2">
-<p>会话 Item 背景/状态</p>
+<p>会话条目的背景/状态</p>
 </td>
 <td>
 <p>uikit_view_default_touch_shadow_bg</p>
 </td>
 <td>
-<p>会话列表 item 默认背景/按压背景</p>
+<p>会话条目的默认背景/按压背景</p>
 </td>
 </tr>
 <tr>
@@ -414,7 +414,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conv_item_pinned</p>
 </td>
 <td>
-<p>会话列表 item 置顶态背景</p>
+<p>会话条目的置顶态背景</p>
 </td>
 </tr>
 <tr>
@@ -425,7 +425,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conversation_muted</p>
 </td>
 <td>
-<p>会话免打扰图标，显示在 item 标题右侧</p>
+<p>会话免打扰图标，显示在会话条目的标题右侧</p>
 </td>
 </tr>
 <tr>
@@ -496,7 +496,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <tbody>
 <tr>
 <td rowspan="7">
-<p>会话列表 item 长按菜单</p>
+<p>会话条目的长按菜单</p>
 </td>
 <td>
 <p>uikit_conv_menu_item_silent</p>
@@ -555,7 +555,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 </tr>
 <tr>
 <td rowspan="4">
-<p>会话页面"更多"弹窗</p>
+<p>会话页面“更多”弹窗</p>
 </td>
 <td>
 <p>uikit_conv_action_new_conversation</p>
@@ -590,7 +590,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 </tr>
 <tr>
 <td rowspan="2">
-<p>会话列表 item 内部提示</p>
+<p>会话条目的内部提示</p>
 </td>
 <td>
 <p>uikit_chat_were_mentioned</p>
@@ -629,7 +629,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <tbody>
 <tr>
 <td rowspan="7">
-<p>会话列表 item 文字/分割线/状态</p>
+<p>会话条目的文字/分割线/状态</p>
 </td>
 <td>
 <p>ease_conv_item_title_color</p>
@@ -730,9 +730,9 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 
 | 布局文件路径                                   | 说明                                             |
 | :--------------------------------------------- | :--------------------------------------------------- |
-| `layout/uikit_item_conversation_list.xml`      | 单个会话列表 item 布局。                               |
-| `layout/uikit_dialog_menu.xml`                 | 会话列表 item 长按菜单：底部弹窗容器布局。             |
-| `layout/uikit_item_menu.xml`                   | 会话列表 item 长按菜单：菜单项布局。                   |
+| `layout/uikit_item_conversation_list.xml`      | 单个会话条目布局。                               |
+| `layout/uikit_dialog_menu.xml`                 | 会话条目长按菜单：底部弹窗容器布局。             |
+| `layout/uikit_item_menu.xml`                   | 会话条目长按菜单：菜单项布局。                   |
 | `layout/fragment_conversation_list_layout.xml` | 会话页整体结构布局：包含 TitleBar、SearchBar、List。 |
 
 ## 可重载方法标记
