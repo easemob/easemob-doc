@@ -10,9 +10,9 @@
 
 该版本在 2025 年 12 月 4 日发布。
 
-1. 支持监听 `getConversationlist` 事件。
+1. 支持监听用户获取会话列表事件 `getConversationlist`。
 2. 优化图片放大查看效果。
-3. 使用 `customRenderers` 代替原来的 `renderMessage` 来自定义消息。
+3. 使用 `customRenderers` 代替原来的 `renderMessage` 来自定义消息的界面展示。
 4. 优化移动设备上消息操作菜单的显示。
 
 ## 版本 2.2.1

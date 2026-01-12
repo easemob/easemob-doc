@@ -8,12 +8,12 @@
 
 #### 新增特性
 
-1. `Chatroom` 组件增加 `customMessageRenderers` 参数用于自定义消息。
+1. `Chatroom` 组件增加 `customMessageRenderers` 参数用于自定义消息的界面展示。
 2. `Provider` 组件增加 `initConfig.countMemberJoinToUnread` 参数，表示聊天室人员加入的消息是否计未读数。
 
 #### 优化
 
-`Chatroom` 组件支持列表不在最底部时是否显示未读数。
+`Chatroom` 组件支持用户向上翻阅历史消息时，如有新消息到达是否显示未读数。
 
 #### 修复
 
