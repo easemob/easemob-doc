@@ -20,11 +20,11 @@ conn.addEventHandler("connectionListener", {
   },
   // 自 4.15.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知。
   onTokenWillExpire: () => {
-        console.log("token 即将过期");
-      },
+    console.log("token 即将过期");
+  },
   onTokenExpired: () => {
-        console.log("token 已经过期");
-      },
+    console.log("token 已经过期");
+  },
   // 连接成功，开始从服务器拉取离线消息时触发。
   onOfflineMessageSyncStart: () => {
     console.log("开始从服务器拉取离线消息");
