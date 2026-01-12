@@ -39,7 +39,7 @@
 | `enableTitleBarPressBack()`   | 设置是否显示返回按钮，默认不显示。<br/> - `true`：显示。 <br/> - (默认) `false`: 不显示。              |
 | `setTitleBarBackPressListener()` | 设置点击标题栏返回按钮的监听器。                               |
 
-1. 设置聊天页面标题栏
+1. 设置聊天页面标题栏：
 
 ```kotlin
 class ChatActivity : AppCompatActivity() {
@@ -62,7 +62,7 @@ class ChatActivity : AppCompatActivity() {
 }
 ```
 
-2. 设置会话列表页面标题栏
+2. 设置会话列表页面标题栏：
 
 ```kotlin
 val fragment = ChatUIKitConversationListFragment.Builder()
@@ -72,7 +72,7 @@ val fragment = ChatUIKitConversationListFragment.Builder()
     .build()
 ```
 
-3. 设置联系人列表标题栏
+3. 设置联系人列表标题栏：
 
 ```kotlin
 val fragment = ChatUIKitContactsListFragment.Builder()
@@ -93,7 +93,7 @@ ChatUIKitConversationListFragment.Builder().useTitleBar()
     
 ```
 
-### 设置标题栏的背景色
+## 设置标题栏的背景色
 
 ```kotlin
 binding?.titleConversations?.setBackgroundColor(ContextCompat.getColor(mContext,R.color.blue))
@@ -141,6 +141,8 @@ binding?.titleConversations?.setTitleEndDrawable(R.drawable.conversation_title)
 
 ## 设置副标题
 
+仅聊天页面支持在标题栏设置副标题。
+
 // TODO：是否要加上   ChatUIKitChatFragment.Builder().setSubtitle("在线")
 
 ```kotlin
@@ -181,16 +183,14 @@ titleBar.setSubtitle(R.string.online_status)
 
 ```
 
-### 设置返回按钮和事件监听
+## 设置返回按钮和事件监听
 
 ```kotlin
 //设置是否支持显示返回按钮：true：是；(默认) false: 否。   
 ChatUIKitConversationListFragment.Builder().enableTitleBarPressBack()
 //设置点击标题栏返回按钮的监听器。 
-ChatUIKitConversationListFragment.Builder().setTitleBarBackPressListener() 
-    
+ChatUIKitConversationListFragment.Builder().setTitleBarBackPressListener()   
 ```
-
 
 ## 常见问题
 
