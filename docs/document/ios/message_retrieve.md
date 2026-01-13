@@ -106,7 +106,7 @@ EMFetchServerMessagesOption* option = [[EMFetchServerMessagesOption alloc] init]
 ```
 
 
-### 根据消息 ID 获取单条或多条本地消息
+### 根据消息 ID 获取本地消息
 
 自 SDK 4.15.1 开始，你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
 
