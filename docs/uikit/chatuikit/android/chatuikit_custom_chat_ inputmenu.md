@@ -4,9 +4,9 @@
 消息底部输入框 `ChatUIkitinputMenu` 实现各类消息的输入和发送以及消息表情等功能，包括两部分：
 
 - 底部输入菜单 `ChatUlKitPrimaryMenu`：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展。
-- 扩展菜单 `ChatUlKitExtendMenu`：提供附件类型消息的发送入口，支持发送图片、视频、文件，并可扩展至自定义消息类型（如名片消息等）。
+- 消息扩展菜单 `ChatUlKitExtendMenu`：提供附件类型消息的发送入口，支持发送图片、视频、文件，并可扩展至自定义消息类型（如名片消息等）。
 
-// TODO：添加底部输入框的图，分为底部输入菜单+扩展菜单。
+// TODO：添加底部输入框的图，分为底部输入菜单+消息扩展菜单。
 
 ## 设置底部输入框背景
 
@@ -34,8 +34,8 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | 界面区域控制 | 可选择仅显示菜单顶部区域，隐藏底部输入与扩展面板部分。 |
 
   // TODO：添加顶部区域截图
-  // TODO：顶部扩展区域还是顶部区域？
-  // TODO：表情功能还是表情面板？
+  // TODO：顶部扩展区域还是顶部区域？  研发
+  // TODO：表情功能还是表情面板？   研发
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置输入菜单" />
@@ -74,7 +74,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | `setCustomEmojiconMenu()`    | 设置自定义表情功能，支持 View 或 Fragment 形式。             |
 | `setCustomExtendMenu()`      | 设置自定义扩展功能功能，支持 View、Dialog 或 Fragment 形式。 |
 | `setCustomTopExtendMenu()`   | 设置自定义顶部扩展布局，支持 View 或 Fragment 形式。         |
-| `hideExtendContainer()`      | 隐藏扩展功能区域，包括表情区域和扩展菜单区域。               |
+| `hideExtendContainer()`      | 隐藏扩展功能区域，包括表情区域和消息扩展菜单区域。               |
 | `hideInputMenu()`            | 隐藏除顶部区域外的输入菜单界面。                     |
 | `showEmojiconMenu()`         | 显示表情功能区域。                                           |
 | `showExtendMenu()`           | 显示扩展功能区域。                                           |
@@ -84,7 +84,6 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | `chatEmojiMenu`              | 获取表情面板操作接口。                                       |
 | `chatExtendMenu`             | 获取扩展功能菜单操作接口。                                   |
 | `chatTopExtendMenu`          | 获取顶部扩展区域操作接口。                                   |
-
 
 ### 设置相关操作
 
@@ -171,15 +170,15 @@ emojiconMenu?.removeEmojiconGroup(1)
 // emojiconMenu?.setTabBarVisibility(false)
 ```
 
-## 设置扩展菜单
+## 设置消息扩展菜单
 
-扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。点击底部输入菜单中的扩展图标（默认为加号）会弹出扩展菜单。
+消息扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。点击底部输入菜单中的扩展图标（默认为加号）会弹出消息扩展菜单。
 
 // TODO：添加图
 
 ### 设置菜单样式风格
 
-扩展菜单支持以下两种样式风格：
+消息扩展菜单支持以下两种样式风格：
 
 - 微信风格样式：
 
@@ -260,9 +259,9 @@ chatExtendMenu?.setMenuOrder(R.id.extend_item_file, 50)
   <ImageItem src="/images/uikit/chatuikit/android/custom msg_type_list.png" title="消息类型扩展" />
 </ImageGallery>
 
-### 监听扩展菜单点击事件 
+### 监听消息扩展菜单点击事件 
 
-你可以通过以下两种方式监听扩展菜单项的点击事件：
+你可以通过以下两种方式监听消息扩展菜单项的点击事件：
 
 **方式一：通过 `UIKitChatFragment.Builder` 设置监听器**
 
@@ -270,7 +269,7 @@ chatExtendMenu?.setMenuOrder(R.id.extend_item_file, 50)
 // conversationID：单聊为对端用户ID，群聊为群组ID。
 // easeChatType：聊天类型，单聊为 `SINGLE_CHAT`，群聊为 `GROUP_CHAT`。
 UIKitChatFragment.Builder(conversationID, easeChatType)
-    .setOnChatExtendMenuItemClickListener(listener)  // 设置扩展菜单点击监听器
+    .setOnChatExtendMenuItemClickListener(listener)  // 设置消息扩展菜单点击监听器
     .build()
 ```
 
@@ -298,7 +297,7 @@ override fun onChatExtendMenuItemClick(view: View?, itemId: Int): Boolean {
 UIKitChatFragment.Builder(conversationID, easeChatType)
         .setOnChatInputChangeListener(onChatInputChangeListener)   // 设置输入变化监听器
         .setChatInputMenuListener()  // 设置输入菜单监听器
-        .setOnChatExtendMenuItemClickListener // 扩展菜单操作监听器
+        .setOnChatExtendMenuItemClickListener // 消息扩展菜单操作监听器
         .build()
 ```
 
@@ -344,7 +343,6 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | ExtendMenu（更多菜单）            | - `layout/uikit_layout_chat_extend_menu.xml`：网格分页<br/> -  `layout/uikit_chat_menu_item.xml`：网格 item：微信风格<br/> -  `layout/uikit_chat_extend_indicator_item.xml`：分页指示点 item<br/> -  `layout/uikit_dialog_menu.xml`：UIActionSheet 弹窗容器<br/> -  `layout/uikit_chat_menu_item_horizontal.xml`：弹窗横向 item<br/> -  `layout/uikit_item_menu.xml`：通用横向 item |
 | EmojiMenu（表情面板）            | - `layout/uikit_widget_chat_emojicon.xml` <br/> - `layout/uikit_widget_emojicon_tab_bar.xml`<br/> -  `layout/uikit_chat_emoji_scroll_tab_item.xml`<br/> -  `layout/uikit_chat_emoji_expression_gridview.xml`<br/> -  `layout/uikit_row_chat_emoji_expression.xml`<br/> -  `layout/uikit_row_chat_emoji_big_expression.xml` |
 | TopExtendMenu（菜单顶部扩展区域） | - `layout/uikit_widget_chat_message_reply.xml`：引用回复条<br/> -  `layout/uikit_layout_chat_messages_multi_select_menu.xml`：多选工具条 |
-
 
 ### 可同名覆盖的设置
 

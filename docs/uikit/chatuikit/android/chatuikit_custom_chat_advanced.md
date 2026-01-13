@@ -50,7 +50,6 @@ chatMessageListLayout?.let{
     it.setAvatarShapeType()     //设置头像的样式，分为默认样式，圆形和矩形三种样式。
     ...
 } 
-
 ```
 
 ## 设置头像和昵称
@@ -75,7 +74,7 @@ fragment?.let { fragment ->
 
 ```
 
-除了 `ChatUIKitMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置头像和昵称，详见 [基础自定义文档](chatuikit_chat_list_basic.html#设置头像和昵称)。两种方式的区别如下表所示：
+除了 `ChatUIKitMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置头像和昵称，详见 [基本设置说明](chatuikit_chat_list_basic.html#设置头像和昵称)。两种方式的区别如下表所示：
 
 | 项         | ChatUIKitMessageListLayout | UIKitChatFragment.Builder | 说明                  |
 | :------------- | :------------------------- | :------------------------ | :-------------------- |
@@ -100,7 +99,7 @@ chatMessageListLayout?.let{
 } 
 ```
 
-除了 `chatMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置消息气泡，详见 [基础设置说明](chatuikit_chat_list_basic.html#设置消息气泡)。两种方式的区别如下表所示：
+除了 `chatMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置消息气泡，详见 [基本设置说明](chatuikit_chat_list_basic.html#设置消息气泡)。两种方式的区别如下表所示：
 
 | 项         | ChatUIKitMessageListLayout | UIKitChatFragment.Builder | 说明                  |
 | :------------- | :------------------------- | :------------------------ | :-------------------- |
@@ -120,7 +119,7 @@ chatMessageListLayout?.let{
 | `setTimeTextColor()`  | 设置消息时间文本的颜色，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。     |
 | `setTimeBackground()` | 设置消息时间的背景。          |
 
-示例代码如下：
+使用示例如下：
 
 ```kotlin
 // 获取 ChatUIKitMessageListLayout 对象
@@ -271,7 +270,7 @@ override fun onDismiss() {
 - **隐藏图标**：将 `resourceId` 设置为 `-1`，则隐藏图标，仅显示文字。
 - **显示/隐藏**：使用 `findItemVisible()` 方法显示或隐藏菜单项。
 
-示例代码如下：
+使用示例如下：
 
 ```kotlin
 override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) {
@@ -844,7 +843,7 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 <p>uikit_chat_message_menu_reaction_item_bg_selector</p>
 </td>
 <td width="81">
-<p>表情菜单item背景选择器</p>
+<p>表情菜单 item 背景选择器</p>
 </td>
 </tr>
 <tr>
@@ -852,7 +851,7 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 <p>uikit_chat_message_reaction_item_bg_selector</p>
 </td>
 <td width="81">
-<p>消息气泡下方reaction气泡背景选择器</p>
+<p>消息气泡下方 Reaction 气泡背景选择器</p>
 </td>
 </tr>
 <tr>
@@ -860,7 +859,7 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 <p>uikit_chat_message_reaction_tab_item_bg_selector</p>
 </td>
 <td width="81">
-<p>更多表情tab item背景选择器</p>
+<p>更多表情 tab Item 背景选择器</p>
 </td>
 </tr>
 <tr>
@@ -868,7 +867,7 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 <p>uikit_chat_emoji_item_bg_selector</p>
 </td>
 <td width="81">
-<p>更多表情面板item背景选择器</p>
+<p>更多表情面板 Item 背景选择器</p>
 </td>
 </tr>
 <tr>
@@ -889,6 +888,8 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 </tr>
 </tbody>
 </table>
+
+// TODO：查找以上表格中的 Item
 
 
 :::tip

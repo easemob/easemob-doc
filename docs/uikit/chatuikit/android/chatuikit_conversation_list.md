@@ -6,7 +6,7 @@
 
 开发者可以继承 `ChatUIKitConversationListAdapter` 实现自己的 `CustomConversationListAdapter`，然后将 `CustomConversationListAdapter` 设置到 `ChatUIKitConversationListFragment#Builder#setCustomAdapter` 中。
 
-1. 创建自定义适配器 `CustomConversati onListAdapter`，继承自 `ChatUIKitConversationListAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
+1. 创建自定义适配器 `CustomConversationListAdapter`，继承自 `ChatUIKitConversationListAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
 
 ```kotlin
 class CustomConversationListAdapter (

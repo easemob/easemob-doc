@@ -2,7 +2,7 @@
 
 消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何通过 `UIKitChatFragment.Builder` 实现消息列表和消息条目的基本设置。
 
-如需通过 `ChatUIKitMessageListLayout` 进行高级设置，详见 [高级定制说明](chatuikit_chat_list_advanced.html)。
+如需通过 `ChatUIKitMessageListLayout` 进行高级设置，详见 [高级设置说明](chatuikit_chat_list_advanced.html)。
 
 // TODO：添加图片，列明消息气泡、消息条目、头像和昵称消息时间等
 
@@ -43,7 +43,6 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
         .setCustomAdapter(customAdapter)
         .setCustomFragment(myChatFragment)
         .build()
-
 ```
 
 `UIKitChatFragment#Builder` 提供的方法如下表所示：
@@ -208,14 +207,16 @@ builder.setCustomAdapter(CustomMessageAdapter())
 
 你可以通过 `UIKitChatFragment#Builder` 设置头像和昵称。关于使用自己的头像和昵称，详见 [用户自定义信息文档中的介绍](chatuikit_userinfo.html#设置会话头像和昵称)。
 
+// TODO：从代码角度看，true 和 false 的含义是不是统一为好。
+
 ```kotlin
 //com.hyphenate.easeui.feature.chat.activities.UIKitChatActivity
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
 // easeChatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
 val fragment = UIKitChatFragment.Builder(conversationID, easeChatType)
-    .showNickname(true)                 // 是否显示昵称：true：是；(默认) false: 否。
-    .hideReceiverAvatar(false)          // 是否隐藏接收方头像：true 隐藏；false 显示（默认显示）。
-    .hideSenderAvatar(false)            // 是否隐藏发送方头像：true 隐藏；false 显示（默认显示）。
+    .showNickname(true)                 // 是否显示昵称：true：显示；(默认) false: 隐藏。
+    .hideReceiverAvatar(false)          // 是否隐藏接收方头像：true：隐藏；（默认）false：显示。
+    .hideSenderAvatar(false)            // 是否隐藏发送方头像：true：隐藏；false：显示。
     .build()
 
 fragment?.let { fragment ->
@@ -321,7 +322,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_1.png" title="UIActionSheet" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_1.png" title="类似 UIActionSheet 样式" />
   <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="类似微信样式" />
 </ImageGallery>
 

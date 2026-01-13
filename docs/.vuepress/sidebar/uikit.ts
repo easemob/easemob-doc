@@ -147,8 +147,8 @@ const chatUikitSidebar = [
               text: "自定义会话列表",
               collapsible: true,
               children: [
-               { text: "基础定制", link: "chatuikit_conversation_list_basic.html" },
-               { text: "高级定制", link: "chatuikit_conversation_list_advanced.html" },
+               { text: "基本设置", link: "chatuikit_conversation_list_basic.html" },
+               { text: "高级设置", link: "chatuikit_conversation_list_advanced.html" },
              ],
             only: ["android"],
           },
@@ -172,8 +172,8 @@ const chatUikitSidebar = [
               text: "自定义消息列表",
               collapsible: true,
               children: [
-               { text: "基础定制", link: "chatuikit_chat_list_basic.html" },
-               { text: "高级定制", link: "chatuikit_chat_list_advanced.html" },
+               { text: "基本设置", link: "chatuikit_chat_list_basic.html" },
+               { text: "高级设置", link: "chatuikit_chat_list_advanced.html" },
              ],
             only: ["android"],
           },
