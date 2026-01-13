@@ -3,8 +3,8 @@
 Android 系统中的 Telecom 框架主要负责管理设备上的所有通话，包括传统的基于 SIM 卡的通话和 VoIP 通话。当有来电时，Telecom 框架会处理来电显示、接听、挂断等功能，并通知相关的应用程序。 
 
 <ImageGallery :columns="3">
-  <ImageItem src="/images/callkit/android/notification_lock.png" title="锁屏来电通知" />
-  <ImageItem src="/images/callkit/android/notification_background.png" title="应用后台运行时来电通知" />
+  <ImageItem src="/images/callkit/android/notification_lock.png" title="锁屏 Telecom 来电通知" />
+  <ImageItem src="/images/callkit/android/notification_background.png" title="应用后台运行时 Telecom 来电通知" />
   <ImageItem src="/images/callkit/android/1v1_video_notification_inapp.png" title="应用内来电通知" />
   <ImageItem src="/images/callkit/android/1v1_video_ongoing.png" title="一对一视频-通话中" />
   <ImageItem src="/images/callkit/android/1v1_voice_ongoing.png" title="一对一语音-通话中" />
@@ -77,11 +77,15 @@ PhoneAccountHelper.registerPhoneAccount(context)
   <ImageItem src="/images/callkit/android/voip_account_enable.png" title="启用 VoIP 账户" />
 </ImageGallery>
 
-3. 启用 Telecom 前，CallKit 内部会检查 VoIP 账户的状态：
-   - `status.isSupported`：设备是否支持 VoIP 功能。
-   - `isRegistered`：是否已注册。
-   - `isEnabled`：是否已开启。
-   
+3. 启用 Telecom 前，CallKit 内部会检查 VoIP 账户的状态 `status`：
+
 ```kotlin
 val status = PhoneAccountHelper.getPhoneAccountStatus(context)
 ```
+
+ `status` 说明如下：
+ - `isSupported`：设备是否支持 VoIP 功能。
+ - `isRegistered`：是否已注册。
+ - `isEnabled`：是否已开启。
+   
+
