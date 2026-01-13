@@ -136,19 +136,19 @@ const chatUikitSidebar = [
       text: "会话列表",
       collapsible: true,
       children: [
-        { text: "页面介绍", link: "chatuikit_conversationlist_intro.html" },
+        { text: "页面介绍", link: "chatuikit_custom_conversation_list_intro.html" },
         { text: "自定义页面", link: "chatuikit_conversation.html", except: ["android"]},
         {
           text: "自定义页面",
           collapsible: true,
           children: [
-            { text: "自定义搜索栏", link: "chatuikit_conversation_searchbar.html" },
+            { text: "自定义搜索栏", link: "chatuikit_custom_conversation_searchbar.html" },
             {
               text: "自定义会话列表",
               collapsible: true,
               children: [
-               { text: "基本设置", link: "chatuikit_conversation_list_basic.html" },
-               { text: "高级设置", link: "chatuikit_conversation_list_advanced.html" },
+               { text: "基本设置", link: "chatuikit_custom_conversation_list_basic.html" },
+               { text: "高级设置", link: "chatuikit_custom_conversation_list_advanced.html" },
              ],
             only: ["android"],
           },
@@ -172,12 +172,12 @@ const chatUikitSidebar = [
               text: "自定义消息列表",
               collapsible: true,
               children: [
-               { text: "基本设置", link: "chatuikit_chat_list_basic.html" },
-               { text: "高级设置", link: "chatuikit_chat_list_advanced.html" },
+               { text: "基本设置", link: "chatuikit_custom_chat_basic.html" },
+               { text: "高级设置", link: "chatuikit_custom_chat_advanced.html" },
              ],
             only: ["android"],
           },
-            { text: "自定义底部输入框", link: "chatuikit_chat_ inputmenu.html" },
+            { text: "自定义底部输入框", link: "chatuikit_custom_chat_inputmenu.html" },
           ],
         only: ["android"],
   },
