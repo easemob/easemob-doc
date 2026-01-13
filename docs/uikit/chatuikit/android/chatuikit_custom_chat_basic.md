@@ -2,7 +2,7 @@
 
 消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何通过 `UIKitChatFragment.Builder` 实现消息列表和消息条目的基本设置。
 
-如需通过 `ChatUIKitMessageListLayout` 进行高级设置，详见 [高级设置说明](chatuikit_chat_list_advanced.html)。
+如需通过 `ChatUIKitMessageListLayout` 进行高级设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html)。
 
 // TODO：添加图片，列明消息气泡、消息条目、头像和昵称消息时间等
 
@@ -49,34 +49,34 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 | 方法                                                         | 描述                           |
 | :----------------------------------------------------------- | :--------------------------------- |
-| `useTitleBar(true)`                                         | 是否使用默认的标题栏（`ChatUIKitTitleBar`）。 <br/> - `true`：是。 <br/> - (默认) `false`: 否。<br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。     |
-| `setTitleBarTitle("title")`                                 | 设置标题栏的主标题。 <br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。      |
-| `setTitleBarSubTitle("subtitle")`                           | 设置标题栏的副标题。 <br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。                  |
-| `enableTitleBarPressBack(true)`                             | 设置是否支持显示返回按钮，默认为不显示。<br/> - `true`：显示。<br/> - (默认) `false`: 不显示。<br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。  |
-| `setTitleBarBackPressListener(onBackPressListener)`         | 设置标题栏返回按钮点击监听器。       |
-| `getHistoryMessageFromServerOrLocal(false)`                 | 设置是否从服务器或本地获取历史消息。 |
-| `setOnChatExtendMenuItemClickListener(onChatExtendMenuItemClickListener)` | 设置聊天扩展菜单项点击监听器。       |
-| `setOnChatInputChangeListener(onChatInputChangeListener)`   | 设置聊天输入变化监听器。             |
-| `setOnMessageItemClickListener(onMessageItemClickListener)` | 设置消息项点击监听器。              |
-| `setOnMessageSendCallBack(onMessageSendCallBack)`           | 设置消息发送回调。                   |
-| `setOnWillSendMessageListener(willSendMessageListener)`     | 设置即将发送消息的监听器。          |
-| `setOnChatRecordTouchListener(onChatRecordTouchListener)`   | 设置聊天记录触摸监听器。             |
-| `setOnModifyMessageListener(onModifyMessageListener)`       | 设置修改消息监听器。                 |
-| `setOnReportMessageListener(onReportMessageListener)`       | 设置举报消息监听器。                 |
-| `setMsgTimeTextColor(msgTimeTextColor)`                     | 设置消息时间文本颜色。               |
-| `setMsgTimeTextSize(msgTimeTextSize)`                       | 设置消息时间文本大小。               |
-| `setReceivedMsgBubbleBackground(receivedMsgBubbleBackground)` | 设置接收消息的气泡背景。             |
-| `setSentBubbleBackground(sentBubbleBackground)`             | 设置发送消息的气泡背景。             |
-| `showNickname(false)`                                       | 设置是否显示昵称。                       |
-| `.hideReceiverAvatar(false)`                                 | 设置是否隐藏接收者头像。                 |
-| `.hideSenderAvatar(true)`                                    | 设置是否隐藏发送者头像。                 |
-| `setChatBackground(chatBackground)`                         | 设置聊天界面背景。                   |
-| `setChatInputMenuBackground(inputMenuBackground)`           | 设置聊天输入菜单背景。               |
-| `setChatInputMenuHint(inputMenuHint)`                       | 设置聊天输入菜单提示文本。           |
-| `sendMessageByOriginalImage(true)`                          | 是否发送原图。<br/> - `true`：是；<br/> - (默认) `false`: 否。                       |
-| `setEmptyLayout(R.layout.layout_chat_empty)`                | 设置空布局。                         |
-| `setCustomAdapter(customAdapter)`                           | 设置自定义适配器。                   |
-| `setCustomFragment(myChatFragment)`                         | 设置自定义Fragment。                 |
+| `useTitleBar`                                         | 是否使用默认的标题栏（`ChatUIKitTitleBar`）。 <br/> - `true`：是。 <br/> - (默认) `false`: 否。<br/> 详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。     |
+| `setTitleBarTitle`                                 | 设置标题栏的主标题。 <br/> 详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。      |
+| `setTitleBarSubTitle`                           | 设置标题栏的副标题。 <br/> 详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。                  |
+| `enableTitleBarPressBack`                             | 设置是否支持显示返回按钮，默认为不显示。<br/> - `true`：显示。<br/> - (默认) `false`: 不显示。<br/> 详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。  |
+| `setTitleBarBackPressListener`         | 设置标题栏返回按钮点击监听器。       |
+| `getHistoryMessageFromServerOrLocal`                 | 设置是否从服务器或本地获取历史消息。 |
+| `setOnChatExtendMenuItemClickListener` | 设置聊天扩展菜单项点击监听器。       |
+| `setOnChatInputChangeListener`   | 设置聊天输入变化监听器。             |
+| `setOnMessageItemClickListener` | 设置消息项点击监听器。              |
+| `setOnMessageSendCallBack`           | 设置消息发送回调。                   |
+| `setOnWillSendMessageListener`     | 设置即将发送消息的监听器。          |
+| `setOnChatRecordTouchListener`   | 设置聊天记录触摸监听器。             |
+| `setOnModifyMessageListener`       | 设置修改消息监听器。                 |
+| `setOnReportMessageListener`       | 设置举报消息监听器。                 |
+| `setMsgTimeTextColor`                     | 设置消息时间文本颜色。               |
+| `setMsgTimeTextSize`                       | 设置消息时间文本大小。               |
+| `setReceivedMsgBubbleBackground` | 设置接收消息的气泡背景。             |
+| `setSentBubbleBackground`             | 设置发送消息的气泡背景。             |
+| `showNickname`                                       | 设置是否显示昵称。                       |
+| `.hideReceiverAvatar`                                 | 设置是否隐藏接收者头像。                 |
+| `.hideSenderAvatar`                                    | 设置是否隐藏发送者头像。                 |
+| `setChatBackground`                         | 设置聊天界面背景。                   |
+| `setChatInputMenuBackground`           | 设置聊天输入菜单背景。               |
+| `setChatInputMenuHint`                       | 设置聊天输入菜单提示文本。           |
+| `sendMessageByOriginalImage`                          | 是否发送原图。<br/> - `true`：是；<br/> - (默认) `false`: 否。                       |
+| `setEmptyLayout`                | 设置空布局。                         |
+| `setCustomAdapter`                           | 设置自定义适配器。                   |
+| `setCustomFragment`                         | 设置自定义Fragment。                 |
 
 ## 设置消息列表背景
 
@@ -225,7 +225,7 @@ fragment?.let { fragment ->
 
 ```
 
-除了 `UIKitChatFragment.Builder`，你还可以通过 `ChatUIKitMessageListLayout` 设置头像和昵称，详见 [高级设置说明](chatuikit_chat_list_advanced.html#设置头像和昵称)。
+除了 `UIKitChatFragment.Builder`，你还可以通过 `ChatUIKitMessageListLayout` 设置头像和昵称，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html#设置头像和昵称)。
 
 ### 设置消息气泡
 
@@ -249,7 +249,7 @@ fragment?.let { fragment ->
 }
 ```
 
-除了 `UIKitChatFragment.Builder`，你可以通过 `chatMessageListLayout` 设置消息气泡，详见 [高级设置说明](chatuikit_chat_list_advanced.html#设置消息气泡)。
+除了 `UIKitChatFragment.Builder`，你可以通过 `chatMessageListLayout` 设置消息气泡，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html#设置消息气泡)。
 
 ### 设置消息时间
 
@@ -300,7 +300,7 @@ fragment?.let { fragment ->
 ```
 
 :::tip
-Builder 不支持设置时间背景。若设置时间背景，需使用 `ChatUIKitMessageListLayout#setTimeBackground(Drawable?)` 或 设置 XML 属性 `ease_chat_item_time_background`，详见 [高级设置说明](chatuikit_chat_list_advanced.html#设置消息时间样式)。
+Builder 不支持设置时间背景。若设置时间背景，需使用 `ChatUIKitMessageListLayout#setTimeBackground(Drawable?)` 或 设置 XML 属性 `ease_chat_item_time_background`，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html#设置消息时间样式)。
 :::
 
 ## 设置长按消息菜单
@@ -326,7 +326,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
   <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="类似微信样式" />
 </ImageGallery>
 
-关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [高级设置文档](chatuikit_chat_list_avanced.html#设置长按消息菜单)。
+关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [消息列表的高级设置说明](chatuikit_chat_list_avanced.html#设置长按消息菜单)。
 
 ## 设置事件监听
 

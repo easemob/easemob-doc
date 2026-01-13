@@ -74,7 +74,7 @@ fragment?.let { fragment ->
 
 ```
 
-除了 `ChatUIKitMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置头像和昵称，详见 [基本设置说明](chatuikit_chat_list_basic.html#设置头像和昵称)。两种方式的区别如下表所示：
+除了 `ChatUIKitMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置头像和昵称，详见 [消息列表的基本设置说明](chatuikit_custom_chat_basic.html#设置头像和昵称)。两种方式的区别如下表所示：
 
 | 项         | ChatUIKitMessageListLayout | UIKitChatFragment.Builder | 说明                  |
 | :------------- | :------------------------- | :------------------------ | :-------------------- |
@@ -99,7 +99,7 @@ chatMessageListLayout?.let{
 } 
 ```
 
-除了 `chatMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置消息气泡，详见 [基本设置说明](chatuikit_chat_list_basic.html#设置消息气泡)。两种方式的区别如下表所示：
+除了 `chatMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置消息气泡，详见 [消息列表的基本设置说明](chatuikit_custom_chat_basic.html#设置消息气泡)。两种方式的区别如下表所示：
 
 | 项         | ChatUIKitMessageListLayout | UIKitChatFragment.Builder | 说明                  |
 | :------------- | :------------------------- | :------------------------ | :-------------------- |
@@ -132,7 +132,7 @@ chatMessageListLayout?.let{
 } 
 ```
 
-关于设置消息时间的格式以及通过 `UIKitChatFragment.Builder` 设置消息时间样式，详见 [基本设置说明](chatuikit_chat_list_basic.html#设置消息时间)。
+关于设置消息时间的格式以及通过 `UIKitChatFragment.Builder` 设置消息时间样式，详见 [消息列表的基本设置说明](chatuikit_custom_chat_basic.html#设置消息时间)。
 
 ## 设置消息状态图标
 
@@ -180,7 +180,7 @@ ChatUIKitClient.init(context, options)
 
 UIKit 支持设置消息长按菜单的样式，包括菜单背景和菜单项的图标、文字颜色和大小。
 
-关于选择微信样式菜单或仿系统 `UIActionSheet` 样式，详见 [消息列表基本设置说明](#chatuikit_chat_list_basic.html)。
+关于选择微信样式菜单或仿系统 `UIActionSheet` 样式，详见 [消息列表的基本设置说明](chatuikit_custom_chat_basic.html#设置长按消息菜单)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/message_longpress_1.png" title="UIActionSheet" />

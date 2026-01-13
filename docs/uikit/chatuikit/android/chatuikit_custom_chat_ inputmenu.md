@@ -27,7 +27,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 你可以获取 `ChatUIKitInputMenu` 对象，对输入菜单进行如下操作：
 
 | 自定义配置 | 描述 |
-|---------|------|
+| :------------ | :----------------- |
 | 自定义菜单布局 | 支持替换或扩展输入菜单中的功能模块。 |
 | 管理表情与扩展功能 | 可动态设置、显示或隐藏自定义表情面板及扩展功能菜单。 |
 | 定制顶部区域 | 支持设置自定义的菜单顶部布局，包括引用回复条与多选消息工具条。 |
@@ -41,7 +41,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
   <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置输入菜单" />
 </ImageGallery>
 
-示例代码如下：
+使用示例如下：
 
 ```kotlin
     val chatInputMenu: ChatUIKitInputMenu? = binding?.layoutChat?.chatInputMenu
@@ -150,7 +150,7 @@ val emojiconMenu: IChatEmojiconMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 | `addEmojiconGroup()`    | 添加自定义表情分组。     |
 | `removeEmojiconGroup()` | 移除指定的表情组。   |
 
-示例代码如下：
+使用示例如下：
 
 ```kotlin
 val emojiconMenu: IChatEmojiconMenu? = binding?.layoutChat?.chatInputMenu?.chatEmojiMenu
@@ -213,7 +213,7 @@ val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 | `setMenuOrder()`     | 设置指定菜单项的显示顺序。 |
 | `registerMenuItem()` | 添加新菜单项。         |
 
-示例代码如下：
+使用示例如下：
 
 ```kotlin
 val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatExtendMenu
