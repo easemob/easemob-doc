@@ -4,7 +4,7 @@
 
 如需通过 `ChatUIKitMessageListLayout` 进行高级设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html)。
 
-// TODO：添加图片，列明消息气泡、消息条目、头像和昵称消息时间等
+// TODO：添加图片，列明消息气泡、消息条目、消息时间等
 
 ## 概述
 
