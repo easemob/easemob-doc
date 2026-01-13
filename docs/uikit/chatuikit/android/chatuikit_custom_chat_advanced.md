@@ -843,7 +843,7 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 <p>uikit_chat_message_menu_reaction_item_bg_selector</p>
 </td>
 <td width="81">
-<p>表情菜单 item 背景选择器</p>
+<p>表情菜单项背景选择器</p>
 </td>
 </tr>
 <tr>
@@ -889,13 +889,9 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 </tbody>
 </table>
 
-// TODO：查找以上表格中的 Item
-
-
 :::tip
 同名覆盖属于“资源层替换”，适合做 UI 资源替换与结构调整。如果你需要基于消息类型做更强的业务逻辑控制，建议通过自定义 Row/ViewHolder（自定义 `ChatUIKitMessagesAdapter` / `ChatUIKitViewHolderFactory`）实现。
 :::
-
 
 ## 可重写方法标记
 

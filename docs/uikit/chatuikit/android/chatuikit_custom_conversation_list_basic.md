@@ -109,6 +109,7 @@ class CustomConversationListAdapter (
     }
 }
 ```
+
 ```kotlin
 class MySingleChatViewHolder( private val viewBinding: MySingleChatItemViewBinding,
                               var config: ChatUIKitConvItemConfig? = ChatUIKitConvItemConfig()
@@ -169,8 +170,8 @@ ChatUIKitConversationListFragment.Builder()
     .build()
 ```
 
-| 方法                             | 描述                                                         |
-| -------------------------------- | ------------------------------------------------------------|
+| 方法        | 描述                          |
+| :-------------- | :----- | 
 | `setItemClickListener`          | 设置会话条目点击事件监听器。                                        |
 | `setOnItemLongClickListener`    | 设置会话条目长按事件监听器。                                        |
 | `setOnMenuItemClickListener`    | 设置会话条目长按后弹出的菜单项的点击事件监听器。                                    |

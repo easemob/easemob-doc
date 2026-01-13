@@ -207,8 +207,6 @@ builder.setCustomAdapter(CustomMessageAdapter())
 
 你可以通过 `UIKitChatFragment#Builder` 设置头像和昵称。关于使用自己的头像和昵称，详见 [用户自定义信息文档中的介绍](chatuikit_userinfo.html#设置会话头像和昵称)。
 
-// TODO：从代码角度看，true 和 false 的含义是不是统一为好。
-
 ```kotlin
 //com.hyphenate.easeui.feature.chat.activities.UIKitChatActivity
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。

@@ -2,6 +2,8 @@
 
 `ChatUIKitTitleBar` 是可自定义的标题栏组件，基于 Material Toolbar 提供灵活的布局方式，支持显示头像、状态图标、标题、副标题、导航按钮和菜单等多种元素。聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。你可以根据自身需求设置标题栏。
 
+## 概述
+
 //TODO：找UI设计提供图
 
 1. 单聊聊天页面的标题栏（绿点表示对端用户在线）如下图所示：
@@ -14,11 +16,11 @@
   ↑   ↑     ↑                              ↑
   │   │     └─ 标题 + 副标题                └─ 菜单
   │   └────── Logo/头像
-  └────────── 导航按钮 // TODO：导航按钮还是返回按钮？
+  └────────── 导航（返回）按钮
 ```
 
 
-1. 群聊页面的标题栏如下图所示：
+2. 群聊页面的标题栏如下图所示：
 
 ```
 ┌──────────────────────────────────────────────────┐
@@ -26,8 +28,6 @@
 └──────────────────────────────────────────────────┘
     
 ```
-
-## 设置标题栏
 
 各页面的 `Fragment#Builder` 提供如下方法：
 
@@ -39,7 +39,7 @@
 | `enableTitleBarPressBack()`   | 设置是否显示返回按钮，默认不显示。<br/> - `true`：显示。 <br/> - (默认) `false`: 不显示。              |
 | `setTitleBarBackPressListener()` | 设置点击标题栏返回按钮的监听器。                               |
 
-1. 设置聊天页面标题栏：
+- 设置聊天页面标题栏：
 
 ```kotlin
 class ChatActivity : AppCompatActivity() {
@@ -62,7 +62,7 @@ class ChatActivity : AppCompatActivity() {
 }
 ```
 
-2. 设置会话列表页面标题栏：
+- 设置会话列表页面标题栏：
 
 ```kotlin
 val fragment = ChatUIKitConversationListFragment.Builder()
@@ -72,7 +72,7 @@ val fragment = ChatUIKitConversationListFragment.Builder()
     .build()
 ```
 
-3. 设置联系人列表标题栏：
+- 设置联系人列表标题栏：
 
 ```kotlin
 val fragment = ChatUIKitContactsListFragment.Builder()
@@ -82,22 +82,20 @@ val fragment = ChatUIKitContactsListFragment.Builder()
     .build()
 ```
 
-// TODO：是否要说明下面的都是以会话列表为例进行设置呢？
-
 ## 设置是否启用标题栏
+
+例如，设置是否启用会话列表页面的标题栏：
 
 ```kotlin
 
 //是否使用默认的标题栏（ChatUIKitTitleBar）：true：是；(默认) false: 否。
 ChatUIKitConversationListFragment.Builder().useTitleBar()
-    
 ```
 
 ## 设置标题栏的背景色
 
 ```kotlin
 binding?.titleConversations?.setBackgroundColor(ContextCompat.getColor(mContext,R.color.blue))
-    
 ```
 
 ## 设置左侧头像
@@ -131,6 +129,8 @@ binding?.titleConversations?.setTitleClickListener {}
 
 ## 设置中部标题
 
+例如，设置会话列表页面的标题栏中的标题：
+
 ```kotlin
 // 文本设置
 ChatUIKitConversationListFragment.Builder().setTitleBarTitle("title")
@@ -143,8 +143,6 @@ binding?.titleConversations?.setTitleEndDrawable(R.drawable.conversation_title)
 
 仅聊天页面支持在标题栏设置副标题。
 
-// TODO：是否要加上   ChatUIKitChatFragment.Builder().setSubtitle("在线")
-
 ```kotlin
 titleBar.setSubtitle("在线")
 titleBar.setSubtitle(R.string.online_status)
@@ -152,9 +150,9 @@ titleBar.setSubtitle(R.string.online_status)
 
 ## 设置右侧显示图标
 
-一般情况下，右侧会支持设置多个图标。我们采用设置 Menu 的方式进行设置。
+一般情况下，右侧会支持设置多个图标。我们采用设置菜单的方式进行设置。
 
-`ChatUIKitConversationListFragment` 中有默认实现一个 `defaultMenu()` 的方法 添加默认的 menu 菜单。若默认菜单不满足需求，可以替换为自己的 menu 菜单，重写 `defaultMenu()` 方法。   
+例如，`ChatUIKitConversationListFragment` 提供 `defaultMenu()` 方法添加默认的 menu 菜单。若默认菜单不满足需求，可以替换为自己的 menu 菜单，重写 `defaultMenu()` 方法。   
 
 ```kotlin
     // 添加 menu
@@ -184,6 +182,8 @@ titleBar.setSubtitle(R.string.online_status)
 ```
 
 ## 设置返回按钮和事件监听
+
+例如，设置会话列表页面的标题栏中的返回按钮：
 
 ```kotlin
 //设置是否支持显示返回按钮：true：是；(默认) false: 否。   

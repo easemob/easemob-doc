@@ -29,13 +29,11 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | 自定义配置 | 描述 |
 | :------------ | :----------------- |
 | 自定义菜单布局 | 支持替换或扩展输入菜单中的功能模块。 |
-| 管理表情与扩展功能 | 可动态设置、显示或隐藏自定义表情面板及扩展功能菜单。 |
-| 定制顶部区域 | 支持设置自定义的菜单顶部布局，包括引用回复条与多选消息工具条。 |
-| 界面区域控制 | 可选择仅显示菜单顶部区域，隐藏底部输入与扩展面板部分。 |
+| 管理表情与扩展功能 | 可动态设置、显示或隐藏自定义表情菜单及扩展功能菜单。 |
+| 定制顶部扩展区域 | 支持设置自定义的菜单顶部布局，包括引用回复条与多选消息工具条。 |
+| 界面区域控制 | 可选择仅显示菜单顶部扩展区域，隐藏底部输入与扩展面板部分。 |
 
-  // TODO：添加顶部区域截图
-  // TODO：顶部扩展区域还是顶部区域？  研发
-  // TODO：表情功能还是表情面板？   研发
+  // TODO：添加顶部扩展区域截图
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置输入菜单" />
@@ -48,16 +46,16 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
     chatInputMenu?.let{
         it.setCustomPrimaryMenu()           //设置自定义的输入菜单，支持 View 和 Fragment 两种方式 
-        it.setCustomEmojiconMenu()          //设置自定义的表情功能，支持 View 和 Fragment 两种方式  
+        it.setCustomEmojiconMenu()          //设置自定义的表情菜单，支持 View 和 Fragment 两种方式  
         it.setCustomExtendMenu()            //设置自定义的扩展功能，支持 View、Dialog 和 Fragment 三种方式 
         it.setCustomTopExtendMenu()         //设置自定义的菜单顶部布局，支持 View 和 Fragment 两种方式 
 
-        it.hideInputMenu()                  //隐藏除了菜单顶部区域外的区域   
+        it.hideInputMenu()                  //隐藏除了菜单顶部扩展区域外的区域   
         it.hideExtendContainer()            //隐藏扩展区域，包括表情区域和扩展功能区域 
 
         it.chatPrimaryMenu                  //获取菜单项接口
         it.chatExtendMenu                   //获取扩展功能接口  
-        it.chatEmojiMenu                    //获取表情功能菜单接口   
+        it.chatEmojiMenu                    //获取表情菜单接口   
 
     }
 
@@ -71,17 +69,17 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | 方法                         | 描述                                                         |
 | :--------------------------- | :----------------------------------------------------------- |
 | `setCustomPrimaryMenu()`     | 设置自定义底部输入菜单，支持 View 或 Fragment 形式。   |
-| `setCustomEmojiconMenu()`    | 设置自定义表情功能，支持 View 或 Fragment 形式。             |
+| `setCustomEmojiconMenu()`    | 设置自定义表情菜单，支持 View 或 Fragment 形式。             |
 | `setCustomExtendMenu()`      | 设置自定义扩展功能功能，支持 View、Dialog 或 Fragment 形式。 |
 | `setCustomTopExtendMenu()`   | 设置自定义顶部扩展布局，支持 View 或 Fragment 形式。         |
 | `hideExtendContainer()`      | 隐藏扩展功能区域，包括表情区域和消息扩展菜单区域。               |
-| `hideInputMenu()`            | 隐藏除顶部区域外的输入菜单界面。                     |
-| `showEmojiconMenu()`         | 显示表情功能区域。                                           |
+| `hideInputMenu()`            | 隐藏除顶部扩展区域外的输入菜单界面。                     |
+| `showEmojiconMenu()`         | 显示表情菜单区域。                                           |
 | `showExtendMenu()`           | 显示扩展功能区域。                                           |
 | `showTopExtendMenu()`        | 显示顶部扩展区域。                                           |
 | `setChatInputMenuListener()` | 设置输入菜单事件监听器。                                     |
 | `chatPrimaryMenu`            | 获取底部输入菜单操作接口。                                   |
-| `chatEmojiMenu`              | 获取表情面板操作接口。                                       |
+| `chatEmojiMenu`              | 获取表情菜单操作接口。                                       |
 | `chatExtendMenu`             | 获取扩展功能菜单操作接口。                                   |
 | `chatTopExtendMenu`          | 获取顶部扩展区域操作接口。                                   |
 
@@ -125,7 +123,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
         .build()
 ```
 
-#### 管理表情面板
+#### 管理表情菜单
 
 1. 获取表情菜单对象。
 
@@ -136,8 +134,8 @@ val emojiconMenu: IChatEmojiconMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 2. 添加或移除自定义表情。
 
 - **单个表情**：对应 `ChatUIKitEmojicon` 对象，必须归属于某个表情分组的 `emojiconList`。
-- **表情分组**：对应 `ChatUIKitEmojiconGroupEntity`，代表表情面板中的一个 Tab 页（包含一组表情网格）。// TODO：原文是 “`ChatUIKitEmojiconGroupEntity` 对应表情面板的一个分组（一个 Tab + 分页网格）”
-- **分组管理**：表情面板的增删操作以分组为单位进行。
+- **表情分组**：对应 `ChatUIKitEmojiconGroupEntity` 对应表情菜单的一个分组（一个 Tab + 分页网格）。
+- **分组管理**：表情菜单的增删操作以分组为单位进行。
 
 ：：：tip
 表情分组 Tab（组 icon）默认不展示。ChatUIKit 的默认样式 `ease_chat_emoji_scroll_tabbar_style` 将 TabBar 的 `visibility` 设为了 `gone`。因此，即使只有 1 个组或有多个组，运行时 Tab icon 也可能不可见。
@@ -329,7 +327,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | InputMenu 容器                                             | - `uikit_live_input_cursor_bg`：输入光标背景 <br/> - `uikit_dialog_input_bg`：部分输入类弹窗背景 |
 | PrimaryMenu（输入栏）                                      | - `uikit_chat_primary_menu_setmode_voice_btn`：语音切换按钮（小麦克风） <br/> - `uikit_chat_primary_menu_setmode_keyboard_btn`：键盘切换图标 <br/> - `uikit_chatting_emoji_btn_normal`：表情按钮（笑脸） <br/> - `uikit_chat_primary_menu_more_button_selector`：加号/更多 <br/> - `uikit_chat_primary_menu_send_btn_selector`：发送按钮背景 <br/> - `uikit_chat_input_primary_send_icon`：发送图标 <br/> - `uikit_chat_primary_menu_input_bg`：输入框背景 |
 | ExtendMenu（更多菜单）                                     | - `uikit_chat_takepic_selector`：拍照 <br/> - `uikit_chat_image_selector`：相册 <br/> - `em_chat_video_selector`：视频 <br/> - `em_chat_file_selector`：文件 <br/> - `em_chat_card_selector`：名片 <br/> - `uikit_chat_extend_menu_wxstyle_bg`：微信风格：单个功能 icon 背景块 <br/> - `uikit_chat_menu_extend_indicator_selector`：分页指示点 <br/> - `uikit_chat_extend_menu_indicator_divider`：分页指示点间隔 |
-| EmojiMenu（表情面板）                                      | - `uikit_chat_emoji_item_bg_selector`：表情 item 背景 <br/> - `uikit_chat_emoji_delete_button_bg`：删除/退格按钮背景 <br/> - `uikit_chat_emoji_pager_send_btn_selector`：发送按钮背景 <br/> - `uikit_dot_emojicon_selected` / `uikit_dot_emojicon_unselected`：分页圆点 <br/> - `uikit_chat_emoji_send`：表情面板发送图标 <br/> - `uikit_chat_emoji_backspace`：表情面板退格图标 <br/> - `uikit_icon_arrow_left_thick`：当前默认的退格箭头图标 |
+| EmojiMenu（表情菜单）                                      | - `uikit_chat_emoji_item_bg_selector`：表情 item 背景 <br/> - `uikit_chat_emoji_delete_button_bg`：删除/退格按钮背景 <br/> - `uikit_chat_emoji_pager_send_btn_selector`：发送按钮背景 <br/> - `uikit_dot_emojicon_selected` / `uikit_dot_emojicon_unselected`：分页圆点 <br/> - `uikit_chat_emoji_send`：表情菜单发送图标 <br/> - `uikit_chat_emoji_backspace`：表情菜单退格图标 <br/> - `uikit_icon_arrow_left_thick`：当前默认的退格箭头图标 |
 | TopExtendMenu（菜单顶部扩展区域：引用回复条 / 多选工具条） | - `uikit_widget_chat_message_reply_background`：引用条整体背景 <br/> - `uikit_chat_quote_default_image`：引用图片默认占位 <br/> - `uikit_chat_quote_icon_cancel`：取消引用 <br/> - `uikit_chat_quote_icon_image` / `uikit_chat_quote_icon_video` / `uikit_chat_quote_icon_voice` <br/> - `uikit_chat_quote_icon_file` / `uikit_chat_quote_icon_user_card` / `uikit_chat_quote_icon_combine` <br/> - `uikit_video_play_btn_small_nor`：引用视频播放按钮 |
 
 ### 可同名覆盖的布局
@@ -341,7 +339,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | InputMenu 容器骨架                | `layout/uikit_widget_chat_input_menu_container.xml`          |
 | PrimaryMenu（输入栏）            | `layout/uikit_widget_chat_primary_menu.xml`                  |
 | ExtendMenu（更多菜单）            | - `layout/uikit_layout_chat_extend_menu.xml`：网格分页<br/> -  `layout/uikit_chat_menu_item.xml`：网格 item：微信风格<br/> -  `layout/uikit_chat_extend_indicator_item.xml`：分页指示点 item<br/> -  `layout/uikit_dialog_menu.xml`：UIActionSheet 弹窗容器<br/> -  `layout/uikit_chat_menu_item_horizontal.xml`：弹窗横向 item<br/> -  `layout/uikit_item_menu.xml`：通用横向 item |
-| EmojiMenu（表情面板）            | - `layout/uikit_widget_chat_emojicon.xml` <br/> - `layout/uikit_widget_emojicon_tab_bar.xml`<br/> -  `layout/uikit_chat_emoji_scroll_tab_item.xml`<br/> -  `layout/uikit_chat_emoji_expression_gridview.xml`<br/> -  `layout/uikit_row_chat_emoji_expression.xml`<br/> -  `layout/uikit_row_chat_emoji_big_expression.xml` |
+| EmojiMenu（表情菜单）            | - `layout/uikit_widget_chat_emojicon.xml` <br/> - `layout/uikit_widget_emojicon_tab_bar.xml`<br/> -  `layout/uikit_chat_emoji_scroll_tab_item.xml`<br/> -  `layout/uikit_chat_emoji_expression_gridview.xml`<br/> -  `layout/uikit_row_chat_emoji_expression.xml`<br/> -  `layout/uikit_row_chat_emoji_big_expression.xml` |
 | TopExtendMenu（菜单顶部扩展区域） | - `layout/uikit_widget_chat_message_reply.xml`：引用回复条<br/> -  `layout/uikit_layout_chat_messages_multi_select_menu.xml`：多选工具条 |
 
 ### 可同名覆盖的设置
@@ -352,10 +350,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | :------------------------------ | :----------------------------------------------------------- |
 | 常用文案                    | - `uikit_chat_primary_menu_button_send`：发送按钮 <br/> - `uikit_chat_primary_menu_button_pushtotalk`：按住说话提示 `uikit_chat_primary_menu_input_hint`：输入框占位文本<br/> -  `uikit_attach_take_pic`/`uikit_attach_picture`/`uikit_attach_video`/`uikit_attach_file`/`uikit_attach_contact_card`：“更多”菜单选项文案<br/> - `uikit_chat_inputmenu_quote_reply_to`：引用回复条前缀 “Replying to” |
 | 输入菜单交互行为           | - `ease_input_show_send_button`：控制输入内容时是否显示发送按钮 <br/> - `ease_input_edit_text_max_lines`：设置输入框最大显示行数 |
-| 视觉样式（字号/间距/颜色/背景等属性） | - PrimaryMenu：`ease_chat_primary_menu_*` <br/> - ExtendMenu：`ease_chat_extend_menu_*` <br/> - EmojiMenu：`ease_chat_emoji_*` <br/> - 引用回复条：`ease_chat_message_reply_*` |
-
-// TODO：`uikit_chat_primary_menu_button_pushtotalk`（按住说话）// TODO：点击录音？
-
+| 视觉样式（字号/间距/颜色/背景等属性） | - PrimaryMenu：`ease_chat_primary_menu_*` <br/> - ExtendMenu：`ease_chat_extend_menu_*` <br/> - EmojiMenu：`ease_chat_emoji_*` <br/> - 引用回复条：`ease_chat_message_reply_*` | 
 
 ## 可重载方法标记
 
