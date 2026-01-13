@@ -214,7 +214,7 @@ ChatClient.getInstance()
   .catch((error) => console.error('Error:', error));
 ```
 
-### 根据消息 ID 获取单条或多条本地消息
+### 根据消息 ID 获取本地消息
 
 自 SDK 1.11.0 版本开始，你可以调用 `getMessagesWithIds`, 传入单个或多个消息 ID 获取单个本地会话中的消息。
 

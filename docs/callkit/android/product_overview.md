@@ -52,11 +52,12 @@
 
 ### 来电通知
 
-<ImageGallery :columns="4">
+<ImageGallery :columns="3">
   <ImageItem src="/images/callkit/android/1v1_video_notification_inapp.png" title="一对一视频通话-应用内来电通知" />
   <ImageItem src="/images/callkit/android/1v1_voice_notification_inapp.png" title="一对一音频通话-应用内来电通知" />
   <ImageItem src="/images/callkit/android/group_call_notification_inapp.png" title="群组通话-应用内来电通知" />
-  <ImageItem src="/images/callkit/android/notification_system.png" title="系统级来电通知" />
+  <ImageItem src="/images/callkit/android/notification_lock.png" title="锁屏 Telecom 来电通知" />
+  <ImageItem src="/images/callkit/android/notification_background.png" title="应用后台运行时 Telecom 来电通知" />
 </ImageGallery>
 
 ## 使用限制

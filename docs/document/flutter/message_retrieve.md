@@ -151,7 +151,7 @@ EMConversation? conversation =
 List<EMMessage>? list = await conversation?.loadMessages();
 ```
 
-### 根据消息 ID 获取单条或多条本地消息
+### 根据消息 ID 获取本地消息
 
 自 SDK 4.16.0 版本开始，你可以调用 `loadMessagesWithIds` 方法传入单个或多个消息 ID 获取单个本地会话中的消息。
 

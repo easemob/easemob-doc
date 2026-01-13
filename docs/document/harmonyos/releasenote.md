@@ -2,6 +2,24 @@
 
 <Toc />
 
+## v1.9.0 Dev 2026-1-9（开发版）
+
+#### 新增特性
+
+- 新增 Native Crash 上报能力：当 SDK native 层代码发生 Crash 时，会在下次启动后上报 Crash 信息。
+- 支持 [根据关键字从本地数据库中获取本地会话中的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
+- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
+
+#### 优化
+
+优化 [获取加入群组接口](group_manage.html#获取群组列表) 的响应速度。
+
+#### 修复
+
+1. 修复当修改文本和自定义消息之外的消息时，`ChatMessageListener#onMessageContentChanged` 回调中不返回修改的信息的问题。
+2. 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，当设置为不保存消息（`FetchMessageOption#setIsSave` 设置为 `false`）仍会生成新的本地会话的问题。
+3. 修复群组或聊天室解散后，成员收到回调后，仍然会从服务器获取群组或聊天室详情的问题。
+
 ## v1.8.1 Dev 2025-11-6（开发版）
 
 #### 优化

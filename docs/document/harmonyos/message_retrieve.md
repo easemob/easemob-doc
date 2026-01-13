@@ -14,7 +14,9 @@
 
 - `ChatManager#fetchHistoryMessages`：根据 `FetchMessageOption` 类从服务端分页获取指定会话的历史消息；
 - `Conversation#searchMessagesByKeywords`：从本地获取群组中指定成员（而非全部成员）发送的消息；
-- `loadMoreMessagesFromDB`：从本地数据库加载消息；
+- `ChatManager#loadConversationMessagesWithKeyword`：通过关键词从本地数据库获取消息，返回会话 ID 及消息 ID 列表的映射关系；
+- `ChatManager#loadMessages`：根据消息 ID 列表从本地数据库获取消息对象列表；
+- `Conversation#loadMoreMessagesFromDB`：从本地数据库加载消息；
 - `ChatManager#getMessage`：根据消息 ID 获取单个本地消息；
 - `Conversation#getMsgCountInRange`：获取本地数据库中单个会话在某个时间段内的全部消息数。
 
@@ -72,6 +74,42 @@ if (conversation) {
       // failure logic
   });
 }
+```
+
+### 根据关键字获取本地会话中的消息
+
+自 SDK 1.9.0 版本开始，你可以调用 `loadConversationMessagesWithKeyword` 方法通过关键词从本地数据库中获取消息，SDK 返回会话 ID 及消息 ID 列表的映射关系，其中消息 ID 列表按 `direction` 设置的方向排列。
+
+```typescript
+// keyword：搜索关键词。设为空字符串表示忽略该参数。
+// timestamp：搜索开始的 Unix 时间戳，单位为毫秒。如果该参数设置为负数，则从最新消息向前获取。默认参数为 -1。
+// sender：消息发送方。设为空字符串表示忽略该参数。默认参数为空字符串。
+// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序获取；`DOWN`：按消息时间戳的顺序获取。
+// scope：消息搜索范围。详见 MessageSearchScope。默认参数为 MessageSearchScope.ALL。
+ChatClient.getInstance().chatManager()?.loadConversationMessagesWithKeyword(keyword, timestamp, sender, direction, scope)
+  .then((resultMap) => {
+    // resultMap: Map<string, Array<string>>
+    // key 为 conversationId，value 为 msgId 列表
+    resultMap.forEach((msgIds, conversationId) => {
+      // use conversationId and msgIds
+    });
+  }).catch((e: ChatError) => {
+    // failure logic
+  });
+```
+
+### 根据消息 ID 列表获取本地消息
+
+自 SDK 1.9.0 版本开始，你可以调用 `loadMessages` 方法根据消息 ID 列表从本地数据库获取消息对象列表。该方法一次最多获取 20 条消息，返回的消息按照时间倒序排列。
+
+```typescript
+// messageIds：消息 ID 列表。列表长度取值范围 [0,20]。
+ChatClient.getInstance().chatManager()?.loadMessages(messageIds)
+  .then((messages) => {
+    // success logic
+  }).catch((e: ChatError) => {
+    // failure logic
+  });
 ```
 
 ### 从本地加载消息
