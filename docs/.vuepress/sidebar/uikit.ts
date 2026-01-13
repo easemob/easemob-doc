@@ -162,7 +162,7 @@ const chatUikitSidebar = [
       text: "消息",
       collapsible: true,
       children: [
-        { text: "页面介绍", link: "chatuikit_chat_intro.html" },
+        { text: "页面介绍", link: "chatuikit_custom_chat_intro.html" },
         { text: "自定义页面", link: "chatuikit_chat.html", except: ["android"]},
         {
           text: "自定义页面",

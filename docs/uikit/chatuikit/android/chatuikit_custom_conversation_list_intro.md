@@ -7,7 +7,7 @@
 会话列表页面通过 `ChatUIKitConversationListFragment` 实现，由标题栏、搜索栏和会话列表组成。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_conversation_list.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/custom_conversation_list.png" title="会话列表页面 ChatUIKitConversationListFragment" />
 </ImageGallery>
 
 ### 标题栏
