@@ -49,27 +49,8 @@ function sendTextMessage() {
 
 - 语音、图片、视频和文件消息本质上是附件消息。
 - 创建和发送附件类型消息。SDK 将附件上传到环信服务器，获取消息的基本信息以及服务器上附件文件的路径。
+  另外，你也可以 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 - 对于图片消息，环信服务器会自动生成图片缩略图；对于视频消息，视频首帧为缩略图。
-
-对于消息附件，你也可以将附件上传到自己的服务器，而不是环信服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
-
-```javascript
-function sendPrivateUrlImg() {
-  let option = {
-    chatType: "singleChat",
-    // 消息类型。
-    type: "img",
-    // 图片文件的 URL 地址。
-    url: "img url",
-    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-    to: "username",
-  };
-  // 创建一条图片消息。
-  let msg = WebIM.message.create(option);
-  //  调用 `send` 方法发送该图片消息。
-  conn.send(msg);
-}
-```
 
 ### 发送语音消息
 
@@ -507,6 +488,28 @@ conn.send
 ```
 
 ## 更多
+
+### 上传消息附件至自有服务器
+
+若要将消息附件上传至你自己的服务器（而非环信服务器），需在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html) 设置为 `true`。发送消息时，直接传入已上传附件的 URL 即可。例如，发送图片消息时，可调用 `sendPrivateUrlImg` 方法并传入图片 URL。
+
+```javascript
+function sendPrivateUrlImg() {
+  let option = {
+    chatType: "singleChat",
+    // 消息类型。
+    type: "img",
+    // 图片文件的 URL 地址。
+    url: "img url",
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "username",
+  };
+  // 创建一条图片消息。
+  let msg = WebIM.message.create(option);
+  //  调用 `send` 方法发送该图片消息。
+  conn.send(msg);
+}
+```
 
 ### 聊天室消息优先级与消息丢弃逻辑
 

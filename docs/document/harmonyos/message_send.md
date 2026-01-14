@@ -63,6 +63,8 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
    
 自 1.7.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
 
+
+
 ### 发送语音消息
 
 1. 发送语音消息前，在应用层录制语音文件。

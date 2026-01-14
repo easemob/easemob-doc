@@ -45,7 +45,7 @@ message.chatType = EMChatTypeChatRoom;
 发送附件消息分为以下两步：
 
 1. 创建和发送附件类型消息。
-2. SDK 将附件上传到环信服务器。
+2. SDK 将附件上传到环信服务器。另外，你也可以 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
 ### 发送语音消息
 
@@ -252,6 +252,30 @@ EMChatMessage* msg = [[EMChatMessage alloc] initWithConversationID:@"conversatio
 ```
 
 ## 更多
+
+### 上传消息附件至自有服务器
+
+发消息时，若要将消息附件上传至你自己的服务器（而非环信服务器），需执行以下操作：
+
+1. 在 SDK 初始化时将 `EMOptions#isAutoTransferMessageAttachments` 参数设置为 `NO`，使 SDK **不再自动上传或下载附件**。设置后，`EMChatManager#sendMessage()` 将不再处理图片、视频等附件的自动处理与上传逻辑。
+2. 图片上传到你的服务器后，将附件 URL 填入消息体，然后发送消息。
+   以图片消息为例，上传后获取其 URL，通过 `sendPrivateUrlImg` 设置到消息体中，然后调用 `sendMessage()` 发送消息。
+
+```objectivec
+- (void)sendPrivateUrlImg:(NSString*)urlPath
+{
+    // 构造图片消息
+    EMImageMessageBody* body = [[EMImageMessageBody alloc] initWithLocalPath:@"localPath" displayName:@"IMG_111.png"];
+    body.remotePath = urlPath; // 图片远程路径
+    body.size = CGSizeMake(100, 100); // 图片尺寸
+    body.fileLength = 10000; // 图片文件大小，单位为字节
+    EMChatMessage* message = [[EMChatMessage alloc] initWithConversationID:@"toUserId" body:body ext:nil];
+    // 发送图片消息
+    [EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:^(EMChatMessage * _Nullable message, EMError * _Nullable error) {
+            
+    }];
+}
+```
 
 ### 聊天室消息优先级与消息丢弃逻辑
 
