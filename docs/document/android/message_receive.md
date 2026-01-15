@@ -12,8 +12,7 @@
 ## 接收文本消息
 
 - 你可以用注册监听 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 接收消息。该 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 可以多次添加，请记得在不需要的时候移除 `listener`，如在 `activity` 的 `onDestroy()` 时。
-- 在新消息到来时，你会收到 `onMessageReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `EMOptions#setIncludeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
-- 对于聊天室消息，你可以通过消息的 `EMMessage#isBroadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
+- 在新消息到来时，你会收到 `onMessageReceived` 回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
 ```java
 EMMessageListener msgListener = new EMMessageListener() {
@@ -38,8 +37,6 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 
 1. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
 2. 获取附件的服务器地址和本地路径。
-
-自 4.14.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
 
 ### 接收语音消息
 
@@ -268,4 +265,18 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
     }
 });
 ```
+
+## 更多
+
+### 消息接收回调返回发送成功的消息
+
+自 4.4.0 版本开始，若初始化时开启了 `EMOptions#setIncludeSendMessageInMessageListener` 选项，发送成功的消息也会通过 `onMessageReceived` 事件返回。
+
+### 判断消息是否为聊天室广播消息
+
+自 4.2.1 版本开始，对于聊天室消息，你可以通过消息的 `EMMessage#isBroadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
+
+### 消息附件下载鉴权
+
+自 4.14.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
 

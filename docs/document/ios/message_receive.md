@@ -14,8 +14,7 @@
 ## 接收文本消息
 
 - 你可以用注册监听 `EMChatManagerDelegate` 接收消息。该 `EMChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除 `Delegate`，如在 `ViewController` `dealloc()` 时。
-- 在新消息到来时，你会收到 `messagesDidReceive` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `EMOptions#includeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
-- 对于聊天室消息，你可以通过消息的 `EMChatMessage#broadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
+- 在新消息到来时，你会收到 `messagesDidReceive` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
 ```objectivec
 // 添加代理。
@@ -47,8 +46,6 @@
 
 1. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
 2. 获取附件的服务器地址和本地路径。
-
-自 ISO SDK 4.14.0 版本开始，支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 API `downloadMessageAttachment` 下载消息附件。
 
 ### 接收语音消息
 
@@ -220,4 +217,18 @@ NSString *localPath = body.localPath;
     }
 }
 ```
+
+## 更多
+
+### 消息接收回调返回发送成功的消息
+
+自 4.4.0 版本开始，若初始化时打开了 `EMOptions#includeSendMessageInMessageListener` 开关，发送成功的消息也会通过 `messagesDidReceive` 返回。
+
+### 判断消息是否为聊天室广播消息
+
+自 4.2.1 版本开始，对于聊天室消息，你可以通过消息的 `EMChatMessage#broadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
+
+### 消息附件下载鉴权
+
+自 4.14.0 版本开始，支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 API `downloadMessageAttachment` 下载消息附件。
 

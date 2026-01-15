@@ -60,10 +60,6 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器。
 2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
-   
-自 1.7.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
-
-
 
 ### 发送语音消息
 
@@ -274,6 +270,59 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 ```
 
 ## 更多
+
+### 上传消息附件至自有服务器
+
+发消息时，若要将消息附件上传至你自己的服务器（而非环信服务器），需执行以下操作：
+
+1. 在 SDK 初始化时调用 `ChatOptions#setAutoTransferMessageAttachments(false)`，使 SDK **不再自动上传或下载附件**。设置后，`ChatManager#sendMessage()` 将不再处理图片、视频等附件的自动处理与上传逻辑。
+2. 图片上传到你的服务器后，将附件 URL 填入消息体，然后发送消息。
+   以图片消息为例，上传后获取其 URL，通过 `ImageMessageBody#setRemoteUrl(string)` 设置到消息体中，然后调用 `sendMessage()` 发送消息。   
+
+```ts
+// 1. SDK 初始化时关闭“自动上传附件到环信服务器”
+// 注意：ChatOptions 构造参数需要提供 AppKey/AppId（示例仅展示关键点）
+let options = new ChatOptions({ appKey: '<YourAppKey>' });
+options.setAutoTransferMessageAttachments(false);
+ChatClient.getInstance().init(context, options);
+
+// 2. 你的业务：将图片上传到自有服务器，拿到可访问的 URL
+// const urlPath = await uploadToYourServerAndGetUrl(...);
+
+// 3. 发送图片消息
+export function sendPrivateUrlImg(
+  toUserId: string,
+  urlPath: string,
+  localPathForPreview: string /*可选：用于本地预览/占位*/
+) {
+  // 将远端 URL（你的服务器地址）写入消息体
+  const body = new ImageMessageBody(localPathForPreview);
+  body.setRemoteUrl(urlPath);      // 图片远程 URL（你的服务器地址）
+  body.setFileName('IMG_111.png'); // 可选：文件名
+  // body.setFileLength(10000);    // 可选：文件大小（字节），不设置也可以
+
+  // 构造图片发送消息（仍建议传一个本地路径用于本地展示；实际下载通过 urlPath 由你自己控制）
+  const message = ChatMessage.createSendMessage(toUserId, body, ChatType.Chat);
+  if (!message) {
+    // localPathForPreview 不可访问时，createImageSendMessage 会返回 undefined
+    return;
+  }
+
+  // （可选）发送回调
+  message.setMessageStatusCallback({
+    onSuccess: () => { /* send success */ },
+    onError: (code: number, error: string) => { /* send fail */ },
+    onProgress: (progress: number) => { },
+  });
+
+  // 发送消息
+  ChatClient.getInstance().chatManager()?.sendMessage(message);
+}
+```
+
+:::tip
+接收端收到消息后，可通过 `(message.getBody() as ImageMessageBody).getRemoteUrl()` 获取你的 URL，然后用你自己的下载/展示逻辑处理（因为你已关闭 SDK 自动附件传输）。
+:::
 
 ### 聊天室消息优先级与消息丢弃逻辑
 
