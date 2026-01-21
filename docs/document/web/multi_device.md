@@ -71,7 +71,7 @@ conn.getSelfIdsOnOtherPlatform().then((res) => {
 2. 初始化 SDK 时，设置 `customOSPlatform` 参数，可选值为 [1,100]，确保该参数的值与环信控制台的 **添加自定义平台** 对话框中设置的设备平台的值相同。
 
 ```javascript
-const conn = new EC.connection({
+const conn = new WebIM.connection({
     appKey: 'you appKey',
     customOSPlatform: 1, // 设置自定义平台
     customDeviceName: '自定义平台1' // 设置平台名称
@@ -192,7 +192,7 @@ A：对于使用 Uniapp 打包的移动端和小程序端，在环信侧多端�
 客户端示例代码如下：
 
 ```javascript
-const conn = new EC.connection({
+const conn = new WebIM.connection({
     appKey: 'you appKey',
     // 这里传入的自定义平台 ID 必须与控制台上设置的相同。
     customOSPlatform: 1, // 自定义平台 ID

@@ -225,7 +225,7 @@ function sendPrivateImg(res) {
 
 ```javascript
 sendGIFMsg(){
-    const file = EC.utils.getFileUrl(imgInput as HTMLInputElement);
+    const file = WebIM.utils.getFileUrl(imgInput as HTMLInputElement);
     let option = {
       chatType: "singleChat",
       type: "img",
@@ -233,7 +233,7 @@ sendGIFMsg(){
       file: file,
       isGif: file.data.type === "image/gif", // 设置是否为 GIF 图片
     };
-    let msg = EC.message.create(option);
+    let msg = WebIM.message.create(option);
     conn.send(msg);
 }
 ```

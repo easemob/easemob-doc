@@ -128,7 +128,7 @@ let options = {
   targetId: "threadId",
   // 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
   pageSize: 20,
-  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
+  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
   cursor: -1,
   // 会话类型：子区为 "groupChat"。
   chatType: "groupChat",
