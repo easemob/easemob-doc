@@ -40,7 +40,7 @@
 ```javascript
 // pageSize: 每页期望获取的会话数量。取值范围为 [1,50]，默认为 `20`。
 // cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段，SDK 从最新活跃的会话开始获取。后续调用传上一次查询结果的游标 res.data.cursor。若 SDK 返回的 cursor 值为空字符串（''），表示当前为最后一页数据。
-connection.getServerConversations({
+conn.getServerConversations({
     pageSize: 50,
     cursor: '',
     includeEmptyConversations: true // 是否获取空会话

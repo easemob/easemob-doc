@@ -51,10 +51,10 @@ conn.deleteAllMessagesAndConversations().then(() => {
 
 ```javascript
 // 按时间删除消息
-connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', beforeTimeStamp: Date.now()})
+conn.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', beforeTimeStamp: Date.now()})
 
 // 按消息 ID 删除消息
-connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', messageIds: ['messageId']})
+conn.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', messageIds: ['messageId']})
 ```
 
 
