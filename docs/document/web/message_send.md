@@ -184,7 +184,7 @@ function sendPrivateImg() {
 
 ```javascript
 sendGIFMsg(){
-    const file = EC.utils.getFileUrl(imgInput as HTMLInputElement);
+    const file = WebIM.utils.getFileUrl(imgInput as HTMLInputElement);
     let option = {
       chatType: "singleChat",
       type: "img",
@@ -192,7 +192,7 @@ sendGIFMsg(){
       file: file,
       isGif: file.data.type === "image/gif", // 设置是否是为GIF图片
     };
-    let msg = EC.message.create(option);
+    let msg = WebIM.message.create(option);
     conn.send(msg);
 }
 ```
@@ -434,7 +434,7 @@ function sendCustomMsg() {
 2. 发送合并消息。
 3. 对端收到合并消息后进行解析，获取原始消息列表。
 
-你可以调用 `message.create` 方法创建一条合并消息，然后调用 `connection.send` 方法发送该条消息。
+你可以调用 `message.create` 方法创建一条合并消息，然后调用 `conn.send` 方法发送该条消息。
 
 创建合并消息时，需要设置以下参数：
 
