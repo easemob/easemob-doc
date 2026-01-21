@@ -57,7 +57,7 @@ function sendTextMessage() {
         isChatThread: 'true',   
     }
     let msg = WebIM.message.create(option); 
-    connection.send(msg).then(() => {
+    conn.send(msg).then(() => {
         console.log('send text message success');  
     }).catch((e) => {
         console.log("send text message error");  
@@ -73,7 +73,7 @@ function sendTextMessage() {
 
 ```javascript
 // 监听收到的文本消息
-connection.addEventHandler('THREADMESSAGE',{
+conn.addEventHandler('THREADMESSAGE',{
   onTextMessage:(message) => {
     if(message.chatThread && JSON.stringify(message.chatThread)!=='{}'){
       console.log(message)
@@ -102,7 +102,7 @@ let option = {
   // 设置是否为子区消息。
   isChatThread: 'true'
 };
-connection.recallMessage(option).then((res) => {
+conn.recallMessage(option).then((res) => {
   console.log('success', res)
 }).catch((error) => {
   // 消息撤回失败 (超过 2 分钟)。

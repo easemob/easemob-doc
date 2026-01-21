@@ -137,7 +137,7 @@ WebIM.conn.getSilentModeForAll()
 
 ```javascript
 // pageSize 的取值范围为 [1,100]，默认值为 10。
-connection.getSilentModeRemindTypeConversations({pageSize: 10})
+conn.getSilentModeRemindTypeConversations({pageSize: 10})
 ```
 
 ## 设置单个会话的推送通知

@@ -28,7 +28,7 @@
 举报违规消息的示例代码如下：
 
 ```javascript
-connection.reportMessage({
+conn.reportMessage({
     reportType: 'report type', 
     reportReason: 'report reason',
     messageId: 'ID of the reported message'

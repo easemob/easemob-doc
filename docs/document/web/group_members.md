@@ -106,7 +106,7 @@ conn.removeGroupMember(option).then(res => console.log(res))
 - 批量移出群成员，示例代码如下：
 
 ```javascript
-connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
+conn.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 ```
 
 ### 管理群成员自定义属性
@@ -134,7 +134,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
         },
     }   
 
-    WebIM.conn.setGroupMemberAttributes(options).then((res) => {
+    conn.setGroupMemberAttributes(options).then((res) => {
         console.log(res)
     }).catch((e) => {
         console.log(e)
@@ -153,7 +153,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
         userId: 'userId'
     }   
 
-    WebIM.conn.getGroupMemberAttributes(options).then((res) => {
+    conn.getGroupMemberAttributes(options).then((res) => {
         console.log(res)
     }).catch((e) => {
         console.log(e)
@@ -178,7 +178,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
         keys: ['key1', 'key2']
     }   
 
-    WebIM.conn.getGroupMembersAttributes(options).then((res) => {
+    conn.getGroupMembersAttributes(options).then((res) => {
         console.log(res)
     }).catch((e) => {
         console.log(e)
