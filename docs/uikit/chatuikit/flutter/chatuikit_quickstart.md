@@ -49,14 +49,29 @@ flutter create chat_uikit_demo --platforms=android,ios
 
 ### 第二步 添加依赖
 
+#### 远程依赖
+
 进入项目目录，添加最新版 `em_chat_uikit`：
 
 ```bash
 cd chat_uikit_demo
-flutter pub add em_chat_uikit:2.3.0-dev.1
+flutter pub add em_chat_uikit:2.3.0
 flutter pub get
 ```
 
+#### 本地依赖
+
+在 Flutter 项目根目录下，在 `pubspec.yaml` 文件的 `dependencies` 部分添加 `em_chat_uikit` 的本地依赖。具体操作示例如下：
+
+```text
+dependencies:
+ em_chat_uikit:
+  path: /Users/XXX/Workspace/Flutter/uikit_repo/easemob-uikit-flutter
+```
+
+:::tip
+`path` 指向本地的 `em_chat_uikit` 目录, 支持绝对路径或相对于项目根目录的相对路径。
+:::
 
 ### 第三步 初始化
 

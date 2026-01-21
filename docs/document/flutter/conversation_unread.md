@@ -37,6 +37,8 @@ int unreadCount =
 你可以调用 `unreadCount` 方法获取本地指定会话的未读消息数，示例代码如下：
 
 ```dart
+// 获取本地指定会话
+EMConversation? conversation = await EMClient.getInstance.chatManager.getConversation("convId", type: EMConversationType.Chat);
 int unreadCount = await conversation.unreadCount();
 ```
 

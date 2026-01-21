@@ -1,6 +1,8 @@
 # Android CallKit 更新日志
 
-## 版本 V4.18.1 Dev 2025-11-6
+## v4.18.1 
+
+该版本在 2026 年 11 月 6 日发布。
 
 #### 优化
 
@@ -12,11 +14,15 @@
 - 修复多人通话界面自己说话状态图标不展示问题。
 - 修复通话页面回到后台时，麦克风自动解禁的问题。
 
-## 版本 V4.18.0 2025-10-31
+## v4.18.0
+
+该版本在 2026 年 10 月 31 日发布。
 
 修复用户 RTC 相关状态未重置问题。
 
-## 版本 4.16.0 2025-08-29
+## v4.16.0
+
+该版本在 2025 年 8 月 29 日发布。
 
 从该版本开始，Android CallKit 源码使用 Kotlin 语言开发，代码迁移至 [GitHub 新 repo](https://github.com/easemob/easemob-callkit-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-callkit-android) ，老版本不再维护。
 
