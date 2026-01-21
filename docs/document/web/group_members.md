@@ -390,8 +390,7 @@ conn.unmuteGroupMember(option).then(res => console.log(res))
 群成员可以调用 `isInGroupMutelist` 方法查看自己是否在群组禁言列表中。
 
 ```javascript
-conn
-    .isInGroupMutelist({ groupId: 'groupId' })
+conn.isInGroupMutelist({ groupId: 'groupId' })
     .then((res) => {
       console.log(res)
     })
