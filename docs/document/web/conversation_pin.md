@@ -44,8 +44,8 @@ connection.pinConversation({conversationId:'conversationId', conversationType: '
 示例代码如下，返回数据类型参见[从服务器分页获取会话列表](conversation_list#从服务器分页获取会话列表)。
 
 ```javascript
-// pageSize: 每页返回的会话数。取值范围为 [1,50]。
-// cursor：开始获取数据的游标位置。若传空字符串（''），SDK 从最新置顶的会话开始查询。
+// pageSize: 每页返回的会话数。取值范围为 [1,50]，默认为 `20`。
+// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段，SDK 从最新置顶的会话开始查询。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
 connection.getServerPinnedConversations({
     pageSize: 50,
     cursor: '',

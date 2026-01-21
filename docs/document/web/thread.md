@@ -154,8 +154,8 @@ conn.getChatThreadDetail({chatThreadId: 'chatThreadId'}).then((res)=>{
 
 ```javascript
 // chatThreadId：子区 ID
-// pageSize：单次请求返回的成员数，取值范围为 [1,50]
-// cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
+// pageSize：单次请求返回的成员数，取值范围为 [1,50]，默认为 20。
+// cursor：开始获取数据的游标位置，首次调用方法时传 `null`、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
 conn.getChatThreadMembers({chatThreadId: 'chatThreadId ',pageSize:20,cursor:'cursor'}).then((res)=>{
   console.log(res)
 });
@@ -166,8 +166,8 @@ conn.getChatThreadMembers({chatThreadId: 'chatThreadId ',pageSize:20,cursor:'cur
 1. 用户可以调用 `getJoinedChatThreads` 方法从服务器分页获取自己加入的子区列表：
 
 ```javascript
-// pageSize：单次请求返回的子区数，取值范围为 [1,50]
-// cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
+// pageSize：单次请求返回的子区数，取值范围为 [1,50]，默认为 20。
+// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
 conn.getJoinedChatThreads({cursor: 'cursor',pageSize: 20}).then((res)=>{
   console.log(res)
 });
@@ -177,8 +177,8 @@ conn.getJoinedChatThreads({cursor: 'cursor',pageSize: 20}).then((res)=>{
 
 ```javascript
 // parentId：群组 ID
-// pageSize：单次请求返回的子区数，取值范围为 [1,50]
-// cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
+// pageSize：单次请求返回的子区数，取值范围为 [1,50]，默认为 20。
+// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
 conn.getJoinedChatThreads({parentId: 'parentId',cursor: 'cursor',pageSize: 20}).then((res)=>{
   console.log(res)
 });
@@ -188,8 +188,8 @@ conn.getJoinedChatThreads({parentId: 'parentId',cursor: 'cursor',pageSize: 20}).
 
 ```javascript
 // parentId：群组 ID
-// pageSize：单次请求返回的子区数，取值范围为 [1,50]
-// cursor：开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
+// pageSize：单次请求返回的子区数，取值范围为 [1,50]，默认为 20。
+// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
 conn.getChatThreads({parentId: 'parentId', cursor:'cursor', pageSize: 20}).then((res)=>{
   console.log(res)
 });
