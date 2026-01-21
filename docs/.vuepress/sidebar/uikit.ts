@@ -142,7 +142,7 @@ const chatUikitSidebar = [
           text: "自定义页面",
           collapsible: true,
           children: [
-            { text: "自定义搜索栏", link: "chatuikit_custom_conversation_searchbar.html" },
+            { text: "自定义搜索栏", link: "chatuikit_custom_conversation_list_searchbar.html" },
             {
               text: "自定义会话列表",
               collapsible: true,
@@ -177,7 +177,7 @@ const chatUikitSidebar = [
              ],
             only: ["android"],
           },
-            { text: "自定义底部输入框", link: "chatuikit_custom_chat_inputmenu.html" },
+            { text: "自定义底部输入框", link: "chatuikit_custom_chat_ inputmenu.html" },
           ],
         only: ["android"],
   },
