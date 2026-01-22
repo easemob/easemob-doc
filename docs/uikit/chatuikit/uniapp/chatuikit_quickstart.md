@@ -73,7 +73,7 @@ npm i easemob-websdk@4.11.0 pinyin-pro@3.26.0 mobx@6.13.4 --save
 
 1. 打开 `pages/index/index.vue` 文件，并替换为如下内容：
 
-```jsx
+```vue
 <template>
   <view class="index">
     <view class="login-form">
@@ -186,7 +186,7 @@ const logout = () => {
 
 要查看服务器域名配置，请点击[这里](https://doc.easemob.com/document/applet/wechat.html#配置服务器域名) 。
 
-```jsx
+```vue
 <script lang="ts">
 import { ChatUIKit } from "./ChatUIKit";
 import websdk from "easemob-websdk/uniApp/Easemob-chat";
