@@ -15,7 +15,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM 通过 [EMChatManager 类](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 类和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类支持从服务器和本地获取会话列表，主要方法如下：
+环信即时通讯 IM 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 类和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类支持从服务器和本地获取会话列表，主要方法如下：
 
 - `EMChatManager#asyncFetchConversationsFromServer`：从服务器获取会话列表。
 - `EMChatManager#asyncFilterConversationsFromDB`：获取本地所有会话或筛选要获取的会话。
