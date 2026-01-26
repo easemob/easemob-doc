@@ -15,7 +15,7 @@
 ## 请求 URL
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{username}/chatfiles/lifetime
+PUT https://{host}/{org_name}/{app_name}/users/{username}/chatfiles/lifetime
 ```
 
 | 参数     | 类型   | 是否必需 | 描述                                                        |
