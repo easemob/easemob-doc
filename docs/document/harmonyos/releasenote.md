@@ -2,6 +2,25 @@
 
 <Toc />
 
+## v1.10.0 Dev 2026-1-26（开发版）
+
+#### 新增特性
+
+1. 长连接支持 WebSocket 协议。
+2. `ChatOptions` 新增 API 支持 WebSocket 私有部署:
+   - `ChatOptions#setWebSocketServer`：设置 WebSocket 服务器地址。
+   - `ChatOptions#getWebSocketServer`：获取设置的 WebSocket 服务器地址。
+   - `ChatOptions#setWebSocketPort`：设置 WebSocket 服务器端口号。
+   - `ChatOptions#getWebSocketPort`：获取设置的 WebSocket 服务器端口号。
+
+#### 优化
+
+优化调用 `logout` 方法的退出逻辑。 
+
+#### 修复
+
+修复页面间传递 `ChatMessage` 对象时偶现为空的问题。
+
 ## v1.9.0 Dev 2026-1-9（开发版）
 
 #### 新增特性

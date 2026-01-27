@@ -6,7 +6,8 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.9.0 开发版发布   | - 新增 Native Crash 上报能力：当 SDK native 层代码发生 Crash 时，会在下次启动后上报 Crash 信息。<br/> - 支持 [根据关键字从本地数据库中获取本地会话中的消息](/document/harmonyos/message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。<br/> - 支持 [根据消息 ID 列表获取本地消息](/document/harmonyos/message_retrieve.html#根据消息-id-列表获取本地消息)。 | 2026-1-9       | [HarmonyOS SDK 4.17.1 更新日志](/document/harmonyos/releasenote.html#v1-9-0-dev-2026-1-9-开发版)          |
+| HarmonyOS SDK 1.9.0 开发版发布   | - 新增 Native Crash 上报能力：当 SDK native 层代码发生 Crash 时，会在下次启动后上报 Crash 信息。<br/> - 支持 [根据关键字从本地数据库中获取本地会话中的消息](/document/harmonyos/message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。<br/> - 支持 [根据消息 ID 列表获取本地消息](/document/harmonyos/message_retrieve.html#根据消息-id-列表获取本地消息)。 | 2026-1-9       | [HarmonyOS SDK 1.9.0 更新日志](/document/harmonyos/releasenote.html#v1-9-0-dev-2026-1-9-开发版)          |
+| HarmonyOS SDK 1.10.0 开发版发布 | - 长连接支持 WebSocket 协议。<br/> - 支持 WebSocket 私有部署。|2026-1-26 | [HarmonyOS SDK 1.10.0 更新日志](/document/harmonyos/releasenote.html#v1-10-0-dev-2026-1-26-开发版) |
 
 #### UIKit 发版
 
