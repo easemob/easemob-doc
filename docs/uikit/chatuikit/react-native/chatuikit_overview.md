@@ -4,7 +4,7 @@
 
 环信聊天 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
-对于 uniapp UIKit/ Demo 的源码，你可以查看 [GitHub](https://github.com/easemob/easemob-uikit-reactnative) 或 [Gitee 地址](https://gitee.com/easemob-code/react-native-chat-library)。
+对于 React Native UIKit/ Demo 的源码，你可以查看 [GitHub](https://github.com/easemob/easemob-uikit-reactnative) 或 [Gitee 地址](https://gitee.com/easemob-code/react-native-chat-library)。
 
 ## UIKit 基本项目结构
 
