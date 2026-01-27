@@ -243,10 +243,6 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
         }
 ```
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_input_bar.png" title="聊天页面输入框配置" />
-</ImageGallery>
-
 ## 设置消息举报功能
 
 你可以通过 `Appearance.chat.reportSelectionTags` 和 `Appearance.chat.reportSelectionReasons` 设置消息举报功能的举报标签数组以及对应的原因数组，key-value 格式，二者一 一对应。
