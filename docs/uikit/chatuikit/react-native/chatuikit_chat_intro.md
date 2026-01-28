@@ -86,8 +86,8 @@ export function ConversationDetailScreen(props: Props) {
 | convType             | ChatConversationType        | 是       | 会话类型。 |
 | convName             | string                      | 否       | 会话名称。 |
 | containerStyle       | object                      | 否       | 修改组件样式。  |
-| input                | object                      | 否       | 输入组件属性、引用属性、自定义组件。详见[输入组件介绍](#输入组件)。 |
-| list                 | object                      | 否       | 消息列表组件属性、引用属性、自定义组件。详见[列表组件介绍](#消息列表组件)。 |
+| input                | object                      | 否       | 输入组件属性、引用属性、自定义组件。详见[输入组件介绍](chatuikit_chat.html#输入组件)。 |
+| list                 | object                      | 否       | 消息列表组件属性、引用属性、自定义组件。详见[列表组件介绍](chatuikit_chat.html#消息列表组件)。 |
 | onClickedAvatar      | function                    | 否       | 点击会话头像的回调。   |
 | NavigationBar        | function                    | 否       | 自定义导航栏组件。   |
 | enableNavigationBar  | boolean                     | 否       | 是否激活导航栏。如果为 `false`，则不显示导航栏。    |
