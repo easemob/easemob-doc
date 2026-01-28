@@ -73,11 +73,9 @@ SDK 初始化和相关功能配置，请查阅相关配置文档：
   
 SDK 功能、接口配置方式及示例说明：
 
-- Android：[接口集成](https://doc.easemob.com/document/android/initialization.html)
-
-- iOS：[接口集成](https://doc.easemob.com/document/ios/initialization.html)
-
-- HarmonyOS：[接口集成](https://doc.easemob.com/document/harmonyos/initialization.html)
+- Android：[接口集成](https://doc.easemob.com/document/android/login.html)
+- iOS：[接口集成](https://doc.easemob.com/document/ios/login.html)
+- HarmonyOS：[接口集成](https://doc.easemob.com/document/harmonyos/login.html)
 
 Android 操作系统 SDK 功能、接口配置方式及示例说明：
 
