@@ -2,6 +2,20 @@
 
 <Toc />
 
+## v1.13.0 2026-01-28
+
+#### 新增特性
+
+- 依赖的原生 SDK 升级到版本（`iOS` 4.17.1 和`Android` 4.17.1）。
+- 长连接支持 WebSocket 协议。
+- `ChatOptions` 新增 API 支持 WebSocket 私有部署:
+   - `ChatOptions#webSocketServer`：设置 WebSocket 服务器地址。
+   - `ChatOptions#webSocketPort`：设置 WebSocket 服务器端口号。
+
+#### 修复
+
+修复原生平台上的 bug。
+
 ## v1.12.0 2025-11-19
 
 - 依赖的原生 SDK 升级：
