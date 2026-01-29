@@ -108,8 +108,8 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android SDK 4.17.0 开发版发布   | - 长连接支持 WebSocket 协议。<br/> - 支持 WebSocket 私有部署 <br/> - 主动退出账号时添加 logout 协议 | 2025-9-25       | [Android SDK 4.17.0 更新日志](/document/android/releasenote.html#v4-17-0-dev-2025-9-25-开发版)          |
-| iOS SDK 4.17.0 开发版发布   | 长连接支持 WebSocket 协议。 | 2025-9-28       | [iOS SDK 4.17.0 更新日志](/document/ios/releasenote.html#v4-17-0-dev-2025-9-28-开发版)          |
+| Android SDK 4.17.0 开发版发布   | - 长连接支持 WebSocket 协议。<br/> - 支持 WebSocket 私有部署。 <br/> - 主动退出账号时添加 logout 协议。 | 2025-9-25       | [Android SDK 4.17.0 更新日志](/document/android/releasenote.html#v4-17-0-dev-2025-9-25-开发版)          |
+| iOS SDK 4.17.0 开发版发布   | - 长连接支持 WebSocket 协议。<br/> - 支持 WebSocket 私有部署。 | 2025-9-28       | [iOS SDK 4.17.0 更新日志](/document/ios/releasenote.html#v4-17-0-dev-2025-9-28-开发版)          |
 | Web/小程序 SDK 4.17.0 开发版发布   | - 获取服务端会话列表时可获取 [空会话](/document/web/conversation_overview.html#空会话)。<br/> - 获取服务端的置顶会话列表时可获取 [空会话](/document/web/conversation_overview.html#空会话) | 2025-9-30       | - [Web SDK 4.17.0 更新日志](/document/web/releasenote.html#v4-17-0-dev-2025-9-30-开发版)<br/> - [小程序 SDK 4.17.0 更新日志](/document/applet/releasenote.html#v4-17-0-dev-2025-9-30-开发版) |
 
 #### UIKit 发版
