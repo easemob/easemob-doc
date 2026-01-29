@@ -164,9 +164,10 @@ const documentSidebar = [
   },
   { text: '获取 SDK 日志', link: 'log.html', except: ['flutter', 'server-side', 'applet'] },
   { text: '常见问题', link: 'faq.html', only: ['react-native'] },
-  { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
   { text: '精简版 SDK', link: 'elite_sdk.html', only: ['android', 'ios']},
   { text: '私有云 SDK IP 地址/域名配置', link: 'private_ip_domain.html', only: ['android', 'ios', 'web', 'harmonyos']},
+  { text: '合规指南', link: 'sdk_compliance.html', except: ['applet']},
+  { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
   { text: '概述', link: 'overview.html', only: ['applet'] },
   { type: "separator", only: ['applet']} as any,
   {
@@ -178,7 +179,6 @@ const documentSidebar = [
           { text: '百度小程序', link: 'baidu.html' },
           { text: '抖音小程序', link: 'bytedance.html' },
           { text: '支付宝小程序', link: 'alipay.html' },
-          { text: '淘宝小程序', link: 'taobao.html' },
           { text: 'Uniapp 全平台', link: 'uniapp.html' },
         ],
         only: ['applet']
@@ -312,6 +312,7 @@ const documentSidebar = [
     only: ['applet']
   },
   { text: '精简版 SDK', link: 'elite_sdk.html', only: ['applet']},
+  { text: '合规指南', link: 'sdk_compliance.html', only: ['applet']},
   { text: '服务端 API 概述', link: 'overview.html', only: ['server-side'] },
   { text: 'API 调用频率限制', link: 'limitationapi.html', only: ['server-side'] },
   { type: "separator", only: ['server-side']} as any,
