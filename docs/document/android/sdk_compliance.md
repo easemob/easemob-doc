@@ -95,7 +95,7 @@ HarmonyOS 操作系统 SDK 功能、接口配置方式及示例说明：
 | :----- | :-------- | :-------- | :-------- | :-------- |
 | 样例 Harmony OS | 登录即时通讯 IM | 设备品牌、设备型号、操作系统版本、IP 地址、网络接入方式和类型 | 1. 配置开启示例：<br/> `ChatClient.getInstance().loginWithToken(userId, token).then(() => {//登录成功回调}).catch((e: ChatError) => {//登录失败回调，包含错误信息});` <br/>2. 配置关闭示例：<br/> `ChatClient.getInstance().logout().then(()=> {//success logic})` | 用户登录即时通讯 IM |
 
-### SDK 隐私政策披露要求与示例说明
+### 3. SDK 隐私政策披露要求与示例说明
 
 请您根据集成本SDK的实际情况，在您的 App 隐私政策中披露：第三方 SDK 名称、SDK 公司名称、SDK 使用目的和功能场景、SDK 涉及个人信息类型、实现 SDK 功能所需的权限、SDK 隐私政策链接。
 
@@ -146,8 +146,8 @@ App 开发者应根据相关法律法规为最终用户提供行使个人信息�
 
 相关配置操作，请查阅相关配置文档：
 
-- Android：[退出登录](https://v4.easemob.com/admin_page/edit/id/26669#退出登录)
-- iOS：[退出登录](https://doc.easemob.com/document/android/login.html#退出登录)
+- Android：[退出登录](https://doc.easemob.com/document/android/login.html#退出登录)
+- iOS：[退出登录](https://doc.easemob.com/document/ios/login.html#退出登录)
 - HarmonyOS：[退出登录](https://doc.easemob.com/document/harmonyos/login.html#退出登录)
 
 ## 三、合规文件指引

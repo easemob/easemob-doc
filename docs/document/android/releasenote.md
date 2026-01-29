@@ -50,7 +50,7 @@
 #### 新增特性 
 
 1. 长连接支持 WebSocket 协议。 
-2. `EMOptions` 新增 API 支持 WebSocket 私有部署:
+2. 支持 WebSocket 私有部署:
    - `EMOptions#setWebSocketServer`：设置 WebSocket 服务器地址。
    - `EMOptions#getWebSocketServer`：获取设置的 WebSocket 服务器地址。
    - `EMOptions#setWebSocketPort`：设置 WebSocket 服务器端口号。
