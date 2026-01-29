@@ -146,8 +146,8 @@ App 开发者应根据相关法律法规为最终用户提供行使个人信息�
 
 相关配置操作，请查阅相关配置文档：
 
-- Android：[退出登录](https://v4.easemob.com/admin_page/edit/id/26669#退出登录)
-- iOS：[退出登录](https://doc.easemob.com/document/android/login.html#退出登录)
+- Android：[退出登录](https://doc.easemob.com/document/android/login.html#退出登录)
+- iOS：[退出登录](https://doc.easemob.com/document/ios/login.html#退出登录)
 - HarmonyOS：[退出登录](https://doc.easemob.com/document/harmonyos/login.html#退出登录)
 
 ## 三、合规文件指引
