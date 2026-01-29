@@ -50,11 +50,11 @@
 
 #### 新增特性 
 
-- 长连接支持 WebSocket 协议：<br/>
-  `EMOptions#enableTLSConnection`：设置 WebSocket 协议是否使用 WSS 协议。
+- 长连接支持 WebSocket 协议。
 - 支持 WebSocket 私有部署:
   - `EMOptions#webSocketServer`：设置 WebSocket 服务器地址。
   - `EMOptions#webSocketPort`：设置 WebSocket 服务器端口号。
+  - `EMOptions#enableTLSConnection`：设置 WebSocket 协议是否使用 WSS 协议。
 
 #### 优化
 
