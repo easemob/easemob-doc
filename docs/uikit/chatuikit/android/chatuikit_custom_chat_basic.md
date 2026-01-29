@@ -109,8 +109,6 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 - 设置默认的头像和昵称及其样式
 - 设置消息气泡
 - 设置消息日期
-- 设置长按消息菜单
-- 设置消息事件监听
 
 ### 添加自定义消息条目
 
