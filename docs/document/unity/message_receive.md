@@ -123,6 +123,30 @@ SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
 
 ```
 
+### 接收 GIF 图片消息
+
+自 Unity SDK 1.4.0 开始，支持接收 GIF 图片消息。
+
+图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
+
+// TODO：替换为 Unity 的示例代码和方法名
+
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessageReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
+
+```java
+public void onMessageReceived(List<EMMessage> messages) {
+    for(EMMessage message : messages) {
+        if (message.getType() == Type.IMAGE) {
+            EMImageMessageBody body = (EMImageMessageBody) msg.getBody();
+            if(body.isGif()) {
+                // 根据业务情况处理gif message, 例如下载展示该消息
+            }
+        }
+    }
+    
+}
+```
+
 ### 接收视频消息
 
 1. 接收方收到视频消息时，自动下载视频缩略图。

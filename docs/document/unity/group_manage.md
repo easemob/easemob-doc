@@ -44,15 +44,17 @@
 
 2. 进群邀请是否需要对方同意 (`inviteNeedConfirm`) 的具体设置如下：
    - 进群邀请需要用户确认 (`option.InviteNeedConfirm` 设置为 `true`)。创建群组并发出邀请后，根据受邀用户的 `AutoAcceptGroupInvitation` 设置，处理逻辑如下：
-     - 用户设置自动接受群组邀请 (`AutoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调。
+     - 用户设置自动接受群组邀请 (`AutoAcceptGroupInvitation` 设置为 `true`)。受邀用户自动进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMembersJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMembersJoinedFromGroup` 回调。
      - 用户设置手动确认群组邀请 (`AutoAcceptGroupInvitation` 设置为 `false`)。受邀用户收到 `IGroupManagerDelegate#OnInvitationReceivedFromGroup` 回调，并选择同意或拒绝入群邀请：
-       - 用户同意入群邀请后，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
+       - 用户同意入群邀请后，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMembersJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMembersJoinedFromGroup` 回调；
        - 用户拒绝入群邀请后，邀请人收到 `IGroupManagerDelegate#OnInvitationDeclinedFromGroup` 回调。
-   - 进群邀请无需用户确认 (`option.InviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无论用户的 `IsAutoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调。
+   - 进群邀请无需用户确认 (`option.InviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无论用户的 `IsAutoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMembersJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMembersJoinedFromGroup` 回调。
 
-用户可以调用 `CreateGroup` 方法创建群组，并通过 `GroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
+用户可以调用 `CreateGroup` 方法创建群组，并通过 `GroupOptions` 中的参数设置群组名称、群组描述、群组头像、群组成员和建群原因。
 
 示例代码如下：
+
+// TODO：示例代码中添加群组头像参数
 
 ```csharp
 GroupOptions option = new GroupOptions(GroupStyle.PrivateMemberCanInvite);
@@ -69,9 +71,9 @@ SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, ca
 
 根据 [创建群组](#创建群组) 时的群组类型 (`GroupStyle`) 设置，加入群组的处理逻辑差别如下：
 
-- 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
+- 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `IGroupManagerDelegate#OnMembersJoinedFromGroup` 回调；
 - 当群组类型为 `PublicJoinNeedApproval` 时，用户可以申请进群，群主和群管理员收到 `IGroupManagerDelegate#OnRequestToJoinReceivedFromGroup` 回调，并选择同意或拒绝入群申请：
-  - 群主和群管理员同意入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinAcceptedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
+  - 群主和群管理员同意入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinAcceptedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMembersJoinedFromGroup` 回调；
   - 群主和群管理员拒绝入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinDeclinedFromGroup` 回调。
 
 :::tip
@@ -130,7 +132,7 @@ SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
 
 ### 退出群组
 
-群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [DestroyGroup](https://docs-im.easemob.com/ccim/unity/group2#解散群组) 方法解散群组。
+群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMembersExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [DestroyGroup](https://docs-im.easemob.com/ccim/unity/group2#解散群组) 方法解散群组。
 
 示例代码如下：
 
@@ -173,9 +175,13 @@ SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(groupId, new Val
 
 ### 获取群成员列表
 
-群成员可以调用 `GetGroupMemberListFromServer` 方法从服务器分页获取群成员列表。
+- 自 1.4.0 版本开始，群成员可以调用 `fetchMemberInfoListFromServer` 方法从服务器获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
 
-示例代码如下：
+```csharp
+
+```
+
+- 1.4.0 版本前，群成员可以调用 `GetGroupMemberListFromServer` 方法从服务器分页获取群成员列表，即群成员的用户 ID 列表。
 
 ```csharp
 SDKClient.Instance.GroupManager.GetGroupMemberListFromServer(groupId, pageSize, cursor, callback: new ValueCallBack<CursorResult<string>>(
@@ -355,12 +361,14 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     public void OnOwnerChangedFromGroup(string groupId, string newOwner, string oldOwner)
     {
     }
+    // TODO：示例代码是否需要修改
     // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
-    public void OnMemberJoinedFromGroup(string groupId, string member)
+    public void OnMembersJoinedFromGroup(string groupId, string member)
     {
     }
+    // TODO：示例代码是否需要修改
     // 群成员主动退出群组。除了退群的成员，其他群成员会收到该回调。
-    public void OnMemberExitedFromGroup(string groupId, string member)
+    public void OnMembersExitedFromGroup(string groupId, string member)
     {
     }
     // 更新群公告。群组所有成员会收到该回调。

@@ -39,7 +39,7 @@
 - 消息时间段；
 - 消息搜索方向；
 - 是否将拉取的消息保存到数据库；
-- 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
+- 对于群组聊天，你可以设置 `FromIds` 参数拉取群组中指定的单个或多个成员发送的历史消息。
 
 :::tip
 1. 若使用该 API，需将 SDK 升级至 V1.2.0 或以上版本。
@@ -53,7 +53,7 @@
   // 消息搜索方向。`UP` 表示按消息时间戳递减的方向获取，即先获取最新消息；`DOWN` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
   option.Direction = MessageSearchDirection.UP;
   //消息发送方的用户 ID, 仅用于群组消息，即当 `FetchHistoryMessagesFromServerBy` 中的 `type` 为 `ConversationType.Group` 时使用。
-  option.From = "xxx";
+  option.FromIds = "xxx";
   // 要获取的消息类型的数组。若不传值，会获取所有类型的消息。
   option.MsgTypes = new List<MessageBodyType>() { MessageBodyType.TXT };
   // 查询的起始时间戳，单位为毫秒。
@@ -129,6 +129,22 @@ conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("msgId");
 ```
 
+### 从本地获取指定群成员发送的消息
+
+自 1.4.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
+
+```csharp
+
+```
+
+### 根据关键字获取本地会话的消息 ID
+
+自 SDK 1.4.0 版本开始，你可以调用 `LoadMessagesWithScopeAndFromIds` 通过设置关键词获取单个会话中的消息 ID 列表。消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
+
+```csharp
+
+```
+
 ### 获取本地会话中特定类型的消息
 
 你可以调用 `LoadMessagesWithMsgType` 方法从本地存储中获取指定会话中特定类型的消息。
@@ -148,6 +164,14 @@ conv.LoadMessagesWithMsgType(type: MessageBodyType.TXT, count: 50, direction: Me
     onError: (code, desc) => {
     }
 ));
+```
+
+### 根据消息 ID 获取本地消息
+
+自 SDK 1.4.0 版本开始，你可以调用 `LoadMessages`, 传入单个或多个消息 ID 获取单个本地会话中的消息。
+
+```csharp
+
 ```
 
 ### 获取一定时间内本地会话的消息

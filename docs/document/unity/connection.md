@@ -43,6 +43,8 @@ class ConnectionDelegate : IConnectionDelegate
     public void OnTokenExpired()
     {
     }
+    // Token 即将过期的通知。
+   // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80%（之前版本为 50%）时触发该回调。
     public void OnTokenWillExpire()
     {
     }

@@ -1,6 +1,6 @@
 # 发送消息
 
-环信即时通讯 IM Unity SDK 通过 `IChatManager` 和 `Message` 类实现文本、图片、音频、视频和文件等类型的消息的发送。
+环信即时通讯 IM Unity SDK 通过 `IChatManager` 和 `Message` 类实现文本、图片、GIF 图片、音频、视频和文件等类型的消息的发送。
 
 - 对于单聊，环信即时通讯 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要 [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。
 
@@ -124,6 +124,27 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
     Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
   }
 ));
+```
+
+### 发送 GIF 图片消息
+
+- 自 Unity SDK 1.4.0 开始，支持发送 GIF 图片消息。
+- GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。
+
+发送 GIF 图片消息的过程如下：
+
+// TODO：替换为 Unity 的示例代码和方法名
+
+1. 发送方调用 `EMMessage#createGifImageMessage` 方法构造 GIF 图片消息体。
+2. 发送方调用 `EMChatManager#sendMessage` 发送 GIF 图片消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+
+```java
+// `imageUri` 为图片本地资源标志符
+EMMessage message = EMMessage.createGifImageMessage(imageUri, toChatUsername);
+// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
+// message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
 ### 发送视频消息

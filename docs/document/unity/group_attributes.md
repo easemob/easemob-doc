@@ -59,6 +59,42 @@ SDKClient.Instance.GroupManager.ChangeGroupDescription(groupId, description, new
 ));
 ```
 
+### 管理群组头像
+
+自 Unity SDK 1.4.0 开始，支持群组头像功能。
+
+#### 设置群组头像
+
+- 创建群组时，可设置群组头像：
+
+```csharp
+
+```
+
+- 创建群组后，若设置群组头像，可调用 [修改群组头像](#修改群组头像) API 设置头像。
+
+#### 修改群组头像
+
+创建群组完成后，群主或管理员可调用 `GroupManager#UpdateGroupAvatar` 设置或修改群组头像：
+
+```csharp
+
+```
+
+群组头像被修改后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调：
+
+```csharp
+
+```
+
+#### 获取群组头像
+
+群成员可以通过获取群详情的方法 `EMGroupManager#getGroupFromServer`，获取群组头像：
+
+```csharp
+
+```
+
 ### 更新群公告
 
 仅群主和群管理员可以调用 `UpdateGroupAnnouncement` 方法设置和更新群公告，群公告的长度限制为 512 个字符。群公告更新后，其他群成员收到 `IGroupManagerDelegate#OnAnnouncementChangedFromGroup` 回调。
