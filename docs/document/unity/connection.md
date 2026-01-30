@@ -9,43 +9,56 @@
 你可以通过注册连接监听确认连接状态。
 
 ```csharp
-
-// 监听器建议在初始化完成之后，登录之前设置，这样可确保收到登录通知。
+// 监听器建议在初始化完成后且登录前设置，这样可确保收到登录通知。
 class ConnectionDelegate : IConnectionDelegate
-{
+{   // SDK 成功连接到 IM 服务器的通知。
     public void OnConnected()
     {
     }
+    // SDK 和 IM 服务器断开连接的通知。
+    // 断开连接时底层不一定会登出。
     public void OnDisconnected()
     {
     }
+    // 当前登录设备账号因鉴权失败强制退出。
     public void OnAuthFailed()
     {
     }
+    // 当前登录账号已经被从服务器端删除的通知。
     public void OnRemovedFromServer()
     {
     }
+    // 登录设备数量超限通知。服务器主动断开连接。
     public void OnLoginTooManyDevice()
     {
     }
+    // 用户密码变更通知。服务器主动断开连接。
     public void OnChangedIMPwd()
     {
     }
+    // 被其他设备踢掉通知。服务器主动断开连接。
     public void OnKickedByOtherDevice()
     {
     }
+    // 用户在其它设备登录。当前用户被服务器断开。
     public void OnLoggedOtherDevice(string deviceName)
     {
     }
+    // 当前用户账号被禁用的通知。
     public void OnForbidByServer()
     {
     }
+    // Token 过期通知。
     public void OnTokenExpired()
     {
     }
+    // Token 即将过期的通知。
+   // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80%（之前版本为 50%）时触发该回调。
     public void OnTokenWillExpire()
     {
     }
+    // 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时通知。
+    // 服务器主动断开连接。
     public void OnAppActiveNumberReachLimitation()
     {
     }

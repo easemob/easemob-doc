@@ -2,19 +2,48 @@
 
 <Toc />
 
-## 版本 1.3.3 2025-10-31
+## v1.4.0 2026-01-29
+
+#### 新增特性
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.12.0
-- - `Android` 升级至 4.12.0
+  - `iOS` 升级至 4.16.2
+  - `Android` 升级至 4.16.1
+- 发送后修改消息接口 [ChatManager#ModifyMessage](message_modify.html) 支持修改各类消息：
+  - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
+  - 命令消息：不支持修改。
+- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
+- 支持 [群组头像功能](group_attributes.html#管理群组头像)。
+- 支持 [拉取群组中指定的单个或多个成员发送的历史消息](message_retrieve.html#从服务器获取指定会话的消息)。`FetchServerMessagesOption#FromIds` 替换原来的 `FetchServerMessagesOption#From` 属性。
+- 支持 [从本地获取指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持 [获取群成员列表](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
+- 支持 [根据关键字从本地数据库中获取单个会话的消息 ID 列表](message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。
+- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。<br/>
+  新增群成员进出事件 [OnMembersJoinedFromGroup](group_manage.html#监听群组事件) 和 [OnMembersExitedFromGroup](group_manage.html#监听群组事件)。已废弃原事件 `OnMemberJoinedFromGroup` 和 `OnMemberExitedFromGroup`，请使用新事件代替。 
+
+#### 优化
+
+对于 `Unity Mac` 和 `Unity Windows`，修改 Token 即将过期事件 [ConnectionDelegate#OnTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
+
+#### 修复
+
+修复消息修改事件 `IChatManagerDelegate#OnMessageContentChanged` 在 Android 平台上无法正确触发的问题。
+
+## v1.3.3 2025-10-31
+
+- 依赖的原生 `SDK` 升级:
+  - `iOS` 升级至 4.12.0
+  - `Android` 升级至 4.12.0
 
 适配 Android 15 的 16 KB 页面大小。
 
 ## v1.3.2 2025-1-17
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.12.0
-- - `Android` 升级至 4.12.0
+  - `iOS` 升级至 4.12.0
+  - `Android` 升级至 4.12.0
 
 #### 新增特性
 
@@ -66,8 +95,8 @@
 ## v1.3.1 Dev 2024-7-9 （开发版）
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.7.0
-- - `Android` 升级至 4.7.0
+  - `iOS` 升级至 4.7.0
+  - `Android` 升级至 4.7.0
 
 #### 新增特性
 
@@ -83,8 +112,8 @@
 ## v1.3.0 Dev 2024-5-7 （开发版）
 
 - 依赖的原生 `SDK` 升级:
-- - `iOS` 升级至 4.5.0
-- - `Android` 升级至 4.5.0
+  - `iOS` 升级至 4.5.0
+  - `Android` 升级至 4.5.0
 
 #### 新增特性
 
