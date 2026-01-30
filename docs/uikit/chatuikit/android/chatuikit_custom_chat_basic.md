@@ -324,7 +324,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
 
 关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [消息列表的高级设置说明](chatuikit_chat_list_avanced.html#设置长按消息菜单)。
 
-## 设置事件监听
+## 设置消息事件监听
 
 通过 `UIKitChatFragment#Builder` 可设置消息条目的各类交互事件监听，包括气泡区域及头像的点击与长按事件。
 

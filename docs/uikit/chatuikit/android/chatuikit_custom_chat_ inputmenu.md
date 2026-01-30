@@ -101,9 +101,9 @@ val primaryMenu: IChatPrimaryMenu? = binding?.layoutChat?.chatInputMenu?.chatPri
 | `editText`           | 获取输入框对象。                     |
 | `setMenuBackground()` | 设置菜单背景。                            |
 
-#### 设置输入框默认文本
+#### 设置文本输入框默认文本
 
-可通过 `UIKitChatFragment.Builder` 设置输入框占位文本：
+可通过 `UIKitChatFragment.Builder` 设置文本输入框中的占位文本：
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
@@ -304,7 +304,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 对于底部输入菜单，你可以通过覆盖同名资源文件（`drawable`/`layout`/`values`）来修改底部输入框的图标、文字、颜色等样式。
 
 ### 常用图标替换
- 
+
 对于底部输入菜单中的常用功能图标，可在 App 工程中创建同名 drawable 资源进行替换：
 
 | 功能描述                 | 资源 ID                                        |
