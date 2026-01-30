@@ -171,7 +171,7 @@ SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(groupId, new Val
 
 ### 获取群成员列表
 
-- 自 1.4.0 版本开始，群成员可以调用 `FetchGroupMemberInfoFromServer` 方法从服务器获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
+- 自 SDK 1.4.0 版本开始，群成员可以调用 `FetchGroupMemberInfoFromServer` 方法从服务器获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
 
 ```csharp
 SDKClient.Instance.GroupManager.FetchGroupMemberInfoFromServer(currentGroupId, cursor, pageSize, new ValueCallBack<CursorResult<GroupMemberInfo>>(
@@ -186,7 +186,7 @@ SDKClient.Instance.GroupManager.FetchGroupMemberInfoFromServer(currentGroupId, c
 ));
 ```
 
-- 1.4.0 版本前，群成员可以调用 `GetGroupMemberListFromServer` 方法从服务器分页获取群成员列表，即群成员的用户 ID 列表。
+- SDK 1.4.0 版本前，群成员可以调用 `GetGroupMemberListFromServer` 方法从服务器分页获取群成员列表，即群成员的用户 ID 列表。
 
 ```csharp
 SDKClient.Instance.GroupManager.GetGroupMemberListFromServer(groupId, pageSize, cursor, callback: new ValueCallBack<CursorResult<string>>(
@@ -234,7 +234,7 @@ SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(pageSize, cursor, ca
 
 ### 查询当前用户已加入的群组数量
 
-自 1.3.0 版本开始，你可以调用 `FetchMyGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+自 SDK 1.3.0 版本开始，你可以调用 `FetchMyGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 
 ```csharp
 SDKClient.Instance.GroupManager.FetchMyGroupsCount(new ValueCallBack<int>(

@@ -132,7 +132,7 @@ Message msg = SDKClient.Instance.ChatManager.LoadMessage("msgId");
 
 ### 从本地获取指定群成员发送的消息
 
-自 1.4.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
+自 SDK 1.4.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
 
 ```csharp
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);

@@ -9,7 +9,7 @@
 - 依赖的原生 `SDK` 升级:
   - `iOS` 升级至 4.16.2
   - `Android` 升级至 4.16.1
-- 发送后修改消息接口 [`ChatManager#ModifyMessage`](message_modify.html) 支持修改各类消息：
+- 发送后修改消息接口 [ChatManager#ModifyMessage](message_modify.html) 支持修改各类消息：
   - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
   - 命令消息：不支持修改。
@@ -21,8 +21,8 @@
 - 支持 [根据关键字从本地数据库中获取单个会话的消息 ID 列表](message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。
 - 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
 - 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
-- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
-  - 新增群成员进出事件 [OnMembersJoinedFromGroup](group_manage.html#监听群组事件) 和 [OnMembersExitedFromGroup](group_manage.html#监听群组事件)。已废弃原事件 `OnMemberJoinedFromGroup` 和 `OnMemberExitedFromGroup`，请使用新事件代替。 
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。<br/>
+  新增群成员进出事件 [OnMembersJoinedFromGroup](group_manage.html#监听群组事件) 和 [OnMembersExitedFromGroup](group_manage.html#监听群组事件)。已废弃原事件 `OnMemberJoinedFromGroup` 和 `OnMemberExitedFromGroup`，请使用新事件代替。 
 
 #### 优化
 
