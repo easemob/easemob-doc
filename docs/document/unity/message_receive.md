@@ -85,7 +85,6 @@ foreach (var msg in messages)
 3. 使用`DownloadAttachment`下载完成后，可获取消息的图片文件和缩略图。
 
 ```csharp
-
 SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
   onSuccess: () => {
     Debug.Log($"下载附件成功");
@@ -120,7 +119,6 @@ SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
     Debug.Log($"附件下载失败，errCode={code}, errDesc={desc}");
   }
 ));
-
 ```
 
 ### 接收 GIF 图片消息
@@ -129,21 +127,21 @@ SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
 
 图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
 
-// TODO：替换为 Unity 的示例代码和方法名
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `OnMessagesReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `true`， 则为 GIF 图片消息。
 
-与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessageReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
-
-```java
-public void onMessageReceived(List<EMMessage> messages) {
-    for(EMMessage message : messages) {
-        if (message.getType() == Type.IMAGE) {
-            EMImageMessageBody body = (EMImageMessageBody) msg.getBody();
-            if(body.isGif()) {
-                // 根据业务情况处理gif message, 例如下载展示该消息
+```csharp
+public void OnMessagesReceived(List<Message> messages)
+{
+    foreach (var msg in messages)
+    {
+        if (msg.Body is ImageBody imageBody)
+        {
+            if (imageBody.isGif == true) {
+                // 根据业务情况处理 gif message, 例如下载展示该消息
             }
         }
     }
-    
+
 }
 ```
 

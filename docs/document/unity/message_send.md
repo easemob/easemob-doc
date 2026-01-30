@@ -133,18 +133,30 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 发送 GIF 图片消息的过程如下：
 
-// TODO：替换为 Unity 的示例代码和方法名
+1. 发送方调用 `Message#CreateImageSendMessage` 方法构造 GIF 图片消息体。
+2. 发送方调用 `ChatManager#SendMessage` 发送 GIF 图片消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
 
-1. 发送方调用 `EMMessage#createGifImageMessage` 方法构造 GIF 图片消息体。
-2. 发送方调用 `EMChatManager#sendMessage` 发送 GIF 图片消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+```csharp
+Message msg = Message.CreateImageSendMessage("to", "filepath");
 
-```java
-// `imageUri` 为图片本地资源标志符
-EMMessage message = EMMessage.createGifImageMessage(imageUri, toChatUsername);
-// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
-// message.setChatType(ChatType.GroupChat);
-// 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
+// 设置 ImageBody 的 isGif 属性为 true
+ImageBody imageBody = (ImageBody)msg.Body;
+imageBody.isGif = true;
+
+SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+    onSuccess: () =>
+    {
+
+    },
+    onProgress: (progress) =>
+    {
+
+    },
+    onError: (code, desc) =>
+    {
+
+    }
+));
 ```
 
 ### 发送视频消息

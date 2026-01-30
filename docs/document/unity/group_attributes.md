@@ -65,10 +65,22 @@ SDKClient.Instance.GroupManager.ChangeGroupDescription(groupId, description, new
 
 #### 设置群组头像
 
-- 创建群组时，可设置群组头像：
+- 创建群组时，可通过 `avatar` 参数设置群组头像：
 
 ```csharp
+GroupOptions options = new GroupOptions(GroupStyle.PublicOpenJoin);
 
+List<string> inviteMembers = new List<string>();
+inviteMembers.Add("member1");
+
+SDKClient.Instance.GroupManager.CreateGroup(name, options, avatar, desc, inviteMembers, inviteReason, new ValueCallBack<Group>(
+      onSuccess: (group) =>
+       {
+        },
+       onError: (code, error) =>
+        {
+        }
+));
 ```
 
 - 创建群组后，若设置群组头像，可调用 [修改群组头像](#修改群组头像) API 设置头像。
@@ -78,21 +90,50 @@ SDKClient.Instance.GroupManager.ChangeGroupDescription(groupId, description, new
 创建群组完成后，群主或管理员可调用 `GroupManager#UpdateGroupAvatar` 设置或修改群组头像：
 
 ```csharp
-
+SDKClient.Instance.GroupManager.UpdateGroupAvatar(currentGroupId, "newAvatar", new CallBack(
+     onSuccess: () =>
+      {
+      },
+     onError: (code, desc) =>
+       {
+       }
+ ));
 ```
 
-群组头像被修改后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调：
+群组头像被修改后，其他群成员会收到 `IGroupManagerDelegate#OnSpecificationChangedFromGroup` 回调：
 
 ```csharp
+// 实现监听器以及定义监听器对象
+// 在本例中，用户 A 为当前用户。
+public class GroupManagerDelegate : IGroupManagerDelegate {
+     public void OnSpecificationChangedFromGroup(Group group)
+    {
 
+    }
+    // other functions
+}
+
+// 注册群组回调。
+GroupManagerDelegate adelegate = new GroupManagerDelegate();
+SDKClient.Instance.GroupManager.AddGroupManagerDelegate(adelegate);
+
+// 移除群组回调。
+SDKClient.Instance.GroupManager.RemoveGroupManagerDelegate(adelegate);
 ```
 
 #### 获取群组头像
 
-群成员可以通过获取群详情的方法 `EMGroupManager#getGroupFromServer`，获取群组头像：
+群成员可以通过获取群详情的方法 `GroupManager#GetGroupSpecificationFromServer`，获取群组头像：
 
 ```csharp
-
+        SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(currentGroupId, new ValueCallBack<Group>(
+            onSuccess: (group) =>
+            {
+            },
+            onError: (code, desc) =>
+            {
+            }
+        ));
 ```
 
 ### 更新群公告

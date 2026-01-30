@@ -50,16 +50,12 @@
        - 用户拒绝入群邀请后，邀请人收到 `IGroupManagerDelegate#OnInvitationDeclinedFromGroup` 回调。
    - 进群邀请无需用户确认 (`option.InviteNeedConfirm` 设置为 `false`)。创建群组并发出邀请后，无论用户的 `IsAutoAcceptGroupInvitation` 设置为何值，受邀用户直接进群并收到 `IGroupManagerDelegate#OnAutoAcceptInvitationFromGroup` 回调，邀请人收到 `IGroupManagerDelegate#OnInvitationAcceptedFromGroup` 回调和 `IGroupManagerDelegate#OnMembersJoinedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMembersJoinedFromGroup` 回调。
 
-用户可以调用 `CreateGroup` 方法创建群组，并通过 `GroupOptions` 中的参数设置群组名称、群组描述、群组头像、群组成员和建群原因。
-
-示例代码如下：
-
-// TODO：示例代码中添加群组头像参数
+用户可以调用 `CreateGroup` 方法创建群组，并通过 `GroupOptions` 中的参数设置群组名称、群组描述、群组头像、群组成员和建群原因。示例代码如下：
 
 ```csharp
 GroupOptions option = new GroupOptions(GroupStyle.PrivateMemberCanInvite);
 option.MaxCount = 100;
-SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, callback:new ValueCallBack<Group>(
+SDKClient.Instance.GroupManager.CreateGroup(groupname, option, avatar, desc, members, callback:new ValueCallBack<Group>(
   onSuccess: (group) => {
   },
   onError:(code, error) => {
@@ -151,7 +147,7 @@ SDKClient.Instance.GroupManager.LeaveGroup(groupId, new CallBack(
 
 群成员可以调用 `GetGroupWithId` 方法从内存获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
 
-群成员也可以调用 `GetGroupSpecificationFromServer` 方法从服务器获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用等信息，不包括群成员列表。
+群成员也可以调用 `GetGroupSpecificationFromServer` 方法从服务器获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组头像、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用等信息，不包括群成员列表。
 
 :::tip
 对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
@@ -175,10 +171,19 @@ SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(groupId, new Val
 
 ### 获取群成员列表
 
-- 自 1.4.0 版本开始，群成员可以调用 `fetchMemberInfoListFromServer` 方法从服务器获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
+- 自 1.4.0 版本开始，群成员可以调用 `FetchGroupMemberInfoFromServer` 方法从服务器获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
 
 ```csharp
+SDKClient.Instance.GroupManager.FetchGroupMemberInfoFromServer(currentGroupId, cursor, pageSize, new ValueCallBack<CursorResult<GroupMemberInfo>>(
+       onSuccess: (result) =>
+        {
 
+        },
+        onError: (code, error) =>
+       {
+
+       }
+));
 ```
 
 - 1.4.0 版本前，群成员可以调用 `GetGroupMemberListFromServer` 方法从服务器分页获取群成员列表，即群成员的用户 ID 列表。
@@ -361,12 +366,10 @@ public class GroupManagerDelegate : IGroupManagerDelegate {
     public void OnOwnerChangedFromGroup(string groupId, string newOwner, string oldOwner)
     {
     }
-    // TODO：示例代码是否需要修改
     // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
     public void OnMembersJoinedFromGroup(string groupId, string member)
     {
     }
-    // TODO：示例代码是否需要修改
     // 群成员主动退出群组。除了退群的成员，其他群成员会收到该回调。
     public void OnMembersExitedFromGroup(string groupId, string member)
     {

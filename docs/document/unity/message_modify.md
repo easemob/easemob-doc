@@ -4,19 +4,17 @@
 
 ## 功能开通和内容修改
 
-// TODO：请 Review 下面的表格
-
 对于单聊、群组和聊天室聊天会话中已经发送成功的消息，SDK 支持对这些消息的内容进行修改。若使用该功能，**需联系环信商务开通**。
 
 | SDK 版本            |描述      |
 | :-------------- | :------------- |
 | SDK 1.2.0 之前版本           | 不支持消息修改功能。    | 
 | SDK 1.2.0（包括）-1.4.0（不包括）           | 仅支持修改单聊或群组会话中已经发送成功的**文本消息**，**聊天室会话不支该功能**。   | 
-| SDK 1.4.0 及之后版本           | 支持对单聊、群组和聊天室会话中各类消息进行修改：<br/> - 文本/自定义消息：支持修改消息内容（body）和扩展字段 `ext`。<br/> - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段 `ext`。<br/> - 命令消息：不支持修改。   | 
+| SDK 1.4.0 及之后版本           | 支持对单聊、群组和聊天室会话中 **各类消息** 进行修改：<br/> - 文本/自定义消息：支持修改消息内容（body）和扩展字段 `ext`。<br/> - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段 `ext`。<br/> - 命令消息：不支持修改。   | 
 
 ## 技术原理
 
-环信即时通讯 IM 通过 `ChatManager` 和 `ChatManagerDelegate` 实现消息修改。
+环信即时通讯 IM 通过 `ChatManager` 和 `IChatManagerDelegate` 实现消息修改。
 
 ### 消息修改流程
 
@@ -49,17 +47,21 @@
 示例代码如下：
 
 ```csharp
-    TextBody tb = new TextBody("new content");
-    SDKClient.Instance.ChatManager.ModifyMessage(msgId, tb, new ValueCallBack<Message>(
-         onSuccess: (dmsg) =>
-         {
-         
-         },
-         onError: (code, desc) =>
-         {
-         
-         }
-    ));
+TextBody tb = new TextBody("new content");
+
+ // 创建 attributes 字典
+Dictionary<string, AttributeValue> attributes = new Dictionary<string, AttributeValue>();
+attributes["Key1"] = AttributeValue.Of("Value1");
+attributes["Key2"] = AttributeValue.Of(100, AttributeValueType.INT32);
+
+SDKClient.Instance.ChatManager.ModifyMessage("msgId", tb, attributes, new ValueCallBack<Message>(
+onSuccess: (dmsg) =>
+{
+},
+onError: (code, desc) =>
+{
+}
+));
 ```
 
 消息修改后，消息的接收方会收到 `IChatManagerDelegate#OnMessageContentChanged` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群聊会话，除了修改消息的用户，群组内的其他成员均会收到该事件。
