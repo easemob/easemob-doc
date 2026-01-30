@@ -225,7 +225,30 @@ const chatUikitSidebar = [
     only: ["uniapp"],
   },
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["uniapp"]},
-  { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["uniapp"]},
+  { type: "separator"} as any,
+  { text: "集成UIKit", link: "chatuikit_dependency.html", only: ["uniapp"]},
+  { text: "初始化", link: "chatuikit_initialization.html", only: ["uniapp"]},
+  // 会话列表
+  {
+    text: "会话列表",
+    collapsible: true,
+    children: [
+      { text: "页面介绍", link: "chatuikit_conversationlist_intro.html" },
+      { text: "自定义页面", link: "chatuikit_conversation.html" },
+    ],
+    only: ["uniapp"],
+  },
+  {
+    text: "消息",
+    collapsible: true,
+    children: [
+      { text: "页面介绍", link: "chatuikit_chat_intro.html" },
+      { text: "自定义页面", link: "chatuikit_chat.html" },
+    ],
+    only: ["uniapp"],
+  },
+  { text: "进阶用法", link: "chatuikit_advantage.html", only: ["uniapp"]},
+  { text: "常见问题", link: "faq.html", only: ["uniapp"]},
   { type: "separator"} as any,
   { text: "更新日志", link: "releasenote.html"},
   { text: "常见问题", link: "faq.html", only: ["react-native"]},

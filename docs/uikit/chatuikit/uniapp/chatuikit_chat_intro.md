@@ -1,0 +1,45 @@
+# 聊天页面
+
+<Toc />
+
+## 概述
+
+`ChatUIKit/modules/Chat/index` 是聊天页面，该页面提供以下功能：
+
+- 发送和接收消息，包括文本、表情、图片、语音、视频、文件消息
+- 对消息进行复制、引用、撤回、删除、编辑操作
+- 从服务器拉取历史消息（漫游消息）
+
+消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/uniapp/message_operation.png" title="聊天页面" />
+</ImageGallery>
+
+## 创建聊天页面
+
+单群聊 UIKit 提供 `ChatUIKit/modules/Chat/index` 页面，添加路由到 `pages.json` 即可使用。
+
+### 配置路由
+
+在 `pages.json` 中添加路由配置：
+
+```json
+{
+  "pages": [
+    {
+      "path": "ChatUIKit/modules/Chat/index",
+      "style": {
+        "navigationStyle": "custom",
+        // #ifdef MP-WEIXIN
+        "disableScroll": true,
+        // #endif
+        "app-plus": {
+          "bounce": "none",
+          "softinputNavBar": "none"
+        }
+      }
+    }
+  ]
+}
+```
