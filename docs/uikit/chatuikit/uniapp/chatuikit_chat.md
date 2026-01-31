@@ -33,6 +33,8 @@
 
 如果你不需要 UIKit 的某些功能，可以在 UIKit 初始化后，调用 `ChatUIKit.hideFeature` 方法隐藏。
 
+你可以在 `ChatUIKit/configType.ts` 文件查看所有可隐藏的功能，或参考 [可隐藏的功能列表](/uikit/chatuikit/uniapp/chatuikit_advantage.html#可隐藏的功能列表)。
+
 ### 隐藏消息操作功能
 
 例如，隐藏消息引用功能：
@@ -45,9 +47,9 @@ ChatUIKit.hideFeature(['replyMessage'])
   <ImageItem src="/images/uikit/chatuikit/uniapp/msg_item_feature_hide.jpg" title="隐藏消息引用功能" />
 </ImageGallery>
 
-### 隐藏输入框功能
+### 隐藏输入栏功能
 
-你可以配置消息输入框的功能，包括是否显示发送语音按钮、是否显示表情消息功能等。例如，隐藏发送图片和表情消息：
+你可以配置消息输入框的功能，包括是否显示发送语音按钮、是否显示表情功能等。例如，隐藏发送图片和表情功能：
 
 ```js
 ChatUIKit.hideFeature(['inputEmoji', 'inputImage'])
@@ -56,5 +58,3 @@ ChatUIKit.hideFeature(['inputEmoji', 'inputImage'])
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/uniapp/input_feature_hide.jpg" title="隐藏发送图片和表情功能" />
 </ImageGallery>
-
-你可以在 `ChatUIKit/configType.ts` 文件查看所有可隐藏的功能，或参考[可隐藏的功能列表](/uikit/chatuikit/uniapp/chatuikit_advantage.html#可隐藏的功能列表)。

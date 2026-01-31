@@ -20,10 +20,6 @@
 
 单群聊 UIKit 提供 `ChatUIKit/modules/Chat/index` 页面，添加路由到 `pages.json` 即可使用。
 
-### 配置路由
-
-在 `pages.json` 中添加路由配置：
-
 ```json
 {
   "pages": [

@@ -2,7 +2,7 @@
 
 <Toc />
 
-在使用 UIKit 前，需要先完成初始化。本文介绍如何在 `App.vue` 中初始化 UIKit 并配置路由。
+在使用 UIKit 前，需要完成初始化工作。本文介绍如何在 `App.vue` 中初始化 UIKit 并进行路由配置。
 
 ## 初始化 UIKit
 
@@ -18,9 +18,9 @@ import { EasemobChatStatic } from "easemob-websdk/Easemob-chat";
 const chat = new (websdk as unknown as EasemobChatStatic).connection({
   appKey: '', // 应用的 App Key
   isHttpDNS: false,
-  url: '', // 环信 websocket URL
-  apiUrl: '', // 环信 Restful API URL
-  delivery: true // 是否开启消息已送达回执
+  url: '', // 环信 WebSocket URL
+  apiUrl: '', // 环信 RESTful API URL
+  delivery: true // 是否开启消息送达回执
 });
 
 // 初始化 ChatUIKit
@@ -31,16 +31,16 @@ ChatUIKit.init({
       // 头像形状：圆形（circle）或方形（square）
       avatarShape: "square"
     },
-    isDebug: true // 是否开启调试模式，开发阶段建议设置为 true
+    isDebug: true // 是否开启调试模式，开发阶段建议开启
   }
 });
 
-// 将 ChatUIKit 挂载到全局，方便在其他页面使用
+// 将 ChatUIKit 挂载到全局，便于其他页面调用
 uni.$UIKit = ChatUIKit;
 
 export default {
   onShow: function () {
-    // 在 onShow 中调用 ChatUIKit.onShow() 方法，主动监测 IM 连接状态
+    // 在 onShow 中调用 ChatUIKit.onShow()，主动监测 IM 连接状态
     ChatUIKit.onShow();
   }
 };
@@ -49,7 +49,7 @@ export default {
 
 ## 登录
 
-初始化完成后，调用登录方法进行登录。你可以在登录页面或 `App.vue` 的 `onLaunch` 中调用：
+初始化完成后，调用登录方法完成用户认证。可在登录页面或 `App.vue` 的 `onLaunch` 中调用：
 
 ```javascript
 // 登录
@@ -60,7 +60,7 @@ uni.$UIKit.chatStore
   })
   .then(() => {
     // 登录成功后的处理逻辑
-    // 例如：跳转到会话列表页面
+    // 示例：跳转到会话列表页面
     uni.navigateTo({
       url: '/ChatUIKit/modules/Conversation/index'
     });
@@ -72,7 +72,7 @@ uni.$UIKit.chatStore
 
 ## 配置路由
 
-在使用 UIKit 的页面功能前，需要在你的项目 `pages.json` 文件中配置 UIKit 路由页面。以下为 UIKit 提供的所有页面路由配置：
+在使用 UIKit 提供的页面功能前，需在项目的 `pages.json` 文件中配置相应的页面路由。以下是 UIKit 所有内置页面的路由配置：
 
 ```json
 {
@@ -186,4 +186,7 @@ uni.$UIKit.chatStore
 
 ## 参考文档
 
-- UIKit 源码：可查看 [GitHub](https://github.com/easemob/easemob-uikit-uniapp) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-uniapp) 地址
+可访问以下地址查看 UIKit 源码：
+
+- [GitHub](https://github.com/easemob/easemob-uikit-uniapp)
+- [Gitee](https://gitee.com/easemob-code/easemob-uikit-uniapp)
