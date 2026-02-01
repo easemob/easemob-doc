@@ -219,6 +219,7 @@ override fun setData(item: ChatUIKitConversation?, position: Int) {
 
 - 设置菜单项文字颜色
   
+
 菜单项文字颜色通过 `ChatUIKitMenuItem.titleColor` 属性控制。你可以在菜单显示前（`setOnMenuPreShowListener`）修改默认的菜单项颜色，或在添加菜单项时直接指定。
 
 ```kotlin
@@ -231,6 +232,7 @@ binding?.listConversation?.setOnMenuPreShowListener { menuHelper, _ ->
 
 - 设置菜单项文字大小
   
+
 菜单项文字大小默认使用样式 `ease_conv_menu_item_title`（其 `textAppearance` 引用 `Ease.TextAppearance.Body.Large`）。
 
 建议在 App 工程中通过 **同名覆盖** `ease_conv_menu_item_title`（或 `Ease.TextAppearance.Body.Large`）来调整字号。
@@ -247,6 +249,7 @@ binding?.listConversation?.setOnMenuPreShowListener { menuHelper, _ ->
 
 - 其他菜单设置
   
+
 如需调整菜单方向、对齐方式或取消按钮显示，可通过 `getConvMenuHelper()` 获取 `ChatUIKitMenuHelper`，调用 `setMenuOrientation()` / `setMenuGravity()` / `showCancel()`。
 
 ## 设置会话免打扰图标
@@ -287,6 +290,7 @@ binding?.listConversation?.apply {
 
 - 方式三：通过 XML 属性设置：
   
+
 若在布局中直接使用 `ChatUIKitConversationListLayout`，可通过以下属性设置：
   - `app:ease_con_item_unread_dot_position="left|right"`
   - `app:ease_con_item_unread_style="num|dot"`
