@@ -31,7 +31,7 @@
 ChatUIKit.hideFeature(['pinConversation'])
 ```
 
-你可以在 `ChatUIKit/configType.ts` 文件查看所有可隐藏的功能，或参考[可隐藏的功能列表](/uikit/chatuikit/uniapp/chatuikit_advantage.html#可隐藏的功能列表)。
+你可以在 `ChatUIKit/configType.ts` 文件查看所有可隐藏的功能，或参考 [可隐藏的功能列表](/uikit/chatuikit/uniapp/chatuikit_advantage.html#可隐藏的功能列表)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/uniapp/cvs_feature_hide.jpg" title="隐藏置顶会话功能" />
