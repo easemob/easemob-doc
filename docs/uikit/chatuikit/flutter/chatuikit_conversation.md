@@ -18,7 +18,7 @@
 | final ConversationsViewItemLongPressHandler? onItemLongPressHandler | 长按会话列表的回调，如果不设置默认会弹出默认的长按菜单。如果设置长按时会把默认的弹出菜单项传给你，你需要调整后返回来，返回来的数据会用于菜单显示，如果返回 `null` 将不会显示菜单。 |
 | final String? searchBarHideText | 搜索框中默认展示的文字内容。|
 | final bool enableSearchBar | 是否使用搜索。<br/> - （默认）`true`：使用；<br/> - `false`：不使用。|
-| final Widget? listViewBackground | 列表为空时展示的背景图。|
+| final Widget? emptyBackground | 列表为空时展示的背景图。|
 | final bool enableAppBar | 是否开启 AppBar，默认开启。关闭后将不再显示 AppBar，传入的 AppBar 也不再生效。|
 | final String? attributes | 扩展参数，会传入到下一个页面。|
 | final ChatUIKitViewObserver? viewObserver | 用于刷新页面的 Observer。 |
