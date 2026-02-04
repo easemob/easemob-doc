@@ -16,7 +16,7 @@
 
 可以在 [环信控制台](https://console.easemob.com/user/login) 创建正式环境下和测试环境下的用户，详见[创建用户相关介绍](/product/console/operation_user.html#创建用户)。
 
-## ## 登录方式
+## 登录方式
 
 你可以通过以下两种方式进行登录：
 
