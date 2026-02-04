@@ -6,7 +6,7 @@
 
 #### 优化
 
-**AOSL Crash 检测库升级**：SDK 依赖的 AOSL 崩溃检测库已更换为 `ShengwangInfra_iOS`。如使用此版本的 IM SDK，请注意需搭配相应版本的声网 RTC SDK ShengwangRtcEngine_iOS 4.6.0 或以上版本。
+AOSL Crash 检测库升级：SDK 依赖的 AOSL 崩溃检测库已更换为 `ShengwangInfra_iOS`。如使用此版本的 IM SDK，请注意需搭配相应版本的声网 RTC SDK ShengwangRtcEngine_iOS 4.6.0 或以上版本。
    
 #### 修复
 

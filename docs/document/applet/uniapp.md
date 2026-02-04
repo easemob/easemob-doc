@@ -129,7 +129,7 @@ const conn = new WebIM.connection({
 
 ### 自动登录
 
-在 uniapp 平台中，应用支持自动登录功能。你只需在初始化时将 `isAutoLogin` 选项设置为 `true`，即可启用该功能。
+自 uniapp SDK 4.19.0 版本开始，应用支持自动登录功能。你只需在初始化时将 `isAutoLogin` 选项设置为 `true`，即可启用该功能。
 
 自动登录的实际有效期取决于你设置的用户 Token 或密码的有效期。例如，若 Token 有效期为 24 小时，则用户在有效期结束后需要重新获取 Token 并登录。
 
