@@ -37,9 +37,11 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 206    | WEBIM_CONNCTION_USER_LOGIN_ANOTHER_DEVICE      | 用户在其他设备登录：如果没有开启多设备登录，则在其他设备登录会将当前登录的设备踢下线，用户会收到此错误。若开启了多设备登录并配置了支持的设备数量，设备间的互踢策略与 `ConnectionParameters#isFixedDeviceId` 参数有关，详见[多设备文档](multi_device.html)。  | 开启多设备功能，详见 [多设备⽂档](https://doc.easemob.com/document/web/multi_device.html)。 |
 | 207    | WEBIM_CONNCTION_USER_REMOVED                   | 用户已经被注销：如果登录用户的 ID 被管理员从环信控制台删除则会收到此错误。 | 提示⽤户被注销。|
 | 208    | WEBIM_USER_ALREADY_LOGIN | 已经登录，又重复登录。 | 不能重复登录。 |
+| 214    | USER_LOGIN_TOO_MANY_DEVICES | 用户登录设备数超过限制。该错误只适用于 uniapp 平台自动登录场景。<br/>该错误在多设备自动登录场景中且打开不踢掉其他设备上的登录的开关时超过登录设备数量的限制才会出现。例如，用户最多可同时登录 4 台设备， A（开启了自动登录）、B、C 和 D。最初，用户在这四个设备上均为登录状态，但由于网络连接原因登出了设备 A，然后手动登录了设备 E。这种情况下，设备 A 的网络恢复正常时会自动登录，这时登录失败且提示该错误。 | 可增加同时在线的设备数量，或先使用 `EMClient#kickDeviceWithToken` 踢掉其他设备再登录。|
 | 216    | WEBIM_CONNCTION_USER_KICKED_BY_CHANGE_PASSWORD | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。 |提示密码已经修改，请重新登录。|
 | 217    | WEBIM_CONNCTION_USER_KICKED_BY_OTHER_DEVICE    | 用户被踢下线：开启多设备登录后，如果用户在其他设备上调用 API 或者通过环信控制台踢出当前设备登录的 ID，SDK 会提示该错误。 | 提示被踢下线。|
 | 219    | USER_MUTED_BY_ADMIN   | 用户被全局禁言：在环信控制台禁言了此用户后，该用户发送消息时会提示该错误。   | 提示⽤户已被禁⾔。|
+| 220    | USER_DEVICE_CHANGED | 用户的登录设备与上次不一致。该错误只适用于 uniapp 平台自动登录场景。<br/>该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。 |登录失败的设备会收到 `EMConnectionListener#onLogout` 事件。收到该事件时，需调用 `EMClient#logout` 方法，并回到登录页面。 |
 | 221    | USER_NOT_FRIEND                                | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。该功能可在控制台开通。 | 提示⽤户⾮对⽅好友。|
 | 500    | SERVER_BUSY                                    | 服务器忙碌。 | 提示服务忙，请重试。|
 | 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT                | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。 | 提示消息发送失败，包含敏感词等⾮法内容。 |

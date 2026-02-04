@@ -2,6 +2,8 @@
 
 <Toc />
 
+## 概述
+
 即时通讯 IM 支持同一账号在多个设备上登录。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#多端多设备)。
 
 多端多设备登录场景下，所有已登录的设备同步以下信息和操作：
@@ -15,11 +17,17 @@
 
 ![img](/images/common/multidevice_device_count.png)
 
-单端和多端登录场景下的互踢策略如下：
+### 互踢策略
 
-| 单端登录  | 多端登录   |其他说明 | 
-| :--------- | :----- | :------- | 
-| 新登录的设备会将当前在线设备踢下线。  |  若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。<br/>多端登录时，是否使用固定的设备 ID 对设备互踢策略存在影响：SDK 会为设备生成设备 ID，作为设备的唯一标识。之前，每个 SDK 实例连接时，SDK 均使用不同的随机字符串作为设备标识。自从 4.8.0 版本开始，Web SDK 新增了 `ConnectionParameters#isFixedDeviceId` 参数，你可以在 SDK 初始化时设置使用随机的设备 ID 或固定设备 ID：<br/>- （默认）`true`：使用固定的设备 ID。设备标识存入本地存储，即使在多设备登录情况下，同一浏览器只能打开一个页签，若打开两个，新页签会将上一个踢掉。<br/>- `false`：使用随机设备 ID。每个页签采用不同的设备 ID。多设备登录情况下，同一浏览器可打开多个页签，若超过允许的设备数量，则新页签会将最先打开的页签踢掉。  |  环信服务器提供 RESTful 接口[查询每个账号已登录设备列表](/document/server-side/account_online_device_obtain.html)、[将账号从已登录设备强制下线](/document/server-side/account_offline_forced.html)和将指定账号强制[从单个设备下线](/document/server-side/account_offline_device_single.html)。       |  
+- 单端登录
+
+新登录的设备会将当前在线设备踢下线。
+
+- 多端登录
+
+若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。<br/>多端登录时，是否使用固定的设备 ID 对设备互踢策略存在影响：SDK 会为设备生成设备 ID，作为设备的唯一标识。之前，每个 SDK 实例连接时，SDK 均使用不同的随机字符串作为设备标识。自从 4.8.0 版本开始，Web SDK 新增了 `ConnectionParameters#isFixedDeviceId` 参数，你可以在 SDK 初始化时设置使用随机的设备 ID 或固定设备 ID：<br/>- （默认）`true`：使用固定的设备 ID。设备标识存入本地存储，即使在多设备登录情况下，同一浏览器只能打开一个页签，若打开两个，新页签会将上一个踢掉。<br/>- `false`：使用随机设备 ID。每个页签采用不同的设备 ID。多设备登录情况下，同一浏览器可打开多个页签，若超过允许的设备数量，则新页签会将最先打开的页签踢掉。
+
+环信服务器提供 RESTful 接口 [查询每个账号已登录设备列表](/document/server-side/account_online_device_obtain.html)、[将账号从已登录设备强制下线](/document/server-side/account_offline_forced.html)和将指定账号强制 [从单个设备下线](/document/server-side/account_offline_device_single.html)。
 
 ## 技术原理
 
@@ -93,17 +101,17 @@ const conn = new WebIM.connection({
     conn.setLoginInfoCustomExt("你的自定义扩展信息json字符串");
 
     // 监听onDisconnected回调
-		conn.addEventHandler("Connected", {
-			// IM连接断开事件
+        conn.addEventHandler("Connected", {
+            // IM连接断开事件
       onDisconnected: (e) => {
-				if(e){
-					// 多端被踢下线
-					if(e.type === '206'){
-						// 其他错误码场景下不存在该字段
-						// 当前设备挤下线的新登录设备的自定义扩展信息。
-						console.log(e.data.loginInfoCustomExt)
-					}
-				}
+                if(e){
+                    // 多端被踢下线
+                    if(e.type === '206'){
+                        // 其他错误码场景下不存在该字段
+                        // 当前设备挤下线的新登录设备的自定义扩展信息。
+                        console.log(e.data.loginInfoCustomExt)
+                    }
+                }
       }
     });
 
@@ -199,7 +207,4 @@ const conn = new WebIM.connection({
     customDeviceName: 'Uniapp-mobile' // 自定义平台名称
 })
 ```
-
-
-
 
