@@ -9,6 +9,18 @@
 | uniapp SDK 4.19.0 开发版发布   | [uniapp 平台支持自动登录](/document/applet/uniapp.html#自动登录)。  | 2026-2-4     | [uniapp SDK 4.19.0 更新日志](/document/applet/releasenote.html#_4-19-0-dev-2026-02-04-开发版)          |
 | HarmonyOS SDK 1.11.0 开发版发布   | - 底层支持安全 DNS 解析 DoH，提高连通性。<br/> - 私有化部署底层链路支持 TCP 和 WebSocket 之间切换。 | 2026-2-4     | [HarmonyOS SDK 1.11.0 更新日志](/document/harmonyos/releasenote.html#v1-11-0-dev-2026-2-4-开发版)          |
 
+#### 单群聊 UIKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android UIKit 4.19.0 发版   | 新增设置会话列表菜单监听。  | 2026-2-4     | [Android UIKit 4.19.0 更新日志](/uikit/chatuikit/android/releasenote.html#v4-19-0)          |
+
+#### CallKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android CallKit 4.19.0 发版   | - 支持灵活配置 RTC 参数。<br/> - 支持控制是否禁用 RTC Token 验证  | 2026-2-4     | [Android CallKit 4.19.0 更新日志](/callkit/android/releasenote.html#v4-19-0)          |
+
 ## 2026-01
 
 #### SDK 发版

@@ -1,5 +1,24 @@
 # Android CallKit 更新日志
 
+## v4.19.0
+
+#### 新增特性
+
+1. 新增 `RtcConfigProvider` 接口，用于灵活配置 RTC 参数。
+2. 新增 `CallKitConfig#getDisableRTCTokenValidation` 开关，支持控制是否禁用 RTC Token 验证。
+
+#### 优化
+
+5. RTC 依赖升级并迁移至声网 SDK（cn.shengwang.rtc:lite-sdk:4.6.0）。
+6. 优化多方呼叫逻辑：双方同时呼叫第三方时，后发起方会收到“对方正忙”提示。
+7. 移除 `READ_PHONE_NUMBERS` 权限，提升隐私合规性。
+8. 优化获取 App ID 的流程，并完善 App ID 为空时的异常处理。
+
+#### 修复
+
+3. 修复群组通话中， 取消信令失败会导致异常退出通话的问题。
+4. 修复同时发起呼叫时，`callInfo` 被错误覆盖的问题。
+
 ## v4.18.1 
 
 该版本在 2026 年 11 月 6 日发布。
