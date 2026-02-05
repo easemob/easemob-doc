@@ -2,13 +2,15 @@
 
 | 事件                  | payload 中类型                 | 触发事件             |
 | :-------------------- | :----------------------------- | :------------------- |
-| `roster`                | -                              | 好友关系操作所有事件 |
-| `roster:add`            | `{“operation”:“add”}`           | 添加好友             |
-| `roster:remove`         | `{“operation”:“remove”}`         | 删除好友             |
-| `roster:accept`         | `{“operation”:“accept”}`         | 同意好友申请。对方用户收到该事件。         |
-| `roster:decline`        | `{“operation”:“decline”}`        | 拒绝好友申请。对方用户收到该事件。       |
-| `roster:ban`            | `{“operation”:“ban”}`           | 拉黑好友             |
-| `roster:allow`          | `{“operation”:“allow”}`          | 解除拉黑好友         |
+| `roster`                | -                              | 好友关系操作所有事件。 |
+| `roster:add`            | `{“operation”:“add”}`           | 添加好友。             |
+| `roster:remove`         | `{“operation”:“remove”}`         | 删除好友。             |
+| `roster:accept`         | `{“operation”:“accept”}`         | 同意好友申请。接受好友申请的用户会收到该事件。该事件用于单设备或多设备登录场景下的操作结果同步。         |
+| `roster:remote_accept`         | `{“operation”:“remote_accept”}`         | 同意好友申请。发起好友申请的用户会收到该事件。         |
+| `roster:decline`        | `{“operation”:“decline”}`        | 拒绝好友申请。拒绝好友申请的用户会收到该事件。该事件用于多设备登录场景下的操作结果同步。       |
+| `roster:remote_decline`        | `{“operation”:“remote_decline”}`        | 拒绝好友申请。发起好友申请的用户会收到该事件。     |
+| `roster:ban`            | `{“operation”:“ban”}`           | 拉黑好友。             |
+| `roster:allow`          | `{“operation”:“allow”}`          | 解除拉黑好友。        |
 
 ## 添加好友
 
@@ -94,6 +96,10 @@
 
 ## 同意好友申请
 
+### 申请方收到事件
+
+`payload.operation` 为 `remote_accept` 时，表示发起好友申请的用户会收到该事件。在这种情况下，`to` 为发起好友申请的用户。  
+
 回调请求示例如下：
 
 ```json
@@ -103,7 +109,7 @@
     "security":"a2e1545231e8acf60513b50984af0c6c",
     "payload":{
         "roster_ver":"DD6E14FE5EE5A9ABC52CA86C5DE1601CF729BFD6",
-        "operation":"accept"
+        "operation":"remote_accept"
         },
     "host":"XXXX",
     "appkey":"XXXX#XXXX",
@@ -124,18 +130,70 @@
 | `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.roster_ver`    | String   | 好友列表的版本号。  |
-| `payload.operation` | String   | `accept`：同意好友申请。 |
+| `payload.operation` | String   | `remote_accept`：同意好友申请事件。发起好友申请的用户会收到该事件。 |
 | `host`            | String   | 服务器名称。          |
 | `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
 | `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
-| `to`       | String | 接收方用户 ID。                                |
+| `to`       | String | 发起好友申请的用户的用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
 | `msg_id`    | String   | 同意好友申请事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
 
+### 接受方收到事件
+
+`payload.operation` 为 `accept`，表示接受好友申请的用户会收到该事件。该事件用于单设备或多设备登录场景下的操作结果同步。
+  
+在这种情况下，`to` 为接受好友申请的用户 ID。
+
+回调请求示例如下：
+
+```json
+{
+    "chat_type":"roster",
+    "callId":"XXXX#XXXX_966725899779049516",
+    "security":"a2e1545231e8acf60513b50984af0c6c",
+    "payload":{
+        "roster_ver":"DD6E14FE5EE5A9ABC52CA86C5DE1601CF729BFD6",
+        "operation":"accept"
+        },
+    "host":"XXXX",
+    "appkey":"XXXX#XXXX",
+    "from":"XXXX#XXXX_XXXX@easemob.com",
+    "to":"tst02",
+    "eventType":"chat",
+    "msg_id":"96XXXX516",
+    "timestamp":1642648213494
+    }
+```
+
+回调请求字段说明如下：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为回调请求的唯一标识，格式为 “App Key_同意好友申请事件的消息 ID”。 | 
+| `chat_type`       | String | `roster` 表示好友事件。 |
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
+| `payload`       | Object | 事件内容。                                                     |
+| `payload.roster_ver`    | String   | 好友列表的版本号。  |
+| `payload.operation` | String   | `accept`：同意好友申请。接受好友申请的用户会收到该事件。该事件用于单设备或多设备登录场景下的操作结果同步。 |
+| `host`            | String   | 服务器名称。          |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
+| `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
+| `to`       | String | 接受好友申请的用户 ID。                     |
+| `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
+| `msg_id`    | String   | 同意好友申请事件的消息 ID。 | 
+| `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+
 ## 拒绝好友申请
 
-用户发送好友申请后，对方用户拒绝添加好友后会收到服务器发送的该事件。
+用户发送好友申请后，若对方用户拒绝添加好友，服务器会发送事件。
+
+### 申请方收到该事件
+
+`payload.operation` 为 `remote_decline`，表示发起好友申请的用户会收到该事件。
+
+在这种情况下，`to` 为发起好友申请的用户 ID。 
 
 回调请求示例：
 
@@ -167,11 +225,55 @@
 | `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.roster_ver`    | String   | 好友列表的版本号。  |
-| `payload.operation` | String   | `decline`：拒绝好友申请。 |
+| `payload.operation` | String   | `remote_decline`：拒绝好友申请。发起好友申请的用户会收到该事件。 |
 | `host`            | String   | 服务器名称。          |
 | `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
 | `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
-| `to`       | String | 接收方用户 ID。                                |
+| `to`       | String | 发起好友申请的用户 ID。                                |
+| `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
+| `msg_id`    | String   | 拒绝好友申请事件的消息 ID。 | 
+| `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+
+### 拒绝方收到该事件
+
+`payload.operation` 为 `decline`，表示拒绝好友申请的用户会收到该事件。该事件用于多设备登录场景下的操作结果同步。
+
+回调请求示例：
+
+```json
+{
+    "chat_type":"roster",
+    "callId":"XXXX#XXXX_966726099692161068",
+    "security":"747d6297660e57bcf38315aa98c206ac",
+    "payload":{
+        "roster_ver":"3D81EC24A6E732B2EB1B654AA446930DB9BAFE59",
+        "operation":"decline"
+        },
+    "host":"XXXX",
+    "appkey":"XXXX#XXXX",
+    "from":"XXXX#XXXX_XXXX@easemob.com",
+    "to":"tst11",
+    "eventType":"chat",
+    "msg_id":"9XXXX68",
+    "timestamp":1642648260029
+    }
+```
+
+回调请求字段说明如下：
+
+| 字段     | 数据类型 | 含义                                                         |
+| :------- | :------- | :----------------------------------------------------------- |
+| `callId`    | String   | `callId` 为回调请求的唯一标识，格式为 “App Key_拒绝好友申请事件的消息 ID”。 | 
+| `chat_type`       | String | `roster` 表示好友事件。 |
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
+| `payload`       | Object | 事件内容。                                                     |
+| `payload.roster_ver`    | String   | 好友列表的版本号。  |
+| `payload.operation` | String   | `decline`：拒绝好友申请。拒绝好友申请的用户会收到该事件。该事件用于多设备登录场景下的操作结果同步。 |
+| `host`            | String   | 服务器名称。          |
+| `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
+| `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
+| `to`       | String | 拒绝好友申请的用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
 | `msg_id`    | String   | 拒绝好友申请事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |

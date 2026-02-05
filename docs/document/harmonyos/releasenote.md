@@ -2,6 +2,17 @@
 
 <Toc />
 
+## v1.11.0 Dev 2026-2-4（开发版）
+
+#### 新增特性
+
+  底层支持安全 DNS 解析 DoH，提高连通性。
+
+#### 优化
+
+- 私有化部署底层链路支持 TCP 和 WebSocket 之间切换。
+- `ChatMessage#setJsonAttribute` 的类型只支持 `object` 类型，推荐使用 [ChatMessage.setExt](message_extension.html)。详见 [消息扩展升级指南](message_extension_optimize.html)。
+ 
 ## v1.10.0 Dev 2026-1-26（开发版）
 
 #### 新增特性
@@ -84,7 +95,7 @@
 #### 修复
 
 - 修复删除本地会话时缓存中的消息未删除的问题。
-- 修复消息扩展属性 `ext` 判断字符串为 JSON 类型时转换有误的问题。
+- 修复消息扩展属性 `ext` 判断字符串为 JSON 类型时转换有误的问题。详见 [消息扩展升级指南](message_extension_optimize.html)。
 
 ## v1.6.0 Dev 2025-4-9（开发版）
 
@@ -94,7 +105,7 @@
   - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
   - 命令消息：不支持修改。
-- [ChatMessage.setExt](message_extension.html)支持 object 类型的扩展字段。
+- [ChatMessage.setExt](message_extension.html)支持 object 类型的扩展字段。详见 [消息扩展升级指南](message_extension_optimize.html)。
 - SDK 优化切换到前台后的重连逻辑。
 - 优化重连逻辑，默认切换重连的地址。
 
