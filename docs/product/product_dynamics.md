@@ -51,7 +51,7 @@
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | 新增主动文本审核 RESTful API   | 调用文本审核 API，业务服务器传入需审核的文本内容，环信服务器进行审核，返回审核结果。 | 2025-12-12  | [主动文本审核](/document/server-side/moderation_text_active.html)         |
-| - 基于自定义群组 ID 创建群组<br/> - 基于自定义聊天室 ID 创建聊天室  | 调用创建群组或聊天室的 RESTful API 时，你可以传入自定义的群组 ID 或聊天室 ID 创建群组或聊天室。若你不传入自定义群组 ID 或聊天室 ID，即时通讯 IM 创建时会自动生成。 | [创建群组](/document/server-side/group_create.html#请求-body-参数) 或 [创建聊天室](/document/server-side/chatroom_create.html#请求-body-参数)       |           |
+| - 基于自定义群组 ID 创建群组<br/> - 基于自定义聊天室 ID 创建聊天室  | 调用创建群组或聊天室的 RESTful API 时，你可以传入自定义的群组 ID 或聊天室 ID 创建群组或聊天室。若你不传入自定义群组 ID 或聊天室 ID，即时通讯 IM 创建时会自动生成。 | 2025-12-12       | [创建群组](/document/server-side/group_create.html#请求-body-参数) 或 [创建聊天室](/document/server-side/chatroom_create.html#请求-body-参数)          |
 
 #### SDK 发版
 
