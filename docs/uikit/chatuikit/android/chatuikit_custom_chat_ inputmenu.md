@@ -195,7 +195,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
   <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="类似微信样式" />
 </ImageGallery>
 
-### 管理扩展菜单项
+### 管理菜单项
 
 你可以通过获取到的 `chatExtendMenu` 对象来动态管理扩展菜单项，包括添加、移除、排序以及处理点击事件等操作。
 
