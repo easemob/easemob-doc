@@ -972,7 +972,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-#### 错误码
+## 错误码
 
 1. 调用发送聊天室消息的接口发送各类消息时，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
