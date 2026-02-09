@@ -242,10 +242,10 @@ binding?.listConversation?.setOnMenuPreShowListener { menuHelper, _ ->
 菜单列表、顶部区域、取消按钮背景均引用 `@color/ease_dialog_menu_bg_color`（定义于 `uikit_dialog_menu.xml`）。
 
 建议在 App 工程中通过**同名覆盖**以下颜色资源：
-  - `ease_dialog_menu_bg_color`：菜单背景色
-  - `ease_conv_menu_item_title_color`：菜单项文字默认颜色
-  - `ease_conv_menu_item_divider_color`：分割线颜色
-  - `ease_dialog_menu_cancel_color`：取消按钮文字颜色
+    - `ease_dialog_menu_bg_color`：菜单背景色
+        - `ease_conv_menu_item_title_color`：菜单项文字默认颜色
+        - `ease_conv_menu_item_divider_color`：分割线颜色
+        - `ease_dialog_menu_cancel_color`：取消按钮文字颜色
 
 - 其他菜单设置
   

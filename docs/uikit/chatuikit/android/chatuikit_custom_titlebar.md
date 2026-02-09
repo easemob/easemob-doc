@@ -1,6 +1,8 @@
 # 页面标题栏
 
-`ChatUIKitTitleBar` 是可自定义的标题栏组件，基于 Material Toolbar 提供灵活的布局方式，支持显示头像、状态图标、标题、副标题、导航按钮和菜单等多种元素。聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。你可以根据自身需求设置标题栏。
+`ChatUIKitTitleBar` 是可自定义的标题栏组件，基于 Material Toolbar 提供灵活的布局方式，支持显示头像、状态图标、标题、副标题、导航按钮和菜单等多种元素。
+
+聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。你可以根据自身需求设置标题栏。
 
 ## 概述
 
@@ -150,9 +152,9 @@ titleBar.setSubtitle(R.string.online_status)
 
 ## 设置右侧显示图标
 
-一般情况下，右侧会支持设置多个图标。我们采用设置菜单的方式进行设置。
+一般情况下，右侧会支持设置多个图标。UIKit 采用设置菜单的方式进行设置。
 
-例如，`ChatUIKitConversationListFragment` 提供 `defaultMenu()` 方法添加默认的 menu 菜单。若默认菜单不满足需求，可以替换为自己的 menu 菜单，重写 `defaultMenu()` 方法。   
+例如，`ChatUIKitConversationListFragment` 提供 `defaultMenu()` 方法添加默认的 menu 菜单。若默认菜单不满足需求，可以替换为自己的菜单，重写 `defaultMenu()` 方法。   
 
 ```kotlin
     // 添加 menu
@@ -259,7 +261,6 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return super.onOptionsItemSelected(item)
 }
 ```
-
 
 
 

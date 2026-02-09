@@ -159,7 +159,7 @@ val mConversationListFragment = ChatUIKitConversationListFragment.Builder()
 
 ## 设置事件监听
 
-`ChatUIKitConversationListFragment.Builder` 提供了针对会话条目及长按菜单的事件监听配置。建议通过 Builder 进行统一设置。
+`ChatUIKitConversationListFragment.Builder` 提供针对会话条目及长按菜单的事件监听配置。建议通过 Builder 进行统一设置。
 
 ```kotlin
 ChatUIKitConversationListFragment.Builder()
