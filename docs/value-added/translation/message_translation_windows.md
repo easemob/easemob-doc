@@ -1,6 +1,6 @@
 ---
 {
-    pageUri: "/document/android/message_translation.html",
+    pageUri: "/document/windows/message_translation.html",
     title: "消息翻译"
 }
 ---
