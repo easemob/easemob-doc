@@ -8,7 +8,7 @@
 
 ## 概述
 
-`UIKitChatFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置，目前提供的设置项如下：
+`UIKitChatFragment` 提供了 Builder 构建方式，方便开发者进行自定义设置，目前提供的设置项如下：
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
