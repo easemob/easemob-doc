@@ -8,7 +8,7 @@
 
 ## 概述
 
-`UIKitChatFragment` 提供了 Builder 构建方式，方便开发者进行自定义设置，目前提供的设置项如下：
+`UIKitChatFragment` 提供了 Builder 构建方式，方便开发者进行自定义设置。目前提供的设置项如下：
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
@@ -203,7 +203,9 @@ builder.setCustomAdapter(CustomMessageAdapter())
 
 ### 设置头像和昵称
 
-你可以通过 `UIKitChatFragment#Builder` 设置头像和昵称。关于使用自己的头像和昵称，详见 [用户自定义信息文档中的介绍](chatuikit_userinfo.html#设置会话头像和昵称)。
+你可以通过 `UIKitChatFragment#Builder` 设置头像和昵称。
+
+关于使用自己的头像和昵称，详见 [用户自定义信息文档中的介绍](chatuikit_userinfo.html#设置会话头像和昵称)。
 
 ```kotlin
 //com.hyphenate.easeui.feature.chat.activities.UIKitChatActivity
