@@ -108,6 +108,27 @@
   <ImageItem src="/images/uikit/chatuikit/feature/common/ios/message_report.png" title="消息审核" />
 </ImageGallery> 
 
+`reportMessageCustomList` 属性允许自定义用户长按消息后显示的举报选项列表。
+
+```typescript
+<ConversationDetail
+  type="chat"
+  convId={convId}
+  convType={convType}
+  list={{
+    props: {
+      reportMessageCustomList: [
+        { key: 'spam', value: '垃圾消息' },
+        { key: 'abuse', value: '辱骂信息' },
+        { key: 'illegal', value: '违法内容' },
+        { key: 'other', value: '其他' },
+      ],
+    },
+  }}
+  onBack={() => navigation.goBack()}
+/>
+```
+
 ## 本地消息搜索
 
 本地消息搜索功能允许用户快速在会话内搜索历史消息内容，支持关键词匹配。该功能帮助用户高效找到所需信息，提高工作效率和信息管理的便捷性。
