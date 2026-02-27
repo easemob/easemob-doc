@@ -6,6 +6,7 @@
 
 - 该方法根据单聊或群聊中的消息 ID 获取单条或多条消息的 Reaction 信息，包括 Reaction ID、使用的表情 ID、以及使用该 Reaction 的用户 ID 及用户人数。
 - 获取的 Reaction 的用户列表只展示最早三个添加 Reaction 的用户。
+- 关于 Reaction 的详细使用限制，详见 [产品使用限制](limitation.html) 文档。
 
 ## 功能开通
 

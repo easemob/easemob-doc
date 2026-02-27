@@ -6,12 +6,12 @@
 
 - 在单聊或群聊场景中对单条消息添加 Reaction。
 - 目前，**Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。**
-- 对于单条消息，一个消息表情即为一个 Reaction，若不同用户重复添加同一消息表情，Reaction 数量计为 1。每条消息默认可添加 20 个 Reaction。
 - 添加 Reaction 会触发发送后回调，详见 [发送后回调事件](callback_group_room_create.html)。
+- 关于 Reaction 的详细使用限制，详见 [产品使用限制](limitation.html) 文档。
 
 ## 功能开通
 
-要使用 Reaction 功能，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通。详见 [环信控制台文档](/product/console/basic_message.html#消息表情回复)。
+要使用 Reaction 功能，需在 [环信控制台](https://console.easemob.com/user/login) 开通。具体操作步骤详见 [环信控制台文档](/product/console/basic_message.html#消息表情回复)。
 
 ## 调用频率上限
 
