@@ -6,6 +6,7 @@
 
 - 删除当前用户添加的单个 Reaction。
 - 目前，**Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。**
+- 关于 Reaction 的详细使用限制，详见 [产品使用限制](limitation.html) 文档。
 
 ## 功能开通
 
