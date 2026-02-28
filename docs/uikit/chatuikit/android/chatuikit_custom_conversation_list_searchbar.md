@@ -4,7 +4,7 @@
 
 // TODO：添加会话搜索栏图片
 
-## 设置使用默认搜索栏
+## 使用默认搜索栏
 
 你可以设置是否使用默认搜索栏：
 
@@ -36,4 +36,4 @@ ChatUIKitClient.setCustomActivityRoute(object : ChatUIKitCustomActivityRoute {
 
 ## 可重载方法标记
 
-其他标记为 open / override fun 的方法均为可重载方法。如有需要，可重载对应方法实现自己业务逻辑。
+其他标记为 open/override fun 的方法均为可重载方法。如有需要，可重载对应方法实现自己业务逻辑。
