@@ -136,7 +136,7 @@ chatMessageListLayout?.let{
 
 ## 设置消息状态图标
 
-#### 替换图标资源
+#### 自定义图标资源
 
 如需自定义消息状态图标，你可在 App 工程中同名覆盖以下 Drawable 资源：
 
@@ -146,12 +146,12 @@ chatMessageListLayout?.let{
 | 已送达 | `uikit_msg_status_received` |
 | 已读   | `uikit_msg_status_read`     |
 
-#### 状态显示规则
+#### 消息状态显示规则
 
 消息已送达和已读图标的显示行为与 SDK 初始化的 `ChatOptions` 配置有关：
 
-- 当 `requireDeliveryAck = true` 且消息收到送达回执时，显示 **已送达** 图标；
-- 当 `requireAck = true` 且消息收到已读回执时，显示消 **已读** 图标。
+- 已送达图标：当 `requireDeliveryAck = true` 且消息收到送达回执时显示。
+- 已读图标：当 `requireAck = true` 且消息收到已读回执时显示。
 
 ```kotlin
 // SDK 初始化时设置（示例：参考 DemoHelper#initChatOptions）
@@ -166,19 +166,12 @@ ChatUIKitClient.init(context, options)
 
 #### 隐藏状态图标
 
-- 方式一：仅隐藏“已读/已送达”
-
-将 `requireAck` 或 `requireDeliveryAck` 设为 `false`，则对应状态图标不会显示，但发送成功后仍会显示已发送图标。
-
-- 方式二：完全隐藏所有发送状态图标（含已发送）
-
-需要自定义发送消息的 Row 布局/Row（例如，在 App 工程中同名覆盖各类 `uikit_row_sent_*.xml` 并移除 `tv_delivered`/`tv_ack`），或提供自定义 Row/ViewHolder 实现。
+- **仅隐藏已读/已送达图标**：将 `requireAck` 或 `requireDeliveryAck` 设为 `false`，则对应状态图标不会显示，但发送成功后仍显示已发送图标。
+- **完全隐藏所有发送状态图标（含已发送）**：需要自定义发送消息的 Row 布局/Row（例如，在 App 工程中同名覆盖各类 `uikit_row_sent_*.xml` 并移除 `tv_delivered`/`tv_ack`），或提供自定义 Row/ViewHolder 实现。
 
 ## 设置长按消息菜单
 
-在消息列表中长按任意消息，即可弹出操作菜单，支持复制、回复、转发、置顶、多选、翻译、创建话题等丰富功能。
-
-UIKit 支持设置消息长按菜单的样式，包括菜单背景和菜单项的图标、文字颜色和大小。
+在消息列表中长按任意消息，可弹出包含复制、回复、转发、置顶、多选、翻译、创建话题等功能的操作菜单。UIKit 支持对菜单样式和内容进行灵活定制，包括菜单背景和菜单项的图标、文字颜色和大小。
 
 关于选择微信样式菜单或仿系统 `UIActionSheet` 样式，详见 [消息列表的基本设置说明](chatuikit_custom_chat_basic.html#设置长按消息菜单)。
 
@@ -187,16 +180,7 @@ UIKit 支持设置消息长按菜单的样式，包括菜单背景和菜单项�
   <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="类似微信样式" />
 </ImageGallery>
 
-#### 设置菜单背景色
-
-菜单背景颜色同样通过资源覆盖的方式进行自定义：
-
-| 菜单样式                        | 背景调整方式                                                 |
-| :------------------------------ | :----------------------------------------------------------- |
-| 微信风格（PopupWindow）     | 覆盖 `drawable/uikit_shape_popup_radius_8` 资源，可修改背景色、圆角、描边等样式。 |
-| 底部弹窗风格（BottomSheet） | 菜单列表的布局文件位于 `res/layout/uikit_dialog_menu.xml` 中。若需自定义背景，可在您的 App 工程中覆盖以下样式：<br>  - `ease_item_menu_top_layout_style`<br>  - `ease_conv_item_menu_list`<br>  - `ease_conv_item_menu_divider`<br>  - `ease_conv_item_menu_cancel` |
-
-#### 管理菜单项
+### 管理菜单项
 
 `ChatUIKitLayout` 提供完整的长按菜单项管理能力，如下表所示：
 
@@ -252,6 +236,17 @@ override fun onDismiss() {
 }
 ```
 
+### 自定义菜单样式
+
+#### 设置菜单背景色
+
+菜单背景颜色同样通过资源覆盖的方式进行自定义：
+
+| 菜单样式                        | 背景调整方式                                                 |
+| :------------------------------ | :----------------------------------------------------------- |
+| 微信风格（PopupWindow）     | 覆盖 `drawable/uikit_shape_popup_radius_8` 资源，可修改背景色、圆角、描边等样式。 |
+| 底部弹窗风格（BottomSheet） | 菜单列表的布局文件位于 `res/layout/uikit_dialog_menu.xml` 中。若需自定义背景，可在您的 App 工程中覆盖以下样式：<br>  - `ease_item_menu_top_layout_style`<br>  - `ease_conv_item_menu_list`<br>  - `ease_conv_item_menu_divider`<br>  - `ease_conv_item_menu_cancel` |
+
 #### 设置菜单项图标
 
 你可以在 `onPreMenu()` 中通过 `ChatUIKitChatMenuHelper` 动态控制菜单项的图标：
@@ -286,7 +281,7 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 }
 ```
 
-#### 设置菜单项文字颜色和大小
+#### 设置菜单项文字样式
 
 1. `ChatUIKitMenuItem` 支持通过 `titleColor` 设置 **文字颜色**（同时会作为 icon tint 颜色）：
 
