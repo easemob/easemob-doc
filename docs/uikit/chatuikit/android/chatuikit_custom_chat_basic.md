@@ -90,7 +90,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 // TODO：添加图片
 
-## 设置消息列表空白页面
+## 设置消息列表空页面
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
