@@ -11,7 +11,6 @@
 环信即时通讯 IM SDK 提供 `Group`、`IGroupManager` 和 `IGroupManagerDelegate` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散群组
-- 加入、退出群组
 - 获取群组详情
 - 获取群成员列表
 - 获取群组列表
@@ -65,48 +64,6 @@ SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, ca
 ));
 ```
 
-### 用户申请入群
-
-根据 [创建群组](#创建群组) 时的群组类型 (`GroupStyle`) 设置，加入群组的处理逻辑差别如下：
-
-- 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
-- 当群组类型为 `PublicJoinNeedApproval` 时，用户可以申请进群，群主和群管理员收到 `IGroupManagerDelegate#OnRequestToJoinReceivedFromGroup` 回调，并选择同意或拒绝入群申请：
-  - 群主和群管理员同意入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinAcceptedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
-  - 群主和群管理员拒绝入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinDeclinedFromGroup` 回调。
-
-:::tip
-用户只能申请加入公开群组，私有群组不支持用户申请入群。
-:::
-
-用户申请加入群组的步骤如下：
-
-1. 调用 `FetchPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。
-2. 调用 `JoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
-
-示例代码如下：
-
-```csharp
-// 获取公开群组列表
-SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(callback: new ValueCallBack<CursorResult<GroupInfo>>(
-    //result 为 CursorResult<GroupInfo>
-    onSuccess: (result) => {
-    },
-    onError: (code, desc) =>
-    {
-    }
-));
-
-// 申请加入群组
-SDKClient.Instance.GroupManager.JoinPublicGroup(groupId, new CallBack(
-    onSuccess: () =>
-    {
-    },
-    onError:(code, desc) =>
-    {
-    }
-));
-```
-
 ### 解散群组
 
 仅群主可以调用 `DestroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `OnDestroyedFromGroup` 回调并被踢出群组。
@@ -123,23 +80,6 @@ SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
     {
     },
     onError: (code, desc) =>
-    {
-    }
-));
-```
-
-### 退出群组
-
-群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [DestroyGroup](https://docs-im.easemob.com/ccim/unity/group2#解散群组) 方法解散群组。
-
-示例代码如下：
-
-```csharp
-SDKClient.Instance.GroupManager.LeaveGroup(groupId, new CallBack(
-    onSuccess: () =>
-    {
-    },
-    onError:(code, desc) =>
     {
     }
 ));

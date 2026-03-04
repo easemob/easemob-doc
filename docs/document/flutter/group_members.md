@@ -30,7 +30,7 @@
 
 本节介绍如何使用环信即时通讯 IM Flutter SDK 提供的 API 实现上述功能。
 
-### 群组加人
+### 加入群组
 
 根据创建群组时的群组类型 (`EMGroupStyle`) 和进群邀请是否需要对方同意 (`EMGroupOptions#inviteNeedConfirm`) 设置，群组加人的处理逻辑有差别。具体规则可以参考 [创建群组](group_manage.html#创建群组)。
 
@@ -43,13 +43,26 @@ try {
 }
 ```
 
-### 群组踢人
+### 退出群组
 
-1. 仅群主和群管理员可以调用 `EMGroupManager#removeMembers` 方法将单个或多个成员移出群组。
-2. 被移出群组后，该成员收到 `EMGroupEventHandler#onUserRemovedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMembersExitedFromGroup` 事件。
-3. 被移出群组后，该用户还可以再次加入群组。
+#### 群成员主动退出群组
+
+群成员可以调用 `leaveGroup` 方法退出群组。其他成员收到 `EMGroupEventHandler#onMembersExitedFromGroup` 回调。
+
+退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 `destroyGroup` 解散群组。
 
 示例代码如下：
+
+```java
+try {
+  await EMClient.getInstance.groupManager.leaveGroup(groupId);
+} on EMError catch (e) {
+}
+```
+
+#### 群成员被移出群组
+
+仅群主和群管理员可以调用 `EMGroupManager#removeMembers` 方法将单个或多个成员移出群组。被踢出群组后，被踢成员将会收到群组事件回调 `EMGroupEventHandler#onUserRemovedFromGroup`，其他成员将会收到回调 `EMGroupEventHandler#onMembersExitedFromGroup`。被移出群组后，用户还可以再次加入群组。
 
 ```dart
 try {

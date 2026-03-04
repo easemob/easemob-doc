@@ -11,7 +11,6 @@
 环信即时通讯 IM SDK 提供 `Group`、`IGroupManager` 和 `IGroupManagerDelegate` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散群组
-- 加入、退出群组
 - 获取群组详情
 - 获取群成员列表
 - 获取群组列表
@@ -121,23 +120,6 @@ SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
     {
     },
     onError: (code, desc) =>
-    {
-    }
-));
-```
-
-### 退出群组
-
-群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMembersExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [DestroyGroup](https://docs-im.easemob.com/ccim/unity/group2#解散群组) 方法解散群组。
-
-示例代码如下：
-
-```csharp
-SDKClient.Instance.GroupManager.LeaveGroup(groupId, new CallBack(
-    onSuccess: () =>
-    {
-    },
-    onError:(code, desc) =>
     {
     }
 ));

@@ -29,7 +29,60 @@
 
 本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
 
-### 群组加人
+### 加入群组
+
+用户进群分为两种方式：主动申请入群和群成员邀请入群。
+
+公开群和私有群在两种入群方式方面存在差别：
+
+| 入群方式                   | 公开群       | 私有群          |
+| :------------------------- | :------------------ | :------------------------------------ |
+| 用户申请入群       | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 [GroupStyle](https://doc.easemob.com/apidoc/unity/namespace_agora_chat.html#a78c8dcc8960a647beb75fb8dd1ebfa1c) 的设置。 | 不支持                                                                                             |
+| 群成员邀请用户入群 | 支持 <br/>只能由群主和管理员邀请。    | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 [GroupStyle](https://doc.easemob.com/apidoc/unity/namespace_agora_chat.html#a78c8dcc8960a647beb75fb8dd1ebfa1c) 的设置。 |
+
+#### 用户申请入群
+
+根据 [创建群组](#创建群组) 时的群组类型 (`GroupStyle`) 设置，加入群组的处理逻辑差别如下：
+
+- 当群组类型为 `PublicOpenJoin` 时，用户可以直接加入群组，无需群主和群管理员同意；加入群组后，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
+- 当群组类型为 `PublicJoinNeedApproval` 时，用户可以申请进群，群主和群管理员收到 `IGroupManagerDelegate#OnRequestToJoinReceivedFromGroup` 回调，并选择同意或拒绝入群申请：
+  - 群主和群管理员同意入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinAcceptedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberJoinedFromGroup` 回调；
+  - 群主和群管理员拒绝入群申请，申请人收到 `IGroupManagerDelegate#OnRequestToJoinDeclinedFromGroup` 回调。
+
+:::tip
+用户只能申请加入公开群组，私有群组不支持用户申请入群。
+:::
+
+用户申请加入群组的步骤如下：
+
+1. 调用 `FetchPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。
+2. 调用 `JoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
+
+示例代码如下：
+
+```csharp
+// 获取公开群组列表
+SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(callback: new ValueCallBack<CursorResult<GroupInfo>>(
+    //result 为 CursorResult<GroupInfo>
+    onSuccess: (result) => {
+    },
+    onError: (code, desc) =>
+    {
+    }
+));
+
+// 申请加入群组
+SDKClient.Instance.GroupManager.JoinPublicGroup(groupId, new CallBack(
+    onSuccess: () =>
+    {
+    },
+    onError:(code, desc) =>
+    {
+    }
+));
+```
+
+#### 邀请用户入群
 
 根据创建群组时的群组类型 (`GroupStyle`) 和进群邀请是否需要对方同意 (`inviteNeedConfirm`) 设置，群组加人的处理逻辑有差别。具体规则可以参考 [创建群组](group_manage.html#创建群组)。
 
@@ -46,9 +99,28 @@ SDKClient.Instance.GroupManager.AddGroupMembers(groupId, members, new CallBack(
 ));
 ```
 
-### 群组踢人
+### 退出群组
 
-仅群主和群管理员可以调用 `DeleteGroupMembers` 方法将单个或多个成员移出群组。被移出后，该成员收到 `IGroupManagerDelegate#OnUserRemovedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。被移出群组后，该用户还可以再次加入群组。
+#### 群成员主动退出群组
+
+群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMembersExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [DestroyGroup](group_manage.html#解散群组) 方法解散群组。
+
+示例代码如下：
+
+```csharp
+SDKClient.Instance.GroupManager.LeaveGroup(groupId, new CallBack(
+    onSuccess: () =>
+    {
+    },
+    onError:(code, desc) =>
+    {
+    }
+));
+```
+
+#### 群成员被移出群组
+
+仅群主和群管理员可以调用 `DeleteGroupMembers` 方法将单个或多个成员移出群组。被移出后，该成员收到 `IGroupManagerDelegate#OnUserRemovedFromGroup` 回调，其他群成员收到 `IGroupManagerDelegate#OnMembersExitedFromGroup` 回调。被移出群组后，该用户还可以再次加入群组。
 
 示例代码如下：
 

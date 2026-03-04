@@ -30,7 +30,7 @@
 
 本节介绍如何使用环信即时通讯 IM React Native SDK 提供的 API 实现上述功能。
 
-### 群组加人
+### 加入群组
 
 用户进群分为两种方式：主动申请入群和群成员邀请入群。
 
@@ -222,7 +222,7 @@ ChatClient.getInstance()
      });
    ```
 
-### 群组踢人
+### 退出群组
 
 仅群主和群管理员可以调用 `removeMembers` 方法将单个或多个成员移出群组。被移出群组后，该成员收到 `ChatGroupEventListener#onUserRemoved` 回调，其他群成员收到 `ChatGroupEventListener#onMemberExited` 回调。被移出群组后，该用户还可以再次加入群组。
 
