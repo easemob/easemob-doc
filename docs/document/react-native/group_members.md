@@ -590,7 +590,7 @@ ChatClient.getInstance()
 ```typescript
 const groupId = '<YOUR_GROUP_ID>';
 const cursor = ''; // 开始分页的位置，第一页为空，后续页面请使用第一页返回的结果
-const limit = 200;
+const limit = 200; // 每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
 ChatClient.getInstance()
   .groupManager.fetchMemberInfoListFromServer(groupId, cursor, limit)
   .then((result) => {
@@ -605,9 +605,10 @@ ChatClient.getInstance()
 
 ```typescript
 // groupId：群组 ID
-// pageSize：期望获取的最大数量
+// pageSize：每页期望返回的群成员数量，取值范围为 [1,1000]。
 // cursor：开始分页的位置，第一页为空，后续页面请使用第一页返回的结果
 ChatClient.getInstance()
+// pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
   .groupManager.fetchMemberListFromServer(groupId, pageSize, cursor)
   .then(() => {
     console.log("get group members success.");

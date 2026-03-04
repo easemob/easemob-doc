@@ -201,6 +201,7 @@ try {
       await EMClient.getInstance.groupManager.fetchGroupMembersInfo(
     groupId: groupId,
     cursor: cursor,
+    //limit: 每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
     limit: limit,
   );
 } on EMError catch (e) {}

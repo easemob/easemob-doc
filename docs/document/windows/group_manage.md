@@ -118,6 +118,7 @@ SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(groupId, new Val
 示例代码如下：
 
 ```csharp
+// pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
 SDKClient.Instance.GroupManager.GetGroupMemberListFromServer(groupId, pageSize, cursor, callback: new ValueCallBack<CursorResult<string>>(
     onSuccess: (result) =>
     {
