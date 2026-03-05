@@ -11,7 +11,6 @@
 环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupEventHandler` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散群组
-- 加入、退出群组
 - 获取群组详情
 - 获取群成员列表
 - 获取群组列表
@@ -202,6 +201,7 @@ try {
       await EMClient.getInstance.groupManager.fetchGroupMembersInfo(
     groupId: groupId,
     cursor: cursor,
+    //limit: 每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
     limit: limit,
   );
 } on EMError catch (e) {}

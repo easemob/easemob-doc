@@ -8,7 +8,7 @@
 
 环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupEventHandler` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
-- 群组加人、踢人
+- 加入、退出群组
 - 获取群组成员信息
 - 管理群成员的自定义属性
 - 管理群主及群管理员
@@ -30,26 +30,128 @@
 
 本节介绍如何使用环信即时通讯 IM Flutter SDK 提供的 API 实现上述功能。
 
-### 群组加人
+### 加入群组
 
-根据创建群组时的群组类型 (`EMGroupStyle`) 和进群邀请是否需要对方同意 (`EMGroupOptions#inviteNeedConfirm`) 设置，群组加人的处理逻辑有差别。具体规则可以参考 [创建群组](group_manage.html#创建群组)。
+用户进群分为两种方式：主动申请入群和群成员邀请入群。
+
+公开群和私有群在两种入群方式方面存在差别：
+
+| 入群方式                   | 公开群       | 私有群          |
+| :------------------------- | :------------------ | :------------------------------------ |
+| 用户申请入群       | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 [EMGroupStyle](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMGroupStyle.html) 的设置。 | 不支持                                                                                             |
+| 群成员邀请用户入群 | 支持 <br/>只能由群主和管理员邀请。    | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 [EMGroupStyle](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMGroupStyle.html) 的设置。 |
+
+#### 用户申请入群
+
+只有公开群支持用户申请入群，私有群不支持。用户可获取公开群列表，选择相应的群组 ID，然后调用相应方法加入该群组。
+
+任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 [EMGroupStyle](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMGroupStyle.html) 的设置：
+
+- `EMGroupStyle` 为 `PublicJoinNeedApproval` 时，群主和群管理员审批后，用户才能加入群组；
+- `EMGroupStyle` 为 `PublicOpenJoin` 时，用户可直接加入群组，无需群主和群管理员审批。
+
+若申请加入公开群，申请人需执行以下步骤：
+
+1. 调用 `fetchPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。示例代码如下：
+
+```dart
+var groups = await EMClient.getInstance.groupManager.fetchPublicGroupsFromServer(pageSize: 10, cursor: null);
+List<EMGroupInfo> groupList = groups.data;
+String? cursor = groups.cursor;
+```
+
+2. 调用 `joinPublicGroup` 或 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
+
+   - 调用 `joinGroup` 方法加入无需群主或管理员审批的公开群，即 `EMGroupStyle` 设置为 `PublicOpenJoin`。申请人不会收到任何回调，其他群成员会收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 和`EMGroupEventHandler#onMembersJoinedFromGroup` 回调。
+
+   示例代码如下：
+
+   ```dart
+   await EMClient.getInstance.groupManager.joinPublicGroup(groupId);
+   ```
+
+   - 调用 `requestToJoinPublicGroup` 方法加入需要群主或管理员审批的公开群，即 `EMGroupStyle` 设置为 `PublicJoinNeedApproval`。示例代码如下：
+
+   ```dart
+   await EMClient.getInstance.groupManager.requestToJoinPublicGroup(groupId, reason: "your reason");
+   ```
+
+   群主或群管理员收到 `EMGroupEventHandler#onRequestToJoinReceivedFromGroup` 回调：
+
+   - 若同意加入群组，需要调用 `acceptInvitation` 方法。
+
+   申请人会收到 `EMGroupEventHandler#onRequestToJoinAcceptedFromGroup` 回调，其他群成员会收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 和`EMGroupEventHandler#onMembersJoinedFromGroup` 回调。
+
+   示例代码如下：
+
+   ```dart
+   EMClient.getInstance.groupManager.acceptJoinApplication(groupId, username);
+   ```
+
+   - 若群主或群管理员拒绝申请人入群，需要调用 `declineJoinApplication` 方法。申请人会收到 `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 回调。
+
+   示例代码如下：
+
+   ```dart
+   EMClient.getInstance.groupManager.declineJoinApplication(groupId, username, reason: "your reason");
+   ```
+
+#### 邀请用户入群
+
+邀请用户入群的方式详见 [邀请用户入群的配置](group_manage.html#创建群组)。
+
+邀请用户入群流程如下：
+
+1. 群成员邀请用户入群。
+
+   - 群主或群管理员加人，需要调用 `addMembers` 方法：
+
+   ```dart
+   EMClient.getInstance.groupManager.addMembers(groupId, members);
+   ```
+
+   - 普通成员邀请人入群，需要调用 `inviterUser` 方法：
+
+   对于私有群，`EMGroupStyle` 设置为 `PrivateMemberCanInvite` 时，所有群成员均可以邀请人进群。
+
+   ```dart
+   EMClient.getInstance.groupManager.inviterUser(groupId, members, reason: "your reason");
+   ```
+
+2. 受邀用户自动进群或确认是否加入群组：
+
+   - 受邀用户同意加入群组，需要调用 `acceptInvitation` 方法。
+
+   ```dart
+   EMClient.getInstance.groupManager.acceptInvitation(groupId, inviter);
+   ```
+
+   - 受邀人拒绝入群组，需要调用 `declineInvitation` 方法。
+
+   ```dart
+   EMClient.getInstance.groupManager.declineInvitation(groupId: groupId, inviter: inviter, reason: "your reason");
+   ```
+
+### 退出群组
+
+#### 群成员主动退出群组
+
+群成员可以调用 `leaveGroup` 方法退出群组。其他成员收到 `EMGroupEventHandler#onMembersExitedFromGroup` 回调。
+
+退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 `destroyGroup` 解散群组。
 
 示例代码如下：
 
-```dart
+```java
 try {
-  await EMClient.getInstance.groupManager.addMembers(groupId, members);
+  await EMClient.getInstance.groupManager.leaveGroup(groupId);
 } on EMError catch (e) {
 }
 ```
 
-### 群组踢人
+#### 群成员被移出群组
 
-1. 仅群主和群管理员可以调用 `EMGroupManager#removeMembers` 方法将单个或多个成员移出群组。
-2. 被移出群组后，该成员收到 `EMGroupEventHandler#onUserRemovedFromGroup` 事件，其他群成员收到 `EMGroupEventHandler#onMembersExitedFromGroup` 事件。
-3. 被移出群组后，该用户还可以再次加入群组。
-
-示例代码如下：
+仅群主和群管理员可以调用 `EMGroupManager#removeMembers` 方法将单个或多个成员移出群组。被踢出群组后，被踢成员将会收到群组事件回调 `EMGroupEventHandler#onUserRemovedFromGroup`，其他成员将会收到回调 `EMGroupEventHandler#onMembersExitedFromGroup`。被移出群组后，用户还可以再次加入群组。
 
 ```dart
 try {

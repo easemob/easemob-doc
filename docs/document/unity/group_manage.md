@@ -11,7 +11,6 @@
 环信即时通讯 IM SDK 提供 `Group`、`IGroupManager` 和 `IGroupManagerDelegate` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散群组
-- 加入、退出群组
 - 获取群组详情
 - 获取群成员列表
 - 获取群组列表
@@ -126,23 +125,6 @@ SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
 ));
 ```
 
-### 退出群组
-
-群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMembersExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [DestroyGroup](https://docs-im.easemob.com/ccim/unity/group2#解散群组) 方法解散群组。
-
-示例代码如下：
-
-```csharp
-SDKClient.Instance.GroupManager.LeaveGroup(groupId, new CallBack(
-    onSuccess: () =>
-    {
-    },
-    onError:(code, desc) =>
-    {
-    }
-));
-```
-
 ### 获取群组详情
 
 群成员可以调用 `GetGroupWithId` 方法从内存获取群组详情。返回结果包括：群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。
@@ -174,6 +156,7 @@ SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(groupId, new Val
 - 自 SDK 1.4.0 版本开始，群成员可以调用 `FetchGroupMemberInfoFromServer` 方法从服务器获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
 
 ```csharp
+//pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
 SDKClient.Instance.GroupManager.FetchGroupMemberInfoFromServer(currentGroupId, cursor, pageSize, new ValueCallBack<CursorResult<GroupMemberInfo>>(
        onSuccess: (result) =>
         {
@@ -189,6 +172,7 @@ SDKClient.Instance.GroupManager.FetchGroupMemberInfoFromServer(currentGroupId, c
 - SDK 1.4.0 版本前，群成员可以调用 `GetGroupMemberListFromServer` 方法从服务器分页获取群成员列表，即群成员的用户 ID 列表。
 
 ```csharp
+//pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
 SDKClient.Instance.GroupManager.GetGroupMemberListFromServer(groupId, pageSize, cursor, callback: new ValueCallBack<CursorResult<string>>(
     onSuccess: (result) =>
     {

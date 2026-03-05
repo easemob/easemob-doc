@@ -144,6 +144,7 @@ let isMsgBlocked: boolean = group.isMsgBlocked();
 - 获取群成员 ID 列表。
   
 ```typescript
+// pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
 ChatClient.getInstance().groupManager()?.fetchGroupMembers(groupId, pageSize, cursor).then((res) => {
     // success logic
 });
