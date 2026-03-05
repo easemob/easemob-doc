@@ -4,7 +4,7 @@
 
 ## 4.18.1 2026-3-5
 
-修复入群事件 `onGroupMembersJoined` 和退群事件 `onGroupMembersExited` 触发了错误的回调的问题。
+修复入群事件 [onMemberJoinedFromGroup](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMGroupEventHandler/onMemberJoinedFromGroup.html) 和退群事件 [onMemberExitedFromGroup](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMGroupEventHandler/onMemberExitedFromGroup.html) 触发了错误的回调的问题。
 
 ## 4.18.0 2026-3-4
 
