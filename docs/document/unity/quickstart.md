@@ -70,18 +70,6 @@
 2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 unitypackage 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
 
-### 集成问题
-
-若在 Windows 平台上由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
-
-```csharp
-Multiple plugins with the same name 'libaosl' (found at 'Assets/Plugins/Agora/Agora-RTC-Plugin/Agora-Unity-RTC-SDK/Plugins/x86_64/libaosl.dll' and 'Assets/Plugins/Agora/AgoraChat/Plugins/x64/libaosl.dll'). That means one or more plugins are set to be compatible with Editor. Only one plugin at the time can be used by Editor
-
-```
-要修复该问题，直接移除 `Assets/Plugins/Agora/AgoraChat/Plugins/x64` 下的 `libaosl.dll` 即可。
-
-如欲了解详情，请参见 [声网官网文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
-
 ## 实现发送和接收单聊消息
 
 本节介绍如何使用即时通讯 SDK 在你的 unity 项目中实现发送和接收单聊消息。
@@ -313,3 +301,17 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 4. 退出登录：直接点击 **Sign out** 退出登录，退出结果会在下方显示。
 5. 接收消息：在 **user id** 文本框中输入接收消息的用户 ID，例如 **quickstart_receiver**，在 **password** 文本框输入密码，点击 **Sign in** 进行登录。登录成功后，下方会显示收到的消息，例如步骤 3 中发送的 ''how are you.''。
 :::
+
+## 常见问题
+
+### SDK 依赖的 Crash 上报库冲突
+
+若在 Windows 平台上由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
+
+```csharp
+Multiple plugins with the same name 'libaosl' (found at 'Assets/Plugins/Agora/Agora-RTC-Plugin/Agora-Unity-RTC-SDK/Plugins/x86_64/libaosl.dll' and 'Assets/Plugins/Agora/AgoraChat/Plugins/x64/libaosl.dll'). That means one or more plugins are set to be compatible with Editor. Only one plugin at the time can be used by Editor
+
+```
+要修复该问题，直接移除 `Assets/Plugins/Agora/AgoraChat/Plugins/x64` 下的 `libaosl.dll` 即可。
+
+如欲了解详情，请参见 [声网官网文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
