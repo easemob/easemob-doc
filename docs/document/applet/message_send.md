@@ -71,6 +71,16 @@ function sendPrivateUrlImg() {
 }
 ```
 
+:::tip 
+环信即时通讯 IM 小程序 SDK v4.19.0 及以上版本新增了便捷获取上传地址的方法。通过以下方式，你可以直接获取文件上传的服务器基地址（URL）：
+
+```js
+// WebIM.conn 为您初始化的 SDK 实例
+const uploadUrl = WebIM.conn.getChatFilesUrl();
+```
+:::
+
+
 ### 发送语音消息
 
 1. 发送语音消息前，在 app 级别实现录音，提供录制的语音文件的 URI 和时长（单位为秒）。
