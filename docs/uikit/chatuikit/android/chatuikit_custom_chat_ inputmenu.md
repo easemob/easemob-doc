@@ -174,17 +174,17 @@ emojiconMenu?.removeEmojiconGroup(1)
 
 // TODO：添加图
 
-### 设置菜单样式风格
+### 设置菜单风格
 
-消息扩展菜单支持以下两种样式风格：
+消息扩展菜单支持以下两种风格：
 
-- 微信风格样式：
+- 微信风格：
 
 ```kotlin
 ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = true
 ```
 
-- UIActionSheet 风格样式：
+- UIActionSheet 风格：
 
 ```kotlin
 ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
@@ -192,7 +192,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/message_types_1.png" title="UIActionSheet" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="类似微信样式" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="类似微信风格" />
 </ImageGallery>
 
 ### 管理菜单项
