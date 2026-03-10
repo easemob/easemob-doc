@@ -5,7 +5,7 @@
 :::tip
 
 1. `✓` 表示该版本支持的功能。订阅对应套餐包后，即可直接使用。
-2. `*` 表示扩展功能。如需使用，你可以在环信控制台中付费开通。
+2. `*` 表示扩展功能。如需使用，可在环信控制台中付费开通。
 :::
 
 <table width="1225">
@@ -28,7 +28,7 @@
 </td>
 </tr>
 <tr>
-<td rowspan="6" width="216">
+<td rowspan="7" width="216">
 <p>用户</p>
 </td>
 <td width="224">
@@ -103,6 +103,20 @@
 <tr>
 <td width="224">
 <p>多端多设备在线</p>
+</td>
+<td width="224">
+<p>&mdash;</p>
+</td>
+<td width="229">
+<p>✓</p>
+</td>
+<td width="332">
+<p>✓</p>
+</td>
+</tr>
+<tr>
+<td width="224">
+<p>全局禁言</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -296,7 +310,7 @@
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>*</p>
+<p>✓</p>
 </td>
 <td width="332">
 <p>✓</p>
@@ -928,17 +942,20 @@
 </td>
 </tr>
 <tr>
-<td colspan="2" width="440">
+<td width="216">
 <p>服务端 API 调用频率上调</p>
+</td>
+<td width="224">
+<p>上调 RESTful API</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>*（可调整 API及单价详见文档说明）</p>
+<p>*（可在环信控制台调整）</p>
 </td>
 <td width="332">
-<p>*（可调整 API及单价详见文档说明）</p>
+<p>*（可在环信控制台调整）</p>
 </td>
 </tr>
 <tr>
