@@ -214,7 +214,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
     "target_type": "users",
     "msg": {
         "type": "custom",
-        "customEvent": "custom_event",
+        "customEvent": "custom_event"
     },
     "from": "admin",
     "ext": {

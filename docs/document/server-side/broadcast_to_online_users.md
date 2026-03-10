@@ -203,7 +203,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 -d '{
     "msg": {
         "type": "custom",
-        "customEvent": "custom_event",
+        "customEvent": "custom_event"
     },
     "from": "admin",
     "ext": {

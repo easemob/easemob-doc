@@ -1,6 +1,22 @@
 # HarmonyOS 单群聊 UIKit 更新日志
 
+## v1.11.1 
 
+本版本 2025 年 3 月 6 日发布。
+
+#### 新增特性
+
+对外提供 `ConversationLatestMessageContentProvider` 接口，便于开发者自定义会话列表最新消息的展示内容。
+
+#### 优化
+
+- 即时通讯 IM SDK 升级至 v1.11.1，以支持 `ChatMessage` 注册多个 `ChatCallback` 回调。详见 [IM SDK v1.11.1 更新日志](/document/harmonyos/releasenote.html#v1-11-1-dev-2026-2-28-开发版)。
+- 适配 IM SDK v1.11.0 中消息扩展的相关变更，详情请参考 [IM SDK 的消息扩展升级指南](/document/harmonyos/message_extension_optimize.html)。
+
+#### 修复
+
+- 修复用户 ID 包含大写字母时导致登录后消息列表显示异常的问题。
+- 修复使用 `ConvListViewModel` 拉取远端会话列表时出现的展示异常。
 
 ## v1.0.2 
 
@@ -12,7 +28,7 @@
 
 本版本 2025 年 5 月 21 日发布。
 
-#### 新增
+#### 新增特性
 
  - 新增新请求页面，方便同意好友请求。
  - 新增发起新会话页面。
