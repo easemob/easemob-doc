@@ -146,7 +146,7 @@ chatMessageListLayout?.let{
 | 已送达 | `uikit_msg_status_received` |
 | 已读   | `uikit_msg_status_read`     |
 
-#### 消息状态显示规则
+#### 图标显示规则
 
 消息已送达和已读图标的显示行为与 SDK 初始化的 `ChatOptions` 配置有关：
 
