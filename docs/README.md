@@ -192,7 +192,7 @@ projects:
             sdks:
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_stream_overview.html     
+                link: /document/server-side/message_stream_send_single.html     
           - text: 接收消息
             desc: 在单聊、群聊和聊天室中接收各种类型的消息，包括文本消息、图片、语音、视频、文件消息、位置消息、透传消息、自定义消息、合并消息。
             sdks:
