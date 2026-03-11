@@ -9,7 +9,9 @@
 - **AI 对话**：大语言模型（LLM）生成较长回复时，可逐段输出与展示，避免用户长时间等待，确保提供更流畅的交互体验。
 - **协同编辑与实时分享**：在内容尚未完全构思完成时，即可逐步分享思路或文稿。
 
-## 消息发送与接收时序图
+流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
+
+## 消息发送与接收流程
 
 ![img](/images/server-side/message_stream_flowchart.png)
 

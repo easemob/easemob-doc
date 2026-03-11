@@ -187,6 +187,12 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/message_single.html
+          - text: 发送流式消息
+            desc: 可通过调用 RESTful API 在单聊和群聊场景中发送流式消息。
+            sdks:
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/server-side/message_stream_overview.html     
           - text: 接收消息
             desc: 在单聊、群聊和聊天室中接收各种类型的消息，包括文本消息、图片、语音、视频、文件消息、位置消息、透传消息、自定义消息、合并消息。
             sdks:
@@ -219,7 +225,19 @@ projects:
                 link: /document/windows/message_receive.html
               - icon: /sdk/electron.svg
                 text: Electron
-                link: /document/electron/message.html#接收消息    
+                link: /document/electron/message.html#接收消息
+          - text: 接收流式消息
+            desc: 在单聊和群聊场景中，客户端可接收流式消息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/message_stream_receive.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/message_stream_receive.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/message_stream_receive.html        
           - text: 获取消息
             desc: 从环信消息服务器获取漫游消息，或者从本地获取消息。
             sdks:
