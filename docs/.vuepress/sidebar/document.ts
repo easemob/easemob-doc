@@ -338,7 +338,6 @@ const documentSidebar = [
         text: '发送流式消息',
         collapsible: true,
         children: [
-          { text: '流式消息概述', link: 'message_stream_overview.html' },
           { text: '发送单聊流式消息', link: 'message_stream_send_single.html' },
           { text: '发送群聊流式消息', link: 'message_stream_send_group.html' },
         ]
