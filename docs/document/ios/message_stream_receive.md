@@ -2,7 +2,7 @@
 
 自 v4.19.0 起，即时通讯 IM iOS SDK 支持接收来自服务端的文本流式消息。
 
-流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream.html) 下发，SDK 负责接收，但不提供发送能力。
+流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
 
 ## 前提条件
 
@@ -22,7 +22,7 @@
 发送和接收流式消息的流程如下：
 
 1. 接收方注册消息监听器，监听流式消息接收事件 `onStreamMessagesReceived`。
-2. 发送方调用服务端 RESTful API [发送流式消息](/document/server-side/message_stream_single.html)。
+2. 发送方调用服务端 RESTful API [发送流式消息](/document/server-side/message_stream_send_single.html)。
 3. 接收方接收和获取流式消息。
 
 ### 接收流式消息分片
