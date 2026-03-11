@@ -946,7 +946,7 @@
 <p>服务端 API 调用频率上调</p>
 </td>
 <td width="224">
-<p>上调 RESTful API</p>
+<p>上调 RESTful API 调用频率</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
