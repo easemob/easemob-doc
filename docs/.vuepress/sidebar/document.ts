@@ -43,6 +43,15 @@ const documentSidebar = [
       { text: '消息概述', link: 'message_overview.html' },
       { text: '发送消息', link: 'message_send.html' },
       { text: '接收消息', link: 'message_receive.html' },
+      {
+        text: '接收流式消息',
+        collapsible: true,
+        children: [
+          { text: '流式消息概述', link: 'message_stream_overview.html' },
+          { text: '接收流式消息', link: 'message_stream_receive.html' },
+        ],
+        only: ['android', 'ios', 'flutter']
+      },
       { text: '获取历史消息', link: 'message_retrieve.html' },
       { text: '撤回消息', link: 'message_recall.html' },
       { text: '搜索消息', link: 'message_search.html', except: ['web']},
@@ -341,6 +350,15 @@ const documentSidebar = [
         { text: '向在线用户发送广播消息', link: 'broadcast_to_online_users.html' },
         { text: '发送聊天室广播消息', link: 'broadcast_to_chatrooms.html' },
         ],
+      },
+      {
+        text: '发送流式消息',
+        collapsible: true,
+        children: [
+          { text: '流式消息概述', link: 'message_stream_overview.html' },
+          { text: '发送单聊流式消息', link: 'message_stream_send_single.html' },
+          { text: '发送群聊流式消息', link: 'message_stream_send_group.html' },
+        ]
       },
       {
         text: '上传和下载文件',
