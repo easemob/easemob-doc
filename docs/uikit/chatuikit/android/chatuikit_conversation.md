@@ -1,43 +1,4 @@
-# 会话列表
-
-<Toc />
-
-`ChatUIKitConversationListFragment` 用于展示当前用户的所有会话，包含单聊和群组聊天（不包括聊天室），并且提供会话搜索、删除、置顶和免打扰功能。
-
-- 点击搜索按钮，跳转到搜索页面，搜索会话。
-- 点击会话列表项，跳转到会话详情页面。
-- 点击标题栏的扩展按钮，选择新会话，创建新会话。
-- 长按会话列表项显示菜单，可进行删除会话、置顶会话、消息免打扰操作。
-
-单条会话展示会话名称、最后一条消息、最后一条消息的时间以及置顶和禁言状态等。
-
-- 对于单聊, 会话展示的名称为对端用户的昵称，若对端用户未设置昵称则展示对方的用户 ID；会话头像是对方的头像，如果没有设置则使用默认头像。
-- 对于群聊，会话名称为当前群组的名称，头像为默认头像。
-
-会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
-</ImageGallery>
-
-## 使用示例
-
-```kotlin
-class ConversationListActivity: AppCompactActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_conversation_list)
-
-        ChatUIKitConversationListFragment.Builder()
-                        .build()?.let { fragment ->
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.fl_fragment, fragment).commit()
-                        }
-    }
-}
-```
-
-## 自定义会话列表页面
+# 自定义会话列表
 
 你可以配置会话列表页面的标题栏、会话列表项。
 
@@ -45,7 +6,7 @@ class ConversationListActivity: AppCompactActivity() {
   <ImageItem src="/images/uikit/chatuikit/android/custom_conversation_list.png" title="会话列表" />
 </ImageGallery>
 
-### 通过 ChatUIKitConversationListFragment.Builder 自定义设置
+## 自定义设置概览
 
 `ChatUIKitConversationListFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置，目前提供的设置项如下：
 
@@ -82,24 +43,78 @@ ChatUIKitConversationListFragment.Builder()
 | setCustomAdapter()              | 设置自定义的适配器，默认为 `ChatUIKitConversationListAdapter`。       |
 | setCustomFragment()             | 设置自定义聊天 `Fragment`，需要继承自 `ChatUIKitConversationListFragment`。 |
 
-### 添加自定义会话布局
+## 添加自定义会话布局
 
 开发者可以继承 `ChatUIKitConversationListAdapter` 实现自己的 `CustomConversationListAdapter`，然后将 `CustomConversationListAdapter` 设置到 `ChatUIKitConversationListFragment#Builder#setCustomAdapter` 中。
 
 1. 创建自定义适配器 `CustomConversationListAdapter`，继承自 `ChatUIKitConversationListAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
 
 ```kotlin
-class CustomConversationListAdapter : ChatUIKitConversationListAdapter() {
-    override fun getItemNotEmptyViewType(position: Int): Int {
-        // 根据消息类型设置自定义 itemViewType。
-        // 如果使用默认的 itemViewType，返回 super.getItemNotEmptyViewType(position) 即可。
-        return CUSTOM_YOUR_CONVERSATION_TYPE
+class CustomConversationListAdapter (
+    config: ChatUIKitConvItemConfig = ChatUIKitConvItemConfig()
+): ChatUIKitConversationListAdapter(config) {
+    companion object {
+        private const val typeSingleChat = 1
+        private const val typeGroupChat = 2
     }
 
-    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<ChatUIKitConversation> {
-        // 根据返回的 viewType 返回对应的 ViewHolder。
-        // 返回自定义的 ViewHolder 或者使用默认的 super.getViewHolder(parent, viewType)
-        return CUSTOM_YOUR_VIEW_HOLDER()
+    override fun getItemNotEmptyViewType(position: Int): Int {
+        //伪代码
+        //假设这里以不同的conversationType返回不同的viewType示例，你可以根据你自己的业务需求调整
+        val conversationType = getItem(position)?.conversationType
+        when (conversationType) {
+            ChatConversationType.Chat -> {
+                return typeSingleChat
+            }
+            ChatConversationType.GroupChat -> {
+                return typeGroupChat
+            }
+            else -> {
+                return typeSingleChat
+            }
+        }
+    }
+
+    override fun getViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder<ChatUIKitConversation> {
+        //伪代码
+        when (viewType) {
+            typeSingleChat -> {
+                return MySingleChatViewHolder(
+                    MySingleChatItemViewBinding
+                        .inflate(LayoutInflater.from(parent.context), parent, false), config
+                )
+            }
+            else -> {
+                return MyGroupChatViewHolder(
+                    MyGroupChatItemViewBinding
+                        .inflate(LayoutInflater.from(parent.context), parent, false), config
+                )
+            }
+        }
+    }
+}
+```
+```kotlin
+class MySingleChatViewHolder( private val viewBinding: MySingleChatItemViewBinding,
+                              var config: ChatUIKitConvItemConfig? = ChatUIKitConvItemConfig()
+) : ChatUIKitBaseRecyclerViewAdapter.ViewHolder<ChatUIKitConversation>(binding = viewBinding) {
+
+    init {
+        // 这里可以进行一些初始化操作
+        // 比如设置特定的样式或配置
+        config?.bindView(viewBinding)
+    }
+
+    override fun initView(itemView: View?) {
+        super.initView(itemView)
+        // 这里可以进行一些视图的初始化操作
+    }
+
+    override fun setData(item: ChatUIKitConversation?, position: Int) {
+        //根据你的UI来设置数据
     }
 }
 ```
@@ -107,7 +122,9 @@ class CustomConversationListAdapter : ChatUIKitConversationListAdapter() {
 2. 添加 `CustomConversationListAdapter` 到 `ChatUIKitConversationListFragment#Builder`。
 
 ```kotlin
-builder.setCustomAdapter(customConversationListAdapter);
+var mConversationListFragment = ChatUIKitConversationListFragment.Builder()
+    .setCustomAdapter(CustomConversationListAdapter())
+    .build()
 ```
 
 3. 通过继承 `ChatUIKitConversationListFragment` 进行自定义设置。
@@ -124,13 +141,13 @@ builder.setCustomFragment(customConversationListFragment);
   <ImageItem src="/images/uikit/chatuikit/android/conversation_list_custom_noavatarsutbtitle.png" title="会话列表无头像、无最新消息" />
 </ImageGallery>
 
-### 设置标题栏
+## 设置标题栏
 
 会话列表页面、聊天页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。如果会话列表页面的标题栏不满足需求，建议根据自身需求设置标题栏。
 
 会话列表页面的标题栏包含左、中、右三个区域，本节介绍如何在使用 `ChatUIKitConversationListFragment` 的前提下配置这些区域。
 
-#### 设置是否启用标题栏
+### 设置是否启用标题栏
 
 ```kotlin
 
@@ -139,7 +156,7 @@ ChatUIKitConversationListFragment.Builder().useTitleBar()
     
 ```
 
-#### 设置左侧头像
+### 设置左侧头像
 
 ```kotlin
 //使用 binding?.titleConversations 可以直接获取到 ChatUIKitTitleBar
@@ -161,7 +178,7 @@ binding?.titleConversations?.let { titlebar->
     
 ```
 
-#### 设置左侧头像及文本区域点击事件
+### 设置左侧头像及文本区域点击事件
 
 ```kotlin
 // logo 图标区域点击事件 
@@ -171,7 +188,7 @@ binding?.titleConversations?.setTitleClickListener {}
     
 ```
 
-#### 设置中部标题
+### 设置中部标题
 
 ```kotlin
 // 文本设置
@@ -181,7 +198,7 @@ binding?.titleConversations?.setTitleEndDrawable(R.drawable.conversation_title)
     
 ```
 
-#### 设置右侧显示图标
+### 设置右侧显示图标
 
 一般情况下，右侧会支持设置多个图标。我们采用设置 Menu 的方式进行设置。
 
@@ -214,7 +231,7 @@ binding?.titleConversations?.setTitleEndDrawable(R.drawable.conversation_title)
 
 ```
 
-#### 设置返回按钮和事件监听
+### 设置返回按钮和事件监听
 
 ```kotlin
 
@@ -225,7 +242,7 @@ ChatUIKitConversationListFragment.Builder().setTitleBarBackPressListener()
     
 ```
 
-#### 设置背景色
+### 设置背景色
 
 设置标题栏的背景色：
 
@@ -235,9 +252,9 @@ binding?.titleConversations?.setBackgroundColor(ContextCompat.getColor(mContext,
     
 ```
 
-### 设置搜索区域
+## 设置搜索区域
 
-#### 设置是否需要搜索功能
+### 设置是否需要搜索功能
 
 ```kotlin
 
@@ -247,7 +264,7 @@ ChatUIKitConversationListFragment.Builder().useSearchBar(true)
     
 ```
 
-#### 自定义搜索
+### 自定义搜索
 
 如果默认的搜索无法满足用户需求，可以通过 `setCustomActivityRoute` 修改跳转路由，跳转自己的搜索页面。
 
@@ -270,7 +287,7 @@ ChatUIKitClient.setCustomActivityRoute(object : ChatUIKitCustomActivityRoute {
     
 ```
 
-### 设置会话列表项
+## 设置会话列表项
 
 要设置会话列表中列表项的内容，你需要执行以下步骤：
 

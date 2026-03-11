@@ -13,10 +13,11 @@
 环信即时通讯 IM HarmonyOS SDK 提供 `ChatManager` 和 `Conversation` 类支持获取服务器和本地的消息，包含如下主要方法：
 
 - `ChatManager#fetchHistoryMessages`：根据 `FetchMessageOption` 类从服务端分页获取指定会话的历史消息；
-- `ChatManager#fetchHistoryMessages`：根据 `searchOptions.from` 字段从服务器获取群组中指定成员（而非全部成员）发送的消息；
 - `Conversation#searchMessagesByKeywords`：从本地获取群组中指定成员（而非全部成员）发送的消息；
-- `Conversation#getAllMessages`：从本地读取指定会话的消息；
-- `ChatManager#getMessage`：根据消息 ID 获取本地消息；
+- `ChatManager#loadConversationMessagesWithKeyword`：通过关键词从本地数据库获取消息，返回会话 ID 及消息 ID 列表的映射关系；
+- `ChatManager#loadMessages`：根据消息 ID 列表从本地数据库获取消息对象列表；
+- `Conversation#loadMoreMessagesFromDB`：从本地数据库加载消息；
+- `ChatManager#getMessage`：根据消息 ID 获取单个本地消息；
 - `Conversation#getMsgCountInRange`：获取本地数据库中单个会话在某个时间段内的全部消息数。
 
 ## 前提条件
@@ -43,8 +44,8 @@
 
 :::tip
 1. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需联系环信商务。**
-2. 对于单聊消息，自 1.5.0 版本开始，从服务器拉取历史消息时会读取服务端的消息已读和送达状态。该功能默认关闭，如果需要，请联系环信商务开通。
-3. 历史消息在服务器上的存储时间与产品的套餐包相关，详见  [IM 套餐包功能对比](/product/product_package_feature.html)。
+2. 自 1.5.0 版本开始，获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态。该功能默认关闭，如果需要，请联系环信商务开通。
+3. 历史消息在服务器上的存储时间与产品的套餐包相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 :::
 
 ```typescript
@@ -56,25 +57,6 @@ ChatClient.getInstance().chatManager()?.fetchHistoryMessages(conversationId, con
     // logic of getting more historical messages
   }
 })
-```
- 
-### 从服务器获取指定群成员发送的消息
-
-自 1.7.0 版本开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
-
-```typescript
-ChatClient.getInstance().chatManager()?.fetchHistoryMessages({
-  conversationId: this.conversationId,
-  conversationType: this.conversationType,
-  pageSize: 50,
-  searchOptions: {
-    searchDirection: SearchDirection.DOWN,
-    isSave: true,
-    from: [this.groupMember1, this.groupMember2]
-  }
-}).then((result) => {
-  // success logic
-});
 ```
 
 ### 从本地获取指定群成员发送的消息
@@ -94,21 +76,54 @@ if (conversation) {
 }
 ```
 
-### 从本地读取指定会话的消息
+### 根据关键字获取本地会话中的消息
 
-你可以调用 `getAllMessages` 方法获取指定会话在内存中的所有消息。如果内存中为空，SDK 再从本地数据库中加载最近一条消息。
-
-你也可以调用 `loadMoreMsgFromDB` 方法从本地数据库中分页加载消息，加载的消息会基于消息中的时间戳放入当前会话的内存中。
+自 SDK 1.9.0 版本开始，你可以调用 `loadConversationMessagesWithKeyword` 方法通过关键词从本地数据库中获取消息，SDK 返回会话 ID 及消息 ID 列表的映射关系，其中消息 ID 列表按 `direction` 设置的方向排列。
 
 ```typescript
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
-List<EMMessage> messages = conversation.getAllMessages();
-// startMsgId：查询的起始消息 ID。SDK 从该消息 ID 开始按消息时间戳的逆序加载。如果传入消息的 ID 为空，SDK 从最新消息开始按消息时间戳的逆序获取。
-// pageSize：每页期望加载的消息数。取值范围为 [1,400]。
-List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
+// keyword：搜索关键词。设为空字符串表示忽略该参数。
+// timestamp：搜索开始的 Unix 时间戳，单位为毫秒。如果该参数设置为负数，则从最新消息向前获取。默认参数为 -1。
+// sender：消息发送方。设为空字符串表示忽略该参数。默认参数为空字符串。
+// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序获取；`DOWN`：按消息时间戳的顺序获取。
+// scope：消息搜索范围。详见 MessageSearchScope。默认参数为 MessageSearchScope.ALL。
+ChatClient.getInstance().chatManager()?.loadConversationMessagesWithKeyword(keyword, timestamp, sender, direction, scope)
+  .then((resultMap) => {
+    // resultMap: Map<string, Array<string>>
+    // key 为 conversationId，value 为 msgId 列表
+    resultMap.forEach((msgIds, conversationId) => {
+      // use conversationId and msgIds
+    });
+  }).catch((e: ChatError) => {
+    // failure logic
+  });
 ```
 
-### 根据消息 ID 获取本地消息
+### 根据消息 ID 列表获取本地消息
+
+自 SDK 1.9.0 版本开始，你可以调用 `loadMessages` 方法根据消息 ID 列表从本地数据库获取消息对象列表。该方法一次最多获取 20 条消息，返回的消息按照时间倒序排列。
+
+```typescript
+// messageIds：消息 ID 列表。列表长度取值范围 [0,20]。
+ChatClient.getInstance().chatManager()?.loadMessages(messageIds)
+  .then((messages) => {
+    // success logic
+  }).catch((e: ChatError) => {
+    // failure logic
+  });
+```
+
+### 从本地加载消息
+
+你可以调用 `loadMoreMessagesFromDB` 方法从本地数据库中分页加载消息。
+
+```typescript
+let conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
+// startMsgId - 查询的起始消息 ID。该参数设置后，SDK 从指定的消息 ID 开始按消息检索方向加载。默认值为空字符串。
+// pageSize - 每页要加载的消息数。取值范围为 [1,400]。默认值为 20。
+let messages: ChatMessage[] | undefined = await conversation?.loadMoreMessagesFromDB(startMsgId, pageSize);
+```
+
+### 根据消息 ID 获取单个本地消息
 
 你可以调用 `getMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 

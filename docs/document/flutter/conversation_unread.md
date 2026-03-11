@@ -25,7 +25,7 @@
 
 ### 获取所有会话的未读消息数
 
-你可以调用 `getUnreadMessageCount` 方法获取本地所有会话的未读消息数量，示例代码如下：
+你可以调用 `getUnreadMessageCount` 方法获取本地所有会话的未读消息数量。示例代码如下：
 
 ```dart
 int unreadCount =
@@ -34,15 +34,17 @@ int unreadCount =
 
 ### 获取指定会话的未读消息数
 
-你可以调用 `unreadCount` 方法获取本地指定会话的未读消息数，示例代码如下：
+你可以调用 `unreadCount` 方法获取本地指定会话的未读消息数。示例代码如下：
 
 ```dart
+// type 为会话类型：单聊为 `Chat`，群聊为 `GroupChat`, 聊天室为 `ChatRoom`，默认为单聊。
+EMConversation? conversation = await EMClient.getInstance.chatManager.getConversation("convId", type: EMConversationType.Chat);
 int unreadCount = await conversation.unreadCount();
 ```
 
 ### 将所有会话的未读消息数清零
 
-你可以调用 `markAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零，示例代码如下：
+你可以调用 `markAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零。示例代码如下：
 
 ```dart
 await EMClient.getInstance.chatManager.markAllConversationsAsRead();
@@ -50,16 +52,20 @@ await EMClient.getInstance.chatManager.markAllConversationsAsRead();
 
 ### 指定会话的未读消息数清零
 
-你可以调用 `markAllMessagesAsRead` 方法对指定会话的未读消息数清零，示例代码如下：
+你可以调用 `markAllMessagesAsRead` 方法对指定会话的未读消息数清零。示例代码如下：
 
 ```dart
+// type 为会话类型：单聊为 `Chat`，群聊为 `GroupChat`, 聊天室为 `ChatRoom`，默认为单聊。
+EMConversation? conversation = await EMClient.getInstance.chatManager.getConversation("convId", type: EMConversationType.Chat);
 await conversation.markAllMessagesAsRead();
 ```
 
 ### 将指定会话的单条未读消息置为已读
 
-你可以调用 `markMessageAsRead` 方法将指定会话的单条未读消息置为已读。
+你可以调用 `markMessageAsRead` 方法将指定会话的单条未读消息置为已读。示例代码如下：
 
 ```dart
+// type 为会话类型：单聊为 `Chat`，群聊为 `GroupChat`, 聊天室为 `ChatRoom`，默认为单聊。
+EMConversation? conversation = await EMClient.getInstance.chatManager.getConversation("convId", type: EMConversationType.Chat);
 await conversation.markMessageAsRead(message.msgId);
 ```

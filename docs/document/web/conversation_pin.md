@@ -32,20 +32,24 @@
 示例代码如下： 
 
 ```javascript
-connection.pinConversation({conversationId:'conversationId', conversationType: 'singleChat', isPinned: true})
+conn.pinConversation({conversationId:'conversationId', conversationType: 'singleChat', isPinned: true})
 ```
 
 ### 获取服务端的置顶会话列表
 
 你可以调用 `getServerPinnedConversations` 方法从服务端分页获取置顶会话列表。SDK 按照会话置顶时间的倒序返回。 
 
-你最多可以拉取 50 个置顶会话。
+你最多可以拉取 50 个置顶会话。从 4.17.0 版本起，你可以选择是否拉取置顶的空会话。
 
 示例代码如下，返回数据类型参见[从服务器分页获取会话列表](conversation_list#从服务器分页获取会话列表)。
 
 ```javascript
-// pageSize: 每页返回的会话数。取值范围为 [1,50]。
-// cursor：开始获取数据的游标位置。若传空字符串（''），SDK 从最新置顶的会话开始查询。
-connection.getServerPinnedConversations({pageSize:50, cursor: ''})
+// pageSize: 每页返回的会话数。取值范围为 [1,50]，默认为 `20`。
+// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段，SDK 从最新置顶的会话开始查询。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
+conn.getServerPinnedConversations({
+    pageSize: 50,
+    cursor: '',
+    includeEmptyConversations: true // 是否获取空会话
+})
 ```
 

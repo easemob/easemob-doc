@@ -143,29 +143,42 @@ boolean isMsgBlocked = group.isMsgBlocked();
 
 ### 获取群成员列表
 
-- 当群成员少于 200 人时，你可以调用从服务器获取群组详情的方法 `getGroupFromServer` 获取获取群成员列表，包括群主、群管理员和普通群成员：
+- 自 4.14.0 版本开始，你可调用 `asyncFetchGroupMembersInfo` 方法获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
 
 ```java
-// 第二个参数传入 `true`，默认取 200 人的群成员列表。
-// 同步方法，会阻塞当前线程。
-EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
-List<String> memberList = group.getMembers();//普通成员
-memberList.addAll(group.getAdminList());//加上管理员
-memberList.add(group.getOwner());//加上群主
+EMClient.getInstance().groupManager().asyncFetchGroupMembersInfo(groupId, null, 50, new EMValueCallBack<EMCursorResult<EMGroupMemberInfo>>() {
+            @Override
+            public void onSuccess(EMCursorResult<EMGroupMemberInfo> value) {
+                List<EMGroupMemberInfo> list = value.getData();
+                for (EMGroupMemberInfo groupMemberInfo : list) {
+                    //获取群成员的用户 ID、加群时间和成员角色
+                    String id = groupMemberInfo.getMemberId();
+                    long joinTime = groupMemberInfo.getJoinTime();
+                    EMGroup.EMGroupPermissionType role = groupMemberInfo.getRole();
+                }
+            }
+
+            @Override
+            public void onError(int error, String errorMsg) {
+
+            }
+        });
 ```
 
-- 当群成员数量大于等于 200 时，你可以首先调用 `getGroupFromServer` 方法获取群主和群管理员，然后调用 `fetchGroupMembers` 方法获取普通群成员列表：
+
+- 你也可以首先调用 `getGroupFromServer` 方法获取群主和群管理员，然后调用 `fetchGroupMembers` 方法获取普通群成员列表（用户 ID 列表）。
 
 ```java
 // 第二个参数传入 `true`，默认取 200 人的群成员列表。
 // 同步方法，会阻塞当前线程。
-EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId, true);
+EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId);
 
 List<String> memberList = new ArrayList<>();
 EMCursorResult<String> result = null;
 final int pageSize = 20;
 do {
     // 同步方法，会阻塞当前线程。异步方法为 asyncFetchGroupMembers(String, String, int, EMValueCallBack)。
+    // pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
      result = EMClient.getInstance().groupManager().fetchGroupMembers(groupId,
              result != null? result.getCursor(): "", pageSize);
      memberList.addAll(result.getData());
@@ -175,9 +188,10 @@ do {
  memberList.add(group.getOwner());//加上群主
 ```
 
+
 ### 获取群组列表
 
-用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。
+用户可以调用 `asyncGetJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。
 
 示例代码如下：
 
@@ -185,9 +199,9 @@ do {
 // 异步方法。同步方法为 getJoinedGroupsFromServer(int, int, boolean, boolean)。
 // pageIndex：当前页码，从 0 开始。
 // pageSize：每页期望返回的群组数。取值范围为[1,20]。
-List<EMGroup> grouplist = EMClient.getInstance().groupManager().asyncGetJoinedGroupsFromServer(pageIndex, pageSize, needMemberCount, needRole, new EMValueCallBack<List<EMGroup>>() {
+EMClient.getInstance().groupManager().asyncGetJoinedGroupsFromServer(pageIndex, pageSize, needMemberCount, needRole, new EMValueCallBack<List<EMGroup>>() {
                         @Override
-                        public void onSuccess(List<EMGroup> value) {
+                        public void onSuccess(List<EMGroup> groups) {
 
                         }
 
@@ -215,7 +229,7 @@ String cursor = result.getCursor();
 
 ### 查询当前用户已加入的群组数量
 
-自 4.2.1 版本开始，你可以调用 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [计费策略](/product/pricing_policy.html#增值服务费用)。
+自 4.2.1 版本开始，你可以调用 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 
 ```java
 EMClient.getInstance().groupManager().asyncGetJoinedGroupsCountFromServer(new EMValueCallBack<Integer>() {

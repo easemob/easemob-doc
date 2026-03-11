@@ -1,4 +1,4 @@
-# 集成 SDK
+# 导入 SDK
 
 本文介绍如何将环信即时通讯 IM SDK 集成到你的 iOS 项目。
 
@@ -8,9 +8,9 @@
 - 安装 iOS 10.0 或更高版本的 iOS 模拟器或 Apple 设备。
 - CocoaPods 1.10.1 或更高版本。
 
-## 集成 SDK
+## 导入 SDK
 
-选择如下任意一种方式将环信即时通讯 IM SDK 集成到你的项目中。
+选择如下任意一种方式将环信即时通讯 IM SDK 导入到你的项目中。
 
 :::tip
 
@@ -21,7 +21,7 @@
 
 ### 方法一：使用 Cocoapods 自动集成
 
-1. 在 **Terminal** 里进入项目根目录，并运行 pod init 命令。项目文件夹下会生成一个 **Podfile** 文本文件。
+1. 在 **Terminal** 里进入项目根目录，并运行 `pod init` 命令。项目文件夹下会生成一个 **Podfile** 文本文件。
 打开 **Podfile** 文件，修改文件为如下内容：
 
 ```ruby
@@ -37,7 +37,7 @@
 
 ### 方法二：手动复制 SDK 文件
 
-打开 [SDK 下载页面](https://www.easemob.com/download/im)，获取最新版的环信即时通讯 IM SDK，然后解压。
+打开 [SDK 下载页面](https://www.easemob.com/download/im#IOS)，获取最新版的环信即时通讯 IM SDK，然后解压。
 
 将 SDK 包内的 `HyphenateChat.xcframework` 拖入到你的工程中。
 

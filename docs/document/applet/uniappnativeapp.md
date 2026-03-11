@@ -12,7 +12,7 @@
 :::tip
 
 - Demo 只包含部分 IM 功能，详细参考 **功能说明**
-- Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
+- Uni-app Demo [GitHub](https://github.com/easemob/webim-uniapp-demo) 或 [Gitee](https://gitee.com/easemob-code/webim-uniapp-demo) 源码地址
 :::
 
 ## 功能说明
@@ -24,7 +24,7 @@
 
 ## 开发者集成
 
-[注册并创建应用](/product/enable_and_configure_IM.html#创建应用)
+[注册并创建应用](/product/console/app_create.html)
 
 ### 搭建 app 开发环境
 
@@ -44,8 +44,8 @@
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
-- Uni-app Demo 源码中获取 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
+- 通过官网 [下载 SDK](https://www.easemob.com/download/im#uni-app)。
+- 从 [GitHub](https://github.com/easemob/webim-uniapp-demo) 或 [Gitee 的 Uni-app Demo 源码](https://gitee.com/easemob-code/webim-uniapp-demo) 中获取。
 
 #### 引入 SDK
 

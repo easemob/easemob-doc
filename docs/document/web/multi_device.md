@@ -2,7 +2,9 @@
 
 <Toc />
 
-即时通讯 IM 支持同一账号在多个设备上登录，使用该服务前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)的 **即时通讯** > **功能配置** > **功能配置总览** > **基础功能** 页面上查找**多端多设备在线**，开启该功能。
+## 概述
+
+即时通讯 IM 支持同一账号在多个设备上登录。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#多端多设备)。
 
 多端多设备登录场景下，所有已登录的设备同步以下信息和操作：
 
@@ -11,19 +13,31 @@
 - 子区相关操作；
 - 会话相关操作。
 
-多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置各端设备的数量：
+多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的 **功能配置 > 基础功能** > **用户** 页面，在弹出的对话框中设置各端设备的数量：
 
 ![img](/images/common/multidevice_device_count.png)
 
-单端和多端登录场景下的互踢策略如下：
+### 互踢策略
 
-| 单端登录  | 多端登录   |其他说明 | 
-| :--------- | :----- | :------- | 
-| 新登录的设备会将当前在线设备踢下线。  |  若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。<br/>多端登录时，是否使用固定的设备 ID 对设备互踢策略存在影响：SDK 会为设备生成设备 ID，作为设备的唯一标识。之前，每个 SDK 实例连接时，SDK 均使用不同的随机字符串作为设备标识。自从 4.8.0 版本开始，Web SDK 新增了 `ConnectionParameters#isFixedDeviceId` 参数，你可以在 SDK 初始化时设置使用随机的设备 ID 或固定设备 ID：<br/>- （默认）`true`：使用固定的设备 ID。设备标识存入本地存储，即使在多设备登录情况下，同一浏览器只能打开一个页签，若打开两个，新页签会将上一个踢掉。<br/>- `false`：使用随机设备 ID。每个页签采用不同的设备 ID。多设备登录情况下，同一浏览器可打开多个页签，若超过允许的设备数量，则新页签会将最先打开的页签踢掉。  |  环信服务器提供 RESTful 接口[查询每个账号已登录设备列表](/document/server-side/account_system.html#获取指定账号的在线登录设备列表)、[将账号从已登录设备强制下线](/document/server-side/account_system.html#强制用户下线)和将指定账号强制[从单个设备下线](/document/server-side/account_system.html#强制用户从单设备下线)。       |  
+- 单端登录
+
+新登录的设备会将当前在线设备踢下线。
+
+- 多端登录
+
+若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。<br/>多端登录时，是否使用固定的设备 ID 对设备互踢策略存在影响：SDK 会为设备生成设备 ID，作为设备的唯一标识。之前，每个 SDK 实例连接时，SDK 均使用不同的随机字符串作为设备标识。自从 4.8.0 版本开始，Web SDK 新增了 `ConnectionParameters#isFixedDeviceId` 参数，你可以在 SDK 初始化时设置使用随机的设备 ID 或固定设备 ID：<br/>- （默认）`true`：使用固定的设备 ID。设备标识存入本地存储，即使在多设备登录情况下，同一浏览器只能打开一个页签，若打开两个，新页签会将上一个踢掉。<br/>- `false`：使用随机设备 ID。每个页签采用不同的设备 ID。多设备登录情况下，同一浏览器可打开多个页签，若超过允许的设备数量，则新页签会将最先打开的页签踢掉。
+
+环信服务器提供 RESTful 接口 [查询每个账号已登录设备列表](/document/server-side/account_online_device_obtain.html)、[将账号从已登录设备强制下线](/document/server-side/account_offline_forced.html)和将指定账号强制 [从单个设备下线](/document/server-side/account_offline_device_single.html)。
 
 ## 技术原理
 
 即时通讯 IM Web SDK 在用户每次登录时会生成一个新的唯一的登录 ID，并将该 ID 发送到服务器。服务器会自动将新消息发送到用户登录的设备，可以自动监听到其他设备上进行的好友或群组操作。
+
+## 前提条件
+
+- 开始前，确保将 SDK 初始化，连接到服务器。详见[快速开始](quickstart.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 开通多端多设备功能。详见 [环信控制台文档](/product/console/basic_user.html#多端多设备)。
+- 设置登录设备的自定义名称和平台需在 SDK 初始化时中完成。
 
 ## 实现方法
 
@@ -56,7 +70,7 @@ conn.getSelfIdsOnOtherPlatform().then((res) => {
 
 你可以按照以下步骤设置登录设备所属的平台：
 
-1. 在环信控制台的 **功能配置 > 功能配置总览** 页面，点击 **基础功能** 页签，然后点击 **多端多设备在线** 对应的设置。在弹出的对话框中点击 **新增自定义平台**，在 **添加自定义平台** 对话框中设置 **设备平台** 和 **设备数量**。
+1. 在环信控制台的 **功能配置** > **基础功能** > **用户** 页面，在**多端多设备** 区域，点击 **设置**。在弹出的对话框中点击 **新增自定义平台**，在 **添加自定义平台** 对话框中设置 **设备平台** 和 **设备数量**。
 
 **设备平台** 的取值范围为 [1,100]，**设备数量** 的取值范围为 [0,4]。
 
@@ -65,7 +79,7 @@ conn.getSelfIdsOnOtherPlatform().then((res) => {
 2. 初始化 SDK 时，设置 `customOSPlatform` 参数，可选值为 [1,100]，确保该参数的值与环信控制台的 **添加自定义平台** 对话框中设置的设备平台的值相同。
 
 ```javascript
-const conn = new EC.connection({
+const conn = new WebIM.connection({
     appKey: 'you appKey',
     customOSPlatform: 1, // 设置自定义平台
     customDeviceName: '自定义平台1' // 设置平台名称
@@ -87,17 +101,17 @@ const conn = new EC.connection({
     conn.setLoginInfoCustomExt("你的自定义扩展信息json字符串");
 
     // 监听onDisconnected回调
-		conn.addEventHandler("Connected", {
-			// IM连接断开事件
+        conn.addEventHandler("Connected", {
+            // IM连接断开事件
       onDisconnected: (e) => {
-				if(e){
-					// 多端被踢下线
-					if(e.type === '206'){
-						// 其他错误码场景下不存在该字段
-						// 当前设备挤下线的新登录设备的自定义扩展信息。
-						console.log(e.data.loginInfoCustomExt)
-					}
-				}
+                if(e){
+                    // 多端被踢下线
+                    if(e.type === '206'){
+                        // 其他错误码场景下不存在该字段
+                        // 当前设备挤下线的新登录设备的自定义扩展信息。
+                        console.log(e.data.loginInfoCustomExt)
+                    }
+                }
       }
     });
 
@@ -186,14 +200,11 @@ A：对于使用 Uniapp 打包的移动端和小程序端，在环信侧多端�
 客户端示例代码如下：
 
 ```javascript
-const conn = new EC.connection({
+const conn = new WebIM.connection({
     appKey: 'you appKey',
     // 这里传入的自定义平台 ID 必须与控制台上设置的相同。
     customOSPlatform: 1, // 自定义平台 ID
     customDeviceName: 'Uniapp-mobile' // 自定义平台名称
 })
 ```
-
-
-
 

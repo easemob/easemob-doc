@@ -11,7 +11,7 @@
 - Xcode：推荐最新版本。
 - 安装 iOS 14.0 或以上版本的 iOS 模拟器或 Apple 设备。
 - CocoaPods 1.14.3 及以上版本已经安装并且已跑通了集成。
-- 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 已在[环信控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#查看应用信息)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 实现发送第一条单聊消息
@@ -29,7 +29,7 @@
 
 你可以在应用加载时或使用 EaseChatUIKit 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 的 **应用详情** 页面查看 App Key。
+初始化时，需传入 App Key。你可以在 [环信控制台](https://console.easemob.com/user/login) 的 **应用概览** 页面查看 App Key。
 
 ```
 import EaseChatUIKit
@@ -52,9 +52,9 @@ let error = EaseChatUIKitClient.shared.setup(appKey: "Appkey")
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 EaseChatUIKit。
 :::
 
-为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用概览** > **用户认证** 页面创建用户并查看用户 token。**用户认证** 页面中的用户仅用于快速体验或调试目的。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
-在开发环境中，你需要在环信控制台 [创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见 [使用环信用户 token 鉴权](/product/easemob_user_token.html)。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 - 4.10.0 及以上版本：
 
@@ -120,7 +120,9 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 
 ### 第四步 创建聊天页面
 
-1. 在控制台[关闭好友关系检查功能](/product/enable_and_configure_IM.html#好友关系检查)，即无需添加好友即可聊天。
+登录成功后，你可以按以下步骤创建聊天页面：
+
+1. 在控制台[关闭好友关系检查功能](/product/console/basic_user.html#好友关系检查)，即无需添加好友即可聊天。
 2. 调用 `init` 方法将在控制台上创建的用户的用户 ID 传入 `conversationId` 参数，向该用户发送消息。
 
 ```swift
@@ -137,4 +139,14 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/message_first.png" title="发送第一条消息" />
 </ImageGallery>
+
+## 常见问题
+
+### 沙盒选项问题
+
+当你使用 Xcode 15 创建新工程时，编译时若出现 **Sandbox: rsync.samba(47334) deny(1) file-write-create...** 报错，你需要在 **Target > Build Settings** 中查找 **User Script Sandboxing** 选项，设置为 **NO**。
+
+![img](/images/ios/quickstart_emulator_error.png)
+
+![img](/images/ios/quickstart_error_solve.png)
 

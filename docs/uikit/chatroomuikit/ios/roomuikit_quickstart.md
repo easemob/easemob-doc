@@ -7,7 +7,7 @@
 - Xcode (推荐最新版本)。
 - 安装 iOS 13.0 或更高版本的 iOS 模拟器或 Apple 设备。
 - 已使用 CocoaPods 添加了 ChatroomUIKit 依赖项。
-- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台](https://console.easemob.com/user/login)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 创建项目
@@ -25,7 +25,7 @@
 
 你可以在应用加载时或使用 ChatroomUIKit 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
+初始化时，需传入 App Key。你可以在[环信控制台](https://console.easemob.com/user/login)的**应用概览**页面查看 App Key。
 
 ```swift    
 import ChatroomUIKit
@@ -41,15 +41,13 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 
 ### 第二步 登录 ChatroomUIKit
 
-使用用户 ID 和用户 Token 登录 ChatroomUIKit。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 登录 ChatroomUIKit。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 :::tip
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 ChatroomUIKit。
 :::
 
-为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
-
-在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ```swift
 ChatroomUIKitClient.shared.login(userId: "user id", token: "token", completion: <#T##(ChatError?) -> Void#>)
@@ -59,7 +57,7 @@ ChatroomUIKitClient.shared.login(userId: "user id", token: "token", completion: 
 
 创建聊天室视图的步骤如下：
 
-1. 获取聊天室列表，加入指定的聊天室。除此之外，你还可以在环信控制台上[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)，获取聊天室 ID。
+1. 获取聊天室列表，加入指定的聊天室。除此之外，你还可以在环信控制台上 [创建聊天室](/product/console/operation_chatroom.html#创建聊天室)，获取聊天室 ID。
 
 2. 创建聊天室视图 `ChatroomView`，传入的参数包括聊天室 ID、布局参数和聊天室所有者的用户 ID。
 
@@ -78,7 +76,7 @@ let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: "Chat room ID",
 
 ![img](/images/uikit/chatroomios/hierarchy.png =800x550)
 
-4. [添加聊天室成员](https://doc.easemob.com/product/enable_and_configure_IM.html#创建聊天室)。
+4. [添加聊天室成员](/product/console/operation_chatroom.html#聊天室审核管理)。
 
 ### 第四步 发送第一条消息
 
@@ -86,4 +84,4 @@ let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: "Chat room ID",
 
 ![img](/images/uikit/chatroomios/click_chat.png =500x500)
 
-上图为聊天室 Demo 显示的内容，如果要实现类似的样式，可以点击[这里](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。 
+上图为聊天室 Demo 显示的内容，如果要实现类似的样式，可以访问 [GitHub](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo) 或 [Gitee 地址](https://gitee.com/easemob-code/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。 

@@ -11,7 +11,7 @@
 - Android Studio 4.0 或以上
 - Android SDK API 21 或以上
 - JDK 11 或以上
-- 有效的环信即时通讯 IM 开发者账号和 App key，详见 [环信控制台文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 有效的环信即时通讯 IM 开发者账号和 App key，详见 [环信控制台文档](/product/console/app_manage.html#查看应用信息)。
 
 ## 项目准备
 
@@ -67,7 +67,7 @@ dependencies {
 
 **本地依赖**
 
-从 GitHub 获取 [单群聊 UIKit 源码](https://github.com/easemob/chatuikit-android)，按照下面的方式集成：
+从 [GitHub](https://github.com/easemob/easemob-uikit-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-android) 获取单群聊 UIKit 源码，按照下面的方式集成：
 
 - 在 Project 工程根目录下的 `settings.gradle.kts` 文件中添加如下代码：
 
@@ -197,7 +197,7 @@ android.enableJetifier=true
 
 ### 第二步 实现代码逻辑
 
-1. 初始化UIKit。
+1. 初始化 UIKit。
 
 2. 实现登录和退出页面。
 
@@ -205,7 +205,9 @@ android.enableJetifier=true
 若你已集成了即时通讯 IM SDK，SDK 的所有用户 ID 均可用于登录单群聊 UIKit。
 :::
 
-你需要在环信控制台 [创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，登录时传入用户 ID 和密码。
+你需要在环信控制台 [创建用户](/product/console/operation_user.html#创建用户)，登录时传入用户 ID 和密码。
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 完整实现示例代码：
 

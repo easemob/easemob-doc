@@ -8,7 +8,8 @@
 
 环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupEventHandler` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
-- 修改群组名称及描述
+- 修改群组名称、描述
+- 获取、设置和修改群头像
 - 获取、更新群组公告
 - 管理群组共享文件
 - 更新群扩展字段
@@ -27,13 +28,13 @@
 
 ### 修改群组名称
 
-仅群主和群管理员可以调用 `EMGroupManager#changeGroupName` 方法设置和修改群组名称，群名称的长度限制为 128 个字符, 其他成员会收到 `EMGroupEventHandler#onSpecificationDidUpdate` 回调。
+仅群主和群管理员可以调用 `EMGroupManager#updateGroupName` 方法设置和修改群组名称，群名称的长度限制为 128 个字符, 其他成员会收到 `EMGroupEventHandler#onSpecificationDidUpdate` 回调。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.changeGroupName(
+  await EMClient.getInstance.groupManager.updateGroupName(
     groupId,
     newName,
   );
@@ -43,18 +44,76 @@ try {
 
 ### 修改群组描述
 
-仅群主和群管理员可以调用 `EMGroupManager#changeGroupDescription` 方法设置和修改群组描述，群描述的长度限制为 512 个字符, 其他成员会收到 `EMGroupEventHandler#onSpecificationDidUpdate` 回调。
+仅群主和群管理员可以调用 `EMGroupManager#updateGroupDesc` 方法设置和修改群组描述，群描述的长度限制为 512 个字符, 其他成员会收到 `EMGroupEventHandler#onSpecificationDidUpdate` 回调。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.changeGroupDescription(
+  await EMClient.getInstance.groupManager.updateGroupDesc(
     groupId,
     newDesc,
   );
 } on EMError catch (e) {
 }
+```
+
+### 管理群组头像
+
+自 Flutter SDK 4.15.0 开始，支持群组头像功能。
+
+#### 设置群组头像
+
+- 创建群组时，可设置群组头像：
+
+```dart
+try {
+  await EMClient.getInstance.groupManager.createGroup(
+    groupName: "groupName",
+    avatarUrl: "avatarUrl",
+  );
+} on EMError catch (e) {
+}
+```
+
+- 创建群组后，若设置群组头像，可调用 [修改群组头像](#修改群组头像) API 设置头像。
+
+#### 修改群组头像
+
+创建群组完成后，群主或管理员可调用 `EMGroupManager#updateGroupAvatarUrl` 设置或修改群组头像：
+
+```dart
+try {
+  await EMClient.getInstance.groupManager.updateGroupAvatarUrl(
+    groupId: 'groupId',
+    avatarUrl: 'avatarUrl',
+  );
+} on EMError catch (e) {}
+```
+
+群组头像被修改后，其他群成员会收到 `  EMGroupEventHandler#onSpecificationDidUpdate` 回调：
+
+```dart
+EMClient.getInstance.groupManager.addEventHandler(
+  'UNIQUE_HANDLER_ID',
+  EMGroupEventHandler(
+    onSpecificationDidUpdate: (group) {},
+  ),
+);
+```
+
+#### 获取群组头像
+
+群成员可以通过获取群详情的方法 `EMGroupManager#fetchGroupInfoFromServer`，获取群组头像：
+
+```dart
+try {
+  EMGroup group =
+      await EMClient.getInstance.groupManager.fetchGroupInfoFromServer(
+    'groupId',
+  );
+  String? avatarUrl = group.avatarUrl;
+} on EMError catch (e) {}
 ```
 
 ### 更新群公告

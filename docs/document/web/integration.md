@@ -1,4 +1,4 @@
-# 集成 SDK
+# 导入 SDK
 
 本文介绍如何将环信即时通讯 IM SDK 集成到你的 Web 项目。
 
@@ -148,20 +148,28 @@ const sendTextMsg = () => {
 ### 引入 JavaScript SDK
 
 ```javascript
-import EC from "easemob-websdk";
+import WebIM from "easemob-websdk";
 ```
+
+:::tip
+`WebIM` 表示环信即时通信 IM SDK。
+:::
 
 ### 引入 TypeScript SDK
 
 在下面的导入代码中，`EasemobChat` 是 SDK 类型的命名空间。
 
 ```javascript
-import EC, { EasemobChat } from "easemob-websdk";
+import WebIM, { EasemobChat } from "easemob-websdk";
 ```
+
+:::tip
+`WebIM` 表示环信即时通信 IM SDK。
+:::
 
 ### 从官网获取并导入 SDK
 
-1. [下载 Web SDK](https://www.easemob.com/download/im)。将 Web SDK 中的 `Easemob-chat.js` 文件保存到你的项目下。
+1. [下载 Web SDK](https://www.easemob.com/download/im#Web)。将 Web SDK 中的 `Easemob-chat.js` 文件保存到你的项目下。
 
 2. 在 `index.html` 文件中，对 `index.js` 文件进行引用。
 
@@ -179,9 +187,9 @@ import EC, { EasemobChat } from "easemob-websdk";
 export default {
   mounted: () => {
     import("easemob-websdk").then((res) => {
-      const EC = res.default;
-      console.log(EC, "easemob websdk");
-      const conn = new EC.connection({
+      const WebIM = res.default;
+      console.log(WebIM, "easemob websdk");
+      const conn = new WebIM.connection({
         appKey: "your appkey"
       });
     });
@@ -199,9 +207,9 @@ import { useEffect } from 'react'
 export default function Home() {
   useEffect(() => {
     import('easemob-websdk').then((res)=>{
-      const EC = res.default;
-      console.log(EC, "easemob websdk");
-      const conn = new EC.connection({
+      const WebIM = res.default;
+      console.log(WebIM, "easemob websdk");
+      const conn = new WebIM.connection({
         appKey: "your appkey"
       });
     }) 

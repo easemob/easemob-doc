@@ -8,7 +8,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [MessageListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift)。
+你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift) 上的 `MessageListController.swift`。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_chat.png" title="聊天页面" />
@@ -22,7 +22,9 @@
   <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_navigation.png" title="导航栏配置" />
 </ImageGallery>
 
-## 自定义消息列表项
+## 设置消息列表项
+
+### 自定义消息列表项
 
 要自定义消息表中列表项的内容，即各种消息类型的 Cell，你需要执行以下步骤：
 
@@ -32,7 +34,7 @@
    
 每个对应的消息类型 Cell 中都有初始化方法、气泡中内容 `createContent` 和 `refresh` 方法可重载，以及其他各种小模块的 UI 创建重载方法等。 
 
-如果需要复用已有逻辑再增加新逻辑，则只需重载对应方法后调用 `super.xxx`，例如：
+- 如果需要复用已有逻辑再增加新逻辑，则只需重载对应方法后调用 `super.xxx`，例如：
 
 ```swift
     override open func refresh(entity: MessageEntity) {
@@ -41,7 +43,7 @@
     }
 ```
 
-如果需要修改之前的逻辑，则需复制之前的 `refresh ` 方法中的代码进行修改，无需调用 `super.xxxx`。
+- 如果需要修改之前的逻辑，则需复制之前的 `refresh ` 方法中的代码进行修改，无需调用 `super.xxxx`。
 
 | 消息 Cell 类     | 描述      | 注册重载对应属性 |
 | --------------------- | ------------------ | ------------------------------------------------------------ |
@@ -69,7 +71,7 @@
 
 你可以通过 `Appearance.chat.contentStyle = [.withReply,.withAvatar,.withNickName,.withDateAndTime]` 设置聊天页面消息中显示内容的可配项数组，默认展示回复消息气泡，消息发送方头像，消息发送方昵称，消息的日期时间。
 
-你可以将不需要的功能移除，也还可添加表情回应（`MessageReaction`）和话题（`MessageThread`）。**注意，添加表情回应和话题功能前，需在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。** 
+你可以将不需要的功能移除，也还可添加表情回应（`MessageReaction`）和话题（`MessageThread`）。**注意，添加表情回应和话题功能前，需在[环信控制台](https://console.easemob.com/user/login)开通。** 
 
 ```swift
         //是否显示消息话题。
@@ -170,7 +172,7 @@
 ### 设置消息翻译
 
 - `Appearance.chat.enableTranslation = value`：是否开启文本消息长按翻译功能，默认为 `false`，即该功能默认关闭。如需开启该特性，需设置为 `true`。
-- `Appearance.chat.targetLanguage= .Chinese` 翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[环信即时通讯云控制台](https://console.easemob.com/user/login)申请试用翻译功能，然后将 `Appearance.chat.enableTranslation` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
+- `Appearance.chat.targetLanguage= .Chinese` 翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[环信控制台](https://console.easemob.com/user/login)申请试用翻译功能，然后将 `Appearance.chat.enableTranslation` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
 - `Appearance.chat.receiveTranslationColor = value`：消息接收方翻译文本颜色。
 - `Appearance.chat.sendTranslationColor = value`：消息发送方翻译文本颜色。
 
@@ -240,10 +242,6 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
            //action handler
         }
 ```
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_input_bar.png" title="聊天页面输入框配置" />
-</ImageGallery>
 
 ## 设置消息举报功能
 

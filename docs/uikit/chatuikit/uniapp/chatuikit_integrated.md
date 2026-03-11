@@ -31,9 +31,23 @@
 UIKit 中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中，存在访问频率限制，建议你将静态资源放置在你的业务服务器上，然后修改 `ChatUIKit/const/index.ts` 文件中的 `ASSETS_URL` 为你的资源服务器地址。
 :::
 
+- GitHub 项目
+
  ```bash
    # 克隆 UIKit
    git clone https://github.com/easemob/easemob-uikit-uniapp.git
+ ```
+
+- Gitee 项目
+
+ ```bash
+   # 克隆 UIKit
+   git clone https://gitee.com/easemob-code/easemob-uikit-uniapp.git
+ ```
+
+克隆项目后，执行以下代码：
+
+ ```bash
    # 在你的 uni-app 项目根目录下执行以下命令，拷贝组件文件
    mkdir -p ./ChatUIKit
    # macOS
@@ -291,7 +305,18 @@ ChatUIKit.appUserStore.setUserInfo('userId', {
 })
 ```
 
+## 常见问题
+
+1. Vue3 项目 在 H5 平台发布时会出现登录失败、页面白屏等问题，如何处理？
+
+Vue3 在 H5 平台发行时，为了优化包体积大小，会默认启动 Tree Shaking（摇树优化），仅打包明确引用的 API 和组件。
+
+该机制可能导致部分未明确引用的模块被排除，从而引发线上运行时出现登录失败、页面白屏等问题，而本地开发环境通常不会暴露此类问题。
+
+鉴于此，为确保正确打包所有依赖模块，需在 `manifest.json` 中关闭 `Tree Shaking`，然后打包 Vue3 项目，部署至 H5 平台。
+
 ## 参考文档
-- [UIKit 源码](https://github.com/easemob/easemob-uikit-uniapp)
+
+- UIKit 源码：可查看 [GitHub](https://github.com/easemob/easemob-uikit-uniapp) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-uniapp) 地址
 - [小程序域名配置](https://doc.easemob.com/document/applet/wechat.html#配置服务器域名)
 

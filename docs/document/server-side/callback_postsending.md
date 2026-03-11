@@ -15,13 +15,13 @@
 
 ## 实现步骤
 
-1. 开通回调服务：在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开通回调服务](/product/enable_and_configure_IM.html#开通消息回调)。
-2. 配置发送后回调规则：详见[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
+1. 开通回调服务：在[环信控制台](https://console.easemob.com/user/login)[开通回调服务](/product/console/basic_webhook.html)。
+2. 配置发送后回调规则：详见[规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。
 3. 发送消息或进行群组、聊天室或联系人相关操作后，环信服务器向你的应用服务器发送回调请求。
 
 ## 发送后回调规则
 
-要使用发送后回调，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)配置回调规则，详见[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
+要使用发送后回调，你需要在[环信控制台](https://console.easemob.com/user/login)配置回调规则，详见[规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。
 
 对于同一个 app 可以针对聊天消息、离线消息和通过 REST API 发送的消息配置不同的规则。如果 app 同时需要聊天消息和离线消息两种消息，建议区分回调地址。不过，规则也可以将这两种消息同时回调至一个指定服务器地址，在接收到消息后，可以对 `eventType` 判断，区分消息类型。
 
@@ -41,7 +41,7 @@
 
 ## 回调示例
 
-消息发送或相关操作发送时，环信服务器会向你的应用服务器发送 HTTP/HTTPS POST 请求，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
+消息发送或相关操作发生后，环信服务器会向你的应用服务器发送 HTTP/HTTPS POST 请求，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
 
 回调时，环信服务器会对发送的正文进行 MD5 签名，使用的 MD5 为 `org.apache.commons.codec.digest.DigestUtils#md5Hex`。
 
@@ -77,7 +77,7 @@
 | `msg_id`          | 消息的 ID。         |
 | `payload`         | 消息内容，与通过 RESTful API 发送过来的一致，查看 [消息格式文档](message_historical.html#历史消息记录的内容)。 |
 | `securityVersion` | 安全校验版本，目前为 1.0.0。请忽略此参数。      | 
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。关于 Secret，详见[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。   | 
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。关于 Secret，详见[规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。   | 
 
 ### 回调响应
 
@@ -94,64 +94,26 @@
 - 异常存储过期时间默认 3 天，若有存储需及时补发。
 - 补发重试次数建议控制在 10 次以内。
 
-### 认证方式
-
-环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
-
-`Authorization：Bearer YourAppToken`
-
-为提高项目的安全性，使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-
-### HTTP 请求
+### 请求 URL
 
 ```http
 GET https://{host}/{org_name}/{app_name}/callbacks/storage/info    
 ```
 
-### 路径参数
+关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
-| 参数       | 类型   | 是否必需 | 描述       |
-| :--------- | :----- | :------- | :--------------------- |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-
-### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述                                     |
-| :-------------- | :----- | :------- | :--------------------------------------- |
-| `Authorization` | String | 是       | 鉴权 Token，管理员 Token（含）以上权限。 |
-
-### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
-
-| 参数              | 类型   | 描述                                                                           |
-| :---------------- | :----- | :------------------ |
-| `path`            | string | 请求路径。              |
-| `uri`             | string | 请求路径的 URI。                                                               |
-| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
-| `organization`    | string | 你在环信 IM 管理后台注册的组织唯一标识。                                       |
-| `application`     | string | 你在环信 IM 管理后台注册的 App 唯一标识。                                      |
-| `action`          | string | 请求方法。   |
-| `duration`        | long   | 请求耗时，单位为毫秒。                                                         |
-| `applicationName` | string | 你在环信 IM 管理后台注册的 App 名称。                                          |
-| `data`            | object | 响应数据内容。包括以下三个参数：`date`、`size` 和 `retry`。                    |
-| - `date`            | String | 当前的 date key，即每 10 分钟内的消息和事件。key 为 10 分钟的起点。              |
-| - `size`            | Int    | 该 date key 内的消息数量。                                                               |
-| - `retry`           | Int    | 该 date key 内的数据已经重试补发的次数。未重试时值为 `0`。 |
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](#响应状态码)了解可能的原因。
-
-### 示例
-
-#### 请求示例
+### 请求示例
 
 ```shell
-curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
+curl -X GET 'https://XXXX/XXXX/XXXX/callbacks/storage/info' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-#### 响应示例
+### 请求 header 参数
+
+关于 `Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
+
+### 响应示例
 
 ```json
 {
@@ -178,31 +140,62 @@ curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' 
 }
 ```
 
+### 响应 body 字段
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中的 `data` 字段如下所示：
+
+| 参数              | 类型   | 描述                                                                           |
+| :---------------- | :----- | :------------------ |
+| `data`            | object | 响应数据内容。包括以下三个参数：`date`、`size` 和 `retry`。                    |
+| - `date`            | String | 当前的 date key，即每 10 分钟内的消息和事件。key 为 10 分钟的起点。              |
+| - `size`            | Int    | 该 date key 内的消息数量。                                                               |
+| - `retry`           | Int    | 该 date key 内的数据已经重试补发的次数。未重试时值为 `0`。 |
+
+响应体中的其他参数说明如下表所示：
+
+| 参数              | 类型   | 描述                                                                           |
+| :---------------- | :----- | :------------------ |
+| `path`            | string | 请求路径。              |
+| `uri`             | string | 请求路径的 URI。                                                               |
+| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
+| `organization`    | string | 你在环信控制台注册的组织唯一标识。                                       |
+| `application`     | string | 你在环信控制台注册的 App 唯一标识。                                      |
+| `action`          | string | 请求方法。   |
+| `duration`        | long   | 请求耗时，单位为毫秒。                                                         |
+| `applicationName` | string | 你在环信控制台注册的 App 名称。                                          |
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](#响应状态码)了解可能的原因。
+
 ## 补发回调存储信息
 
 调用接口根据存储集合进行回调补发。
 
-### HTTP 请求
+### 请求 URL
 
 ```http
 POST https://{host}/{org_name}/{app_name}/callbacks/storage/retry  
 ```
 
-#### 路径参数
+关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
-| 参数       | 类型   | 是否必需 | 描述           |
-| :--------- | :----- | :------- | :---------------------------- |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+### 请求示例
 
-#### 请求 header
+```shell
+curl -X POST 'https://XXXX/XXXX/XXXX/callback/storage/retry' \
+-H 'Authorization: Bearer <YourAppToken>' \
+-H 'Content-Type: application/json' \
+-d '{
+    "date": "202108272230",
+    "retry": 0,
+    "targetUrl": "https://localhost:8000/test"
+}'
+```
 
-| 参数            | 类型   | 是否必需 | 描述                                                                      |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------ |
-| `Content-Type`  | String | 是       | 内容类型，请填 `application/json`。                                       |
-| `Authorization` | String | 是       | 鉴权 App Token 的值。详见[使用 App Token 鉴权](easemob_app_token.html)。 |
+### 请求 header 参数
 
-#### 请求 body
+关于 `Content-Type` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
+
+### 请求 body 参数
 
 | 参数        | 类型   | 是否必需 | 描述                                                                   |
 | :---------- | :----- | :------- | :--------------------------------------------------------------------- |
@@ -210,41 +203,7 @@ POST https://{host}/{org_name}/{app_name}/callbacks/storage/retry
 | `retry`     | Int    | 否       | 开发已重试的次数。考虑到补发也可能失败，服务器会继续存储。最开始是 0。 |
 | `targetUrl` | String | 否       | 补发消息的回调地址，如果为空，则使用原回调规则的回调地址。             |
 
-### HTTP 响应
-
-#### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
-
-| 参数           | 类型   | 描述                                                                           |
-| :------------- | :----- | :----------------------------------------------------------------------------- |
-| `path`         | String | 请求路径。                                                                     |
-| `uri`          | String | 请求路径的 URI。                                                               |
-| `timestamp`    | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
-| `organization` | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`  | String | 你在环信 IM 管理后台注册的 app 唯一标识。                                      |
-| `action`       | String | 请求方法。                                                                     |
-| `data`         | Bool   | - `success`：成功；<br/> - `failure`：失败。                                   |
-| `duration`     | long   | 请求耗时，单位为毫秒。                                                         |
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](#响应状态码)了解可能的原因。
-
-### 示例
-
-#### 请求示例
-
-```shell
-curl -X POST 'https://XXXX/XXXX/XXXX/callback/storage/retry' \
--H 'Authorization: Bearer <YourAppToken>' \
--H 'Content-Type: application/json' \
---data-raw '{
-    "date": "202108272230",
-    "retry": 0,
-    "targetUrl": "https://localhost:8000/test"
-}'
-```
-
-#### 响应示例
+### 响应示例
 
 ```json
 {
@@ -259,6 +218,23 @@ curl -X POST 'https://XXXX/XXXX/XXXX/callback/storage/retry' \
   "applicationName": "XXXX"
 }
 ```
+
+### 响应 body 字段
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
+
+| 参数           | 类型   | 描述                                                                           |
+| :------------- | :----- | :----------------------------------------------------------------------------- |
+| `path`         | String | 请求路径。                                                                     |
+| `uri`          | String | 请求路径的 URI。                                                               |
+| `timestamp`    | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
+| `organization` | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
+| `application`  | String | 你在环信控制台注册的 app 唯一标识。                                      |
+| `action`       | String | 请求方法。                                                                     |
+| `data`         | Bool   | - `success`：成功；<br/> - `failure`：失败。                                   |
+| `duration`     | long   | 请求耗时，单位为毫秒。                                                         |
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](#响应状态码)了解可能的原因。
 
 ### 响应状态码
 

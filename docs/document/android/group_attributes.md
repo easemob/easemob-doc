@@ -8,7 +8,7 @@
 
 环信即时通讯 IM Android SDK 提供 [EMGroupManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager.html) 类和 [EMGroup](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html) 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
-- 修改群组名称及描述
+- 修改群组名称、描述和群头像
 - 获取、更新群组公告
 - 管理群组共享文件
 - 更新群扩展字段
@@ -139,6 +139,8 @@ EMClient.getInstance().groupManager().uploadGroupSharedFile(groupId, filePath, c
 
 ```java
 // 同步方法，需要放到异步线程
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页返回的共享文件数。
 List<EMMucSharedFile> sharedFiles = EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum, pageSize);
 // 获取需要的共享文件信息
 EMMucSharedFile sharedFile = sharedFiles.get(index);
@@ -175,6 +177,8 @@ EMClient.getInstance().groupManager().deleteGroupSharedFile(groupId, fileId);
 
 ```java
 // 同步方法，会阻塞当前线程。
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页返回的共享文件数。
 // 异步方法为 asyncFetchGroupSharedFileList(String, int, int, EMValueCallBack)。
 EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum, pageSize);
 ```

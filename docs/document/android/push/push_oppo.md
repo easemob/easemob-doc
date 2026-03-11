@@ -8,13 +8,11 @@
 
 ## **步骤二 上传推送证书**
 
-在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传 OPPO 推送证书。
+在[环信控制台](https://console.easemob.com/user/login)上传 OPPO 推送证书。
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)，选择你的应用 > **功能配置** > **增值功能** > **即时推送**。
    
-2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
-   
-3. 在**添加推送证书**对话框中选择 **OPPO** 页签，配置 OPPO 推送参数。参数相关信息，详见你在 [OPPO 开发者后台](https://open.oppomobile.com/service/oms?service_id=1000004&app_type=app&app_id=30004346)创建的应用的 `appkey` 和 `mastersecret` 以及程序的 `包名`等信息。
+2. 在 **证书管理** 页面，点击 **添加推送证书**。在 **添加推送证书** 对话框中选择 **OPPO** 页签，配置 OPPO 推送参数。参数相关信息，详见你在 [OPPO 开发者后台](https://open.oppomobile.com/service/oms?service_id=1000004&app_type=app&app_id=30004346)创建的应用的 `appkey` 和 `mastersecret` 以及程序的 `包名`等信息。
 
 ![image](/images/android/push/add_oppo_push_certificate.png)
 

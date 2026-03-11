@@ -16,8 +16,16 @@
 
 克隆项目仓库：
 
+- GitHub 项目
+  
 ```sh
-git clone https://github.com/easemob/easemob-uikit-reactnative.git
+git clone git@github.com:easemob/easemob-uikit-reactnative.git
+```
+
+- Gitee 项目
+
+```sh
+git clone git@gitee.com:easemob-code/react-native-chat-library.git
 ```
 
 ## 初始化项目
@@ -72,9 +80,4 @@ yarn run android
 
 ## 常见问题
 
-如遇到编译或运行问题，可进行如下检查：
-
-1. 确保已安装所有必需的开发环境。
-2. 检查 App Key 是否正确配置。
-3. iOS 编译失败时，尝试清理项目：`cd ios && pod deintegrate && pod install`。
-4. Android 编译失败时，检查 Android Studio 配置和 SDK 安装情况。
+详见 [常见问题](faq.html)。

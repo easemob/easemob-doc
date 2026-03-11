@@ -2,9 +2,16 @@
 
 环信即时通讯 IM 3.9.2 及以上版本对离线消息推送进行了优化。你可以在 app 和会话层面提供了推送通知方式和免打扰模式的细粒度选项。
 
-推送通知方式和免打扰模式为推送的高级功能，若要设置，你需要在 [环信即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。
+## 开通功能
 
-![image](/images/ios/push/push_ios_27_enable_push.png)
+[推送通知方式](push_notification_mode_dnd.html#推送通知方式) 和 [免打扰模式](push_notification_mode_dnd.html#免打扰模式) 是推送的高级功能。使用前，你需要在 [环信控制台](https://console.easemob.com/user/login) 免费开通。**激活后，如需关闭推送高级功能，必须联系商务，因为该操作会删除高级功能相关的所有配置。**
+
+1. 登录 [环信控制台](https://console.easemob.com/user/login)。
+2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
+3. 选择 **增值服务 > 消息推送 > 离线推送**。
+4. 点击 **免费开通**。
+
+![image](/images/android/push/push_advanced_feature_enable.png)
 
 ## 推送通知方式
 
@@ -76,7 +83,7 @@ EMClient.shared().pushManager?.syncSilentModeConversations(fromServerCompletion:
 
 ```
 
-### 本地设置推送通知方式
+### 设置推送通知方式
 
 在本机上调用 `EMPushManager#setSilentModeForConversation:conversationType:params:completion` 设置会话的推送通知方式，在多设备事件 `EMMultiDevicesDelegate#onConversationEvent:conversationId:conversationType` 里会回调当前操作，此时参数 `event` 的值为 `EMMultiDevicesEventConversationMuteInfoChanged`。
 
@@ -111,7 +118,8 @@ extension ViewController: EMMultiDevicesDelegate {
 
 完成 SDK 初始化和成功登录 app 后，你可以对 app 以及各类型的会话开启离线推送功能以及通过设置免打扰模式关闭推送。
 
-你可以在 app 级别指定免打扰时间段和免打扰时长，环信 IM 在这两个时间段内不发送离线推送通知。若既设置了免打扰时间段，又设置了免打扰时长，免打扰模式的生效时间为这两个时间段的累加。
+- 你可以通过 `EMSilentModeParamTypeInterval` 参数开启全天免打扰和关闭免打扰模式：若开始时间和结束时间相同，免打扰模式则全天生效；若设置为  `0:0`-`0:0`，则关闭免打扰模式。
+- 你可以在 app 级别指定免打扰时间段和免打扰时长，环信 IM 在这两个时间段内不发送离线推送通知。若既设置了免打扰时间段，又设置了免打扰时长，免打扰模式的生效时间为这两个时间段的累加。
 
 免打扰时间参数的说明如下表所示：
 
@@ -203,22 +211,14 @@ EMConversationType conversationType = EMConversationTypeGroupChat;
 你可以调用 `getSilentModeForAllWithCompletion` 获取指定会话的推送通知设置，如以下代码示例所示：
 
 ```objectivec
-// 异步方法
-[[EMClient sharedClient].pushManager getSilentModeForAllWithCompletion:^(EMSilentModeResult *aResult, EMError *aError) {
-    if (!aError) {
-        //获取会话的推送通知方式。
-        if(aResult.isSetConversationRemindType){
-            EMPushRemindType remindType = aResult.remindType;
-        }
-        //获取会话的离线推送免打扰过期 Unix 时间戳。
-        NSTimeInterval ex = aResult.expireTimestamp;
-        //获取会话的离线推送免打扰时段的开始时间。
-        EMSilentModeTime *startTime = aResult.silentModeStartTime;
-        EMSilentModeTime *endTime = aResult.silentModeEndTime;
-    }else{
-        NSLog(@"getSilentModeForAll error---%@",aError.errorDescription);
-    }s
-}];
+    [EMClient.sharedClient.pushManager getSilentModeForConversation:@"conversationId" conversationType:EMConversationTypeGroupChat completion:^(EMSilentModeResult * _Nullable aResult, EMError * _Nullable aError) {
+            if (aError == nil) {
+                //获取会话的推送通知方式。
+                EMPushRemindType remindType = aResult.remindType;
+                //获取会话的离线推送免打扰过期 Unix 时间戳。
+                NSTimeInterval ex = aResult.expireTimestamp;
+            }
+    }];
 ```
 
 ## 获取多个会话的推送通知设置

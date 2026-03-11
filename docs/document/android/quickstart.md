@@ -12,11 +12,12 @@
 
 ## 前提条件
 
-- Android Studio 4.0 或以上版本；
-- Android SDK API 等级 21 或以上；
-- Android 5.0 或以上版本的设备；
-- JDK 11 或以上
-- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 推荐 Android Studio Meerkat | 2024.3.1 Patch 2及以上
+- 推荐 Gradle 8.0 及以上
+- targetVersion 33 及以上
+- Android SDK API 21 及以上
+- JDK 17 及以上
+- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信控制台](https://console.easemob.com/user/login)。
 
 ## 准备开发环境
 
@@ -95,6 +96,9 @@ dependencies {
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- 相机权限，用于图片消息时拍摄图片，不使用拍照可以移除 -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <!-- 获取运营商信息，用于获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <!-- 获取读存储权限，用于附件等的获取 -->
@@ -122,32 +126,6 @@ dependencies {
 -dontwarn  com.hyphenate.**
 ```
 
-### 5. 其他集成问题
-
-当同时集成环信 SDK 4.11.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
-
-```java
-com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'lib/x86/libaosl.so'
-```
-
-可在 app 的 `build.gradle` 文件的 Android 节点中添加 `packagingOptions` 节点，指定在构建过程中优先选择第一个匹配的文件：
-
-```gradle
-android {
-  ...
-  packagingOptions {
-    pickFirst 'lib/x86/libaosl.so'
-    pickFirst 'lib/x86_64/libaosl.so'
-    pickFirst 'lib/armeabi-v7a/libaosl.so'
-    pickFirst 'lib/arm64-v8a/libaosl.so'
-  }
-}
-```
-
-然后 Gradle 文件同步，重新构建项目。
-
-如欲了解详情，请参见 [声网官方文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
-
 ## 实现单聊
 
 本节介绍如何实现单聊。
@@ -167,23 +145,15 @@ options.setAppKey("Your appkey");
 // context 为上下文，在 Application 或者 Activity 中可以用 this 代替
 EMClient.getInstance().init(context, options);
 ```
-### 2. 创建账号
+### 2. 创建用户
 
-1. 在 [环信控制台](https://console.easemob.com/user/login) 首页的**应用列表**中，在目标应用的 **操作** 栏中点击 **管理**。
-
-2. 在环信即时通讯云的左侧导航栏中，选择**应用概览 > 用户认证**。
-   
-3. 在**用户认证**页面，点击**创建IM用户**按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
-
-![img](/images/product/user_create_test.png)
-   
-创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 Token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ### 3. 登录账号
 
-创建账号后，获取账号的用户 ID 和 Token。使用如下代码实现用户登录：
+获取账号的用户 ID 和 Token 后，使用如下代码实现用户登录：
 
 ```java
 // 导包
@@ -225,3 +195,29 @@ EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
+
+## 常见问题
+
+### SDK 依赖的 Crash 上报库冲突
+
+当同时集成环信 SDK 4.11.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
+
+```java
+com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'lib/x86/libaosl.so'
+```
+
+可在 app 的 `build.gradle` 文件的 Android 节点中添加 `packagingOptions` 节点，指定在构建过程中优先选择第一个匹配的文件：
+
+```gradle
+android {
+  ...
+  packagingOptions {
+    pickFirst 'lib/x86/libaosl.so'
+    pickFirst 'lib/x86_64/libaosl.so'
+    pickFirst 'lib/armeabi-v7a/libaosl.so'
+    pickFirst 'lib/arm64-v8a/libaosl.so'
+  }
+}
+```
+
+然后 Gradle 文件同步，重新构建项目。如欲了解详情，请参见 [声网官方文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。

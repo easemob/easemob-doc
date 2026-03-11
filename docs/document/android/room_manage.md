@@ -26,7 +26,7 @@
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 - 了解环信即时通讯 IM 不同版本的聊天室相关数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
-- 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom_superadmin.html)。
+- 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom_superadmin_add.html)。
 - 聊天室创建者和管理员的数量之和不能超过 100，即管理员最多可添加 99 个。
 
 ## 实现方法
@@ -35,9 +35,9 @@
 
 ### 创建聊天室
 
-仅 [超级管理员](/document/server-side/chatroom_superadmin.html) 可以调用 `createChatRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
+仅 [超级管理员](/document/server-side/chatroom_superadmin_add.html) 可以调用 `createChatRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
 
-建议直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
+建议直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom_create.html)。
 
 示例代码如下：
 
@@ -58,6 +58,8 @@ EMChatRoom  chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(s
 ```java
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
 // 同步方法，会阻塞当前线程。异步方法为 asyncFetchPublicChatRoomsFromServer(int, int, EMValueCallBack)。
+// pageNum：当前页码，从 1 开始。
+// pageSize：每页期望返回的记录数。取值范围为 [1,50]。
 EMPageResult<EMChatRoom> chatRooms = EMClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(pageNumber, pageSize);
 
 // 加入聊天室
@@ -194,10 +196,10 @@ public interface EMChatRoomChangeListener {
     void onAnnouncementChanged(String chatRoomId, String announcement);
 
     // 聊天室自定义属性有更新。聊天室所有成员会收到该事件。
-    default void onChatroomAttributesDidChanged(String chatRoomId, Map<String,String> attributeMap , String from){}
+    default void onAttributesUpdate(String chatRoomId, Map<String, String> attributeMap, String from) {}
 
     // 有聊天室自定义属性被移除。聊天室所有成员会收到该事件。
-    default void onChatroomAttributesDidRemoved(String chatRoomId, Map<String,String> attributeMap , String from){}
+    default void onAttributesRemoved(String chatRoomId, List<String> keyList , String from){}
 
 }
 ```

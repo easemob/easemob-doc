@@ -60,14 +60,14 @@
 受邀用户直接进群，会收到如下回调：
 
 - 新成员会收到 `GroupChangeListener#onAutoAcceptInvitationFromGroup` 回调；
-- 邀请人收到 `GroupChangeListener#onInvitationAccepted` 回调和 `GroupChangeListener#onMemberJoined` 回调；
-- 其他群成员收到 `GroupChangeListener#onMemberJoined` 回调。
+- 邀请人收到 `GroupChangeListener#onInvitationAccepted` 回调和 `GroupChangeListener#onMembersJoined` 回调；
+- 其他群成员收到 `GroupChangeListener#onMembersJoined` 回调。
 
 2. 受邀用户需要确认才能进群。
 
 只有 `GroupOptions#inviteNeedConfirm` 设置为 `true` 和 `ChatOptions#setAutoAcceptGroupInvitations` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `GroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
 
-- 用户同意入群邀请后，邀请人收到 `GroupChangeListener#onInvitationAccepted` 回调和 `GroupChangeListener#onMemberJoined` 回调，其他群成员收到 `GroupChangeListener#onMemberJoined` 回调；
+- 用户同意入群邀请后，邀请人收到 `GroupChangeListener#onInvitationAccepted` 回调和 `GroupChangeListener#onMembersJoined` 回调，其他群成员收到 `GroupChangeListener#onMembersJoined` 回调；
 - 用户拒绝入群邀请后，邀请人收到 `GroupChangeListener#onInvitationDeclined` 回调。
 
 邀请用户入群的流程如下图所示：
@@ -141,9 +141,32 @@ let isMsgBlocked: boolean = group.isMsgBlocked();
 
 ### 获取群成员列表
 
+- 获取群成员 ID 列表。
+  
 ```typescript
+// pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
 ChatClient.getInstance().groupManager()?.fetchGroupMembers(groupId, pageSize, cursor).then((res) => {
     // success logic
+});
+```
+
+- 获取群成员信息列表，除了成员的用户 ID，还包括成员角色和加入群组的时间。
+  
+```typescript
+ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSize, cursor).then((data) => {
+    // success logic
+    // 下一次请求的 cursor。
+    let nextCursor = data.getNextCursor();
+    // 本次获取的成员列表。
+    let members = data.getResult();
+    members.forEach(item => {
+      // 群成员 ID 。
+      let memberId = item.memberId;
+      // 群成员加入群组的时间。
+      let joinTime = item.joinTime;
+      // 群成员在群组中的角色。
+      let role = item.role;
+    })
 });
 ```
 
@@ -179,7 +202,7 @@ if (result) {
 
 ### 查询当前用户已加入的群组数量
 
-你可以调用 `GroupManager#fetchJoinedGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
+你可以调用 `GroupManager#fetchJoinedGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 
 ```typescript
 ChatClient.getInstance().groupManager()?.fetchJoinedGroupsCount().then(res => console.log(res.toString()));
@@ -285,9 +308,17 @@ let groupListener: GroupListener = {
     // 群主转移权限。新群主会收到该回调。
   },
   onMemberJoined: (groupId: string, member: string): void => {
+    // 废弃，使用 onMembersJoined 代替。
+    // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
+  },
+  onMembersJoined: (groupId: string, member: string[]): void => {
     // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
   },
   onMemberExited: (groupId: string, member: string): void => {
+    // 废弃，使用 onMembersExited 代替。
+    // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
+  },
+  onMembersExited: (groupId: string, member: string[]): void => {
     // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
   },
   onAnnouncementChanged: (groupId: string, announcement: string): void => {

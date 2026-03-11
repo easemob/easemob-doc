@@ -11,10 +11,11 @@
 环信即时通讯 IM Web SDK 支持你通过调用 API 在项目中实现以下群组管理功能：
 
 - 创建、解散群组
-- 获取群组详情信息
+- 获取群组详情
 - 获取群成员列表
-- 获取已加入的群组列表
-- 获取公开群列表
+- 获取群组列表：获取加入和创建的群组列表和公开群列表
+- 查询当前用户已加入的群组数
+- 屏蔽群消息、解除屏蔽群消息和检查当前用户是否已屏蔽群消息
 - 监听群组事件
 
 ## 前提条件
@@ -45,7 +46,7 @@
 | `needApprovalToJoin` | Boolean | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `isPublic` 设置为 `true` 时，对私有群无效。 |
 | `allowMemberToInvite` | Boolean | 是否允许普通群成员邀请人入群：<br/> - `true`：允许；<br/> - `false`：不允许。只有群主和管理员才可以向群组添加用户。<br/>该参数仅对私有群有效，即 `isPublic` 设置为 `false` 时， 因为公开群（isPublic：`true`）仅支持群主和群管理员邀请人入群，不支持普通群成员邀请人入群。 |
 | `inviteNeedConfirm` | Boolean | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。 |
-| `maxMemberCount` | Int | 群组最大成员数，默认为 `200`。不同套餐支持的人数上限不同，详见  [IM 套餐包功能对比](/product/product_package_feature.html)。 |
+| `maxMemberCount` | Int | 群组最大成员数，默认为 `200`。不同套餐支持的人数上限不同，详见  [IM 套餐包功能详情](/product/product_package_feature.html)。 |
 | `extension` | string | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。|
 
 
@@ -141,7 +142,8 @@ conn.getGroupInfo(option).then((res) => {
 
 ```javascript
 conn
-// limit：每页获取的群成员数量，取值范围为 [1,50]，默认值为 50。
+// limit：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
+// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
   .getGroupMembers({ cursor: "", limit: 50, groupId: "groupId" })
   .then((res) => {
     console.log(res);
@@ -154,7 +156,9 @@ conn
 
 ```javascript
 conn.getJoinedGroups({
+  // pageNum：分页查询时的当前页码。若设置了 needAffiliations 或 needRole，则从 0 开始；否则从 1 开始。
   pageNum: 0,
+   // pageSize：分页查询时每页可获取的群组数量上限。若设置了 needAffiliations 或 needRole 参数，每页上限为 20；否则每页上限为 500。
   pageSize: 20,
   needAffiliations: true,
   needRole: true,
@@ -165,10 +169,48 @@ conn.getJoinedGroups({
 
 ```javascript
 let option = {
+  //limit：每页返回的公开群组数。
   limit: 20,
+  // cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
   cursor: cursor,
 };
 conn.getPublicGroups(option).then((res) => console.log(res));
+```
+
+### 查询当前用户已加入的群组数
+
+自 4.15.1 版本开始，你可以调用 `getJoinedGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+
+```javascript
+conn.getJoinedGroupsCount().then((res) => {
+        console.log(res.data);
+});
+```
+
+### 屏蔽群消息
+
+自 4.15.1 版本开始，群成员可以调用 `blockGroupMessage` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息，群主和群管理员不能进行此操作。示例代码如下：
+
+```javascript
+conn.blockGroupMessage({ groupId: 'groupId' });
+```
+
+### 解除屏蔽群消息
+
+自 4.15.1 版本开始，群成员可以调用 `unblockGroupMessage` 方法解除屏蔽群消息。示例代码如下：
+
+```javascript
+conn.unblockGroupMessage({ groupId: 'groupId' });
+```
+
+### 检查当前用户是否已屏蔽群消息
+
+自 4.15.1 版本开始，群成员可以调用 `getGroupInfo` 方法检查自己是否屏蔽了该群的消息。示例代码如下：
+
+```javascript
+conn.getGroupInfo({ groupId: 'groupId' }).then((res) => {
+        console.log(res.data[0].shieldgroup);
+});
 ```
 
 ### 监听群组事件

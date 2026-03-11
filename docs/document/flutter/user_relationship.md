@@ -7,9 +7,9 @@
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
 - 好友列表管理：查询好友列表、请求添加好友、接受好友请求、拒绝好友请求、删除好友和设置好友备注等操作。
-- 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。
+- 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
   
-此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
+此外，环信即时通讯 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/console/basic_user.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
 
 ## 技术原理
 
@@ -35,6 +35,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 开通黑名单功能。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
 
 ## 实现方法
 
@@ -43,13 +44,25 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 1. 添加监听。
 
 ```dart
+
 // 注册监听
+
     EMClient.getInstance.contactManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
       EMContactEventHandler(
-    onFriendRequestAccepted: (userId, reason) {},
+        // 联系人已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 B 收到 `onFriendRequestAccepted` 事件，双方用户收到 `onContactAdded` 事件。
+        onContactAdded: (userId) {},
+        // 联系人被删除。用户 B 将用户 A 从联系人列表上删除，用户 A 收到该事件。
+        onContactDeleted: (userId) {},
+        // 接收到好友请求。用户 B 向用户 A 发送好友请求，用户 A 收到该事件。
+        onContactInvited: (userId, reason) {},
+        // 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。
+        onFriendRequestAccepted: (userId) {},
+        // 对方拒绝了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
+        onFriendRequestDeclined: (userId) {},
       ),
     );
+
 
 // 移除监听
 EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");

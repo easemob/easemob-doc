@@ -6,13 +6,13 @@
 
 你可以通过以下方式查询离线推送的结果：
 
-- 在[环信即时通讯控制台](https://console.easemob.com/user/login)上查看 IM 消息投递查询：
-  - 在 **应用列表** 中点击目标应用的 **操作** 栏中的 **管理** 按钮，进入 **应用详情** 页面。
+- 在[环信控制台](https://console.easemob.com/user/login)上查看 IM 消息投递查询：
+  - 在 **应用列表** 中点击目标应用的 **操作** 栏中的 **管理** 按钮，进入 **应用概览** 页面。
   - 选择 **即时通讯 > 实时查询 > IM消息投递查询**，查看推送结果记录，如下图所示：
 
 ![img](/images/server-side/message_delivery_query.png)
 
-- 推送结果回调：[创建发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)，对于**回调类型**参数选择**离线推送事件**，然后选择**推送成功**、**推送失败**或**推送异常**，即可接收到推送结果消息回调内容。关于离线推送事件，详见[发送后回调事件](/document/server-side/callback_login_logout.html)。
+- 推送结果回调：[创建发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则)，对于**回调类型**参数选择**离线推送事件**，然后选择**推送成功**、**推送失败**或**推送异常**，即可接收到推送结果消息回调内容。关于离线推送事件，详见[发送后回调事件](/document/server-side/callback_login_logout.html)。
 
 ![img](/images/server-side/post_callback_push.png)
 
@@ -20,63 +20,39 @@
 
 ## 调用 RESTful API 查询离线推送结果统计数据
 
-**接口调用频率上限**：10 次/10 秒/App Key
+### 调用频率上限
 
-### HTTP 请求
+10 次/10 秒/App Key
+
+### 请求 URL
 
 ```shell
-GET https://{host}/{org_name}/{app_name}/push/data/offline-push/begin/{startTime}/end/{endTime}
+GET https://{host}/{org_name}/{app_name}/push/data/offline-push/begin/{startTime}/end/{endTime}?platform={ALL}
 ```
-
-#### 路径参数
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `startTime` | String |  是       | 查询数据的开始时间，格式为 yyyy-MM-dd，例如，`2024-04-01`。 |
 | `endTime`   | String |  是       | 查询数据的结束时间，格式为 yyyy-MM-dd，例如，`2024-04-02`。 |
+| `platform` | enum |  是      | 查询的平台，取值如下：<br/> - （默认）`ALL`：查询所有推送平台的推送统计结果。<br/> - `APNS`：APNs 推送；<br/> - `ANDROID`：FCM 推送；<br/> - `XIAOMIPUSH`：小米推送；<br/> - `HUAWEIPUSH`：华为推送<br/> - `MEIZUPUSH`：魅族推送；<br/> - `OPPOPUSH`：OPPO 推送；<br/> - `VIVOPUSH`：vivo 推送；<br/> - `HONOR`：荣耀推送。|
 
-#### 查询参数
+关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
-| 参数       | 类型 | 描述                                                         | 是否必需 |
-| :--------- | :--- | :----------------------------------------------------------- | :------- |
-| `platform` | enum | 查询的平台，取值如下：<br/> - （默认）`ALL`：查询所有推送平台的推送统计结果。<br/> - `APNS`：APNs 推送；<br/> - `ANDROID`：FCM 推送；<br/> - `XIAOMIPUSH`：小米推送；<br/> - `HUAWEIPUSH`：华为推送<br/> - `MEIZUPUSH`：魅族推送；<br/> - `OPPOPUSH`：OPPO 推送；<br/> - `VIVOPUSH`：vivo 推送；<br/> - `HONOR`：荣耀推送。| 是       |
+### 请求示例
 
-#### 请求 header
+```shell
+将 <YourAppToken> 替换为你在服务端生成的 App Token
+curl -g -X GET 'https://XXXX/XXXX/XXXX/push/data/offline-push/begin/2024-04-01/end/2024-04-02?platform=ALL' \
+-H 'Authorization: Bearer <YourAppToken>
+```
+
+### 请求 header 参数
 
 | 参数            | 类型   | 描述        | 是否必需 |
 | :-------------- | :----- | :------------------- | :------- |
 | `Authorization` | String | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 是       |
 
-### HTTP 响应
-
-#### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数        | 类型   | 描述                                                         |
-| :---------- | :----- | :----------------------------------------------------------- |
-| `status`  | String | 请求状态。若请求成功，返回 `OK`。 |
-| `data`  | JSON | 离线推送结果。 |
-| `data.successCount`  | Int | 成功发送的离线推送通知数量。 |
-| `data.failCount`  | Int | 发送失败的离线推送通知数量。 |
-| `data.arriveCount`  | Int | 送达到接收方的离线推送通知的数量。 |
-
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-### 示例
-
-#### 请求示例
-
-```shell
-将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -g -X GET 'https://XXXX/XXXX/XXXX/push/data/offline-push/begin/2024-04-01/end/2024-04-02?platform=ALL' \
--H 'Authorization: Bearer <YourAppToken>
-```
-
-#### 响应示例
+### 响应示例
 
 ```json
 {
@@ -129,6 +105,20 @@ curl -L -g -X GET 'https://XXXX/XXXX/XXXX/push/data/offline-push/begin/2024-04-0
     }
 }
 ```
+
+### 响应 body 字段
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 参数        | 类型   | 描述                                                         |
+| :---------- | :----- | :----------------------------------------------------------- |
+| `status`  | String | 请求状态。若请求成功，返回 `OK`。 |
+| `data`  | JSON | 离线推送结果。 |
+| `data.successCount`  | Int | 成功发送的离线推送通知数量。 |
+| `data.failCount`  | Int | 发送失败的离线推送通知数量。 |
+| `data.arriveCount`  | Int | 送达到接收方的离线推送通知的数量。 |
+
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
 ### 错误码
 

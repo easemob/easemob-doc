@@ -2,7 +2,16 @@
 
 为优化用户在处理大量推送通知时的体验，环信 IM 在 app 和会话层面提供了推送通知方式和免打扰模式的细粒度选项。
 
-**推送通知方式和免打扰模式为推送的高级功能**，若要设置，你需要在 [环信即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。
+## 开通功能
+
+[推送通知方式](push_notification_mode_dnd.html#推送通知方式) 和 [免打扰模式](push_notification_mode_dnd.html#免打扰模式) 是推送的高级功能。使用前，你需要在 [环信控制台](https://console.easemob.com/user/login) 免费开通。**激活后，如需关闭推送高级功能，必须联系商务，因为该操作会删除高级功能相关的所有配置。**
+
+1. 登录 [环信控制台](https://console.easemob.com/user/login)。
+2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
+3. 选择 **增值服务 > 消息推送 > 离线推送**。
+4. 点击 **免费开通**。
+
+![image](/images/android/push/push_advanced_feature_enable.png)
 
 ## 推送通知方式
 
@@ -58,7 +67,9 @@
 
 ## 免打扰模式
 
-你可以在 app 级别指定免打扰时间段和免打扰时长，环信 IM 在这两个时间段内不发送离线推送通知。若既设置了免打扰时间段，又设置了免打扰时长，免打扰模式的生效时间为这两个时间段的累加。
+完成 SDK 初始化和成功登录 app 后，你可以对 app 以及各类型的会话开启离线推送功能以及通过设置免打扰模式关闭推送。
+- 你可以通过 `startTime` 和 `endTime` 参数开启全天免打扰和关闭免打扰模式：若开始时间和结束时间相同，免打扰模式则全天生效；若设置为  `0:0`-`0:0`，则关闭免打扰模式。
+- 你可以在 app 级别指定免打扰时间段和免打扰时长，环信 IM 在这两个时间段内不发送离线推送通知。若既设置了免打扰时间段，又设置了免打扰时长，免打扰模式的生效时间为这两个时间段的累加。
 
 免打扰时间参数的说明如下表所示：
 
@@ -126,12 +137,12 @@ WebIM.conn.getSilentModeForAll()
 
 ```javascript
 // pageSize 的取值范围为 [1,100]，默认值为 10。
-connection.getSilentModeRemindTypeConversations({pageSize: 10})
+conn.getSilentModeRemindTypeConversations({pageSize: 10})
 ```
 
 ## 设置单个会话的推送通知
 
-你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知设置，即推送通知方式或免打扰时间（时长或时间段）示例代码如下。
+你可以调用 `setSilentModeForConversation` 设置指定会话的推送通知设置，即推送通知方式或免打扰时长，示例代码如下。
 
 调用该接口后，你的其他设备会收到 `onMultiDeviceEvent#setSilentModeForConversation` 事件。
 
@@ -154,28 +165,12 @@ connection.getSilentModeRemindTypeConversations({pageSize: 10})
       duration: 7200000 // 免打扰时长，单位为毫秒。
     }
   }
-  
-  const params = {
-    conversationId: '121231233',
-    type: 'chatRoom',
-    options: {
-      paramType: 2, // 免打扰时间段。
-      startTime: {
-        hours: 8, // 免打扰时间段的开始时间中的小时数。
-        minutes: 0 // 免打扰时间段的开始时间中的分钟数。
-      }，
-      endTime: {
-        hours: 12, // 免打扰时间段的结束时间中的小时数。
-        minutes: 0 // 免打扰时间段的结束时间中的分钟数。
-      }
-    }
-  }
 */
 const params = {
   conversationId: '12345',
   type: 'groupChat',
   options: {
-    paramType: 0,
+    paramType: 0, // 会话暂不支持设置免打扰时间段，只能设置APP级别的免打扰时间段。
     remindType: 'ALL'
   }
 }

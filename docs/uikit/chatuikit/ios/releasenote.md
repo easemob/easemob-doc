@@ -1,15 +1,19 @@
 # iOS 单群聊 UIKit 更新日志
 
+## 版本 4.15.1
+
+修复联系人页面对应的内存被回收后重新打开会崩溃问题。
+
 ## 版本 4.14.0
 
-### 新增特性
+#### 新增特性
 
 - 支持 GIF 图片消息。
 - 支持的 iOS 统版本提升为 iOS 14.0。
 
 ## 版本 4.13.1
 
-### 优化
+#### 优化
 
 允许 `TextMessageCell` 中 `refresh` 方法重载。
 
@@ -19,11 +23,11 @@
 
 ## 版本 4.12.1 
 
-### 新增特性
+#### 新增特性
 
 新增长按消息头像时事件回调。
 
-### 优化
+#### 优化
 
 键盘弹起高度不一致的问题。
 
@@ -33,20 +37,20 @@
 
 ## 版本 4.11.2 
 
-### 问题修复
+#### 问题修复
 
 - 修复无法注册多个自定义 Cell 的问题。
 - 修复一些键盘交互问题。
 
 ## 版本 4.11.1
 
-### 问题修复
+#### 问题修复
 
 修复了部分 UIKit 内 `ChatNavigationBar` 继承后需要调用内部指定初始化器，与系统的初始化方法同名导致递归的问题。
 
 ## 版本 4.11.0
 
-### 问题修复
+#### 问题修复
 
 - 修复微信风格样式的发送附件消息菜单与表情键盘点击互相影响的问题。
 - 修复了微信风格长按菜单多个扩展显示的问题。
@@ -58,22 +62,22 @@
 
 ## 版本 4.10.0
 
-### 新增特性
+#### 新增特性
 
 - [消息长按菜单样式新增微信风格样式](chatuikit_custom_chat.html#设置消息长按后显示的操作)；
 - [发送附件消息菜单新增微信风格样式](chatuikit_custom_chat.html#设置附件消息)。
 
-### 交互优化
+#### 交互优化
 
 优化了部分发送消息以及消息选中等交互体验。
 
-### 问题修复
+#### 问题修复
 
 - 修复了不需要消息表情回应时 UI 错乱问题。
 - 修复了一些文案问题。
 - 修复了群详情页面中解散群组请求中强引用的问题。
 
-### 重大变更
+#### 重大变更
 
 由于业务原因对一些类进行了重命名，若要升级需针对如下改动处理编译错误。
 
@@ -84,7 +88,7 @@
 | 版本号变量名  | `EaseChatUIKit_VERSION` -> `ChatUIKit_VERSION`  | 
 | option 类名 | `EaseChatUIKitOptions` -> `ChatUIKitOptions`       | 
 | 初始化类名 | `EaseChatUIKitClient` -> `ChatUIKitClient `       | 
-| 缓存类名   | `EaseChatUIKitContext` -> `ChatUIKitContext`       | 
+| 缓存类名   | `ChatUIKitContext` -> `ChatUIKitContext`       | 
 | 用户个人信息协议名 | `EaseProfileProtocol` -> `ChatUserProfileProtocol` | 
 | 用户信息提供协议名 | 1. `EaseProfileProvider` -> `ChatUserProfileProvider` <br/> 2. `EaseProfileProviderOC` -> `ChatUserProfileProviderOC`      | 
 | 群组信息提供协议名   | 1. `EaseGroupProfileProvider` -> `ChatGroupProfileProvider` <br/> 2. `EaseGroupProfileProviderOC` -> `ChatGroupProfileProviderOC`      | 
@@ -104,7 +108,7 @@
 
 从 V4.6.0 版本开始会启用 Swift 语言编写的新的 `EaseChatUIKit` 与 `EaseChatDemo`，老版本 Demo 和 UIKit 逐渐不再维护，请参考：
 - [UIKit 文档](https://doc.easemob.com/uikit/chatuikit/ios/chatuikit_overview.html)
-- [Demo 源码](https://github.com/easemob/chat-ios/tree/SwiftDemo)
+- Demo 源码：你可以访问 [GitHub](https://github.com/easemob/easemob-demo-ios/tree/SwiftDemo) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-demo-ios/tree/SwiftDemo)。
 
 本版本新增了如下功能、组件和工具类：
 

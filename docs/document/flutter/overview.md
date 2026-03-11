@@ -6,7 +6,7 @@
 
 ## 前提条件
 
-开始前，请注册有效的环信即时通讯 IM 开发者账号和取得 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+开始前，请注册有效的环信即时通讯 IM 开发者账号和取得 App key，见 [环信控制台](https://console.easemob.com/user/login)。
 
 ## 集成环境
 
@@ -37,15 +37,15 @@ await EMClient.getInstance.startCallback();
 
 ### 控制台注册
 
-通过控制台注册用户，详见[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)。
+通过控制台注册用户，详见[创建 IM 用户](/product/console/operation_user.html#创建用户)。
 
 ### REST API 注册
 
-请参考 [注册用户](/document/server-side/account_system.html#注册用户)。
+请参考 [注册用户](/document/server-side/account_register_open.html)。
 
 ### SDK 注册
 
-若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
+若支持 SDK 注册，需登录[环信控制台](https://console.easemob.com/user/login)，选择 **功能配置 > 基础功能** > **用户**，将 **用户注册模式** 设置为 **开放注册**。
 
 ```dart
 try {
@@ -64,7 +64,7 @@ try {
 - 用户 ID + 密码
 - 用户 ID + token
 
-手动登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。
+手动登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_register_open.html)。
 
 调用登录接口后，收到 `onConnected` 回调表明 SDK 与环信服务器连接成功。
 

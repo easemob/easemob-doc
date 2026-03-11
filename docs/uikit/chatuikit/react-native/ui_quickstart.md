@@ -7,7 +7,7 @@
 在集成之前，需要满足以下条件：
 
 1. 有效的环信即时通讯 IM 开发者账号，创建应用并获取 App Key。
-2. 在[环信控制台](https://console.easemob.com/index)[创建两个用户用于聊天](/product/enable_and_configure_IM.html#创建-im-用户)。
+2. 在[环信控制台](https://console.easemob.com/index)[创建两个用户用于聊天](/product/console/operation_user.html#创建用户)。
 
 ## 开发环境需求
 
@@ -22,7 +22,7 @@
 ### 第一步 创建 RN 示例项目
 
 ```sh
-npx @react-native-community/cli@latest init --skip-install --version 0.76.7 sample_app
+npx @react-native-community/cli@latest init --skip-install --version 0.76 simple_demo # 推荐创建稳定版本示例
 ```
 
 ### 第二步 初始化项目
@@ -45,7 +45,6 @@ react-native-create-thumbnail \
 react-native-device-info \
 @react-native-documents/picker \
 react-native-chat-uikit \
-react-native-fast-image \
 react-native-file-access \
 react-native-gesture-handler \
 react-native-image-picker \
@@ -213,6 +212,4 @@ yarn run android
 
 ## 常见问题
 
-初始化项目之后找不到 node_modules，怎么办？
-- `yarn 4.x.x`： 需要设置使用本地配置 `yarn config set nodeLinker node-modules`。
-- `yarn 1.x.x`： 不存在该问题。
+详见 [常见问题](faq.html)。

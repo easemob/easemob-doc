@@ -9,9 +9,10 @@
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
 - 好友列表管理：查询好友列表、请求添加好友、接受好友请求、拒绝好友请求、删除好友和设置好友备注等操作。
-- 黑名单管理：查询黑名单列表、将添加用户至黑名单以及从黑名单中移出用户等操作。
+- 黑名单管理：查询黑名单列表、将添加用户至黑名单以及从黑名单中移出用户等操作。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
+
   
-此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。  
+此外，环信即时通讯 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/console/basic_user.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。  
 
 ## 技术原理
 
@@ -32,20 +33,15 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
 - 调用好友请求相关方法之前先导入头文件 `IEMContactManager.h`；
 - 调用监听接收好友请求等回调方法 API 之前导入头文件：`EMContactManagerDelegate.h`。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 开通黑名单功能。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
 
 ## 实现方法
 
 本节展示如何在项目中管理好友的添加移除和黑名单的添加移除。
 
-### 添加好友
+### 添加好友事件监听
 
-添加好友部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
-
-1. 添加监听。
-
-请监听好友请求相关事件的回调，这样当用户收到好友请求，可以调用接受请求的 API 添加好友。服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。
-
-设置好友监听示例代码如下：
+为了接收好友添加、删除和好友申请状态的变更事件，你需要添加好友事件监听。
 
 ```objectivec
 // 注册好友回调。
@@ -53,13 +49,44 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 // 移除好友回调。
 [[EMClient sharedClient].contactManager removeDelegate:self];
 
-// 收到好友请求。
-- (void)friendRequestDidReceiveFromUser:(NSString *)aUsername
-      message:(NSString *)aMessage
-  { }
+// 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。
+- (void)friendRequestDidApproveByUser:(NSString *)aUsername
+{
+   
+}
+
+// 对方拒绝了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
+- (void)friendRequestDidDeclineByUser:(NSString *)aUsername
+{
+    
+}
+
+// 接收到好友请求。用户 B 向用户 A 发送好友请求，用户 A 收到该事件。
+- (void)friendRequestDidReceiveFromUser:(NSString *)aUsername message:(NSString *)aMessage
+{
+    
+}
+
+// 联系人被删除。用户 B 将用户 A 从联系人列表上删除，用户 A 收到该事件。
+- (void)friendshipDidRemoveByUser:(NSString *)aUsername
+{
+    
+}
+
+// 联系人已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 B 收到 `onFriendRequestAccepted` 事件，双方用户收到 `onContactAdded` 事件。
+- (void)friendshipDidAddByUser:(NSString *)aUsername
+{
+    
+}
 ```
 
-2. 请求添加好友。
+### 添加好友
+
+添加好友部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
+
+服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。
+
+1. 请求添加好友。
 
 示例代码如下：
 

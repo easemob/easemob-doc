@@ -24,6 +24,12 @@
 git clone https://github.com/easemob/easemob-uikit-reactnative.git
 ```
 
+或
+
+```sh
+git clone https://gitee.com/easemob-code/react-native-chat-library.git
+```
+
 ## 初始化项目
 
 ```sh
@@ -43,7 +49,7 @@ cd examples/room-example
 
 修改 `examples/room-example/src/env.ts` 文件内容，填写 appKey 参数。
 
-您可以在[环信即时通讯云控制台](https://console.easemob.com/)创建应用并获取 appKey。
+您可以在[环信控制台](https://console.easemob.com/)创建应用并获取 appKey。
 
 3. 运行项目：
 
@@ -74,9 +80,4 @@ yarn run android
 
 ## 常见问题
 
-如遇到编译或运行问题，请参考：
-
-1. 确保已安装所有必需的开发环境
-2. 检查 appKey 是否正确配置
-3. iOS 编译失败时，尝试清理项目：`cd ios && pod deintegrate && pod install`
-4. Android 编译失败时，检查 Android Studio 配置和 SDK 安装情况
+详见 [常见问题](faq.html)。

@@ -15,14 +15,14 @@
 - Xcode (推荐最新版本)。
 - 安装 iOS 10.0 或以上版本的 iOS 模拟器或 Apple 设备。
 - CocoaPods [1.10.1 或以上版本](https://cocoapods.org/)。
-- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台文档](/product/console/app_manage.html#查看应用信息)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 1. 准备开发环境
 
 ### 创建 Xcode 项目
 
-参考以下步骤在 Xcode 中创建一个 iOS 平台下的 Single View App，项目设置如下：
+参考以下步骤在 Xcode 中创建一个 iOS 平台下的 App，项目设置如下：
 
 - **Product Name** 设为 `HyphenateChatQuickstart`。
 - **Organization Identifier** 设为 `hyphenatechat`。
@@ -53,7 +53,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 ### 方法二：手动导入 SDK v3.8.9.1 及以上版本
 
-1. 下载最新版的 [HyphenateChat iOS SDK](https://www.easemob.com/download/im) 并解压。
+1. 下载最新版的 [HyphenateChat iOS SDK](https://www.easemob.com/download/im#IOS) 并解压。
 2. 复制 SDK 包中的 `HyphenateChat.framework` 至项目路径下。
 3. 打开 Xcode，进入 **TARGETS > Project Name > General > Frameworks, Libraries, and Embedded Content**菜单。
 4. 点击 **+ > Add Other… > Add Files** 添加对应动态库，并确保添加的动态库 **Embed** 属性设置为 **Embed & Sign**。
@@ -70,7 +70,7 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 在工程的 AppDelegate 中的以下方法中，调用 SDK 对应方法。
 
 ```objectivec
-(BOOL)application:(UIApplication *)applicationdidFinishLaunchingWithOptions:(NSDictionary*)launchOptions
+(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
     // appkey 替换成你在环信控制台注册应用中的 App Key
     EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
@@ -83,33 +83,17 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 ## 4. 创建账号
 
-1. 在[环信控制台](https://console.easemob.com/user/login)首页的 **应用列表** 中，在目标应用的 **操作** 栏中点击 **管理**。
-
-2. 在环信即时通讯云的左侧导航栏中，选择 **应用概览 > 用户认证**。
-   
-3. 在 **用户认证** 页面，点击 **创建IM用户** 按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
-
-![img](/images/product/user_create_test.png)
-   
-创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
-```objectivec
-// 异步方法
-[[EMClient sharedClient] registerWithUsername:@"username"
-                                         password:@"your password"
-                                       completion:^(NSString *aUsername, EMError *aError) {
-                                   }];
-```
-
 ## 5. 登录账号
 
-利用创建的用户名和密码登录环信 IM。
+利用创建的用户名和token登录环信 IM。
 
 ```objectivec
 [[EMClient sharedClient] loginWithUsername:@"username"
-                                     password:@"your password"
+                                     token:@"your token"
                                    completion:^(NSString *aUsername, EMError *aError) {
 
 }];
@@ -133,7 +117,7 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"user2"
 
 ## 常见问题
 
-### 集成问题
+### SDK 依赖的 Crash 上报库冲突
 
 由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现如下报错：
 

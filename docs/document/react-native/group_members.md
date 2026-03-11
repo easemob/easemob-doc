@@ -30,7 +30,7 @@
 
 本节介绍如何使用环信即时通讯 IM React Native SDK 提供的 API 实现上述功能。
 
-### 群组加人
+### 加入群组
 
 用户进群分为两种方式：主动申请入群和群成员邀请入群。
 
@@ -222,7 +222,7 @@ ChatClient.getInstance()
      });
    ```
 
-### 群组踢人
+### 退出群组
 
 仅群主和群管理员可以调用 `removeMembers` 方法将单个或多个成员移出群组。被移出群组后，该成员收到 `ChatGroupEventListener#onUserRemoved` 回调，其他群成员收到 `ChatGroupEventListener#onMemberExited` 回调。被移出群组后，该用户还可以再次加入群组。
 
@@ -583,15 +583,32 @@ ChatClient.getInstance()
   });
 ```
 
-### 获取群组成员
+### 获取群成员列表
 
-#### 通过服务器分页获取群组成员
+- 自 1.11.0 版本开始，你可调用 `fetchMemberInfoListFromServer` 方法从服务器获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
+
+```typescript
+const groupId = '<YOUR_GROUP_ID>';
+const cursor = ''; // 开始分页的位置，第一页为空，后续页面请使用第一页返回的结果
+const limit = 200; // 每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
+ChatClient.getInstance()
+  .groupManager.fetchMemberInfoListFromServer(groupId, cursor, limit)
+  .then((result) => {
+    console.log('Fetch member info list result:', result);
+  })
+  .catch((error) => {
+    console.error('Error fetching member info list:', error);
+  });
+```
+
+- 你也可以首先调用 `fetchMemberListFromServer` 方法获取群成员的用户 ID 列表。
 
 ```typescript
 // groupId：群组 ID
-// pageSize：期望获取的最大数量
+// pageSize：每页期望返回的群成员数量，取值范围为 [1,1000]。
 // cursor：开始分页的位置，第一页为空，后续页面请使用第一页返回的结果
 ChatClient.getInstance()
+// pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
   .groupManager.fetchMemberListFromServer(groupId, pageSize, cursor)
   .then(() => {
     console.log("get group members success.");

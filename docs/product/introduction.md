@@ -51,7 +51,7 @@
 
 ### 账号鉴权
 
-即时通讯 IM 支持使用 App 自身账号快速集成即时通信 IM 服务，无需进行账号映射。集成 SDK 后，可以通过接口调用完成用户 ID 与 Token 的鉴权，详情可参见 [用户注册与登录](/product/product_user_registration_login.html) 文档。
+即时通讯 IM 支持使用 App 自身账号快速集成即时通讯 IM 服务，无需进行账号映射。集成 SDK 后，可以通过接口调用完成用户 ID 与 Token 的鉴权，详情可参见 [用户注册与登录](/product/product_user_registration_login.html) 文档。
 
 ## 管理与监控
 
@@ -71,7 +71,7 @@
 
 ## 私有化
 
-环信即时通讯私有化服务是基于 IM 核心技术实现的可私有化部署解决方案。该方案可适配内网物理服务器集群、公有云以及私有云等任意部署环境，提供功能完备、安全可靠、易于扩展的即时通讯平台。更多详情，请参见[私有化服务文档](https://docs-im-privatization.easemob.com/document/v2/privatization/uc_introduction.html)。
+环信即时通讯私有化服务是基于 IM 核心技术实现的可私有化部署解决方案。该方案可适配内网物理服务器集群、公有云以及私有云等任意部署环境，提供功能完备、安全可靠、易于扩展的即时通讯平台。更多详情，请参见[私有化服务文档](https://docs-im-privatization-v3.easemob.com)。
 
 
 

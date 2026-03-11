@@ -9,7 +9,6 @@
 环信即时通讯 IM Android SDK 提供 [EMGroupManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager.html)、[EMGroup](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html) 和 [EMGroupChangeListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_group_change_listener.html)用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 加入、退出群组
-- 获取群组成员信息
 - 管理群成员的自定义属性
 - 管理群主及群管理员
 - 管理群组白名单
@@ -171,30 +170,6 @@ EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userL
 
             @Override
             public void onError(int code, String error) {
-
-            }
-        });
-```
-
-### 获取群组成员信息
-
-自 4.14.0 版本开始，你可以调用 `asyncFetchGroupMembersInfo` 方法获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
-
-```java
-EMClient.getInstance().groupManager().asyncFetchGroupMembersInfo(groupId, null, 50, new EMValueCallBack<EMCursorResult<EMGroupMemberInfo>>() {
-            @Override
-            public void onSuccess(EMCursorResult<EMGroupMemberInfo> value) {
-                List<EMGroupMemberInfo> list = value.getData();
-                for (EMGroupMemberInfo groupMemberInfo : list) {
-                    //获取群成员的用户 ID、加群时间和成员角色
-                    String id = groupMemberInfo.getMemberId();
-                    long joinTime = groupMemberInfo.getJoinTime();
-                    EMGroup.EMGroupPermissionType role = groupMemberInfo.getRole();
-                }
-            }
-
-            @Override
-            public void onError(int error, String errorMsg) {
 
             }
         });
@@ -379,9 +354,9 @@ public void fetchGroupWhiteList(final String groupId, final EMValueCallBack<List
 
 #### 将成员加入群组黑名单
 
-仅群主和群管理员可以调用 `BlockGroupMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupChangeListener#OnUserRemovedFromGroup` 回调。其他群成员会收到该成员退出群组的回调，如需该回调，请联系商务开通。黑名单中的成员会被移出群组，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
+仅群主和群管理员可以调用 `BlockGroupMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupChangeListener#OnUserRemovedFromGroup` 事件。默认情况下，其他群成员不会收到事件通知。如需该事件，请联系商务开通。
 
-示例代码如下：
+黑名单中的成员会被移出群组，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
 
 ```java
 // 同步方法，会阻塞当前线程。
@@ -451,6 +426,8 @@ EMClient.getInstance().groupManager().unMuteGroupMembers(String groupId, List<St
 ```java
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncFetchGroupMuteList(String, int, int, EMValueCallBack)。
+// pageNum	当前页码，从 1 开始。
+// pageSize	每页返回的禁言成员数。
 EMClient.getInstance().groupManager().fetchGroupMuteList(String groupId, int pageNum, int pageSize);
 ```
 

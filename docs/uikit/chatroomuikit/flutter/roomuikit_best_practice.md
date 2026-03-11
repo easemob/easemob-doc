@@ -74,7 +74,7 @@ try {
   }
 ```
 
-2. 获取聊天室列表，加入指定的聊天室。除此之外，你还可以在环信即时通讯云控制台上[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)，获取聊天室 ID。
+2. 获取聊天室列表，加入指定的聊天室。除此之外，你还可以在环信控制台上[创建聊天室](/product/console/operation_chatroom.html#创建聊天室)，获取聊天室 ID。
 
 3. 使用 `chatroom_uikit` 前，需要先创建 `ChatroomController`, 并使 `ChatRoomUIKit` 作为当前页面的根节点，并将其他组件作为 `ChatRoomUIKit` 的子节点。
 
@@ -146,4 +146,4 @@ class _ChatroomViewState extends State<ChatroomView>
 
 ## 参考
 
-若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/flutter/chatroom_uikit_demo)。
+若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/flutter/chatroom_uikit_demo) 或 [Gitee 地址](https://gitee.com/easemob-code/ChatroomDemo/tree/dev/flutter/chatroom_uikit_demo)。

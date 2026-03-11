@@ -14,7 +14,7 @@
 
 - `IChatManager.FetchHistoryMessagesFromServerBy` 根据 `FetchServerMessagesOption` 类分页获取服务器保存的指定会话中的消息。
 - `Conversation.LoadMessages` 读取本地指定会话的消息。
-- `IChatManager.LoadMessage` 根据消息 ID 获取消息。
+- `IChatManager.LoadMessage` 根据消息 ID 获取单个消息。
 - `Conversation.LoadMessagesWithMsgType` 获取本地单个会话中特定类型的消息。
 - `Conversation.LoadMessagesWithTime` 获取本地单个会话中一定时间段内的消息。
 - `Conversion#MessagesCount` 获取 SDK 本地数据库中会话某个时间段内的全部消息数。
@@ -39,13 +39,13 @@
 - 消息时间段；
 - 消息搜索方向；
 - 是否将拉取的消息保存到数据库；
-- 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
+- 对于群组聊天，你可以设置 `FromIds` 参数拉取群组中指定的单个或多个成员发送的历史消息。
 
 :::tip
 1. 若使用该 API，需将 SDK 升级至 V1.2.0 或以上版本。
 2. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需升级至 1.3.0 版本，并联系环信商务。**
-3. 拉取服务器漫游消息时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
-4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
+3. 获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态。该功能默认关闭，如果需要，请联系环信商务开通。
+4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 :::
 
 ```csharp
@@ -53,14 +53,15 @@
   // 消息搜索方向。`UP` 表示按消息时间戳递减的方向获取，即先获取最新消息；`DOWN` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
   option.Direction = MessageSearchDirection.UP;
   //消息发送方的用户 ID, 仅用于群组消息，即当 `FetchHistoryMessagesFromServerBy` 中的 `type` 为 `ConversationType.Group` 时使用。
-  option.From = "xxx";
+  option.FromIds = new List();
+  option.FromIds.Add("id1");
+  option.FromIds.Add("id2");
   // 要获取的消息类型的数组。若不传值，会获取所有类型的消息。
   option.MsgTypes = new List<MessageBodyType>() { MessageBodyType.TXT };
   // 查询的起始时间戳，单位为毫秒。
   option.StartTime = 1709284487000;
   // 查询的结束时间戳，单位为毫秒。
   option.EndTime = 1709284499000;
-
   // conversationId 单聊为对端用户 ID，群组聊天为群组 ID，聊天室聊天为聊天室 ID。
   // type: 会话类型：单聊和群组聊天分别为 `Chat`, `Group`, `Room`。
   // cursor: 查询的起始消息 ID。若该参数设置为空字符串，从最新消息开始。
@@ -103,12 +104,13 @@ SDKClient.Instance.ChatManager.FetchHistoryMessagesFromServer(conversationId, ty
 
 ### 从本地读取指定会话的消息
 
-你可以从本地数据库中读取指定会话的消息，示例代码如下：
+你可以从本地数据库中读取指定会话的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
 ```csharp
 // 获取本地会话。
 Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
 // 该方法获取 `startMsgId` 之前的 `pagesize` 条消息。
+// pagesize：每次获取的消息数量，取值范围为 [1,400]。
 conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>>(
   onSuccess: (list) => {
      Debug.Log($"获取到{list.Count}条消息");
@@ -119,13 +121,47 @@ conv.LoadMessages(startMsgId, pagesize, callback:new ValueCallBack<List<Message>
 ));
 ```
 
-### 根据消息 ID 获取本地消息
+### 根据消息 ID 获取单个本地消息
 
 你可以调用 `LoadMessage` 方法根据消息 ID 获取本地存储的指定消息。如果消息不存在会返回空值。
 
 ```csharp
 // msgId：要获取消息的消息 ID。
 Message msg = SDKClient.Instance.ChatManager.LoadMessage("msgId");
+```
+
+### 从本地获取指定群成员发送的消息
+
+自 SDK 1.4.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
+
+```csharp
+Conversation conv = SDKClient.Instance.ChatManager.GetConversation(conversationId, convType);
+conv.LoadMessagesWithScopeAndFromIds(keyword, timestamp, maxCount, fromIds, direction, scope, new ValueCallBack<List>(
+    onSuccess: (list) =>
+    {
+
+    },
+    onError: (code, desc) =>
+    {
+
+    }
+));
+```
+
+### 根据关键字获取本地会话的消息 ID
+
+自 SDK 1.4.0 版本开始，你可以调用 `LoadConversationMessagesWithKeyword` 通过设置关键词获取单个会话中的消息 ID 列表。消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
+
+```csharp
+SDKClient.Instance.ChatManager.LoadConversationMessagesWithKeyword(keywords, timestamp, from, direction, scope, new ValueCallBack<Dictionary<string, List<string>>>(
+                onSuccess: (result) =>
+                {
+
+                },
+                onError: (code, desc) =>
+                {
+                }
+            ));
 ```
 
 ### 获取本地会话中特定类型的消息
@@ -145,6 +181,28 @@ conv.LoadMessagesWithMsgType(type: MessageBodyType.TXT, count: 50, direction: Me
         }
     },
     onError: (code, desc) => {
+    }
+));
+```
+
+### 根据消息 ID 获取本地消息
+
+自 SDK 1.4.0 版本开始，你可以调用 `LoadMessages`, 传入单个或多个消息 ID 获取单个本地会话中的消息。
+
+```csharp
+// 创建消息ID列表
+List<string> messageIdList = new List<string>();
+messageIdList.Add("msgId1");
+messageIdList.Add("msgId2");
+
+SDKClient.Instance.ChatManager.LoadMessages(messageIdList, conversationId, new ValueCallBack<List<Message>>(
+    onSuccess: (messages) =>
+    {
+
+    },
+    onError: (code, desc) =>
+    {
+
     }
 ));
 ```

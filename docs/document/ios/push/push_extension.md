@@ -2,7 +2,7 @@
 
 你可以利用扩展字段实现自定义推送设置，本文以强制推送、发送静默消息和富文本推送为例介绍如何实现推送扩展功能。
 
-对于推送扩展字段，详见[离线推送扩展字段文档](/document/server-side/push_extension.html)。
+对于推送扩展字段，详见 [离线推送扩展字段文档](/document/server-side/push_extension.html)。
 
 ## 自定义推送字段
 
@@ -57,7 +57,7 @@ message.chatType = EMChatTypeChat;
 推送铃声是指用户收到推送时的提示音，你需要将音频文件加入到 app 中，并在推送中配置使用的音频文件名称。
 
 - 支持格式 Linear PCM MA4 (IMA/ADPCM) µLaw aLaw。
-- 音频文件存放路径 AppData/Library/Sounds，时长不得超过 30 秒。
+- 时长不得超过 30 秒。
 
 更多内容可以参考苹果官方文档：[生成远程推送通知](https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification?language=objc)。
 
@@ -89,6 +89,54 @@ message.chatType = EMChatTypeChat;
         },  
         "badge":1,  
         "sound":"custom.caf"  
+    },
+    "f":"6001",  
+    "t":"6006",  
+    "m":"373360335316321408"  
+}
+```
+
+| 参数    | 描述            |
+| :------ | :-------------- |
+| `body`  | 显示内容。      |
+| `badge` | 角标数。        |
+| `sound` | 提示铃声。      |
+| `f`     | 消息发送方 ID。 |
+| `t`     | 消息接收方 ID。 |
+| `m`     | 消息 ID。       |
+
+## 自定义角标
+
+推送角标是指推送消息到达时，在应用图标上显示的未读消息数。你可以通过设置 `em_push_badge` 字段来自定义角标数。
+
+```objectivec
+EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
+EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
+message.ext = @{@"em_apns_ext":@{@"em_push_badge":@9}};
+message.chatType = EMChatTypeChat; 
+[EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:nil];
+```
+
+| 参数             | 描述                                                         |
+| :--------------- | :----------------------------------------------------------- |
+| `body`           | 消息体。                                                     |
+| `ConversationID` | 消息属于的会话 ID。                                          |
+| `from`           | 消息发送方，一般为当前登录 ID。                              |
+| `to`             | 消息接收方 ID，一般与 `ConversationID` 一致。                |
+| `em_apns_ext`    | 消息扩展，使用扩展的方式向推送中添加自定义字段，该值为固定值，不可修改。 |
+| `em_push_badge`  | 自定义字段，用于设置自定义角标数，该值为固定值，不可修改。   |
+| `9`              | 自定义角标数值。                                             |
+
+**解析的内容**
+
+```json
+{
+    "aps":{
+        "alert":{
+            "body":"你有一条新消息"
+        },  
+        "badge":9,  
+        "sound":"default"  
     },
     "f":"6001",  
     "t":"6006",  

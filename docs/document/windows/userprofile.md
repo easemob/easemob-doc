@@ -16,8 +16,8 @@
 
 环信即时通讯 IM Windows SDK 提供一个 `IUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
-- `UpdateOwnInfo` 设置和修改当前用户自己的属性信息；
-- `FetchUserInfoByUserId` 获取指定用户的所有用户属性信息；
+- `UpdateOwnInfo` 设置和修改当前用户自己的属性；
+- `FetchUserInfoByUserId` 获取指定一个或多个用户的全部用户属性。
 
 ## 前提条件
 
@@ -56,7 +56,7 @@ SDKClient.Instance.UserInfoManager.UpdateOwnInfo(userInfo, new CallBack(
 ));
 ```
 
-关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/document/server-side/userprofile.html#设置用户属性)或[删除用户属性](/document/server-side/userprofile.html#删除用户属性)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
+关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/document/server-side/user_attribute_set.html)或[删除用户属性](/document/server-side/user_attribute_delete.html)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
 
 | 字段        | 类型   | 描述                                                                                              |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------ |
@@ -76,7 +76,7 @@ SDKClient.Instance.UserInfoManager.UpdateOwnInfo(userInfo, new CallBack(
 示例代码如下：
 
 ```csharp
-//获取一个或多个用户的所有属性，一次调用用户 ID 数量不超过 100。
+//一次调用用户 ID 数量不超过 100。
 List<string> idList = new List<string>();
 idList.Add("username");
 SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId

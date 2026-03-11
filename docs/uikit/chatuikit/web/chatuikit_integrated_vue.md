@@ -6,7 +6,7 @@
 
 开始前，确保你的开发环境满足如下条件：
 - 已安装 [Node.js](https://nodejs.org/)。
-- [即时通讯 IM 应用和 App Key](/product/enable_and_configure_IM.html#创建应用)。
+- [即时通讯 IM 应用和 App Key](/product/console/app_create.html)。
 
 ## 操作步骤
 
@@ -47,11 +47,11 @@ npm run dev
 
 运行成功后打开 "http://localhost:5173/" ，可以看到下图所示界面：
 
-![img](/images/uikit/chatuikit/web/vue_project_create.png)
+![Vue 项目创建成功](/images/uikit/chatuikit/web/vue_project_create.png)
 
 ### 第二步 安装和配置 Veaury
 
-[Veaury ](https://github.com/gloriasoft/veaury#readme)是基于 React 和 Vue 的工具库，主要用于 React 和 Vue 在一个项目中公共使用的场景。Veaury 适用于 Vue 3 和 Vue 2。
+[Veaury](https://github.com/gloriasoft/veaury#readme) 是基于 React 和 Vue 的工具库，主要用于 React 和 Vue 在一个项目中公共使用的场景。Veaury 适用于 Vue 3 和 Vue 2。
 
 1. 可以使用以下命令从 npm 安装 Veaury 库：
 
@@ -65,7 +65,7 @@ npm i veaury
 npm i @vitejs/plugin-react
 ```
 
-3. 为了使 Vue 应用能够导入和呈现 React 组件，需要更新项目中的 `vite.config.js` 文件以使用 Veaury 插件。
+3. 为了使 Vue 应用能够导入和呈现 UIKit 组件，需要更新项目中的 `vite.config.js` 文件以使用 Veaury 插件。
 
 [Veaury 配置参考](https://github.com/gloriasoft/veaury/blob/master/README_zhcn.md#vite)
 
@@ -98,23 +98,51 @@ export default defineConfig({
 });
 ```
 
-4. 可将任何 React 组件添加到 `react_app` 目录中，然后将这些 React 组件导入到 `.vue` 文件，并在标准 Vue 组件中呈现。
+4. 在 `main.js` 中配置 VeauryOptions，以适配 React 19：
+
+```js
+import "./assets/main.css";
+import { createApp } from "vue";
+import { createRoot } from "react-dom/client";
+import { setVeauryOptions } from "veaury";
+import App from "./App.vue";
+import router from "./router";
+
+setVeauryOptions({
+  react: {
+    createRoot,
+  },
+});
+
+const app = createApp(App);
+
+app.use(router);
+
+app.mount("#app");
+
+
+```
+5. 可将任何 React 组件添加到 `react_app` 目录中，然后将这些 React 组件导入到 `.vue` 文件，并在标准 Vue 组件中呈现。
 
 ### 第三步 在 Vue 项目中集成 React 组件
 
 首先，你需要在 `react_app` 中创建一个新的 React 组件。该组件负责导入、配置和渲染 UIKit。
 
-1. 安装 UIKit。
+1. 安装 UIKit：
 
    ```bash
-   npm i easemob-chat-uikit --save;
+   npm i easemob-chat-uikit --save
    ```
 
 2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用环信即时通讯 IM 的 App Key 和用户信息初始化 UIKit。
 
 <img src="/images/uikit/chatuikit/web/vue_initialization.png" width="500" >
 
-代码如下：
+代码如下，请将示例中的 `appKey`、`userId` 和 `password` 替换为你的实际值。
+
+若要实现自动登录，初始化时需传入 `userId`、`password` 或 `token`。 
+
+你需要在环信控制台[创建 IM 用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和密码。如果使用 token，你需要从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/document/server-side/easemob_user_token.html) 。
 
 ```jsx
 // 导入 UIKit 到 react_app/chat.jsx 文件
@@ -125,6 +153,8 @@ import 'easemob-chat-uikit/style.css'
 const appKey = "your appkey";
 const userId = "userId";
 const password = "password";
+// 若通过 token 登录，使用下面的代码：
+// token: "token",
 
 const EaseChat = (props) => {
   // 父组件传入的 theme 属性
@@ -166,7 +196,7 @@ export default EaseChat;
 3. 定义 `theme` 变量，传递给 EaseChat 组件，用于切换 UIKit 的主题。
 4. 添加一些样式，美化界面。
 
-```javascript
+```vue
 <script setup>
 import { ref } from "vue";
 import { applyPureReactInVue } from "veaury";
@@ -183,20 +213,20 @@ const switchTheme = () => {
 </script>
 
 <template>
-  <header>
-    <div class="header">
-      <img class="logo" :src="Logo" alt="logo" />
-      <span class="theme" @click="switchTheme">Switch Theme: {{ theme }}</span>
-    </div>
-  </header>
   <main>
+    <header>
+      <div class="header">
+        <img class="logo" :src="Logo" alt="logo" />
+        <span class="theme" @click="switchTheme">Switch Theme: {{ theme }}</span>
+      </div>
+    </header>
     <Chat :theme="theme" />
   </main>
 </template>
 
 <style>
 .chat-wrap {
-  width: 100%;
+  width: 100vh;
   height: calc(100vh - 50px);
   display: flex;
   box-sizing: border-box;
@@ -233,7 +263,15 @@ const switchTheme = () => {
 </style>
 
 ```
-删除 `App.vue` 文件 `template` 中的无关代码，仅保留 RouterView，当访问 http://localhost:5173 时，界面如下：
+5. 删除 `App.vue` 文件 `template` 中的无关代码，仅保留 `RouterView`：
+
+```vue
+<template>
+  <RouterView />
+</template>
+```
+
+当访问 http://localhost:5173 时，界面如下：
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/web/vue_initial_page.png" title="浅色主题" />
@@ -247,7 +285,7 @@ const switchTheme = () => {
 
 ## 相关参考
 
-- [示例项目源码](https://github.com/easemob/webim-vue-demo/tree/chat-uikit-vue-demo)
-- [组件库源码](https://github.com/easemob/Easemob-UIKit-web)
-- [其他示例 demo](https://github.com/easemob/easemob-uikit-react/tree/main/demo)
+- 示例项目源码：可访问 [GitHub](https://github.com/easemob/webim-vue-demo/tree/chat-uikit-vue-demo) 或 [Gitee](https://gitee.com/easemob-code/webim-vue-demo/tree/chat-uikit-vue-demo) 地址。
+- 组件库源码：可访问 [GitHub](https://github.com/easemob/easemob-uikit-react) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-react) 地址。
+- 其他示例 demo：可访问 [GitHub](https://github.com/easemob/easemob-uikit-react/tree/main/demo) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-react/tree/main/demo) 地址。
 - [`UIKitProvider` 文档](https://doc.easemob.com/uikit/chatuikit/web/chatuikit_provider.html)

@@ -210,7 +210,7 @@ const submitFeedback = async () => {
 
     let response, result
     try {
-      response = await fetch('https://h2.a1.easemob.com/api/feedback', {
+      response = await fetch('https://doc-feedback.easemob.com/api/feedback', {
         method: 'POST',
         body: formData,
         headers: {
@@ -276,7 +276,7 @@ const closeForm = () => {
   border-radius: 25px;
   position: fixed;
   right: 1rem;
-  bottom: 9rem;
+  bottom: 11rem;
   width: 50px;
   left: unset;
   z-index: 1000;

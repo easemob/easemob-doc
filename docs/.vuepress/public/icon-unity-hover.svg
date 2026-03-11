@@ -1,14 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>icon/color/unity</title>
-    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="icon-&amp;-Logo2" transform="translate(-88.000000, -336.000000)" fill-rule="nonzero">
-            <g id="icon/color/unity" transform="translate(88.000000, 336.000000)">
-                <rect fill="#D8D8D8" opacity="0" x="0" y="0" width="20" height="20"></rect>
-                <g id="Unity_Technologies_logo" transform="translate(1.142857, 2.142857)" fill="#5C5F61">
-                    <path d="M13.0662983,12.5916782 L10.2446725,7.84988831 L13.0662983,3.10809842 L14.4265193,7.84988831 L13.0662983,12.5916782 Z M6.78642463,12.1289646 L3.24119968,8.61603111 L8.88445146,8.61603111 L11.7060773,13.357821 L6.78642463,12.1289646 Z M6.78642463,3.55630299 L11.6917127,2.32744654 L8.87008682,7.06923644 L3.22683504,7.06923644 L6.78642463,3.55630299 Z M13.992423,0 L7.58216259,1.66255194 L6.62715075,3.2960857 L4.70276243,3.28157662 L0,7.84988831 L4.70276243,12.4182 L6.62715075,12.4036909 L7.58216259,14.0372247 L13.992423,15.7142857 L15.7142857,9.48342208 L14.7447514,7.8643974 L15.7142857,6.24521501 L13.992423,0 Z" id="path2"></path>
-                </g>
-            </g>
-        </g>
-    </g>
+<svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_547_2734)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.55529 0L15.8115 4.31105L15.8476 4.28818V12.8094L13.0231 11.1715V7.81097L9.63186 9.94062V14.1171L12.2941 12.4797L14.9613 14.0337L7.9404 18.4897L7.93916 18.4907L7.93693 18.4892L0.887467 14.0359L3.55157 12.4804L6.21597 14.1176L6.21662 9.94311L2.80602 7.812V11.1722L0 12.8087V4.28818L0.0361524 4.31105L7.23977 0V3.45872L4.59753 5.05544L7.99517 7.24463L11.3928 5.1806L8.55529 3.45872V0Z" fill="#00A0FA"/>
+</g>
+<defs>
+<clipPath id="clip0_547_2734">
+<rect width="15.8476" height="18.5714" fill="white"/>
+</clipPath>
+</defs>
 </svg>

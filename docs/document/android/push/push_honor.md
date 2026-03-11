@@ -1,31 +1,29 @@
-# 在即时通讯 IM 中集成荣耀推
+# 在即时通讯 IM 中集成荣耀推送
 
 环信即时通讯 IM SDK 4.0.3 版本中集成了荣耀推送。本节介绍如何集成荣耀厂商的离线推送通道，使消息通过荣耀推送服务推送至离线的用户。
 
-## **步骤一 在[荣耀开发者服务平台](https://developer.hihonor.com/cn/)创建应用并申请开通推送服务**
+## **步骤一 在 [荣耀开发者服务平台](https://developer.hihonor.com/cn/) 创建应用并申请开通推送服务**
 
-详见[荣耀推送官网说明](https://developer.honor.com/cn/docs/11002/guides/kit-history)。
+关于如何在 [荣耀开发者服务平台](https://developer.hihonor.com/cn/) 创建应用并申请开通推送服务，详见 [荣耀推送官网说明](https://developer.honor.com/cn/docs/11002/guides/kit-history)。
 
-## **步骤二 在环信即时通讯云控制台上传荣耀推送证书**
+## **步骤二 上传荣耀推送证书**
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)，选择你的应用 > **功能配置** > **增值功能** > **即时推送**。
    
-2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
-   
-3. 在**添加推送证书**对话框中选择**荣耀**页签，配置荣耀推送参数。
+2. 在 **证书管理** 页面，点击 **添加推送证书**。在 **添加推送证书** 对话框中选择 **荣耀** 页签，配置荣耀推送参数。
 
-![image](/images/android/push/add_honor_push_template.png)
+![img](/images/console/push_certificate_rongyao.png)
 
 | 推送证书参数    | 类型   | 是否必需 | 描述           |
 | :-------------- | :----- | :------- | :--------------------------------------- |
-| `App ID`        | String | 是       | 应用标识符，应用的唯一标识，在荣耀开发者服务平台开通对应用的荣耀推送服务时生成。                   |
-| `Client ID`     | String | 是       | 应用的客户 ID，用于获取发送消息令牌的 ID，在荣耀开发者服务平台开通对应应用的荣耀推送服务时生成。   |
-| `Client Secret` | String | 是       | 应用的客户密钥，用于获取发送消息令牌的密钥，在荣耀开发者服务平台开通对应应用的荣耀推送服务时生成。 |
-| `Badge Class`   | String | 否       | 应用入口 Activity 类全路径，例如 com.example.test.MainActivity。                                   |
-| `Action`        | String | 否       | 消息接收方在收到离线推送通知时单击通知栏时打开的应用指定页面的自定义标记。该参数需要与客户端 `AndroidManifest.xml` 文件中注册启动的 `Activity` 类中 `intent-filter` 标签中设置的 `action` 一致。   |
+| App ID        | String | 是       | 应用标识符，应用的唯一标识，在荣耀开发者服务平台开通对应用的荣耀推送服务时生成。                   |
+| Client ID     | String | 是       | 应用的客户 ID，用于获取发送消息令牌的 ID，在荣耀开发者服务平台开通对应应用的荣耀推送服务时生成。   |
+| Client Secret | String | 是       | 应用的客户密钥，用于获取发送消息令牌的密钥，在荣耀开发者服务平台开通对应应用的荣耀推送服务时生成。 |
+| Badge Class   | String | 否       | 应用入口 Activity 类全路径，例如 com.example.test.MainActivity。 <br/> 该参数仅对离线推送有效。                                  |
+| Action        | String | 否       | 消息接收方在收到离线推送通知时，单击通知栏时打开的应用指定页面的自定义标记。<br/> - 该参数需要与客户端 `AndroidManifest.xml` 文件中注册启动的 `Activity` 类中 `intent-filter` 页签中设置的 `action` 一致。 <br/> - 该参数仅对离线推送有效。 |
 
 :::tip
-关于**App ID**、**Client ID**和**Client Secret**，可在荣耀开发者服务平台申请开通推送服务后，在**推送服务**页面选择创建的应用，在[**查看推送服务**](https://developer.honor.com/cn/docs/11002/guides/app-registration#申请开通推送服务)页面查看。
+关于 **App ID**、**Client ID** 和 **Client Secret**，可在荣耀开发者服务平台申请开通推送服务后，在 **推送服务** 页面选择创建的应用，在 [**查看推送服务**](https://developer.honor.com/cn/docs/11002/guides/app-registration#申请开通推送服务)页面查看。
 :::
 
 ![image](/images/android/push/view_push_service.png)
@@ -194,7 +192,7 @@ if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
 
 1. 设置 `action` 参数。
 
-在环信即时通讯云控制台的**添加推送证书**对话框中设置 `action` 参数。该参数需要与客户端 `AndroidManifest.xml` 文件中注册启动的 `Activity` 类中 `intent-filter` 标签中设置的 `action` 一致。该配置只能实现跳转到无需前置参数的页面。若启动应用自定义页面需要前置参数，你还需要在消息扩展中添加前置参数。
+在环信控制台的**添加推送证书**对话框中设置 `action` 参数。该参数需要与客户端 `AndroidManifest.xml` 文件中注册启动的 `Activity` 类中 `intent-filter` 标签中设置的 `action` 一致。该配置只能实现跳转到无需前置参数的页面。若启动应用自定义页面需要前置参数，你还需要在消息扩展中添加前置参数。
 
 若推送不同的消息时，接收方收到后点击推送通知栏打开不同应用自定义页面，你可以添加相应的消息扩展属性实现。
 

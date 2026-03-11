@@ -2,75 +2,153 @@
 
 <Toc />
 
-## 版本 V1.7.0 Dev 2025-5-15（开发版）
+## v1.11.1 Dev 2026-2-28（开发版）
 
-### 新增特性
+- 多回调支持：`ChatMessage` 支持设置多个 `ChatCallback`，便于在消息生命周期中灵活处理多个回调逻辑。
+- 登录优化：SDK 在登录时自动将 `userId` 中的大写字母转换为小写，避免因大小写不一致导致的用户匹配问题。
 
-- 支持 [GIF 图片消息](message_send_receive.html#发送和接收-gif-图片消息)。
+## v1.11.0 Dev 2026-2-4（开发版）
+
+#### 新增特性
+
+  底层支持安全 DNS 解析 DoH，提高连通性。
+
+#### 优化
+
+- 私有化部署底层链路支持 TCP 和 WebSocket 之间切换。
+- `ChatMessage#setJsonAttribute` 的类型只支持 `object` 类型，推荐使用 [ChatMessage.setExt](message_extension.html)。详见 [消息扩展升级指南](message_extension_optimize.html)。
+ 
+## v1.10.0 Dev 2026-1-26（开发版）
+
+#### 新增特性
+
+1. 长连接支持 WebSocket 协议。
+2. `ChatOptions` 新增 API 支持 WebSocket 私有部署:
+   - `ChatOptions#setWebSocketServer`：设置 WebSocket 服务器地址。
+   - `ChatOptions#getWebSocketServer`：获取设置的 WebSocket 服务器地址。
+   - `ChatOptions#setWebSocketPort`：设置 WebSocket 服务器端口号。
+   - `ChatOptions#getWebSocketPort`：获取设置的 WebSocket 服务器端口号。
+
+#### 优化
+
+优化调用 `logout` 方法的退出逻辑。 
+
+#### 修复
+
+修复页面间传递 `ChatMessage` 对象时偶现为空的问题。
+
+## v1.9.0 Dev 2026-1-9（开发版）
+
+#### 新增特性
+
+- 新增 Native Crash 上报能力：当 SDK native 层代码发生 Crash 时，会在下次启动后上报 Crash 信息。
+- 支持 [根据关键字从本地数据库中获取本地会话中的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
+- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
+
+#### 优化
+
+优化 [获取加入群组接口](group_manage.html#获取群组列表) 的响应速度。
+
+#### 修复
+
+1. 修复当修改文本和自定义消息之外的消息时，`ChatMessageListener#onMessageContentChanged` 回调中不返回修改的信息的问题。
+2. 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，当设置为不保存消息（`FetchMessageOption#setIsSave` 设置为 `false`）仍会生成新的本地会话的问题。
+3. 修复群组或聊天室解散后，成员收到回调后，仍然会从服务器获取群组或聊天室详情的问题。
+
+## v1.8.1 Dev 2025-11-6（开发版）
+
+#### 优化
+
+解决 HTTP 请求受文件描述符（FD）限制问题。
+
+#### 修复
+
+修复异常情况下从数据库加载群组头像数据崩溃的问题。
+
+## v1.8.0 Dev 2025-6-6（开发版）
+
+#### 新增特性
+
+- [撤回消息](message_recall.html) 时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
+- 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
+  - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
+- 支持 [获取群成员信息列表](group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。
+  
+#### 优化
+
+- 修改 Token 即将过期事件 [onTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 在 Token 有效期达到 80% 左右时（之前版本为 50% ）回调即将过期通知。
+- 支持用户通过字面量的方式设置初始化时的条件。详见 [初始化文档](initialization.html)。
+- 对 `ChatManager` 和 `Conversation` 中 [本地搜索消息接口](message_search.html) 增加默认参数，方便用户调用。
+
+## v1.7.0 Dev 2025-5-15（开发版）
+
+#### 新增特性
+
+- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。 
-- 支持 [消息附件下载鉴权功能](message_send_receive.html#发送和接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持 [消息附件下载鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
 - 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
 - 支持 [根据搜索范围搜索所有会话中的消息](message_search.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](message_search.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
 
-### 优化
+#### 优化
 
 - 升级 SDK 使用的 BoringSSL 和 SQLCipher 库，避免安全风险。
 - 日志文件中增加设备时区偏移，方便排查问题。
 - 调用方法 [ChatManager#fetchHistoryMessages](message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `CursorResult#getNextCursor` 由字符串 `undefined` 改为空字符串。
 
-### 修复
+#### 修复
 
 - 修复删除本地会话时缓存中的消息未删除的问题。
-- 修复消息扩展属性 `ext` 判断字符串为 JSON 类型时转换有误的问题。
+- 修复消息扩展属性 `ext` 判断字符串为 JSON 类型时转换有误的问题。详见 [消息扩展升级指南](message_extension_optimize.html)。
 
-## 版本 V1.6.0 Dev 2025-4-9（开发版）
+## v1.6.0 Dev 2025-4-9（开发版）
 
-### 优化
+#### 优化
 
 - 发送后修改消息接口 [ContactManager#modifyMessage](message_modify.html) 支持修改各类消息：
   - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
   - 命令消息：不支持修改。
-- [ChatMessage.setExt](message_send_receive.html#使用消息扩展字段)支持 object 类型的扩展字段。
+- [ChatMessage.setExt](message_extension.html)支持 object 类型的扩展字段。详见 [消息扩展升级指南](message_extension_optimize.html)。
 - SDK 优化切换到前台后的重连逻辑。
 - 优化重连逻辑，默认切换重连的地址。
 
-## 版本 V1.5.3 Dev 2025-3-17（开发版）
+## v1.5.3 Dev 2025-3-17
 
-### 新增特性
+#### 新增特性
 
 - 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个联系人的信息。
 
-### 优化
+#### 优化
 
 - `PushListener#onError` 回调，增加回调 SDK 内部调用系统库 PushKit 获取 push token 失败的信息。
 - 底层长连接使用 poll 代替 select，解决文件描述符（fd）最大数量 1024 的限制问题。
 
-## 版本 V1.5.2 Dev 2025-3-10（开发版）
+## v1.5.2 Dev 2025-3-10（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 新增 `ChatManager#deleteAllConversationsAndMessages` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
 - 新增 `ChatClient#isConnected` 方法，用于检查 SDK 是否连接到环信服务器。自动登录的场景下，登录状态变为已登录时，可能 SDK 未成功连接至服务端，这种情况下与服务器交互的操作会失败，比如发消息。此时，可调用 `isConnected` 接口判断 SDK 与服务器的连接状态。
 
-### 修复
+#### 修复
 
 - 修复设置 `Conversation#searchMessagesByType` 传入 `ContentType#TXT` 时报错的问题。
 - 修复 `不是 TextMessageBody` 时获取消息修改信息崩溃的问题。
 - 修复 `UserInfoManager#updateUserInfo` 传入 `UserInfoType#GENDER` 时，返回类型有误的问题。
 - 修复自动登录时偶现崩溃的问题。
 
-## 版本 V1.5.1 Dev 2025-1-24（开发版）
+## v1.5.1 Dev 2025-1-24（开发版）
 
-### 修复
+#### 修复
 
 - 修复设置 `ChatOptions#setCustomOSPlatform` 不生效的问题。
 - 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
 
-## 版本 V1.5.0 Dev 2025-1-10（开发版）
+## v1.5.0 Dev 2025-1-10（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 用户加入聊天室可获取如下信息：
   1. 聊天室当前人数：新增  `Chatroom#memberCount` 方法获取。有用户加入或离开聊天室时，当前聊天室人数会更新。
@@ -91,48 +169,48 @@
   - 废弃原来的回调 `ChatroomListener#onMutelistAdded`。
 - 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
 
-### 优化
+#### 优化
 
 - 废弃 `ChatOptions` 传入字符串的构造函数，新增传入 [AppParam](initialization.html#初始化) 的构造方法。
-- [发送前回调](/document/server-side/callback_presending.html)时修改的[消息扩展字段](message_send_receive.html#使用消息扩展字段)，会同步到发送方。
+- [发送前回调](/document/server-side/callback_presending.html)时修改的 [消息扩展字段](message_extension.html)，会同步到发送方。
 - 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
 - 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
 - 优化部分数据库操作。
 
-### 修复
+#### 修复
 
 - 修复置顶的单聊消息被撤回后，该消息未能及时地从置顶消息缓存（`Conversation#getPinnedMessages`）中移除的问题。
 - 修复调用 [PushManager#getSilentModeForConversations](/document/harmonyos/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
 - 修复极端情况下因网络异常导致的 Crash。
 - 修复多次设置 `ChatMessage#setMessageStatusCallback` 时导致崩溃的问题。
 
-## 版本 V1.4.2 Dev 2024-11-04（开发版）
+## v1.4.2 Dev 2024-11-04（开发版）
 
-### 优化
+#### 优化
 
 - 优化 [ChatManager#fetchHistoryMessages](message_retrieve.html#从服务器获取指定会话的消息) 中自动下载缩略图的逻辑。
 
-### 修复
+#### 修复
 
 - 修复消息扩展属性中不支持其他平台整型、浮点型等数据类型的问题。
 
-## 版本 V1.4.1 Dev 2024-10-28（开发版）
+## v1.4.1 Dev 2024-10-28（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 基于 1.4.0 版本，在 DevEco Studio NEXT Release(5.0.3.900) 下重新编译。
 
-### 优化
+#### 优化
 
 - 优化分片上传逻辑。
 
-### 修复
+#### 修复
 
 - 修复 SDK 内部监听网络变化时偶现崩溃的问题。
 
-## 版本 V1.4.0 Dev 2024-09-30（开发版）
+## v1.4.0 Dev 2024-09-30（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 新增[置顶消息功能](message_pin.html#消息置顶)。
 - 新增根据多个消息类型[搜索本地消息](message_search.html)功能。
@@ -159,16 +237,16 @@
 - 支持文件分片上传。
 - 支持[从服务端单向删除聊天室漫游消息](message_delete.html#单向删除服务端的历史消息)。
 
-### 优化
+#### 优化
 
 - 支持 x86_64 架构。
 - 从服务端拉取群组时，不再先清除本地群组，而是将拉取的群组与本地对比，将本地现有群组进行更新，将新增部分在本地插入。若要清除本地群组信息，可以调用 `GroupManager#clearAllLocalGroups` 方法。
 - 构建附件消息时，SDK 内部会读取文件长度，并设置给 `fileLength` 参数。
 - 设置和获取用户属性的接口，包括[设置当前用户的属性、获取单个或多个用户的用户属性和获取指定用户的指定用户属性](userprofile.html)，超过调用频率限制时，会上报错误码 `4` (`ChatError#EXCEED_SERVICE_LIMIT`)。
 
-## 版本 V1.3.0 Dev 2024-09-10（开发版）
+## v1.3.0 Dev 2024-09-10（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 新增[群成员自定义属性](group_members.html#管理群成员的自定义属性)功能：
   - `setMemberAttributes`：设置群成员自定义属性。
@@ -184,11 +262,11 @@
   - `ChatroomListener#onAttributesUpdate`：聊天室自定义属性有更新。
   - `ChatroomListener#onAttributesRemoved`：聊天室自定义属性被移除。
 
-### 优化
+#### 优化
 
 - 适配在 HarmonyOS NEXT 应用中使用 HarmonyOS APK 的 SDK 加密数据库。
 
-### 修复
+#### 修复
 
 - 修复 CMD 消息不能设置 action 的问题；
 - 修复消息不能设置 JSON 格式数据的问题；
@@ -199,9 +277,9 @@
 
 **注意**：SDK V1.3.0 采用官方推荐的字节码构建方式，使用之后版本需要 DevEco Studio 升级到 5.0.3.502 及以上，并需要工程支持该构建模式。详见[快速开始](quickstart.html)。
 
-## 版本 V1.2.0 Dev 2024-07-11（开发版）
+## v1.2.0 Dev 2024-07-11（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 新增 `getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](conversation_list.html#一次性获取本地所有会话)。 
 - 新增[表情回复 Reaction](reaction.html) 功能：
@@ -223,28 +301,29 @@
   - `UserInfoManager#updateUserInfo`：设置和修改当前用户自己的属性信息。
   - `UserInfoManager#fetchUserInfoById`：获取指定用户的属性信息。
 
-## 版本 V1.1.0 Dev 2024-07-01（开发版）
+## v1.1.0 Dev 2024-07-01（开发版）
 
-### 新增特性
+#### 新增特性
 
 - 新增[修改消息](message_modify.html)功能。
-- 新增[自定义消息](message_send_receive.html#发送自定义类型消息)功能。
-- 新增[合并转发消息](message_send_receive.html#发送和接收合并消息)功能。
+- 新增 [发送](message_send.html#发送自定义类型消息) 和 [接收自定义消息](message_receive.html#接收自定义类型消息)功能。
+- 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息](message_receive.html#接收合并消息) 功能。
 - 支持 [HarmonyOS 推送](/document/harmonyos/push/push_overview.html)能力。
 
-### 优化
+#### 优化
 
 - `ChatClient#init` 方法中新增 `Context` 参数。
 - 修改 SDK 文件路径到应用级的应用文件路径下。
 
-## 版本 V1.0.0 Dev 2024-06-7（开发版）
+## v1.0.0 Dev 2024-06-7（开发版）
 
-### 新增特性
+#### 新增特性
 
 环信即时通讯 HarmonyOS SDK 支持单聊、群组聊天和聊天室聊天场景，实现了以下特性：
 
 - 支持消息特性：
-  - [发送和接收消息](message_send_receive.html)；
+  - [发送消息](message_send.html)；
+  - [接收消息](message_receive.html)；
   - [获取历史消息](message_retrieve.html)；
   - [撤回消息](message_recall.html)；
   - [消息回执](message_receipt.html)；

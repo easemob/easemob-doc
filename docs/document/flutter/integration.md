@@ -1,4 +1,4 @@
-# 集成 SDK
+# 添加依赖
 
 本文介绍如何将环信即时通讯 IM SDK 集成到你的 Flutter 项目中。
 
@@ -49,7 +49,7 @@ iOS 需要 iOS 12.0 以上版本。
 
 打开文件 `quick_start/ios/Runner.xcodeproj`，选择 **TARGETS > General > Deployment info**, 设置 iOS 版本为 12.0。
 
-### 集成 SDK
+### 添加依赖
 
 ```shell
 cd quick_start

@@ -27,21 +27,31 @@
 :::tip
 1. 若使用该 API，需将 SDK 版本升级至 V4.1.6 版本或以上。
 2. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需联系环信商务。**
-3. 对于单聊消息，从服务器拉取历史消息时会读取服务端的消息已读和送达状态。该功能默认关闭，如果需要，需升级至 4.11.0 版本，并联系环信商务开通。
-4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见 [IM 套餐包功能对比](/product/product_package_feature.html)。
+3. 自 4.11.0 版本起，获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态。该功能默认关闭，如果需要，请联系环信商务开通。
+4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 :::
 
 ```javascript
-connection.getHistoryMessages({
-  targetId: 'targetId', // 单聊为对端用户 ID，群组聊天为群组 ID。
-  chatType: 'groupChat', // 会话类型：单聊、群组聊天和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
-  pageSize: 20, // 每次获取的消息数量，取值范围为 [1,50]，默认值为 `20`。
-  searchDirection: 'down', // 消息搜索方向。`up` 表示按消息时间戳递减的方向获取，即先获取最新消息；`down` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
+conn.getHistoryMessages({
+  // 单聊为对端用户 ID，群组聊天为群组 ID。
+  targetId: 'targetId', 
+  // 会话类型：单聊、群组聊天和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+  chatType: 'groupChat', 
+  // 每次获取的消息数量，取值范围为 [1,50]，默认值为 `20`。
+  pageSize: 20, 
+  // 消息搜索方向。
+  // （默认）`up` 表示按消息时间戳递减的方向获取，即先获取最新消息。
+  // `down` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
+  searchDirection: 'up', 
   searchOptions: {
-    from: 'message sender userID', // 消息发送方的用户 ID。该参数仅用于群组聊天。 
-    msgTypes: ['txt'], // 要获取的消息类型的数组。若不传值，会获取所有类型的消息。
-    startTime: new Date('2023,11,9').getTime(), // 查询的起始时间戳，单位为毫秒。
-    endTime: new Date('2023,11,10').getTime(), // 查询的结束时间戳，单位为毫秒。
+    // 消息发送方的用户 ID。该参数仅用于群组聊天。 
+    from: 'message sender userID', 
+    // 要获取的消息类型的数组。若不传值，会获取所有类型的消息。
+    msgTypes: ['txt'], 
+    // 查询的起始时间戳，单位为毫秒。
+    startTime: new Date('2023,11,9').getTime(), 
+    // 查询的结束时间戳，单位为毫秒。
+    endTime: new Date('2023,11,10').getTime(), 
   },
 });
 ```
@@ -56,11 +66,14 @@ let options = {
   targetId: "user1",
   // 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
   pageSize: 20,
-  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
+  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串（''），从最新消息开始。
+  // 后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
   cursor: -1,
   // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室
   chatType: "groupChat",
-  // 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
+  // 消息搜索方向。
+  // （默认）`up` 表示按消息时间戳递减的方向获取，即先获取最新消息。
+  // `down` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
   searchDirection: "up",
 };
 WebIM.conn

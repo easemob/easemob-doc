@@ -68,7 +68,7 @@ ChatClient.getInstance()
     direction, // 搜索方向
     timestamp, // 搜索消息的时间戳，从该时间戳开始按照搜索方向 `direction` 搜索。
     count: 20, // 请求的消息数量
-    sender: "", // 消息发送者
+    senders: "", // 消息发送者 // 从 v1.11.0 支持传入多个发送方
     isChatThread: false, // 是否是子区消息。子区消息只在子区中使用。
     searchScope: ChatMessageSearchScope.All, // 搜索范围，详见 `ChatMessageSearchScope` 类型。
   })
@@ -150,3 +150,36 @@ ChatClient.getInstance()
     console.warn(e);
   });
 ```
+
+## 消息关键字搜索规则
+
+调用以下消息搜索 API 搜索不同类型的消息时，其中的 `keywords` 参数对应不同的内容。
+
+- [根据关键字搜索本地数据库中单个会话中指定用户发送的消息](#根据关键字搜索会话中的用户发送的消息)。
+- [根据关键字搜索消息时，可以选择搜索范围在所有会话中进行消息搜索](#根据搜索范围搜索所有会话中的消息)。
+- [根据关键字搜索消息时，可以选择搜索范围在当前会话中进行消息搜索](#根据搜索范围搜索当前会话中的消息)。
+
+### 只搜索消息内容
+
+|消息类型 | 关键字匹配的消息内容 | 关键字搜索内容示例 |
+| :-------------- | :----- |:----- |
+|文本消息  |  `ChatTextMessageBody.content`      | 文本消息的实际内容“你好世界”。|
+|图片消息  |   `ChatFileMessageBody.displayName`     | 图片文件名“photo.jpg”|
+|语音消息  |   `ChatFileMessageBody.displayName`    | 语音文件名“audio.amr”|
+|视频消息  |   `ChatFileMessageBody.displayName`     | 视频文件名“video.mp4”|
+|文件消息  | `ChatFileMessageBody.displayName`       |文件名“report.pdf”|
+|位置消息  |   `ChatLocationMessageBody.address`     | 地址\建筑物名称“北京市朝阳区\国贸大厦”|
+|自定义消息|    `ChatCustomMessageBody.event`    | 自定义事件名“gift”|
+|合并消息  |`ChatCombineMessageBody.title` + `ChatCombineMessageBody.summary`    | 标题\摘要“聊天记录\包含5条消息”|
+
+### 只搜索扩展信息
+
+若只搜索消息的扩展属性（`attributes`）JSON 字符串，`keywords` 字段匹配用户自定义添加的扩展属性，例如：
+
+```json
+{"key1":"value1", "key2":"value2"}
+```
+
+### 全搜索
+
+同时搜索消息内容和扩展信息，任一匹配即返回。

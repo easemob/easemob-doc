@@ -1,4 +1,4 @@
-# 集成 SDK
+# 添加依赖
 
 本文介绍如何将环信即时通讯 IM SDK 集成到你的 React Native 项目中。
 
@@ -7,7 +7,7 @@
 - React Native 0.66.5 or above
 - NodeJs 16 or above (Recommended 18 or above)
 
-## 集成到项目中
+## 添加 SDK 至项目
 
 打开终端，添加依赖到项目中：
 

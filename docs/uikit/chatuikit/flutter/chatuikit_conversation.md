@@ -2,27 +2,6 @@
 
 <Toc />
 
-会话列表 `ConversationsView` 是 `ChatUIKit` 提供的主要组件, 用于展示当前用户的所有会话，包含单聊和群组聊天（不包括聊天室），并且提供会话搜索、删除、置顶和免打扰功能。单条会话展示用户会话列表，包括会话名称、最后一条消息、最后一条消息的时间以及置顶和禁言状态等。
-
-`ConversationsView` 可以直接使用，也可以通过[路由](chatuikit_advancedusage.html#路由的使用)使用。
-
-对于单聊和群聊, 会话展示的名称为你设置的 Profile 中的昵称，若未获取到昵称，则展示 ID；会话头像为你设置的 Profile 中的头像，如果没有设置，则使用默认头像。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/flutter/custom_conversation_list.png" title="会话列表" />
-</ImageGallery>
-
-## 添加会话列表
-
-添加会话列表时，只需要将 `ConversationsView` 添加到页面上即可。
-
-```dart
-@override
-Widget build(BuildContext context) {
-  return const ConversationsView();
-}
-```
-
 ## 自定义会话列表
 
 如果需要自定义会话列表，可以修改以下参数：
@@ -39,7 +18,7 @@ Widget build(BuildContext context) {
 | final ConversationsViewItemLongPressHandler? onItemLongPressHandler | 长按会话列表的回调，如果不设置默认会弹出默认的长按菜单。如果设置长按时会把默认的弹出菜单项传给你，你需要调整后返回来，返回来的数据会用于菜单显示，如果返回 `null` 将不会显示菜单。 |
 | final String? searchBarHideText | 搜索框中默认展示的文字内容。|
 | final bool enableSearchBar | 是否使用搜索。<br/> - （默认）`true`：使用；<br/> - `false`：不使用。|
-| final Widget? listViewBackground | 列表为空时展示的背景图。|
+| final Widget? emptyBackground | 列表为空时展示的背景图。|
 | final bool enableAppBar | 是否开启 AppBar，默认开启。关闭后将不再显示 AppBar，传入的 AppBar 也不再生效。|
 | final String? attributes | 扩展参数，会传入到下一个页面。|
 | final ChatUIKitViewObserver? viewObserver | 用于刷新页面的 Observer。 |

@@ -23,9 +23,9 @@ environment:
 - iOS: 在 `<project root>/ios/Runner/Info.plist` 中添加以下权限。
 
 ```xml
-NSPhotoLibraryUsageDescription
-NSCameraUsageDescription
-NSMicrophoneUsageDescription
+  <key>NSPhotoLibraryUsageDescription</key>
+  <key>NSCameraUsageDescription</key>
+  <key>NSMicrophoneUsageDescription</key>
 ```
 
 - Android: `em_chat_uikit` 已经在 `AndroidManifest.xml` 中添加以下权限, 你不需要再重复添加。
@@ -49,14 +49,29 @@ flutter create chat_uikit_demo --platforms=android,ios
 
 ### 第二步 添加依赖
 
+#### 远程依赖
+
 进入项目目录，添加最新版 `em_chat_uikit`：
 
 ```bash
 cd chat_uikit_demo
-flutter pub add em_chat_uikit
+flutter pub add em_chat_uikit:2.3.0
 flutter pub get
 ```
 
+#### 本地依赖
+
+在 Flutter 项目根目录下，在 `pubspec.yaml` 文件的 `dependencies` 部分添加 `em_chat_uikit` 的本地依赖。具体操作示例如下：
+
+```text
+dependencies:
+ em_chat_uikit:
+  path: /Users/XXX/Workspace/Flutter/uikit_repo/easemob-uikit-flutter
+```
+
+:::tip
+`path` 指向本地的 `em_chat_uikit` 目录, 支持绝对路径或相对于项目根目录的相对路径。
+:::
 
 ### 第三步 初始化
 
@@ -67,10 +82,9 @@ flutter pub get
 // 导入头文件
 import 'package:em_chat_uikit/chat_uikit.dart';
 ...
-
 void main() {
   ChatUIKit.instance
-      .init(options: Options(appKey: appkey, autoLogin: false))
+      .init(options: Options.withAppKey(appkey, autoLogin: false))
       .then((value) {
     runApp(const MyApp());
   });
@@ -86,7 +100,7 @@ void main() {
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录单群聊 UIKit。
 :::
 
-- [使用用户 ID 和密码登录](/product/enable_and_configure_IM.html#创建-im-用户)：
+- [使用用户 ID 和密码登录](/product/console/operation_user.html#创建用户)：
 
 ```dart 
 ChatUIKit.instance.loginWithPassword(userId: userId, password: password);
@@ -94,9 +108,9 @@ ChatUIKit.instance.loginWithPassword(userId: userId, password: password);
 
 - 使用用户 ID 和 token 登录：   
 
-为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
-在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ```dart
 ChatUIKit.instance.loginWithToken(userId: userId, token: token);
@@ -131,21 +145,29 @@ ChatUIKit.instance.loginWithToken(userId: userId, token: token);
 ```dart
 import 'package:em_chat_uikit/chat_uikit.dart';
 import 'package:flutter/material.dart';
-
+//必须填写 appkey、currentUserId、currentUserPwd 和 chatterId 常量 
 const appkey = '';
 const currentUserId = '';
 const currentUserPwd = '';
 const chatterId = '';
 void main() {
   ChatUIKit.instance
-      .init(options: Options(appKey: appkey, autoLogin: false))
+      .init(options: Options.withAppKey(appkey, autoLogin: false))
       .then((value) {
     runApp(const MyApp());
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // 创建本地化实例
+  final ChatUIKitLocalizations _localization = ChatUIKitLocalizations();
 
   @override
   Widget build(BuildContext context) {
@@ -155,9 +177,15 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      // 添加本地化支持
+      supportedLocales: _localization.supportedLocales,
+      localizationsDelegates: _localization.localizationsDelegates,
+      localeResolutionCallback: _localization.localeResolutionCallback,
+      locale: _localization.currentLocale,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
       onGenerateRoute: (settings) {
-        return null;
+        // 使用 ChatUIKitRoute 来处理路由
+        return ChatUIKitRoute().generateRoute(settings);
       },
     );
   }
@@ -181,44 +209,53 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextButton(
-              onPressed: () {
-                if (ChatUIKit.instance.isLogged()) {
-                  ChatUIKit.instance.logout().then((value) => setState(() {}));
-                } else {
-                  ChatUIKit.instance
-                      .loginWithPassword(
-                          userId: currentUserId, password: currentUserPwd)
-                      .then((value) => setState(() {}));
-                }
-              },
-              child: ChatUIKit.instance.isLogged()
-                  ? const Text('Logout')
-                  : const Text('Login'),
-            ),
-            if (ChatUIKit.instance.isLogged())
-              const Expanded(child: ChatPage()),
-          ],
+        child: FutureBuilder<bool>(
+          future: ChatUIKit.instance.isLoginBefore(),
+          builder: (context, snapshot) {
+            // 数据未就绪时，返回空内容
+            if (!snapshot.hasData) {
+              return const SizedBox.shrink();
+            }
+
+            // 数据就绪后，获取登录状态
+            final isLoggedIn = snapshot.data!;
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () async {
+                    if (await ChatUIKit.instance.isLoginBefore()) {
+                      await ChatUIKit.instance.logout();
+                      setState(() {});
+                    } else {
+                      await ChatUIKit.instance.loginWithPassword(
+                        userId: currentUserId,
+                        password: currentUserPwd,
+                      );
+                      setState(() {});
+                      // 登录成功后自动跳转到聊天页面
+                      if (mounted) {
+                        ChatUIKitRoute.pushOrPushNamed(
+                          context,
+                          ChatUIKitRouteNames.messagesView,
+                          MessagesViewArguments(
+                            profile: ChatUIKitProfile.contact(id: chatterId),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  child: isLoggedIn
+                      ? const Text('Logout')
+                      : const Text('Login'),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
-  }
-}
-
-class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
-
-  @override
-  State<ChatPage> createState() => _ChatPageState();
-}
-
-class _ChatPageState extends State<ChatPage> {
-  @override
-  Widget build(BuildContext context) {
-    return MessagesView(profile: ChatUIKitProfile.contact(id: chatterId));
   }
 }
 ```

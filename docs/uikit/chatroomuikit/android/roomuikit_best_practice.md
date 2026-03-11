@@ -40,7 +40,7 @@ ChatroomUIKitClient.getInstance().login(YourAppUser, token, onSuccess = {}, onEr
 
 ## 初始化聊天室视图
 
-1. 获取聊天室列表，加入指定的聊天室。除此之外，你还可以在环信即时通讯云控制台上[创建聊天室](/product/enable_and_configure_IM.html#创建聊天室)，获取聊天室 ID。
+1. 获取聊天室列表，加入指定的聊天室。除此之外，你还可以在环信控制台上 [创建聊天室](/product/console/operation_chatroom.html#创建聊天室)，获取聊天室 ID。
 
 2. 加载聊天室视图 `ComposeChatroom`，传入的参数包括聊天室 ID、布局参数、聊天室所有者的用户 ID 及一些选项。
 
@@ -65,4 +65,4 @@ ChatroomUIKitClient.getInstance().registerRoomResultListener(this)
 
 ## 参考
 
-若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/Android/ChatroomDemo)。
+若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/Android/ChatroomDemo) 或 [Gitee 地址](https://gitee.com/easemob-code/ChatroomDemo/tree/dev/Android/ChatroomDemo)。

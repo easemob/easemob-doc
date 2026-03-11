@@ -55,13 +55,13 @@ cd my-app
 - 通过 npm 安装，运行以下命令：
 
 ```bash
-npm install easemob-chat-uikit --save
+npm install easemob-chat-uikit mobx-react-lite --save
 ```
 
 - 通过 yarn 安装，运行以下命令：
 
 ```bash
-yarn add easemob-chat-uikit
+yarn add easemob-chat-uikit mobx-react-lite
 ```
 
 ### 第三步 使用 easemob-chat-uikit 组件构建应用
@@ -71,6 +71,7 @@ yarn add easemob-chat-uikit
 ```javascript
 // App.js
 import React, { Component, useEffect } from "react";
+import { observer } from "mobx-react-lite";
 import {
   Provider,
   Chatroom,
@@ -89,23 +90,25 @@ const ChatroomApp = observer(() => {
     if (client.addEventHandler) {
       client.addEventHandler("chatroom", {
         onConnected: () => {
-          console.log("登录成功");
+          console.log("已建立连接");
         },
+        onDisconnected: () => {
+          console.log("连接已断开");
+        }
       });
     }
   }, [client]);
 
   const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
   const login = () => {
     client
       .open({
         user: userId,
-        pwd: password,
-        //accessToken: '',
+        accessToken: token,
       })
       .then((res) => {
-        console.log("获取token成功");
+        console.log("登录成功");
       });
   };
   return (
@@ -128,10 +131,10 @@ const ChatroomApp = observer(() => {
             ></input>
           </div>
           <div>
-            <label>password</label>
+            <label>token</label>
             <input
               onChange={(e) => {
-                setPassword(e.target.value);
+                setToken(e.target.value);
               }}
             ></input>
           </div>

@@ -44,9 +44,9 @@ let option = {
 conn.joinGroup(option).then(res => console.log(res))
 ```
 
-任何用户均可申请入群，是否需要群主和群管理员审批，取决于 `approval` 选项的设置：
-- `approval` 为 `false` 时，用户可直接加入群组，无需群主和群管理员审批。其他群成员会收到 `membersPresence` 事件。
-- `approval` 为 `true` 时，群主和群管理员审批后，用户才能加入群组。群主和群管理员会收到 `requestToJoin` 事件。
+任何用户均可申请入群，是否需要群主和群管理员审批，取决于 `needApprovalToJoin` 选项的设置：
+- `needApprovalToJoin` 为 `false` 时，用户可直接加入群组，无需群主和群管理员审批。其他群成员会收到 `membersPresence` 事件。
+- `needApprovalToJoin` 为 `true` 时，群主和群管理员审批后，用户才能加入群组。群主和群管理员会收到 `requestToJoin` 事件。
     - 若同意用户加入群组，群主或管理员需要调用 `acceptGroupJoinRequest` 方法。
     
     申请人会收到 `acceptRequest` 事件且加入群组，其他成员会收到 `membersPresence` 事件。
@@ -106,7 +106,7 @@ conn.removeGroupMember(option).then(res => console.log(res))
 - 批量移出群成员，示例代码如下：
 
 ```javascript
-connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
+conn.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 ```
 
 ### 管理群成员自定义属性
@@ -134,7 +134,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
         },
     }   
 
-    WebIM.conn.setGroupMemberAttributes(options).then((res) => {
+    conn.setGroupMemberAttributes(options).then((res) => {
         console.log(res)
     }).catch((e) => {
         console.log(e)
@@ -153,7 +153,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
         userId: 'userId'
     }   
 
-    WebIM.conn.getGroupMemberAttributes(options).then((res) => {
+    conn.getGroupMemberAttributes(options).then((res) => {
         console.log(res)
     }).catch((e) => {
         console.log(e)
@@ -178,7 +178,7 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
         keys: ['key1', 'key2']
     }   
 
-    WebIM.conn.getGroupMembersAttributes(options).then((res) => {
+    conn.getGroupMembersAttributes(options).then((res) => {
         console.log(res)
     }).catch((e) => {
         console.log(e)
@@ -311,9 +311,9 @@ conn.getGroupAllowlist(option).then(res => console.log(res));
 
 #### 将成员加入群组黑名单
 
-仅群主和群管理员可以调用 `blockGroupMembers` 方法将指定成员添加至群组黑名单。被加入黑名单后，该成员会收到 `removeMember` 事件。其他群成员会收到该成员退出群组的回调，如需该回调，请联系商务开通。黑名单中的成员会被移出群组，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
+仅群主和群管理员可以调用 `blockGroupMembers` 方法将指定成员添加至群组黑名单。被加入黑名单后，该成员会收到 `removeMember` 事件。默认情况下，其他群成员不会收到事件通知。如需该事件，请联系商务开通。
 
-示例代码如下：
+黑名单中的成员会被移出群组，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
 
 ```javascript
 let option = {
@@ -390,8 +390,7 @@ conn.unmuteGroupMember(option).then(res => console.log(res))
 群成员可以调用 `isInGroupMutelist` 方法查看自己是否在群组禁言列表中。
 
 ```javascript
-conn
-    .isInGroupMutelist({ groupId: 'groupId' })
+conn.isInGroupMutelist({ groupId: 'groupId' })
     .then((res) => {
       console.log(res)
     })

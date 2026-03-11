@@ -1,28 +1,14 @@
 export const PUSH_SIDEBAR = [
-    {
-      text: '产品介绍',
-      children: [
-        { text: '产品概述', link: 'push_overview.html' },
-        { text: '产品动态', collapsible: true, children: [
-          { text: '产品功能动态', link: 'push_dynamics.html' },
-          { text: 'Android SDK 发布动态', link: 'push_dynamics_android.html' },
-          { text: 'iOS SDK 发布动态', link: 'push_dynamics_ios.html' },
-        ]},
-        { text: '全球化部署', link: 'push_global_deployment.html' },
-        { text: '接口频率限制', link: 'push_api_call_limitation.html' },
-      ]
-    },
-    {
-      text: '产品定价',
-      children: [
-        { text: '计费说明', link: 'push_billing.html' },
-      ]
-    },
+    { text: '产品概述', link: 'push_overview.html' },
+    { text: '产品动态', link: 'push_dynamics.html' },
+    { text: '全球化部署', link: 'push_global_deployment.html' },
+    { text: '产品定价', link: 'push_billing.html' },
     {
       text: '快速入门',
+      collapsible: true,
       children: [
         { text: '创建产品及应用', link: 'push_createproduct_app.html' },
-        { text: '创建推送', link: 'push_createnotification.html' },
+        { text: '创建推送', link: 'push_task_create.html' },
         { text: '推送任务', link: 'push_task.html' },
         { text: '标签管理', link: 'push_tag_mgmt.html' },
         { text: '证书配置', link: 'push_certificate_config.html' },
@@ -31,6 +17,7 @@ export const PUSH_SIDEBAR = [
     },
     {
       text: 'Android 接入',
+      collapsible: true,
       children: [
         { text: '推送集成说明', link: 'push_integration_note_android' },
         { text: '推送集成过程', link: 'push_integration_process_android' },
@@ -41,6 +28,7 @@ export const PUSH_SIDEBAR = [
     },
     {
       text: 'iOS 接入',
+      collapsible: true,
       children: [
         { text: '推送集成说明', link: 'push_integration_note_ios' },
         { text: '推送集成过程', link: 'push_integration_process_ios' },
@@ -49,7 +37,9 @@ export const PUSH_SIDEBAR = [
     },
     {
       text: '服务端 REST',
+      collapsible: true,
       children: [
+        { text: '服务端 API 概览', link: 'push_api_call_limitation.html' },
         { text: '推送标签管理', link: 'push_by_tag.html' },
         { text: '发送推送通知', link: 'push_send_notification.html' },
         { text: '配置推送通知', link: 'push_notification_config.html' },

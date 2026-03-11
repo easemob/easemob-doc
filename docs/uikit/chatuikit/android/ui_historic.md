@@ -103,7 +103,7 @@ EaseIMKit 提供了 EaseConversationListFragment，需要将其或者其子类�
 ![img](/images/android/easeim.jpeg)
 
 :::tip
-要实现自定义头像及昵称，请参考 [设置头像和昵称](/document/android/userprofile.html#设置当前用户的属性)。
+要实现自定义头像及昵称，请参考 [设置头像和昵称](/document/android/userprofile.html#设置当前用户的所有属性)。
 :::
 
 ### 创建聊天界面
@@ -651,7 +651,7 @@ private void registerConversationType() {
 }
 ```
 
-需要开发者注意的是，自定义的消息类型需要注册到 EaseMessageTypeSetManager 中，具体用法可以参考环信 App 中的 [DemoHelper](https://github.com/easemob/chat-android/blob/master/app/src/main/java/com/hyphenate/easeim/DemoHelper.java) 类中的 `registerConversationType()` 方法，并在初始化时调用 `registerConversationType()` 方法。
+需要开发者注意的是，自定义的消息类型需要注册到 EaseMessageTypeSetManager 中，具体用法可以参考环信 App 中的 [DemoHelper](https://github.com/easemob/chat-android/blob/master/app/src/main/java/com/hyphenate/chatdemo/DemoHelper.java) 类中的 `registerConversationType()` 方法，并在初始化时调用 `registerConversationType()` 方法。
 
 开发者在注册消息类型时，一定要在最后设置默认项（即调用 `setDefaultConversionType()`），并建议将 `EaseTextAdapterDelegate` 设置默认项。如果没有符合的消息类型，EaseIMKit 会选择默认的消息类型进行展示(注：需要展示的消息类型也需要符合默认消息的消息类型，否则会造成 EMMessageBody 强转时报错)。
 

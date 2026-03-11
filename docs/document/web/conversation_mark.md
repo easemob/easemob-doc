@@ -84,7 +84,9 @@ conn.removeConversationMark(options).then(() => {
 
 ```javascript
 const options = {
+  //每页期望获取的会话数量。取值范围为 [1,10]，默认为 10。
   pageSize: 10,
+  // 开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段，SDK 返回最新标记的会话。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
   cursor: '',
   filter: {
     mark: 0

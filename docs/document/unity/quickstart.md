@@ -23,7 +23,6 @@
 
 - Unity Editor 2019.4.28 或以上版本
 - Unity SDK 1.0.5 或以上
-- 目前 Unity SDK 仅支持 x86 指令集及 Intel 芯片。
 - 操作系统与编译器要求：
 
 | 开发平台                | 操作系统版本    | 编译器版本                                                         |
@@ -33,7 +32,7 @@
 | macOS        | macOS 10.0 或以上  |  Xcode 9.0 或以上，Visual Studio for Mac 2019 或以上   |
 | Windows              | Windows 10 或以上 | Microsoft Visual Studio 2019 或以上            |
 
-- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信控制台](https://console.easemob.com/user/login)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 项目设置
@@ -44,7 +43,7 @@
 
 参考以下步骤：
 
-1. 克隆 [chat_unity_demo](https://github.com/easemob/chat_unity_demo) 至本地。
+1. 克隆 `chat_unity_demo` 至本地。详见 [GitHub](https://github.com/easemob/chat_unity_demo) 或 [Gitee](https://gitee.com/easemob-code/chat_unity_demo) 上的示例项目。
 2. 打开 Unity Hub，选择 **Projects** 页签，点击 **Open** 右边的下拉菜单，选择 **Add project from disk**，然后选择步骤 1 中本地路径下的 `chat_unity_quickstart`。这时，**Projects** 列表中显示 **chat_unity_quickstart** 项目。
 3. 单击 **chat_unity_quickstart** 打开项目。
 
@@ -67,21 +66,9 @@
 
 你可以参考以下步骤集成 SDK：
 
-1. [下载 Unity SDK](https://www.easemob.com/download/im)。
+1. [下载 Unity SDK](https://www.easemob.com/download/im#Unity)。
 2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 unitypackage 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
-
-### 集成问题
-
-由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
-
-```csharp
-Multiple plugins with the same name 'libaosl' (found at 'Assets/Plugins/Agora/Agora-RTC-Plugin/Agora-Unity-RTC-SDK/Plugins/x86_64/libaosl.dll' and 'Assets/Plugins/Agora/AgoraChat/Plugins/x64/libaosl.dll'). That means one or more plugins are set to be compatible with Editor. Only one plugin at the time can be used by Editor
-
-```
-要修复该问题，直接移除 `Assets/Plugins/Agora/AgoraChat/Plugins/x64` 下的 `libaosl.dll` 即可。
-
-如欲了解详情，请参见 [声网官网文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
 
 ## 实现发送和接收单聊消息
 
@@ -111,28 +98,15 @@ using AgoraChat.MessageBody;
 在 `InitSDK` 方法中添加以下代码完成 SDK 初始化：
 
 ```csharp
-var options = new Options("appkey"); //将该参数设置为你的 App Key
+Options options = Options.InitOptionsWithAppKey("appkey"); //将该参数设置为你的 App Key
 SDKClient.Instance.InitWithOptions(options);
 ```
 
 ### 4. 创建账号
 
-在 `SignUpAction` 方法尾部添加以下代码，创建即时通讯系统的登录账户，示例代码如下：
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
-```csharp
-SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callback: new CallBack(
-  onSuccess: () => {
-    AddLogToLogText("sign up sdk succeed");
-  },
-  onError: (code, desc) => {
-    AddLogToLogText($"sign up sdk failed, code: {code}, desc: {desc}");
-  }
-));
-```
-
-:::tip
-该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端[调用 Restful API 进行注册](/document/server-side/account_system.html#开放注册单个用户)。若需要使用 Token，需要在你的应用服务器集成[获取 App Token API](/document/server-side/easemob_app_token.html) 和[获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
-:::
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 ### 5. 登录账号
 
@@ -327,3 +301,17 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(this);
 4. 退出登录：直接点击 **Sign out** 退出登录，退出结果会在下方显示。
 5. 接收消息：在 **user id** 文本框中输入接收消息的用户 ID，例如 **quickstart_receiver**，在 **password** 文本框输入密码，点击 **Sign in** 进行登录。登录成功后，下方会显示收到的消息，例如步骤 3 中发送的 ''how are you.''。
 :::
+
+## 常见问题
+
+### SDK 依赖的 Crash 上报库冲突
+
+若在 Windows 平台上由于 Crash 上报使用了 `libaosl.dll` 库，如果同时集成了 Unity Chat SDK 和 AgoraRtcEngine，会有 AOSL 库冲突的问题，在 Unity Editor 中会看到：
+
+```csharp
+Multiple plugins with the same name 'libaosl' (found at 'Assets/Plugins/Agora/Agora-RTC-Plugin/Agora-Unity-RTC-SDK/Plugins/x86_64/libaosl.dll' and 'Assets/Plugins/Agora/AgoraChat/Plugins/x64/libaosl.dll'). That means one or more plugins are set to be compatible with Editor. Only one plugin at the time can be used by Editor
+
+```
+要修复该问题，直接移除 `Assets/Plugins/Agora/AgoraChat/Plugins/x64` 下的 `libaosl.dll` 即可。
+
+如欲了解详情，请参见 [声网官网文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。

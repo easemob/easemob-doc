@@ -13,7 +13,7 @@
 单聊会话已读回执实现的流程如下：
 
 1. 设置 `ChatOptions#requireAck` 为 `true` 开启已读回执功能。
-2. 消息接收方进入会话页面，阅读消息后，调用 `markAllMessagesAsRead` 方法发送会话已读回执。
+2. 消息接收方进入会话页面，阅读消息后，调用 `sendConversationReadAck` 方法发送会话已读回执。
 3. 消息发送方通过监听 `onConversationHasRead` 回调接收会话已读回执。
 
 ## 前提条件
@@ -36,21 +36,19 @@ options.requireAck = true;
 
 2.  接收方发送会话已读回执。
 
-消息接收方进入会话页面，查看会话中是否有未读消息。若有，调用 `markAllMessagesAsRead` 方法发送会话已读回执，没有则不发送。该方法为异步方法，需要捕捉异常。
+消息接收方进入会话页面，查看会话中是否有未读消息。若有，调用 `sendConversationReadAck` 方法发送会话已读回执，没有则不发送。该方法为异步方法，需要捕捉异常。
 
 若会话中存在多条未读消息，建议调用该方法，因为若调用发送消息已读回执方法 `ackMessageRead`，则需要调用多次。
 
 ```typescript
-const convId = ""; // 会话ID。
-const convType = 0; // 会话类型。单聊。
 ChatClient.getInstance()
-  .chatManager.markAllMessagesAsRead(convId, convType)
-  .then(() => {
-    console.log("markAllMessagesAsRead success");
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+      .chatManager.sendConversationReadAck('convId')
+      .then((r) => {
+        console.log(r);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 ```
 
 3. 消息发送方监听会话已读回执的回调。
@@ -71,4 +69,4 @@ ChatClient.getInstance().chatManager.addMessageListener({
 
 ## 会话已读回执和消息未读数
 
-消息接收方调用 `markAllMessagesAsRead` 方法发送会话已读回执，开发者可调用 `ChatConversation#markAllMessagesAsRead` 方法将所有未读消息设置为已读，即将该会话的未读消息数清零。
+消息接收方调用 `sendConversationReadAck` 方法发送会话已读回执，开发者可调用 `ChatConversation#markAllMessagesAsRead` 方法将所有未读消息设置为已读，即将该会话的未读消息数清零。

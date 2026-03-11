@@ -2,16 +2,6 @@
 
 <Toc />
 
-环信单群聊 ChatUIKit 提供 `ContactListPage` 和 `ContactListView` 两种方式方便用户快速集成通讯录页面和自定义通讯录页面。
-
-通讯录页面用于展示通讯录列表，包括联系人搜索，添加联系人，群组列表入口，联系人列表。
-
-昵称在中文或者英文的情况下可以实现按首字母分类。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/page_contact_list.png" title="通讯录" />
-</ImageGallery>
-
 ## 使用示例
 
 - `ContactListPage`：`ChatUIKit` 提供的默认联系人列表页面。页面包含标题栏和联系人列表。应用程序可以采用组件导航（Navigation）跳转到 `ContactListPage`。
@@ -37,7 +27,7 @@ this.pathStack.pushPath({ name: 'ContactListPage' });
 
 示例如下：
 
-1. 编写包含 NavDestination 子组件的页面。
+**步骤一**：编写包含 NavDestination 子组件的页面。
    
 ```typescript
 import {
@@ -94,7 +84,7 @@ export function ContactsPageBuilder() {
 }
 ```
 
-2. 将页面配置到系统配置文件 `route_map.json` 中（参见 [系统路由表](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-navigation-navigation#%E7%B3%BB%E7%BB%9F%E8%B7%AF%E7%94%B1%E8%A1%A8)）。
+**步骤二**：将页面配置到系统配置文件 `route_map.json` 中（参见 [系统路由表](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-navigation-navigation#%E7%B3%BB%E7%BB%9F%E8%B7%AF%E7%94%B1%E8%A1%A8)）。
 
 ```json
 // 1. 工程配置文件 module.json5 中配置 {"routerMap": "$profile:route_map"}
@@ -113,7 +103,7 @@ export function ContactsPageBuilder() {
 }
 ```
 
-3. 跳转到 ContactsPage 页面。
+**步骤三**：跳转到 ContactsPage 页面。
    
 ```typescript
 @Entry

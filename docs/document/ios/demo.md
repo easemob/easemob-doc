@@ -1,6 +1,6 @@
 # 环信即时通讯 IM iOS Demo 
 
-环信即时通讯 IM iOS Demo 提供用户登录、单聊、群组、聊天室、子区、消息(文字、表情、语音、视频、图片、文件等)发送及管理、会话管理、好友管理、用户属性、用户在线状态（Presence）以及实时音视频通话等功能。
+环信即时通讯 IM iOS Demo 提供用户登录、单聊、群组、子区、消息(文字、表情、语音、视频、图片、文件等)发送及管理、会话管理、好友管理、用户属性、用户在线状态（Presence）以及实时音视频通话等功能。
 
 ## 体验 Demo 
 
@@ -21,7 +21,7 @@
   <ImageItem src="/images/uikit/chatuikit/ios/main_contact_list.png" title="通讯录" />
 </ImageGallery>
 
-## 快速跑通 Demo
+## 快速跑通 Demo 源码
 
 ### 开发环境要求
 
@@ -31,12 +31,12 @@
 
 ### 跑通步骤
 
-1. [创建应用](/product/enable_and_configure_IM.html)。 
-2. [获取应用的 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
-3. [创建用户](/product/enable_and_configure_IM.html#创建-im-用户)。
-4. [下载即时通讯 IM Demo 项目源码](https://github.com/easemob/easemob-demo-ios)。
+1. [创建应用](/product/console/app_create.html)。 
+2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
+3. [创建用户](/product/console/operation_user.html#创建用户)。
+4. 从 [GitHub](https://github.com/easemob/easemob-demo-ios) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-ios) 下载即时通讯 IM Demo 项目源码。
 5. 下载完毕，打开 `EaseChatDemo` 目录，运行 `pod install`。
-6. 打开 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件，修改文件中的占位符，`AppKey` 填入步骤 2 获取的 App Key，`ServerHost` 和 `CallKitAppId` 可以填入空字符串。
+6. 打开 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件，修改文件中的占位符，`AppKey` 填入步骤 2 获取的 App Key，`ServerHost`可以填入空字符串。
 7. 使用 XCode 打开 `EaseChatDemo.xcworkspace`，编译运行项目。
 8. 使用注册的用户 ID 和密码登录。
 
@@ -54,7 +54,7 @@ App Server 为 Demo 提供以下功能：
 
 你通过以下步骤部署 App Server：
 
-1. 部署 App Server。详见 [服务端源码](https://github.com/easemob/easemob-im-app-server/tree/dev-demo)。  
+1. 部署 App Server。详见 [GitHub](https://github.com/easemob/easemob-im-app-server/tree/dev-demo) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-appserver/tree/dev-demo) 的服务端源码。  
 2. 在 Demo 工程目录下 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件中，填写 App Server 的域名或 IP 地址。
 3. 在 Demo 工程根目录下 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件中，填写声网AppId。
 

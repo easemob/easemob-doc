@@ -86,7 +86,7 @@
 
 以下为计费示例：
 
-某用户订阅的即时通讯的套餐包为专业版，应用的当月最高 DAU 为 15,000，峰值群组和聊天室数为 110,000 个（免费额度为 100,000）, 当月即时通讯服务费用为 1299 + 1000 + 100 = 2399 元。
+某用户订阅的即时通讯的套餐包为专业版，应用的当月最高 DAU 为 15,000，峰值群组和聊天室数为 100,000 个（免费额度为 100,000）, 当月即时通讯服务费用为 1299 + 1000 = 2299 元。
 
 ### 增值服务费用
 
@@ -100,17 +100,17 @@
 | 扩展单个群成员数上限  | 对单个 App Key 内的所有群组生效 | 预付费   | 3000 人/群，500 元/月  | 8000 人/群，500 元/月  |
 | 扩展单个用户可加入群组数上限 | 对单个 App Key 内的所有用户生效 | 预付费   | 2000 群/人：1000 元/月 | 5000 群/人：1000 元/月 |
 | 群聊消息已读回执   | 功能介绍详见 [群聊消息已读回执](/document/android/message_receipt.html#群聊)。     | 预付费   | 1000 元/月     | — |
-| 全局禁言   | 功能介绍详见 [全局禁言](/document/server-side/user_global_mute.html)。 | 预付费   | 500 元/月    | —    |
+| 全局禁言   | 功能介绍详见 [全局禁言](/document/server-side/user_global_mute_overview.html)。 | 预付费   | 500 元/月    | —    |
 | 回调   | 功能介绍详见 [回调](/document/server-side/callback_overview.html)。    | 预付费   | 1000 元/月   | —     |
 | 回调异常缓存     | 功能介绍详见 [补发回调存储信息接口描述](/document/server-side/callback_postsending.html#补发回调存储信息)。      | 预付费   | 2000 元/月  | 2000 元/月            |
-| 用户在线状态（Presence）订阅   | 功能介绍详见 [用户在线状态订阅](/document/server-side/presence.html)。     | 预付费   | 1000 元/月     | —   |
-| 消息表情回复 Reaction   | 功能介绍详见 [消息表情回复](/document/server-side/reaction.html)。    | 预付费   | 600 元/月     | —    |
-| 子区 Thread    | 功能介绍详见 [管理子区](/document/server-side/group_thread.html#管理子区)。        | 预付费   | 600 元/月    | —     |
+| 用户在线状态（Presence）订阅   | 功能介绍详见 [用户在线状态订阅](/document/server-side/presence_set.html)。     | 预付费   | 1000 元/月     | —   |
+| 消息表情回复 Reaction   | 功能介绍详见 [消息表情回复](/document/server-side/reaction_add.html)。    | 预付费   | 600 元/月     | —    |
+| 子区 Thread    | 功能介绍详见 [管理子区](/document/server-side/group_thread_create.html)。        | 预付费   | 600 元/月    | —     |
 | 消息举报       | 功能介绍详见 [消息举报](/document/android/moderation.html)。       | 预付费   | 500 元/月     | —   |
-| 消息人工审核     | 功能介绍详见 [消息人工审核](https://docs-im.easemob.com/ccim/moderation/censor)。       | 预付费   |1000 元/月     | 1000 元/月            |
+| 消息人工审核     | 功能介绍详见 [消息人工审核](/value-added/moderation/moderation_manual_review.html)。       | 预付费   |1000 元/月     | 1000 元/月            |
 | 质量监控  | 功能介绍详见 [请求质量](request_quality_overview.html)。     | 预付费 | 2000 元/月  | 2000 元/月 |
 
 :::tip
 1. 翻译功能的价格请咨询环信商务。
-2. 内容审核功能的价格详见 [内容审核计费说明](/moderation/moderation_billing_domestic.html)。
+2. 内容审核功能的价格详见 [内容审核计费说明](/value-added/moderation/moderation_billing_domestic.html)。
 :::

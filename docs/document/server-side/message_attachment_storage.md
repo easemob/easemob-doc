@@ -8,82 +8,27 @@
 - 关于消息附件存储时间限制，详见 [消息附件存储文档](/product/message_store.html#历史消息存储)。
 - 若使用该接口，需 **联系环信商务开通**。
 
-**调用频率上限**：100 次/秒/App Key
+## 调用频率上限
 
-## 前提条件
+100 次/秒/App Key
 
-要调用环信即时通讯 REST API，请确保满足以下要求：
-
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
-
-## 认证方式
-
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，必须在请求头部填入如下 `Authorization` 字段：
-
-`Authorization: Bearer YourAppToken`
-
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 仅支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-
-## HTTP 请求
+## 请求 URL
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{username}/chatfiles/lifetime
+PUT https://{host}/{org_name}/{app_name}/users/{username}/chatfiles/lifetime
 ```
 
-#### 路径参数
+| 参数     | 类型   | 是否必需 | 描述                                                        |
+| :------- | :----- | :------- | :---------------------------------------------------------- |
+| `username`  | String    |  是       | 用户 ID。 对该用户指定的消息附件设置存储方式 |
 
-| 参数       | 类型   | 是否必需 | 描述        |
-| :--------- | :----- | :------- | :--------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `username`     | String | 是       | 调用该接口的用户 ID。 | 
+关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
-#### 请求 Header
-
-| 参数           | 类型   | 是否必需 | 描述                                |
-| :------------- | :----- | :------- | :---------------------------------- |
-| `Content-Type` | String | 是       | 内容类型。请填 `application/json`。 |
-| `Accept`        | String | 是       | 内容类型。请填 `application/json`。  |            
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-    
-#### 请求 body
-
-| 参数       | 类型   | 是否必需 | 描述          |
-| :--------- | :----- | :------- | :-------------------------------------------- |
-| `lifetime`      | String   | 是 | 消息附件保存时间：<br/> - （默认）`default`：配置的消息附件的默认有效期；<br/> - `refresh`：刷新消息附件的有效期，相当于重新设置存储时间，延长了存储时长。例如，消息附件可存储 7 天，在存储的第五天时调用了该接口，即将附件的存储时间设置为 7 天，则附件的剩余存储时间为 7 天。该设置可用于延长合并消息的附件存储时间，例如，发送合并消息时，原始图片的存储时间只剩余 1 天，调用该接口时利用该设置可将存储时间延长。<br/> - `forever`：永久有效。 |
-| `chatfile_ids`      | Array   | 是 | 消息附件的文件 UUID，最多可传入 100 个。 | 
-
-## HTTP 响应
-
-#### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数                 | 类型   | 描述            |
-| :------------------- | :----- | :-------------------------------------------- |
-| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
-| `uri`                | String | 请求 URL。                |
-| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
-| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
-| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
-| `action`             | String | 请求方法。                                   |
-| `data`               | JSON   | 是否成功设置消息附件的存储：<br/> - `success`：成功；<br/> - `failed`：失败。 |
-| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
-| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
-
-响应字段及说明详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码)了解可能的原因。
-
-## 示例
-
-#### 请求示例
+## 请求示例
 
 ```shell
 # 将 <YourUserToken> 替换为你的用户 Token
-curl -X PUT -L "http://localhost/{org}/{app}/users/{username}/chatfiles/lifetime" \
+curl -X PUT "http://localhost/{org}/{app}/users/{username}/chatfiles/lifetime" \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer <YourUserToken>" \
 -d '{
@@ -94,7 +39,18 @@ curl -X PUT -L "http://localhost/{org}/{app}/users/{username}/chatfiles/lifetime
     }'
 ```
 
-#### 响应示例
+## 请求 Header 参数
+
+关于 `Content-Type`、`Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
+    
+## 请求 body 参数
+
+| 参数       | 类型   | 是否必需 | 描述          |
+| :--------- | :----- | :------- | :-------------------------------------------- |
+| `lifetime`      | String   | 是 | 消息附件保存时间：<br/> - （默认）`default`：配置的消息附件的默认有效期；<br/> - `refresh`：刷新消息附件的有效期，相当于重新设置存储时间，延长了存储时长。例如，消息附件可存储 7 天，在存储的第五天时调用了该接口，即将附件的存储时间设置为 7 天，则附件的剩余存储时间为 7 天。该设置可用于延长合并消息的附件存储时间，例如，发送合并消息时，原始图片的存储时间只剩余 1 天，调用该接口时利用该设置可将存储时间延长。<br/> - `forever`：永久有效。 |
+| `chatfile_ids`      | Array   | 是 | 消息附件的文件 UUID，最多可传入 100 个。 | 
+
+## 响应示例
 
 ```json
 {
@@ -111,6 +67,30 @@ curl -X PUT -L "http://localhost/{org}/{app}/users/{username}/chatfiles/lifetime
   "applicationName": "XXXX"
 }
 ```
+
+## 响应 body 字段
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中 `data` 字段的说明如下：
+
+| 参数                 | 类型   | 描述            |
+| :------------------- | :----- | :-------------------------------------------- |
+| `data`               | JSON   | 是否成功设置消息附件的存储：<br/> - `success`：成功；<br/> - `failed`：失败。 |
+
+响应包体中的其他字段的说明如下：
+
+| 参数                 | 类型   | 描述            |
+| :------------------- | :----- | :-------------------------------------------- |
+| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
+| `uri`                | String | 请求 URL。                |
+| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
+| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
+| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
+| `action`             | String | 请求方法。                                   |
+| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
+| `applicationName`    | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码)了解可能的原因。
+
 ## 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：

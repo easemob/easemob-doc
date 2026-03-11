@@ -1,7 +1,15 @@
 import { navbar } from 'vuepress-theme-hope'
 
 export const zhNavbar = navbar([
-  { text: '产品简介', link: '/product/introduction.html' },
+  {
+    text: 'V4.x',
+      children: [
+        { text: 'V4.x', link: 'https://doc.easemob.com/product/introduction.html'},
+        { text: 'V3.x', link: 'https://docs-im.easemob.com/ccim/intro'},
+        { text: 'V2.x', link: 'https://docs-im.easemob.com/start/start'}
+      ]
+  },
+  { text: '产品介绍', link: '/product/introduction.html' },
   {
     text: 'UIKit',
     children: [
@@ -11,37 +19,37 @@ export const zhNavbar = navbar([
           {
             text: 'Android',
             icon: '/icon-Android.svg',
-            link: '/uikit/chatuikit/android/chatuikit_overview.html'
+            link: '/uikit/chatuikit/android/beginner_guide.html'
           },
           {
             text: 'iOS',
             icon: '/icon-iOS.svg',
-            link: '/uikit/chatuikit/ios/chatuikit_overview.html'
+            link: '/uikit/chatuikit/ios/beginner_guide.html'
           },
           {
             text: 'Web',
             icon: '/icon-web.svg',
-            link: '/uikit/chatuikit/web/chatuikit_overview.html'
+            link: '/uikit/chatuikit/web/beginner_guide.html'
           },
           {
             text: 'HarmonyOS',
             icon: '/icon-harmonyos.svg',
-            link: '/uikit/chatuikit/harmonyos/chatuikit_overview.html'
+            link: '/uikit/chatuikit/harmonyos/beginner_guide.html'
           },
           {
             text: 'Uniapp',
             icon: '/icon-uni-app.svg',
-            link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
+            link: '/uikit/chatuikit/uniapp/beginner_guide.html'
           },
           {
             text: 'React Native',
             icon: '/icon-ReactNative.svg',
-            link: '/uikit/chatuikit/react-native/chatuikit_overview.html'
+            link: '/uikit/chatuikit/react-native/beginner_guide.html'
           },
           {
             text: 'Flutter',
             icon: '/icon-flutter.svg',
-            link: '/uikit/chatuikit/flutter/chatuikit_overview.html'
+            link: '/uikit/chatuikit/flutter/beginner_guide.html'
           }
         ]
       },
@@ -78,7 +86,27 @@ export const zhNavbar = navbar([
     ]
   },
   {
-    text: 'SDK/REST 集成',
+    text: 'CallKit',
+    children: [
+      {
+        text: 'Android',
+        icon: '/icon-Android.svg',
+        link: '/callkit/android/beginner_guide.html'
+      },
+      {
+        text: 'iOS',
+        icon: '/icon-iOS.svg',
+        link: '/callkit/ios/beginner_guide.html'
+      },
+      {
+        text: 'Web',
+        icon: '/icon-web.svg',
+        link: '/callkit/web/beginner_guide.html'
+      },
+    ]
+  },
+  {
+    text: 'SDK',
     children: [
       {
         text: '平台',
@@ -86,33 +114,28 @@ export const zhNavbar = navbar([
           {
             text: 'Android',
             icon: '/icon-Android.svg',
-            link: '/document/android/quickstart.html'
+            link: '/document/android/beginner_guide.html'
           },
           {
             text: 'iOS',
             icon: '/icon-iOS.svg',
-            link: '/document/ios/quickstart.html'
+            link: '/document/ios/beginner_guide.html'
           },
           {
             text: 'Web',
             icon: '/icon-web.svg',
-            link: '/document/web/quickstart.html'
+            link: '/document/web/beginner_guide.html'
           },
           {
             text: 'HarmonyOS',
             icon: '/icon-harmonyos.svg',
-            link: '/document/harmonyos/quickstart.html'
+            link: '/document/harmonyos/beginner_guide.html'
           },
           {
             text: 'Windows',
             icon: '/icon-windows.svg',
-            link: '/document/windows/quickstart.html'
+            link: '/document/windows/beginner_guide.html'
           },
-          {
-            text: 'Linux',
-            icon: '/icon-linux.svg',
-            link: '/document/linux/overview.html'
-          }
         ]
       },
       {
@@ -121,53 +144,35 @@ export const zhNavbar = navbar([
           {
             text: 'React Native',
             icon: '/icon-ReactNative.svg',
-            link: '/document/react-native/quickstart.html'
+            link: '/document/react-native/beginner_guide.html'
           },
           {
             text: 'Flutter',
             icon: '/icon-flutter.svg',
-            link: '/document/flutter/quickstart.html'
+            link: '/document/flutter/beginner_guide.html'
           },
           {
             text: 'Unity',
             icon: '/icon-unity.svg',
-            link: '/document/unity/quickstart.html'
+            link: '/document/unity/beginner_guide.html'
           },
           {
             text: '小程序',
             icon: '/icon-mini-program.svg',
-            link: '/document/applet/overview.html'
+            link: '/document/applet/beginner_guide.html'
           },
           {
             text: 'uni-app',
             icon: '/icon-uni-app.svg',
             link: '/document/applet/uniapp.html'
           },
-          {
-            text: 'Electron',
-            icon: '/icon-Electron.svg',
-            link: '/document/electron/overview.html'
-          }
         ]
       },
-      {
-        text: '服务端',
-        children: [
-          {
-            text: 'REST API',
-            icon: '/icon-platform.svg',
-            link: '/document/server-side/overview.html'
-          },
-          {
-            text: 'Java',
-            icon: '/icon-platform.svg',
-            link: '/document/server-side/java_server_sdk_2.0.html'
-          }
-        ]
-      }
     ]
   },
-  {
+  { text: '服务端', link: '/document/server-side/overview.html'},
+
+ /* {
     text: 'API 参考',
     children: [
       {
@@ -200,6 +205,7 @@ export const zhNavbar = navbar([
           }
         ]
       },
+      
       {
         text: '框架',
         children: [
@@ -218,11 +224,6 @@ export const zhNavbar = navbar([
             icon: '/icon-unity.svg',
             link: 'https://doc.easemob.com/apidoc/unity/annotated.html'
           },
-          {
-            text: 'Electron',
-            icon: '/icon-Electron.svg',
-            link: 'https://downloads.easemob.com/doc/desktop/apidoc/index.html'
-          }
         ]
       },
       {
@@ -247,9 +248,24 @@ export const zhNavbar = navbar([
       }
     ]
   },
+  */
+ /*{
+    text: '内容审核',
+    link: '/product/moderation_overview.html'
+  },
   {
     text: '即时推送',
     link: '/push/push_overview.html'
+  },
+  */
+  {
+    text: '增值服务',
+      children: [
+        { text: '内容审核', link: '/value-added/moderation/moderation_overview.html'},
+        { text: '实时音视频', link: '/callkit/android/beginner_guide.html'},
+        { text: '消息翻译', link: '/value-added/translation/message_translation_android.html'},
+        { text: '即时推送', link: '/value-added/push/push_overview.html'}
+      ]
   },
   // {
   //   text: "私有部署",
@@ -264,6 +280,6 @@ export const zhNavbar = navbar([
   //    },
   //  ],
   // },
-  { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
+  //  { text: '历史版本', link: 'https://docs-im.easemob.com/ccim/intro' },
   // { text: '有奖调研', link: 'https://doc.easemob.com/form/wjx.html' }
 ])

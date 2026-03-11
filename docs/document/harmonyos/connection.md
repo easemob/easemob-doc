@@ -17,13 +17,13 @@ let connectionListener: ConnectionListener = {
     // 长连接断开
   },
   onLogout: (errorCode: number, info: LoginExtInfo): void => {
-    // 触发退出，需要主动调用 ChatClient#logout 方法
+    // 该监听触发后，需要主动调用 ChatClient#logout 方法
   },
   onTokenExpired: (): void => {
     // 使用 token 登录时，token 过期触发。
   },
   onTokenWillExpire: (): void => {
-    // 使用 token 登录时，token 将要过期时触发。
+    // 自 SDK 1.8.0 开始, SDK 会在 token 有效期达到 80% 时触发该回调，之前版本在 token 有效期达到 50% 时触发。
     // 注意：如果本次登录服务器没有离线消息，不会触发该回调。
   },
   onOfflineMessageSyncStart: () => {
@@ -53,4 +53,4 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 - 用户在另一设备登录，将当前设备上登录的用户踢出，提示错误码 206。 
 - 用户登录设备数量超过限制，提示错误码 214。
 - 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限，提示错误码 8。
-- 开启多设备服务后，用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录（错误码 217）。
+- 开启多设备服务后，用户在其他设备上通过调用 API 或者环信控制台将当前设备登录的 ID 强制退出登录（错误码 217）。

@@ -33,7 +33,7 @@ import en from './en.json';
 ></UIKitProvider>;
 ```
 
-在 `en.json` 文件中设置要修改的文本， 可以在[这里](https://github.com/easemob/Easemob-UIKit-web/tree/dev/local) 查看全部文案， 例如：
+在 `en.json` 文件中设置要修改的文本， 可以在 [GitHub](https://github.com/easemob/easemob-uikit-react/tree/dev/local) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-react/tree/dev/local) 中查看全部文案， 例如：
 
 ```json
 {

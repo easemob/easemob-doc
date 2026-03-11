@@ -12,8 +12,8 @@
 
 ## 前提条件
 
-- 有效的环信即时通讯 IM 开发者账号；
-- [创建环信即时通讯 IM 项目并获取 App Key](/product/enable_and_configure_IM.html)；
+- 有效的 [环信即时通讯 IM 开发者账号](/product/console/account_register.html#注册账号)；
+- 在环信控制台[创建应用](/product/console/app_create.html) 并 [获取 App Key](/product/console/app_manage.html#查看应用信息)；
 - [npm](https://www.npmjs.com/get-npm)；
 - SDK 支持 IE 9+、Firefox 10+、Chrome 54+ 和 Safari 6+。
 
@@ -57,21 +57,13 @@ Easemob_quickstart<br>
 }
 ```
 
-### 3. 创建账号
+### 3. 创建用户
 
-1. 在[环信控制台](https://console.easemob.com/user/login)首页的 **应用列表** 中，在目标应用的 **操作** 栏中点击 **管理**。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
-2. 在环信即时通讯云的左侧导航栏中，选择 **应用概览 > 用户认证**。
-   
-3. 在 **用户认证** 页面，点击 **创建IM用户** 按钮，在弹出的对话框中填写用户 ID 和密码，然后点击 **保存**。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
-![img](/images/product/user_create_test.png)
-   
-创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
-
-在生产环境中，若使用 Token 登录，为了安全考虑，你需要在你的应用服务器集成[获取 App Token API](/document/server-side/easemob_app_token.html) 和[获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
-
-### 3. 实现用户界面
+### 4. 实现用户界面
 
 `index.html` 的内容如下。
 
@@ -97,12 +89,11 @@ Easemob_quickstart<br>
                         <input type="text" placeholder="Username" id="userID">
                     </div>
                     <div class="input-field">
-                        <label>Password</label>
-                        <input type="password" placeholder="Password" id="password">
+                        <label>Token</label>
+                        <input type="text" placeholder="Token" id="token">
                     </div>
                     <div class="row">
                         <div>
-                            <button type="button" id="register">register</button>
                             <button type="button" id="login">login</button>
                             <button type="button" id="logout">logout</button>
                         </div>
@@ -127,7 +118,7 @@ Easemob_quickstart<br>
 </html>
 ```
 
-### 4. 实现消息发送与接收
+### 5. 实现消息发送与接收
 
 `index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 `<Your app key>` 替换为你之前获取的 App Key。
 
@@ -135,7 +126,7 @@ Easemob_quickstart<br>
 import WebIM from 'easemob-websdk'
 const appKey = "<Your app key>"
 
-let username, password
+let username, accessToken
 
 // 初始化客户端。相关的参数配置，详见 API 参考中的 `Connection` 类。
 WebIM.conn = new WebIM.connection({
@@ -163,31 +154,12 @@ WebIM.conn.addEventHandler('connection&message', {
 
 // 按钮行为定义。
 window.onload = function () {
-    // 注册。
-    document.getElementById("register").onclick = function(){
-        username = document.getElementById("userID").value.toString()
-        password = document.getElementById("password").value.toString()
-        WebIM.conn
-            .registerUser({ username, password })
-            .then((res) => {
-                document
-                .getElementById("log")
-                .appendChild(document.createElement("div"))
-                .append(`register user ${username} success`);
-            })
-            .catch((e) => {
-                document
-                .getElementById("log")
-                .appendChild(document.createElement("div"))
-                .append(`${username} already exists`);
-            });
-    }
     // 登录。
     document.getElementById("login").onclick = function () {
         username = document.getElementById("userID").value.toString()
-        password = document.getElementById("password").value.toString()
+        accessToken = document.getElementById("token").value.toString()
         WebIM.conn
-            .open({ user: username, pwd: password })
+            .open({ user: username, accessToken })
             .then((res) => {
                 document
                 .getElementById("log")
@@ -234,7 +206,7 @@ import WebIM, { EasemobChat } from 'easemob-websdk'
 ```
 :::
 
-### 5. 运行项目
+### 6. 运行项目
 
 本文使用 webpack 对项目进行打包，并使用 `webpack-dev-server` 运行项目。
 

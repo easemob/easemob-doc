@@ -2,6 +2,12 @@
 
 <Toc />
 
+## 版本 V1.0.1 2025-6-19
+
+### 优化
+
+升级 react-native 至 0.76。
+
 ## 版本 V1.0.0 2023-12-29
 
 ### 新增特性
@@ -9,12 +15,12 @@
 ChatroomUIKit 提供以下功能：
 
 - **通用特性**
-  - [创建聊天室](roomfeature_common.html#创建聊天室)：ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的接口创建聊天室](/document/server-side/chatroom.html#创建聊天室)。
-  - [解散聊天室](roomfeature_common.html#解散聊天室)：ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 IM SDK 的接口解散聊天室](/document/server-side/chatroom.html#解散聊天室)。
+  - [创建聊天室](roomfeature_common.html#创建聊天室)：ChatroomUIKit 不提供创建聊天室的功能，你可以[调用即时通讯 IM SDK 的接口创建聊天室](/document/server-side/chatroom_create.html)。
+  - [解散聊天室](roomfeature_common.html#解散聊天室)：ChatroomUIKit 不提供解散聊天室的功能，你可以[调用即时通讯 IM SDK 的接口解散聊天室](/document/server-side/chatroom_delete.html)。
   - [离开聊天室](roomfeature_common.html#离开聊天室)：聊天室中的成员可自行离开聊天室，聊天室所有者也可以将成员移出聊天室。
   - [发送弹幕消息](roomfeature_common.html#发送弹幕)：用户在聊天室中向其他参与者发送文字和表情的消息。
   - [打赏](roomfeature_common.html#打赏)：用户通过赠送虚拟礼物，向聊天室中的主播或其他用户表达赞赏或者支持
-  - [全局广播](roomfeature_common.html#全局广播)：向 App 内所有在线聊天室中的所有用户发送相同的消息或通知。
+  - [全局广播](roomfeature_common.html#全局广播)：向 App 内所有活跃聊天室（聊天室至少存在一个成员，而且曾经至少发送过一条消息）中的用户发送消息或通知。
   - [未读消息数](roomfeature_common.html#未读消息数)：在一个聊天室中用户尚未读取的消息数量。
   - [已禁言列表](roomfeature_common.html#已禁言列表)：记录被禁止发言用户的列表。当用户违反了聊天室的规则时，聊天室所有者将其禁言，即添加至已禁言列表。
   - [暗黑模式](roomfeature_common.html#暗黑模式)：ChatroomUIKit 默认风格为明亮模式，切换为暗黑模式后，聊天室界面中所有元素将替换为暗黑风格设计，提供用户舒适的视觉体验。

@@ -5,7 +5,9 @@
 环信即时通讯 IM 提供消息表情回复（下文统称 “Reaction”）功能。用户可以在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量确认投票。
 
 :::tip
-目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+1. **开通方式**：要使用 Reaction 功能，需在 [环信控制台](https://console.easemob.com/user/login) 开通。具体操作步骤详见 [环信控制台文档](/product/console/basic_message.html#消息表情回复)。
+2. **适用范围**：目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+3. **使用限制**：关于 Reaction 的详细使用限制，详见 [产品使用限制](limitation.html) 文档。
 :::
 
 ## 技术原理
@@ -95,7 +97,9 @@ conn
   .getReactionDetail({
     messageId: "messageId",
     reaction: "reaction",
+    // cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
     cursor: null,
+    //pageSize：每页返回的数量。默认为 20，最大为 100。
     pageSize: 20,
   })
   .then((res) => {
@@ -115,7 +119,7 @@ let options = {
   targetId: "user1",
   // 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
   pageSize: 20,
-  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
+  // cursor：查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
   cursor: -1,
   // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊。
   chatType: "groupChat",

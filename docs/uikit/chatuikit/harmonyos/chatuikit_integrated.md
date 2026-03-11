@@ -9,7 +9,7 @@
 - DevEco Studio NEXT Release（5.0.3.900）及以上；
 - HarmonyOS SDK API 12 及以上；
 - HarmonyOS NEXT.0.0.71 或以上版本的模拟器或者真机；
-- 有效的环信即时通讯 IM 开发者账号和 App Key，请参见 [环信控制台文档](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，请参见 [环信控制台文档](/product/console/app_manage.html#查看应用信息)。
 
 ## 集成单群聊 UIKit
 
@@ -27,7 +27,7 @@ ohpm install @easemob/chatuikit
 
 ### 本地依赖
 
-从 GitHub 获取 [UIKit 源码](https://github.com/easemob/easemob-uikit-harmonyos)，按照下面的方式集成：
+从 [GitHub](https://github.com/easemob/easemob-uikit-harmonyos) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-harmonyos) 获取 UIKit 源码，按照下面的方式集成：
 
 - 点击 **Import**，选择 **Import Module**，导入 `chatuikit` 模块。
 - 在项目 Module 中引入 `chatuikit` 模块。

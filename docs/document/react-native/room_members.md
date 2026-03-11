@@ -30,7 +30,7 @@
 
 ### 获取聊天室成员列表
 
-所有聊天室成员均可调用 `fetchChatRoomMembers` 方法获取当前聊天室成员列表。
+所有聊天室成员均可调用 `fetchChatRoomMembers` 方法获取当前聊天室成员列表。服务器不对成员进行排序，因此，返回的成员列表不保证有序。
 
 示例代码如下：
 
@@ -103,15 +103,15 @@ ChatClient.getInstance()
 以下两类成员即使离线也不会退出聊天室：
 
 - 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
-- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)时拉入的用户从未登录过。
+- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_create.html)时拉入的用户从未登录过。
+
+若开启了聊天室多端多设备功能，聊天室白名单中的成员在一台设备上离线重连后，无法收到聊天室的消息。若使该设备收到收到聊天室的消息，需要登录后手动调用 API 加入聊天室。
 
 ### 管理聊天室黑名单
 
 #### 将成员加入聊天室黑名单
 
-仅聊天室所有者和管理员可调用 `blockChatRoomMembers` 方法将指定成员添加至黑名单。
-
-被加入黑名单后，该成员收到 `onRemoved` 回调，其他成员收到 `onMemberExited` 回调。
+仅聊天室所有者和管理员可调用 `blockChatRoomMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `onRemoved` 回调。默认情况下，其他群成员不会收到事件通知。如需该事件，请联系商务开通。
 
 被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室，黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单列表。
 
@@ -294,6 +294,21 @@ ChatClient.getInstance()
   .catch((reason) => {
     console.log("get mute members fail.", reason);
   });
+```
+
+#### 查看当前用户是否在聊天室禁言列表
+
+聊天室所有成员可查看自己是否在聊天室禁言列表中。示例代码如下：
+
+```ts
+    ChatClient.getInstance()
+      .roomManager.isMemberInChatRoomMuteList('roomId123')
+      .then((v) => {
+        console.log('自己是否在聊天室禁言列表中:', v);
+      })
+      .catch((error) => {
+        console.log('检查自己是否在聊天室禁言列表中失败:', error);
+      });
 ```
 
 ### 开启和关闭聊天室全员禁言
