@@ -9,6 +9,12 @@
 
 ## v4.19.0 Dev 2026-2-2（开发版）
 
+#### 新增特性
+
+支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+
+目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
+
 #### 优化
 
 SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用此版本的 IM SDK，请注意需搭配相应版本的声网 RTC SDK ShengwangRtcEngine_iOS 4.6.0 或以上版本。

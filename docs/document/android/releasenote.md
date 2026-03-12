@@ -14,6 +14,12 @@
 
 ## v4.19.0 Dev 2026-2-2（开发版）
 
+#### 新增特性
+
+支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+
+目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
+
 #### 优化
 
 SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。

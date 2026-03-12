@@ -227,7 +227,7 @@ projects:
                 text: Electron
                 link: /document/electron/message.html#接收消息
           - text: 接收流式消息
-            desc: 在单聊和群聊场景中，客户端可接收流式消息。
+            desc: 在单聊和群聊场景中，客户端可接收服务端发送的流式消息。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -235,9 +235,12 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /document/ios/message_stream_receive.html
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/message_stream_receive.html        
+              - icon: /sdk/web.svg
+                text: Web
+                link: /document/web/message_stream_receive.html
+              - icon: /sdk/applet.svg
+                text: 小程序
+                link: /document/applet/message_stream_receive.html      
           - text: 获取消息
             desc: 从环信消息服务器获取漫游消息，或者从本地获取消息。
             sdks:

@@ -4,6 +4,14 @@
 
 ## 4.19.1 Dev 2026-2-27（开发版）
 
+#### 新增特性
+
+支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+
+目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
+
+#### 修复
+
 修复发送文件、图片等附件消息时，上传失败的问题。
 
 ## 4.19.0 Dev 2026-2-4（开发版）
