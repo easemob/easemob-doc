@@ -72,7 +72,7 @@
    - [内容审核](/value-added/moderation/moderation_billing_domestic.html)
    - [消息推送](/value-added/push/push_billing.html)
    - 大模型开发平台：当前服务仅限灰度测试，如需使用请联系环信商务开通。
-   - 消息翻译：如需使用请联系环信商务开通。
+   - [消息翻译](/value-added/translation/message_translation_android.html)：如需使用请联系环信商务开通。
    
 
 
