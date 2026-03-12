@@ -2,7 +2,7 @@ export const PUSH_SIDEBAR = [
     { text: '产品概述', link: 'push_overview.html' },
     { text: '产品动态', link: 'push_dynamics.html' },
     { text: '全球化部署', link: 'push_global_deployment.html' },
-    { text: '产品定价', link: 'push_billing.html' },
+    { text: '计费策略', link: 'push_billing.html' },
     {
       text: '快速入门',
       collapsible: true,
