@@ -67,7 +67,7 @@
 
 接收流式消息分片后，可获取分片内容及相关信息。
 
-#### 分片信息
+#### 当前分片信息
 
 `EMChatMessage` 的 `streamChunk` 属性（`EMStreamChunk` 类型）封装了流式消息分片的全部信息，包括文本内容、传输状态、错误码及自定义字段等。
 
@@ -86,7 +86,7 @@
 - `EMStreamChunkStatusComplete`：流式消息传输完成，当前分片为末片。
 - `EMStreamChunkStatusError`：流式消息传输过程中发生错误。
 
-#### 分片合并后的内容
+#### 合并后分片信息
 
 SDK 会自动按分片顺序在本地合并内容并更新消息体。
 
