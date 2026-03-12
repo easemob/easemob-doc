@@ -78,7 +78,7 @@ String? cursor = groups.cursor;
 
    群主或群管理员收到 `EMGroupEventHandler#onRequestToJoinReceivedFromGroup` 回调：
 
-   - 若同意加入群组，需要调用 `acceptInvitation` 方法。
+   - 若同意加入群组，需要调用 `acceptJoinApplication` 方法。
 
    申请人会收到 `EMGroupEventHandler#onRequestToJoinAcceptedFromGroup` 回调，其他群成员会收到 `EMGroupEventHandler#onMemberJoinedFromGroup` 和`EMGroupEventHandler#onMembersJoinedFromGroup` 回调。
 
