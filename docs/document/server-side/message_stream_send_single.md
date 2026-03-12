@@ -24,7 +24,7 @@
 
 ![img](/images/server-side/message_stream_flowchart.png)
 
-## 调用发送单聊消息 API
+## 调用发送单聊流式消息 API
 
 ### 调用频率上限
 
@@ -42,9 +42,9 @@ POST https://{host}/{org_name}/{app_name}/stream_message/user
 
 例如，一条流式消息包含三个消息分片，各分片的请求示例如下。
 
-若发送的是单片流式消息（即整个消息只有一个分片），则需将 `finish` 参数设为 `true` 以表示传输结束；如有必要，可同时传入 `finishReason`。
-
 - 发送首个消息分片：
+
+当发送单片流式消息（即整个消息仅由一个分片组成）时，需传入 `finish` 参数设为 `true`，以表示本次传输结束。如有需要，还可同时传入 `finishReason` 参数，用于说明传输结束的原因。
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
