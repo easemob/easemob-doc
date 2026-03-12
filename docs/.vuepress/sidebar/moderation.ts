@@ -1,15 +1,15 @@
 export const MODERATION_SIDEBAR = [
      { text: "产品概述", link: "/value-added/moderation/moderation_overview.html" },
      {
-          text: "计费策略",
+          text: "计费说明",
           collapsible: true,
           children: [
             { 
-              text: "国内计费策略",
+              text: "国内计费说明",
               link: "/value-added/moderation/moderation_billing_domestic.html",
             },
             {
-              text: "海外计费策略",
+              text: "海外计费说明",
               link: "/value-added/moderation/moderation_billing_overseas.html",
             },
           ],
