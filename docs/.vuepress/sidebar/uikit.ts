@@ -28,24 +28,38 @@ const chatUikitSidebar = [
   { text: "添加依赖", link: "chatuikit_integrated.html", only: ["ios"] },  
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["ios"] }, 
   {
-        text: "会话列表",
-        collapsible: true,
-        children: [
-          { text: "自定义会话列表页面", link: "chatuikit_custom_conversation_list.html" },
-          { text: "拦截事件与可重载的方法", link: "chatuikit_conversation_intercept_event_overload_method.html" },
-        ], 
-      only: ["ios"]
+      text: "会话列表",
+      collapsible: true,
+      children: [
+        { text: "页面介绍", link: "chatuikit_custom_conversation_list_intro.html" },
+        {
+          text: "自定义页面",
+          collapsible: true,
+          children: [
+               { text: "基本设置", link: "chatuikit_custom_conversation_list_basic.html" },
+               { text: "高级设置", link: "chatuikit_custom_conversation_list_advanced.html" },
+          ],
+        },
+      ],
+    only: ["ios"],
   },
   {
-        text: "消息",
-        collapsible: true,
-        children: [
-          { text: "自定义聊天页面", link: "chatuikit_custom_chat.html" },
-          { text: "实现新类型自定义消息 Cell", link: "chatuikit_custom_cell.html" },
-          { text: "拦截事件与可重载的方法", link: "chatuikit_chat_intercept_event_overload_method.html" },
-        ], 
-      only: ["ios"]
-  },
+      text: "消息",
+      collapsible: true,
+      children: [
+        { text: "页面介绍", link: "chatuikit_custom_chat_intro.html" },
+        {
+          text: "自定义页面",
+          collapsible: true,
+          children: [
+               { text: "基本设置", link: "chatuikit_custom_chat_basic.html" },
+               { text: "高级设置", link: "chatuikit_custom_chat_advanced.html" },
+             ],
+          },
+          { text: "自定义消息输入", link: "chatuikit_custom_chat_ inputmenu.html" },
+      ],
+    only: ["ios"],
+  }, 
   {
         text: "通讯录",
         collapsible: true,
@@ -86,8 +100,22 @@ const chatUikitSidebar = [
       text: "会话列表",
       collapsible: true,
       children: [
-        { text: "页面介绍", link: "chatuikit_conversationlist_intro.html" },
-        { text: "自定义页面", link: "chatuikit_conversation.html" },
+        { text: "页面介绍", link: "chatuikit_custom_conversation_list_intro.html" },
+        {
+          text: "自定义页面",
+          collapsible: true,
+          children: [
+            { text: "自定义搜索栏", link: "chatuikit_custom_conversation_list_searchbar.html" },
+            {
+              text: "自定义会话列表",
+              collapsible: true,
+              children: [
+               { text: "基本设置", link: "chatuikit_custom_conversation_list_basic.html" },
+               { text: "高级设置", link: "chatuikit_custom_conversation_list_advanced.html" },
+              ],
+            },
+         ],
+        },
       ],
     only: ["web"],
   },
@@ -95,8 +123,9 @@ const chatUikitSidebar = [
       text: "消息",
       collapsible: true,
       children: [
-        { text: "页面介绍", link: "chatuikit_chat_intro.html" },
-        { text: "自定义页面", link: "chatuikit_chat.html" },
+        { text: "页面介绍", link: "chatuikit_custom_chat_intro.html" },
+        { text: "自定义消息列表", link: "chatuikit_custom_chat.html" },
+        { text: "自定义消息输入", link: "chatuikit_custom_chat_ inputmenu.html" },
       ],
     only: ["web"],
   },
@@ -109,6 +138,8 @@ const chatUikitSidebar = [
       ],
     only: ["web"],
   },
+  { text: "用户信息提供", link: "chatuikit_provider.html", only: ["web"]},
+  { text: "rootStore", link: "chatuikit_store.html", only: ["web"]},
   { text: "音视频通话", link: "chatuikit_video.html", only: ["web"]},
   { text: "国际化", link: "chatuikit_internationalization.html", only: ["web"]},
   { text: "主题", link: "chatuikit_theme.html", only: ["web"]},
@@ -130,14 +161,13 @@ const chatUikitSidebar = [
    { type: "separator", only: ["android", "harmonyos", "react-native", "flutter"]} as any,
   { text: "添加依赖", link: "chatuikit_dependency.html", only: ["android", "harmonyos"] },
   { text: "初始化", link: "chatuikit_initialization.html", only: ["android", "harmonyos"] },
-  { text: "页面标题栏", link: "chatuikit_titlebar.html", only: ["android"] },
+  { text: "页面标题栏", link: "chatuikit_custom_titlebar.html" },
   { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["react-native", "flutter"] },
   {
       text: "会话列表",
       collapsible: true,
       children: [
         { text: "页面介绍", link: "chatuikit_custom_conversation_list_intro.html" },
-        { text: "自定义页面", link: "chatuikit_conversation.html", except: ["android"]},
         {
           text: "自定义页面",
           collapsible: true,
@@ -150,11 +180,9 @@ const chatUikitSidebar = [
                { text: "基本设置", link: "chatuikit_custom_conversation_list_basic.html" },
                { text: "高级设置", link: "chatuikit_custom_conversation_list_advanced.html" },
              ],
-            only: ["android"],
           },
           ],
-        only: ["android"],
-  },
+        },
       ],
     only: ["android", "harmonyos", "react-native", "flutter"],
   },
@@ -163,11 +191,11 @@ const chatUikitSidebar = [
       collapsible: true,
       children: [
         { text: "页面介绍", link: "chatuikit_custom_chat_intro.html" },
-        { text: "自定义页面", link: "chatuikit_chat.html", except: ["android"]},
         {
           text: "自定义页面",
           collapsible: true,
           children: [
+            { text: "自定义搜索栏", link: "chatuikit_custom_chat_message_search.html", only: ["react-native"] },
             {
               text: "自定义消息列表",
               collapsible: true,
@@ -175,13 +203,11 @@ const chatUikitSidebar = [
                { text: "基本设置", link: "chatuikit_custom_chat_basic.html" },
                { text: "高级设置", link: "chatuikit_custom_chat_advanced.html" },
              ],
-            only: ["android"],
           },
             { text: "自定义底部输入框", link: "chatuikit_custom_chat_ inputmenu.html" },
           ],
-        only: ["android"],
-  },
-      ],
+        }, 
+      ], 
     only: ["android", "harmonyos", "react-native", "flutter"],
   },
   {
@@ -196,6 +222,16 @@ const chatUikitSidebar = [
   { text: "用户信息提供", link: "chatuikit_userinfo.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "联系人详情", link: "chatuikit_custom_contact_details.html", only: ["android", "react-native", "flutter"]},
   { text: "群详情", link: "chatuikit_custom_group_details.html", only: ["android", "react-native", "flutter"] },
+  { text: "自定义数据模型", link: "chatuikit_custom_data_model.html", only: ["react-native"] },
+  {
+      text: "自定义资源",
+      collapsible: true,
+      children: [
+        { text: "自定义文本", link: "chatuikit_custom_text.html" },
+        { text: "自定义图标", link: "chatuikit_custom_icon.html" },
+      ],
+    only: ["react-native"],
+  },
   { text: "国际化", link: "chatuikit_internationalization.html", only: ["android", "react-native"] },
   { text: "主题", link: "chatuikit_theme.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["android", "react-native", "flutter"] },
