@@ -259,9 +259,9 @@ const ChatApp = () => {
 
 全局功能配置 `features` 默认启用 UIKit 全部功能，但支持在组件级别进行覆盖，组件内若存在相同配置，将以组件配置为准。
 
-#### conversationList
+#### 会话列表
 
-会话列表功能配置。
+会话列表功能配置 `conversationList`。
 
 | 参数                      | 类型      | 默认值 | 描述                 |
 | :------------------------ | :-------- | :----- | :------------------- |
@@ -272,9 +272,9 @@ const ChatApp = () => {
 | `item.muteConversation`   | Boolean | `true` | 是否允许免打扰会话   |
 | `item.presence`           | Boolean | `true` | 是否显示在线状态     |
 
-#### chat
+#### 聊天
 
-聊天页面功能配置。
+聊天页面功能配置 `chat`。
 
 - **header（标题栏）**
 
@@ -320,9 +320,9 @@ const ChatApp = () => {
 | `video`       | Boolean | `true` | 是否支持发送视频     |
 | `contactCard` | Boolean | `true` | 是否支持发送名片     |
 
-#### chatroom
+#### 聊天室
 
-聊天室功能配置。
+聊天室功能配置 `chatroom`。
 
 | 参数                 | 类型      | 默认值 | 描述             |
 | :------------------- | :-------- | :----- | :--------------- |

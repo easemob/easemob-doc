@@ -146,7 +146,6 @@ const chatUikitSidebar = [
       ],
     only: ["web"],
   },
-  { text: "用户信息提供", link: "chatuikit_provider.html", only: ["web"]},
   { text: "rootStore", link: "chatuikit_store.html", only: ["web"]},
   { text: "音视频通话", link: "chatuikit_video.html", only: ["web"]},
   { text: "国际化", link: "chatuikit_internationalization.html", only: ["web"]},
