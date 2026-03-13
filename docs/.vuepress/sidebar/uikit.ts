@@ -211,7 +211,7 @@ const chatUikitSidebar = [
                { text: "高级设置", link: "chatuikit_custom_chat_advanced.html" },
              ],
           },
-            { text: "自定义消息输入", link: "chatuikit_custom_chat_inputmenu.html" },
+          { text: "自定义消息输入", link: "chatuikit_custom_chat_inputmenu.html" },
           ],
         }, 
       ], 
