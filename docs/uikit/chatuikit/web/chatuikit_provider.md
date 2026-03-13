@@ -191,9 +191,9 @@ const ChatApp = () => {
 
 ## UIKitProvider 属性概览
 
-### initConfig
+### 初始化配置 
 
-初始化配置，包含 SDK 连接和 UIKit 行为相关的配置。
+初始化配置 `initConfig`，包含 SDK 连接和 UIKit 行为相关的配置。
 
 | 参数 | 类型 | 默认值 | 描述 |
 | :-- | :-- | :-- | :-- |
@@ -213,9 +213,9 @@ const ChatApp = () => {
 | `useOwnUploadFun` | Boolean | `false` | 是否使用自定义上传函数 |
 | `countMemberJoinToUnread` | Boolean | `false` | 聊天室成员加入消息是否计入未读数。`false`：不计入，`true`：计入 |
 
-### local
+### 国际化配置
 
-国际化配置参数，你可以在初始化时配置 `i18next` 的参数。
+对于国际化配置 `local`，你可以在初始化时配置 `i18next` 的参数。
 
 | 参数 | 类型 | 描述 |
 | :-- | :-- | :-- |
@@ -255,9 +255,9 @@ const ChatApp = () => {
 
 所有界面文本可在 [GitHub 文档](https://github.com/easemob/Easemob-UIKit-web/tree/dev/local) 中查看。
 
-### features
+### 全局功能配置
 
-全局功能配置，UIKit 默认展示全部功能。若组件内存在相同配置，则优先采用组件配置。
+全局功能配置 `features` 默认启用 UIKit 全部功能，但支持在组件级别进行覆盖，组件内若存在相同配置，将以组件配置为准。
 
 #### conversationList
 
@@ -366,9 +366,9 @@ const ChatApp = () => {
 </Provider>
 ```
 
-### reactionConfig
+### 消息表情回复
 
-消息表情回复功能的表情全局配置。若消息组件内也配置了相同参数，则优先采用组件配置。
+消息表情回复功能的表情全局配置 `reactionConfig`。若消息组件内也配置了相同参数，则优先采用组件配置。
 
 | 参数 | 类型 | 描述 |
 | :-- | :-- | :-- |
@@ -390,9 +390,9 @@ const ChatApp = () => {
 </Provider>
 ```
 
-### theme
+### 主题样式配置
 
-主题样式配置，用于自定义 UIKit 的视觉外观。
+主题样式配置 `theme`，用于自定义 UIKit 的视觉外观。
 
 | 参数 | 类型 | 默认值 | 描述 |
 | :-- | :-- | :-- | :-- |
@@ -421,18 +421,18 @@ const ChatApp = () => {
 </Provider>
 ```
 
-### presenceMap
+### 在线状态图标映射 
 
-在线状态图标映射，用于自定义在线状态的显示图标。
+在线状态图标映射 `presenceMap`，用于自定义在线状态的显示图标。
 
 | 参数             | 类型                         | 描述           |
 | :--------------- | :--------------------------- | :------------- |
-| `Online`         | `string \| HTMLImageElement` | 在线状态图标   |
-| `Offline`        | `string \| HTMLImageElement` | 离线状态图标   |
-| `Away`           | `string \| HTMLImageElement` | 离开状态图标   |
-| `Busy`           | `string \| HTMLImageElement` | 忙碌状态图标   |
-| `Do Not Disturb` | `string \| HTMLImageElement` | 免打扰状态图标   |
-| `Custom`         | `string \| HTMLImageElement` | 自定义状态图标 |
+| `Online`         | `String \| HTMLImageElement` | 在线状态图标   |
+| `Offline`        | `String \| HTMLImageElement` | 离线状态图标   |
+| `Away`           | `String \| HTMLImageElement` | 离开状态图标   |
+| `Busy`           | `String \| HTMLImageElement` | 忙碌状态图标   |
+| `Do Not Disturb` | `String \| HTMLImageElement` | 免打扰状态图标   |
+| `Custom`         | `String \| HTMLImageElement` | 自定义状态图标 |
 
 使用示例如下：
 
