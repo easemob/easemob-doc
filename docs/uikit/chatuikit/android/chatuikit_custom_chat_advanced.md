@@ -389,7 +389,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 builder.setCustomAdapter(CustomMessageAdapter())
 ```
 
-## 相关资源
+## 自定义资源
 
 在 App 工程中，可通过放置同名资源（`drawable`/`layout`/`values`）来覆盖 UIKit 默认实现，从而自定义界面与功能。
 

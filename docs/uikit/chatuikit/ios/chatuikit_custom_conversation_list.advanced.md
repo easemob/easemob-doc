@@ -302,7 +302,7 @@ Appearance.primaryHue = 203/360.0
 Appearance.secondaryHue = 155/360.0
 ```
 
-## 可覆盖资源
+## 自定义资源
 
 #### 图片资源
 
@@ -349,7 +349,6 @@ Appearance.secondaryHue = 155/360.0
 ## 可重载方法
 
 以下组件均实现了 `ThemeSwitchProtocol`，支持深色/浅色模式切换，重载时需考虑主题兼容性。
-
 
 #### ConversationListController
 

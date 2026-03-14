@@ -662,7 +662,7 @@ function AdvancedConversationListScreen({ navigation }) {
 }
 ```
 
-## 自定义图标和文案
+## 自定义资源
 
 - 关于自定义会话列表页面的图标，详见 [自定义图标文档](chatuikit_custom_icon.html)。
-- 关于自定义会话列表页面的文案，详见 [自定义图标文档](chatuikit_custom_text.html)。
+- 关于自定义会话列表页面的文案，详见 [自定义文案文档](chatuikit_custom_text.html)。

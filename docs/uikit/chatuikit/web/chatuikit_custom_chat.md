@@ -399,7 +399,7 @@ import { TextMessage } from 'easemob-chat-uikit';
 | `.cui-message-editor`       | 消息输入容器 |
 | `.cui-header`               | 标题栏                                   |
 
-## Chat 组件属性总览
+## Chat 属性总览
 
 | 参数 | 类型 | 描述 |
 | :-- | :-- | :-- |

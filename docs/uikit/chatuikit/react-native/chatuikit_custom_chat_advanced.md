@@ -701,7 +701,7 @@ const handleRequestShowPinMessage = () => {
 
 关于自定义消息列表的事件监听，详见 [自定义数据模型文档](chatuikit_custom_data_model.html#自定义事件监听器)。
 
-## 自定义图标和文案
+## 自定义资源
 
 - 关于自定义聊天页面的图标，详见 [自定义图标文档](chatuikit_custom_icon.html)。
 - 关于自定义聊天页面的文案，详见 [自定义图标文档](chatuikit_custom_text.html)。

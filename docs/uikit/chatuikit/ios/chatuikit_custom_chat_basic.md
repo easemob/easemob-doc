@@ -12,9 +12,9 @@
 
 ```Swift
         
-        let background = UIImageView(frame: self.messageContainer.bounds)
-        background.image = UIImage(named: "")
-        self.messageContainer.insertSubview(background, at: 0)
+  let background = UIImageView(frame: self.messageContainer.bounds)
+  background.image = UIImage(named: "")
+  self.messageContainer.insertSubview(background, at: 0)
 ```
 
 ## 设置消息条目
@@ -236,6 +236,6 @@ chatVC.messageContainer.addActionHandler(actionHandler: self)
 - **继承重写**：继承 `MessageListController` 并重写其 ViewModel 的相关方法。
 - **通知监听**：监听消息状态变更通知。
 
-## 可重写方法
+## 可重载方法标记
 
 `MessageListController` 及其组件类中的许多方法均标记为 `open`，可通过子类化深度定制业务逻辑。

@@ -1051,7 +1051,7 @@ override open func methodName(parameters) -> ReturnType {
 | `messageAttachmentStatusChanged(message:error:)` | 附件状态变化 | `message`: 消息, `error`: 错误 |
 | `messageReactionChanged(changes:)` | 表情回应变化 | `changes`: 变化数组 |
 
-## 资源替换
+## 自定义资源
 
 在 `Bundle.main` 中添加同名资源即可覆盖默认资源：
 
@@ -1147,3 +1147,7 @@ override open func methodName(parameters) -> ReturnType {
 | `Share Contact` | 国际化资源 | 在 `Bundle.main` 的 Localizable.strings 中添加 key 为 `Share Contact` |
 | `to` | 国际化资源 | 在 `Bundle.main` 的 Localizable.strings 中添加 key 为 `to` |
 | `file_disable` | 国际化资源 | 在 `Bundle.main` 的 Localizable.strings 中添加 key 为 `file_disable` |
+
+## 可重载方法标记
+
+`MessageListController` 及其组件类中的许多方法均标记为 `open`，可通过子类化深度定制业务逻辑。

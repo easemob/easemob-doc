@@ -367,7 +367,7 @@
 | `moreAction` | Object | 更多操作菜单配置 |
 | `ripple` | Boolean | 是否显示涟漪效果 |
 
-## 会话列表页面主题相关变量
+## 主题相关变量
 
 `ConversationList` 组件提供了以下与会话列表页面主题相关的 SCSS 变量。关于如何修改主题，参见 [主题文档](https://github.com/easemob/Easemob-UIKit-web/blob/dev/docs/theme.md)。
 

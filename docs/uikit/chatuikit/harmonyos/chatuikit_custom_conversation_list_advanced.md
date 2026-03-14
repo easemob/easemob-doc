@@ -372,7 +372,7 @@ struct CustomConvListPage {
 | `enable`          | boolean                                                  | 否   | true          | 是否可用。                                                                      |
 | `onMenuClick`     | (id: string\| number, conv: ChatKitConversation) => void | 否   | `undefined` | 点击回调函数，参数为菜单 ID 和当前会话对象。                                    |
 
-### 动态显示菜单项
+#### 动态显示菜单项
 
 左滑菜单需根据会话状态动态显示。UIKit 提供两种方式：
 
@@ -524,7 +524,6 @@ struct CustomConvListPage {
 
 ## 设置消息未读计数图标
 
-// TODO
 会话列表未读提示支持 **数字** 与 **小蓝点** 两种样式，与会话免打扰状态（`ChatKitConversation.isMuted`）相关：
 
 | 会话免打扰状态 | 未读计数样式             |

@@ -108,6 +108,6 @@
         vc.viewModel?.registerEventsListener(listener: self)
 ```
 
-## 设置会话列表空白页面
+## 设置会话列表空页面
 
 会话列表为空时，`ConversationList` 会显示空状态页面。可通过覆盖资源或自定义 `EmptyStateView` 实现自定义样式。
