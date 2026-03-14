@@ -10,7 +10,9 @@
 
 聊天页面通过 `MessageListController` 实现，由标题栏、消息列表和底部输入框组成。
 
-// TODO：添加截图
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_chat.png" title="聊天页面 MessageListController.swift" />
+</ImageGallery>
 
 ### 标题栏
 

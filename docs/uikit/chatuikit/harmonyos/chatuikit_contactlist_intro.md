@@ -9,8 +9,8 @@
 昵称在中文或者英文的情况下可以实现按首字母分类。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/page_contact_list.png" title="通讯录" />
-</ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_contact_list.png" title="通讯录页面 ContactListPage" />
+</ImageGallery> 
 
 ## 创建通讯录页面
 

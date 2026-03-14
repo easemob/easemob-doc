@@ -5,8 +5,8 @@
 你可以自定义联系人列表页面的导航栏、联系人列表 Header、联系人列表和联系人列表项。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller) 上的 `ContactViewController`。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_list.png" title="通讯录" />
-</ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_list.png" title="通讯录页面 ContactViewController.swift" />
+</ImageGallery> 
 
 ## 自定义导航栏
 

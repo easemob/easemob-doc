@@ -10,6 +10,10 @@
 
 会话列表页面通过 `ConversationListPage` 或 `ConversationListView` 实现，由标题栏、搜索栏和会话列表组成。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_conversation_list.png" title="会话列表页面 ConversationListPage" />
+</ImageGallery>
+
 ### 标题栏
 
 `ConversationListPage` 中的标题栏使用 `ComposeTitleBar` 组件，展示当前用户头像、标题和操作菜单。详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。

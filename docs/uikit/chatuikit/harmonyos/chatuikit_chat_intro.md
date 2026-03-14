@@ -10,7 +10,9 @@
 
 聊天页面通过 `ChatPage` 或 `ChatView` 实现，由标题栏、消息列表和底部输入框组成。
 
-// TODO：添加截图
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat.png" title="聊天页面 ChatPage " />
+</ImageGallery>
 
 ### 标题栏
 

@@ -9,7 +9,7 @@
 `ContactsView` 可以直接使用，也可以通过[路由](chatuikit_advancedusage.html#路由的使用)使用。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/flutter/custom_contact_list.png" title="设置联系人列表页面" />
+  <ImageItem src="/images/uikit/chatuikit/flutter/custom_contact_list.png" title="联系人列表页面" />
 </ImageGallery> 
 
 ## 创建通讯录页面

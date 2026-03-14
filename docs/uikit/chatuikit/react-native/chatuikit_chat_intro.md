@@ -14,7 +14,7 @@
 聊天页面通过 `ConversationDetail` 实现，由标题栏 `ConversationDetailNavigationBar`、消息列表 `MessageList` 和底部输入框 `MessageInput` 组成。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_chat.png" title="聊天页面 ConversationDetail" />
+  <ImageItem src="/images/uikit/chatuikit/rn/custom_chat.png" title="聊天页面 ConversationDetail" />
 </ImageGallery>
 
 聊天页面组件是一个复杂的组件，组件结构如下：

@@ -3,7 +3,7 @@
 你可以配置联系人详情页面的导航栏、点击右侧图片显示的联系人操作和联系人详情自定义列表项等。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactinfoviewcontroller) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactinfoviewcontroller) 上的 `ContactInfoViewController`。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_details.png" title="联系人详情页面" />
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_details.png" title="联系人详情页面 ContactInfoViewController.swift" />
 </ImageGallery>
 
 ## 自定义导航栏

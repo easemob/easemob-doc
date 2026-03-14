@@ -6,7 +6,9 @@
 
 会话列表页面通过 `ConversationListController` 实现，由标题栏、搜索栏和会话列表组成。
 
-TODO：添加页面组件图 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_conversation_list.png" title="会话列表页面 ConversationListController.swift" />
+</ImageGallery>
 
 ### 标题栏
 

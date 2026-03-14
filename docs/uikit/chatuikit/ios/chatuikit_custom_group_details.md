@@ -3,7 +3,7 @@
 你可以配置群详情页面的导航栏、点击右侧图片显示的群组操作和群详情自定义列表项等。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/groupinfoviewcontroller) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/groupinfoviewcontroller) 上的 `GroupInfoViewController`。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_group_details.png" title="群详情页面" />
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_group_details.png" title="群详情页面 GroupInfoViewController.swift" />
 </ImageGallery>
 
 ## 自定义导航栏
