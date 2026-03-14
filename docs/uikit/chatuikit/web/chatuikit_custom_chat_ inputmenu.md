@@ -308,6 +308,6 @@ const ChatContainer = () => {
 
 ## 自定义样式
 
-关于聊天页面的底部输入框的自定义样式，详见 [聊天页面的文档说明](chatuikit_custom_chat.html#自定义样式)。
+关于聊天页面的消息输入区的自定义样式，详见 [聊天页面自定义说明](chatuikit_custom_chat.html#chat-组件属性总览)。
 
 

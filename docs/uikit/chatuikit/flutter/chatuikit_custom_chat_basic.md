@@ -83,7 +83,7 @@ MessagesView(
 
 // TODO：添加图片
 
-## 设置消息列表空白页面
+## 设置消息列表空页面
 
 ```dart
 MessagesView(
@@ -106,108 +106,11 @@ MessagesView(
 ## 设置消息条目
 
 对于消息条目，你可以进行自定义设置，例如：
-- 添加自定义消息条目
-- 设置默认的头像和昵称及其样式
+- 设置头像和昵称及其样式
 - 设置消息气泡
 - 设置消息日期
 - 设置长按消息菜单
 - 设置消息事件监听
-
-### 添加自定义消息条目
-
-你可通过自定义布局，实现不同消息类型的个性化展示。
-
-利用 `itemBuilder` 参数可自定义消息条目。该参数类型为 `MessageItemBuilder`，其定义为：
-
-```dart
-typedef MessageItemBuilder = Widget? Function(
-    BuildContext context, 
-    MessageModel model
-);
-```
-
-如果 `itemBuilder` 返回 `null`，消息将使用默认的 `ChatUIKitMessageListViewMessageItem` 进行渲染。
-
-- **自定义内容布局**
-
-以下示例展示了如何为特定自定义消息类型渲染定制内容：
-
-```dart
-MessagesView(
-  profile: profile,
-  itemBuilder: (context, model) {
-    // 根据消息类型返回自定义 Widget
-    if (model.message.bodyType == MessageType.CUSTOM) {
-      // 检查是否是自定义消息类型
-      final customBody = model.message.body as CustomMessageBody;
-      if (customBody.event == 'custom_type') {
-        // 返回自定义 Widget
-        return Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Colors.blue[100],
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '自定义消息',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 4),
-              Text(customBody.params?['content'] ?? ''),
-            ],
-          ),
-        );
-      }
-    }
-    // 返回 null 使用默认渲染
-    return null;
-  },
-)
-```
-
-- **完全自定义消息项**
-
-若需完全自定义消息项的布局（包括头像、昵称等），可返回一个完整的 Widget：
-
-```dart
-MessagesView(
-  profile: profile,
-  itemBuilder: (context, model) {
-    if (model.message.bodyType == MessageType.CUSTOM) {
-      final customBody = model.message.body as CustomMessageBody;
-      if (customBody.event == 'custom_type') {
-        // 返回完整的自定义消息项 Widget
-        return Row(
-          mainAxisAlignment: model.message.direction == MessageDirection.SEND
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.start,
-          children: [
-            if (model.message.direction == MessageDirection.RECEIVE)
-              ChatUIKitAvatar(
-                size: 32,
-                avatarUrl: ChatUIKitProvider.instance
-                    .getProfileById(model.message.from!)?.avatarUrl,
-              ),
-            SizedBox(width: 8),
-            Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.blue[100],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text('自定义消息内容'),
-            ),
-          ],
-        );
-      }
-    }
-    return null;
-  },
-)
-```
 
 ### 设置头像和昵称
 

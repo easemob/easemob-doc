@@ -1,4 +1,4 @@
-# 消息列表的基本设置
+# 消息列表设置
 
 消息列表是聊天界面的核心组件，基于 `MessageList` 组件实现。本文介绍如何通过 `Chat` 组件的 `messageListProps` 实现消息列表和消息条目的设置。
 
@@ -68,7 +68,7 @@
 
 // TODO：添加消息列表背景的图片
 
-## 设置消息列表空白页面
+## 设置消息列表空页面
 
 通过 `Chat` 组件的 `renderEmpty` 属性可以自定义空内容组件：
 
@@ -396,10 +396,10 @@ import { TextMessage } from 'easemob-chat-uikit';
 | `.cui-messageList-msgItem`  | 消息条目                                 |
 | `.cui-message-base-content` | 消息气泡                                 |
 | `.cui-message-base-time`    | 消息时间                                 |
-| `.cui-message-editor`       | 底部输入框容器 |
+| `.cui-message-editor`       | 消息输入容器 |
 | `.cui-header`               | 标题栏                                   |
 
-## Chat props 总览
+## Chat 组件属性总览
 
 | 参数 | 类型 | 描述 |
 | :-- | :-- | :-- |

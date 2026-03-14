@@ -17,7 +17,9 @@
         self.messageContainer.insertSubview(background, at: 0)
 ```
 
-## 设置头像和昵称
+## 设置消息条目
+
+### 设置头像和昵称
 
 头像和昵称的显示由 `Appearance.chat.contentStyle` 控制：
 
@@ -32,7 +34,7 @@ Appearance.chat.contentStyle = [.withAvatar]
 Appearance.avatarRadius = .large
 ```
 
-## 设置消息气泡
+### 设置消息气泡
 
 #### 设置消息气泡样式
 
@@ -63,7 +65,7 @@ Appearance.chat.sendTextColor = UIColor.white
 Appearance.chat.receiveTextColor = UIColor.black
 ```
 
-1. 支持添加表情回复（`MessageReaction`）和话题（`MessageThread`）。**添加前，需在 [环信控制台](https://console.easemob.com/user/login) 开通。** 
+2. 支持添加表情回复（`MessageReaction`）和话题（`MessageThread`）。**添加前，需在 [环信控制台](https://console.easemob.com/user/login) 开通。** 
 
 ```swift
         //是否显示消息话题。
@@ -86,12 +88,10 @@ Appearance.chat.receiveTextColor = UIColor.black
 
 支持两种修改方式：
 
-- 直接修改源码：
-
 - **直接修改源码**（本地集成）：修改 `MessageBubbleMultiCorner`（多角气泡）或 `MessageBubbleWithArrow`（带箭头气泡）中的渲染逻辑。
 - **全局主题配置**（推荐）：通过修改 `Appearance` 中的色调值（hue）统一调整，主要修改 `primaryHue`。
 
-## 设置消息时间
+### 设置消息时间
 
 #### 设置消息时间格式
 

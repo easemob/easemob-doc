@@ -4,7 +4,7 @@
 
 如果默认的聊天页面不能满足需求，你可以通过修改源码 `ChatUIKit/modules/Chat` 进行自定义开发。
 
-## 修改消息气泡样式
+## 设置消息气泡样式
 
 以修改发送的消息气泡背景为例，修改源码 `ChatUIKit/modules/Chat/index/components/Message/messageItem.vue` 文件中的样式：
 

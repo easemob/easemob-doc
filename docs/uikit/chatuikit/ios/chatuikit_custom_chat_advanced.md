@@ -266,10 +266,10 @@ actions.removeAll { $0.tag = "xxx"}
 Appearance.chat.messageLongPressedActions = actions
 ```
 
-### 自定义菜单样式
+### 设置菜单样式
 
 - 图标替换/隐藏：详见 [Chat/Cells 图片和国际化资源表](#chatcells-图片和国际化资源表)。
-- 文字颜色：详见 [主题色的说明](#chatuikit_theme.html#切换为自定义主题)。
+- 文字颜色：详见 [主题色的说明](chatuikit_theme.html#切换为自定义主题)。
 - 修改菜单项文字大小：
   菜单样式属于全局统一配置，目前不支持对单个菜单项的文字大小进行单独修改。
   若需调整菜单项的文字大小及其相关子视图的尺寸，可通过修改全局字体样式实现。例如，更新 `UIFont.theme.labelSmall` 来统一控制菜单中对应级别的文字外观：

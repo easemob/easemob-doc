@@ -336,7 +336,7 @@ messageItemMenusProvider: (message: ChatKitMessage) => {
 }
 ```
 
-### 自定义消息条目
+## 自定义消息条目
 
 `ChatMessageItemProvider` 用于完全自定义整个消息条目，包括头像、昵称、时间戳、消息状态等。
 

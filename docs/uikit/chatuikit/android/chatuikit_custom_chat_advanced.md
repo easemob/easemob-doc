@@ -298,6 +298,97 @@ override fun onPreMenu(helper: ChatUIKitChatMenuHelper?, message: ChatMessage?) 
 | 微信风格（PopupWindow）    | 在 App 工程中**同名覆盖** `layout/uikit_item_select_text_pop.xml`，修改 `tv_pop_func` 的 `android:textSize` 属性。 |
 | 底部弹窗风格（BottomSheet） | 在 App 工程中**同名覆盖**以下样式之一： <br/> - `ease_chat_extend_menu_item_title` <br/> - `ease_chat_extend_menu_horizontal_item_title` <br/>调整其中的 `textAppearance` 或 `textSize` 属性。（对应布局文件：`uikit_chat_menu_item.xml` / `uikit_chat_menu_item_horizontal.xml`） |
 
+## 添加自定义消息条目
+
+你可以自定义消息条目的内容，即各种消息类型的自定义消息布局。
+
+开发者可以继承 `ChatUIKitRow`、`ChatUIKitRowViewHolder` 和 `ChatUIKitMessagesAdapter` 实现自己的 `CustomTypeChatRow`、`CustomChatTypeViewViewHolder` 和 `CustomMessageAdapter`，然后将 `CustomMessageAdapter` 设置到 `UIKitChatFragment#Builder#setCustomAdapter` 中。
+
+1. 创建 `CustomTypeChatRow` ，继承自 `ChatUIKitRow`。
+
+```kotlin
+class CustomTypeChatRow(
+    private val context: Context,
+    private val attrs: AttributeSet? = null,
+    private val defStyle: Int = 0,
+    isSender: Boolean = false
+): ChatUIKitRow(context, attrs, defStyle, isSender) {
+
+    override fun onInflateView() {
+        inflater.inflate(if (!isSender) R.layout.layout_row_received_custom_type
+        else R.layout.layout_row_sent_custom_type,
+            this)
+    }
+
+    override fun onSetUpView() {
+        (message?.getMessage()?.body as? ChatTextMessageBody)?.let { txtBody ->
+            contentView.text = txtBody.message
+        }
+    }
+}
+```
+
+2. 创建 `CustomChatTypeViewViewHolder`，继承自 `ChatUIKitRowViewHolder`。
+
+```kotlin
+class CustomChatTypeViewViewHolder(
+    itemView: View
+): ChatUIKitRowViewHolder(itemView) {
+
+    override fun onBubbleClick(message: EaseMessage?) {
+        super.onBubbleClick(message)
+        // Add click event
+    }
+}
+```
+
+3. 创建自定义适配器 `CustomMessageAdapter` 继承自 `ChatUIKitMessagesAdapter`，重写 `getItemNotEmptyViewType` 和 `getViewHolder` 方法。
+
+```kotlin
+class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
+
+    override fun getItemNotEmptyViewType(position: Int): Int {
+        // 根据消息类型设置自己的 itemViewType。
+        mData?.get(position)?.getMessage()?.let { msg ->
+            msg.getStringAttribute("type", null)?.let { type ->
+                if (type == CUSTOM_TYPE) {
+                    return if (msg.direct() == ChatMessageDirection.SEND) {
+                        VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME
+                    } else {
+                        VIEW_TYPE_MESSAGE_CUSTOM_VIEW_OTHER
+                    }
+                }
+            }
+        }
+        // 如果要使用默认的，返回 super.getItemNotEmptyViewType(position) 即可。
+        return super.getItemNotEmptyViewType(position)
+    }
+
+    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<EaseMessage> {
+        // 根据返回的 viewType 返回对应的 ViewHolder。
+        if (viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME || viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_OTHER) {
+            CustomChatTypeViewViewHolder(
+                CustomTypeChatRow(parent.context, isSender = viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME)
+            )
+        }
+        // 返回自定义的 ViewHolder 或者 使用默认的 super.getViewHolder(parent, viewType)。
+        return super.getViewHolder(parent, viewType)
+    }
+
+    companion object {
+        private const val CUSTOM_TYPE = "custom_type"
+        private const val VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME = 1000
+        private const val VIEW_TYPE_MESSAGE_CUSTOM_VIEW_OTHER = 1001
+    }
+}
+```
+
+4. 添加 `CustomMessageAdapter` 到 `UIKitChatFragment#Builder`。
+
+```kotlin
+builder.setCustomAdapter(CustomMessageAdapter())
+```
+
 ## 相关资源
 
 在 App 工程中，可通过放置同名资源（`drawable`/`layout`/`values`）来覆盖 UIKit 默认实现，从而自定义界面与功能。
