@@ -32,7 +32,7 @@ const chatUikitSidebar = [
       text: "会话列表",
       collapsible: true,
       children: [
-        { text: "页面介绍", link: "chatuikit_custom_conversation_list_intro.html" },
+        { text: "页面介绍", link: "chatuikit_conversation_list_intro.html" },
         {
           text: "自定义会话列表",
           collapsible: true,
@@ -48,7 +48,7 @@ const chatUikitSidebar = [
       text: "消息",
       collapsible: true,
       children: [
-        { text: "页面介绍", link: "chatuikit_custom_chat_intro.html" },
+        { text: "页面介绍", link: "chatuikit_chat_intro.html" },
         {
           text: "自定义消息列表",
           collapsible: true,
@@ -102,7 +102,7 @@ const chatUikitSidebar = [
       text: "会话列表",
       collapsible: true,
       children: [
-        { text: "页面介绍", link: "chatuikit_custom_conversation_list_intro.html" },
+        { text: "页面介绍", link: "chatuikit_conversation_list_intro.html" },
         { text: "自定义搜索栏", link: "chatuikit_custom_conversation_list_searchbar.html" },
         {
           text: "自定义会话列表",
@@ -119,7 +119,7 @@ const chatUikitSidebar = [
       text: "消息",
       collapsible: true,
       children: [
-        { text: "页面介绍", link: "chatuikit_custom_chat_intro.html" },
+        { text: "页面介绍", link: "chatuikit_chat_intro.html" },
         { text: "自定义消息列表", link: "chatuikit_custom_chat.html" },
         { text: "自定义消息输入", link: "chatuikit_custom_chat_ inputmenu.html" },
       ],
@@ -162,7 +162,7 @@ const chatUikitSidebar = [
       text: "会话列表",
       collapsible: true,
       children: [
-        { text: "页面介绍", link: "chatuikit_custom_conversation_list_intro.html" },
+        { text: "页面介绍", link: "chatuikit_conversation_list_intro.html" },
         { text: "自定义搜索栏", link: "chatuikit_custom_conversation_list_searchbar.html" },
         {
           text: "自定义会话列表",
@@ -179,7 +179,7 @@ const chatUikitSidebar = [
       text: "消息",
       collapsible: true,
       children: [
-        { text: "页面介绍", link: "chatuikit_custom_chat_intro.html" },
+        { text: "页面介绍", link: "chatuikit_chat_intro.html" },
         { text: "自定义搜索栏", link: "chatuikit_custom_chat_message_search.html", only: ["react-native"] },
         {
           text: "自定义消息列表",
@@ -252,8 +252,8 @@ const chatUikitSidebar = [
     text: "会话列表",
     collapsible: true,
     children: [
-      { text: "页面介绍", link: "chatuikit_conversationlist_intro.html" },
-      { text: "自定义页面", link: "chatuikit_conversation.html" },
+      { text: "页面介绍", link: "chatuikit_conversation_list_intro.html" },
+      { text: "自定义页面", link: "chatuikit_custom_conversation_list.html" },
     ],
     only: ["uniapp"],
   },
@@ -262,7 +262,7 @@ const chatUikitSidebar = [
     collapsible: true,
     children: [
       { text: "页面介绍", link: "chatuikit_chat_intro.html" },
-      { text: "自定义页面", link: "chatuikit_chat.html" },
+      { text: "自定义页面", link: "chatuikit_custom_chat.html" },
     ],
     only: ["uniapp"],
   },

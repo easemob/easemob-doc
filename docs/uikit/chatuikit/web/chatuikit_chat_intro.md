@@ -16,7 +16,7 @@
 
 ### 标题栏
 
-聊天页面的标题栏使用 `Header` 组件，支持自定义标题、头像、副标题、右侧操作按钮等。详见 [设置标题栏](chatuikit_custom_titlebar.html)。
+聊天页面的标题栏使用 `Header` 组件，支持自定义标题、头像、副标题、右侧操作按钮等。详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。
 
 ### 消息列表
 

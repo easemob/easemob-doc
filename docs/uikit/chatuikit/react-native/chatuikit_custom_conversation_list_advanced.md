@@ -541,7 +541,7 @@ function ConversationListScreen() {
 
 ### 标题栏配置
 
-关于标题栏配置，详见 [标题栏文档](chatuikit_custom_titlebar.html)。
+关于标题栏配置，详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。
 
 ### FlatList 属性扩展
 

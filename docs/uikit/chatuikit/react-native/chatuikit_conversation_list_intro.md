@@ -16,15 +16,15 @@
 
 ### 会话搜索栏
 
-会话搜索栏  `SearchConversation` 实现会话搜索。点击搜索按钮，跳转到搜索页面，支持按会话名称过滤。关于自定义，详见 [设置会话搜索栏](chatuikit_conversation_searchbar.html)。
+会话搜索栏  `SearchConversation` 实现会话搜索。点击搜索按钮，跳转到搜索页面，支持按会话名称过滤。关于自定义，详见 [设置会话搜索栏](chatuikit_custom_conversation_list_searchbar.html)。
 
 ### 会话列表
 
 会话列表组件 `ConversationList` 按最新消息时间倒序排列，置顶会话始终显示在顶部。列表包含以下类型的会话：
 
-- 通过标题栏加号创建的本地会话
-- 发送消息后自动生成的单聊会话
-- 群组内发送消息后生成的群聊会话
+- 通过标题栏加号创建的本地会话。
+- 发送消息后自动生成的单聊会话。
+- 群组内发送消息后生成的群聊会话。
 
 **首次加载建议**：在应用首次安装或卸载重装后，建议从服务端拉取历史会话列表，以填充本地数据库。
 
@@ -40,10 +40,10 @@
 
 **交互操作**：
 
-- **点击**：跳转至该会话的聊天页面
-- **长按**：弹出操作菜单，支持免打扰、置顶、标记已读、删除
+- **点击**：跳转至该会话的聊天页面。
+- **长按**：弹出操作菜单，支持免打扰、置顶、标记已读、删除。
 
-关于会话条目的自定义，详见 [会话列表的基础自定义](chatuikit_conversation_list_basic.html) 和 [高级自定义](chatuikit_conversation_list_advanced.html) 说明。
+关于会话自定义，详见 [会话列表的基础设置](chatuikit_custom_conversation_list_basic.html) 和 [高级设置](chatuikit_custom_conversation_list_advanced.html) 说明。
 
 ## 创建会话列表页面
 

@@ -86,8 +86,8 @@ react-native-chat-sdk 版本要求 1.8.0 或以上
 
 #### 新增特性
 
-- [新增消息上下文菜单样式，原来的样式和新增样式可选](chatuikit_chat.html#自定义消息上下文菜单样式)。
-- [新增消息发送附件菜单样式，原来的样式和新增样式可选](chatuikit_chat.html#自定义发送消息附件菜单样式)。
+- [新增消息上下文菜单样式，原来的样式和新增样式可选](chatuikit_custom_chat_basic.html#设置长按消息菜单)。
+- [新增消息发送附件菜单样式，原来的样式和新增样式可选](chatuikit_custom_chat_inputmenu.html#设置消息扩展菜单)。
 
 #### 优化
 

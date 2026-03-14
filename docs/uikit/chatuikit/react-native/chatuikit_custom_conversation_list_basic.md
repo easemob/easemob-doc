@@ -61,9 +61,9 @@ function ConversationListScreen() {
 
 | 属性     | 类型            | 描述             |
 | ------------ | ------------- | ------------------------------- |
-| `navigationBarVisible`     | `boolean`                                              | 是否显示标题栏。<br/> - `true`（默认）：显示。<br/> - `false`：隐藏。<br/> 详见[显示或隐藏标题栏](chatuikit_custom_titlebar.html#如何隐藏标题栏？)。           |
+| `navigationBarVisible`     | `boolean`                                              | 是否显示标题栏。<br/> - `true`（默认）：显示。<br/> - `false`：隐藏。<br/> 详见 [显示或隐藏标题栏](chatuikit_custom_titlebar.html#如何隐藏标题栏？)。           |
 | `customNavigationBar`      | `React.ReactElement`                                   | 自定义标题栏组件，完全替换默认标题栏。<br/> 详见 [设置页面标题栏](chatuikit_custom_titlebar.html#完全自定义标题栏)。                              |
-| `searchStyleVisible`       | `boolean`                                              | 是否显示搜索样式组件。<br/> - `true`（默认）：显示。<br/> - `false`：隐藏。<br/> 详见[显示或隐藏搜索样式](chatuikit_custom_conversation_list_searchbar.html)。 |
+| `searchStyleVisible`       | `boolean`                                              | 是否显示搜索样式组件。<br/> - `true`（默认）：显示。<br/> - `false`：隐藏。<br/> 详见 [显示或隐藏搜索样式](chatuikit_custom_conversation_list_searchbar.html)。 |
 | `customSearch`             | `React.ReactElement`                                   | 自定义搜索组件，完全替换默认搜索样式。                                                                                           |
 | `onClickedSearch`          | `(data?: any) => void`                                 | 点击搜索组件的回调。                                                                                                             |
 | `containerStyle`           | `StyleProp<ViewStyle>`                                 | 会话列表容器的样式。                                                                                                             |

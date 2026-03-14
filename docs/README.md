@@ -1282,22 +1282,22 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /uikit/chatuikit/android/chatuikit_conversation.html
+                link: /uikit/chatuikit/android/chatuikit_conversation_list_intro.html
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /uikit/chatuikit/ios/chatuikit_advancedusage.html#会话列表页面
               - icon: /sdk/web.svg
                 text: Web
-                link: /uikit/chatuikit/web/chatuikit_conversation.html
+                link: /uikit/chatuikit/web/chatuikit_conversation_list_intro.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
-                link: /uikit/chatuikit/harmonyos/chatuikit_conversation.html 
+                link: /uikit/chatuikit/harmonyos/chatuikit_conversation_list_intro.html 
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /uikit/chatuikit/flutter/chatuikit_conversation.html
+                link: /uikit/chatuikit/flutter/chatuikit_conversation_list_intro.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /uikit/chatuikit/react-native/chatuikit_conversation.html
+                link: /uikit/chatuikit/react-native/chatuikit_conversation_list_intro.html
           - text: 消息
             desc: 指用户可以引用一条已发送的消息。
             sdks:

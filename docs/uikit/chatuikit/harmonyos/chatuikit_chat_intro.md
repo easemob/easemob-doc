@@ -14,7 +14,7 @@
 
 ### 标题栏
 
-`ChatPage` 中的标题栏使用 `ComposeTitleBar` 组件，展示会话名称、头像和操作菜单。详见 [设置标题栏](chatuikit_custom_titlebar.html)。
+`ChatPage` 中的标题栏使用 `ComposeTitleBar` 组件，展示会话名称、头像和操作菜单。详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。
 
 ### 消息列表
 

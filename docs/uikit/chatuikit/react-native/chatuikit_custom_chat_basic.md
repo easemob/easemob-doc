@@ -165,7 +165,7 @@ export function ConversationDetailScreen(props: Props) {
 }
 ```
 
-### 自定义消息气泡
+### 设置消息气泡
 
 `MessageBubble` 为消息气泡组件，支持自定义气泡的颜色、圆角、阴影等样式。
 
