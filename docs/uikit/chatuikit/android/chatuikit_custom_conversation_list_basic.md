@@ -37,10 +37,10 @@ ChatUIKitConversationListFragment.Builder()
 
 | 方法                            | 描述                                                         |
 | ------------------------------- | ------------------------------------------------------------ |
-| `useTitleBar()`                   | 是否使用默认的标题栏 `ChatUIKitTitleBar`。 <br/> - `true`：是。 <br/> - (默认) `false`: 否。<br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。 |
-| `setTitleBarTitle()`              | 设置标题栏的标题。 <br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。                                          |
-| `enableTitleBarPressBack()`       | 设置是否支持显示返回按钮，默认为不显示。<br/> - `true`：显示。<br/> - (默认) `false`: 不显示。<br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。 |
-| `setTitleBarBackPressListener()`  | 设置点击标题栏返回按钮的监听器。<br/> 详见 [设置页面标题栏](chatuikit_titlebar.html)。                             |
+| `useTitleBar()`                   | 是否使用默认的标题栏 `ChatUIKitTitleBar`。 <br/> - `true`：是。 <br/> - (默认) `false`: 否。<br/> 详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。 |
+| `setTitleBarTitle()`              | 设置标题栏的标题。 <br/> 详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。                                          |
+| `enableTitleBarPressBack()`       | 设置是否支持显示返回按钮，默认为不显示。<br/> - `true`：显示。<br/> - (默认) `false`: 不显示。<br/> 详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。 |
+| `setTitleBarBackPressListener()`  | 设置点击标题栏返回按钮的监听器。<br/> 详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。                             |
 | `setItemClickListener()`          | 设置会话条目点击事件监听器。                                     |
 | `setOnItemLongClickListener()`    | 设置会话条目长按事件监听器。                                     |
 | `setOnMenuItemClickListener()`    | 设置会话菜单点击事件监听器。                                 |

@@ -287,7 +287,7 @@ class CustomEmojiPanel extends StatelessWidget {
 ChatUIKitSettings.messageAttachmentMenuStyle = ChatUIKitMessageAttachmentMenuStyle.menu;
 ```
 
-- 仿系统 `bottomSheet` 样式
+- 仿系统 bottomSheet 样式
 
 ```dart
 ChatUIKitSettings.messageAttachmentMenuStyle = ChatUIKitMessageAttachmentMenuStyle.bottomSheet;

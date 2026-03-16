@@ -12,7 +12,7 @@
 
 ### 标题栏
 
-会话列表页面与聊天页面、联系人列表页面、群详情页面、联系人详情页面的标题栏均使用 `ChatNavigationBar`。详见 [设置标题栏](chatuikit_titlebar.html)。
+会话列表页面与聊天页面、联系人列表页面、群详情页面、联系人详情页面的标题栏均使用 `ChatNavigationBar`。详见 [设置标题栏](chatuikit_custom_titlebar.html)。
 
 ### 会话搜索栏
 
