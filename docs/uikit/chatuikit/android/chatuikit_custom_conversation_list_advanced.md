@@ -209,7 +209,7 @@ override fun setData(item: ChatUIKitConversation?, position: Int) {
 
 ## 设置会话条目长按菜单
 
-长按会话条目会显示会话操作菜单。会话列表页面使用 `ChatUIKitConversationListViewModel` 中提供的方法默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作，详见 [基础自定义说明](chatuikit_custom_conversation_list_basic.html#默认会话操作)。
+长按会话条目会显示会话操作菜单。会话列表页面使用 `ChatUIKitConversationListViewModel` 中提供的方法默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作，详见 [基本设置说明](chatuikit_custom_conversation_list_basic.html#默认会话操作)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />

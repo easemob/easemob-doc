@@ -182,7 +182,7 @@ ConversationsView(
 
 ## 设置会话条目长按菜单
 
-长按会话条目会显示会话操作菜单。会话列表页面使用 `ConversationListViewController` 中提供的方法默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作，详见 [基础自定义说明](chatuikit_custom_conversation_list_basic.html#默认会话操作)。
+长按会话条目会显示会话操作菜单。会话列表页面使用 `ConversationListViewController` 中提供的方法默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作，详见 [基本设置说明](chatuikit_custom_conversation_list_basic.html#默认会话操作)。
 
 #### 设置会话操作
 

@@ -237,7 +237,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
   <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="类似微信样式" />
 </ImageGallery>
 
-关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [消息列表的高级设置说明](chatuikit_chat_list_avanced.html#设置长按消息菜单)。
+关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html#设置长按消息菜单)。
 
 ## 设置消息事件监听
 

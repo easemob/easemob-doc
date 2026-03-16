@@ -408,7 +408,7 @@ builder.setCustomAdapter(CustomMessageAdapter())
 
 在 App 工程中，可通过放置同名资源（`drawable`/`layout`/`values`）来覆盖 UIKit 默认实现，从而自定义界面与功能。
 
-消息类型和消息操作相关的资源设置如下表所示：
+#### 消息类型和消息操作相关资源
 
 <table>
 <thead>
@@ -809,7 +809,7 @@ builder.setCustomAdapter(CustomMessageAdapter())
 </tbody>
 </table>
 
-2. 消息列表相关的菜单的资源设置如下表所示：
+#### 消息菜单相关资源
 
 <table>
 <thead>
