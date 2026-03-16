@@ -169,9 +169,9 @@ export function ConversationDetailScreen(props: Props) {
 
 `MessageBubble` 为消息气泡组件，支持自定义气泡的颜色、圆角、阴影等样式。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
+</div>
 
 ```typescript
 import React from 'react';
@@ -215,9 +215,9 @@ export function CustomMessageBubble(props: MessageBubbleProps) {
 
 初始化时，可设置消息时间格式。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_time.png />
+</div>
 
 ```tsx
 export function App() {

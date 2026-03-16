@@ -107,9 +107,10 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 - 设置消息气泡
 - 设置消息日期
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_item.png" title="消息条目 ChatUIKitRow" />
-</ImageGallery>
+
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_item.png />
+</div>
 
 ### 设置头像和昵称
 
@@ -139,9 +140,9 @@ fragment?.let { fragment ->
 
 你可以通过 `UIKitChatFragment#Builder` 设置消息气泡。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
+</div>
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
@@ -165,9 +166,9 @@ fragment?.let { fragment ->
 
 你可以设置消息的发送和接收时间的格式和样式。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_time.png />
+</div>
 
 #### 设置消息时间格式
 

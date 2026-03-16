@@ -184,8 +184,6 @@ function MyConversationListScreen(props: MyConversationListScreenProps) {
 
 ## 设置导航栏菜单
 
-//  TODO：统一导航栏和标题栏的说法
-
 会话列表导航栏右侧的 "+" 按钮点击后弹出操作菜单，默认包含 "新会话"、"创建群组"、"添加联系人"等选项。你可以通过 `onInitNavigationBarMenu` 自定义菜单项。
 
 #### 菜单项类型定义
@@ -532,7 +530,7 @@ function ConversationListScreen() {
 
 ### 返回按钮回调
 
-当标题栏显示返回按钮时，可通过 `onBack` 处理返回事件：
+当导航栏显示返回按钮时，可通过 `onBack` 处理返回事件：
 
 ```typescript
 <ConversationList
@@ -547,9 +545,9 @@ function ConversationListScreen() {
 
 关于搜索栏配置，详见 [搜索栏配置文档](chatuikit_custom_conversation_list_searchbar.html)。
 
-### 标题栏配置
+### 导航栏配置
 
-关于标题栏配置，详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。
+关于导航栏配置，详见 [设置页面导航栏](chatuikit_custom_titlebar.html)。
 
 ### FlatList 属性扩展
 

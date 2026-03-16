@@ -1,12 +1,12 @@
 # 设置消息输入
 
-消息底部输入框 `ChatUIkitinputMenu` 实现各类消息的输入和发送以及消息表情等功能，包括两部分：
+消息底部输入框 `ChatUIKitInputMenu` 实现各类消息的输入和发送以及消息表情等功能，包括两部分：
 
 - 底部输入栏 `ChatUlKitPrimaryMenu`：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展。
 - 消息扩展菜单 `ChatUlKitExtendMenu`：提供附件类型消息的发送入口，支持发送图片、视频、文件，并可扩展至自定义消息类型（如名片消息等）。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_frame.png" title="消息底部输入框 ChatUIkitinputMenu" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_frame.png" title="消息底部输入框 ChatUIKitInputMenu" />
 </ImageGallery>
 
 ## 设置底部输入框背景

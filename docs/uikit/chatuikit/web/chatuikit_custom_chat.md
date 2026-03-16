@@ -93,9 +93,9 @@
 - 设置消息气泡
 - 设置消息日期
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_item.png" title="消息条目" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_item.png />
+</div>
 
 ### 添加自定义消息条目
 
@@ -156,9 +156,9 @@ const CustomTextMessage = ({ message }) => {
 
 你可以通过以下两种方式设置消息气泡样式：
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
+</div>
 
 - 通过自定义消息组件设置：
 
@@ -199,9 +199,9 @@ import { TextMessage } from 'easemob-chat-uikit';
 
 你可以设置消息的发送和接收时间的格式和样式。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_time.png />
+</div>
 
 #### 设置消息时间格式
 

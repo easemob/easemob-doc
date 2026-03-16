@@ -93,9 +93,9 @@ Appearance.chat.receiveTextColor = UIColor.black
 
 ### 设置消息时间
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_time.png />
+</div>
 
 #### 设置消息时间格式
 

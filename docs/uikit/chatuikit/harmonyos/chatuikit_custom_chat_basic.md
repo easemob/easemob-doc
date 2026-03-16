@@ -4,6 +4,9 @@
 
 如需实现自定义消息布局、气泡等高级设置，详见 [消息列表高级设置](chatuikit_custom_chat_advanced.html)。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/chat_page_no_titlebar.png" title="消息列表组件 ChatView" />
+</ImageGallery>
 
 ## 概述
 
@@ -98,9 +101,9 @@ Column() {
 - 设置消息气泡。
 - 设置消息时间。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_item.png" title="消息条目 MessageItemView" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_item.png />
+</div>
 
 ### 设置头像和昵称
 
@@ -114,17 +117,17 @@ Column() {
 
 你可以通过 `ChatMessageBubbleProvider` 自定义消息气泡，详见 [消息列表的高级设置](chatuikit_custom_chat_advanced.html#自定义消息气泡)。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
+</div>
 
 ### 设置消息时间
 
 你可以设置消息的发送和接收时间的格式和样式。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_time.png />
+</div>
 
 #### 设置消息时间格式
 

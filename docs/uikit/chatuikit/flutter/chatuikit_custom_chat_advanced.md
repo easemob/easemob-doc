@@ -105,9 +105,9 @@ ChatUIKitTimeFormatter.instance.formatterHandler = (
 };
 ```
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_time.png />
+</div>
 
 ## 设置消息状态图标
 
