@@ -2,6 +2,10 @@
 
 会话列表页面支持按会话名称搜索会话。你可以控制搜索栏的显示、自定义搜索栏的样式、跳转逻辑以及自定义搜索功能。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/searchbar.png" title="搜索栏 SearchView" />
+</ImageGallery>
+
 ## 使用默认搜索栏
 
 `ConversationListView` 默认显示搜索栏，点击后触发 `onSearchClick` 事件：
@@ -40,6 +44,10 @@ ConversationListView({
   showSearchView: false  // 隐藏搜索栏
 })
 ```
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_conversation_search_hide.png" title="隐藏搜索框" />
+</ImageGallery>
 
 ## 自定义搜索栏样式
 

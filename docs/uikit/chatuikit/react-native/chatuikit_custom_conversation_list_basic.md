@@ -2,6 +2,10 @@
 
 本文介绍 `ConversationList` 组件的常用配置项，包括标题栏控制、搜索样式、事件监听等基础功能。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/main_conversation_list.png" title="会话列表页面 ConversationList" />
+</ImageGallery>
+
 ## 概述
 
 ```typescript
@@ -151,6 +155,10 @@ React Native UIKit 不内置页面跳转功能，创建新会话、群组或添�
 />
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/conversation_operation.png" title="导航栏更多菜单" />
+</ImageGallery>
+
 ## 过滤空会话
 
 若希望会话列表仅显示有消息记录的会话，可通过 `filterEmptyConversation` 属性过滤掉无消息的空会话：
@@ -185,3 +193,7 @@ React Native UIKit 不内置页面跳转功能，创建新会话、群组或添�
 | 免打扰/取消免打扰 | 设置或取消会话免打扰，免打扰会话只显示红点，不计数。 |
 | 标记已读          | 会话标记为已读状态，清除未读数。                               |
 | 删除              | 删除会话及其所有消息     |
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
+</ImageGallery>

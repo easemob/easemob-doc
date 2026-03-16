@@ -2,6 +2,10 @@
 
 本文介绍如何通过 `ConversationList` 组件的属性实现会话列表的设置，包括会话列表空白页面、添加自定义会话列表和设置会话事件监听。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationList" />
+</ImageGallery>
+
 ## 概述
 
 `ConversationList` 组件提供了以下属性，方便开发者进行自定义设置：
@@ -89,7 +93,7 @@
 }
 ```
 
-## 设置会话列表空白页面
+## 设置会话列表空页面
 
 你可以通过 `renderItem` 属性自定义会话条目的渲染。没有任何会话时，可通过外层容器处理空白状态：
 
@@ -163,9 +167,9 @@ const CustomConversationItem = ({ cvs }) => {
 
 | 会话操作   | 描述                |
 | :--------- | :------------------ |
-| 会话免打扰 | 设置/取消会话免打扰 |
-| 会话置顶   | 置顶/取消置顶会话   |
-| 会话删除   | 删除会话            |
+| 会话免打扰 | 设置/取消会话免打扰。 |
+| 会话置顶   | 置顶/取消置顶会话。   |
+| 会话删除   | 删除会话。           |
 
 你可以通过 `itemProps.moreAction` 来配置这些操作：
 
@@ -196,3 +200,4 @@ const CustomConversationItem = ({ cvs }) => {
   }}
 />
 ```
+

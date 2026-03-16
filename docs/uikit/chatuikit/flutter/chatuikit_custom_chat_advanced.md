@@ -2,6 +2,10 @@
 
 消息列表是聊天界面的核心组件，基于 `MessageListView` 实现。本文介绍如何通过 `MessagesViewController` 实现消息列表的高级设置。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_list.png" title="消息列表组件 MessageListView" />
+</ImageGallery>
+
 ## 概述
 
 你可以通过 `MessagesViewController` 设置消息列表：
@@ -68,6 +72,10 @@ MessagesView(
 )
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
+</ImageGallery>
+
 ## 设置消息时间样式
 
 你可以通过以下两种方式设置消息时间样式：
@@ -96,6 +104,10 @@ ChatUIKitTimeFormatter.instance.formatterHandler = (
   return null;
 };
 ```
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
+</ImageGallery>
 
 ## 设置消息状态图标
 
@@ -135,6 +147,11 @@ await ChatUIKit.instance.init(
 在消息列表中长按任意消息，可弹出包含复制、回复、转发、置顶、多选、翻译、创建话题等功能的操作菜单。UIKit 支持对菜单样式和内容进行灵活定制，包括菜单背景和菜单项的图标、文字颜色和大小。
 
 关于选择微信样式菜单或仿系统 `bottomSheet` 样式，详见 [消息列表的基本设置说明](chatuikit_custom_chat_basic.html#设置长按消息菜单)。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_2.png" title="类似微信样式" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_1.png" title="bottomSheet" />
+</ImageGallery>
 
 ### 管理菜单项
 

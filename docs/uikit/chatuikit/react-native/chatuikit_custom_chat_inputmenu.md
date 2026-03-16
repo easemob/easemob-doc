@@ -2,6 +2,11 @@
 
 本文介绍如何通过底部输入组件 `MessageInput` 实现消息输入的自定义设置，包括发送文本、表情、文件、图片、语音等功能。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="底部输入栏 MessageInput" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 MessageInputBarMenu" />
+</ImageGallery>
+
 ## 概述
 
 `MessageInput` 组件用于发送文本、表情、文件、图片、语音等消息，是聊天界面的核心交互区域。你可以自定义发送菜单、扩展功能菜单，并添加自定义消息类型的发送入口。该组件通常与 `MessageList` 组件配合使用，构成完整的聊天界面。
@@ -58,8 +63,8 @@ function ChatScreen({ route }) {
 | `onEditMessageFinished`            | `(model: MessageModel) => void`      | 否       | 编辑消息完成时的回调。                                                                                                                                    |
 | `onInputMention`                   | `(groupId: string) => void`          | 否       | 点击 @ 提及功能时的回调（群聊中）。                                                                                                                       |
 | `onClickedCardMenu`                | `() => void`                         | 否       | 点击名片菜单时的回调。                                                                                                                                    |
-| `onInitMenu`                       | `(initItems) => InitMenuItemsType[]` | 否       | 初始化扩展菜单时的回调，可以添加、修改或删除菜单项。详见[自定义扩展菜单](#自定义扩展菜单)。                                                               |
-| `emojiList`                        | `string[]`                           | 否       | 自定义表情列表。详见[自定义表情列表](#自定义表情列表)。                                                                                                   |
+| `onInitMenu`                       | `(initItems) => InitMenuItemsType[]` | 否       | 初始化扩展菜单时的回调，可以添加、修改或删除菜单项。详见[自定义扩展菜单](#设置消息扩展菜单)。                                                               |
+| `emojiList`                        | `string[]`                           | 否       | 自定义表情列表。      |
 | `onChangeValue`                    | `(text: string) => void`             | 否       | 输入内容变化时的回调。详见[监听输入变化](#监听输入变化)。                                                                                                 |
 | `selectType`                       | `ConversationSelectModeType`         | 否       | 消息选择模式。<br/> - `common`（默认）：普通模式。<br/> - `multi`：多选模式。<br/> **注意**: 此属性主要用于内部组件之间通信，一般用户无需关注。           |
 | `multiSelectCount`                 | `number`                             | 否       | 多选模式下已选消息的数量。<br/> **注意**: 此属性主要用于内部组件之间通信，一般用户无需关注。                                                              |

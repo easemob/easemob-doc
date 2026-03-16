@@ -2,7 +2,9 @@
 
 本文介绍如何通过 `ChatUIKitConversationListLayout` 实现会话列表的高级设置，包括会话条目的样式、头像、长按菜单以及图标等。
 
-// TODO：添加截图
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ChatUIKitConversationListLayout" />
+</ImageGallery>
 
 ## 概述
 
@@ -52,6 +54,10 @@
         it.setItemHeight()        
     }
 ```
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png" title="会话条目的高度" />
+</ImageGallery>
 
 ## 设置会话条目标题
 
@@ -114,6 +120,14 @@ binding?.listConversation?.let {
 ```
 
 ## 设置会话条目头像
+
+你可以设置默认头像以及头像的样式，如下图所示：
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_square.png" title="方形头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_circle.png" title="圆形头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_no.png" title="无头像" />
+</ImageGallery>
 
 #### 设置默认头像
 
@@ -215,11 +229,10 @@ override fun setData(item: ChatUIKitConversation?, position: Int) {
 
 #### 设置菜单样式
 
-会话长按菜单采用 `ChatUIKitMenuDialog`（BottomSheet）渲染，菜单项布局为 `uikit_item_menu.xml`，相关样式定义在 `ease-im-kit/src/main/res/values/uikit_conversation_styles.xml` 中。
+会话长按菜单采用 `ChatUIKitMenuDialog`（`BottomSheet`）渲染，菜单项布局为 `uikit_item_menu.xml`，相关样式定义在 `ease-im-kit/src/main/res/values/uikit_conversation_styles.xml` 中。
 
 - 设置菜单项文字颜色
   
-
 菜单项文字颜色通过 `ChatUIKitMenuItem.titleColor` 属性控制。你可以在菜单显示前（`setOnMenuPreShowListener`）修改默认的菜单项颜色，或在添加菜单项时直接指定。
 
 ```kotlin
@@ -249,7 +262,6 @@ binding?.listConversation?.setOnMenuPreShowListener { menuHelper, _ ->
 
 - 其他菜单设置
   
-
 如需调整菜单方向、对齐方式或取消按钮显示，可通过 `getConvMenuHelper()` 获取 `ChatUIKitMenuHelper`，调用 `setMenuOrientation()` / `setMenuGravity()` / `showCancel()`。
 
 ## 设置会话免打扰图标
@@ -265,6 +277,10 @@ binding?.listConversation?.setOnMenuPreShowListener { menuHelper, _ ->
 会话列表的未读提示支持 **数字** 与 **小蓝点** 两种样式，并可设置在项的左或右侧。
 
 默认以数字形式显示在会话项右侧。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_unread.png" title="消息未读计数图标" />
+</ImageGallery>
 
 #### 设置计数展示方式
 
@@ -362,7 +378,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 })
 ```
 
-## 相关资源
+## 自定义资源
 
 除以上的页面设置，本节全面列明了会话列表相关资源，包括图标、文字和颜色等。你可以在 App 工程中放置同名资源（`drawable`/`layout`/`values`）来覆盖 UIKit 默认实现，从而替换资源。
 

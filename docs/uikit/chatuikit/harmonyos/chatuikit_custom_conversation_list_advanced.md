@@ -4,9 +4,17 @@
 
 本文介绍会话列表的高级自定义功能，包括自定义会话列表项组件、ViewModel 扩展等。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationListView" />
+</ImageGallery>
+
 ## 自定义会话条目
 
 通过实现 `ConversationItemProvider` 接口，可自定义会话条目的完整布局。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_item.png" title="会话条目 ConversationItemView" />
+</ImageGallery>
 
 #### 添加自定义会话列表
 
@@ -267,6 +275,11 @@ export interface ConversationLatestMessageContentProvider {
 ## 自定义左滑菜单
 
 会话列表支持左滑操作，可通过配置菜单项实现置顶、删除等快捷操作。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/conversation_slide.png" title="会话左滑菜单" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_conversation_slide_menu.png" title="自定义左滑菜单" />
+</ImageGallery>
 
 #### 设置菜单项
 
@@ -532,6 +545,10 @@ struct CustomConvListPage {
 | 已开启         | 小圆点，仅提示有未读消息 |
 
 默认以数字形式显示在会话条目右侧。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_unread.png" title="消息未读计数图标" />
+</ImageGallery>
 
 ## 自定义 ViewModel
 

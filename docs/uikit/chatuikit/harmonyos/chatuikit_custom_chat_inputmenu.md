@@ -2,16 +2,25 @@
 
 <Toc />
 
-消息输入区实现各类消息的输入和发送：
+聊天页面的底部输入框 `ChatInputMenuView` 实现各类消息的输入和发送，包括以下部分：
 
 - **底部输入栏 (ChatPrimaryMenu)**：负责文本与语音消息的输入和发送，支持表情添加及常用功能扩展。
 - **消息扩展菜单 (ChatExtendMenu)**：提供附件类型消息的发送入口，支持图片、视频、文件等，并可扩展自定义消息类型（如名片、位置、红包等）。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="底部输入栏 ChatPrimaryMenu" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 ChatExtendMenu" />
+</ImageGallery>
 
 ## 设置底部输入栏
 
 ### 显示或隐藏输入栏
 
 通过 `ChatPrimaryMenuModel` 控制底部输入栏中各个按钮的启用状态，实现显示或隐藏。
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_input_bar.png" title="设置底部输入栏" />
+</ImageGallery>
 
 ```typescript
 import { ChatPrimaryMenuModel, ChatView, ChatType } from '@easemob/chatuikit';
@@ -99,6 +108,10 @@ ChatView({
 ## 设置消息扩展菜单
 
 点击底部输入栏中的扩展图标（默认为加号）会弹出消息扩展菜单。消息扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_expansion.png" title="消息扩展菜单" />
+</ImageGallery>
 
 ### 管理菜单项
 
@@ -225,6 +238,7 @@ ChatView({
 ```
 
 **默认点击行为**
+
 | 菜单项            | 默认点击行为   |
 | :-------------- | :----- |
 | 拍照 (CAMERA) | 弹出对话框选择拍照或录像。   |

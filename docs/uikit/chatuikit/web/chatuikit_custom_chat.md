@@ -4,7 +4,9 @@
 
 如需通过 `MessageList` 进行高级设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html)。
 
-// TODO：添加图片，列明消息气泡、消息条目、消息时间等
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_list.png" title="消息列表组件 MessageList" />
+</ImageGallery>
 
 ## 概述
 
@@ -82,8 +84,6 @@
 />
 ```
 
-// TODO：添加消息列表空白页面图片
-
 ## 设置消息条目
 
 对于消息条目，你可以进行自定义设置，例如：
@@ -92,6 +92,10 @@
 - 设置默认的头像和昵称及其样式
 - 设置消息气泡
 - 设置消息日期
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_item.png" title="消息条目" />
+</ImageGallery>
 
 ### 添加自定义消息条目
 
@@ -152,9 +156,11 @@ const CustomTextMessage = ({ message }) => {
 
 你可以通过以下两种方式设置消息气泡样式：
 
-- 通过自定义消息组件设置：
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
+</ImageGallery>
 
-// TODO：添加消息气泡的截图
+- 通过自定义消息组件设置：
 
 ```jsx
 import { TextMessage } from 'easemob-chat-uikit';
@@ -193,7 +199,9 @@ import { TextMessage } from 'easemob-chat-uikit';
 
 你可以设置消息的发送和接收时间的格式和样式。
 
-// TODO：添加截图
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
+</ImageGallery>
 
 #### 设置消息时间格式
 

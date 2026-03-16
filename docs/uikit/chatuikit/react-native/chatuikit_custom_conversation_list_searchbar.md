@@ -6,7 +6,9 @@
 React Native UIKit 不内置的路由跳转功能，也未集成第三方路由库。搜索相关的页面跳转需在你的应用层自行实现。
 :::
 
-// TODO：添加会话搜索栏图片
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/searchbar.png" title="搜索栏 SearchView" />
+</ImageGallery>
 
 ## 通用性设计
 

@@ -2,7 +2,10 @@
 
 消息底部输入栏 `MessageInput` 实现各种消息的输入、发送，可扩展至自定义消息类型（如名片消息等）、支持表情添加及常用功能扩展。
 
-// TODO：添加截图
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="底部输入栏 MessageInput" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单" />
+</ImageGallery>
 
 ## 设置底部输入栏背景
 
@@ -25,8 +28,6 @@
   background-color: #f5f5f5;
 }
 ```
-
-// TODO：添加图
 
 ## 设置底部输入栏功能
 
@@ -88,8 +89,6 @@ import { Chat, MessageInput, Icon } from 'easemob-chat-uikit';
   )}
 />;
 ```
-
-// TODO：添加截图
 
 ### 设置文本输入框默认文本
 
@@ -157,7 +156,7 @@ const ChatContainer = () => {
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/chat_input_bar.png" title="消息输入框" />
+  <ImageItem src="/images/uikit/chatuikit/web/chat_input_bar.png" title="底部输入栏中添加图标" />
 </ImageGallery>
 
 ### 管理表情菜单
@@ -168,7 +167,9 @@ const ChatContainer = () => {
 
 底部输入栏的扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。点击底部输入栏中的扩展图标（默认为加号）会弹出扩展菜单。
 
-// TODO：添加图
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单" />
+</ImageGallery>
 
 ### 管理菜单项
 

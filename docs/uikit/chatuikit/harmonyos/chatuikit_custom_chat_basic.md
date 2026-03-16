@@ -4,6 +4,7 @@
 
 如需实现自定义消息布局、气泡等高级设置，详见 [消息列表高级设置](chatuikit_custom_chat_advanced.html)。
 
+
 ## 概述
 
 `ChatView` 是聊天界面核心组件，通过参数配置实现高度自定义。以下是一个基础配置示例：
@@ -97,6 +98,10 @@ Column() {
 - 设置消息气泡。
 - 设置消息时间。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_item.png" title="消息条目 MessageItemView" />
+</ImageGallery>
+
 ### 设置头像和昵称
 
 暂不支持通过 `ChatView` 参数直接设置头像和昵称的显示和隐藏。你可以通过自定义消息布局实现，详见 [聊天页面高级设置](chatuikit_custom_chat_advanced.html#自定义消息布局)。
@@ -109,7 +114,17 @@ Column() {
 
 你可以通过 `ChatMessageBubbleProvider` 自定义消息气泡，详见 [消息列表的高级设置](chatuikit_custom_chat_advanced.html#自定义消息气泡)。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
+</ImageGallery>
+
 ### 设置消息时间
+
+你可以设置消息的发送和接收时间的格式和样式。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
+</ImageGallery>
 
 #### 设置消息时间格式
 

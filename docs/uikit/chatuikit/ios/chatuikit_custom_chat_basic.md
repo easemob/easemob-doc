@@ -93,6 +93,10 @@ Appearance.chat.receiveTextColor = UIColor.black
 
 ### 设置消息时间
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
+</ImageGallery>
+
 #### 设置消息时间格式
 
 - `Appearance.chat.dateFormatToday = "HH:mm"`：当天格式

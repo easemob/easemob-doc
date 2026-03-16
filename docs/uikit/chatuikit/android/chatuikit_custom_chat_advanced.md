@@ -2,7 +2,9 @@
 
 消息列表是聊天界面的核心组件，基于 `ChatUIKitMessageListLayout` 实现。本文介绍如何通过 `ChatUIKitMessageListLayout` 实现消息列表的高级设置。
 
-// TODO：添加图片，列明消息气泡等
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_list.png" title="消息列表组件 ChatUIkitMessageListLayout" />
+</ImageGallery>
 
 ## 概述
 
@@ -87,6 +89,10 @@ fragment?.let { fragment ->
 
 你可以通过 `chatMessageListLayout` 设置消息气泡。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
+</ImageGallery>
+
 ```kotlin
 // 获取 ChatUIKitMessageListLayout 对象
 val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.chatMessageListLayout
@@ -118,6 +124,10 @@ chatMessageListLayout?.let{
 | `setTimeTextSize()`   | 设置消息时间文本的字体大小，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
 | `setTimeTextColor()`  | 设置消息时间文本的颜色，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。     |
 | `setTimeBackground()` | 设置消息时间的背景。          |
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
+</ImageGallery>
 
 使用示例如下：
 

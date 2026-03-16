@@ -2,6 +2,11 @@
 
 本文介绍如何配置会话列表相关组件，包括 `ConversationListPage`（完整页面）和 `ConversationListView`（会话列表组件）的基本参数、事件监听及样式自定义。如需实现复杂自定义，例如动态菜单或过滤逻辑，详见 [会话列表高级设置](chatuikit_custom_conversation_list_advanced.html)。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="完整会话列表页面 ConversationListPage" />
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationListView" />
+</ImageGallery>
+
 ## 组件选型
 
 单群聊 UIKit 提供两种会话列表组件，可根据实际场景灵活选择：

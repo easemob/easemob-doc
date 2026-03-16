@@ -4,7 +4,9 @@
 
 如需通过 `ChatUIKitMessageListLayout` 进行高级设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html)。
 
-// TODO：添加图片，列明消息气泡、消息条目、消息时间等
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/chat_detail.png" title="完整的聊天页面 UIKitChatFragment" />
+</ImageGallery>
 
 ## 概述
 
@@ -88,8 +90,6 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
         .build()
 ```
 
-// TODO：添加图片
-
 ## 设置消息列表空页面
 
 ```kotlin
@@ -100,14 +100,16 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
         .build()
 ```
 
-// TODO：添加图片
-
 ## 设置消息条目
 
 对于消息条目 `ChatUlKitRow`，你可以进行自定义设置，例如：
 - 设置默认的头像和昵称及其样式
 - 设置消息气泡
 - 设置消息日期
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_item.png" title="消息条目 ChatUIKitRow" />
+</ImageGallery>
 
 ### 设置头像和昵称
 
@@ -137,7 +139,9 @@ fragment?.let { fragment ->
 
 你可以通过 `UIKitChatFragment#Builder` 设置消息气泡。
 
-// TODO：添加消息气泡的截图
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
+</ImageGallery>
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
@@ -162,7 +166,7 @@ fragment?.let { fragment ->
 你可以设置消息的发送和接收时间的格式和样式。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_message_date.png" title="设置消息时间" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
 </ImageGallery>
 
 #### 设置消息时间格式

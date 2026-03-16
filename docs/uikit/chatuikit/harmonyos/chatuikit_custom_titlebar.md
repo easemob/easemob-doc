@@ -10,7 +10,9 @@
 - **标题区域**：主标题 `primaryTitle` 与副标题 `secondaryTitle`，支持点击回调。
 - **右侧菜单**：通过 `operationItem` 传入菜单项，自动处理溢出与更多菜单。 
 
-// TODO：添加截图，聊天页面
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/titlebar_chat_single_group.png" title="标题栏 ComposeTitleBar" />
+</ImageGallery>
 
 ## 基础设置
 

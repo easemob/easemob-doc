@@ -1,4 +1,3 @@
-
 # 设置消息输入
 
 消息底部输入框 `ChatUIkitinputMenu` 实现各类消息的输入和发送以及消息表情等功能，包括两部分：
@@ -6,7 +5,9 @@
 - 底部输入栏 `ChatUlKitPrimaryMenu`：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展。
 - 消息扩展菜单 `ChatUlKitExtendMenu`：提供附件类型消息的发送入口，支持发送图片、视频、文件，并可扩展至自定义消息类型（如名片消息等）。
 
-// TODO：添加底部输入框的图，分为底部输入菜单+消息扩展菜单。
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_frame.png" title="消息底部输入框 ChatUIkitinputMenu" />
+</ImageGallery>
 
 ## 设置底部输入框背景
 
@@ -18,9 +19,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
         .build()
 ```
 
-## 设置底部输入栏
-
-// TODO：添加截图
+## 设置底部输入框布局
 
 ### 设置相关属性
 
@@ -33,10 +32,10 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | 定制顶部扩展区域 | 支持设置自定义的菜单顶部布局，包括引用回复条与多选消息工具条。 |
 | 界面区域控制 | 可选择仅显示菜单顶部扩展区域，隐藏底部输入与扩展面板部分。 |
 
-  // TODO：添加顶部扩展区域截图
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置输入菜单" />
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置底部输入栏" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension_top.png" title="顶部扩展区域" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_top_excluded.png" title="除顶部扩展区域外的区域" />
 </ImageGallery>
 
 使用示例如下：
@@ -68,7 +67,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 | 方法                         | 描述                                                         |
 | :--------------------------- | :----------------------------------------------------------- |
-| `setCustomPrimaryMenu()`     | 设置自定义底部输入菜单，支持 View 或 Fragment 形式。   |
+| `setCustomPrimaryMenu()`     | 设置自定义底部输入栏，支持 View 或 Fragment 形式。   |
 | `setCustomEmojiconMenu()`    | 设置自定义表情菜单，支持 View 或 Fragment 形式。             |
 | `setCustomExtendMenu()`      | 设置自定义扩展功能功能，支持 View、Dialog 或 Fragment 形式。 |
 | `setCustomTopExtendMenu()`   | 设置自定义顶部扩展布局，支持 View 或 Fragment 形式。         |
@@ -78,16 +77,16 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | `showExtendMenu()`           | 显示扩展功能区域。                                           |
 | `showTopExtendMenu()`        | 显示顶部扩展区域。                                           |
 | `setChatInputMenuListener()` | 设置输入菜单事件监听器。                                     |
-| `chatPrimaryMenu`            | 获取底部输入菜单操作接口。                                   |
+| `chatPrimaryMenu`            | 获取底部输入栏操作接口。                                   |
 | `chatEmojiMenu`              | 获取表情菜单操作接口。                                       |
 | `chatExtendMenu`             | 获取扩展功能菜单操作接口。                                   |
 | `chatTopExtendMenu`          | 获取顶部扩展区域操作接口。                                   |
 
 ### 设置相关操作
 
-#### 获取并操作底部输入菜单
+#### 获取并操作底部输入栏
 
-你可以获取 `IChatPrimaryMenu` 对象，对底部输入菜单进行自定义操作：
+你可以获取 `IChatPrimaryMenu` 对象，对底部输入栏进行自定义操作：
 
 ```kotlin
 val primaryMenu: IChatPrimaryMenu? = binding?.layoutChat?.chatInputMenu?.chatPrimaryMenu
@@ -170,9 +169,7 @@ emojiconMenu?.removeEmojiconGroup(1)
 
 ## 设置消息扩展菜单
 
-消息扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。点击底部输入菜单中的扩展图标（默认为加号）会弹出消息扩展菜单。
-
-// TODO：添加图
+消息扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。点击底部输入栏中的扩展图标（默认为加号）会弹出消息扩展菜单。
 
 ### 设置菜单风格
 
@@ -284,7 +281,6 @@ override fun onChatExtendMenuItemClick(view: View?, itemId: Int): Boolean {
 }
 ```
 
-
 ## 事件监听
 
 输入菜单支持多种事件监听，可通过 `UIKitChatFragment.Builder` 进行配置：
@@ -301,11 +297,11 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 ## 自定义样式与资源
 
-对于底部输入菜单，你可以通过覆盖同名资源文件（`drawable`/`layout`/`values`）来修改底部输入框的图标、文字、颜色等样式。
+对于底部输入栏，你可以通过覆盖同名资源文件（`drawable`/`layout`/`values`）来修改底部输入框的图标、文字、颜色等样式。
 
 ### 常用图标替换
 
-对于底部输入菜单中的常用功能图标，可在 App 工程中创建同名 drawable 资源进行替换：
+对于底部输入栏中的常用功能图标，可在 App 工程中创建同名 drawable 资源进行替换：
 
 | 功能描述                 | 资源 ID                                        |
 | :----------------------- | :--------------------------------------------- |

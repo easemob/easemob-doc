@@ -209,6 +209,11 @@
 />
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/conversation_list_avatar.png" title="会话列表带头像" />
+  <ImageItem src="/images/uikit/chatuikit/web/conversation_list_avatar_no.png" title="会话列表无头像" />
+</ImageGallery>
+
 ## 设置会话操作
 
 你可以通过 `itemProps.moreAction` 来管理会话操作菜单项：
@@ -258,9 +263,17 @@
 />
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/custom_conversation_list_action.png" title="自定义会话操作" />
+</ImageGallery>
+
 ## 设置消息未读计数图标
 
 会话列表的未读提示支持 **数字** 与 **小蓝点** 两种样式。默认以数字形式显示在会话条目右侧。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_unread.png" title="消息未读计数图标" />
+</ImageGallery>
 
 #### 设置计数展示方式
 

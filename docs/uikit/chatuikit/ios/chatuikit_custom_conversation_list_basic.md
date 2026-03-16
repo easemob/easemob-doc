@@ -2,6 +2,10 @@
 
 本文介绍如何对 `ConversationListController` 进行基本设置，包括 UI 样式、侧滑操作及事件监听。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/main_conversation_list.png" title="会话列表页面 ConversationListController.swift" />
+</ImageGallery>
+
 ## 概述
 
 会话列表的自定义主要通过以下方式实现：
@@ -20,6 +24,10 @@
 | 会话删除            | 从本地删除会话记录。|
 
 关于配置侧滑菜单按钮，详见 [会话列表的高级配置](chatuikit_custom_conversation_list.advanced.html#设置侧滑操作)。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/conversation_slide.png" title="会话操作" />
+</ImageGallery>
 
 ## 设置事件监听
 

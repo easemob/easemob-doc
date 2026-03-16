@@ -243,6 +243,11 @@ class MineMessageEntity: MessageEntity {
 
 关于选择微信样式菜单或仿系统 `ActionSheet` 样式，详见 [消息列表的基本设置说明](chatuikit_custom_chat_basic.html#设置长按消息菜单)。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_1.png" title="UIActionSheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_2.png" title="类似微信样式" />
+</ImageGallery>
+
 ### 管理菜单项
 
 ```swift

@@ -4,6 +4,10 @@
 
 本文介绍聊天页面的高级自定义功能，包括自定义消息布局、ViewModel 扩展、会话最后一条消息展示等。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_list.png" title="消息列表组件 MessageListView" />
+</ImageGallery>
+
 ## 自定义消息布局
 
 单群聊 UIKit 提供两种方式自定义消息布局：
@@ -14,6 +18,10 @@
 ### 自定义消息气泡
 
 `ChatMessageBubbleProvider` 用于自定义消息气泡的展示，保留默认的头像、昵称、时间戳等布局，适用于大部分自定义场景。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
+</ImageGallery>
 
 #### 实现自定义气泡
 
@@ -339,6 +347,10 @@ messageItemMenusProvider: (message: ChatKitMessage) => {
 ## 自定义消息条目
 
 `ChatMessageItemProvider` 用于完全自定义整个消息条目，包括头像、昵称、时间戳、消息状态等。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_item.png" title="消息条目 MessageItemView" />
+</ImageGallery>
 
 #### 实现自定义消息条目
 

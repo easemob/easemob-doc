@@ -4,7 +4,9 @@
 
 如需通过 `MessagesViewController` 进行高级设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.md)。
 
-// TODO：添加图片，列明消息气泡、消息条目、消息时间等
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/chat_detail.png" title="完整的聊天页面 MessagesView" />
+</ImageGallery>
 
 ## 概述
 
@@ -81,8 +83,6 @@ MessagesView(
 )
 ```
 
-// TODO：添加图片
-
 ## 设置消息列表空页面
 
 ```dart
@@ -101,8 +101,6 @@ MessagesView(
 )
 ```
 
-// TODO：添加图片 
-
 ## 设置消息条目
 
 对于消息条目，你可以进行自定义设置，例如：
@@ -111,6 +109,10 @@ MessagesView(
 - 设置消息日期
 - 设置长按消息菜单
 - 设置消息事件监听
+  
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_item.png" title="消息条目 ChatUIKitMessageListViewMessageItem" />
+</ImageGallery>
 
 ### 设置头像和昵称
 
@@ -132,6 +134,10 @@ MessagesView(
 
 1. **通过主题配置**：可在全局主题中统一定义消息气泡的样式属性，如背景色、边距、圆角等。
 2. **通过自定义 `bubbleBuilder`**：可为特定消息类型或会话提供完全自定义的气泡布局与样式，实现更高灵活度的个性化设计。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
+</ImageGallery>
 
 以下为使用 `bubbleBuilder` 自定义气泡的示例：
 
@@ -155,6 +161,10 @@ MessagesView(
 ### 设置消息时间
 
 你可以设置消息的发送和接收时间的显示格式和视觉样式。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
+</ImageGallery>
 
 #### 设置消息时间格式
 

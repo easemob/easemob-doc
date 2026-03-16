@@ -9,27 +9,28 @@
 - 消息扩展菜单（`MessageInputExtensionView.swift`）：提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息（如名片消息等）的快捷入口。
 
 - 表情菜单（`MessageInputEmojiView.swift`）:负责表情展示、选择与删除。
- 
-// TODO：添加底部输入框的图，分为底部输入栏+消息扩展菜单。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="底部输入栏 ChatPrimaryMenu" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 ChatExtendMenu" />
+</ImageGallery>
 
 ## 设置底部输入栏
 
 ### 设置底部输入栏背景色
 
 ```Swift
-            //在MessageListController.swift及其子类（继承注册后）
-            self.messageContainer.inputBar.backgroundColor = .orange
+    //在MessageListController.swift及其子类（继承注册后）
+    self.messageContainer.inputBar.backgroundColor = .orange
 ```
-
-// TODO：添加截图
 
 ### 设置文本输入框默认文本
 
 可通过 `Appearance.chat.inputPlaceHolder` 设置文本输入框中的默认文本：
 
 ```Swift
-        Appearance.chat.inputPlaceHolder = "说点什么吧..."
-        Appearance.chat.maxInputHeight = 80 
+    Appearance.chat.inputPlaceHolder = "说点什么吧..."
+    Appearance.chat.maxInputHeight = 80 
 ```
 
 ### 监听输入内容变化 

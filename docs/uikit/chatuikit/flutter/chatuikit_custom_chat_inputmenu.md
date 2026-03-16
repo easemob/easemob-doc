@@ -5,6 +5,11 @@
 - 底部输入栏 `ChatUIKitInputBar`：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展。
 - 消息扩展菜单 `ChatUIKitMessageViewBottomMenu`：提供附件类型消息的发送入口，支持发送图片、视频、文件，并可扩展至自定义消息类型（如名片消息等）。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="底部输入栏 ChatUIKitInputBar" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 ChatUIKitMessageViewBottomMenu" />
+</ImageGallery>
+
 ## 设置底部输入栏背景
 
 `ChatUIKitInputBar` 的背景样式可通过 `ChatUIKitInputBarTheme` 主题扩展进行自定义配置。提供以下两种设置方式：
@@ -58,7 +63,7 @@ Theme(
 - `ChatUIKitInputBar` 内部通过 `Theme.of(context).extension<ChatUIKitInputBarTheme>()` 获取主题配置。
 :::
 
-## 设置底部输入栏
+## 设置底部输入框布局
 
 ### 设置相关属性
 
@@ -71,8 +76,10 @@ Theme(
 | 定制顶部扩展区域 | 支持设置自定义的菜单顶部布局，包括引用回复条与多选消息工具条。 |
 | 界面区域控制 | 可选择仅显示菜单顶部扩展区域，隐藏底部输入与扩展面板部分。 |
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置输入菜单" />
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置底部输入栏" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension_top.png" title="顶部扩展区域" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_top_excluded.png" title="除顶部扩展区域外的区域" />
 </ImageGallery>
 
 使用示例如下：

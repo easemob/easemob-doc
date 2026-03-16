@@ -2,6 +2,10 @@
 
 本文介绍如何通过 `ConversationsView` 实现会话列表的基本设置，包括会话列表空白页面、添加自定义会话列表和设置会话事件监听。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="完整的会话列表页面 ConversationsView" />
+</ImageGallery>
+
 ## 概述
 
 `ConversationsView` 提供了丰富的参数，支持以下会话自定义设置：

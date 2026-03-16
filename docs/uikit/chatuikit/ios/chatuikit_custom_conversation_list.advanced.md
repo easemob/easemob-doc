@@ -2,6 +2,10 @@
 
 本文介绍如何通过 `Appearance.conversation` 和 `ComponentsRegister` 实现会话列表的高级设置，包括条目样式、侧滑菜单、更多操作菜单等功能的配置。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationList.swift" />
+</ImageGallery>
+
 ## 概述
 
 会话列表的自定义主要通过以下两个模块实现：
@@ -80,9 +84,13 @@ Appearance.conversation.listMoreActions = [
 Appearance.conversation.rowHeight = 76
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png" title="会话条目的高度" />
+</ImageGallery>
+
 ## 设置会话条目头像
 
-通过 `Appearance.conversation` 调整单聊和群聊的默认头像：
+1. 通过 `Appearance.conversation` 调整单聊和群聊的默认头像：
 
 ```swift
 // 设置单聊默认头像
@@ -91,6 +99,16 @@ Appearance.conversation.singlePlaceHolder = UIImage(named: "my_single_avatar")
 // 设置群聊默认头像
 Appearance.conversation.groupPlaceHolder = UIImage(named: "my_group_avatar")
 ```
+
+2. 设置会话头像圆角：
+
+头像圆角，分为极小、小、中、大等四个等级。你可以利用 `Appearance.avatarRadius = value` 设置头像圆角。
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_square.png" title="方形头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_circle.png" title="圆形头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_no.png" title="无头像" />
+</ImageGallery>
 
 ## 设置会话侧滑菜单
 
@@ -105,11 +123,10 @@ Appearance.conversation.swipeRightActions = [.more, .read]
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipeLeftActions.png" title="会话左滑和右滑" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipeLeftActions.png" title="会话左滑和右滑菜单" />
 </ImageGallery>
 
 ## 设置会话条目时间
-
 
 #### 设置时间格式
 
@@ -235,6 +252,10 @@ actions.append(scanAction)
 Appearance.conversation.listMoreActions = actions
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/conversation_operation.png" title="导航栏更多菜单" />
+</ImageGallery>
+
 ## 设置消息未读计数
 
 1. 继承 `ConversationListCell` 创建子类。
@@ -246,6 +267,10 @@ Appearance.conversation.listMoreActions = actions
         
     }
 ```
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_unread.png" title="消息未读计数图标" />
+</ImageGallery>
 
 ## 添加自定义会话条目
 

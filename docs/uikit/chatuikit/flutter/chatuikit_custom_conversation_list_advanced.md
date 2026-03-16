@@ -2,7 +2,9 @@
 
 本文介绍如何通过 `ConversationListViewController` 和自定义构建器实现会话列表的高级设置，包括会话条目的样式、头像、长按菜单以及图标等。
 
-// TODO：添加截图
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="完整的会话列表页面 ConversationsView" />
+</ImageGallery>
 
 ## 概述
 
@@ -55,6 +57,10 @@ ConversationsView(
   },
 )
 ```
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png" title="会话条目的高度" />
+</ImageGallery>
 
 ## 设置会话条目标题
 
@@ -126,6 +132,14 @@ ConversationsView(
 - **隐藏默认时间并自行实现**：设置 `showNewMessageTime: false` 隐藏默认时间显示，然后通过其他方式（如自定义布局）展示你所需的时间格式。
 
 ## 设置会话条目头像
+
+你可以设置默认头像以及头像的样式，如下图所示：
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_square.png" title="方形头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_circle.png" title="圆形头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_no.png" title="无头像" />
+</ImageGallery>
 
 #### 设置默认头像
 

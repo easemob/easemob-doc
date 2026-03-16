@@ -21,11 +21,11 @@
 | `convId`                        | `string`                                    | 是       | 会话 ID。                                                                                                                                                                                |
 | `convType`                      | `ChatConversationType`                      | 是       | 会话类型。                                                                                                                                                                               |
 | `containerStyle`                | `StyleProp<ViewStyle>`                      | 否       | 消息列表容器的样式。详见 [设置容器样式](chatuikit_custom_chat_advanced.html#设置容器样式)。                                                                                                                                  |
-| `onClickedItem`                 | `(id, model) => void \| boolean`            | 否       | 点击消息回调。返回 `false` 可阻止默认行为。详见 [点击消息条目](#点击消息条目)。                                                                                                     |
-| `onLongPressItem`               | `(id, model) => void \| boolean`            | 否       | 长按消息回调。返回 `false` 可阻止默认行为。详见 [长按消息条目](#长按消息条目)。                                                                                                     |
+| `onClickedItem`                 | `(id, model) => void \| boolean`            | 否       | 点击消息回调。返回 `false` 可阻止默认行为。详见 [点击消息条目](#点击消息)。                                                                                                     |
+| `onLongPressItem`               | `(id, model) => void \| boolean`            | 否       | 长按消息回调。返回 `false` 可阻止默认行为。详见 [长按消息条目](#长按消息)。                                                                                                     |
 | `onClickedItemAvatar`           | `(id, model) => void \| boolean`            | 否       | 点击头像的回调。返回 `false` 可阻止默认行为。详见 [点击消息头像](#点击头像)。                                                                                                     |
 | `onClickedItemQuote`            | `(id, model) => void \| boolean`            | 否       | 点击引用消息的回调。返回 `false` 可阻止默认行为。详见 [点击引用消息](#点击引用消息)。                                                                                                     |
-| `recvMessageAutoScroll`         | `boolean`                                   | 否       | 收到新消息时是否自动滚动到底部。<br/> - `true`：自动滚动。<br/> - `false`（默认）：不自动滚动。<br/> 详见 [自动滚动设置](chatuikit_custom_chat_advanced.html#自动滚动设置)。                                           |
+| `recvMessageAutoScroll`         | `boolean`                                   | 否       | 收到新消息时是否自动滚动到底部。<br/> - `true`：自动滚动。<br/> - `false`（默认）：不自动滚动。<br/> 详见 [自动滚动设置](chatuikit_custom_chat_advanced.html#自动滚动控制)。                                           |
 | `messageLayoutType`             | `MessageLayoutType`                         | 否       | 消息布局类型。<br/> - `left`：全部消息都在左侧。<br/> - `right`：全部消息都在右侧。<br/> - 不设置（默认）：发送的消息在右侧，接收的消息在左侧。<br/> 详见 [消息布局类型](chatuikit_custom_chat_advanced.html#消息布局类型)。 |
 | `reportMessageCustomList`       | `{key: string, value: string}[]`            | 否       | 自定义消息举报内容列表。详见 [自定义消息上报](chatfeature_common.html#消息审核)。                                                                                                                          |
 | `listItemRenderProps`           | `MessageListItemRenders & {ListItemRender}` | 否       | 自定义消息条目渲染组件。                                                                                                                                                               |
@@ -74,7 +74,7 @@
 | `removeMultiSelected`      | 移除已选的消息。              |
 | `getMultiSelectedMessages` | 获取已选消息列表。          |
 
-## 设置消息列表的背景颜色
+## 设置消息列表的背景色
 
 ```tsx
 type Props = NativeStackScreenProps<RootScreenParamsList>;
@@ -169,6 +169,10 @@ export function ConversationDetailScreen(props: Props) {
 
 `MessageBubble` 为消息气泡组件，支持自定义气泡的颜色、圆角、阴影等样式。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
+</ImageGallery>
+
 ```typescript
 import React from 'react';
 import { View } from 'react-native';
@@ -202,9 +206,18 @@ export function CustomMessageBubble(props: MessageBubbleProps) {
 }
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_square.png" title="带箭头的方角气泡" />
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_circle.png" title="圆角气泡" />
+</ImageGallery>
+
 ### 设置消息时间
 
 初始化时，可设置消息时间格式。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
+</ImageGallery>
 
 ```tsx
 export function App() {
