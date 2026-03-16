@@ -2,9 +2,9 @@
 
 会话列表页面支持按会话名称搜索会话。你可以控制搜索栏的显示、自定义搜索栏的样式、跳转逻辑以及自定义搜索功能。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/searchbar.png" title="搜索栏 SearchView" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/searchbar.png width="1000"/>
+</div>
 
 ## 使用默认搜索栏
 

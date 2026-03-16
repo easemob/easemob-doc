@@ -11,9 +11,9 @@
 - **结果展示**：清晰的搜索结果列表，包含发送者、内容摘要和时间。
 - **交互跳转**：点击搜索结果可跳转至对应消息位置。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/searchbar.png" title="搜索栏 SearchView" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/searchbar.png width="1000"/>
+</div>
 
 ## 基础用法
 

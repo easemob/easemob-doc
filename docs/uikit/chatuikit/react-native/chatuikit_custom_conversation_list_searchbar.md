@@ -2,13 +2,13 @@
 
 会话列表页面支持按会话名称搜索会话。你可以控制搜索栏的显示、自定义搜索样式以及处理搜索点击事件。
 
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/searchbar.png width="1000"/>
+</div>
+
 :::tip
 React Native UIKit 不内置的路由跳转功能，也未集成第三方路由库。搜索相关的页面跳转需在你的应用层自行实现。
 :::
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/searchbar.png" title="搜索栏 SearchView" />
-</ImageGallery>
 
 ## 通用性设计
 
