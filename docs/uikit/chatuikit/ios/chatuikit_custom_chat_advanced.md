@@ -7,7 +7,7 @@
 可通过以下方式定制消息列表：
 
 - **Appearance.chat**: 配置 UI 样式、图标、菜单项等。
-- **ComponentsRegister**: 注册自定义消息 Cell 或替换核心组件类。
+- **ComponentsRegister**: 注册自定义消息条目或替换核心组件类。
 
 :::tip
 - 所有配置项均可通过 `Appearance.chat` 全局调整。
@@ -273,7 +273,7 @@ Appearance.chat.messageLongPressedActions = actions
 
 ### 设置菜单样式
 
-- 图标替换/隐藏：详见 [Chat/Cells 图片和国际化资源表](#chatcells-图片和国际化资源表)。
+- 图标替换/隐藏：详见 [Chat/消息条目的图片和国际化资源表](#chat-消息条目的图片和国际化资源表)。
 - 文字颜色：详见 [主题色的说明](chatuikit_theme.html#切换为自定义主题)。
 - 修改菜单项文字大小：
   菜单样式属于全局统一配置，目前不支持对单个菜单项的文字大小进行单独修改。
@@ -289,9 +289,9 @@ Appearance.chat.messageLongPressedActions = actions
 
 本节以红包消息为例，介绍如何添加新类型消息条目。
 
-#### 步骤一 继承自定义消息 Cell
+#### 步骤一 继承自定义消息条目
 
-根据需求继承 `EaseChatUIKit` 中的自定义消息 Cell。
+根据需求继承 `EaseChatUIKit` 中的自定义消息条目。
 
 ```swift
 import UIKit
@@ -320,9 +320,9 @@ class RedPackageCell: CustomMessageCell {
 
 ```
 
-#### 步骤二 继承 Cell 的渲染模型
+#### 步骤二 继承消息条目的渲染模型
 
-根据需求继承 `MessageEntity`（Cell 的渲染模型），重写 `customSize()` 方法指定气泡尺寸。其中 `redPackageIdentifier` 为红包的自定义消息的 `event` 标识。
+根据需求继承 `MessageEntity`（消息条目的渲染模型），重写 `customSize()` 方法指定气泡尺寸。其中 `redPackageIdentifier` 为红包的自定义消息的 `event` 标识。
 
 ```swift
 import UIKit
@@ -445,7 +445,7 @@ extension MessageListViewModel {
         ComponentsRegister.shared.MessageRenderEntity = MineMessageEntity.self
         ComponentsRegister.shared.Conversation = MineConversationInfo.self
         ComponentsRegister.shared.MessageViewController = CustomMessageListController.self
-        //redPackageIdentifier 为Cell的唯一标识，也是环信自定义消息的时间类型
+        //redPackageIdentifier 为消息条目的唯一标识，也是环信自定义消息的时间类型
         ComponentsRegister.shared.registerCustomCellClasses(cellType: RedPackageCell.self,identifier: redPackageIdentifier)
 ```
 
@@ -528,7 +528,7 @@ final class MineConversationInfo: ConversationInfo {
 #### 步骤七 注册消息条目
 
 ```swift
-// 替换默认的文本消息 Cell
+// 替换默认的文本消息条目
 ComponentsRegister.shared.ChatTextMessageCell = MyCustomMessageCell.self
 
 // 对应的 `ChatImageMessageCell`&`ChatGIFMessageCell`&`ChatAudioMessageCell`&`ChatVideoMessageCell`&`ChatFileMessageCell`&`ChatContactMessageCell`&`ChatAlertCell`&`ChatLocationCell`&`ChatCombineCell` 与文本消息一致
@@ -541,7 +541,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
   <ImageItem src="/images/uikit/chatuikit/ios/red_package_receive.png" title="接收红包消息" />
 </ImageGallery>
 
-## 消息 cell 业务方法信息及重载
+## 消息条目业务方法信息及重载
 
 ### 方法列表
 
@@ -550,14 +550,14 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 1. **`@objc` 标记**：方法可被 Objective-C 调用。
 2. **`open` 关键字**：方法可在子类中重载。
 3. **`createXXX()` 系列**：方法用于创建自定义 UI 组件。
-4. **`refresh()` 方法**：用于更新 Cell 显示内容。
+4. **`refresh()` 方法**：用于更新消息条目显示内容。
 5. **`switchTheme()` 方法**：用于适配主题切换。
 
 :::tip
 `lazy var` 属性会在首次访问时才会调用对应方法。
 :::
 
-#### 1. MessageCell (基础消息Cell)
+#### 1. MessageCell (基础消息条目)
 
 - **UI 组件创建方法**
 
@@ -578,13 +578,13 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :--------- | :------ | :--------- |
-| `refresh(entity:)` | `@objc(refreshWithEntity:) open func refresh(entity: MessageEntity)` | 刷新 Cell 数据显示 | Void | entity: 消息实体对象 |
+| `refresh(entity:)` | `@objc(refreshWithEntity:) open func refresh(entity: MessageEntity)` | 刷新消息条目数据显示 | Void | entity: 消息实体对象 |
 | `updateAxis(entity:)` | `@objc(updateAxisWithEntity:) open func updateAxis(entity: MessageEntity)` | 更新子视图布局坐标 | Void | entity: 消息实体对象 |
 | `clickAction(gesture:)` | `@objc open func clickAction(gesture: UITapGestureRecognizer)` | 处理点击手势 | Void | gesture: 点击手势识别器 |
 | `longPressAction(gesture:)` | `@objc open func longPressAction(gesture: UILongPressGestureRecognizer)` | 处理长按手势 | Void | gesture: 长按手势识别器 |
 | `switchTheme(style:)` | `open func switchTheme(style: ThemeStyle)` | 切换主题样式 | Void | style: 主题样式枚举 |
 
-#### 2. TextMessageCell (文本消息 Cell)
+#### 2. TextMessageCell (文本消息条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :---------- | :------- | :--------- |
@@ -598,7 +598,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `switchTheme(style:)` | `open override func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 调用 `onThemeChanged()` |
 | `onThemeChanged()` | `open func onThemeChanged()` | 主题变化时更新 UI | Void | 处理链接颜色、选中颜色等 |
 
-#### 3. ImageMessageCell (图片消息 Cell)
+#### 3. ImageMessageCell (图片消息条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :------- | :------------- | :--------- |
@@ -606,7 +606,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新图片消息显示 | Void | 处理本地/远程图片加载 |
 | `switchTheme(style:)` | `open override func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 更新背景色和边框 |
 
-#### 4. VideoMessageCell (视频消息Cell)
+#### 4. VideoMessageCell (视频消息条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :--------- | :------- | :--------- |
@@ -615,7 +615,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新视频消息显示 | Void | 加载视频缩略图、控制播放按钮的显示和隐藏 |
 | `switchTheme(style:)` | `open override func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 更新背景色和边框 |
 
-#### 5. AudioMessageCell (语音消息Cell)
+#### 5. AudioMessageCell (语音消息条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :-------- | :------- | :--------- |
@@ -623,14 +623,14 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新语音消息显示 | Void | 显示已读/未读红点 |
 | `switchTheme(style:)` | `open override func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 更新红点颜色 |
 
-#### 6. FileMessageCell (文件消息Cell)
+#### 6. FileMessageCell (文件消息条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :--------- | :-------- | :--------- |
 | `createContent()` | `@objc open func createContent() -> UIView` | 创建文件内容视图 | UIView | 返回`FileMessageView` 实例 |
 | `refresh(entity:)` | `public override func refresh(entity: MessageEntity)` | 刷新文件消息显示 | Void | 调用 `FileMessageView` 的 `refresh` |
 
-#### 7. LocationMessageCell (位置消息Cell)
+#### 7. LocationMessageCell (位置消息条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :-------- | :------------- | :--------- |
@@ -638,7 +638,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新位置消息显示 | Void | 包含收发消息 UI 区分 |
 | `switchTheme(style:)` | `open override func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 空实现，可自定义 |
 
-#### 8. CustomMessageCell (自定义消息Cell)
+#### 8. CustomMessageCell (自定义消息条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :------------ | :---------- | :--------- |
@@ -646,14 +646,14 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新自定义消息显示 | Void | 包含收发消息 UI 区分 |
 | `switchTheme(style:)` | `open override func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 空实现，可自定义 |
 
-#### 9. ContactCardCell (联系人卡片Cell)
+#### 9. ContactCardCell (联系人卡片条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :----------- | :------------ | :--------- |
 | `createContent()` | `@objc open func createContent() -> UIView` | 创建联系人卡片视图 | UIView | 返回 `ContactCardView` 实例 |
 | `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新联系人卡片显示 | Void | 调用 `ContactCardView` 的 `refresh` |
 
-#### 10. CombineMessageCell (合并消息Cell)
+#### 10. CombineMessageCell (合并消息条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :-------------- | :--------- | :--------- |
@@ -661,7 +661,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新合并消息显示 | Void | 调用 `CombineMessageView` 的 `refresh` |
 | `switchTheme(style:)` | `open override func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 空实现，可自定义 |
 
-#### 11. GIFMessageCell (GIF消息Cell)
+#### 11. GIFMessageCell (GIF 消息条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :-------- | :------------- | :--------- |
@@ -669,7 +669,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新 GIF 消息显示 | Void | 加载并播放 GIF 动画 |
 | `switchTheme(style:)` | `open override func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 更新背景色和边框 |
 
-#### 12. AlertMessageCell (提醒消息Cell)
+#### 12. AlertMessageCell (提醒消息)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :----- | :------- | :--------- |
@@ -677,14 +677,14 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新提醒消息显示 | Void | 显示时间和提醒内容 |
 | `switchTheme(style:)` | `public override func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 更新时间文字颜色 |
 
-#### 13. ChatHistoryCell (聊天历史Cell)
+#### 13. ChatHistoryCell (聊天历史)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :---------- | :------------ | :--------- |
 | `refresh(entity:)` | `@objc open func refresh(entity: MessageEntity)` | 刷新聊天历史显示 | Void | 支持图片、视频、文本消息显示 |
 | `switchTheme(style:)` | `public func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 更新昵称、分隔线、日期颜色 |
 
-#### 14. ChatThreadCell (话题Cell)
+#### 14. ChatThreadCell (话题)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :------------- | :------------ | :--------- |
@@ -692,7 +692,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `renderMessageContent(message:)` | `open func renderMessageContent(message: ChatMessage?) -> NSAttributedString` | 渲染消息内容 | `NSAttributedString` | `message`: 最新消息对象 |
 | `switchTheme(style:)` | `public func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 更新各元素颜色 |
 
-#### 15. PinnedMessageCell (置顶消息Cell)
+#### 15. PinnedMessageCell (置顶消息)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :-------- | :-------- | :--------- |
@@ -701,7 +701,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `confirmRemoveAction()` | `@objc open func confirmRemoveAction()` | 确认移除按钮点击 | Void | 触发移除回调 |
 | `switchTheme(style:)` | `public func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 更新容器和按钮颜色 |
 
-#### 16. ForwardTargetCell (转发目标Cell)
+#### 16. ForwardTargetCell (转发目标条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :--------- | :----------- | :--------- |
@@ -709,13 +709,13 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `highlightKeywords(keyword:in:)` | `func highlightKeywords(keyword: String, in string: String) -> NSAttributedString` | 高亮关键词 | NSAttributedString | 搜索结果关键词高亮 |
 | `actionClick()` | `@objc open func actionClick()` | 发送按钮点击 | Void | 触发转发回调 |
 
-#### 17. ReactionDetailCell (表情回应详情 Cell)
+#### 17. ReactionDetailCell (表情回应详情)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :---------- | :------------ | :--------- |
 | `refresh(reaction:)` | `@objc open func refresh(reaction: MessageReaction)` | 刷新表情回应显示 | Void | `reaction`: 表情回应对象 |
 
-#### 18. ReactionUserCell (表情回应用户Cell)
+#### 18. ReactionUserCell (表情回应用户)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :---------- | :---------- | :--------- |
@@ -724,14 +724,14 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `createNickName()` | `@objc open func createNickName() -> UILabel` | 创建昵称标签 | UILabel | 无参数 |
 | `refresh(profile:)` | `@objc open func refresh(profile: ChatUserProfileProtocol)` | 刷新用户信息显示 | Void | `profile`: 用户信息对象 |
 
-#### 19. ReportOptionCell (举报选项Cell)
+#### 19. ReportOptionCell (举报选项)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :-------- | :--------- | :--------- |
 | `refresh(select:title:)` | `@objc open func refresh(select: Bool, title: String)` | 刷新举报选项显示 | Void | `select`: 是否选中<br/>`title`: 选项标题 |
 | `switchTheme(style:)` | `open func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 更新选中/未选中图标颜色 |
 
-#### 20. SearchHistoryMessageCell (搜索历史消息Cell)
+#### 20. SearchHistoryMessageCell (搜索历史消息)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :----------- | :----------- | :--------- |
@@ -747,7 +747,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 
 | 方法名 | 方法签名 | 返回类型 | 参数说明 | 作用描述 |
 | :-------- | :------- | :----- | :----------- | :--------- |
-| `cellHeight()` | `open func cellHeight() -> CGFloat` | CGFloat | 无参数 | 计算消息Cell的总高度<br/>包含：昵称、回复、气泡、时间、话题、表情回应高度 |
+| `cellHeight()` | `open func cellHeight() -> CGFloat` | CGFloat | 无参数 | 计算消息条目的总高度<br/>包含：昵称、回复、气泡、时间、话题、表情回应高度 |
 | `reactionMenuWidth()` | `open func reactionMenuWidth() -> CGFloat` | CGFloat | 无参数 | 计算表情回应区域的宽度<br/>返回可见表情回应的总宽度，超出最大宽度时截断 |
 | `topicContentHeight()` | `open func topicContentHeight() -> CGFloat` | CGFloat | 无参数 | 计算话题内容区域的高度<br/>如果消息包含 Thread 话题，返回`topicHeight(58)`，否则返回 `0` |
 | `reactionContentHeight()` | `open func reactionContentHeight() -> CGFloat` | CGFloat | 无参数 | 计算表情回应内容的高度<br/>如果有表情回应，返回reactionHeight(30)，否则返回 `0`。 |
@@ -849,10 +849,10 @@ class MyMessageEntity: MessageEntity {
 }
 ```
 
-#### 自定义各消息类型 Cell
+#### 自定义各消息类型条目
 
 ```swift
-// 示例1: 自定义文本消息Cell的内容视图
+// 示例1: 自定义文本消息条目的内容视图
 class MyTextMessageCell: TextMessageCell {
     override func createContent() -> LinkRecognizeTextView {
         let textView = super.createContent()
@@ -861,7 +861,7 @@ class MyTextMessageCell: TextMessageCell {
     }
 }
 
-// 示例2: 自定义图片消息Cell的刷新逻辑
+// 示例2: 自定义图片消息条目的刷新逻辑
 class MyImageMessageCell: ImageMessageCell {
     override func refresh(entity: MessageEntity) {
         super.refresh(entity: entity)
@@ -871,7 +871,7 @@ class MyImageMessageCell: ImageMessageCell {
     }
 }
 
-// 示例3: 完全自定义消息Cell
+// 示例3: 完全自定义消息条目
 class OrderMessageCell: CustomMessageCell {
     override func createContent() -> UIView {
         // 创建订单卡片视图
@@ -894,7 +894,7 @@ class OrderMessageCell: CustomMessageCell {
 | 方法名 | 方法签名 | 返回类型 | 作用描述 |
 | :-------- | :------- | :------------------------------------- | :------------------------------------- |
 | `showDate` | `@objc open var showDate: String { get }` | String | 获取会话列表中显示的日期<br/>当天：HH:mm；非当天：yyyy-MM-dd HH:mm |
-| `showDetailDate` | `@objc open var showDetailDate: String { get }` | String | 获取聊天 Cell 中显示的详细日期<br/>格式同 showDate，可单独配置 |
+| `showDetailDate` | `@objc open var showDetailDate: String { get }` | String | 获取聊天消息条目中显示的详细日期<br/>格式同 showDate，可单独配置 |
 | `showType` | `@objc open var showType: String { get }` | String | 获取消息类型的显示文本<br/>返回：[图片]、[语音]、[视频]、[文件]、[位置]等本地化文本 |
 | `replyIcon` | `@objc open var replyIcon: UIImage? { get }` | UIImage? | 获取回复消息的图标<br/>根据消息类型返回对应图标（图片、语音、视频、文件等） |
 | `showContent` | `@objc open var showContent: String { get }` | String | 获取消息显示内容<br/>文本：消息内容；语音：时长；文件：文件名；自定义：自定义内容 |
@@ -968,9 +968,9 @@ override open func methodName(parameters) -> ReturnType {
 | `enterTopic(threadId:message:)` | 进入话题详情 | `threadId`: 话题 ID, `message`: 消息对象 |
 | `messageWillSendFillExtensionInfo()` | 消息发送前填充扩展信息 | 返回扩展信息字典 |
 | `filterMessageActions(message:)` | 过滤消息长按菜单项 | `message`: 消息实体，返回可用的菜单项 |
-| `showMessageLongPressedDialog(cell:)` | 显示消息长按对话框 | `cell`: 消息 Cell |
-| `showMessageLongPressedMenuWithArrow(cell:items:header:)` | 显示带箭头的长按菜单 | `cell`: 消息 Cell, `items`: 菜单项, `header`: 头部视图 |
-| `showMessageLongPressedMenuActionSheet(cell:items:header:)` | 显示 `ActionSheet` 样式的长按菜单 | `cell`: 消息 Cell, `items`: 菜单项, `header`: 头部视图 |
+| `showMessageLongPressedDialog(cell:)` | 显示消息长按对话框 | `cell`: 消息条目 |
+| `showMessageLongPressedMenuWithArrow(cell:items:header:)` | 显示带箭头的长按菜单 | `cell`: 消息条目, `items`: 菜单项, `header`: 头部视图 |
+| `showMessageLongPressedMenuActionSheet(cell:items:header:)` | 显示 `ActionSheet` 样式的长按菜单 | `cell`: 消息条目, `items`: 菜单项, `header`: 头部视图 |
 | `feedback(with:)` | 触觉反馈 | `style`: 反馈样式 |
 | `showAllReactionsController(message:)` | 显示所有表情回应选择器 | `message`: 消息实体 |
 | `showReactionDetailsController(message:)` | 显示表情回应详情 | `message`: 消息实体 |
@@ -1082,7 +1082,7 @@ override open func methodName(parameters) -> ReturnType {
 
 - 若只需支持亮色模式，仅需配置亮色模式相关的 `hue` 值即可。
 
-#### Chat/Cells 图片和国际化资源表
+#### Chat/消息条目的图片和国际化资源表
 
 | 类别 | 资源类型 | 覆盖方式 |
 | :-------- | :------- | :------------------------------------- |

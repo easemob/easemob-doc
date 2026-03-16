@@ -19,6 +19,10 @@
 
 ## 设置消息条目
 
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_item.png  width="1000" />
+</div>
+
 ### 设置头像和昵称
 
 头像和昵称的显示由 `Appearance.chat.contentStyle` 控制：
@@ -35,6 +39,12 @@ Appearance.avatarRadius = .large
 ```
 
 ### 设置消息气泡
+
+消息气泡如下图所示：
+
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="350" />
+</div>
 
 #### 设置消息气泡样式
 

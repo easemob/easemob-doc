@@ -20,7 +20,7 @@
 `ChatMessageBubbleProvider` 用于自定义消息气泡的展示，保留默认的头像、昵称、时间戳等布局，适用于大部分自定义场景。
 
 <div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="600" />
 </div>
 
 #### 实现自定义气泡
@@ -349,7 +349,7 @@ messageItemMenusProvider: (message: ChatKitMessage) => {
 `ChatMessageItemProvider` 用于完全自定义整个消息条目，包括头像、昵称、时间戳、消息状态等。
 
 <div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_item.png />
+  <img src=/images/uikit/chatuikit/android/message_item.png  width="1000" />
 </div>
 
 #### 实现自定义消息条目

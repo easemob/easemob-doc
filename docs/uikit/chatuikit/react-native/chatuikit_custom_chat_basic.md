@@ -124,6 +124,12 @@ export function ConversationDetailScreen(props: Props) {
 
 ## 设置消息条目
 
+消息条目的界面效果如下图所示：
+
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_item.png width="1000"/>
+</div>
+
 ### 设置头像和昵称
 
 `MessageList` 组件 **不内置默认头像和昵称**，需通过用户信息提供机制进行配置：
@@ -170,7 +176,7 @@ export function ConversationDetailScreen(props: Props) {
 `MessageBubble` 为消息气泡组件，支持自定义气泡的颜色、圆角、阴影等样式。
 
 <div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="500" />
 </div>
 
 ```typescript

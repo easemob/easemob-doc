@@ -85,6 +85,11 @@ fragment?.let { fragment ->
 | 接收方头像显示/隐藏 | `hideChatReceiveAvatar()`  | `hideReceiverAvatar()`    | - `true`：隐藏<br/> -（默认）`false`：显示 |
 | 昵称显示/隐藏       | `showNickname()`           | `showNickname()`          | - `true`：显示<br/> -（默认）`false`：隐藏 |
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hiddenable.png" title="显示发送方和接收方头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hidden.png" title="隐藏发送方和接收方头像" />
+</ImageGallery>
+
 ## 设置消息气泡
 
 你可以通过 `chatMessageListLayout` 设置消息气泡。
@@ -102,7 +107,7 @@ chatMessageListLayout?.let{
 ```
 
 <div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="600" />
 </div>
 
 除了 `chatMessageListLayout`，你可以通过 `UIKitChatFragment.Builder` 设置消息气泡，详见 [消息列表的基本设置说明](chatuikit_custom_chat_basic.html#设置消息气泡)。两种方式的区别如下表所示：

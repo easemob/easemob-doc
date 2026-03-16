@@ -111,7 +111,7 @@ MessagesView(
 - 设置消息事件监听
   
 <div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_item.png />
+  <img src=/images/uikit/chatuikit/android/message_item.png  width="1000" />
 </div>
 
 ### 设置头像和昵称
@@ -128,16 +128,17 @@ MessagesView(
 )
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hiddenable.png" title="显示头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hidden.png" title="隐藏头像" />
+</ImageGallery>
+
 ### 设置消息气泡
 
 消息气泡的样式支持以下两种方式进行设置：
 
 1. **通过主题配置**：可在全局主题中统一定义消息气泡的样式属性，如背景色、边距、圆角等。
 2. **通过自定义 `bubbleBuilder`**：可为特定消息类型或会话提供完全自定义的气泡布局与样式，实现更高灵活度的个性化设计。
-
-<div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
-</div>
 
 以下为使用 `bubbleBuilder` 自定义气泡的示例：
 
@@ -157,6 +158,10 @@ MessagesView(
   },
 )
 ```
+
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="600" />
+</div>
 
 ### 设置消息时间
 

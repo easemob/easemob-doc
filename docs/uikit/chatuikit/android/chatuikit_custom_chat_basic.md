@@ -109,7 +109,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 
 <div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_item.png />
+  <img src=/images/uikit/chatuikit/android/message_item.png width="1000"/>
 </div>
 
 ### 设置头像和昵称
@@ -140,10 +140,6 @@ fragment?.let { fragment ->
 
 你可以通过 `UIKitChatFragment#Builder` 设置消息气泡。
 
-<div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
-</div>
-
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
 // easeChatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
@@ -161,6 +157,10 @@ fragment?.let { fragment ->
 ```
 
 除了 `UIKitChatFragment.Builder`，你可以通过 `chatMessageListLayout` 设置消息气泡，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html#设置消息气泡)。
+
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="600" />
+</div>
 
 ### 设置消息时间
 

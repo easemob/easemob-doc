@@ -102,7 +102,7 @@ Column() {
 - 设置消息时间。
 
 <div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_item.png />
+  <img src=/images/uikit/chatuikit/android/message_item.png  width="1000" />
 </div>
 
 ### 设置头像和昵称
@@ -111,6 +111,11 @@ Column() {
 
 关于使用自己的头像和昵称，可以通过 `UserProfileProvider` 提供用户信息，详见 [用户自定义信息文档中的介绍](chatuikit_userinfo.html#用户信息或者群组信息提供)。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hiddenable.png" title="显示头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hidden.png" title="隐藏头像" />
+</ImageGallery>
+
 ### 设置消息气泡
 
 暂不支持通过 `ChatView` 参数直接设置消息气泡背景。
@@ -118,7 +123,7 @@ Column() {
 你可以通过 `ChatMessageBubbleProvider` 自定义消息气泡，详见 [消息列表的高级设置](chatuikit_custom_chat_advanced.html#自定义消息气泡)。
 
 <div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="600" />
 </div>
 
 ### 设置消息时间

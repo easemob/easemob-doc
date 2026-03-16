@@ -112,6 +112,10 @@ function ChatScreen({ route }) {
 
 `listItemRenderProps` 是消息列表最核心的自定义属性，提供对消息渲染的细粒度控制。通过该属性，你可以完全控制消息的显示样式，包括消息气泡、内容、头像、引用消息等。
 
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_item.png width="1000"/>
+</div>
+
 ### 可自定义组件
 
 `listItemRenderProps` 包含以下可自定义组件：
@@ -296,6 +300,10 @@ export function CustomMessageView(props: MessageViewProps) {
 ### 自定义消息气泡
 
 `MessageBubble` 是包裹消息内容的背景容器组件，负责消息气泡的视觉样式呈现，包括背景色、圆角、阴影等外观属性。详见 [消息列表的基本设置说明](chatuikit_custom_chat_basic.html#设置消息气泡)。
+
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="500" />
+</div>
 
 ### 自定义消息回复 Reaction
 

@@ -94,7 +94,7 @@
 - 设置消息日期
 
 <div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_item.png />
+  <img src=/images/uikit/chatuikit/android/message_item.png  width="1000" />
 </div>
 
 ### 添加自定义消息条目
@@ -157,7 +157,7 @@ const CustomTextMessage = ({ message }) => {
 你可以通过以下两种方式设置消息气泡样式：
 
 <div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_bubble.png width="400" />
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="600" />
 </div>
 
 - 通过自定义消息组件设置：

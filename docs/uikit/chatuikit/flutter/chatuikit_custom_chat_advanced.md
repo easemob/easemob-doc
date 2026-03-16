@@ -49,6 +49,11 @@ MessagesView(
 )
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hiddenable.png" title="显示头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hidden.png" title="隐藏头像" />
+</ImageGallery>
+
 ## 设置消息气泡
 
 你可以通过 `bubbleBuilder` 设置消息气泡。
@@ -72,9 +77,9 @@ MessagesView(
 )
 ```
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_bubble.png" title="消息气泡" />
-</ImageGallery>
+<div style="text-align: center">
+  <img src=/images/uikit/chatuikit/android/message_bubble.png width="600" />
+</div>
 
 ## 设置消息时间样式
 
@@ -105,9 +110,9 @@ ChatUIKitTimeFormatter.instance.formatterHandler = (
 };
 ```
 
-<div style="text-align: center">
-  <img src=/images/uikit/chatuikit/android/message_time.png />
-</div>
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_time.png" title="消息时间" />
+</ImageGallery>
 
 ## 设置消息状态图标
 
