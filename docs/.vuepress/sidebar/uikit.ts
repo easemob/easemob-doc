@@ -38,7 +38,7 @@ const chatUikitSidebar = [
           collapsible: true,
           children: [
                { text: "基本设置", link: "chatuikit_custom_conversation_list_basic.html" },
-               { text: "高级设置", link: "chatuikit_custom_conversation_list.advanced.html" },
+               { text: "高级设置", link: "chatuikit_custom_conversation_list_advanced.html" },
           ],
         },
       ],

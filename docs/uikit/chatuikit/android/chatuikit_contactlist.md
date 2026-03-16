@@ -6,7 +6,7 @@
   <ImageItem src="/images/uikit/chatuikit/android/custom_contact_list.png" title="通讯录页面" />
 </ImageGallery>
 
-## ## 自定义设置概览
+## 自定义设置概览
 
 `ChatUIKitContactsListFragment` 提供了 Builder 构建方式，方便开发者进行一些自定义设置。目前提供的设置项如下：
 

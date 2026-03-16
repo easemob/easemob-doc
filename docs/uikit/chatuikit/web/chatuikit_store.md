@@ -143,9 +143,9 @@ const MyComponent = () => {
 | `loginState`          | 登录状态                                       |
 | `initConfig`          | 初始化配置                                     |
 
-### conversationStore
+### 会话管理
 
-会话管理 Store，用于管理会话列表和当前会话。
+会话管理 Store `conversationStore` 用于管理会话列表和当前会话。
 
 #### 数据属性
 
@@ -188,9 +188,9 @@ const conversation = rootStore.conversationStore.getConversation('singleChat', '
 rootStore.conversationStore.pinConversation('singleChat', 'userId', true);
 ```
 
-### messageStore
+### 消息管理
 
-消息管理 Store，用于管理消息的发送、接收、修改等操作。
+消息管理 Store `messageStore` 用于管理消息的发送、接收、修改等操作。
 
 #### 数据属性
 
@@ -298,9 +298,9 @@ rootStore.messageStore.translateMessage(
 );
 ```
 
-### addressStore
+### 通讯录管理
 
-通讯录管理 Store，用于管理联系人、群组、聊天室等信息。
+通讯录管理 Store `addressStore` 用于管理联系人、群组、聊天室等信息。
 
 #### 数据属性
 
@@ -401,9 +401,9 @@ rootStore.addressStore.muteChatRoomMember('chatroomId', 'userId', 3600);
 rootStore.addressStore.getBlockList();
 ```
 
-### pinnedMessagesStore
+### 置顶消息管理
 
-置顶消息管理 Store，用于管理置顶消息。
+置顶消息管理 Store `pinnedMessagesStore` 用于管理置顶消息。
 
 #### 数据属性
 
@@ -447,9 +447,9 @@ rootStore.pinnedMessagesStore.deletePinnedMessage('singleChat', 'conversationId'
 rootStore.pinnedMessagesStore.changeVisible(true);
 ```
 
-### threadStore
+### 消息话题管理 
 
-话题管理 Store，用于管理话题（Thread）相关功能。
+话题管理 Store `threadStore` 用于管理话题（Thread）相关功能。
 
 #### 数据属性
 
@@ -495,9 +495,9 @@ rootStore.threadStore.getGroupChatThreads('parentId');
 
 ## 自定义 Hooks
 
-### useChatContext
+### 消息 
 
-提供消息相关的数据和方法。
+`useChatContext` 提供消息相关的数据和方法。
 
 **返回值：**
 
@@ -521,9 +521,9 @@ rootStore.threadStore.getGroupChatThreads('parentId');
 }
 ```
 
-### useConversationContext
+### 会话 
 
-提供会话相关的数据和方法。
+`useConversationContext` 提供会话相关的数据和方法。
 
 **返回值：**
 
@@ -539,9 +539,9 @@ rootStore.threadStore.getGroupChatThreads('parentId');
 }
 ```
 
-### useAddressContext
+### 通讯录
 
-提供通讯录相关的数据和方法。
+`useAddressContext` 提供通讯录相关的数据和方法。
 
 **返回值：**
 
@@ -560,9 +560,9 @@ rootStore.threadStore.getGroupChatThreads('parentId');
 }
 ```
 
-### useChatroomContext
+### 聊天室
 
-提供聊天室相关的数据和方法。
+`useChatroomContext` 提供聊天室相关的数据和方法。
 
 **返回值：**
 
@@ -575,9 +575,9 @@ rootStore.threadStore.getGroupChatThreads('parentId');
 }
 ```
 
-### useThreadContext
+### 消息话题 
 
-提供话题相关的数据和方法。
+`useThreadContext` 提供话题相关的数据和方法。
 
 **返回值：**
 

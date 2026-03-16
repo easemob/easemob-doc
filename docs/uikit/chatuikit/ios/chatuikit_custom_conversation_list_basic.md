@@ -23,7 +23,7 @@
 | 会话标记已读           | 标记会话为已读，清除未读数。   |
 | 会话删除            | 从本地删除会话记录。|
 
-关于配置侧滑菜单按钮，详见 [会话列表的高级配置](chatuikit_custom_conversation_list.advanced.html#设置侧滑操作)。
+关于配置侧滑菜单按钮，详见 [会话列表的高级配置](chatuikit_custom_conversation_list_advanced.html#设置会话侧滑菜单)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/conversation_slide.png" title="会话操作" />
