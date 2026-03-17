@@ -14,7 +14,7 @@
   <ImageItem src="/images/uikit/chatuikit/android/titlebar_chat_single_group.png" title="标题栏 ComposeTitleBar" />
 </ImageGallery>
 
-## 基础设置
+## 基本设置
 
 标题栏的基本设置包括设置标题、返回事件与右侧菜单项。以下示例使用 `Navigation` 和 `ComponentV2` 组件：
 

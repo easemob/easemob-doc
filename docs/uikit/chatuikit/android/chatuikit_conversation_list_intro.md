@@ -43,7 +43,7 @@
 - **点击**：跳转至该会话的聊天页面。
 - **长按**：弹出操作菜单，支持免打扰、置顶、标记已读、删除。
 
-关于会话自定义，详见 [会话列表的基础设置](chatuikit_custom_conversation_list_basic.html) 和 [高级设置](chatuikit_custom_conversation_list_advanced.html) 说明。
+关于会话自定义，详见 [会话列表的基本设置](chatuikit_custom_conversation_list_basic.html) 和 [高级设置](chatuikit_custom_conversation_list_advanced.html) 说明。
 
 ## 创建会话列表页面
 

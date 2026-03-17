@@ -43,15 +43,20 @@ ChatUIKitConversationListFragment.Builder()
 | `setCustomAdapter()`              | 设置自定义的适配器，默认为 `ChatUIKitConversationListAdapter`。 |
 | `setCustomFragment()`             | 设置自定义聊天 `Fragment`，需要继承自 `ChatUIKitConversationListFragment`。 |
 
-## 设置会话列表空页面
+## 默认会话操作
 
-`ChatUIKitConversationListFragment#Builder` 提供 `setEmptyLayout()` 设置会话列表的空白页面。
+长按会话条目会显示会话操作菜单。会话列表页面使用 `ChatUIKitConversationListViewModel` 中提供的方法默认实现以下操作：
 
-```kotlin
-ChatUIKitConversationListFragment.Builder()
-    .setEmptyLayout(R.layout.layout_conversation_empty)
-    .build()
-```
+| 会话操作            | 描述   |
+| :-------------- | :----- | 
+| 会话免打扰       | - `makeSilentForConversation`：设置会话免打扰。<br/> - `cancelSilentForConversation` ：取消会话免打扰。   |
+| 会话置顶            | - `pinConversation`：置顶会话。<br/> - `unpinConversation`：取消置顶。     |
+| 会话标记已读           | `makeConversionRead`：标记会话为已读状态。    |
+| 会话删除            | `deleteConversation`：删除会话。   |
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
+</ImageGallery>
 
 ## 设置事件监听
 
@@ -73,20 +78,15 @@ ChatUIKitConversationListFragment.Builder()
 | `setOnMenuItemClickListener`    | 设置会话条目长按后弹出的菜单项的点击事件监听器。                                    |
 | `setConversationChangeListener` | 设置会话变化的监听器，例如会话被删除时触发。                    |
 
-## 默认会话操作
+## 设置会话列表空页面
 
-长按会话条目会显示会话操作菜单。会话列表页面使用 `ChatUIKitConversationListViewModel` 中提供的方法默认实现以下操作：
+`ChatUIKitConversationListFragment#Builder` 提供 `setEmptyLayout()` 设置会话列表的空白页面。
 
-| 会话操作            | 描述   |
-| :-------------- | :----- | 
-| 会话免打扰       | - `makeSilentForConversation`：设置会话免打扰。<br/> - `cancelSilentForConversation` ：取消会话免打扰。   |
-| 会话置顶            | - `pinConversation`：置顶会话。<br/> - `unpinConversation`：取消置顶。     |
-| 会话标记已读           | `makeConversionRead`：标记会话为已读状态。    |
-| 会话删除            | `deleteConversation`：删除会话。   |
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
-</ImageGallery>
+```kotlin
+ChatUIKitConversationListFragment.Builder()
+    .setEmptyLayout(R.layout.layout_conversation_empty)
+    .build()
+```
 
 ## 可重载方法标记
 

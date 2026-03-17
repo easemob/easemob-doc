@@ -21,11 +21,6 @@
 
 你可以设置 `hiddenAvatar` 参数确定是否显示导航栏左侧的头像。若修改导航头像，可通过 `self.navigation.avatarURL = "https://xxx.xxx.xxx"` 实现。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/conversation_list_avatar.png" title="会话列表有头像" />
-  <ImageItem src="/images/uikit/chatuikit/ios/conversation_list_noavatar.png" title="会话列表无头像" />
-</ImageGallery>
-
 ## 设置中部标题
 
 对于导航标题内容，可设置 `self.navigation.title = "Chats".chat.localize`，子标题可设置 `self.navigation.subtitle = "xxx"`。若导航的标题和子标题均需修改，需先修改子标题，再修改标题，旨在更新导航中对应的布局位置。
