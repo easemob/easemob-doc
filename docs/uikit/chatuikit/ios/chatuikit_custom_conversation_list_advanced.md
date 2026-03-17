@@ -88,44 +88,6 @@ Appearance.conversation.rowHeight = 76
   <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png" title="会话条目的高度" />
 </ImageGallery>
 
-## 设置会话头像
-
-1. 通过 `Appearance.conversation` 调整单聊和群聊的默认头像：
-
-```swift
-// 设置单聊默认头像
-Appearance.conversation.singlePlaceHolder = UIImage(named: "my_single_avatar")
-
-// 设置群聊默认头像
-Appearance.conversation.groupPlaceHolder = UIImage(named: "my_group_avatar")
-```
-
-2. 设置会话头像圆角：
-
-头像圆角，分为极小、小、中、大等四个等级。你可以利用 `Appearance.avatarRadius = value` 设置头像圆角。
-
-<ImageGallery :columns="3">
-  <ImageItem src="/images/uikit/chatuikit/ios/avatar_square.png" title="方形头像" />
-  <ImageItem src="/images/uikit/chatuikit/ios/avatar_circle.png" title="圆形头像" />
-  <ImageItem src="/images/uikit/chatuikit/ios/avatar_no.png" title="无头像" />
-</ImageGallery>
-
-## 设置会话侧滑菜单
-
-配置侧滑菜单中的按钮：
-
-```swift
-// 配置左滑菜单按钮
-Appearance.conversation.swipeLeftActions = [.mute, .pin, .delete]
-
-// 配置右滑菜单按钮
-Appearance.conversation.swipeRightActions = [.more, .read]
-```
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipeLeftActions.png" title="会话左滑和右滑菜单" />
-</ImageGallery>
-
 ## 设置会话时间格式和样式
 
 #### 设置时间格式
@@ -152,12 +114,34 @@ Appearance.conversation.dateFormatOtherDay = "MM/dd"// 非当天显示格式
     }
 ```
 
+## 设置会话头像
+
+1. 通过 `Appearance.conversation` 调整单聊和群聊的默认头像：
+
+```swift
+// 设置单聊默认头像
+Appearance.conversation.singlePlaceHolder = UIImage(named: "my_single_avatar")
+
+// 设置群聊默认头像
+Appearance.conversation.groupPlaceHolder = UIImage(named: "my_group_avatar")
+```
+
+2. 设置会话头像圆角：
+
+头像圆角，分为极小、小、中、大等四个等级。你可以利用 `Appearance.avatarRadius = value` 设置头像圆角。
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_square.png" title="方形头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_circle.png" title="圆形头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_no.png" title="无头像" />
+</ImageGallery>
+
 ## 设置会话侧滑菜单
 
-会话列表支持左右滑动手势操作，可通过 `Appearance.conversation` 自定义菜单项。
+会话支持左滑和右滑：
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipeLeftActions.png" title="会话左滑和右滑" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipeLeftActions.png" title="会话左滑和右滑菜单" />
 </ImageGallery>
 
 #### 设置菜单项

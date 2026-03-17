@@ -349,7 +349,7 @@ export function MyConversationDetailScreen(props: Props) {
   <ImageItem src="/images/uikit/chatuikit/ios/message_longpress_2.png" title="context" />
 </ImageGallery>
 
-关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [消息列表的高级设置说明](chatuikit_chat_list_avanced.html#设置长按消息菜单)。
+关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html#设置长按消息菜单)。
 
 ## 设置点击事件
 

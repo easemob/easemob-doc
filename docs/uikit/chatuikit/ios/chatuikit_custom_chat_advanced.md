@@ -283,7 +283,7 @@ Appearance.chat.messageLongPressedActions = actions
         UIFont.theme.labelSmall = UIFont.systemFont(ofSize: 12, weight: .medium)
 ```
 
-## 添加自定义消息条目
+## 完全自定义消息条目
 
 若要展示自定义类型的消息，或完全重写现有消息的展示样式，可通过 `ComponentsRegister` 注册自定义消息条目（Cell）。
 

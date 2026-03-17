@@ -8,185 +8,6 @@
   <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationListView" />
 </ImageGallery>
 
-## 完全自定义会话条目
-
-通过实现 `ConversationItemProvider` 接口，可自定义会话条目的完整布局。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_item.png" title="会话条目 ConversationItemView" />
-</ImageGallery>
-
-#### 完全自定义会话列表
-
-**步骤 1 创建自定义会话条目组件**
-
-使用 `@Builder` 定义会话条目的完整 UI 布局，包括头像、会话名称、最后一条消息、未读数、置顶与免打扰标记等。通过 `conversation` 参数（`ChatKitConversation`）获取会话数据进行渲染。时间戳使用 `formatConversationDate` 格式化，最后一条消息内容使用 `ChatConvInfoManager.getInstance().getLatestMessageContent()` 获取。
-
-```typescript
-import {
-  ChatKitConversation,
-  ChatConvInfoManager,
-  formatConversationDate
-} from '@easemob/chatuikit';
-
-@Builder
-function CustomConversationItem(conversation: ChatKitConversation) {
-  Row() {
-    // 自定义头像
-    Image(conversation.getAvatar())
-      .width(50)
-      .height(50)
-      .borderRadius(25)
-      .margin({ right: 12 })
-  
-    Column({ space: 4 }) {
-      Row() {
-        // 会话名称
-        Text(conversation.getName())
-          .fontSize(16)
-          .fontWeight(FontWeight.Medium)
-          .fontColor('#333333')
-          .maxLines(1)
-          .textOverflow({ overflow: TextOverflow.Ellipsis })
-          .layoutWeight(1)
-    
-        // 置顶标记
-        if (conversation.isPinned) {
-          Image($r('app.media.chat_icon_conv_pin'))
-            .width(16)
-            .height(16)
-            .margin({ right: 4 })
-        }
-    
-        // 时间戳
-        Text(formatTime(conversation.latestMessage?.getServerTimestamp()))
-          .fontSize(12)
-          .fontColor('#999999')
-      }
-      .width('100%')
-  
-      Row() {
-        // 最后一条消息内容
-        Text(getMessageContent(conversation.latestMessage))
-          .fontSize(14)
-          .fontColor('#666666')
-          .maxLines(1)
-          .textOverflow({ overflow: TextOverflow.Ellipsis })
-          .layoutWeight(1)
-    
-        // 未读数标记
-        if (conversation.unreadCount && conversation.unreadCount > 0) {
-          Badge({
-            count: conversation.unreadCount,
-            maxCount: 99,
-            style: { badgeSize: 18, badgeColor: '#FF5A5F' }
-          })
-            .margin({ left: 4 })
-        }
-    
-        // 免打扰图标
-        if (conversation.isMuted) {
-          Image($r('app.media.chat_icon_conv_mute'))
-            .width(16)
-            .height(16)
-            .margin({ left: 4 })
-        }
-      }
-      .width('100%')
-    }
-    .layoutWeight(1)
-    .alignItems(HorizontalAlign.Start)
-  }
-  .width('100%')
-  .padding({ left: 12, right: 12, top: 10, bottom: 10 })
-  .backgroundColor(Color.White)
-}
-```
-
-**步骤 2 实现 ConversationItemProvider 接口**
-
-实现 `ConversationItemProvider` 接口，在 `itemWrapBuilder` 中根据会话类型返回对应的会话条目 Builder。返回 `wrapBuilder(CustomConversationItem)` 使用自定义布局，返回 `undefined` 则使用默认布局。
-
-```typescript
-import {
-  ConversationItemProvider,
-  ChatKitConversation
-} from '@easemob/chatuikit';
-
-class MyConversationItemProvider implements ConversationItemProvider {
-  itemWrapBuilder(item: ChatKitConversation): WrappedBuilder<[ChatKitConversation]> | undefined {
-    // 所有会话均使用自定义布局（包括单聊和群聊）
-    return wrapBuilder<[ChatKitConversation]>(CustomConversationItem);
-  
-    // 按会话类型返回不同布局：
-    // if (item.type === ConversationType.GroupChat) {
-    //   return wrapBuilder<[ChatKitConversation]>(CustomConversationItem);
-    // }
-    // return undefined;  // 单聊使用默认布局
-  }
-}
-```
-
-**步骤 3：注册 Provider**
-
-在页面 `aboutToAppear` 生命周期中，通过 `ChatUIKitClient.setConversationItemProvider()` 注册自定义会话条目提供者，使 `ConversationListView` 使用自定义布局渲染会话列表。
-
-```typescript
-import {
-  ChatUIKitClient,
-  ConversationListView,
-  ConvListViewModel
-} from '@easemob/chatuikit';
-
-@Entry
-@ComponentV2
-struct ConvListAdvancedDemo {
-  aboutToAppear() {
-    // 注册自定义会话条目提供者
-    ChatUIKitClient.setConversationItemProvider(
-      new MyConversationItemProvider()
-    );
-  }
-
-  build() {
-    Column() {
-      ConversationListView({
-        viewModel: new ConvListViewModel()
-      })
-    }
-  }
-}
-```
-
-#### ConversationItemProvider 接口
-
-`ConversationItemProvider` 为 会话条目的 Builder 提供者，返回 `WrappedBuilder` 或 `undefined`（使用默认布局）。
-
-```typescript
-export interface ConversationItemProvider {
-  // item：会话对象
-  itemWrapBuilder: (item: ChatKitConversation) => WrappedBuilder<[ChatKitConversation]> | undefined;
-}
-```
-
-#### ChatKitConversation 属性
-
-`ChatKitConversation` 对象提供以下属性和方法：
-
-| 属性/方法          | 类型                               | 描述                                                                                |
-| :-------------- | :----- | :------- |
-| `conversationId` | String                             | 会话 ID。                                                                           |
-| `type`           | ConversationType                   | 会话类型：单聊为 `ConversationType.Chat`，群聊为 `ConversationType.GroupChat`。 |
-| `unreadCount`    | Number                             | 未读消息数。                                                                        |
-| `isPinned`       | Boolean                            | 是否置顶。                                                                          |
-| `isMuted`        | Boolean                            | 是否免打扰。                                                                        |
-| `hasMention`     | Boolean                            | 是否有@消息。                                                                       |
-| `latestMessage`  | ChatMessage                        | 最后一条消息对象。                                                                  |
-| `latestUser`     | ChatUserProfile                    | 最后一条消息的发送方。                                                              |
-| `profile`        | ChatUserProfile\| ChatGroupProfile | 会话信息（会话名称和头像）。                                                        |
-| `getName()`      | String                             | 获取会话名称。                                                                      |
-| `getAvatar()`    | ResourceStr                        | 获取会话头像。                                                                      |
-
 ## 自定义会话最新消息内容
 
 当应用中存在自定义消息类型（如红包、位置分享、名片等）时，可通过实现 `ConversationLatestMessageContentProvider` 接口来自定义这些消息在会话列表中的展示内容。
@@ -549,6 +370,185 @@ struct CustomConvListPage {
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/conversation_unread.png" title="消息未读计数图标" />
 </ImageGallery>
+
+## 完全自定义会话条目
+
+通过实现 `ConversationItemProvider` 接口，可自定义会话条目的完整布局。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_item.png" title="会话条目 ConversationItemView" />
+</ImageGallery>
+
+#### 完全自定义会话列表
+
+**步骤 1 创建自定义会话条目组件**
+
+使用 `@Builder` 定义会话条目的完整 UI 布局，包括头像、会话名称、最后一条消息、未读数、置顶与免打扰标记等。通过 `conversation` 参数（`ChatKitConversation`）获取会话数据进行渲染。时间戳使用 `formatConversationDate` 格式化，最后一条消息内容使用 `ChatConvInfoManager.getInstance().getLatestMessageContent()` 获取。
+
+```typescript
+import {
+  ChatKitConversation,
+  ChatConvInfoManager,
+  formatConversationDate
+} from '@easemob/chatuikit';
+
+@Builder
+function CustomConversationItem(conversation: ChatKitConversation) {
+  Row() {
+    // 自定义头像
+    Image(conversation.getAvatar())
+      .width(50)
+      .height(50)
+      .borderRadius(25)
+      .margin({ right: 12 })
+  
+    Column({ space: 4 }) {
+      Row() {
+        // 会话名称
+        Text(conversation.getName())
+          .fontSize(16)
+          .fontWeight(FontWeight.Medium)
+          .fontColor('#333333')
+          .maxLines(1)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+          .layoutWeight(1)
+    
+        // 置顶标记
+        if (conversation.isPinned) {
+          Image($r('app.media.chat_icon_conv_pin'))
+            .width(16)
+            .height(16)
+            .margin({ right: 4 })
+        }
+    
+        // 时间戳
+        Text(formatTime(conversation.latestMessage?.getServerTimestamp()))
+          .fontSize(12)
+          .fontColor('#999999')
+      }
+      .width('100%')
+  
+      Row() {
+        // 最后一条消息内容
+        Text(getMessageContent(conversation.latestMessage))
+          .fontSize(14)
+          .fontColor('#666666')
+          .maxLines(1)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+          .layoutWeight(1)
+    
+        // 未读数标记
+        if (conversation.unreadCount && conversation.unreadCount > 0) {
+          Badge({
+            count: conversation.unreadCount,
+            maxCount: 99,
+            style: { badgeSize: 18, badgeColor: '#FF5A5F' }
+          })
+            .margin({ left: 4 })
+        }
+    
+        // 免打扰图标
+        if (conversation.isMuted) {
+          Image($r('app.media.chat_icon_conv_mute'))
+            .width(16)
+            .height(16)
+            .margin({ left: 4 })
+        }
+      }
+      .width('100%')
+    }
+    .layoutWeight(1)
+    .alignItems(HorizontalAlign.Start)
+  }
+  .width('100%')
+  .padding({ left: 12, right: 12, top: 10, bottom: 10 })
+  .backgroundColor(Color.White)
+}
+```
+
+**步骤 2 实现 ConversationItemProvider 接口**
+
+实现 `ConversationItemProvider` 接口，在 `itemWrapBuilder` 中根据会话类型返回对应的会话条目 Builder。返回 `wrapBuilder(CustomConversationItem)` 使用自定义布局，返回 `undefined` 则使用默认布局。
+
+```typescript
+import {
+  ConversationItemProvider,
+  ChatKitConversation
+} from '@easemob/chatuikit';
+
+class MyConversationItemProvider implements ConversationItemProvider {
+  itemWrapBuilder(item: ChatKitConversation): WrappedBuilder<[ChatKitConversation]> | undefined {
+    // 所有会话均使用自定义布局（包括单聊和群聊）
+    return wrapBuilder<[ChatKitConversation]>(CustomConversationItem);
+  
+    // 按会话类型返回不同布局：
+    // if (item.type === ConversationType.GroupChat) {
+    //   return wrapBuilder<[ChatKitConversation]>(CustomConversationItem);
+    // }
+    // return undefined;  // 单聊使用默认布局
+  }
+}
+```
+
+**步骤 3：注册 Provider**
+
+在页面 `aboutToAppear` 生命周期中，通过 `ChatUIKitClient.setConversationItemProvider()` 注册自定义会话条目提供者，使 `ConversationListView` 使用自定义布局渲染会话列表。
+
+```typescript
+import {
+  ChatUIKitClient,
+  ConversationListView,
+  ConvListViewModel
+} from '@easemob/chatuikit';
+
+@Entry
+@ComponentV2
+struct ConvListAdvancedDemo {
+  aboutToAppear() {
+    // 注册自定义会话条目提供者
+    ChatUIKitClient.setConversationItemProvider(
+      new MyConversationItemProvider()
+    );
+  }
+
+  build() {
+    Column() {
+      ConversationListView({
+        viewModel: new ConvListViewModel()
+      })
+    }
+  }
+}
+```
+
+#### ConversationItemProvider 接口
+
+`ConversationItemProvider` 为 会话条目的 Builder 提供者，返回 `WrappedBuilder` 或 `undefined`（使用默认布局）。
+
+```typescript
+export interface ConversationItemProvider {
+  // item：会话对象
+  itemWrapBuilder: (item: ChatKitConversation) => WrappedBuilder<[ChatKitConversation]> | undefined;
+}
+```
+
+#### ChatKitConversation 属性
+
+`ChatKitConversation` 对象提供以下属性和方法：
+
+| 属性/方法          | 类型                               | 描述                                                                                |
+| :-------------- | :----- | :------- |
+| `conversationId` | String                             | 会话 ID。                                                                           |
+| `type`           | ConversationType                   | 会话类型：单聊为 `ConversationType.Chat`，群聊为 `ConversationType.GroupChat`。 |
+| `unreadCount`    | Number                             | 未读消息数。                                                                        |
+| `isPinned`       | Boolean                            | 是否置顶。                                                                          |
+| `isMuted`        | Boolean                            | 是否免打扰。                                                                        |
+| `hasMention`     | Boolean                            | 是否有@消息。                                                                       |
+| `latestMessage`  | ChatMessage                        | 最后一条消息对象。                                                                  |
+| `latestUser`     | ChatUserProfile                    | 最后一条消息的发送方。                                                              |
+| `profile`        | ChatUserProfile\| ChatGroupProfile | 会话信息（会话名称和头像）。                                                        |
+| `getName()`      | String                             | 获取会话名称。                                                                      |
+| `getAvatar()`    | ResourceStr                        | 获取会话头像。                                                                      |
 
 ## 自定义 ViewModel
 

@@ -119,9 +119,9 @@ import { Chat, MessageInput, Icon } from 'easemob-chat-uikit';
 
 ### 添加自定义图标
 
-在底部输入框中添加自定义图标，实现指定的功能:
+在底部输入栏中添加自定义图标，实现指定的功能:
 
-1. 使用 `renderMessageInput` 方法自定义渲染消息输入框。
+1. 使用 `renderMessageInput` 方法自定义渲染底部输入栏。
 2. 使用 `actions` 自定义 `MessageInput` 组件。
 
 ```jsx

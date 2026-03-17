@@ -27,7 +27,7 @@ const chatUikitSidebar = [
   { type: "separator", only: ['ios']} as any,
   { text: "添加依赖", link: "chatuikit_integrated.html", only: ["ios"] },  
   { text: "快速开始", link: "chatuikit_quickstart.html", only: ["ios"] }, 
-  { text: "自定义标题栏", link: "chatuikit_custom_titlebar.html", only: ["ios"] },
+  { text: "页面导航栏", link: "chatuikit_custom_titlebar.html", only: ["ios"] },
   {
       text: "会话列表",
       collapsible: true,
@@ -97,7 +97,7 @@ const chatUikitSidebar = [
   { text: "全局上下文", link: "chatuikit_context.html", only: ["web"]},
   { text: "登录", link: "chatuikit_login.html", only: ["web"]},
   { text: "事件监听器", link: "chatuikit_listener.html", only: ["web"]},
-  { text: "自定义标题栏", link: "chatuikit_custom_titlebar.html", only: ["web"]},
+  { text: "页面标题栏", link: "chatuikit_custom_titlebar.html", only: ["web"]},
   {
       text: "会话列表",
       collapsible: true,
@@ -156,7 +156,7 @@ const chatUikitSidebar = [
   { type: "separator", only: ["android", "harmonyos", "react-native", "flutter"]} as any,
   { text: "添加依赖", link: "chatuikit_dependency.html", only: ["android", "harmonyos"] },
   { text: "初始化", link: "chatuikit_initialization.html", only: ["android", "harmonyos"] },
-  { text: "自定义标题栏", link: "chatuikit_custom_titlebar.html", only: ["android", "harmonyos", "react-native", "flutter"]},
+  { text: "页面标题栏", link: "chatuikit_custom_titlebar.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ["react-native", "flutter"] },
   {
       text: "会话列表",

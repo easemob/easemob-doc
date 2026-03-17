@@ -88,12 +88,6 @@ Appearance.chat.receiveTextColor = UIColor.black
         }
 ```
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hiddenable.png" title="可隐藏区域" />
-  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hidden.png" title="隐藏后的效果" />
-</ImageGallery>
-
-
 #### 修改消息气泡背景色
 
 支持两种修改方式：
@@ -139,7 +133,7 @@ Appearance.chat.messageLongPressMenuStyle = .withArrow
 Appearance.chat.messageLongPressMenuStyle = .actionSheet
 ```
 
-关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [消息列表的高级设置说明](chatuikit_chat_list_avanced.html#设置长按消息菜单)。
+关于菜单项的添加、删除、显示/隐藏以及样式的设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html#设置长按消息菜单)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/message_types_1.png" title="UIActionSheet" />

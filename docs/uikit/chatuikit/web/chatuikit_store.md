@@ -28,7 +28,7 @@ rootStore.conversationStore.setCurrentCvs({
 
 在 React 组件内部，建议使用以下 Hooks 自动接入 MobX 响应式系统，确保数据与 UI 同步更新：
 
-| Hook                       | 用途说明               |
+| Hook                       | 说明               |
 | :------ | :---------------- |
 | `useChatContext()`         | 获取消息相关的状态与操作方法                         |
 | `useConversationContext()` | 获取会话相关的状态与操作方法                         |

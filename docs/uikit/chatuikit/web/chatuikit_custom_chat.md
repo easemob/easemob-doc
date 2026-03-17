@@ -68,8 +68,6 @@
 }
 ```
 
-// TODO：添加消息列表背景的图片
-
 ## 设置消息列表空页面
 
 通过 `Chat` 组件的 `renderEmpty` 属性可以自定义空内容组件：
@@ -88,7 +86,7 @@
 
 对于消息条目，你可以进行自定义设置，例如：
 
-- 添加自定义消息条目
+- 完全自定义消息条目
 - 设置默认的头像和昵称及其样式
 - 设置消息气泡
 - 设置消息日期
@@ -96,37 +94,6 @@
 <div style="text-align: center">
   <img src=/images/uikit/chatuikit/android/message_item.png  width="1000" />
 </div>
-
-### 添加自定义消息条目
-
-你可以使用 `customRenderers` 自定义消息条目的内容，即各种消息类型的自定义消息布局。
-
-```jsx
-import { Chat, MessageList } from 'easemob-chat-uikit';
-
-const CustomTextMessage = ({ message }) => {
-  return (
-    <div className="custom-text-message">
-      <div>{message.msg}</div>
-    </div>
-  );
-};
-
-<Chat
-  messageListProps={{
-    customRenderers: {
-      txt: ctx => <CustomTextMessage message={ctx.message} />,
-      custom: ctx => {
-        // 处理自定义消息类型
-        if (ctx.message.customEvent === 'CARD') {
-          return <CustomCardMessage message={ctx.message} />;
-        }
-        return null;
-      },
-    },
-  }}
-/>;
-```
 
 ### 设置头像和昵称
 
@@ -350,6 +317,37 @@ import { TextMessage } from 'easemob-chat-uikit';
     },
   }}
 />
+```
+
+## 完全自定义消息条目
+
+你可以使用 `customRenderers` 自定义消息条目的内容，即各种消息类型的自定义消息布局。
+
+```jsx
+import { Chat, MessageList } from 'easemob-chat-uikit';
+
+const CustomTextMessage = ({ message }) => {
+  return (
+    <div className="custom-text-message">
+      <div>{message.msg}</div>
+    </div>
+  );
+};
+
+<Chat
+  messageListProps={{
+    customRenderers: {
+      txt: ctx => <CustomTextMessage message={ctx.message} />,
+      custom: ctx => {
+        // 处理自定义消息类型
+        if (ctx.message.customEvent === 'CARD') {
+          return <CustomCardMessage message={ctx.message} />;
+        }
+        return null;
+      },
+    },
+  }}
+/>;
 ```
 
 ## 设置消息事件监听
