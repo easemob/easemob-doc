@@ -327,6 +327,32 @@
 />
 ```
 
+## 完全自定义会话条目
+
+你可以通过 `renderItem` 方法自定义会话条目的渲染：
+
+```jsx
+import { ConversationList, ConversationItem } from 'easemob-chat-uikit';
+
+const CustomConversationItem = ({ cvs }) => {
+  return (
+    <div className="custom-conversation-item">
+      <Avatar src={cvs.avatarUrl} />
+      <div>
+        <div>{cvs.name}</div>
+        <div>{cvs.lastMessage?.msg}</div>
+      </div>
+    </div>
+  );
+};
+
+<ConversationList
+  renderItem={(cvs, index) => {
+    return <CustomConversationItem cvs={cvs} />;
+  }}
+/>;
+```
+
 ## 可自定义的 CSS 类名
 
 `ConversationList` 提供了以下主要的 CSS 类名，你可以通过覆盖这些类名自定义样式：

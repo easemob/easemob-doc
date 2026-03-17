@@ -55,24 +55,20 @@ ConversationsView(
 | `afterWidgets` | `List<Widget>?` | 会话列表之后的组件列表。 |
 | `onSearchTap` | `void Function(List<ConversationItemModel>)?` | 点击搜索按钮的回调。 |
 
-## 设置会话列表空页面
+## 默认会话操作
 
-`ConversationsView` 提供 `emptyBackground` 参数设置会话列表的空白页面。
+长按会话条目会显示会话操作菜单。会话列表页面使用 `ConversationListViewController` 中提供的方法默认实现以下操作：
 
-```dart
-ConversationsView(
-  emptyBackground: Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.chat_bubble_outline, size: 80),
-        SizedBox(height: 16),
-        Text('暂无会话'),
-      ],
-    ),
-  ),
-)
-```
+| 会话操作 | 描述 |
+| :------- | :--- |
+| 会话免打扰 | - `makeSilentForConversation()`：设置会话免打扰。<br/> - `cancelSilentForConversation()`：取消会话免打扰。 |
+| 会话置顶 | - `pinConversation()`：置顶会话。<br/> - `unpinConversation()`：取消置顶。 |
+| 会话标记已读 | `makeConversationRead()`：标记会话为已读状态。 |
+| 会话删除 | `deleteConversation()`：删除会话。 |
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
+</ImageGallery>
 
 ## 设置事件监听
 
@@ -105,13 +101,22 @@ ConversationsView(
 | `onItemLongPressHandler` | 设置会话条目长按事件监听器。 |
 | `onSearchTap` | 设置搜索按钮点击事件监听器。 |
 
-## 默认会话操作
+## 设置会话列表空页面
 
-长按会话条目会显示会话操作菜单。会话列表页面使用 `ConversationListViewController` 中提供的方法默认实现以下操作：
+`ConversationsView` 提供 `emptyBackground` 参数设置会话列表的空白页面。
 
-| 会话操作 | 描述 |
-| :------- | :--- |
-| 会话免打扰 | - `makeSilentForConversation()`：设置会话免打扰。<br/> - `cancelSilentForConversation()`：取消会话免打扰。 |
-| 会话置顶 | - `pinConversation()`：置顶会话。<br/> - `unpinConversation()`：取消置顶。 |
-| 会话标记已读 | `makeConversationRead()`：标记会话为已读状态。 |
-| 会话删除 | `deleteConversation()`：删除会话。 |
+```dart
+ConversationsView(
+  emptyBackground: Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.chat_bubble_outline, size: 80),
+        SizedBox(height: 16),
+        Text('暂无会话'),
+      ],
+    ),
+  ),
+)
+```
+

@@ -112,55 +112,6 @@
 />
 ```
 
-## 完全自定义会话列表
-
-你可以通过 `renderItem` 方法自定义会话条目的渲染：
-
-```jsx
-import { ConversationList, ConversationItem } from 'easemob-chat-uikit';
-
-const CustomConversationItem = ({ cvs }) => {
-  return (
-    <div className="custom-conversation-item">
-      <Avatar src={cvs.avatarUrl} />
-      <div>
-        <div>{cvs.name}</div>
-        <div>{cvs.lastMessage?.msg}</div>
-      </div>
-    </div>
-  );
-};
-
-<ConversationList
-  renderItem={(cvs, index) => {
-    return <CustomConversationItem cvs={cvs} />;
-  }}
-/>;
-```
-
-## 设置事件监听
-
-`ConversationList` 组件提供了针对会话条目的事件监听配置：
-
-```jsx
-<ConversationList
-  // 点击会话条目事件
-  onItemClick={cvs => {
-    console.log('点击会话', cvs);
-    // 跳转到聊天页面
-    navigateToChat(cvs);
-  }}
-  // 搜索事件
-  onSearch={e => {
-    const value = e.target.value;
-    console.log('搜索内容', value);
-    // 返回 false 会阻止默认搜索行为，可以使用自己的搜索逻辑
-    // return false;
-    return true;
-  }}
-/>
-```
-
 ## 默认会话操作
 
 长按会话条目会显示会话操作菜单。会话列表页面默认实现以下操作：
@@ -197,6 +148,29 @@ const CustomConversationItem = ({ cvs }) => {
         },
       ],
     },
+  }}
+/>
+```
+
+## 设置事件监听
+
+`ConversationList` 组件提供了针对会话条目的事件监听配置：
+
+```jsx
+<ConversationList
+  // 点击会话条目事件
+  onItemClick={cvs => {
+    console.log('点击会话', cvs);
+    // 跳转到聊天页面
+    navigateToChat(cvs);
+  }}
+  // 搜索事件
+  onSearch={e => {
+    const value = e.target.value;
+    console.log('搜索内容', value);
+    // 返回 false 会阻止默认搜索行为，可以使用自己的搜索逻辑
+    // return false;
+    return true;
   }}
 />
 ```
