@@ -87,14 +87,6 @@ function AdvancedConversationListScreen({ navigation }) {
 }
 ```
 
-// TODO：研发添加
-// TODO：设置会话条目标题
-// TODO：设置会话条目的消息内容
-// TODO：设置显示/隐藏头像和昵称，设置头像的圆角、方角
-// TODO：设置会话条目时间
-// TODO：添加设置会话免打扰图标
-// TODO：添加设置消息未读计数图标
-
 ## 设置会话条目样式
 
 通过 `ListItemRender` 属性实现会话条目的样式、布局修改，例如，会话列表项的高度、宽度、背景色、上下边距、左右边距以及会话列表项的自定义点击行为和长按行为等。
@@ -132,6 +124,230 @@ function MyConversationListScreen(props: MyConversationListScreenProps) {
 }
 ```
 
+## 设置最新消息的样式
+
+默认情况下，会话条目的内容区域显示 **最新一条消息摘要**，例如，文字、图片、语音等会转换为对应的摘要文本。
+
+消息文本样式需通过 `ListItemRender` 属性自定义。你可以在保留默认点击/长按行为的同时，修改消息的字体、颜色及显示行数：
+
+```tsx
+import React from 'react';
+import { View } from 'react-native';
+import {
+  ConversationList,
+  ConversationListItemProps,
+  PressableHighlight,
+  SingleLineText,
+  useMessageSnapshot,
+} from 'react-native-chat-uikit';
+
+function MessageStyleItem(props: ConversationListItemProps) {
+  const { data, onClicked, onLongPressed } = props;
+  const { getMessageSnapshot } = useMessageSnapshot();
+
+  return (
+    <PressableHighlight
+      onPress={() => onClicked?.(data)}
+      onLongPress={() => onLongPressed?.(data)}
+      style={{ paddingHorizontal: 16, paddingVertical: 12 }}
+    >
+      <SingleLineText paletteType={'title'} textType={'medium'}>
+        {data.convName ?? data.convId}
+      </SingleLineText>
+      <View style={{ height: 4 }} />
+      <SingleLineText
+        paletteType={'body'}
+        textType={'medium'}
+        style={{ color: '#5B6475', fontStyle: 'italic' }}
+      >
+        {getMessageSnapshot(data.lastMessage)}
+      </SingleLineText>
+    </PressableHighlight>
+  );
+}
+
+export function ConversationListWithMessageStyle() {
+  return <ConversationList ListItemRender={MessageStyleItem} />;
+}
+```
+
+## 设置会话时间格式和样式
+
+会话时间的自定义通常包括“格式”与“样式”两方面。推荐组合使用全局 `Container` 的 `formatTime` 配置与 `ListItemRender` 属性：
+
+```tsx
+import React from 'react';
+import { View } from 'react-native';
+import {
+  Container,
+  ConversationList,
+  ConversationListItemProps,
+  PressableHighlight,
+  SingleLineText,
+  formatTsForConvList,
+  useConfigContext,
+} from 'react-native-chat-uikit';
+
+function TimeStyleItem(props: ConversationListItemProps) {
+  const { data, onClicked, onLongPressed } = props;
+  const { formatTime } = useConfigContext();
+  const ts = data.lastMessage?.localTime ?? data.pinnedTime;
+  const text = ts
+    ? (formatTime?.conversationListCallback?.(ts) ?? formatTsForConvList(ts))
+    : '';
+
+  return (
+    <PressableHighlight
+      onPress={() => onClicked?.(data)}
+      onLongPress={() => onLongPressed?.(data)}
+      style={{ paddingHorizontal: 16, paddingVertical: 12 }}
+    >
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <SingleLineText paletteType={'title'} textType={'medium'}>
+          {data.convName ?? data.convId}
+        </SingleLineText>
+        <SingleLineText
+          paletteType={'body'}
+          textType={'small'}
+          style={{ color: '#5C7CFA', fontVariant: ['tabular-nums'] }}
+        >
+          {text}
+        </SingleLineText>
+      </View>
+    </PressableHighlight>
+  );
+}
+
+export function ConversationListWithTimeStyle(props: { options: any }) {
+  return (
+    <Container
+      options={props.options}
+      formatTime={{
+        conversationListCallback: (timestamp) => {
+          return new Date(timestamp).toLocaleString('zh-CN', {
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+        },
+      }}
+    >
+      <ConversationList ListItemRender={TimeStyleItem} />
+    </Container>
+  );
+}
+```
+
+## 设置会话免打扰图标
+
+默认会话条目中的免打扰图标由 `data.doNotDisturb` 控制。如需更换图标样式或位置，可在自定义条目中自行处理：
+
+```tsx
+import React from 'react';
+import { View } from 'react-native';
+import {
+  ConversationList,
+  ConversationListItemProps,
+  Icon,
+  PressableHighlight,
+  SingleLineText,
+} from 'react-native-chat-uikit';
+
+function DisturbIconItem(props: ConversationListItemProps) {
+  const { data, onClicked, onLongPressed } = props;
+
+  return (
+    <PressableHighlight
+      onPress={() => onClicked?.(data)}
+      onLongPress={() => onLongPressed?.(data)}
+      style={{ paddingHorizontal: 16, paddingVertical: 12 }}
+    >
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <SingleLineText paletteType={'title'} textType={'medium'}>
+          {data.convName ?? data.convId}
+        </SingleLineText>
+        {data.doNotDisturb === true ? (
+          <Icon
+            name={'bell_slash'}
+            style={{
+              width: 16,
+              height: 16,
+              marginLeft: 6,
+              tintColor: '#8B93A7',
+            }}
+          />
+        ) : null}
+      </View>
+    </PressableHighlight>
+  );
+}
+
+export function ConversationListWithDisturbIcon() {
+  return <ConversationList ListItemRender={DisturbIconItem} />;
+}
+```
+
+## 设置消息未读计数图标
+
+未读计数可依据业务需求，呈现为 **数字角标**、**小蓝点**。常见的实现方式是利用 `ext` 字段进行配置：
+
+```tsx
+import React from 'react';
+import { View } from 'react-native';
+import {
+  Badges,
+  ConversationList,
+  ConversationListItemProps,
+  PressableHighlight,
+  SingleLineText,
+} from 'react-native-chat-uikit';
+
+type UnreadMode = 'badge' | 'dot' | 'none';
+
+function UnreadIconItem(props: ConversationListItemProps) {
+  const { data, onClicked, onLongPressed } = props;
+  const mode: UnreadMode = (() => {
+    try {
+      return (JSON.parse(data.ext ?? '{}').unreadMode as UnreadMode) ?? 'badge';
+    } catch {
+      return 'badge';
+    }
+  })();
+
+  return (
+    <PressableHighlight
+      onPress={() => onClicked?.(data)}
+      onLongPress={() => onLongPressed?.(data)}
+      style={{ paddingHorizontal: 16, paddingVertical: 12 }}
+    >
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <SingleLineText paletteType={'title'} textType={'medium'}>
+          {data.convName ?? data.convId}
+        </SingleLineText>
+        {mode === 'none' ? null : mode === 'dot' ? (
+          <View
+            style={{
+              width: 10,
+              height: 10,
+              borderRadius: 5,
+              backgroundColor: '#1100ff',
+              marginTop: 6,
+            }}
+          />
+        ) : (
+          <Badges count={data.unreadMessageCount} />
+        )}
+      </View>
+    </PressableHighlight>
+  );
+}
+
+export function ConversationListWithUnreadIcon() {
+  return <ConversationList ListItemRender={UnreadIconItem} />;
+}
+```
+
 ## 设置头像和昵称
 
 会话列表 `ConversationList` 中的条目分为 **用户会话** 和 **群组会话** 两种类型。头像和昵称的显示遵循以下优先级规则：
@@ -148,7 +364,91 @@ function MyConversationListScreen(props: MyConversationListScreenProps) {
 | 注册回调  | 在 `Container` 组件中通过 `onUsersHandler` 和 `onGroupsHandler` 属性提供数据。   | - 按需加载：仅在需要展示时请求数据，避免无效请求 <br/> - 自动缓存：内部维护数据缓存，减少重复请求 <br/> - 实时更新：数据更新后 UI 自动刷新   |
 | 主动调用  | 使用 `ChatService.updateDataList` 方法主动更新数据。   | - 主动推送：可在任意时机主动更新数据，无需等待组件请求 <br/> - 批量处理：支持一次性更新多个用户或群组的数据<br/> - 实时生效：数据更新后立即触发 UI 刷新，无需手动干预<br/> - 事件驱动：更新时会触发内部事件分发，可自定义事件句柄实现精细化控制<br/> -全局同步：自动刷新所有已加载的组件页面，保证数据一致性   |
 
-// TODO：添加设置默认头像、设置会话条目的样式、显示或隐藏头像
+以下示例展示了头像与昵称的三种配置方式：
+- 设置默认头像；
+- 通过数据回调实时获取和更新头像、昵称；
+- 在会话列表中动态显示或隐藏头像。
+
+```tsx
+import React from 'react';
+import {
+  Avatar,
+  ChatConversationType,
+  Container,
+  ConversationList,
+  ConversationListItemProps,
+  GroupAvatar,
+  PressableHighlight,
+  SingleLineText,
+} from 'react-native-chat-uikit';
+import { View } from 'react-native';
+
+const showAvatar = true;
+
+function AvatarVisibleItem(props: ConversationListItemProps) {
+  const { data, onClicked, onLongPressed } = props;
+  return (
+    <PressableHighlight
+      onPress={() => onClicked?.(data)}
+      onLongPress={() => onLongPressed?.(data)}
+      style={{ paddingHorizontal: 16, paddingVertical: 12 }}
+    >
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        {showAvatar ? (
+          data.convType === ChatConversationType.PeerChat ? (
+            <Avatar url={data.convAvatar} size={44} />
+          ) : (
+            <GroupAvatar url={data.convAvatar} size={44} />
+          )
+        ) : null}
+        <View style={{ width: showAvatar ? 10 : 0 }} />
+        <SingleLineText paletteType={'title'} textType={'medium'}>
+          {data.convName ?? data.convId}
+        </SingleLineText>
+      </View>
+    </PressableHighlight>
+  );
+}
+
+export function ConversationListWithAvatarConfig(props: { options: any }) {
+  return (
+    <Container
+      options={props.options}
+      avatar={{
+        // 圆角风格可选: extraSmall/small/medium/large/extraLarge
+        borderRadiusStyle: 'small',
+        // 本地默认头像，需替换为你的资源路径
+        personAvatar: require('./assets/default_person.png'),
+        groupAvatar: require('./assets/default_group.png'),
+      }}
+      onUsersHandler={async (data) => {
+        const result = new Map(data);
+        data.forEach((item, id) => {
+          result.set(id, {
+            ...item,
+            name: item.remark ?? item.name ?? `用户_${id}`,
+            avatar: item.avatar ?? 'https://example.com/default_user.png',
+          });
+        });
+        return result;
+      }}
+      onGroupsHandler={async (data) => {
+        const result = new Map(data);
+        data.forEach((item, id) => {
+          result.set(id, {
+            ...item,
+            name: item.name ?? `群组_${id}`,
+            avatar: item.avatar ?? 'https://example.com/default_group.png',
+          });
+        });
+        return result;
+      }}
+    >
+      <ConversationList ListItemRender={AvatarVisibleItem} />
+    </Container>
+  );
+}
+```
 
 ## 设置会话排序
 

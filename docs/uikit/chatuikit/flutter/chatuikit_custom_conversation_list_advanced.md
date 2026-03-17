@@ -103,7 +103,7 @@ ConversationsView(
 
 默认情况下，会话条目的内容区域显示 **最新一条消息摘要**，例如，文字、图片、语音等会转换为对应的摘要文本。
 
-你可以通过自定义 `itemBuilder` 调整内容样式。使用 `subTitleLabel` 参数可以自定义子标题文本：
+你可以通过自定义 `itemBuilder` 调整最新一条消息的样式。使用 `subTitleLabel` 参数可以自定义子标题文本：
 
 ```dart
 ConversationsView(
@@ -120,7 +120,7 @@ ConversationsView(
 `ChatUIKitConversationListViewItem` 没有 `contentStyle` 参数。子标题的样式是固定的，由主题决定。如果需要完全自定义子标题样式，可以使用 `beforeSubtitle` 和 `afterSubtitle` 参数，或者完全自定义 `itemBuilder`。
 :::
 
-## 设置会话条目时间
+## 设置会话时间格式和样式
 
 默认情况下，会话列表中的每条会话会显示 **最新一条消息的时间**（以格式化后的时间字符串呈现）。
 

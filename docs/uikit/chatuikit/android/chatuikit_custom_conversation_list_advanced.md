@@ -22,8 +22,8 @@
         it.setAvatarBorderColor()   //设置会话条目头像边框的颜色。
         it.setNameTextSize()        //设置会话条目标题的文字大小。
         it.setNameTextColor()       //设置会话条目标题的文字颜色。 
-        it.setMessageTextSize()     //设置会话条目内容的文字大小。
-        it.setMessageTextColor()    //设置会话条目内容的文字颜色。 
+        it.setMessageTextSize()     //设置会话中最新消息的文字大小。
+        it.setMessageTextColor()    //设置会话中最新消息的文字颜色。 
         it.setDateTextSize()        //设置会话条目日期的文字大小。
         it.setDateTextColor()       //设置会话条目日期的文字颜色。
 
@@ -83,11 +83,12 @@ binding?.listConversation?.let {
 }
 ```
 
-## 设置会话条目内容
+## 设置最新消息的样式
 
 默认情况下，会话条目的内容区域显示 **最新一条消息摘要**，例如，文字、图片、语音等会转换为对应的摘要文本。
 
-你可以通过以下方法调整内容样式：
+你可以通过以下方法调整最新的样式：
+
 - `setMessageTextSize(textSizePx: Int)`：设置内容文字大小，单位为 px。
 - `setMessageTextColor(@ColorInt textColor: Int)`：设置内容文字颜色。
 
@@ -101,7 +102,7 @@ binding?.listConversation?.let {
 }
 ```
 
-## 设置会话条目时间
+## 设置会话时间格式和样式
 
 默认情况下，会话条目的时间区域显示 **最新一条消息的时间**（格式化后的时间字符串）。
 
@@ -322,7 +323,7 @@ binding?.listConversation?.apply {
 
 ```xml
 <!-- res/values/colors.xml（App 工程） -->
-<color name="uikit_conv_item_unread_dot_bg">#00FF00</color>
+<color name="uikit_conv_item_unread_dot_bg">##1100ff</color>
 ```
 
 - **使用自定义 drawable 背景**：直接同名覆盖 `uikit_conv_item_unread_dot_bg.xml` 或 `uikit_conv_item_unread_count_bg.xml`，定义为你需要的 shape、selector 或图片即可。
@@ -332,6 +333,108 @@ binding?.listConversation?.apply {
 #### 隐藏未读图标
 
 单群聊 UIKit 未提供独立的开关控制未读提示的显示与隐藏。如需完全隐藏（既不显示数字也不显示红点），建议使用自定义 Adapter/ViewHolder，在数据绑定时将与 `unread_msg_number`、`unread_msg_dot` 等相关的视图设置为 `GONE`，或重写未读提示的展示逻辑。
+
+## 添加自定义会话列表
+
+开发者可以继承 `ChatUIKitConversationListAdapter` 实现自己的 `CustomConversationListAdapter`，然后将 `CustomConversationListAdapter` 设置到 `ChatUIKitConversationListFragment#Builder#setCustomAdapter` 中。
+
+1. 创建自定义适配器 `CustomConversationListAdapter`，继承自 `ChatUIKitConversationListAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
+
+```kotlin
+class CustomConversationListAdapter (
+    config: ChatUIKitConvItemConfig = ChatUIKitConvItemConfig()
+): ChatUIKitConversationListAdapter(config) {
+    companion object {
+        private const val typeSingleChat = 1
+        private const val typeGroupChat = 2
+    }
+
+    override fun getItemNotEmptyViewType(position: Int): Int {
+        //伪代码
+        //假设这里以不同的 conversationType 返回不同的 viewType 示例，你可以根据你自己的业务需求调整
+        val conversationType = getItem(position)?.conversationType
+        when (conversationType) {
+            ChatConversationType.Chat -> {
+                return typeSingleChat
+            }
+            ChatConversationType.GroupChat -> {
+                return typeGroupChat
+            }
+            else -> {
+                return typeSingleChat
+            }
+        }
+    }
+
+    override fun getViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder<ChatUIKitConversation> {
+        //伪代码
+        when (viewType) {
+            typeSingleChat -> {
+                return MySingleChatViewHolder(
+                    MySingleChatItemViewBinding
+                        .inflate(LayoutInflater.from(parent.context), parent, false), config
+                )
+            }
+            else -> {
+                return MyGroupChatViewHolder(
+                    MyGroupChatItemViewBinding
+                        .inflate(LayoutInflater.from(parent.context), parent, false), config
+                )
+            }
+        }
+    }
+}
+```
+
+```kotlin
+class MySingleChatViewHolder( private val viewBinding: MySingleChatItemViewBinding,
+                              var config: ChatUIKitConvItemConfig? = ChatUIKitConvItemConfig()
+) : ChatUIKitBaseRecyclerViewAdapter.ViewHolder<ChatUIKitConversation>(binding = viewBinding) {
+
+    init {
+        // 这里可以进行一些初始化操作
+        // 比如设置特定的样式或配置
+        config?.bindView(viewBinding)
+    }
+
+    override fun initView(itemView: View?) {
+        super.initView(itemView)
+        // 这里可以进行一些视图的初始化操作
+    }
+
+    override fun setData(item: ChatUIKitConversation?, position: Int) {
+        //根据你的UI来设置数据
+    }
+}
+```
+
+2. 添加 `CustomConversationListAdapter` 到 `ChatUIKitConversationListFragment#Builder`。
+
+```kotlin
+var mConversationListFragment = ChatUIKitConversationListFragment.Builder()
+    .setCustomAdapter(CustomConversationListAdapter())
+    .build()
+```
+
+3. 通过继承 `ChatUIKitConversationListFragment` 进行自定义设置。
+
+创建自定义 `CustomConversationListFragment`，继承自 `ChatUIKitConversationListFragment`，并设置到 `ChatUIKitConversationListFragment#Builder` 中。
+
+```kotlin
+val customConversationListFragment = CustomConversationListFragment()
+val mConversationListFragment = ChatUIKitConversationListFragment.Builder()
+    .setCustomFragment(customConversationListFragment)
+    .build()
+```
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_custom_all.png" title="会话列表完整展示" />
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_custom_noavatar.png" title="会话列表无头像" />
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_custom_noavatarsutbtitle.png" title="会话列表无头像、无最新消息" />
+</ImageGallery>
 
 ## 设置事件监听
 

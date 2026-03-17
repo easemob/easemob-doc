@@ -126,7 +126,7 @@ Appearance.conversation.swipeRightActions = [.more, .read]
   <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipeLeftActions.png" title="会话左滑和右滑菜单" />
 </ImageGallery>
 
-## 设置会话条目时间
+## 设置会话时间格式和样式
 
 #### 设置时间格式
 

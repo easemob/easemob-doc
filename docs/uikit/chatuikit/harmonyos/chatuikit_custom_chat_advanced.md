@@ -465,7 +465,7 @@ interface ChatMessageItemProvider {
 ```
 
 :::tip
-若实现了自定义消息布局（`ChatMessageBubbleProvider` 或 `ChatMessageItemProvider`），并希望在会话列表中也展示对应的自定义内容，可通过 `ChatUIKitClient.setConversationLatestMessageContentProvider()` 方法配置。详见 [会话列表高级设置](chatuikit_custom_conversation_list_advanced.html#设置会话条目内容)。
+若实现了自定义消息布局（`ChatMessageBubbleProvider` 或 `ChatMessageItemProvider`），并希望在会话列表中也展示对应的自定义内容，可通过 `ChatUIKitClient.setConversationLatestMessageContentProvider()` 方法配置。详见 [会话列表高级设置](chatuikit_custom_conversation_list_advanced.html#设置最新消息的样式)。
 :::
 
 ## 自定义 ViewModel
