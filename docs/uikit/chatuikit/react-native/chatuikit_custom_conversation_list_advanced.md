@@ -124,7 +124,66 @@ function MyConversationListScreen(props: MyConversationListScreenProps) {
 }
 ```
 
-## 设置最新消息的样式
+## 设置会话标题样式
+
+会话标题样式可通过 `ListItemRender` 自定义。下面示例演示了标题颜色、字号、字重，以及置顶会话的强调样式：
+
+```tsx
+import React from 'react';
+import { View } from 'react-native';
+import {
+  ConversationList,
+  ConversationListItemProps,
+  PressableHighlight,
+  SingleLineText,
+  useMessageSnapshot,
+} from 'react-native-chat-uikit';
+
+function TitleStyleItem(props: ConversationListItemProps) {
+  const { data, onClicked, onLongPressed } = props;
+  const { getMessageSnapshot } = useMessageSnapshot();
+  const isPinned = data.isPinned === true;
+
+  return (
+    <PressableHighlight
+      onPress={() => onClicked?.(data)}
+      onLongPress={() => onLongPressed?.(data)}
+      style={{
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        backgroundColor: isPinned ? '#F8FAFF' : undefined,
+      }}
+    >
+      <SingleLineText
+        paletteType={'title'}
+        textType={'medium'}
+        numberOfLines={1}
+        style={{
+          fontSize: 17,
+          fontWeight: isPinned ? '700' : '500',
+          color: isPinned ? '#2F5BFF' : '#171A1F',
+        }}
+      >
+        {data.convName ?? data.convId}
+      </SingleLineText>
+      <View style={{ height: 4 }} />
+      <SingleLineText
+        paletteType={'body'}
+        textType={'small'}
+        style={{ color: '#808899' }}
+      >
+        {getMessageSnapshot(data.lastMessage)}
+      </SingleLineText>
+    </PressableHighlight>
+  );
+}
+
+export function ConversationListWithTitleStyle() {
+  return <ConversationList ListItemRender={TitleStyleItem} />;
+}
+```
+
+## 设置最新消息样式
 
 默认情况下，会话条目的内容区域显示 **最新一条消息摘要**，例如，文字、图片、语音等会转换为对应的摘要文本。
 
@@ -657,7 +716,7 @@ function MyConversationListScreen(props: MyConversationListScreenProps) {
 }
 ```
 
-## 自定义会话条目
+## 完全自定义会话条目
 
 如果默认的会话条目样式不满足需求，可以通过 `ListItemRender` 属性完全自定义会话条目组件：
 
@@ -868,7 +927,7 @@ function ConversationListScreen() {
 
 ### 长按菜单配置
 
-消息长按菜单的相关配置，详见 [会话条目长按菜单](#设置会话条目长按菜单) 介绍。
+消息长按菜单的相关配置，详见 [会话长按菜单](#设置会话长按菜单) 介绍。
 
 ## 高级属性总览
 

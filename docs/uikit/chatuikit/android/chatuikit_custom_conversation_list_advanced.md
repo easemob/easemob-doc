@@ -15,11 +15,11 @@
         it.setItemBackGround()      //设置会话条目的背景。
         it.setItemHeight()          //设置会话条目的高度。
         it.setAvatarDefaultSrc()    //设置会话条目的默认头像。
-        it.setAvatarSize()          //设置会话条目头像的大小。
-        it.setAvatarShapeType()     //设置会话条目头像的样式，分为默认 ImageView 样式，圆形和矩形三种样式。
-        it.setAvatarRadius()        //设置会话条目头像的圆角半径，样式设置为矩形时有效。
-        it.setAvatarBorderWidth()   //设置会话条目头像边框的宽度。 
-        it.setAvatarBorderColor()   //设置会话条目头像边框的颜色。
+        it.setAvatarSize()          //设置会话头像的大小。
+        it.setAvatarShapeType()     //设置会话头像的样式，分为默认 ImageView 样式，圆形和矩形三种样式。
+        it.setAvatarRadius()        //设置会话头像的圆角半径，样式设置为矩形时有效。
+        it.setAvatarBorderWidth()   //设置会话头像边框的宽度。 
+        it.setAvatarBorderColor()   //设置会话头像边框的颜色。
         it.setNameTextSize()        //设置会话条目标题的文字大小。
         it.setNameTextColor()       //设置会话条目标题的文字颜色。 
         it.setMessageTextSize()     //设置会话中最新消息的文字大小。
@@ -59,7 +59,7 @@
   <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png" title="会话条目的高度" />
 </ImageGallery>
 
-## 设置会话条目标题
+## 设置会话标题样式
 
 会话条目的标题通常显示会话名称，规则如下：
 - 单聊会话：优先显示 `UserProfileProvider` 提供的好友备注/昵称（`remark/name`），否则显示对端 `userId`。
@@ -83,7 +83,7 @@ binding?.listConversation?.let {
 }
 ```
 
-## 设置最新消息的样式
+## 设置最新消息样式
 
 默认情况下，会话条目的内容区域显示 **最新一条消息摘要**，例如，文字、图片、语音等会转换为对应的摘要文本。
 
@@ -120,7 +120,7 @@ binding?.listConversation?.let {
 }
 ```
 
-## 设置会话条目头像
+## 设置会话头像
 
 你可以设置默认头像以及头像的样式，如下图所示：
 
@@ -208,7 +208,7 @@ override fun setData(item: ChatUIKitConversation?, position: Int) {
 }
 ```
 
-## 设置会话条目长按菜单
+## 设置会话长按菜单
 
 长按会话条目会显示会话操作菜单。会话列表页面使用 `ChatUIKitConversationListViewModel` 中提供的方法默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作，详见 [基本设置说明](chatuikit_custom_conversation_list_basic.html#默认会话操作)。
 
@@ -334,7 +334,7 @@ binding?.listConversation?.apply {
 
 单群聊 UIKit 未提供独立的开关控制未读提示的显示与隐藏。如需完全隐藏（既不显示数字也不显示红点），建议使用自定义 Adapter/ViewHolder，在数据绑定时将与 `unread_msg_number`、`unread_msg_dot` 等相关的视图设置为 `GONE`，或重写未读提示的展示逻辑。
 
-## 添加自定义会话列表
+## 完全自定义会话列表
 
 开发者可以继承 `ChatUIKitConversationListAdapter` 实现自己的 `CustomConversationListAdapter`，然后将 `CustomConversationListAdapter` 设置到 `ChatUIKitConversationListFragment#Builder#setCustomAdapter` 中。
 

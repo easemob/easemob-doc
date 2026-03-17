@@ -62,7 +62,7 @@ ConversationsView(
   <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png" title="会话条目的高度" />
 </ImageGallery>
 
-## 设置会话条目标题
+## 设置会话标题样式
 
 会话条目的标题通常显示会话名称，规则如下：
 
@@ -99,7 +99,7 @@ ConversationsView(
 - 如果不提供 `titleWidget`，将使用默认的标题样式。
 :::
 
-## 设置会话条目内容
+## 设置最新消息样式
 
 默认情况下，会话条目的内容区域显示 **最新一条消息摘要**，例如，文字、图片、语音等会转换为对应的摘要文本。
 
@@ -131,7 +131,7 @@ ConversationsView(
 - **完全自定义会话条目**：通过自定义 `itemBuilder` 实现整个会话条目的 UI 和逻辑。
 - **隐藏默认时间并自行实现**：设置 `showNewMessageTime: false` 隐藏默认时间显示，然后通过其他方式（如自定义布局）展示你所需的时间格式。
 
-## 设置会话条目头像
+## 设置会话头像
 
 你可以设置默认头像以及头像的样式，如下图所示：
 
@@ -180,7 +180,7 @@ ConversationsView(
 )
 ```
 
-## 设置会话条目长按菜单
+## 设置会话长按菜单
 
 长按会话条目会显示会话操作菜单。会话列表页面使用 `ConversationListViewController` 中提供的方法默认实现会话免打扰、会话置顶、会话标记已读和会话删除操作，详见 [基本设置说明](chatuikit_custom_conversation_list_basic.html#默认会话操作)。
 
@@ -454,6 +454,44 @@ ConversationsView(
       afterSubtitle: customUnreadWidget,
     );
   },
+)
+```
+
+## 完全自定义会话条目
+
+开发者可以通过 `itemBuilder` 参数实现自定义会话项：
+
+1. 创建自定义会话项构建器。
+
+```dart
+ConversationsView(
+  itemBuilder: (context, model) {
+    // 根据会话类型返回自定义 Widget
+    if (model.profile.type == ChatUIKitProfileType.group) {
+      return CustomGroupConversationItem(model: model);
+    }
+    // 返回 null 使用默认渲染
+    return null;
+  },
+)
+```
+
+2. 通过继承 `ConversationListViewController` 进行自定义设置。
+
+创建自定义 `CustomConversationListViewController`，继承自 `ConversationListViewController`：
+
+```dart
+class CustomConversationListViewController extends ConversationListViewController {
+  @override
+  void fetchItemList() {
+    // 自定义获取会话列表逻辑
+    super.fetchItemList();
+  }
+}
+
+// 使用自定义控制器
+ConversationsView(
+  controller: CustomConversationListViewController(),
 )
 ```
 

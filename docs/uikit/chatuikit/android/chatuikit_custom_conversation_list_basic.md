@@ -1,6 +1,6 @@
 # 会话列表的基本设置
 
-本文介绍如何通过 `ChatUIKitConversationListFragment` 实现会话列表的基本设置，包括会话列表空白页面、添加自定义会话列表和设置会话事件监听。
+本文介绍如何通过 `ChatUIKitConversationListFragment` 实现会话列表的基本设置，包括会话列表空页面和设置会话事件监听。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title= "会话列表 ChatUIKitConversationListFragment" />
@@ -8,13 +8,7 @@
 
 ## 概述
 
-`ChatUIKitConversationListFragment` 提供了 `Builder` 构建方式，支持以下会话自定义设置：
-
-- [设置会话列表空白页面](#设置会话列表空页面)。
-- [添加自定义会话列表](#添加自定义会话列表)：自定义会话列表布局。
-- [设置会话事件监听](#设置事件监听)。
-
-使用示例如下：
+`ChatUIKitConversationListFragment` 提供了 `Builder` 构建方式，支持会话自定义设置。使用示例如下：
 
 ```kotlin
 ChatUIKitConversationListFragment.Builder()

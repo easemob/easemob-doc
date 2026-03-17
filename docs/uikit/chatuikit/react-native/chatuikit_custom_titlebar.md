@@ -229,7 +229,7 @@ const NotificationButton = ({ count, onPress }: { count: number; onPress: () => 
 />
 ```
 
-### 完全自定义标题栏
+### 完全自定义导航栏
 
 如果预设布局不满足需求，可以完全替换整个标题栏：
 

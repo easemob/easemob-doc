@@ -1,6 +1,6 @@
 # 会话列表的基本设置
 
-本文介绍如何通过 `ConversationsView` 实现会话列表的基本设置，包括会话列表空白页面、添加自定义会话列表和设置会话事件监听。
+本文介绍如何通过 `ConversationsView` 实现会话列表的基本设置，包括会话列表空白页面和设置会话事件监听。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="完整的会话列表页面 ConversationsView" />
@@ -8,13 +8,7 @@
 
 ## 概述
 
-`ConversationsView` 提供了丰富的参数，支持以下会话自定义设置：
-
-- [设置会话列表空白页面](#设置会话列表空白页面)。
-- [添加自定义会话列表](#添加自定义会话列表)：自定义会话列表布局。
-- [设置会话事件监听](#设置事件监听)。
-
-使用示例如下：
+`ConversationsView` 提供了丰富的参数，支持以下会话自定义设置。使用示例如下：
 
 ```dart
 ConversationsView(
@@ -61,7 +55,7 @@ ConversationsView(
 | `afterWidgets` | `List<Widget>?` | 会话列表之后的组件列表。 |
 | `onSearchTap` | `void Function(List<ConversationItemModel>)?` | 点击搜索按钮的回调。 |
 
-## 设置会话列表空白页面
+## 设置会话列表空页面
 
 `ConversationsView` 提供 `emptyBackground` 参数设置会话列表的空白页面。
 
@@ -77,44 +71,6 @@ ConversationsView(
       ],
     ),
   ),
-)
-```
-
-## 添加自定义会话条目
-
-开发者可以通过 `itemBuilder` 参数实现自定义会话项：
-
-1. 创建自定义会话项构建器。
-
-```dart
-ConversationsView(
-  itemBuilder: (context, model) {
-    // 根据会话类型返回自定义 Widget
-    if (model.profile.type == ChatUIKitProfileType.group) {
-      return CustomGroupConversationItem(model: model);
-    }
-    // 返回 null 使用默认渲染
-    return null;
-  },
-)
-```
-
-2. 通过继承 `ConversationListViewController` 进行自定义设置。
-
-创建自定义 `CustomConversationListViewController`，继承自 `ConversationListViewController`：
-
-```dart
-class CustomConversationListViewController extends ConversationListViewController {
-  @override
-  void fetchItemList() {
-    // 自定义获取会话列表逻辑
-    super.fetchItemList();
-  }
-}
-
-// 使用自定义控制器
-ConversationsView(
-  controller: CustomConversationListViewController(),
 )
 ```
 

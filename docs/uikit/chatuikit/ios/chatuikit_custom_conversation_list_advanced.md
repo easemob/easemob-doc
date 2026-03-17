@@ -88,7 +88,7 @@ Appearance.conversation.rowHeight = 76
   <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png" title="会话条目的高度" />
 </ImageGallery>
 
-## 设置会话条目头像
+## 设置会话头像
 
 1. 通过 `Appearance.conversation` 调整单聊和群聊的默认头像：
 
@@ -152,7 +152,7 @@ Appearance.conversation.dateFormatOtherDay = "MM/dd"// 非当天显示格式
     }
 ```
 
-## 设置会话条目侧滑菜单
+## 设置会话侧滑菜单
 
 会话列表支持左右滑动手势操作，可通过 `Appearance.conversation` 自定义菜单项。
 
@@ -272,7 +272,7 @@ Appearance.conversation.listMoreActions = actions
   <ImageItem src="/images/uikit/chatuikit/android/conversation_unread.png" title="消息未读计数图标" />
 </ImageGallery>
 
-## 添加自定义会话条目
+## 完全自定义会话条目
 
 如需完全自定义会话条目的 UI（如调整布局、增加未读数显示样式），可继承 `ConversationListCell` 并进行注册：
 

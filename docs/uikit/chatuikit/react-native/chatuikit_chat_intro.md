@@ -145,4 +145,4 @@ export function ConversationDetailScreen(props: Props) {
 | `convType`            | `number`                                         | 是   | -      | - `0`：单聊<br/> - `1`：群聊    |
 | `onBack`              | `() => void`                                     | 否   | -      | 返回按钮回调       |
 | `enableNavigationBar` | `Boolean`                                        | 否   | `true` | 是否显示默认标题栏 |
-| `NavigationBar`       | `React.ReactElement`                             | 否   | -      | 完全自定义标题栏   |
+| `NavigationBar`       | `React.ReactElement`                             | 否   | -      | 完全自定义导航栏   |

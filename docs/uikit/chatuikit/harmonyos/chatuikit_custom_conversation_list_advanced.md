@@ -8,7 +8,7 @@
   <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationListView" />
 </ImageGallery>
 
-## 自定义会话条目
+## 完全自定义会话条目
 
 通过实现 `ConversationItemProvider` 接口，可自定义会话条目的完整布局。
 
@@ -16,7 +16,7 @@
   <ImageItem src="/images/uikit/chatuikit/android/conversation_list_item.png" title="会话条目 ConversationItemView" />
 </ImageGallery>
 
-#### 添加自定义会话列表
+#### 完全自定义会话列表
 
 **步骤 1 创建自定义会话条目组件**
 
@@ -187,7 +187,7 @@ export interface ConversationItemProvider {
 | `getName()`      | String                             | 获取会话名称。                                                                      |
 | `getAvatar()`    | ResourceStr                        | 获取会话头像。                                                                      |
 
-## 自定义会话最新消息的内容
+## 自定义会话最新消息内容
 
 当应用中存在自定义消息类型（如红包、位置分享、名片等）时，可通过实现 `ConversationLatestMessageContentProvider` 接口来自定义这些消息在会话列表中的展示内容。
 

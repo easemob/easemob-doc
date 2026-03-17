@@ -1,6 +1,6 @@
 # 会话列表的基本设置
 
-本文介绍如何通过 `ConversationList` 组件的属性实现会话列表的设置，包括会话列表空白页面、添加自定义会话列表和设置会话事件监听。
+本文介绍如何通过 `ConversationList` 组件的属性实现会话列表的设置，包括会话列表背景、会话列表空页面和设置会话事件监听。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationList" />
@@ -112,7 +112,7 @@
 />
 ```
 
-## 添加自定义会话列表
+## 完全自定义会话列表
 
 你可以通过 `renderItem` 方法自定义会话条目的渲染：
 
