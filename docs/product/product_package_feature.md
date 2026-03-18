@@ -116,13 +116,13 @@
 </tr>
 <tr>
 <td width="224">
-<p>全局禁言</p>
+<p>用户全局禁言（单群聊）</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>*</p>
+<p>联系商务</p>
 </td>
 <td width="332">
 <p>✓</p>
@@ -216,11 +216,11 @@
 </td>
 </tr>
 <tr>
-<td rowspan="26" width="216">
+<td rowspan="24" width="216">
 <p>消息</p>
 </td>
 <td width="224">
-<p>单群聊消息云存储<br /> （历史消息、漫游消息）</p>
+<p>单群聊消息云存储<br/> （历史消息、漫游消息）</p>
 </td>
 <td width="224">
 <p>3 天</p>
@@ -265,7 +265,7 @@
 <p>发送 app 全局广播消息（服务端）</p>
 </td>
 <td width="224">
-<p>✓</p>
+<p>&mdash;</p>
 </td>
 <td width="229">
 <p>联系商务</p>
@@ -347,20 +347,6 @@
 <tr>
 <td width="224">
 <p>定向消息<br /> （支持群组和聊天室）</p>
-</td>
-<td width="224">
-<p>✓</p>
-</td>
-<td width="229">
-<p>✓</p>
-</td>
-<td width="332">
-<p>✓</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>消息推送</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -528,20 +514,6 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息举报</p>
-</td>
-<td width="224">
-<p>&mdash;</p>
-</td>
-<td width="229">
-<p>*</p>
-</td>
-<td width="332">
-<p>✓</p>
-</td>
-</tr>
-<tr>
-<td width="224">
 <p>发送前回调</p>
 </td>
 <td width="224">
@@ -583,7 +555,7 @@
 </td>
 </tr>
 <tr>
-<td rowspan="13" width="216">
+<td rowspan="11" width="216">
 <p>群组</p>
 </td>
 <td width="224">
@@ -622,20 +594,6 @@
 </td>
 <td width="229">
 <p>300（*）</p>
-</td>
-<td width="332">
-<p>3000（*）</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>单个用户可加入群组数上限</p>
-</td>
-<td width="224">
-<p>100</p>
-</td>
-<td width="229">
-<p>600（*）</p>
 </td>
 <td width="332">
 <p>3000（*）</p>
@@ -754,21 +712,7 @@
 </td>
 </tr>
 <tr>
-<td width="224">
-<p>子区</p>
-</td>
-<td width="224">
-<p>&mdash;</p>
-</td>
-<td width="229">
-<p>联系商务</p>
-</td>
-<td width="332">
-<p>联系商务</p>
-</td>
-</tr>
-<tr>
-<td rowspan="11" width="216">
+<td rowspan="12" width="216">
 <p>聊天室</p>
 </td>
 <td width="224">
@@ -912,6 +856,20 @@
 </tr>
 <tr>
 <td width="224">
+<p>用户全局禁言（聊天室）</p>
+</td>
+<td width="224">
+<p>&mdash;</p>
+</td>
+<td width="229">
+<p>&mdash;</p>
+</td>
+<td width="332">
+<p>✓</p>
+</td>
+</tr>
+<tr>
+<td width="224">
 <p>聊天室广播消息</p>
 </td>
 <td width="224">
@@ -963,7 +921,7 @@
 <p>网络</p>
 </td>
 <td width="224">
-<p>全球加速网络<br /> （SD-GMN，全球 5 大数据中心、200+ 边缘加速节点）</p>
+<p>全球加速网络<br/>（SD-GMN，全球 5 大数据中心、230+ 国家及地区，3000+ 边缘加速节点）</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -987,55 +945,6 @@
 </td>
 <td width="332">
 <p>✓</p>
-</td>
-</tr>
-<tr>
-<td rowspan="5" width="216">
-<p>增值服务</p>
-</td>
-<td width="224">
-<p>实时音视频服务</p>
-</td>
-<td width="224">
-<p>✓</p>
-</td>
-<td rowspan="5" width="229">
-<p>单独购买开通</p>
-</td>
-<td rowspan="5" width="332">
-<p>单独购买开通</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>消息翻译</p>
-</td>
-<td width="224">
-<p>&mdash;</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>即时推送</p>
-</td>
-<td width="224">
-<p>✓</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>内容审核</p>
-</td>
-<td width="224">
-<p>&mdash;</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>敏感词服务（基础词库）<br /> 说明：仅包含涉政词库，不支持配置自定义词</p>
-</td>
-<td width="224">
-<p>&mdash;</p>
 </td>
 </tr>
 </tbody>
