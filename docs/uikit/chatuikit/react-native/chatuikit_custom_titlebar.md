@@ -1,6 +1,6 @@
-# 页面标题栏
+# 页面导航栏
 
-`TopNavigationBar` 是一个灵活的标题栏组件，采用左-中-右三段式布局。聊天页面、会话列表页面、联系人列表页面等均使用 `TopNavigationBar`。该组件支持完全自定义左侧、中部和右侧的子组件，让你可以根据业务需求灵活定制标题栏。
+`TopNavigationBar` 是一个灵活的导航栏组件，采用左-中-右三段式布局。聊天页面、会话列表页面、联系人列表页面等均使用 `TopNavigationBar`。该组件支持完全自定义左侧、中部和右侧的子组件，让你可以根据业务需求灵活定制导航栏。
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/android/titlebar_conversation_list.png" title="会话列表导航栏" />
@@ -19,7 +19,7 @@
 | `LeftProps` | `any` | 传递给左侧组件的属性 |
 | `Right` | `React.ComponentType \| React.ReactElement` | 右侧组件 |
 | `RightProps` | `any` | 传递给右侧组件的属性 |
-| `containerStyle` | `StyleProp<ViewStyle>` | 标题栏容器样式 |
+| `containerStyle` | `StyleProp<ViewStyle>` | 导航栏容器样式 |
 
 ## 预设组件
 
@@ -86,7 +86,7 @@ import {
 />
 ```
 
-### 创建群组页面标题栏
+### 创建群组页面导航栏
 
 使用左侧返回按钮和右侧文本按钮：
 
@@ -127,7 +127,7 @@ import {
 
 ## 自定义组件
 
-标题栏 `TopNavigationBar` 支持完全替换左、中、右任意区域的组件，而不仅仅是修改属性。
+导航栏 `TopNavigationBar` 支持完全替换左、中、右任意区域的组件，而不仅仅是修改属性。
 
 ### 自定义左侧组件
 
@@ -231,10 +231,10 @@ const NotificationButton = ({ count, onPress }: { count: number; onPress: () => 
 
 ### 完全自定义导航栏
 
-如果预设布局不满足需求，可以完全替换整个标题栏：
+如果预设布局不满足需求，可以完全替换整个导航栏：
 
 ```typescript
-// 完全自定义的标题栏
+// 完全自定义的导航栏
 const CustomNavigationBar = () => {
   return (
     <View style={{
@@ -262,13 +262,13 @@ const CustomNavigationBar = () => {
   );
 };
 
-// 替换整个标题栏
+// 替换整个导航栏
 <CustomNavigationBar />
 ```
 
-## 设置标题栏样式
+## 设置导航栏样式
 
-### 设置标题栏背景色
+### 设置导航栏背景色
 
 通过 `containerStyle` 属性自定义样式：
 
@@ -284,7 +284,7 @@ const CustomNavigationBar = () => {
 />
 ```
 
-### 设置标题栏高度
+### 设置导航栏高度
 
 ```typescript
 <TopNavigationBar
@@ -312,7 +312,7 @@ const CustomNavigationBar = () => {
 
 ### 会话列表页面
 
-- 使用默认标题栏：
+- 使用默认导航栏：
 
 ```typescript
 import { ConversationList } from 'react-native-chat-uikit';
@@ -320,13 +320,13 @@ import { ConversationList } from 'react-native-chat-uikit';
 function ConversationListScreen() {
   return (
     <ConversationList
-      navigationBarVisible={true}  // 显示默认标题栏
+      navigationBarVisible={true}  // 显示默认导航栏
     />
   );
 }
 ```
 
-- 自定义会话列表标题栏：
+- 自定义会话列表导航栏：
 
 ```typescript
 <ConversationList
@@ -347,7 +347,7 @@ function ConversationListScreen() {
 
 ### 聊天页面
 
-**单聊标题栏：**
+**单聊导航栏：**
 
 ```typescript
 <TopNavigationBar
@@ -389,7 +389,7 @@ function ConversationListScreen() {
 />
 ```
 
-**群聊标题栏（带话题）：**
+**群聊导航栏（带话题）：**
 
 ```typescript
 <TopNavigationBar
@@ -424,7 +424,7 @@ function ConversationListScreen() {
 />
 ```
 
-**话题详情页面标题栏**
+**话题详情页面导航栏**
 
 ```typescript
 
@@ -453,7 +453,7 @@ function ConversationListScreen() {
 />
 ```
 
-**多选模式标题栏**
+**多选模式导航栏**
 
 ```typescript
 
@@ -476,7 +476,7 @@ function ConversationListScreen() {
 
 ### 联系人列表页面
 
-根据 `contactType` 显示不同标题栏样式：
+根据 `contactType` 显示不同导航栏样式：
 
 ```typescript
 // contactType: 'contact-list' - 联系人列表
@@ -515,7 +515,7 @@ function ConversationListScreen() {
 
 ## 常见问题
 
-### 如何隐藏默认标题栏？
+### 如何隐藏默认导航栏？
 
 在页面组件中设置 `navigationBarVisible={false}`：
 
@@ -578,7 +578,7 @@ import LinearGradient from 'react-native-linear-gradient';
 </LinearGradient>
 ```
 
-### 如何实现滚动渐变标题栏？
+### 如何实现滚动渐变导航栏？
 
 结合 Animated 和 ScrollView 的滚动事件实现：
 

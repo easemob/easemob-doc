@@ -75,7 +75,7 @@ val fragment = ChatUIKitContactsListFragment.Builder()
 ChatUIKitConversationListFragment.Builder().useTitleBar()
 ```
 
-## 设置标题栏的背景色
+## 设置标题栏背景色
 
 ```kotlin
 binding?.titleConversations?.setBackgroundColor(ContextCompat.getColor(mContext,R.color.blue))

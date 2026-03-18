@@ -94,7 +94,7 @@ ConversationsView(
 )
 ```
 
-## 设置标题栏的背景色
+## 设置标题栏背景色
 
 ```dart
 ChatUIKitAppBarModel(
