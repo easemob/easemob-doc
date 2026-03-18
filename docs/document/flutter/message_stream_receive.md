@@ -111,7 +111,7 @@ void _addChatListener() {
 | 状态 | 描述 |
 |--------|------|
 | `START`  | 流式消息开始传输，当前分片为首片。  |
-| `START_AND_COMPLETE`  | 流式传输可在一个分片内完成传输。此时消息仅包含一个分片，称为单片流式消息。 |
+| `START_AND_COMPLETE`  | 流式消息在一个分片内完成传输。此时消息仅包含一个分片，称为单片流式消息。 |
 | `PROGRESS` | 流式消息传输中。 |
 | `COMPLETE`  | 流式消息传输完成，当前分片为最后一片。  |
 | `ERROR` | 流式消息传输过程中发生错误。 |
@@ -132,23 +132,23 @@ SDK 会自动按分片顺序在本地合并内容并更新消息体。
  
 | 功能             | 是否支持                          |
 | :--------------- | :-------------------------------- |
-| [发送消息](/document/server-side/message_single.html)         | 是（仅支持通过 RESTful API 发送） |
-| [消息漫游](/document/android/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
-| [消息扩展](/document/android/message_extension.html)         | 是                                |
-| [定向发送](/document/android/message_target.html)         | 否                                |
-| [消息已读回执](/document/android/message_receipt.html)     | 否                                |
+| [发送消息](/document/server-side/message_stream_send_single.html)         | 是（仅支持通过 RESTful API 发送） |
+| [消息漫游](/document/flutter/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
+| [消息扩展](/document/flutter/message_extension.html)         | 是                                |
+| [定向发送](/document/flutter/message_target.html)         | 否                                |
+| [消息已读回执](/document/flutter/message_receipt.html)     | 否                                |
 | 消息输入状态 | 否                                |
-| [消息回复（Reaction）](/document/android/reaction.html)         | 是                                |
-| [消息置顶](/document/android/message_pin.html)         | 是                                |
-| [消息撤回](/document/android/message_recall.html)         | 是                                |
-| [消息单向删除](/document/android/message_delete.html#单向删除服务端的历史消息)     | 是                                |
-| [消息修改](/document/android/message_modify.html)         | 是                                |
-| [消息搜索](/document/android/message_search.html)         | 是                                |
-| [会话未读数](/document/android/conversation_unread.html)       | 是                                |
+| [消息回复（Reaction）](/document/flutter/reaction.html)         | 是                                |
+| [消息置顶](/document/flutter/message_pin.html)         | 是                                |
+| [消息撤回](/document/flutter/message_recall.html)         | 是                                |
+| [消息单向删除](/document/flutter/message_delete.html#单向删除服务端的历史消息)     | 是                                |
+| [消息修改](/document/flutter/message_modify.html)         | 是                                |
+| [消息搜索](/document/flutter/message_search.html)         | 是                                |
+| [会话未读数](/document/flutter/conversation_unread.html)       | 是                                |
 | 会话最后一条消息 | 是                                |
-| [离线推送](/document/server-side/push_settings_set.html)     | 是                                |
+| [离线推送](/document/flutter/push/push_overview.html)     | 是                                |
 | [内容审核](/value-added/moderation/moderation_overview.html)     | 否                                |
-| [消息翻译](/value-added/translation/message_translation_android.html)         | 是                                |
+| [消息翻译](/value-added/translation/message_translation_flutter.html)         | 是                                |
 | [发送前回调](/document/server-side/callback_presending.html)         | 否                               |
 | [发送后回调](/document/server-side/callback_postsending.html)         | 否      |
 | 消息发送成功后在发送方多客户端同步        |   否  |

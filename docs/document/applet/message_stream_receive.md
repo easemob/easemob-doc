@@ -1,4 +1,4 @@
-# 流式消息
+# 接收流式消息
 
 即时通讯 IM 支持在单聊和群组聊天时发送流式消息。流式消息是一种边生成、边发送、边接收的实时消息传输机制。它将长文本或复杂内容拆分为连续的数据片段，以低延迟、分批次的方式实时推送给接收方，无需等待整个内容完全生成即可开始传输。
 
@@ -86,7 +86,7 @@ conn.addEventHandler('handlerId', {
 | 状态 | 枚举值 |描述 |
 | :--- | :--- | :--- |
 | `START` | 0 | 流式消息开始传输，当前分片为首片。 |
-| `START_AND_COMPLETE` | 1 | 流式传输可在一个分片内完成传输。此时消息仅包含一个分片，称为单片流式消息。|
+| `START_AND_COMPLETE` | 1 | 流式消息在一个分片内完成传输。此时消息仅包含一个分片，称为单片流式消息。|
 | `IN_PROGRESS` | 2 | 流式消息传输中。 |
 | `COMPLETED` | 3 | 流式消息传输完成，当前分片为最后一片。 |
 | `ERROR` | 4 | 流式消息传输过程中发生错误。 |
@@ -120,7 +120,7 @@ SDK 会自动按分片顺序在本地合并内容并更新消息体。
 | [消息修改](/document/applet/message_modify.html)         | 是                                |
 | [会话未读数](/document/applet/conversation_unread.html)       | 是                                |
 | 会话最后一条消息 | 是                                |
-| [离线推送](/document/server-side/push_settings_set.html)     | 是                                |
+| [离线推送](/document/web/push/push_overview.html)     | 是                                |
 | [内容审核](/value-added/moderation/moderation_overview.html)     | 否                                |
 | [消息翻译](/value-added/translation/message_translation_applet.html)         | 是                                |
 | [发送前回调](/document/server-side/callback_presending.html)         | 否                               |

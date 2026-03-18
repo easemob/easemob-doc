@@ -43,7 +43,7 @@ const documentSidebar = [
       { text: '消息概述', link: 'message_overview.html' },
       { text: '发送消息', link: 'message_send.html' },
       { text: '接收消息', link: 'message_receive.html' },
-      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios'] },
+      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos'] },
       { text: '获取历史消息', link: 'message_retrieve.html' },
       { text: '撤回消息', link: 'message_recall.html' },
       { text: '搜索消息', link: 'message_search.html', except: ['web']},

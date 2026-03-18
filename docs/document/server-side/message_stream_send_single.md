@@ -48,8 +48,6 @@ POST https://{host}/{org_name}/{app_name}/stream_message/user
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-```bash
 curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
@@ -126,7 +124,7 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
 
 | 参数           | 类型    | 是否必需 | 描述                                                         |
 | :------------- | :------ | :------- | :----------------------------------------------------------- |
-| `msgId`        | String  | 是       | 消息 ID。首次发起流式消息时本字段为空，后续分片需传入首次 API 调用返回的 `msgId`。<br/>该 ID 对应完整的流式消息，其下的各个分片通过 `seq` 字段编号区分。 |
+| `msgId`        | String  | 是       | 消息 ID。<br/>该 ID 对应完整的流式消息，其下的各个分片通过 `seq` 字段编号区分。<br/>**首片不传，后续分片必传**：首次发起流式消息时本字段为空，后续分片需传入首次 API 调用返回的 `msgId`。 |
 | `msg`          | String  | 是       | 当前分片的文本内容。整条流式消息的总长度不得超过 128 KB。    |
 | `seq`          | Int | 是       | 分片序号。流式消息按序拆分为多个分片发送，首个分片序号为 `0`，后续依次递增，用于将分片合并为原消息。 |
 | `finish`       | Bool    | 否       | 标识当前分片是否为最后一个。<br/> - （默认）`false`：否<br/> - `true`：是 <br/>发送最后一个分片时需设为 `true`。若消息结束后仍对同一 `msgId` 发送新分片，将返回错误码 14035。 |
@@ -210,7 +208,7 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
  
 | 功能             | 是否支持                          |
 | :--------------- | :-------------------------------- |
-| [发送消息](/document/server-side/message_single.html)         | 是（仅支持通过 RESTful API 发送） |
+| [发送消息](/document/server-side/message_stream_send_single.html)         | 是（仅支持通过 RESTful API 发送） |
 | [消息漫游](/document/android/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
 | [消息扩展](/document/android/message_extension.html)         | 是                                |
 | [定向发送](/document/android/message_target.html)         | 否                                |
