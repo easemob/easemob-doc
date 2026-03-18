@@ -240,7 +240,10 @@ projects:
                 link: /document/web/message_stream_receive.html
               - icon: /sdk/applet.svg
                 text: 小程序
-                link: /document/applet/message_stream_receive.html      
+                link: /document/applet/message_stream_receive.html   
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS
+                link: /document/harmonyos/message_stream_receive.html     
           - text: 获取消息
             desc: 从环信消息服务器获取漫游消息，或者从本地获取消息。
             sdks:

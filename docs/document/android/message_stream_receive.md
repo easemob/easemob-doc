@@ -67,7 +67,7 @@ EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() 
 | :--- | :--- | :--- |
 | `getText()` | String | 当前消息分片的文本内容。<br/>`EMTextMessageBody#getMessage()` 获取从第一个分片到当前分片的累计合并内容。 |
 | `getStatus()` | EMStreamStatus | 获取流式消息的传输状态。详见下表中的 `EMStreamStatus` 类介绍。 |
-| `isCompleted()` | Boolean | 判断流式消息是否已传输完成。 |
+| `isCompleted()` | Boolean | 判断流式消息是否已传输完成。<br/> 当 `getStatus()` 返回 `COMPLETE`、`START_AND_COMPLETE` 或 `ERROR` 中的任意一种状态时，`isCompleted()` 方法返回 `true`。 |
 | `getCustomType()` | String | 获取自定义透传类型。例如，用于标识文本格式的 "markdown"。 |
 | `getErrorCode()` | Int | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。|
 | `getFinishReason()` | Int | 获取完成原因代码（由业务服务器设置）。默认值 `0` 表示无异常。|
@@ -88,7 +88,7 @@ private void handleStreamChunk(EMMessage message) {
 | 状态 | 描述 |
 | :--- | :--- |
 | `START` | 流式消息开始传输，当前分片为首片。 |
-| `START_AND_COMPLETE` | 流式传输可在一个分片内完成传输。此时消息仅包含一个分片，称为单片流式消息。|
+| `START_AND_COMPLETE` | 流式消息在一个分片内完成传输。此时消息仅包含一个分片，称为单片流式消息。|
 | `PROGRESS` | 流式消息传输中。 |
 | `COMPLETE` | 流式消息传输完成，当前分片为最后一片。 |
 | `ERROR` | 流式消息传输过程中发生错误。 |
@@ -120,7 +120,7 @@ private void handleStreamChunk(EMMessage message) {
  
 | 功能             | 是否支持                          |
 | :--------------- | :-------------------------------- |
-| [发送消息](/document/server-side/message_single.html)         | 是（仅支持通过 RESTful API 发送） |
+| [发送消息](/document/server-side/message_stream_send_single.html)         | 是（仅支持通过 RESTful API 发送） |
 | [消息漫游](/document/android/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
 | [消息扩展](/document/android/message_extension.html)         | 是                                |
 | [定向发送](/document/android/message_target.html)         | 否                                |

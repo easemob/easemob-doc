@@ -59,7 +59,7 @@ curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
         "msg": "第一个分片",
         "seq": 0,
         "type": "markdown"
-    }
+    },
     "ext": {
     }
 }'
@@ -94,7 +94,7 @@ curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
 
 | 参数            | 类型   | 是否必需 | 描述     |
 | :-------------- | :----- | :----------------- | :-------------------- |
-| `from` | String | 是   | <Container type="tip" title="提示"><br/>- 服务器不会校验该用户 ID 是否存在。即使传入不存在的 ID，消息仍会正常下发。<br/>- 服务器不会检查接收方是否已将发送方加入黑名单，也不会校验发送方是否被禁言。<br/>- 若传入空字符串 ("")，请求将失败。</Container> |
+| `from` | String | 是   | 消息发送方的用户 ID。默认为 `admin`。<Container type="tip" title="提示"><br/>- 服务器不会校验该用户 ID 是否存在。即使传入不存在的 ID，消息仍会正常下发。<br/>- 服务器不会检查接收方是否已将发送方加入黑名单，也不会校验发送方是否被禁言。<br/>- 若传入空字符串 ("")，请求将失败。</Container> |
 | `to`   | String | 是 | 消息接收方所属群组的 ID。<br/><Container type="tip" title="提示"><br/> - 只能传入一个群组 ID，且该群组的成员数量不得超过 200 人。<br/> - 服务器不会校验群组 ID 是否存在。即使传入的群组 ID 不存在，消息仍会正常发送，不会收到错误提示。</Container> |
 | `body` | JSON   | 是                     | 消息内容。字段说明请见下方 `body` 参数详情。  |
 | `ext`  | JSON   | 否                     | 消息扩展字段，可用于传递自定义数据。不允许为 `null`。服务端会以 **首个分片** 的 `ext` 为准，后续分片的该字段会被透传。 |
@@ -106,7 +106,7 @@ curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
 | `seq`          | Int | 是   | 分片序号。流式消息按序拆分为多个分片发送，首个分片序号为 `0`，后续依次递增，用于将分片合并为原消息。 |
 | `type`         | String  | 否   | 文本格式类型，仅首个分片需传入。<br/> - （默认）`text`：纯文本 <br/> - `markdown`：Markdown 格式          |
 | `finish`       | Bool    | 否   | 标识当前分片是否为最后一个。<br/> - （默认）`false`：否<br/> - `true`：是 <br/>发送最后一个分片时需设为 `true`。若消息结束后仍对同一 `msgId` 发送新分片，将返回错误码 14035。  |
-| `msgId`        | String  | 是   | 消息 ID。首次发起流式消息时本字段为空，后续分片需传入首次 API 调用返回的 `msgId`。<br/>该 ID 对应完整的流式消息，其下的各个分片通过 `seq` 字段编号区分。 |
+| `msgId`        | String  | 是   | 消息 ID。<br/>该 ID 对应完整的流式消息，其下的各个分片通过 `seq` 字段编号区分。<br/>**首片不传，后续分片必传**：首次发起流式消息时本字段为空，后续分片需传入首次 API 调用返回的 `msgId`。 |
 | `msg`          | String  | 是   | 消息内容。                                                   |
 | `finishReason` | Int | 否   | 自定义结束原因码，仅当 `finish` 为 `true` 时生效。可用于标识消息正常结束、被中止等场景。|
 
