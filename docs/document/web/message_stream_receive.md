@@ -120,7 +120,7 @@ SDK 会自动按分片顺序在本地合并内容并更新消息体。
 | [消息修改](/document/web/message_modify.html)         | 是                                |
 | [会话未读数](/document/web/conversation_unread.html)       | 是                                |
 | 会话最后一条消息 | 是                                |
-| [离线推送](/document/server-side/push_settings_set.html)     | 是                                |
+| [离线推送](/document/web/push/push_overview.html)     | 是                                |
 | [内容审核](/value-added/moderation/moderation_overview.html)     | 否                                |
 | [消息翻译](/value-added/translation/message_translation_web.html)         | 是                                |
 | [发送前回调](/document/server-side/callback_presending.html)         | 否                               |

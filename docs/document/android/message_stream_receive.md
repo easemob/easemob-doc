@@ -1,4 +1,4 @@
-# 流式消息
+# 接收流式消息
 
 即时通讯 IM 支持在单聊和群组聊天时发送流式消息。流式消息是一种边生成、边发送、边接收的实时消息传输机制。它将长文本或复杂内容拆分为连续的数据片段，以低延迟、分批次的方式实时推送给接收方，无需等待整个内容完全生成即可开始传输。
 
@@ -134,7 +134,7 @@ private void handleStreamChunk(EMMessage message) {
 | [消息搜索](/document/android/message_search.html)         | 是                                |
 | [会话未读数](/document/android/conversation_unread.html)       | 是                                |
 | 会话最后一条消息 | 是                                |
-| [离线推送](/document/server-side/push_settings_set.html)     | 是                                |
+| [离线推送](/document/android/push/push_overview.html)     | 是                                |
 | [内容审核](/value-added/moderation/moderation_overview.html)     | 否                                |
 | [消息翻译](/value-added/translation/message_translation_android.html)         | 是                                |
 | [发送前回调](/document/server-side/callback_presending.html)         | 否                               |

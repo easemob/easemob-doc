@@ -176,7 +176,7 @@ curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
  
 | 功能             | 是否支持                          |
 | :--------------- | :-------------------------------- |
-| [发送消息](/document/server-side/message_single.html)         | 是（仅支持通过 RESTful API 发送） |
+| [发送消息](/document/message_stream_send_group.html)         | 是（仅支持通过 RESTful API 发送） |
 | [消息漫游](/document/android/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
 | [消息扩展](/document/android/message_extension.html)         | 是                                |
 | [定向发送](/document/android/message_target.html)         | 否                                |
