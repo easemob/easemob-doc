@@ -59,7 +59,7 @@ ChatClient.getInstance().chatManager()?.addMessageListener({
 
 #### 当前分片信息
 
-通过 `ChatMessage` 的 `getStreamChunk()` 获取 [`ChatStreamChunk`](https://doc.easemob.com/apidoc/harmonyos/classes/ChatStreamChunk.html) 对象。该对象提供以下方法获取当前分片的信息：
+通过 `ChatMessage` 的 `getStreamChunk()` 获取 `ChatStreamChunk` 对象。该对象提供以下方法获取当前分片的信息：
 
 | 方法 | 返回值类型 | 描述 |
 | :--- | :--- | :--- |

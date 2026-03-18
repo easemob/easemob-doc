@@ -48,8 +48,6 @@ POST https://{host}/{org_name}/{app_name}/stream_message/user
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-
-```bash
 curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
