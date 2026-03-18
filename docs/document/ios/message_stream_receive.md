@@ -76,7 +76,7 @@
 | `chunk` | String | 当前消息分片的文本内容。<br/>`EMTextMessageBody` 中的 `text` 为从首片至当前分片的累计合并内容。 |
 | `status` | EMStreamChunkStatus  | 流式消息的传输状态。详见下表中的 `EMStreamChunkStatus` 类介绍。 |
 | `errorCode` | Int | 错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
-| `finishReason` | Int | 完成原因代码（由业务服务器设置）。默认值 `0` 表示无异常。 |
+| `finishReason` | Int | 完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
 | `customType` | String | （可选）自定义透传类型。例如，可用于区分不同展示样式的流式消息。 |
 
 `EMStreamChunkStatus` 枚举定义如下：
@@ -103,22 +103,22 @@ SDK 会自动按分片顺序在本地合并内容并更新消息体。
 | 功能             | 是否支持                          |
 | :--------------- | :-------------------------------- |
 | [发送消息](/document/server-side/message_single.html)         | 是（仅支持通过 RESTful API 发送） |
-| [消息漫游](/document/android/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
-| [消息扩展](/document/android/message_extension.html)         | 是                                |
-| [定向发送](/document/android/message_target.html)         | 否                                |
-| [消息已读回执](/document/android/message_receipt.html)     | 否                                |
+| [消息漫游](/document/ios/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
+| [消息扩展](/document/ios/message_extension.html)         | 是                                |
+| [定向发送](/document/ios/message_target.html)         | 否                                |
+| [消息已读回执](/document/ios/message_receipt.html)     | 否                                |
 | 消息输入状态 | 否                                |
-| [消息回复（Reaction）](/document/android/reaction.html)         | 是                                |
-| [消息置顶](/document/android/message_pin.html)         | 是                                |
-| [消息撤回](/document/android/message_recall.html)         | 是                                |
-| [消息单向删除](/document/android/message_delete.html#单向删除服务端的历史消息)     | 是                                |
-| [消息修改](/document/android/message_modify.html)         | 是                                |
-| [消息搜索](/document/android/message_search.html)         | 是                                |
-| [会话未读数](/document/android/conversation_unread.html)       | 是                                |
+| [消息回复（Reaction）](/document/ios/reaction.html)         | 是                                |
+| [消息置顶](/document/ios/message_pin.html)         | 是                                |
+| [消息撤回](/document/ios/message_recall.html)         | 是                                |
+| [消息单向删除](/document/ios/message_delete.html#单向删除服务端的历史消息)     | 是                                |
+| [消息修改](/document/ios/message_modify.html)         | 是                                |
+| [消息搜索](/document/ios/message_search.html)         | 是                                |
+| [会话未读数](/document/ios/conversation_unread.html)       | 是                                |
 | 会话最后一条消息 | 是                                |
 | [离线推送](/document/ios/push/push_overview.html)     | 是                                |
 | [内容审核](/value-added/moderation/moderation_overview.html)     | 否                                |
-| [消息翻译](/value-added/translation/message_translation_android.html)         | 是                                |
+| [消息翻译](/value-added/translation/message_translation_ios.html)         | 是                                |
 | [发送前回调](/document/server-side/callback_presending.html)         | 否                               |
 | [发送后回调](/document/server-side/callback_postsending.html)         | 否      |
 | 消息发送成功后在发送方多客户端同步        |   否  |
