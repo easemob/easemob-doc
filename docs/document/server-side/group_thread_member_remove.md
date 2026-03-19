@@ -4,7 +4,7 @@
 
 - 批量踢出子区成员。
 - 每次最多可踢出 10 个子区成员。
-- 使用该接口前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通子区功能。
+- 使用该接口前，你需要联系商务开通子区功能。
 
 ## 调用频率上限
 
@@ -100,6 +100,6 @@ curl -X DELETE https://XXXX/XXXX/XXXX/thread/1XXXX7/users \
 | 400     | group_error | request body reaches limit. | 请求 body 中的 `usernames` 参数的值已超过上限。 | 请检查请求 body 中的 `usernames` 参数的值是否超过了 10。每次最多可踢出 10 个子区成员。   |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | group_error | thread not found. | 子区不存在 | 输入正确的子区 ID。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 调用该接口前，你需要联系商务开通子区功能。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

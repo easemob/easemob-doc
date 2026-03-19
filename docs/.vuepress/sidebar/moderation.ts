@@ -1,7 +1,7 @@
 export const MODERATION_SIDEBAR = [
      { text: "产品概述", link: "/value-added/moderation/moderation_overview.html" },
      {
-          text: "产品定价",
+          text: "计费说明",
           collapsible: true,
           children: [
             { 
