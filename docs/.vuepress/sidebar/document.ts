@@ -43,6 +43,7 @@ const documentSidebar = [
       { text: '消息概述', link: 'message_overview.html' },
       { text: '发送消息', link: 'message_send.html' },
       { text: '接收消息', link: 'message_receive.html' },
+      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos'] },
       { text: '获取历史消息', link: 'message_retrieve.html' },
       { text: '撤回消息', link: 'message_recall.html' },
       { text: '搜索消息', link: 'message_search.html', except: ['web']},
@@ -212,6 +213,7 @@ const documentSidebar = [
           { text: '消息概述', link: 'message_overview.html' },
           { text: '发送消息', link: 'message_send.html' },
           { text: '接收消息', link: 'message_receive.html' },
+          { text: '接收流式消息', link: 'message_stream_receive.html' },
           { text: '获取历史消息', link: 'message_retrieve.html' },
           { text: '撤回消息', link: 'message_recall.html' },
           { text: '消息回执', link: 'message_receipt.html' }, 
@@ -333,6 +335,14 @@ const documentSidebar = [
       { text: '发送单聊消息', link: 'message_single.html' },
       { text: '发送群聊消息', link: 'message_group.html' },
       { text: '发送聊天室消息', link: 'message_chatroom.html' },
+      {
+        text: '发送流式消息',
+        collapsible: true,
+        children: [
+          { text: '发送单聊流式消息', link: 'message_stream_send_single.html' },
+          { text: '发送群聊流式消息', link: 'message_stream_send_group.html' },
+        ]
+      },
       {
         text: '发送全局广播消息',
         collapsible: true,

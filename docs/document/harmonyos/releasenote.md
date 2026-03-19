@@ -2,6 +2,23 @@
 
 <Toc />
 
+## v1.12.0 Dev 2026-3-18（开发版）
+
+#### 新增特性
+
+- 支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+
+目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
+
+- WebSocket 连接支持 IPv6 地址。
+
+#### 修复
+
+1. 修复了调用判断当前用户是否在群组或聊天室白名单/禁言列表时可能发生的崩溃问题。
+2. 修复连接状态上报不准确的问题。
+3. 修复 WebSocket 传输和 TCP 连接相关的锁保护问题，提升了 SDK 稳定性。
+4. 修复发送附件消息时，`remote_url` 与 `secret` 信息丢失的问题。
+
 ## v1.11.1 Dev 2026-2-28（开发版）
 
 - 多回调支持：`ChatMessage` 支持设置多个 `ChatCallback`，便于在消息生命周期中灵活处理多个回调逻辑。

@@ -56,6 +56,8 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 510    | MESSAGE_WEBSOCKET_DISCONNECTED                 | 消息发送失败，例如网络断开、重连失败等情况下导致发送失败。  | 提示消息发送失败。|
 | 511    | MESSAGE_SIZE_LIMIT                 | 消息体大小超过限制。关于各端消息体大小的限制，详见[消息概述](message_overview.html#消息类型)。| 提示消息内容过⼤。| 
 | 512    | MESSAGE_SEND_TIMEOUT                 | 发送消息超时。例如，发消息时连接断开，会提示该错误。| 提示发送超时。|
+| 513    | MESSAGE_STREAM_INTERVAL_TIMEOUT                 | 流式消息的相邻消息分片的发送间隔超时：该间隔不能超过 30 秒，超时则返回该错误并终止流式消息。| 可在 UI 上进行提示，或检查消息分片发送间隔。|
+| 514    | MESSAGE_STREAM_TIMEOUT                 | 流式消息的发送总时长超时：该时长不能超过 30 分钟，超时再发送分片则返回该错误。| 可在 UI 上进行提示，或检查流式消息的发送总时长。|
 | 601    | GROUP_ALREADY_JOINED                           | 已在群组内：当前用户已在该群组中。 | 确保邀请的⽤户不在群组中，不要重复邀请。|
 | 602    | GROUP_NOT_JOINED                               | 不在群组内：用户发送群消息或进行群操作时未加入该群组。 | 确保已经加⼊群组。|
 | 603    | PERMISSION_DENIED                              | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。 | 提示⽤户没有权限。|

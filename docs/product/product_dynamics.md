@@ -1,12 +1,27 @@
 # 产品动态
 
+## 2026-03
+
+### SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS SDK 1.12.0 开发版发布   | - [支持接收服务端发送的流式消息](/document/harmonyos/message_stream_receive.html)。<br/> - WebSocket 连接支持 IPv6 地址。  | 2026-3-18     | [HarmonyOS SDK 1.12.0 更新日志](/document/harmonyos/releasenote.html#v1-12-0-dev-2026-3-18-开发版)        |
+
+### 服务端 API
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| 新增发送流式消息 API   | - 新增发送单聊流式消息 API。 <br/> - 新增发送群聊流式消息 API。 | 2026-3-18  | - [发送单聊流式消息 API](/document/server-side/message_stream_send_single.html) <br/> - [发送群聊流式消息 API](/document/server-side/message_stream_send_group.html)        |
+
 ## 2026-02
 
 #### SDK 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Andriod/iOS SDK 4.19.0 开发版发布   | [SDK 依赖的 AOSL Crash 检测库](/document/android/releasenote.html#v4-19-0-dev-2026-2-2-开发版)。  | 2026-2-2     | - [Android SDK 4.19.0 更新日志](/document/android/releasenote.html#v4-19-0-dev-2026-2-2-开发版)  <br/> - [iOS SDK 4.19.0 更新日志](/document/ios/releasenote.html#v4-19-0-dev-2026-2-2-开发版)        |
+| Andriod/iOS SDK 4.19.0 开发版发布   | - [支持接收服务端发送的流式消息](/document/android/message_stream_receive.html)。<br/> - [SDK 依赖的 AOSL Crash 检测库](/document/android/releasenote.html#v4-19-0-dev-2026-2-2-开发版)。  | 2026-2-2     | - [Android SDK 4.19.0 更新日志](/document/android/releasenote.html#v4-19-0-dev-2026-2-2-开发版)  <br/> - [iOS SDK 4.19.0 更新日志](/document/ios/releasenote.html#v4-19-0-dev-2026-2-2-开发版)        |
+| Web/小程序 SDK 4.19.1 开发版发布   | [支持接收服务端发送的流式消息](/document/web/message_stream_receive.html)。  | 2026-2-2     | - [Web SDK 4.19.1 更新日志](/document/web/releasenote.html#_4-19-1-dev-2026-2-27-开发版)  <br/> - [小程序 SDK 4.19.1 更新日志](/document/applet/releasenote.html#_4-19-1-dev-2026-2-27-开发版)        |
 | uniapp SDK 4.19.0 开发版发布   | [uniapp 平台支持自动登录](/document/applet/uniapp.html#自动登录)。  | 2026-2-4     | [uniapp SDK 4.19.0 更新日志](/document/applet/releasenote.html#_4-19-0-dev-2026-02-04-开发版)          |
 | HarmonyOS SDK 1.11.0 开发版发布   | - 底层支持安全 DNS 解析 DoH，提高连通性。<br/> - 私有化部署底层链路支持 TCP 和 WebSocket 之间切换。 | 2026-2-4     | [HarmonyOS SDK 1.11.0 更新日志](/document/harmonyos/releasenote.html#v1-11-0-dev-2026-2-4-开发版)          |
 
