@@ -144,8 +144,8 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
 
 ```json
 {
-    "path": "/stream_message/users",
-    "uri": "https://XXXX/XXXX/XXXX/stream_message/users",
+    "path": "/stream_message/user",
+    "uri": "https://XXXX/XXXX/XXXX/stream_message/user",
     "timestamp": 1766740077265,
     "organization": "113230417254974",
     "application": "dd7f0328-5f3e-XXXX-XXXX-2e0434c5931b",
