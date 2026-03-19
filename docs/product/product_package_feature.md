@@ -116,13 +116,13 @@
 </tr>
 <tr>
 <td width="224">
-<p>用户全局禁言（单群聊）</p>
+<p>用户全局禁言</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>联系商务</p>
+<p>——</p>
 </td>
 <td width="332">
 <p>✓</p>
@@ -712,7 +712,7 @@
 </td>
 </tr>
 <tr>
-<td rowspan="12" width="216">
+<td rowspan="11" width="216">
 <p>聊天室</p>
 </td>
 <td width="224">
@@ -856,20 +856,6 @@
 </tr>
 <tr>
 <td width="224">
-<p>用户全局禁言（聊天室）</p>
-</td>
-<td width="224">
-<p>&mdash;</p>
-</td>
-<td width="229">
-<p>&mdash;</p>
-</td>
-<td width="332">
-<p>✓</p>
-</td>
-</tr>
-<tr>
-<td width="224">
 <p>聊天室广播消息</p>
 </td>
 <td width="224">
@@ -893,10 +879,10 @@
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>*</p>
+<p>联系环信商务</p>
 </td>
 <td width="332">
-<p>*</p>
+<p>联系环信商务</p>
 </td>
 </tr>
 <tr>
@@ -922,20 +908,6 @@
 </td>
 <td width="224">
 <p>全球加速网络<br/>（SD-GMN，全球 5 大数据中心、230+ 国家及地区，3000+ 边缘加速节点）</p>
-</td>
-<td width="224">
-<p>&mdash;</p>
-</td>
-<td width="229">
-<p>✓</p>
-</td>
-<td width="332">
-<p>✓</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>海外代理服务</p>
 </td>
 <td width="224">
 <p>✓</p>
