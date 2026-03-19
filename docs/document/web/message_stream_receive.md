@@ -155,7 +155,7 @@ UI 使用建议如下：
 | [消息扩展](/document/web/message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
 | [定向发送](/document/web/message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
 | [消息已读回执](/document/web/message_receipt.html) | 不支持 | 接收方回传已读状态。 |
-| 消息输入状态 | 不支持 | 通知对方“正在输入”状态。 |
+| [消息输入状态](typing_indication.html) | 不支持 | 通知对方“正在输入”状态。 |
 | [消息回复（Reaction）](/document/web/reaction.html) | 支持 | 对消息添加回复表情。 |
 | [消息置顶](/document/web/message_pin.html) | 支持 | 将消息置顶到会话中。 |
 | [消息撤回](/document/web/message_recall.html) | 支持 | 撤回已发送消息。 |
@@ -163,7 +163,7 @@ UI 使用建议如下：
 | [消息修改](/document/web/message_modify.html) | 支持 | 修改已发送消息内容。 |
 | [会话未读数](/document/web/conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
 | 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
-| [离线推送](/document/web/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。 |
+| [离线推送](/document/web/push/push_overview.html) | 不支持 | 用户离线时进行消息推送提醒。Web 端本身不支持离线推送，只支持对移动端离线推送进行配置。 |
 | [内容审核](/value-added/moderation/moderation_overview.html) | 不支持 | 对消息内容进行审核拦截。 |
 | [消息翻译](/value-added/translation/message_translation_web.html) | 支持 | 对消息内容进行翻译。 |
 | [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |

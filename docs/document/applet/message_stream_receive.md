@@ -164,7 +164,7 @@ UI 使用建议如下：
 | [消息修改](/document/applet/message_modify.html)         | 是                                |
 | [会话未读数](/document/applet/conversation_unread.html)       | 是                                |
 | 会话最后一条消息 | 是                                |
-| [离线推送](/document/web/push/push_overview.html)     | 是                                |
+| [离线推送](/document/applet/push/push_overview.html)     | 是                                |
 | [内容审核](/value-added/moderation/moderation_overview.html)     | 否                                |
 | [消息翻译](/value-added/translation/message_translation_applet.html)         | 是                                |
 | [发送前回调](/document/server-side/callback_presending.html)         | 否                               |
