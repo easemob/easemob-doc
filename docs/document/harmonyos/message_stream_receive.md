@@ -68,7 +68,7 @@ ChatClient.getInstance().chatManager()?.addMessageListener({
 | `isCompleted()` | Boolean | 判断流式消息是否已传输完成。<br/> 当 `status()` 返回 `COMPLETE`、`START_AND_COMPLETE` 或 `ERROR` 中的任意一种状态时，`isCompleted()` 方法返回 `true`。 |
 | `customType()` | String | 获取自定义透传类型。例如，用于标识文本格式的 "markdown"。 |
 | `errorCode()` | Number | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
-| `finishReason()` | Number | 获取完成原因代码（由业务服务器设置）。默认值 `0` 表示无异常。 |
+| `finishReason()` | Number | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
 
 ```typescript
 function handleStreamChunk(message: ChatMessage): void {

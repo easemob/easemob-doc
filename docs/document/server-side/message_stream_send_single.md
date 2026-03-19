@@ -209,23 +209,23 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
 | 功能             | 是否支持                          |
 | :--------------- | :-------------------------------- |
 | [发送消息](/document/server-side/message_stream_send_single.html)         | 是（仅支持通过 RESTful API 发送） |
-| [消息漫游](/document/android/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
-| [消息扩展](/document/android/message_extension.html)         | 是                                |
+| [消息漫游（客户端）](/document/android/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
+| [消息扩展](message_stream_send_single.html#请求示例)         | 是                                |
 | [定向发送](/document/android/message_target.html)         | 否                                |
-| [消息已读回执](/document/android/message_receipt.html)     | 否                                |
+| [消息已读回执（客户端）](/document/android/message_receipt.html)     | 否                                |
 | 消息输入状态 | 否                                |
-| [消息回复（Reaction）](/document/android/reaction.html)         | 是                                |
-| [消息置顶](/document/android/message_pin.html)         | 是                                |
-| [消息撤回](/document/android/message_recall.html)         | 是                                |
-| [消息单向删除](/document/android/message_delete.html#单向删除服务端的历史消息)     | 是                                |
-| [消息修改](/document/android/message_modify.html)         | 是                                |
-| [消息搜索](/document/android/message_search.html)         | 是                                |
-| [会话未读数](/document/android/conversation_unread.html)       | 是                                |
+| [消息回复（Reaction）](reaction_add.html)         | 是                                |
+| [消息置顶（客户端）](/document/android/message_pin.html)         | 是                                |
+| [消息撤回](message_recall_single.html)         | 是                                |
+| [消息单向删除](message_delete_roam_single_msgid.html)     | 是                                |
+| [消息修改](message_modify.html)         | 是                                |
+| [消息搜索（客户端）](/document/android/message_search.html)         | 是                                |
+| [会话未读数（客户端）](/document/android/conversation_unread.html)       | 是                                |
 | 会话最后一条消息 | 是                                |
 | [离线推送](/document/server-side/push_settings_set.html)     | 是                                |
 | [内容审核](/value-added/moderation/moderation_overview.html)     | 否                                |
-| [消息翻译](/value-added/translation/message_translation_android.html)         | 是                                |
+| [消息翻译](message_translation_text.html)         | 是                                |
 | [发送前回调](/document/server-side/callback_presending.html)         | 否                               |
 | [发送后回调](/document/server-side/callback_postsending.html)         | 否      |
 | 消息发送成功后在发送方多客户端同步        |   否  |
-| [发送方和接收方的本地数据库存储](limitation.html#消息存储)         | 
+| [发送方和接收方的本地数据库存储](limitation.html#消息存储)         | 是 | 

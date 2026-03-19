@@ -29,7 +29,7 @@
 
 发送和接收流式消息的流程如下：
 
-1. 接收方注册消息监听器，监听流式消息接收事件 `onStreamMessagesReceived`。
+1. 接收方注册消息监听器，监听流式消息接收事件 `onStreamMessageReceived`。
 2. 发送方调用服务端 RESTful API [发送流式消息](/document/server-side/message_stream_send_single.html)。
 3. 接收方接收和获取流式消息。
 
@@ -70,7 +70,7 @@ EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() 
 | `isCompleted()` | Boolean | 判断流式消息是否已传输完成。<br/> 当 `getStatus()` 返回 `COMPLETE`、`START_AND_COMPLETE` 或 `ERROR` 中的任意一种状态时，`isCompleted()` 方法返回 `true`。 |
 | `getCustomType()` | String | 获取自定义透传类型。例如，用于标识文本格式的 "markdown"。 |
 | `getErrorCode()` | Int | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。|
-| `getFinishReason()` | Int | 获取完成原因代码（由业务服务器设置）。默认值 `0` 表示无异常。|
+| `getFinishReason()` | Int | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。|
 
 ```java
 private void handleStreamChunk(EMMessage message) {

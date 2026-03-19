@@ -103,7 +103,7 @@ void _addChatListener() {
 | `chunk` | String | 当前消息分片的文本内容。<br/>`ChatTextMessageBody` 中的 `content` 则是从首片到当前分片的累计合并内容。 |
 | `status` | StreamStatus | 流式消息的传输状态，详见下表中的 `StreamStatus` 类介绍。 |
 | `errorCode` | Int | 错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
-| `finishReason` | Int | 完成原因代码（由业务服务器设置）。默认值 `0` 表示无异常。 |
+| `finishReason` | Int | 完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
 | `customType` | String? | （可选）自定义透传类型。例如，用于标识文本格式的 "markdown"。 |
 
 `StreamStatus` 枚举定义如下：

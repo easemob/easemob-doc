@@ -79,7 +79,7 @@ conn.addEventHandler('handlerId', {
 | `status` | StreamStatus | 获取流式消息的传输状态。详见下表中的 `StreamStatus` 介绍。 |
 | `customType` | String | 获取自定义透传类型。例如，用于标识文本格式的 "markdown"。 |
 | `errorType` | Number | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。|
-| `finishReason` | Number | 获取完成原因代码（由业务服务器设置）。默认值 `0` 表示无异常。|
+| `finishReason` | Number | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。|
 
 `StreamStatus` 枚举类定义如下：
 
@@ -107,7 +107,7 @@ SDK 会自动按分片顺序在本地合并内容并更新消息体。
  
 | 功能             | 是否支持                          |
 | :--------------- | :-------------------------------- |
-| [发送消息](/document/server-side/message_single.html)         | 是（仅支持通过 RESTful API 发送） |
+| [发送消息](/document/server-side/message_stream_send_single.html)         | 是（仅支持通过 RESTful API 发送） |
 | [消息漫游](/document/applet/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
 | [消息扩展](/document/applet/message_extension.html)         | 是                                |
 | [定向发送](/document/applet/message_target.html)         | 否                                |
