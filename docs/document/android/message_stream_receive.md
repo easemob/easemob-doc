@@ -105,7 +105,7 @@ private void handleStreamChunk(EMMessage message) {
     int errorCode = chunk.getErrorCode();
     int finishReason = chunk.getFinishReason();
 
-    // 建议业务侧按 msgId 更新同一条消息的展示内容
+    // 以下 `updateStreamMessage(...)` 为业务侧自定义的示例方法，用于说明如何按 `msgId` 更新同一条流式消息的展示内容。
     updateStreamMessage(msgId, incrementText, fullText, status, customType, errorCode, finishReason);
 }
 ```
@@ -127,12 +127,6 @@ private void handleStreamChunk(EMMessage message) {
 | `getErrorCode()` | Int | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
 | `getFinishReason()` | Int | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
 
-:::tip
- - `getText()` 获取的是当前分片的内容。
- - `EMTextMessageBody#getMessage()` 获取的是从首个分片到当前分片的累计合并内容。
- - 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
-:::
-
 ```java
 private void handleStreamChunk(EMMessage message) {
     // 获取当前分片的内容
@@ -143,6 +137,12 @@ private void handleStreamChunk(EMMessage message) {
     }
 }
 ```
+
+:::tip
+ - `getText()` 获取的是当前分片的内容。
+ - `EMTextMessageBody#getMessage()` 获取的是从首个分片到当前分片的累计合并内容。
+ - 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
+:::
 
 ### 累计合并内容
 
@@ -195,6 +195,8 @@ UI 使用建议如下：
 
 ## 消息功能支持
 
+流式消息支持的消息功能如下表所示：
+
 | 功能 | 是否支持 | 基本说明 |
 | :--- | :--- | :--- |
 | [发送消息](/document/server-side/message_stream_send_single.html) | 支持 | 通过服务端接口发送流式消息。 |
@@ -224,7 +226,7 @@ UI 使用建议如下：
 
 ### 1. SDK 能否主动发送流式消息？
 
-不支持。流式消息仅支持通过服务端 RESTful API 发送，Android SDK 只负责接收。
+不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，Android SDK 只负责接收。
 
 ### 2. `getText()` 和 `getMessage()` 有何区别？
 

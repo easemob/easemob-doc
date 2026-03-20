@@ -226,7 +226,7 @@ UI 使用建议如下：
 
 ### 1. SDK 能否主动发送流式消息？
 
-不支持。流式消息仅支持通过服务端 RESTful API 发送，iOS SDK 只负责接收。
+不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，iOS SDK 只负责接收。
 
 ### 2. `chunk` 和 `text` 有何区别？
 

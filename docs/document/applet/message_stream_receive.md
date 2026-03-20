@@ -85,6 +85,36 @@ conn.addEventHandler('handlerId', {
 
 在接收到流式消息分片后，你可以进一步获取当前分片内容、传输状态、累计合并内容、自定义类型、错误码和完成原因等信息，并根据 `message.id` 更新同一条消息的展示内容。
 
+```javascript
+function handleStreamChunk(message) {
+  const msgId = message.id;
+  const stream = message.stream;
+
+  if (!stream) {
+    return;
+  }
+
+  // 当前分片内容
+  const incrementText = stream.text;
+
+  // 当前传输状态
+  const status = stream.status;
+
+  // 累计合并内容
+  const fullText = message.msg || "";
+
+  // 自定义类型，例如 text / markdown
+  const customType = stream.customType;
+
+  // 错误码与完成原因
+  const errorType = stream.errorType;
+  const finishReason = stream.finishReason;
+
+  // 以下 `updateStreamMessage(...)` 为业务侧自定义的示例方法，用于说明如何按 `message.id` 更新同一条流式消息的展示内容。
+  updateStreamMessage(msgId, incrementText, fullText, status, customType, errorType, finishReason);
+}
+```
+
 ## 消息内容与处理
 
 接收到流式消息后，你可以从当前分片信息、累计合并内容、扩展字段以及传输状态四个方面处理消息。
@@ -101,12 +131,6 @@ conn.addEventHandler('handlerId', {
 | `errorType` | Number | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
 | `finishReason` | Number | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
 
-:::tip
-- `message.stream.text` 获取的是当前分片的内容。
-- `message.msg` 获取的是从首个分片到当前分片的累计合并内容。
-- 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
-:::
-
 ```javascript
 function handleStreamChunk(message) {
   const stream = message.stream;
@@ -117,17 +141,17 @@ function handleStreamChunk(message) {
 }
 ```
 
+:::tip
+- `message.stream.text` 获取的是当前分片的内容。
+- `message.msg` 获取的是从首个分片到当前分片的累计合并内容。
+- 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
+:::
+
 ### 累计合并内容
 
 SDK 会自动按分片顺序在本地合并流式消息内容，并更新消息体。
 
 `message.msg` 用于获取从首个分片到当前分片的累计合并内容。
-
-:::tip
-UI 使用建议如下：
-- UI 最终展示建议使用累计合并内容。
-- 若需要逐字或逐段动画，可同时结合当前分片内容和累计合并内容进行展示。
-:::
 
 ```javascript
 function handleStreamChunk(message) {
@@ -135,6 +159,12 @@ function handleStreamChunk(message) {
   const currentFullText = message.msg || "";
 }
 ```
+
+:::tip
+UI 使用建议如下：
+- UI 最终展示建议使用累计合并内容。
+- 若需要逐字或逐段动画，可同时结合当前分片内容和累计合并内容进行展示。
+:::
 
 ### 扩展字段
 
@@ -194,7 +224,7 @@ function handleStreamChunk(message) {
 
 ### 1. SDK 能否主动发送流式消息？
 
-不支持。流式消息仅支持通过服务端 RESTful API 发送，小程序 SDK 只负责接收。
+不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，小程序 SDK 只负责接收。
 
 ### 2. `message.stream.text` 和 `message.msg` 有何区别？
 
@@ -218,11 +248,3 @@ function handleStreamChunk(message) {
 ### 5. 是否需自行合并分片？
 
 SDK 会自动合并内容，但业务侧仍建议按 `message.id` 更新同一条消息的 UI，避免将同一条流式消息误显示为多条消息。
-
-
-
-
-
-
-
-

@@ -124,12 +124,6 @@ function handleStreamChunk(message: ChatMessage): void {
 | `errorCode()` | Number | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
 | `finishReason()` | Number | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
 
-:::tip
- - `text()` 获取的是当前分片的内容。
- - `TextMessageBody#getContent()` 获取的是从首个分片到当前分片的累计合并内容。
- - 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
-:::
-
 ```typescript
 function handleStreamChunk(message: ChatMessage): void {
   // 获取当前分片的内容
@@ -140,6 +134,12 @@ function handleStreamChunk(message: ChatMessage): void {
   }
 }
 ```
+
+:::tip
+ - `text()` 获取的是当前分片的内容。
+ - `TextMessageBody#getContent()` 获取的是从首个分片到当前分片的累计合并内容。
+ - 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
+:::
 
 ### 累计合并内容
 
@@ -222,7 +222,7 @@ UI 使用建议如下：
 
 ### 1. SDK 能否主动发送流式消息？
 
-不支持。流式消息仅支持通过服务端 RESTful API 发送，HarmonyOS SDK 只负责接收。
+不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，HarmonyOS SDK 只负责接收。
 
 ### 2. `text()` 和 `getContent()` 有何区别？
 
