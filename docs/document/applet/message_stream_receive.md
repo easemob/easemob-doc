@@ -4,7 +4,7 @@
 
 即时通讯 IM 支持在单聊和群组聊天中接收流式消息。流式消息是一种边生成、边发送、边接收的实时消息传输机制，适用于长文本逐段输出的场景，例如 AI 对话、实时协作写作和分段生成内容展示等。
 
-流式消息由业务服务端生成并通过 [RESTful API](/document/server-side/message_stream_send_single.html) 发送，Web SDK 负责接收、排序、合并和回调，不提供客户端主动发送流式消息的能力。
+流式消息由业务服务端生成并通过 [RESTful API](/document/server-side/message_stream_send_single.html) 发送，小程序 SDK 负责接收、排序、合并和回调，不提供客户端主动发送流式消息的能力。
 
 ## 核心概念
 
@@ -23,7 +23,7 @@
 - 会话类型：仅支持单聊和群聊，不支持聊天室。
 - 消息类型：仅支持文本类型的流式消息。
 - 发送方式：仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 发送。
-- 客户端能力：Web SDK 仅支持接收，不支持发送。
+- 客户端能力：小程序 SDK 仅支持接收，不支持发送。
 - 消息标识：`message.id` 标识整条流式消息。
 - 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#使用限制) 为准。
 
@@ -185,7 +185,7 @@ function handleStreamChunk(message) {
 | 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
 | [离线推送](/document/applet/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。|
 | [内容审核](/value-added/moderation/moderation_overview.html) | 不支持 | 对消息内容进行审核拦截。 |
-| [消息翻译](/value-added/translation/message_translation_web.html) | 支持 | 对消息内容进行翻译。 |
+| [消息翻译](/value-added/translation/message_translation_applet.html) | 支持 | 对消息内容进行翻译。 |
 | [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
 | [发送后回调](/document/server-side/callback_postsending.html) | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
 | 消息发送成功后在发送方多客户端同步 | 不支持 | 消息发送成功后同步到发送方其他设备。 |
