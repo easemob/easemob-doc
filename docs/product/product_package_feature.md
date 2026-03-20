@@ -122,7 +122,7 @@
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>——</p>
+<p>—</p>
 </td>
 <td width="332">
 <p>✓</p>
