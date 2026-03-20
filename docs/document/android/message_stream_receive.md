@@ -16,7 +16,7 @@
 - **累计合并内容**：从首个分片到当前分片为止已合并的完整内容，可通过 `EMTextMessageBody#getMessage()` 获取。
 - **流式消息传输状态**：流式消息在传输过程中的阶段标识，例如开始、传输中、完成或异常结束，可通过 `EMStreamChunk#getStatus()` 获取。
 - **完成原因码**：流式消息结束时的业务原因标识，可通过 `EMStreamChunk#getFinishReason()` 获取。
-- **`msgId`**：消息 ID。整条流式消息的唯一标识。
+- **消息 ID**：流式消息的唯一标识，用于标识整条流式消息。在 Android SDK 中，可通过 `EMMessage#getMsgId` 获取。
 
 ## 支持范围与限制
 
@@ -79,7 +79,7 @@ EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() 
 
 ```java
 private void handleStreamChunk(EMMessage message) {
-    String msgId = message.msgId();
+    String msgId = message.getMsgId();
 
     EMStreamChunk chunk = message.getStreamChunk();
     if (chunk == null) {
@@ -105,7 +105,7 @@ private void handleStreamChunk(EMMessage message) {
     int errorCode = chunk.getErrorCode();
     int finishReason = chunk.getFinishReason();
 
-    // 建议业务侧按 msgId 更新同一条消息的展示内容
+    // 以下 `updateStreamMessage(...)` 为业务侧自定义的示例方法，用于说明如何按 `msgId` 更新同一条流式消息的展示内容。
     updateStreamMessage(msgId, incrementText, fullText, status, customType, errorCode, finishReason);
 }
 ```
@@ -127,12 +127,6 @@ private void handleStreamChunk(EMMessage message) {
 | `getErrorCode()` | Int | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
 | `getFinishReason()` | Int | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
 
-:::tip
- - `getText()` 获取的是当前分片的内容。
- - `EMTextMessageBody#getMessage()` 获取的是从首个分片到当前分片的累计合并内容。
- - 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
-:::
-
 ```java
 private void handleStreamChunk(EMMessage message) {
     // 获取当前分片的内容
@@ -143,6 +137,12 @@ private void handleStreamChunk(EMMessage message) {
     }
 }
 ```
+
+:::tip
+ - `getText()` 获取的是当前分片的内容。
+ - `EMTextMessageBody#getMessage()` 获取的是从首个分片到当前分片的累计合并内容。
+ - 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
+:::
 
 ### 累计合并内容
 
@@ -188,12 +188,14 @@ UI 使用建议如下：
 | `START` | 首个分片到达，流式消息开始传输。 | 创建或定位对应消息项，初始化消息展示，并将该消息标记为“生成中”状态。 |
 | `START_AND_COMPLETE` | 流式消息在单个分片内完成传输，此时消息仅包含一个分片。 | 直接按完整消息展示内容，并结束流式渲染流程。 |
 | `PROGRESS` | 流式消息传输中。 | 使用累计合并内容持续刷新消息展示，并保持消息处于“生成中”状态。 |
-| `COMPLETE` | 最后一片到达，流式消息传输完成。 | 展示最终合并内容，结束“生成中”状态，并按普通消息完成态处理。 |
+| `COMPLETE` | 最后一个分片到达，流式消息传输完成。 | 展示最终合并内容，结束“生成中”状态，并按普通消息完成态处理。 |
 | `ERROR` | 流式消息传输异常结束。 | 保留当前已接收的内容，结束流式渲染，并结合 `errorCode` 和 `finishReason` 展示异常结束状态或错误提示。<br>- `errorCode == 0`：表示 SDK 侧无异常。<br>- `errorCode != 0`：表示本次流式消息以异常状态结束，建议记录日志并提示用户“内容生成中断”。<br>- `finishReason`：建议由服务端定义业务语义，例如，正常完成、主动停止、超时中止或模型异常等，并在客户端统一映射为对应的展示文案。 |
 
 建议界面渲染优先使用累计合并内容，以确保用户始终看到当前最新的完整文本。对于异常结束的流式消息，建议保留已生成的内容，并结合业务需求展示“已中断”、“生成失败”或“已停止”等状态提示。
 
 ## 消息功能支持
+
+流式消息支持的消息功能如下表所示：
 
 | 功能 | 是否支持 | 基本说明 |
 | :--- | :--- | :--- |
@@ -224,7 +226,7 @@ UI 使用建议如下：
 
 ### 1. SDK 能否主动发送流式消息？
 
-不支持。流式消息仅支持通过服务端 RESTful API 发送，Android SDK 只负责接收。
+不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，Android SDK 只负责接收。
 
 ### 2. `getText()` 和 `getMessage()` 有何区别？
 

@@ -16,7 +16,7 @@
 - **累计合并内容**：从首个分片到当前分片为止已合并的完整内容，可通过 `message.msg` 获取。
 - **流式消息传输状态**：流式消息在传输过程中的阶段标识，例如开始、传输中、完成或异常结束，可通过 `message.stream.status` 获取。
 - **完成原因码**：流式消息结束时的业务原因标识，可通过 `message.stream.finishReason` 获取。
-- **`msgId`**：消息 ID。Web SDK 中可通过 `message.id` 获取，标识整条流式消息。
+- **消息 ID**：流式消息的唯一标识，用于标识整条流式消息。在 Web SDK 中，可通过 `message.id` 获取。
 
 ## 支持范围与限制
 
@@ -85,6 +85,36 @@ conn.addEventHandler('handlerId', {
 
 在接收到流式消息分片后，你可以进一步获取当前分片内容、传输状态、累计合并内容、自定义类型、错误码和完成原因等信息，并根据 `message.id` 更新同一条消息的展示内容。
 
+```javascript
+function handleStreamChunk(message) {
+  const msgId = message.id;
+  const stream = message.stream;
+
+  if (!stream) {
+    return;
+  }
+
+  // 当前分片内容
+  const incrementText = stream.text;
+
+  // 当前传输状态
+  const status = stream.status;
+
+  // 累计合并内容
+  const fullText = message.msg || "";
+
+  // 自定义类型，例如 text / markdown
+  const customType = stream.customType;
+
+  // 错误码与完成原因
+  const errorType = stream.errorType;
+  const finishReason = stream.finishReason;
+
+  // 以下 `updateStreamMessage(...)` 为业务侧自定义的示例方法，用于说明如何按 `message.id` 更新同一条流式消息的展示内容。
+  updateStreamMessage(msgId, incrementText, fullText, status, customType, errorType, finishReason);
+}
+```
+
 ## 消息内容与处理
 
 接收到流式消息后，你可以从当前分片信息、累计合并内容、扩展字段以及传输状态四个方面处理消息。
@@ -101,6 +131,16 @@ conn.addEventHandler('handlerId', {
 | `errorType` | Number | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
 | `finishReason` | Number | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
 
+```javascript
+function handleStreamChunk(message) {
+  const stream = message.stream;
+  if (stream) {
+    const incrementText = stream.text;
+    const status = stream.status;
+  }
+}
+```
+
 :::tip
 - `message.stream.text` 获取的是当前分片的内容。
 - `message.msg` 获取的是从首个分片到当前分片的累计合并内容。
@@ -112,6 +152,13 @@ conn.addEventHandler('handlerId', {
 SDK 会自动按分片顺序在本地合并流式消息内容，并更新消息体。
 
 `message.msg` 用于获取从首个分片到当前分片的累计合并内容。
+
+```javascript
+function handleStreamChunk(message) {
+  const stream = message.stream;
+  const currentFullText = message.msg || "";
+}
+```
 
 :::tip
 UI 使用建议如下：
@@ -140,28 +187,31 @@ UI 使用建议如下：
 | `START` | 首个分片到达，流式消息开始传输。 | 创建或定位对应消息项，初始化消息展示，并将该消息标记为“生成中”状态。 |
 | `START_AND_COMPLETE` | 流式消息在单个分片内完成传输，此时消息仅包含一个分片。 | 直接按完整消息展示内容，并结束流式渲染流程。 |
 | `IN_PROGRESS` | 流式消息传输中。 | 使用累计合并内容持续刷新消息展示，并保持消息处于“生成中”状态。 |
-| `COMPLETED` | 最后一片到达，流式消息传输完成。 | 展示最终合并内容，结束“生成中”状态，并按普通消息完成态处理。 |
+| `COMPLETED` | 最后一个分片到达，流式消息传输完成。 | 展示最终合并内容，结束“生成中”状态，并按普通消息完成态处理。 |
 | `ERROR` | 流式消息传输异常结束。 | 保留当前已接收的内容，结束流式渲染，并结合 `errorType` 和 `finishReason` 展示异常结束状态或错误提示。`errorType == 0` 表示 SDK 侧无异常；`errorType != 0` 表示本次流式消息以异常状态结束，建议记录日志并提示用户“内容生成中断”；`finishReason` 建议由服务端定义业务语义，例如正常完成、主动停止、超时中止或模型异常等，并在客户端统一映射为对应的展示文案。 |
 
 建议界面渲染优先使用累计合并内容，以确保用户始终看到当前最新的完整文本。对于异常结束的流式消息，建议保留已生成的内容，并结合业务需求展示“已中断”、“生成失败”或“已停止”等状态提示。
 
 ## 消息功能支持
 
+流式消息支持的消息功能如下表所示：
+
 | 功能 | 是否支持 | 基本说明 |
 | :--- | :--- | :--- |
 | [发送消息](/document/server-side/message_stream_send_single.html) | 支持 | 通过服务端接口发送流式消息。 |
 | [接收消息](message_stream_receive.html) | 支持 | 客户端接收通过服务端接口发送的流式消息。 |
-| [消息漫游](/document/web/message_retrieve.html#从服务器获取指定会话的消息) | 支持 | 从服务端获取历史消息。 |
-| [消息扩展](/document/web/message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
-| [定向发送](/document/web/message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
-| [消息已读回执](/document/web/message_receipt.html) | 不支持 | 接收方回传已读状态。 |
+| [消息漫游](message_retrieve.html#从服务器获取指定会话的消息) | 支持 | 从服务端获取历史消息。 |
+| [消息扩展](message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
+| [定向发送](message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
+| [消息已读回执](message_receipt.html) | 不支持 | 接收方回传已读状态。 |
 | [消息输入状态](typing_indication.html) | 不支持 | 通知对方“正在输入”状态。 |
-| [消息回复（Reaction）](/document/web/reaction.html) | 支持 | 对消息添加回复表情。 |
-| [消息置顶](/document/web/message_pin.html) | 支持 | 将消息置顶到会话中。 |
-| [消息撤回](/document/web/message_recall.html) | 支持 | 撤回已发送消息。 |
-| [消息单向删除](/document/web/message_delete.html#单向删除服务端的历史消息) | 支持 | 仅删除当前用户侧的消息记录。 |
-| [消息修改](/document/web/message_modify.html) | 支持 | 修改已发送消息内容。 |
-| [会话未读数](/document/web/conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
+| [消息回复（Reaction）](reaction.html) | 支持 | 对消息添加回复表情。 |
+| [消息置顶](message_pin.html) | 支持 | 将消息置顶到会话中。 |
+| [消息撤回](message_recall.html) | 支持 | 撤回已发送消息。 |
+| [消息单向删除](message_delete.html#单向删除服务端的历史消息) | 支持 | 仅删除当前用户侧的消息记录。 |
+| [消息修改](message_modify.html) | 支持 | 修改已发送消息内容。 |
+| [消息搜索](message_search.html) | 不支持 | 在本地或会话中搜索消息。 |
+| [会话未读数](conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
 | 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
 | [离线推送](/document/web/push/push_overview.html) | 不支持 | 用户离线时进行消息推送提醒。Web 端本身不支持离线推送，只支持对移动端离线推送进行配置。 |
 | [内容审核](/value-added/moderation/moderation_overview.html) | 不支持 | 对消息内容进行审核拦截。 |
@@ -174,7 +224,7 @@ UI 使用建议如下：
 
 ### 1. SDK 能否主动发送流式消息？
 
-不支持。流式消息仅支持通过服务端 RESTful API 发送，Web SDK 只负责接收。
+不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，Web SDK 只负责接收。
 
 ### 2. `message.stream.text` 和 `message.msg` 有何区别？
 
