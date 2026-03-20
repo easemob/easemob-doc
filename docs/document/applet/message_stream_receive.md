@@ -37,7 +37,7 @@
 
 ## 技术原理
 
-流式消息由业务服务端生成，并通过环信 IM 服务端按分片方式下发至客户端 SDK。Web SDK 在分片到达时触发消息回调，并根据分片顺序自动合并消息内容。你可结合当前分片信息、累计合并内容和传输状态实时更新界面，直到整条消息完成或异常结束。
+流式消息由业务服务端生成，并通过环信 IM 服务端按分片方式下发至客户端 SDK。小程序 SDK 在分片到达时触发消息回调，并根据分片顺序自动合并消息内容。你可结合当前分片信息、累计合并内容和传输状态实时更新界面，直到整条消息完成或异常结束。
 
 ![img](/images/server-side/message_stream_flowchart.png)
 
@@ -194,7 +194,7 @@ function handleStreamChunk(message) {
 
 ### 1. SDK 能否主动发送流式消息？
 
-不支持。流式消息仅支持通过服务端 RESTful API 发送，Web SDK 只负责接收。
+不支持。流式消息仅支持通过服务端 RESTful API 发送，小程序 SDK 只负责接收。
 
 ### 2. `message.stream.text` 和 `message.msg` 有何区别？
 
