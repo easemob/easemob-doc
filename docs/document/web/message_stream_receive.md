@@ -164,21 +164,24 @@ function handleStreamChunk(message) {
 
 ## 消息功能支持
 
+流式消息支持的消息功能如下表所示：
+
 | 功能 | 是否支持 | 基本说明 |
 | :--- | :--- | :--- |
 | [发送消息](/document/server-side/message_stream_send_single.html) | 支持 | 通过服务端接口发送流式消息。 |
 | [接收消息](message_stream_receive.html) | 支持 | 客户端接收通过服务端接口发送的流式消息。 |
-| [消息漫游](/document/web/message_retrieve.html#从服务器获取指定会话的消息) | 支持 | 从服务端获取历史消息。 |
-| [消息扩展](/document/web/message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
-| [定向发送](/document/web/message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
-| [消息已读回执](/document/web/message_receipt.html) | 不支持 | 接收方回传已读状态。 |
+| [消息漫游](message_retrieve.html#从服务器获取指定会话的消息) | 支持 | 从服务端获取历史消息。 |
+| [消息扩展](message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
+| [定向发送](message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
+| [消息已读回执](message_receipt.html) | 不支持 | 接收方回传已读状态。 |
 | [消息输入状态](typing_indication.html) | 不支持 | 通知对方“正在输入”状态。 |
-| [消息回复（Reaction）](/document/web/reaction.html) | 支持 | 对消息添加回复表情。 |
-| [消息置顶](/document/web/message_pin.html) | 支持 | 将消息置顶到会话中。 |
-| [消息撤回](/document/web/message_recall.html) | 支持 | 撤回已发送消息。 |
-| [消息单向删除](/document/web/message_delete.html#单向删除服务端的历史消息) | 支持 | 仅删除当前用户侧的消息记录。 |
-| [消息修改](/document/web/message_modify.html) | 支持 | 修改已发送消息内容。 |
-| [会话未读数](/document/web/conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
+| [消息回复（Reaction）](reaction.html) | 支持 | 对消息添加回复表情。 |
+| [消息置顶](message_pin.html) | 支持 | 将消息置顶到会话中。 |
+| [消息撤回](message_recall.html) | 支持 | 撤回已发送消息。 |
+| [消息单向删除](message_delete.html#单向删除服务端的历史消息) | 支持 | 仅删除当前用户侧的消息记录。 |
+| [消息修改](message_modify.html) | 支持 | 修改已发送消息内容。 |
+| [消息搜索](message_search.html) | 不支持 | 在本地或会话中搜索消息。 |
+| [会话未读数](conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
 | 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
 | [离线推送](/document/web/push/push_overview.html) | 不支持 | 用户离线时进行消息推送提醒。Web 端本身不支持离线推送，只支持对移动端离线推送进行配置。 |
 | [内容审核](/value-added/moderation/moderation_overview.html) | 不支持 | 对消息内容进行审核拦截。 |

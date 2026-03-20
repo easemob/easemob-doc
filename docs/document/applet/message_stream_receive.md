@@ -16,7 +16,7 @@
 - **累计合并内容**：从首个分片到当前分片为止已合并的完整内容，可通过 `message.msg` 获取。
 - **流式消息传输状态**：流式消息在传输过程中的阶段标识，例如开始、传输中、完成或异常结束，可通过 `message.stream.status` 获取。
 - **完成原因码**：流式消息结束时的业务原因标识，可通过 `message.stream.finishReason` 获取。
-- **`msgId`**：流式消息的唯一标识，用于标识整条流式消息。在小程序 SDK 中，可通过 `message.id` 获取。
+- **消息 ID**：流式消息的唯一标识，用于标识整条流式消息。在小程序 SDK 中，可通过 `message.id` 获取。
 
 ## 支持范围与限制
 
@@ -107,6 +107,16 @@ conn.addEventHandler('handlerId', {
 - 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
 :::
 
+```javascript
+function handleStreamChunk(message) {
+  const stream = message.stream;
+  if (stream) {
+    const incrementText = stream.text;
+    const status = stream.status;
+  }
+}
+```
+
 ### 累计合并内容
 
 SDK 会自动按分片顺序在本地合并流式消息内容，并更新消息体。
@@ -118,6 +128,13 @@ UI 使用建议如下：
 - UI 最终展示建议使用累计合并内容。
 - 若需要逐字或逐段动画，可同时结合当前分片内容和累计合并内容进行展示。
 :::
+
+```javascript
+function handleStreamChunk(message) {
+  const stream = message.stream;
+  const currentFullText = message.msg || "";
+}
+```
 
 ### 扩展字段
 
@@ -148,28 +165,30 @@ UI 使用建议如下：
 ## 消息功能支持
 
 流式消息支持的消息功能如下表所示：
- 
-| 功能             | 是否支持                          |
-| :--------------- | :-------------------------------- |
-| [发送消息](/document/server-side/message_stream_send_single.html)         | 是（仅支持通过 RESTful API 发送） |
-| [消息漫游](/document/applet/message_retrieve.html#从服务器获取指定会话的消息)         | 是                                |
-| [消息扩展](/document/applet/message_extension.html)         | 是                                |
-| [定向发送](/document/applet/message_target.html)         | 否                                |
-| [消息已读回执](/document/applet/message_receipt.html)     | 否                                |
-| 消息输入状态 | 否                                |
-| [消息回复（Reaction）](/document/applet/reaction.html)         | 是                                |
-| [消息置顶](/document/applet/message_pin.html)         | 是                                |
-| [消息撤回](/document/applet/message_recall.html)         | 是                                |
-| [消息单向删除](/document/applet/message_delete.html#单向删除服务端的历史消息)     | 是                                |
-| [消息修改](/document/applet/message_modify.html)         | 是                                |
-| [会话未读数](/document/applet/conversation_unread.html)       | 是                                |
-| 会话最后一条消息 | 是                                |
-| [离线推送](/document/applet/push/push_overview.html)     | 是                                |
-| [内容审核](/value-added/moderation/moderation_overview.html)     | 否                                |
-| [消息翻译](/value-added/translation/message_translation_applet.html)         | 是                                |
-| [发送前回调](/document/server-side/callback_presending.html)         | 否                               |
-| [发送后回调](/document/server-side/callback_postsending.html)         | 否      |
-| 消息发送成功后在发送方多客户端同步        |   否  |
+
+| 功能 | 是否支持 | 基本说明 |
+| :--- | :--- | :--- |
+| [发送消息](/document/server-side/message_stream_send_single.html) | 支持 | 通过服务端接口发送流式消息。 |
+| [接收消息](message_stream_receive.html) | 支持 | 客户端接收通过服务端接口发送的流式消息。 |
+| [消息漫游](message_retrieve.html#从服务器获取指定会话的消息) | 支持 | 从服务端获取历史消息。 |
+| [消息扩展](message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
+| [定向发送](message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
+| [消息已读回执](message_receipt.html) | 不支持 | 接收方回传已读状态。 |
+| [消息输入状态](typing_indication.html) | 不支持 | 通知对方“正在输入”状态。 |
+| [消息回复（Reaction）](reaction.html) | 支持 | 对消息添加回复表情。 |
+| [消息置顶](message_pin.html) | 支持 | 将消息置顶到会话中。 |
+| [消息撤回](message_recall.html) | 支持 | 撤回已发送消息。 |
+| [消息单向删除](message_delete.html#单向删除服务端的历史消息) | 支持 | 仅删除当前用户侧的消息记录。 |
+| [消息修改](message_modify.html) | 支持 | 修改已发送消息内容。 |
+| [消息搜索](message_search.html) | 不支持 | 在本地或会话中搜索消息。 |
+| [会话未读数](conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
+| 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
+| [离线推送](/document/applet/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。|
+| [内容审核](/value-added/moderation/moderation_overview.html) | 不支持 | 对消息内容进行审核拦截。 |
+| [消息翻译](/value-added/translation/message_translation_web.html) | 支持 | 对消息内容进行翻译。 |
+| [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
+| [发送后回调](/document/server-side/callback_postsending.html) | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
+| 消息发送成功后在发送方多客户端同步 | 不支持 | 消息发送成功后同步到发送方其他设备。 |
 
 ## 常见问题
 
