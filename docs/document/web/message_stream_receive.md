@@ -16,7 +16,7 @@
 - **累计合并内容**：从首个分片到当前分片为止已合并的完整内容，可通过 `message.msg` 获取。
 - **流式消息传输状态**：流式消息在传输过程中的阶段标识，例如开始、传输中、完成或异常结束，可通过 `message.stream.status` 获取。
 - **完成原因码**：流式消息结束时的业务原因标识，可通过 `message.stream.finishReason` 获取。
-- **`msgId`**：消息 ID。Web SDK 中可通过 `message.id` 获取，标识整条流式消息。
+- **消息 ID**：流式消息的唯一标识，用于标识整条流式消息。在 Web SDK 中，可通过 `message.id` 获取。
 
 ## 支持范围与限制
 
@@ -107,6 +107,16 @@ conn.addEventHandler('handlerId', {
 - 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
 :::
 
+```javascript
+function handleStreamChunk(message) {
+  const stream = message.stream;
+  if (stream) {
+    const incrementText = stream.text;
+    const status = stream.status;
+  }
+}
+```
+
 ### 累计合并内容
 
 SDK 会自动按分片顺序在本地合并流式消息内容，并更新消息体。
@@ -118,6 +128,13 @@ UI 使用建议如下：
 - UI 最终展示建议使用累计合并内容。
 - 若需要逐字或逐段动画，可同时结合当前分片内容和累计合并内容进行展示。
 :::
+
+```javascript
+function handleStreamChunk(message) {
+  const stream = message.stream;
+  const currentFullText = message.msg || "";
+}
+```
 
 ### 扩展字段
 
@@ -140,7 +157,7 @@ UI 使用建议如下：
 | `START` | 首个分片到达，流式消息开始传输。 | 创建或定位对应消息项，初始化消息展示，并将该消息标记为“生成中”状态。 |
 | `START_AND_COMPLETE` | 流式消息在单个分片内完成传输，此时消息仅包含一个分片。 | 直接按完整消息展示内容，并结束流式渲染流程。 |
 | `IN_PROGRESS` | 流式消息传输中。 | 使用累计合并内容持续刷新消息展示，并保持消息处于“生成中”状态。 |
-| `COMPLETED` | 最后一片到达，流式消息传输完成。 | 展示最终合并内容，结束“生成中”状态，并按普通消息完成态处理。 |
+| `COMPLETED` | 最后一个分片到达，流式消息传输完成。 | 展示最终合并内容，结束“生成中”状态，并按普通消息完成态处理。 |
 | `ERROR` | 流式消息传输异常结束。 | 保留当前已接收的内容，结束流式渲染，并结合 `errorType` 和 `finishReason` 展示异常结束状态或错误提示。`errorType == 0` 表示 SDK 侧无异常；`errorType != 0` 表示本次流式消息以异常状态结束，建议记录日志并提示用户“内容生成中断”；`finishReason` 建议由服务端定义业务语义，例如正常完成、主动停止、超时中止或模型异常等，并在客户端统一映射为对应的展示文案。 |
 
 建议界面渲染优先使用累计合并内容，以确保用户始终看到当前最新的完整文本。对于异常结束的流式消息，建议保留已生成的内容，并结合业务需求展示“已中断”、“生成失败”或“已停止”等状态提示。

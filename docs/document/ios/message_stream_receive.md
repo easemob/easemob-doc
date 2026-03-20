@@ -16,7 +16,7 @@
 - **累计合并内容**：从首个分片到当前分片为止已合并的完整内容，可通过 `EMTextMessageBody` 的 `text` 属性获取。
 - **流式消息传输状态**：流式消息在传输过程中的阶段标识，例如开始、传输中、完成或异常结束，可通过 `EMStreamChunk` 的 `status` 属性获取。
 - **完成原因码**：流式消息结束时的业务原因标识，可通过 `EMStreamChunk` 的 `finishReason` 属性获取。
-- **`msgId`**：消息 ID。整条流式消息的唯一标识。在 iOS SDK 中，业务侧可使用 `message.messageId` 关联同一条流式消息。
+- **消息 ID**：流式消息的唯一标识，用于标识整条流式消息。在 iOS SDK 中，可通过 `message.messageId` 获取。
 
 ## 支持范围与限制
 
@@ -74,7 +74,7 @@ final class ChatViewController: UIViewController, EMChatManagerDelegate {
 }
 ```
 
-在接收到流式消息分片后，你可以进一步获取当前分片内容、传输状态、累计合并内容、自定义类型、错误码和完成原因等信息，并根据 `msgId` 更新同一条消息的展示内容。
+在接收到流式消息分片后，你可以进一步获取当前分片内容、传输状态、累计合并内容、自定义类型、错误码和完成原因等信息，并根据 `message.messageId` 更新同一条消息的展示内容。
 
 ```swift
 private func handleStreamChunk(_ message: EMChatMessage) {
@@ -164,7 +164,7 @@ private func handleStreamChunk(_ message: EMChatMessage) {
 ```
 
 :::tip
-建议如下：
+UI 使用建议如下：
 - UI 最终展示建议使用累计合并内容。
 - 若需要逐字或逐段动画，可同时结合当前分片内容和累计合并内容进行展示。
 :::

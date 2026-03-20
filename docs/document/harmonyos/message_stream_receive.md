@@ -16,7 +16,7 @@
 - **累计合并内容**：从首个分片到当前分片为止已合并的完整内容，可通过 `TextMessageBody#getContent()` 获取。
 - **流式消息传输状态**：流式消息在传输过程中的阶段标识，例如开始、传输中、完成或异常结束，可通过 `ChatStreamChunk#status()` 获取。
 - **完成原因码**：流式消息结束时的业务原因标识，可通过 `ChatStreamChunk#finishReason()` 获取。
-- **`msgId`**：消息 ID。整条流式消息的唯一标识。
+- **消息 ID**：流式消息的唯一标识，用于标识整条流式消息。在 HarmonyOS SDK 中，可通过 `ChatMessage#getMsgId` 获取。
 
 ## 支持范围与限制
 
@@ -102,7 +102,7 @@ function handleStreamChunk(message: ChatMessage): void {
   const errorCode: number = chunk.errorCode();
   const finishReason: number = chunk.finishReason();
 
-  // 建议业务侧按 msgId 更新同一条消息的展示内容
+  // 以下 `updateStreamMessageByMsgId(...)` 为业务侧自定义的示例方法，用于说明如何按 `msgId` 更新同一条流式消息的展示内容。
   updateStreamMessageByMsgId(message, incrementText, fullText, status, customType, errorCode, finishReason);
 }
 ```
@@ -183,10 +183,10 @@ UI 使用建议如下：
 
 | 状态 | 说明 | 建议处理 |
 | :--- | :--- | :--- |
-| `START` | 首片到达，流式消息开始传输。 | 创建或定位对应消息项，初始化消息展示，并将该消息标记为“生成中”状态。 |
+| `START` | 首个分片到达，流式消息开始传输。 | 创建或定位对应消息项，初始化消息展示，并将该消息标记为“生成中”状态。 |
 | `START_AND_COMPLETE` | 流式消息在单个分片内完成传输，此时消息仅包含一个分片。 | 直接按完整消息展示内容，并结束流式渲染流程。 |
 | `PROGRESS` | 流式消息传输中。 | 使用累计合并内容持续刷新消息展示，并保持消息处于“生成中”状态。 |
-| `COMPLETE` | 最后一片到达，流式消息传输完成。 | 展示最终合并内容，结束“生成中”状态，并按普通消息完成态处理。 |
+| `COMPLETE` | 最后一个分片到达，流式消息传输完成。 | 展示最终合并内容，结束“生成中”状态，并按普通消息完成态处理。 |
 | `ERROR` | 流式消息传输异常结束。 | 保留当前已接收的内容，结束流式渲染，并结合 `errorCode` 和 `finishReason` 展示异常结束状态或错误提示。<br>- `errorCode == 0`：表示 SDK 侧无异常。<br>- `errorCode != 0`：表示本次流式消息以异常状态结束，建议记录日志并提示用户“内容生成中断”。<br>- `finishReason`：建议由服务端定义业务语义，例如，正常完成、主动停止、超时中止或模型异常等，并在客户端统一映射为对应的展示文案。 |
 
 建议界面渲染优先使用累计合并内容，以确保用户始终看到当前最新的完整文本。对于异常结束的流式消息，建议保留已生成的内容，并结合业务需求展示“已中断”、“生成失败”或“已停止”等状态提示。
