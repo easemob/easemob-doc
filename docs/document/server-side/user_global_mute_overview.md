@@ -12,7 +12,7 @@
 
 ## 开通功能
 
-使用用户全局禁言功能前，你需在环信控制台开通。详见 [环信控制台文档](/product/console/basic_user.html#全局禁言)。
+使用用户全局禁言功能前，你需在环信控制台开通。详见 [环信控制台文档](/product/console/basic_user.html#用户全局禁言)。
 
 ## API 列表
 
