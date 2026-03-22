@@ -198,7 +198,7 @@ export default function ChatScreen(): JSX.Element {
       <ChatFragment
         screenParams={{ chatId, chatType }}
         onClickMessageBubble={(data: MessageItemType) => {
-          // TODO：对于语音消息，进行播放；对于图片消息，进行预览。
+          // todo：对于语音消息，进行播放；对于图片消息，进行预览。
         }}
       />
     </ScreenContainer>
@@ -219,7 +219,7 @@ export default function ChatScreen(): JSX.Element {
       <ChatFragment
         screenParams={{ chatId, chatType }}
         onLongPressMessageBubble={() => {
-          // TODO：显示右键菜单。例如，消息转发、消息删除和消息重发等。
+          // todo：显示右键菜单。例如，消息转发、消息删除和消息重发等。
         }}
       />
     </ScreenContainer>
@@ -244,7 +244,7 @@ export default function ChatScreen(): JSX.Element {
       <ChatFragment
         screenParams={{ chatId, chatType }}
         onSendMessage={(message: ChatMessage) => {
-          // TODO: 更新消息。
+          // todo: 更新消息。
         }}
       />
     </ScreenContainer>
@@ -265,7 +265,7 @@ export default function ChatScreen(): JSX.Element {
       <ChatFragment
         screenParams={{ chatId, chatType }}
         onSendMessageEnd={(message: ChatMessage) => {
-          // TODO：更新消息发送状态，即发送成功或失败。
+          // todo：更新消息发送状态，即发送成功或失败。
         }}
       />
     </ScreenContainer>

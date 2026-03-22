@@ -414,8 +414,6 @@ rootStore.addressStore.getBlockList();
 
 #### 方法列表
 
-// TODO：查看显示
-
 | 方法 | 类型 | 描述 |
 | :-- | :-- | :-- |
 | `unshiftPinnedMessage` | `(conversationType: ChatType, conversationId: string, message: PinnedMessage) => void` | 在列表开头添加置顶消息（仅本地更新） |

@@ -805,8 +805,6 @@ export default class EntryAbility extends UIAbility {
 | `editMessageDialogOptions`     | `EditMessageBottomSheetDialogOptions`                   | 消息编辑对话框配置       |
 | `editMessageDialogWrapper`     | `WrappedBuilder<[EditMessageBottomSheetDialogOptions]>` | 自定义消息编辑对话框组件 |
 
-// TODO：添加两个图，研发忽略
-
 ### 自定义媒体类型选择回调
 
 点击相机扩展菜单时，弹出拍照/录像选择对话框。你可以自定义选择后的处理逻辑：
