@@ -419,7 +419,7 @@ const CustomTextMessage = ({ message }) => {
 | `renderMessageList` | `() => ReactNode` | 自定义渲染 `MessageList` 组件的方法 |
 | `renderMessageInput` | `() => ReactNode` | 自定义渲染 `MessageInput` 组件的方法 |
 | `renderEmpty` | `() => ReactNode` | 自定义渲染空内容组件的方法 |
-| `renderRepliedMessage` | `(repliedMessage: ChatSDK.MessageBody \| null) => ReactNode` | 自定义渲染底部输入框上面的被回复的消息 |
+| `renderRepliedMessage` | `(repliedMessage: ChatSDK.MessageBody \| null) => ReactNode` | 自定义渲染消息输入区上面的被回复的消息 |
 | `useCallkit` | `boolean` | 是否启用 CallKit，默认为 `true` |
 | `callkitProps` | `Partial<CallKitProps>` | CallKit 组件的配置参数 |
 

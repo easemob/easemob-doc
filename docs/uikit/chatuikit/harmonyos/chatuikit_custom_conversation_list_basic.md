@@ -26,7 +26,7 @@
 | `viewModel` | ConvListViewModel | 否 | 会话列表 ViewModel | `ConvListViewModel` |
 | `hideTitleBar` | Boolean | 否 | 是否隐藏标题栏 | `false` |
 | `hideBackIcon` | Boolean | 否 | 是否隐藏返回按钮 | `true` |
-| `onItemClick` | KitCallback&lt;ChatKitConversation&gt; // TODO：关注显示，研发忽略| 否 | 会话点击事件 | 默认跳转到聊天页面 |
+| `onItemClick` | KitCallback&lt;ChatKitConversation&gt;| 否 | 会话点击事件 | 默认跳转到聊天页面 |
 | `titleOperationMenus` | MenuItem[] | 否 | 标题栏右侧菜单 | 默认菜单（新建会话、添加联系人、创建群组） |
 | `onAvatarClick` | () => void | 否 | 点击头像事件 | - |
 | `onBackPress` | () => void | 否 | 点击返回事件 | 默认调用 `pop()` |
@@ -41,7 +41,7 @@
 | `viewModel` | BaseConvListViewModel | 否 | 会话列表 ViewModel | `ConvListViewModel` |
 | `itemMenus` | ConvMenuItem[] | 否 | 左滑菜单项 | 默认菜单（置顶、免打扰、删除） |
 | `showSearchView` | boolean | 否 | 是否显示搜索栏 | `true` |
-| `onItemClick` | KitCallback&lt;ChatKitConversation&gt; // TODO：关注显示，研发忽略 | 否 | 会话点击事件 | - |
+| `onItemClick` | KitCallback&lt;ChatKitConversation&gt; | 否 | 会话点击事件 | - |
 | `onSearchClick` | KitCallback | 否 | 搜索栏点击事件 | - |
 | `searchBuilder` | BuilderParam | 否 | 自定义搜索栏组件 | 默认搜索栏 |
 | `emptyDataBuilder` | BuilderParam | 否 | 自定义空数据布局 | 默认空布局 |

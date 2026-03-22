@@ -1,15 +1,15 @@
 # 设置消息输入
 
-消息底部输入框 `ChatUIKitInputMenu` 实现各类消息的输入和发送以及消息表情等功能，包括两部分：
+消息输入区 `ChatUIKitInputMenu` 实现各类消息的输入和发送以及消息表情等功能，包括两部分：
 
 - 底部输入栏 `ChatUlKitPrimaryMenu`：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展。
 - 消息扩展菜单 `ChatUlKitExtendMenu`：提供附件类型消息的发送入口，支持发送图片、视频、文件，并可扩展至自定义消息类型（如名片消息等）。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_frame.png" title="消息底部输入框 ChatUIKitInputMenu" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_frame.png" title="消息输入区 ChatUIKitInputMenu" />
 </ImageGallery>
 
-## 设置底部输入框背景
+## 设置消息输入区背景
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
@@ -19,7 +19,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
         .build()
 ```
 
-## 设置底部输入框布局
+## 设置消息输入区布局
 
 ### 设置相关属性
 
@@ -297,7 +297,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 ## 自定义样式与资源
 
-对于底部输入栏，你可以通过覆盖同名资源文件（`drawable`/`layout`/`values`）来修改底部输入框的图标、文字、颜色等样式。
+对于底部输入栏，你可以通过覆盖同名资源文件（`drawable`/`layout`/`values`）来修改消息输入区的图标、文字、颜色等样式。
 
 ### 常用图标替换
 

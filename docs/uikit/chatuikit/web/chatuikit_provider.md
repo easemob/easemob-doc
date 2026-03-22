@@ -306,7 +306,7 @@ const ChatApp = () => {
 | `report`     | Boolean | `true` | 是否支持举报消息                           |
 | `pin`        | Boolean | `true` | 是否允许置顶消息                           |
 
-- **messageInput（底部输入框）**
+- **messageInput（消息输入区）**
 
 | 参数          | 类型      | 默认值 | 描述                 |
 | :------------ | :-------- | :----- | :------------------- |

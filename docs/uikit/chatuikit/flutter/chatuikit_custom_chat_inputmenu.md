@@ -63,7 +63,7 @@ Theme(
 - `ChatUIKitInputBar` 内部通过 `Theme.of(context).extension<ChatUIKitInputBarTheme>()` 获取主题配置。
 :::
 
-## 设置底部输入框布局
+## 设置消息输入区布局
 
 ### 设置相关属性
 
@@ -478,7 +478,7 @@ MessagesView(
 
 ## 事件监听
 
-底部输入框支持多种事件监听，可通过 `ChatUIKitInputBar` 进行配置：
+消息输入区支持多种事件监听，可通过 `ChatUIKitInputBar` 进行配置：
 
 ```dart
 ChatUIKitInputBar(
@@ -494,7 +494,7 @@ ChatUIKitInputBar(
 
 ## 自定义样式与资源
 
-对于底部输入框，你可以通过主题配置或自定义 Widget 来修改底部输入框的图标、文字、颜色等样式。
+对于消息输入区，你可以通过主题配置或自定义 Widget 来修改消息输入区的图标、文字、颜色等样式。
 
 ### 常用图标替换
 

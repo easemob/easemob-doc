@@ -373,11 +373,9 @@ struct CustomConvListPage {
 
 ## 完全自定义会话条目
 
-通过实现 `ConversationItemProvider` 接口，可自定义会话条目的完整布局。
+通过实现 `ConversationItemProvider` 接口，可自定义会话条目（`ConversationItemView`）的完整布局。
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_item.png" title="会话条目 ConversationItemView" />
-</ImageGallery>
+<img src="/images/uikit/chatuikit/android/conversation_list_item.png">
 
 #### 完全自定义会话列表
 
@@ -539,7 +537,7 @@ export interface ConversationItemProvider {
 | 属性/方法          | 类型                               | 描述                                                                                |
 | :-------------- | :----- | :------- |
 | `conversationId` | String                             | 会话 ID。                                                                           |
-| `type`           | ConversationType                   | 会话类型：单聊为 `ConversationType.Chat`，群聊为 `ConversationType.GroupChat`。 |
+| `type`           | ConversationType                   | 会话类型：<br/> - 单聊为 `ConversationType.Chat`；<br/> - 群聊为 `ConversationType.GroupChat`。 |
 | `unreadCount`    | Number                             | 未读消息数。                                                                        |
 | `isPinned`       | Boolean                            | 是否置顶。                                                                          |
 | `isMuted`        | Boolean                            | 是否免打扰。                                                                        |
@@ -731,7 +729,7 @@ class MyConvListViewModel extends ConvListViewModel {
 
 ### 资源覆盖示例
 
-详见 [消息列表的高级设置](chatuikit_custom_chat_advanced.html#资源覆盖示例)
+详见 [消息列表的高级设置](chatuikit_custom_chat_advanced.html#资源覆盖示例)。
 
 ### 注意事项
 

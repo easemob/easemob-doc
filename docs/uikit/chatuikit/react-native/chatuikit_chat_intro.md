@@ -1,17 +1,21 @@
 # 聊天页面介绍
 
-`ConversationDetail` 组件提供完整的聊天交互界面，支持多种消息类型收发及丰富的消息管理功能：
+`ConversationDetail` 组件提供完整的聊天交互界面，支持多种消息类型收发及丰富的消息管理功能。
 
-| 类别         | 功能                                     |
+## 页面功能
+
+聊天页面提供如下功能：
+
+| 功能         | 描述                                    |
 | :----------- | :--------------------------------------- |
-| **消息收发** | 文本、表情、图片、语音、视频、文件、名片 |
-| **消息操作** | 复制、引用、撤回、删除、编辑、重发、审核 |
-| **消息管理** | 本地消息清除、消息搜索、消息多选         |
-| **互动增强** | 表情回应、消息置顶、消息翻译、转发       |
+| 消息收发 | 收发文本、表情、图片、语音、视频、文件、名片等消息。 |
+| 消息操作 | 复制、引用、撤回、删除、编辑、重发、审核。 |
+| 消息管理 | 本地消息清除、消息搜索、消息多选。         |
+| 互动增强 | 表情回应、消息置顶、消息翻译、转发。       |
 
 ## 页面组件
 
-聊天页面通过 `ConversationDetail` 实现，由标题栏 `ConversationDetailNavigationBar`、消息列表 `MessageList` 和底部输入框 `MessageInput` 组成。
+聊天页面通过 `ConversationDetail` 实现，由标题栏 `ConversationDetailNavigationBar`、消息列表 `MessageList` 和消息输入区 `MessageInput` 组成。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/rn/custom_chat.png" title="聊天页面 ConversationDetail" />

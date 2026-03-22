@@ -1,6 +1,6 @@
 # 设置消息输入
 
-本文介绍如何通过底部输入组件 `MessageInput` 实现消息输入的自定义设置，包括发送文本、表情、文件、图片、语音等功能。
+本文介绍如何通过消息输入组件 `MessageInput` 实现消息输入的自定义设置，包括发送文本、表情、文件、图片、语音等功能。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="底部输入栏 MessageInput" />
@@ -479,7 +479,7 @@ function ChatScreen({ route }) {
 
 ## 自定义事件监听
 
-关于自定义底部输入框的事件监听，详见 [自定义数据模型文档](chatuikit_custom_data_model.html#自定义事件监听器)。
+关于自定义消息输入区的事件监听，详见 [自定义数据模型文档](chatuikit_custom_data_model.html#自定义事件监听器)。
 
 ## 自定义图标和文案
 

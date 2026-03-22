@@ -2,7 +2,7 @@
 
 <Toc />
 
-聊天页面的底部输入框 `ChatInputMenuView` 实现各类消息的输入和发送，包括以下部分：
+聊天页面的消息输入区 `ChatInputMenuView` 实现各类消息的输入和发送，包括以下部分：
 
 - **底部输入栏 (ChatPrimaryMenu)**：负责文本与语音消息的输入和发送，支持表情添加及常用功能扩展。
 - **消息扩展菜单 (ChatExtendMenu)**：提供附件类型消息的发送入口，支持图片、视频、文件等，并可扩展自定义消息类型（如名片、位置、红包等）。
@@ -63,7 +63,7 @@ struct CustomChatPage {
 
 ### 设置文本输入框默认文本
 
-暂不支持通过参数直接配置输入框占位文本，可通过资源覆盖实现：
+暂不支持通过参数直接配置输入框默认文本，可通过资源覆盖实现：
 
 在 App 模块的 `resources/base/element/string.json` 中添加：
 
@@ -110,7 +110,7 @@ ChatView({
 点击底部输入栏中的扩展图标（默认为加号）会弹出消息扩展菜单。消息扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_expansion.png" title="消息扩展菜单" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 ChatExtendMenu" />
 </ImageGallery>
 
 ### 管理菜单项
@@ -282,7 +282,7 @@ ChatView({
 
 | 资源名称 | 默认值 | 描述 |
 | :------------------------ | :----- | :------------- |
-| `chat_primary_input_placeholder` | Aa | 输入框占位文本 |
+| `chat_primary_input_placeholder` | Aa | 输入框默认文本 |
 | `chat_record_start_hint` | 点击录音 | 录音提示 |
 | `chat_record_recording` | 正在录音 | 录音中提示 |
 
