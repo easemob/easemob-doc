@@ -1001,7 +1001,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups/users' \
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-#### 错误码
+## 错误码
 
 1. 调用发送群聊消息的接口发送各类消息时，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -1018,7 +1018,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups/users' \
 | 403      | message_send_error | message send reach limit  | 消息发送频率超出限制(默认 1 秒内只允许发送 20 条群聊消息) | 限制消息发送频率，详见[文档说明](message_group.html)。|
 | 405       |  |   | 请求方法错误。| 该 REST API 的请求方法为 POST，请勿使用 GET、PUT 或 DELETE 等方法。 |
 
-1. 对于定向消息来说，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+2. 对于定向消息来说，如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
 | HTTP 状态码 | 错误类型      | 错误提示          | 可能原因       | 处理建议       |
 |:---------|:-------------------|:-------------------|:-----------|:----------------------|

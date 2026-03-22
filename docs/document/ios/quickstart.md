@@ -117,7 +117,7 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"user2"
 
 ## 常见问题
 
-### 集成问题
+### SDK 依赖的 Crash 上报库冲突
 
 由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现如下报错：
 

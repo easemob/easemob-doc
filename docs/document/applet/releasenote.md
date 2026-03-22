@@ -2,7 +2,28 @@
 
 <Toc />
 
-## 4.17.1 Dev 2025-12-12
+## 4.19.1 Dev 2026-2-27（开发版）
+
+#### 新增特性
+
+支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+
+目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
+
+#### 修复
+
+修复发送文件、图片等附件消息时，上传失败的问题。
+
+## 4.19.0 Dev 2026-02-04（开发版）
+
+#### 新增特性
+
+[uniapp 平台支持自动登录](uniapp.html#自动登录)。
+
+- 初始化时将 `isAutoLogin` 选项设置为 `true`，启用自动登录。
+- 新增 [错误码 214 和 220](error.html)，在自动登录场景中用户登录设备数超过限制或用户的登录设备与上次不一致时报错。
+
+## 4.17.1 Dev 2025-12-12（开发版）
 
 #### 优化
 
@@ -45,7 +66,7 @@
 - 获取群组成员列表的原方法 `listGroupMembers` 废弃。使用 [getGroupMembers](group_manage.html#获取群成员列表) 替换。
 - 获取群组成员列表的原方法 `listChatRoomMembers` 废弃。使用 [getChatRoomMembers](room_members.html#获取聊天室成员列表) 替换。
 
-## v4.14.0 Dev 2025-4-21
+## v4.14.0 Dev 2025-4-21（开发版）
 
 #### 新增特性
 

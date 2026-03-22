@@ -34,7 +34,11 @@ npm create vite@latest callkit-quickstart -- --template react-ts
 cd callkit-quickstart
 ```
 
-2. 安装项目依赖：
+:::tip
+利用 Vite 创建新项目时，请不要使用 Rolldown 作为构建工具。
+:::
+
+1. 安装项目依赖：
 
 ```bash
 npm install

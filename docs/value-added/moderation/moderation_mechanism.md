@@ -86,9 +86,17 @@
 
 ## 自定义消息
 
-如果使用自定义消息审核，**需首先在[环信控制台](https://console.easemob.com/)[开通文本审核](moderation_enable.html)和[图片审核](moderation_enable.html)，再联系商务开通自定义消息审核。**
+自定义消息支持文本内容与图片 URL 审核：
 
-对于提交审核的自定义消息，消息中的 `customExts` 参数必须包含 `moderation` 节点，示例如下：
+- 文本内容匹配文本审核规则
+- 图片 URL 匹配图片审核规则
+
+使用前请确保：
+
+1. 已在 [环信控制台](https://console.easemob.com/) 分别开通 [文本审核](https://moderation_enable.html/) 与  [图片审核](https://moderation_enable.html/) 服务。
+2. 已联系商务团队开通自定义消息审核功能。
+
+对于需审核的自定义消息，在 `customExts` 参数中必须包含 `moderation` 节点，格式如下：
 
 ```json
 {
@@ -99,14 +107,14 @@
 }
 ```
 
-`moderation` 节点中的参数描述如下表所示：
+`moderation` 节点中的参数说明如下：
 
 | 参数          | 类型   | 描述                                             |
 | :------------ | :----- | :----------------------------------------------- |
-| `enable`  | Boolean   | 是否进行审核。<br/> - 若需审核，必须设置为 `true`。<br/> - 若不审核，设置为 `false`。|
+| `enable`  | Boolean   | 是否启用审核。<br/> - 若需审核，必须设为 `true`。<br/> - 若不审核，设为 `false`。|
 | `contents` | Array | 消息内容。                                 |
-| `type`        | String | 消息类型。目前，审核服务只支持文本消息和图片消息，即该字段只能设置为 `text` 或 `img`。               |
-| `data`        | String | 要审核的消息内容。<br/> - 对于文本消息，该字段为具体的消息内容；<br/> - 对于图片消息，该字段为图片 URL。    |
+| `type`        | String | 消息类型。当前仅支持文本与图片消息，可选值为 `text` 或 `img`。  |
+| `data`        | String | 要审核的消息内容。<br/> - 文本消息：该字段为具体的消息内容，匹配文本审核规则；<br/> - 图片消息：该字段为图片 URL，匹配图片审核规则。    |
 
 
 

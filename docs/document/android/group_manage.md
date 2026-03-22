@@ -178,6 +178,7 @@ EMCursorResult<String> result = null;
 final int pageSize = 20;
 do {
     // 同步方法，会阻塞当前线程。异步方法为 asyncFetchGroupMembers(String, String, int, EMValueCallBack)。
+    // pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
      result = EMClient.getInstance().groupManager().fetchGroupMembers(groupId,
              result != null? result.getCursor(): "", pageSize);
      memberList.addAll(result.getData());

@@ -12,9 +12,12 @@
 
 ## 功能开通
 
-发送广播消息功能默认关闭，**使用前需联系环信商务开通**。
+发送 app 全局广播消息功能的开通取决于即时通讯 IM 的套餐版本：
 
-开通功能后，你可以 [向 app 所有用户发送广播消息](broadcast_to_all_users.html)、向 app 在线用户发送广播消息，[向 app 下的所有活跃聊天室发送广播消息](broadcast_to_chatrooms.html)。
+- **专业版**：此功能默认关闭，**若要使用，需联系环信商务开通**。
+- **旗舰版**：此功能默认开启。
+
+开通后，你可以 [向 app 所有用户发送广播消息](broadcast_to_all_users.html)、向 app 在线用户发送广播消息。
 
 ## 调用频率上限
 
@@ -200,7 +203,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/users/broadcast' \
 -d '{
     "msg": {
         "type": "custom",
-        "customEvent": "custom_event",
+        "customEvent": "custom_event"
     },
     "from": "admin",
     "ext": {

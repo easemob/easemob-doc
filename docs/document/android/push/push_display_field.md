@@ -11,13 +11,13 @@ message.setTo("toChatUsername");
 // 设置自定义推送提示。
 JSONObject extObject = new JSONObject();
 try {
-    extObject.put("em_push_title", "custom push title");
-    extObject.put("em_push_content", "custom push content");
+    extObject.put("title", "custom push title");
+    extObject.put("content", "custom push content");
 } catch (JSONException e) {
     e.printStackTrace();
 }
 // 将推送扩展设置到消息中。
-message.setAttribute("em_apns_ext", extObject);
+message.setAttribute("em_push_ext", extObject);
 // 设置消息体。
 message.addBody(txtBody);
 // 设置消息回调。
@@ -29,6 +29,6 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | 参数              | 描述          |
 | :---------------- | :----------- |
 | `toChatUsername`  | 消息接收方 ID。                                                          |
-| `em_apns_ext`     | 消息扩展，使用扩展的方式向推送中添加自定义字段，该值为固定值，不可修改。 |
-| `em_push_title`   | 自定义字段 key，用于设置自定义的标题，该值为固定值，不可修改。           |
-| `em_push_content` | 自定义字段 key，用于设置自定义的内容，该值为固定值，不可修改。           |
+| `em_push_ext`     | 消息扩展，使用扩展的方式向推送中添加自定义字段，该值为固定值，不可修改。 |
+| `title`   | 自定义字段 key，用于设置自定义的标题，该值为固定值，不可修改。           |
+| `content` | 自定义字段 key，用于设置自定义的内容，该值为固定值，不可修改。           |

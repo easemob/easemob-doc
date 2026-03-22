@@ -1,6 +1,6 @@
 # 发送消息
 
-环信即时通讯 IM Unity SDK 通过 `IChatManager` 和 `Message` 类实现文本、图片、音频、视频和文件等类型的消息的发送。
+环信即时通讯 IM Unity SDK 通过 `IChatManager` 和 `Message` 类实现文本、图片、GIF 图片、音频、视频和文件等类型的消息的发送。
 
 - 对于单聊，环信即时通讯 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要 [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。
 
@@ -56,7 +56,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 附件消息的发送和接收过程如下：
 
 1. 创建和发送附件类型消息。
-2. SDK 将附件上传到环信服务器。
+2. SDK 将附件上传到环信服务器。另外，你也可以 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
 ### 发送语音消息
 
@@ -123,6 +123,39 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
   onError:(code, desc) => {
     Debug.Log($"{msg.MsgId}发送失败，errCode={code}, errDesc={desc}");
   }
+));
+```
+
+### 发送 GIF 图片消息
+
+- 自 Unity SDK 1.4.0 开始，支持发送 GIF 图片消息。
+- GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。
+
+发送 GIF 图片消息的过程如下：
+
+1. 发送方调用 `Message#CreateImageSendMessage` 方法构造 GIF 图片消息体。
+2. 发送方调用 `ChatManager#SendMessage` 发送 GIF 图片消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+
+```csharp
+Message msg = Message.CreateImageSendMessage("to", "filepath");
+
+// 设置 ImageBody 的 isGif 属性为 true
+ImageBody imageBody = (ImageBody)msg.Body;
+imageBody.isGif = true;
+
+SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
+    onSuccess: () =>
+    {
+
+    },
+    onProgress: (progress) =>
+    {
+
+    },
+    onError: (code, desc) =>
+    {
+
+    }
 ));
 ```
 
@@ -307,6 +340,68 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ```
 
 ## 更多
+
+### 上传消息附件至自有服务器
+
+发消息时，若要将消息附件上传至你自己的服务器（而非环信服务器），需执行以下操作：
+
+1. 在 SDK 初始化时将 `Options.ServerTransfer` 设置为 `false`，使 SDK **不再自动上传或下载附件**。设置后，`ChatManager#SendMessage()` 将不再处理图片、视频等附件的自动处理与上传逻辑。
+2. 图片上传到你的服务器后，将附件 URL 填入消息体，然后发送消息。
+   以图片消息为例，上传后获取其 URL，通过 `MessageBody.ImageBody.RemotePath` 属性设置到消息体中，然后调用 `SendMessage()` 发送消息。
+
+```csharp
+using AgoraChat;
+using UnityEngine;
+
+// 1. SDK 初始化时关闭"自动上传附件到环信服务器"
+Options options = Options.InitOptionsWithAppKey("Your_AppKey");
+options.ServerTransfer = false;  // 关闭自动上传附件
+SDKClient.Instance.InitWithOptions(options);
+
+// 2. 你的业务：把图片上传到自有服务器，获得可访问的 URL
+// string urlPath = UploadToYourServerAndGetUrl(...);
+
+// 3. 发送图片消息
+public static void SendPrivateUrlImg(string toUserId,
+                                     string urlPath,
+                                     string localPathForPreview /*可选：用于本地预览/占位*/)
+{
+    // 构造图片消息（仍建议传一个本地路径用于本地展示；真正下载走 urlPath 由你自己控制）
+    Message message = Message.CreateImageSendMessage(
+        userId: toUserId,
+        localPath: localPathForPreview,  // 本地路径，用于预览
+        displayName: "IMG_111.png",      // 可选：文件名
+        fileSize: 10000                  // 可选：文件大小（字节）
+    );
+
+    // 获取图片消息体并设置远程 URL（你的服务器地址）
+    MessageBody.ImageBody imageBody = (MessageBody.ImageBody)message.Body;
+    imageBody.RemotePath = urlPath;  // 设置图片远程 URL
+
+    // 发送回调（可选）
+    CallBack callback = new CallBack(
+        onSuccess: () => {
+            // 发送成功
+            Debug.Log("Message sent successfully");
+        },
+        onError: (code, desc) => {
+            // 发送失败
+            Debug.LogError($"Send failed: {code} - {desc}");
+        },
+        onProgress: (progress) => {
+            // 发送进度（对于 URL 消息，此回调通常不会触发）
+            Debug.Log($"Progress: {progress}%");
+        }
+    );
+
+    // 发送消息
+    SDKClient.Instance.ChatManager.SendMessage(ref message, callback);
+}
+```
+
+:::tip
+接收端收到消息后，可通过 `((MessageBody.ImageBody)message.Body).RemotePath` 取到你的 URL，然后用你自己的下载/展示逻辑处理（因为你已关闭 SDK 自动附件传输）。
+:::
 
 ### 聊天室消息优先级与消息丢弃逻辑
 

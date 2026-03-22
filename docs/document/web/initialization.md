@@ -11,11 +11,16 @@
 初始化时通过传入 `appKey` 来获取 SDK 实例。
 
 ```javascript
-import ChatSDK from "easemob-websdk";
-const conn = new ChatSDK.connection({
+import WebIM from "easemob-websdk";
+const conn = new WebIM.connection({
   appKey: "Your appKey",
 });
 ```
+
+:::tip
+1. `WebIM` 表示环信即时通信 IM SDK。
+2. 对于特性或接口示例代码，`conn.方法名()` 中的 `conn` 为环信即时通信 IM SDK 实例。
+:::
 
 下表明确初始化 SDK 时的一些参数。全部参数详见 [API 参考](https://doc.easemob.com/apidoc/web/modules/Connection.html#ConnectionParameters)。
 

@@ -2,19 +2,27 @@
 
 <Toc />
 
-为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM React Native SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对文本消息进行按需翻译或自动翻译：
+为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM React Native SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对 **文本消息** 进行按需翻译或自动翻译：
 
 - 按需翻译：接收方在收到文本消息后，将消息内容翻译为目标语言。
 - 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
+
+## 功能开通
+
+文本翻译为增值服务，如需使用请先联系环信商务开通。
+
+单次翻译请求最多支持 10,000 字符。实际翻译字数根据 **源文本字符数 × 目标语言数量** 计算。例如，翻译 500 字符到 4 种语言，则计费字符数为 500 × 4 = 2,000 字符。
+
+若传入的文本超过上限，则上报错误 400，错误提示为 “The input text is too long”。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 1. 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
-2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已在 [环信控制台](https://console.easemob.com/user/login) 开通翻译功能。
-4. 该功能由 Microsoft Azure Translation API 提供，因此开始前请确保你了解该功能支持的目标语言。详见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
+2. [已开通翻译功能， 了解翻译服务的使用限制](#功能开通)。
+3. 了解即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+4. 了解翻译服务支持的目标语言：翻译服务由 Microsoft Azure Translation API 提供。关于翻译服务支持的目标语言，详见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
 
 ## 技术原理
 

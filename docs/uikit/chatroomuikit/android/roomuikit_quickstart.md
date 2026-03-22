@@ -4,6 +4,8 @@
 
 利用 ChatroomUIKit，你可以轻松实现聊天室内的用户交互。本文介绍如何实现在聊天室中发送消息。
 
+关于完整项目，请参见 [跑通示例项目](roomuikit_run.html)。
+
 ## 推荐环境
 
 - Android Studio Arctic Fox (2020.3.1) 或以上版本；

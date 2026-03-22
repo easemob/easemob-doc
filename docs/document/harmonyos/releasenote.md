@@ -2,6 +2,76 @@
 
 <Toc />
 
+## v1.12.0 Dev 2026-3-18（开发版）
+
+#### 新增特性
+
+- 支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+
+目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
+
+- WebSocket 连接支持 IPv6 地址。
+
+#### 修复
+
+1. 修复了调用判断当前用户是否在群组或聊天室白名单/禁言列表时可能发生的崩溃问题。
+2. 修复连接状态上报不准确的问题。
+3. 修复 WebSocket 传输和 TCP 连接相关的锁保护问题，提升了 SDK 稳定性。
+4. 修复发送附件消息时，`remote_url` 与 `secret` 信息丢失的问题。
+
+## v1.11.1 Dev 2026-2-28（开发版）
+
+- 多回调支持：`ChatMessage` 支持设置多个 `ChatCallback`，便于在消息生命周期中灵活处理多个回调逻辑。
+- 登录优化：SDK 在登录时自动将 `userId` 中的大写字母转换为小写，避免因大小写不一致导致的用户匹配问题。
+
+## v1.11.0 Dev 2026-2-4（开发版）
+
+#### 新增特性
+
+  底层支持安全 DNS 解析 DoH，提高连通性。
+
+#### 优化
+
+- 私有化部署底层链路支持 TCP 和 WebSocket 之间切换。
+- `ChatMessage#setJsonAttribute` 的类型只支持 `object` 类型，推荐使用 [ChatMessage.setExt](message_extension.html)。详见 [消息扩展升级指南](message_extension_optimize.html)。
+ 
+## v1.10.0 Dev 2026-1-26（开发版）
+
+#### 新增特性
+
+1. 长连接支持 WebSocket 协议。
+2. `ChatOptions` 新增 API 支持 WebSocket 私有部署:
+   - `ChatOptions#setWebSocketServer`：设置 WebSocket 服务器地址。
+   - `ChatOptions#getWebSocketServer`：获取设置的 WebSocket 服务器地址。
+   - `ChatOptions#setWebSocketPort`：设置 WebSocket 服务器端口号。
+   - `ChatOptions#getWebSocketPort`：获取设置的 WebSocket 服务器端口号。
+
+#### 优化
+
+优化调用 `logout` 方法的退出逻辑。 
+
+#### 修复
+
+修复页面间传递 `ChatMessage` 对象时偶现为空的问题。
+
+## v1.9.0 Dev 2026-1-9（开发版）
+
+#### 新增特性
+
+- 新增 Native Crash 上报能力：当 SDK native 层代码发生 Crash 时，会在下次启动后上报 Crash 信息。
+- 支持 [根据关键字从本地数据库中获取本地会话中的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
+- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
+
+#### 优化
+
+优化 [获取加入群组接口](group_manage.html#获取群组列表) 的响应速度。
+
+#### 修复
+
+1. 修复当修改文本和自定义消息之外的消息时，`ChatMessageListener#onMessageContentChanged` 回调中不返回修改的信息的问题。
+2. 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，当设置为不保存消息（`FetchMessageOption#setIsSave` 设置为 `false`）仍会生成新的本地会话的问题。
+3. 修复群组或聊天室解散后，成员收到回调后，仍然会从服务器获取群组或聊天室详情的问题。
+
 ## v1.8.1 Dev 2025-11-6（开发版）
 
 #### 优化
@@ -47,7 +117,7 @@
 #### 修复
 
 - 修复删除本地会话时缓存中的消息未删除的问题。
-- 修复消息扩展属性 `ext` 判断字符串为 JSON 类型时转换有误的问题。
+- 修复消息扩展属性 `ext` 判断字符串为 JSON 类型时转换有误的问题。详见 [消息扩展升级指南](message_extension_optimize.html)。
 
 ## v1.6.0 Dev 2025-4-9（开发版）
 
@@ -57,7 +127,7 @@
   - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
   - 命令消息：不支持修改。
-- [ChatMessage.setExt](message_extension.html)支持 object 类型的扩展字段。
+- [ChatMessage.setExt](message_extension.html)支持 object 类型的扩展字段。详见 [消息扩展升级指南](message_extension_optimize.html)。
 - SDK 优化切换到前台后的重连逻辑。
 - 优化重连逻辑，默认切换重连的地址。
 

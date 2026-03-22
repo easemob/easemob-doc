@@ -61,7 +61,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 发送附件消息分为以下两步：
 
 1. 创建和发送附件类型消息。
-2. SDK 将附件上传到环信服务器。
+2. SDK 将附件上传到环信服务器。另外，你也可以 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
 ### 发送语音消息
 
@@ -268,6 +268,55 @@ EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
 ## 更多
+
+### 上传消息附件至自有服务器
+
+发消息时，若要将消息附件上传至你自己的服务器（而非环信服务器），需执行以下操作：
+
+1. 在 SDK 初始化时调用 `EMOptions#setAutoTransferMessageAttachments(false)`，使 SDK **不再自动上传或下载附件**。设置后，`EMChatManager#sendMessage()` 将不再处理图片、视频等附件的自动处理与上传逻辑。
+2. 图片上传到你的服务器后，将附件 URL 填入消息体，然后发送消息。
+   以图片消息为例，上传后获取其 URL，通过 `EMImageMessageBody#setRemoteUrl(String)` 设置到消息体中，然后调用 `sendMessage()` 发送消息。
+
+```java
+// 1) SDK 初始化时关闭“自动上传附件到环信服务器”
+EMOptions options = new EMOptions();
+options.setAutoTransferMessageAttachments(false);
+EMClient.getInstance().init(appContext, options);
+
+// 2) 你的业务：将图片上传到自有服务器，拿到可访问的 URL
+// String urlPath = uploadToYourServerAndGetUrl(...);
+
+// 3) 发送图片消息
+public static void sendPrivateUrlImg(String toUserId,
+                                     String urlPath,
+                                     String localPathForPreview /*可选：用于本地预览/占位*/ ) {
+
+    // 构造图片消息体（仍建议传一个本地路径用于本地展示；实际下载通过 urlPath 由你自己控制）
+    EMImageMessageBody body = new EMImageMessageBody(new java.io.File(localPathForPreview));
+    body.setRemoteUrl(urlPath);              // 图片远程 URL（你的服务器地址）
+    body.setFileName("IMG_111.png");         // 可选：文件名
+    // body.setFileLength(10000);            // 可选：文件大小（字节），不设置也可以
+
+    // 构造消息
+    EMMessage message = EMMessage.createSendMessage(EMMessage.Type.IMAGE);
+    message.setTo(toUserId);
+    message.addBody(body);
+
+    // （可选）发送回调
+    message.setMessageStatusCallback(new EMCallBack() {
+        @Override public void onSuccess() { /* send success */ }
+        @Override public void onError(int code, String error) { /* send fail */ }
+        @Override public void onProgress(int progress, String status) { }
+    });
+
+    // 发送消息
+    EMClient.getInstance().chatManager().sendMessage(message);
+}
+```
+
+:::tip
+接收端收到消息后，可通过 `((EMImageMessageBody)msg.getBody()).getRemoteUrl()` 取到你的 URL，然后用你自己的下载/展示逻辑处理（因为你已关闭 SDK 自动附件传输）。
+:::
 
 ### 聊天室消息优先级与消息丢弃逻辑
 

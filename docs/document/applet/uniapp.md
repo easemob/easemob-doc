@@ -115,17 +115,34 @@ import SDK from 'easemob-websdk/uniApp/Easemob-chat';
 实例化 SDK，并挂载在全局对象下。
 
 ```javascript
-const WebIM = wx.WebIM = SDK;
+const WebIM = uni.WebIM = SDK;
 const conn = new WebIM.connection({
     appKey: 'your appKey', //注意这里的 "K" 需大写
     url: 'wss://im-api-wechat.easemob.com/websocket', // websocket 连接地址
     apiUrl: 'https://a1.easemob.com',// REST API 连接地址
     useOwnUploadFun: true, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
     isHttpDNS: false, // 在小程序上需设置为false, 其他平台设置为true
+    isAutoLogin: false, // 是否启用自动登录,自 uniapp SDK 4.19.0 版本开始支持属性
 });
 ```
 
 ## 注意事项
+
+### 自动登录
+
+自 uniapp SDK 4.19.0 版本开始，应用支持自动登录功能。你只需在初始化时将 `isAutoLogin` 选项设置为 `true`，即可启用该功能。
+
+自动登录的实际有效期取决于你设置的用户 Token 或密码的有效期。例如，若 Token 有效期为 24 小时，则用户在有效期结束后需要重新获取 Token 并登录。
+
+- 自动登录相关错误码：
+  - [错误码 214](error.html)：当前登录设备数量已达上限，无法继续登录。
+  - [错误码 220](error.html)：当前登录设备与上一次登录的设备不一致。
+
+- 自动登录安全检查机制
+  
+  对于自动登录的设备，上线时默认会踢掉当前登录设备（对于多设备登录，则踢掉最早的登录设备）。若要保留当前登录设备不被踢下线，请联系环信商务。该场景下，自动登录的设备登录失败，收到错误 214，提示当前登录的设备数量超过限制。
+
+### Vue3 项目 在 H5 平台发布时注意事项
 
 uni-app 在 **Vue3 模式** 下，HBuilderX 会默认开启 [**摇树优化（tree-shaking）**](https://uniapp.dcloud.net.cn/collocation/manifest.html#treeshaking)。  
 

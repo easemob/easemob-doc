@@ -1,6 +1,8 @@
 # iOS CallKit 更新日志
 
-## 版本 4.16.0 2025-08-29
+## v4.16.0
+
+该版本在 2025 年 8 月 29 日发布。
 
 从该版本开始，iOS CallKit 源码使用 Swift 语言开发，并且支持 iOS 15.0 及以上版本，代码迁移至 [GitHub 新 repo](https://github.com/easemob/easemob-callkit-iOS) 和 [Gitee 地址](https://gitee.com/easemob-code/easemob-callkit-iOS)。老版本不再维护。
 

@@ -49,9 +49,9 @@
 | `payload.type` | String | 添加聊天室超级管理员的事件，值为 `ADD`。  | 
 | `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
 | `id`           | String | 聊天室 ID。                                                 |
-| `type`         | String | 区分群组或聊天室事件。本事件仅对聊天室有效，因此该参数的值只能为 `CHATROOM`：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室     |
-| `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 |
-| `operation`    | String | 操作。添加聊天室超级管理员的操作为 `ROOM_SUPER_ADMIN`。 |
+| `type`         | String | 事件类型。此处为 `CHATROOM`（聊天室事件）。     |
+| `event`        | String | 事件名称。该参数的值固定为 `group_op_event`。 |
+| `operation`    | String | 具体操作。添加聊天室超级管理员的操作为 `ROOM_SUPER_ADMIN`。 |
 | `operator`     | String | 操作人。若 app 管理员添加了超级管理员，该参数的值固定为 `@ppAdmin`。        |
 | `timestamp`    | Long   | 操作完成的时间戳。      | 
 
@@ -97,9 +97,9 @@
 | `payload.type` | String | 移除聊天室超级管理员的事件，值为 `REMOVE`。  | 
 | `appkey`       | String | 你在环信控制台注册的应用唯一标识。                                |
 | `id`           | String | 聊天室 ID。                                                 |
-| `type`         | String | 区分群组或聊天室事件。本事件仅对聊天室有效，因此该参数的值只能为 `CHATROOM`：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室 |
-| `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 |
-| `operation`    | String | 操作。移除聊天室超级管理员的操作为 `ROOM_SUPER_ADMIN`。 |
+| `type`         | String | 事件类型。此处为 `CHATROOM`（聊天室事件）。     |
+| `event`        | String | 事件名称。该参数的值固定为 `group_op_event`。 |
+| `operation`    | String | 具体操作。移除聊天室超级管理员的操作为 `ROOM_SUPER_ADMIN`。 |
 | `operator`     | String | 操作人。若 app 管理员移除了超级管理员，该参数的值固定为 `@ppAdmin`。        |
 | `timestamp`    | Long   | 操作完成的时间戳。      | 
 

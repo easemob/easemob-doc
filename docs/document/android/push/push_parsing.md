@@ -83,25 +83,47 @@ public class SplashActivity extends BaseActivity {
 
 ## 解析小米推送字段
 
-重写 `EMMiMsgReceiver.onNotificationMessageClicked` 方法可以在 `MiPushMessage` 对象中获取自定义扩展：
+在应用的 `LAUNCHER Activity`（如 `SplashActivity`）中通过 `Intent` 获取推送数据：
 
 ```java
-public class MiMsgReceiver extends EMMiMsgReceiver {
+public class SplashActivity {
+  final static String TAG = "SplashActivity";
 
-    @Override
-    public void onNotificationMessageClicked(Context context, MiPushMessage miPushMessage) {
-        String extStr = miPushMessage.getContent();
-        JSONObject extras = new JSONObject(extStr);
-        if (extras !=null ){
-          String t = extras.getString("t");
-          String f = extras.getString("f");
-          String m = extras.getString("m");
-          String g = extras.getString("g");
-          Object e = extras.get("e");
-          //handle
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    getIntentData(getIntent());
+  }
+
+  @Override
+  public void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    setIntent(intent);
+    getIntentData(intent);
+  }
+
+  private void getIntentData(Intent intent) {
+    if (null != intent) {
+        MiPushMessage pushMessage = null;
+        if (intent.getExtras() != null) {
+            Object raw = intent.getExtras().get("key_message");
+            if (raw instanceof MiPushMessage) {
+                pushMessage = (MiPushMessage) raw;
+            }
         }
+        if (pushMessage != null) {
+            JSONObject extras = new JSONObject(pushMessage.getContent());
+            String t = extras.optString("t");
+            String f = extras.optString("f");
+            String m = extras.optString("m");
+            String g = extras.optString("g");
+            Object e = extras.opt("e");
+            EMLog.d(TAG, "t = " + t + ", f = " + f + ", m = " + m + ", g = " + g + ", e = " + e);
+        }
+    } else {
+      Log.i(TAG, "intent is null");
     }
-
+  }
 }
 ```
 

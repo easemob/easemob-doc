@@ -75,7 +75,7 @@ ChatClient.getInstance().chatManager.sendMessage(msg!, callback).then().catch();
 发送附件消息分为以下两步：
 
 1. 创建和发送附件类型消息。
-2. SDK 将附件上传到环信服务器。
+2. SDK 将附件上传到环信服务器。另外，你也可以 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
 ### 发送语音消息
 
@@ -303,6 +303,59 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 ```
 
 ## 更多
+
+### 上传消息附件至自有服务器
+
+发消息时，若要将消息附件上传至你自己的服务器（而非环信服务器），需执行以下操作：
+
+1. 在 SDK 初始化时将 `ChatOptions.serverTransfer` 设置为 `false`，使 SDK **不再自动上传或下载附件**。设置后，`ChatManager#sendMessage()` 将不再处理图片、视频等附件的自动处理与上传逻辑。
+2. 图片上传到你的服务器后，将附件 URL 填入消息体，然后发送消息。
+   以图片消息为例，图片上传到你的服务器后，将 `ChatImageMessageBody#remotePath` 设置为返回的图片 URL，然后调用 `sendMessage()` 发送消息。
+
+```typescript
+// 1) SDK 初始化时关闭“自动上传附件到环信服务器”
+ChatClient.getInstance()
+  .init(ChatOptions.withAppKey({ appKey: "test#test", serverTransfer: false }))
+  .then()
+  .catch();
+
+// 自定义附件上传和发送消息方法
+async function uploadAndSendImageMessage() {
+  // 例如：图片服务器地址
+  const remoteUrl = "https://www.example.com/path/to/your/image.jpg";
+  const localPath = "/local/path/to/your/image.jpg";
+
+  // 例如：上传图片到你的服务器
+  // await yourUploadFunction(localPath, remoteUrl);
+
+  // 上传图片完成，发送消息
+  const targetId = "targetUserId";
+  const filePath = localPath;
+  const chatType = 0; // 0.singleChat, 1.groupChat, 2.chatRoom
+  const message = ChatMessage.createImageMessage(targetId, filePath, chatType);
+  (message.body as ChatImageMessageBody).remotePath = remoteUrl; // 设置远程 URL
+  (message.body as ChatImageMessageBody).displayName = "image.jpg"; // 可选 设置显示名称
+  const callback = {
+    onError(localMsgId, error) {
+      console.log("Failed to send image message:", localMsgId, error);
+    },
+    onSuccess(msg) {
+      console.log("Image message sent successfully:", msg);
+    },
+  } as ChatMessageStatusCallback;
+  ChatClient.getInstance()
+    .chatManager.sendMessage(message, callback)
+    .then()
+    .catch();
+}
+
+// 2) 调用 uploadAndSendImageMessage 发送图片消息
+uploadAndSendImageMessage();
+```
+
+:::tip
+接收端收到消息后，可通过 `(message.body as ChatImageMessageBody).remotePath` 取到你的 URL，然后用你自己的下载/展示逻辑处理（因为你已关闭 SDK 自动附件传输）。
+:::
 
 ### 聊天室消息优先级与消息丢弃逻辑
 

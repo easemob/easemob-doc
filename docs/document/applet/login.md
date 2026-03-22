@@ -18,6 +18,8 @@
 
 ## 登录方式
 
+你可以通过以下两种方式进行登录：
+
 1. **用户 ID + token** 是更加安全的登录方式。
 
 测试环境下，你在[环信控制台](https://console.easemob.com/user/login)创建用户后，环信服务器会自动为这些用户分配用户 Token，详见[查看用户 Token](/product/console/operation_user.html#查看用户-token)。
@@ -37,7 +39,7 @@ conn
     console.log("login fail", reason);
   });
 ```
-1. **用户 ID + 密码** 登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_register_open.html)。
+2. **用户 ID + 密码** 登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_register_open.html)。
 
 ```javascript
 conn
