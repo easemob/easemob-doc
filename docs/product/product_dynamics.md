@@ -1,64 +1,233 @@
 # 产品动态
 
+## 2026-03
+
+### SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS SDK 1.12.0 开发版发布   | - [支持接收服务端发送的流式消息](/document/harmonyos/message_stream_receive.html)。<br/> - WebSocket 连接支持 IPv6 地址。  | 2026-3-18     | [HarmonyOS SDK 1.12.0 更新日志](/document/harmonyos/releasenote.html#v1-12-0-dev-2026-3-18-开发版)        |
+
+### 服务端 API
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| 新增发送流式消息 API   | - 新增发送单聊流式消息 API。 <br/> - 新增发送群聊流式消息 API。 | 2026-3-18  | - [发送单聊流式消息 API](/document/server-side/message_stream_send_single.html) <br/> - [发送群聊流式消息 API](/document/server-side/message_stream_send_group.html)        |
+
+## 2026-02
+
+#### SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Andriod/iOS SDK 4.19.0 开发版发布   | - [支持接收服务端发送的流式消息](/document/android/message_stream_receive.html)。<br/> - [SDK 依赖的 AOSL Crash 检测库](/document/android/releasenote.html#v4-19-0-dev-2026-2-2-开发版)。  | 2026-2-2     | - [Android SDK 4.19.0 更新日志](/document/android/releasenote.html#v4-19-0-dev-2026-2-2-开发版)  <br/> - [iOS SDK 4.19.0 更新日志](/document/ios/releasenote.html#v4-19-0-dev-2026-2-2-开发版)        |
+| Web/小程序 SDK 4.19.1 开发版发布   | [支持接收服务端发送的流式消息](/document/web/message_stream_receive.html)。  | 2026-2-2     | - [Web SDK 4.19.1 更新日志](/document/web/releasenote.html#_4-19-1-dev-2026-2-27-开发版)  <br/> - [小程序 SDK 4.19.1 更新日志](/document/applet/releasenote.html#_4-19-1-dev-2026-2-27-开发版)        |
+| uniapp SDK 4.19.0 开发版发布   | [uniapp 平台支持自动登录](/document/applet/uniapp.html#自动登录)。  | 2026-2-4     | [uniapp SDK 4.19.0 更新日志](/document/applet/releasenote.html#_4-19-0-dev-2026-02-04-开发版)          |
+| HarmonyOS SDK 1.11.0 开发版发布   | - 底层支持安全 DNS 解析 DoH，提高连通性。<br/> - 私有化部署底层链路支持 TCP 和 WebSocket 之间切换。 | 2026-2-4     | [HarmonyOS SDK 1.11.0 更新日志](/document/harmonyos/releasenote.html#v1-11-0-dev-2026-2-4-开发版)          |
+
+#### CallKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android CallKit 4.19.0 发版   | - 支持灵活配置 RTC 参数。<br/> - 支持控制是否禁用 RTC Token 验证  | 2026-2-4     | [Android CallKit 4.19.0 更新日志](/callkit/android/releasenote.html#v4-19-0)          |
+
+## 2026-01
+
+#### SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS SDK 1.9.0 开发版发布   | - 新增 Native Crash 上报能力：当 SDK native 层代码发生 Crash 时，会在下次启动后上报 Crash 信息。<br/> - 支持 [根据关键字从本地数据库中获取本地会话中的消息](/document/harmonyos/message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。<br/> - 支持 [根据消息 ID 列表获取本地消息](/document/harmonyos/message_retrieve.html#根据消息-id-列表获取本地消息)。 | 2026-1-9       | [HarmonyOS SDK 1.9.0 更新日志](/document/harmonyos/releasenote.html#v1-9-0-dev-2026-1-9-开发版)          |
+| HarmonyOS SDK 1.10.0 开发版发布 | - 长连接支持 WebSocket 协议。<br/> - 支持 WebSocket 私有部署。|2026-1-26 | [HarmonyOS SDK 1.10.0 更新日志](/document/harmonyos/releasenote.html#v1-10-0-dev-2026-1-26-开发版) |
+| React Native SDK 1.13.0 开发版发布 | - 长连接支持 WebSocket 协议。<br/> - 支持 WebSocket 私有部署。|2026-1-28 | [React Native SDK 1.13.0 更新日志](/document/react-native/releasenote.html#v1-13-0-2026-01-28) |
+| Unity SDK 1.4.0 开发版发布 | - [支持修改各类型的消息](/document/unity/message_modify.html)：<br/>1. 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。<br/>2.  文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。<br/>3. 命令消息：不支持修改。<br/> - 支持 [发送](/document/unity/message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](/document/unity/message_receive.html#接收-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/unity/group_attributes.html#管理群组头像)。<br/> - 支持 [拉取群组中指定的单个或多个成员发送的历史消息](/document/unity/message_retrieve.html#从服务器获取指定会话的消息)。<br/> - 支持 [从本地获取指定群成员发送的消息](/document/unity/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [获取群成员列表](/document/unity/group_manage.html#获取群成员列表) 时包括成员角色和入群时间。<br/> - 支持 [根据关键字从本地数据库中获取单个会话的消息 ID 列表](/document/unity/message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。<br/> - 支持 [根据消息 ID 列表获取本地消息](/document/unity/message_retrieve.html#根据消息-id-列表获取本地消息)。<br/> - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。 |2026-1-30 | [Unity SDK 1.4.0 更新日志](/document/unity/releasenote.html#v1-4-0-2026-01-30) |
+
+
+#### UIKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web UIKit 2.4.0 发版   | `ConversationList` 组件增加 `includeEmptyConversations` 参数控制是否拉取 [空会话](/document/web/conversation_overview.html#空会话)。 | 2026-1-9      | [Web 单群聊 UIKit 2.4.0 更新日志](/uikit/chatuikit/web/releasenote.html#v2-4-0)          |
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web 聊天室 UIKit 2.4.0 发版   | - `Chatroom` 组件增加 `customMessageRenderers` 参数用于自定义消息的界面展示。<br/> - `Provider` 组件增加 `initConfig.countMemberJoinToUnread` 参数，表示聊天室人员加入的消息是否计未读数。 | 2026-1-9       | [Web 聊天室 UIKit 2.4.0 更新日志](/uikit/chatroomuikit/web/roomuikit_releasenote.html#v2-4-0)          |
+
+#### CallKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web CallKit 2.4.0 发布    | 支持在多摄像头设备上切换摄像头（注意：部分机型有兼容问题）。  | 2026-1-9       | [Web CallKit 2.4.0 更新日志](/callkit/web/releasenote.html#v2-4-0)          |
+
+## 2025-12
+
+#### 服务端 API
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| 新增主动文本审核 RESTful API   | 调用文本审核 API，业务服务器传入需审核的文本内容，环信服务器进行审核，返回审核结果。 | 2025-12-12  | [主动文本审核](/document/server-side/moderation_text_active.html)         |
+| - 基于自定义群组 ID 创建群组<br/> - 基于自定义聊天室 ID 创建聊天室  | 调用创建群组或聊天室的 RESTful API 时，你可以传入自定义的群组 ID 或聊天室 ID 创建群组或聊天室。若你不传入自定义群组 ID 或聊天室 ID，即时通讯 IM 创建时会自动生成。 | 2025-12-12       | [创建群组](/document/server-side/group_create.html#请求-body-参数) 或 [创建聊天室](/document/server-side/chatroom_create.html#请求-body-参数)          |
+
+#### SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web/小程序 SDK 4.17.1 开发版发布   | 优化日志输出格式和内容。 | 2025-12-12       | - [Web SDK 4.17.1 更新日志](/document/web/releasenote.html#_4-17-1-dev-2025-12-12) <br/> - [小程序 SDK 4.17.1 更新日志](/document/applet/releasenote.html#_4-17-1-dev-2025-12-12)         |
+| Flutter 4.16.0 发版    | - 支持 [根据消息 ID 列表获取本地消息](/document/flutter/message_retrieve.html#根据消息-id-列表获取本地消息)。<br/> - 支持私有部署时设置 IPv6 格式的 REST 地址。 | 2025-12-10       |  [Flutter SDK 4.16.0 更新日志](/document/flutter/releasenote.html#v4-16-0-2025-12-10)         |
+| Flutter 4.17.0 发版    | - 长连接支持 WebSocket 协议。<br/> - 私有化部署底层链路支持 TCP 和 WebSocket 之间的切换。 | 2025-12-17       |  [Flutter SDK 4.17.0 更新日志](/document/flutter/releasenote.html#v4-17-0-2025-12-17)         |
+
+#### UIKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web 单群聊 UIKit 2.3.1 发版   | - 支持监听用户获取会话列表事件 `getConversationlist`。<br/> - 优化图片放大查看效果。<br/> -  使用 `customRenderers` 代替原来的 `renderMessage` 来自定义消息的界面展示。<br/> - 优化移动设备上消息操作菜单的显示。 | 2025-12-4      | [Web 单群聊 UIKit 2.2.0 更新日志](/uikit/chatuikit/web/releasenote.html#v2-3-1)          |
+| Flutter 单群聊 UIKit 2.3.0-dev.1 发版   | 合并聊天室 UIKit 并完整本地化。 | 2025-12-20      | [Flutter 单群聊 UIKit 2.3.0-dev.1 更新日志](/uikit/chatuikit/flutter/releasenote.html#v2-3-0-dev-1) |
+| Flutter UIKit 2.2.0 发版   | - 升级第三方库。<br/> - 修改撤回消息回调。<br/> - 修改群默认头像设置。 | 2025-12-20      | [Flutter 单群聊 UIKit 2.3.0-dev.1 更新日志](/uikit/chatuikit/flutter/releasenote.html#v2-3-0-dev-1) |
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web 聊天室 UIKit 2.3.1 发版   | `ChatroomMessage` 组件支持自定义消息操作菜单。 | 2025-12-4       | [Web 聊天室 UIKit 2.3.1 更新日志](/uikit/chatroomuikit/web/roomuikit_releasenote.html#v2-3-1)          |
+
+#### CallKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web CallKit 2.3.1 发布    | 增加 `useRTCToken` 参数，控制是否开启 Token 校验。  | 2025-12-4       | [Web CallKit 2.3.1 更新日志](/callkit/web/releasenote.html#v2-3-1)          |
+
+## 2025-11
+
+#### SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android SDK 4.18.1 开发版发布    | 私有化部署底层链路支持 TCP 和 WebSocket 之间切换。  | 2025-11-12       | [Android SDK 4.18.1 更新日志](/document/android/releasenote.html#v4-18-1-dev-2025-11-12-开发版)          |
+| iOS SDK 4.18.1 开发版发布    | 私有化部署底层链路支持 TCP 和 WebSocket 之间切换。  | 2025-11-12       | [iOS SDK 4.18.1 更新日志](/document/ios/releasenote.html#v4-18-1-dev-2025-11-12-开发版)          |
+| HarmonyOS SDK 1.8.1 开发版发布   | 解决 HTTP 请求受文件描述符（FD）限制问题。  | 2025-11-6       | [HarmonyOS SDK 1.8.1 更新日志](/document/harmonyos/releasenote.html#v1-8-1-dev-2025-11-6-开发版)          |
+| Flutter 4.15.2 发版    | - 新增 `getCurrentDeviceId` 方法获取你当前设备的设备 ID。<br/> - 支持 [根据关键字获取单个会话中的消息](/document/flutter/message_retrieve.html#根据关键字获取会话中的消息)。 | 2025-11-7       | [Flutter SDK 4.15.2 更新日志](/document/flutter/releasenote.html#v4-15-2-2025-11-7)          |
+
+#### UIKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web 单群聊 UIKit 2.2.1 发版   | `Chat`、`ConversationList` 和 `CallKit` 等组件适配移动端，会话列表和消息等鼠标悬停事件改为长按事件。 | 2025-11-10      | [Web 单群聊 UIKit 2.2.0 更新日志](/uikit/chatuikit/web/releasenote.html#v2-2-1)          |
+| React Native 单群聊 UIKit 2.5.0 发版   | - 支持 [自定义数据层](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义-sdk-数据模型)，实现灵活业务处理。例如，App 内根据手机号搜索好友功能已使用该接口。<br/> - 新增 [自定义图片预览组件](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义图片消息预览组件)，支持自定义 App 内图片消息预览效果。<br/> - 新增 [自定义视频预览组件](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义视频消息预览组件)，支持自定义 App 内视频消息预览效果。<br/> - 新增语音图像动画组件，提升动画展示效果。 | 2025-11-17   | [React Native 单群聊 UIKit 2.5.0 更新日志](/uikit/chatuikit/react-native/releasenote.html#v2-5-0)           |
+
+## 2025-10
+
+#### SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android SDK 4.18.0 开发版发布   | 底层支持安全 DNS 解析 DoH，提高连通性。<br/> - 支持私有部署时设置 IPv6 格式的 REST 地址。  | 2025-10-31      | [Android SDK 4.18.0 更新日志](/document/android/releasenote.html#v4-18-0-dev-2025-10-31-开发版)         |
+| Unity/Windows SDK 1.3.3 发版   | 适配 Android 15 的 16 KB 页面大小。  | 2025-10-31      | [Unity/Windows 1.3.3 更新日志](/document/unity/releasenote.html#版本-1-3-3-2025-10-31)         |
+
+#### UIKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web 单群聊 UIKit 2.1.0 发版   | CallKit 增加清屏功能。 | 2025-10-27       | [Web 单群聊 UIKit 2.1.0 更新日志](/uikit/chatuikit/web/releasenote.html#v2-1-0)          |
+| Uniapp 单群聊 UIKit 1.0.1 发版   | 运行到 app 端，发送语音消息时，增加麦克风权限校验。 | 2025-10-17       | [Uniapp 单群聊 UIKit 1.0.1 更新日志](/uikit/chatuikit/uniapp/releasenote.html#v1-0-1)          |
+
+#### CallKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web CallKit 2.0.1 发布    | 新增清屏功能。  | 2025-10-27       | [Web CallKit 2.1.0 更新日志](/callkit/web/releasenote.html#v2-1-0)          |
+
+## 2025-09
+
+#### SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android SDK 4.17.0 开发版发布   | - 长连接支持 WebSocket 协议。<br/> - 支持 WebSocket 私有部署。 <br/> - 主动退出账号时添加 logout 协议。 | 2025-9-25       | [Android SDK 4.17.0 更新日志](/document/android/releasenote.html#v4-17-0-dev-2025-9-25-开发版)          |
+| iOS SDK 4.17.0 开发版发布   | - 长连接支持 WebSocket 协议。<br/> - 支持 WebSocket 私有部署。 | 2025-9-28       | [iOS SDK 4.17.0 更新日志](/document/ios/releasenote.html#v4-17-0-dev-2025-9-28-开发版)          |
+| Web/小程序 SDK 4.17.0 开发版发布   | - 获取服务端会话列表时可获取 [空会话](/document/web/conversation_overview.html#空会话)。<br/> - 获取服务端的置顶会话列表时可获取 [空会话](/document/web/conversation_overview.html#空会话) | 2025-9-30       | - [Web SDK 4.17.0 更新日志](/document/web/releasenote.html#v4-17-0-dev-2025-9-30-开发版)<br/> - [小程序 SDK 4.17.0 更新日志](/document/applet/releasenote.html#v4-17-0-dev-2025-9-30-开发版) |
+
+#### UIKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web UIKit 2.0.0 发版   | 增加 `CallKit` 组件，`Chat` 组件内使用 `CallKit` 取代原来的音视频通话功能。 | 2025-9-3       | [Web 单群聊 UIKit 2.0.0 更新日志](/uikit/chatuikit/web/releasenote.html#v2-0-0)          |
+
+## 2025-08
+
+#### SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android/iOS SDK 4.16.0 开发版发布    | IM Demo 增加反诈提示：<br/> - 聊天页面增加反诈背景。<br/> - 发送和接收消息都会插入一个反诈提示消息。  | 2025-8-19       | - [Android SDK 4.16.0 更新日志](/document/android/releasenote.html#v4-16-0-dev-2025-8-19-开发版)<br> - [iOS SDK 4.16.0 更新日志](/document/android/releasenote.html#v4-16-0-dev-2025-8-19-开发版)          |
+
+#### CallKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android CallKit 4.16.0 发布    | 从该版本开始，Android CallKit 源码使用 Kotlin 语言开发，代码迁移至 [GitHub 新 repo](https://github.com/easemob/easemob-callkit-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-callkit-android) ，老版本不再维护。该版本的 CallKit 主要变更如下：<br/> - 优化了 [单群聊音视频通话的 UI 界面](/callkit/android/product_overview.html#界面效果)。<br/> - 采用 MVVM 框架设计抽离各个模块的代码，职责分离。<br/> - 合并信令，由原来三个地方合并为一处。解决了 Activity 被回收导致信令不通问题。<br/> - 在应用集成了 FCM 推送的设备上，当应用进程被杀死时，支持 [使用 Telecom](/callkit/android/telecom.html) 唤起设备，实现系统级丝滑呼叫体验。<br/> -  [群组通话的邀请界面](/callkit/android/integration.html#步骤-5-发起通话) 改为 CallKit 内部实现，不再需要开发者自己实现。<br/> - 移除 App Server 的依赖，直接由 CallKit 内部从 SDK 中获取 RTC App ID、rtcToken、UID 和 userID 映射关系等。  | 2025-8-29       | [Android CallKit 4.16.0 更新日志](/callkit/android/releasenote.html#v4-16-0)          |
+| iOS CallKit 4.16.0 发布    | 从该版本开始，iOS CallKit 源码使用 Swift 语言开发，并且支持 iOS 15.0 及以上版本，代码迁移至 [GitHub 新 repo](https://github.com/easemob/easemob-callkit-iOS) 和 [Gitee 地址](https://gitee.com/easemob-code/easemob-callkit-iOS)。老版本不再维护。<br/>该版本的 CallKit 主要变更如下：<br/> - 优化了 [单群聊音视频通话的 UI 界面](/callkit/ios/product_overview.html#界面效果)。<br/> - 单人视频通话支持[画中画](/callkit/ios/picture_in_picture.html)。<br/> - 被叫离线时，支持 [使用 LiveCommunicationKit 进行呼叫](/callkit/ios/livecommunicationkit.html)。<br/> - 优化了 [群组通话的呼叫信令交互](/callkit/ios/signaling.html#群组通话信令交互流程)。<br/> - [群组通话的邀请界面](/callkit/ios/integration.html#发起群组通话) 改为 UIKit 内部实现，不再需要开发者自己实现。<br/> - 通话使用的声网 RTC App ID 及 Token 在 CallKit 内部通过 IM SDK 接口获取，不再依赖 App Server。  | 2025-8-29       | [iOS CallKit 4.16.0 更新日志](/callkit/ios/releasenote.html#v4-16-0)          |
+| Web CallKit 2.0.1 发布    | 从该版本开始，CallKit 移到 `easemob-chat-uikit` 中，为 UIKit 的中的一个组件，代码迁移至 [GitHub 新 repo](https://github.com/easemob/easemob-uikit-react) 和 [Gitee 地址](https://gitee.com/easemob-code/easemob-uikit-react)，老版本不再维护。<br/>该版本的 CallKit 主要变更如下：<br/> - 优化了 [单群聊音视频通话的 UI 界面](/callkit/web/product_overview.html#界面效果)。<br/> - 优化了群组通话的呼叫信令交互。<br/> - [群组通话的邀请界面](/callkit/web/integration.html#发起群组通话) 改为 UIKit 内部实现，不再需要开发者自己实现。<br/> - 通话使用的声网 RTC App ID 及 Token 在 CallKit 内部通过 IM SDK 接口获取，不再依赖 App Server。  | 2025-8-29       | [Web CallKit 2.0.1 更新日志](/callkit/web/releasenote.html#v2-0-1)          |
+
 ## 2025-07
+
+#### 服务端消息翻译 RESTful API
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | 消息翻译 RESTful API   | 消息翻译支持以下三个 RESTful API：<br/> - 翻译消息内容 <br/> - 获取翻译语言列表 <br/> - 检测文本的源语言 | 2025-7-2       | <br/> - [翻译消息内容](/document/server-side/message_translation_text.html) <br/> - [获取翻译语言列表](/document/server-side/message_translation_language_list.html) <br/> - [检测文本的源语言](/document/server-side/message_translation_detect.html) |
 
+#### SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| React Native SDK 1.11.3 发版 | [支持用户查看自己是否在聊天室禁言列表上](room_members.html#查看当前用户是否在聊天室禁言列表)。 | 2025-7-15 | [React Native SDK 1.11.3 更新日志](/document/react-native/releasenote.html#v1-11-3-2025-7-15)|
+
+#### UIKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| React Native 单群聊 UIKit 2.4.8 发版   | 新增漫游消息拉取特性。 | 2025-07-28   | [React Native 单群聊 UIKit 2.4.8 更新日志](/uikit/chatuikit/react-native/releasenote.html#v2-4-8)           |
+
 ## 2025-06
 
-#### Android/iOS SDK 4.15.1 发版
+#### SDK 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 4.15.1 开发版发布   | <br/> - 支持 [根据关键字从本地数据库中获取单个会话的消息](/document/android/message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。<br/> - [根据消息 ID 从本地数据库获取单个或多个消息](/document/ios/message_retrieve.html#根据消息-id-获取单个或多个本地消息)。 | 2025-6-23    | <br> - [Android SDK 4.15.1 更新日志](/document/android/releasenote.html#v4-15-1-dev-2025-6-23-开发版)<br> - [iOS SDK 4.15.1 更新日志](/document/ios/releasenote.html#v4-15-1-dev-2025-6-23-开发版)  |
-
-#### Web SDK 4.15.1 发版
-
-| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
-| :----- | :------- | :---------------- | :---------------- |
+| Android/iOS SDK 4.15.1 开发版发布   | <br/> - 支持 [根据关键字从本地数据库中获取单个会话的消息](/document/android/message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。<br/> - [根据消息 ID 从本地数据库获取单个或多个消息](/document/ios/message_retrieve.html#根据消息-id-列表获取本地消息)。 | 2025-6-23    | <br> - [Android SDK 4.15.1 更新日志](/document/android/releasenote.html#v4-15-1-dev-2025-6-23-开发版)<br> - [iOS SDK 4.15.1 更新日志](/document/ios/releasenote.html#v4-15-1-dev-2025-6-23-开发版)  |
 | Web SDK 4.15.1 开发版发布   | <br/> - 支持 [查询当前用户已加入的群组数量](/document/web/group_manage.html#查询当前用户已加入的群组数)。<br/> - 支持 [屏蔽群消息](/document/web/group_manage.html#屏蔽群消息)、[解除屏蔽群消息](/document/web/group_manage.html#解除屏蔽群消息) 和 [检查当前用户是否已经屏蔽群消息](/document/web/group_manage.html#检查当前用户是否已屏蔽群消息)。 | 2025-6-9     | [Web SDK 4.15.1 更新日志](/document/web/releasenote.html#v4-15-1-dev-2025-6-9-开发版)      |
-
-#### HarmonyOS SDK 1.8.0 发版
-
-| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
-| :----- | :------- | :---------------- | :---------------- |
 | HarmonyOS SDK 1.8.0 开发版发布   | <br/> - [撤回消息](/document/harmonyos/message_recall.html) 时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。<br/> - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。 <br/> - 修改 Token [即将过期事件](/document/harmonyos/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。<br/> - 支持 [获取群成员列表](/document/harmonyos/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。 | 2025-6-6     | [HarmonyOS 1.8.0 更新日志](/document/harmonyos/releasenote.html#v1-8-0-dev-2025-6-6-开发版)      |
+| Flutter SDK 4.15.0 版本发布   | <br/> - 支持 [GIF 图片消息](/document/flutter/message_send.html#发送-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/flutter/group_attributes.html#管理群组头像)。<br/> - 支持 [消息附件鉴权功能](/document/flutter/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/document/flutter/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/flutter/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [获取群成员列表](/document/flutter/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。  | 2025-06-13     | [Flutter 4.15.0 更新日志](/document/flutter/releasenote.html#v4-15-0-dev-2025-6-16-开发版)      |
 
-#### Flutter SDK 4.15.0 发版
+#### UIKit 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Flutter SDK 4.15.0 版本发布   | <br/> - 支持 [GIF 图片消息](/document/flutter/message_send.html#发送-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/flutter/group_attributes.html#管理群组头像)。<br/> - 支持 [消息附件鉴权功能](/document/flutter/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/document/flutter/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/flutter/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [获取群成员列表](/document/flutter/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。  | 2025-06-13     | [Flutter 4.15.0 更新日志](/document/flutter/releasenote.html#v4-15-0-dev-2025-6-16-开发版)      |
+| iOS 单群聊 UIKit 4.14.0 发版   | 支持 GIF 图片消息。 | 2025-6-23       | [iOS 单群聊 UIKit 4.14.0 更新日志](/uikit/chatuikit/ios/releasenote.html#v-4-14-0)          |
+| Web 单群聊 UIKit 1.7.0 发版   | 增加点击消息的回调事件。 | 2025-6-9       | [Web 单群聊 UIKit 4.14.0 更新日志](/uikit/chatuikit/web/releasenote.html#v1-7-0)          |
 
 ## 2025-05
 
-#### Android/iOS/Web/小程序 SDK 4.15.0 发版
+#### SDK 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | SDK 4.15.0 开发版发布  |<br/> - [撤回消息](/document/android/message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。<br/> - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。<br/> - 修改 Token [即将过期事件](/document/android/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。<br/> - 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](/document/android/demo.html#快速跑通-demo-源码)。 <br/> - Web/小程序端支持获取 [群组](/document/web/group_manage.html#获取群成员列表)/[聊天室成员列表](/document/web/room_members.html#获取聊天室成员列表) 时，列明成员的用户 ID 和角色。|  2025-05-21                 | <br/> - [Android 4.15.0 更新日志](/document/android/releasenote.html#v4-15-0-dev-2025-5-21-开发版)<br/> - [iOS 4.15.0 更新日志](/document/ios/releasenote.html#v4-15-0-dev-2025-5-21-开发版)<br/> - [Web 4.15.0 更新日志](/document/web/releasenote.html#v4-15-0-dev-2025-5-21-开发版) <br/> - [小程序 4.15.0 更新日志](/document/applet/releasenote.html#v4-15-0-dev-2025-5-21-开发版)                   |
+| HarmonyOS SDK 1.7.0 开发版发布   | <br/> - 支持 [发送](/document/harmonyos/message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](/document/harmonyos/message_send.html#接收-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/harmonyos/group_attributes.html#管理群组头像)。<br/> - 支持 [消息附件鉴权功能](/document/harmonyos/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/document/harmonyos/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/harmonyos/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [根据搜索范围搜索所有会话中的消息](/document/harmonyos/message_search.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](/document/harmonyos/message_search.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。    | 2025-05-15     | [HarmonyOS 1.7.0 更新日志](/document/harmonyos/releasenote.html#v1-7-0-dev-2025-5-15-开发版)      |
 
-#### HarmonyOS SDK 1.7.0 发版
+#### UIKit 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.7.0 开发版发布   | <br/> - 支持 [发送](/document/harmonyos/message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](/document/harmonyos/message_send.html#接收-gif-图片消息)。<br/> - 支持 [群组头像功能](/document/harmonyos/group_attributes.html#管理群组头像)。<br/> - 支持 [消息附件鉴权功能](/document/harmonyos/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/document/harmonyos/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/harmonyos/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [根据搜索范围搜索所有会话中的消息](/document/harmonyos/message_search.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](/document/harmonyos/message_search.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。    | 2025-05-15     | [HarmonyOS 1.7.0 更新日志](/document/harmonyos/releasenote.html#v1-7-0-dev-2025-5-15-开发版)      |
+| HarmonyOS UIKit 1.0.1 发版   | - 新增新请求页面，方便同意好友请求。<br/> - 新增发起新会话页面。 | 2025-5-21       | [HarmonyOS 单群聊 UIKit 1.0.1 更新日志](/uikit/chatuikit/harmonyos/releasenote.html#v1-0-1)          |
 
 ## 2025-04
 
-#### Android/iOS/Web/小程序 SDK 4.14.0 发版
+#### SDK 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | SDK 4.14.0 开发版发布   | <br/> - 支持 [发送](/document/android/message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](/document/android/message_receive.html#接收-gif-图片消息)。 <br/> - 支持 [群组头像功能](/document/android/group_attributes.html#管理群组头像)。 <br/> - 支持 [消息附件鉴权功能](/document/android/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](/document/android/message_retrieve.html#从服务器获取指定群成员发送的消息)。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/android/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - Android 端支持 [获取群成员信息时包括成员加群时间](/document/android/group_members.html#获取群成员信息)。<br/> - Web/小程序支持 [自定义设备平台](/document/web/multi_device.html#设置登录设备的平台)。<br/> - Uni-app 离线推送 Android 平台支持 [Google FCM](/document/applet/push/uniapp_push_fcm.html)。 | 2025-04-18       | <br/> - [Android 4.14.0 更新日志](/document/android/releasenote.html#v4-14-0-dev-2025-4-21-开发版)<br/> - [iOS 4.14.0 更新日志](/document/ios/releasenote.html#v4-14-0-dev-2025-4-21-开发版)<br/> - [Web 4.14.0 更新日志](/document/web/releasenote.html#v4-14-0-dev-2025-4-21-开发版) <br/> - [小程序 4.14.0 更新日志](/document/applet/releasenote.html#v4-14-0-dev-2025-4-21-开发版)         |
-
-#### HarmonyOS SDK 1.6.0 发版
-
-| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
-| :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.6.0 开发版发布   | <br/> - [支持修改各类型的消息](/document/harmonyos/message_modify.html)：<br/>1. 文本/自定义消息：支持修改消息内容（body）和扩展；<br/>2. 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段；<br/>4. 命令消息：不支持修改。    | 2025-04-9     | [HarmonyOS 1.6.0 更新日志](/document/harmonyos/releasenote.html#v1-6-0-dev-2025-4-9-开发版)      |
+| HarmonyOS SDK 1.6.0 开发版发布   | <br/> - [支持修改各类型的消息](/document/harmonyos/message_modify.html)：<br/>1. 文本/自定义消息：支持修改消息内容（body）和扩展；<br/>2. 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段；<br/>3. 命令消息：不支持修改。    | 2025-04-9     | [HarmonyOS 1.6.0 更新日志](/document/harmonyos/releasenote.html#v1-6-0-dev-2025-4-9-开发版)      |
+| React Native SDK 1.11.0 开发版发布   |- 更新 [修改消息](/document/react-native/message_modify.html)：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以修改消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持修改扩展信息。<br/> - 支持 [发送](/document/react-native/message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](/document/react-native/message_receive.html#接收-gif-图片消息)。<br/> - 支持 [消息附件鉴权功能](/document/react-native/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。<br/> - 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](/document/react-native/message_retrieve.html#从服务器获取指定群成员发送的消息)。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。<br/> - 支持加载本地会话消息时，[只加载指定群成员发送的消息](/document/react-native/message_retrieve.html#从本地获取指定群成员发送的消息)。<br/> - 支持 [根据关键字从本地数据库中获取单个会话的消息 ID 列表](/document/react-native/message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。<br/> - 支持 [根据消息 ID 列表获取本地消息](/document/react-native/message_retrieve.html#根据消息-id-列表获取本地消息)。<br/> - 更新 [根据搜索范围搜索当前会话中的消息](/document/react-native/message_search.html#根据搜索范围搜索当前会话中的消息) 接口 `getConvMsgsWithKeyword`, 新增 `senders` 参数，替换原来的 `sender` 参数。<br/> - [撤回消息](/document/react-native/message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。<br/> - 支持 [创建群组时设置群头像](/document/react-native/group_attributes.html#管理群组头像)。新增创建群组接口 `createGroupEx`，作废原接口 `createGroup`。<br/> - 支持 [修改群组头像](/document/react-native/group_attributes.html#修改群头像)。<br/> - 支持 [获取群成员列表](/document/react-native/group_manage.html#获取群成员列表) 时包括成员角色和入群时间。<br/> - 群组成员进出事件支持一次通知多个成员进出群组（调整前，SDK 会为每个加入/退出的成员单独回调一条事件）：新增群成员进出事件 [onMembersJoined](/document/react-native/group_manage.html#监听群组事件) 和 [onMembersExited](/document/react-native/group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 <br/> - 修改 Token 即将过期事件 [ChatConnectEventListener#onTokenWillExpire](/document/react-native/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。   | 2025-4-15       | [React Native 1.11.0 更新日志](/document/react-native/releasenote.html#v1-11-0-2025-4-15)          |
 
 ## 2025-03
 
@@ -67,9 +236,6 @@
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | SDK 4.13.0 开发版发布   | **新增特性**：<br/><br/> - [发送后修改消息接口支持修改各类消息](/document/android/message_modify.html)：<br/>1. 文本/自定义消息：支持修改消息内容（body）和扩展；<br/>2. 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段；<br/>4. 命令消息：不支持修改。<br/><br/> - 小程序 SDK 支持运行到微信小游戏平台。    | 2025-03-12     | <br/> - [Android 4.13.0 更新日志](/document/android/releasenote.html#v4-13-0-dev-2025-3-12)<br/> - [iOS 4.13.0 更新日志](/document/ios/releasenote.html#v4-13-0-dev-2025-3-12)<br/> - [Web 4.13.0 更新日志](/document/web/releasenote.html#v4-13-0-dev-2025-3-12) <br/> - [小程序 4.13.0 更新日志](/document/applet/releasenote.html#v4-13-0-dev-2025-3-12) <br/> - [Flutter 4.13.0 更新日志](/document/flutter/releasenote.html#v4-13-0-2025-3-28)|
-
-| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
-| :----- | :------- | :---------------- | :---------------- |
 | HarmonyOS SDK 1.5.2 开发版发布   | **新增特性**：<br/> - 支持 [清空聊天记录](/document/harmonyos/message_delete.html#清空聊天记录)：清除当前用户的单聊、群聊和聊天室的消息和会话记录，可选择是否清除服务端的聊天记录。<br/> - 支持检查 SDK 是否连接到环信服务器：自动登录的场景下，登录状态变为已登录时，可能 SDK 未成功连接至服务端，这种情况下与服务器交互的操作会失败，比如发消息。此时，可调用 `isConnected()` 接口判断 SDK 与服务器的连接状态。    | 2025-03-10     | [HarmonyOS 1.5.2 更新日志](/document/harmonyos/releasenote.html#v1-5-2-dev-2025-3-10-开发版)      |
 | HarmonyOS SDK 1.5.3 开发版发布   | **新增特性**：<br/> - 支持[从本地获取单个好友的用户 ID 和好友备注](/document/harmonyos/user_relationship.html#从本地获取好友列表)。    | 2025-03-17     | [HarmonyOS 1.5.3 更新日志](/document/harmonyos/releasenote.html#v1-5-3-dev-2025-3-17-开发版)      |
 
@@ -89,9 +255,17 @@
 
 ## 2025-01
 
+#### SDK 发版
+
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | SDK 4.12.0 开发版发布   | **新增特性**：<br/> - 移动端/Web/小程序/Windows/跨平台：用户加入聊天室可获取的信息新增聊天室当前人数、聊天室创建时间戳、当前用户是否在聊天室白名单中以及当前用户被禁言截止时间戳。<br/> - HarmonyOS [新增自定义设备的名称](/document/harmonyos/multi_device.html#设置登录设备的名称)：添加该功能后，在多设备场景下，若有设备被踢下线，被踢设备可知晓被哪个设备挤下线。 <br/> - HarmonyOS [新增自定义设备的平台](/document/harmonyos/multi_device.html#设置登录设备的平台)：例如，将手机和平板电脑设置为两个单独的平台，方便用户精细化控制同一平台的登录设备数量及平台间互踢等行为。 <br/> - HarmonyOS [新增两个错误码](/document/harmonyos/error.html)：`ChatError#GROUP_USER_IN_BLOCKLIST`（613）：该用户在群组黑名单中。群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。`ChatError#CHATROOM_USER_IN_BLOCKLIST`（707）：该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。 <br/> - HarmonyOS 新增拉取服务器漫游消息时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。<br/> **优化：** <br/> - HarmonyOS 删除服务端会话时会同时删除本地会话。 |  2025-01-11    | <br/> - [Android 4.12.0 更新日志](/document/android/releasenote.html#v4-12-0-dev-2025-1-10)<br/> - [iOS 4.12.0 更新日志](/document/ios/releasenote.html#v4-12-0-dev-2025-1-10)<br/> - [Web 4.12.0 更新日志](/document/web/releasenote.html#v4-12-0-2025-1-10) <br/> - [小程序 4.12.0 更新日志](/document/applet/releasenote.html#v4-12-0-2025-1-10) <br/> - [鸿蒙 1.5.0 更新日志](/document/harmonyos/releasenote.html#v1-5-0-dev-2025-1-10-开发版) <br/> - [Flutter 4.12.0 更新日志](/document/flutter/releasenote.html#v4-12-0-2025-1-17) <br/> - [React Native 1.8.0 更新日志](/document/react-native/releasenote.html#v1-8-0-2025-1-17)<br/> - [Unit 1.3.2 更新日志](/document/unity/releasenote.html#v1-3-2-2025-1-17)<br/> - [Windows 1.3.2 更新日志](/document/windows/releasenote.html#v1-3-2-2025-1-17)|
+
+#### UIKit 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| React Native 单群聊 UIKit 2.4.2 发版 | 增加置顶消息。| 2025-1-17 | [React Native 单群聊 UIKit 2.4.2 更新日志](/uikit/chatuikit/react-native/releasenote.html#v2-4-2) |
 
 ## 2024-12
 
@@ -103,19 +277,19 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.10.0 开发版发布   | **新增特性**：<br/> - 移动端支持获取数据库中的消息总数；<br/> - 移动端新增[两个错误码](/document/android/error.html)，用于提示用户在群组黑名单或聊天室黑名单中。群组或聊天室黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。<br/> - 移动端[单向删除服务端会话时也会删除本地会话](/document/android/conversation_delete.html#单向删除服务端会话及本地会话)。<br/> - Web/小程序端的聊天室公告修改事件返回更新的公告，即聊天室公告修改后，聊天室中的其他成员会通过事件收到更新的公告。<br/> - Web/小程序端新增错误码 208 `WEBIM_USER_ALREADY_LOGIN`，提示用户已登录。单设备登录时，若调用登录方法 `open` 时用户已经登录，会触发该错误；新增错误码 512 `MESSAGE_SEND_TIMEOUT`，提示发送消息超时，例如，连接断开时发送消息会提示该错误。| 2024-09-30      |  <br/> - [Android 4.10.0 更新日志](/document/android/releasenote.html#v4-10-0-2024-09-30)<br/> - [iOS 4.10.0 更新日志](/document/ios/releasenote.html#v4-10-0-2024-09-30)<br/> - [Web 4.10.0 更新日志](/document/web/releasenote.html#v4-10-0-dev-2024-10-11-开发版) <br/> - [小程序 4.10.0 更新日志](/document/applet/releasenote.html#v4-10-0-dev-2024-10-11-开发版)  |
+| SDK 4.10.0 开发版发布   | **新增特性**：<br/> - 移动端支持获取数据库中的消息总数；<br/> - 移动端新增 [两个错误码](/document/android/error.html)，用于提示用户在群组黑名单或聊天室黑名单中。群组或聊天室黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。<br/> - 移动端 [单向删除服务端会话时也会删除本地会话](/document/android/conversation_delete.html#单向删除服务端会话及本地会话)。<br/> - Web/小程序端的聊天室公告修改事件返回更新的公告，即聊天室公告修改后，聊天室中的其他成员会通过事件收到更新的公告。<br/> - Web/小程序端新增错误码 208 `WEBIM_USER_ALREADY_LOGIN`，提示用户已登录。单设备登录时，若调用登录方法 `open` 时用户已经登录，会触发该错误；新增错误码 512 `MESSAGE_SEND_TIMEOUT`，提示发送消息超时，例如，连接断开时发送消息会提示该错误。| 2024-09-30      |  <br/> - [Android 4.10.0 更新日志](/document/android/releasenote.html#v4-10-0-2024-09-30)<br/> - [iOS 4.10.0 更新日志](/document/ios/releasenote.html#v4-10-0-2024-09-30)<br/> - [Web 4.10.0 更新日志](/document/web/releasenote.html#v4-10-0-dev-2024-10-11-开发版) <br/> - [小程序 4.10.0 更新日志](/document/applet/releasenote.html#v4-10-0-dev-2024-10-11-开发版)  |
 | SDK 4.9.1 开发版发布   | uni-app SDK 支持[离线推送](/document/applet/push/uniapp_push.html)。 | 2024-09-06      | [小程序 4.9.1 更新日志](/document/applet/releasenote.html#v4-9-1-dev-2024-09-06-开发版)         |
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.4.0 开发版发布 | **新增特性**：<br/> - 新增[置顶消息功能](/document/harmonyos/message_pin.html#消息置顶)。<br/> - 新增[根据单个或多个消息类型，搜索本地数据库中所有会话或单个会话中的消息](/document/harmonyos/message_search.html#根据消息类型搜索会话消息)。<br/> - 支持[获取 SDK 本地数据库中会话某个时间段内的全部消息数](/document/harmonyos/message_retrieve.html#获取会话在一定时间内的消息数)。<br/> - 支持[会话推送通知方式的本地存储](/document/harmonyos/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置)，并支持从服务器获取所有会话的推送通知方式的设置。<br/> - 支持[设备登录时携带自定义扩展信息并传递给被踢的设备](/document/harmonyos/multi_device.html#设置登录设备的扩展信息)，应用于被踢设备展示提示信息或进行业务判断。<br/> - 支持用户上线后从服务端拉取离线消息时[收到拉取开始和结束的通知](/document/harmonyos/connection.html)。 <br/> - 支持[查看当前用户是否在群组禁言列表中](/document/harmonyos/group_members.html#检查自己是否在禁言列表中)。<br/> - 支持[错误码 213 ChatError#USER_BIND_ANOTHER_DEVICE](/document/harmonyos/error.html)，用于当用户达到登录设备上线时，当前设备无法登录的场景。<br/> - 支持在撤回消息的事件中[返回被撤回的消息所属的会话 ID](/document/harmonyos/message_recall.html#设置消息撤回监听)。<br/> - 支持[加入聊天室时携带扩展信息，并指定是否退出之前加入的全部聊天室](/document/harmonyos/room_manage.html#加入聊天室)。当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。<br/> - 支持[从服务端单向删除聊天室漫游消息](/document/harmonyos/message_delete.html#单向删除服务端的历史消息)。| 2024-09-30  | [HarmonyOS 1.4.0 更新日志](/document/harmonyos/releasenote.html#v1-4-0-dev-2024-09-30-开发版)  |
-| HarmonyOS SDK 1.3.0 开发版发布     | **新增特性**：<br/> - HarmonyOS 端新增[群成员自定义属性](/document/harmonyos/group_members.html#管理群成员的自定义属性)功能。 <br/> - HarmonyOS 端新增[设置推送通知的显示内容](/document/harmonyos/push/push_display.html) 、[推送通知方式和免打扰模式功能](/document/harmonyos/push/push_notification_mode_dnd.html)。 <br/> - HarmonyOS 端新增[用户在线状态订阅](/document/harmonyos/presence.html)功能。 <br/> - 新增[聊天室自定义属性](/document/harmonyos/room_attributes.html#管理聊天室自定义属性-key-value)功能。 | 2024-09-09         | [HarmonyOS 1.3.0 更新日志](/document/harmonyos/releasenote.html#v1-3-0-dev-2024-09-10-开发版)  |
+| HarmonyOS SDK 1.4.0 开发版发布 | **新增特性**：<br/> - 新增[置顶消息功能](/document/harmonyos/message_pin.html#消息置顶)。<br/> - 新增 [根据单个或多个消息类型，搜索本地数据库中所有会话或单个会话中的消息](/document/harmonyos/message_search.html#根据消息类型搜索会话消息)。<br/> - 支持 [获取 SDK 本地数据库中会话某个时间段内的全部消息数](/document/harmonyos/message_retrieve.html#获取会话在一定时间内的消息数)。<br/> - 支持 [会话推送通知方式的本地存储](/document/harmonyos/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置)，并支持从服务器获取所有会话的推送通知方式的设置。<br/> - 支持 [设备登录时携带自定义扩展信息并传递给被踢的设备](/document/harmonyos/multi_device.html#设置登录设备的扩展信息)，应用于被踢设备展示提示信息或进行业务判断。<br/> - 支持用户上线后从服务端拉取离线消息时 [收到拉取开始和结束的通知](/document/harmonyos/connection.html)。 <br/> - 支持 [查看当前用户是否在群组禁言列表中](/document/harmonyos/group_members.html#检查自己是否在禁言列表中)。<br/> - 支持 [错误码 213 ChatError#USER_BIND_ANOTHER_DEVICE](/document/harmonyos/error.html)，用于当用户达到登录设备上线时，当前设备无法登录的场景。<br/> - 支持在撤回消息的事件中 [返回被撤回的消息所属的会话 ID](/document/harmonyos/message_recall.html#设置消息撤回监听)。<br/> - 支持 [加入聊天室时携带扩展信息，并指定是否退出之前加入的全部聊天室](/document/harmonyos/room_manage.html#加入聊天室)。当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。<br/> - 支持 [从服务端单向删除聊天室漫游消息](/document/harmonyos/message_delete.html#单向删除服务端的历史消息)。| 2024-09-30  | [HarmonyOS 1.4.0 更新日志](/document/harmonyos/releasenote.html#v1-4-0-dev-2024-09-30-开发版)  |
+| HarmonyOS SDK 1.3.0 开发版发布     | **新增特性**：<br/> - HarmonyOS 端新增 [群成员自定义属性](/document/harmonyos/group_members.html#管理群成员的自定义属性)功能。 <br/> - HarmonyOS 端新增 [设置推送通知的显示内容](/document/harmonyos/push/push_display.html) 、[推送通知方式和免打扰模式功能](/document/harmonyos/push/push_notification_mode_dnd.html)。 <br/> - HarmonyOS 端新增 [用户在线状态订阅](/document/harmonyos/presence.html)功能。 <br/> - 新增 [聊天室自定义属性](/document/harmonyos/room_attributes.html#管理聊天室自定义属性-key-value)功能。 | 2024-09-09         | [HarmonyOS 1.3.0 更新日志](/document/harmonyos/releasenote.html#v1-3-0-dev-2024-09-10-开发版)  |
 
 ## 2024-08
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.9.0 开发版发布  | **新增特性**：<br/> - 用户上线后从服务端拉取离线消息时，会[收到拉取开始和结束的通知](/document/android/connection.html)。<br/> - 单聊会话支持[消息置顶](/document/android/message_pin.html)。<br/> - 移动端支持查看当前用户是否在指定的群组的禁言列表中。<br/> - 移动端撤回消息后，你[收到的通知中会体现消息所属的会话 ID](/document/android/message_recall.html#设置消息撤回监听)。<br/> - Web 端可[查看 app 下设置了推送通知方式（接收所有人通知、只接收 @ 我的通知和不接收任何通知）的所有会话](/document/web/push/push_notification_mode_dnd.html#获取设置了推送通知方式的所有会话)。<br/> - 对于 Web 端，你若设置了指定会话的推送通知方式或免打扰时长或时间段，[其他设备会收到事件通知](/document/web/push/push_notification_mode_dnd.html#设置单个会话的推送通知)。<br/> - 对于 Web 端，你若清除了会话的推送通知方式，[其他设备会收到事件通知](/document/web/push/push_notification_mode_dnd.html#清除单个会话的推送通知方式的设置)。| 2024-08-30       |  <br/> - [Android 4.9.0 更新日志](/document/android/releasenote.html#v4-9-0-dev-2024-08-30-开发版)<br/> - [iOS 4.9.0 更新日志](/document/ios/releasenote.html#v4-9-0-dev-2024-08-30-开发版) <br/> - [Web 4.9.0 更新日志](/document/web/releasenote.html#v4-9-0-dev-2024-08-30-开发版) |
+| SDK 4.9.0 开发版发布  | **新增特性**：<br/> - 用户上线后从服务端拉取离线消息时，会 [收到拉取开始和结束的通知](/document/android/connection.html)。<br/> - 单聊会话支持 [消息置顶](/document/android/message_pin.html)。<br/> - 移动端支持查看当前用户是否在指定的群组的禁言列表中。<br/> - 移动端撤回消息后，你 [收到的通知中会体现消息所属的会话 ID](/document/android/message_recall.html#设置消息撤回监听)。<br/> - Web 端可 [查看 app 下设置了推送通知方式（接收所有人通知、只接收 @ 我的通知和不接收任何通知）的所有会话](/document/web/push/push_notification_mode_dnd.html#获取设置了推送通知方式的所有会话)。<br/> - 对于 Web 端，你若设置了指定会话的推送通知方式或免打扰时长或时间段，[其他设备会收到事件通知](/document/web/push/push_notification_mode_dnd.html#设置单个会话的推送通知)。<br/> - 对于 Web 端，你若清除了会话的推送通知方式，[其他设备会收到事件通知](/document/web/push/push_notification_mode_dnd.html#清除单个会话的推送通知方式的设置)。| 2024-08-30       |  <br/> - [Android 4.9.0 更新日志](/document/android/releasenote.html#v4-9-0-dev-2024-08-30-开发版)<br/> - [iOS 4.9.0 更新日志](/document/ios/releasenote.html#v4-9-0-dev-2024-08-30-开发版) <br/> - [Web 4.9.0 更新日志](/document/web/releasenote.html#v4-9-0-dev-2024-08-30-开发版) |
 
 ## 2024-07
 
@@ -145,7 +319,6 @@
 | SDK 4.5.0 开发版发布 | **新增特性**：<br/> - 客户端可[置顶消息](/document/android/message_pin.html)，方便会话中的所有用户快速查看重要消息。<br/> - 客户端的消息修改回调中可返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。<br/> - 客户端支持[获取聊天室漫游消息](/document/android/message_retrieve.html#从服务器获取指定会话的消息)。若使用该功能，你需要联系商务开通。<br/> - Android 端 SDK 集成支持[动态加载 .so 库文件](/document/android/quickstart.html#方法三-动态加载-so-库文件)，减少应用安装包的大小。<br/> - iOS 端可[将所有会话的未读消息设为已读](/document/ios/conversation_unread.html#将所有会话的未读消息数清零)，将所有会话的未读消息数清零。<br/>**优化**：<br/> - 优化 token 登录时的错误提示信息，使错误提示更准确。<br/> - 移动端优化[单条转发](/document/android/message_forward.html)功能，附件消息无需重新上传附件即可转发。 | 2024-04-03 | <br/> - [Android 4.5.0 更新日志](/document/android/releasenote.html#v4-5-0-dev-2024-04-03-开发版)<br/> - [iOS 4.5.0 更新日志](/document/ios/releasenote.html#v4-5-0-dev-2024-04-03-开发版)<br/> - [Web 4.6.0 更新日志](/document/web/releasenote.html#v4-6-0-dev-2024-04-02-开发版)<br/> - [小程序 4.6.0 更新日志](/document/applet/releasenote.html#v4-6-0-dev-2024-04-02-开发版)<br/> - [Flutter 4.5.0 更新日志](/document/flutter/releasenote.html#v4-5-0-2024-5-7)。<br/> - [React Native 1.4.0 更新日志](/document/react-native/releasenote.html#v1-4-0-2024-5-7)<br/> - [Unity 1.3.0 更新日志](/document/unity/releasenote.html#v1-3-0-dev-2024-5-7-开发版)<br/> - [Windows 1.3.0 更新日志](/document/windows/releasenote.html#v1-3-0-dev-2024-5-7-开发版)|
 | REST API |**新增 API**： <br/> 1. [分页获取好友列表](/document/server-side/user_friend_list_paged.html)；<br/> 2. [单向清空漫游消息](/document/server-side/message_delete_roam_single_msgid.html)：[根据时间单向清空单聊会话的漫游消息](/document/server-side/message_delete_roam_single_time.html)；[根据时间单向清空群组或聊天室会话的漫游消息](/document/server-side/message_delete_roam_group_room_time.html)；[清空用户的所有漫游消息](/document/server-side/message_delete_roam_user.html)；<br/> 3. [修改文本或自定义消息](/document/server-side/message_modify.html)；<br/> 4. [转让聊天室](/document/server-side/chatroom_owner_transfer.html)；<br/> 5. [强制指定账号从单设备下线](/document/server-side/account_offline_device_single.html)。| 2024-04 | 关于接口的调用频率限制，详见 [API 调用频率限制](/document/server-side/limitationapi.html)。 |
 
-
 ## 2024-01
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
@@ -162,7 +335,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.2.0 开发版发布 | **新增特性**：<br/> - 客户端支持[好友备注功能](/document/android/releasenote.html)。<br/> - 客户端支持聊天室全局广播消息，可根据消息属性判断。<br/> - 移动端可以[从服务器获取当前用户已加入的群组数量](/document/android/group_manage.html#查询当前用户已加入的群组数量)。<br/> - 移动端在申请入群被拒绝时，返回的回调中增加了申请者和拒绝者。<br/> - 移动端在初始化时可配置获取会话列表时是否返回空会话。<br/> **优化** <br/> - 客户端统一 Agora Token 和 EaseMob Token 登录方式，新增 EaseMob Token 即将过期及已过期的回调。<br/> - 移动端优化发消息时重试的逻辑。<br/> - 移动端优化数据库升级逻辑。| 2023-11-17  | <br/> - [Android 4.2.1 更新日志](/document/android/releasenote.html#v4-2-1-dev-2023-11-17)<br/> - [iOS 4.2.0 更新日志](/document/ios/releasenote.html#v4-2-0-dev-2023-11-13)<br/> - [Web 4.3.0 更新日志](/document/web/releasenote.html#v4-3-0-dev-2023-11-17)<br/> - [小程序 4.3.0 更新日志](/document/applet/releasenote.html#v4-3-0-dev-2023-11-17)。<br/> - [Flutter 4.2.0 更新日志](/document/flutter/releasenote.html#v4-2-0-2024-1-4)<br/> - [React Native 1.3.0 更新日志](/document/react-native/releasenote.html#v1-3-0-2024-1-4)  |
+| SDK 4.2.0 开发版发布 | **新增特性**：<br/> - 客户端支持[好友备注功能](/document/android/releasenote.html)。<br/> - 客户端支持聊天室全局广播消息，可根据消息属性判断。<br/> - 移动端可以[从服务器获取当前用户已加入的群组数量](/document/android/group_manage.html#查询当前用户已加入的群组数量)。<br/> - 移动端在申请入群被拒绝时，返回的回调中增加了申请者和拒绝者。<br/> - 移动端在初始化时可配置获取会话列表时是否返回 [空会话](/document/android/conversation_overview.html#空会话)。<br/> **优化** <br/> - 客户端统一 Agora Token 和 EaseMob Token 登录方式，新增 EaseMob Token 即将过期及已过期的回调。<br/> - 移动端优化发消息时重试的逻辑。<br/> - 移动端优化数据库升级逻辑。| 2023-11-17  | <br/> - [Android 4.2.1 更新日志](/document/android/releasenote.html#v4-2-1-dev-2023-11-17)<br/> - [iOS 4.2.0 更新日志](/document/ios/releasenote.html#v4-2-0-dev-2023-11-13)<br/> - [Web 4.3.0 更新日志](/document/web/releasenote.html#v4-3-0-dev-2023-11-17)<br/> - [小程序 4.3.0 更新日志](/document/applet/releasenote.html#v4-3-0-dev-2023-11-17)。<br/> - [Flutter 4.2.0 更新日志](/document/flutter/releasenote.html#v4-2-0-2024-1-4)<br/> - [React Native 1.3.0 更新日志](/document/react-native/releasenote.html#v1-3-0-2024-1-4)  |
 | REST API    | 支持[通过 REST API 向 app 下的所有活跃聊天室发送全局广播消息](/document/server-side/broadcast_to_chatrooms.html) 。活跃聊天室指聊天室至少存在一个成员，而且至少发送过一条消息。| 2023-11-17  | 详见[发送聊天室广播消息](/document/server-side/broadcast_to_chatrooms.html)。  |
 | IM Demo   | 好友详情页面可添加和修改好友备注。 | 2023-11-17       | <br/> - [Android 4.2.1 Demo](https://www.easemob.com/download/demo) <br/> - [iOS 4.2.0 Demo](https://www.easemob.com/download/demo)        |
 

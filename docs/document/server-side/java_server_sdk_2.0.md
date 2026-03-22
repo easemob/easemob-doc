@@ -11,7 +11,7 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 ## 前提条件
 
 - Java 1.8
-- 有效的环信即时通讯 IM 开发者账号和 App Key、Client ID、ClientSecret、BasePath (对应的 RESTful API 域名，详见环信控制台的 **应用概览**页面下的 **开发配置信息** 区域)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key、Client ID、ClientSecret、BasePath (对应的 RESTful API 域名。详见环信控制台的 **应用概览**页面下的 **开发配置信息** 区域的 RESTful API 的服务器域名)。
 
 ## 实现方法
 
@@ -45,7 +45,8 @@ public class Config {
     static {
         try {
             com.easemob.im.Configuration.setDefaultApiClient(ApiClient.builder()
-                    .setBasePath("Rest BasePath")
+            //BasePath 对应的 RESTful API 域名。详见环信控制台的 “应用概览” 页面中的 “开发配置信息” 区域的 RESTful API 的服务器域名。
+                    .setBasePath("BasePath")
                     .setAppKey("Appkey")
                     .setClientId("Client ID")
                     .setClientSecret("Client Secret")

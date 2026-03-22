@@ -11,7 +11,7 @@
 使用 SDK 前需要进行初始化，示例代码如下：
 
 ```javascript
-const conn = new EC.connection({
+const conn = new WebIM.connection({
   appKey: "your appKey",
   url: "wss://im-api-wechat.easemob.com/websocket",
   apiUrl: "https://a1.easemob.com",

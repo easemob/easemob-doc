@@ -13,7 +13,9 @@
 
 创建推送任务前，你需在 [环信控制台](https://console.easemob.com/user/login) 开通即时推送服务。
 
-若仅需测试推送功能，请使用全功能应用 `Demo`，在对话框中点击 **测试DemoKey**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)。
+2. 在左侧导航栏，选择 **增值功能** > **即时推送**。
+3. 在 **即时推送** 页面，选择 **立即订阅**，开通即时推送服务。
 
 ![img](/images/console/push_task_create.png)
 

@@ -2,6 +2,17 @@
 
 <Toc />
 
+## 4.18.1 2026-3-5
+
+修复入群事件 [onMemberJoinedFromGroup](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMGroupEventHandler/onMemberJoinedFromGroup.html) 和退群事件 [onMemberExitedFromGroup](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMGroupEventHandler/onMemberExitedFromGroup.html) 触发了错误的回调的问题。
+
+## 4.18.0 2026-3-4
+
+- 依赖的原生 `SDK` 升级:
+  - `iOS` 升级至 4.18.1
+  - `Android` 升级至 4.18.1
+- 底层支持安全 DNS 解析 DoH，提高连通性。
+
 ## v4.17.0 2025-12-17
 
 #### 新增特性
@@ -22,7 +33,7 @@
 - 依赖的原生 `SDK` 升级:
   - `iOS` 升级至 4.16.2
   - `Android` 升级至 4.16.1
-- 支持 [按消息 ID 获取本地单个会话的单条或多条消息](message_retrieve.html#根据消息-id-获取单条或多条本地消息)。
+- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
 - 支持私有部署时设置 IPv6 格式的 REST 地址。
 
 #### 优化

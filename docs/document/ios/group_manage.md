@@ -147,10 +147,11 @@ NSArray *admins = aGroup.adminList;
 1. 自 4.14.0 版本开始，获取群成员列表时可包括群成员的用户 ID、群成员角色和入群时间。
 
 ```objectivec
+// limit：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
 NSString* cursor = nil;
 [EMClient.sharedClient.groupManager fetchGroupMemberInfoListFromServerWithGroupId:@"groupId" cursor:cursor limit:20 completion:^(EMCursorResult<EMGroupMemberInfo *> * _Nullable cursorResult, EMError * _Nullable error) {
         for (EMGroupMemberInfo * memberInfo in cursorResult.list) {
-            NSString* userId = memberInfo.userId;// 成员Id
+            NSString* userId = memberInfo.userId;// 成员的用户 ID
             NSUInteger joinedTs = memberInfo.joinedTimestamp; // 成员入群时间
             EMGroupPermissionType role = memberInfo.role; //成员角色
         }
@@ -171,7 +172,7 @@ EMGroup *group = [[EMClient sharedClient].groupManager
 NSArray *memberList = group.memberList;
 ```
 
-- 当群成员数量大于等于 200 时，你可以首先调用 `getGroupSpecificationFromServerWithId` 方法获取群主和群管理员，然后调用 `getGroupMemberListFromServerWithId` 方法获取普通群成员列表：
+- 当群成员数量大于等于 200 时，你可以首先调用 `getGroupSpecificationFromServerWithId` 方法获取群主和群管理员，然后调用 `getGroupMemberListFromServerWithId` 方法获取普通群成员列表。
 
 ```objectivec
 EMGroup *group = [[EMClient sharedClient].groupManager
@@ -179,6 +180,8 @@ EMGroup *group = [[EMClient sharedClient].groupManager
                                           fetchMembers:NO
                                           error:nil];
 NSMutableArray *memberList = [[NSMutableArray alloc]init];
+
+// pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
 NSInteger pageSize = 50;
 NSString *cursor = nil;
 EMCursorResult *result = [[EMCursorResult alloc]init];

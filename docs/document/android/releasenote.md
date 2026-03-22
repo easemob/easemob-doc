@@ -2,6 +2,36 @@
 
 <Toc />
 
+## v4.19.1 Dev 2026-2-27（开发版）
+
+#### 优化
+
+优化调用登录方法 `login` 时对未初始化 SDK 的处理逻辑。
+
+#### 修复
+
+修复转发附件类型消息时发送失败的问题。
+
+## v4.19.0 Dev 2026-2-2（开发版）
+
+#### 新增特性
+
+支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+
+目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
+
+#### 优化
+
+SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
+
+#### 修复
+
+- **推送服务**：修复推送访问令牌绑定异常的问题。
+- **初始化校验**：为 `EMClient` 类中的方法增加初始化状态检查，避免未初始化时调用。
+- **附件消息**：修复发送附件消息时，`remote_url` 与 `secret` 信息丢失的问题。
+- **网络兼容**：修复 WebSocket 在 IPv6 网络环境下无法正常连接的问题。
+- **连接状态**：修复 msync 连接状态上报不准确的情况。
+
 ## v4.18.1 Dev 2025-11-12（开发版）
 
 #### 优化
@@ -50,7 +80,7 @@
 #### 新增特性 
 
 1. 长连接支持 WebSocket 协议。 
-2. `EMOptions` 新增 API 支持 WebSocket 私有部署:
+2. 支持 WebSocket 私有部署:
    - `EMOptions#setWebSocketServer`：设置 WebSocket 服务器地址。
    - `EMOptions#getWebSocketServer`：获取设置的 WebSocket 服务器地址。
    - `EMOptions#setWebSocketPort`：设置 WebSocket 服务器端口号。
@@ -103,7 +133,7 @@
 #### 新增特性 
 
 1. [根据关键字从本地数据库中获取单个会话的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
-2. [根据消息 ID 从本地数据库获取单个或多个消息](message_retrieve.html#根据消息-id-获取单个或多个本地消息)。
+2. [根据消息 ID 从本地数据库获取单个或多个消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
 
 #### 修复
 

@@ -58,6 +58,8 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
         appKey: 'your app key', // 你的 app key
         userId: 'user ID', // 用户 ID
         password: 'password', // 如果使用密码登录，传入密码。
+        // 若通过 token 登录，使用下面的代码：
+        // token: "token",
       }}
     />
   </div>

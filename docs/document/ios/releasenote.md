@@ -2,6 +2,31 @@
 
 <Toc />
 
+## v4.19.1 Dev 2026-2-27（开发版）
+
+- 修复从版本 4.19.0 引入的合并转发消息失败的问题。
+- 修复在异步线程中多次调用 `currentUsername` 时偶发的应用崩溃问题。
+
+## v4.19.0 Dev 2026-2-2（开发版）
+
+#### 新增特性
+
+支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+
+目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
+
+#### 优化
+
+SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用此版本的 IM SDK，请注意需搭配相应版本的声网 RTC SDK ShengwangRtcEngine_iOS 4.6.0 或以上版本。
+   
+#### 修复
+
+- 修复发送附件消息时，`remote_url` 与 `secret` 信息丢失的问题。
+- 修复 WebSocket 在 IPv6 网络环境下无法正常连接的问题。
+- 修复 msync 连接状态上报不准确的情况。
+- 修复应用挂起期间，其他设备登录后推送 Token 不更新的问题。
+- 修复获取群组详情并获取成员时，同步与异步方法行为不一致的问题：异步方法在发生错误时不返回群组对象。
+
 ## v4.18.1 Dev 2025-11-12（开发版）
 
 #### 优化
@@ -50,7 +75,11 @@
 
 #### 新增特性 
 
-长连接支持 WebSocket 协议。
+- 长连接支持 WebSocket 协议。
+- 支持 WebSocket 私有部署:
+  - `EMOptions#webSocketServer`：设置 WebSocket 服务器地址。
+  - `EMOptions#webSocketPort`：设置 WebSocket 服务器端口号。
+  - `EMOptions#enableTLSConnection`：设置 WebSocket 协议是否使用 WSS 协议。
 
 #### 优化
 
@@ -98,7 +127,7 @@
 #### 新增特性 
 
 1. [根据关键字从本地数据库中获取单个会话的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
-2. [根据消息 ID 从本地数据库获取单个或多个消息](message_retrieve.html#根据消息-id-获取单个或多个本地消息)。
+2. [根据消息 ID 从本地数据库获取单个或多个消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
 
 #### 修复
 

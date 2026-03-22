@@ -238,12 +238,12 @@ export const zhNavbar = navbar([
             text: 'Java 2.0',
             icon: '/icon-platform.svg',
             link: 'https://github.com/easemob/easemob-im-server-sdk/tree/master_java_2.0/src/test/java/com/easemob/im/api'
+          },
+          {
+            text: 'PHP',
+            icon: '/icon-platform.svg',
+            link: 'https://easemob.github.io/im-php-server-sdk/annotated.html'
           }
-          // {
-            // text: 'PHP',
-            // icon: '/icon-platform.svg',
-            // link: 'https://easemob.github.io/im-php-server-sdk/annotated.html'
-          // }
         ]
       }
     ]

@@ -4,7 +4,8 @@
 
 ## 功能说明
 
-该 API 根据指定的消息的 ID 和表情 ID 获取对应的 Reaction 信息，包括使用了该 Reaction 的用户 ID 及用户人数。
+- 该 API 根据指定的消息的 ID 和表情 ID 获取对应的 Reaction 信息，包括使用了该 Reaction 的用户 ID 及用户人数。
+- 关于 Reaction 的详细使用限制，详见 [产品使用限制](limitation.html) 文档。
 
 ## 功能开通
 

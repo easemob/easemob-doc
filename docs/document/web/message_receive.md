@@ -15,7 +15,6 @@
 
 - 你可以通过 `addEventHandler` 注册监听器监听消息事件。你可以添加多个事件。当不再监听事件时，请确保删除监听器。
 - 当消息到达时，接收方会收到 `onTextMessage` 回调。每个回调包含一条或多条消息。你可以遍历消息列表，并可以解析和展示回调中的消息。
-- 对于聊天室消息，你可以通过消息的 `broadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 
 ```javascript
 // 使用 `addEventHandler` 监听回调事件
@@ -29,8 +28,6 @@ conn.addEventHandler("eventName", {
 语音、图片、视频和文件消息本质上是附件消息。
 
 接收方可以自行下载语音、图片、图片缩略图、视频和文件。
-
-自 SDK 4.14.0 开始，支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户须调用 SDK 的 API `EC.utils.download` 下载消息附件。
 
 ### 接收语音消息
 
@@ -174,3 +171,13 @@ connection
     console.log("合并消息解析后的消息列表", res);
   });
 ```
+
+## 更多
+
+### 判断消息是否为聊天室广播消息
+
+自 4.3.0 版本开始，对于聊天室消息，你可以通过消息的 `broadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
+
+### 消息附件下载鉴权
+
+自 SDK 4.14.0 开始，支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户须调用 SDK 的 API `WebIM.utils.download` 下载消息附件。

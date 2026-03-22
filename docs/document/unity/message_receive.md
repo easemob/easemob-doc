@@ -12,8 +12,7 @@
 ## 接收文本消息
 
 - 你可以用注册监听 `IChatManagerDelegate` 接收消息。该 `IChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除该监听。如在析构 `IChatManagerDelegate` 的继承实例之前。
-- 在新消息到来时，你会收到 `OnMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `Options#IncludeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
-- 对于聊天室消息，你可以通过消息的 `Message#Broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
+- 在新消息到来时，你会收到 `OnMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
 ```csharp
 //继承并实现 IChatManagerDelegate。
@@ -86,7 +85,6 @@ foreach (var msg in messages)
 3. 使用`DownloadAttachment`下载完成后，可获取消息的图片文件和缩略图。
 
 ```csharp
-
 SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
   onSuccess: () => {
     Debug.Log($"下载附件成功");
@@ -121,7 +119,30 @@ SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
     Debug.Log($"附件下载失败，errCode={code}, errDesc={desc}");
   }
 ));
+```
 
+### 接收 GIF 图片消息
+
+自 Unity SDK 1.4.0 开始，支持接收 GIF 图片消息。
+
+图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
+
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `OnMessagesReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `true`， 则为 GIF 图片消息。
+
+```csharp
+public void OnMessagesReceived(List<Message> messages)
+{
+    foreach (var msg in messages)
+    {
+        if (msg.Body is ImageBody imageBody)
+        {
+            if (imageBody.isGif == true) {
+                // 根据业务情况处理 gif message, 例如下载展示该消息
+            }
+        }
+    }
+
+}
 ```
 
 ### 接收视频消息
@@ -267,4 +288,14 @@ SDKClient.Instance.ChatManager.FetchCombineMessageDetail(msg, new ValueCallBack<
     }
 ));
 ```
+
+## 更多
+
+### 消息接收回调返回发送成功的消息
+
+自 1.3.0 版本开始，若在初始化时打开了 `Options#IncludeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
+
+### 判断消息是否为聊天室广播消息
+
+自 1.3.0 版本开始，对于聊天室消息，你可以通过消息的 `Message#Broadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 

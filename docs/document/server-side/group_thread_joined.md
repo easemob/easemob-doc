@@ -3,7 +3,7 @@
 ## 功能说明
 
 - 根据用户 ID 获取该用户加入的所有子区。
-- 使用该接口前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通子区功能。
+- 使用该接口前，你需要联系商务开通子区功能。
 
 ## 调用频率上限
 
@@ -97,6 +97,6 @@ curl -X GET https://XXXX/XXXX/XXXX/threads/user/test4   \
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | query param reaches limit. | 分页参数 `limit` 的值过大。   | 检查查询参数 `limit` 是否在取值范围（[1,50]）内。   |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 调用该接口前，你需要联系商务开通子区功能。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

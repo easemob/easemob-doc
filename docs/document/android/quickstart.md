@@ -126,32 +126,6 @@ dependencies {
 -dontwarn  com.hyphenate.**
 ```
 
-### 5. 其他集成问题
-
-当同时集成环信 SDK 4.11.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
-
-```java
-com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'lib/x86/libaosl.so'
-```
-
-可在 app 的 `build.gradle` 文件的 Android 节点中添加 `packagingOptions` 节点，指定在构建过程中优先选择第一个匹配的文件：
-
-```gradle
-android {
-  ...
-  packagingOptions {
-    pickFirst 'lib/x86/libaosl.so'
-    pickFirst 'lib/x86_64/libaosl.so'
-    pickFirst 'lib/armeabi-v7a/libaosl.so'
-    pickFirst 'lib/arm64-v8a/libaosl.so'
-  }
-}
-```
-
-然后 Gradle 文件同步，重新构建项目。
-
-如欲了解详情，请参见 [声网官方文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
-
 ## 实现单聊
 
 本节介绍如何实现单聊。
@@ -221,3 +195,29 @@ EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
+
+## 常见问题
+
+### SDK 依赖的 Crash 上报库冲突
+
+当同时集成环信 SDK 4.11.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
+
+```java
+com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'lib/x86/libaosl.so'
+```
+
+可在 app 的 `build.gradle` 文件的 Android 节点中添加 `packagingOptions` 节点，指定在构建过程中优先选择第一个匹配的文件：
+
+```gradle
+android {
+  ...
+  packagingOptions {
+    pickFirst 'lib/x86/libaosl.so'
+    pickFirst 'lib/x86_64/libaosl.so'
+    pickFirst 'lib/armeabi-v7a/libaosl.so'
+    pickFirst 'lib/arm64-v8a/libaosl.so'
+  }
+}
+```
+
+然后 Gradle 文件同步，重新构建项目。如欲了解详情，请参见 [声网官方文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。

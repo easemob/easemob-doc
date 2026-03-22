@@ -2,7 +2,7 @@
 
 <Toc />
 
-子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。使用子区消息功能前，你需要在 [环信控制台](https://console.easemob.com/user/login)开通。详见 [环信控制台文档](/product/console/basic_conversation_group_chatroom.html#消息话题)。
+子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。使用子区功能前，你需要联系商务开通。
 
 本文介绍环信即时通讯 IM SDK 如何发送、接收以及撤回子区消息。
 
@@ -27,7 +27,7 @@
 - 完成 4.0.7 及以上版本 SDK 初始化，详见 [快速开始](quickstart.html)；
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 已在 [环信控制台](https://console.easemob.com/user/login) 开通子区功能。详见 [环信控制台文档](/product/console/basic_conversation_group_chatroom.html#消息话题)。
+- 已联系商务开通子区功能。
 
 ## 实现方法
 
@@ -57,7 +57,7 @@ function sendTextMessage() {
         isChatThread: 'true',   
     }
     let msg = WebIM.message.create(option); 
-    connection.send(msg).then(() => {
+    conn.send(msg).then(() => {
         console.log('send text message success');  
     }).catch((e) => {
         console.log("send text message error");  
@@ -73,7 +73,7 @@ function sendTextMessage() {
 
 ```javascript
 // 监听收到的文本消息
-connection.addEventHandler('THREADMESSAGE',{
+conn.addEventHandler('THREADMESSAGE',{
   onTextMessage:(message) => {
     if(message.chatThread && JSON.stringify(message.chatThread)!=='{}'){
       console.log(message)
@@ -102,7 +102,7 @@ let option = {
   // 设置是否为子区消息。
   isChatThread: 'true'
 };
-connection.recallMessage(option).then((res) => {
+conn.recallMessage(option).then((res) => {
   console.log('success', res)
 }).catch((error) => {
   // 消息撤回失败 (超过 2 分钟)。
@@ -128,7 +128,7 @@ let options = {
   targetId: "threadId",
   // 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
   pageSize: 20,
-  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。
+  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串，从最新消息开始。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
   cursor: -1,
   // 会话类型：子区为 "groupChat"。
   chatType: "groupChat",

@@ -5,7 +5,7 @@
 - 群成员基于群组中的一条消息创建子区。该消息为子区的父消息。
 - 子区创建者即子区所有者。
 - **单个 app 下的子区总数默认为 10 万，如需调整请联系商务。**
-- 使用该接口前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通子区功能。
+- 使用该接口前，你需要联系商务开通子区功能。
 
 ## 调用频率上限
 
@@ -99,7 +99,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread   \
 | 403     | group_error | thread number has reached limit. | appKey 创建子区达到上限。 | 删除废弃的子区或者联系商务调整上限。单个 app 下的子区总数默认为 10 万。 |
 | 403     | group_error | user join thread reach limit. | 用户加入的子区达到上限。 | 退出不用的子区或者联系商务调整上限。单个用户默认最多可以加入 100,000 个子区。 |
 | 403     | group_error | msg already create thread.not allow to create. | 消息上已经创建子区。 | 传入其他消息 ID 或者查询该子区后加入。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 请在环信控制台开通子区服务。 |
+| 403     | group_error | thread not open. | 子区功能未开通。 | 调用该接口前，你需要联系商务开通子区功能。 |
 | 404     | group_error | user not in group. | 子区所有者不在群里面。 | 输入已加入群的用户 ID。 |
 | 404     | group_error | msg not exist. | 消息不存在。 | 输入存在的消息 ID。 |
 | 404     | group_error | group not found. | 群组不存在。   | 检查创建子区的群组是否存在。 |

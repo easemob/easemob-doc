@@ -20,7 +20,7 @@ const sendTextMsg = () => {
     },
   };
   let msg = AC.message.create(option);
-  connection.send(msg);
+  conn.send(msg);
 };
 ```
 
@@ -44,6 +44,6 @@ const sendTextMsg = () => {
     },
   };
   let msg = AC.message.create(option);
-  connection.send(msg);
+  conn.send(msg);
 };
 ```

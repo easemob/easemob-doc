@@ -15,8 +15,6 @@
 
 在新消息到来时，你会收到 `onMessageReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
-对于聊天室消息，你可以通过消息的 `ChatMessage#isBroadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
-
 ```typescript
 let msgListener: ChatMessageListener = {
   onMessageReceived: (messages: ChatMessage[]): void => {
@@ -37,8 +35,6 @@ ChatClient.getInstance().chatManager()?.removeMessageListener(msgListener);
 
 1. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
 2. 获取附件的服务器地址和本地路径。
-   
-自 1.7.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
 
 ### 接收语音消息
 
@@ -260,3 +256,13 @@ ChatClient.getInstance().chatManager()?.downloadAndParseCombineMessage(message).
   // 处理出错信息
 });
 ```
+
+## 更多
+
+### 消息附件下载鉴权
+
+自 1.7.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
+
+### 判断消息是否为聊天室广播消息
+
+对于聊天室消息，你可以通过消息的 `ChatMessage#isBroadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
