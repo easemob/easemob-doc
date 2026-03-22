@@ -6,7 +6,9 @@
   <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationList" />
 </ImageGallery>
 
-## 概述
+## 基本设置
+
+### 使用示例
 
 `ConversationList` 组件提供了以下属性，方便开发者进行自定义设置：
 
@@ -52,6 +54,8 @@
 />
 ```
 
+### 属性列表
+
 `ConversationList` 组件提供的主要属性如下表所示：
 
 | 属性 | 类型 | 描述 |
@@ -68,7 +72,7 @@
 | `showSearchList` | Boolean | 是否显示搜索列表 |
 | `includeEmptyConversations` | Boolean | 是否包含空会话 |
 
-## 设置会话列表背景
+### 设置会话列表背景
 
 - 通过 `ConversationList` 组件的 `className` 和 `style` 属性设置会话列表背景：
 
@@ -93,7 +97,7 @@
 }
 ```
 
-## 设置会话列表空页面
+### 设置会话列表空页面
 
 你可以通过 `renderItem` 属性自定义会话条目的渲染。没有任何会话时，可通过外层容器处理空白状态：
 

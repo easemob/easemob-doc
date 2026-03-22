@@ -6,7 +6,9 @@
   <ImageItem src="/images/uikit/chatuikit/ios/main_conversation_list.png" title="会话列表页面 ConversationList" />
 </ImageGallery>
 
-## 概述
+## 基本设置
+
+### 使用示例
 
 ```typescript
 import { ConversationList } from 'react-native-chat-uikit';
@@ -60,6 +62,8 @@ function ConversationListScreen() {
   );
 }
 ```
+
+### 属性列表
 
 `ConversationList` 组件基本属性如下表所示：
 

@@ -6,7 +6,9 @@
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="完整的会话列表页面 ConversationsView" />
 </ImageGallery>
 
-## 概述
+## 基本设置
+
+### 使用示例
 
 `ConversationsView` 提供了丰富的参数，支持以下会话自定义设置。使用示例如下：
 
@@ -38,6 +40,8 @@ ConversationsView(
 )
 ```
 
+### 参数列表
+
 `ConversationsView` 提供的主要参数如下表所示：
 
 | 参数 | 类型 | 描述 |
@@ -54,6 +58,25 @@ ConversationsView(
 | `beforeWidgets` | `List<Widget>?` | 会话列表之前的组件列表。 |
 | `afterWidgets` | `List<Widget>?` | 会话列表之后的组件列表。 |
 | `onSearchTap` | `void Function(List<ConversationItemModel>)?` | 点击搜索按钮的回调。 |
+
+### 设置会话列表空页面
+
+`ConversationsView` 提供 `emptyBackground` 参数设置会话列表的空白页面。
+
+```dart
+ConversationsView(
+  emptyBackground: Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(Icons.chat_bubble_outline, size: 80),
+        SizedBox(height: 16),
+        Text('暂无会话'),
+      ],
+    ),
+  ),
+)
+```
 
 ## 默认会话操作
 
@@ -101,22 +124,4 @@ ConversationsView(
 | `onItemLongPressHandler` | 设置会话条目长按事件监听器。 |
 | `onSearchTap` | 设置搜索按钮点击事件监听器。 |
 
-## 设置会话列表空页面
-
-`ConversationsView` 提供 `emptyBackground` 参数设置会话列表的空白页面。
-
-```dart
-ConversationsView(
-  emptyBackground: Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.chat_bubble_outline, size: 80),
-        SizedBox(height: 16),
-        Text('暂无会话'),
-      ],
-    ),
-  ),
-)
-```
 
