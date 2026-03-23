@@ -72,46 +72,6 @@
 | `showSearchList` | Boolean | 是否显示搜索列表 |
 | `includeEmptyConversations` | Boolean | 是否包含空会话 |
 
-### 默认会话操作
-
-点击会话右侧的 `┇` 显示会话操作。会话列表页面默认实现以下操作：
-
-| 会话操作   | 描述                |
-| :--------- | :------------------ |
-| 会话免打扰 | 设置/取消会话免打扰。 |
-| 会话置顶   | 置顶/取消置顶会话。   |
-| 会话删除   | 删除会话。           |
-
-你可以通过 `itemProps.moreAction` 来配置这些操作：
-
-```jsx
-<ConversationList
-  itemProps={{
-    moreAction: {
-      visible: true,
-      actions: [
-        {
-          content: 'DELETE', // 删除会话
-        },
-        {
-          content: 'PIN', // 置顶会话
-        },
-        {
-          content: 'SILENT', // 免打扰
-        },
-        {
-          content: '自定义操作',
-          onClick: cvs => {
-            console.log('自定义操作', cvs);
-          },
-          icon: <Icon type="STAR" />,
-        },
-      ],
-    },
-  }}
-/>
-```
-
 ### 设置会话列表背景
 
 - 通过 `ConversationList` 组件的 `className` 和 `style` 属性设置会话列表背景：
@@ -152,6 +112,46 @@
       );
     }
     return <ConversationItem data={cvs} />;
+  }}
+/>
+```
+
+## 默认会话操作
+
+点击会话右侧的 `┇` 显示会话操作。会话列表页面默认实现以下操作：
+
+| 会话操作   | 描述                |
+| :--------- | :------------------ |
+| 会话免打扰 | 设置/取消会话免打扰。 |
+| 会话置顶   | 置顶/取消置顶会话。   |
+| 会话删除   | 删除会话。           |
+
+你可以通过 `itemProps.moreAction` 来配置这些操作：
+
+```jsx
+<ConversationList
+  itemProps={{
+    moreAction: {
+      visible: true,
+      actions: [
+        {
+          content: 'DELETE', // 删除会话
+        },
+        {
+          content: 'PIN', // 置顶会话
+        },
+        {
+          content: 'SILENT', // 免打扰
+        },
+        {
+          content: '自定义操作',
+          onClick: cvs => {
+            console.log('自定义操作', cvs);
+          },
+          icon: <Icon type="STAR" />,
+        },
+      ],
+    },
   }}
 />
 ```

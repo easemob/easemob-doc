@@ -40,7 +40,22 @@ Appearance.conversation.dateFormatOtherDay = "MM/dd"  // 设置非当天显示�
 
 这些配置适合放在 `AppDelegate` 或 `SceneDelegate` 中统一设置。
 
-### 默认会话操作
+### 设置会话列表空页面
+
+会话列表为空时，`ConversationList` 会显示默认空状态页面。你可以通过以下方式调整空页面：
+
+- 覆盖默认资源，例如空状态图片。
+- 自定义 `EmptyStateView`，替换默认空状态视图。
+
+例如，你可以先通过覆盖资源的方式快速修改空状态图片：
+
+```swift
+// 将名为 empty 的图片资源添加到 Bundle.main 中，UIKit 会优先使用该图片
+```
+
+如果需要更复杂的空状态页面样式或交互，详见 [会话列表的高级配置](chatuikit_custom_conversation_list_advanced.html)。
+
+## 默认会话操作
 
 左滑或右滑会话条目可显示会话操作菜单。单群聊 UIKit 默认支持以下会话管理功能：
 
@@ -56,21 +71,6 @@ Appearance.conversation.dateFormatOtherDay = "MM/dd"  // 设置非当天显示�
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/conversation_slide.png" title="会话操作" />
 </ImageGallery>
-
-### 设置会话列表空页面
-
-会话列表为空时，`ConversationList` 会显示默认空状态页面。你可以通过以下方式调整空页面：
-
-- 覆盖默认资源，例如空状态图片。
-- 自定义 `EmptyStateView`，替换默认空状态视图。
-
-例如，你可以先通过覆盖资源的方式快速修改空状态图片：
-
-```swift
-// 将名为 empty 的图片资源添加到 Bundle.main 中，UIKit 会优先使用该图片
-```
-
-如果需要更复杂的空状态页面样式或交互，详见 [会话列表的高级配置](chatuikit_custom_conversation_list_advanced.html)。
 
 ## 设置事件监听
 
