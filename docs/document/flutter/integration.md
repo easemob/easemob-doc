@@ -66,11 +66,16 @@ flutter pub get
 2. 添加鸿蒙插件依赖。在项目 `pubspec.yaml` 文件中添加：
 
 ```yaml
-im_flutter_sdk: ^4.13.0
-im_flutter_sdk_ohos:
-  git:
-    url: "https://github.com/easemob/im_flutter_sdk_oh.git"
-    ref: 1.5.3
+  im_flutter_sdk: 4.13.0
+  im_flutter_sdk_ohos:
+    git:
+      url: "https://github.com/easemob/im_flutter_sdk_oh.git"
+      ref: 1.5.3
+
+dependency_overrides:
+  im_flutter_sdk_interface: 4.13.0
+  im_flutter_sdk_ios: 4.13.0
+  im_flutter_sdk_android: 4.13.0
 ```
 
 3. 执行 `flutter pub get`。
