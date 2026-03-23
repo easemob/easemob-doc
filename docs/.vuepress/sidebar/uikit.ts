@@ -57,7 +57,7 @@ const chatUikitSidebar = [
             { text: "高级设置", link: "chatuikit_custom_chat_advanced.html" },
           ],
         },
-        { text: "自定义消息输入", link: "chatuikit_custom_chat_ inputmenu.html" },
+        { text: "自定义消息输入", link: "chatuikit_custom_chat_inputmenu.html" },
       ],
     only: ["ios"],
   },
@@ -120,7 +120,7 @@ const chatUikitSidebar = [
       children: [
         { text: "页面介绍", link: "chatuikit_chat_intro.html" },
         { text: "自定义消息列表", link: "chatuikit_custom_chat.html" },
-        { text: "自定义消息输入", link: "chatuikit_custom_chat_ inputmenu.html" },
+        { text: "自定义消息输入", link: "chatuikit_custom_chat_inputmenu.html" },
       ],
     only: ["web"],
   },
