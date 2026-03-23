@@ -59,6 +59,21 @@ ConversationsView(
 | `afterWidgets` | `List<Widget>?` | 会话列表之后的组件列表。 |
 | `onSearchTap` | `void Function(List<ConversationItemModel>)?` | 点击搜索按钮的回调。 |
 
+## 默认会话操作
+
+长按会话条目会显示会话操作菜单。会话列表页面使用 `ConversationListViewController` 中提供的方法默认实现以下操作：
+
+| 会话操作 | 描述 |
+| :------- | :--- |
+| 会话免打扰 | - `makeSilentForConversation()`：设置会话免打扰。<br/> - `cancelSilentForConversation()`：取消会话免打扰。 |
+| 会话置顶 | - `pinConversation()`：置顶会话。<br/> - `unpinConversation()`：取消置顶。 |
+| 会话标记已读 | `makeConversationRead()`：标记会话为已读状态。 |
+| 会话删除 | `deleteConversation()`：删除会话。 |
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
+</ImageGallery>
+
 ### 设置会话列表空页面
 
 `ConversationsView` 提供 `emptyBackground` 参数设置会话列表的空白页面。
@@ -77,21 +92,6 @@ ConversationsView(
   ),
 )
 ```
-
-## 默认会话操作
-
-长按会话条目会显示会话操作菜单。会话列表页面使用 `ConversationListViewController` 中提供的方法默认实现以下操作：
-
-| 会话操作 | 描述 |
-| :------- | :--- |
-| 会话免打扰 | - `makeSilentForConversation()`：设置会话免打扰。<br/> - `cancelSilentForConversation()`：取消会话免打扰。 |
-| 会话置顶 | - `pinConversation()`：置顶会话。<br/> - `unpinConversation()`：取消置顶。 |
-| 会话标记已读 | `makeConversationRead()`：标记会话为已读状态。 |
-| 会话删除 | `deleteConversation()`：删除会话。 |
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
-</ImageGallery>
 
 ## 设置事件监听
 

@@ -101,6 +101,17 @@ UIKit 不会自动帮你补齐业务页面路由。凡是涉及页面跳转的�
 | `searchBuilder` | BuilderParam | 否 | 自定义搜索栏组件 | 默认搜索栏 |
 | `emptyDataBuilder` | BuilderParam | 否 | 自定义空数据布局 | 默认空布局 |
 
+### 默认会话操作
+
+长按会话条目会显示会话操作菜单。`ConversationListView` 通过 `ConvListViewModel` 提供的方法默认实现了以下操作：
+
+| 会话操作 | 描述 |
+| :------- | :--- |
+| 会话免打扰 | `muteConversation`：设置是否开启会话免打扰。 |
+| 会话置顶 | `pinConversation`：设置置顶/取消置顶会话。 |
+| 会话删除 | `deleteConversation`：删除会话。 |
+| 会话标记已读 | 目前尚不支持。 |
+
 ### 设置会话列表背景色
 
 根据所选组件类型，可通过以下方式自定义背景色：
@@ -157,17 +168,6 @@ ConversationListView({
   emptyDataBuilder: customEmptyDataBuilder
 })
 ```
-
-## 默认会话操作
-
-长按会话条目会显示会话操作菜单。`ConversationListView` 通过 `ConvListViewModel` 提供的方法默认实现了以下操作：
-
-| 会话操作 | 描述 |
-| :------- | :--- |
-| 会话免打扰 | `muteConversation`：设置是否开启会话免打扰。 |
-| 会话置顶 | `pinConversation`：设置置顶/取消置顶会话。 |
-| 会话删除 | `deleteConversation`：删除会话。 |
-| 会话标记已读 | 目前尚不支持。 |
 
 ## 事件监听
 
