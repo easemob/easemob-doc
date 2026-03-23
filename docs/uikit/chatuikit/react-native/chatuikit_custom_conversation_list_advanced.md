@@ -649,7 +649,7 @@ type InitMenuItemsType = {
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
+  <ImageItem src="/images/uikit/chatuikit/rn/conversation_long_press.png" title="会话长按显示的操作" />
 </ImageGallery>
 
 ## 设置侧滑菜单

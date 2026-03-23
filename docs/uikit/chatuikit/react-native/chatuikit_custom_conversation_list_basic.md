@@ -84,22 +84,6 @@ function ConversationListScreen() {
 | `onChangeUnreadCount`      | `(unreadCount: number) => void`                        | 会话列表总未读数变化时的回调。                                                                                                   |
 | `flatListProps`            | `Omit<FlatListProps, 'ref' \| 'data' \| 'renderItem'>` | 传递给内部 FlatList 的其他属性。                                                                                                 |
 
-### 默认会话操作
-
-长按会话时，默认操作菜单功能如下：
-
-| 会话操作              | 描述                                                             |
-| :-------------------- | :--------------------------------------------------------------- |
-| 置顶/取消置顶     | 置顶的会话会显示在列表顶部。                 |
-| 免打扰/取消免打扰 | 设置或取消会话免打扰，免打扰会话只显示红点，不计数。 |
-| 标记已读          | 会话标记为已读状态，清除未读数。                               |
-| 删除              | 删除会话及其所有消息     |
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
-</ImageGallery>
-
-
 ## 设置容器样式
 
 通过 `containerStyle` 属性可自定义会话列表容器的样式：
@@ -114,6 +98,21 @@ function ConversationListScreen() {
   }}
 />
 ```
+
+## 默认会话操作
+
+长按会话时，默认操作菜单功能如下：
+
+| 会话操作              | 描述                                                             |
+| :-------------------- | :--------------------------------------------------------------- |
+| 置顶/取消置顶     | 置顶的会话会显示在列表顶部。                 |
+| 免打扰/取消免打扰 | 设置或取消会话免打扰，免打扰会话只显示红点，不计数。 |
+| 标记已读          | 会话标记为已读状态，清除未读数。                               |
+| 删除              | 删除会话及其所有消息     |
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
+</ImageGallery>
 
 ## 设置事件监听
 

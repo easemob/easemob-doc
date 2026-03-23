@@ -2,10 +2,8 @@
 
 `TopNavigationBar` 是一个灵活的导航栏组件，采用左-中-右三段式布局。聊天页面、会话列表页面、联系人列表页面等均使用 `TopNavigationBar`。该组件支持完全自定义左侧、中部和右侧的子组件，让你可以根据业务需求灵活定制导航栏。
 
-<ImageGallery :columns="3">
-  <ImageItem src="/images/uikit/chatuikit/android/titlebar_conversation_list.png" title="会话列表导航栏" />
-  <ImageItem src="/images/uikit/chatuikit/android/title_chat_single_group.png" title="聊天页面导航栏" />
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_navigation.png" title="自定义导航栏" />
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/titlebar_chat_single_group.png" title="标题栏 TopNavigationBar" />
 </ImageGallery>
 
 ## 组件属性

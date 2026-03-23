@@ -2,12 +2,9 @@
 
 会话列表页面、聊天页面、联系人列表页面、群详情页面和联系人详情页面的导航栏均使用 `EaseChatNavigationBar`。会话列表页面的导航栏包含左、中、右三个区域，本节介绍如何配置这些区域。
 
-<ImageGallery :columns="3">
-  <ImageItem src="/images/uikit/chatuikit/android/titlebar_conversation_list.png" title="会话列表导航栏" />
-  <ImageItem src="/images/uikit/chatuikit/android/title_chat_single_group.png" title="聊天页面导航栏" />
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_navigation.png" title="自定义导航栏" />
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/titlebar_chat_single_group.png" title="标题栏 EaseChatNavigationBar" />
 </ImageGallery>
-
 
 ## 设置导航栏编辑模式
 
@@ -29,7 +26,11 @@
 
 你可以设置 `rightImages` 参数，自定义导航栏右侧按钮的显示图片。**注意按照顺序分别是 0,1,2。**
 
-## 设置点击右侧图片显示的操作
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_navigation.png" title="设置右侧显示图片" />
+</ImageGallery>
+
+## 设置会话列表更多操作
 
 你可以利用 `Appearance.conversation.listMoreActions = value` 设置点击会话列表右上角的 `+` 之后的 `ActionSheet` 的菜单项。你可以增加或删除菜单项，示例代码如下：
 

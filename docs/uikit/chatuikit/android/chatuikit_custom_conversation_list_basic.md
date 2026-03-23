@@ -48,7 +48,17 @@ ChatUIKitConversationListFragment.Builder()
 | `setCustomAdapter()`              | 设置自定义的适配器，默认为 `ChatUIKitConversationListAdapter`。 |
 | `setCustomFragment()`             | 设置自定义会话列表 `Fragment`，需要继承自 `ChatUIKitConversationListFragment`。 |
 
-### 默认会话操作
+### 设置会话列表空页面
+
+`ChatUIKitConversationListFragment#Builder` 提供 `setEmptyLayout()` 设置会话列表的空页面。
+
+```kotlin
+ChatUIKitConversationListFragment.Builder()
+    .setEmptyLayout(R.layout.layout_conversation_empty)
+    .build()
+```
+
+## 默认会话操作
 
 长按会话条目会显示会话操作菜单。会话列表页面使用 `ChatUIKitConversationListViewModel` 中提供的方法默认实现以下操作：
 
@@ -62,16 +72,6 @@ ChatUIKitConversationListFragment.Builder()
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
 </ImageGallery>
-
-### 设置会话列表空页面
-
-`ChatUIKitConversationListFragment#Builder` 提供 `setEmptyLayout()` 设置会话列表的空页面。
-
-```kotlin
-ChatUIKitConversationListFragment.Builder()
-    .setEmptyLayout(R.layout.layout_conversation_empty)
-    .build()
-```
 
 ## 设置事件监听
 
