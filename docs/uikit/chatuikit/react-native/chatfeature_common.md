@@ -100,13 +100,34 @@
   <ImageItem src="/images/uikit/chatuikit/feature/common/ios/message_audio.png" title="语音消息" />
 </ImageGallery> 
 
-## 消息审核
+## 消息举报
 
-消息审核对用户发送的消息内容进行审查，判断其是否符合平台的社区准则、服务条款和相关法律法规。
+消息举报功能会对用户发送的内容进行审核，判断其是否违反平台的社区准则、服务条款及相关法律法规。如发现不合规内容，终端用户可进行举报。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/common/ios/message_report.png" title="消息审核" />
 </ImageGallery> 
+
+`reportMessageCustomList` 属性允许自定义用户长按消息后显示的举报选项列表。
+
+```typescript
+<ConversationDetail
+  type="chat"
+  convId={convId}
+  convType={convType}
+  list={{
+    props: {
+      reportMessageCustomList: [
+        { key: 'spam', value: '垃圾消息' },
+        { key: 'abuse', value: '辱骂信息' },
+        { key: 'illegal', value: '违法内容' },
+        { key: 'other', value: '其他' },
+      ],
+    },
+  }}
+  onBack={() => navigation.goBack()}
+/>
+```
 
 ## 本地消息搜索
 

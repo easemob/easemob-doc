@@ -1,106 +1,152 @@
-# 聊天页面
+# 聊天页面介绍
 
-## 概述
+`ConversationDetail` 组件提供完整的聊天交互界面，支持多种消息类型收发及丰富的消息管理功能。
 
-聊天页面组件 `ConversationDetail` 主要由输入组件、消息列表组件、菜单组件和导航栏组件组成。该组件支持以下功能：
+## 页面功能
 
-- 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
-- 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。
-- 清除本地消息。
-- 消息翻译。
-- 消息表情回复。
-- 消息话题。
-- 消息转发。
+聊天页面提供如下功能：
 
-该组件支持多种模式：包括聊天模式、搜索结果显示模式、创建话题模式、话题模式。 通过 `ConversationDetailProps.type` 属性来区分。详见 `ConversationDetailModelType` 类型。
+| 功能         | 描述                                    |
+| :----------- | :--------------------------------------- |
+| 消息收发 | 收发文本、表情、图片、语音、视频、文件、名片等消息。 |
+| 消息操作 | 复制、引用、撤回、删除、编辑、重发、审核。 |
+| 消息管理 | 本地消息清除、消息搜索、消息多选。         |
+| 互动增强 | 表情回应、消息置顶、消息翻译、转发。       |
 
-消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
+## 页面组件
+
+聊天页面通过 `ConversationDetail` 实现，由标题栏 `ConversationDetailNavigationBar`、消息列表 `MessageList` 和消息输入区 `MessageInput` 组成。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_chat.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/rn/custom_chat.png" title="聊天页面 ConversationDetail" />
 </ImageGallery>
 
-示例代码如下：
+聊天页面组件是一个复杂的组件，组件结构如下：
+
+```text
+ConversationDetail
+├── ConversationDetailNavigationBar    // 标题栏
+├── MessageList                        // 消息列表
+│   ├── AnimatedMessagePinPlaceholder  // 消息置顶占位
+│   ├── FlatList                       // 消息渲染列表
+│   ├── MessageLongPressMenu            // 长按操作菜单
+│   ├── BottomSheetEmojiList            // 表情回应选择器
+│   ├── BottomSheetReactionDetail       // 回应详情弹窗
+│   └── BottomSheetMessageReport        // 消息举报弹窗
+└── MessageInput                        // 消息输入区
+    ├── EmojiList                        // 表情选择面板
+    ├── BottomVoiceBar                    // 语音录制栏
+    ├── MessageInputEditMessage            // 消息编辑框
+    └── MessageInputBarMenu                // 附件扩展菜单
+```
+
+### 标题栏
+
+聊天页面的标题栏 `ConversationDetailNavigationBar` 组件，继承自通用 `TopNavigationBar`，展示会话信息并承载操作入口：
+
+- **会话信息**：头像、名称、免打扰状态。
+- **导航操作**：返回按钮。
+- **功能入口**：音视频通话、更多菜单（查看资料、搜索、清空消息等）。
+
+关于标题栏的自定义，详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。
+
+### 消息列表
+
+消息列表 `MessageList` 负责消息的渲染与交互。
+
+#### 核心能力
+
+消息列表的核心能力如下表所示：
+
+| 功能         | 说明           |
+| :----------- | :-----| 
+| **消息展示** | 支持全部消息类型，每条消息通过 `MessageListItem` 渲染 。       |
+| **消息操作** | 长按弹出菜单：复制、引用、撤回、删除、编辑、重发、举报、翻译、转发、多选、置顶。 |
+| **消息回应** | 支持对消息进行表情回应（Reaction），点击回应可查看回应详情。                   |
+| **消息置顶** | 群聊中置顶的消息显示在列表顶部。 |
+| **消息条目** | `MessageListItem` 实现单条消息展示，包括消息气泡、用户头像、消息时间、发送状态等。     |
+
+#### 消息列表子组件
+
+| 子组件         | 说明           |
+| :----------- | :-----| 
+| **AnimatedMessagePinPlaceholder**       | 消息置顶占位组件，为置顶消息预留显示空间。          |
+| **MessageLongPressMenu**         | 消息长按菜单，提供消息操作选项。         |
+| **BottomSheetEmojiList**         | 表情回应选择器，用于选择对消息的回应表情。        |
+| **BottomSheetReactionDetail**         | 表情回应详情，显示消息的所有回应及回应用户。         |
+| **BottomSheetMessageReport**         | 消息举报弹窗，用于举报不当消息。         |
+
+### 消息输入
+
+`MessageInput` 提供完整的消息输入能力。
+
+#### 核心能力
+
+消息输入区的核心能力如下表所示：
+
+| 模块         | 功能                                              |
+| :----------- | :------------------------------------------------ |
+| **文本输入** | 多行文本输入，自动调整高度。                        |
+| **语音输入** | 按住录音，松开发送（`BottomVoiceBar`）。            |
+| **表情输入** | 表情面板选择与发送（`EmojiList`）。                 |
+| **附件发送** | 扩展菜单：图片、视频、文件、名片。                  |
+| **消息编辑** | 编辑已发送的文本消息（`MessageInputEditMessage`）。 |
+| **消息引用** | 在输入框上方显示被引用的消息。                      |
+| **多选模式** | 进入多选后支持批量删除/转发。                       |
+
+#### 消息输入子组件
+
+| 子组件         | 说明           |
+| :----------- | :-----| 
+| **EmojiList**       | 表情选择列表，提供常用表情的选择和发送。          |
+| **BottomVoiceBar**         | 语音输入栏，支持按住说话、松开发送的语音消息录制。           |
+| **MessageInputEditMessage**         | 编辑消息弹窗，用于编辑已发送的文本消息。           |
+| **MessageInputBarMenu**         | 扩展功能菜单，提供图片、视频、文件、名片等附件发送功能。           |
+
+## 创建聊天页面
+
+使用 `ConversationDetail` 组件快速搭建聊天页面。
+
+**UIKit 不内置路由导航，页面跳转需集成 `React Navigation` 等第三方库自行实现。**
 
 ```tsx
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
-import type { RootParamsName, RootScreenParamsList } from "../routes";
-type Props = NativeStackScreenProps<RootScreenParamsList>;
-export function ConversationDetailScreen(props: Props) {
-  const { route } = props;
-  const name = route.name as RootParamsName;
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import * as React from 'react';
+import { View } from 'react-native';
+import {
+  ConversationDetail,
+  type ConversationDetailModelType,
+  type ConversationDetailRef,
+} from 'react-native-chat-uikit';
 
-  // 必须填写的参数
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+
+export function ConversationDetailScreen(props: Props) {
+  const { route, navigation } = props;
   const convId = ((route.params as any)?.params as any)?.convId;
   const convType = ((route.params as any)?.params as any)?.convType;
-
-  // 搜索模式
-  const messageId = ((route.params as any)?.params as any)?.messageId;
-
-  // 是否是多选模式
-  const selectType = ((route.params as any)?.params as any)?.selectType;
-
-  // 话题模式的参数
-  const thread = ((route.params as any)?.params as any)?.thread;
-  const firstMessage = ((route.params as any)?.params as any)?.firstMessage;
-
-  // 组件模式
-  const comType = React.useRef<ConversationDetailModelType>(
-    name === "ConversationDetail"
-      ? "chat"
-      : name === "MessageThreadDetail"
-      ? "thread"
-      : name === "MessageHistory"
-      ? "search"
-      : "create_thread"
-  ).current;
+  const convRef = React.useRef<ConversationDetailRef>({} as any);
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
+    <ConversationDetail
+      type={'chat'}
+      convId={convId}
+      convType={convType}
+      onBack={() => {
+        navigation.goBack();
       }}
-    >
-      <ConversationDetail
-        type={comType}
-        convId={convId}
-        convType={convType}
-        msgId={messageId}
-        thread={thread}
-        firstMessage={firstMessage}
-        selectType={selectType}
-      />
-    </SafeAreaView>
+    />
   );
 }
-``` 
+```
 
-## 聊天页面的核心属性
+#### 参数说明
 
-`ConversationDetail` 组件的核心属性介绍如下：
-
-| 属性                 | 类型                        | 是否必选 | 描述      |
-| -------- | -------------- | -------- | ------------------------------- |
-| type                 | ConversationDetailModelType | 是       | 组件模式。包括聊天模式、搜索模式、创建话题模式和话题模式。 |
-| convId               | string                      | 是       | 会话 ID。 |
-| convType             | ChatConversationType        | 是       | 会话类型。 |
-| convName             | string                      | 否       | 会话名称。 |
-| containerStyle       | object                      | 否       | 修改组件样式。  |
-| input                | object                      | 否       | 输入组件属性、引用属性、自定义组件。详见[输入组件介绍](chatuikit_chat.html#输入组件)。 |
-| list                 | object                      | 否       | 消息列表组件属性、引用属性、自定义组件。详见[列表组件介绍](chatuikit_chat.html#消息列表组件)。 |
-| onClickedAvatar      | function                    | 否       | 点击会话头像的回调。   |
-| NavigationBar        | function                    | 否       | 自定义导航栏组件。   |
-| enableNavigationBar  | boolean                     | 否       | 是否激活导航栏。如果为 `false`，则不显示导航栏。    |
-| selectType           | ConversationSelectModeType  | 否       | 选择模式。包括普通模式和多选模式。   |
-| thread               | ChatMessageThread           | 否       | 话题模式参数。话题对象。   |
-| firstMessage         | ChatMessageThread           | 否       | 话题模式参数。话题消息对象。 |
-| msgId                | string                      | 否       | 创建话题模式或者搜索模式的参数。话题消息的 ID，或者是搜索模式的消息关键字。|
-| parentId             | string                      | 否       | 创建话题模式参数。该话题的所在群组 ID。  |
-| newThreadName        | string                      | 否       | 创建话题模式参数。该话题的名称。   |
-| onCreateThreadResult | string                      | 否       | 创建话题模式参数。创建话题的结果回调通知。      |
-| onClickedThread      | function                    | 否       | 点击消息气泡，打开话题页面的回调通知。例如，进行路由跳转。  |
-| onClickedVoice       | function                    | 否       | 点击导航栏音频按钮的回调通知。例如，进行路由跳转。  |
-| onClickedVideo       | function                    | 否       | 点击导航栏视频按钮的回调通知。例如，进行路由跳转。   |
-| onThreadDestroyed    | function                    | 否       | 话题销毁的回调通知。例如，进行路由跳转。   |
-| onThreadKicked       | function                    | 否       | 离开话题的回调通知。例如，进行路由跳转。   |
-| onForwardMessage     | function                    | 否       | 转发消息的回调通知。例如，进行路由跳转。   |
+| 参数                  | 类型                                             | 必填 | 默认值 | 说明               |
+| :-------------------- | :----------------------------------------------- | :--- | :----- | :----------------- |
+| `type`                | - `chat`<br/> - `thread`<br/> - `search`<br/> - `create_thread` | 是   | -      | 页面类型：<br/> - `chat`：普通单聊/群聊页面 <br/> - `thread`：话题聊天页面 <br/> - `search`：消息历史搜索页面<br/> - `create_thread`：创建话题页面       |
+| `convId`              | `String`                                         | 是   | -      | 会话 ID             |
+| `convType`            | `number`                                         | 是   | -      | - `0`：单聊<br/> - `1`：群聊    |
+| `onBack`              | `() => void`                                     | 否   | -      | 返回按钮回调       |
+| `enableNavigationBar` | `Boolean`                                        | 否   | `true` | 是否显示默认标题栏 |
+| `NavigationBar`       | `React.ReactElement`                             | 否   | -      | 完全自定义导航栏   |

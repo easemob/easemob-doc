@@ -3,12 +3,12 @@
 对于联系人详情页面，你可以自定义联系人导航栏、联系人列表项和自定义发消息、音频通话、视频通话等按钮。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_details.png" title="联系人详情页面" />
+  <ImageItem src="/images/uikit/chatuikit/rn/custom_contact_details.png" title="联系人详情页面" />
 </ImageGallery>
 
 ## 自定义导航栏
 
-导航栏组件为通用组件，布局为左中右。自定义方式和方法与会话列表类似，详见[会话列表页面的自定义导航栏部分](chatuikit_conversation.html#自定义导航栏)。
+导航栏组件为通用组件，布局为左中右。自定义方式和方法与会话列表类似，详见 [自定义导航栏](chatuikit_custom_titlebar.html)。
 
 ## 自定义按钮
 
