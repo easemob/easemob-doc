@@ -9,7 +9,7 @@
 单聊和群聊页面的标题栏如下图所示：
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/titlebar_chat_single_group.png" title="标题栏 ChatUIKitTitleBar" />
+  <ImageItem src="/images/uikit/chatuikit/ios/titlebar_chat_single_group.png" title="标题栏 ChatUIKitAppBar" />
 </ImageGallery>
 
 各页面的 `ChatUIKitAppBarModel` 提供如下属性：
