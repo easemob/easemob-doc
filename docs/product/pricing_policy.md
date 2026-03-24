@@ -151,7 +151,7 @@
 
 当内容审核服务的用量费超过套餐费时，当月免收套餐费，按各审核模型的实际用量费收取。
 
-具体单价请参见 [审核模型单价](/value-added/moderation/moderation_billing_domestic.html#计费规则)。
+具体单价请参见 [审核模型单价](/value-added/moderation/moderation_billing_domestic.html#审核模型费用)。
 
 **用量费说明**：用量费指当月调用所有审核模型产生的费用总和。
 
