@@ -104,13 +104,13 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 1. 修复更新群组属性时影响群组头像问题。
 2. 修复获取聊天室属性方法 `EMChatManager#fetchChatroomAttributes` 和`EMChatManager#fetchChatroomAllAttributes` 参数异常时完成回调不执行的问题。
 
-## v4.16.1 2025-9-5
+## v4.16.1 Dev 2025-9-5（开发版）
 
 #### 修复
 
 修复 4.16.0 引入的绑定 APNs Token 偶现失败的问题。
 
-## v4.16.0 2025-8-19
+## v4.16.0 Dev 2025-8-19（开发版）
 
 #### 修复
 
@@ -122,7 +122,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
   - 聊天页面增加反诈背景。
   - 发送和接收消息都会插入一个反诈提示消息。
 
-## v4.15.1 2025-6-23
+## v4.15.1 Dev 2025-6-23（开发版）
 
 #### 新增特性 
 
@@ -134,7 +134,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 1. 修复当修改文本和自定义消息之外的消息时，`EMChatManagerDelegate#onMessageContentChanged` 回调中不返回修改的信息的问题。
 2. 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息时（`EMFetchServerMessagesOption#isSave` 设置为 `false`）时，也会生成新的本地会话的问题。
 
-## v4.15.0 2025-5-21
+## v4.15.0 Dev 2025-5-21（开发版）
 
 #### 新增特性
 
@@ -147,7 +147,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 - 修改 Token 即将过期事件 [tokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
 - [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](demo.html#快速跑通-demo-源码)。
 
-## v4.14.0 2025-4-21
+## v4.14.0 Dev 2025-4-21（开发版）
 
 #### 新增特性
 
