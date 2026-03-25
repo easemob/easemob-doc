@@ -82,13 +82,15 @@
 2. 如果业务对“回调消息不丢失”有严格要求，请开通 [回调异常存储](callback_postsending_exception_storage.html) 服务，并结合 [查询异常存储数据](callback_postsending_exception_storage.html#查询异常缓存数据) 和 [补发异常回调数据](callback_postsending_exception_storage.html#补发异常回调数据) 接口进行补偿处理。
 :::
 
-## 回调请求
+## 回调示例
+
+### 回调请求
 
 消息发送或相关事件发生后，环信服务器会向你的业务服务器发起 `HTTP/HTTPS POST` 请求。请求体为 `UTF-8` 编码的 JSON 字符串。
 
 为便于服务端校验请求合法性，环信服务器会对回调请求进行签名。当前签名算法使用 MD5，对应实现为 `org.apache.commons.codec.digest.DigestUtils#md5Hex`。
 
-### 请求示例
+#### 请求示例
 
 ```json
 {
@@ -108,7 +110,7 @@
 }
 ```
 
-### 请求参数说明
+#### 请求参数说明
 
 | 参数 | 类型 | 说明 |
 | :--- | :--- | :--- |
@@ -124,7 +126,7 @@
 | `securityVersion` | String | 安全校验版本，当前固定为 `1.0.0`。该字段当前可忽略。 |
 | `security` | String | 请求签名，计算方式为 `MD5(callId + Secret + timestamp)`。其中 `Secret` 的配置方式详见 [规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。 |
 
-## 回调响应
+### 回调响应
 
 环信 IM 服务器不会校验响应体内容，只要你的业务服务器返回的 HTTP 状态码为 `200`，即视为本次回调处理成功。
 
